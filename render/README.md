@@ -38,9 +38,11 @@ Bumping the version is one edit there.
 | `src/version.mjs` | the version pin + `minecraft-data`/`minecraft-assets` handles + `blockStateId(name, state?)` |
 | `src/world.mjs` | `createEmptyWorld()`, `setBlock()`, `buildSampleWorld()`, and the artifact builders `buildWorldFromArtifact()` / `buildWorldFromVoxels()` |
 | `src/headless-canvas.mjs` | the **swappable render seam**: a WebGL-capable headless canvas |
-| `src/render.mjs` | `renderWorldToPng(world, center, opts?)` + the fixed render contract (`DEFAULTS`) |
+| `src/camera.mjs` | **pure framing math** (no THREE/GL): `framedCamera(bounds, view?)`, `DEFAULT_VIEW`, `viewDistanceFor` — the comparable-camera primitive (T-003-03) |
+| `src/render.mjs` | `renderBuild(build, opts?)` (path-returning) + `renderWorldToPng(world, center, opts?)` + the render contract (`DEFAULTS`) |
 | `src/cli.mjs` | `npm run render:sample` entrypoint |
-| `test/scaffold.test.mjs` | the verification suite |
+| `test/scaffold.test.mjs` | the scaffold verification suite (T-003-01) |
+| `test/view.test.mjs` | framing + render-correctness suite (T-003-03) |
 | `vendor/node-canvas-webgl/` | local shim (see below) |
 
 `world.mjs` and `render.mjs` are a clean **make/populate-world ↔ render-world** seam:
@@ -111,15 +113,38 @@ so one pass yields the complete report. Iteration follows expansion's canonical
 `{ strict: true }` to instead throw an aggregated error listing every unmapped
 voxel. Block legality *vs. the palette* is E-04's concern, not this layer's.
 
-## The fixed render contract
+## Fixed, comparable framing (T-003-03)
 
-`render.mjs`'s `DEFAULTS` own canvas size (512×512), view distance, fov, and a fixed
-camera offset. Comparability is a property of fixed framing, so the framing is
-explicit and defaulted, not left to library defaults. T-003-03 refines the actual
-view angles on top of this contract.
+Renders are **scoring images**: they only diff across prompting methods and archetypes
+if every build is photographed the same way. `camera.mjs` makes that concrete — a
+**fixed viewing direction, with the camera distance derived from the build's extent**, so
+a 3³ build and a 30³ build fill the *same fraction of the frame*. A constant camera offset
+can't: the big build overflows, the small one is a speck.
+
+```js
+import { buildWorldFromArtifact } from './src/world.mjs'
+import { renderBuild } from './src/render.mjs'
+
+const { world, bounds } = await buildWorldFromArtifact(artifact)
+const { path, bytes, view } = await renderBuild({ world, bounds })
+// → frames the build, writes a PNG, and RETURNS ITS PATH
+```
+
+- **`renderBuild(build, opts?) → { path, bytes, view }`** — the path-returning entry point
+  (the surface T-003-04 wraps). `build` is the `world.mjs` `BuildResult` shape
+  (`{ world, bounds, center? }`). An empty build (`bounds == null`) degrades to the
+  constant-offset fallback instead of throwing.
+- **`DEFAULT_VIEW`** owns canvas size (512×512), vertical `fov` (75°), the fixed
+  `azimuthDeg`/`elevationDeg` (45°/35° — the scaffold's proven 3/4 vantage), and a
+  `margin` (~18% padding). Every field is overridable per call via `opts.view`, but the
+  defaults *are* the canonical comparable frame.
+- **`framedCamera(bounds, view?)`** is pure (no THREE/GL), so the comparability invariant —
+  *angular size is invariant under uniform build scaling* — is unit-tested with no GPU.
+- `renderWorldToPng(world, center, opts?)` still returns the raw PNG `Buffer`; pass
+  `opts.bounds` to use framed mode, omit it for the scaffold's constant-offset path.
 
 ## Out of scope (other S-003 tickets)
 
-Multi-angle comparable views and thumbnailing (T-003-03), the Agent SDK tool
-wrapper (T-003-04), schematic export, validators, a Minecraft server, and a bot.
-(Artifact→world construction is now implemented — see above.)
+The Agent SDK tool wrapper (T-003-04), schematic export, validators, a Minecraft server,
+and a bot. (Artifact→world construction (T-003-02) and fixed comparable framing
+(T-003-03) are now implemented — see above.)
