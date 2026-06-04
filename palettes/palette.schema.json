@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mc-design-eval/palettes/palette.schema.json",
+  "title": "Style Palette",
+  "description": "A named style's whitelist of survival-obtainable Minecraft block IDs, injected into the trial prompt as the binding material constraint (spec §6) and read by the palette-adherence validator (spec §9). The `blocks` array is the single source of truth; `groups` is an optional advisory view over it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "minecraftVersion", "description", "blocks"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "Kebab-case style identifier, unique across palettes (e.g. \"industrial\", \"art-deco\")."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable style display name (e.g. \"Industrial\")."
+    },
+    "minecraftVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+(\\.\\d+)?$",
+      "description": "The Minecraft (Java) version the block IDs are valid against, e.g. \"1.20.4\". Block IDs are version-dependent, so this makes \"valid block ID\" a decidable check."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "One-line prompt-facing statement of the style's material intent."
+    },
+    "blocks": {
+      "type": "array",
+      "description": "The whitelist: the canonical, authoritative set of allowed block types. Bare Minecraft block IDs (no `minecraft:` prefix), unique, non-empty.",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*$"
+      }
+    },
+    "groups": {
+      "type": "object",
+      "description": "Optional advisory grouping of `blocks` for human and prompt legibility (e.g. structure / metal / glazing). Every block listed in any group MUST also appear in `blocks` — groups organize the canonical set, they never extend it. This subset invariant is enforced by validate.mjs.",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        }
+      }
+    }
+  }
+}
