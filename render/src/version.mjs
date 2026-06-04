@@ -2,13 +2,19 @@
 //
 // The ticket states pinning here "fixes the canonical block-ID vocabulary used by
 // the schema (T-001-01) and palette (T-001-04)". `palettes/industrial.json` already
-// pins 1.20.4, so this MUST stay equal to that, or the two halves of the instrument
+// pins 1.20.1, so this MUST stay equal to that, or the two halves of the instrument
 // would disagree on what a block ID means. Bumping the version is a single edit here.
+//
+// IT MUST ALSO be a version prismarine-viewer supports (see its `supportedVersions`).
+// setVersion() silently resolves an unsupported pin to the nearest supported one
+// (e.g. 1.20.4 → 1.20.1) while the world is written with the *pinned* version's
+// global state-ids — so a mismatch renders every block as the wrong block. render.mjs
+// hard-guards against that downgrade.
 
 import mcDataLoader from 'minecraft-data'
 import minecraftAssets from 'minecraft-assets'
 
-export const MINECRAFT_VERSION = '1.20.4'
+export const MINECRAFT_VERSION = '1.20.1'
 
 let _mcData
 /** Memoised `minecraft-data` handle for the pinned version. Throws if unknown. */

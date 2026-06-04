@@ -10,8 +10,8 @@ import { Vec3 } from 'vec3'
 import { MINECRAFT_VERSION, mcData, assetsFor, blockStateId } from '../src/version.mjs'
 import { createEmptyWorld, setBlock, buildSampleWorld } from '../src/world.mjs'
 
-test('version pin: 1.20.4 with minecraft-data + minecraft-assets loaded (AC #1)', () => {
-  assert.equal(MINECRAFT_VERSION, '1.20.4')
+test('version pin: 1.20.1 with minecraft-data + minecraft-assets loaded (AC #1)', () => {
+  assert.equal(MINECRAFT_VERSION, '1.20.1')
 
   const data = mcData()
   assert.ok(Object.keys(data.blocksByName).length > 1000, 'minecraft-data blocks present')

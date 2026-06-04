@@ -22,14 +22,18 @@ npm test              # node:test — version pin, world API, and a render smoke
 
 ## The pinned version
 
-`src/version.mjs` is the **single source** of the Minecraft pin: `1.20.4`. It must
+`src/version.mjs` is the **single source** of the Minecraft pin: `1.20.1`. It must
 equal `palettes/industrial.json`'s `minecraftVersion`, because the pin fixes the
 canonical block-ID vocabulary the schema (T-001-01) and palette (T-001-04) share.
 Bumping the version is one edit there.
 
-> Note: `prismarine-viewer` maps `1.20.4` to its nearest supported render assets
-> (`1.20.1`) for meshing/textures. Block-ID resolution still uses `minecraft-data`
-> for `1.20.4`; all scaffold sample blocks exist in both.
+> **The pin MUST be a version `prismarine-viewer` supports** (see its
+> `supportedVersions`). The world is written with the pin's *global state-ids*, and
+> the viewer meshes those ids against the pin's block table — so the two must be the
+> same version. `setVersion()` silently resolves an unsupported pin to the nearest
+> supported one (e.g. `1.20.4` → `1.20.1`), which mis-maps every block (gray concrete
+> rendered as coral). `render.mjs` now hard-throws on that downgrade rather than
+> produce a faithless image.
 
 ## Module shape
 

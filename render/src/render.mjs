@@ -79,6 +79,18 @@ export async function renderWorldToPng (world, center, opts = {}) {
   if (!viewer.setVersion(MINECRAFT_VERSION)) {
     throw new Error(`prismarine-viewer does not support ${MINECRAFT_VERSION}`)
   }
+  // setVersion() returns truthy even when it SILENTLY resolves an unsupported pin to
+  // the nearest supported version (e.g. 1.20.4 -> 1.20.1). The world's blocks are
+  // written with MINECRAFT_VERSION state-ids, so a meshing-version mismatch maps every
+  // id onto a neighbouring block (gray_concrete -> coral). Refuse to render rather than
+  // emit a faithless image that would corrupt visual scoring.
+  if (viewer.version !== MINECRAFT_VERSION) {
+    throw new Error(
+      `prismarine-viewer resolved ${MINECRAFT_VERSION} to ${viewer.version}: the render ` +
+        `version must equal the world/pin version or block state-ids mismap. Pin ` +
+        `MINECRAFT_VERSION (render/src/version.mjs) to a viewer-supported version.`
+    )
+  }
 
   // Stream our in-memory world's chunks into the renderer, centered on what we look at.
   const worldView = new WorldView(world, viewDistance, look)

@@ -12,7 +12,7 @@ import { loadPalette, formatPaletteBlocks, PALETTES_DIR } from "./palette.mjs";
 test("loadPalette reads the shipped industrial palette", () => {
   const p = loadPalette("industrial");
   assert.equal(p.id, "industrial");
-  assert.equal(p.minecraftVersion, "1.20.4");
+  assert.equal(p.minecraftVersion, "1.20.1");
   assert.ok(Array.isArray(p.blocks) && p.blocks.length > 0);
   assert.ok(p.blocks.includes("iron_block"), "whitelist includes iron_block");
 });
