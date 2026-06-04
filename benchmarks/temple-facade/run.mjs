@@ -1,17 +1,15 @@
-// Persistent "design a temple" benchmark. Re-run as the approach is refined; each run
-// is saved under runs/<NNN-approach>/ with its rendered build, and the README gallery
-// regenerates so the PROGRESSION of builds is visible over time.
-//
-// The TASK (task.mjs) is held constant; the APPROACH varies and is the run's label.
+// The consolidated benchmark — design a TEMPLE FACADE and render it HEAD-ON. Fast (one
+// short claude -p call, no multi-phase iteration). Each run is saved under
+// runs/<NNN-approach>/ and the README gallery regenerates, so facades are compared
+// frontally as the approach is refined.
 //
 // LIVE & METERED — runs the model via the `claude -p` subscription shim (spec §4):
-//   node benchmarks/temple/run.mjs --approach v0-singleshot --note "what changed"
-//   npm run bench:temple -- --approach v0-singleshot --note "..."
+//   npm run bench:temple-facade -- --approach v0-facade --note "what changed"
 
 import { mkdirSync, writeFileSync, readFileSync, readdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { TEMPLE_TASK } from "./task.mjs";
+import { TEMPLE_FACADE_TASK } from "./task.mjs";
 import { requestDesignArtifact } from "../../src/sdk-binding.mjs";
 import { PHASE1_MODEL_ID } from "../../src/config.mjs";
 
@@ -19,38 +17,47 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const RUNS_DIR = join(HERE, "runs");
 const README = join(HERE, "README.md");
 
-// --- prompt composition: the v0 approach owns HOW it asks (the variable part). ------
-// Deliberately uncapped and detail-inviting — the opposite of the single-shot house
-// brief that hobbled the model (no "modest footprint", no "over ornament").
-function composeFreeformPrompt(task, { promptMethodId, runId }) {
+function composeFacadePrompt(task, { promptMethodId, runId }) {
   return [
-    "You are a master Minecraft architect. Design a GRAND CLASSICAL TEMPLE as a single,",
-    "complete structured design artifact — your one chance to show the full range of your",
-    "spatial and material design skill. Be ambitious and richly detailed; do NOT hold back",
-    "and do NOT simplify to a plain box.",
+    "You are a master Minecraft architect and a bold, imaginative designer. Design the",
+    "full-quality FACADE (front elevation) of a TEMPLE as a single, complete structured design",
+    "artifact — the one grand face you would photograph head-on. Show creativity, proportion,",
+    "and rich detail. Do NOT produce a flat or monochrome wall.",
     "",
-    "## The build",
+    "## What to build",
     task.goal,
     "",
-    "## Scale & budget (generous on purpose)",
-    "- Footprint: up to about 32 x 32 blocks — use the full area; go larger if the design needs it.",
-    "- Height: up to about 28 blocks including the roof and pediment.",
-    "- Block budget: aim HIGH — on the order of one to several THOUSAND blocks. Detail and scale are rewarded.",
+    "## Style & palette — be creative and colorful (important)",
+    "Invent or choose a distinctive style and commit to it — 'temple' is open to any culture,",
+    "era, or imagination (classical, Egyptian, Mesoamerican, East/South Asian, Byzantine, baroque,",
+    "art-deco, brutalist, fantastical, futurist...). Use COLOR and material variety deliberately:",
+    "draw on the full block range — glazed/colored terracotta, colored concrete, copper and",
+    "oxidized copper, prismarine and sea lanterns, blackstone/deepslate, gold, warm woods,",
+    "nether/warped, wool — not a single pale stone. Give the facade a strong, recognizable",
+    "identity. AVOID defaulting to plain white quartz or sandstone.",
     "",
-    "## Make it detailed",
-    "- Real architectural articulation: columns with capitals and bases, stepped cornices, a",
-    "  pedimented/pitched roof, recessed coffers, openings with depth, and interior furnishing.",
-    "- Exploit the placement DSL fully: `fill`/`box` for masses, `line` for column shafts and",
-    "  edges, and `voxel` with block `state` (stairs/slabs — facing/half) for steps, cornices,",
-    "  roof slopes, and trim so surfaces are not flat cuboids.",
-    "- Vary materials for light, shadow, and accent.",
+    "## Orientation (critical — it is photographed head-on)",
+    "The facade FACES +Z (toward the camera). Build it in the X–Y plane (X = width, Y = height,",
+    "y = 0 at ground) with shallow RELIEF DEPTH into −Z: projecting elements (columns, buttresses,",
+    "cornices) come forward; openings recede. Model only the FRONT and its relief — no back,",
+    "sides, interior, or roof.",
     "",
-    "## Materials (free choice)",
-    "Choose any survival-obtainable Minecraft (1.20.1) blocks that suit a classical temple —",
-    "the sandstone family (smooth/cut/chiseled), quartz (block/pillar/chiseled/smooth/stairs/",
-    "slab), stone bricks and variants, polished stone, prismarine, sea lanterns/glowstone for",
-    "lighting, gold/copper accents. Declare exactly the blocks you place in palette.manifest.",
-    "There is no whitelist — design freely.",
+    "## Detail & proportion bar (what quality means here)",
+    "- Vertical articulation in your chosen idiom (columns, pilasters, piers, buttresses).",
+    "- A crowning element (pediment, parapet, cresting, finials, stepped attic) and a defined base.",
+    "- Framed openings with depth — a grand central entrance, windows/niches with surrounds —",
+    "  string courses, ornament, and lighting worked into the design.",
+    "- Strong proportion and an even bay rhythm; rich, intentional detail over blank fields.",
+    "- Avoid uniform 45° slopes: vary pitches with slab+stair combinations and approximate",
+    "  curves/arches with stepped stairs+slabs. Use voxel with block `state` (stairs/slabs,",
+    "  facing/half) richly for mouldings, sills, reveals, and trim.",
+    "",
+    "## Scale",
+    "- Width up to ~32 (X), height up to ~24 (Y), relief depth ~4–6 (into −Z). Fill it with detail.",
+    "",
+    "## Materials",
+    "Any survival-obtainable Minecraft 1.20.1 blocks — lean into color and variety. Declare the",
+    "blocks you place in palette.manifest.",
     "",
     "## Required metadata (set EXACTLY)",
     `- metadata.trial_id = "${runId}"`,
@@ -60,18 +67,17 @@ function composeFreeformPrompt(task, { promptMethodId, runId }) {
     `- metadata.server_state_id = "${task.serverStateId}"`,
     "",
     "## Style record",
-    'Set style.name = "classical temple" and style.rationale to a short account of the design.',
+    "Set style.name to the style you chose (your own label) and style.rationale to a short account.",
     "",
-    "Build on flat ground with a local origin at or above y = 0 (the stepped base floor at y = 0).",
+    "Build with a local origin at x = 0, y = 0, z = 0 (ground at y = 0); the facade's front",
+    "face at the highest Z so a camera in front of it (+Z) sees the detailed elevation.",
   ].join("\n");
 }
 
-// --- approaches: label -> async (task, ctx) => { artifact, raw, messages, prompt, promptMethodId }
-// Add a new entry here each time the system is refined; the label becomes the run's id.
 const APPROACHES = {
-  "v0-singleshot": async (task, ctx) => {
-    const promptMethodId = "freeform-temple.v0";
-    const prompt = composeFreeformPrompt(task, { promptMethodId, runId: ctx.runId });
+  "v0-facade": async (task, ctx) => {
+    const promptMethodId = "temple-facade-singleshot.v0";
+    const prompt = composeFacadePrompt(task, { promptMethodId, runId: ctx.runId });
     const messages = [];
     const { artifact, raw } = await requestDesignArtifact({
       prompt,
@@ -80,12 +86,10 @@ const APPROACHES = {
     });
     return { artifact, raw, messages, prompt, promptMethodId };
   },
-  // Future, once S-005 lands:
-  // "v1-iterative-multimodal": async (task, ctx) => { ...render→see→revise loop... },
 };
 
 function parseArgs(argv) {
-  const out = { approach: "v0-singleshot", note: "" };
+  const out = { approach: "v0-facade", note: "" };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--approach") out.approach = argv[++i];
     else if (argv[i] === "--note") out.note = argv[++i];
@@ -101,8 +105,6 @@ function nextSeq() {
   return seqs.length ? Math.max(...seqs) + 1 : 1;
 }
 
-// Rebuild the README progression section (summary table + image gallery) from every
-// run's summary.json, so the README is always an accurate, scrollable history.
 function regenerateReadme() {
   const dirs = existsSync(RUNS_DIR)
     ? readdirSync(RUNS_DIR).filter((d) => existsSync(join(RUNS_DIR, d, "summary.json")))
@@ -125,7 +127,7 @@ function regenerateReadme() {
     .map(
       (s) =>
         `### ${String(s.seq).padStart(3, "0")} — \`${s.approach}\` · ${s.date}\n\n` +
-        `![temple run ${s.seq}](runs/${s.runId}/render.png)\n\n` +
+        `![temple-facade run ${s.seq}](runs/${s.runId}/render.png)\n\n` +
         `${s.blocks} blocks · ${s.tokensIn}/${s.tokensOut} tok · ${usd(s.costUsd)}` +
         (s.note ? `\n\n> ${s.note}` : ""),
     )
@@ -156,12 +158,17 @@ async function main() {
   const dir = join(RUNS_DIR, runId);
   mkdirSync(dir, { recursive: true });
 
-  console.log(`temple benchmark ${runId} (approach: ${approach}) — LIVE via claude -p ...`);
-  const { artifact, raw, messages, prompt, promptMethodId } = await run(TEMPLE_TASK, { runId });
-
   const { renderArtifact } = await import("../../render/src/render-tool.mjs");
   const { renderSummary } = await import("../../src/render-tool.mjs");
-  const report = await renderArtifact(artifact, { outPath: join(dir, "render.png") });
+
+  console.log(`temple-facade benchmark ${runId} (approach: ${approach}) — LIVE via claude -p ...`);
+  const { artifact, raw, messages, prompt, promptMethodId } = await run(TEMPLE_FACADE_TASK, { runId, dir });
+
+  // Frontal shot — the whole point of this benchmark (task.view).
+  const report = await renderArtifact(artifact, {
+    outPath: join(dir, "render.png"),
+    view: TEMPLE_FACADE_TASK.view,
+  });
   const sum = renderSummary(report);
 
   writeFileSync(join(dir, "artifact.json"), JSON.stringify(artifact, null, 2) + "\n");
@@ -173,12 +180,13 @@ async function main() {
     seq,
     runId,
     date: new Date().toISOString().slice(0, 10),
-    task: TEMPLE_TASK.id,
-    taskVersion: TEMPLE_TASK.version,
+    task: TEMPLE_FACADE_TASK.id,
+    taskVersion: TEMPLE_FACADE_TASK.version,
     approach,
     promptMethodId,
     model: PHASE1_MODEL_ID,
-    seed: TEMPLE_TASK.seed,
+    seed: TEMPLE_FACADE_TASK.seed,
+    view: TEMPLE_FACADE_TASK.view,
     blocks: sum.placed,
     unmapped: sum.unmapped,
     bounds: sum.bounds,
@@ -195,7 +203,7 @@ async function main() {
     `done ${runId}: ${summary.blocks} blocks (unmapped ${summary.unmapped}), ` +
       `${summary.tokensIn}/${summary.tokensOut} tok, $${Number(summary.costUsd).toFixed(4)}`,
   );
-  console.log(`  render -> benchmarks/temple/runs/${runId}/render.png`);
+  console.log(`  frontal render -> benchmarks/temple-facade/runs/${runId}/render.png`);
 }
 
 main().catch((err) => {

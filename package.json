@@ -12,7 +12,7 @@
     "trial:run": "node scripts/run-trial.mjs",
     "smoke:run": "node scripts/run-trial.mjs",
     "trial:iterative": "node scripts/run-iterative-trial.mjs",
-    "bench:temple": "node benchmarks/temple/run.mjs",
+    "bench:temple-facade": "node benchmarks/temple-facade/run.mjs",
     "test": "node scripts/validate-artifact.mjs --self-test --expect valid schema/examples/valid-industrial-house.json && node scripts/validate-artifact.mjs --expect invalid schema/examples/invalid-industrial-house.json && npm run test:unit"
   },
   "devDependencies": {

@@ -1,0 +1,34 @@
+{
+  "seq": 1,
+  "runId": "001-v0-facade",
+  "date": "2026-06-04",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "v0-facade",
+  "promptMethodId": "temple-facade-singleshot.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 2908,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      -5
+    ],
+    "max": [
+      30,
+      26,
+      0
+    ]
+  },
+  "tokensIn": 9841,
+  "tokensOut": 26219,
+  "costUsd": 0.7601772500000001,
+  "note": "baseline: open style + color, frontal shot"
+}
