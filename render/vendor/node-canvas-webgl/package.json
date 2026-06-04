@@ -1,0 +1,7 @@
+{
+  "name": "node-canvas-webgl",
+  "version": "0.3.0-local",
+  "private": true,
+  "description": "Local shim so prismarine-viewer's headless texture loader resolves on Node 22. See lib/index.js.",
+  "main": "lib/index.js"
+}
