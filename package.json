@@ -8,7 +8,8 @@
     "validate": "node scripts/validate-artifact.mjs",
     "validate:good": "node scripts/validate-artifact.mjs --expect valid schema/examples/valid-industrial-house.json",
     "validate:bad": "node scripts/validate-artifact.mjs --expect invalid schema/examples/invalid-industrial-house.json",
-    "test": "node scripts/validate-artifact.mjs --self-test --expect valid schema/examples/valid-industrial-house.json && node scripts/validate-artifact.mjs --expect invalid schema/examples/invalid-industrial-house.json"
+    "test:unit": "node --test \"src/**/*.test.mjs\"",
+    "test": "node scripts/validate-artifact.mjs --self-test --expect valid schema/examples/valid-industrial-house.json && node scripts/validate-artifact.mjs --expect invalid schema/examples/invalid-industrial-house.json && npm run test:unit"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
