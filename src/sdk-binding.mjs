@@ -94,6 +94,15 @@ export async function requestDesignArtifact({ prompt, model, options = {} } = {}
   if (result === null) {
     throw new Error("SDK query produced no result message");
   }
+  // A non-success terminal (e.g. subtype "error_max_structured_output_retries")
+  // means the model could not produce a conforming artifact within the retry
+  // budget — report it as the binding failure it is, not a missing-payload error.
+  if (result.subtype !== "success") {
+    throw new Error(
+      `SDK query ended without a valid artifact (subtype: ${result.subtype})` +
+        (result.errors?.length ? `:\n${result.errors.join("\n")}` : ""),
+    );
+  }
 
   const parsed = extractArtifact(result);
   if (!parsed.ok) {

@@ -102,9 +102,62 @@ This is the one rule needed to make a *set* (the dedup target) out of an
 Both properties are **machine-checked** in `expand.test.mjs` (expand-twice
 deep-equal; reorder ⇒ identical), so they are guarantees, not just prose.
 
+## Validation & SDK binding (T-001-03)
+
+Two sibling modules turn untrusted input into a schema-valid, typed artifact and
+wire that schema to the experiment harness. They share `src/`'s conventions (pure
+ESM, JSDoc typedefs, `node:test`) and depend on `schema/design-artifact.schema.json`
+as the single source of truth — never re-stating the shape.
+
+### `artifact.mjs` — the validation gate
+
+```js
+import { parseArtifact, assertArtifact, toModelSchema } from "./artifact.mjs";
+```
+
+- **`parseArtifact(input) → ParseResult`** — the gate `expand.mjs` assumes upstream.
+  Accepts a JSON **string** or a parsed **object**. Returns
+  `{ ok:true, artifact }` (frozen, typed `DesignArtifact`) or
+  `{ ok:false, code, errors }` where `code ∈ {"invalid_json","schema_invalid"}` and
+  `errors` are located `at <path>: <why>` lines (the same format as the schema gate
+  — "which field, why"). Validation failure is a *value*, not a throw.
+- **`assertArtifact(input) → DesignArtifact`** — fail-fast variant; returns the
+  artifact or throws with the joined located message.
+- **`toModelSchema() → object`** — the canonical schema projected for a standards
+  validator: the non-standard OpenAPI `discriminator` keyword and the `$schema`/`$id`
+  meta-fields are stripped (the `oneOf` + `const op` keep the union unambiguous).
+  Our own ajv validation keeps using the full schema (with `discriminator`) for
+  crisp single-branch placement errors; only the model-facing copy is reduced.
+
+Shape-only: it does **not** check Minecraft semantics (block registry, state
+legality — E-04) or the `from ≤ to` corner rule (normalized by `expand.mjs`).
+
+### `sdk-binding.mjs` — Claude Agent SDK structured output
+
+```js
+import { designArtifactOutputFormat, extractArtifact, requestDesignArtifact } from "./sdk-binding.mjs";
+```
+
+- **`designArtifactOutputFormat() → { type:"json_schema", schema }`** — the object
+  spread into `query({ options:{ outputFormat } })`. Binds our schema directly as the
+  SDK's enforced structured-output format (spec §4/§5) — no Zod re-authoring, so the
+  contract has exactly one definition. Verified against the installed SDK's
+  `JsonSchemaOutputFormat` type.
+- **`extractArtifact(result) → ParseResult`** — pulls the structured payload off an
+  SDK terminal `result` message (`structured_output`, falling back to `result` text)
+  and re-validates it through `parseArtifact` for defense in depth.
+- **`requestDesignArtifact({ prompt, model, options }) → { artifact, raw }`** — the
+  one **live, metered** call (spec §4: Agent SDK bills at full API rates). It
+  dynamically imports `@anthropic-ai/claude-agent-sdk` (an `optionalDependency`;
+  clear error if absent) so the rest of the module — and the test suite — stay
+  offline. **Not exercised by `npm test`.**
+
 ## Test & verify
 
 ```bash
-npm run test:unit   # the expansion unit suite (node:test)
-npm test            # schema gate + the unit suite
+npm run test:unit   # expansion + artifact + sdk-binding suites (node:test)
+npm test            # schema gate + the unit suites
 ```
+
+The artifact/sdk-binding suites use the committed `schema/examples/*` fixtures as
+the canonical valid/invalid payloads and never make a live SDK call.
