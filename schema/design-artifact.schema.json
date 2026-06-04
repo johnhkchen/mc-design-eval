@@ -128,7 +128,9 @@
       }
     },
     "placement": {
-      "description": "A single placement, tagged by op. Exactly one shape matches.",
+      "description": "A single placement, tagged by op. Exactly one shape matches; op is the discriminator so validation errors point at the matching branch.",
+      "type": "object",
+      "discriminator": { "propertyName": "op" },
       "oneOf": [
         { "$ref": "#/$defs/voxelPlacement" },
         { "$ref": "#/$defs/linePlacement" },
