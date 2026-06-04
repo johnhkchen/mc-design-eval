@@ -16,11 +16,20 @@
 // for a bare JSON object and (b) re-validate the emitted text against the
 // source-of-truth schema (the same located errors as parseArtifact).
 //
+// MULTIMODAL PATH (T-005-02, spec §7 archetype 3): requestDesignArtifactWithImage
+// delivers a rendered WIP image plus text via `--input-format stream-json` — a
+// structured user message (text + base64 image blocks) on stdin instead of raw
+// text — so the model can SEE its build and revise it. It shares the exact
+// spawn/stream/validate spine (invokeClaude) with the text path, so transcript +
+// per-turn token logging (incl. image tokens, which ride in the turn's usage) are
+// unchanged. Its message shaping is PURE and offline-tested (toImageBlock /
+// buildImageTurn / serializeStreamJsonInput).
+//
 // The Agent SDK package remains a drop-in alternative behind this same seam (see
 // designArtifactOutputFormat + SDK_PACKAGE, retained for that path). Most of this
 // module is PURE (option/payload shaping, JSON extraction) and unit-tested with no
-// CLI and no network; only requestDesignArtifact spawns a process and is not tested
-// (spec §4: live + metered).
+// CLI and no network; only the two request* functions spawn a process and are not
+// tested (spec §4: live + metered).
 
 import { spawn } from "node:child_process";
 import { parseArtifact, toModelSchema } from "./artifact.mjs";
@@ -111,30 +120,81 @@ export function extractArtifact(result) {
 }
 
 /**
- * Run one live trial via the `claude -p` subscription shim and return the validated
- * artifact. LIVE and METERED (subscription credits — see file header / spec §4).
- * Not unit-tested. Spawns the CLI (no shell), feeds the schema-scaffolded prompt on
- * stdin, parses the stream-json message stream (calling onMessage per message in
- * order), and re-validates the terminal result's payload.
- *
- * @param {Object} params
- * @param {string} params.prompt   the trial prompt (archetype-constructed)
- * @param {string} [params.model]  pinned model id (single-sourced by the harness)
- * @param {Record<string, *>} [params.options] reserved; SDK-shaped options
- *   (mcpServers/outputFormat) do not translate to the CLI — multimodal tool wiring
- *   arrives later via `--mcp-config`. Single-shot needs no tools.
- * @param {(message: object) => void} [params.onMessage] called once per stream-json
- *   message in order, before any throw, so the runner can capture the transcript
- *   and per-turn usage. Must not mutate the message.
+ * Build an Anthropic image content block from one image. PURE; no I/O. Accepts a
+ * `Buffer`/`Uint8Array` of raw bytes (base64-encoded here), or an object carrying
+ * already-loaded bytes (`{ data, mediaType }`) or base64 (`{ base64, mediaType }`).
+ * `media_type` defaults to "image/png" (the render harness emits PNG). Throws on
+ * empty/missing bytes so a malformed image fails BEFORE a metered call.
+ * @param {Buffer | Uint8Array | { data: Buffer|Uint8Array, mediaType?: string } | { base64: string, mediaType?: string }} image
+ * @returns {{ type: "image", source: { type: "base64", media_type: string, data: string } }}
+ */
+export function toImageBlock(image) {
+  if (image == null) throw new Error("toImageBlock: image is null/undefined");
+  let mediaType = "image/png";
+  let data;
+  if (Buffer.isBuffer(image) || image instanceof Uint8Array) {
+    data = Buffer.from(image).toString("base64");
+  } else if (typeof image === "object") {
+    if (image.mediaType) mediaType = image.mediaType;
+    if (typeof image.base64 === "string") {
+      data = image.base64;
+    } else if (image.data != null && (Buffer.isBuffer(image.data) || image.data instanceof Uint8Array)) {
+      data = Buffer.from(image.data).toString("base64");
+    } else {
+      throw new Error("toImageBlock: expected `data` (Buffer) or `base64` (string)");
+    }
+  } else {
+    throw new Error("toImageBlock: expected a Buffer or { data } / { base64 } object");
+  }
+  if (!data) throw new Error("toImageBlock: image is empty");
+  return { type: "image", source: { type: "base64", media_type: mediaType, data } };
+}
+
+/**
+ * Shape the stream-json USER MESSAGE that delivers a rendered WIP image plus text to
+ * the model on the `claude -p --input-format stream-json` path (spec §7 multimodal).
+ * PURE. The text block reuses `withSchemaInstruction` so the artifact contract is
+ * IDENTICAL to the text path — the revision turn must still emit a bare schema-valid
+ * object, re-validated by the same `extractArtifact`. Throws when no image is given
+ * (AC #1: "one or more").
+ * @param {string} prompt
+ * @param {Array<Parameters<typeof toImageBlock>[0]>} images  one or more images
+ * @returns {{ type: "user", message: { role: "user", content: object[] } }}
+ */
+export function buildImageTurn(prompt, images) {
+  if (!Array.isArray(images) || images.length === 0) {
+    throw new Error("buildImageTurn: at least one image is required");
+  }
+  const content = [
+    { type: "text", text: withSchemaInstruction(prompt) },
+    ...images.map(toImageBlock),
+  ];
+  return { type: "user", message: { role: "user", content } };
+}
+
+/**
+ * Serialize one stream-json input message to the newline-delimited line the CLI
+ * reads on `--input-format stream-json` (one JSON object per line, then EOF). PURE.
+ * @param {object} message
+ * @returns {string}
+ */
+export function serializeStreamJsonInput(message) {
+  return JSON.stringify(message) + "\n";
+}
+
+/**
+ * The shared spawn → stream → validate spine for BOTH live `claude -p` paths
+ * (text-only and image). Spawns the CLI (no shell) with `args`, writes `stdin` and
+ * closes it, parses the stream-json message stream (calling onMessage per message in
+ * order, before any throw), captures the terminal `result`, and re-validates its
+ * payload against the source-of-truth schema. Private — the public wrappers differ
+ * only in the `args` and `stdin` they pass.
+ * @param {{ args: string[], stdin: string, onMessage?: (m: object) => void }} params
  * @returns {Promise<{ artifact: import("./artifact.mjs").DesignArtifact, raw: object }>}
  */
-export async function requestDesignArtifact({ prompt, model, options = {}, onMessage } = {}) {
-  void options; // reserved (see jsdoc); single-shot runs tool-free on the CLI path
-  const args = ["-p", "--output-format", "stream-json", "--verbose"];
-  if (model) args.push("--model", model);
-
+async function invokeClaude({ args, stdin, onMessage }) {
   const child = spawn(CLAUDE_CLI, args, { stdio: ["pipe", "pipe", "pipe"] });
-  child.stdin.end(withSchemaInstruction(prompt));
+  child.stdin.end(stdin);
 
   let result = null;
   let buf = "";
@@ -197,4 +257,71 @@ export async function requestDesignArtifact({ prompt, model, options = {}, onMes
     );
   }
   return { artifact: parsed.artifact, raw: result };
+}
+
+/**
+ * Run one live trial via the `claude -p` subscription shim and return the validated
+ * artifact. LIVE and METERED (subscription credits — see file header / spec §4).
+ * Not unit-tested. Feeds the schema-scaffolded prompt to the CLI as raw text on
+ * stdin (default `--input-format text`) and re-validates the terminal result.
+ *
+ * @param {Object} params
+ * @param {string} params.prompt   the trial prompt (archetype-constructed)
+ * @param {string} [params.model]  pinned model id (single-sourced by the harness)
+ * @param {Record<string, *>} [params.options] reserved; SDK-shaped options
+ *   (mcpServers/outputFormat) do not translate to the CLI — multimodal tool wiring
+ *   arrives later via `--mcp-config`. Single-shot needs no tools.
+ * @param {(message: object) => void} [params.onMessage] called once per stream-json
+ *   message in order, before any throw, so the runner can capture the transcript
+ *   and per-turn usage. Must not mutate the message.
+ * @returns {Promise<{ artifact: import("./artifact.mjs").DesignArtifact, raw: object }>}
+ */
+export async function requestDesignArtifact({ prompt, model, options = {}, onMessage } = {}) {
+  void options; // reserved (see jsdoc); single-shot runs tool-free on the CLI path
+  const args = ["-p", "--output-format", "stream-json", "--verbose"];
+  if (model) args.push("--model", model);
+  return invokeClaude({ args, stdin: withSchemaInstruction(prompt), onMessage });
+}
+
+/**
+ * Run one live MULTIMODAL trial via the `claude -p` shim: deliver a prompt PLUS one
+ * or more rendered WIP images to the model and return the validated artifact (spec
+ * §7 archetype 3). LIVE and METERED, image-bearing. Not unit-tested (spec §4; needs
+ * real image bytes) — its message/content shaping is the PURE, offline-tested
+ * `buildImageTurn`/`toImageBlock`/`serializeStreamJsonInput`.
+ *
+ * Identical to `requestDesignArtifact` except it adds `--input-format stream-json`
+ * and writes a structured user message (text + base64 image blocks) on stdin instead
+ * of raw text. The image rides inside that turn's `message.usage.input_tokens`, so
+ * the runner's `tallyUsage` captures per-turn usage incl. image tokens unchanged
+ * (AC #3); every message is still streamed to `onMessage`.
+ *
+ * AC #2 (the model demonstrably SEES the image) is verified by a documented live
+ * round-trip, not `npm test`. If the CLI ever rejects this stream-json envelope, the
+ * documented fallback is to load the render MCP server via `--mcp-config` and have
+ * its tool return the image as a content block (render-tool.mjs `toToolResult`).
+ *
+ * @param {Object} params
+ * @param {string} params.prompt   the trial / revision prompt
+ * @param {Array<Parameters<typeof toImageBlock>[0]>} params.images  one or more images
+ * @param {string} [params.model]  pinned model id
+ * @param {Record<string, *>} [params.options] reserved (parity with the text path)
+ * @param {(message: object) => void} [params.onMessage] called once per message in order
+ * @returns {Promise<{ artifact: import("./artifact.mjs").DesignArtifact, raw: object }>}
+ */
+export async function requestDesignArtifactWithImage(
+  { prompt, images, model, options = {}, onMessage } = {},
+) {
+  void options; // reserved (see jsdoc); parity with the text path
+  const turn = buildImageTurn(prompt, images); // throws on missing/empty images, pre-spawn
+  const args = [
+    "-p",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--input-format",
+    "stream-json",
+  ];
+  if (model) args.push("--model", model);
+  return invokeClaude({ args, stdin: serializeStreamJsonInput(turn), onMessage });
 }

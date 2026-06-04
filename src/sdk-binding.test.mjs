@@ -17,6 +17,9 @@ import {
   extractArtifact,
   stripToJson,
   withSchemaInstruction,
+  toImageBlock,
+  buildImageTurn,
+  serializeStreamJsonInput,
 } from "./sdk-binding.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -114,4 +117,71 @@ test("withSchemaInstruction appends a JSON-only directive and the schema", () =>
   assert.match(out, /Output format \(required\)/);
   assert.match(out, /ONLY a single JSON object/);
   assert.match(out, /"title": "DesignArtifact"/);
+});
+
+// --- image input shaping (claude -p stream-json path, T-005-02) ------------
+// Tiny inline buffers (PNG magic) — no dependency on render/out (gitignored).
+
+const PNG_MAGIC = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
+
+test("toImageBlock wraps a Buffer as a base64 png block (round-trips)", () => {
+  const block = toImageBlock(PNG_MAGIC);
+  assert.equal(block.type, "image");
+  assert.equal(block.source.type, "base64");
+  assert.equal(block.source.media_type, "image/png");
+  assert.deepEqual(Buffer.from(block.source.data, "base64"), PNG_MAGIC);
+});
+
+test("toImageBlock accepts { data, mediaType } and honors a non-png type", () => {
+  const block = toImageBlock({ data: PNG_MAGIC, mediaType: "image/jpeg" });
+  assert.equal(block.source.media_type, "image/jpeg");
+  assert.deepEqual(Buffer.from(block.source.data, "base64"), PNG_MAGIC);
+});
+
+test("toImageBlock passes through { base64 }", () => {
+  const b64 = PNG_MAGIC.toString("base64");
+  const block = toImageBlock({ base64: b64 });
+  assert.equal(block.source.data, b64);
+  assert.equal(block.source.media_type, "image/png");
+});
+
+test("toImageBlock throws on empty/missing bytes", () => {
+  assert.throws(() => toImageBlock(Buffer.alloc(0)), /empty/);
+  assert.throws(() => toImageBlock(null), /null\/undefined/);
+  assert.throws(() => toImageBlock({}), /data.*or.*base64/);
+});
+
+test("buildImageTurn shapes a user message: schema text block + image blocks", () => {
+  const turn = buildImageTurn("BASE PROMPT", [PNG_MAGIC]);
+  assert.equal(turn.type, "user");
+  assert.equal(turn.message.role, "user");
+  const [text, image] = turn.message.content;
+  assert.equal(text.type, "text");
+  assert.match(text.text, /^BASE PROMPT/);
+  assert.match(text.text, /Output format \(required\)/);
+  assert.match(text.text, /"title": "DesignArtifact"/);
+  assert.equal(image.type, "image");
+});
+
+test("buildImageTurn preserves image count and order", () => {
+  const a = Buffer.from([1, 2, 3]);
+  const b = Buffer.from([4, 5, 6]);
+  const turn = buildImageTurn("P", [a, b]);
+  const images = turn.message.content.filter((c) => c.type === "image");
+  assert.equal(images.length, 2);
+  assert.deepEqual(Buffer.from(images[0].source.data, "base64"), a);
+  assert.deepEqual(Buffer.from(images[1].source.data, "base64"), b);
+});
+
+test("buildImageTurn requires at least one image", () => {
+  assert.throws(() => buildImageTurn("P", []), /at least one image/);
+  assert.throws(() => buildImageTurn("P"), /at least one image/);
+});
+
+test("serializeStreamJsonInput is a single newline-terminated JSON line", () => {
+  const turn = buildImageTurn("P", [PNG_MAGIC]);
+  const line = serializeStreamJsonInput(turn);
+  assert.ok(line.endsWith("\n"));
+  assert.equal(line.trimEnd().includes("\n"), false);
+  assert.deepEqual(JSON.parse(line), turn);
 });
