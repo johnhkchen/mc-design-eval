@@ -13,6 +13,19 @@ the per-run reasoning behind each principle. Renders live in
 
 ## Principles (distilled)
 
+> **⚠️ Measured correction (rubric `v1`, 3-sample mean) — the metric contradicts the impressions below.**
+> Scoring all four runs with the LLM-judge gives overall: v0 = **4.0**, v1 = **4.0**, v2 = **3.0**,
+> v3 = **3.0**. The "design-doc is a huge jump" narrative (P4) is **not supported** — the *conventional
+> colonnades* (v0/v1) scored *higher* than the creative invented-style design-docs (v2/v3), partly
+> because exotic styles read less "unmistakably temple" on the **fidelity** dimension. **No prompting
+> technique reliably moved the score; all cluster 3–4.** The one robust, technique-independent finding
+> is the structural ceiling (P7). Treat the impression-based log entries below as hypotheses the rubric
+> has now partly falsified — this is exactly why we built the judge.
+>
+> **Rubric caveat:** `fidelity` rewards an *unmistakable, conventional* temple, which **penalizes
+> creative/exotic interpretation** — possibly in tension with the creativity goal. Decide consciously
+> whether the rubric should reward convention or invention before trusting cross-style comparisons.
+
 1. **The model matches the bar you set.** Briefs that cap scope ("modest 7×7–9×9", "favor
    structural clarity over ornament") produced a 333-block gray box; removing the cap on the
    *same* model/path produced an 8,018-block temple. Invite ambition explicitly; never cap
@@ -29,7 +42,8 @@ the per-run reasoning behind each principle. Renders live in
    preserving the teal↔amber scheme. **Never run a bare "improve it"; always anchor the revision
    to the doc.** (Cost: the revision is a 3rd call for an incremental gain over an already-strong
    v2 — use it when polish matters.)
-4. **Ground before generating — the biggest single lever (confirmed).** Writing a *finalized
+4. **[CONTESTED by the rubric — see the Measured correction above.]** Ground before generating.
+   Writing a *finalized
    design document* first — lore; the architectural **reason** the temple looks that way; a
    color-theory palette (dominant / supporting / accent + named harmony + a reason for restraint);
    motifs; features; proportion ratios — then building *from it* produced the best result by far:
@@ -44,6 +58,12 @@ the per-run reasoning behind each principle. Renders live in
    "45° at best." Push explicitly for varied roof pitch via slab+stair combos, stepped
    curves/arches, and `voxel`+block-`state` trim — but accept a hard ceiling vs. code-generated
    builds (mc-bench often has the model write a *program*; our declarative contract does not).
+7. **The ceiling is structural, not prompt-shaped (the robust finding).** *Every* rubric judgment,
+   across *every* technique, names the same two weaknesses: **shallow relief depth** and an **awkward
+   narrow crown on a wide body** (proportion). No prompt — design-doc, anchored revision, color
+   rationale — fixed either. This is the real plateau: a capability/medium limit (relief is hard to
+   express in the coordinate DSL; 3D massing/proportion is a model weak spot), not something more
+   prompting will move. It is the evidence-based trigger to weigh the image-to-voxel ceiling raise.
 
 ## Tunable parameters (and what's actually reachable)
 

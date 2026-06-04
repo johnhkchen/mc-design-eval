@@ -33,5 +33,20 @@
   "tokensOut": 35588,
   "costUsd": 1.07585275,
   "roundImages": [],
-  "note": "design-document-first: lore + architectural rationale + color-theory palette, then build"
+  "note": "design-document-first: lore + architectural rationale + color-theory palette, then build",
+  "score": {
+    "proportion": 3.33,
+    "color": 3.67,
+    "detail": 3,
+    "fidelity": 3.67,
+    "overall": 3,
+    "samples": 3,
+    "rubric": "v1",
+    "notes": "Symmetric three-bay facade with a coherent base-middle-crown and a tan/terracotta/teal-with-gold scheme, but the teal ornament reads more fortified gatehouse than unmistakable temple and the relief stays shallow.",
+    "usage": {
+      "input_tokens": 20317,
+      "output_tokens": 1708,
+      "cost_usd": 0.2640745
+    }
+  }
 }

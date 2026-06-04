@@ -16,6 +16,7 @@ import {
   requestText,
 } from "../../src/sdk-binding.mjs";
 import { PHASE1_MODEL_ID } from "../../src/config.mjs";
+import { judgeRender } from "./judge.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const RUNS_DIR = join(HERE, "runs");
@@ -432,13 +433,89 @@ const APPROACHES = {
       roundImages,
     };
   },
+
+  // Best-of-N (literature: for divergent/open-ended tasks, parallel sampling + a verifier
+  // beats sequential refinement — Snell et al. 2408.03314). Sample K independent design-doc
+  // candidates IN PARALLEL, judge each with the rubric, keep the best. Free on a flat-cost
+  // plan; wall-clock stays ~1x within rate limits. allSettled so a rate-limited candidate
+  // drops out instead of failing the run.
+  "vN-bestof": async (task, ctx) => {
+    const promptMethodId = "temple-facade-bestof.v0";
+    const K = ctx.k || 4;
+    const messages = [];
+
+    const settled = await Promise.allSettled(
+      Array.from({ length: K }, async (_, i) => {
+        const m = [];
+        const dd = await requestText({ prompt: composeDesignDocPrompt(task), model: PHASE1_MODEL_ID, onMessage: (x) => m.push(x) });
+        const buildPrompt = composeBuildFromDocPrompt(task, { promptMethodId, runId: `${ctx.runId}-c${i}`, designDoc: dd.text });
+        const res = await requestDesignArtifact({ prompt: buildPrompt, model: PHASE1_MODEL_ID, onMessage: (x) => m.push(x) });
+        const cimg = join(ctx.dir, `cand-${i}.png`);
+        await ctx.renderArtifact(res.artifact, { outPath: cimg, view: task.view });
+        writeFileSync(join(ctx.dir, `cand-${i}.design-doc.md`), dd.text + "\n");
+        const score = await judgeRender({ imagePath: cimg, brief: task.goal });
+        return { i, artifact: res.artifact, score, m, raws: [dd.raw, res.raw], judgeUsage: score.usage };
+      }),
+    );
+
+    const cands = settled.filter((s) => s.status === "fulfilled").map((s) => s.value);
+    if (cands.length === 0) throw new Error("best-of-N: all candidates failed (rate limit?)");
+    cands.sort((a, b) => b.score.overall - a.score.overall);
+    const winner = cands[0];
+
+    let sumIn = 0;
+    let sumOut = 0;
+    let sumCost = 0;
+    for (const c of cands) {
+      for (const r of c.raws) {
+        const u = r.usage || {};
+        sumIn += u.input_tokens || 0;
+        sumOut += u.output_tokens || 0;
+        sumCost += r.total_cost_usd || 0;
+      }
+      sumIn += c.judgeUsage.input_tokens;
+      sumOut += c.judgeUsage.output_tokens;
+      sumCost += c.judgeUsage.cost_usd;
+      for (const x of c.m) messages.push(x);
+    }
+
+    const candScores = cands.map((c) => ({
+      i: c.i,
+      overall: c.score.overall,
+      proportion: c.score.proportion,
+      color: c.score.color,
+      detail: c.score.detail,
+      fidelity: c.score.fidelity,
+    }));
+    writeFileSync(join(ctx.dir, "candidates.json"), JSON.stringify(candScores, null, 2) + "\n");
+    console.log(
+      `  best-of-${K} (${cands.length} ok): overalls ${candScores.map((c) => c.overall).join(", ")} → ` +
+        `winner cand-${winner.i} (${winner.score.overall})`,
+    );
+
+    const raw = {
+      subtype: "success",
+      num_turns: cands.length * 2,
+      usage: { input_tokens: sumIn, output_tokens: sumOut },
+      total_cost_usd: sumCost,
+    };
+    return {
+      artifact: winner.artifact,
+      raw,
+      messages,
+      prompt: "(best-of-N design-doc — see cand-*.png + candidates.json)",
+      promptMethodId,
+      bestof: { k: K, completed: cands.length, winner: winner.i, candScores },
+    };
+  },
 };
 
 function parseArgs(argv) {
-  const out = { approach: "v0-facade", note: "" };
+  const out = { approach: "v0-facade", note: "", k: undefined };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--approach") out.approach = argv[++i];
     else if (argv[i] === "--note") out.note = argv[++i];
+    else if (argv[i] === "--k") out.k = parseInt(argv[++i], 10);
   }
   return out;
 }
@@ -460,12 +537,14 @@ function regenerateReadme() {
     .sort((a, b) => a.seq - b.seq);
 
   const usd = (n) => `$${Number(n ?? 0).toFixed(4)}`;
+  const dur = (ms) => (ms ? `${Math.round(ms / 1000)}s` : "—");
+  const sc = (s) => (s.score && s.score.overall != null ? `${s.score.overall}` : "—");
   const table = [
-    "| # | date | approach | blocks | tok in/out | cost | note |",
-    "|---|------|----------|--------|-----------|------|------|",
+    "| # | date | approach | score | blocks | tok in/out | $ | wall | note |",
+    "|---|------|----------|-------|--------|-----------|---|------|------|",
     ...summaries.map(
       (s) =>
-        `| ${s.seq} | ${s.date} | \`${s.approach}\` | ${s.blocks} | ${s.tokensIn}/${s.tokensOut} | ${usd(s.costUsd)} | ${s.note || ""} |`,
+        `| ${s.seq} | ${s.date} | \`${s.approach}\` | ${sc(s)} | ${s.blocks} | ${s.tokensIn}/${s.tokensOut} | ${usd(s.costUsd)} | ${dur(s.durationMs)} | ${s.note || ""} |`,
     ),
   ].join("\n");
 
@@ -474,7 +553,7 @@ function regenerateReadme() {
       (s) =>
         `### ${String(s.seq).padStart(3, "0")} — \`${s.approach}\` · ${s.date}\n\n` +
         `![temple-facade run ${s.seq}](runs/${s.runId}/render.png)\n\n` +
-        `${s.blocks} blocks · ${s.tokensIn}/${s.tokensOut} tok · ${usd(s.costUsd)}` +
+        `score ${sc(s)}/5 · ${s.blocks} blocks · ${s.tokensIn}/${s.tokensOut} tok · ${usd(s.costUsd)}` +
         (s.note ? `\n\n> ${s.note}` : ""),
     )
     .join("\n\n");
@@ -492,7 +571,8 @@ function regenerateReadme() {
 }
 
 async function main() {
-  const { approach, note } = parseArgs(process.argv.slice(2));
+  const { approach, note, k } = parseArgs(process.argv.slice(2));
+  const startedAt = Date.now();
   const run = APPROACHES[approach];
   if (!run) {
     console.error(`unknown approach "${approach}" (have: ${Object.keys(APPROACHES).join(", ")})`);
@@ -508,10 +588,8 @@ async function main() {
   const { renderSummary } = await import("../../src/render-tool.mjs");
 
   console.log(`temple-facade benchmark ${runId} (approach: ${approach}) — LIVE via claude -p ...`);
-  const { artifact, raw, messages, prompt, promptMethodId, roundImages = [] } = await run(
-    TEMPLE_FACADE_TASK,
-    { runId, dir, renderArtifact },
-  );
+  const { artifact, raw, messages, prompt, promptMethodId, roundImages = [], bestof = null } =
+    await run(TEMPLE_FACADE_TASK, { runId, dir, renderArtifact, k });
 
   // Frontal shot — the whole point of this benchmark (task.view).
   const report = await renderArtifact(artifact, {
@@ -519,6 +597,13 @@ async function main() {
     view: TEMPLE_FACADE_TASK.view,
   });
   const sum = renderSummary(report);
+
+  // Score the final render against the locked rubric (instrument + the best-of-N verifier).
+  const score = await judgeRender({ imagePath: join(dir, "render.png"), brief: TEMPLE_FACADE_TASK.goal });
+  console.log(
+    `  judge[${score.rubric}] overall=${score.overall} ` +
+      `(prop ${score.proportion} / color ${score.color} / detail ${score.detail} / fidelity ${score.fidelity})`,
+  );
 
   writeFileSync(join(dir, "artifact.json"), JSON.stringify(artifact, null, 2) + "\n");
   writeFileSync(join(dir, "prompt.txt"), prompt + "\n");
@@ -546,7 +631,10 @@ async function main() {
     tokensIn: u.input_tokens ?? 0,
     tokensOut: u.output_tokens ?? 0,
     costUsd: raw.total_cost_usd ?? 0,
+    durationMs: Date.now() - startedAt,
+    score,
     roundImages,
+    bestof,
     note,
   };
   writeFileSync(join(dir, "summary.json"), JSON.stringify(summary, null, 2) + "\n");

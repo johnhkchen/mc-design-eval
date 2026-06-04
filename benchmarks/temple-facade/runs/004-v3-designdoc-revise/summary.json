@@ -35,5 +35,20 @@
   "roundImages": [
     "round-0.png"
   ],
-  "note": "design-doc + identity-preserving multimodal revision (P3+P4)"
+  "note": "design-doc + identity-preserving multimodal revision (P3+P4)",
+  "score": {
+    "proportion": 3,
+    "color": 4,
+    "detail": 3,
+    "fidelity": 4,
+    "overall": 3,
+    "samples": 3,
+    "rubric": "v1",
+    "notes": "A symmetric banded colonnade and recessed gold-framed teal portal read clearly as a temple in a disciplined teal/gold/sandstone palette, but relief stays shallow and the narrow stepped crown sits awkwardly atop the much wider body.",
+    "usage": {
+      "input_tokens": 10345,
+      "output_tokens": 1665,
+      "cost_usd": 0.27775825
+    }
+  }
 }

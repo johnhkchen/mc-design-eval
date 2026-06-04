@@ -30,5 +30,20 @@
   "tokensIn": 9841,
   "tokensOut": 26219,
   "costUsd": 0.7601772500000001,
-  "note": "baseline: open style + color, frontal shot"
+  "note": "baseline: open style + color, frontal shot",
+  "score": {
+    "proportion": 4,
+    "color": 4,
+    "detail": 3.67,
+    "fidelity": 4,
+    "overall": 4,
+    "samples": 3,
+    "rubric": "v1",
+    "notes": "A confident teal-and-gold colonnade with a clear central entrance and stepped crown, though the narrow pediment sits a touch awkwardly atop the broad body.",
+    "usage": {
+      "input_tokens": 19954,
+      "output_tokens": 1649,
+      "cost_usd": 0.25849075
+    }
+  }
 }

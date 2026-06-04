@@ -327,28 +327,15 @@ export async function requestDesignArtifactWithImage(
 }
 
 /**
- * Run one live `claude -p` call and return the model's PLAIN TEXT response — no schema
- * instruction, no artifact validation. For stages that precede the build, e.g. a design
- * document (lore/aesthetic/palette rationale) the build then realizes. LIVE and METERED.
- *
- * `effort` maps to the CLI's `--effort` (reasoning-effort knob — the closest tunable to
- * "temperature", which `claude -p` does not expose); `system` to `--system-prompt`.
- * @param {Object} params
- * @param {string} params.prompt
- * @param {string} [params.model]
- * @param {string} [params.effort]    e.g. "low" | "medium" | "high" (CLI --effort)
- * @param {string} [params.system]    optional system prompt
- * @param {(message: object) => void} [params.onMessage]
- * @returns {Promise<{ text: string, raw: object }>}
+ * Spawn `claude -p` (no shell), write stdin, stream the stream-json messages to
+ * onMessage in order, and return the terminal result (no validation). The shared spawn
+ * core for the plain-text and plain-text+image paths below. Private.
+ * @param {{ args: string[], stdin: string, onMessage?: (m: object) => void }} p
+ * @returns {Promise<{ result: object|null, exitCode: number, stderr: string }>}
  */
-export async function requestText({ prompt, model, effort, system, onMessage } = {}) {
-  const args = ["-p", "--output-format", "stream-json", "--verbose"];
-  if (model) args.push("--model", model);
-  if (effort) args.push("--effort", String(effort));
-  if (system) args.push("--system-prompt", system);
-
+async function _runClaude({ args, stdin, onMessage }) {
   const child = spawn(CLAUDE_CLI, args, { stdio: ["pipe", "pipe", "pipe"] });
-  child.stdin.end(prompt);
+  child.stdin.end(stdin);
 
   let result = null;
   let buf = "";
@@ -383,7 +370,11 @@ export async function requestText({ prompt, model, effort, system, onMessage } =
     child.on("close", (c) => resolve(c));
   });
   if (buf.trim()) handleLine(buf);
+  return { result, exitCode, stderr };
+}
 
+/** Turn a terminal result into its plain text, throwing on no-result / non-success. */
+function textOf(result, exitCode, stderr) {
   if (result === null) {
     throw new Error(
       `\`${CLAUDE_CLI} -p\` produced no result (exit ${exitCode})` +
@@ -391,7 +382,52 @@ export async function requestText({ prompt, model, effort, system, onMessage } =
     );
   }
   if (result.subtype !== "success") {
-    throw new Error(`\`claude -p\` text call failed (subtype: ${result.subtype})`);
+    throw new Error(`\`claude -p\` call failed (subtype: ${result.subtype})`);
   }
-  return { text: typeof result.result === "string" ? result.result : "", raw: result };
+  return typeof result.result === "string" ? result.result : "";
+}
+
+/**
+ * Run one live `claude -p` call and return the model's PLAIN TEXT response — no schema
+ * instruction, no artifact validation. For stages that precede the build, e.g. a design
+ * document (lore/aesthetic/palette rationale) the build then realizes. LIVE and METERED.
+ *
+ * `effort` maps to the CLI's `--effort` (reasoning-effort knob — the closest tunable to
+ * "temperature", which `claude -p` does not expose); `system` to `--system-prompt`.
+ * @param {{ prompt: string, model?: string, effort?: string, system?: string,
+ *   onMessage?: (m: object) => void }} params
+ * @returns {Promise<{ text: string, raw: object }>}
+ */
+export async function requestText({ prompt, model, effort, system, onMessage } = {}) {
+  const args = ["-p", "--output-format", "stream-json", "--verbose"];
+  if (model) args.push("--model", model);
+  if (effort) args.push("--effort", String(effort));
+  if (system) args.push("--system-prompt", system);
+  const { result, exitCode, stderr } = await _runClaude({ args, stdin: prompt, onMessage });
+  return { text: textOf(result, exitCode, stderr), raw: result };
+}
+
+/**
+ * Like requestText but with image input and NO schema — the model SEES the image(s) and
+ * returns plain text. The basis for the LLM-as-judge (render in, rubric scores out).
+ * Distinct from requestDesignArtifactWithImage, which forces the design-artifact schema.
+ * @param {{ prompt: string, images: Array<Parameters<typeof toImageBlock>[0]>, model?: string,
+ *   effort?: string, onMessage?: (m: object) => void }} params
+ * @returns {Promise<{ text: string, raw: object }>}
+ */
+export async function requestTextWithImage({ prompt, images, model, effort, onMessage } = {}) {
+  if (!Array.isArray(images) || images.length === 0) {
+    throw new Error("requestTextWithImage: at least one image is required");
+  }
+  const content = [{ type: "text", text: prompt }, ...images.map(toImageBlock)];
+  const turn = { type: "user", message: { role: "user", content } };
+  const args = ["-p", "--output-format", "stream-json", "--verbose", "--input-format", "stream-json"];
+  if (model) args.push("--model", model);
+  if (effort) args.push("--effort", String(effort));
+  const { result, exitCode, stderr } = await _runClaude({
+    args,
+    stdin: serializeStreamJsonInput(turn),
+    onMessage,
+  });
+  return { text: textOf(result, exitCode, stderr), raw: result };
 }
