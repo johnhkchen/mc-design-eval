@@ -10,7 +10,11 @@ import { mkdirSync, writeFileSync, readFileSync, readdirSync, existsSync } from 
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { TEMPLE_FACADE_TASK } from "./task.mjs";
-import { requestDesignArtifact, requestDesignArtifactWithImage } from "../../src/sdk-binding.mjs";
+import {
+  requestDesignArtifact,
+  requestDesignArtifactWithImage,
+  requestText,
+} from "../../src/sdk-binding.mjs";
 import { PHASE1_MODEL_ID } from "../../src/config.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -123,6 +127,81 @@ function composeRevisionPrompt(task, { promptMethodId, runId }) {
   ].join("\n");
 }
 
+// Design-doc-first prompts (v2). Stage 1 produces a finalized DESIGN DOCUMENT as plain
+// text (grounded reasoning + a color-theory palette); stage 2 builds the facade from it.
+// Hypothesis: grounding the design before generating raises quality vs shooting straight
+// into block placement.
+function composeDesignDocPrompt(task) {
+  return [
+    "You are a master architect and worldbuilder. BEFORE building anything, write a tight",
+    "DESIGN DOCUMENT for a TEMPLE FACADE, grounded in real architectural reasoning — the kind a",
+    "thoughtful designer writes to justify every choice. Output ONLY the document (markdown); no",
+    "block list, JSON, or build yet.",
+    "",
+    "## Subject",
+    task.goal,
+    "",
+    "## Cover each, concisely and with REASONS (not just adjectives)",
+    "1. **Lore & setting** — the culture/era/tradition (real or invented), the deity or purpose",
+    "   the temple serves, and the climate/landscape it sits in.",
+    "2. **Aesthetic & architectural logic** — the architectural language (forms, order, silhouette)",
+    "   AND why a temple of this tradition looks this way: ritual function, available materials,",
+    "   structural logic, climate. Ground the look in reasons, not taste alone.",
+    "3. **Color palette (apply color theory)** — choose 3–5 colors: a dominant, 1–2 supporting, and",
+    "   a sparing accent. Name the harmony (analogous / complementary / triadic) and WHY it suits",
+    "   the lore. Map each to a concrete Minecraft block. Avoid over-saturation and 'rainbow'",
+    "   palettes — restraint and hierarchy over many hues.",
+    "4. **Motifs & ornament** — 2–3 recurring motifs and where they appear.",
+    "5. **Architectural features & proportion** — base, supports (columns/piers), entablature/",
+    "   cornice, crowning element, entrance, windows/niches; and the key proportion ratios.",
+    "",
+    "FINALIZE the document — firm decisions, no open options. Keep it under ~400 words.",
+  ].join("\n");
+}
+
+function composeBuildFromDocPrompt(task, { promptMethodId, runId, designDoc }) {
+  return [
+    "You are a master Minecraft architect. Below is your FINALIZED design document for a temple",
+    "facade. Build the facade as a structured design artifact that FAITHFULLY realizes the",
+    "document — its style, color scheme, motifs, features, and proportion. Commit fully to the",
+    "document's decisions; do not water them down.",
+    "",
+    "## Finalized design document",
+    designDoc,
+    "",
+    "## Orientation (critical — photographed head-on)",
+    "The facade FACES +Z (toward the camera). Build it in the X–Y plane (X = width, Y = height,",
+    "y = 0 ground), relief depth into −Z, front face at the highest Z. Model only the front and",
+    "its relief — no back, sides, interior, or roof.",
+    "",
+    "## Realize the document with craft",
+    "- Build every architectural feature the document specifies; honor its proportion ratios.",
+    "- Use the document's color palette as the material scheme (dominant / supporting / accent).",
+    "- Give openings real depth; avoid uniform 45° slopes (vary pitch with slab+stair combos;",
+    "  approximate curves/arches with stepped stairs+slabs); use voxel block `state` for trim.",
+    "",
+    "## Scale",
+    "- Width up to ~32 (X), height up to ~24 (Y), relief depth ~4–6 (into −Z).",
+    "",
+    "## Materials",
+    "Survival-obtainable Minecraft 1.20.1 blocks — primarily the document's palette. Declare the",
+    "blocks you place in palette.manifest.",
+    "",
+    "## Required metadata (set EXACTLY)",
+    `- metadata.trial_id = "${runId}"`,
+    `- metadata.prompting_method_id = "${promptMethodId}"`,
+    `- metadata.model_id = "${PHASE1_MODEL_ID}"`,
+    `- metadata.seed = ${task.seed}`,
+    `- metadata.server_state_id = "${task.serverStateId}"`,
+    "",
+    "## Style record",
+    "Set style.name to the document's style label and style.rationale to one line tying the build",
+    "to the document.",
+    "",
+    "Local origin at x = 0, y = 0, z = 0 (ground at y = 0).",
+  ].join("\n");
+}
+
 const APPROACHES = {
   "v0-facade": async (task, ctx) => {
     const promptMethodId = "temple-facade-singleshot.v0";
@@ -194,6 +273,53 @@ const APPROACHES = {
       prompt: "(multimodal — see round-N.prompt.txt in this run dir)",
       promptMethodId,
       roundImages,
+    };
+  },
+
+  "v2-designdoc": async (task, ctx) => {
+    const promptMethodId = "temple-facade-designdoc.v0";
+    const messages = [];
+    let sumIn = 0;
+    let sumOut = 0;
+    let sumCost = 0;
+    const acc = (raw) => {
+      const u = raw.usage || {};
+      sumIn += u.input_tokens || 0;
+      sumOut += u.output_tokens || 0;
+      sumCost += raw.total_cost_usd || 0;
+    };
+
+    // Stage 1 — finalized design document (plain text, grounded reasoning + palette).
+    const ddPrompt = composeDesignDocPrompt(task);
+    writeFileSync(join(ctx.dir, "design-doc.prompt.txt"), ddPrompt + "\n");
+    const dd = await requestText({ prompt: ddPrompt, model: PHASE1_MODEL_ID, onMessage: (m) => messages.push(m) });
+    acc(dd.raw);
+    writeFileSync(join(ctx.dir, "design-doc.md"), dd.text + "\n");
+    console.log(`  stage 1 (design doc): ${dd.text.length} chars`);
+
+    // Stage 2 — build the facade FROM the finalized document.
+    const buildPrompt = composeBuildFromDocPrompt(task, {
+      promptMethodId,
+      runId: ctx.runId,
+      designDoc: dd.text,
+    });
+    writeFileSync(join(ctx.dir, "build.prompt.txt"), buildPrompt + "\n");
+    const res = await requestDesignArtifact({ prompt: buildPrompt, model: PHASE1_MODEL_ID, onMessage: (m) => messages.push(m) });
+    acc(res.raw);
+    console.log(`  stage 2 (build): ${(res.artifact.placements ?? []).length} ops`);
+
+    const raw = {
+      subtype: "success",
+      num_turns: 2,
+      usage: { input_tokens: sumIn, output_tokens: sumOut },
+      total_cost_usd: sumCost,
+    };
+    return {
+      artifact: res.artifact,
+      raw,
+      messages,
+      prompt: "(design-doc-first — see design-doc.md + *.prompt.txt in this run dir)",
+      promptMethodId,
     };
   },
 };
@@ -299,6 +425,10 @@ async function main() {
     promptMethodId,
     model: PHASE1_MODEL_ID,
     seed: TEMPLE_FACADE_TASK.seed,
+    // Tunable params, recorded per run for attribution. `claude -p` exposes no
+    // --temperature (would need the metered API path); --effort is the available knob.
+    temperature: null,
+    effort: null,
     view: TEMPLE_FACADE_TASK.view,
     blocks: sum.placed,
     unmapped: sum.unmapped,

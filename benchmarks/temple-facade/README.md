@@ -27,8 +27,14 @@ automatically.
 
 ## Approaches
 
-- **`v0-facade`** — single-shot via `claude -p`; an uncapped, creativity- and color-inviting
-  prompt with an explicit orientation contract (facade faces +Z) for the head-on render.
+- **`v0-facade`** — single-shot; uncapped, color-inviting prompt + orientation contract.
+- **`v1-multimodal`** — draft → render head-on → critique prompt → re-emit improved (2 calls).
+- **`v2-designdoc`** — write a finalized design document (lore, architectural rationale,
+  color-theory palette, motifs, features), then build from it (2 calls).
+
+**Learnings** — what works and what doesn't is tracked in
+[`docs/knowledge/design-learnings.md`](../../docs/knowledge/design-learnings.md) (the
+auto-injected corpus). Review and update it after each run.
 
 ## Progression
 

@@ -325,3 +325,73 @@ export async function requestDesignArtifactWithImage(
   if (model) args.push("--model", model);
   return invokeClaude({ args, stdin: serializeStreamJsonInput(turn), onMessage });
 }
+
+/**
+ * Run one live `claude -p` call and return the model's PLAIN TEXT response — no schema
+ * instruction, no artifact validation. For stages that precede the build, e.g. a design
+ * document (lore/aesthetic/palette rationale) the build then realizes. LIVE and METERED.
+ *
+ * `effort` maps to the CLI's `--effort` (reasoning-effort knob — the closest tunable to
+ * "temperature", which `claude -p` does not expose); `system` to `--system-prompt`.
+ * @param {Object} params
+ * @param {string} params.prompt
+ * @param {string} [params.model]
+ * @param {string} [params.effort]    e.g. "low" | "medium" | "high" (CLI --effort)
+ * @param {string} [params.system]    optional system prompt
+ * @param {(message: object) => void} [params.onMessage]
+ * @returns {Promise<{ text: string, raw: object }>}
+ */
+export async function requestText({ prompt, model, effort, system, onMessage } = {}) {
+  const args = ["-p", "--output-format", "stream-json", "--verbose"];
+  if (model) args.push("--model", model);
+  if (effort) args.push("--effort", String(effort));
+  if (system) args.push("--system-prompt", system);
+
+  const child = spawn(CLAUDE_CLI, args, { stdio: ["pipe", "pipe", "pipe"] });
+  child.stdin.end(prompt);
+
+  let result = null;
+  let buf = "";
+  let stderr = "";
+  const handleLine = (line) => {
+    const t = line.trim();
+    if (!t) return;
+    let m;
+    try {
+      m = JSON.parse(t);
+    } catch {
+      return;
+    }
+    if (typeof onMessage === "function") onMessage(m);
+    if (m.type === "result") result = m;
+  };
+  child.stdout.on("data", (c) => {
+    buf += c.toString();
+    let i;
+    while ((i = buf.indexOf("\n")) >= 0) {
+      handleLine(buf.slice(0, i));
+      buf = buf.slice(i + 1);
+    }
+  });
+  child.stderr.on("data", (c) => {
+    stderr += c.toString();
+  });
+  const exitCode = await new Promise((resolve, reject) => {
+    child.on("error", (e) =>
+      reject(new Error(`failed to launch \`${CLAUDE_CLI} -p\` (${e.message}) — is it installed/logged in?`)),
+    );
+    child.on("close", (c) => resolve(c));
+  });
+  if (buf.trim()) handleLine(buf);
+
+  if (result === null) {
+    throw new Error(
+      `\`${CLAUDE_CLI} -p\` produced no result (exit ${exitCode})` +
+        (stderr.trim() ? `:\n${stderr.trim()}` : ""),
+    );
+  }
+  if (result.subtype !== "success") {
+    throw new Error(`\`claude -p\` text call failed (subtype: ${result.subtype})`);
+  }
+  return { text: typeof result.result === "string" ? result.result : "", raw: result };
+}
