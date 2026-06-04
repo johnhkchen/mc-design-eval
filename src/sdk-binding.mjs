@@ -69,9 +69,13 @@ export function extractArtifact(result) {
  * @param {string} params.prompt   the trial prompt
  * @param {string} [params.model]  pinned model id (single-sourced by the harness)
  * @param {Record<string, *>} [params.options] extra `query` options (mergeable)
+ * @param {(message: object) => void} [params.onMessage] pure observation hook,
+ *   called once per yielded SDK message in stream order, BEFORE any throw. Lets a
+ *   caller (the T-004-01 trial runner) capture the full transcript and per-turn
+ *   token usage without opening a second SDK seam. Must not mutate the message.
  * @returns {Promise<{ artifact: import("./artifact.mjs").DesignArtifact, raw: object }>}
  */
-export async function requestDesignArtifact({ prompt, model, options = {} } = {}) {
+export async function requestDesignArtifact({ prompt, model, options = {}, onMessage } = {}) {
   let sdk;
   try {
     sdk = await import(SDK_PACKAGE);
@@ -89,6 +93,7 @@ export async function requestDesignArtifact({ prompt, model, options = {} } = {}
 
   let result = null;
   for await (const message of sdk.query({ prompt, options: queryOptions })) {
+    if (typeof onMessage === "function") onMessage(message);
     if (message.type === "result") result = message;
   }
   if (result === null) {
