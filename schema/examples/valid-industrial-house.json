@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "phase1-house-singleshot-0001",
+    "prompting_method_id": "single-shot.v1",
+    "model_id": "claude-opus-4-8",
+    "seed": 42,
+    "server_state_id": "flat-creative-superflat.v1",
+    "target": "house",
+    "created_at": "2026-06-04T15:30:00Z"
+  },
+  "style": {
+    "name": "industrial",
+    "rationale": "Exposed stone-brick shell with iron framing and a smooth-stone floor; minimal ornament, structural materials left visible to read as a utilitarian workshop."
+  },
+  "palette": {
+    "palette_id": "industrial",
+    "manifest": [
+      "minecraft:smooth_stone",
+      "minecraft:stone_bricks",
+      "minecraft:iron_block",
+      "minecraft:stone_brick_stairs",
+      "minecraft:glowstone"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [0, 0, 0],
+      "to": [6, 0, 6],
+      "block": "minecraft:smooth_stone"
+    },
+    {
+      "op": "box",
+      "from": [0, 1, 0],
+      "to": [6, 4, 6],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "line",
+      "from": [0, 4, 0],
+      "to": [6, 4, 0],
+      "block": "minecraft:iron_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [3, 1, 0],
+      "block": "minecraft:stone_brick_stairs",
+      "state": { "facing": "north", "half": "bottom" }
+    },
+    {
+      "op": "voxel",
+      "pos": [3, 3, 3],
+      "block": "minecraft:glowstone"
+    }
+  ]
+}
