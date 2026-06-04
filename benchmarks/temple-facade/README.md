@@ -37,6 +37,7 @@ automatically.
 | # | date | approach | blocks | tok in/out | cost | note |
 |---|------|----------|--------|-----------|------|------|
 | 1 | 2026-06-04 | `v0-facade` | 2908 | 9841/26219 | $0.7602 | baseline: open style + color, frontal shot |
+| 2 | 2026-06-04 | `v1-multimodal` | 1820 | 19830/59460 | $1.6926 | draft + 1 visual-feedback revision |
 
 ## Gallery
 
@@ -47,5 +48,13 @@ automatically.
 2908 blocks · 9841/26219 tok · $0.7602
 
 > baseline: open style + color, frontal shot
+
+### 002 — `v1-multimodal` · 2026-06-04
+
+![temple-facade run 2](runs/002-v1-multimodal/render.png)
+
+1820 blocks · 19830/59460 tok · $1.6926
+
+> draft + 1 visual-feedback revision
 
 <!-- RUNS:END -->

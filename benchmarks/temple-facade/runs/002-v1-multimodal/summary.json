@@ -1,0 +1,37 @@
+{
+  "seq": 2,
+  "runId": "002-v1-multimodal",
+  "date": "2026-06-04",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "v1-multimodal",
+  "promptMethodId": "temple-facade-multimodal.v1",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 1820,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      -4
+    ],
+    "max": [
+      28,
+      23,
+      0
+    ]
+  },
+  "tokensIn": 19830,
+  "tokensOut": 59460,
+  "costUsd": 1.6926405,
+  "roundImages": [
+    "round-0.png"
+  ],
+  "note": "draft + 1 visual-feedback revision"
+}

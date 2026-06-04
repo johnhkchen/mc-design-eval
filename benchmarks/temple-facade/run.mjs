@@ -10,7 +10,7 @@ import { mkdirSync, writeFileSync, readFileSync, readdirSync, existsSync } from 
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { TEMPLE_FACADE_TASK } from "./task.mjs";
-import { requestDesignArtifact } from "../../src/sdk-binding.mjs";
+import { requestDesignArtifact, requestDesignArtifactWithImage } from "../../src/sdk-binding.mjs";
 import { PHASE1_MODEL_ID } from "../../src/config.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -74,6 +74,55 @@ function composeFacadePrompt(task, { promptMethodId, runId }) {
   ].join("\n");
 }
 
+// Revision prompt for the multimodal approach: the model sees a head-on render of its
+// own facade and re-emits an IMPROVED, complete artifact. Targets the recurring
+// weaknesses (proportion, blockiness, relief depth, color balance).
+function composeRevisionPrompt(task, { promptMethodId, runId }) {
+  return [
+    "You are a master Minecraft architect refining your own work. ATTACHED is a head-on",
+    "render of the temple facade you just designed. Study it critically, then produce an",
+    "IMPROVED, COMPLETE redesign — emit the WHOLE facade artifact again, better.",
+    "",
+    "## What to build",
+    task.goal,
+    "",
+    "## Improve specifically (judge from the render)",
+    "- Proportion & rhythm: fix awkward proportions, uneven bays, a squat or spindly look.",
+    "- Detail & relief: add depth and articulation where it reads flat or crude; strengthen the",
+    "  base, the crowning element, the openings, and the mouldings.",
+    "- Smooth the geometry: replace clumsy uniform 45° steps with varied slab+stair pitches and",
+    "  stepped curves/arches; use voxel block `state` for cleaner trim.",
+    "- Color & material: keep a bold, characterful palette; improve balance and contrast; do not",
+    "  drift toward monochrome.",
+    "- Fix anything in the render that looks broken, floating, misaligned, or unintentional.",
+    "",
+    "## Orientation (unchanged)",
+    "Facade FACES +Z, in the X–Y plane (X = width, Y = height, y = 0 ground), relief depth into",
+    "−Z, front face at the highest Z. Model only the front and its relief.",
+    "",
+    "## Scale",
+    "- Up to ~32 wide (X), ~24 tall (Y), depth ~4–6 (into −Z).",
+    "",
+    "## Materials",
+    "Any survival-obtainable Minecraft 1.20.1 blocks; declare those you place in palette.manifest.",
+    "",
+    "## Required metadata (set EXACTLY)",
+    `- metadata.trial_id = "${runId}"`,
+    `- metadata.prompting_method_id = "${promptMethodId}"`,
+    `- metadata.model_id = "${PHASE1_MODEL_ID}"`,
+    `- metadata.seed = ${task.seed}`,
+    `- metadata.server_state_id = "${task.serverStateId}"`,
+    "",
+    "## Style record",
+    "Keep or refine your chosen style; set style.name to your label and style.rationale to a",
+    "short note on what you improved.",
+    "",
+    "## Output (critical)",
+    "Emit ONE complete design artifact for the IMPROVED facade — the full set of placements, not",
+    "a diff. Local origin at x = 0, y = 0, z = 0; ground at y = 0.",
+  ].join("\n");
+}
+
 const APPROACHES = {
   "v0-facade": async (task, ctx) => {
     const promptMethodId = "temple-facade-singleshot.v0";
@@ -85,6 +134,67 @@ const APPROACHES = {
       onMessage: (m) => messages.push(m),
     });
     return { artifact, raw, messages, prompt, promptMethodId };
+  },
+
+  "v1-multimodal": async (task, ctx) => {
+    const promptMethodId = "temple-facade-multimodal.v1";
+    const REVISIONS = 1; // revision rounds after the initial draft (REVISIONS+1 calls)
+    const messages = [];
+    const roundImages = [];
+    let sumIn = 0;
+    let sumOut = 0;
+    let sumCost = 0;
+    const acc = (raw) => {
+      const u = raw.usage || {};
+      sumIn += u.input_tokens || 0;
+      sumOut += u.output_tokens || 0;
+      sumCost += raw.total_cost_usd || 0;
+    };
+
+    // Round 0 — initial single-shot facade (text only).
+    const initPrompt = composeFacadePrompt(task, { promptMethodId, runId: ctx.runId });
+    writeFileSync(join(ctx.dir, "round-0.prompt.txt"), initPrompt + "\n");
+    let res = await requestDesignArtifact({
+      prompt: initPrompt,
+      model: PHASE1_MODEL_ID,
+      onMessage: (m) => messages.push(m),
+    });
+    acc(res.raw);
+    let artifact = res.artifact;
+    console.log(`  round 0 (draft): ${(artifact.placements ?? []).length} ops`);
+
+    // Revision rounds — render the current facade head-on, feed it back, re-emit improved.
+    for (let r = 1; r <= REVISIONS; r++) {
+      const wipName = `round-${r - 1}.png`;
+      await ctx.renderArtifact(artifact, { outPath: join(ctx.dir, wipName), view: task.view });
+      roundImages.push(wipName);
+      const revPrompt = composeRevisionPrompt(task, { promptMethodId, runId: ctx.runId, round: r });
+      writeFileSync(join(ctx.dir, `round-${r}.prompt.txt`), revPrompt + "\n");
+      res = await requestDesignArtifactWithImage({
+        prompt: revPrompt,
+        images: [readFileSync(join(ctx.dir, wipName))],
+        model: PHASE1_MODEL_ID,
+        onMessage: (m) => messages.push(m),
+      });
+      acc(res.raw);
+      artifact = res.artifact;
+      console.log(`  round ${r} (revised): ${(artifact.placements ?? []).length} ops`);
+    }
+
+    const raw = {
+      subtype: "success",
+      num_turns: REVISIONS + 1,
+      usage: { input_tokens: sumIn, output_tokens: sumOut },
+      total_cost_usd: sumCost,
+    };
+    return {
+      artifact,
+      raw,
+      messages,
+      prompt: "(multimodal — see round-N.prompt.txt in this run dir)",
+      promptMethodId,
+      roundImages,
+    };
   },
 };
 
@@ -162,7 +272,10 @@ async function main() {
   const { renderSummary } = await import("../../src/render-tool.mjs");
 
   console.log(`temple-facade benchmark ${runId} (approach: ${approach}) — LIVE via claude -p ...`);
-  const { artifact, raw, messages, prompt, promptMethodId } = await run(TEMPLE_FACADE_TASK, { runId, dir });
+  const { artifact, raw, messages, prompt, promptMethodId, roundImages = [] } = await run(
+    TEMPLE_FACADE_TASK,
+    { runId, dir, renderArtifact },
+  );
 
   // Frontal shot — the whole point of this benchmark (task.view).
   const report = await renderArtifact(artifact, {
@@ -193,6 +306,7 @@ async function main() {
     tokensIn: u.input_tokens ?? 0,
     tokensOut: u.output_tokens ?? 0,
     costUsd: raw.total_cost_usd ?? 0,
+    roundImages,
     note,
   };
   writeFileSync(join(dir, "summary.json"), JSON.stringify(summary, null, 2) + "\n");
