@@ -40,9 +40,11 @@ Bumping the version is one edit there.
 | `src/headless-canvas.mjs` | the **swappable render seam**: a WebGL-capable headless canvas |
 | `src/camera.mjs` | **pure framing math** (no THREE/GL): `framedCamera(bounds, view?)`, `DEFAULT_VIEW`, `viewDistanceFor` — the comparable-camera primitive (T-003-03) |
 | `src/render.mjs` | `renderBuild(build, opts?)` (path-returning) + `renderWorldToPng(world, center, opts?)` + the render contract (`DEFAULTS`) |
+| `src/render-tool.mjs` | `renderArtifact(artifact, opts?)` — the **artifact→PNG composition core** (T-003-04): `buildWorldFromArtifact` → `renderBuild`, returning a combined build+render report |
 | `src/cli.mjs` | `npm run render:sample` entrypoint |
 | `test/scaffold.test.mjs` | the scaffold verification suite (T-003-01) |
 | `test/view.test.mjs` | framing + render-correctness suite (T-003-03) |
+| `test/render-tool.test.mjs` | GL-gated `renderArtifact` end-to-end suite (T-003-04) |
 | `vendor/node-canvas-webgl/` | local shim (see below) |
 
 `world.mjs` and `render.mjs` are a clean **make/populate-world ↔ render-world** seam:
@@ -143,8 +145,29 @@ const { path, bytes, view } = await renderBuild({ world, bounds })
 - `renderWorldToPng(world, center, opts?)` still returns the raw PNG `Buffer`; pass
   `opts.bounds` to use framed mode, omit it for the scaffold's constant-offset path.
 
+## Construct + render as one unit (T-003-04)
+
+`renderArtifact` (`src/render-tool.mjs`) is the single place an artifact becomes a PNG —
+it composes the two halves above without re-deciding anything:
+
+```js
+import { renderArtifact } from './src/render-tool.mjs'
+
+const report = await renderArtifact(artifact, { outPath: 'out/trial.png' })
+// → { path, bytes, placed, unmapped, bounds, view }
+```
+
+- Builds a **fresh** world every call (`buildWorldFromArtifact` → `createEmptyWorld`), so
+  sequential renders share no state — "reset between trials" is a property of having no
+  state to reset.
+- Construction is **total**: unmappable blocks are skipped and reported in `unmapped`, not
+  thrown, so a partial build still renders and the count stays visible.
+- This is render-domain and **SDK-free**. The Agent SDK wrapper that exposes it to the
+  experiment harness as the in-process `mcp__render__render` tool lives top-level in
+  `src/render-tool.mjs` (where the SDK is declared) and calls `renderArtifact` underneath.
+
 ## Out of scope (other S-003 tickets)
 
-The Agent SDK tool wrapper (T-003-04), schematic export, validators, a Minecraft server,
-and a bot. (Artifact→world construction (T-003-02) and fixed comparable framing
-(T-003-03) are now implemented — see above.)
+Schematic export, validators, a Minecraft server, and a bot. (Artifact→world construction
+(T-003-02), fixed comparable framing (T-003-03), and the construct+render tool (T-003-04)
+are now implemented — see above.)

@@ -14,6 +14,7 @@
 // source — not a re-authored zod schema (consistent with sdk-binding Decision 1).
 
 import { join } from "node:path";
+import { readFileSync } from "node:fs";
 import { parseArtifact } from "./artifact.mjs";
 
 /** Server name → tools surface as `mcp__render__<tool>` (config.mjs pre-commit). */
@@ -100,4 +101,101 @@ export function toToolResult(report, { embedImage = false, pngBuffer = null } = 
     });
   }
   return { content };
+}
+
+/** Default output directory for renders (render/out/, alongside the sample). */
+const DEFAULT_OUT_DIR = join(
+  dirnameOf(import.meta.url),
+  "..",
+  "render",
+  "out",
+);
+
+/** import.meta.url → containing directory, without a node:url import at top level. */
+function dirnameOf(metaUrl) {
+  const path = new URL(".", metaUrl).pathname;
+  return path.replace(/\/$/, "");
+}
+
+/**
+ * Build the in-process `render` MCP server (AC #3) — the seam the Agent SDK harness
+ * adds to `allowedTools` as `mcp__render__render` (config.mjs pre-commit). The model
+ * calls `render(artifact, embedImage?)`; the handler constructs+renders and returns the
+ * PNG path (AC #1) plus, when embedding, the image (spec §4 multimodal).
+ *
+ * LIVE-ISH: dynamically imports the SDK (`tool`, `createSdkMcpServer`) and `zod`, and
+ * — inside the handler — the GL/prismarine render core. Kept dynamic so importing this
+ * module for the pure unit tests loads neither the SDK nor GL. `tool`/`createSdkMcpServer`
+ * are pure factories (unlike `query()`), so building the server is free and unmetered;
+ * the dynamic import only guards the optional dependency. NOT run by `npm test`.
+ *
+ * State (AC #2): the only per-server state is a `trialId → count` Map used solely to
+ * disambiguate output paths across revision turns. Each call builds a FRESH world
+ * (renderArtifact is stateless), so trials cannot bleed.
+ *
+ * @param {{ outDir?: string, embedImage?: boolean, view?: object }} [opts]
+ * @returns {Promise<object>} an McpSdkServerConfigWithInstance for `query({ options:{ mcpServers } })`
+ */
+export async function createRenderServer(opts = {}) {
+  let sdk;
+  try {
+    sdk = await import(SDK_PACKAGE);
+  } catch (err) {
+    throw new Error(
+      `${SDK_PACKAGE} is not installed — run \`npm install ${SDK_PACKAGE}\` to expose the render tool (${err.message})`,
+    );
+  }
+  const { z } = await import("zod");
+  const { tool, createSdkMcpServer } = sdk;
+
+  const outDir = opts.outDir ?? DEFAULT_OUT_DIR;
+  const embedImage = opts.embedImage ?? true;
+  const view = opts.view;
+  const counter = new Map();
+
+  const inputShape = {
+    artifact: z
+      .record(z.string(), z.unknown())
+      .describe(
+        "A complete, schema-valid design artifact: schema_version, metadata, style, palette, and placements.",
+      ),
+    embedImage: z
+      .boolean()
+      .optional()
+      .describe("Return the rendered PNG inline for visual review (default true)."),
+  };
+
+  const handler = async (args) => {
+    const coerced = coerceArtifact(args.artifact);
+    if (!coerced.ok) return coerced.result;
+    const artifact = coerced.artifact;
+
+    const trialId = (artifact.metadata && artifact.metadata.trial_id) || "render";
+    const n = counter.get(trialId) ?? 0;
+    counter.set(trialId, n + 1);
+    const outPath = derivePath(outDir, trialId, n);
+
+    // Lazy: only a live render pulls the GL/prismarine core into the process.
+    const { renderArtifact } = await import("../render/src/render-tool.mjs");
+    const report = await renderArtifact(artifact, { outPath, view });
+
+    const embed = args.embedImage ?? embedImage;
+    const pngBuffer = embed ? readFileSync(report.path) : null;
+    return toToolResult(report, { embedImage: embed, pngBuffer });
+  };
+
+  return createSdkMcpServer({
+    name: RENDER_SERVER_NAME,
+    version: "0.1.0",
+    tools: [
+      tool(
+        RENDER_TOOL_NAME,
+        "Construct the design artifact into an in-memory Minecraft world and render it " +
+          "headless to a PNG. Returns the image path (and, by default, the image itself) " +
+          "plus a build summary including any blocks that could not be placed.",
+        inputShape,
+        handler,
+      ),
+    ],
+  });
 }
