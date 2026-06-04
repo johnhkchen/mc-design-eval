@@ -235,17 +235,58 @@ import { TARGET_BRIEFS, STYLE_BRIEFS } from "./briefs.mjs";
     model-authored, frozen artifact, so attribution (AC #4) is prompt-driven **and**
     verified — a mislabeled trial fails loudly instead of logging a wrong row.
   - **`runSingleShotTrial(spec) → { record, artifact, dir }`** — the **live, metered**
-    wrapper: build prompt → `runTrial` → `assertAttribution`. Not in `npm test`;
-    `npm run trial:run` demonstrates it (house / industrial).
+    wrapper: build prompt → `runTrial` → `assertAttribution`. Not in `npm test`.
+
+## Smoke trial — the milestone (T-004-03)
+
+The **end-to-end "see an image" milestone** and the lone sink of the ticket DAG.
+`smoke-trial.mjs` composes the pieces above into one path —
+`prompt → artifact → materialize → render → SAVED IMAGE` — building a **house** in the
+industrial style. `npm run trial:run` (alias `npm run smoke:run`) is the single command.
+
+```js
+import { runSmokeTrial, renderToolOptions, attachRender } from "./smoke-trial.mjs";
+```
+
+- **`runSmokeTrial(spec) → { record, artifact, report, dir, imagePath }`** — the
+  **live, metered** runner (needs the SDK *and* headless GL; **not in `npm test`**). It
+  reuses single-shot's pure building blocks + the `runTrial` seam (it does not re-open
+  either), then renders the **final** artifact via the T-003-04 render core into the
+  trial store. Two obligations, two mechanisms:
+  - **AC #1 — the render tool is wired in as an invocable tool.** `runSmokeTrial`
+    builds the `mcp__render__render` server (`createRenderServer`) and threads it into
+    the trial's SDK options via the pure **`renderToolOptions(server)`** (`mcpServers` +
+    `allowedTools`). This is the wiring `config.SAFE_TRIAL_OPTIONS` already anticipates;
+    it adds no forbidden tool and still passes `assertSafeOptions`. The prompt is
+    unchanged, so attribution is unaffected — the tool is merely *available* (multimodal
+    archetypes will call it; single-shot does not revise, so it doesn't).
+  - **AC #2–#4 — materialize → render → saved image.** After the artifact is produced
+    and attributed, `runSmokeTrial` deterministically renders it to
+    `trials/<trial_id>/render.png` and rewrites `trial.json` via the pure
+    **`attachRender(record, summary)`** so the record references its image and build
+    summary (`placed`, `unmapped`, `bounds`) — the milestone image is a property of the
+    harness, not of an emergent model tool call.
+- **`renderToolOptions` / `attachRender`** are pure and unit-tested; `renderSummary`
+  (shared with the tool result) lives in `render-tool.mjs`.
+
+The trial store after a smoke trial:
+
+```
+trials/<trial_id>/
+  artifact.json      # the validated design
+  transcript.jsonl   # full SDK transcript, one message per line
+  trial.json         # the record: token counts (usage.totals) AND the render field
+  render.png         # the milestone image  ← viewable
+```
 
 ## Test & verify
 
 ```bash
-npm run test:unit   # expansion + artifact + sdk-binding + trial + palette + single-shot suites (node:test)
+npm run test:unit   # expansion + artifact + sdk-binding + trial + palette + single-shot + smoke-trial suites (node:test)
 npm test            # schema gate + the unit suites
-npm run trial:run   # LIVE, METERED single trial (spec §4) — not part of npm test
+npm run trial:run   # LIVE, METERED end-to-end milestone trial (spec §4) + headless render — not part of npm test
 ```
 
-The artifact/sdk-binding/trial suites use the committed `schema/examples/*`
-fixtures and mock SDK message objects as the canonical payloads and never make a
-live SDK call. Only `trial:run` does.
+The artifact/sdk-binding/trial/smoke-trial suites use the committed
+`schema/examples/*` fixtures and mock SDK/report objects as the canonical payloads and
+never make a live SDK call or touch the GPU. Only `trial:run` does both.
