@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "phase1-house-singleshot-0002",
+    "prompting_method_id": "single-shot.v1",
+    "model_id": "claude-opus-4-8",
+    "seed": 42,
+    "server_state_id": "flat-creative-superflat.v1",
+    "target": "house"
+  },
+  "style": {
+    "name": "industrial",
+    "rationale": "Exposed stone-brick shell with iron framing."
+  },
+  "palette": {
+    "palette_id": "industrial",
+    "manifest": [
+      "minecraft:smooth_stone",
+      "stone_bricks"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [0, 0, 0],
+      "to": [6, 0, 6],
+      "block": "minecraft:smooth_stone"
+    },
+    {
+      "op": "voxel",
+      "pos": [3, 1, 0]
+    }
+  ]
+}
