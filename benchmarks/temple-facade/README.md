@@ -44,6 +44,7 @@ auto-injected corpus). Review and update it after each run.
 |---|------|----------|--------|-----------|------|------|
 | 1 | 2026-06-04 | `v0-facade` | 2908 | 9841/26219 | $0.7602 | baseline: open style + color, frontal shot |
 | 2 | 2026-06-04 | `v1-multimodal` | 1820 | 19830/59460 | $1.6926 | draft + 1 visual-feedback revision |
+| 3 | 2026-06-04 | `v2-designdoc` | 1372 | 19767/35588 | $1.0759 | design-document-first: lore + architectural rationale + color-theory palette, then build |
 
 ## Gallery
 
@@ -62,5 +63,13 @@ auto-injected corpus). Review and update it after each run.
 1820 blocks · 19830/59460 tok · $1.6926
 
 > draft + 1 visual-feedback revision
+
+### 003 — `v2-designdoc` · 2026-06-04
+
+![temple-facade run 3](runs/003-v2-designdoc/render.png)
+
+1372 blocks · 19767/35588 tok · $1.0759
+
+> design-document-first: lore + architectural rationale + color-theory palette, then build
 
 <!-- RUNS:END -->

@@ -1,0 +1,1365 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "003-v2-designdoc",
+    "prompting_method_id": "temple-facade-designdoc.v0",
+    "model_id": "claude-opus-4-8",
+    "seed": 11,
+    "server_state_id": "flat-creative-superflat.v1",
+    "target": "house"
+  },
+  "style": {
+    "name": "Maqari highland-desert pishtaq",
+    "rationale": "A flat screen-like pishtaq of warm red-sandstone earth pierced by one deep turquoise iwan, with cream framing and a single gold finial — the sacred threshold of Sayra's hidden spring."
+  },
+  "palette": {
+    "manifest": [
+      "minecraft:red_sandstone",
+      "minecraft:red_sandstone_stairs",
+      "minecraft:red_sandstone_slab",
+      "minecraft:smooth_sandstone",
+      "minecraft:smooth_sandstone_stairs",
+      "minecraft:smooth_sandstone_slab",
+      "minecraft:cyan_glazed_terracotta",
+      "minecraft:gold_block"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [
+        0,
+        0,
+        -1
+      ],
+      "to": [
+        30,
+        1,
+        1
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        2,
+        1
+      ],
+      "to": [
+        30,
+        2,
+        1
+      ],
+      "block": "minecraft:smooth_sandstone_slab",
+      "state": {
+        "type": "bottom"
+      }
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        2,
+        -1
+      ],
+      "to": [
+        3,
+        15,
+        1
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        27,
+        2,
+        -1
+      ],
+      "to": [
+        30,
+        15,
+        1
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        2,
+        1
+      ],
+      "to": [
+        0,
+        15,
+        1
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        30,
+        2,
+        1
+      ],
+      "to": [
+        30,
+        15,
+        1
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        2,
+        -1
+      ],
+      "to": [
+        9,
+        2,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        3,
+        -1
+      ],
+      "to": [
+        4,
+        11,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        3,
+        -1
+      ],
+      "to": [
+        9,
+        11,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        12,
+        -1
+      ],
+      "to": [
+        9,
+        15,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        21,
+        2,
+        -1
+      ],
+      "to": [
+        26,
+        2,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        21,
+        3,
+        -1
+      ],
+      "to": [
+        21,
+        11,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        26,
+        3,
+        -1
+      ],
+      "to": [
+        26,
+        11,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        21,
+        12,
+        -1
+      ],
+      "to": [
+        26,
+        15,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        2,
+        -1
+      ],
+      "to": [
+        11,
+        19,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        2,
+        -1
+      ],
+      "to": [
+        20,
+        19,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        16,
+        -1
+      ],
+      "to": [
+        20,
+        19,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        12,
+        12,
+        -1
+      ],
+      "to": [
+        12,
+        15,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        13,
+        -1
+      ],
+      "to": [
+        13,
+        15,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        14,
+        -1
+      ],
+      "to": [
+        14,
+        15,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        15,
+        -1
+      ],
+      "to": [
+        15,
+        15,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        12,
+        -1
+      ],
+      "to": [
+        18,
+        15,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        13,
+        -1
+      ],
+      "to": [
+        17,
+        15,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        16,
+        14,
+        -1
+      ],
+      "to": [
+        16,
+        15,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        2,
+        0
+      ],
+      "to": [
+        10,
+        19,
+        0
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        2,
+        0
+      ],
+      "to": [
+        20,
+        19,
+        0
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        12,
+        2,
+        -5
+      ],
+      "to": [
+        18,
+        15,
+        -5
+      ],
+      "block": "minecraft:cyan_glazed_terracotta",
+      "state": {
+        "facing": "south"
+      }
+    },
+    {
+      "op": "fill",
+      "from": [
+        12,
+        2,
+        -4
+      ],
+      "to": [
+        12,
+        11,
+        -1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        2,
+        -4
+      ],
+      "to": [
+        18,
+        11,
+        -1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        12,
+        2,
+        -4
+      ],
+      "to": [
+        18,
+        2,
+        -1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "line",
+      "from": [
+        13,
+        8,
+        -5
+      ],
+      "to": [
+        17,
+        8,
+        -5
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        15,
+        6,
+        -5
+      ],
+      "to": [
+        15,
+        10,
+        -5
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        7,
+        -5
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        9,
+        -5
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        9,
+        -5
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        7,
+        -5
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        6,
+        -5
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        10,
+        -5
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        10,
+        -5
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        6,
+        -5
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        12,
+        12,
+        0
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        13,
+        0
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        14,
+        0
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        18,
+        12,
+        0
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        13,
+        0
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        14,
+        0
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        16,
+        0
+      ],
+      "block": "minecraft:red_sandstone_slab",
+      "state": {
+        "type": "bottom"
+      }
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        11,
+        0
+      ],
+      "to": [
+        11,
+        11,
+        0
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        11,
+        0
+      ],
+      "to": [
+        20,
+        11,
+        0
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        5,
+        3,
+        -1
+      ],
+      "to": [
+        8,
+        11,
+        -1
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        5,
+        9,
+        -1
+      ],
+      "to": [
+        8,
+        11,
+        -1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta",
+      "state": {
+        "facing": "south"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        11,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "top"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        11,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "west",
+        "half": "top"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        5,
+        6,
+        -1
+      ],
+      "to": [
+        7,
+        6,
+        -1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "line",
+      "from": [
+        6,
+        5,
+        -1
+      ],
+      "to": [
+        6,
+        7,
+        -1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        3,
+        -1
+      ],
+      "to": [
+        25,
+        11,
+        -1
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        9,
+        -1
+      ],
+      "to": [
+        25,
+        11,
+        -1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta",
+      "state": {
+        "facing": "south"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        11,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "top"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        11,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "west",
+        "half": "top"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        23,
+        6,
+        -1
+      ],
+      "to": [
+        25,
+        6,
+        -1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "line",
+      "from": [
+        24,
+        5,
+        -1
+      ],
+      "to": [
+        24,
+        7,
+        -1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        16,
+        0
+      ],
+      "to": [
+        9,
+        16,
+        1
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        21,
+        16,
+        0
+      ],
+      "to": [
+        30,
+        16,
+        1
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        16,
+        1
+      ],
+      "to": [
+        9,
+        16,
+        1
+      ],
+      "block": "minecraft:smooth_sandstone_stairs",
+      "state": {
+        "facing": "south",
+        "half": "top"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        21,
+        16,
+        1
+      ],
+      "to": [
+        30,
+        16,
+        1
+      ],
+      "block": "minecraft:smooth_sandstone_stairs",
+      "state": {
+        "facing": "south",
+        "half": "top"
+      }
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        20,
+        0
+      ],
+      "to": [
+        20,
+        20,
+        1
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        10,
+        19,
+        1
+      ],
+      "to": [
+        20,
+        19,
+        1
+      ],
+      "block": "minecraft:smooth_sandstone_slab",
+      "state": {
+        "type": "top"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        10,
+        20,
+        1
+      ],
+      "to": [
+        20,
+        20,
+        1
+      ],
+      "block": "minecraft:smooth_sandstone_stairs",
+      "state": {
+        "facing": "south",
+        "half": "top"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        17,
+        1
+      ],
+      "to": [
+        9,
+        17,
+        1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta",
+      "state": {
+        "facing": "south"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        21,
+        17,
+        1
+      ],
+      "to": [
+        30,
+        17,
+        1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta",
+      "state": {
+        "facing": "south"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        18,
+        1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        18,
+        1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        18,
+        1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        18,
+        1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        18,
+        1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        18,
+        1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        18,
+        1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        18,
+        1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        18,
+        1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        18,
+        1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "line",
+      "from": [
+        10,
+        21,
+        1
+      ],
+      "to": [
+        20,
+        21,
+        1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta",
+      "state": {
+        "facing": "south"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        10,
+        22,
+        1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        12,
+        22,
+        1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        22,
+        1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        22,
+        1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        18,
+        22,
+        1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        20,
+        22,
+        1
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        20,
+        0
+      ],
+      "to": [
+        15,
+        24,
+        1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        10,
+        17,
+        0
+      ],
+      "to": [
+        14,
+        17,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "line",
+      "from": [
+        12,
+        15,
+        0
+      ],
+      "to": [
+        12,
+        19,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        16,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        18,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        18,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        16,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        10,
+        15,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        19,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        10,
+        19,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        15,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "line",
+      "from": [
+        16,
+        17,
+        0
+      ],
+      "to": [
+        20,
+        17,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "line",
+      "from": [
+        18,
+        15,
+        0
+      ],
+      "to": [
+        18,
+        19,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        16,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        19,
+        18,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        18,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        19,
+        16,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        15,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        20,
+        19,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        19,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        20,
+        15,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    }
+  ]
+}

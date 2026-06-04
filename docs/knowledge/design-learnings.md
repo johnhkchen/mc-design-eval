@@ -26,11 +26,14 @@ the per-run reasoning behind each principle. Renders live in
    and it *reined in* over-coloring well — but it converged the palette toward a safe,
    conventional white/blue/gold. Use it as a "tighten & make tasteful" pass; guard against
    blandness (tell it to *preserve* boldness).
-4. **Grounding before generation (testing).** Shooting straight into block placement yields
-   shallow, generic results. Hypothesis: a **design-document-first** stage — lore/setting, the
-   architectural *reason* a temple of that tradition looks that way, a color-theory palette,
-   motifs, features, proportion — *finalized before building* — raises quality. (Benchmark
-   approach `v2-designdoc`; result pending in the log below.)
+4. **Ground before generating — the biggest single lever (confirmed).** Writing a *finalized
+   design document* first — lore; the architectural **reason** the temple looks that way; a
+   color-theory palette (dominant / supporting / accent + named harmony + a reason for restraint);
+   motifs; features; proportion ratios — then building *from it* produced the best result by far:
+   a coherent, identity-rich facade with **tasteful** color. It hit the color sweet spot that
+   "be colorful" (garish, P2) and pure self-critique (bland, P3) both missed, and cost *less*
+   than the multimodal revision. The build faithfully realizes a good doc. **Make
+   design-doc-first the default**; reasoning is cheaper and more effective than re-generation.
 5. **Granularity: facade + frontal shot.** Full builds with multi-phase iteration ran 30+ min;
    a single facade photographed head-on (`view: azimuth 0, elevation 0`) generates in ~one
    short call and is directly comparable run-to-run. Keep the benchmark at facade scope.
@@ -79,7 +82,19 @@ Draft → render head-on → critique prompt → re-emit improved. (1,820 blocks
 - **Didn't:** palette converged to a conventional white/blue/gold (lost the draft's boldness).
 - **→** Self-critique = good tightening pass, but tends to convention. (Principle 3.)
 
-### temple-facade 003 · `v2-designdoc` · (pending)
-Design-document-first: write a finalized design doc (lore, architectural rationale, color-theory
-palette, motifs, features), then build from it. Testing Principle 4.
-- **Result:** _(to be filled after the run — render.png + design-doc.md in the run dir)_
+### temple-facade 003 · `v2-designdoc` · 2026-06-04
+Design-document-first, then build. (1,372 blocks, 2 calls, $1.08 — *cheaper* than v1.)
+- **Result:** "Temple of the Hidden Spring" — an invented Maqari highland-desert *pishtaq* facade:
+  ochre sandstone body, cream framing, a recessed turquoise glazed *iwan* with an eight-point-star
+  motif, flanking blind niches, stepped merlon cresting, one gold finial. (`design-doc.md` = the
+  reasoning; `render.png` = the build.)
+- **Worked — the best result yet, by a clear margin.** The doc produced *real color theory* (a
+  restrained **complementary** ochre↔turquoise + analogous gold scheme, with a stated reason for
+  the restraint), a distinctive cultural identity, recurring motifs, and proportion ratios — and
+  the build *faithfully realized* all of it. Colorful **and** tasteful: the sweet spot v0 (garish)
+  and v1 (bland) both missed. And it was cheaper than the multimodal revision.
+- **Didn't:** still blocky; the "arches" are stepped turquoise panels, not true pointed arches
+  (voxel/medium limit, P6); geometry could be tighter.
+- **→** Grounding before generation is the strongest lever found (P4 confirmed, now default).
+  Next: design-doc-first **+** a multimodal tightening pass (combine P3 + P4) to also clean the
+  geometry — does grounding survive a revision without going bland?
