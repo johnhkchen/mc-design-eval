@@ -31,28 +31,42 @@ export const TARGET_BRIEFS = Object.freeze({
   house: Object.freeze({
     headline: "House — a bounded volume with interior logic; tests coherent enclosed-structure design.",
     brief:
-      "Design a single house: an enclosed structure with a clear footprint, walls, a " +
-      "roof, and at least one opening (door) and window. The interior must read as " +
-      "habitable — a coherent enclosed space, not a solid block — with a floor and " +
-      "headroom a player can stand in. Keep the footprint modest (roughly a 7×7 to " +
-      "9×9 base) so the whole build is legible. Favor structural clarity over " +
-      "ornament; the goal is a believable, buildable dwelling.",
+      "Design a house — an enclosed, genuinely habitable dwelling: a clear footprint, " +
+      "walls, a roof, doorways, and windows, with an interior that reads as livable " +
+      "(distinct rooms, a floor, headroom) rather than a solid block. Be ambitious and " +
+      "detailed — there is no size cap: give it considered proportion, varied massing " +
+      "(setbacks, a porch or eave, a chimney), and depth at every surface (recessed " +
+      "openings, window framing, trim, a roof with real overhang). Exploit the placement " +
+      "DSL fully — fill/box for masses, line for edges, and voxel with block state " +
+      "(stairs/slabs, facing/half) for steps, sills, eaves, and trim — so surfaces are " +
+      "articulated rather than flat cuboids, and roofs are not all uniform 45° slopes. " +
+      "Proportion and detail are what the design is judged on; scale it to read as a " +
+      "real, well-built home, not a hut.",
   }),
   path: Object.freeze({
     headline: "Path — linear continuity that follows terrain; tests holding a constraint across distance.",
     brief:
-      "Design a path: a linear route that holds a consistent width, grade, and " +
-      "material across its whole length rather than within a single footprint. The " +
-      "challenge is continuity over distance — the path should read as one coherent " +
-      "way from end to end, adapting to grade without losing its identity.",
+      "Design a path — a linear route that holds a consistent width, grade, and material " +
+      "across its whole length rather than within a single footprint; the challenge is " +
+      "continuity over distance. Make it crafted, not a flat strip: defined edging and " +
+      "surface texture, steps or ramps where the grade changes, borders or drainage, and " +
+      "occasional landmarks (markers, lamps, a small bridge) that punctuate the way " +
+      "without breaking its identity. Use the DSL fully — voxel with block state " +
+      "(stairs/slabs) for steps, kerbs, and ramps — so the route reads as deliberately " +
+      "built rather than a uniform 45° ribbon. Proportion (width-to-length, step rhythm) " +
+      "and detail are what the design is judged on.",
   }),
   landscape: Object.freeze({
     headline: "Landscape — open composition with no single correct footprint; tests material/aesthetic judgment.",
     brief:
-      "Design a landscape composition: an open arrangement with no single correct " +
-      "footprint, where geometry does not pin the answer down. The challenge is " +
-      "material and aesthetic judgment — composition, balance, and texture — rather " +
-      "than fitting a bounded volume.",
+      "Design a landscape composition — an open arrangement with no single correct " +
+      "footprint, where geometry does not pin the answer down; the challenge is material " +
+      "and aesthetic judgment. Be ambitious: layered terrain and elevation, planting, " +
+      "water, paths, and one or more focal features (a folly, statue, terrace, or grove), " +
+      "composed with balance, rhythm, and texture. Use the DSL fully — voxel with block " +
+      "state for slopes, banks, terraces, and trim — so forms are sculpted rather than " +
+      "blocky, avoiding uniform 45° faces. Proportion, composition, and detail are what " +
+      "the design is judged on; aim for real scope and richness.",
   }),
 });
 
