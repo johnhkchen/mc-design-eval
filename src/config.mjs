@@ -26,6 +26,15 @@ export const PHASE1_MODEL_ID = "claude-opus-4-8";
 export const DEFAULT_PROMPTING_METHOD_ID = "single-shot.v1";
 
 /**
+ * The iterative-multimodal archetype id (spec §7 archetype 3): a harness-orchestrated
+ * generate → render → see → revise loop. Single-sourced — like
+ * DEFAULT_PROMPTING_METHOD_ID — so every logged trial carries exactly one spelling of
+ * this archetype's identity and a Phase-2 model sweep stays greppable.
+ * @type {string}
+ */
+export const ITERATIVE_MULTIMODAL_METHOD_ID = "iterative-multimodal.v1";
+
+/**
  * Tool names that must NEVER be enabled in a trial — the code-execution surface
  * (spec §3: the `allow_insecure_coding` / LLM-writes-and-runs-code path is out of
  * scope). The runner's safe-options guard rejects any attempt to allow these.
