@@ -1,3 +1,6 @@
 node_modules/
 *.log
 .DS_Store
+
+# Generated per-trial store (artifacts, transcripts, records) — T-004-01
+trials/
