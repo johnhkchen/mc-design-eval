@@ -68,16 +68,15 @@ export function coerceArtifact(input) {
 }
 
 /**
- * Build the success CallToolResult from a RenderReport. Always a text block carrying a
- * compact JSON summary (the loggable, path-bearing handle — AC #1); optionally an image
- * block (base64 PNG) for visual grounding (spec §4 multimodal). `unmapped` is surfaced
- * as a count (plus a small detail sample when non-zero) so partial builds are visible —
- * a build that silently drops blocks but returns a clean path is a measurement bug.
+ * The loggable build summary, derived from a RenderReport. This is the SINGLE shape
+ * shared by the tool result (what the model sees — AC #1) and the trial record (what
+ * the milestone harness logs, T-004-03) so the two never drift. `unmapped` is a count
+ * (plus a bounded detail sample when non-zero) so partial builds are visible — a build
+ * that silently drops blocks but returns a clean path is a measurement bug. Pure.
  * @param {import("../render/src/render-tool.mjs").RenderReport} report
- * @param {{ embedImage?: boolean, pngBuffer?: Buffer | null }} [opts]
- * @returns {{ content: object[] }}
+ * @returns {{ path: string, bytes: number, placed: number, unmapped: number, bounds: object|null, unmapped_detail?: object[] }}
  */
-export function toToolResult(report, { embedImage = false, pngBuffer = null } = {}) {
+export function renderSummary(report) {
   const summary = {
     path: report.path,
     bytes: report.bytes,
@@ -92,6 +91,19 @@ export function toToolResult(report, { embedImage = false, pngBuffer = null } = 
       reason: u.reason,
     }));
   }
+  return summary;
+}
+
+/**
+ * Build the success CallToolResult from a RenderReport. Always a text block carrying a
+ * compact JSON summary (the loggable, path-bearing handle — AC #1); optionally an image
+ * block (base64 PNG) for visual grounding (spec §4 multimodal).
+ * @param {import("../render/src/render-tool.mjs").RenderReport} report
+ * @param {{ embedImage?: boolean, pngBuffer?: Buffer | null }} [opts]
+ * @returns {{ content: object[] }}
+ */
+export function toToolResult(report, { embedImage = false, pngBuffer = null } = {}) {
+  const summary = renderSummary(report);
   const content = [{ type: "text", text: JSON.stringify(summary, null, 2) }];
   if (embedImage && pngBuffer) {
     content.push({

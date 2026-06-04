@@ -15,6 +15,7 @@ import {
   RENDER_TOOL_NAME,
   derivePath,
   coerceArtifact,
+  renderSummary,
   toToolResult,
   toErrorResult,
 } from "./render-tool.mjs";
@@ -74,6 +75,31 @@ test("coerceArtifact: malformed JSON string is reported, not thrown", () => {
   const c = coerceArtifact("{ not json");
   assert.equal(c.ok, false);
   assert.equal(c.result.isError, true);
+});
+
+test("renderSummary: the shared loggable shape — count, bounds, no detail when clean", () => {
+  const s = renderSummary(report);
+  assert.equal(s.path, report.path);
+  assert.equal(s.bytes, report.bytes);
+  assert.equal(s.placed, 120);
+  assert.equal(s.unmapped, 0);
+  assert.deepEqual(s.bounds, report.bounds);
+  assert.equal(s.unmapped_detail, undefined, "no detail block for a clean build");
+});
+
+test("renderSummary: unmapped voxels become a count plus a bounded (≤5) detail sample", () => {
+  const withUnmapped = {
+    ...report,
+    unmapped: Array.from({ length: 8 }, (_, i) => ({
+      pos: [i, 0, 0],
+      block: "minecraft:bogus_block",
+      reason: 'unknown block "minecraft:bogus_block"',
+    })),
+  };
+  const s = renderSummary(withUnmapped);
+  assert.equal(s.unmapped, 8);
+  assert.equal(s.unmapped_detail.length, 5, "detail is capped at 5");
+  assert.equal(s.unmapped_detail[0].block, "minecraft:bogus_block");
 });
 
 test("toToolResult: text-only by default carries the loggable path summary (AC #1)", () => {
