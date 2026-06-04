@@ -23,14 +23,14 @@
 // needs headless GL). The GL/prismarine render core is lazy-imported inside it, so
 // importing THIS module for the pure tests loads neither the SDK nor GL.
 
-import { mkdirSync, writeFileSync, readFileSync } from "node:fs";
-import { join, basename } from "node:path";
+import { mkdirSync, writeFileSync, readFileSync, copyFileSync } from "node:fs";
+import { join } from "node:path";
 import {
   requestDesignArtifact,
   requestDesignArtifactWithImage,
 } from "./sdk-binding.mjs";
 import { tallyUsage, serializeTranscript } from "./trial.mjs";
-import { derivePath, renderSummary } from "./render-tool.mjs";
+import { renderSummary } from "./render-tool.mjs";
 import { assertAttribution } from "./single-shot.mjs";
 import { loadPalette, formatPaletteBlocks } from "./palette.mjs";
 import { TARGET_BRIEFS, STYLE_BRIEFS } from "./briefs.mjs";
@@ -52,6 +52,28 @@ export const ITERATIVE_MULTIMODAL = Object.freeze({
   defaultRounds: 3,
   label: "Iterative multimodal (render → see → revise, N rounds)",
 });
+
+/**
+ * The canonical per-round WIP image name (AC #2): `round-0.png`, `round-1.png`, …, one
+ * per round, where `round-N.png` is the render of round N's OUTPUT artifact (round 0 =
+ * the initial draft). PURE. This is the harness loop's own naming — distinct from
+ * render-tool's `derivePath` (`-rev<n>`), which is the in-session `mcp__render__render`
+ * tool's scheme — so the two never collide and changing one can't ripple into the other.
+ * @param {number} round 0-based round index
+ * @returns {string}
+ */
+export function roundImageName(round) {
+  return `round-${round}.png`;
+}
+
+/**
+ * The canonical FINAL image name written inside the trial store (AC #2), mirroring
+ * smoke-trial.mjs's `RENDER_IMAGE_NAME` so the iterative record's top-level `render`
+ * block matches the single-shot baseline's format. It is a byte-copy of the last
+ * `round-N.png` (no second GL pass — that PNG already IS the final artifact's render).
+ * @type {string}
+ */
+export const FINAL_IMAGE_NAME = "render.png";
 
 /**
  * @typedef {Object} TrialSpec
@@ -382,17 +404,34 @@ function sumTotals(rounds) {
  * configured vs. actually-run round counts and why the loop stopped; `rounds` is the
  * per-round breakdown; `usage.totals` is their sum. `finishedAt` is a parameter, not a
  * clock read, so this stays deterministically testable.
+ * The per-round image LIST is already first-class as `rounds[*].image` (round 0 included).
+ * When `finalRender` is supplied, a top-level `render` block is attached the same way
+ * smoke-trial's `attachRender` does — the relative `image` name plus the loggable build
+ * summary with the absolute path stripped — so the iterative record matches the single-shot
+ * baseline's format and the FINAL image is referenced from the record (AC #2). Both
+ * `finalRender`/`finalImage` are OPTIONAL: omitted ⇒ no `render` block (the pure tests that
+ * don't pass them see byte-identical output).
  * @param {Object} p
  * @param {import("./artifact.mjs").DesignArtifact} p.artifact   the final artifact
  * @param {object[]} p.rounds                                    buildRoundRecord rows
  * @param {number} p.roundsConfigured
  * @param {"rounds"|"noop"} p.stoppedReason
  * @param {string} p.finishedAt                                  ISO date-time
+ * @param {import("../render/src/render-tool.mjs").RenderReport} [p.finalRender] final render
+ * @param {string} [p.finalImage]                                final image name (default render.png)
  * @returns {object}
  */
-export function buildIterativeRecord({ artifact, rounds, roundsConfigured, stoppedReason, finishedAt }) {
+export function buildIterativeRecord({
+  artifact,
+  rounds,
+  roundsConfigured,
+  stoppedReason,
+  finishedAt,
+  finalRender,
+  finalImage,
+}) {
   const last = rounds[rounds.length - 1];
-  return {
+  const record = {
     metadata: artifact.metadata,
     model_id: artifact.metadata.model_id,
     prompting_method_id: artifact.metadata.prompting_method_id,
@@ -409,6 +448,11 @@ export function buildIterativeRecord({ artifact, rounds, roundsConfigured, stopp
     rounds,
     finished_at: finishedAt,
   };
+  if (finalRender) {
+    const { path, ...rest } = renderSummary(finalRender);
+    record.render = { image: finalImage ?? FINAL_IMAGE_NAME, ...rest };
+  }
+  return record;
 }
 
 /**
@@ -419,12 +463,18 @@ export function buildIterativeRecord({ artifact, rounds, roundsConfigured, stopp
  * unit-tested (spec §4: metered + headless GL); all its decision logic is the pure
  * functions above, which are.
  *
- * Steps: build the round-0 draft (text) → for each round 1..N render the current
- * artifact to a WIP PNG and feed it back through the multimodal seam with the
- * versioned revision prompt → re-validate (the seam re-checks the schema and throws;
- * this loop additionally asserts trial_id, attribution, and palette adherence each
- * round, AC #3/#4) → stop after N rounds or on a no-op revision → write the per-round
- * artifacts, all WIP renders, the concatenated transcript, and the iterative record.
+ * Per-round images (AC #2): every round's OUTPUT artifact is rendered exactly once to
+ * `round-<r>.png` (round 0 = the initial draft). The image FED INTO revision r is the
+ * prior round's render (`round-<r-1>.png`), so the loop renders each artifact once and
+ * never re-renders. `render.png` is a byte-copy of the final `round-<N>.png`.
+ *
+ * Steps: build the round-0 draft (text) → render it to `round-0.png` → for each round
+ * 1..N feed the prior round's PNG back through the multimodal seam with the versioned
+ * revision prompt, then render the revision's output to `round-<r>.png` → re-validate
+ * (the seam re-checks the schema and throws; this loop additionally asserts trial_id,
+ * attribution, and palette adherence each round, AC #3/#4) → stop after N rounds or on a
+ * no-op revision → copy the final render to `render.png` → write the per-round artifacts,
+ * all WIP renders, the concatenated transcript, and the iterative record.
  * @param {TrialSpec} spec
  * @returns {Promise<{ record: object, artifact: import("./artifact.mjs").DesignArtifact, dir: string, rounds: object[] }>}
  */
@@ -449,7 +499,8 @@ export async function runIterativeTrial(spec) {
     assertInPalette(artifact, palette);
   };
 
-  // Round 0 — initial draft via the text seam.
+  // Round 0 — initial draft via the text seam, then render it to round-0.png (the WIP
+  // image fed into round 1's revision).
   const { prompt: p0 } = buildRound0Prompt(spec);
   const m0 = [];
   const { artifact: first, raw: raw0 } = await requestDesignArtifact({
@@ -459,14 +510,24 @@ export async function runIterativeTrial(spec) {
   });
   guard(first);
   writeFileSync(join(dir, "artifact-round0.json"), JSON.stringify(first, null, 2) + "\n");
-  roundRecords.push(buildRoundRecord({ round: 0, mode: "text", messages: m0, raw: raw0 }));
+  let currentImagePath = join(dir, roundImageName(0));
+  let currentReport = await renderArtifact(first, { outPath: currentImagePath });
+  roundRecords.push(
+    buildRoundRecord({
+      round: 0,
+      mode: "text",
+      messages: m0,
+      raw: raw0,
+      render: currentReport,
+      image: roundImageName(0),
+    }),
+  );
 
-  // Rounds 1..N — render the current design, show it back, take the revision.
+  // Rounds 1..N — show the PRIOR round's render, take the revision, then render the
+  // revision's OWN output to round-<r>.png (which becomes the next round's input).
   let current = first;
   for (let r = 1; r <= rounds; r++) {
-    const imagePath = derivePath(dir, spec.trialId, r);
-    const report = await renderArtifact(current, { outPath: imagePath });
-    const png = readFileSync(report.path);
+    const png = readFileSync(currentImagePath);
 
     const { prompt: pr } = buildRevisionPrompt(spec, r);
     const mk = [];
@@ -478,6 +539,8 @@ export async function runIterativeTrial(spec) {
     });
     guard(next);
     writeFileSync(join(dir, `artifact-round${r}.json`), JSON.stringify(next, null, 2) + "\n");
+    const imagePath = join(dir, roundImageName(r));
+    const report = await renderArtifact(next, { outPath: imagePath });
     roundRecords.push(
       buildRoundRecord({
         round: r,
@@ -485,19 +548,23 @@ export async function runIterativeTrial(spec) {
         messages: mk,
         raw: rawk,
         render: report,
-        image: basename(imagePath),
+        image: roundImageName(r),
       }),
     );
 
     const noop = isNoOpRevision(current, next);
     current = next; // the last artifact is final, no-op or not
+    currentImagePath = imagePath;
+    currentReport = report;
     if (noop) {
       stoppedReason = "noop";
       break;
     }
   }
 
-  // Final store: the final artifact, the full multi-round transcript, the record.
+  // Final store: render.png (a copy of the last round's render), the final artifact, the
+  // full multi-round transcript, and the record (referencing the final image).
+  copyFileSync(currentImagePath, join(dir, FINAL_IMAGE_NAME));
   writeFileSync(join(dir, "artifact.json"), JSON.stringify(current, null, 2) + "\n");
   writeFileSync(join(dir, "transcript.jsonl"), serializeTranscript(allMessages));
   const record = buildIterativeRecord({
@@ -506,6 +573,8 @@ export async function runIterativeTrial(spec) {
     roundsConfigured: rounds,
     stoppedReason,
     finishedAt: new Date().toISOString(),
+    finalRender: currentReport,
+    finalImage: FINAL_IMAGE_NAME,
   });
   writeFileSync(join(dir, "trial.json"), JSON.stringify(record, null, 2) + "\n");
 

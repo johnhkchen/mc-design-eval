@@ -21,6 +21,8 @@ import {
   assertTrialId,
   buildRoundRecord,
   buildIterativeRecord,
+  roundImageName,
+  FINAL_IMAGE_NAME,
 } from "./iterative-multimodal.mjs";
 import { loadPalette } from "./palette.mjs";
 import { TARGET_BRIEFS, STYLE_BRIEFS } from "./briefs.mjs";
@@ -253,6 +255,37 @@ test("buildRoundRecord: multimodal round folds in the render summary (no absolut
   assert.equal(row.render.unmapped, 0);
   assert.deepEqual(row.render.bounds, renderReport.bounds);
   assert.equal(row.render.path, undefined, "no absolute path leaks into the record");
+});
+
+// --- round-image naming (AC #2) ------------------------------------------
+
+test("roundImageName: round-N.png, one per round (round 0 = the draft)", () => {
+  assert.equal(roundImageName(0), "round-0.png");
+  assert.equal(roundImageName(3), "round-3.png");
+  assert.equal(FINAL_IMAGE_NAME, "render.png");
+});
+
+test("buildIterativeRecord: finalRender attaches a top-level render block (no abs path); omitted ⇒ none", () => {
+  const rows = [
+    buildRoundRecord({ round: 0, mode: "text", messages: [assistantMsg(50)], raw: resultMsg(50), render: renderReport, image: "round-0.png" }),
+    buildRoundRecord({ round: 1, mode: "multimodal", messages: [assistantMsg(60)], raw: resultMsg(60), render: renderReport, image: "round-1.png" }),
+  ];
+  const withFinal = buildIterativeRecord({
+    artifact: inPaletteArtifact(), rounds: rows, roundsConfigured: 3, stoppedReason: "rounds",
+    finishedAt: "2026-06-04T00:00:00.000Z", finalRender: renderReport, finalImage: FINAL_IMAGE_NAME,
+  });
+  assert.equal(withFinal.render.image, "render.png");
+  assert.equal(withFinal.render.placed, 120);
+  assert.equal(withFinal.render.unmapped, 0);
+  assert.equal(withFinal.render.path, undefined, "no absolute path leaks into the record");
+  // The per-round image list is first-class on the rows (round 0 included).
+  assert.deepEqual(withFinal.rounds.map((r) => r.image), ["round-0.png", "round-1.png"]);
+
+  const without = buildIterativeRecord({
+    artifact: inPaletteArtifact(), rounds: rows, roundsConfigured: 3, stoppedReason: "rounds",
+    finishedAt: "2026-06-04T00:00:00.000Z",
+  });
+  assert.equal(without.render, undefined, "no render block when finalRender is omitted");
 });
 
 test("buildIterativeRecord: identity from the artifact, summed usage, round/stop bookkeeping", () => {
