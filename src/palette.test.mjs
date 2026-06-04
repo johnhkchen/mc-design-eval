@@ -17,6 +17,16 @@ test("loadPalette reads the shipped industrial palette", () => {
   assert.ok(p.blocks.includes("iron_block"), "whitelist includes iron_block");
 });
 
+test("loadPalette reads the shipped neoclassical palette", () => {
+  const p = loadPalette("neoclassical");
+  assert.equal(p.id, "neoclassical");
+  assert.equal(p.minecraftVersion, "1.20.1");
+  assert.ok(Array.isArray(p.blocks) && p.blocks.length > 0);
+  assert.ok(p.blocks.includes("quartz_pillar"), "whitelist includes quartz_pillar");
+  assert.equal(typeof p.groups, "object");
+  assert.ok(p.groups.columns && p.groups.trim, "has columns and trim groups");
+});
+
 test("loadPalette throws a clear error for an unknown palette id", () => {
   assert.throws(() => loadPalette("does-not-exist"), /unknown palette "does-not-exist"/);
   assert.throws(() => loadPalette("does-not-exist"), new RegExp(PALETTES_DIR.replace(/[/\\]/g, "[/\\\\]")));

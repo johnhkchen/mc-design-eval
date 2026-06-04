@@ -72,4 +72,18 @@ export const STYLE_BRIEFS = Object.freeze({
       "materials; let load-bearing elements, framing, and fixtures be visible and " +
       "read as a working, functional building.",
   }),
+  neoclassical: Object.freeze({
+    name: "neoclassical",
+    brief:
+      "Neoclassical: classical order in pale stone, governed by symmetry and " +
+      "proportion. Front the building with a columned portico — a row of evenly " +
+      "spaced columns (shaft, capital, and base) carrying a projecting entablature " +
+      "and cornice, crowned by a triangular pediment. Raise the whole on a stepped " +
+      "base (a stylobate of broad stone steps) so it reads as elevated and formal. " +
+      "Use tall, regularly-rhythmed windows and carved horizontal banding; keep both " +
+      "elevations and plan bilaterally symmetric about a central axis. Favor crisp " +
+      "white marble and ashlar over rustic or colored materials. Reward detail and " +
+      "scale — fluting, mouldings, a balustrade, depth in the cornice — over a plain " +
+      "box; the silhouette and trim should make the order legible from a distance.",
+  }),
 });
