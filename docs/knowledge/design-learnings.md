@@ -26,13 +26,17 @@ the per-run reasoning behind each principle. Renders live in
 > creative/exotic interpretation** — possibly in tension with the creativity goal. Decide consciously
 > whether the rubric should reward convention or invention before trusting cross-style comparisons.
 
-> **🏁 Verdict (evidence-based): the harness-efficiency phase is plateaued — raise the ceiling next.**
-> No prompting technique moved the rubric score (all 3–4); **best-of-4 selection did not exceed a
-> single shot** (winner 3.67 vs v0's 4.0) at **~7× cost and ~30× wall-clock**; every run fails the
-> *same* structural way (relief + crown). Two prerequisites the data exposed before the image-to-voxel
-> raise: **(1) a finer metric** — judge noise ≈ 0.3–0.5 overall is comparable to the effect sizes, so
-> move to **pairwise/Elo** (A-vs-B) instead of absolute 1–5; **(2) decide convention vs. invention** —
-> `fidelity` rewards an obvious temple, so best-of-N *selects against* the creativity we asked for.
+> **🏁 Verdict (CORRECTED — the plateau was premature; the "ceiling" was our cap).** The recurring
+> failure (shallow relief + awkward crown) was a **self-inflicted prompt cap**, not a capability
+> limit: *every* build pinned its depth to our "relief ~4–6" cap (actual z = 5–7) and its width/height
+> to the prompt's limits. Lifting them (`v4`: width ~48, height ~40, **depth up to ~16**, deep relief
+> + a full-width proportioned crown *required*) moved a design-doc build **3.0 → 4.0** — depth actually
+> used = **15** — at *lower* cost ($0.91). The harness was **not** plateaued; resolution was untapped
+> headroom. Best-of-N (P8) "failed" only because it sampled *capped* candidates. **Current band ≈ 4.0**
+> (v0/v1/v4); **`detail` (3.33) is now the lagging dimension.** Whether 4→5 is reachable by prompting
+> needs the finer **pairwise/Elo** metric (absolute-1–5 noise ≈ 0.4 can't resolve it). Two standing
+> caveats: the pairwise metric, and decide **convention vs. invention** (`fidelity` rewards an obvious
+> temple). Keep mining the harness before any ceiling raise.
 
 1. **The model matches the bar you set.** Briefs that cap scope ("modest 7×7–9×9", "favor
    structural clarity over ornament") produced a 333-block gray box; removing the cap on the
@@ -66,12 +70,14 @@ the per-run reasoning behind each principle. Renders live in
    "45° at best." Push explicitly for varied roof pitch via slab+stair combos, stepped
    curves/arches, and `voxel`+block-`state` trim — but accept a hard ceiling vs. code-generated
    builds (mc-bench often has the model write a *program*; our declarative contract does not).
-7. **The ceiling is structural, not prompt-shaped (the robust finding).** *Every* rubric judgment,
-   across *every* technique, names the same two weaknesses: **shallow relief depth** and an **awkward
-   narrow crown on a wide body** (proportion). No prompt — design-doc, anchored revision, color
-   rationale — fixed either. This is the real plateau: a capability/medium limit (relief is hard to
-   express in the coordinate DSL; 3D massing/proportion is a model weak spot), not something more
-   prompting will move. It is the evidence-based trigger to weigh the image-to-voxel ceiling raise.
+7. **The "structural ceiling" was a self-inflicted cap (CORRECTED).** Every build hit our relief
+   cap *exactly* (depth z = 5–7 under a "relief ~4–6" prompt) and pinned width/height to the prompt's
+   limits — then the judge dinged "shallow relief / awkward crown," which I misread as a capability
+   ceiling and used to declare a plateau. Lifting the caps and *requiring* deep relief + a full-width
+   proportioned crown (`v4`) used depth **15** and moved the score **3.0 → 4.0**. **P1 again: the model
+   matched the bar we set.** Set scale and relief budgets generously and require their use; never
+   mistake a cap for a ceiling. (Lesson for me: I declared a "capability ceiling" from runs that all
+   sat at my own cap — check whether a recurring weakness is pinned to a prompt limit *first*.)
 8. **Test-time selection (best-of-N) does not break the ceiling — plateau confirmed.** Best-of-4
    (4 parallel design-doc candidates, judge-selected) gave candidate overalls 4.0 / 3.67 / 3.33 / 3.0;
    the winner re-judged at **3.67** — the *same band as one cheap v0 (4.0, $0.76, fast)*. Selection
@@ -79,7 +85,9 @@ the per-run reasoning behind each principle. Renders live in
    limits made the "parallel" K=4 run effectively serial, so the free-iteration economics hold for
    dollars but **break on wall-clock**. The structural ceiling (P7) caps the best sample too. Scaling
    test-time compute on this harness is a dead end; the next lever is the ceiling raise, not more
-   sampling or prompting.
+   sampling or prompting. **(Scope corrected — see P7/Verdict:** best-of-N sampled *capped* builds, so
+   it couldn't beat the cap. Selection wasn't the lever; **resolution** was. Re-test best-of-N over
+   *high-res* builds before concluding test-time selection is dead.)
 
 ## Tunable parameters (and what's actually reachable)
 
@@ -162,3 +170,16 @@ Best-of-4 design-doc candidates, judge-selected (the test-time-selection / plate
   "parallel" run; the winner still shows the universal shallow-relief + awkward-crown weakness.
 - **→** Test-time selection does not break the structural ceiling (P8). The harness-efficiency phase
   is plateaued — image-to-voxel ceiling raise is the justified next move (after a finer metric).
+  **[Superseded by run 006 — the "ceiling" was a resolution cap; not plateaued. See Verdict / P7.]**
+
+### temple-facade 006 · `v4-designdoc-highres` · 2026-06-04
+Same design-doc stage as v2; the build prompt LIFTS the scale/relief caps and REQUIRES deep relief +
+a full-width crown. (9,376 blocks, **$0.91**, depth **15** vs v2's 7; W=48, H=40.)
+- **Result: the cap was the ceiling.** Overall **3.0 → 4.0** (proportion 3.33→4, color 3.67→4,
+  fidelity 3.67→4). The build genuinely used the depth — recessed portal, projecting pilasters, a
+  stepped full-width crown — and cost *less* than capped v2.
+- **Didn't:** `detail` only 3.33 — now the lone lagging dimension at the 4.0 band; 4.0 ≈ v0/v1, so it
+  matched the best band rather than exceeding it.
+- **→** The "structural ceiling" (P7) and the plateau verdict were premature — a self-inflicted cap.
+  The harness still has headroom. Next: probe `detail` at high-res, and move to a pairwise metric to
+  see whether 4→5 is reachable.

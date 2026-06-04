@@ -49,6 +49,7 @@ auto-injected corpus). Review and update it after each run.
 | 3 | 2026-06-04 | `v2-designdoc` | 3 | 1372 | 19767/35588 | $1.0759 | — | design-document-first: lore + architectural rationale + color-theory palette, then build |
 | 4 | 2026-06-04 | `v3-designdoc-revise` | 3 | 959 | 29639/60139 | $1.7982 | — | design-doc + identity-preserving multimodal revision (P3+P4) |
 | 5 | 2026-06-04 | `vN-bestof` | 3.67 | 2273 | 126140/124371 | $5.3415 | 1727s | best-of-4 design-doc, judge-selected (test: does selection break the 3-4 plateau?) |
+| 6 | 2026-06-04 | `v4-designdoc-highres` | 4 | 9376 | 20476/28875 | $0.9124 | 407s | design-doc + HIGH-RES build: lift relief/scale caps, require deep relief + proportioned crown (vs v2 capped) |
 
 ## Gallery
 
@@ -91,5 +92,13 @@ score 3/5 · 959 blocks · 29639/60139 tok · $1.7982
 score 3.67/5 · 2273 blocks · 126140/124371 tok · $5.3415
 
 > best-of-4 design-doc, judge-selected (test: does selection break the 3-4 plateau?)
+
+### 006 — `v4-designdoc-highres` · 2026-06-04
+
+![temple-facade run 6](runs/006-v4-designdoc-highres/render.png)
+
+score 4/5 · 9376 blocks · 20476/28875 tok · $0.9124
+
+> design-doc + HIGH-RES build: lift relief/scale caps, require deep relief + proportioned crown (vs v2 capped)
 
 <!-- RUNS:END -->

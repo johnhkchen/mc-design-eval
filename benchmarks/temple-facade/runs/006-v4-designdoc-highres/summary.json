@@ -1,0 +1,54 @@
+{
+  "seq": 6,
+  "runId": "006-v4-designdoc-highres",
+  "date": "2026-06-04",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "v4-designdoc-highres",
+  "promptMethodId": "temple-facade-designdoc-highres.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 9376,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      -14
+    ],
+    "max": [
+      47,
+      39,
+      0
+    ]
+  },
+  "tokensIn": 20476,
+  "tokensOut": 28875,
+  "costUsd": 0.9124352499999999,
+  "durationMs": 406986,
+  "score": {
+    "proportion": 4,
+    "color": 4,
+    "detail": 3.33,
+    "fidelity": 4,
+    "overall": 4,
+    "samples": 3,
+    "rubric": "v1",
+    "notes": "Confident terracotta-and-lapis ziggurat facade with clean stepped crown, symmetric pilastered bays, and a clear recessed entrance, though the relief is fairly shallow and the side bays read as flat framed panels.",
+    "usage": {
+      "input_tokens": 9849,
+      "output_tokens": 1079,
+      "cost_usd": 0.253174
+    }
+  },
+  "roundImages": [],
+  "bestof": null,
+  "note": "design-doc + HIGH-RES build: lift relief/scale caps, require deep relief + proportioned crown (vs v2 capped)"
+}

@@ -251,6 +251,57 @@ function composeDocRevisionPrompt(task, { promptMethodId, runId, designDoc }) {
   ].join("\n");
 }
 
+// High-resolution build (v4): same design-doc, but LIFT the scale/relief caps that every
+// prior run hit exactly (depth pinned at 4–6) and REQUIRE deep relief + a proportioned
+// crown — testing whether the "shallow relief / awkward crown" ceiling was self-inflicted.
+function composeHighResBuildPrompt(task, { promptMethodId, runId, designDoc }) {
+  return [
+    "You are a master Minecraft architect. Below is your FINALIZED design document for a temple",
+    "facade. Build it as a structured design artifact that faithfully realizes the document, at",
+    "GENEROUS SCALE and with DEEP RELIEF. Earlier facades were too small and too flat — do not",
+    "repeat that; use the room you are given.",
+    "",
+    "## Finalized design document",
+    designDoc,
+    "",
+    "## Orientation (photographed head-on)",
+    "Facade FACES +Z, in the X–Y plane (X = width, Y = height, y = 0 ground). Front face at the",
+    "highest Z; relief recedes into −Z. Model only the front and its relief.",
+    "",
+    "## Scale & RELIEF — use it (this is judged)",
+    "- Width up to ~48 (X), height up to ~40 (Y) including the crown. Build big.",
+    "- DEEP relief: up to ~16 blocks of depth into −Z, and genuinely use it. Columns/buttresses",
+    "  project several blocks PROUD of the wall; the central portal RECESSES several blocks deep;",
+    "  cornices, string courses, and the crown step forward and back across MULTIPLE Z-layers. A",
+    "  near-flat screen only 4–6 deep is a failure.",
+    "- CROWN proportion: the crowning element (pediment / parapet / attic / cresting) must span the",
+    "  facade's full width and have real height — a deliberate culmination of the body, never a",
+    "  small cap perched on a wide base.",
+    "",
+    "## Realize the document with craft",
+    "- Build every feature the document specifies; honor its proportion ratios and palette.",
+    "- Frame openings with deep reveals; avoid uniform 45° slopes (vary pitch with slab+stair",
+    "  combos; step curves/arches); use voxel block `state` for mouldings and trim.",
+    "- Use `fill`/`box` for masses and `line` for shafts/edges to stay efficient at this scale.",
+    "",
+    "## Materials",
+    "Primarily the document's palette; declare the blocks you place in palette.manifest.",
+    "",
+    "## Required metadata (set EXACTLY)",
+    `- metadata.trial_id = "${runId}"`,
+    `- metadata.prompting_method_id = "${promptMethodId}"`,
+    `- metadata.model_id = "${PHASE1_MODEL_ID}"`,
+    `- metadata.seed = ${task.seed}`,
+    `- metadata.server_state_id = "${task.serverStateId}"`,
+    "",
+    "## Style record",
+    "Set style.name to the document's style label and style.rationale to one line tying the build",
+    "to the document.",
+    "",
+    "Local origin at x = 0, y = 0, z = 0 (ground at y = 0).",
+  ].join("\n");
+}
+
 const APPROACHES = {
   "v0-facade": async (task, ctx) => {
     const promptMethodId = "temple-facade-singleshot.v0";
@@ -431,6 +482,50 @@ const APPROACHES = {
       prompt: "(design-doc + identity-preserving revision — see design-doc.md + *.prompt.txt)",
       promptMethodId,
       roundImages,
+    };
+  },
+
+  // Design-doc + HIGH-RESOLUTION build: the design-doc stage is identical to v2; only the
+  // build prompt changes (caps lifted, deep relief + proportioned crown required). Isolates
+  // the resolution variable — does lifting the self-inflicted caps dissolve the "ceiling"?
+  "v4-designdoc-highres": async (task, ctx) => {
+    const promptMethodId = "temple-facade-designdoc-highres.v0";
+    const messages = [];
+    let sumIn = 0;
+    let sumOut = 0;
+    let sumCost = 0;
+    const acc = (raw) => {
+      const u = raw.usage || {};
+      sumIn += u.input_tokens || 0;
+      sumOut += u.output_tokens || 0;
+      sumCost += raw.total_cost_usd || 0;
+    };
+
+    const ddPrompt = composeDesignDocPrompt(task);
+    writeFileSync(join(ctx.dir, "design-doc.prompt.txt"), ddPrompt + "\n");
+    const dd = await requestText({ prompt: ddPrompt, model: PHASE1_MODEL_ID, onMessage: (m) => messages.push(m) });
+    acc(dd.raw);
+    writeFileSync(join(ctx.dir, "design-doc.md"), dd.text + "\n");
+    console.log(`  stage 1 (design doc): ${dd.text.length} chars`);
+
+    const buildPrompt = composeHighResBuildPrompt(task, { promptMethodId, runId: ctx.runId, designDoc: dd.text });
+    writeFileSync(join(ctx.dir, "build.prompt.txt"), buildPrompt + "\n");
+    const res = await requestDesignArtifact({ prompt: buildPrompt, model: PHASE1_MODEL_ID, onMessage: (m) => messages.push(m) });
+    acc(res.raw);
+    console.log(`  stage 2 (high-res build): ${(res.artifact.placements ?? []).length} ops`);
+
+    const raw = {
+      subtype: "success",
+      num_turns: 2,
+      usage: { input_tokens: sumIn, output_tokens: sumOut },
+      total_cost_usd: sumCost,
+    };
+    return {
+      artifact: res.artifact,
+      raw,
+      messages,
+      prompt: "(design-doc → HIGH-RES build — see design-doc.md + build.prompt.txt)",
+      promptMethodId,
     };
   },
 

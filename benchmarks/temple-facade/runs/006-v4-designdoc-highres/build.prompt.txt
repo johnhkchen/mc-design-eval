@@ -1,0 +1,65 @@
+You are a master Minecraft architect. Below is your FINALIZED design document for a temple
+facade. Build it as a structured design artifact that faithfully realizes the document, at
+GENEROUS SCALE and with DEEP RELIEF. Earlier facades were too small and too flat — do not
+repeat that; use the room you are given.
+
+## Finalized design document
+# Temple of the Stormward Eye — Front Elevation Design Document
+
+## 1. Lore & Setting
+The **Vautri**, a highland people of a wind-scoured volcanic plateau, carve sanctuaries into ochre tuff cliffs to honor **Ashk, the Stormward Eye** — guardian deity who watches the horizon and breaks the killing storms before they reach the terraces below. The temple faces the prevailing weather: to look upon its face is to stand where the god stands, between the people and the sky. The climate is dry, fierce-sunned, lashed by seasonal gales.
+
+## 2. Aesthetic & Architectural Logic
+The language is **massive, battered (inward-leaning) cliff-cut relief** — a rock-hewn facade, not a freestanding wall, because the soft tuff is quarried in place, not stacked. Heavy battered piers and a deep recessed portal resist wind-load and shade the entrance from the punishing sun; the silhouette steps upward to a single crowning **eye-aperture** that catches first light. Squat proportions and deep shadow-relief read as permanence — a god who does not move. Ornament is incised and inlaid, since carving suits the stone better than carpentry.
+
+## 3. Color Palette (analogous earth + complementary accent)
+Dominant **warm ochre** (the living cliff) grounds the whole; supporting **deep terracotta** and **burnt umber** give the relief its hierarchy of shadow — an **analogous** earth harmony, drawn straight from the volcanic landscape so the temple reads as *of* its place. A single **lapis-blue** accent — the complementary jolt — marks the sacred eye and lintel band, the sky-god's color set against his earthen house.
+
+- Ochre → **smooth red sandstone**
+- Terracotta → **terracotta block**
+- Burnt umber → **granite**
+- Lapis accent → **blue glazed terracotta** (sparingly: the eye, the lintel)
+
+## 4. Motifs & Ornament
+- **The Eye** — radiating lidded oculus, crowning the facade and repeated small above each pier.
+- **Storm-chevron** — stacked zigzag bands along the entablature and pier capitals (lightning).
+- **Terrace-step fret** — incised step pattern at the base, echoing the people's farmed slopes.
+
+## 5. Features & Proportion
+A broad three-step **base** (full width); **four battered piers** dividing three bays; a deep central **portal** (twice the side bays' width) under a heavy lapis-banded **lintel**; a chevron **cornice**; flanking shadowed **niches** for offerings; crowning **eye-aperture** centered. Governing ratio **3:2** (height:width), piers on a **1:2:1** bay rhythm.
+
+## Orientation (photographed head-on)
+Facade FACES +Z, in the X–Y plane (X = width, Y = height, y = 0 ground). Front face at the
+highest Z; relief recedes into −Z. Model only the front and its relief.
+
+## Scale & RELIEF — use it (this is judged)
+- Width up to ~48 (X), height up to ~40 (Y) including the crown. Build big.
+- DEEP relief: up to ~16 blocks of depth into −Z, and genuinely use it. Columns/buttresses
+  project several blocks PROUD of the wall; the central portal RECESSES several blocks deep;
+  cornices, string courses, and the crown step forward and back across MULTIPLE Z-layers. A
+  near-flat screen only 4–6 deep is a failure.
+- CROWN proportion: the crowning element (pediment / parapet / attic / cresting) must span the
+  facade's full width and have real height — a deliberate culmination of the body, never a
+  small cap perched on a wide base.
+
+## Realize the document with craft
+- Build every feature the document specifies; honor its proportion ratios and palette.
+- Frame openings with deep reveals; avoid uniform 45° slopes (vary pitch with slab+stair
+  combos; step curves/arches); use voxel block `state` for mouldings and trim.
+- Use `fill`/`box` for masses and `line` for shafts/edges to stay efficient at this scale.
+
+## Materials
+Primarily the document's palette; declare the blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "006-v4-designdoc-highres"
+- metadata.prompting_method_id = "temple-facade-designdoc-highres.v0"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Set style.name to the document's style label and style.rationale to one line tying the build
+to the document.
+
+Local origin at x = 0, y = 0, z = 0 (ground at y = 0).

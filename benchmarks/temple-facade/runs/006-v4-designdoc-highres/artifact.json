@@ -1,0 +1,1402 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "006-v4-designdoc-highres",
+    "prompting_method_id": "temple-facade-designdoc-highres.v0",
+    "model_id": "claude-opus-4-8",
+    "seed": 11,
+    "server_state_id": "flat-creative-superflat.v1"
+  },
+  "style": {
+    "name": "Massive battered cliff-cut relief",
+    "rationale": "A rock-hewn ochre-tuff sanctuary: heavy battered piers projecting proud of a deep recessed portal, stepping upward to a single crowning lapis Eye of Ashk."
+  },
+  "palette": {
+    "manifest": [
+      "minecraft:smooth_red_sandstone",
+      "minecraft:cut_red_sandstone",
+      "minecraft:red_sandstone_stairs",
+      "minecraft:terracotta",
+      "minecraft:granite",
+      "minecraft:polished_granite",
+      "minecraft:blue_glazed_terracotta",
+      "minecraft:lapis_block"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [
+        16,
+        0,
+        -14
+      ],
+      "to": [
+        31,
+        24,
+        -13
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        0,
+        -4
+      ],
+      "to": [
+        47,
+        1,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        2,
+        -6
+      ],
+      "to": [
+        47,
+        3,
+        -2
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        4,
+        -8
+      ],
+      "to": [
+        47,
+        5,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        6,
+        -8
+      ],
+      "to": [
+        11,
+        7,
+        -6
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        8,
+        -8
+      ],
+      "to": [
+        5,
+        16,
+        -6
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        8,
+        -8
+      ],
+      "to": [
+        11,
+        16,
+        -6
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        17,
+        -8
+      ],
+      "to": [
+        11,
+        24,
+        -6
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        8,
+        -11
+      ],
+      "to": [
+        9,
+        16,
+        -10
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        8,
+        -10
+      ],
+      "to": [
+        9,
+        8,
+        -7
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        16,
+        -7
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "top"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        9,
+        16,
+        -7
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "west",
+        "half": "top"
+      }
+    },
+    {
+      "op": "fill",
+      "from": [
+        36,
+        6,
+        -8
+      ],
+      "to": [
+        43,
+        7,
+        -6
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        36,
+        8,
+        -8
+      ],
+      "to": [
+        37,
+        16,
+        -6
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        42,
+        8,
+        -8
+      ],
+      "to": [
+        43,
+        16,
+        -6
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        36,
+        17,
+        -8
+      ],
+      "to": [
+        43,
+        24,
+        -6
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        38,
+        8,
+        -11
+      ],
+      "to": [
+        41,
+        16,
+        -10
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        38,
+        8,
+        -10
+      ],
+      "to": [
+        41,
+        8,
+        -7
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        38,
+        16,
+        -7
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "top"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        16,
+        -7
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "west",
+        "half": "top"
+      }
+    },
+    {
+      "op": "fill",
+      "from": [
+        16,
+        6,
+        -12
+      ],
+      "to": [
+        17,
+        21,
+        -6
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        30,
+        6,
+        -12
+      ],
+      "to": [
+        31,
+        21,
+        -6
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        5,
+        -13
+      ],
+      "to": [
+        29,
+        5,
+        -6
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        20,
+        -12
+      ],
+      "to": [
+        33,
+        23,
+        -4
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        6,
+        -8
+      ],
+      "to": [
+        3,
+        24,
+        0
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        12,
+        6,
+        -8
+      ],
+      "to": [
+        15,
+        24,
+        0
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        32,
+        6,
+        -8
+      ],
+      "to": [
+        35,
+        24,
+        0
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        44,
+        6,
+        -8
+      ],
+      "to": [
+        47,
+        24,
+        0
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        6,
+        0
+      ],
+      "to": [
+        0,
+        24,
+        0
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        3,
+        6,
+        0
+      ],
+      "to": [
+        3,
+        24,
+        0
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        12,
+        6,
+        0
+      ],
+      "to": [
+        12,
+        24,
+        0
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        15,
+        6,
+        0
+      ],
+      "to": [
+        15,
+        24,
+        0
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        32,
+        6,
+        0
+      ],
+      "to": [
+        32,
+        24,
+        0
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        35,
+        6,
+        0
+      ],
+      "to": [
+        35,
+        24,
+        0
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        44,
+        6,
+        0
+      ],
+      "to": [
+        44,
+        24,
+        0
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        47,
+        6,
+        0
+      ],
+      "to": [
+        47,
+        24,
+        0
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        5,
+        -3
+      ],
+      "to": [
+        47,
+        5,
+        -3
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        24,
+        -7
+      ],
+      "to": [
+        47,
+        25,
+        -3
+      ],
+      "block": "minecraft:terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        26,
+        -6
+      ],
+      "to": [
+        47,
+        29,
+        -5
+      ],
+      "block": "minecraft:terracotta"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        26,
+        -4
+      ],
+      "to": [
+        3,
+        29,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        3,
+        29,
+        -4
+      ],
+      "to": [
+        6,
+        26,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        6,
+        26,
+        -4
+      ],
+      "to": [
+        9,
+        29,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        9,
+        29,
+        -4
+      ],
+      "to": [
+        12,
+        26,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        12,
+        26,
+        -4
+      ],
+      "to": [
+        15,
+        29,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        15,
+        29,
+        -4
+      ],
+      "to": [
+        18,
+        26,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        18,
+        26,
+        -4
+      ],
+      "to": [
+        21,
+        29,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        21,
+        29,
+        -4
+      ],
+      "to": [
+        24,
+        26,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        24,
+        26,
+        -4
+      ],
+      "to": [
+        27,
+        29,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        27,
+        29,
+        -4
+      ],
+      "to": [
+        30,
+        26,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        30,
+        26,
+        -4
+      ],
+      "to": [
+        33,
+        29,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        33,
+        29,
+        -4
+      ],
+      "to": [
+        36,
+        26,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        36,
+        26,
+        -4
+      ],
+      "to": [
+        39,
+        29,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        39,
+        29,
+        -4
+      ],
+      "to": [
+        42,
+        26,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        42,
+        26,
+        -4
+      ],
+      "to": [
+        45,
+        29,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        45,
+        29,
+        -4
+      ],
+      "to": [
+        47,
+        27,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        29,
+        -3
+      ],
+      "to": [
+        47,
+        29,
+        -3
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "south",
+        "half": "top"
+      }
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        30,
+        -7
+      ],
+      "to": [
+        47,
+        32,
+        -3
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        32,
+        -7
+      ],
+      "to": [
+        41,
+        34,
+        -3
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        12,
+        34,
+        -7
+      ],
+      "to": [
+        35,
+        36,
+        -3
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        36,
+        -7
+      ],
+      "to": [
+        29,
+        39,
+        -3
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        32,
+        -3
+      ],
+      "to": [
+        47,
+        32,
+        -3
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        6,
+        34,
+        -3
+      ],
+      "to": [
+        41,
+        34,
+        -3
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        12,
+        36,
+        -3
+      ],
+      "to": [
+        35,
+        36,
+        -3
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        31,
+        -5
+      ],
+      "to": [
+        27,
+        38,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        21,
+        32,
+        -4
+      ],
+      "to": [
+        26,
+        37,
+        -4
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        21,
+        32,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        32,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        21,
+        37,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        37,
+        -4
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        23,
+        34,
+        -4
+      ],
+      "to": [
+        24,
+        35,
+        -4
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        21,
+        38,
+        -3
+      ],
+      "to": [
+        26,
+        38,
+        -3
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "south",
+        "half": "top"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        21,
+        31,
+        -3
+      ],
+      "to": [
+        26,
+        31,
+        -3
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        17,
+        34,
+        -3
+      ],
+      "to": [
+        20,
+        34,
+        -3
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        27,
+        34,
+        -3
+      ],
+      "to": [
+        30,
+        34,
+        -3
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        18,
+        29,
+        -3
+      ],
+      "to": [
+        20,
+        31,
+        -3
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        29,
+        29,
+        -3
+      ],
+      "to": [
+        27,
+        31,
+        -3
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        22,
+        38,
+        -3
+      ],
+      "to": [
+        23,
+        39,
+        -3
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        25,
+        38,
+        -3
+      ],
+      "to": [
+        24,
+        39,
+        -3
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        29,
+        -3
+      ],
+      "to": [
+        3,
+        32,
+        -3
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        30,
+        -3
+      ],
+      "to": [
+        2,
+        31,
+        -3
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        12,
+        29,
+        -3
+      ],
+      "to": [
+        15,
+        32,
+        -3
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        30,
+        -3
+      ],
+      "to": [
+        14,
+        31,
+        -3
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        32,
+        29,
+        -3
+      ],
+      "to": [
+        35,
+        32,
+        -3
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        33,
+        30,
+        -3
+      ],
+      "to": [
+        34,
+        31,
+        -3
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        44,
+        29,
+        -3
+      ],
+      "to": [
+        47,
+        32,
+        -3
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        45,
+        30,
+        -3
+      ],
+      "to": [
+        46,
+        31,
+        -3
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        16,
+        21,
+        -5
+      ],
+      "to": [
+        31,
+        22,
+        -4
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "line",
+      "from": [
+        16,
+        20,
+        -4
+      ],
+      "to": [
+        31,
+        20,
+        -4
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        16,
+        23,
+        -4
+      ],
+      "to": [
+        31,
+        23,
+        -4
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        1,
+        0
+      ],
+      "to": [
+        47,
+        1,
+        0
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        3,
+        -1
+      ],
+      "to": [
+        47,
+        3,
+        -1
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        2,
+        2,
+        -1
+      ],
+      "to": [
+        2,
+        3,
+        -1
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        8,
+        2,
+        -1
+      ],
+      "to": [
+        8,
+        3,
+        -1
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        14,
+        2,
+        -1
+      ],
+      "to": [
+        14,
+        3,
+        -1
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        20,
+        2,
+        -1
+      ],
+      "to": [
+        20,
+        3,
+        -1
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        26,
+        2,
+        -1
+      ],
+      "to": [
+        26,
+        3,
+        -1
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        32,
+        2,
+        -1
+      ],
+      "to": [
+        32,
+        3,
+        -1
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        38,
+        2,
+        -1
+      ],
+      "to": [
+        38,
+        3,
+        -1
+      ],
+      "block": "minecraft:polished_granite"
+    },
+    {
+      "op": "line",
+      "from": [
+        44,
+        2,
+        -1
+      ],
+      "to": [
+        44,
+        3,
+        -1
+      ],
+      "block": "minecraft:polished_granite"
+    }
+  ]
+}
