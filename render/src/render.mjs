@@ -9,9 +9,11 @@
 import { createRequire } from 'node:module'
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { Vec3 } from 'vec3'
 import { createHeadlessCanvas, GL_AVAILABLE, GL_LOAD_ERROR } from './headless-canvas.mjs'
 import { MINECRAFT_VERSION } from './version.mjs'
+import { framedCamera, viewDistanceFor, DEFAULT_VIEW } from './camera.mjs'
 
 export { GL_AVAILABLE, GL_LOAD_ERROR }
 
@@ -44,6 +46,25 @@ export async function renderWorldToPng (world, center, opts = {}) {
   const o = { ...DEFAULTS, ...opts }
   const c = center instanceof Vec3 ? center : new Vec3(center.x, center.y, center.z)
 
+  // Resolve the camera. With `opts.bounds`, frame the build comparably (fixed angle,
+  // distance derived from the build's extent — camera.mjs; T-003-03 AC #2). Without it,
+  // fall back to the scaffold's constant offset (unchanged — keeps scaffold.test green
+  // and serves bounds-less callers). `viewDistance` grows so the framed build's far side
+  // is streamed in before the snapshot.
+  let eye, fov, viewDistance, look
+  if (opts.bounds) {
+    const cam = framedCamera(opts.bounds, opts.view)
+    eye = cam.eye
+    look = cam.target
+    fov = cam.fov
+    viewDistance = viewDistanceFor(cam.distance, cam.radius, o.viewDistance)
+  } else {
+    eye = c.plus(o.cameraOffset)
+    look = c
+    fov = o.fov
+    viewDistance = o.viewDistance
+  }
+
   // The viewer reads these globals (mirrors prismarine-viewer/lib/headless.js).
   globalThis.THREE = require('three')
   globalThis.Worker = require('node:worker_threads').Worker
@@ -59,18 +80,17 @@ export async function renderWorldToPng (world, center, opts = {}) {
     throw new Error(`prismarine-viewer does not support ${MINECRAFT_VERSION}`)
   }
 
-  // Stream our in-memory world's chunks into the renderer.
-  const worldView = new WorldView(world, o.viewDistance, c)
+  // Stream our in-memory world's chunks into the renderer, centered on what we look at.
+  const worldView = new WorldView(world, viewDistance, look)
   viewer.listen(worldView)
-  await worldView.init(c)
+  await worldView.init(look)
 
-  // Fixed camera: a constant offset from center, looking at center.
-  const eye = c.plus(o.cameraOffset)
+  // Same camera-mutation sequence the scaffold proved; only the values differ.
   viewer.camera.position.set(eye.x, eye.y, eye.z)
-  viewer.camera.fov = o.fov
+  viewer.camera.fov = fov
   viewer.camera.aspect = o.width / o.height
   viewer.camera.updateProjectionMatrix()
-  viewer.camera.lookAt(c.x, c.y, c.z)
+  viewer.camera.lookAt(look.x, look.y, look.z)
 
   await viewer.waitForChunksToRender()
   viewer.update()
@@ -93,4 +113,43 @@ export async function renderWorldToPng (world, center, opts = {}) {
     writeFileSync(o.outPath, buffer)
   }
   return buffer
+}
+
+// Default destination for renderBuild when no outPath is given.
+const DEFAULT_BUILD_OUT = fileURLToPath(new URL('../out/build.png', import.meta.url))
+
+/**
+ * Render a constructed build to a PNG file with a fixed, comparable camera, and return
+ * the image PATH (T-003-03 AC #2 + #3). This is the small, named entry point the Agent
+ * SDK render tool (T-003-04) wraps.
+ *
+ * `build` is the T-003-02 `BuildResult` shape — `{ world, bounds, center? }` (extra
+ * fields ignored). When `bounds` is present the build is framed comparably (camera.mjs);
+ * an empty build (`bounds == null`) degrades to the constant-offset path around
+ * `center`, so it still returns a path instead of throwing.
+ *
+ * @param {{ world: object, bounds?: {min:number[],max:number[]}|null, center?: Vec3 }} build
+ * @param {Partial<typeof DEFAULTS> & { outPath?: string, view?: Partial<typeof DEFAULT_VIEW> }} [opts]
+ * @returns {Promise<{ path: string, bytes: number, view: object }>}
+ */
+export async function renderBuild (build, opts = {}) {
+  const view = { ...DEFAULT_VIEW, ...(opts.view || {}) }
+  const outPath = opts.outPath || DEFAULT_BUILD_OUT
+
+  if (build.bounds) {
+    const cam = framedCamera(build.bounds, view)
+    const buffer = await renderWorldToPng(build.world, cam.target, {
+      ...opts, outPath, width: view.width, height: view.height, bounds: build.bounds, view
+    })
+    return { path: outPath, bytes: buffer.length, view: { ...view, distance: cam.distance, radius: cam.radius } }
+  }
+
+  // Empty build: no extent to frame — fall back to the scaffold's constant-offset view.
+  const center = build.center instanceof Vec3
+    ? build.center
+    : (build.center ? new Vec3(build.center.x, build.center.y, build.center.z) : new Vec3(0, 0, 0))
+  const buffer = await renderWorldToPng(build.world, center, {
+    ...opts, outPath, width: view.width, height: view.height
+  })
+  return { path: outPath, bytes: buffer.length, view }
 }
