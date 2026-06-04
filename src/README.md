@@ -152,12 +152,60 @@ import { designArtifactOutputFormat, extractArtifact, requestDesignArtifact } fr
   clear error if absent) so the rest of the module — and the test suite — stay
   offline. **Not exercised by `npm test`.**
 
+## Trial runner (T-004-01)
+
+`config.mjs` + `trial.mjs` are the **E-03 experiment-harness skeleton** (spec §4,
+§11 step 5): run one trial through the Claude Agent SDK and log a clean,
+metadata-keyed record. The runner reaches the SDK **only** through
+`sdk-binding.mjs` — there is exactly one live, metered seam in the codebase.
+
+### `config.mjs` — single source of harness config
+
+```js
+import { PHASE1_MODEL_ID, DEFAULT_PROMPTING_METHOD_ID, SAFE_TRIAL_OPTIONS, FORBIDDEN_TOOLS } from "./config.mjs";
+```
+
+- **`PHASE1_MODEL_ID`** — the pinned model id (spec §4), in **one place**, mirroring
+  `render/src/version.mjs`. Phase 2 sweeps the model by overriding this constant or
+  passing `model` to `runTrial`.
+- **`SAFE_TRIAL_OPTIONS`** — Agent SDK options that **disable code execution**
+  (AC #4 / spec §3): `allowedTools: []`, `permissionMode: "dontAsk"` (deny without
+  prompting — a headless run must never hang), and `disallowedTools` naming the
+  shells explicitly. The runner never sets `bypassPermissions`.
+
+### `trial.mjs` — the runner
+
+```js
+import { runTrial, tallyUsage, serializeTranscript, buildTrialRecord, assertSafeOptions } from "./trial.mjs";
+```
+
+- **`runTrial({ prompt, metadata?, model?, outDir?, options? }) → { record, artifact, dir }`**
+  — the **live, metered** call. Merges + asserts safe options, requests a validated
+  artifact via the binding (collecting every message), and writes the trial store
+  under `trials/<trial_id>/`. Keyed solely off `artifact.metadata.trial_id` (the
+  artifact is the one source; a mismatching passed `metadata.trial_id` throws).
+  **Not exercised by `npm test`** — run it with `npm run trial:run`.
+- **`tallyUsage(messages, result) → { turns, totals }`** — per-`assistant`-turn
+  input/output tokens (spec §7/§9 turn-over-turn growth) plus the SDK's **billed
+  aggregate** totals from the result message. Pure.
+- **`serializeTranscript(messages) → string`** — the full transcript as JSONL.
+- **`buildTrialRecord({ artifact, tally, result, finishedAt }) → TrialRecord`** —
+  the per-trial row E-04 scoring and the §10 rating app join on; identity fields are
+  pulled from the artifact so the record can't disagree with it. Pure.
+- **`assertSafeOptions(options)`** — throws if merged options would enable a
+  code-exec tool or bypass permissions (AC #4). Pure.
+
+The trial store (gitignored) per trial: `artifact.json`, `transcript.jsonl` (every
+SDK message, one per line), `trial.json` (the record).
+
 ## Test & verify
 
 ```bash
-npm run test:unit   # expansion + artifact + sdk-binding suites (node:test)
+npm run test:unit   # expansion + artifact + sdk-binding + trial suites (node:test)
 npm test            # schema gate + the unit suites
+npm run trial:run   # LIVE, METERED single trial (spec §4) — not part of npm test
 ```
 
-The artifact/sdk-binding suites use the committed `schema/examples/*` fixtures as
-the canonical valid/invalid payloads and never make a live SDK call.
+The artifact/sdk-binding/trial suites use the committed `schema/examples/*`
+fixtures and mock SDK message objects as the canonical payloads and never make a
+live SDK call. Only `trial:run` does.
