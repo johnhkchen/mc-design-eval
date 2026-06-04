@@ -198,10 +198,50 @@ import { runTrial, tallyUsage, serializeTranscript, buildTrialRecord, assertSafe
 The trial store (gitignored) per trial: `artifact.json`, `transcript.jsonl` (every
 SDK message, one per line), `trial.json` (the record).
 
+## Single-shot archetype (T-004-02)
+
+A **prompting archetype** (spec §7) is a *named, versioned* configuration of how the
+harness constructs a prompt — so a trial's result is attributable to the archetype,
+not to incidental wording drift. **Single-shot** is archetype 1: ONE generation, no
+feedback, no revision. It is a thin prompt-construction policy layered on the runner
+— it contributes only the prompt and the seed identity, then hands them to
+`runTrial` (the single SDK seam). Three modules:
+
+```js
+import { SINGLE_SHOT, buildSingleShotPrompt, assertAttribution, runSingleShotTrial } from "./single-shot.mjs";
+import { loadPalette, formatPaletteBlocks } from "./palette.mjs";
+import { TARGET_BRIEFS, STYLE_BRIEFS } from "./briefs.mjs";
+```
+
+- **`palette.mjs`** — the shared seam to the T-001-04 palettes (consumer #1).
+  `loadPalette(id)` reads `palettes/<id>.json` by path (no re-validation — that is
+  `palettes/validate.mjs`'s authoring-time job); `formatPaletteBlocks(palette)`
+  renders the whitelist group-by-group for prompt injection. Pure formatter, unit-tested.
+- **`briefs.mjs`** — frozen `TARGET_BRIEFS` (house | path | landscape, the spec §8
+  ladder) and `STYLE_BRIEFS` (industrial). **Shared across archetypes** (§7 holds the
+  target and style constant; only the archetype varies), so it lives outside any one
+  archetype. House is the milestone target; path/landscape are ready for the 3×3 matrix.
+- **`single-shot.mjs`** —
+  - **`buildSingleShotPrompt(spec) → { prompt, seedMetadata }`** (pure): assembles a
+    deterministic prompt from the target brief + named style brief + the injected
+    palette whitelist **as the binding material constraint** (only-these-blocks; outside
+    = violation), and pins every reproducibility field including
+    `prompting_method_id = SINGLE_SHOT.id`. Same spec in → byte-identical prompt out.
+  - **`SINGLE_SHOT`** — the descriptor; `id` is single-sourced from
+    `config.DEFAULT_PROMPTING_METHOD_ID` (`"single-shot.v1"`). The `.v1` suffix is the
+    versioning: changing prompt construction bumps it so old trials stay attributable.
+  - **`assertAttribution(artifact)`** (pure): throws unless the artifact's
+    `metadata.prompting_method_id` equals the archetype id. The harness can't stamp the
+    model-authored, frozen artifact, so attribution (AC #4) is prompt-driven **and**
+    verified — a mislabeled trial fails loudly instead of logging a wrong row.
+  - **`runSingleShotTrial(spec) → { record, artifact, dir }`** — the **live, metered**
+    wrapper: build prompt → `runTrial` → `assertAttribution`. Not in `npm test`;
+    `npm run trial:run` demonstrates it (house / industrial).
+
 ## Test & verify
 
 ```bash
-npm run test:unit   # expansion + artifact + sdk-binding + trial suites (node:test)
+npm run test:unit   # expansion + artifact + sdk-binding + trial + palette + single-shot suites (node:test)
 npm test            # schema gate + the unit suites
 npm run trial:run   # LIVE, METERED single trial (spec §4) — not part of npm test
 ```
