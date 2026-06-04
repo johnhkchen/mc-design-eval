@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mc-design-eval/schema/design-artifact.json",
+  "title": "DesignArtifact",
+  "description": "The structured design object an LLM emits in place of bot commands (spec §5). Single source of truth: schematic export and renders are deterministic derivations from it. See schema/README.md for a field reference.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "metadata", "style", "palette", "placements"],
+  "properties": {
+    "schema_version": {
+      "description": "Semantic version of this artifact contract, so the contract can evolve without breaking stored trials.",
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "metadata": { "$ref": "#/$defs/metadata" },
+    "style": { "$ref": "#/$defs/style" },
+    "palette": { "$ref": "#/$defs/palette" },
+    "placements": {
+      "description": "Ordered list of placements. Array order is application order: when placements overlap, downstream expansion (T-001-02) resolves by last-writer-wins over this order.",
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/placement" }
+    }
+  },
+  "$defs": {
+    "coordinate": {
+      "description": "An integer voxel-lattice cell [x, y, z]. Negative values allowed (builds use a local origin).",
+      "type": "array",
+      "items": { "type": "integer" },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "blockId": {
+      "description": "A namespaced Minecraft block id, e.g. minecraft:stone_bricks. Shape only; whitelist membership is checked by the palette validator (E-04), not here.",
+      "type": "string",
+      "pattern": "^[a-z0-9_.-]+:[a-z0-9_]+$"
+    },
+    "blockState": {
+      "description": "Optional Minecraft block-state properties (stringly-typed), e.g. {\"facing\":\"north\",\"half\":\"bottom\",\"waterlogged\":\"true\"}. Carries orientation/face data the survival-buildability check (E-04) and the schematic exporter (T-002-02) need.",
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "type": "string" }
+    },
+    "metadata": {
+      "description": "Reproducibility and trial-identity fields (spec §5, §9, §10). trial_id is the key the scoring and rating layers join on.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trial_id",
+        "prompting_method_id",
+        "model_id",
+        "seed",
+        "server_state_id"
+      ],
+      "properties": {
+        "trial_id": {
+          "description": "Stable trial identifier; the join key for scores, renders, and human ratings.",
+          "type": "string",
+          "minLength": 1
+        },
+        "prompting_method_id": {
+          "description": "Named, versioned prompting archetype (spec §7), so results are attributable to the method.",
+          "type": "string",
+          "minLength": 1
+        },
+        "model_id": {
+          "description": "The pinned model id (a current id, not a retired one — spec §4).",
+          "type": "string",
+          "minLength": 1
+        },
+        "seed": {
+          "description": "Generation seed held constant across a trial cell for comparability.",
+          "type": "integer"
+        },
+        "server_state_id": {
+          "description": "Identifier of the server/world state the trial assumes, so builds stay comparable.",
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "description": "Optional build target; when present the design rubric (spec §8/§9) branches on it.",
+          "type": "string",
+          "enum": ["house", "path", "landscape"]
+        },
+        "created_at": {
+          "description": "Optional creation timestamp.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "style": {
+      "description": "The named style intent the model commits to (spec §5), enabling style scoring and post-hoc analysis.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "rationale"],
+      "properties": {
+        "name": {
+          "description": "Named style, e.g. industrial, cottagecore, brutalist, art-deco.",
+          "type": "string",
+          "minLength": 1
+        },
+        "rationale": {
+          "description": "Short rationale for how the design realizes the style.",
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "palette": {
+      "description": "The materials the design commits to use (spec §5/§6). manifest is declared intent; actual adherence is measured by the palette validator (E-04).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["manifest"],
+      "properties": {
+        "palette_id": {
+          "description": "Optional reference to a style-palette whitelist (T-001-04).",
+          "type": "string",
+          "minLength": 1
+        },
+        "manifest": {
+          "description": "Declared set of block ids the design uses.",
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/blockId" }
+        }
+      }
+    },
+    "placement": {
+      "description": "A single placement, tagged by op. Exactly one shape matches.",
+      "oneOf": [
+        { "$ref": "#/$defs/voxelPlacement" },
+        { "$ref": "#/$defs/linePlacement" },
+        { "$ref": "#/$defs/boxPlacement" },
+        { "$ref": "#/$defs/fillPlacement" }
+      ]
+    },
+    "voxelPlacement": {
+      "description": "A single block at pos.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["op", "pos", "block"],
+      "properties": {
+        "op": { "const": "voxel" },
+        "pos": { "$ref": "#/$defs/coordinate" },
+        "block": { "$ref": "#/$defs/blockId" },
+        "state": { "$ref": "#/$defs/blockState" }
+      }
+    },
+    "linePlacement": {
+      "description": "Blocks along the straight lattice line from..to, inclusive.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["op", "from", "to", "block"],
+      "properties": {
+        "op": { "const": "line" },
+        "from": { "$ref": "#/$defs/coordinate" },
+        "to": { "$ref": "#/$defs/coordinate" },
+        "block": { "$ref": "#/$defs/blockId" },
+        "state": { "$ref": "#/$defs/blockState" }
+      }
+    },
+    "boxPlacement": {
+      "description": "The hollow rectangular shell (6 faces) spanning from..to inclusive.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["op", "from", "to", "block"],
+      "properties": {
+        "op": { "const": "box" },
+        "from": { "$ref": "#/$defs/coordinate" },
+        "to": { "$ref": "#/$defs/coordinate" },
+        "block": { "$ref": "#/$defs/blockId" },
+        "state": { "$ref": "#/$defs/blockState" }
+      }
+    },
+    "fillPlacement": {
+      "description": "The solid cuboid spanning from..to inclusive.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["op", "from", "to", "block"],
+      "properties": {
+        "op": { "const": "fill" },
+        "from": { "$ref": "#/$defs/coordinate" },
+        "to": { "$ref": "#/$defs/coordinate" },
+        "block": { "$ref": "#/$defs/blockId" },
+        "state": { "$ref": "#/$defs/blockState" }
+      }
+    }
+  }
+}
