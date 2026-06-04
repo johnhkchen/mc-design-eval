@@ -1,0 +1,61 @@
+// Single source of the harness's Phase-1 configuration (T-004-01).
+//
+// Mirrors the render harness's version pin (render/src/version.mjs): the model id
+// the experiment harness runs against lives in EXACTLY ONE place. Spec §4 is
+// explicit — "pin the Phase-1 model by a current ID in config, single-sourced so
+// Phase 2 can sweep it." A Phase-2 model sweep is therefore a single edit (or a
+// per-trial `model` override passed to runTrial), not a hunt through call sites.
+//
+// This module is pure data — no SDK import, no I/O — so it is safe to import
+// anywhere (the runner, future archetype configs, tests).
+
+/**
+ * The Phase-1 pinned model id (spec §4). Phase 2 sweeps the model by overriding
+ * this constant or passing `model` to runTrial. Kept current per spec §4's
+ * warning against hardcoding deprecated ids.
+ * @type {string}
+ */
+export const PHASE1_MODEL_ID = "claude-opus-4-8";
+
+/**
+ * Default prompting-archetype id for the skeleton trial (spec §7). The single-shot
+ * archetype is the Phase-1 baseline; multi-shot / multimodal are later, versioned
+ * configs layered on top of the runner.
+ * @type {string}
+ */
+export const DEFAULT_PROMPTING_METHOD_ID = "single-shot.v1";
+
+/**
+ * Tool names that must NEVER be enabled in a trial — the code-execution surface
+ * (spec §3: the `allow_insecure_coding` / LLM-writes-and-runs-code path is out of
+ * scope). The runner's safe-options guard rejects any attempt to allow these.
+ * @type {readonly string[]}
+ */
+export const FORBIDDEN_TOOLS = Object.freeze([
+  "Bash",
+  "BashOutput",
+  "KillShell",
+  "NotebookEdit",
+  "Task",
+]);
+
+/**
+ * Agent SDK `query` options that DISABLE code execution (AC #4 / spec §3). A
+ * structured-output-only trial needs no tools at all:
+ *   - `allowedTools: []`        — nothing is pre-approved.
+ *   - `permissionMode: "dontAsk"` — deny anything not pre-approved WITHOUT
+ *                                   prompting (a headless trial must never hang on
+ *                                   an interactive permission request).
+ *   - `disallowedTools`         — names the code-exec tools explicitly, as defense
+ *                                 in depth and a greppable statement of intent.
+ * The runner never sets `permissionMode: "bypassPermissions"` nor
+ * `allowDangerouslySkipPermissions`. When the render tool is later exposed to the
+ * harness (spec §4) it is added to `allowedTools` as an `mcp__render__*` tool — a
+ * non-code-exec in-process tool — without touching this posture.
+ * @type {Readonly<{ allowedTools: string[], disallowedTools: readonly string[], permissionMode: string }>}
+ */
+export const SAFE_TRIAL_OPTIONS = Object.freeze({
+  allowedTools: Object.freeze([]),
+  disallowedTools: FORBIDDEN_TOOLS,
+  permissionMode: "dontAsk",
+});
