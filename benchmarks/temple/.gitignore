@@ -1,0 +1,3 @@
+# Keep render.png / artifact.json / summary.json / prompt.txt per run (the progression),
+# but not the bulky raw transcripts.
+runs/*/transcript.jsonl

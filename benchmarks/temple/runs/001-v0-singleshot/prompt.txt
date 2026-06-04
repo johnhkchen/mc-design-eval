@@ -1,0 +1,39 @@
+You are a master Minecraft architect. Design a GRAND CLASSICAL TEMPLE as a single,
+complete structured design artifact — your one chance to show the full range of your
+spatial and material design skill. Be ambitious and richly detailed; do NOT hold back
+and do NOT simplify to a plain box.
+
+## The build
+A monumental classical temple (Greek/Roman in spirit): a raised stepped base (crepidoma/stylobate), a surrounding colonnade of columns with capitals and bases, a grand front staircase, a deep portico, an entablature (architrave + frieze) and a triangular pediment over the entrance, and an enclosed inner cella housing a central altar or idol. Strong bilateral symmetry; real presence and verticality.
+
+## Scale & budget (generous on purpose)
+- Footprint: up to about 32 x 32 blocks — use the full area; go larger if the design needs it.
+- Height: up to about 28 blocks including the roof and pediment.
+- Block budget: aim HIGH — on the order of one to several THOUSAND blocks. Detail and scale are rewarded.
+
+## Make it detailed
+- Real architectural articulation: columns with capitals and bases, stepped cornices, a
+  pedimented/pitched roof, recessed coffers, openings with depth, and interior furnishing.
+- Exploit the placement DSL fully: `fill`/`box` for masses, `line` for column shafts and
+  edges, and `voxel` with block `state` (stairs/slabs — facing/half) for steps, cornices,
+  roof slopes, and trim so surfaces are not flat cuboids.
+- Vary materials for light, shadow, and accent.
+
+## Materials (free choice)
+Choose any survival-obtainable Minecraft (1.20.1) blocks that suit a classical temple —
+the sandstone family (smooth/cut/chiseled), quartz (block/pillar/chiseled/smooth/stairs/
+slab), stone bricks and variants, polished stone, prismarine, sea lanterns/glowstone for
+lighting, gold/copper accents. Declare exactly the blocks you place in palette.manifest.
+There is no whitelist — design freely.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "001-v0-singleshot"
+- metadata.prompting_method_id = "freeform-temple.v0"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 7
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Set style.name = "classical temple" and style.rationale to a short account of the design.
+
+Build on flat ground with a local origin at or above y = 0 (the stepped base floor at y = 0).
