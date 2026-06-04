@@ -9,10 +9,10 @@
 // into the session as an invocable tool; the milestone image is the harness's
 // deterministic render of the final artifact (single-shot does not revise).
 //
-// LIVE AND METERED (spec §4: Agent SDK usage bills at full API rates) and needs
-// headless GL for the render. This is the one place a real trial is launched — it is
-// NOT part of `npm test`. Requires the optional @anthropic-ai/claude-agent-sdk
-// dependency and API credentials.
+// LIVE AND METERED (spec §4): the model is invoked via the `claude -p` subscription
+// shim, and the render needs headless GL. This is the one place a real trial is
+// launched — it is NOT part of `npm test`. Requires the `claude` CLI installed, on
+// PATH, and logged in (subscription credits, not a pay-as-you-go API key).
 
 import { runSmokeTrial } from "../src/smoke-trial.mjs";
 
@@ -38,8 +38,8 @@ try {
 } catch (err) {
   console.error("trial failed:");
   console.error("  " + (err && err.message));
-  if (err && /not installed/.test(err.message)) {
-    console.error("Install the optional SDK: npm install @anthropic-ai/claude-agent-sdk");
+  if (err && /Claude CLI/.test(err.message)) {
+    console.error("Ensure the `claude` CLI is installed, on PATH, and logged in (`claude login`).");
   }
   process.exit(1);
 }

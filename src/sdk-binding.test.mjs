@@ -12,7 +12,12 @@ import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import Ajv2020 from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
-import { designArtifactOutputFormat, extractArtifact } from "./sdk-binding.mjs";
+import {
+  designArtifactOutputFormat,
+  extractArtifact,
+  stripToJson,
+  withSchemaInstruction,
+} from "./sdk-binding.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const examples = resolve(here, "..", "schema", "examples");
@@ -77,4 +82,36 @@ test("invalid structured_output surfaces located validation errors", () => {
 
 test("a result with no payload throws a clear error", () => {
   assert.throws(() => extractArtifact({}), /no structured payload/);
+});
+
+// --- stripToJson / claude -p text path (spec §4) --------------------------
+
+test("stripToJson is a no-op on already-clean JSON", () => {
+  assert.equal(stripToJson(validText).trim(), validText.trim());
+});
+
+test("stripToJson strips a ```json code fence", () => {
+  const fenced = "```json\n" + validText + "\n```";
+  assert.deepEqual(JSON.parse(stripToJson(fenced)), validObj);
+});
+
+test("stripToJson slices the object out of surrounding prose", () => {
+  const chatty = `Here is the design:\n${validText}\nHope that works!`;
+  assert.deepEqual(JSON.parse(stripToJson(chatty)), validObj);
+});
+
+test("extractArtifact accepts fenced result text (the claude -p path)", () => {
+  const r = extractArtifact({ result: "```json\n" + validText + "\n```" });
+  assert.equal(r.ok, true);
+  assert.equal(r.artifact.metadata.trial_id, "phase1-house-singleshot-0001");
+});
+
+// --- withSchemaInstruction (claude -p output-format scaffolding) -----------
+
+test("withSchemaInstruction appends a JSON-only directive and the schema", () => {
+  const out = withSchemaInstruction("BASE PROMPT");
+  assert.match(out, /^BASE PROMPT/);
+  assert.match(out, /Output format \(required\)/);
+  assert.match(out, /ONLY a single JSON object/);
+  assert.match(out, /"title": "DesignArtifact"/);
 });
