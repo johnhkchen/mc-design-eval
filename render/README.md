@@ -35,8 +35,8 @@ Bumping the version is one edit there.
 
 | File | Responsibility |
 | --- | --- |
-| `src/version.mjs` | the version pin + `minecraft-data`/`minecraft-assets` handles + `blockStateId(name)` |
-| `src/world.mjs` | `createEmptyWorld()`, `setBlock(world, pos, name)`, `buildSampleWorld()` — artifact-agnostic |
+| `src/version.mjs` | the version pin + `minecraft-data`/`minecraft-assets` handles + `blockStateId(name, state?)` |
+| `src/world.mjs` | `createEmptyWorld()`, `setBlock()`, `buildSampleWorld()`, and the artifact builders `buildWorldFromArtifact()` / `buildWorldFromVoxels()` |
 | `src/headless-canvas.mjs` | the **swappable render seam**: a WebGL-capable headless canvas |
 | `src/render.mjs` | `renderWorldToPng(world, center, opts?)` + the fixed render contract (`DEFAULTS`) |
 | `src/cli.mjs` | `npm run render:sample` entrypoint |
@@ -75,6 +75,42 @@ browser viewer and screenshot the canvas). Not built now (YAGNI until an environ
 forces it). `src/headless-canvas.mjs` exports `GL_AVAILABLE`/`GL_LOAD_ERROR` so the
 render smoke test skips rather than hard-fails where no GL backend exists.
 
+## Artifact → world construction (T-003-02)
+
+`world.mjs` turns a design artifact into a populated `prismarine-world`. It is the
+one place `render/` reads the artifact contract:
+
+```js
+import { buildWorldFromArtifact, buildWorldFromVoxels } from './src/world.mjs'
+
+const { world, center, bounds, placed, unmapped } = await buildWorldFromArtifact(artifact)
+await renderWorldToPng(world, center) // frames the build with no extra wiring
+```
+
+- **`buildWorldFromArtifact(artifact, opts?)`** — expands the artifact's placement
+  primitives via `../../src/expand.mjs` (the cross-package S-001 → E-02 seam; the
+  same expansion every consumer reads, never reimplemented here), then builds.
+  Schema validity is assumed upstream (`../src/artifact.mjs`).
+- **`buildWorldFromVoxels(voxels, opts?)`** — builds directly from an
+  already-expanded `Voxel[]` (`{ pos, block, state? }`).
+- Returns `{ world, center, bounds, placed, unmapped }`. `center` is the rounded
+  bounding-box midpoint; `bounds` is `{ min, max }` over placed voxels (or `null`).
+
+**State / orientation.** Each voxel's `state` (e.g. `{ facing: "east", half:
+"top" }`) is resolved by `blockStateId(name, state)` to the exact numeric
+state id, computed as the big-endian mixed-radix composition over
+`minecraft-data`'s ordered `states[]`. Omitted properties take the block's
+**default** (not index 0); booleans accept the schema's string form
+(`"true"`/`"false"`, ordered true-before-false to match Minecraft).
+
+**Unknown / unmappable blocks.** Construction is **total and deterministic**: a
+voxel that can't be mapped (unknown block, illegal state) is skipped and recorded
+in `unmapped` (`{ pos, block, state?, reason }`) rather than crashing the build,
+so one pass yields the complete report. Iteration follows expansion's canonical
+(y, z, x) order, so the world and the report are pure functions of the input. Pass
+`{ strict: true }` to instead throw an aggregated error listing every unmapped
+voxel. Block legality *vs. the palette* is E-04's concern, not this layer's.
+
 ## The fixed render contract
 
 `render.mjs`'s `DEFAULTS` own canvas size (512×512), view distance, fov, and a fixed
@@ -84,6 +120,6 @@ view angles on top of this contract.
 
 ## Out of scope (other S-003 tickets)
 
-Artifact→world expansion (T-003-02), multi-angle comparable views and thumbnailing
-(T-003-03), the Agent SDK tool wrapper (T-003-04), schematic export, validators, a
-Minecraft server, and a bot.
+Multi-angle comparable views and thumbnailing (T-003-03), the Agent SDK tool
+wrapper (T-003-04), schematic export, validators, a Minecraft server, and a bot.
+(Artifact→world construction is now implemented — see above.)
