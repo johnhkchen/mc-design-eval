@@ -1,0 +1,39 @@
+{
+  "seq": 4,
+  "runId": "004-v3-designdoc-revise",
+  "date": "2026-06-04",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "v3-designdoc-revise",
+  "promptMethodId": "temple-facade-designdoc-revise.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 959,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      -4
+    ],
+    "max": [
+      14,
+      23,
+      1
+    ]
+  },
+  "tokensIn": 29639,
+  "tokensOut": 60139,
+  "costUsd": 1.7982122499999997,
+  "roundImages": [
+    "round-0.png"
+  ],
+  "note": "design-doc + identity-preserving multimodal revision (P3+P4)"
+}

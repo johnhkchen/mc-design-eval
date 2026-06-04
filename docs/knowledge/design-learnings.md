@@ -21,11 +21,14 @@ the per-run reasoning behind each principle. Renders live in
    garish* facades — many hues, no hierarchy. Color needs a **rationale**: a dominant +
    supporting + accent scheme with a named harmony (analogous / complementary / triadic), not
    just permission. Ask for color *theory*, not color *quantity*.
-3. **Visual self-critique sharpens craft but drifts to convention.** One multimodal revision
-   (render → see → re-emit) clearly improved proportion and geometry and added a real pediment,
-   and it *reined in* over-coloring well — but it converged the palette toward a safe,
-   conventional white/blue/gold. Use it as a "tighten & make tasteful" pass; guard against
-   blandness (tell it to *preserve* boldness).
+3. **Self-critique sharpens craft; anchor it to the design doc or it drifts bland.** A *generic*
+   "improve it" revision (v1) tightened proportion/geometry but converged the palette toward a
+   safe white/blue/gold. Anchoring the revision to the finalized design document — "honor the
+   palette, motifs, and concept; do not genericize" (v3) — keeps the craft gains *without* the
+   bland drift: run 004 cleaned the cornice, the recessed portal, and the column rhythm while
+   preserving the teal↔amber scheme. **Never run a bare "improve it"; always anchor the revision
+   to the doc.** (Cost: the revision is a 3rd call for an incremental gain over an already-strong
+   v2 — use it when polish matters.)
 4. **Ground before generating — the biggest single lever (confirmed).** Writing a *finalized
    design document* first — lore; the architectural **reason** the temple looks that way; a
    color-theory palette (dominant / supporting / accent + named harmony + a reason for restraint);
@@ -98,3 +101,18 @@ Design-document-first, then build. (1,372 blocks, 2 calls, $1.08 — *cheaper* t
 - **→** Grounding before generation is the strongest lever found (P4 confirmed, now default).
   Next: design-doc-first **+** a multimodal tightening pass (combine P3 + P4) to also clean the
   geometry — does grounding survive a revision without going bland?
+
+### temple-facade 004 · `v3-designdoc-revise` · 2026-06-04
+Design-doc → build → **identity-preserving** multimodal revision. (3 calls, 959 blocks, $1.80.)
+- **Result:** "Temple of the Tidewright" — teal-glaze body, sandstone piers, white dentil cornice,
+  amber-gold finial/lintel, a recessed central portal. (`round-0.png` = the build; `render.png` =
+  the revised final.)
+- **Worked — grounding SURVIVED the revision.** The revision tightened geometry, proportion, the
+  cornice, and the recessed portal *while keeping* the teal↔amber palette and concept — none of
+  v1's bland drift. Answers the open question: yes, *if* the revision is told to honor the doc.
+- **Didn't:** the revised facade is slightly more austere than its own round-0 (cleaner but a touch
+  less vibrant); 3 calls = most expensive yet ($1.80); arches still stepped (P6); the gain over an
+  already-strong v2 is incremental.
+- **→** Identity-preserving revision is the most refined process, at higher cost (P3 updated). Open
+  questions: is the 3rd call worth it vs just v2? And does higher `--effort` on the *doc* stage beat
+  *adding* a revision? → an `--effort` sweep is the next axis (temperature still needs the API path).

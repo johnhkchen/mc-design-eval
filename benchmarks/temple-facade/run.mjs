@@ -202,6 +202,54 @@ function composeBuildFromDocPrompt(task, { promptMethodId, runId, designDoc }) {
   ].join("\n");
 }
 
+// Identity-preserving revision (v3): tighten geometry/proportion from a render WITHOUT
+// going bland — explicitly honor the design document's style/palette/motifs. Tests whether
+// grounding (P4) survives a self-critique pass (P3, which otherwise drifts to convention).
+function composeDocRevisionPrompt(task, { promptMethodId, runId, designDoc }) {
+  return [
+    "You are a master Minecraft architect refining your own work. ATTACHED is a head-on render",
+    "of the temple facade you built from the design document below. Improve it — but STAY TRUE to",
+    "the document: keep its style, color palette, motifs, and concept. Do NOT genericize the",
+    "colors, simplify to a conventional look, or abandon the identity. Refine, do not replace.",
+    "",
+    "## Your design document (honor it)",
+    designDoc,
+    "",
+    "## Improve specifically (judge from the render)",
+    "- Proportion & rhythm: fix awkward proportions and uneven bays, per the document's ratios.",
+    "- Geometry: replace clumsy uniform 45° steps with varied slab+stair pitches; make the iwan /",
+    "  arches read as real (stepped) arches, not flat panels; clean misaligned blocks.",
+    "- Relief & depth: deepen the portal and niches; strengthen the cornice, cresting, and base.",
+    "- Color: keep the document's palette and its dominant/supporting/accent hierarchy; if",
+    "  anything, sharpen the contrast — do NOT drift toward monochrome or convention.",
+    "- Fix anything broken, floating, or unintentional.",
+    "",
+    "## Orientation (unchanged)",
+    "Facade FACES +Z, X–Y plane (X = width, Y = height, y = 0 ground), relief into −Z, front face",
+    "at the highest Z. Model only the front and its relief.",
+    "",
+    "## Scale",
+    "- Up to ~32 wide (X), ~24 tall (Y), depth ~4–6 (into −Z).",
+    "",
+    "## Materials",
+    "Primarily the document's palette; declare the blocks you place in palette.manifest.",
+    "",
+    "## Required metadata (set EXACTLY)",
+    `- metadata.trial_id = "${runId}"`,
+    `- metadata.prompting_method_id = "${promptMethodId}"`,
+    `- metadata.model_id = "${PHASE1_MODEL_ID}"`,
+    `- metadata.seed = ${task.seed}`,
+    `- metadata.server_state_id = "${task.serverStateId}"`,
+    "",
+    "## Style record",
+    "Keep style.name as the document's style; set style.rationale to one line on what you tightened.",
+    "",
+    "## Output (critical)",
+    "Emit ONE complete design artifact for the IMPROVED facade — full placements, not a diff.",
+    "Local origin x = 0, y = 0, z = 0; ground y = 0.",
+  ].join("\n");
+}
+
 const APPROACHES = {
   "v0-facade": async (task, ctx) => {
     const promptMethodId = "temple-facade-singleshot.v0";
@@ -320,6 +368,68 @@ const APPROACHES = {
       messages,
       prompt: "(design-doc-first — see design-doc.md + *.prompt.txt in this run dir)",
       promptMethodId,
+    };
+  },
+
+  "v3-designdoc-revise": async (task, ctx) => {
+    const promptMethodId = "temple-facade-designdoc-revise.v0";
+    const messages = [];
+    const roundImages = [];
+    let sumIn = 0;
+    let sumOut = 0;
+    let sumCost = 0;
+    const acc = (raw) => {
+      const u = raw.usage || {};
+      sumIn += u.input_tokens || 0;
+      sumOut += u.output_tokens || 0;
+      sumCost += raw.total_cost_usd || 0;
+    };
+
+    // Stage 1 — finalized design document.
+    const ddPrompt = composeDesignDocPrompt(task);
+    writeFileSync(join(ctx.dir, "design-doc.prompt.txt"), ddPrompt + "\n");
+    const dd = await requestText({ prompt: ddPrompt, model: PHASE1_MODEL_ID, onMessage: (m) => messages.push(m) });
+    acc(dd.raw);
+    writeFileSync(join(ctx.dir, "design-doc.md"), dd.text + "\n");
+    console.log(`  stage 1 (design doc): ${dd.text.length} chars`);
+
+    // Stage 2 — build from the document.
+    const buildPrompt = composeBuildFromDocPrompt(task, { promptMethodId, runId: ctx.runId, designDoc: dd.text });
+    writeFileSync(join(ctx.dir, "build.prompt.txt"), buildPrompt + "\n");
+    let res = await requestDesignArtifact({ prompt: buildPrompt, model: PHASE1_MODEL_ID, onMessage: (m) => messages.push(m) });
+    acc(res.raw);
+    let artifact = res.artifact;
+    console.log(`  stage 2 (build): ${(artifact.placements ?? []).length} ops`);
+
+    // Stage 3 — identity-preserving multimodal revision (render → see → tighten).
+    const wipName = "round-0.png";
+    await ctx.renderArtifact(artifact, { outPath: join(ctx.dir, wipName), view: task.view });
+    roundImages.push(wipName);
+    const revPrompt = composeDocRevisionPrompt(task, { promptMethodId, runId: ctx.runId, designDoc: dd.text });
+    writeFileSync(join(ctx.dir, "revise.prompt.txt"), revPrompt + "\n");
+    res = await requestDesignArtifactWithImage({
+      prompt: revPrompt,
+      images: [readFileSync(join(ctx.dir, wipName))],
+      model: PHASE1_MODEL_ID,
+      onMessage: (m) => messages.push(m),
+    });
+    acc(res.raw);
+    artifact = res.artifact;
+    console.log(`  stage 3 (revised): ${(artifact.placements ?? []).length} ops`);
+
+    const raw = {
+      subtype: "success",
+      num_turns: 3,
+      usage: { input_tokens: sumIn, output_tokens: sumOut },
+      total_cost_usd: sumCost,
+    };
+    return {
+      artifact,
+      raw,
+      messages,
+      prompt: "(design-doc + identity-preserving revision — see design-doc.md + *.prompt.txt)",
+      promptMethodId,
+      roundImages,
     };
   },
 };

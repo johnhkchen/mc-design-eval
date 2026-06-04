@@ -1,0 +1,915 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "004-v3-designdoc-revise",
+    "prompting_method_id": "temple-facade-designdoc-revise.v0",
+    "model_id": "claude-opus-4-8",
+    "seed": 11,
+    "server_state_id": "flat-creative-superflat.v1",
+    "target": "house"
+  },
+  "style": {
+    "name": "Brackish-tropical glazed pishtaq (Temple of the Tidewright)",
+    "rationale": "Tightened the φ silhouette, deepened the central iwan to a true 4-block recess with a stepped stair-sprung gold-lintel arch, replaced the thin plus with a bold gold Eye-of-Calm roundel, turned the fence-like bars into tower-only fluting ribs, and rebuilt the finial as varied slab/stair tiers — sharpening teal↔amber contrast without genericizing."
+  },
+  "palette": {
+    "manifest": [
+      "minecraft:smooth_sandstone",
+      "minecraft:cyan_glazed_terracotta",
+      "minecraft:quartz_block",
+      "minecraft:quartz_stairs",
+      "minecraft:diorite",
+      "minecraft:gold_block"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [
+        0,
+        0,
+        -4
+      ],
+      "to": [
+        14,
+        3,
+        0
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        0,
+        1
+      ],
+      "to": [
+        14,
+        1,
+        1
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        3,
+        0
+      ],
+      "to": [
+        14,
+        3,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        3,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        3,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        3,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        3,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        3,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        10,
+        3,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        12,
+        3,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        3,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        4,
+        -1
+      ],
+      "to": [
+        3,
+        15,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        4,
+        -1
+      ],
+      "to": [
+        14,
+        15,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        4,
+        -1
+      ],
+      "to": [
+        4,
+        15,
+        0
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        4,
+        -1
+      ],
+      "to": [
+        10,
+        15,
+        0
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        5,
+        4,
+        -4
+      ],
+      "to": [
+        5,
+        15,
+        0
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        4,
+        -4
+      ],
+      "to": [
+        9,
+        15,
+        0
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        4,
+        -4
+      ],
+      "to": [
+        8,
+        15,
+        -4
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        13,
+        -3
+      ],
+      "to": [
+        8,
+        15,
+        -2
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        4,
+        -4
+      ],
+      "to": [
+        8,
+        4,
+        0
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        4,
+        1
+      ],
+      "to": [
+        0,
+        15,
+        1
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        2,
+        4,
+        1
+      ],
+      "to": [
+        2,
+        15,
+        1
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        12,
+        4,
+        1
+      ],
+      "to": [
+        12,
+        15,
+        1
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        14,
+        4,
+        1
+      ],
+      "to": [
+        14,
+        15,
+        1
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        7,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        8,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        9,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        10,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        7,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        8,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        9,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        10,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        7,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        8,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        9,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        10,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        7,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        8,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        9,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        10,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        11,
+        -1
+      ],
+      "block": "minecraft:quartz_stairs",
+      "state": {
+        "facing": "east",
+        "half": "top"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        11,
+        -1
+      ],
+      "block": "minecraft:quartz_stairs",
+      "state": {
+        "facing": "west",
+        "half": "top"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        6,
+        12,
+        -1
+      ],
+      "to": [
+        8,
+        12,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        14,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        14,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        14,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        13,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        15,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        13,
+        -1
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        13,
+        -1
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        15,
+        -1
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        15,
+        -1
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        15,
+        1
+      ],
+      "to": [
+        14,
+        15,
+        1
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        16,
+        -1
+      ],
+      "to": [
+        14,
+        16,
+        1
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        17,
+        0
+      ],
+      "to": [
+        14,
+        17,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        17,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        17,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        17,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        17,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        17,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        10,
+        17,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        12,
+        17,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        17,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        18,
+        -1
+      ],
+      "to": [
+        10,
+        19,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "line",
+      "from": [
+        4,
+        18,
+        0
+      ],
+      "to": [
+        4,
+        19,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        10,
+        18,
+        0
+      ],
+      "to": [
+        10,
+        19,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        4,
+        19,
+        1
+      ],
+      "to": [
+        10,
+        19,
+        1
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        18,
+        0
+      ],
+      "block": "minecraft:quartz_stairs",
+      "state": {
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        18,
+        0
+      ],
+      "block": "minecraft:quartz_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "fill",
+      "from": [
+        5,
+        20,
+        -1
+      ],
+      "to": [
+        9,
+        21,
+        0
+      ],
+      "block": "minecraft:cyan_glazed_terracotta"
+    },
+    {
+      "op": "line",
+      "from": [
+        5,
+        20,
+        0
+      ],
+      "to": [
+        5,
+        21,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        9,
+        20,
+        0
+      ],
+      "to": [
+        9,
+        21,
+        0
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        5,
+        21,
+        1
+      ],
+      "to": [
+        9,
+        21,
+        1
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        20,
+        0
+      ],
+      "block": "minecraft:quartz_stairs",
+      "state": {
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        10,
+        20,
+        0
+      ],
+      "block": "minecraft:quartz_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        6,
+        22,
+        0
+      ],
+      "to": [
+        8,
+        22,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        22,
+        0
+      ],
+      "block": "minecraft:quartz_stairs",
+      "state": {
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        9,
+        22,
+        0
+      ],
+      "block": "minecraft:quartz_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        23,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    }
+  ]
+}

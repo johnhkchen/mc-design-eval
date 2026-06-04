@@ -31,6 +31,8 @@ automatically.
 - **`v1-multimodal`** — draft → render head-on → critique prompt → re-emit improved (2 calls).
 - **`v2-designdoc`** — write a finalized design document (lore, architectural rationale,
   color-theory palette, motifs, features), then build from it (2 calls).
+- **`v3-designdoc-revise`** — `v2` plus an *identity-preserving* multimodal revision that tightens
+  geometry/proportion while honoring the document's palette and concept (3 calls).
 
 **Learnings** — what works and what doesn't is tracked in
 [`docs/knowledge/design-learnings.md`](../../docs/knowledge/design-learnings.md) (the
@@ -45,6 +47,7 @@ auto-injected corpus). Review and update it after each run.
 | 1 | 2026-06-04 | `v0-facade` | 2908 | 9841/26219 | $0.7602 | baseline: open style + color, frontal shot |
 | 2 | 2026-06-04 | `v1-multimodal` | 1820 | 19830/59460 | $1.6926 | draft + 1 visual-feedback revision |
 | 3 | 2026-06-04 | `v2-designdoc` | 1372 | 19767/35588 | $1.0759 | design-document-first: lore + architectural rationale + color-theory palette, then build |
+| 4 | 2026-06-04 | `v3-designdoc-revise` | 959 | 29639/60139 | $1.7982 | design-doc + identity-preserving multimodal revision (P3+P4) |
 
 ## Gallery
 
@@ -71,5 +74,13 @@ auto-injected corpus). Review and update it after each run.
 1372 blocks · 19767/35588 tok · $1.0759
 
 > design-document-first: lore + architectural rationale + color-theory palette, then build
+
+### 004 — `v3-designdoc-revise` · 2026-06-04
+
+![temple-facade run 4](runs/004-v3-designdoc-revise/render.png)
+
+959 blocks · 29639/60139 tok · $1.7982
+
+> design-doc + identity-preserving multimodal revision (P3+P4)
 
 <!-- RUNS:END -->

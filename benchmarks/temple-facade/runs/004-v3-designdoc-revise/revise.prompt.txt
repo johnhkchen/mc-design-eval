@@ -1,0 +1,62 @@
+You are a master Minecraft architect refining your own work. ATTACHED is a head-on render
+of the temple facade you built from the design document below. Improve it — but STAY TRUE to
+the document: keep its style, color palette, motifs, and concept. Do NOT genericize the
+colors, simplify to a conventional look, or abandon the identity. Refine, do not replace.
+
+## Your design document (honor it)
+# Temple of the Tidewright — Front Elevation Design Document
+
+## 1. Lore & setting
+The **Sundari Coast cult of the Tidewright**, a deity who "draws the sea in and lets it go" — patron of fishers, salt-harvesters, and safe return. The temple sits on a windward headland where monsoon rain is heavy and salt spray constant. This is an *invented brackish-tropical tradition*: part Southeast-Asian glazed-ceramic temple, part stepped coastal lighthouse-shrine. Worship is **tidal** — the great central door opens only at high water, so the facade is built to frame that single luminous threshold.
+
+## 2. Aesthetic & architectural logic
+The order is a **stepped pishtaq-and-flanking-tower silhouette**: a tall recessed central portal between two squat buttress-towers, crowned by a tiered finial. *Why:* heavy monsoon load demands a steep shedding profile and thick masonry piers; salt air rots stone but spares **glazed ceramic tile**, so the whole skin is fired and glazed — practical *and* radiant. The deep portal recess (relief depth ~3 blocks) shelters worshippers and casts a strong shadow that reads as the deity's "drawn breath." Verticality pulls the eye to the crowning finial — heaven over horizon.
+
+## 3. Color palette (complementary, restrained)
+- **Dominant — deep teal** (glazed sea): `cyan_glazed_terracotta`. The sea itself; covers field walls and tower faces.
+- **Supporting — warm sandstone** (the headland): `smooth_sandstone` for base, piers, framing bands — grounds the cool teal.
+- **Supporting — bleached coral white**: `diorite`/`quartz_block` cornice lines for crisp shadow edges.
+- **Accent — amber-gold** (sun on water): `gold_block`, used *only* on the finial and door lintel.
+
+Teal↔amber is a **complementary** pair: cool body, warm focal spark. Sandstone/white mediate so it never shouts — hierarchy, not rainbow.
+
+## 4. Motifs & ornament
+- **Wave-scroll frieze** — running tile band along the entablature and base plinth (the tide's edge).
+- **Drawn-thread lattice** — vertical fluting on the towers, evoking nets and rain.
+- **The Eye-of-Calm** — a single gold roundel centered above the door (the Tidewright's gaze).
+
+## 5. Features & proportion
+Governing ratio **1 : φ (≈1.6)** — total height ≈ 1.6× width. Three-part vertical: **base plinth (1 unit) : portal body (3) : crowning finial (1.5)**. Central portal occupies the middle third of the width; flanking towers each a quarter. Cornice projects 1 block; portal recesses 3. Two slim niche-windows per tower, gold-rimmed. The crowning element is a **stepped three-tier finial** capped in gold.
+
+## Improve specifically (judge from the render)
+- Proportion & rhythm: fix awkward proportions and uneven bays, per the document's ratios.
+- Geometry: replace clumsy uniform 45° steps with varied slab+stair pitches; make the iwan /
+  arches read as real (stepped) arches, not flat panels; clean misaligned blocks.
+- Relief & depth: deepen the portal and niches; strengthen the cornice, cresting, and base.
+- Color: keep the document's palette and its dominant/supporting/accent hierarchy; if
+  anything, sharpen the contrast — do NOT drift toward monochrome or convention.
+- Fix anything broken, floating, or unintentional.
+
+## Orientation (unchanged)
+Facade FACES +Z, X–Y plane (X = width, Y = height, y = 0 ground), relief into −Z, front face
+at the highest Z. Model only the front and its relief.
+
+## Scale
+- Up to ~32 wide (X), ~24 tall (Y), depth ~4–6 (into −Z).
+
+## Materials
+Primarily the document's palette; declare the blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "004-v3-designdoc-revise"
+- metadata.prompting_method_id = "temple-facade-designdoc-revise.v0"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Keep style.name as the document's style; set style.rationale to one line on what you tightened.
+
+## Output (critical)
+Emit ONE complete design artifact for the IMPROVED facade — full placements, not a diff.
+Local origin x = 0, y = 0, z = 0; ground y = 0.
