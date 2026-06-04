@@ -1,0 +1,1538 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "005-vN-bestof-c1",
+    "prompting_method_id": "temple-facade-bestof.v0",
+    "model_id": "claude-opus-4-8",
+    "seed": 11,
+    "server_state_id": "flat-creative-superflat.v1",
+    "target": "house"
+  },
+  "style": {
+    "name": "Halreni Salt-Vigil — heavy-based stepped temple order",
+    "rationale": "A wind-resistant trapezoidal mass of sun-bleached sandstone with deep-shadow niches and a recessed sea-green portal, crowned by a stepped attic and a single prismarine beacon-eye watching for Maru."
+  },
+  "palette": {
+    "manifest": [
+      "minecraft:smooth_sandstone",
+      "minecraft:cut_red_sandstone",
+      "minecraft:red_sandstone_stairs",
+      "minecraft:granite",
+      "minecraft:prismarine_bricks",
+      "minecraft:prismarine_brick_stairs",
+      "minecraft:polished_deepslate",
+      "minecraft:polished_deepslate_slab",
+      "minecraft:sea_lantern",
+      "minecraft:beacon"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [
+        0,
+        5,
+        -4
+      ],
+      "to": [
+        32,
+        16,
+        -4
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        5,
+        -3
+      ],
+      "to": [
+        13,
+        16,
+        -3
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        5,
+        -3
+      ],
+      "to": [
+        32,
+        16,
+        -3
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        0,
+        -4
+      ],
+      "to": [
+        32,
+        1,
+        0
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        1,
+        0
+      ],
+      "to": [
+        32,
+        1,
+        0
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        2,
+        -4
+      ],
+      "to": [
+        31,
+        3,
+        -1
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        1,
+        3,
+        -1
+      ],
+      "to": [
+        31,
+        3,
+        -1
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        2,
+        4,
+        -4
+      ],
+      "to": [
+        30,
+        4,
+        -2
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        2,
+        4,
+        -2
+      ],
+      "to": [
+        30,
+        4,
+        -2
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        5,
+        -2
+      ],
+      "to": [
+        0,
+        16,
+        -2
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        32,
+        5,
+        -2
+      ],
+      "to": [
+        32,
+        16,
+        -2
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        5,
+        -2
+      ],
+      "to": [
+        3,
+        13,
+        0
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        5,
+        -2
+      ],
+      "to": [
+        3,
+        5,
+        0
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        13,
+        -2
+      ],
+      "to": [
+        3,
+        13,
+        0
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        9,
+        -2
+      ],
+      "to": [
+        3,
+        9,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        2,
+        6,
+        0
+      ],
+      "to": [
+        2,
+        12,
+        0
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        5,
+        -2
+      ],
+      "to": [
+        12,
+        13,
+        0
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        5,
+        -2
+      ],
+      "to": [
+        12,
+        5,
+        0
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        13,
+        -2
+      ],
+      "to": [
+        12,
+        13,
+        0
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        9,
+        -2
+      ],
+      "to": [
+        12,
+        9,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        11,
+        6,
+        0
+      ],
+      "to": [
+        11,
+        12,
+        0
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        5,
+        -2
+      ],
+      "to": [
+        22,
+        13,
+        0
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        5,
+        -2
+      ],
+      "to": [
+        22,
+        5,
+        0
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        13,
+        -2
+      ],
+      "to": [
+        22,
+        13,
+        0
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        9,
+        -2
+      ],
+      "to": [
+        22,
+        9,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        21,
+        6,
+        0
+      ],
+      "to": [
+        21,
+        12,
+        0
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        29,
+        5,
+        -2
+      ],
+      "to": [
+        31,
+        13,
+        0
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        29,
+        5,
+        -2
+      ],
+      "to": [
+        31,
+        5,
+        0
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        29,
+        13,
+        -2
+      ],
+      "to": [
+        31,
+        13,
+        0
+      ],
+      "block": "minecraft:granite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        29,
+        9,
+        -2
+      ],
+      "to": [
+        31,
+        9,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        30,
+        6,
+        0
+      ],
+      "to": [
+        30,
+        12,
+        0
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        5,
+        -2
+      ],
+      "to": [
+        9,
+        5,
+        -2
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        13,
+        -2
+      ],
+      "to": [
+        9,
+        13,
+        -2
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        4,
+        6,
+        -2
+      ],
+      "to": [
+        4,
+        12,
+        -2
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "line",
+      "from": [
+        9,
+        6,
+        -2
+      ],
+      "to": [
+        9,
+        12,
+        -2
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "line",
+      "from": [
+        4,
+        6,
+        -2
+      ],
+      "to": [
+        9,
+        6,
+        -2
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "line",
+      "from": [
+        4,
+        12,
+        -2
+      ],
+      "to": [
+        9,
+        12,
+        -2
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "line",
+      "from": [
+        6,
+        6,
+        -3
+      ],
+      "to": [
+        6,
+        12,
+        -3
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "line",
+      "from": [
+        4,
+        9,
+        -3
+      ],
+      "to": [
+        9,
+        9,
+        -3
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        7,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        7,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        11,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        11,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        23,
+        5,
+        -2
+      ],
+      "to": [
+        28,
+        5,
+        -2
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        23,
+        13,
+        -2
+      ],
+      "to": [
+        28,
+        13,
+        -2
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        23,
+        6,
+        -2
+      ],
+      "to": [
+        23,
+        12,
+        -2
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "line",
+      "from": [
+        28,
+        6,
+        -2
+      ],
+      "to": [
+        28,
+        12,
+        -2
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "line",
+      "from": [
+        23,
+        6,
+        -2
+      ],
+      "to": [
+        28,
+        6,
+        -2
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "line",
+      "from": [
+        23,
+        12,
+        -2
+      ],
+      "to": [
+        28,
+        12,
+        -2
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "line",
+      "from": [
+        26,
+        6,
+        -3
+      ],
+      "to": [
+        26,
+        12,
+        -3
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "line",
+      "from": [
+        23,
+        9,
+        -3
+      ],
+      "to": [
+        28,
+        9,
+        -3
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        7,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        7,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        11,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        11,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        5,
+        -4
+      ],
+      "to": [
+        18,
+        15,
+        -4
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        6,
+        -3
+      ],
+      "to": [
+        14,
+        15,
+        -3
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        6,
+        -3
+      ],
+      "to": [
+        18,
+        15,
+        -3
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        5,
+        -4
+      ],
+      "to": [
+        18,
+        5,
+        -1
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        5,
+        -2
+      ],
+      "to": [
+        13,
+        13,
+        -1
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        5,
+        -2
+      ],
+      "to": [
+        19,
+        13,
+        -1
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        14,
+        -3
+      ],
+      "to": [
+        19,
+        15,
+        -1
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        13,
+        -1
+      ],
+      "block": "minecraft:prismarine_brick_stairs",
+      "state": {
+        "facing": "east",
+        "half": "top"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        18,
+        13,
+        -1
+      ],
+      "block": "minecraft:prismarine_brick_stairs",
+      "state": {
+        "facing": "west",
+        "half": "top"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        9,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        10,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        12,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        20,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        21,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        14,
+        -1
+      ],
+      "block": "minecraft:red_sandstone_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        15,
+        -1
+      ],
+      "to": [
+        12,
+        15,
+        -1
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "line",
+      "from": [
+        20,
+        15,
+        -1
+      ],
+      "to": [
+        32,
+        15,
+        -1
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        16,
+        -2
+      ],
+      "to": [
+        32,
+        16,
+        0
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        17,
+        0
+      ],
+      "to": [
+        32,
+        17,
+        0
+      ],
+      "block": "minecraft:polished_deepslate_slab",
+      "state": {
+        "type": "bottom"
+      }
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        17,
+        -3
+      ],
+      "to": [
+        29,
+        18,
+        -2
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        3,
+        18,
+        -2
+      ],
+      "to": [
+        29,
+        18,
+        -2
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        19,
+        -3
+      ],
+      "to": [
+        23,
+        19,
+        -2
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        9,
+        19,
+        -2
+      ],
+      "to": [
+        23,
+        19,
+        -2
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        20,
+        -3
+      ],
+      "to": [
+        18,
+        20,
+        -2
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        14,
+        20,
+        -2
+      ],
+      "to": [
+        18,
+        20,
+        -2
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        18,
+        -3
+      ],
+      "to": [
+        18,
+        22,
+        -3
+      ],
+      "block": "minecraft:smooth_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        22,
+        -2
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        21,
+        -2
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        21,
+        -2
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        20,
+        -2
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        18,
+        20,
+        -2
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        19,
+        -2
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        19,
+        -2
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        18,
+        -2
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        21,
+        -2
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        20,
+        -2
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        20,
+        -2
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        19,
+        -2
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        20,
+        -2
+      ],
+      "block": "minecraft:sea_lantern"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        23,
+        -3
+      ],
+      "to": [
+        17,
+        23,
+        -2
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        24,
+        -2
+      ],
+      "block": "minecraft:sea_lantern"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        24,
+        -2
+      ],
+      "block": "minecraft:sea_lantern"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        24,
+        -2
+      ],
+      "block": "minecraft:beacon"
+    }
+  ]
+}

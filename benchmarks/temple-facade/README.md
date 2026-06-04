@@ -48,6 +48,7 @@ auto-injected corpus). Review and update it after each run.
 | 2 | 2026-06-04 | `v1-multimodal` | 4 | 1820 | 19830/59460 | $1.6926 | — | draft + 1 visual-feedback revision |
 | 3 | 2026-06-04 | `v2-designdoc` | 3 | 1372 | 19767/35588 | $1.0759 | — | design-document-first: lore + architectural rationale + color-theory palette, then build |
 | 4 | 2026-06-04 | `v3-designdoc-revise` | 3 | 959 | 29639/60139 | $1.7982 | — | design-doc + identity-preserving multimodal revision (P3+P4) |
+| 5 | 2026-06-04 | `vN-bestof` | 3.67 | 2273 | 126140/124371 | $5.3415 | 1727s | best-of-4 design-doc, judge-selected (test: does selection break the 3-4 plateau?) |
 
 ## Gallery
 
@@ -82,5 +83,13 @@ score 3/5 · 1372 blocks · 19767/35588 tok · $1.0759
 score 3/5 · 959 blocks · 29639/60139 tok · $1.7982
 
 > design-doc + identity-preserving multimodal revision (P3+P4)
+
+### 005 — `vN-bestof` · 2026-06-04
+
+![temple-facade run 5](runs/005-vN-bestof/render.png)
+
+score 3.67/5 · 2273 blocks · 126140/124371 tok · $5.3415
+
+> best-of-4 design-doc, judge-selected (test: does selection break the 3-4 plateau?)
 
 <!-- RUNS:END -->

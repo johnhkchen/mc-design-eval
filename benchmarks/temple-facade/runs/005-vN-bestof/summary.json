@@ -1,0 +1,92 @@
+{
+  "seq": 5,
+  "runId": "005-vN-bestof",
+  "date": "2026-06-04",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vN-bestof",
+  "promptMethodId": "temple-facade-bestof.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 2273,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      -4
+    ],
+    "max": [
+      32,
+      24,
+      0
+    ]
+  },
+  "tokensIn": 126140,
+  "tokensOut": 124371,
+  "costUsd": 5.34151525,
+  "durationMs": 1727120,
+  "score": {
+    "proportion": 4,
+    "color": 4,
+    "detail": 3.33,
+    "fidelity": 3.67,
+    "overall": 3.67,
+    "samples": 3,
+    "rubric": "v1",
+    "notes": "Disciplined sand/deepslate/prismarine palette and clean base-middle-crown reading carry a recognizable temple, but the coffered bays read more as windows than ornament and the thin finial weakens the crown.",
+    "usage": {
+      "input_tokens": 10672,
+      "output_tokens": 1636,
+      "cost_usd": 0.25749500000000003
+    }
+  },
+  "roundImages": [],
+  "bestof": {
+    "k": 4,
+    "completed": 4,
+    "winner": 1,
+    "candScores": [
+      {
+        "i": 1,
+        "overall": 4,
+        "proportion": 4,
+        "color": 3.33,
+        "detail": 4,
+        "fidelity": 4
+      },
+      {
+        "i": 3,
+        "overall": 3.67,
+        "proportion": 3.67,
+        "color": 3.67,
+        "detail": 3,
+        "fidelity": 3.67
+      },
+      {
+        "i": 0,
+        "overall": 3.33,
+        "proportion": 3.33,
+        "color": 3.33,
+        "detail": 3.33,
+        "fidelity": 3.33
+      },
+      {
+        "i": 2,
+        "overall": 3,
+        "proportion": 3,
+        "color": 3.33,
+        "detail": 3,
+        "fidelity": 3
+      }
+    ]
+  },
+  "note": "best-of-4 design-doc, judge-selected (test: does selection break the 3-4 plateau?)"
+}

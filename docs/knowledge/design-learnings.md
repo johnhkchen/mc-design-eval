@@ -26,6 +26,14 @@ the per-run reasoning behind each principle. Renders live in
 > creative/exotic interpretation** — possibly in tension with the creativity goal. Decide consciously
 > whether the rubric should reward convention or invention before trusting cross-style comparisons.
 
+> **🏁 Verdict (evidence-based): the harness-efficiency phase is plateaued — raise the ceiling next.**
+> No prompting technique moved the rubric score (all 3–4); **best-of-4 selection did not exceed a
+> single shot** (winner 3.67 vs v0's 4.0) at **~7× cost and ~30× wall-clock**; every run fails the
+> *same* structural way (relief + crown). Two prerequisites the data exposed before the image-to-voxel
+> raise: **(1) a finer metric** — judge noise ≈ 0.3–0.5 overall is comparable to the effect sizes, so
+> move to **pairwise/Elo** (A-vs-B) instead of absolute 1–5; **(2) decide convention vs. invention** —
+> `fidelity` rewards an obvious temple, so best-of-N *selects against* the creativity we asked for.
+
 1. **The model matches the bar you set.** Briefs that cap scope ("modest 7×7–9×9", "favor
    structural clarity over ornament") produced a 333-block gray box; removing the cap on the
    *same* model/path produced an 8,018-block temple. Invite ambition explicitly; never cap
@@ -64,6 +72,14 @@ the per-run reasoning behind each principle. Renders live in
    rationale — fixed either. This is the real plateau: a capability/medium limit (relief is hard to
    express in the coordinate DSL; 3D massing/proportion is a model weak spot), not something more
    prompting will move. It is the evidence-based trigger to weigh the image-to-voxel ceiling raise.
+8. **Test-time selection (best-of-N) does not break the ceiling — plateau confirmed.** Best-of-4
+   (4 parallel design-doc candidates, judge-selected) gave candidate overalls 4.0 / 3.67 / 3.33 / 3.0;
+   the winner re-judged at **3.67** — the *same band as one cheap v0 (4.0, $0.76, fast)*. Selection
+   bought **zero** quality gain at **~7× cost ($5.34)** and **~30× wall-clock (~29 min)** — and rate
+   limits made the "parallel" K=4 run effectively serial, so the free-iteration economics hold for
+   dollars but **break on wall-clock**. The structural ceiling (P7) caps the best sample too. Scaling
+   test-time compute on this harness is a dead end; the next lever is the ceiling raise, not more
+   sampling or prompting.
 
 ## Tunable parameters (and what's actually reachable)
 
@@ -136,3 +152,13 @@ Design-doc → build → **identity-preserving** multimodal revision. (3 calls, 
 - **→** Identity-preserving revision is the most refined process, at higher cost (P3 updated). Open
   questions: is the 3rd call worth it vs just v2? And does higher `--effort` on the *doc* stage beat
   *adding* a revision? → an `--effort` sweep is the next axis (temperature still needs the API path).
+
+### temple-facade 005 · `vN-bestof` (K=4) · 2026-06-04
+Best-of-4 design-doc candidates, judge-selected (the test-time-selection / plateau test).
+(2,273 blocks, **$5.34**, **~29 min** wall-clock, 126k/124k tok.)
+- **Candidate overalls:** 4.0 / 3.67 / 3.33 / 3.0 → winner re-judged **3.67**.
+- **Result: the plateau held.** The best of 4 lands in the *same band as a single v0* (4.0, $0.76,
+  fast). Selection bought no quality gain at ~7× cost and ~30× wall-clock; rate limits serialized the
+  "parallel" run; the winner still shows the universal shallow-relief + awkward-crown weakness.
+- **→** Test-time selection does not break the structural ceiling (P8). The harness-efficiency phase
+  is plateaued — image-to-voxel ceiling raise is the justified next move (after a finer metric).
