@@ -1,0 +1,15 @@
+{
+  "name": "mc-design-eval-palettes",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Style palettes (survival-obtainable block whitelists) and their format validator for mc-design-eval.",
+  "scripts": {
+    "validate": "node validate.mjs",
+    "test": "node validate.mjs industrial.json"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0",
+    "minecraft-data": "^3.110.2"
+  }
+}
