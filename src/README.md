@@ -341,3 +341,28 @@ default near-`#000000`); near-black *foreground* is documented collateral — pa
 to disable. **Coverage note:** median-cut's population-halving split yields dyadic per-cluster
 coverage; coverage becomes dominance-informative after same-block **merge** (visible in validate
 mode, where a constrained palette merges many clusters into one block).
+
+### Image → real-block grid — `image-grid.mjs` (S-022)
+
+The spatial sibling of the extractor: instead of "which blocks?" it answers "**lay this facade out on
+a block grid.**" Decode → area-downsample to an N×M grid → per cell, average only the *foreground*
+pixels (background dropped) → match the mean color to the nearest real block (table + engine). Cells
+that are mostly background become **air** (`null`) — a facade is a silhouette, not a solid rectangle.
+**Dithering is off** (one nearest match per cell → clean architectural color fields).
+
+```bash
+npm run grid:build -- benchmarks/temple-facade/concepts/taj-C-flash.png --n 48
+npm run grid:build -- <img> --whitelist palettes/neoclassical.json   # validate against a manifest
+```
+
+`n` is the held-constant resolution (default **48**, the concept-series width); rows derive from the
+image aspect, `m = round(n·H/W)`. A cell is *filled* when its foreground fraction ≥ `coverageThreshold`
+(default 0.5), else air. Two modes share one pipeline (reusing the extractor's `resolvePalette`):
+**discover** (all 305 blocks) vs **validate** (a `whitelist`/manifest — then `nearestLab` can only
+return a manifest block, so **palette adherence is structural**: `outOfPalette === 0`, *measured* in
+the result, not assumed). `comparePalettes(usedBlocks, declared)` gives the **extracted-vs-declared**
+read `{present, missing, added}`. The pure core (`gridFromPixels`, `comparePalettes`,
+`renderGridSwatch`) is decode-free and unit-tested on synthetic RGBA buffers; decode is isolated to
+`gridFromImage`, which reuses the extractor's lazy `decodeImage`. The CLI writes a **gitignored**
+swatch PNG (each cell = its matched block's table color; air transparent) beside the input or to
+`--out`.

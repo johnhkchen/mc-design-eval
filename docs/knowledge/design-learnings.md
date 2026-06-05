@@ -1191,3 +1191,50 @@ reported in `missing` and skipped — the table is full-cube-only by constructio
 `npm test` 182/182 green (+16 over the E-10 color layer). The durable products are the extractor + CLI
 and this worked example: a concrete "blocks in this facade" readout that grounds the concept image to
 a real, palette-disciplined block set — application point #1 of the CIE-Lab matcher, no 3-D work.
+
+## E-10 worked example — image → real-block grid (T-022-01)
+
+The S-022 grid sampler (`src/color/image-grid.mjs`, CLI `npm run grid:build`) is the spatial sibling
+of the extractor: not "which blocks?" but "**lay this facade out on a block grid.**" Decode →
+area-downsample to N×M → per cell, average the *foreground* pixels → match to the nearest real block;
+mostly-background cells become **air**. Dithering OFF. Run on the same locked concept,
+**`taj-C-flash.png`** (1024²), at the held-constant **n = 48**.
+
+**Discover mode** (full 305-block set) — `48×48 grid · 1202/2304 cells filled · 57 blocks · mean ΔE
+6.47 · outOfPalette 0`. The swatch render (gitignored PNG) is a *visibly recognizable* low-res Taj:
+gold onion dome, central pointed-arch iwan, symmetric two-storey window banks, corner chhatris, a
+green plinth. Top fields: `orange_terracotta` 14% / `dark_prismarine` 14% (teal trim+ground) /
+`chiseled_red_sandstone`+`smooth_red_sandstone` ~16% body / `gold_block`+`raw_gold_block` domes /
+`lapis_block` window glass. Same warm-sandstone-with-gold reading the extractor gave — and the grid
+*places* it. **The 48-cell width is the literal detail cap**: the dome's curve, the arch's point, and
+the window mullions are all resolved to exactly as much detail as 48 columns allow and no more — the
+E-10 thesis (2) made visible.
+
+**Palette adherence (spec §9), measured not assumed.** `outOfPalette` is computed by independently
+testing every filled cell's block against the candidate key set. Discover → **0** (every cell is a
+real obtainable block). Validate vs `palettes/neoclassical.json` → **0** by construction
+(`nearestLab` can only return a manifest block), and the result still surfaces the **21** non-full-cube
+manifest ids (stairs/slabs/panes/`lantern`/`end_rod`) as `missing` — the table is full-cube-only.
+Validate collapses the facade onto 4 blocks at mean ΔE **28.8** (`glowstone` 47%, `redstone_lamp` 23%,
+`light_gray_concrete`, `chiseled_stone_bricks`) — the same palette-vs-fidelity tradeoff the extractor
+exposed, now per-cell: a clean grid, but a poor color fit against the wrong manifest.
+
+**Extracted-vs-declared** (`comparePalettes`, discover `usedBlocks` vs neoclassical `.blocks`):
+`present 1` (`redstone_lamp`), `missing 42`, `added 56`. Read: the Taj concept honored almost none of
+the *neoclassical* doc — which is the **correct** answer, because the Taj brief is not neoclassical.
+The comparison here is illustrative of the metric, not a verdict on the concept; run against the
+concept's *own* manifest it becomes the real "did the image honor the doc?" signal — high `present`,
+low `added` = faithful; large `added` = the image invented materials the doc never declared.
+
+**Two durable observations.**
+- **Air is load-bearing.** A silhouette on near-black means ~48% of cells are background. Mapping
+  them to "nearest block to black" would yield a solid rectangle and make adherence/coverage
+  meaningless. A foreground-coverage threshold (default 0.5, averaging *only* foreground pixels so
+  edge cells report the facade color, not a black-muddied blend) is what makes the grid a facade.
+- **Show the block, not the pixel.** The swatch paints each cell with its *matched block's* table
+  color, not the source pixel — so the visualization is an honest preview of what would actually be
+  placed (the resolution + palette reduction), not a thumbnail of the input.
+
+`npm test` 196/196 green (+14). Output is byte-deterministic (grid JSON and swatch PNG identical
+across runs). Durable products: the grid sampler + CLI + swatch viz and this worked example —
+application point #2 of the CIE-Lab matcher, still no 3-D work (that is E-09's path).
