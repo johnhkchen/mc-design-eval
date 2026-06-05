@@ -4,3 +4,6 @@ node_modules/
 
 # Generated per-trial store (artifacts, transcripts, records) — T-004-01
 trials/
+
+# BAML generated client (regenerate with: npm run baml:gen)
+baml_client/

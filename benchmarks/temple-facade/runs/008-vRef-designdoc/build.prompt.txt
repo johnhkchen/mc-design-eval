@@ -1,0 +1,68 @@
+You are a master Minecraft architect. Below is your FINALIZED design document for a temple
+facade. Build it as a structured design artifact that faithfully realizes the document, at
+GENEROUS SCALE and with DEEP RELIEF. Earlier facades were too small and too flat — do not
+repeat that; use the room you are given.
+
+## Finalized design document
+# Temple of the Azure Mandate
+
+## 1. Lore & setting
+A memorial-temple of the **Heaven-Facing Order**, raised on a forested mountain stair to honor a unifying sage-founder. Like the reference — a 20th-century mausoleum speaking in imperial grammar — it fuses civic solemnity with sacred ceremony: a hall you *ascend* to, not merely enter.
+
+## 2. Aesthetic & architectural logic
+The reference reads as **mass below, sky above**: a fortress-like white granite podium of battered, coursed ashlar grounds a soaring **double-eaved blue-glazed hip roof**. The eye climbs cool stone, then bursts into saturated cobalt. The logic is contrast and hierarchy — heavy/light, matte/glazed, neutral/vivid — and it works because the single bold roof reads instantly against pale walls and green hill.
+
+## 3. Color palette (color theory)
+**Complementary harmony**, neutral-anchored (cool blue vs. warm gold over white).
+- **Dominant — pale granite white:** `calcite` (battered walls, pylons, pilasters).
+- **Supporting — cobalt roof:** `blue_concrete` (tiled eaves and ridge mass) — the reference's signature glazed blue.
+- **Accent — imperial gold:** `gold_block`, used sparingly for the three lintel inscriptions.
+- **Glazed ridge accent:** `blue_glazed_terracotta` at roof crests and ornaments, catching light like real tile.
+- **Shadow/base grey:** `andesite` for the broad ceremonial stair.
+
+## 4. Motifs & ornament
+From the reference: **upturned eave-ends and ridge beasts**, a **carved tablet cartouche** crowning the central bay, **dentil-like bracket courses (dougong)** beneath each eave, and **three gold-charactered lintels** over the openings. Adapted: the bracket course becomes a repeating calcite-and-gold corbel band; the tablet becomes a recessed quartz panel framing a gold glyph.
+
+## 5. Architectural features & proportion
+- **Base:** broad battered podium with two flanking pylons, ~⅓ of total height.
+- **Supports:** four engaged calcite pilasters dividing three bays.
+- **Entablature/eaves:** dentil bracket course, then a **double blue roof** — lower eave shading the entrance, upper roof the crown.
+- **Crowning element:** the cobalt hip roof with glazed-terracotta ridge, the facade's focal mass.
+- **Openings:** three round-arched portals; **central bay widest** (golden-ratio dominant, ~1.6× the flanking arches), each capped by a gold-lettered lintel.
+- **Proportion:** podium : wall : roof ≈ **1 : 1.5 : 1**, symmetrical about the central axis.
+
+## Orientation (photographed head-on)
+Facade FACES +Z, in the X–Y plane (X = width, Y = height, y = 0 ground). Front face at the
+highest Z; relief recedes into −Z. Model only the front and its relief.
+
+## Scale & RELIEF — use it (this is judged)
+- Width up to ~48 (X), height up to ~40 (Y) including the crown. Build big.
+- DEEP relief: up to ~16 blocks of depth into −Z, and genuinely use it. Columns/buttresses
+  project several blocks PROUD of the wall; the central portal RECESSES several blocks deep;
+  cornices, string courses, and the crown step forward and back across MULTIPLE Z-layers. A
+  near-flat screen only 4–6 deep is a failure.
+- CROWN proportion: the crowning element (pediment / parapet / attic / cresting) must span the
+  facade's full width and have real height — a deliberate culmination of the body, never a
+  small cap perched on a wide base.
+
+## Realize the document with craft
+- Build every feature the document specifies; honor its proportion ratios and palette.
+- Frame openings with deep reveals; avoid uniform 45° slopes (vary pitch with slab+stair
+  combos; step curves/arches); use voxel block `state` for mouldings and trim.
+- Use `fill`/`box` for masses and `line` for shafts/edges to stay efficient at this scale.
+
+## Materials
+Primarily the document's palette; declare the blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "008-vRef-designdoc"
+- metadata.prompting_method_id = "temple-facade-reference-designdoc.v0"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Set style.name to the document's style label and style.rationale to one line tying the build
+to the document.
+
+Local origin at x = 0, y = 0, z = 0 (ground at y = 0).

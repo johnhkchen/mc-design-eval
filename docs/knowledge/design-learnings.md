@@ -99,6 +99,15 @@ the per-run reasoning behind each principle. Renders live in
    like the one genuinely sticky dimension under monolithic prompting — a prime target for the
    structured approach. (Also: a heavy prompt made the build stage return prose instead of JSON once —
    the seam now retries once on malformed output, but that is a band-aid; structured I/O is the fix.)
+10. **The structured-output failures are NARRATION, not truncation.** Raw build output captured
+    directly: the model leads with prose ("Looking at this, I'll build the Temple of …"), then the
+    JSON object, then a prose feature-summary. `stop_reason` was end_turn (never max_tokens), and the
+    JSON itself is tiny (~98 ops) — the build never overflows, it *narrates*. Severity is stochastic:
+    mild (recoverable), total (v5: "Done. The…", prose only), or confusing (vBAML: BAML's SAP
+    mis-located the object → "missing style/palette"). A dumb `first-{ … last-}` brace-slice recovered
+    the exact output SAP choked on — so the robust fix is **pre-slice to the brace span before
+    parsing** (BAML's SAP is *not* a magic bullet for this prose-wrap; feed it the sliced object).
+    Assistant-prefill with `{` would suppress the preamble entirely (future option).
 
 ## Tunable parameters (and what's actually reachable)
 
@@ -206,3 +215,21 @@ v4 high-res + a hard surface-ornament/micro-texture push (one variable: detail).
 - **→** Single-pass quality dimensions trade off (P9). `detail` is sticky under monolithic prompting;
   v4 (4.0) remains the high-water mark. The next gain needs **incremental structured I/O** (MCP /
   BAML), not more stacked instructions.
+
+### temple-facade 008 · `vRef-designdoc` · 2026-06-04
+Design doc grounded in a REFERENCE PHOTO (Sun Yat-sen Mausoleum) via multimodal input, then the v4
+high-res build. (153 ops → 20,311 blocks, $1.64.)
+- **Result: the visually strongest run — but the rubric can't prove it.** The doc *read* the photo
+  and derived its palette ("complementary, cool blue vs warm gold over white" → `calcite` white,
+  `blue_concrete` cobalt roof, `gold_block` inscriptions, `blue_glazed_terracotta` ridge) and its
+  triple-arch + tiered-roof + stepped-base massing. The render is unmistakably mausoleum-grounded and
+  the most refined facade yet. Overall **4.0 — same band as v4** (judge noise ~0.4 can't resolve it).
+- **→** Reference grounding is a strong quality lever (imports a proven palette + proportion). The
+  bottleneck is now the METRIC: the absolute 1–5 rubric saturates at 4 and can't rank vRef vs v4 —
+  the **pairwise/Elo judge** is the gating next instrument. (`--ref` makes this concept-art-ready.)
+
+### vBAML (parked) · BAML as a token-efficient library over claude -p
+Modular API spike: `b.request` renders a TERSE `output_format` (whole prompt ~551 tok vs our ~2,077-
+tok JSON Schema) and `b.parse` SAP-parses — both proven on the subscription via `claude -p`. The
+full high-res run FAILED because SAP mis-parsed the narration-wrapped output (P10); fixed by
+pre-slicing the brace span before `b.parse`. Input-token win is real; revisit when token cost bites.

@@ -1,0 +1,2037 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "008-vRef-designdoc",
+    "prompting_method_id": "temple-facade-reference-designdoc.v0",
+    "model_id": "claude-opus-4-8",
+    "seed": 11,
+    "server_state_id": "flat-creative-superflat.v1"
+  },
+  "style": {
+    "name": "imperial blue-roofed memorial-temple",
+    "rationale": "Mass-below-sky-above: a battered white calcite podium grounds a soaring double-eaved cobalt hip roof, complementary cool-blue-vs-gold over neutral white per the Azure Mandate document."
+  },
+  "palette": {
+    "manifest": [
+      "minecraft:andesite",
+      "minecraft:andesite_stairs",
+      "minecraft:blue_concrete",
+      "minecraft:blue_glazed_terracotta",
+      "minecraft:calcite",
+      "minecraft:gold_block",
+      "minecraft:polished_andesite",
+      "minecraft:quartz_block",
+      "minecraft:quartz_slab",
+      "minecraft:quartz_stairs"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [
+        0,
+        0,
+        -16
+      ],
+      "to": [
+        46,
+        2,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        3,
+        -16
+      ],
+      "to": [
+        46,
+        4,
+        -1
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        5,
+        -16
+      ],
+      "to": [
+        46,
+        6,
+        -2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        7,
+        -16
+      ],
+      "to": [
+        46,
+        8,
+        -3
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        9,
+        -16
+      ],
+      "to": [
+        46,
+        10,
+        -4
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        0,
+        -16
+      ],
+      "to": [
+        4,
+        19,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        20,
+        -16
+      ],
+      "to": [
+        4,
+        21,
+        0
+      ],
+      "block": "minecraft:quartz_stairs",
+      "state": {
+        "facing": "east",
+        "half": "top"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        22,
+        0
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        42,
+        0,
+        -16
+      ],
+      "to": [
+        46,
+        19,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        42,
+        20,
+        -16
+      ],
+      "to": [
+        46,
+        21,
+        0
+      ],
+      "block": "minecraft:quartz_stairs",
+      "state": {
+        "facing": "west",
+        "half": "top"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        22,
+        0
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        10,
+        -5
+      ],
+      "to": [
+        46,
+        10,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        11,
+        -1
+      ],
+      "to": [
+        46,
+        11,
+        -1
+      ],
+      "block": "minecraft:quartz_slab",
+      "state": {
+        "type": "top"
+      }
+    },
+    {
+      "op": "fill",
+      "from": [
+        7,
+        0,
+        0
+      ],
+      "to": [
+        39,
+        0,
+        0
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        1,
+        -1
+      ],
+      "to": [
+        37,
+        1,
+        -1
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        2,
+        -2
+      ],
+      "to": [
+        35,
+        2,
+        -2
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        3,
+        -3
+      ],
+      "to": [
+        33,
+        3,
+        -3
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        9,
+        1,
+        0
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        1,
+        0
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        1,
+        0
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        1,
+        0
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        1,
+        0
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        19,
+        1,
+        0
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        21,
+        1,
+        0
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        1,
+        0
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        1,
+        0
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        1,
+        0
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        1,
+        0
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        1,
+        0
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        1,
+        0
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        35,
+        1,
+        0
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        37,
+        1,
+        0
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        3,
+        -2
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        3,
+        -2
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        3,
+        -2
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        19,
+        3,
+        -2
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        21,
+        3,
+        -2
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        3,
+        -2
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        3,
+        -2
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        3,
+        -2
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        3,
+        -2
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        3,
+        -2
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        3,
+        -2
+      ],
+      "block": "minecraft:andesite_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "fill",
+      "from": [
+        5,
+        11,
+        -16
+      ],
+      "to": [
+        41,
+        27,
+        -5
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        2,
+        11,
+        -5
+      ],
+      "to": [
+        5,
+        25,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        11,
+        -3
+      ],
+      "to": [
+        6,
+        12,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        24,
+        -3
+      ],
+      "to": [
+        6,
+        25,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "line",
+      "from": [
+        2,
+        24,
+        0
+      ],
+      "to": [
+        5,
+        24,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        1,
+        13,
+        -5
+      ],
+      "to": [
+        1,
+        23,
+        -5
+      ],
+      "block": "minecraft:polished_andesite"
+    },
+    {
+      "op": "line",
+      "from": [
+        6,
+        13,
+        -5
+      ],
+      "to": [
+        6,
+        23,
+        -5
+      ],
+      "block": "minecraft:polished_andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        41,
+        11,
+        -5
+      ],
+      "to": [
+        44,
+        25,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        40,
+        11,
+        -3
+      ],
+      "to": [
+        45,
+        12,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        40,
+        24,
+        -3
+      ],
+      "to": [
+        45,
+        25,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "line",
+      "from": [
+        41,
+        24,
+        0
+      ],
+      "to": [
+        44,
+        24,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        40,
+        13,
+        -5
+      ],
+      "to": [
+        40,
+        23,
+        -5
+      ],
+      "block": "minecraft:polished_andesite"
+    },
+    {
+      "op": "line",
+      "from": [
+        45,
+        13,
+        -5
+      ],
+      "to": [
+        45,
+        23,
+        -5
+      ],
+      "block": "minecraft:polished_andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        11,
+        -5
+      ],
+      "to": [
+        17,
+        25,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        11,
+        -3
+      ],
+      "to": [
+        18,
+        12,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        24,
+        -3
+      ],
+      "to": [
+        18,
+        25,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "line",
+      "from": [
+        14,
+        24,
+        0
+      ],
+      "to": [
+        17,
+        24,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        13,
+        13,
+        -5
+      ],
+      "to": [
+        13,
+        23,
+        -5
+      ],
+      "block": "minecraft:polished_andesite"
+    },
+    {
+      "op": "line",
+      "from": [
+        18,
+        13,
+        -5
+      ],
+      "to": [
+        18,
+        23,
+        -5
+      ],
+      "block": "minecraft:polished_andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        29,
+        11,
+        -5
+      ],
+      "to": [
+        32,
+        25,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        28,
+        11,
+        -3
+      ],
+      "to": [
+        33,
+        12,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        28,
+        24,
+        -3
+      ],
+      "to": [
+        33,
+        25,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "line",
+      "from": [
+        29,
+        24,
+        0
+      ],
+      "to": [
+        32,
+        24,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        28,
+        13,
+        -5
+      ],
+      "to": [
+        28,
+        23,
+        -5
+      ],
+      "block": "minecraft:polished_andesite"
+    },
+    {
+      "op": "line",
+      "from": [
+        33,
+        13,
+        -5
+      ],
+      "to": [
+        33,
+        23,
+        -5
+      ],
+      "block": "minecraft:polished_andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        11,
+        -11
+      ],
+      "to": [
+        27,
+        20,
+        -5
+      ],
+      "block": "minecraft:air"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        21,
+        -11
+      ],
+      "to": [
+        26,
+        21,
+        -5
+      ],
+      "block": "minecraft:air"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        22,
+        -11
+      ],
+      "to": [
+        26,
+        22,
+        -5
+      ],
+      "block": "minecraft:air"
+    },
+    {
+      "op": "fill",
+      "from": [
+        21,
+        23,
+        -11
+      ],
+      "to": [
+        25,
+        23,
+        -5
+      ],
+      "block": "minecraft:air"
+    },
+    {
+      "op": "fill",
+      "from": [
+        23,
+        24,
+        -11
+      ],
+      "to": [
+        23,
+        24,
+        -5
+      ],
+      "block": "minecraft:air"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        11,
+        -12
+      ],
+      "to": [
+        27,
+        24,
+        -12
+      ],
+      "block": "minecraft:polished_andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        25,
+        -5
+      ],
+      "to": [
+        27,
+        25,
+        -4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        26,
+        -5
+      ],
+      "to": [
+        28,
+        26,
+        -4
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        8,
+        11,
+        -9
+      ],
+      "to": [
+        12,
+        17,
+        -5
+      ],
+      "block": "minecraft:air"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        18,
+        -9
+      ],
+      "to": [
+        11,
+        18,
+        -5
+      ],
+      "block": "minecraft:air"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        19,
+        -9
+      ],
+      "to": [
+        10,
+        19,
+        -5
+      ],
+      "block": "minecraft:air"
+    },
+    {
+      "op": "fill",
+      "from": [
+        8,
+        11,
+        -10
+      ],
+      "to": [
+        12,
+        19,
+        -10
+      ],
+      "block": "minecraft:polished_andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        8,
+        20,
+        -5
+      ],
+      "to": [
+        12,
+        20,
+        -4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        7,
+        21,
+        -5
+      ],
+      "to": [
+        13,
+        21,
+        -4
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        34,
+        11,
+        -9
+      ],
+      "to": [
+        38,
+        17,
+        -5
+      ],
+      "block": "minecraft:air"
+    },
+    {
+      "op": "fill",
+      "from": [
+        35,
+        18,
+        -9
+      ],
+      "to": [
+        37,
+        18,
+        -5
+      ],
+      "block": "minecraft:air"
+    },
+    {
+      "op": "fill",
+      "from": [
+        36,
+        19,
+        -9
+      ],
+      "to": [
+        36,
+        19,
+        -5
+      ],
+      "block": "minecraft:air"
+    },
+    {
+      "op": "fill",
+      "from": [
+        34,
+        11,
+        -10
+      ],
+      "to": [
+        38,
+        19,
+        -10
+      ],
+      "block": "minecraft:polished_andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        34,
+        20,
+        -5
+      ],
+      "to": [
+        38,
+        20,
+        -4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        33,
+        21,
+        -5
+      ],
+      "to": [
+        39,
+        21,
+        -4
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        26,
+        -5
+      ],
+      "to": [
+        42,
+        26,
+        -2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        5,
+        27,
+        -4
+      ],
+      "to": [
+        6,
+        27,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        8,
+        27,
+        -4
+      ],
+      "to": [
+        9,
+        27,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        27,
+        -4
+      ],
+      "to": [
+        12,
+        27,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        27,
+        -4
+      ],
+      "to": [
+        15,
+        27,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        27,
+        -4
+      ],
+      "to": [
+        18,
+        27,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        27,
+        -4
+      ],
+      "to": [
+        21,
+        27,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        23,
+        27,
+        -4
+      ],
+      "to": [
+        24,
+        27,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        26,
+        27,
+        -4
+      ],
+      "to": [
+        27,
+        27,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        29,
+        27,
+        -4
+      ],
+      "to": [
+        30,
+        27,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        32,
+        27,
+        -4
+      ],
+      "to": [
+        33,
+        27,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        35,
+        27,
+        -4
+      ],
+      "to": [
+        36,
+        27,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        38,
+        27,
+        -4
+      ],
+      "to": [
+        39,
+        27,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        41,
+        27,
+        -4
+      ],
+      "to": [
+        42,
+        27,
+        0
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        27,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        27,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        27,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        27,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        28,
+        -2
+      ],
+      "to": [
+        46,
+        28,
+        0
+      ],
+      "block": "minecraft:blue_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        29,
+        -3
+      ],
+      "to": [
+        45,
+        29,
+        -1
+      ],
+      "block": "minecraft:blue_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        2,
+        30,
+        -4
+      ],
+      "to": [
+        44,
+        30,
+        -2
+      ],
+      "block": "minecraft:blue_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        2,
+        31,
+        -3
+      ],
+      "to": [
+        44,
+        31,
+        -3
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        29,
+        0
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        30,
+        0
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        30,
+        0
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        31,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        29,
+        0
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        30,
+        0
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        30,
+        0
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        31,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        31,
+        -6
+      ],
+      "to": [
+        43,
+        33,
+        -4
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        5,
+        33,
+        -5
+      ],
+      "to": [
+        6,
+        33,
+        -2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        8,
+        33,
+        -5
+      ],
+      "to": [
+        9,
+        33,
+        -2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        33,
+        -5
+      ],
+      "to": [
+        12,
+        33,
+        -2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        33,
+        -5
+      ],
+      "to": [
+        15,
+        33,
+        -2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        33,
+        -5
+      ],
+      "to": [
+        18,
+        33,
+        -2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        33,
+        -5
+      ],
+      "to": [
+        21,
+        33,
+        -2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        23,
+        33,
+        -5
+      ],
+      "to": [
+        24,
+        33,
+        -2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        26,
+        33,
+        -5
+      ],
+      "to": [
+        27,
+        33,
+        -2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        29,
+        33,
+        -5
+      ],
+      "to": [
+        30,
+        33,
+        -2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        32,
+        33,
+        -5
+      ],
+      "to": [
+        33,
+        33,
+        -2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        35,
+        33,
+        -5
+      ],
+      "to": [
+        36,
+        33,
+        -2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        38,
+        33,
+        -5
+      ],
+      "to": [
+        39,
+        33,
+        -2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        41,
+        33,
+        -5
+      ],
+      "to": [
+        42,
+        33,
+        -2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        31,
+        -4
+      ],
+      "to": [
+        27,
+        33,
+        -4
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        31,
+        -6
+      ],
+      "to": [
+        26,
+        33,
+        -6
+      ],
+      "block": "minecraft:quartz_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        20,
+        31,
+        -5
+      ],
+      "to": [
+        20,
+        33,
+        -5
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "line",
+      "from": [
+        26,
+        31,
+        -5
+      ],
+      "to": [
+        26,
+        33,
+        -5
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        32,
+        -5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        31,
+        -5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        31,
+        -5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        33,
+        -5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        34,
+        -6
+      ],
+      "to": [
+        42,
+        34,
+        -4
+      ],
+      "block": "minecraft:blue_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        35,
+        -7
+      ],
+      "to": [
+        40,
+        35,
+        -5
+      ],
+      "block": "minecraft:blue_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        8,
+        36,
+        -8
+      ],
+      "to": [
+        38,
+        36,
+        -6
+      ],
+      "block": "minecraft:blue_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        37,
+        -9
+      ],
+      "to": [
+        35,
+        37,
+        -7
+      ],
+      "block": "minecraft:blue_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        38,
+        -10
+      ],
+      "to": [
+        32,
+        38,
+        -8
+      ],
+      "block": "minecraft:blue_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        39,
+        -11
+      ],
+      "to": [
+        28,
+        39,
+        -9
+      ],
+      "block": "minecraft:blue_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        40,
+        -11
+      ],
+      "to": [
+        28,
+        40,
+        -10
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        34,
+        -4
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        35,
+        -5
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        34,
+        -4
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        35,
+        -5
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        41,
+        -10
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        42,
+        -10
+      ],
+      "block": "minecraft:gold_block"
+    }
+  ]
+}

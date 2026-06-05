@@ -1,0 +1,54 @@
+{
+  "seq": 8,
+  "runId": "008-vRef-designdoc",
+  "date": "2026-06-05",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRef-designdoc",
+  "promptMethodId": "temple-facade-reference-designdoc.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 20311,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      -16
+    ],
+    "max": [
+      46,
+      42,
+      0
+    ]
+  },
+  "tokensIn": 21837,
+  "tokensOut": 34157,
+  "costUsd": 1.6368260000000001,
+  "durationMs": 489503,
+  "score": {
+    "proportion": 4,
+    "color": 4,
+    "detail": 3,
+    "fidelity": 4,
+    "overall": 4,
+    "samples": 3,
+    "rubric": "v1",
+    "notes": "Classical pedimented temple reads clearly with disciplined blue-white-gold scheme, but the columned portico is shallow and the wide blank base register feels under-detailed.",
+    "usage": {
+      "input_tokens": 19934,
+      "output_tokens": 1895,
+      "cost_usd": 0.2650705
+    }
+  },
+  "roundImages": [],
+  "bestof": null,
+  "note": "design doc grounded in Sun Yat-sen Mausoleum reference (JPEG), then v4 high-res build"
+}

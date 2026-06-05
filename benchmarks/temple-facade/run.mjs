@@ -6,14 +6,16 @@
 // LIVE & METERED — runs the model via the `claude -p` subscription shim (spec §4):
 //   npm run bench:temple-facade -- --approach v0-facade --note "what changed"
 
-import { mkdirSync, writeFileSync, readFileSync, readdirSync, existsSync } from "node:fs";
-import { join, dirname } from "node:path";
+import { mkdirSync, writeFileSync, readFileSync, readdirSync, existsSync, copyFileSync } from "node:fs";
+import { join, dirname, extname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { spawn } from "node:child_process";
 import { TEMPLE_FACADE_TASK } from "./task.mjs";
 import {
   requestDesignArtifact,
   requestDesignArtifactWithImage,
   requestText,
+  requestTextWithImage,
 } from "../../src/sdk-binding.mjs";
 import { PHASE1_MODEL_ID } from "../../src/config.mjs";
 import { judgeRender } from "./judge.mjs";
@@ -21,6 +23,10 @@ import { judgeRender } from "./judge.mjs";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const RUNS_DIR = join(HERE, "runs");
 const README = join(HERE, "README.md");
+const REPO_ROOT = join(HERE, "..", "..");
+const DEFAULT_REF = join(REPO_ROOT, "references", "sys_mausoleum.JPG");
+const IMAGE_MIME = { ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp", ".gif": "image/gif" };
+const refMime = (p) => IMAGE_MIME[extname(p).toLowerCase()] || "image/png";
 
 function composeFacadePrompt(task, { promptMethodId, runId }) {
   return [
@@ -357,6 +363,58 @@ function composeDetailBuildPrompt(task, { promptMethodId, runId, designDoc }) {
   ].join("\n");
 }
 
+// Reference-grounded design doc (multimodal): the model STUDIES a real high-quality build
+// (a photo) and writes the design doc grounded in its palette/proportion/massing/motifs, then
+// the v4 high-res build realizes it. Imports a proven aesthetic instead of inventing from scratch.
+function composeReferenceDesignDocPrompt(task) {
+  return [
+    "You are a master architect and worldbuilder. ATTACHED is a reference photograph of a real,",
+    "high-quality building. Study it closely, then write a DESIGN DOCUMENT for a Minecraft TEMPLE",
+    "FACADE that takes its CUES FROM THE REFERENCE — grounding the design in a proven, real-world",
+    "aesthetic instead of inventing from a blank page. Adapt and translate; do not slavishly copy.",
+    "",
+    "## First, read the reference (concretely)",
+    "From the image, identify: its material palette and COLORS (and their hierarchy); its proportions,",
+    "massing, and silhouette; its crowning element; its entrance and openings; its ornament and",
+    "recurring motifs; its overall character and mood.",
+    "",
+    "## Subject to design",
+    task.goal,
+    "",
+    "## Then write the document — each point grounded in what you SEE, with REASONS",
+    "1. **Lore & setting** — a tradition/era/purpose consistent with the reference's character.",
+    "2. **Aesthetic & architectural logic** — the language read from the reference, and why it works.",
+    "3. **Color palette (color theory)** — 3–5 colors DERIVED from the reference's actual colors, each",
+    "   mapped to a concrete Minecraft 1.20.1 block; name the harmony + the dominant/supporting/accent.",
+    "4. **Motifs & ornament** — motifs observed in the reference, adapted for the facade.",
+    "5. **Architectural features & proportion** — base, supports, entablature/eaves, crowning element,",
+    "   entrance/openings; key proportion ratios read from the reference.",
+    "",
+    "Finalize the document — firm decisions, no open options. Keep it under ~400 words. Output ONLY",
+    "the document (markdown).",
+  ].join("\n");
+}
+
+// Shell out to the tsx BAML build stage (the generated client is TypeScript). Sends
+// {brief, designDoc} on stdin, gets {design, usage, promptChars} back on stdout.
+function runBamlBuild(input) {
+  return new Promise((resolve, reject) => {
+    const child = spawn("npx", ["tsx", join(HERE, "baml-build.mts")], { stdio: ["pipe", "pipe", "inherit"] });
+    let out = "";
+    child.stdout.on("data", (c) => (out += c.toString()));
+    child.on("error", reject);
+    child.on("close", (code) => {
+      if (code !== 0) return reject(new Error(`baml-build exited ${code}`));
+      try {
+        resolve(JSON.parse(out));
+      } catch (e) {
+        reject(new Error(`baml-build: unparseable output (${e.message})\n${out.slice(0, 400)}`));
+      }
+    });
+    child.stdin.end(JSON.stringify(input));
+  });
+}
+
 const APPROACHES = {
   "v0-facade": async (task, ctx) => {
     const promptMethodId = "temple-facade-singleshot.v0";
@@ -627,6 +685,132 @@ const APPROACHES = {
     };
   },
 
+  // BAML build: design-doc (v2/v4 stage) → BAML renders a TERSE output_format prompt → pipe
+  // through claude -p → SAP-parse the reply. Tests token efficiency + parse robustness vs the
+  // ~2k-token JSON-Schema approach, on the subscription. Uses the v4 high-res guidance (in .baml).
+  "vBAML": async (task, ctx) => {
+    const promptMethodId = "temple-facade-baml.v0";
+    const messages = [];
+    let sumIn = 0;
+    let sumOut = 0;
+    let sumCost = 0;
+    const acc = (raw) => {
+      const u = raw.usage || {};
+      sumIn += u.input_tokens || 0;
+      sumOut += u.output_tokens || 0;
+      sumCost += raw.total_cost_usd || 0;
+    };
+
+    const ddPrompt = composeDesignDocPrompt(task);
+    writeFileSync(join(ctx.dir, "design-doc.prompt.txt"), ddPrompt + "\n");
+    const dd = await requestText({ prompt: ddPrompt, model: PHASE1_MODEL_ID, onMessage: (m) => messages.push(m) });
+    acc(dd.raw);
+    writeFileSync(join(ctx.dir, "design-doc.md"), dd.text + "\n");
+    console.log(`  stage 1 (design doc): ${dd.text.length} chars`);
+
+    const built = await runBamlBuild({ brief: task.goal, designDoc: dd.text });
+    sumIn += built.usage.input_tokens;
+    sumOut += built.usage.output_tokens;
+    sumCost += built.usage.cost_usd;
+    console.log(
+      `  stage 2 (BAML build): ${built.design.placements?.length ?? 0} ops, ` +
+        `terse prompt ~${Math.round(built.promptChars / 4)} tok (vs ~2k JSON-Schema)`,
+    );
+
+    // Adapt BAML's typed output → our design-artifact schema (strip nulls; attach bookkeeping).
+    const d = built.design;
+    const placements = (d.placements ?? []).map((p) => {
+      const q = { ...p };
+      if (q.state == null) delete q.state;
+      return q;
+    });
+    const palette = { manifest: d.palette.manifest };
+    if (d.palette.palette_id) palette.palette_id = d.palette.palette_id;
+    const artifact = {
+      schema_version: "1.0.0",
+      metadata: {
+        trial_id: ctx.runId,
+        prompting_method_id: promptMethodId,
+        model_id: PHASE1_MODEL_ID,
+        seed: task.seed,
+        server_state_id: task.serverStateId,
+      },
+      style: { name: d.style.name, rationale: d.style.rationale },
+      palette,
+      placements,
+    };
+    writeFileSync(join(ctx.dir, "baml-design.json"), JSON.stringify(d, null, 2) + "\n");
+
+    const raw = {
+      subtype: "success",
+      num_turns: 2,
+      usage: { input_tokens: sumIn, output_tokens: sumOut },
+      total_cost_usd: sumCost,
+    };
+    return {
+      artifact,
+      raw,
+      messages,
+      prompt: "(design-doc → BAML build: terse output_format + SAP parse, piped through claude -p)",
+      promptMethodId,
+    };
+  },
+
+  // Reference-grounded: a real high-quality build (photo) → multimodal design doc grounded in
+  // it → v4 high-res build. Tests whether importing a proven aesthetic lifts quality past the
+  // model's invented styles. (--ref <path>; defaults to references/sys_mausoleum.JPG.)
+  "vRef-designdoc": async (task, ctx) => {
+    const promptMethodId = "temple-facade-reference-designdoc.v0";
+    const refPath = ctx.ref || DEFAULT_REF;
+    const messages = [];
+    let sumIn = 0;
+    let sumOut = 0;
+    let sumCost = 0;
+    const acc = (raw) => {
+      const u = raw.usage || {};
+      sumIn += u.input_tokens || 0;
+      sumOut += u.output_tokens || 0;
+      sumCost += raw.total_cost_usd || 0;
+    };
+
+    // Record which reference grounded this run.
+    copyFileSync(refPath, join(ctx.dir, "reference" + extname(refPath)));
+
+    // Stage 1 — multimodal design doc grounded in the reference image.
+    const ddPrompt = composeReferenceDesignDocPrompt(task);
+    writeFileSync(join(ctx.dir, "design-doc.prompt.txt"), ddPrompt + "\n");
+    const dd = await requestTextWithImage({
+      prompt: ddPrompt,
+      images: [{ data: readFileSync(refPath), mediaType: refMime(refPath) }],
+      model: PHASE1_MODEL_ID,
+      onMessage: (m) => messages.push(m),
+    });
+    acc(dd.raw);
+    writeFileSync(join(ctx.dir, "design-doc.md"), dd.text + "\n");
+    console.log(`  stage 1 (reference-grounded design doc): ${dd.text.length} chars`);
+
+    // Stage 2 — high-res build from the grounded doc (v4 build).
+    const buildPrompt = composeHighResBuildPrompt(task, { promptMethodId, runId: ctx.runId, designDoc: dd.text });
+    writeFileSync(join(ctx.dir, "build.prompt.txt"), buildPrompt + "\n");
+    const res = await requestDesignArtifact({ prompt: buildPrompt, model: PHASE1_MODEL_ID, onMessage: (m) => messages.push(m) });
+    acc(res.raw);
+    console.log(`  stage 2 (high-res build): ${(res.artifact.placements ?? []).length} ops`);
+
+    const raw = {
+      subtype: "success",
+      num_turns: 2,
+      usage: { input_tokens: sumIn, output_tokens: sumOut },
+      total_cost_usd: sumCost,
+    };
+    return {
+      artifact: res.artifact,
+      raw,
+      messages,
+      prompt: "(reference image → grounded design-doc → high-res build)",
+      promptMethodId,
+    };
+  },
+
   // Best-of-N (literature: for divergent/open-ended tasks, parallel sampling + a verifier
   // beats sequential refinement — Snell et al. 2408.03314). Sample K independent design-doc
   // candidates IN PARALLEL, judge each with the rubric, keep the best. Free on a flat-cost
@@ -704,11 +888,12 @@ const APPROACHES = {
 };
 
 function parseArgs(argv) {
-  const out = { approach: "v0-facade", note: "", k: undefined };
+  const out = { approach: "v0-facade", note: "", k: undefined, ref: undefined };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--approach") out.approach = argv[++i];
     else if (argv[i] === "--note") out.note = argv[++i];
     else if (argv[i] === "--k") out.k = parseInt(argv[++i], 10);
+    else if (argv[i] === "--ref") out.ref = argv[++i];
   }
   return out;
 }
@@ -764,7 +949,7 @@ function regenerateReadme() {
 }
 
 async function main() {
-  const { approach, note, k } = parseArgs(process.argv.slice(2));
+  const { approach, note, k, ref } = parseArgs(process.argv.slice(2));
   const startedAt = Date.now();
   const run = APPROACHES[approach];
   if (!run) {
@@ -782,7 +967,7 @@ async function main() {
 
   console.log(`temple-facade benchmark ${runId} (approach: ${approach}) — LIVE via claude -p ...`);
   const { artifact, raw, messages, prompt, promptMethodId, roundImages = [], bestof = null } =
-    await run(TEMPLE_FACADE_TASK, { runId, dir, renderArtifact, k });
+    await run(TEMPLE_FACADE_TASK, { runId, dir, renderArtifact, k, ref });
 
   // Frontal shot — the whole point of this benchmark (task.view).
   const report = await renderArtifact(artifact, {
