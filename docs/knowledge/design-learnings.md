@@ -1238,3 +1238,71 @@ low `added` = faithful; large `added` = the image invented materials the doc nev
 `npm test` 196/196 green (+14). Output is byte-deterministic (grid JSON and swatch PNG identical
 across runs). Durable products: the grid sampler + CLI + swatch viz and this worked example —
 application point #2 of the CIE-Lab matcher, still no 3-D work (that is E-09's path).
+
+## E-10 — color-layer consolidation + E-09 reuse hook (S-023, T-023-01)
+
+Terminal E-10 section: not a trial, a **consolidation**. It reconciles the four color modules built by
+the parallel S-019/S-020/S-021/S-022 tickets, removes the one intentional duplication, and confirms
+the boundary that lets Epic E-09 reuse this layer. No new capability, no render.
+
+**What the color layer delivers.** A bottom-up stack, engine ← table ← adapters:
+- **Engine — `cielab.mjs` (S-020):** the portable color core. sRGB→Lab, ΔE, and
+  `nearest`/`nearestLab` argmin over a caller-supplied `[{key, lab}]` palette. **Zero imports** (not
+  even a Node builtin).
+- **Table — `block-table.mjs` + `block-lab-table.json` (S-019):** every full-cube, survival-obtainable
+  1.20.1(-effective-1.20.2) block → a representative color → Lab. Build path uses `minecraft-assets` +
+  `pngjs` (build-time-only, lazy); the runtime path pulls zero Minecraft deps.
+- **Adapters:** `palette-extract.mjs` (S-021) answers *"which real blocks does this facade use?"*
+  (canonical palette extraction); `image-grid.mjs` (S-022) answers *"lay this facade on a block grid"*
+  (real-block grounding, per-cell). Both sit on the engine + table.
+
+So the headline products are **canonical palette extraction + real-block grounding** of any concept
+image, palette-disciplined to obtainable blocks.
+
+**Conversion / ΔE / clustering choices (consolidated).**
+- *Conversion:* 8-bit sRGB → CIE-Lab under **D65** (inverse-gamma → linear-sRGB/XYZ matrix → Lab
+  companding). Single source of truth in `cielab.mjs`; the table re-applies a 3-decimal `round3` only.
+- *ΔE:* **CIE76** (Euclidean in Lab) is the default and is sufficient for nearest-block matching; the
+  metric is **pluggable** (`nearest(…, {metric})`) so CIEDE2000 can be swapped in without touching
+  call sites. (Not done — a future ticket.)
+- *Clustering (extractor):* deterministic **median-cut in Lab**, box selection scored by **count ×
+  range** (so spread, not just population, drives the split), then same-block merge. Known property:
+  population-halving makes leaf coverages dyadic (~1/8, 1/16…); coverage becomes a *dominance* signal
+  only after merge. k-means is the open lever; the clusterer/metric seams are already pluggable.
+- *Background:* a **tolerance, not an equality** — JPEG renders "pure black" as `[1,1,1]`-ish, so a
+  near-black field is dropped within an RGB radius; near-black *foreground* is documented collateral
+  (`--drop none` opts out), acceptable because the locked stage-1 prompt mandates bright silhouettes.
+- *Table scope:* **full-cube only** by construction; manifest stairs/slabs/panes are surfaced as
+  `missing`, not matched.
+
+**Extracted-vs-declared (the measurable finding).** Run on the locked concept `taj-C-flash.png`, the
+extractor/grid's `comparePalettes(used, declared)` against `palettes/neoclassical.json` reports
+`present 1 / missing 42 / added 56` — the Taj concept honors **~1 of 43** neoclassical blocks. That is
+the **correct** answer (the Taj brief is not neoclassical), so here the number is *illustrative of the
+metric*, not a verdict. Run against a concept's **own** declared manifest it becomes the real fidelity
+signal: **high `present` / low `added` = the image honored the doc; large `added` = the image invented
+materials the doc never declared.** Paired with the discover-vs-validate ΔE gap (taj-C: discover mean
+ΔE ≈6 vs validate-against-the-wrong-palette ≈27–29), the layer makes the **palette-vs-fidelity
+tradeoff measurable**.
+
+**Reuse boundary (the load-bearing claim, now enforced).** `cielab.mjs` is the **portable voxelizer
+color core** — deliberately the one module with zero mc-design-eval / Minecraft / DesignArtifact
+knowledge. It takes a palette as plain `[{key, lab}]` data and returns a key; it never touches block
+ids, artifacts, files, or the network. This is no longer just a header promise: `reuse-boundary.test.mjs`
+**statically scans** the engine's imports (fails on any relative or `minecraft-*`/`prismarine-*`
+specifier; asserts the set is empty today) **and** functionally proves `nearest`/`nearestLab` work
+against a literal palette with no block-table import in the test's own graph. The S-019↔S-020 conversion
+duplication is gone — `block-table.srgbToLab` now delegates to the engine (output byte-identical, table
+unchanged), so there is exactly one copy of the color math, in the portable module.
+
+**Handoff to E-09 stage 4.** This color layer **is E-09's voxelizer color core.** When E-09's pipeline
+(concept art → TRELLIS reconstruction → voxel grid) reaches **stage 4** (voxel grid → `DesignArtifact`),
+it holds a per-design palette drawn from the S-019 block→Lab table (plain `{key, lab}` data) and, for
+each voxel's surface color, calls **`nearest(surfaceRgb, designPalette)`** (or `nearestLab` if it
+already holds a Lab centroid) → a block key → places that block in the `DesignArtifact`. It is the exact
+2-D match the extractor (S-021) and grid (S-022) perform, **one dimension up** — voxel surface colors
+instead of image pixels — and it reuses the *same* engine unchanged. No new color math, no Minecraft
+import added to the engine; the boundary test guarantees the import stays safe from E-09's tree.
+
+`npm test` **200/200** green (+4 boundary/usage tests over the 196 from T-022-01). E-10's color layer is
+complete and reuse-ready; the next color work is downstream in E-09's voxelizer, not here.

@@ -306,14 +306,16 @@ Notes: `minecraft-assets` + `pngjs` are **build-time-only** devDependencies — 
 (`loadBlockTable` + the JSON) pulls no Minecraft/asset deps. `minecraft-assets@1.17` has no
 `1.20.1` dataset, so `"1.20.1"` resolves to the effective `1.20.2` (recorded in the table's
 `version`). Biome-tinted and non-full-cube blocks are excluded and documented in the table's
-`excluded[]`. The `srgbToLab` here is a transitional duplicate of S-020's `cielab.mjs`
-conversion (parallel tickets); S-023 consolidates it.
+`excluded[]`. `srgbToLab` here now **delegates to** S-020's `cielab.mjs` conversion and only
+re-applies `round3` for the table's 3-decimal contract (consolidated in S-023; the former
+duplicate is gone, output byte-identical).
 
 ### Engine — `cielab.mjs` (S-020)
 
 The portable color core: `srgbToLab`, `deltaE76`/`deltaE`, `nearest(rgb, …)` and
 `nearestLab(lab, …)` — argmin ΔE over a `[{key, lab}]` palette. **Zero project/Minecraft
-imports** (load-bearing). `nearest` converts an sRGB target then delegates to `nearestLab`;
+imports** (load-bearing — enforced by `reuse-boundary.test.mjs`, S-023). `nearest` converts an
+sRGB target then delegates to `nearestLab`;
 callers already holding a Lab value (e.g. cluster centroids) use `nearestLab` directly to avoid a
 mean-rgb→Lab round-trip (added in T-021-01). The ΔE metric is pluggable (`{ metric }`) so CIEDE2000
 can be swapped in later without touching call sites.
@@ -366,3 +368,16 @@ read `{present, missing, added}`. The pure core (`gridFromPixels`, `comparePalet
 `gridFromImage`, which reuses the extractor's lazy `decodeImage`. The CLI writes a **gitignored**
 swatch PNG (each cell = its matched block's table color; air transparent) beside the input or to
 `--out`.
+
+### Consolidation & reuse boundary (S-023)
+
+The layer is strictly bottom-up: **engine** (`cielab.mjs`, S-020) ← **table** (`block-table.mjs`,
+S-019) ← **adapters** (`palette-extract.mjs` S-021, `image-grid.mjs` S-022). The engine imports
+nothing — not even a Node builtin — so it is portable: any consumer feeds it a plain `[{key, lab}]`
+palette and a color, and gets back a key. `reuse-boundary.test.mjs` enforces this (static import
+scan + a standalone-usage proof) so a stray `../` or `minecraft-*` import can never quietly couple
+the engine to this project. That is the **reuse hook for Epic E-09**: the voxelizer's stage 4 maps
+each voxel surface color through the *same* `nearest()` over the design's palette to a block id for
+DesignArtifact placement — the color core is shared, no 3-D-specific color math needed. The one
+prior duplication (block-table's inlined `srgbToLab`) was removed here; conversion now lives only in
+the engine.

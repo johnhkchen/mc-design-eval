@@ -7,7 +7,10 @@
 // `[{ key, lab }]` data and returns a key; it never touches block ids, artifacts,
 // files, or the network. That boundary is load-bearing — both application points
 // (concept-image→grid, 2D; voxel-grid→blocks, 3D) reuse this same engine, and a stray
-// `../` import would quietly couple it to the project. See
+// `../` import would quietly couple it to the project. The THIRD consumer is Epic E-09's
+// voxelizer (stage 4): voxel surface color → `nearest()` over the design's `[{ key, lab }]`
+// palette → block id → DesignArtifact placement — the same engine, one dimension up. The
+// boundary is enforced by reuse-boundary.test.mjs. See
 // docs/knowledge/cielab-block-matching.md for the rationale and the exact math.
 //
 // Input convention: 8-bit sRGB, each channel 0–255 (the natural form of texture/image
