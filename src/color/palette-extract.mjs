@@ -285,27 +285,36 @@ function matchesMagic(buf, magic) {
 }
 
 /**
+ * Decode an image file (JPEG or PNG — sniffed by magic bytes) to a `{width,height,data}` RGBA8
+ * image. The ONLY place jpeg-js / pngjs are touched; both are lazy-imported so they stay off the
+ * core path. Shared by the palette extractor and the S-022 block-grid sampler (image-grid.mjs).
+ * @param {string} path
+ * @returns {Promise<{width:number,height:number,data:Uint8Array|Buffer}>}
+ */
+export async function decodeImage(path) {
+  const buf = readFileSync(path);
+  if (matchesMagic(buf, JPEG_MAGIC)) {
+    const jpeg = await import("jpeg-js");
+    const d = (jpeg.default || jpeg).decode(buf, { useTArray: true });
+    return { width: d.width, height: d.height, data: d.data };
+  }
+  if (matchesMagic(buf, PNG_MAGIC)) {
+    const { PNG } = await import("pngjs");
+    const d = PNG.sync.read(buf);
+    return { width: d.width, height: d.height, data: d.data };
+  }
+  throw new Error(
+    `decodeImage: unrecognized image format for ${path} ` +
+      `(expected JPEG or PNG magic bytes, got ${buf.slice(0, 4).toString("hex")})`,
+  );
+}
+
+/**
  * Decode an image file (JPEG or PNG — sniffed by magic bytes) and extract its canonical palette.
- * The ONLY place jpeg-js / pngjs are touched; both are lazy-imported so they stay off the core path.
  * @param {string} path
  * @param {object} [opts]  forwarded to {@link extractPaletteFromPixels}
  */
 export async function extractPaletteFromImage(path, opts = {}) {
-  const buf = readFileSync(path);
-  let img;
-  if (matchesMagic(buf, JPEG_MAGIC)) {
-    const jpeg = await import("jpeg-js");
-    const d = (jpeg.default || jpeg).decode(buf, { useTArray: true });
-    img = { width: d.width, height: d.height, data: d.data };
-  } else if (matchesMagic(buf, PNG_MAGIC)) {
-    const { PNG } = await import("pngjs");
-    const d = PNG.sync.read(buf);
-    img = { width: d.width, height: d.height, data: d.data };
-  } else {
-    throw new Error(
-      `extractPaletteFromImage: unrecognized image format for ${path} ` +
-        `(expected JPEG or PNG magic bytes, got ${buf.slice(0, 4).toString("hex")})`,
-    );
-  }
+  const img = await decodeImage(path);
   return extractPaletteFromPixels(img, opts);
 }
