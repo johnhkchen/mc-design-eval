@@ -2,15 +2,20 @@
 // concept image via baml-concept.mts (BAML-composed prompt → Nano Banana). Eyeball-only this
 // phase — outputs land in concepts/<ref>-<variant>-<model>.png for side-by-side review.
 //
-//   node benchmarks/temple-facade/conceptart.mjs --variant A          # all refs, variant A
+//   node benchmarks/temple-facade/conceptart.mjs                       # all refs, DEFAULT variant C
+//   node benchmarks/temple-facade/conceptart.mjs --ref taj             # one ref, default C
+//   node benchmarks/temple-facade/conceptart.mjs --variant A           # override: reference-only
 //   node benchmarks/temple-facade/conceptart.mjs --variant B --ref taj
-//   node benchmarks/temple-facade/conceptart.mjs --variant C --pro
 //
 // Variants (what's attached to Nano Banana, in order):
 //   A    = [reference]            reference photo as inspiration only (fresh generation)
 //   B    = [reference, ourRender] everything: reference for inspiration + our prismarine render to refine
-//   C    = [ourRender]            upscale: refine our blocky render into a clean concept
+//   C    = [ourRender]            upscale: refine our blocky render into a clean concept  ← DEFAULT
 //   base = []                     design-doc only (no image)
+//
+// DEFAULT = C (render-only), locked by T-016-01 from the S-015 matrix: C is the only variant that
+// reliably produces a black background (cleanly segmentable for TRELLIS) and cannot copy the
+// reference photo or its palette, because it never sees one.
 
 import { spawn } from "node:child_process";
 import { mkdirSync } from "node:fs";
@@ -68,7 +73,7 @@ function runCell(job) {
 const argv = process.argv.slice(2);
 const arg = (k, d) => { const a = argv.find((x) => x.startsWith(`--${k}=`)); return a ? a.split("=")[1] : (argv.includes(`--${k}`) ? true : d); };
 const model = arg("pro", false) ? "pro" : "flash";
-const variant = arg("variant", "A");
+const variant = arg("variant", "C"); // C (render-only) is the locked default — see header + T-016-01
 const only = arg("ref", null);
 if (!VARIANTS[variant]) { console.error(`unknown --variant ${variant} (A|B|C|base)`); process.exit(1); }
 

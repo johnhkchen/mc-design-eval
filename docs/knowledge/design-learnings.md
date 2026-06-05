@@ -880,6 +880,61 @@ confirmer (N>1 per arm, or round-0 attribution) would be required before crediti
 uncommitted in the working tree): `--system-prompt`/`system` param (T-013) and `--effort` (T-009) are plumbed
 through `src/sdk-binding.mjs` + `run.mjs`; finishing or re-confirming each is one command + a judge.
 
+---
+
+## Stage-1 concept-art · input-variant matrix (E-09, T-015-01) · 2026-06-05
+
+First run-the-test of the E-09 stage-1 concept chain (Nano Banana / Gemini Flash). **Goal:** pick the
+strongest INPUT VARIANT for the concept generator — what we attach to the image model. Resolution held
+CONSTANT at 48 blocks (not the variable). **Eyeball-only**; 17 cells generated against the current
+`FacadeConceptPrompt`, no source/prompt change. Variants: **A**=[reference] only, **B**=[reference,
+ourRender], **C**=[ourRender] only, **base**=[] (doc text only). References: taj, horyuji, chapelle, arc,
+mausoleum (each with its `vRefRevise` design doc + prior prismarine render). Images under
+`benchmarks/temple-facade/concepts/<ref>-<variant>-flash.png`.
+
+**Decision: default variant = C (render only).** *Rationale, grounded in the images:* C was the only
+variant that produced the required black segmentation background on all 5/5 references, whereas A failed
+to white on `taj-A`/`horyuji-A` and B failed to white on `chapelle-B`/`arc-B` (a white backdrop merges
+with the structure's light edges and, on `arc-B`, with the arch void itself — fatal for the downstream
+TRELLIS segmentation this stage exists to serve). C's palette was doc-correct in every cell because it
+refines *our own* render, which already obeys the doc — while A bled the reference's palette straight in
+(`taj-A` rendered the dome in **white marble**, the exact color the doc deliberately refuses, in gold).
+C cannot copy a reference it never sees, so it alone is immune to the figural-relief copying that gave
+`arc-A` literal **gold human figures**. And C stayed voxel-honest — bold concentric block rings for the
+`chapelle-C` rose window where `chapelle-B` slid into fine tracery filigree. C confirms the ticket's
+prior; it wins on all three stage-1 targets at once (fidelity, inspiration-not-blueprint, voxel detail).
+
+**Per-variant synthesis:**
+- **Most voxel-honest → C.** Bold block ornament throughout; no filigree (cf. `chapelle-B`).
+- **Most faithful (palette + massing) → C.** Doc palette in 5/5; A bleeds reference palette.
+- **Best segmented → C.** 5/5 correct black bg; A and B each go white on 2/5.
+- **A** — richest character but two hard failures: unreliable background (2/5 white) and literal
+  reference-copying (white Taj dome; Arc human figures). Strong only when the reference is plain
+  (`chapelle-A`, `mausoleum-A` were clean on black).
+- **B** — "everything attached" did not dominate: the reference still dragged 2/5 to white, pulled in
+  filigree (`chapelle-B`) and frieze text (`mausoleum-B`). The render didn't reliably win the tug-of-war.
+- **base** — black bg both controls, but no architectural grounding and **text-prone** (`taj-base`
+  produced calligraphy in the band). A weak fallback, not a default.
+
+**Background reliability (the decisive axis):** A 2/5 white · B 2/5 white · C **0/5 white** · base 0/2.
+
+**Prompt weaknesses observed (input to S-017):**
+1. **Black-background demand is overridden by an attached reference photo.** Whenever a real-building
+   photo is attached (A, and B), the model sometimes adopts the photo's neutral/white studio backdrop —
+   4 cells total. Only C (no photo) was 5/5 black. S-017 should harden the black-bg clause specifically
+   for the image-attached path, or accept that C's no-reference input is what makes segmentation robust.
+2. **"NO text" is too weak for buildings with a signature inscription.** The mausoleum produced
+   plaques/glyphs across A/B/C (`mausoleum-C` even rendered a garbled "GY/RU" Latin plaque); `taj-base`
+   produced calligraphy. Strengthen to: replace any nameplate/inscription/calligraphy with a blank or
+   rosette panel.
+3. **Figural-relief copying survives the "inspiration only / no figures" clauses** when the reference is
+   figure-heavy (`arc-A` gold human figures). Reinforces choosing an input (C) that never sees the photo.
+
+**Net + next:** C is the recommended default — S-016 should lock it in `conceptart.mjs` and regression-
+check all 5 references. S-017 inherits the three prompt weaknesses above (black-bg robustness, text
+suppression, figure suppression), most of which only bite the reference-attached variants — a structural
+argument for C beyond this matrix. `npm test` 133/133 green; no source/prompt/rubric edit this ticket.
+
 **Why 016/017/023/024/025/026 have no standalone entries above:** they are non-promotions (levers) and
 no-credible-effect completes (knobs) — recorded here by reference rather than as six separate write-ups, a
 proportional record. Their `summary.json` files under `benchmarks/temple-facade/runs/<id>-vRefRevise-designdoc/`
@@ -892,3 +947,39 @@ persona/effort knobs), all pointing the same way: the single recommended next ex
 fenced ornament pass** (detail-only revision auditing every plane wider than ~6 blocks). Cheap follow-ons:
 land the "judge-both-rounds-keep-the-better" P14 fix, and re-confirm the two knobs with N>1 if their detail
 flip is worth chasing. `npm test` 133/133 green; no rubric/brief edit.
+
+## Stage-1 concept-art · default variant LOCKED (E-09, T-016-01) · 2026-06-05
+
+**Lock:** `benchmarks/temple-facade/conceptart.mjs` now defaults to variant **C (render-only)** when
+`--variant` is omitted (was `A`). C was the matrix winner (T-015-01): it is the only variant that
+reliably yields a black background (cleanly segmentable for TRELLIS) and, seeing only our own
+doc-grounded prismarine render, cannot copy a reference photo or inherit its palette. The header
+comment records the lock; A/B/base are retained for matrix reproducibility and S-017.
+
+**All-reference confirmation** (regenerated via the *defaulted* command — no `--variant` — Flash, 48
+blocks; each cell logged `[C/flash]`, 1 img, confirming the default resolves to C):
+
+- **taj — holds.** Black bg; gold dome (doc palette, not the reference's white marble), red sandstone,
+  blue+yellow inlay, blue tile mosaics; disciplined massing on a plinth; cleanly segmentable. Matches
+  matrix C (Hi/Hi/Hi).
+- **horyuji — holds (on re-draw).** *First draw drifted to a white background* — the exact regression
+  signal T-015-01 flagged to watch. A single re-draw came back **black**, so this is confirmed a
+  non-deterministic lottery draw, **not a tendency** (the saved cell is black: two-story pagoda, red
+  columns, teal roofs, gold brackets, stone plinth — doc-correct, clean). Logged because the prompt's
+  black-bg demand is still only probabilistic; S-017's job to harden.
+- **chapelle — holds.** Near-black bg; rose window as chunky concentric rings (no fine filigree —
+  filigree was the chapelle-B failure, absent here); orange body, gold framing, blue; segments clean.
+- **arc — weakened.** Black bg holds (the decisive axis), but **gold human figures appeared in the
+  side niches** — matrix arc-C was abstract block niches. Figural-relief detail crept in even though C
+  never sees the reference photo (sourced from our own render / the doc). Inspiration-not-blueprint
+  axis weakened; segmentation unaffected. Feeds S-017 (figural suppression is a known prompt gap).
+- **mausoleum — holds (with known caveat).** Black bg; doc palette (blue tiled roofs, white body, gold
+  brackets, red doors); clean symmetric massing on a stepped plinth. The gold **nameplate plaque with
+  glyph-like text** persists above the central arch — this is the reference-driven text weakness the
+  matrix already recorded across *all* variants, not a C-specific regression. S-017 prompt fix.
+
+**Net:** 4/5 hold cleanly; the lone white drift (horyuji) re-drew black, confirming the matrix's
+"tendency, not lottery" basis; arc's figural niches are the one genuine weakening and even there the
+black background (segmentation) survives. The lock on **C is safe to keep** — it remains the best
+default on every reference. Two draws to watch, both already on S-017's list (probabilistic black-bg;
+figural/text suppression) and neither unique to the locked default. `npm test` green.
