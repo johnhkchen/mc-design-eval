@@ -1,0 +1,2481 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "004-vConcept-a-pineapple",
+    "prompting_method_id": "vconcept-sculpture.v1",
+    "model_id": "claude-opus-4-8",
+    "seed": 17,
+    "server_state_id": "flat-creative-superflat.v1"
+  },
+  "style": {
+    "name": "Warm Analogous Pineapple — Ripe Fruit in the Round",
+    "rationale": "Two stacked masses make it instantly nameable from any side: a circular ovoid-of-revolution fruit body (yellow_terracotta, widest ~16 dia at ~40% height, tapering to ~10 at the shoulders, built as stacked per-row disc fills so it reads identically front/side/3-4) and a radiating green_concrete leaf crown flaring up-and-out like a flame. Body height split ~5:18:9 over 32 (base y0-1, body y2-19, crown y20-31) on a flattened 2-block disc base wider than the body bottom for a non-tippy footing. Motif A, the diamond lattice 'eyes', is orange_terracotta diamonds set proud on the shell in a staggered radial grid — mid-band on the four cardinals, a lower band rotated onto the four 45-degree corners, and an upper band back on the cardinals — so the offset rows read as the unmistakable cross-hatch from every angle. Motif B, leaf ridging, is 1-block-thick fins: a tall central tuft plus four cardinal blades splaying out on 45-degree lines with stepped tips, and four shorter diagonal blades to the corners, never merged into a solid cap, giving a jagged green star silhouette. Palette honors the warm yellow-orange-green analogous band with lime_terracotta used sparingly only on the tallest leaf tips. The hidden back half mirrors the visible features so it reads as a finished solid object in the round, not a facade."
+  },
+  "palette": {
+    "manifest": [
+      "minecraft:yellow_terracotta",
+      "minecraft:orange_terracotta",
+      "minecraft:green_concrete",
+      "minecraft:lime_terracotta"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        0,
+        -6
+      ],
+      "to": [
+        4,
+        1,
+        -6
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        0,
+        -5
+      ],
+      "to": [
+        5,
+        1,
+        -5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        0,
+        -4
+      ],
+      "to": [
+        6,
+        1,
+        -4
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        0,
+        -3
+      ],
+      "to": [
+        6,
+        1,
+        -3
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        0,
+        -2
+      ],
+      "to": [
+        7,
+        1,
+        -2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        0,
+        -1
+      ],
+      "to": [
+        7,
+        1,
+        -1
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        0,
+        0
+      ],
+      "to": [
+        7,
+        1,
+        0
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        0,
+        1
+      ],
+      "to": [
+        7,
+        1,
+        1
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        0,
+        2
+      ],
+      "to": [
+        7,
+        1,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        0,
+        3
+      ],
+      "to": [
+        6,
+        1,
+        3
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        0,
+        4
+      ],
+      "to": [
+        6,
+        1,
+        4
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        0,
+        5
+      ],
+      "to": [
+        5,
+        1,
+        5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        0,
+        6
+      ],
+      "to": [
+        4,
+        1,
+        6
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        2,
+        -5
+      ],
+      "to": [
+        3,
+        3,
+        -5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        2,
+        -4
+      ],
+      "to": [
+        4,
+        3,
+        -4
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        2,
+        -3
+      ],
+      "to": [
+        5,
+        3,
+        -3
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        2,
+        -2
+      ],
+      "to": [
+        6,
+        3,
+        -2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        2,
+        -1
+      ],
+      "to": [
+        6,
+        3,
+        -1
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        2,
+        0
+      ],
+      "to": [
+        6,
+        3,
+        0
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        2,
+        1
+      ],
+      "to": [
+        6,
+        3,
+        1
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        2,
+        2
+      ],
+      "to": [
+        6,
+        3,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        2,
+        3
+      ],
+      "to": [
+        5,
+        3,
+        3
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        2,
+        4
+      ],
+      "to": [
+        4,
+        3,
+        4
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        2,
+        5
+      ],
+      "to": [
+        3,
+        3,
+        5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        4,
+        -6
+      ],
+      "to": [
+        4,
+        5,
+        -6
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        4,
+        -5
+      ],
+      "to": [
+        5,
+        5,
+        -5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        4,
+        -4
+      ],
+      "to": [
+        6,
+        5,
+        -4
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        4,
+        -3
+      ],
+      "to": [
+        6,
+        5,
+        -3
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        4,
+        -2
+      ],
+      "to": [
+        7,
+        5,
+        -2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        4,
+        -1
+      ],
+      "to": [
+        7,
+        5,
+        -1
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        4,
+        0
+      ],
+      "to": [
+        7,
+        5,
+        0
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        4,
+        1
+      ],
+      "to": [
+        7,
+        5,
+        1
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        4,
+        2
+      ],
+      "to": [
+        7,
+        5,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        4,
+        3
+      ],
+      "to": [
+        6,
+        5,
+        3
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        4,
+        4
+      ],
+      "to": [
+        6,
+        5,
+        4
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        4,
+        5
+      ],
+      "to": [
+        5,
+        5,
+        5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        4,
+        6
+      ],
+      "to": [
+        4,
+        5,
+        6
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        6,
+        -7
+      ],
+      "to": [
+        4,
+        10,
+        -7
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        6,
+        -6
+      ],
+      "to": [
+        5,
+        10,
+        -6
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        6,
+        -5
+      ],
+      "to": [
+        6,
+        10,
+        -5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        6,
+        -4
+      ],
+      "to": [
+        7,
+        10,
+        -4
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        6,
+        -3
+      ],
+      "to": [
+        7,
+        10,
+        -3
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -8,
+        6,
+        -2
+      ],
+      "to": [
+        8,
+        10,
+        -2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -8,
+        6,
+        -1
+      ],
+      "to": [
+        8,
+        10,
+        -1
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -8,
+        6,
+        0
+      ],
+      "to": [
+        8,
+        10,
+        0
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -8,
+        6,
+        1
+      ],
+      "to": [
+        8,
+        10,
+        1
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -8,
+        6,
+        2
+      ],
+      "to": [
+        8,
+        10,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        6,
+        3
+      ],
+      "to": [
+        7,
+        10,
+        3
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        6,
+        4
+      ],
+      "to": [
+        7,
+        10,
+        4
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        6,
+        5
+      ],
+      "to": [
+        6,
+        10,
+        5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        6,
+        6
+      ],
+      "to": [
+        5,
+        10,
+        6
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        6,
+        7
+      ],
+      "to": [
+        4,
+        10,
+        7
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        11,
+        -6
+      ],
+      "to": [
+        4,
+        13,
+        -6
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        11,
+        -5
+      ],
+      "to": [
+        5,
+        13,
+        -5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        11,
+        -4
+      ],
+      "to": [
+        6,
+        13,
+        -4
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        11,
+        -3
+      ],
+      "to": [
+        6,
+        13,
+        -3
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        11,
+        -2
+      ],
+      "to": [
+        7,
+        13,
+        -2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        11,
+        -1
+      ],
+      "to": [
+        7,
+        13,
+        -1
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        11,
+        0
+      ],
+      "to": [
+        7,
+        13,
+        0
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        11,
+        1
+      ],
+      "to": [
+        7,
+        13,
+        1
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        11,
+        2
+      ],
+      "to": [
+        7,
+        13,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        11,
+        3
+      ],
+      "to": [
+        6,
+        13,
+        3
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        11,
+        4
+      ],
+      "to": [
+        6,
+        13,
+        4
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        11,
+        5
+      ],
+      "to": [
+        5,
+        13,
+        5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        11,
+        6
+      ],
+      "to": [
+        4,
+        13,
+        6
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        14,
+        -5
+      ],
+      "to": [
+        3,
+        16,
+        -5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        14,
+        -4
+      ],
+      "to": [
+        4,
+        16,
+        -4
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        14,
+        -3
+      ],
+      "to": [
+        5,
+        16,
+        -3
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        14,
+        -2
+      ],
+      "to": [
+        6,
+        16,
+        -2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        14,
+        -1
+      ],
+      "to": [
+        6,
+        16,
+        -1
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        14,
+        0
+      ],
+      "to": [
+        6,
+        16,
+        0
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        14,
+        1
+      ],
+      "to": [
+        6,
+        16,
+        1
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        14,
+        2
+      ],
+      "to": [
+        6,
+        16,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        14,
+        3
+      ],
+      "to": [
+        5,
+        16,
+        3
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        14,
+        4
+      ],
+      "to": [
+        4,
+        16,
+        4
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        14,
+        5
+      ],
+      "to": [
+        3,
+        16,
+        5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        17,
+        -4
+      ],
+      "to": [
+        3,
+        19,
+        -4
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        17,
+        -3
+      ],
+      "to": [
+        4,
+        19,
+        -3
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        17,
+        -2
+      ],
+      "to": [
+        5,
+        19,
+        -2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        17,
+        -1
+      ],
+      "to": [
+        5,
+        19,
+        -1
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        17,
+        0
+      ],
+      "to": [
+        5,
+        19,
+        0
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        17,
+        1
+      ],
+      "to": [
+        5,
+        19,
+        1
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        17,
+        2
+      ],
+      "to": [
+        5,
+        19,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        17,
+        3
+      ],
+      "to": [
+        4,
+        19,
+        3
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        17,
+        4
+      ],
+      "to": [
+        3,
+        19,
+        4
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        10,
+        7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -1,
+        9,
+        7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        9,
+        7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        9,
+        7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -2,
+        8,
+        7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -1,
+        8,
+        7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        8,
+        7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        8,
+        7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        8,
+        7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -1,
+        7,
+        7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        7,
+        7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        7,
+        7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        6,
+        7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        8,
+        8
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        10,
+        -7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -1,
+        9,
+        -7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        9,
+        -7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        9,
+        -7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -2,
+        8,
+        -7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -1,
+        8,
+        -7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        8,
+        -7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        8,
+        -7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        8,
+        -7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -1,
+        7,
+        -7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        7,
+        -7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        7,
+        -7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        6,
+        -7
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        8,
+        -8
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        10,
+        0
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        9,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        9,
+        0
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        9,
+        1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        8,
+        -2
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        8,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        8,
+        0
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        8,
+        1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        8,
+        2
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        7,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        7,
+        0
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        7,
+        1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        6,
+        0
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        8,
+        0
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -7,
+        10,
+        0
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -7,
+        9,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -7,
+        9,
+        0
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -7,
+        9,
+        1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -7,
+        8,
+        -2
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -7,
+        8,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -7,
+        8,
+        0
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -7,
+        8,
+        1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -7,
+        8,
+        2
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -7,
+        7,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -7,
+        7,
+        0
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -7,
+        7,
+        1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -7,
+        6,
+        0
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -8,
+        8,
+        0
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        6,
+        5
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        5,
+        5
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        5,
+        5
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        5,
+        4
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        4,
+        5
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        6,
+        -5
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        5,
+        -5
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        5,
+        -5
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        5,
+        -4
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        4,
+        -5
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -5,
+        6,
+        5
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -4,
+        5,
+        5
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -5,
+        5,
+        5
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -5,
+        5,
+        4
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -5,
+        4,
+        5
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -5,
+        6,
+        -5
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -4,
+        5,
+        -5
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -5,
+        5,
+        -5
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -5,
+        5,
+        -4
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -5,
+        4,
+        -5
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        13,
+        6
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -1,
+        12,
+        6
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        12,
+        6
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        12,
+        6
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        11,
+        6
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        13,
+        -6
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -1,
+        12,
+        -6
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        12,
+        -6
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        12,
+        -6
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        11,
+        -6
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        13,
+        0
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        12,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        12,
+        0
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        12,
+        1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        11,
+        0
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -6,
+        13,
+        0
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -6,
+        12,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -6,
+        12,
+        0
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -6,
+        12,
+        1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -6,
+        11,
+        0
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        20,
+        -3
+      ],
+      "to": [
+        3,
+        21,
+        3
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -2,
+        22,
+        -2
+      ],
+      "to": [
+        2,
+        23,
+        2
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        22,
+        0
+      ],
+      "to": [
+        0,
+        31,
+        0
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        -1,
+        22,
+        0
+      ],
+      "to": [
+        -1,
+        30,
+        0
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        1,
+        22,
+        0
+      ],
+      "to": [
+        1,
+        30,
+        0
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        22,
+        1
+      ],
+      "to": [
+        0,
+        30,
+        1
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        22,
+        -1
+      ],
+      "to": [
+        0,
+        30,
+        -1
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        23,
+        2
+      ],
+      "to": [
+        0,
+        29,
+        8
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        29,
+        8
+      ],
+      "to": [
+        0,
+        30,
+        8
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        23,
+        -2
+      ],
+      "to": [
+        0,
+        29,
+        -8
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        29,
+        -8
+      ],
+      "to": [
+        0,
+        30,
+        -8
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        2,
+        23,
+        0
+      ],
+      "to": [
+        8,
+        29,
+        0
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        8,
+        29,
+        0
+      ],
+      "to": [
+        8,
+        30,
+        0
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        -2,
+        23,
+        0
+      ],
+      "to": [
+        -8,
+        29,
+        0
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        -8,
+        29,
+        0
+      ],
+      "to": [
+        -8,
+        30,
+        0
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        2,
+        22,
+        2
+      ],
+      "to": [
+        6,
+        26,
+        6
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        6,
+        26,
+        6
+      ],
+      "to": [
+        6,
+        27,
+        6
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        2,
+        22,
+        -2
+      ],
+      "to": [
+        6,
+        26,
+        -6
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        6,
+        26,
+        -6
+      ],
+      "to": [
+        6,
+        27,
+        -6
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        -2,
+        22,
+        2
+      ],
+      "to": [
+        -6,
+        26,
+        6
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        -6,
+        26,
+        6
+      ],
+      "to": [
+        -6,
+        27,
+        6
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        -2,
+        22,
+        -2
+      ],
+      "to": [
+        -6,
+        26,
+        -6
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        -6,
+        26,
+        -6
+      ],
+      "to": [
+        -6,
+        27,
+        -6
+      ],
+      "block": "minecraft:green_concrete"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        31,
+        0
+      ],
+      "block": "minecraft:lime_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -1,
+        30,
+        0
+      ],
+      "block": "minecraft:lime_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        30,
+        0
+      ],
+      "block": "minecraft:lime_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        30,
+        1
+      ],
+      "block": "minecraft:lime_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        30,
+        -1
+      ],
+      "block": "minecraft:lime_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        30,
+        8
+      ],
+      "block": "minecraft:lime_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        30,
+        -8
+      ],
+      "block": "minecraft:lime_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        30,
+        0
+      ],
+      "block": "minecraft:lime_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -8,
+        30,
+        0
+      ],
+      "block": "minecraft:lime_terracotta"
+    }
+  ]
+}

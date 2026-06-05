@@ -47,6 +47,8 @@ benchmark is the live I/O + rendering + run-dir provenance around it.
 |---|------|---------|-------|--------|-----------|---|------|
 | 1 | 2026-06-05 | `moai` | 32 | 3414 | 20578/18096 | $0.6632 | T-035-01 smoke |
 | 2 | 2026-06-05 | `a dancing man` | 32 | 1073 | 20399/11363 | $0.4945 | T-036-01 build |
+| 3 | 2026-06-05 | `a moai statue` | 32 | 2402 | 20379/14273 | $0.5684 | T-036-02 build (E-13/S-036): angular monolith — text-JSON best case |
+| 4 | 2026-06-05 | `a pineapple` | 32 | 3314 | 20931/31040 | $0.9905 | T-036-03 build |
 
 ## Gallery
 
@@ -65,5 +67,21 @@ benchmark is the live I/O + rendering + run-dir provenance around it.
 **1073 blocks** · 20399/11363 tok · $0.4945
 
 > T-036-01 build
+
+### 003 — `a moai statue` (scale 32) · 2026-06-05
+
+![sculpture run 3 — 3/4](runs/003-vConcept-a-moai-statue/render-3q.png)
+
+**2402 blocks** · 20379/14273 tok · $0.5684
+
+> T-036-02 build (E-13/S-036): angular monolith — text-JSON best case
+
+### 004 — `a pineapple` (scale 32) · 2026-06-05
+
+![sculpture run 4 — 3/4](runs/004-vConcept-a-pineapple/render-3q.png)
+
+**3314 blocks** · 20931/31040 tok · $0.9905
+
+> T-036-03 build
 
 <!-- RUNS:END -->
