@@ -151,7 +151,7 @@
       }
     },
     "linePlacement": {
-      "description": "Blocks along the straight lattice line from..to, inclusive.",
+      "description": "Blocks along a straight lattice line from..to, inclusive. AXIS-ALIGNED or a uniform diagonal ONLY: every nonzero axis delta (to minus from) must have equal magnitude — e.g. [0,0,0]->[0,10,0] (vertical) or [2,2,0]->[8,8,0] (45-degree). An unequal-delta diagonal like [0,0,0]->[7,10,0] is REJECTED (no unambiguous voxelization), not rasterized. For an arbitrary slope, step it with several voxels or short axis-aligned/45-degree lines.",
       "type": "object",
       "additionalProperties": false,
       "required": ["op", "from", "to", "block"],
