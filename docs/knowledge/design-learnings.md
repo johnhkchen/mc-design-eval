@@ -272,6 +272,27 @@ white regression. But two new findings:
   integral masses — a facade is ONE connected plane; (c) carry the doc's full accent set into the
   build so color clears "single family". P10/narration + line-op seams both held this run.
 
+### temple-facade 014 · `vRefRevise-designdoc` (Taj, one-plane + no-flat-fields) · 2026-06-04
+Re-run after commit 2b430bc (revision: a facade is ONE connected plane, integrated bays not
+freestanding pillars; build+revision: NO LARGE FLAT FIELDS). **First `overall = strong` — and
+unanimous (3/3 samples).** (10,013 blocks, $1.64.)
+- **The 2nd pass finally EARNED its keep.** A/B by judging both rounds: round-0 = proportion
+  *competent*, post-revision render = proportion **strong** — the exact inverse of run 013, where the
+  revision *regressed* proportion. The one-plane constraint stopped the column-detaching: the revision
+  now develops the crown (squat dome → proper onion dome on a drum) and refines the iwan arch while
+  keeping every mass bonded. Net-negative → net-positive from a single prompt clause.
+- **Color reached *strong*** (was competent): the craft/color split produced a real multi-hue scheme —
+  terracotta brick dominant, gold supporting, lapis-blue accent — read as a true dominant/supporting/
+  accent harmony, not "a single cool family". Craft from the Taj (massing, dome, iwan), color from the
+  brief: working as designed.
+- **Remaining ceiling = detail (still *competent*).** The no-flat-fields clause helped less than the
+  one-plane clause; brick fields and niche interiors still read somewhat flat. Detail is now the
+  single dimension between *strong* and *exceptional* — the next lever.
+- **Score arc across the Taj runs:** 010 (copy-everything, white) competent → 013 round-0 (craft/color
+  split) competent, revision regressed → **014 strong (3/3)**. The wins were all "tell the model what
+  the system/brief already requires": color≠reference, lines are lattice-constrained, a facade is one
+  plane.
+
 ### vBAML (parked) · BAML as a token-efficient library over claude -p
 Modular API spike: `b.request` renders a TERSE `output_format` (whole prompt ~551 tok vs our ~2,077-
 tok JSON Schema) and `b.parse` SAP-parses — both proven on the subscription via `claude -p`. The
