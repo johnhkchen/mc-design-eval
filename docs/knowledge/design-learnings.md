@@ -13,6 +13,15 @@ the per-run reasoning behind each principle. Renders live in
 
 ## Principles (distilled)
 
+> **🏆 Current state (categorical rubric `v2`, median-of-3) — supersedes the two `v1`-era banners below.**
+> Reference-grounding + a *constrained* 2nd pass moved a Taj build **competent → strong (3/3 unanimous,
+> run 014)** — the first `strong` overall and a direct refutation of the old "no technique reliably moves
+> the score" correction (that was a *metric* failure: the v1 1–5 mean saturated at 4, noise ≈ 0.4; the
+> categorical rubric resolves what numeric couldn't, and names the lagging dimension per build). The
+> load-bearing wins are **P11–P15** below; the v1-era banners are kept for history but their pessimism is
+> retired. **`detail` is now the single lagging dimension** — strong on proportion/color/fidelity, only
+> detail still competent. See P15 for the open frontier.
+
 > **⚠️ Measured correction (rubric `v1`, 3-sample mean) — the metric contradicts the impressions below.**
 > Scoring all four runs with the LLM-judge gives overall: v0 = **4.0**, v1 = **4.0**, v2 = **3.0**,
 > v3 = **3.0**. The "design-doc is a huge jump" narrative (P4) is **not supported** — the *conventional
@@ -107,7 +116,60 @@ the per-run reasoning behind each principle. Renders live in
     mis-located the object → "missing style/palette"). A dumb `first-{ … last-}` brace-slice recovered
     the exact output SAP choked on — so the robust fix is **pre-slice to the brace span before
     parsing** (BAML's SAP is *not* a magic bullet for this prose-wrap; feed it the sliced object).
-    Assistant-prefill with `{` would suppress the preamble entirely (future option).
+    Assistant-prefill with `{` would suppress the preamble entirely (future option). **[Resolved P11:
+    Opus follows a strong instruction — `withSchemaInstruction` now forbids preamble explicitly and
+    routes reasoning to `style.rationale`; the brace-slice + retry stay as backstops. Prefill rejected
+    by the user: "Opus is very good at following instructions, just make the prompt reflect that."]**
+
+11. **Tell the model what the SYSTEM already enforces — a silent invariant is a latent failure or a
+    quality leak.** Three separate failures this session were the harness enforcing a rule the
+    generation prompt never stated: (a) the voxel builder rejects unequal-delta `line` ops (a diagonal
+    `[0,0,0]→[7,10,0]` has no unambiguous lattice voxelization) — crashed the build *and*, on a separate
+    seam, the revision, until the constraint was written into both `facade.baml` and the JSON Schema's
+    `linePlacement.description`; (b) recesses must be carved by *exclusion* (no air op) — burying a block
+    behind a solid fill does nothing; (c) the brief demands color but the design-doc prompt told the
+    model to copy the reference (P12). The fix each time was **surface the constraint into the
+    prompt/schema that the generator sees**. Proactively audit every system-enforced invariant
+    (`box`/`fill`/`voxel` geometry, the palette whitelist, valid block-state values, last-writer-wins
+    overlap) and confirm the prompt states it. A constraint enforced only at validation/render time is a
+    failure waiting to happen; one enforced only in the renderer's *behavior* (not the prompt) is a
+    silent quality cap.
+12. **A grounding reference supplies CRAFT, not COLOR — separate them at every stage.** A reference
+    photo is a *visual* anchor that beats a text instruction: told to "derive the palette from the
+    reference's actual colors," the model copied a white Taj to a near-monochrome white build, silently
+    overriding the brief's explicit "distinctive, COLORFUL look" — and the leak was *upstream* at the
+    design-doc stage, so the downstream revision faithfully kept the white. Splitting **craft**
+    (proportion / massing / silhouette / relief / ornament ← reference) from **color** (← brief) at the
+    design-doc *and* revision stages — "the reference is a CRAFT reference, NOT a color reference; color
+    comes from the brief even if the reference is white" — restored colorful builds and drove `color`
+    **competent → strong** (a real terracotta/gold/blue dominant-supporting-accent scheme). Generalizes:
+    **when a strong exemplar conflicts with the brief on any axis, name which axis comes from which
+    source** — don't let the image silently win every axis.
+13. **A reference in a different DIMENSIONALITY than the target needs an explicit translation rule, not
+    literal matching.** The Taj is a 3-D building whose minarets are freestanding at the plinth corners;
+    told to "match the reference's silhouette," the model copied that literally and the minarets became
+    **floating columns** in a single flat elevation — proportion regressed `strong → competent` (run
+    013). The clause **"a facade is ONE connected plane; borrow the reference's RHYTHM, not its 3-D
+    standalone parts; engaged masses bonded to the body, never freestanding pillars"** fixed it. Same
+    shape as P11/P12: the model needs the translation rule made explicit, because the default is literal
+    copying.
+14. **The reference-compared 2nd pass is double-edged — net-positive ONLY once its freedom is fenced;
+    A/B by judging both rounds.** The *same* revision regressed proportion in run 013 (detached masses)
+    and *lifted* it `competent → strong` in run 014 (after the one-plane clause of P13) — it developed
+    the crown (squat dome → proper onion dome) and refined the iwan arch while keeping masses connected.
+    The way to *know* is to judge **round-0 AND the post-revision render** and compare per-dimension;
+    don't assume the later pass is better. A revision earns its third call only when its degrees of
+    freedom are constrained (honor the doc + one plane + keep the brief's color). Refines P3 ("anchor the
+    revision or it drifts") with a second failure mode: it also *over-converges on the reference* unless
+    fenced.
+15. **Quality dimensions fall one at a time, and `detail` is the last holdout.** Across the Taj arc
+    (010 competent → 014 strong) proportion, color, and fidelity all reached *strong*; **`detail` stayed
+    competent** — large flat brick/niche/plinth fields persist, and the "NO LARGE FLAT FIELDS" prompt
+    clause helped *less* than the structural one-plane clause. This echoes P9 (you can't stack all
+    dimensions in one monolithic pass — they trade off a fixed JSON budget). The likely path to
+    *exceptional* detail is a **dedicated, fenced ornament pass** (structured/incremental I/O) that
+    *only* adds surface relief to flat fields without spending budget elsewhere — not another global
+    "add more detail" instruction.
 
 ## Tunable parameters (and what's actually reachable)
 
