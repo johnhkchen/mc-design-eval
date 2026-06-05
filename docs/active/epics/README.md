@@ -22,6 +22,7 @@ Source of truth: [`docs/specification.md`](../../specification.md).
 | E-10 | block-palette-and-cielab-matching  | high     | E-01              | §5, §6, §9    |
 | E-11 | staged-sculptor-framework          | high     | E-01,E-02,E-04,E-10 | §1, §5, §9  |
 | E-12 | evolution-showcase                 | medium   | —                 | (comms)     |
+| E-13 | concept-grounded-best-of-sequence  | high     | E-03, E-04        | §7, §8, §9  |
 
 ## Dependency graph
 
