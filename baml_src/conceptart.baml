@@ -16,20 +16,34 @@ function FacadeConceptPrompt(design_doc: string, target_blocks: int, attached: s
 
     Render it in authentic MINECRAFT BLOCK style — built from cubic blocks, with block-scale detail
     ONLY. The build is about {{ target_blocks }} blocks wide, so keep every feature BOLD and chunky.
-    HARD LIMITS (anything finer will not survive voxelization, so do NOT draw it):
-    - NO human or animal figures, NO sculptural relief scenes or statues.
-    - NO text, letters, numerals, calligraphy, or inscriptions of any kind.
-    - NO fine filigree, thin tracery, lacework, or sub-block ornament.
+    HARD LIMITS (anything finer will not survive voxelization, so do NOT draw it). These OVERRIDE
+    the design document below: if it describes any of these, render the BOLD-block replacement
+    instead, never the literal motif:
+    - NO human, animal, or deity figures, NO soldiers, NO sculptural relief scenes or statues --
+      EVEN IF the document places statues or figures in niches, panels, or recesses. Render every
+      such niche or panel as a BLANK or bold ROSETTE panel, never a figure.
+    - NO text, letters, numerals, calligraphy, or inscriptions of any kind -- and specifically NO
+      nameplate, signboard, plaque, cartouche, or inscribed tablet above the entrance or anywhere
+      else. Replace any such inscribed panel with a blank or bold rosette panel. Friezes and bands
+      carry plain color-blocking or bold rosettes ONLY -- never a row of glyph-like square
+      characters or symbol panels.
+    - NO fine filigree, thin tracery, lacework, or sub-block ornament; NO star-burst or thin spiked
+      finials. Cap towers, gables, and pinnacles with a SIMPLE chunky block, not a fine spike.
     Replace every such motif with BOLD GEOMETRIC block ornament instead — chunky panels, bands,
     stepped frames, rosettes, and large-scale COLOR BLOCKING. Each smallest feature should read as a
     few whole blocks. Massing, silhouette, and framed openings carry the design.
 
     Faithfully realize THIS finalized design document — its massing and proportion, its style and
     motifs, and above all its PALETTE (use its actual named colors; it is deliberately COLORFUL, never
-    a white or monochrome wall). Keep the structure's OUTER SILHOUETTE in its lighter palette colors so
-    the edges read crisply against the black background; do NOT place black or near-black blocks along
-    the outline (they merge with the background and break segmentation) — reserve any dark tones for
-    recessed interior areas:
+    a white or monochrome wall). The background behind the structure must be SOLID #000000 black --
+    NEVER white, light, grey, navy, or any coloured or gradient backdrop; the structure floats on pure
+    black. So its edges read crisply against that black, keep the structure's OUTER SILHOUETTE in its
+    brighter palette colors and do NOT place black, near-black, OR any dark or dim tone (e.g. dark or
+    medium blue, deep purple) along the outline -- those merge into the black and break segmentation.
+    In particular the OUTERMOST elements -- spires, finials, pinnacles, and the roof crest -- must be a
+    bright, high-contrast palette color (e.g. gold or a warm light stone), never a dark or dim one, so
+    the top edge cannot vanish into the black field. Reserve any dark tones for recessed interior
+    areas only:
 
     {{ design_doc }}
 

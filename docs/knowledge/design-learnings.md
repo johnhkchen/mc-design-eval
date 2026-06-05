@@ -983,3 +983,67 @@ blocks; each cell logged `[C/flash]`, 1 img, confirming the default resolves to 
 black background (segmentation) survives. The lock on **C is safe to keep** — it remains the best
 default on every reference. Two draws to watch, both already on S-017's list (probabilistic black-bg;
 figural/text suppression) and neither unique to the locked default. `npm test` green.
+
+## Stage-1 concept-art · segmentation + resolution hardened (E-09, T-017-01) · 2026-06-05
+
+**Goal:** make every reference (default variant C, Flash, 48 blocks) pass two pipeline-critical
+properties — **segmentation** (cleanly isolable subject) and **resolution discipline** (no sub-block
+figures / text / filigree) — by tightening `baml_src/conceptart.baml` (`FacadeConceptPrompt`) only.
+Eyeball audit (each PNG VIEWed). Inherited the three weaknesses S-015/S-016 flagged.
+
+**Round-0 audit (default-C images, pre-edit):**
+
+| ref       | segmentation                                   | resolution discipline                       |
+|-----------|------------------------------------------------|---------------------------------------------|
+| taj       | PASS (black, crisp)                            | PASS                                        |
+| horyuji   | PASS (black, crisp)                            | PASS                                        |
+| chapelle  | **FAIL** — bg dark *navy*, blue spires merge   | borderline — gable star/finial filigree     |
+| arc       | PASS (black, crisp)                            | **FAIL** — gold human figures in both niches |
+| mausoleum | PASS (black, crisp white)                      | **FAIL** — gold glyph nameplate above arch  |
+
+**Prompt diff (3 clause tightenings in `FacadeConceptPrompt`, two iterations):**
+1. **Figures (HARD LIMIT #1).** Added a doc-OVERRIDE + replacement target: "NO human, animal, or
+   deity figures, NO soldiers … EVEN IF the document places statues or figures in niches/panels —
+   render every such niche as a BLANK or bold ROSETTE panel, never a figure." (The HARD LIMITS block
+   now opens by stating it overrides the design document.)
+2. **Text (HARD LIMIT #2).** Named the specific offender + a frieze clause (added iter-2 after the
+   glyph relocated): "… specifically NO nameplate, signboard, plaque, cartouche, or inscribed tablet
+   … Friezes and bands carry plain color-blocking or bold rosettes ONLY — never a row of glyph-like
+   square characters or symbol panels."
+3. **Filigree (HARD LIMIT #3).** "… NO star-burst or thin spiked finials. Cap towers, gables, and
+   pinnacles with a SIMPLE chunky block, not a fine spike."
+4. **Segmentation clause.** "Background must be SOLID #000000 black — NEVER white, light, grey, navy,
+   or any coloured/gradient backdrop … the OUTERMOST elements — spires, finials, pinnacles, roof
+   crest — must be a bright, high-contrast palette color (e.g. gold or warm light stone), never a
+   dark or dim one, so the top edge cannot vanish into the black field."
+
+**Iteration note (a wording trap worth recording):** the *first* segmentation rewrite listed "white,
+light stone" as example edge colors right next to the background instruction; chapelle **and**
+mausoleum then drew on a **white background** (and mausoleum relocated its glyph into the door
+frieze). Lesson: naming "white" anywhere near the background clause nudges a white backdrop. Iter-2
+removed "white" from the edge examples and front-loaded an explicit "NEVER white/light/grey/navy"
+ban — black returned on both. White bg is technically rembg-isolable, but it created a *light-on-
+light* risk for the light-bodied mausoleum, so black is the safer, consistent target.
+
+**Final audit (all 5 regenerated under the identical final prompt):**
+
+| ref       | segmentation                              | resolution discipline                              |
+|-----------|-------------------------------------------|----------------------------------------------------|
+| taj       | PASS — black, crisp gold/orange/blue      | PASS — bold color-blocking, chunky mosaics         |
+| horyuji   | PASS — black, crisp red/teal/white        | PASS — chunky finial; central panel a geometric medallion |
+| chapelle  | PASS — black; gable/spire edges gold-framed (dark-on-dark gone) | PASS — chunky rose window, no filigree |
+| arc       | PASS — black, crisp                        | PASS — niches now gold SUNBURST rosettes (no figures) |
+| mausoleum | PASS — black, light body crisp on black   | PASS — rosette frieze, geometric roof medallion (no glyph text) |
+
+**Verdict: all 5 references are cleanly segmentable AND resolution-disciplined** under the locked
+default (C / Flash / 48). The figure leak (arc) and the legible-glyph/nameplate leak (mausoleum) are
+closed at the root (prompt), not per-reference; the dark-on-dark merge (chapelle) is resolved by a
+reliable pure-black background plus gold-framed outermost edges.
+
+**Residual / watch:** generation stays non-deterministic — "held" means the prompt no longer invites
+the leak and a fresh draw is clean, not a statistical guarantee. Two references (horyuji, mausoleum)
+converge on a chunky **concentric-square / maze medallion** in the former-nameplate panel — this is
+the intended "replace text with bold geometric ornament" behavior (block-scale, no legible letters),
+recorded here so a future reviewer doesn't mistake it for residual glyph text. `npm test` 133/133
+green. Prompt diff committed + client regenerated (`npm run baml:gen`); concepts saved under
+`benchmarks/temple-facade/concepts/` (gitignored, reproducible).
