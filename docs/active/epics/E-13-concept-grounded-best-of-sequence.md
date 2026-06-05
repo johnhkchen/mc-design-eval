@@ -11,101 +11,110 @@ stories: []
 
 ## Goal
 
-A new prompting archetype — **`vConcept`** — that needs only a **single term/motif**, no reference photo:
+Demonstrate the **flexibility** of the system — *idea → fruition, insanely easily* — by branching from
+architecture to **sculptural objects** via the `vConcept` archetype (needs only a **term**, no reference
+photo):
 
 ```
-term/motif ─▶ design doc ─▶ concept art (Nano Banana) ─▶ multimodal build (our placement) ─▶ render · judge
- "lighthouse"   LLM, from      doc-only concept = the      the existing claude -p multimodal
-                imagination    self-made "reference"        build, grounded on the concept
+term ─▶ design doc ─▶ concept art (Nano Banana) ─▶ multimodal build (our placement) ─▶ render · turntable · judge
+"moai"   LLM, imagined   doc-only concept = the      the existing claude -p multimodal
+                          self-made "reference"        build, grounded on the concept
 ```
 
-The **Nano Banana concept replaces the real reference photo** as the grounding image; our existing build
-process does the placement. Apply it to **8 new locations/builds** and curate a **best-of sequence**
-(showcase-ready, with turntables) that feeds E-12.
+Run it on **8 new sculptural subjects** (one build each — best-of = the *curated sequence*, not best-of-N),
+and play with **scale** to **see where build fidelity lands relative to the concept art**. The output is a
+breadth showcase (rock turntables) for E-12 — *and* an honest measurement of the concept→build gap.
 
 ## Why it matters
 
-Every strong build so far depended on having a **real reference photo** (Taj, Hōryū-ji, …). That caps us
-to subjects we have photos of. `vConcept` removes the dependency: a single word → a self-generated concept
-→ a grounded build. It's the pure recombination of pieces we've already proven —
-- **design-doc-first** (the quality jump, journal P4-era + craft/color split),
-- **stage-1 Nano Banana concept** (locked: colorful, inspiration-not-blueprint, block-appropriate),
-- **multimodal grounded build** (the `vRef` seam: an image grounds the claude -p build) —
-into one self-contained pipeline. It also answers a real research question: **does a self-generated
-concept ground a build as well as a real photo does?** And it generates **8 new high-quality builds** —
-exactly the "explosion of builds" breadth E-12's showcase wants, across fresh subjects.
+1. **Flexibility, shown.** Every build so far is an architectural facade. Pointing the same pipeline at a
+   **dancing man, a moai, a pineapple, a bow & arrow, an anatomically-correct heart** proves it's a general
+   *idea→build* engine, not a temple tool — from a single word, with no reference photo.
+2. **It maps the frontier honestly.** Sculptural/organic forms are exactly where naive **text-JSON
+   geometry struggles** (the medium caps curves, P6) and where **image→3D shines** (organic forms voxelize
+   well — the plant case). So the **concept→build fidelity gap** we measure here is the precise,
+   visual case *for* the sculptor (E-11) and TRELLIS (E-09): the gorgeous concept vs. what text-JSON
+   reaches today. We show it, we don't hide it.
+3. **Reuse.** Pure recombination of proven pieces (design-doc-first + the locked stage-1 concept + the
+   `vRef` grounded-build seam + the orbit/turntable rig). Net-new code is the *generalization* below.
 
-## The archetype (`vConcept`) — reuse, don't reinvent
+## The archetype (`vConcept`) — generalized to subject TYPE + scale
 
-1. **Term → design doc.** A subject-parameterized design-doc prompt (generalize
-   `composeReferenceDesignDocPrompt` to ground in an *imagined* subject term instead of a photo — keep the
-   palette-discipline / craft-color rules).
-2. **Doc → concept.** `baml-concept` in **doc-only** mode (the `base` variant — no reference image, since
-   there is none) → a Minecraft-block concept = the self-made reference. (Locked stage-1 prompt.)
-3. **Concept → build.** The existing **multimodal grounded build** (`requestDesignArtifactWithImage`,
-   the `vRef` seam) grounded on the *concept image* → a `DesignArtifact` (placement). One build (no second
-   revise pass — keeps a run inside the lisa session budget).
-4. **Render + judge** (existing categorical rubric).
+The facade pipeline assumes "front elevation, relief into −Z, model only the front." Sculptures are
+**freestanding 3-D objects built in the round**. So `vConcept` becomes subject-type-aware:
 
-New glue is only: subject parameterization + wiring the generated concept in as the grounding image.
+| stage | facade (existing) | **sculpture (new mode)** |
+|-------|-------------------|--------------------------|
+| design doc | temple-facade doc | imagined doc for the *object* (form, proportion, palette, motifs) |
+| concept (Nano Banana) | head-on facade, black bg | the **object** as Minecraft blocks, 3/4, isolated on black |
+| build | facade + relief | a **full 3-D voxel object** grounded on the concept (not a flat facade) |
+| render | head-on | **3/4 + turntable** (the orbit rig — built for exactly this) |
 
-## The 8 subjects (proposed — tunable)
+Plus a **scale** parameter (e.g. small ~16 vs large ~48 blocks) so we can watch fidelity-vs-concept change
+with resolution. One build per subject per the chosen scale (best-of = B).
 
-Diverse across era / material / style, each a single term Nano Banana can concept and a build can realize
-as a facade:
+## The 8 subjects (sculptural — proposed, tunable)
 
-1. **Lighthouse** (coastal beacon) · 2. **Art-Deco cinema** · 3. **Egyptian temple** (Abu-Simbel-ish) ·
-4. **Mesoamerican step-pyramid** · 5. **Greek temple** (Parthenon) · 6. **Moorish palace** (Alhambra) ·
-7. **Brutalist monument** · 8. **Futurist / space-age tower**.
+A deliberate spread of *form types*, all plausible Minecraft creative builds:
 
-(Swap any term per-ticket; they are not real-photo-dependent.)
+1. **Dancing man** (articulated figure) · 2. **Moai statue** (angular sculpture) · 3. **Pineapple**
+(patterned organic) · 4. **Bow & arrow** (thin/linear — the hardest, like the Golden-Gate cables) ·
+5. **Anatomically-correct heart** (organic anatomy) · 6. **Sword** (iconic thin object) · 7. **Mushroom**
+(organic blob, Minecraft-native) · 8. **Koi fish** (smooth organic curve).
 
-## "Best-of" — the quality mechanism
+The spread is the point: angular sculptures should fare better in text-JSON than smooth/thin ones — the
+showcase makes the fidelity frontier legible across form types.
 
-Each subject gets one `vConcept` build; **if the judge scores it below `strong`, the build ticket
-best-of-N's** (re-run with a fresh concept/build, judge, keep the best) so the *sequence* is genuinely
-best-of. The curation story assembles the 8 winners into the showcase sequence.
+## "Best-of" = the curated sequence (B)
+
+One `vConcept` run per subject; the "best-of" is the **curated 8-subject showcase**, not per-subject
+best-of-N. Cheaper, faster, breadth-first — the message is *ease and range*, not polish.
 
 ## Scope
 
 **In:**
-- The `vConcept` archetype wired into the harness as a named approach (subject-parameterized).
-- **8 subject builds** (one run-the-test each), judged; best-of-N on any sub-`strong` build.
-- A **best-of sequence**: the 8 winners curated + front-arc **rock** turntables (reuse the orbit rig) +
-  captions/scores — handed to E-12 as the "8 new builds / rotating-builds" content.
-- The research note: self-generated-concept grounding vs real-photo grounding (does it hold?).
+- `vConcept` generalized: a **sculpture build mode** (full 3-D voxel object grounded on a concept, rendered
+  3/4 + turntable) + a **scale** parameter, alongside the existing facade mode.
+- **8 sculptural subject builds** (one each), rendered as front-arc rock turntables (reuse the orbit rig).
+- A **fidelity-vs-concept** read per build: how faithfully the text-JSON build realized the concept, by
+  form type and scale — eyeball + the concept/render side-by-side (a fidelity judge is optional).
+- A **curated best-of sequence** handed to E-12 (8 new sculptural builds + rocks + captions).
 
 **Out:**
-- TRELLIS / voxelize / the sculptor (E-09 stages 2–4, E-11) — `vConcept` grounds a **text-JSON** build,
-  not a 3-D voxelize.
-- New reference photos (the point is *no* photo).
-- Whole-structure (facades, as everywhere).
+- Best-of-N per subject (it's B).
+- TRELLIS / voxelize / the sculptor (E-09/E-11) — but the gap we measure is the case *for* them.
+- New reference photos; whole-structure facades.
 
 ## Candidate stories (lisa chain)
 
 ```
-S-035 vConcept archetype
-   ├─> S-036 lighthouse ─┐
-   ├─> S-037 art-deco    │
-   ├─> … (8 builds, fan-out) ├─> S-044 best-of sequence + turntables → E-12
-   └─> S-043 futurist ───┘
+S-035 vConcept sculpture mode + scale
+   ├─> S-036 dancing man ─┐
+   ├─> S-037 moai          │
+   ├─> … (8 sculptural builds, fan-out) ├─> S-044 best-of sequence + rock turntables → E-12
+   └─> S-043 koi fish ─────┘
 ```
 
-- **S-035** — wire the `vConcept` archetype (term→doc→concept→multimodal build), subject-parameterized.
-- **S-036…S-043** — the 8 subject builds (one run-the-test each; best-of-N if sub-`strong`).
-- **S-044** — curate the best-of sequence: the 8 winners + front-arc rock turntables + captions/scores;
-  hand to E-12.
+- **S-035** — generalize `vConcept` to the **sculpture build mode** (term→doc→concept→3-D build) + a scale
+  parameter; wire as an approach. The crux.
+- **S-036…S-043** — the 8 sculptural builds (one run-the-test each, at a chosen scale; record
+  fidelity-vs-concept).
+- **S-044** — curate the best-of sequence (the 8 + rock turntables + concept/render pairs + captions);
+  journal the fidelity-vs-concept frontier; hand to E-12.
 
 ## Definition of done
 
-- `vConcept` runs end-to-end from a single term — no reference photo — producing a judged `DesignArtifact`.
-- **8 new builds** exist, each `strong` (or the best of N), across the 8 subjects.
-- A **best-of sequence** is assembled (winners + rock turntables + captions/scores) and handed to E-12.
-- A journal note records whether **self-generated-concept grounding** matches real-photo grounding.
+- `vConcept` builds a **freestanding sculptural object** from a single term — concept → 3-D build →
+  3/4/turntable render — no reference photo.
+- **8 sculptural builds** exist across the form-type spread, each with its concept and a turntable.
+- A **curated best-of sequence** is handed to E-12, and the journal records the **fidelity-vs-concept**
+  finding (which form types / scales text-JSON realizes well vs. where it falls short — the sculptor's
+  mandate).
 
 ## Notes
 
-- **Reuses the locked stage-1 concept prompt** and the orbit/turntable rig — net-new code is small.
-- **Session budget:** one build per ticket (doc + concept + one grounded build ≈ 15–20 min) fits the lisa
-  session timeout; that's why `vConcept` is a single grounded build, not a doc→concept→build→revise loop.
-- Feeds **E-12** directly (8 new builds + turntables = the breadth/explosion beat on fresh subjects).
+- **The gap is a feature.** Honest concept/render side-by-sides are the strongest case for E-09/E-11; the
+  showcase frames it as "from a word to this in minutes — and here's how much better it gets next."
+- **Render shifts to 3/4 + turntable** for sculptures (the orbit rig already does this) — head-on is a
+  facade convention that doesn't fit an object in the round.
+- **Session budget:** one build per ticket (doc + concept + one 3-D build) fits the lisa session timeout.
