@@ -15,14 +15,18 @@
 // the last-of-major 1.20.2 (block textures identical for our purposes). We record the
 // effective `version` (1.20.2) and the `requestedVersion` (1.20.1) for honest provenance.
 //
-// DUPLICATION NOTE (intentional): `srgbToLab` below mirrors the conversion that S-020's
-// src/color/cielab.mjs will own. T-019-01 and T-020-01 are parallel `depends_on: []` tickets,
-// so this ticket cannot import a file that may not exist yet. S-023 (consolidation) is the
-// designated de-dupe: downstream code should depend on cielab.mjs for conversion, NOT on this.
+// CONSOLIDATION NOTE (S-023, T-023-01): the sRGB→Lab conversion is now OWNED by S-020's
+// portable engine (src/color/cielab.mjs) and imported here — the former intentional duplicate
+// (kept while T-019-01/T-020-01 ran as parallel `depends_on: []` tickets) has been removed.
+// `srgbToLab` below is a thin delegator that re-applies `round3` to keep this table's 3-decimal
+// contract; its output is byte-identical to the pre-S-023 copy (verified over 4096 RGB triples,
+// max abs diff 0), so the committed block-lab-table.json is unchanged. Downstream code must
+// depend on cielab.mjs for conversion, never re-implement it.
 
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve, join } from "node:path";
+import { srgbToLab as srgbToLabRaw } from "./cielab.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 
@@ -30,48 +34,22 @@ const here = dirname(fileURLToPath(import.meta.url));
 export const TABLE_PATH = resolve(here, "block-lab-table.json");
 
 // --- sRGB → CIE-Lab (D65) -------------------------------------------------
-// Faithful to docs/knowledge/cielab-block-matching.md. CIE76-ready; no ΔE here (engine's job).
-
-/** Inverse sRGB gamma for one 0–255 channel → linear 0–1. */
-function srgbChannelToLinear(c255) {
-  const c = c255 / 255;
-  return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
-}
-
-/** Linear RGB (0–1) → XYZ scaled to 0–100 (D65). */
-function linearRgbToXyz(r, g, b) {
-  const X = (0.4124564 * r + 0.3575761 * g + 0.1804375 * b) * 100;
-  const Y = (0.2126729 * r + 0.7151522 * g + 0.0721750 * b) * 100;
-  const Z = (0.0193339 * r + 0.1191920 * g + 0.9503041 * b) * 100;
-  return [X, Y, Z];
-}
-
-const D65 = { Xn: 95.0489, Yn: 100, Zn: 108.8840 };
-const DELTA = 6 / 29;
-const DELTA3 = DELTA ** 3;
-
-/** XYZ companding f(t) for the Lab transform. */
-function fLab(t) {
-  return t > DELTA3 ? Math.cbrt(t) : t / (3 * DELTA * DELTA) + 4 / 29;
-}
+// The conversion math lives in the portable engine (cielab.mjs); here we only re-apply the
+// table's rounding contract. See docs/knowledge/cielab-block-matching.md for the technique.
 
 const round3 = (n) => Math.round(n * 1000) / 1000;
 
 /**
- * Convert an sRGB color (integer channels 0–255) to CIE L*a*b* (D65).
+ * Convert an sRGB color (integer channels 0–255) to CIE L*a*b* (D65), rounded to 3 decimals.
+ * Delegates the conversion to the S-020 engine ({@link srgbToLabRaw}) and re-applies `round3`
+ * so the committed table keeps its 3-decimal contract. Output is byte-identical to the former
+ * inlined copy (verified over 4096 RGB triples, max abs diff 0).
  * @param {[number, number, number]} rgb
  * @returns {[number, number, number]} [L*, a*, b*], rounded to 3 decimals
  */
-export function srgbToLab([r, g, b]) {
-  const [X, Y, Z] = linearRgbToXyz(
-    srgbChannelToLinear(r),
-    srgbChannelToLinear(g),
-    srgbChannelToLinear(b),
-  );
-  const fx = fLab(X / D65.Xn);
-  const fy = fLab(Y / D65.Yn);
-  const fz = fLab(Z / D65.Zn);
-  return [round3(116 * fy - 16), round3(500 * (fx - fy)), round3(200 * (fy - fz))];
+export function srgbToLab(rgb) {
+  const [L, a, b] = srgbToLabRaw(rgb);
+  return [round3(L), round3(a), round3(b)];
 }
 
 // --- texture pixels -------------------------------------------------------
