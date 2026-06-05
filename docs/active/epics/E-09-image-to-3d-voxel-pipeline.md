@@ -6,7 +6,7 @@ status: open
 priority: high
 depends_on: [E-01, E-02, E-04]
 spec: "§1, §5, §6, §7, §9"
-stories: []
+stories: [S-015, S-016, S-017, S-018]
 ---
 
 ## Goal
@@ -104,6 +104,29 @@ afterthought.
 - **Portability proof** — extractability check: the core builds/runs with no mc-design-eval import; ship a
   porting note (and ideally a minimal non-Minecraft example, e.g. voxelizing a plant GLB) so
   plant-model-studio can adopt the core or replicate it.
+
+## Stage-1 concept-art series (lisa chain — make the Nano Banana stage strong)
+
+The concept-art stage is built and validated (BAML `FacadeConceptPrompt` → Nano Banana via the
+`conceptart.mjs` matrix; variant A generalizes across all 5 references, colorful + inspiration-not-
+blueprint + block-appropriate). This chain hardens it before the pipeline is wired, one run-the-test
+ticket per story, gated sequentially (each inherits the prompt the prior locked), recording prompt
+diffs + findings in `design-learnings.md` and saving concepts under `concepts/` for eyeball review.
+Resolution is held CONSTANT (48 blocks); the model is Flash; evaluation is **eyeball-only this phase**.
+
+```
+S-015 input-variant matrix ─> S-016 lock default ─> S-017 robustness ─> S-018 consolidate
+   T-015-01                ─>   T-016-01        ─>   T-017-01       ─>   T-018-01
+```
+
+- **S-015** — run variants A/B/C/base × all 5 references; pick the strongest input variant on the
+  evidence (hypothesis: C, upscale-our-render, wins on voxel-honesty + fidelity-to-our-build).
+- **S-016** — lock the winning variant as the orchestrator/prompt default; re-run all references to
+  confirm no reference regresses.
+- **S-017** — robustness: clean segmentation (isolation/background, dark-silhouette merge) AND
+  resolution discipline (no sub-block detail) across all references; tighten the prompt as needed.
+- **S-018** — consolidate: lock the strong `FacadeConceptPrompt`, write the stage-1 journal section,
+  declare stage 1 done (ready to hand its output to stage 2 / TRELLIS).
 
 ## Definition of done
 
