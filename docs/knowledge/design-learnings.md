@@ -228,6 +228,27 @@ high-res build. (153 ops → 20,311 blocks, $1.64.)
   bottleneck is now the METRIC: the absolute 1–5 rubric saturates at 4 and can't rank vRef vs v4 —
   the **pairwise/Elo judge** is the gating next instrument. (`--ref` makes this concept-art-ready.)
 
+### temple-facade 010 · `vRefRevise-designdoc` (Taj Mahal) · 2026-06-04
+Reference-grounded design doc → build → a 2nd pass that compares the build to the reference and
+improves toward it. (10,566 blocks, $2.09; categorical judge v2.) **Result: `overall = competent`**
+(proportion *strong*, fidelity *strong*, color *competent*, detail *competent*; per-sample
+competent/competent/strong).
+- **The 2nd pass optimized the wrong target.** It made the build markedly more Taj-like (cleaner
+  massing, banded minarets, proper recessed iwan → *strong* proportion+fidelity) but **regressed to
+  near-monochrome white**, losing the warm terracotta fields that round-0 actually had. The judge
+  caught it unprompted: *"the brief explicitly asks for a COLORFUL scheme, and this is essentially a
+  white build… reads close to monochrome."*
+- **Root cause is upstream, not the revision.** The design doc *itself* committed to "Near-
+  **monochromatic white**" because `composeReferenceDesignDocPrompt` said "derive the palette from the
+  reference's actual colors" — a white Taj → white palette, silently overriding the brief's explicit
+  "distinctive, COLORFUL look." The revision then faithfully "honored the document." **A grounding
+  image steals the brief's palette: the visual anchor beats the text instruction.**
+- **→ Fix (commit 63b36ad):** separate **craft** (proportion/massing/relief/ornament → from the
+  reference) from **color** (→ from the brief) at *both* the design-doc and revision stages. Reference
+  reframed as "a CRAFT reference, NOT a color reference"; the revision now treats a build that drifted
+  white as a regression to FIX. Re-run validates whether craft-grounding survives without the palette
+  capture. Generalizes P-ref: ground form, never let a pale reference collapse the build to white.
+
 ### vBAML (parked) · BAML as a token-efficient library over claude -p
 Modular API spike: `b.request` renders a TERSE `output_format` (whole prompt ~551 tok vs our ~2,077-
 tok JSON Schema) and `b.parse` SAP-parses — both proven on the subscription via `claude -p`. The
