@@ -18,6 +18,7 @@ Source of truth: [`docs/specification.md`](../../specification.md).
 | E-06 | phase-1-study                      | high     | E-03, E-04, E-05  | §8, §11     |
 | E-07 | phase-2-model-sweep                | low      | E-06              | §1, §11     |
 | E-08 | autonomous-experiment-loop         | high     | E-03, E-04        | §7, §9, §11 |
+| E-09 | image-to-3d-voxel-pipeline         | high     | E-01, E-02, E-04  | §1,§5,§6,§7,§9 |
 
 ## Dependency graph
 
@@ -29,7 +30,7 @@ E-01 ──┬──> E-02 ──┬──> E-03 ──┬──> E-06 ──> E
             E-05 ───────────────> E-06
 ```
 
-E-01 is the foundation (the artifact contract is the spine, §5). E-02–E-05 build the four instrument layers around it. E-06 runs the Phase-1 3×3 matrix once those layers exist. E-07 is the deferred Phase-2 model sweep. E-08 is the autonomous optimization loop: it *discovers* improved prompting techniques (on top of E-03's runner, judged by E-04) and feeds the promoted champions into E-06's fair comparison.
+E-01 is the foundation (the artifact contract is the spine, §5). E-02–E-05 build the four instrument layers around it. E-06 runs the Phase-1 3×3 matrix once those layers exist. E-07 is the deferred Phase-2 model sweep. E-08 is the autonomous optimization loop: it *discovers* improved prompting techniques (on top of E-03's runner, judged by E-04) and feeds the promoted champions into E-06's fair comparison. E-09 swaps the geometry engine — LLM design reasoning → concept art → 3D mesh → voxel → the same DesignArtifact (§5) — keeping the instrument (E-02 render, E-04 rubric, §6 validators) while retiring text-JSON's geometry ceiling; its voxelizer core is built portable so other repos (e.g. plant-model-studio) can reuse it.
 
 ## Epic frontmatter
 

@@ -2,6 +2,10 @@ node_modules/
 *.log
 .DS_Store
 
+# Secrets — never commit (provisioned locally; see .env.example for the names)
+.env
+.env.local
+
 # Generated per-trial store (artifacts, transcripts, records) — T-004-01
 trials/
 
