@@ -127,15 +127,20 @@ export function medianCutLab(points, k) {
   if (points.length === 0) return [];
   let boxes = [{ points, stats: boxStats(points) }];
   while (boxes.length < k) {
-    // pick the splittable box with the largest count (tie → largest axis range).
+    // Pick the splittable box with the largest count × color-spread. Weighting by spread (not
+    // count alone) leaves a large FLAT color field intact as one high-coverage cluster while
+    // subdividing heterogeneous regions — so post-merge coverage reflects real dominance instead
+    // of the uniform populations that pure population-median-cut produces. Zero-volume boxes
+    // (a single color) have range 0 and are skipped via the distinct<2 guard.
     let target = -1;
-    let bestKey = [-1, -1];
+    let bestScore = -1;
     for (let i = 0; i < boxes.length; i++) {
       const s = boxes[i].stats;
       if (s.distinct < 2) continue; // zero-volume: a single color, cannot split
       const maxRange = Math.max(s.range[0], s.range[1], s.range[2]);
-      if (s.count > bestKey[0] || (s.count === bestKey[0] && maxRange > bestKey[1])) {
-        bestKey = [s.count, maxRange];
+      const score = s.count * maxRange;
+      if (score > bestScore) {
+        bestScore = score;
         target = i;
       }
     }
