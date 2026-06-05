@@ -1,0 +1,44 @@
+{
+  "seq": 9,
+  "runId": "009-vRef-designdoc",
+  "date": "2026-06-04",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRef-designdoc",
+  "promptMethodId": "temple-facade-reference-designdoc.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 24596,
+  "unmapped": 0,
+  "bounds": null,
+  "tokensIn": 0,
+  "tokensOut": 0,
+  "costUsd": 0,
+  "durationMs": 0,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "strong",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "Symmetric triumphal-arch front; ivory/gold/violet triad; rich arch + roundel detail. Short of exceptional: flat wall planes between events, slightly squat side bays.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "strong",
+      "strong"
+    ],
+    "usage": {}
+  },
+  "roundImages": [],
+  "bestof": null,
+  "note": "Arc de Triomphe; salvaged (run errored at summary step after a build-narration retry)"
+}

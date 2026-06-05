@@ -275,8 +275,8 @@ function composeHighResBuildPrompt(task, { promptMethodId, runId, designDoc }) {
     "highest Z; relief recedes into −Z. Model only the front and its relief.",
     "",
     "## Scale & RELIEF — use it (this is judged)",
-    "- Width up to ~48 (X), height up to ~40 (Y) including the crown. Build big.",
-    "- DEEP relief: up to ~16 blocks of depth into −Z, and genuinely use it. Columns/buttresses",
+    "- Width up to ~56 (X), height up to ~48 (Y) including the crown. Build big.",
+    "- DEEP relief: up to ~24 blocks of depth into −Z, and genuinely use it. Columns/buttresses",
     "  project several blocks PROUD of the wall; the central portal RECESSES several blocks deep;",
     "  cornices, string courses, and the crown step forward and back across MULTIPLE Z-layers. A",
     "  near-flat screen only 4–6 deep is a failure.",
@@ -392,6 +392,51 @@ function composeReferenceDesignDocPrompt(task) {
     "",
     "Finalize the document — firm decisions, no open options. Keep it under ~400 words. Output ONLY",
     "the document (markdown).",
+  ].join("\n");
+}
+
+// Second-pass revision that COMPARES the build to the reference (two images) and improves toward
+// it, anchored to the design doc so it tightens craft without going bland (v3 lesson). Used by
+// vRefRevise.
+function composeRefRevisionPrompt(task, { promptMethodId, runId, designDoc }) {
+  return [
+    "You are a master Minecraft architect making a SECOND, improving pass on your own work. TWO",
+    "images are attached: (1) the REFERENCE building your design is grounded in, and (2) a head-on",
+    "render of your CURRENT build. Compare them honestly, then improve the build toward the",
+    "reference's quality — WITHOUT abandoning your design's own identity, palette, or concept.",
+    "",
+    "## Your finalized design document (honor it)",
+    designDoc,
+    "",
+    "## Improve — compare your build (image 2) to the reference (image 1)",
+    "- Proportion & silhouette: match the reference's balance, rhythm, and crowning silhouette more closely.",
+    "- Relief & depth: deepen and model where your build reads flat next to the reference.",
+    "- Ornament & detail: add the reference's character — arch profiles, framing, motifs, texture — where",
+    "  your build is bare; resolve large blank fields.",
+    "- Color: keep your document's palette and its dominant/supporting/accent hierarchy; sharpen contrast",
+    "  if anything; do NOT drift toward monochrome or convention.",
+    "- Fix anything broken, floating, misaligned, or awkward.",
+    "",
+    "## Orientation & scale (unchanged)",
+    "Facade FACES +Z, X-Y plane (X = width, Y = height, y = 0 ground), relief into -Z, front face at the",
+    "highest Z. Width up to ~56, height up to ~48, deep relief up to ~24 into -Z. Front and relief only.",
+    "",
+    "## Materials",
+    "Primarily the document's palette; declare the blocks you place in palette.manifest.",
+    "",
+    "## Required metadata (set EXACTLY)",
+    `- metadata.trial_id = "${runId}"`,
+    `- metadata.prompting_method_id = "${promptMethodId}"`,
+    `- metadata.model_id = "${PHASE1_MODEL_ID}"`,
+    `- metadata.seed = ${task.seed}`,
+    `- metadata.server_state_id = "${task.serverStateId}"`,
+    "",
+    "## Style record",
+    "Keep style.name as the document's style; set style.rationale to one line on what you improved.",
+    "",
+    "## Output (critical)",
+    "Emit ONE complete improved design artifact — the full set of placements, not a diff. Local origin",
+    "at x = 0, y = 0, z = 0 (ground at y = 0).",
   ].join("\n");
 }
 
@@ -811,6 +856,76 @@ const APPROACHES = {
     };
   },
 
+  // Reference-grounded + SECOND PASS: ground the doc in a reference photo → high-res build →
+  // render it → revise by comparing the build to the reference (two images). Combines reference
+  // grounding (vRef) with the anchored revision that tightens craft without going bland (v3).
+  "vRefRevise-designdoc": async (task, ctx) => {
+    const promptMethodId = "temple-facade-reference-revise.v0";
+    const refPath = ctx.ref || DEFAULT_REF;
+    const messages = [];
+    let sumIn = 0;
+    let sumOut = 0;
+    let sumCost = 0;
+    const acc = (raw) => {
+      const u = raw.usage || {};
+      sumIn += u.input_tokens || 0;
+      sumOut += u.output_tokens || 0;
+      sumCost += raw.total_cost_usd || 0;
+    };
+    copyFileSync(refPath, join(ctx.dir, "reference" + extname(refPath)));
+
+    // Stage 1 — reference-grounded design doc.
+    const ddPrompt = composeReferenceDesignDocPrompt(task);
+    writeFileSync(join(ctx.dir, "design-doc.prompt.txt"), ddPrompt + "\n");
+    const dd = await requestTextWithImage({
+      prompt: ddPrompt,
+      images: [{ data: readFileSync(refPath), mediaType: refMime(refPath) }],
+      model: PHASE1_MODEL_ID,
+      onMessage: (m) => messages.push(m),
+    });
+    acc(dd.raw);
+    writeFileSync(join(ctx.dir, "design-doc.md"), dd.text + "\n");
+    console.log(`  stage 1 (reference-grounded design doc): ${dd.text.length} chars`);
+
+    // Stage 2 — high-res build.
+    const buildPrompt = composeHighResBuildPrompt(task, { promptMethodId, runId: ctx.runId, designDoc: dd.text });
+    writeFileSync(join(ctx.dir, "build.prompt.txt"), buildPrompt + "\n");
+    let res = await requestDesignArtifact({ prompt: buildPrompt, model: PHASE1_MODEL_ID, onMessage: (m) => messages.push(m) });
+    acc(res.raw);
+    let artifact = res.artifact;
+    console.log(`  stage 2 (high-res build): ${(artifact.placements ?? []).length} ops`);
+
+    // Stage 3 — second pass: render, then revise comparing the build to the reference (2 images).
+    const wipName = "round-0.png";
+    await ctx.renderArtifact(artifact, { outPath: join(ctx.dir, wipName), view: task.view });
+    const revPrompt = composeRefRevisionPrompt(task, { promptMethodId, runId: ctx.runId, designDoc: dd.text });
+    writeFileSync(join(ctx.dir, "revise.prompt.txt"), revPrompt + "\n");
+    res = await requestDesignArtifactWithImage({
+      prompt: revPrompt,
+      images: [{ data: readFileSync(refPath), mediaType: refMime(refPath) }, readFileSync(join(ctx.dir, wipName))],
+      model: PHASE1_MODEL_ID,
+      onMessage: (m) => messages.push(m),
+    });
+    acc(res.raw);
+    artifact = res.artifact;
+    console.log(`  stage 3 (reference-compared 2nd pass): ${(artifact.placements ?? []).length} ops`);
+
+    const raw = {
+      subtype: "success",
+      num_turns: 3,
+      usage: { input_tokens: sumIn, output_tokens: sumOut },
+      total_cost_usd: sumCost,
+    };
+    return {
+      artifact,
+      raw,
+      messages,
+      prompt: "(reference → grounded doc → build → reference-compared 2nd pass)",
+      promptMethodId,
+      roundImages: [wipName],
+    };
+  },
+
   // Best-of-N (literature: for divergent/open-ended tasks, parallel sampling + a verifier
   // beats sequential refinement — Snell et al. 2408.03314). Sample K independent design-doc
   // candidates IN PARALLEL, judge each with the rubric, keep the best. Free on a flat-cost
@@ -931,7 +1046,7 @@ function regenerateReadme() {
       (s) =>
         `### ${String(s.seq).padStart(3, "0")} — \`${s.approach}\` · ${s.date}\n\n` +
         `![temple-facade run ${s.seq}](runs/${s.runId}/render.png)\n\n` +
-        `score ${sc(s)}/5 · ${s.blocks} blocks · ${s.tokensIn}/${s.tokensOut} tok · ${usd(s.costUsd)}` +
+        `**${sc(s)}** · ${s.blocks} blocks · ${s.tokensIn}/${s.tokensOut} tok · ${usd(s.costUsd)}` +
         (s.note ? `\n\n> ${s.note}` : ""),
     )
     .join("\n\n");

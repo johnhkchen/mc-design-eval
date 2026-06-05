@@ -52,6 +52,7 @@ auto-injected corpus). Review and update it after each run.
 | 6 | 2026-06-04 | `v4-designdoc-highres` | 4 | 9376 | 20476/28875 | $0.9124 | 407s | design-doc + HIGH-RES build: lift relief/scale caps, require deep relief + proportioned crown (vs v2 capped) |
 | 7 | 2026-06-05 | `v5-designdoc-detail` | 3.33 | 6985 | 21752/34687 | $1.0661 | 448s | v4 high-res + hard surface-detail push (retry-on-malformed enabled) |
 | 8 | 2026-06-05 | `vRef-designdoc` | 4 | 20311 | 21837/34157 | $1.6368 | 490s | design doc grounded in Sun Yat-sen Mausoleum reference (JPEG), then v4 high-res build |
+| 9 | 2026-06-04 | `vRef-designdoc` | strong | 24596 | 0/0 | $0.0000 | — | Arc de Triomphe; salvaged (run errored at summary step after a build-narration retry) |
 
 ## Gallery
 
@@ -59,7 +60,7 @@ auto-injected corpus). Review and update it after each run.
 
 ![temple-facade run 1](runs/001-v0-facade/render.png)
 
-score 4/5 · 2908 blocks · 9841/26219 tok · $0.7602
+**4** · 2908 blocks · 9841/26219 tok · $0.7602
 
 > baseline: open style + color, frontal shot
 
@@ -67,7 +68,7 @@ score 4/5 · 2908 blocks · 9841/26219 tok · $0.7602
 
 ![temple-facade run 2](runs/002-v1-multimodal/render.png)
 
-score 4/5 · 1820 blocks · 19830/59460 tok · $1.6926
+**4** · 1820 blocks · 19830/59460 tok · $1.6926
 
 > draft + 1 visual-feedback revision
 
@@ -75,7 +76,7 @@ score 4/5 · 1820 blocks · 19830/59460 tok · $1.6926
 
 ![temple-facade run 3](runs/003-v2-designdoc/render.png)
 
-score 3/5 · 1372 blocks · 19767/35588 tok · $1.0759
+**3** · 1372 blocks · 19767/35588 tok · $1.0759
 
 > design-document-first: lore + architectural rationale + color-theory palette, then build
 
@@ -83,7 +84,7 @@ score 3/5 · 1372 blocks · 19767/35588 tok · $1.0759
 
 ![temple-facade run 4](runs/004-v3-designdoc-revise/render.png)
 
-score 3/5 · 959 blocks · 29639/60139 tok · $1.7982
+**3** · 959 blocks · 29639/60139 tok · $1.7982
 
 > design-doc + identity-preserving multimodal revision (P3+P4)
 
@@ -91,7 +92,7 @@ score 3/5 · 959 blocks · 29639/60139 tok · $1.7982
 
 ![temple-facade run 5](runs/005-vN-bestof/render.png)
 
-score 3.67/5 · 2273 blocks · 126140/124371 tok · $5.3415
+**3.67** · 2273 blocks · 126140/124371 tok · $5.3415
 
 > best-of-4 design-doc, judge-selected (test: does selection break the 3-4 plateau?)
 
@@ -99,7 +100,7 @@ score 3.67/5 · 2273 blocks · 126140/124371 tok · $5.3415
 
 ![temple-facade run 6](runs/006-v4-designdoc-highres/render.png)
 
-score 4/5 · 9376 blocks · 20476/28875 tok · $0.9124
+**4** · 9376 blocks · 20476/28875 tok · $0.9124
 
 > design-doc + HIGH-RES build: lift relief/scale caps, require deep relief + proportioned crown (vs v2 capped)
 
@@ -107,7 +108,7 @@ score 4/5 · 9376 blocks · 20476/28875 tok · $0.9124
 
 ![temple-facade run 7](runs/007-v5-designdoc-detail/render.png)
 
-score 3.33/5 · 6985 blocks · 21752/34687 tok · $1.0661
+**3.33** · 6985 blocks · 21752/34687 tok · $1.0661
 
 > v4 high-res + hard surface-detail push (retry-on-malformed enabled)
 
@@ -115,8 +116,16 @@ score 3.33/5 · 6985 blocks · 21752/34687 tok · $1.0661
 
 ![temple-facade run 8](runs/008-vRef-designdoc/render.png)
 
-score 4/5 · 20311 blocks · 21837/34157 tok · $1.6368
+**4** · 20311 blocks · 21837/34157 tok · $1.6368
 
 > design doc grounded in Sun Yat-sen Mausoleum reference (JPEG), then v4 high-res build
+
+### 009 — `vRef-designdoc` · 2026-06-04
+
+![temple-facade run 9](runs/009-vRef-designdoc/render.png)
+
+**strong** · 24596 blocks · 0/0 tok · $0.0000
+
+> Arc de Triomphe; salvaged (run errored at summary step after a build-narration retry)
 
 <!-- RUNS:END -->

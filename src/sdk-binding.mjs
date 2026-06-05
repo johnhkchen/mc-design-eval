@@ -276,7 +276,7 @@ async function invokeClaude({ args, stdin, onMessage }) {
  *   and per-turn usage. Must not mutate the message.
  * @returns {Promise<{ artifact: import("./artifact.mjs").DesignArtifact, raw: object }>}
  */
-export async function requestDesignArtifact({ prompt, model, options = {}, onMessage, retries = 1 } = {}) {
+export async function requestDesignArtifact({ prompt, model, options = {}, onMessage, retries = 2 } = {}) {
   void options; // reserved (see jsdoc); single-shot runs tool-free on the CLI path
   const args = ["-p", "--output-format", "stream-json", "--verbose"];
   if (model) args.push("--model", model);

@@ -1,0 +1,69 @@
+You are a master Minecraft architect. Below is your FINALIZED design document for a temple
+facade. Build it as a structured design artifact that faithfully realizes the document, at
+GENEROUS SCALE and with DEEP RELIEF. Earlier facades were too small and too flat — do not
+repeat that; use the room you are given.
+
+## Finalized design document
+# Temple of the Triumphal Dawn
+
+## 1. Lore & setting
+A victory-temple of the **Solari**, a sun-worshipping republic that raised a single monumental gate-shrine to honor those who held the pass. Like the reference — a *triumphal arch*, civic and commemorative rather than devotional-enclosed — this is a threshold you walk *through* to be counted among the honored. Era: an imagined neoclassical empire at its confident zenith.
+
+## 2. Aesthetic & architectural logic
+The reference reads as **one cubic mass pierced by one great void**: a near-square silhouette, a single central archway, broad solid piers, capped by a tall attic band. It works because the lone opening concentrates all drama centrally while the unbroken piers give it weight and gravity. I keep that grammar: solidity, symmetry, one dominant arch, sculpture confined to framed relief panels so the wall stays calm.
+
+## 3. Color palette (color theory)
+The reference is warm cream limestone read against a complementary blue sky — so I commit to a **complementary scheme with a metallic accent**:
+- **Dominant — pale cream stone:** `smooth_quartz_block` (the sunlit Pierre de Paris).
+- **Supporting — honey ochre:** `smooth_sandstone` for piers and shadowed relief, the warm tone the stone takes in raking light.
+- **Accent (complement) — sky azure:** `light_blue_terracotta` in the attic roundels, echoing the blue that frames the real monument.
+- **Accent (honor) — gold:** `gold_block`, sparing, for the crowning device only — gilding the victory.
+
+Warm neutrals carry 85%; blue + gold are jewels, not fields.
+
+## 4. Motifs & ornament
+From the reference: **circular roundels** ringing the attic, **deep high-relief figural panels** flanking the arch, a **coffered/dentil cornice**, and the spandrel reliefs above the arch. Adapted: four sunken azure roundels along the crown; two recessed relief niches (quartz figures on sandstone ground) framing the entrance; a dentil course of alternating quartz/sandstone under the cornice.
+
+## 5. Architectural features & proportion
+Reading the reference as roughly **1:1 overall**, arch ≈ ½ the total height, attic ≈ ⅓:
+- **Base:** low sandstone plinth, two steps.
+- **Supports:** two broad quartz piers, each ~¼ the facade width.
+- **Arch:** central, springing at mid-height, the silhouette's heart.
+- **Entablature:** projecting dentil cornice, full relief depth ~3 blocks.
+- **Crown:** flat attic band of azure roundels, centered gold sun-device — the Solari seal catching first light.
+
+## Orientation (photographed head-on)
+Facade FACES +Z, in the X–Y plane (X = width, Y = height, y = 0 ground). Front face at the
+highest Z; relief recedes into −Z. Model only the front and its relief.
+
+## Scale & RELIEF — use it (this is judged)
+- Width up to ~56 (X), height up to ~48 (Y) including the crown. Build big.
+- DEEP relief: up to ~24 blocks of depth into −Z, and genuinely use it. Columns/buttresses
+  project several blocks PROUD of the wall; the central portal RECESSES several blocks deep;
+  cornices, string courses, and the crown step forward and back across MULTIPLE Z-layers. A
+  near-flat screen only 4–6 deep is a failure.
+- CROWN proportion: the crowning element (pediment / parapet / attic / cresting) must span the
+  facade's full width and have real height — a deliberate culmination of the body, never a
+  small cap perched on a wide base.
+
+## Realize the document with craft
+- Build every feature the document specifies; honor its proportion ratios and palette.
+- Frame openings with deep reveals; avoid uniform 45° slopes (vary pitch with slab+stair
+  combos; step curves/arches); use voxel block `state` for mouldings and trim.
+- Use `fill`/`box` for masses and `line` for shafts/edges to stay efficient at this scale.
+
+## Materials
+Primarily the document's palette; declare the blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "009-vRef-designdoc"
+- metadata.prompting_method_id = "temple-facade-reference-designdoc.v0"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Set style.name to the document's style label and style.rationale to one line tying the build
+to the document.
+
+Local origin at x = 0, y = 0, z = 0 (ground at y = 0).

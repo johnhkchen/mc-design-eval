@@ -40,7 +40,7 @@ function regenerateReadme() {
       (s) =>
         `### ${String(s.seq).padStart(3, "0")} — \`${s.approach}\` · ${s.date}\n\n` +
         `![temple-facade run ${s.seq}](runs/${s.runId}/render.png)\n\n` +
-        `score ${sc(s)}/5 · ${s.blocks} blocks · ${s.tokensIn}/${s.tokensOut} tok · ${usd(s.costUsd)}` +
+        `**${sc(s)}** · ${s.blocks} blocks · ${s.tokensIn}/${s.tokensOut} tok · ${usd(s.costUsd)}` +
         (s.note ? `\n\n> ${s.note}` : ""),
     )
     .join("\n\n");
