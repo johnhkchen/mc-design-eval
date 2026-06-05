@@ -22,7 +22,7 @@ class Voxel {
 }
 
 class Line {
-  op "line"
+  op "line" @description("AXIS-ALIGNED or a uniform diagonal ONLY: every nonzero axis delta (to-from) must have equal magnitude. Good: [0,0,0]->[0,10,0] (vertical), [2,2,0]->[8,8,0] (45deg). BAD: [0,0,0]->[7,10,0] (unequal deltas) — that is rejected, not rasterized. For an arbitrary slope, step it with several voxels/short lines.")
   from int[]
   to int[]
   block string
