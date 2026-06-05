@@ -16,6 +16,7 @@
     "bench:judge": "node benchmarks/temple-facade/judge-runs.mjs",
     "build:block-table": "node scripts/build-block-table.mjs",
     "palette:extract": "node scripts/extract-palette.mjs",
+    "grid:build": "node scripts/image-to-grid.mjs",
     "test": "node scripts/validate-artifact.mjs --self-test --expect valid schema/examples/valid-industrial-house.json && node scripts/validate-artifact.mjs --expect invalid schema/examples/invalid-industrial-house.json && npm run test:unit",
     "baml:gen": "baml-cli generate --from baml_src"
   },
