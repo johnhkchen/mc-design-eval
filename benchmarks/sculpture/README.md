@@ -49,6 +49,9 @@ benchmark is the live I/O + rendering + run-dir provenance around it.
 | 2 | 2026-06-05 | `a dancing man` | 32 | 1073 | 20399/11363 | $0.4945 | T-036-01 build |
 | 3 | 2026-06-05 | `a moai statue` | 32 | 2402 | 20379/14273 | $0.5684 | T-036-02 build (E-13/S-036): angular monolith — text-JSON best case |
 | 4 | 2026-06-05 | `a pineapple` | 32 | 3314 | 20931/31040 | $0.9905 | T-036-03 build |
+| 5 | 2026-06-05 | `a bow and arrow` | 32 | 411 | 21453/34999 | $1.0938 | T-036-04 build |
+| 6 | 2026-06-05 | `an anatomically correct human heart` | 32 | 2648 | 21139/16883 | $0.6406 | T-036-05 build |
+| 7 | 2026-06-05 | `a sword` | 32 | 166 | 22298/9677 | $0.4663 | T-036-06 build |
 
 ## Gallery
 
@@ -83,5 +86,29 @@ benchmark is the live I/O + rendering + run-dir provenance around it.
 **3314 blocks** · 20931/31040 tok · $0.9905
 
 > T-036-03 build
+
+### 005 — `a bow and arrow` (scale 32) · 2026-06-05
+
+![sculpture run 5 — 3/4](runs/005-vConcept-a-bow-and-arrow/render-3q.png)
+
+**411 blocks** · 21453/34999 tok · $1.0938
+
+> T-036-04 build
+
+### 006 — `an anatomically correct human heart` (scale 32) · 2026-06-05
+
+![sculpture run 6 — 3/4](runs/006-vConcept-an-anatomically-correct-human-heart/render-3q.png)
+
+**2648 blocks** · 21139/16883 tok · $0.6406
+
+> T-036-05 build
+
+### 007 — `a sword` (scale 32) · 2026-06-05
+
+![sculpture run 7 — 3/4](runs/007-vConcept-a-sword/render-3q.png)
+
+**166 blocks** · 22298/9677 tok · $0.4663
+
+> T-036-06 build
 
 <!-- RUNS:END -->

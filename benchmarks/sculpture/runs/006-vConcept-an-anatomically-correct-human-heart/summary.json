@@ -1,0 +1,46 @@
+{
+  "seq": 6,
+  "runId": "006-vConcept-an-anatomically-correct-human-heart",
+  "date": "2026-06-05",
+  "approach": "vConcept",
+  "promptMethodId": "vconcept-sculpture.v1",
+  "model": "claude-opus-4-8",
+  "effort": null,
+  "subject": "an anatomically correct human heart",
+  "scale": 32,
+  "blocks": 2648,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      -8,
+      0,
+      -6
+    ],
+    "max": [
+      8,
+      31,
+      6
+    ]
+  },
+  "view3q": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "turntable": {
+    "frames": 24,
+    "centerDeg": 45,
+    "amplitudeDeg": 40,
+    "mode": "rock"
+  },
+  "concept": {
+    "model": "gemini-3-pro-image-preview",
+    "promptChars": 4723,
+    "ms": 21215
+  },
+  "tokensIn": 21139,
+  "tokensOut": 16883,
+  "costUsd": 0.64056275,
+  "durationMs": 253515,
+  "note": "T-036-05 build"
+}

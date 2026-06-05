@@ -1,0 +1,853 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "006-vConcept-an-anatomically-correct-human-heart",
+    "prompting_method_id": "vconcept-sculpture.v1",
+    "model_id": "claude-opus-4-8",
+    "seed": 17,
+    "server_state_id": "flat-creative-superflat.v1"
+  },
+  "style": {
+    "name": "anatomical-realism",
+    "rationale": "A lopsided muscular cone (red_terracotta ventricles) leaning down-left to a blunt apex, crowned by a true looping aortic arch with a hole through it (red_concrete) and a branching cluster of cool blue cavae/veins (light_blue_terracotta), with bold yellow_terracotta coronary grooves tracing the front — the real heart, not the valentine — seated base-weighted on a polished_andesite plinth so it reads solid from every side on the turntable."
+  },
+  "palette": {
+    "manifest": [
+      "minecraft:red_terracotta",
+      "minecraft:red_concrete",
+      "minecraft:light_blue_terracotta",
+      "minecraft:yellow_terracotta",
+      "minecraft:polished_andesite"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [
+        -8,
+        0,
+        -5
+      ],
+      "to": [
+        8,
+        1,
+        5
+      ],
+      "block": "minecraft:polished_andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        0,
+        -6
+      ],
+      "to": [
+        7,
+        1,
+        6
+      ],
+      "block": "minecraft:polished_andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        2,
+        -1
+      ],
+      "to": [
+        -1,
+        2,
+        1
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        2,
+        -2
+      ],
+      "to": [
+        -2,
+        2,
+        2
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        3,
+        -1
+      ],
+      "to": [
+        0,
+        3,
+        1
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        3,
+        -2
+      ],
+      "to": [
+        -1,
+        3,
+        2
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        4,
+        -2
+      ],
+      "to": [
+        2,
+        4,
+        2
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        4,
+        -3
+      ],
+      "to": [
+        1,
+        4,
+        3
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        5,
+        -3
+      ],
+      "to": [
+        3,
+        5,
+        3
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        5,
+        -4
+      ],
+      "to": [
+        2,
+        5,
+        4
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        6,
+        -4
+      ],
+      "to": [
+        5,
+        6,
+        4
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        6,
+        -5
+      ],
+      "to": [
+        4,
+        6,
+        5
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -8,
+        7,
+        -4
+      ],
+      "to": [
+        6,
+        7,
+        4
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        7,
+        -5
+      ],
+      "to": [
+        5,
+        7,
+        5
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        8,
+        -5
+      ],
+      "to": [
+        7,
+        8,
+        5
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        8,
+        -6
+      ],
+      "to": [
+        6,
+        8,
+        6
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        9,
+        -5
+      ],
+      "to": [
+        7,
+        9,
+        5
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        9,
+        -6
+      ],
+      "to": [
+        6,
+        9,
+        6
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        10,
+        -5
+      ],
+      "to": [
+        7,
+        10,
+        5
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        10,
+        -6
+      ],
+      "to": [
+        6,
+        10,
+        6
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        11,
+        -4
+      ],
+      "to": [
+        6,
+        11,
+        4
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        11,
+        -5
+      ],
+      "to": [
+        5,
+        11,
+        5
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        12,
+        -4
+      ],
+      "to": [
+        7,
+        12,
+        4
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        12,
+        -5
+      ],
+      "to": [
+        6,
+        12,
+        5
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        13,
+        -3
+      ],
+      "to": [
+        6,
+        13,
+        3
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        13,
+        -4
+      ],
+      "to": [
+        5,
+        13,
+        4
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        14,
+        -3
+      ],
+      "to": [
+        6,
+        14,
+        3
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        14,
+        -4
+      ],
+      "to": [
+        5,
+        14,
+        4
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        15,
+        -2
+      ],
+      "to": [
+        5,
+        15,
+        2
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -2,
+        15,
+        -3
+      ],
+      "to": [
+        4,
+        15,
+        3
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        15,
+        2
+      ],
+      "to": [
+        1,
+        17,
+        5
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        13,
+        -2
+      ],
+      "to": [
+        8,
+        16,
+        2
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        5,
+        13,
+        -3
+      ],
+      "to": [
+        7,
+        17,
+        3
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        15,
+        -2
+      ],
+      "to": [
+        3,
+        17,
+        2
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        2,
+        16,
+        0
+      ],
+      "to": [
+        4,
+        25,
+        2
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        17,
+        0
+      ],
+      "to": [
+        -1,
+        26,
+        2
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        26,
+        0
+      ],
+      "to": [
+        4,
+        28,
+        2
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        28,
+        0
+      ],
+      "to": [
+        -2,
+        31,
+        1
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -1,
+        28,
+        0
+      ],
+      "to": [
+        0,
+        31,
+        1
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        28,
+        0
+      ],
+      "to": [
+        2,
+        30,
+        1
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        28,
+        1
+      ],
+      "to": [
+        4,
+        30,
+        2
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        5,
+        15,
+        -3
+      ],
+      "to": [
+        7,
+        23,
+        -1
+      ],
+      "block": "minecraft:light_blue_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        16,
+        2
+      ],
+      "to": [
+        -2,
+        24,
+        4
+      ],
+      "block": "minecraft:light_blue_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        22,
+        3
+      ],
+      "to": [
+        2,
+        24,
+        4
+      ],
+      "block": "minecraft:light_blue_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        24,
+        3
+      ],
+      "to": [
+        1,
+        26,
+        4
+      ],
+      "block": "minecraft:light_blue_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        13,
+        4
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -1,
+        12,
+        5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -1,
+        11,
+        5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -2,
+        10,
+        6
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -2,
+        9,
+        6
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -2,
+        8,
+        6
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -3,
+        7,
+        5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -3,
+        6,
+        5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -2,
+        5,
+        4
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -2,
+        4,
+        3
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -4,
+        12,
+        5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -3,
+        12,
+        5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        12,
+        5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        12,
+        5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        12,
+        5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -4,
+        11,
+        5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        11,
+        5
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        10,
+        6
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        9,
+        6
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        8,
+        6
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        9,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        8,
+        1
+      ],
+      "block": "minecraft:yellow_terracotta"
+    }
+  ]
+}

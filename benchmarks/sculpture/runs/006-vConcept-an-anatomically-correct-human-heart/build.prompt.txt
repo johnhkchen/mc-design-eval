@@ -1,0 +1,75 @@
+You are a master Minecraft sculptor. Build a FREESTANDING 3-D SCULPTURE as a structured
+design artifact that faithfully realizes the subject "an anatomically correct human heart" — its form, proportion,
+palette, and motifs — per the finalized design document and the attached CONCEPT IMAGE.
+This is an OBJECT IN THE ROUND, displayed on a turntable: it occupies all three axes and
+must read as a solid sculpture from every side. It is NOT a facade, wall, relief, or scene.
+
+## Orientation (a sculpture, not a facade)
+Build a fully three-dimensional object in x/y/z, centered on a local origin (x = 0, z = 0),
+standing on the ground at y = 0. Model the WHOLE object — front, back, both sides, and top —
+as real volume; give it depth and roundness, not a single thin face. There is no privileged
+'front plane' and no relief-into-a-wall: massing projects in every direction as the form needs.
+
+## Single-view limitation (read this)
+The attached concept shows ONE 3/4 view. The back and the far side are NOT depicted — infer
+them as a plausible, coherent continuation of the visible form (mirror symmetric features where
+the subject is symmetric; keep volumes and palette consistent all the way around). Treat that
+hidden half as YOUR reconstruction from a single view — a known limit of this mode — and make it
+read as a finished, deliberate surface, never a flat or hollow back.
+
+## Finalized design document
+# Design Document — Freestanding Sculpture: Anatomically Correct Human Heart
+
+## 1. Read of the subject
+A human heart is a **fist-sized, lopsided muscular cone**, not the symmetric valentine. Essential masses: a fat **rounded body** (the ventricles) tapering to a blunt **apex** that tilts down-left, two soft **atrial bulges** on top, and a **crown of great vessels** erupting from the base. The two unmistakable cues are the **arching aorta** (the candy-cane curve looping up and over) and the **cluster of branching tubes** at the top. Those, plus the tilted teardrop body, make a viewer say "heart, the real one" — not the cartoon.
+
+## 2. Form & proportion (in the round)
+- **Body (ventricles):** ~14 tall × ~14 wide × ~12 deep ovoid, asymmetric — right side flatter, left rounder. Apex offset to one side so it leans, never bilaterally mirrored.
+- **Vessel crown:** ~10–12 blocks of stacked tubes above the body; the aortic arch is the tallest element, carrying the **longest dimension to ~32** (apex-to-arch-top).
+- **Silhouette:** FRONT — teardrop body with a vessel tangle on top, aorta hooking right. SIDE — clearly front-heavy, vessels leaning back. 3/4 — the arch reads as a true loop with a hole through it (the recognizing angle).
+- **Footing:** vessels are cut flat at the base and seated on a **2-block plinth disc** of polished stone so it sits stable on the turntable, base-weighted, never top-heavy.
+
+## 3. Color palette (color theory)
+Near-complementary, warm-dominant:
+- **Dominant — `red_terracotta`** (muscle): muted, fleshy, less neon than concrete.
+- **Supporting — `red_concrete`** (oxygenated aorta/arteries) and **`light_blue_terracotta`** (vena cava, pulmonary veins): the cool blue pops the warm mass via complement.
+- **Accent — `yellow_terracotta`** (coronary fat/vessels, sparingly tracing the body's grooves).
+- **Plinth — `polished_andesite`** (neutral, recedes).
+
+## 4. Surface & motifs
+- **Coronary grooves:** single-block channels of `yellow_terracotta` snaking down the ventricle front — bold, block-scale, the "anatomy" tell.
+- **Vessel rings:** each great vessel is a clean 3–4-wide tube; blue vs. red separation reads instantly.
+
+## 5. Block-budget plan (~32 longest edge)
+Apex→arch-top 32: plinth 2, ventricular body 14, atria 4, vessel crown + aortic arch 12. Body footprint ≈14×12 — compact, readable from every side.
+
+## Scale (honor it)
+- Target ~32 blocks along the LONGEST dimension. Bounding box up to ~32(x) × 32(y)
+  × 32(z); build a compact, solid object that fills that envelope without sprawling.
+- Use `fill`/`box` for the major masses and `line` for struts/edges so you can afford solid
+  volume; reserve `voxel` (with block `state` for stairs/slabs) for shaping curves, facets,
+  and surface detail. Approximate curves/round forms with stepped stairs+slabs, not flat panels.
+
+## Realize the document with craft
+- Build the essential masses and the recognizable features the document names; honor its
+  proportions and its dominant/supporting/accent palette hierarchy.
+- Keep the object SOLID and connected — no detached floating parts unless the subject truly has
+  them (and then bridge them so they are supported).
+
+## Materials
+Survival-obtainable Minecraft 1.20.1 blocks, namespaced — primarily the document's palette.
+Declare every block you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "006-vConcept-an-anatomically-correct-human-heart"
+- metadata.prompting_method_id = "vconcept-sculpture.v1"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 17
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Set style.name to the document's style label and style.rationale to one line tying the build to
+the subject and document.
+
+Emit ONE complete design artifact — the full set of placements, not a diff. Local origin at
+x = 0, y = 0, z = 0 (ground at y = 0).
