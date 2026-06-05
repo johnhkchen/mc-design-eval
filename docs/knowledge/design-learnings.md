@@ -1387,3 +1387,70 @@ voxelizer — it plugs into `MassingSource`, and the boundary test guarantees th
 
 `npm test` **302/302** green (+11 over the 291 from T-028/T-032: 7 staged-loop end-to-end tests + 4 reuse
 boundary tests). E-11's staged-sculptor framework is shipped.
+
+## Fidelity-vs-concept frontier (E-13 sculpture set, S-038) · 2026-06-05
+
+The `vConcept` sculpture pipeline (term → Nano-Banana 3/4 concept → **text→JSON** build → real voxel
+render) run across **12 builds**: 8 fresh subjects @ scale 32 (T-036-01…08) and a moai + pineapple
+**16/32/48** scale study (T-037-01…04). Curated into `pr/assets/sculptures.md` (concept↔render pairs +
+rock turntables + the two triptychs). This is the **measured case for image→3D / the staged sculptor
+(E-11) / TRELLIS (E-09)**: where text→JSON holds, and where it cannot. Per-build evidence:
+`docs/active/work/T-036-0{1,3,4,5,6,7,8}/fidelity-read.md`, `runs/003-…/fidelity.md`,
+`docs/active/work/T-037-0{1,2,3}/fidelity-read.md`, and run 013 inspected in T-038-01.
+
+### The frontier, by form type
+
+Text→JSON reliably carries **palette + part-inventory**; what it loses is **geometry** — and *which*
+geometry it loses tracks the form type:
+
+- **Angular / faceted → realizes best.** **Moai** (run 003): faithful form, every signature cue
+  transfers (stepped brow, eye sockets, nose ridge, set mouth, topknot, plinth) — judged **Competent,
+  form Strong**, the series' best case; only `gray_concrete` drifts darker than the pale tuff (value,
+  not form — see *concept-image-not-color-value-preview*). **Sword** (run 007): faithful cruciform,
+  part-for-part; the one loss is the tip *stepping* rather than tapering to a point. Voxels are
+  axis-aligned boxes — a subject *made of* axis-aligned planes is a near-isomorphism.
+- **Thin / linear → recognizability is angle-gated.** **Bow & arrow** (run 005), the hardest case:
+  the complete part inventory survives in the exact palette, but 1-wide elements foreshorten — at the
+  fixed 45° hero azimuth the arrow collapses to a speck; **only the turntable reads it**. The
+  dancing-man's kicked leg and the sword's tip show the same 1-wide fragility. The *parts* are there;
+  the *still angle* hides them. (See *Fixed 45° hero azimuth actively misleading for orientation-
+  sensitive subjects*.)
+- **Smooth / organic → palette + parts kept, *line* lost.** **Heart** (run 006, **loose**): right
+  material vocabulary, **wrong form** — the lobed teardrop became a rectangular block and the aortic
+  arch **never built as a loop** (its single strongest "real heart" cue), so it reads as an abstract
+  shrine. **Koi** (run 009): right Kohaku palette + every named mass, but the swimming **S-curve** and
+  membranous fins flatten to a straight chunky body + stepped slabs — reads as koi only **broadside**.
+  **Mushroom** (run 008) and **pineapple** (run 004) survive better (their defining mass is a
+  blob, not a line) but still terrace the dome / wash out the lattice. The voxel grid cannot hold a
+  **continuous curve** — the exact thing organic identity lives in.
+
+**One sentence:** text→JSON keeps *what a thing is made of* and *what parts it has*, and loses *line*
+(organic) and *point* (thin) — the two geometries a box lattice can't represent.
+
+### The frontier, by scale (the two triptychs)
+
+`triptych-moai-16-32-48.png` and `triptych-pineapple-16-32-48.png` isolate the scale variable (shared
+concept, three block budgets). They make **opposite** cases — the non-obvious result:
+
+- **Moai (angular): non-monotonic, peaks at 32.** @16 the carved face still reads (graceful
+  coarsening); @32 is best (face + topknot + plinth); **@48 regresses to a near-featureless dark
+  monolith** — given ~6300 blocks the model spent them on coarse fills, not on resolving the face.
+  Bigger ≠ better (see *sculpture-fidelity-non-monotonic-in-scale*).
+- **Pineapple (organic): rewards the budget, ~monotonic up.** @16 blocky but a bold checker; @32
+  rounded body but a **faint** lattice (low value contrast); **@48 is best** — the only scale that
+  delivers *both* a rounded ovoid *and* a legible brown-diamond skin (12176 blocks bought form **and**
+  pattern). Cost: the crown's thin fronds fragment into floating tips. (At @16 a tighter budget also
+  forced a *bolder* palette that read better than @32 — *low-scale-can-improve-pattern-read*.)
+
+**The sharpened law:** the **sign of the scale effect is form-type-dependent**. An angular,
+single-dominant-mass subject can *waste* a large budget on coarse fills; an organic, textured subject
+*converts* extra blocks into both form and pattern. "Scale up for fidelity" is **not** a safe default.
+
+### Why this is the image→3D case
+
+Across all 12: palette and part-inventory are solved; **geometry is the ceiling**. Organic line, thin
+points, and reliable blocks→detail conversion are precisely what a **single-view text→JSON build cannot
+guarantee** — and precisely what an **image→3D** model (TRELLIS, E-09) or a **staged geometric sculptor**
+(E-11) exists to supply. The honest failures (heart, koi, moai@48) are not bugs to hide; they are the
+**measured motivation** for the next stage. The package hands E-12 the visual proof — wins, gaps, and
+the scale frontier, side by side.

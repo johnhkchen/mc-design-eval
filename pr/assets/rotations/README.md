@@ -48,3 +48,28 @@ node render/src/orbit-chain.mjs render/out/orbit/montage.mp4 \
 ```
 
 Requires headless GL (`GL_AVAILABLE`) for `orbit-cli`, and `ffmpeg` on PATH for encoding/chaining.
+
+## Sculpture set (E-13 / S-038) — `rock-<subject>-<seq>.mp4`
+
+The 12-build sculptural best-of (T-038-01). These rocks were **not re-rendered**: the `vConcept`
+sculpture pipeline already saves each build's turntable as 24 rock-mode frames
+(`summary.json.turntable` = center 45°, amplitude 40°, mode `rock`), so this set is just those frames
+**ffmpeg-encoded** (12 fps, `yuv420p`) — same params as `render/src/orbit-clip.mjs`. The source
+`runs/*/turntable/` frames are gitignored; these mp4s are the committed artifacts. Manifest + captions:
+`pr/assets/sculptures.md`.
+
+| clip | build | source run |
+|------|-------|------------|
+| `rock-dancing-man-002.mp4` | dancing man @32 | `sculpture/runs/002-…` |
+| `rock-moai-003.mp4` | moai @32 (angular best case) | `sculpture/runs/003-…` |
+| `rock-pineapple-004.mp4` | pineapple @32 | `sculpture/runs/004-…` |
+| `rock-bow-and-arrow-005.mp4` | bow & arrow @32 (thin stress) | `sculpture/runs/005-…` |
+| `rock-heart-006.mp4` | anatomical heart @32 (form loss) | `sculpture/runs/006-…` |
+| `rock-sword-007.mp4` | sword @32 | `sculpture/runs/007-…` |
+| `rock-mushroom-008.mp4` | mushroom @32 | `sculpture/runs/008-…` |
+| `rock-koi-009.mp4` | koi @32 (line loss) | `sculpture/runs/009-…` |
+| `rock-moai-010.mp4` · `…-003` · `rock-moai-011.mp4` | moai 16 / 32 / 48 triptych | runs 010 / 003 / 011 |
+| `rock-pineapple-012.mp4` · `…-004` · `rock-pineapple-013.mp4` | pineapple 16 / 32 / 48 triptych | runs 012 / 004 / 013 |
+
+Rock (front-arc), not spin: a sculpture's back is **inferred** from one 3/4 concept (single-view
+reconstruction), so the front-arc never parades the weaker reverse. No `spin-*` variants generated.
