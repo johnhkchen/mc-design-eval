@@ -6,6 +6,7 @@
   "description": "Render harness scaffold: build a design as an in-memory voxel world and render it headless to PNG (no Minecraft server, no bot). Epic E-02, spec §3.",
   "scripts": {
     "render:sample": "node src/cli.mjs",
+    "render:orbit": "node src/orbit-cli.mjs",
     "test": "node --test"
   },
   "dependencies": {

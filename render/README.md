@@ -15,6 +15,7 @@ and `node_modules`, so its file footprint is disjoint from concurrent tickets.
 ```sh
 npm install           # builds native gl + canvas (needs python3 + Xcode CLT / build tools)
 npm run render:sample # writes out/sample.png — a stone floor with a few distinct blocks
+npm run render:orbit -- --artifact <runs/id/artifact.json> --frames 8  # turntable frame sequence
 npm test              # node:test — version pin, world API, and a render smoke test
 ```
 
@@ -46,6 +47,10 @@ Bumping the version is one edit there.
 | `src/render.mjs` | `renderBuild(build, opts?)` (path-returning) + `renderWorldToPng(world, center, opts?)` + the render contract (`DEFAULTS`) |
 | `src/render-tool.mjs` | `renderArtifact(artifact, opts?)` — the **artifact→PNG composition core** (T-003-04): `buildWorldFromArtifact` → `renderBuild`, returning a combined build+render report |
 | `src/cli.mjs` | `npm run render:sample` entrypoint |
+| `src/orbit.mjs` | **turntable / orbit** (T-032-01): `orbitAzimuths()` (pure azimuth math) + `renderOrbit(artifact, opts?)` — N frames sweeping azimuth 0→360° at fixed elevation/distance, reusing `renderArtifact`. Artifact-general (reusable by E-11's review bookend) |
+| `src/orbit-clip.mjs` | optional, best-effort ffmpeg clip encode (`maybeEncodeClip`); degrades to frames-only when ffmpeg is absent |
+| `src/orbit-cli.mjs` | `npm run render:orbit` entrypoint |
+| `test/orbit.test.mjs` | orbit azimuth-math (no-GL) + GL-gated frames-differ suite (T-032-01) |
 | `test/scaffold.test.mjs` | the scaffold verification suite (T-003-01) |
 | `test/view.test.mjs` | framing + render-correctness suite (T-003-03) |
 | `test/render-tool.test.mjs` | GL-gated `renderArtifact` end-to-end suite (T-003-04) |
