@@ -1,0 +1,77 @@
+You are a master Minecraft sculptor. Build a FREESTANDING 3-D SCULPTURE as a structured
+design artifact that faithfully realizes the subject "a sword" — its form, proportion,
+palette, and motifs — per the finalized design document and the attached CONCEPT IMAGE.
+This is an OBJECT IN THE ROUND, displayed on a turntable: it occupies all three axes and
+must read as a solid sculpture from every side. It is NOT a facade, wall, relief, or scene.
+
+## Orientation (a sculpture, not a facade)
+Build a fully three-dimensional object in x/y/z, centered on a local origin (x = 0, z = 0),
+standing on the ground at y = 0. Model the WHOLE object — front, back, both sides, and top —
+as real volume; give it depth and roundness, not a single thin face. There is no privileged
+'front plane' and no relief-into-a-wall: massing projects in every direction as the form needs.
+
+## Single-view limitation (read this)
+The attached concept shows ONE 3/4 view. The back and the far side are NOT depicted — infer
+them as a plausible, coherent continuation of the visible form (mirror symmetric features where
+the subject is symmetric; keep volumes and palette consistent all the way around). Treat that
+hidden half as YOUR reconstruction from a single view — a known limit of this mode — and make it
+read as a finished, deliberate surface, never a flat or hollow back.
+
+## Finalized design document
+# Design Document — Freestanding Block Sculpture: "A Sword"
+
+## 1. Read of the subject
+A sword IS a long straight blade meeting a perpendicular crossguard, capped by a gripped hilt and pommel. The instant-recognition cue is the **cruciform silhouette**: a dominant vertical line crossed near its base by a short bar. The blade's **taper to a point** and the **bright metal/dark handle contrast** seal the read. We display it **point-up, vertically**, the most heraldic and stable orientation for a tabletop piece.
+
+## 2. Form & proportion (in the round)
+Four stacked volumes along Y:
+- **Blade** (≈21 blocks): a 3×1 cross-section column tapering to 1×1 at the tip — flat front/side, a slim diamond in plan so it reads as a blade, not a post.
+- **Crossguard** (≈9 blocks wide, 2 tall): the horizontal bar, the only wide mass.
+- **Grip** (≈4 blocks): a 2×2 wrapped handle.
+- **Pommel** (≈2 blocks): a 2×2×2 knob anchoring the bottom.
+Total ≈32 tall. Ratios: blade ≈ 2/3 of height; guard width ≈ ¼ of height. From FRONT the cross reads boldest; from SIDE it thins to an edge-on slab (correct — swords are flat); the **3/4 view** reveals the diamond blade cross-section, proving it's in the round. A **3-wide, 2-thick pommel-grounded footing** plus a small **stone plinth** (5×3×1) keeps it upright, not top-heavy.
+
+## 3. Color palette (color theory)
+**Cool metal vs. warm handle — complementary contrast** suits the weapon's steel-and-leather identity.
+- **Dominant:** `iron_block` — bright blade steel.
+- **Supporting:** `polished_andesite` — blade edge/fuller shading for value depth.
+- **Accent (warm):** `dark_oak_log` grip + `gold_block` pommel & guard tips — regal warm pop against cool steel.
+- **Base:** `stone` plinth (neutral).
+
+## 4. Surface & motifs
+- **Central fuller**: a single vertical `polished_andesite` stripe down the blade's front face — the blade's defining groove, bold at block scale.
+- **Guard caps**: `gold_block` at each crossguard end, mirroring the pommel for symmetry.
+
+## 5. Block-budget plan
+Longest edge (32, vertical): blade 21 · guard zone 2 · grip 4 · pommel 2 · plinth 1–2. Width capped at 9 (guard); depth capped at 3 (blade base) — a compact, readable cruciform.
+
+## Scale (honor it)
+- Target ~32 blocks along the LONGEST dimension. Bounding box up to ~32(x) × 32(y)
+  × 32(z); build a compact, solid object that fills that envelope without sprawling.
+- Use `fill`/`box` for the major masses and `line` for struts/edges so you can afford solid
+  volume; reserve `voxel` (with block `state` for stairs/slabs) for shaping curves, facets,
+  and surface detail. Approximate curves/round forms with stepped stairs+slabs, not flat panels.
+
+## Realize the document with craft
+- Build the essential masses and the recognizable features the document names; honor its
+  proportions and its dominant/supporting/accent palette hierarchy.
+- Keep the object SOLID and connected — no detached floating parts unless the subject truly has
+  them (and then bridge them so they are supported).
+
+## Materials
+Survival-obtainable Minecraft 1.20.1 blocks, namespaced — primarily the document's palette.
+Declare every block you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "007-vConcept-a-sword"
+- metadata.prompting_method_id = "vconcept-sculpture.v1"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 17
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Set style.name to the document's style label and style.rationale to one line tying the build to
+the subject and document.
+
+Emit ONE complete design artifact — the full set of placements, not a diff. Local origin at
+x = 0, y = 0, z = 0 (ground at y = 0).
