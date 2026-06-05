@@ -6,7 +6,7 @@ status: open
 priority: high
 depends_on: [E-03, E-04]
 spec: "§7, §8, §9"
-stories: []
+stories: [S-035, S-036, S-037, S-038]
 ---
 
 ## Goal
@@ -88,19 +88,19 @@ best-of-N. Cheaper, faster, breadth-first — the message is *ease and range*, n
 ## Candidate stories (lisa chain)
 
 ```
-S-035 vConcept sculpture mode + scale
-   ├─> S-036 dancing man ─┐
-   ├─> S-037 moai          │
-   ├─> … (8 sculptural builds, fan-out) ├─> S-044 best-of sequence + rock turntables → E-12
-   └─> S-043 koi fish ─────┘
+S-035 archetype ─> S-036 the 8 sculptural builds (T-036-01..08, fan-out @ ~32) ─┐
+                └─> S-037 scale study (moai & pineapple @ 16 + 48, T-037-01..04) ┴─> S-038 curate → E-12
 ```
 
-- **S-035** — generalize `vConcept` to the **sculpture build mode** (term→doc→concept→3-D build) + a scale
-  parameter; wire as an approach. The crux.
-- **S-036…S-043** — the 8 sculptural builds (one run-the-test each, at a chosen scale; record
-  fidelity-vs-concept).
-- **S-044** — curate the best-of sequence (the 8 + rock turntables + concept/render pairs + captions);
-  journal the fidelity-vs-concept frontier; hand to E-12.
+- **S-035** — generalize `vConcept` to the **single-view sculpture build mode** (term→doc→3/4 concept→3-D
+  build, rendered 3/4 + turntable) + a `--scale` parameter; wire as an approach. *The crux.* (1 ticket)
+- **S-036** — the **8 sculptural builds** at standard scale ~32 (one ticket per subject: dancing man, moai,
+  pineapple, bow & arrow, anatomical heart, sword, mushroom, koi fish), each recording fidelity-vs-concept.
+- **S-037** — the **scale study (b):** two hero subjects (**moai**, **pineapple** — angular vs organic)
+  each at **small ~16** and **large ~48**, so fidelity-vs-scale is visible against their ~32 builds.
+  (4 tickets)
+- **S-038** — curate the best-of sequence (the 8 + rock turntables + concept/render pairs + captions);
+  journal the fidelity-vs-concept frontier by form type & scale; hand to E-12. (1 ticket)
 
 ## Definition of done
 
