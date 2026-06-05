@@ -329,10 +329,9 @@ export async function requestDesignArtifact({ prompt, model, options = {}, onMes
  * @returns {Promise<{ artifact: import("./artifact.mjs").DesignArtifact, raw: object }>}
  */
 export async function requestDesignArtifactWithImage(
-  { prompt, images, model, options = {}, onMessage } = {},
+  { prompt, images, model, options = {}, onMessage, retries = 2 } = {},
 ) {
   void options; // reserved (see jsdoc); parity with the text path
-  const turn = buildImageTurn(prompt, images); // throws on missing/empty images, pre-spawn
   const args = [
     "-p",
     "--output-format",
@@ -342,7 +341,26 @@ export async function requestDesignArtifactWithImage(
     "stream-json",
   ];
   if (model) args.push("--model", model);
-  return invokeClaude({ args, stdin: serializeStreamJsonInput(turn), onMessage });
+
+  // Same narration guard as the text path (P10): the model sometimes returns prose
+  // ("Done. The …") instead of the JSON. Retry with a stern corrective.
+  let lastErr;
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    const p =
+      attempt === 0
+        ? prompt
+        : prompt +
+          "\n\nIMPORTANT: your previous reply was NOT a valid JSON artifact (it began with prose). " +
+          "Output ONLY the single JSON object — no prose, no 'Done', no explanation, no code fences.";
+    const turn = buildImageTurn(p, images); // throws on missing/empty images, pre-spawn
+    try {
+      return await invokeClaude({ args, stdin: serializeStreamJsonInput(turn), onMessage });
+    } catch (e) {
+      lastErr = e;
+      if (!/re-validation|invalid_json|no structured payload|valid artifact/i.test(e.message)) throw e;
+    }
+  }
+  throw lastErr;
 }
 
 /**
