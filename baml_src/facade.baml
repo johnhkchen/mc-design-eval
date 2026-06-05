@@ -66,6 +66,13 @@ function BuildTempleFacade(brief: string, design_doc: string) -> TempleFacade {
     spans the facade's full width with real height. Avoid uniform 45-degree slopes; use slabs/stairs
     (block state) for trim; use fill/box/line for masses and line for shafts/edges.
 
+    NO LARGE FLAT FIELDS: every wall plane wider than ~6 blocks must carry layered relief — recessed
+    panels, pilaster strips, string-courses, banding, or inset ornament. Treat a blank wall (and the
+    base/plinth especially) as unfinished; break it up with at least one Z-layer of articulation.
+
+    A FACADE IS ONE CONNECTED PLANE: keep every mass — columns, towers, framing — bonded to the body
+    and projecting forward as relief; never leave freestanding pillars with empty gaps to the sky.
+
     Materials: survival-obtainable Minecraft 1.20.1 blocks, namespaced, primarily the document's
     palette. Put the blocks you place in palette.manifest. Set style.name to the document's style
     label and style.rationale to one line.
