@@ -1,0 +1,71 @@
+You are a master Minecraft sculptor. Build a FREESTANDING 3-D SCULPTURE as a structured
+design artifact that faithfully realizes the subject "moai" — its form, proportion,
+palette, and motifs — per the finalized design document and the attached CONCEPT IMAGE.
+This is an OBJECT IN THE ROUND, displayed on a turntable: it occupies all three axes and
+must read as a solid sculpture from every side. It is NOT a facade, wall, relief, or scene.
+
+## Orientation (a sculpture, not a facade)
+Build a fully three-dimensional object in x/y/z, centered on a local origin (x = 0, z = 0),
+standing on the ground at y = 0. Model the WHOLE object — front, back, both sides, and top —
+as real volume; give it depth and roundness, not a single thin face. There is no privileged
+'front plane' and no relief-into-a-wall: massing projects in every direction as the form needs.
+
+## Single-view limitation (read this)
+The attached concept shows ONE 3/4 view. The back and the far side are NOT depicted — infer
+them as a plausible, coherent continuation of the visible form (mirror symmetric features where
+the subject is symmetric; keep volumes and palette consistent all the way around). Treat that
+hidden half as YOUR reconstruction from a single view — a known limit of this mode — and make it
+read as a finished, deliberate surface, never a flat or hollow back.
+
+## Finalized design document
+# Moai — Freestanding Block Sculpture (Design Document)
+
+## 1. Read of the subject
+A moai is a **monolithic head-and-torso figure**: roughly three-fifths head, two-fifths body, no legs. It reads instantly from one cluster of features — a **heavy straight brow shelf**, a **long wedge nose**, **sunken eye sockets**, **thin pressed lips**, and a **jutting blunt chin**. Secondary tells: **elongated rectangular ears** down the sides and **stub hands meeting over the lower belly**. Get the brow-nose-chin axis right and a viewer names it at a glance.
+
+## 2. Form & proportion (in the round)
+Stacked volumes, all rectilinear-slab: **base plinth → torso block → neck pinch → head wedge**. Head occupies the top ~19 of 32 blocks, body ~11, plinth ~2. The head is a **front-heavy wedge**, deeper top-to-chin than wide, so the **3/4 view shows the nose-ridge profile** that the front flattens. Side silhouette: a backward-leaning slab with the face overhanging the chest. Ears project ~1 block per side. A **footprint ~12×10** plinth keeps it bottom-heavy and stable — never top-heavy despite the big head.
+
+## 3. Color palette
+**Monochrome-with-warm-crown** harmony — fitting volcanic basalt with one cultural accent.
+- **Dominant:** Gray Concrete (the carved tuff body — flat, matte, stony).
+- **Supporting:** Andesite and Cobblestone Stairs for weathered shading on cheeks/brow and chin underside.
+- **Accent (sparing):** Red Nether Bricks for the **pukao topknot**, the single warm note that draws the eye up and signals "Rapa Nui."
+
+## 4. Surface & motifs
+Two motifs at block scale: the **brow-and-nose cross** (a one-block-deep nose ridge meeting a recessed brow line, casting the signature shadow) and **carved eye sockets** (1×1 inset pits). Cheeks and torso left **flat and unbroken** so the bold geometry survives voxelization.
+
+## 5. Block-budget plan
+Of the 32-block height: **plinth 2, torso 11, neck 1, head 16, pukao 2**. Width tapers 12→10→9 from plinth to head; depth held ~10 so the profile stays massive. Ears and nose spend the lateral/forward budget; everything else stays compact and readable.
+
+## Scale (honor it)
+- Target ~32 blocks along the LONGEST dimension. Bounding box up to ~32(x) × 32(y)
+  × 32(z); build a compact, solid object that fills that envelope without sprawling.
+- Use `fill`/`box` for the major masses and `line` for struts/edges so you can afford solid
+  volume; reserve `voxel` (with block `state` for stairs/slabs) for shaping curves, facets,
+  and surface detail. Approximate curves/round forms with stepped stairs+slabs, not flat panels.
+
+## Realize the document with craft
+- Build the essential masses and the recognizable features the document names; honor its
+  proportions and its dominant/supporting/accent palette hierarchy.
+- Keep the object SOLID and connected — no detached floating parts unless the subject truly has
+  them (and then bridge them so they are supported).
+
+## Materials
+Survival-obtainable Minecraft 1.20.1 blocks, namespaced — primarily the document's palette.
+Declare every block you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "001-vConcept-moai"
+- metadata.prompting_method_id = "vconcept-sculpture.v1"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 17
+- metadata.server_state_id = "flat-creative-superflat.v1"
+- metadata.target = "moai"
+
+## Style record
+Set style.name to the document's style label and style.rationale to one line tying the build to
+the subject and document.
+
+Emit ONE complete design artifact — the full set of placements, not a diff. Local origin at
+x = 0, y = 0, z = 0 (ground at y = 0).

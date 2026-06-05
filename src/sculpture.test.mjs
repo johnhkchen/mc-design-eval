@@ -81,25 +81,25 @@ test("runIdForSubject: zero-padded seq + slug", () => {
   assert.equal(runIdForSubject(1, "koi  fish!"), "001-vConcept-koi-fish");
 });
 
-test("sculptureMetadata: pins the archetype identity; target optional", () => {
-  const m = sculptureMetadata({ runId: "003-vConcept-moai", scale: 32, target: "moai" });
+test("sculptureMetadata: pins archetype identity; NEVER sets the target enum", () => {
+  const m = sculptureMetadata({ runId: "003-vConcept-moai" });
   assert.equal(m.prompting_method_id, VCONCEPT_SCULPTURE_METHOD_ID);
   assert.equal(m.model_id, PHASE1_MODEL_ID);
   assert.equal(m.trial_id, "003-vConcept-moai");
-  assert.equal(m.target, "moai");
   assert.equal(Number.isInteger(m.seed), true);
-  // model override + no target.
-  const m2 = sculptureMetadata({ runId: "x", scale: 16, model: "claude-test" });
+  // target is a schema enum (house|path|landscape) — a sculpture must NOT set it.
+  assert.equal("target" in m, false);
+  // model override flows through.
+  const m2 = sculptureMetadata({ runId: "x", model: "claude-test" });
   assert.equal(m2.model_id, "claude-test");
-  assert.equal("target" in m2, false);
 });
 
-test("metadataPinLines: emits the EXACTLY-set fields", () => {
-  const lines = metadataPinLines(sculptureMetadata({ runId: "r1", scale: 32, target: "moai" }));
+test("metadataPinLines: emits the EXACTLY-set fields, no target", () => {
+  const lines = metadataPinLines(sculptureMetadata({ runId: "r1" }));
   const joined = lines.join("\n");
   assert.match(joined, /metadata\.trial_id = "r1"/);
   assert.match(joined, /metadata\.prompting_method_id = "vconcept-sculpture\.v1"/);
-  assert.match(joined, /metadata\.target = "moai"/);
+  assert.doesNotMatch(joined, /metadata\.target/);
 });
 
 test("design-doc prompt: subject + scale present, object-oriented, no facade tokens", () => {
@@ -124,10 +124,10 @@ test("build prompt: subject/scale/caps + metadata pins + single-view limit, no f
   assert.match(p, new RegExp(`${maxW}`));
   // the finalized doc is embedded.
   assert.match(p, /stoic basalt head/);
-  // metadata pins (attribution).
+  // metadata pins (attribution) — but NOT target (it is a house|path|landscape enum).
   assert.match(p, /metadata\.prompting_method_id = "vconcept-sculpture\.v1"/);
   assert.match(p, /metadata\.trial_id = "003-vConcept-moai"/);
-  assert.match(p, /metadata\.target = "moai"/);
+  assert.doesNotMatch(p, /metadata\.target/);
   // OBJECT orientation present.
   assert.match(p, /x\/y\/z/);
   assert.match(p, /in the round/i);

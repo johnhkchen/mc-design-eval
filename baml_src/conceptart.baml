@@ -50,3 +50,48 @@ function FacadeConceptPrompt(design_doc: string, target_blocks: int, attached: s
     {{ attached }}
   "#
 }
+
+// Stage-1 concept-art prompt for the vConcept SCULPTURE mode (T-035-01 / E-13). Sibling of
+// FacadeConceptPrompt, kept SEPARATE so the facade prompt stays frozen (its E-09 runs stay
+// reproducible). Same transport: BAML renders the TEXT (b.parse never called for images), the
+// harness attaches it to Nano Banana (Gemini), which generates the 3/4 object concept. Unlike
+// the facade fn this frames a FREESTANDING OBJECT IN THE ROUND at a three-quarter view, not a
+// head-on front elevation — the single image that grounds the 3-D build.
+function SculptureConceptPrompt(design_doc: string, target_blocks: int, attached: string) -> string {
+  client ClaudeStub
+  prompt #"
+    Generate CONCEPT ART of a Minecraft-block SCULPTURE: a SINGLE ISOLATED FREESTANDING OBJECT
+    shown in a clear THREE-QUARTER (3/4) VIEW — angled so two sides and the top read at once,
+    seen slightly from above, as if on a turntable — floating against a solid BLACK (#000000)
+    background so it segments cleanly for 3D reconstruction. No ground plane, no cast shadows, no
+    sky, pedestal-on-ground, scenery, or surroundings of any kind. The whole object is CENTERED
+    and FULLY VISIBLE (not cropped — leave a small margin on every side), filling most of the
+    frame, lit by bright, even STUDIO lighting with no dramatic shadows.
+
+    Render it in authentic MINECRAFT BLOCK style — built from cubic blocks, with block-scale
+    detail ONLY. The build is about {{ target_blocks }} blocks along its longest dimension, so keep
+    every feature BOLD and chunky. HARD LIMITS (anything finer will not survive voxelization, so do
+    NOT draw it). These OVERRIDE the design document below: if it describes any of these, render the
+    BOLD-block replacement instead, never the literal motif:
+    - NO sub-block ornament, fine filigree, thin tracery, lacework, hair strands, or thin spikes;
+      every smallest feature must read as a few WHOLE blocks. Approximate curves and round forms with
+      stepped, faceted blocks, never smooth surfaces.
+    - NO text, letters, numerals, or inscriptions of any kind.
+    Replace every such motif with BOLD GEOMETRIC block forms — chunky masses, stepped facets, and
+    large-scale COLOR BLOCKING. Massing, silhouette, and proportion carry the design.
+
+    Faithfully realize THIS finalized design document — its essential masses and proportion, its
+    motifs, and above all its PALETTE (use its actual named colors; commit to its dominant /
+    supporting / accent hierarchy, never a flat grey or monochrome blob). The object is a SOLID
+    sculpture IN THE ROUND with real depth and roundness on every visible side — not a flat relief
+    or a wall. The background behind the object must be SOLID #000000 black -- NEVER white, light,
+    grey, or any coloured or gradient backdrop; the object floats on pure black. So its edges read
+    crisply against that black, keep the object's OUTER SILHOUETTE in its brighter palette colors and
+    do NOT place black, near-black, OR any dark or dim tone along the outline -- those merge into the
+    black and break segmentation. Reserve any dark tones for recessed or interior areas only:
+
+    {{ design_doc }}
+
+    {{ attached }}
+  "#
+}

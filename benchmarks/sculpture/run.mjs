@@ -1,0 +1,261 @@
+// The vConcept SCULPTURE benchmark (T-035-01 / E-13) — design a freestanding 3-D object from
+// a single TERM and render it as a 3/4 still + a front-arc "rock" turntable. Each run is saved
+// under runs/<NNN-vConcept-<subject>>/ and the README gallery regenerates.
+//
+// LIVE & METERED — runs the model via the `claude -p` subscription shim (spec §4) and Nano
+// Banana (Gemini) for the concept image; rendering needs headless GL:
+//   npm run bench:sculpture -- --subject "moai" --scale 32 --note "what changed"
+//
+// The single approach `vConcept` chains: imagined design doc (text) → ONE 3/4 concept image
+// (Nano Banana, via the BAML SculptureConceptPrompt) → a 3-D DesignArtifact built grounded on
+// that one view (multimodal seam) → a 3/4 still + a rock turntable. The back/sides of the object
+// are the model's reconstruction from the single concept view — a known limit (see README).
+//
+// Prompt WORDING lives in src/sculpture.mjs (pure, unit-tested); this file is I/O + the live
+// seam + rendering + run-dir provenance only.
+
+import { mkdirSync, writeFileSync, readFileSync, readdirSync, existsSync } from "node:fs";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+import { spawn } from "node:child_process";
+import {
+  requestText,
+  requestDesignArtifactWithImage,
+} from "../../src/sdk-binding.mjs";
+import { PHASE1_MODEL_ID } from "../../src/config.mjs";
+import {
+  VCONCEPT_SCULPTURE,
+  DEFAULT_SCALE,
+  SCULPTURE_VIEW_3Q,
+  TURNTABLE,
+  assertSculptureSpec,
+  runIdForSubject,
+  composeSculptureDesignDocPrompt,
+  composeSculptureBuildPrompt,
+} from "../../src/sculpture.mjs";
+
+const HERE = dirname(fileURLToPath(import.meta.url));
+const RUNS_DIR = join(HERE, "runs");
+const README = join(HERE, "README.md");
+
+// Shell out to the tsx BAML concept stage (the generated client is TypeScript). Sends the job
+// JSON on stdin, gets the result record back on stdout. Mirrors temple-facade's runBamlBuild.
+function runBamlConcept(input) {
+  return new Promise((resolve, reject) => {
+    const child = spawn("npx", ["tsx", join(HERE, "baml-concept.mts")], { stdio: ["pipe", "pipe", "inherit"] });
+    let out = "";
+    child.stdout.on("data", (c) => (out += c.toString()));
+    child.on("error", reject);
+    child.on("close", (code) => {
+      if (code !== 0) return reject(new Error(`baml-concept exited ${code}`));
+      try {
+        resolve(JSON.parse(out));
+      } catch (e) {
+        reject(new Error(`baml-concept: unparseable output (${e.message})\n${out.slice(0, 400)}`));
+      }
+    });
+    child.stdin.end(JSON.stringify(input));
+  });
+}
+
+// The single approach: term → doc → concept → 3-D build. Returns the artifact + bookkeeping.
+async function runVConcept({ subject, scale, model, effort }, ctx) {
+  const messages = [];
+  let sumIn = 0;
+  let sumOut = 0;
+  let sumCost = 0;
+  const acc = (raw) => {
+    const u = (raw && raw.usage) || {};
+    sumIn += u.input_tokens || 0;
+    sumOut += u.output_tokens || 0;
+    sumCost += (raw && raw.total_cost_usd) || 0;
+  };
+
+  // Stage 1 — imagined design document (plain text; no reference photo).
+  const ddPrompt = composeSculptureDesignDocPrompt({ subject, scale });
+  writeFileSync(join(ctx.dir, "design-doc.prompt.txt"), ddPrompt + "\n");
+  const dd = await requestText({ prompt: ddPrompt, model, effort, onMessage: (m) => messages.push(m) });
+  acc(dd.raw);
+  writeFileSync(join(ctx.dir, "design-doc.md"), dd.text + "\n");
+  console.log(`  stage 1 (design doc): ${dd.text.length} chars`);
+
+  // Stage 2 — ONE 3/4 concept image from the doc (Nano Banana; doc-only, no reference image).
+  const conceptPath = join(ctx.dir, "concept.png");
+  const concept = await runBamlConcept({
+    designDocPath: join(ctx.dir, "design-doc.md"),
+    images: [],
+    targetBlocks: scale,
+    model: "pro",
+    outPath: conceptPath,
+  });
+  console.log(`  stage 2 (concept image): ${concept.model}, ~${Math.round(concept.promptChars / 4)} tok prompt, ${concept.ms}ms`);
+
+  // Stage 3 — 3-D build grounded on the single concept view (multimodal, schema-enforced).
+  const buildPrompt = composeSculptureBuildPrompt({ subject, scale, designDoc: dd.text, runId: ctx.runId, model });
+  writeFileSync(join(ctx.dir, "build.prompt.txt"), buildPrompt + "\n");
+  const res = await requestDesignArtifactWithImage({
+    prompt: buildPrompt,
+    images: [readFileSync(conceptPath)],
+    model,
+    effort,
+    onMessage: (m) => messages.push(m),
+  });
+  acc(res.raw);
+  console.log(`  stage 3 (3-D build): ${(res.artifact.placements ?? []).length} ops`);
+
+  const raw = {
+    subtype: "success",
+    num_turns: 2,
+    usage: { input_tokens: sumIn, output_tokens: sumOut },
+    total_cost_usd: sumCost,
+  };
+  return { artifact: res.artifact, raw, messages, concept };
+}
+
+function parseArgs(argv) {
+  const out = { subject: undefined, scale: DEFAULT_SCALE, frames: TURNTABLE.frames, note: "", model: PHASE1_MODEL_ID, effort: undefined };
+  for (let i = 0; i < argv.length; i++) {
+    if (argv[i] === "--subject") out.subject = argv[++i];
+    else if (argv[i] === "--scale") out.scale = parseInt(argv[++i], 10);
+    else if (argv[i] === "--frames") out.frames = parseInt(argv[++i], 10);
+    else if (argv[i] === "--note") out.note = argv[++i];
+    else if (argv[i] === "--model") out.model = argv[++i];
+    else if (argv[i] === "--effort") out.effort = argv[++i];
+  }
+  return out;
+}
+
+function nextSeq() {
+  if (!existsSync(RUNS_DIR)) return 1;
+  const seqs = readdirSync(RUNS_DIR)
+    .map((d) => parseInt(d.slice(0, 3), 10))
+    .filter((n) => Number.isInteger(n));
+  return seqs.length ? Math.max(...seqs) + 1 : 1;
+}
+
+function regenerateReadme() {
+  const dirs = existsSync(RUNS_DIR)
+    ? readdirSync(RUNS_DIR).filter((d) => existsSync(join(RUNS_DIR, d, "summary.json")))
+    : [];
+  const summaries = dirs
+    .map((d) => JSON.parse(readFileSync(join(RUNS_DIR, d, "summary.json"), "utf8")))
+    .sort((a, b) => a.seq - b.seq);
+
+  const usd = (n) => `$${Number(n ?? 0).toFixed(4)}`;
+  const table = [
+    "| # | date | subject | scale | blocks | tok in/out | $ | note |",
+    "|---|------|---------|-------|--------|-----------|---|------|",
+    ...summaries.map(
+      (s) =>
+        `| ${s.seq} | ${s.date} | \`${s.subject}\` | ${s.scale} | ${s.blocks} | ${s.tokensIn}/${s.tokensOut} | ${usd(s.costUsd)} | ${s.note || ""} |`,
+    ),
+  ].join("\n");
+
+  const gallery = summaries
+    .map(
+      (s) =>
+        `### ${String(s.seq).padStart(3, "0")} — \`${s.subject}\` (scale ${s.scale}) · ${s.date}\n\n` +
+        `![sculpture run ${s.seq} — 3/4](runs/${s.runId}/render-3q.png)\n\n` +
+        `**${s.blocks} blocks** · ${s.tokensIn}/${s.tokensOut} tok · ${usd(s.costUsd)}` +
+        (s.note ? `\n\n> ${s.note}` : ""),
+    )
+    .join("\n\n");
+
+  const body = summaries.length
+    ? `${table}\n\n## Gallery\n\n${gallery}`
+    : "_(no runs yet — run the benchmark to populate this)_";
+
+  const block = `<!-- RUNS:START (generated by run.mjs — do not edit by hand) -->\n\n${body}\n\n<!-- RUNS:END -->`;
+  const md = readFileSync(README, "utf8").replace(/<!-- RUNS:START[\s\S]*?<!-- RUNS:END -->/, block);
+  writeFileSync(README, md);
+}
+
+async function main() {
+  const args = parseArgs(process.argv.slice(2));
+  if (!args.subject) {
+    console.error('usage: npm run bench:sculpture -- --subject "<term>" --scale <N> [--frames N] [--note "..."] [--model id] [--effort low|medium|high]');
+    process.exit(1);
+  }
+  // Validate BEFORE any metered work (throws sculpture: … on a bad subject/scale).
+  const { subject, scale } = assertSculptureSpec({ subject: args.subject, scale: args.scale });
+
+  const startedAt = Date.now();
+  const seq = nextSeq();
+  const runId = runIdForSubject(seq, subject);
+  const dir = join(RUNS_DIR, runId);
+  mkdirSync(dir, { recursive: true });
+
+  // Lazy: only a live run pulls the GL/prismarine core + orbit rig into the process.
+  const { renderArtifact } = await import("../../render/src/render-tool.mjs");
+  const { renderOrbit, oscillateAzimuths } = await import("../../render/src/orbit.mjs");
+  const { renderSummary } = await import("../../src/render-tool.mjs");
+
+  console.log(`sculpture benchmark ${runId} (vConcept, scale ${scale}) — LIVE via claude -p + Nano Banana ...`);
+  const { artifact, raw, messages, concept } = await runVConcept(
+    { subject, scale, model: args.model, effort: args.effort },
+    { runId, dir },
+  );
+
+  // NB: the per-subject join key is the run id (it embeds the subject slug) + summary.json, NOT
+  // metadata.target — in the live schema `target` is an enum (house|path|landscape), so a subject
+  // term cannot go there without failing the AJV gate. We leave metadata exactly as the model
+  // emitted it (already schema-valid via the build seam).
+  writeFileSync(join(dir, "artifact.json"), JSON.stringify(artifact, null, 2) + "\n");
+
+  // 3/4 hero still — the canonical three-quarter view.
+  const report = await renderArtifact(artifact, { outPath: join(dir, "render-3q.png"), view: SCULPTURE_VIEW_3Q });
+  const sum = renderSummary(report);
+  console.log(`  3/4 still: ${sum.placed} blocks (unmapped ${sum.unmapped}) -> render-3q.png`);
+
+  // Front-arc rock turntable — sweeps the front hemisphere only (never the imagined back).
+  const frames = Number.isInteger(args.frames) && args.frames > 0 ? args.frames : TURNTABLE.frames;
+  const azimuths = oscillateAzimuths(frames, { centerDeg: TURNTABLE.centerDeg, amplitudeDeg: TURNTABLE.amplitudeDeg });
+  const orbit = await renderOrbit(artifact, {
+    frames,
+    azimuths,
+    outDir: join(dir, "turntable"),
+    baseName: "frame",
+    view: { elevationDeg: TURNTABLE.elevationDeg, fov: TURNTABLE.fov },
+  });
+  console.log(`  rock turntable: ${orbit.frames.length} frames -> turntable/`);
+
+  writeFileSync(join(dir, "transcript.jsonl"), messages.map((m) => JSON.stringify(m)).join("\n") + "\n");
+
+  const u = raw.usage || {};
+  const summary = {
+    seq,
+    runId,
+    date: new Date().toISOString().slice(0, 10),
+    approach: "vConcept",
+    promptMethodId: VCONCEPT_SCULPTURE.id,
+    model: args.model,
+    effort: args.effort ?? null,
+    subject,
+    scale,
+    blocks: sum.placed,
+    unmapped: sum.unmapped,
+    bounds: sum.bounds,
+    view3q: SCULPTURE_VIEW_3Q,
+    turntable: { frames, centerDeg: TURNTABLE.centerDeg, amplitudeDeg: TURNTABLE.amplitudeDeg, mode: "rock" },
+    concept: { model: concept.model, promptChars: concept.promptChars, ms: concept.ms },
+    tokensIn: u.input_tokens ?? 0,
+    tokensOut: u.output_tokens ?? 0,
+    costUsd: raw.total_cost_usd ?? 0,
+    durationMs: Date.now() - startedAt,
+    note: args.note,
+  };
+  writeFileSync(join(dir, "summary.json"), JSON.stringify(summary, null, 2) + "\n");
+
+  regenerateReadme();
+
+  console.log(
+    `done ${runId}: ${summary.blocks} blocks, ${summary.tokensIn}/${summary.tokensOut} tok, ` +
+      `$${Number(summary.costUsd).toFixed(4)}`,
+  );
+  console.log(`  3/4 still -> benchmarks/sculpture/runs/${runId}/render-3q.png`);
+}
+
+main().catch((err) => {
+  console.error("sculpture benchmark run failed:\n  " + (err?.message || err));
+  process.exit(1);
+});

@@ -1,0 +1,503 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "001-vConcept-moai",
+    "prompting_method_id": "vconcept-sculpture.v1",
+    "model_id": "claude-opus-4-8",
+    "seed": 17,
+    "server_state_id": "flat-creative-superflat.v1"
+  },
+  "style": {
+    "name": "Monochrome-with-warm-crown monolith",
+    "rationale": "A bottom-heavy basalt monolith in flat gray concrete with andesite/cobblestone weathering and a single red-nether-brick pukao crown, stacking plinth-torso-neck-head wedges so the brow-nose-chin axis and recessed sockets name it 'moai' at a glance, per the design document."
+  },
+  "palette": {
+    "manifest": [
+      "minecraft:gray_concrete",
+      "minecraft:andesite",
+      "minecraft:cobblestone_stairs",
+      "minecraft:red_nether_bricks",
+      "minecraft:stone_bricks"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        0,
+        -5
+      ],
+      "to": [
+        6,
+        1,
+        5
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        2,
+        -5
+      ],
+      "to": [
+        5,
+        12,
+        4
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        3,
+        -5
+      ],
+      "to": [
+        5,
+        4,
+        4
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        4,
+        4
+      ],
+      "to": [
+        -1,
+        6,
+        6
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        4,
+        4
+      ],
+      "to": [
+        3,
+        6,
+        6
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        -3,
+        4,
+        6
+      ],
+      "to": [
+        -3,
+        6,
+        6
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "line",
+      "from": [
+        -2,
+        4,
+        6
+      ],
+      "to": [
+        -2,
+        6,
+        6
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "line",
+      "from": [
+        -1,
+        4,
+        6
+      ],
+      "to": [
+        -1,
+        6,
+        6
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "line",
+      "from": [
+        1,
+        4,
+        6
+      ],
+      "to": [
+        1,
+        6,
+        6
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "line",
+      "from": [
+        2,
+        4,
+        6
+      ],
+      "to": [
+        2,
+        6,
+        6
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "line",
+      "from": [
+        3,
+        4,
+        6
+      ],
+      "to": [
+        3,
+        6,
+        6
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        13,
+        -3
+      ],
+      "to": [
+        3,
+        13,
+        4
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        14,
+        -4
+      ],
+      "to": [
+        4,
+        29,
+        5
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        27,
+        6
+      ],
+      "to": [
+        4,
+        29,
+        6
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        25,
+        6
+      ],
+      "to": [
+        4,
+        26,
+        6
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "line",
+      "from": [
+        -4,
+        26,
+        7
+      ],
+      "to": [
+        4,
+        26,
+        7
+      ],
+      "block": "minecraft:cobblestone_stairs",
+      "state": {
+        "facing": "south",
+        "half": "top"
+      }
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        23,
+        6
+      ],
+      "to": [
+        -4,
+        24,
+        6
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -1,
+        23,
+        6
+      ],
+      "to": [
+        1,
+        24,
+        6
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        23,
+        6
+      ],
+      "to": [
+        4,
+        24,
+        6
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        17,
+        6
+      ],
+      "to": [
+        4,
+        22,
+        6
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -2,
+        16,
+        6
+      ],
+      "to": [
+        2,
+        16,
+        6
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        16,
+        6
+      ],
+      "to": [
+        -3,
+        16,
+        6
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        16,
+        6
+      ],
+      "to": [
+        4,
+        16,
+        6
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        14,
+        6
+      ],
+      "to": [
+        4,
+        15,
+        6
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -2,
+        14,
+        7
+      ],
+      "to": [
+        2,
+        15,
+        7
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        -2,
+        13,
+        5
+      ],
+      "to": [
+        2,
+        13,
+        5
+      ],
+      "block": "minecraft:cobblestone_stairs",
+      "state": {
+        "facing": "south",
+        "half": "top"
+      }
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        18,
+        7
+      ],
+      "to": [
+        0,
+        24,
+        7
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -1,
+        17,
+        7
+      ],
+      "to": [
+        1,
+        17,
+        7
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -3,
+        20,
+        6
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        21,
+        6
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -3,
+        18,
+        6
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        19,
+        6
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        18,
+        1
+      ],
+      "to": [
+        -5,
+        26,
+        4
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        5,
+        18,
+        1
+      ],
+      "to": [
+        5,
+        26,
+        4
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        30,
+        -3
+      ],
+      "to": [
+        4,
+        31,
+        4
+      ],
+      "block": "minecraft:red_nether_bricks"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+# Keep per-run provenance (design-doc, concept.png, artifact.json, render-3q.png, summary.json,
+# prompt.txt) but not the bulky raw transcripts or the many turntable frames.
+runs/*/transcript.jsonl
+runs/*/turntable/

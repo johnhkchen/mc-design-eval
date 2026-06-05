@@ -107,21 +107,22 @@ export function runIdForSubject(seq, subject) {
 /**
  * The metadata this archetype pins on the artifact (shared identity for the build stage).
  * PURE. `prompting_method_id` is THIS archetype so the produced artifact is attributable.
- * `target` (the subject term — the E-13 per-subject join key) is set by the caller, which is
- * the only place the subject string is in scope.
- * @param {{ runId: string, scale: number, model?: string, target?: string }} p
+ * NOTE: `metadata.target` is DELIBERATELY not set. In the live schema it is an ENUM
+ * (`house | path | landscape`) — a sculpture is none of those, so pinning the subject term
+ * there would FAIL the AJV gate (the build-prompt schema is looser than the live gate). The
+ * per-subject join key is carried by `trial_id` (the run id embeds the subject slug) and by
+ * the benchmark's summary.json instead.
+ * @param {{ runId: string, model?: string }} p
  * @returns {import("./artifact.mjs").Metadata}
  */
-export function sculptureMetadata({ runId, scale, model, target }) {
-  const meta = {
+export function sculptureMetadata({ runId, model }) {
+  return {
     trial_id: runId,
     prompting_method_id: VCONCEPT_SCULPTURE.id,
     model_id: model || PHASE1_MODEL_ID,
     seed: SCULPTURE_DEFAULTS.seed,
     server_state_id: SCULPTURE_DEFAULTS.serverStateId,
   };
-  if (target) meta.target = target;
-  return meta;
 }
 
 /** The `- metadata.x = …` prompt lines for a Metadata. PURE; shared by the build prompt. */
@@ -190,7 +191,7 @@ export function composeSculptureDesignDocPrompt(spec) {
 export function composeSculptureBuildPrompt({ subject, scale, designDoc, runId, model }) {
   const { subject: subj, scale: sc } = assertSculptureSpec({ subject, scale });
   const { maxW, maxH, maxD } = sculptureScaleCaps(sc);
-  const meta = sculptureMetadata({ runId, scale: sc, model, target: subj });
+  const meta = sculptureMetadata({ runId, model });
   return [
     "You are a master Minecraft sculptor. Build a FREESTANDING 3-D SCULPTURE as a structured",
     `design artifact that faithfully realizes the subject "${subj}" — its form, proportion,`,

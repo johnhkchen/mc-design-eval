@@ -13,6 +13,7 @@
     "smoke:run": "node scripts/run-trial.mjs",
     "trial:iterative": "node scripts/run-iterative-trial.mjs",
     "bench:temple-facade": "node benchmarks/temple-facade/run.mjs",
+    "bench:sculpture": "node benchmarks/sculpture/run.mjs",
     "bench:judge": "node benchmarks/temple-facade/judge-runs.mjs",
     "build:block-table": "node scripts/build-block-table.mjs",
     "palette:extract": "node scripts/extract-palette.mjs",
