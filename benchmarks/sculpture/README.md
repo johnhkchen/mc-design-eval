@@ -52,6 +52,7 @@ benchmark is the live I/O + rendering + run-dir provenance around it.
 | 5 | 2026-06-05 | `a bow and arrow` | 32 | 411 | 21453/34999 | $1.0938 | T-036-04 build |
 | 6 | 2026-06-05 | `an anatomically correct human heart` | 32 | 2648 | 21139/16883 | $0.6406 | T-036-05 build |
 | 7 | 2026-06-05 | `a sword` | 32 | 166 | 22298/9677 | $0.4663 | T-036-06 build |
+| 8 | 2026-06-05 | `a mushroom` | 32 | 4411 | 20587/17201 | $0.6459 | T-036-07 build |
 
 ## Gallery
 
@@ -110,5 +111,13 @@ benchmark is the live I/O + rendering + run-dir provenance around it.
 **166 blocks** · 22298/9677 tok · $0.4663
 
 > T-036-06 build
+
+### 008 — `a mushroom` (scale 32) · 2026-06-05
+
+![sculpture run 8 — 3/4](runs/008-vConcept-a-mushroom/render-3q.png)
+
+**4411 blocks** · 20587/17201 tok · $0.6459
+
+> T-036-07 build
 
 <!-- RUNS:END -->
