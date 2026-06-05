@@ -1,0 +1,46 @@
+{
+  "seq": 10,
+  "runId": "010-vConcept-a-moai-statue",
+  "date": "2026-06-05",
+  "approach": "vConcept",
+  "promptMethodId": "vconcept-sculpture.v1",
+  "model": "claude-opus-4-8",
+  "effort": null,
+  "subject": "a moai statue",
+  "scale": 16,
+  "blocks": 732,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      -3,
+      0,
+      -3
+    ],
+    "max": [
+      3,
+      15,
+      5
+    ]
+  },
+  "view3q": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "turntable": {
+    "frames": 24,
+    "centerDeg": 45,
+    "amplitudeDeg": 40,
+    "mode": "rock"
+  },
+  "concept": {
+    "model": "gemini-3-pro-image-preview",
+    "promptChars": 4470,
+    "ms": 17323
+  },
+  "tokensIn": 19982,
+  "tokensOut": 16752,
+  "costUsd": 0.631409,
+  "durationMs": 244977,
+  "note": "T-037-01 scale-16 study"
+}
