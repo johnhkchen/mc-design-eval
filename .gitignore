@@ -15,3 +15,6 @@ baml_client/
 # Benchmark renders/artifacts — reproducible per-run outputs; the durable record is the
 # journal (docs/knowledge/design-learnings.md). Renders are local-only (image-heavy).
 benchmarks/temple-facade/runs/
+
+# Stage-1 concept-art outputs (E-09) — reproducible, local-only
+benchmarks/temple-facade/concepts/
