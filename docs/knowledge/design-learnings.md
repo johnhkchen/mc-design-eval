@@ -21,6 +21,14 @@ the per-run reasoning behind each principle. Renders live in
 > load-bearing wins are **P11–P15** below; the v1-era banners are kept for history but their pessimism is
 > retired. **`detail` is now the single lagging dimension** — strong on proportion/color/fidelity, only
 > detail still competent. See P15 for the open frontier.
+>
+> **⚠️ Measurement caveat — `detail` is boundary-noisy across generations.** The fixed champion config
+> scored `detail` *competent* in run 014 and *strong* in run 015 (identical prompts, different
+> generation; both judged 3/3 unanimous). Judge-sample unanimity does **not** capture generation-level
+> variance, so a single `detail=strong` is not evidence of a lever effect. Detail experiments must
+> require robustness (strong across ≥2 generations, or a describable articulation delta vs a baseline
+> render), not a one-shot category flip — the overnight loop's promotion gate must control for generation
+> noise, not just judge noise.
 
 > **⚠️ Measured correction (rubric `v1`, 3-sample mean) — the metric contradicts the impressions below.**
 > Scoring all four runs with the LLM-judge gives overall: v0 = **4.0**, v1 = **4.0**, v2 = **3.0**,
