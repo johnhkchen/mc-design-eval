@@ -1,0 +1,76 @@
+You are a master Minecraft sculptor. Build a FREESTANDING 3-D SCULPTURE as a structured
+design artifact that faithfully realizes the subject "a bow and arrow" — its form, proportion,
+palette, and motifs — per the finalized design document and the attached CONCEPT IMAGE.
+This is an OBJECT IN THE ROUND, displayed on a turntable: it occupies all three axes and
+must read as a solid sculpture from every side. It is NOT a facade, wall, relief, or scene.
+
+## Orientation (a sculpture, not a facade)
+Build a fully three-dimensional object in x/y/z, centered on a local origin (x = 0, z = 0),
+standing on the ground at y = 0. Model the WHOLE object — front, back, both sides, and top —
+as real volume; give it depth and roundness, not a single thin face. There is no privileged
+'front plane' and no relief-into-a-wall: massing projects in every direction as the form needs.
+
+## Single-view limitation (read this)
+The attached concept shows ONE 3/4 view. The back and the far side are NOT depicted — infer
+them as a plausible, coherent continuation of the visible form (mirror symmetric features where
+the subject is symmetric; keep volumes and palette consistent all the way around). Treat that
+hidden half as YOUR reconstruction from a single view — a known limit of this mode — and make it
+read as a finished, deliberate surface, never a flat or hollow back.
+
+## Finalized design document
+# Freestanding Sculpture — "A Bow and Arrow"
+
+## 1. Read of the subject
+A bow is fundamentally a **tensioned arc**: a curved springy limb pulled into a "D" by a taut string, with a straight arrow nocked across it ready to loose. The instant-read features are the **double-curved bow arc** and the **dead-straight diagonal arrow** crossing it — the contrast of curve-against-line is what names it. Drawn (mid-pull) reads as "bow," not a plain stick.
+
+## 2. Form & proportion (in the round)
+- **Bow limb:** the longest mass, ~32 blocks tall, a vertical recurve "D" 2 blocks thick, 3 deep — enough body to read solid from any angle, not a flat cutout.
+- **String:** a 1-wide line spanning the limb tips, bowed inward at the grip.
+- **Arrow:** ~22 blocks, a straight diagonal shaft crossing the grip, point leading up-forward, fletching trailing low-back — its diagonal breaks the bow's vertical and sells depth in 3/4 view.
+- **Base:** a low oval plinth (~8×5×2) the lower limb tip plants into, so the piece stands stable, not floating.
+- **Silhouette:** FRONT = D + diagonal arrow; SIDE = the limb's recurve profile; 3/4 = both curve and line resolve — the strongest angle.
+
+## 3. Color palette (apply color theory)
+**Warm-wood + metal accent**, an analogous earth scheme that reads as a crafted weapon.
+- **Dominant — limb & grip:** `spruce_planks` (rich brown wood).
+- **Supporting — arrow shaft + base:** `stripped_oak_log` (lighter tan, separates arrow from bow).
+- **String:** `bone_block` (pale taut cord).
+- **Accent — arrowhead:** `iron_block` (cold metallic point); **fletching:** `red_concrete` (the single saturated spark that draws the eye to "arrow").
+
+## 4. Surface & motifs
+- **Grip wrap:** a 3-block band of `dark_oak_planks` at the limb's center — bold tonal break marking the hand.
+- **Fletching vanes:** stepped red blocks forming a clear arrow tail; recurve at both limb tips curls forward for the "ready" pose.
+
+## 5. Block-budget plan
+32 limb height · 22 arrow (diagonal) · 18 string span · grip band 3 · base 8×5×2 · arrowhead+fletching ~4 each. Compact ~32×24×8 footprint.
+
+## Scale (honor it)
+- Target ~32 blocks along the LONGEST dimension. Bounding box up to ~32(x) × 32(y)
+  × 32(z); build a compact, solid object that fills that envelope without sprawling.
+- Use `fill`/`box` for the major masses and `line` for struts/edges so you can afford solid
+  volume; reserve `voxel` (with block `state` for stairs/slabs) for shaping curves, facets,
+  and surface detail. Approximate curves/round forms with stepped stairs+slabs, not flat panels.
+
+## Realize the document with craft
+- Build the essential masses and the recognizable features the document names; honor its
+  proportions and its dominant/supporting/accent palette hierarchy.
+- Keep the object SOLID and connected — no detached floating parts unless the subject truly has
+  them (and then bridge them so they are supported).
+
+## Materials
+Survival-obtainable Minecraft 1.20.1 blocks, namespaced — primarily the document's palette.
+Declare every block you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "005-vConcept-a-bow-and-arrow"
+- metadata.prompting_method_id = "vconcept-sculpture.v1"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 17
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Set style.name to the document's style label and style.rationale to one line tying the build to
+the subject and document.
+
+Emit ONE complete design artifact — the full set of placements, not a diff. Local origin at
+x = 0, y = 0, z = 0 (ground at y = 0).

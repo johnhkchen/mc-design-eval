@@ -1,0 +1,46 @@
+{
+  "seq": 5,
+  "runId": "005-vConcept-a-bow-and-arrow",
+  "date": "2026-06-05",
+  "approach": "vConcept",
+  "promptMethodId": "vconcept-sculpture.v1",
+  "model": "claude-opus-4-8",
+  "effort": null,
+  "subject": "a bow and arrow",
+  "scale": 32,
+  "blocks": 411,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      -5,
+      0,
+      -6
+    ],
+    "max": [
+      18,
+      33,
+      6
+    ]
+  },
+  "view3q": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "turntable": {
+    "frames": 24,
+    "centerDeg": 45,
+    "amplitudeDeg": 40,
+    "mode": "rock"
+  },
+  "concept": {
+    "model": "gemini-3-pro-image-preview",
+    "promptChars": 4456,
+    "ms": 20800
+  },
+  "tokensIn": 21453,
+  "tokensOut": 34999,
+  "costUsd": 1.0938015,
+  "durationMs": 453105,
+  "note": "T-036-04 build"
+}
