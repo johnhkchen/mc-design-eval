@@ -17,12 +17,12 @@ function readStdin(): Promise<string> {
   });
 }
 
-const { designDocPath, images = [], targetBlocks = 48, model = "flash", outPath } = JSON.parse(await readStdin());
+const { designDocPath, images = [], targetBlocks = 48, model = "flash", outPath, attached = "" } = JSON.parse(await readStdin());
 const designDoc = readFileSync(designDocPath, "utf8");
 
 // BAML needs a key to RENDER (never sent here); the real concept call is Nano Banana below.
 if (!process.env.ANTHROPIC_API_KEY) process.env.ANTHROPIC_API_KEY = "baml-render-only";
-const req: any = await b.request.FacadeConceptPrompt(designDoc, targetBlocks);
+const req: any = await b.request.FacadeConceptPrompt(designDoc, targetBlocks, attached);
 const promptText = (req.body.json().messages ?? [])
   .flatMap((m: any) => (Array.isArray(m.content) ? m.content : [{ type: "text", text: m.content }]))
   .filter((c: any) => c.type === "text")
