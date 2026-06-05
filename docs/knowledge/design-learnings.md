@@ -40,6 +40,28 @@ the per-run reasoning behind each principle. Renders live in
 > UNCHANGED**, so prior scores (incl. 014/015 `strong`) remain comparable — only the top bar rose.
 > `exceptional` is now the loop's real climb target above strong, frozen for the run.
 
+> **🌅 Morning brief — overnight chain S-006…S-009 consolidated (2026-06-05, T-014-01).**
+> **Champion: UNCHANGED** — committed HEAD, the 015 "NO LARGE FLAT FIELDS" menu, `vRefRevise-designdoc`.
+> **No lever promoted.** Categorical band the next chain starts from (median-of-3): overall **strong (3/3)**
+> · proportion **strong** · color **strong** · fidelity **strong** · **detail competent** (the lone holdout
+> / climb target). Exemplar render run 014 (Taj); re-confirmed off-domain on 019/021/022.
+> **What moved:** nothing in the champion — a *confirmation* night. **P12** (color from brief) and **P13**
+> (one connected plane) generalized to four new references (019 Hōryū-ji, 020 Sainte-Chapelle, 021 Arc, 022
+> mausoleum), holding overall strong 3/3; P12 got its first partial *colorful-reference* datum (022 two-tone).
+> **What didn't:** **detail** stayed competent (both dedicated detail levers failed — 016 relief panels flat,
+> 017 texture grain regressed proportion). The two knob A/Bs **both completed but produced NO credible
+> effect**: persona-ON (025) and effort-HIGH (026) each flipped **only `detail` competent→strong** vs their
+> controls (023/024) — a single-dimension single-step move on the one P15 boundary-noisy dimension; two
+> independent knobs producing the *identical* flip is the signature of generation noise, not two levers, so
+> **neither is adopted** (effort-HIGH also cost +31% wall-clock for it). P14 regressed once (020).
+> **Spot-check renders:** 020 round-0 vs render (the P14 regression — recessed portal+rose → flat gold slab);
+> 021 render (the lone detail "lift" = whack-a-mole, gold around openings but a flat arch void); 022 vs 008
+> render (cumulative progress on the founding reference).
+> **Single next experiment:** a **whole-facade fenced ornament pass** (the P15 cure) — a detail-only revision
+> that audits *every* plane wider than ~6 blocks and adds relief without spending budget elsewhere. It
+> targets the sole lagging dimension (detail → exceptional). Cited run IDs: 008/014/016/017/019/020/021/022/
+> 023/024/025/026.
+
 > **⚠️ Measured correction (rubric `v1`, 3-sample mean) — the metric contradicts the impressions below.**
 > Scoring all four runs with the LLM-judge gives overall: v0 = **4.0**, v1 = **4.0**, v2 = **3.0**,
 > v3 = **3.0**. The "design-doc is a huge jump" narrative (P4) is **not supported** — the *conventional
@@ -162,7 +184,27 @@ the per-run reasoning behind each principle. Renders live in
     comes from the brief even if the reference is white" — restored colorful builds and drove `color`
     **competent → strong** (a real terracotta/gold/blue dominant-supporting-accent scheme). Generalizes:
     **when a strong exemplar conflicts with the brief on any axis, name which axis comes from which
-    source** — don't let the image silently win every axis.
+    source** — don't let the image silently win every axis. **Scope (runs 013/019/020/021):** confirmed
+    load-bearing across FOUR *pale* reference palettes — white (Taj), dark-timber (Hōryū-ji), pale-stone
+    (Sainte-Chapelle), cream-limestone (Arc de Triomphe): in every case `color` reached `strong` from the
+    brief, not the reference (run 021 doc: *"No white wall: the reference's pale stone is translated into
+    warm desert stone"*). The *converse* — whether the clause is a harmless no-op under a *genuinely
+    colorful* reference image — was **untested through run 021** (run 020 intended to test it but the
+    supplied Sainte-Chapelle image was a grey-stone *exterior*; every reference through 021 read pale to the
+    model). **Run 022 (Sun Yat-sen Mausoleum) supplies the first PARTIAL converse evidence:** a genuinely
+    *two-tone* reference (saturated cobalt roof + white stone + gold), where reference and brief broadly
+    *agree* on "be colorful." There P12 **held as a near-neutral no-op** — color came from a brief-
+    structured blue↔gold↔vermilion scheme (pre-P12 run 008 *also* derived "blue-white-gold" off the same
+    photo, so the reference simply hands you color) — **while its white-collapse half still mattered**: the
+    dominant *material* area is white granite, and P12 is what kept the model from collapsing to it (blue
+    became the dominant roof, white the field). **So under an already-colorful reference P12 is, so far,
+    harmless-and-still-protective, not idle.** A *fully polychrome* reference test remains open (blue+white
+    is two-tone, not polychrome), but the "is it a no-op under agreement" question is no longer wholly
+    untested. **Scope: load-bearing across FOUR pale conflict references AND near-neutral-but-protective on
+    ONE two-tone agreement reference (mausoleum, run 022).** **Chain verdict (T-014-01): PROMOTE / reinforce
+    — four off-domain confirmations in one night (019/020/021/022), `color = strong` every time, no leak;
+    the only open scope is the still-untested *fully-polychrome* reference (022 was two-tone, the closest
+    yet).**
 13. **A reference in a different DIMENSIONALITY than the target needs an explicit translation rule, not
     literal matching.** The Taj is a 3-D building whose minarets are freestanding at the plinth corners;
     told to "match the reference's silhouette," the model copied that literally and the minarets became
@@ -170,7 +212,14 @@ the per-run reasoning behind each principle. Renders live in
     013). The clause **"a facade is ONE connected plane; borrow the reference's RHYTHM, not its 3-D
     standalone parts; engaged masses bonded to the body, never freestanding pillars"** fixed it. Same
     shape as P11/P12: the model needs the translation rule made explicit, because the default is literal
-    copying.
+    copying. **Generalized (run 019, Hōryū-ji):** the same clause, unmodified, also resolves *vertical*
+    standalone parts — a freestanding five-storey **pagoda** folded into a crowning tiered spire on one
+    connected plane (proportion held `strong` through the 2nd pass). P13 covers stacked-tier/tower
+    references, not only lateral corner-towers — it is a rule about dimensionality, not about minarets.
+    **Chain verdict (T-014-01): PROMOTE / reinforce — held across pagoda tiers (019), Gothic verticality
+    (020), a single colossal opening (021), and stacked roof-eaves + battered wing-walls (022); proportion
+    never regressed *from* the rule. Caveat: the detachment hazard itself was UN-exercised on 021/022 (those
+    references have no freestanding parts), so the headline is corroborated there, not re-stressed.**
 14. **The reference-compared 2nd pass is double-edged — net-positive ONLY once its freedom is fenced;
     A/B by judging both rounds.** The *same* revision regressed proportion in run 013 (detached masses)
     and *lifted* it `competent → strong` in run 014 (after the one-plane clause of P13) — it developed
@@ -179,7 +228,11 @@ the per-run reasoning behind each principle. Renders live in
     don't assume the later pass is better. A revision earns its third call only when its degrees of
     freedom are constrained (honor the doc + one plane + keep the brief's color). Refines P3 ("anchor the
     revision or it drifts") with a second failure mode: it also *over-converges on the reference* unless
-    fenced.
+    fenced. **Chain verdict (T-014-01): SCOPE — reference-dependent ≈coin-flip; this chain held/lifted
+    019/021/022 and regressed 020 (`strong → competent`: a recessed portal + rose traded for a flat gold
+    slab). Running tally: helped 014/019/021/022, regressed 013/017/020. The standing "judge both rounds,
+    keep the better" fix is now strongly indicated and *symmetric* — it would keep the render on 021
+    (detail-lifted) and round-0 on 020 (regression-guarded).**
 15. **Quality dimensions fall one at a time, and `detail` is the last holdout.** Across the Taj arc
     (010 competent → 014 strong) proportion, color, and fidelity all reached *strong*; **`detail` stayed
     competent** — large flat brick/niche/plinth fields persist, and the "NO LARGE FLAT FIELDS" prompt
@@ -187,7 +240,24 @@ the per-run reasoning behind each principle. Renders live in
     dimensions in one monolithic pass — they trade off a fixed JSON budget). The likely path to
     *exceptional* detail is a **dedicated, fenced ornament pass** (structured/incremental I/O) that
     *only* adds surface relief to flat fields without spending budget elsewhere — not another global
-    "add more detail" instruction.
+    "add more detail" instruction. **The flat-field failure is whack-a-mole (run 021, Arc de Triomphe).**
+    Pointed at the Arc's broad attic and spandrels — the literal fields the menu clause names — the lever
+    *did* articulate them (gold-framed rondel band; gold spandrel/archivolt ornament). But the model then
+    relocated blankness to the **largest unnamed surface**: the 2nd pass *enlarged* the central arch into a
+    single huge flat blue void (same enlarge-a-feature move as run 020's gold pediment), and the brick
+    flanks stayed plain. So a *named-field* clause clears the field you name and the blankness migrates;
+    `detail` even flipped competent→strong on that run, but the notes confirm the broad fields stayed flat
+    (the strong is dense ornament *around openings* + P15 boundary noise, not filled fields). This is the
+    strongest argument yet that the cure is a **whole-facade** ornament pass that audits *every* plane
+    wider than ~6 blocks, not a clause that lists example fields the model can satisfy locally while
+    opening a new one elsewhere. **Chain verdict (T-014-01): REINFORCED; both dedicated detail levers
+    DISCARDED — S-006 relief panels (run 016) left `detail` competent; S-010 texture grain (run 017) left
+    `detail` competent AND regressed `proportion` strong→competent. Neither met the robust-lift promotion
+    bar, so the champion is unchanged. New corroboration of the noise caveat: the persona (025) and effort
+    (026) A/Bs EACH flipped only `detail` competent→strong vs control, and both treatment arms emitted MORE
+    output (busier build) — two unrelated knobs producing the same single-`detail` flip, mediated by output
+    size, is exactly the generation-noise / "busier-reads-as-detail" signature, NOT a real lever. The cure
+    remains a whole-facade fenced ornament pass, not incidental verbosity or another menu clause.**
 
 ## Tunable parameters (and what's actually reachable)
 
@@ -378,3 +448,447 @@ Modular API spike: `b.request` renders a TERSE `output_format` (whole prompt ~55
 tok JSON Schema) and `b.parse` SAP-parses — both proven on the subscription via `claude -p`. The
 full high-res run FAILED because SAP mis-parsed the narration-wrapped output (P10); fixed by
 pre-slicing the brace span before `b.parse`. Input-token win is real; revisit when token cost bites.
+
+### temple-facade 019 · `vRefRevise-designdoc` (Hōryū-ji — generalization stress test, T-007-01) · 2026-06-05
+**Generalization run, not a tuning run.** Ran the **champion as-is** (committed HEAD: the 015 "NO
+LARGE FLAT FIELDS" detail menu) on a reference *deliberately unlike* the domed Taj that P11–P15 were
+derived on: `references/horyu_ji.JPG` — the Hōryū-ji Kondō + **five-storey wooden pagoda**, a vertical
+tiered timber complex with a **near-monochrome** dark-wood / white-plaster / grey-tile palette and two
+**freestanding, fully 3-D** masses. Purpose: judge whether **P12** (color from the brief, not the
+reference) and **P13** (a facade is ONE connected plane; borrow rhythm, not 3-D standalone parts)
+*generalize* off-domain. Both are tested, not assumed.
+- **Inherited-champion note (attribution).** Neither detail experiment promoted, so the champion is the
+  committed 015 menu: S-006's relief panels (run 016 `detail=competent`) were never committed; S-010's
+  texture-grain edit left the tree dirty but **run 017 regressed `proportion` strong→competent with
+  `detail` still competent** — a non-promotion. Reverted that WT edit to HEAD before launch so this is a
+  clean champion run, comparable to the 014/015 Taj baseline. (The P12 color-hold and P13 one-plane
+  blocks are byte-identical across menu/texture variants anyway — orthogonal to this test.)
+- **A/B (median-of-3, both rounds judged per P14; all samples unanimous):**
+
+  | dim | round-0 (build) | render (2nd pass) |
+  |-----|-----------------|-------------------|
+  | proportion | strong | strong |
+  | color | strong | strong |
+  | detail | competent | competent |
+  | fidelity | strong | strong |
+  | **overall** | **strong (3/3)** | **strong (3/3)** |
+
+  4,953 blocks, 31,809/47,581 tok, $1.52, 688s. The 2nd pass **held every dimension** (no lift, no
+  regression); it restyled the body (open red colonnade + white bays + torii-like door → enclosed
+  two-storey vermilion wall with white window insets) while preserving massing and palette.
+
+- **P12 — HELD (generalizes to a monochrome reference).** The timber/white/grey palette did **not**
+  leak. The doc opened *"white plaster, dark wood, gray tile — information, not mandate"* and committed
+  to a vermilion-dominant / jade-green-eaves / gold-accent / grey-ground complementary scheme; the judge
+  calls color *"the build's strength … a disciplined, classic palette."* This is the **strongest
+  off-domain confirmation of P12 yet**: the Taj it was derived on was *white*; here the reference is
+  white **+ dark wood + grey tile** (a fuller monochrome temptation, and timber is a "wooden temple
+  obviously = brown" trap) and the craft/color split still held. **Verdict: P12 holds across reference
+  palettes; no scoping needed.**
+
+- **P13 — HELD (generalizes to a different dimensionality: vertical tiered → one plane).** No floating
+  pagoda, no detached tiers, no sky between masses. The model translated the freestanding 5-storey tower
+  into a **crowning tiered spire on a single connected elevation** ("fold the pagoda's diminishing
+  tiered spire into the crown rather than copying it as a detached tower") and the freestanding Kondō
+  into the body — exactly the borrow-rhythm-not-standalone-parts move. Crucially, **proportion stayed
+  `strong` through the 2nd pass** — the *inverse* of Taj runs 013/017, where the reference-compared
+  revision detached masses and regressed proportion. P13 was authored against *lateral* standalone parts
+  (corner minarets); it generalized unmodified to *vertical, stacked* standalone parts (pagoda tiers).
+  **Verdict: P13 holds; it covers stacked-tier/tower references, not only corner-tower references.**
+
+- **Why both held off-domain without an edit:** P12/P13 are framed as *translation rules the model
+  applies before generating* ("information not mandate"; "one connected plane; tiers fold into the
+  crown"), not as Taj-specific facts. A rule generalizes; a fact does not. This is the same shape as
+  P11/P12/P13's origin (the model needs the rule made explicit, then applies it to whatever reference
+  it sees). **No prompt edit was warranted** (neither pre-registered trigger fired); `npm test` 133/133
+  green throughout; tree left clean on the champion.
+
+- **One real blemish (recorded, not a P12/P13 failure): a cross-form finial.** The gold crown renders
+  as a Latin-cross-like shape atop an East-Asian pagoda massing; the judge flags it as *"an oddly
+  syncretic signal that muddies the cultural identity."* It cost nothing categorically (`fidelity`
+  stayed strong) but is a genuine identity slip — a *crowning-motif* hazard distinct from P12/P13. The
+  build prompt asks for a "crowning element" generically; with an East-Asian reference the model reached
+  for a cross-section finial. **Candidate future lever (not actioned, out of scope here):** the build/
+  revision could ask the crown's *motif* to stay consistent with the reference's tradition. Filed, not
+  fixed — this is a generalization run.
+
+- **Detail held at `competent` (both rounds), as expected.** Large flat white window/wall panels persist
+  ("undifferentiated white window panels read as empty"). Consistent with **P15** (detail is the lone
+  holdout; the no-flat-fields *menu* clause helps less than structural clauses) and the P15 noise caveat
+  (single generation; not the dimension under test). The texture-grain lever that *would* target this is
+  S-010's, which did not promote — so the holdout stands.
+
+**Net:** P11–P15's reference-grounding principles are **not Taj-specific** — they generalized in one
+shot to a vertical, monochrome, multi-mass wooden-pagoda reference, holding `overall = strong (3/3)` on
+both rounds. P12 (color) and P13 (one plane) are now confirmed across **palette** *and* **dimensionality**
+axes. The remaining frontiers are unchanged: `detail`'s flat fields, and a newly-surfaced *crowning-motif
+fidelity* hazard when the reference is strongly culturally marked.
+
+### temple-facade 020 · `vRefRevise-designdoc` (Sainte-Chapelle — inverse-condition test, T-008-01) · 2026-06-05
+**Generalization run, not a tuning run.** Ran the **champion as-is** (committed HEAD, 015 menu; tree was
+already clean — **no revert needed**, unlike run 019) on `references/St_Chapelle.png`. 4,068 blocks,
+33,106/66,402 tok, **$2.02**, 929s.
+
+- **PREMISE DISCREPANCY — read this first.** The ticket framed Sainte-Chapelle as the **inverse of the
+  Taj/Hōryū-ji conflict case**: a reference that is *"polychrome stained glass — already colorful, so
+  reference and brief AGREE on color,"* predicting the P12 color-hold clause would be a **near-no-op** and
+  color *"strong regardless."* **The provided image is not that.** `St_Chapelle.png` is the **EXTERIOR**
+  of the chapel (Vincennes): **pale grey/cream limestone** under a dark slate-blue roof; the famous
+  polychrome glass is an *interior* feature and reads from outside only as dark tracery voids. The
+  stage-1 design doc confirms the model saw it as **pale**: *"The reference is pale honey limestone under
+  a slate-blue roof — I take its structure, not its pallor."* **So this was a THIRD conflict-condition
+  run (pale reference vs colorful brief), not the agreement case the ticket assumed.** The hypothesis
+  *"P12 is neutral when the reference agrees"* is therefore **refuted on its premise — untestable on this
+  image**, because the image never presented agreement.
+
+- **A/B (median-of-3, both rounds judged per P14):**
+
+  | dim | round-0 (build) | render (2nd pass) |
+  |-----|-----------------|-------------------|
+  | proportion | **strong** | competent |
+  | color | strong | strong |
+  | detail | competent | competent |
+  | fidelity | **strong** | competent |
+  | **overall** | **strong (3/3)** | **competent** |
+
+- **P12 — HELD, and load-bearing (NOT neutral here).** `color = strong` in **both** rounds off a pale
+  grey-stone reference: the doc took *structure not pallor* and committed to a warm split-complementary
+  scheme — **terracotta-brick dominant, eggplant-purple roofs supporting, gold accent, blue glass
+  secondary** ("genuinely colorful and harmonious, a Flemish/Hanseatic guildhall identity," per the
+  judge). The color-hold clause **fired and worked**; it was not idle. **Verdict: P12 was additive, not
+  neutral — scoped to pale references it now holds across THREE palettes (white Taj / dark-timber
+  Hōryū-ji / pale-stone Sainte-Chapelle).** What the ticket actually wanted to test — neutrality under a
+  *genuinely polychrome reference IMAGE* — **remains UNTESTED** (would need the Sainte-Chapelle *interior*
+  or a similarly saturated exterior). Filed as the open P12 question; see scope note on P12 below.
+
+- **P13 / one connected plane — HELD under Gothic verticality.** Nothing detached: the soaring 1.6:1
+  massing, flanking turret-gables, pinnacles and finials all stayed **bonded into a single elevation** in
+  both rounds (no sky between masses, no freestanding pillars). Gothic verticality did **not** break the
+  one-plane rule. round-0 proportion = **strong**.
+
+- **But the 2nd pass REGRESSED (P14's double-edge returns) — round-0 was the better artifact.** Unlike
+  run 019 (where the revision held every dimension), here it dropped **proportion strong→competent,
+  fidelity strong→competent, overall strong→competent**, holding only color/detail. *Why:* round-0 had a
+  **deep recessed gold-voussoir portal + a central rose/oculus**; the 2nd pass **replaced them with a
+  large flat gold pediment slab** — the judge's *"inert field … carries no relief or ornament … the one
+  easy improvement I can name"* — and shrank the entrance to a small plain door. The revision substituted
+  an articulated, well-proportioned crown for a blank panel. This is the **unfenced double-edge of P14**:
+  given freedom, the revision over-converged on a simplified silhouette and *lost* round-0's best
+  features. Direct A/B (round-0 strong, render competent) is exactly the evidence P14 says to collect.
+  **Reinforces the standing candidate fix: judge both rounds and keep the better — the 2nd pass must not
+  be assumed an improvement** (cf. runs 013, 017 regressions vs 014, 019 holds — it is reference-
+  dependent and currently a coin-flip).
+
+- **Detail / S-006 transfer to tracery — did NOT lift (competent, both rounds).** The dense Gothic
+  tracery (rose medallion, lancets, crockets) was *present* but the **flat-field ceiling persisted** —
+  round-0 had "large flat orange shafts and flat blue side panels"; the render concentrated the failure
+  into the **one big flat gold pediment**. The S-006 relief-panel lever (un-promoted) did not transfer;
+  consistent with **P15** (detail is the lone holdout; the no-flat-fields *menu* clause is weaker than
+  structural clauses). Read with the P15 single-generation caveat.
+
+- **No prompt edit.** Neither pre-registered trigger fired (color did not go monochrome; nothing
+  detached). The regression is the *known* P14 double-edge + the P15 flat-field ceiling, not a new P12/P13
+  failure — so a minimal generalizing edit was **not** warranted (this is a generalization run, not a
+  tuning run). `npm test` 133/133 green; tree left clean on the champion.
+
+**Net:** A pale-stone Gothic reference adds a third palette point confirming **P12 is robust and
+load-bearing across pale references** (not neutralized) — but the ticket's *true* inverse hypothesis (P12
+idle under a *colorful* reference image) is **still untested**, because the supplied image was a
+grey-stone exterior, not the polychrome interior. The sharpest finding is **P14's double-edge resurfacing
+hard**: an unambiguous round-0 `strong (3/3)` → render `competent` regression driven by the 2nd pass
+trading a recessed portal + rose for a flat gold slab. The "keep the better round" fix is now strongly
+indicated, not just noted.
+
+### temple-facade 021 · `vRefRevise-designdoc` (Arc de Triomphe — single-opening generalization, T-011-01) · 2026-06-05
+**Generalization run, not a tuning run.** Ran the **champion as-is** (committed HEAD, 015 menu; tree
+already clean — **no revert needed**, like run 020) on `references/arc_de_triomph.JPG`: the Arc de Triomphe,
+a Roman triumphal arch whose identity is a **single colossal opening** in a near-square pier-block —
+**massing unlike any prior reference** (no minarets/towers like the Taj, no tiered pagoda like Hōryū-ji, no
+soaring Gothic vessel like Sainte-Chapelle). Pale **cream-limestone** palette; broad flat **attic band**
+(rondel/shield reliefs) and tall **spandrel panels** (concentrated high-relief groups) over otherwise plain
+ashlar — i.e. the *classic flat-field structure* the ticket targets. 12,696 blocks, 30,973/71,671 tok,
+**$2.13**, 1006s. Earlier strong run (009) re-run under the current champion (cumulative-progress check).
+
+- **A/B (median-of-3, both rounds judged per P14):**
+
+  | dim | round-0 (build) | render (2nd pass) |
+  |-----|-----------------|-------------------|
+  | proportion | strong | strong |
+  | color | strong | strong |
+  | detail | **competent** | **strong** |
+  | fidelity | strong | strong |
+  | **overall** | **strong** | **strong (3/3)** |
+
+  round-0 perSample [strong, competent, strong]; render perSample [strong, strong, strong].
+
+- **P12 (color) — HELD, load-bearing; a FOURTH pale-reference confirmation.** `color = strong` both rounds
+  off a *pale cream-limestone* reference. The stage-1 doc ("Temple of the Solar Triumph") opened *"No white
+  wall: the reference's pale stone is translated into warm desert stone"* and committed to a complementary-
+  accented scheme — **Smooth Red Sandstone** dominant, **Polished Granite** supporting, **Gold** accent,
+  **Lapis Lazuli** cold-strike (arch vault + attic recesses); both judges read it as "disciplined,
+  committed, non-monochrome." So the model read the image as **pale** → this was again **conflict, not
+  agreement**, and the color-hold clause **fired and worked**. P12 now holds across **four pale palettes**
+  (white Taj / dark-timber Hōryū-ji / pale-stone Sainte-Chapelle / **cream-limestone Arc**). **The genuine
+  agreement case — a truly polychrome reference IMAGE — remains UNTESTED** (every supplied reference so far
+  has read pale to the model); still the open P12 question.
+
+- **P13 (proportion) — HELD strong on the single-arch massing; but the detachment mode was UN-EXERCISED.**
+  The lone-opening massing got a coherent, legible silhouette (plinth → great arch between framed side bays
+  → coffer band + dentil/crenellated cornice); `proportion = strong` both rounds. Two notes: (a) the Arc has
+  **no freestanding parts**, so P13's *detachment* hazard (the thing it was authored against on Taj minarets
+  / Hōryū-ji pagoda tiers) was **never presented** — this run tests proportion-coherence on a novel massing,
+  not detachment, so it only *lightly* corroborates P13's headline claim; (b) crucially the **2nd pass did
+  NOT regress proportion** here — the *inverse* of runs 013/017/020 — even though it **oversized the central
+  arch** (judge: "side bays feel squeezed against the oversized arch"), a sub-categorical blemish that did
+  not cost a category. A single colossal opening is well within the champion's proportion competence.
+
+- **Detail / attic + spandrel flat fields (the headline AC #2 read) — MIXED: the NAMED fields resolved, but
+  the flat-field CLASS migrated; the categorical lift is partly P15 noise.**
+  - **Attic band — RESOLVED:** both rounds render it as an **articulated row of gold-framed coffer/rondel
+    panels** (the doc's rondel shields), not a blank wall. The detail clause filled the specific field the
+    ticket named.
+  - **Spandrels — RESOLVED:** gold archivolt + spandrel ornament flank the arch crown in both rounds.
+  - **But a large flat field PERSISTS, relocated.** Both judges flag it: round-0 — "the large blue infill
+    panels are unbroken flat fields … side bays … flat"; render — "the **enormous central tympanum is one
+    large flat lattice field**, the brick side fields are fairly plain." The 2nd pass **enlarged the central
+    arch** (the same enlarge-a-feature-into-a-flat-field move as run 020's gold pediment), so the dominant
+    flat field became the **giant blue arch void** itself + plain brick flanks.
+  - **Category:** `detail` went **competent → strong** across the 2nd pass — the **first time the revision
+    LIFTED detail** (cf. it held competent on 014/019/020, never rose). Read with the **P15 noise caveat**:
+    the render's unanimous detail=strong is driven by the **dense gold ornament around every opening**, not
+    by the broad fields being filled (the notes confirm the broad fields stayed flat). So the honest verdict
+    is **"named attic/spandrel fields resolved; flat-field class did NOT — it migrated to the arch void; the
+    categorical strong is partly the known detail boundary noise,"** which is **consistent with P15**, not a
+    refutation. The flat-field holdout is now best described as *whack-a-mole*: the lever articulates the
+    field you name, the model relocates blankness to the largest unnamed surface (here, the oversized arch).
+
+- **P14 (2nd-pass double-edge) — a HOLD/LIFT case** (held proportion/color/fidelity strong, lifted detail
+  competent→strong; only cost the oversized-arch blemish, no category hit). Running tally: helped/held **014,
+  019, 021**; regressed **013, 017, 020** — still reference-dependent (~coin-flip), but a clean "2nd pass
+  earned its keep" point on a brand-new massing. The "judge both rounds, keep the better" fix would have
+  kept the *render* here (detail-lifted) — so the fix is symmetric, not just a regression guard.
+
+- **No prompt edit.** Neither pre-registered trigger fired (color did not go monochrome; nothing detached /
+  no top-heavy attic). Detail was fenced out of the trigger set by design (expected P15 holdout, tuned only
+  under the S-006/S-010 ≥2-generation gate, not patched off one run). `npm test` 133/133 green before and
+  after; tree left clean on the champion (zero source diff).
+
+**Net:** the champion's reference-grounding principles **generalize to a single-colossal-opening massing**
+they were never derived on — `overall = strong` on **both** rounds, with **P12 confirmed across a fourth
+pale palette** and **proportion holding through a 2nd pass that, for once, didn't regress it**. The sharpest
+finding is on detail: the "NO LARGE FLAT FIELDS" lever **resolves the specific field you point it at** (the
+attic rondels, the spandrels) but **does not eliminate the flat-field class** — the model relocates blankness
+to the largest unnamed surface (here the oversized blue arch void), and the categorical detail=strong is
+partly P15's known boundary noise. The flat-field ceiling is a *whack-a-mole*, reinforcing P15's call for a
+**dedicated, fenced ornament pass over the whole facade** rather than a global "add more detail" menu clause.
+
+### temple-facade 022 · `vRefRevise-designdoc` (Sun Yat-sen Mausoleum — cumulative-progress on the FOUNDING reference, T-012-01) · 2026-06-05
+**Cumulative-progress measurement, not a generalization run.** Ran the **champion as-is** (committed HEAD,
+015 menu; tree already clean — **no revert needed**) on `references/sys_mausoleum.JPG` — **the reference
+that first proved grounding (run 008)**. Unique value: run 008 (`vRef-designdoc`, **no 2nd pass**) predates
+*every* technique invented since — the craft/color split (P12), one-plane (P13), NO-LARGE-FLAT-FIELDS, the
+high-res deep-relief build, the constrained 2nd pass (P14) — **and** was scored on the now-retired **v1
+numeric (1–5 mean)** rubric. Same image, same brief, same seed (11); **only the accumulated pipeline
+differs**. So this is the chain's one true "how far has technique moved a *fixed* reference" probe.
+11,325 blocks, 32,038/42,093 tok, **$1.41**, 640s.
+
+- **A/B (median-of-3, both rounds judged per P14; all samples unanimous 3/3):**
+
+  | dim | round-0 (build) | render (2nd pass) |
+  |-----|-----------------|-------------------|
+  | proportion | strong | strong |
+  | color | strong | strong |
+  | detail | competent | competent |
+  | fidelity | strong | strong |
+  | **overall** | **strong (3/3)** | **strong (3/3)** |
+
+  The 2nd pass **held every dimension** (no lift, no regression — like run 019, *unlike* the 020 Sainte-
+  Chapelle regression) and made a real *qualitative* gain inside `detail=competent`: it added **framed
+  recessed panels along the base/podium, pilaster strips between the bays, upturned gold roof-corner
+  brackets, and a stronger gold string-course** over round-0's plainer walls. A constrained revision that
+  develops the build without detaching anything — P14's good edge.
+
+- **008-vs-now comparison (the headline) — read on two rubric-independent legs, because v1 numeric and v2
+  categorical are NOT commensurable** (v1 saturated at 4, noise ≈0.4, "same band as v4"; v2 names the
+  lagging dimension). **A "008's 4/5 → strong" equation would be invalid** — so:
+  - **Leg 1 — failure-named (rubric-independent).** Run 008's own v1 judge named two concrete defects:
+    *"the columned portico is shallow"* and *"the wide blank base register feels under-detailed."* The 022
+    render **measurably improved both, without fully resolving either.** The base register is no longer
+    blank — the 2nd pass gave it framed panels + a string-course + a stair surround (vs 008's plain wall);
+    the portals are now framed recessed niches rather than a flush portico. **But** the judge still reads
+    *"the wall plane and base are large flat fields with shallow, drawn-on relief rather than carved
+    depth"* — so the *relief-depth / flat-field class* (008's underlying complaint) **persists as the lone
+    holdout**, exactly the P15 ceiling. Cumulative verdict: technique moved the named defects from *absent*
+    to *present-but-shallow*; it did not break the flat-field ceiling.
+  - **Leg 2 — categorical on its own terms.** Under the v2 rubric that resolves what v1 couldn't, the
+    mausoleum reaches **overall strong (3/3), both rounds** — proportion/color/fidelity strong, `detail`
+    the named holdout. That places this founding reference in the **same strong band as the best Taj (014)
+    and Hōryū-ji (019) runs**, and identifies *detail* as the one thing between it and exceptional —
+    information the v1 4/5 (which dinged "detail 3/5" but couldn't say it was the *sole* gap) could only
+    hint at. The cumulative gain the v2 instrument can actually *name*: **color became a disciplined
+    dominant/supporting/accent harmony** (not just "uses color"), proportion got a coherent base→body→crown,
+    and the 2nd pass articulated the base — while detail stayed the holdout 008 already had.
+
+- **P12 — HELD, and this is the chain's FIRST mildly-colorful / partial-AGREEMENT reference.** Every prior
+  P12 stress was a *pale* near-monochrome reference (white Taj / dark-timber Hōryū-ji / pale-stone Sainte-
+  Chapelle / cream Arc) — all *conflict* cases. The mausoleum is genuinely two-tone: **saturated cobalt
+  glazed-tile roof + white granite + gold tablets**. So reference and brief broadly *agree* on "be
+  colorful" — the long-open **neutrality side of P12** (run 020 wanted it, never got it) finally gets
+  **partial** evidence. The stage-1 doc ("Temple of the Cobalt Ascendant") is the tell: *"The reference
+  hands me one true color — that cobalt roof — and I commit to it boldly rather than collapsing to its
+  white walls,"* committing to a **blue↔gold complementary + vermilion** scheme. The render landed
+  `color=strong` both rounds: *"a disciplined East Asian scheme of dominant pale stone walls, supporting
+  cobalt tile roof, gold cornices/eave ornaments and vermilion doorways as accents — harmonious and
+  culturally coherent."* **Nuance worth recording:** because the reference is *already* colorful, the
+  color-hold clause did **less rescuing here than on the pale references** — note that pre-P12 run 008
+  *also* derived a "blue-white-gold" scheme off this same photo and scored `color=4` (the reference simply
+  hands you color). BUT P12's *white-collapse* half still mattered: the dominant *material* area is white
+  granite, and the model could have collapsed to it (the Taj failure); instead it took the blue as the
+  dominant *roof* and white as the *field*. **Verdict: P12 held; under a colorful reference it is at worst
+  a harmless no-op (the brief gets its color anyway) and at best still prevents the white-collapse of a
+  two-tone reference — the first (partial) confirmation of the colorful-reference side. A *fully*
+  polychrome-reference neutrality test is still open (blue+white is two-tone, not polychrome).**
+
+- **P13 — HELD (stacked-tier roof + battered wing-walls → one connected plane).** The reference's
+  **double-eaved (two stacked) blue hipped roof** folded into a coherent **two-tier crown**, and the
+  flanking **battered buttress wing-walls** became the engaged base/body — no floating roof tier, no
+  detached wing, no sky between masses, in *either* round. Proportion stayed **strong through the 2nd pass**
+  (the inverse of the 013/017/020 detach-and-regress pattern). P13 was authored on lateral minarets,
+  generalized to vertical pagoda tiers (019), and now covers **stacked roof eaves + engaged buttresses** —
+  it is a rule about *not detaching masses*, and it held. (The model stylized the battered walls as a
+  rectangular body rather than reproducing their inward batter — a craft simplification, not a P13
+  detachment failure.)
+
+- **Detail — `competent` both rounds, the P15 holdout, as expected (NOT a trigger).** The 2nd pass *did*
+  articulate the base (framed panels, pilasters, string-course) and the roof is genuinely rich (tile rows,
+  gold dougong dentil course, upturned corner brackets) — but the broad white wall/base fields still read
+  *"flat … shallow, drawn-on relief rather than carved depth."* This is the same lagging dimension run 008
+  had (detail 3/5 then) and that every v2 run has had — read with the P15 single-generation caveat.
+  Consistent with the run-021 *whack-a-mole* finding: relief concentrates where you point it (roof, niches)
+  and blankness relocates to the largest unnamed surface (here the white wall planes).
+
+- **No prompt edit.** Neither pre-registered trigger fired: color did not go monochrome/grey and was
+  brief-structured (no color trigger); nothing detached and the 2nd pass held proportion (no proportion
+  trigger); detail's flat-field persistence is the *expected* P15 holdout, explicitly fenced out of the
+  trigger set (not a bug to patch off one run). `npm test` 133/133 green throughout; tree left clean on the
+  champion.
+
+**Net:** On the reference that *first proved grounding*, the accumulated technique moved run 008's two
+named defects from **absent to present-but-shallow** (base register now panelled, portico now framed-
+recessed) and lifted the build to **overall strong (3/3) on both rounds** under the categorical rubric —
+the same band as the best Taj/Hōryū-ji runs — **but did not break the flat-field/relief-depth ceiling**,
+which remains the single holdout 008 already had. The genuinely new datum is **P12's first colorful-
+reference point**: under a two-tone (cobalt+white+gold) reference where brief and image *agree* on color,
+P12 held as a near-neutral no-op that still guards the white-collapse half — the first partial evidence on
+the neutrality question the chain has carried open since run 020. P14's 2nd pass, for the second run
+running (019, now 022), *held* every dimension rather than regressing — the "keep the better round" fix is
+indicated but the revision is genuinely reference-dependent (held 019/022, regressed 013/017/020).
+
+### temple-facade 024 + 026 · `vRefRevise-designdoc` (Taj — `--effort` default-vs-high A/B, T-009-01) · 2026-06-05
+**The deliberation-knob A/B.** `claude -p` exposes **no `--temperature`**; `--effort` (reasoning effort,
+levels `low|medium|high|xhigh|max`) is the only deliberation tunable. Ran the **champion as-is** on
+`references/taj_mahal.png`, **same seed (11)**, full 3-stage pipeline, twice: **024 = DEFAULT** (no
+`--effort` flag — the genuinely unchanged path) vs **026 = HIGH** (`--effort high`). Rubric + brief
+immutable. Both rounds judged per P14 (round-0 = build, render = 2nd pass), median-of-3.
+
+- **Wiring (AC #1).** `--effort` was already plumbed into `requestText`/`requestTextWithImage` (stage 1)
+  but **absent from the two artifact fns** the build/revision use. Added one guarded line —
+  `if (effort) args.push("--effort", String(effort));` — to `requestDesignArtifact` and
+  `requestDesignArtifactWithImage` (mirrors the existing `requestText` line; `effort===undefined` ⇒ args
+  byte-identical ⇒ default path unchanged), and threaded a `--effort` flag through `run.mjs`
+  (parseArgs → ctx → all 3 stage calls → `summary.effort`). **`npm test` 133/133 green.** Diff is the
+  one-knob analogue of T-013-01's `--system-prompt` wiring.
+
+- **A/B (categorical, both rounds of both runs):**
+
+  | dim | DEFAULT 024 build | DEFAULT 024 render | HIGH 026 build | HIGH 026 render |
+  |-----|:-:|:-:|:-:|:-:|
+  | proportion | strong | strong | strong | strong |
+  | color | strong | strong | strong | strong |
+  | **detail** | **competent** | **competent** | **strong** | **strong** |
+  | fidelity | strong | strong | strong | strong |
+  | overall | strong | strong | strong | strong |
+
+- **Cost.** Wall-clock **723s → 946s (+31%, 1.31×)**; output tokens **53,970 → 71,208 (+32%)**; build ops
+  121→163, 2nd-pass ops 147→202. Higher effort bought a **busier, more verbose build** at a real latency
+  premium; input-token footprint was flat, so the spend is all generation-side.
+
+- **Verdict: NOT A REAL LEVER (do not adopt; effectively *not worth the latency*).** Only **one** of four
+  dimensions moved (detail competent→strong, both rounds) — **below the pre-registered ADOPT bar (≥2 dims
+  a full step, none regressed)** — and detail is **exactly the dimension Decision D down-weights as noise**
+  (P15: the lagging flat-field holdout that swings run-to-run with build verbosity). The decisive evidence
+  is the **cross-knob coincidence**: the *independent* persona A/B (run 025, T-013-01) flipped the **same
+  single `detail` competent→strong** and **also** emitted more output. **Two unrelated knobs producing the
+  identical lone-`detail` flip, both mediated by output size, is the "busier-reads-as-detail" generation-
+  noise signature — not a deliberation effect.** The render notes confirm it: 026's broad iwan/wall fields
+  still read flat ("little relief," "shallow"), the detail=strong coming from denser ornament *around
+  openings*, not filled fields — the same P15 whack-a-mole. At **n=1**, a lone move in the noisy dimension
+  at +31% wall-clock does not clear the noise floor. **No default changed.** A confirmer (n>1) could test
+  whether `--effort high`'s extra ornament ever survives as *real relief*, but the prior is now strongly
+  "no"; the cure for `detail` remains a **whole-facade fenced ornament pass** (P15), not incidental
+  verbosity from a deliberation knob. Already distilled into P15 and "Tunable parameters" by the T-014-01
+  consolidation: `--effort high` ≈ +31% latency / +32% output for **no robust rubric lift** on this config.
+
+### Consolidation · overnight chain S-006…S-009 · 2026-06-05 (T-014-01 — synthesis, NOT a trial)
+A distillation pass over the night's runs (no new trials; no champion tie to break, so no re-judge). The
+chain ran, in dependency order: two detail-lever tuning experiments → four generalization runs → two knob
+A/Bs. **Champion is UNCHANGED** (committed HEAD, the 015 "NO LARGE FLAT FIELDS" menu): nothing the night
+tested cleared its promotion bar. Per-principle verdicts are recorded inline on **P12/P13/P14/P15** above
+(`Chain verdict (T-014-01)`); the champion band + morning brief are the **🌅 banner** at the top of
+Principles. This entry captures the runs that have **no standalone entry** of their own.
+
+**Detail levers — BOTH DISCARDED (the night's hard negative; promotion rule from T-006/T-010 unmet).**
+
+| story / run | mechanism | proportion | color | detail | fidelity | overall | outcome |
+|-------------|-----------|-----------|-------|--------|----------|---------|---------|
+| S-006 / 016 | relief panels | strong | strong | **competent** | strong | strong 3/3 | non-promotion; never committed |
+| S-010 / 017 | texture grain | **competent** (regressed) | strong | **competent** | strong | strong (2/3) | non-promotion; **harmful to proportion**; reverted |
+
+Neither moved `detail` to a robust *strong*; S-010 actively cost a category on proportion. The champion
+stays the 015 menu and `detail` stays the lone holdout (P15). The likely real cure is a *whole-facade fenced
+ornament pass*, not a menu clause or texture swap.
+
+**Generalization runs — already journaled in full above (019/020/021/022); one-line recap for the index:**
+- **019 Hōryū-ji** (T-007): strong 3/3 both rounds; **P12 held**, **P13 held** (pagoda tiers → one plane),
+  2nd pass held every dimension.
+- **020 Sainte-Chapelle** (T-008): round-0 **strong 3/3 → render competent** (the P14 regression — flat gold
+  pediment slab); P12 held (pale stone, a *conflict* case, not the agreement case the ticket assumed — the
+  image was a grey exterior); P13 held.
+- **021 Arc de Triomphe** (T-011): strong both rounds, **detail competent→strong** on the render (whack-a-mole
+  — named fields fill, blankness migrates to the oversized arch void); P12 held (4th pale palette).
+- **022 Sun Yat-sen mausoleum** (T-012): strong 3/3 both rounds; **P12's first partial colorful-reference
+  datum** (two-tone cobalt — near-neutral but still guards white-collapse); P13 held; cumulative progress on
+  the founding-reference (run 008) moved its two named defects *absent → present-but-shallow*.
+
+**Knob A/Bs — BOTH COMPLETED, BOTH show NO credible effect (not adopted).** Both finished during this
+consolidation (the treatment arms were still running when the chain reached S-014). Median-of-3 final renders:
+
+| knob | control | treatment | proportion | color | detail | fidelity | overall | cost / wall-clock Δ |
+|------|---------|-----------|-----------|-------|--------|----------|---------|----------------------|
+| persona (S-013) | OFF 023 | ON 025 | strong=strong | strong=strong | **competent→strong** | strong=strong | strong 3/3 both | $1.81→$2.18 |
+| effort (S-009) | DEFAULT 024 | HIGH 026 | strong=strong | strong=strong | **competent→strong** | strong=strong | strong 3/3 both | $1.71→$2.14, **+31% wall-clock (+223s)** |
+
+**Verdict: inconclusive, lean noise — adopt NEITHER as default.** Both knobs moved *only* `detail`, by *one
+step*, on the single dimension P15 flags as boundary-noisy (competent↔strong at identical config — cf. 014 vs
+015). Two *independent* treatments (an unrelated master-architect persona; a higher reasoning-effort token)
+producing the *identical* single-`detail` flip is the signature of a shared confound, not two distinct levers
+— and both treatment arms emitted more output (busier builds), so the bump tracks generation size, the known
+"busier-reads-as-detail" effect, not deliberation quality. Per the pre-registered, effect-size-calibrated
+rubric (T-013/T-009 design), a single-dimension single-step flip is *within noise → no credible effect*; a
+confirmer (N>1 per arm, or round-0 attribution) would be required before crediting either, and effort-HIGH's
++31% latency makes it a poor trade for a noisy flip. **The wiring DID land** (additive, inert by default,
+uncommitted in the working tree): `--system-prompt`/`system` param (T-013) and `--effort` (T-009) are plumbed
+through `src/sdk-binding.mjs` + `run.mjs`; finishing or re-confirming each is one command + a judge.
+
+**Why 016/017/023/024/025/026 have no standalone entries above:** they are non-promotions (levers) and
+no-credible-effect completes (knobs) — recorded here by reference rather than as six separate write-ups, a
+proportional record. Their `summary.json` files under `benchmarks/temple-facade/runs/<id>-vRefRevise-designdoc/`
+are the durable evidence; every number above is reproducible from them.
+
+**Net + next:** a confirmation night — the reference-grounding principles (P12/P13) generalized cleanly to
+four new massings/palettes, but **detail did not move** and is now the *only* thing between the champion and
+exceptional. Three dead ends were ruled out this chain (relief panels, texture grain, and — on noisy n=1 —
+persona/effort knobs), all pointing the same way: the single recommended next experiment is a **whole-facade
+fenced ornament pass** (detail-only revision auditing every plane wider than ~6 blocks). Cheap follow-ons:
+land the "judge-both-rounds-keep-the-better" P14 fix, and re-confirm the two knobs with N>1 if their detail
+flip is worth chasing. `npm test` 133/133 green; no rubric/brief edit.

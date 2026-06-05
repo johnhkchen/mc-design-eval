@@ -53,6 +53,21 @@ auto-injected corpus). Review and update it after each run.
 | 7 | 2026-06-05 | `v5-designdoc-detail` | 3.33 | 6985 | 21752/34687 | $1.0661 | 448s | v4 high-res + hard surface-detail push (retry-on-malformed enabled) |
 | 8 | 2026-06-05 | `vRef-designdoc` | 4 | 20311 | 21837/34157 | $1.6368 | 490s | design doc grounded in Sun Yat-sen Mausoleum reference (JPEG), then v4 high-res build |
 | 9 | 2026-06-04 | `vRef-designdoc` | strong | 24596 | 0/0 | $0.0000 | — | Arc de Triomphe; salvaged (run errored at summary step after a build-narration retry) |
+| 10 | 2026-06-05 | `vRefRevise-designdoc` | competent | 10566 | 30759/73003 | $2.0924 | 1697s | Taj Mahal; 2nd pass compares build to reference; both build seams retries=2 |
+| 13 | 2026-06-05 | `vRefRevise-designdoc` | competent | 10448 | 30771/57236 | $1.7645 | 818s |  |
+| 14 | 2026-06-05 | `vRefRevise-designdoc` | strong | 10013 | 30745/52174 | $1.6413 | 1100s |  |
+| 15 | 2026-06-05 | `vRefRevise-designdoc` | strong | 10955 | 30610/67528 | $2.0255 | 919s |  |
+| 16 | 2026-06-05 | `vRefRevise-designdoc` | strong | 17710 | 30167/66094 | $1.9910 | 910s |  |
+| 17 | 2026-06-05 | `vRefRevise-designdoc` | strong | 6541 | 32907/62901 | $1.9257 | 852s |  |
+| 18 | 2026-06-05 | `vRefRevise-designdoc` | strong | 6533 | 31643/53789 | $1.6927 | 1075s | T-010-01 detail lever B: contrast-preserving block-texture grain (vs S-006 relief panels) |
+| 19 | 2026-06-05 | `vRefRevise-designdoc` | strong | 4953 | 31809/47581 | $1.5248 | 688s | Horyu-ji generalization (T-007-01): P12/P13 stress on a wooden pagoda — near-monochrome timber palette, freestanding stacked-tier tower |
+| 20 | 2026-06-05 | `vRefRevise-designdoc` | competent | 4068 | 33106/66402 | $2.0190 | 929s | Sainte-Chapelle generalization (T-008-01): inverse P12 test (ref intended colorful); but provided image is grey-limestone EXTERIOR. Read: did color come out strong regardless? + Gothic verticality on proportion (P13), tracery on detail (S-006). |
+| 21 | 2026-06-05 | `vRefRevise-designdoc` | strong | 12696 | 30973/71671 | $2.1251 | 1006s | Arc de Triomphe generalization (T-011-01): single colossal opening; tests P12 color off a 4th pale ref, P13 proportion on arch massing, and the detail lever on the broad flat attic/spandrel fields. |
+| 22 | 2026-06-05 | `vRefRevise-designdoc` | strong | 11325 | 32038/42093 | $1.4054 | 640s | Sun Yat-sen Mausoleum re-run (T-012-01): cumulative-progress on the reference that first proved grounding (run 008). P12 on a blue-white reference; P13 on double-eaved stacked roof + battered wings; detail lever vs 008's named blank base register + shallow portico. |
+| 23 | 2026-06-05 | `vRefRevise-designdoc` | strong | 5196 | 32634/58118 | $1.8112 | 830s | persona A/B OFF (T-013-01): champion default, no system prompt |
+| 24 | 2026-06-05 | `vRefRevise-designdoc` | strong | 9500 | 32558/53970 | $1.7084 | 723s | T-009-01 effort A/B: DEFAULT (no --effort) |
+| 25 | 2026-06-05 | `vRefRevise-designdoc` | strong | 8614 | 32916/71370 | $2.1818 | 980s | persona A/B ON (T-013-01): master-architect system prompt across all 3 stages |
+| 26 | 2026-06-05 | `vRefRevise-designdoc` | strong | 8802 | 32855/71208 | $2.1434 | 946s | T-009-01 effort A/B: HIGH (--effort high) |
 
 ## Gallery
 
@@ -127,5 +142,115 @@ auto-injected corpus). Review and update it after each run.
 **strong** · 24596 blocks · 0/0 tok · $0.0000
 
 > Arc de Triomphe; salvaged (run errored at summary step after a build-narration retry)
+
+### 010 — `vRefRevise-designdoc` · 2026-06-05
+
+![temple-facade run 10](runs/010-vRefRevise-designdoc/render.png)
+
+**competent** · 10566 blocks · 30759/73003 tok · $2.0924
+
+> Taj Mahal; 2nd pass compares build to reference; both build seams retries=2
+
+### 013 — `vRefRevise-designdoc` · 2026-06-05
+
+![temple-facade run 13](runs/013-vRefRevise-designdoc/render.png)
+
+**competent** · 10448 blocks · 30771/57236 tok · $1.7645
+
+### 014 — `vRefRevise-designdoc` · 2026-06-05
+
+![temple-facade run 14](runs/014-vRefRevise-designdoc/render.png)
+
+**strong** · 10013 blocks · 30745/52174 tok · $1.6413
+
+### 015 — `vRefRevise-designdoc` · 2026-06-05
+
+![temple-facade run 15](runs/015-vRefRevise-designdoc/render.png)
+
+**strong** · 10955 blocks · 30610/67528 tok · $2.0255
+
+### 016 — `vRefRevise-designdoc` · 2026-06-05
+
+![temple-facade run 16](runs/016-vRefRevise-designdoc/render.png)
+
+**strong** · 17710 blocks · 30167/66094 tok · $1.9910
+
+### 017 — `vRefRevise-designdoc` · 2026-06-05
+
+![temple-facade run 17](runs/017-vRefRevise-designdoc/render.png)
+
+**strong** · 6541 blocks · 32907/62901 tok · $1.9257
+
+### 018 — `vRefRevise-designdoc` · 2026-06-05
+
+![temple-facade run 18](runs/018-vRefRevise-designdoc/render.png)
+
+**strong** · 6533 blocks · 31643/53789 tok · $1.6927
+
+> T-010-01 detail lever B: contrast-preserving block-texture grain (vs S-006 relief panels)
+
+### 019 — `vRefRevise-designdoc` · 2026-06-05
+
+![temple-facade run 19](runs/019-vRefRevise-designdoc/render.png)
+
+**strong** · 4953 blocks · 31809/47581 tok · $1.5248
+
+> Horyu-ji generalization (T-007-01): P12/P13 stress on a wooden pagoda — near-monochrome timber palette, freestanding stacked-tier tower
+
+### 020 — `vRefRevise-designdoc` · 2026-06-05
+
+![temple-facade run 20](runs/020-vRefRevise-designdoc/render.png)
+
+**competent** · 4068 blocks · 33106/66402 tok · $2.0190
+
+> Sainte-Chapelle generalization (T-008-01): inverse P12 test (ref intended colorful); but provided image is grey-limestone EXTERIOR. Read: did color come out strong regardless? + Gothic verticality on proportion (P13), tracery on detail (S-006).
+
+### 021 — `vRefRevise-designdoc` · 2026-06-05
+
+![temple-facade run 21](runs/021-vRefRevise-designdoc/render.png)
+
+**strong** · 12696 blocks · 30973/71671 tok · $2.1251
+
+> Arc de Triomphe generalization (T-011-01): single colossal opening; tests P12 color off a 4th pale ref, P13 proportion on arch massing, and the detail lever on the broad flat attic/spandrel fields.
+
+### 022 — `vRefRevise-designdoc` · 2026-06-05
+
+![temple-facade run 22](runs/022-vRefRevise-designdoc/render.png)
+
+**strong** · 11325 blocks · 32038/42093 tok · $1.4054
+
+> Sun Yat-sen Mausoleum re-run (T-012-01): cumulative-progress on the reference that first proved grounding (run 008). P12 on a blue-white reference; P13 on double-eaved stacked roof + battered wings; detail lever vs 008's named blank base register + shallow portico.
+
+### 023 — `vRefRevise-designdoc` · 2026-06-05
+
+![temple-facade run 23](runs/023-vRefRevise-designdoc/render.png)
+
+**strong** · 5196 blocks · 32634/58118 tok · $1.8112
+
+> persona A/B OFF (T-013-01): champion default, no system prompt
+
+### 024 — `vRefRevise-designdoc` · 2026-06-05
+
+![temple-facade run 24](runs/024-vRefRevise-designdoc/render.png)
+
+**strong** · 9500 blocks · 32558/53970 tok · $1.7084
+
+> T-009-01 effort A/B: DEFAULT (no --effort)
+
+### 025 — `vRefRevise-designdoc` · 2026-06-05
+
+![temple-facade run 25](runs/025-vRefRevise-designdoc/render.png)
+
+**strong** · 8614 blocks · 32916/71370 tok · $2.1818
+
+> persona A/B ON (T-013-01): master-architect system prompt across all 3 stages
+
+### 026 — `vRefRevise-designdoc` · 2026-06-05
+
+![temple-facade run 26](runs/026-vRefRevise-designdoc/render.png)
+
+**strong** · 8802 blocks · 32855/71208 tok · $2.1434
+
+> T-009-01 effort A/B: HIGH (--effort high)
 
 <!-- RUNS:END -->
