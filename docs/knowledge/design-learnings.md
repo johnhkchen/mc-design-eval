@@ -1047,3 +1047,147 @@ the intended "replace text with bold geometric ornament" behavior (block-scale, 
 recorded here so a future reviewer doesn't mistake it for residual glyph text. `npm test` 133/133
 green. Prompt diff committed + client regenerated (`npm run baml:gen`); concepts saved under
 `benchmarks/temple-facade/concepts/` (gitignored, reproducible).
+
+## Stage-1 concept-art · CONSOLIDATION + stage-2 handoff (E-09, T-018-01 — synthesis, NOT a trial) · 2026-06-05
+
+**Stage 1 of the E-09 image→3D pipeline is DONE.** This is the terminal section of the stage-1 chain:
+it distills S-015 (input-variant matrix) → S-016 (lock default) → S-017 (harden segmentation +
+resolution) into one durable record and states the contract stage 1 hands to stage 2 (TRELLIS). No new
+experiment; no rubric/brief edit; no re-generation (the T-017-01 final audit, below, is the freshest
+evidence and is already on record). The three predecessor sections above are the per-ticket trail;
+this is the conclusion.
+
+**Locked artifacts — confirmed this ticket (working tree clean against each commit):**
+- `baml_src/conceptart.baml` — the strong, locked `FacadeConceptPrompt`, committed **33de8c8**
+  (T-017-01). Carries all three hardening clauses: HARD-LIMITS-override-the-doc (figures → blank/
+  rosette), named text offenders + frieze clause (nameplate/plaque/cartouche/glyph-row → blank/
+  color-blocking), and pure-black bg + bright outermost edges.
+- `benchmarks/temple-facade/conceptart.mjs` — default variant **C** (render-only), committed
+  **565f32f** (T-016-01), matching the S-016 decision. A/B/base retained for matrix reproducibility.
+- `baml_client/**` regenerated via `npm run baml:gen` (gitignored; source-of-truth is `baml_src/`).
+
+**Best input variant = C (render-only) — and *why*, structurally.** C attaches only our own
+doc-grounded prismarine render — never the reference photo. That single fact is the whole argument:
+the two failure modes that *require* a photo to trigger become **impossible by construction** — C
+cannot copy the reference's palette (A rendered the Taj dome in the doc-forbidden **white marble**;
+C used the doc's gold), and C cannot copy figural relief (A grew literal **gold human figures** on the
+Arc). And because nothing imports a studio backdrop, the background is reliably black. The matrix
+*measured* this: background reliability — the segmentation precondition — was A 2/5 white · B 2/5
+white · **C 0/5 white**. C also stayed the most voxel-honest (bold block rings for the Sainte-Chapelle
+rose window where B slid into filigree). So C wins fidelity, inspiration-not-blueprint, and
+segmentation simultaneously — not by scoring marginally higher, but because its no-photo input removes
+the *mechanism* of the other variants' failures. B's "attach everything" did **not** dominate: the
+reference still dragged 2/5 to white and pulled in filigree/text. The lesson generalizes — **for a
+segmentation-critical concept stage, feed the model your own controlled render, not the wild
+reference.**
+
+**What makes a concept voxel-ready (the four criteria TRELLIS needs):**
+1. **Isolated** — one subject, a head-on front elevation, centered with a margin on every side, fully
+   visible (not cropped). No ground plane, shadow, sky, or surroundings.
+2. **Cleanly-segmentable** — SOLID `#000000` black background (never white/light/grey/navy/gradient);
+   the OUTER silhouette (spires, finials, pinnacles, roof crest) in **bright** palette colors so the
+   edge can't vanish into the black; dark tones reserved for recessed interior areas only.
+3. **Resolution-disciplined** — every feature a few whole blocks at ~48 wide. No sub-block figures,
+   statues, text/glyphs, filigree, or thin finials. These are HARD LIMITS that **override the design
+   document** — a niche the doc fills with a statue is rendered as a blank/rosette panel, not the
+   literal motif.
+4. **Faithful + colorful** — the doc's massing, proportion, style, and above all its **palette**; it
+   is deliberately colorful, never a white or monochrome wall.
+
+**The load-bearing prompt rules (do NOT remove these — each is tagged with the leak it closes):**
+- **HARD LIMITS block opens by stating it OVERRIDES the design document.** Without this, figures the
+  doc names in niches survive (arc grew gold figures even under variant C, which never saw the photo —
+  the leak was the doc's own language, so the override is the only fix).
+- **Name the specific text offender + a frieze clause.** "NO text" alone was too weak for
+  inscription-bearing buildings (mausoleum produced plaques/glyphs across all variants). Naming
+  nameplate/signboard/plaque/cartouche/tablet AND adding "friezes carry plain color-blocking or
+  rosettes ONLY — never glyph-like square characters" was needed (the glyph relocated into the frieze
+  after only the first was added).
+- **Pure-black bg + bright outermost edges, in the same clause.** Black alone isn't enough — a
+  dark-navy bg plus blue spires (chapelle) merged dark-on-dark; requiring bright (gold/warm-stone)
+  outermost elements fixes the vanishing top edge.
+- **Wording trap — keep "white"/"light" OUT of the background paragraph.** Listing "white, light
+  stone" as example *edge* colors next to the background instruction caused chapelle **and** mausoleum
+  to draw a **white background**. Front-load an explicit "NEVER white/light/grey/navy" ban and keep
+  light-color examples away from the bg clause.
+
+**Final audit (T-017-01, all 5 regenerated under the identical locked prompt — the standing evidence):**
+taj ✓✓ · horyuji ✓✓ · chapelle ✓✓ · arc ✓✓ · mausoleum ✓✓ (segmentation ✓, resolution-discipline ✓
+for each). This is why no re-generation was done here: a fresh single draw would only add
+non-determinism risk on top of an already-clean audited set.
+
+**Residual caveats (honest):**
+- **Generation is non-deterministic.** "Held" means the prompt no longer *invites* the leak and a
+  fresh draw is clean — **not** a statistical guarantee. horyuji drifted white once in T-016-01 and
+  re-drew black. *If a reference regresses on a later run, redraw before re-editing the prompt.*
+- **The former-nameplate panel converges on a chunky concentric-square / maze medallion** (horyuji,
+  mausoleum). This is the *intended* "replace text with bold geometric ornament" behavior — block-
+  scale, no legible letters — not residual glyph text. Recorded so a reviewer doesn't mistake it. A
+  stricter bar would route that panel to a plain rosette explicitly.
+- **No automated segmentation/resolution metric** exists — verification is human VIEW. If stage 1 is
+  ever run at scale, a bg-purity histogram + a small figure/text classifier is the natural follow-on
+  (out of scope here).
+
+**Handoff to stage 2 (TRELLIS).** The locked stage-1 default (`conceptart.mjs` no-flag → variant C,
+Flash, 48 blocks, `FacadeConceptPrompt` @33de8c8) guarantees TRELLIS a concept image that is
+**isolated** (single front-elevation subject, centered with margin, no ground/shadow/surroundings),
+**cleanly-segmentable** (pure-black `#000000` field with a bright high-contrast outer silhouette, so
+rembg / TRELLIS's own masking lifts the subject without eroding edges or swallowing the void),
+**resolution-disciplined** (block-scale ornament only — no sub-voxel figures, text, or filigree for
+reconstruction to choke on or hallucinate depth from), and **faithful + colorful** (the design doc's
+massing and palette, never a flat monochrome wall that would give TRELLIS no shape cues). In short:
+stage 2 can consume the stage-1 PNG directly — segment it, reconstruct a clean voxel mesh from a
+disambiguated subject, and trust that every feature it sees is meant to become whole blocks. Stage 1
+is closed; the E-09 chain advances to TRELLIS reconstruction.
+
+`npm test` 133/133 green. No source/prompt/rubric/brief edit this ticket — confirm-only synthesis; the
+durable product is this section.
+
+---
+
+## E-10 worked example — canonical palette extraction (T-021-01)
+
+The S-021 extractor (`src/color/palette-extract.mjs`, CLI `npm run palette:extract`) answers
+"**which real blocks does this facade use?**" — decode → drop near-black background → cluster the
+foreground in CIE-Lab → match each centroid to the nearest survival full-cube block (S-019 table via
+the S-020 engine) → merge by block, sort by coverage. Run here on the locked stage-1 default
+concept, **`taj-C-flash.png`** (1024², a baseline JPEG despite the `.png` name).
+
+**Discover mode** (`--k 10`, full 305-block set) — *the canonical palette of the Taj facade:*
+
+```
+chiseled_red_sandstone 13% · dark_oak_log 13% · dark_prismarine 13% · gold_block 13% ·
+orange_terracotta 13% · pumpkin 13% · lapis_block 6% · tinted_glass 6% · bookshelf 6% ·
+mangrove_log 6%        (mean ΔE 6.2, over 51% of frame = foreground)
+```
+
+Reads true: warm sandstone/terracotta/pumpkin body, **gold_block** domes, **lapis_block** accents, a
+**dark_prismarine** teal trim — a believable, buildable, survival-obtainable palette. Mean ΔE ≈ 6 is
+a *good* fit (the worst single match is the dark-navy anti-alias halo between the black void and the
+blue, → tinted_glass at ΔE 16). The image's invented/over-resolved colors are gone: every row is a
+real block.
+
+**Validate mode** (`--whitelist palettes/neoclassical.json`) — *score the facade against a declared
+manifest:* the warm-stone/quartz neoclassical palette is a **poor** fit for the Taj's saturated
+colors — **mean ΔE jumps to ~27**, gold collapses onto `glowstone` (ΔE 27), blues onto
+`chiseled_stone_bricks` (ΔE 41). This is the **palette-vs-fidelity tradeoff made measurable**:
+discover ΔE 6 vs validate-against-the-wrong-palette ΔE 27 is exactly the design lever the matcher was
+built to expose. (21 stairs/slab/pane ids in the manifest aren't full-cube blocks, so they're
+reported in `missing` and skipped — the table is full-cube-only by construction.)
+
+**Two durable observations.**
+- **Coverage is dyadic under median-cut, by construction.** A population-halving median split makes
+  leaf coverages cluster around 1/8, 1/16… regardless of which box is split. Coverage only becomes a
+  *dominance* signal after the same-block **merge** step — clearly visible in validate mode, where a
+  constrained palette merges four gold-ish clusters into one `glowstone` row at 50%. For richer
+  dominance weighting on flat fields, k-means (or a mean/largest-gap split) is the future lever; the
+  metric/clusterer seams are already pluggable.
+- **Background removal is a tolerance, not an equality.** The "pure-black `#000000`" stage-1 field
+  decodes to `[1,1,1]`-ish under JPEG; an exact test would leak the whole margin into the palette.
+  Default drop = within RGB-radius 24 of `dropColor`. Collateral: genuinely near-black *foreground*
+  is also dropped — acceptable because the locked stage-1 prompt bans dark backgrounds and mandates
+  bright silhouettes; `--drop none` opts out for non-black-bg inputs.
+
+`npm test` 182/182 green (+16 over the E-10 color layer). The durable products are the extractor + CLI
+and this worked example: a concrete "blocks in this facade" readout that grounds the concept image to
+a real, palette-disciplined block set — application point #1 of the CIE-Lab matcher, no 3-D work.

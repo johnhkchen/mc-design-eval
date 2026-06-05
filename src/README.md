@@ -308,3 +308,36 @@ Notes: `minecraft-assets` + `pngjs` are **build-time-only** devDependencies — 
 `version`). Biome-tinted and non-full-cube blocks are excluded and documented in the table's
 `excluded[]`. The `srgbToLab` here is a transitional duplicate of S-020's `cielab.mjs`
 conversion (parallel tickets); S-023 consolidates it.
+
+### Engine — `cielab.mjs` (S-020)
+
+The portable color core: `srgbToLab`, `deltaE76`/`deltaE`, `nearest(rgb, …)` and
+`nearestLab(lab, …)` — argmin ΔE over a `[{key, lab}]` palette. **Zero project/Minecraft
+imports** (load-bearing). `nearest` converts an sRGB target then delegates to `nearestLab`;
+callers already holding a Lab value (e.g. cluster centroids) use `nearestLab` directly to avoid a
+mean-rgb→Lab round-trip (added in T-021-01). The ΔE metric is pluggable (`{ metric }`) so CIEDE2000
+can be swapped in later without touching call sites.
+
+### Canonical palette extraction — `palette-extract.mjs` (S-021)
+
+Given a facade concept image, produces the **canonical block palette** it uses: decode → drop the
+near-black background → cluster the foreground in CIE-Lab (deterministic median-cut) → match each
+centroid to the nearest real block (table + engine) → merge centroids hitting the same block
+(summing coverage) → ordered `{block, repColor(hex+lab), coveragePct, deltaE, blockColor}[]` + a
+one-line description.
+
+```bash
+npm run palette:extract -- benchmarks/temple-facade/concepts/taj-C-flash.png --k 10
+npm run palette:extract -- <img> --whitelist palettes/neoclassical.json   # validate a manifest
+```
+
+Two modes share one pipeline, differing only in the candidate set: **discover** (no `whitelist` →
+all 305 table blocks) vs **validate** (`whitelist` → only those ids; unmatched ids are reported in
+`missing`). The pixel core (`extractPaletteFromPixels`) is pure and decode-free — fully unit-tested
+on synthetic RGBA buffers, no binary fixture committed; **decode is isolated** to
+`extractPaletteFromImage`, which lazily imports `jpeg-js`/`pngjs` by magic-byte sniff (the concept
+`.png` files are in fact baseline JPEG). Background removal is parametric (`dropColor`/`dropTolerance`,
+default near-`#000000`); near-black *foreground* is documented collateral — pass `dropColor: null`
+to disable. **Coverage note:** median-cut's population-halving split yields dyadic per-cluster
+coverage; coverage becomes dominance-informative after same-block **merge** (visible in validate
+mode, where a constrained palette merges many clusters into one block).
