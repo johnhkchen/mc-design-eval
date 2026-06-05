@@ -53,6 +53,7 @@ benchmark is the live I/O + rendering + run-dir provenance around it.
 | 6 | 2026-06-05 | `an anatomically correct human heart` | 32 | 2648 | 21139/16883 | $0.6406 | T-036-05 build |
 | 7 | 2026-06-05 | `a sword` | 32 | 166 | 22298/9677 | $0.4663 | T-036-06 build |
 | 8 | 2026-06-05 | `a mushroom` | 32 | 4411 | 20587/17201 | $0.6459 | T-036-07 build |
+| 9 | 2026-06-05 | `a koi fish` | 32 | 1997 | 20022/21719 | $0.7560 | T-036-08 build |
 
 ## Gallery
 
@@ -119,5 +120,13 @@ benchmark is the live I/O + rendering + run-dir provenance around it.
 **4411 blocks** · 20587/17201 tok · $0.6459
 
 > T-036-07 build
+
+### 009 — `a koi fish` (scale 32) · 2026-06-05
+
+![sculpture run 9 — 3/4](runs/009-vConcept-a-koi-fish/render-3q.png)
+
+**1997 blocks** · 20022/21719 tok · $0.7560
+
+> T-036-08 build
 
 <!-- RUNS:END -->
