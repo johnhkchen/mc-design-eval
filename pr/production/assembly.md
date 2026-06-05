@@ -36,7 +36,7 @@ human polish step (§C).
 | F07 | 1.5 | **card** `BEST-OF-N / = one $0.76 shot` | card | Best-of-N cost 7× and gained nothing. | `$5.34 · ~29min → 3.67 · detail-stack 4.0→3.33` | |
 | F08 | 3.0 | `frames/concept-taj-C-flash.png` | file | Text hit a ceiling. So we changed tools. | `text-JSON → image→3D` | ● |
 | F09 | 3.0 | **5-up montage** of `concept-{taj,horyuji,chapelle,arc,mausoleum}-C-flash.png` | montage | Then the floodgates opened. | `concept art, not the build` | ● |
-| F10 | 4.0 | `../assets/rotations/spin-taj-015.mp4` (clip) | clip | And it's real. Rotating in our own rig. | `REAL · prismarine-viewer + minecraft-assets · 360°` | |
+| F10 | 4.0 | `../assets/rotations/rock-taj-015.mp4` (clip) | clip | And it's real. Rotating in our own rig. | `REAL · prismarine-viewer + minecraft-assets` | |
 | F11 | 1.5 | reuse 014 | file | One dimension still won't climb: detail. | `detail: competent (held)` | |
 | F12 | 3.0 | **4-up montage** of `concept-{horyuji,chapelle,arc,mausoleum}-C-flash.png` | montage | Same method, four more landmarks. Still strong. | `4 landmarks · 3/3` | ● |
 | F13 | 3.0 | `frames/concept-goldengate-vision.png` | file | Where it's heading: the staged sculptor. | `where it's heading, not shipped` | ● |
@@ -55,10 +55,11 @@ concept frames. The `●` column is the mandatory amber `[concept]` honesty tag.
 - **F06 velocity grid.** The storyboard wants a fast thumbnail grid of `runs/001…026` — those
   sources are gitignored. The rough cut substitutes a **receipts card** (`26 RUNS / 2 DAYS`), which
   is the same *quantity* message honestly. In the editor, drop in the real run-thumb grid if desired.
-- **F10 rotation — DONE (real spin).** `../assets/rotations/spin-taj-015.mp4` is a real 12fps 360°
-  seamless turntable of the run-015 build (and `rotating-builds-montage.mp4` chains four builds). The
-  rough cut is a still slideshow, so it samples a frame; the editor drops in the clip. Regenerate/chain:
-  `render/src/orbit-cli.mjs` + `render/src/orbit-chain.mjs` (see `../assets/rotations/README.md`).
+- **F10 rotation — DONE (real spin).** The hero is `../assets/rotations/rock-taj-015.mp4` — a real 12fps
+  **front-arc oscillation** (±40° rock, never the flat back) of the run-015 build through our rig. Full-360
+  `spin-*.mp4` + the chained `rotating-builds-montage.mp4` are also available for the "rotating builds"
+  beat. The rough cut samples a frame; the editor drops in the clip. Regenerate/chain:
+  `render/src/orbit-cli.mjs [--oscillate]` + `render/src/orbit-chain.mjs` (see `../assets/rotations/README.md`).
 - **Overlay glyphs.** The burn uses ASCII (`->`, `up`, `x`, `.`); restore `→ ↑ ✕ ·` in the final.
 
 ## (B) Precise shot-list (human editor, no script needed)

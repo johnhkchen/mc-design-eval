@@ -8,17 +8,24 @@ Each `spin-*.mp4` is a **12 fps, 360°, seamless loop** (30 frames at 12°/frame
 so there is no 0°/360° double-count) — a **chainable unit**: concatenate any set of them into a longer
 "rotating builds" sequence.
 
+There are **two variants**:
+- **`spin-*.mp4`** — full 360° turntable (reveals the flat facade back for half the loop).
+- **`rock-*.mp4`** — **front-arc oscillation** (a ±40° sine rock around the front): shows depth/parallax
+  from both 3/4 sides and **never exposes the flat back**. **Preferred for the hero shot (F10).**
+
 | clip | build | source |
 |------|-------|--------|
+| `rock-taj-015.mp4` ★ hero | Taj (champion, "strong") — front-arc rock | `runs/015-vRefRevise-designdoc` |
 | `spin-taj-015.mp4` | Taj (champion, "strong") | `runs/015-vRefRevise-designdoc` |
 | `spin-horyuji-019.mp4` | Hōryū-ji | `runs/019-vRefRevise-designdoc` |
 | `spin-arc-021.mp4` | Arc de Triomphe | `runs/021-vRefRevise-designdoc` |
 | `spin-mausoleum-022.mp4` | Sun Yat-sen mausoleum | `runs/022-vRefRevise-designdoc` |
 | `rotating-builds-montage.mp4` | all four chained | the montage beat |
 
-Note (honest): these are real voxel builds, so the spin reveals depth — and, at the back, that they are
-currently **facades** (flat reverse side). That's on-thesis: it motivates the whole-structure / sculptor
-work (E-11). The strongest angles are the front 3/4 sweep.
+Note (honest): these are real voxel builds, so the rotation reveals depth — and the full-360 `spin-*`
+clips reveal that they are currently **facades** (flat reverse side). The **`rock-*` front-arc variant
+avoids this** by staying in the front hemisphere. The flat back is on-thesis anyway (it motivates the
+whole-structure / sculptor work, E-11) — but for a polished hero shot use the rock.
 
 ## Regenerate / chain (reproducible)
 
@@ -26,6 +33,10 @@ work (E-11). The strongest angles are the front 3/4 sweep.
 # one build → a 12fps 360° seamless orbit clip (frames + mp4 under render/out/orbit/<id>/)
 node render/src/orbit-cli.mjs --artifact benchmarks/temple-facade/runs/015-vRefRevise-designdoc/artifact.json \
   --frames 30 --fps 12 --mp4
+
+# front-arc OSCILLATION variant (±40° rock around the front; never shows the flat back)
+node render/src/orbit-cli.mjs --artifact benchmarks/temple-facade/runs/015-vRefRevise-designdoc/artifact.json \
+  --oscillate --amplitude 40 --center 0 --frames 30 --fps 12 --mp4
 
 # chain any set of orbit clips into one montage (ffmpeg concat, -c copy — they share params)
 node render/src/orbit-chain.mjs render/out/orbit/montage.mp4 \

@@ -9,7 +9,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { orbitAzimuths, orbitFramePath, defaultOrbitDir } from '../src/orbit.mjs'
+import { orbitAzimuths, oscillateAzimuths, orbitFramePath, defaultOrbitDir } from '../src/orbit.mjs'
 
 // --- AC #4: evenly-spaced azimuths, no GL --------------------------------------
 
@@ -37,6 +37,35 @@ test('orbitAzimuths: startDeg offsets the phase and wraps past 360', () => {
   assert.deepEqual(orbitAzimuths(4, { startDeg: 315 }), [315, 45, 135, 225]) // 315+90=405→45
   assert.deepEqual(orbitAzimuths(4, { startDeg: 45 }), [45, 135, 225, 315])
   assert.deepEqual(orbitAzimuths(2, { startDeg: -90 }), [270, 90]) // -90 normalizes to 270
+})
+
+// --- front-arc oscillation (oscillateAzimuths), no GL --------------------------
+
+test('oscillateAzimuths: seamless ping-pong — starts at center, frame N wraps to it', () => {
+  const a = oscillateAzimuths(24, { centerDeg: 0, amplitudeDeg: 40 })
+  assert.equal(a.length, 24)
+  assert.ok(Math.abs(a[0]) < 1e-9, 'frame 0 sits at center (sin 0 = 0)')
+  const wrap = ((0 + 40 * Math.sin(2 * Math.PI)) % 360 + 360) % 360 // hypothetical frame N
+  assert.ok(Math.abs(wrap - a[0]) < 1e-9, 'frame N coincides with frame 0 → seamless loop')
+})
+
+test('oscillateAzimuths: stays within ±amplitude of center (never swings to the back)', () => {
+  const a = oscillateAzimuths(36, { centerDeg: 0, amplitudeDeg: 40 })
+  for (const ang of a) {
+    const signed = ang > 180 ? ang - 360 : ang // fold [0,360) → (-180,180]
+    assert.ok(Math.abs(signed) <= 40 + 1e-9, `${ang}° within ±40° of front`)
+  }
+})
+
+test('oscillateAzimuths: peaks at +amp (i=N/4) and -amp (i=3N/4)', () => {
+  const a = oscillateAzimuths(8, { centerDeg: 0, amplitudeDeg: 40 })
+  assert.ok(Math.abs(a[2] - 40) < 1e-9, 'i=N/4 → +amplitude')
+  assert.ok(Math.abs(a[6] - 320) < 1e-9, 'i=3N/4 → -amplitude (320° = -40°)')
+})
+
+test('oscillateAzimuths: a non-positive-integer frame count throws', () => {
+  assert.throws(() => oscillateAzimuths(0), /positive integer/)
+  assert.throws(() => oscillateAzimuths(2.5), /positive integer/)
 })
 
 test('orbitAzimuths: a non-positive-integer frame count throws (caller bug, not rounding)', () => {

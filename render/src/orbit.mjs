@@ -43,6 +43,25 @@ export function orbitAzimuths (frames, { startDeg = 0 } = {}) {
 }
 
 /**
+ * Front-arc OSCILLATION azimuths — a gentle sinusoidal rock of `amplitudeDeg` around
+ * `centerDeg`, so the camera stays in the front hemisphere (showing depth/parallax from both
+ * 3/4 sides) and never swings around to the flat back of a facade build. PURE (no GL),
+ * seamless: `angle = center + amp·sin(2π·i/N)`, so a hypothetical frame N coincides with
+ * frame 0 — a ping-pong loop with no double-counted endpoint. Sine-eased (slows at the
+ * extremes), unlike a linear triangle. Keep `|center| + amplitude < ~90` to stay off the back.
+ * @param {number} frames a positive integer
+ * @param {{ centerDeg?: number, amplitudeDeg?: number }} [opts]
+ * @returns {number[]} `frames` azimuths oscillating ±amplitude around center (normalized to [0,360))
+ */
+export function oscillateAzimuths (frames, { centerDeg = 0, amplitudeDeg = 40 } = {}) {
+  if (!Number.isInteger(frames) || frames <= 0) {
+    throw new Error(`oscillateAzimuths: frames must be a positive integer, got ${frames}`)
+  }
+  return Array.from({ length: frames }, (_, i) =>
+    normalize360(centerDeg + amplitudeDeg * Math.sin((2 * Math.PI * i) / frames)))
+}
+
+/**
  * Per-frame PNG path with lexical order == angular order: the index is zero-padded so `ls`
  * and ffmpeg's `%0Nd` globbing both walk the frames in sweep order.
  * @param {string} dir       the build's orbit directory
@@ -114,12 +133,14 @@ export async function renderOrbit (artifact, opts = {}) {
     onFrame
   } = opts
   const outDir = opts.outDir ?? defaultOrbitDir(artifact?.metadata?.trial_id)
-  const azimuths = orbitAzimuths(frames, { startDeg })
+  // Default: a full 360° sweep. Callers may pass an explicit `azimuths` list (e.g. the
+  // front-arc oscillation from oscillateAzimuths) to drive any path while reusing this loop.
+  const azimuths = opts.azimuths ?? orbitAzimuths(frames, { startDeg })
 
   const reports = []
   for (let i = 0; i < azimuths.length; i++) {
     const azimuthDeg = azimuths[i]
-    const outPath = orbitFramePath(outDir, baseName, i, frames)
+    const outPath = orbitFramePath(outDir, baseName, i, azimuths.length)
     const r = await renderArtifact(artifact, { outPath, view: { ...view, azimuthDeg }, strict })
     const frame = {
       index: i,

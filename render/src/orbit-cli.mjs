@@ -15,7 +15,7 @@
 import { readFileSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { GL_AVAILABLE, GL_LOAD_ERROR } from './render.mjs'
-import { renderOrbit, defaultOrbitDir } from './orbit.mjs'
+import { renderOrbit, oscillateAzimuths, defaultOrbitDir } from './orbit.mjs'
 import { maybeEncodeClip } from './orbit-clip.mjs'
 
 // --- tiny argv parser (house norm: ad-hoc, see scripts/image-to-grid.mjs) -------
@@ -34,6 +34,9 @@ function parseArgs (argv) {
       case '--fov': out.fov = Number(next()); break
       case '--size': out.size = Number(next()); break
       case '--fps': out.fps = Number(next()); break
+      case '--oscillate': out.oscillate = true; break
+      case '--amplitude': out.amplitudeDeg = Number(next()); break
+      case '--center': out.centerDeg = Number(next()); break
       case '--gif': out.format = 'gif'; break
       case '--mp4': out.format = 'mp4'; break
       case '--help': case '-h': out.help = true; break
@@ -56,7 +59,10 @@ const USAGE = `render:orbit — turntable render of a build artifact
   --size N            square render size in px (default 512)
   --out DIR           output dir (default render/out/orbit/<trial_id>/)
   --gif | --mp4       also encode a clip if ffmpeg is on PATH
-  --fps N             clip frame rate (default 12)`
+  --fps N             clip frame rate (default 12)
+  --oscillate         front-arc ping-pong (rock ±amplitude around center) instead of a full 360°
+  --amplitude DEG     oscillation swing (default 40)
+  --center DEG        oscillation center azimuth (default 0 = head-on front)`
 
 const args = parseArgs(process.argv.slice(2))
 
@@ -103,14 +109,19 @@ if (Number.isFinite(args.elevation)) view.elevationDeg = args.elevation
 if (Number.isFinite(args.fov)) view.fov = args.fov
 if (Number.isFinite(args.size)) { view.width = args.size; view.height = args.size }
 
-const outDir = args.outDir ?? defaultOrbitDir(artifact?.metadata?.trial_id)
+const idForDir = (artifact?.metadata?.trial_id || 'orbit') + (args.oscillate ? '-rock' : '')
+const outDir = args.outDir ?? defaultOrbitDir(idForDir)
+const azimuths = args.oscillate
+  ? oscillateAzimuths(args.frames, { centerDeg: args.centerDeg, amplitudeDeg: args.amplitudeDeg })
+  : undefined
 
-console.log(`rendering ${args.frames} orbit frames of ${artifactPath}`)
+console.log(`rendering ${args.frames} ${args.oscillate ? 'front-arc oscillation' : 'orbit'} frames of ${artifactPath}`)
 console.log(`  → ${outDir}`)
 
 const report = await renderOrbit(artifact, {
   frames: args.frames,
   startDeg: args.startDeg,
+  azimuths,
   outDir,
   view,
   onFrame: (f) => console.log(`  frame ${f.index + 1}/${args.frames} @ ${f.azimuthDeg}° → ${f.path} (${f.bytes} bytes, ${f.placed} placed)`)
