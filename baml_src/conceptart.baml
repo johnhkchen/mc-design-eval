@@ -8,8 +8,11 @@ function FacadeConceptPrompt(design_doc: string, target_blocks: int) -> string {
   client ClaudeStub
   prompt #"
     Generate CONCEPT ART of a Minecraft TEMPLE FACADE: a head-on FRONT ELEVATION — the one grand
-    face photographed straight on — on a plain flat background. No ground plane, sky scene, garden,
-    water, or surroundings; the facade fills the frame.
+    face — as a SINGLE ISOLATED STRUCTURE floating against a solid BLACK (#000000) background, so it
+    segments cleanly for 3D reconstruction. No ground plane, no cast shadows, no sky, garden, water,
+    plinth-on-ground, or surroundings of any kind. The whole facade is CENTERED and FULLY VISIBLE
+    (not cropped — leave a small margin on every side), filling most of the frame, lit by bright,
+    even STUDIO lighting with no dramatic shadows.
 
     Render it in authentic MINECRAFT BLOCK style — built from cubic blocks, with block-scale detail
     ONLY. The build is about {{ target_blocks }} blocks wide, so keep every feature BOLD and chunky:
@@ -18,7 +21,10 @@ function FacadeConceptPrompt(design_doc: string, target_blocks: int) -> string {
 
     Faithfully realize THIS finalized design document — its massing and proportion, its style and
     motifs, and above all its PALETTE (use its actual named colors; it is deliberately COLORFUL, never
-    a white or monochrome wall):
+    a white or monochrome wall). Keep the structure's OUTER SILHOUETTE in its lighter palette colors so
+    the edges read crisply against the black background; do NOT place black or near-black blocks along
+    the outline (they merge with the background and break segmentation) — reserve any dark tones for
+    recessed interior areas:
 
     {{ design_doc }}
 
