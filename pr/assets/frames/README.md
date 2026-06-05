@@ -25,7 +25,7 @@ bundle**: the production desk cuts the video without reaching into gitignored `b
 | `concept-chapelle-C-flash.png` | `concepts/chapelle-C-flash.png` | **`[concept]`** |
 | `concept-arc-C-flash.png` | `concepts/arc-C-flash.png` | **`[concept]`** |
 | `concept-mausoleum-C-flash.png` | `concepts/mausoleum-C-flash.png` | **`[concept]`** — center-cropped from 1376×768 |
-| `rotation-placeholder-002.png` | `runs/002-v1-multimodal/render.png` | **placeholder** for F10 — head-on, NOT the spin (see below) |
+| `../rotations/spin-taj-015.mp4` (+ montage) | `runs/015,019,021,022` orbits | **REAL spin** for F10 — 12fps 360° seamless, see `../rotations/` |
 | `concept-goldengate-vision.png` | `concepts/goldengate-base-flash.png` (gitignored) | **`[concept]`** — F13 vision end-frame; Nano-Banana flash via `pr/production/endframe.mjs` (T-034-01), NOT Minecraft |
 
 **Reuse:** `spine-r4-hero-oneplane-014.png` serves F01 (morph target), F04, and the F05/F11
@@ -36,10 +36,10 @@ asset; the frame→file mapping lives in `sequence.md`.
 
 - **Concepts are not builds.** Every `concept-*.png` is Gemini-Flash *reference art*, captioned
   `[concept]` in the cut. The only real-build claim in the video is the rotation (F10).
-- **The rotation is a placeholder.** `rotation-placeholder-002.png` is a *head-on* render, not a
-  turntable spin. It stands in for F10 until S-032's `renderOrbit` clip is produced
-  (`render/src/orbit.mjs` → `render/out/orbit/<id>/`, gitignored). Per v1-sequencing it is honest
-  as a real-but-blocky build; swap in the real spin when it lands.
+- **The rotation is REAL now.** F10 uses `../rotations/spin-taj-015.mp4` (and the chained
+  `rotating-builds-montage.mp4`) — actual voxel builds spun 360° through `prismarine-viewer` + real
+  `minecraft-assets` textures, 12fps seamless loops. The head-on placeholder is retired. The spin
+  honestly reveals the builds are currently facades (flat back) — on-thesis for the sculptor work.
 
 ## Normalization recipe (reproducible)
 
