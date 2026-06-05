@@ -6,7 +6,7 @@ status: open
 priority: high
 depends_on: [E-01, E-02, E-04, E-10]
 spec: "§1, §5, §9"
-stories: []
+stories: [S-024, S-025, S-026, S-027, S-028, S-029]
 ---
 
 ## Goal
@@ -64,17 +64,19 @@ masses (P14) — staging + locks make "improve" additive, never destructive.
 - **Bookend 2 — review** — render the current state (E-02) → an LLM **diagnostic critic** that names
   *where it's flat, where curves ring, where the focal point is under-detailed, where proportion is off*
   and **routes the defect back to the responsible stage** (diagnose-and-route, NOT a blanket re-emit).
-- **One seed craft pass — self-shadow relief** — assign Z-depth on the locked massing: inset recesses
-  −1, pop trim/cornices +1, a lip under horizontals. The marquee middle stage (it attacks our oldest
-  ceiling, flat fields) and the proof that a pass plugs into the spine over a locked substrate.
+- **Two seed craft passes** — to prove the spine *composes locked stages*, not just one pass:
+  - **material-noise** — per surface, a same-hue block *set* (2–3 IDs) mixed for texture and varied by
+    height (fake shading; an upgrade of E-10's single-block match). Operates on the locked massing.
+  - **self-shadow relief** — inset recesses −1, pop trim/cornices +1, a lip under horizontals. Operates on
+    the **material-locked** state (so a pass demonstrably builds on a *prior pass's* locked output, not
+    just on massing). The marquee depth move — it attacks our oldest ceiling, flat fields.
 - **End-to-end demo on facades** — massing → relief → review, producing a relief facade `DesignArtifact`,
   rendered and critiqued — runnable **now**, before TRELLIS.
 
 **Out (plug into this framework as follow-on epics):**
-- The rest of the craft-pass library — **material-noise** (hue-family mixing, vary by height; an upgrade
-  of E-10's single-block match), the **curve idiom router** (detect dome/cylinder/thin-member → procedural
-  generator instead of sampling), **structural decomposition** (named parts). Each is a later epic that
-  implements the stage interface.
+- The rest of the craft-pass library — the **curve idiom router** (detect dome/cylinder/thin-member →
+  procedural generator instead of sampling) and **structural decomposition** (named parts). Each is a later
+  epic that implements the stage interface. (material-noise + relief are seeded here as proof.)
 - TRELLIS / GLB (E-09 stages 2–3) — the framework consumes whatever form; GLB swaps in at the massing
   bookend later, unchanged downstream.
 - Whole-structure vs facade — the model should be agnostic; we **test on facades first** (cheap,
@@ -83,10 +85,9 @@ masses (P14) — staging + locks make "improve" additive, never destructive.
 ## Candidate stories (lisa chain)
 
 ```
-S-024 spine (build-state + stage interface + orchestrator + locks)
-        ├─> S-025 massing bookend ─┐
-        └─> S-026 review bookend    ├─> S-027 relief seed pass ─> S-028 consolidate
-                                    ┘
+S-024 spine
+   ├─ S-025 massing ─> S-027 material-noise ─> S-028 relief ─┐
+   └─ S-026 review ───────────────────────────────────────────┴─> S-029 consolidate
 ```
 
 - **S-024** — staged build-state model, stage-pass interface, orchestrator, lock semantics; compiles to a
@@ -94,10 +95,12 @@ S-024 spine (build-state + stage interface + orchestrator + locks)
 - **S-025** — massing bookend: concept→block grid → gray proportioned shell + LLM/critic proportion lock.
 - **S-026** — review bookend: render → diagnostic critic (flat / ringing / focal / proportion) → route to
   the responsible stage; no blanket re-emit.
-- **S-027** — seed craft pass: self-shadow relief (inset/pop/lip Z-depth) over locked massing; the plug-in
-  proof + the flat-fields attack.
-- **S-028** — consolidate: the GLB-reuse hook (massing swaps to a 3-D source, downstream unchanged), the
-  journal section, and the statement of how the pass library extends the spine.
+- **S-027** — seed pass A: **material-noise** (same-hue block set per surface, vary by height) over locked
+  massing.
+- **S-028** — seed pass B: **self-shadow relief** (inset/pop/lip Z-depth) over the **material-locked**
+  state — proves a pass composes on a prior pass + attacks flat fields.
+- **S-029** — consolidate: the GLB-reuse hook (massing swaps to a 3-D source, downstream unchanged), the
+  journal section, and how the pass library extends the spine.
 
 ## Definition of done
 

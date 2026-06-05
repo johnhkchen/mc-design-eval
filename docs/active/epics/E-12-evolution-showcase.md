@@ -6,7 +6,7 @@ status: open
 priority: medium
 depends_on: []
 spec: "(comms artifact — communicates §1; no spec section)"
-stories: []
+stories: [S-030, S-031, S-032, S-033, S-034]
 ---
 
 ## Goal
@@ -90,13 +90,25 @@ A folder of desks, each a staffer/role producing one part of the package:
 - Any change to the engineering pipeline — this epic only *consumes* its outputs.
 - Paid distribution / analytics.
 
-## Candidate stories (to tighten with E-11's set)
+## Stories (lisa chain)
 
-- **Research desk** — audience + message + psych brief; the positioning and CTA.
-- **Script desk** — evolution beats, captions/voiceover, storyboard with timing.
-- **Asset desk** — curate + order the canonical evolution sequence (hero spine + breadth beat) with
-  captions and scores from `runs/`/`concepts/`/journal.
-- **Production desk** — output spec + assembly plan + rough cut + LinkedIn post copy.
+```
+S-030 research ─> S-031 script ─┐
+S-032 turntable ────────────────┴─> S-033 assets ─> S-034 production
+```
+
+- **S-030 — research desk** — audience + message + psych brief; positioning, hook, CTA, trust beats.
+- **S-031 — script desk** — both-thread beats (quality climb + velocity/realness), captions/voiceover,
+  storyboard with timing.
+- **S-032 — turntable render** — orbit/azimuth-sweep render mode in the rig (the "yep, that's real" proof;
+  also feeds E-11's review). The one engineering story; independent root, runs in parallel with research.
+- **S-033 — assets desk** — curate + order the canonical evolution sequence (hero spine + breadth beat) +
+  velocity receipts + the rotation clips, with captions + scores from `runs/`/`concepts/`/journal.
+- **S-034 — production desk** — output spec + assembly plan + rough cut + LinkedIn post copy; generate the
+  Golden-Gate "vision" end-frame concept.
+
+**Creative locks (confirmed):** Taj hero spine · categorical score overlay ON · a generated Golden-Gate
+Bridge concept as the forward-looking end-frame · the pivot as the plot twist.
 
 ## Definition of done
 
