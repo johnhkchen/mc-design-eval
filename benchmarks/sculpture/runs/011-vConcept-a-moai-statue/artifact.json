@@ -1,0 +1,401 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "011-vConcept-a-moai-statue",
+    "prompting_method_id": "vconcept-sculpture.v1",
+    "model_id": "claude-opus-4-8",
+    "seed": 17,
+    "server_state_id": "flat-creative-superflat.v1"
+  },
+  "style": {
+    "name": "Monochromatic stone harmony",
+    "rationale": "A moai is one carved block of volcanic tuff, so the whole mass is gray_concrete with only andesite/stone weather-mottle for tonal break and deepslate reserved for the deep eye-sockets and the brow-shadow band — value, not hue, carves the face. Form follows the document: a single head-and-torso column footed on a buried plinth, head ~45% of the 48-tall height and the dominant volume, with the three recognition motifs projecting in real 3-D — heavy straight brow ridge (~2 forward), long downward-widening wedge nose (~3 forward), and jutting chin/lips. The mass is solid and continuous on all axes (no neck taper), so it reads as a carved monolith from every side of the turntable; the back and far flank mirror the visible half as a deliberate, finished stone surface."
+  },
+  "palette": {
+    "manifest": [
+      "minecraft:gray_concrete",
+      "minecraft:andesite",
+      "minecraft:stone",
+      "minecraft:deepslate"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        0,
+        -5
+      ],
+      "to": [
+        6,
+        4,
+        4
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        0,
+        -7
+      ],
+      "to": [
+        -2,
+        2,
+        -6
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        2,
+        0,
+        -7
+      ],
+      "to": [
+        5,
+        2,
+        -6
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        5,
+        -4
+      ],
+      "to": [
+        6,
+        26,
+        3
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        27,
+        -5
+      ],
+      "to": [
+        7,
+        47,
+        4
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        40,
+        -6
+      ],
+      "to": [
+        6,
+        42,
+        -6
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        41,
+        -7
+      ],
+      "to": [
+        5,
+        41,
+        -7
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -1,
+        32,
+        -6
+      ],
+      "to": [
+        1,
+        40,
+        -6
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -1,
+        32,
+        -7
+      ],
+      "to": [
+        1,
+        37,
+        -7
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -1,
+        32,
+        -8
+      ],
+      "to": [
+        1,
+        34,
+        -8
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        28,
+        -6
+      ],
+      "to": [
+        3,
+        31,
+        -6
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -2,
+        28,
+        -7
+      ],
+      "to": [
+        2,
+        29,
+        -7
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -6,
+        7,
+        -4
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        9,
+        -4
+      ],
+      "block": "minecraft:stone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -4,
+        11,
+        3
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        6,
+        0
+      ],
+      "block": "minecraft:stone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -6,
+        14,
+        1
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        8,
+        3
+      ],
+      "block": "minecraft:stone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        18,
+        -4
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -5,
+        21,
+        3
+      ],
+      "block": "minecraft:stone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -6,
+        2,
+        -5
+      ],
+      "block": "minecraft:stone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        3,
+        4
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -3,
+        4,
+        -5
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        1,
+        4
+      ],
+      "block": "minecraft:stone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        2,
+        -2
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -7,
+        30,
+        4
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        33,
+        -2
+      ],
+      "block": "minecraft:stone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -7,
+        44,
+        0
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        38,
+        3
+      ],
+      "block": "minecraft:stone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        39,
+        -5
+      ],
+      "to": [
+        6,
+        39,
+        -5
+      ],
+      "block": "minecraft:deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        39,
+        -6
+      ],
+      "to": [
+        5,
+        39,
+        -6
+      ],
+      "block": "minecraft:deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        36,
+        -5
+      ],
+      "to": [
+        -4,
+        37,
+        -5
+      ],
+      "block": "minecraft:deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        36,
+        -5
+      ],
+      "to": [
+        5,
+        37,
+        -5
+      ],
+      "block": "minecraft:deepslate"
+    }
+  ]
+}
