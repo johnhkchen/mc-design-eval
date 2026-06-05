@@ -22,13 +22,23 @@ the per-run reasoning behind each principle. Renders live in
 > retired. **`detail` is now the single lagging dimension** — strong on proportion/color/fidelity, only
 > detail still competent. See P15 for the open frontier.
 >
-> **⚠️ Measurement caveat — `detail` is boundary-noisy across generations.** The fixed champion config
-> scored `detail` *competent* in run 014 and *strong* in run 015 (identical prompts, different
-> generation; both judged 3/3 unanimous). Judge-sample unanimity does **not** capture generation-level
-> variance, so a single `detail=strong` is not evidence of a lever effect. Detail experiments must
-> require robustness (strong across ≥2 generations, or a describable articulation delta vs a baseline
-> render), not a one-shot category flip — the overnight loop's promotion gate must control for generation
-> noise, not just judge noise.
+> **⚠️ Measurement caveat — `detail` is boundary-noisy, but the variance is PARTLY a real lever.** The
+> fixed champion config scored `detail` *competent* in run 014 and *strong* in run 015 (identical prompts,
+> different generation; both judged 3/3 unanimous). Part of that gap is attributable, not random: run 015
+> chose a **noisier-grained block texture**, which reads as more detail — a real but small lever. So
+> detail variance is partly an *exploitable signal* (block-texture grain, alongside structural relief) and
+> partly irreducible generation noise. Experiments should treat **block texture as a deliberate detail
+> variable**, while still not crediting the residual noise: require a detail win to be robust (strong
+> across ≥2 generations, or a describable articulation/texture delta vs a baseline render), not a one-shot
+> category flip. Judge-sample unanimity does not capture generation-level variance.
+>
+> **🎯 Rubric update — `exceptional` sharpened into a rightfully-rare apex.** Per the E-08 plan (seek
+> strong→exceptional via richer anchors, NOT Elo — no public judging pool), the judge's `exceptional`
+> tier is now demanding and explicitly rare for every dimension (≈1-in-10, "you would screenshot it", no
+> nameable improvement; proportion = every measure inevitable, color = becomes the identity, detail = no
+> flat field anywhere, fidelity = a namable landmark). The **weak/competent/strong boundaries are
+> UNCHANGED**, so prior scores (incl. 014/015 `strong`) remain comparable — only the top bar rose.
+> `exceptional` is now the loop's real climb target above strong, frozen for the run.
 
 > **⚠️ Measured correction (rubric `v1`, 3-sample mean) — the metric contradicts the impressions below.**
 > Scoring all four runs with the LLM-judge gives overall: v0 = **4.0**, v1 = **4.0**, v2 = **3.0**,
