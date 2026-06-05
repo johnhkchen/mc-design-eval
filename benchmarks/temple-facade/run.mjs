@@ -7,7 +7,7 @@
 //   npm run bench:temple-facade -- --approach v0-facade --note "what changed"
 
 import { mkdirSync, writeFileSync, readFileSync, readdirSync, existsSync, copyFileSync } from "node:fs";
-import { join, dirname, extname } from "node:path";
+import { join, dirname, extname, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawn } from "node:child_process";
 import { TEMPLE_FACADE_TASK } from "./task.mjs";
@@ -892,6 +892,13 @@ const APPROACHES = {
       sumCost += raw.total_cost_usd || 0;
     };
     copyFileSync(refPath, join(ctx.dir, "reference" + extname(refPath)));
+    // Persona system prompt under test (T-013-01): applied to all three generative stages when set
+    // (ctx.persona undefined ⇒ system undefined ⇒ default path). Recorded for provenance.
+    const persona = ctx.persona;
+    if (persona) writeFileSync(join(ctx.dir, "persona.txt"), persona);
+    // Reasoning-effort knob under test (T-009-01): applied to all three generative stages when set
+    // (ctx.effort undefined ⇒ effort undefined ⇒ default path). Recorded in summary.json for provenance.
+    const effort = ctx.effort;
 
     // Stage 1 — reference-grounded design doc.
     const ddPrompt = composeReferenceDesignDocPrompt(task);
@@ -900,6 +907,8 @@ const APPROACHES = {
       prompt: ddPrompt,
       images: [{ data: readFileSync(refPath), mediaType: refMime(refPath) }],
       model: PHASE1_MODEL_ID,
+      effort,
+      system: persona,
       onMessage: (m) => messages.push(m),
     });
     acc(dd.raw);
@@ -909,7 +918,7 @@ const APPROACHES = {
     // Stage 2 — high-res build.
     const buildPrompt = composeHighResBuildPrompt(task, { promptMethodId, runId: ctx.runId, designDoc: dd.text });
     writeFileSync(join(ctx.dir, "build.prompt.txt"), buildPrompt + "\n");
-    let res = await requestDesignArtifact({ prompt: buildPrompt, model: PHASE1_MODEL_ID, onMessage: (m) => messages.push(m) });
+    let res = await requestDesignArtifact({ prompt: buildPrompt, model: PHASE1_MODEL_ID, effort, system: persona, onMessage: (m) => messages.push(m) });
     acc(res.raw);
     let artifact = res.artifact;
     console.log(`  stage 2 (high-res build): ${(artifact.placements ?? []).length} ops`);
@@ -923,6 +932,8 @@ const APPROACHES = {
       prompt: revPrompt,
       images: [{ data: readFileSync(refPath), mediaType: refMime(refPath) }, readFileSync(join(ctx.dir, wipName))],
       model: PHASE1_MODEL_ID,
+      effort,
+      system: persona,
       onMessage: (m) => messages.push(m),
     });
     acc(res.raw);
@@ -1022,12 +1033,14 @@ const APPROACHES = {
 };
 
 function parseArgs(argv) {
-  const out = { approach: "v0-facade", note: "", k: undefined, ref: undefined };
+  const out = { approach: "v0-facade", note: "", k: undefined, ref: undefined, personaFile: undefined, effort: undefined };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--approach") out.approach = argv[++i];
     else if (argv[i] === "--note") out.note = argv[++i];
     else if (argv[i] === "--k") out.k = parseInt(argv[++i], 10);
     else if (argv[i] === "--ref") out.ref = argv[++i];
+    else if (argv[i] === "--persona-file") out.personaFile = argv[++i];
+    else if (argv[i] === "--effort") out.effort = argv[++i];
   }
   return out;
 }
@@ -1083,7 +1096,13 @@ function regenerateReadme() {
 }
 
 async function main() {
-  const { approach, note, k, ref } = parseArgs(process.argv.slice(2));
+  const { approach, note, k, ref, personaFile, effort } = parseArgs(process.argv.slice(2));
+  // Optional grounding/persona system prompt (T-013-01). Absent ⇒ persona undefined ⇒ the
+  // model calls get no --system-prompt ⇒ the default path is byte-unchanged.
+  const persona = personaFile ? readFileSync(personaFile, "utf8") : undefined;
+  // Optional reasoning-effort knob (T-009-01): --effort <low|medium|high|xhigh|max>. Absent ⇒ effort
+  // undefined ⇒ no --effort flag ⇒ the default path is byte-unchanged. The only deliberation tunable
+  // `claude -p` exposes (no --temperature on the subscription seam).
   const startedAt = Date.now();
   const run = APPROACHES[approach];
   if (!run) {
@@ -1101,7 +1120,7 @@ async function main() {
 
   console.log(`temple-facade benchmark ${runId} (approach: ${approach}) — LIVE via claude -p ...`);
   const { artifact, raw, messages, prompt, promptMethodId, roundImages = [], bestof = null } =
-    await run(TEMPLE_FACADE_TASK, { runId, dir, renderArtifact, k, ref });
+    await run(TEMPLE_FACADE_TASK, { runId, dir, renderArtifact, k, ref, persona, effort });
 
   // Frontal shot — the whole point of this benchmark (task.view).
   const report = await renderArtifact(artifact, {
@@ -1135,7 +1154,9 @@ async function main() {
     // Tunable params, recorded per run for attribution. `claude -p` exposes no
     // --temperature (would need the metered API path); --effort is the available knob.
     temperature: null,
-    effort: null,
+    effort: effort ?? null,
+    // Persona system prompt under test (T-013-01): the basename when --persona-file is set, else null.
+    persona: personaFile ? basename(personaFile) : null,
     view: TEMPLE_FACADE_TASK.view,
     blocks: sum.placed,
     unmapped: sum.unmapped,

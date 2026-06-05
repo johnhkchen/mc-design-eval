@@ -276,6 +276,11 @@ async function invokeClaude({ args, stdin, onMessage }) {
  * @param {Object} params
  * @param {string} params.prompt   the trial prompt (archetype-constructed)
  * @param {string} [params.model]  pinned model id (single-sourced by the harness)
+ * @param {string} [params.effort] optional reasoning-effort level → `--effort` (the closest tunable to
+ *   "temperature", which `claude -p` does not expose; mirrors requestText). Omitted ⇒ no flag ⇒ default
+ *   path byte-unchanged.
+ * @param {string} [params.system] optional grounding/persona system prompt → `--system-prompt`
+ *   (mirrors requestText). Omitted ⇒ no flag ⇒ default path byte-unchanged.
  * @param {Record<string, *>} [params.options] reserved; SDK-shaped options
  *   (mcpServers/outputFormat) do not translate to the CLI — multimodal tool wiring
  *   arrives later via `--mcp-config`. Single-shot needs no tools.
@@ -284,10 +289,12 @@ async function invokeClaude({ args, stdin, onMessage }) {
  *   and per-turn usage. Must not mutate the message.
  * @returns {Promise<{ artifact: import("./artifact.mjs").DesignArtifact, raw: object }>}
  */
-export async function requestDesignArtifact({ prompt, model, options = {}, onMessage, retries = 2 } = {}) {
+export async function requestDesignArtifact({ prompt, model, effort, system, options = {}, onMessage, retries = 2 } = {}) {
   void options; // reserved (see jsdoc); single-shot runs tool-free on the CLI path
   const args = ["-p", "--output-format", "stream-json", "--verbose"];
   if (model) args.push("--model", model);
+  if (effort) args.push("--effort", String(effort));
+  if (system) args.push("--system-prompt", system);
 
   // Heavy prompts sometimes make the model narrate ("Done. The ...") instead of emitting only
   // the JSON. Retry once with a stern corrective rather than failing the whole (metered) run.
@@ -332,12 +339,17 @@ export async function requestDesignArtifact({ prompt, model, options = {}, onMes
  * @param {string} params.prompt   the trial / revision prompt
  * @param {Array<Parameters<typeof toImageBlock>[0]>} params.images  one or more images
  * @param {string} [params.model]  pinned model id
+ * @param {string} [params.effort] optional reasoning-effort level → `--effort` (the closest tunable to
+ *   "temperature", which `claude -p` does not expose; mirrors requestText). Omitted ⇒ no flag ⇒ default
+ *   path byte-unchanged.
+ * @param {string} [params.system] optional grounding/persona system prompt → `--system-prompt`
+ *   (mirrors requestText). Omitted ⇒ no flag ⇒ default path byte-unchanged.
  * @param {Record<string, *>} [params.options] reserved (parity with the text path)
  * @param {(message: object) => void} [params.onMessage] called once per message in order
  * @returns {Promise<{ artifact: import("./artifact.mjs").DesignArtifact, raw: object }>}
  */
 export async function requestDesignArtifactWithImage(
-  { prompt, images, model, options = {}, onMessage, retries = 2 } = {},
+  { prompt, images, model, effort, system, options = {}, onMessage, retries = 2 } = {},
 ) {
   void options; // reserved (see jsdoc); parity with the text path
   const args = [
@@ -349,6 +361,8 @@ export async function requestDesignArtifactWithImage(
     "stream-json",
   ];
   if (model) args.push("--model", model);
+  if (effort) args.push("--effort", String(effort));
+  if (system) args.push("--system-prompt", system);
 
   // Same narration guard as the text path (P10): the model sometimes returns prose
   // ("Done. The …") instead of the JSON. Retry with a stern corrective.
@@ -456,11 +470,12 @@ export async function requestText({ prompt, model, effort, system, onMessage } =
  * Like requestText but with image input and NO schema — the model SEES the image(s) and
  * returns plain text. The basis for the LLM-as-judge (render in, rubric scores out).
  * Distinct from requestDesignArtifactWithImage, which forces the design-artifact schema.
+ * `system` maps to `--system-prompt` (a grounding/persona prompt; omitted ⇒ default path).
  * @param {{ prompt: string, images: Array<Parameters<typeof toImageBlock>[0]>, model?: string,
- *   effort?: string, onMessage?: (m: object) => void }} params
+ *   effort?: string, system?: string, onMessage?: (m: object) => void }} params
  * @returns {Promise<{ text: string, raw: object }>}
  */
-export async function requestTextWithImage({ prompt, images, model, effort, onMessage } = {}) {
+export async function requestTextWithImage({ prompt, images, model, effort, system, onMessage } = {}) {
   if (!Array.isArray(images) || images.length === 0) {
     throw new Error("requestTextWithImage: at least one image is required");
   }
@@ -469,6 +484,7 @@ export async function requestTextWithImage({ prompt, images, model, effort, onMe
   const args = ["-p", "--output-format", "stream-json", "--verbose", "--input-format", "stream-json"];
   if (model) args.push("--model", model);
   if (effort) args.push("--effort", String(effort));
+  if (system) args.push("--system-prompt", system);
   const { result, exitCode, stderr } = await _runClaude({
     args,
     stdin: serializeStreamJsonInput(turn),
