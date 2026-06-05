@@ -1,0 +1,72 @@
+You are a master Minecraft sculptor. Build a FREESTANDING 3-D SCULPTURE as a structured
+design artifact that faithfully realizes the subject "a pineapple" — its form, proportion,
+palette, and motifs — per the finalized design document and the attached CONCEPT IMAGE.
+This is an OBJECT IN THE ROUND, displayed on a turntable: it occupies all three axes and
+must read as a solid sculpture from every side. It is NOT a facade, wall, relief, or scene.
+
+## Orientation (a sculpture, not a facade)
+Build a fully three-dimensional object in x/y/z, centered on a local origin (x = 0, z = 0),
+standing on the ground at y = 0. Model the WHOLE object — front, back, both sides, and top —
+as real volume; give it depth and roundness, not a single thin face. There is no privileged
+'front plane' and no relief-into-a-wall: massing projects in every direction as the form needs.
+
+## Single-view limitation (read this)
+The attached concept shows ONE 3/4 view. The back and the far side are NOT depicted — infer
+them as a plausible, coherent continuation of the visible form (mirror symmetric features where
+the subject is symmetric; keep volumes and palette consistent all the way around). Treat that
+hidden half as YOUR reconstruction from a single view — a known limit of this mode — and make it
+read as a finished, deliberate surface, never a flat or hollow back.
+
+## Finalized design document
+# Design Document — "Pineapple" Freestanding Block Sculpture
+
+## 1. Read of the subject
+A pineapple is two stacked masses: a **fat ovoid fruit body** below and a **spiky fan of stiff leaves** above. Instant recognition comes from (a) the crosshatched, pinecone-like diamond skin and (b) the radiating crown of pointed green fronds. Get those two and a viewer names it before anything else.
+
+## 2. Form & proportion (in the round)
+Total height ≈48. Split **~30 body : ~18 crown** (a touch under 2:1 — the crown must read tall, not a tuft). Body is a near-circular ovoid in plan, widest at mid-height (~22 blocks diameter), tapering to a rounded ~12-wide base and a narrower ~14 shoulder where the crown springs. Built radially symmetric so FRONT, SIDE, and 3/4 all show the same bulging barrel + spiky top — no "good side." The crown is a star of stepped leaf-blades pointing up and outward, longest in the center. Footing: the body sits flat on a 12-wide rounded base ring, low center of mass, stable — bottom-heavy fruit, not top-heavy.
+
+## 3. Color palette (color theory)
+**Analogous warm harmony** (yellow→orange→green), the natural pineapple ramp; warmth makes the fruit feel ripe.
+- **Dominant — body:** `honey_block` (golden-amber, the ripe skin).
+- **Supporting — diamond grid:** `orange_terracotta` (recessed crosshatch shadows, warm).
+- **Supporting — crown:** `green_concrete` (saturated leaf field).
+- **Accent — frond tips/highlights:** `lime_concrete`, used sparingly at leaf edges.
+Analogous + one brighter accent = unified but not flat.
+
+## 4. Surface & motifs
+**Motif 1 — diamond crosshatch:** a bold lattice of `orange_terracotta` blocks set one-deep into the honey body on a 2–3 block diagonal grid, wrapping fully around — the signature texture, designed at whole-block scale so it survives. **Motif 2 — bladed crown:** alternating `green_concrete` / `lime_concrete` columns stepped to points, gaps between blades for a spiky silhouette.
+
+## 5. Block-budget plan
+~30 vertical on the ovoid body (widest band the crosshatch), ~18 on the crown blades. Footprint capped near 22×22 at the belly so it stays compact and reads cleanly on a turntable from every angle.
+
+## Scale (honor it)
+- Target ~48 blocks along the LONGEST dimension. Bounding box up to ~48(x) × 48(y)
+  × 48(z); build a compact, solid object that fills that envelope without sprawling.
+- Use `fill`/`box` for the major masses and `line` for struts/edges so you can afford solid
+  volume; reserve `voxel` (with block `state` for stairs/slabs) for shaping curves, facets,
+  and surface detail. Approximate curves/round forms with stepped stairs+slabs, not flat panels.
+
+## Realize the document with craft
+- Build the essential masses and the recognizable features the document names; honor its
+  proportions and its dominant/supporting/accent palette hierarchy.
+- Keep the object SOLID and connected — no detached floating parts unless the subject truly has
+  them (and then bridge them so they are supported).
+
+## Materials
+Survival-obtainable Minecraft 1.20.1 blocks, namespaced — primarily the document's palette.
+Declare every block you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "013-vConcept-a-pineapple"
+- metadata.prompting_method_id = "vconcept-sculpture.v1"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 17
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Set style.name to the document's style label and style.rationale to one line tying the build to
+the subject and document.
+
+Emit ONE complete design artifact — the full set of placements, not a diff. Local origin at
+x = 0, y = 0, z = 0 (ground at y = 0).

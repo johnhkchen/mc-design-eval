@@ -56,6 +56,8 @@ benchmark is the live I/O + rendering + run-dir provenance around it.
 | 9 | 2026-06-05 | `a koi fish` | 32 | 1997 | 20022/21719 | $0.7560 | T-036-08 build |
 | 10 | 2026-06-05 | `a moai statue` | 16 | 732 | 19982/16752 | $0.6314 | T-037-01 scale-16 study |
 | 11 | 2026-06-05 | `a moai statue` | 48 | 6283 | 21156/7272 | $0.4002 | T-037-02 scale-48 study |
+| 12 | 2026-06-05 | `a pineapple` | 16 | 332 | 19950/15697 | $0.6062 | T-037-03 scale-16 study |
+| 13 | 2026-06-05 | `a pineapple` | 48 | 12176 | 20801/17283 | $0.6518 | T-037-04 scale-48 study |
 
 ## Gallery
 
@@ -146,5 +148,21 @@ benchmark is the live I/O + rendering + run-dir provenance around it.
 **6283 blocks** · 21156/7272 tok · $0.4002
 
 > T-037-02 scale-48 study
+
+### 012 — `a pineapple` (scale 16) · 2026-06-05
+
+![sculpture run 12 — 3/4](runs/012-vConcept-a-pineapple/render-3q.png)
+
+**332 blocks** · 19950/15697 tok · $0.6062
+
+> T-037-03 scale-16 study
+
+### 013 — `a pineapple` (scale 48) · 2026-06-05
+
+![sculpture run 13 — 3/4](runs/013-vConcept-a-pineapple/render-3q.png)
+
+**12176 blocks** · 20801/17283 tok · $0.6518
+
+> T-037-04 scale-48 study
 
 <!-- RUNS:END -->
