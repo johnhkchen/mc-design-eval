@@ -29,3 +29,16 @@ export {
   MASSING_BLOCK,
   MASSING_STYLE,
 } from "./massing.mjs";
+
+export {
+  DEFECTS,
+  ROUTE_TARGETS,
+  ROUTING_TABLE,
+  routeDefect,
+  routeDiagnosis,
+  assertDefect,
+  DefectVocabularyError,
+  reviewBuildState,
+  defaultRender,
+  defaultDiagnose,
+} from "./review.mjs";

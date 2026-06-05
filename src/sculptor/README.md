@@ -30,6 +30,16 @@ downstream tickets (T-025…T-029).
   `occupied` and runs a "massing" stage through `runStages` to **lock occupancy** (the
   proportion lock), leaving `material`/`relief` free; `proportionsOf` derives bounds/aspect
   for the S-026 review critic; `compileMassing` paints one gray block (`MASSING_BLOCK`).
+- **`review.mjs`** (bookend 2, T-026) — the diagnostic critic. Renders a build state and
+  emits a **structured diagnosis** `{defect, where, route}[]` over the explicit defect
+  vocabulary `{flat, ringing, under-detailed-focal, proportion}` and `ROUTING_TABLE`, where
+  `route` names the stage to re-run (flat→material/relief, ringing→curve, focal→detail,
+  proportion→massing). It **routes, never re-emits** (the P14 cure encoded in a type). It is
+  a stage-agnostic reader of the build state: `flat` is disambiguated *from the state*
+  (un-textured field→material, textured-flat→relief) via `occupiedCells`. Pure
+  `routeDefect`/`routeDiagnosis` are unit-tested; the live leaves — `defaultRender` (GL) and
+  `defaultDiagnose` (the `DiagnoseFacade` BAML categorical judge via the `baml-review.mts`
+  tsx bridge) — are not (`reviewBuildState` injects both, so tests stub the model call).
 
 ## The load-bearing rule
 
@@ -41,6 +51,8 @@ undo a prior one. The lock is enforced in code, not by convention.
 
 ## Boundaries
 
-Pure: no SDK, no network, no render, no schema import in the modules themselves. The AJV
-gate (`src/artifact.mjs`) validates the compiled output in tests, proving render / judge
-/ export stay unchanged. Run `npm test` (or `node --test src/sculptor/*.test.mjs`).
+Pure: no SDK, no network, no render, no schema import in the spine modules themselves. The
+AJV gate (`src/artifact.mjs`) validates the compiled output in tests, proving render / judge
+/ export stay unchanged. The one boundary-crosser is `review.mjs`'s live seam (render + the
+BAML judge) — isolated behind lazy imports / a tsx subprocess so importing the module for the
+pure tests loads neither GL nor BAML. Run `npm test` (or `node --test src/sculptor/*.test.mjs`).
