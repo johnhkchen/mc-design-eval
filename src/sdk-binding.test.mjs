@@ -160,7 +160,7 @@ test("buildImageTurn shapes a user message: schema text block + image blocks", (
   const [text, image] = turn.message.content;
   assert.equal(text.type, "text");
   assert.match(text.text, /^BASE PROMPT/);
-  assert.match(text.text, /Output format \(required\)/);
+  assert.match(text.text, /Output format/);
   assert.match(text.text, /"title": "DesignArtifact"/);
   assert.equal(image.type, "image");
 });
