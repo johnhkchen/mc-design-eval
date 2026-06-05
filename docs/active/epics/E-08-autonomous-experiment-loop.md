@@ -6,7 +6,7 @@ status: open
 priority: high
 depends_on: [E-03, E-04]
 spec: "§7, §9, §11"
-stories: [S-006, S-007, S-008, S-009]
+stories: [S-006, S-007, S-008, S-009, S-010, S-011, S-012, S-013, S-014]
 ---
 
 ## Goal
@@ -71,8 +71,8 @@ E-08 produces the techniques; E-06 measures them.
 ## Inaugural chain (sequential — each is one run-the-test ticket)
 
 ```
-S-006 (detail lever) ─> S-007 (Hōryū-ji) ─> S-008 (Sainte-Chapelle) ─> S-009 (--effort A/B)
-   T-006-01          ─>    T-007-01      ─>      T-008-01           ─>      T-009-01
+S-006 detail-A ─> S-010 detail-B ─> S-007 Hōryū-ji ─> S-008 Ste-Chapelle ─> S-011 Arc ─> S-012 mausoleum ─> S-013 persona ─> S-009 effort ─> S-014 consolidate
+T-006-01 ─> T-010-01 ─> T-007-01 ─> T-008-01 ─> T-011-01 ─> T-012-01 ─> T-013-01 ─> T-009-01 ─> T-014-01
 ```
 
 - **S-006 — detail-articulation lever** (champion = Taj 014): crack the one lagging dimension. Hypothesis:
@@ -84,8 +84,22 @@ S-006 (detail lever) ─> S-007 (Hōryū-ji) ─> S-008 (Sainte-Chapelle) ─> S
 - **S-008 — Sainte-Chapelle generalization** (`references/St_Chapelle.png`): a Gothic, **polychrome
   stained-glass** front where the reference's color *agrees* with the brief. Does the craft/color split
   become a near-no-op (P12 is reference-conditional), or still help?
+- **S-010 — detail lever B** (champion): an *alternate* detail treatment, tried right after S-006 so the
+  better of the two becomes the champion the generalization runs inherit. If S-006 already reached
+  *strong* detail, S-010 probes toward *exceptional*; if S-006 failed, S-010 is the second shot.
+- **S-011 — Arc generalization** (`references/arc_de_triomph.JPG`): a triumphal arch — a *single colossal
+  opening*, massing unlike both the Taj and a pagoda. Further P12/P13 generalization on a reference we
+  already have.
+- **S-012 — mausoleum generalization** (`references/sys_mausoleum.JPG`): the Sun Yat-sen mausoleum — the
+  reference that first proved grounding (run 008). Re-run under the *current* champion to see how far the
+  craft/color split + one-plane + detail lever have moved it since.
 - **S-009 — `--effort` A/B** (champion): the untested deliberation knob on `claude -p` — does higher
-  reasoning effort buy detail/proportion for free? Cheapest lever, runs last.
+  reasoning effort buy detail/proportion for free? Cheap lever, near the end.
+- **S-013 — `--system-prompt` persona A/B** (champion): does injecting a master-architect persona /
+  grounding system prompt lift quality vs the bare prompt? The other untested `claude -p` knob.
+- **S-014 — overnight consolidation** (closes the chain): *not a trial* — reads the night's journal
+  entries, distills/promotes or scopes the principles they produced, updates the champion note, and writes
+  a morning brief (what moved, what didn't, renders to spot-check, recommended next).
 
 ## Definition of done
 
