@@ -302,6 +302,61 @@ function composeHighResBuildPrompt(task, { promptMethodId, runId, designDoc }) {
   ].join("\n");
 }
 
+// Detail-push build (v5): identical to v4 (high-res, deep relief, proportioned crown) PLUS a
+// hard requirement on surface articulation/ornament — `detail` was the lone lagging dimension
+// (3.33) at the ~4.0 band. One variable changed vs v4.
+function composeDetailBuildPrompt(task, { promptMethodId, runId, designDoc }) {
+  return [
+    "You are a master Minecraft architect. Below is your FINALIZED design document for a temple",
+    "facade. Build it as a structured design artifact that faithfully realizes the document, at",
+    "GENEROUS SCALE, with DEEP RELIEF, and — above all this time — RICH SURFACE DETAIL. Prior",
+    "builds were well-massed but UNDER-ORNAMENTED, reading as large flat fields. Fix that.",
+    "",
+    "## Finalized design document",
+    designDoc,
+    "",
+    "## Orientation (photographed head-on)",
+    "Facade FACES +Z, in the X–Y plane (X = width, Y = height, y = 0 ground). Front face at the",
+    "highest Z; relief recedes into −Z. Model only the front and its relief.",
+    "",
+    "## Scale & relief (keep this — it works)",
+    "- Width up to ~48 (X), height up to ~40 (Y) incl. crown. Build big.",
+    "- DEEP relief up to ~16 into −Z, genuinely used: columns/buttresses project several blocks",
+    "  proud; the central portal recesses several blocks; cornices/crown step across Z-layers.",
+    "- CROWN spans the facade's full width with real height — a culmination, not a small cap.",
+    "",
+    "## Surface detail & ornament (the FOCUS this run — judged hardest)",
+    "- NO large flat single-material fields. Break every wall plane with coursing, banding,",
+    "  recessed panels, pilaster strips, or contrasting trim.",
+    "- Articulate EVERY transition with a moulding/string course: base→shaft→capital, wall→",
+    "  entablature→cornice→crown. Put a dentil or stepped course under the main cornice.",
+    "- Ornament the facade: fluting/reeding on columns and pilasters, a repeating frieze motif,",
+    "  medallions/rosettes/inlay panels, coffered or panelled recesses, a carved tympanum.",
+    "- Micro-texture: use 2–3 related blocks within each material family (e.g. smooth / cut /",
+    "  chiseled, or slabs+stairs as relief) so surfaces have grain, not one flat block.",
+    "- Frame every opening with a layered moulding (several stair/slab courses) and a deep reveal.",
+    "- Work lighting in as ornament (lanterns/sea-lanterns in niches, glow accents in the frieze).",
+    "- Use voxel block `state` (stairs/slabs facing/half) liberally for all the above; avoid uniform",
+    "  45° slopes. Use `fill`/`box`/`line` for masses and runs so you can afford the detail.",
+    "",
+    "## Materials",
+    "Primarily the document's palette (plus its near variants for micro-texture); declare every",
+    "block you place in palette.manifest.",
+    "",
+    "## Required metadata (set EXACTLY)",
+    `- metadata.trial_id = "${runId}"`,
+    `- metadata.prompting_method_id = "${promptMethodId}"`,
+    `- metadata.model_id = "${PHASE1_MODEL_ID}"`,
+    `- metadata.seed = ${task.seed}`,
+    `- metadata.server_state_id = "${task.serverStateId}"`,
+    "",
+    "## Style record",
+    "Set style.name to the document's style label and style.rationale to one line on the detailing.",
+    "",
+    "Local origin at x = 0, y = 0, z = 0 (ground at y = 0).",
+  ].join("\n");
+}
+
 const APPROACHES = {
   "v0-facade": async (task, ctx) => {
     const promptMethodId = "temple-facade-singleshot.v0";
@@ -525,6 +580,49 @@ const APPROACHES = {
       raw,
       messages,
       prompt: "(design-doc → HIGH-RES build — see design-doc.md + build.prompt.txt)",
+      promptMethodId,
+    };
+  },
+
+  // Detail-push: v4 (high-res) + a hard surface-ornament requirement. One variable vs v4 —
+  // does pushing detail lift the lagging dimension without costing proportion/color/fidelity?
+  "v5-designdoc-detail": async (task, ctx) => {
+    const promptMethodId = "temple-facade-designdoc-detail.v0";
+    const messages = [];
+    let sumIn = 0;
+    let sumOut = 0;
+    let sumCost = 0;
+    const acc = (raw) => {
+      const u = raw.usage || {};
+      sumIn += u.input_tokens || 0;
+      sumOut += u.output_tokens || 0;
+      sumCost += raw.total_cost_usd || 0;
+    };
+
+    const ddPrompt = composeDesignDocPrompt(task);
+    writeFileSync(join(ctx.dir, "design-doc.prompt.txt"), ddPrompt + "\n");
+    const dd = await requestText({ prompt: ddPrompt, model: PHASE1_MODEL_ID, onMessage: (m) => messages.push(m) });
+    acc(dd.raw);
+    writeFileSync(join(ctx.dir, "design-doc.md"), dd.text + "\n");
+    console.log(`  stage 1 (design doc): ${dd.text.length} chars`);
+
+    const buildPrompt = composeDetailBuildPrompt(task, { promptMethodId, runId: ctx.runId, designDoc: dd.text });
+    writeFileSync(join(ctx.dir, "build.prompt.txt"), buildPrompt + "\n");
+    const res = await requestDesignArtifact({ prompt: buildPrompt, model: PHASE1_MODEL_ID, onMessage: (m) => messages.push(m) });
+    acc(res.raw);
+    console.log(`  stage 2 (detail build): ${(res.artifact.placements ?? []).length} ops`);
+
+    const raw = {
+      subtype: "success",
+      num_turns: 2,
+      usage: { input_tokens: sumIn, output_tokens: sumOut },
+      total_cost_usd: sumCost,
+    };
+    return {
+      artifact: res.artifact,
+      raw,
+      messages,
+      prompt: "(design-doc → DETAIL build — see design-doc.md + build.prompt.txt)",
       promptMethodId,
     };
   },

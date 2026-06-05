@@ -1,0 +1,54 @@
+{
+  "seq": 7,
+  "runId": "007-v5-designdoc-detail",
+  "date": "2026-06-05",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "v5-designdoc-detail",
+  "promptMethodId": "temple-facade-designdoc-detail.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 6985,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      -9
+    ],
+    "max": [
+      43,
+      41,
+      0
+    ]
+  },
+  "tokensIn": 21752,
+  "tokensOut": 34687,
+  "costUsd": 1.0661152499999997,
+  "durationMs": 447602,
+  "score": {
+    "proportion": 3.67,
+    "color": 2.67,
+    "detail": 3.33,
+    "fidelity": 4,
+    "overall": 3.33,
+    "samples": 3,
+    "rubric": "v1",
+    "notes": "Cohesive symmetrical temple with strong base-middle-crown massing and a clear recessed entrance, but the near-monochrome terracotta palette lacks a real accent hierarchy and the side bays read flat.",
+    "usage": {
+      "input_tokens": 10202,
+      "output_tokens": 633,
+      "cost_usd": 0.24839000000000003
+    }
+  },
+  "roundImages": [],
+  "bestof": null,
+  "note": "v4 high-res + hard surface-detail push (retry-on-malformed enabled)"
+}

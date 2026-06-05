@@ -88,6 +88,17 @@ the per-run reasoning behind each principle. Renders live in
    sampling or prompting. **(Scope corrected — see P7/Verdict:** best-of-N sampled *capped* builds, so
    it couldn't beat the cap. Selection wasn't the lever; **resolution** was. Re-test best-of-N over
    *high-res* builds before concluding test-time selection is dead.)
+9. **You can't stack quality dimensions in one monolithic pass — they trade off.** Pushing surface
+   ornament hard (`v5`: fluting, dentils, coffers, "2–3 blocks per material for micro-texture")
+   *backfired*: overall **4.0 → 3.33**. `detail` didn't move (3.33), **color crashed** (4 → 2.67 — the
+   "related blocks" micro-texture collapsed into a near-monochrome orange field with no hierarchy), and
+   the model **traded relief depth away** (15 → 10) to afford the ornament. A single hand-authored JSON
+   has a fixed budget; ask for more of one thing and it robs another. This is the strongest argument
+   for **incremental structured I/O** (MCP tool-calls / a robust parser): build relief, palette, and
+   ornament in separate validated passes, not one monolithic, budget-constrained blob. `detail` looks
+   like the one genuinely sticky dimension under monolithic prompting — a prime target for the
+   structured approach. (Also: a heavy prompt made the build stage return prose instead of JSON once —
+   the seam now retries once on malformed output, but that is a band-aid; structured I/O is the fix.)
 
 ## Tunable parameters (and what's actually reachable)
 
@@ -183,3 +194,15 @@ a full-width crown. (9,376 blocks, **$0.91**, depth **15** vs v2's 7; W=48, H=40
 - **→** The "structural ceiling" (P7) and the plateau verdict were premature — a self-inflicted cap.
   The harness still has headroom. Next: probe `detail` at high-res, and move to a pairwise metric to
   see whether 4→5 is reachable.
+
+### temple-facade 007 · `v5-designdoc-detail` · 2026-06-04
+v4 high-res + a hard surface-ornament/micro-texture push (one variable: detail). (6,985 blocks, $1.07.)
+- **Result: regression.** Overall **4.0 → 3.33**. `detail` unmoved (3.33), `color` crashed (4 → 2.67:
+  micro-texture "related blocks" → a near-monochrome orange field), depth traded away (15 → 10),
+  proportion 4 → 3.67. The ornament is visibly there (fluting, dentils, coffers) but reads as
+  well-articulated *monochrome* — no contrast to register as "detail."
+- **Note:** the heavy prompt made the build stage emit prose once ("Done. The …") instead of JSON;
+  the seam now retries once on malformed output (band-aid; structured I/O is the real fix).
+- **→** Single-pass quality dimensions trade off (P9). `detail` is sticky under monolithic prompting;
+  v4 (4.0) remains the high-water mark. The next gain needs **incremental structured I/O** (MCP /
+  BAML), not more stacked instructions.

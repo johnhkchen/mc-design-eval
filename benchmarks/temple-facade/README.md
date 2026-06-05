@@ -50,6 +50,7 @@ auto-injected corpus). Review and update it after each run.
 | 4 | 2026-06-04 | `v3-designdoc-revise` | 3 | 959 | 29639/60139 | $1.7982 | — | design-doc + identity-preserving multimodal revision (P3+P4) |
 | 5 | 2026-06-04 | `vN-bestof` | 3.67 | 2273 | 126140/124371 | $5.3415 | 1727s | best-of-4 design-doc, judge-selected (test: does selection break the 3-4 plateau?) |
 | 6 | 2026-06-04 | `v4-designdoc-highres` | 4 | 9376 | 20476/28875 | $0.9124 | 407s | design-doc + HIGH-RES build: lift relief/scale caps, require deep relief + proportioned crown (vs v2 capped) |
+| 7 | 2026-06-05 | `v5-designdoc-detail` | 3.33 | 6985 | 21752/34687 | $1.0661 | 448s | v4 high-res + hard surface-detail push (retry-on-malformed enabled) |
 
 ## Gallery
 
@@ -100,5 +101,13 @@ score 3.67/5 · 2273 blocks · 126140/124371 tok · $5.3415
 score 4/5 · 9376 blocks · 20476/28875 tok · $0.9124
 
 > design-doc + HIGH-RES build: lift relief/scale caps, require deep relief + proportioned crown (vs v2 capped)
+
+### 007 — `v5-designdoc-detail` · 2026-06-05
+
+![temple-facade run 7](runs/007-v5-designdoc-detail/render.png)
+
+score 3.33/5 · 6985 blocks · 21752/34687 tok · $1.0661
+
+> v4 high-res + hard surface-detail push (retry-on-malformed enabled)
 
 <!-- RUNS:END -->

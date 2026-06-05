@@ -276,11 +276,30 @@ async function invokeClaude({ args, stdin, onMessage }) {
  *   and per-turn usage. Must not mutate the message.
  * @returns {Promise<{ artifact: import("./artifact.mjs").DesignArtifact, raw: object }>}
  */
-export async function requestDesignArtifact({ prompt, model, options = {}, onMessage } = {}) {
+export async function requestDesignArtifact({ prompt, model, options = {}, onMessage, retries = 1 } = {}) {
   void options; // reserved (see jsdoc); single-shot runs tool-free on the CLI path
   const args = ["-p", "--output-format", "stream-json", "--verbose"];
   if (model) args.push("--model", model);
-  return invokeClaude({ args, stdin: withSchemaInstruction(prompt), onMessage });
+
+  // Heavy prompts sometimes make the model narrate ("Done. The ...") instead of emitting only
+  // the JSON. Retry once with a stern corrective rather than failing the whole (metered) run.
+  let lastErr;
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    const stdin = withSchemaInstruction(
+      attempt === 0
+        ? prompt
+        : prompt +
+            "\n\nIMPORTANT: your previous reply was NOT a valid JSON artifact (it began with prose). " +
+            "Output ONLY the single JSON object — no prose, no 'Done', no explanation, no code fences.",
+    );
+    try {
+      return await invokeClaude({ args, stdin, onMessage });
+    } catch (e) {
+      lastErr = e;
+      if (!/re-validation|invalid_json|no structured payload|valid artifact/i.test(e.message)) throw e;
+    }
+  }
+  throw lastErr;
 }
 
 /**
