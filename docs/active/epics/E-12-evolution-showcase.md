@@ -56,8 +56,18 @@ A folder of desks, each a staffer/role producing one part of the package:
   strong) for "measured, not vibes" credibility.
 - **A breadth beat** — the five references (Taj / Hōryū-ji / Sainte-Chapelle / Arc / mausoleum) concepts
   — to show the method generalizes.
-- **Arc with a plot twist** — the text-JSON ceiling → the decision to change tools (the pivot) → the leap
-  → the sculptor vision (Golden Gate ambition). The honest-failure beats build trust.
+- **Second thread — velocity & "yep, that's real".** The quality climb was *powered* by iteration speed:
+  dozens of builds a day, techniques accumulating in the journal and **transferring** across subjects,
+  compounding into an **explosion of high-quality "bet-you-can't-do-this" builds.** The payoff shot is the
+  **authenticity proof**: those builds **rotating in 3-D**, rendered through *our own rig*
+  (`prismarine-viewer` + real `minecraft-assets` textures) — a 360° spin of an actual voxel structure is
+  something an AI picture can't fake. "We control the rendering rig, and it's true-to-Minecraft" → *yep,
+  real.*
+- **The arc (both threads woven):** hook → the measured climb (scores rising) → the **velocity engine**
+  (dozens/day, techniques compounding & transferring) → the ceiling → the **pivot/leap** → an **explosion**
+  of high-quality builds → the **3-D rotation realness proof** → the **sculptor vision** (Golden Gate
+  ambition). Honest-failure beats (the loop that promoted nothing, the regressions) get a quick credibility
+  flash, not a wallow.
 
 ## Scope
 
@@ -66,6 +76,11 @@ A folder of desks, each a staffer/role producing one part of the package:
   sequence with captions, production spec + post copy).
 - The **canonical evolution sequence** (ordered frames + captions + scores) assembled from existing
   artifacts.
+- A **turntable (orbit) render mode** for the render rig — sweep the camera azimuth around a build's voxel
+  world → a rotation clip, rendered through `prismarine-viewer` + real `minecraft-assets` textures. This is
+  the "yep, that's real" proof asset, and it's a small extension of the existing head-on render harness
+  (vary azimuth across N frames). **Synergy:** it also gives E-11's review bookend true multi-view
+  inspection — built once, used by both.
 - A **rough-cut** the project can produce locally if tooling allows (ffmpeg image-sequence slideshow with
   captions); final polish is a human/video-tool step.
 
@@ -99,3 +114,12 @@ A folder of desks, each a staffer/role producing one part of the package:
   frame).
 - **One hero subject** keeps the "ape→man" read clean; resist montaging many subjects in the spine (use
   the breadth beat for generalization instead).
+- **Don't conflate concept art with the real build (honesty + it's a stronger story).** The Nano Banana
+  concepts are gorgeous *reference* art, not real Minecraft. The "yep, that's real" rotation proof applies
+  to the **actual voxel builds** rendered through our rig. The honest framing is the better one: *anyone
+  can make an AI picture (the concept) — we turn it into a real, rotatable, buildable structure.*
+- **Sequencing — a v1 now, the triumphant payoff after the sculptor.** Today the *real* builds are
+  rotatable-but-blockier (text-JSON era) and the *gorgeous* frames are concepts. So v1 cuts the climb +
+  velocity + a real-but-blocky rotation proof, with the concepts shown as "where it's heading"; the
+  **real-AND-gorgeous rotating build** (the strongest realness shot) slots in as the hero payoff once
+  E-09/E-11 produce sculptor output. Build the turntable + the cut now; upgrade the hero frame later.

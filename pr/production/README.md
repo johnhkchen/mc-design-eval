@@ -12,5 +12,9 @@ Output:
   a **rough cut** (`rough-cut.mp4`), else a precise shot-list a human assembles in a video tool.
 - `post.md` — the LinkedIn post copy (hook line, body, CTA, hashtags).
 
+- `turntable.md` — the "yep, that's real" proof: an **orbit render** (sweep camera azimuth around a build's
+  voxel world via `prismarine-viewer` + real `minecraft-assets` textures) → rotation clips of the actual
+  builds. A small extension of the head-on render harness; also serves E-11's multi-view review.
+
 Final high-production editing (motion graphics, licensed music) is a human/video-tool step — this desk
 delivers everything up to and including a rough cut.
