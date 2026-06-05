@@ -30,6 +30,16 @@ downstream tickets (T-025…T-029).
   `occupied` and runs a "massing" stage through `runStages` to **lock occupancy** (the
   proportion lock), leaving `material`/`relief` free; `proportionsOf` derives bounds/aspect
   for the S-026 review critic; `compileMassing` paints one gray block (`MASSING_BLOCK`).
+- **`material.mjs`** (pass A, T-027) — the material-noise skin over the locked massing. Per
+  surface, `hueFamilySet(target)` upgrades E-10's single-block match to a **same-hue set**
+  (the nearest block + its near neighbours in Lab, via the engine's `deltaE` over the block
+  table); `material(state, intent)` runs a "material" stage that writes a deterministic,
+  height-varied pick (`cellHash` + `pickMaterial`: bottom→darkest, top→lightest — the light
+  break) on every occupied cell and **locks `material`** over the locked occupancy.
+  `compileMaterial` emits the multi-block manifest. Targets come from `intent.material`
+  (palette / per-surface), defaulting to the massing gray. Block ids are namespaced at the
+  boundary (`tableKey`/`blockId`). This is the one other E-10 consumer — it imports the
+  portable engine + block table, leaving them untouched.
 - **`review.mjs`** (bookend 2, T-026) — the diagnostic critic. Renders a build state and
   emits a **structured diagnosis** `{defect, where, route}[]` over the explicit defect
   vocabulary `{flat, ringing, under-detailed-focal, proportion}` and `ROUTING_TABLE`, where

@@ -31,6 +31,14 @@ export {
 } from "./massing.mjs";
 
 export {
+  hueFamilySet,
+  materialStage,
+  material,
+  compileMaterial,
+  MATERIAL_STYLE,
+} from "./material.mjs";
+
+export {
   DEFECTS,
   ROUTE_TARGETS,
   ROUTING_TABLE,
