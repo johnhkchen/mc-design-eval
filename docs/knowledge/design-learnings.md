@@ -249,6 +249,29 @@ competent/competent/strong).
   white as a regression to FIX. Re-run validates whether craft-grounding survives without the palette
   capture. Generalizes P-ref: ground form, never let a pale reference collapse the build to white.
 
+### temple-facade 013 · `vRefRevise-designdoc` (Taj, craft/color split) · 2026-06-04
+Re-run after commit 63b36ad (reference = craft, brief = color) + the line-op constraint fixes
+(822b104 BAML, 00c1358 schema). **The color fix worked**: the doc opened "the reference is white —
+information, not mandate" and committed to teal/gold (Warped/Prismarine + gold portal) — colorful, no
+white regression. But two new findings:
+- **The 2nd-pass revision REGRESSED proportion (`strong → competent`).** Judged both rounds: round-0
+  (pre-revision build) = proportion **strong**, the post-revision render = proportion **competent**;
+  every other dimension identical (color/detail competent, fidelity strong, overall competent for
+  both). The revision **detached the columns from the wall** into freestanding pillars, breaking the
+  integrated bay rhythm round-0 had. **round-0 was the better artifact; the revision actively hurt
+  it.** The 2nd pass is double-edged (cf. v3 lesson), now with direct A/B evidence.
+- **Why it detaches: a 3-D building reference doesn't map onto a flat facade.** The Taj's minarets are
+  genuinely freestanding at the plinth corners; told to "match the reference silhouette," the model
+  copies that — and in a single elevation those minarets become floating columns. Literal silhouette-
+  matching to a 3-D reference is wrong for a facade.
+- **New ceiling on color:** even colorful, the judge reads teal+gold as "a single cool family, not a
+  dominant/supporting/accent scheme" (the doc's violet/Purpur accent got dropped in build/revision).
+- **→** Best config for the Taj so far is **vRef craft/color split WITHOUT the 2nd pass** (= round-0:
+  strong proportion + colorful). Candidate instrument fixes: (a) judge both rounds, keep the better
+  (treat the revision as a candidate, not a mandate); (b) revision prompt must forbid detaching
+  integral masses — a facade is ONE connected plane; (c) carry the doc's full accent set into the
+  build so color clears "single family". P10/narration + line-op seams both held this run.
+
 ### vBAML (parked) · BAML as a token-efficient library over claude -p
 Modular API spike: `b.request` renders a TERSE `output_format` (whole prompt ~551 tok vs our ~2,077-
 tok JSON Schema) and `b.parse` SAP-parses — both proven on the subscription via `claude -p`. The
