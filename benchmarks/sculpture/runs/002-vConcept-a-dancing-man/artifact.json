@@ -1,0 +1,319 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "002-vConcept-a-dancing-man",
+    "prompting_method_id": "vconcept-sculpture.v1",
+    "model_id": "claude-opus-4-8",
+    "seed": 17,
+    "server_state_id": "flat-creative-superflat.v1"
+  },
+  "style": {
+    "name": "heroic-cartoon figurative",
+    "rationale": "A freestanding dancing man read through pose, not anatomy: planted center leg over a 6x6 terracotta plinth that catches the center of mass so the opposite leg can high-kick out to -x as a cantilever, while the arms fling asymmetrically (right up, left out) to draw a jagged diagonal silhouette that differs from every side. Warm analogous palette builds the body in the round — terracotta skin/head, red_terracotta shirt with jagged shoulder pads, brown_terracotta trousers/legs, an orange_terracotta waist belt where shirt meets trousers — and the single cool-bright gold_block accent crowns the motion as hat, hands, and shoes. All masses are full-depth solids (z spanning both sides) so the object reads as volume from front, back, and either flank; the hidden far side mirrors the visible torso/head volumes for a finished surface all the way around."
+  },
+  "palette": {
+    "manifest": [
+      "minecraft:terracotta",
+      "minecraft:red_terracotta",
+      "minecraft:brown_terracotta",
+      "minecraft:orange_terracotta",
+      "minecraft:gold_block"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        0,
+        -3
+      ],
+      "to": [
+        2,
+        1,
+        2
+      ],
+      "block": "minecraft:terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -1,
+        2,
+        -1
+      ],
+      "to": [
+        1,
+        13,
+        1
+      ],
+      "block": "minecraft:brown_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        10,
+        -1
+      ],
+      "to": [
+        -1,
+        13,
+        1
+      ],
+      "block": "minecraft:brown_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        11,
+        -1
+      ],
+      "to": [
+        -3,
+        13,
+        1
+      ],
+      "block": "minecraft:brown_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -9,
+        12,
+        -1
+      ],
+      "to": [
+        -6,
+        14,
+        1
+      ],
+      "block": "minecraft:brown_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -11,
+        13,
+        -1
+      ],
+      "to": [
+        -9,
+        15,
+        1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -1,
+        2,
+        -2
+      ],
+      "to": [
+        1,
+        3,
+        1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        14,
+        -2
+      ],
+      "to": [
+        3,
+        15,
+        2
+      ],
+      "block": "minecraft:brown_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        16,
+        -2
+      ],
+      "to": [
+        3,
+        17,
+        2
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        18,
+        -2
+      ],
+      "to": [
+        3,
+        25,
+        2
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        24,
+        -1
+      ],
+      "to": [
+        -3,
+        25,
+        1
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        24,
+        -1
+      ],
+      "to": [
+        4,
+        25,
+        1
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        23,
+        -1
+      ],
+      "to": [
+        6,
+        25,
+        1
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        5,
+        25,
+        -1
+      ],
+      "to": [
+        7,
+        30,
+        1
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        5,
+        30,
+        -1
+      ],
+      "to": [
+        7,
+        32,
+        1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        22,
+        -1
+      ],
+      "to": [
+        -4,
+        24,
+        1
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -10,
+        21,
+        -1
+      ],
+      "to": [
+        -7,
+        23,
+        1
+      ],
+      "block": "minecraft:red_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -12,
+        21,
+        -1
+      ],
+      "to": [
+        -10,
+        23,
+        1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -2,
+        26,
+        -2
+      ],
+      "to": [
+        2,
+        30,
+        2
+      ],
+      "block": "minecraft:terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -2,
+        31,
+        -2
+      ],
+      "to": [
+        2,
+        32,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -2,
+        31,
+        -4
+      ],
+      "to": [
+        2,
+        31,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    }
+  ]
+}

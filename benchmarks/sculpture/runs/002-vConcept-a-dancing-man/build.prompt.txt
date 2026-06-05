@@ -1,0 +1,70 @@
+You are a master Minecraft sculptor. Build a FREESTANDING 3-D SCULPTURE as a structured
+design artifact that faithfully realizes the subject "a dancing man" — its form, proportion,
+palette, and motifs — per the finalized design document and the attached CONCEPT IMAGE.
+This is an OBJECT IN THE ROUND, displayed on a turntable: it occupies all three axes and
+must read as a solid sculpture from every side. It is NOT a facade, wall, relief, or scene.
+
+## Orientation (a sculpture, not a facade)
+Build a fully three-dimensional object in x/y/z, centered on a local origin (x = 0, z = 0),
+standing on the ground at y = 0. Model the WHOLE object — front, back, both sides, and top —
+as real volume; give it depth and roundness, not a single thin face. There is no privileged
+'front plane' and no relief-into-a-wall: massing projects in every direction as the form needs.
+
+## Single-view limitation (read this)
+The attached concept shows ONE 3/4 view. The back and the far side are NOT depicted — infer
+them as a plausible, coherent continuation of the visible form (mirror symmetric features where
+the subject is symmetric; keep volumes and palette consistent all the way around). Treat that
+hidden half as YOUR reconstruction from a single view — a known limit of this mode — and make it
+read as a finished, deliberate surface, never a flat or hollow back.
+
+## Finalized design document
+# Freestanding Block Sculpture — "A Dancing Man"
+
+## 1. Read of the subject
+A dancing man IS a human figure caught mid-motion: the body thrown off its vertical axis. The essential masses are head, torso, and four limbs — but recognition comes from the *pose*, not anatomy. The instantly-namable features: **one leg planted, the other kicked out**, and **arms flung asymmetrically** (one up, one out). Frozen diagonal energy is the whole point; a symmetric standing figure would read as a statue, not a *dancing* man.
+
+## 2. Form & proportion (in the round)
+Heroic-cartoon proportions for block-scale legibility: head ≈ 6 tall, torso ≈ 10, legs ≈ 14, total ~30 plus a base, fitting the 32 budget. Torso tilts; hips and shoulders counter-rotate (contrapposto) so silhouette differs per view. **Front:** wide A-frame stance, arms making a jagged line. **Side:** clear lean and a trailing kicked leg — the strongest "motion" read. **3/4:** twist resolves, most dynamic. Stability: the planted leg + a flat **2-block-tall plinth** (6×6) catches the figure's center of mass, so the kicked leg can cantilever without toppling the read.
+
+## 3. Color palette (analogous + accent)
+- **Dominant:** `terracotta` (warm clay skin/body) — earthy, human, matte.
+- **Supporting:** `red_terracotta` (shirt/torso) and `brown_terracotta` (trousers/legs) — analogous warm earth tones for a unified, lively body.
+- **Accent (sparing):** `gold_block` — a hat or shoes, catching the eye and crowning the motion.
+Warm analogous harmony reads as energy and flesh; the single cool-bright gold accent gives focus without circus-color chaos.
+
+## 4. Surface & motifs
+Two bold block-scale motifs: a **2-block-thick limb stripe** where shirt meets trousers (a clear color belt at the waist), and **blocky 2×2 hands/feet caps** so extremities punch out against the slimmer limbs. Both survive voxelization.
+
+## 5. Block-budget plan (~32 longest edge)
+Plinth 2 · legs 14 · torso 10 · head 6 = 32 vertical. Horizontal spread ~14–16 (stance + outflung arm). Limbs 2–3 blocks thick; head 4–5 cube. Compact, readable, in the round.
+
+## Scale (honor it)
+- Target ~32 blocks along the LONGEST dimension. Bounding box up to ~32(x) × 32(y)
+  × 32(z); build a compact, solid object that fills that envelope without sprawling.
+- Use `fill`/`box` for the major masses and `line` for struts/edges so you can afford solid
+  volume; reserve `voxel` (with block `state` for stairs/slabs) for shaping curves, facets,
+  and surface detail. Approximate curves/round forms with stepped stairs+slabs, not flat panels.
+
+## Realize the document with craft
+- Build the essential masses and the recognizable features the document names; honor its
+  proportions and its dominant/supporting/accent palette hierarchy.
+- Keep the object SOLID and connected — no detached floating parts unless the subject truly has
+  them (and then bridge them so they are supported).
+
+## Materials
+Survival-obtainable Minecraft 1.20.1 blocks, namespaced — primarily the document's palette.
+Declare every block you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "002-vConcept-a-dancing-man"
+- metadata.prompting_method_id = "vconcept-sculpture.v1"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 17
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Set style.name to the document's style label and style.rationale to one line tying the build to
+the subject and document.
+
+Emit ONE complete design artifact — the full set of placements, not a diff. Local origin at
+x = 0, y = 0, z = 0 (ground at y = 0).

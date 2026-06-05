@@ -1,0 +1,46 @@
+{
+  "seq": 2,
+  "runId": "002-vConcept-a-dancing-man",
+  "date": "2026-06-05",
+  "approach": "vConcept",
+  "promptMethodId": "vconcept-sculpture.v1",
+  "model": "claude-opus-4-8",
+  "effort": null,
+  "subject": "a dancing man",
+  "scale": 32,
+  "blocks": 1073,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      -12,
+      0,
+      -4
+    ],
+    "max": [
+      7,
+      32,
+      2
+    ]
+  },
+  "view3q": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "turntable": {
+    "frames": 24,
+    "centerDeg": 45,
+    "amplitudeDeg": 40,
+    "mode": "rock"
+  },
+  "concept": {
+    "model": "gemini-3-pro-image-preview",
+    "promptChars": 4455,
+    "ms": 18083
+  },
+  "tokensIn": 20399,
+  "tokensOut": 11363,
+  "costUsd": 0.494544,
+  "durationMs": 180708,
+  "note": "T-036-01 build"
+}

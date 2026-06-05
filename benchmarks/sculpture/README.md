@@ -46,6 +46,7 @@ benchmark is the live I/O + rendering + run-dir provenance around it.
 | # | date | subject | scale | blocks | tok in/out | $ | note |
 |---|------|---------|-------|--------|-----------|---|------|
 | 1 | 2026-06-05 | `moai` | 32 | 3414 | 20578/18096 | $0.6632 | T-035-01 smoke |
+| 2 | 2026-06-05 | `a dancing man` | 32 | 1073 | 20399/11363 | $0.4945 | T-036-01 build |
 
 ## Gallery
 
@@ -56,5 +57,13 @@ benchmark is the live I/O + rendering + run-dir provenance around it.
 **3414 blocks** · 20578/18096 tok · $0.6632
 
 > T-035-01 smoke
+
+### 002 — `a dancing man` (scale 32) · 2026-06-05
+
+![sculpture run 2 — 3/4](runs/002-vConcept-a-dancing-man/render-3q.png)
+
+**1073 blocks** · 20399/11363 tok · $0.4945
+
+> T-036-01 build
 
 <!-- RUNS:END -->
