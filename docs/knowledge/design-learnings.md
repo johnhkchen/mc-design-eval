@@ -1306,3 +1306,84 @@ import added to the engine; the boundary test guarantees the import stays safe f
 
 `npm test` **200/200** green (+4 boundary/usage tests over the 196 from T-022-01). E-10's color layer is
 complete and reuse-ready; the next color work is downstream in E-09's voxelizer, not here.
+
+## E-11 — staged-sculptor consolidation (S-029, T-029-01)
+
+Terminal E-11 section: not a trial, a **consolidation** (the analog of E-10's T-023-01). It wires the five
+sibling modules into one demonstrated loop, confirms the form boundary that lets a GLB source drop in, and
+distills the learning. No new capability, no model call on the hot path.
+
+**The staged spine — turn *form* into a *good* build the way a builder works: stage it.** A facade is built
+as a sequence of passes, each operating on the **locked** output of the one before:
+
+```
+form ──MassingSource──▶ massing ──▶ material-noise ──▶ self-shadow relief ──▶ diagnostic critic
+                       (occupied)    (material)         (relief)              (routes, never re-emits)
+```
+
+- **`build-state` + `orchestrator` + `compile` (the spine, T-024):** a sparse `{occupied, material, relief}`
+  facade grid with a per-field **lock set**; stages are pure `apply(state, intent) → state`; `runStages`
+  locks exactly the fields a stage changed on accept; `compile` emits one `voxel` per occupied cell at
+  `[x, y, relief]`. The whole loop is reachable from one barrel (`src/sculptor/index.mjs`).
+- **massing (T-025), material-noise (T-027), relief (T-028)** are the three craft passes; **review (T-026)**
+  is the diagnostic critic. `staged-loop.mjs` (T-029) sequences them — adding **zero** new capability, just
+  the wiring + a baseline metric.
+
+**The lock chain IS the P14 cure — now demonstrated end-to-end.** The old failure (P14, runs 013/017/020) was
+a blanket "improve" 2nd pass that *detached masses* and regressed a strong build — "improve" was destructive.
+The staged loop makes it **additive by construction**: `mass` locks `occupied`, `material` locks `material`
+over the locked occupancy, `relief` locks `relief` over the material-locked state. A later pass that tries to
+change a locked field throws `LockViolationError` at the write (and is rejected at accept as defense in
+depth). Each pass can only **add a field within bounds**; none can undo a prior one. The critic encodes the
+same cure on the read side — it **routes** a defect to the responsible pass to re-run over the locked state,
+it never emits a fresh artifact ("routes, never re-emits", a cure encoded in a type). The consolidation run
+confirms all three fields lock, in order (`lockLog: massing → material → relief`).
+
+**The two seed passes (fake depth without leaving the voxel lattice).**
+- **material-noise** ("fake shading through materials"): per surface a **same-hue block set** (the run-015
+  effect — mix stone / stone_bricks / chiseled_stone_bricks) chosen by a deterministic per-cell hash, varied
+  by height so light breaks top-to-bottom. The k-nearest set is an upgrade of E-10's single-block match via
+  the portable ΔE engine — the one E-10 coupling, and it leaves the engine untouched.
+- **self-shadow relief** ("fake depth through Z"): each feature gets a legal integer Z move from a closed
+  vocabulary (recess/window → −1, trim/cornice/frame/lip/eave/base → +1) plus simple cornice auto-detection.
+  Recesses are **carved by exclusion** — compile emits one voxel per cell and a recess just shifts that lone
+  voxel to z=−1, so a back block is never buried behind a front fill ([[facade-recess-by-exclusion]]).
+
+**The less-flat result (cite `reliefMetrics`).** `reliefMetrics` is a pure projection of a state's relief —
+the quantitative flatness signal (parallels `proportionsOf`; never stored, cannot drift). A massing-only (or
+material-only) state is **all-flat** — every cell `relief === 0`, so `coverage === 0` and `variance === 0`.
+On the demonstrated 4×5 facade (18 occupied cells, one window recess + an auto-detected cornice):
+
+| signal | massing-only (baseline) | composed (massing→material→relief) |
+|--------|-------------------------|------------------------------------|
+| relief coverage | 0 | **0.17** |
+| relief variance | 0 | **0.16** |
+| relief range | 0 | **2** (z=−1 recess .. z=+1 cornice) |
+| manifest | 1 block (gray) | **3 blocks** (same-hue set) |
+
+So the composed build is **measurably less flat** than the massing-only baseline — non-zero relief coverage
+*and* Z-variance where the baseline has neither. The composed artifact passes the live AJV gate and **renders**
+to a valid PNG (headless GL). **Recorded critic diagnosis:** on the textured + relieved facade a `flat` defect
+routes to **`relief`** (state-driven disambiguation — already textured, so it wants depth, not material); a
+clean render yields `[]`. This is the same flatness signal the critic's `flat→relief` route is judged against —
+the loop and its diagnostic agree on the metric.
+
+**Input-agnostic — "we are the sculptor" (the E-09 reuse hook).** The **only form dependency is
+`MassingSource`** (`{width, height, occupied()}` in build coords). `conceptGridSource` is the *single*
+concept-grid-aware function — it adapts the E-10 image→block grid (`{grid, n, m}`, null-means-air, top-down
+rows) into that contract and is the only place those specifics live; it does not even import image-grid (it
+duck-types the shape). The middle passes (material, relief) and the bookends (review, compile) carry **no
+concept-grid import at all**, so a GLB voxelizer that emits the same three members is a **drop-in** — the
+material/relief/review stages never learn where the occupancy came from. This is no longer a header promise:
+`src/sculptor/reuse-boundary.test.mjs` **statically scans** every downstream module's imports (fails on any
+`image-grid` / `palette-extract` / `nano-banana` / `expand` / `briefs` specifier) **and** functionally proves
+a literal gridless `MassingSource` runs the whole loop to a valid artifact with no concept-grid code in the
+test's own graph. Same two-pronged enforcement as E-10's color-engine boundary.
+
+**Handoff.** The staged sculptor is complete and input-agnostic. The wired live critic (`runStagedLoop`
+defaults to the BAML categorical judge + headless render) is the loop S-029's consumer drives; the automated
+suite renders live but stubs the metered judge (per T-026's design). The next form source is E-09's GLB
+voxelizer — it plugs into `MassingSource`, and the boundary test guarantees the middle/review stay unchanged.
+
+`npm test` **302/302** green (+11 over the 291 from T-028/T-032: 7 staged-loop end-to-end tests + 4 reuse
+boundary tests). E-11's staged-sculptor framework is shipped.

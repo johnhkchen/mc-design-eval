@@ -50,6 +50,15 @@ downstream tickets (T-025…T-029).
   is the quantitative "less flat" signal the review critic's `flat→relief` route is judged against.
   Geometry-only: no E-10 color engine, no block table. `compileRelief` stamps the relief style; Z already
   flows through `compile`.
+- **`staged-loop.mjs`** (consolidation, T-029) — the **full wired loop**: `stagedSculpt(source, intent)`
+  sequences `mass → material → relief` (pure, no render/model) and returns the relief-locked state, its
+  `reliefMetrics`, and the massing-only `baseline` for the less-flat comparison; `lessFlat(baseline,
+  metrics)` names the verdict; `runStagedLoop(source, opts)` adds `compileRelief` + the diagnostic critic
+  (`reviewBuildState`, render/diagnose injectable — live by default, stubbed in the suite). Adds NO new
+  capability — it only sequences the existing public passes, so the lock chain (and its P14 cure) is intact.
+  The composed facade is **measurably less flat** than massing-only: `reliefMetrics` coverage/variance go
+  from `0/0` (all-flat) to `> 0`. The **only form dependency is `MassingSource`** — a GLB source is a
+  drop-in; `reuse-boundary.test.mjs` enforces that the middle/review carry no concept-grid import.
 - **`review.mjs`** (bookend 2, T-026) — the diagnostic critic. Renders a build state and
   emits a **structured diagnosis** `{defect, where, route}[]` over the explicit defect
   vocabulary `{flat, ringing, under-detailed-focal, proportion}` and `ROUTING_TABLE`, where

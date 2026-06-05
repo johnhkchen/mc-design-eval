@@ -59,3 +59,6 @@ export {
   defaultRender,
   defaultDiagnose,
 } from "./review.mjs";
+
+// The consolidated full loop (T-029-01): massing → material → relief → critic, wired through the spine.
+export { stagedSculpt, runStagedLoop, lessFlat } from "./staged-loop.mjs";
