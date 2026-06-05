@@ -290,3 +290,21 @@ npm run trial:run   # LIVE, METERED end-to-end milestone trial (spec §4) + head
 The artifact/sdk-binding/trial/smoke-trial suites use the committed
 `schema/examples/*` fixtures and mock SDK/report objects as the canonical payloads and
 never make a live SDK call or touch the GPU. Only `trial:run` does both.
+
+## Color layer (E-10): block → CIE-Lab table
+
+`src/color/block-table.mjs` builds the committed `src/color/block-lab-table.json` — a
+representative color (mean of opaque texture pixels; side face for directional blocks; first
+frame for animated) and CIE L\*a\*b\* for every full-cube, survival-obtainable block. It is the
+runtime input for the portable color engine (S-020) and palette extraction (S-021).
+
+```bash
+npm run build:block-table   # regenerate the table from minecraft-assets textures
+```
+
+Notes: `minecraft-assets` + `pngjs` are **build-time-only** devDependencies — the runtime path
+(`loadBlockTable` + the JSON) pulls no Minecraft/asset deps. `minecraft-assets@1.17` has no
+`1.20.1` dataset, so `"1.20.1"` resolves to the effective `1.20.2` (recorded in the table's
+`version`). Biome-tinted and non-full-cube blocks are excluded and documented in the table's
+`excluded[]`. The `srgbToLab` here is a transitional duplicate of S-020's `cielab.mjs`
+conversion (parallel tickets); S-023 consolidates it.

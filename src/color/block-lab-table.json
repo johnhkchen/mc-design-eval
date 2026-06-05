@@ -1,0 +1,6099 @@
+{
+  "version": "1.20.2",
+  "requestedVersion": "1.20.1",
+  "generatedFrom": "minecraft-assets@1.17.0",
+  "blocks": [
+    {
+      "block": "acacia_log",
+      "texture": "acacia_log",
+      "rgb": [
+        103,
+        97,
+        87
+      ],
+      "lab": [
+        41.408,
+        0.481,
+        6.56
+      ]
+    },
+    {
+      "block": "acacia_planks",
+      "texture": "acacia_planks",
+      "rgb": [
+        168,
+        90,
+        50
+      ],
+      "lab": [
+        46.803,
+        28.572,
+        36.629
+      ]
+    },
+    {
+      "block": "acacia_wood",
+      "texture": "acacia_log",
+      "rgb": [
+        103,
+        97,
+        87
+      ],
+      "lab": [
+        41.408,
+        0.481,
+        6.56
+      ]
+    },
+    {
+      "block": "amethyst_block",
+      "texture": "amethyst_block",
+      "rgb": [
+        134,
+        98,
+        191
+      ],
+      "lab": [
+        48.964,
+        34.247,
+        -43.747
+      ]
+    },
+    {
+      "block": "ancient_debris",
+      "texture": "ancient_debris_side",
+      "rgb": [
+        96,
+        64,
+        56
+      ],
+      "lab": [
+        30.496,
+        12.813,
+        10.532
+      ]
+    },
+    {
+      "block": "andesite",
+      "texture": "andesite",
+      "rgb": [
+        136,
+        136,
+        137
+      ],
+      "lab": [
+        56.732,
+        0.195,
+        -0.535
+      ]
+    },
+    {
+      "block": "azalea_leaves",
+      "texture": "azalea_leaves",
+      "rgb": [
+        90,
+        115,
+        44
+      ],
+      "lab": [
+        45.105,
+        -21.195,
+        35.522
+      ]
+    },
+    {
+      "block": "bamboo_block",
+      "texture": "bamboo_block",
+      "rgb": [
+        127,
+        144,
+        58
+      ],
+      "lab": [
+        56.845,
+        -19.145,
+        42.69
+      ]
+    },
+    {
+      "block": "bamboo_mosaic",
+      "texture": "bamboo_mosaic",
+      "rgb": [
+        190,
+        170,
+        78
+      ],
+      "lab": [
+        69.646,
+        -4.128,
+        49.116
+      ]
+    },
+    {
+      "block": "bamboo_planks",
+      "texture": "bamboo_planks",
+      "rgb": [
+        193,
+        173,
+        80
+      ],
+      "lab": [
+        70.737,
+        -4.284,
+        49.485
+      ]
+    },
+    {
+      "block": "barrel",
+      "texture": "barrel_side",
+      "rgb": [
+        108,
+        81,
+        50
+      ],
+      "lab": [
+        36.563,
+        7.116,
+        22.508
+      ]
+    },
+    {
+      "block": "basalt",
+      "texture": "basalt_side",
+      "rgb": [
+        73,
+        73,
+        78
+      ],
+      "lab": [
+        31.188,
+        1.125,
+        -2.973
+      ]
+    },
+    {
+      "block": "bedrock",
+      "texture": "bedrock",
+      "rgb": [
+        85,
+        85,
+        85
+      ],
+      "lab": [
+        36.146,
+        -0.002,
+        0
+      ]
+    },
+    {
+      "block": "birch_log",
+      "texture": "birch_log",
+      "rgb": [
+        217,
+        215,
+        210
+      ],
+      "lab": [
+        86.009,
+        -0.209,
+        2.703
+      ]
+    },
+    {
+      "block": "birch_planks",
+      "texture": "birch_planks",
+      "rgb": [
+        192,
+        175,
+        121
+      ],
+      "lab": [
+        71.723,
+        -1.808,
+        29.935
+      ]
+    },
+    {
+      "block": "birch_wood",
+      "texture": "birch_log",
+      "rgb": [
+        217,
+        215,
+        210
+      ],
+      "lab": [
+        86.009,
+        -0.209,
+        2.703
+      ]
+    },
+    {
+      "block": "black_concrete",
+      "texture": "black_concrete",
+      "rgb": [
+        8,
+        10,
+        15
+      ],
+      "lab": [
+        2.739,
+        0.275,
+        -2.356
+      ]
+    },
+    {
+      "block": "black_concrete_powder",
+      "texture": "black_concrete_powder",
+      "rgb": [
+        25,
+        27,
+        32
+      ],
+      "lab": [
+        9.757,
+        0.456,
+        -3.769
+      ]
+    },
+    {
+      "block": "black_stained_glass",
+      "texture": "black_stained_glass",
+      "rgb": [
+        25,
+        25,
+        25
+      ],
+      "lab": [
+        8.757,
+        -0.001,
+        0
+      ]
+    },
+    {
+      "block": "black_terracotta",
+      "texture": "black_terracotta",
+      "rgb": [
+        37,
+        23,
+        16
+      ],
+      "lab": [
+        9.349,
+        5.949,
+        7.104
+      ]
+    },
+    {
+      "block": "black_wool",
+      "texture": "black_wool",
+      "rgb": [
+        21,
+        21,
+        26
+      ],
+      "lab": [
+        6.958,
+        1.296,
+        -3.462
+      ]
+    },
+    {
+      "block": "blackstone",
+      "texture": "blackstone",
+      "rgb": [
+        42,
+        36,
+        41
+      ],
+      "lab": [
+        15.03,
+        3.963,
+        -2.281
+      ]
+    },
+    {
+      "block": "blue_concrete",
+      "texture": "blue_concrete",
+      "rgb": [
+        45,
+        47,
+        143
+      ],
+      "lab": [
+        25.483,
+        31.322,
+        -53.335
+      ]
+    },
+    {
+      "block": "blue_concrete_powder",
+      "texture": "blue_concrete_powder",
+      "rgb": [
+        70,
+        73,
+        167
+      ],
+      "lab": [
+        35.706,
+        27.128,
+        -51.21
+      ]
+    },
+    {
+      "block": "blue_ice",
+      "texture": "blue_ice",
+      "rgb": [
+        116,
+        168,
+        253
+      ],
+      "lab": [
+        68.611,
+        6.613,
+        -47.448
+      ]
+    },
+    {
+      "block": "blue_stained_glass",
+      "texture": "blue_stained_glass",
+      "rgb": [
+        51,
+        76,
+        178
+      ],
+      "lab": [
+        36.149,
+        25.931,
+        -57.087
+      ]
+    },
+    {
+      "block": "blue_terracotta",
+      "texture": "blue_terracotta",
+      "rgb": [
+        74,
+        60,
+        91
+      ],
+      "lab": [
+        27.961,
+        13.159,
+        -16.247
+      ]
+    },
+    {
+      "block": "blue_wool",
+      "texture": "blue_wool",
+      "rgb": [
+        53,
+        57,
+        157
+      ],
+      "lab": [
+        29.705,
+        31.019,
+        -54.992
+      ]
+    },
+    {
+      "block": "bone_block",
+      "texture": "bone_block_side",
+      "rgb": [
+        229,
+        226,
+        208
+      ],
+      "lab": [
+        89.676,
+        -2.056,
+        9.159
+      ]
+    },
+    {
+      "block": "bookshelf",
+      "texture": "bookshelf",
+      "rgb": [
+        117,
+        95,
+        60
+      ],
+      "lab": [
+        41.678,
+        3.909,
+        23.33
+      ]
+    },
+    {
+      "block": "brain_coral_block",
+      "texture": "brain_coral_block",
+      "rgb": [
+        207,
+        91,
+        159
+      ],
+      "lab": [
+        55.333,
+        53.393,
+        -14.536
+      ]
+    },
+    {
+      "block": "bricks",
+      "texture": "bricks",
+      "rgb": [
+        151,
+        98,
+        83
+      ],
+      "lab": [
+        46.897,
+        19.66,
+        17.39
+      ]
+    },
+    {
+      "block": "brown_concrete",
+      "texture": "brown_concrete",
+      "rgb": [
+        96,
+        60,
+        32
+      ],
+      "lab": [
+        28.962,
+        12.75,
+        23.57
+      ]
+    },
+    {
+      "block": "brown_concrete_powder",
+      "texture": "brown_concrete_powder",
+      "rgb": [
+        126,
+        85,
+        54
+      ],
+      "lab": [
+        39.915,
+        13.384,
+        24.825
+      ]
+    },
+    {
+      "block": "brown_stained_glass",
+      "texture": "brown_stained_glass",
+      "rgb": [
+        102,
+        76,
+        51
+      ],
+      "lab": [
+        34.464,
+        7.487,
+        19.088
+      ]
+    },
+    {
+      "block": "brown_terracotta",
+      "texture": "brown_terracotta",
+      "rgb": [
+        77,
+        51,
+        36
+      ],
+      "lab": [
+        23.912,
+        9.688,
+        14.22
+      ]
+    },
+    {
+      "block": "brown_wool",
+      "texture": "brown_wool",
+      "rgb": [
+        114,
+        72,
+        41
+      ],
+      "lab": [
+        34.748,
+        14.575,
+        25.745
+      ]
+    },
+    {
+      "block": "bubble_coral_block",
+      "texture": "bubble_coral_block",
+      "rgb": [
+        165,
+        26,
+        162
+      ],
+      "lab": [
+        40.161,
+        66.804,
+        -40.415
+      ]
+    },
+    {
+      "block": "budding_amethyst",
+      "texture": "budding_amethyst",
+      "rgb": [
+        132,
+        96,
+        187
+      ],
+      "lab": [
+        48.082,
+        33.846,
+        -42.845
+      ]
+    },
+    {
+      "block": "calcite",
+      "texture": "calcite",
+      "rgb": [
+        223,
+        224,
+        221
+      ],
+      "lab": [
+        89.026,
+        -0.877,
+        1.347
+      ]
+    },
+    {
+      "block": "cartography_table",
+      "texture": "cartography_table_side3",
+      "rgb": [
+        68,
+        44,
+        20
+      ],
+      "lab": [
+        20.366,
+        8.175,
+        19.771
+      ]
+    },
+    {
+      "block": "cherry_log",
+      "texture": "cherry_log",
+      "rgb": [
+        55,
+        33,
+        44
+      ],
+      "lab": [
+        15.911,
+        12.601,
+        -2.93
+      ]
+    },
+    {
+      "block": "cherry_planks",
+      "texture": "cherry_planks",
+      "rgb": [
+        227,
+        179,
+        173
+      ],
+      "lab": [
+        77.035,
+        16.501,
+        9.718
+      ]
+    },
+    {
+      "block": "cherry_wood",
+      "texture": "cherry_log",
+      "rgb": [
+        55,
+        33,
+        44
+      ],
+      "lab": [
+        15.911,
+        12.601,
+        -2.93
+      ]
+    },
+    {
+      "block": "chiseled_deepslate",
+      "texture": "chiseled_deepslate",
+      "rgb": [
+        54,
+        54,
+        55
+      ],
+      "lab": [
+        22.648,
+        0.231,
+        -0.626
+      ]
+    },
+    {
+      "block": "chiseled_nether_bricks",
+      "texture": "chiseled_nether_bricks",
+      "rgb": [
+        47,
+        24,
+        28
+      ],
+      "lab": [
+        11.563,
+        12.172,
+        2.198
+      ]
+    },
+    {
+      "block": "chiseled_polished_blackstone",
+      "texture": "chiseled_polished_blackstone",
+      "rgb": [
+        54,
+        49,
+        57
+      ],
+      "lab": [
+        21.118,
+        4.073,
+        -4.246
+      ]
+    },
+    {
+      "block": "chiseled_quartz_block",
+      "texture": "chiseled_quartz_block",
+      "rgb": [
+        232,
+        227,
+        218
+      ],
+      "lab": [
+        90.394,
+        0.135,
+        4.988
+      ]
+    },
+    {
+      "block": "chiseled_red_sandstone",
+      "texture": "chiseled_red_sandstone",
+      "rgb": [
+        183,
+        97,
+        28
+      ],
+      "lab": [
+        50.338,
+        30.152,
+        51.127
+      ]
+    },
+    {
+      "block": "chiseled_sandstone",
+      "texture": "chiseled_sandstone",
+      "rgb": [
+        216,
+        203,
+        155
+      ],
+      "lab": [
+        81.663,
+        -2.82,
+        25.631
+      ]
+    },
+    {
+      "block": "chiseled_stone_bricks",
+      "texture": "chiseled_stone_bricks",
+      "rgb": [
+        120,
+        119,
+        120
+      ],
+      "lab": [
+        50.148,
+        0.578,
+        -0.414
+      ]
+    },
+    {
+      "block": "clay",
+      "texture": "clay",
+      "rgb": [
+        161,
+        166,
+        179
+      ],
+      "lab": [
+        68.097,
+        0.838,
+        -7.296
+      ]
+    },
+    {
+      "block": "coal_block",
+      "texture": "coal_block",
+      "rgb": [
+        16,
+        16,
+        16
+      ],
+      "lab": [
+        4.68,
+        0,
+        0
+      ]
+    },
+    {
+      "block": "coal_ore",
+      "texture": "coal_ore",
+      "rgb": [
+        106,
+        106,
+        105
+      ],
+      "lab": [
+        44.79,
+        -0.207,
+        0.56
+      ]
+    },
+    {
+      "block": "coarse_dirt",
+      "texture": "coarse_dirt",
+      "rgb": [
+        119,
+        86,
+        59
+      ],
+      "lab": [
+        39.401,
+        10.104,
+        21.046
+      ]
+    },
+    {
+      "block": "cobbled_deepslate",
+      "texture": "cobbled_deepslate",
+      "rgb": [
+        77,
+        77,
+        81
+      ],
+      "lab": [
+        32.875,
+        0.886,
+        -2.359
+      ]
+    },
+    {
+      "block": "cobblestone",
+      "texture": "cobblestone",
+      "rgb": [
+        128,
+        127,
+        128
+      ],
+      "lab": [
+        53.305,
+        0.571,
+        -0.409
+      ]
+    },
+    {
+      "block": "copper_block",
+      "texture": "copper_block",
+      "rgb": [
+        192,
+        108,
+        80
+      ],
+      "lab": [
+        54.568,
+        30.686,
+        30.159
+      ]
+    },
+    {
+      "block": "copper_ore",
+      "texture": "copper_ore",
+      "rgb": [
+        125,
+        126,
+        120
+      ],
+      "lab": [
+        52.551,
+        -1.555,
+        3.132
+      ]
+    },
+    {
+      "block": "cracked_deepslate_bricks",
+      "texture": "cracked_deepslate_bricks",
+      "rgb": [
+        65,
+        65,
+        65
+      ],
+      "lab": [
+        27.535,
+        -0.001,
+        0
+      ]
+    },
+    {
+      "block": "cracked_deepslate_tiles",
+      "texture": "cracked_deepslate_tiles",
+      "rgb": [
+        53,
+        53,
+        53
+      ],
+      "lab": [
+        22.16,
+        -0.001,
+        0
+      ]
+    },
+    {
+      "block": "cracked_nether_bricks",
+      "texture": "cracked_nether_bricks",
+      "rgb": [
+        40,
+        20,
+        24
+      ],
+      "lab": [
+        9.136,
+        10.925,
+        1.561
+      ]
+    },
+    {
+      "block": "cracked_polished_blackstone_bricks",
+      "texture": "cracked_polished_blackstone_bricks",
+      "rgb": [
+        44,
+        38,
+        44
+      ],
+      "lab": [
+        16.022,
+        4.174,
+        -2.919
+      ]
+    },
+    {
+      "block": "cracked_stone_bricks",
+      "texture": "cracked_stone_bricks",
+      "rgb": [
+        118,
+        118,
+        118
+      ],
+      "lab": [
+        49.637,
+        -0.002,
+        0
+      ]
+    },
+    {
+      "block": "crafting_table",
+      "texture": "crafting_table_front",
+      "rgb": [
+        129,
+        106,
+        70
+      ],
+      "lab": [
+        46.202,
+        3.957,
+        23.608
+      ]
+    },
+    {
+      "block": "crimson_hyphae",
+      "texture": "crimson_stem",
+      "rgb": [
+        93,
+        26,
+        30
+      ],
+      "lab": [
+        20.675,
+        30.731,
+        14.569
+      ]
+    },
+    {
+      "block": "crimson_nylium",
+      "texture": "crimson_nylium_side",
+      "rgb": [
+        107,
+        27,
+        27
+      ],
+      "lab": [
+        23.638,
+        35.217,
+        20.865
+      ]
+    },
+    {
+      "block": "crimson_planks",
+      "texture": "crimson_planks",
+      "rgb": [
+        101,
+        49,
+        71
+      ],
+      "lab": [
+        27.896,
+        26.224,
+        -2.903
+      ]
+    },
+    {
+      "block": "crimson_stem",
+      "texture": "crimson_stem",
+      "rgb": [
+        93,
+        26,
+        30
+      ],
+      "lab": [
+        20.675,
+        30.731,
+        14.569
+      ]
+    },
+    {
+      "block": "crying_obsidian",
+      "texture": "crying_obsidian",
+      "rgb": [
+        33,
+        10,
+        60
+      ],
+      "lab": [
+        7.828,
+        24.117,
+        -27.338
+      ]
+    },
+    {
+      "block": "cut_copper",
+      "texture": "cut_copper",
+      "rgb": [
+        191,
+        107,
+        81
+      ],
+      "lab": [
+        54.227,
+        30.901,
+        29.136
+      ]
+    },
+    {
+      "block": "cut_red_sandstone",
+      "texture": "cut_red_sandstone",
+      "rgb": [
+        189,
+        102,
+        32
+      ],
+      "lab": [
+        52.319,
+        30.099,
+        51.638
+      ]
+    },
+    {
+      "block": "cut_sandstone",
+      "texture": "cut_sandstone",
+      "rgb": [
+        218,
+        206,
+        160
+      ],
+      "lab": [
+        82.694,
+        -2.946,
+        24.437
+      ]
+    },
+    {
+      "block": "cyan_concrete",
+      "texture": "cyan_concrete",
+      "rgb": [
+        21,
+        119,
+        136
+      ],
+      "lab": [
+        45.811,
+        -20.221,
+        -16.886
+      ]
+    },
+    {
+      "block": "cyan_concrete_powder",
+      "texture": "cyan_concrete_powder",
+      "rgb": [
+        37,
+        148,
+        157
+      ],
+      "lab": [
+        56.093,
+        -26.647,
+        -13.491
+      ]
+    },
+    {
+      "block": "cyan_stained_glass",
+      "texture": "cyan_stained_glass",
+      "rgb": [
+        76,
+        127,
+        153
+      ],
+      "lab": [
+        50.703,
+        -9.625,
+        -19.256
+      ]
+    },
+    {
+      "block": "cyan_terracotta",
+      "texture": "cyan_terracotta",
+      "rgb": [
+        87,
+        91,
+        91
+      ],
+      "lab": [
+        38.312,
+        -1.578,
+        -0.548
+      ]
+    },
+    {
+      "block": "cyan_wool",
+      "texture": "cyan_wool",
+      "rgb": [
+        21,
+        138,
+        145
+      ],
+      "lab": [
+        52.263,
+        -27.035,
+        -12.377
+      ]
+    },
+    {
+      "block": "dark_oak_log",
+      "texture": "dark_oak_log",
+      "rgb": [
+        60,
+        47,
+        26
+      ],
+      "lab": [
+        20.316,
+        2.64,
+        15.672
+      ]
+    },
+    {
+      "block": "dark_oak_planks",
+      "texture": "dark_oak_planks",
+      "rgb": [
+        67,
+        43,
+        20
+      ],
+      "lab": [
+        19.931,
+        8.325,
+        19.228
+      ]
+    },
+    {
+      "block": "dark_oak_wood",
+      "texture": "dark_oak_log",
+      "rgb": [
+        60,
+        47,
+        26
+      ],
+      "lab": [
+        20.316,
+        2.64,
+        15.672
+      ]
+    },
+    {
+      "block": "dark_prismarine",
+      "texture": "dark_prismarine",
+      "rgb": [
+        52,
+        92,
+        76
+      ],
+      "lab": [
+        35.802,
+        -18.322,
+        4.82
+      ]
+    },
+    {
+      "block": "dead_brain_coral_block",
+      "texture": "dead_brain_coral_block",
+      "rgb": [
+        124,
+        118,
+        114
+      ],
+      "lab": [
+        50.046,
+        1.53,
+        3.02
+      ]
+    },
+    {
+      "block": "dead_bubble_coral_block",
+      "texture": "dead_bubble_coral_block",
+      "rgb": [
+        132,
+        124,
+        119
+      ],
+      "lab": [
+        52.568,
+        2.105,
+        3.817
+      ]
+    },
+    {
+      "block": "dead_fire_coral_block",
+      "texture": "dead_fire_coral_block",
+      "rgb": [
+        132,
+        124,
+        120
+      ],
+      "lab": [
+        52.594,
+        2.288,
+        3.271
+      ]
+    },
+    {
+      "block": "dead_horn_coral_block",
+      "texture": "dead_horn_coral_block",
+      "rgb": [
+        134,
+        126,
+        122
+      ],
+      "lab": [
+        53.38,
+        2.28,
+        3.261
+      ]
+    },
+    {
+      "block": "dead_tube_coral_block",
+      "texture": "dead_tube_coral_block",
+      "rgb": [
+        130,
+        123,
+        120
+      ],
+      "lab": [
+        52.139,
+        2.09,
+        2.59
+      ]
+    },
+    {
+      "block": "deepslate",
+      "texture": "deepslate",
+      "rgb": [
+        80,
+        80,
+        83
+      ],
+      "lab": [
+        34.123,
+        0.656,
+        -1.759
+      ]
+    },
+    {
+      "block": "deepslate_bricks",
+      "texture": "deepslate_bricks",
+      "rgb": [
+        71,
+        71,
+        71
+      ],
+      "lab": [
+        30.16,
+        -0.001,
+        0
+      ]
+    },
+    {
+      "block": "deepslate_coal_ore",
+      "texture": "deepslate_coal_ore",
+      "rgb": [
+        74,
+        74,
+        76
+      ],
+      "lab": [
+        31.521,
+        0.441,
+        -1.189
+      ]
+    },
+    {
+      "block": "deepslate_copper_ore",
+      "texture": "deepslate_copper_ore",
+      "rgb": [
+        92,
+        93,
+        89
+      ],
+      "lab": [
+        39.285,
+        -1.23,
+        2.156
+      ]
+    },
+    {
+      "block": "deepslate_diamond_ore",
+      "texture": "deepslate_diamond_ore",
+      "rgb": [
+        83,
+        106,
+        107
+      ],
+      "lab": [
+        43.075,
+        -8.241,
+        -3.371
+      ]
+    },
+    {
+      "block": "deepslate_emerald_ore",
+      "texture": "deepslate_emerald_ore",
+      "rgb": [
+        78,
+        104,
+        88
+      ],
+      "lab": [
+        41.571,
+        -13.27,
+        5.912
+      ]
+    },
+    {
+      "block": "deepslate_gold_ore",
+      "texture": "deepslate_gold_ore",
+      "rgb": [
+        115,
+        103,
+        78
+      ],
+      "lab": [
+        44.083,
+        0.574,
+        15.868
+      ]
+    },
+    {
+      "block": "deepslate_iron_ore",
+      "texture": "deepslate_iron_ore",
+      "rgb": [
+        107,
+        100,
+        95
+      ],
+      "lab": [
+        42.863,
+        1.801,
+        3.826
+      ]
+    },
+    {
+      "block": "deepslate_lapis_ore",
+      "texture": "deepslate_lapis_ore",
+      "rgb": [
+        80,
+        91,
+        115
+      ],
+      "lab": [
+        38.595,
+        1.838,
+        -15.011
+      ]
+    },
+    {
+      "block": "deepslate_redstone_ore",
+      "texture": "deepslate_redstone_ore",
+      "rgb": [
+        105,
+        73,
+        75
+      ],
+      "lab": [
+        34.553,
+        13.963,
+        4.263
+      ]
+    },
+    {
+      "block": "deepslate_tiles",
+      "texture": "deepslate_tiles",
+      "rgb": [
+        55,
+        55,
+        55
+      ],
+      "lab": [
+        23.069,
+        -0.001,
+        0
+      ]
+    },
+    {
+      "block": "diamond_block",
+      "texture": "diamond_block",
+      "rgb": [
+        98,
+        237,
+        228
+      ],
+      "lab": [
+        86.386,
+        -39.535,
+        -6.943
+      ]
+    },
+    {
+      "block": "diamond_ore",
+      "texture": "diamond_ore",
+      "rgb": [
+        121,
+        141,
+        141
+      ],
+      "lab": [
+        57.112,
+        -7.14,
+        -2.412
+      ]
+    },
+    {
+      "block": "diorite",
+      "texture": "diorite",
+      "rgb": [
+        189,
+        188,
+        189
+      ],
+      "lab": [
+        76.35,
+        0.531,
+        -0.381
+      ]
+    },
+    {
+      "block": "dirt",
+      "texture": "dirt",
+      "rgb": [
+        134,
+        96,
+        67
+      ],
+      "lab": [
+        44.003,
+        11.735,
+        22.619
+      ]
+    },
+    {
+      "block": "dripstone_block",
+      "texture": "dripstone_block",
+      "rgb": [
+        134,
+        108,
+        93
+      ],
+      "lab": [
+        47.732,
+        7.94,
+        12.292
+      ]
+    },
+    {
+      "block": "emerald_block",
+      "texture": "emerald_block",
+      "rgb": [
+        42,
+        203,
+        88
+      ],
+      "lab": [
+        72.165,
+        -63.688,
+        45.518
+      ]
+    },
+    {
+      "block": "emerald_ore",
+      "texture": "emerald_ore",
+      "rgb": [
+        108,
+        136,
+        116
+      ],
+      "lab": [
+        54.087,
+        -14.228,
+        7.491
+      ]
+    },
+    {
+      "block": "end_stone",
+      "texture": "end_stone",
+      "rgb": [
+        220,
+        223,
+        158
+      ],
+      "lab": [
+        87.222,
+        -11.121,
+        31.61
+      ]
+    },
+    {
+      "block": "end_stone_bricks",
+      "texture": "end_stone_bricks",
+      "rgb": [
+        218,
+        224,
+        162
+      ],
+      "lab": [
+        87.4,
+        -11.851,
+        29.772
+      ]
+    },
+    {
+      "block": "exposed_copper",
+      "texture": "exposed_copper",
+      "rgb": [
+        161,
+        126,
+        104
+      ],
+      "lab": [
+        55.583,
+        10.342,
+        17.157
+      ]
+    },
+    {
+      "block": "exposed_cut_copper",
+      "texture": "exposed_cut_copper",
+      "rgb": [
+        155,
+        122,
+        101
+      ],
+      "lab": [
+        53.844,
+        9.737,
+        16.398
+      ]
+    },
+    {
+      "block": "fire_coral_block",
+      "texture": "fire_coral_block",
+      "rgb": [
+        164,
+        35,
+        47
+      ],
+      "lab": [
+        36.56,
+        51.951,
+        26.314
+      ]
+    },
+    {
+      "block": "fletching_table",
+      "texture": "fletching_table_front",
+      "rgb": [
+        173,
+        155,
+        111
+      ],
+      "lab": [
+        64.544,
+        0.023,
+        25.521
+      ]
+    },
+    {
+      "block": "flowering_azalea_leaves",
+      "texture": "flowering_azalea_leaves",
+      "rgb": [
+        100,
+        111,
+        61
+      ],
+      "lab": [
+        44.823,
+        -12.861,
+        26.399
+      ]
+    },
+    {
+      "block": "gilded_blackstone",
+      "texture": "gilded_blackstone",
+      "rgb": [
+        56,
+        43,
+        38
+      ],
+      "lab": [
+        18.837,
+        5.079,
+        5.538
+      ]
+    },
+    {
+      "block": "glass",
+      "texture": "glass",
+      "rgb": [
+        176,
+        214,
+        219
+      ],
+      "lab": [
+        83.145,
+        -11.368,
+        -6.605
+      ]
+    },
+    {
+      "block": "glowstone",
+      "texture": "glowstone",
+      "rgb": [
+        172,
+        131,
+        84
+      ],
+      "lab": [
+        57.699,
+        9.92,
+        31.37
+      ]
+    },
+    {
+      "block": "gold_block",
+      "texture": "gold_block",
+      "rgb": [
+        246,
+        208,
+        62
+      ],
+      "lab": [
+        84.513,
+        -0.937,
+        72.647
+      ]
+    },
+    {
+      "block": "gold_ore",
+      "texture": "gold_ore",
+      "rgb": [
+        145,
+        134,
+        107
+      ],
+      "lab": [
+        56.22,
+        -0.367,
+        16.066
+      ]
+    },
+    {
+      "block": "granite",
+      "texture": "granite",
+      "rgb": [
+        149,
+        103,
+        86
+      ],
+      "lab": [
+        47.96,
+        16.276,
+        17.013
+      ]
+    },
+    {
+      "block": "gravel",
+      "texture": "gravel",
+      "rgb": [
+        132,
+        127,
+        127
+      ],
+      "lab": [
+        53.618,
+        1.881,
+        0.672
+      ]
+    },
+    {
+      "block": "gray_concrete",
+      "texture": "gray_concrete",
+      "rgb": [
+        55,
+        58,
+        62
+      ],
+      "lab": [
+        24.277,
+        -0.305,
+        -2.913
+      ]
+    },
+    {
+      "block": "gray_concrete_powder",
+      "texture": "gray_concrete_powder",
+      "rgb": [
+        77,
+        81,
+        85
+      ],
+      "lab": [
+        34.228,
+        -0.696,
+        -2.897
+      ]
+    },
+    {
+      "block": "gray_stained_glass",
+      "texture": "gray_stained_glass",
+      "rgb": [
+        76,
+        76,
+        76
+      ],
+      "lab": [
+        32.319,
+        -0.001,
+        0
+      ]
+    },
+    {
+      "block": "gray_terracotta",
+      "texture": "gray_terracotta",
+      "rgb": [
+        58,
+        42,
+        36
+      ],
+      "lab": [
+        18.727,
+        6.399,
+        6.804
+      ]
+    },
+    {
+      "block": "gray_wool",
+      "texture": "gray_wool",
+      "rgb": [
+        63,
+        68,
+        72
+      ],
+      "lab": [
+        28.535,
+        -1.103,
+        -3.119
+      ]
+    },
+    {
+      "block": "green_concrete",
+      "texture": "green_concrete",
+      "rgb": [
+        73,
+        91,
+        36
+      ],
+      "lab": [
+        36.034,
+        -16.646,
+        28.959
+      ]
+    },
+    {
+      "block": "green_concrete_powder",
+      "texture": "green_concrete_powder",
+      "rgb": [
+        97,
+        119,
+        45
+      ],
+      "lab": [
+        46.875,
+        -20.18,
+        37.152
+      ]
+    },
+    {
+      "block": "green_stained_glass",
+      "texture": "green_stained_glass",
+      "rgb": [
+        102,
+        127,
+        51
+      ],
+      "lab": [
+        49.789,
+        -21.63,
+        37.608
+      ]
+    },
+    {
+      "block": "green_terracotta",
+      "texture": "green_terracotta",
+      "rgb": [
+        76,
+        83,
+        42
+      ],
+      "lab": [
+        33.753,
+        -10.072,
+        22.981
+      ]
+    },
+    {
+      "block": "green_wool",
+      "texture": "green_wool",
+      "rgb": [
+        85,
+        110,
+        28
+      ],
+      "lab": [
+        43.014,
+        -22.07,
+        40.431
+      ]
+    },
+    {
+      "block": "hay_block",
+      "texture": "hay_block_side",
+      "rgb": [
+        166,
+        136,
+        38
+      ],
+      "lab": [
+        57.901,
+        1.311,
+        53.423
+      ]
+    },
+    {
+      "block": "honeycomb_block",
+      "texture": "honeycomb_block",
+      "rgb": [
+        229,
+        148,
+        30
+      ],
+      "lab": [
+        67.973,
+        22.299,
+        67.515
+      ]
+    },
+    {
+      "block": "horn_coral_block",
+      "texture": "horn_coral_block",
+      "rgb": [
+        216,
+        200,
+        66
+      ],
+      "lab": [
+        79.786,
+        -9.357,
+        65.693
+      ]
+    },
+    {
+      "block": "ice",
+      "texture": "ice",
+      "rgb": [
+        146,
+        184,
+        254
+      ],
+      "lab": [
+        74.537,
+        4.797,
+        -38.601
+      ]
+    },
+    {
+      "block": "iron_block",
+      "texture": "iron_block",
+      "rgb": [
+        220,
+        220,
+        220
+      ],
+      "lab": [
+        87.761,
+        -0.003,
+        0.001
+      ]
+    },
+    {
+      "block": "iron_ore",
+      "texture": "iron_ore",
+      "rgb": [
+        136,
+        129,
+        123
+      ],
+      "lab": [
+        54.412,
+        1.518,
+        4.192
+      ]
+    },
+    {
+      "block": "jukebox",
+      "texture": "jukebox_side",
+      "rgb": [
+        89,
+        59,
+        41
+      ],
+      "lab": [
+        27.879,
+        10.881,
+        16.468
+      ]
+    },
+    {
+      "block": "jungle_log",
+      "texture": "jungle_log",
+      "rgb": [
+        85,
+        68,
+        25
+      ],
+      "lab": [
+        29.753,
+        1.753,
+        28.046
+      ]
+    },
+    {
+      "block": "jungle_planks",
+      "texture": "jungle_planks",
+      "rgb": [
+        160,
+        115,
+        81
+      ],
+      "lab": [
+        52.209,
+        13.519,
+        25.764
+      ]
+    },
+    {
+      "block": "jungle_wood",
+      "texture": "jungle_log",
+      "rgb": [
+        85,
+        68,
+        25
+      ],
+      "lab": [
+        29.753,
+        1.753,
+        28.046
+      ]
+    },
+    {
+      "block": "lapis_block",
+      "texture": "lapis_block",
+      "rgb": [
+        31,
+        67,
+        140
+      ],
+      "lab": [
+        29.907,
+        14.699,
+        -44.317
+      ]
+    },
+    {
+      "block": "lapis_ore",
+      "texture": "lapis_ore",
+      "rgb": [
+        107,
+        118,
+        141
+      ],
+      "lab": [
+        49.503,
+        1.283,
+        -13.876
+      ]
+    },
+    {
+      "block": "light_blue_concrete",
+      "texture": "light_blue_concrete",
+      "rgb": [
+        36,
+        137,
+        199
+      ],
+      "lab": [
+        54.436,
+        -6.318,
+        -40.02
+      ]
+    },
+    {
+      "block": "light_blue_concrete_powder",
+      "texture": "light_blue_concrete_powder",
+      "rgb": [
+        74,
+        181,
+        213
+      ],
+      "lab": [
+        68.971,
+        -20.781,
+        -25.179
+      ]
+    },
+    {
+      "block": "light_blue_stained_glass",
+      "texture": "light_blue_stained_glass",
+      "rgb": [
+        102,
+        153,
+        216
+      ],
+      "lab": [
+        62.137,
+        0.815,
+        -37.325
+      ]
+    },
+    {
+      "block": "light_blue_terracotta",
+      "texture": "light_blue_terracotta",
+      "rgb": [
+        113,
+        109,
+        138
+      ],
+      "lab": [
+        47.343,
+        7.932,
+        -15.333
+      ]
+    },
+    {
+      "block": "light_blue_wool",
+      "texture": "light_blue_wool",
+      "rgb": [
+        58,
+        175,
+        217
+      ],
+      "lab": [
+        66.95,
+        -18.655,
+        -30.52
+      ]
+    },
+    {
+      "block": "light_gray_concrete",
+      "texture": "light_gray_concrete",
+      "rgb": [
+        125,
+        125,
+        115
+      ],
+      "lab": [
+        52.136,
+        -1.927,
+        5.453
+      ]
+    },
+    {
+      "block": "light_gray_concrete_powder",
+      "texture": "light_gray_concrete_powder",
+      "rgb": [
+        155,
+        155,
+        148
+      ],
+      "lab": [
+        63.794,
+        -1.319,
+        3.666
+      ]
+    },
+    {
+      "block": "light_gray_stained_glass",
+      "texture": "light_gray_stained_glass",
+      "rgb": [
+        153,
+        153,
+        153
+      ],
+      "lab": [
+        63.223,
+        -0.002,
+        0
+      ]
+    },
+    {
+      "block": "light_gray_terracotta",
+      "texture": "light_gray_terracotta",
+      "rgb": [
+        135,
+        107,
+        98
+      ],
+      "lab": [
+        47.687,
+        9.687,
+        9.275
+      ]
+    },
+    {
+      "block": "light_gray_wool",
+      "texture": "light_gray_wool",
+      "rgb": [
+        142,
+        142,
+        135
+      ],
+      "lab": [
+        58.832,
+        -1.337,
+        3.726
+      ]
+    },
+    {
+      "block": "lime_concrete",
+      "texture": "lime_concrete",
+      "rgb": [
+        94,
+        169,
+        25
+      ],
+      "lab": [
+        62.359,
+        -45.511,
+        59.552
+      ]
+    },
+    {
+      "block": "lime_concrete_powder",
+      "texture": "lime_concrete_powder",
+      "rgb": [
+        125,
+        189,
+        42
+      ],
+      "lab": [
+        70.121,
+        -42.234,
+        62.467
+      ]
+    },
+    {
+      "block": "lime_stained_glass",
+      "texture": "lime_stained_glass",
+      "rgb": [
+        127,
+        204,
+        25
+      ],
+      "lab": [
+        74.677,
+        -48.464,
+        70.759
+      ]
+    },
+    {
+      "block": "lime_terracotta",
+      "texture": "lime_terracotta",
+      "rgb": [
+        104,
+        118,
+        53
+      ],
+      "lab": [
+        47.18,
+        -15.841,
+        33.635
+      ]
+    },
+    {
+      "block": "lime_wool",
+      "texture": "lime_wool",
+      "rgb": [
+        112,
+        185,
+        26
+      ],
+      "lab": [
+        68.18,
+        -45.865,
+        64.722
+      ]
+    },
+    {
+      "block": "lodestone",
+      "texture": "lodestone_side",
+      "rgb": [
+        119,
+        120,
+        123
+      ],
+      "lab": [
+        50.435,
+        0.234,
+        -1.772
+      ]
+    },
+    {
+      "block": "magenta_concrete",
+      "texture": "magenta_concrete",
+      "rgb": [
+        169,
+        48,
+        159
+      ],
+      "lab": [
+        42.845,
+        60.964,
+        -34.319
+      ]
+    },
+    {
+      "block": "magenta_concrete_powder",
+      "texture": "magenta_concrete_powder",
+      "rgb": [
+        193,
+        84,
+        185
+      ],
+      "lab": [
+        53.149,
+        56.595,
+        -33.194
+      ]
+    },
+    {
+      "block": "magenta_stained_glass",
+      "texture": "magenta_stained_glass",
+      "rgb": [
+        178,
+        76,
+        216
+      ],
+      "lab": [
+        51.374,
+        62.208,
+        -53.931
+      ]
+    },
+    {
+      "block": "magenta_terracotta",
+      "texture": "magenta_terracotta",
+      "rgb": [
+        150,
+        88,
+        109
+      ],
+      "lab": [
+        45.038,
+        28.373,
+        -0.925
+      ]
+    },
+    {
+      "block": "magenta_wool",
+      "texture": "magenta_wool",
+      "rgb": [
+        190,
+        69,
+        180
+      ],
+      "lab": [
+        50.098,
+        61.477,
+        -35.098
+      ]
+    },
+    {
+      "block": "magma_block",
+      "texture": "magma",
+      "rgb": [
+        142,
+        63,
+        31
+      ],
+      "lab": [
+        36.755,
+        31.413,
+        34.745
+      ]
+    },
+    {
+      "block": "mangrove_log",
+      "texture": "mangrove_log",
+      "rgb": [
+        84,
+        67,
+        41
+      ],
+      "lab": [
+        29.562,
+        3.399,
+        18.503
+      ]
+    },
+    {
+      "block": "mangrove_planks",
+      "texture": "mangrove_planks",
+      "rgb": [
+        118,
+        54,
+        49
+      ],
+      "lab": [
+        31.144,
+        27.569,
+        16.452
+      ]
+    },
+    {
+      "block": "mangrove_wood",
+      "texture": "mangrove_log",
+      "rgb": [
+        84,
+        67,
+        41
+      ],
+      "lab": [
+        29.562,
+        3.399,
+        18.503
+      ]
+    },
+    {
+      "block": "melon",
+      "texture": "melon_side",
+      "rgb": [
+        114,
+        146,
+        30
+      ],
+      "lab": [
+        56.316,
+        -27.517,
+        53.134
+      ]
+    },
+    {
+      "block": "moss_block",
+      "texture": "moss_block",
+      "rgb": [
+        89,
+        110,
+        45
+      ],
+      "lab": [
+        43.456,
+        -18.908,
+        33.13
+      ]
+    },
+    {
+      "block": "mossy_cobblestone",
+      "texture": "mossy_cobblestone",
+      "rgb": [
+        110,
+        119,
+        95
+      ],
+      "lab": [
+        48.679,
+        -8.036,
+        12.096
+      ]
+    },
+    {
+      "block": "mossy_stone_bricks",
+      "texture": "mossy_stone_bricks",
+      "rgb": [
+        115,
+        121,
+        105
+      ],
+      "lab": [
+        49.905,
+        -5.395,
+        8.014
+      ]
+    },
+    {
+      "block": "mud",
+      "texture": "mud",
+      "rgb": [
+        60,
+        57,
+        61
+      ],
+      "lab": [
+        24.398,
+        2.199,
+        -2.014
+      ]
+    },
+    {
+      "block": "mud_bricks",
+      "texture": "mud_bricks",
+      "rgb": [
+        137,
+        104,
+        79
+      ],
+      "lab": [
+        46.69,
+        9.708,
+        19.183
+      ]
+    },
+    {
+      "block": "muddy_mangrove_roots",
+      "texture": "muddy_mangrove_roots_side",
+      "rgb": [
+        68,
+        59,
+        48
+      ],
+      "lab": [
+        25.474,
+        1.863,
+        8.27
+      ]
+    },
+    {
+      "block": "mycelium",
+      "texture": "mycelium_side",
+      "rgb": [
+        114,
+        88,
+        72
+      ],
+      "lab": [
+        39.623,
+        8.252,
+        13.387
+      ]
+    },
+    {
+      "block": "nether_bricks",
+      "texture": "nether_bricks",
+      "rgb": [
+        44,
+        22,
+        26
+      ],
+      "lab": [
+        10.439,
+        11.792,
+        2.011
+      ]
+    },
+    {
+      "block": "nether_gold_ore",
+      "texture": "nether_gold_ore",
+      "rgb": [
+        115,
+        55,
+        42
+      ],
+      "lab": [
+        30.749,
+        25.162,
+        20.282
+      ]
+    },
+    {
+      "block": "nether_quartz_ore",
+      "texture": "nether_quartz_ore",
+      "rgb": [
+        118,
+        66,
+        62
+      ],
+      "lab": [
+        34.184,
+        21.989,
+        12.247
+      ]
+    },
+    {
+      "block": "nether_wart_block",
+      "texture": "nether_wart_block",
+      "rgb": [
+        115,
+        3,
+        2
+      ],
+      "lab": [
+        22.708,
+        43.876,
+        33.43
+      ]
+    },
+    {
+      "block": "netherite_block",
+      "texture": "netherite_block",
+      "rgb": [
+        67,
+        61,
+        64
+      ],
+      "lab": [
+        26.451,
+        3.222,
+        -0.905
+      ]
+    },
+    {
+      "block": "netherrack",
+      "texture": "netherrack",
+      "rgb": [
+        98,
+        38,
+        38
+      ],
+      "lab": [
+        24.076,
+        27.23,
+        13.737
+      ]
+    },
+    {
+      "block": "note_block",
+      "texture": "note_block",
+      "rgb": [
+        89,
+        59,
+        41
+      ],
+      "lab": [
+        27.879,
+        10.881,
+        16.468
+      ]
+    },
+    {
+      "block": "oak_log",
+      "texture": "oak_log",
+      "rgb": [
+        109,
+        85,
+        51
+      ],
+      "lab": [
+        37.821,
+        5.255,
+        23.521
+      ]
+    },
+    {
+      "block": "oak_planks",
+      "texture": "oak_planks",
+      "rgb": [
+        162,
+        131,
+        79
+      ],
+      "lab": [
+        56.565,
+        5.118,
+        32.435
+      ]
+    },
+    {
+      "block": "oak_wood",
+      "texture": "oak_log",
+      "rgb": [
+        109,
+        85,
+        51
+      ],
+      "lab": [
+        37.821,
+        5.255,
+        23.521
+      ]
+    },
+    {
+      "block": "obsidian",
+      "texture": "obsidian",
+      "rgb": [
+        15,
+        11,
+        25
+      ],
+      "lab": [
+        3.713,
+        4.152,
+        -7.514
+      ]
+    },
+    {
+      "block": "ochre_froglight",
+      "texture": "ochre_froglight_side",
+      "rgb": [
+        245,
+        233,
+        182
+      ],
+      "lab": [
+        92.163,
+        -3.693,
+        26.312
+      ]
+    },
+    {
+      "block": "orange_concrete",
+      "texture": "orange_concrete",
+      "rgb": [
+        224,
+        97,
+        1
+      ],
+      "lab": [
+        56.49,
+        46.008,
+        65.291
+      ]
+    },
+    {
+      "block": "orange_concrete_powder",
+      "texture": "orange_concrete_powder",
+      "rgb": [
+        227,
+        132,
+        32
+      ],
+      "lab": [
+        64.114,
+        29.978,
+        63.715
+      ]
+    },
+    {
+      "block": "orange_stained_glass",
+      "texture": "orange_stained_glass",
+      "rgb": [
+        216,
+        127,
+        51
+      ],
+      "lab": [
+        61.672,
+        28.665,
+        53.785
+      ]
+    },
+    {
+      "block": "orange_terracotta",
+      "texture": "orange_terracotta",
+      "rgb": [
+        162,
+        84,
+        38
+      ],
+      "lab": [
+        44.467,
+        28.722,
+        40.08
+      ]
+    },
+    {
+      "block": "orange_wool",
+      "texture": "orange_wool",
+      "rgb": [
+        241,
+        118,
+        20
+      ],
+      "lab": [
+        63.106,
+        42.519,
+        67.114
+      ]
+    },
+    {
+      "block": "oxidized_copper",
+      "texture": "oxidized_copper",
+      "rgb": [
+        82,
+        163,
+        133
+      ],
+      "lab": [
+        61.377,
+        -32.174,
+        8.042
+      ]
+    },
+    {
+      "block": "oxidized_cut_copper",
+      "texture": "oxidized_cut_copper",
+      "rgb": [
+        80,
+        154,
+        126
+      ],
+      "lab": [
+        58.341,
+        -30.004,
+        7.641
+      ]
+    },
+    {
+      "block": "packed_ice",
+      "texture": "packed_ice",
+      "rgb": [
+        142,
+        180,
+        250
+      ],
+      "lab": [
+        73.084,
+        4.92,
+        -38.722
+      ]
+    },
+    {
+      "block": "packed_mud",
+      "texture": "packed_mud",
+      "rgb": [
+        142,
+        107,
+        80
+      ],
+      "lab": [
+        48.066,
+        10.246,
+        20.529
+      ]
+    },
+    {
+      "block": "pearlescent_froglight",
+      "texture": "pearlescent_froglight_side",
+      "rgb": [
+        236,
+        225,
+        229
+      ],
+      "lab": [
+        90.478,
+        4.424,
+        -0.611
+      ]
+    },
+    {
+      "block": "pink_concrete",
+      "texture": "pink_concrete",
+      "rgb": [
+        214,
+        101,
+        143
+      ],
+      "lab": [
+        57.646,
+        48.771,
+        -1.635
+      ]
+    },
+    {
+      "block": "pink_concrete_powder",
+      "texture": "pink_concrete_powder",
+      "rgb": [
+        229,
+        153,
+        181
+      ],
+      "lab": [
+        71.405,
+        32.309,
+        -2.798
+      ]
+    },
+    {
+      "block": "pink_stained_glass",
+      "texture": "pink_stained_glass",
+      "rgb": [
+        242,
+        127,
+        165
+      ],
+      "lab": [
+        67.109,
+        48.07,
+        0.05
+      ]
+    },
+    {
+      "block": "pink_terracotta",
+      "texture": "pink_terracotta",
+      "rgb": [
+        162,
+        78,
+        79
+      ],
+      "lab": [
+        43.795,
+        34.807,
+        15.855
+      ]
+    },
+    {
+      "block": "pink_wool",
+      "texture": "pink_wool",
+      "rgb": [
+        238,
+        141,
+        172
+      ],
+      "lab": [
+        69.618,
+        40.501,
+        -0.281
+      ]
+    },
+    {
+      "block": "podzol",
+      "texture": "podzol_side",
+      "rgb": [
+        123,
+        88,
+        57
+      ],
+      "lab": [
+        40.388,
+        10.516,
+        23.585
+      ]
+    },
+    {
+      "block": "polished_andesite",
+      "texture": "polished_andesite",
+      "rgb": [
+        132,
+        135,
+        134
+      ],
+      "lab": [
+        56.042,
+        -1.309,
+        0.149
+      ]
+    },
+    {
+      "block": "polished_basalt",
+      "texture": "polished_basalt_side",
+      "rgb": [
+        89,
+        88,
+        92
+      ],
+      "lab": [
+        37.619,
+        1.257,
+        -2.165
+      ]
+    },
+    {
+      "block": "polished_blackstone",
+      "texture": "polished_blackstone",
+      "rgb": [
+        53,
+        49,
+        57
+      ],
+      "lab": [
+        21.014,
+        3.65,
+        -4.412
+      ]
+    },
+    {
+      "block": "polished_blackstone_bricks",
+      "texture": "polished_blackstone_bricks",
+      "rgb": [
+        48,
+        43,
+        50
+      ],
+      "lab": [
+        18.305,
+        3.907,
+        -3.686
+      ]
+    },
+    {
+      "block": "polished_deepslate",
+      "texture": "polished_deepslate",
+      "rgb": [
+        72,
+        73,
+        73
+      ],
+      "lab": [
+        30.935,
+        -0.413,
+        -0.144
+      ]
+    },
+    {
+      "block": "polished_diorite",
+      "texture": "polished_diorite",
+      "rgb": [
+        193,
+        193,
+        195
+      ],
+      "lab": [
+        78.121,
+        0.368,
+        -1.002
+      ]
+    },
+    {
+      "block": "polished_granite",
+      "texture": "polished_granite",
+      "rgb": [
+        154,
+        107,
+        89
+      ],
+      "lab": [
+        49.627,
+        16.43,
+        17.607
+      ]
+    },
+    {
+      "block": "prismarine",
+      "texture": "prismarine",
+      "rgb": [
+        99,
+        162,
+        146
+      ],
+      "lab": [
+        62.14,
+        -24.102,
+        1.943
+      ]
+    },
+    {
+      "block": "prismarine_bricks",
+      "texture": "prismarine_bricks",
+      "rgb": [
+        99,
+        172,
+        158
+      ],
+      "lab": [
+        65.455,
+        -26.248,
+        0.062
+      ]
+    },
+    {
+      "block": "pumpkin",
+      "texture": "pumpkin_side",
+      "rgb": [
+        196,
+        115,
+        24
+      ],
+      "lab": [
+        56.154,
+        25.84,
+        58.036
+      ]
+    },
+    {
+      "block": "purple_concrete",
+      "texture": "purple_concrete",
+      "rgb": [
+        100,
+        32,
+        156
+      ],
+      "lab": [
+        29.77,
+        51.945,
+        -54.074
+      ]
+    },
+    {
+      "block": "purple_concrete_powder",
+      "texture": "purple_concrete_powder",
+      "rgb": [
+        132,
+        56,
+        178
+      ],
+      "lab": [
+        39.494,
+        52.971,
+        -51.311
+      ]
+    },
+    {
+      "block": "purple_stained_glass",
+      "texture": "purple_stained_glass",
+      "rgb": [
+        127,
+        63,
+        178
+      ],
+      "lab": [
+        40.051,
+        48.5,
+        -50.447
+      ]
+    },
+    {
+      "block": "purple_terracotta",
+      "texture": "purple_terracotta",
+      "rgb": [
+        118,
+        70,
+        86
+      ],
+      "lab": [
+        35.8,
+        22.88,
+        -0.695
+      ]
+    },
+    {
+      "block": "purple_wool",
+      "texture": "purple_wool",
+      "rgb": [
+        122,
+        42,
+        173
+      ],
+      "lab": [
+        35.618,
+        55.84,
+        -54.677
+      ]
+    },
+    {
+      "block": "purpur_block",
+      "texture": "purpur_block",
+      "rgb": [
+        170,
+        126,
+        170
+      ],
+      "lab": [
+        58.388,
+        24.618,
+        -16.712
+      ]
+    },
+    {
+      "block": "purpur_pillar",
+      "texture": "purpur_pillar",
+      "rgb": [
+        172,
+        130,
+        172
+      ],
+      "lab": [
+        59.631,
+        23.431,
+        -15.951
+      ]
+    },
+    {
+      "block": "quartz_block",
+      "texture": "quartz_block_side",
+      "rgb": [
+        236,
+        230,
+        223
+      ],
+      "lab": [
+        91.575,
+        0.815,
+        4.123
+      ]
+    },
+    {
+      "block": "quartz_bricks",
+      "texture": "quartz_bricks",
+      "rgb": [
+        235,
+        229,
+        222
+      ],
+      "lab": [
+        91.223,
+        0.816,
+        4.126
+      ]
+    },
+    {
+      "block": "quartz_pillar",
+      "texture": "quartz_pillar",
+      "rgb": [
+        236,
+        231,
+        224
+      ],
+      "lab": [
+        91.849,
+        0.472,
+        3.998
+      ]
+    },
+    {
+      "block": "raw_copper_block",
+      "texture": "raw_copper_block",
+      "rgb": [
+        154,
+        106,
+        79
+      ],
+      "lab": [
+        49.184,
+        15.894,
+        22.84
+      ]
+    },
+    {
+      "block": "raw_gold_block",
+      "texture": "raw_gold_block",
+      "rgb": [
+        222,
+        169,
+        47
+      ],
+      "lab": [
+        72.305,
+        8.575,
+        65.639
+      ]
+    },
+    {
+      "block": "raw_iron_block",
+      "texture": "raw_iron_block",
+      "rgb": [
+        166,
+        136,
+        107
+      ],
+      "lab": [
+        58.768,
+        7.151,
+        19.874
+      ]
+    },
+    {
+      "block": "red_concrete",
+      "texture": "red_concrete",
+      "rgb": [
+        142,
+        33,
+        33
+      ],
+      "lab": [
+        31.693,
+        45.083,
+        28.176
+      ]
+    },
+    {
+      "block": "red_concrete_powder",
+      "texture": "red_concrete_powder",
+      "rgb": [
+        168,
+        54,
+        51
+      ],
+      "lab": [
+        39.923,
+        46.438,
+        28.087
+      ]
+    },
+    {
+      "block": "red_nether_bricks",
+      "texture": "red_nether_bricks",
+      "rgb": [
+        70,
+        7,
+        9
+      ],
+      "lab": [
+        12.443,
+        29.04,
+        15.685
+      ]
+    },
+    {
+      "block": "red_sand",
+      "texture": "red_sand",
+      "rgb": [
+        191,
+        103,
+        33
+      ],
+      "lab": [
+        52.829,
+        30.429,
+        51.803
+      ]
+    },
+    {
+      "block": "red_sandstone",
+      "texture": "red_sandstone",
+      "rgb": [
+        187,
+        99,
+        29
+      ],
+      "lab": [
+        51.359,
+        30.781,
+        51.853
+      ]
+    },
+    {
+      "block": "red_stained_glass",
+      "texture": "red_stained_glass",
+      "rgb": [
+        153,
+        51,
+        51
+      ],
+      "lab": [
+        36.708,
+        42.528,
+        23.534
+      ]
+    },
+    {
+      "block": "red_terracotta",
+      "texture": "red_terracotta",
+      "rgb": [
+        143,
+        61,
+        47
+      ],
+      "lab": [
+        36.713,
+        33.731,
+        25.592
+      ]
+    },
+    {
+      "block": "red_wool",
+      "texture": "red_wool",
+      "rgb": [
+        161,
+        39,
+        35
+      ],
+      "lab": [
+        36.275,
+        49.182,
+        33.073
+      ]
+    },
+    {
+      "block": "redstone_block",
+      "texture": "redstone_block",
+      "rgb": [
+        176,
+        25,
+        5
+      ],
+      "lab": [
+        37.734,
+        57.011,
+        49.415
+      ]
+    },
+    {
+      "block": "redstone_lamp",
+      "texture": "redstone_lamp",
+      "rgb": [
+        95,
+        55,
+        30
+      ],
+      "lab": [
+        27.462,
+        15.23,
+        22.965
+      ]
+    },
+    {
+      "block": "redstone_ore",
+      "texture": "redstone_ore",
+      "rgb": [
+        140,
+        110,
+        110
+      ],
+      "lab": [
+        49.318,
+        11.858,
+        4.538
+      ]
+    },
+    {
+      "block": "reinforced_deepslate",
+      "texture": "reinforced_deepslate_side",
+      "rgb": [
+        102,
+        109,
+        101
+      ],
+      "lab": [
+        45.223,
+        -4.332,
+        3.549
+      ]
+    },
+    {
+      "block": "rooted_dirt",
+      "texture": "rooted_dirt",
+      "rgb": [
+        144,
+        104,
+        77
+      ],
+      "lab": [
+        47.452,
+        12.52,
+        21.506
+      ]
+    },
+    {
+      "block": "sand",
+      "texture": "sand",
+      "rgb": [
+        219,
+        207,
+        163
+      ],
+      "lab": [
+        83.089,
+        -2.679,
+        23.417
+      ]
+    },
+    {
+      "block": "sandstone",
+      "texture": "sandstone",
+      "rgb": [
+        216,
+        203,
+        156
+      ],
+      "lab": [
+        81.682,
+        -2.688,
+        25.131
+      ]
+    },
+    {
+      "block": "sculk",
+      "texture": "sculk",
+      "rgb": [
+        13,
+        28,
+        34
+      ],
+      "lab": [
+        9.251,
+        -4.256,
+        -6.118
+      ]
+    },
+    {
+      "block": "sculk_catalyst",
+      "texture": "sculk_catalyst_side",
+      "rgb": [
+        77,
+        94,
+        90
+      ],
+      "lab": [
+        38.413,
+        -7.419,
+        0.124
+      ]
+    },
+    {
+      "block": "sea_lantern",
+      "texture": "sea_lantern",
+      "rgb": [
+        172,
+        200,
+        191
+      ],
+      "lab": [
+        78.368,
+        -11.18,
+        1.334
+      ]
+    },
+    {
+      "block": "shroomlight",
+      "texture": "shroomlight",
+      "rgb": [
+        241,
+        147,
+        71
+      ],
+      "lab": [
+        69.489,
+        29.267,
+        53.781
+      ]
+    },
+    {
+      "block": "smithing_table",
+      "texture": "smithing_table_front",
+      "rgb": [
+        57,
+        37,
+        39
+      ],
+      "lab": [
+        17.177,
+        9.84,
+        2.502
+      ]
+    },
+    {
+      "block": "smooth_basalt",
+      "texture": "smooth_basalt",
+      "rgb": [
+        73,
+        72,
+        78
+      ],
+      "lab": [
+        30.881,
+        1.761,
+        -3.427
+      ]
+    },
+    {
+      "block": "smooth_quartz",
+      "texture": "quartz_block_bottom",
+      "rgb": [
+        237,
+        230,
+        224
+      ],
+      "lab": [
+        91.676,
+        1.327,
+        3.757
+      ]
+    },
+    {
+      "block": "smooth_red_sandstone",
+      "texture": "red_sandstone_top",
+      "rgb": [
+        181,
+        98,
+        31
+      ],
+      "lab": [
+        50.288,
+        28.863,
+        49.795
+      ]
+    },
+    {
+      "block": "smooth_sandstone",
+      "texture": "sandstone_top",
+      "rgb": [
+        224,
+        214,
+        170
+      ],
+      "lab": [
+        85.425,
+        -3.448,
+        23.021
+      ]
+    },
+    {
+      "block": "smooth_stone",
+      "texture": "smooth_stone",
+      "rgb": [
+        159,
+        159,
+        159
+      ],
+      "lab": [
+        65.491,
+        -0.002,
+        0
+      ]
+    },
+    {
+      "block": "snow_block",
+      "texture": "snow",
+      "rgb": [
+        249,
+        254,
+        254
+      ],
+      "lab": [
+        99.291,
+        -1.644,
+        -0.574
+      ]
+    },
+    {
+      "block": "soul_sand",
+      "texture": "soul_sand",
+      "rgb": [
+        81,
+        62,
+        51
+      ],
+      "lab": [
+        27.937,
+        6.483,
+        9.943
+      ]
+    },
+    {
+      "block": "soul_soil",
+      "texture": "soul_soil",
+      "rgb": [
+        76,
+        58,
+        47
+      ],
+      "lab": [
+        26.064,
+        6.122,
+        9.883
+      ]
+    },
+    {
+      "block": "sponge",
+      "texture": "sponge",
+      "rgb": [
+        196,
+        192,
+        75
+      ],
+      "lab": [
+        76.035,
+        -13.208,
+        57.649
+      ]
+    },
+    {
+      "block": "spruce_log",
+      "texture": "spruce_log",
+      "rgb": [
+        59,
+        38,
+        17
+      ],
+      "lab": [
+        17.258,
+        7.264,
+        17.622
+      ]
+    },
+    {
+      "block": "spruce_planks",
+      "texture": "spruce_planks",
+      "rgb": [
+        115,
+        85,
+        49
+      ],
+      "lab": [
+        38.489,
+        7.86,
+        25.664
+      ]
+    },
+    {
+      "block": "spruce_wood",
+      "texture": "spruce_log",
+      "rgb": [
+        59,
+        38,
+        17
+      ],
+      "lab": [
+        17.258,
+        7.264,
+        17.622
+      ]
+    },
+    {
+      "block": "stone",
+      "texture": "stone",
+      "rgb": [
+        126,
+        126,
+        126
+      ],
+      "lab": [
+        52.8,
+        -0.002,
+        0
+      ]
+    },
+    {
+      "block": "stone_bricks",
+      "texture": "stone_bricks",
+      "rgb": [
+        122,
+        122,
+        122
+      ],
+      "lab": [
+        51.223,
+        -0.002,
+        0
+      ]
+    },
+    {
+      "block": "stripped_acacia_log",
+      "texture": "stripped_acacia_log",
+      "rgb": [
+        175,
+        93,
+        60
+      ],
+      "lab": [
+        48.6,
+        30.444,
+        33.506
+      ]
+    },
+    {
+      "block": "stripped_acacia_wood",
+      "texture": "stripped_acacia_log",
+      "rgb": [
+        175,
+        93,
+        60
+      ],
+      "lab": [
+        48.6,
+        30.444,
+        33.506
+      ]
+    },
+    {
+      "block": "stripped_bamboo_block",
+      "texture": "stripped_bamboo_block",
+      "rgb": [
+        193,
+        173,
+        80
+      ],
+      "lab": [
+        70.737,
+        -4.284,
+        49.485
+      ]
+    },
+    {
+      "block": "stripped_birch_log",
+      "texture": "stripped_birch_log",
+      "rgb": [
+        197,
+        176,
+        118
+      ],
+      "lab": [
+        72.382,
+        -0.661,
+        32.466
+      ]
+    },
+    {
+      "block": "stripped_birch_wood",
+      "texture": "stripped_birch_log",
+      "rgb": [
+        197,
+        176,
+        118
+      ],
+      "lab": [
+        72.382,
+        -0.661,
+        32.466
+      ]
+    },
+    {
+      "block": "stripped_cherry_log",
+      "texture": "stripped_cherry_log",
+      "rgb": [
+        215,
+        145,
+        149
+      ],
+      "lab": [
+        67.18,
+        27.006,
+        8.733
+      ]
+    },
+    {
+      "block": "stripped_cherry_wood",
+      "texture": "stripped_cherry_log",
+      "rgb": [
+        215,
+        145,
+        149
+      ],
+      "lab": [
+        67.18,
+        27.006,
+        8.733
+      ]
+    },
+    {
+      "block": "stripped_crimson_hyphae",
+      "texture": "stripped_crimson_stem",
+      "rgb": [
+        137,
+        57,
+        90
+      ],
+      "lab": [
+        35.954,
+        37.744,
+        -2.681
+      ]
+    },
+    {
+      "block": "stripped_crimson_stem",
+      "texture": "stripped_crimson_stem",
+      "rgb": [
+        137,
+        57,
+        90
+      ],
+      "lab": [
+        35.954,
+        37.744,
+        -2.681
+      ]
+    },
+    {
+      "block": "stripped_dark_oak_log",
+      "texture": "stripped_dark_oak_log",
+      "rgb": [
+        73,
+        57,
+        36
+      ],
+      "lab": [
+        25.169,
+        3.82,
+        15.751
+      ]
+    },
+    {
+      "block": "stripped_dark_oak_wood",
+      "texture": "stripped_dark_oak_log",
+      "rgb": [
+        73,
+        57,
+        36
+      ],
+      "lab": [
+        25.169,
+        3.82,
+        15.751
+      ]
+    },
+    {
+      "block": "stripped_jungle_log",
+      "texture": "stripped_jungle_log",
+      "rgb": [
+        171,
+        133,
+        85
+      ],
+      "lab": [
+        58.123,
+        8.467,
+        31.338
+      ]
+    },
+    {
+      "block": "stripped_jungle_wood",
+      "texture": "stripped_jungle_log",
+      "rgb": [
+        171,
+        133,
+        85
+      ],
+      "lab": [
+        58.123,
+        8.467,
+        31.338
+      ]
+    },
+    {
+      "block": "stripped_mangrove_log",
+      "texture": "stripped_mangrove_log",
+      "rgb": [
+        120,
+        54,
+        48
+      ],
+      "lab": [
+        31.454,
+        28.303,
+        17.556
+      ]
+    },
+    {
+      "block": "stripped_mangrove_wood",
+      "texture": "stripped_mangrove_log",
+      "rgb": [
+        120,
+        54,
+        48
+      ],
+      "lab": [
+        31.454,
+        28.303,
+        17.556
+      ]
+    },
+    {
+      "block": "stripped_oak_log",
+      "texture": "stripped_oak_log",
+      "rgb": [
+        177,
+        144,
+        86
+      ],
+      "lab": [
+        61.626,
+        5.023,
+        35.311
+      ]
+    },
+    {
+      "block": "stripped_oak_wood",
+      "texture": "stripped_oak_log",
+      "rgb": [
+        177,
+        144,
+        86
+      ],
+      "lab": [
+        61.626,
+        5.023,
+        35.311
+      ]
+    },
+    {
+      "block": "stripped_spruce_log",
+      "texture": "stripped_spruce_log",
+      "rgb": [
+        116,
+        90,
+        52
+      ],
+      "lab": [
+        40.038,
+        5.603,
+        25.87
+      ]
+    },
+    {
+      "block": "stripped_spruce_wood",
+      "texture": "stripped_spruce_log",
+      "rgb": [
+        116,
+        90,
+        52
+      ],
+      "lab": [
+        40.038,
+        5.603,
+        25.87
+      ]
+    },
+    {
+      "block": "stripped_warped_hyphae",
+      "texture": "stripped_warped_stem",
+      "rgb": [
+        58,
+        151,
+        148
+      ],
+      "lab": [
+        57.24,
+        -27.739,
+        -6.575
+      ]
+    },
+    {
+      "block": "stripped_warped_stem",
+      "texture": "stripped_warped_stem",
+      "rgb": [
+        58,
+        151,
+        148
+      ],
+      "lab": [
+        57.24,
+        -27.739,
+        -6.575
+      ]
+    },
+    {
+      "block": "target",
+      "texture": "target_side",
+      "rgb": [
+        229,
+        176,
+        168
+      ],
+      "lab": [
+        76.399,
+        18.149,
+        11.556
+      ]
+    },
+    {
+      "block": "terracotta",
+      "texture": "terracotta",
+      "rgb": [
+        152,
+        94,
+        68
+      ],
+      "lab": [
+        45.771,
+        20.857,
+        24.756
+      ]
+    },
+    {
+      "block": "tinted_glass",
+      "texture": "tinted_glass",
+      "rgb": [
+        47,
+        34,
+        52
+      ],
+      "lab": [
+        15.468,
+        10.312,
+        -9.39
+      ]
+    },
+    {
+      "block": "tnt",
+      "texture": "tnt_side",
+      "rgb": [
+        182,
+        88,
+        84
+      ],
+      "lab": [
+        48.967,
+        37.67,
+        20.319
+      ]
+    },
+    {
+      "block": "tube_coral_block",
+      "texture": "tube_coral_block",
+      "rgb": [
+        49,
+        87,
+        207
+      ],
+      "lab": [
+        41.172,
+        29.258,
+        -65.84
+      ]
+    },
+    {
+      "block": "tuff",
+      "texture": "tuff",
+      "rgb": [
+        108,
+        109,
+        103
+      ],
+      "lab": [
+        45.777,
+        -1.593,
+        3.215
+      ]
+    },
+    {
+      "block": "verdant_froglight",
+      "texture": "verdant_froglight_side",
+      "rgb": [
+        211,
+        235,
+        208
+      ],
+      "lab": [
+        90.697,
+        -12.811,
+        10.446
+      ]
+    },
+    {
+      "block": "warped_hyphae",
+      "texture": "warped_stem",
+      "rgb": [
+        58,
+        59,
+        78
+      ],
+      "lab": [
+        25.495,
+        4.45,
+        -11.672
+      ]
+    },
+    {
+      "block": "warped_nylium",
+      "texture": "warped_nylium_side",
+      "rgb": [
+        73,
+        62,
+        60
+      ],
+      "lab": [
+        27.264,
+        4.367,
+        2.988
+      ]
+    },
+    {
+      "block": "warped_planks",
+      "texture": "warped_planks",
+      "rgb": [
+        43,
+        105,
+        99
+      ],
+      "lab": [
+        40.438,
+        -21.448,
+        -2.638
+      ]
+    },
+    {
+      "block": "warped_stem",
+      "texture": "warped_stem",
+      "rgb": [
+        58,
+        59,
+        78
+      ],
+      "lab": [
+        25.495,
+        4.45,
+        -11.672
+      ]
+    },
+    {
+      "block": "warped_wart_block",
+      "texture": "warped_wart_block",
+      "rgb": [
+        23,
+        120,
+        121
+      ],
+      "lab": [
+        45.626,
+        -25.572,
+        -8.237
+      ]
+    },
+    {
+      "block": "weathered_copper",
+      "texture": "weathered_copper",
+      "rgb": [
+        108,
+        153,
+        110
+      ],
+      "lab": [
+        59.063,
+        -24.236,
+        17.844
+      ]
+    },
+    {
+      "block": "weathered_cut_copper",
+      "texture": "weathered_cut_copper",
+      "rgb": [
+        109,
+        145,
+        108
+      ],
+      "lab": [
+        56.668,
+        -20.166,
+        15.684
+      ]
+    },
+    {
+      "block": "wet_sponge",
+      "texture": "wet_sponge",
+      "rgb": [
+        171,
+        181,
+        70
+      ],
+      "lab": [
+        70.973,
+        -18.479,
+        53.759
+      ]
+    },
+    {
+      "block": "white_concrete",
+      "texture": "white_concrete",
+      "rgb": [
+        207,
+        213,
+        214
+      ],
+      "lab": [
+        84.848,
+        -1.849,
+        -1.202
+      ]
+    },
+    {
+      "block": "white_concrete_powder",
+      "texture": "white_concrete_powder",
+      "rgb": [
+        226,
+        227,
+        228
+      ],
+      "lab": [
+        90.187,
+        -0.159,
+        -0.604
+      ]
+    },
+    {
+      "block": "white_stained_glass",
+      "texture": "white_stained_glass",
+      "rgb": [
+        255,
+        255,
+        255
+      ],
+      "lab": [
+        100,
+        -0.003,
+        0.001
+      ]
+    },
+    {
+      "block": "white_terracotta",
+      "texture": "white_terracotta",
+      "rgb": [
+        210,
+        178,
+        161
+      ],
+      "lab": [
+        74.899,
+        8.925,
+        12.982
+      ]
+    },
+    {
+      "block": "white_wool",
+      "texture": "white_wool",
+      "rgb": [
+        234,
+        236,
+        237
+      ],
+      "lab": [
+        93.275,
+        -0.491,
+        -0.717
+      ]
+    },
+    {
+      "block": "yellow_concrete",
+      "texture": "yellow_concrete",
+      "rgb": [
+        241,
+        175,
+        21
+      ],
+      "lab": [
+        75.711,
+        12.958,
+        76.056
+      ]
+    },
+    {
+      "block": "yellow_concrete_powder",
+      "texture": "yellow_concrete_powder",
+      "rgb": [
+        233,
+        199,
+        55
+      ],
+      "lab": [
+        80.988,
+        -2.106,
+        71.296
+      ]
+    },
+    {
+      "block": "yellow_stained_glass",
+      "texture": "yellow_stained_glass",
+      "rgb": [
+        229,
+        229,
+        51
+      ],
+      "lab": [
+        88.418,
+        -18.952,
+        79.086
+      ]
+    },
+    {
+      "block": "yellow_terracotta",
+      "texture": "yellow_terracotta",
+      "rgb": [
+        186,
+        133,
+        35
+      ],
+      "lab": [
+        59.286,
+        11.875,
+        56.586
+      ]
+    },
+    {
+      "block": "yellow_wool",
+      "texture": "yellow_wool",
+      "rgb": [
+        249,
+        198,
+        40
+      ],
+      "lab": [
+        82.209,
+        4.759,
+        77.383
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "block": "acacia_button",
+      "reason": "non-full-cube (parent minecraft:block/button)"
+    },
+    {
+      "block": "acacia_fence_gate",
+      "reason": "non-full-cube (parent minecraft:block/template_fence_gate)"
+    },
+    {
+      "block": "acacia_hanging_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "acacia_leaves",
+      "reason": "non-full-cube (parent minecraft:block/leaves)"
+    },
+    {
+      "block": "acacia_pressure_plate",
+      "reason": "non-full-cube (parent minecraft:block/pressure_plate_up)"
+    },
+    {
+      "block": "acacia_sapling",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "acacia_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "acacia_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "acacia_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "activator_rail",
+      "reason": "non-full-cube (parent minecraft:block/rail_flat)"
+    },
+    {
+      "block": "air",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "allium",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "amethyst_cluster",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "andesite_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "andesite_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "anvil",
+      "reason": "non-full-cube (parent minecraft:block/template_anvil)"
+    },
+    {
+      "block": "attached_melon_stem",
+      "reason": "non-full-cube (parent minecraft:block/stem_fruit)"
+    },
+    {
+      "block": "attached_pumpkin_stem",
+      "reason": "non-full-cube (parent minecraft:block/stem_fruit)"
+    },
+    {
+      "block": "azalea",
+      "reason": "non-full-cube (parent minecraft:block/template_azalea)"
+    },
+    {
+      "block": "azure_bluet",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "bamboo_button",
+      "reason": "non-full-cube (parent minecraft:block/button)"
+    },
+    {
+      "block": "bamboo_fence_gate",
+      "reason": "non-full-cube (parent minecraft:block/template_custom_fence_gate)"
+    },
+    {
+      "block": "bamboo_hanging_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "bamboo_mosaic_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "bamboo_mosaic_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "bamboo_pressure_plate",
+      "reason": "non-full-cube (parent minecraft:block/pressure_plate_up)"
+    },
+    {
+      "block": "bamboo_sapling",
+      "reason": "non-full-cube (parent minecraft:block/tinted_cross)"
+    },
+    {
+      "block": "bamboo_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "bamboo_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "bamboo_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "barrier",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "beacon",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "bee_nest",
+      "reason": "non-full-cube (parent minecraft:block/orientable_with_bottom)"
+    },
+    {
+      "block": "beehive",
+      "reason": "non-full-cube (parent minecraft:block/orientable_with_bottom)"
+    },
+    {
+      "block": "big_dripleaf",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "big_dripleaf_stem",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "birch_button",
+      "reason": "non-full-cube (parent minecraft:block/button)"
+    },
+    {
+      "block": "birch_fence_gate",
+      "reason": "non-full-cube (parent minecraft:block/template_fence_gate)"
+    },
+    {
+      "block": "birch_hanging_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "birch_leaves",
+      "reason": "non-full-cube (parent minecraft:block/leaves)"
+    },
+    {
+      "block": "birch_pressure_plate",
+      "reason": "non-full-cube (parent minecraft:block/pressure_plate_up)"
+    },
+    {
+      "block": "birch_sapling",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "birch_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "birch_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "birch_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "black_candle_cake",
+      "reason": "non-full-cube (parent minecraft:block/template_cake_with_candle)"
+    },
+    {
+      "block": "black_carpet",
+      "reason": "non-full-cube (parent minecraft:block/carpet)"
+    },
+    {
+      "block": "black_glazed_terracotta",
+      "reason": "non-full-cube (parent minecraft:block/template_glazed_terracotta)"
+    },
+    {
+      "block": "black_shulker_box",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "blackstone_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "blackstone_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "blast_furnace",
+      "reason": "non-full-cube (parent minecraft:block/orientable)"
+    },
+    {
+      "block": "blue_candle_cake",
+      "reason": "non-full-cube (parent minecraft:block/template_cake_with_candle)"
+    },
+    {
+      "block": "blue_carpet",
+      "reason": "non-full-cube (parent minecraft:block/carpet)"
+    },
+    {
+      "block": "blue_glazed_terracotta",
+      "reason": "non-full-cube (parent minecraft:block/template_glazed_terracotta)"
+    },
+    {
+      "block": "blue_orchid",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "blue_shulker_box",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "brain_coral",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "brain_coral_fan",
+      "reason": "non-full-cube (parent minecraft:block/coral_fan)"
+    },
+    {
+      "block": "brain_coral_wall_fan",
+      "reason": "non-full-cube (parent minecraft:block/coral_wall_fan)"
+    },
+    {
+      "block": "brewing_stand",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "brick_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "brick_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "brown_candle_cake",
+      "reason": "non-full-cube (parent minecraft:block/template_cake_with_candle)"
+    },
+    {
+      "block": "brown_carpet",
+      "reason": "non-full-cube (parent minecraft:block/carpet)"
+    },
+    {
+      "block": "brown_glazed_terracotta",
+      "reason": "non-full-cube (parent minecraft:block/template_glazed_terracotta)"
+    },
+    {
+      "block": "brown_mushroom",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "brown_mushroom_block",
+      "reason": "non-full-cube (parent minecraft:block/template_single_face)"
+    },
+    {
+      "block": "brown_shulker_box",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "bubble_coral",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "bubble_coral_fan",
+      "reason": "non-full-cube (parent minecraft:block/coral_fan)"
+    },
+    {
+      "block": "bubble_coral_wall_fan",
+      "reason": "non-full-cube (parent minecraft:block/coral_wall_fan)"
+    },
+    {
+      "block": "cactus",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "cake",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "calibrated_sculk_sensor",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "campfire",
+      "reason": "non-full-cube (parent minecraft:block/template_campfire)"
+    },
+    {
+      "block": "candle_cake",
+      "reason": "non-full-cube (parent minecraft:block/template_cake_with_candle)"
+    },
+    {
+      "block": "carved_pumpkin",
+      "reason": "non-full-cube (parent minecraft:block/orientable)"
+    },
+    {
+      "block": "cauldron",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "cave_vines",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "cave_vines_plant",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "chain",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "chain_command_block",
+      "reason": "non-full-cube (parent minecraft:block/template_command_block)"
+    },
+    {
+      "block": "cherry_button",
+      "reason": "non-full-cube (parent minecraft:block/button)"
+    },
+    {
+      "block": "cherry_fence_gate",
+      "reason": "non-full-cube (parent minecraft:block/template_fence_gate)"
+    },
+    {
+      "block": "cherry_hanging_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "cherry_leaves",
+      "reason": "non-full-cube (parent minecraft:block/leaves)"
+    },
+    {
+      "block": "cherry_pressure_plate",
+      "reason": "non-full-cube (parent minecraft:block/pressure_plate_up)"
+    },
+    {
+      "block": "cherry_sapling",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "cherry_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "cherry_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "cherry_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "chest",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "chipped_anvil",
+      "reason": "non-full-cube (parent minecraft:block/template_anvil)"
+    },
+    {
+      "block": "chiseled_bookshelf",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "chorus_flower",
+      "reason": "non-full-cube (parent minecraft:block/template_chorus_flower)"
+    },
+    {
+      "block": "chorus_plant",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "cobbled_deepslate_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "cobbled_deepslate_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "cobblestone_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "cobblestone_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "cobweb",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "command_block",
+      "reason": "non-full-cube (parent minecraft:block/template_command_block)"
+    },
+    {
+      "block": "comparator",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "composter",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "conduit",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "cornflower",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "crimson_button",
+      "reason": "non-full-cube (parent minecraft:block/button)"
+    },
+    {
+      "block": "crimson_fence_gate",
+      "reason": "non-full-cube (parent minecraft:block/template_fence_gate)"
+    },
+    {
+      "block": "crimson_fungus",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "crimson_hanging_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "crimson_pressure_plate",
+      "reason": "non-full-cube (parent minecraft:block/pressure_plate_up)"
+    },
+    {
+      "block": "crimson_roots",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "crimson_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "crimson_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "crimson_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "cut_copper_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "cut_copper_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "cut_red_sandstone_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "cut_sandstone_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "cyan_candle_cake",
+      "reason": "non-full-cube (parent minecraft:block/template_cake_with_candle)"
+    },
+    {
+      "block": "cyan_carpet",
+      "reason": "non-full-cube (parent minecraft:block/carpet)"
+    },
+    {
+      "block": "cyan_glazed_terracotta",
+      "reason": "non-full-cube (parent minecraft:block/template_glazed_terracotta)"
+    },
+    {
+      "block": "cyan_shulker_box",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "damaged_anvil",
+      "reason": "non-full-cube (parent minecraft:block/template_anvil)"
+    },
+    {
+      "block": "dandelion",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "dark_oak_button",
+      "reason": "non-full-cube (parent minecraft:block/button)"
+    },
+    {
+      "block": "dark_oak_fence_gate",
+      "reason": "non-full-cube (parent minecraft:block/template_fence_gate)"
+    },
+    {
+      "block": "dark_oak_hanging_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "dark_oak_leaves",
+      "reason": "non-full-cube (parent minecraft:block/leaves)"
+    },
+    {
+      "block": "dark_oak_pressure_plate",
+      "reason": "non-full-cube (parent minecraft:block/pressure_plate_up)"
+    },
+    {
+      "block": "dark_oak_sapling",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "dark_oak_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "dark_oak_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "dark_oak_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "dark_prismarine_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "dark_prismarine_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "daylight_detector",
+      "reason": "non-full-cube (parent minecraft:block/template_daylight_detector)"
+    },
+    {
+      "block": "dead_brain_coral",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "dead_brain_coral_fan",
+      "reason": "non-full-cube (parent minecraft:block/coral_fan)"
+    },
+    {
+      "block": "dead_brain_coral_wall_fan",
+      "reason": "non-full-cube (parent minecraft:block/coral_wall_fan)"
+    },
+    {
+      "block": "dead_bubble_coral",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "dead_bubble_coral_fan",
+      "reason": "non-full-cube (parent minecraft:block/coral_fan)"
+    },
+    {
+      "block": "dead_bubble_coral_wall_fan",
+      "reason": "non-full-cube (parent minecraft:block/coral_wall_fan)"
+    },
+    {
+      "block": "dead_bush",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "dead_fire_coral",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "dead_fire_coral_fan",
+      "reason": "non-full-cube (parent minecraft:block/coral_fan)"
+    },
+    {
+      "block": "dead_fire_coral_wall_fan",
+      "reason": "non-full-cube (parent minecraft:block/coral_wall_fan)"
+    },
+    {
+      "block": "dead_horn_coral",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "dead_horn_coral_fan",
+      "reason": "non-full-cube (parent minecraft:block/coral_fan)"
+    },
+    {
+      "block": "dead_horn_coral_wall_fan",
+      "reason": "non-full-cube (parent minecraft:block/coral_wall_fan)"
+    },
+    {
+      "block": "dead_tube_coral",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "dead_tube_coral_fan",
+      "reason": "non-full-cube (parent minecraft:block/coral_fan)"
+    },
+    {
+      "block": "dead_tube_coral_wall_fan",
+      "reason": "non-full-cube (parent minecraft:block/coral_wall_fan)"
+    },
+    {
+      "block": "decorated_pot",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "deepslate_brick_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "deepslate_brick_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "deepslate_tile_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "deepslate_tile_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "detector_rail",
+      "reason": "non-full-cube (parent minecraft:block/rail_flat)"
+    },
+    {
+      "block": "diorite_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "diorite_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "dirt_path",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "dispenser",
+      "reason": "non-full-cube (parent minecraft:block/orientable)"
+    },
+    {
+      "block": "dragon_egg",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "dried_kelp_block",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "dropper",
+      "reason": "non-full-cube (parent minecraft:block/orientable)"
+    },
+    {
+      "block": "enchanting_table",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "end_portal",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "end_portal_frame",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "end_rod",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "end_stone_brick_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "end_stone_brick_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "ender_chest",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "exposed_cut_copper_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "exposed_cut_copper_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "farmland",
+      "reason": "non-full-cube (parent minecraft:block/template_farmland)"
+    },
+    {
+      "block": "fern",
+      "reason": "non-full-cube (parent minecraft:block/tinted_cross)"
+    },
+    {
+      "block": "fire_coral",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "fire_coral_fan",
+      "reason": "non-full-cube (parent minecraft:block/coral_fan)"
+    },
+    {
+      "block": "fire_coral_wall_fan",
+      "reason": "non-full-cube (parent minecraft:block/coral_wall_fan)"
+    },
+    {
+      "block": "flower_pot",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "flowering_azalea",
+      "reason": "non-full-cube (parent minecraft:block/template_azalea)"
+    },
+    {
+      "block": "frogspawn",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "furnace",
+      "reason": "non-full-cube (parent minecraft:block/orientable)"
+    },
+    {
+      "block": "glow_lichen",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "granite_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "granite_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "grass",
+      "reason": "non-full-cube (parent minecraft:block/tinted_cross)"
+    },
+    {
+      "block": "grass_block",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "gray_candle_cake",
+      "reason": "non-full-cube (parent minecraft:block/template_cake_with_candle)"
+    },
+    {
+      "block": "gray_carpet",
+      "reason": "non-full-cube (parent minecraft:block/carpet)"
+    },
+    {
+      "block": "gray_glazed_terracotta",
+      "reason": "non-full-cube (parent minecraft:block/template_glazed_terracotta)"
+    },
+    {
+      "block": "gray_shulker_box",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "green_candle_cake",
+      "reason": "non-full-cube (parent minecraft:block/template_cake_with_candle)"
+    },
+    {
+      "block": "green_carpet",
+      "reason": "non-full-cube (parent minecraft:block/carpet)"
+    },
+    {
+      "block": "green_glazed_terracotta",
+      "reason": "non-full-cube (parent minecraft:block/template_glazed_terracotta)"
+    },
+    {
+      "block": "green_shulker_box",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "grindstone",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "hanging_roots",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "heavy_weighted_pressure_plate",
+      "reason": "non-full-cube (parent minecraft:block/pressure_plate_up)"
+    },
+    {
+      "block": "honey_block",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "hopper",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "horn_coral",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "horn_coral_fan",
+      "reason": "non-full-cube (parent minecraft:block/coral_fan)"
+    },
+    {
+      "block": "horn_coral_wall_fan",
+      "reason": "non-full-cube (parent minecraft:block/coral_wall_fan)"
+    },
+    {
+      "block": "jack_o_lantern",
+      "reason": "non-full-cube (parent minecraft:block/orientable)"
+    },
+    {
+      "block": "jigsaw",
+      "reason": "denylisted (non-survival / impostor)"
+    },
+    {
+      "block": "jungle_button",
+      "reason": "non-full-cube (parent minecraft:block/button)"
+    },
+    {
+      "block": "jungle_fence_gate",
+      "reason": "non-full-cube (parent minecraft:block/template_fence_gate)"
+    },
+    {
+      "block": "jungle_hanging_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "jungle_leaves",
+      "reason": "non-full-cube (parent minecraft:block/leaves)"
+    },
+    {
+      "block": "jungle_pressure_plate",
+      "reason": "non-full-cube (parent minecraft:block/pressure_plate_up)"
+    },
+    {
+      "block": "jungle_sapling",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "jungle_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "jungle_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "jungle_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "kelp",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "kelp_plant",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "ladder",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "lantern",
+      "reason": "non-full-cube (parent minecraft:block/template_lantern)"
+    },
+    {
+      "block": "large_amethyst_bud",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "lava",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "lava_cauldron",
+      "reason": "non-full-cube (parent minecraft:block/template_cauldron_full)"
+    },
+    {
+      "block": "lectern",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "lever",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "light_blue_candle_cake",
+      "reason": "non-full-cube (parent minecraft:block/template_cake_with_candle)"
+    },
+    {
+      "block": "light_blue_carpet",
+      "reason": "non-full-cube (parent minecraft:block/carpet)"
+    },
+    {
+      "block": "light_blue_glazed_terracotta",
+      "reason": "non-full-cube (parent minecraft:block/template_glazed_terracotta)"
+    },
+    {
+      "block": "light_blue_shulker_box",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "light_gray_candle_cake",
+      "reason": "non-full-cube (parent minecraft:block/template_cake_with_candle)"
+    },
+    {
+      "block": "light_gray_carpet",
+      "reason": "non-full-cube (parent minecraft:block/carpet)"
+    },
+    {
+      "block": "light_gray_glazed_terracotta",
+      "reason": "non-full-cube (parent minecraft:block/template_glazed_terracotta)"
+    },
+    {
+      "block": "light_gray_shulker_box",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "light_weighted_pressure_plate",
+      "reason": "non-full-cube (parent minecraft:block/pressure_plate_up)"
+    },
+    {
+      "block": "lightning_rod",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "lily_of_the_valley",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "lily_pad",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "lime_candle_cake",
+      "reason": "non-full-cube (parent minecraft:block/template_cake_with_candle)"
+    },
+    {
+      "block": "lime_carpet",
+      "reason": "non-full-cube (parent minecraft:block/carpet)"
+    },
+    {
+      "block": "lime_glazed_terracotta",
+      "reason": "non-full-cube (parent minecraft:block/template_glazed_terracotta)"
+    },
+    {
+      "block": "lime_shulker_box",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "loom",
+      "reason": "non-full-cube (parent minecraft:block/orientable_with_bottom)"
+    },
+    {
+      "block": "magenta_candle_cake",
+      "reason": "non-full-cube (parent minecraft:block/template_cake_with_candle)"
+    },
+    {
+      "block": "magenta_carpet",
+      "reason": "non-full-cube (parent minecraft:block/carpet)"
+    },
+    {
+      "block": "magenta_glazed_terracotta",
+      "reason": "non-full-cube (parent minecraft:block/template_glazed_terracotta)"
+    },
+    {
+      "block": "magenta_shulker_box",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "mangrove_button",
+      "reason": "non-full-cube (parent minecraft:block/button)"
+    },
+    {
+      "block": "mangrove_fence_gate",
+      "reason": "non-full-cube (parent minecraft:block/template_fence_gate)"
+    },
+    {
+      "block": "mangrove_hanging_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "mangrove_leaves",
+      "reason": "non-full-cube (parent minecraft:block/leaves)"
+    },
+    {
+      "block": "mangrove_pressure_plate",
+      "reason": "non-full-cube (parent minecraft:block/pressure_plate_up)"
+    },
+    {
+      "block": "mangrove_propagule",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "mangrove_roots",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "mangrove_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "mangrove_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "mangrove_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "medium_amethyst_bud",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "moss_carpet",
+      "reason": "non-full-cube (parent minecraft:block/carpet)"
+    },
+    {
+      "block": "mossy_cobblestone_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "mossy_cobblestone_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "mossy_stone_brick_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "mossy_stone_brick_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "moving_piston",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "mud_brick_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "mud_brick_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "mushroom_stem",
+      "reason": "non-full-cube (parent minecraft:block/template_single_face)"
+    },
+    {
+      "block": "nether_brick_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "nether_brick_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "nether_sprouts",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "oak_button",
+      "reason": "non-full-cube (parent minecraft:block/button)"
+    },
+    {
+      "block": "oak_fence_gate",
+      "reason": "non-full-cube (parent minecraft:block/template_fence_gate)"
+    },
+    {
+      "block": "oak_hanging_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "oak_leaves",
+      "reason": "non-full-cube (parent minecraft:block/leaves)"
+    },
+    {
+      "block": "oak_pressure_plate",
+      "reason": "non-full-cube (parent minecraft:block/pressure_plate_up)"
+    },
+    {
+      "block": "oak_sapling",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "oak_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "oak_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "oak_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "observer",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "orange_candle_cake",
+      "reason": "non-full-cube (parent minecraft:block/template_cake_with_candle)"
+    },
+    {
+      "block": "orange_carpet",
+      "reason": "non-full-cube (parent minecraft:block/carpet)"
+    },
+    {
+      "block": "orange_glazed_terracotta",
+      "reason": "non-full-cube (parent minecraft:block/template_glazed_terracotta)"
+    },
+    {
+      "block": "orange_shulker_box",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "orange_tulip",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "oxeye_daisy",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "oxidized_cut_copper_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "oxidized_cut_copper_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "petrified_oak_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "pink_candle_cake",
+      "reason": "non-full-cube (parent minecraft:block/template_cake_with_candle)"
+    },
+    {
+      "block": "pink_carpet",
+      "reason": "non-full-cube (parent minecraft:block/carpet)"
+    },
+    {
+      "block": "pink_glazed_terracotta",
+      "reason": "non-full-cube (parent minecraft:block/template_glazed_terracotta)"
+    },
+    {
+      "block": "pink_shulker_box",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "pink_tulip",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "piston",
+      "reason": "non-full-cube (parent minecraft:block/template_piston)"
+    },
+    {
+      "block": "piston_head",
+      "reason": "non-full-cube (parent minecraft:block/template_piston_head)"
+    },
+    {
+      "block": "pointed_dripstone",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "polished_andesite_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "polished_andesite_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "polished_blackstone_brick_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "polished_blackstone_brick_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "polished_blackstone_button",
+      "reason": "non-full-cube (parent minecraft:block/button)"
+    },
+    {
+      "block": "polished_blackstone_pressure_plate",
+      "reason": "non-full-cube (parent minecraft:block/pressure_plate_up)"
+    },
+    {
+      "block": "polished_blackstone_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "polished_blackstone_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "polished_deepslate_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "polished_deepslate_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "polished_diorite_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "polished_diorite_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "polished_granite_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "polished_granite_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "poppy",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "potted_acacia_sapling",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_allium",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_azalea_bush",
+      "reason": "non-full-cube (parent minecraft:block/template_potted_azalea_bush)"
+    },
+    {
+      "block": "potted_azure_bluet",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_bamboo",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "potted_birch_sapling",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_blue_orchid",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_brown_mushroom",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_cactus",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "potted_cherry_sapling",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_cornflower",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_crimson_fungus",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_crimson_roots",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_dandelion",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_dark_oak_sapling",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_dead_bush",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_fern",
+      "reason": "non-full-cube (parent minecraft:block/tinted_flower_pot_cross)"
+    },
+    {
+      "block": "potted_flowering_azalea_bush",
+      "reason": "non-full-cube (parent minecraft:block/template_potted_azalea_bush)"
+    },
+    {
+      "block": "potted_jungle_sapling",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_lily_of_the_valley",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_mangrove_propagule",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "potted_oak_sapling",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_orange_tulip",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_oxeye_daisy",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_pink_tulip",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_poppy",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_red_mushroom",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_red_tulip",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_spruce_sapling",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_torchflower",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_warped_fungus",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_warped_roots",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_white_tulip",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "potted_wither_rose",
+      "reason": "non-full-cube (parent minecraft:block/flower_pot_cross)"
+    },
+    {
+      "block": "powder_snow",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "powered_rail",
+      "reason": "non-full-cube (parent minecraft:block/rail_flat)"
+    },
+    {
+      "block": "prismarine_brick_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "prismarine_brick_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "prismarine_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "prismarine_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "purple_candle_cake",
+      "reason": "non-full-cube (parent minecraft:block/template_cake_with_candle)"
+    },
+    {
+      "block": "purple_carpet",
+      "reason": "non-full-cube (parent minecraft:block/carpet)"
+    },
+    {
+      "block": "purple_glazed_terracotta",
+      "reason": "non-full-cube (parent minecraft:block/template_glazed_terracotta)"
+    },
+    {
+      "block": "purple_shulker_box",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "purpur_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "purpur_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "quartz_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "quartz_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "rail",
+      "reason": "non-full-cube (parent minecraft:block/rail_flat)"
+    },
+    {
+      "block": "red_candle_cake",
+      "reason": "non-full-cube (parent minecraft:block/template_cake_with_candle)"
+    },
+    {
+      "block": "red_carpet",
+      "reason": "non-full-cube (parent minecraft:block/carpet)"
+    },
+    {
+      "block": "red_glazed_terracotta",
+      "reason": "non-full-cube (parent minecraft:block/template_glazed_terracotta)"
+    },
+    {
+      "block": "red_mushroom",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "red_mushroom_block",
+      "reason": "non-full-cube (parent minecraft:block/template_single_face)"
+    },
+    {
+      "block": "red_nether_brick_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "red_nether_brick_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "red_sandstone_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "red_sandstone_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "red_shulker_box",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "red_tulip",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "redstone_torch",
+      "reason": "non-full-cube (parent minecraft:block/template_torch)"
+    },
+    {
+      "block": "redstone_wall_torch",
+      "reason": "non-full-cube (parent minecraft:block/template_torch_wall)"
+    },
+    {
+      "block": "repeating_command_block",
+      "reason": "non-full-cube (parent minecraft:block/template_command_block)"
+    },
+    {
+      "block": "sandstone_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "sandstone_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "sculk_sensor",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "sculk_shrieker",
+      "reason": "non-full-cube (parent minecraft:block/template_sculk_shrieker)"
+    },
+    {
+      "block": "sculk_vein",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "sea_pickle",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "seagrass",
+      "reason": "non-full-cube (parent minecraft:block/template_seagrass)"
+    },
+    {
+      "block": "shulker_box",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "slime_block",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "small_amethyst_bud",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "smoker",
+      "reason": "non-full-cube (parent minecraft:block/orientable_with_bottom)"
+    },
+    {
+      "block": "smooth_quartz_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "smooth_quartz_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "smooth_red_sandstone_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "smooth_red_sandstone_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "smooth_sandstone_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "smooth_sandstone_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "smooth_stone_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "sniffer_egg",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "soul_campfire",
+      "reason": "non-full-cube (parent minecraft:block/template_campfire)"
+    },
+    {
+      "block": "soul_lantern",
+      "reason": "non-full-cube (parent minecraft:block/template_lantern)"
+    },
+    {
+      "block": "soul_torch",
+      "reason": "non-full-cube (parent minecraft:block/template_torch)"
+    },
+    {
+      "block": "soul_wall_torch",
+      "reason": "non-full-cube (parent minecraft:block/template_torch_wall)"
+    },
+    {
+      "block": "spawner",
+      "reason": "denylisted (non-survival / impostor)"
+    },
+    {
+      "block": "spore_blossom",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "spruce_button",
+      "reason": "non-full-cube (parent minecraft:block/button)"
+    },
+    {
+      "block": "spruce_fence_gate",
+      "reason": "non-full-cube (parent minecraft:block/template_fence_gate)"
+    },
+    {
+      "block": "spruce_hanging_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "spruce_leaves",
+      "reason": "non-full-cube (parent minecraft:block/leaves)"
+    },
+    {
+      "block": "spruce_pressure_plate",
+      "reason": "non-full-cube (parent minecraft:block/pressure_plate_up)"
+    },
+    {
+      "block": "spruce_sapling",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "spruce_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "spruce_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "spruce_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "sticky_piston",
+      "reason": "non-full-cube (parent minecraft:block/template_piston)"
+    },
+    {
+      "block": "stone_brick_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "stone_brick_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "stone_button",
+      "reason": "non-full-cube (parent minecraft:block/button)"
+    },
+    {
+      "block": "stone_pressure_plate",
+      "reason": "non-full-cube (parent minecraft:block/pressure_plate_up)"
+    },
+    {
+      "block": "stone_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "stone_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "stonecutter",
+      "reason": "non-full-cube (parent block/block)"
+    },
+    {
+      "block": "structure_block",
+      "reason": "denylisted (non-survival / impostor)"
+    },
+    {
+      "block": "structure_void",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "sugar_cane",
+      "reason": "non-full-cube (parent minecraft:block/tinted_cross)"
+    },
+    {
+      "block": "torch",
+      "reason": "non-full-cube (parent minecraft:block/template_torch)"
+    },
+    {
+      "block": "torchflower",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "tripwire_hook",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "tube_coral",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "tube_coral_fan",
+      "reason": "non-full-cube (parent minecraft:block/coral_fan)"
+    },
+    {
+      "block": "tube_coral_wall_fan",
+      "reason": "non-full-cube (parent minecraft:block/coral_wall_fan)"
+    },
+    {
+      "block": "turtle_egg",
+      "reason": "non-full-cube (parent minecraft:block/template_turtle_egg)"
+    },
+    {
+      "block": "twisting_vines",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "twisting_vines_plant",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "vine",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "wall_torch",
+      "reason": "non-full-cube (parent minecraft:block/template_torch_wall)"
+    },
+    {
+      "block": "warped_button",
+      "reason": "non-full-cube (parent minecraft:block/button)"
+    },
+    {
+      "block": "warped_fence_gate",
+      "reason": "non-full-cube (parent minecraft:block/template_fence_gate)"
+    },
+    {
+      "block": "warped_fungus",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "warped_hanging_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "warped_pressure_plate",
+      "reason": "non-full-cube (parent minecraft:block/pressure_plate_up)"
+    },
+    {
+      "block": "warped_roots",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "warped_sign",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "warped_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "warped_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "water",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "weathered_cut_copper_slab",
+      "reason": "non-full-cube (parent minecraft:block/slab)"
+    },
+    {
+      "block": "weathered_cut_copper_stairs",
+      "reason": "non-full-cube (parent minecraft:block/stairs)"
+    },
+    {
+      "block": "weeping_vines",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "weeping_vines_plant",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "white_candle_cake",
+      "reason": "non-full-cube (parent minecraft:block/template_cake_with_candle)"
+    },
+    {
+      "block": "white_carpet",
+      "reason": "non-full-cube (parent minecraft:block/carpet)"
+    },
+    {
+      "block": "white_glazed_terracotta",
+      "reason": "non-full-cube (parent minecraft:block/template_glazed_terracotta)"
+    },
+    {
+      "block": "white_shulker_box",
+      "reason": "non-full-cube (parent none)"
+    },
+    {
+      "block": "white_tulip",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "wither_rose",
+      "reason": "non-full-cube (parent minecraft:block/cross)"
+    },
+    {
+      "block": "yellow_candle_cake",
+      "reason": "non-full-cube (parent minecraft:block/template_cake_with_candle)"
+    },
+    {
+      "block": "yellow_carpet",
+      "reason": "non-full-cube (parent minecraft:block/carpet)"
+    },
+    {
+      "block": "yellow_glazed_terracotta",
+      "reason": "non-full-cube (parent minecraft:block/template_glazed_terracotta)"
+    },
+    {
+      "block": "yellow_shulker_box",
+      "reason": "non-full-cube (parent none)"
+    }
+  ]
+}

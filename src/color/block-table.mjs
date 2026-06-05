@@ -1,0 +1,284 @@
+// Block → CIE-Lab color table builder (T-019-01, epic E-10 / story S-019).
+//
+// Produces the cached `block-lab-table.json` that the portable color engine (S-020,
+// src/color/cielab.mjs) and the palette extractor (S-021) consume: for every full-cube,
+// survival-obtainable 1.20.1 block, a representative color (mean of opaque texture pixels,
+// side face for directional blocks, first frame for animated) converted to CIE L*a*b*.
+// See docs/knowledge/cielab-block-matching.md for the governing technique.
+//
+// Boundary: the BUILD path (resolveAssets / buildBlockTable) reads `minecraft-assets` and
+// decodes PNGs with `pngjs` — both BUILD-TIME-ONLY devDependencies, imported lazily so they
+// never leak onto the RUNTIME path. The runtime path (loadBlockTable + the committed JSON)
+// pulls zero Minecraft/asset deps, preserving S-020's "portable, zero-Minecraft-deps" goal.
+//
+// Version note: minecraft-assets@1.17 ships no 1.20.1 dataset; passing "1.20.1" resolves to
+// the last-of-major 1.20.2 (block textures identical for our purposes). We record the
+// effective `version` (1.20.2) and the `requestedVersion` (1.20.1) for honest provenance.
+//
+// DUPLICATION NOTE (intentional): `srgbToLab` below mirrors the conversion that S-020's
+// src/color/cielab.mjs will own. T-019-01 and T-020-01 are parallel `depends_on: []` tickets,
+// so this ticket cannot import a file that may not exist yet. S-023 (consolidation) is the
+// designated de-dupe: downstream code should depend on cielab.mjs for conversion, NOT on this.
+
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname, resolve, join } from "node:path";
+
+const here = dirname(fileURLToPath(import.meta.url));
+
+/** Default location of the committed output table. */
+export const TABLE_PATH = resolve(here, "block-lab-table.json");
+
+// --- sRGB → CIE-Lab (D65) -------------------------------------------------
+// Faithful to docs/knowledge/cielab-block-matching.md. CIE76-ready; no ΔE here (engine's job).
+
+/** Inverse sRGB gamma for one 0–255 channel → linear 0–1. */
+function srgbChannelToLinear(c255) {
+  const c = c255 / 255;
+  return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+}
+
+/** Linear RGB (0–1) → XYZ scaled to 0–100 (D65). */
+function linearRgbToXyz(r, g, b) {
+  const X = (0.4124564 * r + 0.3575761 * g + 0.1804375 * b) * 100;
+  const Y = (0.2126729 * r + 0.7151522 * g + 0.0721750 * b) * 100;
+  const Z = (0.0193339 * r + 0.1191920 * g + 0.9503041 * b) * 100;
+  return [X, Y, Z];
+}
+
+const D65 = { Xn: 95.0489, Yn: 100, Zn: 108.8840 };
+const DELTA = 6 / 29;
+const DELTA3 = DELTA ** 3;
+
+/** XYZ companding f(t) for the Lab transform. */
+function fLab(t) {
+  return t > DELTA3 ? Math.cbrt(t) : t / (3 * DELTA * DELTA) + 4 / 29;
+}
+
+const round3 = (n) => Math.round(n * 1000) / 1000;
+
+/**
+ * Convert an sRGB color (integer channels 0–255) to CIE L*a*b* (D65).
+ * @param {[number, number, number]} rgb
+ * @returns {[number, number, number]} [L*, a*, b*], rounded to 3 decimals
+ */
+export function srgbToLab([r, g, b]) {
+  const [X, Y, Z] = linearRgbToXyz(
+    srgbChannelToLinear(r),
+    srgbChannelToLinear(g),
+    srgbChannelToLinear(b),
+  );
+  const fx = fLab(X / D65.Xn);
+  const fy = fLab(Y / D65.Yn);
+  const fz = fLab(Z / D65.Zn);
+  return [round3(116 * fy - 16), round3(500 * (fx - fy)), round3(200 * (fy - fz))];
+}
+
+// --- texture pixels -------------------------------------------------------
+
+/**
+ * Mean of opaque pixels of a decoded PNG (pngjs shape: {width,height,data} RGBA8).
+ * Uses only the FIRST FRAME (top width×width rows) for vertical animation strips
+ * (height > width and a whole multiple). Averages channels of pixels with alpha ≥ threshold;
+ * if none qualify, falls back to any alpha > 0; returns null if the texture is fully
+ * transparent.
+ * @param {{width:number,height:number,data:Uint8Array|Buffer}} png
+ * @param {number} [alphaThreshold=128]
+ * @returns {[number, number, number] | null}
+ */
+export function meanOpaqueRgb(png, alphaThreshold = 128) {
+  const { width, height, data } = png;
+  const frameH =
+    height > width && height % width === 0 ? width : height; // first animation frame
+  for (const minA of [alphaThreshold, 1]) {
+    let r = 0, g = 0, b = 0, n = 0;
+    for (let y = 0; y < frameH; y++) {
+      for (let x = 0; x < width; x++) {
+        const i = (width * y + x) << 2;
+        if (data[i + 3] < minA) continue;
+        r += data[i];
+        g += data[i + 1];
+        b += data[i + 2];
+        n++;
+      }
+    }
+    if (n > 0) return [Math.round(r / n), Math.round(g / n), Math.round(b / n)];
+  }
+  return null;
+}
+
+// --- block classification -------------------------------------------------
+
+/** Strip a texture/model ref like "minecraft:block/oak_log" or "block/dirt" → "oak_log". */
+function textureStem(ref) {
+  if (typeof ref !== "string") return null;
+  return ref.replace(/^minecraft:/, "").replace(/^block\//, "").replace(/^blocks\//, "");
+}
+
+/** True iff the (stripped) model parent is one of the full-cube templates. */
+export function isFullCubeParent(parent) {
+  const p = (parent || "").replace(/^minecraft:/, "");
+  return p.startsWith("block/cube");
+}
+
+// Full-cube blocks that are NOT survival-obtainable or are greyscale/tinted impostors.
+// Most technical blocks already fall out via the non-cube parent filter; these are the
+// full-cube stragglers, listed explicitly so the exclusion is documented intent, not luck.
+export const EXCLUDE_BLOCKS = Object.freeze(
+  new Set([
+    "spawner", // transparent cage cube_all; not survival-obtainable
+    "infested_stone",
+    "infested_cobblestone",
+    "infested_stone_bricks",
+    "infested_mossy_stone_bricks",
+    "infested_cracked_stone_bricks",
+    "infested_chiseled_stone_bricks",
+    "infested_deepslate", // cube_all clones of stone textures — misleading duplicates
+    "jigsaw",
+    "command_block",
+    "chain_command_block",
+    "repeating_command_block",
+    "structure_block",
+  ]),
+);
+
+/**
+ * Decide whether a block belongs in the table, given its model entry.
+ * Real-block-ness (presence in blocks_textures) is checked by the builder, not here.
+ * @returns {{ include: boolean, reason?: string }}
+ */
+export function classifyBlock(name, model) {
+  if (!model) return { include: false, reason: "no model" };
+  if (!isFullCubeParent(model.parent)) {
+    return { include: false, reason: `non-full-cube (parent ${model.parent || "none"})` };
+  }
+  if (JSON.stringify(model).includes("tintindex")) {
+    return { include: false, reason: "biome-tinted (tintindex)" };
+  }
+  if (EXCLUDE_BLOCKS.has(name)) {
+    return { include: false, reason: "denylisted (non-survival / impostor)" };
+  }
+  return { include: true };
+}
+
+/**
+ * Choose the representative face texture stem for a full-cube model.
+ * cube_all / *_mirrored_all → `all`; column / bottom_top → `side`; generic `cube` →
+ * side → north → first non-vertical face → all. Returns null if no usable face texture.
+ * @returns {string | null} the PNG stem (no extension)
+ */
+export function pickFace(model) {
+  const t = (model && model.textures) || {};
+  const cand = (key) => (t[key] ? textureStem(t[key]) : null);
+  const order = [
+    "side",
+    "all",
+    "north",
+    "east",
+    "south",
+    "west",
+  ];
+  for (const key of order) {
+    const stem = cand(key);
+    if (stem) return stem;
+  }
+  // last resort: any face that is not a top/bottom/end/particle reference
+  for (const [key, ref] of Object.entries(t)) {
+    if (/^(top|bottom|up|down|end|particle)$/.test(key)) continue;
+    const stem = textureStem(ref);
+    if (stem) return stem;
+  }
+  return null;
+}
+
+// --- asset I/O + build ----------------------------------------------------
+
+/**
+ * Resolve the minecraft-assets data directory and read its block indexes.
+ * The ONLY place `minecraft-assets` is touched. Reads JSON by path (avoids the CJS gotcha).
+ * @param {string} [version="1.20.1"]
+ * @returns {Promise<{directory:string, version:string, models:object, textureNames:Set<string>}>}
+ */
+export async function resolveAssets(version = "1.20.1") {
+  const { default: mcAssets } = await import("minecraft-assets");
+  const a = mcAssets(version);
+  if (!a) throw new Error(`minecraft-assets has no dataset resolvable from "${version}"`);
+  const directory = a.directory;
+  const models = JSON.parse(readFileSync(join(directory, "blocks_models.json"), "utf8"));
+  const textures = JSON.parse(readFileSync(join(directory, "blocks_textures.json"), "utf8"));
+  const textureNames = new Set(textures.map((t) => t.name));
+  return { directory, version: a.version, models, textureNames };
+}
+
+/**
+ * Build the full block → Lab table. Deterministic (sorted by block name).
+ * @param {{version?: string}} [opts]
+ * @returns {Promise<{version:string, requestedVersion:string, generatedFrom:string,
+ *   blocks:{block:string,texture:string,rgb:number[],lab:number[]}[],
+ *   excluded:{block:string,reason:string}[]}>}
+ */
+export async function buildBlockTable({ version = "1.20.1" } = {}) {
+  const { PNG } = await import("pngjs");
+  const { directory, version: effective, models, textureNames } = await resolveAssets(version);
+
+  const blocks = [];
+  const excluded = [];
+
+  for (const name of Object.keys(models)) {
+    if (!textureNames.has(name)) continue; // model template, not a real block
+    const model = models[name];
+    const verdict = classifyBlock(name, model);
+    if (!verdict.include) {
+      excluded.push({ block: name, reason: verdict.reason });
+      continue;
+    }
+    const stem = pickFace(model);
+    if (!stem) {
+      excluded.push({ block: name, reason: "no usable face texture" });
+      continue;
+    }
+    let png;
+    try {
+      png = PNG.sync.read(readFileSync(join(directory, "blocks", `${stem}.png`)));
+    } catch (err) {
+      excluded.push({ block: name, reason: `texture read failed (${stem}.png)` });
+      continue;
+    }
+    const rgb = meanOpaqueRgb(png);
+    if (!rgb) {
+      excluded.push({ block: name, reason: "no opaque pixels" });
+      continue;
+    }
+    blocks.push({ block: name, texture: stem, rgb, lab: srgbToLab(rgb) });
+  }
+
+  blocks.sort((x, y) => (x.block < y.block ? -1 : x.block > y.block ? 1 : 0));
+  excluded.sort((x, y) => (x.block < y.block ? -1 : x.block > y.block ? 1 : 0));
+
+  let pkgVersion = "unknown";
+  try {
+    pkgVersion = JSON.parse(
+      readFileSync(
+        new URL("../../node_modules/minecraft-assets/package.json", import.meta.url),
+      ),
+    ).version;
+  } catch {
+    /* provenance is best-effort */
+  }
+
+  return {
+    version: effective,
+    requestedVersion: version,
+    generatedFrom: `minecraft-assets@${pkgVersion}`,
+    blocks,
+    excluded,
+  };
+}
+
+/**
+ * Load the committed block→Lab table (runtime path; no asset deps).
+ * @param {string} [path=TABLE_PATH]
+ */
+export function loadBlockTable(path = TABLE_PATH) {
+  return JSON.parse(readFileSync(path, "utf8"));
+}
