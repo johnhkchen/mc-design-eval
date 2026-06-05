@@ -40,6 +40,16 @@ downstream tickets (T-025…T-029).
   (palette / per-surface), defaulting to the massing gray. Block ids are namespaced at the
   boundary (`tableKey`/`blockId`). This is the one other E-10 consumer — it imports the
   portable engine + block table, leaving them untouched.
+- **`relief.mjs`** (pass B, T-028) — the self-shadow relief skin over the locked material. `relief(state,
+  intent)` runs a "relief" stage that writes per-cell Z-depth from a closed feature vocabulary
+  (`FEATURE_RELIEF`: recess/window→inset −1, trim/cornice/frame/lip/eave/base→pop +1) over
+  `intent.relief.features` plus a simple top-row **cornice** detection over the occupancy, then **locks
+  `relief`** over the material-locked state. Recesses are **carved by exclusion** — the compile emits one
+  voxel per cell and a recess just shifts that lone voxel to z=−1, so a back block is never buried behind
+  a front fill. `reliefMetrics(state)` (coverage / Z-variance — a pure projection, like `proportionsOf`)
+  is the quantitative "less flat" signal the review critic's `flat→relief` route is judged against.
+  Geometry-only: no E-10 color engine, no block table. `compileRelief` stamps the relief style; Z already
+  flows through `compile`.
 - **`review.mjs`** (bookend 2, T-026) — the diagnostic critic. Renders a build state and
   emits a **structured diagnosis** `{defect, where, route}[]` over the explicit defect
   vocabulary `{flat, ringing, under-detailed-focal, proportion}` and `ROUTING_TABLE`, where

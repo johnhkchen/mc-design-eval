@@ -39,6 +39,15 @@ export {
 } from "./material.mjs";
 
 export {
+  relief,
+  reliefStage,
+  reliefMetrics,
+  compileRelief,
+  FEATURE_RELIEF,
+  RELIEF_STYLE,
+} from "./relief.mjs";
+
+export {
   DEFECTS,
   ROUTE_TARGETS,
   ROUTING_TABLE,
