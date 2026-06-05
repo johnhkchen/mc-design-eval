@@ -11,7 +11,7 @@
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { srgbToLab, deltaE76, deltaE, nearest } from "./cielab.mjs";
+import { srgbToLab, deltaE76, deltaE, nearest, nearestLab } from "./cielab.mjs";
 
 const close = (actual, expected, tol, msg) =>
   assert.ok(Math.abs(actual - expected) <= tol, `${msg}: |${actual} - ${expected}| > ${tol}`);
@@ -123,4 +123,34 @@ test("nearest honors a pluggable metric (default never invoked)", () => {
 test("nearest throws on an empty or non-array palette", () => {
   assert.throws(() => nearest([0, 0, 0], []), /non-empty array/);
   assert.throws(() => nearest([0, 0, 0], null), /non-empty array/);
+});
+
+// --- nearestLab (Lab-input matcher; the centroid path for T-021) -----------
+
+test("nearestLab matches an exact entry Lab with deltaE 0", () => {
+  const res = nearestLab(PALETTE[2].lab, PALETTE); // 'red' entry's own lab
+  assert.equal(res.key, "red");
+  assert.equal(res.deltaE, 0);
+  assert.deepEqual(res.lab, PALETTE[2].lab);
+});
+
+test("nearestLab picks the perceptually closest key for a Lab target", () => {
+  // A Lab near red but not equal: nudge each component slightly.
+  const [L, a, b] = PALETTE[2].lab;
+  assert.equal(nearestLab([L + 1, a - 2, b + 1], PALETTE).key, "red");
+  assert.equal(nearestLab(srgbToLab([8, 8, 250]), PALETTE).key, "blue");
+});
+
+test("nearest delegates to nearestLab (same result via either entry point)", () => {
+  const rgb = [240, 20, 15];
+  const viaRgb = nearest(rgb, PALETTE);
+  const viaLab = nearestLab(srgbToLab(rgb), PALETTE);
+  assert.deepEqual(viaRgb, viaLab);
+});
+
+test("nearestLab honors a pluggable metric and validates the palette", () => {
+  const favorBlack = (_t, lab) => (lab === PALETTE[1].lab ? -1 : 1);
+  assert.equal(nearestLab(PALETTE[2].lab, PALETTE, { metric: favorBlack }).key, "black");
+  assert.throws(() => nearestLab([0, 0, 0], []), /non-empty array/);
+  assert.throws(() => nearestLab([0, 0, 0], null), /non-empty array/);
 });

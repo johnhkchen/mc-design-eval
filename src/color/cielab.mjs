@@ -102,29 +102,43 @@ export function deltaE76(lab1, lab2) {
 export const deltaE = deltaE76;
 
 /**
- * Find the palette entry whose Lab is nearest to `rgb` under `metric` (argmin ΔE).
- * The target color is converted sRGB→Lab here; palette entries carry pre-converted,
- * cached Lab (converted once by the table builder). Linear scan — palettes are small
- * (≈5–30 entries), so a scan beats building a tree. (For matching against a *large*
- * block set, build a k-d tree on Lab and query it here instead.)
- * @param {RGB} rgb  target color, 0–255
+ * Find the palette entry whose Lab is nearest to a pre-computed `targetLab` under
+ * `metric` (argmin ΔE). This is the core scan; callers holding a Lab target (e.g. a
+ * cluster centroid formed in Lab space, T-021) use this directly rather than
+ * round-tripping a representative rgb back through {@link srgbToLab}. Palette entries
+ * carry pre-converted, cached Lab. Linear scan — palettes are small (≈5–30 entries),
+ * so a scan beats building a tree. (For matching against a *large* block set, build a
+ * k-d tree on Lab and query it here instead.)
+ * @param {Lab} targetLab  target color already in CIE L*a*b*
  * @param {PaletteEntry[]} palette  non-empty `[{ key, lab }]`
  * @param {{ metric?: (a: Lab, b: Lab) => number }} [opts]
  * @returns {NearestResult}
  */
-export function nearest(rgb, palette, { metric = deltaE76 } = {}) {
+export function nearestLab(targetLab, palette, { metric = deltaE76 } = {}) {
   if (!Array.isArray(palette) || palette.length === 0) {
-    throw new Error("nearest: palette must be a non-empty array of { key, lab }");
+    throw new Error("nearestLab: palette must be a non-empty array of { key, lab }");
   }
-  const target = srgbToLab(rgb);
   let best = palette[0];
-  let bestD = metric(target, best.lab);
+  let bestD = metric(targetLab, best.lab);
   for (let i = 1; i < palette.length; i++) {
-    const d = metric(target, palette[i].lab);
+    const d = metric(targetLab, palette[i].lab);
     if (d < bestD) {
       bestD = d;
       best = palette[i];
     }
   }
   return { key: best.key, deltaE: bestD, lab: best.lab };
+}
+
+/**
+ * Find the palette entry whose Lab is nearest to `rgb` under `metric` (argmin ΔE).
+ * The target color is converted sRGB→Lab here, then delegated to {@link nearestLab};
+ * the public contract (signature + `{ key, deltaE, lab }` return) is unchanged.
+ * @param {RGB} rgb  target color, 0–255
+ * @param {PaletteEntry[]} palette  non-empty `[{ key, lab }]`
+ * @param {{ metric?: (a: Lab, b: Lab) => number }} [opts]
+ * @returns {NearestResult}
+ */
+export function nearest(rgb, palette, opts) {
+  return nearestLab(srgbToLab(rgb), palette, opts);
 }
