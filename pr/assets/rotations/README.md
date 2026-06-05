@@ -16,11 +16,15 @@ There are **two variants**:
 | clip | build | source |
 |------|-------|--------|
 | `rock-taj-015.mp4` ★ hero | Taj (champion, "strong") — front-arc rock | `runs/015-vRefRevise-designdoc` |
-| `spin-taj-015.mp4` | Taj (champion, "strong") | `runs/015-vRefRevise-designdoc` |
-| `spin-horyuji-019.mp4` | Hōryū-ji | `runs/019-vRefRevise-designdoc` |
-| `spin-arc-021.mp4` | Arc de Triomphe | `runs/021-vRefRevise-designdoc` |
-| `spin-mausoleum-022.mp4` | Sun Yat-sen mausoleum | `runs/022-vRefRevise-designdoc` |
-| `rotating-builds-montage.mp4` | all four chained | the montage beat |
+| `rock-horyuji-019.mp4` | Hōryū-ji — rock | `runs/019-vRefRevise-designdoc` |
+| `rock-arc-021.mp4` | Arc de Triomphe — rock | `runs/021-vRefRevise-designdoc` |
+| `rock-mausoleum-022.mp4` | Sun Yat-sen mausoleum — rock | `runs/022-vRefRevise-designdoc` |
+| `rock-builds-montage.mp4` | four rocks chained — the montage beat (no flat back) | — |
+| `spin-taj-015.mp4` | Taj — full 360° | `runs/015-vRefRevise-designdoc` |
+| `spin-horyuji-019.mp4` | Hōryū-ji — full 360° | `runs/019-vRefRevise-designdoc` |
+| `spin-arc-021.mp4` | Arc de Triomphe — full 360° | `runs/021-vRefRevise-designdoc` |
+| `spin-mausoleum-022.mp4` | Sun Yat-sen mausoleum — full 360° | `runs/022-vRefRevise-designdoc` |
+| `rotating-builds-montage.mp4` | four spins chained | the full-360 montage |
 
 Note (honest): these are real voxel builds, so the rotation reveals depth — and the full-360 `spin-*`
 clips reveal that they are currently **facades** (flat reverse side). The **`rock-*` front-arc variant
