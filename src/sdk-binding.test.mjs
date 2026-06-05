@@ -111,11 +111,13 @@ test("extractArtifact accepts fenced result text (the claude -p path)", () => {
 
 // --- withSchemaInstruction (claude -p output-format scaffolding) -----------
 
-test("withSchemaInstruction appends a JSON-only directive and the schema", () => {
+test("withSchemaInstruction appends a strict JSON-only directive and the schema", () => {
   const out = withSchemaInstruction("BASE PROMPT");
   assert.match(out, /^BASE PROMPT/);
-  assert.match(out, /Output format \(required\)/);
-  assert.match(out, /ONLY a single JSON object/);
+  assert.match(out, /Output format/);
+  assert.match(out, /VERY FIRST character/);
+  assert.match(out, /style\.rationale/, "gives the narration instinct a legal outlet");
+  assert.match(out, /beginning with/, "ends with a recency nudge to start with the JSON");
   assert.match(out, /"title": "DesignArtifact"/);
 });
 

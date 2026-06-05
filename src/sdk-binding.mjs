@@ -66,11 +66,19 @@ export function withSchemaInstruction(prompt) {
   return [
     prompt,
     "",
-    "## Output format (required)",
-    "Respond with ONLY a single JSON object conforming to the JSON Schema below.",
-    "No prose, no explanation, and no Markdown code fences — output the JSON object alone.",
+    "## Output format — STRICT (read carefully)",
+    "Output a SINGLE JSON object conforming to the JSON Schema below, and NOTHING ELSE:",
+    "- Your VERY FIRST character MUST be `{` and your LAST character MUST be `}`.",
+    '- Do NOT begin with any sentence, acknowledgement, or preamble — no "Understood", "Here",',
+    "  \"Done\", \"Looking at this\", \"I'll build…\", and no lead-in of any kind.",
+    "- Do NOT add commentary, explanation, or a summary before or after the JSON, and do NOT wrap",
+    "  it in Markdown code fences.",
+    "- Put ALL of your design reasoning inside `style.rationale` in the JSON — never as prose.",
     "",
+    "JSON Schema:",
     schema,
+    "",
+    "Now output ONLY the JSON object, beginning with `{`.",
   ].join("\n");
 }
 
