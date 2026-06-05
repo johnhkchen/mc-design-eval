@@ -26,6 +26,7 @@ bundle**: the production desk cuts the video without reaching into gitignored `b
 | `concept-arc-C-flash.png` | `concepts/arc-C-flash.png` | **`[concept]`** |
 | `concept-mausoleum-C-flash.png` | `concepts/mausoleum-C-flash.png` | **`[concept]`** — center-cropped from 1376×768 |
 | `rotation-placeholder-002.png` | `runs/002-v1-multimodal/render.png` | **placeholder** for F10 — head-on, NOT the spin (see below) |
+| `concept-goldengate-vision.png` | `concepts/goldengate-base-flash.png` (gitignored) | **`[concept]`** — F13 vision end-frame; Nano-Banana flash via `pr/production/endframe.mjs` (T-034-01), NOT Minecraft |
 
 **Reuse:** `spine-r4-hero-oneplane-014.png` serves F01 (morph target), F04, and the F05/F11
 re-flashes. `concept-taj-C-flash.png` serves F08 (pivot target) and the F09 wall. One file per real
@@ -52,4 +53,7 @@ magick <concept.png> -filter Lanczos -resize 1080x1080 <out.png>
 # the one non-square concept (mausoleum, 1376×768) — center-crop, then scale
 magick concepts/mausoleum-C-flash.png -gravity center -crop 768x768+0+0 +repage \
        -filter Lanczos -resize 1080x1080 concept-mausoleum-C-flash.png
+
+# Golden-Gate vision end-frame (F13) — generated + normalized in one step by the driver:
+node pr/production/endframe.mjs   # baml-concept.mts → Nano Banana → Lanczos 1080×1080 (center-crop if non-square)
 ```

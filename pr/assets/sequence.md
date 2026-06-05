@@ -92,14 +92,16 @@ Every number traces to disk; nothing invented:
 
 | Status | Frames |
 |---|---|
-| **Copied + normalized** (in `frames/`) | F02, F03, F04 (+alts), F08→concept, F09 wall, F12 breadth, F10 placeholder |
-| **Reference-only** (derived/reuse) | F05, F07, F11 (reuse 014); F06 montage (production grid) |
-| **To-generate** | F01 gray box `[describe/regen]`, F10 real spin (S-032), F13 Golden-Gate (S-034), F14 thesis card, F15 CTA card |
+| **Copied + normalized** (in `frames/`) | F02, F03, F04 (+alts), F08→concept, F09 wall, F12 breadth, F10 placeholder, **F13 Golden-Gate (`concept-goldengate-vision.png`, generated T-034-01)** |
+| **Reference-only** (derived/reuse) | F05, F11 (reuse 014) |
+| **Synthesized by the assembler** (`pr/production/assemble.mjs`, T-034-01) | F06 receipts card, F07 trust card, F14 thesis card, F15 CTA card |
+| **To-generate** | F01 gray box `[describe/regen]` (rough cut substitutes hero 014 + morph-chip), F10 real spin (S-032) |
 
 ## Honesty ledger
 
-- [x] **Concept ≠ real build** — F08/F09/F12 frames are `[concept]` (`concept-*.png`); F13 to-gen
-      is `[concept]`. Only F10 claims a real build, and v1 is a flagged placeholder.
+- [x] **Concept ≠ real build** — F08/F09/F12 frames are `[concept]` (`concept-*.png`); F13
+      (`concept-goldengate-vision.png`, generated T-034-01) is `[concept]`, burned with the amber
+      tag in the rough cut. Only F10 claims a real build, and v1 is a flagged placeholder.
 - [x] **v1-sequencing** — F13 captioned "where it's heading," not "what we shipped."
 - [x] **No invented metrics** — every score/cost/block/run number above carries a `[receipt:…]` to
       a `summary.json` field, `ls`, or `wc -l`. F02/F03 rubric (v1-numeric) is named, not hidden.
