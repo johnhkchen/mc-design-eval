@@ -24,6 +24,12 @@ downstream tickets (T-025…T-029).
   cell at `[x, y, relief]`, manifest derived from blocks placed. Pure — validation is the
   consumer's job (`src/artifact.mjs`), exercised in the round-trip test.
 - **`index.mjs`** — public barrel for downstream tickets.
+- **`massing.mjs`** (bookend 1, T-025) — the gray proportion shell. `conceptGridSource`
+  adapts a *form* (the E-10 image grid today, a GLB later) to the neutral `MassingSource`
+  contract (`{width, height, occupied()}` — no concept-grid specifics leak); `mass` sets
+  `occupied` and runs a "massing" stage through `runStages` to **lock occupancy** (the
+  proportion lock), leaving `material`/`relief` free; `proportionsOf` derives bounds/aspect
+  for the S-026 review critic; `compileMassing` paints one gray block (`MASSING_BLOCK`).
 
 ## The load-bearing rule
 

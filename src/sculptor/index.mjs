@@ -20,3 +20,12 @@ export {
 export { changedFields, defineStage, runStages, StageRejectedError } from "./orchestrator.mjs";
 
 export { toDesignArtifact, COMPILE_DEFAULTS } from "./compile.mjs";
+
+export {
+  conceptGridSource,
+  mass,
+  proportionsOf,
+  compileMassing,
+  MASSING_BLOCK,
+  MASSING_STYLE,
+} from "./massing.mjs";
