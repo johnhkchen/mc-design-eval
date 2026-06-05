@@ -21,6 +21,7 @@ Source of truth: [`docs/specification.md`](../../specification.md).
 | E-09 | image-to-3d-voxel-pipeline         | high     | E-01, E-02, E-04  | §1,§5,§6,§7,§9 |
 | E-10 | block-palette-and-cielab-matching  | high     | E-01              | §5, §6, §9    |
 | E-11 | staged-sculptor-framework          | high     | E-01,E-02,E-04,E-10 | §1, §5, §9  |
+| E-12 | evolution-showcase                 | medium   | —                 | (comms)     |
 
 ## Dependency graph
 
