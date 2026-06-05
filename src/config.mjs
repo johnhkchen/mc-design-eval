@@ -35,6 +35,17 @@ export const DEFAULT_PROMPTING_METHOD_ID = "single-shot.v1";
 export const ITERATIVE_MULTIMODAL_METHOD_ID = "iterative-multimodal.v1";
 
 /**
+ * The vConcept SCULPTURE-mode archetype id (E-13, spec §7). A term-grounded pipeline:
+ * imagined design doc → a single 3/4 concept image (Nano Banana) → a freestanding 3-D
+ * voxel object built grounded on that one view → a 3/4 still + a front-arc rock turntable.
+ * Single-sourced here (like the other method ids) so every logged sculpture run carries one
+ * spelling of this archetype's identity and a Phase-2 model sweep stays greppable. The `.v1`
+ * suffix versions the doc/concept/build prompt construction in src/sculpture.mjs.
+ * @type {string}
+ */
+export const VCONCEPT_SCULPTURE_METHOD_ID = "vconcept-sculpture.v1";
+
+/**
  * Tool names that must NEVER be enabled in a trial — the code-execution surface
  * (spec §3: the `allow_insecure_coding` / LLM-writes-and-runs-code path is out of
  * scope). The runner's safe-options guard rejects any attempt to allow these.
