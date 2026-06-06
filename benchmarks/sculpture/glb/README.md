@@ -1,0 +1,40 @@
+# `benchmarks/sculpture/glb/` — TRELLIS-2 image→3D GLBs (E-09 stage-2 seed)
+
+Real 3-D meshes reconstructed from our `vConcept` **concept images** (3/4 view, solid-black
+background — ideal TRELLIS input) by **TRELLIS 2** (Microsoft, image-to-3D) running on Modal. These
+exist to feed the **E-15 form-target seam** (`src/form/form-target.mjs` `glbFormTarget`): a real 3-D
+form the surgical revision loop can project per-region, instead of the flat single-view concept
+silhouette that E-15 measured as too blunt for local edits to climb (see
+`[[form-revision-needs-3d-target]]` / the E-15 journal section).
+
+The `.glb` binaries are **gitignored** (~5 MB each, regenerable); this manifest is the durable record.
+
+## The meshes
+
+| file | subject | source concept | verts | tris | size | gen time |
+|------|---------|----------------|------:|-----:|-----:|---------:|
+| `koi.glb` | koi fish (the flattened S-curve) | `runs/009-vConcept-a-koi-fish/concept.png` | 95,147 | 143,664 | 4.95 MB | 284 s (cold) |
+| `heart.glb` | anatomical heart (the open aortic arch) | `runs/006-…-human-heart/concept.png` | 106,365 | 145,210 | 5.42 MB | 156 s (warm) |
+
+Both: valid binary glTF v2, 1 mesh / 1 primitive, 2 textures, 1 material. Generated 2026-06-05.
+
+## How they were made (reproducible)
+
+```bash
+# Contract replicated from plant-model-studio (backend/cmd/generate-models/main.go generateViaModal):
+# POST { image:<b64 png>, decimation_target, texture_size, seed } → raw GLB bytes.
+set -a; . ./.env; set +a          # MODAL_ENDPOINT_URL (gitignored; never printed)
+node benchmarks/sculpture/trellis-glb.mjs <concept.png> glb/<name>.glb
+```
+
+- Endpoint: `MODAL_ENDPOINT_URL` (the plant-model-studio TRELLIS-2 Modal deployment), read from the
+  gitignored `.env` — **never** committed or printed.
+- Params: `decimation_target=150000`, `texture_size=1024`, `seed=42` (the plant pipeline defaults).
+- Client: `benchmarks/sculpture/trellis-glb.mjs` (`generateGlb` + `inspectGlb`) — the E-09 stage-2 seed.
+
+## What's next (these are the foundation)
+
+The overnight follow-on uses these two GLBs as a real 3-D target/source: implement `glbFormTarget`
+(silhouette rasterization from the build's view) → re-run the E-15 surgical loop and measure whether a
+3-D target unlocks the form fidelity the flat concept couldn't; and (the E-09 closure arm) voxelize the
+GLB → a `DesignArtifact` and compare head-to-head against the text-JSON build.
