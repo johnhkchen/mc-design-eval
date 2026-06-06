@@ -1,0 +1,505 @@
+{
+  "schema": "codesign-ab/v1",
+  "gateSchema": "value-gate/v1",
+  "threshold": 6,
+  "extractorK": 8,
+  "note": "ΔE is concept↔render: realized build palette (placed manifest at value-true Lab) vs the concept's realized palette. .v2 ΔE is small partly by construction (the snap targeted this palette); the gate's value is as a regression/threshold flag and a record of the residual. Render-PNG extraction is avoided (viewer scene dominates ~79% glass) — the placed-manifest proxy is segmentation-free (T-039 invariant).",
+  "rows": [
+    {
+      "runId": "001-vConcept-moai",
+      "e13Verdict": "Competent — faithful form, drifted value (gray_concrete reads darker than tuff)",
+      "conceptPalette": "5 blocks over 44% of frame: deepslate_copper_ore 37%, deepslate_bricks 25%, copper_ore 19%, chiseled_nether_bricks 13%, diorite 6% (mean ΔE 4)",
+      "gateBefore": {
+        "schema": "value-gate/v1",
+        "threshold": 6,
+        "meanDeltaE": 6.97,
+        "maxDeltaE": 11.44,
+        "flagged": true,
+        "recommendCorrectiveReplace": true,
+        "perBlock": [
+          {
+            "block": "stone_bricks",
+            "lab": [
+              51.223,
+              -0.002,
+              0
+            ],
+            "value": 51.2,
+            "weight": 0.03,
+            "nearest": "copper_ore",
+            "deltaE": 2.66
+          },
+          {
+            "block": "gray_concrete",
+            "lab": [
+              24.277,
+              -0.305,
+              -2.913
+            ],
+            "value": 24.3,
+            "weight": 0.51,
+            "nearest": "deepslate_bricks",
+            "deltaE": 7.59
+          },
+          {
+            "block": "andesite",
+            "lab": [
+              56.732,
+              0.195,
+              -0.535
+            ],
+            "value": 56.7,
+            "weight": 0.37,
+            "nearest": "copper_ore",
+            "deltaE": 6.56
+          },
+          {
+            "block": "cobblestone",
+            "lab": [
+              53.305,
+              0.571,
+              -0.409
+            ],
+            "value": 53.3,
+            "weight": 0.06,
+            "nearest": "copper_ore",
+            "deltaE": 4.01
+          },
+          {
+            "block": "red_nether_bricks",
+            "lab": [
+              12.443,
+              29.04,
+              15.685
+            ],
+            "value": 12.4,
+            "weight": 0.03,
+            "nearest": "chiseled_nether_bricks",
+            "deltaE": 11.44
+          }
+        ],
+        "present": [],
+        "missing": [
+          "deepslate_copper_ore",
+          "deepslate_bricks",
+          "copper_ore",
+          "chiseled_nether_bricks",
+          "diorite"
+        ],
+        "added": [
+          "stone_bricks",
+          "gray_concrete",
+          "andesite",
+          "cobblestone",
+          "red_nether_bricks"
+        ]
+      },
+      "gateAfter": {
+        "schema": "value-gate/v1",
+        "threshold": 6,
+        "meanDeltaE": 2.31,
+        "maxDeltaE": 10.54,
+        "flagged": false,
+        "recommendCorrectiveReplace": false,
+        "perBlock": [
+          {
+            "block": "copper_ore",
+            "lab": [
+              52.551,
+              -1.555,
+              3.132
+            ],
+            "value": 52.6,
+            "weight": 0.46,
+            "nearest": "copper_ore",
+            "deltaE": 1.75
+          },
+          {
+            "block": "deepslate_bricks",
+            "lab": [
+              30.16,
+              -0.001,
+              0
+            ],
+            "value": 30.2,
+            "weight": 0.51,
+            "nearest": "deepslate_bricks",
+            "deltaE": 2.35
+          },
+          {
+            "block": "chiseled_nether_bricks",
+            "lab": [
+              11.563,
+              12.172,
+              2.198
+            ],
+            "value": 11.6,
+            "weight": 0.03,
+            "nearest": "chiseled_nether_bricks",
+            "deltaE": 10.54
+          }
+        ],
+        "present": [
+          "deepslate_bricks",
+          "copper_ore",
+          "chiseled_nether_bricks"
+        ],
+        "missing": [
+          "deepslate_copper_ore",
+          "diorite"
+        ],
+        "added": []
+      },
+      "closure": {
+        "before": 6.97,
+        "after": 2.31,
+        "delta": 4.66,
+        "pct": 66.9,
+        "improved": true
+      },
+      "verdict": "closed",
+      "correctiveReplace": {
+        "recommended": false,
+        "fired": false,
+        "rationale": "drift under the gate — no re-place needed"
+      }
+    },
+    {
+      "runId": "007-vConcept-a-sword",
+      "e13Verdict": "Recognizable — faithful cruciform, near-true palette",
+      "conceptPalette": "8 blocks over 8% of frame: polished_diorite 25%, brown_concrete 13%, gilded_blackstone 13%, polished_andesite 13%, spruce_log 13%, iron_block 12%, birch_planks 6%, gold_block 6% (mean ΔE 3.7)",
+      "gateBefore": {
+        "schema": "value-gate/v1",
+        "threshold": 6,
+        "meanDeltaE": 3.98,
+        "maxDeltaE": 8.18,
+        "flagged": false,
+        "recommendCorrectiveReplace": false,
+        "perBlock": [
+          {
+            "block": "stone",
+            "lab": [
+              52.8,
+              -0.002,
+              0
+            ],
+            "value": 52.8,
+            "weight": 0.1,
+            "nearest": "polished_andesite",
+            "deltaE": 3.38
+          },
+          {
+            "block": "gold_block",
+            "lab": [
+              84.513,
+              -0.937,
+              72.647
+            ],
+            "value": 84.5,
+            "weight": 0.3,
+            "nearest": "gold_block",
+            "deltaE": 4.71
+          },
+          {
+            "block": "dark_oak_log",
+            "lab": [
+              20.316,
+              2.64,
+              15.672
+            ],
+            "value": 20.3,
+            "weight": 0.2,
+            "nearest": "spruce_log",
+            "deltaE": 8.18
+          },
+          {
+            "block": "iron_block",
+            "lab": [
+              87.761,
+              -0.003,
+              0.001
+            ],
+            "value": 87.8,
+            "weight": 0.3,
+            "nearest": "iron_block",
+            "deltaE": 1.44
+          },
+          {
+            "block": "polished_andesite",
+            "lab": [
+              56.042,
+              -1.309,
+              0.149
+            ],
+            "value": 56,
+            "weight": 0.1,
+            "nearest": "polished_andesite",
+            "deltaE": 1.55
+          }
+        ],
+        "present": [
+          "polished_andesite",
+          "iron_block",
+          "gold_block"
+        ],
+        "missing": [
+          "polished_diorite",
+          "brown_concrete",
+          "gilded_blackstone",
+          "spruce_log",
+          "birch_planks"
+        ],
+        "added": [
+          "stone",
+          "dark_oak_log"
+        ]
+      },
+      "gateAfter": {
+        "schema": "value-gate/v1",
+        "threshold": 6,
+        "meanDeltaE": 2.65,
+        "maxDeltaE": 4.71,
+        "flagged": false,
+        "recommendCorrectiveReplace": false,
+        "perBlock": [
+          {
+            "block": "polished_andesite",
+            "lab": [
+              56.042,
+              -1.309,
+              0.149
+            ],
+            "value": 56,
+            "weight": 0.2,
+            "nearest": "polished_andesite",
+            "deltaE": 1.55
+          },
+          {
+            "block": "gold_block",
+            "lab": [
+              84.513,
+              -0.937,
+              72.647
+            ],
+            "value": 84.5,
+            "weight": 0.3,
+            "nearest": "gold_block",
+            "deltaE": 4.71
+          },
+          {
+            "block": "spruce_log",
+            "lab": [
+              17.258,
+              7.264,
+              17.622
+            ],
+            "value": 17.3,
+            "weight": 0.2,
+            "nearest": "spruce_log",
+            "deltaE": 2.46
+          },
+          {
+            "block": "iron_block",
+            "lab": [
+              87.761,
+              -0.003,
+              0.001
+            ],
+            "value": 87.8,
+            "weight": 0.3,
+            "nearest": "iron_block",
+            "deltaE": 1.44
+          }
+        ],
+        "present": [
+          "polished_andesite",
+          "spruce_log",
+          "iron_block",
+          "gold_block"
+        ],
+        "missing": [
+          "polished_diorite",
+          "brown_concrete",
+          "gilded_blackstone",
+          "birch_planks"
+        ],
+        "added": []
+      },
+      "closure": {
+        "before": 3.98,
+        "after": 2.65,
+        "delta": 1.33,
+        "pct": 33.4,
+        "improved": true
+      },
+      "verdict": "already-near-true",
+      "correctiveReplace": {
+        "recommended": false,
+        "fired": false,
+        "rationale": "drift under the gate — no re-place needed"
+      }
+    },
+    {
+      "runId": "013-vConcept-a-pineapple",
+      "e13Verdict": "Organic — cross-hatch present but the defining line softens",
+      "conceptPalette": "8 blocks over 21% of frame: green_concrete 13%, hay_block 13%, honeycomb_block 13%, jungle_log 13%, melon 13%, orange_terracotta 13%, pumpkin 13%, smooth_red_sandstone 13% (mean ΔE 7.3)",
+      "gateBefore": {
+        "schema": "value-gate/v1",
+        "threshold": 6,
+        "meanDeltaE": 10.34,
+        "maxDeltaE": 19.16,
+        "flagged": true,
+        "recommendCorrectiveReplace": true,
+        "perBlock": [
+          {
+            "block": "hay_block",
+            "lab": [
+              57.901,
+              1.311,
+              53.423
+            ],
+            "value": 57.9,
+            "weight": 0.11,
+            "nearest": "hay_block",
+            "deltaE": 14.16
+          },
+          {
+            "block": "orange_terracotta",
+            "lab": [
+              44.467,
+              28.722,
+              40.08
+            ],
+            "value": 44.5,
+            "weight": 0.58,
+            "nearest": "orange_terracotta",
+            "deltaE": 9.71
+          },
+          {
+            "block": "green_concrete",
+            "lab": [
+              36.034,
+              -16.646,
+              28.959
+            ],
+            "value": 36,
+            "weight": 0.17,
+            "nearest": "green_concrete",
+            "deltaE": 2.8
+          },
+          {
+            "block": "lime_concrete",
+            "lab": [
+              62.359,
+              -45.511,
+              59.552
+            ],
+            "value": 62.4,
+            "weight": 0.14,
+            "nearest": "melon",
+            "deltaE": 19.16
+          }
+        ],
+        "present": [
+          "green_concrete",
+          "hay_block",
+          "orange_terracotta"
+        ],
+        "missing": [
+          "honeycomb_block",
+          "jungle_log",
+          "melon",
+          "pumpkin",
+          "smooth_red_sandstone"
+        ],
+        "added": [
+          "lime_concrete"
+        ]
+      },
+      "gateAfter": {
+        "schema": "value-gate/v1",
+        "threshold": 6,
+        "meanDeltaE": 8.55,
+        "maxDeltaE": 14.16,
+        "flagged": true,
+        "recommendCorrectiveReplace": true,
+        "perBlock": [
+          {
+            "block": "hay_block",
+            "lab": [
+              57.901,
+              1.311,
+              53.423
+            ],
+            "value": 57.9,
+            "weight": 0.11,
+            "nearest": "hay_block",
+            "deltaE": 14.16
+          },
+          {
+            "block": "orange_terracotta",
+            "lab": [
+              44.467,
+              28.722,
+              40.08
+            ],
+            "value": 44.5,
+            "weight": 0.58,
+            "nearest": "orange_terracotta",
+            "deltaE": 9.71
+          },
+          {
+            "block": "green_concrete",
+            "lab": [
+              36.034,
+              -16.646,
+              28.959
+            ],
+            "value": 36,
+            "weight": 0.17,
+            "nearest": "green_concrete",
+            "deltaE": 2.8
+          },
+          {
+            "block": "melon",
+            "lab": [
+              56.316,
+              -27.517,
+              53.134
+            ],
+            "value": 56.3,
+            "weight": 0.14,
+            "nearest": "melon",
+            "deltaE": 6.09
+          }
+        ],
+        "present": [
+          "green_concrete",
+          "hay_block",
+          "melon",
+          "orange_terracotta"
+        ],
+        "missing": [
+          "honeycomb_block",
+          "jungle_log",
+          "pumpkin",
+          "smooth_red_sandstone"
+        ],
+        "added": []
+      },
+      "closure": {
+        "before": 10.34,
+        "after": 8.55,
+        "delta": 1.79,
+        "pct": 17.3,
+        "improved": true
+      },
+      "verdict": "narrowed",
+      "correctiveReplace": {
+        "recommended": true,
+        "fired": false,
+        "rationale": "residual over gate; a re-place against the SAME realized palette is idempotent — the real lever is a new palette-aware concept or a wider extractor k"
+      }
+    }
+  ]
+}
