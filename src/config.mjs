@@ -57,6 +57,19 @@ export const VCONCEPT_SCULPTURE_METHOD_ID = "vconcept-sculpture.v1";
 export const VCONCEPT_SCULPTURE_METHOD_ID_V2 = "vconcept-sculpture.v2";
 
 /**
+ * The vConcept BUILDING-mode archetype id (E-20 / story S-067 / T-067-01). The third vConcept
+ * framing after facade (front elevation) and sculpture (freestanding 3/4 object): a WHOLE BUILDING
+ * IN THE ROUND — four sides, roof, depth — imagined as a design doc → ONE 3/4 concept image of a
+ * SINGLE complete building (never a turnaround/contact sheet, which produces multiple buildings +
+ * hallucinated connectors, the moai lesson) → a TRELLIS GLB the GLB→voxel pipeline places as bulk.
+ * Single-sourced here like the other method ids so every logged building run carries one spelling of
+ * this archetype's identity and a Phase-2 model sweep stays greppable. The `.v1` suffix versions the
+ * doc/concept/build prompt construction in src/building.mjs.
+ * @type {string}
+ */
+export const VCONCEPT_BUILDING_METHOD_ID = "vconcept-building.v1";
+
+/**
  * The GLB-voxel build archetype id (E-16 / story S-051 / T-051-01). This build is NOT produced by a
  * model: a real 3-D mesh (TRELLIS GLB) is voxelized to occupancy (T-050-01), each occupied cell is
  * colored value-true by sampling the GLB's surface texture and snapping to the nearest block in Lab
