@@ -1,0 +1,139 @@
+{
+  "schema": "form-routing/v1",
+  "scale": 32,
+  "generatedFrom": "routed pick over e18-remeasure.json",
+  "note": "Per subject: before = universal thin (the E-18 combined build's voxelizer on all 7); after = routed (thin subjects keep voxelizeGlbThin; solid subjects use plain voxelizeGlb). Form IoU higher is better; occupancy lower is better (less spurious bulk). `traded` = a solid the thin pass marginally helped (heart, +0.018) but routed solid for the large occupancy/cleanliness win.",
+  "averages": {
+    "formIoU": {
+      "before": 0.731,
+      "after": 0.782,
+      "delta": 0.051
+    }
+  },
+  "occupancy": {
+    "before": 36723,
+    "after": 28295,
+    "delta": -8428,
+    "solidsDropped": 8428
+  },
+  "recovered": [
+    "dancing-man",
+    "moai",
+    "pineapple",
+    "mushroom"
+  ],
+  "traded": [
+    "heart"
+  ],
+  "kept": [
+    "bow-and-arrow",
+    "koi"
+  ],
+  "subjects": [
+    {
+      "subject": "dancing-man",
+      "formType": "solid",
+      "before": {
+        "formIoU": 0.814,
+        "occ": 1504
+      },
+      "after": {
+        "formIoU": 0.914,
+        "occ": 973
+      },
+      "dFormIoU": 0.1,
+      "dOcc": -531,
+      "verdict": "recovered"
+    },
+    {
+      "subject": "moai",
+      "formType": "solid",
+      "before": {
+        "formIoU": 0.399,
+        "occ": 6059
+      },
+      "after": {
+        "formIoU": 0.565,
+        "occ": 4215
+      },
+      "dFormIoU": 0.166,
+      "dOcc": -1844,
+      "verdict": "recovered"
+    },
+    {
+      "subject": "pineapple",
+      "formType": "solid",
+      "before": {
+        "formIoU": 0.845,
+        "occ": 4855
+      },
+      "after": {
+        "formIoU": 0.907,
+        "occ": 3397
+      },
+      "dFormIoU": 0.062,
+      "dOcc": -1458,
+      "verdict": "recovered"
+    },
+    {
+      "subject": "bow-and-arrow",
+      "formType": "thin",
+      "before": {
+        "formIoU": 0.526,
+        "occ": 1210
+      },
+      "after": {
+        "formIoU": 0.526,
+        "occ": 1210
+      },
+      "dFormIoU": 0,
+      "dOcc": 0,
+      "verdict": "kept"
+    },
+    {
+      "subject": "heart",
+      "formType": "solid",
+      "before": {
+        "formIoU": 0.895,
+        "occ": 7982
+      },
+      "after": {
+        "formIoU": 0.877,
+        "occ": 5840
+      },
+      "dFormIoU": -0.018,
+      "dOcc": -2142,
+      "verdict": "traded"
+    },
+    {
+      "subject": "mushroom",
+      "formType": "solid",
+      "before": {
+        "formIoU": 0.929,
+        "occ": 11958
+      },
+      "after": {
+        "formIoU": 0.98,
+        "occ": 9505
+      },
+      "dFormIoU": 0.051,
+      "dOcc": -2453,
+      "verdict": "recovered"
+    },
+    {
+      "subject": "koi",
+      "formType": "thin",
+      "before": {
+        "formIoU": 0.706,
+        "occ": 3155
+      },
+      "after": {
+        "formIoU": 0.706,
+        "occ": 3155
+      },
+      "dFormIoU": 0,
+      "dOcc": 0,
+      "verdict": "kept"
+    }
+  ]
+}

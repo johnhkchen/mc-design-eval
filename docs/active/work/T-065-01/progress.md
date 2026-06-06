@@ -24,8 +24,21 @@
 
 **Verify:** `npm test` → **655 pass / 0 fail**.
 
-## Step 3 — runner + apply ×7 over the real spine ⏳
+## Step 3 — runner + apply ×7 over the real spine ✅ (committed)
+
+- `benchmarks/sculpture/form-routing.mjs`: thin I/O host — reads `e18-remeasure.json`, calls
+  `assembleRoutingReport`, writes `form-routing.{md,json}`. No GL/model/network.
+- `package.json`: `form:routing` script.
+- Ran over the real spine (scale 32, 7 subjects). **Result (matches the Research projection):**
+  - **Solids recovered:** dancing-man 0.814→0.914 (+0.10), moai 0.399→0.565 (+0.166),
+    pineapple 0.845→0.907 (+0.062), mushroom 0.929→0.980 (+0.051).
+  - **Thin kept:** bow-and-arrow 0.526, koi 0.706 (unchanged — still thin).
+  - **Traded:** heart 0.895→0.877 (−0.018 form for −2142 cells — the deliberate cleanliness trade).
+  - **Average form IoU 0.731 → 0.782 (+0.051).**
+  - **Occupancy 36,723 → 28,295 cells (−8,428, −23%); all of the drop is on solids.**
+
+**Verify:** `node benchmarks/sculpture/form-routing.mjs` exits 0; `npm test` → **658 pass / 0 fail** (AC #4).
 
 ## Deviations from plan
 
-- (none yet)
+- (none) — AC #3 was satisfiable as a pure spine read exactly as designed; no GL sweep was needed.
