@@ -1,0 +1,1545 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate",
+    "prompting_method_id": "vconcept-building.v1",
+    "model_id": "claude-opus-4-8",
+    "seed": 17,
+    "server_state_id": "flat-creative-superflat.v1",
+    "target": "house"
+  },
+  "style": {
+    "name": "medieval defensive gatehouse",
+    "rationale": "A near-monochrome stone keep pierced by one arched passage: stone_bricks body, cobblestone plinth/string-course/corner buttresses and roof verge, deepslate_tiles steep gable roof reading as silhouette, and a single warm dark_oak_log voussoir gate front and back. Footprint 28W x 20D, walls to y29, gable ridge running front-to-back so the triangle faces the entry and frames the arch; ratio ~1.5:1 tall-to-wide for a defensive guard-block. Modelled in the round — four enclosing walls, two arched gates, two slit windows per side, and a finished four-sloped... gable roof with the hidden back mirrored from the single-view concept."
+  },
+  "palette": {
+    "manifest": [
+      "minecraft:stone_bricks",
+      "minecraft:cobblestone",
+      "minecraft:deepslate_tiles",
+      "minecraft:dark_oak_log"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [
+        -14,
+        0,
+        -10
+      ],
+      "to": [
+        -4,
+        29,
+        -10
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        0,
+        -10
+      ],
+      "to": [
+        13,
+        29,
+        -10
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        10,
+        -10
+      ],
+      "to": [
+        2,
+        29,
+        -10
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -14,
+        0,
+        9
+      ],
+      "to": [
+        -4,
+        29,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        0,
+        9
+      ],
+      "to": [
+        13,
+        29,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        10,
+        9
+      ],
+      "to": [
+        2,
+        29,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -14,
+        0,
+        -10
+      ],
+      "to": [
+        -14,
+        13,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -14,
+        17,
+        -10
+      ],
+      "to": [
+        -14,
+        29,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -14,
+        14,
+        -10
+      ],
+      "to": [
+        -14,
+        16,
+        -5
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -14,
+        14,
+        -3
+      ],
+      "to": [
+        -14,
+        16,
+        2
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -14,
+        14,
+        4
+      ],
+      "to": [
+        -14,
+        16,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        0,
+        -10
+      ],
+      "to": [
+        13,
+        13,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        17,
+        -10
+      ],
+      "to": [
+        13,
+        29,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        14,
+        -10
+      ],
+      "to": [
+        13,
+        16,
+        -5
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        14,
+        -3
+      ],
+      "to": [
+        13,
+        16,
+        2
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        14,
+        4
+      ],
+      "to": [
+        13,
+        16,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -14,
+        30,
+        -10
+      ],
+      "to": [
+        13,
+        30,
+        -10
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -13,
+        31,
+        -10
+      ],
+      "to": [
+        12,
+        31,
+        -10
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -12,
+        32,
+        -10
+      ],
+      "to": [
+        11,
+        32,
+        -10
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -11,
+        33,
+        -10
+      ],
+      "to": [
+        10,
+        33,
+        -10
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -10,
+        34,
+        -10
+      ],
+      "to": [
+        9,
+        34,
+        -10
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -9,
+        35,
+        -10
+      ],
+      "to": [
+        8,
+        35,
+        -10
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -8,
+        36,
+        -10
+      ],
+      "to": [
+        7,
+        36,
+        -10
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        37,
+        -10
+      ],
+      "to": [
+        6,
+        37,
+        -10
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        38,
+        -10
+      ],
+      "to": [
+        5,
+        38,
+        -10
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        39,
+        -10
+      ],
+      "to": [
+        4,
+        39,
+        -10
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        40,
+        -10
+      ],
+      "to": [
+        3,
+        40,
+        -10
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        41,
+        -10
+      ],
+      "to": [
+        2,
+        41,
+        -10
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -2,
+        42,
+        -10
+      ],
+      "to": [
+        1,
+        42,
+        -10
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -1,
+        43,
+        -10
+      ],
+      "to": [
+        0,
+        43,
+        -10
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -14,
+        30,
+        9
+      ],
+      "to": [
+        13,
+        30,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -13,
+        31,
+        9
+      ],
+      "to": [
+        12,
+        31,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -12,
+        32,
+        9
+      ],
+      "to": [
+        11,
+        32,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -11,
+        33,
+        9
+      ],
+      "to": [
+        10,
+        33,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -10,
+        34,
+        9
+      ],
+      "to": [
+        9,
+        34,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -9,
+        35,
+        9
+      ],
+      "to": [
+        8,
+        35,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -8,
+        36,
+        9
+      ],
+      "to": [
+        7,
+        36,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        37,
+        9
+      ],
+      "to": [
+        6,
+        37,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        38,
+        9
+      ],
+      "to": [
+        5,
+        38,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        39,
+        9
+      ],
+      "to": [
+        4,
+        39,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        40,
+        9
+      ],
+      "to": [
+        3,
+        40,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        41,
+        9
+      ],
+      "to": [
+        2,
+        41,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -2,
+        42,
+        9
+      ],
+      "to": [
+        1,
+        42,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -1,
+        43,
+        9
+      ],
+      "to": [
+        0,
+        43,
+        9
+      ],
+      "block": "minecraft:stone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -14,
+        29,
+        -9
+      ],
+      "to": [
+        -14,
+        30,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -13,
+        30,
+        -9
+      ],
+      "to": [
+        -13,
+        31,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -12,
+        31,
+        -9
+      ],
+      "to": [
+        -12,
+        32,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -11,
+        32,
+        -9
+      ],
+      "to": [
+        -11,
+        33,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -10,
+        33,
+        -9
+      ],
+      "to": [
+        -10,
+        34,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -9,
+        34,
+        -9
+      ],
+      "to": [
+        -9,
+        35,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -8,
+        35,
+        -9
+      ],
+      "to": [
+        -8,
+        36,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -7,
+        36,
+        -9
+      ],
+      "to": [
+        -7,
+        37,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -6,
+        37,
+        -9
+      ],
+      "to": [
+        -6,
+        38,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        38,
+        -9
+      ],
+      "to": [
+        -5,
+        39,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        39,
+        -9
+      ],
+      "to": [
+        -4,
+        40,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        40,
+        -9
+      ],
+      "to": [
+        -3,
+        41,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -2,
+        41,
+        -9
+      ],
+      "to": [
+        -2,
+        42,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -1,
+        42,
+        -9
+      ],
+      "to": [
+        -1,
+        43,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        29,
+        -9
+      ],
+      "to": [
+        13,
+        30,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        12,
+        30,
+        -9
+      ],
+      "to": [
+        12,
+        31,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        31,
+        -9
+      ],
+      "to": [
+        11,
+        32,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        32,
+        -9
+      ],
+      "to": [
+        10,
+        33,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        33,
+        -9
+      ],
+      "to": [
+        9,
+        34,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        8,
+        34,
+        -9
+      ],
+      "to": [
+        8,
+        35,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        7,
+        35,
+        -9
+      ],
+      "to": [
+        7,
+        36,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        36,
+        -9
+      ],
+      "to": [
+        6,
+        37,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        5,
+        37,
+        -9
+      ],
+      "to": [
+        5,
+        38,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        38,
+        -9
+      ],
+      "to": [
+        4,
+        39,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        39,
+        -9
+      ],
+      "to": [
+        3,
+        40,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        2,
+        40,
+        -9
+      ],
+      "to": [
+        2,
+        41,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        41,
+        -9
+      ],
+      "to": [
+        1,
+        42,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        42,
+        -9
+      ],
+      "to": [
+        0,
+        43,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -15,
+        29,
+        -9
+      ],
+      "to": [
+        -15,
+        30,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        29,
+        -9
+      ],
+      "to": [
+        14,
+        30,
+        8
+      ],
+      "block": "minecraft:deepslate_tiles"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -14,
+        0,
+        -10
+      ],
+      "to": [
+        -13,
+        29,
+        -9
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        12,
+        0,
+        -10
+      ],
+      "to": [
+        13,
+        29,
+        -9
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -14,
+        0,
+        8
+      ],
+      "to": [
+        -13,
+        29,
+        9
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        12,
+        0,
+        8
+      ],
+      "to": [
+        13,
+        29,
+        9
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -15,
+        0,
+        -10
+      ],
+      "to": [
+        -15,
+        29,
+        -9
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -15,
+        0,
+        8
+      ],
+      "to": [
+        -15,
+        29,
+        9
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        0,
+        -10
+      ],
+      "to": [
+        14,
+        29,
+        -9
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        0,
+        8
+      ],
+      "to": [
+        14,
+        29,
+        9
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -14,
+        0,
+        -10
+      ],
+      "to": [
+        -4,
+        1,
+        -10
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        0,
+        -10
+      ],
+      "to": [
+        13,
+        1,
+        -10
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -14,
+        0,
+        9
+      ],
+      "to": [
+        -4,
+        1,
+        9
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        0,
+        9
+      ],
+      "to": [
+        13,
+        1,
+        9
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -14,
+        0,
+        -10
+      ],
+      "to": [
+        -14,
+        1,
+        9
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        0,
+        -10
+      ],
+      "to": [
+        13,
+        1,
+        9
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -14,
+        29,
+        -10
+      ],
+      "to": [
+        13,
+        29,
+        -10
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -14,
+        29,
+        9
+      ],
+      "to": [
+        13,
+        29,
+        9
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -14,
+        29,
+        -10
+      ],
+      "to": [
+        -14,
+        29,
+        9
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        29,
+        -10
+      ],
+      "to": [
+        13,
+        29,
+        9
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "line",
+      "from": [
+        -14,
+        30,
+        -10
+      ],
+      "to": [
+        -1,
+        43,
+        -10
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "line",
+      "from": [
+        -14,
+        30,
+        -11
+      ],
+      "to": [
+        -1,
+        43,
+        -11
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "line",
+      "from": [
+        13,
+        30,
+        -10
+      ],
+      "to": [
+        0,
+        43,
+        -10
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "line",
+      "from": [
+        13,
+        30,
+        -11
+      ],
+      "to": [
+        0,
+        43,
+        -11
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "line",
+      "from": [
+        -14,
+        30,
+        9
+      ],
+      "to": [
+        -1,
+        43,
+        9
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "line",
+      "from": [
+        -14,
+        30,
+        10
+      ],
+      "to": [
+        -1,
+        43,
+        10
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "line",
+      "from": [
+        13,
+        30,
+        9
+      ],
+      "to": [
+        0,
+        43,
+        9
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "line",
+      "from": [
+        13,
+        30,
+        10
+      ],
+      "to": [
+        0,
+        43,
+        10
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        0,
+        -10
+      ],
+      "to": [
+        -4,
+        9,
+        -10
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        0,
+        -10
+      ],
+      "to": [
+        3,
+        9,
+        -10
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -3,
+        9,
+        -10
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        9,
+        -10
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        10,
+        -10
+      ],
+      "to": [
+        3,
+        10,
+        -10
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        0,
+        9
+      ],
+      "to": [
+        -4,
+        9,
+        9
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        0,
+        9
+      ],
+      "to": [
+        3,
+        9,
+        9
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -3,
+        9,
+        9
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        9,
+        9
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        10,
+        9
+      ],
+      "to": [
+        3,
+        10,
+        9
+      ],
+      "block": "minecraft:dark_oak_log"
+    }
+  ]
+}

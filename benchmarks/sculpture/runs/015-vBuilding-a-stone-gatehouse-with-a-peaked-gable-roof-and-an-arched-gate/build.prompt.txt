@@ -1,0 +1,75 @@
+You are a master Minecraft architect. Build a WHOLE 3-D BUILDING as a structured design artifact
+that faithfully realizes the subject "a stone gatehouse with a peaked gable roof and an arched gate" — its massing, proportion, roof, palette, and
+architectural detail — per the finalized design document and the attached CONCEPT IMAGE. This is a
+complete STRUCTURE IN THE ROUND: it occupies all three axes and must read as a real building from
+every side, with all four elevations and a finished roof. It is NOT a facade, wall, relief, or scene,
+and it is ONE building — not a campus, street, courtyard complex, or cluster of structures.
+
+## Orientation (a building in the round, not a facade)
+Build a fully three-dimensional structure in x/y/z, centered on a local origin (x = 0, z = 0),
+sitting on the ground at y = 0. Model the WHOLE building — front, back, both sides, and the roof —
+as real volume with real depth: four walls enclosing a footprint, a roof on top, framed openings.
+There is no privileged 'front plane' and no relief-into-a-wall: massing projects in every direction
+as the form needs. Give it depth, not a single thin face.
+
+## Single-view limitation (read this)
+The attached concept shows ONE 3/4 view — two faces and the roof. The back and the far side are NOT
+depicted — infer them as a plausible, coherent continuation of the visible building (mirror symmetric
+features where the building is symmetric; keep the roof, wall material, opening rhythm, and palette
+consistent all the way around). Treat that hidden half as YOUR reconstruction from a single view — a
+known limit of this mode — and make every elevation read as a finished, deliberate wall, never flat
+or hollow.
+
+## Finalized design document
+# Stone Gatehouse — Design Document
+
+## 1. Read of the building
+A **medieval defensive gatehouse** — the fortified entry block of a castle or town wall, c. 12th–14th century. Fundamentally a tall, solid stone **tower pierced by a single passage**. Two features name it at a glance: the **arched gate** tunnelling through its base, and the **peaked gable** rising directly above that arch on the entry face. Massing is one upright stone cube, heavier than it is wide, so it reads as a guard-block, not a house.
+
+## 2. Form & proportion (in the round)
+One mass: a rectangular stone keep. **Footprint 28 W × 20 D**, **wall height 30**, **ridge tip at 44** (longest dimension ≈ 48 vertical). Ratio ~1.5:1 tall-to-wide — proud and defensive. The **ridge runs front-to-back**, so the gable **triangle faces the entry (front)**, framing the arch. Front/back elevations show the gable peak + arch; **side elevations** show the long slope of the gable and narrow slit windows. Roof: **steep gable**. Two shallow **corner buttress-pilasters** (2-block-deep) ground all four corners; a 2-high plinth course foots it firmly to the earth. Entry side = gabled front.
+
+## 3. Color palette (monochrome + warm accent)
+**Near-monochrome stone harmony** — restraint suits fortification.
+- **Dominant walls:** `stone_bricks` (cool grey, the structural body).
+- **Texture/banding:** `cobblestone` (plinth + buttress faces, rougher grain).
+- **Roof:** `deepslate_tiles` (dark cool grey — recedes, lets the gable read as silhouette).
+- **Accent (sparing):** `dark_oak_log` arch voussoirs + door, the one warm note drawing the eye to the gate.
+
+## 4. Surface & architectural detail
+Motif 1 — **the arch:** a chunky **6 W × 10 H** opening, ringed by a 1-block `dark_oak_log` voussoir band, repeated front and back. Motif 2 — **banding:** a single `cobblestone` string-course at wall-top and the 2-high plinth, wrapping all four sides. Windows: bold **1×3 vertical slits**, two per side elevation. Buttresses read as corner pilasters.
+
+## 5. Block-budget plan
+Of the ~48 vertical: **plinth 2**, **walls 28** (arch + slits subtracted), **gable+roof 14**. Footprint 28×20 keeps it one compact, in-the-round block.
+
+## Scale (honor it)
+- Target ~48 blocks along the LONGEST dimension. Bounding box up to ~48(x) × 48(y)
+  × 48(z); build one compact, solid building that fills that envelope without sprawling into
+  multiple structures.
+- Use `fill`/`box` for walls, floors, and the roof's major masses and `line` for edges/trim so you
+  can afford solid volume; reserve `voxel` (with block `state` for stairs/slabs) for shaping the roof
+  pitch, openings, and surface detail. Approximate slopes/round forms with stepped stairs+slabs.
+
+## Realize the document with craft
+- Build the essential masses, the roof form, and the recognizable features the document names; honor
+  its footprint/height proportions and its dominant/supporting/accent palette hierarchy.
+- Keep the building SOLID and connected — one principal mass; no detached floating parts unless the
+  subject truly has them (and then bridge them so they are supported).
+
+## Materials
+Survival-obtainable Minecraft 1.20.1 blocks, namespaced — primarily the document's palette. Declare
+every block you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate"
+- metadata.prompting_method_id = "vconcept-building.v1"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 17
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Set style.name to the document's style label and style.rationale to one line tying the build to the
+subject and document.
+
+Emit ONE complete design artifact — the full set of placements, not a diff. Local origin at
+x = 0, y = 0, z = 0 (ground at y = 0).

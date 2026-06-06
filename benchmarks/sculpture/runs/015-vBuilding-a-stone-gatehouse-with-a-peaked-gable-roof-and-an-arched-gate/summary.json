@@ -1,0 +1,47 @@
+{
+  "seq": 15,
+  "runId": "015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate",
+  "date": "2026-06-06",
+  "approach": "vConcept-building",
+  "promptMethodId": "vconcept-building.v1",
+  "model": "claude-opus-4-8",
+  "effort": null,
+  "subject": "a stone gatehouse with a peaked gable roof and an arched gate",
+  "scale": 48,
+  "blocks": 4508,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      -15,
+      0,
+      -11
+    ],
+    "max": [
+      14,
+      43,
+      10
+    ]
+  },
+  "view3q": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "turntable": {
+    "frames": 24,
+    "centerDeg": 45,
+    "amplitudeDeg": 40,
+    "mode": "rock"
+  },
+  "concept": {
+    "model": "gemini-3-pro-image-preview",
+    "promptChars": 5299,
+    "ms": 21348
+  },
+  "tokensIn": 20217,
+  "tokensOut": 41105,
+  "costUsd": 1.25418225,
+  "durationMs": 553930,
+  "note": "E-20 foundation (S-067): full building, single 3/4 view, GLB→voxel target",
+  "valueMatch": null
+}

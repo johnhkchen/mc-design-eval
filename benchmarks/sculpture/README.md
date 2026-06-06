@@ -58,6 +58,7 @@ benchmark is the live I/O + rendering + run-dir provenance around it.
 | 11 | 2026-06-05 | `a moai statue` | 48 | 6283 | 21156/7272 | $0.4002 | T-037-02 scale-48 study |
 | 12 | 2026-06-05 | `a pineapple` | 16 | 332 | 19950/15697 | $0.6062 | T-037-03 scale-16 study |
 | 13 | 2026-06-05 | `a pineapple` | 48 | 12176 | 20801/17283 | $0.6518 | T-037-04 scale-48 study |
+| 15 | 2026-06-06 | `a stone gatehouse with a peaked gable roof and an arched gate` | 48 | 4508 | 20217/41105 | $1.2542 | E-20 foundation (S-067): full building, single 3/4 view, GLB→voxel target |
 
 ## Gallery
 
@@ -164,5 +165,13 @@ benchmark is the live I/O + rendering + run-dir provenance around it.
 **12176 blocks** · 20801/17283 tok · $0.6518
 
 > T-037-04 scale-48 study
+
+### 015 — `a stone gatehouse with a peaked gable roof and an arched gate` (scale 48) · 2026-06-06
+
+![sculpture run 15 — 3/4](runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/render-3q.png)
+
+**4508 blocks** · 20217/41105 tok · $1.2542
+
+> E-20 foundation (S-067): full building, single 3/4 view, GLB→voxel target
 
 <!-- RUNS:END -->
