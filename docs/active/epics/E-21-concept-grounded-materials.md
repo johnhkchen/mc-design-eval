@@ -69,9 +69,20 @@ top-roof / base / opening-recess) and places each role's block by feature; (c) a
 pass** (LLM sees render vs concept → corrects material regions, accept-if-closer); (d) a **consolidation**
 on the buildings + a couple sculptures (does brick-vs-cobble return? cleaner AND truer?), journaled, E-12.
 
+**Palette policy (the LLM may grow the palette).** When the LLM — grounded in the concept — catches a
+material the concept uses but the build is **missing** (a "missing texture"), it has the **right to add
+that block back into the palette**. E-21's allowed palette = **design-doc manifest ∪ the ≤2 gated secondary
+(E-19) ∪ the LLM's concept-justified additions**. This supersedes E-19's stricter design-doc-only guard
+(which applied to the pre-E-21 builds). The discipline is **concept-justification, not a hard cap**: every
+added block names the concept material + where it appears, is a real survival block, and is a **distinct
+material role** (a near-tone block alongside an existing one — cobble with brick — is the goal; a redundant
+near-duplicate is not). This is concept-justified growth — the opposite of the full-table 91-block bloat
+E-19 killed (random near-duplicates, no justification).
+
 **Out:** SAM / pixel-accurate instance masks (deferred — SAM-3D for region textures later); changing form
 (geometry stays from E-16/E-20); the rubric/brief (immutable); the colorimetric path is kept for
-within-material value and as the fallback when the LLM map is silent.
+within-material value and as the fallback when the LLM map is silent. **Not** a hard palette cap — bloat is
+prevented by concept-justification + distinct-role, not a count limit.
 
 ## Candidate stories & DAG (overnight chain — gated after E-19, on main, journaled)
 
