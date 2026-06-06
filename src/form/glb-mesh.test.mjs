@@ -88,7 +88,7 @@ export function buildBoxGlb(min = [0, 0, 0], size = [1, 1, 1], node = {}) {
 // A minimal valid .glb with POSITION + TEXCOORD_0 + a baseColor image (bytes are an opaque stub —
 // parseGlbColoredSurface only slices + reports them; it never decodes). `imgBytes`/`mimeType` let a
 // test assert the slice and the reported mime; per-corner UVs are deterministic (u=i/7, v=i/7).
-function buildColoredBoxGlb(min = [0, 0, 0], size = [1, 1, 1], imgBytes = [1, 2, 3, 4, 5], mimeType = "image/webp") {
+function buildColoredBoxGlb(min = [0, 0, 0], size = [1, 1, 1], imgBytes = [1, 2, 3, 4, 5], mimeType = "image/webp", viaWebpExt = false) {
   const corners = boxCorners(min, size);
   const posBytes = corners.length * 3 * 4; // 96
   const idxBytes = pad4(BOX_TRIS.length * 2); // 72
@@ -125,8 +125,10 @@ function buildColoredBoxGlb(min = [0, 0, 0], size = [1, 1, 1], imgBytes = [1, 2,
       { bufferView: 1, componentType: 5123, type: "SCALAR", count: BOX_TRIS.length },
       { bufferView: 2, componentType: 5126, type: "VEC2", count: corners.length },
     ],
+    extensionsUsed: viaWebpExt ? ["EXT_texture_webp"] : undefined,
     images: [{ bufferView: 3, mimeType }],
-    textures: [{ source: 0 }],
+    // Real TRELLIS GLBs carry the WebP source under EXT_texture_webp (texture.source is absent).
+    textures: [viaWebpExt ? { extensions: { EXT_texture_webp: { source: 0 } } } : { source: 0 }],
     materials: [{ pbrMetallicRoughness: { baseColorTexture: { index: 0 } } }],
     meshes: [{ primitives: [{ attributes: { POSITION: 0, TEXCOORD_0: 2 }, indices: 1, material: 0 }] }],
     nodes: [{ mesh: 0 }],
@@ -218,6 +220,14 @@ test("parseGlbColoredSurface: reports baseColor image bytes + mime (no decode)",
   assert.ok(s.baseColor, "expected a baseColor image");
   assert.equal(s.baseColor.mimeType, "image/webp");
   assert.deepEqual(Array.from(s.baseColor.data), [9, 8, 7, 6]);
+});
+
+test("parseGlbColoredSurface: resolves baseColor via the EXT_texture_webp extension (TRELLIS form)", () => {
+  const glb = buildColoredBoxGlb([0, 0, 0], [1, 1, 1], [1, 2, 3], "image/webp", /* viaWebpExt */ true);
+  const s = parseGlbColoredSurface(glb);
+  assert.ok(s.baseColor, "expected baseColor resolved through EXT_texture_webp");
+  assert.equal(s.baseColor.mimeType, "image/webp");
+  assert.deepEqual(Array.from(s.baseColor.data), [1, 2, 3]);
 });
 
 test("parseGlbColoredSurface: untextured GLB → baseColor null, UVs zero-filled", () => {

@@ -221,7 +221,8 @@ function extractBaseColorImage(json, bin, prim) {
   const texIdx = mat?.pbrMetallicRoughness?.baseColorTexture?.index;
   if (texIdx == null) return null;
   const tex = json.textures?.[texIdx];
-  const imgIdx = tex?.source;
+  // WebP textures (TRELLIS) carry the image under the EXT_texture_webp extension, not `source`.
+  const imgIdx = tex?.source ?? tex?.extensions?.EXT_texture_webp?.source;
   if (imgIdx == null) return null;
   const img = json.images?.[imgIdx];
   if (!img || img.bufferView == null) return null; // data-URI images unsupported (TRELLIS embeds in BIN)
