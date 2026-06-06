@@ -1872,3 +1872,54 @@ LLM-map placed by geometric feature, and on the architectural 1:1 case (gatehous
 distinction the colour build merged — cleanly, truly, with concept-justified growth only — while the three
 over-reaches honestly mark the assigner's two real boundaries (two-materials-one-role, and the architectural
 feature classifier on organic forms).
+
+## Beyond facade — the whole structure, in the round (E-20) (S-070, T-070-01) · 2026-06-06
+
+The terminal E-20 record, and the answer to the oldest honest note in the journal. Phase 1's ceiling was a
+**facade**: text→JSON, at its best (run-014 `vRefRevise`, a unanimous **strong** 3/3), produced **one grand
+face** — a temple front, a single connected plane, with a *flat reverse side*. Every committed `spin-*.mp4`
+made this literal: rotate the build and the back falls away (`pr/assets/rotations/README.md` says so outright —
+"the full-360 `spin-*` clips reveal that they are currently facades"). That flat back is what motivated the
+whole-structure / sculptor arc (E-11) and the image→3D pivot (E-13→E-21).
+
+E-20 closes that arc. The matured pipeline — **TRELLIS bulk reconstruction** (E-16/E-17) + **E-19/E-21 clean,
+concept-grounded materials** + the **E-15 surgical cage** + the high-res voxel build (T-068) — produced a
+**complete building, in the round**: a stone gatehouse, **54×64×54**, **57,202 blocks**, a disciplined
+**4-block palette** (`stone_bricks` / `cobblestone` / `deepslate_tiles` / `dark_oak_log`), with **four real
+sides and a stepped roof**. `spin-building-e20.mp4` is the **first `spin-*` whose 360° does not reveal a flat
+back** — the thing text→JSON could not do, made legible in a single rotation.
+
+| dimension | facade (text→JSON best, run-014) | full building (E-20) |
+| --------- | -------------------------------- | -------------------- |
+| extent    | one face — a connected plane, flat back | **54×64×54** — 4 sides + a stepped roof, real back |
+| blocks    | ~10,013                          | **57,202** |
+| palette   | designed, colourful (Taj)        | 4 clean blocks (E-19/E-21-disciplined) |
+| how built | text→JSON, single view           | image→3D (TRELLIS) → voxel → clean materials → surgical cage |
+| verdict   | **strong** (facade, unanimous 3/3) | **weak** — *as rendered by the 512² no-AA lens* (E-22 confound) |
+
+**The headline — the leap is completeness, not finish.** The defensible, measured claim is *scale*: a whole
+structure where there was only a face. It does **not** depend on the judge verdict and is visible to anyone who
+watches the turntable. The build is genuinely in the round; the facade era is over.
+
+**Honest notes — where detail tops out (the residual, not hidden).**
+- **The verdict is `weak`, and it is render-lens-confounded.** The categorical judge returned **weak** at
+  whole-object form-IoU **0.929** (final; the surgical loop accepted **zero** edits, so `building/best` *is* the
+  final build — `benchmarks/sculpture/surgical-standard.{md,json}`). But the judge's core complaint — the crown
+  "dissolves into a chaotic grey jumble" — is **texture-minification aliasing in the 512² no-AA render**, not
+  build geometry or palette speckle (T-068: off-palette 0, speckle ~0; E-21 restored the 4 near-tone
+  materials). Per the E-22 finding (*render aliasing ≠ material speckle*), the honest reading is "**weak as
+  rendered by the current lens**"; E-22 fixes the lens and moves the gate to reference resemblance, which may
+  lift this materially. The verdict is recorded faithfully; it is not purely a property of the build.
+- **Fine architectural detail still tops out (the genuine residual).** Two compounding, *measured* causes
+  (T-069-01): (1) the **E-15 per-region LLM block-edit route does not scale** to a 57k-block build — every
+  region proposal failed with "prompt too long" (~1.25M tokens vs the 1M limit), because a high-res region's
+  placement list overflows the model context (memory: `surgical-edit-path-scale-limit`); (2) the **TRELLIS form
+  target had already dropped the defining detail** upstream (T-067: arch ring, gable ridge, slit windows), so
+  even a working editor had no per-region signal toward them. The *bulk* is right and complete; the *fine
+  relief* (window reveals, cornices, the arch voussoirs) is where quality tops out — and refining it needs a
+  better upstream mesh + a region representation the editor can fit in context, both out of E-20's scope.
+
+**One sentence:** E-20 ends the facade era — the matured pipeline builds a complete 54×64×54, 57,202-block
+structure with a real back and roof (the first `spin-*` that proves it), and the leap is *completeness*, with
+the honest residual that fine detail still tops out at **weak as-rendered** — confounded by the 512² render lens
+(E-22) on top of the genuine ceilings of a 1M-context surgical editor and a detail-lossy TRELLIS target.
