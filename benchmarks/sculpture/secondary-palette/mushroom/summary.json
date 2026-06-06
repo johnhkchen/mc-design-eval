@@ -1,0 +1,35 @@
+{
+  "subject": "mushroom",
+  "scale": 32,
+  "occupancy": 9505,
+  "designDocSize": 4,
+  "added": [
+    {
+      "block": "dead_brain_coral_block",
+      "gain": 32.74,
+      "coverage": 0.125,
+      "primaryDeltaE": 34.926,
+      "tableDeltaE": 2.187
+    },
+    {
+      "block": "mossy_stone_bricks",
+      "gain": 25.531,
+      "coverage": 0.126,
+      "primaryDeltaE": 28.75,
+      "tableDeltaE": 3.219
+    }
+  ],
+  "secondaryCount": 2,
+  "totalPalette": 6,
+  "snapBefore": 23.533,
+  "snapAfter": 18.042,
+  "offPalette": 0,
+  "formIoU": 0.98,
+  "foregroundPx": 926399,
+  "view3q": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "durationSec": 33.9
+}

@@ -1,0 +1,231 @@
+{
+  "schema": "secondary-palette/v1",
+  "method": "glb-voxel.v1",
+  "view": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "scale": 32,
+  "defaults": {
+    "k": 8,
+    "driftThreshold": 12,
+    "minCoverage": 0.05,
+    "fitThreshold": 6,
+    "gainThreshold": 6,
+    "K": 2
+  },
+  "metric": "augmentation = design-doc palette ∪ ≤K table blocks passing ALL gates (underserved/real/fit/big-win); snap ΔE = mean per-voxel CIE76 distance from the sampled surface colour to its nearest palette block, design-doc-only (before) vs augmented (after); off-palette = blocks outside the augmented palette (0 by construction); form IoU = silhouette vs the GLB mesh at SCULPTURE_VIEW_3Q (invariant — recolour).",
+  "generatedFrom": "benchmarks/sculpture/glb/<subject>.glb via segmentMaterials({palette: paletteFromManifest(manifest), augment:{table}}) (src/form/palette-augment.mjs)",
+  "note": "Gated secondary palette: the primary stays the design-doc manifest; the secondary is ≤K blocks from the full value-true table added ONLY when they greatly cut snap drift for a genuine, meaningful texture colour. Honest: subjects that need none add none. Total palette per subject ≤ design-doc size + K.",
+  "subjects": [
+    {
+      "subject": "dancing-man",
+      "scale": 32,
+      "occupancy": 973,
+      "designDocSize": 5,
+      "added": [],
+      "secondaryCount": 0,
+      "totalPalette": 5,
+      "snapBefore": 15.33,
+      "snapAfter": 15.33,
+      "offPalette": 0,
+      "formIoU": 0.914,
+      "foregroundPx": 1048576,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 10.1
+    },
+    {
+      "subject": "moai",
+      "scale": 32,
+      "occupancy": 4215,
+      "designDocSize": 4,
+      "added": [
+        {
+          "block": "nether_quartz_ore",
+          "gain": 20.458,
+          "coverage": 0.124,
+          "primaryDeltaE": 25.503,
+          "tableDeltaE": 5.045
+        },
+        {
+          "block": "cyan_terracotta",
+          "gain": 11.84,
+          "coverage": 0.078,
+          "primaryDeltaE": 13.729,
+          "tableDeltaE": 1.889
+        }
+      ],
+      "secondaryCount": 2,
+      "totalPalette": 6,
+      "snapBefore": 8.215,
+      "snapAfter": 5.206,
+      "offPalette": 0,
+      "formIoU": 0.565,
+      "foregroundPx": 1048346,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 26.4
+    },
+    {
+      "subject": "pineapple",
+      "scale": 32,
+      "occupancy": 3397,
+      "designDocSize": 4,
+      "added": [],
+      "secondaryCount": 0,
+      "totalPalette": 4,
+      "snapBefore": 17.593,
+      "snapAfter": 17.593,
+      "offPalette": 0,
+      "formIoU": 0.907,
+      "foregroundPx": 1048576,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 16.6
+    },
+    {
+      "subject": "bow-and-arrow",
+      "scale": 32,
+      "occupancy": 513,
+      "designDocSize": 6,
+      "added": [
+        {
+          "block": "light_gray_concrete_powder",
+          "gain": 21.069,
+          "coverage": 0.125,
+          "primaryDeltaE": 25.27,
+          "tableDeltaE": 4.201
+        },
+        {
+          "block": "black_terracotta",
+          "gain": 7.04,
+          "coverage": 0.126,
+          "primaryDeltaE": 12.017,
+          "tableDeltaE": 4.977
+        }
+      ],
+      "secondaryCount": 2,
+      "totalPalette": 8,
+      "snapBefore": 9.275,
+      "snapAfter": 7.037,
+      "offPalette": 0,
+      "formIoU": 0.473,
+      "foregroundPx": 1047416,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 8
+    },
+    {
+      "subject": "heart",
+      "scale": 32,
+      "occupancy": 5840,
+      "designDocSize": 5,
+      "added": [
+        {
+          "block": "mycelium",
+          "gain": 16.271,
+          "coverage": 0.125,
+          "primaryDeltaE": 21.71,
+          "tableDeltaE": 5.439
+        },
+        {
+          "block": "cyan_terracotta",
+          "gain": 15.705,
+          "coverage": 0.125,
+          "primaryDeltaE": 17.881,
+          "tableDeltaE": 2.176
+        }
+      ],
+      "secondaryCount": 2,
+      "totalPalette": 7,
+      "snapBefore": 13.244,
+      "snapAfter": 10.148,
+      "offPalette": 0,
+      "formIoU": 0.877,
+      "foregroundPx": 1048167,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 22.6
+    },
+    {
+      "subject": "mushroom",
+      "scale": 32,
+      "occupancy": 9505,
+      "designDocSize": 4,
+      "added": [
+        {
+          "block": "dead_brain_coral_block",
+          "gain": 32.74,
+          "coverage": 0.125,
+          "primaryDeltaE": 34.926,
+          "tableDeltaE": 2.187
+        },
+        {
+          "block": "mossy_stone_bricks",
+          "gain": 25.531,
+          "coverage": 0.126,
+          "primaryDeltaE": 28.75,
+          "tableDeltaE": 3.219
+        }
+      ],
+      "secondaryCount": 2,
+      "totalPalette": 6,
+      "snapBefore": 23.533,
+      "snapAfter": 18.042,
+      "offPalette": 0,
+      "formIoU": 0.98,
+      "foregroundPx": 926399,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 33.9
+    },
+    {
+      "subject": "koi",
+      "scale": 32,
+      "occupancy": 2164,
+      "designDocSize": 5,
+      "added": [
+        {
+          "block": "smooth_red_sandstone",
+          "gain": 22.384,
+          "coverage": 0.125,
+          "primaryDeltaE": 24.902,
+          "tableDeltaE": 2.518
+        }
+      ],
+      "secondaryCount": 1,
+      "totalPalette": 6,
+      "snapBefore": 13.836,
+      "snapAfter": 11.584,
+      "offPalette": 0,
+      "formIoU": 0.622,
+      "foregroundPx": 1046741,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 14.2
+    }
+  ]
+}

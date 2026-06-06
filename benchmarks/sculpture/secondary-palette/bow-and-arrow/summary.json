@@ -1,0 +1,35 @@
+{
+  "subject": "bow-and-arrow",
+  "scale": 32,
+  "occupancy": 513,
+  "designDocSize": 6,
+  "added": [
+    {
+      "block": "light_gray_concrete_powder",
+      "gain": 21.069,
+      "coverage": 0.125,
+      "primaryDeltaE": 25.27,
+      "tableDeltaE": 4.201
+    },
+    {
+      "block": "black_terracotta",
+      "gain": 7.04,
+      "coverage": 0.126,
+      "primaryDeltaE": 12.017,
+      "tableDeltaE": 4.977
+    }
+  ],
+  "secondaryCount": 2,
+  "totalPalette": 8,
+  "snapBefore": 9.275,
+  "snapAfter": 7.037,
+  "offPalette": 0,
+  "formIoU": 0.473,
+  "foregroundPx": 1047416,
+  "view3q": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "durationSec": 8
+}

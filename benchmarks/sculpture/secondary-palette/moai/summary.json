@@ -1,0 +1,35 @@
+{
+  "subject": "moai",
+  "scale": 32,
+  "occupancy": 4215,
+  "designDocSize": 4,
+  "added": [
+    {
+      "block": "nether_quartz_ore",
+      "gain": 20.458,
+      "coverage": 0.124,
+      "primaryDeltaE": 25.503,
+      "tableDeltaE": 5.045
+    },
+    {
+      "block": "cyan_terracotta",
+      "gain": 11.84,
+      "coverage": 0.078,
+      "primaryDeltaE": 13.729,
+      "tableDeltaE": 1.889
+    }
+  ],
+  "secondaryCount": 2,
+  "totalPalette": 6,
+  "snapBefore": 8.215,
+  "snapAfter": 5.206,
+  "offPalette": 0,
+  "formIoU": 0.565,
+  "foregroundPx": 1048346,
+  "view3q": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "durationSec": 26.4
+}

@@ -1,0 +1,35 @@
+{
+  "subject": "heart",
+  "scale": 32,
+  "occupancy": 5840,
+  "designDocSize": 5,
+  "added": [
+    {
+      "block": "mycelium",
+      "gain": 16.271,
+      "coverage": 0.125,
+      "primaryDeltaE": 21.71,
+      "tableDeltaE": 5.439
+    },
+    {
+      "block": "cyan_terracotta",
+      "gain": 15.705,
+      "coverage": 0.125,
+      "primaryDeltaE": 17.881,
+      "tableDeltaE": 2.176
+    }
+  ],
+  "secondaryCount": 2,
+  "totalPalette": 7,
+  "snapBefore": 13.244,
+  "snapAfter": 10.148,
+  "offPalette": 0,
+  "formIoU": 0.877,
+  "foregroundPx": 1048167,
+  "view3q": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "durationSec": 22.6
+}
