@@ -1,0 +1,671 @@
+{
+  "schema": "e18-scorecard/v1",
+  "epic": "E-18",
+  "scale": 32,
+  "builds": [
+    "r1",
+    "r2",
+    "e18"
+  ],
+  "metrics": [
+    {
+      "key": "formIoU",
+      "label": "form IoU",
+      "better": "higher"
+    },
+    {
+      "key": "speckle",
+      "label": "speckle",
+      "better": "lower"
+    },
+    {
+      "key": "distinct",
+      "label": "distinct",
+      "better": "lower"
+    },
+    {
+      "key": "offPalette",
+      "label": "off-pal",
+      "better": "lower"
+    },
+    {
+      "key": "valueDeltaE",
+      "label": "value ΔE",
+      "better": "lower"
+    }
+  ],
+  "fixes": [
+    {
+      "key": "thin",
+      "label": "thin voxelization (form)",
+      "baseline": "r1",
+      "vs": "vsR1",
+      "metric": "formIoU",
+      "mean": -0.004,
+      "n": 7,
+      "improved": 4,
+      "held": 0,
+      "regressed": 3,
+      "verdict": "regressed"
+    },
+    {
+      "key": "segment",
+      "label": "material segmentation (speckle)",
+      "baseline": "r2",
+      "vs": "vsR2",
+      "metric": "speckle",
+      "mean": -0.18,
+      "n": 7,
+      "improved": 7,
+      "held": 0,
+      "regressed": 0,
+      "verdict": "won-clean"
+    },
+    {
+      "key": "discipline",
+      "label": "palette discipline (off-pal + distinct)",
+      "baseline": "r2",
+      "vs": "vsR2",
+      "metric": "offPalette",
+      "mean": -2790.57,
+      "n": 7,
+      "improved": 7,
+      "held": 0,
+      "regressed": 0,
+      "verdict": "won-discipline"
+    }
+  ],
+  "routing": {
+    "thinHelped": [
+      {
+        "subject": "moai",
+        "dForm": 0.03
+      },
+      {
+        "subject": "bow-and-arrow",
+        "dForm": 0.05
+      },
+      {
+        "subject": "heart",
+        "dForm": 0.02
+      },
+      {
+        "subject": "koi",
+        "dForm": 0.08
+      }
+    ],
+    "solidHurt": [
+      {
+        "subject": "dancing-man",
+        "dForm": -0.1
+      },
+      {
+        "subject": "pineapple",
+        "dForm": -0.06
+      },
+      {
+        "subject": "mushroom",
+        "dForm": -0.05
+      }
+    ],
+    "flat": []
+  },
+  "averages": {
+    "r1": {
+      "formIoU": 0.76,
+      "speckle": 0.44,
+      "distinct": 5.43,
+      "offPalette": 0,
+      "valueDeltaE": 5.47
+    },
+    "r2": {
+      "formIoU": 0.76,
+      "speckle": 0.3,
+      "distinct": 6.43,
+      "offPalette": 2790.57,
+      "valueDeltaE": 0
+    },
+    "e18": {
+      "formIoU": 0.76,
+      "speckle": 0.13,
+      "distinct": 5.43,
+      "offPalette": 0,
+      "valueDeltaE": 8.67
+    }
+  },
+  "subjects": [
+    {
+      "subject": "dancing-man",
+      "r1": {
+        "formIoU": 0.914,
+        "speckle": 0.402,
+        "distinct": 5,
+        "offPalette": 0,
+        "valueDeltaE": 11.19
+      },
+      "r2": {
+        "formIoU": 0.914,
+        "speckle": 0.275,
+        "distinct": 5,
+        "offPalette": 973,
+        "valueDeltaE": 0
+      },
+      "e18": {
+        "formIoU": 0.814,
+        "speckle": 0.148,
+        "distinct": 5,
+        "offPalette": 0,
+        "valueDeltaE": 13.82
+      },
+      "thin": {
+        "components": 1,
+        "surfaceOnlyCount": 531,
+        "occBase": 973,
+        "occThin": 1504
+      },
+      "deltas": {
+        "vsR1": {
+          "formIoU": {
+            "raw": -0.1,
+            "improved": false
+          },
+          "speckle": {
+            "raw": -0.25,
+            "improved": true
+          },
+          "distinct": {
+            "raw": 0,
+            "improved": false
+          },
+          "offPalette": {
+            "raw": 0,
+            "improved": false
+          },
+          "valueDeltaE": {
+            "raw": 2.63,
+            "improved": false
+          }
+        },
+        "vsR2": {
+          "formIoU": {
+            "raw": -0.1,
+            "improved": false
+          },
+          "speckle": {
+            "raw": -0.13,
+            "improved": true
+          },
+          "distinct": {
+            "raw": 0,
+            "improved": false
+          },
+          "offPalette": {
+            "raw": -973,
+            "improved": true
+          },
+          "valueDeltaE": {
+            "raw": 13.82,
+            "improved": false
+          }
+        }
+      }
+    },
+    {
+      "subject": "moai",
+      "r1": {
+        "formIoU": 0.565,
+        "speckle": 0.428,
+        "distinct": 5,
+        "offPalette": 0,
+        "valueDeltaE": 1
+      },
+      "r2": {
+        "formIoU": 0.565,
+        "speckle": 0.248,
+        "distinct": 5,
+        "offPalette": 4096,
+        "valueDeltaE": 0
+      },
+      "e18": {
+        "formIoU": 0.593,
+        "speckle": 0.136,
+        "distinct": 5,
+        "offPalette": 0,
+        "valueDeltaE": 1.88
+      },
+      "thin": {
+        "components": 3,
+        "surfaceOnlyCount": 1844,
+        "occBase": 4215,
+        "occThin": 6059
+      },
+      "deltas": {
+        "vsR1": {
+          "formIoU": {
+            "raw": 0.03,
+            "improved": true
+          },
+          "speckle": {
+            "raw": -0.29,
+            "improved": true
+          },
+          "distinct": {
+            "raw": 0,
+            "improved": false
+          },
+          "offPalette": {
+            "raw": 0,
+            "improved": false
+          },
+          "valueDeltaE": {
+            "raw": 0.88,
+            "improved": false
+          }
+        },
+        "vsR2": {
+          "formIoU": {
+            "raw": 0.03,
+            "improved": true
+          },
+          "speckle": {
+            "raw": -0.11,
+            "improved": true
+          },
+          "distinct": {
+            "raw": 0,
+            "improved": false
+          },
+          "offPalette": {
+            "raw": -4096,
+            "improved": true
+          },
+          "valueDeltaE": {
+            "raw": 1.88,
+            "improved": false
+          }
+        }
+      }
+    },
+    {
+      "subject": "pineapple",
+      "r1": {
+        "formIoU": 0.907,
+        "speckle": 0.422,
+        "distinct": 4,
+        "offPalette": 0,
+        "valueDeltaE": 8.71
+      },
+      "r2": {
+        "formIoU": 0.907,
+        "speckle": 0.25,
+        "distinct": 5,
+        "offPalette": 2939,
+        "valueDeltaE": 0
+      },
+      "e18": {
+        "formIoU": 0.845,
+        "speckle": 0.104,
+        "distinct": 4,
+        "offPalette": 0,
+        "valueDeltaE": 8.43
+      },
+      "thin": {
+        "components": 1,
+        "surfaceOnlyCount": 1458,
+        "occBase": 3397,
+        "occThin": 4855
+      },
+      "deltas": {
+        "vsR1": {
+          "formIoU": {
+            "raw": -0.06,
+            "improved": false
+          },
+          "speckle": {
+            "raw": -0.32,
+            "improved": true
+          },
+          "distinct": {
+            "raw": 0,
+            "improved": false
+          },
+          "offPalette": {
+            "raw": 0,
+            "improved": false
+          },
+          "valueDeltaE": {
+            "raw": -0.28,
+            "improved": true
+          }
+        },
+        "vsR2": {
+          "formIoU": {
+            "raw": -0.06,
+            "improved": false
+          },
+          "speckle": {
+            "raw": -0.15,
+            "improved": true
+          },
+          "distinct": {
+            "raw": -1,
+            "improved": true
+          },
+          "offPalette": {
+            "raw": -2939,
+            "improved": true
+          },
+          "valueDeltaE": {
+            "raw": 8.43,
+            "improved": false
+          }
+        }
+      }
+    },
+    {
+      "subject": "bow-and-arrow",
+      "r1": {
+        "formIoU": 0.473,
+        "speckle": 0.442,
+        "distinct": 6,
+        "offPalette": 0,
+        "valueDeltaE": 1.1
+      },
+      "r2": {
+        "formIoU": 0.473,
+        "speckle": 0.366,
+        "distinct": 8,
+        "offPalette": 352,
+        "valueDeltaE": 0
+      },
+      "e18": {
+        "formIoU": 0.526,
+        "speckle": 0.089,
+        "distinct": 6,
+        "offPalette": 0,
+        "valueDeltaE": 8.04
+      },
+      "thin": {
+        "components": 1,
+        "surfaceOnlyCount": 697,
+        "occBase": 513,
+        "occThin": 1210
+      },
+      "deltas": {
+        "vsR1": {
+          "formIoU": {
+            "raw": 0.05,
+            "improved": true
+          },
+          "speckle": {
+            "raw": -0.35,
+            "improved": true
+          },
+          "distinct": {
+            "raw": 0,
+            "improved": false
+          },
+          "offPalette": {
+            "raw": 0,
+            "improved": false
+          },
+          "valueDeltaE": {
+            "raw": 6.94,
+            "improved": false
+          }
+        },
+        "vsR2": {
+          "formIoU": {
+            "raw": 0.05,
+            "improved": true
+          },
+          "speckle": {
+            "raw": -0.28,
+            "improved": true
+          },
+          "distinct": {
+            "raw": -2,
+            "improved": true
+          },
+          "offPalette": {
+            "raw": -352,
+            "improved": true
+          },
+          "valueDeltaE": {
+            "raw": 8.04,
+            "improved": false
+          }
+        }
+      }
+    },
+    {
+      "subject": "heart",
+      "r1": {
+        "formIoU": 0.877,
+        "speckle": 0.57,
+        "distinct": 7,
+        "offPalette": 0,
+        "valueDeltaE": 4.62
+      },
+      "r2": {
+        "formIoU": 0.877,
+        "speckle": 0.343,
+        "distinct": 7,
+        "offPalette": 1323,
+        "valueDeltaE": 0
+      },
+      "e18": {
+        "formIoU": 0.895,
+        "speckle": 0.11,
+        "distinct": 7,
+        "offPalette": 0,
+        "valueDeltaE": 8
+      },
+      "thin": {
+        "components": 1,
+        "surfaceOnlyCount": 2142,
+        "occBase": 5840,
+        "occThin": 7982
+      },
+      "deltas": {
+        "vsR1": {
+          "formIoU": {
+            "raw": 0.02,
+            "improved": true
+          },
+          "speckle": {
+            "raw": -0.46,
+            "improved": true
+          },
+          "distinct": {
+            "raw": 0,
+            "improved": false
+          },
+          "offPalette": {
+            "raw": 0,
+            "improved": false
+          },
+          "valueDeltaE": {
+            "raw": 3.38,
+            "improved": false
+          }
+        },
+        "vsR2": {
+          "formIoU": {
+            "raw": 0.02,
+            "improved": true
+          },
+          "speckle": {
+            "raw": -0.23,
+            "improved": true
+          },
+          "distinct": {
+            "raw": 0,
+            "improved": false
+          },
+          "offPalette": {
+            "raw": -1323,
+            "improved": true
+          },
+          "valueDeltaE": {
+            "raw": 8,
+            "improved": false
+          }
+        }
+      }
+    },
+    {
+      "subject": "mushroom",
+      "r1": {
+        "formIoU": 0.98,
+        "speckle": 0.374,
+        "distinct": 6,
+        "offPalette": 0,
+        "valueDeltaE": 7.17
+      },
+      "r2": {
+        "formIoU": 0.98,
+        "speckle": 0.301,
+        "distinct": 7,
+        "offPalette": 8614,
+        "valueDeltaE": 0
+      },
+      "e18": {
+        "formIoU": 0.929,
+        "speckle": 0.131,
+        "distinct": 6,
+        "offPalette": 0,
+        "valueDeltaE": 4.14
+      },
+      "thin": {
+        "components": 1,
+        "surfaceOnlyCount": 2453,
+        "occBase": 9505,
+        "occThin": 11958
+      },
+      "deltas": {
+        "vsR1": {
+          "formIoU": {
+            "raw": -0.05,
+            "improved": false
+          },
+          "speckle": {
+            "raw": -0.24,
+            "improved": true
+          },
+          "distinct": {
+            "raw": 0,
+            "improved": false
+          },
+          "offPalette": {
+            "raw": 0,
+            "improved": false
+          },
+          "valueDeltaE": {
+            "raw": -3.03,
+            "improved": true
+          }
+        },
+        "vsR2": {
+          "formIoU": {
+            "raw": -0.05,
+            "improved": false
+          },
+          "speckle": {
+            "raw": -0.17,
+            "improved": true
+          },
+          "distinct": {
+            "raw": -1,
+            "improved": true
+          },
+          "offPalette": {
+            "raw": -8614,
+            "improved": true
+          },
+          "valueDeltaE": {
+            "raw": 4.14,
+            "improved": false
+          }
+        }
+      }
+    },
+    {
+      "subject": "koi",
+      "r1": {
+        "formIoU": 0.622,
+        "speckle": 0.415,
+        "distinct": 5,
+        "offPalette": 0,
+        "valueDeltaE": 4.53
+      },
+      "r2": {
+        "formIoU": 0.623,
+        "speckle": 0.35,
+        "distinct": 8,
+        "offPalette": 1237,
+        "valueDeltaE": 0
+      },
+      "e18": {
+        "formIoU": 0.706,
+        "speckle": 0.158,
+        "distinct": 5,
+        "offPalette": 0,
+        "valueDeltaE": 16.35
+      },
+      "thin": {
+        "components": 1,
+        "surfaceOnlyCount": 991,
+        "occBase": 2164,
+        "occThin": 3155
+      },
+      "deltas": {
+        "vsR1": {
+          "formIoU": {
+            "raw": 0.08,
+            "improved": true
+          },
+          "speckle": {
+            "raw": -0.26,
+            "improved": true
+          },
+          "distinct": {
+            "raw": 0,
+            "improved": false
+          },
+          "offPalette": {
+            "raw": 0,
+            "improved": false
+          },
+          "valueDeltaE": {
+            "raw": 11.82,
+            "improved": false
+          }
+        },
+        "vsR2": {
+          "formIoU": {
+            "raw": 0.08,
+            "improved": true
+          },
+          "speckle": {
+            "raw": -0.19,
+            "improved": true
+          },
+          "distinct": {
+            "raw": -3,
+            "improved": true
+          },
+          "offPalette": {
+            "raw": -1237,
+            "improved": true
+          },
+          "valueDeltaE": {
+            "raw": 16.35,
+            "improved": false
+          }
+        }
+      }
+    }
+  ],
+  "note": "E-18 consolidation scorecard (T-061-01): a PURE read of the T-060-01 combined-remeasure spine. Each fix's row is the MEAN of its isolating marginal across the present subjects (n reported): thin voxelization is E18−R1 (form), material segmentation and palette discipline are E18−R2 (speckle, off-palette/distinct). Off-palette is counted against the AUGMENTED DESIGN-DOC palette (design-doc manifest ∪ ≤2 gated secondary). R2's value ΔE is 0 by construction (snap to the GLB's own texture palette); E18's value ΔE is nonzero — a real, small cost of the tighter palette, not a tautology. Form IoU is a routed tradeoff: thin preservation helps organic/thin subjects and over-thickens already-solid ones (see routing). Zero/negative shown."
+}
