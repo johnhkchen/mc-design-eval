@@ -57,3 +57,7 @@ benchmarks/sculpture/glb-voxel-seg/**/render-3q.png
 # E-18 combined remeasure renders (T-060-01) — derived, regen via
 # `node benchmarks/sculpture/e18-remeasure.mjs`. Durable record: e18-remeasure.{md,json} + per-subject summaries.
 benchmarks/sculpture/e18-build/**/render-3q.png
+
+# E-18 gated secondary palette renders (T-058-03) — derived, regen via
+# `node benchmarks/sculpture/secondary-palette.mjs`. Durable record: secondary-palette.{md,json} + per-subject summaries.
+benchmarks/sculpture/secondary-palette/**/render-3q.png
