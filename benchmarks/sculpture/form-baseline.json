@@ -1,0 +1,127 @@
+{
+  "schema": "form-fidelity/v1",
+  "metric": "silhouette-iou",
+  "grid": 128,
+  "fit": "aspect",
+  "generatedFrom": "benchmarks/sculpture/runs/*/{render-3q.png,concept.png}",
+  "meanIoU": 0.479,
+  "subjects": [
+    {
+      "run": "001-vConcept-moai",
+      "subject": "moai",
+      "iou": 0.197,
+      "renderCoverage": 0.207,
+      "conceptCoverage": 0.438,
+      "renderAspect": 0.467,
+      "conceptAspect": 1.544
+    },
+    {
+      "run": "002-vConcept-a-dancing-man",
+      "subject": "a dancing man",
+      "iou": 0.533,
+      "renderCoverage": 0.13,
+      "conceptCoverage": 0.138,
+      "renderAspect": 0.553,
+      "conceptAspect": 0.723
+    },
+    {
+      "run": "003-vConcept-a-moai-statue",
+      "subject": "a moai statue",
+      "iou": 0.213,
+      "renderCoverage": 0.181,
+      "conceptCoverage": 0.483,
+      "renderAspect": 0.421,
+      "conceptAspect": 1.627
+    },
+    {
+      "run": "004-vConcept-a-pineapple",
+      "subject": "a pineapple",
+      "iou": 0.755,
+      "renderCoverage": 0.159,
+      "conceptCoverage": 0.193,
+      "renderAspect": 0.598,
+      "conceptAspect": 0.553
+    },
+    {
+      "run": "005-vConcept-a-bow-and-arrow",
+      "subject": "a bow and arrow",
+      "iou": 0.35,
+      "renderCoverage": 0.06,
+      "conceptCoverage": 0.093,
+      "renderAspect": 0.43,
+      "conceptAspect": 0.71
+    },
+    {
+      "run": "006-vConcept-an-anatomically-correct-human-heart",
+      "subject": "an anatomically correct human heart",
+      "iou": 0.347,
+      "renderCoverage": 0.183,
+      "conceptCoverage": 1,
+      "renderAspect": 0.501,
+      "conceptAspect": 1.833
+    },
+    {
+      "run": "007-vConcept-a-sword",
+      "subject": "a sword",
+      "iou": 0.459,
+      "renderCoverage": 0.051,
+      "conceptCoverage": 0.081,
+      "renderAspect": 0.261,
+      "conceptAspect": 0.376
+    },
+    {
+      "run": "008-vConcept-a-mushroom",
+      "subject": "a mushroom",
+      "iou": 0.496,
+      "renderCoverage": 0.157,
+      "conceptCoverage": 0.803,
+      "renderAspect": 0.894,
+      "conceptAspect": 1.964
+    },
+    {
+      "run": "009-vConcept-a-koi-fish",
+      "subject": "a koi fish",
+      "iou": 0.481,
+      "renderCoverage": 0.144,
+      "conceptCoverage": 0.274,
+      "renderAspect": 1.2,
+      "conceptAspect": 1.553
+    },
+    {
+      "run": "010-vConcept-a-moai-statue",
+      "subject": "a moai statue",
+      "iou": 0.818,
+      "renderCoverage": 0.249,
+      "conceptCoverage": 0.226,
+      "renderAspect": 0.638,
+      "conceptAspect": 0.569
+    },
+    {
+      "run": "011-vConcept-a-moai-statue",
+      "subject": "a moai statue",
+      "iou": 0.488,
+      "renderCoverage": 0.18,
+      "conceptCoverage": 0.629,
+      "renderAspect": 0.415,
+      "conceptAspect": 1.016
+    },
+    {
+      "run": "012-vConcept-a-pineapple",
+      "subject": "a pineapple",
+      "iou": 0.298,
+      "renderCoverage": 0.145,
+      "conceptCoverage": 1,
+      "renderAspect": 0.787,
+      "conceptAspect": 1.833
+    },
+    {
+      "run": "013-vConcept-a-pineapple",
+      "subject": "a pineapple",
+      "iou": 0.789,
+      "renderCoverage": 0.154,
+      "conceptCoverage": 0.205,
+      "renderAspect": 0.607,
+      "conceptAspect": 0.579
+    }
+  ]
+}
