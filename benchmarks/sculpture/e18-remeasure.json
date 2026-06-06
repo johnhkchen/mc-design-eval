@@ -36,29 +36,29 @@
   "generatedFrom": "voxelizeGlbThin → segmentMaterials, vs glb-voxel (R1) + glb-voxel-clean (R2)",
   "note": "E-18 combined build (thin-preserved voxelization + material-region segmentation) re-measured vs the E-17 R1 (glb-voxel) and R2 (material-clean) baselines. Deltas are direction-aware (form IoU higher is better; speckle/distinct/off-palette/value ΔE lower is better).",
   "notes": {
-    "valueDeltaETautology": "R2 snaps to the GLB's own texture palette (the value-ΔE reference), so its value ΔE is ~0 by construction — a 0 there carries no signal. E18 uses a TIGHTER fixed palette (k=6), so its value ΔE can be nonzero: a small, real cost of palette discipline, not a tautology. Speckle / distinct / off-palette carry the primary discrimination."
+    "valueDeltaETautology": null
   },
   "averages": {
     "r1": {
       "formIoU": 0.76,
-      "speckle": 0.62,
-      "distinct": 53.29,
-      "offPalette": 1968.14,
-      "valueDeltaE": 4.53
+      "speckle": 0.44,
+      "distinct": 5.43,
+      "offPalette": 0,
+      "valueDeltaE": 5.47
     },
     "r2": {
       "formIoU": 0.76,
       "speckle": 0.3,
       "distinct": 6.43,
-      "offPalette": 1171.86,
+      "offPalette": 2790.57,
       "valueDeltaE": 0
     },
     "e18": {
       "formIoU": 0.76,
       "speckle": 0.13,
-      "distinct": 5.29,
+      "distinct": 5.43,
       "offPalette": 0,
-      "valueDeltaE": 1.35
+      "valueDeltaE": 8.67
     }
   },
   "regressions": [
@@ -71,6 +71,27 @@
     },
     {
       "subject": "dancing-man",
+      "metric": "distinct",
+      "vs": "r1",
+      "raw": 0,
+      "kind": "no-change"
+    },
+    {
+      "subject": "dancing-man",
+      "metric": "offPalette",
+      "vs": "r1",
+      "raw": 0,
+      "kind": "no-change"
+    },
+    {
+      "subject": "dancing-man",
+      "metric": "valueDeltaE",
+      "vs": "r1",
+      "raw": 2.63,
+      "kind": "worse"
+    },
+    {
+      "subject": "dancing-man",
       "metric": "formIoU",
       "vs": "r2",
       "raw": -0.1,
@@ -87,8 +108,29 @@
       "subject": "dancing-man",
       "metric": "valueDeltaE",
       "vs": "r2",
+      "raw": 13.82,
+      "kind": "worse"
+    },
+    {
+      "subject": "moai",
+      "metric": "distinct",
+      "vs": "r1",
       "raw": 0,
       "kind": "no-change"
+    },
+    {
+      "subject": "moai",
+      "metric": "offPalette",
+      "vs": "r1",
+      "raw": 0,
+      "kind": "no-change"
+    },
+    {
+      "subject": "moai",
+      "metric": "valueDeltaE",
+      "vs": "r1",
+      "raw": 0.88,
+      "kind": "worse"
     },
     {
       "subject": "moai",
@@ -99,31 +141,31 @@
     },
     {
       "subject": "moai",
+      "metric": "valueDeltaE",
+      "vs": "r2",
+      "raw": 1.88,
+      "kind": "worse"
+    },
+    {
+      "subject": "pineapple",
+      "metric": "formIoU",
+      "vs": "r1",
+      "raw": -0.06,
+      "kind": "worse"
+    },
+    {
+      "subject": "pineapple",
+      "metric": "distinct",
+      "vs": "r1",
+      "raw": 0,
+      "kind": "no-change"
+    },
+    {
+      "subject": "pineapple",
       "metric": "offPalette",
-      "vs": "r2",
+      "vs": "r1",
       "raw": 0,
       "kind": "no-change"
-    },
-    {
-      "subject": "moai",
-      "metric": "valueDeltaE",
-      "vs": "r2",
-      "raw": 0,
-      "kind": "no-change"
-    },
-    {
-      "subject": "pineapple",
-      "metric": "formIoU",
-      "vs": "r1",
-      "raw": -0.06,
-      "kind": "worse"
-    },
-    {
-      "subject": "pineapple",
-      "metric": "valueDeltaE",
-      "vs": "r1",
-      "raw": 0.35,
-      "kind": "worse"
     },
     {
       "subject": "pineapple",
@@ -136,12 +178,61 @@
       "subject": "pineapple",
       "metric": "valueDeltaE",
       "vs": "r2",
-      "raw": 4.73,
+      "raw": 8.43,
+      "kind": "worse"
+    },
+    {
+      "subject": "bow-and-arrow",
+      "metric": "distinct",
+      "vs": "r1",
+      "raw": 0,
+      "kind": "no-change"
+    },
+    {
+      "subject": "bow-and-arrow",
+      "metric": "offPalette",
+      "vs": "r1",
+      "raw": 0,
+      "kind": "no-change"
+    },
+    {
+      "subject": "bow-and-arrow",
+      "metric": "valueDeltaE",
+      "vs": "r1",
+      "raw": 6.94,
       "kind": "worse"
     },
     {
       "subject": "bow-and-arrow",
       "metric": "valueDeltaE",
+      "vs": "r2",
+      "raw": 8.04,
+      "kind": "worse"
+    },
+    {
+      "subject": "heart",
+      "metric": "distinct",
+      "vs": "r1",
+      "raw": 0,
+      "kind": "no-change"
+    },
+    {
+      "subject": "heart",
+      "metric": "offPalette",
+      "vs": "r1",
+      "raw": 0,
+      "kind": "no-change"
+    },
+    {
+      "subject": "heart",
+      "metric": "valueDeltaE",
+      "vs": "r1",
+      "raw": 3.38,
+      "kind": "worse"
+    },
+    {
+      "subject": "heart",
+      "metric": "distinct",
       "vs": "r2",
       "raw": 0,
       "kind": "no-change"
@@ -150,7 +241,7 @@
       "subject": "heart",
       "metric": "valueDeltaE",
       "vs": "r2",
-      "raw": 3.41,
+      "raw": 8,
       "kind": "worse"
     },
     {
@@ -162,6 +253,20 @@
     },
     {
       "subject": "mushroom",
+      "metric": "distinct",
+      "vs": "r1",
+      "raw": 0,
+      "kind": "no-change"
+    },
+    {
+      "subject": "mushroom",
+      "metric": "offPalette",
+      "vs": "r1",
+      "raw": 0,
+      "kind": "no-change"
+    },
+    {
+      "subject": "mushroom",
       "metric": "formIoU",
       "vs": "r2",
       "raw": -0.05,
@@ -171,15 +276,36 @@
       "subject": "mushroom",
       "metric": "valueDeltaE",
       "vs": "r2",
-      "raw": 1.29,
+      "raw": 4.14,
+      "kind": "worse"
+    },
+    {
+      "subject": "koi",
+      "metric": "distinct",
+      "vs": "r1",
+      "raw": 0,
+      "kind": "no-change"
+    },
+    {
+      "subject": "koi",
+      "metric": "offPalette",
+      "vs": "r1",
+      "raw": 0,
+      "kind": "no-change"
+    },
+    {
+      "subject": "koi",
+      "metric": "valueDeltaE",
+      "vs": "r1",
+      "raw": 11.82,
       "kind": "worse"
     },
     {
       "subject": "koi",
       "metric": "valueDeltaE",
       "vs": "r2",
-      "raw": 0,
-      "kind": "no-change"
+      "raw": 16.35,
+      "kind": "worse"
     }
   ],
   "subjects": [
@@ -187,24 +313,24 @@
       "subject": "dancing-man",
       "r1": {
         "formIoU": 0.914,
-        "speckle": 0.528,
-        "distinct": 18,
-        "offPalette": 366,
-        "valueDeltaE": 2.1
+        "speckle": 0.402,
+        "distinct": 5,
+        "offPalette": 0,
+        "valueDeltaE": 11.19
       },
       "r2": {
         "formIoU": 0.914,
         "speckle": 0.275,
         "distinct": 5,
-        "offPalette": 319,
+        "offPalette": 973,
         "valueDeltaE": 0
       },
       "e18": {
         "formIoU": 0.814,
-        "speckle": 0.15,
+        "speckle": 0.148,
         "distinct": 5,
         "offPalette": 0,
-        "valueDeltaE": 0
+        "valueDeltaE": 13.82
       },
       "thin": {
         "components": 1,
@@ -219,20 +345,20 @@
             "improved": false
           },
           "speckle": {
-            "raw": -0.38,
+            "raw": -0.25,
             "improved": true
           },
           "distinct": {
-            "raw": -13,
-            "improved": true
+            "raw": 0,
+            "improved": false
           },
           "offPalette": {
-            "raw": -366,
-            "improved": true
+            "raw": 0,
+            "improved": false
           },
           "valueDeltaE": {
-            "raw": -2.1,
-            "improved": true
+            "raw": 2.63,
+            "improved": false
           }
         },
         "vsR2": {
@@ -249,11 +375,11 @@
             "improved": false
           },
           "offPalette": {
-            "raw": -319,
+            "raw": -973,
             "improved": true
           },
           "valueDeltaE": {
-            "raw": 0,
+            "raw": 13.82,
             "improved": false
           }
         }
@@ -263,24 +389,24 @@
       "subject": "moai",
       "r1": {
         "formIoU": 0.565,
-        "speckle": 0.643,
-        "distinct": 43,
-        "offPalette": 853,
-        "valueDeltaE": 1.22
+        "speckle": 0.428,
+        "distinct": 5,
+        "offPalette": 0,
+        "valueDeltaE": 1
       },
       "r2": {
         "formIoU": 0.565,
         "speckle": 0.248,
         "distinct": 5,
-        "offPalette": 0,
+        "offPalette": 4096,
         "valueDeltaE": 0
       },
       "e18": {
         "formIoU": 0.593,
-        "speckle": 0.159,
+        "speckle": 0.136,
         "distinct": 5,
         "offPalette": 0,
-        "valueDeltaE": 0
+        "valueDeltaE": 1.88
       },
       "thin": {
         "components": 3,
@@ -295,20 +421,20 @@
             "improved": true
           },
           "speckle": {
-            "raw": -0.48,
+            "raw": -0.29,
             "improved": true
           },
           "distinct": {
-            "raw": -38,
-            "improved": true
+            "raw": 0,
+            "improved": false
           },
           "offPalette": {
-            "raw": -853,
-            "improved": true
+            "raw": 0,
+            "improved": false
           },
           "valueDeltaE": {
-            "raw": -1.22,
-            "improved": true
+            "raw": 0.88,
+            "improved": false
           }
         },
         "vsR2": {
@@ -317,7 +443,7 @@
             "improved": true
           },
           "speckle": {
-            "raw": -0.09,
+            "raw": -0.11,
             "improved": true
           },
           "distinct": {
@@ -325,11 +451,11 @@
             "improved": false
           },
           "offPalette": {
-            "raw": 0,
-            "improved": false
+            "raw": -4096,
+            "improved": true
           },
           "valueDeltaE": {
-            "raw": 0,
+            "raw": 1.88,
             "improved": false
           }
         }
@@ -339,24 +465,24 @@
       "subject": "pineapple",
       "r1": {
         "formIoU": 0.907,
-        "speckle": 0.549,
-        "distinct": 24,
-        "offPalette": 2272,
-        "valueDeltaE": 4.38
+        "speckle": 0.422,
+        "distinct": 4,
+        "offPalette": 0,
+        "valueDeltaE": 8.71
       },
       "r2": {
         "formIoU": 0.907,
         "speckle": 0.25,
         "distinct": 5,
-        "offPalette": 2003,
+        "offPalette": 2939,
         "valueDeltaE": 0
       },
       "e18": {
         "formIoU": 0.845,
-        "speckle": 0.109,
+        "speckle": 0.104,
         "distinct": 4,
         "offPalette": 0,
-        "valueDeltaE": 4.73
+        "valueDeltaE": 8.43
       },
       "thin": {
         "components": 1,
@@ -371,20 +497,20 @@
             "improved": false
           },
           "speckle": {
-            "raw": -0.44,
+            "raw": -0.32,
             "improved": true
           },
           "distinct": {
-            "raw": -20,
-            "improved": true
+            "raw": 0,
+            "improved": false
           },
           "offPalette": {
-            "raw": -2272,
-            "improved": true
+            "raw": 0,
+            "improved": false
           },
           "valueDeltaE": {
-            "raw": 0.35,
-            "improved": false
+            "raw": -0.28,
+            "improved": true
           }
         },
         "vsR2": {
@@ -393,7 +519,7 @@
             "improved": false
           },
           "speckle": {
-            "raw": -0.14,
+            "raw": -0.15,
             "improved": true
           },
           "distinct": {
@@ -401,11 +527,11 @@
             "improved": true
           },
           "offPalette": {
-            "raw": -2003,
+            "raw": -2939,
             "improved": true
           },
           "valueDeltaE": {
-            "raw": 4.73,
+            "raw": 8.43,
             "improved": false
           }
         }
@@ -415,24 +541,24 @@
       "subject": "bow-and-arrow",
       "r1": {
         "formIoU": 0.473,
-        "speckle": 0.706,
-        "distinct": 34,
-        "offPalette": 365,
-        "valueDeltaE": 3.8
+        "speckle": 0.442,
+        "distinct": 6,
+        "offPalette": 0,
+        "valueDeltaE": 1.1
       },
       "r2": {
         "formIoU": 0.473,
         "speckle": 0.366,
         "distinct": 8,
-        "offPalette": 164,
+        "offPalette": 352,
         "valueDeltaE": 0
       },
       "e18": {
         "formIoU": 0.526,
-        "speckle": 0.053,
-        "distinct": 5,
+        "speckle": 0.089,
+        "distinct": 6,
         "offPalette": 0,
-        "valueDeltaE": 0
+        "valueDeltaE": 8.04
       },
       "thin": {
         "components": 1,
@@ -447,20 +573,20 @@
             "improved": true
           },
           "speckle": {
-            "raw": -0.65,
+            "raw": -0.35,
             "improved": true
           },
           "distinct": {
-            "raw": -29,
-            "improved": true
+            "raw": 0,
+            "improved": false
           },
           "offPalette": {
-            "raw": -365,
-            "improved": true
+            "raw": 0,
+            "improved": false
           },
           "valueDeltaE": {
-            "raw": -3.8,
-            "improved": true
+            "raw": 6.94,
+            "improved": false
           }
         },
         "vsR2": {
@@ -469,19 +595,19 @@
             "improved": true
           },
           "speckle": {
-            "raw": -0.31,
+            "raw": -0.28,
             "improved": true
           },
           "distinct": {
-            "raw": -3,
+            "raw": -2,
             "improved": true
           },
           "offPalette": {
-            "raw": -164,
+            "raw": -352,
             "improved": true
           },
           "valueDeltaE": {
-            "raw": 0,
+            "raw": 8.04,
             "improved": false
           }
         }
@@ -491,24 +617,24 @@
       "subject": "heart",
       "r1": {
         "formIoU": 0.877,
-        "speckle": 0.692,
-        "distinct": 91,
-        "offPalette": 4063,
-        "valueDeltaE": 5.91
+        "speckle": 0.57,
+        "distinct": 7,
+        "offPalette": 0,
+        "valueDeltaE": 4.62
       },
       "r2": {
         "formIoU": 0.877,
         "speckle": 0.343,
         "distinct": 7,
-        "offPalette": 2831,
+        "offPalette": 1323,
         "valueDeltaE": 0
       },
       "e18": {
         "formIoU": 0.895,
-        "speckle": 0.1,
-        "distinct": 6,
+        "speckle": 0.11,
+        "distinct": 7,
         "offPalette": 0,
-        "valueDeltaE": 3.41
+        "valueDeltaE": 8
       },
       "thin": {
         "components": 1,
@@ -523,20 +649,20 @@
             "improved": true
           },
           "speckle": {
-            "raw": -0.59,
+            "raw": -0.46,
             "improved": true
           },
           "distinct": {
-            "raw": -85,
-            "improved": true
+            "raw": 0,
+            "improved": false
           },
           "offPalette": {
-            "raw": -4063,
-            "improved": true
+            "raw": 0,
+            "improved": false
           },
           "valueDeltaE": {
-            "raw": -2.5,
-            "improved": true
+            "raw": 3.38,
+            "improved": false
           }
         },
         "vsR2": {
@@ -545,19 +671,19 @@
             "improved": true
           },
           "speckle": {
-            "raw": -0.24,
+            "raw": -0.23,
             "improved": true
           },
           "distinct": {
-            "raw": -1,
-            "improved": true
+            "raw": 0,
+            "improved": false
           },
           "offPalette": {
-            "raw": -2831,
+            "raw": -1323,
             "improved": true
           },
           "valueDeltaE": {
-            "raw": 3.41,
+            "raw": 8,
             "improved": false
           }
         }
@@ -567,24 +693,24 @@
       "subject": "mushroom",
       "r1": {
         "formIoU": 0.98,
-        "speckle": 0.522,
-        "distinct": 92,
-        "offPalette": 4212,
-        "valueDeltaE": 6.44
+        "speckle": 0.374,
+        "distinct": 6,
+        "offPalette": 0,
+        "valueDeltaE": 7.17
       },
       "r2": {
         "formIoU": 0.98,
         "speckle": 0.301,
         "distinct": 7,
-        "offPalette": 2300,
+        "offPalette": 8614,
         "valueDeltaE": 0
       },
       "e18": {
         "formIoU": 0.929,
-        "speckle": 0.143,
+        "speckle": 0.131,
         "distinct": 6,
         "offPalette": 0,
-        "valueDeltaE": 1.29
+        "valueDeltaE": 4.14
       },
       "thin": {
         "components": 1,
@@ -599,19 +725,19 @@
             "improved": false
           },
           "speckle": {
-            "raw": -0.38,
+            "raw": -0.24,
             "improved": true
           },
           "distinct": {
-            "raw": -86,
-            "improved": true
+            "raw": 0,
+            "improved": false
           },
           "offPalette": {
-            "raw": -4212,
-            "improved": true
+            "raw": 0,
+            "improved": false
           },
           "valueDeltaE": {
-            "raw": -5.15,
+            "raw": -3.03,
             "improved": true
           }
         },
@@ -621,7 +747,7 @@
             "improved": false
           },
           "speckle": {
-            "raw": -0.16,
+            "raw": -0.17,
             "improved": true
           },
           "distinct": {
@@ -629,11 +755,11 @@
             "improved": true
           },
           "offPalette": {
-            "raw": -2300,
+            "raw": -8614,
             "improved": true
           },
           "valueDeltaE": {
-            "raw": 1.29,
+            "raw": 4.14,
             "improved": false
           }
         }
@@ -643,24 +769,24 @@
       "subject": "koi",
       "r1": {
         "formIoU": 0.622,
-        "speckle": 0.723,
-        "distinct": 71,
-        "offPalette": 1646,
-        "valueDeltaE": 7.87
+        "speckle": 0.415,
+        "distinct": 5,
+        "offPalette": 0,
+        "valueDeltaE": 4.53
       },
       "r2": {
         "formIoU": 0.623,
         "speckle": 0.35,
         "distinct": 8,
-        "offPalette": 586,
+        "offPalette": 1237,
         "valueDeltaE": 0
       },
       "e18": {
         "formIoU": 0.706,
-        "speckle": 0.17,
-        "distinct": 6,
+        "speckle": 0.158,
+        "distinct": 5,
         "offPalette": 0,
-        "valueDeltaE": 0
+        "valueDeltaE": 16.35
       },
       "thin": {
         "components": 1,
@@ -675,20 +801,20 @@
             "improved": true
           },
           "speckle": {
-            "raw": -0.55,
+            "raw": -0.26,
             "improved": true
           },
           "distinct": {
-            "raw": -65,
-            "improved": true
+            "raw": 0,
+            "improved": false
           },
           "offPalette": {
-            "raw": -1646,
-            "improved": true
+            "raw": 0,
+            "improved": false
           },
           "valueDeltaE": {
-            "raw": -7.87,
-            "improved": true
+            "raw": 11.82,
+            "improved": false
           }
         },
         "vsR2": {
@@ -697,19 +823,19 @@
             "improved": true
           },
           "speckle": {
-            "raw": -0.18,
+            "raw": -0.19,
             "improved": true
           },
           "distinct": {
-            "raw": -2,
+            "raw": -3,
             "improved": true
           },
           "offPalette": {
-            "raw": -586,
+            "raw": -1237,
             "improved": true
           },
           "valueDeltaE": {
-            "raw": 0,
+            "raw": 16.35,
             "improved": false
           }
         }

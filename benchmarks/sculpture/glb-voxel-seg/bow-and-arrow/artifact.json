@@ -9,15 +9,16 @@
   },
   "style": {
     "name": "glb-voxel-seg",
-    "rationale": "Region-segmented bow-and-arrow GLB under a 5-block fixed palette from its own texture; gradients banded."
+    "rationale": "Region-segmented bow-and-arrow GLB under the augmented design-doc palette (6 design-doc + ≤2 gated secondary); gradients banded."
   },
   "palette": {
     "manifest": [
-      "minecraft:barrel",
+      "minecraft:black_terracotta",
+      "minecraft:dark_oak_planks",
+      "minecraft:iron_block",
       "minecraft:light_gray_concrete_powder",
-      "minecraft:mangrove_log",
-      "minecraft:oak_planks",
-      "minecraft:spruce_log"
+      "minecraft:spruce_planks",
+      "minecraft:stripped_oak_log"
     ]
   },
   "placements": [
@@ -28,7 +29,7 @@
         1,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -37,7 +38,7 @@
         1,
         -1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -46,7 +47,7 @@
         2,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -55,7 +56,7 @@
         3,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -64,7 +65,7 @@
         6,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -73,7 +74,7 @@
         7,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -82,7 +83,7 @@
         9,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -109,7 +110,7 @@
         14,
         1
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -118,7 +119,7 @@
         15,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -127,7 +128,7 @@
         16,
         -1
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -136,7 +137,7 @@
         16,
         1
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -145,7 +146,7 @@
         18,
         -1
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -154,7 +155,7 @@
         18,
         1
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -163,7 +164,7 @@
         20,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -172,7 +173,7 @@
         22,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -181,7 +182,7 @@
         23,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -190,7 +191,7 @@
         24,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -199,7 +200,7 @@
         26,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -208,7 +209,7 @@
         27,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -217,7 +218,7 @@
         28,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -226,7 +227,7 @@
         1,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -235,7 +236,7 @@
         1,
         -1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -244,7 +245,7 @@
         2,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -253,7 +254,7 @@
         3,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -262,7 +263,7 @@
         6,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -271,7 +272,7 @@
         7,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -280,7 +281,7 @@
         9,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -307,7 +308,7 @@
         14,
         1
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -316,7 +317,7 @@
         16,
         -1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -325,7 +326,7 @@
         16,
         1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -334,7 +335,7 @@
         17,
         -1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -343,7 +344,7 @@
         17,
         1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -352,7 +353,7 @@
         18,
         -1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -361,7 +362,7 @@
         18,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -370,7 +371,7 @@
         18,
         1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -379,7 +380,7 @@
         20,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -388,7 +389,7 @@
         22,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -397,7 +398,7 @@
         23,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -406,7 +407,7 @@
         24,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -415,7 +416,7 @@
         26,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -424,7 +425,7 @@
         27,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -433,7 +434,7 @@
         28,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -442,7 +443,7 @@
         1,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -451,7 +452,7 @@
         1,
         -1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -460,7 +461,7 @@
         2,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -469,7 +470,7 @@
         3,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -478,7 +479,7 @@
         6,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -487,7 +488,7 @@
         7,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -496,7 +497,7 @@
         9,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -505,7 +506,7 @@
         12,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -514,7 +515,7 @@
         14,
         -1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -523,7 +524,7 @@
         14,
         1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -532,7 +533,7 @@
         18,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -541,7 +542,7 @@
         20,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -550,7 +551,7 @@
         22,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -559,7 +560,7 @@
         23,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -568,7 +569,7 @@
         24,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -577,7 +578,7 @@
         26,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -586,7 +587,7 @@
         27,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -595,7 +596,7 @@
         28,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -604,7 +605,7 @@
         1,
         -2
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -613,7 +614,7 @@
         1,
         -1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -622,7 +623,7 @@
         2,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -631,7 +632,7 @@
         3,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -640,7 +641,7 @@
         6,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:light_gray_concrete_powder"
     },
     {
       "op": "voxel",
@@ -649,7 +650,7 @@
         7,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:light_gray_concrete_powder"
     },
     {
       "op": "voxel",
@@ -658,7 +659,7 @@
         9,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -667,7 +668,7 @@
         12,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -676,7 +677,7 @@
         14,
         -1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -685,7 +686,7 @@
         14,
         1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -694,7 +695,7 @@
         15,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -757,7 +758,7 @@
         20,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -766,7 +767,7 @@
         22,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -775,7 +776,7 @@
         23,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -784,7 +785,7 @@
         24,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -793,7 +794,7 @@
         26,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -802,7 +803,7 @@
         27,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -811,7 +812,7 @@
         28,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -820,7 +821,7 @@
         1,
         -2
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -829,7 +830,7 @@
         1,
         -1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -838,7 +839,7 @@
         2,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -847,7 +848,7 @@
         3,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -856,7 +857,7 @@
         6,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:light_gray_concrete_powder"
     },
     {
       "op": "voxel",
@@ -865,7 +866,7 @@
         7,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:light_gray_concrete_powder"
     },
     {
       "op": "voxel",
@@ -874,7 +875,7 @@
         9,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -883,7 +884,7 @@
         12,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -892,7 +893,7 @@
         14,
         -1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -901,7 +902,7 @@
         14,
         1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -910,7 +911,7 @@
         16,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -919,7 +920,7 @@
         17,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -928,7 +929,7 @@
         18,
         -1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -937,7 +938,7 @@
         18,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -946,7 +947,7 @@
         18,
         1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -955,7 +956,7 @@
         20,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -964,7 +965,7 @@
         22,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -973,7 +974,7 @@
         23,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -982,7 +983,7 @@
         24,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -991,7 +992,7 @@
         26,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1000,7 +1001,7 @@
         27,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1009,7 +1010,7 @@
         28,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -1018,7 +1019,7 @@
         1,
         -2
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1027,7 +1028,7 @@
         1,
         -1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1036,7 +1037,7 @@
         2,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1045,7 +1046,7 @@
         3,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1054,7 +1055,7 @@
         6,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:light_gray_concrete_powder"
     },
     {
       "op": "voxel",
@@ -1063,7 +1064,7 @@
         7,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:light_gray_concrete_powder"
     },
     {
       "op": "voxel",
@@ -1072,7 +1073,7 @@
         9,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1081,7 +1082,7 @@
         12,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1090,7 +1091,7 @@
         14,
         -1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1099,7 +1100,7 @@
         14,
         1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1108,7 +1109,7 @@
         16,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -1117,7 +1118,7 @@
         17,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -1126,7 +1127,7 @@
         18,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1135,7 +1136,7 @@
         18,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -1144,7 +1145,7 @@
         18,
         1
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -1153,7 +1154,7 @@
         20,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1162,7 +1163,7 @@
         22,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1171,7 +1172,7 @@
         23,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1180,7 +1181,7 @@
         24,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1189,7 +1190,7 @@
         26,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1198,7 +1199,7 @@
         27,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1207,7 +1208,7 @@
         28,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -1216,7 +1217,7 @@
         1,
         -2
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1225,7 +1226,7 @@
         1,
         -1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1234,7 +1235,7 @@
         2,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1243,7 +1244,7 @@
         3,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1252,7 +1253,7 @@
         6,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:light_gray_concrete_powder"
     },
     {
       "op": "voxel",
@@ -1261,7 +1262,7 @@
         7,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:light_gray_concrete_powder"
     },
     {
       "op": "voxel",
@@ -1270,7 +1271,7 @@
         9,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1279,7 +1280,7 @@
         12,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1288,7 +1289,7 @@
         14,
         -1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -1297,7 +1298,7 @@
         14,
         1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -1306,7 +1307,7 @@
         16,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:light_gray_concrete_powder"
     },
     {
       "op": "voxel",
@@ -1315,7 +1316,7 @@
         17,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1324,7 +1325,7 @@
         18,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1333,7 +1334,7 @@
         18,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1342,7 +1343,7 @@
         18,
         1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1351,7 +1352,7 @@
         20,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1360,7 +1361,7 @@
         22,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1369,7 +1370,7 @@
         23,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1378,7 +1379,7 @@
         24,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1387,7 +1388,7 @@
         26,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1396,7 +1397,7 @@
         27,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1405,7 +1406,7 @@
         28,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -1414,7 +1415,7 @@
         1,
         -2
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1423,7 +1424,7 @@
         1,
         -1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1432,7 +1433,7 @@
         2,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1441,7 +1442,7 @@
         3,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1450,7 +1451,7 @@
         6,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1459,7 +1460,7 @@
         7,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1468,7 +1469,7 @@
         9,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1477,7 +1478,7 @@
         12,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1486,7 +1487,7 @@
         14,
         -1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -1495,7 +1496,7 @@
         14,
         1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -1504,7 +1505,7 @@
         16,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:light_gray_concrete_powder"
     },
     {
       "op": "voxel",
@@ -1513,7 +1514,7 @@
         17,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1522,7 +1523,7 @@
         18,
         -1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1531,7 +1532,7 @@
         18,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1540,7 +1541,7 @@
         18,
         1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1549,7 +1550,7 @@
         20,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1558,7 +1559,7 @@
         22,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1567,7 +1568,7 @@
         23,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1576,7 +1577,7 @@
         24,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1585,7 +1586,7 @@
         26,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1594,7 +1595,7 @@
         27,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1603,7 +1604,7 @@
         28,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -1612,7 +1613,7 @@
         1,
         -2
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1621,7 +1622,7 @@
         1,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1630,7 +1631,7 @@
         2,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1639,7 +1640,7 @@
         3,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1648,7 +1649,7 @@
         6,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1657,7 +1658,7 @@
         7,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1666,7 +1667,7 @@
         9,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1675,7 +1676,7 @@
         11,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -1684,7 +1685,7 @@
         13,
         -1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1693,7 +1694,7 @@
         13,
         1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1702,7 +1703,7 @@
         14,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1711,7 +1712,7 @@
         16,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1720,7 +1721,7 @@
         17,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -1729,7 +1730,7 @@
         18,
         -1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -1738,7 +1739,7 @@
         18,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -1747,7 +1748,7 @@
         18,
         1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -1765,7 +1766,7 @@
         22,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1774,7 +1775,7 @@
         23,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1783,7 +1784,7 @@
         24,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1792,7 +1793,7 @@
         26,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1801,7 +1802,7 @@
         27,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -1810,7 +1811,7 @@
         28,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -1819,7 +1820,7 @@
         1,
         -2
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1828,7 +1829,7 @@
         1,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1837,7 +1838,7 @@
         2,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1846,7 +1847,7 @@
         3,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -1855,7 +1856,7 @@
         6,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1864,7 +1865,7 @@
         7,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1873,7 +1874,7 @@
         10,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -1882,7 +1883,7 @@
         11,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -1891,7 +1892,7 @@
         13,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1900,7 +1901,7 @@
         13,
         1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1909,7 +1910,7 @@
         14,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1918,7 +1919,7 @@
         14,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1927,7 +1928,7 @@
         15,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1936,7 +1937,7 @@
         15,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1945,7 +1946,7 @@
         15,
         1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1954,7 +1955,7 @@
         16,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1963,7 +1964,7 @@
         16,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1972,7 +1973,7 @@
         16,
         1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1981,7 +1982,7 @@
         17,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1990,7 +1991,7 @@
         17,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -1999,7 +2000,7 @@
         17,
         1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -2026,7 +2027,7 @@
         22,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -2035,7 +2036,7 @@
         23,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -2044,7 +2045,7 @@
         24,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -2053,7 +2054,7 @@
         26,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2062,7 +2063,7 @@
         27,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -2071,7 +2072,7 @@
         28,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -2080,7 +2081,7 @@
         0,
         -2
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2089,7 +2090,7 @@
         0,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2098,7 +2099,7 @@
         0,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2107,7 +2108,7 @@
         0,
         1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2116,7 +2117,7 @@
         0,
         2
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2125,7 +2126,7 @@
         1,
         -2
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2134,7 +2135,7 @@
         1,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2143,7 +2144,7 @@
         1,
         2
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2152,7 +2153,7 @@
         2,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -2161,7 +2162,7 @@
         3,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -2170,7 +2171,7 @@
         6,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -2179,7 +2180,7 @@
         10,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -2188,7 +2189,7 @@
         11,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -2197,7 +2198,7 @@
         13,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2206,7 +2207,7 @@
         13,
         1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2215,7 +2216,7 @@
         14,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2224,7 +2225,7 @@
         14,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2233,7 +2234,7 @@
         15,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2242,7 +2243,7 @@
         15,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2251,7 +2252,7 @@
         15,
         1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2260,7 +2261,7 @@
         16,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2269,7 +2270,7 @@
         16,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2278,7 +2279,7 @@
         16,
         1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2287,7 +2288,7 @@
         17,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2296,7 +2297,7 @@
         17,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2305,7 +2306,7 @@
         17,
         1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2332,7 +2333,7 @@
         23,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -2341,7 +2342,7 @@
         24,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -2350,7 +2351,7 @@
         26,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2359,7 +2360,7 @@
         27,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -2368,7 +2369,7 @@
         28,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -2377,7 +2378,7 @@
         0,
         -3
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2386,7 +2387,7 @@
         0,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2395,7 +2396,7 @@
         0,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2404,7 +2405,7 @@
         0,
         1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2413,7 +2414,7 @@
         0,
         3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -2422,7 +2423,7 @@
         1,
         -3
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2431,7 +2432,7 @@
         1,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2440,7 +2441,7 @@
         1,
         3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -2449,7 +2450,7 @@
         2,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -2458,7 +2459,7 @@
         3,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -2467,7 +2468,7 @@
         6,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2476,7 +2477,7 @@
         7,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2485,7 +2486,7 @@
         8,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2494,7 +2495,7 @@
         9,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2503,7 +2504,7 @@
         12,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -2512,7 +2513,7 @@
         13,
         -1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2521,7 +2522,7 @@
         13,
         1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2530,7 +2531,7 @@
         14,
         -1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2539,7 +2540,7 @@
         14,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2548,7 +2549,7 @@
         14,
         1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2557,7 +2558,7 @@
         15,
         -1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2566,7 +2567,7 @@
         15,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2575,7 +2576,7 @@
         15,
         1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2584,7 +2585,7 @@
         16,
         -1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2593,7 +2594,7 @@
         16,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2602,7 +2603,7 @@
         16,
         1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2611,7 +2612,7 @@
         17,
         -1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2620,7 +2621,7 @@
         17,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2629,7 +2630,7 @@
         17,
         1
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2638,7 +2639,7 @@
         21,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -2647,7 +2648,7 @@
         22,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -2656,7 +2657,7 @@
         24,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -2665,7 +2666,7 @@
         26,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2674,7 +2675,7 @@
         27,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -2683,7 +2684,7 @@
         28,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -2692,7 +2693,7 @@
         0,
         -3
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2701,7 +2702,7 @@
         0,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2710,7 +2711,7 @@
         0,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2719,7 +2720,7 @@
         0,
         1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2728,7 +2729,7 @@
         0,
         3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -2737,7 +2738,7 @@
         1,
         -3
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2746,7 +2747,7 @@
         1,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2755,7 +2756,7 @@
         1,
         3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -2764,7 +2765,7 @@
         2,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -2773,7 +2774,7 @@
         3,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -2782,7 +2783,7 @@
         6,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2791,7 +2792,7 @@
         7,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2800,7 +2801,7 @@
         9,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2809,7 +2810,7 @@
         12,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -2818,7 +2819,7 @@
         15,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -2827,7 +2828,7 @@
         19,
         -1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -2836,7 +2837,7 @@
         19,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -2845,7 +2846,7 @@
         19,
         1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -2854,7 +2855,7 @@
         21,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2863,7 +2864,7 @@
         22,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2872,7 +2873,7 @@
         24,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -2881,7 +2882,7 @@
         25,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2890,7 +2891,7 @@
         26,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2899,7 +2900,7 @@
         27,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -2908,7 +2909,7 @@
         28,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -2917,7 +2918,7 @@
         0,
         -3
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2926,7 +2927,7 @@
         0,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2935,7 +2936,7 @@
         0,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2944,7 +2945,7 @@
         0,
         1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2953,7 +2954,7 @@
         0,
         3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -2962,7 +2963,7 @@
         1,
         -3
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2971,7 +2972,7 @@
         1,
         -2
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2980,7 +2981,7 @@
         1,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2989,7 +2990,7 @@
         1,
         2
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -2998,7 +2999,7 @@
         1,
         3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3007,7 +3008,7 @@
         2,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3016,7 +3017,7 @@
         3,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3025,7 +3026,7 @@
         5,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3034,7 +3035,7 @@
         9,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -3043,7 +3044,7 @@
         12,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -3052,7 +3053,7 @@
         15,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -3061,7 +3062,7 @@
         23,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3070,7 +3071,7 @@
         27,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -3079,7 +3080,7 @@
         28,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3088,7 +3089,7 @@
         0,
         -3
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3097,7 +3098,7 @@
         0,
         -1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3106,7 +3107,7 @@
         0,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3115,7 +3116,7 @@
         0,
         1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3124,7 +3125,7 @@
         0,
         3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3133,7 +3134,7 @@
         1,
         -3
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3142,7 +3143,7 @@
         1,
         -2
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3151,7 +3152,7 @@
         1,
         -1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3160,7 +3161,7 @@
         1,
         2
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -3169,7 +3170,7 @@
         1,
         3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3178,7 +3179,7 @@
         2,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:light_gray_concrete_powder"
     },
     {
       "op": "voxel",
@@ -3187,7 +3188,7 @@
         3,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:light_gray_concrete_powder"
     },
     {
       "op": "voxel",
@@ -3196,7 +3197,7 @@
         4,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:light_gray_concrete_powder"
     },
     {
       "op": "voxel",
@@ -3205,7 +3206,7 @@
         5,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:light_gray_concrete_powder"
     },
     {
       "op": "voxel",
@@ -3214,7 +3215,7 @@
         9,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -3223,7 +3224,7 @@
         12,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -3232,7 +3233,7 @@
         15,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3241,7 +3242,7 @@
         28,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3250,7 +3251,7 @@
         0,
         -3
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3259,7 +3260,7 @@
         0,
         -1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3268,7 +3269,7 @@
         0,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3277,7 +3278,7 @@
         0,
         1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3286,7 +3287,7 @@
         0,
         3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3295,7 +3296,7 @@
         1,
         -3
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3304,7 +3305,7 @@
         1,
         -1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3313,7 +3314,7 @@
         1,
         3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3322,7 +3323,7 @@
         2,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:light_gray_concrete_powder"
     },
     {
       "op": "voxel",
@@ -3331,7 +3332,7 @@
         3,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:light_gray_concrete_powder"
     },
     {
       "op": "voxel",
@@ -3340,7 +3341,7 @@
         9,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -3349,7 +3350,7 @@
         12,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -3358,7 +3359,7 @@
         15,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3376,7 +3377,7 @@
         25,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -3385,7 +3386,7 @@
         26,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3394,7 +3395,7 @@
         28,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3403,7 +3404,7 @@
         0,
         -3
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3412,7 +3413,7 @@
         0,
         -1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3421,7 +3422,7 @@
         0,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3430,7 +3431,7 @@
         0,
         1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3439,7 +3440,7 @@
         0,
         3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3448,7 +3449,7 @@
         1,
         -3
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3457,7 +3458,7 @@
         1,
         -1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3466,7 +3467,7 @@
         1,
         3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3475,7 +3476,7 @@
         2,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:light_gray_concrete_powder"
     },
     {
       "op": "voxel",
@@ -3484,7 +3485,7 @@
         9,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -3493,7 +3494,7 @@
         12,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3502,7 +3503,7 @@
         15,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -3520,7 +3521,7 @@
         25,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -3529,7 +3530,7 @@
         26,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3538,7 +3539,7 @@
         28,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3547,7 +3548,7 @@
         0,
         -3
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3556,7 +3557,7 @@
         0,
         -1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3565,7 +3566,7 @@
         0,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3574,7 +3575,7 @@
         0,
         1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3583,7 +3584,7 @@
         0,
         3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3592,7 +3593,7 @@
         1,
         -3
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3601,7 +3602,7 @@
         1,
         -2
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3610,7 +3611,7 @@
         1,
         -1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3619,7 +3620,7 @@
         1,
         2
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -3628,7 +3629,7 @@
         1,
         3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3664,7 +3665,7 @@
         9,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -3673,7 +3674,7 @@
         12,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3682,7 +3683,7 @@
         15,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -3700,7 +3701,7 @@
         25,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -3709,7 +3710,7 @@
         27,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -3718,7 +3719,7 @@
         28,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3727,7 +3728,7 @@
         0,
         -3
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3736,7 +3737,7 @@
         0,
         -1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3745,7 +3746,7 @@
         0,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3754,7 +3755,7 @@
         0,
         1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3763,7 +3764,7 @@
         0,
         3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3772,7 +3773,7 @@
         1,
         -3
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3781,7 +3782,7 @@
         1,
         -2
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3790,7 +3791,7 @@
         1,
         -1
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -3799,7 +3800,7 @@
         1,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -3808,7 +3809,7 @@
         1,
         2
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -3817,7 +3818,7 @@
         1,
         3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3826,7 +3827,7 @@
         2,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -3835,7 +3836,7 @@
         3,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -3844,7 +3845,7 @@
         4,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -3853,7 +3854,7 @@
         9,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -3862,7 +3863,7 @@
         12,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:light_gray_concrete_powder"
     },
     {
       "op": "voxel",
@@ -3871,7 +3872,7 @@
         15,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -3889,7 +3890,7 @@
         25,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -3898,7 +3899,7 @@
         27,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -3907,7 +3908,7 @@
         28,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3952,7 +3953,7 @@
         0,
         3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3979,7 +3980,7 @@
         1,
         3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -3988,7 +3989,7 @@
         3,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -3997,7 +3998,7 @@
         9,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -4006,7 +4007,7 @@
         12,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:light_gray_concrete_powder"
     },
     {
       "op": "voxel",
@@ -4015,7 +4016,7 @@
         15,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4033,7 +4034,7 @@
         25,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4114,7 +4115,7 @@
         7,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -4123,7 +4124,7 @@
         9,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -4132,7 +4133,7 @@
         12,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:light_gray_concrete_powder"
     },
     {
       "op": "voxel",
@@ -4141,7 +4142,7 @@
         15,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4159,7 +4160,7 @@
         25,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4204,7 +4205,7 @@
         9,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -4213,7 +4214,7 @@
         12,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -4222,7 +4223,7 @@
         15,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4240,7 +4241,7 @@
         25,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4249,7 +4250,7 @@
         28,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -4258,7 +4259,7 @@
         29,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -4267,7 +4268,7 @@
         30,
         0
       ],
-      "block": "minecraft:oak_planks"
+      "block": "minecraft:stripped_oak_log"
     },
     {
       "op": "voxel",
@@ -4276,7 +4277,7 @@
         11,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -4285,7 +4286,7 @@
         12,
         0
       ],
-      "block": "minecraft:light_gray_concrete_powder"
+      "block": "minecraft:iron_block"
     },
     {
       "op": "voxel",
@@ -4294,7 +4295,7 @@
         15,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4312,7 +4313,7 @@
         25,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4321,7 +4322,7 @@
         26,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -4330,7 +4331,7 @@
         28,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -4339,7 +4340,7 @@
         29,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -4348,7 +4349,7 @@
         30,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -4357,7 +4358,7 @@
         31,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -4366,7 +4367,7 @@
         15,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4384,7 +4385,7 @@
         14,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4393,7 +4394,7 @@
         15,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4402,7 +4403,7 @@
         15,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4411,7 +4412,7 @@
         15,
         1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4420,7 +4421,7 @@
         16,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -4429,7 +4430,7 @@
         17,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -4447,7 +4448,7 @@
         14,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4456,7 +4457,7 @@
         15,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4465,7 +4466,7 @@
         15,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4474,7 +4475,7 @@
         15,
         1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4483,7 +4484,7 @@
         16,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -4492,7 +4493,7 @@
         17,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -4510,7 +4511,7 @@
         14,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4519,7 +4520,7 @@
         15,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4528,7 +4529,7 @@
         15,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4537,7 +4538,7 @@
         15,
         1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4546,7 +4547,7 @@
         16,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -4555,7 +4556,7 @@
         17,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -4573,7 +4574,7 @@
         14,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4582,7 +4583,7 @@
         15,
         -1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4591,7 +4592,7 @@
         15,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4600,7 +4601,7 @@
         15,
         1
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4609,7 +4610,7 @@
         16,
         0
       ],
-      "block": "minecraft:mangrove_log"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
@@ -4618,7 +4619,7 @@
         17,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:black_terracotta"
     },
     {
       "op": "voxel",
@@ -4627,7 +4628,7 @@
         15,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
@@ -4636,7 +4637,7 @@
         15,
         0
       ],
-      "block": "minecraft:barrel"
+      "block": "minecraft:spruce_planks"
     }
   ]
 }

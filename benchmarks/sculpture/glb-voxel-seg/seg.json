@@ -17,7 +17,7 @@
   },
   "metric": "palette discipline = off-palette count (blocks outside the fixed palette) + distinct-block count (manifest); noise = spatial speckle (fraction of face-adjacent differing pairs); form IoU = silhouette vs the GLB's own mesh at SCULPTURE_VIEW_3Q (steady = segmentation did not break the shape)",
   "generatedFrom": "benchmarks/sculpture/glb/<subject>.glb via segmentMaterials (src/form/material-segment.mjs)",
-  "note": "E-18 rung R-seg: region segmentation over the R2 material-clean builds. The palette is texture-derived (E-10) and FIXED; every region fills with one palette block (gradients banded), so off-palette = 0 and distinct ≈ palette size by construction. R-seg only re-decides each occupied cell's block; it NEVER touches occupancy, so form IoU is invariant (GL rounding aside). Before = the committed R2 build; its off-palette is counted against the SAME fixed palette (the leakage R-seg removes). Sword excluded.",
+  "note": "E-18 rung R-seg: region segmentation over the R2 material-clean builds. T-058-02: the palette is the AUGMENTED DESIGN-DOC palette (design-doc manifest ∪ ≤K=2 gated secondary, T-058-03) and FIXED — NOT a texture median-cut; every region fills with one palette block (gradients banded), so off-palette = 0 and distinct ≤ design-doc size + 2 by construction (asserted by assertPaletteDiscipline). R-seg only re-decides each occupied cell's block; it NEVER touches occupancy, so form IoU is invariant (GL rounding aside). Before = the committed R2 build; its off-palette is counted against the SAME augmented palette (the leakage R-seg removes). Sword excluded.",
   "subjects": [
     {
       "subject": "dancing-man",
@@ -43,8 +43,8 @@
       "distinctBefore": 5,
       "distinctAfter": 5,
       "speckleBefore": 0.275,
-      "speckleAfter": 0.155,
-      "offPaletteBefore": 319,
+      "speckleAfter": 0.151,
+      "offPaletteBefore": 973,
       "offPaletteAfter": 0,
       "formIoUBefore": 0.914,
       "formIoUAfter": 0.914,
@@ -53,7 +53,7 @@
         "elevationDeg": 30,
         "fov": 45
       },
-      "durationSec": 9.2
+      "durationSec": 10.2
     },
     {
       "subject": "moai",
@@ -74,13 +74,13 @@
           15
         ]
       },
-      "paletteSize": 5,
+      "paletteSize": 6,
       "paletteDescription": "5 blocks over 100% of frame: coal_ore 29%, stone_bricks 25%, cracked_stone_bricks 21%, cyan_terracotta 14%, nether_quartz_ore 12% (mean ΔE 2.2)",
       "distinctBefore": 5,
       "distinctAfter": 5,
       "speckleBefore": 0.248,
-      "speckleAfter": 0.119,
-      "offPaletteBefore": 0,
+      "speckleAfter": 0.097,
+      "offPaletteBefore": 4096,
       "offPaletteAfter": 0,
       "formIoUBefore": 0.565,
       "formIoUAfter": 0.565,
@@ -89,7 +89,7 @@
         "elevationDeg": 30,
         "fov": 45
       },
-      "durationSec": 23.5
+      "durationSec": 24.8
     },
     {
       "subject": "pineapple",
@@ -115,8 +115,8 @@
       "distinctBefore": 5,
       "distinctAfter": 4,
       "speckleBefore": 0.25,
-      "speckleAfter": 0.12,
-      "offPaletteBefore": 2003,
+      "speckleAfter": 0.126,
+      "offPaletteBefore": 2939,
       "offPaletteAfter": 0,
       "formIoUBefore": 0.907,
       "formIoUAfter": 0.907,
@@ -125,13 +125,13 @@
         "elevationDeg": 30,
         "fov": 45
       },
-      "durationSec": 13.8
+      "durationSec": 15.1
     },
     {
       "subject": "bow-and-arrow",
       "scale": 32,
       "occupancy": 513,
-      "regionCount": 5,
+      "regionCount": 6,
       "blocks": 513,
       "unmapped": 0,
       "bounds": {
@@ -146,13 +146,13 @@
           3
         ]
       },
-      "paletteSize": 5,
+      "paletteSize": 8,
       "paletteDescription": "5 blocks over 100% of frame: spruce_log 50%, barrel 13%, light_gray_concrete_powder 13%, mangrove_log 13%, oak_planks 13% (mean ΔE 4.3)",
       "distinctBefore": 8,
-      "distinctAfter": 5,
+      "distinctAfter": 6,
       "speckleBefore": 0.366,
-      "speckleAfter": 0.224,
-      "offPaletteBefore": 164,
+      "speckleAfter": 0.228,
+      "offPaletteBefore": 352,
       "offPaletteAfter": 0,
       "formIoUBefore": 0.473,
       "formIoUAfter": 0.473,
@@ -161,13 +161,13 @@
         "elevationDeg": 30,
         "fov": 45
       },
-      "durationSec": 7.9
+      "durationSec": 8.1
     },
     {
       "subject": "heart",
       "scale": 32,
       "occupancy": 5840,
-      "regionCount": 6,
+      "regionCount": 7,
       "blocks": 5840,
       "unmapped": 0,
       "bounds": {
@@ -182,13 +182,13 @@
           15
         ]
       },
-      "paletteSize": 6,
+      "paletteSize": 7,
       "paletteDescription": "6 blocks over 100% of frame: brown_wool 27%, red_concrete 23%, cyan_stained_glass 13%, cyan_terracotta 13%, mycelium 13%, nether_quartz_ore 13% (mean ΔE 4.8)",
       "distinctBefore": 7,
-      "distinctAfter": 6,
+      "distinctAfter": 7,
       "speckleBefore": 0.343,
-      "speckleAfter": 0.136,
-      "offPaletteBefore": 2831,
+      "speckleAfter": 0.144,
+      "offPaletteBefore": 1323,
       "offPaletteAfter": 0,
       "formIoUBefore": 0.877,
       "formIoUAfter": 0.877,
@@ -197,7 +197,7 @@
         "elevationDeg": 30,
         "fov": 45
       },
-      "durationSec": 20.2
+      "durationSec": 21.7
     },
     {
       "subject": "mushroom",
@@ -223,8 +223,8 @@
       "distinctBefore": 7,
       "distinctAfter": 6,
       "speckleBefore": 0.301,
-      "speckleAfter": 0.176,
-      "offPaletteBefore": 2300,
+      "speckleAfter": 0.153,
+      "offPaletteBefore": 8614,
       "offPaletteAfter": 0,
       "formIoUBefore": 0.98,
       "formIoUAfter": 0.98,
@@ -233,13 +233,13 @@
         "elevationDeg": 30,
         "fov": 45
       },
-      "durationSec": 34.9
+      "durationSec": 37.6
     },
     {
       "subject": "koi",
       "scale": 32,
       "occupancy": 2164,
-      "regionCount": 6,
+      "regionCount": 5,
       "blocks": 2164,
       "unmapped": 0,
       "bounds": {
@@ -257,10 +257,10 @@
       "paletteSize": 6,
       "paletteDescription": "6 blocks over 100% of frame: white_terracotta 25%, white_concrete 25%, clay 13%, cyan_stained_glass 13%, smooth_red_sandstone 13%, yellow_terracotta 13% (mean ΔE 7.8)",
       "distinctBefore": 8,
-      "distinctAfter": 6,
+      "distinctAfter": 5,
       "speckleBefore": 0.35,
-      "speckleAfter": 0.218,
-      "offPaletteBefore": 586,
+      "speckleAfter": 0.184,
+      "offPaletteBefore": 1237,
       "offPaletteAfter": 0,
       "formIoUBefore": 0.623,
       "formIoUAfter": 0.622,
@@ -269,7 +269,7 @@
         "elevationDeg": 30,
         "fov": 45
       },
-      "durationSec": 12.8
+      "durationSec": 13.8
     }
   ]
 }

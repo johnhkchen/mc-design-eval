@@ -2,7 +2,7 @@
   "subject": "koi",
   "scale": 32,
   "occupancy": 2164,
-  "regionCount": 6,
+  "regionCount": 5,
   "blocks": 2164,
   "unmapped": 0,
   "bounds": {
@@ -20,10 +20,10 @@
   "paletteSize": 6,
   "paletteDescription": "6 blocks over 100% of frame: white_terracotta 25%, white_concrete 25%, clay 13%, cyan_stained_glass 13%, smooth_red_sandstone 13%, yellow_terracotta 13% (mean ΔE 7.8)",
   "distinctBefore": 8,
-  "distinctAfter": 6,
+  "distinctAfter": 5,
   "speckleBefore": 0.35,
-  "speckleAfter": 0.218,
-  "offPaletteBefore": 586,
+  "speckleAfter": 0.184,
+  "offPaletteBefore": 1237,
   "offPaletteAfter": 0,
   "formIoUBefore": 0.623,
   "formIoUAfter": 0.622,
@@ -32,5 +32,5 @@
     "elevationDeg": 30,
     "fov": 45
   },
-  "durationSec": 12.8
+  "durationSec": 13.8
 }

@@ -2,24 +2,24 @@
   "subject": "moai",
   "r1": {
     "formIoU": 0.565,
-    "speckle": 0.643,
-    "distinct": 43,
-    "offPalette": 853,
-    "valueDeltaE": 1.22
+    "speckle": 0.428,
+    "distinct": 5,
+    "offPalette": 0,
+    "valueDeltaE": 1
   },
   "r2": {
     "formIoU": 0.565,
     "speckle": 0.248,
     "distinct": 5,
-    "offPalette": 0,
+    "offPalette": 4096,
     "valueDeltaE": 0
   },
   "e18": {
     "formIoU": 0.593,
-    "speckle": 0.159,
+    "speckle": 0.136,
     "distinct": 5,
     "offPalette": 0,
-    "valueDeltaE": 0
+    "valueDeltaE": 1.88
   },
   "thin": {
     "components": 3,

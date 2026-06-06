@@ -2,7 +2,7 @@
   "subject": "heart",
   "scale": 32,
   "occupancy": 5840,
-  "regionCount": 6,
+  "regionCount": 7,
   "blocks": 5840,
   "unmapped": 0,
   "bounds": {
@@ -17,13 +17,13 @@
       15
     ]
   },
-  "paletteSize": 6,
+  "paletteSize": 7,
   "paletteDescription": "6 blocks over 100% of frame: brown_wool 27%, red_concrete 23%, cyan_stained_glass 13%, cyan_terracotta 13%, mycelium 13%, nether_quartz_ore 13% (mean ΔE 4.8)",
   "distinctBefore": 7,
-  "distinctAfter": 6,
+  "distinctAfter": 7,
   "speckleBefore": 0.343,
-  "speckleAfter": 0.136,
-  "offPaletteBefore": 2831,
+  "speckleAfter": 0.144,
+  "offPaletteBefore": 1323,
   "offPaletteAfter": 0,
   "formIoUBefore": 0.877,
   "formIoUAfter": 0.877,
@@ -32,5 +32,5 @@
     "elevationDeg": 30,
     "fov": 45
   },
-  "durationSec": 20.2
+  "durationSec": 21.7
 }

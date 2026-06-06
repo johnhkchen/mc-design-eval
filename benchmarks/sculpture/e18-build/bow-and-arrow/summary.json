@@ -2,24 +2,24 @@
   "subject": "bow-and-arrow",
   "r1": {
     "formIoU": 0.473,
-    "speckle": 0.706,
-    "distinct": 34,
-    "offPalette": 365,
-    "valueDeltaE": 3.8
+    "speckle": 0.442,
+    "distinct": 6,
+    "offPalette": 0,
+    "valueDeltaE": 1.1
   },
   "r2": {
     "formIoU": 0.473,
     "speckle": 0.366,
     "distinct": 8,
-    "offPalette": 164,
+    "offPalette": 352,
     "valueDeltaE": 0
   },
   "e18": {
     "formIoU": 0.526,
-    "speckle": 0.053,
-    "distinct": 5,
+    "speckle": 0.089,
+    "distinct": 6,
     "offPalette": 0,
-    "valueDeltaE": 0
+    "valueDeltaE": 8.04
   },
   "thin": {
     "components": 1,

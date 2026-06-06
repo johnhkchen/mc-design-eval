@@ -9,33 +9,49 @@ Scale 32. Subjects: 7.
 
 | subject | form IoU | speckle | distinct | off-pal | value ΔE | thin |
 | ------- | -------- | ------- | -------- | ------- | -------- | ---- |
-| dancing-man | 0.91→0.91→0.81 | 0.53→0.28→0.15 | 18→5→5 | 366→319→0 | 2.1→0→0 | comp 1, +531 |
-| moai | 0.56→0.56→0.59 | 0.64→0.25→0.16 | 43→5→5 | 853→0→0 | 1.22→0→0 | comp 3, +1844 |
-| pineapple | 0.91→0.91→0.85 | 0.55→0.25→0.11 | 24→5→4 | 2272→2003→0 | 4.38→0→4.73 | comp 1, +1458 |
-| bow-and-arrow | 0.47→0.47→0.53 | 0.71→0.37→0.05 | 34→8→5 | 365→164→0 | 3.8→0→0 | comp 1, +697 |
-| heart | 0.88→0.88→0.9 | 0.69→0.34→0.1 | 91→7→6 | 4063→2831→0 | 5.91→0→3.41 | comp 1, +2142 |
-| mushroom | 0.98→0.98→0.93 | 0.52→0.3→0.14 | 92→7→6 | 4212→2300→0 | 6.44→0→1.29 | comp 1, +2453 |
-| koi | 0.62→0.62→0.71 | 0.72→0.35→0.17 | 71→8→6 | 1646→586→0 | 7.87→0→0 | comp 1, +991 |
-| **AVERAGE** | 0.76→0.76→0.76 | 0.62→0.3→0.13 | 53.29→6.43→5.29 | 1968.14→1171.86→0 | 4.53→0→1.35 | — |
+| dancing-man | 0.91→0.91→0.81 | 0.4→0.28→0.15 | 5→5→5 | 0→973→0 | 11.19→0→13.82 | comp 1, +531 |
+| moai | 0.56→0.56→0.59 | 0.43→0.25→0.14 | 5→5→5 | 0→4096→0 | 1→0→1.88 | comp 3, +1844 |
+| pineapple | 0.91→0.91→0.85 | 0.42→0.25→0.1 | 4→5→4 | 0→2939→0 | 8.71→0→8.43 | comp 1, +1458 |
+| bow-and-arrow | 0.47→0.47→0.53 | 0.44→0.37→0.09 | 6→8→6 | 0→352→0 | 1.1→0→8.04 | comp 1, +697 |
+| heart | 0.88→0.88→0.9 | 0.57→0.34→0.11 | 7→7→7 | 0→1323→0 | 4.62→0→8 | comp 1, +2142 |
+| mushroom | 0.98→0.98→0.93 | 0.37→0.3→0.13 | 6→7→6 | 0→8614→0 | 7.17→0→4.14 | comp 1, +2453 |
+| koi | 0.62→0.62→0.71 | 0.42→0.35→0.16 | 5→8→5 | 0→1237→0 | 4.53→0→16.35 | comp 1, +991 |
+| **AVERAGE** | 0.76→0.76→0.76 | 0.44→0.3→0.13 | 5.43→6.43→5.43 | 0→2790.57→0 | 5.47→0→8.67 | — |
 
 ## Regressions / no-change (E18 not strictly better than a baseline)
 
 - **dancing-man** form IoU vs R1: Δ -0.1 (worse).
+- **dancing-man** distinct vs R1: Δ 0 (no-change).
+- **dancing-man** off-pal vs R1: Δ 0 (no-change).
+- **dancing-man** value ΔE vs R1: Δ 2.63 (worse).
 - **dancing-man** form IoU vs R2: Δ -0.1 (worse).
 - **dancing-man** distinct vs R2: Δ 0 (no-change).
-- **dancing-man** value ΔE vs R2: Δ 0 (no-change).
+- **dancing-man** value ΔE vs R2: Δ 13.82 (worse).
+- **moai** distinct vs R1: Δ 0 (no-change).
+- **moai** off-pal vs R1: Δ 0 (no-change).
+- **moai** value ΔE vs R1: Δ 0.88 (worse).
 - **moai** distinct vs R2: Δ 0 (no-change).
-- **moai** off-pal vs R2: Δ 0 (no-change).
-- **moai** value ΔE vs R2: Δ 0 (no-change).
+- **moai** value ΔE vs R2: Δ 1.88 (worse).
 - **pineapple** form IoU vs R1: Δ -0.06 (worse).
-- **pineapple** value ΔE vs R1: Δ 0.35 (worse).
+- **pineapple** distinct vs R1: Δ 0 (no-change).
+- **pineapple** off-pal vs R1: Δ 0 (no-change).
 - **pineapple** form IoU vs R2: Δ -0.06 (worse).
-- **pineapple** value ΔE vs R2: Δ 4.73 (worse).
-- **bow-and-arrow** value ΔE vs R2: Δ 0 (no-change).
-- **heart** value ΔE vs R2: Δ 3.41 (worse).
+- **pineapple** value ΔE vs R2: Δ 8.43 (worse).
+- **bow-and-arrow** distinct vs R1: Δ 0 (no-change).
+- **bow-and-arrow** off-pal vs R1: Δ 0 (no-change).
+- **bow-and-arrow** value ΔE vs R1: Δ 6.94 (worse).
+- **bow-and-arrow** value ΔE vs R2: Δ 8.04 (worse).
+- **heart** distinct vs R1: Δ 0 (no-change).
+- **heart** off-pal vs R1: Δ 0 (no-change).
+- **heart** value ΔE vs R1: Δ 3.38 (worse).
+- **heart** distinct vs R2: Δ 0 (no-change).
+- **heart** value ΔE vs R2: Δ 8 (worse).
 - **mushroom** form IoU vs R1: Δ -0.05 (worse).
+- **mushroom** distinct vs R1: Δ 0 (no-change).
+- **mushroom** off-pal vs R1: Δ 0 (no-change).
 - **mushroom** form IoU vs R2: Δ -0.05 (worse).
-- **mushroom** value ΔE vs R2: Δ 1.29 (worse).
-- **koi** value ΔE vs R2: Δ 0 (no-change).
-
-> _Value-ΔE note:_ R2 snaps to the GLB's own texture palette (the value-ΔE reference), so its value ΔE is ~0 by construction — a 0 there carries no signal. E18 uses a TIGHTER fixed palette (k=6), so its value ΔE can be nonzero: a small, real cost of palette discipline, not a tautology. Speckle / distinct / off-palette carry the primary discrimination.
+- **mushroom** value ΔE vs R2: Δ 4.14 (worse).
+- **koi** distinct vs R1: Δ 0 (no-change).
+- **koi** off-pal vs R1: Δ 0 (no-change).
+- **koi** value ΔE vs R1: Δ 11.82 (worse).
+- **koi** value ΔE vs R2: Δ 16.35 (worse).

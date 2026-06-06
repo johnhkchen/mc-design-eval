@@ -9,28 +9,15 @@
   },
   "style": {
     "name": "glb-voxel",
-    "rationale": "Voxelized dancing-man GLB; cells colored value-true from the GLB surface."
+    "rationale": "Voxelized dancing-man GLB; cells colored value-true from the GLB surface, snapped to the augmented design-doc palette (5 design-doc blocks + ≤2 gated secondary)."
   },
   "palette": {
     "manifest": [
-      "minecraft:brown_concrete",
-      "minecraft:brown_wool",
-      "minecraft:cartography_table",
-      "minecraft:crimson_nylium",
-      "minecraft:dark_oak_planks",
-      "minecraft:gray_terracotta",
-      "minecraft:hay_block",
-      "minecraft:jukebox",
-      "minecraft:jungle_log",
-      "minecraft:magma_block",
-      "minecraft:nether_gold_ore",
-      "minecraft:nether_wart_block",
-      "minecraft:netherrack",
+      "minecraft:brown_terracotta",
+      "minecraft:gold_block",
       "minecraft:orange_terracotta",
-      "minecraft:redstone_lamp",
-      "minecraft:spruce_log",
-      "minecraft:stripped_spruce_log",
-      "minecraft:yellow_terracotta"
+      "minecraft:red_terracotta",
+      "minecraft:terracotta"
     ]
   },
   "placements": [
@@ -41,7 +28,7 @@
         16,
         -10
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -50,7 +37,7 @@
         17,
         -10
       ],
-      "block": "minecraft:gray_terracotta"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -59,7 +46,7 @@
         18,
         -10
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -68,7 +55,7 @@
         18,
         -9
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -77,7 +64,7 @@
         18,
         -8
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -86,7 +73,7 @@
         18,
         -7
       ],
-      "block": "minecraft:stripped_spruce_log"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -95,7 +82,7 @@
         19,
         -10
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -104,7 +91,7 @@
         19,
         -9
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -113,7 +100,7 @@
         19,
         -8
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -122,7 +109,7 @@
         19,
         -7
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -131,7 +118,7 @@
         20,
         -10
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -140,7 +127,7 @@
         20,
         -9
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -149,7 +136,7 @@
         20,
         -8
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -158,7 +145,7 @@
         20,
         -7
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -167,7 +154,7 @@
         21,
         -10
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -176,7 +163,7 @@
         21,
         -9
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -185,7 +172,7 @@
         21,
         -8
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -194,7 +181,7 @@
         21,
         -7
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -203,7 +190,7 @@
         21,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -212,7 +199,7 @@
         21,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -221,7 +208,7 @@
         21,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -230,7 +217,7 @@
         22,
         -10
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -239,7 +226,7 @@
         22,
         -9
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -248,7 +235,7 @@
         22,
         -8
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -257,7 +244,7 @@
         22,
         -7
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -266,7 +253,7 @@
         22,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -275,7 +262,7 @@
         22,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -284,7 +271,7 @@
         22,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -293,7 +280,7 @@
         23,
         -7
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -302,7 +289,7 @@
         23,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -311,7 +298,7 @@
         23,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -320,7 +307,7 @@
         23,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -329,7 +316,7 @@
         16,
         -10
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -338,7 +325,7 @@
         17,
         -10
       ],
-      "block": "minecraft:magma_block"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -347,7 +334,7 @@
         18,
         -10
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -356,7 +343,7 @@
         18,
         -9
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -365,7 +352,7 @@
         18,
         -8
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -374,7 +361,7 @@
         18,
         -7
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -383,7 +370,7 @@
         19,
         -10
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -392,7 +379,7 @@
         19,
         -9
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -401,7 +388,7 @@
         19,
         -8
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -410,7 +397,7 @@
         19,
         -7
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -428,7 +415,7 @@
         20,
         -9
       ],
-      "block": "minecraft:magma_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -437,7 +424,7 @@
         20,
         -8
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -446,7 +433,7 @@
         20,
         -7
       ],
-      "block": "minecraft:redstone_lamp"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -455,7 +442,7 @@
         21,
         -10
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -464,7 +451,7 @@
         21,
         -9
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -473,7 +460,7 @@
         21,
         -8
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -482,7 +469,7 @@
         21,
         -7
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -491,7 +478,7 @@
         21,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -500,7 +487,7 @@
         21,
         -5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -509,7 +496,7 @@
         21,
         -4
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -518,7 +505,7 @@
         22,
         -10
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -527,7 +514,7 @@
         22,
         -9
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -536,7 +523,7 @@
         22,
         -8
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -545,7 +532,7 @@
         22,
         -7
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -554,7 +541,7 @@
         22,
         -6
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -563,7 +550,7 @@
         22,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -572,7 +559,7 @@
         22,
         -4
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -581,7 +568,7 @@
         23,
         -7
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -590,7 +577,7 @@
         23,
         -6
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -599,7 +586,7 @@
         23,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -608,7 +595,7 @@
         23,
         -4
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -617,7 +604,7 @@
         23,
         -3
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -626,7 +613,7 @@
         24,
         -6
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -635,7 +622,7 @@
         24,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -644,7 +631,7 @@
         24,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -653,7 +640,7 @@
         25,
         -6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -662,7 +649,7 @@
         25,
         -5
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -671,7 +658,7 @@
         25,
         -4
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -680,7 +667,7 @@
         16,
         -10
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -689,7 +676,7 @@
         17,
         -10
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -698,7 +685,7 @@
         18,
         -10
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -707,7 +694,7 @@
         18,
         -9
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -716,7 +703,7 @@
         18,
         -8
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -725,7 +712,7 @@
         18,
         -7
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -734,7 +721,7 @@
         19,
         -10
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -743,7 +730,7 @@
         19,
         -9
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -752,7 +739,7 @@
         19,
         -8
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -761,7 +748,7 @@
         19,
         -7
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -770,7 +757,7 @@
         20,
         -10
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -779,7 +766,7 @@
         20,
         -9
       ],
-      "block": "minecraft:magma_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -788,7 +775,7 @@
         20,
         -8
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -797,7 +784,7 @@
         20,
         -7
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -806,7 +793,7 @@
         21,
         -10
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -815,7 +802,7 @@
         21,
         -9
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -824,7 +811,7 @@
         21,
         -8
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -833,7 +820,7 @@
         21,
         -7
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -842,7 +829,7 @@
         21,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -851,7 +838,7 @@
         21,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -860,7 +847,7 @@
         21,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -869,7 +856,7 @@
         22,
         -10
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -878,7 +865,7 @@
         22,
         -9
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -887,7 +874,7 @@
         22,
         -8
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -896,7 +883,7 @@
         22,
         -7
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -905,7 +892,7 @@
         22,
         -6
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -914,7 +901,7 @@
         22,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -923,7 +910,7 @@
         22,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -932,7 +919,7 @@
         23,
         -7
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -941,7 +928,7 @@
         23,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -950,7 +937,7 @@
         23,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -959,7 +946,7 @@
         23,
         -4
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -968,7 +955,7 @@
         23,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -977,7 +964,7 @@
         24,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -986,7 +973,7 @@
         24,
         -5
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -995,7 +982,7 @@
         24,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1004,7 +991,7 @@
         25,
         -6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -1013,7 +1000,7 @@
         25,
         -5
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1022,7 +1009,7 @@
         25,
         -4
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1031,7 +1018,7 @@
         22,
         -7
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1040,7 +1027,7 @@
         22,
         -6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -1049,7 +1036,7 @@
         22,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1058,7 +1045,7 @@
         22,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1067,7 +1054,7 @@
         23,
         -7
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1076,7 +1063,7 @@
         23,
         -6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -1085,7 +1072,7 @@
         23,
         -5
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1094,7 +1081,7 @@
         23,
         -4
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1103,7 +1090,7 @@
         23,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1112,7 +1099,7 @@
         24,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1121,7 +1108,7 @@
         24,
         -5
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1130,7 +1117,7 @@
         24,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1139,7 +1126,7 @@
         25,
         -6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -1148,7 +1135,7 @@
         25,
         -5
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1157,7 +1144,7 @@
         25,
         -4
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1166,7 +1153,7 @@
         0,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1175,7 +1162,7 @@
         0,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1184,7 +1171,7 @@
         0,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1193,7 +1180,7 @@
         0,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1202,7 +1189,7 @@
         0,
         -1
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -1211,7 +1198,7 @@
         0,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1220,7 +1207,7 @@
         1,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1229,7 +1216,7 @@
         1,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1238,7 +1225,7 @@
         1,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1247,7 +1234,7 @@
         1,
         -2
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1256,7 +1243,7 @@
         1,
         -1
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1265,7 +1252,7 @@
         1,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1274,7 +1261,7 @@
         2,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1283,7 +1270,7 @@
         2,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1292,7 +1279,7 @@
         2,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1301,7 +1288,7 @@
         2,
         -2
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1310,7 +1297,7 @@
         2,
         -1
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1319,7 +1306,7 @@
         2,
         0
       ],
-      "block": "minecraft:dark_oak_planks"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1328,7 +1315,7 @@
         3,
         -5
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1337,7 +1324,7 @@
         3,
         -4
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1346,7 +1333,7 @@
         3,
         -3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1355,7 +1342,7 @@
         3,
         -2
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1364,7 +1351,7 @@
         3,
         -1
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1382,7 +1369,7 @@
         15,
         -6
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1391,7 +1378,7 @@
         15,
         -5
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:terracotta"
     },
     {
       "op": "voxel",
@@ -1400,7 +1387,7 @@
         15,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1409,7 +1396,7 @@
         15,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1418,7 +1405,7 @@
         16,
         -6
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1427,7 +1414,7 @@
         16,
         -5
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1436,7 +1423,7 @@
         16,
         -4
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1445,7 +1432,7 @@
         16,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1454,7 +1441,7 @@
         17,
         -6
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1463,7 +1450,7 @@
         17,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1472,7 +1459,7 @@
         17,
         -4
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:terracotta"
     },
     {
       "op": "voxel",
@@ -1490,7 +1477,7 @@
         18,
         -6
       ],
-      "block": "minecraft:brown_wool"
+      "block": "minecraft:terracotta"
     },
     {
       "op": "voxel",
@@ -1499,7 +1486,7 @@
         18,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1508,7 +1495,7 @@
         18,
         -4
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1517,7 +1504,7 @@
         18,
         -3
       ],
-      "block": "minecraft:brown_wool"
+      "block": "minecraft:terracotta"
     },
     {
       "op": "voxel",
@@ -1526,7 +1513,7 @@
         19,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1535,7 +1522,7 @@
         19,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1544,7 +1531,7 @@
         19,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1553,7 +1540,7 @@
         19,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1562,7 +1549,7 @@
         20,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1571,7 +1558,7 @@
         20,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1580,7 +1567,7 @@
         20,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1589,7 +1576,7 @@
         20,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1598,7 +1585,7 @@
         21,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1607,7 +1594,7 @@
         21,
         -5
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1616,7 +1603,7 @@
         21,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1625,7 +1612,7 @@
         21,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1634,7 +1621,7 @@
         22,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1643,7 +1630,7 @@
         22,
         -5
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1652,7 +1639,7 @@
         22,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1661,7 +1648,7 @@
         22,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1670,7 +1657,7 @@
         23,
         -6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -1679,7 +1666,7 @@
         23,
         -5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -1688,7 +1675,7 @@
         23,
         -4
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1697,7 +1684,7 @@
         23,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1706,7 +1693,7 @@
         24,
         -6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -1715,7 +1702,7 @@
         24,
         -5
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:terracotta"
     },
     {
       "op": "voxel",
@@ -1724,7 +1711,7 @@
         24,
         -4
       ],
-      "block": "minecraft:dark_oak_planks"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1733,7 +1720,7 @@
         24,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1742,7 +1729,7 @@
         25,
         -6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -1751,7 +1738,7 @@
         25,
         -5
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:terracotta"
     },
     {
       "op": "voxel",
@@ -1760,7 +1747,7 @@
         25,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1769,7 +1756,7 @@
         25,
         -3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1778,7 +1765,7 @@
         0,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1787,7 +1774,7 @@
         0,
         -4
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1796,7 +1783,7 @@
         0,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1805,7 +1792,7 @@
         0,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1814,7 +1801,7 @@
         0,
         -1
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -1832,7 +1819,7 @@
         1,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1841,7 +1828,7 @@
         1,
         -4
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1850,7 +1837,7 @@
         1,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1859,7 +1846,7 @@
         1,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1886,7 +1873,7 @@
         2,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1895,7 +1882,7 @@
         2,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1904,7 +1891,7 @@
         2,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1913,7 +1900,7 @@
         2,
         -2
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1940,7 +1927,7 @@
         3,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1949,7 +1936,7 @@
         3,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1958,7 +1945,7 @@
         3,
         -3
       ],
-      "block": "minecraft:magma_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -1976,7 +1963,7 @@
         3,
         -1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -1994,7 +1981,7 @@
         4,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2012,7 +1999,7 @@
         4,
         -1
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -2021,7 +2008,7 @@
         5,
         -3
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -2030,7 +2017,7 @@
         5,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2039,7 +2026,7 @@
         5,
         -1
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -2048,7 +2035,7 @@
         6,
         -3
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -2057,7 +2044,7 @@
         6,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2066,7 +2053,7 @@
         6,
         -1
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -2075,7 +2062,7 @@
         7,
         -3
       ],
-      "block": "minecraft:dark_oak_planks"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2084,7 +2071,7 @@
         8,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2093,7 +2080,7 @@
         8,
         -2
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2102,7 +2089,7 @@
         8,
         -1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2111,7 +2098,7 @@
         9,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2120,7 +2107,7 @@
         9,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2129,7 +2116,7 @@
         9,
         -1
       ],
-      "block": "minecraft:cartography_table"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2138,7 +2125,7 @@
         10,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2156,7 +2143,7 @@
         10,
         -1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2192,7 +2179,7 @@
         11,
         -1
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2201,7 +2188,7 @@
         12,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2219,7 +2206,7 @@
         12,
         -3
       ],
-      "block": "minecraft:magma_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2228,7 +2215,7 @@
         13,
         -5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -2237,7 +2224,7 @@
         13,
         -4
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2246,7 +2233,7 @@
         13,
         -3
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2255,7 +2242,7 @@
         14,
         -6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -2264,7 +2251,7 @@
         14,
         -5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -2273,7 +2260,7 @@
         14,
         -4
       ],
-      "block": "minecraft:magma_block"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -2282,7 +2269,7 @@
         14,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2291,7 +2278,7 @@
         15,
         -6
       ],
-      "block": "minecraft:brown_wool"
+      "block": "minecraft:terracotta"
     },
     {
       "op": "voxel",
@@ -2300,7 +2287,7 @@
         15,
         -5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -2309,7 +2296,7 @@
         15,
         -4
       ],
-      "block": "minecraft:yellow_terracotta"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -2318,7 +2305,7 @@
         15,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2327,7 +2314,7 @@
         16,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2336,7 +2323,7 @@
         16,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2345,7 +2332,7 @@
         16,
         -4
       ],
-      "block": "minecraft:yellow_terracotta"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -2363,7 +2350,7 @@
         17,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2372,7 +2359,7 @@
         17,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2381,7 +2368,7 @@
         17,
         -4
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:terracotta"
     },
     {
       "op": "voxel",
@@ -2390,7 +2377,7 @@
         17,
         -3
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -2399,7 +2386,7 @@
         18,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2408,7 +2395,7 @@
         18,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2417,7 +2404,7 @@
         18,
         -4
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2426,7 +2413,7 @@
         18,
         -3
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -2435,7 +2422,7 @@
         19,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2444,7 +2431,7 @@
         19,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2453,7 +2440,7 @@
         19,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2462,7 +2449,7 @@
         19,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2471,7 +2458,7 @@
         20,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2480,7 +2467,7 @@
         20,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2489,7 +2476,7 @@
         20,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2498,7 +2485,7 @@
         20,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2507,7 +2494,7 @@
         21,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2516,7 +2503,7 @@
         21,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2525,7 +2512,7 @@
         21,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2534,7 +2521,7 @@
         21,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2543,7 +2530,7 @@
         22,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2552,7 +2539,7 @@
         22,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2561,7 +2548,7 @@
         22,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2570,7 +2557,7 @@
         22,
         -3
       ],
-      "block": "minecraft:redstone_lamp"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2579,7 +2566,7 @@
         23,
         -6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -2588,7 +2575,7 @@
         23,
         -5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -2597,7 +2584,7 @@
         23,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2606,7 +2593,7 @@
         23,
         -3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2615,7 +2602,7 @@
         24,
         -6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -2624,7 +2611,7 @@
         24,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2633,7 +2620,7 @@
         24,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2642,7 +2629,7 @@
         24,
         -3
       ],
-      "block": "minecraft:cartography_table"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2651,7 +2638,7 @@
         25,
         -6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -2660,7 +2647,7 @@
         25,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2669,7 +2656,7 @@
         25,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2678,7 +2665,7 @@
         25,
         -3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2687,7 +2674,7 @@
         26,
         -6
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2696,7 +2683,7 @@
         26,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2705,7 +2692,7 @@
         26,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2714,7 +2701,7 @@
         26,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2723,7 +2710,7 @@
         27,
         -6
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2732,7 +2719,7 @@
         27,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2741,7 +2728,7 @@
         27,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2750,7 +2737,7 @@
         27,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2759,7 +2746,7 @@
         28,
         -6
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2768,7 +2755,7 @@
         28,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2777,7 +2764,7 @@
         28,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2786,7 +2773,7 @@
         28,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2795,7 +2782,7 @@
         29,
         -6
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2804,7 +2791,7 @@
         29,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2813,7 +2800,7 @@
         29,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2822,7 +2809,7 @@
         29,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2831,7 +2818,7 @@
         29,
         -2
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2840,7 +2827,7 @@
         29,
         -1
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2849,7 +2836,7 @@
         30,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2858,7 +2845,7 @@
         30,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2867,7 +2854,7 @@
         30,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2876,7 +2863,7 @@
         30,
         -3
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -2885,7 +2872,7 @@
         30,
         -2
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -2894,7 +2881,7 @@
         30,
         -1
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -2903,7 +2890,7 @@
         31,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2912,7 +2899,7 @@
         31,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2921,7 +2908,7 @@
         31,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2930,7 +2917,7 @@
         31,
         -3
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -2939,7 +2926,7 @@
         0,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2948,7 +2935,7 @@
         0,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2957,7 +2944,7 @@
         0,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2966,7 +2953,7 @@
         0,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -2975,7 +2962,7 @@
         0,
         -1
       ],
-      "block": "minecraft:stripped_spruce_log"
+      "block": "minecraft:terracotta"
     },
     {
       "op": "voxel",
@@ -2993,7 +2980,7 @@
         1,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3002,7 +2989,7 @@
         1,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3011,7 +2998,7 @@
         1,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3020,7 +3007,7 @@
         1,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3047,7 +3034,7 @@
         2,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3056,7 +3043,7 @@
         2,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3065,7 +3052,7 @@
         2,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3074,7 +3061,7 @@
         2,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3083,7 +3070,7 @@
         2,
         -1
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3092,7 +3079,7 @@
         2,
         0
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3101,7 +3088,7 @@
         3,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3110,7 +3097,7 @@
         3,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3119,7 +3106,7 @@
         3,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3128,7 +3115,7 @@
         3,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3137,7 +3124,7 @@
         3,
         -1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3146,7 +3133,7 @@
         3,
         0
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3155,7 +3142,7 @@
         4,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3164,7 +3151,7 @@
         4,
         -2
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -3173,7 +3160,7 @@
         4,
         -1
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -3182,7 +3169,7 @@
         5,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3191,7 +3178,7 @@
         5,
         -2
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -3200,7 +3187,7 @@
         5,
         -1
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -3209,7 +3196,7 @@
         6,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3218,7 +3205,7 @@
         6,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3227,7 +3214,7 @@
         6,
         -1
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -3236,7 +3223,7 @@
         7,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3245,7 +3232,7 @@
         8,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3254,7 +3241,7 @@
         8,
         -2
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3263,7 +3250,7 @@
         8,
         -1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3272,7 +3259,7 @@
         9,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3281,7 +3268,7 @@
         9,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3290,7 +3277,7 @@
         9,
         -1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3299,7 +3286,7 @@
         10,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3308,7 +3295,7 @@
         10,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3317,7 +3304,7 @@
         10,
         -1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3326,7 +3313,7 @@
         11,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3335,7 +3322,7 @@
         11,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3344,7 +3331,7 @@
         11,
         -2
       ],
-      "block": "minecraft:nether_gold_ore"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3353,7 +3340,7 @@
         11,
         -1
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3362,7 +3349,7 @@
         12,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3371,7 +3358,7 @@
         12,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3380,7 +3367,7 @@
         12,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3389,7 +3376,7 @@
         13,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3398,7 +3385,7 @@
         13,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3407,7 +3394,7 @@
         13,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3416,7 +3403,7 @@
         14,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3425,7 +3412,7 @@
         14,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3434,7 +3421,7 @@
         14,
         -4
       ],
-      "block": "minecraft:magma_block"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -3443,7 +3430,7 @@
         14,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3452,7 +3439,7 @@
         15,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3461,7 +3448,7 @@
         15,
         -5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -3470,7 +3457,7 @@
         15,
         -4
       ],
-      "block": "minecraft:yellow_terracotta"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -3479,7 +3466,7 @@
         15,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3488,7 +3475,7 @@
         16,
         -6
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3497,7 +3484,7 @@
         16,
         -5
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3506,7 +3493,7 @@
         16,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3515,7 +3502,7 @@
         16,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3524,7 +3511,7 @@
         17,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3533,7 +3520,7 @@
         17,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3542,7 +3529,7 @@
         17,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3551,7 +3538,7 @@
         17,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3560,7 +3547,7 @@
         18,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3569,7 +3556,7 @@
         18,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3578,7 +3565,7 @@
         18,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3587,7 +3574,7 @@
         18,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3596,7 +3583,7 @@
         19,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3605,7 +3592,7 @@
         19,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3614,7 +3601,7 @@
         19,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3623,7 +3610,7 @@
         19,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3632,7 +3619,7 @@
         20,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3641,7 +3628,7 @@
         20,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3650,7 +3637,7 @@
         20,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3659,7 +3646,7 @@
         20,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3668,7 +3655,7 @@
         21,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3677,7 +3664,7 @@
         21,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3686,7 +3673,7 @@
         21,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3695,7 +3682,7 @@
         21,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3704,7 +3691,7 @@
         22,
         -6
       ],
-      "block": "minecraft:redstone_lamp"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3713,7 +3700,7 @@
         22,
         -5
       ],
-      "block": "minecraft:redstone_lamp"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3722,7 +3709,7 @@
         22,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3731,7 +3718,7 @@
         22,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3740,7 +3727,7 @@
         23,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3749,7 +3736,7 @@
         23,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3758,7 +3745,7 @@
         23,
         -4
       ],
-      "block": "minecraft:netherrack"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3767,7 +3754,7 @@
         23,
         -3
       ],
-      "block": "minecraft:netherrack"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3776,7 +3763,7 @@
         24,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3785,7 +3772,7 @@
         24,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3794,7 +3781,7 @@
         24,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3803,7 +3790,7 @@
         24,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3812,7 +3799,7 @@
         25,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3821,7 +3808,7 @@
         25,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3830,7 +3817,7 @@
         25,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3839,7 +3826,7 @@
         25,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3848,7 +3835,7 @@
         26,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3857,7 +3844,7 @@
         26,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3866,7 +3853,7 @@
         26,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3875,7 +3862,7 @@
         26,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3884,7 +3871,7 @@
         27,
         -6
       ],
-      "block": "minecraft:nether_gold_ore"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3893,7 +3880,7 @@
         27,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3902,7 +3889,7 @@
         27,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3911,7 +3898,7 @@
         27,
         -3
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -3920,7 +3907,7 @@
         28,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -3929,7 +3916,7 @@
         28,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3938,7 +3925,7 @@
         28,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3947,7 +3934,7 @@
         28,
         -3
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -3956,7 +3943,7 @@
         29,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3965,7 +3952,7 @@
         29,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3974,7 +3961,7 @@
         29,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -3983,7 +3970,7 @@
         29,
         -3
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -3992,7 +3979,7 @@
         29,
         -2
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4001,7 +3988,7 @@
         29,
         -1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4010,7 +3997,7 @@
         30,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4019,7 +4006,7 @@
         30,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4028,7 +4015,7 @@
         30,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4037,7 +4024,7 @@
         30,
         -3
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4046,7 +4033,7 @@
         30,
         -2
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4055,7 +4042,7 @@
         30,
         -1
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4064,7 +4051,7 @@
         31,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4073,7 +4060,7 @@
         31,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4082,7 +4069,7 @@
         31,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4091,7 +4078,7 @@
         31,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4100,7 +4087,7 @@
         0,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4109,7 +4096,7 @@
         0,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4118,7 +4105,7 @@
         0,
         -3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4127,7 +4114,7 @@
         0,
         -2
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4136,7 +4123,7 @@
         0,
         -1
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4145,7 +4132,7 @@
         0,
         0
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4154,7 +4141,7 @@
         1,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4163,7 +4150,7 @@
         1,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4172,7 +4159,7 @@
         1,
         -3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4181,7 +4168,7 @@
         1,
         -2
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4190,7 +4177,7 @@
         1,
         -1
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4199,7 +4186,7 @@
         1,
         0
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4208,7 +4195,7 @@
         2,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4217,7 +4204,7 @@
         2,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4226,7 +4213,7 @@
         2,
         -3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4235,7 +4222,7 @@
         2,
         -2
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4244,7 +4231,7 @@
         2,
         -1
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4253,7 +4240,7 @@
         2,
         0
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4262,7 +4249,7 @@
         3,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4271,7 +4258,7 @@
         3,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4280,7 +4267,7 @@
         3,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4289,7 +4276,7 @@
         3,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4298,7 +4285,7 @@
         3,
         -1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4307,7 +4294,7 @@
         3,
         0
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4316,7 +4303,7 @@
         4,
         -3
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -4325,7 +4312,7 @@
         4,
         -2
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4334,7 +4321,7 @@
         4,
         -1
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -4343,7 +4330,7 @@
         5,
         -3
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -4352,7 +4339,7 @@
         5,
         -2
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -4361,7 +4348,7 @@
         5,
         -1
       ],
-      "block": "minecraft:cartography_table"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4370,7 +4357,7 @@
         6,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4379,7 +4366,7 @@
         6,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4388,7 +4375,7 @@
         6,
         -1
       ],
-      "block": "minecraft:cartography_table"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4397,7 +4384,7 @@
         7,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4406,7 +4393,7 @@
         8,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4415,7 +4402,7 @@
         8,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4424,7 +4411,7 @@
         8,
         -1
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4433,7 +4420,7 @@
         9,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4442,7 +4429,7 @@
         9,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4451,7 +4438,7 @@
         9,
         -1
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:terracotta"
     },
     {
       "op": "voxel",
@@ -4460,7 +4447,7 @@
         10,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4469,7 +4456,7 @@
         10,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4478,7 +4465,7 @@
         10,
         -1
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4487,7 +4474,7 @@
         11,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4496,7 +4483,7 @@
         11,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4505,7 +4492,7 @@
         11,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4514,7 +4501,7 @@
         11,
         -1
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4523,7 +4510,7 @@
         12,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4532,7 +4519,7 @@
         12,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4541,7 +4528,7 @@
         12,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4550,7 +4537,7 @@
         13,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4559,7 +4546,7 @@
         13,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4568,7 +4555,7 @@
         13,
         -3
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -4577,7 +4564,7 @@
         14,
         -6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -4586,7 +4573,7 @@
         14,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4595,7 +4582,7 @@
         14,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4604,7 +4591,7 @@
         14,
         -3
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -4613,7 +4600,7 @@
         15,
         -6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -4622,7 +4609,7 @@
         15,
         -5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -4631,7 +4618,7 @@
         15,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4640,7 +4627,7 @@
         15,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4649,7 +4636,7 @@
         16,
         -6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -4658,7 +4645,7 @@
         16,
         -5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -4667,7 +4654,7 @@
         16,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4676,7 +4663,7 @@
         16,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4685,7 +4672,7 @@
         17,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4694,7 +4681,7 @@
         17,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4703,7 +4690,7 @@
         17,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4712,7 +4699,7 @@
         17,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4721,7 +4708,7 @@
         18,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4730,7 +4717,7 @@
         18,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4739,7 +4726,7 @@
         18,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4748,7 +4735,7 @@
         18,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4757,7 +4744,7 @@
         19,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4766,7 +4753,7 @@
         19,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4775,7 +4762,7 @@
         19,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4784,7 +4771,7 @@
         19,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4793,7 +4780,7 @@
         20,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4802,7 +4789,7 @@
         20,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4811,7 +4798,7 @@
         20,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4820,7 +4807,7 @@
         20,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4829,7 +4816,7 @@
         21,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4838,7 +4825,7 @@
         21,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4847,7 +4834,7 @@
         21,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4856,7 +4843,7 @@
         21,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4865,7 +4852,7 @@
         22,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4874,7 +4861,7 @@
         22,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4883,7 +4870,7 @@
         22,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4892,7 +4879,7 @@
         22,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4901,7 +4888,7 @@
         23,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4910,7 +4897,7 @@
         23,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4919,7 +4906,7 @@
         23,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4928,7 +4915,7 @@
         23,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4937,7 +4924,7 @@
         24,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4946,7 +4933,7 @@
         24,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4955,7 +4942,7 @@
         24,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4964,7 +4951,7 @@
         24,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -4973,7 +4960,7 @@
         25,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4982,7 +4969,7 @@
         25,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -4991,7 +4978,7 @@
         25,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5000,7 +4987,7 @@
         25,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5009,7 +4996,7 @@
         26,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5018,7 +5005,7 @@
         26,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5027,7 +5014,7 @@
         26,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5036,7 +5023,7 @@
         26,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5045,7 +5032,7 @@
         27,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5054,7 +5041,7 @@
         27,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5063,7 +5050,7 @@
         27,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5072,7 +5059,7 @@
         27,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5081,7 +5068,7 @@
         28,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5090,7 +5077,7 @@
         28,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5099,7 +5086,7 @@
         28,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5108,7 +5095,7 @@
         28,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5117,7 +5104,7 @@
         29,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5126,7 +5113,7 @@
         29,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5135,7 +5122,7 @@
         29,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5144,7 +5131,7 @@
         29,
         -3
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -5153,7 +5140,7 @@
         29,
         -2
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5162,7 +5149,7 @@
         29,
         -1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5171,7 +5158,7 @@
         30,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5180,7 +5167,7 @@
         30,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5189,7 +5176,7 @@
         30,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5198,7 +5185,7 @@
         30,
         -3
       ],
-      "block": "minecraft:magma_block"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -5207,7 +5194,7 @@
         30,
         -2
       ],
-      "block": "minecraft:magma_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5216,7 +5203,7 @@
         30,
         -1
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5225,7 +5212,7 @@
         31,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5234,7 +5221,7 @@
         31,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5243,7 +5230,7 @@
         31,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5252,7 +5239,7 @@
         31,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5261,7 +5248,7 @@
         0,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5270,7 +5257,7 @@
         0,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5279,7 +5266,7 @@
         0,
         -3
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5288,7 +5275,7 @@
         0,
         -2
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5297,7 +5284,7 @@
         0,
         -1
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5306,7 +5293,7 @@
         0,
         0
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5315,7 +5302,7 @@
         1,
         -5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -5324,7 +5311,7 @@
         1,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5333,7 +5320,7 @@
         1,
         -3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5342,7 +5329,7 @@
         1,
         -2
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5351,7 +5338,7 @@
         1,
         -1
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5360,7 +5347,7 @@
         1,
         0
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5369,7 +5356,7 @@
         2,
         -5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -5378,7 +5365,7 @@
         2,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5387,7 +5374,7 @@
         2,
         -3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5396,7 +5383,7 @@
         2,
         -2
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5405,7 +5392,7 @@
         2,
         -1
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5414,7 +5401,7 @@
         2,
         0
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5423,7 +5410,7 @@
         3,
         -5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -5432,7 +5419,7 @@
         3,
         -4
       ],
-      "block": "minecraft:redstone_lamp"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5441,7 +5428,7 @@
         3,
         -3
       ],
-      "block": "minecraft:redstone_lamp"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5450,7 +5437,7 @@
         3,
         -2
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5459,7 +5446,7 @@
         3,
         -1
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5468,7 +5455,7 @@
         3,
         0
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5477,7 +5464,7 @@
         10,
         8
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5486,7 +5473,7 @@
         11,
         6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5495,7 +5482,7 @@
         11,
         7
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5504,7 +5491,7 @@
         11,
         8
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5513,7 +5500,7 @@
         12,
         1
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5522,7 +5509,7 @@
         12,
         2
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5531,7 +5518,7 @@
         12,
         4
       ],
-      "block": "minecraft:dark_oak_planks"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5540,7 +5527,7 @@
         12,
         5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5549,7 +5536,7 @@
         12,
         6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5558,7 +5545,7 @@
         12,
         7
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5567,7 +5554,7 @@
         12,
         8
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5576,7 +5563,7 @@
         12,
         9
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5585,7 +5572,7 @@
         13,
         1
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5594,7 +5581,7 @@
         13,
         2
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5603,7 +5590,7 @@
         13,
         3
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5612,7 +5599,7 @@
         13,
         4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5621,7 +5608,7 @@
         13,
         5
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5630,7 +5617,7 @@
         13,
         6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5639,7 +5626,7 @@
         13,
         7
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5648,7 +5635,7 @@
         13,
         9
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5657,7 +5644,7 @@
         14,
         -6
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:terracotta"
     },
     {
       "op": "voxel",
@@ -5666,7 +5653,7 @@
         14,
         -5
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5675,7 +5662,7 @@
         14,
         -4
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5684,7 +5671,7 @@
         14,
         -3
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5702,7 +5689,7 @@
         14,
         -1
       ],
-      "block": "minecraft:magma_block"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -5711,7 +5698,7 @@
         14,
         0
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5720,7 +5707,7 @@
         14,
         1
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5729,7 +5716,7 @@
         14,
         2
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5738,7 +5725,7 @@
         14,
         3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5747,7 +5734,7 @@
         14,
         4
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5756,7 +5743,7 @@
         14,
         5
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5765,7 +5752,7 @@
         15,
         -6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -5774,7 +5761,7 @@
         15,
         -5
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5783,7 +5770,7 @@
         15,
         -4
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5792,7 +5779,7 @@
         15,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5810,7 +5797,7 @@
         15,
         -1
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5819,7 +5806,7 @@
         15,
         0
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5828,7 +5815,7 @@
         15,
         1
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5837,7 +5824,7 @@
         16,
         -6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -5846,7 +5833,7 @@
         16,
         -5
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5855,7 +5842,7 @@
         16,
         -4
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5864,7 +5851,7 @@
         16,
         -3
       ],
-      "block": "minecraft:netherrack"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5882,7 +5869,7 @@
         16,
         -1
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5891,7 +5878,7 @@
         17,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5900,7 +5887,7 @@
         17,
         -5
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5909,7 +5896,7 @@
         17,
         -4
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5918,7 +5905,7 @@
         17,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5936,7 +5923,7 @@
         17,
         -1
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -5945,7 +5932,7 @@
         18,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5954,7 +5941,7 @@
         18,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5963,7 +5950,7 @@
         18,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5972,7 +5959,7 @@
         18,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5981,7 +5968,7 @@
         19,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5990,7 +5977,7 @@
         19,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -5999,7 +5986,7 @@
         19,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6008,7 +5995,7 @@
         19,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6017,7 +6004,7 @@
         20,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6026,7 +6013,7 @@
         20,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6035,7 +6022,7 @@
         20,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6044,7 +6031,7 @@
         20,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6053,7 +6040,7 @@
         21,
         -6
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6062,7 +6049,7 @@
         21,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6071,7 +6058,7 @@
         21,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6080,7 +6067,7 @@
         21,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6089,7 +6076,7 @@
         22,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6098,7 +6085,7 @@
         22,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6107,7 +6094,7 @@
         22,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6116,7 +6103,7 @@
         22,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6125,7 +6112,7 @@
         23,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6134,7 +6121,7 @@
         23,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6143,7 +6130,7 @@
         23,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6152,7 +6139,7 @@
         23,
         -3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6161,7 +6148,7 @@
         24,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6170,7 +6157,7 @@
         24,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6179,7 +6166,7 @@
         24,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6188,7 +6175,7 @@
         24,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6197,7 +6184,7 @@
         25,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6206,7 +6193,7 @@
         25,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6215,7 +6202,7 @@
         25,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6224,7 +6211,7 @@
         25,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6233,7 +6220,7 @@
         26,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6242,7 +6229,7 @@
         26,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6251,7 +6238,7 @@
         26,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6260,7 +6247,7 @@
         26,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6269,7 +6256,7 @@
         27,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6278,7 +6265,7 @@
         27,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6287,7 +6274,7 @@
         27,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6296,7 +6283,7 @@
         27,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6305,7 +6292,7 @@
         28,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6314,7 +6301,7 @@
         28,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6323,7 +6310,7 @@
         28,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6332,7 +6319,7 @@
         28,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6341,7 +6328,7 @@
         29,
         -6
       ],
-      "block": "minecraft:redstone_lamp"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6350,7 +6337,7 @@
         29,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6359,7 +6346,7 @@
         29,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6368,7 +6355,7 @@
         29,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6377,7 +6364,7 @@
         29,
         -2
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6386,7 +6373,7 @@
         29,
         -1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6395,7 +6382,7 @@
         30,
         -6
       ],
-      "block": "minecraft:redstone_lamp"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6404,7 +6391,7 @@
         30,
         -5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -6413,7 +6400,7 @@
         30,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6422,7 +6409,7 @@
         30,
         -3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6440,7 +6427,7 @@
         30,
         -1
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6449,7 +6436,7 @@
         31,
         -6
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6458,7 +6445,7 @@
         31,
         -5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -6467,7 +6454,7 @@
         31,
         -4
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -6476,7 +6463,7 @@
         31,
         -3
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -6485,7 +6472,7 @@
         10,
         8
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6494,7 +6481,7 @@
         11,
         6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -6503,7 +6490,7 @@
         11,
         7
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -6512,7 +6499,7 @@
         11,
         8
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6521,7 +6508,7 @@
         12,
         1
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -6530,7 +6517,7 @@
         12,
         2
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -6539,7 +6526,7 @@
         12,
         4
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -6548,7 +6535,7 @@
         12,
         5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -6557,7 +6544,7 @@
         12,
         6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -6566,7 +6553,7 @@
         12,
         7
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -6575,7 +6562,7 @@
         12,
         8
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -6584,7 +6571,7 @@
         12,
         9
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6593,7 +6580,7 @@
         13,
         1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6602,7 +6589,7 @@
         13,
         2
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6611,7 +6598,7 @@
         13,
         3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6620,7 +6607,7 @@
         13,
         4
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -6629,7 +6616,7 @@
         13,
         5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -6638,7 +6625,7 @@
         13,
         6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -6647,7 +6634,7 @@
         13,
         7
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -6656,7 +6643,7 @@
         13,
         9
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6665,7 +6652,7 @@
         14,
         -4
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6674,7 +6661,7 @@
         14,
         -3
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6683,7 +6670,7 @@
         14,
         -2
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6692,7 +6679,7 @@
         14,
         -1
       ],
-      "block": "minecraft:brown_wool"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6701,7 +6688,7 @@
         14,
         0
       ],
-      "block": "minecraft:nether_gold_ore"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6710,7 +6697,7 @@
         14,
         1
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6719,7 +6706,7 @@
         14,
         2
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6728,7 +6715,7 @@
         14,
         3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6737,7 +6724,7 @@
         14,
         4
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -6746,7 +6733,7 @@
         14,
         5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -6755,7 +6742,7 @@
         15,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6764,7 +6751,7 @@
         15,
         -3
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:terracotta"
     },
     {
       "op": "voxel",
@@ -6782,7 +6769,7 @@
         15,
         -1
       ],
-      "block": "minecraft:redstone_lamp"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6791,7 +6778,7 @@
         15,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6800,7 +6787,7 @@
         15,
         1
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6809,7 +6796,7 @@
         16,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6818,7 +6805,7 @@
         16,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6827,7 +6814,7 @@
         16,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6836,7 +6823,7 @@
         16,
         -3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6854,7 +6841,7 @@
         16,
         -1
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6863,7 +6850,7 @@
         17,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6872,7 +6859,7 @@
         17,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6881,7 +6868,7 @@
         17,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6899,7 +6886,7 @@
         17,
         -2
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6908,7 +6895,7 @@
         17,
         -1
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6917,7 +6904,7 @@
         18,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6926,7 +6913,7 @@
         18,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6935,7 +6922,7 @@
         18,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6953,7 +6940,7 @@
         19,
         -6
       ],
-      "block": "minecraft:magma_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -6962,7 +6949,7 @@
         19,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6971,7 +6958,7 @@
         19,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -6989,7 +6976,7 @@
         20,
         -6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -6998,7 +6985,7 @@
         20,
         -5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -7007,7 +6994,7 @@
         20,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7016,7 +7003,7 @@
         20,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7025,7 +7012,7 @@
         21,
         -6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -7034,7 +7021,7 @@
         21,
         -5
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -7043,7 +7030,7 @@
         21,
         -4
       ],
-      "block": "minecraft:redstone_lamp"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7052,7 +7039,7 @@
         21,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7061,7 +7048,7 @@
         22,
         -6
       ],
-      "block": "minecraft:gray_terracotta"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7070,7 +7057,7 @@
         22,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -7079,7 +7066,7 @@
         22,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -7088,7 +7075,7 @@
         22,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7097,7 +7084,7 @@
         23,
         -6
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7106,7 +7093,7 @@
         23,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -7115,7 +7102,7 @@
         23,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -7124,7 +7111,7 @@
         23,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7133,7 +7120,7 @@
         24,
         -6
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7142,7 +7129,7 @@
         24,
         -5
       ],
-      "block": "minecraft:gray_terracotta"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7151,7 +7138,7 @@
         24,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7160,7 +7147,7 @@
         24,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7169,7 +7156,7 @@
         25,
         -6
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7178,7 +7165,7 @@
         25,
         -5
       ],
-      "block": "minecraft:gray_terracotta"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7187,7 +7174,7 @@
         25,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7196,7 +7183,7 @@
         25,
         -3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7205,7 +7192,7 @@
         10,
         8
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -7214,7 +7201,7 @@
         11,
         6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -7223,7 +7210,7 @@
         11,
         7
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -7232,7 +7219,7 @@
         11,
         8
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -7241,7 +7228,7 @@
         12,
         1
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -7250,7 +7237,7 @@
         12,
         2
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -7259,7 +7246,7 @@
         12,
         4
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -7268,7 +7255,7 @@
         12,
         5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7277,7 +7264,7 @@
         12,
         6
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7286,7 +7273,7 @@
         12,
         7
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -7295,7 +7282,7 @@
         12,
         8
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -7304,7 +7291,7 @@
         12,
         9
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -7313,7 +7300,7 @@
         13,
         1
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7322,7 +7309,7 @@
         13,
         2
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7331,7 +7318,7 @@
         13,
         3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7340,7 +7327,7 @@
         13,
         4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7349,7 +7336,7 @@
         13,
         5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7358,7 +7345,7 @@
         13,
         6
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7367,7 +7354,7 @@
         13,
         7
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -7376,7 +7363,7 @@
         13,
         9
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -7385,7 +7372,7 @@
         14,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7394,7 +7381,7 @@
         14,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7403,7 +7390,7 @@
         14,
         -2
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7412,7 +7399,7 @@
         14,
         -1
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7421,7 +7408,7 @@
         14,
         0
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7430,7 +7417,7 @@
         14,
         1
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7439,7 +7426,7 @@
         14,
         2
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -7448,7 +7435,7 @@
         14,
         3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7457,7 +7444,7 @@
         14,
         4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7466,7 +7453,7 @@
         14,
         5
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:terracotta"
     },
     {
       "op": "voxel",
@@ -7475,7 +7462,7 @@
         15,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7484,7 +7471,7 @@
         15,
         -3
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:terracotta"
     },
     {
       "op": "voxel",
@@ -7493,7 +7480,7 @@
         15,
         -2
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7502,7 +7489,7 @@
         15,
         -1
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7511,7 +7498,7 @@
         15,
         0
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7520,7 +7507,7 @@
         15,
         1
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -7529,7 +7516,7 @@
         16,
         -6
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7538,7 +7525,7 @@
         16,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7547,7 +7534,7 @@
         16,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7556,7 +7543,7 @@
         16,
         -3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7565,7 +7552,7 @@
         16,
         -2
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7574,7 +7561,7 @@
         16,
         -1
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -7583,7 +7570,7 @@
         17,
         -6
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7592,7 +7579,7 @@
         17,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7601,7 +7588,7 @@
         17,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7610,7 +7597,7 @@
         17,
         -3
       ],
-      "block": "minecraft:gray_terracotta"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7619,7 +7606,7 @@
         17,
         -2
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -7628,7 +7615,7 @@
         17,
         -1
       ],
-      "block": "minecraft:magma_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -7637,7 +7624,7 @@
         18,
         -6
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7646,7 +7633,7 @@
         18,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7655,7 +7642,7 @@
         18,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7664,7 +7651,7 @@
         18,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7673,7 +7660,7 @@
         19,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7682,7 +7669,7 @@
         19,
         -5
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7691,7 +7678,7 @@
         19,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7700,7 +7687,7 @@
         19,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7709,7 +7696,7 @@
         20,
         -6
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -7718,7 +7705,7 @@
         20,
         -5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:orange_terracotta"
     },
     {
       "op": "voxel",
@@ -7727,7 +7714,7 @@
         20,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7736,7 +7723,7 @@
         20,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7745,7 +7732,7 @@
         21,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -7754,7 +7741,7 @@
         21,
         -5
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -7763,7 +7750,7 @@
         21,
         -4
       ],
-      "block": "minecraft:redstone_lamp"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7772,7 +7759,7 @@
         21,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7781,7 +7768,7 @@
         22,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -7790,7 +7777,7 @@
         22,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -7799,7 +7786,7 @@
         22,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -7808,7 +7795,7 @@
         22,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7817,7 +7804,7 @@
         23,
         -6
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7826,7 +7813,7 @@
         23,
         -5
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -7835,7 +7822,7 @@
         23,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -7844,7 +7831,7 @@
         23,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7853,7 +7840,7 @@
         24,
         -6
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7862,7 +7849,7 @@
         24,
         -5
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7871,7 +7858,7 @@
         24,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7880,7 +7867,7 @@
         24,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7889,7 +7876,7 @@
         25,
         -6
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -7898,7 +7885,7 @@
         25,
         -5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -7907,7 +7894,7 @@
         25,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7916,7 +7903,7 @@
         25,
         -3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7925,7 +7912,7 @@
         20,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7934,7 +7921,7 @@
         20,
         -1
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -7943,7 +7930,7 @@
         20,
         0
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -7952,7 +7939,7 @@
         20,
         1
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7961,7 +7948,7 @@
         20,
         2
       ],
-      "block": "minecraft:jukebox"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7970,7 +7957,7 @@
         21,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -7979,7 +7966,7 @@
         21,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -7988,7 +7975,7 @@
         21,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -7997,7 +7984,7 @@
         21,
         -1
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8006,7 +7993,7 @@
         21,
         0
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8015,7 +8002,7 @@
         21,
         1
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8024,7 +8011,7 @@
         21,
         2
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8033,7 +8020,7 @@
         21,
         3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8042,7 +8029,7 @@
         21,
         4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8051,7 +8038,7 @@
         21,
         5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -8060,7 +8047,7 @@
         22,
         -4
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -8069,7 +8056,7 @@
         22,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8078,7 +8065,7 @@
         22,
         -2
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8087,7 +8074,7 @@
         22,
         -1
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8096,7 +8083,7 @@
         22,
         0
       ],
-      "block": "minecraft:redstone_lamp"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8105,7 +8092,7 @@
         22,
         1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8114,7 +8101,7 @@
         22,
         2
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -8123,7 +8110,7 @@
         22,
         3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8132,7 +8119,7 @@
         22,
         4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8141,7 +8128,7 @@
         22,
         5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -8150,7 +8137,7 @@
         23,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8159,7 +8146,7 @@
         23,
         -5
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8168,7 +8155,7 @@
         23,
         -4
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -8177,7 +8164,7 @@
         23,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8186,7 +8173,7 @@
         23,
         -2
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8195,7 +8182,7 @@
         23,
         -1
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8204,7 +8191,7 @@
         23,
         3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8213,7 +8200,7 @@
         23,
         4
       ],
-      "block": "minecraft:jungle_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8222,7 +8209,7 @@
         23,
         5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -8231,7 +8218,7 @@
         24,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8240,7 +8227,7 @@
         24,
         -3
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8249,7 +8236,7 @@
         25,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8258,7 +8245,7 @@
         25,
         -3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8267,7 +8254,7 @@
         20,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8276,7 +8263,7 @@
         20,
         -1
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -8285,7 +8272,7 @@
         20,
         0
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8294,7 +8281,7 @@
         20,
         1
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8303,7 +8290,7 @@
         20,
         2
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8312,7 +8299,7 @@
         21,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8321,7 +8308,7 @@
         21,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8330,7 +8317,7 @@
         21,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8339,7 +8326,7 @@
         21,
         -1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8348,7 +8335,7 @@
         21,
         0
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -8357,7 +8344,7 @@
         21,
         1
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -8366,7 +8353,7 @@
         21,
         2
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8375,7 +8362,7 @@
         21,
         3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8384,7 +8371,7 @@
         21,
         4
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -8393,7 +8380,7 @@
         21,
         5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -8402,7 +8389,7 @@
         22,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8411,7 +8398,7 @@
         22,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8420,7 +8407,7 @@
         22,
         -2
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8429,7 +8416,7 @@
         22,
         -1
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8438,7 +8425,7 @@
         22,
         0
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -8447,7 +8434,7 @@
         22,
         1
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -8456,7 +8443,7 @@
         22,
         2
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -8465,7 +8452,7 @@
         22,
         3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8474,7 +8461,7 @@
         22,
         4
       ],
-      "block": "minecraft:brown_wool"
+      "block": "minecraft:terracotta"
     },
     {
       "op": "voxel",
@@ -8483,7 +8470,7 @@
         22,
         5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -8492,7 +8479,7 @@
         23,
         -6
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8501,7 +8488,7 @@
         23,
         -5
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8510,7 +8497,7 @@
         23,
         -4
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8519,7 +8506,7 @@
         23,
         -3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8528,7 +8515,7 @@
         23,
         -2
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8537,7 +8524,7 @@
         23,
         -1
       ],
-      "block": "minecraft:stripped_spruce_log"
+      "block": "minecraft:terracotta"
     },
     {
       "op": "voxel",
@@ -8546,7 +8533,7 @@
         23,
         3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8555,7 +8542,7 @@
         23,
         4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8564,7 +8551,7 @@
         23,
         5
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -8573,7 +8560,7 @@
         24,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8582,7 +8569,7 @@
         24,
         -3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8591,7 +8578,7 @@
         25,
         -4
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8600,7 +8587,7 @@
         25,
         -3
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8609,7 +8596,7 @@
         20,
         -2
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8618,7 +8605,7 @@
         20,
         -1
       ],
-      "block": "minecraft:brown_concrete"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8627,7 +8614,7 @@
         20,
         0
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8636,7 +8623,7 @@
         20,
         1
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8645,7 +8632,7 @@
         20,
         2
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8654,7 +8641,7 @@
         21,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8663,7 +8650,7 @@
         21,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8672,7 +8659,7 @@
         21,
         -2
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -8681,7 +8668,7 @@
         21,
         -1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8690,7 +8677,7 @@
         21,
         0
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8699,7 +8686,7 @@
         21,
         1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8717,7 +8704,7 @@
         22,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8726,7 +8713,7 @@
         22,
         -3
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8735,7 +8722,7 @@
         22,
         -2
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8744,7 +8731,7 @@
         22,
         -1
       ],
-      "block": "minecraft:nether_wart_block"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8753,7 +8740,7 @@
         22,
         0
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     },
     {
       "op": "voxel",
@@ -8762,7 +8749,7 @@
         22,
         1
       ],
-      "block": "minecraft:spruce_log"
+      "block": "minecraft:brown_terracotta"
     },
     {
       "op": "voxel",
@@ -8771,7 +8758,7 @@
         22,
         2
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8780,7 +8767,7 @@
         23,
         -4
       ],
-      "block": "minecraft:crimson_nylium"
+      "block": "minecraft:red_terracotta"
     },
     {
       "op": "voxel",
@@ -8789,7 +8776,7 @@
         23,
         -3
       ],
-      "block": "minecraft:hay_block"
+      "block": "minecraft:gold_block"
     }
   ]
 }
