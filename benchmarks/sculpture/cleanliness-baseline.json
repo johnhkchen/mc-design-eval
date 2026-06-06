@@ -1,0 +1,236 @@
+{
+  "ticket": "T-062-01",
+  "metrics": {
+    "speckle": "fraction of occupied cells locally outvoted by a single other block (fragmentation, not boundaries)",
+    "components": "6-connected occupancy components",
+    "largestFraction": "largest component / total cells; 1.0 = one solid mass",
+    "strayCount": "cells not in the largest component",
+    "subFloorCount": "stray cells below the largest component's lowest cell (islands under the floor)"
+  },
+  "builds": [
+    {
+      "id": "r1",
+      "label": "R1 glb-voxel"
+    },
+    {
+      "id": "r2",
+      "label": "R2 glb-voxel-clean"
+    },
+    {
+      "id": "e18",
+      "label": "E18 thin+seg"
+    }
+  ],
+  "rows": [
+    {
+      "subject": "dancing-man",
+      "r1": {
+        "speckle": 0.108,
+        "components": 1,
+        "largestFraction": 1,
+        "strayCount": 0,
+        "subFloorCount": 0,
+        "distinct": 5,
+        "cells": 973
+      },
+      "r2": {
+        "speckle": 0.031,
+        "components": 1,
+        "largestFraction": 1,
+        "strayCount": 0,
+        "subFloorCount": 0,
+        "distinct": 5,
+        "cells": 973
+      },
+      "e18": {
+        "speckle": 0.015,
+        "components": 1,
+        "largestFraction": 1,
+        "strayCount": 0,
+        "subFloorCount": 0,
+        "distinct": 5,
+        "cells": 1504
+      }
+    },
+    {
+      "subject": "moai",
+      "r1": {
+        "speckle": 0.172,
+        "components": 6,
+        "largestFraction": 0.52,
+        "strayCount": 2023,
+        "subFloorCount": 0,
+        "distinct": 5,
+        "cells": 4215
+      },
+      "r2": {
+        "speckle": 0.058,
+        "components": 6,
+        "largestFraction": 0.52,
+        "strayCount": 2023,
+        "subFloorCount": 0,
+        "distinct": 5,
+        "cells": 4215
+      },
+      "e18": {
+        "speckle": 0,
+        "components": 3,
+        "largestFraction": 0.519,
+        "strayCount": 2912,
+        "subFloorCount": 0,
+        "distinct": 5,
+        "cells": 6059
+      }
+    },
+    {
+      "subject": "pineapple",
+      "r1": {
+        "speckle": 0.108,
+        "components": 12,
+        "largestFraction": 0.987,
+        "strayCount": 45,
+        "subFloorCount": 0,
+        "distinct": 4,
+        "cells": 3397
+      },
+      "r2": {
+        "speckle": 0.038,
+        "components": 12,
+        "largestFraction": 0.987,
+        "strayCount": 45,
+        "subFloorCount": 0,
+        "distinct": 5,
+        "cells": 3397
+      },
+      "e18": {
+        "speckle": 0.012,
+        "components": 1,
+        "largestFraction": 1,
+        "strayCount": 0,
+        "subFloorCount": 0,
+        "distinct": 4,
+        "cells": 4855
+      }
+    },
+    {
+      "subject": "bow-and-arrow",
+      "r1": {
+        "speckle": 0.11,
+        "components": 21,
+        "largestFraction": 0.277,
+        "strayCount": 371,
+        "subFloorCount": 0,
+        "distinct": 6,
+        "cells": 513
+      },
+      "r2": {
+        "speckle": 0.031,
+        "components": 21,
+        "largestFraction": 0.277,
+        "strayCount": 371,
+        "subFloorCount": 0,
+        "distinct": 8,
+        "cells": 513
+      },
+      "e18": {
+        "speckle": 0.003,
+        "components": 1,
+        "largestFraction": 1,
+        "strayCount": 0,
+        "subFloorCount": 0,
+        "distinct": 6,
+        "cells": 1210
+      }
+    },
+    {
+      "subject": "heart",
+      "r1": {
+        "speckle": 0.153,
+        "components": 10,
+        "largestFraction": 0.986,
+        "strayCount": 80,
+        "subFloorCount": 0,
+        "distinct": 7,
+        "cells": 5840
+      },
+      "r2": {
+        "speckle": 0.052,
+        "components": 10,
+        "largestFraction": 0.986,
+        "strayCount": 80,
+        "subFloorCount": 0,
+        "distinct": 7,
+        "cells": 5840
+      },
+      "e18": {
+        "speckle": 0.012,
+        "components": 1,
+        "largestFraction": 1,
+        "strayCount": 0,
+        "subFloorCount": 0,
+        "distinct": 7,
+        "cells": 7982
+      }
+    },
+    {
+      "subject": "mushroom",
+      "r1": {
+        "speckle": 0.06,
+        "components": 4,
+        "largestFraction": 0.998,
+        "strayCount": 19,
+        "subFloorCount": 0,
+        "distinct": 6,
+        "cells": 9505
+      },
+      "r2": {
+        "speckle": 0.029,
+        "components": 4,
+        "largestFraction": 0.998,
+        "strayCount": 19,
+        "subFloorCount": 0,
+        "distinct": 7,
+        "cells": 9505
+      },
+      "e18": {
+        "speckle": 0.016,
+        "components": 1,
+        "largestFraction": 1,
+        "strayCount": 0,
+        "subFloorCount": 0,
+        "distinct": 6,
+        "cells": 11958
+      }
+    },
+    {
+      "subject": "koi",
+      "r1": {
+        "speckle": 0.13,
+        "components": 8,
+        "largestFraction": 0.976,
+        "strayCount": 53,
+        "subFloorCount": 0,
+        "distinct": 5,
+        "cells": 2164
+      },
+      "r2": {
+        "speckle": 0.061,
+        "components": 8,
+        "largestFraction": 0.976,
+        "strayCount": 53,
+        "subFloorCount": 0,
+        "distinct": 8,
+        "cells": 2164
+      },
+      "e18": {
+        "speckle": 0.028,
+        "components": 1,
+        "largestFraction": 1,
+        "strayCount": 0,
+        "subFloorCount": 0,
+        "distinct": 5,
+        "cells": 3155
+      }
+    }
+  ]
+}
