@@ -30,3 +30,7 @@ benchmarks/sculpture/glb/silhouette/
 # GLB-voxel build renders (T-051-01) — image-heavy, derived from the gitignored GLBs, regen via
 # `node benchmarks/sculpture/glb-voxel-run.mjs`. The durable record is summary.md + artifact.json.
 benchmarks/sculpture/glb-voxel/**/render-3q.png
+
+# GLB-voxel surgical-loop renders (T-052-01) — image-heavy, derived, regen via
+# `node benchmarks/sculpture/glb-voxel-surgical.mjs`. The durable record is the .json/.md summary.
+benchmarks/sculpture/glb-voxel-surgical/**/*.png

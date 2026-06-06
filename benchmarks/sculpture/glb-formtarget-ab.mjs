@@ -273,7 +273,12 @@ async function main() {
   emit(rows);
 }
 
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+// Main-guard so this file's exports (formVerdictOf, VERDICT_GLOSS) are importable side-effect-free — e.g.
+// by glb-voxel-surgical.mjs (T-052-01), which reuses the verdict logic rather than cloning it. Running the
+// file directly is unchanged.
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  main().catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });
+}
