@@ -95,3 +95,61 @@ function SculptureConceptPrompt(design_doc: string, target_blocks: int, attached
     {{ attached }}
   "#
 }
+
+// Stage-1 concept-art prompt — vConcept SCULPTURE, PALETTE-AWARE .v2 (T-040-01 / S-040 / E-14).
+// Sibling of SculptureConceptPrompt, kept SEPARATE so the .v1 prompt stays frozen (its E-13 runs
+// stay reproducible). Adds exactly ONE thing over .v1: it consumes a VALUE-TRUE palette legend and
+// is told to match the ATTACHED SWATCH GRID's real block VALUES (often darker than the block's name
+// implies), closing the value-drift gap (the concept blocked hue but not value, so the render later
+// surprised with a darker block). The swatch grid IMAGE is attached by the harness via the same
+// multimodal path any reference image uses; BAML renders only the TEXT. The .v1 body below is copied
+// character-for-character from SculptureConceptPrompt; only the VALUE-TRUE PALETTE block is new.
+function SculptureConceptPromptV2(design_doc: string, target_blocks: int, palette_swatches: string, attached: string) -> string {
+  client ClaudeStub
+  prompt #"
+    Generate CONCEPT ART of a Minecraft-block SCULPTURE: a SINGLE ISOLATED FREESTANDING OBJECT
+    shown in a clear THREE-QUARTER (3/4) VIEW — angled so two sides and the top read at once,
+    seen slightly from above, as if on a turntable — floating against a solid BLACK (#000000)
+    background so it segments cleanly for 3D reconstruction. No ground plane, no cast shadows, no
+    sky, pedestal-on-ground, scenery, or surroundings of any kind. The whole object is CENTERED
+    and FULLY VISIBLE (not cropped — leave a small margin on every side), filling most of the
+    frame, lit by bright, even STUDIO lighting with no dramatic shadows.
+
+    Render it in authentic MINECRAFT BLOCK style — built from cubic blocks, with block-scale
+    detail ONLY. The build is about {{ target_blocks }} blocks along its longest dimension, so keep
+    every feature BOLD and chunky. HARD LIMITS (anything finer will not survive voxelization, so do
+    NOT draw it). These OVERRIDE the design document below: if it describes any of these, render the
+    BOLD-block replacement instead, never the literal motif:
+    - NO sub-block ornament, fine filigree, thin tracery, lacework, hair strands, or thin spikes;
+      every smallest feature must read as a few WHOLE blocks. Approximate curves and round forms with
+      stepped, faceted blocks, never smooth surfaces.
+    - NO text, letters, numerals, or inscriptions of any kind.
+    Replace every such motif with BOLD GEOMETRIC block forms — chunky masses, stepped facets, and
+    large-scale COLOR BLOCKING. Massing, silhouette, and proportion carry the design.
+
+    Faithfully realize THIS finalized design document — its essential masses and proportion, its
+    motifs, and above all its PALETTE (use its actual named colors; commit to its dominant /
+    supporting / accent hierarchy, never a flat grey or monochrome blob). The object is a SOLID
+    sculpture IN THE ROUND with real depth and roundness on every visible side — not a flat relief
+    or a wall. The background behind the object must be SOLID #000000 black -- NEVER white, light,
+    grey, or any coloured or gradient backdrop; the object floats on pure black. So its edges read
+    crisply against that black, keep the object's OUTER SILHOUETTE in its brighter palette colors and
+    do NOT place black, near-black, OR any dark or dim tone along the outline -- those merge into the
+    black and break segmentation. Reserve any dark tones for recessed or interior areas only:
+
+    VALUE-TRUE PALETTE (this is the .v2 addition): An exact SWATCH GRID of the REAL Minecraft blocks
+    for this build is attached as an image. Each swatch is that block's TRUE in-render color and
+    VALUE — frequently DARKER than the block's name suggests. Match every surface to these real
+    swatch VALUES, not to an imagined or idealized hue: if a block's true swatch is dark, paint that
+    surface dark. Where the design document names a block, use that block's swatch VALUE for it. This
+    overrides any lighter impression the block's NAME might give — but it does NOT override the
+    silhouette rule above: keep the brightest palette blocks on the outer edge and spend the darker
+    true-value blocks on interior / recessed surfaces. The legend maps each named block to its true
+    value (L* lightness, 0 = black .. 100 = white):
+    {{ palette_swatches }}
+
+    {{ design_doc }}
+
+    {{ attached }}
+  "#
+}
