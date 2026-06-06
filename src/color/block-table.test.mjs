@@ -12,6 +12,7 @@ import assert from "node:assert/strict";
 import {
   srgbToLab,
   meanOpaqueRgb,
+  varianceOpaque,
   loadBlockTable,
   classifyBlock,
   isFullCubeParent,
@@ -75,6 +76,53 @@ test("meanOpaqueRgb: animated strip uses only the first frame", () => {
 test("meanOpaqueRgb: averages multiple opaque pixels", () => {
   const p = png(2, 1, [0, 0, 0, 255, 100, 100, 100, 255]);
   assert.deepEqual(meanOpaqueRgb(p), [50, 50, 50]);
+});
+
+// --- Group B1: varianceOpaque (T-064-01 texture busy-ness) ----------------
+
+test("varianceOpaque: a uniform texture has zero variance", () => {
+  const p = png(2, 2, [50, 60, 70, 255, 50, 60, 70, 255, 50, 60, 70, 255, 50, 60, 70, 255]);
+  assert.equal(varianceOpaque(p), 0);
+});
+
+test("varianceOpaque: a busy texture scores higher than a flat one", () => {
+  const flat = png(2, 1, [100, 100, 100, 255, 110, 100, 100, 255]); // tiny spread
+  const busy = png(2, 1, [0, 0, 0, 255, 255, 255, 255, 255]); // max spread
+  assert.ok(varianceOpaque(busy) > varianceOpaque(flat), "busy must out-score flat");
+});
+
+test("varianceOpaque: matches the closed-form per-channel variance", () => {
+  // R channel {0,100}: mean 50, var ((50²)+(50²))/2 = 2500. G,B constant → 0. Sum = 2500.
+  const p = png(2, 1, [0, 10, 20, 255, 100, 10, 20, 255]);
+  assert.equal(varianceOpaque(p), 2500);
+});
+
+test("varianceOpaque: ignores transparent pixels", () => {
+  // opaque {0,100} on R (var 2500); a wild transparent pixel must not count.
+  const p = png(3, 1, [0, 0, 0, 255, 100, 0, 0, 255, 255, 255, 255, 0]);
+  assert.equal(varianceOpaque(p), 2500);
+});
+
+test("varianceOpaque: animated strip uses only the first frame", () => {
+  // width=1, height=2: frame 0 uniform (var 0); frame 1 wild must be ignored.
+  const p = png(1, 2, [60, 60, 60, 255, 200, 10, 250, 255]);
+  assert.equal(varianceOpaque(p), 0);
+});
+
+test("varianceOpaque: a single opaque pixel has no defined variance → 0", () => {
+  const p = png(2, 1, [200, 30, 40, 255, 0, 0, 0, 0]);
+  assert.equal(varianceOpaque(p), 0);
+});
+
+test("committed table: every block carries a non-negative integer var", () => {
+  const t = loadBlockTable();
+  for (const b of t.blocks) {
+    assert.ok(Number.isInteger(b.var) && b.var >= 0, `${b.block} var=${b.var}`);
+  }
+  // flat solids near zero, classic busy blocks high — sanity on the recorded signal.
+  const v = (n) => t.blocks.find((b) => b.block === n)?.var;
+  assert.ok(v("white_concrete") < 100, `white_concrete ${v("white_concrete")}`);
+  assert.ok(v("nether_quartz_ore") > 2000, `nether_quartz_ore ${v("nether_quartz_ore")}`);
 });
 
 // --- Group B2: classification helpers -------------------------------------

@@ -85,6 +85,50 @@ export function meanOpaqueRgb(png, alphaThreshold = 128) {
   return null;
 }
 
+/**
+ * Summed per-channel VARIANCE of the same opaque pixels {@link meanOpaqueRgb} averages — a scalar
+ * texture "busy-ness" (RGB² units). Same first-frame + alpha-fallback selection so the variance is
+ * measured over exactly the pixel set the recorded mean came from. A flat block (concrete, terracotta,
+ * wool) scores near 0; a high-variance block (coral, ore, mycelium) scores high. Used (T-064-01) to make
+ * busy blocks lose to flat blocks of comparable mean ΔE. Returns 0 when fewer than 2 opaque pixels exist
+ * (variance undefined). Pure.
+ * @param {{width:number,height:number,data:Uint8Array|Buffer}} png
+ * @param {number} [alphaThreshold=128]
+ * @returns {number} summed channel variance, rounded; 0 if <2 opaque pixels
+ */
+export function varianceOpaque(png, alphaThreshold = 128) {
+  const { width, height, data } = png;
+  const frameH = height > width && height % width === 0 ? width : height; // first animation frame
+  for (const minA of [alphaThreshold, 1]) {
+    let r = 0, g = 0, b = 0, n = 0;
+    for (let y = 0; y < frameH; y++) {
+      for (let x = 0; x < width; x++) {
+        const i = (width * y + x) << 2;
+        if (data[i + 3] < minA) continue;
+        r += data[i];
+        g += data[i + 1];
+        b += data[i + 2];
+        n++;
+      }
+    }
+    if (n === 0) continue; // try the looser alpha pass
+    if (n < 2) return 0; // single pixel: variance undefined
+    const mr = r / n, mg = g / n, mb = b / n;
+    let vr = 0, vg = 0, vb = 0;
+    for (let y = 0; y < frameH; y++) {
+      for (let x = 0; x < width; x++) {
+        const i = (width * y + x) << 2;
+        if (data[i + 3] < minA) continue;
+        vr += (data[i] - mr) ** 2;
+        vg += (data[i + 1] - mg) ** 2;
+        vb += (data[i + 2] - mb) ** 2;
+      }
+    }
+    return Math.round((vr + vg + vb) / n);
+  }
+  return 0;
+}
+
 // --- block classification -------------------------------------------------
 
 /** Strip a texture/model ref like "minecraft:block/oak_log" or "block/dirt" → "oak_log". */
@@ -227,7 +271,7 @@ export async function buildBlockTable({ version = "1.20.1" } = {}) {
       excluded.push({ block: name, reason: "no opaque pixels" });
       continue;
     }
-    blocks.push({ block: name, texture: stem, rgb, lab: srgbToLab(rgb) });
+    blocks.push({ block: name, texture: stem, rgb, lab: srgbToLab(rgb), var: varianceOpaque(png) });
   }
 
   blocks.sort((x, y) => (x.block < y.block ? -1 : x.block > y.block ? 1 : 0));
