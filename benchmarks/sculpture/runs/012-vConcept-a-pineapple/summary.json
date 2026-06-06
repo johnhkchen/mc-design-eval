@@ -1,0 +1,46 @@
+{
+  "seq": 12,
+  "runId": "012-vConcept-a-pineapple",
+  "date": "2026-06-05",
+  "approach": "vConcept",
+  "promptMethodId": "vconcept-sculpture.v1",
+  "model": "claude-opus-4-8",
+  "effort": null,
+  "subject": "a pineapple",
+  "scale": 16,
+  "blocks": 332,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      -4,
+      0,
+      -4
+    ],
+    "max": [
+      4,
+      16,
+      4
+    ]
+  },
+  "view3q": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "turntable": {
+    "frames": 24,
+    "centerDeg": 45,
+    "amplitudeDeg": 40,
+    "mode": "rock"
+  },
+  "concept": {
+    "model": "gemini-3-pro-image-preview",
+    "promptChars": 4586,
+    "ms": 20448
+  },
+  "tokensIn": 19950,
+  "tokensOut": 15697,
+  "costUsd": 0.6061865,
+  "durationMs": 214867,
+  "note": "T-037-03 scale-16 study"
+}

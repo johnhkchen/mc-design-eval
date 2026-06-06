@@ -1,0 +1,656 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "003-vConcept-a-moai-statue",
+    "prompting_method_id": "vconcept-sculpture.v1",
+    "model_id": "claude-opus-4-8",
+    "seed": 17,
+    "server_state_id": "flat-creative-superflat.v1"
+  },
+  "style": {
+    "name": "Monochromatic stone monolith",
+    "rationale": "One quarried column in gray-concrete tuff, mottled with andesite and stone, resolving into the iconic wedge-brow / long-nose / heavy-jaw moai face with deep omitted eye sockets and a single warm red-sandstone pukao to draw the eye to the crown."
+  },
+  "palette": {
+    "manifest": [
+      "minecraft:gray_concrete",
+      "minecraft:andesite",
+      "minecraft:stone",
+      "minecraft:red_sandstone"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        0,
+        -4
+      ],
+      "to": [
+        5,
+        2,
+        5
+      ],
+      "block": "minecraft:stone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        3,
+        -4
+      ],
+      "to": [
+        5,
+        3,
+        5
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -5,
+        3,
+        -4
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        3,
+        5
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        3,
+        -4
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -5,
+        3,
+        5
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        4,
+        -3
+      ],
+      "to": [
+        4,
+        12,
+        4
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        13,
+        -3
+      ],
+      "to": [
+        3,
+        15,
+        4
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        -3,
+        4,
+        5
+      ],
+      "to": [
+        -3,
+        11,
+        5
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "line",
+      "from": [
+        3,
+        4,
+        5
+      ],
+      "to": [
+        3,
+        11,
+        5
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "line",
+      "from": [
+        -2,
+        7,
+        5
+      ],
+      "to": [
+        2,
+        7,
+        5
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        6,
+        4
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -3,
+        9,
+        4
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        11,
+        4
+      ],
+      "block": "minecraft:stone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -2,
+        5,
+        4
+      ],
+      "block": "minecraft:stone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        8,
+        4
+      ],
+      "block": "minecraft:stone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -3,
+        12,
+        4
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        16,
+        -3
+      ],
+      "to": [
+        4,
+        28,
+        2
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        16,
+        3
+      ],
+      "to": [
+        4,
+        23,
+        4
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -1,
+        24,
+        3
+      ],
+      "to": [
+        1,
+        25,
+        4
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        24,
+        3
+      ],
+      "to": [
+        -4,
+        25,
+        4
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        24,
+        3
+      ],
+      "to": [
+        4,
+        25,
+        4
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        26,
+        3
+      ],
+      "to": [
+        4,
+        28,
+        4
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -3,
+        24,
+        2
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -2,
+        24,
+        2
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -3,
+        25,
+        2
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -2,
+        25,
+        2
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        24,
+        2
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        24,
+        2
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        25,
+        2
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        25,
+        2
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -5,
+        20,
+        0
+      ],
+      "to": [
+        -5,
+        27,
+        2
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        5,
+        20,
+        0
+      ],
+      "to": [
+        5,
+        27,
+        2
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -4,
+        26,
+        5
+      ],
+      "to": [
+        4,
+        27,
+        5
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -2,
+        27,
+        6
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        27,
+        6
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        19,
+        5
+      ],
+      "to": [
+        0,
+        25,
+        5
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        20,
+        6
+      ],
+      "to": [
+        0,
+        23,
+        6
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -1,
+        19,
+        5
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        19,
+        5
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        18,
+        5
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -1,
+        18,
+        5
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        18,
+        5
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -2,
+        17,
+        5
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        17,
+        5
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        16,
+        4
+      ],
+      "to": [
+        3,
+        17,
+        5
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -1,
+        16,
+        6
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        16,
+        6
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        16,
+        6
+      ],
+      "block": "minecraft:gray_concrete"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        20,
+        4
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -3,
+        21,
+        4
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        18,
+        4
+      ],
+      "block": "minecraft:stone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -3,
+        19,
+        4
+      ],
+      "block": "minecraft:stone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -4,
+        22,
+        4
+      ],
+      "block": "minecraft:stone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        22,
+        4
+      ],
+      "block": "minecraft:andesite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        29,
+        -2
+      ],
+      "to": [
+        3,
+        29,
+        3
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -3,
+        30,
+        -2
+      ],
+      "to": [
+        3,
+        30,
+        3
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -2,
+        31,
+        -1
+      ],
+      "to": [
+        2,
+        31,
+        2
+      ],
+      "block": "minecraft:red_sandstone"
+    }
+  ]
+}
