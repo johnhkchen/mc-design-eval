@@ -1638,3 +1638,50 @@ E-15 consolidation; the categorical is the IoU band + the loop's `improved|held|
 moves the surgical loop where the flat concept couldn't** (1 of 2), and **surgical refinement on the
 already-grounded voxel set adds no net whole-object gain** (koi regressed, heart held) — the path to form
 is grounding the geometry, not editing the text→JSON build, and the cage that won't fake it still holds.
+
+## Consolidation sweep (E-17) — what each technique bought, across all 7 subjects
+
+E-16 measured 2 subjects (koi, heart). E-17 generalizes the whole arc to **all 7 sculptural subjects** by
+running one canonical ladder and scoring every rung the same way:
+
+```
+R0 text→JSON  →  R1 glb-voxel  →  R2 +material-clean  →  R3 +surgical
+```
+
+against each subject's own image→3D GLB. The data spine is `benchmarks/sculpture/sweep-ablation.json`
+(T-056-01); the legible scorecard + per-subject march-of-progress strips are `pr/assets/sweep.md` +
+`pr/assets/frames/march-*.png` (T-057-01). The headline is the **per-technique average of the marginal
+column** — what each technique added, meaned over the 7 subjects:
+
+| technique | rung | n | avg ΔformIoU | avg ΔvalueΔE | improved/held/regressed | verdict |
+|---|---|---:|---:|---:|:---:|---|
+| **glb-voxel** (form grounding) | R0→R1 | 7 | **+0.238** | −7.16 | 7/0/0 | won-form |
+| **material-clean** (palette) | R1→R2 | 7 | +0.000 | **−4.53** | 0/7/0 | won-value |
+| **surgical** (per-region) | R2→R3 | 7 | −0.001 | +0.00 | 0/6/1 | wash |
+
+**The one legible picture.** Form is bought **once**, by voxelization: grounding the geometry in the
+image→3D GLB lifts silhouette IoU **+0.238 on average across all 7 subjects** (range +0.124 pineapple →
++0.421 heart), and it improved **every** subject (7/7). This is the E-16 finding (koi +0.150, heart +0.421)
+holding at breadth — not a two-subject fluke. The two later rungs are **not** form levers and the sweep
+says so in numbers.
+
+**Where a rung didn't help (shown, not dropped).**
+- **material-clean buys no form** (avg ΔformIoU +0.000) — it is a pure **value** lever, cleaning the
+  realized palette toward the GLB's canonical material values (avg ΔvalueΔE −4.53). Caveat: its R2/R3
+  `value ΔE` residual is **0 by construction** — it snaps to the GLB's *own* texture palette, so the
+  metric is partly tautological. The honest win is the R1→R2 cleanup, not the zero.
+- **surgical is a net wash** on an already-grounded build: avg ΔformIoU **−0.001**, with **0 of 7
+  subjects improved** and one **regression** (bow-and-arrow −0.004). A single-view per-region accept-gate
+  rarely lifts the whole-object silhouette once voxelization has captured the form — the E-15/E-16
+  single-view ceiling persists at breadth. The P14 cage still earns its keep (it rolls back non-improving
+  tweaks), it simply has almost no headroom here.
+
+**The residual.** Voxelization is the decisive, cheap, deterministic lever (no model loop); it lands the
+form in one step but is not *perfect* form — the hardest subjects stay only *fair* (moai 0.565,
+bow-and-arrow 0.469/0.473, koi 0.623) where thin or fine-relief geometry voxelizes coarsely and the metric
+is a single normalized 3/4 view. The remaining gap is a **voxelization-fidelity** problem (resolution /
+multi-view / axis), not a palette or per-region-edit problem — material-clean and surgical have already
+shown they cannot close it. **One sentence:** across 7 subjects, grounding geometry in the GLB voxelization
+is the whole form win (+0.238 avg IoU, 7/7), material-clean is a value-only cleanup (−4.53 avg ΔE, 0 form),
+and surgical refinement is an honest wash (−0.001 avg, one regression) — the arc's value is bought by where
+the geometry comes from, and the instrument shows the rungs that bought nothing as buying nothing.

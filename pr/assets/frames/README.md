@@ -27,6 +27,24 @@ bundle**: the production desk cuts the video without reaching into gitignored `b
 | `concept-mausoleum-C-flash.png` | `concepts/mausoleum-C-flash.png` | **`[concept]`** — center-cropped from 1376×768 |
 | `../rotations/spin-taj-015.mp4` (+ montage) | `runs/015,019,021,022` orbits | **REAL spin** for F10 — 12fps 360° seamless, see `../rotations/` |
 | `concept-goldengate-vision.png` | `concepts/goldengate-base-flash.png` (gitignored) | **`[concept]`** — F13 vision end-frame; Nano-Banana flash via `pr/production/endframe.mjs` (T-034-01), NOT Minecraft |
+| `march-<subject>.png` × 7 | the four gitignored rung renders (below) | **E-17 march-of-progress** — R0→R1→R2→R3 side by side, one strip per sculptural subject (T-057-01) |
+
+**E-17 march frames (`march-*.png`).** Each is the four rung renders of one sculptural subject
+composited left→right at 512px each + 6px gutters (2066×512), via `montageRow` (`src/form/montage.mjs`).
+The source renders are all **gitignored** (root `.gitignore`), which is exactly why these composites are
+committed here — `pr/assets/` must stay self-contained. Subjects: dancing-man, moai, pineapple,
+bow-and-arrow, heart, mushroom, koi. Source per panel:
+
+| panel | source render (gitignored) | rung |
+|---|---|---|
+| R0 | `benchmarks/sculpture/sweep-ablation/<subj>/r0-render-3q.png` | text→JSON |
+| R1 | `benchmarks/sculpture/glb-voxel/<subj>/render-3q.png` | glb-voxel |
+| R2 | `benchmarks/sculpture/glb-voxel-clean/<subj>/render-3q.png` | +material-clean |
+| R3 | `benchmarks/sculpture/glb-voxel-surgical-sweep/<subj>/after.png` | +surgical |
+
+**Regen:** `node benchmarks/sculpture/sweep-scorecard.mjs` (needs the rung builds present locally; it
+skips any subject whose source renders are absent and still writes the scorecard). The numbers paired
+with these strips live in `../sweep.md`.
 
 **Reuse:** `spine-r4-hero-oneplane-014.png` serves F01 (morph target), F04, and the F05/F11
 re-flashes. `concept-taj-C-flash.png` serves F08 (pivot target) and the F09 wall. One file per real
