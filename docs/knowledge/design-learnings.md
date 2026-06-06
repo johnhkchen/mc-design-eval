@@ -1980,3 +1980,70 @@ static cleared but its form drift stayed, and the moai got an *honest worse* ver
 artifact via SSAA ×3), retires green-metric sign-off for a reference-anchored **triptych + categorical-verdict +
 named-gap** gate, and re-photographs the four headline builds honestly — 3 drifted / 1 different object, two
 material gaps routed to E-21, with the moai's *worse* verdict kept rather than hidden (Rule 7).
+
+## 2.5-D interaction sector (E-23) — view-matched-to-task, two paths, the gate-switch (S-083, T-083-01) · 2026-06-06
+
+The terminal E-23 learning, proven on **one** build (`npm run milestone:cottage` → a hollow, accurate,
+room-divided cottage). The arc before this could make a face *look* right (E-22 lens + resemblance gate) but
+every build was a **solid mass**: no interior, and the LLM either drowned in ~57k voxels or edited blind. E-23
+is the **abstraction that fixed the interaction**, not a new score.
+
+**View-matched-to-task — hand the model the view the task needs, not the world.** Each op gets a *task-shaped*
+2.5-D projection through the E-22 fixed lens: a **plan/top** view to author a floorplan, an **elevation** to
+judge a face, a **3/4** to read massing. The model looks at one legible image, not a voxel dump
+(`[[twodee-interaction-sector]]`). Reading any angle is in scope (Path R); *painting* needs the unambiguous
+back-projection of Path P. This is what makes a small model viable on a building-scale subject.
+
+**Two paths — program vs judgement — and when each wins.**
+- **Program path** (deterministic generator; bulk placement is the program's job): the **hollow carve**
+  (`markHollowable` → `carveArtifact`, flatten-by-exclusion, no air op — `[[facade-recess-by-exclusion]]`) and
+  the **N×M floorplan** (`generateFloorplan` partitions the footprint, places floors at storey lines + grid
+  walls + doorways-by-exclusion). The LLM **authors/steers** a tiny spec; the program emits the hundreds of
+  placements. Use it where the work is *bulk, geometric, and verifiable* — 978 voxels carved, 395 placed, none
+  hand-touched.
+- **Judgement path** (the LLM acts on a face): **spray-paint** — project the front to the grid, splat a
+  per-cell material target (concept where it is the truth, GLB where the concept is silent), back-project to
+  recolor surface placements. Use it where the work is *perceptual and local* — restoring the half-timber band
+  the 3-D feature placer collapsed (plaster `8 → 315`). Paint is geometry-safe, so it composes cleanly *before*
+  the program stages.
+
+**The gate-switch at the craft→design line — the headline.** The gate is not one thing; it **changes with
+whether a reference exists**:
+- **Resemblance** governs the **exterior** — there *is* a concept to match, so score the painted face against
+  it (front 0.25 → 0.40, E-22 per-face accept-if-closer, P14-safe).
+- **Plausibility** governs the **interior** — "break the shell into rooms" is **invention**; there is nothing
+  to resemble, so gate six *internal-consistency* constraints (rooms valid + non-overlapping + reachable;
+  floors at the storey lines; storey count matches the read; grid fits the envelope) — all PASS, with a named
+  residual.
+The exact same build crosses the line, so the milestone reports **both** gates side by side. That switch —
+resemblance where there's a reference, plausibility where there isn't — is the E-23 thesis.
+
+**Right-sized-model results — which ops ran light, and the rubric.** The chain fired exactly two metered
+calls, one per tier: the **hollowable-mass detector on Haiku** (light — a bounded classification scoped to one
+3/4 view, over the candidate mass the geometric read already isolated) and the **floorplan author on Opus**
+(strong — authoring a generator, the design reasoning). The scoping rubric (single-sourced in
+`src/model-tier.mjs` `OP_ROUTING`): **light** = a narrow detector/classification scoped to ONE view over a
+bounded candidate set; **strong** = cross-view judgement, authoring a generator, or material zoning. Detectors
+go light; *making new structure* goes strong. This is the first place the project does real multi-model
+agentic engineering — and it held on a building-scale build.
+
+**Where it over/under-reaches (honest — Rule 7).**
+- **The exterior is held *provably*, the interior is gated by *plausibility* not truth.** The carve and fill
+  both pass `exteriorHeld` (the 10-camera surface digest is invariant — the hollow + rooms are literally
+  invisible from outside), but the interior has *no reference*, so plausibility is the ceiling, not resemblance.
+- **The +x side is accepted by construction** — the concept never shows a side, so its GLB splat has no
+  per-face resemblance delta. The *front* face is no longer the gap; the side is the named exterior residual.
+- **`openings-align` is steered, not verified** — the front-most ortho march can't read a recessed door as a
+  hole, so interior-door↔exterior-door alignment trusts the LLM's `frontDoor`, not geometry. A depth pass
+  would close it.
+- **No stair** — reachability is per-storey; vertical circulation is the obvious next reach.
+- **The cutaway is a render-only section** (`src/view/cutaway.mjs`, flatten-by-exclusion) — the real artifact
+  is never edited to flatter the view (Rule 3); the section exists only to photograph the hollow + grid.
+- **The authoring is non-deterministic** — the floorplan author returns 2×2 / 2×3 / 3×3 across runs (all
+  gate-passing); the generator + gates are deterministic given a spec. A seed would pin a Phase-2 sweep.
+
+**One sentence:** E-23 proves the 2.5-D interaction sector on a single cottage — task-shaped views feed two
+paths (program: carve + N×M fill, 978 voxels removed / 395 placed; judgement: spray-paint, plaster 8→315),
+the gate **switches** from exterior resemblance (0.25→0.40) to interior plausibility (six constraints PASS) at
+the craft→design line, and the ops are model-scoped (detector on Haiku, author on Opus) — exterior held
+*provably* the whole time, with the side-by-construction, steered-openings, and no-stair residuals named.
