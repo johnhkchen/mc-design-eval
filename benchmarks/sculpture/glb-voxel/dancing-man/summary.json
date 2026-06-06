@@ -1,27 +1,27 @@
 {
-  "subject": "heart",
+  "subject": "dancing-man",
   "scale": 32,
-  "occupancy": 5840,
-  "blocks": 5840,
+  "occupancy": 973,
+  "blocks": 973,
   "unmapped": 0,
   "bounds": {
     "min": [
-      -11,
+      -7,
       0,
-      -16
+      -10
     ],
     "max": [
-      10,
-      26,
-      15
+      6,
+      31,
+      9
     ]
   },
-  "manifestSize": 91,
+  "manifestSize": 18,
   "view3q": {
     "azimuthDeg": 45,
     "elevationDeg": 30,
     "fov": 45
   },
-  "silhouetteIoU": 0.877,
-  "durationSec": 19.5
+  "silhouetteIoU": 0.914,
+  "durationSec": 8.5
 }

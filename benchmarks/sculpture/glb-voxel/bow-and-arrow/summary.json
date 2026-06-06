@@ -1,27 +1,27 @@
 {
-  "subject": "heart",
+  "subject": "bow-and-arrow",
   "scale": 32,
-  "occupancy": 5840,
-  "blocks": 5840,
+  "occupancy": 513,
+  "blocks": 513,
   "unmapped": 0,
   "bounds": {
     "min": [
-      -11,
+      -15,
       0,
-      -16
+      -3
     ],
     "max": [
-      10,
-      26,
-      15
+      14,
+      31,
+      3
     ]
   },
-  "manifestSize": 91,
+  "manifestSize": 34,
   "view3q": {
     "azimuthDeg": 45,
     "elevationDeg": 30,
     "fov": 45
   },
-  "silhouetteIoU": 0.877,
-  "durationSec": 19.5
+  "silhouetteIoU": 0.473,
+  "durationSec": 7
 }

@@ -138,7 +138,7 @@ function buildR1(rows, { scale = DEFAULT_SCALE } = {}) {
     ...rows.map((r) =>
       r.skipped
         ? `| ${r.subject} | — | — | — | — | — | _(GLB absent — ${r.note ?? "skipped"})_`
-        : `| ${r.subject} | ${r.occupancy} | ${r.formIoU} | ${r.scale} | ${r.blocks} | ${r.manifestSize} |` +
+        : `| ${r.subject} | ${r.occupancy} | ${r.silhouetteIoU} | ${r.scale} | ${r.blocks} | ${r.manifestSize} |` +
           (r.regenerated ? " _(GLB regenerated)_" : ""),
     ),
     "",
@@ -203,7 +203,9 @@ async function runBreadth({ scale = DEFAULT_SCALE, regenMissing = false } = {}) 
     const renderPath = join(dir, "render-3q.png");
     const report = await renderArtifact(artifact, { outPath: renderPath, view: SCULPTURE_VIEW_3Q });
     const sum = renderSummary(report);
-    const formIoU = await judgeIoU(renderPath, glbBytes);
+    // Field name kept as `silhouetteIoU` (not `formIoU`): glb-voxel-surgical.mjs reads it for its build
+    // baseline cross-reference. Same quantity; the r1 column LABELS it "form IoU vs GLB".
+    const silhouetteIoU = await judgeIoU(renderPath, glbBytes);
     const secs = Number(((Date.now() - t0) / 1000).toFixed(1));
 
     const summary = {
@@ -215,7 +217,7 @@ async function runBreadth({ scale = DEFAULT_SCALE, regenMissing = false } = {}) 
       bounds: sum.bounds,
       manifestSize: artifact.palette.manifest.length,
       view3q: SCULPTURE_VIEW_3Q,
-      formIoU,
+      silhouetteIoU,
       durationSec: secs,
       ...(regenerated ? { regenerated: true } : {}),
     };
@@ -223,7 +225,7 @@ async function runBreadth({ scale = DEFAULT_SCALE, regenMissing = false } = {}) 
     rows.push(summary);
     console.error(
       `${subj.key}: occ ${summary.occupancy}, ${sum.placed} blocks, manifest ${summary.manifestSize}, ` +
-        `form IoU ${formIoU}${regenerated ? " (regen)" : ""} (${secs}s)`,
+        `form IoU ${silhouetteIoU}${regenerated ? " (regen)" : ""} (${secs}s)`,
     );
   }
   return rows;

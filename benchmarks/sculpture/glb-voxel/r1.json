@@ -1,0 +1,205 @@
+{
+  "schema": "glb-voxel-r1/v1",
+  "rung": "R1",
+  "method": "glb-voxel.v1",
+  "view": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "scale": 32,
+  "metric": "silhouette-iou (GLB 3-D target = the build's OWN source mesh)",
+  "generatedFrom": "benchmarks/sculpture/glb/<subject>.glb via glbVoxelBuild (src/form/glb-voxel-build.mjs)",
+  "note": "E-17 rung R1: the E-16 GLB-voxel build (koi+heart) generalized to all 7 subjects with GLBs. occupancy = artifact.placements.length (one voxel per occupied cell). formIoU = full-build 3/4 render silhouette vs the whole GLB silhouette at SCULPTURE_VIEW_3Q, normalized (translation + uniform scale removed; rotation NOT corrected — but the build is voxelized FROM this GLB, so alignment is as good as it gets). Single 3/4 view; silhouette ≠ volume. Sword excluded (thin-subject TRELLIS failure).",
+  "subjects": [
+    {
+      "subject": "dancing-man",
+      "scale": 32,
+      "occupancy": 973,
+      "blocks": 973,
+      "unmapped": 0,
+      "bounds": {
+        "min": [
+          -7,
+          0,
+          -10
+        ],
+        "max": [
+          6,
+          31,
+          9
+        ]
+      },
+      "manifestSize": 18,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "silhouetteIoU": 0.914,
+      "durationSec": 8.5
+    },
+    {
+      "subject": "moai",
+      "scale": 32,
+      "occupancy": 4215,
+      "blocks": 4215,
+      "unmapped": 0,
+      "bounds": {
+        "min": [
+          -16,
+          0,
+          -16
+        ],
+        "max": [
+          15,
+          21,
+          15
+        ]
+      },
+      "manifestSize": 43,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "silhouetteIoU": 0.565,
+      "durationSec": 23
+    },
+    {
+      "subject": "pineapple",
+      "scale": 32,
+      "occupancy": 3397,
+      "blocks": 3397,
+      "unmapped": 0,
+      "bounds": {
+        "min": [
+          -9,
+          0,
+          -8
+        ],
+        "max": [
+          9,
+          31,
+          9
+        ]
+      },
+      "manifestSize": 24,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "silhouetteIoU": 0.907,
+      "durationSec": 14
+    },
+    {
+      "subject": "bow-and-arrow",
+      "scale": 32,
+      "occupancy": 513,
+      "blocks": 513,
+      "unmapped": 0,
+      "bounds": {
+        "min": [
+          -15,
+          0,
+          -3
+        ],
+        "max": [
+          14,
+          31,
+          3
+        ]
+      },
+      "manifestSize": 34,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "silhouetteIoU": 0.473,
+      "durationSec": 7
+    },
+    {
+      "subject": "heart",
+      "scale": 32,
+      "occupancy": 5840,
+      "blocks": 5840,
+      "unmapped": 0,
+      "bounds": {
+        "min": [
+          -11,
+          0,
+          -16
+        ],
+        "max": [
+          10,
+          26,
+          15
+        ]
+      },
+      "manifestSize": 91,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "silhouetteIoU": 0.877,
+      "durationSec": 19.5
+    },
+    {
+      "subject": "mushroom",
+      "scale": 32,
+      "occupancy": 9505,
+      "blocks": 9505,
+      "unmapped": 0,
+      "bounds": {
+        "min": [
+          -15,
+          0,
+          -15
+        ],
+        "max": [
+          14,
+          31,
+          14
+        ]
+      },
+      "manifestSize": 92,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "silhouetteIoU": 0.98,
+      "durationSec": 28.8
+    },
+    {
+      "subject": "koi",
+      "scale": 32,
+      "occupancy": 2164,
+      "blocks": 2164,
+      "unmapped": 0,
+      "bounds": {
+        "min": [
+          -16,
+          0,
+          -11
+        ],
+        "max": [
+          15,
+          16,
+          11
+        ]
+      },
+      "manifestSize": 71,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "silhouetteIoU": 0.622,
+      "durationSec": 12.5
+    }
+  ]
+}
