@@ -41,24 +41,24 @@
   "averages": {
     "r1": {
       "formIoU": 0.76,
-      "speckle": 0.44,
+      "speckle": 0.12,
       "distinct": 5.43,
       "offPalette": 0,
       "valueDeltaE": 5.47
     },
     "r2": {
       "formIoU": 0.76,
-      "speckle": 0.3,
+      "speckle": 0.04,
       "distinct": 6.43,
       "offPalette": 2790.57,
       "valueDeltaE": 0
     },
     "e18": {
-      "formIoU": 0.76,
-      "speckle": 0.13,
-      "distinct": 5.43,
+      "formIoU": 0.73,
+      "speckle": 0.01,
+      "distinct": 5.29,
       "offPalette": 0,
-      "valueDeltaE": 8.67
+      "valueDeltaE": 8.59
     }
   },
   "regressions": [
@@ -113,10 +113,10 @@
     },
     {
       "subject": "moai",
-      "metric": "distinct",
+      "metric": "formIoU",
       "vs": "r1",
-      "raw": 0,
-      "kind": "no-change"
+      "raw": -0.17,
+      "kind": "worse"
     },
     {
       "subject": "moai",
@@ -129,21 +129,21 @@
       "subject": "moai",
       "metric": "valueDeltaE",
       "vs": "r1",
-      "raw": 0.88,
+      "raw": 0.32,
       "kind": "worse"
     },
     {
       "subject": "moai",
-      "metric": "distinct",
+      "metric": "formIoU",
       "vs": "r2",
-      "raw": 0,
-      "kind": "no-change"
+      "raw": -0.17,
+      "kind": "worse"
     },
     {
       "subject": "moai",
       "metric": "valueDeltaE",
       "vs": "r2",
-      "raw": 1.88,
+      "raw": 1.32,
       "kind": "worse"
     },
     {
@@ -313,21 +313,21 @@
       "subject": "dancing-man",
       "r1": {
         "formIoU": 0.914,
-        "speckle": 0.402,
+        "speckle": 0.108,
         "distinct": 5,
         "offPalette": 0,
         "valueDeltaE": 11.19
       },
       "r2": {
         "formIoU": 0.914,
-        "speckle": 0.275,
+        "speckle": 0.031,
         "distinct": 5,
         "offPalette": 973,
         "valueDeltaE": 0
       },
       "e18": {
         "formIoU": 0.814,
-        "speckle": 0.148,
+        "speckle": 0.015,
         "distinct": 5,
         "offPalette": 0,
         "valueDeltaE": 13.82
@@ -336,7 +336,8 @@
         "components": 1,
         "surfaceOnlyCount": 531,
         "occBase": 973,
-        "occThin": 1504
+        "occThin": 1504,
+        "occPruned": 1504
       },
       "deltas": {
         "vsR1": {
@@ -345,7 +346,7 @@
             "improved": false
           },
           "speckle": {
-            "raw": -0.25,
+            "raw": -0.09,
             "improved": true
           },
           "distinct": {
@@ -367,7 +368,7 @@
             "improved": false
           },
           "speckle": {
-            "raw": -0.13,
+            "raw": -0.02,
             "improved": true
           },
           "distinct": {
@@ -389,73 +390,74 @@
       "subject": "moai",
       "r1": {
         "formIoU": 0.565,
-        "speckle": 0.428,
+        "speckle": 0.172,
         "distinct": 5,
         "offPalette": 0,
         "valueDeltaE": 1
       },
       "r2": {
         "formIoU": 0.565,
-        "speckle": 0.248,
+        "speckle": 0.058,
         "distinct": 5,
         "offPalette": 4096,
         "valueDeltaE": 0
       },
       "e18": {
-        "formIoU": 0.593,
-        "speckle": 0.136,
-        "distinct": 5,
+        "formIoU": 0.399,
+        "speckle": 0,
+        "distinct": 4,
         "offPalette": 0,
-        "valueDeltaE": 1.88
+        "valueDeltaE": 1.32
       },
       "thin": {
         "components": 3,
         "surfaceOnlyCount": 1844,
         "occBase": 4215,
-        "occThin": 6059
+        "occThin": 6059,
+        "occPruned": 3147
       },
       "deltas": {
         "vsR1": {
           "formIoU": {
-            "raw": 0.03,
-            "improved": true
+            "raw": -0.17,
+            "improved": false
           },
           "speckle": {
-            "raw": -0.29,
+            "raw": -0.17,
             "improved": true
           },
           "distinct": {
-            "raw": 0,
-            "improved": false
+            "raw": -1,
+            "improved": true
           },
           "offPalette": {
             "raw": 0,
             "improved": false
           },
           "valueDeltaE": {
-            "raw": 0.88,
+            "raw": 0.32,
             "improved": false
           }
         },
         "vsR2": {
           "formIoU": {
-            "raw": 0.03,
-            "improved": true
+            "raw": -0.17,
+            "improved": false
           },
           "speckle": {
-            "raw": -0.11,
+            "raw": -0.06,
             "improved": true
           },
           "distinct": {
-            "raw": 0,
-            "improved": false
+            "raw": -1,
+            "improved": true
           },
           "offPalette": {
             "raw": -4096,
             "improved": true
           },
           "valueDeltaE": {
-            "raw": 1.88,
+            "raw": 1.32,
             "improved": false
           }
         }
@@ -465,21 +467,21 @@
       "subject": "pineapple",
       "r1": {
         "formIoU": 0.907,
-        "speckle": 0.422,
+        "speckle": 0.108,
         "distinct": 4,
         "offPalette": 0,
         "valueDeltaE": 8.71
       },
       "r2": {
         "formIoU": 0.907,
-        "speckle": 0.25,
+        "speckle": 0.038,
         "distinct": 5,
         "offPalette": 2939,
         "valueDeltaE": 0
       },
       "e18": {
         "formIoU": 0.845,
-        "speckle": 0.104,
+        "speckle": 0.012,
         "distinct": 4,
         "offPalette": 0,
         "valueDeltaE": 8.43
@@ -488,7 +490,8 @@
         "components": 1,
         "surfaceOnlyCount": 1458,
         "occBase": 3397,
-        "occThin": 4855
+        "occThin": 4855,
+        "occPruned": 4855
       },
       "deltas": {
         "vsR1": {
@@ -497,7 +500,7 @@
             "improved": false
           },
           "speckle": {
-            "raw": -0.32,
+            "raw": -0.1,
             "improved": true
           },
           "distinct": {
@@ -519,7 +522,7 @@
             "improved": false
           },
           "speckle": {
-            "raw": -0.15,
+            "raw": -0.03,
             "improved": true
           },
           "distinct": {
@@ -541,21 +544,21 @@
       "subject": "bow-and-arrow",
       "r1": {
         "formIoU": 0.473,
-        "speckle": 0.442,
+        "speckle": 0.11,
         "distinct": 6,
         "offPalette": 0,
         "valueDeltaE": 1.1
       },
       "r2": {
         "formIoU": 0.473,
-        "speckle": 0.366,
+        "speckle": 0.031,
         "distinct": 8,
         "offPalette": 352,
         "valueDeltaE": 0
       },
       "e18": {
         "formIoU": 0.526,
-        "speckle": 0.089,
+        "speckle": 0.003,
         "distinct": 6,
         "offPalette": 0,
         "valueDeltaE": 8.04
@@ -564,7 +567,8 @@
         "components": 1,
         "surfaceOnlyCount": 697,
         "occBase": 513,
-        "occThin": 1210
+        "occThin": 1210,
+        "occPruned": 1210
       },
       "deltas": {
         "vsR1": {
@@ -573,7 +577,7 @@
             "improved": true
           },
           "speckle": {
-            "raw": -0.35,
+            "raw": -0.11,
             "improved": true
           },
           "distinct": {
@@ -595,7 +599,7 @@
             "improved": true
           },
           "speckle": {
-            "raw": -0.28,
+            "raw": -0.03,
             "improved": true
           },
           "distinct": {
@@ -617,21 +621,21 @@
       "subject": "heart",
       "r1": {
         "formIoU": 0.877,
-        "speckle": 0.57,
+        "speckle": 0.153,
         "distinct": 7,
         "offPalette": 0,
         "valueDeltaE": 4.62
       },
       "r2": {
         "formIoU": 0.877,
-        "speckle": 0.343,
+        "speckle": 0.052,
         "distinct": 7,
         "offPalette": 1323,
         "valueDeltaE": 0
       },
       "e18": {
         "formIoU": 0.895,
-        "speckle": 0.11,
+        "speckle": 0.012,
         "distinct": 7,
         "offPalette": 0,
         "valueDeltaE": 8
@@ -640,7 +644,8 @@
         "components": 1,
         "surfaceOnlyCount": 2142,
         "occBase": 5840,
-        "occThin": 7982
+        "occThin": 7982,
+        "occPruned": 7982
       },
       "deltas": {
         "vsR1": {
@@ -649,7 +654,7 @@
             "improved": true
           },
           "speckle": {
-            "raw": -0.46,
+            "raw": -0.14,
             "improved": true
           },
           "distinct": {
@@ -671,7 +676,7 @@
             "improved": true
           },
           "speckle": {
-            "raw": -0.23,
+            "raw": -0.04,
             "improved": true
           },
           "distinct": {
@@ -693,21 +698,21 @@
       "subject": "mushroom",
       "r1": {
         "formIoU": 0.98,
-        "speckle": 0.374,
+        "speckle": 0.06,
         "distinct": 6,
         "offPalette": 0,
         "valueDeltaE": 7.17
       },
       "r2": {
         "formIoU": 0.98,
-        "speckle": 0.301,
+        "speckle": 0.029,
         "distinct": 7,
         "offPalette": 8614,
         "valueDeltaE": 0
       },
       "e18": {
         "formIoU": 0.929,
-        "speckle": 0.131,
+        "speckle": 0.016,
         "distinct": 6,
         "offPalette": 0,
         "valueDeltaE": 4.14
@@ -716,7 +721,8 @@
         "components": 1,
         "surfaceOnlyCount": 2453,
         "occBase": 9505,
-        "occThin": 11958
+        "occThin": 11958,
+        "occPruned": 11958
       },
       "deltas": {
         "vsR1": {
@@ -725,7 +731,7 @@
             "improved": false
           },
           "speckle": {
-            "raw": -0.24,
+            "raw": -0.04,
             "improved": true
           },
           "distinct": {
@@ -747,7 +753,7 @@
             "improved": false
           },
           "speckle": {
-            "raw": -0.17,
+            "raw": -0.01,
             "improved": true
           },
           "distinct": {
@@ -769,21 +775,21 @@
       "subject": "koi",
       "r1": {
         "formIoU": 0.622,
-        "speckle": 0.415,
+        "speckle": 0.13,
         "distinct": 5,
         "offPalette": 0,
         "valueDeltaE": 4.53
       },
       "r2": {
         "formIoU": 0.623,
-        "speckle": 0.35,
+        "speckle": 0.061,
         "distinct": 8,
         "offPalette": 1237,
         "valueDeltaE": 0
       },
       "e18": {
         "formIoU": 0.706,
-        "speckle": 0.158,
+        "speckle": 0.028,
         "distinct": 5,
         "offPalette": 0,
         "valueDeltaE": 16.35
@@ -792,7 +798,8 @@
         "components": 1,
         "surfaceOnlyCount": 991,
         "occBase": 2164,
-        "occThin": 3155
+        "occThin": 3155,
+        "occPruned": 3155
       },
       "deltas": {
         "vsR1": {
@@ -801,7 +808,7 @@
             "improved": true
           },
           "speckle": {
-            "raw": -0.26,
+            "raw": -0.1,
             "improved": true
           },
           "distinct": {
@@ -823,7 +830,7 @@
             "improved": true
           },
           "speckle": {
-            "raw": -0.19,
+            "raw": -0.03,
             "improved": true
           },
           "distinct": {

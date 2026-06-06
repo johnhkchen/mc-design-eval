@@ -2,21 +2,21 @@
   "subject": "koi",
   "r1": {
     "formIoU": 0.622,
-    "speckle": 0.415,
+    "speckle": 0.13,
     "distinct": 5,
     "offPalette": 0,
     "valueDeltaE": 4.53
   },
   "r2": {
     "formIoU": 0.623,
-    "speckle": 0.35,
+    "speckle": 0.061,
     "distinct": 8,
     "offPalette": 1237,
     "valueDeltaE": 0
   },
   "e18": {
     "formIoU": 0.706,
-    "speckle": 0.158,
+    "speckle": 0.028,
     "distinct": 5,
     "offPalette": 0,
     "valueDeltaE": 16.35
@@ -25,7 +25,22 @@
     "components": 1,
     "surfaceOnlyCount": 991,
     "occBase": 2164,
-    "occThin": 3155
+    "occThin": 3155,
+    "occPruned": 3155
+  },
+  "stray": {
+    "before": {
+      "components": 1,
+      "largestFraction": 1,
+      "strayCount": 0,
+      "subFloorCount": 0
+    },
+    "after": {
+      "components": 1,
+      "largestFraction": 1,
+      "strayCount": 0,
+      "subFloorCount": 0
+    }
   },
   "scale": 32
 }

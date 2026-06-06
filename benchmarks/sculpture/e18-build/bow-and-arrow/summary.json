@@ -2,21 +2,21 @@
   "subject": "bow-and-arrow",
   "r1": {
     "formIoU": 0.473,
-    "speckle": 0.442,
+    "speckle": 0.11,
     "distinct": 6,
     "offPalette": 0,
     "valueDeltaE": 1.1
   },
   "r2": {
     "formIoU": 0.473,
-    "speckle": 0.366,
+    "speckle": 0.031,
     "distinct": 8,
     "offPalette": 352,
     "valueDeltaE": 0
   },
   "e18": {
     "formIoU": 0.526,
-    "speckle": 0.089,
+    "speckle": 0.003,
     "distinct": 6,
     "offPalette": 0,
     "valueDeltaE": 8.04
@@ -25,7 +25,22 @@
     "components": 1,
     "surfaceOnlyCount": 697,
     "occBase": 513,
-    "occThin": 1210
+    "occThin": 1210,
+    "occPruned": 1210
+  },
+  "stray": {
+    "before": {
+      "components": 1,
+      "largestFraction": 1,
+      "strayCount": 0,
+      "subFloorCount": 0
+    },
+    "after": {
+      "components": 1,
+      "largestFraction": 1,
+      "strayCount": 0,
+      "subFloorCount": 0
+    }
   },
   "scale": 32
 }

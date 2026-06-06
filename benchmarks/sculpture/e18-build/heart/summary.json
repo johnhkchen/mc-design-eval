@@ -2,21 +2,21 @@
   "subject": "heart",
   "r1": {
     "formIoU": 0.877,
-    "speckle": 0.57,
+    "speckle": 0.153,
     "distinct": 7,
     "offPalette": 0,
     "valueDeltaE": 4.62
   },
   "r2": {
     "formIoU": 0.877,
-    "speckle": 0.343,
+    "speckle": 0.052,
     "distinct": 7,
     "offPalette": 1323,
     "valueDeltaE": 0
   },
   "e18": {
     "formIoU": 0.895,
-    "speckle": 0.11,
+    "speckle": 0.012,
     "distinct": 7,
     "offPalette": 0,
     "valueDeltaE": 8
@@ -25,7 +25,22 @@
     "components": 1,
     "surfaceOnlyCount": 2142,
     "occBase": 5840,
-    "occThin": 7982
+    "occThin": 7982,
+    "occPruned": 7982
+  },
+  "stray": {
+    "before": {
+      "components": 1,
+      "largestFraction": 1,
+      "strayCount": 0,
+      "subFloorCount": 0
+    },
+    "after": {
+      "components": 1,
+      "largestFraction": 1,
+      "strayCount": 0,
+      "subFloorCount": 0
+    }
   },
   "scale": 32
 }

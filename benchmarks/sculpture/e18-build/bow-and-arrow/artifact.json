@@ -9,7 +9,7 @@
   },
   "style": {
     "name": "glb-voxel-e18",
-    "rationale": "Thin-preserved voxelization (513→1210 cells) then region-segmented under the augmented design-doc palette (6 design-doc + ≤2 gated secondary)."
+    "rationale": "Thin-preserved voxelization then stray-pruned (513→1210→1210 cells) then region-segmented under the augmented design-doc palette (6 design-doc + ≤2 gated secondary)."
   },
   "palette": {
     "manifest": [

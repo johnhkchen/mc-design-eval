@@ -2,30 +2,45 @@
   "subject": "moai",
   "r1": {
     "formIoU": 0.565,
-    "speckle": 0.428,
+    "speckle": 0.172,
     "distinct": 5,
     "offPalette": 0,
     "valueDeltaE": 1
   },
   "r2": {
     "formIoU": 0.565,
-    "speckle": 0.248,
+    "speckle": 0.058,
     "distinct": 5,
     "offPalette": 4096,
     "valueDeltaE": 0
   },
   "e18": {
-    "formIoU": 0.593,
-    "speckle": 0.136,
-    "distinct": 5,
+    "formIoU": 0.399,
+    "speckle": 0,
+    "distinct": 4,
     "offPalette": 0,
-    "valueDeltaE": 1.88
+    "valueDeltaE": 1.32
   },
   "thin": {
     "components": 3,
     "surfaceOnlyCount": 1844,
     "occBase": 4215,
-    "occThin": 6059
+    "occThin": 6059,
+    "occPruned": 3147
+  },
+  "stray": {
+    "before": {
+      "components": 3,
+      "largestFraction": 0.519,
+      "strayCount": 2912,
+      "subFloorCount": 0
+    },
+    "after": {
+      "components": 1,
+      "largestFraction": 1,
+      "strayCount": 0,
+      "subFloorCount": 0
+    }
   },
   "scale": 32
 }

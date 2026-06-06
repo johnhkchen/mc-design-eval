@@ -2,21 +2,21 @@
   "subject": "mushroom",
   "r1": {
     "formIoU": 0.98,
-    "speckle": 0.374,
+    "speckle": 0.06,
     "distinct": 6,
     "offPalette": 0,
     "valueDeltaE": 7.17
   },
   "r2": {
     "formIoU": 0.98,
-    "speckle": 0.301,
+    "speckle": 0.029,
     "distinct": 7,
     "offPalette": 8614,
     "valueDeltaE": 0
   },
   "e18": {
     "formIoU": 0.929,
-    "speckle": 0.131,
+    "speckle": 0.016,
     "distinct": 6,
     "offPalette": 0,
     "valueDeltaE": 4.14
@@ -25,7 +25,22 @@
     "components": 1,
     "surfaceOnlyCount": 2453,
     "occBase": 9505,
-    "occThin": 11958
+    "occThin": 11958,
+    "occPruned": 11958
+  },
+  "stray": {
+    "before": {
+      "components": 1,
+      "largestFraction": 1,
+      "strayCount": 0,
+      "subFloorCount": 0
+    },
+    "after": {
+      "components": 1,
+      "largestFraction": 1,
+      "strayCount": 0,
+      "subFloorCount": 0
+    }
   },
   "scale": 32
 }
