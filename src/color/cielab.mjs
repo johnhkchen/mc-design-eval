@@ -134,6 +134,46 @@ export function nearestLab(targetLab, palette, { metric = deltaE76 } = {}) {
 }
 
 /**
+ * The default variance-penalty weight for {@link nearestFlat} (T-064-01). A tie-breaker, not a hammer:
+ * a busy block only loses to a flat block when their mean ΔE is within `FLAT_LAMBDA·Δ√var` of each other.
+ * @type {number}
+ */
+export const FLAT_LAMBDA = 0.1;
+
+/**
+ * Like {@link nearestLab}, but PREFERS FLAT (low texture-variance) blocks: argmin of
+ * `metric(targetLab, e.lab) + lambda · √(e.var || 0)` over the palette. An entry's `var` is the summed
+ * per-channel texture variance recorded in the block table (see `varianceOpaque`); entries WITHOUT a
+ * numeric `var` score plain ΔE, so this degrades to `nearestLab` (back-compatible). The returned
+ * `deltaE` is the TRUE (unpenalized) ΔE of the winner — callers reporting drift stay honest; only the
+ * SELECTION is biased. So a busy block ties or beats a flat block ONLY when its colour fit is enough
+ * better to overcome the busy-ness penalty. PURE.
+ * @param {Lab} targetLab  target color already in CIE L*a*b*
+ * @param {(PaletteEntry & {var?:number})[]} palette  non-empty `[{ key, lab, var? }]`
+ * @param {{ lambda?: number, metric?: (a: Lab, b: Lab) => number }} [opts]
+ * @returns {NearestResult}
+ */
+export function nearestFlat(targetLab, palette, { lambda = FLAT_LAMBDA, metric = deltaE76 } = {}) {
+  if (!Array.isArray(palette) || palette.length === 0) {
+    throw new Error("nearestFlat: palette must be a non-empty array of { key, lab, var? }");
+  }
+  const penalty = (e) => (Number.isFinite(e.var) ? lambda * Math.sqrt(e.var) : 0);
+  let best = palette[0];
+  let bestTrue = metric(targetLab, best.lab);
+  let bestScore = bestTrue + penalty(best);
+  for (let i = 1; i < palette.length; i++) {
+    const trueD = metric(targetLab, palette[i].lab);
+    const score = trueD + penalty(palette[i]);
+    if (score < bestScore) {
+      bestScore = score;
+      bestTrue = trueD;
+      best = palette[i];
+    }
+  }
+  return { key: best.key, deltaE: bestTrue, lab: best.lab };
+}
+
+/**
  * Find the palette entry whose Lab is nearest to `rgb` under `metric` (argmin ΔE).
  * The target color is converted sRGB→Lab here, then delegated to {@link nearestLab};
  * the public contract (signature + `{ key, deltaE, lab }` return) is unchanged.

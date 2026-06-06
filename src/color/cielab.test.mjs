@@ -11,7 +11,7 @@
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { srgbToLab, deltaE76, deltaE, nearest, nearestLab } from "./cielab.mjs";
+import { srgbToLab, deltaE76, deltaE, nearest, nearestLab, nearestFlat, FLAT_LAMBDA } from "./cielab.mjs";
 
 const close = (actual, expected, tol, msg) =>
   assert.ok(Math.abs(actual - expected) <= tol, `${msg}: |${actual} - ${expected}| > ${tol}`);
@@ -153,4 +153,49 @@ test("nearestLab honors a pluggable metric and validates the palette", () => {
   assert.equal(nearestLab(PALETTE[2].lab, PALETTE, { metric: favorBlack }).key, "black");
   assert.throws(() => nearestLab([0, 0, 0], []), /non-empty array/);
   assert.throws(() => nearestLab([0, 0, 0], null), /non-empty array/);
+});
+
+// --- nearestFlat (T-064-01: variance-penalized, flat-preferring selection) --
+
+test("nearestFlat: at equal mean ΔE, the flatter (lower-var) block wins", () => {
+  const target = [50, 0, 0];
+  // two entries equidistant in Lab from the target; only var differs.
+  const pal = [
+    { key: "busy", lab: [55, 0, 0], var: 4000 },
+    { key: "flat", lab: [45, 0, 0], var: 4 },
+  ];
+  assert.equal(nearestFlat(target, pal).key, "flat");
+});
+
+test("nearestFlat: entries without var behave exactly like nearestLab", () => {
+  const pal = [
+    { key: "a", lab: [10, 0, 0] },
+    { key: "b", lab: [90, 0, 0] },
+  ];
+  assert.deepEqual(nearestFlat([20, 0, 0], pal), nearestLab([20, 0, 0], pal));
+});
+
+test("nearestFlat: a small ΔE advantage loses to a flat block; a large one wins", () => {
+  const target = [50, 0, 0];
+  const flat = { key: "flat", lab: [54, 0, 0], var: 1 }; // ΔE 4
+  // busy slightly closer (ΔE 2) but √10000·0.1 = 10 penalty → loses.
+  const busyNear = { key: "busyNear", lab: [52, 0, 0], var: 10000 };
+  assert.equal(nearestFlat(target, [flat, busyNear]).key, "flat");
+  // busy much closer (ΔE 0) → 0 + 10 = 10 vs flat 4; flat still wins here, so make flat far.
+  const flatFar = { key: "flatFar", lab: [80, 0, 0], var: 1 }; // ΔE 30
+  const busyExact = { key: "busyExact", lab: [50, 0, 0], var: 10000 }; // ΔE 0 + 10
+  assert.equal(nearestFlat(target, [flatFar, busyExact]).key, "busyExact");
+});
+
+test("nearestFlat: returned deltaE is the TRUE (unpenalized) ΔE of the winner", () => {
+  const target = [50, 0, 0];
+  const pal = [{ key: "flat", lab: [45, 0, 0], var: 4 }];
+  const res = nearestFlat(target, pal);
+  assert.equal(res.key, "flat");
+  close(res.deltaE, deltaE76(target, pal[0].lab), 1e-9, "true ΔE returned");
+  assert.ok(FLAT_LAMBDA > 0, "FLAT_LAMBDA is a positive weight");
+});
+
+test("nearestFlat: validates a non-empty palette", () => {
+  assert.throws(() => nearestFlat([0, 0, 0], []), /non-empty array/);
 });
