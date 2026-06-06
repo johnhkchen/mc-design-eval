@@ -1,0 +1,36 @@
+{
+  "subject": "mushroom",
+  "scale": 32,
+  "occupancy": 9505,
+  "regionCount": 6,
+  "blocks": 9505,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      -15,
+      0,
+      -15
+    ],
+    "max": [
+      14,
+      31,
+      14
+    ]
+  },
+  "paletteSize": 6,
+  "paletteDescription": "6 blocks over 88% of frame: crimson_nylium 25%, light_gray_wool 25%, diorite 13%, mossy_stone_bricks 13%, green_concrete 13%, netherrack 13% (mean ΔE 4.7)",
+  "distinctBefore": 7,
+  "distinctAfter": 6,
+  "speckleBefore": 0.301,
+  "speckleAfter": 0.176,
+  "offPaletteBefore": 2300,
+  "offPaletteAfter": 0,
+  "formIoUBefore": 0.98,
+  "formIoUAfter": 0.98,
+  "view3q": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "durationSec": 34.9
+}

@@ -147,6 +147,24 @@ test("bandRegion: a 1-wide gradient column → a MONOTONIC staircase, adjacent c
   assert.ok(distinct([...filled.values()]) >= 2, "the gradient is banded, not flattened to one block");
 });
 
+test("bandRegion: the default hard band is cleaner (less within-region speckle) than the ordered dither", () => {
+  // a wide 8×8 slab with a smooth gradient along i → the dither scatters two blocks across the boundary
+  // band (more adjacent differences); the hard band keeps solid stripes (fewer). The metric must prefer it.
+  const cells = [];
+  for (let i = 0; i < 8; i++) for (let k = 0; k < 8; k++) cells.push([i, 0, k]);
+  const occ = makeOcc([8, 1, 8], cells);
+  const labs = labsOf(cells.map(([i]) => { const v = 20 + i * 30; return [v, v, v]; }));
+  const region = { cells: [...Array(cells.length).keys()] };
+  const cc = cellCoordsOf(occ);
+  const hard = bandRegion(region, cc, labs, PAL); // default: hard band
+  const soft = bandRegion(region, cc, labs, PAL, { dither: true });
+  const toKeys = (m) => cells.map((_, n) => m.get(n));
+  assert.ok(
+    speckleScore(occ, toKeys(hard)) <= speckleScore(occ, toKeys(soft)),
+    "hard band ≤ dither on the speckle metric",
+  );
+});
+
 test("bandRegion: more palette steps than cells → still ≤1 step per adjacent cell (capped to extent)", () => {
   const cells = [[0, 0, 0], [0, 1, 0], [0, 2, 0]]; // extent 2 along j, but a 3-step palette over a big range
   const occ = makeOcc([1, 3, 1], cells);

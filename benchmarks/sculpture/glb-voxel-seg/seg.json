@@ -1,0 +1,275 @@
+{
+  "schema": "glb-voxel-seg/v1",
+  "rung": "R-seg",
+  "method": "glb-voxel.v1",
+  "view": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "scale": 32,
+  "defaults": {
+    "k": 6,
+    "growDE": 22,
+    "gradDE": 25,
+    "minRegion": 12,
+    "neighbourhood": 6
+  },
+  "metric": "palette discipline = off-palette count (blocks outside the fixed palette) + distinct-block count (manifest); noise = spatial speckle (fraction of face-adjacent differing pairs); form IoU = silhouette vs the GLB's own mesh at SCULPTURE_VIEW_3Q (steady = segmentation did not break the shape)",
+  "generatedFrom": "benchmarks/sculpture/glb/<subject>.glb via segmentMaterials (src/form/material-segment.mjs)",
+  "note": "E-18 rung R-seg: region segmentation over the R2 material-clean builds. The palette is texture-derived (E-10) and FIXED; every region fills with one palette block (gradients banded), so off-palette = 0 and distinct ≈ palette size by construction. R-seg only re-decides each occupied cell's block; it NEVER touches occupancy, so form IoU is invariant (GL rounding aside). Before = the committed R2 build; its off-palette is counted against the SAME fixed palette (the leakage R-seg removes). Sword excluded.",
+  "subjects": [
+    {
+      "subject": "dancing-man",
+      "scale": 32,
+      "occupancy": 973,
+      "regionCount": 5,
+      "blocks": 973,
+      "unmapped": 0,
+      "bounds": {
+        "min": [
+          -7,
+          0,
+          -10
+        ],
+        "max": [
+          6,
+          31,
+          9
+        ]
+      },
+      "paletteSize": 5,
+      "paletteDescription": "5 blocks over 100% of frame: spruce_log 25%, hay_block 25%, redstone_lamp 25%, crimson_nylium 13%, magma_block 12% (mean ΔE 6.4)",
+      "distinctBefore": 5,
+      "distinctAfter": 5,
+      "speckleBefore": 0.275,
+      "speckleAfter": 0.155,
+      "offPaletteBefore": 319,
+      "offPaletteAfter": 0,
+      "formIoUBefore": 0.914,
+      "formIoUAfter": 0.914,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 9.2
+    },
+    {
+      "subject": "moai",
+      "scale": 32,
+      "occupancy": 4215,
+      "regionCount": 5,
+      "blocks": 4215,
+      "unmapped": 0,
+      "bounds": {
+        "min": [
+          -16,
+          0,
+          -16
+        ],
+        "max": [
+          15,
+          21,
+          15
+        ]
+      },
+      "paletteSize": 5,
+      "paletteDescription": "5 blocks over 100% of frame: coal_ore 29%, stone_bricks 25%, cracked_stone_bricks 21%, cyan_terracotta 14%, nether_quartz_ore 12% (mean ΔE 2.2)",
+      "distinctBefore": 5,
+      "distinctAfter": 5,
+      "speckleBefore": 0.248,
+      "speckleAfter": 0.119,
+      "offPaletteBefore": 0,
+      "offPaletteAfter": 0,
+      "formIoUBefore": 0.565,
+      "formIoUAfter": 0.565,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 23.5
+    },
+    {
+      "subject": "pineapple",
+      "scale": 32,
+      "occupancy": 3397,
+      "regionCount": 4,
+      "blocks": 3397,
+      "unmapped": 0,
+      "bounds": {
+        "min": [
+          -9,
+          0,
+          -8
+        ],
+        "max": [
+          9,
+          31,
+          9
+        ]
+      },
+      "paletteSize": 4,
+      "paletteDescription": "4 blocks over 100% of frame: green_terracotta 39%, sponge 25%, yellow_terracotta 25%, spruce_planks 11% (mean ΔE 13)",
+      "distinctBefore": 5,
+      "distinctAfter": 4,
+      "speckleBefore": 0.25,
+      "speckleAfter": 0.12,
+      "offPaletteBefore": 2003,
+      "offPaletteAfter": 0,
+      "formIoUBefore": 0.907,
+      "formIoUAfter": 0.907,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 13.8
+    },
+    {
+      "subject": "bow-and-arrow",
+      "scale": 32,
+      "occupancy": 513,
+      "regionCount": 5,
+      "blocks": 513,
+      "unmapped": 0,
+      "bounds": {
+        "min": [
+          -15,
+          0,
+          -3
+        ],
+        "max": [
+          14,
+          31,
+          3
+        ]
+      },
+      "paletteSize": 5,
+      "paletteDescription": "5 blocks over 100% of frame: spruce_log 50%, barrel 13%, light_gray_concrete_powder 13%, mangrove_log 13%, oak_planks 13% (mean ΔE 4.3)",
+      "distinctBefore": 8,
+      "distinctAfter": 5,
+      "speckleBefore": 0.366,
+      "speckleAfter": 0.224,
+      "offPaletteBefore": 164,
+      "offPaletteAfter": 0,
+      "formIoUBefore": 0.473,
+      "formIoUAfter": 0.473,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 7.9
+    },
+    {
+      "subject": "heart",
+      "scale": 32,
+      "occupancy": 5840,
+      "regionCount": 6,
+      "blocks": 5840,
+      "unmapped": 0,
+      "bounds": {
+        "min": [
+          -11,
+          0,
+          -16
+        ],
+        "max": [
+          10,
+          26,
+          15
+        ]
+      },
+      "paletteSize": 6,
+      "paletteDescription": "6 blocks over 100% of frame: brown_wool 27%, red_concrete 23%, cyan_stained_glass 13%, cyan_terracotta 13%, mycelium 13%, nether_quartz_ore 13% (mean ΔE 4.8)",
+      "distinctBefore": 7,
+      "distinctAfter": 6,
+      "speckleBefore": 0.343,
+      "speckleAfter": 0.136,
+      "offPaletteBefore": 2831,
+      "offPaletteAfter": 0,
+      "formIoUBefore": 0.877,
+      "formIoUAfter": 0.877,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 20.2
+    },
+    {
+      "subject": "mushroom",
+      "scale": 32,
+      "occupancy": 9505,
+      "regionCount": 6,
+      "blocks": 9505,
+      "unmapped": 0,
+      "bounds": {
+        "min": [
+          -15,
+          0,
+          -15
+        ],
+        "max": [
+          14,
+          31,
+          14
+        ]
+      },
+      "paletteSize": 6,
+      "paletteDescription": "6 blocks over 88% of frame: crimson_nylium 25%, light_gray_wool 25%, diorite 13%, mossy_stone_bricks 13%, green_concrete 13%, netherrack 13% (mean ΔE 4.7)",
+      "distinctBefore": 7,
+      "distinctAfter": 6,
+      "speckleBefore": 0.301,
+      "speckleAfter": 0.176,
+      "offPaletteBefore": 2300,
+      "offPaletteAfter": 0,
+      "formIoUBefore": 0.98,
+      "formIoUAfter": 0.98,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 34.9
+    },
+    {
+      "subject": "koi",
+      "scale": 32,
+      "occupancy": 2164,
+      "regionCount": 6,
+      "blocks": 2164,
+      "unmapped": 0,
+      "bounds": {
+        "min": [
+          -16,
+          0,
+          -11
+        ],
+        "max": [
+          15,
+          16,
+          11
+        ]
+      },
+      "paletteSize": 6,
+      "paletteDescription": "6 blocks over 100% of frame: white_terracotta 25%, white_concrete 25%, clay 13%, cyan_stained_glass 13%, smooth_red_sandstone 13%, yellow_terracotta 13% (mean ΔE 7.8)",
+      "distinctBefore": 8,
+      "distinctAfter": 6,
+      "speckleBefore": 0.35,
+      "speckleAfter": 0.218,
+      "offPaletteBefore": 586,
+      "offPaletteAfter": 0,
+      "formIoUBefore": 0.623,
+      "formIoUAfter": 0.622,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 12.8
+    }
+  ]
+}

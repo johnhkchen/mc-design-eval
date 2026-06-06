@@ -36,9 +36,12 @@ import { DEFAULT_SCALE } from "../sculpture.mjs";
 
 export { speckleScore }; // one import site for the runner (the before/after metric lives in R2's module)
 
-/** Tunables (design.md). growDE < gradDE: a material's internal noise grows together; a smooth gradient
- *  stays one region yet trips the gradient test. All ΔE in the CIE76 space the whole stack uses. */
-export const SEG_DEFAULTS = Object.freeze({ k: 6, growDE: 10, gradDE: 18, minRegion: 2, neighbourhood: 6 });
+/** Tunables (design.md; tuned on the sweep, plan.md Step 5). growDE < gradDE: a material's internal noise
+ *  grows together while a smooth gradient stays one region yet trips the gradient test. growDE is generous
+ *  (20) and minRegion absorbs specks up to 8 cells — both cut surface FRAGMENTATION, the dominant speckle
+ *  source on organic subjects (fewer regions → fewer inter-region boundaries). All ΔE in the CIE76 space
+ *  the whole stack uses. */
+export const SEG_DEFAULTS = Object.freeze({ k: 6, growDE: 22, gradDE: 25, minRegion: 12, neighbourhood: 6 });
 
 /** The style stamped on a segmented build (distinct from R1 "glb-voxel" and R2 "glb-voxel-clean"). */
 export const MATERIAL_SEG_STYLE = Object.freeze({
@@ -304,11 +307,16 @@ export function orderedDither(a, b, frac) {
  * BAND a gradient region between ADJACENT palette steps along its gradient axis. Derive the ordered steps
  * (the distinct palette blocks the region's voxels snap to, sorted dark→light by L*), cap them to the
  * axis extent (so adjacent cells never jump >1 step — the ≤2-blocks-across-a-transition AC holds even on a
- * thin region), then per cell map its normalised position → a continuous step, splitting the fractional
- * part with an ordered dither over the perpendicular plane. Monotonic non-decreasing along the axis. PURE.
+ * thin region), then per cell map its normalised position → a continuous step.
+ *
+ * DEFAULT is a HARD band: each cell takes the NEAREST step (round) → solid colour bands with one-cell-wide
+ * transitions, the minimum within-region adjacent variation (so the speckle metric drops, not rises — a
+ * dither would scatter two blocks across the whole region and inflate face-adjacent differences). `dither`
+ * opts into the softened ordered-Bayer boundary instead (structured, not random) when a smoother gradient
+ * read is wanted at the cost of more speckle. Monotonic non-decreasing along the axis either way. PURE.
  * @returns {Map<number,string>} cellIndex → bare block key
  */
-export function bandRegion(region, cellCoords, labs, palette) {
+export function bandRegion(region, cellCoords, labs, palette, { dither = false } = {}) {
   const out = new Map();
   // ordered, deduped steps by L*
   const seen = new Map();
@@ -352,7 +360,11 @@ export function bandRegion(region, cellCoords, labs, palette) {
     let p = extent === 0 ? 0 : (cellCoords[ci][axis] - lo) / extent;
     if (sign < 0) p = 1 - p;
     const s = p * (K - 1);
-    let base = Math.floor(s);
+    if (!dither) {
+      out.set(ci, steps[Math.min(Math.round(s), K - 1)]); // hard band: nearest step
+      continue;
+    }
+    const base = Math.floor(s);
     const frac = s - base;
     if (base >= K - 1) {
       out.set(ci, steps[K - 1]);
@@ -369,7 +381,7 @@ export function bandRegion(region, cellCoords, labs, palette) {
  * gradient (spread > gradDE) → {@link bandRegion}. PURE.
  * @returns {Map<number,string>} cellIndex → bare block key
  */
-export function fillRegion(region, cellCoords, labs, palette, { gradDE = SEG_DEFAULTS.gradDE } = {}) {
+export function fillRegion(region, cellCoords, labs, palette, { gradDE = SEG_DEFAULTS.gradDE, dither = false } = {}) {
   const stats = regionStats(region, labs);
   if (stats.spread <= gradDE) {
     const key = nearestLab(stats.mean, palette).key;
@@ -377,7 +389,7 @@ export function fillRegion(region, cellCoords, labs, palette, { gradDE = SEG_DEF
     for (const ci of region.cells) out.set(ci, key);
     return out;
   }
-  return bandRegion(region, cellCoords, labs, palette);
+  return bandRegion(region, cellCoords, labs, palette, { dither });
 }
 
 // --- optional E-11 texture, filtered to the fixed palette --------------------
@@ -433,8 +445,10 @@ export function offPaletteCount(keys, palette) {
  * @param {{ occupancy:object, surface:{vertices:Float64Array,uvs:Float64Array},
  *           texture:{width:number,height:number,data:Uint8Array|Buffer} }} build
  * @param {{ k?:number, growDE?:number, gradDE?:number, minRegion?:number, neighbourhood?:6|26,
- *           dropColor?:number[]|null, materialTexture?:boolean|object,
+ *           dither?:boolean, dropColor?:number[]|null, materialTexture?:boolean|object,
  *           metadata?:object, style?:object, paletteId?:string }} [opts]
+ *           `dither` (default false) softens gradient boundaries with an ordered Bayer dither at the cost
+ *           of more speckle; the default hard band minimises speckle.
  * @returns {import("../artifact.mjs").DesignArtifact}
  */
 export function segmentMaterials(build, opts = {}) {
@@ -455,7 +469,7 @@ export function segmentMaterials(build, opts = {}) {
 
   const keys = new Array(occupancy.count);
   for (const region of state.regions) {
-    const filled = fillRegion(region, cellCoords, labs, snapPalette, { gradDE });
+    const filled = fillRegion(region, cellCoords, labs, snapPalette, { gradDE, dither: opts.dither ?? false });
     for (const [ci, key] of filled) keys[ci] = key;
   }
 

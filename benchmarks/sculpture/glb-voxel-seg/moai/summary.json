@@ -1,0 +1,36 @@
+{
+  "subject": "moai",
+  "scale": 32,
+  "occupancy": 4215,
+  "regionCount": 5,
+  "blocks": 4215,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      -16,
+      0,
+      -16
+    ],
+    "max": [
+      15,
+      21,
+      15
+    ]
+  },
+  "paletteSize": 5,
+  "paletteDescription": "5 blocks over 100% of frame: coal_ore 29%, stone_bricks 25%, cracked_stone_bricks 21%, cyan_terracotta 14%, nether_quartz_ore 12% (mean ΔE 2.2)",
+  "distinctBefore": 5,
+  "distinctAfter": 5,
+  "speckleBefore": 0.248,
+  "speckleAfter": 0.119,
+  "offPaletteBefore": 0,
+  "offPaletteAfter": 0,
+  "formIoUBefore": 0.565,
+  "formIoUAfter": 0.565,
+  "view3q": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "durationSec": 23.5
+}
