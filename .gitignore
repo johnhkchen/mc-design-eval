@@ -45,3 +45,7 @@ benchmarks/sculpture/glb-voxel-surgical-sweep/**/*.png
 
 # Ablation collector R0 renders (T-056-01, E-17) — derived. Durable record: sweep-ablation.{md,json}.
 benchmarks/sculpture/sweep-ablation/**/*.png
+
+# Thin-voxel before/after renders (T-059-01, E-18) — image-heavy, derived from the gitignored GLBs,
+# regen via `node benchmarks/sculpture/glb-voxel-thin.mjs`. Durable record: thin.{md,json} + summaries.
+benchmarks/sculpture/glb-voxel-thin/**/render-*.png

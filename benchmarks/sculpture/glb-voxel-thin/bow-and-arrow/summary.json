@@ -1,0 +1,21 @@
+{
+  "subject": "bow-and-arrow",
+  "scale": 32,
+  "base": {
+    "occupancy": 513,
+    "iou": 0.473,
+    "components": 4
+  },
+  "thin": {
+    "occupancy": 1210,
+    "iou": 0.526,
+    "components": 1,
+    "surfaceOnlyCount": 697
+  },
+  "dIoU": 0.053,
+  "view3q": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  }
+}

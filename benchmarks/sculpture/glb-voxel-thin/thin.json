@@ -1,0 +1,58 @@
+{
+  "schema": "glb-voxel-thin/v1",
+  "ticket": "T-059-01",
+  "epic": "E-18",
+  "view": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "scale": 32,
+  "metric": "silhouette-iou vs the build's OWN source GLB at SCULPTURE_VIEW_3Q, normalized; components = 26-connected voxel components.",
+  "method": "base = voxelizeGlb (center parity); thin = voxelizeGlbThin (solid ∪ conservative-shell triangle–box SAT).",
+  "note": "Bow-and-arrow was the worst-voxelizing of the E-17 7-subject sweep (R1 form IoU 0.473) — sub-voxel stave/string/shaft dropped under center-only parity. The thin pass unions a conservative surface trace so a connected mesh surface yields a connected voxel chain. Thick forms are bit-identical to base.",
+  "subjects": [
+    {
+      "subject": "bow-and-arrow",
+      "scale": 32,
+      "base": {
+        "occupancy": 513,
+        "iou": 0.473,
+        "components": 4
+      },
+      "thin": {
+        "occupancy": 1210,
+        "iou": 0.526,
+        "components": 1,
+        "surfaceOnlyCount": 697
+      },
+      "dIoU": 0.053,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      }
+    },
+    {
+      "subject": "koi",
+      "scale": 32,
+      "base": {
+        "occupancy": 2164,
+        "iou": 0.622,
+        "components": 1
+      },
+      "thin": {
+        "occupancy": 3155,
+        "iou": 0.707,
+        "components": 1,
+        "surfaceOnlyCount": 991
+      },
+      "dIoU": 0.085,
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      }
+    }
+  ]
+}

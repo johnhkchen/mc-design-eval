@@ -1,0 +1,21 @@
+{
+  "subject": "koi",
+  "scale": 32,
+  "base": {
+    "occupancy": 2164,
+    "iou": 0.622,
+    "components": 1
+  },
+  "thin": {
+    "occupancy": 3155,
+    "iou": 0.707,
+    "components": 1,
+    "surfaceOnlyCount": 991
+  },
+  "dIoU": 0.085,
+  "view3q": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  }
+}
