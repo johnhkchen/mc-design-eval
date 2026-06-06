@@ -1,0 +1,53 @@
+{
+  "subject": "dancing-man",
+  "formType": "solid",
+  "busy": {
+    "formIoU": 0.914,
+    "speckle": 0.016,
+    "largestFraction": 1,
+    "strayCount": 0,
+    "components": 1,
+    "distinct": 5,
+    "offPalette": 0,
+    "valueDeltaE": 13.72
+  },
+  "intermediate": {
+    "formIoU": 0.814,
+    "speckle": 0.014,
+    "largestFraction": 1,
+    "strayCount": 0,
+    "components": 1,
+    "distinct": 5,
+    "offPalette": 0,
+    "valueDeltaE": 13.17
+  },
+  "e19": {
+    "formIoU": 0.914,
+    "speckle": 0.022,
+    "largestFraction": 1,
+    "strayCount": 0,
+    "components": 1,
+    "distinct": 5,
+    "offPalette": 0,
+    "valueDeltaE": 12.36
+  },
+  "pruneApplied": false,
+  "occ": {
+    "base": 973,
+    "routed": 973,
+    "pruned": 973
+  },
+  "stray": {
+    "before": {
+      "components": 1,
+      "largestFraction": 1,
+      "strayCount": 0
+    },
+    "after": {
+      "components": 1,
+      "largestFraction": 1,
+      "strayCount": 0
+    }
+  },
+  "scale": 32
+}

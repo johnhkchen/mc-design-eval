@@ -1,0 +1,53 @@
+{
+  "subject": "heart",
+  "formType": "solid",
+  "busy": {
+    "formIoU": 0.877,
+    "speckle": 0.017,
+    "largestFraction": 0.986,
+    "strayCount": 80,
+    "components": 10,
+    "distinct": 7,
+    "offPalette": 1174,
+    "valueDeltaE": 6.41
+  },
+  "intermediate": {
+    "formIoU": 0.895,
+    "speckle": 0.019,
+    "largestFraction": 1,
+    "strayCount": 0,
+    "components": 1,
+    "distinct": 7,
+    "offPalette": 0,
+    "valueDeltaE": 6.62
+  },
+  "e19": {
+    "formIoU": 0.877,
+    "speckle": 0.032,
+    "largestFraction": 0.986,
+    "strayCount": 80,
+    "components": 10,
+    "distinct": 7,
+    "offPalette": 0,
+    "valueDeltaE": 6.08
+  },
+  "pruneApplied": false,
+  "occ": {
+    "base": 5840,
+    "routed": 5840,
+    "pruned": 5840
+  },
+  "stray": {
+    "before": {
+      "components": 10,
+      "largestFraction": 0.986,
+      "strayCount": 80
+    },
+    "after": {
+      "components": 10,
+      "largestFraction": 0.986,
+      "strayCount": 80
+    }
+  },
+  "scale": 32
+}

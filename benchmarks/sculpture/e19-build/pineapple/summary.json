@@ -1,0 +1,53 @@
+{
+  "subject": "pineapple",
+  "formType": "solid",
+  "busy": {
+    "formIoU": 0.907,
+    "speckle": 0.014,
+    "largestFraction": 0.987,
+    "strayCount": 45,
+    "components": 12,
+    "distinct": 4,
+    "offPalette": 0,
+    "valueDeltaE": 9.61
+  },
+  "intermediate": {
+    "formIoU": 0.845,
+    "speckle": 0.022,
+    "largestFraction": 1,
+    "strayCount": 0,
+    "components": 1,
+    "distinct": 4,
+    "offPalette": 0,
+    "valueDeltaE": 8.28
+  },
+  "e19": {
+    "formIoU": 0.907,
+    "speckle": 0.021,
+    "largestFraction": 0.987,
+    "strayCount": 45,
+    "components": 12,
+    "distinct": 4,
+    "offPalette": 0,
+    "valueDeltaE": 6.68
+  },
+  "pruneApplied": false,
+  "occ": {
+    "base": 3397,
+    "routed": 3397,
+    "pruned": 3397
+  },
+  "stray": {
+    "before": {
+      "components": 12,
+      "largestFraction": 0.987,
+      "strayCount": 45
+    },
+    "after": {
+      "components": 12,
+      "largestFraction": 0.987,
+      "strayCount": 45
+    }
+  },
+  "scale": 32
+}

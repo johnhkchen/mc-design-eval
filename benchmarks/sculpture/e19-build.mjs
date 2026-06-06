@@ -56,6 +56,16 @@ const OUT_DIR = join(HERE, "e19-build"); // the combined E-19 build outputs
 const FRAMES_DIR = join(HERE, "..", "..", "pr", "assets", "frames");
 const WORST = ["heart", "moai", "koi"]; // speckle / stray geometry / speckle
 
+// PRUNE GATE (T-066-01 consolidation finding). pruneStrays' relative floor (minFraction 0.5) is calibrated
+// for moai's GROSS duplicate-mass hallucination (largestFraction 0.52). Naively applying it to EVERY routed
+// solid clips legitimate detached detail: plain voxelization disconnects pineapple's crown tips into small
+// components (45 cells / frac 0.987) that the E-18 universal-thin pass had bridged — and pruning them costs
+// −0.096 form IoU. So prune ONLY when the build is a real multi-mass hallucination (largestFraction below the
+// gate); near-single-mass builds (frac ≥ gate) keep their incidental specks. moai (0.52) is pruned; pineapple
+// (0.987) / heart (0.986) / mushroom (0.998) / koi (0.976) are not. This separates "stray hallucination" from
+// "incidental voxelization disconnection" — the former is E-19's target, the latter is load-bearing geometry.
+const PRUNE_GATE_FRACTION = 0.9;
+
 const round2 = (n) => Math.round(n * 100) / 100;
 const round3 = (n) => Math.round(n * 1000) / 1000;
 
@@ -180,9 +190,11 @@ async function buildSubject(subj, { scale, renderArtifact }) {
   const occBase = voxelizeGlb(glbBytes, { scale });
   // T-065 routing: thin subjects keep voxelizeGlbThin; solids use plain voxelizeGlb (no over-thickening).
   const occRouted = voxelizeRouted(glbBytes, { subject: subj.key, scale });
-  // T-063 pruning: drop TRELLIS strays (moai's duplicate masses) geometrically.
-  const occPruned = pruneStrays(occRouted);
   const strayBefore = strayVoxelStats(occRouted);
+  // T-063 pruning, GATED (see PRUNE_GATE_FRACTION): drop TRELLIS multi-mass hallucinations (moai's duplicate
+  // masses) but leave incidental specks on near-single-mass builds (pineapple crown) untouched.
+  const pruneApplied = strayBefore.largestFraction < PRUNE_GATE_FRACTION;
+  const occPruned = pruneApplied ? pruneStrays(occRouted) : occRouted;
   const strayAfter = strayVoxelStats(occPruned);
 
   const surface = parseGlbColoredSurface(glbBytes);
@@ -201,7 +213,7 @@ async function buildSubject(subj, { scale, renderArtifact }) {
       metadata: { trial_id: `${subj.key}-e19-cleanup` },
       style: {
         name: "glb-voxel-e19",
-        rationale: `Routed voxelization (${formType}: ${occBase.count}→${occRouted.count} cells) then stray-pruned (${occRouted.count}→${occPruned.count}) then region-segmented under the augmented design-doc palette (${prim.length} design-doc + ≤2 gated secondary).`,
+        rationale: `Routed voxelization (${formType}: ${occBase.count}→${occRouted.count} cells) then ${pruneApplied ? `stray-pruned (${occRouted.count}→${occPruned.count}, multi-mass hallucination)` : `prune-gated (frac ${round3(strayBefore.largestFraction)} ≥ ${PRUNE_GATE_FRACTION}, kept incidental specks)`} then region-segmented under the augmented design-doc palette (${prim.length} design-doc + ≤2 gated secondary).`,
       },
     },
   );
@@ -232,6 +244,7 @@ async function buildSubject(subj, { scale, renderArtifact }) {
     busy,
     intermediate,
     e19,
+    pruneApplied,
     occ: { base: occBase.count, routed: occRouted.count, pruned: occPruned.count },
     stray: {
       before: { components: strayBefore.components, largestFraction: round3(strayBefore.largestFraction), strayCount: strayBefore.strayCount },
@@ -245,7 +258,7 @@ async function buildSubject(subj, { scale, renderArtifact }) {
       `speckle ${busy?.speckle}→${intermediate?.speckle}→${e19.speckle} · distinct ${busy?.distinct}→${e19.distinct} · ` +
       `off-pal ${busy?.offPalette}→${e19.offPalette} · ΔE ${busy?.valueDeltaE}→${e19.valueDeltaE} · ` +
       `occ ${occBase.count}→${occRouted.count}→${occPruned.count} · stray ${strayBefore.strayCount}→${strayAfter.strayCount} ` +
-      `(frac ${round3(strayBefore.largestFraction)}→${round3(strayAfter.largestFraction)})`,
+      `(frac ${round3(strayBefore.largestFraction)}→${round3(strayAfter.largestFraction)}) · prune ${pruneApplied ? "ON" : "gated"}`,
   );
   return row;
 }
@@ -274,7 +287,7 @@ async function buildMarginals(rows) {
 
   return {
     prune: moai
-      ? `moai stray ${moai.stray.before.strayCount}→${moai.stray.after.strayCount}, largest-frac ${moai.stray.before.largestFraction}→${moai.stray.after.largestFraction}, components ${moai.stray.before.components}→${moai.stray.after.components} — the TRELLIS duplicate masses dropped. The other 6 subjects are already single-mass (no-op).`
+      ? `moai stray ${moai.stray.before.strayCount}→${moai.stray.after.strayCount}, largest-frac ${moai.stray.before.largestFraction}→${moai.stray.after.largestFraction}, components ${moai.stray.before.components}→${moai.stray.after.components} — the TRELLIS duplicate masses dropped. Pruning is GATED at largestFraction < ${PRUNE_GATE_FRACTION}: only moai (the gross multi-mass hallucination) qualifies; near-single-mass solids (pineapple/heart/mushroom, frac ≥ 0.976) keep their incidental crown/edge specks rather than have plain-voxelize disconnections clipped (which cost pineapple −0.096 form IoU when pruned ungated).`
       : "moai row missing.",
     materials: `the busy textured blocks (coral_brain/mycelium/quartz_ore) are gone; off-palette avg ${busyOffPal}→0; speckle avg ${busySpeckle}→${e19Speckle}; distinct avg ${busyDistinct}→${e19Distinct}. Variance-aware nearestFlat + varCeiling 1200 + keepFloor dual-gate + true-axis gradient banding.`,
     routing: r,

@@ -1,0 +1,53 @@
+{
+  "subject": "koi",
+  "formType": "thin",
+  "busy": {
+    "formIoU": 0.622,
+    "speckle": 0.019,
+    "largestFraction": 0.976,
+    "strayCount": 53,
+    "components": 8,
+    "distinct": 5,
+    "offPalette": 0,
+    "valueDeltaE": 12.04
+  },
+  "intermediate": {
+    "formIoU": 0.706,
+    "speckle": 0.045,
+    "largestFraction": 1,
+    "strayCount": 0,
+    "components": 1,
+    "distinct": 5,
+    "offPalette": 0,
+    "valueDeltaE": 17.55
+  },
+  "e19": {
+    "formIoU": 0.706,
+    "speckle": 0.045,
+    "largestFraction": 1,
+    "strayCount": 0,
+    "components": 1,
+    "distinct": 5,
+    "offPalette": 0,
+    "valueDeltaE": 17.55
+  },
+  "pruneApplied": false,
+  "occ": {
+    "base": 2164,
+    "routed": 3155,
+    "pruned": 3155
+  },
+  "stray": {
+    "before": {
+      "components": 1,
+      "largestFraction": 1,
+      "strayCount": 0
+    },
+    "after": {
+      "components": 1,
+      "largestFraction": 1,
+      "strayCount": 0
+    }
+  },
+  "scale": 32
+}

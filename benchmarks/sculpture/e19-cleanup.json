@@ -1,0 +1,469 @@
+{
+  "schema": "e19-cleanup/v1",
+  "scale": 32,
+  "generatedFrom": "e19-build live sweep (routed+prune+clean) vs glb-voxel-seg busy baseline (fixed metrics)",
+  "note": "Per subject three columns: BUSY = E-18 seg build (glb-voxel-seg), re-scored on the fixed T-062 metrics; INTERMEDIATE = universal-thin + prune + clean (committed e18-build); E-19 = routed + prune + clean. delta = E-19 − BUSY (the full cleanup). Higher better for form IoU / largest-fraction; lower better for speckle / stray / distinct / off-palette / value ΔE. moai's form IoU is scored vs its OWN hallucinated GLB (3 statues + bridge bars) so it is reference-corrupt — stray/component is moai's honest signal (T-063).",
+  "headline": {
+    "question": "Is GLB-voxel colour now as clean as text→JSON?",
+    "cleanAsTextJson": true,
+    "offPaletteMax": 0,
+    "speckleAvg": 0.024,
+    "distinctAvg": 5.429,
+    "speckleAvgBusy": 0.012,
+    "note": "text→JSON builds are speckle-free, single design-doc palette, 0 off-palette. cleanAsTextJson = (every E-19 build has 0 off-palette) AND (avg E-19 speckle ≤ 0.05). value ΔE is a separate axis (the design-doc-palette discipline cost), reported but NOT part of the colour-cleanliness verdict."
+  },
+  "averages": {
+    "busy": {
+      "formIoU": 0.763,
+      "speckle": 0.012,
+      "largestFraction": 0.821,
+      "strayCount": 370.143,
+      "distinct": 5.429,
+      "offPalette": 1148.857,
+      "valueDeltaE": 7.194
+    },
+    "intermediate": {
+      "formIoU": 0.731,
+      "speckle": 0.021,
+      "largestFraction": 1,
+      "strayCount": 0,
+      "distinct": 5.429,
+      "offPalette": 0,
+      "valueDeltaE": 11.136
+    },
+    "e19": {
+      "formIoU": 0.761,
+      "speckle": 0.024,
+      "largestFraction": 0.996,
+      "strayCount": 20.571,
+      "distinct": 5.429,
+      "offPalette": 0,
+      "valueDeltaE": 9.809
+    },
+    "delta": {
+      "formIoU": -0.002,
+      "speckle": 0.012,
+      "largestFraction": 0.175,
+      "strayCount": -349.571,
+      "distinct": 0,
+      "offPalette": -1148.857,
+      "valueDeltaE": 2.614
+    }
+  },
+  "axes": {
+    "formIoU": {
+      "better": "up",
+      "avgDelta": -0.002,
+      "improved": [
+        "bow-and-arrow",
+        "koi"
+      ],
+      "held": [
+        "dancing-man",
+        "pineapple",
+        "heart",
+        "mushroom"
+      ],
+      "regressed": [
+        "moai"
+      ]
+    },
+    "speckle": {
+      "better": "down",
+      "avgDelta": 0.012,
+      "improved": [],
+      "held": [],
+      "regressed": [
+        "dancing-man",
+        "moai",
+        "pineapple",
+        "bow-and-arrow",
+        "heart",
+        "mushroom",
+        "koi"
+      ]
+    },
+    "largestFraction": {
+      "better": "up",
+      "avgDelta": 0.175,
+      "improved": [
+        "moai",
+        "bow-and-arrow",
+        "koi"
+      ],
+      "held": [
+        "dancing-man",
+        "pineapple",
+        "heart",
+        "mushroom"
+      ],
+      "regressed": []
+    },
+    "strayCount": {
+      "better": "down",
+      "avgDelta": -349.571,
+      "improved": [
+        "moai",
+        "bow-and-arrow",
+        "koi"
+      ],
+      "held": [
+        "dancing-man",
+        "pineapple",
+        "heart",
+        "mushroom"
+      ],
+      "regressed": []
+    },
+    "distinct": {
+      "better": "down",
+      "avgDelta": 0,
+      "improved": [
+        "mushroom"
+      ],
+      "held": [
+        "dancing-man",
+        "moai",
+        "pineapple",
+        "heart",
+        "koi"
+      ],
+      "regressed": [
+        "bow-and-arrow"
+      ]
+    },
+    "offPalette": {
+      "better": "down",
+      "avgDelta": -1148.857,
+      "improved": [
+        "moai",
+        "heart",
+        "mushroom"
+      ],
+      "held": [
+        "dancing-man",
+        "pineapple",
+        "bow-and-arrow",
+        "koi"
+      ],
+      "regressed": []
+    },
+    "valueDeltaE": {
+      "better": "down",
+      "avgDelta": 2.614,
+      "improved": [
+        "dancing-man",
+        "pineapple",
+        "heart"
+      ],
+      "held": [],
+      "regressed": [
+        "moai",
+        "bow-and-arrow",
+        "mushroom",
+        "koi"
+      ]
+    }
+  },
+  "marginals": {
+    "prune": "moai stray 2023→0, largest-frac 0.52→1, components 6→1 — the TRELLIS duplicate masses dropped. Pruning is GATED at largestFraction < 0.9: only moai (the gross multi-mass hallucination) qualifies; near-single-mass solids (pineapple/heart/mushroom, frac ≥ 0.976) keep their incidental crown/edge specks rather than have plain-voxelize disconnections clipped (which cost pineapple −0.096 form IoU when pruned ungated).",
+    "materials": "the busy textured blocks (coral_brain/mycelium/quartz_ore) are gone; off-palette avg 1149→0; speckle avg 0.012→0.024; distinct avg 5.429→5.429. Variance-aware nearestFlat + varCeiling 1200 + keepFloor dual-gate + true-axis gradient banding.",
+    "routing": "form IoU avg 0.731→0.782 (+0.051); occupancy 36723→28295 (-8428); solids de-thickened by 8428 cells. Recovered: dancing-man, moai, pineapple, mushroom; traded: heart; kept (thin): bow-and-arrow, koi."
+  },
+  "subjects": [
+    {
+      "subject": "dancing-man",
+      "busy": {
+        "formIoU": 0.914,
+        "speckle": 0.016,
+        "largestFraction": 1,
+        "strayCount": 0,
+        "components": 1,
+        "distinct": 5,
+        "offPalette": 0,
+        "valueDeltaE": 13.72
+      },
+      "intermediate": {
+        "formIoU": 0.814,
+        "speckle": 0.014,
+        "largestFraction": 1,
+        "strayCount": 0,
+        "components": 1,
+        "distinct": 5,
+        "offPalette": 0,
+        "valueDeltaE": 13.17
+      },
+      "e19": {
+        "formIoU": 0.914,
+        "speckle": 0.022,
+        "largestFraction": 1,
+        "strayCount": 0,
+        "components": 1,
+        "distinct": 5,
+        "offPalette": 0,
+        "valueDeltaE": 12.36
+      },
+      "delta": {
+        "formIoU": 0,
+        "speckle": 0.006,
+        "largestFraction": 0,
+        "strayCount": 0,
+        "distinct": 0,
+        "offPalette": 0,
+        "valueDeltaE": -1.36
+      }
+    },
+    {
+      "subject": "moai",
+      "busy": {
+        "formIoU": 0.565,
+        "speckle": 0.001,
+        "largestFraction": 0.52,
+        "strayCount": 2023,
+        "components": 6,
+        "distinct": 5,
+        "offPalette": 887,
+        "valueDeltaE": 1.5
+      },
+      "intermediate": {
+        "formIoU": 0.399,
+        "speckle": 0.006,
+        "largestFraction": 1,
+        "strayCount": 0,
+        "components": 1,
+        "distinct": 5,
+        "offPalette": 0,
+        "valueDeltaE": 20.85
+      },
+      "e19": {
+        "formIoU": 0.416,
+        "speckle": 0.005,
+        "largestFraction": 1,
+        "strayCount": 0,
+        "components": 1,
+        "distinct": 5,
+        "offPalette": 0,
+        "valueDeltaE": 14.05
+      },
+      "delta": {
+        "formIoU": -0.149,
+        "speckle": 0.004,
+        "largestFraction": 0.48,
+        "strayCount": -2023,
+        "distinct": 0,
+        "offPalette": -887,
+        "valueDeltaE": 12.55
+      }
+    },
+    {
+      "subject": "pineapple",
+      "busy": {
+        "formIoU": 0.907,
+        "speckle": 0.014,
+        "largestFraction": 0.987,
+        "strayCount": 45,
+        "components": 12,
+        "distinct": 4,
+        "offPalette": 0,
+        "valueDeltaE": 9.61
+      },
+      "intermediate": {
+        "formIoU": 0.845,
+        "speckle": 0.022,
+        "largestFraction": 1,
+        "strayCount": 0,
+        "components": 1,
+        "distinct": 4,
+        "offPalette": 0,
+        "valueDeltaE": 8.28
+      },
+      "e19": {
+        "formIoU": 0.907,
+        "speckle": 0.021,
+        "largestFraction": 0.987,
+        "strayCount": 45,
+        "components": 12,
+        "distinct": 4,
+        "offPalette": 0,
+        "valueDeltaE": 6.68
+      },
+      "delta": {
+        "formIoU": 0,
+        "speckle": 0.007,
+        "largestFraction": 0,
+        "strayCount": 0,
+        "distinct": 0,
+        "offPalette": 0,
+        "valueDeltaE": -2.93
+      }
+    },
+    {
+      "subject": "bow-and-arrow",
+      "busy": {
+        "formIoU": 0.473,
+        "speckle": 0,
+        "largestFraction": 0.277,
+        "strayCount": 371,
+        "components": 21,
+        "distinct": 6,
+        "offPalette": 0,
+        "valueDeltaE": 3.37
+      },
+      "intermediate": {
+        "formIoU": 0.526,
+        "speckle": 0.012,
+        "largestFraction": 1,
+        "strayCount": 0,
+        "components": 1,
+        "distinct": 7,
+        "offPalette": 0,
+        "valueDeltaE": 5.44
+      },
+      "e19": {
+        "formIoU": 0.526,
+        "speckle": 0.012,
+        "largestFraction": 1,
+        "strayCount": 0,
+        "components": 1,
+        "distinct": 7,
+        "offPalette": 0,
+        "valueDeltaE": 5.44
+      },
+      "delta": {
+        "formIoU": 0.053,
+        "speckle": 0.012,
+        "largestFraction": 0.723,
+        "strayCount": -371,
+        "distinct": 1,
+        "offPalette": 0,
+        "valueDeltaE": 2.07
+      }
+    },
+    {
+      "subject": "heart",
+      "busy": {
+        "formIoU": 0.877,
+        "speckle": 0.017,
+        "largestFraction": 0.986,
+        "strayCount": 80,
+        "components": 10,
+        "distinct": 7,
+        "offPalette": 1174,
+        "valueDeltaE": 6.41
+      },
+      "intermediate": {
+        "formIoU": 0.895,
+        "speckle": 0.019,
+        "largestFraction": 1,
+        "strayCount": 0,
+        "components": 1,
+        "distinct": 7,
+        "offPalette": 0,
+        "valueDeltaE": 6.62
+      },
+      "e19": {
+        "formIoU": 0.877,
+        "speckle": 0.032,
+        "largestFraction": 0.986,
+        "strayCount": 80,
+        "components": 10,
+        "distinct": 7,
+        "offPalette": 0,
+        "valueDeltaE": 6.08
+      },
+      "delta": {
+        "formIoU": 0,
+        "speckle": 0.015,
+        "largestFraction": 0,
+        "strayCount": 0,
+        "distinct": 0,
+        "offPalette": -1174,
+        "valueDeltaE": -0.33
+      }
+    },
+    {
+      "subject": "mushroom",
+      "busy": {
+        "formIoU": 0.98,
+        "speckle": 0.018,
+        "largestFraction": 0.998,
+        "strayCount": 19,
+        "components": 4,
+        "distinct": 6,
+        "offPalette": 5981,
+        "valueDeltaE": 3.71
+      },
+      "intermediate": {
+        "formIoU": 0.929,
+        "speckle": 0.027,
+        "largestFraction": 1,
+        "strayCount": 0,
+        "components": 1,
+        "distinct": 5,
+        "offPalette": 0,
+        "valueDeltaE": 6.04
+      },
+      "e19": {
+        "formIoU": 0.98,
+        "speckle": 0.03,
+        "largestFraction": 0.998,
+        "strayCount": 19,
+        "components": 4,
+        "distinct": 5,
+        "offPalette": 0,
+        "valueDeltaE": 6.5
+      },
+      "delta": {
+        "formIoU": 0,
+        "speckle": 0.012,
+        "largestFraction": 0,
+        "strayCount": 0,
+        "distinct": -1,
+        "offPalette": -5981,
+        "valueDeltaE": 2.79
+      }
+    },
+    {
+      "subject": "koi",
+      "busy": {
+        "formIoU": 0.622,
+        "speckle": 0.019,
+        "largestFraction": 0.976,
+        "strayCount": 53,
+        "components": 8,
+        "distinct": 5,
+        "offPalette": 0,
+        "valueDeltaE": 12.04
+      },
+      "intermediate": {
+        "formIoU": 0.706,
+        "speckle": 0.045,
+        "largestFraction": 1,
+        "strayCount": 0,
+        "components": 1,
+        "distinct": 5,
+        "offPalette": 0,
+        "valueDeltaE": 17.55
+      },
+      "e19": {
+        "formIoU": 0.706,
+        "speckle": 0.045,
+        "largestFraction": 1,
+        "strayCount": 0,
+        "components": 1,
+        "distinct": 5,
+        "offPalette": 0,
+        "valueDeltaE": 17.55
+      },
+      "delta": {
+        "formIoU": 0.084,
+        "speckle": 0.026,
+        "largestFraction": 0.024,
+        "strayCount": -53,
+        "distinct": 0,
+        "offPalette": 0,
+        "valueDeltaE": 5.51
+      }
+    }
+  ]
+}
