@@ -1,0 +1,177 @@
+{
+  "schema": "hollow-carve/v1",
+  "subject": "cottage (T-084 sealed artifact)",
+  "placements": {
+    "before": 6597,
+    "after": 5465
+  },
+  "occupancy": {
+    "voxels": 6438,
+    "dims": [
+      26,
+      27,
+      32
+    ]
+  },
+  "carve": {
+    "enclosed": 1100,
+    "protectedCount": 122,
+    "removeCount": 973,
+    "inset": 1,
+    "regions": [
+      {
+        "yStart": 1,
+        "yEnd": 15,
+        "inset": 1,
+        "note": "Main bulk, 1047 enclosed cells; 1-cell wall preserves exterior skin and roof framing load path"
+      },
+      {
+        "yStart": 16,
+        "yEnd": 22,
+        "inset": 1,
+        "note": "Secondary band (roof deck), 40 enclosed cells; 1-cell inset maintains structural envelope"
+      }
+    ],
+    "perBand": [
+      {
+        "yStart": 1,
+        "yEnd": 15,
+        "removed": 935
+      },
+      {
+        "yStart": 16,
+        "yEnd": 22,
+        "removed": 38
+      }
+    ],
+    "keep": {
+      "cornerPosts": 0,
+      "tallColumns": 716,
+      "total": 716
+    }
+  },
+  "cavity": {
+    "before": 6438,
+    "removed": 973,
+    "after": 5465
+  },
+  "exteriorHeld": {
+    "held": true,
+    "digestBytesBefore": 133355,
+    "digestBytesAfter": 133355
+  },
+  "watertight": {
+    "beforeCarve": {
+      "watertight": false,
+      "interiorCells": 3625,
+      "reached": 2507,
+      "breaches": [
+        "-12,3,-2",
+        "-12,6,0",
+        "-12,9,-3",
+        "-12,9,-2",
+        "-12,10,-4",
+        "-12,10,-3",
+        "-12,11,-4",
+        "-12,12,-4",
+        "-12,12,-3",
+        "-12,13,1",
+        "-12,15,-9",
+        "-12,15,-8",
+        "-12,15,-7",
+        "-12,15,-4",
+        "-12,15,0",
+        "-12,15,4"
+      ]
+    },
+    "afterCarve": {
+      "watertight": false,
+      "interiorCells": 3522,
+      "reached": 2507,
+      "breaches": [
+        "-12,3,-2",
+        "-12,6,0",
+        "-12,9,-3",
+        "-12,9,-2",
+        "-12,10,-4",
+        "-12,10,-3",
+        "-12,11,-4",
+        "-12,12,-4",
+        "-12,12,-3",
+        "-12,13,1",
+        "-12,15,-9",
+        "-12,15,-8",
+        "-12,15,-7",
+        "-12,15,-4",
+        "-12,15,0",
+        "-12,15,4"
+      ]
+    }
+  },
+  "detector": {
+    "op": "hollowable-mass-detector",
+    "tier": "light",
+    "model": "claude-haiku-4-5",
+    "usage": {
+      "input_tokens": 10,
+      "output_tokens": 661,
+      "total_cost_usd": 0.02139895
+    },
+    "parsed": {
+      "schema": "hollowable-mass/v1",
+      "hollowable": true,
+      "regions": [
+        {
+          "yStart": 1,
+          "yEnd": 15,
+          "inset": 1,
+          "note": "Main bulk, 1047 enclosed cells; 1-cell wall preserves exterior skin and roof framing load path"
+        },
+        {
+          "yStart": 16,
+          "yEnd": 22,
+          "inset": 1,
+          "note": "Secondary band (roof deck), 40 enclosed cells; 1-cell inset maintains structural envelope"
+        }
+      ],
+      "blockers": []
+    },
+    "parseError": null
+  },
+  "renders": {
+    "before": [
+      {
+        "angle": "threeQuarter",
+        "path": "docs/active/work/T-080-01/view-before-threeQuarter.png",
+        "bytes": 140628
+      },
+      {
+        "angle": "front",
+        "path": "docs/active/work/T-080-01/view-before-front.png",
+        "bytes": 92556
+      },
+      {
+        "angle": "top",
+        "path": "docs/active/work/T-080-01/view-before-top.png",
+        "bytes": 90228
+      }
+    ],
+    "after": [
+      {
+        "angle": "threeQuarter",
+        "path": "docs/active/work/T-080-01/view-after-threeQuarter.png",
+        "bytes": 140628
+      },
+      {
+        "angle": "front",
+        "path": "docs/active/work/T-080-01/view-after-front.png",
+        "bytes": 92556
+      },
+      {
+        "angle": "top",
+        "path": "docs/active/work/T-080-01/view-after-top.png",
+        "bytes": 90228
+      }
+    ]
+  }
+}
