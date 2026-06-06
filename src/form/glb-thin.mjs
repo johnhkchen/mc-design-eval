@@ -29,7 +29,8 @@
 // field) so it is a drop-in for sampleSurfaceColors / colorVoxelsToArtifact / materialCleanVoxel.
 
 import { parseGlbMesh } from "./glb-mesh.mjs";
-import { pointInMesh, occupiedCells } from "./glb-voxelize.mjs";
+import { pointInMesh } from "./glb-voxelize.mjs";
+import { componentLabels } from "./voxel-components.mjs";
 import { SCALE_MIN, SCALE_MAX, DEFAULT_SCALE } from "../sculpture.mjs";
 
 const DEGENERATE_EPS = 1e-18; // a triangle whose normal is below this (in squared length) has no surface
@@ -178,62 +179,16 @@ export function voxelizeGlbThin(glb, { scale = DEFAULT_SCALE, shell = true, thin
   return occupancy;
 }
 
-/** Build an "i,j,k" → cell-index map over the occupied cells (occupiedCells order). */
-function indexCells(occupancy) {
-  const index = new Map();
-  let n = 0;
-  for (const [i, j, k] of occupiedCells(occupancy)) {
-    index.set(`${i},${j},${k}`, n);
-    n++;
-  }
-  return index;
-}
-
-const FACE_DIRS = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
-const BOX_DIRS = (() => {
-  const d = [];
-  for (let i = -1; i <= 1; i++) for (let j = -1; j <= 1; j++) for (let k = -1; k <= 1; k++) {
-    if (i || j || k) d.push([i, j, k]);
-  }
-  return d;
-})();
-
 /**
  * Connected-component count + sizes over the occupancy (the AC no-dropped-thin-components instrument).
- * `connectivity` 6 (face) or 26 (box). Iterative flood fill over the indexCells map. PURE; deterministic
- * (sizes sorted descending). Reads only `occupied`/`count`.
+ * `connectivity` 6 (face) or 26 (box, the default for the thin diagnostic). Delegates to the shared flood-fill
+ * core in voxel-components.mjs (one flood fill, not three copies); re-shapes labels → {count, sizes desc}.
+ * PURE; deterministic (sizes sorted descending). Reads only `occupied`/`count`.
  * @param {{occupied:Int32Array, count:number}} occupancy
  * @param {{connectivity?:number}} [opts]
  * @returns {{count:number, sizes:number[]}}
  */
 export function connectedComponents(occupancy, { connectivity = 26 } = {}) {
-  if (connectivity !== 6 && connectivity !== 26) {
-    throw new Error(`connectedComponents: connectivity must be 6 or 26 (got ${connectivity})`);
-  }
-  const dirs = connectivity === 6 ? FACE_DIRS : BOX_DIRS;
-  const index = indexCells(occupancy);
-  const cells = [...occupiedCells(occupancy)];
-  const seen = new Uint8Array(cells.length);
-  const sizes = [];
-  for (let start = 0; start < cells.length; start++) {
-    if (seen[start]) continue;
-    let size = 0;
-    const stack = [start];
-    seen[start] = 1;
-    while (stack.length) {
-      const n = stack.pop();
-      size++;
-      const [ci, cj, ck] = cells[n];
-      for (const [di, dj, dk] of dirs) {
-        const m = index.get(`${ci + di},${cj + dj},${ck + dk}`);
-        if (m !== undefined && !seen[m]) {
-          seen[m] = 1;
-          stack.push(m);
-        }
-      }
-    }
-    sizes.push(size);
-  }
-  sizes.sort((a, b) => b - a);
-  return { count: sizes.length, sizes };
+  const { sizes } = componentLabels(occupancy, { connectivity });
+  return { count: sizes.length, sizes: [...sizes].sort((a, b) => b - a) };
 }
