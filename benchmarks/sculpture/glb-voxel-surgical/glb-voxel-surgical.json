@@ -1,0 +1,325 @@
+{
+  "schema": "glb-voxel-surgical/v1",
+  "metric": "silhouette-iou (GLB 3-D target = the build's OWN source)",
+  "generatedFrom": "benchmarks/sculpture/glb-voxel/{koi,heart}/artifact.json (T-051-01) + benchmarks/sculpture/glb/{koi,heart}.glb",
+  "note": "THE SYNTHESIS: the surgical loop (T-049-01 glbFormTarget) runs on the GLB-voxel builds (T-051-01) with the form target = the SAME GLB each build was voxelized from. Per region: scoreBefore/After is the TRUE per-region 3-D IoU (R-framed build render vs the GLB silhouette clipped to R mapped into mesh space). whole IoU = the full-build 3/4 render vs the whole GLB silhouette. Verdict is APPLES-TO-APPLES: GLB-after vs GLB-before (improved|held|regressed); `regressed` is impossible under the rollback gate (an alarm). Each subject runs TWO regions — one LLM-edit (`curve`), one PROCEDURAL (`relief`) — so the trace shows both routes. P14: accepted regions lock; non-improving tweaks roll back (confirmed from the loop's own locked+trace). Honesty: single 3/4 view; silhouette ≠ form; normalization removes translation+uniform scale; rotation/axis NOT corrected (but build⊂its own GLB, so alignment is as good as it gets). n=2.",
+  "subjects": [
+    {
+      "subject": "koi",
+      "glb": "glb/koi.glb",
+      "buildSilhouetteIoU": 0.622,
+      "wholeObjectIoUBefore": 0.6215955186401391,
+      "wholeObjectIoUAfter": 0.6137388467811571,
+      "verdict": "regressed",
+      "keptCount": 1,
+      "rolledBackCount": 1,
+      "perRegion": [
+        {
+          "index": 0,
+          "region": {
+            "min": [
+              9,
+              0,
+              -2
+            ],
+            "max": [
+              15,
+              16,
+              9
+            ]
+          },
+          "configuredRoute": "curve",
+          "loopRoute": "llm-edit",
+          "defect": "thick-fin / stair-stepping",
+          "where": "the caudal fin (a thin sheet voxelization thickened into a chunky stack)",
+          "tweak": "noop",
+          "scoreBefore": 0.5128038194444444,
+          "scoreAfter": 0.528370354079613,
+          "accepted": true,
+          "reason": "accepted",
+          "proposedWholeIoU": 0.6137388467811571
+        },
+        {
+          "index": 1,
+          "region": {
+            "min": [
+              -6,
+              3,
+              -4
+            ],
+            "max": [
+              2,
+              12,
+              4
+            ]
+          },
+          "configuredRoute": "relief",
+          "loopRoute": "relief",
+          "defect": "flat-skin",
+          "where": "the dense mid-body flank",
+          "tweak": "relief+1",
+          "scoreBefore": 0.7163290446208596,
+          "scoreAfter": 0.7163290446208596,
+          "accepted": false,
+          "reason": "rolled-back"
+        }
+      ],
+      "p14": {
+        "ok": true,
+        "locked": [
+          {
+            "min": [
+              9,
+              0,
+              -2
+            ],
+            "max": [
+              15,
+              16,
+              9
+            ]
+          }
+        ],
+        "acceptedCount": 1,
+        "violations": []
+      },
+      "proposals": [
+        {
+          "region": "9,0,-2|15,16,9",
+          "proposed": 3,
+          "applied": 3,
+          "rejected": [],
+          "stashed": true
+        }
+      ],
+      "trace": [
+        {
+          "iteration": 1,
+          "region": {
+            "bbox": {
+              "min": [
+                9,
+                0,
+                -2
+              ],
+              "max": [
+                15,
+                16,
+                9
+              ]
+            }
+          },
+          "subBounds": {
+            "min": [
+              9,
+              0,
+              -2
+            ],
+            "max": [
+              15,
+              16,
+              9
+            ]
+          },
+          "defect": "thick-fin / stair-stepping",
+          "where": "the caudal fin (a thin sheet voxelization thickened into a chunky stack)",
+          "route": "llm-edit",
+          "tweak": "noop",
+          "scoreBefore": 0.5128038194444444,
+          "scoreAfter": 0.528370354079613,
+          "accepted": true,
+          "reason": "accepted"
+        },
+        {
+          "iteration": 2,
+          "region": {
+            "bbox": {
+              "min": [
+                -6,
+                3,
+                -4
+              ],
+              "max": [
+                2,
+                12,
+                4
+              ]
+            }
+          },
+          "subBounds": {
+            "min": [
+              -6,
+              3,
+              -4
+            ],
+            "max": [
+              2,
+              12,
+              4
+            ]
+          },
+          "defect": "flat-skin",
+          "where": "the dense mid-body flank",
+          "route": "relief",
+          "tweak": "relief+1",
+          "scoreBefore": 0.7163290446208596,
+          "scoreAfter": 0.7163290446208596,
+          "accepted": false,
+          "reason": "rolled-back"
+        }
+      ]
+    },
+    {
+      "subject": "heart",
+      "glb": "glb/heart.glb",
+      "buildSilhouetteIoU": 0.877,
+      "wholeObjectIoUBefore": 0.8770910547931483,
+      "wholeObjectIoUAfter": 0.8770910547931483,
+      "verdict": "held",
+      "keptCount": 0,
+      "rolledBackCount": 2,
+      "perRegion": [
+        {
+          "index": 0,
+          "region": {
+            "min": [
+              -8,
+              18,
+              -10
+            ],
+            "max": [
+              8,
+              26,
+              10
+            ]
+          },
+          "configuredRoute": "curve",
+          "loopRoute": "llm-edit",
+          "defect": "almost-closed-arch",
+          "where": "the great vessels / aortic arch (a near-solid taper, not an open loop)",
+          "tweak": "noop",
+          "scoreBefore": 0.5662919170381857,
+          "scoreAfter": 0.5662919170381857,
+          "accepted": false,
+          "reason": "rolled-back",
+          "proposedWholeIoU": 0.8770910547931483
+        },
+        {
+          "index": 1,
+          "region": {
+            "min": [
+              -8,
+              4,
+              -8
+            ],
+            "max": [
+              8,
+              14,
+              8
+            ]
+          },
+          "configuredRoute": "relief",
+          "loopRoute": "relief",
+          "defect": "flat-skin",
+          "where": "the ventricular wall",
+          "tweak": "relief+1",
+          "scoreBefore": 0.7301147928030611,
+          "scoreAfter": 0.7283236994219653,
+          "accepted": false,
+          "reason": "rolled-back"
+        }
+      ],
+      "p14": {
+        "ok": true,
+        "locked": [],
+        "acceptedCount": 0,
+        "violations": []
+      },
+      "proposals": [
+        {
+          "region": "-8,18,-10|8,26,10",
+          "proposed": 8,
+          "applied": 8,
+          "rejected": [],
+          "stashed": true
+        }
+      ],
+      "trace": [
+        {
+          "iteration": 1,
+          "region": {
+            "bbox": {
+              "min": [
+                -8,
+                18,
+                -10
+              ],
+              "max": [
+                8,
+                26,
+                10
+              ]
+            }
+          },
+          "subBounds": {
+            "min": [
+              -8,
+              18,
+              -10
+            ],
+            "max": [
+              8,
+              26,
+              10
+            ]
+          },
+          "defect": "almost-closed-arch",
+          "where": "the great vessels / aortic arch (a near-solid taper, not an open loop)",
+          "route": "llm-edit",
+          "tweak": "noop",
+          "scoreBefore": 0.5662919170381857,
+          "scoreAfter": 0.5662919170381857,
+          "accepted": false,
+          "reason": "rolled-back"
+        },
+        {
+          "iteration": 2,
+          "region": {
+            "bbox": {
+              "min": [
+                -8,
+                4,
+                -8
+              ],
+              "max": [
+                8,
+                14,
+                8
+              ]
+            }
+          },
+          "subBounds": {
+            "min": [
+              -8,
+              4,
+              -8
+            ],
+            "max": [
+              8,
+              14,
+              8
+            ]
+          },
+          "defect": "flat-skin",
+          "where": "the ventricular wall",
+          "route": "relief",
+          "tweak": "relief+1",
+          "scoreBefore": 0.7301147928030611,
+          "scoreAfter": 0.7283236994219653,
+          "accepted": false,
+          "reason": "rolled-back"
+        }
+      ]
+    }
+  ]
+}

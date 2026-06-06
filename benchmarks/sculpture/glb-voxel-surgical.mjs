@@ -33,9 +33,23 @@ import { makeFormEditor, regionKey } from "../../src/revise/form-edit.mjs";
 import { boxesIntersect } from "../../src/revise/tweak.mjs";
 import { glbFormTarget } from "../../src/form/form-target.mjs";
 import { SCULPTURE_VIEW_3Q } from "../../src/sculpture.mjs";
-// DRY: the categorical judge + its gloss are the sibling's exports — reused, not cloned (the
-// parallel-roots-duplicate-shared-deps lesson). GLB-after vs GLB-before; `regressed` is an alarm only.
-import { formVerdictOf, VERDICT_GLOSS } from "./glb-formtarget-ab.mjs";
+// DRY: the categorical classifier is the sibling's export — reused, not cloned (the
+// parallel-roots-duplicate-shared-deps lesson). GLB-after vs GLB-before, whole-object.
+import { formVerdictOf } from "./glb-formtarget-ab.mjs";
+
+// The gloss is LOCAL (not the sibling's): the sibling's accept-gate and verdict measure the SAME quantity,
+// so there `regressed` is impossible (an alarm). HERE they differ — the loop's accept-gate is the
+// per-region IoU; the verdict is the whole-object IoU — so a per-region clean that does NOT transfer to
+// the whole object can genuinely lower whole-object IoU. `regressed` is therefore a REAL, possible outcome
+// (a local edit cleared its region but worsened the global silhouette under the single 3/4 view), not an
+// alarm. That divergence is itself a finding the synthesis is meant to surface.
+const VERDICT_GLOSS = {
+  improved: "a region cleared the per-region accept-gate AND the whole-object GLB IoU rose — the local clean transferred to the whole",
+  held: "no region beat its per-region target — the cage kept the build unchanged (no regression)",
+  regressed:
+    "a region cleared the per-region accept-gate but the whole-object GLB IoU FELL — a real divergence: the local per-region clean did not transfer (and slightly hurt) the global single-view silhouette. NOT a gate bug (P14 still holds); a limit of per-region single-view IoU as a hill-climb signal",
+  unknown: "missing a before or after score",
+};
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const GLB_DIR = join(HERE, "glb");
@@ -265,14 +279,27 @@ function emit(rows) {
   writeFileSync(join(OUT_DIR, "glb-voxel-surgical.json"), JSON.stringify(json, null, 2) + "\n");
 
   const kept = rows.flatMap((r) => r.perRegion.filter((p) => p.accepted).map((p) => `${r.subject}:${p.configuredRoute}`));
-  const headline =
-    rows.length === 0
-      ? "No subjects ran (assets absent) — see the note below."
-      : kept.length === 0
-        ? "No surgical tweak beat the build's own 3-D form on either subject — every region rolled back " +
-          "(the cage held the already-close builds unchanged). A real null: the GLB-voxel start is close " +
-          "enough that no LOCAL edit cleaned a voxelization artifact past the per-region accept-gate."
-        : `Surgical tweaks that cleared the GLB accept-gate (cleaned a voxelization artifact): ${kept.join(", ")}.`;
+  const transferred = rows.filter((r) => r.verdict === "improved").map((r) => r.subject);
+  const cleanedNoTransfer = rows.filter((r) => r.keptCount > 0 && r.verdict !== "improved").map((r) => r.subject);
+  let headline;
+  if (rows.length === 0) {
+    headline = "No subjects ran (assets absent) — see the note below.";
+  } else if (kept.length === 0) {
+    headline =
+      "No surgical tweak beat the build's own 3-D form on either subject — every region rolled back " +
+      "(the cage held the already-close builds unchanged). A real null: the GLB-voxel start is close " +
+      "enough that no LOCAL edit cleaned a voxelization artifact past the per-region accept-gate.";
+  } else {
+    const parts = [`Surgical edits cleared the per-region accept-gate (cleaned the targeted artifact) on: ${kept.join(", ")}.`];
+    if (transferred.length) parts.push(`That lifted whole-object GLB IoU on: ${transferred.join(", ")}.`);
+    if (cleanedNoTransfer.length)
+      parts.push(
+        `But the per-region clean did NOT transfer to the whole object on: ${cleanedNoTransfer.join(", ")} ` +
+          "(whole-object IoU flat/down) — the honest synthesis finding: a single-view per-region accept-gate " +
+          "can keep a local edit that the whole-object silhouette does not reward.",
+      );
+    headline = parts.join(" ");
+  }
   const p14ok = rows.every((r) => r.p14.ok);
 
   const md = [
