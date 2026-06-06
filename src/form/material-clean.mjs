@@ -140,10 +140,21 @@ export function denoiseVoxelKeys(occupancy, keys, opts = {}) {
   return cur;
 }
 
+/** The 6 face-adjacent offsets, for the fragmentation neighbourhood (both directions on each axis). */
+const SPECKLE_DIRS = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
+
 /**
- * Spatial speckle score: the fraction of FACE-ADJACENT (6-neighbour) occupied cell pairs whose blocks
- * differ. 0 = perfectly clean (every neighbour shares a block); higher = speckled. Counts each pair once
- * (only the +i/+j/+k neighbour). PURE — the truest measure of the surface noise this pass removes.
+ * Spatial speckle score = the fraction of occupied cells that are FRAGMENTATION (specks), NOT the fraction
+ * of differing boundaries. A cell is a speck when it is LOCALLY OUTVOTED: among {its own block} ∪ {the blocks
+ * of its occupied face-neighbours}, some OTHER block is strictly more frequent than the cell's own (self is
+ * counted, so a speck needs ≥2 neighbours agreeing on a single other block — "differs from a strong
+ * neighbourhood majority / isolated singleton"). Consequences:
+ *   - a large clean region with a sharp edge to a neighbour region → ≈0 (the boundary is NOT penalized: each
+ *     boundary cell still has its own region as its local majority);
+ *   - a checkerboard / salt-and-pepper noise → ≈1 (every cell is outvoted);
+ *   - a uniform field or a solid mass → 0.
+ * Only cells with ≥1 occupied face-neighbour count toward the denominator (a lone cell has no neighbourhood).
+ * PURE; signature/shape/range unchanged from the old boundary-counting metric (callers keep working).
  * @param {{occupied:Int32Array, count:number}} occupancy
  * @param {string[]} keys bare keys, occupiedCells order
  * @returns {number} in [0,1]
@@ -151,23 +162,27 @@ export function denoiseVoxelKeys(occupancy, keys, opts = {}) {
 export function speckleScore(occupancy, keys) {
   const index = indexCells(occupancy);
   const cells = [...occupiedCells(occupancy)];
-  let pairs = 0;
-  let differ = 0;
-  const dirs = [
-    [1, 0, 0],
-    [0, 1, 0],
-    [0, 0, 1],
-  ];
+  let denom = 0;
+  let specks = 0;
   for (let n = 0; n < cells.length; n++) {
     const [i, j, k] = cells[n];
-    for (const [di, dj, dk] of dirs) {
+    const own = keys[n];
+    const tally = new Map([[own, 1]]); // self counted
+    let neighbours = 0;
+    for (const [di, dj, dk] of SPECKLE_DIRS) {
       const m = index.get(`${i + di},${j + dj},${k + dk}`);
       if (m === undefined) continue;
-      pairs++;
-      if (keys[n] !== keys[m]) differ++;
+      neighbours++;
+      tally.set(keys[m], (tally.get(keys[m]) || 0) + 1);
     }
+    if (neighbours === 0) continue; // lone cell: no neighbourhood to be a speck within
+    denom++;
+    const ownCount = tally.get(own);
+    let maxOther = 0;
+    for (const [key, c] of tally) if (key !== own && c > maxOther) maxOther = c;
+    if (maxOther > ownCount) specks++; // locally outvoted ⇒ a speck
   }
-  return pairs === 0 ? 0 : differ / pairs;
+  return denom === 0 ? 0 : specks / denom;
 }
 
 /**

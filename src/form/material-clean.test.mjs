@@ -114,12 +114,30 @@ test("denoiseVoxelKeys: a 50/50 tie keeps the current block (only outvoting flip
 
 // --- speckleScore -----------------------------------------------------------
 
-test("speckleScore: adjacent differing cells = 1.0; matching = 0.0; lone cell = 0", () => {
-  const two = makeOcc([2, 1, 1], [[0, 0, 0], [1, 0, 0]]);
-  assert.equal(speckleScore(two, ["red_wool", "blue_wool"]), 1);
-  assert.equal(speckleScore(two, ["red_wool", "red_wool"]), 0);
+test("speckleScore: measures fragmentation, not boundaries — clean 2-region ≈0, checkerboard high", () => {
+  // A 4×4×1 block split into two solid halves (left red, right blue). The shared edge must NOT be penalized.
+  const cells = [];
+  for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) cells.push([i, j, 0]);
+  const twoRegion = makeOcc([4, 4, 1], cells);
+  const halfKeys = cells.map(([i]) => (i < 2 ? "red_wool" : "blue_wool"));
+  assert.equal(speckleScore(twoRegion, halfKeys), 0, "a clean two-region block is not penalized for its edge");
+
+  // The SAME grid, checkerboarded → every cell is locally outvoted → near 1.
+  const checker = cells.map(([i, j]) => ((i + j) % 2 ? "red_wool" : "blue_wool"));
+  assert.ok(speckleScore(twoRegion, checker) > 0.9, "a checkerboard scores high");
+
+  // A single speck (3×3 red, blue center) → exactly one outvoted cell of nine.
+  const wall = [];
+  for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) wall.push([i, j, 0]);
+  const occ3 = makeOcc([3, 3, 1], wall);
+  const speckKeys = wall.map(([i, j]) => (i === 1 && j === 1 ? "blue_wool" : "red_wool"));
+  assert.ok(speckleScore(occ3, speckKeys) > 0, "a lone speck is counted");
+  assert.equal(speckleScore(occ3, speckKeys), 1 / 9, "exactly one of nine cells is a speck");
+
+  // Uniform field → 0; a lone cell (no neighbourhood) → 0.
+  assert.equal(speckleScore(occ3, wall.map(() => "red_wool")), 0, "uniform → 0");
   const one = makeOcc([1, 1, 1], [[0, 0, 0]]);
-  assert.equal(speckleScore(one, ["red_wool"]), 0);
+  assert.equal(speckleScore(one, ["red_wool"]), 0, "a lone cell has no neighbourhood");
 });
 
 // --- materialCleanVoxel: end-to-end on synthetic build (AC #2/#3) -----------
