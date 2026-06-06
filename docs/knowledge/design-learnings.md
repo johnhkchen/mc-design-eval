@@ -1510,3 +1510,58 @@ failure is killed.**
 gate cleared) and gives every future build a **concept↔render Δvalue gate**, while honestly showing the
 contract *confirms* the already-true, only *narrows* the organic, and trades pixel-accurate render reads
 for a segmentation-free placement proxy.
+
+## E-15 surgical form revision — the gap measured, the cage that won't fake it (S-047, T-047-01) · 2026-06-05
+
+E-14 closed the one E-13 miss that was *not* geometry (value drift). E-15 turns to geometry: the
+silhouettes that never match the concept — the koi's S-curve body that flattens to a straight one, the
+heart's aortic arch that never closes. The epic built a **surgical revision loop**: a form-fidelity metric
+(silhouette **IoU**, T-043-01) makes the gap a number; a region-lock + section-observe (T-044-01) frames
+one defect at a time; a deterministic **accept-gate** (T-045-01) keeps an edit only if it *raises* the
+metric, else rolls it back and **locks** the region; an **LLM block-editor** (T-046-01) proposes the
+freeform `add/remove/move/swap`. T-047-01 closes it with the **form-target seam**
+(`src/form/form-target.mjs`) the accept step consults — a concept/heuristic target *today*, a documented
+**GLB (image→3D) adapter point** for later — swappable with **no change** to observe/diagnose/accept.
+
+### Before/after — E-13 baseline whole-object IoU → after surgical revision
+
+| subject | E-13 IoU (before) | after | Δ | proposed (rolled-back) | kept? | verdict |
+|---|---:|---:|---:|---:|---|---|
+| **koi** (flattened S-curve) | 0.481 | 0.481 | 0.000 | 0.481 | ✗ rolled-back | **held** |
+| **heart** (open aortic arch) | 0.347 | 0.347 | 0.000 | **0.345** ⚠ | ✗ rolled-back | **held** |
+
+(`benchmarks/sculpture/form-revise-ab.{md,json}` — the measured loop trace — vs `form-baseline.json`, the
+T-043-01 "before." Verdict is categorical and deterministic, no model call: `improved | held | regressed`.)
+
+### The honest read (the headline)
+
+**Neither subject improved, and that is the result.** The koi's proposed edit left the whole silhouette
+unmoved; the heart's *regressed* it (0.347 → 0.345) and the accept-gate **rejected it** — the per-region
+signal fell (0.384 → 0.379), so the cage rolled it back and kept the original. The loop rolled back **2 of
+2** and changed no build. The proof the gate is real is that it **said no** to a regressing edit; a loop
+that "improves" everything is measuring nothing. The surgical cage measured the form gap and **declined to
+keep an edit it could not earn.**
+
+### Honest notes — where surgical revision *didn't* help, and what it cost
+
+- **The signal is whole-object, single-view — the ceiling.** The accept number is one 3/4 render's
+  silhouette IoU vs a **flat Nano-Banana concept**. A small in-region block edit barely moves a
+  *whole-object* outline, and a flat concept offers no honest **region-vs-region** target to hill-climb (a
+  true region IoU needs a 3-D→2-D projection of the target). This is exactly what the **GLB form-target
+  seam** exists to lift: a real 3-D target projects a per-region silhouette the loop can chase. The seam is
+  wired (`liveFormScore({ formTarget })` → `resolveFormTarget`); the GLB itself is deferred (E-09), and the
+  adapter point `glbFormTarget` throws with that note. **Swapping it in needs no loop change** — that is the
+  T-047-01 deliverable, proven by the demo consuming the seam and by `form-target.test.mjs`.
+- **It cost metered iterations for two rolled-back edits.** The LLM-edit route is a `claude -p` call per
+  region; here it bought two rejections. That is the honest price of proving the cage *rejects*, not a bug.
+- **IoU is necessary, not sufficient.** Two shapes can share an outline; silhouette IoU is the cheap form
+  number paired with the color gate, not a complete form judge (the T-043-01 caveat, carried).
+- **The cage's value is structural, not a leaderboard bump.** What E-15 ships is a *loop that cannot
+  regress a build* (accept-if-improved + region-lock + the target seam), plus the metric to know when a
+  future better target (GLB) finally moves these two. The number didn't move; the machinery that will move
+  it — honestly — is in place.
+
+**One sentence:** E-15 makes the form gap a number and wraps it in a cage that **keeps only edits that
+raise it** (koi/heart: 2-of-2 rolled back — the gate rejected a regressing heart edit), shipping the
+**form-target seam** (concept today, GLB-ready) as the forward lever while honestly showing that
+whole-object single-view IoU is too blunt for local edits to climb until that better target lands.
