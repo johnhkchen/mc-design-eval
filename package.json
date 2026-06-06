@@ -20,6 +20,7 @@
     "e19:build": "node benchmarks/sculpture/e19-build.mjs",
     "material:map": "node benchmarks/sculpture/material-map.mjs",
     "material:assign": "node benchmarks/sculpture/material-assign.mjs",
+    "material:correct": "node benchmarks/sculpture/material-correct.mjs",
     "build:block-table": "node scripts/build-block-table.mjs",
     "palette:extract": "node scripts/extract-palette.mjs",
     "grid:build": "node scripts/image-to-grid.mjs",

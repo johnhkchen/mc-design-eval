@@ -65,3 +65,7 @@ benchmarks/sculpture/secondary-palette/**/render-3q.png
 # E-21 feature-aware-assignment renders (T-072-01) — derived from the gitignored gatehouse GLB, regen via
 # `node benchmarks/sculpture/material-assign.mjs`. Durable record: material-assign/<subj>.json + artifact.json.
 benchmarks/sculpture/material-assign/**/render-3q.png
+
+# E-21 concept material-correction renders (T-073-01) — region crops + before/after, regen via
+# `node benchmarks/sculpture/material-correct.mjs`. Durable record: material-correct/<subj>.{json,md} + artifact.json.
+benchmarks/sculpture/material-correct/**/*.png

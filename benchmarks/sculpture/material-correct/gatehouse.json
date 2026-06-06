@@ -1,0 +1,188 @@
+{
+  "schema": "material-correct/v1",
+  "subject": "gatehouse",
+  "metric": "concept colour agreement (deterministic CIE76 cluster agreement vs the concept image)",
+  "generatedFrom": {
+    "inputArtifact": "material-assign/gatehouse/artifact.json",
+    "concept": "runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+    "materialMap": "material-map/gatehouse.json"
+  },
+  "allowedPalette": {
+    "mapPalette": [
+      "minecraft:stone_bricks",
+      "minecraft:cobblestone",
+      "minecraft:deepslate_tiles",
+      "minecraft:dark_oak_log",
+      "minecraft:dark_oak_planks"
+    ],
+    "secondary": []
+  },
+  "manifestBefore": [
+    "minecraft:cobblestone",
+    "minecraft:dark_oak_log",
+    "minecraft:dark_oak_planks",
+    "minecraft:deepslate_tiles",
+    "minecraft:stone_bricks"
+  ],
+  "manifestAfter": [
+    "minecraft:cobblestone",
+    "minecraft:dark_oak_log",
+    "minecraft:dark_oak_planks",
+    "minecraft:deepslate_tiles",
+    "minecraft:stone_bricks"
+  ],
+  "wholeObjectAgreementBefore": 0.6572657280031243,
+  "wholeObjectAgreementAfter": 0.6572657280031243,
+  "verdict": "held",
+  "keptCount": 0,
+  "rolledBackCount": 2,
+  "additions": [],
+  "perRegion": [
+    {
+      "index": 0,
+      "region": {
+        "min": [
+          -13,
+          16,
+          -13
+        ],
+        "max": [
+          13,
+          31,
+          13
+        ]
+      },
+      "defect": "roof/gable material zoning vs the concept",
+      "where": "the upper mass (roof slope + gable)",
+      "loopRoute": "material-correct",
+      "scoreBefore": 0.6388861230560554,
+      "scoreAfter": 0.6388861230560554,
+      "accepted": false,
+      "reason": "rolled-back"
+    },
+    {
+      "index": 1,
+      "region": {
+        "min": [
+          -13,
+          0,
+          -13
+        ],
+        "max": [
+          13,
+          15,
+          13
+        ]
+      },
+      "defect": "wall/corner/base material zoning vs the concept",
+      "where": "the lower mass (wall field, corner pilasters, plinth)",
+      "loopRoute": "material-correct",
+      "scoreBefore": 0.6721579768248278,
+      "scoreAfter": 0.6721579768248278,
+      "accepted": false,
+      "reason": "rolled-back"
+    }
+  ],
+  "p14": {
+    "ok": true,
+    "locked": [],
+    "acceptedCount": 0,
+    "violations": []
+  },
+  "proposals": [
+    {
+      "region": "-13,16,-13|13,31,13",
+      "proposedSwaps": 0,
+      "proposedAdditions": 0,
+      "appliedSwaps": 0,
+      "acceptedAdditions": 0,
+      "rejected": [],
+      "stashed": false
+    },
+    {
+      "region": "-13,0,-13|13,15,13",
+      "proposedSwaps": 0,
+      "proposedAdditions": 0,
+      "appliedSwaps": 0,
+      "acceptedAdditions": 0,
+      "rejected": [],
+      "stashed": false
+    }
+  ],
+  "trace": [
+    {
+      "iteration": 1,
+      "region": {
+        "bbox": {
+          "min": [
+            -13,
+            16,
+            -13
+          ],
+          "max": [
+            13,
+            31,
+            13
+          ]
+        }
+      },
+      "subBounds": {
+        "min": [
+          -13,
+          16,
+          -13
+        ],
+        "max": [
+          13,
+          31,
+          13
+        ]
+      },
+      "defect": "roof/gable material zoning vs the concept",
+      "where": "the upper mass (roof slope + gable)",
+      "route": "material-correct",
+      "tweak": "noop",
+      "scoreBefore": 0.6388861230560554,
+      "scoreAfter": 0.6388861230560554,
+      "accepted": false,
+      "reason": "rolled-back"
+    },
+    {
+      "iteration": 2,
+      "region": {
+        "bbox": {
+          "min": [
+            -13,
+            0,
+            -13
+          ],
+          "max": [
+            13,
+            15,
+            13
+          ]
+        }
+      },
+      "subBounds": {
+        "min": [
+          -13,
+          0,
+          -13
+        ],
+        "max": [
+          13,
+          15,
+          13
+        ]
+      },
+      "defect": "wall/corner/base material zoning vs the concept",
+      "where": "the lower mass (wall field, corner pilasters, plinth)",
+      "route": "material-correct",
+      "tweak": "noop",
+      "scoreBefore": 0.6721579768248278,
+      "scoreAfter": 0.6721579768248278,
+      "accepted": false,
+      "reason": "rolled-back"
+    }
+  ]
+}
