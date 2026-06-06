@@ -11,9 +11,10 @@ import { mkdirSync, writeFileSync } from 'node:fs'
 import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { Vec3 } from 'vec3'
-import { createHeadlessCanvas, GL_AVAILABLE, GL_LOAD_ERROR } from './headless-canvas.mjs'
+import { createHeadlessCanvas, readCanvasRgba, encodeRgbaToPng, GL_AVAILABLE, GL_LOAD_ERROR } from './headless-canvas.mjs'
 import { MINECRAFT_VERSION } from './version.mjs'
 import { framedCamera, viewDistanceFor, DEFAULT_VIEW } from './camera.mjs'
+import { boxDownscale } from '../../src/render-supersample.mjs'
 
 export { GL_AVAILABLE, GL_LOAD_ERROR }
 
@@ -29,7 +30,15 @@ export const DEFAULTS = {
   height: 512,
   viewDistance: 4,
   fov: 75,
-  cameraOffset: new Vec3(7, 8, 7) // fixed isometric-ish vantage, relative to center
+  cameraOffset: new Vec3(7, 8, 7), // fixed isometric-ish vantage, relative to center
+  // Supersampling factor (SSAA) — render internally at N× the contract size, then box-average
+  // back down (T-075-01). FIXED at 3 for every build (comparability, E-02): at the high-res
+  // building scales (~6 px/block at 512²) a 16px texture is minified and the viewer's
+  // point-sampled atlas (NearestFilter, no mipmaps) turns it into grey static. At N=3 the
+  // internal 1536² raster draws each block at ~18 px ≥ the 16px texture (no GL minification),
+  // and the pure box-downscale resolves it to a clean, stable 512². The output contract stays
+  // 512²; supersampling is internal. N=1 keeps the legacy point-sampled path.
+  supersample: 3
 }
 
 /**
@@ -71,9 +80,17 @@ export async function renderWorldToPng (world, center, opts = {}) {
   const THREE = globalThis.THREE
   const { Viewer, WorldView, getBufferFromStream } = require('prismarine-viewer').viewer
 
-  const canvas = createHeadlessCanvas(o.width, o.height)
+  // Supersample: render into an N×-larger framebuffer, then box-average to the 512² contract
+  // (T-075-01). The contract output size (o.width × o.height) is unchanged; only the internal
+  // raster grows. Aspect ratio is preserved, so the camera/framing math below is untouched →
+  // renders stay comparable (E-02).
+  const ss = Math.max(1, Math.round(o.supersample || 1))
+  const ssW = o.width * ss
+  const ssH = o.height * ss
+
+  const canvas = createHeadlessCanvas(ssW, ssH)
   const renderer = new THREE.WebGLRenderer({ canvas })
-  renderer.setSize(o.width, o.height, false)
+  renderer.setSize(ssW, ssH, false)
 
   const viewer = new Viewer(renderer)
   if (!viewer.setVersion(MINECRAFT_VERSION)) {
@@ -108,7 +125,17 @@ export async function renderWorldToPng (world, center, opts = {}) {
   viewer.update()
   renderer.render(viewer.scene, viewer.camera)
 
-  const buffer = await getBufferFromStream(canvas.createPNGStream())
+  // Resolve the supersampled raster to the 512² contract. ss>1: read the rendered RGBA off the
+  // (large) canvas and box-average it down — the averaging is what kills the minification static
+  // (the pure math lives in src/render-supersample.mjs). ss===1: the unchanged legacy path.
+  let buffer
+  if (ss > 1) {
+    const { data } = readCanvasRgba(canvas)
+    const small = boxDownscale(data, ssW, ssH, o.width, o.height)
+    buffer = encodeRgbaToPng(small, o.width, o.height)
+  } else {
+    buffer = await getBufferFromStream(canvas.createPNGStream())
+  }
 
   // prismarine-viewer spawns mesh worker threads that keep the event loop alive.
   // Terminate them and drop the GL context so a single call leaves nothing running —

@@ -151,3 +151,38 @@ try {
 export function createHeadlessCanvas (width, height) {
   return new HeadlessCanvas(width, height)
 }
+
+// --- Supersampling support (T-075-01) ---------------------------------------------
+// The two seams the SSAA render lens needs, kept here because this is the ONLY file
+// that knows the node-canvas/GL surface trick (Design decision 3): read the rendered
+// pixels OUT of a (supersampled) canvas, and encode a downscaled RGBA buffer back to a
+// PNG. The averaging itself lives in the pure, GL-free src/render-supersample.mjs.
+
+/**
+ * Read the rendered RGBA8 pixels off a HeadlessCanvas. Forces the GL→2D blit via the
+ * `__synced2d__` getter, which already flips GL's bottom-left origin to top-left, so the
+ * returned buffer is in the same orientation as the PNG encoders.
+ * @param {HeadlessCanvas} canvas
+ * @returns {{ data: Uint8ClampedArray, width: number, height: number }}
+ */
+export function readCanvasRgba (canvas) {
+  const ctx = canvas.__synced2d__
+  const { width, height } = canvas
+  return { data: ctx.getImageData(0, 0, width, height).data, width, height }
+}
+
+/**
+ * Encode an RGBA8 buffer to a PNG Buffer at the given size (node-canvas, synchronous).
+ * Used to emit the box-downscaled 512² image after a supersampled render.
+ * @param {Uint8ClampedArray|Uint8Array} rgba length width*height*4
+ * @param {number} width @param {number} height
+ * @returns {Buffer}
+ */
+export function encodeRgbaToPng (rgba, width, height) {
+  const c = new Canvas(width, height)
+  const ctx = c.getContext('2d')
+  const img = ctx.createImageData(width, height)
+  img.data.set(rgba)
+  ctx.putImageData(img, 0, 0)
+  return c.toBuffer('image/png')
+}
