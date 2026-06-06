@@ -1565,3 +1565,76 @@ keep an edit it could not earn.**
 raise it** (koi/heart: 2-of-2 rolled back — the gate rejected a regressing heart edit), shipping the
 **form-target seam** (concept today, GLB-ready) as the forward lever while honestly showing that
 whole-object single-view IoU is too blunt for local edits to climb until that better target lands.
+
+## E-16 GLB-grounded form — image→3D, grounded then refined (S-053, T-053-01 — synthesis, NOT a trial) · 2026-06-05
+
+Terminal E-16 section: not a trial, a **consolidation** (the analog of E-14's T-042-01 and E-15's
+T-047-01). E-15 left the form gap measured against a **flat Nano-Banana concept** and concluded the
+whole-object single-view IoU was too blunt for local edits to climb *until a better (3-D) target lands*.
+E-16 lands it: a real **TRELLIS GLB** (image→3D, `glb/{koi,heart}.glb`) becomes the target, and the epic
+asks three measured questions — answered here head-to-head, residual shown not hidden
+(`benchmarks/sculpture/glb-grounded-ab.{md,json}`, a pure offline consolidator over the three arms'
+committed records — no re-measurement).
+
+### The three-way — whole-object IoU vs the GLB target (E-13 concept as cross-ref)
+
+The comparability spine is **silhouette IoU vs the GLB** (the only axis all three arms share): text→JSON
+is the un-edited E-13 build scored against the GLB; GLB-voxel is the voxel build's own `silhouetteIoU`;
+surgical is the post-loop whole-object IoU. vs-concept is carried only where it was measured (text→JSON).
+
+| subject | method | IoU vs GLB | IoU vs concept | Δ vs text→JSON | categorical |
+|---|---|---:|---:|---:|---|
+| **koi** | text→JSON (E-13) | 0.472 | 0.481 | — | poor |
+|  | GLB-voxel (T-051-01) | 0.622 | — | **+0.150** | fair |
+|  | GLB-voxel + surgical (T-052-01) | 0.614 | — | +0.142 | fair (regressed) |
+| **heart** | text→JSON (E-13) | 0.456 | 0.347 | — | poor |
+|  | GLB-voxel (T-051-01) | 0.877 | — | **+0.421** | strong |
+|  | GLB-voxel + surgical (T-052-01) | 0.877 | — | +0.421 | strong (held) |
+
+(Bands are an IoU reading aid: poor < 0.50 · fair < 0.70 · good < 0.85 · strong ≥ 0.85; surgical rows
+append the deterministic loop verdict. **No fresh LLM perceptual judge was re-run** — consistent with the
+E-15 consolidation; the categorical is the IoU band + the loop's `improved|held|regressed`.)
+
+### The three answers (the headline)
+
+1. **Did the 3-D target move the E-15 loop on text→JSON builds? — Partly, 1 of 2.** With `glbFormTarget`
+   swapped for the flat `conceptFormTarget` and *nothing else changed* (the seam invariant T-047-01
+   promised), the **heart improved** (0.456→0.462 vs GLB, the edit cleared the gate and was kept) while
+   the **koi held** (0.472→0.472, rolled back). E-15's flat concept moved **0 of 2** and *rejected* a
+   regressing heart edit; the 3-D target is what gave the heart a per-region signal worth keeping. **The
+   better target moved the loop where the flat one could not — on 1 of 2.**
+2. **Did voxelization beat text→JSON on form? — Yes, decisively.** Against the same GLB: koi
+   **0.472→0.622 (+0.150)**, heart **0.456→0.877 (+0.421)**. Voxelizing the image→3D mesh is a far larger
+   form win than any surgical edit on a text→JSON build. This is the epic's real payload: the path to good
+   *form* is **grounding the geometry in a 3-D reconstruction**, not editing a text-authored build.
+3. **Did surgical tweaks add capability on the voxel set, and at what cost? — No net whole-object gain.**
+   The koi cleaned one region locally (the chunky caudal fin, region IoU 0.513→0.528, *accepted*) but the
+   whole-object silhouette **regressed** (0.622→0.614 — the local clean did not transfer); the heart
+   **rolled back both** regions (held 0.877). Cost: one `claude -p` LLM-edit call per `curve` region (koi
+   1 kept / 1 rolled, heart 0 / 2). **Once voxelization captures the form, local single-view surgical
+   edits have little headroom and can slightly hurt the whole-object outline** — the E-15 single-view
+   ceiling persists even with a 3-D target *and* a voxel base.
+
+### Honest notes — where grounding *didn't* help, and what it cost
+
+- **Voxelization is not perfect form.** koi 0.622 is only *fair* — a thin caudal fin voxelizes into a
+  chunky stack; the metric is a single 3/4 view; rotation/axis is **not** corrected and translation+uniform
+  scale are normalized out. heart 0.877 is *strong* but still < 1. The win is large and real, not total.
+- **The surgical layer is a wash on an already-grounded build.** The E-15 cage still earns its keep — it
+  **refused** every edit that didn't raise the per-region signal and **rolled back the koi's whole-object
+  regression candidates** (P14 held: accepted regions lock, non-improving tweaks roll back). But on a base
+  that already scores 0.622–0.877, the headroom for a local single-view edit is small, and the one
+  *accepted* per-region clean (koi fin) did **not** transfer to the whole silhouette. That divergence is
+  not a gate bug; it is the honest limit of per-region single-view IoU as a hill-climb signal.
+- **It cost metered model calls for little form movement.** The two surgical arms spent `claude -p`
+  LLM-edit calls per `curve` region and bought one kept local edit (koi) that the whole object didn't
+  reward, plus three rollbacks. The cheap, decisive lever was **Arm B (voxelization)**, which needs no
+  per-region model loop at all (koi 12.6s, heart 20.5s of deterministic voxelize+color).
+- **No perceptual judge was re-run.** A consolidation should not manufacture new model evidence; the
+  categorical is the deterministic verdict + the IoU band. A perceptual head-to-head would be a new trial.
+
+**One sentence:** E-16 grounds the form loop in a real image→3D GLB and measures the honest answer —
+**voxelizing the mesh is the decisive form win** (koi +0.150, heart +0.421 vs text→JSON), a **3-D target
+moves the surgical loop where the flat concept couldn't** (1 of 2), and **surgical refinement on the
+already-grounded voxel set adds no net whole-object gain** (koi regressed, heart held) — the path to form
+is grounding the geometry, not editing the text→JSON build, and the cage that won't fake it still holds.
