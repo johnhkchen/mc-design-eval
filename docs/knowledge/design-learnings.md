@@ -1923,3 +1923,60 @@ watches the turntable. The build is genuinely in the round; the facade era is ov
 structure with a real back and roof (the first `spin-*` that proves it), and the leap is *completeness*, with
 the honest residual that fine detail still tops out at **weak as-rendered** — confounded by the 512² render lens
 (E-22) on top of the genuine ceilings of a 1M-context surgical editor and a detail-lossy TRELLIS target.
+
+## Faithful render + resemblance gate (E-22) — the lens was broken, the green metric measured nothing (S-075/076/077, T-075…077-01) · 2026-06-06
+
+This is a **measurement-methodology** learning, not a per-build score. E-22 found that the thing we were
+judging was partly an artifact of *how we photographed*, and that the proxy metric we signed off on never
+measured the actual goal. It fixes both and re-photographs the headline builds honestly.
+
+**Root cause — clean build, broken lens.** The scale-64 gatehouse rendered as grey *static* on the roof, and
+the proxy metrics blamed the build (a "speckle" / material-noise reading). It was **texture-minification
+aliasing**: at scale 64 the build's surface samples far more texel-detail than 512² can hold, so point-sampling
+the oversized raster down to 512² produced salt-and-pepper noise — *the lens, not the blocks*. The block-level
+palette metrics read **clean** the whole time because the build genuinely is clean; the noise was injected at
+the final downscale. Memory: `[[render-aliasing-not-material-speckle]]`. The lesson — **a proxy that scores the
+artifact but not the photograph of it will defend a broken lens forever.**
+
+**The fix — SSAA ×3 (T-075-01).** Render into an N×-larger framebuffer (1536² at N=3) and **box-average** down
+to the fixed 512² contract (`render/src/render.mjs` `DEFAULTS.supersample=3`; pure math in
+`src/render-supersample.mjs`). Quantified on the *same, byte-identical* scale-64 gatehouse artifact: high-freq
+energy **690.9 → 197.5, −71.4%**. The before/after (`pr/assets/gatehouse-lens-{before,after}.png`, fresh renders
+via `supersample:1` vs `:3`) is the proof: the roof goes from static to clean grey planes with the build
+untouched. **No build was shrunk or edited to make this happen** (Rule 3) — only the camera's resolve changed.
+
+**The gate that replaced green-metric sign-off (T-076-01).** The old metrics (form-IoU thresholds, value-ΔE,
+speckle) read *perfect on the static* — they answered "is the artifact internally clean?", never "does the build
+**look like** its references?". E-22 replaces sign-off-by-number with a **reference-anchored resemblance gate**:
+a **triptych** `concept | mesh | minecraft` rendered through one shared lens (the verdict a human inspects —
+Rule 2), a **categorical judge** that rules `same object | drifted | different object` and **names exactly one
+gap** (region + attribute — Rule 7), with the perceptual numbers demoted to *diagnostics that explain* the
+verdict. References (concept image + GLB) are **immutable inputs** (Rule 1); the prompt + thresholds are **frozen**
+(Rule 5). The pure scorer/judge-parser/aggregator are unit-tested; the GL render + metered judge are verified by
+a live run, never by the suite.
+
+**What re-photographing changed about prior verdicts (honest, including worse — T-077-01).** Four headline
+builds, fixed lens, metered judge:
+
+| subject | verdict | named residual gap | meshIoU | note |
+| ------- | ------- | ------------------ | ------- | ---- |
+| gatehouse | `drifted` | form @ upper roof / gable | 0.929 | the static cleared, but a **real** form gap remained — the roof reads chunky vs the concept's clean gable. The aliasing was hiding a true drift; clearing the lens did **not** flip it to "same object". |
+| cottage | `drifted` | **material zoning** @ upper-story walls → **E-21** | 0.929 | bulk form faithful; the material *placement* drifts — a material-identity finding, routed, **not edited here**. |
+| moai | `different object` | form @ overall body (connected masses + horizontal rails) | **0.417** | the honest **worse** result. The e19 moai form genuinely collapsed (low meshIoU, fused masses) — a verdict the green metrics never surfaced. Reported, not suppressed. |
+| pineapple | `drifted` | **palette** @ fruit body → **E-21** | 0.908 | strong organic form (cross-hatch recovers); the *palette* drifts — routed to E-21. |
+
+Tally: **3 drifted / 1 different object**, **2 material-drift findings routed to E-21** (cottage zoning,
+pineapple palette), **2 form gaps not routed** (E-22 does not edit form — a form gap is the honest build
+verdict, owned by the build pipeline). **The fixed lens made nothing look better than it is** — the gatehouse
+static cleared but its form drift stayed, and the moai got an *honest worse* verdict the proxy had masked.
+
+**The routing rule (E-22 charter).** E-22 **photographs + judges**; it does **not** edit form or materials
+(Rule 3). A gap on a **material axis** (`palette` / `material zoning`) is a **finding routed to E-21**
+(`docs/active/work/T-077-01/e21-material-findings.md`); a `form`/`massing` gap is reported as a residual but
+**not** routed (it is the build's honest verdict, not a material-identity defect). Encoded once in the pure
+`consolidateResemblance` (`src/form/resemblance.mjs`), unit-tested both ways.
+
+**One sentence:** E-22 proves the grey static was the *lens* not the build (−71.4% HF energy on an untouched
+artifact via SSAA ×3), retires green-metric sign-off for a reference-anchored **triptych + categorical-verdict +
+named-gap** gate, and re-photographs the four headline builds honestly — 3 drifted / 1 different object, two
+material gaps routed to E-21, with the moai's *worse* verdict kept rather than hidden (Rule 7).
