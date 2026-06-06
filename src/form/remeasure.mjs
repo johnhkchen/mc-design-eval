@@ -145,8 +145,10 @@ export function assembleRemeasure(rows, opts = {}) {
 
   const notes = {
     valueDeltaETautology: valueTautology
-      ? "value ΔE is ~0 for R2 and E18 by construction (both snap to the GLB's own texture palette); the " +
-        "E18-vs-R2 value-ΔE delta carries no signal — speckle / distinct / off-palette discriminate."
+      ? "R2 snaps to the GLB's own texture palette (the value-ΔE reference), so its value ΔE is ~0 by " +
+        "construction — a 0 there carries no signal. E18 uses a TIGHTER fixed palette (k=6), so its value " +
+        "ΔE can be nonzero: a small, real cost of palette discipline, not a tautology. Speckle / distinct " +
+        "/ off-palette carry the primary discrimination."
       : null,
   };
 

@@ -1,0 +1,31 @@
+{
+  "subject": "koi",
+  "r1": {
+    "formIoU": 0.622,
+    "speckle": 0.723,
+    "distinct": 71,
+    "offPalette": 1646,
+    "valueDeltaE": 7.87
+  },
+  "r2": {
+    "formIoU": 0.623,
+    "speckle": 0.35,
+    "distinct": 8,
+    "offPalette": 586,
+    "valueDeltaE": 0
+  },
+  "e18": {
+    "formIoU": 0.706,
+    "speckle": 0.17,
+    "distinct": 6,
+    "offPalette": 0,
+    "valueDeltaE": 0
+  },
+  "thin": {
+    "components": 1,
+    "surfaceOnlyCount": 991,
+    "occBase": 2164,
+    "occThin": 3155
+  },
+  "scale": 32
+}

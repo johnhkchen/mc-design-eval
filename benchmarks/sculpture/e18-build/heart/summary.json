@@ -1,0 +1,31 @@
+{
+  "subject": "heart",
+  "r1": {
+    "formIoU": 0.877,
+    "speckle": 0.692,
+    "distinct": 91,
+    "offPalette": 4063,
+    "valueDeltaE": 5.91
+  },
+  "r2": {
+    "formIoU": 0.877,
+    "speckle": 0.343,
+    "distinct": 7,
+    "offPalette": 2831,
+    "valueDeltaE": 0
+  },
+  "e18": {
+    "formIoU": 0.895,
+    "speckle": 0.1,
+    "distinct": 6,
+    "offPalette": 0,
+    "valueDeltaE": 3.41
+  },
+  "thin": {
+    "components": 1,
+    "surfaceOnlyCount": 2142,
+    "occBase": 5840,
+    "occThin": 7982
+  },
+  "scale": 32
+}

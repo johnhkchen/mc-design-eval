@@ -1,0 +1,31 @@
+{
+  "subject": "pineapple",
+  "r1": {
+    "formIoU": 0.907,
+    "speckle": 0.549,
+    "distinct": 24,
+    "offPalette": 2272,
+    "valueDeltaE": 4.38
+  },
+  "r2": {
+    "formIoU": 0.907,
+    "speckle": 0.25,
+    "distinct": 5,
+    "offPalette": 2003,
+    "valueDeltaE": 0
+  },
+  "e18": {
+    "formIoU": 0.845,
+    "speckle": 0.109,
+    "distinct": 4,
+    "offPalette": 0,
+    "valueDeltaE": 4.73
+  },
+  "thin": {
+    "components": 1,
+    "surfaceOnlyCount": 1458,
+    "occBase": 3397,
+    "occThin": 4855
+  },
+  "scale": 32
+}

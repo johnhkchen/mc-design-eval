@@ -1,0 +1,31 @@
+{
+  "subject": "dancing-man",
+  "r1": {
+    "formIoU": 0.914,
+    "speckle": 0.528,
+    "distinct": 18,
+    "offPalette": 366,
+    "valueDeltaE": 2.1
+  },
+  "r2": {
+    "formIoU": 0.914,
+    "speckle": 0.275,
+    "distinct": 5,
+    "offPalette": 319,
+    "valueDeltaE": 0
+  },
+  "e18": {
+    "formIoU": 0.814,
+    "speckle": 0.15,
+    "distinct": 5,
+    "offPalette": 0,
+    "valueDeltaE": 0
+  },
+  "thin": {
+    "components": 1,
+    "surfaceOnlyCount": 531,
+    "occBase": 973,
+    "occThin": 1504
+  },
+  "scale": 32
+}

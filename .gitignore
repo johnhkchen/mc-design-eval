@@ -53,3 +53,7 @@ benchmarks/sculpture/glb-voxel-thin/**/render-*.png
 # Material-region segmentation renders (T-058-01, E-18) — derived, regen via
 # `node benchmarks/sculpture/glb-voxel-seg.mjs`. Durable record: seg.{md,json} + per-subject summaries.
 benchmarks/sculpture/glb-voxel-seg/**/render-3q.png
+
+# E-18 combined remeasure renders (T-060-01) — derived, regen via
+# `node benchmarks/sculpture/e18-remeasure.mjs`. Durable record: e18-remeasure.{md,json} + per-subject summaries.
+benchmarks/sculpture/e18-build/**/render-3q.png

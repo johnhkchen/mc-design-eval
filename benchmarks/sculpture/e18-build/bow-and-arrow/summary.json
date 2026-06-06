@@ -1,0 +1,31 @@
+{
+  "subject": "bow-and-arrow",
+  "r1": {
+    "formIoU": 0.473,
+    "speckle": 0.706,
+    "distinct": 34,
+    "offPalette": 365,
+    "valueDeltaE": 3.8
+  },
+  "r2": {
+    "formIoU": 0.473,
+    "speckle": 0.366,
+    "distinct": 8,
+    "offPalette": 164,
+    "valueDeltaE": 0
+  },
+  "e18": {
+    "formIoU": 0.526,
+    "speckle": 0.053,
+    "distinct": 5,
+    "offPalette": 0,
+    "valueDeltaE": 0
+  },
+  "thin": {
+    "components": 1,
+    "surfaceOnlyCount": 697,
+    "occBase": 513,
+    "occThin": 1210
+  },
+  "scale": 32
+}

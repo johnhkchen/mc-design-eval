@@ -1,0 +1,31 @@
+{
+  "subject": "moai",
+  "r1": {
+    "formIoU": 0.565,
+    "speckle": 0.643,
+    "distinct": 43,
+    "offPalette": 853,
+    "valueDeltaE": 1.22
+  },
+  "r2": {
+    "formIoU": 0.565,
+    "speckle": 0.248,
+    "distinct": 5,
+    "offPalette": 0,
+    "valueDeltaE": 0
+  },
+  "e18": {
+    "formIoU": 0.593,
+    "speckle": 0.159,
+    "distinct": 5,
+    "offPalette": 0,
+    "valueDeltaE": 0
+  },
+  "thin": {
+    "components": 3,
+    "surfaceOnlyCount": 1844,
+    "occBase": 4215,
+    "occThin": 6059
+  },
+  "scale": 32
+}
