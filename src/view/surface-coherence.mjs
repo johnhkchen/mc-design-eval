@@ -278,8 +278,9 @@ export function sealWalls(occ, { fieldMaterial } = {}) {
 
 /** Keys of the ENCLOSED MASS — voxels with all six orthogonal neighbours occupied (the carveable bulk a
  *  hollow would remove). Mirrors `hollowable-mass.hollowableCore`'s rule, but returns the KEYS so the
- *  watertight flood can treat them as the simulated cavity. PURE. */
-function enclosedMassKeys(occ) {
+ *  watertight flood can treat them as the simulated cavity. Exported as the SINGLE enclosed-mass definition
+ *  the T-080-01 carve (`hollow-carve.mjs`) reuses — one rule, no third copy. PURE. */
+export function enclosedMassKeys(occ) {
   const keys = new Set();
   for (const key of occ.cells.keys()) {
     const [x, y, z] = key.split(",").map(Number);

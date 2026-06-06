@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 import { occupancyFromCells } from "./occupancy.mjs";
 import {
   sealRoof, sealWallFace, sealWalls, watertightCheck, applyDeltas, overlay, roofOutlineCoverage,
+  enclosedMassKeys,
 } from "./surface-coherence.mjs";
 
 /** Solid box [0..sx-1]×[0..sy-1]×[0..sz-1] of one block. */
@@ -252,6 +253,19 @@ test("applyDeltas appends placements without mutating the source artifact", () =
 // ----------------------------------------------------------------------------------------------------
 // Purity / source guard — the pure invariant cannot regress (mirrors T-082-01)
 // ----------------------------------------------------------------------------------------------------
+
+test("enclosedMassKeys: the all-6-neighbours set (the shared carve definition)", () => {
+  // 3×3×3 solid box: only the centre (1,1,1) has all six neighbours occupied.
+  const box3 = [];
+  for (let x = 0; x < 3; x++) for (let y = 0; y < 3; y++) for (let z = 0; z < 3; z++) box3.push({ pos: [x, y, z], block: "minecraft:stone" });
+  const keys3 = enclosedMassKeys(occupancyFromCells(box3));
+  assert.equal(keys3.size, 1);
+  assert.ok(keys3.has("1,1,1"));
+  // 2×2×2 box: no cell has all six neighbours → empty.
+  const box2 = [];
+  for (let x = 0; x < 2; x++) for (let y = 0; y < 2; y++) for (let z = 0; z < 2; z++) box2.push({ pos: [x, y, z], block: "minecraft:stone" });
+  assert.equal(enclosedMassKeys(occupancyFromCells(box2)).size, 0);
+});
 
 test("source guard: the ops module imports no model / GL / API key", () => {
   const src = readFileSync(fileURLToPath(new URL("./surface-coherence.mjs", import.meta.url)), "utf8");
