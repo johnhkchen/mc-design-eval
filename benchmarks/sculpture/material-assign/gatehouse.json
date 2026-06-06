@@ -1,0 +1,81 @@
+{
+  "schema": "material-assign/v1",
+  "subject": "gatehouse",
+  "scale": 32,
+  "generatedFrom": {
+    "glb": "glb/stone-gatehouse.glb",
+    "materialMap": "material-map/gatehouse.json"
+  },
+  "cells": 8076,
+  "features": {
+    "flat-face": 5431,
+    "edge-corner": 880,
+    "top-roof": 1083,
+    "base": 275,
+    "opening-recess": 407
+  },
+  "manifest": [
+    "minecraft:cobblestone",
+    "minecraft:dark_oak_log",
+    "minecraft:dark_oak_planks",
+    "minecraft:deepslate_tiles",
+    "minecraft:stone_bricks"
+  ],
+  "blocksByRule": {
+    "walls": "minecraft:stone_bricks",
+    "corners-edges": "minecraft:cobblestone",
+    "roof": "minecraft:deepslate_tiles",
+    "trim": "minecraft:dark_oak_log",
+    "openings": "minecraft:dark_oak_planks"
+  },
+  "unplacedRules": [
+    {
+      "block": "minecraft:dark_oak_log",
+      "rule": "trim"
+    }
+  ],
+  "matrix": {
+    "deepslate_tiles": {
+      "flat-face": 0,
+      "edge-corner": 0,
+      "top-roof": 1083,
+      "base": 128,
+      "opening-recess": 0
+    },
+    "stone_bricks": {
+      "flat-face": 5431,
+      "edge-corner": 0,
+      "top-roof": 0,
+      "base": 131,
+      "opening-recess": 0
+    },
+    "cobblestone": {
+      "flat-face": 0,
+      "edge-corner": 880,
+      "top-roof": 0,
+      "base": 8,
+      "opening-recess": 0
+    },
+    "dark_oak_planks": {
+      "flat-face": 0,
+      "edge-corner": 0,
+      "top-roof": 0,
+      "base": 0,
+      "opening-recess": 407
+    },
+    "dark_oak_log": {
+      "flat-face": 0,
+      "edge-corner": 0,
+      "top-roof": 0,
+      "base": 8,
+      "opening-recess": 0
+    }
+  },
+  "wallsBlock": "stone_bricks",
+  "cornerBlock": "cobblestone",
+  "wallsPresent": true,
+  "cornerPresent": true,
+  "wallsOnFaces": true,
+  "cornerOnEdges": true,
+  "brickNotCobbleByFeature": true
+}
