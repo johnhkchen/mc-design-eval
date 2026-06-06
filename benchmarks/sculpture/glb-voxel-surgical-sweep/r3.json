@@ -1,0 +1,653 @@
+{
+  "schema": "glb-voxel-r3/v1",
+  "rung": "R3",
+  "method": "glb-voxel.v1",
+  "view": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "scale": 32,
+  "metric": "whole-object silhouette IoU vs the GLB at SCULPTURE_VIEW_3Q (verdict signal); the loop's per-region accept-gate is the TRUE per-region GLB IoU (scoreBefore/After). verdict = GLB-after vs GLB-before.",
+  "generatedFrom": "benchmarks/sculpture/glb-voxel-clean/<subject>/artifact.json (R2) + benchmarks/sculpture/glb/<subject>.glb",
+  "note": "E-17 rung R3: the E-15 surgical reviseLoop on the R2 cleaned builds, form target = the build's own GLB. Regions are generic horizontal slabs (autoRegions); routing is the default model-free procedural pass (no claude -p). P14: accepted regions lock; non-improving tweaks roll back (confirmed from the loop's own locked+trace). Expected near-null — a single-view per-region accept-gate rarely lifts the whole-object silhouette of an already-close GLB-voxel build. Sword excluded (no GLB).",
+  "subjects": [
+    {
+      "subject": "dancing-man",
+      "scale": 32,
+      "regions": 3,
+      "formIoUR2": 0.914,
+      "wholeObjectIoUBefore": 0.914,
+      "wholeObjectIoUAfter": 0.914,
+      "verdict": "held",
+      "changed": false,
+      "kept": 0,
+      "rolledBack": 0,
+      "p14": {
+        "ok": true,
+        "locked": 0,
+        "acceptedCount": 0,
+        "violations": []
+      },
+      "iterations": 0,
+      "converged": true,
+      "perRegion": [
+        {
+          "index": 0,
+          "region": {
+            "min": [
+              -7,
+              0,
+              -10
+            ],
+            "max": [
+              6,
+              9,
+              9
+            ]
+          },
+          "route": null,
+          "tweak": null,
+          "scoreBefore": null,
+          "scoreAfter": null,
+          "accepted": false,
+          "reason": "clean"
+        },
+        {
+          "index": 1,
+          "region": {
+            "min": [
+              -7,
+              10,
+              -10
+            ],
+            "max": [
+              6,
+              20,
+              9
+            ]
+          },
+          "route": null,
+          "tweak": null,
+          "scoreBefore": null,
+          "scoreAfter": null,
+          "accepted": false,
+          "reason": "clean"
+        },
+        {
+          "index": 2,
+          "region": {
+            "min": [
+              -7,
+              21,
+              -10
+            ],
+            "max": [
+              6,
+              31,
+              9
+            ]
+          },
+          "route": null,
+          "tweak": null,
+          "scoreBefore": null,
+          "scoreAfter": null,
+          "accepted": false,
+          "reason": "clean"
+        }
+      ],
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 0.7
+    },
+    {
+      "subject": "moai",
+      "scale": 32,
+      "regions": 3,
+      "formIoUR2": 0.565,
+      "wholeObjectIoUBefore": 0.565,
+      "wholeObjectIoUAfter": 0.565,
+      "verdict": "held",
+      "changed": false,
+      "kept": 0,
+      "rolledBack": 0,
+      "p14": {
+        "ok": true,
+        "locked": 0,
+        "acceptedCount": 0,
+        "violations": []
+      },
+      "iterations": 0,
+      "converged": true,
+      "perRegion": [
+        {
+          "index": 0,
+          "region": {
+            "min": [
+              -16,
+              0,
+              -16
+            ],
+            "max": [
+              15,
+              6,
+              15
+            ]
+          },
+          "route": null,
+          "tweak": null,
+          "scoreBefore": null,
+          "scoreAfter": null,
+          "accepted": false,
+          "reason": "clean"
+        },
+        {
+          "index": 1,
+          "region": {
+            "min": [
+              -16,
+              7,
+              -16
+            ],
+            "max": [
+              15,
+              13,
+              15
+            ]
+          },
+          "route": null,
+          "tweak": null,
+          "scoreBefore": null,
+          "scoreAfter": null,
+          "accepted": false,
+          "reason": "clean"
+        },
+        {
+          "index": 2,
+          "region": {
+            "min": [
+              -16,
+              14,
+              -16
+            ],
+            "max": [
+              15,
+              21,
+              15
+            ]
+          },
+          "route": null,
+          "tweak": null,
+          "scoreBefore": null,
+          "scoreAfter": null,
+          "accepted": false,
+          "reason": "clean"
+        }
+      ],
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 0.5
+    },
+    {
+      "subject": "pineapple",
+      "scale": 32,
+      "regions": 3,
+      "formIoUR2": 0.907,
+      "wholeObjectIoUBefore": 0.907,
+      "wholeObjectIoUAfter": 0.907,
+      "verdict": "held",
+      "changed": false,
+      "kept": 0,
+      "rolledBack": 0,
+      "p14": {
+        "ok": true,
+        "locked": 0,
+        "acceptedCount": 0,
+        "violations": []
+      },
+      "iterations": 0,
+      "converged": true,
+      "perRegion": [
+        {
+          "index": 0,
+          "region": {
+            "min": [
+              -9,
+              0,
+              -8
+            ],
+            "max": [
+              9,
+              9,
+              9
+            ]
+          },
+          "route": null,
+          "tweak": null,
+          "scoreBefore": null,
+          "scoreAfter": null,
+          "accepted": false,
+          "reason": "clean"
+        },
+        {
+          "index": 1,
+          "region": {
+            "min": [
+              -9,
+              10,
+              -8
+            ],
+            "max": [
+              9,
+              20,
+              9
+            ]
+          },
+          "route": null,
+          "tweak": null,
+          "scoreBefore": null,
+          "scoreAfter": null,
+          "accepted": false,
+          "reason": "clean"
+        },
+        {
+          "index": 2,
+          "region": {
+            "min": [
+              -9,
+              21,
+              -8
+            ],
+            "max": [
+              9,
+              31,
+              9
+            ]
+          },
+          "route": null,
+          "tweak": null,
+          "scoreBefore": null,
+          "scoreAfter": null,
+          "accepted": false,
+          "reason": "clean"
+        }
+      ],
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 0.5
+    },
+    {
+      "subject": "bow-and-arrow",
+      "scale": 32,
+      "regions": 3,
+      "formIoUR2": 0.473,
+      "wholeObjectIoUBefore": 0.473,
+      "wholeObjectIoUAfter": 0.469,
+      "verdict": "regressed",
+      "changed": true,
+      "kept": 1,
+      "rolledBack": 0,
+      "p14": {
+        "ok": true,
+        "locked": 1,
+        "acceptedCount": 1,
+        "violations": []
+      },
+      "iterations": 2,
+      "converged": true,
+      "perRegion": [
+        {
+          "index": 0,
+          "region": {
+            "min": [
+              -15,
+              0,
+              -3
+            ],
+            "max": [
+              14,
+              9,
+              3
+            ]
+          },
+          "route": null,
+          "tweak": null,
+          "scoreBefore": null,
+          "scoreAfter": null,
+          "accepted": false,
+          "reason": "clean"
+        },
+        {
+          "index": 1,
+          "region": {
+            "min": [
+              -15,
+              10,
+              -3
+            ],
+            "max": [
+              14,
+              20,
+              3
+            ]
+          },
+          "route": null,
+          "tweak": null,
+          "scoreBefore": null,
+          "scoreAfter": null,
+          "accepted": false,
+          "reason": "clean"
+        },
+        {
+          "index": 2,
+          "region": {
+            "min": [
+              -15,
+              21,
+              -3
+            ],
+            "max": [
+              14,
+              31,
+              3
+            ]
+          },
+          "route": "relief",
+          "tweak": "relief-1",
+          "scoreBefore": 0.28891804843134916,
+          "scoreAfter": 0.2916065416065416,
+          "accepted": true,
+          "reason": "accepted"
+        }
+      ],
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 2.1
+    },
+    {
+      "subject": "heart",
+      "scale": 32,
+      "regions": 3,
+      "formIoUR2": 0.877,
+      "wholeObjectIoUBefore": 0.877,
+      "wholeObjectIoUAfter": 0.877,
+      "verdict": "held",
+      "changed": false,
+      "kept": 0,
+      "rolledBack": 0,
+      "p14": {
+        "ok": true,
+        "locked": 0,
+        "acceptedCount": 0,
+        "violations": []
+      },
+      "iterations": 0,
+      "converged": true,
+      "perRegion": [
+        {
+          "index": 0,
+          "region": {
+            "min": [
+              -11,
+              0,
+              -16
+            ],
+            "max": [
+              10,
+              8,
+              15
+            ]
+          },
+          "route": null,
+          "tweak": null,
+          "scoreBefore": null,
+          "scoreAfter": null,
+          "accepted": false,
+          "reason": "clean"
+        },
+        {
+          "index": 1,
+          "region": {
+            "min": [
+              -11,
+              9,
+              -16
+            ],
+            "max": [
+              10,
+              16,
+              15
+            ]
+          },
+          "route": null,
+          "tweak": null,
+          "scoreBefore": null,
+          "scoreAfter": null,
+          "accepted": false,
+          "reason": "clean"
+        },
+        {
+          "index": 2,
+          "region": {
+            "min": [
+              -11,
+              17,
+              -16
+            ],
+            "max": [
+              10,
+              26,
+              15
+            ]
+          },
+          "route": null,
+          "tweak": null,
+          "scoreBefore": null,
+          "scoreAfter": null,
+          "accepted": false,
+          "reason": "clean"
+        }
+      ],
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 0.5
+    },
+    {
+      "subject": "mushroom",
+      "scale": 32,
+      "regions": 3,
+      "formIoUR2": 0.98,
+      "wholeObjectIoUBefore": 0.98,
+      "wholeObjectIoUAfter": 0.98,
+      "verdict": "held",
+      "changed": false,
+      "kept": 0,
+      "rolledBack": 0,
+      "p14": {
+        "ok": true,
+        "locked": 0,
+        "acceptedCount": 0,
+        "violations": []
+      },
+      "iterations": 0,
+      "converged": true,
+      "perRegion": [
+        {
+          "index": 0,
+          "region": {
+            "min": [
+              -15,
+              0,
+              -15
+            ],
+            "max": [
+              14,
+              9,
+              14
+            ]
+          },
+          "route": null,
+          "tweak": null,
+          "scoreBefore": null,
+          "scoreAfter": null,
+          "accepted": false,
+          "reason": "clean"
+        },
+        {
+          "index": 1,
+          "region": {
+            "min": [
+              -15,
+              10,
+              -15
+            ],
+            "max": [
+              14,
+              20,
+              14
+            ]
+          },
+          "route": null,
+          "tweak": null,
+          "scoreBefore": null,
+          "scoreAfter": null,
+          "accepted": false,
+          "reason": "clean"
+        },
+        {
+          "index": 2,
+          "region": {
+            "min": [
+              -15,
+              21,
+              -15
+            ],
+            "max": [
+              14,
+              31,
+              14
+            ]
+          },
+          "route": null,
+          "tweak": null,
+          "scoreBefore": null,
+          "scoreAfter": null,
+          "accepted": false,
+          "reason": "clean"
+        }
+      ],
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 0.5
+    },
+    {
+      "subject": "koi",
+      "scale": 32,
+      "regions": 3,
+      "formIoUR2": 0.623,
+      "wholeObjectIoUBefore": 0.623,
+      "wholeObjectIoUAfter": 0.623,
+      "verdict": "held",
+      "changed": false,
+      "kept": 0,
+      "rolledBack": 0,
+      "p14": {
+        "ok": true,
+        "locked": 0,
+        "acceptedCount": 0,
+        "violations": []
+      },
+      "iterations": 0,
+      "converged": true,
+      "perRegion": [
+        {
+          "index": 0,
+          "region": {
+            "min": [
+              -16,
+              0,
+              -11
+            ],
+            "max": [
+              15,
+              4,
+              11
+            ]
+          },
+          "route": null,
+          "tweak": null,
+          "scoreBefore": null,
+          "scoreAfter": null,
+          "accepted": false,
+          "reason": "clean"
+        },
+        {
+          "index": 1,
+          "region": {
+            "min": [
+              -16,
+              5,
+              -11
+            ],
+            "max": [
+              15,
+              10,
+              11
+            ]
+          },
+          "route": null,
+          "tweak": null,
+          "scoreBefore": null,
+          "scoreAfter": null,
+          "accepted": false,
+          "reason": "clean"
+        },
+        {
+          "index": 2,
+          "region": {
+            "min": [
+              -16,
+              11,
+              -11
+            ],
+            "max": [
+              15,
+              16,
+              11
+            ]
+          },
+          "route": null,
+          "tweak": null,
+          "scoreBefore": null,
+          "scoreAfter": null,
+          "accepted": false,
+          "reason": "clean"
+        }
+      ],
+      "view3q": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "durationSec": 0.5
+    }
+  ]
+}

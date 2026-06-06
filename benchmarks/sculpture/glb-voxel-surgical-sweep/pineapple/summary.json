@@ -1,0 +1,91 @@
+{
+  "subject": "pineapple",
+  "scale": 32,
+  "regions": 3,
+  "formIoUR2": 0.907,
+  "wholeObjectIoUBefore": 0.907,
+  "wholeObjectIoUAfter": 0.907,
+  "verdict": "held",
+  "changed": false,
+  "kept": 0,
+  "rolledBack": 0,
+  "p14": {
+    "ok": true,
+    "locked": 0,
+    "acceptedCount": 0,
+    "violations": []
+  },
+  "iterations": 0,
+  "converged": true,
+  "perRegion": [
+    {
+      "index": 0,
+      "region": {
+        "min": [
+          -9,
+          0,
+          -8
+        ],
+        "max": [
+          9,
+          9,
+          9
+        ]
+      },
+      "route": null,
+      "tweak": null,
+      "scoreBefore": null,
+      "scoreAfter": null,
+      "accepted": false,
+      "reason": "clean"
+    },
+    {
+      "index": 1,
+      "region": {
+        "min": [
+          -9,
+          10,
+          -8
+        ],
+        "max": [
+          9,
+          20,
+          9
+        ]
+      },
+      "route": null,
+      "tweak": null,
+      "scoreBefore": null,
+      "scoreAfter": null,
+      "accepted": false,
+      "reason": "clean"
+    },
+    {
+      "index": 2,
+      "region": {
+        "min": [
+          -9,
+          21,
+          -8
+        ],
+        "max": [
+          9,
+          31,
+          9
+        ]
+      },
+      "route": null,
+      "tweak": null,
+      "scoreBefore": null,
+      "scoreAfter": null,
+      "accepted": false,
+      "reason": "clean"
+    }
+  ],
+  "view3q": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "durationSec": 0.5
+}

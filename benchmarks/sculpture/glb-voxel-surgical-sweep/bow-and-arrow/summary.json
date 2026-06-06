@@ -1,0 +1,91 @@
+{
+  "subject": "bow-and-arrow",
+  "scale": 32,
+  "regions": 3,
+  "formIoUR2": 0.473,
+  "wholeObjectIoUBefore": 0.473,
+  "wholeObjectIoUAfter": 0.469,
+  "verdict": "regressed",
+  "changed": true,
+  "kept": 1,
+  "rolledBack": 0,
+  "p14": {
+    "ok": true,
+    "locked": 1,
+    "acceptedCount": 1,
+    "violations": []
+  },
+  "iterations": 2,
+  "converged": true,
+  "perRegion": [
+    {
+      "index": 0,
+      "region": {
+        "min": [
+          -15,
+          0,
+          -3
+        ],
+        "max": [
+          14,
+          9,
+          3
+        ]
+      },
+      "route": null,
+      "tweak": null,
+      "scoreBefore": null,
+      "scoreAfter": null,
+      "accepted": false,
+      "reason": "clean"
+    },
+    {
+      "index": 1,
+      "region": {
+        "min": [
+          -15,
+          10,
+          -3
+        ],
+        "max": [
+          14,
+          20,
+          3
+        ]
+      },
+      "route": null,
+      "tweak": null,
+      "scoreBefore": null,
+      "scoreAfter": null,
+      "accepted": false,
+      "reason": "clean"
+    },
+    {
+      "index": 2,
+      "region": {
+        "min": [
+          -15,
+          21,
+          -3
+        ],
+        "max": [
+          14,
+          31,
+          3
+        ]
+      },
+      "route": "relief",
+      "tweak": "relief-1",
+      "scoreBefore": 0.28891804843134916,
+      "scoreAfter": 0.2916065416065416,
+      "accepted": true,
+      "reason": "accepted"
+    }
+  ],
+  "view3q": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "durationSec": 2.1
+}
