@@ -73,3 +73,18 @@ sculpture pipeline already saves each build's turntable as 24 rock-mode frames
 
 Rock (front-arc), not spin: a sculpture's back is **inferred** from one 3/4 concept (single-view
 reconstruction), so the front-arc never parades the weaker reverse. No `spin-*` variants generated.
+
+## Beyond facade — the full building, in the round (E-20 / T-070-01)
+
+The payoff to the honest note above: every earlier `spin-*` revealed a **flat facade back** (the very gap
+that motivated the whole-structure work). The E-20 building is the **first `spin-*` whose 360° does not** —
+a complete 54×64×54 gatehouse (57,202 blocks, 4-block clean palette), all four sides + a stepped roof, built
+by the matured pipeline (TRELLIS bulk + E-19/E-21 clean materials + E-15 cage). This is a true `spin-` (not a
+`rock-`): the whole point is that the back is real. Source: `benchmarks/sculpture/building/best/artifact.json`.
+
+| clip | build | source |
+|------|-------|--------|
+| `spin-building-e20.mp4` ★ in-the-round | stone gatehouse — full 360°, real back + roof (48f @ 12fps) | `benchmarks/sculpture/building/best/artifact.json` |
+
+Curated stills (the "all sides" evidence): `pr/assets/frames/building-turntable-{front,right,back,left}.png`
+(768², azimuths 45°/135°/225°/315°). Verdict chip travels with it — see `pr/assets/beyond-facade.md`.
