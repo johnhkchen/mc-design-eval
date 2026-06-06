@@ -28,6 +28,7 @@
 
 import { extractTexturePalette, speckleScore } from "./material-clean.mjs";
 import { sampleSurfaceColors, keysToArtifact } from "./glb-voxel-build.mjs";
+import { augmentPalette } from "./palette-augment.mjs";
 import { voxelizeGlb, occupiedCells } from "./glb-voxelize.mjs";
 import { parseGlbColoredSurface } from "./glb-mesh.mjs";
 import { srgbToLab, deltaE, nearestLab } from "../color/cielab.mjs";
@@ -446,9 +447,12 @@ export function offPaletteCount(keys, palette) {
  *           texture:{width:number,height:number,data:Uint8Array|Buffer} }} build
  * @param {{ palette?:{key:string,lab:number[]}[], k?:number, growDE?:number, gradDE?:number,
  *           minRegion?:number, neighbourhood?:6|26, dither?:boolean, dropColor?:number[]|null,
- *           materialTexture?:boolean|object, metadata?:object, style?:object, paletteId?:string }} [opts]
+ *           augment?:boolean|object, materialTexture?:boolean|object, metadata?:object, style?:object,
+ *           paletteId?:string }} [opts]
  *           `palette` (the fix): the DESIGN-DOC palette `[{key,lab}]` to snap within — the deliberate few
  *           blocks the model chose. When omitted, a palette is median-cut from the GLB texture (looser).
+ *           `augment` (E-18 T-058-03, default off): add ≤K gated secondary table blocks (design-doc ∪
+ *           super-great-fit blocks for underserved texture colours). `true` = defaults, or `{table?,…,K?}`.
  *           `dither` (default false) softens gradient boundaries with an ordered Bayer dither at the cost
  *           of more speckle; the default hard band minimises speckle.
  * @returns {import("../artifact.mjs").DesignArtifact}
@@ -463,7 +467,13 @@ export function segmentMaterials(build, opts = {}) {
 
   // Candidate set: the DESIGN-DOC palette when supplied (the fix — the model's deliberate few blocks),
   // else fall back to extracting one from the GLB texture. opts.palette is `[{key,lab}]`.
-  const snapPalette = opts.palette ?? extractTexturePalette(texture, { k, dropColor: opts.dropColor }).snapPalette;
+  let snapPalette = opts.palette ?? extractTexturePalette(texture, { k, dropColor: opts.dropColor }).snapPalette;
+  // E-18 T-058-03 (opt-in): augment with ≤K gated secondary table blocks for genuine texture colours the
+  // tight palette represents poorly (high snap drift). `opts.augment` = true (defaults) or {table?,…,K?}.
+  if (opts.augment) {
+    const a = opts.augment === true ? {} : opts.augment;
+    snapPalette = augmentPalette(snapPalette, texture, a.table, a);
+  }
   const colors = sampleSurfaceColors({ occupancy, surface, texture });
   const labs = cellLabs(colors);
   const cellCoords = [...occupiedCells(occupancy)];

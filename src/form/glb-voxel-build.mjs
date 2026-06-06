@@ -21,6 +21,7 @@
 
 import { nearestLab, srgbToLab } from "../color/cielab.mjs";
 import { loadBlockTable } from "../color/block-table.mjs";
+import { augmentPalette } from "./palette-augment.mjs";
 import { voxelizeGlb, occupiedCells } from "./glb-voxelize.mjs";
 import { parseGlbColoredSurface } from "./glb-mesh.mjs";
 import { SCALE_MIN, SCALE_MAX, DEFAULT_SCALE } from "../sculpture.mjs";
@@ -230,12 +231,15 @@ function assertScale(scale) {
  * colors → compile value-true placements. Async because the texture decode is.
  *
  * @param {Uint8Array|ArrayBuffer|Buffer} glb
+ * `augment` (E-18 T-058-03, opt-in): when truthy AND a design-doc `palette` is supplied, the candidate
+ * palette is the GATED secondary augmentation (design-doc palette ∪ ≤K super-great-fit table blocks) of
+ * the decoded texture — `true` for defaults, or an options object `{table?, driftThreshold?, …, K?}`.
  * @param {{ scale?:number,
  *           decodeTexture:(img:{data:Uint8Array,mimeType:string})=>Promise<{width:number,height:number,data:Uint8Array}>,
- *           palette?:{key:string,lab:number[]}[], metadata?:object, style?:object }} opts
+ *           palette?:{key:string,lab:number[]}[], augment?:boolean|object, metadata?:object, style?:object }} opts
  * @returns {Promise<import("../artifact.mjs").DesignArtifact>}
  */
-export async function glbVoxelBuild(glb, { scale = DEFAULT_SCALE, decodeTexture, palette, metadata, style } = {}) {
+export async function glbVoxelBuild(glb, { scale = DEFAULT_SCALE, decodeTexture, palette, augment, metadata, style } = {}) {
   assertScale(scale);
   if (typeof decodeTexture !== "function") {
     throw new Error("glbVoxelBuild: a decodeTexture(img) function is required (WebP decode stays out of src/CI)");
@@ -246,6 +250,11 @@ export async function glbVoxelBuild(glb, { scale = DEFAULT_SCALE, decodeTexture,
     throw new Error("glbVoxelBuild: GLB has no baseColor texture (no surface color to sample)");
   }
   const texture = await decodeTexture(surface.baseColor);
+  let pal = palette;
+  if (augment && pal) {
+    const a = augment === true ? {} : augment;
+    pal = augmentPalette(pal, texture, a.table, a);
+  }
   const colors = sampleSurfaceColors({ occupancy, surface, texture });
-  return colorVoxelsToArtifact(occupancy, colors, { palette, scale, metadata, style });
+  return colorVoxelsToArtifact(occupancy, colors, { palette: pal, scale, metadata, style });
 }
