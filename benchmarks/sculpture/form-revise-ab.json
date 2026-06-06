@@ -1,0 +1,158 @@
+{
+  "schema": "form-revise-ab/v1",
+  "metric": "silhouette-iou",
+  "generatedFrom": "benchmarks/sculpture/runs/{009-*-koi-fish,006-*-human-heart}",
+  "note": "region IoU = the R-framed render's silhouette IoU vs the concept (the loop's accept signal); whole IoU = the full-build 3/4 render vs concept (comparable to form-baseline.json). A true region-vs-region IoU needs a 3-D→2-D concept projection (out of scope, T-045).",
+  "subjects": [
+    {
+      "subject": "koi",
+      "run": "009-vConcept-a-koi-fish",
+      "region": {
+        "min": [
+          -9,
+          1,
+          -5
+        ],
+        "max": [
+          2,
+          6,
+          5
+        ]
+      },
+      "defect": "ringing",
+      "where": "the swimming body (the S-curve that flattens to a straight body)",
+      "route": "llm-edit",
+      "regionIoUBefore": 0.455,
+      "regionIoUAfter": 0.455,
+      "accepted": false,
+      "reason": "rolled-back",
+      "wholeObjectIoUBefore": 0.481,
+      "wholeObjectIoUAfter": 0.481,
+      "wholeObjectIoUProposed": 0.481,
+      "trace": [
+        {
+          "iteration": 1,
+          "region": {
+            "bbox": {
+              "min": [
+                -9,
+                1,
+                -5
+              ],
+              "max": [
+                2,
+                6,
+                5
+              ]
+            }
+          },
+          "subBounds": {
+            "min": [
+              -9,
+              1,
+              -5
+            ],
+            "max": [
+              2,
+              6,
+              5
+            ]
+          },
+          "defect": "ringing",
+          "where": "the swimming body (the S-curve that flattens to a straight body)",
+          "route": "llm-edit",
+          "tweak": "noop",
+          "scoreBefore": 0.455,
+          "scoreAfter": 0.455,
+          "accepted": false,
+          "reason": "rolled-back"
+        }
+      ],
+      "edits": 1,
+      "proposals": [
+        {
+          "region": "-9,1,-5|2,6,5",
+          "proposed": 4,
+          "applied": 4,
+          "rejected": [],
+          "stashed": true
+        }
+      ]
+    },
+    {
+      "subject": "heart",
+      "run": "006-vConcept-an-anatomically-correct-human-heart",
+      "region": {
+        "min": [
+          -8,
+          20,
+          -6
+        ],
+        "max": [
+          8,
+          31,
+          6
+        ]
+      },
+      "defect": "ringing",
+      "where": "the aortic arch (which never builds as a closed loop)",
+      "route": "llm-edit",
+      "regionIoUBefore": 0.384,
+      "regionIoUAfter": 0.379,
+      "accepted": false,
+      "reason": "rolled-back",
+      "wholeObjectIoUBefore": 0.347,
+      "wholeObjectIoUAfter": 0.347,
+      "wholeObjectIoUProposed": 0.345,
+      "trace": [
+        {
+          "iteration": 1,
+          "region": {
+            "bbox": {
+              "min": [
+                -8,
+                20,
+                -6
+              ],
+              "max": [
+                8,
+                31,
+                6
+              ]
+            }
+          },
+          "subBounds": {
+            "min": [
+              -8,
+              20,
+              -6
+            ],
+            "max": [
+              8,
+              31,
+              6
+            ]
+          },
+          "defect": "ringing",
+          "where": "the aortic arch (which never builds as a closed loop)",
+          "route": "llm-edit",
+          "tweak": "noop",
+          "scoreBefore": 0.384,
+          "scoreAfter": 0.379,
+          "accepted": false,
+          "reason": "rolled-back"
+        }
+      ],
+      "edits": 1,
+      "proposals": [
+        {
+          "region": "-8,20,-6|8,31,6",
+          "proposed": 3,
+          "applied": 3,
+          "rejected": [],
+          "stashed": true
+        }
+      ]
+    }
+  ]
+}

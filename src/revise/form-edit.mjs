@@ -82,6 +82,21 @@ function isDelta(delta) {
 }
 
 /**
+ * Normalize a model-emitted `add` placement so it conforms to the artifact schema: the BAML optional
+ * `state` map renders as `null` (or `{}`) when the model omits it, but the schema requires `state` to be
+ * a non-empty object WHEN PRESENT — so a null/empty/non-object `state` is dropped rather than passed
+ * through to fail AJV. PURE — a fresh placement; the input is untouched.
+ */
+function normalizeAdded(p) {
+  if (p.state && typeof p.state === "object" && !Array.isArray(p.state) && Object.keys(p.state).length > 0) {
+    return p;
+  }
+  const { state, ...rest } = p;
+  void state;
+  return rest;
+}
+
+/**
  * APPLY A BOUNDED EDIT-OP LIST to an in-region placement set, clamped to `subBounds`. The pure heart of
  * the LLM editor (AC #5): ops are applied in order; remove/move/swap address placements by their ORIGINAL
  * index (a tombstone array keeps indices stable as removes happen). `add`/`move` are bounds-checked with
@@ -111,11 +126,12 @@ export function applyFormEdit(inRegion, subBounds, ops) {
         reject(op, "add: missing placement");
         continue;
       }
-      if (!placementInBounds(op.placement, subBounds)) {
+      const added = normalizeAdded(op.placement);
+      if (!placementInBounds(added, subBounds)) {
         reject(op, "add: placement escapes region");
         continue;
       }
-      slots.push(op.placement);
+      slots.push(added);
       applied.push(op);
     } else if (kind === "remove") {
       if (!inRange(op.target, inRegion.length) || slots[op.target] == null) {
@@ -195,6 +211,7 @@ export function makeFormEditor(opts = {}) {
     applyEdit = applyRegionEdit,
   } = opts;
   const stash = new Map();
+  const proposals = []; // observability: one entry per form-defect region the LLM editor proposed for
 
   async function diagnose(artifact, R, observation) {
     const routed = await critic(artifact, R, observation);
@@ -204,17 +221,24 @@ export function makeFormEditor(opts = {}) {
     if (top.route === "relief" || top.route === "material") return [top];
 
     // A FORM defect → the LLM editor. Propose → apply (bounds) → lock → AJV; stash only a valid edit.
+    const record = { region: regionKey(subBoundsOf(R)), proposed: 0, applied: 0, rejected: [], stashed: false };
     try {
       const { ops } = await propose(artifact, R, observation, top.defect);
-      const { placements } = applyFormEdit(R.placements, R.subBounds, ops);
-      if (placements.length) {
-        const candidate = applyEdit(artifact, R, placements); // the region-lock (region.mjs)
+      const res = applyFormEdit(R.placements, R.subBounds, ops);
+      record.proposed = Array.isArray(ops) ? ops.length : 0;
+      record.applied = res.applied.length;
+      record.rejected = res.rejected.map((r) => r.reason);
+      if (res.placements.length) {
+        const candidate = applyEdit(artifact, R, res.placements); // the region-lock (region.mjs)
         validate(candidate); // AJV (artifact.mjs) — throws on a schema-invalid placement
-        stash.set(regionKey(subBoundsOf(R)), placements);
+        stash.set(regionKey(subBoundsOf(R)), res.placements);
+        record.stashed = true;
       }
-    } catch {
+    } catch (e) {
       // Out-of-bounds / schema-invalid / model error → leave unstashed → identity no-op, rolled back.
+      record.error = String(e && e.message).slice(0, 200);
     }
+    proposals.push(record);
     return [{ defect: top.defect, where: top.where, route: LLM_EDIT_ROUTE }];
   }
 
@@ -225,7 +249,7 @@ export function makeFormEditor(opts = {}) {
     return scopedTweakFor(route, attempt, intent);
   }
 
-  return { diagnose, tweakFor, stash };
+  return { diagnose, tweakFor, stash, proposals };
 }
 
 // --- the live leaf: propose an edit via the BAML ReviseRegion bridge (GL + metered) ---
@@ -253,7 +277,13 @@ export async function defaultProposeEdit(artifact, R, observation, defect, opts 
   const { dirname, join } = await import("node:path");
   const here = dirname(fileURLToPath(import.meta.url));
   const subject = opts.subject ?? artifact?.style?.name ?? artifact?.metadata?.trial_id ?? "the subject";
-  const region = typeof R.spec === "string" ? R.spec : JSON.stringify(R.spec);
+  // The region text MUST carry the numeric bounds — without them the model cannot keep an add/move
+  // inside R, and every op is rejected by the bounds guard (the bug the first A/B surfaced).
+  const sub = subBoundsOf(R);
+  const spec = typeof R.spec === "string" ? R.spec : JSON.stringify(R.spec);
+  const region =
+    `${spec} — every voxel of every edit MUST satisfy min [${sub.min.join(", ")}] ≤ [x,y,z] ≤ ` +
+    `max [${sub.max.join(", ")}] (inclusive); ops outside this box are rejected`;
   // Index the in-region placements so the model can address remove/move/swap by `target`.
   const placements = JSON.stringify(R.placements.map((p, i) => ({ index: i, ...p })));
 

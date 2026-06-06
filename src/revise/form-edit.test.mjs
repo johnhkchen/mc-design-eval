@@ -102,6 +102,20 @@ test("FE-bounds: placementInBounds agrees with the lock's per-voxel test", () =>
   assert.equal(placementInBounds({ op: "fill", from: [0, 0, 0], to: [9, 9, 10], block: "b" }, SUB), false);
 });
 
+test("FE-apply: an added placement with a null/empty `state` is normalized (schema safety)", () => {
+  const inR = inRegionFixture();
+  const { placements } = applyFormEdit(inR, SUB, [
+    { kind: "add", placement: { op: "voxel", pos: [5, 5, 5], block: "minecraft:oak_planks", state: null } },
+    { kind: "add", placement: { op: "voxel", pos: [6, 6, 6], block: "minecraft:oak_stairs", state: {} } },
+    { kind: "add", placement: { op: "voxel", pos: [7, 7, 7], block: "minecraft:oak_stairs", state: { facing: "north" } } },
+  ]);
+  const added = placements.filter((p) => p.block.startsWith("minecraft:oak"));
+  assert.equal(added.length, 3);
+  assert.ok(!("state" in added[0]), "null state dropped");
+  assert.ok(!("state" in added[1]), "empty-object state dropped");
+  assert.deepEqual(added[2].state, { facing: "north" }, "a real state is kept");
+});
+
 test("FE-bounds: a remove that would empty a non-empty region is rejected (schema floor)", () => {
   const inR = [{ op: "voxel", pos: [1, 1, 1], block: "minecraft:stone" }];
   const r = applyFormEdit(inR, SUB, [{ kind: "remove", target: 0 }]);
