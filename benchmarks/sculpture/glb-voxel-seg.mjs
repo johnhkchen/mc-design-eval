@@ -36,7 +36,8 @@ import {
   SEG_DEFAULTS,
 } from "../../src/form/material-segment.mjs";
 import { extractTexturePalette } from "../../src/form/material-clean.mjs";
-import { paletteFromManifest } from "../../src/form/glb-voxel-build.mjs";
+import { paletteFromManifest, assertPaletteDiscipline } from "../../src/form/glb-voxel-build.mjs";
+import { augmentPalette } from "../../src/form/palette-augment.mjs";
 import { voxelizeGlb } from "../../src/form/glb-voxelize.mjs";
 import { parseGlbColoredSurface } from "../../src/form/glb-mesh.mjs";
 import { assertArtifact } from "../../src/artifact.mjs";
@@ -161,11 +162,13 @@ function buildSeg(rows, { scale = DEFAULT_SCALE } = {}) {
       "silhouette vs the GLB's own mesh at SCULPTURE_VIEW_3Q (steady = segmentation did not break the shape)",
     generatedFrom: "benchmarks/sculpture/glb/<subject>.glb via segmentMaterials (src/form/material-segment.mjs)",
     note:
-      "E-18 rung R-seg: region segmentation over the R2 material-clean builds. The palette is texture-derived " +
-      "(E-10) and FIXED; every region fills with one palette block (gradients banded), so off-palette = 0 and " +
-      "distinct ≈ palette size by construction. R-seg only re-decides each occupied cell's block; it NEVER " +
-      "touches occupancy, so form IoU is invariant (GL rounding aside). Before = the committed R2 build; its " +
-      "off-palette is counted against the SAME fixed palette (the leakage R-seg removes). Sword excluded.",
+      "E-18 rung R-seg: region segmentation over the R2 material-clean builds. T-058-02: the palette is the " +
+      "AUGMENTED DESIGN-DOC palette (design-doc manifest ∪ ≤K=2 gated secondary, T-058-03) and FIXED — NOT a " +
+      "texture median-cut; every region fills with one palette block (gradients banded), so off-palette = 0 and " +
+      "distinct ≤ design-doc size + 2 by construction (asserted by assertPaletteDiscipline). R-seg only " +
+      "re-decides each occupied cell's block; it NEVER touches occupancy, so form IoU is invariant (GL rounding " +
+      "aside). Before = the committed R2 build; its off-palette is counted against the SAME augmented palette " +
+      "(the leakage R-seg removes). Sword excluded.",
     subjects: rows,
   };
   return { md, json };
@@ -209,19 +212,24 @@ async function runSeg({ scale = DEFAULT_SCALE, regenMissing = false } = {}) {
     // median-cut from the noisy TRELLIS texture (which is the "larger universe" that bloats + speckles).
     const designManifest = JSON.parse(await readFile(join(RUNS_DIR, subj.run, "artifact.json"), "utf8")).palette.manifest;
     const palette = paletteFromManifest(designManifest);
+    // E-18 T-058-02: the canonical candidate set is the AUGMENTED design-doc palette (design-doc ∪ ≤K=2
+    // gated secondary, T-058-03). `aug` is the membership reference for off-palette + the discipline guard.
+    const aug = augmentPalette(palette, texture);
 
     const artifact = segmentMaterials(
       { occupancy, surface, texture },
       {
         palette,
+        augment: true,
         metadata: { trial_id: `${subj.key}-glb-voxel-seg` },
         style: {
           name: "glb-voxel-seg",
-          rationale: `Region-segmented ${subj.key} GLB under the design-doc palette (${palette.length} blocks); gradients banded.`,
+          rationale: `Region-segmented ${subj.key} GLB under the augmented design-doc palette (${palette.length} design-doc + ≤2 gated secondary); gradients banded.`,
         },
       },
     );
     assertArtifact(artifact); // fail loud if the gate rejects
+    assertPaletteDiscipline(artifact, aug, { cap: palette.length + 2 }); // fail loud on any off-(augmented) block
     await writeFile(join(dir, "artifact.json"), JSON.stringify(artifact, null, 2) + "\n");
 
     const renderPath = join(dir, "render-3q.png");
@@ -230,7 +238,7 @@ async function runSeg({ scale = DEFAULT_SCALE, regenMissing = false } = {}) {
     const formIoUAfter = await judgeIoU(renderPath, glbBytes);
     const afterKeys = keysFromArtifact(artifact);
     const speckleAfter = round3(speckleScore(occupancy, afterKeys));
-    const offPaletteAfter = offPaletteCount(afterKeys, snapPalette);
+    const offPaletteAfter = offPaletteCount(afterKeys, aug);
     const distinctAfter = artifact.palette.manifest.length;
 
     // Before (R2): the committed glb-voxel-clean/<subj> artifact + summary. Same GLB + scale ⇒ same occupancy order.
@@ -245,7 +253,7 @@ async function runSeg({ scale = DEFAULT_SCALE, regenMissing = false } = {}) {
       const r2Keys = keysFromArtifact(r2Art);
       distinctBefore = r2Art.palette.manifest.length;
       speckleBefore = round3(speckleScore(occupancy, r2Keys));
-      offPaletteBefore = offPaletteCount(r2Keys, snapPalette); // R2's leakage vs the SAME fixed palette
+      offPaletteBefore = offPaletteCount(r2Keys, aug); // R2 leakage vs the augmented design-doc palette
     }
     if (existsSync(r2SumPath)) {
       formIoUBefore = JSON.parse(await readFile(r2SumPath, "utf8")).formIoUAfter ?? null;
@@ -260,7 +268,7 @@ async function runSeg({ scale = DEFAULT_SCALE, regenMissing = false } = {}) {
       blocks: sum.placed,
       unmapped: sum.unmapped,
       bounds: sum.bounds,
-      paletteSize: snapPalette.length,
+      paletteSize: aug.length,
       paletteDescription: description,
       distinctBefore,
       distinctAfter,
@@ -277,7 +285,7 @@ async function runSeg({ scale = DEFAULT_SCALE, regenMissing = false } = {}) {
     await writeFile(join(dir, "summary.json"), JSON.stringify(summary, null, 2) + "\n");
     rows.push(summary);
     console.error(
-      `${subj.key}: occ ${summary.occupancy}, palette ${snapPalette.length}, distinct ${distinctBefore}→` +
+      `${subj.key}: occ ${summary.occupancy}, palette ${aug.length}, distinct ${distinctBefore}→` +
         `${distinctAfter}, speckle ${speckleBefore}→${speckleAfter}, off-palette ${offPaletteBefore}→${offPaletteAfter}, ` +
         `form IoU ${formIoUBefore}→${formIoUAfter}${regenerated ? " (regen)" : ""} (${secs}s)`,
     );

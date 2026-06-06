@@ -29,7 +29,9 @@ import { tmpdir } from "node:os";
 import { voxelizeGlb } from "../../src/form/glb-voxelize.mjs";
 import { voxelizeGlbThin } from "../../src/form/glb-thin.mjs";
 import { parseGlbColoredSurface } from "../../src/form/glb-mesh.mjs";
-import { segmentMaterials, speckleScore, offPaletteCount, SEG_DEFAULTS } from "../../src/form/material-segment.mjs";
+import { segmentMaterials, speckleScore, offPaletteCount } from "../../src/form/material-segment.mjs";
+import { paletteFromManifest, assertPaletteDiscipline } from "../../src/form/glb-voxel-build.mjs";
+import { augmentPalette } from "../../src/form/palette-augment.mjs";
 import { extractTexturePalette } from "../../src/form/material-clean.mjs";
 import { valueGate, realizedPaletteFromArtifact } from "../../src/color/value-gate.mjs";
 import { assembleRemeasure } from "../../src/form/remeasure.mjs";
@@ -131,7 +133,7 @@ function valueDeltaEOf(artifact, refClusters) {
 }
 
 /** A committed baseline's five-metric cell (speckle recomputed over the NON-thin occupancy). */
-async function baselineCell(dir, key, { occBase, segPalette, refClusters, iouKey }) {
+async function baselineCell(dir, key, { occBase, augPalette, refClusters, iouKey }) {
   const artifact = await readJson(join(dir, key, "artifact.json"));
   const summary = await readJson(join(dir, key, "summary.json"));
   if (!artifact) return null;
@@ -140,7 +142,7 @@ async function baselineCell(dir, key, { occBase, segPalette, refClusters, iouKey
     formIoU: summary && typeof summary[iouKey] === "number" ? summary[iouKey] : null,
     speckle: round3(speckleScore(occBase, keys)),
     distinct: artifact.palette.manifest.length,
-    offPalette: offPaletteCount(keys, segPalette),
+    offPalette: offPaletteCount(keys, augPalette), // R1/R2 leakage vs the augmented design-doc palette
     valueDeltaE: valueDeltaEOf(artifact, refClusters),
   };
 }
@@ -170,21 +172,29 @@ async function buildSubject(subj, { scale, renderArtifact, regenMissing }) {
   const surface = parseGlbColoredSurface(glbBytes);
   if (!surface.baseColor) throw new Error(`${subj.key}: GLB has no baseColor texture`);
   const texture = await decodeTexture(surface.baseColor);
-  const refClusters = extractTexturePalette(texture).snapPalette; // value-ΔE reference (E-17 parity)
-  const segPalette = extractTexturePalette(texture, { k: SEG_DEFAULTS.k }).snapPalette; // off-palette reference
+  const refClusters = extractTexturePalette(texture).snapPalette; // value-ΔE reference (E-17 parity, k=8)
+  // E-18 T-058-02 (the core fix): the combined build snaps within the AUGMENTED DESIGN-DOC palette
+  // (design-doc manifest ∪ ≤K=2 gated secondary), NOT a texture median-cut. `aug` is the off-palette
+  // membership reference for E18/R1/R2 AND the discipline-guard candidate set.
+  const designManifest = JSON.parse(await readFile(join(RUNS_DIR, subj.run, "artifact.json"), "utf8")).palette.manifest;
+  const prim = paletteFromManifest(designManifest);
+  const aug = augmentPalette(prim, texture);
 
-  // The combined build: thin occupancy → segment (value-true colour + clean materials).
+  // The combined build: thin occupancy → segment (value-true colour + clean materials) under the palette.
   const artifact = segmentMaterials(
     { occupancy: occThin, surface, texture },
     {
+      palette: prim,
+      augment: true,
       metadata: { trial_id: `${subj.key}-e18-combined` },
       style: {
         name: "glb-voxel-e18",
-        rationale: `Thin-preserved voxelization (${occBase.count}→${occThin.count} cells) then region-segmented under a ${segPalette.length}-block fixed palette.`,
+        rationale: `Thin-preserved voxelization (${occBase.count}→${occThin.count} cells) then region-segmented under the augmented design-doc palette (${prim.length} design-doc + ≤2 gated secondary).`,
       },
     },
   );
   assertArtifact(artifact);
+  assertPaletteDiscipline(artifact, aug, { cap: prim.length + 2 }); // fail loud on any off-(augmented) block
   await writeFile(join(dir, "artifact.json"), JSON.stringify(artifact, null, 2) + "\n");
 
   const renderPath = join(dir, "render-3q.png");
@@ -194,12 +204,12 @@ async function buildSubject(subj, { scale, renderArtifact, regenMissing }) {
     formIoU: await judgeIoU(renderPath, glbBytes),
     speckle: round3(speckleScore(occThin, eKeys)),
     distinct: artifact.palette.manifest.length,
-    offPalette: offPaletteCount(eKeys, segPalette),
+    offPalette: offPaletteCount(eKeys, aug),
     valueDeltaE: valueDeltaEOf(artifact, refClusters),
   };
 
-  const r1 = await baselineCell(R1_DIR, subj.key, { occBase, segPalette, refClusters, iouKey: "silhouetteIoU" });
-  const r2 = await baselineCell(R2_DIR, subj.key, { occBase, segPalette, refClusters, iouKey: "formIoUAfter" });
+  const r1 = await baselineCell(R1_DIR, subj.key, { occBase, augPalette: aug, refClusters, iouKey: "silhouetteIoU" });
+  const r2 = await baselineCell(R2_DIR, subj.key, { occBase, augPalette: aug, refClusters, iouKey: "formIoUAfter" });
 
   const thin = {
     components: occThin.thin?.components ?? null,

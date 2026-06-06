@@ -146,9 +146,11 @@ export function assembleRemeasure(rows, opts = {}) {
   const notes = {
     valueDeltaETautology: valueTautology
       ? "R2 snaps to the GLB's own texture palette (the value-ΔE reference), so its value ΔE is ~0 by " +
-        "construction — a 0 there carries no signal. E18 uses a TIGHTER fixed palette (k=6), so its value " +
-        "ΔE can be nonzero: a small, real cost of palette discipline, not a tautology. Speckle / distinct " +
-        "/ off-palette carry the primary discrimination."
+        "construction — a 0 there carries no signal. E18 (T-058-02) snaps within the AUGMENTED DESIGN-DOC " +
+        "palette (design-doc manifest ∪ ≤K=2 gated secondary), tighter than the texture reference, so its " +
+        "value ΔE can be nonzero: a small, real cost of palette discipline, not a tautology. Speckle / " +
+        "distinct / off-palette (now counted against that augmented design-doc palette) carry the primary " +
+        "discrimination."
       : null,
   };
 

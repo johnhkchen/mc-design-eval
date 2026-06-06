@@ -196,12 +196,15 @@ async function runBreadth({ scale = DEFAULT_SCALE, regenMissing = false } = {}) 
     // of just those blocks.
     const designManifest = JSON.parse(await readFile(join(RUNS_DIR, subj.run, "artifact.json"), "utf8")).palette.manifest;
     const palette = paletteFromManifest(designManifest);
+    // E-18 T-058-02: snap within the AUGMENTED design-doc palette (design-doc ∪ ≤K=2 gated secondary,
+    // T-058-03) — canonical across every build path, NOT the full 305-block table or a texture median-cut.
     const artifact = await glbVoxelBuild(glbBytes, {
       scale,
       decodeTexture,
       palette,
+      augment: true,
       metadata: { trial_id: `${subj.key}-glb-voxel` },
-      style: { name: "glb-voxel", rationale: `Voxelized ${subj.key} GLB; cells colored value-true from the GLB surface, snapped to the design-doc palette (${palette.length} blocks).` },
+      style: { name: "glb-voxel", rationale: `Voxelized ${subj.key} GLB; cells colored value-true from the GLB surface, snapped to the augmented design-doc palette (${palette.length} design-doc blocks + ≤2 gated secondary).` },
     });
     assertArtifact(artifact); // fail loud if the gate rejects
     await writeFile(join(dir, "artifact.json"), JSON.stringify(artifact, null, 2) + "\n");
