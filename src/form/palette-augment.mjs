@@ -17,7 +17,7 @@
 // segment and glb-voxel-build both import THIS module).
 
 import { aggregateForeground, medianCutLab, DEFAULTS as EXTRACT_DEFAULTS } from "../color/palette-extract.mjs";
-import { nearestLab } from "../color/cielab.mjs";
+import { nearestLab, nearestFlat, FLAT_LAMBDA } from "../color/cielab.mjs";
 import { loadBlockTable } from "../color/block-table.mjs";
 
 /**
@@ -28,6 +28,12 @@ import { loadBlockTable } from "../color/block-table.mjs";
  *   fitThreshold  — "super-great fit": the candidate table block must be within this ΔE of the cluster
  *   gainThreshold — "big win": (primaryΔE − tableΔE) must be ≥ this (greatly cuts the drift)
  *   K             — cap on added secondary blocks (most subjects add 0)
+ *   varCeiling    — "flat enough": a candidate table block whose summed texture variance exceeds this is
+ *                   excluded outright (no busy block leaks in even at a great fit). T-064-01: 1200 sits
+ *                   just below dead_brain_coral_block (1363), mycelium (2483), nether_quartz_ore (7114)
+ *                   while leaving ~64% of the table (matte concrete/terracotta/wool/stone) eligible.
+ *   lambda        — flat-preference weight for the candidate fit (nearestFlat); a flat table block beats
+ *                   a busier one of comparable ΔE within the secondary search itself.
  */
 export const AUGMENT_DEFAULTS = Object.freeze({
   k: 8,
@@ -36,6 +42,8 @@ export const AUGMENT_DEFAULTS = Object.freeze({
   fitThreshold: 6,
   gainThreshold: 6,
   K: 2,
+  varCeiling: 1200,
+  lambda: FLAT_LAMBDA,
 });
 
 /** The full value-true table as a `nearestLab` palette. Inlined (NOT blockPaletteFromTable — that lives
@@ -44,7 +52,7 @@ function tablePalette(table) {
   if (!table || !Array.isArray(table.blocks) || table.blocks.length === 0) {
     throw new Error("augmentPalette: table.blocks must be a non-empty array");
   }
-  return table.blocks.map((b) => ({ key: b.block, lab: b.lab }));
+  return table.blocks.map((b) => ({ key: b.block, lab: b.lab, var: b.var }));
 }
 
 /**
@@ -89,20 +97,23 @@ export function augmentReport(designDocPalette, texture, table = loadBlockTable(
   const clusters = medianCutLab(points, o.k);
   const tbl = tablePalette(table);
   const primaryKeys = new Set(primary.map((e) => e.key));
+  const varOf = new Map(tbl.map((e) => [e.key, e.var])); // candidate busy-ness lookup (T-064-01)
 
   // Score every cluster (kept for an honest "considered but rejected" trail in the record).
   const candidates = clusters.map((c) => {
     const coverage = c.count / foregroundPx;
     const primaryDeltaE = nearestLab(c.lab, primary).deltaE;
-    const best = nearestLab(c.lab, tbl);
+    const best = nearestFlat(c.lab, tbl, { lambda: o.lambda }); // flat-preferring fit (T-064-01)
     const gain = primaryDeltaE - best.deltaE;
+    const candVar = varOf.get(best.key);
     const qualifies =
       primaryDeltaE > o.driftThreshold && // underserved
       coverage >= o.minCoverage && // real
       best.deltaE <= o.fitThreshold && // super-great fit
       gain >= o.gainThreshold && // big win
+      (!Number.isFinite(candVar) || candVar <= o.varCeiling) && // flat enough (no busy block leaks in)
       !primaryKeys.has(best.key); // not already in the design-doc palette
-    return { key: best.key, lab: best.lab, coverage, primaryDeltaE, tableDeltaE: best.deltaE, gain, clusterLab: c.lab, qualifies };
+    return { key: best.key, lab: best.lab, var: candVar, coverage, primaryDeltaE, tableDeltaE: best.deltaE, gain, clusterLab: c.lab, qualifies };
   });
 
   // Rank qualifiers by gain × coverage (desc), tie-break coverage (desc) then key (asc) — deterministic.

@@ -156,3 +156,55 @@ test("segmentMaterials: without augment the design-doc palette is untouched (reg
   const keys = art.placements.map((p) => p.block.replace(/^minecraft:/, ""));
   assert.ok(keys.every((k) => k === "white_concrete" || k === "black_concrete"), "no augment ⇒ only primary blocks");
 });
+
+// --- T-064-01: the varCeiling gate excludes busy blocks ---------------------
+
+// A table where the EXACT red fit is a busy block; a flat red sits slightly further away.
+const TABLE_BUSY = {
+  blocks: [
+    { block: "white_concrete", lab: lab(WHITE), var: 2 },
+    { block: "black_concrete", lab: lab(BLACK), var: 3 },
+    { block: "red_coral_busy", lab: lab(RED), var: 5000 }, // exact fit, but above varCeiling
+    { block: "red_concrete", lab: lab([196, 34, 34]), var: 50 }, // flat, a hair further
+  ],
+};
+
+test("augmentPalette: a busy table block above varCeiling is rejected even at a great fit", () => {
+  const texture = atlasRow(rep(RED, 16));
+  const r = augmentReport(PRIMARY, texture, TABLE_BUSY, NOBG);
+  // The flat red wins the candidate fit (busy is penalized) AND the busy one is ceiling-excluded anyway.
+  assert.ok(!r.secondary.some((e) => e.key === "red_coral_busy"), "the busy block never enters the palette");
+  assert.equal(r.secondary[0]?.key, "red_concrete", "the flat block is chosen instead");
+});
+
+test("augmentPalette: even when the busy block is the nearest, the ceiling blocks it (no flat alternative)", () => {
+  const ONLY_BUSY = {
+    blocks: [
+      { block: "white_concrete", lab: lab(WHITE), var: 2 },
+      { block: "black_concrete", lab: lab(BLACK), var: 3 },
+      { block: "red_coral_busy", lab: lab(RED), var: 5000 },
+    ],
+  };
+  const texture = atlasRow(rep(RED, 16));
+  const r = augmentReport(PRIMARY, texture, ONLY_BUSY, NOBG);
+  const cand = r.candidates.find((c) => c.key === "red_coral_busy");
+  assert.ok(cand && cand.primaryDeltaE > AUGMENT_DEFAULTS.driftThreshold && cand.tableDeltaE <= AUGMENT_DEFAULTS.fitThreshold,
+    "it is underserved AND a tight fit");
+  assert.equal(cand.qualifies, false, "but the varCeiling gate disqualifies it");
+  assert.equal(r.secondary.length, 0, "nothing busy is admitted");
+});
+
+test("augmentPalette: a flat secondary block (below the ceiling) is still admitted", () => {
+  // red_concrete is flat (var 50) and the exact fit here → still added (the ceiling only stops busy ones).
+  const TABLE_FLAT = {
+    blocks: [
+      { block: "white_concrete", lab: lab(WHITE), var: 2 },
+      { block: "black_concrete", lab: lab(BLACK), var: 3 },
+      { block: "red_concrete", lab: lab(RED), var: 50 },
+    ],
+  };
+  const texture = atlasRow(rep(RED, 16));
+  const r = augmentReport(PRIMARY, texture, TABLE_FLAT, NOBG);
+  assert.equal(r.secondary.length, 1);
+  assert.equal(r.secondary[0].key, "red_concrete", "a flat secondary is admitted normally");
+});
