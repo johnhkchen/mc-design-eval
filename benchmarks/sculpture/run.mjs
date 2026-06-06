@@ -33,7 +33,50 @@ import {
   composeSculptureDesignDocPrompt,
   composeSculptureBuildPrompt,
 } from "../../src/sculpture.mjs";
+import {
+  VCONCEPT_BUILDING,
+  BUILDING_DEFAULT_SCALE,
+  BUILDING_VIEW_3Q,
+  BUILDING_TURNTABLE,
+  assertBuildingSpec,
+  runIdForBuilding,
+  composeBuildingDesignDocPrompt,
+  composeBuildingBuildPrompt,
+} from "../../src/building.mjs";
 import { writeValueMatch } from "./value-match-shared.mjs";
+
+// Mode dispatch — the only difference between the frozen E-13 sculpture path and the E-20 building path
+// is the pure prompt builders + run-id namespace + concept variant + framing constants. `sculpture`
+// (the default) is byte-identical to before; `building` swaps these. Everything downstream (render,
+// turntable, summary, README) is shared.
+const MODES = {
+  sculpture: {
+    descriptor: VCONCEPT_SCULPTURE,
+    approach: "vConcept",
+    defaultScale: DEFAULT_SCALE,
+    assertSpec: assertSculptureSpec,
+    runId: runIdForSubject,
+    composeDoc: composeSculptureDesignDocPrompt,
+    composeBuild: composeSculptureBuildPrompt,
+    conceptVariant: "v1",
+    view3q: SCULPTURE_VIEW_3Q,
+    turntable: TURNTABLE,
+    allowValueMatch: true,
+  },
+  building: {
+    descriptor: VCONCEPT_BUILDING,
+    approach: "vConcept-building",
+    defaultScale: BUILDING_DEFAULT_SCALE,
+    assertSpec: assertBuildingSpec,
+    runId: runIdForBuilding,
+    composeDoc: composeBuildingDesignDocPrompt,
+    composeBuild: composeBuildingBuildPrompt,
+    conceptVariant: "building",
+    view3q: BUILDING_VIEW_3Q,
+    turntable: BUILDING_TURNTABLE,
+    allowValueMatch: false,
+  },
+};
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const RUNS_DIR = join(HERE, "runs");
@@ -60,7 +103,8 @@ function runBamlConcept(input) {
 }
 
 // The single approach: term → doc → concept → 3-D build. Returns the artifact + bookkeeping.
-async function runVConcept({ subject, scale, model, effort }, ctx) {
+// `mode` (sculpture|building) supplies the pure prompt builders + the concept variant.
+async function runVConcept({ subject, scale, model, effort, mode }, ctx) {
   const messages = [];
   let sumIn = 0;
   let sumOut = 0;
@@ -73,7 +117,7 @@ async function runVConcept({ subject, scale, model, effort }, ctx) {
   };
 
   // Stage 1 — imagined design document (plain text; no reference photo).
-  const ddPrompt = composeSculptureDesignDocPrompt({ subject, scale });
+  const ddPrompt = mode.composeDoc({ subject, scale });
   writeFileSync(join(ctx.dir, "design-doc.prompt.txt"), ddPrompt + "\n");
   const dd = await requestText({ prompt: ddPrompt, model, effort, onMessage: (m) => messages.push(m) });
   acc(dd.raw);
@@ -88,11 +132,12 @@ async function runVConcept({ subject, scale, model, effort }, ctx) {
     targetBlocks: scale,
     model: "pro",
     outPath: conceptPath,
+    variant: mode.conceptVariant,
   });
   console.log(`  stage 2 (concept image): ${concept.model}, ~${Math.round(concept.promptChars / 4)} tok prompt, ${concept.ms}ms`);
 
   // Stage 3 — 3-D build grounded on the single concept view (multimodal, schema-enforced).
-  const buildPrompt = composeSculptureBuildPrompt({ subject, scale, designDoc: dd.text, runId: ctx.runId, model });
+  const buildPrompt = mode.composeBuild({ subject, scale, designDoc: dd.text, runId: ctx.runId, model });
   writeFileSync(join(ctx.dir, "build.prompt.txt"), buildPrompt + "\n");
   const res = await requestDesignArtifactWithImage({
     prompt: buildPrompt,
@@ -114,7 +159,8 @@ async function runVConcept({ subject, scale, model, effort }, ctx) {
 }
 
 function parseArgs(argv) {
-  const out = { subject: undefined, scale: DEFAULT_SCALE, frames: TURNTABLE.frames, note: "", model: PHASE1_MODEL_ID, effort: undefined, valueMatch: false };
+  // scale defaults per-mode (resolved in main): undefined here so --mode building can pick its larger default.
+  const out = { subject: undefined, scale: undefined, frames: TURNTABLE.frames, note: "", model: PHASE1_MODEL_ID, effort: undefined, valueMatch: false, mode: "sculpture" };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--subject") out.subject = argv[++i];
     else if (argv[i] === "--scale") out.scale = parseInt(argv[++i], 10);
@@ -123,6 +169,7 @@ function parseArgs(argv) {
     else if (argv[i] === "--model") out.model = argv[++i];
     else if (argv[i] === "--effort") out.effort = argv[++i];
     else if (argv[i] === "--value-match") out.valueMatch = true;
+    else if (argv[i] === "--mode") out.mode = argv[++i];
   }
   return out;
 }
@@ -174,16 +221,23 @@ function regenerateReadme() {
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
-  if (!args.subject) {
-    console.error('usage: npm run bench:sculpture -- --subject "<term>" --scale <N> [--frames N] [--note "..."] [--model id] [--effort low|medium|high] [--value-match]');
+  const mode = MODES[args.mode];
+  if (!args.subject || !mode) {
+    console.error('usage: npm run bench:sculpture -- --subject "<term>" --scale <N> [--frames N] [--note "..."] [--model id] [--effort low|medium|high] [--value-match] [--mode sculpture|building]');
+    if (args.subject && !mode) console.error(`  unknown --mode "${args.mode}" (expected: ${Object.keys(MODES).join(" | ")})`);
     process.exit(1);
   }
-  // Validate BEFORE any metered work (throws sculpture: … on a bad subject/scale).
-  const { subject, scale } = assertSculptureSpec({ subject: args.subject, scale: args.scale });
+  // Validate BEFORE any metered work (throws sculpture:/building: … on a bad subject/scale). Scale
+  // defaults per-mode (building's envelope is larger than sculpture's) when --scale is omitted.
+  const reqScale = Number.isInteger(args.scale) ? args.scale : mode.defaultScale;
+  const { subject, scale } = mode.assertSpec({ subject: args.subject, scale: reqScale });
+  if (args.valueMatch && !mode.allowValueMatch) {
+    console.log(`  note: --value-match is a sculpture-only path; ignored in ${args.mode} mode.`);
+  }
 
   const startedAt = Date.now();
   const seq = nextSeq();
-  const runId = runIdForSubject(seq, subject);
+  const runId = mode.runId(seq, subject);
   const dir = join(RUNS_DIR, runId);
   mkdirSync(dir, { recursive: true });
 
@@ -192,9 +246,9 @@ async function main() {
   const { renderOrbit, oscillateAzimuths } = await import("../../render/src/orbit.mjs");
   const { renderSummary } = await import("../../src/render-tool.mjs");
 
-  console.log(`sculpture benchmark ${runId} (vConcept, scale ${scale}) — LIVE via claude -p + Nano Banana ...`);
+  console.log(`${args.mode} benchmark ${runId} (${mode.approach}, scale ${scale}) — LIVE via claude -p + Nano Banana ...`);
   const { artifact, raw, messages, concept } = await runVConcept(
-    { subject, scale, model: args.model, effort: args.effort },
+    { subject, scale, model: args.model, effort: args.effort, mode },
     { runId, dir },
   );
 
@@ -205,14 +259,14 @@ async function main() {
   writeFileSync(join(dir, "artifact.json"), JSON.stringify(artifact, null, 2) + "\n");
 
   // 3/4 hero still — the canonical three-quarter view.
-  const report = await renderArtifact(artifact, { outPath: join(dir, "render-3q.png"), view: SCULPTURE_VIEW_3Q });
+  const report = await renderArtifact(artifact, { outPath: join(dir, "render-3q.png"), view: mode.view3q });
   const sum = renderSummary(report);
   console.log(`  3/4 still: ${sum.placed} blocks (unmapped ${sum.unmapped}) -> render-3q.png`);
 
   // Additive .v2 value-matched build (E-14 / T-041-01): snap placements to the value-true blocks that
   // hit the concept's realized value, then render a side-by-side still. ALL .v1 files above untouched.
   let valueMatch = null;
-  if (args.valueMatch) {
+  if (args.valueMatch && mode.allowValueMatch) {
     const { snap } = await writeValueMatch({
       dir,
       runId,
@@ -226,14 +280,15 @@ async function main() {
   }
 
   // Front-arc rock turntable — sweeps the front hemisphere only (never the imagined back).
-  const frames = Number.isInteger(args.frames) && args.frames > 0 ? args.frames : TURNTABLE.frames;
-  const azimuths = oscillateAzimuths(frames, { centerDeg: TURNTABLE.centerDeg, amplitudeDeg: TURNTABLE.amplitudeDeg });
+  const tt = mode.turntable;
+  const frames = Number.isInteger(args.frames) && args.frames > 0 ? args.frames : tt.frames;
+  const azimuths = oscillateAzimuths(frames, { centerDeg: tt.centerDeg, amplitudeDeg: tt.amplitudeDeg });
   const orbit = await renderOrbit(artifact, {
     frames,
     azimuths,
     outDir: join(dir, "turntable"),
     baseName: "frame",
-    view: { elevationDeg: TURNTABLE.elevationDeg, fov: TURNTABLE.fov },
+    view: { elevationDeg: tt.elevationDeg, fov: tt.fov },
   });
   console.log(`  rock turntable: ${orbit.frames.length} frames -> turntable/`);
 
@@ -244,8 +299,8 @@ async function main() {
     seq,
     runId,
     date: new Date().toISOString().slice(0, 10),
-    approach: "vConcept",
-    promptMethodId: VCONCEPT_SCULPTURE.id,
+    approach: mode.approach,
+    promptMethodId: mode.descriptor.id,
     model: args.model,
     effort: args.effort ?? null,
     subject,
@@ -253,8 +308,8 @@ async function main() {
     blocks: sum.placed,
     unmapped: sum.unmapped,
     bounds: sum.bounds,
-    view3q: SCULPTURE_VIEW_3Q,
-    turntable: { frames, centerDeg: TURNTABLE.centerDeg, amplitudeDeg: TURNTABLE.amplitudeDeg, mode: "rock" },
+    view3q: mode.view3q,
+    turntable: { frames, centerDeg: tt.centerDeg, amplitudeDeg: tt.amplitudeDeg, mode: "rock" },
     concept: { model: concept.model, promptChars: concept.promptChars, ms: concept.ms },
     tokensIn: u.input_tokens ?? 0,
     tokensOut: u.output_tokens ?? 0,

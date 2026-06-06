@@ -20,14 +20,17 @@ function readStdin(): Promise<string> {
   });
 }
 
-// `variant:"v2"` (+ paletteSwatches) selects the palette-aware T-040-01 prompt; absent/"v1" is the
-// frozen E-13 path, byte-identical to before. The swatch grid image rides in `images` like any ref.
+// `variant:"v2"` (+ paletteSwatches) selects the palette-aware T-040-01 prompt; `variant:"building"`
+// selects the E-20 BuildingConceptPrompt (whole building in the round, single 3/4 view); absent/"v1" is
+// the frozen E-13 sculpture path, byte-identical to before. A swatch grid image rides in `images`.
 const { designDocPath, images = [], targetBlocks = 32, model = "pro", outPath, attached = "", variant = "v1", paletteSwatches = "" } = JSON.parse(await readStdin());
 const designDoc = readFileSync(designDocPath, "utf8");
 
 // BAML needs a key to RENDER (never sent here); the real concept call is Nano Banana below.
 if (!process.env.ANTHROPIC_API_KEY) process.env.ANTHROPIC_API_KEY = "baml-render-only";
-const req: any = variant === "v2"
+const req: any = variant === "building"
+  ? await b.request.BuildingConceptPrompt(designDoc, targetBlocks, attached)
+  : variant === "v2"
   ? await b.request.SculptureConceptPromptV2(designDoc, targetBlocks, paletteSwatches, attached)
   : await b.request.SculptureConceptPrompt(designDoc, targetBlocks, attached);
 const promptText = (req.body.json().messages ?? [])
