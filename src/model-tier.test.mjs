@@ -65,6 +65,7 @@ test("OP_ROUTING integrity: every tier is a known tier, every rationale non-empt
   const byOp = Object.fromEntries(OP_ROUTING.map((r) => [r.op, r.tier]));
   assert.equal(byOp["roof-patch-detector"], "light");
   assert.equal(byOp["hollowable-mass-detector"], "light");
+  assert.equal(byOp["floorplan-author"], "strong"); // authoring a generator → strong (T-081-01)
 });
 
 test("ROUTING_RUBRIC has a light + strong rule", () => {

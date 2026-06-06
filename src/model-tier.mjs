@@ -111,6 +111,14 @@ export const OP_ROUTING = Object.freeze([
       "Assigning materials to geometric zones across the whole build is the rubric's named strong case — " +
       "material zoning across views, not a single-view label.",
   }),
+  Object.freeze({
+    op: "floorplan-author",
+    tier: "strong",
+    rationale:
+      "Authoring/steering an N×M floorplan generator from the plan + elevation is design WITH invention " +
+      "(no interior reference) — the rubric's named strong case (authoring a generator), not a one-view " +
+      "label. (T-081-01, fills the T-080-01 hollow shell.)",
+  }),
 ]);
 
 /**
