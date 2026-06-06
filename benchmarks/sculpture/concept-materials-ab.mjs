@@ -213,6 +213,8 @@ function spawnMap({ conceptPath, docPath }) {
         reject(new Error(`unparseable bridge output: ${e.message}\n${out.slice(0, 300)}`));
       }
     });
+    // the bridge reads {conceptPath, docPath?} from stdin — write it and END (else it hangs on readStdin()).
+    child.stdin.end(JSON.stringify({ conceptPath, ...(docPath ? { docPath } : {}) }));
   });
 }
 
@@ -323,7 +325,7 @@ async function runLive({ scale, only }) {
     }
   }
   await emit(rowInputs, { scale });
-  await copyFrames(["gatehouse", "cottage"]);
+  await copyFrames(subjects.map((s) => s.key)); // gatehouse before/after = the AC#3 visual; all 4 for E-12
 }
 
 /** --offline: re-derive the report from committed before/after artifacts + maps, re-validate AJV, no GL/model. */

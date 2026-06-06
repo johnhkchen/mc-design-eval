@@ -6,12 +6,14 @@ near-tone materials) → **after** = concept-grounded (the T-071 LLM material ma
 geometric feature). Cells read **before→after**. Lower better for speckle / off-palette; `distinct` is
 the palette-growth axis (grows only by concept-justified additions).
 
-Scale 32. Subjects: 2. Schema `concept-materials-ab/v1`.
+Scale 32. Subjects: 4. Schema `concept-materials-ab/v1`.
 
 | subject | kind | distinct | speckle | off-pal | near-tone collapsed→restored | true-by-feature | judge |
 | ------- | ---- | -------- | ------- | ------- | ---------------------------- | --------------- | ----- |
 | gatehouse | architectural | 5→5 | 0.006→0.035 | 0→0 | 3→3 (sep 4) | ✓ | **restored** |
 | cottage | architectural | 7→6 | 0.002→0.093 | 1416→0 | 3→0 (sep 1) | ✗ | **over-reach** |
+| moai | sculpture | 5→3 | 0.005→0.079 | 1492→0 | 1→0 (sep 0) | ✗ | **over-reach** |
+| pineapple | sculpture | —→— | —→— | —→— | — | n/a | **deferred** |
 
 ## Palette growth — what the LLM added back, and why (AC#4)
 
@@ -19,14 +21,16 @@ Scale 32. Subjects: 2. Schema `concept-materials-ab/v1`.
 | ------- | ---------- | ------------------------------------------- | ---------- |
 | gatehouse | 0 | _(none)_ | ✓ |
 | cottage | -1 | _(none)_ | ✓ |
+| moai | -2 | `stone_bricks` (base) · plinth / footing course — Near-tone but NOT the same material as the body: the base shows a regular tiled grid / coursed jointing in all three views, versus the smooth jointless concrete of the column. Kept distinct as bricks (visible coursing, masonry role as a wider footing) rather than collapsed into the body's gray. | ✓ |
+| pineapple | — | _(none)_ | — |
 
 ## Judge tally (AC#2)
 
 - **restored** (1): gatehouse
 - **clean-held** (0): —
 - **no-distinction** (0): —
-- **over-reach** (1): cottage
-- **deferred** (0): —
+- **over-reach** (2): cottage, moai
+- **deferred** (1): pineapple
 
 ## Headline
 
@@ -34,7 +38,7 @@ Scale 32. Subjects: 2. Schema `concept-materials-ab/v1`.
 
 → **Restored on the architectural headline; honest over-reach recorded on organic forms (see ledger).**
 
-Near-tone pairs collapsed by colorimetry **6** → restored by the concept-grounded build **3**. restored: gatehouse; over-reach: cottage; deferred: —.
+Near-tone pairs collapsed by colorimetry **7** → restored by the concept-grounded build **3**. restored: gatehouse; over-reach: cottage, moai; deferred: pineapple.
 > _restored = a colorimetric near-tone collapse is present again, placed by feature; over-reach = a map block dominates the wrong feature OR growth is unjustified (honest); no-distinction = monochrome subject, growth must stay flat (bloat control); deferred = no after build._
 
 ## Honesty ledger

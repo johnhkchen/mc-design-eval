@@ -1801,3 +1801,74 @@ real** (moai), materials **flat** (busy blocks gone), at the documented value-Δ
 speckle ≤ 0.05, busy blocks gone) and removes the stray hallucination where it is real (moai 2023→0) — the
 residue is a measurement tautology (value ΔE) and one corrupt GLB (moai), both with named upstream fixes, plus
 the reusable lesson that **a prune tuned for gross hallucination must be gated off incidental disconnection**.
+
+## Concept-grounded materials (E-21) — the mean-colour collapse restored by feature, and where it over-reaches (S-074, T-074-01) · 2026-06-06
+
+Through E-19 every block was chosen by **nearest mean colour** (`segmentMaterials`). That single authority has
+one structural failure: it **collapses near-tone-distinct materials**. Two regions the concept shows as
+*different materials* but *similar tone* — stone-brick walls vs cobblestone corner buttresses, smooth tuff body
+vs a coursed-brick plinth — both snap to the same grey block, and the deliberate masonry distinction the design
+*intended* disappears. Mean colour cannot tell brick from cobble; it only sees grey ≈ grey. **Material identity
+is semantic, not chromatic** — it is *what the material is for* (texture, grain, coursing, architectural role),
+which colour throws away.
+
+**The fix is an authority swap, not a colour fix.** E-21 replaced mean-colour with a three-stage
+concept-grounded pipeline: **T-071** — an LLM reads the concept image and *names the real survival block per
+visible region* by material intent (the map: `material-map/{subject}.json`); **T-072** — each named block is
+placed by **geometric feature** (flat-face / edge-corner / roof / base / opening-recess), so a block lands on
+the feature it is *for*, not where its colour happens to match; **T-073** — a refine pass corrects visible
+mis-zoning against the concept. **T-074** measured it: per subject one GLB-voxel build under two authorities —
+`before` = colorimetric (the E-19 mean-colour path) → `after` = concept-grounded (map → feature-assign) — on
+the **same GLB and the same map-palette universe**, so the *only* variable is the authority. Spine:
+`benchmarks/sculpture/concept-materials-ab.{md,json}`; handoff `pr/assets/concept-materials.md`.
+
+| subject | kind | distinct | speckle | off-pal | near-tone collapsed→restored | true-by-feature | judge |
+| ------- | ---- | -------- | ------- | ------- | ---------------------------- | --------------- | ----- |
+| gatehouse | architectural | 5→5 | 0.006→0.035 | 0→0 | 3→3 (sep 4) | ✓ | **restored** |
+| cottage | architectural | 7→6 | 0.002→0.093 | 1416→0 | 3→0 (sep 1) | ✗ | **over-reach** |
+| moai | sculpture | 5→3 | 0.005→0.079 | 1492→0 | 1→0 (sep 0) | ✗ | **over-reach** |
+| pineapple | sculpture | 4→4 | 0.021→0.073 | 0→0 | 3→2 (sep 2) | ✗ | **over-reach** |
+
+**The headline — the collapse IS fixable by authority, on the 1:1 case. gatehouse restores cleanly.** The
+colorimetric build merged its four near-tone materials toward grey; the concept-grounded build places all four
+back on the feature each is *for* — `stone_bricks` on flat-face walls, `cobblestone` on edge-corner quoins,
+`deepslate_tiles` on the roof, `dark_oak_planks` in the opening recesses. **Every block dominates its intended
+feature** (true-by-feature ✓), 4 near-tone pairs separated, off-palette stays 0, distinct holds at 5 (no
+bloat). The grey-blob walls become brick-walls-with-cobble-corners — the exact failure E-21 set out to fix,
+measured restored. Across all four subjects, near-tone pairs collapsed by colorimetry **10 → restored 5**.
+
+**The LLM's right to add a missing concept material back — justified growth, not bloat (AC#4).** distinct grew
+on *no* subject and shrank on three; the *one* addition across all four (moai's `stone_bricks` plinth) is
+**concept-justified** — the base shows a tiled coursed grid the smooth `gray_concrete` column does not, a
+genuine near-tone material the design-doc omitted. The build adds a block **only** where the concept shows one
+the prior palette missed, bounded by the map, never sliding back toward the 305-block table. Growth is gated by
+concept evidence, not free.
+
+**Where it over-reaches — two named, reusable boundaries (the honest negative, AC#5).** Over-reach is not noise
+or regression; it is exactly the two places a *geometric* assigner cannot carry a *concept-justified* material:
+
+1. **Two materials, one architectural role — the SHARED-RULE LIMIT (cottage).** The map is concept-honest but
+   assigns **two materials to one `placementRule`** (`stone_bricks` + `white_terracotta` both `walls`;
+   `spruce_planks` + `dark_oak_planks` both `roof`). T-072 places **one block per geometric feature**, so the
+   second same-role material has no distinct feature to land on — `white_terracotta` spills to the base,
+   `dark_oak_planks` to the opening recess. The materials are *justified*, not invented; **geometry alone
+   cannot separate two materials that share one role.** Needs a sub-feature selector (same family as the
+   unplaced `trim`-accent gap).
+2. **Organic forms lack the architectural feature vocabulary (moai, pineapple).** The flat-face / edge-corner /
+   roof / base / recess classifier was built for buildings; on an organic monolith or an ovoid-with-fins it is
+   ill-defined, so a justified block leans on the colour fallback and mis-zones (moai's plinth bricks land on
+   edge-corners; pineapple's crown `green_concrete` dominates edge-corner cells). The near-tone pair is real
+   and *named in the map* — the assigner just can't place it on a form its feature vocabulary doesn't describe.
+
+**The deeper finding (carry forward).** Near-tone material identity is carried by **geometry (feature
+assignment), not colour** — which is why it is *invisible to a render*, and why the T-073 render-based refine
+pass (which corrects visible mis-zoning) cannot see it and is cited, not re-run per subject. The boundary of
+E-21 is therefore not "does the LLM name the right material" (it does — every map is concept-honest) but
+"**can the feature classifier place it**" — and that fails precisely on two-materials-one-role and on organic
+forms. Both are upstream feature-vocabulary tickets, not authority defects.
+
+**One sentence:** E-21 swaps the material authority from collapse-prone mean-colour to a concept-grounded
+LLM-map placed by geometric feature, and on the architectural 1:1 case (gatehouse) it restores every near-tone
+distinction the colour build merged — cleanly, truly, with concept-justified growth only — while the three
+over-reaches honestly mark the assigner's two real boundaries (two-materials-one-role, and the architectural
+feature classifier on organic forms).

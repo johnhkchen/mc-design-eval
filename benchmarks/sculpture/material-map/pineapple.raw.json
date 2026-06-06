@@ -1,0 +1,34 @@
+{
+  "materials": [
+    {
+      "role": "fruit body field — the golden ovoid skin between the eyes",
+      "block": "minecraft:yellow_terracotta",
+      "placementRule": "walls",
+      "rationale": "The dominant warm-gold mass between the diamonds reads as muted, earthy ripe fruit (not glossy toy-yellow); terracotta's matte grain matches the body's soft, non-shiny surface."
+    },
+    {
+      "role": "diamond 'eyes' lattice — the raised orange cross/plus motifs",
+      "block": "minecraft:orange_terracotta",
+      "placementRule": "trim",
+      "rationale": "The staggered raised plus-shapes are a distinct deeper orange than the body field — a near-tone but separate material giving the pineapple-skin lattice its depth; kept distinct so the eyes don't collapse into the gold body."
+    },
+    {
+      "role": "leaf crown blades — the radiating green fins",
+      "block": "minecraft:green_concrete",
+      "placementRule": "roof",
+      "rationale": "The crown is the top mass and the one cool note; the saturated, flat-faced green fins read as concrete's clean matte saturation, popping against the warm body."
+    },
+    {
+      "role": "leaf highlight tips — the bright lime caps on the tallest blades",
+      "block": "minecraft:lime_terracotta",
+      "placementRule": "trim",
+      "rationale": "Only the outermost blade tips show a lighter, yellower lime than the body of the leaves — a sparing highlight accent kept distinct from the darker green_concrete crown so the leaf tips catch light."
+    },
+    {
+      "role": "plinth disc — the flattened base course under the body",
+      "block": "minecraft:yellow_terracotta",
+      "placementRule": "base",
+      "rationale": "The slightly wider footing course at the bottom shares the body's gold material but functions as a separate stabilizing plinth region beneath the fruit mass."
+    }
+  ]
+}

@@ -9,10 +9,13 @@
       "gatehouse"
     ],
     "overReachSubjects": [
-      "cottage"
+      "cottage",
+      "moai"
     ],
-    "deferredSubjects": [],
-    "collapsedPairsBefore": 6,
+    "deferredSubjects": [
+      "pineapple"
+    ],
+    "collapsedPairsBefore": 7,
     "restoredPairsAfter": 3,
     "verdict": "Restored on the architectural headline; honest over-reach recorded on organic forms (see ledger).",
     "note": "restored = a colorimetric near-tone collapse is present again, placed by feature; over-reach = a map block dominates the wrong feature OR growth is unjustified (honest); no-distinction = monochrome subject, growth must stay flat (bloat control); deferred = no after build."
@@ -24,9 +27,12 @@
     "clean-held": [],
     "no-distinction": [],
     "over-reach": [
-      "cottage"
+      "cottage",
+      "moai"
     ],
-    "deferred": []
+    "deferred": [
+      "pineapple"
+    ]
   },
   "subjects": [
     {
@@ -273,6 +279,93 @@
         ]
       },
       "judge": "over-reach"
+    },
+    {
+      "subject": "moai",
+      "kind": "sculpture",
+      "before": {
+        "distinct": 5,
+        "speckle": 0.005,
+        "offPalette": 1492
+      },
+      "after": {
+        "distinct": 3,
+        "speckle": 0.079,
+        "offPalette": 0
+      },
+      "delta": {
+        "distinct": -2,
+        "speckle": 0.074,
+        "offPalette": -1492
+      },
+      "nearTone": {
+        "pairs": [
+          {
+            "a": "red_sandstone",
+            "b": "stone_bricks",
+            "dL": 0.136,
+            "beforeBoth": false,
+            "afterBoth": true,
+            "distinguishedBefore": false,
+            "distinguishedAfter": false,
+            "separated": false,
+            "collapsedBefore": true,
+            "restored": false
+          }
+        ],
+        "collapsedBefore": 1,
+        "restoredAfter": 0,
+        "separatedAfter": 0
+      },
+      "growth": {
+        "added": [
+          {
+            "block": "stone_bricks",
+            "placementRule": "base",
+            "role": "plinth / footing course",
+            "rationale": "Near-tone but NOT the same material as the body: the base shows a regular tiled grid / coursed jointing in all three views, versus the smooth jointless concrete of the column. Kept distinct as bricks (visible coursing, masonry role as a wider footing) rather than collapsed into the body's gray.",
+            "inMap": true,
+            "justified": true
+          }
+        ],
+        "count": 1,
+        "justified": true
+      },
+      "trueByFeature": {
+        "ok": false,
+        "perRule": [
+          {
+            "block": "gray_concrete",
+            "rule": "walls",
+            "feature": "flat-face",
+            "dominant": "flat-face",
+            "ok": true
+          },
+          {
+            "block": "stone_bricks",
+            "rule": "base",
+            "feature": "base",
+            "dominant": "edge-corner",
+            "ok": false
+          }
+        ]
+      },
+      "judge": "over-reach"
+    },
+    {
+      "subject": "pineapple",
+      "kind": "sculpture",
+      "before": null,
+      "after": null,
+      "delta": {
+        "distinct": null,
+        "speckle": null,
+        "offPalette": null
+      },
+      "nearTone": null,
+      "growth": null,
+      "trueByFeature": null,
+      "judge": "deferred"
     }
   ],
   "ledger": [

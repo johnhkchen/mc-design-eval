@@ -1,0 +1,39 @@
+{
+  "map": [
+    {
+      "role": "monolithic body and carved face (brow, nose, lips, chin, torso)",
+      "block": "minecraft:gray_concrete",
+      "placementRule": "walls",
+      "rationale": "The dominant column reads as one smooth, uniform, matte gray mass — clean weathered tuff with no coursing or grain. The stepped facial planes are carved FROM this same monolith (geometry, not a material change), so the whole figure is a single smooth gray field."
+    },
+    {
+      "role": "pukao topknot (crown accent)",
+      "block": "minecraft:red_sandstone",
+      "placementRule": "trim",
+      "rationale": "The stepped cap at the crown is the one warm note — a muted reddish-orange with faint horizontal coursing, distinct in both hue and material from the gray body; red sandstone's warm tone and bedded grain match the historically-correct pukao."
+    },
+    {
+      "role": "plinth / footing course",
+      "block": "minecraft:stone_bricks",
+      "placementRule": "base",
+      "rationale": "Near-tone but NOT the same material as the body: the base shows a regular tiled grid / coursed jointing in all three views, versus the smooth jointless concrete of the column. Kept distinct as bricks (visible coursing, masonry role as a wider footing) rather than collapsed into the body's gray."
+    }
+  ],
+  "dropped": [],
+  "palette": [
+    "minecraft:gray_concrete",
+    "minecraft:red_sandstone",
+    "minecraft:stone_bricks"
+  ],
+  "stats": {
+    "in": 3,
+    "kept": 3,
+    "dropped": 0,
+    "distinctBlocks": 3,
+    "placementRules": [
+      "walls",
+      "trim",
+      "base"
+    ]
+  }
+}
