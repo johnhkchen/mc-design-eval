@@ -34,3 +34,7 @@ benchmarks/sculpture/glb-voxel/**/render-3q.png
 # GLB-voxel surgical-loop renders (T-052-01) — image-heavy, derived, regen via
 # `node benchmarks/sculpture/glb-voxel-surgical.mjs`. The durable record is the .json/.md summary.
 benchmarks/sculpture/glb-voxel-surgical/**/*.png
+
+# GLB-voxel material-clean (R2) renders (T-055-01) — image-heavy, derived, regen via
+# `node benchmarks/sculpture/glb-voxel-clean.mjs`. The durable record is summary.json + r2.{md,json}.
+benchmarks/sculpture/glb-voxel-clean/**/render-3q.png
