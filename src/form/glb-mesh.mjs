@@ -208,3 +208,95 @@ export function parseGlbMesh(glb) {
   if (tris.length === 0) throw new GlbParseError("GLB contained no triangles");
   return { positions: Float64Array.from(tris), triangleCount: tris.length / 9, bounds: { min, max } };
 }
+
+/**
+ * Resolve a primitive's baseColor texture bytes: material → pbrMetallicRoughness.baseColorTexture →
+ * texture.source → image.bufferView → sliced bytes. Returns `{ data, mimeType }` or null if any link
+ * is absent (the GLB is untextured, or color is encoded some other way). Pure; no decode.
+ * @returns {{ data: Uint8Array, mimeType: string } | null}
+ */
+function extractBaseColorImage(json, bin, prim) {
+  const matIdx = prim?.material;
+  const mat = matIdx == null ? null : json.materials?.[matIdx];
+  const texIdx = mat?.pbrMetallicRoughness?.baseColorTexture?.index;
+  if (texIdx == null) return null;
+  const tex = json.textures?.[texIdx];
+  const imgIdx = tex?.source;
+  if (imgIdx == null) return null;
+  const img = json.images?.[imgIdx];
+  if (!img || img.bufferView == null) return null; // data-URI images unsupported (TRELLIS embeds in BIN)
+  const bv = json.bufferViews?.[img.bufferView];
+  if (!bv) throw new GlbParseError(`image ${imgIdx} references missing bufferView ${img.bufferView}`);
+  if (!bin) throw new GlbParseError("image references binary data but GLB has no BIN chunk");
+  const start = bv.byteOffset ?? 0;
+  const data = bin.subarray(start, start + bv.byteLength);
+  return { data, mimeType: img.mimeType ?? "application/octet-stream" };
+}
+
+/**
+ * Parse a .glb into a COLOR-AWARE, vertex-indexed surface: per-vertex world positions + UVs, the AABB,
+ * and the baseColor texture bytes (still encoded — the caller decodes; this module never pulls an image
+ * codec). Companion to {@link parseGlbMesh}, which is geometry-only and unchanged. Used by the GLB-voxel
+ * color stage (T-051-01): nearest-vertex UV → texture sample → value-true block.
+ *
+ * Vertices are concatenated across all primitives/meshes in scene order; UVs share the vertex index
+ * space (a vertex with no TEXCOORD_0 gets [0,0]). Indices are intentionally NOT returned — the color
+ * stage matches a voxel to its nearest vertex, not a triangle. The baseColor image is taken from the
+ * FIRST primitive that has one (TRELLIS GLBs are single-material).
+ *
+ * @param {Uint8Array|ArrayBuffer|Buffer} glb
+ * @returns {{ vertices: Float64Array, uvs: Float64Array, bounds:{min:number[],max:number[]},
+ *            baseColor: { data: Uint8Array, mimeType: string } | null }}
+ */
+export function parseGlbColoredSurface(glb) {
+  const buf = toU8(glb);
+  const { json, bin } = splitChunks(buf);
+
+  const verts = []; // flat world-space xyz
+  const uv = []; // flat u,v (one per vertex)
+  const min = [Infinity, Infinity, Infinity];
+  const max = [-Infinity, -Infinity, -Infinity];
+  let baseColor = null;
+
+  const emitMesh = (mesh, world) => {
+    for (const prim of mesh.primitives ?? []) {
+      const posIdx = prim.attributes?.POSITION;
+      if (posIdx == null) throw new GlbParseError("mesh primitive has no POSITION attribute");
+      const pos = readAccessor(json, bin, posIdx);
+      const uvIdx = prim.attributes?.TEXCOORD_0;
+      const tex = uvIdx == null ? null : readAccessor(json, bin, uvIdx);
+      for (let v = 0; v < pos.count; v++) {
+        const [wx, wy, wz] = transformPoint(world, pos.array[v * 3], pos.array[v * 3 + 1], pos.array[v * 3 + 2]);
+        verts.push(wx, wy, wz);
+        if (wx < min[0]) min[0] = wx;
+        if (wy < min[1]) min[1] = wy;
+        if (wz < min[2]) min[2] = wz;
+        if (wx > max[0]) max[0] = wx;
+        if (wy > max[1]) max[1] = wy;
+        if (wz > max[2]) max[2] = wz;
+        uv.push(tex ? tex.array[v * 2] : 0, tex ? tex.array[v * 2 + 1] : 0);
+      }
+      if (baseColor === null) baseColor = extractBaseColorImage(json, bin, prim);
+    }
+  };
+
+  const walkNode = (idx, parent) => {
+    const node = json.nodes?.[idx];
+    if (!node) return;
+    const world = mat4Multiply(parent, mat4FromNode(node));
+    if (node.mesh != null) emitMesh(json.meshes[node.mesh], world);
+    for (const child of node.children ?? []) walkNode(child, world);
+  };
+
+  const scene = json.scenes?.[json.scene ?? 0];
+  if (scene?.nodes?.length) {
+    for (const root of scene.nodes) walkNode(root, mat4Identity());
+  } else if (json.nodes?.length) {
+    json.nodes.forEach((_, i) => walkNode(i, mat4Identity()));
+  } else {
+    for (const mesh of json.meshes ?? []) emitMesh(mesh, mat4Identity());
+  }
+
+  if (verts.length === 0) throw new GlbParseError("GLB contained no vertices");
+  return { vertices: Float64Array.from(verts), uvs: Float64Array.from(uv), bounds: { min, max }, baseColor };
+}
