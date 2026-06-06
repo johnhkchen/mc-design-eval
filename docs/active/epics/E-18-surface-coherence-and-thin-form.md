@@ -23,7 +23,14 @@ attacks:
    adjacent cells get scattered blocks. E-17's **material-clean** pass (R2 — extract a value-true palette
    from the GLB texture via the E-10 CIE-Lab technique, snap each voxel, light neighborhood smoothing)
    **narrowed but did not eliminate** it — the heart's R2 reads "coherent red with noise," not clean.
-   Silhouette IoU is blind to this, so it shows only on the speckle / value-ΔE axis.
+   Two specific symptoms, both observed and both worth special attention (a directive):
+   - **Palette leakage** — the build pulls in **many blocks beyond the intended palette** (the same-hue
+     E-11 expansion + per-voxel nearest-block over a loose/large palette let near-duplicate blocks creep
+     in), so the material set is far bigger than the few colors the subject actually has.
+   - **Gradients break down** — the GLB texture has **smooth gradients** (shading, color transitions);
+     snapping each voxel *independently* turns a gradient into a *scatter* of many near-identical blocks
+     (noise) instead of a clean **band or dither**. Gradients are where the speckle is worst.
+   Silhouette IoU is blind to all of this, so it shows only on the speckle / palette-size / value-ΔE axis.
 2. **Thin forms (a geometry problem, two-headed).** Thin/elongated subjects are the pipeline's weakest:
    - **bow & arrow** *has* a GLB but voxelizes worst (form IoU **0.473**, lowest of the 7) — thin members
      (the bowstave, the string, the arrow shaft) drop out or stair-step at a global voxel scale.
@@ -37,10 +44,13 @@ attacks:
 
 Close both gaps and make the resulting picture honest:
 
-- **Kill the speckle** — replace per-voxel snap-and-smooth with **material-region segmentation**: group
-  contiguous same-material voxels into regions and fill each region with one value-true block (optionally
-  an E-11 same-hue set varied by normal/height for *deliberate* texture). The proper "clean material
-  regions," not salt-and-pepper.
+- **Kill the speckle** — replace per-voxel snap-and-smooth with **material-region segmentation** under a
+  **tight, fixed palette**: (a) confine the whole build to a small canonical palette (a handful of
+  value-true blocks extracted from the texture) — **zero off-palette blocks**, distinct-block count ≈
+  palette size, no same-hue leakage; (b) fill each contiguous region with one palette block; and (c) where
+  a region carries a real **gradient**, render it as a **deliberate band or ordered dither** between two
+  adjacent palette steps — never a per-voxel scatter. The proper "clean material regions," not
+  salt-and-pepper, and gradients that read as gradients.
 - **Preserve thin form** — a **thin-feature-aware voxelization**: detect thin members (local thickness /
   medial axis) and guarantee they survive (connectivity, no dropped components; finer effective resolution
   where thin), lifting the bow-and-arrow voxel build.
@@ -60,8 +70,9 @@ Close both gaps and make the resulting picture honest:
 
 ## Scope
 
-**In:** the **material-region-segmentation** pass (connected-region fill over value-true voxels → clean
-materials; a speckle metric, before/after, ×7); **thin-feature-preserving voxelization** (thin-member
+**In:** the **material-region-segmentation** pass (tight fixed palette + connected-region fill + gradient
+banding/dither over value-true voxels → clean materials; metrics: distinct-block / off-palette /
+speckle, before/after, ×7); **thin-feature-preserving voxelization** (thin-member
 detection + connectivity/adaptive-scale → bow-and-arrow et al., form-IoU before/after); **integrate +
 re-measure** (both passes combined across the 7 subjects, updated rung metrics: form IoU + speckle +
 value ΔE); **consolidation** (the scorecard delta, the **sword/thin-angular boundary finding**,
@@ -81,11 +92,13 @@ S-059 thin-feature voxelization ────┘     (both passes, ×7, metrics) 
    (lift bow-and-arrow's form)                                             finding + journal + E-12)
 ```
 
-- **S-058 — material-region-segmentation (the speckle fix).** Over a glb-voxel build's value-true voxels,
-  **segment contiguous same-material regions** (region-grow / connected components by Lab ΔE threshold in
-  3-D surface space) and **fill each region with one block** (its dominant value-true block; optionally an
-  E-11 same-hue set varied by normal/height). Removes salt-and-pepper. A **speckle metric** (neighborhood
-  disagreement rate / distinct-block count) before/after, ×7. Pure logic unit-tested.
+- **S-058 — material-region-segmentation (the speckle fix).** Under a **tight fixed palette** (a handful
+  of value-true blocks; **zero off-palette leakage**, distinct-block count ≈ palette size), **segment
+  contiguous same-material regions** (region-grow / connected components by Lab ΔE in 3-D surface space)
+  and **fill each region with one palette block**; where a region carries a **gradient**, render it as a
+  **deliberate band / ordered dither** between adjacent palette steps, never a per-voxel scatter. Removes
+  salt-and-pepper *and* fixes gradients/palette-bloat. Metrics: **distinct-block count, off-palette count
+  (target 0), speckle (neighborhood-disagreement) rate**, before/after, ×7. Pure logic unit-tested.
 - **S-059 — thin-feature-preserving-voxelization (the thin fix).** An adaptive layer over `voxelizeGlb`:
   detect **thin members** (local thickness below a threshold / medial axis) and ensure they **survive** —
   guaranteed connectivity (no severed/dropped thin components), finer effective resolution where thin (or
