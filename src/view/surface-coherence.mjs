@@ -66,6 +66,32 @@ function enclosedHoleCells(grid) {
   return out;
 }
 
+/** Face INTRUSIONS — the "random homes": surface cells whose block ≠ `field` AND that are EMBEDDED in the
+ *  field (a strict majority of present 4-neighbours are the field material). This preserves coherent
+ *  multi-material BANDS (Tudor timber courses, a cobble foundation — a cell whose neighbours share its
+ *  material is kept) and strips only the isolated specks the witnessed defect described. NOT "every
+ *  non-dominant cell": a polychrome wall is intentional, so the field is a context, not a monolith. PURE. */
+function faceIntrusions(grid, field) {
+  const out = [];
+  for (let v = 0; v < grid.m; v++) {
+    for (let u = 0; u < grid.n; u++) {
+      const c = grid.cells[v][u];
+      if (!c || bareBlock(c.block) === field) continue;
+      let present = 0, fieldN = 0;
+      for (const [du, dv] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+        const nu = u + du, nv = v + dv;
+        if (nv < 0 || nv >= grid.m || nu < 0 || nu >= grid.n) continue;
+        const n = grid.cells[nv][nu];
+        if (!n) continue;
+        present++;
+        if (bareBlock(n.block) === field) fieldN++;
+      }
+      if (present > 0 && fieldN * 2 > present) out.push(c); // strict-majority field → embedded speck
+    }
+  }
+  return out;
+}
+
 /** World depth coordinate (axisW) to seal a hole at: the front-most (min-depth) filled 4-neighbour's W,
  *  so the seal sits FLUSH with the surrounding skin (not at a global roof height that a sloped/eaved roof
  *  would miss). `null` when the cell has no filled neighbour (cannot happen for an enclosed hole). */
@@ -198,8 +224,8 @@ export function sealWallFace(occ, dir, { fieldMaterial, strip } = {}) {
   const placements = [];
   let stripped = 0, sealed = 0;
 
-  for (const c of filledCells(grid)) {
-    if (bareBlock(c.block) === field) continue;
+  // strip intrusions — the embedded specks (default), or the detector-supplied `strip` set ∩ them
+  for (const c of faceIntrusions(grid, field)) {
     if (stripSet && !stripSet.has(voxelKey(c.voxel))) continue;
     placements.push({ op: "voxel", pos: [...c.voxel], block: namespaced(field) });
     stripped++;
@@ -219,13 +245,11 @@ export function sealWallFace(occ, dir, { fieldMaterial, strip } = {}) {
   };
 }
 
-/** {intrusions, holes} for one face against `field`: non-field surface cells + enclosed skin holes. */
+/** {intrusions, holes} for one face against `field`: embedded-speck intrusions + enclosed skin holes. */
 function faceCoherence(occ, dir, field) {
   if (!occ.bounds) return { intrusions: 0, holes: 0 };
   const grid = projectSurface(occ, dir);
-  let intrusions = 0;
-  for (const c of filledCells(grid)) if (bareBlock(c.block) !== field) intrusions++;
-  return { intrusions, holes: enclosedHoleCells(grid).length };
+  return { intrusions: faceIntrusions(grid, field).length, holes: enclosedHoleCells(grid).length };
 }
 
 /**

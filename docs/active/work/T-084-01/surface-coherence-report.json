@@ -1,0 +1,220 @@
+{
+  "schema": "surface-coherence/v1",
+  "subject": "cottage (after-artifact.json)",
+  "placements": {
+    "before": 6429,
+    "after": 6597
+  },
+  "occupancy": {
+    "voxels": 6429,
+    "dims": [
+      26,
+      27,
+      32
+    ]
+  },
+  "roof": {
+    "field": "spruce_planks",
+    "stripped": 62,
+    "filled": 1,
+    "coverage": {
+      "before": 0.998,
+      "after": 1
+    },
+    "strayCount": {
+      "before": 62,
+      "after": 0
+    }
+  },
+  "walls": {
+    "stripped": 100,
+    "sealed": 8,
+    "faces": [
+      {
+        "dir": "+x",
+        "field": "stone_bricks",
+        "stripped": 22,
+        "sealed": 4,
+        "before": {
+          "intrusions": 22,
+          "holes": 4
+        },
+        "after": {
+          "intrusions": 12,
+          "holes": 0
+        }
+      },
+      {
+        "dir": "-x",
+        "field": "stone_bricks",
+        "stripped": 32,
+        "sealed": 4,
+        "before": {
+          "intrusions": 32,
+          "holes": 4
+        },
+        "after": {
+          "intrusions": 16,
+          "holes": 0
+        }
+      },
+      {
+        "dir": "+z",
+        "field": "stone_bricks",
+        "stripped": 22,
+        "sealed": 0,
+        "before": {
+          "intrusions": 22,
+          "holes": 0
+        },
+        "after": {
+          "intrusions": 6,
+          "holes": 0
+        }
+      },
+      {
+        "dir": "-z",
+        "field": "stone_bricks",
+        "stripped": 24,
+        "sealed": 0,
+        "before": {
+          "intrusions": 24,
+          "holes": 0
+        },
+        "after": {
+          "intrusions": 11,
+          "holes": 0
+        }
+      }
+    ]
+  },
+  "watertight": {
+    "before": {
+      "watertight": false,
+      "interiorCells": 3561,
+      "reached": 2443,
+      "breaches": [
+        "-12,3,-2",
+        "-12,6,0",
+        "-12,9,-3",
+        "-12,10,-4",
+        "-12,10,-3",
+        "-12,11,-4",
+        "-12,12,-4",
+        "-12,12,-3",
+        "-12,13,1",
+        "-12,15,-9",
+        "-12,15,-8",
+        "-12,15,-7",
+        "-12,15,-4",
+        "-12,15,0",
+        "-12,15,4",
+        "-12,15,5"
+      ]
+    },
+    "after": {
+      "watertight": false,
+      "interiorCells": 3625,
+      "reached": 2507,
+      "breaches": [
+        "-12,3,-2",
+        "-12,6,0",
+        "-12,9,-3",
+        "-12,9,-2",
+        "-12,10,-4",
+        "-12,10,-3",
+        "-12,11,-4",
+        "-12,12,-4",
+        "-12,12,-3",
+        "-12,13,1",
+        "-12,15,-9",
+        "-12,15,-8",
+        "-12,15,-7",
+        "-12,15,-4",
+        "-12,15,0",
+        "-12,15,4"
+      ]
+    }
+  },
+  "detectors": [
+    {
+      "op": "roof-patch-detector",
+      "tier": "light",
+      "model": "claude-haiku-4-5",
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2255,
+        "total_cost_usd": 0.03040645
+      },
+      "parsed": {
+        "schema": "roof-patch/v1",
+        "patches": []
+      },
+      "parseError": null
+    },
+    {
+      "op": "hollowable-mass-detector",
+      "tier": "light",
+      "model": "claude-haiku-4-5",
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 997,
+        "total_cost_usd": 0.02333895
+      },
+      "parsed": {
+        "schema": "hollowable-mass/v1",
+        "hollowable": false,
+        "regions": [
+          {
+            "yStart": 1,
+            "yEnd": 15,
+            "inset": 1,
+            "note": "Primary body — 1047 carveable cells"
+          },
+          {
+            "yStart": 16,
+            "yEnd": 22,
+            "inset": 1,
+            "note": "Upper volume — 40 carveable cells"
+          },
+          {
+            "yStart": 23,
+            "yEnd": 23,
+            "inset": 1,
+            "note": "Roof — 13 carveable cells"
+          }
+        ],
+        "blockers": [
+          "8 skin holes detected in elevations — seal required before hollowing"
+        ]
+      },
+      "parseError": null
+    }
+  ],
+  "renders": {
+    "before": [
+      {
+        "angle": "top",
+        "path": "docs/active/work/T-084-01/view-before-top.png",
+        "bytes": 91022
+      },
+      {
+        "angle": "threeQuarter",
+        "path": "docs/active/work/T-084-01/view-before-threeQuarter.png",
+        "bytes": 141002
+      }
+    ],
+    "after": [
+      {
+        "angle": "top",
+        "path": "docs/active/work/T-084-01/view-after-top.png",
+        "bytes": 90228
+      },
+      {
+        "angle": "threeQuarter",
+        "path": "docs/active/work/T-084-01/view-after-threeQuarter.png",
+        "bytes": 140628
+      }
+    ]
+  }
+}

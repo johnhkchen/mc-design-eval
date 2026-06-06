@@ -134,13 +134,33 @@ test("sealWalls dedups a corner voxel shared by two faces", () => {
   assert.equal(cornerDeltas.length, 1, "corner sealed once");
 });
 
-test("sealWallFace fieldMaterial override forces the field block", () => {
+test("sealWallFace strips only embedded specks, preserving a coherent material band", () => {
+  // A 5×3 -z wall: a 2-wide spruce_planks timber band (columns x0,x1) beside a stone field (x2..x4), plus
+  // one lone spruce speck embedded in the stone at (3,1). The band is coherent and must be kept; only the
+  // speck is a "random home".
   const cells = [];
-  for (let x = 0; x < 3; x++) for (let y = 0; y < 3; y++) cells.push({ pos: [x, y, 0], block: "minecraft:stone" });
+  for (let x = 0; x < 5; x++) for (let y = 0; y < 3; y++) {
+    const band = x <= 1; // the intentional timber columns
+    const speck = x === 3 && y === 1;
+    cells.push({ pos: [x, y, 0], block: (band || speck) ? "minecraft:spruce_planks" : "minecraft:stone" });
+  }
+  const occ = occupancyFromCells(cells);
+  const r = sealWallFace(occ, "-z"); // field = stone (the plurality: 9 stone vs 6 spruce band + 1 speck)
+  assert.equal(r.field, "stone");
+  assert.equal(r.stripped, 1, "only the embedded speck is stripped; the timber band survives");
+  assert.deepEqual(r.placements[0].pos, [3, 1, 0]);
+});
+
+test("sealWallFace fieldMaterial override relabels the field", () => {
+  const cells = [];
+  for (let x = 0; x < 3; x++) for (let y = 0; y < 3; y++) {
+    cells.push({ pos: [x, y, 0], block: (x === 1 && y === 1) ? "minecraft:cobblestone" : "minecraft:bricks" });
+  }
   const occ = occupancyFromCells(cells);
   const r = sealWallFace(occ, "-z", { fieldMaterial: "minecraft:bricks" });
   assert.equal(r.field, "bricks");
-  assert.equal(r.stripped, 9); // every stone cell is now an intrusion vs the forced field
+  assert.equal(r.stripped, 1); // the lone cobblestone speck embedded in the bricks field
+  assert.equal(r.placements[0].block, "minecraft:bricks");
 });
 
 // ----------------------------------------------------------------------------------------------------

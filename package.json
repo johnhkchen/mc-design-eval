@@ -22,6 +22,7 @@
     "view:proof": "node benchmarks/sculpture/view-layer-proof.mjs",
     "spray:paint": "node benchmarks/sculpture/spray-paint.mjs",
     "detect:routing": "node benchmarks/sculpture/detector-routing.mjs",
+    "coherence:cottage": "node benchmarks/sculpture/surface-coherence.mjs",
     "resemblance": "node benchmarks/sculpture/resemblance.mjs",
     "resemblance:consolidate": "node benchmarks/sculpture/resemblance-consolidation.mjs",
     "surgical:standard": "node benchmarks/sculpture/surgical-standard.mjs",
