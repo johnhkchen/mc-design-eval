@@ -96,6 +96,60 @@ function SculptureConceptPrompt(design_doc: string, target_blocks: int, attached
   "#
 }
 
+// Stage-1 concept-art prompt for the vConcept BUILDING mode (T-067-01 / E-20). Sibling of
+// SculptureConceptPrompt, kept SEPARATE so the facade/sculpture prompts stay frozen (their runs stay
+// reproducible). Same transport: BAML renders the TEXT (b.parse never called for images), the harness
+// attaches it to Nano Banana (Gemini), which generates the 3/4 concept. Unlike the sculpture fn this
+// frames a WHOLE BUILDING IN THE ROUND — and adds the load-bearing HARD constraint: exactly ONE complete
+// building in ONE 3/4 view, never a turnaround / contact sheet / elevation grid / cluster (a multi-view
+// contact sheet is what gave the moai duplicate masses + hallucinated connectors; a building contact
+// sheet would yield multiple buildings + invented bridges). The single image grounds the 3-D build + GLB.
+function BuildingConceptPrompt(design_doc: string, target_blocks: int, attached: string) -> string {
+  client ClaudeStub
+  prompt #"
+    Generate CONCEPT ART of a Minecraft-block BUILDING: exactly ONE complete, single building shown in
+    ONE clear THREE-QUARTER (3/4) VIEW — angled so TWO of its faces and the ROOF read at once, seen
+    slightly from above — floating against a solid BLACK (#000000) background so it segments cleanly for
+    3D reconstruction. No ground plane, no cast shadows, no sky, no street, no scenery or surroundings of
+    any kind. The whole building is CENTERED and FULLY VISIBLE (not cropped — leave a small margin on
+    every side), filling most of the frame, lit by bright, even STUDIO lighting with no dramatic shadows.
+
+    HARD SINGLE-SUBJECT / SINGLE-VIEW CONSTRAINT (this is critical, do NOT violate it): show EXACTLY ONE
+    building in EXACTLY ONE 3/4 view. This is NOT a turnaround, NOT a contact sheet, NOT a multi-view or
+    multi-panel elevation grid, NOT an orthographic plan/section, and NOT a row, street, courtyard, or
+    cluster of buildings. Do NOT draw a second building, an annex, a detached outbuilding, a separate
+    tower, or any duplicate of the structure. One building, one camera, one frame.
+
+    Render it in authentic MINECRAFT BLOCK style — built from cubic blocks, with block-scale detail
+    ONLY. The build is about {{ target_blocks }} blocks along its longest dimension, so keep every feature
+    BOLD and chunky. HARD LIMITS (anything finer will not survive voxelization, so do NOT draw it). These
+    OVERRIDE the design document below: if it describes any of these, render the BOLD-block replacement
+    instead, never the literal motif:
+    - NO sub-block ornament, fine filigree, thin tracery, lacework, lattice, or thin spires/finials; every
+      smallest feature (window, cornice band, buttress, roof ridge) must read as a few WHOLE blocks.
+      Approximate slopes, arches, and round forms with stepped, faceted blocks, never smooth surfaces.
+    - NO text, letters, numerals, signage, or inscriptions of any kind.
+    Replace every such motif with BOLD GEOMETRIC block forms — chunky walls, a clear bold roof mass,
+    framed rectangular windows/doors in a regular rhythm, stepped cornices and banding, and large-scale
+    COLOR BLOCKING. Massing, silhouette, roof form, and the opening rhythm carry the design.
+
+    Faithfully realize THIS finalized design document — its massing and proportion (footprint vs height),
+    its roof form, its window/door rhythm, and above all its PALETTE (use its actual named colors; commit
+    to its dominant / supporting / accent hierarchy, never a flat grey or monochrome blob). The building is
+    a SOLID structure IN THE ROUND with real depth on every visible side — four walls and a finished roof,
+    not a flat facade or a single wall. The background behind the building must be SOLID #000000 black --
+    NEVER white, light, grey, or any coloured or gradient backdrop; the building floats on pure black. So
+    its edges read crisply against that black, keep the building's OUTER SILHOUETTE (roof crest, wall
+    corners, eaves) in its brighter palette colors and do NOT place black, near-black, OR any dark or dim
+    tone along the outline -- those merge into the black and break segmentation. Reserve any dark tones for
+    recessed openings / interior areas only:
+
+    {{ design_doc }}
+
+    {{ attached }}
+  "#
+}
+
 // Stage-1 concept-art prompt — vConcept SCULPTURE, PALETTE-AWARE .v2 (T-040-01 / S-040 / E-14).
 // Sibling of SculptureConceptPrompt, kept SEPARATE so the .v1 prompt stays frozen (its E-13 runs
 // stay reproducible). Adds exactly ONE thing over .v1: it consumes a VALUE-TRUE palette legend and
