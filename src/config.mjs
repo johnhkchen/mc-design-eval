@@ -57,6 +57,19 @@ export const VCONCEPT_SCULPTURE_METHOD_ID = "vconcept-sculpture.v1";
 export const VCONCEPT_SCULPTURE_METHOD_ID_V2 = "vconcept-sculpture.v2";
 
 /**
+ * The GLB-voxel build archetype id (E-16 / story S-051 / T-051-01). This build is NOT produced by a
+ * model: a real 3-D mesh (TRELLIS GLB) is voxelized to occupancy (T-050-01), each occupied cell is
+ * colored value-true by sampling the GLB's surface texture and snapping to the nearest block in Lab
+ * (E-10 `nearestLab`), and the result is compiled to a standard DesignArtifact. It is the image→3D arm
+ * that goes head-to-head against the text→JSON sculpture builds. Single-sourced here like the other
+ * method ids so every GLB-voxel build carries one spelling of its identity and a Phase-2 sweep stays
+ * greppable. `model_id` on such an artifact records the pinned id for join-key parity even though no
+ * model was invoked; this method id makes the GLB provenance unambiguous.
+ * @type {string}
+ */
+export const GLB_VOXEL_METHOD_ID = "glb-voxel.v1";
+
+/**
  * Tool names that must NEVER be enabled in a trial — the code-execution surface
  * (spec §3: the `allow_insecure_coding` / LLM-writes-and-runs-code path is out of
  * scope). The runner's safe-options guard rejects any attempt to allow these.
