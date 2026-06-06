@@ -129,7 +129,7 @@ export function sampleSurfaceColors({ occupancy, surface, texture }) {
  * @returns {import("../artifact.mjs").DesignArtifact}
  */
 export function colorVoxelsToArtifact(occupancy, colors, opts = {}) {
-  const { count, dims } = occupancy;
+  const { count } = occupancy;
   if (!Number.isInteger(count) || count <= 0) {
     throw new Error("colorVoxelsToArtifact: occupancy has no cells (artifact requires ≥1 placement)");
   }
@@ -137,15 +137,46 @@ export function colorVoxelsToArtifact(occupancy, colors, opts = {}) {
     throw new Error(`colorVoxelsToArtifact: colors must have 3·count (${count * 3}) entries, got ${colors?.length}`);
   }
   const palette = opts.palette ?? blockPaletteFromTable();
+  const keys = new Array(count);
+  let n = 0;
+  for (const _ of occupiedCells(occupancy)) {
+    const rgb = [colors[n * 3], colors[n * 3 + 1], colors[n * 3 + 2]];
+    keys[n] = nearestLab(srgbToLab(rgb), palette).key;
+    n++;
+  }
+  return keysToArtifact(occupancy, keys, opts);
+}
+
+/**
+ * Compile occupancy + per-cell BLOCK KEYS into a schema-valid DesignArtifact. PURE; does NOT validate.
+ * The shared coordinate/manifest/wrapper build behind {@link colorVoxelsToArtifact} (which snaps colors →
+ * keys first) and the R2 material-clean pass (which produces keys via a palette snap + spatial denoise, so
+ * it has no colors to snap). Single source of truth for the i/j/k → pos centering and the manifest.
+ *
+ * Coordinate map (design.md Decision 5): i→x, j→y (up; ground at y=0), k→z, x/z centered on the origin
+ * (x = i − ⌊nx/2⌋, z = k − ⌊nz/2⌋) — parity with the text→JSON sculpture lineage.
+ *
+ * @param {{dims:number[], occupied:Int32Array, count:number}} occupancy
+ * @param {string[]} keys bare block keys (no namespace), length === count, in occupiedCells order
+ * @param {{ metadata?:object, style?:{name:string,rationale:string}, schemaVersion?:string,
+ *           paletteId?:string }} [opts]
+ * @returns {import("../artifact.mjs").DesignArtifact}
+ */
+export function keysToArtifact(occupancy, keys, opts = {}) {
+  const { count, dims } = occupancy;
+  if (!Number.isInteger(count) || count <= 0) {
+    throw new Error("keysToArtifact: occupancy has no cells (artifact requires ≥1 placement)");
+  }
+  if (!keys || keys.length !== count) {
+    throw new Error(`keysToArtifact: keys must have count (${count}) entries, got ${keys?.length}`);
+  }
   const ox = Math.floor(dims[0] / 2);
   const oz = Math.floor(dims[2] / 2);
 
   const placements = new Array(count);
   let n = 0;
   for (const [i, j, k] of occupiedCells(occupancy)) {
-    const rgb = [colors[n * 3], colors[n * 3 + 1], colors[n * 3 + 2]];
-    const { key } = nearestLab(srgbToLab(rgb), palette);
-    placements[n] = { op: "voxel", pos: [i - ox, j, k - oz], block: `minecraft:${key}` };
+    placements[n] = { op: "voxel", pos: [i - ox, j, k - oz], block: `minecraft:${keys[n]}` };
     n++;
   }
   const manifest = [...new Set(placements.map((p) => p.block))].sort();
