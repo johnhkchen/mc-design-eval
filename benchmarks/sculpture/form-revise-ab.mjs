@@ -23,11 +23,39 @@ import { reviseLoop, liveFormScore } from "../../src/revise/loop.mjs";
 import { observeRegion, selectRegion, applyRegionEdit, subBoundsOf } from "../../src/revise/region.mjs";
 import { makeFormEditor, regionKey } from "../../src/revise/form-edit.mjs";
 import { formFidelityFromPair } from "../../src/form/form-fidelity.mjs";
+import { conceptFormTarget } from "../../src/form/form-target.mjs";
 import { SCULPTURE_VIEW_3Q } from "../../src/sculpture.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const RUNS_DIR = join(HERE, "runs");
 const OUT_DIR = join(HERE, "form-revise-ab");
+const BASELINE = join(HERE, "form-baseline.json");
+
+// --- the categorical verdict vs the E-13 baseline (deterministic, no model — the form analogue of E-14's
+// codesign-ab `verdictOf`). The "before" is T-043-01's committed baseline whole-object IoU; the "after" is
+// the (possibly revised) build's whole-object IoU. `eps` is the strict-improvement margin (mirrors the
+// loop's epsilon=0 with a hair of slack against decode noise).
+export function formVerdictOf(baseline, after, accepted, eps = 1e-3) {
+  if (typeof baseline !== "number" || typeof after !== "number") return "unknown";
+  if (after < baseline - eps) return "regressed"; // must not happen under the accept gate — an alarm
+  if (accepted && after > baseline + eps) return "improved"; // the cage kept an edit that beat baseline
+  return "held"; // no edit beat baseline; the cage left the build unchanged (no regression)
+}
+
+export const VERDICT_GLOSS = {
+  improved: "a surgical edit cleared the accept-gate AND lifted the whole-object IoU above the E-13 baseline",
+  held: "no local edit beat the single-view silhouette baseline — the cage kept the build unchanged (no regression)",
+  regressed: "whole-object IoU fell below the E-13 baseline — should be impossible under the gate (alarm)",
+  unknown: "missing a baseline or after score",
+};
+
+/** The committed E-13 baseline whole-object IoU per run (T-043-01's "before"). */
+function baselineIoU(run) {
+  if (!existsSync(BASELINE)) return null;
+  const b = JSON.parse(readFileSync(BASELINE, "utf8"));
+  const hit = (b.subjects || []).find((s) => s.run === run);
+  return hit ? hit.iou : null;
+}
 
 // The two AC #4 subjects + their curated form regions (the defect locus) and the form defect to fix.
 const SUBJECTS = [
@@ -75,7 +103,9 @@ async function reviseSubject(s) {
     observe: (a, R) => observeRegion(a, R, { outPath: join(subjOut, "crop.png") }),
     diagnose: editor.diagnose,
     tweakFor: editor.tweakFor,
-    score: liveFormScore({ conceptPath }),
+    // The accept step consults the FORM-TARGET seam (T-047-01): a concept target today; a GLB target
+    // swaps in here later with no change to the loop. This demo proves the seam is load-bearing live.
+    score: liveFormScore({ formTarget: conceptFormTarget({ conceptPath }) }),
     budget: { maxIterations: 4, perRegion: 1 },
   });
 
@@ -93,6 +123,8 @@ async function reviseSubject(s) {
   }
 
   const e = out.trace[0] || {};
+  const e13Baseline = baselineIoU(s.run);
+  const accepted = e.accepted ?? false;
   return {
     subject: s.key,
     run: s.run,
@@ -102,11 +134,13 @@ async function reviseSubject(s) {
     route: e.route ?? null,
     regionIoUBefore: e.scoreBefore ?? null, // the R-framed accept signal (per-region form IoU)
     regionIoUAfter: e.scoreAfter ?? null,
-    accepted: e.accepted ?? false,
+    accepted,
     reason: e.reason ?? null,
+    e13Baseline, // T-043-01 committed whole-object IoU — the "before"
     wholeObjectIoUBefore: beforeWhole,
     wholeObjectIoUAfter: afterWhole,
     wholeObjectIoUProposed: proposedWhole, // the stashed LLM edit, rendered even if rolled back
+    verdict: formVerdictOf(e13Baseline, afterWhole, accepted), // categorical, vs the E-13 baseline
     trace: out.trace,
     edits: editor.stash.size,
     proposals: editor.proposals,
@@ -115,58 +149,55 @@ async function reviseSubject(s) {
 
 function mdTable(rows) {
   const head =
-    "| subject | route | region IoU before | region IoU after | whole IoU before | whole IoU after | kept? |\n" +
-    "|---------|-------|------------------:|-----------------:|-----------------:|----------------:|:-----:|";
+    "| subject | route | E-13 IoU (before) | whole IoU after | proposed whole | kept? | verdict |\n" +
+    "|---------|-------|------------------:|----------------:|---------------:|:-----:|---------|";
   const fmt = (n) => (typeof n === "number" ? n.toFixed(3) : "—");
   const body = rows
     .map(
       (r) =>
-        `| ${r.subject} | ${r.route ?? "—"} | ${fmt(r.regionIoUBefore)} | ${fmt(r.regionIoUAfter)} | ` +
-        `${fmt(r.wholeObjectIoUBefore)} | ${fmt(r.wholeObjectIoUAfter)} | ${r.accepted ? "✓" : "✗"} |`,
+        `| ${r.subject} | ${r.route ?? "—"} | ${fmt(r.e13Baseline)} | ${fmt(r.wholeObjectIoUAfter)} | ` +
+        `${fmt(r.wholeObjectIoUProposed)} | ${r.accepted ? "✓" : "✗"} | **${r.verdict ?? "—"}** |`,
     )
     .join("\n");
   return `${head}\n${body}`;
 }
 
-async function main() {
-  mkdirSync(OUT_DIR, { recursive: true });
-  const rows = [];
-  for (const s of SUBJECTS) {
-    if (!existsSync(join(RUNS_DIR, s.run, "artifact.json"))) {
-      console.error(`skip ${s.key}: ${s.run}/artifact.json not found`);
-      continue;
-    }
-    console.error(`revising ${s.key} (${s.run}) …`);
-    rows.push(await reviseSubject(s));
-  }
-
+/** Write form-revise-ab.{json,md} from `rows` (shared by the live run and the offline regenerator). */
+function emit(rows) {
   const json = {
     schema: "form-revise-ab/v1",
     metric: "silhouette-iou",
     generatedFrom: "benchmarks/sculpture/runs/{009-*-koi-fish,006-*-human-heart}",
     note:
       "region IoU = the R-framed render's silhouette IoU vs the concept (the loop's accept signal); " +
-      "whole IoU = the full-build 3/4 render vs concept (comparable to form-baseline.json). A true " +
-      "region-vs-region IoU needs a 3-D→2-D concept projection (out of scope, T-045).",
+      "whole IoU = the full-build 3/4 render vs concept (comparable to form-baseline.json). The verdict is " +
+      "categorical vs the E-13 baseline (T-043-01): improved | held | regressed. A true region-vs-region " +
+      "IoU (and a better-than-flat-concept target) needs the GLB form-target seam (T-047-01, deferred E-09).",
     subjects: rows,
   };
   writeFileSync(join(HERE, "form-revise-ab.json"), JSON.stringify(json, null, 2) + "\n");
 
   const md = [
-    "# Form-revise A/B — the LLM form-edit route (T-046-01)",
+    "# Form-revise A/B — the LLM form-edit route + the E-13-baseline verdict (T-046-01 / T-047-01)",
     "",
     "The deterministic revision loop with the **LLM block-editor** behind the accept-gate, over a curated",
-    "form region of each subject. `region IoU` is the loop's per-region accept signal (the R-framed render",
-    "vs the concept); `whole IoU` is the full-build 3/4 render vs the concept (comparable to",
-    "`form-baseline.json`). An edit is **kept** only if the region IoU strictly improved, else rolled back.",
+    "form region of each subject. The accept step consults the **form-target seam** (T-047-01: a concept",
+    "target today, a GLB target later). `whole IoU` is the full-build 3/4 render vs the concept (comparable",
+    "to `form-baseline.json`); the **verdict** is categorical vs the E-13 baseline. An edit is **kept** only",
+    "if the per-region accept signal strictly improved, else rolled back.",
     "",
     mdTable(rows),
+    "",
+    ...Object.entries(VERDICT_GLOSS).map(([k, v]) => `- **${k}** — ${v}`),
     "",
     ...rows.map((r) =>
       [
         `## ${r.subject} — ${r.run}`,
         `- region: \`${JSON.stringify(r.region)}\`  defect: **${r.defect}** in ${r.where}`,
         `- route: \`${r.route}\`  kept: **${r.accepted}** (${r.reason})  proposed edits stashed: ${r.edits}`,
+        `- E-13 baseline whole IoU: ${typeof r.e13Baseline === "number" ? r.e13Baseline.toFixed(3) : "—"}` +
+          `  → after: ${typeof r.wholeObjectIoUAfter === "number" ? r.wholeObjectIoUAfter.toFixed(3) : "—"}` +
+          `  verdict: **${r.verdict}**`,
         `- proposed-edit whole IoU: ${typeof r.wholeObjectIoUProposed === "number" ? r.wholeObjectIoUProposed.toFixed(3) : "—"}` +
           ` (the LLM edit applied, shown even if rolled back)`,
         `- renders: \`form-revise-ab/${r.subject}/{before,proposed,after}.png\` + \`crop.png\` (the region the model saw)`,
@@ -181,6 +212,39 @@ async function main() {
   ].join("\n");
   writeFileSync(join(HERE, "form-revise-ab.md"), md);
   console.error(`wrote form-revise-ab.json + form-revise-ab.md (${rows.length} subjects)`);
+}
+
+/**
+ * Offline regenerate (no GL, no model): re-derive `e13Baseline` + `verdict` from the COMMITTED measured
+ * numbers and re-emit. The measured IoUs are preserved verbatim — this only layers the baseline + verdict
+ * on top, so the committed artifacts carry the categorical verdict without a metered re-run.
+ */
+function regenerateOffline() {
+  const prev = JSON.parse(readFileSync(join(HERE, "form-revise-ab.json"), "utf8"));
+  const rows = (prev.subjects || []).map((r) => {
+    const e13Baseline = baselineIoU(r.run) ?? r.e13Baseline ?? null;
+    const verdict = formVerdictOf(e13Baseline, r.wholeObjectIoUAfter, r.accepted);
+    return { ...r, e13Baseline, verdict };
+  });
+  emit(rows);
+}
+
+async function main() {
+  if (process.argv.includes("--offline")) {
+    regenerateOffline();
+    return;
+  }
+  mkdirSync(OUT_DIR, { recursive: true });
+  const rows = [];
+  for (const s of SUBJECTS) {
+    if (!existsSync(join(RUNS_DIR, s.run, "artifact.json"))) {
+      console.error(`skip ${s.key}: ${s.run}/artifact.json not found`);
+      continue;
+    }
+    console.error(`revising ${s.key} (${s.run}) …`);
+    rows.push(await reviseSubject(s));
+  }
+  emit(rows);
 }
 
 main().catch((e) => {

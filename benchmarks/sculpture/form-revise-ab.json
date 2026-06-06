@@ -2,7 +2,7 @@
   "schema": "form-revise-ab/v1",
   "metric": "silhouette-iou",
   "generatedFrom": "benchmarks/sculpture/runs/{009-*-koi-fish,006-*-human-heart}",
-  "note": "region IoU = the R-framed render's silhouette IoU vs the concept (the loop's accept signal); whole IoU = the full-build 3/4 render vs concept (comparable to form-baseline.json). A true region-vs-region IoU needs a 3-D→2-D concept projection (out of scope, T-045).",
+  "note": "region IoU = the R-framed render's silhouette IoU vs the concept (the loop's accept signal); whole IoU = the full-build 3/4 render vs concept (comparable to form-baseline.json). The verdict is categorical vs the E-13 baseline (T-043-01): improved | held | regressed. A true region-vs-region IoU (and a better-than-flat-concept target) needs the GLB form-target seam (T-047-01, deferred E-09).",
   "subjects": [
     {
       "subject": "koi",
@@ -77,7 +77,9 @@
           "rejected": [],
           "stashed": true
         }
-      ]
+      ],
+      "e13Baseline": 0.481,
+      "verdict": "held"
     },
     {
       "subject": "heart",
@@ -152,7 +154,9 @@
           "rejected": [],
           "stashed": true
         }
-      ]
+      ],
+      "e13Baseline": 0.347,
+      "verdict": "held"
     }
   ]
 }
