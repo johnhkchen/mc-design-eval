@@ -174,6 +174,43 @@ export function projectSurface(occ, dir) {
 }
 
 /**
+ * Resolve a dir to its ORTHOGRAPHIC spec, throwing on a diagonal or arbitrary-oblique dir. Sealing /
+ * hole-back-projection (S-084) is ortho-only — the +y roof and the four side faces — because a hole has no
+ * stored voxel and we synthesize its world pos from the spec's axis map. PURE.
+ * @param {string|{name:string}} dir
+ * @returns {typeof ORTHO_DIRS[number]} the ortho spec
+ */
+export function orthoSpec(dir) {
+  const { kind, spec } = resolveDir(dir);
+  if (kind !== "ortho") {
+    throw new Error(`surface-grid: orthoSpec("${spec.name}") — only orthographic dirs carry an axis map; diagonals are out`);
+  }
+  return spec;
+}
+
+/**
+ * World `[x,y,z]` for a grid cell `(u,v)` on an ortho face at a given WORLD depth coordinate `w` (the
+ * axis-W value, not an index). The inverse of {@link projectOrtho}'s cell→pos mapping, exposed so the
+ * S-084 seal ops can place a voxel at a HOLE cell (which carries no stored `SurfaceCell.voxel`). For a
+ * filled cell `c`, `cellWorldPos(occ, spec, u, v, c.voxel[spec.axisW])` reproduces `c.voxel`. PURE.
+ * @param {import("./occupancy.mjs").Occupancy} occ
+ * @param {typeof ORTHO_DIRS[number]} spec  from {@link orthoSpec}
+ * @param {number} u column index
+ * @param {number} v row index
+ * @param {number} w world coordinate on the depth axis (axisW)
+ * @returns {number[]} [x,y,z]
+ */
+export function cellWorldPos(occ, spec, u, v, w) {
+  const { min, max } = occ.bounds;
+  const { axisU, signU, axisV, signV, axisW } = spec;
+  const pos = [0, 0, 0];
+  pos[axisU] = worldOnAxis(min[axisU], max[axisU], signU, u);
+  pos[axisV] = worldOnAxis(min[axisV], max[axisV], signV, v);
+  pos[axisW] = w;
+  return pos;
+}
+
+/**
  * Back-project a surface grid to its surface voxel set: each non-null cell's stored `voxel` + `block`.
  * The round-trip `backProject(projectSurface(occ,dir))` is the per-column front-most surface set — an
  * identity the AC pins. PURE.

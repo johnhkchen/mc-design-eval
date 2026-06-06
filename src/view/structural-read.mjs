@@ -89,8 +89,11 @@ export function storeyBands(occ, { floorFillThreshold = 0.6 } = {}) {
   };
 }
 
-/** 4-connected air components of a binary mask, tagged with which borders they touch. PURE helper. */
-function airComponents(mask) {
+/** 4-connected air components of a binary mask, tagged with which borders they touch. PURE helper.
+ *  Exported so the S-084 seal ops reuse the ONE enclosed-vs-border definition (`!top&&!bottom&&!left&&
+ *  !right` = enclosed = a real interior hole, never a bbox corner) that `wallFields.holes` + `openings`
+ *  already use — the detector→op contract cannot drift. */
+export function airComponents(mask) {
   const { w, h, data } = mask;
   const seen = new Uint8Array(w * h);
   const comps = [];

@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { occupancyFromCells } from "./occupancy.mjs";
-import { footprint, storeyBands, openings, roofRegion, wallFields, structuralRead } from "./structural-read.mjs";
+import { footprint, storeyBands, openings, roofRegion, wallFields, structuralRead, airComponents } from "./structural-read.mjs";
 
 /** Solid box perimeter ring at a fixed y over [0..s-1]² (x,z), one block. */
 function ringAtY(s, y, block) {
@@ -96,6 +96,26 @@ test("structuralRead bundles footprint/storeyBands/roofRegion/wallFields", () =>
   const r = structuralRead(occ);
   assert.ok(r.footprint && r.storeyBands && r.roofRegion && r.wallFields);
   assert.equal(r.footprint.area, 9);
+});
+
+test("airComponents tags an enclosed hole vs a border-touching gap", () => {
+  // 3×3 mask, all filled except the centre → one enclosed air component.
+  const w = 3, h = 3;
+  const data = new Uint8Array(w * h).fill(1);
+  data[1 * w + 1] = 0; // centre hole
+  const enclosed = airComponents({ w, h, data });
+  assert.equal(enclosed.length, 1);
+  const b = enclosed[0].borders;
+  assert.ok(!b.top && !b.bottom && !b.left && !b.right, "centre hole touches no border");
+  assert.deepEqual(enclosed[0].cellsUV, [[1, 1]]);
+
+  // Open the left edge → the gap reaches the border, no longer enclosed.
+  const data2 = new Uint8Array(w * h).fill(1);
+  data2[1 * w + 1] = 0;
+  data2[1 * w + 0] = 0; // (0,1) on the left border
+  const comps = airComponents({ w, h, data: data2 });
+  assert.equal(comps.length, 1);
+  assert.ok(comps[0].borders.left, "gap now touches the left border");
 });
 
 test("empty occupancy: all reads degrade without throwing", () => {

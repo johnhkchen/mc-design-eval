@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { occupancyFromCells } from "./occupancy.mjs";
 import {
   projectSurface, backProject, gridMaskOf, resolveDir, ORTHO_DIRS, DIAG_DIRS,
+  orthoSpec, cellWorldPos,
 } from "./surface-grid.mjs";
 
 /** Build a solid cube [0..s-1]^3 of one block. */
@@ -110,4 +111,26 @@ test("empty occupancy → empty grid, no throw", () => {
   const g = projectSurface(occ, "-z");
   assert.equal(g.filled, 0);
   assert.deepEqual(backProject(g), []);
+});
+
+test("orthoSpec returns the ortho axis map and throws on a diagonal", () => {
+  assert.equal(orthoSpec("+y").name, "+y");
+  assert.equal(orthoSpec("-z").axisW, 2);
+  assert.throws(() => orthoSpec("+x+z"), /only orthographic/);
+});
+
+test("cellWorldPos inverts projectOrtho: it reproduces every filled cell's stored voxel", () => {
+  const occ = cube(3);
+  for (const dir of ["+x", "-x", "+z", "-z", "+y", "-y"]) {
+    const spec = orthoSpec(dir);
+    const g = projectSurface(occ, dir);
+    for (let v = 0; v < g.m; v++) {
+      for (let u = 0; u < g.n; u++) {
+        const c = g.cells[v][u];
+        if (!c) continue;
+        const pos = cellWorldPos(occ, spec, u, v, c.voxel[spec.axisW]);
+        assert.deepEqual(pos, c.voxel, `${dir} cell (${u},${v})`);
+      }
+    }
+  }
 });
