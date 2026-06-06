@@ -245,10 +245,13 @@ const WHITE = Object.freeze([255, 255, 255, 255]);
  * @returns {{w:number,h:number,data:Uint8Array}}
  */
 export function resampleRgba(img, W, H, fit = "aspect", opts = {}) {
-  if (!isImg(img)) throw new Error("resampleRgba: img must be {width,height,data}");
+  // accepts either decoded-image ({width,height}) or panel ({w,h}) shape
+  const sw = img?.width ?? img?.w;
+  const sh = img?.height ?? img?.h;
+  if (!img?.data || !(sw > 0) || !(sh > 0)) throw new Error("resampleRgba: img must be {width|w, height|h, data}");
   if (!Number.isInteger(W) || !Number.isInteger(H) || W < 1 || H < 1) throw new Error("resampleRgba: W,H must be positive integers");
   const bg = opts.bg ?? WHITE;
-  const { width: sw, height: sh, data: sd } = img;
+  const sd = img.data;
   const out = new Uint8Array(W * H * 4);
   for (let i = 0; i < W * H; i++) { const o = i << 2; out[o] = bg[0]; out[o + 1] = bg[1]; out[o + 2] = bg[2]; out[o + 3] = bg[3]; }
   // content rect inside W×H

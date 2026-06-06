@@ -19,6 +19,7 @@
     "form:routing": "node benchmarks/sculpture/form-routing.mjs",
     "e19:build": "node benchmarks/sculpture/e19-build.mjs",
     "building:build": "node benchmarks/sculpture/building-build.mjs",
+    "resemblance": "node benchmarks/sculpture/resemblance.mjs",
     "surgical:standard": "node benchmarks/sculpture/surgical-standard.mjs",
     "material:map": "node benchmarks/sculpture/material-map.mjs",
     "material:assign": "node benchmarks/sculpture/material-assign.mjs",
