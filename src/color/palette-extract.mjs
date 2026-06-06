@@ -221,7 +221,7 @@ function mergeByBlock(matched, totalFg) {
       coveragePct: round1((100 * g.count) / totalFg),
       deltaE: round2(deltaE(repLab, g.blockLab)),
       blockColor: blockEntry
-        ? { hex: rgbToHex(blockEntry.rgb), rgb: blockEntry.rgb, lab: blockEntry.lab }
+        ? { hex: rgbToHex(blockEntry.rgb), rgb: blockEntry.rgb, lab: blockEntry.lab, var: blockEntry.var }
         : null,
     });
   }

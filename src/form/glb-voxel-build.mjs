@@ -53,7 +53,7 @@ export function blockPaletteFromTable(table = loadBlockTable()) {
   if (!table || !Array.isArray(table.blocks) || table.blocks.length === 0) {
     throw new Error("blockPaletteFromTable: table.blocks must be a non-empty array");
   }
-  return table.blocks.map((b) => ({ key: b.block, lab: b.lab }));
+  return table.blocks.map((b) => ({ key: b.block, lab: b.lab, var: b.var }));
 }
 
 /**
@@ -72,7 +72,7 @@ export function paletteFromManifest(manifest, table = loadBlockTable()) {
     throw new Error("paletteFromManifest: manifest must be a non-empty array of block names");
   }
   const want = new Set(manifest.map((b) => String(b).replace(/^minecraft:/, "")));
-  const palette = table.blocks.filter((b) => want.has(b.block)).map((b) => ({ key: b.block, lab: b.lab }));
+  const palette = table.blocks.filter((b) => want.has(b.block)).map((b) => ({ key: b.block, lab: b.lab, var: b.var }));
   if (palette.length === 0) {
     throw new Error(
       `paletteFromManifest: no manifest block resolved in the block-Lab table (manifest: ${manifest.join(", ")})`,

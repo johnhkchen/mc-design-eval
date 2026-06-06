@@ -56,7 +56,7 @@ export function extractTexturePalette(texture, opts = {}) {
   if (dropTolerance !== undefined) extractOpts.dropTolerance = dropTolerance;
   if (alphaThreshold !== undefined) extractOpts.alphaThreshold = alphaThreshold;
   const result = extractPaletteFromPixels(texture, extractOpts);
-  const snapPalette = result.palette.map((e) => ({ key: e.block, lab: e.blockColor.lab }));
+  const snapPalette = result.palette.map((e) => ({ key: e.block, lab: e.blockColor.lab, var: e.blockColor.var }));
   if (snapPalette.length === 0) throw new Error("extractTexturePalette: texture yielded no palette blocks");
   return { snapPalette, entries: result.palette, description: result.description };
 }

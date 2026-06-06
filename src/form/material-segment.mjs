@@ -31,7 +31,7 @@ import { sampleSurfaceColors, keysToArtifact } from "./glb-voxel-build.mjs";
 import { augmentPalette } from "./palette-augment.mjs";
 import { voxelizeGlb, occupiedCells } from "./glb-voxelize.mjs";
 import { parseGlbColoredSurface } from "./glb-mesh.mjs";
-import { srgbToLab, deltaE, nearestLab } from "../color/cielab.mjs";
+import { srgbToLab, deltaE, nearestLab, nearestFlat } from "../color/cielab.mjs";
 import { hueFamilySet, pickMaterial, cellHash, tableKey } from "../sculptor/material.mjs";
 import { DEFAULT_SCALE } from "../sculpture.mjs";
 
@@ -322,7 +322,7 @@ export function bandRegion(region, cellCoords, labs, palette, { dither = false }
   // ordered, deduped steps by L*
   const seen = new Map();
   for (const ci of region.cells) {
-    const m = nearestLab(labAt(labs, ci), palette);
+    const m = nearestFlat(labAt(labs, ci), palette); // flat-preferring snap (T-064-01)
     if (!seen.has(m.key)) seen.set(m.key, m.lab[0]);
   }
   let steps = [...seen.entries()].sort((p, q) => p[1] - q[1]).map(([key]) => key);
@@ -385,7 +385,7 @@ export function bandRegion(region, cellCoords, labs, palette, { dither = false }
 export function fillRegion(region, cellCoords, labs, palette, { gradDE = SEG_DEFAULTS.gradDE, dither = false } = {}) {
   const stats = regionStats(region, labs);
   if (stats.spread <= gradDE) {
-    const key = nearestLab(stats.mean, palette).key;
+    const key = nearestFlat(stats.mean, palette).key; // flat-preferring snap (T-064-01)
     const out = new Map();
     for (const ci of region.cells) out.set(ci, key);
     return out;
