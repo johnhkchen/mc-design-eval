@@ -1454,3 +1454,59 @@ guarantee** — and precisely what an **image→3D** model (TRELLIS, E-09) or a 
 (E-11) exists to supply. The honest failures (heart, koi, moai@48) are not bugs to hide; they are the
 **measured motivation** for the next stage. The package hands E-12 the visual proof — wins, gaps, and
 the scale frontier, side by side.
+
+## E-14 value-true co-design — the drift, measured then killed (S-042, T-042-01) · 2026-06-05
+
+The E-13 frontier left one failure that was *not* geometry: **value drift**. The moai realized as
+**Competent, form Strong** — the series' best case — yet its `gray_concrete` body rendered far darker than
+the pale-tuff value the concept previewed (*concept-image-not-color-value-preview*). E-14 closed that one
+moving part with a **palette co-design loop**: the concept previews against the *real* block values
+(S-040, `.v2` swatch-grid concept), and the build *places* the value-true block, not the model's
+name-by-hue pick (S-041, `snapArtifactToValueTrue` — the model owns form + where, the engine owns which
+block). S-042 is the **measurement**: a concept↔render **Δvalue gate** (`src/color/value-gate.mjs`) scores
+how far the *built* palette sits from the palette the *concept previewed* — the drift E-13 could only see
+*after* the render, now a number computed up front (mean ΔE over the realized palette, flagged > 6 CIE76).
+
+### Before/after — concept↔render mean ΔE (`.v1` name-by-hue → `.v2` value-matched)
+
+| subject | E-13 verdict | ΔE before | ΔE after | closure | gate after | E-14 verdict |
+|---|---|---|---|---|---|---|
+| **moai** (angular) | Competent — drifted value | 6.97 | 2.31 | **4.66 (66.9%)** | ✓ clear | **closed** |
+| **sword** (angular) | Recognizable — near-true | 3.98 | 2.65 | 1.33 (33.4%) | ✓ clear | already-near-true |
+| **pineapple** (organic) | Organic — line softens | 10.34 | 8.55 | 1.79 (17.3%) | ⚠ flagged | narrowed |
+
+(`benchmarks/sculpture/codesign-ab.{md,json}`, offline over the committed runs — no model call, no GL.)
+
+### The moai close (the headline)
+
+The documented drift scores **6.97 before — over the gate** — and the value-matched build pulls it to
+**2.31, clearing it**: `gray_concrete` (L24.3) → `deepslate_bricks` (L29.8), **+5.5** toward the value the
+concept showed. The body block now sits **1.75–2.35 ΔE** from the concept's `copper_ore`/`deepslate_bricks`
+clusters instead of a value the render would have exposed as a surprise. **The one E-13 non-geometry
+failure is killed.**
+
+### Honest notes — where value-true *didn't* help, and what it cost
+
+- **The gate is partly tautological — and we say so.** `.v2`'s low ΔE is *partly by construction*: the
+  T-041 snap targeted this exact realized palette. The gate's real value is as a **regression/threshold
+  flag** and a record of the **residual**, not a surprise-free proof. The proof it isn't vacuous: the
+  **pineapple stays flagged after** (8.55 > 6) — value-matching *narrowed* but did not *close* the organic
+  case. The corrective re-place is *recommended* there but does **not** auto-fire: a second snap against
+  the same palette is idempotent; the real lever is a new palette-aware concept or a wider extractor `k`.
+- **The sword was already near-true.** At 3.98 before it never tripped the gate — value-true *confirms*
+  rather than *rescues* an angular subject whose model picks (iron/gold/andesite) already render at value.
+  The contract earns its keep on the *drifting* case, not uniformly.
+- **It cost segmentation.** The render-side palette can't be read from the render PNG: the
+  prismarine-viewer scene dominates it (~79% `glass`). The gate sidesteps this with the **placed-manifest
+  proxy** (a real full-cube block renders as itself — the T-039 table invariant), which is segmentation-
+  free but *coverage-blind to the 2-D layout* — it weights by placement count, not by on-screen area. A
+  true pixel-accurate render read still needs sculpture/background segmentation (deferred).
+- **Many-to-one collapse persists (the T-041 residual).** When the concept's realized palette has fewer
+  clusters than the model's manifest, several model blocks snap to one realized block (moai mid-grays →
+  `copper_ore`); the gate's per-block ΔE keeps that residual visible (`chiseled_nether_bricks` still 10.5
+  ΔE on the moai) rather than averaging it away.
+
+**One sentence:** the palette co-design loop **measurably kills the moai value drift** (66.9% gap closure,
+gate cleared) and gives every future build a **concept↔render Δvalue gate**, while honestly showing the
+contract *confirms* the already-true, only *narrows* the organic, and trades pixel-accurate render reads
+for a segmentation-free placement proxy.
