@@ -17,6 +17,7 @@
     "bench:building": "node benchmarks/sculpture/run.mjs --mode building",
     "bench:judge": "node benchmarks/temple-facade/judge-runs.mjs",
     "form:routing": "node benchmarks/sculpture/form-routing.mjs",
+    "e19:build": "node benchmarks/sculpture/e19-build.mjs",
     "build:block-table": "node scripts/build-block-table.mjs",
     "palette:extract": "node scripts/extract-palette.mjs",
     "grid:build": "node scripts/image-to-grid.mjs",
