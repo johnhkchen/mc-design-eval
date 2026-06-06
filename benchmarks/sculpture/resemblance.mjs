@@ -41,8 +41,6 @@ import { encodeRgbaToPng } from "../../render/src/headless-canvas.mjs";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO = join(HERE, "..", "..");
 const GLB_DIR = join(HERE, "glb");
-const RUNS_DIR = join(HERE, "runs");
-const BUILDING_DIR = join(HERE, "building");
 const OUT_DIR = join(HERE, "resemblance");
 
 // node-canvas only resolves from the render package; require it via the render package's location so the
@@ -59,16 +57,53 @@ function canvasLib() {
   return _canvasPkg;
 }
 
+// The immutable-reference registry (Rule 1). Each subject names its concept image, GLB mesh, build artifact,
+// and a committed (pre-lens-fix) render for the --offline path. Paths are relative to the sculpture root
+// (HERE). The four E-22 headline subjects: gatehouse + cottage (buildings) and moai + pineapple (the two
+// sculpture form-type poles — angular fine-relief vs organic textured). Concept→GLB mapping per glb/README.md.
 const SUBJECTS = {
   gatehouse: {
     key: "gatehouse",
     glb: "stone-gatehouse.glb",
-    run: "015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate",
-    // the chosen E-20 build + its committed (pre-lens-fix) render for the --offline path
-    artifact: join(BUILDING_DIR, "best", "artifact.json"),
-    committedRender: join(BUILDING_DIR, "scale-64", "render-3q.png"),
+    concept: "runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+    // the chosen E-20 build + its committed (pre-lens-fix) scale-64 render for the --offline path
+    artifact: "building/best/artifact.json",
+    committedRender: "building/scale-64/render-3q.png",
+  },
+  cottage: {
+    key: "cottage",
+    glb: "cottage.glb",
+    concept: "runs/014-vConcept-a-cottage/concept.png",
+    // the E-21 material-corrected cottage build (only build artifact this subject has)
+    artifact: "concept-materials/cottage/after-artifact.json",
+    committedRender: "concept-materials/cottage/after-3q.png",
+  },
+  moai: {
+    key: "moai",
+    glb: "moai.glb",
+    concept: "runs/003-vConcept-a-moai-statue/concept.png",
+    artifact: "e19-build/moai/artifact.json",
+    committedRender: "e19-build/moai/render-3q.png",
+  },
+  pineapple: {
+    key: "pineapple",
+    glb: "pineapple.glb",
+    concept: "runs/004-vConcept-a-pineapple/concept.png",
+    artifact: "e19-build/pineapple/artifact.json",
+    committedRender: "e19-build/pineapple/render-3q.png",
   },
 };
+
+/** Resolve a SUBJECTS entry's relative paths against the sculpture root → absolute paths for the runner. */
+function resolveSubject(def) {
+  return {
+    subject: def.key,
+    conceptPath: join(HERE, def.concept),
+    glbPath: join(GLB_DIR, def.glb),
+    artifactPath: join(HERE, def.artifact),
+    committedRenderPath: join(HERE, def.committedRender),
+  };
+}
 
 async function readJson(p) {
   return JSON.parse(await readFile(p, "utf8"));
@@ -253,14 +288,7 @@ async function main() {
   const { offline, subject } = parseArgs(process.argv.slice(2));
   const def = SUBJECTS[subject];
   if (!def) throw new Error(`unknown subject "${subject}" (known: ${Object.keys(SUBJECTS).join(", ")})`);
-  await runResemblanceGate({
-    subject: def.key,
-    conceptPath: join(RUNS_DIR, def.run, "concept.png"),
-    glbPath: join(GLB_DIR, def.glb),
-    artifactPath: def.artifact,
-    committedRenderPath: def.committedRender,
-    offline,
-  });
+  await runResemblanceGate({ ...resolveSubject(def), offline });
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
@@ -270,4 +298,4 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   });
 }
 
-export { SUBJECTS };
+export { SUBJECTS, resolveSubject };
