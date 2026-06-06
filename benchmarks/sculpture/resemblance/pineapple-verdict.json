@@ -1,0 +1,17 @@
+{
+  "schema": "resemblance-verdict/v1",
+  "verdict": "drifted",
+  "gap": {
+    "region": "fruit body",
+    "attribute": "palette"
+  },
+  "rationale": "The spiky crown and rounded body read as a pineapple, but the body has gone dark brown with green bleeding into it instead of the concept's golden-yellow rind.",
+  "judge": {
+    "model": "claude-opus-4-8",
+    "usage": {
+      "input_tokens": 10270,
+      "output_tokens": 347,
+      "cost_usd": 0.11541425
+    }
+  }
+}

@@ -10,8 +10,8 @@ inspects** (Rule 2); the perceptual numbers below only EXPLAIN it.
 ## Categorical judge (metered)
 
 - **verdict:** `drifted`
-- **named gap (Rule 7):** **form** — _the roof/upper gable_
-- **rationale:** The lower stone walls and warm door read as the same gatehouse, but the upper roof dissolves into a noisy lighter mass with no clean gable ridge or pitched roof planes.
+- **named gap (Rule 7):** **form** — _upper roof and gable_
+- **rationale:** The lower stone walls and warm arched door read as the same gatehouse, but the upper region lacks a clean pitched roof and dissolves into a noisy lighter mass.
 
 ## Perceptual diagnostics (Rule 2 — NOT the verdict)
 

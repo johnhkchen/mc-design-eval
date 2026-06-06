@@ -1,0 +1,17 @@
+{
+  "schema": "resemblance-verdict/v1",
+  "verdict": "drifted",
+  "gap": {
+    "region": "upper-story walls below the roof",
+    "attribute": "material zoning"
+  },
+  "rationale": "The lower stone base and brown plank roof read as the same cottage, but the concept's distinctive cream half-timbered upper story is rendered as gray stone, collapsing the two-tone wall zoning into a single stone mass.",
+  "judge": {
+    "model": "claude-opus-4-8",
+    "usage": {
+      "input_tokens": 10270,
+      "output_tokens": 562,
+      "cost_usd": 0.12042675
+    }
+  }
+}

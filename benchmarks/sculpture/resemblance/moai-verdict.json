@@ -1,0 +1,17 @@
+{
+  "schema": "resemblance-verdict/v1",
+  "verdict": "different object",
+  "gap": {
+    "region": "overall body — the connected masses and horizontal rails",
+    "attribute": "form"
+  },
+  "rationale": "Instead of a single upright moai the build reads as two fragmented stone masses joined by orange-and-gray horizontal beams, so the standing-statue form is not recognizable.",
+  "judge": {
+    "model": "claude-opus-4-8",
+    "usage": {
+      "input_tokens": 10270,
+      "output_tokens": 578,
+      "cost_usd": 0.12100174999999999
+    }
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "schema": "resemblance-consolidation/v1",
+  "subjects": [
+    {
+      "subject": "gatehouse",
+      "verdict": "drifted",
+      "gap": {
+        "region": "upper roof and gable",
+        "attribute": "form"
+      },
+      "mode": "live",
+      "form": {
+        "meshIoU": 0.929,
+        "conceptIoU": 0.611
+      },
+      "material": {
+        "set": 0.75,
+        "zone": 0.304,
+        "meanDeltaE": 39.27
+      },
+      "routesToE21": false
+    },
+    {
+      "subject": "cottage",
+      "verdict": "drifted",
+      "gap": {
+        "region": "upper-story walls below the roof",
+        "attribute": "material zoning"
+      },
+      "mode": "live",
+      "form": {
+        "meshIoU": 0.929,
+        "conceptIoU": 0.63
+      },
+      "material": {
+        "set": 0.667,
+        "zone": 0.321,
+        "meanDeltaE": 36.43
+      },
+      "routesToE21": true
+    },
+    {
+      "subject": "moai",
+      "verdict": "different object",
+      "gap": {
+        "region": "overall body — the connected masses and horizontal rails",
+        "attribute": "form"
+      },
+      "mode": "live",
+      "form": {
+        "meshIoU": 0.417,
+        "conceptIoU": 0.281
+      },
+      "material": {
+        "set": 0.9,
+        "zone": 0.86,
+        "meanDeltaE": 14.32
+      },
+      "routesToE21": false
+    },
+    {
+      "subject": "pineapple",
+      "verdict": "drifted",
+      "gap": {
+        "region": "fruit body",
+        "attribute": "palette"
+      },
+      "mode": "live",
+      "form": {
+        "meshIoU": 0.908,
+        "conceptIoU": 0.815
+      },
+      "material": {
+        "set": 0.917,
+        "zone": 0.3,
+        "meanDeltaE": 30.12
+      },
+      "routesToE21": true
+    }
+  ],
+  "summary": {
+    "counts": {
+      "drifted": 3,
+      "different object": 1
+    },
+    "e21Findings": [
+      {
+        "subject": "cottage",
+        "attribute": "material zoning",
+        "region": "upper-story walls below the roof",
+        "note": "material drift (material zoning @ upper-story walls below the roof) — route to E-21; not edited in E-22"
+      },
+      {
+        "subject": "pineapple",
+        "attribute": "palette",
+        "region": "fruit body",
+        "note": "material drift (palette @ fruit body) — route to E-21; not edited in E-22"
+      }
+    ]
+  }
+}

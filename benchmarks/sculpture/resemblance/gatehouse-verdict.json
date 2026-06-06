@@ -2,16 +2,16 @@
   "schema": "resemblance-verdict/v1",
   "verdict": "drifted",
   "gap": {
-    "region": "the roof/upper gable",
+    "region": "upper roof and gable",
     "attribute": "form"
   },
-  "rationale": "The lower stone walls and warm door read as the same gatehouse, but the upper roof dissolves into a noisy lighter mass with no clean gable ridge or pitched roof planes.",
+  "rationale": "The lower stone walls and warm arched door read as the same gatehouse, but the upper region lacks a clean pitched roof and dissolves into a noisy lighter mass.",
   "judge": {
     "model": "claude-opus-4-8",
     "usage": {
-      "input_tokens": 10505,
-      "output_tokens": 341,
-      "cost_usd": 0.11235175
+      "input_tokens": 10270,
+      "output_tokens": 410,
+      "cost_usd": 0.11644550000000001
     }
   }
 }
