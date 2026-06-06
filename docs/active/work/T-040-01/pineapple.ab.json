@@ -1,0 +1,103 @@
+{
+  "subject": "pineapple",
+  "run": "013-vConcept-a-pineapple",
+  "schema": "concept-ab/v1",
+  "blocks": 4,
+  "snappedCount": 1,
+  "manifest": [
+    "hay_block",
+    "orange_terracotta",
+    "green_concrete",
+    "lime_concrete"
+  ],
+  "valueStats": {
+    "meanL": 50.2,
+    "minL": 36,
+    "maxL": 62.4
+  },
+  "card": [
+    {
+      "name": "honey_block",
+      "block": "hay_block",
+      "hex": "#a68826",
+      "rgb": [
+        166,
+        136,
+        38
+      ],
+      "lab": [
+        57.901,
+        1.311,
+        53.423
+      ],
+      "value": 57.9,
+      "snapped": true,
+      "deltaE": 0
+    },
+    {
+      "name": "orange_terracotta",
+      "block": "orange_terracotta",
+      "hex": "#a25426",
+      "rgb": [
+        162,
+        84,
+        38
+      ],
+      "lab": [
+        44.467,
+        28.722,
+        40.08
+      ],
+      "value": 44.5,
+      "snapped": false,
+      "deltaE": 0
+    },
+    {
+      "name": "green_concrete",
+      "block": "green_concrete",
+      "hex": "#495b24",
+      "rgb": [
+        73,
+        91,
+        36
+      ],
+      "lab": [
+        36.034,
+        -16.646,
+        28.959
+      ],
+      "value": 36,
+      "snapped": false,
+      "deltaE": 0
+    },
+    {
+      "name": "lime_concrete",
+      "block": "lime_concrete",
+      "hex": "#5ea919",
+      "rgb": [
+        94,
+        169,
+        25
+      ],
+      "lab": [
+        62.359,
+        -45.511,
+        59.552
+      ],
+      "value": 62.4,
+      "snapped": false,
+      "deltaE": 0
+    }
+  ],
+  "paths": {
+    "v1": "pineapple.v1.png",
+    "v2": "pineapple.v2.png",
+    "swatch": "pineapple.swatch.png"
+  },
+  "v2gen": {
+    "model": "gemini-3-pro-image-preview",
+    "ms": 33472,
+    "promptChars": 5554,
+    "imageCount": 1
+  }
+}

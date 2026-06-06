@@ -1,0 +1,99 @@
+{
+  "schema": "value-matched-build/v1",
+  "runId": "007-vConcept-a-sword",
+  "methodId": "vconcept-sculpture.v2",
+  "conceptPalette": "8 blocks over 8% of frame: polished_diorite 25%, brown_concrete 13%, gilded_blackstone 13%, polished_andesite 13%, spruce_log 13%, iron_block 12%, birch_planks 6%, gold_block 6% (mean ΔE 3.7)",
+  "changedPlacements": 3,
+  "manifest": [
+    "minecraft:polished_andesite",
+    "minecraft:gold_block",
+    "minecraft:spruce_log",
+    "minecraft:iron_block"
+  ],
+  "realizedUsed": [
+    {
+      "block": "polished_diorite",
+      "L": 80.1
+    },
+    {
+      "block": "brown_concrete",
+      "L": 29.2
+    },
+    {
+      "block": "gilded_blackstone",
+      "L": 18
+    },
+    {
+      "block": "polished_andesite",
+      "L": 56
+    },
+    {
+      "block": "spruce_log",
+      "L": 15.3
+    },
+    {
+      "block": "iron_block",
+      "L": 86.4
+    },
+    {
+      "block": "birch_planks",
+      "L": 73
+    },
+    {
+      "block": "gold_block",
+      "L": 84.8
+    }
+  ],
+  "swaps": [
+    {
+      "name": "stone",
+      "valueHonest": "stone",
+      "valueHonestL": 52.8,
+      "to": "polished_andesite",
+      "toL": 56,
+      "deltaE": 3.38,
+      "valueShift": 3.2,
+      "changed": true
+    },
+    {
+      "name": "gold_block",
+      "valueHonest": "gold_block",
+      "valueHonestL": 84.5,
+      "to": "gold_block",
+      "toL": 84.8,
+      "deltaE": 4.71,
+      "valueShift": 0.3,
+      "changed": false
+    },
+    {
+      "name": "dark_oak_log",
+      "valueHonest": "dark_oak_log",
+      "valueHonestL": 20.3,
+      "to": "spruce_log",
+      "toL": 15.3,
+      "deltaE": 8.18,
+      "valueShift": -5,
+      "changed": true
+    },
+    {
+      "name": "iron_block",
+      "valueHonest": "iron_block",
+      "valueHonestL": 87.8,
+      "to": "iron_block",
+      "toL": 86.4,
+      "deltaE": 1.44,
+      "valueShift": -1.4,
+      "changed": false
+    },
+    {
+      "name": "polished_andesite",
+      "valueHonest": "polished_andesite",
+      "valueHonestL": 56,
+      "to": "polished_andesite",
+      "toL": 56,
+      "deltaE": 1.55,
+      "valueShift": 0,
+      "changed": false
+    }
+  ]
+}

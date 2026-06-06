@@ -22,7 +22,7 @@ import {
   requestText,
   requestDesignArtifactWithImage,
 } from "../../src/sdk-binding.mjs";
-import { PHASE1_MODEL_ID } from "../../src/config.mjs";
+import { PHASE1_MODEL_ID, VCONCEPT_SCULPTURE_METHOD_ID_V2 } from "../../src/config.mjs";
 import {
   VCONCEPT_SCULPTURE,
   DEFAULT_SCALE,
@@ -33,6 +33,7 @@ import {
   composeSculptureDesignDocPrompt,
   composeSculptureBuildPrompt,
 } from "../../src/sculpture.mjs";
+import { writeValueMatch } from "./value-match-shared.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const RUNS_DIR = join(HERE, "runs");
@@ -113,7 +114,7 @@ async function runVConcept({ subject, scale, model, effort }, ctx) {
 }
 
 function parseArgs(argv) {
-  const out = { subject: undefined, scale: DEFAULT_SCALE, frames: TURNTABLE.frames, note: "", model: PHASE1_MODEL_ID, effort: undefined };
+  const out = { subject: undefined, scale: DEFAULT_SCALE, frames: TURNTABLE.frames, note: "", model: PHASE1_MODEL_ID, effort: undefined, valueMatch: false };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--subject") out.subject = argv[++i];
     else if (argv[i] === "--scale") out.scale = parseInt(argv[++i], 10);
@@ -121,6 +122,7 @@ function parseArgs(argv) {
     else if (argv[i] === "--note") out.note = argv[++i];
     else if (argv[i] === "--model") out.model = argv[++i];
     else if (argv[i] === "--effort") out.effort = argv[++i];
+    else if (argv[i] === "--value-match") out.valueMatch = true;
   }
   return out;
 }
@@ -173,7 +175,7 @@ function regenerateReadme() {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (!args.subject) {
-    console.error('usage: npm run bench:sculpture -- --subject "<term>" --scale <N> [--frames N] [--note "..."] [--model id] [--effort low|medium|high]');
+    console.error('usage: npm run bench:sculpture -- --subject "<term>" --scale <N> [--frames N] [--note "..."] [--model id] [--effort low|medium|high] [--value-match]');
     process.exit(1);
   }
   // Validate BEFORE any metered work (throws sculpture: … on a bad subject/scale).
@@ -206,6 +208,22 @@ async function main() {
   const report = await renderArtifact(artifact, { outPath: join(dir, "render-3q.png"), view: SCULPTURE_VIEW_3Q });
   const sum = renderSummary(report);
   console.log(`  3/4 still: ${sum.placed} blocks (unmapped ${sum.unmapped}) -> render-3q.png`);
+
+  // Additive .v2 value-matched build (E-14 / T-041-01): snap placements to the value-true blocks that
+  // hit the concept's realized value, then render a side-by-side still. ALL .v1 files above untouched.
+  let valueMatch = null;
+  if (args.valueMatch) {
+    const { snap } = await writeValueMatch({
+      dir,
+      runId,
+      artifact,
+      conceptPath: join(dir, "concept.png"),
+      renderArtifact,
+      renderSummary,
+    });
+    valueMatch = { methodId: snap.artifact.metadata.prompting_method_id, changedPlacements: snap.changedPlacements, manifest: snap.manifest };
+    console.log(`  value-matched (.v2): ${snap.changedPlacements} placements rewritten -> render-3q.value.png`);
+  }
 
   // Front-arc rock turntable — sweeps the front hemisphere only (never the imagined back).
   const frames = Number.isInteger(args.frames) && args.frames > 0 ? args.frames : TURNTABLE.frames;
@@ -243,6 +261,7 @@ async function main() {
     costUsd: raw.total_cost_usd ?? 0,
     durationMs: Date.now() - startedAt,
     note: args.note,
+    valueMatch,
   };
   writeFileSync(join(dir, "summary.json"), JSON.stringify(summary, null, 2) + "\n");
 

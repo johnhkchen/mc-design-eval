@@ -1,0 +1,86 @@
+{
+  "schema": "value-matched-build/v1",
+  "runId": "001-vConcept-moai",
+  "methodId": "vconcept-sculpture.v2",
+  "conceptPalette": "5 blocks over 44% of frame: deepslate_copper_ore 37%, deepslate_bricks 25%, copper_ore 19%, chiseled_nether_bricks 13%, diorite 6% (mean ΔE 4)",
+  "changedPlacements": 35,
+  "manifest": [
+    "minecraft:copper_ore",
+    "minecraft:deepslate_bricks",
+    "minecraft:chiseled_nether_bricks"
+  ],
+  "realizedUsed": [
+    {
+      "block": "deepslate_copper_ore",
+      "L": 40.5
+    },
+    {
+      "block": "deepslate_bricks",
+      "L": 29.8
+    },
+    {
+      "block": "copper_ore",
+      "L": 51
+    },
+    {
+      "block": "chiseled_nether_bricks",
+      "L": 11
+    },
+    {
+      "block": "diorite",
+      "L": 73
+    }
+  ],
+  "swaps": [
+    {
+      "name": "stone_bricks",
+      "valueHonest": "stone_bricks",
+      "valueHonestL": 51.2,
+      "to": "copper_ore",
+      "toL": 51,
+      "deltaE": 2.66,
+      "valueShift": -0.2,
+      "changed": true
+    },
+    {
+      "name": "gray_concrete",
+      "valueHonest": "gray_concrete",
+      "valueHonestL": 24.3,
+      "to": "deepslate_bricks",
+      "toL": 29.8,
+      "deltaE": 7.59,
+      "valueShift": 5.5,
+      "changed": true
+    },
+    {
+      "name": "andesite",
+      "valueHonest": "andesite",
+      "valueHonestL": 56.7,
+      "to": "copper_ore",
+      "toL": 51,
+      "deltaE": 6.56,
+      "valueShift": -5.7,
+      "changed": true
+    },
+    {
+      "name": "cobblestone_stairs",
+      "valueHonest": "cobblestone",
+      "valueHonestL": 53.3,
+      "to": "copper_ore",
+      "toL": 51,
+      "deltaE": 4.01,
+      "valueShift": -2.3,
+      "changed": true
+    },
+    {
+      "name": "red_nether_bricks",
+      "valueHonest": "red_nether_bricks",
+      "valueHonestL": 12.4,
+      "to": "chiseled_nether_bricks",
+      "toL": 11,
+      "deltaE": 11.44,
+      "valueShift": -1.4,
+      "changed": true
+    }
+  ]
+}

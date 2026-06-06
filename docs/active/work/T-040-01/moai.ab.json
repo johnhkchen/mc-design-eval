@@ -1,0 +1,122 @@
+{
+  "subject": "moai",
+  "run": "001-vConcept-moai",
+  "schema": "concept-ab/v1",
+  "blocks": 5,
+  "snappedCount": 1,
+  "manifest": [
+    "gray_concrete",
+    "andesite",
+    "cobblestone",
+    "red_nether_bricks",
+    "stone_bricks"
+  ],
+  "valueStats": {
+    "meanL": 39.6,
+    "minL": 12.4,
+    "maxL": 56.7
+  },
+  "card": [
+    {
+      "name": "gray_concrete",
+      "block": "gray_concrete",
+      "hex": "#373a3e",
+      "rgb": [
+        55,
+        58,
+        62
+      ],
+      "lab": [
+        24.277,
+        -0.305,
+        -2.913
+      ],
+      "value": 24.3,
+      "snapped": false,
+      "deltaE": 0
+    },
+    {
+      "name": "andesite",
+      "block": "andesite",
+      "hex": "#888889",
+      "rgb": [
+        136,
+        136,
+        137
+      ],
+      "lab": [
+        56.732,
+        0.195,
+        -0.535
+      ],
+      "value": 56.7,
+      "snapped": false,
+      "deltaE": 0
+    },
+    {
+      "name": "cobblestone_stairs",
+      "block": "cobblestone",
+      "hex": "#807f80",
+      "rgb": [
+        128,
+        127,
+        128
+      ],
+      "lab": [
+        53.305,
+        0.571,
+        -0.409
+      ],
+      "value": 53.3,
+      "snapped": true,
+      "deltaE": 0
+    },
+    {
+      "name": "red_nether_bricks",
+      "block": "red_nether_bricks",
+      "hex": "#460709",
+      "rgb": [
+        70,
+        7,
+        9
+      ],
+      "lab": [
+        12.443,
+        29.04,
+        15.685
+      ],
+      "value": 12.4,
+      "snapped": false,
+      "deltaE": 0
+    },
+    {
+      "name": "stone_bricks",
+      "block": "stone_bricks",
+      "hex": "#7a7a7a",
+      "rgb": [
+        122,
+        122,
+        122
+      ],
+      "lab": [
+        51.223,
+        -0.002,
+        0
+      ],
+      "value": 51.2,
+      "snapped": false,
+      "deltaE": 0
+    }
+  ],
+  "paths": {
+    "v1": "moai.v1.png",
+    "v2": "moai.v2.png",
+    "swatch": "moai.swatch.png"
+  },
+  "v2gen": {
+    "model": "gemini-3-pro-image-preview",
+    "ms": 21480,
+    "promptChars": 5528,
+    "imageCount": 1
+  }
+}

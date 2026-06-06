@@ -1,0 +1,89 @@
+{
+  "schema": "value-matched-build/v1",
+  "runId": "013-vConcept-a-pineapple",
+  "methodId": "vconcept-sculpture.v2",
+  "conceptPalette": "8 blocks over 21% of frame: green_concrete 13%, hay_block 13%, honeycomb_block 13%, jungle_log 13%, melon 13%, orange_terracotta 13%, pumpkin 13%, smooth_red_sandstone 13% (mean ΔE 7.3)",
+  "changedPlacements": 31,
+  "manifest": [
+    "minecraft:hay_block",
+    "minecraft:orange_terracotta",
+    "minecraft:green_concrete",
+    "minecraft:melon"
+  ],
+  "realizedUsed": [
+    {
+      "block": "green_concrete",
+      "L": 33.5
+    },
+    {
+      "block": "hay_block",
+      "L": 46.1
+    },
+    {
+      "block": "honeycomb_block",
+      "L": 62.3
+    },
+    {
+      "block": "jungle_log",
+      "L": 30
+    },
+    {
+      "block": "melon",
+      "L": 55.8
+    },
+    {
+      "block": "orange_terracotta",
+      "L": 36.1
+    },
+    {
+      "block": "pumpkin",
+      "L": 54
+    },
+    {
+      "block": "smooth_red_sandstone",
+      "L": 46.1
+    }
+  ],
+  "swaps": [
+    {
+      "name": "honey_block",
+      "valueHonest": "hay_block",
+      "valueHonestL": 57.9,
+      "to": "hay_block",
+      "toL": 46.1,
+      "deltaE": 14.16,
+      "valueShift": -11.8,
+      "changed": true
+    },
+    {
+      "name": "orange_terracotta",
+      "valueHonest": "orange_terracotta",
+      "valueHonestL": 44.5,
+      "to": "orange_terracotta",
+      "toL": 36.1,
+      "deltaE": 9.71,
+      "valueShift": -8.4,
+      "changed": false
+    },
+    {
+      "name": "green_concrete",
+      "valueHonest": "green_concrete",
+      "valueHonestL": 36,
+      "to": "green_concrete",
+      "toL": 33.5,
+      "deltaE": 2.8,
+      "valueShift": -2.5,
+      "changed": false
+    },
+    {
+      "name": "lime_concrete",
+      "valueHonest": "lime_concrete",
+      "valueHonestL": 62.4,
+      "to": "melon",
+      "toL": 55.8,
+      "deltaE": 19.16,
+      "valueShift": -6.6,
+      "changed": true
+    }
+  ]
+}
