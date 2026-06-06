@@ -1,0 +1,33 @@
+{
+  "subject": "bow-and-arrow",
+  "scale": 32,
+  "occupancy": 513,
+  "blocks": 513,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      -15,
+      0,
+      -3
+    ],
+    "max": [
+      14,
+      31,
+      3
+    ]
+  },
+  "paletteSize": 8,
+  "paletteDescription": "8 blocks over 100% of frame: black_terracotta 13%, barrel 13%, cartography_table 13%, dark_oak_planks 13%, light_gray_concrete_powder 13%, mangrove_log 13%, oak_planks 13%, spruce_log 13% (mean ΔE 4.7)",
+  "manifestBefore": 34,
+  "manifestAfter": 8,
+  "speckleBefore": 0.706,
+  "speckleAfter": 0.366,
+  "formIoUBefore": 0.473,
+  "formIoUAfter": 0.473,
+  "view3q": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "durationSec": 7.1
+}

@@ -1,0 +1,33 @@
+{
+  "subject": "pineapple",
+  "scale": 32,
+  "occupancy": 3397,
+  "blocks": 3397,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      -9,
+      0,
+      -8
+    ],
+    "max": [
+      9,
+      31,
+      9
+    ]
+  },
+  "paletteSize": 5,
+  "paletteDescription": "5 blocks over 100% of frame: green_terracotta 39%, hay_block 25%, wet_sponge 13%, orange_terracotta 13%, spruce_planks 11% (mean ΔE 12.5)",
+  "manifestBefore": 24,
+  "manifestAfter": 5,
+  "speckleBefore": 0.549,
+  "speckleAfter": 0.25,
+  "formIoUBefore": 0.907,
+  "formIoUAfter": 0.907,
+  "view3q": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "durationSec": 14.2
+}

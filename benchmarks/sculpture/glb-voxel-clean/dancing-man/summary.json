@@ -1,0 +1,33 @@
+{
+  "subject": "dancing-man",
+  "scale": 32,
+  "occupancy": 973,
+  "blocks": 973,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      -7,
+      0,
+      -10
+    ],
+    "max": [
+      6,
+      31,
+      9
+    ]
+  },
+  "paletteSize": 7,
+  "paletteDescription": "7 blocks over 100% of frame: hay_block 25%, spruce_log 15%, brown_concrete 13%, crimson_nylium 13%, magma_block 12%, redstone_lamp 12%, cartography_table 11% (mean ΔE 6.7)",
+  "manifestBefore": 18,
+  "manifestAfter": 5,
+  "speckleBefore": 0.528,
+  "speckleAfter": 0.275,
+  "formIoUBefore": 0.914,
+  "formIoUAfter": 0.914,
+  "view3q": {
+    "azimuthDeg": 45,
+    "elevationDeg": 30,
+    "fov": 45
+  },
+  "durationSec": 8.5
+}
