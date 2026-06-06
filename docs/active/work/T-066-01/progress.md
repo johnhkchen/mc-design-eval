@@ -45,8 +45,15 @@ unaffected — and would be a no-op there anyway: e18's only sub-0.9 build is mo
   (ablation tautology), reported as a cost not hidden.
 - **Headline answer:** yes on colour cleanliness (off-pal 0, speckle ≤ 0.05) with two honest caveats below.
 
-## Remaining
+## Status: COMPLETE (Steps 1–6 done)
 
-- **Step 4** — `design-learnings.md` E-19 cleanup section (backlog closed by number + headline answer).
-- **Step 5** — E-12 handoff `pr/assets/voxel-cleanup.md`.
-- **Step 6** — final `npm test` + `review.md`.
+- **Step 4** ✅ `design-learnings.md` E-19 cleanup section — backlog closed by number (T-062/063/064/065),
+  headline answer, two honest caveats, consolidation finding. Commit `docs(E-19 T-066-01): design-learnings
+  voxel-cleanup section + E-12 handoff`.
+- **Step 5** ✅ E-12 handoff `pr/assets/voxel-cleanup.md` + before/after frames `pr/assets/frames/e19-{moai,
+  heart,koi}-{before,after}.png`. Same commit.
+- **Step 6** ✅ final `npm test` **676/676 green**; `review.md` written (changes, AC table, test coverage +
+  gap, deviation, open concerns).
+
+All 5 acceptance criteria met. Headline: GLB-voxel colour is now as clean as text→JSON on colour cleanliness
+(0 off-palette ×7, speckle ≤ 0.05), with two named/honest caveats (value-ΔE tautology, moai's corrupt GLB).
