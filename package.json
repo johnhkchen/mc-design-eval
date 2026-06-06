@@ -25,6 +25,7 @@
     "coherence:cottage": "node benchmarks/sculpture/surface-coherence.mjs",
     "hollow:cottage": "node benchmarks/sculpture/hollow-cottage.mjs",
     "floorplan:cottage": "node benchmarks/sculpture/floorplan-cottage.mjs",
+    "milestone:cottage": "node benchmarks/sculpture/hollow-cottage-milestone.mjs",
     "resemblance": "node benchmarks/sculpture/resemblance.mjs",
     "resemblance:consolidate": "node benchmarks/sculpture/resemblance-consolidation.mjs",
     "surgical:standard": "node benchmarks/sculpture/surgical-standard.mjs",
