@@ -18,6 +18,28 @@
 export const PHASE1_MODEL_ID = "claude-opus-4-8";
 
 /**
+ * Per-op MODEL TIERS for the agentic-engineering seam (E-23 / S-082 / T-082-01). Because the 2.5-D view
+ * layer (T-078-01) scopes each op to a single view, narrow sub-tasks (a single-view detector /
+ * classification) suffice on a LIGHTER model; only cross-view judgement, authoring a generator, or
+ * material zoning needs the strong tier. Single-sourced HERE like every other model id so a Phase-2 sweep
+ * is one edit and every logged op carries one spelling of its tier.
+ *
+ * HARD INVARIANT (ticket + standing Phase-1 rule): a lighter tier is reached via the `claude -p`
+ * SUBSCRIPTION shim with a `--model` override — it is still the subscription, just a smaller `--model`.
+ * The metered API key MUST NEVER enter this path. `strong` aliases {@link PHASE1_MODEL_ID} so the pinned
+ * default stays single-sourced; `light` is the Haiku family (the dateless rolling alias, mirroring the
+ * opus id style — `claude -p --model` accepts the family alias).
+ * @type {Readonly<{ light: string, strong: string }>}
+ */
+export const MODEL_TIERS = Object.freeze({
+  light: "claude-haiku-4-5",
+  strong: PHASE1_MODEL_ID,
+});
+
+/** Default tier when an op does not declare one — the strong (pinned-default) tier. @type {"strong"} */
+export const DEFAULT_TIER = "strong";
+
+/**
  * Default prompting-archetype id for the skeleton trial (spec §7). The single-shot
  * archetype is the Phase-1 baseline; multi-shot / multimodal are later, versioned
  * configs layered on top of the runner.

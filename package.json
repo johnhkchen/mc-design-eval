@@ -20,6 +20,7 @@
     "e19:build": "node benchmarks/sculpture/e19-build.mjs",
     "building:build": "node benchmarks/sculpture/building-build.mjs",
     "view:proof": "node benchmarks/sculpture/view-layer-proof.mjs",
+    "detect:routing": "node benchmarks/sculpture/detector-routing.mjs",
     "resemblance": "node benchmarks/sculpture/resemblance.mjs",
     "resemblance:consolidate": "node benchmarks/sculpture/resemblance-consolidation.mjs",
     "surgical:standard": "node benchmarks/sculpture/surgical-standard.mjs",
