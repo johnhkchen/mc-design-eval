@@ -25,6 +25,7 @@
 
 import { applyDeltas } from "./surface-coherence.mjs";
 import { openings, airComponents } from "./structural-read.mjs";
+import { DIAG_DIRS } from "./surface-grid.mjs";
 import { parseJsonReply } from "./json-reply.mjs";
 
 /** Schema tag for the floorplan plan + report. */
@@ -166,11 +167,75 @@ export function roomOfColumn(rooms, x, z) {
   return null;
 }
 
+/**
+ * Per-line occupied brackets of the shell (the exterior-safety shadow). An interior AIR cell is invisible
+ * from a camera iff an occupied shell cell sits IN FRONT of it along that camera's ray. We track every ray
+ * direction the benchmark lenses use:
+ *   • the 6 ORTHO cameras: for every (y,z) the min/max occupied x, for every (x,z) the min/max y, for every
+ *     (x,y) the min/max z — front-occluded on +axis ⇔ an occupied cell with a greater coord, on −axis ⇔ a
+ *     lesser one (`isOrthoHidden` = front-occluded from ALL six = bracketed both sides of all three axes);
+ *   • the 4 DIAGONAL cameras (the 3/4 resemblance view's family): for every (diagCol, y) the MAX occupied
+ *     `viewScore = signX·x + signZ·z` — a cell is front-occluded from that corner ⇔ something on its
+ *     diagonal ray has a greater viewScore.
+ * `enclosedMassKeys` (the carve) needed only 3-D enclosure because REMOVING a hidden cell reveals nothing;
+ * ADDING is asymmetric — a slice-enclosed or even ortho-hidden cell can still be SEEN obliquely through a
+ * wall opening — so the fill must clear all ten cameras. PURE.
+ * @param {import("./occupancy.mjs").Occupancy} occ
+ * @returns {{xr:Map, yr:Map, zr:Map, diag:{name:string,signX:number,signZ:number,max:Map<string,number>}[]}}
+ */
+export function orthoShadow(occ) {
+  const xr = new Map(), yr = new Map(), zr = new Map();
+  const ext = (m, k, v) => { const r = m.get(k); if (!r) m.set(k, [v, v]); else { if (v < r[0]) r[0] = v; if (v > r[1]) r[1] = v; } };
+  const diag = DIAG_DIRS.map((d) => ({ name: d.name, signX: d.signX, signZ: d.signZ, max: new Map() }));
+  for (const key of occ.cells.keys()) {
+    const [x, y, z] = key.split(",").map(Number);
+    ext(xr, `${y},${z}`, x);
+    ext(yr, `${x},${z}`, y);
+    ext(zr, `${x},${y}`, z);
+    for (const d of diag) {
+      const col = d.signX * x - d.signZ * z;
+      const vs = d.signX * x + d.signZ * z;
+      const k = `${col},${y}`;
+      const cur = d.max.get(k);
+      if (cur === undefined || vs > cur) d.max.set(k, vs);
+    }
+  }
+  return { xr, yr, zr, diag };
+}
+
+/** True iff `(x,y,z)` is bracketed by occupied shell on both sides of all three axes — front-occluded from
+ *  every ORTHO camera. PURE. */
+export function isOrthoHidden(shadow, x, y, z) {
+  const xr = shadow.xr.get(`${y},${z}`);
+  const yr = shadow.yr.get(`${x},${z}`);
+  const zr = shadow.zr.get(`${x},${y}`);
+  return !!xr && xr[0] < x && x < xr[1] &&
+    !!yr && yr[0] < y && y < yr[1] &&
+    !!zr && zr[0] < z && z < zr[1];
+}
+
+/** True iff `(x,y,z)` is front-occluded from all four DIAGONAL cameras (something on each diagonal ray has a
+ *  greater viewScore). Protects the oblique 3/4 resemblance render. PURE. */
+export function isDiagHidden(shadow, x, y, z) {
+  for (const d of shadow.diag) {
+    const col = d.signX * x - d.signZ * z;
+    const vs = d.signX * x + d.signZ * z;
+    const m = d.max.get(`${col},${y}`);
+    if (m === undefined || m <= vs) return false; // nothing in front on this diagonal ray → visible
+  }
+  return true;
+}
+
+/** The full fill-safety predicate: front-occluded from all six ortho AND four diagonal cameras, so filling
+ *  the cell changes no ortho OR diagonal front-most surface voxel — the fill stays invisible in the
+ *  benchmark renders. PURE. */
+export function isFillHidden(shadow, x, y, z) {
+  return isOrthoHidden(shadow, x, y, z) && isDiagHidden(shadow, x, y, z);
+}
+
 // ----------------------------------------------------------------------------------------------------
 // The plan + the bulk placements (pure — "the program places").
 // ----------------------------------------------------------------------------------------------------
-
-const isWallColumn = (grid, x, z) => grid.xWalls.includes(x) || grid.zWalls.includes(z);
 
 /** The center column of an inclusive range. */
 const mid = (lo, hi) => Math.floor((lo + hi) / 2);
@@ -225,36 +290,48 @@ export function generateFloorplan(occ, read, spec = {}) {
   const fpBBox = read?.footprint?.bbox ?? null;
   const storeys = storeysFromRead(read);
   const grid = gridPartition(fpBBox, { rows: spec.rows ?? 2, cols: spec.cols ?? 2 });
+  const shadow = orthoShadow(occ);
+  // safe to FILL: an air cell front-occluded from all six ortho AND four diagonal cameras (the hard
+  // exterior-held guarantee, ortho + the 3/4 resemblance view). Slice enclosure (interiorColumnsAtY) is
+  // only the room-air HEURISTIC; this is the SAFETY predicate.
+  const safeAir = (x, y, z) => !occ.has(x, y, z) && isFillHidden(shadow, x, y, z);
   const placements = [];
   const planStoreys = [];
 
+  const it = grid.interior;
   for (const st of storeys) {
-    // interior columns just above the floor define the storey's rooms (the room-air footprint there)
-    const floorCols = interiorColumnsAtY(occ, st.floorY + 1);
-    const existingRooms = grid.rooms.filter((r) => {
-      for (const key of floorCols) {
-        const [x, z] = key.split(",").map(Number);
-        if (x >= r.x0 && x <= r.x1 && z >= r.z0 && z <= r.z1) return true;
+    // which rooms actually have room-air this storey: sample a mid-storey height (the floor plane itself
+    // is often the foundation/slab, so room existence is read from the cavity, not the floor)
+    const midY = Math.floor((st.floorY + 1 + st.ceilY) / 2);
+    const roomHas = new Map(grid.rooms.map((r) => [r.id, false]));
+    if (it) {
+      for (let z = it.z0; z <= it.z1; z++) for (let x = it.x0; x <= it.x1; x++) {
+        if (!safeAir(x, midY, z)) continue;
+        const r = roomOfColumn(grid.rooms, x, z);
+        if (r) roomHas.set(r.id, true);
       }
-      return false;
-    });
+    }
+    const existingRooms = grid.rooms.filter((r) => roomHas.get(r.id));
     const { exclude, doors } = doorways(grid, st.floorY, existingRooms);
 
-    // FLOORS: a slab at floorY over the room-air columns, skipping any already-solid cell (the foundation)
-    for (const key of floorCols) {
-      const [x, z] = key.split(",").map(Number);
-      if (!occ.has(x, st.floorY, z)) placements.push({ op: "voxel", pos: [x, st.floorY, z], block: materials.floor });
+    // FLOORS: a slab at floorY over the interior, only where the floor cell is exterior-safe (a foundation
+    // cell is already solid → safeAir skips it, so the ground storey reuses the existing floor)
+    if (it) {
+      for (let z = it.z0; z <= it.z1; z++) for (let x = it.x0; x <= it.x1; x++) {
+        if (safeAir(x, st.floorY, z)) placements.push({ op: "voxel", pos: [x, st.floorY, z], block: materials.floor });
+      }
     }
 
-    // WALLS: per y in the storey, the divider columns ∩ that height's interior, minus the doorway gaps
-    for (let y = st.floorY + 1; y <= st.ceilY; y++) {
-      const cols = interiorColumnsAtY(occ, y);
-      for (const key of cols) {
-        const [x, z] = key.split(",").map(Number);
-        if (!isWallColumn(grid, x, z)) continue;
-        if (exclude.has(`${x},${y},${z}`)) continue; // doorway = no wall placed (exclusion)
+    // WALLS: the divider CROSS, per height, where the cell is exterior-safe air, minus the doorway gaps.
+    // Iterate the grid lines directly so a divider fills the full cross-section it can safely reach.
+    for (let y = st.floorY + 1; y <= st.ceilY && it; y++) {
+      const pushWall = (x, z) => {
+        if (exclude.has(`${x},${y},${z}`)) return;     // doorway = no wall placed (exclusion, no air op)
+        if (!safeAir(x, y, z)) return;                 // never place a cell visible from outside
         placements.push({ op: "voxel", pos: [x, y, z], block: materials.wall });
-      }
+      };
+      for (const x of grid.xWalls) for (let z = it.z0; z <= it.z1; z++) pushWall(x, z);
+      for (const z of grid.zWalls) for (let x = it.x0; x <= it.x1; x++) if (!grid.xWalls.includes(x)) pushWall(x, z);
     }
 
     planStoreys.push({

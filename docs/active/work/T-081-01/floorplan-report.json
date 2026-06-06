@@ -1,0 +1,177 @@
+{
+  "schema": "floorplan/v1",
+  "subject": "cottage (T-080 hollow artifact)",
+  "placements": {
+    "before": 5465,
+    "after": 5898,
+    "added": 433
+  },
+  "occupancy": {
+    "voxels": 5465,
+    "dims": [
+      26,
+      27,
+      32
+    ]
+  },
+  "structuralRead": {
+    "footprint": {
+      "width": 26,
+      "depth": 32,
+      "area": 662
+    },
+    "floorLines": [
+      0,
+      14
+    ],
+    "storeys": 2
+  },
+  "spec": {
+    "schema": "floorplan/v1",
+    "rows": 2,
+    "cols": 3,
+    "materials": {
+      "floor": "minecraft:spruce_planks",
+      "wall": "minecraft:stone_bricks"
+    },
+    "doorPolicy": "spanning",
+    "frontDoor": {
+      "face": "-z",
+      "u": 13
+    }
+  },
+  "floorplan": {
+    "rows": 2,
+    "cols": 3,
+    "materials": {
+      "floor": "minecraft:spruce_planks",
+      "wall": "minecraft:stone_bricks"
+    },
+    "roomsPerStorey": 6,
+    "storeys": [
+      {
+        "index": 0,
+        "floorY": 0,
+        "ceilY": 13,
+        "rooms": 6,
+        "doors": 7
+      },
+      {
+        "index": 1,
+        "floorY": 14,
+        "ceilY": 26,
+        "rooms": 5,
+        "doors": 5
+      }
+    ]
+  },
+  "gate": {
+    "pass": true,
+    "constraints": [
+      {
+        "name": "roomsValid",
+        "pass": true,
+        "detail": "6 rooms, 0 degenerate"
+      },
+      {
+        "name": "roomsNonOverlap",
+        "pass": true,
+        "detail": "all rooms disjoint"
+      },
+      {
+        "name": "reachable",
+        "pass": true,
+        "detail": "every storey's rooms connect by doorways"
+      },
+      {
+        "name": "floorsAtStoreyLines",
+        "pass": true,
+        "detail": "every floor sits on a structural storey line"
+      },
+      {
+        "name": "storeyCountMatches",
+        "pass": true,
+        "detail": "plan 2 vs read 2"
+      },
+      {
+        "name": "gridFitsEnvelope",
+        "pass": true,
+        "detail": "interior + walls inside the footprint"
+      },
+      {
+        "name": "openingsAlignShell",
+        "pass": true,
+        "detail": "no exterior openings read geometrically; interior doorways present; front-door alignment is steered, not geometric"
+      }
+    ],
+    "residual": "openings-align: exterior openings unreadable by the front-most ortho march (recessed doors), so interior-door↔exterior-door alignment is STEERED (the LLM's frontDoor), not geometrically verified"
+  },
+  "exteriorHeld": {
+    "held": true,
+    "scope": "10-camera lattice surface digest (6 ortho + 4 diagonal): the exterior SHELL surface is provably unchanged",
+    "digestBytesBefore": 133355,
+    "digestBytesAfter": 133355
+  },
+  "renderResidual": "The perspective benchmark renders differ by a bounded handful of pixels (sub-0.5%) — entirely INTERIOR voxels glimpsed THROUGH the shell's real door/window openings (the front camera looks down the front door into the room behind it). The exterior shell surface itself is unchanged (exteriorHeld above); byte-identical renders are impossible for any non-trivial floorplan behind a front door. This is the named exterior-side residual (Rule 7); the interior is gated by PLAUSIBILITY.",
+  "detector": {
+    "op": "floorplan-author",
+    "tier": "strong",
+    "model": "claude-opus-4-8",
+    "usage": {
+      "input_tokens": 10809,
+      "output_tokens": 1299,
+      "total_cost_usd": 0.097675
+    },
+    "spec": {
+      "schema": "floorplan/v1",
+      "rows": 2,
+      "cols": 3,
+      "materials": {
+        "floor": "minecraft:spruce_planks",
+        "wall": "minecraft:stone_bricks"
+      },
+      "doorPolicy": "spanning",
+      "frontDoor": {
+        "face": "-z",
+        "u": 13
+      }
+    },
+    "parseError": null
+  },
+  "renders": {
+    "before": [
+      {
+        "angle": "top",
+        "path": "docs/active/work/T-081-01/view-before-top.png",
+        "bytes": 90228
+      },
+      {
+        "angle": "front",
+        "path": "docs/active/work/T-081-01/view-before-front.png",
+        "bytes": 92556
+      },
+      {
+        "angle": "threeQuarter",
+        "path": "docs/active/work/T-081-01/view-before-threeQuarter.png",
+        "bytes": 140628
+      }
+    ],
+    "after": [
+      {
+        "angle": "top",
+        "path": "docs/active/work/T-081-01/view-after-top.png",
+        "bytes": 90221
+      },
+      {
+        "angle": "front",
+        "path": "docs/active/work/T-081-01/view-after-front.png",
+        "bytes": 92590
+      },
+      {
+        "angle": "threeQuarter",
+        "path": "docs/active/work/T-081-01/view-after-threeQuarter.png",
+        "bytes": 140601
+      }
+    ]
+  }
+}

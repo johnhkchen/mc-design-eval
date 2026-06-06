@@ -12,6 +12,7 @@ import { exteriorHeld } from "./hollow-carve.mjs";
 import {
   FLOORPLAN_SCHEMA, DEFAULT_MATERIALS,
   storeysFromRead, gridPartition, interiorColumnsAtY, roomOfColumn,
+  orthoShadow, isOrthoHidden, isDiagHidden, isFillHidden,
   generateFloorplan, applyFloorplan, gateFloorplan, openingsAlignShell,
   buildFloorplanPrompt, parseFloorplanSpec,
 } from "./floorplan.mjs";
@@ -19,6 +20,17 @@ import {
 const FLOOR = "minecraft:spruce_planks";
 const WALL = "minecraft:cobblestone";
 const MANIFEST = ["minecraft:spruce_planks", "minecraft:cobblestone", "minecraft:stone_bricks"];
+
+/** An OPEN-top box: 4 walls + a floor slab, but NO roof — the interior is visible from above. The
+ *  exterior-safety predicate must REFUSE to fill cells visible down the open top. */
+function openTopShellCells(s = 10, h = 10, block = "minecraft:stone_bricks") {
+  const cells = [];
+  for (let y = 0; y < h; y++)
+    for (let z = 0; z < s; z++)
+      for (let x = 0; x < s; x++)
+        if (x === 0 || x === s - 1 || z === 0 || z === s - 1 || y === 0) cells.push({ pos: [x, y, z], block });
+  return cells;
+}
 
 /** A CLOSED hollow box SHELL: solid on all six faces (4 walls + floor + roof), interior air — so the
  *  interior is enclosed and invisible from every ortho view (the cottage's enclosed property). */
@@ -180,6 +192,41 @@ test("exterior-held negative control: a placement on a skin column flips held to
   const art = artifactOf(boxShellCells(10, 10));
   const filled = applyFloorplan(art, [{ op: "voxel", pos: [0, 5, 5], block: WALL }]); // x=0 is the -x skin
   assert.equal(exteriorHeld(occ, artifactOccupancy(filled)).held, false);
+});
+
+test("isOrthoHidden: an interior air cell of a closed box is hidden; an open-top cell is not", () => {
+  const closed = orthoShadow(boxShellOcc(10, 10));
+  assert.ok(isOrthoHidden(closed, 5, 5, 5), "deep interior of a closed box is occluded in all 6 views");
+  const open = orthoShadow(occupancyFromCells(openTopShellCells(10, 10)));
+  // an interior cell near the open top has no occupied above it → visible from +y → NOT hidden
+  assert.equal(isOrthoHidden(open, 5, 8, 5), false);
+});
+
+test("isFillHidden: requires occlusion from the diagonal cameras, not just ortho (protects the 3/4 view)", () => {
+  // a closed box with the +x+z vertical EDGE (x=s-1 ∧ z=s-1) removed → a diagonal sightline straight in
+  const s = 9;
+  const cells = [];
+  for (let y = 0; y < s; y++) for (let z = 0; z < s; z++) for (let x = 0; x < s; x++)
+    if (x === 0 || x === s - 1 || z === 0 || z === s - 1 || y === 0 || y === s - 1) {
+      if (x === s - 1 && z === s - 1) continue; // the open corner edge
+      cells.push({ pos: [x, y, z], block: "minecraft:stone_bricks" });
+    }
+  const sh = orthoShadow(occupancyFromCells(cells));
+  // a cell on the exposed x=z diagonal is ortho-hidden but seen down the open corner
+  assert.equal(isOrthoHidden(sh, 7, 4, 7), true, "bracketed on all ortho axes");
+  assert.equal(isDiagHidden(sh, 7, 4, 7), false, "but seen down the open +x+z corner");
+  assert.equal(isFillHidden(sh, 7, 4, 7), false, "so the fill predicate refuses it");
+  // a cell OFF the exposed diagonal clears every camera
+  assert.equal(isFillHidden(sh, 4, 4, 3), true);
+});
+
+test("generateFloorplan: an OPEN-top shell stays exterior-held — visible cells are never filled (the fix)", () => {
+  const occ = occupancyFromCells(openTopShellCells(10, 10));
+  const art = artifactOf(openTopShellCells(10, 10));
+  const { placements } = generateFloorplan(occ, fakeRead(10, 10, [0, 4]), { rows: 2, cols: 2 });
+  const filled = applyFloorplan(art, placements);
+  assert.ok(exteriorHeld(occ, artifactOccupancy(filled)).held,
+    "no cell visible down the open top may be filled");
 });
 
 test("generateFloorplan: every placed block is from the supplied manifest materials", () => {
