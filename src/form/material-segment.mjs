@@ -44,12 +44,13 @@ export { speckleScore }; // one import site for the runner (the before/after met
  *  the whole stack uses. */
 export const SEG_DEFAULTS = Object.freeze({
   k: 6, growDE: 22, gradDE: 25, minRegion: 12, neighbourhood: 6,
-  // T-064-01 noise-vs-intent: a region smaller than minRegion is absorbed ONLY when it is NOISE — either
-  // truly tiny (≤ tinyFloor cells: single/double-voxel snap flecks) or close in colour to its best
-  // neighbour (bestΔE ≤ absorbDE, i.e. within grow distance — it should have merged). A small region that
-  // is colour-DISTINCT from every neighbour (bestΔE > absorbDE) is INTENT (e.g. a mushroom-cap spot) and
-  // is KEPT. absorbDE defaults to growDE so "would have grown together" == "is noise".
-  absorbDE: 22, tinyFloor: 2,
+  // T-064-01 noise-vs-intent: a region smaller than minRegion is KEPT (treated as deliberate detail, e.g.
+  // a mushroom-cap spot) only when it is BOTH colour-DISTINCT from its best neighbour (bestΔE > absorbDE,
+  // i.e. it would NOT have grown together) AND at least `keepFloor` cells (a feature, not a fleck).
+  // Otherwise it is absorbed as noise. A `≤ tinyFloor` region is always absorbed regardless of colour.
+  // keepFloor sits just below minRegion: a colour-distinct region of 8–11 cells survives, while the
+  // many 3–7 cell distinct snap-flecks (which inflate speckle without enriching the palette) are absorbed.
+  absorbDE: 22, tinyFloor: 2, keepFloor: 8,
 });
 
 /** The style stamped on a segmented build (distinct from R1 "glb-voxel" and R2 "glb-voxel-clean"). */
@@ -220,7 +221,12 @@ export function absorbSmallRegions(
   state,
   occupancy,
   labs,
-  { minRegion = SEG_DEFAULTS.minRegion, absorbDE = SEG_DEFAULTS.absorbDE, tinyFloor = SEG_DEFAULTS.tinyFloor } = {},
+  {
+    minRegion = SEG_DEFAULTS.minRegion,
+    absorbDE = SEG_DEFAULTS.absorbDE,
+    tinyFloor = SEG_DEFAULTS.tinyFloor,
+    keepFloor = SEG_DEFAULTS.keepFloor,
+  } = {},
 ) {
   const labelOf = state.labelOf.slice();
   const cellCoords = [...occupiedCells(occupancy)];
@@ -259,9 +265,10 @@ export function absorbSmallRegions(
         }
       }
       if (best === -1) continue;
-      // Noise-vs-intent (T-064-01): keep a small region that is colour-DISTINCT from its nearest
-      // neighbour (it is deliberate detail), absorb only genuine noise (tiny fleck or near-in-colour).
-      if (r.cells.length > tinyFloor && bestD > absorbDE) continue;
+      // Noise-vs-intent (T-064-01): keep a small region only when it is deliberate detail — colour-
+      // DISTINCT from its nearest neighbour (bestΔE > absorbDE) AND a feature, not a fleck
+      // (≥ keepFloor cells). Everything else (tiny, or near-in-colour) is absorbed as noise.
+      if (r.cells.length > tinyFloor && r.cells.length >= keepFloor && bestD > absorbDE) continue;
       for (const ci of r.cells) labelOf[ci] = best;
       changed = true;
     }
@@ -568,6 +575,7 @@ export function segmentMaterials(build, opts = {}) {
   const minRegion = opts.minRegion ?? SEG_DEFAULTS.minRegion;
   const absorbDE = opts.absorbDE ?? SEG_DEFAULTS.absorbDE;
   const tinyFloor = opts.tinyFloor ?? SEG_DEFAULTS.tinyFloor;
+  const keepFloor = opts.keepFloor ?? SEG_DEFAULTS.keepFloor;
   const neighbourhood = opts.neighbourhood ?? SEG_DEFAULTS.neighbourhood;
 
   // Candidate set: the DESIGN-DOC palette when supplied (the fix — the model's deliberate few blocks),
@@ -584,7 +592,7 @@ export function segmentMaterials(build, opts = {}) {
   const cellCoords = [...occupiedCells(occupancy)];
 
   let state = growRegions(occupancy, labs, { growDE, neighbourhood });
-  state = absorbSmallRegions(state, occupancy, labs, { minRegion, absorbDE, tinyFloor });
+  state = absorbSmallRegions(state, occupancy, labs, { minRegion, absorbDE, tinyFloor, keepFloor });
 
   const keys = new Array(occupancy.count);
   for (const region of state.regions) {

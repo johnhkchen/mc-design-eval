@@ -112,16 +112,30 @@ test("absorbSmallRegions: a single off-colour speck is absorbed into its surroun
 
 // --- absorbSmallRegions: T-064-01 noise-vs-intent rule ----------------------
 
-test("absorbSmallRegions: a colour-DISTINCT small region is KEPT (legitimate detail, not noise)", () => {
-  // a 4×4 white cap with a 2×2 RED spot at the corner — the spot is small but a different material.
+test("absorbSmallRegions: a colour-DISTINCT small region ≥ keepFloor is KEPT (legitimate detail, not noise)", () => {
+  // a 5×5 white cap with a 3×3 RED spot at the corner — the spot (9 cells) is below minRegion but a
+  // different material AND a real feature (≥ keepFloor), so the dual-gate keeps it.
+  const cells = [];
+  for (let i = 0; i < 5; i++) for (let j = 0; j < 5; j++) cells.push([i, j, 0]);
+  const occ = makeOcc([5, 5, 1], cells);
+  const labs = labsOf(cells.map(([i, j]) => (i < 3 && j < 3 ? [220, 20, 20] : [235, 235, 235])));
+  const grown = growRegions(occ, labs, { growDE: 8 });
+  // size-9 spot < minRegion 12 but ≥ keepFloor 8 and ΔE to the white neighbour ≫ absorbDE → KEEP.
+  const kept = absorbSmallRegions(grown, occ, labs, { minRegion: 12, absorbDE: 22, tinyFloor: 2, keepFloor: 8 });
+  assert.equal(kept.regions.length, 2, "the distinct feature survives as its own region");
+});
+
+test("absorbSmallRegions: a colour-DISTINCT fleck BELOW keepFloor IS absorbed (dual-gate noise)", () => {
+  // a 4×4 white cap with a 2×2 RED spot (4 cells) — colour-distinct but too small to be a feature.
+  // The dual-gate (T-064-01 koi-speckle refinement) absorbs it: distinct snap-flecks inflate speckle
+  // without enriching the palette, so a region must clear BOTH absorbDE AND keepFloor to survive.
   const cells = [];
   for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) cells.push([i, j, 0]);
   const occ = makeOcc([4, 4, 1], cells);
   const labs = labsOf(cells.map(([i, j]) => (i < 2 && j < 2 ? [220, 20, 20] : [235, 235, 235])));
   const grown = growRegions(occ, labs, { growDE: 8 });
-  // size-4 spot < minRegion 12, but its ΔE to the white neighbour ≫ absorbDE → KEEP.
-  const kept = absorbSmallRegions(grown, occ, labs, { minRegion: 12, absorbDE: 22, tinyFloor: 2 });
-  assert.equal(kept.regions.length, 2, "the distinct spot survives as its own region");
+  const absorbed = absorbSmallRegions(grown, occ, labs, { minRegion: 12, absorbDE: 22, tinyFloor: 2, keepFloor: 8 });
+  assert.equal(absorbed.regions.length, 1, "a distinct but sub-keepFloor fleck is absorbed as noise");
 });
 
 test("absorbSmallRegions: a colour-CLOSE small region IS absorbed (real noise)", () => {
