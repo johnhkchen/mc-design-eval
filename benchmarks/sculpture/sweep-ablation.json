@@ -1,0 +1,258 @@
+{
+  "schema": "sweep-ablation/v1",
+  "epic": "E-17",
+  "scale": 32,
+  "rungs": [
+    {
+      "id": "R0",
+      "label": "text→JSON"
+    },
+    {
+      "id": "R1",
+      "label": "glb-voxel"
+    },
+    {
+      "id": "R2",
+      "label": "+material-clean"
+    },
+    {
+      "id": "R3",
+      "label": "+surgical"
+    }
+  ],
+  "metric": "formIoU = whole-build 3/4-view silhouette IoU vs the subject's GLB mesh (SCULPTURE_VIEW_3Q, normalized — translation + uniform scale removed). valueDeltaE = coverage-weighted mean CIE76 of the realized palette vs the GLB's own canonical texture palette (value-gate.mjs; lower = cleaner). verdict = form IoU rung-over-rung (baseline|improved|held|regressed). dFormIoU / dValueDeltaE = the marginal change each rung added vs the previous present rung (dValueDeltaE < 0 = cleaner).",
+  "note": "E-17 data spine (T-056-01): all 7 subjects up one ladder, every rung scored the same way. R3's verdict is expected to be 'held' on the already-close GLB-voxel builds (a single-view per-region accept-gate rarely lifts the whole-object silhouette) — recorded honestly, not dropped. R0's IoU is measured against the GLB after silhouette normalization; the build coords differ from the mesh, so it is the honest cross-target floor, not a like-for-like comparison.",
+  "subjects": [
+    {
+      "subject": "dancing-man",
+      "rungs": {
+        "R0": {
+          "formIoU": 0.606,
+          "valueDeltaE": 16.25,
+          "verdict": "baseline",
+          "dFormIoU": null,
+          "dValueDeltaE": null
+        },
+        "R1": {
+          "formIoU": 0.914,
+          "valueDeltaE": 2.1,
+          "verdict": "improved",
+          "dFormIoU": 0.308,
+          "dValueDeltaE": -14.15
+        },
+        "R2": {
+          "formIoU": 0.914,
+          "valueDeltaE": 0,
+          "verdict": "held",
+          "dFormIoU": 0,
+          "dValueDeltaE": -2.1
+        },
+        "R3": {
+          "formIoU": 0.914,
+          "valueDeltaE": 0,
+          "verdict": "held",
+          "dFormIoU": 0,
+          "dValueDeltaE": 0
+        }
+      }
+    },
+    {
+      "subject": "moai",
+      "rungs": {
+        "R0": {
+          "formIoU": 0.279,
+          "valueDeltaE": 9.77,
+          "verdict": "baseline",
+          "dFormIoU": null,
+          "dValueDeltaE": null
+        },
+        "R1": {
+          "formIoU": 0.565,
+          "valueDeltaE": 1.22,
+          "verdict": "improved",
+          "dFormIoU": 0.286,
+          "dValueDeltaE": -8.55
+        },
+        "R2": {
+          "formIoU": 0.565,
+          "valueDeltaE": 0,
+          "verdict": "held",
+          "dFormIoU": 0,
+          "dValueDeltaE": -1.22
+        },
+        "R3": {
+          "formIoU": 0.565,
+          "valueDeltaE": 0,
+          "verdict": "held",
+          "dFormIoU": 0,
+          "dValueDeltaE": 0
+        }
+      }
+    },
+    {
+      "subject": "pineapple",
+      "rungs": {
+        "R0": {
+          "formIoU": 0.783,
+          "valueDeltaE": 6.19,
+          "verdict": "baseline",
+          "dFormIoU": null,
+          "dValueDeltaE": null
+        },
+        "R1": {
+          "formIoU": 0.907,
+          "valueDeltaE": 4.38,
+          "verdict": "improved",
+          "dFormIoU": 0.124,
+          "dValueDeltaE": -1.81
+        },
+        "R2": {
+          "formIoU": 0.907,
+          "valueDeltaE": 0,
+          "verdict": "held",
+          "dFormIoU": 0,
+          "dValueDeltaE": -4.38
+        },
+        "R3": {
+          "formIoU": 0.907,
+          "valueDeltaE": 0,
+          "verdict": "held",
+          "dFormIoU": 0,
+          "dValueDeltaE": 0
+        }
+      }
+    },
+    {
+      "subject": "bow-and-arrow",
+      "rungs": {
+        "R0": {
+          "formIoU": 0.299,
+          "valueDeltaE": 10.09,
+          "verdict": "baseline",
+          "dFormIoU": null,
+          "dValueDeltaE": null
+        },
+        "R1": {
+          "formIoU": 0.473,
+          "valueDeltaE": 3.8,
+          "verdict": "improved",
+          "dFormIoU": 0.174,
+          "dValueDeltaE": -6.29
+        },
+        "R2": {
+          "formIoU": 0.473,
+          "valueDeltaE": 0,
+          "verdict": "held",
+          "dFormIoU": 0,
+          "dValueDeltaE": -3.8
+        },
+        "R3": {
+          "formIoU": 0.469,
+          "valueDeltaE": 0,
+          "verdict": "regressed",
+          "dFormIoU": -0.004,
+          "dValueDeltaE": 0
+        }
+      }
+    },
+    {
+      "subject": "heart",
+      "rungs": {
+        "R0": {
+          "formIoU": 0.456,
+          "valueDeltaE": 9.91,
+          "verdict": "baseline",
+          "dFormIoU": null,
+          "dValueDeltaE": null
+        },
+        "R1": {
+          "formIoU": 0.877,
+          "valueDeltaE": 5.91,
+          "verdict": "improved",
+          "dFormIoU": 0.421,
+          "dValueDeltaE": -4
+        },
+        "R2": {
+          "formIoU": 0.877,
+          "valueDeltaE": 0,
+          "verdict": "held",
+          "dFormIoU": 0,
+          "dValueDeltaE": -5.91
+        },
+        "R3": {
+          "formIoU": 0.877,
+          "valueDeltaE": 0,
+          "verdict": "held",
+          "dFormIoU": 0,
+          "dValueDeltaE": 0
+        }
+      }
+    },
+    {
+      "subject": "mushroom",
+      "rungs": {
+        "R0": {
+          "formIoU": 0.776,
+          "valueDeltaE": 13.16,
+          "verdict": "baseline",
+          "dFormIoU": null,
+          "dValueDeltaE": null
+        },
+        "R1": {
+          "formIoU": 0.98,
+          "valueDeltaE": 6.44,
+          "verdict": "improved",
+          "dFormIoU": 0.204,
+          "dValueDeltaE": -6.72
+        },
+        "R2": {
+          "formIoU": 0.98,
+          "valueDeltaE": 0,
+          "verdict": "held",
+          "dFormIoU": 0,
+          "dValueDeltaE": -6.44
+        },
+        "R3": {
+          "formIoU": 0.98,
+          "valueDeltaE": 0,
+          "verdict": "held",
+          "dFormIoU": 0,
+          "dValueDeltaE": 0
+        }
+      }
+    },
+    {
+      "subject": "koi",
+      "rungs": {
+        "R0": {
+          "formIoU": 0.472,
+          "valueDeltaE": 16.5,
+          "verdict": "baseline",
+          "dFormIoU": null,
+          "dValueDeltaE": null
+        },
+        "R1": {
+          "formIoU": 0.622,
+          "valueDeltaE": 7.87,
+          "verdict": "improved",
+          "dFormIoU": 0.15,
+          "dValueDeltaE": -8.63
+        },
+        "R2": {
+          "formIoU": 0.623,
+          "valueDeltaE": 0,
+          "verdict": "held",
+          "dFormIoU": 0.001,
+          "dValueDeltaE": -7.87
+        },
+        "R3": {
+          "formIoU": 0.623,
+          "valueDeltaE": 0,
+          "verdict": "held",
+          "dFormIoU": 0,
+          "dValueDeltaE": 0
+        }
+      }
+    }
+  ]
+}

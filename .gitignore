@@ -42,3 +42,6 @@ benchmarks/sculpture/glb-voxel-clean/**/render-3q.png
 # GLB-voxel surgical SWEEP renders (T-056-01, E-17 R3) — derived, regen via
 # `node benchmarks/sculpture/glb-voxel-surgical-sweep.mjs`. Durable record: r3.{md,json} + summaries.
 benchmarks/sculpture/glb-voxel-surgical-sweep/**/*.png
+
+# Ablation collector R0 renders (T-056-01, E-17) — derived. Durable record: sweep-ablation.{md,json}.
+benchmarks/sculpture/sweep-ablation/**/*.png
