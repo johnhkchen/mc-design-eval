@@ -44,8 +44,9 @@ score every rung the same way, and produce **one scorecard** that shows — per 
 ```
 R0  text→JSON          the E-13 baseline build                                  (where we started)
 R1  glb-voxel          voxelize the TRELLIS GLB → DesignArtifact   (E-16)        (form win)
-R2  + material-clean   denoise/quantize the per-voxel color into clean material  (NEW, this epic)
-                       regions via value-true palette (E-14) + material passes (E-11)
+R2  + material-clean   ground the voxel materials in a canonical palette         (NEW, this epic)
+                       EXTRACTED FROM THE GLB SURFACE TEXTURE via the E-10 CIE-Lab
+                       palette technique → value-true blocks (E-14) + material passes (E-11)
 R3  + surgical         E-15 region polish against the GLB target   (E-15+E-16)   (final cleanup)
 ```
 
@@ -78,8 +79,9 @@ AVG / Δ     baseline   +form      +material     +polish       ← "what each im
 
 ## Scope
 
-**In:** the **material-clean pass** (denoise/quantize GLB-voxel color → clean material regions, value-true
-+ height-varied — the new lever); the **glb-voxel build across all 8 subjects** (generalize E-16's
+**In:** the **material-clean pass** (ground voxel materials in a canonical palette **extracted from the
+GLB surface texture** via the E-10 CIE-Lab palette technique → value-true blocks + height-varied — the new
+lever); the **glb-voxel build across all 8 subjects** (generalize E-16's
 koi/heart path); the **ablation sweep harness** (assemble the 4-rung ladder × 8 subjects, run the surgical
 rung, collect form-IoU + value-ΔE + judge per rung); the **consolidation scorecard + per-subject
 march-of-progress** (the legible answer), journaled, with an E-12 handoff.
@@ -100,10 +102,13 @@ S-054 glb-voxel ×8 ─▶ S-055 material-clean ×8 ─▶ S-056 ablation sweep 
   the R1 `glb-voxel` build + render + form-IoU for every subject. Generalizes the koi/heart path; little
   new code, broad coverage.
 - **S-055 — material-clean-pass (the new lever).** Build + apply a pass that turns the speckled per-voxel
-  GLB color into **clean material regions**: cluster the voxel colors (median-cut in Lab, as
-  `palette-extract` does), snap to **value-true blocks** (E-14), and apply **E-11 material passes**
-  (same-hue set, height-varied) for texture instead of noise — optionally spatial-smoothing a voxel to its
-  neighborhood's dominant block. → the R2 `+material-clean` build for all 8. Pure logic unit-tested.
+  GLB color into **clean material regions** by **grounding the materials in a canonical palette extracted
+  from the GLB's surface texture** with the E-10 CIE-Lab palette technique (`extractPaletteFromImage` /
+  `medianCutLab` → value-true blocks, E-14) — *not* by clustering the noisy per-voxel samples. Then assign
+  each voxel by sampling the texture and snapping to the nearest block within that palette, spatial-denoise
+  to the neighborhood's dominant block, and apply **E-11 material passes** (same-hue set, height-varied)
+  for deliberate texture instead of noise. → the R2 `+material-clean` build for all 8. Pure logic
+  unit-tested.
 - **S-056 — ablation-sweep.** Assemble the full 4-rung ladder (R0 text→JSON, R1 glb-voxel, R2
   +material-clean, R3 +surgical) for all 8 subjects — running the **E-15 surgical rung** on the cleaned
   voxel build with the GLB target — and **collect form-IoU + value-ΔE + judge per rung per subject** into
