@@ -1,0 +1,166 @@
+{
+  "schema": "glb-formtarget-ab/v1",
+  "metric": "silhouette-iou (GLB 3-D target)",
+  "generatedFrom": "benchmarks/sculpture/runs/{009-*-koi-fish,006-*-human-heart} + benchmarks/sculpture/glb/{koi,heart}.glb",
+  "note": "region IoU = the R-framed build render's silhouette vs the GLB silhouette CLIPPED to R mapped into mesh space (mapVoxelRegionToMesh) — a TRUE per-region 3-D signal the flat concept could not give. whole IoU = the full-build 3/4 render vs the whole GLB silhouette. The verdict is categorical and APPLES-TO-APPLES: GLB-after vs GLB-before (improved|held|regressed); the E-13 concept-target IoU is a cross-reference only (mixing it into the gate would falsely flag an unchanged build as regressed). Honesty: single 3/4 view; GLB and build share no origin/scale (normalization removes translation+uniform scale) and rotation/axis mismatch is NOT corrected. Compare directly to form-revise-ab.md (the flat-concept run).",
+  "subjects": [
+    {
+      "subject": "koi",
+      "run": "009-vConcept-a-koi-fish",
+      "glb": "glb/koi.glb",
+      "region": {
+        "min": [
+          -9,
+          1,
+          -5
+        ],
+        "max": [
+          2,
+          6,
+          5
+        ]
+      },
+      "defect": "ringing",
+      "where": "the swimming body (the S-curve that flattens to a straight body)",
+      "route": "llm-edit",
+      "regionIoUBefore": 0.5933979358701647,
+      "regionIoUAfter": 0.5933979358701647,
+      "accepted": false,
+      "reason": "rolled-back",
+      "e13Baseline": 0.481,
+      "wholeObjectIoUBefore": 0.4719478098788444,
+      "wholeObjectIoUAfter": 0.4719478098788444,
+      "wholeObjectIoUProposed": 0.4719478098788444,
+      "moved": false,
+      "verdict": "held",
+      "trace": [
+        {
+          "iteration": 1,
+          "region": {
+            "bbox": {
+              "min": [
+                -9,
+                1,
+                -5
+              ],
+              "max": [
+                2,
+                6,
+                5
+              ]
+            }
+          },
+          "subBounds": {
+            "min": [
+              -9,
+              1,
+              -5
+            ],
+            "max": [
+              2,
+              6,
+              5
+            ]
+          },
+          "defect": "ringing",
+          "where": "the swimming body (the S-curve that flattens to a straight body)",
+          "route": "llm-edit",
+          "tweak": "noop",
+          "scoreBefore": 0.5933979358701647,
+          "scoreAfter": 0.5933979358701647,
+          "accepted": false,
+          "reason": "rolled-back"
+        }
+      ],
+      "edits": 1,
+      "proposals": [
+        {
+          "region": "-9,1,-5|2,6,5",
+          "proposed": 10,
+          "applied": 10,
+          "rejected": [],
+          "stashed": true
+        }
+      ]
+    },
+    {
+      "subject": "heart",
+      "run": "006-vConcept-an-anatomically-correct-human-heart",
+      "glb": "glb/heart.glb",
+      "region": {
+        "min": [
+          -8,
+          20,
+          -6
+        ],
+        "max": [
+          8,
+          31,
+          6
+        ]
+      },
+      "defect": "ringing",
+      "where": "the aortic arch (which never builds as a closed loop)",
+      "route": "llm-edit",
+      "regionIoUBefore": 0.4487072560467056,
+      "regionIoUAfter": 0.45560619872379216,
+      "accepted": true,
+      "reason": "accepted",
+      "e13Baseline": 0.347,
+      "wholeObjectIoUBefore": 0.45643516270033996,
+      "wholeObjectIoUAfter": 0.4620722891566265,
+      "wholeObjectIoUProposed": 0.4620722891566265,
+      "moved": true,
+      "verdict": "improved",
+      "trace": [
+        {
+          "iteration": 1,
+          "region": {
+            "bbox": {
+              "min": [
+                -8,
+                20,
+                -6
+              ],
+              "max": [
+                8,
+                31,
+                6
+              ]
+            }
+          },
+          "subBounds": {
+            "min": [
+              -8,
+              20,
+              -6
+            ],
+            "max": [
+              8,
+              31,
+              6
+            ]
+          },
+          "defect": "ringing",
+          "where": "the aortic arch (which never builds as a closed loop)",
+          "route": "llm-edit",
+          "tweak": "noop",
+          "scoreBefore": 0.4487072560467056,
+          "scoreAfter": 0.45560619872379216,
+          "accepted": true,
+          "reason": "accepted"
+        }
+      ],
+      "edits": 1,
+      "proposals": [
+        {
+          "region": "-8,20,-6|8,31,6",
+          "proposed": 3,
+          "applied": 3,
+          "rejected": [],
+          "stashed": true
+        }
+      ]
+    }
+  ]
+}
