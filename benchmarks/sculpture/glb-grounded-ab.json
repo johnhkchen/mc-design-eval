@@ -1,0 +1,185 @@
+{
+  "schema": "glb-grounded-ab/v1",
+  "metric": "silhouette-iou (whole-object, 3/4 view)",
+  "generatedFrom": "form-baseline.json (E-13 vs concept) + glb-formtarget-ab.json (Arm A) + glb-voxel/{koi,heart}/summary.json (Arm B) + glb-voxel-surgical/glb-voxel-surgical.json (synthesis)",
+  "note": "THE E-16 CONSOLIDATION. Three-way head-to-head of text→JSON (E-13) vs GLB-voxel (T-051-01) vs GLB-voxel+surgical (T-052-01) for koi + heart. The apples-to-apples axis is whole-object silhouette IoU vs the GLB target (exists for all three arms): text→JSON-vs-GLB is the un-edited E-13 build scored against the GLB (glb-formtarget-ab `wholeObjectIoUBefore`); GLB-voxel-vs-GLB is the voxel build's `silhouetteIoU`; surgical-vs-GLB is `wholeObjectIoUAfter`. vs-concept (E-13 form-baseline) is carried only where it was measured (the text→JSON rows). categorical = an IoU-derived band (poor<0.50, fair<0.70, good<0.85, strong≥0.85) appended with the deterministic loop verdict for the surgical arms — NOT an independent perceptual judge (none re-run; honest residual). Numbers are read from committed upstream records, not recomputed. n=2.",
+  "bands": [
+    {
+      "below": 0.5,
+      "band": "poor"
+    },
+    {
+      "below": 0.7,
+      "band": "fair"
+    },
+    {
+      "below": 0.85,
+      "band": "good"
+    },
+    {
+      "below": null,
+      "band": "strong"
+    }
+  ],
+  "subjects": [
+    {
+      "subject": "koi",
+      "run": "009-vConcept-a-koi-fish",
+      "glb": "glb/koi.glb",
+      "armA": {
+        "regionIoUBefore": 0.593,
+        "regionIoUAfter": 0.593,
+        "wholeBefore": 0.472,
+        "wholeAfter": 0.472,
+        "accepted": false,
+        "moved": false,
+        "verdict": "held"
+      },
+      "synthesis": {
+        "wholeBefore": 0.622,
+        "wholeAfter": 0.614,
+        "verdict": "regressed",
+        "keptCount": 1,
+        "rolledBackCount": 1,
+        "perRegion": [
+          {
+            "defect": "thick-fin / stair-stepping",
+            "route": "llm-edit",
+            "before": 0.513,
+            "after": 0.528,
+            "accepted": true
+          },
+          {
+            "defect": "flat-skin",
+            "route": "relief",
+            "before": 0.716,
+            "after": 0.716,
+            "accepted": false
+          }
+        ]
+      },
+      "methods": [
+        {
+          "method": "text→JSON (E-13)",
+          "ticket": "E-13",
+          "iouVsGlb": 0.472,
+          "iouVsConcept": 0.481,
+          "categorical": "poor",
+          "verdict": null,
+          "deltaVsTextJson": 0
+        },
+        {
+          "method": "GLB-voxel (T-051-01)",
+          "ticket": "T-051-01",
+          "iouVsGlb": 0.622,
+          "iouVsConcept": null,
+          "categorical": "fair",
+          "verdict": null,
+          "deltaVsTextJson": 0.15
+        },
+        {
+          "method": "GLB-voxel + surgical (T-052-01)",
+          "ticket": "T-052-01",
+          "iouVsGlb": 0.614,
+          "iouVsConcept": null,
+          "categorical": "fair (regressed)",
+          "verdict": "regressed",
+          "deltaVsTextJson": 0.142,
+          "keptCount": 1,
+          "rolledBackCount": 1
+        }
+      ]
+    },
+    {
+      "subject": "heart",
+      "run": "006-vConcept-an-anatomically-correct-human-heart",
+      "glb": "glb/heart.glb",
+      "armA": {
+        "regionIoUBefore": 0.449,
+        "regionIoUAfter": 0.456,
+        "wholeBefore": 0.456,
+        "wholeAfter": 0.462,
+        "accepted": true,
+        "moved": true,
+        "verdict": "improved"
+      },
+      "synthesis": {
+        "wholeBefore": 0.877,
+        "wholeAfter": 0.877,
+        "verdict": "held",
+        "keptCount": 0,
+        "rolledBackCount": 2,
+        "perRegion": [
+          {
+            "defect": "almost-closed-arch",
+            "route": "llm-edit",
+            "before": 0.566,
+            "after": 0.566,
+            "accepted": false
+          },
+          {
+            "defect": "flat-skin",
+            "route": "relief",
+            "before": 0.73,
+            "after": 0.728,
+            "accepted": false
+          }
+        ]
+      },
+      "methods": [
+        {
+          "method": "text→JSON (E-13)",
+          "ticket": "E-13",
+          "iouVsGlb": 0.456,
+          "iouVsConcept": 0.347,
+          "categorical": "poor",
+          "verdict": null,
+          "deltaVsTextJson": 0
+        },
+        {
+          "method": "GLB-voxel (T-051-01)",
+          "ticket": "T-051-01",
+          "iouVsGlb": 0.877,
+          "iouVsConcept": null,
+          "categorical": "strong",
+          "verdict": null,
+          "deltaVsTextJson": 0.421
+        },
+        {
+          "method": "GLB-voxel + surgical (T-052-01)",
+          "ticket": "T-052-01",
+          "iouVsGlb": 0.877,
+          "iouVsConcept": null,
+          "categorical": "strong (held)",
+          "verdict": "held",
+          "deltaVsTextJson": 0.421,
+          "keptCount": 0,
+          "rolledBackCount": 2
+        }
+      ]
+    }
+  ],
+  "answers": {
+    "q1_targetMovedTextJsonLoop": {
+      "moved": "1 of 2",
+      "detail": "heart improved (0.456→0.462, edit accepted); koi held (0.472→0.472, rolled back). Against E-15's flat concept (0 of 2 moved; the heart edit regressed and was rejected), the 3-D target gave the heart a per-region signal worth keeping.",
+      "answer": "Partly — the 3-D target moved the loop on 1 of 2, where the flat concept moved 0 of 2."
+    },
+    "q2_voxelizationBeatTextJson": {
+      "koiDelta": 0.15,
+      "heartDelta": 0.421,
+      "answer": "Yes, decisively. vs the same GLB: koi 0.472→0.622 (+0.15), heart 0.456→0.877 (+0.421). Voxelizing the image→3D mesh is a far larger form win than any surgical edit on a text→JSON build."
+    },
+    "q3_surgicalAddedCapability": {
+      "koi": "whole-object 0.622→0.614 (regressed); 1 region cleaned locally but did not transfer to the whole silhouette",
+      "heart": "whole-object 0.877→0.877 (held); both regions rolled back",
+      "cost": "one claude -p LLM-edit call per `curve` region (koi 1 kept / 1 rolled, heart 0 / 2)",
+      "answer": "No net whole-object gain. Once voxelization captures the form, local single-view surgical edits have little headroom and can slightly hurt the whole-object silhouette — the E-15 single-view ceiling persists even with a 3-D target and a voxel base."
+    }
+  },
+  "residual": [
+    "GLB-voxel is not 1.0 — koi 0.622 (the thin caudal fin voxelizes chunky), heart 0.877 (closer). The metric is a single 3/4 view; rotation/axis is not corrected; translation+uniform scale are normalized out.",
+    "Surgical revision cannot reliably climb a whole-object single-view IoU even with a 3-D target on a voxel base (koi regressed, heart held).",
+    "Silhouette IoU is necessary, not sufficient — two shapes can share an outline. No fresh LLM perceptual judge was re-run in E-16; the categorical is the IoU band + the deterministic loop verdict."
+  ]
+}
