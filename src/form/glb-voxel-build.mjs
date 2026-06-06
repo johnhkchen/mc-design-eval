@@ -55,6 +55,31 @@ export function blockPaletteFromTable(table = loadBlockTable()) {
   return table.blocks.map((b) => ({ key: b.block, lab: b.lab }));
 }
 
+/**
+ * THE DESIGN-DOC PALETTE as a `nearestLab` candidate set — the fix for palette bloat / speckle (the
+ * picker was snapping over the full 305-block universe instead of the few blocks the design doc chose).
+ * Restrict the snap candidates to exactly the original build's `palette.manifest` (the model's deliberate
+ * dominant/supporting/accent set), looked up in the block→Lab table. Namespace-tolerant (`minecraft:` is
+ * stripped to match bare table keys). A manifest block absent from the value-true table (e.g. a non-full-
+ * cube like stairs) is dropped — it cannot be a voxel anyway. Throws if nothing resolves.
+ * @param {string[]} manifest  the original artifact's `palette.manifest`
+ * @param {{blocks:{block:string,lab:number[]}[]}} [table]
+ * @returns {{key:string, lab:number[]}[]}
+ */
+export function paletteFromManifest(manifest, table = loadBlockTable()) {
+  if (!Array.isArray(manifest) || manifest.length === 0) {
+    throw new Error("paletteFromManifest: manifest must be a non-empty array of block names");
+  }
+  const want = new Set(manifest.map((b) => String(b).replace(/^minecraft:/, "")));
+  const palette = table.blocks.filter((b) => want.has(b.block)).map((b) => ({ key: b.block, lab: b.lab }));
+  if (palette.length === 0) {
+    throw new Error(
+      `paletteFromManifest: no manifest block resolved in the block-Lab table (manifest: ${manifest.join(", ")})`,
+    );
+  }
+  return palette;
+}
+
 /** Clamp `v` to `[0, n-1]` (texel index safety after a UV→pixel map). */
 function clampIdx(v, n) {
   return v < 0 ? 0 : v >= n ? n - 1 : v;

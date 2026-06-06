@@ -28,7 +28,7 @@ import { dirname, join } from "node:path";
 import { spawn } from "node:child_process";
 import { tmpdir } from "node:os";
 
-import { glbVoxelBuild } from "../../src/form/glb-voxel-build.mjs";
+import { glbVoxelBuild, paletteFromManifest } from "../../src/form/glb-voxel-build.mjs";
 import { assertArtifact } from "../../src/artifact.mjs";
 import { DEFAULT_SCALE, SCULPTURE_VIEW_3Q } from "../../src/sculpture.mjs";
 import { GLB_VOXEL_METHOD_ID } from "../../src/config.mjs";
@@ -191,11 +191,17 @@ async function runBreadth({ scale = DEFAULT_SCALE, regenMissing = false } = {}) 
     const glbBytes = await readFile(glbPath);
 
     const t0 = Date.now();
+    // Candidate palette = the DESIGN-DOC manifest (the model's deliberate few blocks), NOT the full
+    // 305-block table — the fix for palette bloat / speckle. Snap each GLB-surface color to the nearest
+    // of just those blocks.
+    const designManifest = JSON.parse(await readFile(join(RUNS_DIR, subj.run, "artifact.json"), "utf8")).palette.manifest;
+    const palette = paletteFromManifest(designManifest);
     const artifact = await glbVoxelBuild(glbBytes, {
       scale,
       decodeTexture,
+      palette,
       metadata: { trial_id: `${subj.key}-glb-voxel` },
-      style: { name: "glb-voxel", rationale: `Voxelized ${subj.key} GLB; cells colored value-true from the GLB surface.` },
+      style: { name: "glb-voxel", rationale: `Voxelized ${subj.key} GLB; cells colored value-true from the GLB surface, snapped to the design-doc palette (${palette.length} blocks).` },
     });
     assertArtifact(artifact); // fail loud if the gate rejects
     await writeFile(join(dir, "artifact.json"), JSON.stringify(artifact, null, 2) + "\n");

@@ -7,6 +7,7 @@ import assert from "node:assert/strict";
 
 import {
   blockPaletteFromTable,
+  paletteFromManifest,
   sampleSurfaceColors,
   colorVoxelsToArtifact,
 } from "./glb-voxel-build.mjs";
@@ -30,6 +31,34 @@ const TINY_PALETTE = [
   { key: "red_wool", lab: srgbToLab([255, 0, 0]) },
   { key: "blue_wool", lab: srgbToLab([0, 0, 255]) },
 ];
+
+test("paletteFromManifest: confines candidates to the design-doc manifest (namespace-tolerant)", () => {
+  const table = {
+    blocks: [
+      { block: "red_terracotta", lab: [40, 30, 20] },
+      { block: "red_concrete", lab: [45, 50, 30] },
+      { block: "lapis_block", lab: [30, 10, -40] },
+      { block: "gold_block", lab: [80, 5, 70] },
+    ],
+  };
+  // namespaced manifest of 2 blocks → exactly those 2, prefix stripped, others excluded
+  const pal = paletteFromManifest(["minecraft:red_terracotta", "minecraft:lapis_block"], table);
+  assert.deepEqual(pal.map((p) => p.key).sort(), ["lapis_block", "red_terracotta"]);
+  // a manifest block absent from the value-true table (e.g. a non-full-cube) is dropped, not fatal
+  const pal2 = paletteFromManifest(["red_concrete", "oak_stairs"], table);
+  assert.deepEqual(pal2.map((p) => p.key), ["red_concrete"]);
+  // empty manifest and total non-resolution both throw
+  assert.throws(() => paletteFromManifest([], table), /non-empty/);
+  assert.throws(() => paletteFromManifest(["nonexistent_block"], table), /no manifest block resolved/);
+});
+
+test("paletteFromManifest: result is a strict subset of the full table (no leakage to the universe)", () => {
+  const table = blockPaletteFromTable();
+  const manifest = ["minecraft:red_terracotta", "minecraft:gold_block", "minecraft:lapis_block"];
+  const pal = paletteFromManifest(manifest, { blocks: table.map((p) => ({ block: p.key, lab: p.lab })) });
+  assert.ok(pal.length <= manifest.length && pal.length > 0);
+  assert.ok(pal.length < table.length); // far smaller than the 305-block universe — the whole point
+});
 
 test("colorVoxelsToArtifact: 2 red + 2 blue cells → valid artifact, sorted-unique 2-block manifest", () => {
   const colors = Uint8Array.from([255, 0, 0, 255, 0, 0, 0, 0, 255, 0, 0, 255]); // red, red, blue, blue

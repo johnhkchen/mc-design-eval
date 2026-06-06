@@ -444,9 +444,11 @@ export function offPaletteCount(keys, palette) {
  * keysToArtifact.
  * @param {{ occupancy:object, surface:{vertices:Float64Array,uvs:Float64Array},
  *           texture:{width:number,height:number,data:Uint8Array|Buffer} }} build
- * @param {{ k?:number, growDE?:number, gradDE?:number, minRegion?:number, neighbourhood?:6|26,
- *           dither?:boolean, dropColor?:number[]|null, materialTexture?:boolean|object,
- *           metadata?:object, style?:object, paletteId?:string }} [opts]
+ * @param {{ palette?:{key:string,lab:number[]}[], k?:number, growDE?:number, gradDE?:number,
+ *           minRegion?:number, neighbourhood?:6|26, dither?:boolean, dropColor?:number[]|null,
+ *           materialTexture?:boolean|object, metadata?:object, style?:object, paletteId?:string }} [opts]
+ *           `palette` (the fix): the DESIGN-DOC palette `[{key,lab}]` to snap within — the deliberate few
+ *           blocks the model chose. When omitted, a palette is median-cut from the GLB texture (looser).
  *           `dither` (default false) softens gradient boundaries with an ordered Bayer dither at the cost
  *           of more speckle; the default hard band minimises speckle.
  * @returns {import("../artifact.mjs").DesignArtifact}
@@ -459,7 +461,9 @@ export function segmentMaterials(build, opts = {}) {
   const minRegion = opts.minRegion ?? SEG_DEFAULTS.minRegion;
   const neighbourhood = opts.neighbourhood ?? SEG_DEFAULTS.neighbourhood;
 
-  const { snapPalette } = extractTexturePalette(texture, { k, dropColor: opts.dropColor });
+  // Candidate set: the DESIGN-DOC palette when supplied (the fix — the model's deliberate few blocks),
+  // else fall back to extracting one from the GLB texture. opts.palette is `[{key,lab}]`.
+  const snapPalette = opts.palette ?? extractTexturePalette(texture, { k, dropColor: opts.dropColor }).snapPalette;
   const colors = sampleSurfaceColors({ occupancy, surface, texture });
   const labs = cellLabs(colors);
   const cellCoords = [...occupiedCells(occupancy)];

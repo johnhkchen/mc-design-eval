@@ -36,6 +36,7 @@ import {
   SEG_DEFAULTS,
 } from "../../src/form/material-segment.mjs";
 import { extractTexturePalette } from "../../src/form/material-clean.mjs";
+import { paletteFromManifest } from "../../src/form/glb-voxel-build.mjs";
 import { voxelizeGlb } from "../../src/form/glb-voxelize.mjs";
 import { parseGlbColoredSurface } from "../../src/form/glb-mesh.mjs";
 import { assertArtifact } from "../../src/artifact.mjs";
@@ -203,16 +204,20 @@ async function runSeg({ scale = DEFAULT_SCALE, regenMissing = false } = {}) {
     const surface = parseGlbColoredSurface(glbBytes);
     if (!surface.baseColor) throw new Error(`${subj.key}: GLB has no baseColor texture`);
     const texture = await decodeTexture(surface.baseColor);
-    const { snapPalette, description } = extractTexturePalette(texture, { k: SEG_DEFAULTS.k });
+    const { description } = extractTexturePalette(texture, { k: SEG_DEFAULTS.k }); // kept for the before-state note only
+    // The fix: snap within the DESIGN-DOC palette (the model's deliberate few blocks), NOT a palette
+    // median-cut from the noisy TRELLIS texture (which is the "larger universe" that bloats + speckles).
+    const designManifest = JSON.parse(await readFile(join(RUNS_DIR, subj.run, "artifact.json"), "utf8")).palette.manifest;
+    const palette = paletteFromManifest(designManifest);
 
     const artifact = segmentMaterials(
       { occupancy, surface, texture },
       {
-        k: SEG_DEFAULTS.k,
+        palette,
         metadata: { trial_id: `${subj.key}-glb-voxel-seg` },
         style: {
           name: "glb-voxel-seg",
-          rationale: `Region-segmented ${subj.key} GLB under a ${snapPalette.length}-block fixed palette from its own texture; gradients banded.`,
+          rationale: `Region-segmented ${subj.key} GLB under the design-doc palette (${palette.length} blocks); gradients banded.`,
         },
       },
     );
