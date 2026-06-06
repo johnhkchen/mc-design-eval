@@ -86,3 +86,7 @@ benchmarks/sculpture/building/scale-*/artifact.json
 # (the loop accepted zero edits; the cage held), so the 7.6 MB duplicate is NOT re-committed. Durable record:
 # surgical-standard.{json,md} + building/round-*/summary.json. Regenerate via `npm run surgical:standard`.
 benchmarks/sculpture/building/refined/artifact.json
+
+# Spray-paint face renders (T-079-01, E-23) — derived, regen via `npm run spray:paint`. The durable
+# record is spray-paint/cottage.{json,md} + spray-paint/cottage/artifact.json (the painted build).
+benchmarks/sculpture/spray-paint/**/*.png

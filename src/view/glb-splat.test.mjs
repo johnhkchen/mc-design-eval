@@ -2,7 +2,23 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { occupancyFromCells } from "./occupancy.mjs";
 import { projectSurface } from "./surface-grid.mjs";
-import { glbVoxelOccupancy, splatFromGlbOccupancy, splatFromCells } from "./glb-splat.mjs";
+import { glbVoxelOccupancy, splatFromGlbOccupancy, splatFromCells, resampleBlockGrid } from "./glb-splat.mjs";
+
+test("resampleBlockGrid maps a source block grid onto a target n×m (nearest cell)", () => {
+  const src = [["a", "b"], ["c", "d"]]; // 2×2
+  const up = resampleBlockGrid(src, 2, 2, 4, 4);
+  assert.equal(up.n, 4);
+  assert.equal(up.m, 4);
+  assert.equal(up.grid[0][0], "a");
+  assert.equal(up.grid[0][3], "b");
+  assert.equal(up.grid[3][0], "c");
+  assert.equal(up.grid[3][3], "d");
+  assert.equal(up.sourceFilled, 16);
+  // nulls pass through and are not counted
+  const withNull = resampleBlockGrid([["a", null]], 2, 1, 2, 1);
+  assert.equal(withNull.grid[0][1], null);
+  assert.equal(withNull.sourceFilled, 1);
+});
 
 test("splatFromGlbOccupancy sizes the target to the build face grid (n,m)", () => {
   // a colour-true GLB occupancy (2×2×2) and a DIFFERENT-sized build face grid

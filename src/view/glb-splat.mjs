@@ -34,6 +34,37 @@ export async function glbVoxelOccupancy({ occupancy, surface, texture, palette }
 }
 
 /**
+ * Nearest-cell resample of a 2-D block grid (block id or null per cell) from its native `srcN×srcM` onto
+ * a target `n×m`. The single alignment primitive shared by the GLB splat and the concept splat (whose
+ * image-grid result has its own aspect-derived rows) — both are quantized to the build face's cell grid
+ * so `paintFace` consumes them directly. A scale map, not interpolation (blocks are categorical). PURE.
+ * @param {(string|null)[][]} srcGrid  srcM rows × srcN cols
+ * @param {number} srcN
+ * @param {number} srcM
+ * @param {number} n  target cols (the build face's grid width)
+ * @param {number} m  target rows (the build face's grid height)
+ * @returns {{grid:(string|null)[][], n:number, m:number, sourceFilled:number}}
+ */
+export function resampleBlockGrid(srcGrid, srcN, srcM, n, m) {
+  if (!Number.isInteger(n) || !Number.isInteger(m) || n < 1 || m < 1) {
+    throw new Error("resampleBlockGrid: target n,m must be positive integers");
+  }
+  const grid = Array.from({ length: m }, () => new Array(n).fill(null));
+  let sourceFilled = 0;
+  if (srcN >= 1 && srcM >= 1) {
+    for (let v = 0; v < m; v++) {
+      const sv = Math.min(srcM - 1, Math.floor((v * srcM) / m));
+      for (let u = 0; u < n; u++) {
+        const su = Math.min(srcN - 1, Math.floor((u * srcN) / n));
+        const cell = srcGrid[sv]?.[su] ?? null;
+        if (cell != null) { grid[v][u] = cell; sourceFilled++; }
+      }
+    }
+  }
+  return { grid, n, m, sourceFilled };
+}
+
+/**
  * A per-cell material target for `faceGrid` (the BUILD face), drawn from a colour-true GLB occupancy
  * projected through the same `dir`. The GLB projection and the build face are both ortho/45° on the same
  * `dir`, so they line up; any (n,m) difference is a pure scale map resolved by nearest-cell resample. The
@@ -44,24 +75,9 @@ export async function glbVoxelOccupancy({ occupancy, surface, texture, palette }
  * @returns {{grid:(string|null)[][], n:number, m:number, sourceFilled:number}}
  */
 export function splatFromGlbOccupancy(glbOcc, dir, faceGrid) {
-  const { n, m } = faceGrid;
-  if (!Number.isInteger(n) || !Number.isInteger(m) || n < 1 || m < 1) {
-    throw new Error("splatFromGlbOccupancy: faceGrid must carry positive integer n,m");
-  }
   const src = projectSurface(glbOcc, dir);
-  const grid = Array.from({ length: m }, () => new Array(n).fill(null));
-  let sourceFilled = 0;
-  if (src.n >= 1 && src.m >= 1) {
-    for (let v = 0; v < m; v++) {
-      const sv = Math.min(src.m - 1, Math.floor((v * src.m) / m));
-      for (let u = 0; u < n; u++) {
-        const su = Math.min(src.n - 1, Math.floor((u * src.n) / n));
-        const cell = src.cells[sv][su];
-        if (cell) { grid[v][u] = cell.block; sourceFilled++; }
-      }
-    }
-  }
-  return { grid, n, m, sourceFilled };
+  const srcGrid = src.cells.map((row) => row.map((c) => (c ? c.block : null)));
+  return resampleBlockGrid(srcGrid, src.n, src.m, faceGrid.n, faceGrid.m);
 }
 
 /**
@@ -77,32 +93,44 @@ export function splatFromCells(cells, dir, faceGrid) {
 
 /**
  * IMPURE leaf: load a GLB, voxelize + colour-sample it, and return the per-cell material target for the
- * build's `faceGrid` along `dir`. Lazy-imports the GLB parser, voxelizer, and texture decode so the pure
- * test glob never pulls them. Returns `{ grid, n, m, sourceFilled }` (a target the paint tool consumes).
+ * build's `faceGrid` along `dir`. Lazy-imports the GLB parser + voxelizer. The baseColor texture decode
+ * is INJECTED (`opts.decodeTexture`) — TRELLIS GLBs are WebP, and WebP decode needs a host codec that
+ * (by the glb-voxel-build discipline) must stay OUT of `src/`/CI; the on-demand runner supplies a
+ * `dwebp`-backed decoder. With no `decodeTexture`, only PNG/JPEG baseColor images decode (via the shared
+ * image decoder). Returns `{ grid, n, m, sourceFilled }` (a target the paint tool consumes).
  * @param {string} glbPath
  * @param {{n:number,m:number}} faceGrid  the build's SurfaceGrid for `dir`
  * @param {string|{name:string}} dir
- * @param {{ palette:{key:string,lab:number[]}[], scale?:number }} opts  the design palette to snap within
+ * @param {{ palette:{key:string,lab:number[]}[], scale?:number,
+ *           decodeTexture?:(img:{data:Uint8Array,mimeType:string})=>Promise<{width:number,height:number,data:Uint8Array}> }} opts
  * @returns {Promise<{grid:(string|null)[][], n:number, m:number, sourceFilled:number}>}
  */
 export async function loadGlbSplat(glbPath, faceGrid, dir, opts = {}) {
   const { readFile } = await import("node:fs/promises");
   const { parseGlbColoredSurface } = await import("../form/glb-mesh.mjs");
   const { voxelizeGlb } = await import("../form/glb-voxelize.mjs");
-  const { decodeImage } = await import("../color/palette-extract.mjs");
   const bytes = await readFile(glbPath);
   const surface = parseGlbColoredSurface(bytes);
   if (!surface.baseColor) throw new Error(`loadGlbSplat: ${glbPath} has no baseColor texture (untextured GLB)`);
   const occupancy = voxelizeGlb(bytes, opts.scale ? { scale: opts.scale } : {});
-  // decode the embedded baseColor image (png/webp) via the shared image decoder
+  const texture = await decodeBaseColor(surface.baseColor, opts.decodeTexture);
+  const glbOcc = await glbVoxelOccupancy({ occupancy, surface, texture, palette: opts.palette });
+  return splatFromGlbOccupancy(glbOcc, dir, faceGrid);
+}
+
+/** Decode a baseColor image to RGBA: prefer the injected `decodeTexture` (host codec, e.g. WebP→dwebp);
+ *  else PNG/JPEG via the shared image decoder (writes a temp file it can sniff). */
+async function decodeBaseColor(baseColor, decodeTexture) {
+  if (typeof decodeTexture === "function") return decodeTexture(baseColor);
+  if (baseColor.mimeType?.includes("webp")) {
+    throw new Error("loadGlbSplat: baseColor is WebP — inject opts.decodeTexture (a dwebp-backed decoder); src/ keeps no WebP codec");
+  }
   const { writeFile, mkdtemp } = await import("node:fs/promises");
   const { tmpdir } = await import("node:os");
   const { join } = await import("node:path");
+  const { decodeImage } = await import("../color/palette-extract.mjs");
   const tmp = await mkdtemp(join(tmpdir(), "glb-tex-"));
-  const ext = surface.baseColor.mimeType?.includes("webp") ? "webp" : "png";
-  const texPath = join(tmp, `tex.${ext}`);
-  await writeFile(texPath, Buffer.from(surface.baseColor.data));
-  const texture = await decodeImage(texPath);
-  const glbOcc = await glbVoxelOccupancy({ occupancy, surface, texture, palette: opts.palette });
-  return splatFromGlbOccupancy(glbOcc, dir, faceGrid);
+  const texPath = join(tmp, "tex.png");
+  await writeFile(texPath, Buffer.from(baseColor.data));
+  return decodeImage(texPath);
 }
