@@ -39,15 +39,20 @@ export { GL_AVAILABLE, GL_LOAD_ERROR }
  * still returns a path — renderBuild degrades to its constant-offset fallback.
  *
  * @param {{ placements: object[] }} artifact
- * @param {{ outPath?: string, view?: object, strict?: boolean }} [opts]
- *   `outPath` — where to write the PNG (renderBuild default if omitted).
- *   `view`    — partial framing override (camera.mjs DEFAULT_VIEW otherwise).
- *   `strict`  — throw (after the full scan) if any voxel is unmapped.
+ * @param {{ outPath?: string, view?: object, strict?: boolean, supersample?: number }} [opts]
+ *   `outPath`     — where to write the PNG (renderBuild default if omitted).
+ *   `view`        — partial framing override (camera.mjs DEFAULT_VIEW otherwise).
+ *   `strict`      — throw (after the full scan) if any voxel is unmapped.
+ *   `supersample` — SSAA factor; forwarded to renderBuild (DEFAULTS.supersample=3 if omitted).
+ *                   `supersample:1` selects the legacy point-sampled "old lens" (E-22 before/after).
  * @returns {Promise<RenderReport>}
  */
 export async function renderArtifact (artifact, opts = {}) {
   const build = await buildWorldFromArtifact(artifact, { strict: opts.strict })
-  const r = await renderBuild(build, { outPath: opts.outPath, view: opts.view })
+  // Only forward `supersample` when explicitly set — passing `undefined` would override
+  // renderWorldToPng's DEFAULTS.supersample (3) via the spread and silently fall back to 1.
+  const ssOpt = opts.supersample === undefined ? {} : { supersample: opts.supersample }
+  const r = await renderBuild(build, { outPath: opts.outPath, view: opts.view, ...ssOpt })
   return {
     path: r.path,
     bytes: r.bytes,
