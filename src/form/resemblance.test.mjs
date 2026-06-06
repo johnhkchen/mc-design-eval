@@ -16,8 +16,11 @@ import {
   composeTriptych,
   buildResemblancePrompt,
   parseResemblanceVerdict,
+  consolidateResemblance,
   RESEMBLANCE_SCHEMA,
   RESEMBLANCE_VERDICT_SCHEMA,
+  RESEMBLANCE_CONSOLIDATION_SCHEMA,
+  MATERIAL_GAP_ATTRS,
   VERDICTS,
   GAP_ATTRS,
 } from "./resemblance.mjs";
@@ -270,4 +273,72 @@ test("parseResemblanceVerdict: rejects bad enums and gap-integrity violations", 
   assert.throws(() => parseResemblanceVerdict('{"verdict":"drifted","gap":{"region":"","attribute":"form"}}'), /gap.region/);
   assert.throws(() => parseResemblanceVerdict("not json at all"), /not JSON/);
   assert.throws(() => parseResemblanceVerdict(""), /empty/);
+});
+
+// ---- consolidateResemblance (T-077-01 aggregator + E-21 routing rule) ----
+
+const mkResult = (subject, verdict, gap, extra = {}) => ({
+  subject,
+  mode: extra.mode ?? "live",
+  row: {
+    form: { meshIoU: extra.meshIoU ?? 0.9, conceptIoU: extra.conceptIoU ?? 0.6 },
+    material: { set: { score: extra.set ?? 0.7 }, zone: { score: extra.zone ?? 0.3, meanDeltaE: extra.dE ?? 20 } },
+  },
+  verdict: { schema: RESEMBLANCE_VERDICT_SCHEMA, verdict, gap, rationale: "" },
+});
+
+test("consolidateResemblance: tallies verdict counts and carries the schema + per-subject form/material", () => {
+  const out = consolidateResemblance([
+    mkResult("a", "same object", null),
+    mkResult("b", "drifted", { region: "roof", attribute: "form" }),
+    mkResult("c", "drifted", { region: "walls", attribute: "palette" }),
+  ]);
+  assert.equal(out.schema, RESEMBLANCE_CONSOLIDATION_SCHEMA);
+  assert.deepEqual(out.summary.counts, { "same object": 1, drifted: 2 });
+  assert.equal(out.subjects.length, 3);
+  assert.deepEqual(out.subjects[0].form, { meshIoU: 0.9, conceptIoU: 0.6 });
+  assert.deepEqual(out.subjects[2].material, { set: 0.7, zone: 0.3, meanDeltaE: 20 });
+  assert.equal(out.subjects[1].mode, "live");
+});
+
+test("consolidateResemblance: routes ONLY material gaps (palette / material zoning) to E-21", () => {
+  // sanity: the routed set is exactly the material half of GAP_ATTRS
+  assert.deepEqual([...MATERIAL_GAP_ATTRS].sort(), ["material zoning", "palette"]);
+  const out = consolidateResemblance([
+    mkResult("palette-drift", "drifted", { region: "facade", attribute: "palette" }),
+    mkResult("zoning-drift", "different object", { region: "base", attribute: "material zoning" }),
+    mkResult("form-drift", "drifted", { region: "roof", attribute: "form" }),
+    mkResult("massing-drift", "drifted", { region: "tower", attribute: "massing" }),
+    mkResult("clean", "same object", null),
+  ]);
+  const routed = out.subjects.filter((s) => s.routesToE21).map((s) => s.subject);
+  assert.deepEqual(routed.sort(), ["palette-drift", "zoning-drift"]);
+  assert.equal(out.summary.e21Findings.length, 2);
+  assert.equal(out.summary.e21Findings[0].attribute, "palette");
+  assert.equal(out.summary.e21Findings[0].subject, "palette-drift");
+  // form / massing / same-object never route
+  assert.equal(out.subjects.find((s) => s.subject === "form-drift").routesToE21, false);
+  assert.equal(out.subjects.find((s) => s.subject === "massing-drift").routesToE21, false);
+  assert.equal(out.subjects.find((s) => s.subject === "clean").routesToE21, false);
+});
+
+test("consolidateResemblance: a non-verdict (unparsed / not run) is counted but never routes", () => {
+  const out = consolidateResemblance([
+    { subject: "x", mode: "live", row: {}, verdict: { verdict: "unparsed", gap: null } },
+    { subject: "y", mode: "offline", row: {}, verdict: { verdict: "(not run)", gap: null } },
+  ]);
+  assert.equal(out.summary.counts.unparsed, 1);
+  assert.equal(out.summary.counts["(not run)"], 1);
+  assert.equal(out.summary.e21Findings.length, 0);
+  assert.equal(out.subjects[0].routesToE21, false);
+  assert.equal(out.subjects[0].form.meshIoU, null); // missing row degrades to null, no throw
+});
+
+test("consolidateResemblance: total + deterministic on empty / repeated input", () => {
+  const empty = consolidateResemblance([]);
+  assert.deepEqual(empty.summary.counts, {});
+  assert.deepEqual(empty.summary.e21Findings, []);
+  assert.deepEqual(empty.subjects, []);
+  const input = [mkResult("a", "drifted", { region: "r", attribute: "palette" })];
+  assert.deepEqual(consolidateResemblance(input), consolidateResemblance(input));
 });

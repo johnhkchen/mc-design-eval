@@ -375,3 +375,53 @@ export function parseResemblanceVerdict(text) {
     rationale: typeof rationale === "string" ? rationale.trim() : "",
   };
 }
+
+export const RESEMBLANCE_CONSOLIDATION_SCHEMA = "resemblance-consolidation/v1";
+
+/** The material half of GAP_ATTRS — a gap on these axes is MATERIAL drift, routed back to E-21 (not edited
+ *  here). The other half (form, massing) is form drift: reported as a residual, but E-22 does not edit form. */
+export const MATERIAL_GAP_ATTRS = Object.freeze(["material zoning", "palette"]);
+
+/**
+ * Consolidate N per-subject resemblance results into one report object (S-077 / T-077-01). PURE: pure data
+ * transformation, no I/O, no model, no thresholds beyond the frozen GAP_ATTRS. Tallies verdicts, names the
+ * residual gap per subject (Rule 7), and routes MATERIAL-attributed gaps to E-21 (Rule: E-22 photographs +
+ * judges; it does not edit form or materials). Total — a non-verdict (e.g. "unparsed", "(not run)") is
+ * counted under its literal key and never emits an E-21 finding (a non-verdict cannot name a material gap).
+ *
+ * @param {Array<{subject:string, row:object, verdict:object, mode?:string}>} subjectResults
+ * @returns {{schema:string, subjects:Array<object>, summary:{counts:Object, e21Findings:Array<object>}}}
+ */
+export function consolidateResemblance(subjectResults) {
+  const list = Array.isArray(subjectResults) ? subjectResults : [];
+  const counts = {};
+  const e21Findings = [];
+  const subjects = list.map((r) => {
+    const v = r?.verdict || {};
+    const verdict = typeof v.verdict === "string" ? v.verdict : "(missing)";
+    const gap = v.gap && typeof v.gap === "object" ? { region: v.gap.region, attribute: v.gap.attribute } : null;
+    const routesToE21 = !!(gap && MATERIAL_GAP_ATTRS.includes(gap.attribute));
+    counts[verdict] = (counts[verdict] || 0) + 1;
+    if (routesToE21) {
+      e21Findings.push({
+        subject: r.subject,
+        attribute: gap.attribute,
+        region: gap.region,
+        note: `material drift (${gap.attribute} @ ${gap.region}) — route to E-21; not edited in E-22`,
+      });
+    }
+    const form = r?.row?.form || {};
+    const set = r?.row?.material?.set || {};
+    const zone = r?.row?.material?.zone || {};
+    return {
+      subject: r.subject,
+      verdict,
+      gap,
+      mode: r?.mode ?? null,
+      form: { meshIoU: form.meshIoU ?? null, conceptIoU: form.conceptIoU ?? null },
+      material: { set: set.score ?? null, zone: zone.score ?? null, meanDeltaE: zone.meanDeltaE ?? null },
+      routesToE21,
+    };
+  });
+  return { schema: RESEMBLANCE_CONSOLIDATION_SCHEMA, subjects, summary: { counts, e21Findings } };
+}
