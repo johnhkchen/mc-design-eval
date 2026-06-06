@@ -88,6 +88,8 @@ block dominates its intended feature, no bloat); the three over-reaches are hone
 
 ## Recommendation
 
-Ready to commit. Final commit should include the 2-line `spawnMap` fix, the moai/pineapple maps + builds, the
-re-derived report, the handoff, and the design-learnings section. No blocking issues; the three over-reaches
+Done. The pipeline (maps, builds, frames, handoff, design-learnings, `spawnMap` fix) landed in `15b8c0a`;
+that commit's report still read `pineapple deferred` from the first (crashed) sweep, so this session's commit
+carries the `--offline`-re-derived `concept-materials-ab.{md,json}` (consistent 4/4, `{restored:1,
+over-reach:3}`) plus the `progress.md`/`review.md` phase artifacts. No blocking issues; the three over-reaches
 are the honest negative the ticket asked for (AC#5), not failures to fix.

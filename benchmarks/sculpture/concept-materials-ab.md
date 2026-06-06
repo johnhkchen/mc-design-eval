@@ -13,7 +13,7 @@ Scale 32. Subjects: 4. Schema `concept-materials-ab/v1`.
 | gatehouse | architectural | 5→5 | 0.006→0.035 | 0→0 | 3→3 (sep 4) | ✓ | **restored** |
 | cottage | architectural | 7→6 | 0.002→0.093 | 1416→0 | 3→0 (sep 1) | ✗ | **over-reach** |
 | moai | sculpture | 5→3 | 0.005→0.079 | 1492→0 | 1→0 (sep 0) | ✗ | **over-reach** |
-| pineapple | sculpture | —→— | —→— | —→— | — | n/a | **deferred** |
+| pineapple | sculpture | 4→4 | 0.021→0.073 | 0→0 | 3→2 (sep 2) | ✗ | **over-reach** |
 
 ## Palette growth — what the LLM added back, and why (AC#4)
 
@@ -22,15 +22,15 @@ Scale 32. Subjects: 4. Schema `concept-materials-ab/v1`.
 | gatehouse | 0 | _(none)_ | ✓ |
 | cottage | -1 | _(none)_ | ✓ |
 | moai | -2 | `stone_bricks` (base) · plinth / footing course — Near-tone but NOT the same material as the body: the base shows a regular tiled grid / coursed jointing in all three views, versus the smooth jointless concrete of the column. Kept distinct as bricks (visible coursing, masonry role as a wider footing) rather than collapsed into the body's gray. | ✓ |
-| pineapple | — | _(none)_ | — |
+| pineapple | 0 | _(none)_ | ✓ |
 
 ## Judge tally (AC#2)
 
 - **restored** (1): gatehouse
 - **clean-held** (0): —
 - **no-distinction** (0): —
-- **over-reach** (2): cottage, moai
-- **deferred** (1): pineapple
+- **over-reach** (3): cottage, moai, pineapple
+- **deferred** (0): —
 
 ## Headline
 
@@ -38,7 +38,7 @@ Scale 32. Subjects: 4. Schema `concept-materials-ab/v1`.
 
 → **Restored on the architectural headline; honest over-reach recorded on organic forms (see ledger).**
 
-Near-tone pairs collapsed by colorimetry **7** → restored by the concept-grounded build **3**. restored: gatehouse; over-reach: cottage, moai; deferred: pineapple.
+Near-tone pairs collapsed by colorimetry **10** → restored by the concept-grounded build **5**. restored: gatehouse; over-reach: cottage, moai, pineapple; deferred: —.
 > _restored = a colorimetric near-tone collapse is present again, placed by feature; over-reach = a map block dominates the wrong feature OR growth is unjustified (honest); no-distinction = monochrome subject, growth must stay flat (bloat control); deferred = no after build._
 
 ## Honesty ledger

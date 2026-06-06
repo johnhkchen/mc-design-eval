@@ -10,13 +10,12 @@
     ],
     "overReachSubjects": [
       "cottage",
-      "moai"
-    ],
-    "deferredSubjects": [
+      "moai",
       "pineapple"
     ],
-    "collapsedPairsBefore": 7,
-    "restoredPairsAfter": 3,
+    "deferredSubjects": [],
+    "collapsedPairsBefore": 10,
+    "restoredPairsAfter": 5,
     "verdict": "Restored on the architectural headline; honest over-reach recorded on organic forms (see ledger).",
     "note": "restored = a colorimetric near-tone collapse is present again, placed by feature; over-reach = a map block dominates the wrong feature OR growth is unjustified (honest); no-distinction = monochrome subject, growth must stay flat (bloat control); deferred = no after build."
   },
@@ -28,11 +27,10 @@
     "no-distinction": [],
     "over-reach": [
       "cottage",
-      "moai"
-    ],
-    "deferred": [
+      "moai",
       "pineapple"
-    ]
+    ],
+    "deferred": []
   },
   "subjects": [
     {
@@ -355,17 +353,96 @@
     {
       "subject": "pineapple",
       "kind": "sculpture",
-      "before": null,
-      "after": null,
-      "delta": {
-        "distinct": null,
-        "speckle": null,
-        "offPalette": null
+      "before": {
+        "distinct": 4,
+        "speckle": 0.021,
+        "offPalette": 0
       },
-      "nearTone": null,
-      "growth": null,
-      "trueByFeature": null,
-      "judge": "deferred"
+      "after": {
+        "distinct": 4,
+        "speckle": 0.073,
+        "offPalette": 0
+      },
+      "delta": {
+        "distinct": 0,
+        "speckle": 0.052,
+        "offPalette": 0
+      },
+      "nearTone": {
+        "pairs": [
+          {
+            "a": "orange_terracotta",
+            "b": "lime_terracotta",
+            "dL": 2.713,
+            "beforeBoth": true,
+            "afterBoth": true,
+            "distinguishedBefore": false,
+            "distinguishedAfter": true,
+            "separated": true,
+            "collapsedBefore": true,
+            "restored": true
+          },
+          {
+            "a": "orange_terracotta",
+            "b": "green_concrete",
+            "dL": 8.433,
+            "beforeBoth": true,
+            "afterBoth": true,
+            "distinguishedBefore": false,
+            "distinguishedAfter": false,
+            "separated": false,
+            "collapsedBefore": true,
+            "restored": false
+          },
+          {
+            "a": "green_concrete",
+            "b": "lime_terracotta",
+            "dL": 11.146,
+            "beforeBoth": true,
+            "afterBoth": true,
+            "distinguishedBefore": false,
+            "distinguishedAfter": true,
+            "separated": true,
+            "collapsedBefore": true,
+            "restored": true
+          }
+        ],
+        "collapsedBefore": 3,
+        "restoredAfter": 2,
+        "separatedAfter": 2
+      },
+      "growth": {
+        "added": [],
+        "count": 0,
+        "justified": true
+      },
+      "trueByFeature": {
+        "ok": false,
+        "perRule": [
+          {
+            "block": "yellow_terracotta",
+            "rule": "walls",
+            "feature": "flat-face",
+            "dominant": "flat-face",
+            "ok": true
+          },
+          {
+            "block": "green_concrete",
+            "rule": "roof",
+            "feature": "top-roof",
+            "dominant": "edge-corner",
+            "ok": false
+          },
+          {
+            "block": "yellow_terracotta",
+            "rule": "base",
+            "feature": "base",
+            "dominant": "flat-face",
+            "ok": false
+          }
+        ]
+      },
+      "judge": "over-reach"
     }
   ],
   "ledger": [
