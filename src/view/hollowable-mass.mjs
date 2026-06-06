@@ -10,7 +10,7 @@
 // the metered runner owns the GL render, decode, and the light-tier `claude -p` call. NO model import,
 // NO API key, NO GL here. PURE — runs under the `src/**/*.test.mjs` glob.
 
-import { stripToJson } from "../sdk-binding.mjs";
+import { parseJsonReply } from "./json-reply.mjs";
 import { storeyBands, wallFields } from "./structural-read.mjs";
 
 /** The op's tier (single point of declaration; mirrored in model-tier OP_ROUTING). */
@@ -93,18 +93,18 @@ export function buildHollowablePrompt(read, core) {
 }
 
 /**
- * Parse a hollowable-mass model reply into the schema-tagged result. Reuses `stripToJson`. Coerces
- * `hollowable` to bool, keeps well-formed regions, defaults `blockers` to `[]`. Throws ONLY on non-JSON.
- * PURE.
+ * Parse a hollowable-mass model reply into the schema-tagged result. Reuses `parseJsonReply` (fences /
+ * prose / fence-then-prose). Coerces `hollowable` to bool, keeps well-formed regions, defaults `blockers`
+ * to `[]`. Throws ONLY on non-JSON. PURE.
  * @param {string} text
  * @returns {{schema:string, hollowable:boolean, regions:{yStart:number,yEnd:number,inset:number,note:string}[], blockers:string[]}}
  */
 export function parseHollowable(text) {
   let obj;
   try {
-    obj = JSON.parse(stripToJson(text));
+    obj = parseJsonReply(text);
   } catch (e) {
-    throw new Error(`parseHollowable: reply was not JSON (${e.message})`);
+    throw new Error(`parseHollowable: ${e.message}`);
   }
   const regions = [];
   for (const r of Array.isArray(obj?.regions) ? obj.regions : []) {

@@ -69,6 +69,11 @@ test("parseRoofPatch tolerates code fences and prose around the object", () => {
   assert.equal(parseRoofPatch(prose).patches.length, 1);
 });
 
+test("parseRoofPatch handles fence-then-prose (the live light-tier shape)", () => {
+  const live = '```json\n{ "patches": [] }\n```\n\nLooking at the top-down render, the roof reads coherent…';
+  assert.deepEqual(parseRoofPatch(live).patches, []);
+});
+
 test("parseRoofPatch drops malformed rows (bad issue / non-int coords)", () => {
   const r = parseRoofPatch(
     '{"patches":[{"x":1,"z":1,"issue":"explode"},{"x":"a","z":2,"issue":"hole"},{"x":3,"z":3,"issue":"hole"}]}',

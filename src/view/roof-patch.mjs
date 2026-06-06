@@ -12,7 +12,7 @@
 //
 // PURE — runs under the `src/**/*.test.mjs` glob.
 
-import { stripToJson } from "../sdk-binding.mjs";
+import { parseJsonReply } from "./json-reply.mjs";
 import { bareBlock } from "./occupancy.mjs";
 
 /** The op's tier (single point of declaration; mirrored in model-tier OP_ROUTING). */
@@ -85,18 +85,18 @@ export function buildRoofPatchPrompt(roofRegion, candidates) {
 }
 
 /**
- * Parse a roof-patch model reply into the schema-tagged result. Reuses `stripToJson` (fences/prose →
- * bare object). Drops rows that lack integer x,z or a known issue; throws ONLY when the reply is not
- * JSON at all (the runner logs the raw text on a throw). PURE.
+ * Parse a roof-patch model reply into the schema-tagged result. Reuses `parseJsonReply` (fences / prose /
+ * fence-then-prose → bare object). Drops rows that lack integer x,z or a known issue; throws ONLY when
+ * the reply is not JSON at all (the runner logs the raw text on a throw). PURE.
  * @param {string} text
  * @returns {{schema:string, patches:{x:number,z:number,issue:string,note:string}[]}}
  */
 export function parseRoofPatch(text) {
   let obj;
   try {
-    obj = JSON.parse(stripToJson(text));
+    obj = parseJsonReply(text);
   } catch (e) {
-    throw new Error(`parseRoofPatch: reply was not JSON (${e.message})`);
+    throw new Error(`parseRoofPatch: ${e.message}`);
   }
   const rows = Array.isArray(obj?.patches) ? obj.patches : [];
   const patches = [];

@@ -1,0 +1,546 @@
+{
+  "schema": "detector-routing/v1",
+  "subject": "cottage (after-artifact.json)",
+  "placements": 6429,
+  "occupancy": {
+    "voxels": 6429,
+    "dims": [
+      26,
+      27,
+      32
+    ]
+  },
+  "priors": {
+    "roof": {
+      "dominant": "spruce_planks",
+      "stray": [
+        {
+          "x": 4,
+          "z": -15,
+          "block": "cobblestone"
+        },
+        {
+          "x": -13,
+          "z": -14,
+          "block": "stone_bricks"
+        },
+        {
+          "x": -12,
+          "z": -14,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 4,
+          "z": -14,
+          "block": "stone_bricks"
+        },
+        {
+          "x": -13,
+          "z": -13,
+          "block": "stone_bricks"
+        },
+        {
+          "x": -12,
+          "z": -13,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 4,
+          "z": -13,
+          "block": "stone_bricks"
+        },
+        {
+          "x": -13,
+          "z": -12,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 4,
+          "z": -12,
+          "block": "stone_bricks"
+        },
+        {
+          "x": -13,
+          "z": -11,
+          "block": "dark_oak_log"
+        },
+        {
+          "x": -12,
+          "z": -11,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 4,
+          "z": -11,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 4,
+          "z": -10,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 4,
+          "z": -9,
+          "block": "cobblestone"
+        },
+        {
+          "x": 10,
+          "z": -9,
+          "block": "cobblestone"
+        },
+        {
+          "x": 11,
+          "z": -9,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 12,
+          "z": -9,
+          "block": "cobblestone"
+        },
+        {
+          "x": -1,
+          "z": -8,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 5,
+          "z": -8,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 6,
+          "z": -8,
+          "block": "cobblestone"
+        },
+        {
+          "x": 8,
+          "z": -8,
+          "block": "cobblestone"
+        },
+        {
+          "x": 9,
+          "z": -8,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 11,
+          "z": -8,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 12,
+          "z": -8,
+          "block": "cobblestone"
+        },
+        {
+          "x": 1,
+          "z": -6,
+          "block": "dark_oak_log"
+        },
+        {
+          "x": 2,
+          "z": -6,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 3,
+          "z": -6,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 4,
+          "z": -6,
+          "block": "stone_bricks"
+        },
+        {
+          "x": -9,
+          "z": -4,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 9,
+          "z": -3,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 10,
+          "z": 1,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 5,
+          "z": 2,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 7,
+          "z": 3,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 10,
+          "z": 3,
+          "block": "dark_oak_log"
+        },
+        {
+          "x": 7,
+          "z": 4,
+          "block": "stone_bricks"
+        },
+        {
+          "x": -1,
+          "z": 5,
+          "block": "dark_oak_log"
+        },
+        {
+          "x": 4,
+          "z": 5,
+          "block": "dark_oak_log"
+        },
+        {
+          "x": 5,
+          "z": 5,
+          "block": "cobblestone"
+        },
+        {
+          "x": 7,
+          "z": 5,
+          "block": "cobblestone"
+        },
+        {
+          "x": 8,
+          "z": 5,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 9,
+          "z": 5,
+          "block": "cobblestone"
+        },
+        {
+          "x": 10,
+          "z": 5,
+          "block": "cobblestone"
+        },
+        {
+          "x": 11,
+          "z": 5,
+          "block": "dark_oak_log"
+        },
+        {
+          "x": 12,
+          "z": 5,
+          "block": "cobblestone"
+        },
+        {
+          "x": 4,
+          "z": 6,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 10,
+          "z": 6,
+          "block": "cobblestone"
+        },
+        {
+          "x": 11,
+          "z": 6,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 12,
+          "z": 6,
+          "block": "cobblestone"
+        },
+        {
+          "x": -13,
+          "z": 7,
+          "block": "stone_bricks"
+        },
+        {
+          "x": -12,
+          "z": 7,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 4,
+          "z": 7,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 4,
+          "z": 8,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 4,
+          "z": 9,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 4,
+          "z": 10,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 4,
+          "z": 11,
+          "block": "stone_bricks"
+        },
+        {
+          "x": -13,
+          "z": 12,
+          "block": "stone_bricks"
+        },
+        {
+          "x": -12,
+          "z": 12,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 4,
+          "z": 12,
+          "block": "stone_bricks"
+        },
+        {
+          "x": -13,
+          "z": 13,
+          "block": "stone_bricks"
+        },
+        {
+          "x": -12,
+          "z": 13,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 4,
+          "z": 13,
+          "block": "stone_bricks"
+        },
+        {
+          "x": 4,
+          "z": 14,
+          "block": "cobblestone"
+        }
+      ],
+      "holeCount": 172,
+      "coverage": 0.793
+    },
+    "hollow": {
+      "enclosed": 1100,
+      "perBand": [
+        {
+          "yStart": 0,
+          "yEnd": 0,
+          "enclosed": 0
+        },
+        {
+          "yStart": 1,
+          "yEnd": 15,
+          "enclosed": 1047
+        },
+        {
+          "yStart": 16,
+          "yEnd": 22,
+          "enclosed": 40
+        },
+        {
+          "yStart": 23,
+          "yEnd": 23,
+          "enclosed": 13
+        },
+        {
+          "yStart": 24,
+          "yEnd": 24,
+          "enclosed": 0
+        },
+        {
+          "yStart": 25,
+          "yEnd": 25,
+          "enclosed": 0
+        },
+        {
+          "yStart": 26,
+          "yEnd": 26,
+          "enclosed": 0
+        }
+      ],
+      "skinHoles": 8
+    }
+  },
+  "renders": [
+    {
+      "angle": "top",
+      "path": "docs/active/work/T-082-01/view-top.png",
+      "bytes": 91022
+    },
+    {
+      "angle": "threeQuarter",
+      "path": "docs/active/work/T-082-01/view-threeQuarter.png",
+      "bytes": 141002
+    }
+  ],
+  "routing": [
+    {
+      "op": "roof-patch-detector",
+      "tier": "light",
+      "rationale": "Classifies which roof cells read wrong on ONE top view, over a bounded candidate set (the strays and holes the pure roof read already isolated). Narrow + single-view → light."
+    },
+    {
+      "op": "hollowable-mass-detector",
+      "tier": "light",
+      "rationale": "Confirms the safe-to-carve interior mass + flags skin-hole blockers, scoped to footprint + storey bands + a single 3/4 view. Bounded geometric classification → light. (Feeds T-080-01.)"
+    },
+    {
+      "op": "seal-authoring",
+      "tier": "strong",
+      "rationale": "AUTHORING a watertight seal over the holes the detector flagged is generative and must reconcile multiple faces — cross-view + new structure → strong (S-084, seal-before-hollow)."
+    },
+    {
+      "op": "material-zoning",
+      "tier": "strong",
+      "rationale": "Assigning materials to geometric zones across the whole build is the rubric's named strong case — material zoning across views, not a single-view label."
+    }
+  ],
+  "ops": [
+    {
+      "op": "roof-patch-detector",
+      "tier": "light",
+      "model": "claude-haiku-4-5",
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 4205,
+        "total_cost_usd": 0.040318950000000006
+      },
+      "parsed": {
+        "schema": "roof-patch/v1",
+        "patches": [
+          {
+            "x": -13,
+            "z": -14,
+            "issue": "stray-material",
+            "note": "stone_bricks breaks brown coherence; left vertical cluster"
+          },
+          {
+            "x": -12,
+            "z": -14,
+            "issue": "stray-material",
+            "note": "stone_bricks breaks brown coherence; left vertical cluster"
+          },
+          {
+            "x": -13,
+            "z": -13,
+            "issue": "stray-material",
+            "note": "stone_bricks breaks brown coherence; left vertical cluster"
+          },
+          {
+            "x": -12,
+            "z": -13,
+            "issue": "stray-material",
+            "note": "stone_bricks breaks brown coherence; left vertical cluster"
+          },
+          {
+            "x": -13,
+            "z": -12,
+            "issue": "stray-material",
+            "note": "stone_bricks breaks brown coherence; left vertical cluster"
+          },
+          {
+            "x": -13,
+            "z": -11,
+            "issue": "stray-material",
+            "note": "dark_oak_log breaks brown coherence; left edge"
+          },
+          {
+            "x": -12,
+            "z": -11,
+            "issue": "stray-material",
+            "note": "stone_bricks breaks brown coherence; left vertical cluster"
+          },
+          {
+            "x": 4,
+            "z": -15,
+            "issue": "stray-material",
+            "note": "cobblestone breaks brown coherence; right vertical line"
+          },
+          {
+            "x": 4,
+            "z": -14,
+            "issue": "stray-material",
+            "note": "stone_bricks breaks brown coherence; right vertical line"
+          },
+          {
+            "x": 4,
+            "z": -13,
+            "issue": "stray-material",
+            "note": "stone_bricks breaks brown coherence; right vertical line"
+          },
+          {
+            "x": 4,
+            "z": -12,
+            "issue": "stray-material",
+            "note": "stone_bricks breaks brown coherence; right vertical line"
+          },
+          {
+            "x": 4,
+            "z": -11,
+            "issue": "stray-material",
+            "note": "stone_bricks breaks brown coherence; right vertical line"
+          },
+          {
+            "x": 4,
+            "z": -10,
+            "issue": "stray-material",
+            "note": "stone_bricks breaks brown coherence; right vertical line"
+          },
+          {
+            "x": 4,
+            "z": -9,
+            "issue": "stray-material",
+            "note": "cobblestone breaks brown coherence; right vertical line"
+          },
+          {
+            "x": 10,
+            "z": -9,
+            "issue": "stray-material",
+            "note": "cobblestone breaks brown coherence; center-right cluster"
+          },
+          {
+            "x": 11,
+            "z": -9,
+            "issue": "stray-material",
+            "note": "stone_bricks breaks brown coherence; center-right cluster"
+          },
+          {
+            "x": 12,
+            "z": -9,
+            "issue": "stray-material",
+            "note": "cobblestone breaks brown coherence; center-right cluster"
+          }
+        ]
+      },
+      "parseError": null
+    },
+    {
+      "op": "hollowable-mass-detector",
+      "tier": "light",
+      "model": "claude-haiku-4-5",
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 774,
+        "total_cost_usd": 0.02238395
+      },
+      "parsed": {
+        "schema": "hollowable-mass/v1",
+        "hollowable": false,
+        "regions": [],
+        "blockers": [
+          "8 skin holes detected in elevations — shell not watertight, seal before hollow"
+        ]
+      },
+      "parseError": null
+    }
+  ]
+}
