@@ -156,18 +156,22 @@ export async function reviseLoop(artifact, opts = {}) {
  * projection for `regionIoU` is out of scope; a caller may pass an explicit 2-D `region`). LAZY-imports
  * the render + form stack so importing loop.mjs for the pure tests loads no GL. The loop's pure tests
  * inject a synthetic deterministic score instead of this.
- * @param {{conceptPath?:string, view?:object, region?:object, grid?:number, fit?:string, width?:number, height?:number}} [cfg]
+ *
+ * THE TARGET IS A SEAM (T-047-01). The reference shape is resolved through the FORM-TARGET interface
+ * (`resolveFormTarget`): `cfg.formTarget` if given, else a concept target from `cfg.conceptPath`. The
+ * accept step consults ONLY `target.scoreRender(renderPath, R)`, so a future GLB (image→3D) target swaps
+ * in here — `liveFormScore({ formTarget: glbFormTarget({ glbPath }) })` — with NO change to the loop body,
+ * observe, diagnose, or the accept gate.
+ * @param {{conceptPath?:string, formTarget?:object, view?:object, region?:object, grid?:number, fit?:string, width?:number, height?:number}} [cfg]
  * @returns {(artifact:object, R:object) => Promise<number>}
  */
 export function liveFormScore(cfg = {}) {
   return async (artifact, R) => {
-    if (!cfg.conceptPath) {
-      throw new Error("liveFormScore: cfg.conceptPath (the concept reference PNG) is required");
-    }
     const { observeRegion } = await import("./region.mjs");
-    const { formFidelityFromPair } = await import("../form/form-fidelity.mjs");
+    const { resolveFormTarget } = await import("../form/form-target.mjs");
     const { tmpdir } = await import("node:os");
     const { join } = await import("node:path");
+    const target = resolveFormTarget(cfg); // concept today; GLB later — same scoreRender(renderPath, R)
     const outPath = join(tmpdir(), `revise-loop-score-${R.subBounds.min.join("_")}.png`);
     await observeRegion(artifact, R, {
       outPath,
@@ -175,9 +179,6 @@ export function liveFormScore(cfg = {}) {
       width: cfg.width ?? 512,
       height: cfg.height ?? 512,
     });
-    const opts = { grid: cfg.grid, fit: cfg.fit };
-    if (cfg.region) opts.region = cfg.region;
-    const result = await formFidelityFromPair(outPath, cfg.conceptPath, opts);
-    return cfg.region ? result.regionIoU : result.iou;
+    return target.scoreRender(outPath, R);
   };
 }

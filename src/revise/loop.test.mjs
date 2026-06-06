@@ -151,8 +151,9 @@ test("LE: loop.mjs's top-level imports pull no GL/render; liveFormScore is lazy"
   for (const s of specs) {
     for (const re of DENY) assert.ok(!re.test(s), `top-level import "${s}" must be lazy (matched ${re})`);
   }
-  // the render/form stack must be reached via dynamic import (the live score seam)
-  assert.ok(/await import\(\s*["'][^"']*form-fidelity\.mjs/.test(src), "liveFormScore lazy-imports the form metric");
+  // the render/form stack must be reached via dynamic import (the live score seam). The form metric is now
+  // reached through the form-target seam (T-047-01), which itself imports form-fidelity — still lazy.
+  assert.ok(/await import\(\s*["'][^"']*form-target\.mjs/.test(src), "liveFormScore lazy-imports the form-target seam");
   assert.ok(/await import\(\s*["']\.\/region\.mjs/.test(src), "liveFormScore lazy-imports observeRegion");
 });
 
