@@ -72,10 +72,24 @@ async function wholeRender(artifact, outPath) {
   return outPath;
 }
 
-/** Judge a whole-build render with the categorical JudgeFacade (median of `samples`). claude -p (metered). */
+/** Judge a whole-build render with the categorical JudgeFacade (median of `samples`). claude -p (metered).
+ *  RESILIENT: the metered judge subprocess can flake transiently — retry once, then degrade to an `unknown`
+ *  verdict (the pure analyzer tolerates it) rather than losing the whole expensive run. */
 async function judgeWhole(renderPath, brief, samples) {
-  const j = await judgeRender({ imagePath: renderPath, brief, samples });
-  return j;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      return await judgeRender({ imagePath: renderPath, brief, samples });
+    } catch (e) {
+      console.error(`judge attempt ${attempt + 1} failed: ${e?.message || e}`);
+    }
+  }
+  // last resort: a single sample (cheapest, least flaky); else degrade to unknown.
+  try {
+    return await judgeRender({ imagePath: renderPath, brief, samples: 1 });
+  } catch (e) {
+    console.error(`judge degraded to unknown: ${e?.message || e}`);
+    return { overall: "unknown", proportion: "unknown", color: "unknown", detail: "unknown", fidelity: "unknown", perSample: [], notes: `judge failed: ${String(e?.message || e).slice(0, 200)}`, usage: {} };
+  }
 }
 
 /**
@@ -108,6 +122,7 @@ async function runRound({ artifact, regions, target, brief, roundIdx, samples, d
   const judge = await judgeWhole(renderPath, brief, samples);
 
   const acceptedSpecs = out.trace.filter((e) => e.accepted).map((e) => e.region);
+  const editErrors = editor.proposals.filter((p) => p.error).map((p) => ({ region: p.region, error: p.error }));
   const cell = {
     round: roundIdx,
     overall: judge.overall,
@@ -121,11 +136,15 @@ async function runRound({ artifact, regions, target, brief, roundIdx, samples, d
     accepted: acceptedSpecs.length,
     usage: judge.usage,
   };
-  await writeFile(join(dir, "summary.json"), JSON.stringify({ cell, trace: out.trace }, null, 2) + "\n");
-  console.error(
-    `round ${roundIdx}: overall ${judge.overall} · whole IoU ${wholeIoU} · accepted ${acceptedSpecs.length}/${regions.length}`,
+  await writeFile(
+    join(dir, "summary.json"),
+    JSON.stringify({ cell, trace: out.trace, proposals: editor.proposals }, null, 2) + "\n",
   );
-  return { cell, trace: out.trace, acceptedSpecs, artifact: out.artifact };
+  console.error(
+    `round ${roundIdx}: overall ${judge.overall} · whole IoU ${wholeIoU} · accepted ${acceptedSpecs.length}/${regions.length}` +
+      (editErrors.length ? ` · ${editErrors.length} edit-proposal error(s)` : ""),
+  );
+  return { cell, trace: out.trace, acceptedSpecs, artifact: out.artifact, editErrors };
 }
 
 /** Render + judge the unedited baseline (round 0 — the trajectory's first point). */
@@ -153,8 +172,37 @@ async function baselineRound({ artifact, target, brief, samples, dir }) {
   return { cell, trace: [] };
 }
 
-async function emit({ rounds, trace, brief }) {
-  const { md, json } = assembleSurgicalStandard({ rounds, trace, brief });
+/** Derive the honest "where/why it tops out" findings from the collected edit errors (root-cause notes). */
+function deriveFindings(editErrors) {
+  const findings = [];
+  // The baml-revise subprocess inherits stderr (the prompt-too-long BamlError prints there) and returns only
+  // its exit code to the parent — so editErrors carry "baml-revise exited 1". The diagnosed cause (observed in
+  // the subprocess stderr) is the region placement list exceeding the model context on a high-res build.
+  const failed = editErrors.filter((e) => /too long|tokens|context|exited/i.test(e.error || ""));
+  if (failed.length) {
+    findings.push(
+      `The per-region LLM block-edit route FAILED on ${failed.length}/${editErrors.length} attempt(s) — the ` +
+        `baml-revise subprocess exited non-zero, its stderr reporting a "prompt too long" BamlError ` +
+        `(~1.25M tokens vs the 1M limit). A high-res building region's placement list (tens of thousands of ` +
+        `blocks at scale 64) exceeds the model's context. The E-15 surgical LLM-edit path — validated on ` +
+        `~32-block sculptures (hundreds of placements) — does NOT scale to the high-res building's region ` +
+        `density; the loop cannot propose a form edit, so every region rolls back unchanged (the cage held).`,
+    );
+    findings.push(
+      `Compounding cause: the TRELLIS GLB form target (T-067) already lost the defining details (arch ring, ` +
+        `gable ridge line, 1×3 slit windows), so even a working editor has no per-region signal pulling toward ` +
+        `those features — the form target cannot reward detail it does not itself contain.`,
+    );
+  }
+  if (editErrors.length) {
+    const sample = editErrors[0];
+    findings.push(`Representative edit-proposal error (region ${sample.region}): "${sample.error}".`);
+  }
+  return findings;
+}
+
+async function emit({ rounds, trace, brief, findings = [] }) {
+  const { md, json } = assembleSurgicalStandard({ rounds, trace, brief, findings });
   await writeFile(join(HERE, "surgical-standard.json"), JSON.stringify(json, null, 2) + "\n");
   await writeFile(join(HERE, "surgical-standard.md"), md);
   console.error(
@@ -191,6 +239,7 @@ async function runLive({ rounds: maxRounds, samples, perRegion, regions }) {
 
   let current = best;
   let remaining = [...regions];
+  const editErrors = [];
   for (let r = 1; r <= maxRounds; r++) {
     if (remaining.length === 0) {
       console.error("all regions locked — converged.");
@@ -208,6 +257,7 @@ async function runLive({ rounds: maxRounds, samples, perRegion, regions }) {
     });
     cells.push(res.cell);
     trace.push(...res.trace);
+    editErrors.push(...res.editErrors);
     current = res.artifact;
     // P14 across rounds: drop the regions the loop accepted (locked) — never revisit them.
     remaining = remaining.filter((reg) => !res.acceptedSpecs.includes(reg.spec));
@@ -221,7 +271,7 @@ async function runLive({ rounds: maxRounds, samples, perRegion, regions }) {
     }
   }
 
-  const json = await emit({ rounds: cells, trace, brief });
+  const json = await emit({ rounds: cells, trace, brief, findings: deriveFindings(editErrors) });
   await saveRefined(current, json);
 }
 
@@ -244,19 +294,23 @@ async function saveRefined(artifact, json) {
 async function verifyOffline({ rounds: maxRounds }) {
   const cells = [];
   const trace = [];
+  const editErrors = [];
   let brief = null;
   for (let r = 0; r <= maxRounds; r++) {
     const s = await readJson(join(BUILDING_DIR, `round-${r}`, "summary.json"));
     if (!s) continue;
     cells.push(s.cell);
     if (Array.isArray(s.trace)) trace.push(...s.trace);
+    if (Array.isArray(s.proposals)) {
+      for (const p of s.proposals) if (p.error) editErrors.push({ region: p.region, error: p.error });
+    }
   }
   const designDoc = await readFile(join(RUNS_DIR, SUBJECT.run, "design-doc.md"), "utf8").catch(() => null);
   brief = designDoc ?? null;
   if (cells.length === 0) {
     console.error("offline: no committed round summaries found — emitting placeholder report.");
   }
-  const json = await emit({ rounds: cells, trace, brief });
+  const json = await emit({ rounds: cells, trace, brief, findings: deriveFindings(editErrors) });
   console.error(`offline: ${cells.length} round(s); outcome ${json.outcome.reachedStandard ? "reached" : "topped out"}`);
 }
 

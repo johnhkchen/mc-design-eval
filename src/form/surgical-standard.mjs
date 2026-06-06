@@ -249,9 +249,11 @@ export function assembleSurgicalStandard({
   bar = STANDARD_BAR,
   eps = 0,
   subject = "building",
+  findings = [],
 } = {}) {
   if (!Array.isArray(rounds)) throw new Error("assembleSurgicalStandard: rounds must be an array");
   if (!Array.isArray(trace)) throw new Error("assembleSurgicalStandard: trace must be an array");
+  if (!Array.isArray(findings)) throw new Error("assembleSurgicalStandard: findings must be an array");
 
   const cells = rounds.map(roundCell);
   const trajectory = verdictTrajectory(cells);
@@ -274,6 +276,7 @@ export function assembleSurgicalStandard({
     editTrace,
     p14,
     outcome,
+    findings: findings.map((f) => String(f)),
     rounds: cells,
     note:
       "The accept-gate is the DETERMINISTIC GLB per-region form-IoU compare (a hill-climb cannot tolerate a " +
@@ -340,6 +343,9 @@ function renderStandardMd(json) {
       ? `**SAFE** ✓ — ${json.p14.acceptedCount} accepted region(s), all disjoint, every kept edit strictly improved.`
       : `**VIOLATIONS** ✗ (${json.p14.violations.length}): ${json.p14.violations.map((v) => v.type).join(", ")}.`,
     "",
+    ...(json.findings && json.findings.length
+      ? ["## Findings (where/why quality tops out)", "", ...json.findings.map((f) => `- ${f}`), ""]
+      : []),
     `> _Note:_ ${json.note}`,
     "",
   ];

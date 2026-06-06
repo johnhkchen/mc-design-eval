@@ -81,3 +81,8 @@ benchmarks/sculpture/building/**/*.png
 # per-scale intermediate artifacts are large + regenerable; commit the lightweight summary + the chosen
 # building/best/artifact.json (the deliverable) only.
 benchmarks/sculpture/building/scale-*/artifact.json
+
+# E-20 surgical refine-to-standard (T-069-01) — the refined build is byte-identical to building/best/
+# (the loop accepted zero edits; the cage held), so the 7.6 MB duplicate is NOT re-committed. Durable record:
+# surgical-standard.{json,md} + building/round-*/summary.json. Regenerate via `npm run surgical:standard`.
+benchmarks/sculpture/building/refined/artifact.json

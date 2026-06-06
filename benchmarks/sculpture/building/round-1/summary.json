@@ -1,0 +1,167 @@
+{
+  "cell": {
+    "round": 1,
+    "overall": "weak",
+    "proportion": "weak",
+    "color": "competent",
+    "detail": "weak",
+    "fidelity": "weak",
+    "perSample": [
+      "weak",
+      "weak",
+      "weak"
+    ],
+    "notes": "Massing reads as a single heavy stone block taller than wide, which honors the guard-block brief — but the silhouette is lumpy and the crown dissolves into an irregular, partly-collapsed roof rather than a clean steep gable, so the base→middle→crown rhythm never resolves (competent proportion at best). Palette is disciplined near-monochrome stone grey with a dark band and a strip of warm brown at the base; restrained but unremarkable, and the brown reads as an unfinished plinth rather than a deliberate arch/door accent, so color stays competent. Detail is the weakest dimension: the surface is a homogeneous grey field of texture noise with no legible relief — no voussoir ring, no slit windows, no buttress pilasters articulate the walls; it is flat fields plus aliasing. Fidelity suffers most from the gate: the one feature that should name the building — a chunky arched passage tunnelling the base — is not legible; the front shows only a rectangular notch that reads as a missing chunk, not an arch. Without a clear entrance or gable read it lands as a generic stone blob, not a recognizable gatehouse. Overall weak: a plausible stone mass that fails to deliver its two naming features (arch + peaked gable) and offers no articulated surface.",
+    "wholeIoU": 0.929,
+    "accepted": 0,
+    "usage": {
+      "input_tokens": 20697,
+      "output_tokens": 3968,
+      "cost_usd": 0.37940450000000003
+    }
+  },
+  "trace": [
+    {
+      "iteration": 1,
+      "region": {
+        "where": "top",
+        "fraction": 0.22
+      },
+      "subBounds": {
+        "min": [
+          -27,
+          32,
+          -27
+        ],
+        "max": [
+          26,
+          63,
+          26
+        ]
+      },
+      "defect": "stair-stepped",
+      "where": "the roof edges / gable ridge (cornice line)",
+      "route": "llm-edit",
+      "tweak": "noop",
+      "scoreBefore": 0.5959431313954542,
+      "scoreAfter": 0.5959431313954542,
+      "accepted": false,
+      "reason": "rolled-back"
+    },
+    {
+      "iteration": 2,
+      "region": {
+        "where": "front",
+        "fraction": 0.3
+      },
+      "subBounds": {
+        "min": [
+          0,
+          0,
+          -27
+        ],
+        "max": [
+          26,
+          63,
+          26
+        ]
+      },
+      "defect": "soft",
+      "where": "the gable face + the arched-gate voussoir ring",
+      "route": "llm-edit",
+      "tweak": "noop",
+      "scoreBefore": 0.7225870646766169,
+      "scoreAfter": 0.7225870646766169,
+      "accepted": false,
+      "reason": "rolled-back"
+    },
+    {
+      "iteration": 3,
+      "region": {
+        "where": "left",
+        "fraction": 0.28
+      },
+      "subBounds": {
+        "min": [
+          -27,
+          0,
+          -27
+        ],
+        "max": [
+          26,
+          63,
+          -1
+        ]
+      },
+      "defect": "soft",
+      "where": "the side window reveals (the 1×3 slit windows)",
+      "route": "llm-edit",
+      "tweak": "noop",
+      "scoreBefore": 0.6350086340089066,
+      "scoreAfter": 0.6350086340089066,
+      "accepted": false,
+      "reason": "rolled-back"
+    },
+    {
+      "iteration": 4,
+      "region": {
+        "where": "right",
+        "fraction": 0.28
+      },
+      "subBounds": {
+        "min": [
+          -27,
+          0,
+          0
+        ],
+        "max": [
+          26,
+          63,
+          26
+        ]
+      },
+      "defect": "soft",
+      "where": "the side window reveals (the 1×3 slit windows)",
+      "route": "llm-edit",
+      "tweak": "noop",
+      "scoreBefore": 0.7503238019328484,
+      "scoreAfter": 0.7503238019328484,
+      "accepted": false,
+      "reason": "rolled-back"
+    }
+  ],
+  "proposals": [
+    {
+      "region": "-27,32,-27|26,63,26",
+      "proposed": 0,
+      "applied": 0,
+      "rejected": [],
+      "stashed": false,
+      "error": "baml-revise exited 1"
+    },
+    {
+      "region": "0,0,-27|26,63,26",
+      "proposed": 0,
+      "applied": 0,
+      "rejected": [],
+      "stashed": false,
+      "error": "baml-revise exited 1"
+    },
+    {
+      "region": "-27,0,-27|26,63,-1",
+      "proposed": 0,
+      "applied": 0,
+      "rejected": [],
+      "stashed": false,
+      "error": "baml-revise exited 1"
+    },
+    {
+      "region": "-27,0,0|26,63,26",
+      "proposed": 0,
+      "applied": 0,
+      "rejected": [],
+      "stashed": false,
+      "error": "baml-revise exited 1"
+    }
+  ]
+}

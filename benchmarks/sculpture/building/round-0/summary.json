@@ -1,0 +1,24 @@
+{
+  "cell": {
+    "round": 0,
+    "overall": "weak",
+    "proportion": "competent",
+    "color": "competent",
+    "detail": "weak",
+    "fidelity": "weak",
+    "perSample": [
+      "weak",
+      "weak",
+      "competent"
+    ],
+    "notes": "Massing reads as a heavy stone block taller than wide, which respects the brief's guard-block intent — but that is where coherence ends. There is no legible base→middle→crown: the lower walls are a solid dark slab, and the entire upper half dissolves into a jagged, noisy lighter-grey mass with no readable ridge, gable triangle, or roof plane. The defining features the brief names — the arched passage and the peaked gable over it — are simply not present to the eye. I see no 6×10 arch, no voussoir ring, no slit windows, no buttress pilasters; the warm dark_oak accent appears only as a few stray brown blocks at the base front, reading as an unfinished corner rather than a framed gate. Palette is disciplined (cool grey body, darker roof, sparing warm note), so color earns competent, but the grey-on-grey gives almost no relief read and the surface is flat fields plus what looks like render noise rather than purposeful articulation — detail is weak. As a temple/gatehouse it fails the recognition test: no clear entrance, no silhouette, no landmark identity. It reads as a generic stone lump with a chaotic top, so fidelity and the holistic judgement are weak.",
+    "wholeIoU": 0.929,
+    "accepted": 0,
+    "usage": {
+      "input_tokens": 10082,
+      "output_tokens": 3852,
+      "cost_usd": 0.3076715
+    }
+  },
+  "trace": []
+}

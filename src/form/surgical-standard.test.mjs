@@ -238,4 +238,16 @@ test("assembleSurgicalStandard: empty rounds → placeholder, no throw; non-arra
   assert.match(md, /no rounds ran/);
   assert.throws(() => assembleSurgicalStandard({ rounds: "nope" }), /rounds must be an array/);
   assert.throws(() => assembleSurgicalStandard({ rounds: [], trace: "nope" }), /trace must be an array/);
+  assert.throws(() => assembleSurgicalStandard({ rounds: [], trace: [], findings: "nope" }), /findings must be an array/);
+});
+
+test("assembleSurgicalStandard: findings render a 'where/why tops out' section", () => {
+  const { md, json } = assembleSurgicalStandard({
+    rounds: [{ round: 0, overall: "weak", wholeIoU: 0.929 }],
+    trace: [],
+    findings: ["the LLM-edit route failed: prompt too long on a high-res region"],
+  });
+  assert.deepEqual(json.findings, ["the LLM-edit route failed: prompt too long on a high-res region"]);
+  assert.match(md, /Findings \(where\/why quality tops out\)/);
+  assert.match(md, /prompt too long/);
 });
