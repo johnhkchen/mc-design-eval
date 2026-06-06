@@ -46,6 +46,17 @@ export const ITERATIVE_MULTIMODAL_METHOD_ID = "iterative-multimodal.v1";
 export const VCONCEPT_SCULPTURE_METHOD_ID = "vconcept-sculpture.v1";
 
 /**
+ * The value-matched vConcept SCULPTURE archetype id (E-14 / story S-041 / T-041-01). The `.v2`
+ * build path SHARES the `.v1` build PROMPT — the model still owns form + where — and differs only by
+ * a post-build ENGINE step: after the model proposes the artifact, the concept's realized palette is
+ * extracted and each placement's block is snapped to the value-true block that hits that region's
+ * value (curing the documented moai value drift). Single-sourced here like the other method ids so a
+ * value-matched run carries exactly one spelling of its identity and a Phase-2 sweep stays greppable.
+ * @type {string}
+ */
+export const VCONCEPT_SCULPTURE_METHOD_ID_V2 = "vconcept-sculpture.v2";
+
+/**
  * Tool names that must NEVER be enabled in a trial — the code-execution surface
  * (spec §3: the `allow_insecure_coding` / LLM-writes-and-runs-code path is out of
  * scope). The runner's safe-options guard rejects any attempt to allow these.

@@ -19,7 +19,11 @@
 // test glob (`src/**/*.test.mjs`) exercises every line without billing a model or loading
 // GL. The one live/metered/GL runner lives in benchmarks/sculpture/run.mjs and imports this.
 
-import { PHASE1_MODEL_ID, VCONCEPT_SCULPTURE_METHOD_ID } from "./config.mjs";
+import {
+  PHASE1_MODEL_ID,
+  VCONCEPT_SCULPTURE_METHOD_ID,
+  VCONCEPT_SCULPTURE_METHOD_ID_V2,
+} from "./config.mjs";
 
 /**
  * The archetype descriptor. `id` is single-sourced from config.mjs so there is exactly one
@@ -31,6 +35,22 @@ export const VCONCEPT_SCULPTURE = Object.freeze({
   id: VCONCEPT_SCULPTURE_METHOD_ID, // "vconcept-sculpture.v1"
   version: 1,
   label: "vConcept sculpture (term → 3/4 concept → freestanding 3-D object)",
+});
+
+/**
+ * The value-matched variant (E-14 / story S-041 / T-041-01). It SHARES the `.v1` BUILD PROMPT
+ * verbatim — `composeSculptureBuildPrompt` is unchanged, the model still owns form + where — and
+ * differs only by a post-build ENGINE step: the concept's realized palette is extracted and each
+ * placement's block is snapped to the value-true block that hits that region's value
+ * (`src/color/value-build.mjs` `snapArtifactToValueTrue`), curing the documented moai value drift.
+ * Because no prompt construction changes, this is a NEW method id rather than a `.v1` prompt fork.
+ * @type {Readonly<{ id: string, version: number, label: string, sharesPromptWith: string }>}
+ */
+export const VCONCEPT_SCULPTURE_V2 = Object.freeze({
+  id: VCONCEPT_SCULPTURE_METHOD_ID_V2, // "vconcept-sculpture.v2"
+  version: 2,
+  label: "vConcept sculpture, value-matched (engine snaps placements to value-true blocks)",
+  sharesPromptWith: VCONCEPT_SCULPTURE_METHOD_ID,
 });
 
 /** Target longest-edge bounds (blocks). Below 8 no form survives voxelization; above 64 the
