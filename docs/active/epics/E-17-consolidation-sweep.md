@@ -33,11 +33,17 @@ it while it reads busy up close — *form solved, material not*.
 
 ## Goal
 
-**Bring it all together in one measured sweep.** Take **every** E-13 sculptural subject (the 8: dancing
-man, moai, pineapple, bow & arrow, heart, sword, mushroom, koi) up a **single canonical technique ladder**,
-score every rung the same way, and produce **one scorecard** that shows — per subject and on average —
-**the marginal contribution of each technique**. Plus build the one missing rung the sweep needs: a
-**material-clean pass** that fixes E-16's speckle (the new lever; the rest is composition of proven work).
+**Bring it all together in one measured sweep.** Take **every** E-13 sculptural subject **with a GLB** (the
+**7**: dancing man, moai, pineapple, bow & arrow, heart, mushroom, koi) up a **single canonical technique
+ladder**, score every rung the same way, and produce **one scorecard** that shows — per subject and on
+average — **the marginal contribution of each technique**. Plus build the one missing rung the sweep
+needs: a **material-clean pass** that fixes E-16's speckle (the new lever; the rest is composition of
+proven work).
+
+> **Sword is excluded (7, not 8) — a finding, not a gap.** The thinnest subject (`runs/007-…-sword`, an
+> elongated blade) **fails TRELLIS with HTTP 500 on 3 attempts**: image→3D has its own **thin-subject
+> failure mode**, the same form class text→JSON foreshortens. It's documented (`glb/README.md`), not
+> silently dropped, and is itself a data point for the journal.
 
 ### The canonical ladder (each rung adds exactly one technique; same metrics throughout)
 
@@ -59,13 +65,13 @@ categorical**. The scorecard then reads off, for each technique, *what it bought
 subject     text→JSON  glb-voxel  +mat-clean   +surgical     ← per-rung metric, and the MARGINAL Δ each adds
 koi           …          …          …             …
 heart         …          …          …             …
-…(×8)
+…(×7)
 AVG / Δ     baseline   +form      +material     +polish       ← "what each improvement bought," on average
 ```
 
 ## Why now / why this shape
 
-- **Attribution, not anecdote.** One ladder, one metric set, all 8 subjects → the contribution of value,
+- **Attribution, not anecdote.** One ladder, one metric set, all 7 subjects → the contribution of value,
   form (voxelization), material, and surgical polish becomes a *number you can point at*, with a visual
   march-of-progress per subject. That is the deliverable.
 - **It closes E-16's loose end.** The material-clean rung (R2) is the one genuinely new build technique;
@@ -73,7 +79,7 @@ AVG / Δ     baseline   +form      +material     +polish       ← "what each im
   value-true palette + E-11's material passes. Without it the voxel win looks unfinished.
 - **It's mostly composition + measurement.** R0/R1/R3 already exist (E-13/E-16/E-15); the net-new code is
   R2 + the sweep harness + the scorecard. Low risk, high legibility.
-- **The GLBs are provisioned.** All 8 subjects now have a TRELLIS GLB on disk (`benchmarks/sculpture/glb/
+- **The GLBs are provisioned.** All 7 subjects now have a TRELLIS GLB on disk (`benchmarks/sculpture/glb/
   *.glb`, gitignored; manifest in `glb/README.md`; regen via `benchmarks/sculpture/trellis-glb.mjs`), so
   the sweep is pure local computation — no network, ideal for the autonomous run.
 
@@ -81,12 +87,12 @@ AVG / Δ     baseline   +form      +material     +polish       ← "what each im
 
 **In:** the **material-clean pass** (ground voxel materials in a canonical palette **extracted from the
 GLB surface texture** via the E-10 CIE-Lab palette technique → value-true blocks + height-varied — the new
-lever); the **glb-voxel build across all 8 subjects** (generalize E-16's
-koi/heart path); the **ablation sweep harness** (assemble the 4-rung ladder × 8 subjects, run the surgical
+lever); the **glb-voxel build across all 7 subjects** (generalize E-16's
+koi/heart path); the **ablation sweep harness** (assemble the 4-rung ladder × 7 subjects, run the surgical
 rung, collect form-IoU + value-ΔE + judge per rung); the **consolidation scorecard + per-subject
 march-of-progress** (the legible answer), journaled, with an E-12 handoff.
 
-**Out:** generating GLBs (already done — the 8 are on disk; a ticket may regen a missing one via
+**Out:** generating GLBs (already done — the 7 are on disk; a ticket may regen a missing one via
 `trellis-glb.mjs`, but generation is not the work); new subjects beyond the E-13 set (apples-to-apples
 against a known baseline is the point); the rubric and brief (immutable during measurement); a fresh
 from-scratch re-generation of builds (the sweep consumes the existing E-13 builds + the GLBs).
@@ -94,11 +100,11 @@ from-scratch re-generation of builds (the sweep consumes the existing E-13 build
 ## Candidate stories & DAG (overnight chain — gated, journaled, on main)
 
 ```
-S-054 glb-voxel ×8 ─▶ S-055 material-clean ×8 ─▶ S-056 ablation sweep (4-rung ladder ×8, collect) ─▶ S-057 scorecard + march
+S-054 glb-voxel ×7 ─▶ S-055 material-clean ×7 ─▶ S-056 ablation sweep (4-rung ladder ×7, collect) ─▶ S-057 scorecard + march
    (R1 for all)         (R2: the new lever)        (adds R3 surgical; gathers all metrics)            (the legible answer)
 ```
 
-- **S-054 — glb-voxel-breadth.** Run E-16's `glbVoxelBuild` across all 8 subjects (the GLBs exist) →
+- **S-054 — glb-voxel-breadth.** Run E-16's `glbVoxelBuild` across all 7 subjects (the GLBs exist) →
   the R1 `glb-voxel` build + render + form-IoU for every subject. Generalizes the koi/heart path; little
   new code, broad coverage.
 - **S-055 — material-clean-pass (the new lever).** Build + apply a pass that turns the speckled per-voxel
@@ -107,10 +113,10 @@ S-054 glb-voxel ×8 ─▶ S-055 material-clean ×8 ─▶ S-056 ablation sweep 
   `medianCutLab` → value-true blocks, E-14) — *not* by clustering the noisy per-voxel samples. Then assign
   each voxel by sampling the texture and snapping to the nearest block within that palette, spatial-denoise
   to the neighborhood's dominant block, and apply **E-11 material passes** (same-hue set, height-varied)
-  for deliberate texture instead of noise. → the R2 `+material-clean` build for all 8. Pure logic
+  for deliberate texture instead of noise. → the R2 `+material-clean` build for all 7. Pure logic
   unit-tested.
 - **S-056 — ablation-sweep.** Assemble the full 4-rung ladder (R0 text→JSON, R1 glb-voxel, R2
-  +material-clean, R3 +surgical) for all 8 subjects — running the **E-15 surgical rung** on the cleaned
+  +material-clean, R3 +surgical) for all 7 subjects — running the **E-15 surgical rung** on the cleaned
   voxel build with the GLB target — and **collect form-IoU + value-ΔE + judge per rung per subject** into
   one structured record.
 - **S-057 — consolidation-scorecard-and-march.** The legible answer: a **scorecard** (subject × rung, with
@@ -119,7 +125,7 @@ S-054 glb-voxel ×8 ─▶ S-055 material-clean ×8 ─▶ S-056 ablation sweep 
 
 ## Definition of done
 
-- All 8 subjects have the full 4-rung ladder (R0–R3) built, rendered, and **scored on the same axes**
+- All 7 subjects have the full 4-rung ladder (R0–R3) built, rendered, and **scored on the same axes**
   (form IoU vs GLB, value ΔE, judge).
 - A **single scorecard** states, per technique, **what it bought** on average and per subject — including
   where a rung **didn't help or hurt** (honest, like E-14/E-15/E-16).
@@ -130,7 +136,7 @@ S-054 glb-voxel ×8 ─▶ S-055 material-clean ×8 ─▶ S-056 ablation sweep 
 ## Orchestration notes (for the autonomous overnight run)
 
 - **Gated linear-ish DAG, on main, journaled diffs** — the proven E-08/E-16 overnight shape. The sweep
-  itself (S-056) fans out over 8 subjects, which the agent parallelizes internally.
+  itself (S-056) fans out over 7 subjects, which the agent parallelizes internally.
 - **GL-free where it counts.** The material-clean clustering/quantization and the metric collection are
   **pure/deterministic** — built and unit-tested without GL (on synthetic occupancy/color); only the
   final renders need GL, isolated behind the existing seam (the user's env has GL).

@@ -11,12 +11,23 @@ The `.glb` binaries are **gitignored** (~5 MB each, regenerable); this manifest 
 
 ## The meshes
 
-| file | subject | source concept | verts | tris | size | gen time |
-|------|---------|----------------|------:|-----:|-----:|---------:|
-| `koi.glb` | koi fish (the flattened S-curve) | `runs/009-vConcept-a-koi-fish/concept.png` | 95,147 | 143,664 | 4.95 MB | 284 s (cold) |
-| `heart.glb` | anatomical heart (the open aortic arch) | `runs/006-…-human-heart/concept.png` | 106,365 | 145,210 | 5.42 MB | 156 s (warm) |
+| file | subject | source concept | verts | tris | size |
+|------|---------|----------------|------:|-----:|-----:|
+| `koi.glb` | koi fish (the flattened S-curve) | `runs/009-vConcept-a-koi-fish/concept.png` | 95,147 | 143,664 | 4.95 MB |
+| `heart.glb` | anatomical heart (the open aortic arch) | `runs/006-…-human-heart/concept.png` | 106,365 | 145,210 | 5.42 MB |
+| `dancing-man.glb` | dancing man | `runs/002-vConcept-a-dancing-man/concept.png` | 80,130 | 143,727 | 4.43 MB |
+| `moai.glb` | moai statue | `runs/003-vConcept-a-moai-statue/concept.png` | 96,453 | 142,336 | 5.10 MB |
+| `pineapple.glb` | pineapple | `runs/004-vConcept-a-pineapple/concept.png` | 93,159 | 146,617 | 4.93 MB |
+| `bow-and-arrow.glb` | bow & arrow | `runs/005-vConcept-a-bow-and-arrow/concept.png` | 99,392 | 141,585 | 5.15 MB |
+| `mushroom.glb` | mushroom | `runs/008-vConcept-a-mushroom/concept.png` | 90,522 | 144,487 | 5.08 MB |
 
-Both: valid binary glTF v2, 1 mesh / 1 primitive, 2 textures, 1 material. Generated 2026-06-05.
+All: valid binary glTF v2, 1 mesh / 1 primitive, **2 textures** (the baseColor surface texture is what
+E-17's material-clean pass mines via the CIE-Lab palette technique), 1 material. Generated 2026-06-05.
+
+**Sword excluded — a finding, not a gap.** `runs/007-vConcept-a-sword` (the thinnest subject, an
+elongated blade) **fails TRELLIS with HTTP 500 on 3 attempts**. Image→3D has a **thin-subject failure
+mode** of its own — the same form class (thin members / "point") that text→JSON foreshortens to a speck.
+So the E-17 sweep runs on the **7 subjects with GLBs**; sword is documented, not silently dropped.
 
 ## How they were made (reproducible)
 
