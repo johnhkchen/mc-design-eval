@@ -1,0 +1,130 @@
+{
+  "schema": "material-map/v1",
+  "subject": "cottage",
+  "generatedFrom": {
+    "concept": "runs/014-vConcept-a-cottage/concept.png",
+    "designDoc": "design-doc.md"
+  },
+  "map": [
+    {
+      "role": "load-bearing ground-floor wall field",
+      "block": "minecraft:stone_bricks",
+      "placementRule": "walls",
+      "rationale": "The ground storey reads as a SMOOTH, neatly coursed grey ashlar plane — regular rectangular blocks with tight joints — the dressed-stone wall body, distinct from the rough corner stone."
+    },
+    {
+      "role": "corner quoins, plinth course & chimney shaft (rough grey stone)",
+      "block": "minecraft:cobblestone",
+      "placementRule": "corners-edges",
+      "rationale": "The building corners and the chimney shaft show a LUMPY, irregular speckled grey grain — same cool tone as the wall but a coarser cobble texture; kept separate from stone_bricks so the quoin/buttress distinction survives a mean-color match."
+    },
+    {
+      "role": "half-timbering frame — vertical studs, corner posts, eaves beams",
+      "block": "minecraft:dark_oak_log",
+      "placementRule": "trim",
+      "rationale": "The signature dark vertical stripes over the cream panels are heavy round structural timbers with a strong wood grain — the framing rhythm; the dark-brown LOG texture (not flat planks) is what reads here."
+    },
+    {
+      "role": "upper-storey plaster infill between the timbers",
+      "block": "minecraft:white_terracotta",
+      "placementRule": "walls",
+      "rationale": "The panels between the studs are a warm, matte CREAM off-white — not pure white and not the cool grey stone below; white_terracotta gives the soft plaster tone without collapsing into the stone base."
+    },
+    {
+      "role": "main roof field — plank courses",
+      "block": "minecraft:spruce_planks",
+      "placementRule": "roof",
+      "rationale": "The steep roof slopes are stepped courses of warm MEDIUM-brown sawn planks — clearly lighter and flatter-grained than the near-black dark_oak timber frame; spruce_planks holds that distinct, lighter roof tone."
+    },
+    {
+      "role": "roof eaves, verge & rake fascia (darker plank edge)",
+      "block": "minecraft:dark_oak_planks",
+      "placementRule": "roof",
+      "rationale": "The overhanging eaves and gable rake read noticeably DARKER than the roof field — a deeper plank banding the roof edge; a near-tone pair with spruce_planks kept distinct (dark edge over lighter field)."
+    },
+    {
+      "role": "chimney cap",
+      "block": "minecraft:bricks",
+      "placementRule": "trim",
+      "rationale": "The chimney top is a warm RED-BROWN coursed brick block crowning the cool grey cobble shaft — a deliberate warm-on-cool material contrast, not the same stone as the shaft."
+    }
+  ],
+  "palette": [
+    "minecraft:stone_bricks",
+    "minecraft:cobblestone",
+    "minecraft:dark_oak_log",
+    "minecraft:white_terracotta",
+    "minecraft:spruce_planks",
+    "minecraft:dark_oak_planks",
+    "minecraft:bricks"
+  ],
+  "dropped": [
+    {
+      "reason": "unknown-block",
+      "entry": {
+        "role": "entry door",
+        "block": "minecraft:spruce_door",
+        "placementRule": "openings",
+        "rationale": "The ground-floor doorway shows a warm-brown panelled wooden door set in the stone reveal — a spruce-toned timber door."
+      }
+    },
+    {
+      "reason": "unknown-block",
+      "entry": {
+        "role": "window shutters & lattice fills",
+        "block": "minecraft:dark_oak_trapdoor",
+        "placementRule": "openings",
+        "rationale": "Both storeys show brown LATTICE/slatted window fills and flanking shutters with a fine horizontal grain — trapdoor slats read this gridded reveal far better than a solid plank."
+      }
+    },
+    {
+      "reason": "unknown-block",
+      "entry": {
+        "role": "door lantern",
+        "block": "minecraft:lantern",
+        "placementRule": "openings",
+        "rationale": "A single glowing warm light hangs beside the front door in the concept — a lantern accent at the entrance."
+      }
+    }
+  ],
+  "stats": {
+    "in": 10,
+    "kept": 7,
+    "dropped": 3,
+    "distinctBlocks": 7,
+    "placementRules": [
+      "walls",
+      "corners-edges",
+      "trim",
+      "roof"
+    ]
+  },
+  "preservesNearTone": true,
+  "nearTonePairs": [
+    {
+      "a": "minecraft:dark_oak_log",
+      "b": "minecraft:dark_oak_planks",
+      "dL": 0.385
+    },
+    {
+      "a": "minecraft:stone_bricks",
+      "b": "minecraft:cobblestone",
+      "dL": 2.082
+    },
+    {
+      "a": "minecraft:stone_bricks",
+      "b": "minecraft:bricks",
+      "dL": 4.326
+    },
+    {
+      "a": "minecraft:cobblestone",
+      "b": "minecraft:bricks",
+      "dL": 6.408
+    },
+    {
+      "a": "minecraft:spruce_planks",
+      "b": "minecraft:bricks",
+      "dL": 8.408
+    }
+  ]
+}

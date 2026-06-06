@@ -1,0 +1,84 @@
+{
+  "schema": "material-map/v1",
+  "subject": "gatehouse",
+  "generatedFrom": {
+    "concept": "runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+    "designDoc": "design-doc.md"
+  },
+  "map": [
+    {
+      "role": "structural walls (dominant body)",
+      "block": "minecraft:stone_bricks",
+      "placementRule": "walls",
+      "rationale": "The main wall field on every elevation is smooth, regular RECTANGULAR-coursed brick — uniform mortar lines, flat faces. This is the cool-grey structural body; kept distinct from the rougher cobblestone corners."
+    },
+    {
+      "role": "corner buttresses + rough string-course banding",
+      "block": "minecraft:cobblestone",
+      "placementRule": "corners-edges",
+      "rationale": "The four corner pilasters (and the band running under the eave) show a visibly ROUGH, rounded, irregular cobble grain — bumpy, non-coursed — against the smooth stone-brick field. Near-tone grey but a DIFFERENT material; must not collapse into stone_bricks."
+    },
+    {
+      "role": "roof mass",
+      "block": "minecraft:deepslate_tiles",
+      "placementRule": "roof",
+      "rationale": "The steep gable slope reads as dark, tight, cool-grey tiling — markedly darker than the walls so the roof recedes and the gable reads as silhouette. Distinct dark tone, not the lighter wall stone."
+    },
+    {
+      "role": "arch voussoir ring (warm accent)",
+      "block": "minecraft:dark_oak_log",
+      "placementRule": "trim",
+      "rationale": "A chunky 1-block band of warm dark-brown TIMBER with visible log grain rings the arched gate — the single warm note against the all-grey stone. Distinct material (wood, not stone) framing the opening."
+    },
+    {
+      "role": "gate door / passage leaf",
+      "block": "minecraft:dark_oak_planks",
+      "placementRule": "openings",
+      "rationale": "Inside the timber arch the recessed door/passage fill is the same warm dark wood but reads as flat sawn boards rather than the round log frame — kept as a distinct opening fill (planks) vs the log voussoir."
+    }
+  ],
+  "palette": [
+    "minecraft:stone_bricks",
+    "minecraft:cobblestone",
+    "minecraft:deepslate_tiles",
+    "minecraft:dark_oak_log",
+    "minecraft:dark_oak_planks"
+  ],
+  "dropped": [],
+  "stats": {
+    "in": 5,
+    "kept": 5,
+    "dropped": 0,
+    "distinctBlocks": 5,
+    "placementRules": [
+      "walls",
+      "corners-edges",
+      "roof",
+      "trim",
+      "openings"
+    ]
+  },
+  "preservesNearTone": true,
+  "nearTonePairs": [
+    {
+      "a": "minecraft:dark_oak_log",
+      "b": "minecraft:dark_oak_planks",
+      "dL": 0.385
+    },
+    {
+      "a": "minecraft:stone_bricks",
+      "b": "minecraft:cobblestone",
+      "dL": 2.082
+    },
+    {
+      "a": "minecraft:deepslate_tiles",
+      "b": "minecraft:dark_oak_log",
+      "dL": 2.753
+    },
+    {
+      "a": "minecraft:deepslate_tiles",
+      "b": "minecraft:dark_oak_planks",
+      "dL": 3.138
+    }
+  ]
+}
