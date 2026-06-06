@@ -42,7 +42,15 @@ export { speckleScore }; // one import site for the runner (the before/after met
  *  (20) and minRegion absorbs specks up to 8 cells — both cut surface FRAGMENTATION, the dominant speckle
  *  source on organic subjects (fewer regions → fewer inter-region boundaries). All ΔE in the CIE76 space
  *  the whole stack uses. */
-export const SEG_DEFAULTS = Object.freeze({ k: 6, growDE: 22, gradDE: 25, minRegion: 12, neighbourhood: 6 });
+export const SEG_DEFAULTS = Object.freeze({
+  k: 6, growDE: 22, gradDE: 25, minRegion: 12, neighbourhood: 6,
+  // T-064-01 noise-vs-intent: a region smaller than minRegion is absorbed ONLY when it is NOISE — either
+  // truly tiny (≤ tinyFloor cells: single/double-voxel snap flecks) or close in colour to its best
+  // neighbour (bestΔE ≤ absorbDE, i.e. within grow distance — it should have merged). A small region that
+  // is colour-DISTINCT from every neighbour (bestΔE > absorbDE) is INTENT (e.g. a mushroom-cap spot) and
+  // is KEPT. absorbDE defaults to growDE so "would have grown together" == "is noise".
+  absorbDE: 22, tinyFloor: 2,
+});
 
 /** The style stamped on a segmented build (distinct from R1 "glb-voxel" and R2 "glb-voxel-clean"). */
 export const MATERIAL_SEG_STYLE = Object.freeze({
@@ -195,17 +203,25 @@ function regionsFromLabels(labelOf) {
 
 /**
  * Absorb each region smaller than `minRegion` into the 6-adjacent region whose MEAN Lab is nearest — the
- * "off-colour singleton absorbed" cure (design.md Decision 4). Smallest-first, deterministic tie-break
- * (first-cell index); iterates until stable so a chain of specks resolves. PURE; relabels only, never
- * touches occupancy. A speck with no differently-labelled neighbour keeps its own region (then its own
- * nearest-palette fill).
+ * "off-colour singleton absorbed" cure (design.md Decision 4) UNDER A NOISE-VS-INTENT RULE (T-064-01):
+ * a small region is absorbed ONLY when it is noise — `cells ≤ tinyFloor` (a single/double-voxel fleck) OR
+ * its nearest-neighbour mean ΔE is `≤ absorbDE` (close enough it should have grown together). A small but
+ * colour-DISTINCT region (bestΔE > absorbDE, e.g. a mushroom-cap spot) is KEPT — legitimate detail is no
+ * longer eaten with the noise. Smallest-first, deterministic tie-break (first-cell index); iterates until
+ * stable so a chain of specks resolves. PURE; relabels only, never touches occupancy. A speck with no
+ * differently-labelled neighbour keeps its own region (then its own nearest-palette fill).
  * @param {{labelOf:Int32Array, regions:object[]}} state from {@link growRegions}
  * @param {{occupied:Int32Array, count:number}} occupancy
  * @param {Float64Array} labs
- * @param {{minRegion?:number}} [opts]
+ * @param {{minRegion?:number, absorbDE?:number, tinyFloor?:number}} [opts]
  * @returns {{labelOf:Int32Array, regions:{label:number, cells:number[]}[]}}
  */
-export function absorbSmallRegions(state, occupancy, labs, { minRegion = SEG_DEFAULTS.minRegion } = {}) {
+export function absorbSmallRegions(
+  state,
+  occupancy,
+  labs,
+  { minRegion = SEG_DEFAULTS.minRegion, absorbDE = SEG_DEFAULTS.absorbDE, tinyFloor = SEG_DEFAULTS.tinyFloor } = {},
+) {
   const labelOf = state.labelOf.slice();
   const cellCoords = [...occupiedCells(occupancy)];
   const index = indexCells(occupancy);
@@ -243,6 +259,9 @@ export function absorbSmallRegions(state, occupancy, labs, { minRegion = SEG_DEF
         }
       }
       if (best === -1) continue;
+      // Noise-vs-intent (T-064-01): keep a small region that is colour-DISTINCT from its nearest
+      // neighbour (it is deliberate detail), absorb only genuine noise (tiny fleck or near-in-colour).
+      if (r.cells.length > tinyFloor && bestD > absorbDE) continue;
       for (const ci of r.cells) labelOf[ci] = best;
       changed = true;
     }
@@ -295,6 +314,73 @@ export function gradientAxis(region, cellCoords, labs) {
   return best;
 }
 
+/** Solve a symmetric 3×3 system Ax=b by Gaussian elimination with partial pivoting. Returns null if
+ *  (near-)singular. Tiny + pure; A is the centred-coordinate covariance, b the coord·L* covariance. */
+function solve3(A, b) {
+  const m = [
+    [A[0][0], A[0][1], A[0][2], b[0]],
+    [A[1][0], A[1][1], A[1][2], b[1]],
+    [A[2][0], A[2][1], A[2][2], b[2]],
+  ];
+  for (let col = 0; col < 3; col++) {
+    let piv = col;
+    for (let r = col + 1; r < 3; r++) if (Math.abs(m[r][col]) > Math.abs(m[piv][col])) piv = r;
+    if (Math.abs(m[piv][col]) < 1e-9) return null; // singular / degenerate
+    if (piv !== col) [m[col], m[piv]] = [m[piv], m[col]];
+    for (let r = 0; r < 3; r++) {
+      if (r === col) continue;
+      const f = m[r][col] / m[col][col];
+      for (let c = col; c < 4; c++) m[r][c] -= f * m[col][c];
+    }
+  }
+  return [m[0][3] / m[0][0], m[1][3] / m[1][1], m[2][3] / m[2][2]];
+}
+
+/**
+ * The region's TRUE colour-gradient DIRECTION in voxel space (T-064-01): the least-squares gradient of
+ * L* over the cell coordinates `(i,j,k)`, i.e. solve the centred normal equations `Cov(coord)·g =
+ * Cov(coord, L*)` and normalize `g`. Unlike {@link gradientAxis} (one of the 3 cardinals), this points
+ * along the ACTUAL direction colour changes fastest — so a DIAGONAL gradient bands monotonically instead
+ * of scattering across a cardinal's perpendicular. Sign is oriented dark→light (g points toward
+ * increasing L*). Returns null on a degenerate region (no spatial spread / flat colour / singular cov) so
+ * callers fall back to the cardinal path. PURE.
+ * @returns {[number,number,number]|null} unit direction, or null
+ */
+export function gradientDirection(region, cellCoords, labs) {
+  const n = region.cells.length;
+  if (n < 3) return null;
+  const mean = [0, 0, 0];
+  let mL = 0;
+  for (const ci of region.cells) {
+    mean[0] += cellCoords[ci][0];
+    mean[1] += cellCoords[ci][1];
+    mean[2] += cellCoords[ci][2];
+    mL += labs[ci * 3];
+  }
+  mean[0] /= n; mean[1] /= n; mean[2] /= n; mL /= n;
+  const A = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+  const b = [0, 0, 0];
+  for (const ci of region.cells) {
+    const d = [cellCoords[ci][0] - mean[0], cellCoords[ci][1] - mean[1], cellCoords[ci][2] - mean[2]];
+    const dL = labs[ci * 3] - mL;
+    for (let r = 0; r < 3; r++) {
+      b[r] += d[r] * dL;
+      for (let c = 0; c < 3; c++) A[r][c] += d[r] * d[c];
+    }
+  }
+  // Ridge-regularize: a PLANAR region (e.g. a façade with one coordinate constant) has a rank-deficient
+  // coordinate covariance, so the raw normal equations are singular. A tiny diagonal ridge keeps the
+  // solve well-posed and forces the gradient component of a no-variance axis to ≈0 (its row becomes
+  // [0,ε,0]), so the direction lives in the plane the region actually spans. Negligible on full-rank A.
+  const ridge = 1e-6 * (A[0][0] + A[1][1] + A[2][2] + 1);
+  for (let r = 0; r < 3; r++) A[r][r] += ridge;
+  const g = solve3(A, b);
+  if (!g) return null;
+  const norm = Math.hypot(g[0], g[1], g[2]);
+  if (norm < 1e-9) return null; // no colour trend
+  return [g[0] / norm, g[1] / norm, g[2] / norm];
+}
+
 /**
  * Ordered (Bayer) dither between two adjacent steps: returns 0 (the LOW step) or 1 (the HIGH step). The
  * fraction `frac` of cells assigned the high step is `frac` on average, placed by a fixed 4×4 pattern over
@@ -305,10 +391,12 @@ export function orderedDither(a, b, frac) {
 }
 
 /**
- * BAND a gradient region between ADJACENT palette steps along its gradient axis. Derive the ordered steps
- * (the distinct palette blocks the region's voxels snap to, sorted dark→light by L*), cap them to the
- * axis extent (so adjacent cells never jump >1 step — the ≤2-blocks-across-a-transition AC holds even on a
- * thin region), then per cell map its normalised position → a continuous step.
+ * BAND a gradient region between ADJACENT palette steps along its TRUE gradient DIRECTION
+ * ({@link gradientDirection}; a diagonal gradient bands monotonically instead of scattering on a cardinal
+ * axis — T-064-01). Derive the ordered steps (the distinct palette blocks the region's voxels snap to,
+ * sorted dark→light by L*), cap them to the projected extent (so adjacent cells never jump >1 step — the
+ * ≤2-blocks-across-a-transition AC holds for any direction), then per cell map its normalised projection
+ * position → a continuous step.
  *
  * DEFAULT is a HARD band: each cell takes the NEAREST step (round) → solid colour bands with one-cell-wide
  * transitions, the minimum within-region adjacent variation (so the speckle metric drops, not rises — a
@@ -330,20 +418,35 @@ export function bandRegion(region, cellCoords, labs, palette, { dither = false }
     for (const ci of region.cells) out.set(ci, steps[0]);
     return out;
   }
-  const axis = gradientAxis(region, cellCoords, labs);
-  const sign = axisCorrelation(region, cellCoords, labs, axis) < 0 ? -1 : 1;
-  const perp = [0, 1, 2].filter((d) => d !== axis);
+  // The banding DIRECTION (T-064-01): the true least-squares colour-gradient direction (handles a
+  // DIAGONAL gradient that a single cardinal axis would scatter), already oriented dark→light. Fall back
+  // to the dominant CARDINAL axis (the old behaviour, also keeps `gradientAxis` exercised) when the
+  // direction is degenerate. Either way banding is a 1-D projection `coord·dir`.
+  let dir = gradientDirection(region, cellCoords, labs);
+  if (!dir) {
+    const axis = gradientAxis(region, cellCoords, labs);
+    const sign = axisCorrelation(region, cellCoords, labs, axis) < 0 ? -1 : 1;
+    dir = [0, 0, 0];
+    dir[axis] = sign;
+  }
+  const proj = (ci) => cellCoords[ci][0] * dir[0] + cellCoords[ci][1] * dir[1] + cellCoords[ci][2] * dir[2];
+  // perpendicular pair = the two axes the direction is least aligned with (for the ordered dither).
+  const perp = [0, 1, 2].sort((a, b) => Math.abs(dir[a]) - Math.abs(dir[b])).slice(0, 2);
   let lo = Infinity;
   let hi = -Infinity;
   for (const ci of region.cells) {
-    const c = cellCoords[ci][axis];
+    const c = proj(ci);
     if (c < lo) lo = c;
     if (c > hi) hi = c;
   }
   const extent = hi - lo;
-  // cap steps so (#steps - 1) ≤ extent → at most a 1-step change per adjacent cell.
-  if (extent >= 0 && steps.length - 1 > extent) {
-    const m = Math.max(1, extent + 1);
+  // The largest projection change between two face-adjacent cells is `maxComp` (a unit step along the
+  // axis the direction is most aligned with). Cap the step count so (#steps − 1)·maxComp ≤ extent ⇒
+  // adjacent cells never jump >1 step — the ≤2-blocks-across-a-transition AC holds for ANY direction.
+  const maxComp = Math.max(Math.abs(dir[0]), Math.abs(dir[1]), Math.abs(dir[2])) || 1;
+  const cap = extent > 0 ? Math.floor(extent / maxComp) + 1 : 1;
+  if (steps.length > cap) {
+    const m = Math.max(1, cap);
     const sub = [];
     for (let t = 0; t < m; t++) {
       const idx = m === 1 ? 0 : Math.round((t * (steps.length - 1)) / (m - 1));
@@ -358,11 +461,10 @@ export function bandRegion(region, cellCoords, labs, palette, { dither = false }
     return out;
   }
   for (const ci of region.cells) {
-    let p = extent === 0 ? 0 : (cellCoords[ci][axis] - lo) / extent;
-    if (sign < 0) p = 1 - p;
+    const p = extent === 0 ? 0 : (proj(ci) - lo) / extent;
     const s = p * (K - 1);
     if (!dither) {
-      out.set(ci, steps[Math.min(Math.round(s), K - 1)]); // hard band: nearest step
+      out.set(ci, steps[Math.min(Math.max(Math.round(s), 0), K - 1)]); // hard band: nearest step
       continue;
     }
     const base = Math.floor(s);
@@ -446,7 +548,8 @@ export function offPaletteCount(keys, palette) {
  * @param {{ occupancy:object, surface:{vertices:Float64Array,uvs:Float64Array},
  *           texture:{width:number,height:number,data:Uint8Array|Buffer} }} build
  * @param {{ palette?:{key:string,lab:number[]}[], k?:number, growDE?:number, gradDE?:number,
- *           minRegion?:number, neighbourhood?:6|26, dither?:boolean, dropColor?:number[]|null,
+ *           minRegion?:number, absorbDE?:number, tinyFloor?:number, neighbourhood?:6|26,
+ *           dither?:boolean, dropColor?:number[]|null,
  *           augment?:boolean|object, materialTexture?:boolean|object, metadata?:object, style?:object,
  *           paletteId?:string }} [opts]
  *           `palette` (the fix): the DESIGN-DOC palette `[{key,lab}]` to snap within — the deliberate few
@@ -463,6 +566,8 @@ export function segmentMaterials(build, opts = {}) {
   const growDE = opts.growDE ?? SEG_DEFAULTS.growDE;
   const gradDE = opts.gradDE ?? SEG_DEFAULTS.gradDE;
   const minRegion = opts.minRegion ?? SEG_DEFAULTS.minRegion;
+  const absorbDE = opts.absorbDE ?? SEG_DEFAULTS.absorbDE;
+  const tinyFloor = opts.tinyFloor ?? SEG_DEFAULTS.tinyFloor;
   const neighbourhood = opts.neighbourhood ?? SEG_DEFAULTS.neighbourhood;
 
   // Candidate set: the DESIGN-DOC palette when supplied (the fix — the model's deliberate few blocks),
@@ -479,7 +584,7 @@ export function segmentMaterials(build, opts = {}) {
   const cellCoords = [...occupiedCells(occupancy)];
 
   let state = growRegions(occupancy, labs, { growDE, neighbourhood });
-  state = absorbSmallRegions(state, occupancy, labs, { minRegion });
+  state = absorbSmallRegions(state, occupancy, labs, { minRegion, absorbDE, tinyFloor });
 
   const keys = new Array(occupancy.count);
   for (const region of state.regions) {

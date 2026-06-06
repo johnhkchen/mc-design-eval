@@ -13,6 +13,7 @@ import {
   regionStats,
   absorbSmallRegions,
   gradientAxis,
+  gradientDirection,
   orderedDither,
   bandRegion,
   fillRegion,
@@ -109,6 +110,42 @@ test("absorbSmallRegions: a single off-colour speck is absorbed into its surroun
   assert.equal(absorbed.labelOf.length, occ.count, "absorption never changes occupancy");
 });
 
+// --- absorbSmallRegions: T-064-01 noise-vs-intent rule ----------------------
+
+test("absorbSmallRegions: a colour-DISTINCT small region is KEPT (legitimate detail, not noise)", () => {
+  // a 4×4 white cap with a 2×2 RED spot at the corner — the spot is small but a different material.
+  const cells = [];
+  for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) cells.push([i, j, 0]);
+  const occ = makeOcc([4, 4, 1], cells);
+  const labs = labsOf(cells.map(([i, j]) => (i < 2 && j < 2 ? [220, 20, 20] : [235, 235, 235])));
+  const grown = growRegions(occ, labs, { growDE: 8 });
+  // size-4 spot < minRegion 12, but its ΔE to the white neighbour ≫ absorbDE → KEEP.
+  const kept = absorbSmallRegions(grown, occ, labs, { minRegion: 12, absorbDE: 22, tinyFloor: 2 });
+  assert.equal(kept.regions.length, 2, "the distinct spot survives as its own region");
+});
+
+test("absorbSmallRegions: a colour-CLOSE small region IS absorbed (real noise)", () => {
+  // same shape, but the spot is only slightly off the surrounding grey (within absorbDE) → noise.
+  const cells = [];
+  for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) cells.push([i, j, 0]);
+  const occ = makeOcc([4, 4, 1], cells);
+  const labs = labsOf(cells.map(([i, j]) => (i < 2 && j < 2 ? [120, 120, 120] : [140, 140, 140])));
+  const grown = growRegions(occ, labs, { growDE: 5 }); // 5 < the ~7.7 ΔE seam → starts as 2 regions
+  assert.ok(grown.regions.length >= 2, "the close spot starts separate at this growDE");
+  const absorbed = absorbSmallRegions(grown, occ, labs, { minRegion: 12, absorbDE: 22, tinyFloor: 2 });
+  assert.equal(absorbed.regions.length, 1, "a near-in-colour small region is absorbed as noise");
+});
+
+test("absorbSmallRegions: a tiny (≤tinyFloor) fleck is always absorbed even if colour-distinct", () => {
+  const cells = [];
+  for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) cells.push([i, j, 0]);
+  const occ = makeOcc([3, 3, 1], cells);
+  const labs = labsOf(cells.map(([i, j]) => (i === 1 && j === 1 ? [220, 20, 20] : [235, 235, 235])));
+  const grown = growRegions(occ, labs, { growDE: 8 });
+  const absorbed = absorbSmallRegions(grown, occ, labs, { minRegion: 12, absorbDE: 5, tinyFloor: 2 });
+  assert.equal(absorbed.regions.length, 1, "a single-voxel snap fleck is noise regardless of colour");
+});
+
 // --- gradientAxis -----------------------------------------------------------
 
 test("gradientAxis: picks the axis the colour varies along", () => {
@@ -116,6 +153,75 @@ test("gradientAxis: picks the axis the colour varies along", () => {
   const occ = makeOcc([1, 1, 8], cells);
   const labs = labsOf(cells.map(([, , k]) => { const v = 20 + k * 28; return [v, v, v]; }));
   assert.equal(gradientAxis({ cells: [...Array(8).keys()] }, cellCoordsOf(occ), labs), 2);
+});
+
+// --- gradientDirection (T-064-01: true/diagonal gradient direction) ---------
+
+test("gradientDirection: a DIAGONAL gradient points along the diagonal, not a cardinal", () => {
+  // an 8×8 slab in the i–k plane (j constant); L* increases along i+k.
+  const cells = [];
+  for (let i = 0; i < 8; i++) for (let k = 0; k < 8; k++) cells.push([i, 0, k]);
+  const occ = makeOcc([8, 1, 8], cells);
+  const labs = labsOf(cells.map(([i, , k]) => { const v = 20 + (i + k) * 12; return [v, v, v]; }));
+  const dir = gradientDirection({ cells: [...Array(cells.length).keys()] }, cellCoordsOf(occ), labs);
+  assert.ok(dir, "a planar diagonal region yields a direction (ridge keeps it well-posed)");
+  // i and k components ≈ equal and positive; j ≈ 0.
+  assert.ok(Math.abs(dir[1]) < 1e-3, `j component ≈ 0 (got ${dir[1]})`);
+  assert.ok(dir[0] > 0.5 && dir[2] > 0.5, `i,k both strongly positive (got ${dir[0]},${dir[2]})`);
+  assert.ok(Math.abs(dir[0] - dir[2]) < 0.1, "symmetric diagonal → i ≈ k component");
+});
+
+test("gradientDirection: a flat-colour region returns null (no trend)", () => {
+  const cells = Array.from({ length: 9 }, (_, n) => [n, 0, 0]);
+  const occ = makeOcc([9, 1, 1], cells);
+  const labs = labsOf(cells.map(() => [120, 120, 120]));
+  assert.equal(gradientDirection({ cells: [...Array(9).keys()] }, cellCoordsOf(occ), labs), null);
+});
+
+// --- bandRegion along a DIAGONAL (AC#2) -------------------------------------
+
+test("bandRegion: a DIAGONAL gradient bands MONOTONICALLY along the diagonal (≤2 blocks per transition)", () => {
+  // 6×6 slab, L* increases along i+k. A cardinal banding would scatter (cells at equal i, varying k get
+  // different bands → non-monotonic across k). The true-direction banding must be monotonic on the diagonal.
+  const W = 6;
+  const cells = [];
+  for (let i = 0; i < W; i++) for (let k = 0; k < W; k++) cells.push([i, 0, k]);
+  const occ = makeOcc([W, 1, W], cells);
+  const cc = cellCoordsOf(occ);
+  const labs = labsOf(cells.map(([i, , k]) => { const v = 15 + (i + k) * 18; return [v, v, v]; }));
+  const region = { cells: [...Array(cells.length).keys()] };
+  const filled = bandRegion(region, cc, labs, PAL);
+
+  const order = new Map(PAL.slice().sort((a, b) => a.lab[0] - b.lab[0]).map((e, n) => [e.key, n]));
+  const idxAt = new Map(); // "i,k" → step index
+  cells.forEach(([i, , k], n) => idxAt.set(`${i},${k}`, order.get(filled.get(n))));
+
+  // (1) monotonic non-decreasing along the diagonal coordinate s = i+k.
+  const byS = new Map();
+  for (const [key, step] of idxAt) {
+    const [i, k] = key.split(",").map(Number);
+    const s = i + k;
+    if (!byS.has(s)) byS.set(s, new Set());
+    byS.get(s).add(step);
+  }
+  const ss = [...byS.keys()].sort((a, b) => a - b);
+  let prevMax = -1;
+  for (const s of ss) {
+    const steps = [...byS.get(s)];
+    const lo = Math.min(...steps);
+    assert.ok(lo >= prevMax, `band non-decreasing along the diagonal at s=${s}`);
+    prevMax = Math.max(...steps);
+  }
+  // (2) ≤1 step difference across every FACE-adjacent transition (≤2 distinct blocks across it).
+  for (const [i, , k] of cells) {
+    const here = idxAt.get(`${i},${k}`);
+    for (const [di, dk] of [[1, 0], [0, 1]]) {
+      const nb = idxAt.get(`${i + di},${k + dk}`);
+      if (nb === undefined) continue;
+      assert.ok(Math.abs(nb - here) <= 1, `≤1 step across (${i},${k})→(${i + di},${k + dk}): ${here}→${nb}`);
+    }
+  }
+  assert.ok(distinct([...filled.values()]) >= 2, "the diagonal is actually banded, not flattened");
 });
 
 // --- orderedDither ----------------------------------------------------------
