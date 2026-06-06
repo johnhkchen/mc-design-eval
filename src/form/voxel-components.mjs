@@ -10,6 +10,10 @@
 // whether an island floats below the build. We lift the labeling core here (`componentLabels`) and `glb-thin`
 // now delegates to it — one flood fill, two consumers. `strayVoxelStats` builds on the labels.
 //
+// This module also ACTS on occupancy, not only measures it: `pruneStrays` (T-063-01, E-19) drops disconnected
+// debris — floating islands and (moai) duplicate masses + hallucinated connectors — keeping the principal
+// component plus any component large enough to be a legitimate separate part (e.g. a detached arrow).
+//
 // PURE: no GL, no GLB, no WebP, no network. Reads only `occupied`/`count` (+ `j` coords). Unit-tested offline.
 
 import { occupiedCells } from "./glb-voxelize.mjs";
@@ -120,4 +124,46 @@ export function strayVoxelStats(occupancy, { connectivity = 6 } = {}) {
     strayCount: total - largestCount,
     subFloorCount,
   };
+}
+
+/**
+ * Drop STRAY components from an occupancy: keep the largest component plus any component whose size is ≥ a
+ * RELATIVE floor (`minFraction × largestCount`) and ≥ an absolute floor (`minCells`). The geometric cleanup
+ * for TRELLIS debris — floating islands, and (moai) duplicate masses + hallucinated connecting bars that are
+ * roughly half the principal mass (so no absolute small-island floor can drop them; the discriminator must be
+ * relative to the principal mass). A legitimately separate part (e.g. a detached arrow) that clears the floor
+ * is KEPT, so this is not "keep only the biggest".
+ *
+ * PURE; deterministic; preserves occupiedCells order (the join key downstream colour sampling relies on). The
+ * stale `thin` diagnostic (its component count described the pre-prune grid) is dropped from the result;
+ * `dims`/`bounds`/`voxelSize`/`scale` pass through. Empty or single-component occupancy → returned unchanged.
+ * Reuses the shared flood-fill core (`componentLabels`) — no fourth DFS.
+ *
+ * @param {{occupied:Int32Array, count:number, dims?:number[], bounds?:object, voxelSize?:number, scale?:number}} occupancy
+ * @param {{connectivity?:number, minFraction?:number, minCells?:number}} [opts]
+ *   connectivity 6 (face, default) or 26 (box); minFraction default 0.5 (component must be ≥ half the largest
+ *   to survive — drops moai's 0.496×/0.430× duplicate masses, keeps an equal-sized legitimate part); minCells
+ *   default 0 (an optional additional absolute cell floor, inactive by default). Boundary is INCLUSIVE (`>=`).
+ * @returns {object} a new occupancy with `occupied`/`count` pruned (or the input unchanged on a no-op)
+ */
+export function pruneStrays(occupancy, { connectivity = 6, minFraction = 0.5, minCells = 0 } = {}) {
+  if (!occupancy.count) return occupancy;
+  const { labels, sizes } = componentLabels(occupancy, { connectivity });
+  if (sizes.length <= 1) return occupancy; // single solid mass — nothing to prune
+
+  // largest component: max size, lowest label index on ties (matches strayVoxelStats).
+  let largest = 0;
+  for (let l = 1; l < sizes.length; l++) if (sizes[l] > sizes[largest]) largest = l;
+  const floor = Math.max(minCells, minFraction * sizes[largest]);
+  const keep = sizes.map((s, l) => l === largest || s >= floor);
+
+  const kept = [];
+  let n = 0;
+  for (const [i, j, k] of occupiedCells(occupancy)) {
+    if (keep[labels[n]]) kept.push(i, j, k);
+    n++;
+  }
+  const pruned = { ...occupancy, occupied: Int32Array.from(kept), count: kept.length / 3 };
+  delete pruned.thin;
+  return pruned;
 }

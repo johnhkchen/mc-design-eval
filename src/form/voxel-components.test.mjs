@@ -5,7 +5,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { componentLabels, strayVoxelStats } from "./voxel-components.mjs";
+import { componentLabels, strayVoxelStats, pruneStrays } from "./voxel-components.mjs";
 import { connectedComponents } from "./glb-thin.mjs";
 
 /** Occupancy from a dims triple + an ordered [i,j,k] cell list (occupiedCells order = list order). */
@@ -74,6 +74,84 @@ test("strayVoxelStats: empty occupancy → all-zero struct, no throw", () => {
   assert.deepEqual(strayVoxelStats(occ), {
     components: 0, largestCount: 0, largestFraction: 0, strayCount: 0, subFloorCount: 0,
   });
+});
+
+// --- pruneStrays: AC cases --------------------------------------------------
+
+/** Helper: offset a box's cells by (di,dj,dk). */
+const shift = (cells, di, dj, dk) => cells.map(([i, j, k]) => [i + di, j + dj, k + dk]);
+
+test("pruneStrays: a tiny floating island is removed, the main mass kept", () => {
+  const occ = makeOcc([10, 10, 10], [...box(3, 3, 3), [9, 9, 9]]);
+  const p = pruneStrays(occ);
+  assert.equal(p.count, 27, "the lone island cell is dropped");
+  const s = strayVoxelStats(p);
+  assert.equal(s.components, 1);
+  assert.equal(s.largestFraction, 1);
+});
+
+test("pruneStrays: two large legitimate parts → both kept", () => {
+  // two equal 3×3×3 masses with a gap; each is ≥ 0.5× the other → neither is stray.
+  const occ = makeOcc([12, 4, 4], [...box(3, 3, 3), ...shift(box(3, 3, 3), 8, 0, 0)]);
+  const p = pruneStrays(occ);
+  assert.equal(p.count, 54, "both legitimate parts survive");
+  assert.equal(componentLabels(p).count, 2);
+});
+
+test("pruneStrays: a moai-like half-sized duplicate mass is dropped", () => {
+  // main 4×4×4 = 64; detached 3×3×3 = 27 (ratio 0.42 < 0.5) → dropped, leaving one solid mass.
+  const occ = makeOcc([16, 4, 4], [...box(4, 4, 4), ...shift(box(3, 3, 3), 10, 0, 0)]);
+  const p = pruneStrays(occ);
+  assert.equal(p.count, 64);
+  assert.equal(strayVoxelStats(p).largestFraction, 1, "after pruning the build is a single mass");
+});
+
+test("pruneStrays: size-floor boundary is inclusive (≥ floor kept, below dropped)", () => {
+  // main = 8 cells (2×2×2); second component sized to hit the floor exactly. floor = 0.5 × 8 = 4.
+  const main = box(2, 2, 2); // 8 cells, j 0..1
+  const four = [[8, 0, 0], [9, 0, 0], [8, 1, 0], [9, 1, 0]]; // 4 cells, == floor → kept
+  const three = [[8, 0, 0], [9, 0, 0], [8, 1, 0]]; //            3 cells, <  floor → dropped
+  assert.equal(pruneStrays(makeOcc([12, 4, 4], [...main, ...four])).count, 12, "exactly-floor part kept");
+  assert.equal(pruneStrays(makeOcc([12, 4, 4], [...main, ...three])).count, 8, "below-floor part dropped");
+});
+
+test("pruneStrays: minFraction is tunable (1.01 keeps only the largest)", () => {
+  const occ = makeOcc([12, 4, 4], [...box(3, 3, 3), ...shift(box(3, 3, 3), 8, 0, 0)]);
+  const p = pruneStrays(occ, { minFraction: 1.01 }); // nothing but the argmax can clear the floor
+  assert.equal(p.count, 27, "only the largest (first-discovered on a tie) survives");
+});
+
+test("pruneStrays: minCells adds an absolute floor", () => {
+  // two equal 3×3×3 masses (27 each); minCells 28 forces both non-largest below the absolute floor.
+  const occ = makeOcc([12, 4, 4], [...box(3, 3, 3), ...shift(box(3, 3, 3), 8, 0, 0)]);
+  assert.equal(pruneStrays(occ, { minCells: 28 }).count, 27, "the equal-but-sub-minCells part is dropped");
+});
+
+test("pruneStrays: no-op on a single solid mass (count unchanged)", () => {
+  const occ = makeOcc([3, 3, 3], box(3, 3, 3));
+  const p = pruneStrays(occ);
+  assert.equal(p.count, 27);
+});
+
+test("pruneStrays: empty occupancy returned unchanged, no throw", () => {
+  const occ = makeOcc([1, 1, 1], []);
+  assert.equal(pruneStrays(occ).count, 0);
+});
+
+test("pruneStrays: surviving cells preserve occupiedCells order (downstream join key)", () => {
+  // main block first, island last; after pruning the survivors must equal the main block IN ORDER.
+  const main = box(2, 2, 2);
+  const occ = makeOcc([10, 10, 10], [...main, [9, 9, 9]]);
+  const p = pruneStrays(occ);
+  const got = [...p.occupied];
+  const want = main.flat();
+  assert.deepEqual(got, want, "order preserved; only the trailing island removed");
+});
+
+test("pruneStrays: drops the stale thin diagnostic from the result", () => {
+  const occ = makeOcc([10, 10, 10], [...box(3, 3, 3), [9, 9, 9]]);
+  occ.thin = { surfaceOnlyCount: 1, components: 2 }; // simulate a voxelizeGlbThin field
+  assert.equal("thin" in pruneStrays(occ), false, "a stale component count must not survive pruning");
 });
 
 // --- componentLabels: core invariants + connectivity ------------------------
