@@ -32,6 +32,7 @@ import { parseGlbColoredSurface } from "../../src/form/glb-mesh.mjs";
 import { segmentMaterials, speckleScore, offPaletteCount } from "../../src/form/material-segment.mjs";
 import { paletteFromManifest, assertPaletteDiscipline } from "../../src/form/glb-voxel-build.mjs";
 import { augmentPalette } from "../../src/form/palette-augment.mjs";
+import { pruneStrays, strayVoxelStats } from "../../src/form/voxel-components.mjs";
 import { extractTexturePalette } from "../../src/form/material-clean.mjs";
 import { valueGate, realizedPaletteFromArtifact } from "../../src/color/value-gate.mjs";
 import { assembleRemeasure } from "../../src/form/remeasure.mjs";
@@ -169,6 +170,11 @@ async function buildSubject(subj, { scale, renderArtifact, regenMissing }) {
   const t0 = Date.now();
   const occBase = voxelizeGlb(glbBytes, { scale });
   const occThin = voxelizeGlbThin(glbBytes, { scale });
+  // T-063-01: drop TRELLIS strays (floating islands; moai's duplicate masses + connectors) geometrically —
+  // keep the largest 6-connected component plus any legitimately large part. No-op for the already-clean 6.
+  const occPruned = pruneStrays(occThin);
+  const strayBefore = strayVoxelStats(occThin);
+  const strayAfter = strayVoxelStats(occPruned);
   const surface = parseGlbColoredSurface(glbBytes);
   if (!surface.baseColor) throw new Error(`${subj.key}: GLB has no baseColor texture`);
   const texture = await decodeTexture(surface.baseColor);
@@ -180,16 +186,19 @@ async function buildSubject(subj, { scale, renderArtifact, regenMissing }) {
   const prim = paletteFromManifest(designManifest);
   const aug = augmentPalette(prim, texture);
 
-  // The combined build: thin occupancy → segment (value-true colour + clean materials) under the palette.
+  // The combined build: thin occupancy → stray-pruned → segment (value-true colour + clean materials) under
+  // the AUGMENTED palette. T-063-01 AC #4: pass `aug` (= augmentPalette(prim,texture), already computed for
+  // the discipline guard) directly, so the snap-candidate set IS the guard set — single source of truth — and
+  // the ≤2 gated secondary blocks are placed. (Was `palette: prim, augment: true`, which re-augmented
+  // internally to an equal set; this removes that divergence risk without changing the realized manifest.)
   const artifact = segmentMaterials(
-    { occupancy: occThin, surface, texture },
+    { occupancy: occPruned, surface, texture },
     {
-      palette: prim,
-      augment: true,
+      palette: aug,
       metadata: { trial_id: `${subj.key}-e18-combined` },
       style: {
         name: "glb-voxel-e18",
-        rationale: `Thin-preserved voxelization (${occBase.count}→${occThin.count} cells) then region-segmented under the augmented design-doc palette (${prim.length} design-doc + ≤2 gated secondary).`,
+        rationale: `Thin-preserved voxelization then stray-pruned (${occBase.count}→${occThin.count}→${occPruned.count} cells) then region-segmented under the augmented design-doc palette (${prim.length} design-doc + ≤2 gated secondary).`,
       },
     },
   );
@@ -202,7 +211,7 @@ async function buildSubject(subj, { scale, renderArtifact, regenMissing }) {
   const eKeys = keysFromArtifact(artifact);
   const e18 = {
     formIoU: await judgeIoU(renderPath, glbBytes),
-    speckle: round3(speckleScore(occThin, eKeys)),
+    speckle: round3(speckleScore(occPruned, eKeys)),
     distinct: artifact.palette.manifest.length,
     offPalette: offPaletteCount(eKeys, aug),
     valueDeltaE: valueDeltaEOf(artifact, refClusters),
@@ -216,15 +225,32 @@ async function buildSubject(subj, { scale, renderArtifact, regenMissing }) {
     surfaceOnlyCount: occThin.thin?.surfaceOnlyCount ?? null,
     occBase: occBase.count,
     occThin: occThin.count,
+    occPruned: occPruned.count,
+  };
+  // T-063-01 AC #5: stray-voxel count before (thin) / after (pruned) per subject (the S-062 metric).
+  const stray = {
+    before: {
+      components: strayBefore.components,
+      largestFraction: round3(strayBefore.largestFraction),
+      strayCount: strayBefore.strayCount,
+      subFloorCount: strayBefore.subFloorCount,
+    },
+    after: {
+      components: strayAfter.components,
+      largestFraction: round3(strayAfter.largestFraction),
+      strayCount: strayAfter.strayCount,
+      subFloorCount: strayAfter.subFloorCount,
+    },
   };
 
   const secs = Number(((Date.now() - t0) / 1000).toFixed(1));
-  const row = { subject: subj.key, r1, r2, e18, thin, scale, ...(regenerated ? { regenerated: true } : {}) };
+  const row = { subject: subj.key, r1, r2, e18, thin, stray, scale, ...(regenerated ? { regenerated: true } : {}) };
   await writeFile(join(dir, "summary.json"), JSON.stringify(row, null, 2) + "\n");
   console.error(
     `${subj.key}: IoU ${r1?.formIoU}/${r2?.formIoU}/${e18.formIoU} · speckle ${r1?.speckle}/${r2?.speckle}/${e18.speckle} · ` +
       `distinct ${r1?.distinct}/${r2?.distinct}/${e18.distinct} · off-pal ${r1?.offPalette}/${r2?.offPalette}/${e18.offPalette} · ` +
-      `ΔE ${r1?.valueDeltaE}/${r2?.valueDeltaE}/${e18.valueDeltaE} · thin ${thin.occBase}→${thin.occThin} comp ${thin.components} (${secs}s)`,
+      `ΔE ${r1?.valueDeltaE}/${r2?.valueDeltaE}/${e18.valueDeltaE} · thin ${thin.occBase}→${thin.occThin}→${thin.occPruned} ` +
+      `stray ${stray.before.strayCount}→${stray.after.strayCount} (frac ${stray.before.largestFraction}→${stray.after.largestFraction}) (${secs}s)`,
   );
   return row;
 }
