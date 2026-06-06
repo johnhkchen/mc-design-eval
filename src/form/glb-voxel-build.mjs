@@ -81,6 +81,44 @@ export function paletteFromManifest(manifest, table = loadBlockTable()) {
   return palette;
 }
 
+/**
+ * THE PALETTE-DISCIPLINE GUARD (E-18 T-058-02). Fail LOUDLY if a built artifact's manifest contains a block
+ * outside its AUGMENTED design-doc palette — so a future regression to a full-table / texture-median-cut snap
+ * cannot slip back in, while the gated secondary (T-058-03) is permitted. The consumer-side assert twin of
+ * `assertArtifact` (schema): runners call it right after building, before writing. PURE; no I/O, no GL.
+ *
+ * `palette` is the augmented set to check against — `augmentPalette(paletteFromManifest(manifest), texture)`
+ * (or the bare design-doc palette when no augmentation is used). Namespace-tolerant: placement keys are
+ * `minecraft:`-stripped to match the bare table keys in `palette`.
+ *
+ * @param {{palette:{manifest:string[]}}} artifact  a built DesignArtifact (manifest = unique placed blocks)
+ * @param {{key:string}[]} palette  the augmented design-doc palette to confine to
+ * @param {{cap?:number}} [opts]  optional distinct-block ceiling (e.g. design-doc size + K secondary)
+ * @returns {object} the artifact (chainable) on success
+ * @throws if any manifest block is outside `palette`, or distinct count exceeds `cap`
+ */
+export function assertPaletteDiscipline(artifact, palette, { cap } = {}) {
+  if (!artifact?.palette?.manifest || !Array.isArray(artifact.palette.manifest)) {
+    throw new Error("assertPaletteDiscipline: artifact.palette.manifest must be an array of block names");
+  }
+  if (!Array.isArray(palette) || palette.length === 0) {
+    throw new Error("assertPaletteDiscipline: palette must be a non-empty array of {key}");
+  }
+  const allowed = new Set(palette.map((e) => String(e.key).replace(/^minecraft:/, "")));
+  const manifest = artifact.palette.manifest;
+  const off = manifest.filter((b) => !allowed.has(String(b).replace(/^minecraft:/, "")));
+  if (off.length > 0) {
+    throw new Error(
+      `assertPaletteDiscipline: ${off.length} block(s) outside the augmented design-doc palette ` +
+        `(size ${palette.length}): ${off.join(", ")}`,
+    );
+  }
+  if (Number.isFinite(cap) && manifest.length > cap) {
+    throw new Error(`assertPaletteDiscipline: distinct-block count ${manifest.length} exceeds cap ${cap}`);
+  }
+  return artifact;
+}
+
 /** Clamp `v` to `[0, n-1]` (texel index safety after a UV→pixel map). */
 function clampIdx(v, n) {
   return v < 0 ? 0 : v >= n ? n - 1 : v;

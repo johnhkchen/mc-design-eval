@@ -10,7 +10,9 @@ import {
   paletteFromManifest,
   sampleSurfaceColors,
   colorVoxelsToArtifact,
+  assertPaletteDiscipline,
 } from "./glb-voxel-build.mjs";
+import { augmentPalette } from "./palette-augment.mjs";
 import { srgbToLab, nearestLab } from "../color/cielab.mjs";
 import { assertArtifact } from "../artifact.mjs";
 
@@ -146,4 +148,74 @@ test("blockPaletteFromTable: the committed 305-block table → non-empty {key,la
 
 test("blockPaletteFromTable: rejects an empty/garbage table", () => {
   assert.throws(() => blockPaletteFromTable({ blocks: [] }), /non-empty/);
+});
+
+// --- assertPaletteDiscipline — the E-18 T-058-02 palette-discipline guard --------------------------------
+
+test("assertPaletteDiscipline: manifest ⊆ palette returns the artifact (no throw)", () => {
+  const colors = Uint8Array.from([255, 0, 0, 255, 0, 0, 0, 0, 255, 0, 0, 255]); // red, red, blue, blue
+  const art = colorVoxelsToArtifact(occ2x1x2(), colors, { palette: TINY_PALETTE });
+  // both placed blocks (red_wool, blue_wool) are in TINY_PALETTE → passes, returns the same artifact.
+  assert.equal(assertPaletteDiscipline(art, TINY_PALETTE), art);
+});
+
+test("assertPaletteDiscipline: a manifest block outside the palette throws, naming it", () => {
+  const colors = Uint8Array.from([255, 0, 0, 255, 0, 0, 0, 0, 255, 0, 0, 255]); // red, red, blue, blue
+  const art = colorVoxelsToArtifact(occ2x1x2(), colors, { palette: TINY_PALETTE });
+  // art uses red/blue wool; checking against a palette that lacks blue_wool must throw naming blue_wool.
+  const redOnly = [{ key: "red_wool", lab: srgbToLab([255, 0, 0]) }];
+  assert.throws(() => assertPaletteDiscipline(art, redOnly), /outside the augmented design-doc palette/);
+  assert.throws(() => assertPaletteDiscipline(art, redOnly), /blue_wool/);
+});
+
+test("assertPaletteDiscipline: cap trips on bloat even when every block is in-palette", () => {
+  const art = colorVoxelsToArtifact(occ2x1x2(), new Uint8Array(12), { palette: TINY_PALETTE });
+  // manifest is 1 distinct block (all-black → blue_wool) here; force the cap below the count.
+  const big = colorVoxelsToArtifact(
+    occ2x1x2(),
+    Uint8Array.from([255, 0, 0, 255, 0, 0, 0, 0, 255, 0, 0, 255]),
+    { palette: TINY_PALETTE },
+  );
+  assert.equal(big.palette.manifest.length, 2);
+  assert.doesNotThrow(() => assertPaletteDiscipline(big, TINY_PALETTE, { cap: 2 }));
+  assert.throws(() => assertPaletteDiscipline(big, TINY_PALETTE, { cap: 1 }), /exceeds cap 1/);
+  assert.doesNotThrow(() => assertPaletteDiscipline(art, TINY_PALETTE, { cap: 2 }));
+});
+
+test("assertPaletteDiscipline: namespace-tolerant (minecraft: placement vs bare palette key)", () => {
+  // manifest carries namespaced blocks; palette carries bare keys — must still match.
+  const art = { palette: { manifest: ["minecraft:red_wool", "minecraft:blue_wool"] }, placements: [] };
+  assert.doesNotThrow(() => assertPaletteDiscipline(art, TINY_PALETTE));
+  // and the reverse: bare manifest vs namespaced palette keys.
+  const art2 = { palette: { manifest: ["red_wool"] }, placements: [] };
+  assert.doesNotThrow(() => assertPaletteDiscipline(art2, [{ key: "minecraft:red_wool", lab: [0, 0, 0] }]));
+});
+
+test("assertPaletteDiscipline + augmentPalette: an augmented build passes the guard at cap size+K", () => {
+  // Synthetic value-true table: a neutral design-doc block + a saturated red the texture will under-serve.
+  const table = {
+    blocks: [
+      { block: "gray_concrete", lab: srgbToLab([128, 128, 128]) },
+      { block: "red_concrete", lab: srgbToLab([200, 20, 20]) },
+    ],
+  };
+  const prim = [{ key: "gray_concrete", lab: srgbToLab([128, 128, 128]) }]; // design-doc: 1 block
+  // A texture that is mostly saturated red (an underserved, high-coverage colour) → augment should add red.
+  const W = 8;
+  const H = 8;
+  const data = new Uint8Array(W * H * 4);
+  for (let p = 0; p < W * H; p++) {
+    data[p * 4] = 200;
+    data[p * 4 + 1] = 20;
+    data[p * 4 + 2] = 20;
+    data[p * 4 + 3] = 255;
+  }
+  const texture = { width: W, height: H, data };
+  const aug = augmentPalette(prim, texture, table, { minCoverage: 0.01 });
+  assert.ok(aug.length >= prim.length); // augmentation never shrinks the palette
+  // Build a 4-cell red artifact; under `prim` alone red snaps to gray (the drift), but `aug` includes red.
+  const redColors = Uint8Array.from([200, 20, 20, 200, 20, 20, 200, 20, 20, 200, 20, 20]);
+  const art = colorVoxelsToArtifact(occ2x1x2(), redColors, { palette: aug });
+  assert.doesNotThrow(() => assertPaletteDiscipline(art, aug, { cap: prim.length + 2 }));
+  assert.doesNotThrow(() => assertArtifact(art));
 });
