@@ -1,0 +1,56 @@
+// Per-face resemblance gate — accept-if-closer, P14-safe (T-079-01, story S-079, epic E-23).
+//
+// AC #5: a paint is accepted per-face only if it moves the build face TOWARD the concept's same face;
+// a paint that doesn't is rolled back. This is the E-22 resemblance gate (`resemblance.mjs`
+// zoneAgreement/setAgreement) applied PER FACE, and the hill-climb accept contract mirrors
+// `revise/loop.mjs` exactly — `after > before + epsilon` else roll back (P14: a non-improving face is
+// reverted, never committed). The verdict a human trusts remains the face triptych + the categorical
+// judge (E-22 Rule 2); these numbers are the DIAGNOSTIC nudge the gate hill-climbs on, no more.
+//
+// PURE scorer (operates on already-decoded face RGBA + an injected block table — no GL, no new colour
+// math) + a PURE gate decision. The GL re-render of each face is the runner's impure edge.
+
+import { zoneAgreement, setAgreement, buildPalette } from "../form/resemblance.mjs";
+import { medianCutLab, aggregateForeground } from "../color/palette-extract.mjs";
+import { CONCEPT_BG } from "../form/form-fidelity.mjs";
+
+export const FACE_RESEMBLANCE_SCHEMA = "face-resemblance/v1";
+
+/**
+ * Score how much a BUILD face image resembles the concept's SAME face — the per-face accept signal.
+ * Reuses the E-22 zone agreement (materials in the same places) as the headline `score`, plus set
+ * agreement (same materials at all) as a diagnostic. Both block-grounded via the injected table. PURE.
+ * @param {{width:number,height:number,data:Uint8Array}} buildFaceImg   decoded render of the build face
+ * @param {{width:number,height:number,data:Uint8Array}} conceptFaceImg decoded concept (same face)
+ * @param {object} blockTable  a loadBlockTable() result (injected — the core never reads the FS)
+ * @param {{artifact?:object} & object} [opts]  forwarded to the E-22 scorers; `artifact` enables set agreement
+ * @returns {{schema:string, score:number|null, zone:object, set:object|null}}
+ */
+export function faceResemblance(buildFaceImg, conceptFaceImg, blockTable, opts = {}) {
+  const zone = zoneAgreement(buildFaceImg, conceptFaceImg, blockTable, opts);
+  let set = null;
+  if (opts.artifact) {
+    const buildPal = buildPalette(opts.artifact, blockTable, opts);
+    const conceptClusters = medianCutLab(
+      aggregateForeground(conceptFaceImg, CONCEPT_BG).points,
+      opts.conceptK ?? 6,
+    );
+    set = setAgreement(buildPal, conceptClusters, opts);
+  }
+  return { schema: FACE_RESEMBLANCE_SCHEMA, score: zone.score, zone, set };
+}
+
+/**
+ * The P14-safe accept decision: accept a paint pass only when the face's resemblance STRICTLY improves
+ * (`after > before + epsilon`), mirroring revise/loop's gate. A null after-score (e.g. an empty face)
+ * is never an improvement. PURE.
+ * @param {{before:number|null, after:number|null, epsilon?:number}} args
+ * @returns {{accepted:boolean, before:number|null, after:number|null, delta:number|null, epsilon:number}}
+ */
+export function acceptIfCloser({ before, after, epsilon = 0 }) {
+  const b = before == null ? null : before;
+  const a = after == null ? null : after;
+  const delta = b == null || a == null ? null : Math.round((a - b) * 1000) / 1000;
+  const accepted = a != null && b != null && a > b + epsilon;
+  return { accepted, before: b, after: a, delta, epsilon };
+}
