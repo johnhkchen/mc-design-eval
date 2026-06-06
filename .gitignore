@@ -69,3 +69,7 @@ benchmarks/sculpture/material-assign/**/render-3q.png
 # E-21 concept material-correction renders (T-073-01) — region crops + before/after, regen via
 # `node benchmarks/sculpture/material-correct.mjs`. Durable record: material-correct/<subj>.{json,md} + artifact.json.
 benchmarks/sculpture/material-correct/**/*.png
+
+# E-21 concept-materials A/B renders (T-074-01) — before/after PNGs, regen via `node benchmarks/sculpture/
+# concept-materials-ab.mjs`. Durable record: concept-materials-ab.{json,md} + concept-materials/<subj>/*-artifact.json.
+benchmarks/sculpture/concept-materials/**/*.png

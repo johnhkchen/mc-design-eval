@@ -1,0 +1,286 @@
+{
+  "schema": "concept-materials-ab/v1",
+  "scale": 32,
+  "generatedFrom": "concept-materials-ab live sweep (colorimetric E-19 before vs concept-grounded map+feature-assign after)",
+  "note": "Per subject two builds: BEFORE = colorimetric (mean-colour segmentMaterials, the E-19 authority); AFTER = concept-grounded (T-071 map → T-072 feature-assign). distinct = palette size (the growth axis); speckle / off-palette = cleanliness (lower better); near-tone collapsed→restored = the headline; trueByFeature = each map block dominates its intended feature; growth = blocks added back vs the design-doc, each with its concept justification.",
+  "headline": {
+    "question": "Is the near-tone material distinction restored where the concept put it, clean (E-19 coherence held) and true (right material per feature), with concept-justified palette growth?",
+    "restoredSubjects": [
+      "gatehouse"
+    ],
+    "overReachSubjects": [
+      "cottage"
+    ],
+    "deferredSubjects": [],
+    "collapsedPairsBefore": 6,
+    "restoredPairsAfter": 3,
+    "verdict": "Restored on the architectural headline; honest over-reach recorded on organic forms (see ledger).",
+    "note": "restored = a colorimetric near-tone collapse is present again, placed by feature; over-reach = a map block dominates the wrong feature OR growth is unjustified (honest); no-distinction = monochrome subject, growth must stay flat (bloat control); deferred = no after build."
+  },
+  "judges": {
+    "restored": [
+      "gatehouse"
+    ],
+    "clean-held": [],
+    "no-distinction": [],
+    "over-reach": [
+      "cottage"
+    ],
+    "deferred": []
+  },
+  "subjects": [
+    {
+      "subject": "gatehouse",
+      "kind": "architectural",
+      "before": {
+        "distinct": 5,
+        "speckle": 0.006,
+        "offPalette": 0
+      },
+      "after": {
+        "distinct": 5,
+        "speckle": 0.035,
+        "offPalette": 0
+      },
+      "delta": {
+        "distinct": 0,
+        "speckle": 0.029,
+        "offPalette": 0
+      },
+      "nearTone": {
+        "pairs": [
+          {
+            "a": "dark_oak_log",
+            "b": "dark_oak_planks",
+            "dL": 0.385,
+            "beforeBoth": true,
+            "afterBoth": true,
+            "distinguishedBefore": false,
+            "distinguishedAfter": true,
+            "separated": true,
+            "collapsedBefore": true,
+            "restored": true
+          },
+          {
+            "a": "stone_bricks",
+            "b": "cobblestone",
+            "dL": 2.082,
+            "beforeBoth": true,
+            "afterBoth": true,
+            "distinguishedBefore": true,
+            "distinguishedAfter": true,
+            "separated": true,
+            "collapsedBefore": false,
+            "restored": false
+          },
+          {
+            "a": "deepslate_tiles",
+            "b": "dark_oak_log",
+            "dL": 2.753,
+            "beforeBoth": true,
+            "afterBoth": true,
+            "distinguishedBefore": false,
+            "distinguishedAfter": true,
+            "separated": true,
+            "collapsedBefore": true,
+            "restored": true
+          },
+          {
+            "a": "deepslate_tiles",
+            "b": "dark_oak_planks",
+            "dL": 3.138,
+            "beforeBoth": true,
+            "afterBoth": true,
+            "distinguishedBefore": false,
+            "distinguishedAfter": true,
+            "separated": true,
+            "collapsedBefore": true,
+            "restored": true
+          }
+        ],
+        "collapsedBefore": 3,
+        "restoredAfter": 3,
+        "separatedAfter": 4
+      },
+      "growth": {
+        "added": [],
+        "count": 0,
+        "justified": true
+      },
+      "trueByFeature": {
+        "ok": true,
+        "perRule": [
+          {
+            "block": "stone_bricks",
+            "rule": "walls",
+            "feature": "flat-face",
+            "dominant": "flat-face",
+            "ok": true
+          },
+          {
+            "block": "cobblestone",
+            "rule": "corners-edges",
+            "feature": "edge-corner",
+            "dominant": "edge-corner",
+            "ok": true
+          },
+          {
+            "block": "deepslate_tiles",
+            "rule": "roof",
+            "feature": "top-roof",
+            "dominant": "top-roof",
+            "ok": true
+          },
+          {
+            "block": "dark_oak_planks",
+            "rule": "openings",
+            "feature": "opening-recess",
+            "dominant": "opening-recess",
+            "ok": true
+          }
+        ]
+      },
+      "judge": "restored"
+    },
+    {
+      "subject": "cottage",
+      "kind": "architectural",
+      "before": {
+        "distinct": 7,
+        "speckle": 0.002,
+        "offPalette": 1416
+      },
+      "after": {
+        "distinct": 6,
+        "speckle": 0.093,
+        "offPalette": 0
+      },
+      "delta": {
+        "distinct": -1,
+        "speckle": 0.091,
+        "offPalette": -1416
+      },
+      "nearTone": {
+        "pairs": [
+          {
+            "a": "dark_oak_log",
+            "b": "dark_oak_planks",
+            "dL": 0.385,
+            "beforeBoth": true,
+            "afterBoth": true,
+            "distinguishedBefore": true,
+            "distinguishedAfter": false,
+            "separated": false,
+            "collapsedBefore": false,
+            "restored": false
+          },
+          {
+            "a": "stone_bricks",
+            "b": "cobblestone",
+            "dL": 2.082,
+            "beforeBoth": true,
+            "afterBoth": true,
+            "distinguishedBefore": true,
+            "distinguishedAfter": true,
+            "separated": true,
+            "collapsedBefore": false,
+            "restored": false
+          },
+          {
+            "a": "stone_bricks",
+            "b": "bricks",
+            "dL": 4.326,
+            "beforeBoth": false,
+            "afterBoth": false,
+            "distinguishedBefore": false,
+            "distinguishedAfter": false,
+            "separated": false,
+            "collapsedBefore": true,
+            "restored": false
+          },
+          {
+            "a": "cobblestone",
+            "b": "bricks",
+            "dL": 6.408,
+            "beforeBoth": false,
+            "afterBoth": false,
+            "distinguishedBefore": false,
+            "distinguishedAfter": false,
+            "separated": false,
+            "collapsedBefore": true,
+            "restored": false
+          },
+          {
+            "a": "spruce_planks",
+            "b": "bricks",
+            "dL": 8.408,
+            "beforeBoth": false,
+            "afterBoth": false,
+            "distinguishedBefore": false,
+            "distinguishedAfter": false,
+            "separated": false,
+            "collapsedBefore": true,
+            "restored": false
+          }
+        ],
+        "collapsedBefore": 3,
+        "restoredAfter": 0,
+        "separatedAfter": 1
+      },
+      "growth": {
+        "added": [],
+        "count": 0,
+        "justified": true
+      },
+      "trueByFeature": {
+        "ok": false,
+        "perRule": [
+          {
+            "block": "stone_bricks",
+            "rule": "walls",
+            "feature": "flat-face",
+            "dominant": "flat-face",
+            "ok": true
+          },
+          {
+            "block": "cobblestone",
+            "rule": "corners-edges",
+            "feature": "edge-corner",
+            "dominant": "edge-corner",
+            "ok": true
+          },
+          {
+            "block": "white_terracotta",
+            "rule": "walls",
+            "feature": "flat-face",
+            "dominant": "base",
+            "ok": false
+          },
+          {
+            "block": "spruce_planks",
+            "rule": "roof",
+            "feature": "top-roof",
+            "dominant": "top-roof",
+            "ok": true
+          },
+          {
+            "block": "dark_oak_planks",
+            "rule": "roof",
+            "feature": "top-roof",
+            "dominant": "opening-recess",
+            "ok": false
+          }
+        ]
+      },
+      "judge": "over-reach"
+    }
+  ],
+  "ledger": [
+    "`trim` (a 1-block accent voussoir/band) has no geometric feature in the T-072 classifier — recorded as a known gap, not placed by form (see T-072 review).",
+    "Non-full-cube fixtures (spruce_door, dark_oak_trapdoor, lantern) are dropped by the material map (not voxel materials) — see the cottage map `dropped`.",
+    "The colorimetric BEFORE and concept-grounded AFTER share the SAME map palette universe; the ONLY variable is the authority (mean colour vs geometric feature). Architectural before/after share one voxelization; sculpture before is the published E-19 build (its own routed+pruned geometry), after is a fresh voxelization.",
+    "SHARED-RULE LIMIT (the cottage finding): the T-072 assigner places ONE block per geometric feature, but the LLM map may assign TWO materials to the same placementRule (cottage: stone_bricks + white_terracotta both `walls`; spruce_planks + dark_oak_planks both `roof`). The second same-role material has no distinct feature to land on and is mis-placed (white_terracotta→base, dark_oak_planks→opening-recess) — recorded as `over-reach` though the material is concept-justified, not invented. Geometry alone cannot separate two materials sharing one architectural role; this needs a finer sub-feature selector (same family as the `trim` gap). The gatehouse (1:1 rule→block) restores cleanly.",
+    "On organic sculptures the architectural feature classifier (flat-face/edge-corner/roof/base/recess) is ill-defined; the concept-grounded build leans on the colour fallback and may mis-zone — recorded as `over-reach`, the honest negative (AC#5), not a regression.",
+    "Near-tone identity is invisible to a render (T-073 finding): the refine pass corrects VISIBLE mis-zoning; the near-tone distinction is carried by GEOMETRY (T-072), not colour. This A/B measures the assign-level build; the T-073 correct pass is cited, not re-run per subject."
+  ]
+}

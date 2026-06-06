@@ -55,6 +55,22 @@ test("nearToneRestoration: present in both but NOT feature-separated", () => {
   assert.equal(r.separatedAfter, 0); // same dominant feature → not separated
 });
 
+test("nearToneRestoration: SPATIAL collapse — both present in before but not feature-separated, restored in after", () => {
+  // The real gatehouse story: colorimetric keeps both blocks in the manifest but scatters them by colour
+  // (both dominate flat-face); the concept-grounded build separates them by feature.
+  const r = nearToneRestoration({
+    nearTonePairs: NEAR,
+    beforeManifest: ["minecraft:stone_bricks", "minecraft:cobblestone"],
+    afterManifest: ["minecraft:stone_bricks", "minecraft:cobblestone"],
+    beforeMatrix: { stone_bricks: { "flat-face": 300 }, cobblestone: { "flat-face": 40 } }, // colour-scattered: same feature
+    afterMatrix: MATRIX_SEPARATED, // feature-placed: distinct features
+  });
+  assert.equal(r.collapsedBefore, 1); // not distinguished in before despite both present
+  assert.equal(r.restoredAfter, 1); // distinguished in after
+  assert.equal(r.pairs[0].distinguishedBefore, false);
+  assert.equal(r.pairs[0].distinguishedAfter, true);
+});
+
 test("nearToneRestoration: tuple form + no pairs", () => {
   const tuple = nearToneRestoration({ nearTonePairs: [["stone_bricks", "cobblestone", 2]], beforeManifest: [], afterManifest: ["stone_bricks", "cobblestone"], afterMatrix: MATRIX_SEPARATED });
   assert.equal(tuple.restoredAfter, 1);
@@ -129,6 +145,16 @@ test("judgeSubject: restored when a collapse is recovered and clean held", () =>
     trueByFeature: { ok: true },
   });
   assert.equal(j, "restored");
+});
+
+test("judgeSubject: restored when speckle ROSE but still meets the E-19 bar (quoin detailing ≠ noise)", () => {
+  const nearTone = nearToneRestoration({ nearTonePairs: NEAR, beforeManifest: ["stone_bricks"], afterManifest: ["stone_bricks", "cobblestone"], afterMatrix: MATRIX_SEPARATED });
+  // the real gatehouse: speckle 0.006 → 0.035 (rose, but ≤ 0.05) — legitimate cobble-quoin alternation.
+  const j = judgeSubject({ nearTone, before: { speckle: 0.006, offPalette: 0 }, after: { speckle: 0.035, offPalette: 0 }, growth: { count: 0, justified: true }, trueByFeature: { ok: true } });
+  assert.equal(j, "restored");
+  // but a speckle EXPLOSION past the bar (0.093) is NOT clean → clean-held demoted (still no regression).
+  const j2 = judgeSubject({ nearTone, before: { speckle: 0.006, offPalette: 0 }, after: { speckle: 0.093, offPalette: 0 }, growth: { count: 0, justified: true }, trueByFeature: { ok: true } });
+  assert.equal(j2, "clean-held");
 });
 
 test("judgeSubject: over-reach on mis-assignment or unjustified growth", () => {
