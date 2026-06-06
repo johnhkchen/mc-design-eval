@@ -1,0 +1,271 @@
+{
+  "schema": "view-layer-proof/v1",
+  "subject": "cottage (after-artifact.json)",
+  "placements": 6429,
+  "manifest": [
+    "minecraft:cobblestone",
+    "minecraft:dark_oak_log",
+    "minecraft:dark_oak_planks",
+    "minecraft:spruce_planks",
+    "minecraft:stone_bricks",
+    "minecraft:white_terracotta"
+  ],
+  "occupancy": {
+    "voxels": 6429,
+    "dims": [
+      26,
+      27,
+      32
+    ],
+    "bounds": {
+      "min": [
+        -13,
+        0,
+        -16
+      ],
+      "max": [
+        12,
+        26,
+        15
+      ]
+    }
+  },
+  "structuralRead": {
+    "footprint": {
+      "width": 26,
+      "depth": 32,
+      "columns": 660
+    },
+    "storeyBands": {
+      "bandCount": 7,
+      "bands": [
+        {
+          "yStart": 0,
+          "yEnd": 0,
+          "dominantBlock": "dark_oak_log",
+          "fill": 0.642
+        },
+        {
+          "yStart": 1,
+          "yEnd": 15,
+          "dominantBlock": "stone_bricks",
+          "fill": 0.434
+        },
+        {
+          "yStart": 16,
+          "yEnd": 22,
+          "dominantBlock": "spruce_planks",
+          "fill": 0.332
+        },
+        {
+          "yStart": 23,
+          "yEnd": 23,
+          "dominantBlock": "stone_bricks",
+          "fill": 0.141
+        },
+        {
+          "yStart": 24,
+          "yEnd": 24,
+          "dominantBlock": "spruce_planks",
+          "fill": 0.102
+        },
+        {
+          "yStart": 25,
+          "yEnd": 25,
+          "dominantBlock": "cobblestone",
+          "fill": 0.009
+        },
+        {
+          "yStart": 26,
+          "yEnd": 26,
+          "dominantBlock": "spruce_planks",
+          "fill": 0.009
+        }
+      ],
+      "floorLines": [
+        0,
+        7,
+        14
+      ]
+    },
+    "roofRegion": {
+      "coverage": 0.793,
+      "yRange": [
+        7,
+        26
+      ],
+      "cells": 660
+    },
+    "wallFields": {
+      "+x": {
+        "surfaceCells": 686,
+        "holes": 4,
+        "blocks": 5
+      },
+      "-x": {
+        "surfaceCells": 686,
+        "holes": 4,
+        "blocks": 5
+      },
+      "+z": {
+        "surfaceCells": 571,
+        "holes": 0,
+        "blocks": 6
+      },
+      "-z": {
+        "surfaceCells": 571,
+        "holes": 0,
+        "blocks": 6
+      }
+    }
+  },
+  "openings": {
+    "+x": [
+      {
+        "bbox": {
+          "u0": 6,
+          "v0": 12,
+          "u1": 6,
+          "v1": 12
+        },
+        "kind": "window",
+        "cells": 1
+      },
+      {
+        "bbox": {
+          "u0": 14,
+          "v0": 17,
+          "u1": 14,
+          "v1": 17
+        },
+        "kind": "window",
+        "cells": 1
+      },
+      {
+        "bbox": {
+          "u0": 5,
+          "v0": 20,
+          "u1": 6,
+          "v1": 20
+        },
+        "kind": "window",
+        "cells": 2
+      }
+    ],
+    "-x": [
+      {
+        "bbox": {
+          "u0": 25,
+          "v0": 12,
+          "u1": 25,
+          "v1": 12
+        },
+        "kind": "window",
+        "cells": 1
+      },
+      {
+        "bbox": {
+          "u0": 17,
+          "v0": 17,
+          "u1": 17,
+          "v1": 17
+        },
+        "kind": "window",
+        "cells": 1
+      },
+      {
+        "bbox": {
+          "u0": 25,
+          "v0": 20,
+          "u1": 26,
+          "v1": 20
+        },
+        "kind": "window",
+        "cells": 2
+      }
+    ],
+    "+z": [],
+    "-z": []
+  },
+  "surfaceGridRoundTrip": {
+    "dir": "-z",
+    "filledCells": 571,
+    "backProjected": 571,
+    "allOccupied": true,
+    "identity": true
+  },
+  "renders": [
+    {
+      "angle": "front",
+      "view": {
+        "azimuthDeg": 0,
+        "elevationDeg": 0
+      },
+      "path": "docs/active/work/T-078-01/view-front.png",
+      "bytes": 94738
+    },
+    {
+      "angle": "threeQuarter",
+      "view": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30,
+        "fov": 45
+      },
+      "path": "docs/active/work/T-078-01/view-threeQuarter.png",
+      "bytes": 141002
+    },
+    {
+      "angle": "top",
+      "view": {
+        "azimuthDeg": 0,
+        "elevationDeg": 89.9
+      },
+      "path": "docs/active/work/T-078-01/view-top.png",
+      "bytes": 91022
+    },
+    {
+      "angle": "+x+z",
+      "view": {
+        "azimuthDeg": 45,
+        "elevationDeg": 30
+      },
+      "path": "docs/active/work/T-078-01/view-+x+z.png",
+      "bytes": 106593
+    }
+  ],
+  "referenceTarget": {
+    "n": 26,
+    "m": 26,
+    "paletteMode": "validate",
+    "outOfPalette": 0,
+    "filledCells": 676,
+    "meanDeltaE": 28.75,
+    "legend": [
+      {
+        "block": "white_terracotta",
+        "cells": 550,
+        "pct": 81.4
+      },
+      {
+        "block": "stone_bricks",
+        "cells": 64,
+        "pct": 9.5
+      },
+      {
+        "block": "cobblestone",
+        "cells": 28,
+        "pct": 4.1
+      },
+      {
+        "block": "dark_oak_log",
+        "cells": 18,
+        "pct": 2.7
+      },
+      {
+        "block": "spruce_planks",
+        "cells": 16,
+        "pct": 2.4
+      }
+    ]
+  }
+}
