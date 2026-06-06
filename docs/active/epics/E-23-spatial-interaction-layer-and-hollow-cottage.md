@@ -6,7 +6,7 @@ status: open
 priority: high
 depends_on: [E-21, E-22]
 spec: "§1, §5, §6, §9"
-stories: [S-078, S-079, S-080, S-081, S-082, S-083]
+stories: [S-078, S-079, S-080, S-081, S-082, S-083, S-084]
 ---
 
 ## Background (read this first — self-contained)
@@ -92,6 +92,41 @@ build (voxels) ──▶ VIEW LAYER  (read from any angle: ortho + 45° + full 3
 - **It opens multi-model agentic engineering** — the scoped-view ops are where lighter tiers first earn
   their place.
 
+## Challenges it must overcome (witnessed this session — the bar for "done")
+
+These are concrete failure modes seen in the cottage diagnostics and the E-20 building, not hypotheticals.
+After E-23 we must be able to **guarantee** each is beaten on the milestone:
+
+1. **Watertight roof — fully covered in wood, no seams, no openings, no stray blocks.** The cottage/gatehouse
+   roofs are *not* a clean wood surface: the front-face projection showed roof rows speckled with non-roof
+   blocks, gaps between plank courses, and the E-20 crown "dissolves into a chaotic grey jumble." The roof
+   must read as **one continuous roof-material surface**: 100% covered, holes/seams filled, stray non-roof
+   blocks stripped. (Consumes the S-082 roof-patch detector + a deterministic seal/fill — S-084.)
+
+2. **Coherent wall skin (no random intrusions, no accidental holes) — while the mass is hollow enough for
+   interiors.** The projected wall faces are noisy: stray `spruce_planks`/`dark_oak_log` embedded in the
+   stone field (the "random homes"), and `.` columns with no front voxel at all (holes). Two *coupled*
+   requirements: (a) the wall skin reads as one coherent material field — wrong-material intrusions stripped,
+   holes sealed; (b) the interior is hollowed enough to fit the N×M rooms — but the hollow must leave a
+   **watertight shell**. You cannot enclose an interior behind a hole-y wall, so **sealing the skin is a
+   prerequisite for a safe hollow** (S-084 → S-080).
+
+3. **Solid mass → enclosed interior.** The voxelization is a solid block with no cavity; the carve must open
+   enough room for the floorplan while preserving (and first sealing) the skin — verified by a flood-fill
+   from outside *not* reaching the interior (a genuinely watertight shell, S-080/S-084).
+
+## Method: splat materials from a same-angle reference render (reuse the facade grid technique)
+
+We already downsample a concept image to a block grid for facades — `src/color/image-grid.mjs`
+`gridFromImage` produced the taj `.grid.png` (a per-cell pixel-art block design). E-23 brings that into the
+2.5-D layer and makes it 3-D-aware: render the **textured GLB at the *same angle* as the projected face**
+(the GLB carries surface texture the concept's single front view never shows — e.g. the sides, the roof
+slope), **grid-quantize** it to the face's cell grid, and **splat** the resulting per-cell material target
+onto the face. Then the LLM **refines and judges** (the resemblance accept-gate) rather than hand-painting
+every cell. The same-angle render gives material ground-truth aligned **cell-for-cell** with the build face;
+the splat is the auto-paint, the LLM is the corrector. (Concept splat for the front where the concept is the
+truth; textured-GLB splat for the sides/roof where it isn't.)
+
 ## Scope
 
 **In:**
@@ -102,8 +137,15 @@ build (voxels) ──▶ VIEW LAYER  (read from any angle: ortho + 45° + full 3
   The shared primitive: the storey line serves *both* material banding (where plaster starts) *and* floor
   heights (where storeys sit).
 - (c) **Spray-paint (Path B, craft)** — a face-paint tool with the **enforced** design-doc palette
-  (∪ E-21 concept-justified additions); LLM paints → back-project → per-face accept-if-closer vs the
-  concept face (resemblance-gated). Fixes the cottage face.
+  (∪ E-21 concept-justified additions); the LLM paints, *or* a **same-angle reference render is grid-
+  quantized and splatted** as the per-cell target (the facade-grid technique, `image-grid.mjs`, now from the
+  textured GLB / concept) → back-project → per-face accept-if-closer vs the concept face (resemblance-gated).
+  Fixes the cottage face (proven: the front-face POC restored the plaster band, 215→8 reversed,
+  back-projection landed clean — only block-value tuning, e.g. `white_terracotta` reads pinkish vs the
+  concept cream, is left to the LLM/gate).
+- (h) **Surface-coherence ops (S-084)** — deterministic seal/fill + strip, driven by detectors: a
+  **watertight roof** (100% roof-material, holes/seams filled, strays stripped) and a **coherent wall skin**
+  (intrusions stripped, holes sealed) → a **watertight shell** ready to hollow.
 - (d) **Hollow (Path A, program)** — LLM marks the hollowable interior (scoped detector) → a deterministic
   program carves it to a shell + structural members, **preserving the exterior skin** the resemblance gate
   signed off.
@@ -125,13 +167,12 @@ any angle is in; *writing* paint stays on ortho/45° where back-projection is un
 
 ```
 S-078 view layer + structural read (substrate)
-   ├─▶ S-082 right-sized model routing (seam + exemplar detectors)
-   ├─▶ S-079 spray-paint materials (Path B, craft, resemblance-gate) ─┐
-   └─▶ S-080 hollow the mass (Path A, program) ─▶ S-081 N×M floorplan  ┤
-                                                  (Path A, design,      │
-                                                   plausibility-gate)   │
-                                                                        ▼
-                                              S-083 milestone: hollow accurate cottage + consolidation
+   ├─▶ S-082 right-sized model routing (seam + roof-patch / hollowable-mass detectors)
+   │       └─▶ S-084 surface-coherence ops (watertight roof + coherent wall skin → watertight shell)
+   │                   └─▶ S-080 hollow the mass (needs the shell) ─▶ S-081 N×M floorplan
+   │                                                                  (Path A, design, plausibility-gate)
+   ├─▶ S-079 spray-paint / splat materials (Path B, craft, resemblance-gate) ─┐
+   └──────────────────────────────────────────────────────────────────────────┴─▶ S-083 milestone
 ```
 
 - **S-078 — view-layer-and-structural-read.** The substrate: read from ortho/45°/full-3-axis (E-22 lens);
@@ -149,9 +190,13 @@ S-078 view layer + structural read (substrate)
   resemblance.
 - **S-082 — right-sized-model-routing (agentic).** A per-op model-tier seam over the subscription shim;
   exemplar light-tier detectors (roof-patch, hollowable-mass); the scope-tight-→-light-model principle.
-- **S-083 — hollow-cottage-milestone.** Bring it together: exterior accurate (S-079), hollowed (S-080),
-  N×M-infilled (S-081), ops model-scoped (S-082). Both gates; multi-angle + from-below cutaway renders;
-  journal; E-12.
+- **S-084 — surface-coherence-ops.** Deterministic seal/fill + strip driven by detectors: **watertight
+  roof** (100% roof-material, holes/seams filled, stray non-roof blocks stripped) and **coherent wall skin**
+  (wrong-material intrusions stripped, holes sealed) → a **watertight shell** (flood-fill from outside can't
+  reach the interior). Beats witnessed challenges 1 & 2; the prerequisite for a safe hollow (S-080).
+- **S-083 — hollow-cottage-milestone.** Bring it together: exterior accurate (S-079), surfaces coherent
+  (S-084), hollowed (S-080), N×M-infilled (S-081), ops model-scoped (S-082). Both gates; multi-angle +
+  from-below cutaway renders; journal; E-12.
 
 ## Definition of done
 
@@ -159,6 +204,10 @@ S-078 view layer + structural read (substrate)
   resemblance gate at *same-object* or a materially-narrowed *drifted* with the face no longer the gap — and
   (2) is **hollow** (shell + structure) with an **N×M grid floorplan filling N storeys**, the interior
   passing a **plausibility gate** (valid, reachable rooms; floors at storey lines; openings aligned).
+- **The witnessed challenges are beaten, measurably:** the **roof is watertight** (100% roof-material, no
+  holes/seams, no stray non-roof blocks); the **wall skin is coherent** (no wrong-material intrusions, no
+  accidental holes); the **shell is watertight** (outside flood-fill can't reach the interior) yet **hollow
+  enough** for the N×M rooms.
 - **Both paths are demonstrated off the one feature zone:** a **judgement** op (spray-paint) and **program**
   ops (hollow, floorplan), all driven through the 2.5-D view layer.
 - **Right-sized models are real:** at least the two exemplar detectors run on a **light tier via the
