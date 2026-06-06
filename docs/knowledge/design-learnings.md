@@ -1743,3 +1743,61 @@ next lever is to **route it by form type** (skip the shell on already-solid subj
 recovers the thin form where it was severed (bow 0.473 → 0.526, 4→1 components) at the honest cost of a
 small value-ΔE rise (8.67 vs 5.47) and a ~1-voxel over-thickening of already-solid subjects — and the real
 deliverable is the **form-type-routing rule** the sword boundary makes unavoidable.
+
+## Voxel cleanup (E-19) — the busy build made as clean as text→JSON (S-066, T-066-01)
+
+E-18 left the GLB-voxel build *winning on form* but **busy**: it leaked off the design-doc palette into the
+GLB's own texture (k≈8 median-cut → busy textured blocks like `nether_quartz_ore`, `coral_brain`, `mycelium`),
+carried TRELLIS **stray geometry** (moai's two duplicate statues + bridge bars), and **over-thickened** the
+already-solid subjects with a universal thin shell. E-19 closed that backlog with three fixes, each on its own
+ticket, then **T-066 composed all three into one build and measured the honest before/after** vs the busy E-18
+seg build (`glb-voxel-seg/`, re-scored on the fixed T-062 metrics). Spine:
+`benchmarks/sculpture/e19-cleanup.{md,json}`; build: `benchmarks/sculpture/e19-build/`; before/after composites:
+`pr/assets/frames/e19-{moai,heart,koi}-{before,after}.png` + the handoff `pr/assets/voxel-cleanup.md`.
+
+**The backlog — each item closed, by number.**
+
+| # | fix | what it bought (busy → E-19) | verdict |
+|---|---|---|---|
+| **T-062** | fixed cleanliness metrics (fragmentation speckle + `strayVoxelStats`) | the scoreboard this epic is judged on | closed |
+| **T-063** | stray-voxel pruning (`pruneStrays`, relative floor) | **moai stray 2023 → 0, largest-frac 0.52 → 1.0, components 6 → 1** | closed (gated, see below) |
+| **T-064** | variance-aware flat palette + true-axis gradient banding + `keepFloor` | **off-palette 1149 → 0 avg (7/7); busy textured blocks gone; distinct ≤ busy (mushroom 6→5)** | closed |
+| **T-065** | per-subject thin routing (`voxelizeRouted`) | **solids de-thickened (occupancy −8,428 cells); form IoU recovered** (dancing-man 0.814→0.914, mushroom 0.929→0.98 vs universal thin) | closed (wired here) |
+
+**The headline — is GLB-voxel colour now as clean as text→JSON? Yes, on colour cleanliness.** Every E-19 build
+is **0 off-palette** (busy avg 1149; moai 887 / heart 1174 / mushroom 5981 → 0) — it snaps *within* the
+augmented design-doc palette, exactly like a text→JSON build, enforced by `assertPaletteDiscipline`. Speckle is
+**≤ 0.045 on all 7** (avg 0.024 < the 0.05 clean bar); distinct holds at 5.43 avg. The busy textured blocks
+(`nether_quartz_ore`, `coral_brain`, `mycelium`) are gone from every manifest. The before/after pairs show it:
+moai's busy red-speckled ore → matte design-doc palette, heart's purple/gold texture-leak vessels → in-palette.
+
+**The two honest caveats (where "as clean as text→JSON" is qualified).**
+- **value ΔE rose (avg 7.19 → 9.81; moai 14.05, koi 17.55).** This is the design-doc-palette **discipline
+  cost**, the same ablation tautology E-18 named: the busy build's value ΔE is low *because* it snapped to the
+  GLB texture it is scored against; E-19's tighter palette must drift. text→JSON pays the identical price —
+  this is a property of *having* a fixed palette, not a GLB-voxel defect. Reported, not hidden.
+- **moai is geometrically clean but not a clean moai.** Pruning drops the two *fully-detached* masses
+  (stray 2023→0) but the kept largest 6-connected component is *itself* a tangle of partial statues the bridge
+  bars hold together — **the moai GLB is the hallucination** (TRELLIS reconstructed 3 statues from a 3-view
+  contact sheet). So moai's form IoU *falls* vs its own corrupt reference (0.565 → 0.416); **stray/component is
+  moai's honest signal, not IoU.** The real fix is upstream — regenerate the GLB from a *single-view* concept —
+  a separate ticket; pruning is the no-op safety net once that lands.
+
+**The consolidation finding (composing fixes surfaces new conflicts).** Naively stacking T-065 routing + T-063
+pruning **regressed pineapple −0.096 form IoU**. In E-18 the universal thin pass bridged pineapple's crown into
+one component, so pruning was a no-op; under routing, solids go to *plain* `voxelizeGlb`, the crown tips
+disconnect into 11 tiny components (45 cells), and `pruneStrays`' relative floor (tuned for moai's *gross*
+duplicate masses) **clipped silhouette-load-bearing crown geometry**. Fix: a **prune gate** — apply pruning
+only to a real multi-mass hallucination (`largestFraction < 0.9`). moai (0.52) qualifies; near-single-mass
+solids (pineapple 0.987 / heart 0.986 / mushroom 0.998 / koi 0.976) keep their incidental specks. Pineapple
+recovered to 0.907; moai keeps its full stray fix. **Lesson: a relative-floor prune calibrated for one form
+clips legitimate detached detail on another — gate it on the presence of an actual hallucination, not on
+"any stray".**
+
+**The net.** form IoU **held** (busy avg 0.763 → E-19 0.761; only the reference-corrupt moai regresses;
+routing recovered the universal-thin solid losses), off-palette **eliminated** (7/7 → 0), strays **fixed where
+real** (moai), materials **flat** (busy blocks gone), at the documented value-ΔE discipline cost.
+**One sentence:** E-19 makes the GLB-voxel build's colour as disciplined as text→JSON (off-palette 0/7,
+speckle ≤ 0.05, busy blocks gone) and removes the stray hallucination where it is real (moai 2023→0) — the
+residue is a measurement tautology (value ΔE) and one corrupt GLB (moai), both with named upstream fixes, plus
+the reusable lesson that **a prune tuned for gross hallucination must be gated off incidental disconnection**.
