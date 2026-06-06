@@ -28,6 +28,8 @@ bundle**: the production desk cuts the video without reaching into gitignored `b
 | `../rotations/spin-taj-015.mp4` (+ montage) | `runs/015,019,021,022` orbits | **REAL spin** for F10 — 12fps 360° seamless, see `../rotations/` |
 | `concept-goldengate-vision.png` | `concepts/goldengate-base-flash.png` (gitignored) | **`[concept]`** — F13 vision end-frame; Nano-Banana flash via `pr/production/endframe.mjs` (T-034-01), NOT Minecraft |
 | `march-<subject>.png` × 7 | the four gitignored rung renders (below) | **E-17 march-of-progress** — R0→R1→R2→R3 side by side, one strip per sculptural subject (T-057-01) |
+| `speckle-heart.png`, `speckle-koi.png` | R2 + E18 renders (gitignored) | **E-18 surface coherence** — before \| after, `glb-voxel-clean` (R2, speckled) → `e18-build` (E18, segmented) (T-061-01) |
+| `thin-bow-and-arrow.png` | thin base + thin renders (gitignored) | **E-18 thin form** — before \| after, base voxelization (4 components) → thin (1 component), bow IoU 0.473 → 0.526 (T-061-01) |
 
 **E-17 march frames (`march-*.png`).** Each is the four rung renders of one sculptural subject
 composited left→right at 512px each + 6px gutters (2066×512), via `montageRow` (`src/form/montage.mjs`).
@@ -45,6 +47,20 @@ bow-and-arrow, heart, mushroom, koi. Source per panel:
 **Regen:** `node benchmarks/sculpture/sweep-scorecard.mjs` (needs the rung builds present locally; it
 skips any subject whose source renders are absent and still writes the scorecard). The numbers paired
 with these strips live in `../sweep.md`.
+
+**E-18 before/after pairs (`speckle-*.png`, `thin-bow-and-arrow.png`).** Each is two renders composited
+left→right (before | after) at 512px + 6px gutter (1030×512), via `montageRow` (`src/form/montage.mjs`).
+All source renders are **gitignored**, which is why these composites are committed. Source per panel:
+
+| composite | before (gitignored) | after (gitignored) | shows |
+|---|---|---|---|
+| `speckle-heart.png` | `glb-voxel-clean/heart/render-3q.png` (R2) | `e18-build/heart/render-3q.png` (E18) | speckle 0.343 → 0.110 |
+| `speckle-koi.png` | `glb-voxel-clean/koi/render-3q.png` (R2) | `e18-build/koi/render-3q.png` (E18) | speckle 0.350 → 0.158 |
+| `thin-bow-and-arrow.png` | `glb-voxel-thin/bow-and-arrow/render-base-3q.png` | `glb-voxel-thin/bow-and-arrow/render-thin-3q.png` | 4→1 components, IoU 0.473 → 0.526 |
+
+**Regen:** `node benchmarks/sculpture/e18-scorecard.mjs` (needs the R2/E18/thin builds present locally;
+skips any pair whose sources are absent and still writes the scorecard). The numbers paired with these
+pairs live in `../surface-and-thin.md`.
 
 **Reuse:** `spine-r4-hero-oneplane-014.png` serves F01 (morph target), F04, and the F05/F11
 re-flashes. `concept-taj-C-flash.png` serves F08 (pivot target) and the F09 wall. One file per real

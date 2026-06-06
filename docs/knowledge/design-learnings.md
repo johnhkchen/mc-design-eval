@@ -1685,3 +1685,61 @@ shown they cannot close it. **One sentence:** across 7 subjects, grounding geome
 is the whole form win (+0.238 avg IoU, 7/7), material-clean is a value-only cleanup (−4.53 avg ΔE, 0 form),
 and surgical refinement is an honest wash (−0.001 avg, one regression) — the arc's value is bought by where
 the geometry comes from, and the instrument shows the rungs that bought nothing as buying nothing.
+
+## Surface coherence & thin form (E-18) — the speckle/leak killed, the thin form recovered, the boundary named (S-061, T-061-01)
+
+E-17 left the glb-voxel build winning on form but with two surface gaps: **speckle** (each voxel samples
+the TRELLIS texture independently → scattered blocks) and **palette leakage** (material-clean snapped to
+the GLB's own texture palette, not the design doc, so builds used far more blocks than intended). It also
+left one **thin-form** failure (bow-and-arrow voxelizes worst; sub-voxel members drop out). E-18 closed
+the surface gaps with **material-region segmentation** (T-058) under an **augmented design-doc palette**
+(design-doc manifest ∪ ≤2 gated secondary, enforced by `assertPaletteDiscipline`, T-058-02/03) and the
+thin gap with **thin-preserving voxelization** (`voxelizeGlbThin`, T-059). T-060 combined them and
+re-measured all 7 subjects on five axes vs the E-17 R1 (glb-voxel) and R2 (material-clean) baselines.
+Spine: `benchmarks/sculpture/e18-remeasure.json`; scorecard + before/after composites:
+`pr/assets/surface-and-thin.md` + `pr/assets/frames/{speckle-heart,speckle-koi,thin-bow-and-arrow}.png`.
+Each fix read against the baseline that isolates it (form via R1 — colour never moves a silhouette;
+speckle + discipline via R2):
+
+| fix | isolating Δ | n | avg Δ | improved/held/regressed | verdict |
+|---|---|---:|---:|:---:|---|
+| **material segmentation** (speckle) | E18−R2 speckle | 7 | **−0.180** | 7/0/0 | won-clean |
+| **palette discipline** (off-pal + distinct) | E18−R2 off-pal | 7 | **−2791** | 7/0/0 | won-discipline |
+| **thin voxelization** (form) | E18−R1 form IoU | 7 | −0.004 | 4/0/3 | routed tradeoff |
+
+**The two clean wins.** Speckle is the decisive, most uniform win in the record: E18 halves R2's smoothed
+surface (avg **0.30 → 0.13**) and drops it on **all 7** subjects (R1 0.44 → E18 0.13). Palette discipline
+holds at **off-palette 0 on all 7** vs R2's avg ~2790 leak — R2 snaps to the GLB's *own texture* palette
+(k≈8) while E18/R1 snap *within* the augmented design-doc palette; distinct ≤ R2 everywhere (avg 6.4 → 5.4).
+The before/after pairs (`speckle-heart.png`, `speckle-koi.png`) show the scattered surface resolving into
+clean material regions.
+
+**The thin form recovered (bow-and-arrow).** Thin preservation lifts bow-and-arrow **0.473 → 0.526** and
+coalesces its 4 severed components into 1 (`thin-bow-and-arrow.png`); koi +0.080, heart +0.020, moai +0.030.
+
+**Where it didn't help (shown, not dropped).**
+- **Form IoU is a routed tradeoff, net −0.004.** The conservative surface trace adds a ~1-voxel shell to
+  *every* subject, so it over-thickens the 3 already-solid forms — **dancing-man −0.10, pineapple −0.06,
+  mushroom −0.05** — while recovering the thin/organic ones. Net avg form IoU is flat (0.76 across R1/R2/E18).
+  This spread is not a defect; it is the evidence for routing.
+- **Value ΔE rose, and it is a real cost — not the R2 tautology.** R2's value ΔE is 0 *by construction*
+  (it snaps to the texture it is scored against). E18's value ΔE (avg **8.67 vs R1 5.47**) is the honest
+  price of the tighter design-doc palette drifting from the GLB texture (koi +11.82, dancing +2.63 vs R1).
+  Recorded as a cost of discipline, not hidden behind R2's zero.
+
+**The form-type-routing rule (the deliverable).** Image→3D voxelization is not universal. The per-subject
+form Δ says thin preservation helps organic/thin and hurts already-solid; and **sword never enters the
+voxel path at all** — TRELLIS 500s on the thin blade across 4 attempts (incl. after trimming to fill the
+frame; `glb/README.md`), yet sword's text→JSON build was one of the better E-13 ones (the faithful
+cruciform). So the pipeline routes by form type: **bulky/organic → image→3D → voxelize (with thin
+preservation where members are sub-voxel); thin/angular → text→JSON.** The instrument now knows which
+path each subject belongs on.
+
+**The residual.** Form IoU is unchanged on average — E-18 was a *surface and connectivity* epic, not a
+form-fidelity one; the hardest subjects (moai 0.59, bow 0.53, koi 0.71) are still only fair, the same
+voxelization-resolution ceiling E-17 named. Thin preservation is currently applied universally; the honest
+next lever is to **route it by form type** (skip the shell on already-solid subjects) rather than tune it.
+**One sentence:** E-18 kills the speckle (−0.18 avg, 7/7) and the palette leak (off-pal → 0, 7/7) cleanly,
+recovers the thin form where it was severed (bow 0.473 → 0.526, 4→1 components) at the honest cost of a
+small value-ΔE rise (8.67 vs 5.47) and a ~1-voxel over-thickening of already-solid subjects — and the real
+deliverable is the **form-type-routing rule** the sword boundary makes unavoidable.
