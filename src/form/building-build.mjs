@@ -88,14 +88,23 @@ export function pickBestScale(rows = [], { iouEps = 0.01 } = {}) {
     }
   }
   const rankedView = ranked.map((r) => ({ scale: r.scale, formIoU: r.formIoU }));
+  const maxScale = valid.reduce((m, r) => Math.max(m, r.scale), -Infinity);
+  const higherLost = valid.find((r) => r.scale > chosen.scale && isNum(r.formIoU)); // a higher scale that read worse
   const runnerUp = ranked.find((r) => r.scale !== chosen.scale);
-  const reason = tieBreak
-    ? `scale ${chosen.scale} kept: form IoU ${fmt(chosen.formIoU)} is within ${iouEps} of the top (scale ${top.scale} @ ${fmt(top.formIoU)}) — the lower scale is kept (fewer blocks, the best-reading-not-biggest rule).`
-    : isNum(chosen.formIoU)
-      ? `scale ${chosen.scale} kept: highest form IoU ${fmt(chosen.formIoU)}` +
-        (runnerUp ? ` vs scale ${runnerUp.scale} @ ${fmt(runnerUp.formIoU)}` : "") +
-        " — a higher scale did not read better (scale↔fidelity is non-monotonic for angular forms)."
-      : `scale ${chosen.scale} kept (no form IoU available to rank).`;
+  let reason;
+  if (tieBreak) {
+    reason = `scale ${chosen.scale} kept: form IoU ${fmt(chosen.formIoU)} is within ${iouEps} of the top (scale ${top.scale} @ ${fmt(top.formIoU)}) — the lower scale is kept (fewer blocks, the best-reading-not-biggest rule).`;
+  } else if (!isNum(chosen.formIoU)) {
+    reason = `scale ${chosen.scale} kept (no form IoU available to rank).`;
+  } else if (higherLost) {
+    reason = `scale ${chosen.scale} kept: highest form IoU ${fmt(chosen.formIoU)} — a higher scale (${higherLost.scale} @ ${fmt(higherLost.formIoU)}) read WORSE (scale↔fidelity is non-monotonic for angular forms; the bigger block count is not kept).`;
+  } else if (chosen.scale === maxScale) {
+    reason = `scale ${chosen.scale} kept: highest form IoU ${fmt(chosen.formIoU)} at the HIGHEST scale tried` +
+      (runnerUp ? ` (vs scale ${runnerUp.scale} @ ${fmt(runnerUp.formIoU)})` : "") +
+      " — more resolution still read better; the high-scale regression that bites angular sculptures did not appear up to this ceiling.";
+  } else {
+    reason = `scale ${chosen.scale} kept: highest form IoU ${fmt(chosen.formIoU)}` + (runnerUp ? ` vs scale ${runnerUp.scale} @ ${fmt(runnerUp.formIoU)}` : "") + ".";
+  }
   return { scale: chosen.scale, formIoU: chosen.formIoU, reason, tieBreak, ranked: rankedView };
 }
 

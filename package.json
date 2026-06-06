@@ -18,6 +18,7 @@
     "bench:judge": "node benchmarks/temple-facade/judge-runs.mjs",
     "form:routing": "node benchmarks/sculpture/form-routing.mjs",
     "e19:build": "node benchmarks/sculpture/e19-build.mjs",
+    "building:build": "node benchmarks/sculpture/building-build.mjs",
     "material:map": "node benchmarks/sculpture/material-map.mjs",
     "material:assign": "node benchmarks/sculpture/material-assign.mjs",
     "material:correct": "node benchmarks/sculpture/material-correct.mjs",

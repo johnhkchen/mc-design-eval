@@ -73,3 +73,11 @@ benchmarks/sculpture/material-correct/**/*.png
 # E-21 concept-materials A/B renders (T-074-01) — before/after PNGs, regen via `node benchmarks/sculpture/
 # concept-materials-ab.mjs`. Durable record: concept-materials-ab.{json,md} + concept-materials/<subj>/*-artifact.json.
 benchmarks/sculpture/concept-materials/**/*.png
+
+# E-20 high-res building build renders (T-068-01) — per-scale 3q renders, regen via `node benchmarks/
+# sculpture/building-build.mjs`. Durable record: building-build.{json,md} + building/scale-<n>/{artifact,summary}.json
+# + building/best/artifact.json. The chosen frame pr/assets/frames/building-best.png is committed (a frame).
+benchmarks/sculpture/building/**/*.png
+# per-scale intermediate artifacts are large + regenerable; commit the lightweight summary + the chosen
+# building/best/artifact.json (the deliverable) only.
+benchmarks/sculpture/building/scale-*/artifact.json

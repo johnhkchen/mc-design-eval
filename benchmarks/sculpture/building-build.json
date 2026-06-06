@@ -1,0 +1,81 @@
+{
+  "schema": "building-build/v1",
+  "generatedFrom": "building-build live sweep (voxelize @scales → E-19 clean: augmented design-doc palette + segment + gated prune) vs the GLB silhouette",
+  "subject": "building",
+  "scalesTried": [
+    48,
+    64
+  ],
+  "chosen": {
+    "scale": 64,
+    "formIoU": 0.929,
+    "reason": "scale 64 kept: highest form IoU 0.929 at the HIGHEST scale tried (vs scale 48 @ 0.908) — more resolution still read better; the high-scale regression that bites angular sculptures did not appear up to this ceiling.",
+    "tieBreak": false,
+    "ranked": [
+      {
+        "scale": 64,
+        "formIoU": 0.929
+      },
+      {
+        "scale": 48,
+        "formIoU": 0.908
+      }
+    ]
+  },
+  "chosenRow": {
+    "scale": 64,
+    "blocks": 57202,
+    "formIoU": 0.929,
+    "speckle": 0.001,
+    "distinct": 4,
+    "offPalette": 0,
+    "valueDeltaE": 1.73,
+    "strayCount": 0,
+    "largestFraction": 1,
+    "occ": {
+      "routed": 69118,
+      "pruned": 57202
+    },
+    "note": null
+  },
+  "clean": {
+    "offPaletteZero": true,
+    "speckleOk": true,
+    "singleMass": true
+  },
+  "note": "Per scale: voxelize (solid→plain voxelizeGlb) → gated pruneStrays → segmentMaterials under the augmented design-doc flat palette (design-doc + ≤2 secondary). form IoU vs the GLB at the building 3/4 view (higher better); speckle/distinct/off-palette/value ΔE lower better. The BEST-READING scale is kept (highest form IoU), NOT the biggest block count — scale↔fidelity is non-monotonic for angular forms (a building is angular). The GLB lost fine detail upstream (T-067), so absolute IoU is bounded by the reconstruction; the cross-scale comparison is the signal.",
+  "rows": [
+    {
+      "scale": 48,
+      "blocks": 22879,
+      "formIoU": 0.908,
+      "speckle": 0.002,
+      "distinct": 4,
+      "offPalette": 0,
+      "valueDeltaE": 1.65,
+      "strayCount": 0,
+      "largestFraction": 1,
+      "occ": {
+        "routed": 27620,
+        "pruned": 22879
+      },
+      "note": null
+    },
+    {
+      "scale": 64,
+      "blocks": 57202,
+      "formIoU": 0.929,
+      "speckle": 0.001,
+      "distinct": 4,
+      "offPalette": 0,
+      "valueDeltaE": 1.73,
+      "strayCount": 0,
+      "largestFraction": 1,
+      "occ": {
+        "routed": 69118,
+        "pruned": 57202
+      },
+      "note": null
+    }
+  ]
+}
