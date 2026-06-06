@@ -11,7 +11,18 @@
 
 **Verify:** `npm test` → **652 pass / 0 fail**.
 
-## Step 2 — assembleRoutingReport + tests ⏳
+## Step 2 — assembleRoutingReport + tests ✅ (committed)
+
+- Added `ROUTING_SCHEMA = "form-routing/v1"`, `pickRouted(row)`, `assembleRoutingReport(spine, opts?)`
+  (+ `renderRoutingMd`) to `form-routing.mjs`. Pure read of the spine: before = universal thin
+  (`e18.formIoU`, `occThin`), after = routed pick (`thin ? e18 : r1`, `thin ? occThin : occBase`).
+  Verdicts: `kept` (thin), `recovered` (solid the thin pass hurt), `traded` (solid thin marginally
+  helped — heart), `flat`. Averages, occupancy totals + solids-dropped, tolerant of missing cells.
+- `form-routing.test.mjs`: `pickRouted` (kept/recovered/traded) + `assembleRoutingReport` (averages,
+  occupancy totals, verdict buckets, schema, missing-cell tolerance, non-array throw) on a synthetic
+  3-subject spine.
+
+**Verify:** `npm test` → **655 pass / 0 fail**.
 
 ## Step 3 — runner + apply ×7 over the real spine ⏳
 

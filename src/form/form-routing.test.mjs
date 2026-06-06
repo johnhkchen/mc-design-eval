@@ -13,6 +13,9 @@ import {
   formTypeOf,
   selectVoxelizer,
   voxelizeRouted,
+  ROUTING_SCHEMA,
+  pickRouted,
+  assembleRoutingReport,
 } from "./form-routing.mjs";
 
 const THIN = ["bow-and-arrow", "koi"];
@@ -60,4 +63,74 @@ test("voxelizeRouted: dispatches via the selector to the chosen voxelizer", () =
   // selection parity (the dispatch key): thin subjects pick thin, solids pick plain.
   assert.equal(selectVoxelizer("koi"), voxelizeGlbThin);
   assert.equal(selectVoxelizer("pineapple"), voxelizeGlb);
+});
+
+// A small synthetic e18-remeasure/v1 spine: one thin subject (koi), one clear-solid the thin pass hurt
+// (dancing-man), one solid the thin pass marginally HELPED (heart, the deliberate trade).
+const SYN_SPINE = {
+  schema: "e18-remeasure/v1",
+  scale: 32,
+  subjects: [
+    { subject: "koi", r1: { formIoU: 0.622 }, e18: { formIoU: 0.706 }, thin: { occBase: 2164, occThin: 3155 } },
+    { subject: "dancing-man", r1: { formIoU: 0.914 }, e18: { formIoU: 0.814 }, thin: { occBase: 973, occThin: 1504 } },
+    { subject: "heart", r1: { formIoU: 0.877 }, e18: { formIoU: 0.895 }, thin: { occBase: 5840, occThin: 7982 } },
+  ],
+};
+
+test("pickRouted: thin kept, solid-hurt recovers, marginal-helped solid traded", () => {
+  const koi = pickRouted(SYN_SPINE.subjects[0]);
+  assert.equal(koi.formType, "thin");
+  assert.deepEqual(koi.before, { formIoU: 0.706, occ: 3155 });
+  assert.deepEqual(koi.after, { formIoU: 0.706, occ: 3155 }); // unchanged — still thin
+  assert.equal(koi.dFormIoU, 0);
+  assert.equal(koi.dOcc, 0);
+  assert.equal(koi.verdict, "kept");
+
+  const dm = pickRouted(SYN_SPINE.subjects[1]);
+  assert.equal(dm.formType, "solid");
+  assert.equal(dm.before.formIoU, 0.814); // universal thin
+  assert.equal(dm.after.formIoU, 0.914); // routed → plain (recovers)
+  assert.equal(dm.dFormIoU, 0.1);
+  assert.equal(dm.after.occ, 973); // occBase < occThin
+  assert.equal(dm.dOcc, 973 - 1504);
+  assert.equal(dm.verdict, "recovered");
+
+  const heart = pickRouted(SYN_SPINE.subjects[2]);
+  assert.equal(heart.formType, "solid");
+  assert.equal(heart.before.formIoU, 0.895); // thin marginally helped
+  assert.equal(heart.after.formIoU, 0.877); // routed solid → slight form dip
+  assert.ok(heart.dFormIoU < 0);
+  assert.ok(heart.dOcc < 0); // but occupancy drops
+  assert.equal(heart.verdict, "traded");
+});
+
+test("assembleRoutingReport: averages, occupancy totals, verdict buckets, schema", () => {
+  const { md, json } = assembleRoutingReport(SYN_SPINE);
+  assert.equal(json.schema, ROUTING_SCHEMA);
+  assert.equal(json.scale, 32);
+  // averages: before = mean(e18) over 3; after = mean(routed pick).
+  assert.equal(json.averages.formIoU.before, Math.round(((0.706 + 0.814 + 0.895) / 3) * 1000) / 1000);
+  assert.equal(json.averages.formIoU.after, Math.round(((0.706 + 0.914 + 0.877) / 3) * 1000) / 1000);
+  assert.ok(json.averages.formIoU.delta > 0); // routing lifts the average
+  // occupancy: before = sum(occThin); after = koi occThin + solids occBase.
+  assert.equal(json.occupancy.before, 3155 + 1504 + 7982);
+  assert.equal(json.occupancy.after, 3155 + 973 + 5840);
+  assert.ok(json.occupancy.delta < 0);
+  assert.equal(json.occupancy.solidsDropped, (1504 - 973) + (7982 - 5840));
+  // verdict buckets.
+  assert.deepEqual(json.recovered, ["dancing-man"]);
+  assert.deepEqual(json.kept, ["koi"]);
+  assert.deepEqual(json.traded, ["heart"]);
+  // markdown carries the table + summary.
+  assert.match(md, /before \(universal thin\) \/ after \(routed\)/);
+  assert.match(md, /dancing-man/);
+  assert.match(md, /Solids recovered:/);
+});
+
+test("assembleRoutingReport: tolerant of a missing cell; throws on a non-array spine", () => {
+  const { json } = assembleRoutingReport({ scale: 32, subjects: [{ subject: "moai", r1: {}, e18: { formIoU: 0.399 }, thin: { occThin: 6059 } }] });
+  // r1.formIoU missing → after.formIoU null → flat (not a crash).
+  assert.equal(json.subjects[0].after.formIoU, null);
+  assert.equal(json.subjects[0].verdict, "flat");
+  assert.throws(() => assembleRoutingReport({}), /subjects must be an array/);
 });
