@@ -43,22 +43,22 @@
       "formIoU": 0.76,
       "speckle": 0.12,
       "distinct": 5.43,
-      "offPalette": 0,
+      "offPalette": 717.71,
       "valueDeltaE": 5.47
     },
     "r2": {
       "formIoU": 0.76,
       "speckle": 0.04,
       "distinct": 6.43,
-      "offPalette": 2790.57,
+      "offPalette": 2896.71,
       "valueDeltaE": 0
     },
     "e18": {
       "formIoU": 0.73,
-      "speckle": 0.01,
-      "distinct": 5.29,
+      "speckle": 0.02,
+      "distinct": 5.43,
       "offPalette": 0,
-      "valueDeltaE": 8.59
+      "valueDeltaE": 11.14
     }
   },
   "regressions": [
@@ -87,7 +87,7 @@
       "subject": "dancing-man",
       "metric": "valueDeltaE",
       "vs": "r1",
-      "raw": 2.63,
+      "raw": 1.98,
       "kind": "worse"
     },
     {
@@ -108,7 +108,7 @@
       "subject": "dancing-man",
       "metric": "valueDeltaE",
       "vs": "r2",
-      "raw": 13.82,
+      "raw": 13.17,
       "kind": "worse"
     },
     {
@@ -120,7 +120,7 @@
     },
     {
       "subject": "moai",
-      "metric": "offPalette",
+      "metric": "distinct",
       "vs": "r1",
       "raw": 0,
       "kind": "no-change"
@@ -129,7 +129,7 @@
       "subject": "moai",
       "metric": "valueDeltaE",
       "vs": "r1",
-      "raw": 0.32,
+      "raw": 19.85,
       "kind": "worse"
     },
     {
@@ -141,9 +141,16 @@
     },
     {
       "subject": "moai",
+      "metric": "distinct",
+      "vs": "r2",
+      "raw": 0,
+      "kind": "no-change"
+    },
+    {
+      "subject": "moai",
       "metric": "valueDeltaE",
       "vs": "r2",
-      "raw": 1.32,
+      "raw": 20.85,
       "kind": "worse"
     },
     {
@@ -178,15 +185,15 @@
       "subject": "pineapple",
       "metric": "valueDeltaE",
       "vs": "r2",
-      "raw": 8.43,
+      "raw": 8.28,
       "kind": "worse"
     },
     {
       "subject": "bow-and-arrow",
       "metric": "distinct",
       "vs": "r1",
-      "raw": 0,
-      "kind": "no-change"
+      "raw": 1,
+      "kind": "worse"
     },
     {
       "subject": "bow-and-arrow",
@@ -199,14 +206,14 @@
       "subject": "bow-and-arrow",
       "metric": "valueDeltaE",
       "vs": "r1",
-      "raw": 6.94,
+      "raw": 4.34,
       "kind": "worse"
     },
     {
       "subject": "bow-and-arrow",
       "metric": "valueDeltaE",
       "vs": "r2",
-      "raw": 8.04,
+      "raw": 5.44,
       "kind": "worse"
     },
     {
@@ -218,16 +225,9 @@
     },
     {
       "subject": "heart",
-      "metric": "offPalette",
-      "vs": "r1",
-      "raw": 0,
-      "kind": "no-change"
-    },
-    {
-      "subject": "heart",
       "metric": "valueDeltaE",
       "vs": "r1",
-      "raw": 3.38,
+      "raw": 2,
       "kind": "worse"
     },
     {
@@ -241,7 +241,7 @@
       "subject": "heart",
       "metric": "valueDeltaE",
       "vs": "r2",
-      "raw": 8,
+      "raw": 6.62,
       "kind": "worse"
     },
     {
@@ -250,20 +250,6 @@
       "vs": "r1",
       "raw": -0.05,
       "kind": "worse"
-    },
-    {
-      "subject": "mushroom",
-      "metric": "distinct",
-      "vs": "r1",
-      "raw": 0,
-      "kind": "no-change"
-    },
-    {
-      "subject": "mushroom",
-      "metric": "offPalette",
-      "vs": "r1",
-      "raw": 0,
-      "kind": "no-change"
     },
     {
       "subject": "mushroom",
@@ -276,7 +262,7 @@
       "subject": "mushroom",
       "metric": "valueDeltaE",
       "vs": "r2",
-      "raw": 4.14,
+      "raw": 6.04,
       "kind": "worse"
     },
     {
@@ -297,14 +283,14 @@
       "subject": "koi",
       "metric": "valueDeltaE",
       "vs": "r1",
-      "raw": 11.82,
+      "raw": 13.02,
       "kind": "worse"
     },
     {
       "subject": "koi",
       "metric": "valueDeltaE",
       "vs": "r2",
-      "raw": 16.35,
+      "raw": 17.55,
       "kind": "worse"
     }
   ],
@@ -327,10 +313,10 @@
       },
       "e18": {
         "formIoU": 0.814,
-        "speckle": 0.015,
+        "speckle": 0.014,
         "distinct": 5,
         "offPalette": 0,
-        "valueDeltaE": 13.82
+        "valueDeltaE": 13.17
       },
       "thin": {
         "components": 1,
@@ -358,7 +344,7 @@
             "improved": false
           },
           "valueDeltaE": {
-            "raw": 2.63,
+            "raw": 1.98,
             "improved": false
           }
         },
@@ -380,7 +366,7 @@
             "improved": true
           },
           "valueDeltaE": {
-            "raw": 13.82,
+            "raw": 13.17,
             "improved": false
           }
         }
@@ -392,22 +378,22 @@
         "formIoU": 0.565,
         "speckle": 0.172,
         "distinct": 5,
-        "offPalette": 0,
+        "offPalette": 287,
         "valueDeltaE": 1
       },
       "r2": {
         "formIoU": 0.565,
         "speckle": 0.058,
         "distinct": 5,
-        "offPalette": 4096,
+        "offPalette": 4163,
         "valueDeltaE": 0
       },
       "e18": {
         "formIoU": 0.399,
-        "speckle": 0,
-        "distinct": 4,
+        "speckle": 0.006,
+        "distinct": 5,
         "offPalette": 0,
-        "valueDeltaE": 1.32
+        "valueDeltaE": 20.85
       },
       "thin": {
         "components": 3,
@@ -427,15 +413,15 @@
             "improved": true
           },
           "distinct": {
-            "raw": -1,
-            "improved": true
-          },
-          "offPalette": {
             "raw": 0,
             "improved": false
           },
+          "offPalette": {
+            "raw": -287,
+            "improved": true
+          },
           "valueDeltaE": {
-            "raw": 0.32,
+            "raw": 19.85,
             "improved": false
           }
         },
@@ -445,19 +431,19 @@
             "improved": false
           },
           "speckle": {
-            "raw": -0.06,
+            "raw": -0.05,
             "improved": true
           },
           "distinct": {
-            "raw": -1,
-            "improved": true
+            "raw": 0,
+            "improved": false
           },
           "offPalette": {
-            "raw": -4096,
+            "raw": -4163,
             "improved": true
           },
           "valueDeltaE": {
-            "raw": 1.32,
+            "raw": 20.85,
             "improved": false
           }
         }
@@ -481,10 +467,10 @@
       },
       "e18": {
         "formIoU": 0.845,
-        "speckle": 0.012,
+        "speckle": 0.022,
         "distinct": 4,
         "offPalette": 0,
-        "valueDeltaE": 8.43
+        "valueDeltaE": 8.28
       },
       "thin": {
         "components": 1,
@@ -500,7 +486,7 @@
             "improved": false
           },
           "speckle": {
-            "raw": -0.1,
+            "raw": -0.09,
             "improved": true
           },
           "distinct": {
@@ -512,7 +498,7 @@
             "improved": false
           },
           "valueDeltaE": {
-            "raw": -0.28,
+            "raw": -0.43,
             "improved": true
           }
         },
@@ -522,7 +508,7 @@
             "improved": false
           },
           "speckle": {
-            "raw": -0.03,
+            "raw": -0.02,
             "improved": true
           },
           "distinct": {
@@ -534,7 +520,7 @@
             "improved": true
           },
           "valueDeltaE": {
-            "raw": 8.43,
+            "raw": 8.28,
             "improved": false
           }
         }
@@ -558,10 +544,10 @@
       },
       "e18": {
         "formIoU": 0.526,
-        "speckle": 0.003,
-        "distinct": 6,
+        "speckle": 0.012,
+        "distinct": 7,
         "offPalette": 0,
-        "valueDeltaE": 8.04
+        "valueDeltaE": 5.44
       },
       "thin": {
         "components": 1,
@@ -577,11 +563,11 @@
             "improved": true
           },
           "speckle": {
-            "raw": -0.11,
+            "raw": -0.1,
             "improved": true
           },
           "distinct": {
-            "raw": 0,
+            "raw": 1,
             "improved": false
           },
           "offPalette": {
@@ -589,7 +575,7 @@
             "improved": false
           },
           "valueDeltaE": {
-            "raw": 6.94,
+            "raw": 4.34,
             "improved": false
           }
         },
@@ -599,11 +585,11 @@
             "improved": true
           },
           "speckle": {
-            "raw": -0.03,
+            "raw": -0.02,
             "improved": true
           },
           "distinct": {
-            "raw": -2,
+            "raw": -1,
             "improved": true
           },
           "offPalette": {
@@ -611,7 +597,7 @@
             "improved": true
           },
           "valueDeltaE": {
-            "raw": 8.04,
+            "raw": 5.44,
             "improved": false
           }
         }
@@ -623,22 +609,22 @@
         "formIoU": 0.877,
         "speckle": 0.153,
         "distinct": 7,
-        "offPalette": 0,
+        "offPalette": 1003,
         "valueDeltaE": 4.62
       },
       "r2": {
         "formIoU": 0.877,
         "speckle": 0.052,
         "distinct": 7,
-        "offPalette": 1323,
+        "offPalette": 1108,
         "valueDeltaE": 0
       },
       "e18": {
         "formIoU": 0.895,
-        "speckle": 0.012,
+        "speckle": 0.019,
         "distinct": 7,
         "offPalette": 0,
-        "valueDeltaE": 8
+        "valueDeltaE": 6.62
       },
       "thin": {
         "components": 1,
@@ -654,7 +640,7 @@
             "improved": true
           },
           "speckle": {
-            "raw": -0.14,
+            "raw": -0.13,
             "improved": true
           },
           "distinct": {
@@ -662,11 +648,11 @@
             "improved": false
           },
           "offPalette": {
-            "raw": 0,
-            "improved": false
+            "raw": -1003,
+            "improved": true
           },
           "valueDeltaE": {
-            "raw": 3.38,
+            "raw": 2,
             "improved": false
           }
         },
@@ -676,7 +662,7 @@
             "improved": true
           },
           "speckle": {
-            "raw": -0.04,
+            "raw": -0.03,
             "improved": true
           },
           "distinct": {
@@ -684,11 +670,11 @@
             "improved": false
           },
           "offPalette": {
-            "raw": -1323,
+            "raw": -1108,
             "improved": true
           },
           "valueDeltaE": {
-            "raw": 8,
+            "raw": 6.62,
             "improved": false
           }
         }
@@ -700,22 +686,22 @@
         "formIoU": 0.98,
         "speckle": 0.06,
         "distinct": 6,
-        "offPalette": 0,
+        "offPalette": 3734,
         "valueDeltaE": 7.17
       },
       "r2": {
         "formIoU": 0.98,
         "speckle": 0.029,
         "distinct": 7,
-        "offPalette": 8614,
+        "offPalette": 9505,
         "valueDeltaE": 0
       },
       "e18": {
         "formIoU": 0.929,
-        "speckle": 0.016,
-        "distinct": 6,
+        "speckle": 0.027,
+        "distinct": 5,
         "offPalette": 0,
-        "valueDeltaE": 4.14
+        "valueDeltaE": 6.04
       },
       "thin": {
         "components": 1,
@@ -731,19 +717,19 @@
             "improved": false
           },
           "speckle": {
-            "raw": -0.04,
+            "raw": -0.03,
             "improved": true
           },
           "distinct": {
-            "raw": 0,
-            "improved": false
+            "raw": -1,
+            "improved": true
           },
           "offPalette": {
-            "raw": 0,
-            "improved": false
+            "raw": -3734,
+            "improved": true
           },
           "valueDeltaE": {
-            "raw": -3.03,
+            "raw": -1.13,
             "improved": true
           }
         },
@@ -753,19 +739,19 @@
             "improved": false
           },
           "speckle": {
-            "raw": -0.01,
+            "raw": 0,
             "improved": true
           },
           "distinct": {
-            "raw": -1,
+            "raw": -2,
             "improved": true
           },
           "offPalette": {
-            "raw": -8614,
+            "raw": -9505,
             "improved": true
           },
           "valueDeltaE": {
-            "raw": 4.14,
+            "raw": 6.04,
             "improved": false
           }
         }
@@ -789,10 +775,10 @@
       },
       "e18": {
         "formIoU": 0.706,
-        "speckle": 0.028,
+        "speckle": 0.045,
         "distinct": 5,
         "offPalette": 0,
-        "valueDeltaE": 16.35
+        "valueDeltaE": 17.55
       },
       "thin": {
         "components": 1,
@@ -808,7 +794,7 @@
             "improved": true
           },
           "speckle": {
-            "raw": -0.1,
+            "raw": -0.08,
             "improved": true
           },
           "distinct": {
@@ -820,7 +806,7 @@
             "improved": false
           },
           "valueDeltaE": {
-            "raw": 11.82,
+            "raw": 13.02,
             "improved": false
           }
         },
@@ -830,7 +816,7 @@
             "improved": true
           },
           "speckle": {
-            "raw": -0.03,
+            "raw": -0.02,
             "improved": true
           },
           "distinct": {
@@ -842,7 +828,7 @@
             "improved": true
           },
           "valueDeltaE": {
-            "raw": 16.35,
+            "raw": 17.55,
             "improved": false
           }
         }
