@@ -1,7 +1,11 @@
 {
   "schema": "material-correct/v1",
-  "subject": "gatehouse",
-  "probe": null,
+  "subject": "gatehouse-probe",
+  "probe": {
+    "collapsed": "minecraft:deepslate_tiles→minecraft:stone_bricks",
+    "flipped": 1211,
+    "note": "a material was deliberately mis-zoned (collapsed into the wall block) to give the loop a real, visible defect to correct"
+  },
   "metric": "concept colour agreement (deterministic CIE76 cluster agreement vs the concept image)",
   "generatedFrom": {
     "inputArtifact": "material-assign/gatehouse/artifact.json",
@@ -22,7 +26,6 @@
     "minecraft:cobblestone",
     "minecraft:dark_oak_log",
     "minecraft:dark_oak_planks",
-    "minecraft:deepslate_tiles",
     "minecraft:stone_bricks"
   ],
   "manifestAfter": [
@@ -32,11 +35,11 @@
     "minecraft:deepslate_tiles",
     "minecraft:stone_bricks"
   ],
-  "wholeObjectAgreementBefore": 0.6572657280031243,
-  "wholeObjectAgreementAfter": 0.6572657280031243,
-  "verdict": "held",
-  "keptCount": 0,
-  "rolledBackCount": 2,
+  "wholeObjectAgreementBefore": 0.6280660774440563,
+  "wholeObjectAgreementAfter": 0.6454259884117082,
+  "verdict": "improved",
+  "keptCount": 1,
+  "rolledBackCount": 1,
   "additions": [],
   "perRegion": [
     {
@@ -56,10 +59,10 @@
       "defect": "roof/gable material zoning vs the concept",
       "where": "the upper mass (roof slope + gable)",
       "loopRoute": "material-correct",
-      "scoreBefore": 0.6388861230560554,
-      "scoreAfter": 0.6388861230560554,
-      "accepted": false,
-      "reason": "rolled-back"
+      "scoreBefore": 0.6209609426858553,
+      "scoreAfter": 0.6414266442237858,
+      "accepted": true,
+      "reason": "accepted"
     },
     {
       "index": 1,
@@ -78,28 +81,41 @@
       "defect": "wall/corner/base material zoning vs the concept",
       "where": "the lower mass (wall field, corner pilasters, plinth)",
       "loopRoute": "material-correct",
-      "scoreBefore": 0.6721579768248278,
-      "scoreAfter": 0.6721579768248278,
+      "scoreBefore": 0.6860894744816715,
+      "scoreAfter": 0.6860894744816715,
       "accepted": false,
       "reason": "rolled-back"
     }
   ],
   "p14": {
     "ok": true,
-    "locked": [],
-    "acceptedCount": 0,
+    "locked": [
+      {
+        "min": [
+          -13,
+          16,
+          -13
+        ],
+        "max": [
+          13,
+          31,
+          13
+        ]
+      }
+    ],
+    "acceptedCount": 1,
     "violations": []
   },
   "proposals": [
     {
       "region": "-13,16,-13|13,31,13",
-      "proposedRemaps": 0,
+      "proposedRemaps": 1,
       "proposedSwaps": 0,
       "proposedAdditions": 0,
-      "applied": 0,
+      "applied": 1,
       "acceptedAdditions": 0,
       "rejected": [],
-      "stashed": false
+      "stashed": true
     },
     {
       "region": "-13,0,-13|13,15,13",
@@ -145,10 +161,10 @@
       "where": "the upper mass (roof slope + gable)",
       "route": "material-correct",
       "tweak": "noop",
-      "scoreBefore": 0.6388861230560554,
-      "scoreAfter": 0.6388861230560554,
-      "accepted": false,
-      "reason": "rolled-back"
+      "scoreBefore": 0.6209609426858553,
+      "scoreAfter": 0.6414266442237858,
+      "accepted": true,
+      "reason": "accepted"
     },
     {
       "iteration": 2,
@@ -182,8 +198,8 @@
       "where": "the lower mass (wall field, corner pilasters, plinth)",
       "route": "material-correct",
       "tweak": "noop",
-      "scoreBefore": 0.6721579768248278,
-      "scoreAfter": 0.6721579768248278,
+      "scoreBefore": 0.6860894744816715,
+      "scoreAfter": 0.6860894744816715,
       "accepted": false,
       "reason": "rolled-back"
     }

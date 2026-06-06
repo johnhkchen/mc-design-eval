@@ -84,15 +84,51 @@ export function classifySwap(op, { allowed, table } = {}) {
 }
 
 /**
+ * Apply BLOCK-REMAPS to an in-region placement set: each `{fromBlock, toBlock}` recolors EVERY placement
+ * whose block == fromBlock to toBlock. The right granularity for a DENSE voxel region (thousands of cells)
+ * where per-index swaps do not scale — one remap recolors a whole material at once. Positions byte-
+ * identical (recolor-only ⇒ geometry immutable); a remap can never empty the region. A remap whose toBlock
+ * is not in `allowed` is dropped (recorded). PURE; the input array is not mutated.
+ * @param {object[]} inRegion
+ * @param {Array<{fromBlock:string, toBlock:string}>} remaps
+ * @param {Set<string>} allowed  the (grown) allowed palette
+ * @returns {{placements:object[], applied:object[], rejected:Array<{op:object,reason:string}>}}
+ */
+function applyRemaps(inRegion, remaps, allowed) {
+  const map = new Map(); // fromBlock → toBlock (last wins on a dup from)
+  const applied = [];
+  const rejected = [];
+  for (const r of Array.isArray(remaps) ? remaps : []) {
+    const from = normalizeBlock(r && r.fromBlock);
+    const to = normalizeBlock(r && r.toBlock);
+    if (!from || !to) {
+      rejected.push({ op: { kind: "remap", ...r }, reason: "remap: missing from/to block" });
+      continue;
+    }
+    if (!allowed.has(to)) {
+      rejected.push({ op: { kind: "remap", ...r }, reason: "remap: off-palette toBlock (no concept justification)" });
+      continue;
+    }
+    map.set(from, to);
+    applied.push({ kind: "remap", fromBlock: from, toBlock: to });
+  }
+  if (map.size === 0) return { placements: inRegion.slice(), applied, rejected };
+  const placements = inRegion.map((p) => (map.has(p.block) ? { ...p, block: map.get(p.block) } : p));
+  return { placements, applied, rejected };
+}
+
+/**
  * APPLY A CONCEPT CORRECTION to an in-region placement set: gate the proposed additions, GROW the allowed
- * palette by the accepted ones, keep only the recolor swaps whose target block is then allowed, and apply
- * them via the REUSED `applyFormEdit` (swap-only — positions byte-identical, so geometry is immutable by
- * construction). PURE; inputs unmutated. A swap to an un-justified off-palette/needs-addition block is
+ * palette by the accepted ones, then apply (a) BLOCK-REMAPS — `{fromBlock,toBlock}` recoloring a whole
+ * material across the region (the scalable primitive for dense voxel builds) — and (b) per-index recolor
+ * SWAPS via the REUSED `applyFormEdit`. Both are recolor-only (positions byte-identical, so geometry is
+ * immutable by construction). PURE; inputs unmutated. A remap/swap to an un-justified off-palette block is
  * DROPPED (recorded in `rejected`, never thrown — the model may over-reach; drop the op, not the edit).
  *
  * @param {object[]} inRegion  R.placements (the in-region set)
  * @param {{min:number[],max:number[]}} subBounds  R.subBounds
- * @param {{swaps?:Array<{target:number, block:string}>, additions?:Array<object>}} correction
+ * @param {{remaps?:Array<{fromBlock:string,toBlock:string}>, swaps?:Array<{target:number, block:string}>,
+ *          additions?:Array<object>}} correction
  * @param {{allowed:Set<string>, table?:object}} ctx  the pre-correction allowed palette
  * @returns {{placements:object[], applied:object[], rejected:Array<{op:object,reason:string}>,
  *            acceptedAdditions:Array<{block:string, conceptMaterial:string, where:string, rationale:string}>,
@@ -103,7 +139,7 @@ export function applyCorrection(inRegion, subBounds, correction = {}, { allowed 
   const acceptedAdditions = [];
   const rejected = [];
 
-  // 1. Gate additions first — an accepted addition unlocks the swaps that target its block.
+  // 1. Gate additions first — an accepted addition unlocks the remaps/swaps that target its block.
   for (const add of Array.isArray(correction.additions) ? correction.additions : []) {
     const g = gateAddition(add, { allowed: grown, table });
     if (!g.ok) {
@@ -119,7 +155,10 @@ export function applyCorrection(inRegion, subBounds, correction = {}, { allowed 
     });
   }
 
-  // 2. Keep only recolor swaps whose (normalized) target block is now allowed; drop the rest, recorded.
+  // 2. Apply block-remaps first (whole-material recolor, scales to dense regions).
+  const remapRes = applyRemaps(inRegion, correction.remaps, grown);
+
+  // 3. Keep only recolor swaps whose (normalized) target block is now allowed; drop the rest, recorded.
   const swapOps = [];
   for (const s of Array.isArray(correction.swaps) ? correction.swaps : []) {
     const block = normalizeBlock(s && s.block);
@@ -134,12 +173,12 @@ export function applyCorrection(inRegion, subBounds, correction = {}, { allowed 
     swapOps.push({ kind: "swap", target: s.target, block });
   }
 
-  // 3. Apply the kept swaps via the reused swap core (geometry-immutable; never empties the region).
-  const res = applyFormEdit(inRegion, subBounds, swapOps);
+  // 4. Apply the kept swaps via the reused swap core (over the remapped placements; never empties the region).
+  const res = applyFormEdit(remapRes.placements, subBounds, swapOps);
   return {
     placements: res.placements,
-    applied: res.applied,
-    rejected: [...rejected, ...res.rejected],
+    applied: [...remapRes.applied, ...res.applied],
+    rejected: [...rejected, ...remapRes.rejected, ...res.rejected],
     acceptedAdditions,
     grownAllowed: grown,
   };

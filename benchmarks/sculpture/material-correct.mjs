@@ -123,7 +123,30 @@ function secondaryOf(manifest, mapPalette) {
   return manifest.filter((b) => !m.has(b));
 }
 
-async function buildLive() {
+/**
+ * PROBE mutation: deliberately mis-zone the ROOF — flip every deepslate_tiles placement (the dark roof
+ * material) to stone_bricks (the light wall block). This is a HIGH-CONTRAST, clearly-visible defect (a
+ * light-grey roof where the concept shows a dark roof) that the model CAN see in a render and the
+ * colorimetric gate CAN reward fixing — so it exercises the corrective accept path live on the real
+ * subject. (A near-TONE collapse like cobblestone→stone_bricks is, by contrast, nearly invisible in a
+ * render — the model proposes nothing, which is itself the honest finding that near-tone identity is not
+ * recoverable from colour and is why T-072 places by GEOMETRY, not colour.) Returns a fresh artifact + a
+ * count. `from`/`to` are overridable so the corner-collapse limitation can also be probed.
+ */
+function collapseMaterial(artifact, from = "minecraft:deepslate_tiles", to = "minecraft:stone_bricks") {
+  let flipped = 0;
+  const placements = artifact.placements.map((p) => {
+    if (p.block === from) {
+      flipped++;
+      return { ...p, block: to };
+    }
+    return p;
+  });
+  const manifest = [...new Set(placements.map((p) => p.block))].sort();
+  return { artifact: { ...artifact, palette: { ...artifact.palette, manifest }, placements }, flipped, from, to };
+}
+
+async function buildLive({ probe = false } = {}) {
   const artifactPath = join(IN_DIR, SUBJECT.key, "artifact.json");
   const conceptPath = join(RUNS, SUBJECT.conceptRun, "concept.png");
   const mapPath = join(MAP_DIR, SUBJECT.map);
@@ -131,12 +154,21 @@ async function buildLive() {
   if (!existsSync(conceptPath)) throw new Error(`${conceptPath} absent (the concept is run-local)`);
   if (!existsSync(mapPath)) throw new Error(`material-map/${SUBJECT.map} absent (run T-071 material:map first)`);
 
-  const artifact = JSON.parse(readFileSync(artifactPath, "utf8"));
   const mapJson = JSON.parse(readFileSync(mapPath, "utf8"));
   const mapPalette = mapJson.palette ?? [];
+  let artifact = JSON.parse(readFileSync(artifactPath, "utf8"));
+  let probeFlipped = 0;
+  let probeFromTo = null;
+  if (probe) {
+    const c = collapseMaterial(artifact);
+    artifact = c.artifact;
+    probeFlipped = c.flipped;
+    probeFromTo = `${c.from}→${c.to}`;
+  }
   const secondary = secondaryOf(artifact.palette.manifest, mapPalette);
 
-  const subjOut = join(OUT_DIR, SUBJECT.key);
+  const recordName = probe ? `${SUBJECT.key}-probe` : SUBJECT.key;
+  const subjOut = join(OUT_DIR, recordName);
   mkdirSync(subjOut, { recursive: true });
 
   const target = conceptMaterialTarget({ conceptPath });
@@ -188,7 +220,11 @@ async function buildLive() {
 
   const record = {
     schema: "material-correct/v1",
-    subject: SUBJECT.key,
+    subject: recordName,
+    probe: probe
+      ? { collapsed: probeFromTo, flipped: probeFlipped,
+          note: "a material was deliberately mis-zoned (collapsed into the wall block) to give the loop a real, visible defect to correct" }
+      : null,
     metric: "concept colour agreement (deterministic CIE76 cluster agreement vs the concept image)",
     generatedFrom: {
       inputArtifact: `material-assign/${SUBJECT.key}/artifact.json`,
@@ -211,12 +247,15 @@ async function buildLive() {
   };
 
   writeFileSync(join(subjOut, "artifact.json"), JSON.stringify(out.artifact, null, 2) + "\n");
-  writeFileSync(join(OUT_DIR, `${SUBJECT.key}.json`), JSON.stringify(record, null, 2) + "\n");
+  writeFileSync(join(OUT_DIR, `${recordName}.json`), JSON.stringify(record, null, 2) + "\n");
   emitMd([record]);
 
   console.error(
-    `gatehouse material-correct: agreement ${fmt(beforeWhole)} → ${fmt(afterWhole)} (verdict ${record.verdict}); ` +
-      `regions kept/rolled ${keptCount}/${rolledBackCount}; additions ${editor.additions.length}; P14 ${record.p14.ok ? "ok" : "VIOLATION"}`,
+    `${recordName} material-correct: agreement ${fmt(beforeWhole)} → ${fmt(afterWhole)} (verdict ${record.verdict}); ` +
+      `regions kept/rolled ${keptCount}/${rolledBackCount}; additions ${editor.additions.length}; ` +
+      `proposed remaps/swaps ${editor.proposals.reduce((n, p) => n + p.proposedRemaps, 0)}/${editor.proposals.reduce((n, p) => n + p.proposedSwaps, 0)}; ` +
+      `P14 ${record.p14.ok ? "ok" : "VIOLATION"}` +
+      (probe ? ` (probe: ${probeFlipped} cells collapsed ${probeFromTo})` : ""),
   );
   return record;
 }
@@ -260,7 +299,7 @@ function emitMd(rows) {
       ].join("\n"),
     ),
   ].join("\n");
-  writeFileSync(join(OUT_DIR, `${SUBJECT.key}.md`), md);
+  writeFileSync(join(OUT_DIR, `${rows[0].subject}.md`), md);
 }
 
 /** --offline: re-derive the verdict from committed numbers + re-validate the corrected artifact, no GL/model. */
@@ -288,7 +327,10 @@ async function main() {
     return;
   }
   mkdirSync(OUT_DIR, { recursive: true });
-  await buildLive();
+  // --probe: deliberately mis-zone the corners (collapse cobblestone→stone_bricks) before the loop, to
+  // exercise the corrective path live on the real subject — proves the loop fixes a real defect, not just
+  // that nothing needed fixing. Default (no flag): the honest run on the as-built gatehouse.
+  await buildLive({ probe: process.argv.includes("--probe") });
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {

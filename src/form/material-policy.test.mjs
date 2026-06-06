@@ -137,6 +137,41 @@ test("MP-apply: an off-palette swap with NO justification is DROPPED (recorded, 
   assert.ok(out.placements.every((p) => p.block === "minecraft:stone_bricks"), "build unchanged");
 });
 
+test("MP-apply: a block-REMAP recolors the whole material across a dense region (geometry immutable)", () => {
+  const allowed = allowedPalette({ mapPalette: ["minecraft:stone_bricks", "minecraft:deepslate_tiles"] });
+  const inR = inRegionFixture(); // three stone_bricks voxels (stands in for thousands)
+  const out = applyCorrection(inR, SUB, { remaps: [{ fromBlock: "minecraft:stone_bricks", toBlock: "minecraft:deepslate_tiles" }] }, { allowed });
+  assert.equal(out.applied.length, 1, "one remap applied recolors all matching cells");
+  assert.ok(out.placements.every((p) => p.block === "minecraft:deepslate_tiles"), "every stone_bricks cell recolored");
+  const posOf = (ps) => ps.map((p) => p.pos.join(",")).sort();
+  assert.deepEqual(posOf(out.placements), posOf(inR), "positions identical — geometry immutable");
+});
+
+test("MP-apply: a remap to an off-palette toBlock is DROPPED (recorded)", () => {
+  const allowed = allowedPalette({ mapPalette: ["minecraft:stone_bricks"] });
+  const inR = inRegionFixture();
+  const out = applyCorrection(inR, SUB, { remaps: [{ fromBlock: "minecraft:stone_bricks", toBlock: "minecraft:deepslate_tiles" }] }, { allowed });
+  assert.equal(out.applied.length, 0);
+  assert.ok(out.rejected.some((r) => /remap: off-palette/.test(r.reason)));
+  assert.ok(out.placements.every((p) => p.block === "minecraft:stone_bricks"), "build unchanged");
+});
+
+test("MP-apply: a remap to a concept-justified ADDITION applies after the addition is gated", () => {
+  const allowed = allowedPalette({ mapPalette: ["minecraft:stone_bricks"] });
+  const inR = inRegionFixture();
+  const out = applyCorrection(
+    inR,
+    SUB,
+    {
+      remaps: [{ fromBlock: "minecraft:stone_bricks", toBlock: "minecraft:deepslate_tiles" }],
+      additions: [{ block: "minecraft:deepslate_tiles", conceptMaterial: "dark roof tiling", where: "the gable slope" }],
+    },
+    { allowed },
+  );
+  assert.equal(out.acceptedAdditions.length, 1);
+  assert.ok(out.placements.every((p) => p.block === "minecraft:deepslate_tiles"), "remap applied after the addition unlocked the toBlock");
+});
+
 test("MP-apply: schema tag is stable", () => {
   assert.equal(POLICY_SCHEMA, "material-policy/v1");
 });

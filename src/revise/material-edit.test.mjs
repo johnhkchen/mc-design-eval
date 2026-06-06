@@ -104,6 +104,26 @@ test("ME-policy: a needs-addition swap applies when its concept-justified additi
   assert.equal(editor.additions[0].conceptMaterial, "rough cobble buttress");
 });
 
+test("ME-policy: a whole-material REMAP recolors a dense region in one op (scales where swaps cannot)", async () => {
+  // The dense-region case the probe surfaced: a region of N stone_bricks cells, recolored to deepslate by
+  // a SINGLE remap (a per-index swap list would not scale to thousands of cells).
+  const art = artifactWith([
+    { op: "voxel", pos: [0, 0, 0], block: "minecraft:stone_bricks" },
+    { op: "voxel", pos: [1, 0, 0], block: "minecraft:stone_bricks" },
+    { op: "voxel", pos: [0, 1, 0], block: "minecraft:stone_bricks" },
+  ]);
+  const editor = makeMaterialEditor({
+    critic: materialCritic(),
+    policy: { mapPalette: ["minecraft:stone_bricks", "minecraft:deepslate_tiles"] },
+    propose: async () => ({ remaps: [{ fromBlock: "minecraft:stone_bricks", toBlock: "minecraft:deepslate_tiles" }] }),
+  });
+  const R = selectRegion(art, REGION);
+  await editor.diagnose(art, R, null);
+  const replayed = editor.tweakFor(MATERIAL_EDIT_ROUTE)(R.placements, subBoundsOf(R));
+  assert.ok(replayed.every((p) => p.block === "minecraft:deepslate_tiles"), "the remap recolored every cell");
+  assert.equal(editor.proposals[0].proposedRemaps, 1);
+});
+
 // --- ME-cage ----------------------------------------------------------------
 
 test("ME-cage: through the UNMODIFIED reviseLoop — accepted when the score improves", async () => {

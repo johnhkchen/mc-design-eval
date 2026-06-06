@@ -86,21 +86,23 @@ export function makeMaterialEditor(opts = {}) {
 
     const record = {
       region: regionKey(subBoundsOf(R)),
+      proposedRemaps: 0,
       proposedSwaps: 0,
       proposedAdditions: 0,
-      appliedSwaps: 0,
+      applied: 0,
       acceptedAdditions: 0,
       rejected: [],
       stashed: false,
     };
     try {
       const ctx = { allowed: [...allowed], currentPalette: [...allowed] };
-      const { swaps = [], additions: proposed = [] } = await propose(artifact, R, observation, ctx);
+      const { remaps = [], swaps = [], additions: proposed = [] } = await propose(artifact, R, observation, ctx);
+      record.proposedRemaps = Array.isArray(remaps) ? remaps.length : 0;
       record.proposedSwaps = Array.isArray(swaps) ? swaps.length : 0;
       record.proposedAdditions = Array.isArray(proposed) ? proposed.length : 0;
 
-      const res = applyCorrection(R.placements, R.subBounds, { swaps, additions: proposed }, { allowed, table });
-      record.appliedSwaps = res.applied.length;
+      const res = applyCorrection(R.placements, R.subBounds, { remaps, swaps, additions: proposed }, { allowed, table });
+      record.applied = res.applied.length;
       record.acceptedAdditions = res.acceptedAdditions.length;
       record.rejected = res.rejected.map((r) => r.reason);
 
@@ -179,7 +181,7 @@ export async function defaultProposeCorrection(artifact, R, observation, ctx = {
       if (code !== 0) return reject(new Error(`baml-material-correct exited ${code}`));
       try {
         const parsed = JSON.parse(out);
-        resolve({ swaps: parsed.swaps ?? [], additions: parsed.additions ?? [] });
+        resolve({ remaps: parsed.remaps ?? [], swaps: parsed.swaps ?? [], additions: parsed.additions ?? [] });
       } catch (e) {
         reject(new Error(`baml-material-correct: unparseable output (${e.message})\n${out.slice(0, 300)}`));
       }

@@ -59,6 +59,7 @@ const hi = cleaned.lastIndexOf("}");
 if (lo >= 0 && hi > lo) cleaned = cleaned.slice(lo, hi + 1);
 const parsed: any = b.parse.CorrectRegion(cleaned);
 
+const remaps = (parsed.remaps ?? []).map((r: any) => ({ fromBlock: r.fromBlock ?? "", toBlock: r.toBlock ?? "" }));
 const swaps = (parsed.swaps ?? []).map((s: any) => ({ target: s.target, block: s.block ?? "" }));
 const additions = (parsed.additions ?? []).map((a: any) => ({
   block: a.block ?? "",
@@ -67,4 +68,4 @@ const additions = (parsed.additions ?? []).map((a: any) => ({
   rationale: a.rationale ?? "",
 }));
 
-process.stdout.write(JSON.stringify({ swaps, additions }));
+process.stdout.write(JSON.stringify({ remaps, swaps, additions }));

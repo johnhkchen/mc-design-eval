@@ -10,7 +10,15 @@
 // colour agreement improved. Kept SEPARATE from the frozen ReviseRegion (a FORM editor) so each prompt
 // stays reproducible.
 
-// One recolor: re-block the in-region placement at `target` (its index in the prompt list) to `block`.
+// A whole-material recolor: re-block EVERY in-region placement whose block == fromBlock to toBlock. The
+// right granularity for a DENSE region (a voxelized roof/wall is thousands of cells) — one remap recolors
+// the whole mis-zoned material at once. PREFER this over per-index swaps for region-wide material errors.
+class MaterialRemap {
+  fromBlock string @description("the namespaced block CURRENTLY mis-zoned in this region, e.g. minecraft:stone_bricks")
+  toBlock string @description("the namespaced block it SHOULD be per the concept, e.g. minecraft:deepslate_tiles")
+}
+
+// A precise single recolor: re-block the in-region placement at `target` (its index in the prompt list).
 class MaterialSwap {
   target int @description("index of the in-region placement to RE-BLOCK (recolor); geometry is unchanged")
   block string @description("the new namespaced block id, e.g. minecraft:cobblestone — a real survival block, preferably already in the current palette")
@@ -25,7 +33,8 @@ class MaterialAddition {
 }
 
 class RegionCorrection {
-  swaps MaterialSwap[] @description("a SMALL, surgical set of recolor swaps — only the mis-zoned placements")
+  remaps MaterialRemap[] @description("whole-material recolors for region-wide mis-zoning — the PREFERRED tool; usually 0–2")
+  swaps MaterialSwap[] @description("a SMALL set of per-cell recolor swaps for precise fixes; usually empty when a remap fits")
   additions MaterialAddition[] @description("concept materials MISSING from the current palette; usually empty")
 }
 
@@ -57,11 +66,18 @@ function CorrectRegion(subject: string, region: string, current_palette: string,
     {{ current_palette }}
 
     ## What "material correction" means here
-    The feature heuristics that placed these blocks sometimes MIS-ZONE a region — a corner buttress filled
-    with the smooth wall block instead of the rough corner block, a gable mis-materialed. Compare the build
-    to the concept and emit a swap for each placement whose MATERIAL is wrong for where it sits. Prefer the
-    block in the current palette whose TEXTURE/GRAIN/ROLE matches what the concept shows there — the right
-    MATERIAL, not the closest average colour.
+    The feature heuristics that placed these blocks sometimes MIS-ZONE a region — a roof filled with the
+    light wall block instead of the dark roof block, a gable mis-materialed, a corner buttress filled with
+    the smooth wall block. Compare the build render to the concept and fix each material that is wrong for
+    where it sits. Prefer the block whose TEXTURE/GRAIN/ROLE matches what the concept shows there — the
+    right MATERIAL, not the closest average colour.
+
+    ## How to correct — PREFER whole-material remaps
+    This region may contain THOUSANDS of voxel placements, so do NOT try to swap them one index at a time.
+    When a whole material is mis-zoned (e.g. the roof reads as light wall stone but the concept shows a dark
+    roof), emit a single `MaterialRemap` {fromBlock, toBlock} — it recolors EVERY matching cell in the
+    region at once. Use the per-index `swaps` only for a few precise touch-ups a remap would over-reach.
+    Read the placements list below to see which block ids are currently present in this region.
 
     ## The right to ADD a missing material (use sparingly, justify always)
     If the concept clearly shows a material that is MISSING from the current palette (a "missing texture"),
@@ -71,10 +87,10 @@ function CorrectRegion(subject: string, region: string, current_palette: string,
     (same material role, no new distinction). Most regions need ZERO additions.
 
     ## Rules — read carefully
-    - RECOLOR ONLY. Never move, add, or remove geometry — emit only swaps (and, rarely, additions).
-    - Keep the list SMALL and surgical — swap only the genuinely mis-zoned placements, not the whole region.
-    - Every `block` must be a REAL, survival-obtainable Minecraft block, NAMESPACED (minecraft:...).
-    - If the region's materials already match the concept, return EMPTY swaps and additions.
+    - RECOLOR ONLY. Never move, add, or remove geometry — emit only remaps/swaps (and, rarely, additions).
+    - Be surgical — correct only the genuinely mis-zoned materials.
+    - Every block id must be a REAL, survival-obtainable Minecraft block, NAMESPACED (minecraft:...).
+    - If the region's materials already match the concept, return EMPTY remaps, swaps, and additions.
 
     {{ ctx.output_format }}
   "#
