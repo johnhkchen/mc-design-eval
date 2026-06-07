@@ -44,23 +44,23 @@
     "histogram": {
       "masked": {
         "base": 0,
-        "upper": 134,
+        "upper": 83,
         "roof": 0
       },
       "unmasked": {
         "base": 96,
-        "upper": 134,
-        "roof": 80
+        "upper": 83,
+        "roof": 131
       }
     },
-    "offZonePlasterStripped": 1,
+    "offZonePlasterStripped": 2,
     "interiorStrays": 5,
     "note": "histogram = surface plaster per structural zone. MASKED (this fix) confines plaster to 'upper' (base=0, roof=0); UNMASKED (the shipped color-only splat) smears it into base+roof. Interior strays are pre-existing, not on any face, and untouched by seal/paint — not the visible defect."
   },
   "plaster": {
     "block": "minecraft:white_terracotta",
     "before": 7,
-    "after": 139,
+    "after": 88,
     "reversed": true
   },
   "materialCounts": {
@@ -73,23 +73,23 @@
       "dark_oak_planks": 21
     },
     "after": {
-      "cobblestone": 444,
-      "stone_bricks": 3742,
-      "dark_oak_log": 1022,
-      "spruce_planks": 1068,
-      "white_terracotta": 139,
-      "dark_oak_planks": 23
+      "cobblestone": 477,
+      "stone_bricks": 3762,
+      "dark_oak_log": 947,
+      "spruce_planks": 1102,
+      "white_terracotta": 88,
+      "dark_oak_planks": 62
     }
   },
-  "cornerCollisions": 16,
+  "cornerCollisions": 7,
   "faces": [
     {
       "face": "front (+z)",
       "source": "concept",
-      "painted": 218,
-      "skipped": 38,
+      "painted": 186,
+      "skipped": 34,
       "offPalette": 0,
-      "zoneRejected": 315,
+      "zoneRejected": 351,
       "before": {
         "path": "benchmarks/sculpture/spray-paint/cottage/view-front-before.png",
         "score": {
@@ -246,46 +246,46 @@
         "path": "benchmarks/sculpture/spray-paint/cottage/view-front-after.png",
         "score": {
           "schema": "face-resemblance/v1",
-          "score": 0.317,
+          "score": 0.3,
           "zone": {
-            "score": 0.317,
-            "meanDeltaE": 35.08,
+            "score": 0.3,
+            "meanDeltaE": 36.61,
             "zoneGrid": 8,
             "common": 60,
             "zones": {
               "build": [
                 null,
                 null,
-                "deepslate_gold_ore",
-                "dead_brain_coral_block",
-                "exposed_cut_copper",
-                "exposed_cut_copper",
+                "brown_stained_glass",
+                "acacia_log",
+                "acacia_log",
+                "acacia_log",
                 null,
                 null,
                 "bookshelf",
                 "barrel",
-                "acacia_log",
-                "deepslate_copper_ore",
+                "soul_sand",
+                "stripped_dark_oak_log",
                 "mycelium",
-                "soul_sand",
-                "deepslate_gold_ore",
-                "deepslate_gold_ore",
-                "bookshelf",
-                "exposed_cut_copper",
-                "soul_sand",
-                "brown_stained_glass",
-                "dark_oak_log",
-                "brown_stained_glass",
-                "brown_stained_glass",
-                "bookshelf",
-                "white_terracotta",
-                "exposed_copper",
                 "acacia_log",
+                "deepslate_gold_ore",
+                "deepslate_gold_ore",
+                "oak_log",
+                "brown_stained_glass",
+                "mangrove_log",
+                "spruce_log",
+                "acacia_log",
+                "mangrove_log",
+                "mangrove_log",
+                "brown_stained_glass",
+                "dead_brain_coral_block",
+                "deepslate_iron_ore",
+                "mangrove_log",
+                "dark_oak_log",
                 "muddy_mangrove_roots",
-                "dark_oak_log",
+                "mangrove_log",
+                "mycelium",
                 "acacia_log",
-                "dripstone_block",
-                "dripstone_block",
                 "white_terracotta",
                 "exposed_copper",
                 "dead_bubble_coral_block",
@@ -397,8 +397,8 @@
       "gate": {
         "accepted": true,
         "before": 0.25,
-        "after": 0.317,
-        "delta": 0.067,
+        "after": 0.3,
+        "delta": 0.05,
         "epsilon": 0
       },
       "accepted": true,
@@ -407,10 +407,10 @@
     {
       "face": "side (+x)",
       "source": "glb",
-      "painted": 286,
-      "skipped": 141,
+      "painted": 231,
+      "skipped": 131,
       "offPalette": 0,
-      "zoneRejected": 263,
+      "zoneRejected": 328,
       "before": {
         "path": "benchmarks/sculpture/spray-paint/cottage/view-side-before.png",
         "score": null

@@ -1,21 +1,21 @@
 # Spray-paint — cottage (T-079-02)
 
-Plaster (`minecraft:white_terracotta`): **7 → 139** — the 215→8 regression **reversed**.
+Plaster (`minecraft:white_terracotta`): **7 → 88** — the 215→8 regression **reversed**.
 
 Sealed before paint: 6429 → 6597 placements (seal then paint).
 
 ## Zone mask (T-079-02)
 storeyDivide = y7. Surface plaster by zone:
-- **masked (this fix):** base 0, upper 134, roof 0 → plaster confined to the upper storey (base 0, roof 0).
-- **unmasked (the shipped color-only splat):** base 96, upper 134, roof 80 → smeared into base + roof.
+- **masked (this fix):** base 0, upper 83, roof 0 → plaster confined to the upper storey (base 0, roof 0).
+- **unmasked (the shipped color-only splat):** base 96, upper 83, roof 131 → smeared into base + roof.
 - interior strays (pre-existing, not on any face, untouched): 5.
 
 Enforced palette ("4 cans"): cobblestone, dark_oak_log, dark_oak_planks, spruce_planks, stone_bricks, white_terracotta.
-Corner collisions resolved (concept > glb): 16.
+Corner collisions resolved (concept > glb): 7.
 
 ## Faces
-- **front (+z)** (concept): painted 218, skipped 38, offPalette 0, zoneRejected 315, accepted=true · resemblance 0.25→0.317
-- **side (+x)** (glb): painted 286, skipped 141, offPalette 0, zoneRejected 263, accepted=true · no concept face for this side — the textured GLB is the truth; gated by-construction
+- **front (+z)** (concept): painted 186, skipped 34, offPalette 0, zoneRejected 351, accepted=true · resemblance 0.25→0.3
+- **side (+x)** (glb): painted 231, skipped 131, offPalette 0, zoneRejected 328, accepted=true · no concept face for this side — the textured GLB is the truth; gated by-construction
 
 Refine: skipped (optional polish; the structural zone mask + base/roof=0 throw are the guard)
 

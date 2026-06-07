@@ -261,10 +261,16 @@ export function structuralZones(occ, opts = {}) {
   const minY = occ.bounds ? occ.bounds.min[1] : 0;
   const storeyDivide = opts.storeyDivide ??
     (floorLines.length >= 2 ? floorLines[1] : minY + (opts.baseHeight ?? 6));
+  // TOP of the upper storey (the eave line) — the floor line ABOVE storeyDivide, else a storey's height up.
+  // Bounding "upper" above by GEOMETRY is essential: roofRegion under-covers a noisy pitched roof
+  // (coverage < 1), so relying on roof MEMBERSHIP alone leaks plaster up into the gable. The eave line is
+  // immune to the material collapse (it's a floor-slab geometry signal), unlike the dominant-block bands.
+  const upperTop = opts.upperTop ??
+    (floorLines.length >= 3 ? floorLines[floorLines.length - 1] : storeyDivide + (opts.storeyHeight ?? 7));
   const zoneOf = (voxel) => {
     const [x, y, z] = voxel;
-    if (roofKeys.has(`${x},${y},${z}`)) return "roof";
+    if (y >= upperTop || roofKeys.has(`${x},${y},${z}`)) return "roof";
     return y >= storeyDivide ? "upper" : "base";
   };
-  return { zoneOf, storeyDivide, roofKeys, floorLines };
+  return { zoneOf, storeyDivide, upperTop, roofKeys, floorLines };
 }
