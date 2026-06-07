@@ -235,3 +235,36 @@ export function structuralRead(occ, opts = {}) {
     wallFields: wallFields(occ),
   };
 }
+
+/**
+ * Structural ZONES for material masking — classify a voxel into "base" | "upper" | "roof". The spray-
+ * paint zone-mask gate (S-079 fix) consumes `zoneOf` so plaster lands in the upper storey ONLY; the
+ * runner maps each zone → its allowed materials. Derived from GEOMETRY (floor lines + the top-exposed
+ * roof shell), NOT the current dominant blocks — so it survives a material collapse (the raw cottage's
+ * plaster has already collapsed to stone, so the dominant-block bands encode the wrong materials).
+ *   • roof  — voxel is a {@link roofRegion} (+y top-exposed) cell. Membership, NOT a y-threshold: the
+ *             pitched roof's y-range (low eaves … high ridge/chimney) overlaps the walls', so no single
+ *             threshold separates them; membership is exact.
+ *   • upper — not roof and y >= storeyDivide (the upper-storey wall band, plaster-eligible).
+ *   • base  — y < storeyDivide (the lower stone base).
+ * storeyDivide = floorLines[1] (the floor OF the upper storey = top of the base) when present, else
+ * min y + baseHeight.
+ * @param {import("./occupancy.mjs").Occupancy} occ
+ * @param {{storeyDivide?:number, baseHeight?:number, floorFillThreshold?:number}} [opts]
+ * @returns {{zoneOf:(voxel:number[])=>("base"|"upper"|"roof"), storeyDivide:number,
+ *            roofKeys:Set<string>, floorLines:number[]}}
+ */
+export function structuralZones(occ, opts = {}) {
+  const region = roofRegion(occ);
+  const roofKeys = new Set(region.cells.map((c) => `${c.x},${c.y},${c.z}`));
+  const { floorLines } = storeyBands(occ, opts);
+  const minY = occ.bounds ? occ.bounds.min[1] : 0;
+  const storeyDivide = opts.storeyDivide ??
+    (floorLines.length >= 2 ? floorLines[1] : minY + (opts.baseHeight ?? 6));
+  const zoneOf = (voxel) => {
+    const [x, y, z] = voxel;
+    if (roofKeys.has(`${x},${y},${z}`)) return "roof";
+    return y >= storeyDivide ? "upper" : "base";
+  };
+  return { zoneOf, storeyDivide, roofKeys, floorLines };
+}

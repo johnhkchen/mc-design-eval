@@ -36,23 +36,36 @@ function namespaced(id) {
  * @property {number} painted  cells that produced a recolor
  * @property {number} skipped  filled cells skipped (no target / no change)
  * @property {number} offPalette  target cells dropped for being off-palette
+ * @property {number} zoneRejected  target cells dropped for being disallowed in the cell's structural zone
  */
 
 /**
  * Spray-paint one face: project `occ` along `dir`, then for each filled surface cell whose target block
- * is in `allowed` AND differs from the cell's current block, emit a recolor at the cell's stored voxel.
- * Air cells, target-null cells, off-palette targets, and no-change cells emit nothing (no air op). PURE.
+ * is in `allowed` AND (when a zone mask is given) allowed in the cell's structural zone AND differs from
+ * the cell's current block, emit a recolor at the cell's stored voxel. Air cells, target-null cells,
+ * off-palette targets, zone-disallowed targets, and no-change cells emit nothing (no air op). PURE.
+ *
+ * THE FIX (S-079 T-079-02): the splat is intersected with the STRUCTURAL ZONE. Color chooses which block
+ * within a zone; the structural read chooses which zone allows it. Without `zoneOf`, behaviour is
+ * unchanged (the global-palette gate only) — `white_terracotta` smeared across base + roof because
+ * 3-D/colour space has no storey axis (`twodee-interaction-sector`). With `zoneOf`, a plaster target on
+ * a base or roof cell is REJECTED (counted in `zoneRejected`), not painted.
  * @param {import("./occupancy.mjs").Occupancy} occ
  * @param {string|{name:string}} dir  an ortho/45° dir (surface-grid throws on arbitrary-oblique)
  * @param {(string|null)[][]} targetGrid  per-cell target block (bare or namespaced) or null; m×n
- * @param {{allowed:Set<string>, source?:string}} opts
+ * @param {{allowed:Set<string>, source?:string,
+ *          zoneOf?:(voxel:number[])=>string, allowedByZone?:Map<string,Set<string>>}} opts
+ *   `zoneOf` classifies a voxel into a zone; `allowedByZone` maps each zone → its allowed bare ids. When
+ *   `zoneOf` is given, `allowedByZone` MUST be a Map. The effective per-cell palette is `allowed ∩
+ *   allowedByZone.get(zone)`.
  * @returns {PaintPass}
  */
-export function paintFace(occ, dir, targetGrid, { allowed, source = "concept" } = {}) {
+export function paintFace(occ, dir, targetGrid, { allowed, source = "concept", zoneOf, allowedByZone } = {}) {
   if (!(allowed instanceof Set)) throw new Error("paintFace: opts.allowed must be a Set of bare block ids");
+  if (zoneOf && !(allowedByZone instanceof Map)) throw new Error("paintFace: opts.allowedByZone must be a Map when zoneOf is given");
   const grid = projectSurface(occ, dir);
   const placements = [];
-  let painted = 0, skipped = 0, offPalette = 0;
+  let painted = 0, skipped = 0, offPalette = 0, zoneRejected = 0;
   for (let v = 0; v < grid.m; v++) {
     const trow = targetGrid[v];
     for (let u = 0; u < grid.n; u++) {
@@ -62,12 +75,16 @@ export function paintFace(occ, dir, targetGrid, { allowed, source = "concept" } 
       if (target == null) { skipped++; continue; }
       const bareTarget = bareBlock(target);
       if (!allowed.has(bareTarget)) { offPalette++; continue; } // structurally impossible off-palette
+      if (zoneOf) {
+        const zoneAllowed = allowedByZone.get(zoneOf(cell.voxel));
+        if (!zoneAllowed || !zoneAllowed.has(bareTarget)) { zoneRejected++; continue; } // wrong zone
+      }
       if (bareTarget === bareBlock(cell.block)) { skipped++; continue; } // already that material
       placements.push({ op: "voxel", pos: [...cell.voxel], block: namespaced(target) });
       painted++;
     }
   }
-  return { dir: grid.dir, source, placements, painted, skipped, offPalette };
+  return { dir: grid.dir, source, placements, painted, skipped, offPalette, zoneRejected };
 }
 
 /**

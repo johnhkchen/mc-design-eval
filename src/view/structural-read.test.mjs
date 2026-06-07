@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { occupancyFromCells } from "./occupancy.mjs";
-import { footprint, storeyBands, openings, roofRegion, wallFields, structuralRead, airComponents } from "./structural-read.mjs";
+import { footprint, storeyBands, openings, roofRegion, wallFields, structuralRead, structuralZones, airComponents } from "./structural-read.mjs";
 
 /** Solid box perimeter ring at a fixed y over [0..s-1]² (x,z), one block. */
 function ringAtY(s, y, block) {
@@ -116,6 +116,42 @@ test("airComponents tags an enclosed hole vs a border-touching gap", () => {
   const comps = airComponents({ w, h, data: data2 });
   assert.equal(comps.length, 1);
   assert.ok(comps[0].borders.left, "gap now touches the left border");
+});
+
+test("structuralZones: base / upper / roof from floor lines + top-exposed shell", () => {
+  // A ground-floor slab y0, stone base rings y1-2, an upper-floor slab y3 (the base/upper divide),
+  // upper-storey rings y4-6, a flat roof slab y7. floorLines → [0, 3, 7]; storeyDivide = the SECOND = 3.
+  const S = 6;
+  const cells = [
+    ...slabAtY(S, 0, "minecraft:stone_bricks"),     // ground floor slab → floor line y0
+    ...ringAtY(S, 1, "minecraft:stone_bricks"), ...ringAtY(S, 2, "minecraft:stone_bricks"),
+    ...slabAtY(S, 3, "minecraft:oak_planks"),       // upper floor slab → floor line y3 (the divide)
+    ...ringAtY(S, 4, "minecraft:white_terracotta"), ...ringAtY(S, 5, "minecraft:white_terracotta"), ...ringAtY(S, 6, "minecraft:white_terracotta"),
+    ...slabAtY(S, 7, "minecraft:spruce_planks"),    // flat roof → top-exposed cells
+  ];
+  const occ = occupancyFromCells(cells);
+  const fl = storeyBands(occ).floorLines;
+  assert.deepEqual(fl, [0, 3, 7]);
+  const z = structuralZones(occ);
+  assert.equal(z.storeyDivide, fl[1]); // the SECOND floor line is the base/upper divide
+  // A wall voxel below the divide is base; above it (and not top-exposed) is upper.
+  assert.equal(z.zoneOf([0, 1, 0]), "base");
+  assert.equal(z.zoneOf([0, 5, 0]), "upper");
+  // A roof voxel (top-exposed +y slab) is roof regardless of y.
+  assert.equal(z.zoneOf([2, 7, 2]), "roof");
+  // Membership, not a threshold: the y7 corner of the slab is still roof.
+  assert.equal(z.zoneOf([0, 7, 0]), "roof");
+});
+
+test("structuralZones: storeyDivide falls back to baseHeight when <2 floor lines", () => {
+  // A solid 4-cube has a floor line only where fill is high; force the fallback via opts.
+  const cells = [];
+  for (let x = 0; x < 3; x++) for (let y = 0; y < 8; y++) for (let z = 0; z < 3; z++) cells.push({ pos: [x, y, z], block: "minecraft:stone_bricks" });
+  const occ = occupancyFromCells(cells);
+  const z = structuralZones(occ, { storeyDivide: 4 }); // explicit divide honoured
+  assert.equal(z.storeyDivide, 4);
+  assert.equal(z.zoneOf([1, 2, 1]), "base");   // below divide, interior (not top-exposed)
+  assert.equal(z.zoneOf([1, 5, 1]), "upper");  // above divide, interior
 });
 
 test("empty occupancy: all reads degrade without throwing", () => {

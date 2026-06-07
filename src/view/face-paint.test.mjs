@@ -78,6 +78,40 @@ test("occluded interior voxel is never painted (never a front-most cell)", () =>
   assert.ok(painted.has(voxelKey([2, 1, 1]))); // its front-most neighbour is painted
 });
 
+test("zone gate: plaster painted only in the upper zone; base & roof reject it (AC #1)", () => {
+  // A 4-cube. Split it by world y: lower half (y<2) = base, upper half = upper. Paint a plaster target
+  // over the +x face; only the upper-half front voxels should be painted, the base-half rejected.
+  const s = 4;
+  const occ = occupancyFromCells(cube(s));
+  const grid = projectSurface(occ, "+x");
+  const zoneOf = ([, y]) => (y < 2 ? "base" : "upper");
+  const allowedByZone = new Map([
+    ["base", new Set(["stone_bricks"])],         // base keeps stone — plaster disallowed
+    ["upper", new Set(["white_terracotta"])],    // upper allows plaster
+  ]);
+  const pass = paintFace(occ, "+x", fillTarget(grid, "white_terracotta"), { allowed: ALLOWED, zoneOf, allowedByZone });
+  // every painted voxel is in the upper zone (y >= 2); none below
+  assert.ok(pass.placements.length > 0);
+  for (const p of pass.placements) assert.ok(p.pos[1] >= 2, `painted voxel ${p.pos} must be upper-zone`);
+  // the base-half front cells were rejected by the zone gate, not painted
+  assert.ok(pass.zoneRejected > 0);
+  assert.equal(pass.painted + pass.zoneRejected, grid.filled); // every filled cell painted or zone-rejected (plaster differs from stone everywhere)
+
+  // a roof-style zone with no plaster rejects it entirely
+  const roofZone = () => "roof";
+  const roofAllowed = new Map([["roof", new Set(["spruce_planks"])]]);
+  const roofPass = paintFace(occ, "+x", fillTarget(grid, "white_terracotta"), { allowed: ALLOWED, zoneOf: roofZone, allowedByZone: roofAllowed });
+  assert.equal(roofPass.painted, 0);
+  assert.equal(roofPass.zoneRejected, grid.filled);
+});
+
+test("zone gate requires allowedByZone to be a Map", () => {
+  const occ = occupancyFromCells(cube(3));
+  const grid = projectSurface(occ, "+x");
+  assert.throws(() => paintFace(occ, "+x", fillTarget(grid, "white_terracotta"), { allowed: ALLOWED, zoneOf: () => "base" }),
+    /allowedByZone must be a Map/);
+});
+
 test("mergePaints resolves a shared corner voxel to the concept source over glb", () => {
   const conceptPass = { dir: "-z", source: "concept", placements: [{ op: "voxel", pos: [2, 2, 0], block: "minecraft:white_terracotta" }], painted: 1, skipped: 0, offPalette: 0 };
   const glbPass = { dir: "+x", source: "glb", placements: [{ op: "voxel", pos: [2, 2, 0], block: "minecraft:dark_oak_log" }], painted: 1, skipped: 0, offPalette: 0 };
