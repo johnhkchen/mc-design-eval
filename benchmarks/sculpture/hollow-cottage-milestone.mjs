@@ -25,7 +25,7 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { artifactOccupancy, bareBlock } from "../../src/view/occupancy.mjs";
-import { structuralRead } from "../../src/view/structural-read.mjs";
+import { structuralRead, structuralZones } from "../../src/view/structural-read.mjs";
 import { renderViews } from "../../src/view/multi-angle.mjs";
 import { runTieredOp } from "../../src/model-tier.mjs";
 import { requestTextWithImage } from "../../src/sdk-binding.mjs";
@@ -61,6 +61,52 @@ const OUT_DIR = join(ROOT, "docs/active/work/T-083-01");
 const ASSETS = join(ROOT, "pr/assets");
 const PLASTER = "minecraft:white_terracotta";
 const DIR_TO_ANGLE = { "+z": "front", "-z": "back", "+x": "right", "-x": "left", "+y": "top", "-y": "bottom" };
+
+// Zone→materials policy (cottage; mirrors spray-paint.mjs). BINDING: plaster ∈ "upper" ONLY.
+const ZONE_MATERIALS = {
+  base: ["stone_bricks", "cobblestone", "dark_oak_log"],
+  upper: ["white_terracotta", "dark_oak_log", "stone_bricks"],
+  roof: ["spruce_planks", "dark_oak_planks", "cobblestone", "bricks"],
+};
+const SURFACE_FACES = ["+x", "-x", "+z", "-z", "+y"];
+
+/** Per-zone count of PLASTER surface voxels (the visible skin), classified by `zoneOf`. */
+function surfacePlasterByZone(artifact, zoneOf) {
+  const occ = artifactOccupancy(artifact);
+  const seen = new Set();
+  const hist = { base: 0, upper: 0, roof: 0 };
+  for (const dir of SURFACE_FACES) {
+    for (const row of projectSurface(occ, dir).cells) {
+      for (const c of row) {
+        if (!c || bareBlock(c.block) !== "white_terracotta") continue;
+        const k = c.voxel.join(",");
+        if (seen.has(k)) continue;
+        seen.add(k);
+        hist[zoneOf(c.voxel)]++;
+      }
+    }
+  }
+  return hist;
+}
+
+/** Recolor base/roof SURFACE plaster strays to the zone primary (plaster belongs to "upper" only). */
+function stripOffZonePlaster(occ, zoneOf, allowedByZone) {
+  const primary = { base: ZONE_MATERIALS.base[0], roof: ZONE_MATERIALS.roof[0] };
+  const byKey = new Map();
+  for (const dir of SURFACE_FACES) {
+    for (const row of projectSurface(occ, dir).cells) {
+      for (const c of row) {
+        if (!c || bareBlock(c.block) !== "white_terracotta") continue;
+        const zone = zoneOf(c.voxel);
+        if (zone === "upper") continue;
+        const to = primary[zone];
+        if (!allowedByZone.get(zone)?.has(to)) continue;
+        byKey.set(c.voxel.join(","), { op: "voxel", pos: [...c.voxel], block: `minecraft:${to}` });
+      }
+    }
+  }
+  return [...byKey.values()];
+}
 
 const usageOf = (raw) => ({ input_tokens: raw?.usage?.input_tokens, output_tokens: raw?.usage?.output_tokens, total_cost_usd: raw?.total_cost_usd });
 const rel = (p) => p.replace(ROOT, "");
@@ -109,7 +155,8 @@ async function main() {
   if (!existsSync(RAW_PATH)) throw new Error(`${RAW_PATH} absent`);
   const blockTable = loadBlockTable();
 
-  // ===== STAGE 1 — SPRAY-PAINT (judgement path): recolor the skin =================================
+  // ===== STAGE 1 — SEAL (coherence holes only; the door survives) — BEFORE paint (T-079-02 AC #3) ==
+  // Seal FIRST so paint never lands on a stray (no floating painted blocks) and runs on a complete skin.
   const raw = JSON.parse(await readFile(RAW_PATH, "utf8"));
   const manifest = raw.palette?.manifest ?? [];
   const allowed = allowedPalette(raw);
@@ -118,40 +165,51 @@ async function main() {
   const plasterBefore = materialCounts(raw).white_terracotta ?? 0;
   console.error(`Raw cottage: ${raw.placements.length} placements, ${rawOcc.size} voxels; plaster(${PLASTER}) before=${plasterBefore}`);
 
-  const frontGrid = projectSurface(rawOcc, "+z");
+  const sealed = applyDeltas(raw, [...sealRoof(rawOcc).placements, ...sealWalls(rawOcc).placements]);
+  const sealedOcc = artifactOccupancy(sealed);
+  const wtSealed = watertightCheck(sealedOcc);
+  console.error(`Sealed: ${raw.placements.length}→${sealed.placements.length} placements; watertight=${wtSealed.watertight} (door/window openings retained).`);
+
+  // ===== STAGE 2 — SPRAY-PAINT (judgement path) on the SEALED skin: splat ∩ structural-zone ========
+  const { zoneOf, storeyDivide } = structuralZones(sealedOcc);
+  const allowedByZone = new Map(Object.entries(ZONE_MATERIALS).map(([z, mats]) => [z, new Set(mats.filter((b) => allowed.has(b)))]));
+  const frontGrid = projectSurface(sealedOcc, "+z");
   const conceptRes = await quantizeToFace(CONCEPT_PATH, frontGrid, { manifest });
   const frontTarget = resampleBlockGrid(conceptRes.grid, conceptRes.n, conceptRes.m, frontGrid.n, frontGrid.m).grid;
-  const frontPass = paintFace(rawOcc, "+z", frontTarget, { allowed, source: "concept" });
-  let sidePass = { dir: "+x", source: "glb", placements: [], painted: 0, skipped: 0, offPalette: 0 };
+  const frontPass = paintFace(sealedOcc, "+z", frontTarget, { allowed, source: "concept", zoneOf, allowedByZone });
+  let sidePass = { dir: "+x", source: "glb", placements: [], painted: 0, skipped: 0, offPalette: 0, zoneRejected: 0 };
   try {
-    const sideGrid = projectSurface(rawOcc, "+x");
+    const sideGrid = projectSurface(sealedOcc, "+x");
     const sideSplat = await loadGlbSplat(GLB_PATH, sideGrid, "+x", { palette, decodeTexture });
-    sidePass = paintFace(rawOcc, "+x", sideSplat.grid, { allowed, source: "glb" });
-    console.error(`Side GLB-splat: ${sidePass.painted} cells.`);
+    sidePass = paintFace(sealedOcc, "+x", sideSplat.grid, { allowed, source: "glb", zoneOf, allowedByZone });
+    console.error(`Side GLB-splat: ${sidePass.painted} cells (zoneRejected ${sidePass.zoneRejected}).`);
   } catch (e) { console.error(`Side GLB-splat skipped: ${e.message}`); }
 
   // FACE before/after for the E-12 handoff + the resemblance gate (front vs concept).
   const conceptImg = await (async () => { try { return await (await import("../../src/color/palette-extract.mjs")).decodeImage(CONCEPT_PATH); } catch { return null; } })();
-  const faceBefore = await tryRenderFace(raw, "+z", "face-front-before", conceptImg, blockTable);
+  const faceBefore = await tryRenderFace(sealed, "+z", "face-front-before", conceptImg, blockTable);
   const merged = mergePaints([sidePass, frontPass].filter((p) => p.painted > 0), { priority: ["concept", "glb"] });
-  const painted = applyPaint(raw, merged.placements);
+  const stripPlacements = stripOffZonePlaster(sealedOcc, zoneOf, allowedByZone);
+  const painted = applyPaint(sealed, [...stripPlacements, ...merged.placements]);
   const faceAfter = await tryRenderFace(painted, "+z", "face-front-after", conceptImg, blockTable);
   const resGate = acceptIfCloser({ before: faceBefore.score?.score ?? null, after: faceAfter.score?.score ?? null });
   const plasterAfter = materialCounts(painted).white_terracotta ?? 0;
   const plasterReversed = plasterAfter > plasterBefore && plasterAfter > 8;
-  console.error(`Spray-paint: front ${frontPass.painted} + side ${sidePass.painted} cells; plaster ${plasterBefore}→${plasterAfter} (${plasterReversed ? "REVERSED" : "not reversed"}); face resemblance ${faceBefore.score?.score ?? "?"}→${faceAfter.score?.score ?? "?"}`);
+  // The structural guard (T-079-02 AC #4): plaster confined to the upper storey on the visible skin.
+  const histMasked = surfacePlasterByZone(painted, zoneOf);
+  console.error(`Spray-paint: front ${frontPass.painted} (zoneRejected ${frontPass.zoneRejected}) + side ${sidePass.painted} cells; plaster ${plasterBefore}→${plasterAfter} (${plasterReversed ? "REVERSED" : "not reversed"}); surface plaster by zone ${JSON.stringify(histMasked)}; face resemblance ${faceBefore.score?.score ?? "?"}→${faceAfter.score?.score ?? "?"}`);
+  if (histMasked.base !== 0 || histMasked.roof !== 0) {
+    throw new Error(`zone violation: plaster on base/roof surface (base=${histMasked.base}, roof=${histMasked.roof}) — the splat∩zone mask failed`);
+  }
 
-  // ===== STAGE 2 — SEAL (coherence holes only; the door survives) ==================================
+  // The painted, sealed build feeds the hollow stage directly (sealing already happened).
   const paintedOcc = artifactOccupancy(painted);
-  const sealed = applyDeltas(painted, [...sealRoof(paintedOcc).placements, ...sealWalls(paintedOcc).placements]);
-  const sealedOcc = artifactOccupancy(sealed);
-  const wtSealed = watertightCheck(sealedOcc);
-  console.error(`Sealed: ${sealed.placements.length} placements; watertight=${wtSealed.watertight} (door/window openings retained).`);
 
   // ===== STAGE 3 — HOLLOW CARVE (program path), metered LIGHT detector =============================
-  const read = structuralRead(sealedOcc);
-  const core = hollowableCore(sealedOcc);
-  const before = await renderViews(sealed, ["threeQuarter"], { outDir: OUT_DIR, label: () => "hollow-probe-3q" }).catch(() => []);
+  // Operates on the painted skin (paint is a recolor, so geometry == the sealed shell).
+  const read = structuralRead(paintedOcc);
+  const core = hollowableCore(paintedOcc);
+  const before = await renderViews(painted, ["threeQuarter"], { outDir: OUT_DIR, label: () => "hollow-probe-3q" }).catch(() => []);
   let hollowDetector = null;
   try {
     if (!before.length) throw new Error("no probe render (GL unavailable)");
@@ -166,16 +224,16 @@ async function main() {
     console.error(`  detector unavailable: ${e.message} — falling back to the geometric mark.`);
     hollowDetector = { op: "hollowable-mass-detector", error: e.message, parsed: null };
   }
-  const keep = new Set([...cornerPostKeys(sealedOcc), ...tallColumnKeys(sealedOcc, { minSpanFrac: 0.9 })]);
+  const keep = new Set([...cornerPostKeys(paintedOcc), ...tallColumnKeys(paintedOcc, { minSpanFrac: 0.9 })]);
   const blockers = hollowDetector?.parsed?.blockers ?? [];
   const useDet = hollowDetector?.parsed?.hollowable === true && blockers.length === 0;
   const regions = useDet ? hollowDetector.parsed.regions : undefined;
   const inset = useDet && hollowDetector.parsed.regions?.[0]?.inset ? hollowDetector.parsed.regions[0].inset : 1;
-  const mark = markHollowable(sealedOcc, { keep, regions, inset });
-  const hollow = carveArtifact(sealed, mark.remove);
-  const hollowOcc = carveOccupancy(sealedOcc, mark.remove);
-  const carveHeld = exteriorHeld(sealedOcc, hollowOcc);
-  const cavity = cavityReport(sealedOcc, mark.remove);
+  const mark = markHollowable(paintedOcc, { keep, regions, inset });
+  const hollow = carveArtifact(painted, mark.remove);
+  const hollowOcc = carveOccupancy(paintedOcc, mark.remove);
+  const carveHeld = exteriorHeld(paintedOcc, hollowOcc);
+  const cavity = cavityReport(paintedOcc, mark.remove);
   console.error(`Hollow: ${mark.enclosed} enclosed, ${mark.protectedCount} protected, ${mark.removeCount} removed; cavity ${cavity.before}→${cavity.after}; exteriorHeld=${carveHeld.held}.`);
   if (!carveHeld.held) throw new Error("carve exterior-held FAILED — the hollow changed a front-most surface voxel.");
 
@@ -232,16 +290,18 @@ async function main() {
   const report = {
     schema: "hollow-cottage-milestone/v1",
     subject: "cottage",
-    chain: ["raw", "spray-paint", "seal", "hollow-carve", "floorplan-fill"],
+    chain: ["raw", "seal", "spray-paint", "hollow-carve", "floorplan-fill"],
     placements: { raw: raw.placements.length, painted: painted.placements.length, sealed: sealed.placements.length, hollow: hollow.placements.length, filled: filled.placements.length },
     occupancy: { voxels: rawOcc.size, dims: rawOcc.dims },
     gates: {
       exteriorResemblance: {
         path: "judgement", reference: "concept (+z front face)",
         plaster: { block: PLASTER, before: plasterBefore, after: plasterAfter, reversed: plasterReversed },
+        zones: { storeyDivide, materials: ZONE_MATERIALS, histogram: { masked: histMasked }, // surface plaster by zone after the T-079-02 fix
+          note: "splat ∩ structural-zone (T-079-02): plaster confined to the upper storey (base 0, roof 0), sealed BEFORE paint." },
         face: { before: faceBefore, after: faceAfter, gate: resGate, blind: resGate.before == null },
-        residual: "E-22 cottage was `drifted`, gap = material zoning @ upper-story walls; spray-paint restores that band " +
-          "(plaster " + plasterBefore + "→" + plasterAfter + "), so the face is no longer the gap. The remaining exterior residual is " +
+        residual: "E-22 cottage was `drifted`, gap = material zoning @ upper-story walls; the band-masked spray-paint restores that band " +
+          "(plaster " + plasterBefore + "→" + plasterAfter + ", confined to the upper storey by structuralZones), so the face is no longer the gap. The remaining exterior residual is " +
           "the +x SIDE: the concept never shows it, so the GLB splat is accepted by-construction (no per-face resemblance delta).",
       },
       interiorPlausibility: {

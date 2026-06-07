@@ -3,17 +3,17 @@
   "subject": "cottage",
   "chain": [
     "raw",
-    "spray-paint",
     "seal",
+    "spray-paint",
     "hollow-carve",
     "floorplan-fill"
   ],
   "placements": {
     "raw": 6429,
-    "painted": 7422,
-    "sealed": 7874,
-    "hollow": 5460,
-    "filled": 5855
+    "painted": 7086,
+    "sealed": 6597,
+    "hollow": 5465,
+    "filled": 5898
   },
   "occupancy": {
     "voxels": 6429,
@@ -30,8 +30,37 @@
       "plaster": {
         "block": "minecraft:white_terracotta",
         "before": 8,
-        "after": 315,
+        "after": 139,
         "reversed": true
+      },
+      "zones": {
+        "storeyDivide": 7,
+        "materials": {
+          "base": [
+            "stone_bricks",
+            "cobblestone",
+            "dark_oak_log"
+          ],
+          "upper": [
+            "white_terracotta",
+            "dark_oak_log",
+            "stone_bricks"
+          ],
+          "roof": [
+            "spruce_planks",
+            "dark_oak_planks",
+            "cobblestone",
+            "bricks"
+          ]
+        },
+        "histogram": {
+          "masked": {
+            "base": 0,
+            "upper": 134,
+            "roof": 0
+          }
+        },
+        "note": "splat ∩ structural-zone (T-079-02): plaster confined to the upper storey (base 0, roof 0), sealed BEFORE paint."
       },
       "face": {
         "before": {
@@ -41,7 +70,7 @@
             "score": 0.25,
             "zone": {
               "score": 0.25,
-              "meanDeltaE": 39.77,
+              "meanDeltaE": 40.1,
               "zoneGrid": 8,
               "common": 60,
               "zones": {
@@ -49,7 +78,7 @@
                   null,
                   null,
                   "deepslate_gold_ore",
-                  "deepslate_gold_ore",
+                  "acacia_log",
                   "acacia_log",
                   "acacia_log",
                   null,
@@ -75,41 +104,41 @@
                   "acacia_log",
                   "soul_sand",
                   "bedrock",
-                  "deepslate_copper_ore",
                   "acacia_log",
-                  "coal_ore",
-                  "acacia_log",
-                  "deepslate_copper_ore",
-                  "coal_ore",
-                  "coal_ore",
-                  "coal_ore",
-                  "cracked_stone_bricks",
-                  "cracked_stone_bricks",
-                  "stone_bricks",
-                  "stone_bricks",
-                  "deepslate_copper_ore",
-                  "gray_stained_glass",
-                  "deepslate_copper_ore",
-                  "coal_ore",
-                  "deepslate_iron_ore",
-                  "coal_ore",
-                  "deepslate_iron_ore",
-                  "tuff",
-                  "deepslate_iron_ore",
-                  "acacia_log",
-                  "acacia_log",
-                  "deepslate_iron_ore",
-                  "coal_ore",
-                  "chiseled_stone_bricks",
-                  "stone_bricks",
-                  "deepslate_iron_ore",
-                  "deepslate_copper_ore",
-                  "gray_stained_glass",
                   "mycelium",
                   "acacia_log",
                   "acacia_log",
+                  "deepslate_copper_ore",
+                  "coal_ore",
+                  "coal_ore",
+                  "coal_ore",
+                  "cracked_stone_bricks",
+                  "cracked_stone_bricks",
+                  "stone_bricks",
+                  "stone_bricks",
+                  "deepslate_copper_ore",
+                  "gray_stained_glass",
+                  "deepslate_copper_ore",
+                  "coal_ore",
+                  "coal_ore",
+                  "coal_ore",
+                  "deepslate_copper_ore",
+                  "tuff",
+                  "deepslate_copper_ore",
                   "acacia_log",
-                  "stone_bricks"
+                  "deepslate_iron_ore",
+                  "coal_ore",
+                  "coal_ore",
+                  "chiseled_stone_bricks",
+                  "chiseled_stone_bricks",
+                  "deepslate_iron_ore",
+                  "deepslate_copper_ore",
+                  "gray_stained_glass",
+                  "acacia_log",
+                  "acacia_log",
+                  "acacia_log",
+                  "acacia_log",
+                  "cracked_stone_bricks"
                 ],
                 "concept": [
                   "white_stained_glass",
@@ -190,78 +219,78 @@
           "path": "docs/active/work/T-083-01/view-face-front-after.png",
           "score": {
             "schema": "face-resemblance/v1",
-            "score": 0.4,
+            "score": 0.333,
             "zone": {
-              "score": 0.4,
-              "meanDeltaE": 22.88,
+              "score": 0.333,
+              "meanDeltaE": 35.99,
               "zoneGrid": 8,
               "common": 60,
               "zones": {
                 "build": [
                   null,
                   null,
+                  "deepslate_gold_ore",
+                  "dead_brain_coral_block",
                   "exposed_cut_copper",
-                  "exposed_copper",
-                  "white_terracotta",
-                  "white_terracotta",
+                  "exposed_cut_copper",
                   null,
                   null,
-                  "white_terracotta",
-                  "white_terracotta",
+                  "bookshelf",
+                  "barrel",
+                  "acacia_log",
+                  "deepslate_copper_ore",
                   "mycelium",
-                  "stripped_dark_oak_log",
                   "soul_sand",
-                  "mycelium",
-                  "light_gray_concrete_powder",
-                  "light_gray_concrete_powder",
-                  "white_terracotta",
-                  "white_terracotta",
-                  "soul_sand",
-                  "spruce_log",
-                  "dark_oak_log",
-                  "stripped_dark_oak_log",
+                  "deepslate_gold_ore",
+                  "deepslate_gold_ore",
+                  "bookshelf",
                   "exposed_cut_copper",
-                  "white_terracotta",
-                  "white_terracotta",
-                  "exposed_copper",
+                  "soul_sand",
                   "brown_stained_glass",
-                  "spruce_log",
                   "dark_oak_log",
-                  "mangrove_log",
-                  "exposed_cut_copper",
-                  "light_gray_concrete_powder",
+                  "mycelium",
+                  "brown_stained_glass",
+                  "mycelium",
                   "white_terracotta",
                   "exposed_copper",
+                  "acacia_log",
+                  "muddy_mangrove_roots",
+                  "dark_oak_log",
+                  "acacia_log",
+                  "mycelium",
                   "dripstone_block",
-                  "mangrove_log",
-                  "stripped_dark_oak_log",
-                  "barrel",
+                  "white_terracotta",
+                  "exposed_copper",
+                  "dead_bubble_coral_block",
+                  "coal_ore",
+                  "muddy_mangrove_roots",
+                  "acacia_log",
                   "white_terracotta",
                   "white_terracotta",
                   "white_terracotta",
                   "white_terracotta",
                   "dripstone_block",
-                  "mangrove_log",
-                  "stripped_dark_oak_log",
-                  "barrel",
-                  "white_terracotta",
-                  "white_terracotta",
-                  "white_terracotta",
-                  "raw_iron_block",
-                  "dripstone_block",
+                  "deepslate_copper_ore",
+                  "bedrock",
+                  "bedrock",
+                  "iron_ore",
+                  "dead_brain_coral_block",
+                  "tuff",
+                  "deepslate_copper_ore",
+                  "muddy_mangrove_roots",
                   "stripped_dark_oak_log",
                   "muddy_mangrove_roots",
-                  "dripstone_block",
-                  "white_terracotta",
-                  "white_terracotta",
-                  "white_terracotta",
-                  "white_terracotta",
-                  "white_terracotta",
-                  "dripstone_block",
-                  "dripstone_block",
-                  "iron_ore",
-                  "white_terracotta",
-                  "white_terracotta"
+                  "deepslate_copper_ore",
+                  "deepslate_iron_ore",
+                  "dark_oak_log",
+                  "deepslate_iron_ore",
+                  "deepslate_copper_ore",
+                  "gray_stained_glass",
+                  "acacia_log",
+                  "acacia_log",
+                  "gray_stained_glass",
+                  "acacia_log",
+                  "coal_ore"
                 ],
                 "concept": [
                   "white_stained_glass",
@@ -341,13 +370,13 @@
         "gate": {
           "accepted": true,
           "before": 0.25,
-          "after": 0.4,
-          "delta": 0.15,
+          "after": 0.333,
+          "delta": 0.083,
           "epsilon": 0
         },
         "blind": false
       },
-      "residual": "E-22 cottage was `drifted`, gap = material zoning @ upper-story walls; spray-paint restores that band (plaster 8→315), so the face is no longer the gap. The remaining exterior residual is the +x SIDE: the concept never shows it, so the GLB splat is accepted by-construction (no per-face resemblance delta)."
+      "residual": "E-22 cottage was `drifted`, gap = material zoning @ upper-story walls; the band-masked spray-paint restores that band (plaster 8→139, confined to the upper storey by structuralZones), so the face is no longer the gap. The remaining exterior residual is the +x SIDE: the concept never shows it, so the GLB splat is accepted by-construction (no per-face resemblance delta)."
     },
     "interiorPlausibility": {
       "path": "program-into-design",
@@ -357,7 +386,7 @@
         {
           "name": "roomsValid",
           "pass": true,
-          "detail": "4 rooms, 0 degenerate"
+          "detail": "6 rooms, 0 degenerate"
         },
         {
           "name": "roomsNonOverlap",
@@ -396,15 +425,15 @@
   "hollow": {
     "enclosed": 1100,
     "protected": 122,
-    "removed": 978,
+    "removed": 973,
     "cavity": {
       "before": 6438,
-      "removed": 978,
-      "after": 5460
+      "removed": 973,
+      "after": 5465
     },
     "exteriorHeld": {
       "held": true,
-      "digestBytes": 135134
+      "digestBytes": 134242
     },
     "watertight": {
       "watertight": false,
@@ -432,26 +461,26 @@
   },
   "floorplan": {
     "rows": 2,
-    "cols": 2,
-    "roomsPerStorey": 4,
-    "placements": 395,
+    "cols": 3,
+    "roomsPerStorey": 6,
+    "placements": 433,
     "storeys": [
       {
         "index": 0,
         "floorY": 0,
-        "rooms": 4,
-        "doors": 4
+        "rooms": 6,
+        "doors": 7
       },
       {
         "index": 1,
         "floorY": 14,
-        "rooms": 3,
-        "doors": 2
+        "rooms": 5,
+        "doors": 5
       }
     ],
     "exteriorHeld": {
       "held": true,
-      "digestBytes": 135134
+      "digestBytes": 134242
     }
   },
   "structuralRead": {
@@ -474,8 +503,8 @@
       "model": "claude-haiku-4-5",
       "usage": {
         "input_tokens": 10,
-        "output_tokens": 4128,
-        "total_cost_usd": 0.0390677
+        "output_tokens": 1289,
+        "total_cost_usd": 0.024761449999999997
       },
       "parsed": {
         "schema": "hollowable-mass/v1",
@@ -485,19 +514,13 @@
             "yStart": 1,
             "yEnd": 15,
             "inset": 1,
-            "note": "Main interior; 1047 enclosed cells"
+            "note": "main interior, 1047 cells, standard 1-cell wall"
           },
           {
             "yStart": 16,
             "yEnd": 22,
-            "inset": 1,
-            "note": "Upper attic; 40 enclosed cells"
-          },
-          {
-            "yStart": 23,
-            "yEnd": 23,
-            "inset": 1,
-            "note": "Gable ridge; 13 enclosed cells"
+            "inset": 2,
+            "note": "upper level, 40 cells, thin section—conservative inset maintains structure"
           }
         ],
         "blockers": []
@@ -509,17 +532,17 @@
       "tier": "strong",
       "model": "claude-opus-4-8",
       "usage": {
-        "input_tokens": 10446,
-        "output_tokens": 1087,
-        "total_cost_usd": 0.12864425000000002
+        "input_tokens": 10191,
+        "output_tokens": 868,
+        "total_cost_usd": 0.12206924999999999
       },
       "spec": {
         "schema": "floorplan/v1",
         "rows": 2,
-        "cols": 2,
+        "cols": 3,
         "materials": {
           "floor": "minecraft:spruce_planks",
-          "wall": "minecraft:dark_oak_planks"
+          "wall": "minecraft:stone_bricks"
         },
         "doorPolicy": "spanning",
         "frontDoor": {
