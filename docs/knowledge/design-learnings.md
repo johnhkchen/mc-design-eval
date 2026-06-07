@@ -2047,3 +2047,23 @@ paths (program: carve + N×M fill, 978 voxels removed / 395 placed; judgement: s
 the gate **switches** from exterior resemblance (0.25→0.40) to interior plausibility (six constraints PASS) at
 the craft→design line, and the ops are model-scoped (detector on Haiku, author on Opus) — exterior held
 *provably* the whole time, with the side-by-construction, steered-openings, and no-stair residuals named.
+
+### Correction (T-079-02) — the splat must be ∩ structural-zone, not color-only · 2026-06-06
+
+The "plaster 8→315" figure above was a **regression dressed as a win**. The shipped T-079-01 spray-paint
+recolored *every* in-palette surface cell — a color-only splat with **no storey mask** — so plaster
+(`white_terracotta`) smeared across the base, the upper storey, **and** the roof (per-band: y0:65 … y24:10,
+315 total), plus floating painted strays from painting an un-sealed surface. It read as a **pink blob**, not a
+stone-base / plaster-band / wood-roof cottage. The color-only splat was *more sophisticated* than the
+T-079-01 POC that restricted plaster to the upper-storey band — and **worse**, because it dropped the
+structural constraint.
+
+The lesson: **splat must be ∩ structural-zone.** Color chooses *which block within a zone*; the structural
+read chooses *which zone allows it*. The fix adds `structuralZones(occ)` (base/upper/roof from floor lines +
+the top-exposed roof shell — geometry, *not* the current dominant blocks, which already encode the collapse),
+and `paintFace` gains a zone gate: a plaster target on a base/roof cell is **rejected, not painted**. Measured
+on the sealed cottage, surface plaster by zone went from the smear `{base:96, upper:134, roof:80}` (unmasked)
+to `{base:0, upper:134, roof:0}` (masked) — plaster confined to the upper storey. Two more discipline points
+fell out: **seal before paint** (so no stray is painted — the floating blocks were paint on un-sealed
+geometry), and the **guard is structural** (a base/roof-plaster THROW), not the marginal resemblance number —
+a `0.25→0.40` gain must not be able to rubber-stamp a zone-wrong skin (`[[twodee-interaction-sector]]`).
