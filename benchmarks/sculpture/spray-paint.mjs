@@ -31,6 +31,8 @@ import { projectSurface } from "../../src/view/surface-grid.mjs";
 import { quantizeToFace } from "../../src/view/reference-quantize.mjs";
 import { loadGlbSplat, resampleBlockGrid } from "../../src/view/glb-splat.mjs";
 import { paintFace, mergePaints, applyPaint } from "../../src/view/face-paint.mjs";
+import { structuralZones } from "../../src/view/structural-read.mjs";
+import { sealRoof, sealWalls, applyDeltas } from "../../src/view/surface-coherence.mjs";
 import { allowedPalette } from "../../src/view/palette-cans.mjs";
 import { faceResemblance, acceptIfCloser } from "../../src/view/face-resemblance.mjs";
 import { paletteFromManifest } from "../../src/form/glb-voxel-build.mjs";
@@ -45,6 +47,78 @@ const OUT_DIR = join(ROOT, "benchmarks/sculpture/spray-paint");
 const SUBJ_DIR = join(OUT_DIR, "cottage");
 
 const PLASTER = "minecraft:white_terracotta";
+
+// THE ZONE→MATERIALS POLICY (cottage; derived from material-map/cottage.json roles, intersected with the
+// build manifest at runtime). The BINDING invariant: plaster (white_terracotta) ∈ "upper" ONLY — base
+// and roof exclude it, so a plaster target there is zoneRejected, not painted (T-079-02 fix). The other
+// materials are allowed generously per zone so legit recolors (stone on the base, planks on the roof)
+// still happen; the fix removes the smear, it does not freeze the skin.
+const ZONE_MATERIALS = {
+  base: ["stone_bricks", "cobblestone", "dark_oak_log"],            // coursed stone + quoins + sill timber
+  upper: ["white_terracotta", "dark_oak_log", "stone_bricks"],      // plaster + timber frame + window reveals
+  roof: ["spruce_planks", "dark_oak_planks", "cobblestone", "bricks"], // roof courses + chimney (NO plaster)
+};
+
+/** The 5 exposed faces a painted-plaster surface voxel can live on (the visible skin). */
+const SURFACE_FACES = ["+x", "-x", "+z", "-z", "+y"];
+
+/** Per-zone count of PLASTER surface voxels in `artifact` (the visible skin), classified by `zoneOf`.
+ *  Interior plaster strays (not on any face) are NOT counted — they are not the visible defect. */
+function surfacePlasterByZone(artifact, zoneOf) {
+  const occ = artifactOccupancy(artifact);
+  const seen = new Set();
+  const hist = { base: 0, upper: 0, roof: 0 };
+  for (const dir of SURFACE_FACES) {
+    const grid = projectSurface(occ, dir);
+    for (const row of grid.cells) {
+      for (const c of row) {
+        if (!c || bareBlock(c.block) !== "white_terracotta") continue;
+        const k = c.voxel.join(",");
+        if (seen.has(k)) continue;
+        seen.add(k);
+        hist[zoneOf(c.voxel)]++;
+      }
+    }
+  }
+  return hist;
+}
+
+/** STRIP off-zone plaster from the skin: recolor any base/roof SURFACE plaster voxel to its zone's
+ *  primary material (base→stone, roof→planks). Plaster belongs to the upper storey ONLY, so any base/
+ *  roof plaster is a defect — a pre-existing stray (or a smear). Narrowly scoped to plaster so it can
+ *  never grey-out a legit off-primary material (e.g. a spruce gable, which classifies "upper"). Returns
+ *  recolor placements (deduped by voxel). PURE. */
+function stripOffZonePlaster(occ, zoneOf, allowedByZone) {
+  const primary = { base: ZONE_MATERIALS.base[0], roof: ZONE_MATERIALS.roof[0] };
+  const byKey = new Map();
+  for (const dir of SURFACE_FACES) {
+    const grid = projectSurface(occ, dir);
+    for (const row of grid.cells) {
+      for (const c of row) {
+        if (!c || bareBlock(c.block) !== "white_terracotta") continue;
+        const zone = zoneOf(c.voxel);
+        if (zone === "upper") continue; // plaster is legal here
+        const to = primary[zone];
+        if (!allowedByZone.get(zone)?.has(to)) continue; // primary not in manifest — skip rather than guess
+        byKey.set(c.voxel.join(","), { op: "voxel", pos: [...c.voxel], block: `minecraft:${to}` });
+      }
+    }
+  }
+  return [...byKey.values()];
+}
+
+/** Total interior (non-surface) plaster voxels — pre-existing strays paint/seal cannot reach. */
+function interiorPlaster(artifact) {
+  const occ = artifactOccupancy(artifact);
+  const surf = new Set();
+  for (const dir of SURFACE_FACES) {
+    const grid = projectSurface(occ, dir);
+    for (const row of grid.cells) for (const c of row) if (c) surf.add(c.voxel.join(","));
+  }
+  let n = 0;
+  for (const [k, blk] of occ.cells) if (bareBlock(blk) === "white_terracotta" && !surf.has(k)) n++;
+  return n;
+}
 
 // The cottage "front" the concept shows is the +Z face: multi-angle's `front` (azimuth 0) looks toward
 // −Z from the +Z side, so it renders the +Z-facing surface = Path-P "+z". The render angle and the Path-P
@@ -109,20 +183,40 @@ async function main() {
     const recPath = join(OUT_DIR, "cottage.json");
     if (!existsSync(recPath)) throw new Error("spray-paint/cottage.json absent — run the live pass first");
     const rec = JSON.parse(await readFile(recPath, "utf8"));
-    const ok = rec.plaster.after >= rec.plaster.before && rec.plaster.after > 8;
-    console.error(`[offline] plaster ${rec.plaster.before}→${rec.plaster.after}; reversal ${ok ? "CONFIRMED" : "NOT confirmed"}`);
+    const reversalOk = rec.plaster.after >= rec.plaster.before && rec.plaster.after > 8;
+    const h = rec.zones?.histogram?.masked;
+    const zoneOk = !h || (h.base === 0 && h.roof === 0); // base/roof surface plaster must be 0 when recorded
+    const ok = reversalOk && zoneOk;
+    console.error(`[offline] plaster ${rec.plaster.before}→${rec.plaster.after}; reversal ${reversalOk ? "CONFIRMED" : "NOT confirmed"}` +
+      (h ? `; zone histogram masked=${JSON.stringify(h)} (base/roof=0 ${zoneOk ? "OK" : "VIOLATED"})` : ""));
+    if (!ok) process.exitCode = 1;
     return;
   }
 
   if (!existsSync(ART_PATH)) throw new Error(`${ART_PATH} absent`);
-  const artifact = JSON.parse(await readFile(ART_PATH, "utf8"));
-  const manifest = artifact.palette?.manifest ?? [];
-  const allowed = allowedPalette(artifact); // the "4 cans" — manifest (no add-back needed; plaster is in it)
+  const raw = JSON.parse(await readFile(ART_PATH, "utf8"));
+  const manifest = raw.palette?.manifest ?? [];
+  const allowed = allowedPalette(raw); // the "4 cans" — manifest (no add-back needed; plaster is in it)
   const palette = paletteFromManifest(manifest);
   const blockTable = loadBlockTable();
+
+  // --- 0. SEAL BEFORE PAINT (T-079-02 AC #3) ------------------------------------------------------
+  // Strip stray specks + seal skin/roof holes FIRST, so paint never lands on a stray (no floating
+  // painted blocks) and runs on a complete skin. Inline (no cross-ticket file dep) — the seal ops are
+  // pure. `artifact`/`occ` below are the SEALED build; all downstream work uses it.
+  const rawOcc = artifactOccupancy(raw);
+  const artifact = applyDeltas(raw, [...sealRoof(rawOcc).placements, ...sealWalls(rawOcc).placements]);
   const occ = artifactOccupancy(artifact);
   const before = materialCounts(artifact);
-  console.error(`cottage: ${artifact.placements.length} placements; plaster(${PLASTER}) before = ${before.white_terracotta ?? 0}`);
+  console.error(`cottage: raw ${raw.placements.length} → sealed ${artifact.placements.length} placements; plaster(${PLASTER}) before = ${before.white_terracotta ?? 0}`);
+
+  // --- 0b. STRUCTURAL ZONE MASK (T-079-02 AC #1) --------------------------------------------------
+  // Derive base/upper/roof from the structural read; map each zone → its materials ∩ the manifest.
+  const { zoneOf, storeyDivide } = structuralZones(occ);
+  const allowedByZone = new Map(
+    Object.entries(ZONE_MATERIALS).map(([z, mats]) => [z, new Set(mats.filter((b) => allowed.has(b)))]),
+  );
+  console.error(`zones: storeyDivide=${storeyDivide}; base={${[...allowedByZone.get("base")].join(",")}} upper={${[...allowedByZone.get("upper")].join(",")}} roof={${[...allowedByZone.get("roof")].join(",")}}`);
 
   // --- 1. per-face material targets ---------------------------------------------------------------
   // FRONT (+z): the concept is the truth → quantize it to the face cell-grid (within the manifest), resample.
@@ -141,18 +235,28 @@ async function main() {
     console.error(`side GLB splat skipped: ${e.message}`);
   }
 
-  // --- 2. paint passes (back-projection to recolor placements) ------------------------------------
-  const frontPass = paintFace(occ, "+z", frontTarget, { allowed, source: "concept" });
+  // --- 2. paint passes (back-projection to recolor placements) — splat ∩ structural-zone ----------
+  const frontPass = paintFace(occ, "+z", frontTarget, { allowed, source: "concept", zoneOf, allowedByZone });
   const sidePass = sideSplat
-    ? paintFace(occ, "+x", sideSplat.grid, { allowed, source: "glb" })
-    : { dir: "+x", source: "glb", placements: [], painted: 0, skipped: 0, offPalette: 0 };
-  console.error(`paint: front ${frontPass.painted} cells, side ${sidePass.painted} cells`);
+    ? paintFace(occ, "+x", sideSplat.grid, { allowed, source: "glb", zoneOf, allowedByZone })
+    : { dir: "+x", source: "glb", placements: [], painted: 0, skipped: 0, offPalette: 0, zoneRejected: 0 };
+  console.error(`paint (zone-masked): front ${frontPass.painted} cells (zoneRejected ${frontPass.zoneRejected}), side ${sidePass.painted} cells (zoneRejected ${sidePass.zoneRejected})`);
+
+  // --- 2b. THE PROOF: the same splat WITHOUT the zone mask (the old smear) for the before/after ----
+  const frontUnmasked = paintFace(occ, "+z", frontTarget, { allowed, source: "concept" });
+  const sideUnmasked = sideSplat ? paintFace(occ, "+x", sideSplat.grid, { allowed, source: "glb" }) : { placements: [] };
+  const unmaskedBuild = applyPaint(artifact, mergePaints([sideUnmasked, frontUnmasked].filter((p) => (p.placements?.length ?? 0) > 0), { priority: ["concept", "glb"] }).placements);
+  const histUnmasked = surfacePlasterByZone(unmaskedBuild, zoneOf);   // plaster smeared into base/roof
+  console.error(`histogram (surface plaster by zone): UNMASKED ${JSON.stringify(histUnmasked)}`);
 
   // --- 3. optional metered LLM refine (the one metered call; default off) --------------------------
-  let refineNote = "skipped (run with --refine)";
+  // T-079-02: the GUARD is the structural invariant (splat ∩ zone mask + the base/roof=0 THROW below),
+  // NOT this refine pass — the shipped defect was structural (no storey axis), so the zone mask is the
+  // fix; refine stays an optional polish, not the thing standing between us and a pink blob.
+  let refineNote = "skipped (optional polish; the structural zone mask + base/roof=0 throw are the guard)";
   if (refine) {
-    refineNote = "requested — face-vs-face refinement is the metered call (LLM corrects the splat, palette-gated). " +
-      "Wired through requestTextWithImage in a follow-up; the splat+gate path stands alone without it.";
+    refineNote = "requested — face-vs-face refinement is the metered call (LLM corrects the splat, palette+zone-gated). " +
+      "Wired through requestTextWithImage in a follow-up; the splat ∩ zone path stands alone without it.";
     console.error(`[refine] ${refineNote}`);
   }
 
@@ -176,7 +280,7 @@ async function main() {
   const frontAccepted = frontGate.before == null ? true : frontGate.accepted;
   faceRecords.push({
     face: "front (+z)", source: "concept", painted: frontPass.painted, skipped: frontPass.skipped,
-    offPalette: frontPass.offPalette, before: frontBeforeR, after: frontAfterR, gate: frontGate,
+    offPalette: frontPass.offPalette, zoneRejected: frontPass.zoneRejected, before: frontBeforeR, after: frontAfterR, gate: frontGate,
     accepted: frontAccepted, gateBlind: frontGate.before == null,
   });
 
@@ -187,7 +291,7 @@ async function main() {
   const sideAccepted = sidePass.painted > 0;
   faceRecords.push({
     face: "side (+x)", source: "glb", painted: sidePass.painted, skipped: sidePass.skipped,
-    offPalette: sidePass.offPalette, before: sideBeforeR, after: sideAfterR,
+    offPalette: sidePass.offPalette, zoneRejected: sidePass.zoneRejected, before: sideBeforeR, after: sideAfterR,
     accepted: sideAccepted, note: "no concept face for this side — the textured GLB is the truth; gated by-construction",
   });
 
@@ -196,8 +300,23 @@ async function main() {
   if (sideAccepted) acceptedPasses.push(sidePass); // glb first; concept wins corners on merge
   if (frontAccepted) acceptedPasses.push(frontPass);
   const merged = mergePaints(acceptedPasses, { priority: ["concept", "glb"] });
-  const painted = applyPaint(artifact, merged.placements);
+  // Strip off-zone plaster (pre-existing base/roof strays) FIRST so the concept/glb paint wins any
+  // collision; together they make base/roof plaster = 0 by construction.
+  const stripPlacements = stripOffZonePlaster(occ, zoneOf, allowedByZone);
+  const painted = applyPaint(artifact, [...stripPlacements, ...merged.placements]);
   assertArtifact(painted); // AC #7: the painted build is still AJV-valid
+
+  // --- 5b. THE STRUCTURAL GUARD (T-079-02 AC #4): plaster must be confined to the upper storey. The
+  // zone mask makes off-zone paint impossible by construction; this THROW (mirroring the milestone's
+  // exteriorHeld) guarantees it can never silently ship — a marginal resemblance number cannot rubber-
+  // stamp a zone-wrong skin. Measured on the SURFACE (the visible skin); interior strays are pre-existing.
+  const histMasked = surfacePlasterByZone(painted, zoneOf);
+  const interiorStrays = interiorPlaster(painted);
+  console.error(`off-zone plaster stripped from skin: ${stripPlacements.length}`);
+  console.error(`histogram (surface plaster by zone): MASKED ${JSON.stringify(histMasked)} (interior strays ${interiorStrays}, untouched)`);
+  if (histMasked.base !== 0 || histMasked.roof !== 0) {
+    throw new Error(`zone violation: plaster on base/roof surface (base=${histMasked.base}, roof=${histMasked.roof}) — the splat∩zone mask failed`);
+  }
   await writeFile(join(SUBJ_DIR, "artifact.json"), JSON.stringify(painted, null, 2) + "\n");
 
   const after = materialCounts(painted);
@@ -212,6 +331,17 @@ async function main() {
       build: ART_PATH.replace(ROOT, ""), concept: CONCEPT_PATH.replace(ROOT, ""), glb: GLB_PATH.replace(ROOT, ""),
     },
     palette: { allowed: [...allowed].sort(), additions: [] },
+    sealed: { raw: raw.placements.length, sealed: artifact.placements.length },
+    zones: {
+      storeyDivide,
+      materials: ZONE_MATERIALS,
+      histogram: { masked: histMasked, unmasked: histUnmasked }, // surface plaster by zone (before/after the fix)
+      offZonePlasterStripped: stripPlacements.length,
+      interiorStrays,
+      note: "histogram = surface plaster per structural zone. MASKED (this fix) confines plaster to 'upper' " +
+        "(base=0, roof=0); UNMASKED (the shipped color-only splat) smears it into base+roof. Interior strays " +
+        "are pre-existing, not on any face, and untouched by seal/paint — not the visible defect.",
+    },
     plaster: { block: PLASTER, before: before.white_terracotta ?? 0, after: after.white_terracotta ?? 0, reversed: reversal },
     materialCounts: { before, after },
     cornerCollisions: merged.collisions,
@@ -228,12 +358,21 @@ async function main() {
 function renderMd(r) {
   const f = r.faces.map((x) =>
     `- **${x.face}** (${x.source}): painted ${x.painted}, skipped ${x.skipped}, offPalette ${x.offPalette}, ` +
-    `accepted=${x.accepted}` +
+    `zoneRejected ${x.zoneRejected ?? 0}, accepted=${x.accepted}` +
     (x.before?.score ? ` · resemblance ${x.before.score.score}→${x.after?.score?.score ?? "?"}` : ` · ${x.before?.error ? "GL unavailable (gate blind)" : (x.note ?? "")}`),
   ).join("\n");
-  return `# Spray-paint — cottage (T-079-01)\n\n` +
+  const z = r.zones;
+  const histLine = (h) => `base ${h.base}, upper ${h.upper}, roof ${h.roof}`;
+  const zoneMd = z ? `## Zone mask (T-079-02)\n` +
+    `storeyDivide = y${z.storeyDivide}. Surface plaster by zone:\n` +
+    `- **masked (this fix):** ${histLine(z.histogram.masked)} → plaster confined to the upper storey (base 0, roof 0).\n` +
+    `- **unmasked (the shipped color-only splat):** ${histLine(z.histogram.unmasked)} → smeared into base + roof.\n` +
+    `- interior strays (pre-existing, not on any face, untouched): ${z.interiorStrays}.\n\n` : "";
+  return `# Spray-paint — cottage (T-079-02)\n\n` +
     `Plaster (\`${r.plaster.block}\`): **${r.plaster.before} → ${r.plaster.after}** — ` +
     `the 215→8 regression ${r.plaster.reversed ? "**reversed**" : "NOT reversed"}.\n\n` +
+    (r.sealed ? `Sealed before paint: ${r.sealed.raw} → ${r.sealed.sealed} placements (seal then paint).\n\n` : "") +
+    zoneMd +
     `Enforced palette ("4 cans"): ${r.palette.allowed.join(", ")}.\n` +
     `Corner collisions resolved (concept > glb): ${r.cornerCollisions}.\n\n## Faces\n${f}\n\n` +
     `Refine: ${r.refine}\n\n> ${r.note}\n`;
