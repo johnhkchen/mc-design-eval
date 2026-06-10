@@ -83,10 +83,21 @@ const ZONE_POLICY = {
   },
   roof: {
     dominant: "spruce_planks",                                      // plank-course field (NO plaster)
-    preserve: ["dark_oak_planks", "cobblestone", "bricks"],         // eaves/verge + chimney shaft/cap
+    // eaves/verge + chimney shaft/cap; dark_oak_log = the gable timber framing — gable cells classify
+    // "roof" above upperTop, and the full-shell fill (T-090-01) now reaches their exposed faces, so the
+    // frame must be declared here or the fill recolors visible timber to spruce.
+    preserve: ["dark_oak_planks", "cobblestone", "bricks", "dark_oak_log"],
     splat: ["dark_oak_planks", "cobblestone", "bricks"],
   },
 };
+
+// THE BAND ACCEPTANCE (T-090-01, S-090): on the FULL exposed shell (6-dir exposure — the camera's
+// truth at any angle), the roof zone must read >= ROOF_BAND_TARGET roof materials (dominant +
+// preserve; the chimney's cobble/bricks are declared preserve, so no exception needed) and the upper
+// zone's stone residue must be <= UPPER_RESIDUE_MAX. Hard throws, same precedent as the coverage gate:
+// a marginal number cannot silently ship a grey-jumble roof.
+const ROOF_BAND_TARGET = 0.9;
+const UPPER_RESIDUE_MAX = 0.05;
 
 // THE COVERAGE GATE (T-088-01, S-088): every zone's intended dominant must cover >= this fraction of the
 // zone's visible skin, as a PRECONDITION ahead of the per-face hill-climb — the gate that accepted a
@@ -210,6 +221,17 @@ function materialCounts(artifact) {
   return counts;
 }
 
+/** Best-effort GL render at a named angle (no scoring) — the oblique-evidence path (T-090-01). */
+async function tryRenderAngle(artifact, angle, label) {
+  try {
+    const { renderViews } = await import("../../src/view/multi-angle.mjs");
+    const [r] = await renderViews(artifact, [angle], { outDir: SUBJ_DIR, label: () => label });
+    return { path: r.path.replace(ROOT, "") };
+  } catch (e) {
+    return { error: e.message };
+  }
+}
+
 /** Best-effort GL render of the build face → decoded RGBA, or null if headless GL is unavailable. */
 async function tryRenderFace(artifact, dir, label, refImg, table, blockTable) {
   try {
@@ -246,11 +268,18 @@ async function main() {
     // REJECTED, the zone-filled skin PASSED (skip-if-absent so pre-gate records degrade gracefully).
     const cg = rec.zones?.coverageGate;
     const covGateOk = !cg || (cg.splatOnly?.passed === false && cg.zoneFilled?.passed === true);
-    const ok = reversalOk && zoneOk && covOk && covGateOk;
+    // T-090-01: the full-shell band acceptance must hold in the record — roof reads >= target roof
+    // materials, the upper band's displaced-field residue is bounded (skip-if-absent for old records).
+    const bands = rec.zones?.bands;
+    const bandsOk = !bands ||
+      ((bands.acceptance?.roofMaterialsFraction ?? 0) >= (bands.thresholds?.roofMaterialsTarget ?? 0.9) &&
+       (bands.acceptance?.upperStoneFraction ?? 1) <= (bands.thresholds?.upperResidueMax ?? 0.05));
+    const ok = reversalOk && zoneOk && covOk && covGateOk && bandsOk;
     console.error(`[offline] plaster ${rec.plaster.before}→${rec.plaster.after}; reversal ${reversalOk ? "CONFIRMED" : "NOT confirmed"}` +
       (h ? `; zone histogram masked=${JSON.stringify(h)} (base/roof=0 ${zoneOk ? "OK" : "VIOLATED"})` : "") +
       (cov ? `; upper dominant coverage splat-only ${cov.splatOnly?.upper?.dominantFraction} → zone-filled ${cov.zoneFilled?.upper?.dominantFraction} (${covOk ? "OK" : "NOT improved"})` : "") +
-      (cg ? `; coverage gate @${cg.threshold}: splat-only ${cg.splatOnly?.passed ? "PASSED (unexpected)" : "rejected"} / zone-filled ${cg.zoneFilled?.passed ? "passed" : "REJECTED (unexpected)"} (${covGateOk ? "OK" : "VIOLATED"})` : ""));
+      (cg ? `; coverage gate @${cg.threshold}: splat-only ${cg.splatOnly?.passed ? "PASSED (unexpected)" : "rejected"} / zone-filled ${cg.zoneFilled?.passed ? "passed" : "REJECTED (unexpected)"} (${covGateOk ? "OK" : "VIOLATED"})` : "") +
+      (bands ? `; full-shell bands: roof materials ${bands.acceptance?.roofMaterialsFraction} / upper residue ${bands.acceptance?.upperStoneFraction} (${bandsOk ? "OK" : "VIOLATED"})` : ""));
     if (!ok) process.exitCode = 1;
     return;
   }
@@ -285,23 +314,29 @@ async function main() {
   );
   console.error(`zones: storeyDivide=${storeyDivide}; splat palettes base={${[...allowedByZone.get("base")].join(",")}} upper={${[...allowedByZone.get("upper")].join(",")}} roof={${[...allowedByZone.get("roof")].join(",")}}`);
 
-  // --- 0c. THE ZONE-FILL BASE COAT (T-085-01) ------------------------------------------------------
-  // Deterministically establish each zone's dominant on the visible skin BEFORE any splat: the collapsed
-  // upper-band stone goes to plaster, secondary RUNS (studs, quoins, chimney, gable planks) are kept.
-  // Recolor-only, so every projection below has identical geometry. All splat/gate/commit work runs on
-  // the base-coated build (`based`/`occBased`); the sealed pre-fill `artifact`/`occ` remain only as the
-  // §2b baseline and the plaster-before reference.
+  // --- 0c. THE FULL-SHELL ZONE-FILL BASE COAT (T-085-01, skin upgraded by T-090-01) ----------------
+  // Deterministically establish each zone's dominant BEFORE any splat — on the FULL EXPOSED SHELL
+  // (skin:"exposure", every cell with any of its 6 faces air-exposed), not just the five-camera
+  // projection skin: the old wall-field fill covered the surfaces one enumeration found, and the camera
+  // found the rest (grey side faces of the stepped roof courses at every oblique azimuth). Exposure ⊇
+  // projection, so this REPLACES the E-24 stage rather than stacking on it (implementer's call, ticket
+  // AC #2). Secondary RUNS (studs, quoins, chimney, gable framing) are kept. Recolor-only, so every
+  // projection below has identical geometry. The old projection-skin fill is kept as a REPLAY
+  // (`basedProjection`) — the before-baseline for the T-090-01 band histograms and oblique renders.
   const fillZones = Object.fromEntries(
     Object.entries(ZONE_POLICY).map(([z, p]) => [z, { dominant: p.dominant, preserve: p.preserve }]),
   );
   for (const [z, p] of Object.entries(fillZones)) {
     if (!allowed.has(p.dominant)) throw new Error(`zone-fill: ${z} dominant "${p.dominant}" not in the build manifest`);
   }
-  const fill = zoneFill(occ, { zoneOf, zones: fillZones });
+  const fill = zoneFill(occ, { zoneOf, zones: fillZones, skin: "exposure" });
   const based = applyPaint(artifact, fill.placements);
   const occBased = artifactOccupancy(based);
-  console.error(`zone-fill base coat: ${fill.placements.length} cells filled, ${fill.kept} kept — ` +
-    Object.entries(fill.byZone).map(([z, s]) => `${z} ${s.filled}/${s.surface}`).join(", "));
+  const fillProjection = zoneFill(occ, { zoneOf, zones: fillZones }); // the old wall-field fill, replayed
+  const basedProjection = applyPaint(artifact, fillProjection.placements);
+  console.error(`full-shell zone-fill base coat: ${fill.placements.length} cells filled, ${fill.kept} kept — ` +
+    Object.entries(fill.byZone).map(([z, s]) => `${z} ${s.filled}/${s.surface}`).join(", ") +
+    ` (projection-skin replay would fill ${fillProjection.placements.length})`);
 
   // --- 1. per-face material targets ---------------------------------------------------------------
   // FRONT (+z): the concept is the truth → quantize it to the face cell-grid (within the manifest), resample.
@@ -339,7 +374,8 @@ async function main() {
   const frontLegacy = paintFace(occ, "+z", frontTarget, { allowed, source: "concept", zoneOf, allowedByZone: legacyByZone });
   const sideLegacy = sideSplat ? paintFace(occ, "+x", sideSplat.grid, { allowed, source: "glb", zoneOf, allowedByZone: legacyByZone }) : { placements: [] };
   const splatOnlyBuild = applyPaint(artifact, mergePaints([sideLegacy, frontLegacy].filter((p) => (p.placements?.length ?? 0) > 0), { priority: ["concept", "glb"] }).placements);
-  const covSplatOnly = dominantCoverage(surfaceZoneHistogram(artifactOccupancy(splatOnlyBuild), zoneOf), ZONE_POLICY);
+  const covSplatOnly = dominantCoverage(
+    surfaceZoneHistogram(artifactOccupancy(splatOnlyBuild), zoneOf, { skin: "exposure" }), ZONE_POLICY);
   console.error(`coverage (splat-only baseline): ${coverageLine(covSplatOnly)}`);
   // T-088-01 proof, the REJECT side: the under-applied splat-only skin must fail the coverage gate —
   // and the verdict is delta-independent (no resemblance number can rescue a missing base coat).
@@ -375,7 +411,7 @@ async function main() {
   // 0.25→0.40 can no longer rubber-stamp a 91%-bare wall). GL-free, so it binds even when the
   // resemblance score is blind.
   const covFrontCandidate = dominantCoverage(
-    surfaceZoneHistogram(artifactOccupancy(frontCandidate), zoneOf), ZONE_POLICY);
+    surfaceZoneHistogram(artifactOccupancy(frontCandidate), zoneOf, { skin: "exposure" }), ZONE_POLICY);
   const frontGate = acceptWithCoverage({
     coverage: covFrontCandidate, threshold: COVERAGE_THRESHOLD, zones: ZONE_POLICY,
     before: frontBeforeR.score?.score ?? null,
@@ -429,7 +465,10 @@ async function main() {
   }
   // THE T-085-01 EVIDENCE: per-zone dominant coverage of the final skin vs the splat-only baseline —
   // the 9%→≈77% reversal, produced by the pipeline (Rule 1), GL-free.
-  const covFilled = dominantCoverage(surfaceZoneHistogram(artifactOccupancy(painted), zoneOf), ZONE_POLICY);
+  // The census basis is the EXPOSURE skin from here on (T-090-01): the projection census declared the
+  // upper band 71% plaster while the camera saw 32% — the exposure census is the camera's truth.
+  const covFilled = dominantCoverage(
+    surfaceZoneHistogram(artifactOccupancy(painted), zoneOf, { skin: "exposure" }), ZONE_POLICY);
   console.error(`coverage (zone-filled, final): ${coverageLine(covFilled)}`);
   // T-088-01 proof, the PASS side + the guard: the shipped skin must clear the coverage gate, and a
   // failing skin must never silently ship a record (same precedent as the base/roof-plaster throw —
@@ -441,6 +480,45 @@ async function main() {
       gateZoneFilled.failures.map((f) => `${f.zone} ${f.dominant}=${f.fraction} < ${COVERAGE_THRESHOLD}`).join(", "));
   }
   console.error(`coverage upper ${ZONE_POLICY.upper.dominant}: splat-only ${Math.round((covSplatOnly.upper?.dominantFraction ?? 0) * 100)}% → zone-filled ${Math.round((covFilled.upper?.dominantFraction ?? 0) * 100)}%`);
+
+  // --- 5c. THE T-090-01 BAND EVIDENCE: before/after composition of the full exposed shell ----------
+  // BEFORE = the projection-skin fill replay (what the old wall-field stage shipped), AFTER = the
+  // painted build — both measured with the SAME instrument (6-dir exposure per zone, the ticket's
+  // measurement). Acceptance: roof reads >= ROOF_BAND_TARGET roof materials (dominant + preserve;
+  // chimney cobble/bricks are declared preserve), upper's displaced-field residue <= UPPER_RESIDUE_MAX.
+  const bandsBefore = dominantCoverage(
+    surfaceZoneHistogram(artifactOccupancy(basedProjection), zoneOf, { skin: "exposure" }), ZONE_POLICY);
+  const bandsAfter = covFilled; // the final skin, same exposure census as the coverage gate above
+  const zoneMaterialsFraction = (cov, zone) => {
+    const z = cov[zone];
+    if (!z || !z.total) return null;
+    const mats = new Set([ZONE_POLICY[zone].dominant, ...ZONE_POLICY[zone].preserve].map(bareBlock));
+    const n = Object.entries(z.byBlock).reduce((a, [b, c]) => a + (mats.has(b) ? c : 0), 0);
+    return Math.round((n / z.total) * 1000) / 1000;
+  };
+  const residueBlock = ZONE_POLICY.base.dominant; // the displaced field that collapsed into the upper band
+  const acceptance = {
+    roofMaterialsFraction: zoneMaterialsFraction(bandsAfter, "roof"),
+    upperStoneFraction: Math.round(((bandsAfter.upper?.byBlock?.[residueBlock] ?? 0) /
+      (bandsAfter.upper?.total || 1)) * 1000) / 1000,
+  };
+  console.error(`bands (6-dir exposure): roof materials ${Math.round((zoneMaterialsFraction(bandsBefore, "roof") ?? 0) * 100)}% → ` +
+    `${Math.round((acceptance.roofMaterialsFraction ?? 0) * 100)}% (target >= ${ROOF_BAND_TARGET}); ` +
+    `upper ${residueBlock} residue ${Math.round(((bandsBefore.upper?.byBlock?.[residueBlock] ?? 0) / (bandsBefore.upper?.total || 1)) * 100)}% → ` +
+    `${Math.round(acceptance.upperStoneFraction * 100)}% (max ${UPPER_RESIDUE_MAX})`);
+  if ((acceptance.roofMaterialsFraction ?? 0) < ROOF_BAND_TARGET || acceptance.upperStoneFraction > UPPER_RESIDUE_MAX) {
+    throw new Error(`full-shell band acceptance FAILED: roof materials ${acceptance.roofMaterialsFraction} ` +
+      `(target >= ${ROOF_BAND_TARGET}), upper ${residueBlock} residue ${acceptance.upperStoneFraction} (max ${UPPER_RESIDUE_MAX})`);
+  }
+
+  // The oblique renders ARE the evidence (E-25 Rule 1): an azimuth the old fill failed on — 225° sees
+  // the -x/-z roof course side faces the projection skin never enumerated. Best-effort like the face
+  // renders (a headless-GL failure degrades to a recorded gap).
+  const OBLIQUE_ANGLE = "-x-z"; // azimuth 225°
+  const obliqueBefore = await tryRenderAngle(basedProjection, OBLIQUE_ANGLE, "oblique225-before");
+  const obliqueAfter = await tryRenderAngle(painted, OBLIQUE_ANGLE, "oblique225-after");
+  console.error(`oblique 225° renders: before ${obliqueBefore.path ?? obliqueBefore.error}, after ${obliqueAfter.path ?? obliqueAfter.error}`);
+
   await writeFile(join(SUBJ_DIR, "artifact.json"), JSON.stringify(painted, null, 2) + "\n");
 
   const after = materialCounts(painted);
@@ -459,18 +537,23 @@ async function main() {
     fill: {
       policy: ZONE_POLICY,
       minRun: 2,
+      skin: "exposure",
       placements: fill.placements.length,
+      projectionReplayPlacements: fillProjection.placements.length,
       kept: fill.kept,
       byZone: fill.byZone,
-      note: "the deterministic zone-fill base coat (T-085-01): each zone's dominant established on the " +
-        "visible skin ahead of the splat; secondary runs (studs, quoins, chimney, gable planks) kept; " +
-        "the splat demoted to secondaries (its palette excludes every field material).",
+      byRegion: fill.byRegion,
+      note: "the deterministic zone-fill base coat (T-085-01), upgraded to the FULL EXPOSED SHELL " +
+        "(T-090-01, skin:exposure — every cell with any of its 6 faces air-exposed, replacing the " +
+        "five-camera projection skin the old wall-field fill used): each zone's dominant established " +
+        "ahead of the splat; secondary runs (studs, quoins, chimney, gable framing) kept; the splat " +
+        "demoted to secondaries (its palette excludes every field material).",
     },
     zones: {
       storeyDivide,
       materials: ZONE_POLICY,
       histogram: { masked: histMasked, unmasked: histUnmasked }, // surface plaster by zone (before/after the fix)
-      coverage: { splatOnly: covSplatOnly, zoneFilled: covFilled }, // per-zone dominant coverage (T-085-01)
+      coverage: { skin: "exposure", splatOnly: covSplatOnly, zoneFilled: covFilled }, // per-zone dominant coverage (T-085-01; exposure basis since T-090-01)
       coverageGate: { // the threshold PRECONDITION (T-088-01): proof both ways, delta-independent
         threshold: COVERAGE_THRESHOLD,
         splatOnly: gateSplatOnly,   // expect passed:false — the under-applied E-23 skin is REJECTED
@@ -479,6 +562,17 @@ async function main() {
           "whose intended dominant covers < threshold of its visible skin fails the skin regardless of " +
           "the marginal resemblance delta (the 0.25→0.40 that rubber-stamped the 91%-bare wall cannot " +
           "pass it). splatOnly replays the pre-fill path; zoneFilled is the shipped skin.",
+      },
+      bands: { // T-090-01: before/after composition of the full exposed shell, one instrument both ways
+        skin: "exposure",
+        measuredOn: { before: "projection-fill replay (the old wall-field base coat)", after: "the painted build" },
+        before: bandsBefore,
+        after: bandsAfter,
+        acceptance,
+        thresholds: { roofMaterialsTarget: ROOF_BAND_TARGET, upperResidueMax: UPPER_RESIDUE_MAX, residueBlock },
+        note: "roofMaterialsFraction = (dominant + preserve) cells / roof-zone exposed total; the " +
+          "chimney's cobble/bricks are declared preserve, so no exception is carved out. " +
+          "upperStoneFraction = the displaced base field's residue on the upper zone's exposed shell.",
       },
       offZonePlasterStripped: stripPlacements.length,
       interiorStrays,
@@ -491,6 +585,11 @@ async function main() {
     plaster: { block: PLASTER, before: before.white_terracotta ?? 0, after: after.white_terracotta ?? 0, reversed: reversal },
     materialCounts: { before, after },
     cornerCollisions: merged.collisions,
+    renders: {
+      oblique: { angle: OBLIQUE_ANGLE, azimuthDeg: 225, before: obliqueBefore, after: obliqueAfter,
+        note: "the T-090-01 evidence: an azimuth the old wall-field fill failed on — grey roof course " +
+          "side faces before, zone materials after. The render is the evidence; the histogram is support." },
+    },
     faces: faceRecords,
     refine: refineNote,
     note: "the splat does the bulk; the LLM refines/judges (twodee-interaction-sector). Verdict = the human face " +
@@ -523,6 +622,25 @@ function renderMd(r) {
     `- upper-band plaster: **${pct(z.coverage.splatOnly.upper?.dominantFraction)} → ` +
     `${pct(z.coverage.zoneFilled.upper?.dominantFraction)}** — the splat places secondaries only ` +
     `(upper palette = ${JSON.stringify(r.fill.policy.upper.splat)}).\n\n` : "";
+  const bands = z?.bands;
+  const bandLine = (cov) => ["base", "upper", "roof"].map((zn) => {
+    const top = Object.entries(cov[zn]?.byBlock ?? {}).sort((a, b) => b[1] - a[1]).slice(0, 3)
+      .map(([b, n]) => `${b} ${Math.round((n / cov[zn].total) * 100)}%`).join(" ");
+    return `${zn} (${cov[zn]?.total ?? "?"}): ${top}`;
+  }).join("\n  - ");
+  const bandsMd = bands ? `## Full-shell fill (T-090-01)\n` +
+    `The base coat now covers the FULL exposed shell (6-dir exposure — every face any camera can see), ` +
+    `not just the five-camera projection skin (${r.fill?.projectionReplayPlacements ?? "?"} cells) the ` +
+    `old wall-field fill painted; this run filled **${r.fill?.placements ?? "?"} cells**.\n` +
+    `Exposed-shell composition, same instrument before/after:\n` +
+    `- **before (projection-fill replay):**\n  - ${bandLine(bands.before)}\n` +
+    `- **after (the painted build):**\n  - ${bandLine(bands.after)}\n` +
+    `- **acceptance:** roof materials **${pct(bands.acceptance.roofMaterialsFraction)}** ` +
+    `(target ≥ ${pct(bands.thresholds.roofMaterialsTarget)}); upper \`${bands.thresholds.residueBlock}\` residue ` +
+    `**${pct(bands.acceptance.upperStoneFraction)}** (max ${pct(bands.thresholds.upperResidueMax)}).\n` +
+    (r.renders?.oblique ? `- **evidence renders (azimuth ${r.renders.oblique.azimuthDeg}°):** ` +
+      `${r.renders.oblique.before.path ?? r.renders.oblique.before.error} → ` +
+      `${r.renders.oblique.after.path ?? r.renders.oblique.after.error}\n\n` : "\n") : "";
   const cg = z?.coverageGate;
   const gateMd = cg ? `## Coverage gate (T-088-01)\n` +
     `Per-zone dominant coverage is a **precondition** ahead of the per-face hill-climb (threshold ` +
@@ -541,7 +659,7 @@ function renderMd(r) {
     `Plaster (\`${r.plaster.block}\`): **${r.plaster.before} → ${r.plaster.after}** — ` +
     `the 215→8 regression ${r.plaster.reversed ? "**reversed**" : "NOT reversed"}.\n\n` +
     (r.sealed ? `Sealed before paint: ${r.sealed.raw} → ${r.sealed.sealed} placements (seal then paint).\n\n` : "") +
-    fillMd + gateMd + zoneMd +
+    fillMd + bandsMd + gateMd + zoneMd +
     `Enforced palette ("4 cans"): ${r.palette.allowed.join(", ")}.\n` +
     `Corner collisions resolved (concept > glb): ${r.cornerCollisions}.\n\n## Faces\n${f}\n\n` +
     `Refine: ${r.refine}\n\n> ${r.note}\n`;
