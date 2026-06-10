@@ -1,0 +1,46 @@
+{
+  "materials": [
+    {
+      "role": "structural wall body",
+      "block": "minecraft:cobblestone",
+      "placementRule": "walls",
+      "rationale": "Main nave and tower wall fields show irregular rounded pebble masonry with random coursing — the rough cobble read, not dressed blocks."
+    },
+    {
+      "role": "corner quoins and nave buttresses",
+      "block": "minecraft:stone_bricks",
+      "placementRule": "corners-edges",
+      "rationale": "Tower corners, gable rakes and the projecting pilasters along the nave are crisp, regularly-coursed lighter dressed blocks — kept distinct from the rounded cobble wall they frame."
+    },
+    {
+      "role": "wall-head cornice and plinth course",
+      "block": "minecraft:stone_bricks",
+      "placementRule": "base",
+      "rationale": "A continuous neat ashlar band runs along the ground course and again where wall meets roof — straight-coursed dressed stone, unlike the cobble above it."
+    },
+    {
+      "role": "roof mass and tower spire",
+      "block": "minecraft:dark_oak_planks",
+      "placementRule": "roof",
+      "rationale": "Steep nave gable and the pyramidal tower cap are warm dark-brown horizontal timber planking — strong grain contrast against the grey stone."
+    },
+    {
+      "role": "window reveals and surrounds",
+      "block": "minecraft:polished_andesite",
+      "placementRule": "trim",
+      "rationale": "The tall 1×3 windows are framed by smooth, fine-grained pale-grey stone with no coursing lines — a third grey, finer than both cobble and stone-brick."
+    },
+    {
+      "role": "window glazing fill",
+      "block": "minecraft:black_stained_glass",
+      "placementRule": "openings",
+      "rationale": "Each window recess reads as a flat dark void set behind the pale frame — the deep shadowed glazing within the surround."
+    },
+    {
+      "role": "entry door",
+      "block": "minecraft:dark_oak_door",
+      "placementRule": "openings",
+      "rationale": "The arched opening at the tower base shows a vertical-plank dark timber door, matching the roof's warm brown wood tone."
+    }
+  ]
+}

@@ -10,8 +10,11 @@
 // (unit-tested, no live call). This runner is the IMPURE leaf — it spawns the metered tsx bridge
 // (src/form/baml-material-map.mts → claude -p subscription) and does file I/O.
 //
-//   node benchmarks/sculpture/material-map.mjs            # live metered sweep, writes <subj>.json + <subj>.raw.json
-//   node benchmarks/sculpture/material-map.mjs --offline  # re-validate committed <subj>.raw.json, no live call
+//   node benchmarks/sculpture/material-map.mjs                    # live metered sweep, writes <subj>.json + <subj>.raw.json
+//   node benchmarks/sculpture/material-map.mjs --subject church   # ONE subject — the regeneration guard: committed
+//                                                                 # maps are PINS (downstream records assert agreement);
+//                                                                 # never regenerate a subject you don't intend to re-pin
+//   node benchmarks/sculpture/material-map.mjs --offline          # re-validate committed <subj>.raw.json, no live call
 //
 // Writes material-map/{gatehouse,cottage}.{json,raw.json}. The JSON is the durable record (committed);
 // there are no PNG renders, so nothing is gitignored.
@@ -19,7 +22,7 @@
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
+import { basename, dirname, join } from "node:path";
 import { spawn } from "node:child_process";
 
 import {
@@ -40,9 +43,18 @@ const SUBJECTS = [
     runDir: join(RUNS, "015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate"),
   },
   { key: "cottage", runDir: join(RUNS, "014-vConcept-a-cottage") },
+  // E-25 challenge subject (T-095-01): registered concept-first by T-094-01; map generated ONCE
+  // via --subject church and committed — the pin for the only LLM-authored input on its path.
+  { key: "church", runDir: join(RUNS, "016-vBuilding-a-village-church-with-a-square-bell-tower") },
 ];
 
 const OFFLINE = process.argv.includes("--offline");
+const ARGV = process.argv.slice(2);
+const ONLY = ARGV.includes("--subject") ? ARGV[ARGV.indexOf("--subject") + 1] : null;
+if (ONLY && !SUBJECTS.some((s) => s.key === ONLY)) {
+  console.error(`--subject must be one of: ${SUBJECTS.map((s) => s.key).join(", ")}`);
+  process.exit(1);
+}
 
 /** Spawn the metered tsx bridge with {conceptPath, docPath?} on stdin → parsed {materials}. LIVE. */
 function callBridge(conceptPath, docPath) {
@@ -67,7 +79,7 @@ async function run() {
   await mkdir(OUT_DIR, { recursive: true });
   const summary = [];
 
-  for (const { key, runDir } of SUBJECTS) {
+  for (const { key, runDir } of SUBJECTS.filter((s) => !ONLY || s.key === ONLY)) {
     const conceptPath = join(runDir, "concept.png");
     const docPath = join(runDir, "design-doc.md");
     const hasDoc = existsSync(docPath);
@@ -99,7 +111,7 @@ async function run() {
       schema: "material-map/v1",
       subject: key,
       generatedFrom: {
-        concept: `runs/${key === "gatehouse" ? "015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate" : "014-vConcept-a-cottage"}/concept.png`,
+        concept: `runs/${basename(runDir)}/concept.png`, // derived from the registry row — a 3rd subject must not inherit another's path
         designDoc: hasDoc ? "design-doc.md" : null,
       },
       map,
