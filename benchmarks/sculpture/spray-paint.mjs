@@ -39,7 +39,7 @@ import { projectSurface } from "../../src/view/surface-grid.mjs";
 import { quantizeToFace } from "../../src/view/reference-quantize.mjs";
 import { loadGlbSplat, resampleBlockGrid } from "../../src/view/glb-splat.mjs";
 import { paintFace, mergePaints, applyPaint } from "../../src/view/face-paint.mjs";
-import { zoneFill, surfaceZoneHistogram, dominantCoverage } from "../../src/view/zone-fill.mjs";
+import { zoneFill, surfaceZoneHistogram, dominantCoverage, exposedVoxelEntries } from "../../src/view/zone-fill.mjs";
 import { structuralZones } from "../../src/view/structural-read.mjs";
 import { sealRoof, sealWalls, applyDeltas } from "../../src/view/surface-coherence.mjs";
 import { allowedPalette } from "../../src/view/palette-cans.mjs";
@@ -83,12 +83,24 @@ const ZONE_POLICY = {
   },
   roof: {
     dominant: "spruce_planks",                                      // plank-course field (NO plaster)
-    // eaves/verge + chimney shaft/cap; dark_oak_log = the gable timber framing — gable cells classify
-    // "roof" above upperTop, and the full-shell fill (T-090-01) now reaches their exposed faces, so the
-    // frame must be declared here or the fill recolors visible timber to spruce.
-    preserve: ["dark_oak_planks", "cobblestone", "bricks", "dark_oak_log"],
-    splat: ["dark_oak_planks", "cobblestone", "bricks"],
+    // dark_oak_planks = eaves/verge; dark_oak_log = gable timber framing (gable cells classify "roof"
+    // above upperTop, and the full-shell fill reaches their exposed faces). cobblestone/bricks are NOT
+    // preserved here (T-090-01): the material map binds them to quoins/plinth/CHIMNEY, never the roof
+    // field — the 185 scattered cobble fragments on the courses ARE the grey jumble. The chimney keeps
+    // its material via the DECLARED SUB-REGION below (protruding-stack detection), not via preserve;
+    // and the splat may no longer scatter grey onto the roof either.
+    preserve: ["dark_oak_planks", "dark_oak_log"],
+    splat: ["dark_oak_planks"],
   },
+};
+
+// The fill policy the SHIPPED T-085/T-088 wall-field stage used (projection skin; cobble/bricks
+// preserved as runs, gable logs filled) — kept ONLY to replay the old base coat deterministically: the
+// "before" of the T-090-01 band histograms and oblique renders. Not used to paint the build.
+const LEGACY_FILL_ZONES = {
+  base: { dominant: "stone_bricks", preserve: ["cobblestone", "dark_oak_log"] },
+  upper: { dominant: "white_terracotta", preserve: ["dark_oak_log", "spruce_planks", "dark_oak_planks"] },
+  roof: { dominant: "spruce_planks", preserve: ["dark_oak_planks", "cobblestone", "bricks"] },
 };
 
 // THE BAND ACCEPTANCE (T-090-01, S-090): on the FULL exposed shell (6-dir exposure — the camera's
@@ -221,6 +233,42 @@ function materialCounts(artifact) {
   return counts;
 }
 
+/** The DECLARED chimney sub-region, derived from GEOMETRY (T-090-01, no subject constants): a
+ *  protruding stack = the columns rising ABOVE the highest roof PLANE. ridgeY = the highest column-top
+ *  shared by an 8-connected plateau of >= minPlateau equal-top columns (a roof plane / gable top is at
+ *  least a small plane; a chimney or finial footprint is smaller). Region = cells above ridgeY in
+ *  columns whose top exceeds it. A build with no protrusion gets an empty region. PURE logic. */
+function protrudingStackRegion(occ, { minPlateau = 4 } = {}) {
+  const topY = new Map(); // "x,z" → max y
+  for (const key of occ.cells.keys()) {
+    const [x, y, z] = key.split(",").map(Number);
+    const k = `${x},${z}`;
+    if (!(topY.has(k)) || topY.get(k) < y) topY.set(k, y);
+  }
+  // largest-y plateau: 8-connected components of equal-top columns, sized >= minPlateau
+  let ridgeY = -Infinity;
+  const seen = new Set();
+  for (const [start, y0] of topY) {
+    if (seen.has(start) || y0 <= ridgeY) continue;
+    const comp = [start];
+    seen.add(start);
+    const stack = [start];
+    while (stack.length) {
+      const [x, z] = stack.pop().split(",").map(Number);
+      for (let dx = -1; dx <= 1; dx++) for (let dz = -1; dz <= 1; dz++) {
+        if (!dx && !dz) continue;
+        const nk = `${x + dx},${z + dz}`;
+        if (seen.has(nk) || topY.get(nk) !== y0) continue;
+        seen.add(nk); stack.push(nk); comp.push(nk);
+      }
+    }
+    if (comp.length >= minPlateau && y0 > ridgeY) ridgeY = y0;
+  }
+  if (!Number.isFinite(ridgeY)) return { contains: () => false, columns: new Set(), ridgeY: null };
+  const columns = new Set([...topY].filter(([, y]) => y > ridgeY).map(([k]) => k));
+  return { contains: ([x, y, z]) => y > ridgeY && columns.has(`${x},${z}`), columns, ridgeY };
+}
+
 /** Best-effort GL render at a named angle (no scoring) — the oblique-evidence path (T-090-01). */
 async function tryRenderAngle(artifact, angle, label) {
   try {
@@ -329,14 +377,22 @@ async function main() {
   for (const [z, p] of Object.entries(fillZones)) {
     if (!allowed.has(p.dominant)) throw new Error(`zone-fill: ${z} dominant "${p.dominant}" not in the build manifest`);
   }
-  const fill = zoneFill(occ, { zoneOf, zones: fillZones, skin: "exposure" });
+  // THE DECLARED SUB-REGION: the chimney (the stack protruding above the highest roof plane) keeps its
+  // material — cobble shaft + cap — while every OTHER roof-zone cobble/bricks fragment is jumble and
+  // gets filled (the material map binds those blocks to quoins/plinth/chimney, never the roof field).
+  const chimney = protrudingStackRegion(occ);
+  const regions = [{ name: "chimney", contains: chimney.contains }];
+  console.error(`declared sub-region "chimney": ridgeY=${chimney.ridgeY}, ${chimney.columns.size} protruding columns`);
+  const fill = zoneFill(occ, { zoneOf, zones: fillZones, skin: "exposure", regions });
   const based = applyPaint(artifact, fill.placements);
   const occBased = artifactOccupancy(based);
-  const fillProjection = zoneFill(occ, { zoneOf, zones: fillZones }); // the old wall-field fill, replayed
+  // the old wall-field fill replayed with ITS OWN era's policy — the faithful "before"
+  const fillProjection = zoneFill(occ, { zoneOf, zones: LEGACY_FILL_ZONES });
   const basedProjection = applyPaint(artifact, fillProjection.placements);
-  console.error(`full-shell zone-fill base coat: ${fill.placements.length} cells filled, ${fill.kept} kept — ` +
+  console.error(`full-shell zone-fill base coat: ${fill.placements.length} cells filled, ${fill.kept} kept ` +
+    `(region-kept ${JSON.stringify(fill.byRegion)}) — ` +
     Object.entries(fill.byZone).map(([z, s]) => `${z} ${s.filled}/${s.surface}`).join(", ") +
-    ` (projection-skin replay would fill ${fillProjection.placements.length})`);
+    ` (legacy projection-skin replay fills ${fillProjection.placements.length})`);
 
   // --- 1. per-face material targets ---------------------------------------------------------------
   // FRONT (+z): the concept is the truth → quantize it to the face cell-grid (within the manifest), resample.
@@ -489,35 +545,48 @@ async function main() {
   const bandsBefore = dominantCoverage(
     surfaceZoneHistogram(artifactOccupancy(basedProjection), zoneOf, { skin: "exposure" }), ZONE_POLICY);
   const bandsAfter = covFilled; // the final skin, same exposure census as the coverage gate above
-  const zoneMaterialsFraction = (cov, zone) => {
-    const z = cov[zone];
-    if (!z || !z.total) return null;
-    const mats = new Set([ZONE_POLICY[zone].dominant, ...ZONE_POLICY[zone].preserve].map(bareBlock));
-    const n = Object.entries(z.byBlock).reduce((a, [b, c]) => a + (mats.has(b) ? c : 0), 0);
-    return Math.round((n / z.total) * 1000) / 1000;
-  };
   const residueBlock = ZONE_POLICY.base.dominant; // the displaced field that collapsed into the upper band
-  const acceptance = {
-    roofMaterialsFraction: zoneMaterialsFraction(bandsAfter, "roof"),
-    upperStoneFraction: Math.round(((bandsAfter.upper?.byBlock?.[residueBlock] ?? 0) /
-      (bandsAfter.upper?.total || 1)) * 1000) / 1000,
+  // One instrument, chimney-aware: walk the exposure skin; roof fraction = (dominant+preserve) cells
+  // over roof-zone cells OUTSIDE the declared chimney region; upper residue = displaced-field fraction.
+  const roofMats = new Set([ZONE_POLICY.roof.dominant, ...ZONE_POLICY.roof.preserve].map(bareBlock));
+  const measureBands = (build) => {
+    let roofTotal = 0, roofOk = 0, chimneyCells = 0, upperTotal = 0, upperResidue = 0;
+    for (const { voxel, block } of exposedVoxelEntries(artifactOccupancy(build))) {
+      const zn = zoneOf(voxel);
+      if (zn === "roof") {
+        if (chimney.contains(voxel)) { chimneyCells++; continue; }
+        roofTotal++;
+        if (roofMats.has(bareBlock(block))) roofOk++;
+      } else if (zn === "upper") {
+        upperTotal++;
+        if (bareBlock(block) === residueBlock) upperResidue++;
+      }
+    }
+    return {
+      roofMaterialsFraction: roofTotal ? Math.round((roofOk / roofTotal) * 1000) / 1000 : null,
+      upperStoneFraction: Math.round((upperResidue / (upperTotal || 1)) * 1000) / 1000,
+      roofTotal, chimneyCells, upperTotal,
+    };
   };
-  console.error(`bands (6-dir exposure): roof materials ${Math.round((zoneMaterialsFraction(bandsBefore, "roof") ?? 0) * 100)}% → ` +
+  const measuredBefore = measureBands(basedProjection);
+  const acceptance = measureBands(painted);
+  console.error(`bands (6-dir exposure, chimney excepted): roof materials ${Math.round((measuredBefore.roofMaterialsFraction ?? 0) * 100)}% → ` +
     `${Math.round((acceptance.roofMaterialsFraction ?? 0) * 100)}% (target >= ${ROOF_BAND_TARGET}); ` +
-    `upper ${residueBlock} residue ${Math.round(((bandsBefore.upper?.byBlock?.[residueBlock] ?? 0) / (bandsBefore.upper?.total || 1)) * 100)}% → ` +
+    `upper ${residueBlock} residue ${Math.round(measuredBefore.upperStoneFraction * 100)}% → ` +
     `${Math.round(acceptance.upperStoneFraction * 100)}% (max ${UPPER_RESIDUE_MAX})`);
   if ((acceptance.roofMaterialsFraction ?? 0) < ROOF_BAND_TARGET || acceptance.upperStoneFraction > UPPER_RESIDUE_MAX) {
     throw new Error(`full-shell band acceptance FAILED: roof materials ${acceptance.roofMaterialsFraction} ` +
       `(target >= ${ROOF_BAND_TARGET}), upper ${residueBlock} residue ${acceptance.upperStoneFraction} (max ${UPPER_RESIDUE_MAX})`);
   }
 
-  // The oblique renders ARE the evidence (E-25 Rule 1): an azimuth the old fill failed on — 225° sees
-  // the -x/-z roof course side faces the projection skin never enumerated. Best-effort like the face
-  // renders (a headless-GL failure degrades to a recorded gap).
-  const OBLIQUE_ANGLE = "-x-z"; // azimuth 225°
-  const obliqueBefore = await tryRenderAngle(basedProjection, OBLIQUE_ANGLE, "oblique225-before");
-  const obliqueAfter = await tryRenderAngle(painted, OBLIQUE_ANGLE, "oblique225-after");
-  console.error(`oblique 225° renders: before ${obliqueBefore.path ?? obliqueBefore.error}, after ${obliqueAfter.path ?? obliqueAfter.error}`);
+  // The oblique renders ARE the evidence (E-25 Rule 1): an azimuth the old fill failed on. 135° at a
+  // low 15° elevation sees the +x/-z roof course side faces and the scattered cobble the projection
+  // skin never cleaned (measured the most-changed of the ticket's candidate azimuths). Best-effort like
+  // the face renders (a headless-GL failure degrades to a recorded gap).
+  const OBLIQUE_ANGLE = { azimuthDeg: 135, elevationDeg: 15 };
+  const obliqueBefore = await tryRenderAngle(basedProjection, OBLIQUE_ANGLE, "oblique135-before");
+  const obliqueAfter = await tryRenderAngle(painted, OBLIQUE_ANGLE, "oblique135-after");
+  console.error(`oblique 135° renders: before ${obliqueBefore.path ?? obliqueBefore.error}, after ${obliqueAfter.path ?? obliqueAfter.error}`);
 
   await writeFile(join(SUBJ_DIR, "artifact.json"), JSON.stringify(painted, null, 2) + "\n");
 
@@ -543,6 +612,10 @@ async function main() {
       kept: fill.kept,
       byZone: fill.byZone,
       byRegion: fill.byRegion,
+      regions: { chimney: { ridgeY: chimney.ridgeY, protrudingColumns: chimney.columns.size,
+        note: "declared sub-region, derived from geometry (the stack protruding above the highest " +
+          "roof plane) — keeps its material unconditionally; cobble/bricks anywhere else in the roof " +
+          "zone are jumble and get filled (the material map binds them to quoins/plinth/chimney)." } },
       note: "the deterministic zone-fill base coat (T-085-01), upgraded to the FULL EXPOSED SHELL " +
         "(T-090-01, skin:exposure — every cell with any of its 6 faces air-exposed, replacing the " +
         "five-camera projection skin the old wall-field fill used): each zone's dominant established " +
@@ -565,14 +638,19 @@ async function main() {
       },
       bands: { // T-090-01: before/after composition of the full exposed shell, one instrument both ways
         skin: "exposure",
-        measuredOn: { before: "projection-fill replay (the old wall-field base coat)", after: "the painted build" },
+        measuredOn: {
+          before: "legacy projection-fill replay (the shipped T-085 wall-field base coat + its era's policy)",
+          after: "the painted build",
+        },
         before: bandsBefore,
         after: bandsAfter,
+        acceptanceBefore: measuredBefore,
         acceptance,
         thresholds: { roofMaterialsTarget: ROOF_BAND_TARGET, upperResidueMax: UPPER_RESIDUE_MAX, residueBlock },
-        note: "roofMaterialsFraction = (dominant + preserve) cells / roof-zone exposed total; the " +
-          "chimney's cobble/bricks are declared preserve, so no exception is carved out. " +
-          "upperStoneFraction = the displaced base field's residue on the upper zone's exposed shell.",
+        note: "roofMaterialsFraction = (dominant + preserve) cells over the roof zone's exposed shell " +
+          "EXCLUDING the declared chimney sub-region (the ticket's exception); upperStoneFraction = " +
+          "the displaced base field's residue on the upper zone's exposed shell. Same instrument " +
+          "before and after.",
       },
       offZonePlasterStripped: stripPlacements.length,
       interiorStrays,
@@ -586,7 +664,7 @@ async function main() {
     materialCounts: { before, after },
     cornerCollisions: merged.collisions,
     renders: {
-      oblique: { angle: OBLIQUE_ANGLE, azimuthDeg: 225, before: obliqueBefore, after: obliqueAfter,
+      oblique: { angle: OBLIQUE_ANGLE, azimuthDeg: OBLIQUE_ANGLE.azimuthDeg, before: obliqueBefore, after: obliqueAfter,
         note: "the T-090-01 evidence: an azimuth the old wall-field fill failed on — grey roof course " +
           "side faces before, zone materials after. The render is the evidence; the histogram is support." },
     },
@@ -635,9 +713,11 @@ function renderMd(r) {
     `Exposed-shell composition, same instrument before/after:\n` +
     `- **before (projection-fill replay):**\n  - ${bandLine(bands.before)}\n` +
     `- **after (the painted build):**\n  - ${bandLine(bands.after)}\n` +
-    `- **acceptance:** roof materials **${pct(bands.acceptance.roofMaterialsFraction)}** ` +
+    `- **acceptance (chimney sub-region excepted):** roof materials ` +
+    `${pct(bands.acceptanceBefore?.roofMaterialsFraction)} → **${pct(bands.acceptance.roofMaterialsFraction)}** ` +
     `(target ≥ ${pct(bands.thresholds.roofMaterialsTarget)}); upper \`${bands.thresholds.residueBlock}\` residue ` +
-    `**${pct(bands.acceptance.upperStoneFraction)}** (max ${pct(bands.thresholds.upperResidueMax)}).\n` +
+    `${pct(bands.acceptanceBefore?.upperStoneFraction)} → **${pct(bands.acceptance.upperStoneFraction)}** ` +
+    `(max ${pct(bands.thresholds.upperResidueMax)}).\n` +
     (r.renders?.oblique ? `- **evidence renders (azimuth ${r.renders.oblique.azimuthDeg}°):** ` +
       `${r.renders.oblique.before.path ?? r.renders.oblique.before.error} → ` +
       `${r.renders.oblique.after.path ?? r.renders.oblique.after.error}\n\n` : "\n") : "";

@@ -49,37 +49,46 @@
         "dominant": "spruce_planks",
         "preserve": [
           "dark_oak_planks",
-          "cobblestone",
-          "bricks"
+          "dark_oak_log"
         ],
         "splat": [
-          "dark_oak_planks",
-          "cobblestone",
-          "bricks"
+          "dark_oak_planks"
         ]
       }
     },
     "minRun": 2,
-    "placements": 976,
-    "kept": 1474,
+    "skin": "exposure",
+    "placements": 2645,
+    "projectionReplayPlacements": 976,
+    "kept": 2693,
     "byZone": {
-      "roof": {
-        "surface": 1214,
-        "filled": 339,
-        "kept": 875
+      "base": {
+        "surface": 1551,
+        "filled": 151,
+        "kept": 1400
       },
       "upper": {
-        "surface": 638,
-        "filled": 583,
-        "kept": 55
+        "surface": 1413,
+        "filled": 1326,
+        "kept": 87
       },
-      "base": {
-        "surface": 598,
-        "filled": 54,
-        "kept": 544
+      "roof": {
+        "surface": 2374,
+        "filled": 1168,
+        "kept": 1206
       }
     },
-    "note": "the deterministic zone-fill base coat (T-085-01): each zone's dominant established on the visible skin ahead of the splat; secondary runs (studs, quoins, chimney, gable planks) kept; the splat demoted to secondaries (its palette excludes every field material)."
+    "byRegion": {
+      "chimney": 12
+    },
+    "regions": {
+      "chimney": {
+        "ridgeY": 24,
+        "protrudingColumns": 6,
+        "note": "declared sub-region, derived from geometry (the stack protruding above the highest roof plane) — keeps its material unconditionally; cobble/bricks anywhere else in the roof zone are jumble and get filled (the material map binds them to quoins/plinth/chimney)."
+      }
+    },
+    "note": "the deterministic zone-fill base coat (T-085-01), upgraded to the FULL EXPOSED SHELL (T-090-01, skin:exposure — every cell with any of its 6 faces air-exposed, replacing the five-camera projection skin the old wall-field fill used): each zone's dominant established ahead of the splat; secondary runs (studs, quoins, chimney, gable framing) kept; the splat demoted to secondaries (its palette excludes every field material)."
   },
   "zones": {
     "storeyDivide": 7,
@@ -110,13 +119,10 @@
         "dominant": "spruce_planks",
         "preserve": [
           "dark_oak_planks",
-          "cobblestone",
-          "bricks"
+          "dark_oak_log"
         ],
         "splat": [
-          "dark_oak_planks",
-          "cobblestone",
-          "bricks"
+          "dark_oak_planks"
         ]
       }
     },
@@ -133,76 +139,79 @@
       }
     },
     "coverage": {
+      "skin": "exposure",
       "splatOnly": {
-        "roof": {
-          "total": 1214,
+        "base": {
+          "total": 1551,
           "byBlock": {
-            "spruce_planks": 779,
-            "cobblestone": 118,
-            "dark_oak_planks": 46,
-            "stone_bricks": 180,
-            "dark_oak_log": 90,
-            "white_terracotta": 1
+            "cobblestone": 124,
+            "stone_bricks": 897,
+            "dark_oak_log": 448,
+            "spruce_planks": 69,
+            "white_terracotta": 5,
+            "dark_oak_planks": 8
           },
-          "dominant": "spruce_planks",
-          "dominantFraction": 0.642
+          "dominant": "stone_bricks",
+          "dominantFraction": 0.578
         },
         "upper": {
-          "total": 638,
+          "total": 1413,
           "byBlock": {
-            "dark_oak_log": 187,
-            "stone_bricks": 279,
-            "spruce_planks": 11,
+            "cobblestone": 112,
+            "stone_bricks": 969,
+            "dark_oak_log": 229,
+            "spruce_planks": 18,
             "white_terracotta": 83,
-            "cobblestone": 76,
             "dark_oak_planks": 2
           },
           "dominant": "white_terracotta",
-          "dominantFraction": 0.13
+          "dominantFraction": 0.059
         },
-        "base": {
-          "total": 598,
+        "roof": {
+          "total": 2374,
           "byBlock": {
-            "spruce_planks": 12,
-            "dark_oak_log": 176,
-            "stone_bricks": 336,
-            "cobblestone": 70,
-            "dark_oak_planks": 3,
-            "white_terracotta": 1
+            "stone_bricks": 795,
+            "spruce_planks": 1014,
+            "cobblestone": 241,
+            "dark_oak_log": 270,
+            "dark_oak_planks": 52,
+            "white_terracotta": 2
           },
-          "dominant": "stone_bricks",
-          "dominantFraction": 0.562
+          "dominant": "spruce_planks",
+          "dominantFraction": 0.427
         }
       },
       "zoneFilled": {
-        "roof": {
-          "total": 1214,
-          "byBlock": {
-            "spruce_planks": 1080,
-            "cobblestone": 91,
-            "dark_oak_planks": 43
-          },
-          "dominant": "spruce_planks",
-          "dominantFraction": 0.89
-        },
-        "upper": {
-          "total": 638,
-          "byBlock": {
-            "dark_oak_log": 184,
-            "white_terracotta": 454
-          },
-          "dominant": "white_terracotta",
-          "dominantFraction": 0.712
-        },
         "base": {
-          "total": 598,
+          "total": 1551,
           "byBlock": {
-            "stone_bricks": 370,
-            "dark_oak_log": 159,
-            "cobblestone": 69
+            "cobblestone": 111,
+            "stone_bricks": 1028,
+            "dark_oak_log": 412
           },
           "dominant": "stone_bricks",
-          "dominantFraction": 0.619
+          "dominantFraction": 0.663
+        },
+        "upper": {
+          "total": 1413,
+          "byBlock": {
+            "white_terracotta": 1197,
+            "dark_oak_log": 214,
+            "spruce_planks": 2
+          },
+          "dominant": "white_terracotta",
+          "dominantFraction": 0.847
+        },
+        "roof": {
+          "total": 2374,
+          "byBlock": {
+            "spruce_planks": 2149,
+            "dark_oak_log": 174,
+            "dark_oak_planks": 45,
+            "cobblestone": 6
+          },
+          "dominant": "spruce_planks",
+          "dominantFraction": 0.905
         }
       }
     },
@@ -215,28 +224,34 @@
           {
             "zone": "upper",
             "dominant": "white_terracotta",
-            "fraction": 0.13,
-            "total": 638
+            "fraction": 0.059,
+            "total": 1413
+          },
+          {
+            "zone": "roof",
+            "dominant": "spruce_planks",
+            "fraction": 0.427,
+            "total": 2374
           }
         ],
         "byZone": {
           "base": {
             "dominant": "stone_bricks",
-            "fraction": 0.562,
-            "total": 598,
+            "fraction": 0.578,
+            "total": 1551,
             "passed": true
           },
           "upper": {
             "dominant": "white_terracotta",
-            "fraction": 0.13,
-            "total": 638,
+            "fraction": 0.059,
+            "total": 1413,
             "passed": false
           },
           "roof": {
             "dominant": "spruce_planks",
-            "fraction": 0.642,
-            "total": 1214,
-            "passed": true
+            "fraction": 0.427,
+            "total": 2374,
+            "passed": false
           }
         }
       },
@@ -247,34 +262,134 @@
         "byZone": {
           "base": {
             "dominant": "stone_bricks",
-            "fraction": 0.619,
-            "total": 598,
+            "fraction": 0.663,
+            "total": 1551,
             "passed": true
           },
           "upper": {
             "dominant": "white_terracotta",
-            "fraction": 0.712,
-            "total": 638,
+            "fraction": 0.847,
+            "total": 1413,
             "passed": true
           },
           "roof": {
             "dominant": "spruce_planks",
-            "fraction": 0.89,
-            "total": 1214,
+            "fraction": 0.905,
+            "total": 2374,
             "passed": true
           }
         }
       },
       "note": "coverage is a PRECONDITION ahead of the per-face hill-climb, not a tie-breaker: any zone whose intended dominant covers < threshold of its visible skin fails the skin regardless of the marginal resemblance delta (the 0.25→0.40 that rubber-stamped the 91%-bare wall cannot pass it). splatOnly replays the pre-fill path; zoneFilled is the shipped skin."
     },
+    "bands": {
+      "skin": "exposure",
+      "measuredOn": {
+        "before": "legacy projection-fill replay (the shipped T-085 wall-field base coat + its era's policy)",
+        "after": "the painted build"
+      },
+      "before": {
+        "base": {
+          "total": 1551,
+          "byBlock": {
+            "cobblestone": 126,
+            "stone_bricks": 1035,
+            "dark_oak_log": 324,
+            "spruce_planks": 57,
+            "white_terracotta": 4,
+            "dark_oak_planks": 5
+          },
+          "dominant": "stone_bricks",
+          "dominantFraction": 0.667
+        },
+        "upper": {
+          "total": 1413,
+          "byBlock": {
+            "white_terracotta": 583,
+            "stone_bricks": 690,
+            "dark_oak_log": 97,
+            "spruce_planks": 7,
+            "cobblestone": 36
+          },
+          "dominant": "white_terracotta",
+          "dominantFraction": 0.413
+        },
+        "roof": {
+          "total": 2374,
+          "byBlock": {
+            "spruce_planks": 1362,
+            "cobblestone": 210,
+            "stone_bricks": 615,
+            "dark_oak_log": 180,
+            "dark_oak_planks": 6,
+            "white_terracotta": 1
+          },
+          "dominant": "spruce_planks",
+          "dominantFraction": 0.574
+        }
+      },
+      "after": {
+        "base": {
+          "total": 1551,
+          "byBlock": {
+            "cobblestone": 111,
+            "stone_bricks": 1028,
+            "dark_oak_log": 412
+          },
+          "dominant": "stone_bricks",
+          "dominantFraction": 0.663
+        },
+        "upper": {
+          "total": 1413,
+          "byBlock": {
+            "white_terracotta": 1197,
+            "dark_oak_log": 214,
+            "spruce_planks": 2
+          },
+          "dominant": "white_terracotta",
+          "dominantFraction": 0.847
+        },
+        "roof": {
+          "total": 2374,
+          "byBlock": {
+            "spruce_planks": 2149,
+            "dark_oak_log": 174,
+            "dark_oak_planks": 45,
+            "cobblestone": 6
+          },
+          "dominant": "spruce_planks",
+          "dominantFraction": 0.905
+        }
+      },
+      "acceptanceBefore": {
+        "roofMaterialsFraction": 0.653,
+        "upperStoneFraction": 0.488,
+        "roofTotal": 2362,
+        "chimneyCells": 12,
+        "upperTotal": 1413
+      },
+      "acceptance": {
+        "roofMaterialsFraction": 1,
+        "upperStoneFraction": 0,
+        "roofTotal": 2362,
+        "chimneyCells": 12,
+        "upperTotal": 1413
+      },
+      "thresholds": {
+        "roofMaterialsTarget": 0.9,
+        "upperResidueMax": 0.05,
+        "residueBlock": "stone_bricks"
+      },
+      "note": "roofMaterialsFraction = (dominant + preserve) cells over the roof zone's exposed shell EXCLUDING the declared chimney sub-region (the ticket's exception); upperStoneFraction = the displaced base field's residue on the upper zone's exposed shell. Same instrument before and after."
+    },
     "offZonePlasterStripped": 0,
-    "interiorStrays": 5,
+    "interiorStrays": 743,
     "note": "histogram = surface plaster per structural zone. MASKED (this fix) confines plaster to 'upper' (base=0, roof=0); UNMASKED (the shipped color-only splat) smears it into base+roof. Interior strays are pre-existing, not on any face, and untouched by seal/paint — not the visible defect. coverage = per-zone dominant fraction of the visible skin: splatOnly replays the pre-fill T-079-02 path (the 9% baseline); zoneFilled is the shipped base-coat result."
   },
   "plaster": {
     "block": "minecraft:white_terracotta",
     "before": 7,
-    "after": 459,
+    "after": 1197,
     "reversed": true
   },
   "materialCounts": {
@@ -287,23 +402,39 @@
       "dark_oak_planks": 21
     },
     "after": {
-      "cobblestone": 373,
-      "stone_bricks": 3336,
-      "dark_oak_log": 837,
-      "spruce_planks": 1379,
-      "white_terracotta": 459,
-      "dark_oak_planks": 54
+      "cobblestone": 117,
+      "stone_bricks": 2128,
+      "dark_oak_log": 800,
+      "white_terracotta": 1197,
+      "spruce_planks": 2151,
+      "dark_oak_planks": 45
     }
   },
   "cornerCollisions": 0,
+  "renders": {
+    "oblique": {
+      "angle": {
+        "azimuthDeg": 135,
+        "elevationDeg": 15
+      },
+      "azimuthDeg": 135,
+      "before": {
+        "path": "benchmarks/sculpture/spray-paint/cottage/view-oblique135-before.png"
+      },
+      "after": {
+        "path": "benchmarks/sculpture/spray-paint/cottage/view-oblique135-after.png"
+      },
+      "note": "the T-090-01 evidence: an azimuth the old wall-field fill failed on — grey roof course side faces before, zone materials after. The render is the evidence; the histogram is support."
+    }
+  },
   "faces": [
     {
       "face": "front (+z)",
       "source": "concept",
-      "painted": 86,
-      "skipped": 8,
+      "painted": 85,
+      "skipped": 7,
       "offPalette": 0,
-      "zoneRejected": 477,
+      "zoneRejected": 479,
       "before": {
         "path": "benchmarks/sculpture/spray-paint/cottage/view-front-before.png",
         "score": {
@@ -311,7 +442,7 @@
           "score": 0.3,
           "zone": {
             "score": 0.3,
-            "meanDeltaE": 38.79,
+            "meanDeltaE": 39.02,
             "zoneGrid": 8,
             "common": 60,
             "zones": {
@@ -326,31 +457,31 @@
                 null,
                 "bookshelf",
                 "barrel",
-                "acacia_log",
-                "acacia_log",
+                "barrel",
+                "mangrove_log",
                 "brown_stained_glass",
-                "acacia_log",
+                "mangrove_log",
                 "deepslate_gold_ore",
                 "deepslate_gold_ore",
                 "oak_log",
+                "brown_stained_glass",
+                "brown_stained_glass",
                 "barrel",
                 "brown_stained_glass",
-                "brown_stained_glass",
-                "brown_stained_glass",
-                "mycelium",
+                "barrel",
                 "mangrove_log",
                 "barrel",
-                "dead_brain_coral_block",
-                "mycelium",
-                "coarse_dirt",
-                "coarse_dirt",
+                "bookshelf",
                 "brown_stained_glass",
                 "brown_stained_glass",
                 "coarse_dirt",
-                "mycelium",
-                "dripstone_block",
+                "brown_stained_glass",
+                "brown_stained_glass",
+                "barrel",
+                "barrel",
                 "exposed_cut_copper",
-                "light_gray_concrete_powder",
+                "exposed_cut_copper",
+                "white_terracotta",
                 "white_terracotta",
                 "exposed_copper",
                 "white_terracotta",
@@ -360,7 +491,7 @@
                 "exposed_copper",
                 "dripstone_block",
                 "exposed_copper",
-                "iron_ore",
+                "raw_iron_block",
                 "white_terracotta",
                 "iron_ore",
                 "dripstone_block",
@@ -375,7 +506,7 @@
                 "cracked_stone_bricks",
                 "deepslate_copper_ore",
                 "deepslate_copper_ore",
-                "acacia_log",
+                "deepslate_iron_ore",
                 "acacia_log",
                 "acacia_log",
                 "coal_ore",
@@ -463,7 +594,7 @@
           "score": 0.35,
           "zone": {
             "score": 0.35,
-            "meanDeltaE": 37.44,
+            "meanDeltaE": 37.96,
             "zoneGrid": 8,
             "common": 60,
             "zones": {
@@ -472,38 +603,38 @@
                 null,
                 "brown_stained_glass",
                 "barrel",
-                "acacia_log",
+                "deepslate_gold_ore",
                 "acacia_log",
                 null,
                 null,
                 "bookshelf",
                 "barrel",
                 "mangrove_log",
-                "soul_sand",
-                "brown_stained_glass",
-                "acacia_log",
+                "cartography_table",
+                "mangrove_log",
+                "mangrove_log",
                 "deepslate_gold_ore",
                 "deepslate_gold_ore",
                 "oak_log",
-                "barrel",
-                "mangrove_log",
+                "brown_stained_glass",
+                "brown_stained_glass",
                 "spruce_log",
                 "mangrove_log",
                 "mangrove_log",
                 "mangrove_log",
                 "barrel",
-                "dead_brain_coral_block",
-                "mycelium",
-                "barrel",
-                "stripped_dark_oak_log",
-                "mangrove_log",
+                "bookshelf",
                 "brown_stained_glass",
-                "coarse_dirt",
-                "mycelium",
-                "dripstone_block",
+                "brown_stained_glass",
+                "stripped_dark_oak_log",
+                "stripped_dark_oak_log",
+                "brown_stained_glass",
+                "barrel",
+                "barrel",
                 "exposed_cut_copper",
-                "iron_ore",
-                "raw_iron_block",
+                "exposed_cut_copper",
+                "exposed_copper",
+                "white_terracotta",
                 "mycelium",
                 "white_terracotta",
                 "white_terracotta",
@@ -518,8 +649,8 @@
                 "dripstone_block",
                 "stone_bricks",
                 "coal_ore",
-                "acacia_log",
-                "stripped_dark_oak_log",
+                "deepslate_copper_ore",
+                "muddy_mangrove_roots",
                 "muddy_mangrove_roots",
                 "coal_ore",
                 "chiseled_stone_bricks",
@@ -527,7 +658,7 @@
                 "cracked_stone_bricks",
                 "deepslate_copper_ore",
                 "deepslate_copper_ore",
-                "acacia_log",
+                "deepslate_iron_ore",
                 "acacia_log",
                 "acacia_log",
                 "coal_ore",
@@ -622,20 +753,20 @@
           "byZone": {
             "base": {
               "dominant": "stone_bricks",
-              "fraction": 0.751,
-              "total": 598,
+              "fraction": 0.714,
+              "total": 1551,
               "passed": true
             },
             "upper": {
               "dominant": "white_terracotta",
-              "fraction": 0.892,
-              "total": 638,
+              "fraction": 0.929,
+              "total": 1413,
               "passed": true
             },
             "roof": {
               "dominant": "spruce_planks",
-              "fraction": 0.905,
-              "total": 1214,
+              "fraction": 0.906,
+              "total": 2374,
               "passed": true
             }
           }
@@ -652,10 +783,10 @@
     {
       "face": "side (+x)",
       "source": "glb",
-      "painted": 224,
-      "skipped": 30,
+      "painted": 208,
+      "skipped": 25,
       "offPalette": 0,
-      "zoneRejected": 436,
+      "zoneRejected": 457,
       "before": {
         "path": "benchmarks/sculpture/spray-paint/cottage/view-side-before.png",
         "score": null
