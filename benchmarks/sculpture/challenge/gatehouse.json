@@ -1,0 +1,501 @@
+{
+  "schema": "challenge-milestone/v1",
+  "subject": "gatehouse",
+  "status": "gated",
+  "inputs": {
+    "build": "concept-materials/gatehouse/after-artifact.json",
+    "concept": "runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+    "glb": "glb/stone-gatehouse.glb",
+    "map": "material-map/gatehouse.json",
+    "kitRecord": "kit/gatehouse.json",
+    "e23Before": "building/best/artifact.json"
+  },
+  "provision": null,
+  "shell": {
+    "strip": {
+      "components": 23,
+      "kept": 3,
+      "strippedCells": 221
+    },
+    "openings": [
+      "window",
+      "window",
+      "door",
+      "window",
+      "window",
+      "door"
+    ],
+    "closureBefore": {
+      "reached": 389,
+      "interiorCells": 389,
+      "byDirection": {
+        "+x": 0,
+        "-x": 41,
+        "+y": 172,
+        "-y": 0,
+        "+z": 40,
+        "-z": 10
+      }
+    },
+    "voids": {
+      "minDepth": 3,
+      "filled": 820,
+      "byDir": {
+        "+x": {
+          "basinCells": 0,
+          "filled": 0,
+          "skippedAllowed": 0,
+          "skippedNoZone": 0
+        },
+        "-x": {
+          "basinCells": 10,
+          "filled": 154,
+          "skippedAllowed": 0,
+          "skippedNoZone": 0
+        },
+        "+z": {
+          "basinCells": 20,
+          "filled": 161,
+          "skippedAllowed": 0,
+          "skippedNoZone": 0
+        },
+        "-z": {
+          "basinCells": 23,
+          "filled": 69,
+          "skippedAllowed": 0,
+          "skippedNoZone": 0
+        },
+        "+y": {
+          "basinCells": 78,
+          "filled": 436,
+          "skippedAllowed": 0,
+          "skippedNoZone": 0
+        }
+      }
+    },
+    "plug": {
+      "cells": 54,
+      "iterations": 1
+    }
+  },
+  "skin": {
+    "substitution": {
+      "stone_bricks": "polished_basalt"
+    },
+    "kit": {
+      "source": "kit/gatehouse.json",
+      "overrides": {
+        "deepslate_tiles": "deepslate_bricks"
+      }
+    },
+    "zoneMap": {
+      "source": "concept",
+      "bands": [
+        {
+          "name": "band0",
+          "yRange": [
+            0,
+            20
+          ],
+          "dominantBlock": "stone_bricks",
+          "dominantRole": "structural walls (dominant body)",
+          "share": 1,
+          "secondaries": [
+            {
+              "block": "dark_oak_log",
+              "role": "arch voussoir ring (warm accent)",
+              "share": 0.104
+            },
+            {
+              "block": "deepslate_tiles",
+              "role": "roof mass",
+              "share": 0.562
+            },
+            {
+              "block": "cobblestone",
+              "role": "corner buttresses + rough string-course banding",
+              "share": 0.001
+            },
+            {
+              "block": "dark_oak_planks",
+              "role": "gate door / passage leaf",
+              "share": 0.008
+            }
+          ]
+        }
+      ],
+      "roof": {
+        "dominantBlock": "deepslate_tiles",
+        "dominantRole": "roof mass",
+        "share": 1,
+        "secondaries": [
+          {
+            "block": "stone_bricks",
+            "role": "structural walls (dominant body)",
+            "share": 0.203
+          },
+          {
+            "block": "cobblestone",
+            "role": "corner buttresses + rough string-course banding",
+            "share": 0.003
+          },
+          {
+            "block": "dark_oak_log",
+            "role": "arch voussoir ring (warm accent)",
+            "share": 0
+          },
+          {
+            "block": "dark_oak_planks",
+            "role": "gate door / passage leaf",
+            "share": 0
+          }
+        ]
+      },
+      "reason": null
+    },
+    "zoneMapVsCommitted": {
+      "record": "zone-map/gatehouse.json",
+      "bandsIdentical": false,
+      "roofIdentical": false,
+      "committedBands": [
+        {
+          "name": "band0",
+          "yRange": [
+            0,
+            17
+          ],
+          "dominantBlock": "stone_bricks",
+          "dominantRole": "structural walls (dominant body)",
+          "share": 1,
+          "secondaries": [
+            {
+              "block": "dark_oak_log",
+              "role": "arch voussoir ring (warm accent)",
+              "share": 0.129
+            },
+            {
+              "block": "deepslate_tiles",
+              "role": "roof mass",
+              "share": 0.564
+            },
+            {
+              "block": "cobblestone",
+              "role": "corner buttresses + rough string-course banding",
+              "share": 0
+            },
+            {
+              "block": "dark_oak_planks",
+              "role": "gate door / passage leaf",
+              "share": 0.01
+            }
+          ]
+        }
+      ]
+    },
+    "fill": {
+      "placements": 170,
+      "kept": 5515,
+      "byZone": {
+        "band0": {
+          "surface": 4216,
+          "filled": 111,
+          "kept": 4105
+        },
+        "roof": {
+          "surface": 1469,
+          "filled": 59,
+          "kept": 1410
+        }
+      }
+    },
+    "splat": {
+      "front": {
+        "dir": "+z",
+        "source": "concept",
+        "painted": 565,
+        "skipped": 103,
+        "offPalette": 0,
+        "zoneRejected": 119,
+        "accepted": false,
+        "coverageGate": {
+          "passed": false,
+          "threshold": 0.5,
+          "failures": [
+            {
+              "zone": "roof",
+              "dominant": "deepslate_bricks",
+              "fraction": 0.457,
+              "total": 1469
+            }
+          ],
+          "byZone": {
+            "band0": {
+              "dominant": "polished_basalt",
+              "fraction": 0.672,
+              "total": 4216,
+              "passed": true
+            },
+            "roof": {
+              "dominant": "deepslate_bricks",
+              "fraction": 0.457,
+              "total": 1469,
+              "passed": false
+            }
+          }
+        },
+        "outOfPalette": 0
+      },
+      "side": {
+        "dir": "+x",
+        "source": "glb",
+        "painted": 336,
+        "skipped": 49,
+        "offPalette": 0,
+        "zoneRejected": 151,
+        "accepted": true
+      },
+      "collisions": 0
+    },
+    "course": {
+      "columnsRaised": 54,
+      "voxelsAdded": 57
+    },
+    "salt": {
+      "stripped": 245,
+      "kept": 796
+    },
+    "coverage": {
+      "band0": {
+        "total": 4234,
+        "byBlock": {
+          "polished_basalt": 3129,
+          "deepslate_bricks": 377,
+          "cobblestone": 616,
+          "dark_oak_planks": 96,
+          "dark_oak_log": 16
+        },
+        "dominant": "polished_basalt",
+        "dominantFraction": 0.739
+      },
+      "roof": {
+        "total": 1436,
+        "byBlock": {
+          "deepslate_bricks": 898,
+          "dark_oak_planks": 94,
+          "polished_basalt": 367,
+          "dark_oak_log": 43,
+          "cobblestone": 34
+        },
+        "dominant": "deepslate_bricks",
+        "dominantFraction": 0.625
+      }
+    },
+    "gates": {
+      "threshold": 0.5,
+      "splatOnly": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "polished_basalt",
+            "fraction": 0.665,
+            "total": 4216,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "deepslate_bricks",
+            "fraction": 0.558,
+            "total": 1469,
+            "passed": true
+          }
+        }
+      },
+      "final": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "polished_basalt",
+            "fraction": 0.739,
+            "total": 4234,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "deepslate_bricks",
+            "fraction": 0.625,
+            "total": 1436,
+            "passed": true
+          }
+        }
+      }
+    },
+    "bands": {
+      "roofMaterialsFraction": 1,
+      "wallForeignResidue": {
+        "band0": 0
+      }
+    },
+    "notes": []
+  },
+  "reproducible": {
+    "doubleRun": true,
+    "sha256": {
+      "base": null,
+      "shell": "24fefe6da680b982a40c537fe3a41685af289863d079e5d62f7bae3e2478f281",
+      "final": "e4467844ffb4056d7bd0fc7cb7c66cffc9d4a6f046892e51a054e92df02c15dc"
+    },
+    "determinism": "provision→shell→skin is a pure function of the committed inputs (concept PNG, material map, GLB, kit); two in-process executions byte-matched on every artifact; --repro re-proves from a fresh process. LLM-authored inputs are one-time committed records; the gate judge is the pinned model, single sample per view, verdicts committed in the gate record."
+  },
+  "gate": {
+    "outcome": "FAIL",
+    "gapCount": 12,
+    "gapBudget": 2,
+    "failures": [
+      {
+        "angle": "+x+z",
+        "reason": "different object"
+      },
+      {
+        "angle": "+x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x-z",
+        "reason": "different object"
+      },
+      {
+        "angle": "-x+z",
+        "reason": "drifted"
+      }
+    ],
+    "perView": [
+      {
+        "angle": "+x+z",
+        "azimuthDeg": 45,
+        "coverage": true,
+        "verdict": "different object",
+        "gaps": [
+          {
+            "region": "roofline / overall upper massing",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "front entrance (the arched doorway)",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "facade surfaces",
+            "attribute": "material zoning",
+            "severity": "major"
+          }
+        ]
+      },
+      {
+        "angle": "+x-z",
+        "azimuthDeg": 135,
+        "coverage": true,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof and upper structure",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "walls and facade openings",
+            "attribute": "form",
+            "severity": "minor"
+          },
+          {
+            "region": "overall stone-and-dark-trim coloring",
+            "attribute": "palette",
+            "severity": "minor"
+          }
+        ]
+      },
+      {
+        "angle": "-x-z",
+        "azimuthDeg": 225,
+        "coverage": true,
+        "verdict": "different object",
+        "gaps": [
+          {
+            "region": "roof / upper mass",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "overall building footprint and silhouette",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "front face — columned portico vs plain arched wall",
+            "attribute": "material zoning",
+            "severity": "major"
+          }
+        ]
+      },
+      {
+        "angle": "-x+z",
+        "azimuthDeg": 315,
+        "coverage": true,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "perimeter walls",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "roof eaves",
+            "attribute": "form",
+            "severity": "minor"
+          },
+          {
+            "region": "overall body",
+            "attribute": "massing",
+            "severity": "minor"
+          }
+        ]
+      }
+    ],
+    "record": "benchmarks/sculpture/multi-angle/gatehouse-challenge.json",
+    "sheet": "pr/assets/frames/multi-angle-gatehouse-challenge.png"
+  },
+  "artifacts": {
+    "base": null,
+    "shell": "challenge/gatehouse/shell-artifact.json",
+    "final": "challenge/gatehouse/artifact.json"
+  },
+  "renders": [
+    {
+      "when": "final",
+      "angle": "-x-z",
+      "path": "benchmarks/sculpture/challenge/gatehouse/view-final-oblique225.png"
+    },
+    {
+      "when": "final",
+      "angle": "front",
+      "path": "benchmarks/sculpture/challenge/gatehouse/view-final-front.png"
+    },
+    {
+      "when": "final",
+      "angle": "top",
+      "path": "benchmarks/sculpture/challenge/gatehouse/view-final-top.png"
+    },
+    {
+      "when": "e23-before",
+      "angle": "-x-z",
+      "path": "benchmarks/sculpture/challenge/gatehouse/view-e23-before-oblique225.png"
+    }
+  ],
+  "frames": [
+    "pr/assets/frames/challenge-gatehouse-before.png",
+    "pr/assets/frames/challenge-gatehouse-after.png"
+  ]
+}

@@ -1,0 +1,386 @@
+{
+  "schema": "multi-angle-gate/v1",
+  "subject": "gatehouse",
+  "label": "challenge",
+  "artifact": {
+    "path": "benchmarks/sculpture/challenge/gatehouse/artifact.json",
+    "sha256": "e4467844ffb4056d7bd0fc7cb7c66cffc9d4a6f046892e51a054e92df02c15dc"
+  },
+  "contract": {
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "elevationDeg": 30,
+    "width": 512,
+    "height": 512,
+    "gapBudget": 2,
+    "coverageThreshold": 0.5,
+    "note": "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them"
+  },
+  "zones": {
+    "source": "concept",
+    "reason": null,
+    "policy": {
+      "band0": {
+        "dominant": "polished_basalt",
+        "preserve": [
+          "dark_oak_log",
+          "deepslate_bricks",
+          "cobblestone",
+          "dark_oak_planks"
+        ]
+      },
+      "roof": {
+        "dominant": "deepslate_bricks",
+        "preserve": [
+          "polished_basalt",
+          "cobblestone",
+          "dark_oak_log",
+          "dark_oak_planks"
+        ]
+      }
+    },
+    "substitutionApplied": {
+      "stone_bricks": "polished_basalt"
+    },
+    "kitOverridesApplied": {
+      "deepslate_tiles": "deepslate_bricks"
+    }
+  },
+  "views": [
+    {
+      "angle": "+x+z",
+      "azimuthDeg": 45,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/gatehouse-challenge/view-+x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "polished_basalt",
+            "fraction": 0.624,
+            "total": 1019,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "deepslate_bricks",
+            "fraction": 0.697,
+            "total": 327,
+            "passed": true
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "different object",
+        "gaps": [
+          {
+            "region": "roofline / overall upper massing",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "front entrance (the arched doorway)",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "facade surfaces",
+            "attribute": "material zoning",
+            "severity": "major"
+          }
+        ],
+        "rationale": "The references show a simple gabled cottage with a clean pitched roof and a single arched doorway, but the Minecraft build is a sprawling, multi-tiered colonnaded ruin with no recognizable gable roof, no clear arched entrance, and chaotic material zoning, so it does not read as the same object from this angle."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10445,
+          "output_tokens": 220,
+          "cost_usd": 0.152465
+        }
+      }
+    },
+    {
+      "angle": "+x-z",
+      "azimuthDeg": 135,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/gatehouse-challenge/view-+x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "polished_basalt",
+            "fraction": 0.616,
+            "total": 1019,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "deepslate_bricks",
+            "fraction": 0.727,
+            "total": 341,
+            "passed": true
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof and upper structure",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "walls and facade openings",
+            "attribute": "form",
+            "severity": "minor"
+          },
+          {
+            "region": "overall stone-and-dark-trim coloring",
+            "attribute": "palette",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The build keeps the cuboidal stone massing and grey-plus-dark palette of the gatehouse, but its upper form is a ragged, broken mass rather than the clean gabled roof shown in the concept and mesh silhouette, a major drift from this angle."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10445,
+          "output_tokens": 864,
+          "cost_usd": 0.16856499999999996
+        }
+      }
+    },
+    {
+      "angle": "-x-z",
+      "azimuthDeg": 225,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/gatehouse-challenge/view--x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "polished_basalt",
+            "fraction": 0.69,
+            "total": 993,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "deepslate_bricks",
+            "fraction": 0.805,
+            "total": 353,
+            "passed": true
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "different object",
+        "gaps": [
+          {
+            "region": "roof / upper mass",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "overall building footprint and silhouette",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "front face — columned portico vs plain arched wall",
+            "attribute": "material zoning",
+            "severity": "major"
+          }
+        ],
+        "rationale": "The references show a compact gabled stone cottage with a single arched doorway, but the Minecraft panel is a sprawling colonnaded temple with no gabled roof and a wholly different massing, so it is not recognizable as the same building."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10445,
+          "output_tokens": 599,
+          "cost_usd": 0.1631
+        }
+      }
+    },
+    {
+      "angle": "-x+z",
+      "azimuthDeg": 315,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/gatehouse-challenge/view--x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "polished_basalt",
+            "fraction": 0.68,
+            "total": 1005,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "deepslate_bricks",
+            "fraction": 0.769,
+            "total": 355,
+            "passed": true
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "perimeter walls",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "roof eaves",
+            "attribute": "form",
+            "severity": "minor"
+          },
+          {
+            "region": "overall body",
+            "attribute": "massing",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The gray stone palette and gabled-roof massing read true to the references, but the concept's solid-walled gatehouse has become an open colonnade of deeply-shadowed pillars with heavy projecting eaves, a real structural drift from this angle."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10445,
+          "output_tokens": 955,
+          "cost_usd": 0.172
+        }
+      }
+    }
+  ],
+  "aggregate": {
+    "schema": "multi-angle-gate/v1",
+    "decided": true,
+    "passed": false,
+    "gapCount": 12,
+    "gapBudget": 2,
+    "gaps": [
+      {
+        "angle": "+x+z",
+        "region": "roofline / overall upper massing",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x+z",
+        "region": "front entrance (the arched doorway)",
+        "attribute": "massing"
+      },
+      {
+        "angle": "+x+z",
+        "region": "facade surfaces",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "+x-z",
+        "region": "roof and upper structure",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x-z",
+        "region": "walls and facade openings",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x-z",
+        "region": "overall stone-and-dark-trim coloring",
+        "attribute": "palette"
+      },
+      {
+        "angle": "-x-z",
+        "region": "roof / upper mass",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x-z",
+        "region": "overall building footprint and silhouette",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x-z",
+        "region": "front face — columned portico vs plain arched wall",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x+z",
+        "region": "perimeter walls",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x+z",
+        "region": "roof eaves",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x+z",
+        "region": "overall body",
+        "attribute": "massing"
+      }
+    ],
+    "failures": [
+      {
+        "angle": "+x+z",
+        "reason": "different object"
+      },
+      {
+        "angle": "+x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x-z",
+        "reason": "different object"
+      },
+      {
+        "angle": "-x+z",
+        "reason": "drifted"
+      }
+    ],
+    "views": [
+      {
+        "angle": "+x+z",
+        "outcome": "different object: form"
+      },
+      {
+        "angle": "+x-z",
+        "outcome": "drifted: form"
+      },
+      {
+        "angle": "-x-z",
+        "outcome": "different object: form"
+      },
+      {
+        "angle": "-x+z",
+        "outcome": "drifted: form"
+      }
+    ]
+  },
+  "sheet": "pr/assets/frames/multi-angle-gatehouse-challenge.png",
+  "labeled": true
+}

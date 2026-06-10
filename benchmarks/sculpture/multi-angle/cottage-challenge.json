@@ -1,0 +1,366 @@
+{
+  "schema": "multi-angle-gate/v1",
+  "subject": "cottage",
+  "label": "challenge",
+  "artifact": {
+    "path": "benchmarks/sculpture/challenge/cottage/artifact.json",
+    "sha256": "dbe9a083461d8888b4876361e44206f301ec9af6b4ca5c25beece4d480176da4"
+  },
+  "contract": {
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "elevationDeg": 30,
+    "width": 512,
+    "height": 512,
+    "gapBudget": 2,
+    "coverageThreshold": 0.5,
+    "note": "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them"
+  },
+  "zones": {
+    "source": "concept",
+    "reason": null,
+    "policy": {
+      "band0": {
+        "dominant": "tuff",
+        "preserve": [
+          "dark_oak_log",
+          "spruce_planks",
+          "cobblestone",
+          "bricks"
+        ]
+      },
+      "band1": {
+        "dominant": "smooth_sandstone",
+        "preserve": [
+          "spruce_planks",
+          "dark_oak_log",
+          "cobblestone",
+          "bricks"
+        ]
+      },
+      "roof": {
+        "dominant": "spruce_planks",
+        "preserve": [
+          "spruce_planks",
+          "dark_oak_log",
+          "tuff",
+          "cobblestone",
+          "bricks"
+        ]
+      }
+    },
+    "substitutionApplied": {
+      "stone_bricks": "tuff",
+      "white_terracotta": "sandstone"
+    },
+    "kitOverridesApplied": {
+      "white_terracotta": "smooth_sandstone",
+      "dark_oak_planks": "spruce_planks"
+    }
+  },
+  "views": [
+    {
+      "angle": "+x+z",
+      "azimuthDeg": 45,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-challenge/view-+x+z.png"
+      },
+      "coverage": {
+        "passed": false,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "tuff",
+            "fraction": 0.584,
+            "total": 274,
+            "passed": true
+          },
+          "band1": {
+            "dominant": "smooth_sandstone",
+            "fraction": 0.399,
+            "total": 396,
+            "passed": false
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 0.557,
+            "total": 341,
+            "passed": true
+          }
+        }
+      },
+      "verdict": null,
+      "judge": null,
+      "reason": "coverage"
+    },
+    {
+      "angle": "+x-z",
+      "azimuthDeg": 135,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-challenge/view-+x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "tuff",
+            "fraction": 0.698,
+            "total": 268,
+            "passed": true
+          },
+          "band1": {
+            "dominant": "smooth_sandstone",
+            "fraction": 0.568,
+            "total": 384,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 0.73,
+            "total": 330,
+            "passed": true
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "roof eaves/overhang",
+            "attribute": "massing",
+            "severity": "minor"
+          },
+          {
+            "region": "upper walls vs stone base",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The stone base, cream timber-framed walls, and brown roof palette all read as the same cottage, but the roof has collapsed into a jagged, chaotically stepped mass with protruding eaves where the mesh shows a clean pitched form, breaking the silhouette from this angle."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10445,
+          "output_tokens": 897,
+          "cost_usd": 0.16941
+        }
+      }
+    },
+    {
+      "angle": "-x-z",
+      "azimuthDeg": 225,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-challenge/view--x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "tuff",
+            "fraction": 0.865,
+            "total": 274,
+            "passed": true
+          },
+          "band1": {
+            "dominant": "smooth_sandstone",
+            "fraction": 0.715,
+            "total": 403,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 0.817,
+            "total": 334,
+            "passed": true
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof across the whole top",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "upper timber-framed storey walls",
+            "attribute": "material zoning",
+            "severity": "minor"
+          },
+          {
+            "region": "roof timber/plank coloring",
+            "attribute": "palette",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The stone base and cream upper walls read true, but the roof has collapsed into a flat, broken jumble of planks rather than the clean steep gabled pitch shown in the concept and mesh silhouette."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10445,
+          "output_tokens": 185,
+          "cost_usd": 0.15160999999999997
+        }
+      }
+    },
+    {
+      "angle": "-x+z",
+      "azimuthDeg": 315,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-challenge/view--x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "tuff",
+            "fraction": 0.75,
+            "total": 268,
+            "passed": true
+          },
+          "band1": {
+            "dominant": "smooth_sandstone",
+            "fraction": 0.634,
+            "total": 396,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 0.745,
+            "total": 318,
+            "passed": true
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "same object",
+        "gaps": [
+          {
+            "region": "roofline and eaves",
+            "attribute": "form",
+            "severity": "minor"
+          },
+          {
+            "region": "upper timber-frame wall",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The build reads as the same cottage from this angle — brown plank roof over cream timber-frame walls atop a gray stone base all zone true to the concept and mesh — with only minor roughness in the irregular roofline and a slightly muddled upper-wall framing."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10445,
+          "output_tokens": 674,
+          "cost_usd": 0.163835
+        }
+      }
+    }
+  ],
+  "aggregate": {
+    "schema": "multi-angle-gate/v1",
+    "decided": true,
+    "passed": false,
+    "gapCount": 8,
+    "gapBudget": 2,
+    "gaps": [
+      {
+        "angle": "+x-z",
+        "region": "roof",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x-z",
+        "region": "roof eaves/overhang",
+        "attribute": "massing"
+      },
+      {
+        "angle": "+x-z",
+        "region": "upper walls vs stone base",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x-z",
+        "region": "roof across the whole top",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x-z",
+        "region": "upper timber-framed storey walls",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x-z",
+        "region": "roof timber/plank coloring",
+        "attribute": "palette"
+      },
+      {
+        "angle": "-x+z",
+        "region": "roofline and eaves",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x+z",
+        "region": "upper timber-frame wall",
+        "attribute": "material zoning"
+      }
+    ],
+    "failures": [
+      {
+        "angle": "+x+z",
+        "reason": "coverage"
+      },
+      {
+        "angle": "+x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x-z",
+        "reason": "drifted"
+      }
+    ],
+    "views": [
+      {
+        "angle": "+x+z",
+        "outcome": "coverage"
+      },
+      {
+        "angle": "+x-z",
+        "outcome": "drifted: form"
+      },
+      {
+        "angle": "-x-z",
+        "outcome": "drifted: form"
+      },
+      {
+        "angle": "-x+z",
+        "outcome": "same object (2 minor)"
+      }
+    ]
+  },
+  "sheet": "pr/assets/frames/multi-angle-cottage-challenge.png",
+  "labeled": true
+}

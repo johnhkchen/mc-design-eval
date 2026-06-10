@@ -192,11 +192,11 @@ async function runChain(def, paths) {
     const p = await provisionBase(def);
     base = p.artifact;
     provision = p.stats;
+    await writeFile(paths.baseAbs, artifactJson(base)); // provisioned subjects only — committed bases stay single-sourced
   } else {
     base = JSON.parse(await readFile(join(HERE, def.build), "utf8"));
     assertArtifact(base);
   }
-  await writeFile(paths.baseAbs, artifactJson(base));
   const shell = shellStage(base);
   await writeFile(paths.shellAbs, artifactJson(shell.artifact));
   // The D5 uniform transform: the skin consumes the SHELL-REPAIRED build; the committed zone-map
@@ -315,7 +315,7 @@ async function main() {
     }
   } catch (e) {
     // Rule 6: the failure IS the recorded result — no artifact, no sheet, no pass.
-    const stage = existsSync(paths.shellAbs) ? "skin" : existsSync(paths.baseAbs) ? "shell" : "provision";
+    const stage = existsSync(paths.shellAbs) ? "skin" : (!def.provision || existsSync(paths.baseAbs)) ? "shell" : "provision";
     const record = {
       schema: RECORD_SCHEMA, subject: def.key, status: "pipeline-failed", stage, error: e.message,
       inputs: { build: def.provision ? null : def.build, concept: def.concept, glb: def.glb, map: def.map },
