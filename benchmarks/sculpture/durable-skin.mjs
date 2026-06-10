@@ -1,0 +1,625 @@
+// IMPURE RUNNER — E-24 durable consolidation (S-089 / T-089-01). THE DURABLE RULE: a result the pipeline
+// can't reproduce is not a result. The four E-24 stages landed as separate per-ticket runners whose
+// on-disk records chain by hand (spray:paint → value:select / pattern:cottage fork — no artifact is
+// simultaneously value-true AND patterned); this runner composes their PURE CORES end-to-end, per
+// subject, in ONE named command:
+//
+//   value-true selection (T-086) → seal (S-084) → full-shell zone-fill base coat (T-085, skin upgraded
+//   to "exposure" by T-090) → secondaries splat (E-23, zone-gated, dominants excluded) → coherent
+//   surface (T-087: course basin-fill + stray-salt strip) → coverage-aware gate (T-088, terminal THROW)
+//
+// Value-true runs FIRST (a palette transform): selection happens in the ORIGINAL name space (the named
+// block must locate its own concept region — the T-086 locator), then the substitution renames the
+// build + the zone policy once, so every later stage (fill dominants, concept quantize, splat palettes,
+// coverage gate) operates in the shipped palette with no translation layer at the end.
+//
+// DETERMINISM (E-24 Rule 2): no LLM call is on this path — the concept PNG and the material-map roles
+// are committed upstream artifacts (frozen data), spray-paint's --refine stub is not carried over, and
+// every stage is a pure function of the committed inputs. The deterministic core runs TWICE per live
+// invocation and the two artifacts must be byte-identical (recorded as reproducible + a sha256 of the
+// written artifact, re-checked by --offline). GL renders are evidence, never inputs to a decision.
+//
+// THE SEAM INVARIANT: everything that transforms the build is a unit-tested pure core under src/; this
+// file is impure wiring only (file I/O, GL renders, frame copies, the durable record). Mirrors
+// spray-paint.mjs / value-select.mjs / surface-pattern.mjs — which stay untouched as the per-ticket
+// measurement records (T-090-01 owns spray-paint.mjs concurrently).
+//
+// GL — run on demand, NOT in `npm test`:
+//   npm run skin:cottage                # the full pipeline + renders + frames
+//   npm run skin:gatehouse
+//   npm run skin:cottage -- --offline   # re-assert the committed record + artifact hash, no GL/decode
+//
+// Writes durable-skin/<subj>.{json,md} (committed) + durable-skin/<subj>/artifact.json (the final
+// skinned build) + PNGs (gitignored) + pr/assets/frames/durable-<subj>-{before,after,strip}.png
+// (committed evidence frames).
+
+import { readFile, writeFile, mkdir, copyFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+import { artifactOccupancy, bareBlock } from "../../src/view/occupancy.mjs";
+import { projectSurface } from "../../src/view/surface-grid.mjs";
+import { structuralZones } from "../../src/view/structural-read.mjs";
+import { sealRoof, sealWalls, applyDeltas } from "../../src/view/surface-coherence.mjs";
+import {
+  zoneFill, surfaceZoneHistogram, dominantCoverage, exposedVoxelEntries,
+} from "../../src/view/zone-fill.mjs";
+import { quantizeToFace, bareList } from "../../src/view/reference-quantize.mjs";
+import { loadGlbSplat, resampleBlockGrid } from "../../src/view/glb-splat.mjs";
+import { paintFace, mergePaints, applyPaint } from "../../src/view/face-paint.mjs";
+import { allowedPalette } from "../../src/view/palette-cans.mjs";
+import { regularizeRoofCourses, stripStraySalt } from "../../src/view/surface-pattern.mjs";
+import {
+  faceResemblance, coverageGate, DEFAULT_COVERAGE_THRESHOLD,
+} from "../../src/view/face-resemblance.mjs";
+import {
+  SAMPLE_GRID_N, estimateBorderColor, sampleRoleSwatches, selectValueTrueMap,
+} from "../../src/color/value-select.mjs";
+import { gridFromPixels } from "../../src/color/image-grid.mjs";
+import { decodeImage } from "../../src/color/palette-extract.mjs";
+import { loadBlockTable } from "../../src/color/block-table.mjs";
+import { paletteFromManifest } from "../../src/form/glb-voxel-build.mjs";
+import { resampleRgba, composeTriptych, RESEMBLANCE_DEFAULTS } from "../../src/form/resemblance.mjs";
+import { encodeRgbaToPng } from "../../render/src/headless-canvas.mjs";
+import { assertArtifact } from "../../src/artifact.mjs";
+
+const ROOT = fileURLToPath(new URL("../../", import.meta.url));
+const HERE = join(ROOT, "benchmarks/sculpture");
+const OUT_DIR = join(HERE, "durable-skin");
+const FRAMES_DIR = join(ROOT, "pr/assets/frames");
+
+const COVERAGE_THRESHOLD = DEFAULT_COVERAGE_THRESHOLD; // T-088: the dominant is actually dominant
+const ROOF_BAND_TARGET = 0.9;   // T-090 band evidence: roof reads >= 90% roof materials on the shell
+const UPPER_RESIDUE_MAX = 0.05; // and the upper band's displaced-field residue is bounded
+const MIN_KEEP = 3, MIN_EXTENT = 3; // T-087 salt-strip shape rule
+const OBLIQUE_ANGLE = "-x-z";   // azimuth 225° — the angle the projection-skin fill failed on (T-090)
+
+// THE SUBJECT REGISTRY. Policies are written in the NAMED (pre-substitution) block space of each
+// subject's E-21 material map and mapped through the value-true substitution at exactly one point
+// (mapPolicy). `legacy` = the would-have-been E-23 splat-only palettes (dominants included) — replayed
+// solely as the before-baseline; for the gatehouse no E-23 skin ever shipped, so the replay is the
+// honest counterfactual, labeled as such in the record. `plasterInvariant` (cottage) names the
+// upper-only block whose base/roof surface count must be 0 (T-079-02 guard; vacuous where null).
+const SUBJECTS = {
+  cottage: {
+    key: "cottage",
+    build: "concept-materials/cottage/after-artifact.json",
+    concept: "runs/014-vConcept-a-cottage/concept.png",
+    glb: "glb/cottage.glb",
+    map: "material-map/cottage.json",
+    valueSelectRecord: "value-select/cottage.json", // T-086's committed result — agreement asserted
+    policy: { // spray-paint.mjs ZONE_POLICY verbatim (incl. the T-090 gable-framing preserve)
+      base: {
+        dominant: "stone_bricks",
+        preserve: ["cobblestone", "dark_oak_log"],
+        splat: ["cobblestone", "dark_oak_log"],
+      },
+      upper: {
+        dominant: "white_terracotta",
+        preserve: ["dark_oak_log", "spruce_planks", "dark_oak_planks"],
+        splat: ["dark_oak_log"],
+      },
+      roof: {
+        dominant: "spruce_planks",
+        preserve: ["dark_oak_planks", "cobblestone", "bricks", "dark_oak_log"],
+        splat: ["dark_oak_planks", "cobblestone", "bricks"],
+      },
+    },
+    legacy: {
+      base: ["stone_bricks", "cobblestone", "dark_oak_log"],
+      upper: ["white_terracotta", "dark_oak_log", "stone_bricks"],
+      roof: ["spruce_planks", "dark_oak_planks", "cobblestone", "bricks"],
+    },
+    plasterInvariant: "white_terracotta",
+    frontDir: "+z", sideDir: "+x",
+  },
+  gatehouse: {
+    key: "gatehouse",
+    build: "concept-materials/gatehouse/after-artifact.json",
+    concept: "runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+    glb: "glb/stone-gatehouse.glb",
+    map: "material-map/gatehouse.json",
+    valueSelectRecord: null, // no committed T-086 record — this run IS the gatehouse value-true result
+    policy: { // derived from material-map/gatehouse.json roles (1:1 rule→block, the E-21 "restored" case)
+      base: {
+        dominant: "stone_bricks",                                        // smooth coursed wall field
+        preserve: ["cobblestone", "dark_oak_log", "dark_oak_planks"],    // corners + arch ring + door leaf
+        splat: ["cobblestone", "dark_oak_log", "dark_oak_planks"],
+      },
+      upper: {
+        dominant: "stone_bricks",                                        // same field — single-material body
+        preserve: ["cobblestone"],                                       // the under-eave rough band
+        splat: ["cobblestone"],
+      },
+      roof: {
+        dominant: "deepslate_tiles",                                     // uniform dark tile slope
+        preserve: [],                                                    // anything else on the roof is salt
+        splat: [],
+      },
+    },
+    legacy: {
+      base: ["stone_bricks", "cobblestone", "dark_oak_log", "dark_oak_planks"],
+      upper: ["stone_bricks", "cobblestone"],
+      roof: ["deepslate_tiles"],
+    },
+    plasterInvariant: null,
+    frontDir: "+z", sideDir: "+x",
+  },
+};
+
+const bare = (id) => String(id).replace(/^minecraft:/, "");
+
+/** Map a named-space zone policy through the value-true substitution — THE one renaming point. */
+function mapPolicy(policy, sub) {
+  return Object.fromEntries(Object.entries(policy).map(([z, p]) => [z, {
+    dominant: sub(p.dominant),
+    preserve: [...new Set(p.preserve.map(sub))],
+    splat: [...new Set(p.splat.map(sub))],
+  }]));
+}
+
+/** Rename switched blocks across manifest + placements (value-select.mjs precedent). */
+function applySubstitution(artifact, substitution) {
+  const subbed = (b) => `minecraft:${substitution[bare(b)] ?? bare(b)}`;
+  return {
+    ...artifact,
+    palette: { ...artifact.palette, manifest: [...new Set(artifact.palette.manifest.map(subbed))] },
+    placements: artifact.placements.map((p) => (substitution[bare(p.block)] ? { ...p, block: subbed(p.block) } : p)),
+  };
+}
+
+/** Final material per voxel (last-write-wins). */
+function materialCounts(artifact) {
+  const counts = {};
+  for (const blk of artifactOccupancy(artifact).cells.values()) {
+    const b = bareBlock(blk);
+    counts[b] = (counts[b] || 0) + 1;
+  }
+  return counts;
+}
+
+/** Per-zone count of `block` on the EXPOSURE skin (the camera's truth) — the plaster-invariant census. */
+function exposedBlockByZone(artifact, zoneOf, block) {
+  const hist = { base: 0, upper: 0, roof: 0 };
+  for (const { voxel, block: blk } of exposedVoxelEntries(artifactOccupancy(artifact))) {
+    if (bareBlock(blk) === block) hist[zoneOf(voxel)] = (hist[zoneOf(voxel)] || 0) + 1;
+  }
+  return hist;
+}
+
+/** Fraction of a zone's shell covered by its dominant + preserve set (the T-090 band instrument). */
+function zoneMaterialsFraction(cov, zone, policy) {
+  const z = cov[zone];
+  if (!z || !z.total) return null;
+  const mats = new Set([policy[zone].dominant, ...policy[zone].preserve].map(bareBlock));
+  const n = Object.entries(z.byBlock).reduce((a, [b, c]) => a + (mats.has(b) ? c : 0), 0);
+  return Math.round((n / z.total) * 1000) / 1000;
+}
+
+function coverageLine(cov) {
+  return Object.entries(cov)
+    .map(([z, c]) => `${z} ${c.dominant}=${c.dominantFraction == null ? "?" : Math.round(c.dominantFraction * 100) + "%"}`)
+    .join(", ");
+}
+
+/** Decode a GLB baseColor image to RGBA (WebP via dwebp) — spray-paint's injection, runner-local. */
+async function decodeTexture({ data, mimeType }) {
+  const { writeFile: wf, rm } = await import("node:fs/promises");
+  const { tmpdir } = await import("node:os");
+  if (mimeType === "image/png" || mimeType === "image/jpeg") {
+    const p = join(tmpdir(), `ds-tex-${process.pid}.${mimeType === "image/png" ? "png" : "jpg"}`);
+    await wf(p, Buffer.from(data));
+    try { return await decodeImage(p); } finally { await rm(p, { force: true }); }
+  }
+  const { spawn } = await import("node:child_process");
+  const inP = join(tmpdir(), `ds-tex-${process.pid}.webp`);
+  const outP = join(tmpdir(), `ds-tex-${process.pid}.png`);
+  await wf(inP, Buffer.from(data));
+  await new Promise((res, rej) => {
+    const c = spawn("dwebp", [inP, "-o", outP], { stdio: "ignore" });
+    c.on("error", rej);
+    c.on("close", (code) => (code === 0 ? res() : rej(new Error(`dwebp exited ${code}`))));
+  });
+  try { return await decodeImage(outP); } finally { await rm(inP, { force: true }); await rm(outP, { force: true }); }
+}
+
+/** Best-effort GL render at a named angle (a lens, never logic). */
+async function tryRenderAngle(artifact, angle, label, subjDir) {
+  try {
+    const { renderViews } = await import("../../src/view/multi-angle.mjs");
+    const [r] = await renderViews(artifact, [angle], { outDir: subjDir, label: () => label });
+    return { angle, path: r.path.replace(ROOT, "") };
+  } catch (e) {
+    return { angle, error: e.message };
+  }
+}
+
+// =================================================================================================
+// THE DETERMINISTIC CORE — reads committed inputs, writes nothing, no GL. Run twice per live pass;
+// the two final artifacts must be byte-identical (the reproducibility proof).
+// =================================================================================================
+async function buildSkin(def) {
+  const notes = [];
+  const matMap = JSON.parse(await readFile(join(HERE, def.map), "utf8"));
+  const raw = JSON.parse(await readFile(join(HERE, def.build), "utf8"));
+  assertArtifact(raw);
+
+  // --- 1. VALUE-TRUE SELECTION (T-086 cores, ORIGINAL name space) --------------------------------
+  const conceptPath = join(HERE, def.concept);
+  const conceptImg = await decodeImage(conceptPath);
+  const namedManifest = bareList(matMap.palette);
+  const borderColor = estimateBorderColor(conceptImg);
+  const gridResult = gridFromPixels(conceptImg, {
+    whitelist: namedManifest, n: SAMPLE_GRID_N, dropColor: borderColor, cellMeans: true,
+  });
+  const swatches = sampleRoleSwatches(gridResult, namedManifest);
+  const rows = selectValueTrueMap(matMap.map, swatches);
+  const substitution = Object.fromEntries(rows.filter((r) => r.switched).map((r) => [r.named, r.chosen]));
+  let agreesWithRecord = null;
+  if (def.valueSelectRecord && existsSync(join(HERE, def.valueSelectRecord))) {
+    const committed = JSON.parse(await readFile(join(HERE, def.valueSelectRecord), "utf8"));
+    const canon = (o) => JSON.stringify(Object.entries(o ?? {}).sort());
+    agreesWithRecord = canon(committed.substitution) === canon(substitution);
+    if (!agreesWithRecord) {
+      throw new Error(`value-true substitution diverges from the committed ${def.valueSelectRecord}: ` +
+        `${JSON.stringify(substitution)} vs ${JSON.stringify(committed.substitution)} — same cores, same ` +
+        `inputs; divergence is a wiring bug, not a result`);
+    }
+  }
+  const sub = (b) => substitution[b] ?? b;
+
+  // --- 2. SUBSTITUTED BUILD + POLICY (the shipped palette, everywhere below) ---------------------
+  const artifact0 = applySubstitution(raw, substitution);
+  assertArtifact(artifact0);
+  const policyS = mapPolicy(def.policy, sub);
+  const legacyS = Object.fromEntries(Object.entries(def.legacy).map(([z, m]) => [z, [...new Set(m.map(sub))]]));
+  const allowed = allowedPalette(artifact0);
+  const subManifest = artifact0.palette.manifest;
+  const palette = paletteFromManifest(subManifest);
+  for (const [z, p] of Object.entries(policyS)) {
+    if (!allowed.has(p.dominant)) throw new Error(`zone "${z}" dominant "${p.dominant}" not in the substituted manifest`);
+  }
+
+  // --- 3. SEAL (S-084) → 4. ZONES → 5. FULL-SHELL BASE COAT (T-085 + T-090 skin) -----------------
+  const occ0 = artifactOccupancy(artifact0);
+  const sealed = applyDeltas(artifact0, [...sealRoof(occ0).placements, ...sealWalls(occ0).placements]);
+  const occSealed = artifactOccupancy(sealed);
+  const { zoneOf, storeyDivide, upperTop } = structuralZones(occSealed, def.zoneOpts ?? {});
+  const fillZones = Object.fromEntries(
+    Object.entries(policyS).map(([z, p]) => [z, { dominant: p.dominant, preserve: p.preserve }]));
+  const fill = zoneFill(occSealed, { zoneOf, zones: fillZones, skin: "exposure" });
+  const based = applyPaint(sealed, fill.placements);
+  const occBased = artifactOccupancy(based);
+
+  // --- 6. SECONDARIES SPLAT (E-23, zone-gated, dominants excluded) -------------------------------
+  const allowedByZone = new Map(
+    Object.entries(policyS).map(([z, p]) => [z, new Set(p.splat.filter((b) => allowed.has(b)))]));
+  const frontGrid = projectSurface(occBased, def.frontDir);
+  const conceptRes = await quantizeToFace(conceptPath, frontGrid, { manifest: subManifest });
+  const frontTarget = resampleBlockGrid(conceptRes.grid, conceptRes.n, conceptRes.m, frontGrid.n, frontGrid.m).grid;
+  const sideGrid = projectSurface(occBased, def.sideDir);
+  let sideSplat = null;
+  try {
+    sideSplat = await loadGlbSplat(join(HERE, def.glb), sideGrid, def.sideDir, { palette, decodeTexture });
+  } catch (e) {
+    notes.push(`side GLB splat skipped: ${e.message}`);
+  }
+  const frontPass = paintFace(occBased, def.frontDir, frontTarget, { allowed, source: "concept", zoneOf, allowedByZone });
+  const sidePass = sideSplat
+    ? paintFace(occBased, def.sideDir, sideSplat.grid, { allowed, source: "glb", zoneOf, allowedByZone })
+    : { dir: def.sideDir, source: "glb", placements: [], painted: 0, skipped: 0, offPalette: 0, zoneRejected: 0 };
+  // T-088 PRECONDITION on the front candidate, GL-free (the deterministic acceptance: the concept IS the
+  // truth for the front, so with coverage passed the paint is accepted; the resemblance delta is rendered
+  // later as EVIDENCE — it cannot rescue a coverage failure, per the T-088 contract).
+  const frontCandidate = applyPaint(based, frontPass.placements);
+  const covFrontCandidate = dominantCoverage(
+    surfaceZoneHistogram(artifactOccupancy(frontCandidate), zoneOf, { skin: "exposure" }), policyS);
+  const gateFrontCandidate = coverageGate(covFrontCandidate, { threshold: COVERAGE_THRESHOLD, zones: policyS });
+  const frontAccepted = gateFrontCandidate.passed;
+  const sideAccepted = sidePass.painted > 0;
+  const acceptedPasses = [];
+  if (sideAccepted) acceptedPasses.push(sidePass);
+  if (frontAccepted) acceptedPasses.push(frontPass);
+  const merged = acceptedPasses.length
+    ? mergePaints(acceptedPasses, { priority: ["concept", "glb"] })
+    : { placements: [], collisions: 0 };
+  const painted = applyPaint(based, merged.placements);
+
+  // --- 7. THE E-23 SPLAT-ONLY BASELINE (replayed on the sealed, UN-filled build) ------------------
+  const legacyByZone = new Map(
+    Object.entries(legacyS).map(([z, mats]) => [z, new Set(mats.filter((b) => allowed.has(b)))]));
+  const frontLegacy = paintFace(occSealed, def.frontDir, frontTarget, { allowed, source: "concept", zoneOf, allowedByZone: legacyByZone });
+  const sideLegacy = sideSplat
+    ? paintFace(occSealed, def.sideDir, sideSplat.grid, { allowed, source: "glb", zoneOf, allowedByZone: legacyByZone })
+    : { placements: [] };
+  const splatOnly = applyPaint(sealed, mergePaints(
+    [sideLegacy, frontLegacy].filter((p) => (p.placements?.length ?? 0) > 0),
+    { priority: ["concept", "glb"] }).placements);
+  const covSplatOnly = dominantCoverage(
+    surfaceZoneHistogram(artifactOccupancy(splatOnly), zoneOf, { skin: "exposure" }), policyS);
+  const gateSplatOnly = coverageGate(covSplatOnly, { threshold: COVERAGE_THRESHOLD, zones: policyS });
+
+  // --- 8. COHERENT SURFACE (T-087: geometry first, pattern second) --------------------------------
+  const course = regularizeRoofCourses(artifactOccupancy(painted), { dominant: policyS.roof.dominant });
+  const courseBuild = applyPaint(painted, course.placements);
+  const salt = stripStraySalt(artifactOccupancy(courseBuild), {
+    zoneOf, zones: policyS, minKeep: MIN_KEEP, minExtent: MIN_EXTENT,
+  });
+  const final = applyPaint(courseBuild, salt.placements);
+
+  // --- 9. TERMINAL GATES (a failing skin can never write a record) --------------------------------
+  let plasterHistogram = null;
+  if (def.plasterInvariant) {
+    const block = sub(def.plasterInvariant);
+    plasterHistogram = exposedBlockByZone(final, zoneOf, block);
+    if (plasterHistogram.base !== 0 || plasterHistogram.roof !== 0) {
+      throw new Error(`zone violation: ${block} on base/roof shell (${JSON.stringify(plasterHistogram)})`);
+    }
+  }
+  const covFinal = dominantCoverage(
+    surfaceZoneHistogram(artifactOccupancy(final), zoneOf, { skin: "exposure" }), policyS);
+  const gateFinal = coverageGate(covFinal, { threshold: COVERAGE_THRESHOLD, zones: policyS });
+  if (!gateFinal.passed) {
+    throw new Error(`coverage gate FAILED on the final skin: ` +
+      gateFinal.failures.map((f) => `${f.zone} ${f.dominant}=${f.fraction} < ${COVERAGE_THRESHOLD}`).join(", "));
+  }
+  // T-090 band evidence on the same shell census. The upper-residue check only means something when the
+  // base field is a DIFFERENT material that could collapse into the upper band (cottage); where base and
+  // upper share a dominant (gatehouse) the "residue" IS the dominant — recorded as n/a.
+  const bands = {
+    roofMaterialsFraction: zoneMaterialsFraction(covFinal, "roof", policyS),
+    upperResidueBlock: policyS.base.dominant !== policyS.upper.dominant ? policyS.base.dominant : null,
+    upperResidueFraction: null,
+  };
+  if (bands.upperResidueBlock) {
+    bands.upperResidueFraction = Math.round(((covFinal.upper?.byBlock?.[bands.upperResidueBlock] ?? 0) /
+      (covFinal.upper?.total || 1)) * 1000) / 1000;
+  }
+  if ((bands.roofMaterialsFraction ?? 0) < ROOF_BAND_TARGET ||
+      (bands.upperResidueFraction != null && bands.upperResidueFraction > UPPER_RESIDUE_MAX)) {
+    throw new Error(`band acceptance FAILED: roof materials ${bands.roofMaterialsFraction} ` +
+      `(target >= ${ROOF_BAND_TARGET}), upper residue ${bands.upperResidueFraction} (max ${UPPER_RESIDUE_MAX})`);
+  }
+  assertArtifact(final);
+
+  return {
+    raw, artifact0, sealed, based, painted, splatOnly, final,
+    substitution, rows, agreesWithRecord, policyS, borderColor,
+    zones: { storeyDivide, upperTop }, zoneOf, fill,
+    splat: {
+      front: {
+        dir: def.frontDir, source: "concept", painted: frontPass.painted, skipped: frontPass.skipped,
+        offPalette: frontPass.offPalette, zoneRejected: frontPass.zoneRejected,
+        accepted: frontAccepted, coverageGate: gateFrontCandidate, outOfPalette: conceptRes.outOfPalette,
+      },
+      side: {
+        dir: def.sideDir, source: "glb", painted: sidePass.painted, skipped: sidePass.skipped,
+        offPalette: sidePass.offPalette, zoneRejected: sidePass.zoneRejected, accepted: sideAccepted,
+      },
+      collisions: merged.collisions,
+    },
+    course, salt,
+    coverage: { splatOnly: covSplatOnly, final: covFinal },
+    gates: { threshold: COVERAGE_THRESHOLD, splatOnly: gateSplatOnly, final: gateFinal },
+    bands, plasterHistogram, notes,
+  };
+}
+
+// =================================================================================================
+// MAIN — offline re-assert, or live: double-run determinism proof + renders + frames + the record.
+// =================================================================================================
+const DIR_TO_ANGLE = { "+z": "front", "-z": "back", "+x": "right", "-x": "left" };
+
+async function main() {
+  const argv = process.argv.slice(2);
+  const subjectKey = argv[argv.indexOf("--subject") + 1];
+  const def = SUBJECTS[subjectKey];
+  if (!def) throw new Error(`--subject must be one of: ${Object.keys(SUBJECTS).join(", ")}`);
+  const offline = argv.includes("--offline");
+  const subjDir = join(OUT_DIR, def.key);
+  const recPath = join(OUT_DIR, `${def.key}.json`);
+  const artPath = join(subjDir, "artifact.json");
+
+  if (offline) {
+    if (!existsSync(recPath) || !existsSync(artPath)) throw new Error(`committed record/artifact absent — run npm run skin:${def.key} first`);
+    const rec = JSON.parse(await readFile(recPath, "utf8"));
+    const artBytes = await readFile(artPath, "utf8");
+    assertArtifact(JSON.parse(artBytes));
+    const sha = createHash("sha256").update(artBytes).digest("hex");
+    const checks = {
+      sha: sha === rec.reproducible?.sha256,
+      gateFinal: rec.coverageGate?.final?.passed === true,
+      gateSplatOnly: rec.coverageGate?.splatOnly?.passed === false,
+      bands: (rec.bands?.roofMaterialsFraction ?? 0) >= ROOF_BAND_TARGET &&
+        (rec.bands?.upperResidueFraction == null || rec.bands.upperResidueFraction <= UPPER_RESIDUE_MAX),
+      plaster: !rec.invariants?.plasterHistogram ||
+        (rec.invariants.plasterHistogram.base === 0 && rec.invariants.plasterHistogram.roof === 0),
+      course: (rec.pattern?.course?.after?.stepSmoothness ?? 0) >= (rec.pattern?.course?.before?.stepSmoothness ?? 1),
+    };
+    const ok = Object.values(checks).every(Boolean);
+    console.error(`[offline] ${def.key}: artifact sha ${checks.sha ? "MATCHES" : "DIVERGES"}; ` +
+      `coverage gate final ${checks.gateFinal ? "passed" : "VIOLATED"} / splat-only ${checks.gateSplatOnly ? "rejected" : "VIOLATED"}; ` +
+      `bands ${checks.bands ? "OK" : "VIOLATED"}; plaster invariant ${checks.plaster ? "OK" : "VIOLATED"}; ` +
+      `course smoothness ${checks.course ? "non-regressing" : "VIOLATED"}; AJV ok`);
+    if (!ok) process.exitCode = 1;
+    return;
+  }
+
+  await mkdir(subjDir, { recursive: true });
+  await mkdir(FRAMES_DIR, { recursive: true });
+
+  // THE REPRODUCIBILITY PROOF (Rule 2): the deterministic core, twice; byte-equal or no record.
+  const r1 = await buildSkin(def);
+  const r2 = await buildSkin(def);
+  const j1 = JSON.stringify(r1.final);
+  if (j1 !== JSON.stringify(r2.final)) throw new Error("NON-DETERMINISTIC: two in-process runs produced different artifacts");
+  console.error(`[${def.key}] reproducible: double-run artifacts identical (${r1.final.placements.length} placements)`);
+  console.error(`[${def.key}] substitution ${JSON.stringify(r1.substitution)}` +
+    (r1.agreesWithRecord != null ? ` — agrees with committed value-select record` : " (no committed record — this run is the result)"));
+  console.error(`[${def.key}] fill: ${r1.fill.placements.length} filled, ${r1.fill.kept} kept — ` +
+    Object.entries(r1.fill.byZone).map(([z, s]) => `${z} ${s.filled}/${s.surface}`).join(", "));
+  console.error(`[${def.key}] splat: front ${r1.splat.front.painted} (zoneRejected ${r1.splat.front.zoneRejected}, accepted ${r1.splat.front.accepted}), ` +
+    `side ${r1.splat.side.painted} (accepted ${r1.splat.side.accepted})`);
+  console.error(`[${def.key}] pattern: ${r1.course.columnsRaised} columns raised / ${r1.course.voxelsAdded} voxels added, ` +
+    `smoothness ${r1.course.before.stepSmoothness} → ${r1.course.after.stepSmoothness}; salt ${r1.salt.stripped} stripped / ${r1.salt.kept} kept`);
+  console.error(`[${def.key}] coverage splat-only: ${coverageLine(r1.coverage.splatOnly)} → gate ${r1.gates.splatOnly.passed ? "PASS (unexpected)" : "REJECT"}`);
+  console.error(`[${def.key}] coverage final:      ${coverageLine(r1.coverage.final)} → gate ${r1.gates.final.passed ? "PASS" : "REJECT"}`);
+  console.error(`[${def.key}] bands: roof materials ${r1.bands.roofMaterialsFraction}` +
+    (r1.bands.upperResidueFraction != null ? `, upper ${r1.bands.upperResidueBlock} residue ${r1.bands.upperResidueFraction}` : " (upper residue n/a — shared dominant)"));
+
+  const artJson = JSON.stringify(r1.final, null, 2) + "\n";
+  await writeFile(artPath, artJson);
+  const sha256 = createHash("sha256").update(artJson).digest("hex");
+
+  // --- renders + the resemblance EVIDENCE (best-effort; never gates the build) --------------------
+  const frontAngle = DIR_TO_ANGLE[def.frontDir] ?? "front";
+  const renders = [];
+  const rSplatFront = await tryRenderAngle(r1.splatOnly, frontAngle, "splatonly-front", subjDir);
+  const rFinalFront = await tryRenderAngle(r1.final, frontAngle, "final-front", subjDir);
+  const rSplatObl = await tryRenderAngle(r1.splatOnly, OBLIQUE_ANGLE, "splatonly-oblique225", subjDir);
+  const rFinalObl = await tryRenderAngle(r1.final, OBLIQUE_ANGLE, "final-oblique225", subjDir);
+  const rTop = await tryRenderAngle(r1.final, "top", "final-top", subjDir);
+  renders.push({ when: "splat-only", ...rSplatFront }, { when: "final", ...rFinalFront },
+    { when: "splat-only", ...rSplatObl }, { when: "final", ...rFinalObl }, { when: "final", ...rTop });
+  for (const r of renders) console.error(`render ${r.when} ${r.angle}: ${r.path ?? `unavailable (${r.error})`}`);
+  // front-face resemblance vs the concept, both skins (evidence for the record; T-088 already decided)
+  let resemblance = null;
+  try {
+    if (rSplatFront.path && rFinalFront.path) {
+      const blockTable = loadBlockTable();
+      const conceptImg = await decodeImage(join(HERE, def.concept));
+      const sB = faceResemblance(await decodeImage(join(ROOT, rSplatFront.path)), conceptImg, blockTable, { artifact: r1.splatOnly });
+      const sA = faceResemblance(await decodeImage(join(ROOT, rFinalFront.path)), conceptImg, blockTable, { artifact: r1.final });
+      resemblance = { face: frontAngle, splatOnly: sB.score, final: sA.score };
+      console.error(`[${def.key}] front resemblance vs concept: splat-only ${sB.score} → final ${sA.score} (evidence, not the gate)`);
+    }
+  } catch (e) {
+    resemblance = { error: e.message };
+  }
+
+  // --- the strip (concept | splat-only | final) + committed frames --------------------------------
+  const frames = [];
+  try {
+    if (rSplatFront.path && rFinalFront.path) {
+      const P = RESEMBLANCE_DEFAULTS.panel;
+      const panels = [
+        resampleRgba(await decodeImage(join(HERE, def.concept)), P, P, "aspect"),
+        resampleRgba(await decodeImage(join(ROOT, rSplatFront.path)), P, P, "aspect"),
+        resampleRgba(await decodeImage(join(ROOT, rFinalFront.path)), P, P, "aspect"),
+      ];
+      const strip = composeTriptych(panels, {});
+      const stripPath = join(subjDir, `${def.key}-strip.png`);
+      await writeFile(stripPath, encodeRgbaToPng(strip.data, strip.w, strip.h));
+      await copyFile(stripPath, join(FRAMES_DIR, `durable-${def.key}-strip.png`));
+      frames.push(`pr/assets/frames/durable-${def.key}-strip.png`);
+    }
+    if (rSplatObl.path) {
+      await copyFile(join(ROOT, rSplatObl.path), join(FRAMES_DIR, `durable-${def.key}-before.png`));
+      frames.push(`pr/assets/frames/durable-${def.key}-before.png`);
+    }
+    if (rFinalObl.path) {
+      await copyFile(join(ROOT, rFinalObl.path), join(FRAMES_DIR, `durable-${def.key}-after.png`));
+      frames.push(`pr/assets/frames/durable-${def.key}-after.png`);
+    }
+  } catch (e) {
+    console.error(`frames: ${e.message}`);
+  }
+
+  // --- the durable record --------------------------------------------------------------------------
+  const before = materialCounts(r1.raw);
+  const after = materialCounts(r1.final);
+  const record = {
+    schema: "durable-skin/v1",
+    subject: def.key,
+    inputs: { build: def.build, concept: def.concept, glb: def.glb, map: def.map },
+    valueTrue: {
+      substitution: r1.substitution,
+      agreesWithCommittedRecord: r1.agreesWithRecord,
+      rows: r1.rows.map((r) => ({
+        role: r.role, named: r.named, chosen: r.chosen, switched: r.switched, reason: r.reason,
+        sampleCells: r.sampleCells, namedTrue: r.namedTrue ?? null, chosenTrue: r.chosenTrue ?? null,
+      })),
+      note: "selection in the ORIGINAL name space (T-086 locator), substitution applied ONCE to build + " +
+        "policy; all later stages run in the shipped palette. Reported ΔE is true unweighted ΔE76.",
+    },
+    sealed: { raw: r1.raw.placements.length, substituted: r1.artifact0.placements.length, sealed: r1.sealed.placements.length },
+    zones: r1.zones,
+    fill: {
+      skin: "exposure", minRun: 2, policy: r1.policyS,
+      placements: r1.fill.placements.length, kept: r1.fill.kept, byZone: r1.fill.byZone,
+    },
+    splat: r1.splat,
+    pattern: {
+      course: {
+        dominant: r1.policyS.roof.dominant, columnsRaised: r1.course.columnsRaised,
+        voxelsAdded: r1.course.voxelsAdded, before: r1.course.before, after: r1.course.after,
+      },
+      salt: { minKeep: MIN_KEEP, minExtent: MIN_EXTENT, stripped: r1.salt.stripped, kept: r1.salt.kept, byZone: r1.salt.byZone },
+    },
+    coverage: r1.coverage,
+    coverageGate: {
+      threshold: COVERAGE_THRESHOLD,
+      splatOnly: r1.gates.splatOnly, // expect passed:false — the E-23 baseline cannot establish a dominant
+      final: r1.gates.final,         // expect passed:true  — a failing skin would have thrown, no record
+      note: "coverage is a PRECONDITION (T-088): the splat-only replay is rejected delta-independently; " +
+        "the final skin must pass or the run throws. Census basis = the full 6-dir exposure shell (T-090).",
+    },
+    bands: { ...r1.bands, roofTarget: ROOF_BAND_TARGET, upperResidueMax: UPPER_RESIDUE_MAX },
+    invariants: { plasterHistogram: r1.plasterHistogram },
+    reproducible: {
+      doubleRun: true, sha256,
+      determinism: "no LLM on the path — concept PNG + material-map roles are committed upstream " +
+        "artifacts; every stage is a pure function of them. Two in-process executions byte-matched.",
+    },
+    resemblance,
+    materialCounts: { before, after },
+    renders, frames,
+    notes: r1.notes,
+  };
+  await writeFile(recPath, JSON.stringify(record, null, 2) + "\n");
+  await writeFile(join(OUT_DIR, `${def.key}.md`), renderMd(record));
+  console.error(`\n✓ wrote ${recPath} + ${artPath} (sha256 ${sha256.slice(0, 12)}…)`);
+}
+
+function renderMd(r) {
+  const pct = (f) => (f == null ? "?" : `${Math.round(f * 100)}%`);
+  const covLine = (cov) => Object.keys(cov)
+    .map((z) => `${z} \`${cov[z]?.dominant}\` ${pct(cov[z]?.dominantFraction)} of ${cov[z]?.total ?? "?"}`)
+    .join(" · ");
+  const rowsMd = r.valueTrue.rows.map((x) =>
+    `| ${x.role} | \`${x.named}\` | \`${x.chosen}\` | ${x.switched ? "**switched**" : x.reason} | ${x.sampleCells} | ` +
+    `${x.namedTrue ? x.namedTrue.deltaE : "—"} → ${x.chosenTrue ? x.chosenTrue.deltaE : "—"} |`).join("\n");
+  const renders = r.renders.map((f) => `- ${f.when} ${f.angle}: ${f.path ?? `GL unavailable (${f.error})`}`).join("\n");
+  const m = (s) => `smoothness **${s.stepSmoothness}**, cliff ${s.cliff}`;
+  return `# Durable skin — ${r.subject} (T-089-01)\n\n` +
+    `One command, end-to-end: value-true → seal → full-shell zone-fill → secondaries splat → coherent ` +
+    `surface → coverage gate. **Reproducible**: double-run byte-identical, artifact sha256 \`${r.reproducible.sha256.slice(0, 16)}…\`.\n\n` +
+    `## Value-true selection (T-086)\n` +
+    `Substitution: \`${JSON.stringify(r.valueTrue.substitution)}\`` +
+    (r.valueTrue.agreesWithCommittedRecord != null ? ` (agrees with the committed value-select record)` : ` (first run for this subject)`) + `\n\n` +
+    `| role | named | chosen | verdict | cells | true ΔE |\n|---|---|---|---|---|---|\n${rowsMd}\n\n` +
+    `## Base coat + splat (T-085/T-090 + E-23)\n` +
+    `Full-shell fill (skin: exposure): **${r.fill.placements} cells filled**, ${r.fill.kept} kept — ` +
+    Object.entries(r.fill.byZone).map(([z, s]) => `${z} ${s.filled}/${s.surface}`).join(", ") + `.\n` +
+    `Splat (secondaries only): front ${r.splat.front.painted} painted (zoneRejected ${r.splat.front.zoneRejected}, ` +
+    `accepted ${r.splat.front.accepted}), side ${r.splat.side.painted} (accepted ${r.splat.side.accepted}).\n\n` +
+    `## Coherent surface (T-087)\n` +
+    `Courses: ${r.pattern.course.columnsRaised} columns / ${r.pattern.course.voxelsAdded} voxels — before ` +
+    `${m(r.pattern.course.before)} → after ${m(r.pattern.course.after)}. Salt: **${r.pattern.salt.stripped} stripped**, ${r.pattern.salt.kept} kept.\n\n` +
+    `## Coverage gate (T-088) — proof both ways, exposure-shell census\n` +
+    `- **splat-only (the E-23 baseline): ${r.coverageGate.splatOnly.passed ? "PASSED (unexpected)" : "REJECTED"}** — ${covLine(r.coverage.splatOnly)}\n` +
+    `- **final skin: ${r.coverageGate.final.passed ? "PASSED" : "REJECTED (unexpected)"}** — ${covLine(r.coverage.final)}\n` +
+    `- bands: roof materials ${pct(r.bands.roofMaterialsFraction)} (target ${pct(r.bands.roofTarget)})` +
+    (r.bands.upperResidueFraction != null ? `, upper \`${r.bands.upperResidueBlock}\` residue ${pct(r.bands.upperResidueFraction)} (max ${pct(r.bands.upperResidueMax)})` : " · upper residue n/a (shared dominant)") + `\n` +
+    (r.invariants.plasterHistogram ? `- plaster invariant: ${JSON.stringify(r.invariants.plasterHistogram)} (base/roof = 0)\n` : "") +
+    (r.resemblance && r.resemblance.final != null ? `- front resemblance vs concept (evidence): ${r.resemblance.splatOnly} → ${r.resemblance.final}\n` : "") +
+    `\n## Renders\n${renders}\n\nFrames: ${r.frames.join(", ") || "(none — GL unavailable)"}\n\n` +
+    `> ${r.reproducible.determinism}\n` +
+    (r.notes.length ? `\nNotes: ${r.notes.join("; ")}\n` : "");
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch((e) => { console.error(e); process.exit(1); });
+}

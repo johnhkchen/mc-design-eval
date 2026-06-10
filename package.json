@@ -21,6 +21,8 @@
     "building:build": "node benchmarks/sculpture/building-build.mjs",
     "view:proof": "node benchmarks/sculpture/view-layer-proof.mjs",
     "spray:paint": "node benchmarks/sculpture/spray-paint.mjs",
+    "skin:cottage": "node benchmarks/sculpture/durable-skin.mjs --subject cottage",
+    "skin:gatehouse": "node benchmarks/sculpture/durable-skin.mjs --subject gatehouse",
     "pattern:cottage": "node benchmarks/sculpture/surface-pattern.mjs",
     "detect:routing": "node benchmarks/sculpture/detector-routing.mjs",
     "coherence:cottage": "node benchmarks/sculpture/surface-coherence.mjs",

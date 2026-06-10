@@ -98,3 +98,8 @@ benchmarks/sculpture/value-select/**/*.png
 # Surface-pattern renders (T-087-01) — derived, regen via `npm run pattern:cottage`. The durable
 # record is surface-pattern/cottage.{json,md} + surface-pattern/cottage/artifact.json (the patterned build).
 benchmarks/sculpture/surface-pattern/**/*.png
+
+# Durable-skin renders (T-089-01, E-24 consolidation) — derived, regen via `npm run skin:<subject>`.
+# The durable record is durable-skin/<subj>.{json,md} + durable-skin/<subj>/artifact.json; the
+# committed evidence frames live in pr/assets/frames/durable-*.png.
+benchmarks/sculpture/durable-skin/**/*.png
