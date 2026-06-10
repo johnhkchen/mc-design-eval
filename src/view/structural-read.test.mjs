@@ -161,3 +161,51 @@ test("empty occupancy: all reads degrade without throwing", () => {
   assert.equal(roofRegion(occ).coverage, 0);
   assert.deepEqual(openings(occ, "-z"), []);
 });
+
+// ---- T-097-01: dressed openings keep their identity (AC #5) ----------------------------------------
+
+test("openings: a fence-dressed window is still a window, with the dressing reported", () => {
+  // Same wall as the classified test: window at (2,4), door at (4,0..1) — but the window aperture
+  // now holds a fence (rail) and the door holds a door fixture. Identity must survive dressing.
+  const cells = [];
+  for (let x = 0; x <= 6; x++) for (let y = 0; y <= 6; y++) {
+    if (x === 2 && y === 4) continue;
+    if (x === 4 && (y === 0 || y === 1)) continue;
+    cells.push({ pos: [x, y, 0], block: "minecraft:stone" });
+  }
+  cells.push({ pos: [2, 4, 0], block: "minecraft:oak_fence", form: "rail", state: { east: "true", west: "true" } });
+  cells.push({ pos: [4, 0, 0], block: "minecraft:spruce_door", form: "fixture", state: { half: "lower" } });
+  cells.push({ pos: [4, 1, 0], block: "minecraft:spruce_door", form: "fixture", state: { half: "upper" } });
+  const occ = occupancyFromCells(cells);
+  const found = openings(occ, "-z");
+  assert.deepEqual(found.map((o) => o.kind).sort(), ["door", "window"]);
+  const window = found.find((o) => o.kind === "window");
+  assert.equal(window.cells, 1);
+  assert.deepEqual(window.dressing, { cells: 1, blocks: ["oak_fence"] });
+  const door = found.find((o) => o.kind === "door");
+  assert.equal(door.cells, 2);
+  assert.deepEqual(door.dressing, { cells: 2, blocks: ["spruce_door"] });
+});
+
+test("openings: an undressed window reports zero dressing (cube-only back-compat)", () => {
+  const cells = [];
+  for (let x = 0; x <= 6; x++) for (let y = 0; y <= 6; y++) {
+    if (x === 2 && y === 4) continue;
+    cells.push({ pos: [x, y, 0], block: "minecraft:stone" });
+  }
+  const occ = occupancyFromCells(cells);
+  const found = openings(occ, "-z");
+  assert.equal(found.length, 1);
+  assert.deepEqual(found[0].dressing, { cells: 0, blocks: [] });
+});
+
+test("openings: a fixture OUTSIDE any aperture does not invent or join an opening", () => {
+  // Full wall (no holes) + a lantern hanging on it: no opening may appear.
+  const cells = [];
+  for (let x = 0; x <= 4; x++) for (let y = 0; y <= 4; y++) {
+    cells.push({ pos: [x, y, 0], block: "minecraft:stone" });
+  }
+  cells.push({ pos: [2, 2, 1], block: "minecraft:lantern", form: "fixture", state: { hanging: "true" } });
+  const occ = occupancyFromCells(cells);
+  assert.deepEqual(openings(occ, "-z"), []);
+});

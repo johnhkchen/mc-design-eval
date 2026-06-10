@@ -31,7 +31,7 @@
 // renders, durable records, and AC assertions live in the runner (benchmarks/sculpture/shell-integrity.mjs).
 
 import { componentLabels } from "../form/voxel-components.mjs";
-import { occupancyFromCells, bareBlock } from "./occupancy.mjs";
+import { occupancyFromCells, solidOccupancy, bareBlock } from "./occupancy.mjs";
 import { projectSurface, orthoSpec, cellWorldPos } from "./surface-grid.mjs";
 import { openings } from "./structural-read.mjs";
 import { spillLevels } from "./surface-pattern.mjs";
@@ -102,7 +102,9 @@ export function componentStrip(occ, { keepGrounded = true } = {}) {
   const cells = [];
   n = 0;
   for (const [key, block] of occ.cells) {
-    if (keep[labels[n++]]) cells.push({ pos: key.split(",").map(Number), block });
+    if (keep[labels[n++]]) {
+      cells.push({ pos: key.split(",").map(Number), block, form: occ.forms?.get(key), state: occ.states?.get(key) });
+    }
   }
   return {
     occ: occupancyFromCells(cells),
@@ -119,8 +121,9 @@ export function componentStrip(occ, { keepGrounded = true } = {}) {
  * contract has no air op and removal cannot be appended. `schema_version`/`metadata`/`style` and the
  * palette's `palette_id` carry over from `template`; the manifest is recomputed as the sorted unique
  * placed blocks (keysToArtifact precedent). Does NOT validate — callers run assertArtifact (the
- * round-trip pattern). Per-voxel `state` is not carried: occupancy holds block ids only (the pipeline
- * places no fixtures). Throws on an empty occupancy (an artifact requires ≥1 placement). PURE.
+ * round-trip pattern). Per-voxel `state` IS carried (T-097-01: occupancy holds fixture states, and a
+ * strip must not silently undress a window). Throws on an empty occupancy (an artifact requires ≥1
+ * placement). PURE.
  * @param {import("./occupancy.mjs").Occupancy} occ
  * @param {{schema_version:string, metadata:object, style:object, palette:object}} template
  * @returns {object} a fresh artifact object (template fields shallow-copied)
@@ -129,9 +132,15 @@ export function rebuildArtifact(occ, template) {
   if (!occ.size) throw new Error("rebuildArtifact: occupancy has no cells (artifact requires ≥1 placement)");
   if (!template || typeof template !== "object") throw new Error("rebuildArtifact: template artifact required");
   const rows = [];
-  for (const [key, block] of occ.cells) rows.push({ pos: key.split(",").map(Number), block: namespaced(block) });
+  for (const [key, block] of occ.cells) {
+    rows.push({ pos: key.split(",").map(Number), block: namespaced(block), state: occ.states?.get(key) });
+  }
   rows.sort((a, b) => a.pos[1] - b.pos[1] || a.pos[2] - b.pos[2] || a.pos[0] - b.pos[0]);
-  const placements = rows.map((r) => ({ op: "voxel", pos: r.pos, block: r.block }));
+  const placements = rows.map((r) =>
+    r.state === undefined
+      ? { op: "voxel", pos: r.pos, block: r.block }
+      : { op: "voxel", pos: r.pos, block: r.block, state: r.state }
+  );
   const manifest = [...new Set(placements.map((p) => p.block))].sort();
   const palette = template.palette?.palette_id
     ? { palette_id: template.palette.palette_id, manifest }
@@ -150,21 +159,25 @@ export function rebuildArtifact(occ, template) {
  * door — the arch) back-projected through the FULL depth axis to a world AABB. World-space (not uv) so
  * regions measured on one occupancy (the RAW pre-seal build, whose openings the concept declared)
  * survive bounds-insensitive reuse on its sealed/stripped descendants. The void detector and the closure
- * check consume these as the allow-list. PURE.
+ * check consume these as the allow-list. T-097-01: `openings` detects on the SOLID view, so the bbox
+ * (u,v) space is the solid grid's — back-projection here uses the SAME solid bounds, keeping a dressed
+ * aperture's region identical to its undressed twin. PURE.
  * @param {import("./occupancy.mjs").Occupancy} occ
  * @param {string[]} [dirs]
  * @returns {{kind:string, dir:string, min:number[], max:number[]}[]}
  */
 export function openingRegions(occ, dirs = SIDE_FACES) {
   if (!occ.bounds) return [];
+  const solid = solidOccupancy(occ);
+  if (!solid.bounds) return [];
   const out = [];
   for (const dir of dirs) {
     const spec = orthoSpec(dir);
-    const wLo = occ.bounds.min[spec.axisW];
-    const wHi = occ.bounds.max[spec.axisW];
+    const wLo = solid.bounds.min[spec.axisW];
+    const wHi = solid.bounds.max[spec.axisW];
     for (const o of openings(occ, dir)) {
-      const a = cellWorldPos(occ, spec, o.bbox.u0, o.bbox.v0, wLo);
-      const b = cellWorldPos(occ, spec, o.bbox.u1, o.bbox.v1, wHi);
+      const a = cellWorldPos(solid, spec, o.bbox.u0, o.bbox.v0, wLo);
+      const b = cellWorldPos(solid, spec, o.bbox.u1, o.bbox.v1, wHi);
       out.push({
         kind: o.kind,
         dir,
@@ -281,16 +294,24 @@ function buildDominant(occ) {
  * through-window escapes ±z) → `byDirection` is the per-direction verdict the ticket asks for ("not
  * just plan view"), independent of the (lateral) axis the flood happens to cross the interface on.
  * `closed` ⇔ no interior cell reached. Mouths are sorted (deterministic plug order). PURE.
+ *
+ * T-097-01 fixture semantics: skin is SOLID cells only — a fixture (fence, trapdoor) does not seal.
+ * A fixture inside an allow region is a DRESSED opening: the region is already honorary skin, so the
+ * shell stays closed, and `dressed.cells` reports how many non-solid cells dress the regions (the
+ * verdict reads "closed, N dressed" — not a hole, not wall mass). A fixture OUTSIDE every region adds
+ * no skin (it cannot fake closure) and is flaggable separately via {@link strayFixtures}.
  * @param {import("./occupancy.mjs").Occupancy} occ
  * @param {{regions?:object[]}} [opts]
  * @returns {{closed:boolean, interiorCells:number, reached:number,
- *            byDirection:Record<string,number>, mouths:string[]}}
+ *            byDirection:Record<string,number>, mouths:string[], dressed:{cells:number}}}
  */
 export function closureCheck(occ, { regions = [] } = {}) {
   const byDirection = { "+x": 0, "-x": 0, "+y": 0, "-y": 0, "+z": 0, "-z": 0 };
-  if (!occ.bounds) return { closed: true, interiorCells: 0, reached: 0, byDirection, mouths: [] };
+  const dressed = { cells: dressedCellCount(occ, regions) };
+  if (!occ.bounds) return { closed: true, interiorCells: 0, reached: 0, byDirection, mouths: [], dressed };
   const { min, max } = occ.bounds;
-  const occAt = (x, y, z) => occ.has(x, y, z) || inRegion([x, y, z], regions);
+  const solidAt = typeof occ.solid === "function" ? occ.solid : occ.has; // pre-T-097 occupancies
+  const occAt = (x, y, z) => solidAt(x, y, z) || inRegion([x, y, z], regions);
   const inB = (x, y, z) => x >= min[0] && x <= max[0] && y >= min[1] && y <= max[1] && z >= min[2] && z <= max[2];
   const rayHits = (x, y, z, dx, dy, dz) => {
     let cx = x + dx, cy = y + dy, cz = z + dz;
@@ -374,7 +395,37 @@ export function closureCheck(occ, { regions = [] } = {}) {
     if (isMouth) mouths.push(k);
   }
   mouths.sort();
-  return { closed: reached === 0, interiorCells: interior.size, reached, byDirection, mouths };
+  return { closed: reached === 0, interiorCells: interior.size, reached, byDirection, mouths, dressed };
+}
+
+/** Occupied non-solid cells inside any allow region — the dressing tally closureCheck reports. PURE. */
+function dressedCellCount(occ, regions) {
+  if (!occ.forms?.size || !regions.length) return 0;
+  let count = 0;
+  for (const key of occ.forms.keys()) {
+    if (inRegion(key.split(",").map(Number), regions)) count++;
+  }
+  return count;
+}
+
+/**
+ * STRAY FIXTURES: occupied non-solid cells OUTSIDE every allow region — a fence floating in a wall
+ * field is a grammar/material defect, not a watertightness breach, so this is a separate detector
+ * (it never changes `closureCheck.closed`). Sorted by key for determinism. PURE.
+ * @param {import("./occupancy.mjs").Occupancy} occ
+ * @param {object[]} [regions] world AABBs (see {@link openingRegions})
+ * @returns {{key:string, pos:number[], block:string, form:"fixture"|"rail"}[]}
+ */
+export function strayFixtures(occ, regions = []) {
+  if (!occ.forms?.size) return [];
+  const out = [];
+  for (const [key, form] of occ.forms) {
+    const pos = key.split(",").map(Number);
+    if (inRegion(pos, regions)) continue;
+    out.push({ key, pos, block: occ.cells.get(key), form });
+  }
+  out.sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0));
+  return out;
 }
 
 /**
@@ -406,7 +457,9 @@ export function plugClosure(occ, { zoneOf, zones, regions = [], maxIterations = 
     if (check.closed) return { occ: current, placements, iterations: i, closed: true, check };
     if (i === maxIterations) break;
     const cells = [];
-    for (const [k, b] of current.cells) cells.push({ pos: k.split(",").map(Number), block: b });
+    for (const [k, b] of current.cells) {
+      cells.push({ pos: k.split(",").map(Number), block: b, form: current.forms?.get(k), state: current.states?.get(k) });
+    }
     for (const k of check.mouths) {
       const pos = k.split(",").map(Number);
       const dom = policy.get(zoneOf(pos)) ?? fallback;

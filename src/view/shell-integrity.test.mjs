@@ -228,3 +228,88 @@ test("plugClosure throws at the iteration cap instead of returning unclosed", ()
     () => plugClosure(occupancyFromCells(cells), { ...WALL_POLICY, maxIterations: 0 }),
     /not closed after 0 iterations/);
 });
+
+// ---- T-097-01: dressed openings vs stray fixtures (AC #4) ------------------------------------------
+
+import { strayFixtures } from "./shell-integrity.mjs";
+
+/** The dressed hut: a through-window at (3,2) on both z walls, each aperture holding a fence. */
+function dressedHutCells() {
+  const cells = drop(hollowBoxCells(0, 6, 0, 5, 0, 6), [3, 2, 0], [3, 2, 6]);
+  cells.push({ pos: [3, 2, 0], block: "oak_fence", form: "rail", state: { east: "true", west: "true" } });
+  cells.push({ pos: [3, 2, 6], block: "oak_fence", form: "rail", state: { east: "true", west: "true" } });
+  return cells;
+}
+
+test("closureCheck: a dressed opening passes as DRESSED — openings → regions → closed, with the tally", () => {
+  const occ = occupancyFromCells(dressedHutCells());
+  // identity survives dressing end-to-end: openings still sees the through-window…
+  const regions = openingRegions(occ);
+  assert.ok(regions.length >= 1, "the dressed aperture must still yield an allow region");
+  // …and closure reads it as dressed, not as a hole and not as wall mass
+  const c = closureCheck(occ, { regions });
+  assert.equal(c.closed, true);
+  assert.equal(c.dressed.cells, 2);
+});
+
+test("closureCheck: the same dressing with NO declared region is a breach (a fence cannot fake skin)", () => {
+  const occ = occupancyFromCells(dressedHutCells());
+  const c = closureCheck(occ, { regions: [] });
+  assert.equal(c.closed, false, "non-solid cells must not seal the shell");
+  assert.equal(c.dressed.cells, 0);
+});
+
+test("closureCheck: cube-only builds keep their verdicts and report zero dressing", () => {
+  const c = closureCheck(occupancyFromCells(hollowBoxCells(0, 6, 0, 5, 0, 6)));
+  assert.equal(c.closed, true);
+  assert.deepEqual(c.dressed, { cells: 0 });
+});
+
+test("strayFixtures: a fence in a wall field is flagged; dressing inside regions is not", () => {
+  const cells = dressedHutCells();
+  cells.push({ pos: [1, 3, -1], block: "oak_fence", form: "rail" }); // stray: mounted outside the wall, no aperture
+  const occ = occupancyFromCells(cells);
+  const regions = openingRegions(occ);
+  const strays = strayFixtures(occ, regions);
+  assert.equal(strays.length, 1);
+  assert.deepEqual(strays[0].pos, [1, 3, -1]);
+  assert.equal(strays[0].form, "rail");
+  assert.equal(strays[0].block, "oak_fence");
+  // the stray is a defect flag, not a closure verdict change
+  assert.equal(closureCheck(occ, { regions }).closed, true);
+});
+
+test("strayFixtures: empty for a cube-only build and for fully-dressed regions", () => {
+  assert.deepEqual(strayFixtures(occupancyFromCells(hollowBoxCells(0, 4, 0, 3, 0, 4))), []);
+  const occ = occupancyFromCells(dressedHutCells());
+  assert.deepEqual(strayFixtures(occ, openingRegions(occ)), []);
+});
+
+test("rebuildArtifact carries fixture state (a strip must not undress a window)", () => {
+  const occ = occupancyFromCells([
+    { pos: [0, 0, 0], block: "minecraft:stone" },
+    { pos: [1, 0, 0], block: "minecraft:oak_fence", form: "rail", state: { north: "true", south: "true" } },
+  ]);
+  const art = rebuildArtifact(occ, TEMPLATE);
+  const fence = art.placements.find((p) => p.block === "minecraft:oak_fence");
+  assert.deepEqual(fence.state, { north: "true", south: "true" });
+  const stone = art.placements.find((p) => p.block === "minecraft:stone");
+  assert.ok(!("state" in stone), "cube placements stay stateless");
+});
+
+test("componentStrip and plugClosure preserve the third class through their rebuilds", () => {
+  // strip: dressed hut + floating debris → fence form/state survive the rebuild
+  const withDebris = [...dressedHutCells(), ...boxCells(20, 21, 8, 9, 20, 21, "dirt")];
+  const stripped = componentStrip(occupancyFromCells(withDebris));
+  assert.equal(stripped.strippedCells, 8);
+  assert.equal(stripped.occ.formOf(3, 2, 0), "rail");
+  assert.deepEqual(stripped.occ.states.get("3,2,0"), { east: "true", west: "true" });
+  // plug: dressed window declared + a separate roof hole → plugged closed, dressing intact
+  const occ = occupancyFromCells(drop(dressedHutCells(), [5, 5, 5]));
+  const regions = openingRegions(occupancyFromCells(dressedHutCells()));
+  const r = plugClosure(occ, { zoneOf: () => "all", zones: { all: { dominant: "stone" } }, regions });
+  assert.equal(r.closed, true);
+  assert.ok(r.placements.length > 0, "the roof hole must be plugged");
+  assert.equal(r.occ.formOf(3, 2, 0), "rail");
+  assert.deepEqual(r.occ.states.get("3,2,0"), { east: "true", west: "true" });
+});
