@@ -24,6 +24,7 @@
     "skin:cottage": "node benchmarks/sculpture/durable-skin.mjs --subject cottage",
     "skin:gatehouse": "node benchmarks/sculpture/durable-skin.mjs --subject gatehouse",
     "zone:map": "node benchmarks/sculpture/zone-map.mjs",
+    "gate:multi": "node benchmarks/sculpture/multi-angle-gate.mjs",
     "pattern:cottage": "node benchmarks/sculpture/surface-pattern.mjs",
     "shell:cottage": "node benchmarks/sculpture/shell-integrity.mjs --subject cottage",
     "shell:gatehouse": "node benchmarks/sculpture/shell-integrity.mjs --subject gatehouse",

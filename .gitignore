@@ -116,3 +116,8 @@ benchmarks/sculpture/shell-integrity/**/*.png
 # T-092-01 zone-map renders — regenerable via npm run zone:map. The committed record is
 # zone-map/<subj>.{json,md}; the committed evidence frames live in pr/assets/frames/zonemap-*.png.
 benchmarks/sculpture/zone-map/**/*.png
+
+# T-093-01 multi-angle gate renders + judged triptychs — regenerable via npm run gate:multi. The
+# committed record is multi-angle/<subj>-<label>.{json,md}; the committed verdict SHEET lives in
+# pr/assets/frames/multi-angle-*.png.
+benchmarks/sculpture/multi-angle/**/*.png
