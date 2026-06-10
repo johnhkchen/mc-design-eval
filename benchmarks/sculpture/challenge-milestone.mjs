@@ -185,7 +185,7 @@ function shellStage(baseArtifact) {
 // (buildSkin reads its input from disk — a deliberate, inspectable file seam); run twice per live
 // pass, all produced artifacts byte-compared.
 // =================================================================================================
-async function runChain(def, paths) {
+export async function runChain(def, paths) {
   let provision = null;
   let base;
   if (def.provision) {
