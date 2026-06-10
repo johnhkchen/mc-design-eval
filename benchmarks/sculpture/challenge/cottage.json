@@ -78,6 +78,86 @@
     "plug": {
       "cells": 462,
       "iterations": 1
+    },
+    "regularize": {
+      "accepted": 2,
+      "rejected": 0,
+      "census": {
+        "before": {
+          "cells": 7693,
+          "spikes": 276,
+          "byExposure": [
+            1734,
+            3130,
+            1749,
+            804,
+            246,
+            30,
+            0
+          ],
+          "ragged": 157,
+          "columns": 656,
+          "raggedRate": 0.2393
+        },
+        "after": {
+          "cells": 10020,
+          "spikes": 57,
+          "byExposure": [
+            6174,
+            2596,
+            945,
+            248,
+            47,
+            10,
+            0
+          ],
+          "ragged": 63,
+          "columns": 657,
+          "raggedRate": 0.0959
+        }
+      },
+      "iou": {
+        "baseline": {
+          "+x+z": 0.9253,
+          "+x-z": 0.8927,
+          "-x-z": 0.9438,
+          "-x+z": 0.9447
+        },
+        "final": {
+          "+x+z": 0.9273,
+          "+x-z": 0.893,
+          "-x-z": 0.941,
+          "-x+z": 0.9425
+        }
+      },
+      "steps": [
+        {
+          "step": "open",
+          "accepted": true,
+          "reasons": [],
+          "cells": {
+            "removed": 5,
+            "restoredComponents": [
+              {
+                "size": 4808,
+                "minY": 0
+              }
+            ]
+          },
+          "spikes": 274,
+          "raggedRate": 0.2393
+        },
+        {
+          "step": "close",
+          "accepted": true,
+          "reasons": [],
+          "cells": {
+            "added": 2332
+          },
+          "spikes": 57,
+          "raggedRate": 0.0959
+        }
+      ]
     }
   },
   "skin": {
@@ -99,7 +179,7 @@
           "name": "band0",
           "yRange": [
             0,
-            6
+            7
           ],
           "dominantBlock": "stone_bricks",
           "dominantRole": "load-bearing ground-floor wall field",
@@ -135,27 +215,27 @@
         {
           "name": "band1",
           "yRange": [
-            7,
-            16
+            8,
+            18
           ],
           "dominantBlock": "white_terracotta",
           "dominantRole": "upper-storey plaster infill between the timbers",
-          "share": 0.992,
+          "share": 0.984,
           "secondaries": [
             {
               "block": "spruce_planks",
               "role": "main roof field — plank courses",
-              "share": 0.328
+              "share": 0.304
             },
             {
               "block": "dark_oak_planks",
               "role": "roof eaves, verge & rake fascia (darker plank edge)",
-              "share": 0.288
+              "share": 0.302
             },
             {
               "block": "dark_oak_log",
               "role": "half-timbering frame — vertical studs, corner posts, eaves beams",
-              "share": 0.25
+              "share": 0.268
             },
             {
               "block": "cobblestone",
@@ -173,27 +253,27 @@
       "roof": {
         "dominantBlock": "dark_oak_planks",
         "dominantRole": "roof eaves, verge & rake fascia (darker plank edge)",
-        "share": 0.787,
+        "share": 0.778,
         "secondaries": [
           {
             "block": "spruce_planks",
             "role": "main roof field — plank courses",
-            "share": 0.116
+            "share": 0.123
           },
           {
             "block": "dark_oak_log",
             "role": "half-timbering frame — vertical studs, corner posts, eaves beams",
-            "share": 0.378
+            "share": 0.366
           },
           {
             "block": "stone_bricks",
             "role": "load-bearing ground-floor wall field",
-            "share": 0.063
+            "share": 0.075
           },
           {
             "block": "cobblestone",
             "role": "corner quoins, plinth course & chimney shaft (rough grey stone)",
-            "share": 0.006
+            "share": 0.007
           },
           {
             "block": "bricks",
@@ -286,23 +366,23 @@
       ]
     },
     "fill": {
-      "placements": 1993,
-      "kept": 3985,
+      "placements": 1004,
+      "kept": 2860,
       "byZone": {
         "band0": {
-          "surface": 1844,
-          "filled": 90,
-          "kept": 1754
-        },
-        "band1": {
-          "surface": 2442,
-          "filled": 1789,
-          "kept": 653
+          "surface": 1486,
+          "filled": 61,
+          "kept": 1425
         },
         "roof": {
-          "surface": 1692,
-          "filled": 114,
-          "kept": 1578
+          "surface": 896,
+          "filled": 15,
+          "kept": 881
+        },
+        "band1": {
+          "surface": 1482,
+          "filled": 928,
+          "kept": 554
         }
       }
     },
@@ -310,10 +390,10 @@
       "front": {
         "dir": "+z",
         "source": "concept",
-        "painted": 231,
-        "skipped": 31,
+        "painted": 223,
+        "skipped": 40,
         "offPalette": 0,
-        "zoneRejected": 309,
+        "zoneRejected": 315,
         "accepted": true,
         "coverageGate": {
           "passed": true,
@@ -322,20 +402,20 @@
           "byZone": {
             "band0": {
               "dominant": "tuff",
-              "fraction": 0.755,
-              "total": 1844,
+              "fraction": 0.677,
+              "total": 1486,
               "passed": true
             },
             "band1": {
               "dominant": "smooth_sandstone",
-              "fraction": 0.701,
-              "total": 2442,
+              "fraction": 0.588,
+              "total": 1482,
               "passed": true
             },
             "roof": {
               "dominant": "spruce_planks",
-              "fraction": 0.729,
-              "total": 1692,
+              "fraction": 0.805,
+              "total": 896,
               "passed": true
             }
           }
@@ -345,55 +425,55 @@
       "side": {
         "dir": "+x",
         "source": "glb",
-        "painted": 518,
-        "skipped": 76,
+        "painted": 513,
+        "skipped": 80,
         "offPalette": 0,
-        "zoneRejected": 94,
+        "zoneRejected": 97,
         "accepted": true
       },
       "collisions": 20
     },
     "course": {
-      "columnsRaised": 31,
-      "voxelsAdded": 40
+      "columnsRaised": 1,
+      "voxelsAdded": 1
     },
     "salt": {
-      "stripped": 413,
-      "kept": 706
+      "stripped": 346,
+      "kept": 902
     },
     "coverage": {
       "band0": {
-        "total": 1844,
+        "total": 1486,
         "byBlock": {
-          "cobblestone": 57,
-          "tuff": 1379,
-          "dark_oak_log": 361,
-          "spruce_planks": 47
+          "cobblestone": 80,
+          "tuff": 967,
+          "dark_oak_log": 379,
+          "spruce_planks": 60
         },
         "dominant": "tuff",
-        "dominantFraction": 0.748
-      },
-      "band1": {
-        "total": 2436,
-        "byBlock": {
-          "cobblestone": 126,
-          "smooth_sandstone": 1739,
-          "dark_oak_log": 258,
-          "spruce_planks": 313
-        },
-        "dominant": "smooth_sandstone",
-        "dominantFraction": 0.714
+        "dominantFraction": 0.651
       },
       "roof": {
-        "total": 1707,
+        "total": 896,
         "byBlock": {
-          "dark_oak_log": 215,
-          "spruce_planks": 1221,
-          "tuff": 198,
-          "cobblestone": 73
+          "dark_oak_log": 133,
+          "spruce_planks": 680,
+          "tuff": 58,
+          "cobblestone": 25
         },
         "dominant": "spruce_planks",
-        "dominantFraction": 0.715
+        "dominantFraction": 0.759
+      },
+      "band1": {
+        "total": 1482,
+        "byBlock": {
+          "cobblestone": 143,
+          "smooth_sandstone": 891,
+          "dark_oak_log": 272,
+          "spruce_planks": 176
+        },
+        "dominant": "smooth_sandstone",
+        "dominantFraction": 0.601
       }
     },
     "gates": {
@@ -405,27 +485,27 @@
           {
             "zone": "band1",
             "dominant": "smooth_sandstone",
-            "fraction": 0.041,
-            "total": 2442
+            "fraction": 0.071,
+            "total": 1482
           }
         ],
         "byZone": {
           "band0": {
             "dominant": "tuff",
-            "fraction": 0.677,
-            "total": 1844,
+            "fraction": 0.574,
+            "total": 1486,
             "passed": true
           },
           "band1": {
             "dominant": "smooth_sandstone",
-            "fraction": 0.041,
-            "total": 2442,
+            "fraction": 0.071,
+            "total": 1482,
             "passed": false
           },
           "roof": {
             "dominant": "spruce_planks",
-            "fraction": 0.679,
-            "total": 1692,
+            "fraction": 0.801,
+            "total": 896,
             "passed": true
           }
         }
@@ -437,20 +517,20 @@
         "byZone": {
           "band0": {
             "dominant": "tuff",
-            "fraction": 0.748,
-            "total": 1844,
+            "fraction": 0.651,
+            "total": 1486,
             "passed": true
           },
           "band1": {
             "dominant": "smooth_sandstone",
-            "fraction": 0.714,
-            "total": 2436,
+            "fraction": 0.601,
+            "total": 1482,
             "passed": true
           },
           "roof": {
             "dominant": "spruce_planks",
-            "fraction": 0.715,
-            "total": 1707,
+            "fraction": 0.759,
+            "total": 896,
             "passed": true
           }
         }
@@ -469,26 +549,26 @@
     "doubleRun": true,
     "sha256": {
       "base": null,
-      "shell": "6d7077f4e24f2afad74195f0d3c3818ffcf7340d53c402647e7f0926193ec8c0",
-      "final": "dbe9a083461d8888b4876361e44206f301ec9af6b4ca5c25beece4d480176da4"
+      "shell": "33b1ca02f2589f49dd8c678e2416bf81196be41bf91451c4c9e351baf24c0afd",
+      "final": "347def099ef05da18d8c814a6a0855dcd2a0bb0248cb3f93249f6f041d9ec212"
     },
     "determinism": "provision→shell→skin is a pure function of the committed inputs (concept PNG, material map, GLB, kit); two in-process executions byte-matched on every artifact; --repro re-proves from a fresh process. LLM-authored inputs are one-time committed records; the gate judge is the pinned model, single sample per view, verdicts committed in the gate record."
   },
   "gate": {
     "outcome": "FAIL",
-    "gapCount": 8,
+    "gapCount": 11,
     "gapBudget": 2,
     "failures": [
       {
         "angle": "+x+z",
-        "reason": "coverage"
-      },
-      {
-        "angle": "+x-z",
         "reason": "drifted"
       },
       {
         "angle": "-x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x+z",
         "reason": "drifted"
       }
     ],
@@ -496,29 +576,40 @@
       {
         "angle": "+x+z",
         "azimuthDeg": 45,
-        "coverage": false,
-        "verdict": "judge-not-called",
-        "gaps": []
+        "coverage": true,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "overall roof and upper storey",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "roof eaves and ridge",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "timber-frame upper walls",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ]
       },
       {
         "angle": "+x-z",
         "azimuthDeg": 135,
         "coverage": true,
-        "verdict": "drifted",
+        "verdict": "same object",
         "gaps": [
           {
-            "region": "roof",
+            "region": "roof ridge and eaves",
             "attribute": "form",
-            "severity": "major"
-          },
-          {
-            "region": "roof eaves/overhang",
-            "attribute": "massing",
             "severity": "minor"
           },
           {
-            "region": "upper walls vs stone base",
-            "attribute": "material zoning",
+            "region": "chimney on the roof",
+            "attribute": "massing",
             "severity": "minor"
           }
         ]
@@ -530,18 +621,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof across the whole top",
+            "region": "roof",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "upper timber-framed storey walls",
-            "attribute": "material zoning",
+            "region": "roof eaves/beams",
+            "attribute": "form",
             "severity": "minor"
           },
           {
-            "region": "roof timber/plank coloring",
-            "attribute": "palette",
+            "region": "lower walls (stone base + cream storey)",
+            "attribute": "material zoning",
             "severity": "minor"
           }
         ]
@@ -550,15 +641,20 @@
         "angle": "-x+z",
         "azimuthDeg": 315,
         "coverage": true,
-        "verdict": "same object",
+        "verdict": "drifted",
         "gaps": [
           {
-            "region": "roofline and eaves",
+            "region": "roof — far slope and ridge",
             "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "upper timber-frame storey, right gable end",
+            "attribute": "massing",
             "severity": "minor"
           },
           {
-            "region": "upper timber-frame wall",
+            "region": "stone ground floor at building corner",
             "attribute": "material zoning",
             "severity": "minor"
           }
