@@ -23,7 +23,7 @@ inspects** (Rule 2); the perceptual numbers below only EXPLAIN it.
 | material zone agreement | 0.382 | materials in the same places? (0..1) |
 | mean zone ΔE | 40.13 | per-cell Lab drift (lower better) |
 
-Build dominant blocks: polished_basalt×5945, deepslate_tiles×3041, cobblestone×1157, dark_oak_planks×409, dark_oak_log×46.
+Build dominant blocks: polished_basalt×5890, deepslate_bricks×1907, cobblestone×961, dark_oak_planks×409, dark_oak_log×86.
 Concept snapped blocks: gilded_blackstone, deepslate_bricks, deepslate_copper_ore, iron_block, white_stained_glass, white_stained_glass.
 
 > Honesty: concept is an APPROXIMATE 3/4 view (camera mismatch depresses IoU/zone ΔE); zoning is read
