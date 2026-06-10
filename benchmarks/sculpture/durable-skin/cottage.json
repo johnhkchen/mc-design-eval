@@ -284,6 +284,13 @@
     },
     "agreesWithRecord": true
   },
+  "kit": {
+    "source": "kit/cottage.json",
+    "overrides": {
+      "white_terracotta": "smooth_sandstone",
+      "dark_oak_planks": "spruce_planks"
+    }
+  },
   "fill": {
     "skin": "exposure",
     "minRun": 2,
@@ -293,37 +300,33 @@
         "preserve": [
           "dark_oak_log",
           "spruce_planks",
-          "dark_oak_planks",
           "cobblestone",
           "bricks"
         ],
         "splat": [
           "dark_oak_log",
           "spruce_planks",
-          "dark_oak_planks",
           "cobblestone",
           "bricks"
         ]
       },
       "band1": {
-        "dominant": "sandstone",
+        "dominant": "smooth_sandstone",
         "preserve": [
           "spruce_planks",
-          "dark_oak_planks",
           "dark_oak_log",
           "cobblestone",
           "bricks"
         ],
         "splat": [
           "spruce_planks",
-          "dark_oak_planks",
           "dark_oak_log",
           "cobblestone",
           "bricks"
         ]
       },
       "roof": {
-        "dominant": "dark_oak_planks",
+        "dominant": "spruce_planks",
         "preserve": [
           "spruce_planks",
           "dark_oak_log",
@@ -338,13 +341,13 @@
         ]
       }
     },
-    "placements": 2333,
-    "kept": 3005,
+    "placements": 2254,
+    "kept": 3084,
     "byZone": {
       "band0": {
         "surface": 1551,
-        "filled": 118,
-        "kept": 1433
+        "filled": 115,
+        "kept": 1436
       },
       "band1": {
         "surface": 1413,
@@ -353,8 +356,8 @@
       },
       "roof": {
         "surface": 2374,
-        "filled": 1044,
-        "kept": 1330
+        "filled": 968,
+        "kept": 1406
       }
     }
   },
@@ -362,40 +365,33 @@
     "front": {
       "dir": "+z",
       "source": "concept",
-      "painted": 184,
-      "skipped": 30,
+      "painted": 216,
+      "skipped": 38,
       "offPalette": 0,
-      "zoneRejected": 357,
-      "accepted": false,
+      "zoneRejected": 317,
+      "accepted": true,
       "coverageGate": {
-        "passed": false,
+        "passed": true,
         "threshold": 0.5,
-        "failures": [
-          {
-            "zone": "roof",
-            "dominant": "dark_oak_planks",
-            "fraction": 0.43,
-            "total": 2374
-          }
-        ],
+        "failures": [],
         "byZone": {
           "band0": {
             "dominant": "tuff",
-            "fraction": 0.687,
+            "fraction": 0.685,
             "total": 1551,
             "passed": true
           },
           "band1": {
-            "dominant": "sandstone",
+            "dominant": "smooth_sandstone",
             "fraction": 0.792,
             "total": 1413,
             "passed": true
           },
           "roof": {
-            "dominant": "dark_oak_planks",
-            "fraction": 0.43,
+            "dominant": "spruce_planks",
+            "fraction": 0.816,
             "total": 2374,
-            "passed": false
+            "passed": true
           }
         }
       },
@@ -404,17 +400,17 @@
     "side": {
       "dir": "+x",
       "source": "glb",
-      "painted": 462,
-      "skipped": 70,
+      "painted": 457,
+      "skipped": 78,
       "offPalette": 0,
-      "zoneRejected": 158,
+      "zoneRejected": 155,
       "accepted": true
     },
-    "collisions": 0
+    "collisions": 16
   },
   "pattern": {
     "course": {
-      "dominant": "dark_oak_planks",
+      "dominant": "spruce_planks",
       "columnsRaised": 41,
       "voxelsAdded": 85,
       "before": {
@@ -437,71 +433,59 @@
     "salt": {
       "minKeep": 3,
       "minExtent": 3,
-      "stripped": 500,
-      "kept": 915,
+      "stripped": 387,
+      "kept": 595,
       "byZone": {
         "roof": {
-          "offDominant": 908,
-          "strippedCells": 327,
-          "keptCells": 581,
+          "offDominant": 392,
+          "strippedCells": 199,
+          "keptCells": 193,
           "byBlock": {
             "dark_oak_log": {
-              "stripped": 130,
-              "kept": 113
+              "stripped": 141,
+              "kept": 173
             },
             "cobblestone": {
-              "stripped": 60,
-              "kept": 27
-            },
-            "spruce_planks": {
-              "stripped": 137,
-              "kept": 441
+              "stripped": 58,
+              "kept": 20
             }
           }
         },
         "band1": {
-          "offDominant": 288,
-          "strippedCells": 91,
-          "keptCells": 197,
+          "offDominant": 339,
+          "strippedCells": 99,
+          "keptCells": 240,
           "byBlock": {
             "dark_oak_log": {
-              "stripped": 41,
-              "kept": 116
+              "stripped": 51,
+              "kept": 126
             },
             "spruce_planks": {
-              "stripped": 15,
-              "kept": 4
-            },
-            "dark_oak_planks": {
-              "stripped": 5,
-              "kept": 6
+              "stripped": 19,
+              "kept": 63
             },
             "cobblestone": {
-              "stripped": 30,
-              "kept": 71
+              "stripped": 29,
+              "kept": 51
             }
           }
         },
         "band0": {
-          "offDominant": 219,
-          "strippedCells": 82,
-          "keptCells": 137,
+          "offDominant": 251,
+          "strippedCells": 89,
+          "keptCells": 162,
           "byBlock": {
             "dark_oak_log": {
-              "stripped": 34,
-              "kept": 96
+              "stripped": 40,
+              "kept": 112
             },
             "spruce_planks": {
-              "stripped": 15,
-              "kept": 3
+              "stripped": 16,
+              "kept": 14
             },
             "cobblestone": {
-              "stripped": 30,
-              "kept": 38
-            },
-            "dark_oak_planks": {
-              "stripped": 3,
-              "kept": 0
+              "stripped": 33,
+              "kept": 36
             }
           }
         }
@@ -513,12 +497,11 @@
       "band0": {
         "total": 1551,
         "byBlock": {
-          "cobblestone": 126,
-          "tuff": 905,
-          "dark_oak_log": 439,
-          "spruce_planks": 68,
-          "sandstone": 5,
-          "dark_oak_planks": 8
+          "cobblestone": 125,
+          "tuff": 904,
+          "dark_oak_log": 442,
+          "spruce_planks": 75,
+          "smooth_sandstone": 5
         },
         "dominant": "tuff",
         "dominantFraction": 0.583
@@ -526,64 +509,60 @@
       "band1": {
         "total": 1413,
         "byBlock": {
-          "cobblestone": 112,
-          "tuff": 981,
-          "dark_oak_log": 225,
-          "spruce_planks": 18,
-          "sandstone": 75,
-          "dark_oak_planks": 2
+          "cobblestone": 107,
+          "tuff": 973,
+          "dark_oak_log": 239,
+          "spruce_planks": 19,
+          "smooth_sandstone": 75
         },
-        "dominant": "sandstone",
+        "dominant": "smooth_sandstone",
         "dominantFraction": 0.053
       },
       "roof": {
         "total": 2374,
         "byBlock": {
-          "tuff": 795,
-          "spruce_planks": 1003,
-          "cobblestone": 253,
-          "dark_oak_log": 269,
-          "dark_oak_planks": 52,
-          "sandstone": 2
+          "tuff": 804,
+          "spruce_planks": 1027,
+          "cobblestone": 268,
+          "dark_oak_log": 273,
+          "smooth_sandstone": 2
         },
-        "dominant": "dark_oak_planks",
-        "dominantFraction": 0.022
+        "dominant": "spruce_planks",
+        "dominantFraction": 0.433
       }
     },
     "final": {
       "band0": {
         "total": 1551,
         "byBlock": {
-          "cobblestone": 80,
-          "tuff": 1087,
-          "dark_oak_log": 349,
-          "spruce_planks": 35
+          "cobblestone": 78,
+          "tuff": 1059,
+          "dark_oak_log": 365,
+          "spruce_planks": 49
         },
         "dominant": "tuff",
-        "dominantFraction": 0.701
+        "dominantFraction": 0.683
       },
       "band1": {
         "total": 1419,
         "byBlock": {
-          "cobblestone": 105,
-          "sandstone": 1150,
-          "dark_oak_log": 152,
-          "spruce_planks": 6,
-          "dark_oak_planks": 6
+          "cobblestone": 85,
+          "smooth_sandstone": 1107,
+          "dark_oak_log": 162,
+          "spruce_planks": 65
         },
-        "dominant": "sandstone",
-        "dominantFraction": 0.81
+        "dominant": "smooth_sandstone",
+        "dominantFraction": 0.78
       },
       "roof": {
         "total": 2440,
         "byBlock": {
-          "dark_oak_log": 231,
-          "dark_oak_planks": 1400,
-          "spruce_planks": 671,
-          "cobblestone": 138
+          "dark_oak_log": 291,
+          "spruce_planks": 2018,
+          "cobblestone": 131
         },
-        "dominant": "dark_oak_planks",
-        "dominantFraction": 0.574
+        "dominant": "spruce_planks",
+        "dominantFraction": 0.827
       }
     }
   },
@@ -595,14 +574,14 @@
       "failures": [
         {
           "zone": "band1",
-          "dominant": "sandstone",
+          "dominant": "smooth_sandstone",
           "fraction": 0.053,
           "total": 1413
         },
         {
           "zone": "roof",
-          "dominant": "dark_oak_planks",
-          "fraction": 0.022,
+          "dominant": "spruce_planks",
+          "fraction": 0.433,
           "total": 2374
         }
       ],
@@ -614,14 +593,14 @@
           "passed": true
         },
         "band1": {
-          "dominant": "sandstone",
+          "dominant": "smooth_sandstone",
           "fraction": 0.053,
           "total": 1413,
           "passed": false
         },
         "roof": {
-          "dominant": "dark_oak_planks",
-          "fraction": 0.022,
+          "dominant": "spruce_planks",
+          "fraction": 0.433,
           "total": 2374,
           "passed": false
         }
@@ -634,19 +613,19 @@
       "byZone": {
         "band0": {
           "dominant": "tuff",
-          "fraction": 0.701,
+          "fraction": 0.683,
           "total": 1551,
           "passed": true
         },
         "band1": {
-          "dominant": "sandstone",
-          "fraction": 0.81,
+          "dominant": "smooth_sandstone",
+          "fraction": 0.78,
           "total": 1419,
           "passed": true
         },
         "roof": {
-          "dominant": "dark_oak_planks",
-          "fraction": 0.574,
+          "dominant": "spruce_planks",
+          "fraction": 0.827,
           "total": 2440,
           "passed": true
         }
@@ -665,9 +644,9 @@
   },
   "invariants": {
     "plaster": {
-      "block": "sandstone",
+      "block": "smooth_sandstone",
       "histogram": {
-        "band1": 1150
+        "band1": 1107
       },
       "allowedZones": [
         "band1"
@@ -676,13 +655,13 @@
   },
   "reproducible": {
     "doubleRun": true,
-    "sha256": "2b526194fe2c36ef3b6446334ad0ce7a9069fb9a0a248816bc8b0bcda0ee1b67",
+    "sha256": "e33d48e82b0790fb1c2376287d952af41082ffed52a8229d4d0ea21e06cf6a4b",
     "determinism": "no LLM on the path — concept PNG + material-map roles are committed upstream artifacts; every stage is a pure function of them. Two in-process executions byte-matched."
   },
   "resemblance": {
     "face": "front",
     "splatOnly": 0.35,
-    "final": 0.283
+    "final": 0.367
   },
   "materialCounts": {
     "before": {
@@ -694,12 +673,11 @@
       "dark_oak_planks": 22
     },
     "after": {
-      "cobblestone": 323,
-      "tuff": 2187,
-      "dark_oak_log": 733,
-      "spruce_planks": 715,
-      "sandstone": 1150,
-      "dark_oak_planks": 1415
+      "cobblestone": 294,
+      "tuff": 2159,
+      "dark_oak_log": 819,
+      "spruce_planks": 2144,
+      "smooth_sandstone": 1107
     }
   },
   "renders": [

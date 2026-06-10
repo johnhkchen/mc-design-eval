@@ -1,6 +1,6 @@
 # Durable skin — cottage (T-089-01)
 
-One command, end-to-end: value-true → seal → full-shell zone-fill → secondaries splat → coherent surface → coverage gate. **Reproducible**: double-run byte-identical, artifact sha256 `2b526194fe2c36ef…`.
+One command, end-to-end: value-true → seal → full-shell zone-fill → secondaries splat → coherent surface → coverage gate. **Reproducible**: double-run byte-identical, artifact sha256 `e33d48e82b0790fb…`.
 
 ## Value-true selection (T-086)
 Substitution: `{"stone_bricks":"tuff","white_terracotta":"sandstone"}` (agrees with the committed value-select record)
@@ -23,18 +23,18 @@ Substitution: `{"stone_bricks":"tuff","white_terracotta":"sandstone"}` (agrees w
 Diff vs the prior: walls identical
 
 ## Base coat + splat (T-085/T-090 + E-23)
-Full-shell fill (skin: exposure): **2333 cells filled**, 3005 kept — band0 118/1551, band1 1171/1413, roof 1044/2374.
-Splat (secondaries only): front 184 painted (zoneRejected 357, accepted false), side 462 (accepted true).
+Full-shell fill (skin: exposure): **2254 cells filled**, 3084 kept — band0 115/1551, band1 1171/1413, roof 968/2374.
+Splat (secondaries only): front 216 painted (zoneRejected 317, accepted true), side 457 (accepted true).
 
 ## Coherent surface (T-087)
-Courses: 41 columns / 85 voxels — before smoothness **0.784**, cliff 273 → after smoothness **0.827**, cliff 218. Salt: **500 stripped**, 915 kept.
+Courses: 41 columns / 85 voxels — before smoothness **0.784**, cliff 273 → after smoothness **0.827**, cliff 218. Salt: **387 stripped**, 595 kept.
 
 ## Coverage gate (T-088) — proof both ways, exposure-shell census
-- **splat-only (the E-23 baseline): REJECTED** — band0 `tuff` 58% of 1551 · band1 `sandstone` 5% of 1413 · roof `dark_oak_planks` 2% of 2374
-- **final skin: PASSED** — band0 `tuff` 70% of 1551 · band1 `sandstone` 81% of 1419 · roof `dark_oak_planks` 57% of 2440
+- **splat-only (the E-23 baseline): REJECTED** — band0 `tuff` 58% of 1551 · band1 `smooth_sandstone` 5% of 1413 · roof `spruce_planks` 43% of 2374
+- **final skin: PASSED** — band0 `tuff` 68% of 1551 · band1 `smooth_sandstone` 78% of 1419 · roof `spruce_planks` 83% of 2440
 - bands: roof materials 100% (target 90%), wall foreign residue band0 0% · band1 0% (max 5%)
-- plaster invariant: `sandstone` {"band1":1150} — allowed zones: band1
-- front resemblance vs concept (evidence): 0.35 → 0.283
+- plaster invariant: `smooth_sandstone` {"band1":1107} — allowed zones: band1
+- front resemblance vs concept (evidence): 0.35 → 0.367
 
 ## Renders
 - splat-only front: benchmarks/sculpture/durable-skin/cottage/view-splatonly-front.png

@@ -201,6 +201,12 @@
     },
     "agreesWithRecord": true
   },
+  "kit": {
+    "source": "kit/gatehouse.json",
+    "overrides": {
+      "deepslate_tiles": "deepslate_bricks"
+    }
+  },
   "fill": {
     "skin": "exposure",
     "minRun": 2,
@@ -209,19 +215,19 @@
         "dominant": "polished_basalt",
         "preserve": [
           "dark_oak_log",
-          "deepslate_tiles",
+          "deepslate_bricks",
           "cobblestone",
           "dark_oak_planks"
         ],
         "splat": [
           "dark_oak_log",
-          "deepslate_tiles",
+          "deepslate_bricks",
           "cobblestone",
           "dark_oak_planks"
         ]
       },
       "roof": {
-        "dominant": "deepslate_tiles",
+        "dominant": "deepslate_bricks",
         "preserve": [
           "polished_basalt",
           "cobblestone",
@@ -255,10 +261,10 @@
     "front": {
       "dir": "+z",
       "source": "concept",
-      "painted": 586,
+      "painted": 610,
       "skipped": 111,
       "offPalette": 0,
-      "zoneRejected": 142,
+      "zoneRejected": 118,
       "accepted": false,
       "coverageGate": {
         "passed": false,
@@ -266,21 +272,21 @@
         "failures": [
           {
             "zone": "roof",
-            "dominant": "deepslate_tiles",
-            "fraction": 0.37,
+            "dominant": "deepslate_bricks",
+            "fraction": 0.372,
             "total": 2592
           }
         ],
         "byZone": {
           "band0": {
             "dominant": "polished_basalt",
-            "fraction": 0.657,
+            "fraction": 0.65,
             "total": 3320,
             "passed": true
           },
           "roof": {
-            "dominant": "deepslate_tiles",
-            "fraction": 0.37,
+            "dominant": "deepslate_bricks",
+            "fraction": 0.372,
             "total": 2592,
             "passed": false
           }
@@ -291,17 +297,17 @@
     "side": {
       "dir": "+x",
       "source": "glb",
-      "painted": 286,
-      "skipped": 74,
+      "painted": 330,
+      "skipped": 66,
       "offPalette": 0,
-      "zoneRejected": 184,
+      "zoneRejected": 148,
       "accepted": true
     },
     "collisions": 0
   },
   "pattern": {
     "course": {
-      "dominant": "deepslate_tiles",
+      "dominant": "deepslate_bricks",
       "columnsRaised": 91,
       "voxelsAdded": 311,
       "before": {
@@ -324,48 +330,48 @@
     "salt": {
       "minKeep": 3,
       "minExtent": 3,
-      "stripped": 255,
-      "kept": 857,
+      "stripped": 233,
+      "kept": 898,
       "byZone": {
         "roof": {
-          "offDominant": 480,
-          "strippedCells": 120,
-          "keptCells": 360,
+          "offDominant": 476,
+          "strippedCells": 123,
+          "keptCells": 353,
           "byBlock": {
             "polished_basalt": {
-              "stripped": 47,
-              "kept": 222
+              "stripped": 49,
+              "kept": 205
             },
             "cobblestone": {
-              "stripped": 39,
-              "kept": 61
+              "stripped": 38,
+              "kept": 64
             },
             "dark_oak_log": {
               "stripped": 4,
-              "kept": 50
+              "kept": 57
             },
             "dark_oak_planks": {
-              "stripped": 30,
+              "stripped": 32,
               "kept": 27
             }
           }
         },
         "band0": {
-          "offDominant": 632,
-          "strippedCells": 135,
-          "keptCells": 497,
+          "offDominant": 655,
+          "strippedCells": 110,
+          "keptCells": 545,
           "byBlock": {
             "cobblestone": {
-              "stripped": 53,
-              "kept": 413
+              "stripped": 48,
+              "kept": 396
             },
-            "deepslate_tiles": {
-              "stripped": 50,
-              "kept": 80
+            "deepslate_bricks": {
+              "stripped": 30,
+              "kept": 144
             },
             "dark_oak_log": {
               "stripped": 16,
-              "kept": 4
+              "kept": 5
             },
             "dark_oak_planks": {
               "stripped": 16,
@@ -381,51 +387,51 @@
       "band0": {
         "total": 3320,
         "byBlock": {
-          "deepslate_tiles": 108,
-          "polished_basalt": 2175,
-          "cobblestone": 901,
-          "dark_oak_log": 45,
-          "dark_oak_planks": 91
+          "deepslate_bricks": 108,
+          "polished_basalt": 2136,
+          "cobblestone": 930,
+          "dark_oak_log": 53,
+          "dark_oak_planks": 93
         },
         "dominant": "polished_basalt",
-        "dominantFraction": 0.655
+        "dominantFraction": 0.643
       },
       "roof": {
         "total": 2592,
         "byBlock": {
-          "cobblestone": 121,
-          "polished_basalt": 1044,
-          "deepslate_tiles": 1147,
-          "dark_oak_planks": 280
+          "cobblestone": 118,
+          "polished_basalt": 1043,
+          "deepslate_bricks": 1155,
+          "dark_oak_planks": 276
         },
-        "dominant": "deepslate_tiles",
-        "dominantFraction": 0.443
+        "dominant": "deepslate_bricks",
+        "dominantFraction": 0.446
       }
     },
     "final": {
       "band0": {
         "total": 3320,
         "byBlock": {
-          "polished_basalt": 2495,
-          "deepslate_tiles": 176,
-          "cobblestone": 635,
+          "polished_basalt": 2447,
+          "deepslate_bricks": 240,
+          "cobblestone": 618,
           "dark_oak_planks": 10,
-          "dark_oak_log": 4
+          "dark_oak_log": 5
         },
         "dominant": "polished_basalt",
-        "dominantFraction": 0.752
+        "dominantFraction": 0.737
       },
       "roof": {
         "total": 2790,
         "byBlock": {
-          "cobblestone": 91,
-          "polished_basalt": 942,
-          "deepslate_tiles": 1513,
+          "cobblestone": 94,
+          "polished_basalt": 925,
+          "deepslate_bricks": 1520,
           "dark_oak_planks": 194,
-          "dark_oak_log": 50
+          "dark_oak_log": 57
         },
-        "dominant": "deepslate_tiles",
-        "dominantFraction": 0.542
+        "dominant": "deepslate_bricks",
+        "dominantFraction": 0.545
       }
     }
   },
@@ -437,21 +443,21 @@
       "failures": [
         {
           "zone": "roof",
-          "dominant": "deepslate_tiles",
-          "fraction": 0.443,
+          "dominant": "deepslate_bricks",
+          "fraction": 0.446,
           "total": 2592
         }
       ],
       "byZone": {
         "band0": {
           "dominant": "polished_basalt",
-          "fraction": 0.655,
+          "fraction": 0.643,
           "total": 3320,
           "passed": true
         },
         "roof": {
-          "dominant": "deepslate_tiles",
-          "fraction": 0.443,
+          "dominant": "deepslate_bricks",
+          "fraction": 0.446,
           "total": 2592,
           "passed": false
         }
@@ -464,13 +470,13 @@
       "byZone": {
         "band0": {
           "dominant": "polished_basalt",
-          "fraction": 0.752,
+          "fraction": 0.737,
           "total": 3320,
           "passed": true
         },
         "roof": {
-          "dominant": "deepslate_tiles",
-          "fraction": 0.542,
+          "dominant": "deepslate_bricks",
+          "fraction": 0.545,
           "total": 2790,
           "passed": true
         }
@@ -491,7 +497,7 @@
   },
   "reproducible": {
     "doubleRun": true,
-    "sha256": "e59d9a2c477d22bd2f814afebfa05c577141f7842bc93fc11c30ba8d720a6bed",
+    "sha256": "54bc1554c448b63274e45754c53995a22dc8940acc36d2ac7baa221361d4e1bb",
     "determinism": "no LLM on the path — concept PNG + material-map roles are committed upstream artifacts; every stage is a pure function of them. Two in-process executions byte-matched."
   },
   "resemblance": {
@@ -508,11 +514,11 @@
       "dark_oak_planks": 407
     },
     "after": {
-      "polished_basalt": 5705,
-      "deepslate_tiles": 1733,
-      "cobblestone": 726,
+      "polished_basalt": 5640,
+      "deepslate_bricks": 1804,
+      "cobblestone": 712,
       "dark_oak_planks": 205,
-      "dark_oak_log": 54
+      "dark_oak_log": 62
     }
   },
   "renders": [

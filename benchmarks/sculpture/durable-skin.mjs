@@ -100,6 +100,7 @@ export const SUBJECTS = {
     map: "material-map/cottage.json",
     valueSelectRecord: "value-select/cottage.json", // T-086's committed result — agreement asserted
     zoneMapRecord: "zone-map/cottage.json", // T-092's committed result — agreement asserted
+    kitRecord: "kit/cottage.json", // T-096's recognized kit — verified overrides beat the snap
     policy: { // FALLBACK PRIOR (spray-paint.mjs ZONE_POLICY verbatim, incl. the T-090 gable-framing preserve)
       base: {
         dominant: "stone_bricks",
@@ -133,6 +134,7 @@ export const SUBJECTS = {
     map: "material-map/gatehouse.json",
     valueSelectRecord: null, // no committed T-086 record — this run IS the gatehouse value-true result
     zoneMapRecord: "zone-map/gatehouse.json", // T-092's committed result — agreement asserted
+    kitRecord: "kit/gatehouse.json", // T-096's recognized kit — verified overrides beat the snap
     policy: { // FALLBACK PRIOR, from material-map/gatehouse.json roles (1:1 rule→block, the E-21 "restored" case)
       base: {
         dominant: "stone_bricks",                                        // smooth coursed wall field
@@ -282,10 +284,23 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
   }
   const sub = (b) => substitution[b] ?? b;
 
+  // --- 1b. KIT OVERRIDES (T-096, E-26): RECOGNITION BEATS SNAP at this ONE renaming point. The
+  // committed kit's `overrides` hold only VERIFIED cube recognitions that cover a derived band
+  // (kitOverrides' contract); they compose OVER the color-snap — the snap `substitution` itself
+  // stays untouched (the value-select agreement above compares it). No kit record ⇒ unchanged.
+  let kit = { source: null, overrides: {} };
+  if (def.kitRecord && existsSync(join(HERE, def.kitRecord))) {
+    const kitRec = JSON.parse(await readFile(join(HERE, def.kitRecord), "utf8"));
+    if (kitRec.schema !== "kit/v1") throw new Error(`${def.kitRecord} is not a kit/v1 record`);
+    kit = { source: def.kitRecord, overrides: kitRec.overrides ?? {} };
+  }
+  const combined = { ...substitution, ...kit.overrides };
+  const subK = (b) => combined[b] ?? b;
+
   // --- 2. SUBSTITUTED BUILD (the shipped palette, everywhere below) ------------------------------
-  const artifact0 = applySubstitution(raw, substitution);
+  const artifact0 = applySubstitution(raw, combined);
   assertArtifact(artifact0);
-  const legacyS = Object.fromEntries(Object.entries(def.legacy).map(([z, m]) => [z, [...new Set(m.map(sub))]]));
+  const legacyS = Object.fromEntries(Object.entries(def.legacy).map(([z, m]) => [z, [...new Set(m.map(subK))]]));
   const allowed = allowedPalette(artifact0);
   const subManifest = artifact0.palette.manifest;
   const palette = paletteFromManifest(subManifest);
@@ -336,7 +351,7 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
       notes.push(`zone map fell back to the prior: ${extracted.reason}`);
     }
   }
-  const policyS = mapPolicy(policyNamed, sub);
+  const policyS = mapPolicy(policyNamed, subK);
   for (const [z, p] of Object.entries(policyS)) {
     if (!allowed.has(p.dominant)) throw new Error(`zone "${z}" dominant "${p.dominant}" not in the substituted manifest`);
   }
@@ -412,7 +427,7 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
   // plaster is legitimate on BOTH storeys above the plinth and forbidden on the plinth + roof.
   let plaster = null;
   if (def.plasterInvariant) {
-    const block = sub(def.plasterInvariant);
+    const block = subK(def.plasterInvariant);
     const histogram = exposedBlockByZone(final, zoneOf, block);
     const allowedZones = Object.entries(policyS)
       .filter(([, p]) => p.dominant === block || p.preserve.includes(block) || p.splat.includes(block))
@@ -460,7 +475,7 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
 
   return {
     raw, artifact0, sealed, based, painted, splatOnly, final,
-    substitution, rows, agreesWithRecord, policyS, borderColor,
+    substitution, kit, rows, agreesWithRecord, policyS, borderColor,
     zones: { storeyDivide, upperTop }, zoneOf, zoneMap, fill,
     splat: {
       front: {
@@ -628,6 +643,7 @@ async function main() {
     sealed: { raw: r1.raw.placements.length, substituted: r1.artifact0.placements.length, sealed: r1.sealed.placements.length },
     zones: { ...r1.zones, source: r1.zoneMap.source },
     zoneMap: r1.zoneMap,
+    kit: r1.kit, // T-096 (E-26): verified recognitions composed OVER the snap at the renaming point
     fill: {
       skin: "exposure", minRun: 2, policy: r1.policyS,
       placements: r1.fill.placements.length, kept: r1.fill.kept, byZone: r1.fill.byZone,
