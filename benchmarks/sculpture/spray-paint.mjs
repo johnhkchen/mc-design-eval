@@ -39,11 +39,13 @@ import { projectSurface } from "../../src/view/surface-grid.mjs";
 import { quantizeToFace } from "../../src/view/reference-quantize.mjs";
 import { loadGlbSplat, resampleBlockGrid } from "../../src/view/glb-splat.mjs";
 import { paintFace, mergePaints, applyPaint } from "../../src/view/face-paint.mjs";
-import { zoneFill, surfaceZoneHistogram } from "../../src/view/zone-fill.mjs";
+import { zoneFill, surfaceZoneHistogram, dominantCoverage } from "../../src/view/zone-fill.mjs";
 import { structuralZones } from "../../src/view/structural-read.mjs";
 import { sealRoof, sealWalls, applyDeltas } from "../../src/view/surface-coherence.mjs";
 import { allowedPalette } from "../../src/view/palette-cans.mjs";
-import { faceResemblance, acceptIfCloser } from "../../src/view/face-resemblance.mjs";
+import {
+  faceResemblance, coverageGate, acceptWithCoverage, DEFAULT_COVERAGE_THRESHOLD,
+} from "../../src/view/face-resemblance.mjs";
 import { paletteFromManifest } from "../../src/form/glb-voxel-build.mjs";
 import { loadBlockTable } from "../../src/color/block-table.mjs";
 import { assertArtifact } from "../../src/artifact.mjs";
@@ -85,6 +87,13 @@ const ZONE_POLICY = {
     splat: ["dark_oak_planks", "cobblestone", "bricks"],
   },
 };
+
+// THE COVERAGE GATE (T-088-01, S-088): every zone's intended dominant must cover >= this fraction of the
+// zone's visible skin, as a PRECONDITION ahead of the per-face hill-climb — the gate that accepted a
+// marginal 0.25→0.40 on a 91%-bare wall can no longer be fooled. 0.5 = "the dominant is actually
+// dominant" (a majority of the skin), with margin both ways on the recorded evidence (splat-only upper
+// 0.13 must fail; the weakest passing zone, base 0.619, must pass).
+const COVERAGE_THRESHOLD = DEFAULT_COVERAGE_THRESHOLD;
 
 // The T-079-02-era per-zone splat palettes (dominants included), kept ONLY to replay the splat-only
 // baseline deterministically — the "(was 9%)" coverage evidence in the record. Not used to paint the build.
@@ -140,20 +149,6 @@ function stripOffZonePlaster(occ, zoneOf, allowed) {
     }
   }
   return [...byKey.values()];
-}
-
-/** Decorate a surfaceZoneHistogram with each zone's intended dominant + its applied fraction — the
- *  coverage evidence (T-085-01 AC #3): "is the dominant actually established?", per zone, ‰-rounded. */
-function coverageRecord(hist) {
-  const out = {};
-  for (const [zone, h] of Object.entries(hist)) {
-    const dominant = ZONE_POLICY[zone]?.dominant ?? null;
-    out[zone] = {
-      total: h.total, byBlock: h.byBlock, dominant,
-      dominantFraction: dominant && h.total ? Math.round(((h.byBlock[dominant] ?? 0) / h.total) * 1000) / 1000 : null,
-    };
-  }
-  return out;
 }
 
 /** One-line per-zone dominant-coverage summary for the console/md. */
@@ -247,10 +242,15 @@ async function main() {
     const cov = rec.zones?.coverage;
     const covOk = !cov ||
       (cov.zoneFilled?.upper?.dominantFraction ?? 0) > (cov.splatOnly?.upper?.dominantFraction ?? 0);
-    const ok = reversalOk && zoneOk && covOk;
+    // T-088-01: the coverage gate's proof both ways must hold in the record — the splat-only replay
+    // REJECTED, the zone-filled skin PASSED (skip-if-absent so pre-gate records degrade gracefully).
+    const cg = rec.zones?.coverageGate;
+    const covGateOk = !cg || (cg.splatOnly?.passed === false && cg.zoneFilled?.passed === true);
+    const ok = reversalOk && zoneOk && covOk && covGateOk;
     console.error(`[offline] plaster ${rec.plaster.before}→${rec.plaster.after}; reversal ${reversalOk ? "CONFIRMED" : "NOT confirmed"}` +
       (h ? `; zone histogram masked=${JSON.stringify(h)} (base/roof=0 ${zoneOk ? "OK" : "VIOLATED"})` : "") +
-      (cov ? `; upper dominant coverage splat-only ${cov.splatOnly?.upper?.dominantFraction} → zone-filled ${cov.zoneFilled?.upper?.dominantFraction} (${covOk ? "OK" : "NOT improved"})` : ""));
+      (cov ? `; upper dominant coverage splat-only ${cov.splatOnly?.upper?.dominantFraction} → zone-filled ${cov.zoneFilled?.upper?.dominantFraction} (${covOk ? "OK" : "NOT improved"})` : "") +
+      (cg ? `; coverage gate @${cg.threshold}: splat-only ${cg.splatOnly?.passed ? "PASSED (unexpected)" : "rejected"} / zone-filled ${cg.zoneFilled?.passed ? "passed" : "REJECTED (unexpected)"} (${covGateOk ? "OK" : "VIOLATED"})` : ""));
     if (!ok) process.exitCode = 1;
     return;
   }
@@ -339,8 +339,13 @@ async function main() {
   const frontLegacy = paintFace(occ, "+z", frontTarget, { allowed, source: "concept", zoneOf, allowedByZone: legacyByZone });
   const sideLegacy = sideSplat ? paintFace(occ, "+x", sideSplat.grid, { allowed, source: "glb", zoneOf, allowedByZone: legacyByZone }) : { placements: [] };
   const splatOnlyBuild = applyPaint(artifact, mergePaints([sideLegacy, frontLegacy].filter((p) => (p.placements?.length ?? 0) > 0), { priority: ["concept", "glb"] }).placements);
-  const covSplatOnly = coverageRecord(surfaceZoneHistogram(artifactOccupancy(splatOnlyBuild), zoneOf));
+  const covSplatOnly = dominantCoverage(surfaceZoneHistogram(artifactOccupancy(splatOnlyBuild), zoneOf), ZONE_POLICY);
   console.error(`coverage (splat-only baseline): ${coverageLine(covSplatOnly)}`);
+  // T-088-01 proof, the REJECT side: the under-applied splat-only skin must fail the coverage gate —
+  // and the verdict is delta-independent (no resemblance number can rescue a missing base coat).
+  const gateSplatOnly = coverageGate(covSplatOnly, { threshold: COVERAGE_THRESHOLD, zones: ZONE_POLICY });
+  console.error(`coverage gate (splat-only baseline): ${gateSplatOnly.passed ? "PASS (unexpected)" : "FAIL"} — ` +
+    gateSplatOnly.failures.map((f) => `${f.zone} ${f.dominant}=${f.fraction} < ${COVERAGE_THRESHOLD}`).join(", "));
 
   // --- 3. optional metered LLM refine (the one metered call; default off) --------------------------
   // T-079-02: the GUARD is the structural invariant (splat ∩ zone mask + the base/roof=0 THROW below),
@@ -365,17 +370,27 @@ async function main() {
   const frontBeforeR = await tryRenderFace(based, "+z", "front-before", conceptImg, palette, blockTable);
   const frontCandidate = applyPaint(based, frontPass.placements);
   const frontAfterR = await tryRenderFace(frontCandidate, "+z", "front-after", conceptImg, palette, blockTable);
-  const frontGate = acceptIfCloser({
+  // T-088-01: the coverage PRECONDITION runs AHEAD of the hill-climb — the candidate skin must show
+  // every zone's intended dominant at >= threshold before the marginal delta is even consulted (a
+  // 0.25→0.40 can no longer rubber-stamp a 91%-bare wall). GL-free, so it binds even when the
+  // resemblance score is blind.
+  const covFrontCandidate = dominantCoverage(
+    surfaceZoneHistogram(artifactOccupancy(frontCandidate), zoneOf), ZONE_POLICY);
+  const frontGate = acceptWithCoverage({
+    coverage: covFrontCandidate, threshold: COVERAGE_THRESHOLD, zones: ZONE_POLICY,
     before: frontBeforeR.score?.score ?? null,
     after: frontAfterR.score?.score ?? null,
   });
-  // P14: accept the front paint when it moves toward the concept OR when the gate is blind (no GL ref) —
-  // in the GL-blind case the splat IS the concept truth (the band is in the concept), recorded as such.
-  const frontAccepted = frontGate.before == null ? true : frontGate.accepted;
+  // P14: with the coverage precondition PASSED, accept the front paint when it moves toward the concept
+  // OR when the resemblance gate is blind (no GL ref) — in the GL-blind case the splat IS the concept
+  // truth (the band is in the concept), recorded as such. A coverage failure rejects in every case.
+  const gateBlind = (frontBeforeR.score?.score ?? null) == null;
+  const frontAccepted = frontGate.reason === "coverage" ? false : gateBlind ? true : frontGate.accepted;
   faceRecords.push({
     face: "front (+z)", source: "concept", painted: frontPass.painted, skipped: frontPass.skipped,
     offPalette: frontPass.offPalette, zoneRejected: frontPass.zoneRejected, before: frontBeforeR, after: frontAfterR, gate: frontGate,
-    accepted: frontAccepted, gateBlind: frontGate.before == null,
+    coverageGate: { passed: frontGate.coverage.passed, threshold: COVERAGE_THRESHOLD, failures: frontGate.coverage.failures },
+    accepted: frontAccepted, gateBlind,
   });
 
   // SIDE: the GLB is the truth (no concept face to gate against) — apply the splat paint, render for the record.
@@ -414,8 +429,17 @@ async function main() {
   }
   // THE T-085-01 EVIDENCE: per-zone dominant coverage of the final skin vs the splat-only baseline —
   // the 9%→≈77% reversal, produced by the pipeline (Rule 1), GL-free.
-  const covFilled = coverageRecord(surfaceZoneHistogram(artifactOccupancy(painted), zoneOf));
+  const covFilled = dominantCoverage(surfaceZoneHistogram(artifactOccupancy(painted), zoneOf), ZONE_POLICY);
   console.error(`coverage (zone-filled, final): ${coverageLine(covFilled)}`);
+  // T-088-01 proof, the PASS side + the guard: the shipped skin must clear the coverage gate, and a
+  // failing skin must never silently ship a record (same precedent as the base/roof-plaster throw —
+  // a marginal resemblance number cannot substitute for the base coat).
+  const gateZoneFilled = coverageGate(covFilled, { threshold: COVERAGE_THRESHOLD, zones: ZONE_POLICY });
+  console.error(`coverage gate (zone-filled, final): ${gateZoneFilled.passed ? "PASS" : "FAIL"} @ threshold ${COVERAGE_THRESHOLD}`);
+  if (!gateZoneFilled.passed) {
+    throw new Error(`coverage gate FAILED on the final skin: ` +
+      gateZoneFilled.failures.map((f) => `${f.zone} ${f.dominant}=${f.fraction} < ${COVERAGE_THRESHOLD}`).join(", "));
+  }
   console.error(`coverage upper ${ZONE_POLICY.upper.dominant}: splat-only ${Math.round((covSplatOnly.upper?.dominantFraction ?? 0) * 100)}% → zone-filled ${Math.round((covFilled.upper?.dominantFraction ?? 0) * 100)}%`);
   await writeFile(join(SUBJ_DIR, "artifact.json"), JSON.stringify(painted, null, 2) + "\n");
 
@@ -447,6 +471,15 @@ async function main() {
       materials: ZONE_POLICY,
       histogram: { masked: histMasked, unmasked: histUnmasked }, // surface plaster by zone (before/after the fix)
       coverage: { splatOnly: covSplatOnly, zoneFilled: covFilled }, // per-zone dominant coverage (T-085-01)
+      coverageGate: { // the threshold PRECONDITION (T-088-01): proof both ways, delta-independent
+        threshold: COVERAGE_THRESHOLD,
+        splatOnly: gateSplatOnly,   // expect passed:false — the under-applied E-23 skin is REJECTED
+        zoneFilled: gateZoneFilled, // expect passed:true  — the base-coated skin clears the precondition
+        note: "coverage is a PRECONDITION ahead of the per-face hill-climb, not a tie-breaker: any zone " +
+          "whose intended dominant covers < threshold of its visible skin fails the skin regardless of " +
+          "the marginal resemblance delta (the 0.25→0.40 that rubber-stamped the 91%-bare wall cannot " +
+          "pass it). splatOnly replays the pre-fill path; zoneFilled is the shipped skin.",
+      },
       offZonePlasterStripped: stripPlacements.length,
       interiorStrays,
       note: "histogram = surface plaster per structural zone. MASKED (this fix) confines plaster to 'upper' " +
@@ -490,6 +523,15 @@ function renderMd(r) {
     `- upper-band plaster: **${pct(z.coverage.splatOnly.upper?.dominantFraction)} → ` +
     `${pct(z.coverage.zoneFilled.upper?.dominantFraction)}** — the splat places secondaries only ` +
     `(upper palette = ${JSON.stringify(r.fill.policy.upper.splat)}).\n\n` : "";
+  const cg = z?.coverageGate;
+  const gateMd = cg ? `## Coverage gate (T-088-01)\n` +
+    `Per-zone dominant coverage is a **precondition** ahead of the per-face hill-climb (threshold ` +
+    `**${cg.threshold}** of the zone's visible skin) — proof both ways:\n` +
+    `- **splat-only replay (the E-23 under-applied skin): ${cg.splatOnly.passed ? "PASSED (unexpected)" : "REJECTED"}** — ` +
+    cg.splatOnly.failures.map((f) => `${f.zone} \`${f.dominant}\` ${pct(f.fraction)} < ${pct(cg.threshold)}`).join(", ") +
+    `. Delta-independent: even the historically accepted marginal 0.25→0.40 front delta cannot pass it.\n` +
+    `- **zone-filled skin (the shipped base coat): ${cg.zoneFilled.passed ? "PASSED" : "REJECTED (unexpected)"}** — ` +
+    `every zone's dominant ≥ ${pct(cg.threshold)} of its skin.\n\n` : "";
   const zoneMd = z ? `## Zone mask (T-079-02)\n` +
     `storeyDivide = y${z.storeyDivide}. Surface plaster by zone:\n` +
     `- **masked (this fix):** ${histLine(z.histogram.masked)} → plaster confined to the upper storey (base 0, roof 0).\n` +
@@ -499,7 +541,7 @@ function renderMd(r) {
     `Plaster (\`${r.plaster.block}\`): **${r.plaster.before} → ${r.plaster.after}** — ` +
     `the 215→8 regression ${r.plaster.reversed ? "**reversed**" : "NOT reversed"}.\n\n` +
     (r.sealed ? `Sealed before paint: ${r.sealed.raw} → ${r.sealed.sealed} placements (seal then paint).\n\n` : "") +
-    fillMd + zoneMd +
+    fillMd + gateMd + zoneMd +
     `Enforced palette ("4 cans"): ${r.palette.allowed.join(", ")}.\n` +
     `Corner collisions resolved (concept > glb): ${r.cornerCollisions}.\n\n## Faces\n${f}\n\n` +
     `Refine: ${r.refine}\n\n> ${r.note}\n`;
