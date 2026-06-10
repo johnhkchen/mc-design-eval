@@ -49,6 +49,7 @@ import {
 import { paletteFromManifest } from "../../src/form/glb-voxel-build.mjs";
 import { loadBlockTable } from "../../src/color/block-table.mjs";
 import { assertArtifact } from "../../src/artifact.mjs";
+import { protrudingStackRegion } from "../../src/view/shell-regularize.mjs";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 const ART_PATH = join(ROOT, "benchmarks/sculpture/concept-materials/cottage/after-artifact.json");
@@ -233,41 +234,8 @@ function materialCounts(artifact) {
   return counts;
 }
 
-/** The DECLARED chimney sub-region, derived from GEOMETRY (T-090-01, no subject constants): a
- *  protruding stack = the columns rising ABOVE the highest roof PLANE. ridgeY = the highest column-top
- *  shared by an 8-connected plateau of >= minPlateau equal-top columns (a roof plane / gable top is at
- *  least a small plane; a chimney or finial footprint is smaller). Region = cells above ridgeY in
- *  columns whose top exceeds it. A build with no protrusion gets an empty region. PURE logic. */
-function protrudingStackRegion(occ, { minPlateau = 4 } = {}) {
-  const topY = new Map(); // "x,z" → max y
-  for (const key of occ.cells.keys()) {
-    const [x, y, z] = key.split(",").map(Number);
-    const k = `${x},${z}`;
-    if (!(topY.has(k)) || topY.get(k) < y) topY.set(k, y);
-  }
-  // largest-y plateau: 8-connected components of equal-top columns, sized >= minPlateau
-  let ridgeY = -Infinity;
-  const seen = new Set();
-  for (const [start, y0] of topY) {
-    if (seen.has(start) || y0 <= ridgeY) continue;
-    const comp = [start];
-    seen.add(start);
-    const stack = [start];
-    while (stack.length) {
-      const [x, z] = stack.pop().split(",").map(Number);
-      for (let dx = -1; dx <= 1; dx++) for (let dz = -1; dz <= 1; dz++) {
-        if (!dx && !dz) continue;
-        const nk = `${x + dx},${z + dz}`;
-        if (seen.has(nk) || topY.get(nk) !== y0) continue;
-        seen.add(nk); stack.push(nk); comp.push(nk);
-      }
-    }
-    if (comp.length >= minPlateau && y0 > ridgeY) ridgeY = y0;
-  }
-  if (!Number.isFinite(ridgeY)) return { contains: () => false, columns: new Set(), ridgeY: null };
-  const columns = new Set([...topY].filter(([, y]) => y > ridgeY).map(([k]) => k));
-  return { contains: ([x, y, z]) => y > ridgeY && columns.has(`${x},${z}`), columns, ridgeY };
-}
+// protrudingStackRegion (the declared chimney sub-region) was lifted to src/view/shell-regularize.mjs
+// (T-102-01) so the regularization cage and this runner share one detector — imported above.
 
 /** Best-effort GL render at a named angle (no scoring) — the oblique-evidence path (T-090-01). */
 async function tryRenderAngle(artifact, angle, label) {
