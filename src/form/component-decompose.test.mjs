@@ -264,3 +264,86 @@ test("roofPlanes: voxelization spikes change nothing (raw vs regularized toleran
     assert.ok(spiked[i].voxelFit.rmseRaw >= clean[i].voxelFit.rmseRaw);
   }
 });
+
+// ---- wallSlabs + openingGroups ------------------------------------------------------------------
+
+import { wallSlabs, openingGroups } from "./component-decompose.mjs";
+
+test("wallSlabs: a box gets 4 full-coverage axis planes", () => {
+  const occ = occupancyFromCells(boxCells(8, 4, 6));
+  const seg = segmentMasses(occ);
+  const slabs = wallSlabs(occ, seg);
+  assert.equal(slabs.length, 4);
+  const byDir = new Map(slabs.map((s) => [s.dir, s]));
+  assert.equal(byDir.get("+x").value, 7);
+  assert.equal(byDir.get("-x").value, 0);
+  assert.equal(byDir.get("+z").value, 5);
+  assert.equal(byDir.get("-z").value, 0);
+  for (const s of slabs) {
+    assert.equal(s.coverage, 1);
+    assert.equal(s.axis, s.dir.includes("x") ? "x" : "z");
+    assert.equal(s.massId, "mass-0");
+  }
+});
+
+test("wallSlabs: tower and nave carry separate slabs on the same world side", () => {
+  const cells = [...boxCells(20, 6, 8), ...boxCells(6, 14, 6, { z0: 8 })];
+  const occ = occupancyFromCells(cells);
+  const seg = segmentMasses(occ);
+  const slabs = wallSlabs(occ, seg);
+  assert.equal(slabs.length, 8, "4 per body mass");
+  const px = slabs.filter((s) => s.dir === "+x");
+  assert.equal(px.length, 2);
+  const naveX = px.find((s) => s.massId === seg.masses[0].id);
+  const towerX = px.find((s) => s.massId === seg.masses[1].id);
+  assert.equal(naveX.value, 19);
+  assert.equal(towerX.value, 5);
+});
+
+/** 1-thick wall at z=0 over x∈[0..10], y∈[0..8], with holes punched per `skip(x,y)`. */
+const wallWith = (skip) => {
+  const cells = [];
+  for (let x = 0; x <= 10; x++) {
+    for (let y = 0; y <= 8; y++) {
+      if (skip(x, y)) continue;
+      cells.push({ pos: [x, y, 0], block: "minecraft:stone" });
+    }
+  }
+  return occupancyFromCells(cells);
+};
+
+test("openingGroups: two aligned windows form one group; the door stands alone", () => {
+  const occ = wallWith((x, y) =>
+    (y >= 4 && y <= 5 && ((x >= 2 && x <= 3) || (x >= 7 && x <= 8))) || // two 2×2 windows
+    (x === 5 && y <= 2));                                               // a 1×3 door
+  const groups = openingGroups(occ, segmentMasses(occ), { dirs: ["-z"] });
+  assert.equal(groups.length, 2);
+  const windows = groups.find((g) => g.kind === "window");
+  const doors = groups.find((g) => g.kind === "door");
+  assert.equal(windows.openings.length, 2);
+  assert.equal(doors.openings.length, 1);
+  const [w1, w2] = windows.openings;
+  assert.deepEqual(w1.extent, { axis: "x", range: [2, 3], yRange: [4, 5] });
+  assert.deepEqual(w2.extent, { axis: "x", range: [7, 8], yRange: [4, 5] });
+  assert.deepEqual(w1.jambs, [{ at: 2, y0: 4, y1: 5 }, { at: 3, y0: 4, y1: 5 }]);
+  assert.equal(w1.archCandidate, false);
+  const d = doors.openings[0];
+  assert.equal(d.sillY, 0);
+  assert.equal(d.crown, 2);
+  assert.equal(d.archCandidate, false, "a 1-wide flat-head door is no arch");
+});
+
+test("openingGroups: an arched doorway is flagged with spring and crown", () => {
+  // aperture columns x2..6 with head heights 3,4,5,4,3 — a stepped arch
+  const tops = new Map([[2, 3], [3, 4], [4, 5], [5, 4], [6, 3]]);
+  const occ = wallWith((x, y) => tops.has(x) && y <= tops.get(x));
+  const groups = openingGroups(occ, segmentMasses(occ), { dirs: ["-z"] });
+  assert.equal(groups.length, 1);
+  const arch = groups[0].openings[0];
+  assert.equal(groups[0].kind, "door");
+  assert.equal(arch.archCandidate, true);
+  assert.equal(arch.crown, 5);
+  assert.equal(arch.spring, 3, "the highest y still spanning the full width");
+  assert.equal(arch.width, 5);
+  assert.deepEqual(arch.headProfile.map((p) => p.topY), [3, 4, 5, 4, 3]);
+});

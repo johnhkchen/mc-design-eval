@@ -730,3 +730,167 @@ export function roofPlanes(occ, segmentation, opts = {}) {
   for (const p of planes) { delete p._ridgeWith; delete p._regionIdx; delete p._massSet; delete p._assign; }
   return planes;
 }
+
+// ---- wall slabs -----------------------------------------------------------------------------------
+
+/**
+ * WALL SLABS per body mass × side face (D4): project the mass's own cells along the face, take the
+ * modal depth band (mode ±1, ties broken outward — the camera's surface) as the slab plane. Walls
+ * are axis-aligned in voxel space by construction, so the slab is `{axis, value}` + world bounds;
+ * `coverage` (slab cells / face cells) is the honesty number — a slanted or noisy face shows up low,
+ * it is never hidden. Protrusion masses (chimneys) carry no slabs; their geometry is the plan+base.
+ */
+export function wallSlabs(occ, segmentation) {
+  const slabs = [];
+  const solid = solidOccupancy(occ);
+  for (const mass of segmentation.masses) {
+    if (mass.role === "protrusion") continue;
+    const own = new Set(runCells(mass.plan.runs).map(([x, z]) => keyXZ(x, z)));
+    const cells = [];
+    for (const [key, blk] of solid.cells) {
+      const [x, , z] = key.split(",").map(Number);
+      if (own.has(keyXZ(x, z))) cells.push({ pos: key.split(",").map(Number), block: blk });
+    }
+    if (!cells.length) continue;
+    const massOcc = occupancyFromCells(cells);
+    for (const dir of SIDE_FACES) {
+      const spec = orthoSpec(dir);
+      const grid = projectSurface(massOcc, dir);
+      const depthCount = new Map();
+      const faceCells = [];
+      for (const row of grid.cells) {
+        for (const c of row) {
+          if (!c) continue;
+          faceCells.push(c);
+          const w = c.voxel[spec.axisW];
+          depthCount.set(w, (depthCount.get(w) || 0) + 1);
+        }
+      }
+      if (!faceCells.length) continue;
+      const outward = spec.near === "max" ? -1 : 1; // prefer the outermost depth on count ties
+      const mode = [...depthCount.entries()]
+        .sort((a, b) => b[1] - a[1] || (outward > 0 ? a[0] - b[0] : b[0] - a[0]))[0][0];
+      const slabCells = faceCells.filter((c) => Math.abs(c.voxel[spec.axisW] - mode) <= 1);
+      const lo = [Infinity, Infinity, Infinity], hi = [-Infinity, -Infinity, -Infinity];
+      for (const c of slabCells) {
+        for (let a = 0; a < 3; a++) {
+          if (c.voxel[a] < lo[a]) lo[a] = c.voxel[a];
+          if (c.voxel[a] > hi[a]) hi[a] = c.voxel[a];
+        }
+      }
+      slabs.push({
+        id: `${mass.id}-wall-${dir}`,
+        massId: mass.id,
+        dir,
+        axis: spec.axisW === 0 ? "x" : "z",
+        value: mode,
+        boundsWorld: { min: lo, max: hi },
+        faceCells: faceCells.length,
+        slabCells: slabCells.length,
+        coverage: round3(slabCells.length / faceCells.length),
+      });
+    }
+  }
+  return slabs;
+}
+
+// ---- opening groups -------------------------------------------------------------------------------
+
+/**
+ * OPENING GROUPS (D5): lift `openings(occ, dir, {withCells:true})` into world geometry — extent,
+ * sill, the two jamb lines, the per-column HEAD PROFILE — and group same-face same-kind same-size
+ * openings (window rows). `archCandidate` flags a head profile that rises ≥2 over its jamb tops and
+ * reads unimodal (±1 jitter tolerance for raw shells); `spring` is the highest y at which the
+ * aperture still spans its full width (where the arch starts to turn). The full circle fit is
+ * S-105's job — the profile is recorded so S-105 fits from data, not from a re-read.
+ * Openings attribute to the body mass with the largest plan overlap on the face's horizontal axis.
+ */
+export function openingGroups(occ, segmentation, { dirs = SIDE_FACES } = {}) {
+  const solid = solidOccupancy(occ);
+  if (!solid.bounds) return [];
+  const { min, max } = solid.bounds;
+  const bodies = segmentation.masses.filter((m) => m.role !== "protrusion");
+  const found = [];
+
+  for (const dir of dirs) {
+    const spec = orthoSpec(dir);
+    const wU = (u) => (spec.signU > 0 ? min[spec.axisU] + u : max[spec.axisU] - u);
+    const wY = (v) => (spec.signV > 0 ? min[1] + v : max[1] - v);
+    const uAxis = spec.axisU === 0 ? "x" : "z";
+    for (const op of openings(occ, dir, { withCells: true })) {
+      const cols = new Map(); // world-u → {top, bottom}
+      let sillY = Infinity;
+      for (const [u, v] of op.cellsUV) {
+        const at = wU(u), y = wY(v);
+        const c = cols.get(at) ?? { top: -Infinity, bottom: Infinity };
+        if (y > c.top) c.top = y;
+        if (y < c.bottom) c.bottom = y;
+        cols.set(at, c);
+        if (y < sillY) sillY = y;
+      }
+      const ats = [...cols.keys()].sort((a, b) => a - b);
+      const headProfile = ats.map((at) => ({ at, topY: cols.get(at).top }));
+      const crown = Math.max(...headProfile.map((p) => p.topY));
+      const first = cols.get(ats[0]), last = cols.get(ats[ats.length - 1]);
+      const jambs = [
+        { at: ats[0], y0: first.bottom, y1: first.top },
+        { at: ats[ats.length - 1], y0: last.bottom, y1: last.top },
+      ];
+      // arch: central rise ≥2 over the jamb tops, unimodal head (±1 jitter tolerated)
+      const edgeTop = Math.max(jambs[0].y1, jambs[1].y1);
+      let unimodal = true;
+      const peak = headProfile.findIndex((p) => p.topY === crown);
+      for (let i = 1; i < headProfile.length; i++) {
+        if (i <= peak && headProfile[i].topY < headProfile[i - 1].topY - 1) unimodal = false;
+        if (i > peak && headProfile[i].topY > headProfile[i - 1].topY + 1) unimodal = false;
+      }
+      const archCandidate = headProfile.length >= 3 && crown - edgeTop >= 2 && unimodal;
+      let spring = null;
+      if (archCandidate) {
+        spring = crown;
+        for (let y = sillY; y <= crown; y++) {
+          const width = ats.filter((at) => cols.get(at).bottom <= y && y <= cols.get(at).top).length;
+          if (width === ats.length) spring = y;
+        }
+      }
+      // mass attribution: largest plan-bbox overlap along the face's horizontal axis
+      const uLo = ats[0], uHi = ats[ats.length - 1];
+      let massId = bodies.length ? bodies[0].id : null;
+      let bestOverlap = -1;
+      for (const m of bodies) {
+        const b = m.plan.bbox;
+        const [bLo, bHi] = uAxis === "x" ? [b.minX, b.maxX] : [b.minZ, b.maxZ];
+        const ov = Math.min(uHi, bHi) - Math.max(uLo, bLo) + 1;
+        if (ov > bestOverlap) { bestOverlap = ov; massId = m.id; }
+      }
+      found.push({
+        dir, kind: op.kind, massId,
+        opening: {
+          extent: { axis: uAxis, range: [uLo, uHi], yRange: [sillY, crown] },
+          cells: op.cells,
+          sillY, crown,
+          width: ats.length, height: crown - sillY + 1,
+          jambs, headProfile, archCandidate, spring,
+        },
+      });
+    }
+  }
+
+  // group: same dir+kind+mass, aligned sills/crowns, same width (±1) — transitive via first member
+  const groups = [];
+  const sorted = found.sort((a, b) =>
+    dirs.indexOf(a.dir) - dirs.indexOf(b.dir) ||
+    a.massId.localeCompare(b.massId) || a.kind.localeCompare(b.kind) ||
+    a.opening.extent.range[0] - b.opening.extent.range[0]);
+  for (const f of sorted) {
+    const host = groups.find((g) => {
+      if (g.dir !== f.dir || g.kind !== f.kind || g.massId !== f.massId) return false;
+      const o = g.openings[0], p = f.opening;
+      return Math.abs(o.sillY - p.sillY) <= 1 && Math.abs(o.crown - p.crown) <= 1 &&
+        Math.abs(o.width - p.width) <= 1;
+    });
+    if (host) host.openings.push(f.opening);
+    else groups.push({ id: `og-${groups.length}`, massId: f.massId, dir: f.dir, kind: f.kind, openings: [f.opening] });
+  }
+  return groups;
+}
