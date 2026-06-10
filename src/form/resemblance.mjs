@@ -286,18 +286,19 @@ export function silhouetteToRgba(sil, opts = {}) {
 }
 
 /**
- * Paste three equal-sized RGBA panels left→right (concept | mesh | minecraft) with separator gutters into
- * one RGBA buffer. PURE — the math; node-canvas labels + PNG encode are the runner's impure job.
- * @param {Array<{w:number,h:number,data:Uint8Array}>} panels exactly 3, all same w×h
+ * Paste N equal-sized RGBA panels left→right with separator gutters into one RGBA buffer — the
+ * T-093-01 generalization the multi-angle CONTACT SHEET composes on (concept | 4 gated views).
+ * PURE — the math; node-canvas labels + PNG encode are the runner's impure job.
+ * @param {Array<{w:number,h:number,data:Uint8Array}>} panels 1+, all same w×h
  * @returns {{w:number,h:number,data:Uint8Array}}
  */
-export function composeTriptych(panels, opts = {}) {
-  if (!Array.isArray(panels) || panels.length !== 3) throw new Error("composeTriptych: exactly 3 panels required");
+export function composeSheet(panels, opts = {}) {
+  if (!Array.isArray(panels) || panels.length < 1) throw new Error("composeSheet: at least 1 panel required");
   const { w: pw, h: ph } = panels[0];
-  for (const p of panels) if (p.w !== pw || p.h !== ph) throw new Error("composeTriptych: panels must share dimensions");
+  for (const p of panels) if (p.w !== pw || p.h !== ph) throw new Error("composeSheet: panels must share dimensions");
   const gutter = opts.gutter ?? RESEMBLANCE_DEFAULTS.gutter;
   const sep = opts.sep ?? [40, 40, 40, 255];
-  const W = pw * 3 + gutter * 2;
+  const W = pw * panels.length + gutter * (panels.length - 1);
   const H = ph;
   const out = new Uint8Array(W * H * 4);
   for (let i = 0; i < W * H; i++) { const o = i << 2; out[o] = sep[0]; out[o + 1] = sep[1]; out[o + 2] = sep[2]; out[o + 3] = sep[3]; }
@@ -312,6 +313,17 @@ export function composeTriptych(panels, opts = {}) {
     }
   });
   return { w: W, h: H, data: out };
+}
+
+/**
+ * Paste three equal-sized RGBA panels left→right (concept | mesh | minecraft) — the E-22 triptych.
+ * The 3-panel contract is preserved verbatim for v1 callers; the math is {@link composeSheet}'s.
+ * @param {Array<{w:number,h:number,data:Uint8Array}>} panels exactly 3, all same w×h
+ * @returns {{w:number,h:number,data:Uint8Array}}
+ */
+export function composeTriptych(panels, opts = {}) {
+  if (!Array.isArray(panels) || panels.length !== 3) throw new Error("composeTriptych: exactly 3 panels required");
+  return composeSheet(panels, opts);
 }
 
 // --- the categorical judge: fixed prompt + pure verdict parser ------------------------------------------

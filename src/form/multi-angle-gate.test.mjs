@@ -191,3 +191,27 @@ test("viewOutcomeLabel covers every state", () => {
     verdict: { verdict: "drifted", gaps: [{ region: "r", attribute: "form", severity: "major" }] },
   }), "drifted: form");
 });
+
+// --- the contact-sheet composer (step 2: composeSheet generalization) -----------------
+
+test("composeSheet: N-panel width math and triptych delegation", async () => {
+  const { composeSheet, composeTriptych, RESEMBLANCE_DEFAULTS } = await import("./resemblance.mjs");
+  const P = 4, G = RESEMBLANCE_DEFAULTS.gutter;
+  const panel = (v) => ({ w: P, h: P, data: new Uint8Array(P * P * 4).fill(v) });
+  const five = composeSheet([1, 2, 3, 4, 5].map(panel));
+  assert.equal(five.w, P * 5 + G * 4);
+  assert.equal(five.h, P);
+  // triptych contract preserved: exactly 3 panels, byte-identical to the sheet path
+  assert.throws(() => composeTriptych([panel(1), panel(2)]), /exactly 3 panels/);
+  const t = composeTriptych([1, 2, 3].map(panel));
+  const s = composeSheet([1, 2, 3].map(panel));
+  assert.deepEqual([t.w, t.h], [s.w, s.h]);
+  assert.deepEqual(Buffer.from(t.data), Buffer.from(s.data));
+});
+
+test("composeSheet rejects empty and mismatched panels", async () => {
+  const { composeSheet } = await import("./resemblance.mjs");
+  assert.throws(() => composeSheet([]), /at least 1 panel/);
+  assert.throws(() => composeSheet([{ w: 2, h: 2, data: new Uint8Array(16) }, { w: 3, h: 2, data: new Uint8Array(24) }]),
+    /share dimensions/);
+});
