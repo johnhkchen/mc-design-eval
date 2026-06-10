@@ -21,6 +21,14 @@
 // The image-row → voxel-y map is calibrated on the ROBUST extents of both axes — rows/layers carrying at
 // least EXTENT_WIDTH_FLOOR of the maximum width/mass — the same statistic on both sides, so a narrow
 // feature rising past the ridge (the chimney) is excluded from BOTH and cannot shear the bands.
+// Within those extents the map is ANCHORED at the WIDEST-SILHOUETTE line when it is a distinctive
+// feature (a narrow plateau): the eave/roof-overhang is the widest line of both the concept render and
+// the voxel build (measured: cottage max layer = y14 = upperTop, max image row a single line; gatehouse
+// max layer = y18 = upperTop), so pinning max-width-row ↔ max-count-layer and mapping piecewise-linearly
+// above/below it stops the 3/4 view's vertical foreshortening from leaking roof rows below the geometric
+// eave (the defect a plain linear map showed on the real cottage: spruce dominating wall layers 7..10).
+// When either plateau is BROAD (≥ ANCHOR_MAX_PLATEAU of its extent — a flat-sided synthetic, a tower),
+// the "widest line" is not a feature and the map stays plain linear.
 //
 // The walls/roof split stays GEOMETRIC (upperTop from structuralZones): only layers below it produce
 // wall bands; everything mapping at or above it aggregates into ONE roof histogram that supplies the
@@ -60,6 +68,11 @@ export const MIN_PROFILE_CELLS = 200;
 /** Both robust extents must span at least this many rows/layers to calibrate a linear map. */
 export const MIN_EXTENT_LAYERS = 4;
 
+/** The widest-silhouette anchor engages only when its plateau is NARROW — a distinctive feature (an
+ *  eave overhang), not a flat-sided mass. Plateaus wider than this fraction of the extent fall back
+ *  to the plain linear map. */
+export const ANCHOR_MAX_PLATEAU = 0.25;
+
 /** placementRules naming linear/local design features (studs, quoins, chimney shaft, door leaves) that
  *  cross height bands and are by construction never row-dominant — always carried as secondaries so the
  *  fill PRESERVES their runs. */
@@ -73,6 +86,7 @@ const DEFAULTS = Object.freeze({
   minDominantShare: MIN_DOMINANT_SHARE,
   minProfileCells: MIN_PROFILE_CELLS,
   minExtentLayers: MIN_EXTENT_LAYERS,
+  anchorMaxPlateau: ANCHOR_MAX_PLATEAU,
   crossBandRules: CROSS_BAND_RULES,
 });
 
@@ -128,21 +142,52 @@ export function robustExtent(widths, floor = EXTENT_WIDTH_FLOOR) {
 }
 
 /**
- * Linear map of the image rows inside `rowExt` onto voxel layers [yLo..yHi] (row order is top-first, so
- * rowExt.lo → yHi and rowExt.hi → yLo), accumulating each row's histogram into its layer.
- * Rows outside the robust extent (silhouette spurs) are skipped.
+ * The widest-silhouette anchor: the midpoint of the maximal-width plateau inside `ext`, or null when
+ * the plateau is too broad to be a feature (≥ `maxPlateauFraction` of the extent) — see module header.
+ * @param {number[]} widths
+ * @param {{lo:number, hi:number}} ext
+ * @param {number} [maxPlateauFraction]
+ * @returns {number|null} a (possibly fractional) index inside the extent
+ */
+export function anchorIndex(widths, ext, maxPlateauFraction = ANCHOR_MAX_PLATEAU) {
+  let max = -Infinity;
+  for (let i = ext.lo; i <= ext.hi; i++) if (widths[i] > max) max = widths[i];
+  const at = [];
+  for (let i = ext.lo; i <= ext.hi; i++) if (widths[i] === max) at.push(i);
+  const extent = ext.hi - ext.lo + 1;
+  if (at.length / extent >= maxPlateauFraction) return null;
+  return (at[0] + at[at.length - 1]) / 2;
+}
+
+/**
+ * Map the image rows inside `rowExt` onto voxel layers [yLo..yHi] (row order is top-first, so
+ * rowExt.lo → yHi and rowExt.hi → yLo), accumulating each row's histogram into its layer. With
+ * `anchors` ({row, y} — from {@link anchorIndex} on each axis) the map is PIECEWISE linear, pinned at
+ * the shared widest-silhouette feature; without, plain linear. Rows outside the robust extent
+ * (silhouette spurs) are skipped.
  * @param {{filled:number, counts:Record<string,number>}[]} rows  from rowProfile
  * @param {{lo:number, hi:number}} rowExt
  * @param {{yLo:number, yHi:number}} layerExt
+ * @param {{row:number, y:number}|null} [anchors]
  * @returns {Map<number, {filled:number, counts:Record<string,number>}>} keyed by voxel y
  */
-export function mapRowsToLayers(rows, rowExt, layerExt) {
+export function mapRowsToLayers(rows, rowExt, layerExt, anchors = null) {
   const byY = new Map();
-  const rowSpan = Math.max(1, rowExt.hi - rowExt.lo);
-  const ySpan = layerExt.yHi - layerExt.yLo;
+  const yAt = (i) => {
+    if (anchors) {
+      const { row: ar, y: ay } = anchors;
+      if (i <= ar) {
+        const span = Math.max(1e-9, ar - rowExt.lo);
+        return layerExt.yHi - ((i - rowExt.lo) / span) * (layerExt.yHi - ay);
+      }
+      const span = Math.max(1e-9, rowExt.hi - ar);
+      return ay - ((i - ar) / span) * (ay - layerExt.yLo);
+    }
+    const span = Math.max(1, rowExt.hi - rowExt.lo);
+    return layerExt.yHi - ((i - rowExt.lo) / span) * (layerExt.yHi - layerExt.yLo);
+  };
   for (let i = rowExt.lo; i <= rowExt.hi; i++) {
-    const t = (i - rowExt.lo) / rowSpan;
-    const y = Math.round(layerExt.yHi - t * ySpan);
+    const y = Math.round(yAt(i));
     let acc = byY.get(y);
     if (!acc) byY.set(y, (acc = { filled: 0, counts: {} }));
     const row = rows[i];
@@ -165,22 +210,36 @@ function sumCounts(into, from) {
   for (const [k, c] of Object.entries(from)) into[k] = (into[k] || 0) + c;
 }
 
+/** Restrict a histogram to a candidate set (null set = no restriction). */
+function filterCounts(counts, set) {
+  if (!set) return counts;
+  const out = {};
+  for (const [k, c] of Object.entries(counts)) if (set.has(k)) out[k] = c;
+  return out;
+}
+
 /**
- * Segment voxel layers [yLo..yHi] into bands of consecutive layers sharing a dominant block. A layer
- * with no mapped rows inherits the previous layer's dominant (leading empties take the first real one).
+ * Segment voxel layers [yLo..yHi] into bands of consecutive layers sharing a dominant block. With
+ * `fieldBlocks` (the map's `placementRule:"walls"` blocks) the per-layer dominant is decided among
+ * FIELD materials only — a 3/4-view concept stacks roof slopes and feature trim (studs, shadows,
+ * shutters) into the same image rows as the wall fields, and a band's dominant must be a field, never
+ * a feature or another zone's material (measured on the real cottage: every wall layer was
+ * log/spruce-dominant over ALL cells, plaster/stone-dominant over FIELD cells). `share` is then the
+ * dominant's share OF THE FIELD cells; the full `counts` are kept for secondaries. A layer with no
+ * (field) cells inherits the previous layer's dominant (leading empties take the first real one).
  * Bands shorter than `minBandHeight` merge into a same-dominant neighbour when one exists, else the
  * taller neighbour (adopting its dominant).
  * @param {Map<number,{filled:number,counts:Record<string,number>}>} byY  from mapRowsToLayers
- * @param {{yLo:number, yHi:number, minBandHeight?:number}} opts
+ * @param {{yLo:number, yHi:number, minBandHeight?:number, fieldBlocks?:Set<string>|null}} opts
  * @returns {{yRange:[number,number], dominant:string, share:number, filled:number,
  *            counts:Record<string,number>}[]} bottom-up; empty array when no layer has data
  */
-export function segmentLayerBands(byY, { yLo, yHi, minBandHeight = MIN_BAND_HEIGHT }) {
-  // per-layer dominants with inherit-forward (then backward for leading gaps)
+export function segmentLayerBands(byY, { yLo, yHi, minBandHeight = MIN_BAND_HEIGHT, fieldBlocks = null }) {
+  // per-layer dominants over the FIELD cells, with inherit-forward (then backward for leading gaps)
   const doms = [];
   for (let y = yLo; y <= yHi; y++) {
     const h = byY.get(y);
-    doms.push(h && h.filled > 0 ? dominantOf(h.counts) : null);
+    doms.push(h && h.filled > 0 ? dominantOf(filterCounts(h.counts, fieldBlocks)) : null);
   }
   let firstReal = doms.find((d) => d !== null) ?? null;
   if (firstReal === null) return [];
@@ -230,7 +289,11 @@ export function segmentLayerBands(byY, { yLo, yHi, minBandHeight = MIN_BAND_HEIG
       }
     }
   }
-  for (const b of bands) b.share = b.filled ? round3((b.counts[b.dominant] || 0) / b.filled) : 0;
+  for (const b of bands) {
+    const field = filterCounts(b.counts, fieldBlocks);
+    const fieldFilled = Object.values(field).reduce((a, c) => a + c, 0);
+    b.share = fieldFilled ? round3((field[b.dominant] || 0) / fieldFilled) : 0;
+  }
   return bands;
 }
 
@@ -334,13 +397,31 @@ export function extractConceptZoneMap(input, opts = {}) {
   const layerExt = { yLo: layerCounts.yMin + layerExtIdx.lo, yHi: layerCounts.yMin + layerExtIdx.hi };
   if (layerExt.yHi - layerExt.yLo + 1 < o.minExtentLayers) return refuse("extent-too-short");
 
-  const byY = mapRowsToLayers(profile.rows, rowExt, layerExt);
+  // pin the map at the shared widest-silhouette feature (the eave overhang) when both axes show one
+  const rowAnchor = anchorIndex(profile.rows.map((r) => r.filled), rowExt, o.anchorMaxPlateau);
+  const layerAnchorIdx = anchorIndex(layerCounts.counts, layerExtIdx, o.anchorMaxPlateau);
+  const anchors = rowAnchor != null && layerAnchorIdx != null
+    ? { row: rowAnchor, y: layerCounts.yMin + layerAnchorIdx }
+    : null;
+  params.anchored = anchors != null;
+  if (anchors) params.anchor = { row: anchors.row, y: anchors.y };
+  const byY = mapRowsToLayers(profile.rows, rowExt, layerExt, anchors);
+
+  // the placementRule classes: FIELD blocks may dominate wall bands, ROOF blocks the roof — features
+  // (trim/corners/openings) never dominate anything (they become secondaries). Maps without the rule
+  // annotations leave the class open (null = unrestricted).
+  const fieldList = materialMap.map.filter((r) => r.placementRule === "walls").map((r) => bare(r.block));
+  const fieldBlocks = fieldList.length ? new Set(fieldList) : null;
+  const roofList = materialMap.map.filter((r) => r.placementRule === "roof").map((r) => bare(r.block));
+  const roofBlocks = roofList.length ? new Set(roofList) : null;
 
   // walls: below the geometric eave only
   const wallYHi = Math.min(layerExt.yHi, upperTop - 1);
   if (wallYHi < layerExt.yLo) return refuse("extent-too-short");
-  let bands = segmentLayerBands(byY, { yLo: layerExt.yLo, yHi: wallYHi, minBandHeight: o.minBandHeight });
-  if (!bands.length) return refuse("too-few-cells");
+  let bands = segmentLayerBands(byY, {
+    yLo: layerExt.yLo, yHi: wallYHi, minBandHeight: o.minBandHeight, fieldBlocks,
+  });
+  if (!bands.length) return refuse("no-field-cells");
   bands = snapBands(bands, floorLines ?? [], o.snapTolerance);
   // tile the FULL wall extent: the build's real bottom and the eave (zoneOf must be total)
   bands[0].yRange[0] = Math.min(bands[0].yRange[0], layerCounts.yMin);
@@ -352,8 +433,14 @@ export function extractConceptZoneMap(input, opts = {}) {
     if (y >= upperTop) { roofAgg.filled += h.filled; sumCounts(roofAgg.counts, h.counts); }
   }
   if (roofAgg.filled === 0) return refuse("weak-dominant:roof");
-  const roofDominant = dominantOf(roofAgg.counts);
-  const roofShare = round3((roofAgg.counts[roofDominant] || 0) / roofAgg.filled);
+  // the roof dominant is decided among ROOF-class blocks (same principle as the wall field)
+  const roofClassCounts = roofBlocks
+    ? Object.fromEntries(Object.entries(roofAgg.counts).filter(([k]) => roofBlocks.has(k)))
+    : roofAgg.counts;
+  const roofClassFilled = Object.values(roofClassCounts).reduce((a, c) => a + c, 0);
+  if (roofClassFilled === 0) return refuse("weak-dominant:roof");
+  const roofDominant = dominantOf(roofClassCounts);
+  const roofShare = round3((roofClassCounts[roofDominant] || 0) / roofClassFilled);
   if (roofShare < o.minDominantShare) return refuse("weak-dominant:roof");
 
   // readability + roles

@@ -1,0 +1,188 @@
+{
+  "schema": "zone-map/v1",
+  "subject": "cottage",
+  "inputs": {
+    "concept": "runs/014-vConcept-a-cottage/concept.png",
+    "map": "material-map/cottage.json",
+    "build": "concept-materials/cottage/after-artifact.json"
+  },
+  "source": "concept",
+  "derived": {
+    "bands": [
+      {
+        "name": "band0",
+        "yRange": [
+          0,
+          6
+        ],
+        "dominantBlock": "stone_bricks",
+        "dominantRole": "load-bearing ground-floor wall field",
+        "share": 0.919,
+        "secondaries": [
+          {
+            "block": "dark_oak_log",
+            "role": "half-timbering frame — vertical studs, corner posts, eaves beams",
+            "share": 0.418
+          },
+          {
+            "block": "spruce_planks",
+            "role": "main roof field — plank courses",
+            "share": 0.15
+          },
+          {
+            "block": "dark_oak_planks",
+            "role": "roof eaves, verge & rake fascia (darker plank edge)",
+            "share": 0.119
+          },
+          {
+            "block": "cobblestone",
+            "role": "corner quoins, plinth course & chimney shaft (rough grey stone)",
+            "share": 0.002
+          },
+          {
+            "block": "bricks",
+            "role": "chimney cap",
+            "share": 0.033
+          }
+        ]
+      },
+      {
+        "name": "band1",
+        "yRange": [
+          7,
+          13
+        ],
+        "dominantBlock": "white_terracotta",
+        "dominantRole": "upper-storey plaster infill between the timbers",
+        "share": 1,
+        "secondaries": [
+          {
+            "block": "spruce_planks",
+            "role": "main roof field — plank courses",
+            "share": 0.415
+          },
+          {
+            "block": "dark_oak_planks",
+            "role": "roof eaves, verge & rake fascia (darker plank edge)",
+            "share": 0.196
+          },
+          {
+            "block": "dark_oak_log",
+            "role": "half-timbering frame — vertical studs, corner posts, eaves beams",
+            "share": 0.201
+          },
+          {
+            "block": "cobblestone",
+            "role": "corner quoins, plinth course & chimney shaft (rough grey stone)",
+            "share": 0.003
+          },
+          {
+            "block": "bricks",
+            "role": "chimney cap",
+            "share": 0.002
+          }
+        ]
+      }
+    ],
+    "roof": {
+      "dominantBlock": "dark_oak_planks",
+      "dominantRole": "roof eaves, verge & rake fascia (darker plank edge)",
+      "share": 0.764,
+      "secondaries": [
+        {
+          "block": "spruce_planks",
+          "role": "main roof field — plank courses",
+          "share": 0.135
+        },
+        {
+          "block": "dark_oak_log",
+          "role": "half-timbering frame — vertical studs, corner posts, eaves beams",
+          "share": 0.364
+        },
+        {
+          "block": "cobblestone",
+          "role": "corner quoins, plinth course & chimney shaft (rough grey stone)",
+          "share": 0.003
+        },
+        {
+          "block": "bricks",
+          "role": "chimney cap",
+          "share": 0
+        }
+      ]
+    }
+  },
+  "prior": {
+    "policy": {
+      "base": {
+        "dominant": "stone_bricks",
+        "preserve": [
+          "cobblestone",
+          "dark_oak_log"
+        ],
+        "splat": [
+          "cobblestone",
+          "dark_oak_log"
+        ]
+      },
+      "upper": {
+        "dominant": "white_terracotta",
+        "preserve": [
+          "dark_oak_log",
+          "spruce_planks",
+          "dark_oak_planks"
+        ],
+        "splat": [
+          "dark_oak_log"
+        ]
+      },
+      "roof": {
+        "dominant": "spruce_planks",
+        "preserve": [
+          "dark_oak_planks",
+          "cobblestone",
+          "bricks",
+          "dark_oak_log"
+        ],
+        "splat": [
+          "dark_oak_planks",
+          "cobblestone",
+          "bricks"
+        ]
+      }
+    },
+    "storeyDivide": 7,
+    "upperTop": 14
+  },
+  "diff": {
+    "wallDiffs": [],
+    "roofDominant": {
+      "prior": "spruce_planks",
+      "derived": "dark_oak_planks",
+      "changed": true
+    }
+  },
+  "params": {
+    "extentWidthFloor": 0.25,
+    "minBandHeight": 2,
+    "snapTolerance": 2,
+    "secondaryMinShare": 0.05,
+    "minDominantShare": 0.3,
+    "minProfileCells": 200,
+    "minExtentLayers": 4,
+    "anchorMaxPlateau": 0.25,
+    "crossBandRules": [
+      "trim",
+      "corners-edges",
+      "openings"
+    ],
+    "n": 96,
+    "m": 52,
+    "anchored": true,
+    "anchor": {
+      "row": 23,
+      "y": 14
+    }
+  },
+  "note": "bands/roof are NAMED (pre-substitution) block space; durable-skin asserts agreement with `derived` on every run (divergence throws). The prior is the recorded fallback + diff baseline."
+}

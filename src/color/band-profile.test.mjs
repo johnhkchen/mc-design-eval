@@ -282,20 +282,53 @@ test("extent-too-short: a silhouette under MIN_EXTENT_LAYERS wide rows refuses",
   assert.deepEqual([zm.readable, zm.reason], [false, "extent-too-short"]);
 });
 
-test("weak-dominant: a band that is an unreadable mix refuses with the band named", () => {
+test("weak-dominant: a band whose FIELD is an unreadable mix refuses with the band named", () => {
+  // four field (walls-rule) materials at 25% each — no readable wall field anywhere
+  const fourFieldMap = {
+    map: ["stone_bricks", "white_terracotta", "cobblestone", "bricks"]
+      .map((b, i) => ({ role: `field ${i}`, block: `minecraft:${b}`, placementRule: "walls" }))
+      .concat([{ role: "roof field", block: "minecraft:spruce_planks", placementRule: "roof" }]),
+  };
   const grid = Array.from({ length: 48 }, () => new Array(32).fill(null));
-  const four = ["stone_bricks", "white_terracotta", "dark_oak_log", "spruce_planks"];
-  for (let y = 8; y <= 47; y++) for (let x = 0; x < 32; x++) grid[y][x] = four[(x + y) % 4]; // 25% each
-  const zm = extractConceptZoneMap({ gridResult: { grid, n: 32, m: 48 }, ...GEO, materialMap: MAT_MAP });
+  const four = ["stone_bricks", "white_terracotta", "cobblestone", "bricks"];
+  for (let y = 8; y <= 47; y++) for (let x = 0; x < 32; x++) grid[y][x] = y <= 15 ? "spruce_planks" : four[(x + y) % 4];
+  const zm = extractConceptZoneMap({ gridResult: { grid, n: 32, m: 48 }, ...GEO, materialMap: fourFieldMap });
   assert.equal(zm.readable, false);
   assert.match(zm.reason, /^weak-dominant:/);
 });
 
-test("unmapped-dominant: a dominant block with no material-map row refuses by name", () => {
+test("field-class dominance: feature/roof cells outnumbering the field cannot flip a wall band", () => {
+  // every wall row: 40% dark_oak_log (trim) + 35% spruce_planks (roof leak) + 25% white_terracotta —
+  // over ALL cells log wins; over FIELD cells the band is plaster (the real-cottage failure mode)
+  const grid = Array.from({ length: 48 }, () => new Array(32).fill(null));
+  for (let y = 8; y <= 15; y++) for (let x = 4; x <= 27; x++) grid[y][x] = "spruce_planks"; // roof rows
+  for (let y = 16; y <= 47; y++) {
+    for (let x = 0; x < 32; x++) {
+      grid[y][x] = x < 13 ? "dark_oak_log" : x < 24 ? "spruce_planks" : "white_terracotta";
+    }
+  }
+  const zm = extractConceptZoneMap({ gridResult: { grid, n: 32, m: 48 }, ...GEO, materialMap: MAT_MAP });
+  assert.equal(zm.readable, true);
+  assert.equal(zm.bands.length, 1);
+  assert.equal(zm.bands[0].dominantBlock, "white_terracotta");
+  assert.ok(zm.bands[0].share >= 0.99); // share is of the FIELD cells, not of all cells
+});
+
+test("unmapped-dominant: a rule-less map with no row for the dominant refuses by name", () => {
+  const grid = Array.from({ length: 48 }, () => new Array(32).fill(null));
+  for (let y = 8; y <= 47; y++) for (let x = 0; x < 32; x++) grid[y][x] = "oak_planks";
+  // no placementRule annotations → the field/roof classes are unrestricted, so the failure surfaces
+  // at role resolution: the dominant has no map row
+  const noRuleMap = { map: [{ role: "mystery", block: "minecraft:bricks" }] };
+  const zm = extractConceptZoneMap({ gridResult: { grid, n: 32, m: 48 }, ...GEO, materialMap: noRuleMap });
+  assert.deepEqual([zm.readable, zm.reason], [false, "unmapped-dominant:oak_planks"]);
+});
+
+test("no-field-cells: a concept showing none of the map's wall-field materials refuses", () => {
   const grid = Array.from({ length: 48 }, () => new Array(32).fill(null));
   for (let y = 8; y <= 47; y++) for (let x = 0; x < 32; x++) grid[y][x] = "oak_planks";
   const zm = extractConceptZoneMap({ gridResult: { grid, n: 32, m: 48 }, ...GEO, materialMap: MAT_MAP });
-  assert.deepEqual([zm.readable, zm.reason], [false, "unmapped-dominant:oak_planks"]);
+  assert.deepEqual([zm.readable, zm.reason], [false, "no-field-cells"]);
 });
 
 test("fallback results still report the params used (recorded, not silent)", () => {

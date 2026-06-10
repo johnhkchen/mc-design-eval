@@ -112,3 +112,7 @@ benchmarks/sculpture/durable-skin/**/*.png
 # durable record is shell-integrity/<subj>.{json,md} + shell-integrity/<subj>/artifact.json; the
 # committed evidence frames live in pr/assets/frames/shell-*.png.
 benchmarks/sculpture/shell-integrity/**/*.png
+
+# T-092-01 zone-map renders — regenerable via npm run zone:map. The committed record is
+# zone-map/<subj>.{json,md}; the committed evidence frames live in pr/assets/frames/zonemap-*.png.
+benchmarks/sculpture/zone-map/**/*.png

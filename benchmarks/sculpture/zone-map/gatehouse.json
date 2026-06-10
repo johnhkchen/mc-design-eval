@@ -1,0 +1,137 @@
+{
+  "schema": "zone-map/v1",
+  "subject": "gatehouse",
+  "inputs": {
+    "concept": "runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+    "map": "material-map/gatehouse.json",
+    "build": "concept-materials/gatehouse/after-artifact.json"
+  },
+  "source": "concept",
+  "derived": {
+    "bands": [
+      {
+        "name": "band0",
+        "yRange": [
+          0,
+          17
+        ],
+        "dominantBlock": "stone_bricks",
+        "dominantRole": "structural walls (dominant body)",
+        "share": 1,
+        "secondaries": [
+          {
+            "block": "dark_oak_log",
+            "role": "arch voussoir ring (warm accent)",
+            "share": 0.129
+          },
+          {
+            "block": "deepslate_tiles",
+            "role": "roof mass",
+            "share": 0.564
+          },
+          {
+            "block": "cobblestone",
+            "role": "corner buttresses + rough string-course banding",
+            "share": 0
+          },
+          {
+            "block": "dark_oak_planks",
+            "role": "gate door / passage leaf",
+            "share": 0.01
+          }
+        ]
+      }
+    ],
+    "roof": {
+      "dominantBlock": "deepslate_tiles",
+      "dominantRole": "roof mass",
+      "share": 1,
+      "secondaries": [
+        {
+          "block": "stone_bricks",
+          "role": "structural walls (dominant body)",
+          "share": 0.31
+        },
+        {
+          "block": "cobblestone",
+          "role": "corner buttresses + rough string-course banding",
+          "share": 0.003
+        },
+        {
+          "block": "dark_oak_log",
+          "role": "arch voussoir ring (warm accent)",
+          "share": 0
+        },
+        {
+          "block": "dark_oak_planks",
+          "role": "gate door / passage leaf",
+          "share": 0
+        }
+      ]
+    }
+  },
+  "prior": {
+    "policy": {
+      "base": {
+        "dominant": "stone_bricks",
+        "preserve": [
+          "cobblestone",
+          "dark_oak_log",
+          "dark_oak_planks"
+        ],
+        "splat": [
+          "cobblestone",
+          "dark_oak_log",
+          "dark_oak_planks"
+        ]
+      },
+      "upper": {
+        "dominant": "stone_bricks",
+        "preserve": [
+          "cobblestone"
+        ],
+        "splat": [
+          "cobblestone"
+        ]
+      },
+      "roof": {
+        "dominant": "deepslate_tiles",
+        "preserve": [],
+        "splat": []
+      }
+    },
+    "storeyDivide": 17,
+    "upperTop": 18
+  },
+  "diff": {
+    "wallDiffs": [],
+    "roofDominant": {
+      "prior": "deepslate_tiles",
+      "derived": "deepslate_tiles",
+      "changed": false
+    }
+  },
+  "params": {
+    "extentWidthFloor": 0.25,
+    "minBandHeight": 2,
+    "snapTolerance": 2,
+    "secondaryMinShare": 0.05,
+    "minDominantShare": 0.3,
+    "minProfileCells": 200,
+    "minExtentLayers": 4,
+    "anchorMaxPlateau": 0.25,
+    "crossBandRules": [
+      "trim",
+      "corners-edges",
+      "openings"
+    ],
+    "n": 96,
+    "m": 52,
+    "anchored": true,
+    "anchor": {
+      "row": 19.5,
+      "y": 18
+    }
+  },
+  "note": "bands/roof are NAMED (pre-substitution) block space; durable-skin asserts agreement with `derived` on every run (divergence throws). The prior is the recorded fallback + diff baseline."
+}
