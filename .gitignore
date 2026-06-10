@@ -107,3 +107,8 @@ benchmarks/sculpture/surface-pattern/**/*.png
 # The durable record is durable-skin/<subj>.{json,md} + durable-skin/<subj>/artifact.json; the
 # committed evidence frames live in pr/assets/frames/durable-*.png.
 benchmarks/sculpture/durable-skin/**/*.png
+
+# T-091-01 shell-integrity renders — regenerable via npm run shell:cottage / shell:gatehouse. The
+# durable record is shell-integrity/<subj>.{json,md} + shell-integrity/<subj>/artifact.json; the
+# committed evidence frames live in pr/assets/frames/shell-*.png.
+benchmarks/sculpture/shell-integrity/**/*.png

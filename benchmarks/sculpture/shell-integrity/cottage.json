@@ -1,0 +1,293 @@
+{
+  "schema": "shell-integrity/v1",
+  "subject": "cottage",
+  "inputs": {
+    "build": "spray-paint/cottage/artifact.json"
+  },
+  "expect": {
+    "components": 23,
+    "strippedCells": 126,
+    "keptComponents": 1
+  },
+  "strip": {
+    "components": 23,
+    "keptComponents": 1,
+    "strippedCells": 126,
+    "kept": [
+      {
+        "size": 6312,
+        "minY": 0,
+        "grounded": true,
+        "largest": true
+      }
+    ],
+    "stripped": [
+      {
+        "size": 54,
+        "minY": 2
+      },
+      {
+        "size": 3,
+        "minY": 2
+      },
+      {
+        "size": 20,
+        "minY": 2
+      },
+      {
+        "size": 2,
+        "minY": 3
+      },
+      {
+        "size": 2,
+        "minY": 4
+      },
+      {
+        "size": 1,
+        "minY": 6
+      },
+      {
+        "size": 4,
+        "minY": 6
+      },
+      {
+        "size": 1,
+        "minY": 6
+      },
+      {
+        "size": 1,
+        "minY": 6
+      },
+      {
+        "size": 2,
+        "minY": 9
+      },
+      {
+        "size": 4,
+        "minY": 10
+      },
+      {
+        "size": 1,
+        "minY": 11
+      },
+      {
+        "size": 5,
+        "minY": 14
+      },
+      {
+        "size": 1,
+        "minY": 18
+      },
+      {
+        "size": 1,
+        "minY": 19
+      },
+      {
+        "size": 1,
+        "minY": 19
+      },
+      {
+        "size": 1,
+        "minY": 19
+      },
+      {
+        "size": 1,
+        "minY": 21
+      },
+      {
+        "size": 7,
+        "minY": 22
+      },
+      {
+        "size": 1,
+        "minY": 22
+      },
+      {
+        "size": 7,
+        "minY": 22
+      },
+      {
+        "size": 6,
+        "minY": 25
+      }
+    ],
+    "note": "keep the largest 6-connected component + GROUNDED components (a standing structure — the gatehouse's inner passage — is not debris; floating is what makes debris debris). Kept exceptions are declared above. Deletion has no artifact op, so the strip REBUILDS the artifact in canonical voxel order."
+  },
+  "zones": {
+    "census": {
+      "base": {
+        "dominant": "stone_bricks"
+      },
+      "upper": {
+        "dominant": "white_terracotta"
+      },
+      "roof": {
+        "dominant": "spruce_planks"
+      }
+    },
+    "storeyDivide": 7,
+    "upperTop": 14,
+    "note": "dominants are the build's own exposure-shell majority per structural zone — no E-21 map, no subject constants (E-25 Rule 3)."
+  },
+  "openings": {
+    "regions": [
+      {
+        "kind": "window",
+        "dir": "+x",
+        "min": [
+          -13,
+          2,
+          2
+        ],
+        "max": [
+          12,
+          3,
+          2
+        ]
+      },
+      {
+        "kind": "window",
+        "dir": "-x",
+        "min": [
+          -13,
+          2,
+          2
+        ],
+        "max": [
+          12,
+          3,
+          2
+        ]
+      }
+    ],
+    "note": "the allow-list: the build's declared through-openings (structural read `openings` — the arch is the door), back-projected to world AABBs. The concept-image opening reader is E-26 kit scope; the raw build's own openings are today's data-driven equivalent."
+  },
+  "voids": {
+    "minDepth": 3,
+    "filled": 1126,
+    "byDir": {
+      "+x": {
+        "basinCells": 26,
+        "filled": 455,
+        "skippedAllowed": 0,
+        "skippedNoZone": 0
+      },
+      "-x": {
+        "basinCells": 20,
+        "filled": 199,
+        "skippedAllowed": 0,
+        "skippedNoZone": 0
+      },
+      "+z": {
+        "basinCells": 52,
+        "filled": 368,
+        "skippedAllowed": 10,
+        "skippedNoZone": 0
+      },
+      "-z": {
+        "basinCells": 23,
+        "filled": 82,
+        "skippedAllowed": 0,
+        "skippedNoZone": 0
+      },
+      "+y": {
+        "basinCells": 9,
+        "filled": 22,
+        "skippedAllowed": 0,
+        "skippedNoZone": 0
+      }
+    },
+    "note": "a cavity is a BASIN in a face's depth field (priority-flood spill levels — the same hydrology as the T-087 course fill, over -depth): pockets ≥ minDepth below their rim are missing mass, filled flush in the owning zone's dominant; depth-1..2 facade relief drains or sits above the floor and is kept; declared openings are never filled."
+  },
+  "closure": {
+    "before": {
+      "reached": 2483,
+      "interiorCells": 2490,
+      "byDirection": {
+        "+x": 594,
+        "-x": 248,
+        "+y": 78,
+        "-y": 0,
+        "+z": 557,
+        "-z": 102
+      }
+    },
+    "plug": {
+      "cells": 338,
+      "iterations": 1,
+      "maxIterations": 8
+    },
+    "final": {
+      "closed": true,
+      "interiorCells": 2152,
+      "reached": 0,
+      "byDirection": {
+        "+x": 0,
+        "-x": 0,
+        "+y": 0,
+        "-y": 0,
+        "+z": 0,
+        "-z": 0
+      }
+    },
+    "note": "GROUND-SOLID six-direction watertightness of the STANDING build (flood seeds from sky + sides; a -y ray exiting the bbox rests on terrain); declared openings are honorary skin; breaches attributed to the shaft's escape direction(s). plugClosure THROWS rather than returning unclosed — the gate cannot be passed by an unclosed shell."
+  },
+  "reproducible": {
+    "doubleRun": true,
+    "sha256": "3e07184693f00bb6d290d4255b30e9a8c30f488bf000f21c4a183ac63ec4fa6b",
+    "determinism": "no LLM, no GL on the path — every stage is a pure function of the committed input artifact. Two in-process executions byte-matched."
+  },
+  "placements": {
+    "input": 9535,
+    "stripped": 6312,
+    "voidFills": 1126,
+    "plugs": 338,
+    "final": 7776
+  },
+  "renders": [
+    {
+      "when": "before",
+      "angle": "front",
+      "path": "benchmarks/sculpture/shell-integrity/cottage/view-front-before.png"
+    },
+    {
+      "when": "after",
+      "angle": "front",
+      "path": "benchmarks/sculpture/shell-integrity/cottage/view-front-after.png"
+    },
+    {
+      "when": "before",
+      "angle": "+x-z",
+      "path": "benchmarks/sculpture/shell-integrity/cottage/view-oblique135-before.png"
+    },
+    {
+      "when": "after",
+      "angle": "+x-z",
+      "path": "benchmarks/sculpture/shell-integrity/cottage/view-oblique135-after.png"
+    },
+    {
+      "when": "before",
+      "angle": "-x-z",
+      "path": "benchmarks/sculpture/shell-integrity/cottage/view-oblique225-before.png"
+    },
+    {
+      "when": "after",
+      "angle": "-x-z",
+      "path": "benchmarks/sculpture/shell-integrity/cottage/view-oblique225-after.png"
+    },
+    {
+      "when": "before",
+      "angle": "top",
+      "path": "benchmarks/sculpture/shell-integrity/cottage/view-top-before.png"
+    },
+    {
+      "when": "after",
+      "angle": "top",
+      "path": "benchmarks/sculpture/shell-integrity/cottage/view-top-after.png"
+    }
+  ],
+  "frames": [
+    "pr/assets/frames/shell-cottage-before.png",
+    "pr/assets/frames/shell-cottage-after.png"
+  ]
+}

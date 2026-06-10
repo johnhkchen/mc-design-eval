@@ -1,0 +1,256 @@
+{
+  "schema": "shell-integrity/v1",
+  "subject": "gatehouse",
+  "inputs": {
+    "build": "building/best/artifact.json"
+  },
+  "expect": null,
+  "strip": {
+    "components": 1,
+    "keptComponents": 1,
+    "strippedCells": 0,
+    "kept": [
+      {
+        "size": 57202,
+        "minY": 0,
+        "grounded": true,
+        "largest": true
+      }
+    ],
+    "stripped": [],
+    "note": "keep the largest 6-connected component + GROUNDED components (a standing structure — the gatehouse's inner passage — is not debris; floating is what makes debris debris). Kept exceptions are declared above. Deletion has no artifact op, so the strip REBUILDS the artifact in canonical voxel order."
+  },
+  "zones": {
+    "census": {
+      "base": {
+        "dominant": "deepslate_tiles"
+      },
+      "upper": {
+        "dominant": "stone_bricks"
+      },
+      "roof": {
+        "dominant": "stone_bricks"
+      }
+    },
+    "storeyDivide": 33,
+    "upperTop": 37,
+    "note": "dominants are the build's own exposure-shell majority per structural zone — no E-21 map, no subject constants (E-25 Rule 3)."
+  },
+  "openings": {
+    "regions": [
+      {
+        "kind": "window",
+        "dir": "+x",
+        "min": [
+          -27,
+          37,
+          7
+        ],
+        "max": [
+          26,
+          37,
+          7
+        ]
+      },
+      {
+        "kind": "door",
+        "dir": "+x",
+        "min": [
+          -27,
+          0,
+          -8
+        ],
+        "max": [
+          26,
+          26,
+          7
+        ]
+      },
+      {
+        "kind": "window",
+        "dir": "-x",
+        "min": [
+          -27,
+          37,
+          7
+        ],
+        "max": [
+          26,
+          37,
+          7
+        ]
+      },
+      {
+        "kind": "door",
+        "dir": "-x",
+        "min": [
+          -27,
+          0,
+          -8
+        ],
+        "max": [
+          26,
+          26,
+          7
+        ]
+      },
+      {
+        "kind": "window",
+        "dir": "+z",
+        "min": [
+          -19,
+          56,
+          -27
+        ],
+        "max": [
+          19,
+          60,
+          26
+        ]
+      },
+      {
+        "kind": "window",
+        "dir": "-z",
+        "min": [
+          -19,
+          56,
+          -27
+        ],
+        "max": [
+          19,
+          60,
+          26
+        ]
+      }
+    ],
+    "note": "the allow-list: the build's declared through-openings (structural read `openings` — the arch is the door), back-projected to world AABBs. The concept-image opening reader is E-26 kit scope; the raw build's own openings are today's data-driven equivalent."
+  },
+  "voids": {
+    "minDepth": 3,
+    "filled": 11071,
+    "byDir": {
+      "+x": {
+        "basinCells": 386,
+        "filled": 1930,
+        "skippedAllowed": 0,
+        "skippedNoZone": 0
+      },
+      "-x": {
+        "basinCells": 83,
+        "filled": 1735,
+        "skippedAllowed": 0,
+        "skippedNoZone": 0
+      },
+      "+z": {
+        "basinCells": 266,
+        "filled": 1755,
+        "skippedAllowed": 0,
+        "skippedNoZone": 0
+      },
+      "-z": {
+        "basinCells": 259,
+        "filled": 1195,
+        "skippedAllowed": 0,
+        "skippedNoZone": 0
+      },
+      "+y": {
+        "basinCells": 659,
+        "filled": 4456,
+        "skippedAllowed": 0,
+        "skippedNoZone": 0
+      }
+    },
+    "note": "a cavity is a BASIN in a face's depth field (priority-flood spill levels — the same hydrology as the T-087 course fill, over -depth): pockets ≥ minDepth below their rim are missing mass, filled flush in the owning zone's dominant; depth-1..2 facade relief drains or sits above the floor and is kept; declared openings are never filled."
+  },
+  "closure": {
+    "before": {
+      "reached": 22069,
+      "interiorCells": 22203,
+      "byDirection": {
+        "+x": 117,
+        "-x": 1004,
+        "+y": 68,
+        "-y": 0,
+        "+z": 1554,
+        "-z": 667
+      }
+    },
+    "plug": {
+      "cells": 503,
+      "iterations": 1,
+      "maxIterations": 8
+    },
+    "final": {
+      "closed": true,
+      "interiorCells": 17386,
+      "reached": 0,
+      "byDirection": {
+        "+x": 0,
+        "-x": 0,
+        "+y": 0,
+        "-y": 0,
+        "+z": 0,
+        "-z": 0
+      }
+    },
+    "note": "GROUND-SOLID six-direction watertightness of the STANDING build (flood seeds from sky + sides; a -y ray exiting the bbox rests on terrain); declared openings are honorary skin; breaches attributed to the shaft's escape direction(s). plugClosure THROWS rather than returning unclosed — the gate cannot be passed by an unclosed shell."
+  },
+  "reproducible": {
+    "doubleRun": true,
+    "sha256": "82247f301ee0ebc37b282a99ecd449327d04e6770c25fd7b07e41336fe5daee4",
+    "determinism": "no LLM, no GL on the path — every stage is a pure function of the committed input artifact. Two in-process executions byte-matched."
+  },
+  "placements": {
+    "input": 57202,
+    "stripped": 57202,
+    "voidFills": 11071,
+    "plugs": 503,
+    "final": 68776
+  },
+  "renders": [
+    {
+      "when": "before",
+      "angle": "front",
+      "path": "benchmarks/sculpture/shell-integrity/gatehouse/view-front-before.png"
+    },
+    {
+      "when": "after",
+      "angle": "front",
+      "path": "benchmarks/sculpture/shell-integrity/gatehouse/view-front-after.png"
+    },
+    {
+      "when": "before",
+      "angle": "+x-z",
+      "path": "benchmarks/sculpture/shell-integrity/gatehouse/view-oblique135-before.png"
+    },
+    {
+      "when": "after",
+      "angle": "+x-z",
+      "path": "benchmarks/sculpture/shell-integrity/gatehouse/view-oblique135-after.png"
+    },
+    {
+      "when": "before",
+      "angle": "-x-z",
+      "path": "benchmarks/sculpture/shell-integrity/gatehouse/view-oblique225-before.png"
+    },
+    {
+      "when": "after",
+      "angle": "-x-z",
+      "path": "benchmarks/sculpture/shell-integrity/gatehouse/view-oblique225-after.png"
+    },
+    {
+      "when": "before",
+      "angle": "top",
+      "path": "benchmarks/sculpture/shell-integrity/gatehouse/view-top-before.png"
+    },
+    {
+      "when": "after",
+      "angle": "top",
+      "path": "benchmarks/sculpture/shell-integrity/gatehouse/view-top-after.png"
+    }
+  ],
+  "frames": [
+    "pr/assets/frames/shell-gatehouse-before.png",
+    "pr/assets/frames/shell-gatehouse-after.png"
+  ]
+}
