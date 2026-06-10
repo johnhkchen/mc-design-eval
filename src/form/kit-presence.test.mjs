@@ -140,6 +140,22 @@ test("grammar-satisfied hut: the fixpoint holds — all cube rows pass", () => {
   assert.ok(frame.satisfied > 0);
 });
 
+test("a sub-minRun DECLARED-secondary speck is tolerated residue, never a missing panel", () => {
+  // satisfy the hut, then break one band1 wall cell into an isolated cobble speck (run < minRun):
+  // the fill would strip it, but cobblestone is band1's declared preserve — residue, not absence
+  const h = hut();
+  const g = placementGrammar(h.occ, HOPTS(h));
+  const satisfied = withPlacements(h.occ, [
+    ...g.placements,
+    { pos: [2, 5, 0], block: "cobblestone" }, // wall-field cell, no cobble neighbours
+  ]);
+  const r = kitPresence(satisfied, HOPTS(h));
+  const band1 = r.checks.find((c) => c.feature === "panel:band1");
+  assert.equal(band1.passed, true, JSON.stringify(r.gaps));
+  assert.equal(band1.tolerated.residue, 1);
+  assert.equal(r.passed, true);
+});
+
 test("a kit binding nothing for a feature is a recorded skip, never a crash or a silent pass", () => {
   const h = hut();
   const kit = [entry("smooth_sandstone", ["band1"])]; // no trim, no band0, no roof cube

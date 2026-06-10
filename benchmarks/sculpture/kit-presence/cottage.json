@@ -1,0 +1,906 @@
+{
+  "schema": "kit-presence-proof/v1",
+  "subject": "cottage",
+  "proven": true,
+  "expectations": {
+    "negativeFails": true,
+    "negativeNamesFamilies": true,
+    "positivePasses": true
+  },
+  "inputs": {
+    "negative": "durable-skin/cottage/artifact.json",
+    "grammar": "placement-grammar/cottage/artifact.json",
+    "ref": "concept-materials/cottage/after-artifact.json",
+    "kit": "kit/cottage.json",
+    "skinRecord": "durable-skin/cottage.json",
+    "kitSha256": "8cc6d06dc850e12b6e576dc56834a4d16b8c55a6b7e88ac68bb934551e8fa78b",
+    "note": "the kit is IMMUTABLE input (E-26 Rule 2) — loaded committed, handed to the checker verbatim"
+  },
+  "pipelineOrder": "durable-skin → placement-grammar → T-099 (openings) → kit-presence gate",
+  "treatments": {
+    "slots": {
+      "infill": {
+        "block": "spruce_fence",
+        "source": "derived-species-fence"
+      },
+      "shutter": {
+        "block": "spruce_trapdoor",
+        "source": "kit-fixture"
+      },
+      "door": {
+        "block": "spruce_door",
+        "source": "kit-fixture"
+      },
+      "light": {
+        "block": "lantern",
+        "source": "kit-fixture"
+      },
+      "frame": {
+        "block": "spruce_planks",
+        "source": "kit-trim"
+      }
+    },
+    "derivations": [
+      {
+        "slot": "infill",
+        "block": "spruce_fence",
+        "from": "spruce_trapdoor",
+        "reason": "no rail entry in kit; species-matched fence derived from the shutter block (the kit declared the window grille unidentified)"
+      }
+    ],
+    "unfulfilled": []
+  },
+  "apertures": [
+    {
+      "dir": "+x",
+      "kind": "window",
+      "bbox": {
+        "u0": 6,
+        "v0": 12,
+        "u1": 6,
+        "v1": 12
+      },
+      "region": {
+        "min": [
+          -13,
+          14,
+          -10
+        ],
+        "max": [
+          12,
+          14,
+          -10
+        ]
+      }
+    },
+    {
+      "dir": "+x",
+      "kind": "window",
+      "bbox": {
+        "u0": 14,
+        "v0": 17,
+        "u1": 14,
+        "v1": 17
+      },
+      "region": {
+        "min": [
+          -13,
+          9,
+          -2
+        ],
+        "max": [
+          12,
+          9,
+          -2
+        ]
+      }
+    },
+    {
+      "dir": "+x",
+      "kind": "window",
+      "bbox": {
+        "u0": 5,
+        "v0": 20,
+        "u1": 6,
+        "v1": 20
+      },
+      "region": {
+        "min": [
+          -13,
+          6,
+          -11
+        ],
+        "max": [
+          12,
+          6,
+          -10
+        ]
+      }
+    },
+    {
+      "dir": "-x",
+      "kind": "window",
+      "bbox": {
+        "u0": 25,
+        "v0": 12,
+        "u1": 25,
+        "v1": 12
+      },
+      "region": {
+        "min": [
+          -13,
+          14,
+          -10
+        ],
+        "max": [
+          12,
+          14,
+          -10
+        ]
+      }
+    },
+    {
+      "dir": "-x",
+      "kind": "window",
+      "bbox": {
+        "u0": 17,
+        "v0": 17,
+        "u1": 17,
+        "v1": 17
+      },
+      "region": {
+        "min": [
+          -13,
+          9,
+          -2
+        ],
+        "max": [
+          12,
+          9,
+          -2
+        ]
+      }
+    },
+    {
+      "dir": "-x",
+      "kind": "window",
+      "bbox": {
+        "u0": 25,
+        "v0": 20,
+        "u1": 26,
+        "v1": 20
+      },
+      "region": {
+        "min": [
+          -13,
+          6,
+          -11
+        ],
+        "max": [
+          12,
+          6,
+          -10
+        ]
+      }
+    }
+  ],
+  "negative": {
+    "artifact": "durable-skin/cottage/artifact.json",
+    "schema": "kit-presence/v1",
+    "passed": false,
+    "checks": [
+      {
+        "feature": "frame",
+        "block": "spruce_planks",
+        "shipped": "spruce_planks",
+        "sites": 321,
+        "missing": 192,
+        "satisfied": 28,
+        "tolerated": {
+          "respected": 91,
+          "skippedIsolated": 10
+        },
+        "gating": true,
+        "passed": false
+      },
+      {
+        "feature": "panel:band0",
+        "block": "stone_bricks",
+        "shipped": "tuff",
+        "sites": 1551,
+        "missing": 0,
+        "tolerated": {
+          "residue": 5
+        },
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "panel:band1",
+        "block": "smooth_sandstone",
+        "shipped": "smooth_sandstone",
+        "sites": 1420,
+        "missing": 0,
+        "tolerated": {
+          "residue": 8
+        },
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "course",
+        "block": "spruce_planks",
+        "shipped": "spruce_planks",
+        "sites": 2439,
+        "missing": 0,
+        "tolerated": {
+          "residue": 26
+        },
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "openings:infill",
+        "block": "spruce_fence",
+        "sites": 6,
+        "missingAt": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "toleratedAt": [],
+        "gating": true,
+        "passed": false
+      },
+      {
+        "feature": "openings:shutters",
+        "block": "spruce_trapdoor",
+        "sites": 6,
+        "missingAt": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "toleratedAt": [],
+        "gating": true,
+        "passed": false
+      },
+      {
+        "feature": "openings:lintel-sill",
+        "placed": 25,
+        "gating": false,
+        "passed": null
+      }
+    ],
+    "gaps": [
+      "missing: spruce_planks frame @ 192/321 frame-line cells",
+      "missing: spruce_fence infill @ openings 1/2/3/4/5/6",
+      "missing: spruce_trapdoor shutters @ openings 1/2/3/4/5/6"
+    ],
+    "skips": [
+      {
+        "feature": "openings:door",
+        "reason": "no door-kind aperture declared by the concept (T-099 D7 — detector gap, not absence)"
+      },
+      {
+        "feature": "openings:light",
+        "reason": "no door-kind aperture declared by the concept (T-099 D7 — detector gap, not absence)"
+      }
+    ],
+    "grammar": {
+      "bindings": {
+        "frame": "spruce_planks",
+        "panels": {
+          "band0": "stone_bricks",
+          "band1": "smooth_sandstone"
+        },
+        "course": "spruce_planks",
+        "openingTreatments": [
+          "spruce_trapdoor",
+          "lantern",
+          "spruce_door"
+        ],
+        "skipped": []
+      },
+      "shipped": {
+        "frame": "spruce_planks",
+        "panels": {
+          "band0": "tuff",
+          "band1": "smooth_sandstone"
+        },
+        "course": "spruce_planks"
+      },
+      "frame": {
+        "counts": {
+          "wall": 2073,
+          "cornerPost": 113,
+          "roofline": 120,
+          "floorLine": 88
+        },
+        "painted": 181,
+        "adopted": 11,
+        "respected": 91,
+        "skippedIsolated": 10,
+        "alreadyFrame": 28
+      },
+      "fill": {
+        "placements": 39,
+        "byZone": {
+          "band0": {
+            "surface": 1551,
+            "filled": 5,
+            "kept": 1546
+          },
+          "band1": {
+            "surface": 1420,
+            "filled": 8,
+            "kept": 1412
+          },
+          "roof": {
+            "surface": 2439,
+            "filled": 26,
+            "kept": 2413
+          }
+        }
+      }
+    },
+    "dressing": {
+      "stats": {
+        "openings": 6,
+        "fullyDressed": 2,
+        "placements": 42,
+        "conflicts": 6,
+        "alreadyDressed": 0
+      },
+      "perOpening": [
+        {
+          "dir": "+x",
+          "kind": "window",
+          "bbox": {
+            "u0": 6,
+            "v0": 12,
+            "u1": 6,
+            "v1": 12
+          },
+          "applied": {
+            "infill": 1,
+            "shutterLeft": 0,
+            "shutterRight": 1,
+            "lintel": 0,
+            "sill": 0
+          },
+          "placed": {
+            "infill": 1,
+            "shutterLeft": 0,
+            "shutterRight": 1,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "shutterLeft",
+              "name": "shutter-no-jamb-left",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "lintel",
+              "name": "lintel-no-band-cells",
+              "reduction": "lintel-skipped"
+            },
+            {
+              "slot": "sill",
+              "name": "sill-no-band-cells",
+              "reduction": "sill-skipped"
+            }
+          ]
+        },
+        {
+          "dir": "+x",
+          "kind": "window",
+          "bbox": {
+            "u0": 14,
+            "v0": 17,
+            "u1": 14,
+            "v1": 17
+          },
+          "applied": {
+            "infill": 1,
+            "shutterLeft": 1,
+            "shutterRight": 0,
+            "lintel": 1,
+            "sill": 3
+          },
+          "placed": {
+            "infill": 1,
+            "shutterLeft": 1,
+            "shutterRight": 0,
+            "lintel": 1,
+            "sill": 3
+          },
+          "conflicts": [
+            {
+              "slot": "shutterRight",
+              "name": "shutter-no-jamb-right",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "+x",
+          "kind": "window",
+          "bbox": {
+            "u0": 5,
+            "v0": 20,
+            "u1": 6,
+            "v1": 20
+          },
+          "applied": {
+            "infill": 2,
+            "shutterLeft": 0,
+            "shutterRight": 1,
+            "lintel": 4,
+            "sill": 4
+          },
+          "placed": {
+            "infill": 2,
+            "shutterLeft": 0,
+            "shutterRight": 1,
+            "lintel": 4,
+            "sill": 2
+          },
+          "conflicts": [
+            {
+              "slot": "shutterLeft",
+              "name": "shutter-no-jamb-left",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "-x",
+          "kind": "window",
+          "bbox": {
+            "u0": 25,
+            "v0": 12,
+            "u1": 25,
+            "v1": 12
+          },
+          "applied": {
+            "infill": 1,
+            "shutterLeft": 1,
+            "shutterRight": 1,
+            "lintel": 3,
+            "sill": 0
+          },
+          "placed": {
+            "infill": 1,
+            "shutterLeft": 1,
+            "shutterRight": 1,
+            "lintel": 2,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "sill",
+              "name": "sill-no-band-cells",
+              "reduction": "sill-skipped"
+            }
+          ]
+        },
+        {
+          "dir": "-x",
+          "kind": "window",
+          "bbox": {
+            "u0": 17,
+            "v0": 17,
+            "u1": 17,
+            "v1": 17
+          },
+          "applied": {
+            "infill": 1,
+            "shutterLeft": 1,
+            "shutterRight": 1,
+            "lintel": 3,
+            "sill": 2
+          },
+          "placed": {
+            "infill": 1,
+            "shutterLeft": 1,
+            "shutterRight": 1,
+            "lintel": 3,
+            "sill": 2
+          },
+          "conflicts": []
+        },
+        {
+          "dir": "-x",
+          "kind": "window",
+          "bbox": {
+            "u0": 25,
+            "v0": 20,
+            "u1": 26,
+            "v1": 20
+          },
+          "applied": {
+            "infill": 2,
+            "shutterLeft": 1,
+            "shutterRight": 1,
+            "lintel": 4,
+            "sill": 4
+          },
+          "placed": {
+            "infill": 2,
+            "shutterLeft": 1,
+            "shutterRight": 1,
+            "lintel": 4,
+            "sill": 4
+          },
+          "conflicts": []
+        }
+      ]
+    }
+  },
+  "positive": {
+    "artifact": "kit-presence/cottage/dressed-artifact.json",
+    "artifactSha256": "106e0bb2bcfdbd977f2aaeaa834a71d7cd4f1aa56fe16cb307d8e923a360d0fd",
+    "composedFrom": {
+      "grammar": "placement-grammar/cottage/artifact.json",
+      "dressingPlacements": 38
+    },
+    "schema": "kit-presence/v1",
+    "passed": true,
+    "checks": [
+      {
+        "feature": "frame",
+        "block": "spruce_planks",
+        "shipped": "spruce_planks",
+        "sites": 325,
+        "missing": 0,
+        "satisfied": 214,
+        "tolerated": {
+          "respected": 100,
+          "skippedIsolated": 11
+        },
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "panel:band0",
+        "block": "stone_bricks",
+        "shipped": "tuff",
+        "sites": 1547,
+        "missing": 0,
+        "tolerated": {
+          "residue": 0
+        },
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "panel:band1",
+        "block": "smooth_sandstone",
+        "shipped": "smooth_sandstone",
+        "sites": 1418,
+        "missing": 0,
+        "tolerated": {
+          "residue": 5
+        },
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "course",
+        "block": "spruce_planks",
+        "shipped": "spruce_planks",
+        "sites": 2437,
+        "missing": 0,
+        "tolerated": {
+          "residue": 1
+        },
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "openings:infill",
+        "block": "spruce_fence",
+        "sites": 6,
+        "missingAt": [],
+        "toleratedAt": [],
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "openings:shutters",
+        "block": "spruce_trapdoor",
+        "sites": 6,
+        "missingAt": [],
+        "toleratedAt": [
+          1,
+          2,
+          3
+        ],
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "openings:lintel-sill",
+        "placed": 0,
+        "gating": false,
+        "passed": null
+      }
+    ],
+    "gaps": [],
+    "skips": [
+      {
+        "feature": "openings:door",
+        "reason": "no door-kind aperture declared by the concept (T-099 D7 — detector gap, not absence)"
+      },
+      {
+        "feature": "openings:light",
+        "reason": "no door-kind aperture declared by the concept (T-099 D7 — detector gap, not absence)"
+      }
+    ],
+    "grammar": {
+      "bindings": {
+        "frame": "spruce_planks",
+        "panels": {
+          "band0": "stone_bricks",
+          "band1": "smooth_sandstone"
+        },
+        "course": "spruce_planks",
+        "openingTreatments": [
+          "spruce_trapdoor",
+          "lantern",
+          "spruce_door"
+        ],
+        "skipped": []
+      },
+      "shipped": {
+        "frame": "spruce_planks",
+        "panels": {
+          "band0": "tuff",
+          "band1": "smooth_sandstone"
+        },
+        "course": "spruce_planks"
+      },
+      "frame": {
+        "counts": {
+          "wall": 2067,
+          "cornerPost": 117,
+          "roofline": 120,
+          "floorLine": 88
+        },
+        "painted": 0,
+        "adopted": 0,
+        "respected": 100,
+        "skippedIsolated": 11,
+        "alreadyFrame": 214
+      },
+      "fill": {
+        "placements": 6,
+        "byZone": {
+          "band0": {
+            "surface": 1547,
+            "filled": 0,
+            "kept": 1547
+          },
+          "band1": {
+            "surface": 1418,
+            "filled": 5,
+            "kept": 1413
+          },
+          "roof": {
+            "surface": 2437,
+            "filled": 1,
+            "kept": 2436
+          }
+        }
+      }
+    },
+    "dressing": {
+      "stats": {
+        "openings": 6,
+        "fullyDressed": 2,
+        "placements": 0,
+        "conflicts": 6,
+        "alreadyDressed": 17
+      },
+      "perOpening": [
+        {
+          "dir": "+x",
+          "kind": "window",
+          "bbox": {
+            "u0": 6,
+            "v0": 12,
+            "u1": 6,
+            "v1": 12
+          },
+          "applied": {
+            "infill": 1,
+            "shutterLeft": 0,
+            "shutterRight": 1,
+            "lintel": 0,
+            "sill": 0
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "shutterLeft",
+              "name": "shutter-no-jamb-left",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "lintel",
+              "name": "lintel-no-band-cells",
+              "reduction": "lintel-skipped"
+            },
+            {
+              "slot": "sill",
+              "name": "sill-no-band-cells",
+              "reduction": "sill-skipped"
+            }
+          ]
+        },
+        {
+          "dir": "+x",
+          "kind": "window",
+          "bbox": {
+            "u0": 14,
+            "v0": 17,
+            "u1": 14,
+            "v1": 17
+          },
+          "applied": {
+            "infill": 1,
+            "shutterLeft": 1,
+            "shutterRight": 0,
+            "lintel": 1,
+            "sill": 3
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "shutterRight",
+              "name": "shutter-no-jamb-right",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "+x",
+          "kind": "window",
+          "bbox": {
+            "u0": 5,
+            "v0": 20,
+            "u1": 6,
+            "v1": 20
+          },
+          "applied": {
+            "infill": 2,
+            "shutterLeft": 0,
+            "shutterRight": 1,
+            "lintel": 4,
+            "sill": 4
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "shutterLeft",
+              "name": "shutter-no-jamb-left",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "-x",
+          "kind": "window",
+          "bbox": {
+            "u0": 25,
+            "v0": 12,
+            "u1": 25,
+            "v1": 12
+          },
+          "applied": {
+            "infill": 1,
+            "shutterLeft": 1,
+            "shutterRight": 1,
+            "lintel": 3,
+            "sill": 0
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "sill",
+              "name": "sill-no-band-cells",
+              "reduction": "sill-skipped"
+            }
+          ]
+        },
+        {
+          "dir": "-x",
+          "kind": "window",
+          "bbox": {
+            "u0": 17,
+            "v0": 17,
+            "u1": 17,
+            "v1": 17
+          },
+          "applied": {
+            "infill": 1,
+            "shutterLeft": 1,
+            "shutterRight": 1,
+            "lintel": 3,
+            "sill": 2
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": []
+        },
+        {
+          "dir": "-x",
+          "kind": "window",
+          "bbox": {
+            "u0": 25,
+            "v0": 20,
+            "u1": 26,
+            "v1": 20
+          },
+          "applied": {
+            "infill": 2,
+            "shutterLeft": 1,
+            "shutterRight": 1,
+            "lintel": 4,
+            "sill": 4
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": []
+        }
+      ]
+    }
+  },
+  "reproducible": {
+    "doubleRun": true,
+    "determinism": "no LLM, no GL — committed inputs, pure checker; two executions byte-matched per side."
+  }
+}

@@ -32,6 +32,7 @@
 
 import { placementGrammar } from "./placement-grammar.mjs";
 import { dressOpenings } from "../view/opening-dressing.mjs";
+import { bareBlock } from "../view/occupancy.mjs";
 
 /** Schema tags (downstream version-check). */
 export const KIT_PRESENCE_SCHEMA = "kit-presence/v1";
@@ -95,11 +96,20 @@ export function kitPresence(occ, {
     if (!row.passed) gaps.push(`missing: ${row.shipped} frame @ ${missing}/${sites} frame-line cells`);
   }
 
-  // panel/course absences = cells the fill would still repaint, bucketed by zone
-  const fillByZone = new Map();
+  // panel/course absences = cells the fill would still repaint, bucketed by zone — but a MISSING
+  // INGREDIENT is a site occupied by a block FOREIGN to the zone's declared vocabulary. A fill
+  // placement over the zone's own dominant/preserve block is sub-minRun RESIDUE (a run the
+  // dressing broke when it re-opened a pane, an isolated declared-secondary speck): the fill's
+  // cleanliness contract, not an absence — tolerated, counted, never silent.
+  const ownOf = new Map(Object.entries(policy).map(([z, p]) =>
+    [z, new Set([p.dominant, ...(p.preserve ?? [])].map(bareBlock))]));
+  const fillByZone = new Map();    // foreign cells — gating
+  const residueByZone = new Map(); // own-vocabulary specks — tolerated
   for (const p of g.fill.placements) {
     const z = zoneOf(p.pos);
-    fillByZone.set(z, (fillByZone.get(z) ?? 0) + 1);
+    const cur = bareBlock(occ.block(...p.pos));
+    const bucket = ownOf.get(z)?.has(cur) ? residueByZone : fillByZone;
+    bucket.set(z, (bucket.get(z) ?? 0) + 1);
   }
   for (const band of bandNames) {
     const shipped = g.shipped.panels[band];
@@ -109,7 +119,8 @@ export function kitPresence(occ, {
     const surface = g.fill.byZone?.[band]?.surface ?? null;
     const row = {
       feature: `panel:${band}`, block: g.bindings.panels[band], shipped,
-      sites: surface, missing, gating: true, passed: missing === 0,
+      sites: surface, missing, tolerated: { residue: residueByZone.get(band) ?? 0 },
+      gating: true, passed: missing === 0,
     };
     checks.push(row);
     if (!row.passed) gaps.push(`missing: ${shipped} panel @ ${band} (${missing} cells)`);
@@ -119,7 +130,9 @@ export function kitPresence(occ, {
     fillByZone.delete("roof");
     const row = {
       feature: "course", block: g.bindings.course, shipped: g.shipped.course,
-      sites: g.fill.byZone?.roof?.surface ?? null, missing, gating: true, passed: missing === 0,
+      sites: g.fill.byZone?.roof?.surface ?? null, missing,
+      tolerated: { residue: residueByZone.get("roof") ?? 0 },
+      gating: true, passed: missing === 0,
     };
     checks.push(row);
     if (!row.passed) gaps.push(`missing: ${row.shipped} course @ roof (${missing} cells)`);
