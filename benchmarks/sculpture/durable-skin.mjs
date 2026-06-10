@@ -4,9 +4,11 @@
 // simultaneously value-true AND patterned); this runner composes their PURE CORES end-to-end, per
 // subject, in ONE named command:
 //
-//   value-true selection (T-086) → seal (S-084) → full-shell zone-fill base coat (T-085, skin upgraded
-//   to "exposure" by T-090) → secondaries splat (E-23, zone-gated, dominants excluded) → coherent
-//   surface (T-087: course basin-fill + stray-salt strip) → coverage-aware gate (T-088, terminal THROW)
+//   value-true selection (T-086) → seal (S-084) → CONCEPT-DERIVED ZONE MAP (T-092: bands + dominants
+//   read from the concept aligned to floor-lines; the registry prior is a recorded fallback) →
+//   full-shell zone-fill base coat (T-085, skin upgraded to "exposure" by T-090) → secondaries splat
+//   (E-23, zone-gated, dominants excluded) → coherent surface (T-087: course basin-fill + stray-salt
+//   strip) → coverage-aware gate (T-088, terminal THROW)
 //
 // Value-true runs FIRST (a palette transform): selection happens in the ORIGINAL name space (the named
 // block must locate its own concept region — the T-086 locator), then the substitution renames the
@@ -46,6 +48,8 @@ import { sealRoof, sealWalls, applyDeltas } from "../../src/view/surface-coheren
 import {
   zoneFill, surfaceZoneHistogram, dominantCoverage, exposedVoxelEntries,
 } from "../../src/view/zone-fill.mjs";
+import { extractConceptZoneMap } from "../../src/color/band-profile.mjs";
+import { layerCounts, zonesFromBands, diffZoneMaps } from "../../src/view/zone-map.mjs";
 import { quantizeToFace, bareList } from "../../src/view/reference-quantize.mjs";
 import { loadGlbSplat, resampleBlockGrid } from "../../src/view/glb-splat.mjs";
 import { paintFace, mergePaints, applyPaint } from "../../src/view/face-paint.mjs";
@@ -78,11 +82,16 @@ const OBLIQUE_ANGLE = "-x-z";   // azimuth 225° — the angle the projection-sk
 
 // THE SUBJECT REGISTRY. Policies are written in the NAMED (pre-substitution) block space of each
 // subject's E-21 material map and mapped through the value-true substitution at exactly one point
-// (mapPolicy). `legacy` = the would-have-been E-23 splat-only palettes (dominants included) — replayed
-// solely as the before-baseline; for the gatehouse no E-23 skin ever shipped, so the replay is the
-// honest counterfactual, labeled as such in the record. `plasterInvariant` (cottage) names the
-// upper-only block whose base/roof surface count must be 0 (T-079-02 guard; vacuous where null).
-const SUBJECTS = {
+// (mapPolicy). T-092: the zone map is DERIVED FROM THE CONCEPT by default (band-profile +
+// zonesFromBands); `policy` is the recorded FALLBACK prior — used only when the concept region is
+// unreadable (recorded, never overriding a readable concept) and as the diff baseline / the legacy
+// replay's zone source. `zoneMapRecord` = the committed zone-map/v1 record (npm run zone:map) —
+// agreement asserted like valueSelectRecord. `legacy` = the would-have-been E-23 splat-only palettes
+// (dominants included) — replayed solely as the before-baseline; for the gatehouse no E-23 skin ever
+// shipped, so the replay is the honest counterfactual, labeled as such in the record.
+// `plasterInvariant` (cottage) names the block that must appear ONLY on zones whose policy includes
+// it (T-079-02 guard generalized; vacuous where null).
+export const SUBJECTS = {
   cottage: {
     key: "cottage",
     build: "concept-materials/cottage/after-artifact.json",
@@ -90,7 +99,8 @@ const SUBJECTS = {
     glb: "glb/cottage.glb",
     map: "material-map/cottage.json",
     valueSelectRecord: "value-select/cottage.json", // T-086's committed result — agreement asserted
-    policy: { // spray-paint.mjs ZONE_POLICY verbatim (incl. the T-090 gable-framing preserve)
+    zoneMapRecord: "zone-map/cottage.json", // T-092's committed result — agreement asserted
+    policy: { // FALLBACK PRIOR (spray-paint.mjs ZONE_POLICY verbatim, incl. the T-090 gable-framing preserve)
       base: {
         dominant: "stone_bricks",
         preserve: ["cobblestone", "dark_oak_log"],
@@ -122,7 +132,8 @@ const SUBJECTS = {
     glb: "glb/stone-gatehouse.glb",
     map: "material-map/gatehouse.json",
     valueSelectRecord: null, // no committed T-086 record — this run IS the gatehouse value-true result
-    policy: { // derived from material-map/gatehouse.json roles (1:1 rule→block, the E-21 "restored" case)
+    zoneMapRecord: "zone-map/gatehouse.json", // T-092's committed result — agreement asserted
+    policy: { // FALLBACK PRIOR, from material-map/gatehouse.json roles (1:1 rule→block, the E-21 "restored" case)
       base: {
         dominant: "stone_bricks",                                        // smooth coursed wall field
         preserve: ["cobblestone", "dark_oak_log", "dark_oak_planks"],    // corners + arch ring + door leaf
@@ -180,9 +191,10 @@ function materialCounts(artifact) {
   return counts;
 }
 
-/** Per-zone count of `block` on the EXPOSURE skin (the camera's truth) — the plaster-invariant census. */
+/** Per-zone count of `block` on the EXPOSURE skin (the camera's truth) — the plaster-invariant census.
+ *  Zone names come from `zoneOf` (T-092: derived band names, not a fixed base/upper/roof). */
 function exposedBlockByZone(artifact, zoneOf, block) {
-  const hist = { base: 0, upper: 0, roof: 0 };
+  const hist = {};
   for (const { voxel, block: blk } of exposedVoxelEntries(artifactOccupancy(artifact))) {
     if (bareBlock(blk) === block) hist[zoneOf(voxel)] = (hist[zoneOf(voxel)] || 0) + 1;
   }
@@ -240,7 +252,7 @@ async function tryRenderAngle(artifact, angle, label, subjDir) {
 // THE DETERMINISTIC CORE — reads committed inputs, writes nothing, no GL. Run twice per live pass;
 // the two final artifacts must be byte-identical (the reproducibility proof).
 // =================================================================================================
-async function buildSkin(def) {
+export async function buildSkin(def, { zoneSource = "derived" } = {}) {
   const notes = [];
   const matMap = JSON.parse(await readFile(join(HERE, def.map), "utf8"));
   const raw = JSON.parse(await readFile(join(HERE, def.build), "utf8"));
@@ -270,23 +282,66 @@ async function buildSkin(def) {
   }
   const sub = (b) => substitution[b] ?? b;
 
-  // --- 2. SUBSTITUTED BUILD + POLICY (the shipped palette, everywhere below) ---------------------
+  // --- 2. SUBSTITUTED BUILD (the shipped palette, everywhere below) ------------------------------
   const artifact0 = applySubstitution(raw, substitution);
   assertArtifact(artifact0);
-  const policyS = mapPolicy(def.policy, sub);
   const legacyS = Object.fromEntries(Object.entries(def.legacy).map(([z, m]) => [z, [...new Set(m.map(sub))]]));
   const allowed = allowedPalette(artifact0);
   const subManifest = artifact0.palette.manifest;
   const palette = paletteFromManifest(subManifest);
+
+  // --- 3. SEAL (S-084) → 4. ZONES (T-092: read from the CONCEPT, prior = recorded fallback) ------
+  const occ0 = artifactOccupancy(artifact0);
+  const sealed = applyDeltas(artifact0, [...sealRoof(occ0).placements, ...sealWalls(occ0).placements]);
+  const occSealed = artifactOccupancy(sealed);
+  const sz = structuralZones(occSealed, def.zoneOpts ?? {});
+  const { storeyDivide, upperTop } = sz;
+  // The band profile reads the SAME committed inputs the value-true step already decoded: the
+  // step-1 gridResult (named-manifest validate quantize) + the geometric y-axis (floor-lines).
+  let zoneMap = { source: "prior", reason: "zoneSource=prior (forced)" };
+  let zoneOf = sz.zoneOf;        // the prior's zone geometry (base/upper/roof)
+  let policyNamed = def.policy;  // the prior's assignments (named space)
+  if (zoneSource === "derived") {
+    const extracted = extractConceptZoneMap({
+      gridResult, floorLines: sz.floorLines, layerCounts: layerCounts(occSealed),
+      upperTop, materialMap: matMap,
+    });
+    if (extracted.readable) {
+      const zb = zonesFromBands({
+        bands: extracted.bands, roof: extracted.roof, roofKeys: sz.roofKeys, upperTop,
+      });
+      zoneOf = zb.zoneOf;
+      policyNamed = zb.zones;
+      zoneMap = {
+        source: "concept", bands: extracted.bands, roof: extracted.roof, params: extracted.params,
+        diff: diffZoneMaps({
+          prior: { zones: def.policy, storeyDivide, upperTop },
+          derived: extracted, yMin: occSealed.bounds.min[1],
+        }),
+      };
+      if (def.zoneMapRecord && existsSync(join(HERE, def.zoneMapRecord))) {
+        const committed = JSON.parse(await readFile(join(HERE, def.zoneMapRecord), "utf8"));
+        const canon = (v) => JSON.stringify(v ?? null);
+        zoneMap.agreesWithRecord =
+          canon(committed.derived?.bands) === canon(zoneMap.bands) &&
+          canon(committed.derived?.roof) === canon(zoneMap.roof);
+        if (!zoneMap.agreesWithRecord) {
+          throw new Error(`derived zone map diverges from the committed ${def.zoneMapRecord} — same ` +
+            `cores, same inputs; divergence is a wiring bug, not a result`);
+        }
+      }
+    } else {
+      // E-25: the prior is a FALLBACK, recorded when used, never overriding a readable concept.
+      zoneMap = { source: "prior-fallback", reason: extracted.reason, params: extracted.params };
+      notes.push(`zone map fell back to the prior: ${extracted.reason}`);
+    }
+  }
+  const policyS = mapPolicy(policyNamed, sub);
   for (const [z, p] of Object.entries(policyS)) {
     if (!allowed.has(p.dominant)) throw new Error(`zone "${z}" dominant "${p.dominant}" not in the substituted manifest`);
   }
 
-  // --- 3. SEAL (S-084) → 4. ZONES → 5. FULL-SHELL BASE COAT (T-085 + T-090 skin) -----------------
-  const occ0 = artifactOccupancy(artifact0);
-  const sealed = applyDeltas(artifact0, [...sealRoof(occ0).placements, ...sealWalls(occ0).placements]);
-  const occSealed = artifactOccupancy(sealed);
-  const { zoneOf, storeyDivide, upperTop } = structuralZones(occSealed, def.zoneOpts ?? {});
+  // --- 5. FULL-SHELL BASE COAT (T-085 + T-090 skin) ----------------------------------------------
   const fillZones = Object.fromEntries(
     Object.entries(policyS).map(([z, p]) => [z, { dominant: p.dominant, preserve: p.preserve }]));
   const fill = zoneFill(occSealed, { zoneOf, zones: fillZones, skin: "exposure" });
@@ -330,9 +385,11 @@ async function buildSkin(def) {
   // --- 7. THE E-23 SPLAT-ONLY BASELINE (replayed on the sealed, UN-filled build) ------------------
   const legacyByZone = new Map(
     Object.entries(legacyS).map(([z, mats]) => [z, new Set(mats.filter((b) => allowed.has(b)))]));
-  const frontLegacy = paintFace(occSealed, def.frontDir, frontTarget, { allowed, source: "concept", zoneOf, allowedByZone: legacyByZone });
+  // the legacy replay keeps ITS historical zone source (the prior's base/upper/roof geometry) so the
+  // before-baseline cannot silently improve when the map derivation changes
+  const frontLegacy = paintFace(occSealed, def.frontDir, frontTarget, { allowed, source: "concept", zoneOf: sz.zoneOf, allowedByZone: legacyByZone });
   const sideLegacy = sideSplat
-    ? paintFace(occSealed, def.sideDir, sideSplat.grid, { allowed, source: "glb", zoneOf, allowedByZone: legacyByZone })
+    ? paintFace(occSealed, def.sideDir, sideSplat.grid, { allowed, source: "glb", zoneOf: sz.zoneOf, allowedByZone: legacyByZone })
     : { placements: [] };
   const splatOnly = applyPaint(sealed, mergePaints(
     [sideLegacy, frontLegacy].filter((p) => (p.placements?.length ?? 0) > 0),
@@ -350,13 +407,22 @@ async function buildSkin(def) {
   const final = applyPaint(courseBuild, salt.placements);
 
   // --- 9. TERMINAL GATES (a failing skin can never write a record) --------------------------------
-  let plasterHistogram = null;
+  // T-079-02 guard, generalized for derived zone names (T-092): the invariant block may appear ONLY
+  // on zones whose policy includes it (dominant ∪ preserve ∪ splat) — under the derived cottage map
+  // plaster is legitimate on BOTH storeys above the plinth and forbidden on the plinth + roof.
+  let plaster = null;
   if (def.plasterInvariant) {
     const block = sub(def.plasterInvariant);
-    plasterHistogram = exposedBlockByZone(final, zoneOf, block);
-    if (plasterHistogram.base !== 0 || plasterHistogram.roof !== 0) {
-      throw new Error(`zone violation: ${block} on base/roof shell (${JSON.stringify(plasterHistogram)})`);
+    const histogram = exposedBlockByZone(final, zoneOf, block);
+    const allowedZones = Object.entries(policyS)
+      .filter(([, p]) => p.dominant === block || p.preserve.includes(block) || p.splat.includes(block))
+      .map(([z]) => z);
+    const violations = Object.entries(histogram).filter(([z, c]) => c > 0 && !allowedZones.includes(z));
+    if (violations.length) {
+      throw new Error(`zone violation: ${block} on shells outside its zones ` +
+        `(${JSON.stringify(Object.fromEntries(violations))}; allowed: ${allowedZones.join(", ")})`);
     }
+    plaster = { block, histogram, allowedZones };
   }
   const covFinal = dominantCoverage(
     surfaceZoneHistogram(artifactOccupancy(final), zoneOf, { skin: "exposure" }), policyS);
@@ -365,29 +431,37 @@ async function buildSkin(def) {
     throw new Error(`coverage gate FAILED on the final skin: ` +
       gateFinal.failures.map((f) => `${f.zone} ${f.dominant}=${f.fraction} < ${COVERAGE_THRESHOLD}`).join(", "));
   }
-  // T-090 band evidence on the same shell census. The upper-residue check only means something when the
-  // base field is a DIFFERENT material that could collapse into the upper band (cottage); where base and
-  // upper share a dominant (gatehouse) the "residue" IS the dominant — recorded as n/a.
+  // T-090 band evidence on the same shell census, generalized for N wall bands (T-092): for each wall
+  // band, the shell fraction covered by OTHER wall bands' dominants (its own dominant/preserve set
+  // excluded) is the displaced-field residue — bounded as before. Bands sharing a dominant (the
+  // gatehouse's single-material body) contribute no foreign blocks, the old "n/a" case by construction.
+  const wallZoneNames = Object.keys(policyS).filter((z) => z !== "roof");
   const bands = {
     roofMaterialsFraction: zoneMaterialsFraction(covFinal, "roof", policyS),
-    upperResidueBlock: policyS.base.dominant !== policyS.upper.dominant ? policyS.base.dominant : null,
-    upperResidueFraction: null,
+    wallForeignResidue: {},
   };
-  if (bands.upperResidueBlock) {
-    bands.upperResidueFraction = Math.round(((covFinal.upper?.byBlock?.[bands.upperResidueBlock] ?? 0) /
-      (covFinal.upper?.total || 1)) * 1000) / 1000;
+  for (const z of wallZoneNames) {
+    const own = new Set([policyS[z].dominant, ...policyS[z].preserve]);
+    const foreign = new Set(wallZoneNames.filter((w) => w !== z)
+      .map((w) => policyS[w].dominant).filter((b) => !own.has(b)));
+    const total = covFinal[z]?.total || 0;
+    bands.wallForeignResidue[z] = total
+      ? Math.round((Object.entries(covFinal[z].byBlock)
+          .reduce((a, [b, c]) => a + (foreign.has(b) ? c : 0), 0) / total) * 1000) / 1000
+      : null;
   }
-  if ((bands.roofMaterialsFraction ?? 0) < ROOF_BAND_TARGET ||
-      (bands.upperResidueFraction != null && bands.upperResidueFraction > UPPER_RESIDUE_MAX)) {
+  const worstResidue = Math.max(0, ...Object.values(bands.wallForeignResidue).filter((v) => v != null));
+  if ((bands.roofMaterialsFraction ?? 0) < ROOF_BAND_TARGET || worstResidue > UPPER_RESIDUE_MAX) {
     throw new Error(`band acceptance FAILED: roof materials ${bands.roofMaterialsFraction} ` +
-      `(target >= ${ROOF_BAND_TARGET}), upper residue ${bands.upperResidueFraction} (max ${UPPER_RESIDUE_MAX})`);
+      `(target >= ${ROOF_BAND_TARGET}), wall foreign residue ${JSON.stringify(bands.wallForeignResidue)} ` +
+      `(max ${UPPER_RESIDUE_MAX})`);
   }
   assertArtifact(final);
 
   return {
     raw, artifact0, sealed, based, painted, splatOnly, final,
     substitution, rows, agreesWithRecord, policyS, borderColor,
-    zones: { storeyDivide, upperTop }, zoneOf, fill,
+    zones: { storeyDivide, upperTop }, zoneOf, zoneMap, fill,
     splat: {
       front: {
         dir: def.frontDir, source: "concept", painted: frontPass.painted, skipped: frontPass.skipped,
@@ -403,7 +477,7 @@ async function buildSkin(def) {
     course, salt,
     coverage: { splatOnly: covSplatOnly, final: covFinal },
     gates: { threshold: COVERAGE_THRESHOLD, splatOnly: gateSplatOnly, final: gateFinal },
-    bands, plasterHistogram, notes,
+    bands, plaster, notes,
   };
 }
 
@@ -433,16 +507,19 @@ async function main() {
       gateFinal: rec.coverageGate?.final?.passed === true,
       gateSplatOnly: rec.coverageGate?.splatOnly?.passed === false,
       bands: (rec.bands?.roofMaterialsFraction ?? 0) >= ROOF_BAND_TARGET &&
-        (rec.bands?.upperResidueFraction == null || rec.bands.upperResidueFraction <= UPPER_RESIDUE_MAX),
-      plaster: !rec.invariants?.plasterHistogram ||
-        (rec.invariants.plasterHistogram.base === 0 && rec.invariants.plasterHistogram.roof === 0),
+        Object.values(rec.bands?.wallForeignResidue ?? {}).every((v) => v == null || v <= UPPER_RESIDUE_MAX),
+      plaster: !rec.invariants?.plaster ||
+        Object.entries(rec.invariants.plaster.histogram).every(([z, c]) =>
+          c === 0 || rec.invariants.plaster.allowedZones.includes(z)),
+      zoneMap: rec.zoneMap?.source === "concept" || rec.zoneMap?.source === "prior-fallback",
       course: (rec.pattern?.course?.after?.stepSmoothness ?? 0) >= (rec.pattern?.course?.before?.stepSmoothness ?? 1),
     };
     const ok = Object.values(checks).every(Boolean);
     console.error(`[offline] ${def.key}: artifact sha ${checks.sha ? "MATCHES" : "DIVERGES"}; ` +
       `coverage gate final ${checks.gateFinal ? "passed" : "VIOLATED"} / splat-only ${checks.gateSplatOnly ? "rejected" : "VIOLATED"}; ` +
       `bands ${checks.bands ? "OK" : "VIOLATED"}; plaster invariant ${checks.plaster ? "OK" : "VIOLATED"}; ` +
-      `course smoothness ${checks.course ? "non-regressing" : "VIOLATED"}; AJV ok`);
+      `course smoothness ${checks.course ? "non-regressing" : "VIOLATED"}; ` +
+      `zone map ${checks.zoneMap ? `recorded (${rec.zoneMap.source})` : "MISSING"}; AJV ok`);
     if (!ok) process.exitCode = 1;
     return;
   }
@@ -458,6 +535,10 @@ async function main() {
   console.error(`[${def.key}] reproducible: double-run artifacts identical (${r1.final.placements.length} placements)`);
   console.error(`[${def.key}] substitution ${JSON.stringify(r1.substitution)}` +
     (r1.agreesWithRecord != null ? ` — agrees with committed value-select record` : " (no committed record — this run is the result)"));
+  console.error(`[${def.key}] zone map: ${r1.zoneMap.source}` +
+    (r1.zoneMap.reason ? ` (${r1.zoneMap.reason})` : "") +
+    (r1.zoneMap.bands ? ` — ${r1.zoneMap.bands.map((b) => `${b.name} y${b.yRange[0]}..${b.yRange[1]} ${b.dominantBlock}`).join(", ")}; roof ${r1.zoneMap.roof.dominantBlock}` : "") +
+    (r1.zoneMap.agreesWithRecord ? " — agrees with committed zone-map record" : ""));
   console.error(`[${def.key}] fill: ${r1.fill.placements.length} filled, ${r1.fill.kept} kept — ` +
     Object.entries(r1.fill.byZone).map(([z, s]) => `${z} ${s.filled}/${s.surface}`).join(", "));
   console.error(`[${def.key}] splat: front ${r1.splat.front.painted} (zoneRejected ${r1.splat.front.zoneRejected}, accepted ${r1.splat.front.accepted}), ` +
@@ -466,8 +547,8 @@ async function main() {
     `smoothness ${r1.course.before.stepSmoothness} → ${r1.course.after.stepSmoothness}; salt ${r1.salt.stripped} stripped / ${r1.salt.kept} kept`);
   console.error(`[${def.key}] coverage splat-only: ${coverageLine(r1.coverage.splatOnly)} → gate ${r1.gates.splatOnly.passed ? "PASS (unexpected)" : "REJECT"}`);
   console.error(`[${def.key}] coverage final:      ${coverageLine(r1.coverage.final)} → gate ${r1.gates.final.passed ? "PASS" : "REJECT"}`);
-  console.error(`[${def.key}] bands: roof materials ${r1.bands.roofMaterialsFraction}` +
-    (r1.bands.upperResidueFraction != null ? `, upper ${r1.bands.upperResidueBlock} residue ${r1.bands.upperResidueFraction}` : " (upper residue n/a — shared dominant)"));
+  console.error(`[${def.key}] bands: roof materials ${r1.bands.roofMaterialsFraction}; wall foreign residue ` +
+    Object.entries(r1.bands.wallForeignResidue).map(([z, v]) => `${z}=${v ?? "n/a"}`).join(", "));
 
   const artJson = JSON.stringify(r1.final, null, 2) + "\n";
   await writeFile(artPath, artJson);
@@ -545,7 +626,8 @@ async function main() {
         "policy; all later stages run in the shipped palette. Reported ΔE is true unweighted ΔE76.",
     },
     sealed: { raw: r1.raw.placements.length, substituted: r1.artifact0.placements.length, sealed: r1.sealed.placements.length },
-    zones: r1.zones,
+    zones: { ...r1.zones, source: r1.zoneMap.source },
+    zoneMap: r1.zoneMap,
     fill: {
       skin: "exposure", minRun: 2, policy: r1.policyS,
       placements: r1.fill.placements.length, kept: r1.fill.kept, byZone: r1.fill.byZone,
@@ -566,8 +648,8 @@ async function main() {
       note: "coverage is a PRECONDITION (T-088): the splat-only replay is rejected delta-independently; " +
         "the final skin must pass or the run throws. Census basis = the full 6-dir exposure shell (T-090).",
     },
-    bands: { ...r1.bands, roofTarget: ROOF_BAND_TARGET, upperResidueMax: UPPER_RESIDUE_MAX },
-    invariants: { plasterHistogram: r1.plasterHistogram },
+    bands: { ...r1.bands, roofTarget: ROOF_BAND_TARGET, residueMax: UPPER_RESIDUE_MAX },
+    invariants: { plaster: r1.plaster },
     reproducible: {
       doubleRun: true, sha256,
       determinism: "no LLM on the path — concept PNG + material-map roles are committed upstream " +
@@ -600,6 +682,15 @@ function renderMd(r) {
     `Substitution: \`${JSON.stringify(r.valueTrue.substitution)}\`` +
     (r.valueTrue.agreesWithCommittedRecord != null ? ` (agrees with the committed value-select record)` : ` (first run for this subject)`) + `\n\n` +
     `| role | named | chosen | verdict | cells | true ΔE |\n|---|---|---|---|---|---|\n${rowsMd}\n\n` +
+    `## Zone map (T-092) — source: **${r.zoneMap.source}**` +
+    (r.zoneMap.reason ? ` (${r.zoneMap.reason})` : "") + `\n` +
+    (r.zoneMap.bands
+      ? r.zoneMap.bands.map((b) => `- ${b.name} y ${b.yRange[0]}..${b.yRange[1]}: \`${b.dominantBlock}\` (${b.dominantRole})`).join("\n") +
+        `\n- roof: \`${r.zoneMap.roof.dominantBlock}\` (${r.zoneMap.roof.dominantRole})\n` +
+        (r.zoneMap.diff?.wallDiffs?.length
+          ? `\nDiff vs the prior: ${r.zoneMap.diff.wallDiffs.map((d) => `y ${d.yRange[0]}..${d.yRange[1]} \`${d.prior}\`→\`${d.derived}\``).join("; ")}\n\n`
+          : `\nDiff vs the prior: walls identical\n\n`)
+      : `The concept region was unreadable; the registry prior was applied and recorded.\n\n`) +
     `## Base coat + splat (T-085/T-090 + E-23)\n` +
     `Full-shell fill (skin: exposure): **${r.fill.placements} cells filled**, ${r.fill.kept} kept — ` +
     Object.entries(r.fill.byZone).map(([z, s]) => `${z} ${s.filled}/${s.surface}`).join(", ") + `.\n` +
@@ -612,8 +703,8 @@ function renderMd(r) {
     `- **splat-only (the E-23 baseline): ${r.coverageGate.splatOnly.passed ? "PASSED (unexpected)" : "REJECTED"}** — ${covLine(r.coverage.splatOnly)}\n` +
     `- **final skin: ${r.coverageGate.final.passed ? "PASSED" : "REJECTED (unexpected)"}** — ${covLine(r.coverage.final)}\n` +
     `- bands: roof materials ${pct(r.bands.roofMaterialsFraction)} (target ${pct(r.bands.roofTarget)})` +
-    (r.bands.upperResidueFraction != null ? `, upper \`${r.bands.upperResidueBlock}\` residue ${pct(r.bands.upperResidueFraction)} (max ${pct(r.bands.upperResidueMax)})` : " · upper residue n/a (shared dominant)") + `\n` +
-    (r.invariants.plasterHistogram ? `- plaster invariant: ${JSON.stringify(r.invariants.plasterHistogram)} (base/roof = 0)\n` : "") +
+    `, wall foreign residue ${Object.entries(r.bands.wallForeignResidue).map(([z, v]) => `${z} ${v == null ? "n/a" : pct(v)}`).join(" · ")} (max ${pct(r.bands.residueMax)})\n` +
+    (r.invariants.plaster ? `- plaster invariant: \`${r.invariants.plaster.block}\` ${JSON.stringify(r.invariants.plaster.histogram)} — allowed zones: ${r.invariants.plaster.allowedZones.join(", ")}\n` : "") +
     (r.resemblance && r.resemblance.final != null ? `- front resemblance vs concept (evidence): ${r.resemblance.splatOnly} → ${r.resemblance.final}\n` : "") +
     `\n## Renders\n${renders}\n\nFrames: ${r.frames.join(", ") || "(none — GL unavailable)"}\n\n` +
     `> ${r.reproducible.determinism}\n` +
