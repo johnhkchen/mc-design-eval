@@ -1,0 +1,62 @@
+{
+  "ingredients": [
+    {
+      "block": "stone_bricks",
+      "role": "main wall body / coursed masonry of the structure",
+      "formClass": "cube",
+      "whereUsed": [
+        "band0",
+        "openings"
+      ],
+      "confidence": "high",
+      "rationale": "Uniform light-grey blocks laid in a regular offset brick course with crisp straight mortar lines and the faint cracked-brick speckle characteristic of the stone_bricks texture; flat faces, no rounded cobble lumps."
+    },
+    {
+      "block": "cobblestone",
+      "role": "corner quoins and the eave/trim band capping the walls",
+      "formClass": "cube",
+      "whereUsed": [
+        "corners-edges",
+        "trim"
+      ],
+      "confidence": "high",
+      "rationale": "The vertical corner strips and the band under the roof have a mottled, lumpy, rounded-pebble surface with irregular dark pits — the cobblestone texture — clearly distinct from the flat ruled coursing of the stone_bricks walls beside them."
+    },
+    {
+      "block": "deepslate_bricks",
+      "role": "roof field (the sloped dark brick courses)",
+      "formClass": "cube",
+      "whereUsed": [
+        "roof"
+      ],
+      "confidence": "medium",
+      "rationale": "The roof slope shows very dark, near-black blocks laid in a tight horizontal brick course with visible offset mortar joints — a brick pattern (not plain stone), in the dark deepslate value range rather than a brown or red brick."
+    },
+    {
+      "block": "stone_brick_stairs",
+      "role": "stepped roof eaves / verge and ridge edging",
+      "formClass": "fixture",
+      "whereUsed": [
+        "roof"
+      ],
+      "confidence": "medium",
+      "rationale": "The light-grey stepped edges framing the dark roof field read as a staircase profile (angled steps with a slab-thick nose) in the same light stone-brick value as the walls, used to make the sloped eave and verge."
+    },
+    {
+      "block": "dark_oak_planks",
+      "role": "arched door surround / lintel framing the gateway opening",
+      "formClass": "cube",
+      "whereUsed": [
+        "openings"
+      ],
+      "confidence": "medium",
+      "rationale": "The blocks framing the doorway arch are warm dark-brown with horizontal plank grain and the regular vertical seams of a plank texture, in the dark/cool brown range that distinguishes dark_oak from the redder spruce or lighter oak."
+    }
+  ],
+  "unidentified": [
+    {
+      "surface": "narrow vertical window slits on the side wall (openings)",
+      "reason": "They read as thin dark recessed slots; I cannot tell whether they are empty air recesses or hold a dark infill block (e.g. bars/pane), so I will not guess a block."
+    }
+  ]
+}

@@ -1,0 +1,276 @@
+{
+  "schema": "kit/v1",
+  "subject": "cottage",
+  "generatedFrom": {
+    "concept": "runs/014-vConcept-a-cottage/concept.png",
+    "materialMap": "material-map/cottage.json",
+    "zoneMapRecord": "zone-map/cottage.json"
+  },
+  "params": {
+    "model": "claude-opus-4-8",
+    "tier": "strong",
+    "gridN": 96,
+    "deltaMax": 16,
+    "chromaWeight": 2,
+    "minCells": 24,
+    "lightnessOffset": -14.157,
+    "offsetSamples": 4
+  },
+  "kit": [
+    {
+      "block": "stone_bricks",
+      "role": "ground-floor / plinth walls",
+      "formClass": "cube",
+      "whereUsed": [
+        "band0",
+        "base"
+      ],
+      "confidence": "high",
+      "rationale": "The lower storey shows regular rectangular coursing with straight horizontal mortar lines and uniform cool-grey blocks — the tidy ashlar grid of stone_bricks, not the random lumps of cobblestone.",
+      "flags": [],
+      "valueCheck": {
+        "verdict": "verified",
+        "deltaE": 6.702,
+        "rawDeltaE": 17.067,
+        "cells": 295,
+        "swatchLab": [
+          35.444,
+          0.521,
+          3.209
+        ],
+        "blockLab": [
+          51.223,
+          -0.002,
+          0
+        ],
+        "flaggedForReview": false
+      }
+    },
+    {
+      "block": "cobblestone",
+      "role": "base corner quoins and chimney stack",
+      "formClass": "cube",
+      "whereUsed": [
+        "corners-edges",
+        "base",
+        "roof"
+      ],
+      "confidence": "medium",
+      "rationale": "At the building corners and on the chimney rising through the roof the stone changes to a mottled, rounded, irregular-pebble texture distinct from the brick coursing beside it — the lumpy cobblestone face.",
+      "flags": [],
+      "valueCheck": {
+        "verdict": "flagged-mismatch",
+        "deltaE": 42.884,
+        "rawDeltaE": 38.278,
+        "cells": 41,
+        "swatchLab": [
+          59.43,
+          1.706,
+          18.449
+        ],
+        "blockLab": [
+          53.305,
+          0.571,
+          -0.409
+        ],
+        "flaggedForReview": true
+      }
+    },
+    {
+      "block": "spruce_planks",
+      "role": "roof field, timber framing beams and floor band",
+      "formClass": "cube",
+      "whereUsed": [
+        "roof",
+        "band1",
+        "trim"
+      ],
+      "confidence": "high",
+      "rationale": "Both the stepped roof slopes and the vertical/horizontal framing members show evenly spaced dark-brown plank striations with the flat, low-contrast grain of spruce_planks rather than the reddish chocolate streaks of dark_oak.",
+      "flags": [],
+      "valueCheck": {
+        "verdict": "verified",
+        "deltaE": 15.381,
+        "rawDeltaE": 21.13,
+        "cells": 1555,
+        "swatchLab": [
+          23.997,
+          6.82,
+          18.046
+        ],
+        "blockLab": [
+          38.489,
+          7.86,
+          25.664
+        ],
+        "flaggedForReview": false
+      }
+    },
+    {
+      "block": "smooth_sandstone",
+      "role": "plaster infill panels between timbers",
+      "formClass": "cube",
+      "whereUsed": [
+        "band1"
+      ],
+      "confidence": "medium",
+      "rationale": "The cream panels framed by the dark beams are flat and near-featureless with only a faint horizontal seam — the smooth, uniform pale face of smooth_sandstone reading as render/plaster, not the visible grain of birch planks.",
+      "flags": [],
+      "valueCheck": {
+        "verdict": "verified",
+        "deltaE": 8.511,
+        "rawDeltaE": 16.228,
+        "cells": 99,
+        "swatchLab": [
+          71.604,
+          0.779,
+          22.561
+        ],
+        "blockLab": [
+          85.425,
+          -3.448,
+          23.021
+        ],
+        "flaggedForReview": false
+      }
+    },
+    {
+      "block": "spruce_trapdoor",
+      "role": "window shutters / lattice infill",
+      "formClass": "fixture",
+      "whereUsed": [
+        "openings"
+      ],
+      "confidence": "medium",
+      "rationale": "The brown elements flanking and filling the windows show vertical boards with a cross-brace and a thin recessed profile sitting proud of the wall — the board-and-batten silhouette of spruce trapdoors used as shutters.",
+      "flags": [],
+      "valueCheck": {
+        "verdict": null,
+        "reason": "non-cube",
+        "flaggedForReview": false
+      }
+    },
+    {
+      "block": "spruce_door",
+      "role": "front entrance door",
+      "formClass": "fixture",
+      "whereUsed": [
+        "openings",
+        "base"
+      ],
+      "confidence": "medium",
+      "rationale": "The ground-floor entry is a single tall two-panel leaf with a dark vertical-plank face and a visible handle, matching the spruce_door texture set into the stone-brick surround.",
+      "flags": [],
+      "valueCheck": {
+        "verdict": null,
+        "reason": "non-cube",
+        "flaggedForReview": false
+      }
+    },
+    {
+      "block": "lantern",
+      "role": "exterior light beside the door",
+      "formClass": "fixture",
+      "whereUsed": [
+        "openings",
+        "base"
+      ],
+      "confidence": "high",
+      "rationale": "A small cube-on-bracket fixture emitting a warm orange glow with a metal cage and bright center pixels next to the doorway — the lit lantern.",
+      "flags": [],
+      "valueCheck": {
+        "verdict": null,
+        "reason": "non-cube",
+        "flaggedForReview": false
+      }
+    }
+  ],
+  "unidentified": [
+    {
+      "surface": "inner window grille behind the shutters",
+      "reason": "A dark criss-cross lattice is visible inside the window opening, but the resolution does not let me distinguish whether it is iron_bars, a wooden fence/trapdoor grid, or simply shadow, so I will not name a block.",
+      "fallback": {
+        "mode": "color-snap"
+      }
+    }
+  ],
+  "dropped": [],
+  "overrides": {
+    "white_terracotta": "smooth_sandstone",
+    "dark_oak_planks": "spruce_planks"
+  },
+  "overrideRows": [
+    {
+      "bandName": "band0",
+      "named": "stone_bricks",
+      "recognized": "stone_bricks",
+      "verdict": "identity"
+    },
+    {
+      "bandName": "band1",
+      "named": "white_terracotta",
+      "recognized": "smooth_sandstone",
+      "verdict": "override"
+    },
+    {
+      "bandName": "roof",
+      "named": "dark_oak_planks",
+      "recognized": "spruce_planks",
+      "verdict": "override"
+    }
+  ],
+  "diff": {
+    "corrections": [
+      {
+        "band": "band1",
+        "old": "white_terracotta",
+        "new": "smooth_sandstone",
+        "ships": true,
+        "oldRole": "upper-storey plaster infill between the timbers"
+      },
+      {
+        "band": "roof",
+        "old": "dark_oak_planks",
+        "new": "spruce_planks",
+        "ships": true,
+        "oldRole": "roof eaves, verge & rake fascia (darker plank edge)"
+      }
+    ],
+    "recovered": [
+      {
+        "block": "spruce_trapdoor",
+        "role": "window shutters / lattice infill",
+        "formClass": "fixture"
+      },
+      {
+        "block": "spruce_door",
+        "role": "front entrance door",
+        "formClass": "fixture"
+      },
+      {
+        "block": "lantern",
+        "role": "exterior light beside the door",
+        "formClass": "fixture"
+      }
+    ],
+    "unchanged": [
+      "stone_bricks",
+      "cobblestone",
+      "spruce_planks"
+    ]
+  },
+  "stats": {
+    "in": 7,
+    "kept": 7,
+    "dropped": 0,
+    "unidentified": 1,
+    "flagged": 0,
+    "formClasses": {
+      "cube": 4,
+      "fixture": 3,
+      "rail": 0
+    },
+    "verified": 3,
+    "flaggedForReview": 1
+  }
+}

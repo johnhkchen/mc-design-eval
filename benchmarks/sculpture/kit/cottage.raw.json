@@ -1,0 +1,87 @@
+{
+  "ingredients": [
+    {
+      "block": "stone_bricks",
+      "role": "ground-floor / plinth walls",
+      "formClass": "cube",
+      "whereUsed": [
+        "band0",
+        "base"
+      ],
+      "confidence": "high",
+      "rationale": "The lower storey shows regular rectangular coursing with straight horizontal mortar lines and uniform cool-grey blocks — the tidy ashlar grid of stone_bricks, not the random lumps of cobblestone."
+    },
+    {
+      "block": "cobblestone",
+      "role": "base corner quoins and chimney stack",
+      "formClass": "cube",
+      "whereUsed": [
+        "corners-edges",
+        "base",
+        "roof"
+      ],
+      "confidence": "medium",
+      "rationale": "At the building corners and on the chimney rising through the roof the stone changes to a mottled, rounded, irregular-pebble texture distinct from the brick coursing beside it — the lumpy cobblestone face."
+    },
+    {
+      "block": "spruce_planks",
+      "role": "roof field, timber framing beams and floor band",
+      "formClass": "cube",
+      "whereUsed": [
+        "roof",
+        "band1",
+        "trim"
+      ],
+      "confidence": "high",
+      "rationale": "Both the stepped roof slopes and the vertical/horizontal framing members show evenly spaced dark-brown plank striations with the flat, low-contrast grain of spruce_planks rather than the reddish chocolate streaks of dark_oak."
+    },
+    {
+      "block": "smooth_sandstone",
+      "role": "plaster infill panels between timbers",
+      "formClass": "cube",
+      "whereUsed": [
+        "band1"
+      ],
+      "confidence": "medium",
+      "rationale": "The cream panels framed by the dark beams are flat and near-featureless with only a faint horizontal seam — the smooth, uniform pale face of smooth_sandstone reading as render/plaster, not the visible grain of birch planks."
+    },
+    {
+      "block": "spruce_trapdoor",
+      "role": "window shutters / lattice infill",
+      "formClass": "fixture",
+      "whereUsed": [
+        "openings"
+      ],
+      "confidence": "medium",
+      "rationale": "The brown elements flanking and filling the windows show vertical boards with a cross-brace and a thin recessed profile sitting proud of the wall — the board-and-batten silhouette of spruce trapdoors used as shutters."
+    },
+    {
+      "block": "spruce_door",
+      "role": "front entrance door",
+      "formClass": "fixture",
+      "whereUsed": [
+        "openings",
+        "base"
+      ],
+      "confidence": "medium",
+      "rationale": "The ground-floor entry is a single tall two-panel leaf with a dark vertical-plank face and a visible handle, matching the spruce_door texture set into the stone-brick surround."
+    },
+    {
+      "block": "lantern",
+      "role": "exterior light beside the door",
+      "formClass": "fixture",
+      "whereUsed": [
+        "openings",
+        "base"
+      ],
+      "confidence": "high",
+      "rationale": "A small cube-on-bracket fixture emitting a warm orange glow with a metal cage and bright center pixels next to the doorway — the lit lantern."
+    }
+  ],
+  "unidentified": [
+    {
+      "surface": "inner window grille behind the shutters",
+      "reason": "A dark criss-cross lattice is visible inside the window opening, but the resolution does not let me distinguish whether it is iron_bars, a wooden fence/trapdoor grid, or simply shadow, so I will not name a block."
+    }
+  ]
+}
