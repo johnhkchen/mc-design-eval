@@ -37,6 +37,8 @@
     "resemblance:consolidate": "node benchmarks/sculpture/resemblance-consolidation.mjs",
     "surgical:standard": "node benchmarks/sculpture/surgical-standard.mjs",
     "material:map": "node benchmarks/sculpture/material-map.mjs",
+    "kit:extract": "node benchmarks/sculpture/kit-extract.mjs",
+    "build:block-vocab": "node scripts/build-block-vocab.mjs",
     "material:assign": "node benchmarks/sculpture/material-assign.mjs",
     "material:correct": "node benchmarks/sculpture/material-correct.mjs",
     "value:select": "node benchmarks/sculpture/value-select.mjs",
