@@ -85,8 +85,10 @@ function skinEntries(occ, skin, faces) {
  * Is the voxel at `key` part of a RUN — a same-material 6-connected component of ≥ `minRun` cells over the
  * FULL occupancy (interior continuation counts: a stud running into the wall is one run)? Bounded flood
  * with early exit at `minRun`; the verdict is memoized for every visited key so a long stud is flooded once.
+ * Exported so the T-098 placement grammar respects the SAME keep rule when painting frame lines —
+ * one run definition, no refork.
  */
-function inRun(occ, key, bare, minRun, memo) {
+export function inRun(occ, key, bare, minRun, memo) {
   const known = memo.get(key);
   if (known !== undefined) return known;
   const visited = new Set([key]);
