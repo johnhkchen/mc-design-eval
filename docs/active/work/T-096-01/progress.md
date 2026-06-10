@@ -36,9 +36,21 @@ Live data exposed two design flaws, both fixed in the pure core before committin
    the AC #2/#3 hard rule); `diffKitVsMap` counts any candidate naming a different block as a
    correction, stamped `ships: true|false`.
 
-## Remaining
+## Completed (continued)
 
-- Re-run `kit:extract --offline` (no new live calls — raws are pinned), inspect, commit
-  records + raws (step 5 commit).
-- Step 6: durable-skin wiring (`kitRecord` + `subK` composition), full `npm test`, commit.
-- review.md.
+- **Deviation fixes** (`e5c6929`): shared-shading offset in `verifyKitValues` (rawDeltaE kept),
+  `flagged-candidate` rows + `ships:` on corrections, band-specificity candidate ranking (the
+  live cottage exposed confidence-first picking the crossing `spruce_planks` over the exclusive
+  `smooth_sandstone` for band1). 24 kit tests; suite 1129 green.
+- **Step 5 — records** (`76c4472`): kits + raws + md committed; offline re-runs byte-identical
+  (checksum-verified). Cottage: `white_terracotta → smooth_sandstone` ships;
+  spruce_trapdoor/spruce_door/lantern recovered; timber framing recognized as spruce_planks
+  (differs from "stripped logs", rationale recorded — the AC's escape clause); window fences
+  honestly `unidentified` with recorded color-snap fallback. Gatehouse:
+  `deepslate_tiles → deepslate_bricks` ships, stone_brick_stairs recovered.
+- **Step 6 — wiring** (`f23f0f0`): `kitRecord` in SUBJECTS; `subK` composes verified overrides
+  over the snap before the single renaming point; live proof both subjects — all terminal gates
+  pass, double-run byte-identical, value-select and zone-map agreements still asserted and
+  passing; durable-skin records regenerated with kit provenance.
+
+All plan steps complete. `npm test` green (1129).
