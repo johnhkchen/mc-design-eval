@@ -88,41 +88,20 @@ function bandEvidence(cov, policy) {
   return { roofMaterialsFraction: policy.roof ? fraction("roof", own("roof")) : null, wallForeignResidue };
 }
 
-/** The deterministic core for one subject: committed inputs → grammar → gated final artifact. */
-async function runGrammar(def) {
-  const skinRecPath = join(HERE, "durable-skin", `${def.key}.json`);
-  const skinArtPath = join(HERE, "durable-skin", def.key, "artifact.json");
-  const kitPath = def.kitRecord && join(HERE, def.kitRecord);
-  for (const [what, p] of [["durable-skin record", skinRecPath], ["durable-skin artifact", skinArtPath]]) {
-    if (!existsSync(p)) throw new Error(`${what} absent (${p}) — run npm run skin:${def.key} first`);
-  }
-  if (!kitPath || !existsSync(kitPath)) {
-    throw new Error(`no committed kit for ${def.key} — the grammar binds KIT entries (run kit:extract)`);
-  }
-  const skinRec = JSON.parse(await readFile(skinRecPath, "utf8"));
-  const build = JSON.parse(await readFile(skinArtPath, "utf8"));
-  assertArtifact(build);
-  const kitRec = JSON.parse(await readFile(kitPath, "utf8"));
-  if (kitRec.schema !== "kit/v1") throw new Error(`${def.kitRecord} is not a kit/v1 record`);
-  if (skinRec.zoneMap?.source !== "concept" || !skinRec.zoneMap.bands) {
-    throw new Error(`durable-skin record has no concept-derived zone map (source=${skinRec.zoneMap?.source}) — ` +
-      `the grammar binds to the T-092 derived bands, not the prior`);
-  }
-
+/** The gated grammar core over ONE build: geometry re-read → bind+paint → THROW gates → re-gated
+ *  final. Exported for the styled milestone (T-101), which feeds it from buildSkin's return value;
+ *  the committed-record disk seam stays in runGrammar. Behavior identical either way. */
+export function grammarStage(build, { bands, roof, policy, substitution, kitRec, zoneOpts }) {
   // geometry + the derived zone map (the same composition buildSkin records)
   const occ = artifactOccupancy(build);
-  const sz = structuralZones(occ, def.zoneOpts ?? {});
-  const zb = zonesFromBands({
-    bands: skinRec.zoneMap.bands, roof: skinRec.zoneMap.roof,
-    roofKeys: sz.roofKeys, upperTop: sz.upperTop,
-  });
-  const bandNames = skinRec.zoneMap.bands.map((b) => b.name);
+  const sz = structuralZones(occ, zoneOpts ?? {});
+  const zb = zonesFromBands({ bands, roof, roofKeys: sz.roofKeys, upperTop: sz.upperTop });
+  const bandNames = bands.map((b) => b.name);
 
-  // the one renaming point: value-true substitution ∘ kit overrides (buildSkin's subK, from the record)
-  const combined = { ...(skinRec.valueTrue?.substitution ?? {}), ...(kitRec.overrides ?? {}) };
+  // the one renaming point: value-true substitution ∘ kit overrides (buildSkin's subK)
+  const combined = { ...(substitution ?? {}), ...(kitRec.overrides ?? {}) };
   const sub = (b) => combined[b] ?? b;
 
-  const policy = skinRec.fill.policy; // SHIPPED space (recorded by buildSkin after mapPolicy)
   const grammar = placementGrammar(occ, {
     kit: kitRec.kit, bandNames, policy, zoneOf: zb.zoneOf,
     floorLines: sz.floorLines, upperTop: sz.upperTop, roofKeys: sz.roofKeys, sub,
@@ -152,17 +131,47 @@ async function runGrammar(def) {
     throw new Error(`coverage gate FAILED after the grammar: ` +
       gate.failures.map((f) => `${f.zone} ${f.dominant}=${f.fraction} < ${COVERAGE_THRESHOLD}`).join(", "));
   }
-  const bands = bandEvidence(cov, policy);
-  const worstResidue = Math.max(0, ...Object.values(bands.wallForeignResidue).filter((v) => v != null));
-  if ((bands.roofMaterialsFraction ?? 0) < ROOF_BAND_TARGET || worstResidue > UPPER_RESIDUE_MAX) {
-    throw new Error(`band acceptance FAILED after the grammar: roof ${bands.roofMaterialsFraction} ` +
-      `(>= ${ROOF_BAND_TARGET}), residue ${JSON.stringify(bands.wallForeignResidue)} (max ${UPPER_RESIDUE_MAX})`);
+  const bandsEvidence = bandEvidence(cov, policy);
+  const worstResidue = Math.max(0, ...Object.values(bandsEvidence.wallForeignResidue).filter((v) => v != null));
+  if ((bandsEvidence.roofMaterialsFraction ?? 0) < ROOF_BAND_TARGET || worstResidue > UPPER_RESIDUE_MAX) {
+    throw new Error(`band acceptance FAILED after the grammar: roof ${bandsEvidence.roofMaterialsFraction} ` +
+      `(>= ${ROOF_BAND_TARGET}), residue ${JSON.stringify(bandsEvidence.wallForeignResidue)} (max ${UPPER_RESIDUE_MAX})`);
   }
-  return { skinRec, build, grammar, final, coverage: cov, gate, bands, bandNames, policy };
+  return { grammar, final, coverage: cov, gate, bands: bandsEvidence, bandNames };
 }
 
-/** Render an artifact at the four config gate azimuths; compose a labeled-order 4-panel sheet. */
-async function renderSheet(artifact, label, subjDir) {
+/** The deterministic core for one subject: committed inputs → grammar → gated final artifact. */
+async function runGrammar(def) {
+  const skinRecPath = join(HERE, "durable-skin", `${def.key}.json`);
+  const skinArtPath = join(HERE, "durable-skin", def.key, "artifact.json");
+  const kitPath = def.kitRecord && join(HERE, def.kitRecord);
+  for (const [what, p] of [["durable-skin record", skinRecPath], ["durable-skin artifact", skinArtPath]]) {
+    if (!existsSync(p)) throw new Error(`${what} absent (${p}) — run npm run skin:${def.key} first`);
+  }
+  if (!kitPath || !existsSync(kitPath)) {
+    throw new Error(`no committed kit for ${def.key} — the grammar binds KIT entries (run kit:extract)`);
+  }
+  const skinRec = JSON.parse(await readFile(skinRecPath, "utf8"));
+  const build = JSON.parse(await readFile(skinArtPath, "utf8"));
+  assertArtifact(build);
+  const kitRec = JSON.parse(await readFile(kitPath, "utf8"));
+  if (kitRec.schema !== "kit/v1") throw new Error(`${def.kitRecord} is not a kit/v1 record`);
+  if (skinRec.zoneMap?.source !== "concept" || !skinRec.zoneMap.bands) {
+    throw new Error(`durable-skin record has no concept-derived zone map (source=${skinRec.zoneMap?.source}) — ` +
+      `the grammar binds to the T-092 derived bands, not the prior`);
+  }
+
+  const policy = skinRec.fill.policy; // SHIPPED space (recorded by buildSkin after mapPolicy)
+  const staged = grammarStage(build, {
+    bands: skinRec.zoneMap.bands, roof: skinRec.zoneMap.roof,
+    policy, substitution: skinRec.valueTrue?.substitution, kitRec, zoneOpts: def.zoneOpts,
+  });
+  return { skinRec, build, policy, ...staged };
+}
+
+/** Render an artifact at the four config gate azimuths; compose a labeled-order 4-panel sheet.
+ *  Exported as the shared evidence helper (T-101 reuses it for the styled before/after sheets). */
+export async function renderSheet(artifact, label, subjDir) {
   const { renderViews } = await import("../../src/view/multi-angle.mjs");
   const renders = await renderViews(artifact, [...MULTI_ANGLE_GATE.azimuths], {
     outDir: subjDir, label: (a) => `${label}-${a.replace(/\+/g, "p").replace(/-/g, "m")}`,
@@ -327,7 +336,9 @@ async function main() {
   console.error(`[${def.key}] record: ${recPath.replace(ROOT, "")}`);
 }
 
-main().catch((e) => {
-  console.error(e.stack || String(e));
-  process.exitCode = 1;
-});
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch((e) => {
+    console.error(e.stack || String(e));
+    process.exitCode = 1;
+  });
+}
