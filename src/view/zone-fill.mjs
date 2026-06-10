@@ -15,6 +15,16 @@
 // (four elevations + the roof top), deduped by voxel — exactly the skin the render lens sees; interior
 // cells are never touched.
 //
+// TWO SKINS (T-090-01, story S-090, epic E-25). The PROJECTION skin above is what five orthographic
+// cameras see — first occupied voxel per ray — and it under-covers: a cell occluded along all five rays
+// but still air-adjacent (the side face of a stepped roof course behind a gable, an under-eave wall
+// cell) is never enumerated, yet any oblique camera sees it (the cottage roof read 89% spruce on the
+// projection census and 55% on the real shell). The EXPOSURE skin is the full shell: every occupied
+// voxel with ANY of its 6 faces air-exposed — what a camera at ANY angle can see. `skin:"exposure"`
+// switches the fill and the census to it. Spec'd-in inclusions (they match the ticket's measurement):
+// -y-only-exposed cells (render-invisible undersides) and interior-cavity skins (a hollow build's
+// inner walls — interior-aware filling is the E-23 interior path's concern, not this op's).
+//
 // PURE — no GL, no I/O, no Date/random.
 
 import { bareBlock } from "./occupancy.mjs";
@@ -48,6 +58,28 @@ export function* surfaceVoxelEntries(occ, faces = FILL_FACES) {
 }
 
 const NEIGHBORS = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
+
+/** Iterate the FULL-SHELL exposure skin: every occupied voxel with ANY of its 6 faces air-exposed —
+ *  a strict superset of the projection skin (every projected cell's camera-side neighbour is air).
+ *  Deterministic in occupancy insertion order. Same {key, voxel, block} shape as surfaceVoxelEntries. */
+export function* exposedVoxelEntries(occ) {
+  for (const [key, block] of occ.cells) {
+    const [x, y, z] = key.split(",").map(Number);
+    for (const [dx, dy, dz] of NEIGHBORS) {
+      if (!occ.has(x + dx, y + dy, z + dz)) {
+        yield { key, voxel: [x, y, z], block };
+        break;
+      }
+    }
+  }
+}
+
+/** The one skin-name → iterator dispatch (the fill and the census must agree on what a skin means). */
+function skinEntries(occ, skin, faces) {
+  if (skin === "projection") return surfaceVoxelEntries(occ, faces);
+  if (skin === "exposure") return exposedVoxelEntries(occ);
+  throw new Error(`zone-fill: skin "${skin}" is not "projection" or "exposure"`);
+}
 
 /**
  * Is the voxel at `key` part of a RUN — a same-material 6-connected component of ≥ `minRun` cells over the
@@ -85,17 +117,28 @@ function inRun(occ, key, bare, minRun, memo) {
  *     quoin course, the chimney);
  *   • anything else (the collapsed stone field, isolated preserve-material specks, off-policy strays) →
  *     FILL: recolor to the zone's dominant.
- * Zones absent from `zones` are untouched. PURE.
+ * A voxel inside a DECLARED SUB-REGION (`regions`, T-090-01) is kept UNCONDITIONALLY, before zone
+ * policy is consulted — a declared design element (a chimney, a finial) keeps its material even when
+ * it is the zone's displaced field or a sub-minRun speck. Zones absent from `zones` are untouched.
+ * `skin` picks the enumeration: "projection" (the five-camera skin, the E-24 wall-field fill) or
+ * "exposure" (the full 6-dir-exposed shell, the T-090-01 full-shell fill). PURE.
  * @param {import("./occupancy.mjs").Occupancy} occ
  * @param {{zoneOf:(voxel:number[])=>string,
  *          zones:Record<string,{dominant:string, preserve?:string[]}>,
- *          faces?:string[], minRun?:number}} opts
+ *          faces?:string[], minRun?:number, skin?:"projection"|"exposure",
+ *          regions?:{name:string, contains:(voxel:number[])=>boolean}[]}} opts
  * @returns {{placements:{op:"voxel",pos:number[],block:string}[], filled:number, kept:number,
- *            byZone:Record<string,{surface:number,filled:number,kept:number}>}}
+ *            byZone:Record<string,{surface:number,filled:number,kept:number}>,
+ *            byRegion:Record<string,number>}}
  */
-export function zoneFill(occ, { zoneOf, zones, faces = FILL_FACES, minRun = 2 } = {}) {
+export function zoneFill(occ, { zoneOf, zones, faces = FILL_FACES, minRun = 2, skin = "projection", regions = [] } = {}) {
   if (typeof zoneOf !== "function") throw new Error("zoneFill: opts.zoneOf must be a function");
   if (!zones || typeof zones !== "object") throw new Error("zoneFill: opts.zones must be a zone→policy map");
+  for (const r of regions) {
+    if (!r || typeof r.name !== "string" || typeof r.contains !== "function") {
+      throw new Error("zoneFill: each region must be {name:string, contains:(voxel)=>boolean}");
+    }
+  }
   const policy = new Map();
   for (const [zone, p] of Object.entries(zones)) {
     if (!p || typeof p.dominant !== "string") throw new Error(`zoneFill: zones.${zone}.dominant must be a bare block id`);
@@ -104,13 +147,20 @@ export function zoneFill(occ, { zoneOf, zones, faces = FILL_FACES, minRun = 2 } 
   const memo = new Map(); // run verdicts, shared across the whole fill
   const placements = [];
   const byZone = {};
+  const byRegion = {};
   let filled = 0, kept = 0;
-  for (const { key, voxel, block } of surfaceVoxelEntries(occ, faces)) {
+  for (const { key, voxel, block } of skinEntries(occ, skin, faces)) {
     const zone = zoneOf(voxel);
     const p = policy.get(zone);
     if (!p) continue; // no policy for this zone — untouched
     const z = (byZone[zone] ??= { surface: 0, filled: 0, kept: 0 });
     z.surface++;
+    const region = regions.find((r) => r.contains(voxel));
+    if (region) {
+      byRegion[region.name] = (byRegion[region.name] || 0) + 1;
+      z.kept++; kept++;
+      continue;
+    }
     const bare = bareBlock(block);
     if (bare === p.dominant || (p.preserve.has(bare) && inRun(occ, key, bare, minRun, memo))) {
       z.kept++; kept++;
@@ -119,22 +169,23 @@ export function zoneFill(occ, { zoneOf, zones, faces = FILL_FACES, minRun = 2 } 
     placements.push({ op: "voxel", pos: [...voxel], block: namespaced(p.dominant) });
     z.filled++; filled++;
   }
-  return { placements, filled, kept, byZone };
+  return { placements, filled, kept, byZone, byRegion };
 }
 
 /**
  * Per-zone material census of the visible skin: total surface cells + per-bare-block counts, keyed by
  * whatever `zoneOf` returns. The coverage evidence for "the dominant is actually applied" (and the seam
- * the S-088 coverage gate consumes). PURE.
+ * the S-088 coverage gate consumes). `skin` picks the census basis: "projection" (the five-camera
+ * skin) or "exposure" (the full 6-dir shell — the camera's truth at any angle, T-090-01). PURE.
  * @param {import("./occupancy.mjs").Occupancy} occ
  * @param {(voxel:number[])=>string} zoneOf
- * @param {{faces?:string[]}} [opts]
+ * @param {{faces?:string[], skin?:"projection"|"exposure"}} [opts]
  * @returns {Record<string,{total:number, byBlock:Record<string,number>}>}
  */
-export function surfaceZoneHistogram(occ, zoneOf, { faces = FILL_FACES } = {}) {
+export function surfaceZoneHistogram(occ, zoneOf, { faces = FILL_FACES, skin = "projection" } = {}) {
   if (typeof zoneOf !== "function") throw new Error("surfaceZoneHistogram: zoneOf must be a function");
   const out = {};
-  for (const { voxel, block } of surfaceVoxelEntries(occ, faces)) {
+  for (const { voxel, block } of skinEntries(occ, skin, faces)) {
     const zone = zoneOf(voxel);
     const z = (out[zone] ??= { total: 0, byBlock: {} });
     z.total++;

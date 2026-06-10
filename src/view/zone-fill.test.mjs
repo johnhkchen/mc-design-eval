@@ -3,7 +3,10 @@ import assert from "node:assert/strict";
 import { occupancyFromCells } from "./occupancy.mjs";
 import { expandArtifact, voxelKey } from "../expand.mjs";
 import { applyPaint } from "./face-paint.mjs";
-import { zoneFill, surfaceZoneHistogram, dominantCoverage, FILL_FACES } from "./zone-fill.mjs";
+import {
+  zoneFill, surfaceZoneHistogram, dominantCoverage, FILL_FACES,
+  surfaceVoxelEntries, exposedVoxelEntries,
+} from "./zone-fill.mjs";
 
 // THE SYNTHETIC TWO-STOREY HUT. A solid 5×5 box: stone base (y 0..2) with a 3-cell cobblestone quoin
 // column at the (0,*,0) corner; a stone upper band (y 3..5 — the collapsed field the fill must displace)
@@ -166,4 +169,98 @@ test("dominantCoverage: composes with surfaceZoneHistogram on the hut census", (
   assert.equal(cov.base.dominantFraction, Math.round((45 / 48) * 1000) / 1000);
   assert.equal(cov.upper.dominant, "white_terracotta");
   assert.throws(() => dominantCoverage(null), /hist/);
+});
+
+// ---------------------------------------------------------------------------------------------------
+// T-090-01: the FULL-SHELL exposure skin. The synthetic below reproduces the geometry class that
+// defeats the projection skin on the cottage (615/615 grey roof-band cells sit on faces NO ortho ray
+// reaches): a cell exposed into a COVERED STEP GAP. Two 3-tall spruce ridges (x=0 and x=2) flank a
+// 1-wide valley; the valley FLOOR (y=0) is stone_bricks (the grey course side cells) and a spruce CAP
+// (y=2) bridges the gap. The mid-valley floor cell (1,0,1) has its +y face open into the covered slot,
+// but every ortho ray passes over it: +y stops at the cap, ±x at the ridges, ±z at the slot mouths.
+// Ridge A's (0,*,0) column is a 3-cell dark_oak_log stud run. 24 cells, all air-adjacent.
+function steppedRoof() {
+  const cells = [];
+  for (const x of [0, 2]) for (let y = 0; y <= 2; y++) for (let z = 0; z <= 2; z++) {
+    cells.push({ pos: [x, y, z], block: x === 0 && z === 0 ? "minecraft:dark_oak_log" : "minecraft:spruce_planks" });
+  }
+  for (let z = 0; z <= 2; z++) {
+    cells.push({ pos: [1, 0, z], block: "minecraft:stone_bricks" }); // the grey valley course
+    cells.push({ pos: [1, 2, z], block: "minecraft:spruce_planks" }); // the cap bridging the slot
+  }
+  return cells;
+}
+const roofOnly = () => "roof";
+const ROOF_ZONES = { roof: { dominant: "spruce_planks", preserve: ["dark_oak_log"] } };
+
+test("exposedVoxelEntries is a strict superset of the projection skin (hut)", () => {
+  const occ = occupancyFromCells(hut());
+  const proj = new Set([...surfaceVoxelEntries(occ)].map((e) => e.key));
+  const expo = new Set([...exposedVoxelEntries(occ)].map((e) => e.key));
+  for (const k of proj) assert.ok(expo.has(k), `projected ${k} must be exposure-skin too`);
+  assert.ok(!proj.has("2,4,2") && !expo.has("2,4,2")); // buried: in neither skin
+  // an underside-only cell (interior y=0 column, only its -y face is air) is exposure-only
+  assert.ok(!proj.has("2,0,2") && expo.has("2,0,2"));
+  assert.ok(expo.size > proj.size);
+});
+
+test("covered valley: the occluded grey cell is missed by projection, found by exposure", () => {
+  const occ = occupancyFromCells(steppedRoof());
+  const proj = new Set([...surfaceVoxelEntries(occ)].map((e) => e.key));
+  const expo = new Set([...exposedVoxelEntries(occ)].map((e) => e.key));
+  assert.ok(!proj.has("1,0,1"), "no ortho ray reaches the mid-valley floor cell");
+  assert.ok(expo.has("1,0,1"), "its +y face into the covered slot is air-exposed");
+  assert.equal(expo.size, 24); // every cell of the synthetic is air-adjacent
+});
+
+test("zoneFill skin:'exposure' recolors the grey valley course; skin:'projection' cannot", () => {
+  const occ = occupancyFromCells(steppedRoof());
+  const full = zoneFill(occ, { zoneOf: roofOnly, zones: ROOF_ZONES, skin: "exposure" });
+  assert.equal(blockAt(full.placements, [1, 0, 1]), "minecraft:spruce_planks");
+  assert.equal(full.byZone.roof.surface, 24);
+  assert.equal(full.filled, 3); // the whole stone course; everything else is dominant or the stud run
+  const proj = zoneFill(occ, { zoneOf: roofOnly, zones: ROOF_ZONES });
+  assert.equal(blockAt(proj.placements, [1, 0, 1]), undefined); // the old fill leaves the grey cell
+  assert.equal(proj.filled, 2); // only the slot-mouth cells are on the projection skin
+});
+
+test("a stud run survives the exposure fill", () => {
+  const occ = occupancyFromCells(steppedRoof());
+  const full = zoneFill(occ, { zoneOf: roofOnly, zones: ROOF_ZONES, skin: "exposure" });
+  for (const y of [0, 1, 2]) assert.equal(blockAt(full.placements, [0, y, 0]), undefined);
+});
+
+test("a declared sub-region keeps its material unconditionally", () => {
+  const occ = occupancyFromCells(hut());
+  // preservation disabled both ways: empty preserve set AND an unreachable minRun — only the declared
+  // region can save the chimney; the oak stray (outside the region) is still filled.
+  const zones = { ...ZONES, roof: { dominant: "spruce_planks", preserve: [] } };
+  const regions = [{ name: "chimney", contains: ([x, y, z]) => x === 1 && z === 1 && y >= 7 }];
+  const fill = zoneFill(occ, { zoneOf, zones, regions, minRun: 99, skin: "exposure" });
+  assert.equal(blockAt(fill.placements, [1, 7, 1]), undefined);
+  assert.equal(blockAt(fill.placements, [1, 8, 1]), undefined);
+  assert.equal(fill.byRegion.chimney, 2);
+  assert.equal(blockAt(fill.placements, [3, 6, 4]), "minecraft:spruce_planks");
+});
+
+test("exposure fill is recolor-only: placements land on existing voxels, geometry unchanged", () => {
+  const cells = steppedRoof();
+  const occ = occupancyFromCells(cells);
+  const art = artifactOf(cells);
+  const fill = zoneFill(occ, { zoneOf: roofOnly, zones: ROOF_ZONES, skin: "exposure" });
+  for (const p of fill.placements) assert.ok(occ.has(...p.pos));
+  const posSet = (vs) => new Set(vs.map((v) => voxelKey(v.pos)));
+  assert.deepEqual(posSet(expandArtifact(applyPaint(art, fill.placements))), posSet(expandArtifact(art)));
+});
+
+test("surfaceZoneHistogram skin:'exposure' matches hand counts on the covered valley", () => {
+  const hist = surfaceZoneHistogram(occupancyFromCells(steppedRoof()), roofOnly, { skin: "exposure" });
+  assert.deepEqual(hist.roof, { total: 24, byBlock: { spruce_planks: 18, stone_bricks: 3, dark_oak_log: 3 } });
+});
+
+test("unknown skin and malformed regions throw", () => {
+  const occ = occupancyFromCells(hut());
+  assert.throws(() => zoneFill(occ, { zoneOf, zones: ZONES, skin: "oblique" }), /skin "oblique"/);
+  assert.throws(() => surfaceZoneHistogram(occ, zoneOf, { skin: "glb" }), /skin "glb"/);
+  assert.throws(() => zoneFill(occ, { zoneOf, zones: ZONES, regions: [{ name: "x" }] }), /region/);
 });
