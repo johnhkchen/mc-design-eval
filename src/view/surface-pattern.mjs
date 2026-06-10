@@ -116,10 +116,45 @@ function metricsOfMap(ymap) {
 }
 
 /**
- * REGULAR-COURSE OP: basin-fill the roof's +y height field to its hydrological spill level. Priority-
- * flood: columns missing a 4-neighbour are OUTLETS (water drains off them — map edges, eaves, notches),
- * seeded at their own height; popping the lowest frontier level outward-in, an interior column's level
- * is max(own height, the level it spills through). A column below its spill level is an enclosed defect
+ * PRIORITY-FLOOD SPILL LEVELS over a 2-D value field (Map "a,b" → value). Cells missing a 4-neighbour
+ * are OUTLETS (the field drains off them — map edges, eaves, notches), seeded at their own value;
+ * popping the lowest frontier level outward-in, an interior cell's level is max(own value, the level it
+ * spills through). A cell BELOW its returned level sits in an enclosed basin; a cell that drains keeps
+ * its own value by construction. THE one hydrology core, two consumers: {@link regularizeRoofCourses}
+ * over the +y height map (basin = roof pit) and shell-integrity's void detector over per-face `-depth`
+ * (basin = recess/cavity, T-091-01). Keys may be negative world coords or grid indices — only 4-adjacency
+ * of the "a,b" pair is read. PURE.
+ * @param {Map<string,number>} vmap
+ * @returns {Map<string,number>} spill level per input key (isolated keys without neighbours: own value)
+ */
+export function spillLevels(vmap) {
+  const level = new Map();
+  const heap = [];
+  for (const [k, v] of vmap) {
+    const [a, b] = k.split(",").map(Number);
+    if (PLAN4.some(([da, db]) => !vmap.has(`${a + da},${b + db}`))) {
+      level.set(k, v);
+      heapPush(heap, [v, k]);
+    }
+  }
+  while (heap.length) {
+    const [l, k] = heapPop(heap);
+    if (level.get(k) !== l) continue; // stale entry
+    const [a, b] = k.split(",").map(Number);
+    for (const [da, db] of PLAN4) {
+      const nk = `${a + da},${b + db}`;
+      if (!vmap.has(nk) || level.has(nk)) continue;
+      const nl = Math.max(vmap.get(nk), l);
+      level.set(nk, nl);
+      heapPush(heap, [nl, nk]);
+    }
+  }
+  return level;
+}
+
+/**
+ * REGULAR-COURSE OP: basin-fill the roof's +y height field to its hydrological spill level (the
+ * priority-flood lives in {@link spillLevels}). A column below its spill level is an enclosed defect
  * (a dent/pit the seal passes left) and is raised by ADDING voxels in `dominant`; a valley that drains
  * keeps its height by construction; bumps are never touched (no delete — the residual is honest).
  * @param {import("./occupancy.mjs").Occupancy} occ
@@ -133,28 +168,7 @@ export function regularizeRoofCourses(occ, { dominant } = {}) {
   }
   const ymap = topHeightMap(occ);
   const before = metricsOfMap(ymap);
-  // priority-flood spill levels
-  const level = new Map();
-  const heap = [];
-  for (const [k, y] of ymap) {
-    const [x, z] = k.split(",").map(Number);
-    if (PLAN4.some(([dx, dz]) => !ymap.has(`${x + dx},${z + dz}`))) {
-      level.set(k, y);
-      heapPush(heap, [y, k]);
-    }
-  }
-  while (heap.length) {
-    const [l, k] = heapPop(heap);
-    if (level.get(k) !== l) continue; // stale entry
-    const [x, z] = k.split(",").map(Number);
-    for (const [dx, dz] of PLAN4) {
-      const nk = `${x + dx},${z + dz}`;
-      if (!ymap.has(nk) || level.has(nk)) continue;
-      const nl = Math.max(ymap.get(nk), l);
-      level.set(nk, nl);
-      heapPush(heap, [nl, nk]);
-    }
-  }
+  const level = spillLevels(ymap);
   // raise each basin column to its spill level — adds only
   const placements = [];
   const raised = new Map(); // post-fill height map, for the after metrics
