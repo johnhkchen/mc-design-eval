@@ -2128,3 +2128,35 @@ recorded and `--offline` re-asserts it (plus gates + AJV) against the committed 
 **One sentence:** E-24 ends with the thing it was missing at the start — two subjects whose high-quality
 skins (dominants established 88–100%, value-true blocks, coherent courses, gate-passing) are produced by
 **one reproducible pipeline command** with the residuals named, instead of by an agent's hand.
+
+## Subject roster refresh — retirement is a measurement decision (E-25 / T-094-01)
+
+**Moai is retired; the concept was the defect.** The `runs/003` concept image shows **three statues in
+one frame** on a black background. TRELLIS reconstructed it as a fragmented mesh (the smoke gate now
+quantifies it: voxelized @48, **3 components, largestFraction 0.52**); the build was judged "different
+object" mostly on debris and duplicate masses — verdicts that say nothing about design capability. The
+lesson is upstream of every score: **a weird concept makes every downstream verdict ambiguous**, and no
+amount of gate sophistication recovers it. Moai is moved to a `RETIRED SUBJECTS` block in
+`benchmarks/sculpture/resemblance.mjs` (rationale inline, history and artifacts untouched); the live
+resemblance roster is gatehouse + cottage + pineapple.
+
+**Concepts now pass a sanity checklist BEFORE registration.** Recorded beside the image
+(`runs/<id>/concept-checklist.md`), one row per attempt per item: single building · clean background ·
+one canonical 3/4 view · ≥3 distinct material zones · readable silhouette · no environmental clutter ·
+**bulky throughout** (no thin freestanding members — the TRELLIS thin-subject 500 / sword lesson).
+Regeneration happens before registration; once registered the concept is **immutable** (E-25 Rule 2).
+The checklist earned its keep immediately: the church's attempt 1 was rejected for a thin gold cross
+finial *before* the TRELLIS call was spent; attempt 2 (steered via the BAML job's `attached` note,
+failed attempt preserved on disk) passes all seven items.
+
+**Church is the registered challenge subject (E-25 Rule 3).** Cottage and gatehouse both shaped the
+pipeline; passing on them cannot prove generalization. The church — a village church with a square
+bell tower: two attached masses, two roof forms (pitched nave + pyramidal tower cap), four material
+zones, bulky throughout — was provisioned concept-first via the new `provision-concept.mjs` (vConcept
+building mode stages 1+2, **deliberately no build**), minted to `glb/church.glb` via the TRELLIS
+client, and smoke-checked with the new `glb-smoke.mjs` at the working scale 48: **26-conn 1 component,
+largestFraction 1.0000** (48×37×40, 11,423 cells; 6-conn 0.955 reported only — cleaner than the
+gatehouse's 0.83). The gate was validated both ways first: gatehouse passes reproducing its recorded
+numbers; moai fails. Registration is `CHALLENGE_SUBJECTS` in `resemblance.mjs` — concept path, GLB
+path, scale, **nothing else**: no material map, no build, no skin, no runner consumes it yet. The whole
+point is that when the pipeline runs it, it runs it untuned.

@@ -108,6 +108,26 @@ const SUBJECTS = {
 // object · clean background · one canonical 3/4 view · ≥3 material zones · readable silhouette ·
 // no clutter · bulky throughout); see the church entry below for the first checklist-gated subject.
 
+// ── CHALLENGE SUBJECTS (T-094-01, registered 2026-06-10) ─────────────────────────────────────────
+// E-25 Rule 3: generalization needs a subject the pipeline code has never seen. Cottage and gatehouse
+// both shaped the pipeline; church exists to be run UNTUNED. This entry is the registration record —
+// paths + working scale ONLY. Deliberately NOT in SUBJECTS: no build, material map, or skin exists
+// yet (`artifact`/`committedRender` have nothing to point at), and the default consolidation sweep
+// must not consume it. The concept passed the sanity checklist recorded beside the image
+// (runs/016-…/concept-checklist.md, incl. the glb-smoke single-mass sign-off: 26-conn 1 component,
+// largestFraction 1.0000 @48) and is IMMUTABLE hereafter (Rule 2). Future tickets point the runner
+// rosters (material-map → value-select → zone-map → durable-skin → multi-angle gate) at these same
+// paths as pure data — zero pipeline-code changes. Field shapes mirror SUBJECTS (concept relative to
+// the sculpture root, glb relative to glb/) so promotion into SUBJECTS is a move, not a rewrite.
+export const CHALLENGE_SUBJECTS = {
+  church: {
+    key: "church",
+    glb: "church.glb", // gitignored binary; provenance + smoke-check numbers in glb/README.md
+    concept: "runs/016-vBuilding-a-village-church-with-a-square-bell-tower/concept.png",
+    scale: 48, // the working scale (BUILDING_DEFAULT_SCALE) — the smoke-checked voxelization scale
+  },
+};
+
 /** Resolve a SUBJECTS entry's relative paths against the sculpture root → absolute paths for the runner. */
 function resolveSubject(def) {
   return {
