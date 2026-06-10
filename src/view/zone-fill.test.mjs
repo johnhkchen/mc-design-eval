@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { occupancyFromCells } from "./occupancy.mjs";
 import { expandArtifact, voxelKey } from "../expand.mjs";
 import { applyPaint } from "./face-paint.mjs";
-import { zoneFill, surfaceZoneHistogram, FILL_FACES } from "./zone-fill.mjs";
+import { zoneFill, surfaceZoneHistogram, dominantCoverage, FILL_FACES } from "./zone-fill.mjs";
 
 // THE SYNTHETIC TWO-STOREY HUT. A solid 5×5 box: stone base (y 0..2) with a 3-cell cobblestone quoin
 // column at the (0,*,0) corner; a stone upper band (y 3..5 — the collapsed field the fill must displace)
@@ -134,4 +134,36 @@ test("surfaceZoneHistogram: hand counts before, dominant+studs only after the fi
   assert.deepEqual(after.upper, { total: 48, byBlock: { white_terracotta: 45, dark_oak_log: 3 } });
   assert.deepEqual(after.roof, { total: 26, byBlock: { spruce_planks: 24, bricks: 2 } });
   assert.equal(FILL_FACES.length, 5); // the census faces are the five visible ones (no -y underside)
+});
+
+test("dominantCoverage: per-zone fraction of the intended dominant, permille-rounded", () => {
+  const hist = {
+    upper: { total: 638, byBlock: { white_terracotta: 454, dark_oak_log: 184 } },
+    base: { total: 598, byBlock: { stone_bricks: 370, dark_oak_log: 159, cobblestone: 69 } },
+  };
+  const cov = dominantCoverage(hist, {
+    upper: { dominant: "minecraft:white_terracotta" }, // namespaced policy id normalizes
+    base: { dominant: "stone_bricks", preserve: ["cobblestone"], splat: [] }, // extra keys ignored
+  });
+  assert.deepEqual(cov.upper, { ...hist.upper, dominant: "white_terracotta", dominantFraction: 0.712 });
+  assert.deepEqual(cov.base, { ...hist.base, dominant: "stone_bricks", dominantFraction: 0.619 });
+});
+
+test("dominantCoverage: absent dominant counts as 0; un-intended or empty zones report null", () => {
+  const hist = {
+    upper: { total: 10, byBlock: { stone_bricks: 10 } }, // intended dominant nowhere on the skin
+    attic: { total: 4, byBlock: { spruce_planks: 4 } },  // no policy entry
+    void: { total: 0, byBlock: {} },                     // empty census
+  };
+  const cov = dominantCoverage(hist, { upper: { dominant: "white_terracotta" }, void: { dominant: "stone_bricks" } });
+  assert.equal(cov.upper.dominantFraction, 0);
+  assert.deepEqual([cov.attic.dominant, cov.attic.dominantFraction], [null, null]);
+  assert.deepEqual([cov.void.dominant, cov.void.dominantFraction], ["stone_bricks", null]);
+});
+
+test("dominantCoverage: composes with surfaceZoneHistogram on the hut census", () => {
+  const cov = dominantCoverage(surfaceZoneHistogram(occupancyFromCells(hut()), zoneOf), ZONES);
+  assert.equal(cov.base.dominantFraction, Math.round((45 / 48) * 1000) / 1000);
+  assert.equal(cov.upper.dominant, "white_terracotta");
+  assert.throws(() => dominantCoverage(null), /hist/);
 });

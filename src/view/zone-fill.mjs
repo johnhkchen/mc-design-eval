@@ -141,3 +141,28 @@ export function surfaceZoneHistogram(occ, zoneOf, { faces = FILL_FACES } = {}) {
   }
   return out;
 }
+
+/**
+ * Per-zone dominant-coverage record: decorate a surfaceZoneHistogram census with each zone's INTENDED
+ * dominant (from the E-21-derived zones policy) and the fraction of the zone's visible skin it covers —
+ * the S-088 coverage metric ("is the intended dominant actually applied?"), ‰-rounded like the
+ * committed spray-paint record. A zone absent from `zones` (or an empty census) reports
+ * `dominant/dominantFraction: null` — measurable but un-intended zones are not judged here. PURE.
+ * @param {Record<string,{total:number, byBlock:Record<string,number>}>} hist  surfaceZoneHistogram output
+ * @param {Record<string,{dominant:string}>} [zones]  zone→policy map (same shape zoneFill takes; extra keys ignored)
+ * @returns {Record<string,{total:number, byBlock:Record<string,number>, dominant:string|null, dominantFraction:number|null}>}
+ */
+export function dominantCoverage(hist, zones = {}) {
+  if (!hist || typeof hist !== "object") throw new Error("dominantCoverage: hist must be a surfaceZoneHistogram record");
+  const out = {};
+  for (const [zone, h] of Object.entries(hist)) {
+    const dominant = typeof zones[zone]?.dominant === "string" ? bareBlock(zones[zone].dominant) : null;
+    out[zone] = {
+      total: h.total,
+      byBlock: h.byBlock,
+      dominant,
+      dominantFraction: dominant && h.total ? Math.round(((h.byBlock[dominant] ?? 0) / h.total) * 1000) / 1000 : null,
+    };
+  }
+  return out;
+}

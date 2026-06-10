@@ -54,3 +54,55 @@ export function acceptIfCloser({ before, after, epsilon = 0 }) {
   const accepted = a != null && b != null && a > b + epsilon;
   return { accepted, before: b, after: a, delta, epsilon };
 }
+
+/** "Is the dominant actually DOMINANT" — a majority of the zone's visible skin (S-088 default). */
+export const DEFAULT_COVERAGE_THRESHOLD = 0.5;
+
+/**
+ * The S-088 coverage PRECONDITION over a `dominantCoverage` record (zone-fill.mjs): every gated zone
+ * must show `dominantFraction >= threshold` on a non-empty census. Gated zones = `opts.zones`' keys
+ * when given (the E-21-derived intent), else every measured zone. A gated zone that is missing from
+ * `coverage`, has an empty census, or has a null fraction FAILS — absence of evidence is failure (the
+ * 91%-bare wall *had* a number; a zone with no number is worse, never a pass). PURE.
+ * @param {Record<string,{total:number, dominant:string|null, dominantFraction:number|null}>} coverage
+ * @param {{threshold?:number, zones?:Record<string,object>}} [opts]
+ * @returns {{passed:boolean, threshold:number,
+ *            failures:{zone:string,dominant:string|null,fraction:number|null,total:number}[],
+ *            byZone:Record<string,{dominant:string|null,fraction:number|null,total:number,passed:boolean}>}}
+ */
+export function coverageGate(coverage, { threshold = DEFAULT_COVERAGE_THRESHOLD, zones } = {}) {
+  if (!coverage || typeof coverage !== "object") throw new Error("coverageGate: coverage must be a dominantCoverage record");
+  const gated = zones ? Object.keys(zones) : Object.keys(coverage);
+  const failures = [];
+  const byZone = {};
+  for (const zone of gated) {
+    const c = coverage[zone];
+    const fraction = c?.dominantFraction ?? null;
+    const total = c?.total ?? 0;
+    const passed = total > 0 && fraction != null && fraction >= threshold;
+    byZone[zone] = { dominant: c?.dominant ?? null, fraction, total, passed };
+    if (!passed) failures.push({ zone, dominant: c?.dominant ?? null, fraction, total });
+  }
+  return { passed: failures.length === 0, threshold, failures, byZone };
+}
+
+/**
+ * Coverage-aware accept (S-088): the coverage PRECONDITION runs FIRST — a skin whose base coat is
+ * under-applied is rejected regardless of the marginal resemblance delta (coverage is a precondition,
+ * not a tie-breaker; resemblance refines a skin that already has its base coat, it cannot substitute
+ * for one). Only when coverage passes does the decision fall through to `acceptIfCloser`, unchanged.
+ * On a coverage short-circuit the resemblance fields are nulled, NOT computed — the record must show
+ * the delta was never consulted. PURE.
+ * @param {{coverage:object, threshold?:number, zones?:object,
+ *          before:number|null, after:number|null, epsilon?:number}} args
+ * @returns {{accepted:boolean, reason:"coverage"|"resemblance-improved"|"resemblance-not-improved",
+ *            coverage:object, before:number|null, after:number|null, delta:number|null, epsilon:number}}
+ */
+export function acceptWithCoverage({ coverage, threshold, zones, before, after, epsilon = 0 }) {
+  const pre = coverageGate(coverage, { threshold, zones });
+  if (!pre.passed) {
+    return { accepted: false, reason: "coverage", coverage: pre, before: null, after: null, delta: null, epsilon };
+  }
+  const res = acceptIfCloser({ before, after, epsilon });
+  return { ...res, reason: res.accepted ? "resemblance-improved" : "resemblance-not-improved", coverage: pre };
+}
