@@ -28,8 +28,10 @@ function namespaced(id) {
   return typeof id === "string" && !id.includes(":") ? `minecraft:${id}` : id;
 }
 
-/** Iterate the visible-skin surface voxels: union of the face projections, deduped by voxel key. */
-function* surfaceVoxelEntries(occ, faces) {
+/** Iterate the visible-skin surface voxels: union of the face projections, deduped by voxel key.
+ *  THE canonical skin iterator — exported so the S-087 surface-pattern ops consume the same skin
+ *  definition the fill and the census use (one definition, no refork). */
+export function* surfaceVoxelEntries(occ, faces = FILL_FACES) {
   const seen = new Set();
   for (const dir of faces) {
     const grid = projectSurface(occ, dir);
