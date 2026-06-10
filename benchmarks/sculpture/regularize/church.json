@@ -1,0 +1,248 @@
+{
+  "schema": "shell-regularize/v1",
+  "subject": "church",
+  "inputs": {
+    "shell": "challenge/church/shell-artifact.json",
+    "glb": "glb/church.glb"
+  },
+  "expect": {
+    "spikes": 602,
+    "ragged": 334,
+    "columns": 1376
+  },
+  "params": {
+    "radius": 1,
+    "minKeep": 9,
+    "iouTolerance": 0.02,
+    "grid": 128,
+    "spikeFaces": 4,
+    "cliff": 3,
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "note": "op parameters (declared, shared across subjects — no tuning); azimuths config-frozen (MULTI_ANGLE_GATE)"
+  },
+  "targets": {
+    "spikesReduction": 0.5,
+    "raggedRelativeReduction": 0.1,
+    "note": "implementer-declared (AC #4); the run THROWS on a miss — honest gaps, not quiet records"
+  },
+  "protect": {
+    "chimney": {
+      "ridgeY": 32,
+      "columns": 0
+    },
+    "openings": 32,
+    "note": "derived from geometry: the protruding stack above the highest roof plane (lifted protrudingStackRegion) + the build's own declared openings. The cage verifies both untouched independently of the ops honoring them."
+  },
+  "census": {
+    "before": {
+      "cells": 13647,
+      "spikes": 602,
+      "byExposure": [
+        3035,
+        4041,
+        3742,
+        2227,
+        546,
+        56,
+        0
+      ],
+      "ragged": 334,
+      "columns": 1376,
+      "raggedRate": 0.2427
+    },
+    "after": {
+      "cells": 16751,
+      "spikes": 242,
+      "byExposure": [
+        7159,
+        5424,
+        2856,
+        1070,
+        220,
+        22,
+        0
+      ],
+      "ragged": 198,
+      "columns": 1376,
+      "raggedRate": 0.1439
+    },
+    "reduction": {
+      "spikes": 0.598,
+      "raggedRelative": 0.4071
+    }
+  },
+  "iou": {
+    "baseline": {
+      "+x+z": 0.8984,
+      "+x-z": 0.9453,
+      "-x-z": 0.9229,
+      "-x+z": 0.8609
+    },
+    "final": {
+      "+x+z": 0.898,
+      "+x-z": 0.9464,
+      "-x-z": 0.9248,
+      "-x+z": 0.8663
+    }
+  },
+  "trace": [
+    {
+      "step": "open",
+      "params": {
+        "radius": 1,
+        "minKeep": 9
+      },
+      "accepted": false,
+      "reasons": [
+        "closure: 225 interior cells exterior-reachable (input had 213)"
+      ],
+      "iouByAzimuth": {
+        "+x+z": {
+          "baseline": 0.8984,
+          "candidate": 0.8984,
+          "floor": 0.8784
+        },
+        "+x-z": {
+          "baseline": 0.9453,
+          "candidate": 0.9453,
+          "floor": 0.9253
+        },
+        "-x-z": {
+          "baseline": 0.9229,
+          "candidate": 0.9229,
+          "floor": 0.9029
+        },
+        "-x+z": {
+          "baseline": 0.8609,
+          "candidate": 0.8609,
+          "floor": 0.8409
+        }
+      },
+      "closure": {
+        "closed": false,
+        "reached": 225,
+        "inputReached": 213
+      },
+      "protect": {
+        "violations": 0
+      },
+      "census": {
+        "cells": 13641,
+        "spikes": 596,
+        "byExposure": [
+          3033,
+          4043,
+          3742,
+          2227,
+          542,
+          54,
+          0
+        ],
+        "ragged": 332,
+        "columns": 1371,
+        "raggedRate": 0.2422
+      },
+      "cells": {
+        "removed": 6,
+        "restoredComponents": [
+          {
+            "size": 8890,
+            "minY": 0
+          }
+        ]
+      }
+    },
+    {
+      "step": "close",
+      "params": {
+        "radius": 1
+      },
+      "accepted": true,
+      "reasons": [],
+      "iouByAzimuth": {
+        "+x+z": {
+          "baseline": 0.8984,
+          "candidate": 0.898,
+          "floor": 0.8784
+        },
+        "+x-z": {
+          "baseline": 0.9453,
+          "candidate": 0.9464,
+          "floor": 0.9253
+        },
+        "-x-z": {
+          "baseline": 0.9229,
+          "candidate": 0.9248,
+          "floor": 0.9029
+        },
+        "-x+z": {
+          "baseline": 0.8609,
+          "candidate": 0.8663,
+          "floor": 0.8409
+        }
+      },
+      "closure": {
+        "closed": false,
+        "reached": 150,
+        "inputReached": 213
+      },
+      "protect": {
+        "violations": 0
+      },
+      "census": {
+        "cells": 16751,
+        "spikes": 242,
+        "byExposure": [
+          7159,
+          5424,
+          2856,
+          1070,
+          220,
+          22,
+          0
+        ],
+        "ragged": 198,
+        "columns": 1376,
+        "raggedRate": 0.1439
+      },
+      "cells": {
+        "added": 3104
+      }
+    }
+  ],
+  "cage": {
+    "accepted": 1,
+    "rejected": 1,
+    "note": "every step gated on (a) per-azimuth silhouette IoU vs the GLB ≥ input − tolerance, (b) closure no-regress (strict 'closed' when the input is closed; plug remediation recorded), (c) protected regions byte-identical. Rejected steps rolled back and recorded."
+  },
+  "reproducible": {
+    "doubleRun": true,
+    "sha256": "02e78adb5cd445ac97d125bb0c6d55fdf42c7a3382d25ad036b9f15a52b2e83e",
+    "determinism": "no LLM, no GL on the decision path — silhouettes via the pure rasterizer; two in-process executions byte-matched."
+  },
+  "placements": {
+    "input": 13647,
+    "final": 16751
+  },
+  "renders": [
+    {
+      "when": "before",
+      "angle": "-x-z",
+      "path": "benchmarks/sculpture/regularize/church/view-oblique225-before.png"
+    },
+    {
+      "when": "after",
+      "angle": "-x-z",
+      "path": "benchmarks/sculpture/regularize/church/view-oblique225-after.png"
+    }
+  ],
+  "frames": [
+    "pr/assets/frames/regularize-church-before.png",
+    "pr/assets/frames/regularize-church-after.png"
+  ]
+}

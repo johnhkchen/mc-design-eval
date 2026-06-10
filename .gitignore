@@ -143,3 +143,8 @@ benchmarks/sculpture/dress-openings/**/*.png
 # styled/<subj>/*artifact.json; the committed evidence frames live in pr/assets/frames/styled-*.png
 # + multi-angle-*-styled.png + pr/assets/styled-*-kit.md.
 benchmarks/sculpture/styled/**/*.png
+
+# T-102-01 shell-regularization renders — regenerable via npm run regularize:{cottage,gatehouse,church}.
+# The durable record is regularize/<subj>.{json,md} + regularize/<subj>/artifact.json; the
+# committed evidence frames live in pr/assets/frames/regularize-*.png.
+benchmarks/sculpture/regularize/**/*.png
