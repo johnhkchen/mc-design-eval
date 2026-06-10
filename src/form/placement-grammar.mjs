@@ -179,11 +179,19 @@ export function placementGrammar(occ, {
   }
 
   // --- fields + courses through the fill's OWN contract (the T-090-01 survival proof) -----------
+  // `frameRefilled` counts the cells THE GRAMMAR PAINTED that the fill takes back — the survival
+  // proof, and it must be 0. A PRE-EXISTING sub-run frame-block speck that happens to sit on a frame
+  // cell (the gatehouse had 2 isolated cobbles at post positions) is the fill's normal anti-speckle
+  // strip, not a grammar violation — reported separately, never gated.
   const occPrime = overlayPlacements(solid, framePlacements);
   const fill = zoneFill(occPrime, { zoneOf, zones: policy, skin: "exposure", minRun });
-  const frameKeySet = new Set(frame.cells.keys());
-  const frameRefilled = fill.placements.reduce(
-    (n, p) => n + (frameKeySet.has(p.pos.join(",")) ? 1 : 0), 0);
+  const paintedKeys = new Set(framePlacements.map((p) => p.pos.join(",")));
+  let frameRefilled = 0, preexistingFrameRefilled = 0;
+  for (const p of fill.placements) {
+    const k = p.pos.join(",");
+    if (paintedKeys.has(k)) frameRefilled++;
+    else if (frame.cells.has(k)) preexistingFrameRefilled++;
+  }
 
   // --- preconditions (reported, runner-enforced) -------------------------------------------------
   const preconditions = { frameInPreserve: {}, bindingAgreesWithPolicy: {} };
@@ -219,6 +227,7 @@ export function placementGrammar(occ, {
     frame: { counts: frame.counts, painted, respected, adopted, skippedIsolated, alreadyFrame, placements: framePlacements },
     fill,
     frameRefilled,
+    preexistingFrameRefilled,
     fields,
     openings: boundOpenings,
     placements: [...framePlacements, ...fill.placements],

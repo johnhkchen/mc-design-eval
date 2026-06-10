@@ -1,0 +1,235 @@
+{
+  "schema": "placement-grammar/v1",
+  "subject": "gatehouse",
+  "pipelineOrder": "durable-skin → placement-grammar → T-099 (openings)",
+  "inputs": {
+    "build": "durable-skin/gatehouse/artifact.json",
+    "skinRecord": "durable-skin/gatehouse.json",
+    "kit": "kit/gatehouse.json",
+    "zoneMapBands": [
+      "band0"
+    ]
+  },
+  "grammar": {
+    "bindings": {
+      "frame": "cobblestone",
+      "panels": {
+        "band0": "stone_bricks"
+      },
+      "course": "deepslate_bricks",
+      "openingTreatments": [],
+      "skipped": []
+    },
+    "shipped": {
+      "frame": "cobblestone",
+      "panels": {
+        "band0": "polished_basalt"
+      },
+      "course": "deepslate_bricks"
+    },
+    "frame": {
+      "counts": {
+        "wall": 2906,
+        "cornerPost": 210,
+        "roofline": 90,
+        "floorLine": 90
+      },
+      "painted": 187,
+      "adopted": 3,
+      "respected": 50,
+      "skippedIsolated": 1,
+      "alreadyFrame": 149
+    },
+    "fill": {
+      "placements": 22,
+      "kept": 6088,
+      "byZone": {
+        "band0": {
+          "surface": 3320,
+          "filled": 7,
+          "kept": 3313
+        },
+        "roof": {
+          "surface": 2790,
+          "filled": 15,
+          "kept": 2775
+        }
+      }
+    },
+    "frameRefilled": 0,
+    "preexistingFrameRefilled": 2,
+    "preconditions": {
+      "frameInPreserve": {
+        "band0": true
+      },
+      "bindingAgreesWithPolicy": {
+        "band0": true,
+        "roof": true
+      }
+    },
+    "fields": [
+      {
+        "dir": "+x",
+        "instances": 3,
+        "cells": 227
+      },
+      {
+        "dir": "-x",
+        "instances": 3,
+        "cells": 228
+      },
+      {
+        "dir": "+z",
+        "instances": 1,
+        "cells": 380
+      },
+      {
+        "dir": "-z",
+        "instances": 1,
+        "cells": 347
+      }
+    ],
+    "openings": [
+      {
+        "dir": "+x",
+        "kind": "door",
+        "bbox": {
+          "u0": 7,
+          "v0": 16,
+          "u1": 19,
+          "v1": 31
+        },
+        "cells": 87,
+        "dressing": {
+          "cells": 0,
+          "blocks": []
+        },
+        "treatment": null,
+        "candidates": []
+      },
+      {
+        "dir": "-x",
+        "kind": "door",
+        "bbox": {
+          "u0": 7,
+          "v0": 16,
+          "u1": 19,
+          "v1": 31
+        },
+        "cells": 87,
+        "dressing": {
+          "cells": 0,
+          "blocks": []
+        },
+        "treatment": null,
+        "candidates": []
+      }
+    ],
+    "placements": 212
+  },
+  "coverage": {
+    "band0": {
+      "total": 3320,
+      "byBlock": {
+        "cobblestone": 800,
+        "polished_basalt": 2264,
+        "deepslate_bricks": 243,
+        "dark_oak_planks": 8,
+        "dark_oak_log": 5
+      },
+      "dominant": "polished_basalt",
+      "dominantFraction": 0.682
+    },
+    "roof": {
+      "total": 2790,
+      "byBlock": {
+        "cobblestone": 91,
+        "polished_basalt": 922,
+        "deepslate_bricks": 1535,
+        "dark_oak_planks": 185,
+        "dark_oak_log": 57
+      },
+      "dominant": "deepslate_bricks",
+      "dominantFraction": 0.55
+    }
+  },
+  "coverageGate": {
+    "threshold": 0.5,
+    "passed": true,
+    "failures": [],
+    "byZone": {
+      "band0": {
+        "dominant": "polished_basalt",
+        "fraction": 0.682,
+        "total": 3320,
+        "passed": true
+      },
+      "roof": {
+        "dominant": "deepslate_bricks",
+        "fraction": 0.55,
+        "total": 2790,
+        "passed": true
+      }
+    }
+  },
+  "bands": {
+    "roofMaterialsFraction": 1,
+    "wallForeignResidue": {
+      "band0": 0
+    },
+    "roofTarget": 0.9,
+    "residueMax": 0.05
+  },
+  "reproducible": {
+    "doubleRun": true,
+    "sha256": "6984e28264314ed4f88348e3b933b3ff03bbd8666e7d0da6fd24d3176fd22a5c"
+  },
+  "renders": {
+    "before": [
+      {
+        "angle": "+x+z",
+        "path": "benchmarks/sculpture/placement-grammar/gatehouse/view-before-pxpz.png"
+      },
+      {
+        "angle": "+x-z",
+        "path": "benchmarks/sculpture/placement-grammar/gatehouse/view-before-pxmz.png"
+      },
+      {
+        "angle": "-x-z",
+        "path": "benchmarks/sculpture/placement-grammar/gatehouse/view-before-mxmz.png"
+      },
+      {
+        "angle": "-x+z",
+        "path": "benchmarks/sculpture/placement-grammar/gatehouse/view-before-mxpz.png"
+      }
+    ],
+    "after": [
+      {
+        "angle": "+x+z",
+        "path": "benchmarks/sculpture/placement-grammar/gatehouse/view-after-pxpz.png"
+      },
+      {
+        "angle": "+x-z",
+        "path": "benchmarks/sculpture/placement-grammar/gatehouse/view-after-pxmz.png"
+      },
+      {
+        "angle": "-x-z",
+        "path": "benchmarks/sculpture/placement-grammar/gatehouse/view-after-mxmz.png"
+      },
+      {
+        "angle": "-x+z",
+        "path": "benchmarks/sculpture/placement-grammar/gatehouse/view-after-mxpz.png"
+      }
+    ],
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ]
+  },
+  "frames": [
+    "pr/assets/frames/grammar-gatehouse-before.png",
+    "pr/assets/frames/grammar-gatehouse-after.png"
+  ]
+}

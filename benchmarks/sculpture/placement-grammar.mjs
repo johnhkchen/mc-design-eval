@@ -190,7 +190,8 @@ function markdown(def, rec) {
     `${g.frame.respected} respected (kept declared secondaries), ${g.frame.skippedIsolated} broken-line ` +
     `isolates skipped, ${g.frame.alreadyFrame} already frame.`, "",
     `Fill (fields + courses through zoneFill): ${g.fill.placements.length} filled, ${g.fill.kept} kept; ` +
-    `**frameRefilled ${g.frameRefilled}** (the T-090-01 survival proof).`, "",
+    `**frameRefilled ${g.frameRefilled}** (the T-090-01 survival proof)` +
+    (g.preexistingFrameRefilled ? ` — plus ${g.preexistingFrameRefilled} pre-existing sub-run specks stripped (the fill's anti-speckle, not the grammar's paint)` : "") + ".", "",
     `Openings bound for T-099: ${g.openings.length} instances — ` +
     (g.openings.map((o) => `${o.dir} ${o.kind}→${o.treatment ?? "∅"}`).join(", ") || "none") + ".", "",
     `Coverage after grammar: ` + Object.entries(rec.coverage)
@@ -265,7 +266,8 @@ async function main() {
     `${g.frame.counts.floorLine} cells (posts+crown+beams) — ${g.frame.painted} painted, ` +
     `${g.frame.adopted} adopted (line continuity), ${g.frame.respected} respected, ` +
     `${g.frame.skippedIsolated} isolates skipped, ${g.frame.alreadyFrame} already`);
-  console.error(`[${def.key}] fill: ${g.fill.placements.length} filled, ${g.fill.kept} kept; frameRefilled ${g.frameRefilled}`);
+  console.error(`[${def.key}] fill: ${g.fill.placements.length} filled, ${g.fill.kept} kept; frameRefilled ${g.frameRefilled}` +
+    (g.preexistingFrameRefilled ? ` (+${g.preexistingFrameRefilled} pre-existing specks stripped — not the grammar's)` : ""));
   console.error(`[${def.key}] openings bound: ${g.openings.map((o) => `${o.dir} ${o.kind}→${o.treatment ?? "∅"}`).join(", ") || "none"}`);
   console.error(`[${def.key}] coverage: ` + Object.entries(r1.coverage)
     .map(([z, c]) => `${z} ${c.dominant}=${Math.round((c.dominantFraction ?? 0) * 100)}%`).join(", ") +
@@ -307,6 +309,7 @@ async function main() {
       },
       fill: { placements: g.fill.placements.length, kept: g.fill.kept, byZone: g.fill.byZone },
       frameRefilled: g.frameRefilled,
+      preexistingFrameRefilled: g.preexistingFrameRefilled,
       preconditions: g.preconditions,
       fields: g.fields.map((f) => ({ dir: f.dir, instances: f.instances.length, cells: f.instances.reduce((a, i) => a + i.cells, 0) })),
       openings: g.openings.map((o) => ({ dir: o.dir, kind: o.kind, bbox: o.bbox, cells: o.cells, dressing: o.dressing, treatment: o.treatment, candidates: o.candidates })),
