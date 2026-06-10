@@ -1,0 +1,555 @@
+{
+  "schema": "durable-skin/v1",
+  "subject": "cottage",
+  "inputs": {
+    "build": "concept-materials/cottage/after-artifact.json",
+    "concept": "runs/014-vConcept-a-cottage/concept.png",
+    "glb": "glb/cottage.glb",
+    "map": "material-map/cottage.json"
+  },
+  "valueTrue": {
+    "substitution": {
+      "stone_bricks": "tuff",
+      "white_terracotta": "sandstone"
+    },
+    "agreesWithCommittedRecord": true,
+    "rows": [
+      {
+        "role": "load-bearing ground-floor wall field",
+        "named": "stone_bricks",
+        "chosen": "tuff",
+        "switched": true,
+        "reason": "switched",
+        "sampleCells": 161,
+        "namedTrue": {
+          "deltaE": 11.6,
+          "dL": 10.97,
+          "da": -0.85,
+          "db": -3.65
+        },
+        "chosenTrue": {
+          "deltaE": 6.06,
+          "dL": 5.53,
+          "da": -2.44,
+          "db": -0.44
+        }
+      },
+      {
+        "role": "corner quoins, plinth course & chimney shaft (rough grey stone)",
+        "named": "cobblestone",
+        "chosen": "cobblestone",
+        "switched": false,
+        "reason": "thin-sample",
+        "sampleCells": 6,
+        "namedTrue": null,
+        "chosenTrue": null
+      },
+      {
+        "role": "half-timbering frame — vertical studs, corner posts, eaves beams",
+        "named": "dark_oak_log",
+        "chosen": "dark_oak_log",
+        "switched": false,
+        "reason": "prior-is-best",
+        "sampleCells": 643,
+        "namedTrue": {
+          "deltaE": 7.44,
+          "dL": 3.57,
+          "da": -1.11,
+          "db": 6.44
+        },
+        "chosenTrue": {
+          "deltaE": 7.44,
+          "dL": 3.57,
+          "da": -1.11,
+          "db": 6.44
+        }
+      },
+      {
+        "role": "upper-storey plaster infill between the timbers",
+        "named": "white_terracotta",
+        "chosen": "sandstone",
+        "switched": true,
+        "reason": "switched",
+        "sampleCells": 137,
+        "namedTrue": {
+          "deltaE": 13.59,
+          "dL": 6.37,
+          "da": 7.76,
+          "db": -9.16
+        },
+        "chosenTrue": {
+          "deltaE": 14.02,
+          "dL": 13.15,
+          "da": -3.85,
+          "db": 2.99
+        }
+      },
+      {
+        "role": "main roof field — plank courses",
+        "named": "spruce_planks",
+        "chosen": "spruce_planks",
+        "switched": false,
+        "reason": "prior-is-best",
+        "sampleCells": 456,
+        "namedTrue": {
+          "deltaE": 1.62,
+          "dL": -0.92,
+          "da": 0.5,
+          "db": 1.24
+        },
+        "chosenTrue": {
+          "deltaE": 1.62,
+          "dL": -0.92,
+          "da": 0.5,
+          "db": 1.24
+        }
+      },
+      {
+        "role": "roof eaves, verge & rake fascia (darker plank edge)",
+        "named": "dark_oak_planks",
+        "chosen": "dark_oak_planks",
+        "switched": false,
+        "reason": "prior-is-best",
+        "sampleCells": 570,
+        "namedTrue": {
+          "deltaE": 0.23,
+          "dL": -0.12,
+          "da": 0.1,
+          "db": 0.16
+        },
+        "chosenTrue": {
+          "deltaE": 0.23,
+          "dL": -0.12,
+          "da": 0.1,
+          "db": 0.16
+        }
+      },
+      {
+        "role": "chimney cap",
+        "named": "bricks",
+        "chosen": "bricks",
+        "switched": false,
+        "reason": "thin-sample",
+        "sampleCells": 17,
+        "namedTrue": null,
+        "chosenTrue": null
+      }
+    ],
+    "note": "selection in the ORIGINAL name space (T-086 locator), substitution applied ONCE to build + policy; all later stages run in the shipped palette. Reported ΔE is true unweighted ΔE76."
+  },
+  "sealed": {
+    "raw": 6429,
+    "substituted": 6429,
+    "sealed": 6597
+  },
+  "zones": {
+    "storeyDivide": 7,
+    "upperTop": 14
+  },
+  "fill": {
+    "skin": "exposure",
+    "minRun": 2,
+    "policy": {
+      "base": {
+        "dominant": "tuff",
+        "preserve": [
+          "cobblestone",
+          "dark_oak_log"
+        ],
+        "splat": [
+          "cobblestone",
+          "dark_oak_log"
+        ]
+      },
+      "upper": {
+        "dominant": "sandstone",
+        "preserve": [
+          "dark_oak_log",
+          "spruce_planks",
+          "dark_oak_planks"
+        ],
+        "splat": [
+          "dark_oak_log"
+        ]
+      },
+      "roof": {
+        "dominant": "spruce_planks",
+        "preserve": [
+          "dark_oak_planks",
+          "cobblestone",
+          "bricks",
+          "dark_oak_log"
+        ],
+        "splat": [
+          "dark_oak_planks",
+          "cobblestone",
+          "bricks"
+        ]
+      }
+    },
+    "placements": 2454,
+    "kept": 2884,
+    "byZone": {
+      "base": {
+        "surface": 1551,
+        "filled": 151,
+        "kept": 1400
+      },
+      "upper": {
+        "surface": 1413,
+        "filled": 1326,
+        "kept": 87
+      },
+      "roof": {
+        "surface": 2374,
+        "filled": 977,
+        "kept": 1397
+      }
+    }
+  },
+  "splat": {
+    "front": {
+      "dir": "+z",
+      "source": "concept",
+      "painted": 90,
+      "skipped": 10,
+      "offPalette": 0,
+      "zoneRejected": 471,
+      "accepted": true,
+      "coverageGate": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "base": {
+            "dominant": "tuff",
+            "fraction": 0.714,
+            "total": 1551,
+            "passed": true
+          },
+          "upper": {
+            "dominant": "sandstone",
+            "fraction": 0.929,
+            "total": 1413,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 0.829,
+            "total": 2374,
+            "passed": true
+          }
+        }
+      },
+      "outOfPalette": 0
+    },
+    "side": {
+      "dir": "+x",
+      "source": "glb",
+      "painted": 219,
+      "skipped": 29,
+      "offPalette": 0,
+      "zoneRejected": 442,
+      "accepted": true
+    },
+    "collisions": 0
+  },
+  "pattern": {
+    "course": {
+      "dominant": "spruce_planks",
+      "columnsRaised": 41,
+      "voxelsAdded": 85,
+      "before": {
+        "pairs": 1262,
+        "flat": 626,
+        "step1": 363,
+        "cliff": 273,
+        "stepSmoothness": 0.784,
+        "meanAbsStep": 0.983
+      },
+      "after": {
+        "pairs": 1262,
+        "flat": 707,
+        "step1": 337,
+        "cliff": 218,
+        "stepSmoothness": 0.827,
+        "meanAbsStep": 0.755
+      }
+    },
+    "salt": {
+      "minKeep": 3,
+      "minExtent": 3,
+      "stripped": 262,
+      "kept": 341,
+      "byZone": {
+        "roof": {
+          "offDominant": 200,
+          "strippedCells": 135,
+          "keptCells": 65,
+          "byBlock": {
+            "cobblestone": {
+              "stripped": 52,
+              "kept": 48
+            },
+            "dark_oak_planks": {
+              "stripped": 29,
+              "kept": 14
+            },
+            "dark_oak_log": {
+              "stripped": 54,
+              "kept": 3
+            }
+          }
+        },
+        "upper": {
+          "offDominant": 177,
+          "strippedCells": 51,
+          "keptCells": 126,
+          "byBlock": {
+            "dark_oak_log": {
+              "stripped": 51,
+              "kept": 120
+            },
+            "spruce_planks": {
+              "stripped": 0,
+              "kept": 6
+            }
+          }
+        },
+        "base": {
+          "offDominant": 226,
+          "strippedCells": 76,
+          "keptCells": 150,
+          "byBlock": {
+            "dark_oak_log": {
+              "stripped": 41,
+              "kept": 111
+            },
+            "cobblestone": {
+              "stripped": 35,
+              "kept": 39
+            }
+          }
+        }
+      }
+    }
+  },
+  "coverage": {
+    "splatOnly": {
+      "base": {
+        "total": 1551,
+        "byBlock": {
+          "cobblestone": 126,
+          "tuff": 905,
+          "dark_oak_log": 439,
+          "spruce_planks": 68,
+          "sandstone": 5,
+          "dark_oak_planks": 8
+        },
+        "dominant": "tuff",
+        "dominantFraction": 0.583
+      },
+      "upper": {
+        "total": 1413,
+        "byBlock": {
+          "cobblestone": 112,
+          "tuff": 981,
+          "dark_oak_log": 225,
+          "spruce_planks": 18,
+          "sandstone": 75,
+          "dark_oak_planks": 2
+        },
+        "dominant": "sandstone",
+        "dominantFraction": 0.053
+      },
+      "roof": {
+        "total": 2374,
+        "byBlock": {
+          "tuff": 795,
+          "spruce_planks": 1003,
+          "cobblestone": 253,
+          "dark_oak_log": 269,
+          "dark_oak_planks": 52,
+          "sandstone": 2
+        },
+        "dominant": "spruce_planks",
+        "dominantFraction": 0.422
+      }
+    },
+    "final": {
+      "base": {
+        "total": 1551,
+        "byBlock": {
+          "cobblestone": 81,
+          "tuff": 1106,
+          "dark_oak_log": 364
+        },
+        "dominant": "tuff",
+        "dominantFraction": 0.713
+      },
+      "upper": {
+        "total": 1419,
+        "byBlock": {
+          "sandstone": 1255,
+          "dark_oak_log": 156,
+          "spruce_planks": 8
+        },
+        "dominant": "sandstone",
+        "dominantFraction": 0.884
+      },
+      "roof": {
+        "total": 2440,
+        "byBlock": {
+          "spruce_planks": 2146,
+          "dark_oak_log": 119,
+          "dark_oak_planks": 16,
+          "cobblestone": 159
+        },
+        "dominant": "spruce_planks",
+        "dominantFraction": 0.88
+      }
+    }
+  },
+  "coverageGate": {
+    "threshold": 0.5,
+    "splatOnly": {
+      "passed": false,
+      "threshold": 0.5,
+      "failures": [
+        {
+          "zone": "upper",
+          "dominant": "sandstone",
+          "fraction": 0.053,
+          "total": 1413
+        },
+        {
+          "zone": "roof",
+          "dominant": "spruce_planks",
+          "fraction": 0.422,
+          "total": 2374
+        }
+      ],
+      "byZone": {
+        "base": {
+          "dominant": "tuff",
+          "fraction": 0.583,
+          "total": 1551,
+          "passed": true
+        },
+        "upper": {
+          "dominant": "sandstone",
+          "fraction": 0.053,
+          "total": 1413,
+          "passed": false
+        },
+        "roof": {
+          "dominant": "spruce_planks",
+          "fraction": 0.422,
+          "total": 2374,
+          "passed": false
+        }
+      }
+    },
+    "final": {
+      "passed": true,
+      "threshold": 0.5,
+      "failures": [],
+      "byZone": {
+        "base": {
+          "dominant": "tuff",
+          "fraction": 0.713,
+          "total": 1551,
+          "passed": true
+        },
+        "upper": {
+          "dominant": "sandstone",
+          "fraction": 0.884,
+          "total": 1419,
+          "passed": true
+        },
+        "roof": {
+          "dominant": "spruce_planks",
+          "fraction": 0.88,
+          "total": 2440,
+          "passed": true
+        }
+      }
+    },
+    "note": "coverage is a PRECONDITION (T-088): the splat-only replay is rejected delta-independently; the final skin must pass or the run throws. Census basis = the full 6-dir exposure shell (T-090)."
+  },
+  "bands": {
+    "roofMaterialsFraction": 1,
+    "upperResidueBlock": "tuff",
+    "upperResidueFraction": 0,
+    "roofTarget": 0.9,
+    "upperResidueMax": 0.05
+  },
+  "invariants": {
+    "plasterHistogram": {
+      "base": 0,
+      "upper": 1255,
+      "roof": 0
+    }
+  },
+  "reproducible": {
+    "doubleRun": true,
+    "sha256": "722af44b87faf5ddb18b0ab628cf0f73fa724aa1a127dc324e3d836faa56539e",
+    "determinism": "no LLM on the path — concept PNG + material-map roles are committed upstream artifacts; every stage is a pure function of them. Two in-process executions byte-matched."
+  },
+  "resemblance": {
+    "face": "front",
+    "splatOnly": 0.35,
+    "final": 0.3
+  },
+  "materialCounts": {
+    "before": {
+      "cobblestone": 608,
+      "stone_bricks": 3933,
+      "spruce_planks": 1073,
+      "dark_oak_log": 785,
+      "white_terracotta": 8,
+      "dark_oak_planks": 22
+    },
+    "after": {
+      "cobblestone": 240,
+      "tuff": 2206,
+      "dark_oak_log": 640,
+      "sandstone": 1255,
+      "spruce_planks": 2166,
+      "dark_oak_planks": 16
+    }
+  },
+  "renders": [
+    {
+      "when": "splat-only",
+      "angle": "front",
+      "path": "benchmarks/sculpture/durable-skin/cottage/view-splatonly-front.png"
+    },
+    {
+      "when": "final",
+      "angle": "front",
+      "path": "benchmarks/sculpture/durable-skin/cottage/view-final-front.png"
+    },
+    {
+      "when": "splat-only",
+      "angle": "-x-z",
+      "path": "benchmarks/sculpture/durable-skin/cottage/view-splatonly-oblique225.png"
+    },
+    {
+      "when": "final",
+      "angle": "-x-z",
+      "path": "benchmarks/sculpture/durable-skin/cottage/view-final-oblique225.png"
+    },
+    {
+      "when": "final",
+      "angle": "top",
+      "path": "benchmarks/sculpture/durable-skin/cottage/view-final-top.png"
+    }
+  ],
+  "frames": [
+    "pr/assets/frames/durable-cottage-strip.png",
+    "pr/assets/frames/durable-cottage-before.png",
+    "pr/assets/frames/durable-cottage-after.png"
+  ],
+  "notes": []
+}
