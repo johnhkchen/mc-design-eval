@@ -182,12 +182,13 @@ function markdown(def, rec) {
     `# placement-grammar — ${def.key}`, "",
     `Pipeline order: **${rec.pipelineOrder}**`, "",
     `Bindings (named → shipped): frame ${g.bindings.frame} → **${g.shipped.frame}**; ` +
-    rec.bandNames.map((b) => `${b} ${g.bindings.panels[b]} → ${g.shipped.panels[b]}`).join("; ") +
+    rec.inputs.zoneMapBands.map((b) => `${b} ${g.bindings.panels[b]} → ${g.shipped.panels[b]}`).join("; ") +
     `; course ${g.bindings.course} → ${g.shipped.course}.`, "",
     `Frame lines: ${g.frame.counts.cornerPost} cornerPost + ${g.frame.counts.roofline} roofline + ` +
     `${g.frame.counts.floorLine} floorLine of ${g.frame.counts.wall} wall cells — ` +
-    `${g.frame.painted} painted, ${g.frame.respected} respected (kept declared secondaries), ` +
-    `${g.frame.alreadyFrame} already frame.`, "",
+    `${g.frame.painted} painted, ${g.frame.adopted} adopted (line continuity), ` +
+    `${g.frame.respected} respected (kept declared secondaries), ${g.frame.skippedIsolated} broken-line ` +
+    `isolates skipped, ${g.frame.alreadyFrame} already frame.`, "",
     `Fill (fields + courses through zoneFill): ${g.fill.placements.length} filled, ${g.fill.kept} kept; ` +
     `**frameRefilled ${g.frameRefilled}** (the T-090-01 survival proof).`, "",
     `Openings bound for T-099: ${g.openings.length} instances — ` +
@@ -262,7 +263,8 @@ async function main() {
     (g.bindings.skipped.length ? ` (skipped: ${g.bindings.skipped.map((s) => s.feature).join(", ")})` : ""));
   console.error(`[${def.key}] frame: ${g.frame.counts.cornerPost}+${g.frame.counts.roofline}+` +
     `${g.frame.counts.floorLine} cells (posts+crown+beams) — ${g.frame.painted} painted, ` +
-    `${g.frame.respected} respected, ${g.frame.alreadyFrame} already`);
+    `${g.frame.adopted} adopted (line continuity), ${g.frame.respected} respected, ` +
+    `${g.frame.skippedIsolated} isolates skipped, ${g.frame.alreadyFrame} already`);
   console.error(`[${def.key}] fill: ${g.fill.placements.length} filled, ${g.fill.kept} kept; frameRefilled ${g.frameRefilled}`);
   console.error(`[${def.key}] openings bound: ${g.openings.map((o) => `${o.dir} ${o.kind}→${o.treatment ?? "∅"}`).join(", ") || "none"}`);
   console.error(`[${def.key}] coverage: ` + Object.entries(r1.coverage)
@@ -299,7 +301,10 @@ async function main() {
     },
     grammar: {
       bindings: g.bindings, shipped: g.shipped,
-      frame: { counts: g.frame.counts, painted: g.frame.painted, respected: g.frame.respected, alreadyFrame: g.frame.alreadyFrame },
+      frame: {
+        counts: g.frame.counts, painted: g.frame.painted, adopted: g.frame.adopted,
+        respected: g.frame.respected, skippedIsolated: g.frame.skippedIsolated, alreadyFrame: g.frame.alreadyFrame,
+      },
       fill: { placements: g.fill.placements.length, kept: g.fill.kept, byZone: g.fill.byZone },
       frameRefilled: g.frameRefilled,
       preconditions: g.preconditions,

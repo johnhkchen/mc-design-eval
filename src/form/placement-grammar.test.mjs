@@ -49,8 +49,8 @@ function hut() {
   return { occ, zoneOf, geom: { floorLines: [0, 3, 7], upperTop, roofKeys } };
 }
 const POLICY = {
-  band0: { dominant: "stone_bricks", preserve: ["cobblestone", "spruce_planks"] },
-  band1: { dominant: "smooth_sandstone", preserve: ["cobblestone", "spruce_planks"] },
+  band0: { dominant: "stone_bricks", preserve: ["cobblestone", "spruce_planks", "dark_oak_log"] },
+  band1: { dominant: "smooth_sandstone", preserve: ["cobblestone", "spruce_planks", "dark_oak_log"] },
   roof: { dominant: "spruce_planks", preserve: ["cobblestone"] },
 };
 const GOPTS = (h) => ({
@@ -127,6 +127,8 @@ test("placementGrammar: frame painted, declared chimney respected, fields realiz
   assert.equal(g.frame.counts.cornerPost + g.frame.counts.roofline + g.frame.counts.floorLine, 48);
   assert.equal(g.frame.respected, 7);
   assert.equal(g.frame.painted, 41);
+  assert.equal(g.frame.adopted, 0, "no singleton gaps in this hut — nothing to adopt");
+  assert.equal(g.frame.skippedIsolated, 0, "no broken-line isolates in this hut");
   assert.equal(g.frame.alreadyFrame, 0);
   // band1 walls (white_terracotta, off-policy) → panel; 56 band1 wall cells − 36 frame = 20
   assert.equal(g.fill.placements.length, 20);
@@ -174,6 +176,24 @@ test("placementGrammar: sub is the one renaming point — bound blocks map to sh
   assert.equal(g.shipped.panels.band0, "tuff");
   assert.equal(g.bindings.panels.band0, "stone_bricks", "bindings stay in NAMED space");
   assert.equal(g.preconditions.bindingAgreesWithPolicy.band0, true);
+});
+
+test("placementGrammar: a singleton gap in a partly-kept line ADOPTS the kept block, never a speck", () => {
+  // floor-beam row y3 on the front face: kept log runs either side of a 1-cell dominant gap; the gap
+  // has no paint neighbour and no frame-block neighbour, so the kit frame block would be an isolated
+  // speck below minRun (the fill would strip it) — line continuity adopts the log instead.
+  const h = hut();
+  const cells = [];
+  for (const [k, b] of h.occ.cells) cells.push({ pos: k.split(",").map(Number), block: b });
+  const logged = new Set(["1,3,0", "1,2,0", "3,3,0", "3,2,0"]); // runs of 2 — the fill's keep rule
+  const occ = occupancyFromCells(cells.map((c) =>
+    logged.has(c.pos.join(",")) ? { ...c, block: "dark_oak_log" } : c));
+  const g = placementGrammar(occ, { ...GOPTS(h), kit: KIT, zoneOf: h.zoneOf });
+  const gap = g.frame.placements.find((p) => p.pos.join(",") === "2,3,0");
+  assert.ok(gap, "the gap cell is painted");
+  assert.equal(gap.block, "minecraft:dark_oak_log", "adopted from the kept run, not the kit frame block");
+  assert.ok(g.frame.adopted >= 1);
+  assert.equal(g.frameRefilled, 0, "the adopted cell joins the run and survives the fill");
 });
 
 test("placementGrammar: opening instances are bound per kind and carried for T-099 — no fixture placements", () => {

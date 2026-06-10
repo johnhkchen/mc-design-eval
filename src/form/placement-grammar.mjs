@@ -129,21 +129,52 @@ export function placementGrammar(occ, {
   };
 
   // --- frame lines → frame block (diffed; kept declared secondaries respected) -------------------
+  // LINE CONTINUITY: where a line is already partly carried by a KEPT declared secondary (the splat-
+  // painted studs, a chimney course), painting the 1-cell gaps with the kit frame block would insert
+  // isolated specks BELOW minRun — which the fill rightly strips (the cottage refilled 21 such cells).
+  // A paint cell with no same-block support (no paint neighbour, no existing frame-block neighbour)
+  // ADOPTS an adjacent kept preserve-run's block instead (a respected frame cell or any declared
+  // secondary run beside it), completing the existing run — the line stays coherent and survives the
+  // fill by the same rule everything else does. A cell with neither support nor donor is a broken-
+  // line isolate (debris columns, air-pocketed corners): SKIPPED, counted, never painted — a 1-cell
+  // speck serves no rhythm and the fill would rightly strip it.
+  const NB6 = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
   const frame = frameLines(solid, geom);
   const preserveOf = new Map(Object.entries(policy).map(
     ([z, p]) => [z, new Set((p.preserve ?? []).map(bareBlock))]));
   const memo = new Map();
   const framePlacements = [];
-  let painted = 0, respected = 0, alreadyFrame = 0;
+  let painted = 0, respected = 0, alreadyFrame = 0, adopted = 0, skippedIsolated = 0;
   if (shipped.frame) {
+    const curOf = (key) => bareBlock(solid.cells.get(key));
+    const status = new Map(); // key → "already" | "respected" | "paint"
     for (const key of frame.cells.keys()) {
-      const cur = bareBlock(solid.cells.get(key));
-      if (cur === shipped.frame) { alreadyFrame++; continue; }
+      const cur = curOf(key);
+      if (cur === shipped.frame) { status.set(key, "already"); alreadyFrame++; continue; }
       const voxel = key.split(",").map(Number);
       const pset = preserveOf.get(zoneOf(voxel));
-      if (pset?.has(cur) && inRun(solid, key, cur, minRun, memo)) { respected++; continue; }
-      framePlacements.push({ op: "voxel", pos: voxel, block: `minecraft:${shipped.frame}` });
-      painted++;
+      if (pset?.has(cur) && inRun(solid, key, cur, minRun, memo)) { status.set(key, "respected"); respected++; continue; }
+      status.set(key, "paint");
+    }
+    for (const [key, st] of status) {
+      if (st !== "paint") continue;
+      const [x, y, z] = key.split(",").map(Number);
+      const nbKeys = NB6.map(([dx, dy, dz]) => `${x + dx},${y + dy},${z + dz}`);
+      const supported = nbKeys.some((nk) => status.get(nk) === "paint" || curOf(nk) === shipped.frame);
+      let block = shipped.frame;
+      if (!supported) {
+        const pset = preserveOf.get(zoneOf([x, y, z])) ?? new Set();
+        const donor = nbKeys.find((nk) => {
+          if (status.get(nk) === "paint") return false; // a to-be-repainted cell cannot donate
+          const nb = curOf(nk);
+          return nb !== undefined && nb !== shipped.frame && pset.has(nb) && inRun(solid, nk, nb, minRun, memo);
+        });
+        if (donor) { block = curOf(donor); adopted++; }
+        else { skippedIsolated++; continue; }
+      } else {
+        painted++;
+      }
+      framePlacements.push({ op: "voxel", pos: [x, y, z], block: `minecraft:${block}` });
     }
   }
 
@@ -185,7 +216,7 @@ export function placementGrammar(occ, {
       skipped: bindings.skipped,
     },
     shipped,
-    frame: { counts: frame.counts, painted, respected, alreadyFrame, placements: framePlacements },
+    frame: { counts: frame.counts, painted, respected, adopted, skippedIsolated, alreadyFrame, placements: framePlacements },
     fill,
     frameRefilled,
     fields,

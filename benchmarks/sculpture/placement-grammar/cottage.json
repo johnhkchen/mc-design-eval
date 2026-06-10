@@ -1,0 +1,228 @@
+{
+  "schema": "placement-grammar/v1",
+  "subject": "cottage",
+  "pipelineOrder": "durable-skin → placement-grammar → T-099 (openings)",
+  "inputs": {
+    "build": "durable-skin/cottage/artifact.json",
+    "skinRecord": "durable-skin/cottage.json",
+    "kit": "kit/cottage.json",
+    "zoneMapBands": [
+      "band0",
+      "band1"
+    ]
+  },
+  "grammar": {
+    "bindings": {
+      "frame": "spruce_planks",
+      "panels": {
+        "band0": "stone_bricks",
+        "band1": "smooth_sandstone"
+      },
+      "course": "spruce_planks",
+      "openingTreatments": [
+        "spruce_trapdoor",
+        "lantern",
+        "spruce_door"
+      ],
+      "skipped": []
+    },
+    "shipped": {
+      "frame": "spruce_planks",
+      "panels": {
+        "band0": "tuff",
+        "band1": "smooth_sandstone"
+      },
+      "course": "spruce_planks"
+    },
+    "frame": {
+      "counts": {
+        "wall": 2073,
+        "cornerPost": 113,
+        "roofline": 120,
+        "floorLine": 88
+      },
+      "painted": 181,
+      "adopted": 11,
+      "respected": 91,
+      "skippedIsolated": 10,
+      "alreadyFrame": 28
+    },
+    "fill": {
+      "placements": 39,
+      "kept": 5371,
+      "byZone": {
+        "band0": {
+          "surface": 1551,
+          "filled": 5,
+          "kept": 1546
+        },
+        "band1": {
+          "surface": 1420,
+          "filled": 8,
+          "kept": 1412
+        },
+        "roof": {
+          "surface": 2439,
+          "filled": 26,
+          "kept": 2413
+        }
+      }
+    },
+    "frameRefilled": 0,
+    "preconditions": {
+      "frameInPreserve": {
+        "band0": true,
+        "band1": true
+      },
+      "bindingAgreesWithPolicy": {
+        "band0": true,
+        "band1": true,
+        "roof": true
+      }
+    },
+    "fields": [
+      {
+        "dir": "+x",
+        "instances": 5,
+        "cells": 253
+      },
+      {
+        "dir": "-x",
+        "instances": 3,
+        "cells": 271
+      },
+      {
+        "dir": "+z",
+        "instances": 3,
+        "cells": 255
+      },
+      {
+        "dir": "-z",
+        "instances": 4,
+        "cells": 243
+      }
+    ],
+    "openings": [],
+    "placements": 231
+  },
+  "coverage": {
+    "band0": {
+      "total": 1551,
+      "byBlock": {
+        "cobblestone": 79,
+        "tuff": 1039,
+        "dark_oak_log": 364,
+        "spruce_planks": 69
+      },
+      "dominant": "tuff",
+      "dominantFraction": 0.67
+    },
+    "band1": {
+      "total": 1420,
+      "byBlock": {
+        "cobblestone": 85,
+        "spruce_planks": 225,
+        "smooth_sandstone": 948,
+        "dark_oak_log": 162
+      },
+      "dominant": "smooth_sandstone",
+      "dominantFraction": 0.668
+    },
+    "roof": {
+      "total": 2439,
+      "byBlock": {
+        "spruce_planks": 2044,
+        "dark_oak_log": 274,
+        "cobblestone": 121
+      },
+      "dominant": "spruce_planks",
+      "dominantFraction": 0.838
+    }
+  },
+  "coverageGate": {
+    "threshold": 0.5,
+    "passed": true,
+    "failures": [],
+    "byZone": {
+      "band0": {
+        "dominant": "tuff",
+        "fraction": 0.67,
+        "total": 1551,
+        "passed": true
+      },
+      "band1": {
+        "dominant": "smooth_sandstone",
+        "fraction": 0.668,
+        "total": 1420,
+        "passed": true
+      },
+      "roof": {
+        "dominant": "spruce_planks",
+        "fraction": 0.838,
+        "total": 2439,
+        "passed": true
+      }
+    }
+  },
+  "bands": {
+    "roofMaterialsFraction": 1,
+    "wallForeignResidue": {
+      "band0": 0,
+      "band1": 0
+    },
+    "roofTarget": 0.9,
+    "residueMax": 0.05
+  },
+  "reproducible": {
+    "doubleRun": true,
+    "sha256": "46fe291515df99fb23b6b831304b878d23fc3b0bba864df64661edfa94ee0c35"
+  },
+  "renders": {
+    "before": [
+      {
+        "angle": "+x+z",
+        "path": "benchmarks/sculpture/placement-grammar/cottage/view-before-pxpz.png"
+      },
+      {
+        "angle": "+x-z",
+        "path": "benchmarks/sculpture/placement-grammar/cottage/view-before-pxmz.png"
+      },
+      {
+        "angle": "-x-z",
+        "path": "benchmarks/sculpture/placement-grammar/cottage/view-before-mxmz.png"
+      },
+      {
+        "angle": "-x+z",
+        "path": "benchmarks/sculpture/placement-grammar/cottage/view-before-mxpz.png"
+      }
+    ],
+    "after": [
+      {
+        "angle": "+x+z",
+        "path": "benchmarks/sculpture/placement-grammar/cottage/view-after-pxpz.png"
+      },
+      {
+        "angle": "+x-z",
+        "path": "benchmarks/sculpture/placement-grammar/cottage/view-after-pxmz.png"
+      },
+      {
+        "angle": "-x-z",
+        "path": "benchmarks/sculpture/placement-grammar/cottage/view-after-mxmz.png"
+      },
+      {
+        "angle": "-x+z",
+        "path": "benchmarks/sculpture/placement-grammar/cottage/view-after-mxpz.png"
+      }
+    ],
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ]
+  },
+  "frames": [
+    "pr/assets/frames/grammar-cottage-before.png",
+    "pr/assets/frames/grammar-cottage-after.png"
+  ]
+}
