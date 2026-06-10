@@ -86,18 +86,95 @@ export function blockStateId (name, state) {
 }
 
 /**
- * Decode `defaultState` into per-property indices (big-endian mixed radix: the
- * LAST property varies fastest). So omitted properties keep their default value.
+ * Decode a state id into per-property indices (big-endian mixed radix: the
+ * LAST property varies fastest). The shared inverse of `composeStateId` — both
+ * the default-state decode and the read-back decoder (`stateProps`) use this
+ * one walk, so encode and decode cannot drift.
  * @returns {number[]} one index per entry of `states`
  */
-function decodeDefaultIndices (block, states, base) {
-  let rem = base - block.minStateId
+function decodeIndices (block, states, id) {
+  let rem = id - block.minStateId
   const indices = new Array(states.length)
   for (let i = states.length - 1; i >= 0; i--) {
     indices[i] = rem % states[i].num_values
     rem = Math.floor(rem / states[i].num_values)
   }
   return indices
+}
+
+/**
+ * Decode `defaultState` into per-property indices, so omitted properties keep
+ * their default value.
+ */
+function decodeDefaultIndices (block, states, base) {
+  return decodeIndices(block, states, base)
+}
+
+/**
+ * Inverse of `blockStateId` for a single block: decode a numeric state id into
+ * the block's stringly-typed property map (the artifact schema's `blockState`
+ * form — enums as their value string, bools as "true"/"false", ints as decimal
+ * strings). PURE over the injected descriptor: callers pass `block` (with
+ * `minStateId`/`maxStateId`/`name`) and its ordered `states[]`, so tests can
+ * exercise the radix walk on synthetic descriptors without loading
+ * minecraft-data.
+ *
+ * @param {{name:string, minStateId:number, maxStateId:number}} block
+ * @param {{name:string, type:string, num_values:number, values?:string[]}[]} states
+ * @param {number} stateId
+ * @returns {{ name: string, properties: Record<string,string> }}
+ * @throws if `stateId` is outside the block's state-id range
+ */
+export function stateProps (block, states, stateId) {
+  if (stateId < block.minStateId || stateId > block.maxStateId) {
+    throw new Error(`state id ${stateId} out of range [${block.minStateId}, ${block.maxStateId}] for "${block.name}"`)
+  }
+  const properties = {}
+  if (!states || states.length === 0) return { name: block.name, properties }
+  const indices = decodeIndices(block, states, stateId)
+  for (let i = 0; i < states.length; i++) {
+    const s = states[i]
+    const idx = indices[i]
+    if (s.values) properties[s.name] = s.values[idx]
+    else if (s.type === 'bool') properties[s.name] = idx === 0 ? 'true' : 'false'
+    else properties[s.name] = String(idx)
+  }
+  return { name: block.name, properties }
+}
+
+let _rangeIndex
+/** Sorted [minStateId, maxStateId, block] ranges for the pinned version (built once). */
+function rangeIndex () {
+  if (!_rangeIndex) {
+    _rangeIndex = mcData().blocksArray
+      .filter((b) => Number.isInteger(b.minStateId))
+      .map((b) => [b.minStateId, b.maxStateId, b])
+      .sort((a, b) => a[0] - b[0])
+  }
+  return _rangeIndex
+}
+
+/**
+ * Decode a global numeric state id (as stored by `prismarine-world`) into its
+ * owning block name + stringly property map — the read-back channel the fixture
+ * test-card verification uses to prove "right block, right facing" from the
+ * world alone. Binary search over the version's contiguous state-id ranges.
+ * @param {number} stateId
+ * @returns {{ name: string, properties: Record<string,string> }}
+ * @throws if no block of the pinned version owns `stateId`
+ */
+export function decodeStateId (stateId) {
+  const ranges = rangeIndex()
+  let lo = 0
+  let hi = ranges.length - 1
+  while (lo <= hi) {
+    const mid = (lo + hi) >> 1
+    const [min, max, block] = ranges[mid]
+    if (stateId < min) hi = mid - 1
+    else if (stateId > max) lo = mid + 1
+    else return stateProps(block, block.states ?? [], stateId)
+  }
+  throw new Error(`no ${MINECRAFT_VERSION} block owns state id ${stateId}`)
 }
 
 /**
