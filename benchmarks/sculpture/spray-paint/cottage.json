@@ -21,30 +21,109 @@
     "raw": 6429,
     "sealed": 6597
   },
+  "fill": {
+    "policy": {
+      "base": {
+        "dominant": "stone_bricks",
+        "preserve": [
+          "cobblestone",
+          "dark_oak_log"
+        ],
+        "splat": [
+          "cobblestone",
+          "dark_oak_log"
+        ]
+      },
+      "upper": {
+        "dominant": "white_terracotta",
+        "preserve": [
+          "dark_oak_log",
+          "spruce_planks",
+          "dark_oak_planks"
+        ],
+        "splat": [
+          "dark_oak_log"
+        ]
+      },
+      "roof": {
+        "dominant": "spruce_planks",
+        "preserve": [
+          "dark_oak_planks",
+          "cobblestone",
+          "bricks"
+        ],
+        "splat": [
+          "dark_oak_planks",
+          "cobblestone",
+          "bricks"
+        ]
+      }
+    },
+    "minRun": 2,
+    "placements": 976,
+    "kept": 1474,
+    "byZone": {
+      "roof": {
+        "surface": 1214,
+        "filled": 339,
+        "kept": 875
+      },
+      "upper": {
+        "surface": 638,
+        "filled": 583,
+        "kept": 55
+      },
+      "base": {
+        "surface": 598,
+        "filled": 54,
+        "kept": 544
+      }
+    },
+    "note": "the deterministic zone-fill base coat (T-085-01): each zone's dominant established on the visible skin ahead of the splat; secondary runs (studs, quoins, chimney, gable planks) kept; the splat demoted to secondaries (its palette excludes every field material)."
+  },
   "zones": {
     "storeyDivide": 7,
     "materials": {
-      "base": [
-        "stone_bricks",
-        "cobblestone",
-        "dark_oak_log"
-      ],
-      "upper": [
-        "white_terracotta",
-        "dark_oak_log",
-        "stone_bricks"
-      ],
-      "roof": [
-        "spruce_planks",
-        "dark_oak_planks",
-        "cobblestone",
-        "bricks"
-      ]
+      "base": {
+        "dominant": "stone_bricks",
+        "preserve": [
+          "cobblestone",
+          "dark_oak_log"
+        ],
+        "splat": [
+          "cobblestone",
+          "dark_oak_log"
+        ]
+      },
+      "upper": {
+        "dominant": "white_terracotta",
+        "preserve": [
+          "dark_oak_log",
+          "spruce_planks",
+          "dark_oak_planks"
+        ],
+        "splat": [
+          "dark_oak_log"
+        ]
+      },
+      "roof": {
+        "dominant": "spruce_planks",
+        "preserve": [
+          "dark_oak_planks",
+          "cobblestone",
+          "bricks"
+        ],
+        "splat": [
+          "dark_oak_planks",
+          "cobblestone",
+          "bricks"
+        ]
+      }
     },
     "histogram": {
       "masked": {
         "base": 0,
-        "upper": 83,
+        "upper": 454,
         "roof": 0
       },
       "unmasked": {
@@ -53,14 +132,88 @@
         "roof": 131
       }
     },
-    "offZonePlasterStripped": 2,
+    "coverage": {
+      "splatOnly": {
+        "roof": {
+          "total": 1214,
+          "byBlock": {
+            "spruce_planks": 779,
+            "cobblestone": 118,
+            "dark_oak_planks": 46,
+            "stone_bricks": 180,
+            "dark_oak_log": 90,
+            "white_terracotta": 1
+          },
+          "dominant": "spruce_planks",
+          "dominantFraction": 0.642
+        },
+        "upper": {
+          "total": 638,
+          "byBlock": {
+            "dark_oak_log": 187,
+            "stone_bricks": 279,
+            "spruce_planks": 11,
+            "white_terracotta": 83,
+            "cobblestone": 76,
+            "dark_oak_planks": 2
+          },
+          "dominant": "white_terracotta",
+          "dominantFraction": 0.13
+        },
+        "base": {
+          "total": 598,
+          "byBlock": {
+            "spruce_planks": 12,
+            "dark_oak_log": 176,
+            "stone_bricks": 336,
+            "cobblestone": 70,
+            "dark_oak_planks": 3,
+            "white_terracotta": 1
+          },
+          "dominant": "stone_bricks",
+          "dominantFraction": 0.562
+        }
+      },
+      "zoneFilled": {
+        "roof": {
+          "total": 1214,
+          "byBlock": {
+            "spruce_planks": 1080,
+            "cobblestone": 91,
+            "dark_oak_planks": 43
+          },
+          "dominant": "spruce_planks",
+          "dominantFraction": 0.89
+        },
+        "upper": {
+          "total": 638,
+          "byBlock": {
+            "dark_oak_log": 184,
+            "white_terracotta": 454
+          },
+          "dominant": "white_terracotta",
+          "dominantFraction": 0.712
+        },
+        "base": {
+          "total": 598,
+          "byBlock": {
+            "stone_bricks": 370,
+            "dark_oak_log": 159,
+            "cobblestone": 69
+          },
+          "dominant": "stone_bricks",
+          "dominantFraction": 0.619
+        }
+      }
+    },
+    "offZonePlasterStripped": 0,
     "interiorStrays": 5,
-    "note": "histogram = surface plaster per structural zone. MASKED (this fix) confines plaster to 'upper' (base=0, roof=0); UNMASKED (the shipped color-only splat) smears it into base+roof. Interior strays are pre-existing, not on any face, and untouched by seal/paint — not the visible defect."
+    "note": "histogram = surface plaster per structural zone. MASKED (this fix) confines plaster to 'upper' (base=0, roof=0); UNMASKED (the shipped color-only splat) smears it into base+roof. Interior strays are pre-existing, not on any face, and untouched by seal/paint — not the visible defect. coverage = per-zone dominant fraction of the visible skin: splatOnly replays the pre-fill T-079-02 path (the 9% baseline); zoneFilled is the shipped base-coat result."
   },
   "plaster": {
     "block": "minecraft:white_terracotta",
     "before": 7,
-    "after": 88,
+    "after": 459,
     "reversed": true
   },
   "materialCounts": {
@@ -73,98 +226,98 @@
       "dark_oak_planks": 21
     },
     "after": {
-      "cobblestone": 477,
-      "stone_bricks": 3762,
-      "dark_oak_log": 947,
-      "spruce_planks": 1102,
-      "white_terracotta": 88,
-      "dark_oak_planks": 62
+      "cobblestone": 373,
+      "stone_bricks": 3336,
+      "dark_oak_log": 837,
+      "spruce_planks": 1379,
+      "white_terracotta": 459,
+      "dark_oak_planks": 54
     }
   },
-  "cornerCollisions": 7,
+  "cornerCollisions": 0,
   "faces": [
     {
       "face": "front (+z)",
       "source": "concept",
-      "painted": 186,
-      "skipped": 34,
+      "painted": 86,
+      "skipped": 8,
       "offPalette": 0,
-      "zoneRejected": 351,
+      "zoneRejected": 477,
       "before": {
         "path": "benchmarks/sculpture/spray-paint/cottage/view-front-before.png",
         "score": {
           "schema": "face-resemblance/v1",
-          "score": 0.25,
+          "score": 0.3,
           "zone": {
-            "score": 0.25,
-            "meanDeltaE": 40.1,
+            "score": 0.3,
+            "meanDeltaE": 38.79,
             "zoneGrid": 8,
             "common": 60,
             "zones": {
               "build": [
                 null,
                 null,
+                "barrel",
+                "barrel",
                 "deepslate_gold_ore",
-                "acacia_log",
-                "acacia_log",
                 "acacia_log",
                 null,
                 null,
                 "bookshelf",
                 "barrel",
                 "acacia_log",
-                "deepslate_copper_ore",
-                "mycelium",
+                "acacia_log",
+                "brown_stained_glass",
                 "acacia_log",
                 "deepslate_gold_ore",
                 "deepslate_gold_ore",
                 "oak_log",
+                "barrel",
                 "brown_stained_glass",
                 "brown_stained_glass",
                 "brown_stained_glass",
-                "acacia_log",
                 "mycelium",
                 "mangrove_log",
-                "brown_stained_glass",
-                "cracked_stone_bricks",
-                "deepslate_copper_ore",
-                "acacia_log",
-                "soul_sand",
-                "bedrock",
-                "acacia_log",
+                "barrel",
+                "dead_brain_coral_block",
                 "mycelium",
-                "acacia_log",
-                "acacia_log",
-                "deepslate_copper_ore",
-                "coal_ore",
-                "coal_ore",
-                "coal_ore",
-                "cracked_stone_bricks",
-                "cracked_stone_bricks",
+                "coarse_dirt",
+                "coarse_dirt",
+                "brown_stained_glass",
+                "brown_stained_glass",
+                "coarse_dirt",
+                "mycelium",
+                "dripstone_block",
+                "exposed_cut_copper",
+                "light_gray_concrete_powder",
+                "white_terracotta",
+                "exposed_copper",
+                "white_terracotta",
+                "white_terracotta",
+                "white_terracotta",
+                "light_gray_concrete_powder",
+                "exposed_copper",
+                "dripstone_block",
+                "exposed_copper",
+                "iron_ore",
+                "white_terracotta",
+                "iron_ore",
+                "dripstone_block",
                 "stone_bricks",
-                "stone_bricks",
-                "deepslate_copper_ore",
-                "gray_stained_glass",
-                "deepslate_copper_ore",
                 "coal_ore",
                 "coal_ore",
-                "coal_ore",
-                "deepslate_copper_ore",
-                "tuff",
-                "deepslate_copper_ore",
-                "acacia_log",
                 "deepslate_iron_ore",
                 "coal_ore",
-                "coal_ore",
+                "cracked_stone_bricks",
                 "chiseled_stone_bricks",
                 "chiseled_stone_bricks",
-                "deepslate_iron_ore",
+                "cracked_stone_bricks",
                 "deepslate_copper_ore",
-                "gray_stained_glass",
+                "deepslate_copper_ore",
                 "acacia_log",
                 "acacia_log",
                 "acacia_log",
-                "acacia_log",
+                "coal_ore",
                 "cracked_stone_bricks"
               ],
               "concept": [
@@ -246,10 +399,10 @@
         "path": "benchmarks/sculpture/spray-paint/cottage/view-front-after.png",
         "score": {
           "schema": "face-resemblance/v1",
-          "score": 0.3,
+          "score": 0.35,
           "zone": {
-            "score": 0.3,
-            "meanDeltaE": 36.61,
+            "score": 0.35,
+            "meanDeltaE": 37.44,
             "zoneGrid": 8,
             "common": 60,
             "zones": {
@@ -257,66 +410,66 @@
                 null,
                 null,
                 "brown_stained_glass",
-                "acacia_log",
+                "barrel",
                 "acacia_log",
                 "acacia_log",
                 null,
                 null,
                 "bookshelf",
                 "barrel",
+                "mangrove_log",
                 "soul_sand",
-                "stripped_dark_oak_log",
-                "mycelium",
+                "brown_stained_glass",
                 "acacia_log",
                 "deepslate_gold_ore",
                 "deepslate_gold_ore",
                 "oak_log",
-                "brown_stained_glass",
+                "barrel",
                 "mangrove_log",
                 "spruce_log",
-                "acacia_log",
                 "mangrove_log",
+                "mangrove_log",
+                "mangrove_log",
+                "barrel",
+                "dead_brain_coral_block",
+                "mycelium",
+                "barrel",
+                "stripped_dark_oak_log",
                 "mangrove_log",
                 "brown_stained_glass",
-                "dead_brain_coral_block",
-                "deepslate_iron_ore",
-                "mangrove_log",
-                "dark_oak_log",
-                "muddy_mangrove_roots",
-                "mangrove_log",
+                "coarse_dirt",
                 "mycelium",
-                "acacia_log",
-                "white_terracotta",
-                "exposed_copper",
-                "dead_bubble_coral_block",
-                "coal_ore",
-                "muddy_mangrove_roots",
-                "cracked_stone_bricks",
-                "white_terracotta",
-                "white_terracotta",
-                "white_terracotta",
-                "white_terracotta",
                 "dripstone_block",
-                "deepslate_copper_ore",
-                "bedrock",
-                "coal_ore",
+                "exposed_cut_copper",
                 "iron_ore",
-                "dead_brain_coral_block",
-                "tuff",
-                "deepslate_copper_ore",
-                "muddy_mangrove_roots",
+                "raw_iron_block",
+                "mycelium",
+                "white_terracotta",
+                "white_terracotta",
+                "white_terracotta",
+                "light_gray_concrete_powder",
+                "exposed_copper",
+                "mycelium",
+                "exposed_copper",
+                "dripstone_block",
+                "white_terracotta",
+                "iron_ore",
+                "dripstone_block",
+                "stone_bricks",
+                "coal_ore",
+                "acacia_log",
                 "stripped_dark_oak_log",
                 "muddy_mangrove_roots",
                 "coal_ore",
                 "chiseled_stone_bricks",
                 "chiseled_stone_bricks",
-                "deepslate_iron_ore",
+                "cracked_stone_bricks",
                 "deepslate_copper_ore",
-                "gray_stained_glass",
+                "deepslate_copper_ore",
                 "acacia_log",
                 "acacia_log",
                 "acacia_log",
-                "acacia_log",
+                "coal_ore",
                 "cracked_stone_bricks"
               ],
               "concept": [
@@ -396,8 +549,8 @@
       },
       "gate": {
         "accepted": true,
-        "before": 0.25,
-        "after": 0.3,
+        "before": 0.3,
+        "after": 0.35,
         "delta": 0.05,
         "epsilon": 0
       },
@@ -407,10 +560,10 @@
     {
       "face": "side (+x)",
       "source": "glb",
-      "painted": 231,
-      "skipped": 131,
+      "painted": 224,
+      "skipped": 30,
       "offPalette": 0,
-      "zoneRejected": 328,
+      "zoneRejected": 436,
       "before": {
         "path": "benchmarks/sculpture/spray-paint/cottage/view-side-before.png",
         "score": null
