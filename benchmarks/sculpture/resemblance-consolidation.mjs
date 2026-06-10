@@ -1,6 +1,7 @@
 // IMPURE DRIVER — the E-22 terminal consolidation (S-077 / T-077-01). Applies the fixed render lens
-// (T-075-01) + the resemblance gate (T-076-01) to the FOUR headline builds — gatehouse + cottage (buildings)
-// and moai + pineapple (the two sculpture form-type poles) — and reports HONESTLY:
+// (T-075-01) + the resemblance gate (T-076-01) to the headline builds — gatehouse + cottage (buildings)
+// and pineapple (sculpture; moai was retired 2026-06-10, see RETIRED SUBJECTS in resemblance.mjs /
+// T-094-01) — and reports HONESTLY:
 //
 //   1. per subject: run `runResemblanceGate` (triptych | perceptual row | categorical verdict + named gap),
 //   2. aggregate with the pure `consolidateResemblance` (verdict tally + E-21 routing of MATERIAL gaps),
@@ -19,7 +20,7 @@
 //
 //   node benchmarks/sculpture/resemblance-consolidation.mjs            # live: fixed-lens renders + metered judge
 //   node benchmarks/sculpture/resemblance-consolidation.mjs --offline  # GL-free + model-free wiring check
-//   node benchmarks/sculpture/resemblance-consolidation.mjs --subject moai,gatehouse  # a subset
+//   node benchmarks/sculpture/resemblance-consolidation.mjs --subject cottage,gatehouse  # a subset
 
 import { readFile, writeFile, mkdir, copyFile } from "node:fs/promises";
 import { existsSync } from "node:fs";

@@ -59,8 +59,9 @@ function canvasLib() {
 
 // The immutable-reference registry (Rule 1). Each subject names its concept image, GLB mesh, build artifact,
 // and a committed (pre-lens-fix) render for the --offline path. Paths are relative to the sculpture root
-// (HERE). The four E-22 headline subjects: gatehouse + cottage (buildings) and moai + pineapple (the two
-// sculpture form-type poles — angular fine-relief vs organic textured). Concept→GLB mapping per glb/README.md.
+// (HERE). The live subjects: gatehouse + cottage (buildings) and pineapple (the organic-textured sculpture
+// pole; the angular fine-relief pole, moai, is RETIRED — see the block below the registry). Concept→GLB
+// mapping per glb/README.md.
 const SUBJECTS = {
   gatehouse: {
     key: "gatehouse",
@@ -78,13 +79,6 @@ const SUBJECTS = {
     artifact: "durable-skin/cottage/artifact.json",
     committedRender: "resemblance/cottage-minecraft.png",
   },
-  moai: {
-    key: "moai",
-    glb: "moai.glb",
-    concept: "runs/003-vConcept-a-moai-statue/concept.png",
-    artifact: "e19-build/moai/artifact.json",
-    committedRender: "e19-build/moai/render-3q.png",
-  },
   pineapple: {
     key: "pineapple",
     glb: "pineapple.glb",
@@ -93,6 +87,26 @@ const SUBJECTS = {
     committedRender: "e19-build/pineapple/render-3q.png",
   },
 };
+
+// ── RETIRED SUBJECTS (T-094-01, 2026-06-10) ──────────────────────────────────────────────────────
+// Removed from measurement, NOT from history: run dirs, e19-build artifacts, scale-study records,
+// and glb/moai.glb all stay on disk untouched.
+//
+//   moai: {
+//     key: "moai",
+//     glb: "moai.glb",
+//     concept: "runs/003-vConcept-a-moai-statue/concept.png",
+//     artifact: "e19-build/moai/artifact.json",
+//     committedRender: "e19-build/moai/render-3q.png",
+//   },
+//
+// WHY: the concept image is the defect. runs/003 shows THREE statues in one frame on a black
+// background; the TRELLIS mesh fragmented into two masses; the build was judged "different object"
+// mostly due to debris/fragmentation that says nothing about design capability. A weird concept
+// makes every downstream verdict ambiguous — so the subject is retired rather than the verdicts
+// endlessly relitigated. Concepts now pass a sanity checklist BEFORE registration (single building/
+// object · clean background · one canonical 3/4 view · ≥3 material zones · readable silhouette ·
+// no clutter · bulky throughout); see the church entry below for the first checklist-gated subject.
 
 /** Resolve a SUBJECTS entry's relative paths against the sculpture root → absolute paths for the runner. */
 function resolveSubject(def) {
