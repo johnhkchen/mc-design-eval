@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mc-design-eval/schema/component-record.schema.json",
+  "title": "component-record/v1",
+  "description": "The E-27 component decomposition contract (T-103-01, Rule 4): a shell segmented into named components with explicit geometry. This record is the SINGLE input every downstream consumer (S-104 roof-as-program, S-105 shaped vocabulary, S-106 component-aware skinning) reads — no consumer re-derives structure from occupancy where a definition exists here. Plan-cell sets are encoded as sorted row runs ({z, x0, x1}); decode with runCells() from src/form/component-decompose.mjs.",
+  "type": "object",
+  "required": ["schema", "subject", "source", "alignment", "bounds", "masses", "roofPlanes", "wallSlabs", "openingGroups", "findings"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "component-record/v1" },
+    "subject": { "type": "string", "minLength": 1, "description": "Registry subject key (durable-skin SUBJECTS)." },
+    "source": {
+      "type": "object",
+      "description": "Provenance of the decomposed shell, stamped by the runner.",
+      "required": ["shellPath", "sha256", "regularized"],
+      "additionalProperties": false,
+      "properties": {
+        "shellPath": { "type": "string" },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "regularized": { "type": ["boolean", "null"], "description": "true: a T-102 regularized shell; false: raw; null: unknown/unstated." }
+      }
+    },
+    "alignment": {
+      "type": ["object", "null"],
+      "description": "Mesh→voxel alignment used for the glbFits. 'registry-scale' is exact (voxelizeGlb+keysToArtifact mapping); 'aabb-affine' is the per-axis box fallback (approximate — weigh glbFit accordingly). null: decomposed without a mesh.",
+      "required": ["mode"],
+      "properties": {
+        "mode": { "enum": ["registry-scale", "aabb-affine"] },
+        "scales": { "type": ["array", "null"], "items": { "type": "number" }, "minItems": 3, "maxItems": 3 },
+        "voxelSize": { "type": ["number", "null"] }
+      }
+    },
+    "bounds": {
+      "type": "object",
+      "required": ["min", "max"],
+      "properties": {
+        "min": { "$ref": "#/$defs/vec3" },
+        "max": { "$ref": "#/$defs/vec3" }
+      }
+    },
+    "masses": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/mass" }
+    },
+    "roofPlanes": { "type": "array", "items": { "$ref": "#/$defs/roofPlane" } },
+    "wallSlabs": { "type": "array", "items": { "$ref": "#/$defs/wallSlab" } },
+    "openingGroups": { "type": "array", "items": { "$ref": "#/$defs/openingGroup" } },
+    "findings": {
+      "type": "array",
+      "description": "Named honest gaps (E-25 Rule 6): glb-fit-missing, glb-absent, slab-low-coverage, isolated-mass, …",
+      "items": {
+        "type": "object",
+        "required": ["code", "where", "detail"],
+        "properties": {
+          "code": { "type": "string" },
+          "where": { "type": "string" },
+          "detail": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "vec3": { "type": "array", "items": { "type": "number" }, "minItems": 3, "maxItems": 3 },
+    "runs": {
+      "type": "array",
+      "description": "Sorted plan-cell row runs; decode with runCells().",
+      "items": {
+        "type": "object",
+        "required": ["z", "x0", "x1"],
+        "additionalProperties": false,
+        "properties": { "z": { "type": "integer" }, "x0": { "type": "integer" }, "x1": { "type": "integer" } }
+      }
+    },
+    "plan": {
+      "type": "object",
+      "required": ["runs", "bbox", "area"],
+      "properties": {
+        "runs": { "$ref": "#/$defs/runs" },
+        "bbox": {
+          "type": "object",
+          "required": ["minX", "maxX", "minZ", "maxZ"],
+          "properties": { "minX": { "type": "integer" }, "maxX": { "type": "integer" }, "minZ": { "type": "integer" }, "maxZ": { "type": "integer" } }
+        },
+        "area": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "mass": {
+      "type": "object",
+      "description": "A separable volume: the primary body, an attached mass (church tower), or a protected protrusion (chimney — E-27 Rule 2 vocabulary). A protrusion's yRange starts at its base (junction + 1), not at bedrock.",
+      "required": ["id", "role", "protected", "plan", "yRange", "volume", "junctions"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^mass-\\d+$" },
+        "role": { "enum": ["primary", "attached", "protrusion"] },
+        "protected": { "type": "boolean" },
+        "plan": { "$ref": "#/$defs/plan" },
+        "yRange": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 },
+        "volume": { "type": "integer", "minimum": 0 },
+        "junctions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Where this mass meets another: 'side' = facing boundary columns + y-overlap; 'base' = a protrusion's footprint on its host's top surface.",
+            "required": ["withMass", "kind", "cells", "yRange"],
+            "properties": {
+              "withMass": { "type": "string" },
+              "kind": { "enum": ["side", "base"] },
+              "cells": { "$ref": "#/$defs/runs" },
+              "yRange": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 }
+            }
+          }
+        }
+      }
+    },
+    "planeFit": {
+      "type": "object",
+      "description": "y = gradient[0]·x + gradient[1]·z + c through point; normal unit with ny>0.",
+      "required": ["normal", "point", "gradient", "rmse"],
+      "properties": {
+        "normal": { "$ref": "#/$defs/vec3" },
+        "point": { "$ref": "#/$defs/vec3" },
+        "gradient": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 },
+        "rmse": { "type": "number" },
+        "rmseRaw": { "type": "number", "description": "Residual vs the RAW (unsmoothed) heightfield — what the shell actually is." },
+        "maxResidual": { "type": "number" },
+        "degenerate": { "type": "boolean" }
+      }
+    },
+    "roofPlane": {
+      "type": "object",
+      "required": ["id", "massId", "kind", "voxelFit", "glbFit", "extent", "eave", "ridge"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^roof-\\d+$" },
+        "massId": { "type": "string" },
+        "kind": { "enum": ["pitched", "flat"] },
+        "voxelFit": { "$ref": "#/$defs/planeFit" },
+        "glbFit": {
+          "anyOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "description": "The mesh-anchored fit (E-27 Rule 1). null ⇒ a glb-fit-missing finding exists and the voxel fit stands alone.",
+              "required": ["normal", "point", "gradient", "rmse", "triangles", "areaSupport", "angleToVoxelDeg", "offsetDelta"],
+              "properties": {
+                "normal": { "$ref": "#/$defs/vec3" },
+                "point": { "$ref": "#/$defs/vec3" },
+                "gradient": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 },
+                "rmse": { "type": "number" },
+                "triangles": { "type": "integer", "minimum": 1 },
+                "areaSupport": { "type": "number" },
+                "angleToVoxelDeg": { "type": "number" },
+                "offsetDelta": { "type": "number" }
+              }
+            }
+          ]
+        },
+        "extent": { "$ref": "#/$defs/plan" },
+        "eave": {
+          "type": "object",
+          "required": ["cells", "dir"],
+          "properties": {
+            "cells": { "$ref": "#/$defs/runs" },
+            "dir": { "enum": ["+x", "-x", "+z", "-z", null], "description": "Downhill direction; null for flat caps (perimeter eave)." }
+          }
+        },
+        "ridge": {
+          "anyOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "required": ["withPlane", "axis", "y", "cells"],
+              "properties": {
+                "withPlane": { "type": "string" },
+                "axis": { "enum": ["x", "z"] },
+                "y": { "type": "number" },
+                "cells": { "$ref": "#/$defs/runs" }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "wallSlab": {
+      "type": "object",
+      "required": ["id", "massId", "dir", "axis", "value", "boundsWorld", "coverage"],
+      "properties": {
+        "id": { "type": "string" },
+        "massId": { "type": "string" },
+        "dir": { "enum": ["+x", "-x", "+z", "-z"] },
+        "axis": { "enum": ["x", "z"] },
+        "value": { "type": "integer", "description": "The modal depth coordinate of the face (the slab plane)." },
+        "boundsWorld": {
+          "type": "object",
+          "required": ["min", "max"],
+          "properties": { "min": { "$ref": "#/$defs/vec3" }, "max": { "$ref": "#/$defs/vec3" } }
+        },
+        "faceCells": { "type": "integer" },
+        "slabCells": { "type": "integer" },
+        "coverage": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "openingGroup": {
+      "type": "object",
+      "description": "Same-face, same-kind, same-size openings (a window row), attributed to the mass with the largest plan overlap.",
+      "required": ["id", "massId", "dir", "kind", "openings"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^og-\\d+$" },
+        "massId": { "type": "string" },
+        "dir": { "enum": ["+x", "-x", "+z", "-z"] },
+        "kind": { "enum": ["door", "window"] },
+        "openings": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["extent", "sillY", "crown", "width", "height", "jambs", "headProfile", "archCandidate", "spring"],
+            "properties": {
+              "extent": {
+                "type": "object",
+                "required": ["axis", "range", "yRange"],
+                "properties": {
+                  "axis": { "enum": ["x", "z"], "description": "The in-wall horizontal world axis; the wall-depth axis is carried by the owning mass's slab." },
+                  "range": { "type": "array", "items": { "type": "integer" }, "minItems": 2, "maxItems": 2 },
+                  "yRange": { "type": "array", "items": { "type": "integer" }, "minItems": 2, "maxItems": 2 }
+                }
+              },
+              "cells": { "type": "integer" },
+              "sillY": { "type": "integer" },
+              "crown": { "type": "integer" },
+              "width": { "type": "integer", "minimum": 1 },
+              "height": { "type": "integer", "minimum": 1 },
+              "jambs": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                  "type": "object",
+                  "required": ["at", "y0", "y1"],
+                  "properties": { "at": { "type": "integer" }, "y0": { "type": "integer" }, "y1": { "type": "integer" } }
+                }
+              },
+              "headProfile": {
+                "type": "array",
+                "description": "Top-of-aperture y per column, ordered by world coordinate — S-105 fits its arch from this, never from a re-read.",
+                "items": {
+                  "type": "object",
+                  "required": ["at", "topY"],
+                  "properties": { "at": { "type": "integer" }, "topY": { "type": "integer" } }
+                }
+              },
+              "archCandidate": { "type": "boolean" },
+              "spring": { "type": ["integer", "null"], "description": "Highest y still spanning the full width (where the arch turns); null unless archCandidate." }
+            }
+          }
+        }
+      }
+    }
+  }
+}

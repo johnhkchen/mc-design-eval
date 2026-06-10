@@ -347,3 +347,72 @@ test("openingGroups: an arched doorway is flagged with spring and crown", () => 
   assert.equal(arch.width, 5);
   assert.deepEqual(arch.headProfile.map((p) => p.topY), [3, 4, 5, 4, 3]);
 });
+
+// ---- decompose + the record contract --------------------------------------------------------------
+
+import { decompose } from "./component-decompose.mjs";
+import { readFileSync } from "node:fs";
+import Ajv2020 from "ajv/dist/2020.js";
+
+/** The gable+chimney shell and its matching 4-triangle reference mesh (planes y=x+4 and y=16−x). */
+const gableChimneyFixture = () => {
+  const cells = gabledBox();
+  for (let x = 2; x <= 4; x++) for (let z = 2; z <= 4; z++) {
+    for (let y = 8; y <= 13; y++) cells.push({ pos: [x, y, z], block: "minecraft:bricks" });
+  }
+  const quad = (a, b, c, d) => [[a, b, c], [a, c, d]];
+  // each face as 4 z-strips — a decimated face is rarely a single quad, and centroids must
+  // scatter enough that the chimney's plan hole doesn't swallow a whole face's support
+  const tris = [];
+  for (let z = 0; z < 8; z += 2) {
+    tris.push(
+      ...quad([0, 4, z], [6, 10, z], [6, 10, z + 2], [0, 4, z + 2]),
+      ...quad([6, 10, z], [12, 4, z], [12, 4, z + 2], [6, 10, z + 2]),
+    );
+  }
+  const positions = new Float64Array(tris.length * 9);
+  tris.forEach((t, i) => positions.set(t.flat(), i * 9));
+  return {
+    occ: occupancyFromCells(cells),
+    glb: { positions, triangleCount: tris.length },
+    alignment: { mode: "registry-scale", scales: [1, 1, 1], voxelSize: 1, toVoxel: (p) => p },
+  };
+};
+
+test("decompose: full record with GLB fits attached, validates against the schema", () => {
+  const { occ, glb, alignment } = gableChimneyFixture();
+  const body = decompose(occ, { glb, alignment });
+  assert.equal(body.schema, COMPONENT_RECORD_SCHEMA);
+  assert.equal(body.masses.length, 2);
+  assert.equal(body.roofPlanes.length, 2);
+  for (const p of body.roofPlanes) {
+    assert.ok(p.glbFit, `${p.id} carries a glbFit`);
+    assert.ok(p.glbFit.angleToVoxelDeg < 10, "mesh and voxel fits agree");
+    assert.ok(p.glbFit.areaSupport > 0);
+  }
+  assert.ok(!body.findings.some((f) => f.code === "glb-fit-missing"));
+
+  // stamp provenance the way the runner does, then the record must validate
+  const record = { ...body, subject: "synthetic", source: { shellPath: "synthetic", sha256: "0".repeat(64), regularized: null } };
+  const schema = JSON.parse(readFileSync(new URL("../../schema/component-record.schema.json", import.meta.url), "utf8"));
+  const ajv = new Ajv2020({ allErrors: true, strict: true });
+  const validate = ajv.compile(schema);
+  const valid = validate(record);
+  assert.ok(valid, JSON.stringify(validate.errors, null, 2));
+});
+
+test("decompose: byte-deterministic across rebuilds", () => {
+  const a = gableChimneyFixture();
+  const b = gableChimneyFixture();
+  const ra = decompose(a.occ, { glb: a.glb, alignment: a.alignment });
+  const rb = decompose(b.occ, { glb: b.glb, alignment: b.alignment });
+  assert.equal(JSON.stringify(ra), JSON.stringify(rb));
+});
+
+test("decompose: without a mesh the record is honest — glbFit null, glb-absent finding", () => {
+  const { occ } = gableChimneyFixture();
+  const body = decompose(occ);
+  assert.equal(body.alignment, null);
+  assert.ok(body.roofPlanes.every((p) => p.glbFit === null));
+  assert.ok(body.findings.some((f) => f.code === "glb-absent"));
+});

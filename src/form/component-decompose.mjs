@@ -21,6 +21,7 @@
 import { solidOccupancy, occupancyFromCells } from "../view/occupancy.mjs";
 import { openings } from "../view/structural-read.mjs";
 import { projectSurface, orthoSpec } from "../view/surface-grid.mjs";
+import { triangleStats, glbFitForPlane } from "./component-glb-fit.mjs";
 
 export const COMPONENT_RECORD_SCHEMA = "component-record/v1";
 
@@ -893,4 +894,62 @@ export function openingGroups(occ, segmentation, { dirs = SIDE_FACES } = {}) {
     else groups.push({ id: `og-${groups.length}`, massId: f.massId, dir: f.dir, kind: f.kind, openings: [f.opening] });
   }
   return groups;
+}
+
+// ---- the record -----------------------------------------------------------------------------------
+
+/**
+ * Decompose a shell occupancy into the component-record BODY (everything except subject/source
+ * provenance, which the runner stamps): masses, roof planes (GLB-fitted when `glb` + `alignment`
+ * are given — E-27 Rule 1, with a named finding on every miss), wall slabs, opening groups,
+ * findings. Deterministic and byte-stable: same occupancy + mesh → identical JSON.
+ *
+ * @param {import("../view/occupancy.mjs").Occupancy} occ
+ * @param {{glb?:{positions:Float64Array,triangleCount:number}|null,
+ *          alignment?:{mode:string,scales:number[],toVoxel:Function}|null,
+ *          opts?:{masses?:object, roof?:object, openings?:object, glbFit?:object}}} [input]
+ */
+export function decompose(occ, { glb = null, alignment = null, opts = {} } = {}) {
+  const segmentation = segmentMasses(occ, opts.masses);
+  const planes = roofPlanes(occ, segmentation, opts.roof);
+  const slabs = wallSlabs(occ, segmentation);
+  const groups = openingGroups(occ, segmentation, opts.openings);
+  const findings = [];
+
+  if (glb && alignment) {
+    const stats = triangleStats(glb.positions, glb.triangleCount);
+    for (const p of planes) {
+      const extentKeys = new Set(runCells(p.extent.runs).map(([x, z]) => keyXZ(x, z)));
+      const fit = glbFitForPlane(stats, alignment, p.voxelFit, extentKeys, opts.glbFit);
+      if (fit) p.glbFit = fit;
+      else findings.push({
+        code: "glb-fit-missing", where: p.id,
+        detail: "no aligned triangles in the normal cone over this extent; voxel fit stands alone",
+      });
+    }
+  } else {
+    findings.push({ code: "glb-absent", where: "record", detail: "decomposed without a mesh reference; voxel fits only" });
+  }
+  for (const s of slabs) {
+    if (s.coverage < 0.6) findings.push({ code: "slab-low-coverage", where: s.id, detail: `coverage ${s.coverage}` });
+  }
+  for (const m of segmentation.masses) {
+    if (m.role === "protrusion") continue;
+    if (m.plan.area < 12 && m.junctions.length === 0) {
+      findings.push({ code: "isolated-mass", where: m.id, detail: `area ${m.plan.area} with no junction` });
+    }
+  }
+
+  return {
+    schema: COMPONENT_RECORD_SCHEMA,
+    alignment: alignment
+      ? { mode: alignment.mode, scales: alignment.scales ?? null, voxelSize: alignment.voxelSize ?? null }
+      : null,
+    bounds: occ.bounds,
+    masses: segmentation.masses,
+    roofPlanes: planes,
+    wallSlabs: slabs,
+    openingGroups: groups,
+    findings,
+  };
 }
