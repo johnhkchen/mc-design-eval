@@ -149,6 +149,8 @@ test("dressOpenings +z: fence in the aperture, shutters proud, lintel/sill recol
   assert.equal(rep.applied.infill, 4);
   assert.equal(rep.applied.shutterLeft, 2);
   assert.equal(rep.applied.shutterRight, 2);
+  // a fresh dressing: every satisfied cell was a NEW placement
+  assert.deepEqual(rep.placed, rep.applied);
   assert.equal(r.stats.fullyDressed, 1);
 });
 
@@ -199,6 +201,9 @@ test("idempotency: dressing a dressed target emits nothing new", () => {
   assert.equal(r2.placements.length, 0);
   assert.ok(r2.stats.alreadyDressed > 0);
   assert.equal(r2.perOpening[0].conflicts.length, 0);
+  // `placed` is the idempotence witness: everything applied, nothing newly placed (T-100-01)
+  assert.ok(Object.values(r2.perOpening[0].placed).every((n) => n === 0));
+  assert.ok(Object.values(r2.perOpening[0].applied).some((n) => n > 0));
 });
 
 // ---------------------------------------------------------------- conflict honesty

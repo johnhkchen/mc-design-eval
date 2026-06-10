@@ -251,8 +251,11 @@ export function dressOpenings(targetOcc, apertures, treatments) {
     const probeOccupied = (c) => firstWhere(c, targetOcc.has);
 
     const applicable = KIND_SLOTS[ap.kind] ?? [];
+    // `applied` counts SATISFIED cells (new placements AND already-dressed skips); `placed` counts
+    // only NEW placements — all-zero `placed` is the idempotence/presence witness (T-100-01).
     const report = { dir: ap.dir, kind: ap.kind, bbox: { ...ap.bbox }, region: ap.region, paneSpan: null,
-      applied: Object.fromEntries(applicable.map((s) => [s, 0])), conflicts: [] };
+      applied: Object.fromEntries(applicable.map((s) => [s, 0])),
+      placed: Object.fromEntries(applicable.map((s) => [s, 0])), conflicts: [] };
     const conflict = (slot, name, reduction) => report.conflicts.push({ slot, name, reduction });
     perOpening.push(report);
 
@@ -299,8 +302,10 @@ export function dressOpenings(targetOcc, apertures, treatments) {
     if (applicable.includes("infill")) {
       if (slots.infill) {
         for (const { au, av, w } of paneCells) {
+          const n0 = placements.length;
           if (placeAtPane("infill", posAt(au, av, w), slots.infill.block, FENCE_RUN_STATE[ap.dir])) {
             report.applied.infill++;
+            if (placements.length > n0) report.placed.infill++;
           }
         }
       } else conflict("infill", "no-infill-treatment", "aperture-left-open");
@@ -341,7 +346,10 @@ export function dressOpenings(targetOcc, apertures, treatments) {
       if (flank.some((f) => targetOcc.has(...shutterPos(f)))) { conflict(slot, `shutter-blocked-${side}`, "shutter-dropped"); continue; }
       for (const f of flank) {
         if (place(shutterPos(f), slots.shutter.block,
-          { facing: SHUTTER_FACING[ap.dir], half: "bottom", open: "true" })) report.applied[slot]++;
+          { facing: SHUTTER_FACING[ap.dir], half: "bottom", open: "true" })) {
+          report.applied[slot]++;
+          report.placed[slot]++;
+        }
       }
     }
 
@@ -365,7 +373,7 @@ export function dressOpenings(targetOcc, apertures, treatments) {
         if (!inSpan(w)) continue; // air column, or a surface far off the pane (eave/far wall) — never frame those
         const pos = posAt(c.au, c.av, w);
         if (bareBlock(targetOcc.block(...pos)) === frameBlock) { report.applied[band]++; continue; }
-        if (place(pos, frameBlock)) report.applied[band]++;
+        if (place(pos, frameBlock)) { report.applied[band]++; report.placed[band]++; }
       }
       if (report.applied[band] === 0) conflict(band, `${band}-no-band-cells`, `${band}-skipped`);
     }
@@ -399,9 +407,13 @@ export function dressOpenings(targetOcc, apertures, treatments) {
             if (wU === null) { conflict("door", "door-column-too-short", "leaf-skipped"); continue; }
             if (wU !== wL) { conflict("door", "door-halves-misaligned", "leaf-skipped"); continue; }
             const base = { facing: COMPASS[ap.dir], hinge, open: "false" };
+            const n0 = placements.length;
             const okL = placeAtPane("door", posAt(au, yBottom, wL), slots.door.block, { ...base, half: "lower" });
             const okU = placeAtPane("door", posAt(au, yBottom + 1, wU), slots.door.block, { ...base, half: "upper" });
-            if (okL && okU) report.applied.door++;
+            if (okL && okU) {
+              report.applied.door++;
+              if (placements.length > n0) report.placed.door++;
+            }
           }
         }
       }
@@ -419,7 +431,12 @@ export function dressOpenings(targetOcc, apertures, treatments) {
         const cur = targetOcc.block(...pos);
         if (cur !== null && bareBlock(cur) === bareBlock(slots.light.block)) { alreadyDressed++; opPositions.push(pos); report.applied.light++; placed = true; break; }
         if (targetOcc.has(...pos)) continue;
-        if (place(pos, slots.light.block, { hanging: "false" })) { report.applied.light++; placed = true; break; }
+        if (place(pos, slots.light.block, { hanging: "false" })) {
+          report.applied.light++;
+          report.placed.light++;
+          placed = true;
+          break;
+        }
       }
       if (!placed) conflict("light", "light-no-space", "light-dropped");
     }
