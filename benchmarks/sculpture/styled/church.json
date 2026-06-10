@@ -1,0 +1,15 @@
+{
+  "schema": "styled-milestone/v1",
+  "subject": "church",
+  "status": "pipeline-failed",
+  "stage": "kit",
+  "error": "no committed kit record (registry kitRecord=null) — kit extraction (kit-extract.mjs) requires a committed T-092 zone-map record (registry zoneMapRecord=null); zone derivation runs inside the skin chain, so both are blocked by this subject's upstream gate findings (see challenge/church.json). Run kit:extract once the chain passes its skin gates.",
+  "inputs": {
+    "build": null,
+    "concept": "runs/016-vBuilding-a-village-church-with-a-square-bell-tower/concept.png",
+    "glb": "glb/church.glb",
+    "map": "material-map/church.json",
+    "kitRecord": null
+  },
+  "note": "a named precondition, not a crash — recorded honestly (E-25 Rule 6); nothing was tuned in response"
+}

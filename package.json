@@ -55,7 +55,10 @@
     "grid:build": "node scripts/image-to-grid.mjs",
     "test": "node scripts/validate-artifact.mjs --self-test --expect valid schema/examples/valid-industrial-house.json && node scripts/validate-artifact.mjs --expect invalid schema/examples/invalid-industrial-house.json && npm run test:unit",
     "baml:gen": "baml-cli generate --from baml_src",
-    "presence:cottage": "node benchmarks/sculpture/kit-presence.mjs --subject cottage"
+    "presence:cottage": "node benchmarks/sculpture/kit-presence.mjs --subject cottage",
+    "styled:cottage": "node benchmarks/sculpture/styled-milestone.mjs --subject cottage",
+    "styled:gatehouse": "node benchmarks/sculpture/styled-milestone.mjs --subject gatehouse",
+    "styled:church": "node benchmarks/sculpture/styled-milestone.mjs --subject church"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
