@@ -62,6 +62,30 @@ test("openings: a wall with one window and one door, classified", () => {
   assert.equal(door.cells, 2);
 });
 
+test("openings withCells: aperture cell shapes returned, default path unchanged (T-103-01)", () => {
+  // Same wall as above: window at (2,4), 2-tall door at (4, 0..1).
+  const cells = [];
+  for (let x = 0; x <= 6; x++) for (let y = 0; y <= 6; y++) {
+    if (x === 2 && y === 4) continue;
+    if (x === 4 && (y === 0 || y === 1)) continue;
+    cells.push({ pos: [x, y, 0], block: "minecraft:stone" });
+  }
+  const occ = occupancyFromCells(cells);
+  const plain = openings(occ, "-z");
+  assert.ok(plain.every((o) => !("cellsUV" in o)), "default path carries no cellsUV");
+  const withCells = openings(occ, "-z", { withCells: true });
+  const door = withCells.find((o) => o.kind === "door");
+  assert.equal(door.cellsUV.length, door.cells);
+  const window = withCells.find((o) => o.kind === "window");
+  assert.equal(window.cellsUV.length, 1);
+  // every cell sits inside its own bbox
+  for (const o of withCells) {
+    for (const [u, v] of o.cellsUV) {
+      assert.ok(u >= o.bbox.u0 && u <= o.bbox.u1 && v >= o.bbox.v0 && v <= o.bbox.v1);
+    }
+  }
+});
+
 test("roofRegion: a closed box → full coverage, top y-range", () => {
   const S = 6;
   const cells = [

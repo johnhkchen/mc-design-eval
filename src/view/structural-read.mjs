@@ -147,10 +147,13 @@ export function airComponents(mask) {
  * is always `{cells: 0, blocks: []}` — pre-fixture behavior unchanged.
  * @param {import("./occupancy.mjs").Occupancy} occ
  * @param {string} dir one of the side faces (or any ortho dir)
+ * @param {{withCells?:boolean}} [opts] withCells additionally returns each opening's `cellsUV`
+ *   (the aperture's air cells in grid (u,v) space) — the T-103 component lift needs the SHAPE
+ *   (head profile, jambs), not just the bbox. Default path is byte-identical to before.
  * @returns {{bbox:{u0,v0,u1,v1}, kind:"door"|"window", cells:number,
- *            dressing:{cells:number, blocks:string[]}}[]}
+ *            dressing:{cells:number, blocks:string[]}, cellsUV?:[number,number][]}[]}
  */
-export function openings(occ, dir) {
+export function openings(occ, dir, { withCells = false } = {}) {
   if (!occ.bounds) return [];
   const solid = solidOccupancy(occ);
   if (!solid.bounds) return []; // all-fixture occupancy: no solid mask to find apertures in
@@ -193,12 +196,14 @@ export function openings(occ, dir) {
         for (const blk of dressingAt.get(`${u},${v}`) ?? []) blocks.push(bareBlock(blk));
       }
     }
-    return {
+    const out = {
       bbox: c.bbox,
       kind: c.kind,
       cells: c.cellsUV.length,
       dressing: { cells: blocks.length, blocks: [...new Set(blocks)].sort() },
     };
+    if (withCells) out.cellsUV = c.cellsUV.map(([u, v]) => [u, v]);
+    return out;
   });
 }
 
