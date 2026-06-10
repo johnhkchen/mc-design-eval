@@ -32,6 +32,7 @@
     "material:map": "node benchmarks/sculpture/material-map.mjs",
     "material:assign": "node benchmarks/sculpture/material-assign.mjs",
     "material:correct": "node benchmarks/sculpture/material-correct.mjs",
+    "value:select": "node benchmarks/sculpture/value-select.mjs",
     "concept:ab": "node benchmarks/sculpture/concept-materials-ab.mjs",
     "build:block-table": "node scripts/build-block-table.mjs",
     "palette:extract": "node scripts/extract-palette.mjs",

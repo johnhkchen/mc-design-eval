@@ -90,3 +90,7 @@ benchmarks/sculpture/building/refined/artifact.json
 # Spray-paint face renders (T-079-01, E-23) — derived, regen via `npm run spray:paint`. The durable
 # record is spray-paint/cottage.{json,md} + spray-paint/cottage/artifact.json (the painted build).
 benchmarks/sculpture/spray-paint/**/*.png
+
+# Value-true selection renders (T-086-01) — derived, image-heavy; the durable record is
+# value-select/cottage.{json,md} + value-select/cottage/artifact.json (the recolored build).
+benchmarks/sculpture/value-select/**/*.png
