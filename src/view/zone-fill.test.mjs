@@ -4,7 +4,7 @@ import { occupancyFromCells } from "./occupancy.mjs";
 import { expandArtifact, voxelKey } from "../expand.mjs";
 import { applyPaint } from "./face-paint.mjs";
 import {
-  zoneFill, surfaceZoneHistogram, dominantCoverage, FILL_FACES,
+  zoneFill, surfaceZoneHistogram, dominantCoverage, ownCoverage, FILL_FACES,
   surfaceVoxelEntries, exposedVoxelEntries,
 } from "./zone-fill.mjs";
 
@@ -263,4 +263,19 @@ test("unknown skin and malformed regions throw", () => {
   assert.throws(() => zoneFill(occ, { zoneOf, zones: ZONES, skin: "oblique" }), /skin "oblique"/);
   assert.throws(() => surfaceZoneHistogram(occ, zoneOf, { skin: "glb" }), /skin "glb"/);
   assert.throws(() => zoneFill(occ, { zoneOf, zones: ZONES, regions: [{ name: "x" }] }), /region/);
+});
+
+test("ownCoverage: dominant + declared preserve fraction (T-090's own set); monotone vs dominant-only", () => {
+  const hist = {
+    band1: { total: 396, byBlock: { smooth_sandstone: 92, spruce_planks: 128, dark_oak_log: 134, cobblestone: 27, tuff: 13, spruce_fence: 2 } },
+    attic: { total: 4, byBlock: { spruce_planks: 4 } }, // no policy entry → null
+  };
+  const cov = ownCoverage(hist, {
+    band1: { dominant: "minecraft:smooth_sandstone", preserve: ["spruce_planks", "dark_oak_log", "cobblestone"] },
+  });
+  assert.equal(cov.band1.dominantFraction, 0.232); // the dominant-only count survives unchanged
+  assert.deepEqual(cov.band1.own, ["smooth_sandstone", "spruce_planks", "dark_oak_log", "cobblestone"]);
+  assert.equal(cov.band1.ownFraction, 0.962);       // foreign tuff + fence still count against
+  assert.ok(cov.band1.ownFraction >= cov.band1.dominantFraction, "own ⊇ dominant — monotone");
+  assert.deepEqual([cov.attic.own, cov.attic.ownFraction], [null, null]);
 });

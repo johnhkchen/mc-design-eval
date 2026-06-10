@@ -13,6 +13,9 @@
 //   → OPENING DRESSING (T-099 pure cores: concept-declared apertures from the chain's raw input
 //     build, treatments from the kit, deterministic idempotent placement; conflicts and
 //     unfulfilled slots recorded, never silent)
+//   → GRAMMAR SETTLE (the seam T-100 named for S-101: re-opening panes perturbs the frame-line
+//     read and breaks kept runs — the SAME grammar op re-runs to its own fixpoint, bounded, so the
+//     styled build is a no-op for the op the kit-presence checker re-runs)
 //   → THE KIT-AWARE MULTI-ANGLE GATE (T-100 ∘ T-093), spawned through its own CLI so its frozen
 //     contract (kit-presence fixpoint check beside the 4-azimuth judge, overall = resemblance AND
 //     presence, exit codes) is reused, never re-implemented.
@@ -72,7 +75,8 @@ const GATE_LABEL = "styled";
 const RECORD_SCHEMA = "styled-milestone/v1";
 const PIPELINE_ORDER = "kit (committed, T-096) → shell integrity (T-091) → skin (T-086 value-true → " +
   "kit overrides → seal → T-092 zones → T-090 fill → T-087 coherence → T-088 gates) → " +
-  "placement grammar (T-098) → opening dressing (T-099) → kit-aware multi-angle gate (T-100 ∘ T-093)";
+  "placement grammar (T-098) → opening dressing (T-099) → grammar settle (the T-100 fixpoint seam) → " +
+  "kit-aware multi-angle gate (T-100 ∘ T-093)";
 
 const sha256 = (s) => createHash("sha256").update(s).digest("hex");
 const artifactJson = (a) => JSON.stringify(a, null, 2) + "\n";
@@ -87,19 +91,43 @@ async function styledChain(def, kitRec, paths, track) {
     throw new Error(`skin produced no concept-derived zone map (source=${skin.zoneMap?.source}) — ` +
       `the grammar binds to the T-092 derived bands, not the prior`);
   }
-  const g = grammarStage(skin.final, {
+  const gOpts = {
     bands: skin.zoneMap.bands, roof: skin.zoneMap.roof,
     policy: skin.policyS, substitution: skin.substitution, kitRec, zoneOpts: def.zoneOpts,
-  });
+  };
+  const g = grammarStage(skin.final, gOpts);
   track.stage = "dressing";
   // apertures are concept-declared: measured on the chain's RAW input build (T-099's reference) —
   // the provisioned base for challenge subjects, the committed pre-seal build otherwise
   const apertures = extractApertures(artifactOccupancy(base));
   const treatments = treatmentsFromKit(kitRec);
   const dress = dressOpenings(artifactOccupancy(g.final), apertures, treatments);
-  const styled = applyDressing(g.final, dress.placements);
+  const dressed = applyDressing(g.final, dress.placements);
+  assertArtifact(dressed);
+  track.stage = "settle";
+  // THE SETTLE PASS (the pipeline seam T-100 named for S-101): re-opening the panes perturbs the
+  // grammar's frame-line read near apertures and breaks kept runs. Re-run the SAME grammar op
+  // (frame + fill, gates included) to its own fixpoint, bounded — the styled build must be a no-op
+  // for the op the kit-presence checker re-runs (T-100's fixpoint rule), and the re-run IS the
+  // post-dressing cleanliness pass. Non-convergence is a wiring bug, never smoothed.
+  let styled = dressed;
+  const settle = { iterations: 0, trail: [] };
+  for (;;) {
+    const s = grammarStage(styled, gOpts);
+    const wants = s.grammar.frame.painted + s.grammar.frame.adopted + s.grammar.fill.placements.length;
+    if (wants === 0) break;
+    if (++settle.iterations > 4) {
+      throw new Error(`settle did not converge after 4 grammar re-runs (still wants ${wants} cells: ` +
+        `frame ${s.grammar.frame.painted + s.grammar.frame.adopted}, fill ${s.grammar.fill.placements.length})`);
+    }
+    settle.trail.push({
+      frame: s.grammar.frame.painted + s.grammar.frame.adopted,
+      fill: s.grammar.fill.placements.length,
+    });
+    styled = s.final;
+  }
   assertArtifact(styled);
-  return { provision, base, shell, skin, grammar: g, apertures, treatments, dress, styled };
+  return { provision, base, shell, skin, grammar: g, apertures, treatments, dress, settle, styled };
 }
 
 /** Spawn the kit-aware gate through its own CLI (frozen contract). Exit 0/1/2 is a VERDICT. */
@@ -203,7 +231,10 @@ function renderMd(r) {
     `(${d.stats.fullyDressed}/${d.stats.openings} fully dressed, ${d.stats.conflicts} conflicts, ` +
     `${d.stats.alreadyDressed} already dressed). Unfulfilled slots: ` +
     `${d.treatments.unfulfilled.length ? d.treatments.unfulfilled.join(", ") : "none"}. Derivations: ` +
-    `${Object.keys(d.treatments.derivations ?? {}).length ? JSON.stringify(d.treatments.derivations) : "none"}.\n\n` +
+    `${Object.keys(d.treatments.derivations ?? {}).length ? JSON.stringify(d.treatments.derivations) : "none"}.\n` +
+    `Settle (the T-100 seam): grammar re-run to its own fixpoint in ${r.settle.iterations} iteration(s)` +
+    (r.settle.trail.length ? ` (${r.settle.trail.map((t) => `frame ${t.frame} + fill ${t.fill}`).join("; ")})` : " (already a no-op)") +
+    ` — the styled build is a no-op for the op the kit-presence checker re-runs.\n\n` +
     `## Kit-aware multi-angle gate (T-100 ∘ T-093) — **${r.gate.outcome}**\n\n` +
     `Resemblance: ${r.gate.resemblance?.decided ? (r.gate.resemblance.passed ? "PASS" : "FAIL") : `REFUSAL (${r.gate.resemblance?.refusal})`}` +
     (r.gate.resemblance?.gapCount != null ? ` (gaps ${r.gate.resemblance.gapCount}/${r.gate.resemblance.gapBudget})` : "") +
@@ -386,6 +417,8 @@ async function main() {
   console.error(`[${def.key}] dressing: ${r1.apertures.length} apertures, ${r1.dress.placements.length} placements ` +
     `(${r1.dress.stats.fullyDressed}/${r1.dress.stats.openings} fully dressed, ${r1.dress.stats.conflicts} conflicts); ` +
     `unfulfilled: ${r1.treatments.unfulfilled.join(", ") || "none"}`);
+  console.error(`[${def.key}] settle: grammar fixpoint reached in ${r1.settle.iterations} re-run(s)` +
+    (r1.settle.trail.length ? ` — ${r1.settle.trail.map((t) => `frame ${t.frame} + fill ${t.fill}`).join("; ")}` : " — already a no-op"));
 
   // audit: the chain's derived bands vs the committed zone-map record (chain runs on the repaired shell)
   let zoneMapDiff = null;
@@ -475,6 +508,7 @@ async function main() {
       perOpening: r1.dress.perOpening,
       stats: r1.dress.stats,
     },
+    settle: r1.settle,
     reproducible: {
       doubleRun: true, sha256: shas,
       determinism: "kit→shell→skin→grammar→dressing is a pure function of the committed inputs " +

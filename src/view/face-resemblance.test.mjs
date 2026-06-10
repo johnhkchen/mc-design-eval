@@ -112,3 +112,16 @@ test("the recorded cottage fractions prove the gate both ways (T-088-01 AC #3, u
   assert.equal(passed.accepted, true);
   assert.equal(passed.reason, "resemblance-improved");
 });
+
+test("coverageGate metric 'own': gates on ownFraction (declared vocabulary); default metric unchanged", () => {
+  const rec = { band1: { total: 100, byBlock: {}, dominant: "smooth_sandstone", dominantFraction: 0.23,
+    own: ["smooth_sandstone", "spruce_planks"], ownFraction: 0.96 } };
+  assert.equal(coverageGate(rec).passed, false, "dominant-only still fails the styled band");
+  const g = coverageGate(rec, { metric: "own" });
+  assert.equal(g.passed, true);
+  assert.equal(g.byZone.band1.fraction, 0.96);
+  assert.equal(g.byZone.band1.dominantFraction, 0.23, "the dominant count stays reported beside it");
+  assert.deepEqual(g.byZone.band1.own, ["smooth_sandstone", "spruce_planks"]);
+  assert.equal(coverageGate(rec, { metric: "own", threshold: 0.97 }).passed, false);
+  assert.throws(() => coverageGate(rec, { metric: "best" }), /unknown metric/);
+});

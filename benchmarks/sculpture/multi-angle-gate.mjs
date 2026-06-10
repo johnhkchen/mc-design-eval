@@ -50,7 +50,7 @@ import {
 } from "../../src/form/resemblance.mjs";
 import { resolveAngle, renderViews } from "../../src/view/multi-angle.mjs";
 import { structuralZones } from "../../src/view/structural-read.mjs";
-import { surfaceZoneHistogram, dominantCoverage } from "../../src/view/zone-fill.mjs";
+import { surfaceZoneHistogram, ownCoverage } from "../../src/view/zone-fill.mjs";
 import { coverageGate, DEFAULT_COVERAGE_THRESHOLD } from "../../src/view/face-resemblance.mjs";
 import { layerCounts, zonesFromBands } from "../../src/view/zone-map.mjs";
 import { extractConceptZoneMap } from "../../src/color/band-profile.mjs";
@@ -313,10 +313,14 @@ async function main() {
     for (const r of renders) {
       const a = r.angle;
       const az = resolveAngle(a).azimuthDeg;
-      // T-088 PRECONDITION on THIS view's visible skin: the diagonal projection census.
+      // T-088 PRECONDITION on THIS view's visible skin: the diagonal projection census. Censused on
+      // OWN materials (dominant + declared preserve — T-090's band-evidence set, T-101): a styled
+      // zone legitimately carries frame lines and shutters over its dominant; dominant-only counting
+      // rejected exactly the ingredients the kit supplied. Monotone vs the old metric — any view
+      // that passed dominant-only still passes; foreign leakage still fails.
       const cov = coverageGate(
-        dominantCoverage(surfaceZoneHistogram(occ, derived.zoneOf, { faces: [a], skin: "projection" }), zonesShipped),
-        { threshold: DEFAULT_COVERAGE_THRESHOLD, zones: zonesShipped });
+        ownCoverage(surfaceZoneHistogram(occ, derived.zoneOf, { faces: [a], skin: "projection" }), zonesShipped),
+        { threshold: DEFAULT_COVERAGE_THRESHOLD, zones: zonesShipped, metric: "own" });
       const viewImg = await decodeImage(r.path);
       const viewPanel = resampleRgba(viewImg, P, P, "aspect");
       panels.push(viewPanel);
@@ -329,7 +333,7 @@ async function main() {
         // the T-088 short-circuit: the judge is NEVER called; the record must show that.
         view.reason = "coverage";
         console.error(`[${slug}] ${a} (${az}°): coverage REJECT — ` +
-          cov.failures.map((f) => `${f.zone} ${f.dominant}=${f.fraction}`).join(", ") + " — judge not called");
+          cov.failures.map((f) => `${f.zone} own(${f.dominant}+preserve)=${f.fraction}`).join(", ") + " — judge not called");
       } else {
         const meshPanel = mesh
           ? resampleRgba(silhouetteToRgba(rasterizeSilhouette(mesh, { view: resolveAngle(a) })), P, P, "aspect")

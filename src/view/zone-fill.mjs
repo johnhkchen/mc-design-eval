@@ -221,3 +221,31 @@ export function dominantCoverage(hist, zones = {}) {
   }
   return out;
 }
+
+/**
+ * Per-zone OWN-materials coverage: `dominantCoverage` extended with each zone's declared vocabulary —
+ * dominant + `preserve` (the T-090 band-evidence "own" set) — and the fraction of the zone's visible
+ * skin those cover. A styled zone (E-26) legitimately carries frame lines, shutters, and splat
+ * secondaries on top of its dominant; censusing the dominant alone under-counts exactly the
+ * ingredients the kit placed. Foreign leakage (another zone's dominant, salt) still counts against.
+ * Strictly monotone vs `dominantFraction` (own ⊇ dominant): anything that passed dominant-only
+ * coverage passes own-coverage. PURE.
+ * @param {Record<string,{total:number, byBlock:Record<string,number>}>} hist  surfaceZoneHistogram output
+ * @param {Record<string,{dominant:string, preserve?:string[]}>} [zones]
+ * @returns {Record<string,{total:number, byBlock:Record<string,number>, dominant:string|null,
+ *           dominantFraction:number|null, own:string[]|null, ownFraction:number|null}>}
+ */
+export function ownCoverage(hist, zones = {}) {
+  const out = dominantCoverage(hist, zones);
+  for (const [zone, row] of Object.entries(out)) {
+    const p = zones[zone];
+    const own = typeof p?.dominant === "string"
+      ? [...new Set([p.dominant, ...(p.preserve ?? [])].map(bareBlock))]
+      : null;
+    row.own = own;
+    row.ownFraction = own && row.total
+      ? Math.round((own.reduce((n, b) => n + (row.byBlock[b] ?? 0), 0) / row.total) * 1000) / 1000
+      : null;
+  }
+  return out;
+}

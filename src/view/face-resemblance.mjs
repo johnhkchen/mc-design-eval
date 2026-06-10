@@ -64,23 +64,32 @@ export const DEFAULT_COVERAGE_THRESHOLD = 0.5;
  * when given (the E-21-derived intent), else every measured zone. A gated zone that is missing from
  * `coverage`, has an empty census, or has a null fraction FAILS — absence of evidence is failure (the
  * 91%-bare wall *had* a number; a zone with no number is worse, never a pass). PURE.
+ * Metric "own" (E-26, T-101): gate on `ownFraction` from an `ownCoverage` record instead — the
+ * zone's declared vocabulary (dominant + preserve, the T-090 band-evidence set). A styled zone's
+ * frame lines and shutters are supplied ingredients, not under-coverage; foreign leakage still
+ * fails. Strictly monotone vs "dominant" (own ⊇ dominant): anything that passed dominant-only
+ * coverage passes own-coverage. Default callers are byte-identical to before.
  * @param {Record<string,{total:number, dominant:string|null, dominantFraction:number|null}>} coverage
- * @param {{threshold?:number, zones?:Record<string,object>}} [opts]
+ * @param {{threshold?:number, zones?:Record<string,object>, metric?:"dominant"|"own"}} [opts]
  * @returns {{passed:boolean, threshold:number,
  *            failures:{zone:string,dominant:string|null,fraction:number|null,total:number}[],
  *            byZone:Record<string,{dominant:string|null,fraction:number|null,total:number,passed:boolean}>}}
  */
-export function coverageGate(coverage, { threshold = DEFAULT_COVERAGE_THRESHOLD, zones } = {}) {
+export function coverageGate(coverage, { threshold = DEFAULT_COVERAGE_THRESHOLD, zones, metric = "dominant" } = {}) {
   if (!coverage || typeof coverage !== "object") throw new Error("coverageGate: coverage must be a dominantCoverage record");
+  if (metric !== "dominant" && metric !== "own") throw new Error(`coverageGate: unknown metric "${metric}"`);
   const gated = zones ? Object.keys(zones) : Object.keys(coverage);
   const failures = [];
   const byZone = {};
   for (const zone of gated) {
     const c = coverage[zone];
-    const fraction = c?.dominantFraction ?? null;
+    const fraction = (metric === "own" ? c?.ownFraction : c?.dominantFraction) ?? null;
     const total = c?.total ?? 0;
     const passed = total > 0 && fraction != null && fraction >= threshold;
-    byZone[zone] = { dominant: c?.dominant ?? null, fraction, total, passed };
+    byZone[zone] = {
+      dominant: c?.dominant ?? null, fraction, total, passed,
+      ...(metric === "own" ? { metric, own: c?.own ?? null, dominantFraction: c?.dominantFraction ?? null } : {}),
+    };
     if (!passed) failures.push({ zone, dominant: c?.dominant ?? null, fraction, total });
   }
   return { passed: failures.length === 0, threshold, failures, byZone };
