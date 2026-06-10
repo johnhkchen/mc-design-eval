@@ -95,8 +95,8 @@ async function main() {
   // --- 3. before/after renders (best-effort; the top view is where the courses read) ---------------
   const faces = [];
   for (const angle of ["front", "right", "top"]) {
-    faces.push({ ...(await tryRender(artifact, angle, `view-${angle}-before`)), when: "before" });
-    faces.push({ ...(await tryRender(patterned, angle, `view-${angle}-after`)), when: "after" });
+    faces.push({ ...(await tryRender(artifact, angle, `${angle}-before`)), when: "before" });
+    faces.push({ ...(await tryRender(patterned, angle, `${angle}-after`)), when: "after" });
   }
   for (const f of faces) console.error(`render ${f.when} ${f.angle}: ${f.path ?? `unavailable (${f.error})`}`);
 

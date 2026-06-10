@@ -1,0 +1,161 @@
+{
+  "schema": "surface-pattern/v1",
+  "subject": "cottage",
+  "inputs": {
+    "build": "benchmarks/sculpture/spray-paint/cottage/artifact.json",
+    "policyFrom": "benchmarks/sculpture/spray-paint/cottage.json"
+  },
+  "zones": {
+    "storeyDivide": 7,
+    "policy": {
+      "base": {
+        "dominant": "stone_bricks",
+        "preserve": [
+          "cobblestone",
+          "dark_oak_log"
+        ],
+        "splat": [
+          "cobblestone",
+          "dark_oak_log"
+        ]
+      },
+      "upper": {
+        "dominant": "white_terracotta",
+        "preserve": [
+          "dark_oak_log",
+          "spruce_planks",
+          "dark_oak_planks"
+        ],
+        "splat": [
+          "dark_oak_log"
+        ]
+      },
+      "roof": {
+        "dominant": "spruce_planks",
+        "preserve": [
+          "dark_oak_planks",
+          "cobblestone",
+          "bricks"
+        ],
+        "splat": [
+          "dark_oak_planks",
+          "cobblestone",
+          "bricks"
+        ]
+      }
+    }
+  },
+  "course": {
+    "dominant": "spruce_planks",
+    "columnsRaised": 41,
+    "voxelsAdded": 85,
+    "before": {
+      "pairs": 1262,
+      "flat": 626,
+      "step1": 363,
+      "cliff": 273,
+      "stepSmoothness": 0.784,
+      "meanAbsStep": 0.983
+    },
+    "after": {
+      "pairs": 1262,
+      "flat": 707,
+      "step1": 337,
+      "cliff": 218,
+      "stepSmoothness": 0.827,
+      "meanAbsStep": 0.755
+    },
+    "note": "basin-fill of the +y height field to its hydrological spill level (priority-flood): enclosed dents/pits raised in the roof dominant; draining valleys + bumps untouched by construction (no delete — bump residual is honest). stepSmoothness = fraction of adjacent column joints within one block; 1.0 is unreachable (legit gable/verge edges count)."
+  },
+  "salt": {
+    "minKeep": 3,
+    "minExtent": 3,
+    "stripped": 202,
+    "kept": 343,
+    "byZone": {
+      "roof": {
+        "offDominant": 133,
+        "strippedCells": 75,
+        "keptCells": 58,
+        "byBlock": {
+          "cobblestone": {
+            "stripped": 46,
+            "kept": 44
+          },
+          "dark_oak_planks": {
+            "stripped": 29,
+            "kept": 14
+          }
+        }
+      },
+      "upper": {
+        "offDominant": 184,
+        "strippedCells": 50,
+        "keptCells": 134,
+        "byBlock": {
+          "dark_oak_log": {
+            "stripped": 50,
+            "kept": 128
+          },
+          "spruce_planks": {
+            "stripped": 0,
+            "kept": 6
+          }
+        }
+      },
+      "base": {
+        "offDominant": 228,
+        "strippedCells": 77,
+        "keptCells": 151,
+        "byBlock": {
+          "dark_oak_log": {
+            "stripped": 44,
+            "kept": 115
+          },
+          "cobblestone": {
+            "stripped": 33,
+            "kept": 36
+          }
+        }
+      }
+    },
+    "note": "off-dominant VISIBLE-SKIN cells judged by the PATTERN of their same-material skin component (whole-skin 6-connected — the chimney crosses zones): kept iff size>=minKeep AND max-extent>=minExtent (a run/line: studs, trim, the chimney shaft); salt recolored to the cell's zone dominant. Material legality was zoneFill's gate; this judges pattern."
+  },
+  "placements": {
+    "courseAdds": 85,
+    "saltRecolors": 202
+  },
+  "faces": [
+    {
+      "angle": "front",
+      "path": "benchmarks/sculpture/surface-pattern/cottage/view-front-before.png",
+      "when": "before"
+    },
+    {
+      "angle": "front",
+      "path": "benchmarks/sculpture/surface-pattern/cottage/view-front-after.png",
+      "when": "after"
+    },
+    {
+      "angle": "right",
+      "path": "benchmarks/sculpture/surface-pattern/cottage/view-right-before.png",
+      "when": "before"
+    },
+    {
+      "angle": "right",
+      "path": "benchmarks/sculpture/surface-pattern/cottage/view-right-after.png",
+      "when": "after"
+    },
+    {
+      "angle": "top",
+      "path": "benchmarks/sculpture/surface-pattern/cottage/view-top-before.png",
+      "when": "before"
+    },
+    {
+      "angle": "top",
+      "path": "benchmarks/sculpture/surface-pattern/cottage/view-top-after.png",
+      "when": "after"
+    }
+  ],
+  "note": "surface-pattern pass (S-087): coverage ≠ a clean pattern — this raises the READ of the already watertight (S-084), base-coated (S-085) skin. Consumes the spray-paint build; spray-paint.mjs deliberately untouched (pipeline consolidation is S-089/E-25)."
+}
