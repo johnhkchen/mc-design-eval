@@ -1,0 +1,719 @@
+{
+  "schema": "fixture-card/v1",
+  "ticket": "T-097-01",
+  "verdict": {
+    "ok": true,
+    "gate": "pass",
+    "unmapped": 0,
+    "rowsVerified": 25,
+    "rows": 25
+  },
+  "rows": [
+    {
+      "id": "trapdoor-north-open",
+      "family": "trapdoor",
+      "block": "spruce_trapdoor",
+      "state": {
+        "facing": "north",
+        "half": "bottom",
+        "open": "true"
+      },
+      "pos": [
+        0,
+        1,
+        0
+      ],
+      "pass": true,
+      "stored": 6037,
+      "decoded": {
+        "name": "spruce_trapdoor",
+        "properties": {
+          "facing": "north",
+          "half": "bottom",
+          "open": "true",
+          "powered": "false",
+          "waterlogged": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "trapdoor-south-open",
+      "family": "trapdoor",
+      "block": "spruce_trapdoor",
+      "state": {
+        "facing": "south",
+        "half": "bottom",
+        "open": "true"
+      },
+      "pos": [
+        3,
+        1,
+        0
+      ],
+      "pass": true,
+      "stored": 6053,
+      "decoded": {
+        "name": "spruce_trapdoor",
+        "properties": {
+          "facing": "south",
+          "half": "bottom",
+          "open": "true",
+          "powered": "false",
+          "waterlogged": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "trapdoor-west-open",
+      "family": "trapdoor",
+      "block": "spruce_trapdoor",
+      "state": {
+        "facing": "west",
+        "half": "bottom",
+        "open": "true"
+      },
+      "pos": [
+        6,
+        1,
+        0
+      ],
+      "pass": true,
+      "stored": 6069,
+      "decoded": {
+        "name": "spruce_trapdoor",
+        "properties": {
+          "facing": "west",
+          "half": "bottom",
+          "open": "true",
+          "powered": "false",
+          "waterlogged": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "trapdoor-east-open",
+      "family": "trapdoor",
+      "block": "spruce_trapdoor",
+      "state": {
+        "facing": "east",
+        "half": "bottom",
+        "open": "true"
+      },
+      "pos": [
+        9,
+        1,
+        0
+      ],
+      "pass": true,
+      "stored": 6085,
+      "decoded": {
+        "name": "spruce_trapdoor",
+        "properties": {
+          "facing": "east",
+          "half": "bottom",
+          "open": "true",
+          "powered": "false",
+          "waterlogged": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "trapdoor-closed-bottom",
+      "family": "trapdoor",
+      "block": "spruce_trapdoor",
+      "state": {
+        "facing": "north",
+        "half": "bottom",
+        "open": "false"
+      },
+      "pos": [
+        12,
+        1,
+        0
+      ],
+      "pass": true,
+      "stored": 6041,
+      "decoded": {
+        "name": "spruce_trapdoor",
+        "properties": {
+          "facing": "north",
+          "half": "bottom",
+          "open": "false",
+          "powered": "false",
+          "waterlogged": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "trapdoor-closed-top",
+      "family": "trapdoor",
+      "block": "spruce_trapdoor",
+      "state": {
+        "facing": "north",
+        "half": "top",
+        "open": "false"
+      },
+      "pos": [
+        15,
+        1,
+        0
+      ],
+      "pass": true,
+      "stored": 6033,
+      "decoded": {
+        "name": "spruce_trapdoor",
+        "properties": {
+          "facing": "north",
+          "half": "top",
+          "open": "false",
+          "powered": "false",
+          "waterlogged": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "fence-post",
+      "family": "fence",
+      "block": "oak_fence",
+      "state": null,
+      "pos": [
+        0,
+        1,
+        3
+      ],
+      "pass": true,
+      "stored": 5848,
+      "decoded": {
+        "name": "oak_fence",
+        "properties": {
+          "east": "false",
+          "north": "false",
+          "south": "false",
+          "waterlogged": "false",
+          "west": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "fence-ew",
+      "family": "fence",
+      "block": "oak_fence",
+      "state": {
+        "east": "true",
+        "west": "true"
+      },
+      "pos": [
+        3,
+        1,
+        3
+      ],
+      "pass": true,
+      "stored": 5831,
+      "decoded": {
+        "name": "oak_fence",
+        "properties": {
+          "east": "true",
+          "north": "false",
+          "south": "false",
+          "waterlogged": "false",
+          "west": "true"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "fence-ns",
+      "family": "fence",
+      "block": "oak_fence",
+      "state": {
+        "north": "true",
+        "south": "true"
+      },
+      "pos": [
+        6,
+        1,
+        3
+      ],
+      "pass": true,
+      "stored": 5836,
+      "decoded": {
+        "name": "oak_fence",
+        "properties": {
+          "east": "false",
+          "north": "true",
+          "south": "true",
+          "waterlogged": "false",
+          "west": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "fence-corner-ne",
+      "family": "fence",
+      "block": "oak_fence",
+      "state": {
+        "north": "true",
+        "east": "true"
+      },
+      "pos": [
+        9,
+        1,
+        3
+      ],
+      "pass": true,
+      "stored": 5824,
+      "decoded": {
+        "name": "oak_fence",
+        "properties": {
+          "east": "true",
+          "north": "true",
+          "south": "false",
+          "waterlogged": "false",
+          "west": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "fence-tee-new",
+      "family": "fence",
+      "block": "oak_fence",
+      "state": {
+        "north": "true",
+        "east": "true",
+        "west": "true"
+      },
+      "pos": [
+        12,
+        1,
+        3
+      ],
+      "pass": true,
+      "stored": 5823,
+      "decoded": {
+        "name": "oak_fence",
+        "properties": {
+          "east": "true",
+          "north": "true",
+          "south": "false",
+          "waterlogged": "false",
+          "west": "true"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "stairs-north",
+      "family": "stairs",
+      "block": "stone_brick_stairs",
+      "state": {
+        "facing": "north",
+        "half": "bottom",
+        "shape": "straight"
+      },
+      "pos": [
+        0,
+        1,
+        6
+      ],
+      "pass": true,
+      "stored": 7120,
+      "decoded": {
+        "name": "stone_brick_stairs",
+        "properties": {
+          "facing": "north",
+          "half": "bottom",
+          "shape": "straight",
+          "waterlogged": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "stairs-south",
+      "family": "stairs",
+      "block": "stone_brick_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom",
+        "shape": "straight"
+      },
+      "pos": [
+        3,
+        1,
+        6
+      ],
+      "pass": true,
+      "stored": 7140,
+      "decoded": {
+        "name": "stone_brick_stairs",
+        "properties": {
+          "facing": "south",
+          "half": "bottom",
+          "shape": "straight",
+          "waterlogged": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "stairs-west",
+      "family": "stairs",
+      "block": "stone_brick_stairs",
+      "state": {
+        "facing": "west",
+        "half": "bottom",
+        "shape": "straight"
+      },
+      "pos": [
+        6,
+        1,
+        6
+      ],
+      "pass": true,
+      "stored": 7160,
+      "decoded": {
+        "name": "stone_brick_stairs",
+        "properties": {
+          "facing": "west",
+          "half": "bottom",
+          "shape": "straight",
+          "waterlogged": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "stairs-east",
+      "family": "stairs",
+      "block": "stone_brick_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom",
+        "shape": "straight"
+      },
+      "pos": [
+        9,
+        1,
+        6
+      ],
+      "pass": true,
+      "stored": 7180,
+      "decoded": {
+        "name": "stone_brick_stairs",
+        "properties": {
+          "facing": "east",
+          "half": "bottom",
+          "shape": "straight",
+          "waterlogged": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "stairs-east-top",
+      "family": "stairs",
+      "block": "stone_brick_stairs",
+      "state": {
+        "facing": "east",
+        "half": "top",
+        "shape": "straight"
+      },
+      "pos": [
+        12,
+        1,
+        6
+      ],
+      "pass": true,
+      "stored": 7170,
+      "decoded": {
+        "name": "stone_brick_stairs",
+        "properties": {
+          "facing": "east",
+          "half": "top",
+          "shape": "straight",
+          "waterlogged": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "slab-bottom",
+      "family": "slab",
+      "block": "oak_slab",
+      "state": {
+        "type": "bottom"
+      },
+      "pos": [
+        0,
+        1,
+        9
+      ],
+      "pass": true,
+      "stored": 11024,
+      "decoded": {
+        "name": "oak_slab",
+        "properties": {
+          "type": "bottom",
+          "waterlogged": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "slab-top",
+      "family": "slab",
+      "block": "oak_slab",
+      "state": {
+        "type": "top"
+      },
+      "pos": [
+        3,
+        1,
+        9
+      ],
+      "pass": true,
+      "stored": 11022,
+      "decoded": {
+        "name": "oak_slab",
+        "properties": {
+          "type": "top",
+          "waterlogged": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "slab-double",
+      "family": "slab",
+      "block": "oak_slab",
+      "state": {
+        "type": "double"
+      },
+      "pos": [
+        6,
+        1,
+        9
+      ],
+      "pass": true,
+      "stored": 11026,
+      "decoded": {
+        "name": "oak_slab",
+        "properties": {
+          "type": "double",
+          "waterlogged": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "door-closed-lower",
+      "family": "door",
+      "block": "spruce_door",
+      "state": {
+        "facing": "east",
+        "half": "lower",
+        "hinge": "left",
+        "open": "false"
+      },
+      "pos": [
+        0,
+        1,
+        12
+      ],
+      "pass": true,
+      "stored": 11740,
+      "decoded": {
+        "name": "spruce_door",
+        "properties": {
+          "facing": "east",
+          "half": "lower",
+          "hinge": "left",
+          "open": "false",
+          "powered": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "door-closed-upper",
+      "family": "door",
+      "block": "spruce_door",
+      "state": {
+        "facing": "east",
+        "half": "upper",
+        "hinge": "left",
+        "open": "false"
+      },
+      "pos": [
+        0,
+        2,
+        12
+      ],
+      "pass": true,
+      "stored": 11732,
+      "decoded": {
+        "name": "spruce_door",
+        "properties": {
+          "facing": "east",
+          "half": "upper",
+          "hinge": "left",
+          "open": "false",
+          "powered": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "door-open-lower",
+      "family": "door",
+      "block": "spruce_door",
+      "state": {
+        "facing": "east",
+        "half": "lower",
+        "hinge": "left",
+        "open": "true"
+      },
+      "pos": [
+        3,
+        1,
+        12
+      ],
+      "pass": true,
+      "stored": 11738,
+      "decoded": {
+        "name": "spruce_door",
+        "properties": {
+          "facing": "east",
+          "half": "lower",
+          "hinge": "left",
+          "open": "true",
+          "powered": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "door-open-upper",
+      "family": "door",
+      "block": "spruce_door",
+      "state": {
+        "facing": "east",
+        "half": "upper",
+        "hinge": "left",
+        "open": "true"
+      },
+      "pos": [
+        3,
+        2,
+        12
+      ],
+      "pass": true,
+      "stored": 11730,
+      "decoded": {
+        "name": "spruce_door",
+        "properties": {
+          "facing": "east",
+          "half": "upper",
+          "hinge": "left",
+          "open": "true",
+          "powered": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "lantern-standing",
+      "family": "lantern",
+      "block": "lantern",
+      "state": {
+        "hanging": "false"
+      },
+      "pos": [
+        0,
+        1,
+        15
+      ],
+      "pass": true,
+      "stored": 18365,
+      "decoded": {
+        "name": "lantern",
+        "properties": {
+          "hanging": "false",
+          "waterlogged": "false"
+        }
+      },
+      "wrong": []
+    },
+    {
+      "id": "lantern-hanging",
+      "family": "lantern",
+      "block": "lantern",
+      "state": {
+        "hanging": "true"
+      },
+      "pos": [
+        3,
+        1,
+        15
+      ],
+      "pass": true,
+      "stored": 18363,
+      "decoded": {
+        "name": "lantern",
+        "properties": {
+          "hanging": "true",
+          "waterlogged": "false"
+        }
+      },
+      "wrong": []
+    }
+  ],
+  "unmapped": [],
+  "evidence": {
+    "renders": [
+      {
+        "angle": "+x+z",
+        "path": "benchmarks/sculpture/fixture-card/view-card-+x+z.png",
+        "bytes": 238923,
+        "sha256": "d520e3ca84726cec9e3b3f4164e97b8a3d18bb2abfccdecc09743c95ae52346b"
+      },
+      {
+        "angle": "+x-z",
+        "path": "benchmarks/sculpture/fixture-card/view-card-+x-z.png",
+        "bytes": 244455,
+        "sha256": "006b8dd01e0ff2026d1d391e3ed0f1357d353c595852156dbfcf0b7bc306ed0b"
+      },
+      {
+        "angle": "-x-z",
+        "path": "benchmarks/sculpture/fixture-card/view-card--x-z.png",
+        "bytes": 249360,
+        "sha256": "8be510b3f4d101123d113cecab6fde8afeadeea44ba2462473470247c1ca87bd"
+      },
+      {
+        "angle": "-x+z",
+        "path": "benchmarks/sculpture/fixture-card/view-card--x+z.png",
+        "bytes": 247435,
+        "sha256": "d4139ea7f407b6a8604816089aad648e9b34fa9c5f807dd3431b6e72de45778b"
+      },
+      {
+        "angle": "front",
+        "path": "benchmarks/sculpture/fixture-card/view-card-front.png",
+        "bytes": 35170,
+        "sha256": "5e3fb39ecef37006f195e9c261ce1d287e2669503d3f190511caadf45935a1cc"
+      }
+    ],
+    "renderError": null
+  },
+  "namedResiduals": [
+    "stairs-invisible: prismarine-viewer 1.33.0 meshes NO stair block at any state (probed oak/stone_brick/cobblestone, default and explicit states) — stairs are placed and read back correctly but do not appear in renders. S-099 must not rely on stair pixels until the lens is fixed."
+  ]
+}
