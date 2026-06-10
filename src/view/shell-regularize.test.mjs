@@ -235,18 +235,61 @@ test("regularizeShell: a destructive step is rejected, rolled back, and recorded
   assert.deepEqual(r.census.after, r.census.before);
 });
 
-test("regularizeShell: a closure-breaching step is rejected", () => {
-  // hollow-interior box (closed): walls + roof, open bottom on ground
-  const cells = boxCells(0, 5, 0, 4, 0, 5).filter(({ pos: [x, y, z] }) =>
-    x === 0 || x === 5 || z === 0 || z === 5 || y === 4 || y === 0);
-  const occ = occupancyFromCells(cells);
-  const holed = occupancyFromCells(cells.filter(({ pos }) => pos.join(",") !== "2,4,2")); // roof hole
+// hollow-interior box (closed): walls + roof + floor, on ground
+const hollowCells = () => boxCells(0, 5, 0, 4, 0, 5).filter(({ pos: [x, y, z] }) =>
+  x === 0 || x === 5 || z === 0 || z === 5 || y === 4 || y === 0);
+const dropAt = (cells, ...keys) => {
+  const dropSet = new Set(keys);
+  return cells.filter(({ pos }) => !dropSet.has(pos.join(",")));
+};
+
+test("regularizeShell: a hole poked into a CLOSED shell is plug-remediated and recorded", () => {
+  const occ = occupancyFromCells(hollowCells());
+  const holed = occupancyFromCells(dropAt(hollowCells(), "2,4,2"));
   const r = regularizeShell(occ, {
     refSils: refsOf(occ),
     steps: [{ op: "open", fn: () => ({ occ: holed }) }],
   });
+  assert.equal(r.accepted, 1, r.trace[0].reasons.join("; "));
+  assert.ok(r.trace[0].cells.plugged >= 1, "plug remediation recorded");
+  assert.equal(r.trace[0].closure.reached, 0);
+});
+
+test("regularizeShell: closure NO-REGRESS — an already-open input shell gates on not getting worse", () => {
+  // two chambers split by a full wall at x=3; the roof hole over chamber A makes the input OPEN
+  // with only chamber A reached — chamber B's sealed interior is what no-regress protects
+  const chambered = () => [
+    ...boxCells(0, 6, 0, 4, 0, 5).filter(({ pos: [x, y, z] }) =>
+      x === 0 || x === 6 || z === 0 || z === 5 || y === 4 || y === 0),
+    ...boxCells(3, 3, 1, 3, 1, 4), // the dividing wall
+  ];
+  const input = occupancyFromCells(dropAt(chambered(), "1,4,1")); // roof hole over chamber A
+  const same = regularizeShell(input, {
+    refSils: refsOf(input),
+    steps: [{ op: "open", fn: (o) => ({ occ: o }) }],
+  });
+  assert.equal(same.accepted, 1, same.trace[0].reasons.join("; ")); // no-op never regresses
+  const breached = occupancyFromCells(dropAt(chambered(), "1,4,1", "3,2,2")); // wall hole → chamber B reached
+  const regress = regularizeShell(input, {
+    refSils: refsOf(input),
+    steps: [{ op: "open", fn: () => ({ occ: breached }) }],
+  });
+  assert.equal(regress.rejected, 1, JSON.stringify(regress.trace[0].closure));
+  assert.ok(regress.trace[0].reasons.some((m) => m.startsWith("closure:")), regress.trace[0].reasons.join("; "));
+  assert.ok(regress.trace[0].closure.reached > regress.trace[0].closure.inputReached);
+});
+
+test("regularizeShell: a plug that would touch a protected region still rejects the step", () => {
+  const occ = occupancyFromCells(hollowCells());
+  const holed = occupancyFromCells(dropAt(hollowCells(), "2,4,2"));
+  const r = regularizeShell(occ, {
+    refSils: refsOf(occ),
+    iouTolerance: 1, // isolate checks (b)+(c)
+    protect: [{ name: "interior", contains: ([x, y, z]) => x > 0 && x < 5 && z > 0 && z < 5 && y > 0 && y < 4 }],
+    steps: [{ op: "open", fn: () => ({ occ: holed }) }],
+  });
   assert.equal(r.rejected, 1);
-  assert.ok(r.trace[0].reasons.some((m) => m.startsWith("closure:")), r.trace[0].reasons.join("; "));
+  assert.ok(r.trace[0].reasons.some((m) => m.startsWith("protect:")), r.trace[0].reasons.join("; "));
 });
 
 test("regularizeShell: a protect-violating step is rejected (defense in depth beyond the ops)", () => {

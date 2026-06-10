@@ -45,7 +45,7 @@ import { rasterizeSilhouette } from "../form/glb-silhouette.mjs";
 import { normalizeSilhouette, iou } from "../form/form-fidelity.mjs";
 import { MULTI_ANGLE_GATE } from "../config.mjs";
 import { occupancyFromCells, bareBlock } from "./occupancy.mjs";
-import { closureCheck } from "./shell-integrity.mjs";
+import { closureCheck, plugClosure } from "./shell-integrity.mjs";
 import { resolveAngle } from "./multi-angle.mjs";
 
 export const REGULARIZE_SCHEMA = "shell-regularize/v1";
@@ -442,8 +442,18 @@ const round4 = (x) => Math.round(x * 1e4) / 1e4;
  *   (a) at EVERY gate azimuth, candidate-vs-GLB silhouette IoU ≥ the INPUT shell's IoU at that
  *       azimuth − iouTolerance (anchored to the input, so cumulative drift is bounded — the E-15
  *       "no 3-D target → regression" lesson as an invariant);
- *   (b) the six-direction closure check (T-091, with the caller's declared-opening regions) still
- *       passes;
+ *   (b) six-direction closure (T-091, with the caller's declared-opening regions) does NOT
+ *       REGRESS: candidate exterior-reachable interior cells ≤ the input shell's. (No-regress,
+ *       not "closed": opening regions re-derived on a repaired shell can differ from the ones its
+ *       own chain run plugged against — the witnessed church shell reads 213 reachable with its
+ *       re-derived openings — and a cage must be runnable on the shells that exist.) When the
+ *       input IS closed and a step creates new contained air (a close can roof a recess), ONE
+ *       plug remediation is attempted — plugClosure with the build dominant — and the plugged
+ *       candidate is re-judged by ALL three checks; the plug count is recorded.
+ *       Known limit of the open-input fallback: a step that POKES a hole reclassifies the cells
+ *       beneath it as non-interior, so the reached COUNT can stay flat — only the closed-input
+ *       strict mode (the chain path, where regularize runs right after plugClosure) catches every
+ *       new hole; on an open input the silhouette floors are the backstop. Named, not hidden.
  *   (c) protected sub-regions (declared predicates: chimney, openings, …) are untouched —
  *       verified independently of the ops honoring them (defense in depth).
  * A failing step ROLLS BACK automatically (the previous occupancy stands) and its StepRecord
@@ -489,6 +499,25 @@ export function regularizeShell(occ, {
   const baseline = silhouetteIoUs(occ, refSils, { grid });
   const floors = Object.fromEntries(
     Object.entries(baseline).map(([a, v]) => [a, v - iouTolerance]));
+  const inputClosure = closureCheck(occ, { regions });
+
+  // judge a candidate against all three checks; returns the reasons + per-check evidence
+  const judge = (prev, candidate) => {
+    const reasons = [];
+    const candIoU = silhouetteIoUs(candidate, refSils, { grid });
+    const iouByAzimuth = {};
+    for (const a of Object.keys(refSils)) {
+      iouByAzimuth[a] = { baseline: round4(baseline[a]), candidate: round4(candIoU[a]), floor: round4(floors[a]) };
+      if (candIoU[a] < floors[a]) reasons.push(`iou:${a} ${round4(candIoU[a])} < ${round4(floors[a])}`);
+    }
+    const closure = closureCheck(candidate, { regions });
+    if (closure.reached > inputClosure.reached) {
+      reasons.push(`closure: ${closure.reached} interior cells exterior-reachable (input had ${inputClosure.reached})`);
+    }
+    const violations = protectViolations(prev, candidate, protect);
+    if (violations) reasons.push(`protect: ${violations} cells changed inside protected regions`);
+    return { reasons, iouByAzimuth, closure, violations };
+  };
 
   let current = occ;
   const trace = [];
@@ -501,31 +530,35 @@ export function regularizeShell(occ, {
     else if (step.op === "close") result = closeShell(current, { ...params, protect });
     else throw new Error(`regularizeShell: unknown step op "${step.op}"`);
 
-    const candidate = result.occ;
-    const reasons = [];
-    const candIoU = silhouetteIoUs(candidate, refSils, { grid });
-    const iouByAzimuth = {};
-    for (const a of Object.keys(refSils)) {
-      iouByAzimuth[a] = { baseline: round4(baseline[a]), candidate: round4(candIoU[a]), floor: round4(floors[a]) };
-      if (candIoU[a] < floors[a]) reasons.push(`iou:${a} ${round4(candIoU[a])} < ${round4(floors[a])}`);
+    let candidate = result.occ;
+    let verdict = judge(current, candidate);
+    let plugged = 0;
+    // ONE plug remediation: only when the input is closed and the step's sole closure failure is
+    // NEW contained air (a close can roof a recess) — plug with the build dominant, re-judge all.
+    if (inputClosure.closed && verdict.closure.reached > 0) {
+      try {
+        const plug = plugClosure(candidate, { zoneOf: () => "_", zones: {}, regions });
+        plugged = plug.placements.length;
+        candidate = plug.occ;
+        verdict = judge(current, candidate);
+      } catch {
+        plugged = 0; // did not converge — the unplugged verdict stands
+      }
     }
-    const closure = closureCheck(candidate, { regions });
-    if (!closure.closed) reasons.push(`closure: ${closure.reached} interior cells exterior-reachable`);
-    const violations = protectViolations(current, candidate, protect);
-    if (violations) reasons.push(`protect: ${violations} cells changed inside protected regions`);
 
-    const ok = reasons.length === 0;
+    const ok = verdict.reasons.length === 0;
     trace.push({
       step: step.op, params,
-      accepted: ok, reasons,
-      iouByAzimuth,
-      closure: { closed: closure.closed, reached: closure.reached },
-      protect: { violations },
+      accepted: ok, reasons: verdict.reasons,
+      iouByAzimuth: verdict.iouByAzimuth,
+      closure: { closed: verdict.closure.closed, reached: verdict.closure.reached, inputReached: inputClosure.reached },
+      protect: { violations: verdict.violations },
       census: censusOf(candidate),
       cells: {
         ...(result.removedCells !== undefined ? { removed: result.removedCells } : {}),
         ...(result.restored !== undefined ? { restoredComponents: result.restored } : {}),
         ...(result.addedCells !== undefined ? { added: result.addedCells } : {}),
+        ...(plugged ? { plugged } : {}),
       },
     });
     if (ok) { current = candidate; accepted++; } else rejected++;
