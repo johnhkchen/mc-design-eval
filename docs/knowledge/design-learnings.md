@@ -2067,3 +2067,64 @@ to `{base:0, upper:134, roof:0}` (masked) — plaster confined to the upper stor
 fell out: **seal before paint** (so no stray is painted — the floating blocks were paint on un-sealed
 geometry), and the **guard is structural** (a base/roof-plaster THROW), not the marginal resemblance number —
 a `0.25→0.40` gain must not be able to rubber-stamp a zone-wrong skin (`[[twodee-interaction-sector]]`).
+
+## E-24 durable high-quality results — the pipeline reproduces it, or it isn't a result (S-089, T-089-01) · 2026-06-10
+
+The epic's origin: the good cottage skin (cream plaster band, ~77% coverage) existed only as an agent's
+**inline hand-edit** (e8062fa) — `npm run spray:paint` regenerated the bad 9%-splat version. E-24 closes
+that gap stage by stage, and this consolidation proves it end-to-end: **one named command per subject**
+(`npm run skin:cottage` / `skin:gatehouse`, `benchmarks/sculpture/durable-skin.mjs`) composes value-true
+block selection → seal → full-shell zone-fill → secondaries splat → coherent surface → coverage-aware
+gate, on the **cottage and the gatehouse**, with no hand edits anywhere in the path.
+
+**A splat cannot establish a dominant — fill first, polish second (T-085).** The concept-color splat
+converted only 9–13% of the upper wall to plaster (quantization collapses cream/stone near-tones;
+concept→face stretch misaligns the bands); replayed today on the exposure census it reads **5%**. The
+deterministic zone-fill lays each zone's dominant on the skin *first* (upper lands at **88%** after the
+full pass), and the splat is demoted to secondaries whose palettes exclude every field material — it can
+never repaint the coat back to stone. On the gatehouse the same inversion shows on the roof: splat-only
+**44%** deepslate → zone-filled **100%**.
+
+**Value-true selection is a hue fix, honestly reported (T-086).** The E-21 map names blocks by rationale;
+nothing checked the name against the concept's rendered value. The selection engine (chroma-weighted,
+within the role's material family, prior kept absent clear margin) switched the cottage's plaster
+`white_terracotta → sandstone` (the pink a* axis eliminated) and field `stone_bricks → tuff`; on the
+gatehouse it switched the wall field `stone_bricks → polished_basalt` (true ΔE **9.49 → 4.9**) and kept
+everything else (deepslate below-margin, dark_oak prior-is-best, thin-sample keeps). The trade is real and
+recorded: value fidelity is bought with texture identity (tuff is flatter than dressed ashlar; basalt adds
+vertical striping) and with *named-set* resemblance (the perceptual material-set score counts renamed
+blocks as misses).
+
+**The coverage-aware gate catches "looks the same" (T-088).** Coverage is a **precondition**, not a
+tie-breaker: the splat-only replay is REJECTED on both subjects regardless of its resemblance delta, and
+the final skin must pass or the runner **throws** — a failing skin cannot write a record. The proof both
+ways is in each record (`coverageGate.splatOnly.passed: false`, `final.passed: true`).
+
+**The durable rule (Rules 1+2): reproducibility is part of the result.** No LLM call is on the path — the
+concept PNG and the material-map roles are committed upstream artifacts, frozen data. Every live run
+executes the deterministic core **twice** and requires byte-identical artifacts; the artifact's sha256 is
+recorded and `--offline` re-asserts it (plus gates + AJV) against the committed record. Cottage
+`722af44b…` (9,707 placements), gatehouse `8a30c191…` (10,598).
+
+**Where it over- and under-reaches (Rule 5, honest):**
+- **Resemblance did not jump — and that's the finding.** Refreshed triptychs judge both subjects
+  `drifted` (cottage gap: material zoning@roof; gatehouse: form@walls/roofline). Front-face resemblance
+  evidence: cottage 0.35 → 0.30 (the sandstone band reads slightly *further* from the concept under the
+  per-face metric than the grey splat did), gatehouse 0.344 → 0.344. E-24's claim is **coverage,
+  coherence, value-truth, and reproducibility** — the resemblance ceiling is form + zoning work (E-25/E-26
+  territory), and pretending otherwise would re-commit the "marginal delta rubber-stamps a skin" sin.
+- **The census is the exposure shell (T-090), but the salt strip still judges the projection skin** — an
+  off-dominant speck visible only obliquely survives the strip (it was filled by the base coat, so the
+  residue is bounded, but the strip's instrument lags the fill's).
+- **Roof-course bumps remain** (no-delete contract): cottage smoothness 0.827, gatehouse 0.784 — cleaner
+  courses, not perfect ones.
+- **Thin-sample roles stay unvalidated** (gatehouse cobblestone 3 cells, door planks 11; cottage chimney
+  bricks) — the floor keeps the prior, which is the *absence* of a value judgement, not a pass.
+- **The gatehouse "E-23 baseline" is a counterfactual** — no splat-only skin ever shipped for it; the
+  replay shows what that path *would* have produced (labeled as such in the record).
+- **Per-zone gate thresholds remain YAGNI** — 0.5 held on both subjects (weakest passing zone: base 71%);
+  a legitimately secondary-heavy zone would still fail honestly-good skins someday.
+
+**One sentence:** E-24 ends with the thing it was missing at the start — two subjects whose high-quality
+skins (dominants established 88–100%, value-true blocks, coherent courses, gate-passing) are produced by
+**one reproducible pipeline command** with the residuals named, instead of by an agent's hand.
