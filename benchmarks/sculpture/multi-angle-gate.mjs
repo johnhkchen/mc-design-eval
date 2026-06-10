@@ -149,18 +149,24 @@ function deriveZones({ occ, conceptImg, matMap, fallbackPolicy }) {
   };
 }
 
-/** Map a NAMED-space policy into the artifact's SHIPPED palette (see module header). */
-function policyInShippedPalette(zones, { matMap, gridResult, artifact }) {
+/** Map a NAMED-space policy into the artifact's SHIPPED palette (see module header). The shipped
+ *  name space is value-true substitution COMPOSED WITH the committed kit overrides (T-096: the kit
+ *  renames at durable-skin's one renaming point, so a kit-skinned artifact carries e.g.
+ *  smooth_sandstone where the named policy says white_terracotta — censusing the named block would
+ *  fail the view on NAMING, not coverage). The allowed-guard keeps both renames unapplied on
+ *  artifacts whose manifest doesn't carry them (the pre-substitution proof baseline). */
+function policyInShippedPalette(zones, { matMap, gridResult, artifact, kitOverrides = {} }) {
   const namedManifest = bareList(matMap.palette);
   const swatches = sampleRoleSwatches(gridResult, namedManifest);
   const rows = selectValueTrueMap(matMap.map, swatches);
   const substitution = Object.fromEntries(rows.filter((r) => r.switched).map((r) => [r.named, r.chosen]));
+  const combined = { ...substitution, ...kitOverrides };
   const allowed = allowedPalette(artifact);
-  const ship = (b) => (substitution[bare(b)] && allowed.has(substitution[bare(b)])) ? substitution[bare(b)] : bare(b);
+  const ship = (b) => (combined[bare(b)] && allowed.has(combined[bare(b)])) ? combined[bare(b)] : bare(b);
   const out = Object.fromEntries(Object.entries(zones).map(([z, p]) => [z, {
     dominant: ship(p.dominant), preserve: [...new Set((p.preserve ?? []).map(ship))],
   }]));
-  return { zones: out, substitution };
+  return { zones: out, substitution, kitOverrides };
 }
 
 async function main() {
@@ -214,9 +220,17 @@ async function main() {
   const occ = artifactOccupancy(artifact);
 
   // --- zones (T-092 reuse) + the shipped-palette policy ---------------------------------------------
+  // T-096: the committed kit's verified overrides are part of the shipped name space (durable-skin
+  // composes them at its one renaming point); read them the same way, optional like there.
+  let kitOverrides = {};
+  if (def.kitRecord && existsSync(join(HERE, def.kitRecord))) {
+    const kitRec = JSON.parse(await readFile(join(HERE, def.kitRecord), "utf8"));
+    if (kitRec.schema !== "kit/v1") throw new Error(`${def.kitRecord} is not a kit/v1 record`);
+    kitOverrides = kitRec.overrides ?? {};
+  }
   const derived = deriveZones({ occ, conceptImg, matMap, fallbackPolicy: def.policy });
   const { zones: zonesShipped, substitution } = policyInShippedPalette(derived.zones, {
-    matMap, gridResult: derived.gridResult, artifact,
+    matMap, gridResult: derived.gridResult, artifact, kitOverrides,
   });
   console.error(`[${slug}] zones: ${derived.source}${derived.reason ? ` (${derived.reason})` : ""} — ` +
     Object.entries(zonesShipped).map(([z, p]) => `${z}=${p.dominant}`).join(", "));
@@ -331,7 +345,7 @@ async function main() {
       gapBudget: MULTI_ANGLE_GATE.gapBudget, coverageThreshold: DEFAULT_COVERAGE_THRESHOLD,
       note: "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them",
     },
-    zones: { source: derived.source, reason: derived.reason, policy: zonesShipped, substitutionApplied: substitution },
+    zones: { source: derived.source, reason: derived.reason, policy: zonesShipped, substitutionApplied: substitution, kitOverridesApplied: kitOverrides },
     views,
     aggregate,
     sheet: sheetFrame.replace(ROOT, ""),
