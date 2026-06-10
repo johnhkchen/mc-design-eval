@@ -21,6 +21,7 @@
     "building:build": "node benchmarks/sculpture/building-build.mjs",
     "view:proof": "node benchmarks/sculpture/view-layer-proof.mjs",
     "spray:paint": "node benchmarks/sculpture/spray-paint.mjs",
+    "pattern:cottage": "node benchmarks/sculpture/surface-pattern.mjs",
     "detect:routing": "node benchmarks/sculpture/detector-routing.mjs",
     "coherence:cottage": "node benchmarks/sculpture/surface-coherence.mjs",
     "hollow:cottage": "node benchmarks/sculpture/hollow-cottage.mjs",
