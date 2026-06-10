@@ -11,6 +11,11 @@ Per-zone dominant coverage of the skin:
 - **zone-filled (this fix):** base `stone_bricks` 62% of 598 · upper `white_terracotta` 71% of 638 · roof `spruce_planks` 89% of 1214
 - upper-band plaster: **13% → 71%** — the splat places secondaries only (upper palette = ["dark_oak_log"]).
 
+## Coverage gate (T-088-01)
+Per-zone dominant coverage is a **precondition** ahead of the per-face hill-climb (threshold **0.5** of the zone's visible skin) — proof both ways:
+- **splat-only replay (the E-23 under-applied skin): REJECTED** — upper `white_terracotta` 13% < 50%. Delta-independent: even the historically accepted marginal 0.25→0.40 front delta cannot pass it.
+- **zone-filled skin (the shipped base coat): PASSED** — every zone's dominant ≥ 50% of its skin.
+
 ## Zone mask (T-079-02)
 storeyDivide = y7. Surface plaster by zone:
 - **masked (this fix):** base 0, upper 454, roof 0 → plaster confined to the upper storey (base 0, roof 0).

@@ -206,6 +206,67 @@
         }
       }
     },
+    "coverageGate": {
+      "threshold": 0.5,
+      "splatOnly": {
+        "passed": false,
+        "threshold": 0.5,
+        "failures": [
+          {
+            "zone": "upper",
+            "dominant": "white_terracotta",
+            "fraction": 0.13,
+            "total": 638
+          }
+        ],
+        "byZone": {
+          "base": {
+            "dominant": "stone_bricks",
+            "fraction": 0.562,
+            "total": 598,
+            "passed": true
+          },
+          "upper": {
+            "dominant": "white_terracotta",
+            "fraction": 0.13,
+            "total": 638,
+            "passed": false
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 0.642,
+            "total": 1214,
+            "passed": true
+          }
+        }
+      },
+      "zoneFilled": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "base": {
+            "dominant": "stone_bricks",
+            "fraction": 0.619,
+            "total": 598,
+            "passed": true
+          },
+          "upper": {
+            "dominant": "white_terracotta",
+            "fraction": 0.712,
+            "total": 638,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 0.89,
+            "total": 1214,
+            "passed": true
+          }
+        }
+      },
+      "note": "coverage is a PRECONDITION ahead of the per-face hill-climb, not a tie-breaker: any zone whose intended dominant covers < threshold of its visible skin fails the skin regardless of the marginal resemblance delta (the 0.25→0.40 that rubber-stamped the 91%-bare wall cannot pass it). splatOnly replays the pre-fill path; zoneFilled is the shipped skin."
+    },
     "offZonePlasterStripped": 0,
     "interiorStrays": 5,
     "note": "histogram = surface plaster per structural zone. MASKED (this fix) confines plaster to 'upper' (base=0, roof=0); UNMASKED (the shipped color-only splat) smears it into base+roof. Interior strays are pre-existing, not on any face, and untouched by seal/paint — not the visible defect. coverage = per-zone dominant fraction of the visible skin: splatOnly replays the pre-fill T-079-02 path (the 9% baseline); zoneFilled is the shipped base-coat result."
@@ -552,7 +613,38 @@
         "before": 0.3,
         "after": 0.35,
         "delta": 0.05,
-        "epsilon": 0
+        "epsilon": 0,
+        "reason": "resemblance-improved",
+        "coverage": {
+          "passed": true,
+          "threshold": 0.5,
+          "failures": [],
+          "byZone": {
+            "base": {
+              "dominant": "stone_bricks",
+              "fraction": 0.751,
+              "total": 598,
+              "passed": true
+            },
+            "upper": {
+              "dominant": "white_terracotta",
+              "fraction": 0.892,
+              "total": 638,
+              "passed": true
+            },
+            "roof": {
+              "dominant": "spruce_planks",
+              "fraction": 0.905,
+              "total": 1214,
+              "passed": true
+            }
+          }
+        }
+      },
+      "coverageGate": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": []
       },
       "accepted": true,
       "gateBlind": false
