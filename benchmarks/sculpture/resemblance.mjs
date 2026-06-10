@@ -66,17 +66,17 @@ const SUBJECTS = {
     key: "gatehouse",
     glb: "stone-gatehouse.glb",
     concept: "runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
-    // the chosen E-20 build + its committed (pre-lens-fix) scale-64 render for the --offline path
-    artifact: "building/best/artifact.json",
-    committedRender: "building/scale-64/render-3q.png",
+    // the E-24 durable skin (T-089-01, end-to-end pipeline output) + the refreshed fixed-lens render
+    artifact: "durable-skin/gatehouse/artifact.json",
+    committedRender: "resemblance/gatehouse-minecraft.png",
   },
   cottage: {
     key: "cottage",
     glb: "cottage.glb",
     concept: "runs/014-vConcept-a-cottage/concept.png",
-    // the E-21 material-corrected cottage build (only build artifact this subject has)
-    artifact: "concept-materials/cottage/after-artifact.json",
-    committedRender: "concept-materials/cottage/after-3q.png",
+    // the E-24 durable skin (T-089-01, end-to-end pipeline output) + the refreshed fixed-lens render
+    artifact: "durable-skin/cottage/artifact.json",
+    committedRender: "resemblance/cottage-minecraft.png",
   },
   moai: {
     key: "moai",

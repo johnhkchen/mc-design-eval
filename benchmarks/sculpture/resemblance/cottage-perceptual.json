@@ -2,40 +2,40 @@
   "schema": "resemblance/v1",
   "subject": "cottage",
   "form": {
-    "meshIoU": 0.929,
-    "conceptIoU": 0.63,
+    "meshIoU": 0.928,
+    "conceptIoU": 0.629,
     "grid": 128,
     "fit": "aspect"
   },
   "material": {
     "set": {
-      "score": 0.667,
-      "buildCovered": 0.667,
-      "conceptCovered": 0.667,
+      "score": 0.5,
+      "buildCovered": 0.5,
+      "conceptCovered": 0.5,
       "build": [
         {
-          "block": "stone_bricks",
-          "count": 3933
+          "block": "tuff",
+          "count": 4265
         },
         {
           "block": "spruce_planks",
-          "count": 1073
+          "count": 2333
+        },
+        {
+          "block": "sandstone",
+          "count": 1385
         },
         {
           "block": "dark_oak_log",
-          "count": 785
+          "count": 1007
         },
         {
           "block": "cobblestone",
-          "count": 608
+          "count": 652
         },
         {
           "block": "dark_oak_planks",
-          "count": 22
-        },
-        {
-          "block": "white_terracotta",
-          "count": 8
+          "count": 65
         }
       ],
       "concept": [
@@ -48,10 +48,10 @@
       ]
     },
     "zone": {
-      "score": 0.321,
-      "meanDeltaE": 36.43,
+      "score": 0.418,
+      "meanDeltaE": 35.23,
       "zoneGrid": 8,
-      "common": 56,
+      "common": 55,
       "zones": {
         "build": [
           null,
@@ -65,58 +65,58 @@
           "gold_ore",
           "stripped_spruce_log",
           "spruce_planks",
-          "bookshelf",
+          "deepslate_gold_ore",
+          "barrel",
+          "barrel",
+          "barrel",
+          null,
+          "stripped_spruce_log",
           "barrel",
           "barrel",
           "brown_stained_glass",
+          "brown_stained_glass",
+          "barrel",
+          "spruce_planks",
+          "crafting_table",
+          "deepslate_gold_ore",
+          "barrel",
+          "barrel",
+          "brown_stained_glass",
+          "barrel",
+          "brown_stained_glass",
+          "oak_log",
+          "stripped_spruce_log",
+          "sandstone",
           "gold_ore",
+          "barrel",
+          "barrel",
           "bookshelf",
-          "oak_log",
-          "brown_stained_glass",
-          "brown_stained_glass",
-          "mycelium",
-          "oak_log",
           "barrel",
-          "dripstone_block",
+          "gold_ore",
+          "fletching_table",
+          "light_gray_concrete_powder",
+          "fletching_table",
+          "gold_ore",
+          "gold_ore",
+          "fletching_table",
+          "crafting_table",
+          "fletching_table",
+          "sand",
+          null,
+          "acacia_log",
+          "deepslate_gold_ore",
           "deepslate_gold_ore",
           "acacia_log",
-          "brown_stained_glass",
-          "brown_stained_glass",
-          "barrel",
-          "brown_stained_glass",
           "deepslate_gold_ore",
-          "light_gray_concrete",
-          "deepslate_iron_ore",
-          "acacia_log",
-          "brown_stained_glass",
-          "acacia_log",
-          "coal_ore",
-          "mycelium",
-          "dead_brain_coral_block",
-          "andesite",
-          "light_gray_stained_glass",
-          "deepslate_iron_ore",
-          "cracked_stone_bricks",
-          "andesite",
-          "coal_ore",
-          "cracked_stone_bricks",
-          "deepslate_iron_ore",
-          "light_gray_stained_glass",
-          null,
-          "acacia_log",
-          "deepslate_iron_ore",
-          "andesite",
-          "coal_ore",
-          "stone_bricks",
-          "gravel",
-          null,
-          null,
-          null,
-          "coal_ore",
-          "dead_brain_coral_block",
-          "acacia_log",
-          "dead_brain_coral_block",
           "tuff",
+          null,
+          null,
+          null,
+          "deepslate_copper_ore",
+          "stripped_dark_oak_log",
+          "acacia_log",
+          "acacia_log",
+          "copper_ore",
           null
         ],
         "concept": [
