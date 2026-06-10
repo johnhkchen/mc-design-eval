@@ -181,14 +181,16 @@ const TABLE_LAB = new Map([["stone_bricks", [60, 1, 2]], ["smooth_sandstone", [8
 const cube = (over = {}) => ({ ...entry(), flags: [], ...over });
 
 test("verifyKitValues: swatch at the block's own Lab verifies (ΔEw ≈ 0)", () => {
-  const out = verifyKitValues([cube()], SWATCH([60, 1, 2], 100), { tableLab: TABLE_LAB });
+  const { kit: out, valueParams } = verifyKitValues([cube()], SWATCH([60, 1, 2], 100), { tableLab: TABLE_LAB });
   assert.equal(out[0].valueCheck.verdict, "verified");
   assert.equal(out[0].valueCheck.deltaE, 0);
+  assert.equal(out[0].valueCheck.rawDeltaE, 0);
   assert.equal(out[0].valueCheck.flaggedForReview, false);
+  assert.equal(valueParams.lightnessOffset, 0); // 1 sample < KIT_OFFSET_MIN_SAMPLES — no offset
 });
 
 test("verifyKitValues: a mismatch FLAGS for review and NEVER rewrites the block (no silent snap)", () => {
-  const out = verifyKitValues([cube()], SWATCH([85, -10, 30], 100), { tableLab: TABLE_LAB });
+  const { kit: out } = verifyKitValues([cube()], SWATCH([85, -10, 30], 100), { tableLab: TABLE_LAB });
   assert.equal(out[0].valueCheck.verdict, "flagged-mismatch");
   assert.equal(out[0].valueCheck.flaggedForReview, true);
   assert.ok(out[0].valueCheck.deltaE > KIT_VERIFY_DELTA_MAX);
@@ -196,15 +198,47 @@ test("verifyKitValues: a mismatch FLAGS for review and NEVER rewrites the block 
 });
 
 test("verifyKitValues: thin-sample, no-swatch, and non-cube verdicts", () => {
-  const thin = verifyKitValues([cube()], SWATCH([60, 1, 2], 3), { tableLab: TABLE_LAB });
+  const thin = verifyKitValues([cube()], SWATCH([60, 1, 2], 3), { tableLab: TABLE_LAB }).kit;
   assert.equal(thin[0].valueCheck.verdict, "thin-sample");
   assert.equal(thin[0].valueCheck.flaggedForReview, true);
-  const none = verifyKitValues([cube()], new Map(), { tableLab: TABLE_LAB });
+  const none = verifyKitValues([cube()], new Map(), { tableLab: TABLE_LAB }).kit;
   assert.equal(none[0].valueCheck.verdict, "no-swatch");
-  const fix = verifyKitValues([cube({ block: "spruce_door", formClass: "fixture" })], new Map(), { tableLab: TABLE_LAB });
+  const fix = verifyKitValues([cube({ block: "spruce_door", formClass: "fixture" })], new Map(), { tableLab: TABLE_LAB }).kit;
   assert.equal(fix[0].valueCheck.verdict, null);
   assert.equal(fix[0].valueCheck.reason, "non-cube");
   assert.equal(fix[0].valueCheck.flaggedForReview, false);
+});
+
+test("verifyKitValues: shared concept-shading ΔL is removed from the verdict, kept in rawDeltaE", () => {
+  // three cubes, all exactly 14 L* darker than their blocks (global shading), hue/chroma true
+  const table = new Map([["stone_bricks", [60, 1, 2]], ["smooth_sandstone", [80, 2, 14]], ["spruce_planks", [38, 8, 26]]]);
+  const swatches = new Map([
+    ["stone_bricks", { lab: [46, 1, 2], cells: 100 }],
+    ["smooth_sandstone", { lab: [66, 2, 14], cells: 100 }],
+    ["spruce_planks", { lab: [24, 8, 26], cells: 100 }],
+  ]);
+  const kit = [cube(), cube({ block: "smooth_sandstone", role: "panels" }), cube({ block: "spruce_planks", role: "roof" })];
+  const { kit: out, valueParams } = verifyKitValues(kit, swatches, { tableLab: table });
+  assert.equal(valueParams.lightnessOffset, -14);
+  assert.equal(valueParams.offsetSamples, 3);
+  for (const e of out) {
+    assert.equal(e.valueCheck.verdict, "verified", `${e.block} should verify after offset removal`);
+    assert.equal(e.valueCheck.deltaE, 0);
+    assert.equal(e.valueCheck.rawDeltaE, 14); // the true distance stays on the record
+  }
+});
+
+test("verifyKitValues: the offset never rescues a genuine hue mismatch", () => {
+  const table = new Map([["stone_bricks", [60, 1, 2]], ["smooth_sandstone", [80, 2, 14]], ["bricks", [40, 18, 12]]]);
+  const swatches = new Map([
+    ["stone_bricks", { lab: [46, 1, 2], cells: 100 }],
+    ["smooth_sandstone", { lab: [66, 2, 14], cells: 100 }],
+    ["bricks", { lab: [26, -15, -10], cells: 100 }], // cool blue-green region — NOT bricks
+  ]);
+  const kit = [cube(), cube({ block: "smooth_sandstone", role: "panels" }), cube({ block: "bricks", role: "chimney" })];
+  const { kit: out } = verifyKitValues(kit, swatches, { tableLab: table });
+  assert.equal(out.find((e) => e.block === "bricks").valueCheck.verdict, "flagged-mismatch");
+  assert.equal(out.find((e) => e.block === "stone_bricks").valueCheck.verdict, "verified");
 });
 
 // --- overrides (AC #3) -------------------------------------------------------------------------
@@ -224,22 +258,36 @@ test("kitOverrides: a verified cube covering a band overrides the band's named d
   assert.equal(rows.find((r) => r.bandName === "band0").verdict, "no-candidate");
 });
 
-test("kitOverrides: a FLAGGED entry never ships; identity is recorded, not emitted", () => {
+test("kitOverrides: a FLAGGED entry never ships but stays VISIBLE as a flagged-candidate row", () => {
   const flagged = { ...verified("smooth_sandstone", ["band1"]), valueCheck: { verdict: "flagged-mismatch", flaggedForReview: true } };
   const r1 = kitOverrides([flagged], ZONE_DERIVED);
   assert.deepEqual(r1.overrides, {});
+  assert.deepEqual(r1.rows.find((r) => r.bandName === "band1"),
+    { bandName: "band1", named: "white_terracotta", recognized: "smooth_sandstone", verdict: "flagged-candidate" });
   const r2 = kitOverrides([verified("stone_bricks", ["band0"])], ZONE_DERIVED);
   assert.deepEqual(r2.overrides, {});
   assert.equal(r2.rows.find((r) => r.bandName === "band0").verdict, "identity");
 });
 
-test("kitOverrides: roof covered via whereUsed roof; higher confidence wins among candidates", () => {
+test("kitOverrides: roof covered via whereUsed roof; higher confidence wins among equals", () => {
   const kit = [verified("spruce_planks", ["roof"], "low"), verified("dark_oak_planks", ["roof"], "high")];
   const { overrides, rows } = kitOverrides(kit, ZONE_DERIVED);
   assert.equal(rows.find((r) => r.bandName === "roof").verdict, "identity"); // high-conf wins, matches named
   assert.deepEqual(overrides, {});
   const swap = kitOverrides([verified("spruce_planks", ["roof"], "high")], ZONE_DERIVED);
   assert.deepEqual(swap.overrides, { dark_oak_planks: "spruce_planks" });
+});
+
+test("kitOverrides: band-specificity beats confidence — an exclusive entry is the band's field", () => {
+  // the live-cottage regression: spruce_planks (high conf, crossing roof+band1+trim) must not
+  // beat smooth_sandstone (medium conf, exclusively band1) for the band1 field material
+  const kit = [
+    verified("spruce_planks", ["roof", "band1", "trim"], "high"),
+    verified("smooth_sandstone", ["band1"], "medium"),
+  ];
+  const { overrides, rows } = kitOverrides(kit, ZONE_DERIVED);
+  assert.equal(rows.find((r) => r.bandName === "band1").recognized, "smooth_sandstone");
+  assert.equal(overrides.white_terracotta, "smooth_sandstone");
 });
 
 // --- diff (AC #4) ------------------------------------------------------------------------------
@@ -256,9 +304,18 @@ test("diffKitVsMap: terracotta correction visible; formerly-dropped fixtures rec
   ];
   const ov = kitOverrides(kit, ZONE_DERIVED);
   const diff = diffKitVsMap(kit, matMap, ov);
-  assert.deepEqual(diff.corrections, [{ band: "band1", old: "white_terracotta", new: "smooth_sandstone", oldRole: "upper-storey plaster infill" }]);
+  assert.deepEqual(diff.corrections, [{ band: "band1", old: "white_terracotta", new: "smooth_sandstone", ships: true, oldRole: "upper-storey plaster infill" }]);
   assert.deepEqual(diff.recovered, [{ block: "dark_oak_trapdoor", role: "shutters", formClass: "fixture" }]);
   assert.deepEqual(diff.unchanged, ["stone_bricks"]);
+});
+
+test("diffKitVsMap: a flagged candidate is a VISIBLE correction with ships:false", () => {
+  const matMap = { map: [{ role: "upper-storey plaster infill", block: "minecraft:white_terracotta" }] };
+  const flagged = { ...verified("smooth_sandstone", ["band1"]), valueCheck: { verdict: "flagged-mismatch", flaggedForReview: true } };
+  const ov = kitOverrides([flagged], ZONE_DERIVED);
+  const diff = diffKitVsMap([flagged], matMap, ov);
+  assert.deepEqual(diff.corrections, [{ band: "band1", old: "white_terracotta", new: "smooth_sandstone", ships: false, oldRole: "upper-storey plaster infill" }]);
+  assert.deepEqual(diff.recovered, []); // it's a correction, not a recovery
 });
 
 test("schema tag exported for the runner", () => {

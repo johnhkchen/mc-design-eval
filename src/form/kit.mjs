@@ -60,6 +60,15 @@ export const WHERE_FEATURE_TERMS = Object.freeze(["openings", "trim", "corners-e
  *  cross-family distances that motivated the terracotta correction. */
 export const KIT_VERIFY_DELTA_MAX = 16;
 
+/** Minimum cube samples before the SHARED concept-shading lightness offset is estimated and
+ *  removed. A concept previews block HUE but not VALUE (global scene shading darkens every
+ *  region together — measured on the cottage: swatch−block ΔL ≈ −14..−16 on 3 of 4 cubes
+ *  simultaneously); identity of a depicted block lives in hue/chroma + RELATIVE value, so the
+ *  verdict uses the offset-corrected distance while `rawDeltaE` records the true one. Below
+ *  this sample count there is no shared signal to estimate (1 sample would zero itself —
+ *  a tautology) and the raw distance is the verdict. */
+export const KIT_OFFSET_MIN_SAMPLES = 3;
+
 const TABLE = loadBlockTable();
 const CUBE_SET = new Set(TABLE.blocks.map((b) => b.block));
 const TABLE_LAB = new Map(TABLE.blocks.map((b) => [b.block, b.lab]));
@@ -285,20 +294,44 @@ export function assertKit(kit) {
  * against its concept region (validate-mode swatch sample) in chroma-weighted CIE-Lab. A mismatch
  * FLAGS the entry for review — it never rewrites `block` and never falls back to a color-snap.
  * Non-cube entries get `valueCheck: {verdict:null, reason:"non-cube"}` (no Lab row exists; the
- * vocabulary check is their whole validation). Returns NEW entry objects; input is not mutated.
+ * vocabulary check is their whole validation).
+ *
+ * SHARED-SHADING CORRECTION: when ≥ {@link KIT_OFFSET_MIN_SAMPLES} cube entries have usable
+ * swatches, the median swatch−block ΔL across them is the concept's global shading offset; the
+ * verdict distance removes it (block identity = hue/chroma + relative value) while `rawDeltaE`
+ * records the uncorrected truth (the "report true ΔE separately" rule).
+ *
+ * Returns NEW entry objects; input is not mutated.
  * @param {object[]} kit  from parseKit
  * @param {Map<string,{lab:number[], cells:number}>} swatches  from sampleRoleSwatches (bare keys)
- * @param {{deltaMax?:number, minCells?:number, chromaWeight?:number, tableLab?:Map<string,number[]>}} [opts]
- * @returns {object[]} kit with `valueCheck` per entry
+ * @param {{deltaMax?:number, minCells?:number, chromaWeight?:number, offsetMinSamples?:number,
+ *          tableLab?:Map<string,number[]>}} [opts]
+ * @returns {{kit:object[], valueParams:{lightnessOffset:number, offsetSamples:number}}}
  */
 export function verifyKitValues(kit, swatches, opts = {}) {
   const deltaMax = opts.deltaMax ?? KIT_VERIFY_DELTA_MAX;
   const minCells = opts.minCells ?? MIN_CELLS;
   const w = opts.chromaWeight ?? CHROMA_WEIGHT;
+  const offsetMinSamples = opts.offsetMinSamples ?? KIT_OFFSET_MIN_SAMPLES;
   const labs = opts.tableLab ?? TABLE_LAB;
   const round3 = (n) => Math.round(n * 1000) / 1000;
 
-  return kit.map((e) => {
+  // shared concept-shading offset over the usable cube samples
+  const dLs = [];
+  for (const e of kit) {
+    if (e.formClass !== "cube") continue;
+    const blockLab = labs.get(e.block);
+    const s = swatches?.get(e.block);
+    if (blockLab && s && s.cells >= minCells) dLs.push(s.lab[0] - blockLab[0]);
+  }
+  let lightnessOffset = 0;
+  if (dLs.length >= offsetMinSamples) {
+    const sorted = [...dLs].sort((a, b) => a - b);
+    const mid = Math.floor(sorted.length / 2);
+    lightnessOffset = round3(sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2);
+  }
+
+  const out = kit.map((e) => {
     if (e.formClass !== "cube") {
       return { ...e, valueCheck: { verdict: null, reason: "non-cube", flaggedForReview: false } };
     }
@@ -310,13 +343,16 @@ export function verifyKitValues(kit, swatches, opts = {}) {
     if (s.cells < minCells) {
       return { ...e, valueCheck: { verdict: "thin-sample", cells: s.cells, flaggedForReview: true } };
     }
-    const deltaE = round3(weightedDeltaE(s.lab, blockLab, w));
+    const rawDeltaE = round3(weightedDeltaE(s.lab, blockLab, w));
+    const corrected = [s.lab[0] - lightnessOffset, s.lab[1], s.lab[2]];
+    const deltaE = round3(weightedDeltaE(corrected, blockLab, w));
     const verdict = deltaE <= deltaMax ? "verified" : "flagged-mismatch";
     return {
       ...e,
       valueCheck: {
         verdict,
         deltaE,
+        rawDeltaE,
         cells: s.cells,
         swatchLab: s.lab.map(round3),
         blockLab: blockLab.map(round3),
@@ -324,15 +360,24 @@ export function verifyKitValues(kit, swatches, opts = {}) {
       },
     };
   });
+  return { kit: out, valueParams: { lightnessOffset, offsetSamples: dLs.length } };
 }
 
 /**
  * Recognition beats snap (AC #3): for each derived zone-map band (and the roof), the VERIFIED
  * cube kit entry covering it (whereUsed) supplies the band's block; the band's named-space
- * `dominantBlock` maps to it. Only verified entries override — a flagged entry NEVER ships.
- * Highest confidence wins among candidates; first-seen wins a tie; a second band naming a
- * conflicting recognition for the same named block records "skipped-conflict".
- * @param {object[]} kit  from verifyKitValues
+ * `dominantBlock` maps to it. Only verified entries override — a flagged entry NEVER ships, but
+ * a band whose only candidates are flagged records a "flagged-candidate" row so the recognition
+ * stays VISIBLE for review (AC #4) without shipping. Highest confidence wins among candidates;
+ * first-seen wins a tie; a second band naming a conflicting recognition for the same named block
+ * records "skipped-conflict".
+ *
+ * CANDIDATE RANK = band-specificity first: an ingredient used ONLY here is this band's field
+ * material; one that also covers roof/trim is a crossing secondary (measured on the live
+ * cottage kit: spruce_planks lists [roof, band1, trim] and must not beat smooth_sandstone's
+ * exclusive [band1] for the band1 field). Fewer whereUsed refs win, then the band's position in
+ * the entry's own list, then confidence; first-seen breaks remaining ties.
+ * @param {object[]} kit  the verified kit (verifyKitValues().kit)
  * @param {{bands:{name:string, dominantBlock:string}[], roof:{dominantBlock:string}}} zoneDerived
  * @returns {{overrides:Record<string,string>, rows:{bandName,named,recognized,verdict}[]}}
  */
@@ -345,11 +390,20 @@ export function kitOverrides(kit, zoneDerived) {
   const overrides = {};
   const rows = [];
   for (const t of targets) {
-    const candidates = kit
-      .filter((e) => e.formClass === "cube" && e.valueCheck?.verdict === "verified" && e.whereUsed.includes(t.name))
-      .sort((a, b) => confRank[a.confidence] - confRank[b.confidence]);
+    const covering = kit
+      .filter((e) => e.formClass === "cube" && e.whereUsed.includes(t.name))
+      .sort((a, b) =>
+        a.whereUsed.length - b.whereUsed.length ||
+        a.whereUsed.indexOf(t.name) - b.whereUsed.indexOf(t.name) ||
+        confRank[a.confidence] - confRank[b.confidence]);
+    const candidates = covering.filter((e) => e.valueCheck?.verdict === "verified");
     if (!candidates.length) {
-      rows.push({ bandName: t.name, named: t.named, recognized: null, verdict: "no-candidate" });
+      if (covering.length) {
+        // visible, non-shipping: the recognition exists but its value check is flagged
+        rows.push({ bandName: t.name, named: t.named, recognized: covering[0].block, verdict: "flagged-candidate" });
+      } else {
+        rows.push({ bandName: t.name, named: t.named, recognized: null, verdict: "no-candidate" });
+      }
       continue;
     }
     const recognized = candidates[0].block;
@@ -370,9 +424,10 @@ export function kitOverrides(kit, zoneDerived) {
 /**
  * The cottage-proof diff (AC #4): the kit against the old E-21 map. `corrections` = band-covering
  * recognitions that name a DIFFERENT block than the old map (the white_terracotta fix made
- * visible, joined through {@link kitOverrides} rows); `recovered` = kit ingredients absent from
- * the old map's palette (the formerly-dropped fixtures/rails); `unchanged` = kit blocks the old
- * map already had. PURE.
+ * visible, joined through {@link kitOverrides} rows) — INDEPENDENT of shipping: a flagged
+ * candidate is a visible correction with `ships: false`; only a verified override carries
+ * `ships: true`. `recovered` = kit ingredients absent from the old map's palette (the
+ * formerly-dropped fixtures/rails); `unchanged` = kit blocks the old map already had. PURE.
  * @param {object[]} kit
  * @param {{map:{role:string, block:string}[]}} materialMap  the committed E-21 record
  * @param {{rows:object[]}} overridesResult  from kitOverrides
@@ -381,11 +436,12 @@ export function kitOverrides(kit, zoneDerived) {
 export function diffKitVsMap(kit, materialMap, overridesResult) {
   const mapByBlock = new Map((materialMap?.map ?? []).map((r) => [tableKey(r.block), r]));
   const corrections = (overridesResult?.rows ?? [])
-    .filter((r) => r.verdict === "override")
+    .filter((r) => r.recognized && r.recognized !== r.named)
     .map((r) => ({
       band: r.bandName,
       old: r.named,
       new: r.recognized,
+      ships: r.verdict === "override",
       oldRole: mapByBlock.get(tableKey(r.named))?.role ?? null,
     }));
   const recovered = [];

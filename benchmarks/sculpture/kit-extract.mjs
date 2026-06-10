@@ -89,8 +89,8 @@ function kitMd(rec) {
   for (const e of rec.kit) {
     const vc = e.valueCheck;
     const vcs = vc.verdict === null ? "— (non-cube)" :
-      vc.verdict === "verified" ? `verified (ΔEw ${vc.deltaE})` :
-      `**${vc.verdict}**${vc.deltaE != null ? ` (ΔEw ${vc.deltaE})` : ""} ⚑`;
+      vc.verdict === "verified" ? `verified (ΔEw ${vc.deltaE}, raw ${vc.rawDeltaE})` :
+      `**${vc.verdict}**${vc.deltaE != null ? ` (ΔEw ${vc.deltaE}, raw ${vc.rawDeltaE})` : ""} ⚑`;
     lines.push(`| \`${e.block}\`${e.flags.length ? " ⚑" : ""} | ${e.formClass}${e.declaredFormClass ? ` (declared ${e.declaredFormClass})` : ""} | ${e.whereUsed.join(", ")} | ${e.confidence} | ${vcs} | ${e.role} |`);
   }
   lines.push(``);
@@ -163,7 +163,7 @@ async function run() {
       whitelist: cubeBlocks, n: SAMPLE_GRID_N, dropColor: estimateBorderColor(conceptImg), cellMeans: true,
     });
     const swatches = sampleRoleSwatches(gridResult, cubeBlocks);
-    const kit = verifyKitValues(parsed, swatches);
+    const { kit, valueParams } = verifyKitValues(parsed, swatches);
 
     const ov = kitOverrides(kit, zoneRecord.derived);
     const diff = diffKitVsMap(kit, matMap, ov);
@@ -175,6 +175,7 @@ async function run() {
       params: {
         model: MODEL_TIERS.strong, tier: "strong", gridN: SAMPLE_GRID_N,
         deltaMax: KIT_VERIFY_DELTA_MAX, chromaWeight: CHROMA_WEIGHT, minCells: MIN_CELLS,
+        ...valueParams, // lightnessOffset (shared concept shading) + offsetSamples
       },
       kit,
       unidentified,
