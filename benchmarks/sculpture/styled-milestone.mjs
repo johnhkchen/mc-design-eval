@@ -192,7 +192,7 @@ function kitReportMd(def, kitRec, kitSha, gate) {
     `\`benchmarks/sculpture/styled/${def.key}.json\`.\n`;
 }
 
-function renderMd(r) {
+export function renderMd(r) {
   if (r.status === "pipeline-failed") {
     return `# Styled milestone — ${r.subject} (T-101-01, E-26 terminal)\n\n**PIPELINE FAILED** at the ` +
       `**${r.stage}** stage (recorded honestly — E-25 Rule 6; nothing tuned in response):\n\n` +
@@ -230,7 +230,7 @@ function renderMd(r) {
     `${d.apertures} concept-declared apertures; ${d.placements} placements ` +
     `(${d.stats.fullyDressed}/${d.stats.openings} fully dressed, ${d.stats.conflicts} conflicts, ` +
     `${d.stats.alreadyDressed} already dressed). Unfulfilled slots: ` +
-    `${d.treatments.unfulfilled.length ? d.treatments.unfulfilled.join(", ") : "none"}. Derivations: ` +
+    `${d.treatments.unfulfilled.length ? d.treatments.unfulfilled.map((u) => `${u.slot} (${u.reason})`).join(", ") : "none"}. Derivations: ` +
     `${Object.keys(d.treatments.derivations ?? {}).length ? JSON.stringify(d.treatments.derivations) : "none"}.\n` +
     `Settle (the T-100 seam): grammar re-run to its own fixpoint in ${r.settle.iterations} iteration(s)` +
     (r.settle.trail.length ? ` (${r.settle.trail.map((t) => `frame ${t.frame} + fill ${t.fill}`).join("; ")})` : " (already a no-op)") +
@@ -416,7 +416,7 @@ async function main() {
     `${g.frame.respected} respected; frameRefilled ${g.frameRefilled}; coverage+bands re-asserted PASS`);
   console.error(`[${def.key}] dressing: ${r1.apertures.length} apertures, ${r1.dress.placements.length} placements ` +
     `(${r1.dress.stats.fullyDressed}/${r1.dress.stats.openings} fully dressed, ${r1.dress.stats.conflicts} conflicts); ` +
-    `unfulfilled: ${r1.treatments.unfulfilled.join(", ") || "none"}`);
+    `unfulfilled: ${r1.treatments.unfulfilled.map((u) => u.slot).join(", ") || "none"}`);
   console.error(`[${def.key}] settle: grammar fixpoint reached in ${r1.settle.iterations} re-run(s)` +
     (r1.settle.trail.length ? ` — ${r1.settle.trail.map((t) => `frame ${t.frame} + fill ${t.fill}`).join("; ")}` : " — already a no-op"));
 

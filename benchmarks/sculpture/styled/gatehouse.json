@@ -1,0 +1,1342 @@
+{
+  "schema": "styled-milestone/v1",
+  "subject": "gatehouse",
+  "status": "gated",
+  "pipelineOrder": "kit (committed, T-096) → shell integrity (T-091) → skin (T-086 value-true → kit overrides → seal → T-092 zones → T-090 fill → T-087 coherence → T-088 gates) → placement grammar (T-098) → opening dressing (T-099) → grammar settle (the T-100 fixpoint seam) → kit-aware multi-angle gate (T-100 ∘ T-093)",
+  "inputs": {
+    "build": "concept-materials/gatehouse/after-artifact.json",
+    "concept": "runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+    "glb": "glb/stone-gatehouse.glb",
+    "map": "material-map/gatehouse.json",
+    "kitRecord": "kit/gatehouse.json",
+    "kitSha256": "583bcb85d57d54d6572bed46c1531f3faa4d0f054fa458c0004bb80b3eab58bc",
+    "kitPin": "kit/gatehouse.raw.json",
+    "kitlessBefore": "durable-skin/gatehouse/artifact.json"
+  },
+  "provision": null,
+  "shell": {
+    "strip": {
+      "components": 23,
+      "kept": 3,
+      "strippedCells": 221
+    },
+    "openings": [
+      "window",
+      "window",
+      "door",
+      "window",
+      "window",
+      "door"
+    ],
+    "voids": {
+      "minDepth": 3,
+      "filled": 820,
+      "byDir": {
+        "+x": {
+          "basinCells": 0,
+          "filled": 0,
+          "skippedAllowed": 0,
+          "skippedNoZone": 0
+        },
+        "-x": {
+          "basinCells": 10,
+          "filled": 154,
+          "skippedAllowed": 0,
+          "skippedNoZone": 0
+        },
+        "+z": {
+          "basinCells": 20,
+          "filled": 161,
+          "skippedAllowed": 0,
+          "skippedNoZone": 0
+        },
+        "-z": {
+          "basinCells": 23,
+          "filled": 69,
+          "skippedAllowed": 0,
+          "skippedNoZone": 0
+        },
+        "+y": {
+          "basinCells": 78,
+          "filled": 436,
+          "skippedAllowed": 0,
+          "skippedNoZone": 0
+        }
+      }
+    },
+    "plug": {
+      "cells": 54,
+      "iterations": 1
+    }
+  },
+  "skin": {
+    "substitution": {
+      "stone_bricks": "polished_basalt"
+    },
+    "kitOverrides": {
+      "deepslate_tiles": "deepslate_bricks"
+    },
+    "zoneMap": {
+      "source": "concept",
+      "bands": [
+        {
+          "name": "band0",
+          "yRange": [
+            0,
+            20
+          ],
+          "dominantBlock": "stone_bricks",
+          "dominantRole": "structural walls (dominant body)",
+          "share": 1,
+          "secondaries": [
+            {
+              "block": "dark_oak_log",
+              "role": "arch voussoir ring (warm accent)",
+              "share": 0.104
+            },
+            {
+              "block": "deepslate_tiles",
+              "role": "roof mass",
+              "share": 0.562
+            },
+            {
+              "block": "cobblestone",
+              "role": "corner buttresses + rough string-course banding",
+              "share": 0.001
+            },
+            {
+              "block": "dark_oak_planks",
+              "role": "gate door / passage leaf",
+              "share": 0.008
+            }
+          ]
+        }
+      ],
+      "roof": {
+        "dominantBlock": "deepslate_tiles",
+        "dominantRole": "roof mass",
+        "share": 1,
+        "secondaries": [
+          {
+            "block": "stone_bricks",
+            "role": "structural walls (dominant body)",
+            "share": 0.203
+          },
+          {
+            "block": "cobblestone",
+            "role": "corner buttresses + rough string-course banding",
+            "share": 0.003
+          },
+          {
+            "block": "dark_oak_log",
+            "role": "arch voussoir ring (warm accent)",
+            "share": 0
+          },
+          {
+            "block": "dark_oak_planks",
+            "role": "gate door / passage leaf",
+            "share": 0
+          }
+        ]
+      }
+    },
+    "zoneMapVsCommitted": {
+      "record": "zone-map/gatehouse.json",
+      "bandsIdentical": false,
+      "roofIdentical": false
+    },
+    "fill": {
+      "placements": 170,
+      "kept": 5515
+    },
+    "salt": {
+      "stripped": 245,
+      "kept": 796
+    },
+    "coverage": {
+      "band0": {
+        "total": 4234,
+        "byBlock": {
+          "polished_basalt": 3129,
+          "deepslate_bricks": 377,
+          "cobblestone": 616,
+          "dark_oak_planks": 96,
+          "dark_oak_log": 16
+        },
+        "dominant": "polished_basalt",
+        "dominantFraction": 0.739
+      },
+      "roof": {
+        "total": 1436,
+        "byBlock": {
+          "deepslate_bricks": 898,
+          "dark_oak_planks": 94,
+          "polished_basalt": 367,
+          "dark_oak_log": 43,
+          "cobblestone": 34
+        },
+        "dominant": "deepslate_bricks",
+        "dominantFraction": 0.625
+      }
+    },
+    "gates": {
+      "threshold": 0.5,
+      "splatOnly": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "polished_basalt",
+            "fraction": 0.665,
+            "total": 4216,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "deepslate_bricks",
+            "fraction": 0.558,
+            "total": 1469,
+            "passed": true
+          }
+        }
+      },
+      "final": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "polished_basalt",
+            "fraction": 0.739,
+            "total": 4234,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "deepslate_bricks",
+            "fraction": 0.625,
+            "total": 1436,
+            "passed": true
+          }
+        }
+      }
+    }
+  },
+  "grammar": {
+    "bindings": {
+      "frame": "cobblestone",
+      "panels": {
+        "band0": "stone_bricks"
+      },
+      "course": "deepslate_bricks",
+      "openingTreatments": [],
+      "skipped": []
+    },
+    "shipped": {
+      "frame": "cobblestone",
+      "panels": {
+        "band0": "polished_basalt"
+      },
+      "course": "deepslate_bricks"
+    },
+    "frame": {
+      "counts": {
+        "wall": 3551,
+        "cornerPost": 106,
+        "roofline": 238,
+        "floorLine": 597
+      },
+      "painted": 548,
+      "adopted": 16,
+      "respected": 294,
+      "skippedIsolated": 2,
+      "alreadyFrame": 81
+    },
+    "fill": {
+      "placements": 10,
+      "kept": 5660
+    },
+    "frameRefilled": 0,
+    "preexistingFrameRefilled": 0,
+    "coverage": {
+      "band0": {
+        "total": 4417,
+        "byBlock": {
+          "polished_basalt": 2670,
+          "cobblestone": 1168,
+          "deepslate_bricks": 428,
+          "dark_oak_planks": 126,
+          "dark_oak_log": 25
+        },
+        "dominant": "polished_basalt",
+        "dominantFraction": 0.604
+      },
+      "roof": {
+        "total": 1253,
+        "byBlock": {
+          "deepslate_bricks": 864,
+          "polished_basalt": 269,
+          "dark_oak_planks": 56,
+          "dark_oak_log": 35,
+          "cobblestone": 29
+        },
+        "dominant": "deepslate_bricks",
+        "dominantFraction": 0.69
+      }
+    },
+    "bands": {
+      "roofMaterialsFraction": 1,
+      "wallForeignResidue": {
+        "band0": 0
+      }
+    }
+  },
+  "dressing": {
+    "apertures": 12,
+    "apertureList": [
+      {
+        "dir": "+x",
+        "kind": "window",
+        "bbox": {
+          "u0": 6,
+          "v0": 9,
+          "u1": 6,
+          "v1": 9
+        }
+      },
+      {
+        "dir": "+x",
+        "kind": "window",
+        "bbox": {
+          "u0": 20,
+          "v0": 9,
+          "u1": 20,
+          "v1": 9
+        }
+      },
+      {
+        "dir": "+x",
+        "kind": "door",
+        "bbox": {
+          "u0": 7,
+          "v0": 16,
+          "u1": 19,
+          "v1": 31
+        }
+      },
+      {
+        "dir": "-x",
+        "kind": "window",
+        "bbox": {
+          "u0": 6,
+          "v0": 9,
+          "u1": 6,
+          "v1": 9
+        }
+      },
+      {
+        "dir": "-x",
+        "kind": "window",
+        "bbox": {
+          "u0": 20,
+          "v0": 9,
+          "u1": 20,
+          "v1": 9
+        }
+      },
+      {
+        "dir": "-x",
+        "kind": "door",
+        "bbox": {
+          "u0": 7,
+          "v0": 16,
+          "u1": 19,
+          "v1": 31
+        }
+      },
+      {
+        "dir": "+z",
+        "kind": "window",
+        "bbox": {
+          "u0": 5,
+          "v0": 2,
+          "u1": 6,
+          "v1": 3
+        }
+      },
+      {
+        "dir": "+z",
+        "kind": "window",
+        "bbox": {
+          "u0": 14,
+          "v0": 2,
+          "u1": 18,
+          "v1": 3
+        }
+      },
+      {
+        "dir": "+z",
+        "kind": "window",
+        "bbox": {
+          "u0": 19,
+          "v0": 2,
+          "u1": 22,
+          "v1": 2
+        }
+      },
+      {
+        "dir": "-z",
+        "kind": "window",
+        "bbox": {
+          "u0": 4,
+          "v0": 2,
+          "u1": 7,
+          "v1": 2
+        }
+      },
+      {
+        "dir": "-z",
+        "kind": "window",
+        "bbox": {
+          "u0": 8,
+          "v0": 2,
+          "u1": 12,
+          "v1": 3
+        }
+      },
+      {
+        "dir": "-z",
+        "kind": "window",
+        "bbox": {
+          "u0": 20,
+          "v0": 2,
+          "u1": 21,
+          "v1": 3
+        }
+      }
+    ],
+    "treatments": {
+      "slots": {
+        "frame": {
+          "block": "cobblestone",
+          "source": "kit-trim"
+        }
+      },
+      "derivations": [],
+      "unfulfilled": [
+        {
+          "slot": "infill",
+          "reason": "no kit entry routes to this slot"
+        },
+        {
+          "slot": "shutter",
+          "reason": "no kit entry routes to this slot"
+        },
+        {
+          "slot": "door",
+          "reason": "no kit entry routes to this slot"
+        },
+        {
+          "slot": "light",
+          "reason": "no kit entry routes to this slot"
+        }
+      ]
+    },
+    "placements": 51,
+    "perOpening": [
+      {
+        "dir": "+x",
+        "kind": "window",
+        "bbox": {
+          "u0": 6,
+          "v0": 9,
+          "u1": 6,
+          "v1": 9
+        },
+        "region": {
+          "min": [
+            -13,
+            22,
+            -7
+          ],
+          "max": [
+            13,
+            22,
+            -7
+          ]
+        },
+        "paneSpan": [
+          13,
+          13
+        ],
+        "applied": {
+          "infill": 0,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 2,
+          "sill": 1
+        },
+        "placed": {
+          "infill": 0,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 2,
+          "sill": 1
+        },
+        "conflicts": [
+          {
+            "slot": "infill",
+            "name": "no-infill-treatment",
+            "reduction": "aperture-left-open"
+          },
+          {
+            "slot": "shutterLeft",
+            "name": "no-shutter-treatment",
+            "reduction": "shutter-dropped"
+          },
+          {
+            "slot": "shutterRight",
+            "name": "no-shutter-treatment",
+            "reduction": "shutter-dropped"
+          }
+        ]
+      },
+      {
+        "dir": "+x",
+        "kind": "window",
+        "bbox": {
+          "u0": 20,
+          "v0": 9,
+          "u1": 20,
+          "v1": 9
+        },
+        "region": {
+          "min": [
+            -13,
+            22,
+            7
+          ],
+          "max": [
+            13,
+            22,
+            7
+          ]
+        },
+        "paneSpan": [
+          13,
+          13
+        ],
+        "applied": {
+          "infill": 0,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 2,
+          "sill": 1
+        },
+        "placed": {
+          "infill": 0,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 2,
+          "sill": 1
+        },
+        "conflicts": [
+          {
+            "slot": "infill",
+            "name": "no-infill-treatment",
+            "reduction": "aperture-left-open"
+          },
+          {
+            "slot": "shutterLeft",
+            "name": "no-shutter-treatment",
+            "reduction": "shutter-dropped"
+          },
+          {
+            "slot": "shutterRight",
+            "name": "no-shutter-treatment",
+            "reduction": "shutter-dropped"
+          }
+        ]
+      },
+      {
+        "dir": "+x",
+        "kind": "door",
+        "bbox": {
+          "u0": 7,
+          "v0": 16,
+          "u1": 19,
+          "v1": 31
+        },
+        "region": {
+          "min": [
+            -13,
+            0,
+            -6
+          ],
+          "max": [
+            13,
+            15,
+            6
+          ]
+        },
+        "paneSpan": [
+          11,
+          11
+        ],
+        "applied": {
+          "door": 0,
+          "lintel": 15,
+          "light": 0
+        },
+        "placed": {
+          "door": 0,
+          "lintel": 10,
+          "light": 0
+        },
+        "conflicts": [
+          {
+            "slot": "door",
+            "name": "no-door-treatment",
+            "reduction": "left-undressed"
+          }
+        ]
+      },
+      {
+        "dir": "-x",
+        "kind": "window",
+        "bbox": {
+          "u0": 6,
+          "v0": 9,
+          "u1": 6,
+          "v1": 9
+        },
+        "region": {
+          "min": [
+            -13,
+            22,
+            7
+          ],
+          "max": [
+            13,
+            22,
+            7
+          ]
+        },
+        "paneSpan": [
+          -11,
+          -11
+        ],
+        "applied": {
+          "infill": 0,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 1,
+          "sill": 3
+        },
+        "placed": {
+          "infill": 0,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 1,
+          "sill": 3
+        },
+        "conflicts": [
+          {
+            "slot": "infill",
+            "name": "no-infill-treatment",
+            "reduction": "aperture-left-open"
+          },
+          {
+            "slot": "shutterLeft",
+            "name": "no-shutter-treatment",
+            "reduction": "shutter-dropped"
+          },
+          {
+            "slot": "shutterRight",
+            "name": "no-shutter-treatment",
+            "reduction": "shutter-dropped"
+          }
+        ]
+      },
+      {
+        "dir": "-x",
+        "kind": "window",
+        "bbox": {
+          "u0": 20,
+          "v0": 9,
+          "u1": 20,
+          "v1": 9
+        },
+        "region": {
+          "min": [
+            -13,
+            22,
+            -7
+          ],
+          "max": [
+            13,
+            22,
+            -7
+          ]
+        },
+        "paneSpan": [
+          -11,
+          -11
+        ],
+        "applied": {
+          "infill": 0,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 2,
+          "sill": 2
+        },
+        "placed": {
+          "infill": 0,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 2,
+          "sill": 0
+        },
+        "conflicts": [
+          {
+            "slot": "infill",
+            "name": "no-infill-treatment",
+            "reduction": "aperture-left-open"
+          },
+          {
+            "slot": "shutterLeft",
+            "name": "no-shutter-treatment",
+            "reduction": "shutter-dropped"
+          },
+          {
+            "slot": "shutterRight",
+            "name": "no-shutter-treatment",
+            "reduction": "shutter-dropped"
+          }
+        ]
+      },
+      {
+        "dir": "-x",
+        "kind": "door",
+        "bbox": {
+          "u0": 7,
+          "v0": 16,
+          "u1": 19,
+          "v1": 31
+        },
+        "region": {
+          "min": [
+            -13,
+            0,
+            -6
+          ],
+          "max": [
+            13,
+            15,
+            6
+          ]
+        },
+        "paneSpan": [
+          -11,
+          -11
+        ],
+        "applied": {
+          "door": 0,
+          "lintel": 15,
+          "light": 0
+        },
+        "placed": {
+          "door": 0,
+          "lintel": 0,
+          "light": 0
+        },
+        "conflicts": [
+          {
+            "slot": "door",
+            "name": "no-door-treatment",
+            "reduction": "left-undressed"
+          }
+        ]
+      },
+      {
+        "dir": "+z",
+        "kind": "window",
+        "bbox": {
+          "u0": 5,
+          "v0": 2,
+          "u1": 6,
+          "v1": 3
+        },
+        "region": {
+          "min": [
+            7,
+            28,
+            -13
+          ],
+          "max": [
+            8,
+            29,
+            13
+          ]
+        },
+        "paneSpan": [
+          4,
+          4
+        ],
+        "applied": {
+          "infill": 0,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 0,
+          "sill": 4
+        },
+        "placed": {
+          "infill": 0,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 0,
+          "sill": 4
+        },
+        "conflicts": [
+          {
+            "slot": "infill",
+            "name": "no-infill-treatment",
+            "reduction": "aperture-left-open"
+          },
+          {
+            "slot": "shutterLeft",
+            "name": "no-shutter-treatment",
+            "reduction": "shutter-dropped"
+          },
+          {
+            "slot": "shutterRight",
+            "name": "no-shutter-treatment",
+            "reduction": "shutter-dropped"
+          },
+          {
+            "slot": "lintel",
+            "name": "lintel-no-band-cells",
+            "reduction": "lintel-skipped"
+          }
+        ]
+      },
+      {
+        "dir": "+z",
+        "kind": "window",
+        "bbox": {
+          "u0": 14,
+          "v0": 2,
+          "u1": 18,
+          "v1": 3
+        },
+        "region": {
+          "min": [
+            -5,
+            28,
+            -13
+          ],
+          "max": [
+            -1,
+            29,
+            13
+          ]
+        },
+        "paneSpan": [
+          4,
+          4
+        ],
+        "applied": {
+          "infill": 0,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 0,
+          "sill": 7
+        },
+        "placed": {
+          "infill": 0,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 0,
+          "sill": 7
+        },
+        "conflicts": [
+          {
+            "slot": "infill",
+            "name": "no-infill-treatment",
+            "reduction": "aperture-left-open"
+          },
+          {
+            "slot": "shutterLeft",
+            "name": "no-shutter-treatment",
+            "reduction": "shutter-dropped"
+          },
+          {
+            "slot": "shutterRight",
+            "name": "no-shutter-treatment",
+            "reduction": "shutter-dropped"
+          },
+          {
+            "slot": "lintel",
+            "name": "lintel-no-band-cells",
+            "reduction": "lintel-skipped"
+          }
+        ]
+      },
+      {
+        "dir": "+z",
+        "kind": "window",
+        "bbox": {
+          "u0": 19,
+          "v0": 2,
+          "u1": 22,
+          "v1": 2
+        },
+        "region": {
+          "min": [
+            -9,
+            29,
+            -13
+          ],
+          "max": [
+            -6,
+            29,
+            13
+          ]
+        },
+        "paneSpan": [
+          3,
+          3
+        ],
+        "applied": {
+          "infill": 0,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 1,
+          "sill": 4
+        },
+        "placed": {
+          "infill": 0,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 1,
+          "sill": 4
+        },
+        "conflicts": [
+          {
+            "slot": "infill",
+            "name": "no-infill-treatment",
+            "reduction": "aperture-left-open"
+          },
+          {
+            "slot": "shutterLeft",
+            "name": "no-shutter-treatment",
+            "reduction": "shutter-dropped"
+          },
+          {
+            "slot": "shutterRight",
+            "name": "no-shutter-treatment",
+            "reduction": "shutter-dropped"
+          }
+        ]
+      },
+      {
+        "dir": "-z",
+        "kind": "window",
+        "bbox": {
+          "u0": 4,
+          "v0": 2,
+          "u1": 7,
+          "v1": 2
+        },
+        "region": {
+          "min": [
+            -9,
+            29,
+            -13
+          ],
+          "max": [
+            -6,
+            29,
+            13
+          ]
+        },
+        "paneSpan": [
+          2,
+          2
+        ],
+        "applied": {
+          "infill": 0,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 1,
+          "sill": 4
+        },
+        "placed": {
+          "infill": 0,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 1,
+          "sill": 4
+        },
+        "conflicts": [
+          {
+            "slot": "infill",
+            "name": "no-infill-treatment",
+            "reduction": "aperture-left-open"
+          },
+          {
+            "slot": "shutterLeft",
+            "name": "no-shutter-treatment",
+            "reduction": "shutter-dropped"
+          },
+          {
+            "slot": "shutterRight",
+            "name": "no-shutter-treatment",
+            "reduction": "shutter-dropped"
+          }
+        ]
+      },
+      {
+        "dir": "-z",
+        "kind": "window",
+        "bbox": {
+          "u0": 8,
+          "v0": 2,
+          "u1": 12,
+          "v1": 3
+        },
+        "region": {
+          "min": [
+            -5,
+            28,
+            -13
+          ],
+          "max": [
+            -1,
+            29,
+            13
+          ]
+        },
+        "paneSpan": [
+          2,
+          2
+        ],
+        "applied": {
+          "infill": 0,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 0,
+          "sill": 7
+        },
+        "placed": {
+          "infill": 0,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 0,
+          "sill": 5
+        },
+        "conflicts": [
+          {
+            "slot": "infill",
+            "name": "no-infill-treatment",
+            "reduction": "aperture-left-open"
+          },
+          {
+            "slot": "shutterLeft",
+            "name": "no-shutter-treatment",
+            "reduction": "shutter-dropped"
+          },
+          {
+            "slot": "shutterRight",
+            "name": "no-shutter-treatment",
+            "reduction": "shutter-dropped"
+          },
+          {
+            "slot": "lintel",
+            "name": "lintel-no-band-cells",
+            "reduction": "lintel-skipped"
+          }
+        ]
+      },
+      {
+        "dir": "-z",
+        "kind": "window",
+        "bbox": {
+          "u0": 20,
+          "v0": 2,
+          "u1": 21,
+          "v1": 3
+        },
+        "region": {
+          "min": [
+            7,
+            28,
+            -13
+          ],
+          "max": [
+            8,
+            29,
+            13
+          ]
+        },
+        "paneSpan": [
+          2,
+          2
+        ],
+        "applied": {
+          "infill": 0,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 0,
+          "sill": 4
+        },
+        "placed": {
+          "infill": 0,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 0,
+          "sill": 3
+        },
+        "conflicts": [
+          {
+            "slot": "infill",
+            "name": "no-infill-treatment",
+            "reduction": "aperture-left-open"
+          },
+          {
+            "slot": "shutterLeft",
+            "name": "no-shutter-treatment",
+            "reduction": "shutter-dropped"
+          },
+          {
+            "slot": "shutterRight",
+            "name": "no-shutter-treatment",
+            "reduction": "shutter-dropped"
+          },
+          {
+            "slot": "lintel",
+            "name": "lintel-no-band-cells",
+            "reduction": "lintel-skipped"
+          }
+        ]
+      }
+    ],
+    "stats": {
+      "openings": 12,
+      "fullyDressed": 0,
+      "placements": 51,
+      "conflicts": 36,
+      "alreadyDressed": 0
+    }
+  },
+  "settle": {
+    "iterations": 2,
+    "trail": [
+      {
+        "frame": 0,
+        "fill": 6
+      },
+      {
+        "frame": 2,
+        "fill": 0
+      }
+    ]
+  },
+  "reproducible": {
+    "doubleRun": true,
+    "sha256": {
+      "base": null,
+      "shell": "24fefe6da680b982a40c537fe3a41685af289863d079e5d62f7bae3e2478f281",
+      "skinFinal": "e4467844ffb4056d7bd0fc7cb7c66cffc9d4a6f046892e51a054e92df02c15dc",
+      "grammarFinal": "2dfb0c7d3e3e67df6a7d6c590aeeebe70656e69d0a04a401a52f6fe2a2d87240",
+      "styled": "3ea1c65bd03a117cb144a5eae3e2d2c2159ba26dd02e97122c328e853a92c114"
+    },
+    "determinism": "kit→shell→skin→grammar→dressing is a pure function of the committed inputs (concept PNG, material map, GLB, kit); two in-process executions byte-matched on every artifact; --repro re-proves from a fresh process. LLM-authored inputs are one-time committed records (the kit's raw model reply is pinned beside it); the gate judge is the pinned model, single sample per view, verdicts committed in the gate record."
+  },
+  "gate": {
+    "outcome": "FAIL",
+    "resemblance": {
+      "decided": true,
+      "passed": false,
+      "gapCount": 12,
+      "gapBudget": 2,
+      "failures": [
+        {
+          "angle": "+x+z",
+          "reason": "drifted"
+        },
+        {
+          "angle": "+x-z",
+          "reason": "drifted"
+        },
+        {
+          "angle": "-x-z",
+          "reason": "different object"
+        },
+        {
+          "angle": "-x+z",
+          "reason": "different object"
+        }
+      ],
+      "refusal": null
+    },
+    "kitPresence": {
+      "ran": null,
+      "passed": true,
+      "reason": null,
+      "gaps": [],
+      "skips": [
+        "openings:infill (kit names no treatment for this slot)",
+        "openings:shutters (kit names no treatment for this slot)",
+        "openings:door (kit names no treatment for this slot)",
+        "openings:light (kit names no treatment for this slot)"
+      ]
+    },
+    "perView": [
+      {
+        "angle": "+x+z",
+        "azimuthDeg": 45,
+        "coverage": true,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roofline along the top",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "overall building mass and footprint",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "front and side walls",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ]
+      },
+      {
+        "angle": "+x-z",
+        "azimuthDeg": 135,
+        "coverage": true,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof / ridge line",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "upper walls and eaves",
+            "attribute": "massing",
+            "severity": "minor"
+          },
+          {
+            "region": "stone base and dark-wood trim",
+            "attribute": "palette",
+            "severity": "minor"
+          }
+        ]
+      },
+      {
+        "angle": "-x-z",
+        "azimuthDeg": 225,
+        "coverage": true,
+        "verdict": "different object",
+        "gaps": [
+          {
+            "region": "overall building mass",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "roof — the gabled pitched roof of the concept/mesh",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "walls and entrance — should be a closed stone box with an arched door, instead reads as open colonnaded ruin",
+            "attribute": "form",
+            "severity": "major"
+          }
+        ]
+      },
+      {
+        "angle": "-x+z",
+        "azimuthDeg": 315,
+        "coverage": true,
+        "verdict": "different object",
+        "gaps": [
+          {
+            "region": "overall building body",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "walls — open colonnade of vertical columns instead of solid stone walls",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "roof and ridge",
+            "attribute": "form",
+            "severity": "major"
+          }
+        ]
+      }
+    ],
+    "record": "benchmarks/sculpture/multi-angle/gatehouse-styled.json",
+    "sheet": "pr/assets/frames/multi-angle-gatehouse-styled.png"
+  },
+  "artifacts": {
+    "base": null,
+    "shell": "styled/gatehouse/shell-artifact.json",
+    "grammar": "styled/gatehouse/grammar-artifact.json",
+    "styled": "styled/gatehouse/artifact.json"
+  },
+  "renders": {
+    "kitlessBefore": [
+      {
+        "angle": "+x+z",
+        "path": "benchmarks/sculpture/styled/gatehouse/view-before-kitless-pxpz.png"
+      },
+      {
+        "angle": "+x-z",
+        "path": "benchmarks/sculpture/styled/gatehouse/view-before-kitless-pxmz.png"
+      },
+      {
+        "angle": "-x-z",
+        "path": "benchmarks/sculpture/styled/gatehouse/view-before-kitless-mxmz.png"
+      },
+      {
+        "angle": "-x+z",
+        "path": "benchmarks/sculpture/styled/gatehouse/view-before-kitless-mxpz.png"
+      }
+    ],
+    "styledAfter": [
+      {
+        "angle": "+x+z",
+        "path": "benchmarks/sculpture/styled/gatehouse/view-after-styled-pxpz.png"
+      },
+      {
+        "angle": "+x-z",
+        "path": "benchmarks/sculpture/styled/gatehouse/view-after-styled-pxmz.png"
+      },
+      {
+        "angle": "-x-z",
+        "path": "benchmarks/sculpture/styled/gatehouse/view-after-styled-mxmz.png"
+      },
+      {
+        "angle": "-x+z",
+        "path": "benchmarks/sculpture/styled/gatehouse/view-after-styled-mxpz.png"
+      }
+    ],
+    "note": null
+  },
+  "frames": [
+    "pr/assets/frames/styled-gatehouse-before.png",
+    "pr/assets/frames/styled-gatehouse-after.png"
+  ],
+  "kitReport": "pr/assets/styled-gatehouse-kit.md",
+  "generalization": "no subject keys, constants, branches, or thresholds in this runner — subjects are durable-skin registry data (E-25 Rule 3)"
+}
