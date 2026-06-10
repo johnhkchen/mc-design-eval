@@ -44,6 +44,7 @@
     "material:map": "node benchmarks/sculpture/material-map.mjs",
     "kit:extract": "node benchmarks/sculpture/kit-extract.mjs",
     "card:fixtures": "node benchmarks/sculpture/fixture-card.mjs",
+    "dress:cottage": "node benchmarks/sculpture/dress-openings.mjs --subject cottage",
     "build:block-vocab": "node scripts/build-block-vocab.mjs",
     "material:assign": "node benchmarks/sculpture/material-assign.mjs",
     "material:correct": "node benchmarks/sculpture/material-correct.mjs",

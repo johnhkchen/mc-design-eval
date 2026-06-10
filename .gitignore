@@ -133,3 +133,8 @@ benchmarks/sculpture/challenge/**/*.png
 # durable record is placement-grammar/<subj>.{json,md} + placement-grammar/<subj>/artifact.json;
 # the committed evidence sheets live in pr/assets/frames/grammar-*.png.
 benchmarks/sculpture/placement-grammar/**/*.png
+
+# T-099-01 opening-dressing renders — regenerable via npm run dress:cottage. The durable record is
+# dress-openings/<subj>.{json,md} + dress-openings/<subj>/artifact.json; the committed evidence
+# frames live in pr/assets/frames/dress-*.png.
+benchmarks/sculpture/dress-openings/**/*.png
