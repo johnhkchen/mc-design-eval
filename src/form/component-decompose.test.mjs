@@ -97,3 +97,75 @@ test("medianSmooth: kills a single-column spike, preserves a gable crest", () =>
   // mid-slope keeps its step height
   assert.equal(gable.h.get("3,4"), 4 + 3);
 });
+
+// ---- segmentMasses ------------------------------------------------------------------------------
+
+import { segmentMasses } from "./component-decompose.mjs";
+
+test("segmentMasses: a single box is one primary mass, no junctions", () => {
+  const { masses, columnMass } = segmentMasses(occupancyFromCells(boxCells(8, 4, 6)));
+  assert.equal(masses.length, 1);
+  assert.equal(masses[0].role, "primary");
+  assert.equal(masses[0].plan.area, 48);
+  assert.deepEqual(masses[0].yRange, [0, 3]);
+  assert.equal(masses[0].volume, 8 * 4 * 6);
+  assert.deepEqual(masses[0].junctions, []);
+  assert.equal(columnMass.get("0,0"), "mass-0");
+});
+
+test("segmentMasses: tower + nave split with a side junction (the church shape)", () => {
+  // nave: 20×8 plan, height 6 (y 0..5); tower: 6×6 plan attached at z=8..13, height 14 (y 0..13)
+  const cells = [...boxCells(20, 6, 8), ...boxCells(6, 14, 6, { z0: 8 })];
+  const { masses } = segmentMasses(occupancyFromCells(cells));
+  assert.equal(masses.length, 2);
+  const [primary, tower] = masses;
+  assert.equal(primary.role, "primary");
+  assert.equal(primary.plan.area, 160);
+  assert.equal(tower.role, "attached");
+  assert.equal(tower.plan.area, 36);
+  assert.deepEqual(tower.yRange, [0, 13]);
+  // the junction: tower's facing row at z=8, nave's at z=7, overlapping y [0,5]
+  const tj = tower.junctions.find((j) => j.withMass === primary.id);
+  assert.equal(tj.kind, "side");
+  assert.deepEqual(tj.cells, [{ z: 8, x0: 0, x1: 5 }]);
+  assert.deepEqual(tj.yRange, [0, 5]);
+  const pj = primary.junctions.find((j) => j.withMass === tower.id);
+  assert.deepEqual(pj.cells, [{ z: 7, x0: 0, x1: 5 }]);
+});
+
+test("segmentMasses: a chimney is a protected protrusion with a base junction (even below ridge height)", () => {
+  // 11×9 box, height 4 (y 0..3); 3×3 chimney at x 4..6, z 3..5 rising to y 9
+  const cells = boxCells(11, 4, 9);
+  for (let x = 4; x <= 6; x++) for (let z = 3; z <= 5; z++) {
+    for (let y = 4; y <= 9; y++) cells.push({ pos: [x, y, z], block: "minecraft:bricks" });
+  }
+  const { masses } = segmentMasses(occupancyFromCells(cells));
+  assert.equal(masses.length, 2);
+  const chimney = masses.find((m) => m.role === "protrusion");
+  assert.ok(chimney, "chimney found");
+  assert.equal(chimney.protected, true);
+  assert.equal(chimney.plan.area, 9, "median-eroded corners recovered by the raw-height dilation");
+  assert.deepEqual(chimney.yRange, [4, 9]);
+  assert.equal(chimney.volume, 9 * 6);
+  const base = chimney.junctions.find((j) => j.kind === "base");
+  assert.equal(base.withMass, masses[0].id);
+  assert.deepEqual(base.yRange, [3, 3]);
+  // the host's plan excludes the chimney columns
+  assert.equal(masses[0].plan.area, 11 * 9 - 9);
+});
+
+test("segmentMasses: a continuous gable slope stays one mass (no height-gap split)", () => {
+  const { masses } = segmentMasses(occupancyFromCells(gabledBox()));
+  assert.equal(masses.length, 1);
+  assert.equal(masses[0].role, "primary");
+});
+
+test("segmentMasses: single-column voxelization spikes neither split nor protrude", () => {
+  const cells = boxCells(10, 3, 10);
+  for (const [sx, sz] of [[2, 2], [5, 7], [8, 4]]) {
+    for (let y = 3; y <= 8; y++) cells.push({ pos: [sx, y, sz], block: "minecraft:stone" });
+  }
+  const { masses } = segmentMasses(occupancyFromCells(cells));
+  assert.equal(masses.length, 1);
+  assert.equal(masses[0].role, "primary");
+});
