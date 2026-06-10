@@ -1,0 +1,277 @@
+{
+  "schema": "value-select/v1",
+  "subject": "cottage",
+  "inputs": {
+    "map": "benchmarks/sculpture/material-map/cottage.json",
+    "concept": "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
+    "build": "benchmarks/sculpture/spray-paint/cottage/artifact.json"
+  },
+  "params": {
+    "gridN": 96,
+    "chromaWeight": 2,
+    "switchMargin": 0.15,
+    "minCells": 24,
+    "borderColor": [
+      254,
+      254,
+      254
+    ],
+    "dropTolerance": 24
+  },
+  "rows": [
+    {
+      "role": "load-bearing ground-floor wall field",
+      "placementRule": "walls",
+      "named": "stone_bricks",
+      "family": "stone",
+      "sampleLab": [
+        40.3,
+        0.8,
+        3.7
+      ],
+      "sampleCells": 161,
+      "namedScore": 16.57,
+      "namedTrue": {
+        "deltaE": 11.6,
+        "dL": 10.97,
+        "da": -0.85,
+        "db": -3.65
+      },
+      "chosen": "tuff",
+      "switched": true,
+      "reason": "switched",
+      "chosenScore": 11.04,
+      "chosenTrue": {
+        "deltaE": 6.06,
+        "dL": 5.53,
+        "da": -2.44,
+        "db": -0.44
+      }
+    },
+    {
+      "role": "corner quoins, plinth course & chimney shaft (rough grey stone)",
+      "placementRule": "corners-edges",
+      "named": "cobblestone",
+      "chosen": "cobblestone",
+      "switched": false,
+      "reason": "thin-sample",
+      "family": "stone",
+      "sampleLab": [
+        55,
+        1.1,
+        11.1
+      ],
+      "sampleCells": 6,
+      "namedScore": null,
+      "chosenScore": null,
+      "namedTrue": null,
+      "chosenTrue": null
+    },
+    {
+      "role": "half-timbering frame — vertical studs, corner posts, eaves beams",
+      "placementRule": "trim",
+      "named": "dark_oak_log",
+      "family": "log",
+      "sampleLab": [
+        16.7,
+        3.7,
+        9.2
+      ],
+      "sampleCells": 643,
+      "namedScore": 15.09,
+      "namedTrue": {
+        "deltaE": 7.44,
+        "dL": 3.57,
+        "da": -1.11,
+        "db": 6.44
+      },
+      "chosen": "dark_oak_log",
+      "switched": false,
+      "reason": "prior-is-best",
+      "chosenScore": 15.09,
+      "chosenTrue": {
+        "deltaE": 7.44,
+        "dL": 3.57,
+        "da": -1.11,
+        "db": 6.44
+      }
+    },
+    {
+      "role": "upper-storey plaster infill between the timbers",
+      "placementRule": "walls",
+      "named": "white_terracotta",
+      "family": "smooth",
+      "sampleLab": [
+        68.5,
+        1.2,
+        22.1
+      ],
+      "sampleCells": 137,
+      "namedScore": 25.2,
+      "namedTrue": {
+        "deltaE": 13.59,
+        "dL": 6.37,
+        "da": 7.76,
+        "db": -9.16
+      },
+      "chosen": "sandstone",
+      "switched": true,
+      "reason": "switched",
+      "chosenScore": 19.67,
+      "chosenTrue": {
+        "deltaE": 14.02,
+        "dL": 13.15,
+        "da": -3.85,
+        "db": 2.99
+      }
+    },
+    {
+      "role": "main roof field — plank courses",
+      "placementRule": "roof",
+      "named": "spruce_planks",
+      "family": "planks",
+      "sampleLab": [
+        39.4,
+        7.4,
+        24.4
+      ],
+      "sampleCells": 456,
+      "namedScore": 5.23,
+      "namedTrue": {
+        "deltaE": 1.62,
+        "dL": -0.92,
+        "da": 0.5,
+        "db": 1.24
+      },
+      "chosen": "spruce_planks",
+      "switched": false,
+      "reason": "prior-is-best",
+      "chosenScore": 5.23,
+      "chosenTrue": {
+        "deltaE": 1.62,
+        "dL": -0.92,
+        "da": 0.5,
+        "db": 1.24
+      }
+    },
+    {
+      "role": "roof eaves, verge & rake fascia (darker plank edge)",
+      "placementRule": "roof",
+      "named": "dark_oak_planks",
+      "family": "planks",
+      "sampleLab": [
+        20.1,
+        8.2,
+        19.1
+      ],
+      "sampleCells": 570,
+      "namedScore": 2.16,
+      "namedTrue": {
+        "deltaE": 0.23,
+        "dL": -0.12,
+        "da": 0.1,
+        "db": 0.16
+      },
+      "chosen": "dark_oak_planks",
+      "switched": false,
+      "reason": "prior-is-best",
+      "chosenScore": 2.16,
+      "chosenTrue": {
+        "deltaE": 0.23,
+        "dL": -0.12,
+        "da": 0.1,
+        "db": 0.16
+      }
+    },
+    {
+      "role": "chimney cap",
+      "placementRule": "trim",
+      "named": "bricks",
+      "chosen": "bricks",
+      "switched": false,
+      "reason": "thin-sample",
+      "family": "brick",
+      "sampleLab": [
+        54.6,
+        8.9,
+        21.4
+      ],
+      "sampleCells": 17,
+      "namedScore": null,
+      "chosenScore": null,
+      "namedTrue": null,
+      "chosenTrue": null
+    }
+  ],
+  "map": [
+    {
+      "role": "load-bearing ground-floor wall field",
+      "block": "minecraft:tuff",
+      "placementRule": "walls"
+    },
+    {
+      "role": "corner quoins, plinth course & chimney shaft (rough grey stone)",
+      "block": "minecraft:cobblestone",
+      "placementRule": "corners-edges"
+    },
+    {
+      "role": "half-timbering frame — vertical studs, corner posts, eaves beams",
+      "block": "minecraft:dark_oak_log",
+      "placementRule": "trim"
+    },
+    {
+      "role": "upper-storey plaster infill between the timbers",
+      "block": "minecraft:sandstone",
+      "placementRule": "walls"
+    },
+    {
+      "role": "main roof field — plank courses",
+      "block": "minecraft:spruce_planks",
+      "placementRule": "roof"
+    },
+    {
+      "role": "roof eaves, verge & rake fascia (darker plank edge)",
+      "block": "minecraft:dark_oak_planks",
+      "placementRule": "roof"
+    },
+    {
+      "role": "chimney cap",
+      "block": "minecraft:bricks",
+      "placementRule": "trim"
+    }
+  ],
+  "substitution": {
+    "stone_bricks": "tuff",
+    "white_terracotta": "sandstone"
+  },
+  "plaster": {
+    "named": "white_terracotta",
+    "chosen": "sandstone",
+    "switched": true,
+    "before": {
+      "deltaE": 13.59,
+      "dL": 6.37,
+      "da": 7.76,
+      "db": -9.16
+    },
+    "after": {
+      "deltaE": 14.02,
+      "dL": 13.15,
+      "da": -3.85,
+      "db": 2.99
+    },
+    "counts": {
+      "white_terracotta": 459,
+      "sandstone": 459
+    }
+  },
+  "renders": {
+    "before": {
+      "path": "benchmarks/sculpture/value-select/cottage/view-front-before.png"
+    },
+    "after": {
+      "path": "benchmarks/sculpture/value-select/cottage/view-front-after.png"
+    }
+  },
+  "note": "Selection is chroma-weighted (w=2) + flat-penalized WITHIN the role's material family; the map's name is the prior (floor + margin keep it absent clear evidence). Reported ΔE/components are TRUE unweighted ΔE76 — the score column is the selection objective, kept separate so the record can't launder the objective as the result. `map` is the value-true role map S-089 consumes."
+}
