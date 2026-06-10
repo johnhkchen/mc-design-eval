@@ -144,66 +144,217 @@
   },
   "zones": {
     "storeyDivide": 7,
-    "upperTop": 14
+    "upperTop": 14,
+    "source": "concept"
+  },
+  "zoneMap": {
+    "source": "concept",
+    "bands": [
+      {
+        "name": "band0",
+        "yRange": [
+          0,
+          6
+        ],
+        "dominantBlock": "stone_bricks",
+        "dominantRole": "load-bearing ground-floor wall field",
+        "share": 0.919,
+        "secondaries": [
+          {
+            "block": "dark_oak_log",
+            "role": "half-timbering frame — vertical studs, corner posts, eaves beams",
+            "share": 0.418
+          },
+          {
+            "block": "spruce_planks",
+            "role": "main roof field — plank courses",
+            "share": 0.15
+          },
+          {
+            "block": "dark_oak_planks",
+            "role": "roof eaves, verge & rake fascia (darker plank edge)",
+            "share": 0.119
+          },
+          {
+            "block": "cobblestone",
+            "role": "corner quoins, plinth course & chimney shaft (rough grey stone)",
+            "share": 0.002
+          },
+          {
+            "block": "bricks",
+            "role": "chimney cap",
+            "share": 0.033
+          }
+        ]
+      },
+      {
+        "name": "band1",
+        "yRange": [
+          7,
+          13
+        ],
+        "dominantBlock": "white_terracotta",
+        "dominantRole": "upper-storey plaster infill between the timbers",
+        "share": 1,
+        "secondaries": [
+          {
+            "block": "spruce_planks",
+            "role": "main roof field — plank courses",
+            "share": 0.415
+          },
+          {
+            "block": "dark_oak_planks",
+            "role": "roof eaves, verge & rake fascia (darker plank edge)",
+            "share": 0.196
+          },
+          {
+            "block": "dark_oak_log",
+            "role": "half-timbering frame — vertical studs, corner posts, eaves beams",
+            "share": 0.201
+          },
+          {
+            "block": "cobblestone",
+            "role": "corner quoins, plinth course & chimney shaft (rough grey stone)",
+            "share": 0.003
+          },
+          {
+            "block": "bricks",
+            "role": "chimney cap",
+            "share": 0.002
+          }
+        ]
+      }
+    ],
+    "roof": {
+      "dominantBlock": "dark_oak_planks",
+      "dominantRole": "roof eaves, verge & rake fascia (darker plank edge)",
+      "share": 0.764,
+      "secondaries": [
+        {
+          "block": "spruce_planks",
+          "role": "main roof field — plank courses",
+          "share": 0.135
+        },
+        {
+          "block": "dark_oak_log",
+          "role": "half-timbering frame — vertical studs, corner posts, eaves beams",
+          "share": 0.364
+        },
+        {
+          "block": "cobblestone",
+          "role": "corner quoins, plinth course & chimney shaft (rough grey stone)",
+          "share": 0.003
+        },
+        {
+          "block": "bricks",
+          "role": "chimney cap",
+          "share": 0
+        }
+      ]
+    },
+    "params": {
+      "extentWidthFloor": 0.25,
+      "minBandHeight": 2,
+      "snapTolerance": 2,
+      "secondaryMinShare": 0.05,
+      "minDominantShare": 0.3,
+      "minProfileCells": 200,
+      "minExtentLayers": 4,
+      "anchorMaxPlateau": 0.25,
+      "crossBandRules": [
+        "trim",
+        "corners-edges",
+        "openings"
+      ],
+      "n": 96,
+      "m": 52,
+      "anchored": true,
+      "anchor": {
+        "row": 23,
+        "y": 14
+      }
+    },
+    "diff": {
+      "wallDiffs": [],
+      "roofDominant": {
+        "prior": "spruce_planks",
+        "derived": "dark_oak_planks",
+        "changed": true
+      }
+    },
+    "agreesWithRecord": true
   },
   "fill": {
     "skin": "exposure",
     "minRun": 2,
     "policy": {
-      "base": {
+      "band0": {
         "dominant": "tuff",
-        "preserve": [
-          "cobblestone",
-          "dark_oak_log"
-        ],
-        "splat": [
-          "cobblestone",
-          "dark_oak_log"
-        ]
-      },
-      "upper": {
-        "dominant": "sandstone",
         "preserve": [
           "dark_oak_log",
           "spruce_planks",
-          "dark_oak_planks"
+          "dark_oak_planks",
+          "cobblestone",
+          "bricks"
         ],
         "splat": [
-          "dark_oak_log"
+          "dark_oak_log",
+          "spruce_planks",
+          "dark_oak_planks",
+          "cobblestone",
+          "bricks"
+        ]
+      },
+      "band1": {
+        "dominant": "sandstone",
+        "preserve": [
+          "spruce_planks",
+          "dark_oak_planks",
+          "dark_oak_log",
+          "cobblestone",
+          "bricks"
+        ],
+        "splat": [
+          "spruce_planks",
+          "dark_oak_planks",
+          "dark_oak_log",
+          "cobblestone",
+          "bricks"
         ]
       },
       "roof": {
-        "dominant": "spruce_planks",
+        "dominant": "dark_oak_planks",
         "preserve": [
-          "dark_oak_planks",
+          "spruce_planks",
+          "dark_oak_log",
           "cobblestone",
-          "bricks",
-          "dark_oak_log"
+          "bricks"
         ],
         "splat": [
-          "dark_oak_planks",
+          "spruce_planks",
+          "dark_oak_log",
           "cobblestone",
           "bricks"
         ]
       }
     },
-    "placements": 2454,
-    "kept": 2884,
+    "placements": 2333,
+    "kept": 3005,
     "byZone": {
-      "base": {
+      "band0": {
         "surface": 1551,
-        "filled": 151,
-        "kept": 1400
+        "filled": 118,
+        "kept": 1433
       },
-      "upper": {
+      "band1": {
         "surface": 1413,
-        "filled": 1326,
-        "kept": 87
+        "filled": 1171,
+        "kept": 242
       },
       "roof": {
         "surface": 2374,
-        "filled": 977,
-        "kept": 1397
+        "filled": 1044,
+        "kept": 1330
       }
     }
   },
@@ -211,33 +362,40 @@
     "front": {
       "dir": "+z",
       "source": "concept",
-      "painted": 90,
-      "skipped": 10,
+      "painted": 184,
+      "skipped": 30,
       "offPalette": 0,
-      "zoneRejected": 471,
-      "accepted": true,
+      "zoneRejected": 357,
+      "accepted": false,
       "coverageGate": {
-        "passed": true,
+        "passed": false,
         "threshold": 0.5,
-        "failures": [],
+        "failures": [
+          {
+            "zone": "roof",
+            "dominant": "dark_oak_planks",
+            "fraction": 0.43,
+            "total": 2374
+          }
+        ],
         "byZone": {
-          "base": {
+          "band0": {
             "dominant": "tuff",
-            "fraction": 0.714,
+            "fraction": 0.687,
             "total": 1551,
             "passed": true
           },
-          "upper": {
+          "band1": {
             "dominant": "sandstone",
-            "fraction": 0.929,
+            "fraction": 0.792,
             "total": 1413,
             "passed": true
           },
           "roof": {
-            "dominant": "spruce_planks",
-            "fraction": 0.829,
+            "dominant": "dark_oak_planks",
+            "fraction": 0.43,
             "total": 2374,
-            "passed": true
+            "passed": false
           }
         }
       },
@@ -246,17 +404,17 @@
     "side": {
       "dir": "+x",
       "source": "glb",
-      "painted": 219,
-      "skipped": 29,
+      "painted": 462,
+      "skipped": 70,
       "offPalette": 0,
-      "zoneRejected": 442,
+      "zoneRejected": 158,
       "accepted": true
     },
     "collisions": 0
   },
   "pattern": {
     "course": {
-      "dominant": "spruce_planks",
+      "dominant": "dark_oak_planks",
       "columnsRaised": 41,
       "voxelsAdded": 85,
       "before": {
@@ -279,55 +437,71 @@
     "salt": {
       "minKeep": 3,
       "minExtent": 3,
-      "stripped": 262,
-      "kept": 341,
+      "stripped": 500,
+      "kept": 915,
       "byZone": {
         "roof": {
-          "offDominant": 200,
-          "strippedCells": 135,
-          "keptCells": 65,
+          "offDominant": 908,
+          "strippedCells": 327,
+          "keptCells": 581,
           "byBlock": {
+            "dark_oak_log": {
+              "stripped": 130,
+              "kept": 113
+            },
             "cobblestone": {
-              "stripped": 52,
-              "kept": 48
-            },
-            "dark_oak_planks": {
-              "stripped": 29,
-              "kept": 14
-            },
-            "dark_oak_log": {
-              "stripped": 54,
-              "kept": 3
-            }
-          }
-        },
-        "upper": {
-          "offDominant": 177,
-          "strippedCells": 51,
-          "keptCells": 126,
-          "byBlock": {
-            "dark_oak_log": {
-              "stripped": 51,
-              "kept": 120
+              "stripped": 60,
+              "kept": 27
             },
             "spruce_planks": {
-              "stripped": 0,
-              "kept": 6
+              "stripped": 137,
+              "kept": 441
             }
           }
         },
-        "base": {
-          "offDominant": 226,
-          "strippedCells": 76,
-          "keptCells": 150,
+        "band1": {
+          "offDominant": 288,
+          "strippedCells": 91,
+          "keptCells": 197,
           "byBlock": {
             "dark_oak_log": {
               "stripped": 41,
-              "kept": 111
+              "kept": 116
+            },
+            "spruce_planks": {
+              "stripped": 15,
+              "kept": 4
+            },
+            "dark_oak_planks": {
+              "stripped": 5,
+              "kept": 6
             },
             "cobblestone": {
-              "stripped": 35,
-              "kept": 39
+              "stripped": 30,
+              "kept": 71
+            }
+          }
+        },
+        "band0": {
+          "offDominant": 219,
+          "strippedCells": 82,
+          "keptCells": 137,
+          "byBlock": {
+            "dark_oak_log": {
+              "stripped": 34,
+              "kept": 96
+            },
+            "spruce_planks": {
+              "stripped": 15,
+              "kept": 3
+            },
+            "cobblestone": {
+              "stripped": 30,
+              "kept": 38
+            },
+            "dark_oak_planks": {
+              "stripped": 3,
+              "kept": 0
             }
           }
         }
@@ -336,7 +510,7 @@
   },
   "coverage": {
     "splatOnly": {
-      "base": {
+      "band0": {
         "total": 1551,
         "byBlock": {
           "cobblestone": 126,
@@ -349,7 +523,7 @@
         "dominant": "tuff",
         "dominantFraction": 0.583
       },
-      "upper": {
+      "band1": {
         "total": 1413,
         "byBlock": {
           "cobblestone": 112,
@@ -372,41 +546,44 @@
           "dark_oak_planks": 52,
           "sandstone": 2
         },
-        "dominant": "spruce_planks",
-        "dominantFraction": 0.422
+        "dominant": "dark_oak_planks",
+        "dominantFraction": 0.022
       }
     },
     "final": {
-      "base": {
+      "band0": {
         "total": 1551,
         "byBlock": {
-          "cobblestone": 81,
-          "tuff": 1106,
-          "dark_oak_log": 364
+          "cobblestone": 80,
+          "tuff": 1087,
+          "dark_oak_log": 349,
+          "spruce_planks": 35
         },
         "dominant": "tuff",
-        "dominantFraction": 0.713
+        "dominantFraction": 0.701
       },
-      "upper": {
+      "band1": {
         "total": 1419,
         "byBlock": {
-          "sandstone": 1255,
-          "dark_oak_log": 156,
-          "spruce_planks": 8
+          "cobblestone": 105,
+          "sandstone": 1150,
+          "dark_oak_log": 152,
+          "spruce_planks": 6,
+          "dark_oak_planks": 6
         },
         "dominant": "sandstone",
-        "dominantFraction": 0.884
+        "dominantFraction": 0.81
       },
       "roof": {
         "total": 2440,
         "byBlock": {
-          "spruce_planks": 2146,
-          "dark_oak_log": 119,
-          "dark_oak_planks": 16,
-          "cobblestone": 159
+          "dark_oak_log": 231,
+          "dark_oak_planks": 1400,
+          "spruce_planks": 671,
+          "cobblestone": 138
         },
-        "dominant": "spruce_planks",
-        "dominantFraction": 0.88
+        "dominant": "dark_oak_planks",
+        "dominantFraction": 0.574
       }
     }
   },
@@ -417,34 +594,34 @@
       "threshold": 0.5,
       "failures": [
         {
-          "zone": "upper",
+          "zone": "band1",
           "dominant": "sandstone",
           "fraction": 0.053,
           "total": 1413
         },
         {
           "zone": "roof",
-          "dominant": "spruce_planks",
-          "fraction": 0.422,
+          "dominant": "dark_oak_planks",
+          "fraction": 0.022,
           "total": 2374
         }
       ],
       "byZone": {
-        "base": {
+        "band0": {
           "dominant": "tuff",
           "fraction": 0.583,
           "total": 1551,
           "passed": true
         },
-        "upper": {
+        "band1": {
           "dominant": "sandstone",
           "fraction": 0.053,
           "total": 1413,
           "passed": false
         },
         "roof": {
-          "dominant": "spruce_planks",
-          "fraction": 0.422,
+          "dominant": "dark_oak_planks",
+          "fraction": 0.022,
           "total": 2374,
           "passed": false
         }
@@ -455,21 +632,21 @@
       "threshold": 0.5,
       "failures": [],
       "byZone": {
-        "base": {
+        "band0": {
           "dominant": "tuff",
-          "fraction": 0.713,
+          "fraction": 0.701,
           "total": 1551,
           "passed": true
         },
-        "upper": {
+        "band1": {
           "dominant": "sandstone",
-          "fraction": 0.884,
+          "fraction": 0.81,
           "total": 1419,
           "passed": true
         },
         "roof": {
-          "dominant": "spruce_planks",
-          "fraction": 0.88,
+          "dominant": "dark_oak_planks",
+          "fraction": 0.574,
           "total": 2440,
           "passed": true
         }
@@ -479,27 +656,33 @@
   },
   "bands": {
     "roofMaterialsFraction": 1,
-    "upperResidueBlock": "tuff",
-    "upperResidueFraction": 0,
+    "wallForeignResidue": {
+      "band0": 0,
+      "band1": 0
+    },
     "roofTarget": 0.9,
-    "upperResidueMax": 0.05
+    "residueMax": 0.05
   },
   "invariants": {
-    "plasterHistogram": {
-      "base": 0,
-      "upper": 1255,
-      "roof": 0
+    "plaster": {
+      "block": "sandstone",
+      "histogram": {
+        "band1": 1150
+      },
+      "allowedZones": [
+        "band1"
+      ]
     }
   },
   "reproducible": {
     "doubleRun": true,
-    "sha256": "722af44b87faf5ddb18b0ab628cf0f73fa724aa1a127dc324e3d836faa56539e",
+    "sha256": "2b526194fe2c36ef3b6446334ad0ce7a9069fb9a0a248816bc8b0bcda0ee1b67",
     "determinism": "no LLM on the path — concept PNG + material-map roles are committed upstream artifacts; every stage is a pure function of them. Two in-process executions byte-matched."
   },
   "resemblance": {
     "face": "front",
     "splatOnly": 0.35,
-    "final": 0.3
+    "final": 0.283
   },
   "materialCounts": {
     "before": {
@@ -511,12 +694,12 @@
       "dark_oak_planks": 22
     },
     "after": {
-      "cobblestone": 240,
-      "tuff": 2206,
-      "dark_oak_log": 640,
-      "sandstone": 1255,
-      "spruce_planks": 2166,
-      "dark_oak_planks": 16
+      "cobblestone": 323,
+      "tuff": 2187,
+      "dark_oak_log": 733,
+      "spruce_planks": 715,
+      "sandstone": 1150,
+      "dark_oak_planks": 1415
     }
   },
   "renders": [

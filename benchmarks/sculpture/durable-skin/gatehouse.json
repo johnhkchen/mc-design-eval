@@ -103,57 +103,151 @@
   },
   "zones": {
     "storeyDivide": 17,
-    "upperTop": 18
+    "upperTop": 18,
+    "source": "concept"
+  },
+  "zoneMap": {
+    "source": "concept",
+    "bands": [
+      {
+        "name": "band0",
+        "yRange": [
+          0,
+          17
+        ],
+        "dominantBlock": "stone_bricks",
+        "dominantRole": "structural walls (dominant body)",
+        "share": 1,
+        "secondaries": [
+          {
+            "block": "dark_oak_log",
+            "role": "arch voussoir ring (warm accent)",
+            "share": 0.129
+          },
+          {
+            "block": "deepslate_tiles",
+            "role": "roof mass",
+            "share": 0.564
+          },
+          {
+            "block": "cobblestone",
+            "role": "corner buttresses + rough string-course banding",
+            "share": 0
+          },
+          {
+            "block": "dark_oak_planks",
+            "role": "gate door / passage leaf",
+            "share": 0.01
+          }
+        ]
+      }
+    ],
+    "roof": {
+      "dominantBlock": "deepslate_tiles",
+      "dominantRole": "roof mass",
+      "share": 1,
+      "secondaries": [
+        {
+          "block": "stone_bricks",
+          "role": "structural walls (dominant body)",
+          "share": 0.31
+        },
+        {
+          "block": "cobblestone",
+          "role": "corner buttresses + rough string-course banding",
+          "share": 0.003
+        },
+        {
+          "block": "dark_oak_log",
+          "role": "arch voussoir ring (warm accent)",
+          "share": 0
+        },
+        {
+          "block": "dark_oak_planks",
+          "role": "gate door / passage leaf",
+          "share": 0
+        }
+      ]
+    },
+    "params": {
+      "extentWidthFloor": 0.25,
+      "minBandHeight": 2,
+      "snapTolerance": 2,
+      "secondaryMinShare": 0.05,
+      "minDominantShare": 0.3,
+      "minProfileCells": 200,
+      "minExtentLayers": 4,
+      "anchorMaxPlateau": 0.25,
+      "crossBandRules": [
+        "trim",
+        "corners-edges",
+        "openings"
+      ],
+      "n": 96,
+      "m": 52,
+      "anchored": true,
+      "anchor": {
+        "row": 19.5,
+        "y": 18
+      }
+    },
+    "diff": {
+      "wallDiffs": [],
+      "roofDominant": {
+        "prior": "deepslate_tiles",
+        "derived": "deepslate_tiles",
+        "changed": false
+      }
+    },
+    "agreesWithRecord": true
   },
   "fill": {
     "skin": "exposure",
     "minRun": 2,
     "policy": {
-      "base": {
+      "band0": {
         "dominant": "polished_basalt",
         "preserve": [
-          "cobblestone",
           "dark_oak_log",
+          "deepslate_tiles",
+          "cobblestone",
           "dark_oak_planks"
         ],
         "splat": [
-          "cobblestone",
           "dark_oak_log",
+          "deepslate_tiles",
+          "cobblestone",
           "dark_oak_planks"
-        ]
-      },
-      "upper": {
-        "dominant": "polished_basalt",
-        "preserve": [
-          "cobblestone"
-        ],
-        "splat": [
-          "cobblestone"
         ]
       },
       "roof": {
         "dominant": "deepslate_tiles",
-        "preserve": [],
-        "splat": []
+        "preserve": [
+          "polished_basalt",
+          "cobblestone",
+          "dark_oak_log",
+          "dark_oak_planks"
+        ],
+        "splat": [
+          "polished_basalt",
+          "cobblestone",
+          "dark_oak_log",
+          "dark_oak_planks"
+        ]
       }
     },
-    "placements": 1722,
-    "kept": 4190,
+    "placements": 191,
+    "kept": 5721,
     "byZone": {
-      "base": {
-        "surface": 3220,
-        "filled": 215,
-        "kept": 3005
-      },
-      "upper": {
-        "surface": 100,
-        "filled": 9,
-        "kept": 91
+      "band0": {
+        "surface": 3320,
+        "filled": 107,
+        "kept": 3213
       },
       "roof": {
         "surface": 2592,
-        "filled": 1498,
-        "kept": 1094
+        "filled": 84,
+        "kept": 2508
       }
     }
   },
@@ -161,33 +255,34 @@
     "front": {
       "dir": "+z",
       "source": "concept",
-      "painted": 250,
-      "skipped": 92,
+      "painted": 586,
+      "skipped": 111,
       "offPalette": 0,
-      "zoneRejected": 497,
-      "accepted": true,
+      "zoneRejected": 142,
+      "accepted": false,
       "coverageGate": {
-        "passed": true,
+        "passed": false,
         "threshold": 0.5,
-        "failures": [],
+        "failures": [
+          {
+            "zone": "roof",
+            "dominant": "deepslate_tiles",
+            "fraction": 0.37,
+            "total": 2592
+          }
+        ],
         "byZone": {
-          "base": {
+          "band0": {
             "dominant": "polished_basalt",
-            "fraction": 0.697,
-            "total": 3220,
-            "passed": true
-          },
-          "upper": {
-            "dominant": "polished_basalt",
-            "fraction": 0.77,
-            "total": 100,
+            "fraction": 0.657,
+            "total": 3320,
             "passed": true
           },
           "roof": {
             "dominant": "deepslate_tiles",
-            "fraction": 1,
+            "fraction": 0.37,
             "total": 2592,
-            "passed": true
+            "passed": false
           }
         }
       },
@@ -196,10 +291,10 @@
     "side": {
       "dir": "+x",
       "source": "glb",
-      "painted": 48,
-      "skipped": 29,
+      "painted": 286,
+      "skipped": 74,
       "offPalette": 0,
-      "zoneRejected": 467,
+      "zoneRejected": 184,
       "accepted": true
     },
     "collisions": 0
@@ -229,32 +324,48 @@
     "salt": {
       "minKeep": 3,
       "minExtent": 3,
-      "stripped": 79,
-      "kept": 726,
+      "stripped": 255,
+      "kept": 857,
       "byZone": {
-        "upper": {
-          "offDominant": 23,
-          "strippedCells": 0,
-          "keptCells": 23,
+        "roof": {
+          "offDominant": 480,
+          "strippedCells": 120,
+          "keptCells": 360,
           "byBlock": {
+            "polished_basalt": {
+              "stripped": 47,
+              "kept": 222
+            },
             "cobblestone": {
-              "stripped": 0,
-              "kept": 23
+              "stripped": 39,
+              "kept": 61
+            },
+            "dark_oak_log": {
+              "stripped": 4,
+              "kept": 50
+            },
+            "dark_oak_planks": {
+              "stripped": 30,
+              "kept": 27
             }
           }
         },
-        "base": {
-          "offDominant": 782,
-          "strippedCells": 79,
-          "keptCells": 703,
+        "band0": {
+          "offDominant": 632,
+          "strippedCells": 135,
+          "keptCells": 497,
           "byBlock": {
             "cobblestone": {
-              "stripped": 47,
-              "kept": 677
+              "stripped": 53,
+              "kept": 413
+            },
+            "deepslate_tiles": {
+              "stripped": 50,
+              "kept": 80
             },
             "dark_oak_log": {
               "stripped": 16,
-              "kept": 26
+              "kept": 4
             },
             "dark_oak_planks": {
               "stripped": 16,
@@ -267,27 +378,17 @@
   },
   "coverage": {
     "splatOnly": {
-      "base": {
-        "total": 3220,
+      "band0": {
+        "total": 3320,
         "byBlock": {
           "deepslate_tiles": 108,
-          "polished_basalt": 2106,
-          "cobblestone": 879,
+          "polished_basalt": 2175,
+          "cobblestone": 901,
           "dark_oak_log": 45,
-          "dark_oak_planks": 82
+          "dark_oak_planks": 91
         },
         "dominant": "polished_basalt",
-        "dominantFraction": 0.654
-      },
-      "upper": {
-        "total": 100,
-        "byBlock": {
-          "cobblestone": 22,
-          "dark_oak_planks": 9,
-          "polished_basalt": 69
-        },
-        "dominant": "polished_basalt",
-        "dominantFraction": 0.69
+        "dominantFraction": 0.655
       },
       "roof": {
         "total": 2592,
@@ -302,33 +403,29 @@
       }
     },
     "final": {
-      "base": {
-        "total": 3220,
+      "band0": {
+        "total": 3320,
         "byBlock": {
-          "polished_basalt": 2289,
-          "cobblestone": 899,
-          "dark_oak_planks": 6,
-          "dark_oak_log": 26
+          "polished_basalt": 2495,
+          "deepslate_tiles": 176,
+          "cobblestone": 635,
+          "dark_oak_planks": 10,
+          "dark_oak_log": 4
         },
         "dominant": "polished_basalt",
-        "dominantFraction": 0.711
-      },
-      "upper": {
-        "total": 100,
-        "byBlock": {
-          "cobblestone": 23,
-          "polished_basalt": 77
-        },
-        "dominant": "polished_basalt",
-        "dominantFraction": 0.77
+        "dominantFraction": 0.752
       },
       "roof": {
         "total": 2790,
         "byBlock": {
-          "deepslate_tiles": 2790
+          "cobblestone": 91,
+          "polished_basalt": 942,
+          "deepslate_tiles": 1513,
+          "dark_oak_planks": 194,
+          "dark_oak_log": 50
         },
         "dominant": "deepslate_tiles",
-        "dominantFraction": 1
+        "dominantFraction": 0.542
       }
     }
   },
@@ -346,16 +443,10 @@
         }
       ],
       "byZone": {
-        "base": {
+        "band0": {
           "dominant": "polished_basalt",
-          "fraction": 0.654,
-          "total": 3220,
-          "passed": true
-        },
-        "upper": {
-          "dominant": "polished_basalt",
-          "fraction": 0.69,
-          "total": 100,
+          "fraction": 0.655,
+          "total": 3320,
           "passed": true
         },
         "roof": {
@@ -371,21 +462,15 @@
       "threshold": 0.5,
       "failures": [],
       "byZone": {
-        "base": {
+        "band0": {
           "dominant": "polished_basalt",
-          "fraction": 0.711,
-          "total": 3220,
-          "passed": true
-        },
-        "upper": {
-          "dominant": "polished_basalt",
-          "fraction": 0.77,
-          "total": 100,
+          "fraction": 0.752,
+          "total": 3320,
           "passed": true
         },
         "roof": {
           "dominant": "deepslate_tiles",
-          "fraction": 1,
+          "fraction": 0.542,
           "total": 2790,
           "passed": true
         }
@@ -395,23 +480,24 @@
   },
   "bands": {
     "roofMaterialsFraction": 1,
-    "upperResidueBlock": null,
-    "upperResidueFraction": null,
+    "wallForeignResidue": {
+      "band0": 0
+    },
     "roofTarget": 0.9,
-    "upperResidueMax": 0.05
+    "residueMax": 0.05
   },
   "invariants": {
-    "plasterHistogram": null
+    "plaster": null
   },
   "reproducible": {
     "doubleRun": true,
-    "sha256": "8a30c19165c38a0eddd0831ee62abcbd6a7520d95a7f29113e2622d54ebd4e39",
+    "sha256": "e59d9a2c477d22bd2f814afebfa05c577141f7842bc93fc11c30ba8d720a6bed",
     "determinism": "no LLM on the path — concept PNG + material-map roles are committed upstream artifacts; every stage is a pure function of them. Two in-process executions byte-matched."
   },
   "resemblance": {
     "face": "front",
     "splatOnly": 0.344,
-    "final": 0.344
+    "final": 0.328
   },
   "materialCounts": {
     "before": {
@@ -422,11 +508,11 @@
       "dark_oak_planks": 407
     },
     "after": {
-      "polished_basalt": 4566,
-      "cobblestone": 922,
-      "dark_oak_planks": 6,
-      "dark_oak_log": 26,
-      "deepslate_tiles": 2903
+      "polished_basalt": 5705,
+      "deepslate_tiles": 1733,
+      "cobblestone": 726,
+      "dark_oak_planks": 205,
+      "dark_oak_log": 54
     }
   },
   "renders": [

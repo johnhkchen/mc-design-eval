@@ -1,6 +1,6 @@
 # Durable skin — cottage (T-089-01)
 
-One command, end-to-end: value-true → seal → full-shell zone-fill → secondaries splat → coherent surface → coverage gate. **Reproducible**: double-run byte-identical, artifact sha256 `722af44b87faf5dd…`.
+One command, end-to-end: value-true → seal → full-shell zone-fill → secondaries splat → coherent surface → coverage gate. **Reproducible**: double-run byte-identical, artifact sha256 `2b526194fe2c36ef…`.
 
 ## Value-true selection (T-086)
 Substitution: `{"stone_bricks":"tuff","white_terracotta":"sandstone"}` (agrees with the committed value-select record)
@@ -15,19 +15,26 @@ Substitution: `{"stone_bricks":"tuff","white_terracotta":"sandstone"}` (agrees w
 | roof eaves, verge & rake fascia (darker plank edge) | `dark_oak_planks` | `dark_oak_planks` | prior-is-best | 570 | 0.23 → 0.23 |
 | chimney cap | `bricks` | `bricks` | thin-sample | 17 | — → — |
 
+## Zone map (T-092) — source: **concept**
+- band0 y 0..6: `stone_bricks` (load-bearing ground-floor wall field)
+- band1 y 7..13: `white_terracotta` (upper-storey plaster infill between the timbers)
+- roof: `dark_oak_planks` (roof eaves, verge & rake fascia (darker plank edge))
+
+Diff vs the prior: walls identical
+
 ## Base coat + splat (T-085/T-090 + E-23)
-Full-shell fill (skin: exposure): **2454 cells filled**, 2884 kept — base 151/1551, upper 1326/1413, roof 977/2374.
-Splat (secondaries only): front 90 painted (zoneRejected 471, accepted true), side 219 (accepted true).
+Full-shell fill (skin: exposure): **2333 cells filled**, 3005 kept — band0 118/1551, band1 1171/1413, roof 1044/2374.
+Splat (secondaries only): front 184 painted (zoneRejected 357, accepted false), side 462 (accepted true).
 
 ## Coherent surface (T-087)
-Courses: 41 columns / 85 voxels — before smoothness **0.784**, cliff 273 → after smoothness **0.827**, cliff 218. Salt: **262 stripped**, 341 kept.
+Courses: 41 columns / 85 voxels — before smoothness **0.784**, cliff 273 → after smoothness **0.827**, cliff 218. Salt: **500 stripped**, 915 kept.
 
 ## Coverage gate (T-088) — proof both ways, exposure-shell census
-- **splat-only (the E-23 baseline): REJECTED** — base `tuff` 58% of 1551 · upper `sandstone` 5% of 1413 · roof `spruce_planks` 42% of 2374
-- **final skin: PASSED** — base `tuff` 71% of 1551 · upper `sandstone` 88% of 1419 · roof `spruce_planks` 88% of 2440
-- bands: roof materials 100% (target 90%), upper `tuff` residue 0% (max 5%)
-- plaster invariant: {"base":0,"upper":1255,"roof":0} (base/roof = 0)
-- front resemblance vs concept (evidence): 0.35 → 0.3
+- **splat-only (the E-23 baseline): REJECTED** — band0 `tuff` 58% of 1551 · band1 `sandstone` 5% of 1413 · roof `dark_oak_planks` 2% of 2374
+- **final skin: PASSED** — band0 `tuff` 70% of 1551 · band1 `sandstone` 81% of 1419 · roof `dark_oak_planks` 57% of 2440
+- bands: roof materials 100% (target 90%), wall foreign residue band0 0% · band1 0% (max 5%)
+- plaster invariant: `sandstone` {"band1":1150} — allowed zones: band1
+- front resemblance vs concept (evidence): 0.35 → 0.283
 
 ## Renders
 - splat-only front: benchmarks/sculpture/durable-skin/cottage/view-splatonly-front.png
