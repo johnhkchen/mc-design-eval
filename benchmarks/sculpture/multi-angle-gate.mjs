@@ -42,6 +42,10 @@ import {
   MULTI_ANGLE_GATE_SCHEMA,
 } from "../../src/form/multi-angle-gate.mjs";
 import {
+  kitPresence, composeKitAwareVerdict, KIT_PRESENCE_SCHEMA,
+} from "../../src/form/kit-presence.mjs";
+import { treatmentsFromKit, extractApertures } from "../../src/view/opening-dressing.mjs";
+import {
   resampleRgba, silhouetteToRgba, composeTriptych, composeSheet, RESEMBLANCE_DEFAULTS,
 } from "../../src/form/resemblance.mjs";
 import { resolveAngle, renderViews } from "../../src/view/multi-angle.mjs";
@@ -140,12 +144,15 @@ function deriveZones({ occ, conceptImg, matMap, fallbackPolicy }) {
   });
   if (extracted.readable) {
     const zb = zonesFromBands({ bands: extracted.bands, roof: extracted.roof, roofKeys: sz.roofKeys, upperTop: sz.upperTop });
-    return { zoneOf: zb.zoneOf, zones: zb.zones, source: "concept", reason: null, gridResult };
+    return {
+      zoneOf: zb.zoneOf, zones: zb.zones, source: "concept", reason: null, gridResult,
+      bandNames: extracted.bands.map((b) => b.name), sz,
+    };
   }
   return {
     zoneOf: sz.zoneOf,
     zones: Object.fromEntries(Object.entries(fallbackPolicy).map(([z, p]) => [z, { dominant: bare(p.dominant), preserve: p.preserve.map(bare) }])),
-    source: "prior-fallback", reason: extracted.reason, gridResult,
+    source: "prior-fallback", reason: extracted.reason, gridResult, bandNames: null, sz,
   };
 }
 
@@ -166,7 +173,7 @@ function policyInShippedPalette(zones, { matMap, gridResult, artifact, kitOverri
   const out = Object.fromEntries(Object.entries(zones).map(([z, p]) => [z, {
     dominant: ship(p.dominant), preserve: [...new Set((p.preserve ?? []).map(ship))],
   }]));
-  return { zones: out, substitution, kitOverrides };
+  return { zones: out, substitution, kitOverrides, ship };
 }
 
 async function main() {
@@ -193,12 +200,22 @@ async function main() {
       shortCircuit: (rec.views ?? []).every((v) => v.coverage?.passed !== false || v.verdict === null),
       aggregate: rec.aggregate && (rec.aggregate.decided === true) !== (typeof rec.aggregate.refusal === "string"),
       sheet: typeof rec.sheet === "string" && existsSync(join(ROOT, rec.sheet)),
+      // T-100 (additive — records without kitPresence stay valid): the recorded overall verdict
+      // must equal the pure composition of the recorded aggregate and presence result.
+      kitAware: !rec.kitPresence || (() => {
+        const expect = composeKitAwareVerdict(rec.aggregate, rec.kitPresence);
+        return rec.overall && expect.decided === rec.overall.decided &&
+          expect.passed === rec.overall.passed && expect.refusal === rec.overall.refusal &&
+          (rec.kitPresence.ran === false || rec.kitPresence.schema === KIT_PRESENCE_SCHEMA);
+      })(),
     };
     const ok = Object.values(checks).every(Boolean);
     console.error(`[offline] ${slug}: schema ${checks.schema ? "OK" : "BAD"}; contract ${checks.contract ? "OK" : "VIOLATED"}; ` +
       `views ${checks.views ? "OK" : "BAD"}; T-088 short-circuit ${checks.shortCircuit ? "OK" : "VIOLATED"}; ` +
-      `aggregate ${checks.aggregate ? "well-formed" : "MALFORMED"}; sheet ${checks.sheet ? "present" : "MISSING"} — ` +
-      `recorded outcome: ${rec.aggregate?.decided ? (rec.aggregate.passed ? "PASS" : "FAIL") : `REFUSAL (${rec.aggregate?.refusal})`}`);
+      `aggregate ${checks.aggregate ? "well-formed" : "MALFORMED"}; sheet ${checks.sheet ? "present" : "MISSING"}; ` +
+      `kit-aware ${rec.kitPresence ? (checks.kitAware ? "consistent" : "INCONSISTENT") : "n/a (pre-T-100)"} — ` +
+      `recorded outcome: ${rec.aggregate?.decided ? (rec.aggregate.passed ? "PASS" : "FAIL") : `REFUSAL (${rec.aggregate?.refusal})`}` +
+      (rec.overall ? ` → kit-aware ${rec.overall.decided ? (rec.overall.passed ? "PASS" : "FAIL") : `REFUSAL (${rec.overall.refusal})`}` : ""));
     if (!ok) process.exitCode = 1;
     return;
   }
@@ -223,17 +240,44 @@ async function main() {
   // T-096: the committed kit's verified overrides are part of the shipped name space (durable-skin
   // composes them at its one renaming point); read them the same way, optional like there.
   let kitOverrides = {};
+  let kitRec = null;
   if (def.kitRecord && existsSync(join(HERE, def.kitRecord))) {
-    const kitRec = JSON.parse(await readFile(join(HERE, def.kitRecord), "utf8"));
+    kitRec = JSON.parse(await readFile(join(HERE, def.kitRecord), "utf8"));
     if (kitRec.schema !== "kit/v1") throw new Error(`${def.kitRecord} is not a kit/v1 record`);
     kitOverrides = kitRec.overrides ?? {};
   }
   const derived = deriveZones({ occ, conceptImg, matMap, fallbackPolicy: def.policy });
-  const { zones: zonesShipped, substitution } = policyInShippedPalette(derived.zones, {
+  const { zones: zonesShipped, substitution, ship } = policyInShippedPalette(derived.zones, {
     matMap, gridResult: derived.gridResult, artifact, kitOverrides,
   });
   console.error(`[${slug}] zones: ${derived.source}${derived.reason ? ` (${derived.reason})` : ""} — ` +
     Object.entries(zonesShipped).map(([z, p]) => `${z}=${p.dominant}`).join(", "));
+
+  // --- T-100: the kit-presence COMPANION precondition (deterministic; runs whether or not the
+  // judge later refuses — both run, both reported; the kit is the COMMITTED record, immutable) ----
+  let presence;
+  if (!kitRec) {
+    presence = { ran: false, reason: "no-kit-record" };
+  } else if (derived.source !== "concept") {
+    presence = { ran: false, reason: "no-concept-bands" }; // kit whereUsed refs need the derived bands
+  } else if (!existsSync(join(HERE, def.build))) {
+    presence = { ran: false, reason: "no-reference-build" }; // apertures are concept-declared (T-099)
+  } else {
+    const refArt = JSON.parse(await readFile(join(HERE, def.build), "utf8"));
+    presence = kitPresence(occ, {
+      kit: kitRec.kit, bandNames: derived.bandNames, policy: zonesShipped, zoneOf: derived.zoneOf,
+      floorLines: derived.sz.floorLines, upperTop: derived.sz.upperTop, roofKeys: derived.sz.roofKeys,
+      sub: ship,
+      apertures: extractApertures(artifactOccupancy(refArt)),
+      treatments: treatmentsFromKit(kitRec),
+    });
+    console.error(`[${slug}] kit presence: ${presence.passed ? "PASS" : "FAIL"}` +
+      (presence.gaps.length ? ` — ${presence.gaps.join("; ")}` : ""));
+    for (const s of presence.skips) console.error(`[${slug}] kit presence skip: ${s.feature} (${s.reason})`);
+  }
+  if (!presence.ran && presence.reason) {
+    console.error(`[${slug}] kit presence not run: ${presence.reason}`);
+  }
 
   // --- mesh silhouettes (form reference that rotates; GLB is gitignored — placeholder when absent) --
   const glbPath = join(HERE, def.glb);
@@ -324,6 +368,8 @@ async function main() {
   const aggregate = aggregateMultiAngle(views.map((v) => ({
     angle: v.angle, rendered: v.rendered, coverage: v.coverage, verdict: v.verdict, unparsed: v.unparsed,
   })));
+  // T-100: the kit-aware verdict — presence ANDs with the aggregate, never replaces it.
+  const overall = composeKitAwareVerdict(aggregate, presence);
 
   // --- THE CONTACT SHEET (the verdict artifact — Rule 1) ----------------------------------------------
   const sheetComposed = composeSheet(panels, { gutter: RESEMBLANCE_DEFAULTS.gutter });
@@ -348,17 +394,20 @@ async function main() {
     zones: { source: derived.source, reason: derived.reason, policy: zonesShipped, substitutionApplied: substitution, kitOverridesApplied: kitOverrides },
     views,
     aggregate,
+    kitPresence: presence,
+    overall,
     sheet: sheetFrame.replace(ROOT, ""),
     labeled,
   };
   await writeFile(recPath, JSON.stringify(record, null, 2) + "\n");
   await writeFile(join(OUT_DIR, `${slug}.md`), recordMd(record));
 
-  const outcome = aggregate.decided ? (aggregate.passed ? "PASS" : "FAIL") : `REFUSAL (${aggregate.refusal})`;
-  console.error(`\n[${slug}] verdict: ${outcome}` +
-    (aggregate.decided ? ` — gaps ${aggregate.gapCount}/${aggregate.gapBudget}, failures ${JSON.stringify(aggregate.failures)}` : ""));
+  const outcome = overall.decided ? (overall.passed ? "PASS" : "FAIL") : `REFUSAL (${overall.refusal})`;
+  console.error(`\n[${slug}] kit-aware verdict: ${outcome} — resemblance ` +
+    (aggregate.decided ? `${aggregate.passed ? "pass" : "fail"} (gaps ${aggregate.gapCount}/${aggregate.gapBudget})` : `refusal`) +
+    `; kit presence ` + (presence.ran === false ? `not run (${presence.reason})` : presence.passed ? "pass" : "fail"));
   console.error(`✓ wrote ${recPath} + sheet ${record.sheet}`);
-  process.exitCode = aggregate.decided ? (aggregate.passed ? 0 : 1) : 2;
+  process.exitCode = overall.decided ? (overall.passed ? 0 : 1) : 2;
 }
 
 function recordMd(r) {
@@ -375,6 +424,19 @@ function recordMd(r) {
     ? `**${r.aggregate.passed ? "PASS" : "FAIL"}** — gaps ${r.aggregate.gapCount}/${r.aggregate.gapBudget}` +
       (r.aggregate.failures.length ? `; failures: ${r.aggregate.failures.map((f) => `${f.angle}:${f.reason}`).join(", ")}` : "")
     : `**REFUSAL** — ${r.aggregate.refusal} (no pass/fail verdict is produced on a partial gate)`;
+  const kp = r.kitPresence;
+  const kitSection = kp?.ran === false
+    ? `not run — ${kp.reason}`
+    : `**${kp.passed ? "PASS" : "FAIL"}**` +
+      (kp.gaps.length ? ` — named absences:\n${kp.gaps.map((g) => `- \`${g}\``).join("\n")}` : " — every kit entry present at its grammar sites") +
+      (kp.skips.length ? `\n\nSkips (recorded): ${kp.skips.map((s) => `${s.feature} (${s.reason})`).join("; ")}` : "");
+  const overall = r.overall
+    ? (r.overall.decided
+      ? `**${r.overall.passed ? "PASS" : "FAIL"}** — resemblance ${r.overall.components.resemblance.passed ? "pass" : "fail"} ∧ ` +
+        `kit presence ${r.overall.components.kitPresence.ran ? (r.overall.components.kitPresence.passed ? "pass" : "fail") : "not run"}` +
+        ` (the judge cannot pass a build missing kit entries; the kit check cannot replace the judgement)`
+      : `**REFUSAL** — ${r.overall.refusal} (kit presence still reported above)`)
+    : "(pre-T-100 record)";
   return `# Multi-angle same-object gate — ${r.subject} (${r.label}) — T-093-01\n\n` +
     `![sheet](../../../${r.sheet})\n\n` +
     `**The sheet is the verdict artifact** (E-25 Rule 1); this table is support.\n\n` +
@@ -383,7 +445,9 @@ function recordMd(r) {
     `${r.contract.elevationDeg}°, ${r.contract.width}², coverage ≥ ${r.contract.coverageThreshold}, ` +
     `gap budget ${r.contract.gapBudget}\n\n` +
     `| view | azimuth | rendered | T-088 coverage | judge verdict |\n|---|---|---|---|---|\n${viewRows}\n\n` +
-    `## Aggregate\n${agg}\n`;
+    `## Resemblance aggregate (T-093)\n${agg}\n\n` +
+    `## Kit presence (T-100)\n${kitSection}\n\n` +
+    `## Kit-aware verdict\n${overall}\n`;
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
