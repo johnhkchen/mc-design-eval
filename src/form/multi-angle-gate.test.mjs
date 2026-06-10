@@ -1,0 +1,193 @@
+// Unit suite for the multi-angle same-object gate pure core (T-093-01, S-093, E-25).
+// No GL, no network: the v2 per-view verdict parser contract, the aggregate REFUSE/DECIDE rule
+// (incl. the AC's refuse-on-missing-view and gap-budget cases), the sheet captions, and the
+// N-panel sheet composer (step 2). The metered judge and rendering are the runner's edges.
+
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import {
+  buildMultiAngleViewPrompt, parseMultiAngleVerdict, aggregateMultiAngle, viewOutcomeLabel,
+  MULTI_ANGLE_VERDICT_SCHEMA, MULTI_ANGLE_GATE_SCHEMA, MAX_GAPS_PER_VIEW,
+} from "./multi-angle-gate.mjs";
+import { MULTI_ANGLE_GATE } from "../config.mjs";
+
+const AZ = MULTI_ANGLE_GATE.azimuths;
+
+// --- the contract itself ----------------------------------------------------
+
+test("the gate contract: four fixed ground-diagonal azimuths, gap budget 2, frozen", () => {
+  assert.deepEqual([...AZ], ["+x+z", "+x-z", "-x-z", "-x+z"]);
+  assert.equal(MULTI_ANGLE_GATE.gapBudget, 2);
+  assert.ok(Object.isFrozen(MULTI_ANGLE_GATE) && Object.isFrozen(MULTI_ANGLE_GATE.azimuths));
+});
+
+test("the per-view prompt names the azimuth and the strict JSON shape", () => {
+  const p = buildMultiAngleViewPrompt("-x-z", 225);
+  assert.match(p, /azimuth 225°/);
+  assert.match(p, /"-x-z"/);
+  assert.match(p, /"verdict":"same object\|drifted\|different object"/);
+  assert.match(p, /severity/);
+});
+
+// --- parser: valid shapes ----------------------------------------------------
+
+const J = (o) => JSON.stringify(o);
+
+test("same object with zero gaps parses", () => {
+  const v = parseMultiAngleVerdict(J({ verdict: "same object", gaps: [], rationale: "reads true" }));
+  assert.equal(v.schema, MULTI_ANGLE_VERDICT_SCHEMA);
+  assert.equal(v.verdict, "same object");
+  assert.deepEqual(v.gaps, []);
+});
+
+test("same object with minor gaps parses; fenced JSON accepted", () => {
+  const text = "```json\n" + J({
+    verdict: "same object",
+    gaps: [
+      { region: "roof ridge", attribute: "palette", severity: "minor" },
+      { region: "rear wall", attribute: "material zoning", severity: "minor" },
+    ],
+    rationale: "small tone drift",
+  }) + "\n```";
+  const v = parseMultiAngleVerdict(text);
+  assert.equal(v.gaps.length, 2);
+  assert.equal(v.gaps[0].severity, "minor");
+});
+
+test("drifted with a major gap parses", () => {
+  const v = parseMultiAngleVerdict(J({
+    verdict: "drifted",
+    gaps: [{ region: "roof side faces", attribute: "material zoning", severity: "major" }],
+    rationale: "grey roof sides",
+  }));
+  assert.equal(v.verdict, "drifted");
+  assert.equal(v.gaps[0].severity, "major");
+});
+
+// --- parser: contract violations throw ----------------------------------------
+
+test("same object with a MAJOR gap is a contract violation", () => {
+  assert.throws(() => parseMultiAngleVerdict(J({
+    verdict: "same object",
+    gaps: [{ region: "roof", attribute: "form", severity: "major" }],
+    rationale: "",
+  })), /cannot carry a major gap/);
+});
+
+test("drifted without gaps / without a major gap throws", () => {
+  assert.throws(() => parseMultiAngleVerdict(J({ verdict: "drifted", gaps: [], rationale: "" })),
+    /requires at least one named gap/);
+  assert.throws(() => parseMultiAngleVerdict(J({
+    verdict: "drifted",
+    gaps: [{ region: "roof", attribute: "form", severity: "minor" }],
+    rationale: "",
+  })), /at least one MAJOR gap/);
+});
+
+test("vocabulary stays frozen: bad verdict, attribute, severity, gap count all throw", () => {
+  assert.throws(() => parseMultiAngleVerdict(J({ verdict: "close enough", gaps: [], rationale: "" })), /verdict must be one of/);
+  assert.throws(() => parseMultiAngleVerdict(J({
+    verdict: "drifted", gaps: [{ region: "x", attribute: "vibes", severity: "major" }], rationale: "",
+  })), /attribute must be one of/);
+  assert.throws(() => parseMultiAngleVerdict(J({
+    verdict: "drifted", gaps: [{ region: "x", attribute: "form", severity: "fatal" }], rationale: "",
+  })), /severity must be one of/);
+  const four = Array.from({ length: MAX_GAPS_PER_VIEW + 1 }, () => ({ region: "x", attribute: "form", severity: "minor" }));
+  assert.throws(() => parseMultiAngleVerdict(J({ verdict: "same object", gaps: four, rationale: "" })), /at most/);
+});
+
+test("non-JSON and empty replies throw", () => {
+  assert.throws(() => parseMultiAngleVerdict("the build looks fine to me"), /not JSON/);
+  assert.throws(() => parseMultiAngleVerdict("   "), /empty/);
+});
+
+// --- aggregation: helpers ------------------------------------------------------
+
+const ok = (angle, gaps = []) => ({
+  angle, rendered: true, coverage: { passed: true },
+  verdict: { verdict: "same object", gaps: gaps.map((g) => ({ severity: "minor", ...g })) },
+});
+const minor = (region, attribute = "palette") => ({ region, attribute });
+
+// --- aggregation: pass/fail ------------------------------------------------------
+
+test("all same-object, zero gaps → PASS", () => {
+  const agg = aggregateMultiAngle(AZ.map((a) => ok(a)));
+  assert.equal(agg.schema, MULTI_ANGLE_GATE_SCHEMA);
+  assert.deepEqual([agg.decided, agg.passed, agg.gapCount], [true, true, 0]);
+  assert.deepEqual(agg.failures, []);
+});
+
+test("exactly gapBudget minor gaps total → still PASS; budget+1 → FAIL named gap-budget", () => {
+  const two = aggregateMultiAngle([ok(AZ[0], [minor("ridge")]), ok(AZ[1], [minor("eave")]), ok(AZ[2]), ok(AZ[3])]);
+  assert.deepEqual([two.decided, two.passed, two.gapCount], [true, true, 2]);
+  const three = aggregateMultiAngle([ok(AZ[0], [minor("ridge"), minor("eave")]), ok(AZ[1], [minor("door")]), ok(AZ[2]), ok(AZ[3])]);
+  assert.deepEqual([three.decided, three.passed, three.gapCount], [true, false, 3]);
+  assert.deepEqual(three.failures, [{ angle: "(all)", reason: "gap-budget" }]);
+});
+
+test("one drifted view → decided FAIL with the angle named", () => {
+  const drifted = {
+    angle: AZ[2], rendered: true, coverage: { passed: true },
+    verdict: { verdict: "drifted", gaps: [{ region: "roof sides", attribute: "material zoning", severity: "major" }] },
+  };
+  const agg = aggregateMultiAngle([ok(AZ[0]), ok(AZ[1]), drifted, ok(AZ[3])]);
+  assert.deepEqual([agg.decided, agg.passed], [true, false]);
+  assert.deepEqual(agg.failures, [{ angle: AZ[2], reason: "drifted" }]);
+});
+
+test("a coverage-failed view (judge never called) → decided FAIL, not a refusal", () => {
+  const cov = { angle: AZ[1], rendered: true, coverage: { passed: false }, verdict: null };
+  const agg = aggregateMultiAngle([ok(AZ[0]), cov, ok(AZ[2]), ok(AZ[3])]);
+  assert.deepEqual([agg.decided, agg.passed], [true, false]);
+  assert.deepEqual(agg.failures, [{ angle: AZ[1], reason: "coverage" }]);
+});
+
+// --- aggregation: refusals (AC: the gate refuses to produce a verdict) ------------
+
+test("a missing azimuth → REFUSAL, no pass/fail", () => {
+  const agg = aggregateMultiAngle([ok(AZ[0]), ok(AZ[1]), ok(AZ[2])]);
+  assert.equal(agg.decided, false);
+  assert.equal(agg.refusal, `missing-view:${AZ[3]}`);
+  assert.equal(agg.passed, undefined);
+});
+
+test("an unrendered view → REFUSAL", () => {
+  const agg = aggregateMultiAngle([{ angle: AZ[0], rendered: false, coverage: null, verdict: null },
+    ok(AZ[1]), ok(AZ[2]), ok(AZ[3])]);
+  assert.deepEqual([agg.decided, agg.refusal], [false, `missing-view:${AZ[0]}`]);
+});
+
+test("an unparsed judge reply → REFUSAL (never a guessed verdict)", () => {
+  const agg = aggregateMultiAngle([ok(AZ[0]), ok(AZ[1]), ok(AZ[2]),
+    { angle: AZ[3], rendered: true, coverage: { passed: true }, verdict: null, unparsed: true }]);
+  assert.deepEqual([agg.decided, agg.refusal], [false, `unparsed:${AZ[3]}`]);
+});
+
+test("a rendered, covered view with no verdict at all → REFUSAL missing-verdict", () => {
+  const agg = aggregateMultiAngle([ok(AZ[0]), ok(AZ[1]), ok(AZ[2]),
+    { angle: AZ[3], rendered: true, coverage: { passed: true }, verdict: null }]);
+  assert.deepEqual([agg.decided, agg.refusal], [false, `missing-verdict:${AZ[3]}`]);
+});
+
+// --- aggregation: the exact-set contract --------------------------------------------
+
+test("an unexpected or duplicate angle is a caller bug — throws", () => {
+  assert.throws(() => aggregateMultiAngle([...AZ.map((a) => ok(a)), ok(AZ[0])]), /duplicate/);
+  assert.throws(() => aggregateMultiAngle([ok("front")]), /unexpected angle/);
+});
+
+// --- sheet captions ------------------------------------------------------------------
+
+test("viewOutcomeLabel covers every state", () => {
+  assert.equal(viewOutcomeLabel(undefined), "missing");
+  assert.equal(viewOutcomeLabel({ rendered: false }), "missing");
+  assert.equal(viewOutcomeLabel({ rendered: true, coverage: { passed: false } }), "coverage");
+  assert.equal(viewOutcomeLabel({ rendered: true, coverage: { passed: true }, unparsed: true }), "unparsed");
+  assert.equal(viewOutcomeLabel(ok(AZ[0])), "same object");
+  assert.equal(viewOutcomeLabel(ok(AZ[0], [minor("ridge")])), "same object (1 minor)");
+  assert.equal(viewOutcomeLabel({
+    rendered: true, coverage: { passed: true },
+    verdict: { verdict: "drifted", gaps: [{ region: "r", attribute: "form", severity: "major" }] },
+  }), "drifted: form");
+});

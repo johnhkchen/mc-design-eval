@@ -40,6 +40,19 @@ export const MODEL_TIERS = Object.freeze({
 export const DEFAULT_TIER = "strong";
 
 /**
+ * The multi-angle same-object gate contract (E-25 / S-093 / T-093-01). FOUR fixed ground-diagonal
+ * azimuths (named per src/view/multi-angle.mjs VIEW_ANGLES: 45/135/225/315 deg at the 30 deg contract
+ * elevation — the E-22 3/4 lens elevation) and the aggregate gap budget. E-25 Rule 4: the set is
+ * CONFIG, never a per-run option — no runner flag may drop an angle, change the elevation, or lower
+ * the 512x512 render contract. Frozen here, single-sourced like every other contract id.
+ * @type {Readonly<{azimuths: readonly string[], gapBudget: number}>}
+ */
+export const MULTI_ANGLE_GATE = Object.freeze({
+  azimuths: Object.freeze(["+x+z", "+x-z", "-x-z", "-x+z"]),
+  gapBudget: 2,
+});
+
+/**
  * Default prompting-archetype id for the skeleton trial (spec §7). The single-shot
  * archetype is the Phase-1 baseline; multi-shot / multimodal are later, versioned
  * configs layered on top of the runner.
