@@ -130,7 +130,7 @@ test("dressOpenings +z: fence in the aperture, shutters proud, lintel/sill recol
   const r = dressOpenings(occ, aps, TREATMENTS);
   const rep = r.perOpening[0];
   assert.equal(rep.conflicts.length, 0);
-  assert.equal(rep.planeW, 0);
+  assert.deepEqual(rep.paneSpan, [0, 0]);
   // infill: 4 fences at the holes, run axis x ⇒ east/west booleans
   const fences = byBlock(r.placements, "spruce_fence");
   assert.deepEqual(posSet(fences), new Set(WINDOW_HOLES.map((p) => p.join(","))));

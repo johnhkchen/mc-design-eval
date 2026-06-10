@@ -1,0 +1,602 @@
+{
+  "schema": "dress-openings/v1",
+  "subject": "cottage",
+  "inputs": {
+    "target": "durable-skin/cottage/artifact.json",
+    "ref": "concept-materials/cottage/after-artifact.json",
+    "kit": "kit/cottage.json"
+  },
+  "treatments": {
+    "slots": {
+      "infill": {
+        "block": "spruce_fence",
+        "source": "derived-species-fence"
+      },
+      "shutter": {
+        "block": "spruce_trapdoor",
+        "source": "kit-fixture"
+      },
+      "door": {
+        "block": "spruce_door",
+        "source": "kit-fixture"
+      },
+      "light": {
+        "block": "lantern",
+        "source": "kit-fixture"
+      },
+      "frame": {
+        "block": "spruce_planks",
+        "source": "kit-trim"
+      }
+    },
+    "derivations": [
+      {
+        "slot": "infill",
+        "block": "spruce_fence",
+        "from": "spruce_trapdoor",
+        "reason": "no rail entry in kit; species-matched fence derived from the shutter block (the kit declared the window grille unidentified)"
+      }
+    ],
+    "unfulfilled": [],
+    "ignored": []
+  },
+  "apertures": [
+    {
+      "dir": "+x",
+      "kind": "window",
+      "bbox": {
+        "u0": 6,
+        "v0": 12,
+        "u1": 6,
+        "v1": 12
+      },
+      "region": {
+        "min": [
+          -13,
+          14,
+          -10
+        ],
+        "max": [
+          12,
+          14,
+          -10
+        ]
+      },
+      "cells": 1
+    },
+    {
+      "dir": "+x",
+      "kind": "window",
+      "bbox": {
+        "u0": 14,
+        "v0": 17,
+        "u1": 14,
+        "v1": 17
+      },
+      "region": {
+        "min": [
+          -13,
+          9,
+          -2
+        ],
+        "max": [
+          12,
+          9,
+          -2
+        ]
+      },
+      "cells": 1
+    },
+    {
+      "dir": "+x",
+      "kind": "window",
+      "bbox": {
+        "u0": 5,
+        "v0": 20,
+        "u1": 6,
+        "v1": 20
+      },
+      "region": {
+        "min": [
+          -13,
+          6,
+          -11
+        ],
+        "max": [
+          12,
+          6,
+          -10
+        ]
+      },
+      "cells": 2
+    },
+    {
+      "dir": "-x",
+      "kind": "window",
+      "bbox": {
+        "u0": 25,
+        "v0": 12,
+        "u1": 25,
+        "v1": 12
+      },
+      "region": {
+        "min": [
+          -13,
+          14,
+          -10
+        ],
+        "max": [
+          12,
+          14,
+          -10
+        ]
+      },
+      "cells": 1
+    },
+    {
+      "dir": "-x",
+      "kind": "window",
+      "bbox": {
+        "u0": 17,
+        "v0": 17,
+        "u1": 17,
+        "v1": 17
+      },
+      "region": {
+        "min": [
+          -13,
+          9,
+          -2
+        ],
+        "max": [
+          12,
+          9,
+          -2
+        ]
+      },
+      "cells": 1
+    },
+    {
+      "dir": "-x",
+      "kind": "window",
+      "bbox": {
+        "u0": 25,
+        "v0": 20,
+        "u1": 26,
+        "v1": 20
+      },
+      "region": {
+        "min": [
+          -13,
+          6,
+          -11
+        ],
+        "max": [
+          12,
+          6,
+          -10
+        ]
+      },
+      "cells": 2
+    }
+  ],
+  "dressing": {
+    "placements": 42,
+    "stats": {
+      "openings": 6,
+      "fullyDressed": 2,
+      "placements": 42,
+      "conflicts": 6,
+      "alreadyDressed": 0
+    },
+    "perOpening": [
+      {
+        "dir": "+x",
+        "kind": "window",
+        "bbox": {
+          "u0": 6,
+          "v0": 12,
+          "u1": 6,
+          "v1": 12
+        },
+        "region": {
+          "min": [
+            -13,
+            14,
+            -10
+          ],
+          "max": [
+            12,
+            14,
+            -10
+          ]
+        },
+        "paneSpan": [
+          12,
+          12
+        ],
+        "applied": {
+          "infill": 1,
+          "shutterLeft": 0,
+          "shutterRight": 1,
+          "lintel": 0,
+          "sill": 0
+        },
+        "conflicts": [
+          {
+            "slot": "shutterLeft",
+            "name": "shutter-no-jamb-left",
+            "reduction": "shutter-dropped"
+          },
+          {
+            "slot": "lintel",
+            "name": "lintel-no-band-cells",
+            "reduction": "lintel-skipped"
+          },
+          {
+            "slot": "sill",
+            "name": "sill-no-band-cells",
+            "reduction": "sill-skipped"
+          }
+        ]
+      },
+      {
+        "dir": "+x",
+        "kind": "window",
+        "bbox": {
+          "u0": 14,
+          "v0": 17,
+          "u1": 14,
+          "v1": 17
+        },
+        "region": {
+          "min": [
+            -13,
+            9,
+            -2
+          ],
+          "max": [
+            12,
+            9,
+            -2
+          ]
+        },
+        "paneSpan": [
+          11,
+          11
+        ],
+        "applied": {
+          "infill": 1,
+          "shutterLeft": 1,
+          "shutterRight": 0,
+          "lintel": 1,
+          "sill": 3
+        },
+        "conflicts": [
+          {
+            "slot": "shutterRight",
+            "name": "shutter-no-jamb-right",
+            "reduction": "shutter-dropped"
+          }
+        ]
+      },
+      {
+        "dir": "+x",
+        "kind": "window",
+        "bbox": {
+          "u0": 5,
+          "v0": 20,
+          "u1": 6,
+          "v1": 20
+        },
+        "region": {
+          "min": [
+            -13,
+            6,
+            -11
+          ],
+          "max": [
+            12,
+            6,
+            -10
+          ]
+        },
+        "paneSpan": [
+          3,
+          3
+        ],
+        "applied": {
+          "infill": 2,
+          "shutterLeft": 0,
+          "shutterRight": 1,
+          "lintel": 4,
+          "sill": 4
+        },
+        "conflicts": [
+          {
+            "slot": "shutterLeft",
+            "name": "shutter-no-jamb-left",
+            "reduction": "shutter-dropped"
+          }
+        ]
+      },
+      {
+        "dir": "-x",
+        "kind": "window",
+        "bbox": {
+          "u0": 25,
+          "v0": 12,
+          "u1": 25,
+          "v1": 12
+        },
+        "region": {
+          "min": [
+            -13,
+            14,
+            -10
+          ],
+          "max": [
+            12,
+            14,
+            -10
+          ]
+        },
+        "paneSpan": [
+          -13,
+          -13
+        ],
+        "applied": {
+          "infill": 1,
+          "shutterLeft": 1,
+          "shutterRight": 1,
+          "lintel": 3,
+          "sill": 0
+        },
+        "conflicts": [
+          {
+            "slot": "sill",
+            "name": "sill-no-band-cells",
+            "reduction": "sill-skipped"
+          }
+        ]
+      },
+      {
+        "dir": "-x",
+        "kind": "window",
+        "bbox": {
+          "u0": 17,
+          "v0": 17,
+          "u1": 17,
+          "v1": 17
+        },
+        "region": {
+          "min": [
+            -13,
+            9,
+            -2
+          ],
+          "max": [
+            12,
+            9,
+            -2
+          ]
+        },
+        "paneSpan": [
+          -13,
+          -13
+        ],
+        "applied": {
+          "infill": 1,
+          "shutterLeft": 1,
+          "shutterRight": 1,
+          "lintel": 3,
+          "sill": 2
+        },
+        "conflicts": []
+      },
+      {
+        "dir": "-x",
+        "kind": "window",
+        "bbox": {
+          "u0": 25,
+          "v0": 20,
+          "u1": 26,
+          "v1": 20
+        },
+        "region": {
+          "min": [
+            -13,
+            6,
+            -11
+          ],
+          "max": [
+            12,
+            6,
+            -10
+          ]
+        },
+        "paneSpan": [
+          -13,
+          -11
+        ],
+        "applied": {
+          "infill": 2,
+          "shutterLeft": 1,
+          "shutterRight": 1,
+          "lintel": 4,
+          "sill": 4
+        },
+        "conflicts": []
+      }
+    ],
+    "regions": [
+      {
+        "kind": "window",
+        "dir": "+x",
+        "min": [
+          12,
+          14,
+          -10
+        ],
+        "max": [
+          13,
+          14,
+          -9
+        ]
+      },
+      {
+        "kind": "window",
+        "dir": "+x",
+        "min": [
+          10,
+          8,
+          -3
+        ],
+        "max": [
+          12,
+          10,
+          -1
+        ]
+      },
+      {
+        "kind": "window",
+        "dir": "+x",
+        "min": [
+          3,
+          5,
+          -12
+        ],
+        "max": [
+          4,
+          7,
+          -9
+        ]
+      },
+      {
+        "kind": "window",
+        "dir": "-x",
+        "min": [
+          -14,
+          14,
+          -11
+        ],
+        "max": [
+          -13,
+          15,
+          -9
+        ]
+      },
+      {
+        "kind": "window",
+        "dir": "-x",
+        "min": [
+          -14,
+          8,
+          -3
+        ],
+        "max": [
+          -12,
+          10,
+          -1
+        ]
+      },
+      {
+        "kind": "window",
+        "dir": "-x",
+        "min": [
+          -14,
+          5,
+          -12
+        ],
+        "max": [
+          -11,
+          7,
+          -9
+        ]
+      }
+    ],
+    "note": "apertures measured on the RAW reference (the openings the concept declared — the E-25 openingRegions precedent); sealed panes re-opened by last-write-wins replacement."
+  },
+  "integrity": {
+    "openingsBefore": 0,
+    "openingsAfter": 6,
+    "openingsReportingDressing": 6,
+    "closure": {
+      "baseline": {
+        "closed": false,
+        "reached": 2602
+      },
+      "dressed": {
+        "closed": false,
+        "reached": 2602
+      },
+      "dressedCells": 8,
+      "nonRegression": true,
+      "note": "the shipped skin never had a closure stage; the gate is NON-REGRESSION under the concept-declared allow-list (ref openingRegions ∪ the op's footprint regions, D8)."
+    },
+    "strayFixturesBare": 9,
+    "strayFixturesComposed": 0
+  },
+  "acceptance": {
+    "windowsDressed": true,
+    "windows": 6,
+    "fullyShuttered": 3,
+    "shutterSidesApplied": 9,
+    "shutterSidesPossible": 12,
+    "door": {
+      "detected": 0,
+      "note": "none-detected: the doorway is not a through-hole; `openings` is silhouette-based and cannot see it (T-099 design D7 — named honesty row, detector gap for S-101)"
+    }
+  },
+  "reproducible": {
+    "doubleRun": true,
+    "sha256": "316246890ce6bf6d72ebc1b5988573142536347fba225c8292207104cbc2b89f",
+    "determinism": "no LLM on this path — the kit record, raw reference, and shipped target are committed inputs; the dressing core is pure. Two executions placement-matched."
+  },
+  "renders": [
+    {
+      "when": "before",
+      "angle": "right",
+      "path": "benchmarks/sculpture/dress-openings/cottage/view-before-right.png"
+    },
+    {
+      "when": "after",
+      "angle": "right",
+      "path": "benchmarks/sculpture/dress-openings/cottage/view-after-right.png"
+    },
+    {
+      "when": "before",
+      "angle": "left",
+      "path": "benchmarks/sculpture/dress-openings/cottage/view-before-left.png"
+    },
+    {
+      "when": "after",
+      "angle": "left",
+      "path": "benchmarks/sculpture/dress-openings/cottage/view-after-left.png"
+    },
+    {
+      "when": "before",
+      "angle": "+x+z",
+      "path": "benchmarks/sculpture/dress-openings/cottage/view-before-+x+z.png"
+    },
+    {
+      "when": "after",
+      "angle": "+x+z",
+      "path": "benchmarks/sculpture/dress-openings/cottage/view-after-+x+z.png"
+    },
+    {
+      "when": "before",
+      "angle": "-x-z",
+      "path": "benchmarks/sculpture/dress-openings/cottage/view-before--x-z.png"
+    },
+    {
+      "when": "after",
+      "angle": "-x-z",
+      "path": "benchmarks/sculpture/dress-openings/cottage/view-after--x-z.png"
+    }
+  ],
+  "frames": [
+    "pr/assets/frames/dress-cottage-before.png",
+    "pr/assets/frames/dress-cottage-after.png"
+  ]
+}

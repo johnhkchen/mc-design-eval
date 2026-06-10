@@ -202,15 +202,19 @@ export function extractApertures(refOcc, dirs = SIDE_FACES) {
 
 /**
  * THE DRESSING OP (design D2/D3/D5/D6). Apply `treatments.slots` to each aperture on the TARGET
- * occupancy, entirely in world space. Wall plane = modal first-solid depth over the perimeter ring
- * probed on the target (sealed/open/mixed panes all resolve); pane solid → REPLACED (re-opened),
- * air → added, same-fixture → already-dressed (idempotent). Shutters need a solid backing jamb at
- * the plane and a free cell one step out. Lintel/sill recolor SOLID cells only, and only when the
- * block actually changes. Doors: 1 wide → single leaf, 2 → hinge left/right pair, wider → centered
- * single leaf with the named reduction; height ≥ 2 required. Every non-applied applicable slot has
- * a named conflict + reduction. Returns deterministic placements (aperture order, slot order,
- * row-major cells) plus per-opening reports and the placement-footprint `regions` (design D8 — the
- * allow-list extension consumers compose over `openingRegions`). PURE.
+ * occupancy, entirely in world space. THE PANE IS RESOLVED PER CELL: the first OCCUPIED cell along
+ * the column from the camera side (probed on the cottage: the walls are jettied — storeys sit at
+ * different depths, so a single per-opening plane places fence in mid-air while the real sealed
+ * pane stays solid). A solid pane → REPLACED (re-opened), the same fixture → already-dressed
+ * (idempotent), an empty column → the modal perimeter depth (the open-hole fallback). Shutters,
+ * lintel, sill, and the lantern are PANE-RELATIVE: their jamb/band cells must sit within one cell
+ * of the pane depth span — a shutter never attaches to a far wall, a frame never recolors an eave
+ * floating in front. Doors: 1 wide → single leaf, 2 → hinge left/right pair, wider → centered
+ * single leaf with the named reduction; height ≥ 2 and aligned leaf halves required. Every
+ * non-applied applicable slot has a named conflict + reduction. Returns deterministic placements
+ * (aperture order, slot order, row-major cells) plus per-opening reports and the placement-
+ * footprint `regions` (design D8 — the allow-list extension consumers compose over
+ * `openingRegions`). PURE.
  * @param {import("./occupancy.mjs").Occupancy} targetOcc
  * @param {object[]} apertures from {@link extractApertures}
  * @param {{slots:object}} treatments from {@link treatmentsFromKit}
@@ -237,31 +241,37 @@ export function dressOpenings(targetOcc, apertures, treatments) {
       pos[spec.axisU] = au; pos[spec.axisV] = av; pos[spec.axisW] = w;
       return pos;
     };
-    const probe = ({ au, av }) => {
+    const firstWhere = ({ au, av }, pred) => {
       for (let w = wStart; near ? w >= wEnd : w <= wEnd; w += step) {
-        if (targetOcc.solid(...posAt(au, av, w))) return w;
+        if (pred(...posAt(au, av, w))) return w;
       }
       return null;
     };
+    const probeSolid = (c) => firstWhere(c, targetOcc.solid);
+    const probeOccupied = (c) => firstWhere(c, targetOcc.has);
 
     const applicable = KIND_SLOTS[ap.kind] ?? [];
-    const report = { dir: ap.dir, kind: ap.kind, bbox: { ...ap.bbox }, region: ap.region, planeW: null,
+    const report = { dir: ap.dir, kind: ap.kind, bbox: { ...ap.bbox }, region: ap.region, paneSpan: null,
       applied: Object.fromEntries(applicable.map((s) => [s, 0])), conflicts: [] };
     const conflict = (slot, name, reduction) => report.conflicts.push({ slot, name, reduction });
     perOpening.push(report);
 
-    // --- wall plane: modal perimeter depth (nearest-to-camera breaks ties — deterministic) -------
-    const depths = ap.perim.map(probe).filter((w) => w !== null);
-    if (!depths.length) { conflict("opening", "no-wall-plane", "opening-skipped"); continue; }
+    // --- the open-hole fallback depth: modal perimeter first-solid (nearest-to-camera tie-break) --
+    const ringDepths = ap.perim.map(probeSolid).filter((w) => w !== null);
     const tally = new Map();
-    for (const w of depths) tally.set(w, (tally.get(w) || 0) + 1);
-    let planeW = null, bestN = -1;
+    for (const w of ringDepths) tally.set(w, (tally.get(w) || 0) + 1);
+    let fallbackW = null, bestN = -1;
     for (const [w, n] of tally) {
-      if (n > bestN || (n === bestN && Math.abs(w - wStart) < Math.abs(planeW - wStart))) { planeW = w; bestN = n; }
+      if (n > bestN || (n === bestN && Math.abs(w - wStart) < Math.abs(fallbackW - wStart))) { fallbackW = w; bestN = n; }
     }
-    if (depths.some((w) => w !== planeW)) conflict("opening", "irregular-jamb-depth", "modal-plane-used");
-    report.planeW = planeW;
-    const wOut = planeW - step; // one cell toward the camera — proud of the facade
+
+    // --- per-cell pane resolution: the first occupied cell IS the pane ----------------------------
+    const paneCells = ap.cells.map((c) => ({ ...c, w: probeOccupied(c) ?? fallbackW }));
+    if (paneCells.some((c) => c.w === null)) { conflict("opening", "no-wall-plane", "opening-skipped"); continue; }
+    const paneLo = Math.min(...paneCells.map((c) => c.w));
+    const paneHi = Math.max(...paneCells.map((c) => c.w));
+    const inSpan = (w) => w !== null && w >= paneLo - 1 && w <= paneHi + 1;
+    report.paneSpan = [paneLo, paneHi];
 
     const opPositions = []; // region footprint accumulator
     const place = (pos, block, state) => {
@@ -274,7 +284,7 @@ export function dressOpenings(targetOcc, apertures, treatments) {
       opPositions.push(pos);
       return true;
     };
-    /** Place-or-skip at an aperture-plane cell: solid pane → replace; same fixture → idempotent skip. */
+    /** Place-or-skip at a pane cell: solid pane → replace; same fixture → idempotent skip. */
     const placeAtPane = (slot, pos, block, state) => {
       const cur = targetOcc.block(...pos);
       if (cur !== null && !targetOcc.solid(...pos)) {
@@ -288,43 +298,61 @@ export function dressOpenings(targetOcc, apertures, treatments) {
     // --- fence infill in the aperture (windows) ---------------------------------------------------
     if (applicable.includes("infill")) {
       if (slots.infill) {
-        for (const { au, av } of ap.cells) {
-          if (placeAtPane("infill", posAt(au, av, planeW), slots.infill.block, FENCE_RUN_STATE[ap.dir])) {
+        for (const { au, av, w } of paneCells) {
+          if (placeAtPane("infill", posAt(au, av, w), slots.infill.block, FENCE_RUN_STATE[ap.dir])) {
             report.applied.infill++;
           }
         }
       } else conflict("infill", "no-infill-treatment", "aperture-left-open");
     }
 
-    // --- trapdoor shutters flanking (windows), all-or-none per side -------------------------------
+    // --- trapdoor shutters flanking (windows), all-or-none per side. The jamb is checked at the
+    // ADJACENT PANE CELL's depth (same row, nearest aperture column): a shutter hangs beside ITS
+    // window pane — a protrusion in front of the jamb is "blocked", a missing wall there is
+    // "no-jamb"; a far wall deeper in the column is never a jamb. ----------------------------------
+    const rowPaneW = ({ au, av }) => {
+      let best = null;
+      for (const c of paneCells) {
+        if (c.av === av && (best === null || Math.abs(c.au - au) < Math.abs(best.au - au))) best = c;
+      }
+      return best?.w ?? null;
+    };
     for (const side of ["left", "right"]) {
       const slot = side === "left" ? "shutterLeft" : "shutterRight";
       if (!applicable.includes(slot)) continue;
       if (!slots.shutter) { conflict(slot, "no-shutter-treatment", "shutter-dropped"); continue; }
-      const flank = ap.flanks[side];
-      const noJamb = flank.some(({ au, av }) => !targetOcc.solid(...posAt(au, av, planeW)));
-      const blocked = flank.some(({ au, av }) => targetOcc.has(...posAt(au, av, wOut)));
-      const already = flank.every(({ au, av }) => {
-        const cur = targetOcc.block(...posAt(au, av, wOut));
+      const flank = ap.flanks[side].map((c) => ({ ...c, jw: rowPaneW(c) }));
+      const shutterPos = (f) => posAt(f.au, f.av, f.jw - step); // one cell proud of ITS jamb
+      const already = flank.every((f) => {
+        if (f.jw === null) return false;
+        const cur = targetOcc.block(...shutterPos(f));
         return cur !== null && bareBlock(cur) === bareBlock(slots.shutter.block);
       });
-      if (already) { alreadyDressed += flank.length; flank.forEach(({ au, av }) => opPositions.push(posAt(au, av, wOut))); report.applied[slot] = flank.length; continue; }
-      if (noJamb) { conflict(slot, `shutter-no-jamb-${side}`, "shutter-dropped"); continue; }
-      if (blocked) { conflict(slot, `shutter-blocked-${side}`, "shutter-dropped"); continue; }
-      for (const { au, av } of flank) {
-        if (place(posAt(au, av, wOut), slots.shutter.block,
+      if (already) {
+        alreadyDressed += flank.length;
+        flank.forEach((f) => opPositions.push(shutterPos(f)));
+        report.applied[slot] = flank.length;
+        continue;
+      }
+      if (flank.some((f) => f.jw === null || !targetOcc.solid(...posAt(f.au, f.av, f.jw)))) {
+        conflict(slot, `shutter-no-jamb-${side}`, "shutter-dropped");
+        continue;
+      }
+      if (flank.some((f) => targetOcc.has(...shutterPos(f)))) { conflict(slot, `shutter-blocked-${side}`, "shutter-dropped"); continue; }
+      for (const f of flank) {
+        if (place(shutterPos(f), slots.shutter.block,
           { facing: SHUTTER_FACING[ap.dir], half: "bottom", open: "true" })) report.applied[slot]++;
       }
     }
 
-    // --- lintel / sill: recolor SOLID plane cells to the frame block ------------------------------
+    // --- lintel / sill: recolor the FACADE cell of each band column, pane-relative ----------------
     let frameBlock = slots.frame?.block ?? null;
     if (!frameBlock) {
       const census = new Map();
-      for (const { au, av } of ap.perim) {
-        const pos = posAt(au, av, planeW);
-        if (!targetOcc.solid(...pos)) continue;
-        const b = bareBlock(targetOcc.block(...pos));
+      for (const c of ap.perim) {
+        const w = probeSolid(c);
+        if (!inSpan(w)) continue;
+        const b = bareBlock(targetOcc.block(...posAt(c.au, c.av, w)));
         census.set(b, (census.get(b) || 0) + 1);
       }
       for (const [b, n] of census) if (frameBlock === null || n > census.get(frameBlock)) frameBlock = b;
@@ -332,25 +360,28 @@ export function dressOpenings(targetOcc, apertures, treatments) {
     for (const band of ["lintel", "sill"]) {
       if (!applicable.includes(band)) continue;
       if (!frameBlock) { conflict(band, "no-frame-block", `${band}-dropped`); continue; }
-      for (const { au, av } of ap[band]) {
-        const pos = posAt(au, av, planeW);
-        if (!targetOcc.solid(...pos)) continue; // never add floating frame mass
+      for (const c of ap[band]) {
+        const w = probeSolid(c);
+        if (!inSpan(w)) continue; // air column, or a surface far off the pane (eave/far wall) — never frame those
+        const pos = posAt(c.au, c.av, w);
         if (bareBlock(targetOcc.block(...pos)) === frameBlock) { report.applied[band]++; continue; }
         if (place(pos, frameBlock)) report.applied[band]++;
       }
+      if (report.applied[band] === 0) conflict(band, `${band}-no-band-cells`, `${band}-skipped`);
     }
 
     // --- door leaf/leaves (door kind) --------------------------------------------------------------
     if (applicable.includes("door")) {
       if (!slots.door) conflict("door", "no-door-treatment", "left-undressed");
       else {
-        const avs = ap.cells.map((c) => c.av);
+        const paneAt = new Map(paneCells.map((c) => [`${c.au},${c.av}`, c.w]));
+        const avs = paneCells.map((c) => c.av);
         const yBottom = Math.min(...avs);
         const height = new Set(avs).size;
-        const bottomCols = [...new Set(ap.cells.filter((c) => c.av === yBottom).map((c) => c.au))]
+        const bottomCols = [...new Set(paneCells.filter((c) => c.av === yBottom).map((c) => c.au))]
           .sort((a, b) => a - b);
-        const hasUpper = (au) => ap.cells.some((c) => c.au === au && c.av === yBottom + 1);
-        if (height < 2 || !bottomCols.some(hasUpper)) {
+        const upperW = (au) => paneAt.get(`${au},${yBottom + 1}`) ?? null;
+        if (height < 2 || !bottomCols.some((au) => upperW(au) !== null)) {
           conflict("door", "door-too-short", "left-undressed");
         } else {
           let leaves;
@@ -363,23 +394,28 @@ export function dressOpenings(targetOcc, apertures, treatments) {
             conflict("door", "door-wide-aperture", "centered-single-leaf");
           }
           for (const { au, hinge } of leaves) {
-            if (!hasUpper(au)) { conflict("door", "door-column-too-short", "leaf-skipped"); continue; }
+            const wL = paneAt.get(`${au},${yBottom}`);
+            const wU = upperW(au);
+            if (wU === null) { conflict("door", "door-column-too-short", "leaf-skipped"); continue; }
+            if (wU !== wL) { conflict("door", "door-halves-misaligned", "leaf-skipped"); continue; }
             const base = { facing: COMPASS[ap.dir], hinge, open: "false" };
-            const okL = placeAtPane("door", posAt(au, yBottom, planeW), slots.door.block, { ...base, half: "lower" });
-            const okU = placeAtPane("door", posAt(au, yBottom + 1, planeW), slots.door.block, { ...base, half: "upper" });
+            const okL = placeAtPane("door", posAt(au, yBottom, wL), slots.door.block, { ...base, half: "lower" });
+            const okU = placeAtPane("door", posAt(au, yBottom + 1, wU), slots.door.block, { ...base, half: "upper" });
             if (okL && okU) report.applied.door++;
           }
         }
       }
     }
 
-    // --- lantern beside the door's top row (door kind) ---------------------------------------------
+    // --- lantern beside the door's top row (door kind), on the door's own jamb --------------------
     if (applicable.includes("light") && slots.light) {
-      const avTop = Math.max(...ap.cells.map((c) => c.av));
+      const avTop = Math.max(...paneCells.map((c) => c.av));
       const sides = [ap.flanks.right, ap.flanks.left].map((f) => f.find((c) => c.av === avTop)).filter(Boolean);
       let placed = false;
-      for (const { au, av } of sides) {
-        const pos = posAt(au, av, wOut);
+      for (const c of sides) {
+        const jw = rowPaneW(c);
+        if (jw === null || !targetOcc.solid(...posAt(c.au, c.av, jw))) continue;
+        const pos = posAt(c.au, c.av, jw - step);
         const cur = targetOcc.block(...pos);
         if (cur !== null && bareBlock(cur) === bareBlock(slots.light.block)) { alreadyDressed++; opPositions.push(pos); report.applied.light++; placed = true; break; }
         if (targetOcc.has(...pos)) continue;
@@ -389,7 +425,7 @@ export function dressOpenings(targetOcc, apertures, treatments) {
     }
 
     // --- the opening's placement footprint (the allow-list extension, design D8) -------------------
-    for (const { au, av } of ap.cells) opPositions.push(posAt(au, av, planeW));
+    for (const { au, av, w } of paneCells) opPositions.push(posAt(au, av, w));
     const rMin = [Infinity, Infinity, Infinity], rMax = [-Infinity, -Infinity, -Infinity];
     for (const p of opPositions) for (let i = 0; i < 3; i++) {
       if (p[i] < rMin[i]) rMin[i] = p[i];
