@@ -123,3 +123,8 @@ benchmarks/sculpture/zone-map/**/*.png
 benchmarks/sculpture/multi-angle/**/*.png
 # …except the synthetic-positive fixture's concept (a committed INPUT, not a regenerable output)
 !benchmarks/sculpture/multi-angle/fixtures/**
+
+# T-095-01 challenge-milestone renders — regenerable via npm run challenge:{cottage,gatehouse,church}.
+# The durable record is challenge/<subj>.{json,md} + challenge/<subj>/{base-,shell-,}artifact.json;
+# the committed evidence frames live in pr/assets/frames/challenge-*.png + multi-angle-*-challenge.png.
+benchmarks/sculpture/challenge/**/*.png
