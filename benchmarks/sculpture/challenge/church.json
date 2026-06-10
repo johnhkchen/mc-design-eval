@@ -1,0 +1,14 @@
+{
+  "schema": "challenge-milestone/v1",
+  "subject": "church",
+  "status": "pipeline-failed",
+  "stage": "skin",
+  "error": "coverage gate FAILED on the final skin: band0 stone=0.332 < 0.5",
+  "inputs": {
+    "build": null,
+    "concept": "runs/016-vBuilding-a-village-church-with-a-square-bell-tower/concept.png",
+    "glb": "glb/church.glb",
+    "map": "material-map/church.json"
+  },
+  "note": "a terminal gate or chain stage threw — recorded honestly (E-25 Rule 6); nothing was tuned in response"
+}

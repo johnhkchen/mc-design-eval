@@ -101,7 +101,17 @@ async function main() {
   const results = {};
   for (const k of keys) {
     const def = SUBJECTS[k];
-    const r = await buildSkin(def); // derived by default; throws on any pipeline gate failure
+    let r;
+    try {
+      r = await buildSkin(def); // derived by default; throws on any pipeline gate failure
+    } catch (e) {
+      // A sweep DEFERS a failing subject (material-map precedent) — no record is written for it;
+      // its own named command (skin:<k> / challenge:<k>) is where that failure is the result.
+      // An explicit --subject <k> request still fails loudly.
+      if (subjArg !== "all") throw e;
+      console.error(`[${k}] DEFERRED — pipeline gate threw: ${e.message}`);
+      continue;
+    }
     results[k] = r;
     const rec = recordOf(def, r);
     await writeFile(join(OUT_DIR, `${k}.json`), JSON.stringify(rec, null, 2) + "\n");

@@ -160,6 +160,49 @@ export const SUBJECTS = {
     plasterInvariant: null,
     frontDir: "+z", sideDir: "+x",
   },
+  // THE E-25 CHALLENGE SUBJECT (T-094-01 registered concept+GLB; T-095-01 ran it). UNTUNED
+  // CONTRACT: this entry is registry DATA only — paths, the working scale, and a fallback prior
+  // transcribed 1:1 from the committed material-map/church.json roles (the gatehouse precedent;
+  // transcription, not tuning): walls=cobblestone field, corners-edges/base=stone_bricks,
+  // trim=polished_andesite, openings=black_stained_glass, roof=dark_oak_planks. The live path is
+  // the concept-derived zone map; no committed zone-map/value-select/kit records exist (first
+  // contact — nullable by design). `build` is provisioned BY the challenge runner (GLB + map at
+  // `provision.scale`, the smoke-checked voxelization scale); `provision` is consumed only there.
+  church: {
+    key: "church",
+    build: "challenge/church/base-artifact.json",
+    concept: "runs/016-vBuilding-a-village-church-with-a-square-bell-tower/concept.png",
+    glb: "glb/church.glb",
+    map: "material-map/church.json",
+    valueSelectRecord: null, // first run IS the value-true result (gatehouse precedent)
+    zoneMapRecord: null,     // no committed derivation — the challenge record carries the first one
+    kitRecord: null,         // kits are E-26 scope; optional in buildSkin
+    provision: { scale: 48 },
+    policy: { // FALLBACK PRIOR, from material-map/church.json roles (1:1 rule→block transcription)
+      base: {
+        dominant: "cobblestone",                                            // structural wall body
+        preserve: ["stone_bricks", "polished_andesite", "black_stained_glass"], // quoins/plinth + trim + glazing
+        splat: ["stone_bricks", "polished_andesite", "black_stained_glass"],
+      },
+      upper: {
+        dominant: "cobblestone",                                            // same field — single-material body
+        preserve: ["stone_bricks", "polished_andesite", "black_stained_glass"],
+        splat: ["stone_bricks", "polished_andesite", "black_stained_glass"],
+      },
+      roof: {
+        dominant: "dark_oak_planks",                                        // roof mass + tower cap
+        preserve: [],                                                       // anything else on the roof is salt
+        splat: [],
+      },
+    },
+    legacy: { // the E-23 splat-only counterfactual (no E-23 skin ever existed — labeled in the record)
+      base: ["cobblestone", "stone_bricks", "polished_andesite", "black_stained_glass"],
+      upper: ["cobblestone", "stone_bricks", "polished_andesite", "black_stained_glass"],
+      roof: ["dark_oak_planks"],
+    },
+    plasterInvariant: null,
+    frontDir: "+z", sideDir: "+x",
+  },
 };
 
 const bare = (id) => String(id).replace(/^minecraft:/, "");
