@@ -2201,3 +2201,85 @@ band measured 0 and views failed on *naming*, not coverage. The fix is at the ga
 point (kit overrides composed over the substitution, allowed-guarded). Symmetric lesson to "recognition
 beats snap": any new renaming layer must be applied at every consumer's naming seam, or downstream
 instruments silently measure the wrong block.
+
+## Concept style kit (E-26) — recognize the blocks, place them by grammar, gate on their presence (S-096…S-101, T-101-01) · 2026-06-10
+
+**The five-whys that opened the epic.** The original complaint: the cottage concept's instantly
+identifiable ingredients — smooth sandstone panels, a timber frame, trapdoor shutters, fence-infilled
+windows — were absent from builds that nevertheless *passed gates*. Why ×5 bottoms out in a contract
+error: E-21's material map asked the model **which color** each role should be, not **which block**
+the concept depicts. Concept art depicts *nameable blocks* (a Minecraft artist drew trapdoors, not
+"medium-brown rectangles"); mean-color matching collapsed near-tone-distinct materials and silently
+dropped every non-cube fixture. The fix is recognition: T-096 extracts a **kit** ({block, role,
+formClass, whereUsed, confidence}) from the concept by multimodal recognition, validated against the
+survival vocabulary, with values **verified** in chroma-weighted CIE-Lab (flag-for-review after
+removing the shared concept-shading offset — never a silent color-snap). Recognition beats snap:
+smooth_sandstone replaced the white_terracotta snap on cottage band1; trapdoor/door/lantern were
+recovered; the fence the model couldn't name was recorded as an honest fallback and later derived by
+species (spruce_trapdoor → spruce_fence), reversibly.
+
+**The fixture path exists and the lens has one named hole.** T-097 proved placement + render for
+trapdoors, fences, slabs, doors, lanterns with CARD_ROWS as the block-state vocabulary — and proved
+by read-back that NO stair block renders at any state in prismarine-viewer 1.33.0. Stairs stay out
+of kits until the lens is fixed; that's an instrument boundary, not a design choice.
+
+**Placement is grammar, not paint.** T-098 binds the kit to structural sites — frame block on the
+frame lines (corner posts, eave/rake crowns, floor-line beams), panels and courses re-realized
+through zoneFill itself — under the T-090-01 contract proven not assumed: `frameRefilled` MUST be 0
+(the frame is an honored declared secondary of every band it crosses). T-099 dresses the
+concept-declared apertures (measured on the raw pre-seal reference; the skin's sealed panes are
+re-opened by last-write-wins) with kit treatments; every conflict is named, unfulfilled slots are
+recorded, and shutters hang by Minecraft-compass ground truth.
+
+**The gate that doesn't enumerate can't demand.** The 512px judge names "material zoning," never
+"missing trapdoor shutters" — so missing ingredients hid behind verdicts for four epics. T-100's
+kit-presence checker enumerates by the **fixpoint rule**: an ingredient is present at its sites iff
+re-running the pure op that supplies it is a no-op there. Absences come back named
+(`missing: spruce_trapdoor shutters @ openings 3/4`); tolerated geometry is inherited from the ops
+that define it; the verdict composes as resemblance AND presence — both run, both reported.
+
+**The terminal milestone (T-101): one named run, and the two seams only composition could surface.**
+`styled:{cottage,gatehouse,church}` runs kit (committed record, pinned by its raw reply) → shell →
+skin → grammar → dressing → settle → the kit-aware gate, double-run byte-compared, `--repro`/
+`--offline` proofs, honest `pipeline-failed` records. Composing the stages end-to-end surfaced two
+instrument seams no single-stage run could see:
+1. **Dominant-only per-view coverage rejected the styling itself.** The styled band1 at 45° is 23%
+   dominant but **96% own materials** (frame + logs + panels) — the T-088 per-view census, built for
+   monolithic plaster fields, counted the kit's supplied ingredients as under-coverage and never
+   called the judge. Fix: census **own materials** (dominant + declared preserve — exactly T-090's
+   band-evidence set). Strictly monotone (anything that passed still passes); foreign leakage still
+   fails.
+2. **The dressing perturbs the grammar's own read.** Re-opening panes changes the frame-line
+   geometry near apertures (one chimney-adjacent cell flipped to paintable) and breaks kept runs
+   (6 own-vocabulary residue cells). The styled chain now re-runs the SAME grammar op to its own
+   bounded fixpoint (**settle**: cottage 1 iteration, gatehouse 2) — the styled build is a no-op for
+   the op the checker re-runs, and the settle is the post-dressing cleanliness pass T-100 predicted.
+
+**Milestone outcomes — the kit claim closed; form did not.** Cottage: kit presence **PASS, zero
+gaps** (door/light are named detector skips), all four views reach the judge, resemblance FAIL
+12/2 — major form@roof at three obliques, while the timber framing reads as *minor zoning*: the
+ingredients are now visibly there, and the residual gap is the E-25 roof-form finding, untouched by
+styling (as predicted — no amount of skinning or dressing fixes voxel form). Gatehouse, untuned:
+kit presence PASS with the kit's own four named skips (it ships no opening treatments); resemblance
+FAIL 12/2 with two different-object views (form/massing — its E-25 result). Church, untuned: blocked
+at the named kit precondition — kit extraction needs a committed zone-map record, zone derivation
+runs inside the skin chain, and the chain still fails the T-088 skin gate (band0 stone 0.33 < 0.5,
+the E-25 provision finding); the styled record names the whole dependency chain rather than
+inventing a kit nothing validates.
+
+**Over-reach, honestly.** The shared-shading offset in kit value-verification is a judgment call
+calibrated on this data (whitelist-quantization circularity noted in T-096). The species-fence
+derivation is policy, not recognition. The checker tolerates own-vocabulary sub-minRun residue —
+principled (the fill's cleanliness contract) but it widens what "present" accepts. The settle pass
+can undo isolated dressing jamb recolors (the run rule wins — recorded, visible in counts).
+Under-reach: door detection still can't see the cottage's non-through doorway (skip, not absence);
+stairs are lens-blocked; the roof-form gap needs a form-stage fix (E-15/E-16 territory), not a
+material one; church needs the E-21 provision stage generalized before any styling applies.
+
+**E-12 handoff.** The scoring layer should consume, per subject: `benchmarks/sculpture/styled/
+<subj>.json` (the chain record: stage evidence, settle, sha256s), `multi-angle/<subj>-styled.json`
+(per-view verdicts + `kitPresence` + `overall`), and `pr/assets/styled-<subj>-kit.md` (the kit with
+its presence verdict). The deterministic presence verdict is the accountability instrument (cheap,
+named, reproducible); the judge is the perceptual one (metered, pinned-model, single-sample) —
+score them as components, never collapse them: the epic's lesson is that one number hid the other
+for four epics.
