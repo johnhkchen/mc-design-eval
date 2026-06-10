@@ -39,7 +39,21 @@ Ticket-shape confirmation: two attached masses (nave + square bell tower) · two
 (pitched nave gable + pyramidal tower cap) · ≥3 material zones (stone walls, dark roof, timber
 door, light trim) — matches the AC's subject definition.
 
-## Sign-off (after GLB + voxelization smoke-check)
+## Sign-off (GLB + voxelization smoke-check) — ✓ PASSED, registered 2026-06-10
 
-_Pending — filled after `trellis-glb.mjs` → `glb-smoke.mjs` (single-bulky-mass gate at the
-working scale 48)._
+`trellis-glb.mjs` (MODAL_ENDPOINT_URL from the gitignored `.env`, defaults
+decimation 150000 / texture 1024 / seed 42) → `glb/church.glb`: 6,469,100 bytes, glTF v2,
+magic OK, 343.6s (cold start). Mesh: 132,892 verts / 146,118 tris.
+
+`glb-smoke.mjs --scale 48` (the working scale): dims **48×37×40**, 11,423 cells —
+**26-conn: 1 component, largestFraction 1.0000** (GATE: pass — a single bulky mass, no
+moai-style fragmentation); 6-conn: 70 components, largestFraction 0.9552 (reported only;
+thin-shell surface artifact — cleaner than the gatehouse's recorded 0.8283). Gate validated
+against controls before judging church: stone-gatehouse PASSES reproducing its recorded
+numbers (1 @26-conn, 27,620 cells), moai FAILS (3 components, largestFraction 0.5213 — the
+retirement defect, caught).
+
+**`church` is hereby registered** (`CHALLENGE_SUBJECTS` in `benchmarks/sculpture/resemblance.mjs`:
+concept = this run's `concept.png`, glb = `church.glb`, scale = 48). The concept is IMMUTABLE
+from this point (E-25 Rule 2). No build, material map, or skin exists — the building pipeline
+must later consume it UNTUNED (E-25 Rule 3).

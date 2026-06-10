@@ -16,16 +16,31 @@ The `.glb` binaries are **gitignored** (~5 MB each, regenerable); this manifest 
 | `koi.glb` | koi fish (the flattened S-curve) | `runs/009-vConcept-a-koi-fish/concept.png` | 95,147 | 143,664 | 4.95 MB |
 | `heart.glb` | anatomical heart (the open aortic arch) | `runs/006-…-human-heart/concept.png` | 106,365 | 145,210 | 5.42 MB |
 | `dancing-man.glb` | dancing man | `runs/002-vConcept-a-dancing-man/concept.png` | 80,130 | 143,727 | 4.43 MB |
-| `moai.glb` | moai statue | `runs/003-vConcept-a-moai-statue/concept.png` | 96,453 | 142,336 | 5.10 MB |
+| `moai.glb` | moai statue *(retired as a measurement subject, T-094-01)* | `runs/003-vConcept-a-moai-statue/concept.png` | 96,453 | 142,336 | 5.10 MB |
 | `pineapple.glb` | pineapple | `runs/004-vConcept-a-pineapple/concept.png` | 93,159 | 146,617 | 4.93 MB |
 | `bow-and-arrow.glb` | bow & arrow | `runs/005-vConcept-a-bow-and-arrow/concept.png` | 99,392 | 141,585 | 5.15 MB |
 | `mushroom.glb` | mushroom | `runs/008-vConcept-a-mushroom/concept.png` | 90,522 | 144,487 | 5.08 MB |
 | `cottage.glb` | **full building** (E-20 de-risk, one-off helper) | `runs/014-vConcept-a-cottage/concept.png` | 122,530 | 137,257 | 5.88 MB |
 | `stone-gatehouse.glb` | **full building** (E-20/S-067 **formal mode**) | `runs/015-vBuilding-…-gatehouse-…/concept.png` | 99,363 | 143,053 | 5.02 MB |
+| `church.glb` | **full building — the E-25 CHALLENGE subject** (T-094-01) | `runs/016-vBuilding-a-village-church-with-a-square-bell-tower/concept.png` | 132,892 | 146,118 | 6.47 MB |
 
 All: valid binary glTF v2, 1 mesh / 1 primitive, **2 textures** (the baseColor surface texture is what
 E-17's material-clean pass mines via the CIE-Lab palette technique), 1 material. Sculptures generated
-2026-06-05; cottage + stone-gatehouse 2026-06-06.
+2026-06-05; cottage + stone-gatehouse 2026-06-06; church 2026-06-10.
+
+**church (T-094-01) — the checklist-gated challenge subject.** Cottage and gatehouse were both used to
+develop the E-25 building pipeline, so passing on them cannot prove generalization (Rule 3 needs a
+subject the code has never seen). The church was provisioned concept-first via
+`provision-concept.mjs` (vConcept building mode, stages 1+2 only — deliberately **no build**), judged
+against the **concept sanity checklist** recorded beside the image
+(`runs/016-…/concept-checklist.md`; attempt 1 was REJECTED for a thin gold cross finial — the
+moai/sword thin-member lesson applied *before* spending the TRELLIS call), then minted here and
+smoke-checked with `glb-smoke.mjs` at the working scale 48: dims 48×37×40, 11,423 cells, **26-conn 1
+component / largestFraction 1.0000** (6-conn 0.9552, reported only). The gate's controls: gatehouse
+PASSES reproducing the numbers above; moai FAILS (3 components, largestFraction 0.5213) — the
+fragmentation that retired it. Registered in `CHALLENGE_SUBJECTS`
+(`benchmarks/sculpture/resemblance.mjs`) as paths+scale only; no material map, build, or skin exists —
+the pipeline must later run it untuned.
 
 **TRELLIS reconstructs a full BUILDING (E-20/S-067 — PASSED, mode now formalized).** Two building GLBs
 confirm it. `cottage.glb` was the de-risk (one-off `building-concept.mjs` helper). `stone-gatehouse.glb`
