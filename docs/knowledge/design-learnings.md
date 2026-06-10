@@ -2160,3 +2160,44 @@ gatehouse's 0.83). The gate was validated both ways first: gatehouse passes repr
 numbers; moai fails. Registration is `CHALLENGE_SUBJECTS` in `resemblance.mjs` — concept path, GLB
 path, scale, **nothing else**: no material map, no build, no skin, no runner consumes it yet. The whole
 point is that when the pipeline runs it, it runs it untuned.
+
+## The concept-faithful pipeline ran end-to-end — and the milestone names what still fails (E-25, T-095-01)
+
+**One command per subject now runs the whole chain.** `challenge:{cottage,gatehouse,church}` compose
+the epic's stages in order — provision (challenge subjects only) → shell integrity (T-091) →
+concept-derived zone map (T-092) → full-shell zone-fill with value-true + kit + secondaries +
+coherence (E-24) → the multi-angle same-object gate (T-093) — with the deterministic stretch executed
+twice per invocation and byte-compared, a `--repro` fresh-process re-proof, and gate failures recorded
+as `pipeline-failed` results rather than tuned away. The records are
+`benchmarks/sculpture/challenge/<subj>.{json,md}`; the sheets are the deliverable
+(`pr/assets/frames/multi-angle-<subj>-challenge.png`).
+
+**Full-shell + closure survived; roof FORM is still THE gap.** Shell repair (cottage 24→1 components,
+958 voids; gatehouse 23→3, 820 voids; both CLOSED) and the exposure-shell skin gates (all bands ≥ 63%)
+pass on both developed subjects — plan-view coverage ≠ skinned is fixed at the *material* level. The
+judge then fails both subjects the same way it failed the T-093 baseline: **major form/massing@roof at
+the 30° contract elevation** (cottage 2× drifted + 1 coverage; gatehouse 2× different-object + 2×
+drifted). One genuine improvement: the cottage's 315° view now reads **same object** (2 minor gaps) —
+the first real-subject view ever to pass a judged azimuth. Zoning and value-truth were never the
+oblique problem; voxel roof *form* is, and no amount of skinning fixes it.
+
+**Concept-derived zoning beats priors, and shifts under repair — recorded, not gated.** The derivation
+re-run on the shell-repaired builds diverges from the committed unrepaired-build records (cottage band1
+y7..13 → y7..16): band extents are a function of geometry, so the chain records the derived map + a
+diff vs the committed record instead of asserting agreement across different geometry. Honesty
+preserved, determinism preserved.
+
+**The church generalization run failed exactly where it should.** The pipeline is provably generic —
+`grep church` hits registry data only — and the untuned run produced a *named* blocker, not noise: the
+E-21 feature-assigner hands corners/base/openings ~55% of the church's lower shell (tower + buttresses
++ many windows), the concept's cobble wall field tops out at 0.33, and the T-088 coverage gate refuses
+to ship the skin. Over-reach honestly stated: the E-24 skin machinery generalized; the E-21 provision
+stage did not. The secondary-share problem routes to E-26 (kit grammar, dressed openings), not to gate
+tuning.
+
+**Instrument lesson: name spaces must compose at every seam.** The multi-angle gate censused the NAMED
+policy through the value-true substitution but was blind to T-096's kit overrides — every kit-renamed
+band measured 0 and views failed on *naming*, not coverage. The fix is at the gate's single renaming
+point (kit overrides composed over the substitution, allowed-guarded). Symmetric lesson to "recognition
+beats snap": any new renaming layer must be applied at every consumer's naming seam, or downstream
+instruments silently measure the wrong block.
