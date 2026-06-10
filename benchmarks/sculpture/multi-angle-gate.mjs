@@ -44,7 +44,7 @@ import {
 import {
   resampleRgba, silhouetteToRgba, composeTriptych, composeSheet, RESEMBLANCE_DEFAULTS,
 } from "../../src/form/resemblance.mjs";
-import { VIEW_ANGLES, resolveAngle, renderViews } from "../../src/view/multi-angle.mjs";
+import { resolveAngle, renderViews } from "../../src/view/multi-angle.mjs";
 import { structuralZones } from "../../src/view/structural-read.mjs";
 import { surfaceZoneHistogram, dominantCoverage } from "../../src/view/zone-fill.mjs";
 import { coverageGate, DEFAULT_COVERAGE_THRESHOLD } from "../../src/view/face-resemblance.mjs";
@@ -62,6 +62,26 @@ import { loadMeshFromGlb, rasterizeSilhouette } from "../../src/form/glb-silhoue
 import { encodeRgbaToPng } from "../../render/src/headless-canvas.mjs";
 import { assertArtifact } from "../../src/artifact.mjs";
 import { SUBJECTS } from "./durable-skin.mjs";
+
+// THE GATE REGISTRY: the pipeline subjects + the synthetic-positive fixture (registry DATA only —
+// E-25 Rule 3). "synthetic-hut" exists to prove the gate's PASS path end-to-end: its "concept" is a
+// committed render of its own artifact, so ground truth is same-object by construction; it is labeled
+// synthetic in every record and is NOT a pipeline subject.
+const GATE_SUBJECTS = {
+  ...SUBJECTS,
+  "synthetic-hut": {
+    key: "synthetic-hut",
+    concept: "multi-angle/fixtures/hut/concept.png",
+    map: "multi-angle/fixtures/hut/material-map.json",
+    glb: "multi-angle/fixtures/hut/none.glb", // absent by design — mesh panel falls back to placeholder
+    build: "multi-angle/fixtures/hut/artifact.json",
+    policy: { // fallback prior, mirrors the fixture's two materials
+      base: { dominant: "stone_bricks", preserve: [], splat: [] },
+      upper: { dominant: "stone_bricks", preserve: [], splat: [] },
+      roof: { dominant: "spruce_planks", preserve: [], splat: [] },
+    },
+  },
+};
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 const HERE = join(ROOT, "benchmarks/sculpture");
@@ -147,10 +167,10 @@ async function main() {
   const argv = process.argv.slice(2);
   const arg = (name) => (argv.includes(name) ? argv[argv.indexOf(name) + 1] : null);
   const subjectKey = arg("--subject");
-  const def = SUBJECTS[subjectKey];
-  if (!def) throw new Error(`--subject must be one of: ${Object.keys(SUBJECTS).join(", ")}`);
+  const def = GATE_SUBJECTS[subjectKey];
+  if (!def) throw new Error(`--subject must be one of: ${Object.keys(GATE_SUBJECTS).join(", ")}`);
   const label = arg("--label") ?? "current";
-  const artifactRel = arg("--artifact") ?? `durable-skin/${def.key}/artifact.json`;
+  const artifactRel = arg("--artifact") ?? (def.build?.startsWith("multi-angle/") ? def.build : `durable-skin/${def.key}/artifact.json`);
   const offline = argv.includes("--offline");
   const slug = `${def.key}-${label}`;
   const recPath = join(OUT_DIR, `${slug}.json`);
@@ -228,13 +248,13 @@ async function main() {
   if (renderError) {
     console.error(`[${slug}] RENDER FAILED — the gate refuses to produce a verdict: ${renderError}`);
     for (const a of azimuths) {
-      views.push({ angle: a, azimuthDeg: VIEW_ANGLES[a].azimuthDeg, rendered: false, render: { error: renderError }, coverage: null, verdict: null, judge: null });
+      views.push({ angle: a, azimuthDeg: resolveAngle(a).azimuthDeg, rendered: false, render: { error: renderError }, coverage: null, verdict: null, judge: null });
       panels.push(grey);
     }
   } else {
     for (const r of renders) {
       const a = r.angle;
-      const az = VIEW_ANGLES[a].azimuthDeg;
+      const az = resolveAngle(a).azimuthDeg;
       // T-088 PRECONDITION on THIS view's visible skin: the diagonal projection census.
       const cov = coverageGate(
         dominantCoverage(surfaceZoneHistogram(occ, derived.zoneOf, { faces: [a], skin: "projection" }), zonesShipped),

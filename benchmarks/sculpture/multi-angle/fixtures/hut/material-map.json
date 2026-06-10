@@ -1,0 +1,20 @@
+{
+  "schema": "material-map/v1",
+  "subject": "synthetic-hut",
+  "note": "T-093-01 synthetic-positive fixture: the concept is a render of the fixture artifact itself, so ground truth is SAME OBJECT by construction. Validates the gate's pass path end-to-end.",
+  "map": [
+    {
+      "role": "wall field",
+      "block": "minecraft:stone_bricks",
+      "placementRule": "walls",
+      "rationale": "the hut's single wall material"
+    },
+    {
+      "role": "roof field",
+      "block": "minecraft:spruce_planks",
+      "placementRule": "roof",
+      "rationale": "the pyramid roof material"
+    }
+  ],
+  "palette": ["minecraft:stone_bricks", "minecraft:spruce_planks"]
+}

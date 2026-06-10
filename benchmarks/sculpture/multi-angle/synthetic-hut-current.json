@@ -1,0 +1,256 @@
+{
+  "schema": "multi-angle-gate/v1",
+  "subject": "synthetic-hut",
+  "label": "current",
+  "artifact": {
+    "path": "benchmarks/sculpture/multi-angle/fixtures/hut/artifact.json",
+    "sha256": "0db4c89694f9095edd3598782b75ae740b07e5dc6eaf6621c4d0ad63a9ee4096"
+  },
+  "contract": {
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "elevationDeg": 30,
+    "width": 512,
+    "height": 512,
+    "gapBudget": 2,
+    "coverageThreshold": 0.5,
+    "note": "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them"
+  },
+  "zones": {
+    "source": "concept",
+    "reason": null,
+    "policy": {
+      "band0": {
+        "dominant": "stone_bricks",
+        "preserve": [
+          "spruce_planks"
+        ]
+      },
+      "roof": {
+        "dominant": "spruce_planks",
+        "preserve": []
+      }
+    },
+    "substitutionApplied": {
+      "stone_bricks": "stone"
+    }
+  },
+  "views": [
+    {
+      "angle": "+x+z",
+      "azimuthDeg": 45,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/synthetic-hut-current/view-+x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "stone_bricks",
+            "fraction": 1,
+            "total": 147,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 25,
+            "passed": true
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "same object",
+        "gaps": [
+          {
+            "region": "roof overhang depth",
+            "attribute": "massing",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The build matches the concept's stone-brick base and overhanging brown-plank roof in form, massing, and palette at this angle, reading clearly as the same structure."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 11091,
+          "output_tokens": 408,
+          "cost_usd": 0.124515
+        }
+      }
+    },
+    {
+      "angle": "+x-z",
+      "azimuthDeg": 135,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/synthetic-hut-current/view-+x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "stone_bricks",
+            "fraction": 1,
+            "total": 147,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 25,
+            "passed": true
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "same object",
+        "gaps": [
+          {
+            "region": "roof overhang front edge",
+            "attribute": "form",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The stone-walled body with brown plank roof and matching overhang reads as the same gatehouse seen from azimuth 135°, with only a slightly thinner roof eave as a cosmetic difference."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10601,
+          "output_tokens": 123,
+          "cost_usd": 0.11493999999999999
+        }
+      }
+    },
+    {
+      "angle": "-x-z",
+      "azimuthDeg": 225,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/synthetic-hut-current/view--x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "stone_bricks",
+            "fraction": 1,
+            "total": 147,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 25,
+            "passed": true
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "same object",
+        "gaps": [],
+        "rationale": "The Minecraft panel shows the same stone-brick cube base with an overhanging brown stepped roof as the concept, with matching form, massing, material zoning, and palette from azimuth 225°."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 11009,
+          "output_tokens": 357,
+          "cost_usd": 0.12283
+        }
+      }
+    },
+    {
+      "angle": "-x+z",
+      "azimuthDeg": 315,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/synthetic-hut-current/view--x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "stone_bricks",
+            "fraction": 1,
+            "total": 147,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 25,
+            "passed": true
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "same object",
+        "gaps": [],
+        "rationale": "The Minecraft panel shows the same stone-brick base capped by an overhanging brown plank roof slab as the concept, with matching form, massing, material zoning, and palette from this angle."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 11009,
+          "output_tokens": 438,
+          "cost_usd": 0.124855
+        }
+      }
+    }
+  ],
+  "aggregate": {
+    "schema": "multi-angle-gate/v1",
+    "decided": true,
+    "passed": true,
+    "gapCount": 2,
+    "gapBudget": 2,
+    "gaps": [
+      {
+        "angle": "+x+z",
+        "region": "roof overhang depth",
+        "attribute": "massing"
+      },
+      {
+        "angle": "+x-z",
+        "region": "roof overhang front edge",
+        "attribute": "form"
+      }
+    ],
+    "failures": [],
+    "views": [
+      {
+        "angle": "+x+z",
+        "outcome": "same object (1 minor)"
+      },
+      {
+        "angle": "+x-z",
+        "outcome": "same object (1 minor)"
+      },
+      {
+        "angle": "-x-z",
+        "outcome": "same object"
+      },
+      {
+        "angle": "-x+z",
+        "outcome": "same object"
+      }
+    ]
+  },
+  "sheet": "pr/assets/frames/multi-angle-synthetic-hut-current.png",
+  "labeled": true
+}

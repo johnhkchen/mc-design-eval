@@ -1,0 +1,409 @@
+{
+  "schema": "multi-angle-gate/v1",
+  "subject": "cottage",
+  "label": "current",
+  "artifact": {
+    "path": "benchmarks/sculpture/durable-skin/cottage/artifact.json",
+    "sha256": "2b526194fe2c36ef3b6446334ad0ce7a9069fb9a0a248816bc8b0bcda0ee1b67"
+  },
+  "contract": {
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "elevationDeg": 30,
+    "width": 512,
+    "height": 512,
+    "gapBudget": 2,
+    "coverageThreshold": 0.5,
+    "note": "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them"
+  },
+  "zones": {
+    "source": "concept",
+    "reason": null,
+    "policy": {
+      "band0": {
+        "dominant": "tuff",
+        "preserve": [
+          "dark_oak_log",
+          "spruce_planks",
+          "dark_oak_planks",
+          "cobblestone",
+          "bricks"
+        ]
+      },
+      "band1": {
+        "dominant": "sandstone",
+        "preserve": [
+          "spruce_planks",
+          "dark_oak_planks",
+          "dark_oak_log",
+          "cobblestone",
+          "bricks"
+        ]
+      },
+      "roof": {
+        "dominant": "dark_oak_planks",
+        "preserve": [
+          "spruce_planks",
+          "dark_oak_log",
+          "cobblestone",
+          "bricks"
+        ]
+      }
+    },
+    "substitutionApplied": {
+      "stone_bricks": "tuff",
+      "white_terracotta": "sandstone"
+    }
+  },
+  "views": [
+    {
+      "angle": "+x+z",
+      "azimuthDeg": 45,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-current/view-+x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "tuff",
+            "fraction": 0.646,
+            "total": 277,
+            "passed": true
+          },
+          "band1": {
+            "dominant": "sandstone",
+            "fraction": 0.519,
+            "total": 291,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.54,
+            "total": 454,
+            "passed": true
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "roof eaves/edges",
+            "attribute": "form",
+            "severity": "minor"
+          },
+          {
+            "region": "walls vs roof proportion",
+            "attribute": "massing",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "Palette and stone-base/plaster zoning read true, but the brown roof mass is oversized and irregular relative to the wall storeys, exceeding the cleaner roof bulk shown in the mesh and concept and shrinking the timber-framed walls to a sliver."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 12270,
+          "output_tokens": 977,
+          "cost_usd": 0.144635
+        }
+      }
+    },
+    {
+      "angle": "+x-z",
+      "azimuthDeg": 135,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-current/view-+x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "tuff",
+            "fraction": 0.73,
+            "total": 270,
+            "passed": true
+          },
+          "band1": {
+            "dominant": "sandstone",
+            "fraction": 0.567,
+            "total": 282,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.521,
+            "total": 445,
+            "passed": true
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "white-plaster timber-framed wall storey",
+            "attribute": "material zoning",
+            "severity": "major"
+          },
+          {
+            "region": "chimney on the ridge",
+            "attribute": "form",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The brown roof has overgrown into a sprawling, jagged mass that swallows nearly the whole form, leaving only a sliver of the white timber-framed wall storey and no chimney, whereas both references show a balanced roof sitting above a prominent white-walled storey on a stone base."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 11009,
+          "output_tokens": 826,
+          "cost_usd": 0.13455499999999998
+        }
+      }
+    },
+    {
+      "angle": "-x-z",
+      "azimuthDeg": 225,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-current/view--x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "tuff",
+            "fraction": 0.87,
+            "total": 277,
+            "passed": true
+          },
+          "band1": {
+            "dominant": "sandstone",
+            "fraction": 0.708,
+            "total": 291,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.52,
+            "total": 454,
+            "passed": true
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "upper storey walls",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The stone base, cream-and-timber walls, brown roof and chimney match the references in massing and palette, but the roof reads as a jumble of exposed beams and disordered planks rather than the clean coherent roof mass the concept and mesh silhouette show from this angle."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 11009,
+          "output_tokens": 1321,
+          "cost_usd": 0.14693
+        }
+      }
+    },
+    {
+      "angle": "-x+z",
+      "azimuthDeg": 315,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-current/view--x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "tuff",
+            "fraction": 0.822,
+            "total": 270,
+            "passed": true
+          },
+          "band1": {
+            "dominant": "sandstone",
+            "fraction": 0.727,
+            "total": 282,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.506,
+            "total": 445,
+            "passed": true
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "overall shell / upper storey",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "plaster wall band",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "Stone base, cream plaster, and brown timber palette still read as the same cottage, but the roof has collapsed into a chaotic jumble of protruding loose planks and the shell is fragmented with gaps, failing to fill the clean solid silhouette the mesh shows at this angle."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 11009,
+          "output_tokens": 900,
+          "cost_usd": 0.136405
+        }
+      }
+    }
+  ],
+  "aggregate": {
+    "schema": "multi-angle-gate/v1",
+    "decided": true,
+    "passed": false,
+    "gapCount": 11,
+    "gapBudget": 2,
+    "gaps": [
+      {
+        "angle": "+x+z",
+        "region": "roof",
+        "attribute": "massing"
+      },
+      {
+        "angle": "+x+z",
+        "region": "roof eaves/edges",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x+z",
+        "region": "walls vs roof proportion",
+        "attribute": "massing"
+      },
+      {
+        "angle": "+x-z",
+        "region": "roof",
+        "attribute": "massing"
+      },
+      {
+        "angle": "+x-z",
+        "region": "white-plaster timber-framed wall storey",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "+x-z",
+        "region": "chimney on the ridge",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x-z",
+        "region": "roof",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x-z",
+        "region": "upper storey walls",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x+z",
+        "region": "roof",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x+z",
+        "region": "overall shell / upper storey",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x+z",
+        "region": "plaster wall band",
+        "attribute": "material zoning"
+      }
+    ],
+    "failures": [
+      {
+        "angle": "+x+z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "+x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x+z",
+        "reason": "drifted"
+      }
+    ],
+    "views": [
+      {
+        "angle": "+x+z",
+        "outcome": "drifted: massing"
+      },
+      {
+        "angle": "+x-z",
+        "outcome": "drifted: massing"
+      },
+      {
+        "angle": "-x-z",
+        "outcome": "drifted: form"
+      },
+      {
+        "angle": "-x+z",
+        "outcome": "drifted: form"
+      }
+    ]
+  },
+  "sheet": "pr/assets/frames/multi-angle-cottage-current.png",
+  "labeled": true
+}

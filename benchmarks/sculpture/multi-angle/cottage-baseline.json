@@ -1,0 +1,250 @@
+{
+  "schema": "multi-angle-gate/v1",
+  "subject": "cottage",
+  "label": "baseline",
+  "artifact": {
+    "path": "benchmarks/sculpture/concept-materials/cottage/after-artifact.json",
+    "sha256": "507c11918dc7cd76a9e7c3cf73c9161a7d0d1a026e66fa84969530b8d0b5b1ad"
+  },
+  "contract": {
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "elevationDeg": 30,
+    "width": 512,
+    "height": 512,
+    "gapBudget": 2,
+    "coverageThreshold": 0.5,
+    "note": "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them"
+  },
+  "zones": {
+    "source": "concept",
+    "reason": null,
+    "policy": {
+      "band0": {
+        "dominant": "stone_bricks",
+        "preserve": [
+          "dark_oak_log",
+          "spruce_planks",
+          "dark_oak_planks",
+          "cobblestone",
+          "bricks"
+        ]
+      },
+      "band1": {
+        "dominant": "white_terracotta",
+        "preserve": [
+          "spruce_planks",
+          "dark_oak_planks",
+          "dark_oak_log",
+          "cobblestone",
+          "bricks"
+        ]
+      },
+      "roof": {
+        "dominant": "dark_oak_planks",
+        "preserve": [
+          "spruce_planks",
+          "dark_oak_log",
+          "cobblestone",
+          "bricks"
+        ]
+      }
+    },
+    "substitutionApplied": {
+      "stone_bricks": "tuff",
+      "white_terracotta": "sandstone"
+    }
+  },
+  "views": [
+    {
+      "angle": "+x+z",
+      "azimuthDeg": 45,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-baseline/view-+x+z.png"
+      },
+      "coverage": {
+        "passed": false,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "stone_bricks",
+            "fraction": 0.581,
+            "total": 277,
+            "passed": true
+          },
+          "band1": {
+            "dominant": "white_terracotta",
+            "fraction": 0,
+            "total": 290,
+            "passed": false
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.009,
+            "total": 454,
+            "passed": false
+          }
+        }
+      },
+      "verdict": null,
+      "judge": null,
+      "reason": "coverage"
+    },
+    {
+      "angle": "+x-z",
+      "azimuthDeg": 135,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-baseline/view-+x-z.png"
+      },
+      "coverage": {
+        "passed": false,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "stone_bricks",
+            "fraction": 0.628,
+            "total": 269,
+            "passed": true
+          },
+          "band1": {
+            "dominant": "white_terracotta",
+            "fraction": 0,
+            "total": 281,
+            "passed": false
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.002,
+            "total": 446,
+            "passed": false
+          }
+        }
+      },
+      "verdict": null,
+      "judge": null,
+      "reason": "coverage"
+    },
+    {
+      "angle": "-x-z",
+      "azimuthDeg": 225,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-baseline/view--x-z.png"
+      },
+      "coverage": {
+        "passed": false,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "stone_bricks",
+            "fraction": 0.56,
+            "total": 277,
+            "passed": true
+          },
+          "band1": {
+            "dominant": "white_terracotta",
+            "fraction": 0,
+            "total": 291,
+            "passed": false
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.002,
+            "total": 453,
+            "passed": false
+          }
+        }
+      },
+      "verdict": null,
+      "judge": null,
+      "reason": "coverage"
+    },
+    {
+      "angle": "-x+z",
+      "azimuthDeg": 315,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-baseline/view--x+z.png"
+      },
+      "coverage": {
+        "passed": false,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "stone_bricks",
+            "fraction": 0.558,
+            "total": 269,
+            "passed": true
+          },
+          "band1": {
+            "dominant": "white_terracotta",
+            "fraction": 0,
+            "total": 282,
+            "passed": false
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.002,
+            "total": 445,
+            "passed": false
+          }
+        }
+      },
+      "verdict": null,
+      "judge": null,
+      "reason": "coverage"
+    }
+  ],
+  "aggregate": {
+    "schema": "multi-angle-gate/v1",
+    "decided": true,
+    "passed": false,
+    "gapCount": 0,
+    "gapBudget": 2,
+    "gaps": [],
+    "failures": [
+      {
+        "angle": "+x+z",
+        "reason": "coverage"
+      },
+      {
+        "angle": "+x-z",
+        "reason": "coverage"
+      },
+      {
+        "angle": "-x-z",
+        "reason": "coverage"
+      },
+      {
+        "angle": "-x+z",
+        "reason": "coverage"
+      }
+    ],
+    "views": [
+      {
+        "angle": "+x+z",
+        "outcome": "coverage"
+      },
+      {
+        "angle": "+x-z",
+        "outcome": "coverage"
+      },
+      {
+        "angle": "-x-z",
+        "outcome": "coverage"
+      },
+      {
+        "angle": "-x+z",
+        "outcome": "coverage"
+      }
+    ]
+  },
+  "sheet": "pr/assets/frames/multi-angle-cottage-baseline.png",
+  "labeled": true
+}

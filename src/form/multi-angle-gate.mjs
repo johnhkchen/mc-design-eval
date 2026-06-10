@@ -67,6 +67,9 @@ export function buildMultiAngleViewPrompt(angleName, azimuthDeg) {
     'massing, material zoning, palette) + SEVERITY ("minor" = cosmetic, does not break same-object;',
     '"major" = breaks it). A "same object" verdict must carry ONLY minor gaps (or none); "drifted" and',
     '"different object" must carry at least one gap, at least one of them major.',
+    "A gap is a DIFFERENCE from the reference panels. Do NOT name features the references themselves",
+    "show (e.g., blocky voxel stepping that appears identically in the concept/mesh panels), and do not",
+    "inventory the medium — Minecraft builds are made of blocks; blockiness alone is never a gap.",
     "Reply with STRICT JSON only, no prose, in this exact shape:",
     '{"verdict":"same object|drifted|different object","gaps":[{"region":"...","attribute":"form|massing|material zoning|palette","severity":"minor|major"}],"rationale":"one sentence"}',
   ].join("\n");
