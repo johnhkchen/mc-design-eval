@@ -138,3 +138,8 @@ benchmarks/sculpture/placement-grammar/**/*.png
 # dress-openings/<subj>.{json,md} + dress-openings/<subj>/artifact.json; the committed evidence
 # frames live in pr/assets/frames/dress-*.png.
 benchmarks/sculpture/dress-openings/**/*.png
+
+# E-26 styled-milestone (T-101-01) working renders — the records are styled/<subj>.{json,md} +
+# styled/<subj>/*artifact.json; the committed evidence frames live in pr/assets/frames/styled-*.png
+# + multi-angle-*-styled.png + pr/assets/styled-*-kit.md.
+benchmarks/sculpture/styled/**/*.png
