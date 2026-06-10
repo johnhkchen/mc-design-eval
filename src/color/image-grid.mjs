@@ -27,6 +27,11 @@
 // CAVEAT (inherited, documented): background removal drops pixels near `dropColor` (default near-black
 // #000000), so near-black FOREGROUND is collateral. Acceptable for the locked stage-1 concept images
 // (bright silhouettes on dark fields). Pass `dropColor: null` to disable removal for other inputs.
+//
+// OPT-IN `cellMeans` (T-086-01, S-086): `gridFromPixels(img, { cellMeans: true })` additionally returns
+// the per-cell FOREGROUND mean colors (`result.cellMeans`, m×n of [r,g,b]|null) that matching normally
+// discards — the S-086 role-swatch sampler reads the true concept color behind each cell's assignment.
+// Default off; the result shape is unchanged when the opt is absent.
 
 import { srgbToLab, nearestLab, deltaE } from "./cielab.mjs";
 import { loadBlockTable } from "./block-table.mjs";
@@ -101,7 +106,7 @@ function aggregateCells({ width, height, data }, n, m, bgOpts) {
  * no I/O, no decode dep.
  * @param {{width:number,height:number,data:Uint8Array|Buffer}} img
  * @param {{n?:number, coverageThreshold?:number, dropColor?:RGB|null, dropTolerance?:number,
- *          alphaThreshold?:number, whitelist?:string[]}} [opts]
+ *          alphaThreshold?:number, whitelist?:string[], cellMeans?:boolean}} [opts]
  * @returns {object} GridResult — see module header / structure.md
  */
 export function gridFromPixels(img, opts = {}) {
@@ -113,11 +118,13 @@ export function gridFromPixels(img, opts = {}) {
   const cells = aggregateCells(img, n, m, o);
 
   const grid = [];
+  const cellMeans = o.cellMeans ? [] : null; // opt-in: per-cell foreground means (see header)
   const blockCounts = Object.create(null);
   let filledCells = 0;
   let deSum = 0;
   for (let gy = 0; gy < m; gy++) {
     const row = new Array(n);
+    const meansRow = cellMeans ? new Array(n).fill(null) : null;
     for (let gx = 0; gx < n; gx++) {
       const c = cells[gy * n + gx];
       const total = c.fgCount + c.bgCount;
@@ -126,6 +133,7 @@ export function gridFromPixels(img, opts = {}) {
         const meanRgb = [c.sumR / c.fgCount, c.sumG / c.fgCount, c.sumB / c.fgCount];
         const { key, deltaE: dE } = nearestLab(srgbToLab(meanRgb), candidates);
         row[gx] = key;
+        if (meansRow) meansRow[gx] = meanRgb;
         blockCounts[key] = (blockCounts[key] || 0) + 1;
         filledCells++;
         deSum += dE;
@@ -134,6 +142,7 @@ export function gridFromPixels(img, opts = {}) {
       }
     }
     grid.push(row);
+    if (cellMeans) cellMeans.push(meansRow);
   }
 
   const totalCells = n * m;
@@ -176,6 +185,7 @@ export function gridFromPixels(img, opts = {}) {
     meanDeltaE: filledCells ? round2(deSum / filledCells) : 0,
     description: "",
   };
+  if (cellMeans) result.cellMeans = cellMeans;
   result.description = describeGrid(result);
   return result;
 }

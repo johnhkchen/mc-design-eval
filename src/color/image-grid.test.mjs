@@ -104,6 +104,29 @@ test("every filled cell is one of the matched palette blocks; air is null", () =
   assert.equal(r.airCells + r.filledCells, r.totalCells);
 });
 
+// --- Group B2: opt-in cellMeans (T-086-01) ----------------------------------
+
+test("cellMeans is absent by default", () => {
+  const img = imageWithRegion(16, 8, rgbOf("gold_block"), [8, 0, 16, 8]);
+  const r = gridFromPixels(img, { n: 8 });
+  assert.ok(!("cellMeans" in r), "default result must not carry cellMeans");
+});
+
+test("cellMeans: filled cell carries its foreground mean; air cell is null", () => {
+  const gold = rgbOf("gold_block");
+  const img = imageWithRegion(16, 8, gold, [8, 0, 16, 8]);
+  const r = gridFromPixels(img, { n: 8, cellMeans: true });
+  assert.equal(r.cellMeans.length, r.m);
+  for (let gy = 0; gy < r.m; gy++) {
+    assert.equal(r.cellMeans[gy].length, r.n);
+    for (let gx = 0; gx < r.n; gx++) {
+      const mean = r.cellMeans[gy][gx];
+      if (gx < 4) assert.equal(mean, null, `col ${gx} is air → null mean`);
+      else assert.deepEqual(mean, gold, `col ${gx} is solid gold → its exact mean`);
+    }
+  }
+});
+
 // --- Group C: palette adherence (spec §9) ----------------------------------
 
 test("validate mode: zero out-of-palette cells, every cell in the whitelist", () => {
