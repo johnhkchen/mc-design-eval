@@ -73,7 +73,7 @@ const PR_ASSETS = join(ROOT, "pr/assets");
 
 const GATE_LABEL = "styled";
 const RECORD_SCHEMA = "styled-milestone/v1";
-const PIPELINE_ORDER = "kit (committed, T-096) → shell integrity (T-091) → skin (T-086 value-true → " +
+const PIPELINE_ORDER = "kit (committed, T-096) → shell integrity (T-091) → regularize (T-102 cage) → skin (T-086 value-true → " +
   "kit overrides → seal → T-092 zones → T-090 fill → T-087 coherence → T-088 gates) → " +
   "placement grammar (T-098) → opening dressing (T-099) → grammar settle (the T-100 fixpoint seam) → " +
   "kit-aware multi-angle gate (T-100 ∘ T-093)";

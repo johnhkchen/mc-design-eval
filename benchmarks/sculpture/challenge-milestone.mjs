@@ -4,6 +4,8 @@
 //   [provision (challenge subjects only, data-gated: GLB + committed material map + working scale
 //   → feature-assigned base — the same pure cores that built the cottage/gatehouse bases in T-074)]
 //   → SHELL INTEGRITY (T-091: componentStrip → rebuild → fillVoids → plugClosure; closure THROWS)
+//   → REGULARIZATION CAGE (T-102: morphological open/close on the closed shell, every step gated
+//     on GLB silhouette IoU at the 4 azimuths + closure + protect; rejected steps recorded)
 //   → THE E-24 SKIN via the exported buildSkin (value-true T-086 → kit overrides T-096 → seal →
 //     CONCEPT-DERIVED ZONE MAP T-092 → full-shell exposure zone-fill T-090 → secondaries splat →
 //     coherence T-087 → coverage/band/plaster terminal gates T-088, all THROWS)
@@ -49,8 +51,12 @@ import { artifactOccupancy } from "../../src/view/occupancy.mjs";
 import { structuralZones } from "../../src/view/structural-read.mjs";
 import { surfaceZoneHistogram } from "../../src/view/zone-fill.mjs";
 import {
-  componentStrip, rebuildArtifact, openingRegions, fillVoids, plugClosure, closureCheck,
+  componentStrip, rebuildArtifact, openingRegions, inRegion, fillVoids, plugClosure, closureCheck,
 } from "../../src/view/shell-integrity.mjs";
+import { regularizeShell, protrudingStackRegion } from "../../src/view/shell-regularize.mjs";
+import { loadMeshFromGlb, rasterizeSilhouette } from "../../src/form/glb-silhouette.mjs";
+import { resolveAngle } from "../../src/view/multi-angle.mjs";
+import { MULTI_ANGLE_GATE } from "../../src/config.mjs";
 import { applyDeltas } from "../../src/view/surface-coherence.mjs";
 import { voxelizeGlb } from "../../src/form/glb-voxelize.mjs";
 import { parseGlbColoredSurface } from "../../src/form/glb-mesh.mjs";
@@ -153,8 +159,12 @@ async function provisionBase(def) {
 }
 
 /** SHELL INTEGRITY (T-091 cores) on the in-memory base. No `expect` pins — the chain's inputs are
- *  not the witnessed-defect artifacts the shell-integrity runner pins. closureCheck is a THROW gate. */
-function shellStage(baseArtifact) {
+ *  not the witnessed-defect artifacts the shell-integrity runner pins. closureCheck is a THROW gate.
+ *  Then the T-102 REGULARIZATION CAGE on the closed shell: morphological open/close, every step
+ *  gated on per-azimuth silhouette IoU vs the GLB `refSils`, closure no-regress (strict here — the
+ *  input is closed by construction), and derived protect regions (chimney stack + openings);
+ *  rejected steps roll back and are recorded in the report. */
+function shellStage(baseArtifact, refSils) {
   const occ0 = artifactOccupancy(baseArtifact);
   const strip = componentStrip(occ0);
   const stripped = rebuildArtifact(strip.occ, baseArtifact);
@@ -167,9 +177,21 @@ function shellStage(baseArtifact) {
   const voids = fillVoids(occS, { zoneOf, zones, minDepth: MIN_DEPTH, regions });
   const repaired = applyDeltas(stripped, voids.placements);
   const plug = plugClosure(artifactOccupancy(repaired), { zoneOf, zones, regions, maxIterations: MAX_PLUG_ITER });
-  const final = applyDeltas(repaired, plug.placements);
-  assertArtifact(final);
+  const closed = applyDeltas(repaired, plug.placements);
+  assertArtifact(closed);
   if (!plug.check.closed) throw new Error("closure gate FAILED after plugClosure — impossible by contract");
+
+  // T-102 regularize: deletion has no artifact op, so the stage REBUILDS (componentStrip precedent)
+  const occC = artifactOccupancy(closed);
+  const stack = protrudingStackRegion(occC);
+  const protect = [
+    { name: "chimney", contains: stack.contains },
+    ...regions.map((r, i) => ({ name: `${r.kind}@${r.dir}#${i}`, contains: (pos) => inRegion(pos, [r]) })),
+  ];
+  const reg = regularizeShell(occC, { refSils, regions, protect });
+  const final = rebuildArtifact(reg.occ, closed);
+  assertArtifact(final);
+
   return {
     artifact: final,
     strip: { components: strip.components, kept: strip.kept.length, strippedCells: strip.strippedCells },
@@ -177,6 +199,12 @@ function shellStage(baseArtifact) {
     closureBefore: { reached: closureBefore.reached, interiorCells: closureBefore.interiorCells, byDirection: closureBefore.byDirection },
     voids: { minDepth: MIN_DEPTH, filled: voids.filled, byDir: voids.byDir },
     plug: { cells: plug.placements.length, iterations: plug.iterations },
+    regularize: {
+      accepted: reg.accepted, rejected: reg.rejected,
+      census: reg.census, iou: reg.iou,
+      steps: reg.trace.map((s) => ({ step: s.step, accepted: s.accepted, reasons: s.reasons,
+        cells: s.cells, spikes: s.census.spikes, raggedRate: s.census.raggedRate })),
+    },
   };
 }
 
@@ -197,7 +225,11 @@ export async function runChain(def, paths) {
     base = JSON.parse(await readFile(join(HERE, def.build), "utf8"));
     assertArtifact(base);
   }
-  const shell = shellStage(base);
+  // the T-102 cage's 3-D target: GLB silhouettes at the 4 gate azimuths (pure rasterizer, no GL)
+  const mesh = loadMeshFromGlb(await readFile(join(HERE, def.glb)));
+  const refSils = {};
+  for (const a of MULTI_ANGLE_GATE.azimuths) refSils[a] = rasterizeSilhouette(mesh, { view: resolveAngle(a) });
+  const shell = shellStage(base, refSils);
   await writeFile(paths.shellAbs, artifactJson(shell.artifact));
   // The D5 uniform transform: the skin consumes the SHELL-REPAIRED build; the committed zone-map
   // record was derived from the unrepaired build, so its agreement assert does not apply here —
@@ -341,6 +373,10 @@ async function main() {
   console.error(`[${def.key}] shell: ${r1.shell.strip.components} → ${r1.shell.strip.kept} components (${r1.shell.strip.strippedCells} cells stripped); ` +
     `voids ${r1.shell.voids.filled} filled; plug ${r1.shell.plug.cells} in ${r1.shell.plug.iterations} iter; closure CLOSED ` +
     `(before: ${r1.shell.closureBefore.reached}/${r1.shell.closureBefore.interiorCells} reachable)`);
+  console.error(`[${def.key}] regularize (T-102): ${r1.shell.regularize.steps.map((s) =>
+    `${s.step} ${s.accepted ? "ok" : `REJECTED(${s.reasons[0]})`}`).join(", ")} — spikes ` +
+    `${r1.shell.regularize.census.before.spikes} → ${r1.shell.regularize.census.after.spikes}, ragged ` +
+    `${(r1.shell.regularize.census.before.raggedRate * 100).toFixed(1)}% → ${(r1.shell.regularize.census.after.raggedRate * 100).toFixed(1)}%`);
   console.error(`[${def.key}] skin: zone map ${r1.skin.zoneMap.source}` +
     (r1.skin.zoneMap.bands ? ` — ${r1.skin.zoneMap.bands.map((b) => `${b.name} y${b.yRange[0]}..${b.yRange[1]} ${b.dominantBlock}`).join(", ")}; roof ${r1.skin.zoneMap.roof.dominantBlock}` : ` (${r1.skin.zoneMap.reason ?? ""})`) +
     `; fill ${r1.skin.fill.placements.length}; salt ${r1.skin.salt.stripped} stripped; coverage gate final PASS`);
@@ -407,7 +443,7 @@ async function main() {
       e23Before: extras.e23Before ?? null,
     },
     provision: r1.provision,
-    shell: { strip: r1.shell.strip, openings: r1.shell.openings, closureBefore: r1.shell.closureBefore, voids: r1.shell.voids, plug: r1.shell.plug },
+    shell: { strip: r1.shell.strip, openings: r1.shell.openings, closureBefore: r1.shell.closureBefore, voids: r1.shell.voids, plug: r1.shell.plug, regularize: r1.shell.regularize },
     skin: {
       substitution: r1.skin.substitution, kit: r1.skin.kit,
       zoneMap: { source: r1.skin.zoneMap.source, bands: r1.skin.zoneMap.bands ?? null, roof: r1.skin.zoneMap.roof ?? null, reason: r1.skin.zoneMap.reason ?? null },
@@ -447,8 +483,8 @@ function renderMd(r) {
     `| ${v.angle} | ${v.azimuthDeg}° | ${v.coverage === null ? "—" : v.coverage ? "pass" : "REJECT"} | ${v.verdict ?? "(missing)"} | ${gapsOf(v)} |`).join("\n");
   return `# Challenge milestone — ${r.subject} (T-095-01)\n\n` +
     `One command, the whole E-25 chain: ${r.provision ? "provision (GLB+map, untuned) → " : ""}` +
-    `shell integrity (T-091) → concept-derived zones (T-092) → E-24 full-shell skin → multi-angle ` +
-    `same-object gate (T-093). **Reproducible**: double-run byte-identical, final sha256 ` +
+    `shell integrity (T-091) → regularization cage (T-102) → concept-derived zones (T-092) → E-24 ` +
+    `full-shell skin → multi-angle same-object gate (T-093). **Reproducible**: double-run byte-identical, final sha256 ` +
     `\`${r.reproducible.sha256.final.slice(0, 16)}…\`.\n\n` +
     (r.provision ? `## Provision (challenge subject — first contact with the pipeline)\nScale ${r.provision.scale}, ` +
       `${r.provision.cells} cells, ${r.provision.manifest} manifest blocks — GLB + committed material map, zero tuning.\n\n` : "") +
@@ -457,6 +493,12 @@ function renderMd(r) {
     `voids ${r.shell.voids.filled} filled (minDepth ${r.shell.voids.minDepth}); plug ${r.shell.plug.cells} cells / ` +
     `${r.shell.plug.iterations} iter → **CLOSED** (before: ${r.shell.closureBefore.reached}/${r.shell.closureBefore.interiorCells} reachable). ` +
     `Openings honored: ${r.shell.openings.join(", ") || "(none)"}.\n\n` +
+    `## Regularization cage (T-102)\n` +
+    r.shell.regularize.steps.map((s) => `- **${s.step}** ${s.accepted ? "ACCEPTED" : `REJECTED — ${s.reasons.join("; ")}`} ` +
+      `(removed ${s.cells.removed ?? 0}, added ${s.cells.added ?? 0}, plugged ${s.cells.plugged ?? 0})`).join("\n") + `\n` +
+    `Spikes ${r.shell.regularize.census.before.spikes} → ${r.shell.regularize.census.after.spikes}; ragged ` +
+    `${(r.shell.regularize.census.before.raggedRate * 100).toFixed(1)}% → ${(r.shell.regularize.census.after.raggedRate * 100).toFixed(1)}%; ` +
+    `IoU vs GLB held at all 4 azimuths (caged, rejected steps rolled back).\n\n` +
     `## Skin (T-086/T-092/T-090/E-23/T-087/T-088)\n` +
     `Zone map: **${r.skin.zoneMap.source}**` +
     (r.skin.zoneMap.bands ? ` — ${r.skin.zoneMap.bands.map((b) => `${b.name} y${b.yRange[0]}..${b.yRange[1]} \`${b.dominantBlock}\``).join(", ")}; roof \`${r.skin.zoneMap.roof.dominantBlock}\`` : ` (${r.skin.zoneMap.reason ?? ""})`) + `.` +
