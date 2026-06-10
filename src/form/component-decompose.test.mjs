@@ -169,3 +169,98 @@ test("segmentMasses: single-column voxelization spikes neither split nor protrud
   assert.equal(masses.length, 1);
   assert.equal(masses[0].role, "primary");
 });
+
+// ---- roofPlanes ---------------------------------------------------------------------------------
+
+import { roofPlanes } from "./component-decompose.mjs";
+
+const planesOf = (cells) => {
+  const occ = occupancyFromCells(cells);
+  const seg = segmentMasses(occ);
+  return { seg, planes: roofPlanes(occ, seg) };
+};
+
+test("roofPlanes: a gable is exactly 2 opposing pitched planes with a shared z-ridge", () => {
+  const { planes } = planesOf(gabledBox());
+  assert.equal(planes.length, 2);
+  assert.ok(planes.every((p) => p.kind === "pitched"));
+  const [a, b] = planes;
+  assert.ok(a.voxelFit.gradient[0] * b.voxelFit.gradient[0] < 0, "opposing x-slopes");
+  assert.ok(a.voxelFit.rmse <= 0.5 && b.voxelFit.rmse <= 0.5);
+  // ridge: shared, along z, at the crest height (smoothed crest is wallTop+5)
+  assert.equal(a.ridge.withPlane, b.id);
+  assert.equal(b.ridge.withPlane, a.id);
+  assert.equal(a.ridge.axis, "z");
+  assert.equal(a.ridge.y, 9);
+  // each eave is the full-depth low row on the plane's downhill side
+  for (const p of planes) {
+    const eave = runCells(p.eave.cells);
+    assert.equal(eave.length, 9);
+    const ex = new Set(eave.map(([x]) => x));
+    assert.equal(ex.size, 1, "eave is a single x row");
+    assert.equal([...ex][0], p.eave.dir === "+x" ? 12 : 0);
+  }
+});
+
+test("roofPlanes: a flat box is one flat plane, perimeter eave, no ridge", () => {
+  const { planes } = planesOf(boxCells(10, 5, 8));
+  assert.equal(planes.length, 1);
+  assert.equal(planes[0].kind, "flat");
+  assert.equal(planes[0].ridge, null);
+  assert.equal(planes[0].eave.dir, null);
+  assert.equal(runCells(planes[0].eave.cells).length, 2 * (10 + 8) - 4);
+});
+
+test("roofPlanes: a pyramid is 4 per-face planes; orthogonal faces never ridge-pair", () => {
+  const cells = boxCells(13, 3, 13);
+  for (let x = 0; x < 13; x++) {
+    for (let z = 0; z < 13; z++) {
+      const top = 2 + Math.min(x, 12 - x, z, 12 - z) + 1;
+      for (let y = 3; y <= top; y++) cells.push({ pos: [x, y, z], block: "minecraft:stone" });
+    }
+  }
+  const { planes } = planesOf(cells);
+  assert.equal(planes.length, 4);
+  const dirs = planes.map((p) => p.eave.dir).sort();
+  assert.deepEqual(dirs, ["+x", "+z", "-x", "-z"].sort(), "one face per direction");
+  const byId = new Map(planes.map((p) => [p.id, p]));
+  for (const p of planes.filter((p) => p.ridge)) {
+    const other = byId.get(p.ridge.withPlane);
+    const dot = p.voxelFit.gradient[0] * other.voxelFit.gradient[0] +
+      p.voxelFit.gradient[1] * other.voxelFit.gradient[1];
+    assert.ok(dot < 0, "ridge partners have opposing gradients");
+  }
+});
+
+test("roofPlanes: the chimney's columns never pollute the gable fits", () => {
+  const cells = gabledBox();
+  for (let x = 2; x <= 4; x++) for (let z = 2; z <= 4; z++) {
+    for (let y = 8; y <= 13; y++) cells.push({ pos: [x, y, z], block: "minecraft:bricks" });
+  }
+  const { seg, planes } = planesOf(cells);
+  assert.equal(seg.masses.filter((m) => m.role === "protrusion").length, 1);
+  assert.equal(planes.length, 2);
+  assert.ok(planes.every((p) => p.kind === "pitched" && p.voxelFit.rmse <= 0.5));
+  // extent excludes the chimney plan entirely
+  const chimney = new Set(runCells(seg.masses.find((m) => m.role === "protrusion").plan.runs)
+    .map(([x, z]) => `${x},${z}`));
+  for (const p of planes) {
+    for (const [x, z] of runCells(p.extent.runs)) assert.ok(!chimney.has(`${x},${z}`));
+  }
+});
+
+test("roofPlanes: voxelization spikes change nothing (raw vs regularized tolerance)", () => {
+  const clean = planesOf(gabledBox()).planes;
+  const cells = gabledBox();
+  for (const [sx, sz, top] of [[2, 2, 14], [9, 6, 15]]) {
+    for (let y = 8; y <= top; y++) cells.push({ pos: [sx, y, sz], block: "minecraft:stone" });
+  }
+  const spiked = planesOf(cells).planes;
+  assert.equal(spiked.length, clean.length);
+  for (let i = 0; i < clean.length; i++) {
+    assert.deepEqual(spiked[i].voxelFit.gradient, clean[i].voxelFit.gradient);
+    assert.equal(spiked[i].extent.area, clean[i].extent.area);
+    // the spikes live in rmseRaw, not in the fit
+    assert.ok(spiked[i].voxelFit.rmseRaw >= clean[i].voxelFit.rmseRaw);
+  }
+});

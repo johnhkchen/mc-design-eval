@@ -459,3 +459,274 @@ export function segmentMasses(occ, opts = {}) {
 
   return { masses, columnMass, heightfield: hf };
 }
+
+// ---- roof planes ----------------------------------------------------------------------------------
+
+const gradAngleDeg = (g1, g2) => {
+  const n1 = Math.hypot(g1[0], 1, g1[1]); // plane normals (−a, 1, −b)/|·|
+  const n2 = Math.hypot(g2[0], 1, g2[1]);
+  const dot = (g1[0] * g2[0] + 1 + g1[1] * g2[1]) / (n1 * n2);
+  return (Math.acos(Math.max(-1, Math.min(1, dot))) * 180) / Math.PI;
+};
+const downhillDir = ([a, b]) => (Math.abs(a) >= Math.abs(b) ? (a > 0 ? "-x" : "+x") : (b > 0 ? "-z" : "+z"));
+
+/**
+ * Segment each body mass's smoothed top surface into ROOF PLANES (D3): deterministic region growing
+ * (lex scan order, BFS, exact LSQ refits every `refitEvery` accepted cells), under-sized regions
+ * dissolved into their best-fitting neighbor, near-equal adjacent planes merged. Per plane: the
+ * voxel fit (with rmse vs the smoothed surface AND rmseRaw vs the raw one — the smoothing never
+ * hides the shell), kind flat|pitched, extent, EAVE EDGE (boundary cells on the downhill side within
+ * `eaveTol` of the plane's minimum; a flat cap's eave is its outside perimeter), and RIDGE CANDIDATE
+ * (the shared boundary of two opposing-gradient planes, with its axis and mean height). Protrusion
+ * masses (chimneys) own their columns, so they are excluded from every fit by construction.
+ */
+export function roofPlanes(occ, segmentation, opts = {}) {
+  const {
+    residualTol = 1.25, minPlaneArea = 8, mergeAngleDeg = 10, mergeOffset = 1,
+    flatSlope = 0.15, refitEvery = 16, eaveTol = 0.5, growAngleDeg = 35,
+  } = opts;
+  const { masses, heightfield: hf } = segmentation;
+  const planes = [];
+
+  for (const mass of masses) {
+    if (mass.role === "protrusion") continue;
+    const massKeys = sortedKeys(runCells(mass.plan.runs).map(([x, z]) => keyXZ(x, z)));
+    const massSet = new Set(massKeys);
+    const cellOf = (k) => {
+      const [x, z] = parseXZ(k);
+      return { x, z, y: hf.h.get(k) };
+    };
+
+    // -- region growing, most-planar seeds first: a pyramid's wedge interiors are perfectly planar
+    // while its diagonal hip lines are not — growing from the interiors carves the wedges cleanly
+    // and leaves the ambiguous 1-wide diagonal bands to the dissolve step (still deterministic:
+    // ties break on the lex scan order)
+    const localFit = new Map();
+    for (const k of massKeys) {
+      const [x, z] = parseXZ(k);
+      const nbhd = [];
+      for (let dx = -1; dx <= 1; dx++) {
+        for (let dz = -1; dz <= 1; dz++) {
+          const nk = keyXZ(x + dx, z + dz);
+          if (massSet.has(nk)) nbhd.push(cellOf(nk));
+        }
+      }
+      localFit.set(k, fitPlane(nbhd));
+    }
+    const lexIdx = new Map(massKeys.map((k, i) => [k, i]));
+    const seedOrder = [...massKeys].sort((a, b) =>
+      localFit.get(a).rmse - localFit.get(b).rmse || lexIdx.get(a) - lexIdx.get(b));
+    const assign = new Map();
+    let regions = [];
+    for (const seedK of seedOrder) {
+      if (assign.has(seedK)) continue;
+      const [sx, sz] = parseXZ(seedK);
+      const seedCells = [];
+      for (let dx = -1; dx <= 1; dx++) {
+        for (let dz = -1; dz <= 1; dz++) {
+          const nk = keyXZ(sx + dx, sz + dz);
+          if (massSet.has(nk)) seedCells.push(cellOf(nk));
+        }
+      }
+      let plane = fitPlane(seedCells);
+      const id = regions.length;
+      const cells = [seedK];
+      assign.set(seedK, id);
+      const queue = [seedK];
+      let sinceRefit = 0;
+      while (queue.length) {
+        const k = queue.shift();
+        const [x, z] = parseXZ(k);
+        for (const [dx, dz] of N4) {
+          const nk = keyXZ(x + dx, z + dz);
+          if (!massSet.has(nk) || assign.has(nk)) continue;
+          const { y } = cellOf(nk);
+          const pred = plane.gradient[0] * (x + dx) + plane.gradient[1] * (z + dz) +
+            (plane.point[1] - plane.gradient[0] * plane.point[0] - plane.gradient[1] * plane.point[2]);
+          if (Math.abs(y - pred) > residualTol) continue;
+          // the cell's LOCAL orientation must agree with the region plane — a region cannot snake
+          // across a hip/ridge line by dragging its refit (the pyramid failure mode); mixed-window
+          // cells on the crest/diagonals stay unassigned and dissolve into their best plane below
+          const lf = localFit.get(nk);
+          if (!lf.degenerate && gradAngleDeg(lf.gradient, plane.gradient) > growAngleDeg) continue;
+          assign.set(nk, id);
+          cells.push(nk);
+          queue.push(nk);
+          if (++sinceRefit >= refitEvery) {
+            plane = fitPlane(cells.map(cellOf));
+            sinceRefit = 0;
+          }
+        }
+      }
+      regions.push({ cells, plane: fitPlane(cells.map(cellOf)) });
+    }
+
+    // -- dissolve under-sized regions into the adjacent region with the lowest mean residual
+    const adjacentRegions = (r, self) => {
+      const found = new Set();
+      for (const k of r.cells) {
+        const [x, z] = parseXZ(k);
+        for (const [dx, dz] of N4) {
+          const o = assign.get(keyXZ(x + dx, z + dz));
+          if (o !== undefined && o !== self && regions[o].cells.length) found.add(o);
+        }
+      }
+      return [...found].sort((a, b) => a - b);
+    };
+    const meanResidual = (cells, plane) => {
+      const c0 = plane.point[1] - plane.gradient[0] * plane.point[0] - plane.gradient[1] * plane.point[2];
+      let s = 0;
+      for (const k of cells) {
+        const { x, z, y } = cellOf(k);
+        s += Math.abs(y - (plane.gradient[0] * x + plane.gradient[1] * z + c0));
+      }
+      return s / cells.length;
+    };
+    let changed = true;
+    while (changed) {
+      changed = false;
+      for (let i = 0; i < regions.length; i++) {
+        const r = regions[i];
+        if (!r.cells.length || r.cells.length >= minPlaneArea) continue;
+        const adj = adjacentRegions(r, i);
+        if (!adj.length) continue; // isolated sliver — kept, surfaces as a small plane
+        const host = adj.sort((a, b) =>
+          meanResidual(r.cells, regions[a].plane) - meanResidual(r.cells, regions[b].plane) || a - b)[0];
+        for (const k of r.cells) assign.set(k, host);
+        regions[host].cells.push(...r.cells);
+        regions[host].plane = fitPlane(regions[host].cells.map(cellOf));
+        r.cells = [];
+        changed = true;
+      }
+    }
+    // -- absorb redundant bands: a region whose cells already lie within growth tolerance of a
+    // LARGER neighbor's plane is a leftover seam band (the angle-gated crest/hip line), not a roof
+    // face — a genuine face has large residuals under any other face's plane
+    changed = true;
+    while (changed) {
+      changed = false;
+      const byArea = regions
+        .map((r, idx) => ({ r, idx }))
+        .filter(({ r }) => r.cells.length)
+        .sort((a, b) => a.r.cells.length - b.r.cells.length || a.idx - b.idx);
+      for (const { r, idx } of byArea) {
+        if (!r.cells.length) continue;
+        const hosts = adjacentRegions(r, idx)
+          .filter((o) => regions[o].cells.length >= r.cells.length)
+          .map((o) => ({ o, res: meanResidual(r.cells, regions[o].plane) }))
+          .filter(({ res }) => res <= residualTol)
+          .sort((a, b) => a.res - b.res || a.o - b.o);
+        if (!hosts.length) continue;
+        const host = hosts[0].o;
+        for (const k of r.cells) assign.set(k, host);
+        regions[host].cells.push(...r.cells);
+        regions[host].plane = fitPlane(regions[host].cells.map(cellOf));
+        r.cells = [];
+        changed = true;
+        break;
+      }
+    }
+    // -- merge near-equal adjacent planes
+    changed = true;
+    while (changed) {
+      changed = false;
+      for (let i = 0; i < regions.length && !changed; i++) {
+        if (!regions[i].cells.length) continue;
+        for (const j of adjacentRegions(regions[i], i)) {
+          if (j <= i) continue;
+          const a = regions[i], b = regions[j];
+          if (gradAngleDeg(a.plane.gradient, b.plane.gradient) >= mergeAngleDeg) continue;
+          if (meanResidual(b.cells, a.plane) >= mergeOffset) continue;
+          for (const k of b.cells) assign.set(k, i);
+          a.cells.push(...b.cells);
+          a.plane = fitPlane(a.cells.map(cellOf));
+          b.cells = [];
+          changed = true;
+          break;
+        }
+      }
+    }
+
+    // -- finalize (area-desc order, stable ids appended across masses)
+    const live = regions
+      .map((r, idx) => ({ ...r, idx }))
+      .filter((r) => r.cells.length)
+      .sort((a, b) => b.cells.length - a.cells.length || a.idx - b.idx);
+    const localIdx = new Map(); // original region index → planes[] slot
+    for (const r of live) {
+      const cells = sortedKeys(r.cells);
+      const xz = cells.map(parseXZ);
+      const plane = fitPlane(cells.map(cellOf));
+      const c0 = plane.point[1] - plane.gradient[0] * plane.point[0] - plane.gradient[1] * plane.point[2];
+      let sseRaw = 0;
+      for (const k of cells) {
+        const [x, z] = parseXZ(k);
+        const rr = hf.raw.get(k) - (plane.gradient[0] * x + plane.gradient[1] * z + c0);
+        sseRaw += rr * rr;
+      }
+      const slope = Math.hypot(plane.gradient[0], plane.gradient[1]);
+      const kind = slope < flatSlope ? "flat" : "pitched";
+      const minH = Math.min(...cells.map((k) => hf.h.get(k)));
+      const boundary = cells.filter((k) => {
+        const [x, z] = parseXZ(k);
+        return N4.some(([dx, dz]) => assign.get(keyXZ(x + dx, z + dz)) !== r.idx);
+      });
+      const eaveCells = boundary.filter((k) => {
+        if (kind === "flat") {
+          const [x, z] = parseXZ(k);
+          return N4.some(([dx, dz]) => !massSet.has(keyXZ(x + dx, z + dz)));
+        }
+        return hf.h.get(k) <= minH + eaveTol;
+      });
+      localIdx.set(r.idx, planes.length);
+      planes.push({
+        id: `roof-${planes.length}`,
+        massId: mass.id,
+        kind,
+        voxelFit: {
+          normal: plane.normal, point: plane.point, gradient: plane.gradient,
+          rmse: plane.rmse, rmseRaw: round3(Math.sqrt(sseRaw / cells.length)),
+          maxResidual: plane.maxResidual, degenerate: plane.degenerate,
+        },
+        extent: planOf(xz),
+        eave: { cells: columnRuns(eaveCells.map(parseXZ)), dir: kind === "pitched" ? downhillDir(plane.gradient) : null },
+        ridge: null,
+        glbFit: null,
+        _ridgeWith: null, _regionIdx: r.idx, _massSet: massSet, _assign: assign, // stripped below
+      });
+    }
+
+    // -- ridge candidates: opposing-gradient adjacent plane pairs within this mass
+    const massPlanes = planes.filter((p) => p.massId === mass.id);
+    for (let i = 0; i < massPlanes.length; i++) {
+      for (let j = i + 1; j < massPlanes.length; j++) {
+        const a = massPlanes[i], b = massPlanes[j];
+        if (a.kind !== "pitched" || b.kind !== "pitched") continue;
+        const ga = a.voxelFit.gradient, gb = b.voxelFit.gradient;
+        const dot = ga[0] * gb[0] + ga[1] * gb[1];
+        const mag = Math.hypot(ga[0], ga[1]) * Math.hypot(gb[0], gb[1]);
+        if (!mag || dot / mag >= -0.5) continue; // not opposing (orthogonal hips never ridge-pair)
+        const shared = [];
+        for (const k of runCells(a.extent.runs).map(([x, z]) => keyXZ(x, z))) {
+          const [x, z] = parseXZ(k);
+          if (N4.some(([dx, dz]) => a._assign.get(keyXZ(x + dx, z + dz)) === b._regionIdx)) shared.push(k);
+        }
+        for (const k of runCells(b.extent.runs).map(([x, z]) => keyXZ(x, z))) {
+          const [x, z] = parseXZ(k);
+          if (N4.some(([dx, dz]) => b._assign.get(keyXZ(x + dx, z + dz)) === a._regionIdx)) shared.push(k);
+        }
+        if (!shared.length) continue;
+        const cells = sortedKeys(new Set(shared)).map(parseXZ);
+        const xs = cells.map(([x]) => x), zs = cells.map(([, z]) => z);
+        const axis = Math.max(...xs) - Math.min(...xs) >= Math.max(...zs) - Math.min(...zs) ? "x" : "z";
+        const y = round3(cells.reduce((s, [x, z]) => s + hf.h.get(keyXZ(x, z)), 0) / cells.length);
+        const ridge = { axis, y, cells: columnRuns(cells) };
+        a.ridge = { withPlane: b.id, ...ridge };
+        b.ridge = { withPlane: a.id, ...ridge };
+      }
+    }
+  }
+
+  for (const p of planes) { delete p._ridgeWith; delete p._regionIdx; delete p._massSet; delete p._assign; }
+  return planes;
+}
