@@ -11,6 +11,14 @@
 // src/view/* cores (unit-tested). This file is the impure wiring only: GL face renders (E-22 fixed lens),
 // GLB decode, the optional metered LLM refine, and the durable record. Mirrors material-correct.mjs.
 //
+// THE BASE COAT (T-085-01, E-24): the splat cannot ESTABLISH a zone's dominant material — it converted
+// only 9% of the upper-storey wall to plaster (quantization collapse + concept→face misalignment); the
+// good 77% skin existed only as an inline hand-edit (e8062fa). Now a deterministic ZONE-FILL (zoneFill,
+// pure) lays each zone's dominant FIRST (base=stone, upper=plaster, roof=planks; secondary RUNS kept),
+// and the splat is DEMOTED to placing secondaries only (its per-zone palette excludes every field
+// material) — so it can never repaint the coat back to stone. Coverage before polish (Rule 3), and the
+// whole result is reproduced by `npm run spray:paint` end-to-end (Rule 1, no hand edits).
+//
 // GL + (optionally) METERED — run on demand, NOT in `npm test`:
 //   node benchmarks/sculpture/spray-paint.mjs            # splat + paint + per-face gate (GL renders)
 //   node benchmarks/sculpture/spray-paint.mjs --refine   # + the metered LLM face-vs-face refinement
@@ -31,6 +39,7 @@ import { projectSurface } from "../../src/view/surface-grid.mjs";
 import { quantizeToFace } from "../../src/view/reference-quantize.mjs";
 import { loadGlbSplat, resampleBlockGrid } from "../../src/view/glb-splat.mjs";
 import { paintFace, mergePaints, applyPaint } from "../../src/view/face-paint.mjs";
+import { zoneFill, surfaceZoneHistogram } from "../../src/view/zone-fill.mjs";
 import { structuralZones } from "../../src/view/structural-read.mjs";
 import { sealRoof, sealWalls, applyDeltas } from "../../src/view/surface-coherence.mjs";
 import { allowedPalette } from "../../src/view/palette-cans.mjs";
@@ -48,15 +57,41 @@ const SUBJ_DIR = join(OUT_DIR, "cottage");
 
 const PLASTER = "minecraft:white_terracotta";
 
-// THE ZONE→MATERIALS POLICY (cottage; derived from material-map/cottage.json roles, intersected with the
-// build manifest at runtime). The BINDING invariant: plaster (white_terracotta) ∈ "upper" ONLY — base
-// and roof exclude it, so a plaster target there is zoneRejected, not painted (T-079-02 fix). The other
-// materials are allowed generously per zone so legit recolors (stone on the base, planks on the roof)
-// still happen; the fix removes the smear, it does not freeze the skin.
-const ZONE_MATERIALS = {
-  base: ["stone_bricks", "cobblestone", "dark_oak_log"],            // coursed stone + quoins + sill timber
-  upper: ["white_terracotta", "dark_oak_log", "stone_bricks"],      // plaster + timber frame + window reveals
-  roof: ["spruce_planks", "dark_oak_planks", "cobblestone", "bricks"], // roof courses + chimney (NO plaster)
+// THE ZONE POLICY (cottage; derived from material-map/cottage.json roles, intersected with the build
+// manifest at runtime). Per zone: the DOMINANT (the field material the zone-fill base coat establishes),
+// the PRESERVE set (secondaries kept by the fill when they form runs — studs, quoins, the chimney; plus
+// roof-skirt planks on voxels that geometrically classify "upper": a spruce gable is a legit resident),
+// and the SPLAT set (what the demoted splat may still place — secondaries ONLY). Two binding invariants:
+//   • plaster (white_terracotta) is "upper"-only — a plaster target on base/roof is zoneRejected (T-079-02);
+//   • no zone's splat set contains ANY zone's field material — the splat can never repaint the base coat
+//     back to stone (the quantization collapse maps the concept's cream to stone_bricks; with the old
+//     generous "upper" palette it would re-apply the 64% failure on top of the fill) (T-085-01).
+// Cost accepted & named: upper-band stone window reveals are plastered (stone cannot be preserved in
+// "upper" — it IS the displaced field); reveal restoration is a surface-pattern concern (S-087).
+const ZONE_POLICY = {
+  base: {
+    dominant: "stone_bricks",                                       // coursed ashlar wall field
+    preserve: ["cobblestone", "dark_oak_log"],                      // quoins/plinth + sill timber
+    splat: ["cobblestone", "dark_oak_log"],
+  },
+  upper: {
+    dominant: "white_terracotta",                                   // the plaster infill — THE base coat
+    preserve: ["dark_oak_log", "spruce_planks", "dark_oak_planks"], // timber frame + roof-skirt/gable cells
+    splat: ["dark_oak_log"],                                        // the splat places studs only
+  },
+  roof: {
+    dominant: "spruce_planks",                                      // plank-course field (NO plaster)
+    preserve: ["dark_oak_planks", "cobblestone", "bricks"],         // eaves/verge + chimney shaft/cap
+    splat: ["dark_oak_planks", "cobblestone", "bricks"],
+  },
+};
+
+// The T-079-02-era per-zone splat palettes (dominants included), kept ONLY to replay the splat-only
+// baseline deterministically — the "(was 9%)" coverage evidence in the record. Not used to paint the build.
+const LEGACY_ZONE_MATERIALS = {
+  base: ["stone_bricks", "cobblestone", "dark_oak_log"],
+  upper: ["white_terracotta", "dark_oak_log", "stone_bricks"],
+  roof: ["spruce_planks", "dark_oak_planks", "cobblestone", "bricks"],
 };
 
 /** The 5 exposed faces a painted-plaster surface voxel can live on (the visible skin). */
@@ -88,8 +123,8 @@ function surfacePlasterByZone(artifact, zoneOf) {
  *  roof plaster is a defect — a pre-existing stray (or a smear). Narrowly scoped to plaster so it can
  *  never grey-out a legit off-primary material (e.g. a spruce gable, which classifies "upper"). Returns
  *  recolor placements (deduped by voxel). PURE. */
-function stripOffZonePlaster(occ, zoneOf, allowedByZone) {
-  const primary = { base: ZONE_MATERIALS.base[0], roof: ZONE_MATERIALS.roof[0] };
+function stripOffZonePlaster(occ, zoneOf, allowed) {
+  const primary = { base: ZONE_POLICY.base.dominant, roof: ZONE_POLICY.roof.dominant };
   const byKey = new Map();
   for (const dir of SURFACE_FACES) {
     const grid = projectSurface(occ, dir);
@@ -99,12 +134,33 @@ function stripOffZonePlaster(occ, zoneOf, allowedByZone) {
         const zone = zoneOf(c.voxel);
         if (zone === "upper") continue; // plaster is legal here
         const to = primary[zone];
-        if (!allowedByZone.get(zone)?.has(to)) continue; // primary not in manifest — skip rather than guess
+        if (!allowed.has(to)) continue; // primary not in manifest — skip rather than guess
         byKey.set(c.voxel.join(","), { op: "voxel", pos: [...c.voxel], block: `minecraft:${to}` });
       }
     }
   }
   return [...byKey.values()];
+}
+
+/** Decorate a surfaceZoneHistogram with each zone's intended dominant + its applied fraction — the
+ *  coverage evidence (T-085-01 AC #3): "is the dominant actually established?", per zone, ‰-rounded. */
+function coverageRecord(hist) {
+  const out = {};
+  for (const [zone, h] of Object.entries(hist)) {
+    const dominant = ZONE_POLICY[zone]?.dominant ?? null;
+    out[zone] = {
+      total: h.total, byBlock: h.byBlock, dominant,
+      dominantFraction: dominant && h.total ? Math.round(((h.byBlock[dominant] ?? 0) / h.total) * 1000) / 1000 : null,
+    };
+  }
+  return out;
+}
+
+/** One-line per-zone dominant-coverage summary for the console/md. */
+function coverageLine(cov) {
+  return Object.entries(cov)
+    .map(([z, c]) => `${z} ${c.dominant}=${c.dominantFraction == null ? "?" : Math.round(c.dominantFraction * 100) + "%"}`)
+    .join(", ");
 }
 
 /** Total interior (non-surface) plaster voxels — pre-existing strays paint/seal cannot reach. */
@@ -186,9 +242,15 @@ async function main() {
     const reversalOk = rec.plaster.after >= rec.plaster.before && rec.plaster.after > 8;
     const h = rec.zones?.histogram?.masked;
     const zoneOk = !h || (h.base === 0 && h.roof === 0); // base/roof surface plaster must be 0 when recorded
-    const ok = reversalOk && zoneOk;
+    // T-085-01: the zone-filled upper dominant coverage must beat the splat-only baseline when recorded
+    // (the 9%→≈77% reversal is reproducible from the record; the threshold gate itself is S-088).
+    const cov = rec.zones?.coverage;
+    const covOk = !cov ||
+      (cov.zoneFilled?.upper?.dominantFraction ?? 0) > (cov.splatOnly?.upper?.dominantFraction ?? 0);
+    const ok = reversalOk && zoneOk && covOk;
     console.error(`[offline] plaster ${rec.plaster.before}→${rec.plaster.after}; reversal ${reversalOk ? "CONFIRMED" : "NOT confirmed"}` +
-      (h ? `; zone histogram masked=${JSON.stringify(h)} (base/roof=0 ${zoneOk ? "OK" : "VIOLATED"})` : ""));
+      (h ? `; zone histogram masked=${JSON.stringify(h)} (base/roof=0 ${zoneOk ? "OK" : "VIOLATED"})` : "") +
+      (cov ? `; upper dominant coverage splat-only ${cov.splatOnly?.upper?.dominantFraction} → zone-filled ${cov.zoneFilled?.upper?.dominantFraction} (${covOk ? "OK" : "NOT improved"})` : ""));
     if (!ok) process.exitCode = 1;
     return;
   }
@@ -211,22 +273,45 @@ async function main() {
   console.error(`cottage: raw ${raw.placements.length} → sealed ${artifact.placements.length} placements; plaster(${PLASTER}) before = ${before.white_terracotta ?? 0}`);
 
   // --- 0b. STRUCTURAL ZONE MASK (T-079-02 AC #1) --------------------------------------------------
-  // Derive base/upper/roof from the structural read; map each zone → its materials ∩ the manifest.
+  // Derive base/upper/roof from the structural read; map each zone → its SPLAT materials ∩ the manifest
+  // (secondaries only — the dominants are the zone-fill's job, §0c). The legacy map (dominants included)
+  // is built alongside, solely for the splat-only baseline replay in §2b.
   const { zoneOf, storeyDivide } = structuralZones(occ);
   const allowedByZone = new Map(
-    Object.entries(ZONE_MATERIALS).map(([z, mats]) => [z, new Set(mats.filter((b) => allowed.has(b)))]),
+    Object.entries(ZONE_POLICY).map(([z, p]) => [z, new Set(p.splat.filter((b) => allowed.has(b)))]),
   );
-  console.error(`zones: storeyDivide=${storeyDivide}; base={${[...allowedByZone.get("base")].join(",")}} upper={${[...allowedByZone.get("upper")].join(",")}} roof={${[...allowedByZone.get("roof")].join(",")}}`);
+  const legacyByZone = new Map(
+    Object.entries(LEGACY_ZONE_MATERIALS).map(([z, mats]) => [z, new Set(mats.filter((b) => allowed.has(b)))]),
+  );
+  console.error(`zones: storeyDivide=${storeyDivide}; splat palettes base={${[...allowedByZone.get("base")].join(",")}} upper={${[...allowedByZone.get("upper")].join(",")}} roof={${[...allowedByZone.get("roof")].join(",")}}`);
+
+  // --- 0c. THE ZONE-FILL BASE COAT (T-085-01) ------------------------------------------------------
+  // Deterministically establish each zone's dominant on the visible skin BEFORE any splat: the collapsed
+  // upper-band stone goes to plaster, secondary RUNS (studs, quoins, chimney, gable planks) are kept.
+  // Recolor-only, so every projection below has identical geometry. All splat/gate/commit work runs on
+  // the base-coated build (`based`/`occBased`); the sealed pre-fill `artifact`/`occ` remain only as the
+  // §2b baseline and the plaster-before reference.
+  const fillZones = Object.fromEntries(
+    Object.entries(ZONE_POLICY).map(([z, p]) => [z, { dominant: p.dominant, preserve: p.preserve }]),
+  );
+  for (const [z, p] of Object.entries(fillZones)) {
+    if (!allowed.has(p.dominant)) throw new Error(`zone-fill: ${z} dominant "${p.dominant}" not in the build manifest`);
+  }
+  const fill = zoneFill(occ, { zoneOf, zones: fillZones });
+  const based = applyPaint(artifact, fill.placements);
+  const occBased = artifactOccupancy(based);
+  console.error(`zone-fill base coat: ${fill.placements.length} cells filled, ${fill.kept} kept — ` +
+    Object.entries(fill.byZone).map(([z, s]) => `${z} ${s.filled}/${s.surface}`).join(", "));
 
   // --- 1. per-face material targets ---------------------------------------------------------------
   // FRONT (+z): the concept is the truth → quantize it to the face cell-grid (within the manifest), resample.
-  const frontGrid = projectSurface(occ, "+z");
+  const frontGrid = projectSurface(occBased, "+z");
   const conceptRes = await quantizeToFace(CONCEPT_PATH, frontGrid, { manifest });
   const frontTarget = resampleBlockGrid(conceptRes.grid, conceptRes.n, conceptRes.m, frontGrid.n, frontGrid.m).grid;
   console.error(`front target: concept quantized ${conceptRes.n}×${conceptRes.m} → face ${frontGrid.n}×${frontGrid.m}, outOfPalette=${conceptRes.outOfPalette}`);
 
   // SIDE (+x): the concept never shows it → textured-GLB splat, same dir, in voxel space.
-  const sideGrid = projectSurface(occ, "+x");
+  const sideGrid = projectSurface(occBased, "+x");
   let sideSplat = null;
   try {
     sideSplat = await loadGlbSplat(GLB_PATH, sideGrid, "+x", { palette, decodeTexture });
@@ -235,19 +320,27 @@ async function main() {
     console.error(`side GLB splat skipped: ${e.message}`);
   }
 
-  // --- 2. paint passes (back-projection to recolor placements) — splat ∩ structural-zone ----------
-  const frontPass = paintFace(occ, "+z", frontTarget, { allowed, source: "concept", zoneOf, allowedByZone });
+  // --- 2. paint passes (back-projection, SECONDARIES over the base coat) — splat ∩ zone policy -----
+  const frontPass = paintFace(occBased, "+z", frontTarget, { allowed, source: "concept", zoneOf, allowedByZone });
   const sidePass = sideSplat
-    ? paintFace(occ, "+x", sideSplat.grid, { allowed, source: "glb", zoneOf, allowedByZone })
+    ? paintFace(occBased, "+x", sideSplat.grid, { allowed, source: "glb", zoneOf, allowedByZone })
     : { dir: "+x", source: "glb", placements: [], painted: 0, skipped: 0, offPalette: 0, zoneRejected: 0 };
-  console.error(`paint (zone-masked): front ${frontPass.painted} cells (zoneRejected ${frontPass.zoneRejected}), side ${sidePass.painted} cells (zoneRejected ${sidePass.zoneRejected})`);
+  console.error(`paint (secondaries over the coat): front ${frontPass.painted} cells (zoneRejected ${frontPass.zoneRejected}), side ${sidePass.painted} cells (zoneRejected ${sidePass.zoneRejected})`);
 
-  // --- 2b. THE PROOF: the same splat WITHOUT the zone mask (the old smear) for the before/after ----
+  // --- 2b. THE PROOFS (both replayed on the pre-fill sealed build) ---------------------------------
+  // (a) the splat WITHOUT the zone mask — the original smear (T-079-02's before).
   const frontUnmasked = paintFace(occ, "+z", frontTarget, { allowed, source: "concept" });
   const sideUnmasked = sideSplat ? paintFace(occ, "+x", sideSplat.grid, { allowed, source: "glb" }) : { placements: [] };
   const unmaskedBuild = applyPaint(artifact, mergePaints([sideUnmasked, frontUnmasked].filter((p) => (p.placements?.length ?? 0) > 0), { priority: ["concept", "glb"] }).placements);
   const histUnmasked = surfacePlasterByZone(unmaskedBuild, zoneOf);   // plaster smeared into base/roof
   console.error(`histogram (surface plaster by zone): UNMASKED ${JSON.stringify(histUnmasked)}`);
+  // (b) the zone-masked splat WITHOUT the fill — the shipped T-079-02 path, i.e. what `npm run` used to
+  // produce: the "(was 9%)" coverage baseline the zone-fill is measured against (T-085-01 AC #3).
+  const frontLegacy = paintFace(occ, "+z", frontTarget, { allowed, source: "concept", zoneOf, allowedByZone: legacyByZone });
+  const sideLegacy = sideSplat ? paintFace(occ, "+x", sideSplat.grid, { allowed, source: "glb", zoneOf, allowedByZone: legacyByZone }) : { placements: [] };
+  const splatOnlyBuild = applyPaint(artifact, mergePaints([sideLegacy, frontLegacy].filter((p) => (p.placements?.length ?? 0) > 0), { priority: ["concept", "glb"] }).placements);
+  const covSplatOnly = coverageRecord(surfaceZoneHistogram(artifactOccupancy(splatOnlyBuild), zoneOf));
+  console.error(`coverage (splat-only baseline): ${coverageLine(covSplatOnly)}`);
 
   // --- 3. optional metered LLM refine (the one metered call; default off) --------------------------
   // T-079-02: the GUARD is the structural invariant (splat ∩ zone mask + the base/roof=0 THROW below),
@@ -267,9 +360,10 @@ async function main() {
   })();
   const faceRecords = [];
 
-  // FRONT: gate the concept paint against the concept itself.
-  const frontBeforeR = await tryRenderFace(artifact, "+z", "front-before", conceptImg, palette, blockTable);
-  const frontCandidate = applyPaint(artifact, frontPass.placements);
+  // FRONT: gate the concept paint against the concept itself. "Before" = the base-coated build — the
+  // gate now measures the splat's MARGINAL contribution over the coat, not the coat itself.
+  const frontBeforeR = await tryRenderFace(based, "+z", "front-before", conceptImg, palette, blockTable);
+  const frontCandidate = applyPaint(based, frontPass.placements);
   const frontAfterR = await tryRenderFace(frontCandidate, "+z", "front-after", conceptImg, palette, blockTable);
   const frontGate = acceptIfCloser({
     before: frontBeforeR.score?.score ?? null,
@@ -285,8 +379,8 @@ async function main() {
   });
 
   // SIDE: the GLB is the truth (no concept face to gate against) — apply the splat paint, render for the record.
-  const sideBeforeR = await tryRenderFace(artifact, "+x", "side-before", null, palette, blockTable);
-  const sideCandidate = applyPaint(artifact, sidePass.placements);
+  const sideBeforeR = await tryRenderFace(based, "+x", "side-before", null, palette, blockTable);
+  const sideCandidate = applyPaint(based, sidePass.placements);
   const sideAfterR = await tryRenderFace(sideCandidate, "+x", "side-after", null, palette, blockTable);
   const sideAccepted = sidePass.painted > 0;
   faceRecords.push({
@@ -301,9 +395,10 @@ async function main() {
   if (frontAccepted) acceptedPasses.push(frontPass);
   const merged = mergePaints(acceptedPasses, { priority: ["concept", "glb"] });
   // Strip off-zone plaster (pre-existing base/roof strays) FIRST so the concept/glb paint wins any
-  // collision; together they make base/roof plaster = 0 by construction.
-  const stripPlacements = stripOffZonePlaster(occ, zoneOf, allowedByZone);
-  const painted = applyPaint(artifact, [...stripPlacements, ...merged.placements]);
+  // collision; together they make base/roof plaster = 0 by construction. The fill itself never emits
+  // off-zone plaster (only "upper"'s dominant is plaster), so stripping the base-coated occ is safe.
+  const stripPlacements = stripOffZonePlaster(occBased, zoneOf, allowed);
+  const painted = applyPaint(based, [...stripPlacements, ...merged.placements]);
   assertArtifact(painted); // AC #7: the painted build is still AJV-valid
 
   // --- 5b. THE STRUCTURAL GUARD (T-079-02 AC #4): plaster must be confined to the upper storey. The
@@ -317,6 +412,11 @@ async function main() {
   if (histMasked.base !== 0 || histMasked.roof !== 0) {
     throw new Error(`zone violation: plaster on base/roof surface (base=${histMasked.base}, roof=${histMasked.roof}) — the splat∩zone mask failed`);
   }
+  // THE T-085-01 EVIDENCE: per-zone dominant coverage of the final skin vs the splat-only baseline —
+  // the 9%→≈77% reversal, produced by the pipeline (Rule 1), GL-free.
+  const covFilled = coverageRecord(surfaceZoneHistogram(artifactOccupancy(painted), zoneOf));
+  console.error(`coverage (zone-filled, final): ${coverageLine(covFilled)}`);
+  console.error(`coverage upper ${ZONE_POLICY.upper.dominant}: splat-only ${Math.round((covSplatOnly.upper?.dominantFraction ?? 0) * 100)}% → zone-filled ${Math.round((covFilled.upper?.dominantFraction ?? 0) * 100)}%`);
   await writeFile(join(SUBJ_DIR, "artifact.json"), JSON.stringify(painted, null, 2) + "\n");
 
   const after = materialCounts(painted);
@@ -332,15 +432,28 @@ async function main() {
     },
     palette: { allowed: [...allowed].sort(), additions: [] },
     sealed: { raw: raw.placements.length, sealed: artifact.placements.length },
+    fill: {
+      policy: ZONE_POLICY,
+      minRun: 2,
+      placements: fill.placements.length,
+      kept: fill.kept,
+      byZone: fill.byZone,
+      note: "the deterministic zone-fill base coat (T-085-01): each zone's dominant established on the " +
+        "visible skin ahead of the splat; secondary runs (studs, quoins, chimney, gable planks) kept; " +
+        "the splat demoted to secondaries (its palette excludes every field material).",
+    },
     zones: {
       storeyDivide,
-      materials: ZONE_MATERIALS,
+      materials: ZONE_POLICY,
       histogram: { masked: histMasked, unmasked: histUnmasked }, // surface plaster by zone (before/after the fix)
+      coverage: { splatOnly: covSplatOnly, zoneFilled: covFilled }, // per-zone dominant coverage (T-085-01)
       offZonePlasterStripped: stripPlacements.length,
       interiorStrays,
       note: "histogram = surface plaster per structural zone. MASKED (this fix) confines plaster to 'upper' " +
         "(base=0, roof=0); UNMASKED (the shipped color-only splat) smears it into base+roof. Interior strays " +
-        "are pre-existing, not on any face, and untouched by seal/paint — not the visible defect.",
+        "are pre-existing, not on any face, and untouched by seal/paint — not the visible defect. " +
+        "coverage = per-zone dominant fraction of the visible skin: splatOnly replays the pre-fill " +
+        "T-079-02 path (the 9% baseline); zoneFilled is the shipped base-coat result.",
     },
     plaster: { block: PLASTER, before: before.white_terracotta ?? 0, after: after.white_terracotta ?? 0, reversed: reversal },
     materialCounts: { before, after },
@@ -363,6 +476,20 @@ function renderMd(r) {
   ).join("\n");
   const z = r.zones;
   const histLine = (h) => `base ${h.base}, upper ${h.upper}, roof ${h.roof}`;
+  const pct = (f) => (f == null ? "?" : `${Math.round(f * 100)}%`);
+  const covLine = (cov) => ["base", "upper", "roof"]
+    .map((zn) => `${zn} \`${cov[zn]?.dominant}\` ${pct(cov[zn]?.dominantFraction)} of ${cov[zn]?.total ?? "?"}`)
+    .join(" · ");
+  const fillMd = r.fill ? `## Zone-fill base coat (T-085-01)\n` +
+    `Deterministic fill of each zone's dominant on the visible skin, ahead of the splat: ` +
+    `**${r.fill.placements} cells filled**, ${r.fill.kept} kept (secondary runs + already-dominant). ` +
+    Object.entries(r.fill.byZone).map(([zn, s]) => `${zn} ${s.filled}/${s.surface}`).join(", ") + `.\n` +
+    `Per-zone dominant coverage of the skin:\n` +
+    `- **splat-only (the pre-fill pipeline):** ${covLine(z.coverage.splatOnly)}\n` +
+    `- **zone-filled (this fix):** ${covLine(z.coverage.zoneFilled)}\n` +
+    `- upper-band plaster: **${pct(z.coverage.splatOnly.upper?.dominantFraction)} → ` +
+    `${pct(z.coverage.zoneFilled.upper?.dominantFraction)}** — the splat places secondaries only ` +
+    `(upper palette = ${JSON.stringify(r.fill.policy.upper.splat)}).\n\n` : "";
   const zoneMd = z ? `## Zone mask (T-079-02)\n` +
     `storeyDivide = y${z.storeyDivide}. Surface plaster by zone:\n` +
     `- **masked (this fix):** ${histLine(z.histogram.masked)} → plaster confined to the upper storey (base 0, roof 0).\n` +
@@ -372,7 +499,7 @@ function renderMd(r) {
     `Plaster (\`${r.plaster.block}\`): **${r.plaster.before} → ${r.plaster.after}** — ` +
     `the 215→8 regression ${r.plaster.reversed ? "**reversed**" : "NOT reversed"}.\n\n` +
     (r.sealed ? `Sealed before paint: ${r.sealed.raw} → ${r.sealed.sealed} placements (seal then paint).\n\n` : "") +
-    zoneMd +
+    fillMd + zoneMd +
     `Enforced palette ("4 cans"): ${r.palette.allowed.join(", ")}.\n` +
     `Corner collisions resolved (concept > glb): ${r.cornerCollisions}.\n\n## Faces\n${f}\n\n` +
     `Refine: ${r.refine}\n\n> ${r.note}\n`;
