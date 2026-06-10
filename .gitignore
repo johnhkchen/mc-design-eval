@@ -128,3 +128,8 @@ benchmarks/sculpture/multi-angle/**/*.png
 # The durable record is challenge/<subj>.{json,md} + challenge/<subj>/{base-,shell-,}artifact.json;
 # the committed evidence frames live in pr/assets/frames/challenge-*.png + multi-angle-*-challenge.png.
 benchmarks/sculpture/challenge/**/*.png
+
+# T-098-01 placement-grammar renders — regenerable via npm run grammar:{cottage,gatehouse}. The
+# durable record is placement-grammar/<subj>.{json,md} + placement-grammar/<subj>/artifact.json;
+# the committed evidence sheets live in pr/assets/frames/grammar-*.png.
+benchmarks/sculpture/placement-grammar/**/*.png

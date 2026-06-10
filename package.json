@@ -28,6 +28,8 @@
     "challenge:cottage": "node benchmarks/sculpture/challenge-milestone.mjs --subject cottage",
     "challenge:gatehouse": "node benchmarks/sculpture/challenge-milestone.mjs --subject gatehouse",
     "challenge:church": "node benchmarks/sculpture/challenge-milestone.mjs --subject church",
+    "grammar:cottage": "node benchmarks/sculpture/placement-grammar.mjs --subject cottage",
+    "grammar:gatehouse": "node benchmarks/sculpture/placement-grammar.mjs --subject gatehouse",
     "pattern:cottage": "node benchmarks/sculpture/surface-pattern.mjs",
     "shell:cottage": "node benchmarks/sculpture/shell-integrity.mjs --subject cottage",
     "shell:gatehouse": "node benchmarks/sculpture/shell-integrity.mjs --subject gatehouse",
