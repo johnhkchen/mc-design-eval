@@ -36,7 +36,8 @@ import {
 } from "../../src/form/pin-guard.mjs";
 import { assertWorkshopProgram } from "../../src/workshop/program.mjs";
 import { runWorkshopLoop, conformanceScore } from "../../src/workshop/loop.mjs";
-import { parseWorkshopReply } from "../../src/workshop/critique.mjs";
+import { parseWorkshopReply, critiqueRenderArgs } from "../../src/workshop/critique.mjs";
+import { bamlRender } from "../../src/baml/bridge.mjs";
 import { serializeArtifact, replayLedger, offlineAssert } from "../../src/workshop/replay.mjs";
 import { workshopSubjectsFrom } from "../../src/workshop/seed.mjs";
 import { SUBJECTS as REGISTRY } from "./durable-skin.mjs";
@@ -178,11 +179,23 @@ async function runLive() {
     return views.map((v) => ({ angle: v.angle, path: relative(ROOT, v.path), bytes: v.bytes }));
   };
 
-  const exchange = async ({ prompt, renders, program: current }) => {
-    const images = [
-      { data: conceptBuf, mediaType: "image/png" },
-      ...await Promise.all(renders.map(async (r) => ({ data: await readFile(join(ROOT, r.path)), mediaType: "image/png" }))),
-    ];
+  const exchange = async (ctx) => {
+    const { renders, program: current } = ctx;
+    // The prompt AND the image order come from the BAML function's render (T-129-01): the loop
+    // hands over the round context, critiqueRenderArgs serializes it into the typed inputs, and
+    // the bridge renders CritiqueWorkshopRound. Transport stays on the tiered subscription shim;
+    // the SAME rendered prompt is re-sent on a bounded re-ask (the reply policy's contract).
+    const renderB64 = await Promise.all(
+      renders.map(async (r) => (await readFile(join(ROOT, r.path))).toString("base64")),
+    );
+    const { prompt, images } = await bamlRender({
+      fn: "CritiqueWorkshopRound",
+      args: critiqueRenderArgs(ctx),
+      images: {
+        concept: { base64: conceptBuf.toString("base64"), mediaType: "image/png" },
+        renders: renderB64.map((base64) => ({ base64, mediaType: "image/png" })),
+      },
+    });
     const ask = async () => {
       const { text, raw } = await runTieredOp({ tier: TIER, prompt, images });
       return { text, usage: raw?.usage };
