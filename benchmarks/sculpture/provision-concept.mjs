@@ -124,7 +124,9 @@ async function main() {
   });
   console.log(`  stage 2 (concept image): ${concept.model}, ~${Math.round(concept.promptChars / 4)} tok prompt, ${concept.ms}ms`);
   console.log(`✓ ${conceptPath}`);
-  console.log(`  next: judge it against the sanity checklist (concept-checklist.md beside the image) before any registration.`);
+  console.log(`  next: judge it against the sanity checklist (concept-checklist.md beside the image), mint the`);
+  console.log(`  material map, then \`npm run registration:smoke\` BEFORE any TRELLIS call — the full order is`);
+  console.log(`  docs/knowledge/registration-runbook.md.`);
 }
 
 main().catch((e) => {

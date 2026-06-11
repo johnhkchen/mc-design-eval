@@ -39,7 +39,13 @@ moai/sword thin-member lesson applied *before* spending the TRELLIS call), then 
 smoke-checked with `glb-smoke.mjs` at the working scale 48: dims 48×37×40, 11,423 cells, **26-conn 1
 component / largestFraction 1.0000** (6-conn 0.9552, reported only). The gate's controls: gatehouse
 PASSES reproducing the numbers above; moai FAILS (3 components, largestFraction 0.5213) — the
-fragmentation that retired it. Registered in `CHALLENGE_SUBJECTS`
+fragmentation that retired it. *Gate semantics since T-120-01:* the strict `components === 1` check
+became the **speck-tolerant** `speckVerdict` — every non-principal 26-conn component must
+individually be ≤ 2% of total cells (`GLB_SMOKE_SPECK_FRACTION`); specks are reported and delegated
+to the standing `shellStage` componentStrip, anything larger still fails (the barn's 1-cell speck —
+the former named deviation — is in-contract; moai still fails on its duplicate mass). Committed
+fixture records live in `glb/smoke/{barn,moai,church}@48.json`; the full registration order is
+`docs/knowledge/registration-runbook.md`. Registered in `CHALLENGE_SUBJECTS`
 (`benchmarks/sculpture/resemblance.mjs`) as paths+scale only; no material map, build, or skin exists —
 the pipeline must later run it untuned.
 
