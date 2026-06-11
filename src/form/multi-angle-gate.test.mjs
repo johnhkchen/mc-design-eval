@@ -7,7 +7,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   buildMultiAngleViewPrompt, parseMultiAngleVerdict, aggregateMultiAngle, viewOutcomeLabel,
-  MULTI_ANGLE_VERDICT_SCHEMA, MULTI_ANGLE_GATE_SCHEMA, MAX_GAPS_PER_VIEW,
+  gateInstrumentDiff, MULTI_ANGLE_VERDICT_SCHEMA, MULTI_ANGLE_GATE_SCHEMA, MAX_GAPS_PER_VIEW,
 } from "./multi-angle-gate.mjs";
 import { MULTI_ANGLE_GATE } from "../config.mjs";
 
@@ -190,6 +190,70 @@ test("viewOutcomeLabel covers every state", () => {
     rendered: true, coverage: { passed: true },
     verdict: { verdict: "drifted", gaps: [{ region: "r", attribute: "form", severity: "major" }] },
   }), "drifted: form");
+});
+
+// --- gateInstrumentDiff (T-114-01: the re-judge's untouchable set) ---------------------
+
+const recFixture = () => ({
+  schema: MULTI_ANGLE_GATE_SCHEMA,
+  subject: "church", label: "challenge",
+  artifact: { path: "p.json", sha256: "abc" },
+  contract: { azimuths: [...AZ], gapBudget: 2 },
+  zones: { source: "concept", policy: { roof: { dominant: "dark_oak_planks" } } },
+  kitPresence: { ran: true, passed: false, gaps: ["missing: x"] },
+  views: [
+    { ...ok(AZ[0]), azimuthDeg: 45, judge: { model: "m", usage: { output_tokens: 1 } } },
+    { ...ok(AZ[1]), azimuthDeg: 135, judge: { model: "m", usage: { output_tokens: 2 } } },
+    { angle: AZ[2], azimuthDeg: 225, rendered: true, coverage: { passed: true },
+      verdict: null, unparsed: true, parseError: "not JSON", rawReply: "```json{trunc" },
+    { ...ok(AZ[3]), azimuthDeg: 315, judge: { model: "m", usage: { output_tokens: 3 } } },
+  ],
+  aggregate: { decided: false, refusal: `unparsed:${AZ[2]}` },
+});
+
+test("gateInstrumentDiff: identical records → []", () => {
+  assert.deepEqual(gateInstrumentDiff(recFixture(), recFixture()), []);
+});
+
+test("gateInstrumentDiff: the unparsed view gaining verdict + replies is the ALLOWED change", () => {
+  const after = recFixture();
+  const v = after.views[2];
+  delete v.unparsed; delete v.parseError; delete v.rawReply;
+  v.verdict = { verdict: "drifted", gaps: [{ region: "roof", attribute: "form", severity: "major" }] };
+  v.replies = [{ attempt: 1, parsed: false, source: "committed" }, { attempt: 2, parsed: true, source: "live" }];
+  v.judge = { model: "m", usage: { output_tokens: 9 } };
+  after.aggregate = { decided: true, passed: false }; // downstream — not compared
+  after.rejudge = { angles: [AZ[2]], instrumentDiff: [] };
+  assert.deepEqual(gateInstrumentDiff(recFixture(), after), []);
+});
+
+test("gateInstrumentDiff: touching a PARSED view's verdict — or anything else on it — is flagged", () => {
+  const after = recFixture();
+  after.views[0].verdict.verdict = "drifted"; // a verdict re-roll
+  assert.deepEqual(gateInstrumentDiff(recFixture(), after), [`views[${AZ[0]}]`]);
+  const after2 = recFixture();
+  after2.views[3].judge.usage.output_tokens = 99; // even usage on a parsed view is untouchable
+  assert.deepEqual(gateInstrumentDiff(recFixture(), after2), [`views[${AZ[3]}]`]);
+});
+
+test("gateInstrumentDiff: instrument fields are each flagged by name", () => {
+  for (const [mutate, path] of [
+    [(r) => { r.contract.gapBudget = 3; }, "contract"],
+    [(r) => { r.zones.policy.roof.dominant = "stone"; }, "zones"],
+    [(r) => { r.kitPresence.passed = true; }, "kitPresence"],
+    [(r) => { r.artifact.sha256 = "zzz"; }, "artifact"],
+    [(r) => { r.views[2].coverage.passed = false; }, `views[${AZ[2]}].coverage`],
+  ]) {
+    const after = recFixture();
+    mutate(after);
+    assert.deepEqual(gateInstrumentDiff(recFixture(), after), [path]);
+  }
+});
+
+test("gateInstrumentDiff: a dropped view is flagged", () => {
+  const after = recFixture();
+  after.views.pop();
+  assert.deepEqual(gateInstrumentDiff(recFixture(), after), [`views[${AZ[3]}]`, "views.length"]);
 });
 
 // --- the contact-sheet composer (step 2: composeSheet generalization) -----------------

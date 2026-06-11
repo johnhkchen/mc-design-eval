@@ -199,6 +199,47 @@ export function aggregateMultiAngle(views, opts = {}) {
 }
 
 /**
+ * Instrument-diff between two gate records (T-114-01): the paths that differ among the fields a
+ * re-judge may NOT touch. The re-judge completes I/O on a committed record — it never re-derives,
+ * re-renders-for-decision, or re-rolls; this is the pure tripwire that proves it. Compared:
+ *   - record-level: schema, subject, label, artifact (pin), contract, zones, kitPresence;
+ *   - per view: when `before` carried a PARSED verdict, the ENTIRE view object must be byte-equal
+ *     (a parsed verdict is final — whatever it says); when it did not (unparsed / coverage
+ *     short-circuit), the identity/instrument fields (angle, azimuthDeg, rendered, coverage,
+ *     reason) must be equal while verdict/replies/judge/unparsed/parseError/rawReply may change —
+ *     completing those IS the re-judge's purpose.
+ * aggregate/overall/sheet/rejudge are downstream of the views and deliberately not compared.
+ * PURE; records are plain JSON, so deep equality is JSON.stringify equality.
+ * @param {object} before  the committed record
+ * @param {object} after   the re-judged record
+ * @returns {string[]}  differing paths, [] when the instrument is untouched
+ */
+export function gateInstrumentDiff(before, after) {
+  if (!before || !after || typeof before !== "object" || typeof after !== "object") {
+    throw new Error("gateInstrumentDiff: before and after must be record objects");
+  }
+  const eq = (a, b) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
+  const diff = [];
+  for (const k of ["schema", "subject", "label", "artifact", "contract", "zones", "kitPresence"]) {
+    if (!eq(before[k], after[k])) diff.push(k);
+  }
+  const afterByAngle = new Map((after.views ?? []).map((v) => [v.angle, v]));
+  for (const bv of before.views ?? []) {
+    const av = afterByAngle.get(bv.angle);
+    if (!av) { diff.push(`views[${bv.angle}]`); continue; }
+    if (bv.verdict) {
+      if (!eq(bv, av)) diff.push(`views[${bv.angle}]`);
+    } else {
+      for (const k of ["angle", "azimuthDeg", "rendered", "coverage", "reason"]) {
+        if (!eq(bv[k], av[k])) { diff.push(`views[${bv.angle}].${k}`); }
+      }
+    }
+  }
+  if ((after.views ?? []).length !== (before.views ?? []).length) diff.push("views.length");
+  return diff;
+}
+
+/**
  * The sheet's per-panel caption for a view record. PURE, total.
  * @param {{rendered?:boolean, coverage?:{passed:boolean}|null,
  *          verdict?:{verdict:string, gaps?:object[]}|null, unparsed?:boolean}|undefined} view
