@@ -2,12 +2,12 @@
   "schema": "reconstructed-milestone/v1",
   "subject": "church",
   "chain": {
-    "runner": "challenge-milestone.mjs",
-    "record": "benchmarks/sculpture/challenge/church.json",
+    "runner": "styled-milestone.mjs",
+    "record": "benchmarks/sculpture/styled/church.json",
     "exitCode": 1,
     "status": "pipeline-failed",
-    "stage": "skin",
-    "error": "coverage gate FAILED on the final skin: band0 stone=0.327 < 0.5 [census: band0={\"total\":2082,\"byBlock\":{\"polished_basalt\":1225,\"stone\":681,\"black_stained_glass\":100,\"dark_oak_planks\":76}}; band0:offslab={\"total\":5109,\"byBlock\":{\"polished_basalt\":3525,\"stone\":1270,\"dark_oak_planks\":5,\"black_stained_glass\":309}}]",
+    "stage": "settle",
+    "error": "settle did not converge after 4 grammar+dressing re-runs (still wants: frame 13, foreign fill 168, gating dressing 0)",
     "gate": null
   },
   "componentLayer": {
@@ -23,12 +23,7 @@
       "roof": "50fce80f78ecf37617e773d864fcdecbd4a98b73dfe16f17eaf09a8797f8e4d3",
       "shaped": "50fce80f78ecf37617e773d864fcdecbd4a98b73dfe16f17eaf09a8797f8e4d3"
     },
-    "findings": [
-      {
-        "code": "roof-program-fallback",
-        "detail": "roof program not accepted — roof seam falls back, recorded by the chain"
-      }
-    ]
+    "findings": []
   },
   "instrument": {
     "frozen": null,
@@ -49,15 +44,15 @@
         "baselineSha256": "d2a42db5d754806309b4624069a4289d48d4aced528469173555778fd5c056cc"
       },
       "after": {
-        "spikes": 202,
-        "ragged": 193,
-        "columns": 1376,
-        "raggedRate": 0.1403,
-        "source": "challenge/church/reconstructed-artifact.json"
+        "spikes": 204,
+        "ragged": 218,
+        "columns": 1370,
+        "raggedRate": 0.1591,
+        "source": "styled/church/reconstructed-artifact.json"
       }
     },
     "roofFit": {
-      "status": "fallback",
+      "status": "accepted",
       "gables": 3,
       "sides": 6,
       "adoptedPitchBy": {
@@ -76,13 +71,7 @@
       "rejected": 1,
       "source": "regularize record (standalone — STALE for this subject; the chain re-cuts its shell, T-106 review #4)"
     },
-    "coverageRefusal": {
-      "zone": "band0",
-      "block": "stone",
-      "fraction": 0.327,
-      "threshold": 0.5,
-      "census": "band0={\"total\":2082,\"byBlock\":{\"polished_basalt\":1225,\"stone\":681,\"black_stained_glass\":100,\"dark_oak_planks\":76}}; band0:offslab={\"total\":5109,\"byBlock\":{\"polished_basalt\":3525,\"stone\":1270,\"dark_oak_planks\":5,\"black_stained_glass\":309}}"
-    }
+    "coverageRefusal": null
   },
   "sheets": {
     "before": "pr/assets/frames/reconstructed-church-before.png",
@@ -91,16 +80,12 @@
   },
   "findings": [
     {
-      "code": "roof-program-fallback",
-      "detail": "roof program not accepted — roof seam falls back, recorded by the chain"
-    },
-    {
       "code": "chain-refused",
-      "detail": "skin: coverage gate FAILED on the final skin: band0 stone=0.327 < 0.5 [census: band0={\"total\":2082,\"byBlock\":{\"polished_basalt\":1225,\"stone\":681,\"black_stained_glass\":100,\"dark_oak_planks\":76}}; band0:offsl"
+      "detail": "settle: settle did not converge after 4 grammar+dressing re-runs (still wants: frame 13, foreign fill 168, gating dressing 0)"
     },
     {
       "code": "after-is-last-completed-stage",
-      "detail": "after side measured on challenge/church/reconstructed-artifact.json (the chain refused downstream of it)"
+      "detail": "after side measured on styled/church/reconstructed-artifact.json (the chain refused downstream of it)"
     }
   ],
   "generalization": {
