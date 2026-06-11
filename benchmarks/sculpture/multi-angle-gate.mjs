@@ -44,7 +44,8 @@ import {
 import {
   kitPresence, composeKitAwareVerdict, KIT_PRESENCE_SCHEMA,
 } from "../../src/form/kit-presence.mjs";
-import { treatmentsFromKit, extractApertures } from "../../src/view/opening-dressing.mjs";
+import { extractApertures } from "../../src/view/opening-dressing.mjs";
+import { composeVocabulary } from "../../src/form/material-vocabulary.mjs";
 import {
   resampleRgba, silhouetteToRgba, composeTriptych, composeSheet, RESEMBLANCE_DEFAULTS,
 } from "../../src/form/resemblance.mjs";
@@ -166,18 +167,21 @@ function deriveZones({ occ, conceptImg, matMap, fallbackPolicy, componentPlan = 
  *  smooth_sandstone where the named policy says white_terracotta — censusing the named block would
  *  fail the view on NAMING, not coverage). The allowed-guard keeps both renames unapplied on
  *  artifacts whose manifest doesn't carry them (the pre-substitution proof baseline). */
-function policyInShippedPalette(zones, { matMap, gridResult, artifact, kitOverrides = {} }) {
+function policyInShippedPalette(zones, { matMap, gridResult, artifact, kitOverrides = {}, kit = [], componentPlan = null }) {
   const namedManifest = bareList(matMap.palette);
   const swatches = sampleRoleSwatches(gridResult, namedManifest);
   const rows = selectValueTrueMap(matMap.map, swatches);
   const substitution = Object.fromEntries(rows.filter((r) => r.switched).map((r) => [r.named, r.chosen]));
-  const combined = { ...substitution, ...kitOverrides };
+  // T-113-01: the substitution DERIVATION stays here (this process reads the same committed
+  // inputs the chain did); the COMPOSITION is the authority's — the same module the chain
+  // consumes, in its manifest-guarded mode (`allowed`), so the gate censuses the vocabulary the
+  // chain actually shipped, roof course family included.
   const allowed = allowedPalette(artifact);
-  const ship = (b) => (combined[bare(b)] && allowed.has(combined[bare(b)])) ? combined[bare(b)] : bare(b);
-  const out = Object.fromEntries(Object.entries(zones).map(([z, p]) => [z, {
-    dominant: ship(p.dominant), preserve: [...new Set((p.preserve ?? []).map(ship))],
-  }]));
-  return { zones: out, substitution, kitOverrides, ship };
+  const vocab = composeVocabulary({
+    policyNamed: zones, substitution, kitOverrides, kit,
+    componentPlan, allowed, roofFamilyAllowed: allowed,
+  });
+  return { zones: vocab.zones, substitution, kitOverrides, ship: vocab.sub, vocabulary: vocab };
 }
 
 async function main() {
@@ -263,8 +267,8 @@ async function main() {
       `roof cells ${componentPlan.roof ? componentPlan.roof.cells.size : 0}`);
   }
   const derived = deriveZones({ occ, conceptImg, matMap, fallbackPolicy: def.policy, componentPlan });
-  const { zones: zonesShipped, substitution, ship } = policyInShippedPalette(derived.zones, {
-    matMap, gridResult: derived.gridResult, artifact, kitOverrides,
+  const { zones: zonesShipped, substitution, ship, vocabulary } = policyInShippedPalette(derived.zones, {
+    matMap, gridResult: derived.gridResult, artifact, kitOverrides, kit: kitRec?.kit ?? [], componentPlan,
   });
   console.error(`[${slug}] zones: ${derived.source}${derived.reason ? ` (${derived.reason})` : ""} — ` +
     Object.entries(zonesShipped).map(([z, p]) => `${z}=${p.dominant}`).join(", "));
@@ -293,7 +297,8 @@ async function main() {
       floorLines: floorLinesEff, upperTop: derived.sz.upperTop, roofKeys: derived.sz.roofKeys,
       sub: ship,
       apertures: extractApertures(refOcc),
-      treatments: treatmentsFromKit(kitRec),
+      // T-113-01: the SHIPPED treatments — the same vocabulary the chain dressed with
+      treatments: vocabulary.treatments,
       frames: componentPlan?.frames
         ? frameLinesFromComponent(occ,
             { floorLines: floorLinesEff, upperTop: derived.sz.upperTop, roofKeys: derived.sz.roofKeys },
@@ -429,7 +434,11 @@ async function main() {
       gapBudget: MULTI_ANGLE_GATE.gapBudget, coverageThreshold: DEFAULT_COVERAGE_THRESHOLD,
       note: "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them",
     },
-    zones: { source: derived.source, reason: derived.reason, policy: zonesShipped, substitutionApplied: substitution, kitOverridesApplied: kitOverrides },
+    zones: {
+      source: derived.source, reason: derived.reason, policy: zonesShipped,
+      substitutionApplied: substitution, kitOverridesApplied: kitOverrides,
+      vocabulary: vocabulary.record, // the authority's composed lineage (T-113-01)
+    },
     views,
     aggregate,
     kitPresence: presence,

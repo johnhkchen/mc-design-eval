@@ -37,8 +37,9 @@ import { artifactOccupancy } from "../../src/view/occupancy.mjs";
 import { openings } from "../../src/view/structural-read.mjs";
 import { openingRegions, closureCheck, strayFixtures, SIDE_FACES } from "../../src/view/shell-integrity.mjs";
 import {
-  treatmentsFromKit, extractApertures, dressOpenings, applyDressing,
+  extractApertures, dressOpenings, applyDressing,
 } from "../../src/view/opening-dressing.mjs";
+import { composeVocabulary } from "../../src/form/material-vocabulary.mjs";
 import { assertArtifact } from "../../src/artifact.mjs";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
@@ -118,8 +119,21 @@ async function main() {
   assertArtifact(target);
   if (kitRec.schema !== "kit/v1") throw new Error(`${def.kit} is not a kit/v1 record`);
 
-  // ---- 1. TREATMENTS -------------------------------------------------------------------------
-  const treatments = treatmentsFromKit(kitRec);
+  // ---- 1. TREATMENTS (composed by the AUTHORITY — T-113-01) ------------------------------------
+  // The target ships in substituted space; the treatments must speak it. The substitution lives in
+  // the durable-skin record beside the target — loaded when present (data-gated, named), so this
+  // evidence runner dresses with the SAME vocabulary the styled chain does.
+  const skinRecRel = def.target.replace(/\/[^/]+\/artifact\.json$/, `/${def.key}.json`);
+  const skinRec = existsSync(join(HERE, skinRecRel))
+    ? JSON.parse(await readFile(join(HERE, skinRecRel), "utf8"))
+    : null;
+  if (!skinRec) console.error(`[${def.key}] no durable-skin record at ${skinRecRel} — treatments compose without a value-true substitution (named)`);
+  const vocab = composeVocabulary({
+    policyNamed: {},
+    substitution: skinRec?.valueTrue?.substitution ?? {},
+    kitOverrides: kitRec.overrides ?? {}, kit: kitRec.kit ?? [],
+  });
+  const treatments = vocab.treatments;
   console.error(`[${def.key}] treatments: ` + Object.entries(treatments.slots)
     .map(([s, v]) => `${s}=${v.block}(${v.source})`).join(", "));
   for (const d of treatments.derivations) console.error(`[${def.key}] derived ${d.slot}: ${d.block} ← ${d.from} (${d.reason})`);

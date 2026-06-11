@@ -33,6 +33,7 @@
 import { placementGrammar } from "./placement-grammar.mjs";
 import { dressOpenings } from "../view/opening-dressing.mjs";
 import { bareBlock } from "../view/occupancy.mjs";
+import { ownSetsOf } from "./material-vocabulary.mjs";
 
 /** Schema tags (downstream version-check). */
 export const KIT_PRESENCE_SCHEMA = "kit-presence/v1";
@@ -113,8 +114,7 @@ export function kitPresence(occ, {
   // placement over the zone's own dominant/preserve block is sub-minRun RESIDUE (a run the
   // dressing broke when it re-opened a pane, an isolated declared-secondary speck): the fill's
   // cleanliness contract, not an absence — tolerated, counted, never silent.
-  const ownOf = new Map(Object.entries(policy).map(([z, p]) =>
-    [z, new Set([p.dominant, ...(p.preserve ?? [])].map(bareBlock))]));
+  const ownOf = ownSetsOf(policy); // the authority's own-vocabulary composition (T-113-01)
   const fillByZone = new Map();    // foreign cells — gating
   const residueByZone = new Map(); // own-vocabulary specks — tolerated
   for (const p of g.fill.placements) {

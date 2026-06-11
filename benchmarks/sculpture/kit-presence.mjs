@@ -36,9 +36,10 @@ import { artifactOccupancy } from "../../src/view/occupancy.mjs";
 import { structuralZones } from "../../src/view/structural-read.mjs";
 import { zonesFromBands } from "../../src/view/zone-map.mjs";
 import {
-  treatmentsFromKit, extractApertures, dressOpenings, applyDressing,
+  extractApertures, dressOpenings, applyDressing,
 } from "../../src/view/opening-dressing.mjs";
 import { kitPresence, KIT_PRESENCE_SCHEMA } from "../../src/form/kit-presence.mjs";
+import { composeVocabulary } from "../../src/form/material-vocabulary.mjs";
 import { assertArtifact } from "../../src/artifact.mjs";
 import { SUBJECTS } from "./durable-skin.mjs";
 
@@ -114,14 +115,20 @@ async function main() {
     throw new Error("durable-skin record has no concept-derived zone map — presence binds to the T-092 bands");
   }
 
-  // the grammar runner's exact composition: bands + shipped policy + the one renaming point
+  // the grammar runner's exact composition, via the AUTHORITY (T-113-01): the committed skin
+  // record holds the already-shipped policy; the renaming point and the shipped treatments
+  // compose in the one module.
   const bandNames = skinRec.zoneMap.bands.map((b) => b.name);
-  const policy = skinRec.fill.policy; // SHIPPED space
-  const combined = { ...(skinRec.valueTrue?.substitution ?? {}), ...(kitRec.overrides ?? {}) };
-  const sub = (b) => combined[b] ?? b;
+  const vocab = composeVocabulary({
+    policyNamed: skinRec.fill.policy, policySpace: "shipped",
+    substitution: skinRec.valueTrue?.substitution ?? {},
+    kitOverrides: kitRec.overrides ?? {}, kit: kitRec.kit ?? [],
+  });
+  const policy = vocab.zones;
+  const sub = vocab.sub;
   const apertures = extractApertures(artifactOccupancy(ref));
   if (!apertures.length) throw new Error("no apertures on the reference build — wiring bug, not a result");
-  const treatments = treatmentsFromKit(kitRec);
+  const treatments = vocab.treatments;
 
   /** The checker over one artifact — geometry re-read from THAT artifact (AC #1). */
   const check = (artifact) => {
