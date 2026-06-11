@@ -11,6 +11,9 @@ stories: [S-128, S-129, S-130, S-131, S-132]
 
 ## Background (read this first — self-contained)
 
+**Milestone rung: M2 — "A style we invented in an afternoon"** (`docs/knowledge/milestones.md`).
+The glance test outranks the gate (clause 3); numbers are diagnostics, never destinations.
+
 **The project.** `mc-design-eval` measures an LLM's spatial/material *design* capability via styled
 Minecraft builds. E-31 (in flight) pivots the build path to **recognition and substitution**: the model
 reads concept + conditioned sketch, names the parts in pattern-book vocabulary, canonical generators

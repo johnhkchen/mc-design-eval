@@ -6,6 +6,8 @@ mc-design-eval — a measurement instrument for evaluating an LLM's spatial/mate
 
 **The architecture of record is `docs/knowledge/pipeline-philosophy.md`** (ratified 2026-06-11): AI at every stage, each in its native representation — language for world-building (materials are diegetic, not optical), image gen for the target, 3-D gen for form *evidence only* (never substrate, textures never read), VLM recognition for the building program, pure code (brushes) for construction, the workshop loop for model self-revision, and the frozen instrument for measurement. Creation is iterative and free; measurement is frozen and singular. Read it before proposing pipeline changes.
 
+**The goal ladder is `docs/knowledge/milestones.md`**: M1 one house that looks like its picture → M2 a style invented in an afternoon → M3 a street that belongs together → M4 the Commissioned Village (one sentence in, an unattended day, strangers judge the screenshots) → M5 the self-serve site (users vote on styles with their feet; we serve the quality pipeline they can't build). Every epic names its rung. Numbers are diagnostics, never destinations; the gate is QA, the stranger is the judge; if a build passes the gate but fails the glance, the glance wins.
+
 ## Stack (Phase 1)
 
 - **Language:** JavaScript (Node 20+, ESM / `.mjs`). Single toolchain — no Python on the hot path this phase.

@@ -11,6 +11,9 @@ stories: [S-123, S-124, S-125, S-126, S-127]
 
 ## Background (read this first — self-contained)
 
+**Milestone rung: M1 — "One house that looks like its picture"** (`docs/knowledge/milestones.md`).
+The glance test outranks the gate (clause 3); numbers are diagnostics, never destinations.
+
 **The project.** `mc-design-eval` measures an LLM's spatial/material *design* capability via styled
 Minecraft builds, with a hardened, frozen measurement instrument (kit-aware + 4-azimuth same-object
 gate, receipts, immutable references).
