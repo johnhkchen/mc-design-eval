@@ -41,4 +41,39 @@ Bonus shape note: the buttress/quoin vs wall-field split depicts the E-21 brick�
 near-tone distinction by *geometric feature* — exactly what the material map and feature
 assignment are built to preserve.
 
-## Sign-off (GLB + voxelization smoke-check) — PENDING (appended after `trellis-glb.mjs`)
+## Sign-off (GLB + voxelization smoke-check) — ✓ PASSED with one NAMED deviation, registered 2026-06-11
+
+`trellis-glb.mjs` (MODAL_ENDPOINT_URL from the gitignored `.env`, defaults decimation 150000 /
+texture 1024 / seed 42) → `glb/barn.glb`: 6,511,456 bytes, glTF v2, magic OK, 322.2s.
+Mesh: 138,513 verts / 141,220 tris.
+sha256 `38de9931c26a70f9e6d0b7ed56702030913705149d16bb1cfd336a96639e5985` (the binary is
+gitignored; this pin is the durable record).
+
+`glb-smoke.mjs` swept scales 32/40/48/56/64 → 26-conn components 8 / 4 / 2 / 7 / 2, largest
+fraction 0.9813 / 0.9962 / **0.9997** / 0.9973 / 0.9995. **The strict single-component gate FAILS
+at every scale** — at the chosen working scale 48 the residue is exactly ONE floating cell at
+(35,15,17) out of 3,579 (dims 48×21×26), TRELLIS mesh debris near the roof.
+
+**Named deviation, and why it is accepted rather than re-rolled:**
+- The defect class the gate exists to catch is *moai-style multi-mass fragmentation* (the recorded
+  control: 3 components, largestFraction 0.5213). A 0.03% single-cell speck is not that class.
+- The generate-first chain never consumes the raw voxelization: evidence is conditioned through
+  `shellStage` before any fit (generated-milestone.mjs provisionStage). Probed through that exact
+  call path (voxelize @48 → keysToArtifact → shellStage with the 4 gate-azimuth GLB silhouettes):
+  **conditioned evidence = 7,157 cells, 26-conn = 1 component** — the speck is stripped before the
+  component set ever sees the occupancy. The artifact itself contains zero blob cells by
+  construction (`assertGeneratedProvenance`), so no mesh speck can reach the build.
+- Re-running TRELLIS cannot help (seed 42 pinned ⇒ same mesh); regenerating a checklist-clean
+  concept to chase one mesh cell would trade a measured, conditioned-away defect for concept
+  roulette. E-25's regeneration license is for *concept* failures; items 1–7 above all pass.
+
+Working scale: **48** for both `provision.scale` and `generated.scale` (registry-scale alignment,
+T-115). Note this supersedes the design.md tiebreaker toward 32 — raw connectivity at 32 is
+strictly worse (8 components, 19 stray cells); 48 follows the church building precedent.
+
+**`barn` is hereby registered** (SUBJECTS in `benchmarks/sculpture/durable-skin.mjs` + the
+kit-extract.mjs / material-map.mjs DATA lists: concept = this run's `concept.png`, glb =
+`glb/barn.glb`, scale = 48). The concept is IMMUTABLE from this point (E-25 Rule 2). No build,
+material map, zone map, or kit exists yet — the pipeline consumes it UNTUNED (E-25 Rule 3); the
+records land in T-116-01 bootstrap order (material-map → challenge provision → zone-map → kit →
+generated milestone).
