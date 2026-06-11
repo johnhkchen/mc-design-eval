@@ -176,8 +176,8 @@ export const SUBJECTS = {
     glb: "glb/church.glb",
     map: "material-map/church.json",
     valueSelectRecord: null, // first run IS the value-true result (gatehouse precedent)
-    zoneMapRecord: null,     // no committed derivation — the challenge record carries the first one
-    kitRecord: null,         // kits are E-26 scope; optional in buildSkin
+    zoneMapRecord: "zone-map/church.json", // T-110-01: first committed derivation (chain audits the diff)
+    kitRecord: "kit/church.json",          // T-110-01: first church kit (roof family + presence gate)
     provision: { scale: 48 },
     // T-106-01: the chain-canonical caged shell — the standalone T-102 record was cut from the
     // PRE-cage-wiring challenge shell (stale input; its expect pins describe that shell), so the
