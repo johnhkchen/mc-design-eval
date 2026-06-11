@@ -25,6 +25,7 @@
     "skin:gatehouse": "node benchmarks/sculpture/durable-skin.mjs --subject gatehouse",
     "zone:map": "node benchmarks/sculpture/zone-map.mjs",
     "gate:multi": "node benchmarks/sculpture/multi-angle-gate.mjs",
+    "diff:roof": "node benchmarks/sculpture/roof-diff.mjs",
     "gate:rejudge": "node benchmarks/sculpture/multi-angle-gate.mjs --rejudge",
     "challenge:cottage": "node benchmarks/sculpture/challenge-milestone.mjs --subject cottage",
     "challenge:gatehouse": "node benchmarks/sculpture/challenge-milestone.mjs --subject gatehouse",

@@ -121,6 +121,7 @@ benchmarks/sculpture/zone-map/**/*.png
 # committed record is multi-angle/<subj>-<label>.{json,md}; the committed verdict SHEET lives in
 # pr/assets/frames/multi-angle-*.png.
 benchmarks/sculpture/multi-angle/**/*.png
+benchmarks/sculpture/roof-diff/**/*.png
 # …except the synthetic-positive fixture's concept (a committed INPUT, not a regenerable output)
 !benchmarks/sculpture/multi-angle/fixtures/**
 

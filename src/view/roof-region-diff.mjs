@@ -133,6 +133,16 @@ export function roofRegions(gables, occ, opts = {}) {
     const hiFace = g.ends?.hi?.faceCoord ?? null;
     const eaveEdges = g.sides.map((s) => ({ edge: s.eaveEdge, axis: s.eaveDir[1] }));
 
+    // the ridge band is relative to the surface the gable ACHIEVES, not the nominal ridge.y —
+    // when the fitted side planes intersect below the recorded ridge (the cottage case) the peak
+    // line still exists and must be named, or the instrument goes ridge-blind exactly where the
+    // ridge is wrong
+    let maxH = -Infinity;
+    for (const [, x, z] of parsed) {
+      const h = gableSurfaceHeight(g, x, z);
+      if (h > maxH) maxH = h;
+    }
+
     for (const [k, x, z] of parsed) {
       const along = alongOf(x, z);
       const cross = crossOf(x, z);
@@ -144,7 +154,7 @@ export function roofRegions(gables, occ, opts = {}) {
       const inLo = loFace != null ? along <= loFace : along < loAlong + d.endBandWidth;
       const inHi = hiFace != null ? along >= hiFace : along > hiAlong - d.endBandWidth;
       if (inLo || inHi) put(k, "ends");
-      if (gableSurfaceHeight(g, x, z) >= g.ridge.y - d.capDepth) put(k, "ridge");
+      if (gableSurfaceHeight(g, x, z) >= maxH - d.capDepth) put(k, "ridge");
     }
   }
 
@@ -163,13 +173,17 @@ const NEIGH6 = Object.freeze([[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 
 /**
  * Project every EXPOSED solid cell to screen space under the SAME camera the build silhouette
  * used (exposedFaceMesh bounds = `[min, max+1]` through cameraForMeshBounds — no forked framing).
- * Each point carries its region: the column's assignment for cells at/above the band floor,
- * `wall` below. PURE.
+ * Each point carries its region: the column's assignment for cells at/above the band floor
+ * (`unpartitioned` when the roof band has no gable there — e.g. a flat-cap tower beside a fitted
+ * nave), `wall` below. `opts.wallTopOf(x,z)` supplies a per-column band floor for multi-mass
+ * builds whose storeys top out at different heights (data from the mass records — no constants).
+ * PURE.
  * @returns {{region:string, sx:number, sy:number}[]}
  */
 export function projectRegions(regions, occ, view, opts = {}) {
   const width = opts.width ?? SILHOUETTE_DEFAULTS.width;
   const height = opts.height ?? SILHOUETTE_DEFAULTS.height;
+  const wallTopOf = opts.wallTopOf ?? (() => regions.bandFloor);
   const meshBounds = { min: occ.bounds.min.slice(), max: occ.bounds.max.map((v) => v + 1) };
   const cam = cameraForMeshBounds(meshBounds, { ...view, width, height });
 
@@ -186,7 +200,8 @@ export function projectRegions(regions, occ, view, opts = {}) {
     if (!exposed) continue;
     const p = projectPoint([x + 0.5, y + 0.5, z + 0.5], cam, width, height);
     if (!(p.w > 0)) continue;
-    const region = y >= regions.bandFloor ? (regions.assign.get(colKey(x, z)) ?? "wall") : "wall";
+    const floor = wallTopOf(x, z) ?? regions.bandFloor;
+    const region = y >= floor ? (regions.assign.get(colKey(x, z)) ?? "unpartitioned") : "wall";
     points.push({ region, sx: p.x, sy: p.y });
   }
   return points;
@@ -201,7 +216,7 @@ export function projectRegions(regions, occ, view, opts = {}) {
  *
  * @param {{buildSil:object, refSil:object, points:object[], grid?:number, precedence?:string[]}} args
  */
-export function attributeMismatch({ buildSil, refSil, points, grid = ROOF_DIFF_DEFAULTS.grid, precedence = ROOF_DIFF_DEFAULTS.precedence }) {
+export function attributeMismatch({ buildSil, refSil, points, grid = ROOF_DIFF_DEFAULTS.grid, precedence = ROOF_DIFF_DEFAULTS.precedence, withField = false }) {
   const nb = normalizeSilhouette(buildSil, { grid, fit: "aspect" });
   const nr = normalizeSilhouette(refSil, { grid, fit: "aspect" });
   const score = iou(nb, nr);
@@ -248,7 +263,10 @@ export function attributeMismatch({ buildSil, refSil, points, grid = ROOF_DIFF_D
     byRegion[name] = byRegion[name] ?? { extra: 0, missing: 0 };
     byRegion[name][kind]++;
   }
-  return { iou: round3(score), grid: G, mismatchPx: extra + missing, extra, missing, byRegion, unattributed };
+  const out = { iou: round3(score), grid: G, mismatchPx: extra + missing, extra, missing, byRegion, unattributed };
+  // runner-only render payload (typed arrays — callers must strip it before recording JSON)
+  if (withField) out.field = { names, regionOf, nb, nr };
+  return out;
 }
 
 // --- height profiles --------------------------------------------------------
@@ -385,14 +403,14 @@ export function heightProfiles({ gable, tops, aTris }) {
  * profiles + cross-azimuth summary. The caller (impure runner) supplies everything loaded — occ,
  * gables (ends merged), GLB reference silhouettes, aligned triangles. PURE; plain JSON out.
  */
-export function roofRegionDiff({ occ, gables, refSils, aTris, bandFloor = null, grid = ROOF_DIFF_DEFAULTS.grid }) {
+export function roofRegionDiff({ occ, gables, refSils, aTris, bandFloor = null, wallTopOf = null, grid = ROOF_DIFF_DEFAULTS.grid }) {
   const regions = roofRegions(gables, occ, { bandFloor });
   const azimuths = Object.keys(refSils);
   const buildSils = voxelSilhouettes(occ, azimuths);
 
   const views = {};
   for (const a of azimuths) {
-    const points = projectRegions(regions, occ, resolveAngle(a), { width: buildSils[a].w, height: buildSils[a].h });
+    const points = projectRegions(regions, occ, resolveAngle(a), { width: buildSils[a].w, height: buildSils[a].h, wallTopOf });
     views[a] = attributeMismatch({ buildSil: buildSils[a], refSil: refSils[a], points, grid });
   }
 
