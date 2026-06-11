@@ -21,6 +21,9 @@
       "minTriangles": 1,
       "anchorSlack": 1.5
     },
+    "ridgeFit": {
+      "apexGap": 1
+    },
     "iouTolerance": 0.02,
     "grid": 128,
     "spikeFaces": 4,
@@ -245,6 +248,582 @@
       }
     ]
   },
+  "ridgeFit": {
+    "schema": "roof-ridge-fit/v1",
+    "gables": [
+      {
+        "id": "gable-roof-0-roof-4",
+        "recordY": 28,
+        "intersect": {
+          "y": 26.397,
+          "v": 0.934,
+          "valid": false,
+          "reasons": [
+            "intersection y 26.397 not above the eaves (26.5)"
+          ]
+        },
+        "deltaVsRecord": null,
+        "apexLine": {
+          "height": 31.5,
+          "slopeDeg": 0,
+          "span": [
+            -12,
+            13
+          ],
+          "length": 26,
+          "rmse": 0,
+          "slices": 26
+        }
+      }
+    ],
+    "note": "intersect = the ridge constructed from the FITTED side planes; apexLine = the GLB apex measured under the aabb alignment (evidence only — vertical absolutes are unreliable, the roof-end-fit lesson)"
+  },
+  "terminations": {
+    "schema": "plane-terminate/v1",
+    "planes": [
+      {
+        "id": "roof-2",
+        "kind": "flat",
+        "area": 151
+      },
+      {
+        "id": "roof-1",
+        "kind": "pitched",
+        "area": 153
+      },
+      {
+        "id": "roof-3",
+        "kind": "pitched",
+        "area": 28
+      },
+      {
+        "id": "roof-5",
+        "kind": "pitched",
+        "area": 14
+      },
+      {
+        "id": "roof-6",
+        "kind": "pitched",
+        "area": 13
+      },
+      {
+        "id": "roof-7",
+        "kind": "pitched",
+        "area": 9
+      },
+      {
+        "id": "roof-8",
+        "kind": "pitched",
+        "area": 9
+      }
+    ],
+    "trace": [
+      {
+        "step": "terminate:roof-2",
+        "params": {
+          "radius": 1
+        },
+        "accepted": true,
+        "reasons": [],
+        "iouByAzimuth": {
+          "+x+z": {
+            "baseline": 0.8988,
+            "candidate": 0.8989,
+            "floor": 0.8788
+          },
+          "+x-z": {
+            "baseline": 0.9263,
+            "candidate": 0.9255,
+            "floor": 0.9063
+          },
+          "-x-z": {
+            "baseline": 0.917,
+            "candidate": 0.9165,
+            "floor": 0.897
+          },
+          "-x+z": {
+            "baseline": 0.895,
+            "candidate": 0.895,
+            "floor": 0.875
+          }
+        },
+        "closure": {
+          "closed": true,
+          "reached": 0,
+          "inputReached": 0
+        },
+        "protect": {
+          "violations": 0
+        },
+        "census": {
+          "cells": 9467,
+          "spikes": 33,
+          "byExposure": [
+            4760,
+            2892,
+            1499,
+            283,
+            30,
+            3,
+            0
+          ],
+          "ragged": 67,
+          "columns": 679,
+          "raggedRate": 0.0987
+        },
+        "cells": {
+          "removed": 15,
+          "added": 1
+        }
+      },
+      {
+        "step": "terminate:roof-1",
+        "params": {
+          "radius": 1
+        },
+        "accepted": true,
+        "reasons": [],
+        "iouByAzimuth": {
+          "+x+z": {
+            "baseline": 0.8988,
+            "candidate": 0.8926,
+            "floor": 0.8788
+          },
+          "+x-z": {
+            "baseline": 0.9263,
+            "candidate": 0.9255,
+            "floor": 0.9063
+          },
+          "-x-z": {
+            "baseline": 0.917,
+            "candidate": 0.9141,
+            "floor": 0.897
+          },
+          "-x+z": {
+            "baseline": 0.895,
+            "candidate": 0.8904,
+            "floor": 0.875
+          }
+        },
+        "closure": {
+          "closed": true,
+          "reached": 0,
+          "inputReached": 0
+        },
+        "protect": {
+          "violations": 0
+        },
+        "census": {
+          "cells": 9412,
+          "spikes": 38,
+          "byExposure": [
+            4735,
+            2858,
+            1512,
+            269,
+            35,
+            3,
+            0
+          ],
+          "ragged": 67,
+          "columns": 679,
+          "raggedRate": 0.0987
+        },
+        "cells": {
+          "removed": 55,
+          "added": 0
+        }
+      },
+      {
+        "step": "terminate:roof-3",
+        "params": {
+          "radius": 1
+        },
+        "accepted": true,
+        "reasons": [],
+        "iouByAzimuth": {
+          "+x+z": {
+            "baseline": 0.8988,
+            "candidate": 0.8904,
+            "floor": 0.8788
+          },
+          "+x-z": {
+            "baseline": 0.9263,
+            "candidate": 0.9255,
+            "floor": 0.9063
+          },
+          "-x-z": {
+            "baseline": 0.917,
+            "candidate": 0.9128,
+            "floor": 0.897
+          },
+          "-x+z": {
+            "baseline": 0.895,
+            "candidate": 0.8904,
+            "floor": 0.875
+          }
+        },
+        "closure": {
+          "closed": true,
+          "reached": 0,
+          "inputReached": 0
+        },
+        "protect": {
+          "violations": 0
+        },
+        "census": {
+          "cells": 9397,
+          "spikes": 38,
+          "byExposure": [
+            4730,
+            2851,
+            1506,
+            272,
+            35,
+            3,
+            0
+          ],
+          "ragged": 65,
+          "columns": 679,
+          "raggedRate": 0.0957
+        },
+        "cells": {
+          "removed": 15,
+          "added": 0
+        }
+      },
+      {
+        "step": "terminate:roof-5",
+        "params": {
+          "radius": 1
+        },
+        "accepted": true,
+        "reasons": [],
+        "iouByAzimuth": {
+          "+x+z": {
+            "baseline": 0.8988,
+            "candidate": 0.8902,
+            "floor": 0.8788
+          },
+          "+x-z": {
+            "baseline": 0.9263,
+            "candidate": 0.9247,
+            "floor": 0.9063
+          },
+          "-x-z": {
+            "baseline": 0.917,
+            "candidate": 0.9123,
+            "floor": 0.897
+          },
+          "-x+z": {
+            "baseline": 0.895,
+            "candidate": 0.8883,
+            "floor": 0.875
+          }
+        },
+        "closure": {
+          "closed": true,
+          "reached": 0,
+          "inputReached": 0
+        },
+        "protect": {
+          "violations": 0
+        },
+        "census": {
+          "cells": 9388,
+          "spikes": 47,
+          "byExposure": [
+            4729,
+            2849,
+            1497,
+            266,
+            44,
+            3,
+            0
+          ],
+          "ragged": 59,
+          "columns": 679,
+          "raggedRate": 0.0869
+        },
+        "cells": {
+          "removed": 9,
+          "added": 0
+        }
+      },
+      {
+        "step": "terminate:roof-6",
+        "params": {
+          "radius": 1
+        },
+        "accepted": true,
+        "reasons": [],
+        "iouByAzimuth": {
+          "+x+z": {
+            "baseline": 0.8988,
+            "candidate": 0.8902,
+            "floor": 0.8788
+          },
+          "+x-z": {
+            "baseline": 0.9263,
+            "candidate": 0.9234,
+            "floor": 0.9063
+          },
+          "-x-z": {
+            "baseline": 0.917,
+            "candidate": 0.9123,
+            "floor": 0.897
+          },
+          "-x+z": {
+            "baseline": 0.895,
+            "candidate": 0.8879,
+            "floor": 0.875
+          }
+        },
+        "closure": {
+          "closed": true,
+          "reached": 0,
+          "inputReached": 0
+        },
+        "protect": {
+          "violations": 0
+        },
+        "census": {
+          "cells": 9384,
+          "spikes": 48,
+          "byExposure": [
+            4729,
+            2846,
+            1492,
+            269,
+            45,
+            3,
+            0
+          ],
+          "ragged": 59,
+          "columns": 679,
+          "raggedRate": 0.0869
+        },
+        "cells": {
+          "removed": 4,
+          "added": 0
+        }
+      },
+      {
+        "step": "terminate:roof-7",
+        "params": {
+          "radius": 1
+        },
+        "accepted": true,
+        "reasons": [],
+        "iouByAzimuth": {
+          "+x+z": {
+            "baseline": 0.8988,
+            "candidate": 0.8897,
+            "floor": 0.8788
+          },
+          "+x-z": {
+            "baseline": 0.9263,
+            "candidate": 0.9239,
+            "floor": 0.9063
+          },
+          "-x-z": {
+            "baseline": 0.917,
+            "candidate": 0.9123,
+            "floor": 0.897
+          },
+          "-x+z": {
+            "baseline": 0.895,
+            "candidate": 0.8879,
+            "floor": 0.875
+          }
+        },
+        "closure": {
+          "closed": true,
+          "reached": 0,
+          "inputReached": 0
+        },
+        "protect": {
+          "violations": 0
+        },
+        "census": {
+          "cells": 9382,
+          "spikes": 49,
+          "byExposure": [
+            4729,
+            2846,
+            1491,
+            267,
+            46,
+            3,
+            0
+          ],
+          "ragged": 57,
+          "columns": 679,
+          "raggedRate": 0.0839
+        },
+        "cells": {
+          "removed": 2,
+          "added": 0
+        }
+      },
+      {
+        "step": "terminate:roof-8",
+        "params": {
+          "radius": 1
+        },
+        "accepted": true,
+        "reasons": [],
+        "iouByAzimuth": {
+          "+x+z": {
+            "baseline": 0.8988,
+            "candidate": 0.8897,
+            "floor": 0.8788
+          },
+          "+x-z": {
+            "baseline": 0.9263,
+            "candidate": 0.9239,
+            "floor": 0.9063
+          },
+          "-x-z": {
+            "baseline": 0.917,
+            "candidate": 0.9123,
+            "floor": 0.897
+          },
+          "-x+z": {
+            "baseline": 0.895,
+            "candidate": 0.8879,
+            "floor": 0.875
+          }
+        },
+        "closure": {
+          "closed": true,
+          "reached": 0,
+          "inputReached": 0
+        },
+        "protect": {
+          "violations": 0
+        },
+        "census": {
+          "cells": 9379,
+          "spikes": 50,
+          "byExposure": [
+            4729,
+            2845,
+            1487,
+            268,
+            47,
+            3,
+            0
+          ],
+          "ragged": 55,
+          "columns": 679,
+          "raggedRate": 0.081
+        },
+        "cells": {
+          "removed": 3,
+          "added": 0
+        }
+      }
+    ],
+    "accepted": 7,
+    "rejected": 0,
+    "iou": {
+      "baseline": {
+        "+x+z": 0.8988,
+        "+x-z": 0.9263,
+        "-x-z": 0.917,
+        "-x+z": 0.895
+      },
+      "final": {
+        "+x+z": 0.8897,
+        "+x-z": 0.9239,
+        "-x-z": 0.9123,
+        "-x+z": 0.8879
+      }
+    }
+  },
+  "residual": {
+    "schema": "silhouette-residual/v1",
+    "dilationPx": 4,
+    "removedCells": 0,
+    "log": [
+      {
+        "id": "res-0",
+        "size": 53,
+        "perAzimuth": {
+          "+x+z": {
+            "massPx": 265,
+            "spillPx": 0,
+            "spillFrac": 0
+          },
+          "+x-z": {
+            "massPx": 255,
+            "spillPx": 0,
+            "spillFrac": 0
+          },
+          "-x-z": {
+            "massPx": 312,
+            "spillPx": 0,
+            "spillFrac": 0
+          },
+          "-x+z": {
+            "massPx": 316,
+            "spillPx": 0,
+            "spillFrac": 0
+          }
+        },
+        "shownAt": [
+          "+x+z",
+          "+x-z",
+          "-x-z",
+          "-x+z"
+        ],
+        "refutedAt": [],
+        "outcome": "exempt-shown",
+        "reasons": [
+          "GLB accounts for the mass at every gate azimuth"
+        ]
+      },
+      {
+        "id": "res-1",
+        "size": 3,
+        "perAzimuth": {
+          "+x+z": {
+            "massPx": 52,
+            "spillPx": 0,
+            "spillFrac": 0
+          },
+          "+x-z": {
+            "massPx": 53,
+            "spillPx": 0,
+            "spillFrac": 0
+          },
+          "-x-z": {
+            "massPx": 35,
+            "spillPx": 0,
+            "spillFrac": 0
+          },
+          "-x+z": {
+            "massPx": 32,
+            "spillPx": 0,
+            "spillFrac": 0
+          }
+        },
+        "shownAt": [
+          "+x+z",
+          "+x-z",
+          "-x-z",
+          "-x+z"
+        ],
+        "refutedAt": [],
+        "outcome": "exempt-shown",
+        "reasons": [
+          "GLB accounts for the mass at every gate azimuth"
+        ]
+      }
+    ],
+    "note": "exempt ⇔ spill-free at every gate azimuth after the one-voxel dilation (a mass the GLB contains); refuted at ≥1 azimuth → removed under the cage (IoU floors, closure no-regress), rolled back named otherwise"
+  },
   "family": {
     "field": "deepslate_bricks",
     "stairs": "deepslate_brick_stairs",
@@ -294,7 +873,8 @@
           "counts": {
             "full": 1503,
             "stairs": 50,
-            "slabs": 139
+            "slabs": 139,
+            "cap": 14
           },
           "gables": [
             "gable-roof-0-roof-4"
@@ -406,7 +986,8 @@
           "counts": {
             "full": 1036,
             "stairs": 41,
-            "slabs": 136
+            "slabs": 136,
+            "cap": 0
           },
           "gables": [
             "gable-roof-0-roof-4"
@@ -414,7 +995,13 @@
           "fittedEnds": 0,
           "endCoords": []
         },
-        "findings": [],
+        "findings": [
+          {
+            "code": "ridge-unfitted",
+            "where": "gable-roof-0-roof-4",
+            "detail": "intersection y 26.397 not above the eaves (26.5) — as-built ridge stays (Rule 2)"
+          }
+        ],
         "pitches": [
           {
             "id": "gable-roof-0-roof-4",
@@ -432,7 +1019,8 @@
             ]
           }
         ],
-        "ends": []
+        "ends": [],
+        "ridge": []
       },
       {
         "massId": "mass-0",
@@ -478,7 +1066,8 @@
           "counts": {
             "full": 1209,
             "stairs": 78,
-            "slabs": 135
+            "slabs": 135,
+            "cap": 6
           },
           "gables": [
             "gable-roof-0-roof-4"
@@ -504,7 +1093,8 @@
             ]
           }
         ],
-        "ends": []
+        "ends": [],
+        "ridge": []
       },
       {
         "massId": "mass-0",
@@ -550,7 +1140,8 @@
           "counts": {
             "full": 1240,
             "stairs": 0,
-            "slabs": 152
+            "slabs": 152,
+            "cap": 0
           },
           "gables": [
             "gable-roof-0-roof-4"
@@ -568,7 +1159,13 @@
             }
           ]
         },
-        "findings": [],
+        "findings": [
+          {
+            "code": "ridge-unfitted",
+            "where": "gable-roof-0-roof-4",
+            "detail": "intersection y 26.397 not above the eaves (26.5) — as-built ridge stays (Rule 2)"
+          }
+        ],
         "pitches": [
           {
             "id": "gable-roof-0-roof-4",
@@ -592,7 +1189,8 @@
             "lo": null,
             "hi": 13
           }
-        ]
+        ],
+        "ridge": []
       },
       {
         "massId": "mass-0",
@@ -635,7 +1233,8 @@
           "counts": {
             "full": 1503,
             "stairs": 50,
-            "slabs": 139
+            "slabs": 139,
+            "cap": 14
           },
           "gables": [
             "gable-roof-0-roof-4"
@@ -677,7 +1276,8 @@
             "lo": null,
             "hi": 13
           }
-        ]
+        ],
+        "ridge": []
       }
     ],
     "iou": {
@@ -776,12 +1376,12 @@
   "unmapped": 0,
   "reproducible": {
     "doubleRun": true,
-    "sha256": "5ffc907ebb7ad4c9de13c6059113c0a19110b268a32d036fb15e70d567a35ed0",
+    "sha256": "6ed2580cff4ce07dca5731e85f64c74d34906d8f9156a17db36f15aa1bce8278",
     "determinism": "no LLM, no GL on the decision path — silhouettes via the pure rasterizer; two in-process executions byte-matched."
   },
   "placements": {
     "input": 9350,
-    "final": 9481
+    "final": 9379
   },
   "renders": [
     {
@@ -823,6 +1423,16 @@
       "when": "after",
       "angle": "-x+z",
       "path": "benchmarks/sculpture/roof/gatehouse/view-oblique315-after.png"
+    },
+    {
+      "when": "before",
+      "angle": "front",
+      "path": "benchmarks/sculpture/roof/gatehouse/view-ridge-before.png"
+    },
+    {
+      "when": "after",
+      "angle": "front",
+      "path": "benchmarks/sculpture/roof/gatehouse/view-ridge-after.png"
     }
   ],
   "frames": [
@@ -831,7 +1441,9 @@
     "pr/assets/frames/roof-gatehouse-end45-before.png",
     "pr/assets/frames/roof-gatehouse-end45-after.png",
     "pr/assets/frames/roof-gatehouse-end315-before.png",
-    "pr/assets/frames/roof-gatehouse-end315-after.png"
+    "pr/assets/frames/roof-gatehouse-end315-after.png",
+    "pr/assets/frames/roof-gatehouse-ridge-before.png",
+    "pr/assets/frames/roof-gatehouse-ridge-after.png"
   ],
   "lensNote": "stairs-rendered (T-107-01, supersedes the T-097 stairs-invisible pin): the lens defect was getModelVariants' substring air-check matching every *_stairs name; fixed by render/scripts/patch-viewer-lens.mjs. Stair courses are visible in renders; placement remains proven by the unmapped gate + the committed states."
 }

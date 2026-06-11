@@ -1,6 +1,6 @@
 # Roof as program — gatehouse (T-104-01)
 
-The sampled roof replaced by a roof GENERATED from parameters fitted against the component record's GLB fits — stair courses, slab half-steps, solid wedge — swapped under the T-102 cage, behind `npm run roof:gatehouse`. **Status: ACCEPTED** — reproducible, artifact sha256 `5ffc907ebb7ad4c9…`.
+The sampled roof replaced by a roof GENERATED from parameters fitted against the component record's GLB fits — stair courses, slab half-steps, solid wedge — swapped under the T-102 cage, behind `npm run roof:gatehouse`. **Status: ACCEPTED** — reproducible, artifact sha256 `6ed2580cff4ce07d…`.
 
 ## Fitted gables
 - **gable-roof-0-roof-4** (sane) ridge x @ y 28, hip ends — roof-0 → +z: pitch **0.613** (glb, glb∠ 7.603°), eave y 19, overhang 4; roof-4 → -z: pitch **1.558** (voxel), eave y 26.5, overhang -10
@@ -14,6 +14,26 @@ Ends fitted in the accepted geometry: 1 — gable-roof-0-roof-4 [lo — · hi 13
 
 ## Per-component outcomes (T-110-01)
 - **mass-0** (primary): ACCEPTED (`end-fitted-voxel-pitch-gable-ends`) — rmse gable-roof-0-roof-4 0.144 (gables: gable-roof-0-roof-4, gable-roof-1-roof-6)
+
+## Ridge fit (T-109-01)
+- **gable-roof-0-roof-4**: record ridge y 28; intersect invalid (intersection y 26.397 not above the eaves (26.5)); GLB apex line: y 31.5, slope 0°, length 26, rmse 0
+
+Cap course cells in the accepted geometry: 0.
+
+## Upper-edge terminations (T-109-01)
+Planes: roof-2 (flat, 151), roof-1 (pitched, 153), roof-3 (pitched, 28), roof-5 (pitched, 14), roof-6 (pitched, 13), roof-7 (pitched, 9), roof-8 (pitched, 9) — 7 accepted / 0 rolled back.
+- `terminate:roof-2`: accepted (−15/+1)
+- `terminate:roof-1`: accepted (−55/+0)
+- `terminate:roof-3`: accepted (−15/+0)
+- `terminate:roof-5`: accepted (−9/+0)
+- `terminate:roof-6`: accepted (−4/+0)
+- `terminate:roof-7`: accepted (−2/+0)
+- `terminate:roof-8`: accepted (−3/+0)
+
+## Silhouette residual (T-109-01)
+Dilation 4px (one voxel); removed 0 cells.
+- **res-0** (53 cells): exempt-shown — GLB accounts for the mass at every gate azimuth
+- **res-1** (3 cells): exempt-shown — GLB accounts for the mass at every gate azimuth
 
 ## The cage
 IoU vs GLB — baseline: +x+z 0.9135 · +x-z 0.9299 · -x-z 0.9343 · -x+z 0.9226; final: +x+z 0.9133 · +x-z 0.9248 · -x-z 0.922 · -x+z 0.9147 (tolerance 0.02, anchored to the input shell). Closure reached 0 → 0. Chimney: 22 columns protected, 0 cells re-seated.
@@ -46,8 +66,10 @@ Carved 1561 sampled cells; generated 1503 full / 50 stairs / 139 slabs (family d
 - after -x-z: benchmarks/sculpture/roof/gatehouse/view-oblique225-after.png
 - before -x+z: benchmarks/sculpture/roof/gatehouse/view-oblique315-before.png
 - after -x+z: benchmarks/sculpture/roof/gatehouse/view-oblique315-after.png
+- before front: benchmarks/sculpture/roof/gatehouse/view-ridge-before.png
+- after front: benchmarks/sculpture/roof/gatehouse/view-ridge-after.png
 
-Frames: pr/assets/frames/roof-gatehouse-before.png, pr/assets/frames/roof-gatehouse-after.png, pr/assets/frames/roof-gatehouse-end45-before.png, pr/assets/frames/roof-gatehouse-end45-after.png, pr/assets/frames/roof-gatehouse-end315-before.png, pr/assets/frames/roof-gatehouse-end315-after.png
+Frames: pr/assets/frames/roof-gatehouse-before.png, pr/assets/frames/roof-gatehouse-after.png, pr/assets/frames/roof-gatehouse-end45-before.png, pr/assets/frames/roof-gatehouse-end45-after.png, pr/assets/frames/roof-gatehouse-end315-before.png, pr/assets/frames/roof-gatehouse-end315-after.png, pr/assets/frames/roof-gatehouse-ridge-before.png, pr/assets/frames/roof-gatehouse-ridge-after.png
 
 > stairs-rendered (T-107-01, supersedes the T-097 stairs-invisible pin): the lens defect was getModelVariants' substring air-check matching every *_stairs name; fixed by render/scripts/patch-viewer-lens.mjs. Stair courses are visible in renders; placement remains proven by the unmapped gate + the committed states.
 
