@@ -421,8 +421,10 @@ export function silhouetteIoUs(occ, refSils, { grid = REGULARIZE_DEFAULTS.grid }
 
 // --- the cage -------------------------------------------------------------------------------------
 
-/** Cells differing inside any protect region between two occupancies (presence OR block). */
-function protectViolations(before, after, protect) {
+/** Cells differing inside any protect region between two occupancies (presence OR block).
+ *  Exported for the T-104 roof swap, which judges its one composed step with the cage's own
+ *  checks rather than re-implementing them. */
+export function protectViolations(before, after, protect) {
   if (!protect.length) return 0;
   let n = 0;
   const keys = new Set([...before.cells.keys(), ...after.cells.keys()]);
