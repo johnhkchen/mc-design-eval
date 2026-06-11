@@ -188,9 +188,39 @@ test("C2 eave anchors: build = mean recorded eaveY; glb = median over eave-edge 
   const occ = makeOcc(g);
   const r = heightProfiles({ gable: g, tops: roofRegions([g], occ).tops, aTris: slopedSheet() });
   assert.equal(r.anchors.buildEave, 5);
-  // eave strips z=±3, x∈[−2..2] → glb = x+10.5 per column, two strips of 5 → median 10.5
+  // eave strips z=±3, x∈[−2..2] → glb = x+10.5 per column, 5 samples per side, median 10.5 each
   assert.equal(r.anchors.glbEave, 10.5);
-  assert.equal(r.anchors.glbEaveSamples, 10);
+  assert.deepEqual(r.anchors.perSide.map((s) => ({ samples: s.samples, median: s.median })),
+    [{ samples: 5, median: 10.5 }, { samples: 5, median: 10.5 }]);
+  assert.deepEqual(r.anchors.dropped, []);
+});
+
+test("C2b asymmetric eaves with one-sided sampling: like-for-like anchors, no phantom offset", () => {
+  // Two sides with DIFFERENT eaves (build 4 and 8); the GLB sheet covers only side A's eave
+  // strip. The old pooled-median paired build mean (4+8)/2=6 with side-A-only glb samples —
+  // a phantom −2 offset on every eave-relative delta. Like-for-like drops side B from BOTH.
+  const g = makeGable();
+  g.sides[0].eaveY = 8; // +z side: eave strip z=+3 — NOT covered by the half sheet below
+  g.sides[1].eaveY = 4; // −z side: eave strip z=−3 — sampled
+  const occ = makeOcc(g);
+  // flat sheet y=12 covering only the z≤0 half (side B's eave strip; side A unsampled)
+  const half = [
+    { verts: [[-3, 12, -4], [4, 12, -4], [4, 12, 0]] },
+    { verts: [[-3, 12, -4], [4, 12, 0], [-3, 12, 0]] },
+  ];
+  const r = heightProfiles({ gable: g, tops: roofRegions([g], occ).tops, aTris: half });
+  assert.equal(r.anchors.buildEave, 4); // the sampled side only — NOT the (8+4)/2=6 declared mean
+  assert.equal(r.anchors.glbEave, 12);
+  assert.deepEqual(r.anchors.dropped, ["roof-a"]);
+  // per-x column max tops out at 8 (z=+1: min of ridge cap 8 / sideA 10 / sideB 8), glb flat 12:
+  // the build rises 4 above ITS eave anchor, the GLB 0 above ITS OWN → delta +4. The old pooled
+  // anchors (buildEave (8+4)/2 = 6) would have read +2 — a phantom −2 from pairing a two-side
+  // declared mean with one-side samples.
+  for (const e of r.ridge.profile) {
+    assert.equal(e.build, 8);
+    assert.equal(e.glb, 12);
+    assert.equal(e.delta, 4);
+  }
 });
 
 test("C3 eave-relative delta anchors each side to its own eave (constant glb offset cancels)", () => {

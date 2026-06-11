@@ -30,7 +30,7 @@ import { voxelSilhouettes, REGULARIZE_DEFAULTS } from "./shell-regularize.mjs";
 import { resolveAngle } from "./multi-angle.mjs";
 import { normalizeSilhouette, normalizePlacement, iou } from "../form/form-fidelity.mjs";
 import { cameraForMeshBounds, projectPoint, SILHOUETTE_DEFAULTS } from "../form/glb-silhouette.mjs";
-import { gableSurfaceHeight } from "../form/roof-fit.mjs";
+import { gableSurfaceHeight, glbHeightAt, gableEaveAnchors } from "../form/roof-fit.mjs";
 
 /** Schema tag stamped on assembled records. */
 export const ROOF_DIFF_SCHEMA = "roof-region-diff/v1";
@@ -271,32 +271,6 @@ export function attributeMismatch({ buildSil, refSil, points, grid = ROOF_DIFF_D
 
 // --- height profiles --------------------------------------------------------
 
-/** Max GLB surface height over a column's center, sampled from voxel-space triangles. */
-function glbHeightAt(aTris, x, z) {
-  const px = x + 0.5, pz = z + 0.5;
-  let best = null;
-  for (const t of aTris) {
-    const [a, b, c] = t.verts;
-    const d = (b[2] - a[2]) * (c[0] - a[0]) - (b[0] - a[0]) * (c[2] - a[2]); // xz 2-area
-    if (Math.abs(d) < 1e-9) continue; // vertical / degenerate in plan view
-    const w1 = ((pz - a[2]) * (c[0] - a[0]) - (px - a[0]) * (c[2] - a[2])) / d;
-    const w2 = ((b[2] - a[2]) * (px - a[0]) - (b[0] - a[0]) * (pz - a[2])) / d;
-    const w0 = 1 - w1 - w2;
-    const eps = -1e-9;
-    if (w0 < eps || w1 < eps || w2 < eps) continue;
-    const y = w0 * a[1] + w1 * b[1] + w2 * c[1];
-    if (best === null || y > best) best = y;
-  }
-  return best;
-}
-
-const median = (arr) => {
-  if (!arr.length) return null;
-  const s = [...arr].sort((a, b) => a - b);
-  const m = s.length >> 1;
-  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
-};
-
 function profileStats(pairs) {
   const both = pairs.filter((p) => p.build != null && p.glb != null);
   const uncovered = pairs.length - both.length;
@@ -314,9 +288,10 @@ function profileStats(pairs) {
 /**
  * Per-gable height profiles along the RIDGE (max column height per ridge-axis coordinate) and the
  * RAKES (each end's column line, height per cross coordinate), build vs GLB triangles. Deltas are
- * reported RAW (inherits aabb vertical unreliability — context only) and EAVE-RELATIVE (each side
- * anchored to its own measured eave: build = mean recorded `eaveY`; GLB = median sampled height
- * over the recorded eave-edge columns) — the refit-grade number. PURE.
+ * reported RAW (inherits aabb vertical unreliability — context only) and EAVE-RELATIVE via the
+ * shared like-for-like anchors (roof-fit gableEaveAnchors: per side, build = recorded `eaveY`,
+ * GLB = median sampled height over that side's eave-edge columns; unsampled sides drop from BOTH
+ * means) — the refit-grade number. PURE.
  * @returns {{gable:string, anchors:object, ridge:object, rakes:object[]}}
  */
 export function heightProfiles({ gable, tops, aTris }) {
@@ -331,19 +306,9 @@ export function heightProfiles({ gable, tops, aTris }) {
     sampled.set(colKey(x, z), { build: tops.get(colKey(x, z)) ?? null, glb: glbHeightAt(aTris, x, z) });
   }
 
-  // anchors
-  const buildEave = gable.sides.length ? gable.sides.reduce((s, side) => s + side.eaveY, 0) / gable.sides.length : null;
-  const glbEaveSamples = [];
-  for (const side of gable.sides) {
-    for (const [x, z] of cols) {
-      const c = side.eaveDir[1] === axis ? alongOf([x, z]) : crossOf([x, z]);
-      if (c === side.eaveEdge) {
-        const s = sampled.get(colKey(x, z));
-        if (s?.glb != null) glbEaveSamples.push(s.glb);
-      }
-    }
-  }
-  const glbEave = median(glbEaveSamples);
+  // anchors — the shared arithmetic (one composition point with the ridge closure)
+  const anchors = gableEaveAnchors(gable, (x, z) => sampled.get(colKey(x, z))?.glb ?? null);
+  const { buildEave, glbEave } = anchors;
 
   const entry = (vKey, group) => {
     let build = null, glb = null;
@@ -392,7 +357,12 @@ export function heightProfiles({ gable, tops, aTris }) {
 
   return {
     gable: gable.id,
-    anchors: { buildEave: buildEave != null ? round3(buildEave) : null, glbEave: glbEave != null ? round3(glbEave) : null, glbEaveSamples: glbEaveSamples.length },
+    anchors: {
+      buildEave: buildEave != null ? round3(buildEave) : null,
+      glbEave: glbEave != null ? round3(glbEave) : null,
+      perSide: anchors.perSide.map((s) => ({ ...s, median: s.median != null ? round3(s.median) : null })),
+      dropped: anchors.dropped,
+    },
     ridge: { profile: ridgeLine, stats: profileStats(ridgeLine) },
     rakes,
   };

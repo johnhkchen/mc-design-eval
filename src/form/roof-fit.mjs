@@ -229,6 +229,76 @@ export function gableSurfaceHeight(gable, x, z) {
 }
 
 /**
+ * Max GLB surface height over a column's center, sampled from voxel-space triangles. THE sampler —
+ * shared by the roof-diff instrument (height profiles) and the ridge closure (T-122-01), so the
+ * fit consumes the exact reading the instrument verifies (one ruler, one composition point).
+ */
+export function glbHeightAt(aTris, x, z) {
+  const px = x + 0.5, pz = z + 0.5;
+  let best = null;
+  for (const t of aTris) {
+    const [a, b, c] = t.verts;
+    const d = (b[2] - a[2]) * (c[0] - a[0]) - (b[0] - a[0]) * (c[2] - a[2]); // xz 2-area
+    if (Math.abs(d) < 1e-9) continue; // vertical / degenerate in plan view
+    const w1 = ((pz - a[2]) * (c[0] - a[0]) - (px - a[0]) * (c[2] - a[2])) / d;
+    const w2 = ((b[2] - a[2]) * (px - a[0]) - (b[0] - a[0]) * (pz - a[2])) / d;
+    const w0 = 1 - w1 - w2;
+    const eps = -1e-9;
+    if (w0 < eps || w1 < eps || w2 < eps) continue;
+    const y = w0 * a[1] + w1 * b[1] + w2 * c[1];
+    if (best === null || y > best) best = y;
+  }
+  return best;
+}
+
+const median = (arr) => {
+  if (!arr.length) return null;
+  const s = [...arr].sort((a, b) => a - b);
+  const m = s.length >> 1;
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+};
+
+/**
+ * Like-for-like eave anchors for eave-relative height comparison — each side anchored to its OWN
+ * eave on BOTH legs: build = the side's recorded `eaveY`, GLB = the median sampled height over
+ * that side's eave-edge columns. A side with zero GLB samples drops out of BOTH means (symmetric
+ * coverage), so asymmetric eaves with one-sided sampling can no longer manufacture a phantom
+ * offset (the barn read −2.3 from a pooled median of 4 low-side samples vs a declared mean over
+ * both sides). The single implementation consumed by the instrument AND the ridge closure.
+ * @param {object} gable parametric gable (ridge, sides with eaveDir/eaveEdge/eaveY, footprint)
+ * @param {(x:number, z:number) => number|null} glbAt height sampler at a column (e.g. glbHeightAt)
+ * @returns {{buildEave:number|null, glbEave:number|null,
+ *            perSide:{planeId:string|null, eaveY:number, samples:number, median:number|null}[],
+ *            dropped:(string|null)[]}}
+ */
+export function gableEaveAnchors(gable, glbAt) {
+  const rawCols = gable.footprint?.cols;
+  const colSet = rawCols instanceof Set ? rawCols : new Set(rawCols ?? []);
+  const cols = [...colSet].map((k) => k.split(",").map(Number));
+  const perSide = gable.sides.map((side) => {
+    const samples = [];
+    if (side.eaveDir && side.eaveEdge !== null && side.eaveEdge !== undefined) {
+      for (const [x, z] of cols) {
+        const c = side.eaveDir[1] === "x" ? x : z;
+        if (c !== side.eaveEdge) continue;
+        const s = glbAt(x, z);
+        if (s != null) samples.push(s);
+      }
+    }
+    return { planeId: side.planeId ?? null, eaveY: side.eaveY, samples: samples.length, median: median(samples) };
+  });
+  const kept = perSide.filter((s) => s.samples > 0);
+  const dropped = perSide.filter((s) => s.samples === 0).map((s) => s.planeId);
+  if (!kept.length) return { buildEave: null, glbEave: null, perSide, dropped };
+  return {
+    buildEave: kept.reduce((s, p) => s + p.eaveY, 0) / kept.length,
+    glbEave: kept.reduce((s, p) => s + p.median, 0) / kept.length,
+    perSide,
+    dropped,
+  };
+}
+
+/**
  * Extract parametric gables from a component record: one per reciprocal ridge pair of pitched
  * planes. Every plane that does not participate in a sane gable is a NAMED finding — flat planes,
  * unpaired fragments, broken pairs (Rule 1: the regularized mass stays for those regions).

@@ -6,7 +6,7 @@ import assert from "node:assert/strict";
 import { columnRuns } from "./component-decompose.mjs";
 import {
   ROOF_FIT_DEFAULTS, gablesFromRecord, evalSideHeight, programFitError, planeHeightAt, pitchVariant,
-  gableEndsVariant, gableSurfaceHeight, hipEndPlanes, hipPlaneHeight,
+  gableEndsVariant, gableSurfaceHeight, hipEndPlanes, hipPlaneHeight, glbHeightAt, gableEaveAnchors,
 } from "./roof-fit.mjs";
 
 /** Row runs over an inclusive plan rectangle. */
@@ -297,4 +297,65 @@ test("hipPlaneHeight rises from the anchor toward the interior on both ends", ()
   assert.equal(hipPlaneHeight(lo, 3), 13);
   assert.equal(hipPlaneHeight(hi, 7), 10);
   assert.equal(hipPlaneHeight(hi, 4), 13);
+});
+
+// --- glbHeightAt + gableEaveAnchors (T-122-01: the shared sampler/anchor seam) -------------------
+
+test("glbHeightAt samples the barycentric surface at the column center; null off the sheet", () => {
+  // plane y = x + 10 over x∈[−3,4], z∈[−4,4] (the roof-region-diff fixture, now shared here)
+  const sheet = [
+    { verts: [[-3, 7, -4], [4, 14, -4], [4, 14, 4]] },
+    { verts: [[-3, 7, -4], [4, 14, 4], [-3, 7, 4]] },
+  ];
+  assert.equal(glbHeightAt(sheet, 0, 0), 10.5); // center (0.5, 0.5) → y = 0.5 + 10
+  assert.equal(glbHeightAt(sheet, 2, -2), 12.5);
+  assert.equal(glbHeightAt(sheet, 40, 0), null); // outside every triangle
+});
+
+test("gableEaveAnchors: per-side medians, symmetric case averages both sides", () => {
+  const cols = new Set();
+  for (let x = -2; x <= 2; x++) for (let z = -3; z <= 3; z++) cols.add(`${x},${z}`);
+  const g = {
+    ridge: { axis: "x", y: 8 },
+    sides: [
+      { planeId: "a", eaveDir: "+z", eaveY: 5, eaveEdge: 3, pitch: 1 },
+      { planeId: "b", eaveDir: "-z", eaveY: 5, eaveEdge: -3, pitch: 1 },
+    ],
+    footprint: { cols, bbox: { minX: -2, maxX: 2, minZ: -3, maxZ: 3 } },
+  };
+  // glb height = 12 on side a's strip (z=3), 10 on side b's strip (z=−3)
+  const r = gableEaveAnchors(g, (x, z) => (z === 3 ? 12 : z === -3 ? 10 : null));
+  assert.equal(r.buildEave, 5);
+  assert.equal(r.glbEave, 11); // mean of per-side medians (12, 10) — not a pooled median
+  assert.deepEqual(r.dropped, []);
+  assert.deepEqual(r.perSide.map((s) => s.samples), [5, 5]);
+});
+
+test("gableEaveAnchors: an unsampled side drops from BOTH means (symmetric coverage)", () => {
+  const cols = new Set(["0,-3", "0,3", "1,-3", "1,3"]);
+  const g = {
+    ridge: { axis: "x", y: 8 },
+    sides: [
+      { planeId: "a", eaveDir: "+z", eaveY: 9, eaveEdge: 3, pitch: 1 },
+      { planeId: "b", eaveDir: "-z", eaveY: 4, eaveEdge: -3, pitch: 1 },
+    ],
+    footprint: { cols, bbox: { minX: 0, maxX: 1, minZ: -3, maxZ: 3 } },
+  };
+  const r = gableEaveAnchors(g, (x, z) => (z === -3 ? 6 : null)); // only side b sampled
+  assert.equal(r.buildEave, 4, "side a's declared eave must not lean on the build anchor");
+  assert.equal(r.glbEave, 6);
+  assert.deepEqual(r.dropped, ["a"]);
+});
+
+test("gableEaveAnchors: no samples at all → null anchors (caller refuses, named)", () => {
+  const cols = new Set(["0,0"]);
+  const g = {
+    ridge: { axis: "x", y: 8 },
+    sides: [{ planeId: "a", eaveDir: "+z", eaveY: 5, eaveEdge: 3, pitch: 1 }],
+    footprint: { cols, bbox: { minX: 0, maxX: 0, minZ: 0, maxZ: 0 } },
+  };
+  const r = gableEaveAnchors(g, () => null);
+  assert.equal(r.buildEave, null);
+  assert.equal(r.glbEave, null);
+  assert.deepEqual(r.dropped, ["a"]);
 });
