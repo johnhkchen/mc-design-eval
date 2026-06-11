@@ -61,7 +61,10 @@
     "presence:cottage": "node benchmarks/sculpture/kit-presence.mjs --subject cottage",
     "styled:cottage": "node benchmarks/sculpture/styled-milestone.mjs --subject cottage",
     "styled:gatehouse": "node benchmarks/sculpture/styled-milestone.mjs --subject gatehouse",
-    "styled:church": "node benchmarks/sculpture/styled-milestone.mjs --subject church"
+    "styled:church": "node benchmarks/sculpture/styled-milestone.mjs --subject church",
+    "components:cottage": "node benchmarks/sculpture/component-decomposition.mjs --subject cottage",
+    "components:gatehouse": "node benchmarks/sculpture/component-decomposition.mjs --subject gatehouse",
+    "components:church": "node benchmarks/sculpture/component-decomposition.mjs --subject church"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

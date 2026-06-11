@@ -148,3 +148,8 @@ benchmarks/sculpture/styled/**/*.png
 # The durable record is regularize/<subj>.{json,md} + regularize/<subj>/artifact.json; the
 # committed evidence frames live in pr/assets/frames/regularize-*.png.
 benchmarks/sculpture/regularize/**/*.png
+
+# T-103-01 component-decomposition renders — regenerable via npm run components:{cottage,gatehouse,church}.
+# The durable record is components/<subj>.{json,md}; the committed evidence frames live in
+# pr/assets/frames/components-*.png.
+benchmarks/sculpture/components/**/*.png
