@@ -128,8 +128,18 @@ export function grammarStage(build, { bands, roof, vocab, kitRec, zoneOpts, comp
 
   // --- GATES (deterministic; a failing grammar writes no passing record) -------------------------
   if (!grammar.shipped.frame) {
-    throw new Error(`kit binds no frame block (skipped: ${JSON.stringify(grammar.bindings.skipped)}) — ` +
-      `the grammar milestone requires a trim-tagged cube entry`);
+    // T-121-01: bindKit's contract is "degrades to a recorded no-op — never a throw". When the
+    // kit HAS trim-tagged cubes but every one carries the don't-trust flag (a first-run
+    // extraction), that is a review state, not a wiring bug: the frame stays unshipped (nothing is
+    // tuned, the flag stands), the skip reason ships in the record, and kit-presence + the
+    // kit-aware gate still judge the result. A true no-candidate still throws.
+    const frameSkip = grammar.bindings.skipped.find((s) => s.feature === "frame");
+    if (frameSkip?.reason !== "all-flagged") {
+      throw new Error(`kit binds no frame block (skipped: ${JSON.stringify(grammar.bindings.skipped)}) — ` +
+        `the grammar milestone requires a trim-tagged cube entry`);
+    }
+    console.error(`[grammar] frame unshipped — every trim-tagged cube is value-flagged ` +
+      `(skipped: ${JSON.stringify(grammar.bindings.skipped)}); degrading to the recorded no-op (bindKit contract)`);
   }
   if (grammar.frameRefilled !== 0) {
     throw new Error(`fill-survival VIOLATED: ${grammar.frameRefilled} frame cells refilled — the frame ` +

@@ -102,6 +102,22 @@ test("bindKit: empty/absent kit degrades to all-null bindings, never a throw", (
   assert.deepEqual(b.openingTreatments, []);
 });
 
+test("bindKit: skip reasons separate the review state from the kit-shape bug (T-121-01)", () => {
+  // the barn shape: the ONLY trim cube and the ONLY roof cube are value-flagged → all-flagged
+  const b = bindKit([
+    entry("stone_bricks", ["band0", "corners-edges", "trim", "openings"], { valueCheck: { verdict: "flagged-mismatch" } }),
+    entry("spruce_planks", ["roof"], { valueCheck: { verdict: "flagged-mismatch" } }),
+    entry("cobblestone", ["band0"], { valueCheck: { verdict: "no-swatch" } }),
+  ], { bandNames: ["band0"] });
+  assert.equal(b.frame, null);
+  assert.equal(b.course, null);
+  assert.deepEqual(b.skipped.find((s) => s.feature === "frame"), { feature: "frame", reason: "all-flagged" });
+  assert.deepEqual(b.skipped.find((s) => s.feature === "course"), { feature: "course", reason: "all-flagged" });
+  // no trim-tagged cube AT ALL → no-candidate (the milestone still throws on this one)
+  const none = bindKit([entry("cobblestone", ["band0"], { valueCheck: { verdict: "no-swatch" } })], { bandNames: ["band0"] });
+  assert.deepEqual(none.skipped.find((s) => s.feature === "frame"), { feature: "frame", reason: "no-candidate" });
+});
+
 test("bindOpenings: door-kind takes the *_door candidate (a trapdoor is NOT a door), windows the rest", () => {
   const treatments = bindKit(KIT, { bandNames: [] }).openingTreatments;
   const bound = bindOpenings([

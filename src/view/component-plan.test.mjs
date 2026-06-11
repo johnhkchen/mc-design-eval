@@ -217,6 +217,31 @@ test("planCensusZoneOf: a program cell censuses as roof regardless of its y-band
   assert.equal(roofOnly([0, 4, 2]), "roof");
 });
 
+test("planCensusZoneOf: the dual (T-121-01) — a wall-plane cell in the roof y-band censuses roof:gable", () => {
+  const zoneOf = ([, y]) => (y >= 6 ? "roof" : y >= 3 ? "band1" : "band0");
+  // gable-end slabs rise past the eave (the barn's fitted ±x walls reach the apex)
+  const gableSlabs = SLABS.map((s) =>
+    s.axis === "x" ? { ...s, boundsWorld: { min: s.boundsWorld.min, max: [s.boundsWorld.max[0], 9, s.boundsWorld.max[2]] } } : s);
+  const wf = wallFacePredicate({ wallSlabs: gableSlabs });
+  const plan = { roof: { cells: new Set(["3,7,2"]) }, wallFaces: wf };
+  const census = planCensusZoneOf(zoneOf, plan, ["band0", "band1"]);
+  assert.equal(census([0, 7, 2]), "roof:gable"); // stone gable triangle: measured, never gated against the roof
+  assert.equal(census([3, 7, 2]), "roof");       // the program cell is roof by definition
+  assert.equal(census([3, 7, 3]), "roof");       // a stray off every wall plane still gates as roof (spikes survive)
+  assert.equal(census([0, 4, 2]), "band1");      // below the roof band the wall plane is the band, as before
+  // no roof program → no census authority: the gable cell y-bins to roof exactly as before
+  const noProgram = planCensusZoneOf(zoneOf, { wallFaces: wf }, ["band0", "band1"]);
+  assert.equal(noProgram([0, 7, 2]), "roof");
+  // generator provenance is the authority where it exists: an off-plane mass cell (the two-cell-
+  // thick gable skin, a protrusion top) censuses roof:gable; the same key without mass membership
+  // would have gated as roof
+  const withMass = planCensusZoneOf(zoneOf,
+    { roof: { cells: new Set(["3,7,2"]) }, wallFaces: wf, mass: { cells: new Set(["1,7,3"]), source: "provenance" } },
+    ["band0", "band1"]);
+  assert.equal(withMass([1, 7, 3]), "roof:gable");
+  assert.equal(withMass([2, 7, 3]), "roof");
+});
+
 test("buildComponentPlan: wallTop is the defined wall/roof boundary (max slab y + 1)", () => {
   const p = buildComponentPlan({ componentRecord: RECORD, shellSha: SHA });
   assert.equal(p.wallTop, 6); // slabs reach y5; first non-wall layer is 6 — the box's actual upperTop

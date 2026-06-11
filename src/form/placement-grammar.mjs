@@ -53,22 +53,35 @@ export function rankCandidates(entries) {
  *            openingTreatments:object[], skipped:{feature:string,reason:string}[]}}
  */
 export function bindKit(kitEntries, { bandNames }) {
-  const entries = (kitEntries ?? []).filter(usable);
+  const all = kitEntries ?? [];
+  const entries = all.filter(usable);
   const cubes = entries.filter((e) => e.formClass === "cube");
+  const cubesAll = all.filter((e) => e.formClass === "cube");
   const skipped = [];
-  const pick = (feature, cands) => {
+  // T-121-01: "all-flagged" ≠ "no-candidate" — a kit whose only candidates carry the don't-trust
+  // flag is a first-run REVIEW state (a never-tuned subject's trim/roof cubes), not a kit-shape
+  // bug; the milestone degrades on the former and still throws on the latter.
+  const pick = (feature, cands, candsAll = cands) => {
     const ranked = rankCandidates(cands);
-    if (!ranked.length) { skipped.push({ feature, reason: "no-candidate" }); return null; }
+    if (!ranked.length) {
+      skipped.push({ feature, reason: candsAll.length ? "all-flagged" : "no-candidate" });
+      return null;
+    }
     return ranked[0];
   };
-  const frame = pick("frame", cubes.filter((e) => e.whereUsed.includes("trim")));
+  const frame = pick("frame",
+    cubes.filter((e) => e.whereUsed.includes("trim")),
+    cubesAll.filter((e) => e.whereUsed.includes("trim")));
   const panels = {};
   for (const band of bandNames) {
     // fields sit BETWEEN frame lines — the frame block can never also be the panel
     panels[band] = pick(`panel:${band}`,
-      cubes.filter((e) => e.whereUsed.includes(band) && e.block !== frame?.block));
+      cubes.filter((e) => e.whereUsed.includes(band) && e.block !== frame?.block),
+      cubesAll.filter((e) => e.whereUsed.includes(band) && e.block !== frame?.block));
   }
-  const course = pick("course", cubes.filter((e) => e.whereUsed.includes("roof")));
+  const course = pick("course",
+    cubes.filter((e) => e.whereUsed.includes("roof")),
+    cubesAll.filter((e) => e.whereUsed.includes("roof")));
   const openingTreatments = rankCandidates(entries.filter(
     (e) => (e.formClass === "fixture" || e.formClass === "rail") && e.whereUsed.includes("openings")));
   return { frame, panels, course, openingTreatments, skipped };

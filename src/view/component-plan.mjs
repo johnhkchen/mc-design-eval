@@ -259,6 +259,7 @@ export function serializeComponentPlan(plan) {
       roofFootprintCols: [...plan.frames.roofFootprintCols].sort(),
       rooflineSource: plan.frames.rooflineSource,
     } : null,
+    mass: plan.mass ? { cells: [...plan.mass.cells].sort(), source: plan.mass.source } : null,
     wallSlabs: plan.wallFaces ? plan.wallFaces.slabs : null,
     wallTop: plan.wallTop ?? null,
     wallTopEffective: plan.wallTopEffective ?? null,
@@ -286,6 +287,7 @@ export function reviveComponentPlan(json) {
       rooflineSource: json.frames.rooflineSource,
     } : null,
     wallFaces: json.wallSlabs ? wallFacePredicate({ wallSlabs: json.wallSlabs }) : null,
+    mass: json.mass ? { cells: new Set(json.mass.cells), source: json.mass.source } : null,
     wallTop: json.wallTop ?? null,
     wallTopEffective: json.wallTopEffective ?? null,
     touchedCells: json.touchedCells ? new Set(json.touchedCells) : null,
@@ -336,6 +338,15 @@ export function planCensusZoneOf(zoneOf, plan, bandNames, { frameCells = null } 
   return (voxel) => {
     const key = voxel.join(",");
     if (roofCells?.has(key)) return "roof";
+    // The dual (T-121-01): when the roof PROGRAM is the census authority, a cell that y-bins
+    // "roof" but is NOT a program cell and IS a defined wall — a generator-provenance mass cell
+    // (the authority where one exists: wall-top courses, two-cell-thick gable skins, protrusion
+    // tops) or a cell on a fitted slab plane — must not be counted against the roof band it
+    // y-bins into (a steep stone gable + a one-course eave offset diluted a first-run subject's
+    // roof fraction to 0.83). `roof:gable` is measured, never gated. A roof-band cell that NO
+    // definition claims stays "roof" — spikes and strays still gate.
+    if (roofCells && zoneOf(voxel) === "roof" &&
+        (plan?.mass?.cells?.has(key) || plan?.wallFaces?.contains(voxel))) return "roof:gable";
     if (frameCells?.has(key)) {
       const zone = zoneOf(voxel);
       return bands.has(zone) ? `${zone}:frame` : inner(voxel);

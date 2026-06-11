@@ -260,9 +260,17 @@ function assembleComponentPlan(prov) {
     : null;
   if (!frames) findings.push({ code: "component-corners-empty", detail: "wall slabs define no corner intersections" });
   const wallFaces = wallFacePredicate(record);
+  // T-121-01: the generator's provenance is the census authority for "what is NOT roof" — a
+  // steep-gabled subject's wall-top course, two-cell-thick gable skins, and protrusion tops all
+  // y-bin into the roof band (the committed zone map's eave can sit a course below the generated
+  // geometry's) but are mass cells by construction. planCensusZoneOf sends them to `roof:gable`
+  // (measured, never gated); the slab-plane predicate alone misses every off-plane mass cell.
+  const mass = gen.provenance?.byCell
+    ? { cells: new Set([...gen.provenance.byCell.entries()].filter(([, src]) => !String(src).startsWith("roof")).map(([k]) => k)), source: "provenance" }
+    : null;
   const bodyTops = fit.masses.filter((m) => m.role !== "protrusion").map((m) => m.wallTop);
   const wallTop = bodyTops.length ? Math.max(...bodyTops) + 1 : null;
-  return { schema: COMPONENT_PLAN_SCHEMA, roof, frames, wallFaces, wallTop, findings };
+  return { schema: COMPONENT_PLAN_SCHEMA, roof, frames, wallFaces, mass, wallTop, findings };
 }
 
 /** The full deterministic chain: provision → skin → the SHARED styled stretch. */

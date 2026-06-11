@@ -411,8 +411,31 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
 
   // --- 3. SEAL (S-084) → 4. ZONES (T-092: read from the CONCEPT, prior = recorded fallback) ------
   const occ0 = artifactOccupancy(artifact0);
-  const sealed = applyDeltas(artifact0, [...sealRoof(occ0).placements, ...sealWalls(occ0).placements]);
+  // T-121-01: on the roof PROGRAM's footprint the courses are the contract, not a height field to
+  // seal (the stage-8 course rule, applied to the seal that runs before it). sealRoof's +y read
+  // picks the most-common top block as "the roof" — on a steep-gabled subject that is the WALL
+  // field (gable tops, wall-top course, protrusion tops out-project the roof planes), so it
+  // stripped the program's slab/stair eave courses to the wall block (201 cells, roof census
+  // 0.75). Off-footprint columns keep today's behavior; the program is never auto-"fixed".
+  let sealRoofOp = sealRoof(occ0);
+  if (def.componentPlan?.roof?.footprintCols) {
+    const before = sealRoofOp.placements.length;
+    const placements = sealRoofOp.placements.filter(
+      (p) => !def.componentPlan.roof.footprintCols.has(`${p.pos[0]},${p.pos[2]}`));
+    sealRoofOp = { ...sealRoofOp, placements, programFiltered: before - placements.length };
+  }
+  const sealRoofDeltas = sealRoofOp.placements;
+  const sealWallDeltas = sealWalls(occ0).placements;
+  const sealed = applyDeltas(artifact0, [...sealRoofDeltas, ...sealWallDeltas]);
   const occSealed = artifactOccupancy(sealed);
+  // T-121-01: sealWalls cells are WALL by construction (the S-084 watertight plug at the wall/roof
+  // junction — a gable-end seal can land a course ABOVE the generated wall top, y-binning into
+  // the roof band and diluting its census). They join the plan's provenance-mass set BEFORE the
+  // census closure is built, so they census `roof:gable` like every other defined wall cell; the
+  // mutation precedes serializeComponentPlan, so the gate revives the SAME census.
+  if (def.componentPlan?.mass?.cells) {
+    for (const p of sealWallDeltas) def.componentPlan.mass.cells.add(p.pos.join(","));
+  }
   // T-106-01 seam 4 (the re-pin protocol, mechanized): the wall/roof boundary comes from the
   // component DEFINITION when one exists — the occupancy-derived eave read drifts on a rebuilt
   // roof and re-maps the concept's rows (a phantom band appeared on the cottage). The pin is an
@@ -665,9 +688,32 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
   }
   const worstResidue = Math.max(0, ...Object.values(bands.wallForeignResidue).filter((v) => v != null));
   if ((bands.roofMaterialsFraction ?? 0) < ROOF_BAND_TARGET || worstResidue > UPPER_RESIDUE_MAX) {
+    // T-121-01: the failure carries its MEASURED CAUSE (the T-106 "residual is named" discipline,
+    // which the coverage gate above already follows) — the roof zone's full census names WHICH
+    // blocks dilute the band; the target itself is untouched.
+    let roofCensus = "roof census unavailable";
+    if (covFinal.roof) {
+      const roofOwn = ownSetsOf(policyS).get("roof");
+      const stageBlockAt = (artifact) => {
+        const m = new Map(artifact.placements.map((p) => [p.pos.join(","), bareBlock(p.block)]));
+        return (k) => m.get(k) ?? "·";
+      };
+      const stages = [["raw", stageBlockAt(raw)], ["sealed", stageBlockAt(sealed)],
+        ["based", stageBlockAt(based)], ["painted", stageBlockAt(painted)], ["course", stageBlockAt(courseBuild)]];
+      const sample = [];
+      for (const { voxel, block } of exposedVoxelEntries(artifactOccupancy(final))) {
+        if (censusZoneOf(voxel) === "roof" && !roofOwn.has(bareBlock(block))) {
+          const k = voxel.join(",");
+          sample.push(`${bareBlock(block)}@${k}[${stages.map(([n, f]) => `${n}:${f(k)}`).join(" ")} fillZone:${zoneOf(voxel)} program:${plan?.roof?.cells?.has(k) ?? "?"}]`);
+          if (sample.length >= 6) break;
+        }
+      }
+      roofCensus = `roof census ${JSON.stringify({ total: covFinal.roof.total, byBlock: covFinal.roof.byBlock })}` +
+        (sample.length ? `; diluting cells e.g. ${sample.join(" ")}` : "");
+    }
     throw new Error(`band acceptance FAILED: roof materials ${bands.roofMaterialsFraction} ` +
       `(target >= ${ROOF_BAND_TARGET}), wall foreign residue ${JSON.stringify(bands.wallForeignResidue)} ` +
-      `(max ${UPPER_RESIDUE_MAX})`);
+      `(max ${UPPER_RESIDUE_MAX}) [${roofCensus}]`);
   }
   assertArtifact(final);
 
