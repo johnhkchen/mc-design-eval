@@ -40,6 +40,8 @@ const PIN_WRITERS = [
   "benchmarks/sculpture/reconstructed-milestone.mjs",
   "benchmarks/sculpture/component-skin.mjs",
   "benchmarks/sculpture/durable-skin.mjs",
+  "benchmarks/sculpture/registration-smoke.mjs", // T-120-01: registration-smoke.{json,md} beside the concept
+  "benchmarks/sculpture/glb-smoke.mjs", // T-120-01: --record fixture records under glb/smoke/
 ];
 
 /** Raw record-write idioms that must not reappear (each was converted at T-119-01). */

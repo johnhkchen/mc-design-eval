@@ -11,6 +11,8 @@
 // Usage:  node benchmarks/sculpture/trellis-glb.mjs <input.png> <output.glb>
 
 import { readFile, writeFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import { dirname, join } from "node:path";
 
 const GLTF_MAGIC = 0x46546c67; // "glTF" — little-endian u32 at byte 0 of a binary glTF (.glb)
 const DEFAULTS = { decimationTarget: 150000, textureSize: 1024, seed: 42 };
@@ -55,6 +57,25 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   if (!inPath || !outPath) {
     console.error("usage: node benchmarks/sculpture/trellis-glb.mjs <input.png> <output.glb>");
     process.exit(2);
+  }
+  // T-120-01 pre-spend gate: a registration smoke record beside the input PNG decides BEFORE the
+  // POST (the barn lesson — a lens refusal decidable from the concept was discovered only after
+  // the GLB spend). Absent record → proceed with a note: sculpture subjects have no material map
+  // and never get a smoke record; building registrations are bound to it by the runbook
+  // (docs/knowledge/registration-runbook.md) and S-094 checklist item 8.
+  const smokePath = join(dirname(inPath), "registration-smoke.json");
+  if (existsSync(smokePath)) {
+    const smoke = JSON.parse(await readFile(smokePath, "utf8"));
+    if (smoke.pass !== true) {
+      console.error(`✗ REFUSED before any spend — ${smokePath} records a failing registration smoke ` +
+        `(${smoke.refusal?.stage ?? "?"}: ${smoke.refusal?.reason ?? "?"}). Regenerate the concept ` +
+        `(npm run registration:smoke) before minting a GLB.`);
+      process.exit(1);
+    }
+    console.error(`→ registration smoke: PASS (${smokePath})`);
+  } else {
+    console.error(`→ no registration-smoke.json beside the input (fine for sculpture subjects; ` +
+      `building registrations must run \`npm run registration:smoke\` first — see the runbook)`);
   }
   const t0 = Date.now();
   const png = await readFile(inPath);

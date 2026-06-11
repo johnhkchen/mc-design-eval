@@ -24,6 +24,7 @@
     "skin:cottage": "node benchmarks/sculpture/durable-skin.mjs --subject cottage",
     "skin:gatehouse": "node benchmarks/sculpture/durable-skin.mjs --subject gatehouse",
     "zone:map": "node benchmarks/sculpture/zone-map.mjs",
+    "registration:smoke": "node benchmarks/sculpture/registration-smoke.mjs",
     "gate:multi": "node benchmarks/sculpture/multi-angle-gate.mjs",
     "diff:roof": "node benchmarks/sculpture/roof-diff.mjs",
     "gate:rejudge": "node benchmarks/sculpture/multi-angle-gate.mjs --rejudge",
