@@ -1,0 +1,114 @@
+{
+  "schema": "reconstructed-milestone/v1",
+  "subject": "church",
+  "chain": {
+    "runner": "challenge-milestone.mjs",
+    "record": "benchmarks/sculpture/challenge/church.json",
+    "exitCode": 1,
+    "status": "pipeline-failed",
+    "stage": "skin",
+    "error": "coverage gate FAILED on the final skin: band0 stone=0.327 < 0.5 [census: band0={\"total\":2082,\"byBlock\":{\"polished_basalt\":1225,\"stone\":681,\"black_stained_glass\":100,\"dark_oak_planks\":76}}; band0:offslab={\"total\":5109,\"byBlock\":{\"polished_basalt\":3525,\"stone\":1270,\"dark_oak_planks\":5,\"black_stained_glass\":309}}]",
+    "gate": null
+  },
+  "componentLayer": {
+    "inputs": {
+      "regularized": "challenge/church/shell-artifact.json",
+      "component": "components/church.json",
+      "roof": "roof/church.json",
+      "shaped": "shaped/church.json"
+    },
+    "pins": {
+      "regularizedShell": "50fce80f78ecf37617e773d864fcdecbd4a98b73dfe16f17eaf09a8797f8e4d3",
+      "component": "50fce80f78ecf37617e773d864fcdecbd4a98b73dfe16f17eaf09a8797f8e4d3",
+      "roof": "50fce80f78ecf37617e773d864fcdecbd4a98b73dfe16f17eaf09a8797f8e4d3",
+      "shaped": "50fce80f78ecf37617e773d864fcdecbd4a98b73dfe16f17eaf09a8797f8e4d3"
+    },
+    "findings": [
+      {
+        "code": "roof-program-fallback",
+        "detail": "roof program not accepted — roof seam falls back, recorded by the chain"
+      }
+    ]
+  },
+  "instrument": {
+    "frozen": null,
+    "comparedTo": null,
+    "diffs": [],
+    "judgeModels": [],
+    "note": "no gate ran (chain refused before the gate) — nothing to diff; the instrument is untouched by construction"
+  },
+  "verdicts": null,
+  "metrics": {
+    "census": {
+      "before": {
+        "spikes": 602,
+        "ragged": 334,
+        "columns": 1376,
+        "raggedRate": 0.2427,
+        "source": "benchmarks/sculpture/challenge/church/shell-artifact.json@48582f3",
+        "baselineSha256": "d2a42db5d754806309b4624069a4289d48d4aced528469173555778fd5c056cc"
+      },
+      "after": {
+        "spikes": 202,
+        "ragged": 193,
+        "columns": 1376,
+        "raggedRate": 0.1403,
+        "source": "challenge/church/reconstructed-artifact.json"
+      }
+    },
+    "roofFit": {
+      "status": "fallback",
+      "gables": 3,
+      "sides": 6,
+      "adoptedPitchBy": {
+        "voxel": 4,
+        "glb": 1,
+        "unknown": 1
+      },
+      "glbRejectedDivergence": {
+        "max": 1.301,
+        "count": 4,
+        "note": "glb pitch rejected by the attempt-ladder on these sides — the divergence is the rejection cause, not a build fit error"
+      }
+    },
+    "cage": {
+      "accepted": 1,
+      "rejected": 1,
+      "source": "regularize record (standalone — STALE for this subject; the chain re-cuts its shell, T-106 review #4)"
+    },
+    "coverageRefusal": {
+      "zone": "band0",
+      "block": "stone",
+      "fraction": 0.327,
+      "threshold": 0.5,
+      "census": "band0={\"total\":2082,\"byBlock\":{\"polished_basalt\":1225,\"stone\":681,\"black_stained_glass\":100,\"dark_oak_planks\":76}}; band0:offslab={\"total\":5109,\"byBlock\":{\"polished_basalt\":3525,\"stone\":1270,\"dark_oak_planks\":5,\"black_stained_glass\":309}}"
+    }
+  },
+  "sheets": {
+    "before": "pr/assets/frames/reconstructed-church-before.png",
+    "after": "pr/assets/frames/reconstructed-church-after.png",
+    "gate": null
+  },
+  "findings": [
+    {
+      "code": "roof-program-fallback",
+      "detail": "roof program not accepted — roof seam falls back, recorded by the chain"
+    },
+    {
+      "code": "chain-refused",
+      "detail": "skin: coverage gate FAILED on the final skin: band0 stone=0.327 < 0.5 [census: band0={\"total\":2082,\"byBlock\":{\"polished_basalt\":1225,\"stone\":681,\"black_stained_glass\":100,\"dark_oak_planks\":76}}; band0:offsl"
+    },
+    {
+      "code": "after-is-last-completed-stage",
+      "detail": "after side measured on challenge/church/reconstructed-artifact.json (the chain refused downstream of it)"
+    }
+  ],
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  },
+  "reproducible": {
+    "milestoneSha256": null,
+    "determinism": "the milestone runner double-runs the deterministic chain and owns the byte-identity proof (--repro re-proves it fresh-process); this record distills committed outputs — same inputs, same record"
+  }
+}
