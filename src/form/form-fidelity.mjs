@@ -126,11 +126,35 @@ export function normalizeSilhouette(mask, opts = {}) {
 }
 
 /**
+ * Placement of a bbox-crop inside the normalized `G×G` grid — the SINGLE definition of the
+ * letterbox transform `normalizeSilhouette` applies (T-118-01: the roof-region diff maps projected
+ * points through the same placement instead of re-deriving it). `fit:'aspect'` scales so the
+ * bbox's longer side fills G and centers the shorter side; `fit:'stretch'` fills G² per axis.
+ * Forward map of a source pixel `(sx,sy)`: `gx = ox + (sx − x0)·tw/bw`, `gy = oy + (sy − y0)·th/bh`.
+ * @param {{x0:number,y0:number,x1:number,y1:number}} bbox half-open source crop window
+ * @param {{grid?:number, fit?:string}} [opts]
+ * @returns {{tw:number,th:number,ox:number,oy:number}} target span and offset inside the grid
+ */
+export function normalizePlacement(bbox, opts = {}) {
+  const G = opts.grid ?? FORM_DEFAULTS.grid;
+  const fit = opts.fit ?? FORM_DEFAULTS.fit;
+  if (fit !== "aspect" && fit !== "stretch") throw new Error(`normalizePlacement: fit must be 'aspect'|'stretch', got ${fit}`);
+  const bw = bbox.x1 - bbox.x0;
+  const bh = bbox.y1 - bbox.y0;
+  if (fit === "stretch") return { tw: G, th: G, ox: 0, oy: 0 };
+  if (bw >= bh) {
+    const th = Math.max(1, Math.round((G * bh) / bw));
+    return { tw: G, th, ox: 0, oy: Math.floor((G - th) / 2) };
+  }
+  const tw = Math.max(1, Math.round((G * bw) / bh));
+  return { tw, th: G, ox: Math.floor((G - tw) / 2), oy: 0 };
+}
+
+/**
  * Crop a silhouette to its bbox and resample into a `G×G` occupancy grid by INVERSE mapping: each target
  * cell pulls the source window it covers and is foreground iff coverage ≥ `covThresh` (echoes image-grid's
  * `aggregateCells`, but pull-style so it is correct under both down- and up-sampling — no resampling gaps).
- * `fit:'aspect'` scales so the bbox's longer side fills G and centers the shorter side (letterbox —
- * proportion preserved); `fit:'stretch'` scales each axis independently to fill G².
+ * Placement (letterbox/stretch) comes from {@link normalizePlacement}.
  * @returns {Uint8Array}  length G·G
  */
 function resampleInto(mask, G, fit, covThresh, bboxOverride = null) {
@@ -140,14 +164,7 @@ function resampleInto(mask, G, fit, covThresh, bboxOverride = null) {
   if (!bbox) return out;
   const bw = bbox.x1 - bbox.x0;
   const bh = bbox.y1 - bbox.y0;
-  let tw, th, ox, oy;
-  if (fit === "stretch") {
-    tw = G; th = G; ox = 0; oy = 0;
-  } else if (bw >= bh) {
-    tw = G; th = Math.max(1, Math.round((G * bh) / bw)); ox = 0; oy = Math.floor((G - th) / 2);
-  } else {
-    th = G; tw = Math.max(1, Math.round((G * bw) / bh)); ox = Math.floor((G - tw) / 2); oy = 0;
-  }
+  const { tw, th, ox, oy } = normalizePlacement(bbox, { grid: G, fit });
   for (let ty = 0; ty < th; ty++) {
     let sy0 = bbox.y0 + Math.floor((ty * bh) / th);
     let sy1 = bbox.y0 + Math.floor(((ty + 1) * bh) / th);

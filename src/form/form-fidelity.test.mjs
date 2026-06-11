@@ -24,6 +24,7 @@ import {
   CONCEPT_BG,
   extractSilhouette,
   normalizeSilhouette,
+  normalizePlacement,
   iou,
   regionIoU,
   formFidelity,
@@ -156,6 +157,45 @@ test("B7 bbox override identical to the mask's own bbox is byte-identical to no 
   const a = normalizeSilhouette(sil, { grid: 12 });
   const b = normalizeSilhouette(sil, { grid: 12, bbox: sil.bbox });
   assert.deepEqual([...a.data], [...b.data]);
+});
+
+// --- Group B′: normalizePlacement (T-118-01) --------------------------------
+
+test("B8 placement: wide bbox fills the grid width, letterboxes height, centers it", () => {
+  const p = normalizePlacement({ x0: 0, y0: 0, x1: 10, y1: 5 }, { grid: 12, fit: "aspect" });
+  assert.deepEqual(p, { tw: 12, th: 6, ox: 0, oy: 3 });
+});
+
+test("B9 placement: tall bbox fills the grid height, letterboxes width, centers it", () => {
+  const p = normalizePlacement({ x0: 2, y0: 1, x1: 7, y1: 11 }, { grid: 12, fit: "aspect" });
+  assert.deepEqual(p, { tw: 6, th: 12, ox: 3, oy: 0 });
+});
+
+test("B10 placement: stretch fills both axes regardless of proportion", () => {
+  const p = normalizePlacement({ x0: 0, y0: 0, x1: 3, y1: 9 }, { grid: 12, fit: "stretch" });
+  assert.deepEqual(p, { tw: 12, th: 12, ox: 0, oy: 0 });
+});
+
+test("B11 placement agrees with normalizeSilhouette's letterbox (the one-definition check)", () => {
+  // tall 2×6 blob in an 8×8 mask → normalized columns outside [ox, ox+tw) must be empty,
+  // and the placement's column band must contain every foreground pixel.
+  const img = imageOf(8, 8, (x, y) => (x >= 3 && x < 5 && y >= 1 && y < 7 ? WHITE : BLACK));
+  const sil = extractSilhouette(img, CONCEPT_BG);
+  const G = 12;
+  const norm = normalizeSilhouette(sil, { grid: G });
+  const p = normalizePlacement(sil.bbox, { grid: G });
+  for (let y = 0; y < G; y++) {
+    for (let x = 0; x < G; x++) {
+      if (norm.data[y * G + x]) {
+        assert.ok(x >= p.ox && x < p.ox + p.tw, `fg at column ${x} outside placement band`);
+        assert.ok(y >= p.oy && y < p.oy + p.th, `fg at row ${y} outside placement band`);
+      }
+    }
+  }
+});
+
+test("B12 placement: bad fit throws", () => {
+  assert.throws(() => normalizePlacement({ x0: 0, y0: 0, x1: 1, y1: 1 }, { fit: "tile" }), /fit/);
 });
 
 // --- Group C: iou ----------------------------------------------------------
