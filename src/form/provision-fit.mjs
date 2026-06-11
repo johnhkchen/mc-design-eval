@@ -12,7 +12,8 @@
 import { decompose, runCells } from "./component-decompose.mjs";
 import { gablesFromRecord } from "./roof-fit.mjs";
 import { fitGableEnds, alignedTriangles } from "./roof-end-fit.mjs";
-import { ridgeFromPlanes, fitRidgeLine } from "./roof-ridge-fit.mjs";
+import { ridgeFromPlanes, fitRidgeLine, fitRidgeProfile, closeRidge } from "./roof-ridge-fit.mjs";
+import { glbHeightAt, gableEaveAnchors } from "./roof-fit.mjs";
 import { fitHipCap, fitHipEnds } from "./roof-hip-fit.mjs";
 import { fitOpeningHead } from "./shaped-fit.mjs";
 import { componentGableGroups } from "./component-roof.mjs";
@@ -118,6 +119,29 @@ export function fitProvision({ occ, glb = null, alignment = null, opts = {} } = 
         apexLine: tris.length ? fitRidgeLine(g, tris, { exclude: protrusionCols }) : null,
       };
     });
+    // T-122-01 RIDGE CLOSURE — build the ridge at the fitted height. The sampled GLB ridge line
+    // (fitRidgeProfile: the roof-diff instrument's own reading) is applied to the gable DATA,
+    // eave-relatively, sides re-derived through the closed ridge, refuted hip demands cleared.
+    // The generator consumes the CLOSED gables; ridgeFit keeps the pre-closure evidence beside
+    // the closure block. A refusal leaves the gable exactly as fitted (named, Rule 2).
+    if (tris.length) {
+      grpGables = grpGables.map((g, i) => {
+        const profile = fitRidgeProfile(g, tris, { exclude: protrusionCols });
+        const anchors = gableEaveAnchors(g, (x, z) => glbHeightAt(tris, x, z));
+        const apexLine = ridgeFit[i].apexLine && ridgeFit[i].apexLine.height !== undefined ? ridgeFit[i].apexLine : null;
+        const { gable, closure } = closeRidge(g, { profile, anchors, apexLine });
+        ridgeFit[i].closure = closure;
+        for (const r of closure.refusals) {
+          findings.push({ ...finding("ridge-closure-refused", g.id, r), stage: "ridge-closure" });
+        }
+        if (closure.apexDiverges) {
+          findings.push({ ...finding("apex-vs-profile-divergence", g.id,
+            `closed ridge ${closure.to} vs vertex apexLine ${apexLine.height} (apexCheck ${closure.apexCheck})`),
+            stage: "ridge-closure" });
+        }
+        return gable;
+      });
+    }
     roofs.push({ massId: grp.massId, role: grp.role, kind: "gable", gables: grpGables, ridgeFit,
       findings: [] });
   }

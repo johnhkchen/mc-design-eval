@@ -121,3 +121,53 @@ test("serialize/revive: Sets round-trip through JSON (the regenerate-proof seam)
     JSON.stringify(serializeProvisionFit(revived)),
     JSON.stringify(serializeProvisionFit(fit)));
 });
+
+// ---- ridge closure integration (T-122-01) --------------------------------------------------------
+
+/** A synthetic GLB whose roof is a tent ABOVE the blob ridge: y = 5.5 + 1.5·(6 − |x−6|) over the
+ *  gabledBox footprint (identity alignment — positions already in voxel space). */
+function tentGlb() {
+  const yOf = (x) => 5.5 + 1.5 * (6 - Math.abs(x - 6));
+  const quads = [
+    // plane A: x −0.5 → 6, plane B: x 6 → 12.5, both spanning z −0.5 → 9.5
+    [[-0.5, yOf(-0.5), -0.5], [6, yOf(6), -0.5], [6, yOf(6), 9.5], [-0.5, yOf(-0.5), 9.5]],
+    [[6, yOf(6), -0.5], [12.5, yOf(12.5), -0.5], [12.5, yOf(12.5), 9.5], [6, yOf(6), 9.5]],
+  ];
+  const positions = [];
+  for (const [a, b, c, d] of quads) positions.push(...a, ...b, ...c, ...a, ...c, ...d);
+  return {
+    glb: { positions, triangleCount: positions.length / 9, bounds: { min: [-0.5, 0, -0.5], max: [12.5, 14.5, 9.5] } },
+    alignment: { toVoxel: (p) => p, scales: [1, 1, 1] },
+  };
+}
+
+test("fitProvision: ridge closure consumes the sampled GLB ridge — gables closed, evidence kept", () => {
+  const { glb, alignment } = tentGlb();
+  const fit = fitProvision({ occ: occupancyFromCells(gabledBox()), glb, alignment });
+  const roof = fit.roofs.find((r) => r.kind === "gable");
+  assert.ok(roof && roof.gables.length === 1);
+  const g = roof.gables[0];
+  const rf = roof.ridgeFit[0];
+  assert.ok(rf.closure, "ridgeFit carries the closure block");
+  assert.equal(rf.closure.applied, true, `refusals: ${rf.closure.refusals.join("; ")}`);
+  assert.equal(rf.recordY, rf.closure.from, "pre-closure ridge kept as evidence");
+  assert.equal(g.ridge.y, rf.closure.to, "the generator-facing gable carries the closed ridge");
+  assert.ok(g.ridge.y > rf.recordY, "the GLB tent sits above the blob ridge — closure raises it");
+  for (const s of g.sides) {
+    assert.ok(s.pitchFitted !== undefined, "fitted pitch kept as evidence");
+    assert.ok(Math.abs(s.eaveY + s.pitch * s.run - g.ridge.y) < 0.51,
+      `side ${s.planeId} plane passes through the closed ridge (eave ${s.eaveY} + ${s.pitch}·${s.run} vs ${g.ridge.y})`);
+  }
+  // serialize/revive round-trips the closure (the runner re-proves generation from the record)
+  const revived = reviveProvisionFit(JSON.parse(JSON.stringify(serializeProvisionFit(fit))));
+  const rg = revived.roofs.find((r) => r.kind === "gable").gables[0];
+  assert.equal(rg.ridge.y, g.ridge.y);
+  assert.equal(revived.roofs.find((r) => r.kind === "gable").ridgeFit[0].closure.to, rf.closure.to);
+});
+
+test("fitProvision: no GLB → no closure (gables exactly as fitted, limitation already named)", () => {
+  const fit = fitProvision({ occ: occupancyFromCells(gabledBox()) });
+  const roof = fit.roofs.find((r) => r.kind === "gable");
+  assert.equal(roof.ridgeFit[0].closure, undefined);
+  assert.ok(!fit.findings.some((f) => f.stage === "ridge-closure"));
+});

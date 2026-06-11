@@ -357,3 +357,86 @@ test("hip-cap generation is deterministic and the apex column is the cap course"
   assert.deepEqual(norm(a), norm(generateRoof([hipCap()], SPRUCE)));
   assert.ok(a.capKeys.has("3,13,3"), "apex cell marked as cap course");
 });
+
+// ---------------------------------------------------------------- ridge closure realization (T-122-01)
+
+test("a closed gable realizes the closed ridge height within ±1, both axes", async () => {
+  const { closeRidge } = await import("../form/roof-ridge-fit.mjs");
+  for (const axis of ["z", "x"]) {
+    // a deliberately-low fit: ridge.y 12 with shallow pitches that intersect even lower
+    const g = axis === "z" ? gable({ pitch: 0.5, eaveY: 10, ridgeY: 12, E: 4 }) : (() => {
+      const base = gable({ pitch: 0.5, eaveY: 10, ridgeY: 12, E: 4 });
+      const cols = new Set([...base.footprint.cols].map((k) => k.split(",").reverse().join(",")));
+      return {
+        ...base,
+        ridge: { axis: "x", y: 12 },
+        sides: [
+          { ...base.sides[0], eaveDir: "+z" },
+          { ...base.sides[1], eaveDir: "-z" },
+        ],
+        footprint: { cols, bbox: { minX: 0, maxX: 5, minZ: -4, maxZ: 4 }, area: cols.size },
+      };
+    })();
+    g.sides.forEach((s) => { s.run = 4; });
+    const profile = { height: 16, span: axis === "z" ? [0, 5] : [0, 5], length: 6, rmse: 0 };
+    const anchors = { buildEave: 10, glbEave: 10, perSide: [], dropped: [] };
+    const { gable: closed, closure } = closeRidge(g, { profile, anchors });
+    assert.equal(closure.applied, true, closure.refusals.join("; "));
+    assert.equal(closed.ridge.y, 16);
+    const { cells } = generateRoof([closed], SPRUCE);
+    const top = Math.max(...cells.map((c) => c.pos[1]));
+    assert.ok(Math.abs(top - 16) <= 1, `${axis}-axis built ridge top ${top} within ±1 of the closed 16`);
+    // and the as-fitted gable demonstrably under-built (the witness mechanism, synthetic)
+    const before = Math.max(...generateRoof([g], SPRUCE).cells.map((c) => c.pos[1]));
+    assert.ok(before <= 12, `as-fitted tops at ${before}`);
+  }
+});
+
+test("two closed intersecting gables compose by max height (the cross-gable case)", async () => {
+  const { closeRidge } = await import("../form/roof-ridge-fit.mjs");
+  const main = gable({ pitch: 1, eaveY: 10, ridgeY: 14, E: 4, z0: 0, z1: 9 });
+  main.sides.forEach((s) => { s.run = 4; });
+  const cross = (() => {
+    const cols = new Set();
+    for (let x = -4; x <= 4; x++) for (let z = 3; z <= 6; z++) cols.add(`${x},${z}`);
+    return {
+      id: "gable-cross",
+      ridge: { axis: "x", y: 12 },
+      sides: [
+        { planeId: "c-a", eaveDir: "+z", pitch: 0.5, pitchSource: "glb", eaveY: 10, eaveEdge: 6, run: 1.5, extentCells: [] },
+        { planeId: "c-b", eaveDir: "-z", pitch: 0.5, pitchSource: "glb", eaveY: 10, eaveEdge: 3, run: 1.5, extentCells: [] },
+      ],
+      footprint: { cols, bbox: { minX: -4, maxX: 4, minZ: 3, maxZ: 6 }, area: cols.size },
+      hip: { demanded: false, lo: false, hi: false },
+      sane: true,
+      reasons: [],
+    };
+  })();
+  const { gable: closedCross, closure } = closeRidge(cross, {
+    profile: { height: 13, span: [-4, 4], length: 9, rmse: 0 },
+    anchors: { buildEave: 10, glbEave: 10, perSide: [], dropped: [] },
+  });
+  assert.equal(closure.applied, true, closure.refusals.join("; "));
+  const { cells } = generateRoof([main, closedCross], SPRUCE);
+  const m = byPos(cells);
+  // the main ridge still owns its height where the cross-gable is lower
+  assert.ok(m.get("0,14,0"), "main ridge cap survives");
+  // the closed cross ridge reaches 13 at its own row outside the main wedge's higher region
+  const crossTop = Math.max(...cells.filter((c) => c.pos[2] >= 3 && c.pos[2] <= 6 && Math.abs(c.pos[0]) === 4).map((c) => c.pos[1]));
+  assert.ok(Math.abs(crossTop - 13) <= 1, `cross ridge edge tops at ${crossTop}`);
+});
+
+test("closed gables keep stair/slab cap states renderable: every shaped cell carries a state", async () => {
+  const { closeRidge } = await import("../form/roof-ridge-fit.mjs");
+  const g = gable({ pitch: 0.5, eaveY: 10, ridgeY: 12, E: 4 });
+  g.sides.forEach((s) => { s.run = 4; });
+  const { gable: closed } = closeRidge(g, {
+    profile: { height: 15.5, span: [0, 5], length: 6, rmse: 0 }, // half-block target → slab cap path
+    anchors: { buildEave: 10, glbEave: 10, perSide: [], dropped: [] },
+  });
+  const { cells } = generateRoof([closed], SPRUCE);
+  for (const c of cells) {
+    assert.ok(["spruce_planks", "spruce_stairs", "spruce_slab"].includes(c.block), `unmapped block ${c.block}`);
+    if (c.block !== "spruce_planks") assert.ok(c.state, `${c.block} at ${c.pos} carries a block state`);
+  }
+});
