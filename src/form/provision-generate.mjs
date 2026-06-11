@@ -148,19 +148,41 @@ export function generateProvision(fit, { family, policy, bands = null, sheetBloc
     return set.has(`${x + 1},${z}`) && set.has(`${x - 1},${z}`) &&
       set.has(`${x},${z + 1}`) && set.has(`${x},${z - 1}`);
   }));
-  for (const m of fit.masses) {
-    const top = m.role === "protrusion" ? m.massTop : m.wallTop;
+  const bodies = fit.masses.filter((m) => m.role !== "protrusion");
+  const protrusions = fit.masses.filter((m) => m.role === "protrusion");
+  for (const m of bodies) {
     let cols = new Set();
     for (const r of m.runs) for (let x = r.x0; x <= r.x1; x++) cols.add(`${x},${r.z}`);
-    let interior = new Set();
-    if (m.role !== "protrusion") {
-      interior = cols;
-      for (let i = 0; i < o.wallThickness; i++) interior = erode(interior);
-    }
+    let interior = cols;
+    for (let i = 0; i < o.wallThickness; i++) interior = erode(interior);
     for (const col of cols) {
       if (sheetCols.has(col) || interior.has(col)) continue;
       const [x, z] = col.split(",").map(Number);
-      for (let y = m.baseY; y <= top; y++) {
+      for (let y = m.baseY; y <= m.wallTop; y++) {
+        const key = `${x},${y},${z}`;
+        wallMap.set(key, { cell: { pos: [x, y, z], block: wallBlockAt(y) }, provenance: `mass:${m.id}` });
+      }
+    }
+  }
+  // protrusions (chimneys, finials) generate SOLID over their blob extent — but only when the
+  // generated build actually carries them: a protrusion whose base course rests on nothing (its
+  // support was an under-fitted roof's blob cells) would FLOAT; it is omitted as a REGISTERED
+  // LIMITATION (Rule 1), never generated absurd and never copied from the blob.
+  const worldBase = Math.min(...fit.masses.map((m) => m.baseY));
+  const roofKeySet = new Set(roofCells.map((c) => c.pos.join(",")));
+  const supportAt = (x, y, z) => wallMap.has(`${x},${y},${z}`) || roofKeySet.has(`${x},${y},${z}`);
+  for (const m of protrusions) {
+    const cols = [];
+    for (const r of m.runs) for (let x = r.x0; x <= r.x1; x++) cols.push([x, r.z]);
+    const grounded = m.baseY <= worldBase ||
+      cols.some(([x, z]) => supportAt(x, m.baseY - 1, z));
+    if (!grounded) {
+      findings.push(finding("mass-unsupported", m.id,
+        `protrusion base y=${m.baseY} rests on no generated cell (the blob support was never built) — omitted, registered`));
+      continue;
+    }
+    for (const [x, z] of cols) {
+      for (let y = m.baseY; y <= m.massTop; y++) {
         const key = `${x},${y},${z}`;
         wallMap.set(key, { cell: { pos: [x, y, z], block: wallBlockAt(y) }, provenance: `mass:${m.id}` });
       }

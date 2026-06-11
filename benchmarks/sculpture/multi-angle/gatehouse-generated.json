@@ -1,0 +1,766 @@
+{
+  "schema": "multi-angle-gate/v1",
+  "subject": "gatehouse",
+  "label": "generated",
+  "artifact": {
+    "path": "benchmarks/sculpture/generated/gatehouse/artifact.json",
+    "sha256": "80c904c7861f24e3cc978497955e5fb0f50c4664887f6162716700a253eabf01"
+  },
+  "contract": {
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "elevationDeg": 30,
+    "width": 512,
+    "height": 512,
+    "gapBudget": 2,
+    "coverageThreshold": 0.5,
+    "note": "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them"
+  },
+  "zones": {
+    "source": "concept",
+    "reason": null,
+    "policy": {
+      "band0": {
+        "dominant": "polished_basalt",
+        "preserve": [
+          "dark_oak_log",
+          "deepslate_bricks",
+          "cobblestone",
+          "dark_oak_planks"
+        ],
+        "splat": [
+          "dark_oak_log",
+          "deepslate_bricks",
+          "cobblestone",
+          "dark_oak_planks"
+        ]
+      },
+      "roof": {
+        "dominant": "deepslate_bricks",
+        "preserve": [
+          "polished_basalt",
+          "cobblestone",
+          "dark_oak_log",
+          "dark_oak_planks",
+          "deepslate_brick_slab"
+        ],
+        "splat": [
+          "polished_basalt",
+          "cobblestone",
+          "dark_oak_log",
+          "dark_oak_planks"
+        ]
+      }
+    },
+    "substitutionApplied": {
+      "stone_bricks": "polished_basalt"
+    },
+    "kitOverridesApplied": {
+      "deepslate_tiles": "deepslate_bricks"
+    },
+    "vocabulary": {
+      "schema": "material-vocabulary/v1",
+      "policySpace": "named",
+      "guarded": true,
+      "substitution": {
+        "stone_bricks": "polished_basalt"
+      },
+      "kitOverrides": {
+        "deepslate_tiles": "deepslate_bricks"
+      },
+      "zones": {
+        "band0": {
+          "dominant": "polished_basalt",
+          "preserve": [
+            "dark_oak_log",
+            "deepslate_bricks",
+            "cobblestone",
+            "dark_oak_planks"
+          ],
+          "splat": [
+            "dark_oak_log",
+            "deepslate_bricks",
+            "cobblestone",
+            "dark_oak_planks"
+          ]
+        },
+        "roof": {
+          "dominant": "deepslate_bricks",
+          "preserve": [
+            "polished_basalt",
+            "cobblestone",
+            "dark_oak_log",
+            "dark_oak_planks",
+            "deepslate_brick_slab"
+          ],
+          "splat": [
+            "polished_basalt",
+            "cobblestone",
+            "dark_oak_log",
+            "dark_oak_planks"
+          ]
+        }
+      },
+      "treatmentSlots": {
+        "frame": "cobblestone"
+      },
+      "derivations": [],
+      "roofFamilyAppended": [
+        "deepslate_brick_slab"
+      ]
+    }
+  },
+  "views": [
+    {
+      "angle": "+x+z",
+      "azimuthDeg": 45,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/gatehouse-generated/view-+x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "polished_basalt",
+            "fraction": 1,
+            "total": 38,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "polished_basalt",
+              "dark_oak_log",
+              "deepslate_bricks",
+              "cobblestone",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.605
+          },
+          "roof": {
+            "dominant": "deepslate_bricks",
+            "fraction": 1,
+            "total": 166,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "deepslate_bricks",
+              "polished_basalt",
+              "cobblestone",
+              "dark_oak_log",
+              "dark_oak_planks",
+              "deepslate_brick_slab"
+            ],
+            "dominantFraction": 0.06
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof / top of structure",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "walls (whole body)",
+            "attribute": "material zoning",
+            "severity": "major"
+          },
+          {
+            "region": "overall body / interior",
+            "attribute": "massing",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "Same boxy gatehouse footprint and arched opening, but the steep peaked roof is replaced by a flat stepped cap and the light-stone walls are rendered in uniform dark material, breaking the form and zoning from this angle."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10749,
+          "output_tokens": 516,
+          "cost_usd": 0.170835
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof / top of structure\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"walls (whole body)\",\"attribute\":\"material zoning\",\"severity\":\"major\"},{\"region\":\"overall body / interior\",\"attribute\":\"massing\",\"severity\":\"minor\"}],\"rationale\":\"Same boxy gatehouse footprint and arched opening, but the steep peaked roof is replaced by a flat stepped cap and the light",
+          "usage": {
+            "input_tokens": 10749,
+            "output_tokens": 516,
+            "cost_usd": 0.170835
+          },
+          "source": "live"
+        }
+      ]
+    },
+    {
+      "angle": "+x-z",
+      "azimuthDeg": 135,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/gatehouse-generated/view-+x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "polished_basalt",
+            "fraction": 1,
+            "total": 57,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "polished_basalt",
+              "dark_oak_log",
+              "deepslate_bricks",
+              "cobblestone",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.737
+          },
+          "roof": {
+            "dominant": "deepslate_bricks",
+            "fraction": 1,
+            "total": 157,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "deepslate_bricks",
+              "polished_basalt",
+              "cobblestone",
+              "dark_oak_log",
+              "dark_oak_planks",
+              "deepslate_brick_slab"
+            ],
+            "dominantFraction": 0.274
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof/top of structure",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "overall body — open hollow interior visible",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "walls vs roof",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The build keeps the gatehouse footprint and boxy walls but replaces the references' steep peaked roof with an irregular open flat cap and reads as a hollow shell in uniform dark material rather than a solid body with light walls and a dark roof."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10749,
+          "output_tokens": 672,
+          "cost_usd": 0.17473499999999997
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof/top of structure\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"overall body — open hollow interior visible\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"walls vs roof\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The build keeps the gatehouse footprint and boxy walls but replaces the references' steep peaked roof with an ",
+          "usage": {
+            "input_tokens": 10749,
+            "output_tokens": 672,
+            "cost_usd": 0.17473499999999997
+          },
+          "source": "live"
+        }
+      ]
+    },
+    {
+      "angle": "-x-z",
+      "azimuthDeg": 225,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/gatehouse-generated/view--x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "polished_basalt",
+            "fraction": 1,
+            "total": 281,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "polished_basalt",
+              "dark_oak_log",
+              "deepslate_bricks",
+              "cobblestone",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.993
+          },
+          "roof": {
+            "dominant": "deepslate_bricks",
+            "fraction": 1,
+            "total": 166,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "deepslate_bricks",
+              "polished_basalt",
+              "cobblestone",
+              "dark_oak_log",
+              "dark_oak_planks",
+              "deepslate_brick_slab"
+            ],
+            "dominantFraction": 0.361
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof / top of structure",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "walls vs roof across the whole body",
+            "attribute": "material zoning",
+            "severity": "major"
+          },
+          {
+            "region": "interior / overall body",
+            "attribute": "massing",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The build keeps the same boxy footprint but loses the steep peaked roof (open shell with a ragged hole on top) and abandons the light-stone-wall / dark-roof zoning for a uniform dark material, so it reads as recognizably related but defective from this angle."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10749,
+          "output_tokens": 563,
+          "cost_usd": 0.17201
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof / top of structure\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"walls vs roof across the whole body\",\"attribute\":\"material zoning\",\"severity\":\"major\"},{\"region\":\"interior / overall body\",\"attribute\":\"massing\",\"severity\":\"minor\"}],\"rationale\":\"The build keeps the same boxy footprint but loses the steep peaked roof (open shell with a ragged hole on ",
+          "usage": {
+            "input_tokens": 10749,
+            "output_tokens": 563,
+            "cost_usd": 0.17201
+          },
+          "source": "live"
+        }
+      ]
+    },
+    {
+      "angle": "-x+z",
+      "azimuthDeg": 315,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/gatehouse-generated/view--x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "polished_basalt",
+            "fraction": 1,
+            "total": 281,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "polished_basalt",
+              "dark_oak_log",
+              "deepslate_bricks",
+              "cobblestone",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.993
+          },
+          "roof": {
+            "dominant": "deepslate_bricks",
+            "fraction": 1,
+            "total": 155,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "deepslate_bricks",
+              "polished_basalt",
+              "cobblestone",
+              "dark_oak_log",
+              "dark_oak_planks",
+              "deepslate_brick_slab"
+            ],
+            "dominantFraction": 0.045
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof / top of structure",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "overall body / interior",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "walls vs roof",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The build keeps the boxy footprint of the gatehouse but loses the steep peaked roof to an irregular flat/stepped cap and reads as a hollow open shell in uniform dark material rather than the references' solid mass with light stone walls and a distinct dark roof."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10749,
+          "output_tokens": 526,
+          "cost_usd": 0.171085
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof / top of structure\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"overall body / interior\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"walls vs roof\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The build keeps the boxy footprint of the gatehouse but loses the steep peaked roof to an irregular flat/stepped cap and reads a",
+          "usage": {
+            "input_tokens": 10749,
+            "output_tokens": 526,
+            "cost_usd": 0.171085
+          },
+          "source": "live"
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "schema": "multi-angle-gate/v1",
+    "decided": true,
+    "passed": false,
+    "gapCount": 12,
+    "gapBudget": 2,
+    "gaps": [
+      {
+        "angle": "+x+z",
+        "region": "roof / top of structure",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x+z",
+        "region": "walls (whole body)",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "+x+z",
+        "region": "overall body / interior",
+        "attribute": "massing"
+      },
+      {
+        "angle": "+x-z",
+        "region": "roof/top of structure",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x-z",
+        "region": "overall body — open hollow interior visible",
+        "attribute": "massing"
+      },
+      {
+        "angle": "+x-z",
+        "region": "walls vs roof",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x-z",
+        "region": "roof / top of structure",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x-z",
+        "region": "walls vs roof across the whole body",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x-z",
+        "region": "interior / overall body",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x+z",
+        "region": "roof / top of structure",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x+z",
+        "region": "overall body / interior",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x+z",
+        "region": "walls vs roof",
+        "attribute": "material zoning"
+      }
+    ],
+    "failures": [
+      {
+        "angle": "+x+z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "+x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x+z",
+        "reason": "drifted"
+      }
+    ],
+    "views": [
+      {
+        "angle": "+x+z",
+        "outcome": "drifted: form"
+      },
+      {
+        "angle": "+x-z",
+        "outcome": "drifted: form"
+      },
+      {
+        "angle": "-x-z",
+        "outcome": "drifted: form"
+      },
+      {
+        "angle": "-x+z",
+        "outcome": "drifted: form"
+      }
+    ]
+  },
+  "kitPresence": {
+    "schema": "kit-presence/v1",
+    "passed": true,
+    "checks": [
+      {
+        "feature": "frame",
+        "block": "cobblestone",
+        "shipped": "cobblestone",
+        "sites": 105,
+        "missing": 0,
+        "satisfied": 48,
+        "tolerated": {
+          "respected": 57,
+          "skippedIsolated": 0
+        },
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "panel:band0",
+        "block": "stone_bricks",
+        "shipped": "polished_basalt",
+        "sites": 3653,
+        "missing": 0,
+        "tolerated": {
+          "residue": 0
+        },
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "course",
+        "block": "deepslate_bricks",
+        "shipped": "deepslate_bricks",
+        "sites": 252,
+        "missing": 0,
+        "tolerated": {
+          "residue": 0
+        },
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "openings:lintel-sill",
+        "placed": 0,
+        "gating": false,
+        "passed": null
+      }
+    ],
+    "gaps": [],
+    "skips": [
+      {
+        "feature": "openings:door",
+        "reason": "kit names no treatment for this slot"
+      },
+      {
+        "feature": "openings:light",
+        "reason": "kit names no treatment for this slot"
+      }
+    ],
+    "grammar": {
+      "bindings": {
+        "frame": "cobblestone",
+        "panels": {
+          "band0": "stone_bricks"
+        },
+        "course": "deepslate_bricks",
+        "openingTreatments": [],
+        "skipped": []
+      },
+      "shipped": {
+        "frame": "cobblestone",
+        "panels": {
+          "band0": "polished_basalt"
+        },
+        "course": "deepslate_bricks"
+      },
+      "frame": {
+        "counts": {
+          "wall": 3420,
+          "cornerPost": 0,
+          "roofline": 105,
+          "floorLine": 0
+        },
+        "painted": 0,
+        "adopted": 0,
+        "respected": 57,
+        "skippedIsolated": 0,
+        "alreadyFrame": 48
+      },
+      "fill": {
+        "placements": 0,
+        "byZone": {
+          "band0": {
+            "surface": 3653,
+            "filled": 0,
+            "kept": 3653
+          },
+          "roof": {
+            "surface": 252,
+            "filled": 0,
+            "kept": 252
+          }
+        }
+      }
+    },
+    "dressing": {
+      "stats": {
+        "openings": 2,
+        "fullyDressed": 0,
+        "placements": 0,
+        "conflicts": 2,
+        "alreadyDressed": 0
+      },
+      "perOpening": [
+        {
+          "dir": "+x",
+          "kind": "door",
+          "bbox": {
+            "u0": 19,
+            "v0": 12,
+            "u1": 19,
+            "v1": 24
+          },
+          "applied": {
+            "door": 0,
+            "lintel": 2,
+            "light": 0
+          },
+          "placed": {
+            "door": 0,
+            "lintel": 0,
+            "light": 0
+          },
+          "conflicts": [
+            {
+              "slot": "door",
+              "name": "no-door-treatment",
+              "reduction": "left-undressed"
+            }
+          ]
+        },
+        {
+          "dir": "-x",
+          "kind": "door",
+          "bbox": {
+            "u0": 7,
+            "v0": 12,
+            "u1": 7,
+            "v1": 24
+          },
+          "applied": {
+            "door": 0,
+            "lintel": 2,
+            "light": 0
+          },
+          "placed": {
+            "door": 0,
+            "lintel": 0,
+            "light": 0
+          },
+          "conflicts": [
+            {
+              "slot": "door",
+              "name": "no-door-treatment",
+              "reduction": "left-undressed"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "overall": {
+    "schema": "kit-aware-gate/v1",
+    "decided": true,
+    "passed": false,
+    "components": {
+      "resemblance": {
+        "decided": true,
+        "passed": false
+      },
+      "kitPresence": {
+        "ran": true,
+        "passed": true,
+        "gaps": []
+      }
+    }
+  },
+  "sheet": "pr/assets/frames/multi-angle-gatehouse-generated.png",
+  "labeled": true
+}

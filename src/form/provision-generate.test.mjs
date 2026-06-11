@@ -184,6 +184,26 @@ test("storey bands paint walls per yRange; sheet courses carry the fascia block"
   assertGeneratedProvenance(gen.artifact, gen.provenance);
 });
 
+test("an unsupported protrusion is OMITTED with a named finding, never generated floating", () => {
+  const base = flatFit();
+  const fit = {
+    ...base,
+    masses: [...base.masses,
+      { id: "mass-1", role: "protrusion", runs: [{ z: 2, x0: 2, x1: 3 }],
+        footprint: { bbox: { minX: 2, maxX: 3, minZ: 2, maxZ: 2 }, area: 2 },
+        baseY: 12, massTop: 15, wallTop: 15, wallTopSource: "mass-top", heightDisagreement: 0, findings: [] },
+      { id: "mass-2", role: "protrusion", runs: [{ z: 0, x0: 0, x1: 0 }],
+        footprint: { bbox: { minX: 0, maxX: 0, minZ: 0, maxZ: 0 }, area: 1 },
+        baseY: 6, massTop: 8, wallTop: 8, wallTopSource: "mass-top", heightDisagreement: 0, findings: [] }],
+  };
+  const gen = generateProvision(fit, { family: FAMILY, policy: POLICY });
+  assert.ok(gen.findings.some((f) => f.code === "mass-unsupported" && f.where === "mass-1"),
+    "floating protrusion registered, not built");
+  assert.equal(gen.occ.has(2, 12, 2), false, "no floating cells");
+  assert.equal(gen.occ.has(0, 7, 0), true, "wall-supported protrusion (base y6 on wallTop-5 wall... ) generated");
+  assertGeneratedProvenance(gen.artifact, gen.provenance);
+});
+
 // ---- determinism / the regenerate proof ------------------------------------------------------------
 
 test("regenerate from the serialized fit record is byte-identical (the check's teeth)", () => {

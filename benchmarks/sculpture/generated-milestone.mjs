@@ -569,6 +569,7 @@ async function main() {
       scale: r1.scale, alignment: "registry-scale", generationBands: r1.bandSource,
     },
     fit: fitSummary(r1.fit),
+    generation: { counts: r1.gen.counts, findings: r1.gen.findings }, // Rule 1: omissions are named HERE
     zeroBlob: r1.zeroBlob,
     cage,
     census,
