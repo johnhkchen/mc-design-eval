@@ -760,12 +760,15 @@ export function proportionsOf(occupied, masses, params = SKETCH_PARAMS, { regist
 // --- the sketch ------------------------------------------------------------------------------------------
 
 /**
- * The full conditioning: GLB bytes → form-sketch/v1 record. Deterministic (no timestamps, no
- * randomness); the runner adds source.glbSha256 and proves byte-reproducibility via --repro.
- * `registryScale` is the subject's registry working scale (e.g. SUBJECTS[key].generated.scale) —
- * passed in so this module stays registry-blind and subject-agnostic.
+ * The full conditioning: GLB bytes → form-sketch/v1 record plus the working state a visualizer
+ * needs (conditioned cells, parsed mesh). Deterministic (no timestamps, no randomness); the
+ * runner adds source.glbSha256 and proves byte-reproducibility via --repro. `registryScale` is
+ * the subject's registry working scale (e.g. the registry entry's generated.scale) — passed in
+ * so this module stays registry-blind and subject-agnostic.
+ * @returns {{ sketch: object, occupied: Int32Array, sample: object,
+ *             mesh: {positions: Float64Array, triangleCount: number, bounds: object} }}
  */
-export function buildSketch(glbBytes, { subject, registryScale, params = SKETCH_PARAMS }) {
+export function conditionGlb(glbBytes, { subject, registryScale, params = SKETCH_PARAMS }) {
   const mesh = parseGlbMesh(glbBytes);
   const geom = triangleGeometry(mesh.positions, mesh.triangleCount);
   const pitch = pitchClass(geom.normals, geom.areas, params);
@@ -781,7 +784,7 @@ export function buildSketch(glbBytes, { subject, registryScale, params = SKETCH_
   const footprint = fitFootprint(sym.occupied, params);
   const proportions = proportionsOf(sym.occupied, masses, params, { registryScale, sampleScale: sample.scale });
   const { occupied: _occ, faces: symFaces, ...symmetry } = sym;
-  return {
+  const sketch = {
     schema: FORM_SKETCH_SCHEMA,
     subject,
     params: { ...params, registryScale },
@@ -806,4 +809,10 @@ export function buildSketch(glbBytes, { subject, registryScale, params = SKETCH_
     proportions,
     faces: symFaces,
   };
+  return { sketch, occupied: sym.occupied, sample, mesh };
+}
+
+/** The record alone — the runner and most callers want just the sketch. */
+export function buildSketch(glbBytes, opts) {
+  return conditionGlb(glbBytes, opts).sketch;
 }
