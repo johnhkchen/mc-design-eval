@@ -235,9 +235,15 @@ async function main() {
   const label = arg("--label") ?? "current";
   const artifactRel = arg("--artifact") ?? (def.build?.startsWith("multi-angle/") ? def.build : `durable-skin/${def.key}/artifact.json`);
   const offline = argv.includes("--offline");
+  const rejudge = argv.includes("--rejudge");
   const slug = `${def.key}-${label}`;
   const recPath = join(OUT_DIR, `${slug}.json`);
   const sheetFrame = join(FRAMES_DIR, `multi-angle-${slug}.png`);
+
+  if (rejudge) {
+    await rejudgeMain({ def, label, slug, recPath, sheetFrame });
+    return;
+  }
 
   if (offline) {
     if (!existsSync(recPath)) throw new Error(`committed record absent — run npm run gate:multi -- --subject ${def.key} first`);
@@ -509,6 +515,146 @@ async function main() {
   process.exitCode = overall.decided ? (overall.passed ? 0 : 1) : 2;
 }
 
+/** THE RE-JUDGE MODE (T-114-01): complete the I/O of a committed record. Re-judges ONLY views
+ *  that exhausted to `unparsed` (their ledger seeded with the committed malformed reply, so the
+ *  bound spans the view's whole history); zones/coverage/kitPresence/contract are COPIED from the
+ *  record, never recomputed — that, plus gateInstrumentDiff refusing the write on any drift, is
+ *  what makes a verdict re-roll impossible by construction. Renders happen only for pixels (the
+ *  judge triptych + the regenerated sheet); nothing decision-bearing is recomputed from GL. */
+async function rejudgeMain({ def, label, slug, recPath, sheetFrame }) {
+  if (!existsSync(recPath)) {
+    throw new Error(`committed record absent (${recPath}) — nothing to re-judge; run npm run gate:multi -- --subject ${def.key} --label ${label} first`);
+  }
+  const before = JSON.parse(await readFile(recPath, "utf8"));
+  if (before.schema !== MULTI_ANGLE_GATE_SCHEMA) {
+    throw new Error(`${recPath} is not a ${MULTI_ANGLE_GATE_SCHEMA} record`);
+  }
+  if (JSON.stringify(before.contract?.azimuths) !== JSON.stringify([...MULTI_ANGLE_GATE.azimuths])) {
+    throw new Error("record contract diverges from config azimuths — refusing to re-judge");
+  }
+
+  // the artifact pin, BEFORE any render or metered call: a changed build is a different
+  // judgement (it needs a fresh gate run), not a reply re-ask.
+  const artifactPath = join(ROOT, before.artifact.path);
+  const artifactJson = await readFile(artifactPath, "utf8");
+  const sha = createHash("sha256").update(artifactJson).digest("hex");
+  if (sha !== before.artifact.sha256) {
+    throw new Error(`artifact pin mismatch: ${before.artifact.path} is ${sha.slice(0, 12)}…, the record judged ` +
+      `${before.artifact.sha256.slice(0, 12)}… — a changed build needs a fresh gate run, not a re-judge`);
+  }
+  const artifact = JSON.parse(artifactJson);
+  assertArtifact(artifact);
+
+  // ONLY unparsed views are re-judgeable; a record of parsed verdicts has nothing to ask.
+  const targets = before.views.filter((v) => v.unparsed === true && !v.verdict);
+  if (targets.length === 0) {
+    throw new Error(`[${slug}] no unparsed view — every verdict is parsed and FINAL; ` +
+      "re-judging parsed verdicts is impossible by construction (that would be a re-roll)");
+  }
+  console.error(`[${slug}] re-judge: ${targets.map((t) => t.angle).join(", ")} — completing I/O on the ` +
+    "committed record (zones/coverage/kitPresence copied, never recomputed)");
+
+  // pixels only: the four contract renders feed the triptych + the regenerated sheet.
+  const viewsDir = join(OUT_DIR, slug);
+  await mkdir(viewsDir, { recursive: true });
+  const conceptPath = join(HERE, def.concept);
+  if (!existsSync(conceptPath)) throw new Error(`concept image absent: ${conceptPath} (immutable reference)`);
+  const conceptImg = await decodeImage(conceptPath);
+  const renders = await renderViews(artifact, [...MULTI_ANGLE_GATE.azimuths], { outDir: viewsDir });
+  for (const r of renders) {
+    if (!r?.path || !existsSync(r.path) || !(r.bytes > 0)) throw new Error(`render missing for ${r?.angle}`);
+  }
+  const renderByAngle = new Map(renders.map((r) => [r.angle, r]));
+  const glbPath = join(HERE, def.glb);
+  let mesh = null;
+  if (existsSync(glbPath)) mesh = loadMeshFromGlb(await readFile(glbPath));
+  else console.error(`WARN: GLB absent (${glbPath}) — mesh panel will be a placeholder`);
+
+  const P = RESEMBLANCE_DEFAULTS.panel;
+  const conceptPanel = resampleRgba(conceptImg, P, P, "aspect");
+  const grey = { w: P, h: P, data: new Uint8Array(P * P * 4).fill(235) };
+  const panelByAngle = new Map();
+  for (const a of MULTI_ANGLE_GATE.azimuths) {
+    panelByAngle.set(a, resampleRgba(await decodeImage(renderByAngle.get(a).path), P, P, "aspect"));
+  }
+
+  const views = [];
+  for (const bv of before.views) {
+    if (!(bv.unparsed === true && !bv.verdict)) {
+      views.push(structuredClone(bv)); // parsed (or short-circuited) views: byte-identical copies
+      continue;
+    }
+    const meshPanel = mesh
+      ? resampleRgba(silhouetteToRgba(rasterizeSilhouette(mesh, { view: resolveAngle(bv.angle) })), P, P, "aspect")
+      : grey;
+    const triptych = composeTriptych([conceptPanel, meshPanel, panelByAngle.get(bv.angle)], { gutter: RESEMBLANCE_DEFAULTS.gutter });
+    const triptychBuf = encodeRgbaToPng(triptych.data, triptych.w, triptych.h);
+    await writeFile(join(viewsDir, `judged-${bv.angle.replace(/[+]/g, "p").replace(/-/g, "m")}.png`), triptychBuf);
+    // the committed malformed reply is attempt 1 of THIS view's ledger — the bound spans history
+    const seed = [{
+      parsed: false, parseError: bv.parseError ?? "unparsed (no parseError recorded)",
+      rawReply: bv.rawReply ?? null, usage: bv.judge?.usage ?? null,
+    }];
+    const { verdict, replies } = await judgeThroughPolicy({
+      slug, angle: bv.angle, azimuthDeg: bv.azimuthDeg, triptychBuf, seed,
+    });
+    const nv = { ...structuredClone(bv), replies };
+    nv.judge = { model: PHASE1_MODEL_ID, usage: replies.at(-1).usage }; // original usage lives in replies[0]
+    if (verdict) {
+      nv.verdict = verdict;
+      delete nv.unparsed;
+      delete nv.parseError;
+      delete nv.rawReply;
+      console.error(`[${slug}] ${bv.angle} (${bv.azimuthDeg}°): recovered on attempt ${replies.length} — ${verdict.verdict}` +
+        (verdict.gaps.length ? ` — ${verdict.gaps.map((g) => `${g.severity} ${g.attribute}@${g.region}`).join("; ")}` : ""));
+    } else {
+      nv.parseError = replies.at(-1).parseError;
+      nv.rawReply = replies.at(-1).rawReply;
+      console.error(`[${slug}] ${bv.angle}: STILL UNPARSED after ${replies.length}/${MAX_REPLY_ATTEMPTS} attempts — ` +
+        "the REFUSAL stands; ledger committed (do not raise the bound)");
+    }
+    views.push(nv);
+  }
+
+  // the pure tail, recomputed; kitPresence is the COMMITTED result (deterministic, not re-run)
+  const aggregate = aggregateMultiAngle(views.map((v) => ({
+    angle: v.angle, rendered: v.rendered, coverage: v.coverage, verdict: v.verdict, unparsed: v.unparsed,
+  })));
+  const overall = composeKitAwareVerdict(aggregate, before.kitPresence);
+
+  const record = {
+    ...structuredClone(before),
+    views,
+    aggregate,
+    overall,
+    rejudge: { ticket: "T-114-01", angles: targets.map((t) => t.angle), seeded: true, instrumentDiff: [] },
+  };
+  const diff = gateInstrumentDiff(before, record);
+  record.rejudge.instrumentDiff = diff;
+  if (diff.length > 0) {
+    throw new Error(`[${slug}] instrument diff non-empty (${diff.join(", ")}) — refusing to write the re-judged record`);
+  }
+
+  const panels = [conceptPanel, ...MULTI_ANGLE_GATE.azimuths.map((a) => panelByAngle.get(a))];
+  const sheetComposed = composeSheet(panels, { gutter: RESEMBLANCE_DEFAULTS.gutter });
+  const labels = ["concept", ...views.map((v) => `${v.angle} ${v.azimuthDeg}° — ${viewOutcomeLabel(v)}`)];
+  const { buf: sheetBuf, labeled } = encodeLabeledSheet(sheetComposed, labels, P, RESEMBLANCE_DEFAULTS.gutter);
+  record.labeled = labeled;
+  const sheetPath = join(OUT_DIR, `${slug}-sheet.png`);
+  await writeFile(sheetPath, sheetBuf);
+  await copyFile(sheetPath, sheetFrame);
+  await writeFile(recPath, JSON.stringify(record, null, 2) + "\n");
+  await writeFile(join(OUT_DIR, `${slug}.md`), recordMd(record));
+
+  const outcome = overall.decided ? (overall.passed ? "PASS" : "FAIL") : `REFUSAL (${overall.refusal})`;
+  console.error(`\n[${slug}] re-judged kit-aware verdict: ${outcome} — resemblance ` +
+    (aggregate.decided ? `${aggregate.passed ? "pass" : "fail"} (gaps ${aggregate.gapCount}/${aggregate.gapBudget})` : "refusal") +
+    `; kit presence ` + (before.kitPresence?.ran === false ? `not run (${before.kitPresence.reason})` : before.kitPresence?.passed ? "pass" : "fail") +
+    `; instrument-diff clean`);
+  console.error(`✓ wrote ${recPath} + sheet ${record.sheet}`);
+  process.exitCode = overall.decided ? (overall.passed ? 0 : 1) : 2;
+}
+
 function recordMd(r) {
   const viewRows = r.views.map((v) => {
     const covCell = v.coverage
@@ -546,7 +692,13 @@ function recordMd(r) {
     `| view | azimuth | rendered | T-088 coverage | judge verdict |\n|---|---|---|---|---|\n${viewRows}\n\n` +
     `## Resemblance aggregate (T-093)\n${agg}\n\n` +
     `## Kit presence (T-100)\n${kitSection}\n\n` +
-    `## Kit-aware verdict\n${overall}\n`;
+    `## Kit-aware verdict\n${overall}\n` +
+    (r.rejudge
+      ? `\n## Re-judge (T-114)\nUnparsed view(s) re-judged under the bounded reply policy: ` +
+        `${r.rejudge.angles.join(", ")} — every reply committed (\`replies[]\` per attempt, the committed ` +
+        `malformed reply seeded as attempt 1); prompt and judge model byte-identical; ` +
+        `instrument-diff ${r.rejudge.instrumentDiff.length === 0 ? "CLEAN — parsed verdicts untouched" : `DIRTY: ${r.rejudge.instrumentDiff.join(", ")}`}.\n`
+      : "");
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
