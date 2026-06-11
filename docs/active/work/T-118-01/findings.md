@@ -94,3 +94,30 @@ role-aware zone lens, T-117/S-117; this instrument picks barn up automatically o
 Instrument honesty notes carried into the records: nearest-cell attribution localizes, it does
 not adjudicate; `glbEave` is a plan-view max and can catch taller structures behind the eave
 (gatehouse); `unpartitioned` includes non-roof protrusions (cottage chimney) by construction.
+
+## AFTER: the refit wave's before/after evidence
+
+The `fitRidgeLine` repair landed in three parts (all evidence-side; the cage ladder is untouched):
+footprint-COLUMN sampling (was: bbox window), recorded-protrusion exclusion dilated one plan cell
+(`excludeDilate: 1`, the quantization unit), and a **dominant-line selector** (the apex line is
+the longest contiguous cluster within `apexGap`; a higher-but-shorter cluster is recorded as
+`spike`, never hidden — "highest wins" is how the chimney took the apex).
+
+Recorded apexLine, before → after (`roof/<s>.json`, before copies in
+`docs/active/work/T-118-01/artifacts/before/`):
+
+| subject | gable | before | after |
+|---|---|---|---|
+| cottage | main | 26.484 span [4,7] (the chimney) | **23.963 span [−16,3]** + spike 26.497 [4,4] named |
+| cottage | cross | 26.5 span [−1,2] (chimney bleed) | **22.445 span [−1,12]** (the full true line) |
+| gatehouse | main | 31.5 span [−12,13] | 31.5 span **[0,13]**, 5 columns excluded — the 31.5 band over the remaining span is GLB-backed mass over footprint columns (the T-111 "lumps"), now bounded evidence, not a fake whole-span apex |
+| church | nave | 28.723 span [−7,−7] (the tower) | **17.799 span [−5,−1]** + spike 28.078 [−7,−6] named |
+
+Movement proof and its honest boundary: the repair changes EVIDENCE, not geometry — placements
+are byte-identical for all three subjects (asserted at re-run; accepted rungs unchanged;
+`--repro` PASS ×3), and the roof-diff records are byte-identical before→after (the builds did not
+move, so the instrument must not — and does not). The constructive deltas the instrument names
+(generated cottage cross-ridge −3.445, gatehouse parapet band, church porch mass) require chain
+re-runs that re-judge (S-121) — building them blind here is exactly what E-30 Rule 2 forbids.
+The generated-path provision-fit records keep their old apexLine values until that chain re-runs
+(same no-judge boundary); the code path is already repaired.

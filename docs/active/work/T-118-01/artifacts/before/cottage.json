@@ -22,8 +22,7 @@
       "anchorSlack": 1.5
     },
     "ridgeFit": {
-      "apexGap": 1,
-      "excludeDilate": 1
+      "apexGap": 1
     },
     "iouTolerance": 0.02,
     "grid": 128,
@@ -275,23 +274,15 @@
         },
         "deltaVsRecord": -1.404,
         "apexLine": {
-          "height": 23.963,
-          "slopeDeg": 0.002,
+          "height": 26.484,
+          "slopeDeg": -1.089,
           "span": [
-            -16,
-            3
+            4,
+            7
           ],
-          "length": 20,
-          "rmse": 0.001,
-          "slices": 32,
-          "excludedColumns": 24,
-          "spike": {
-            "height": 26.497,
-            "span": [
-              4,
-              4
-            ]
-          }
+          "length": 4,
+          "rmse": 0.017,
+          "slices": 32
         }
       },
       {
@@ -305,16 +296,15 @@
         },
         "deltaVsRecord": -2.113,
         "apexLine": {
-          "height": 22.445,
-          "slopeDeg": 0.001,
+          "height": 26.5,
+          "slopeDeg": 0.003,
           "span": [
             -1,
-            12
+            2
           ],
-          "length": 14,
+          "length": 4,
           "rmse": 0,
-          "slices": 14,
-          "excludedColumns": 3
+          "slices": 14
         }
       }
     ],
@@ -639,15 +629,6 @@
       }
     ],
     "note": "exempt ⇔ spill-free at every gate azimuth after the one-voxel dilation (a mass the GLB contains); refuted at ≥1 azimuth → removed under the cage (IoU floors, closure no-regress), rolled back named otherwise"
-  },
-  "hipFit": {
-    "schema": "roof-hip-fit/v1",
-    "params": {
-      "minTriangles": 1,
-      "apexSlack": 1
-    },
-    "components": [],
-    "note": "positions as-built (band-floor cross-section, bbox eave edges); slopes from recorded planes else GLB quadrant normals; apex CONSTRUCTED and sanity-bounded by the as-built top — glbMaxY is evidence, never applied (the aabb-affine lesson)"
   },
   "family": {
     "field": "spruce_planks",

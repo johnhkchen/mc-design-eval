@@ -22,8 +22,7 @@
       "anchorSlack": 1.5
     },
     "ridgeFit": {
-      "apexGap": 1,
-      "excludeDilate": 1
+      "apexGap": 1
     },
     "iouTolerance": 0.02,
     "grid": 128,
@@ -268,13 +267,12 @@
           "height": 31.5,
           "slopeDeg": 0,
           "span": [
-            0,
+            -12,
             13
           ],
-          "length": 14,
+          "length": 26,
           "rmse": 0,
-          "slices": 26,
-          "excludedColumns": 5
+          "slices": 26
         }
       }
     ],
@@ -825,41 +823,6 @@
       }
     ],
     "note": "exempt ⇔ spill-free at every gate azimuth after the one-voxel dilation (a mass the GLB contains); refuted at ≥1 azimuth → removed under the cage (IoU floors, closure no-regress), rolled back named otherwise"
-  },
-  "hipFit": {
-    "schema": "roof-hip-fit/v1",
-    "params": {
-      "minTriangles": 1,
-      "apexSlack": 1
-    },
-    "components": [
-      {
-        "massId": "mass-0",
-        "cap": null,
-        "capFitted": false,
-        "hipEnds": [
-          {
-            "id": "gable-roof-0-roof-4",
-            "fitted": {
-              "lo": {
-                "pitch": 0.605,
-                "rmse": 0.867,
-                "triangles": 13,
-                "source": "glb"
-              },
-              "hi": {
-                "pitch": 0.381,
-                "rmse": 0.63,
-                "triangles": 8,
-                "source": "glb"
-              }
-            }
-          }
-        ],
-        "findings": []
-      }
-    ],
-    "note": "positions as-built (band-floor cross-section, bbox eave edges); slopes from recorded planes else GLB quadrant normals; apex CONSTRUCTED and sanity-bounded by the as-built top — glbMaxY is evidence, never applied (the aabb-affine lesson)"
   },
   "family": {
     "field": "deepslate_bricks",
@@ -1479,10 +1442,6 @@
     "pr/assets/frames/roof-gatehouse-end45-after.png",
     "pr/assets/frames/roof-gatehouse-end315-before.png",
     "pr/assets/frames/roof-gatehouse-end315-after.png",
-    "pr/assets/frames/roof-gatehouse-cap45-before.png",
-    "pr/assets/frames/roof-gatehouse-cap45-after.png",
-    "pr/assets/frames/roof-gatehouse-cap135-before.png",
-    "pr/assets/frames/roof-gatehouse-cap135-after.png",
     "pr/assets/frames/roof-gatehouse-ridge-before.png",
     "pr/assets/frames/roof-gatehouse-ridge-after.png"
   ],

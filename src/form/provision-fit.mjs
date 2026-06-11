@@ -9,7 +9,7 @@
 // (serializeProvisionFit / reviveProvisionFit) so the runner can re-prove the generated artifact
 // from the recorded parameters alone (the zero-blob check's teeth).
 
-import { decompose } from "./component-decompose.mjs";
+import { decompose, runCells } from "./component-decompose.mjs";
 import { gablesFromRecord } from "./roof-fit.mjs";
 import { fitGableEnds, alignedTriangles } from "./roof-end-fit.mjs";
 import { ridgeFromPlanes, fitRidgeLine } from "./roof-ridge-fit.mjs";
@@ -104,12 +104,18 @@ export function fitProvision({ occ, glb = null, alignment = null, opts = {} } = 
       findings.push(...(hipEndsRes.findings ?? []).map((f) => ({ ...f, stage: "hip-end-fit" })));
       grpGables = hipEndsRes.gables;
     }
+    // T-118-01: recorded protrusion columns are excluded from apex sampling — the chimney won
+    // the cottage apex cluster (the roof-diff findings' evidence pollution)
+    const protrusionCols = new Set(
+      (record.masses ?? []).filter((m) => m.role === "protrusion")
+        .flatMap((m) => runCells(m.plan?.runs ?? []).map(([x, z]) => `${x},${z}`))
+    );
     const ridgeFit = grpGables.map((g) => {
       const intersect = ridgeFromPlanes(g);
       return {
         id: g.id, recordY: g.ridge.y, intersect,
         deltaVsRecord: intersect.valid ? Math.round((intersect.y - g.ridge.y) * 1e3) / 1e3 : null,
-        apexLine: tris.length ? fitRidgeLine(g, tris) : null,
+        apexLine: tris.length ? fitRidgeLine(g, tris, { exclude: protrusionCols }) : null,
       };
     });
     roofs.push({ massId: grp.massId, role: grp.role, kind: "gable", gables: grpGables, ridgeFit,

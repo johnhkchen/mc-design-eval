@@ -106,6 +106,51 @@ test("no roof-band triangles in the window → named reason", () => {
   assert.equal(r.reason, "ridge-unfitted");
 });
 
+// ------------------------------------------- fitRidgeLine: T-118-01 pollution exclusion
+
+/** A tentGable whose footprint cols cover x∈[-8,8] × z∈[-8,8] (so col gating is active). */
+function coladGable() {
+  const g = tentGable();
+  for (let x = -8; x <= 8; x++) for (let z = -8; z <= 8; z++) g.footprint.cols.add(`${x},${z}`);
+  return g;
+}
+
+test("a chimney spike inside the footprint loses to the dominant line; the spike is recorded (the cottage case)", () => {
+  const tris = [];
+  for (let x = -5; x <= 5; x++) tris.push(apexTri(x, 23));
+  tris.push(apexTri(2, 28, 3)); // the chimney: taller, at column (2,3)
+  // the dominant-line selector rejects the 1-bin spike even without exclusion — and NAMES it
+  const r = fitRidgeLine(coladGable(), tris);
+  assert.equal(r.height, 23);
+  assert.deepEqual(r.spike, { height: 28, span: [2, 2] });
+  // recorded protrusion columns are dropped from sampling entirely (dilated by one plan cell)
+  const clean = fitRidgeLine(coladGable(), tris, { exclude: new Set(["2,3"]) });
+  assert.equal(clean.height, 23);
+  assert.deepEqual(clean.span, [-5, 5]);
+  assert.ok(clean.excludedColumns >= 1);
+  assert.equal(clean.spike, undefined);
+});
+
+test("columns outside the footprint cols are not sampled (the gatehouse parapet case)", () => {
+  const g = coladGable();
+  // remove the z=8 column line from the footprint — the 'parapet' sits inside the bbox but
+  // outside the cols, exactly the gatehouse geometry
+  for (let x = -8; x <= 8; x++) g.footprint.cols.delete(`${x},8`);
+  const tris = [];
+  for (let x = -5; x <= 5; x++) tris.push(apexTri(x, 23));
+  for (let x = -5; x <= 5; x++) tris.push(apexTri(x, 31, 8)); // parapet tops along z=8
+  const r = fitRidgeLine(g, tris);
+  assert.equal(r.height, 23);
+});
+
+test("empty footprint cols leave the bbox window in charge (back-compat witness)", () => {
+  const tris = [];
+  for (let x = -5; x <= 5; x++) tris.push(apexTri(x, 23));
+  const r = fitRidgeLine(tentGable(), tris); // tentGable: cols is an empty Set
+  assert.equal(r.height, 23);
+  assert.equal(r.excludedColumns, 0);
+});
+
 // ---------------------------------------------------------------- ridgeVariant
 
 test("ridgeVariant replaces the ridge height with the rounded intersection and records the delta", () => {

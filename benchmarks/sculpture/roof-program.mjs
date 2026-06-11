@@ -250,7 +250,9 @@ async function runRoof(def) {
       recordY: g.ridge.y,
       intersect,
       deltaVsRecord: intersect.valid ? Math.round((intersect.y - g.ridge.y) * 1e3) / 1e3 : null,
-      apexLine: fitRidgeLine(g, aTris),
+      // T-118-01: chimney/protrusion columns excluded — the cottage apexLine was the GLB chimney
+      // cluster, the gatehouse's the parapet tops (the roof-diff findings' evidence pollution)
+      apexLine: fitRidgeLine(g, aTris, { exclude: chimney }),
     };
   });
 

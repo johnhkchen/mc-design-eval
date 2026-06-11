@@ -15,8 +15,11 @@ Ends fitted in the accepted geometry: 1 — gable-roof-0-roof-4 [lo — · hi 13
 ## Per-component outcomes (T-110-01)
 - **mass-0** (primary): ACCEPTED (`end-fitted-voxel-pitch-gable-ends`) — rmse gable-roof-0-roof-4 0.144 (gables: gable-roof-0-roof-4, gable-roof-1-roof-6)
 
+## Hip/pyramid fit (T-112-01)
+- **mass-0**: cap refused (named in findings); gable-roof-0-roof-4 ends: lo **0.605** · hi **0.381**
+
 ## Ridge fit (T-109-01)
-- **gable-roof-0-roof-4**: record ridge y 28; intersect invalid (intersection y 26.397 not above the eaves (26.5)); GLB apex line: y 31.5, slope 0°, length 26, rmse 0
+- **gable-roof-0-roof-4**: record ridge y 28; intersect invalid (intersection y 26.397 not above the eaves (26.5)); GLB apex line: y 31.5, slope 0°, length 14, rmse 0
 
 Cap course cells in the accepted geometry: 0.
 
@@ -69,7 +72,7 @@ Carved 1561 sampled cells; generated 1503 full / 50 stairs / 139 slabs (family d
 - before front: benchmarks/sculpture/roof/gatehouse/view-ridge-before.png
 - after front: benchmarks/sculpture/roof/gatehouse/view-ridge-after.png
 
-Frames: pr/assets/frames/roof-gatehouse-before.png, pr/assets/frames/roof-gatehouse-after.png, pr/assets/frames/roof-gatehouse-end45-before.png, pr/assets/frames/roof-gatehouse-end45-after.png, pr/assets/frames/roof-gatehouse-end315-before.png, pr/assets/frames/roof-gatehouse-end315-after.png, pr/assets/frames/roof-gatehouse-ridge-before.png, pr/assets/frames/roof-gatehouse-ridge-after.png
+Frames: pr/assets/frames/roof-gatehouse-before.png, pr/assets/frames/roof-gatehouse-after.png, pr/assets/frames/roof-gatehouse-end45-before.png, pr/assets/frames/roof-gatehouse-end45-after.png, pr/assets/frames/roof-gatehouse-end315-before.png, pr/assets/frames/roof-gatehouse-end315-after.png, pr/assets/frames/roof-gatehouse-cap45-before.png, pr/assets/frames/roof-gatehouse-cap45-after.png, pr/assets/frames/roof-gatehouse-cap135-before.png, pr/assets/frames/roof-gatehouse-cap135-after.png, pr/assets/frames/roof-gatehouse-ridge-before.png, pr/assets/frames/roof-gatehouse-ridge-after.png
 
 > stairs-rendered (T-107-01, supersedes the T-097 stairs-invisible pin): the lens defect was getModelVariants' substring air-check matching every *_stairs name; fixed by render/scripts/patch-viewer-lens.mjs. Stair courses are visible in renders; placement remains proven by the unmapped gate + the committed states.
 

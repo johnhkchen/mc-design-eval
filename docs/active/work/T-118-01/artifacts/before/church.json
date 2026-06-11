@@ -22,8 +22,7 @@
       "anchorSlack": 1.5
     },
     "ridgeFit": {
-      "apexGap": 1,
-      "excludeDilate": 1
+      "apexGap": 1
     },
     "iouTolerance": 0.02,
     "grid": 128,
@@ -356,23 +355,15 @@
         },
         "deltaVsRecord": 0.378,
         "apexLine": {
-          "height": 17.799,
-          "slopeDeg": -13.332,
+          "height": 28.723,
+          "slopeDeg": 0,
           "span": [
-            -5,
-            -1
+            -7,
+            -7
           ],
-          "length": 5,
-          "rmse": 0.405,
-          "slices": 9,
-          "excludedColumns": 0,
-          "spike": {
-            "height": 28.078,
-            "span": [
-              -7,
-              -6
-            ]
-          }
+          "length": 1,
+          "rmse": 0,
+          "slices": 9
         }
       }
     ],

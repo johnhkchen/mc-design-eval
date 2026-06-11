@@ -22,7 +22,7 @@ Ends fitted in the accepted geometry: 0
 - **mass-1**: cap **FITTED** — band 11, apex 18 (glb evidence 32.5); faces +x **1.716** (glb-quadrant), -x **1.674** (glb-quadrant), +z **1.355** (voxel), -z **1.732** (glb-quadrant)
 
 ## Ridge fit (T-109-01)
-- **gable-roof-3-roof-7**: record ridge y 18; intersect **y 18.378** @ v -9.762 (Δ vs record 0.378); GLB apex line: y 28.723, slope 0°, length 1, rmse 0
+- **gable-roof-3-roof-7**: record ridge y 18; intersect **y 18.378** @ v -9.762 (Δ vs record 0.378); GLB apex line: y 17.799, slope -13.332°, length 5, rmse 0.405
 
 Cap course cells in the accepted geometry: 0.
 

@@ -16,8 +16,8 @@ Ends fitted in the accepted geometry: 3 — gable-roof-0-roof-4 [lo -16 · hi 15
 - **mass-0** (primary): ACCEPTED (`end-fitted-voxel-pitch-ridge-fit`) — rmse gable-roof-0-roof-4 0.161, gable-roof-2-roof-3 0.288 (gables: gable-roof-0-roof-4, gable-roof-2-roof-3)
 
 ## Ridge fit (T-109-01)
-- **gable-roof-0-roof-4**: record ridge y 24; intersect **y 22.596** @ v -5.826 (Δ vs record -1.404); GLB apex line: y 26.484, slope -1.089°, length 4, rmse 0.017
-- **gable-roof-2-roof-3**: record ridge y 21; intersect **y 18.887** @ v 0.793 (Δ vs record -2.113); GLB apex line: y 26.5, slope 0.003°, length 4, rmse 0
+- **gable-roof-0-roof-4**: record ridge y 24; intersect **y 22.596** @ v -5.826 (Δ vs record -1.404); GLB apex line: y 23.963, slope 0.002°, length 20, rmse 0.001
+- **gable-roof-2-roof-3**: record ridge y 21; intersect **y 18.887** @ v 0.793 (Δ vs record -2.113); GLB apex line: y 22.445, slope 0.001°, length 14, rmse 0
 
 Cap course cells in the accepted geometry: 0.
 
