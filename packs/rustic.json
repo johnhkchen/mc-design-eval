@@ -1,0 +1,144 @@
+{
+  "schema": "style-pack/v1",
+  "style": "rustic",
+  "provenance": {
+    "setting": "An English yeoman farmstead family (Tudor/farmstead vernacular) on pastured lowland with a small stone quarry, managed oak coppice, and a sawpit — the cottage and the tithe barn are both buildings of this one place, so they draw on the same materials.",
+    "sources": {
+      "local-fieldstone": "Rubble fieldstone cleared from the surrounding pasture — abundant and cheap; irregular, mottled grey; laid uncoursed for wall fields and chimney shafts.",
+      "quarried-ashlar": "Dressed stone from the small local quarry — costly to cut, so it is spent only where it earns its keep: quoins, buttress piers, plinth courses, door and window dressings.",
+      "oak-coppice": "Dark structural oak from the managed coppice — heavy hewn frame timbers (posts, studs, bressummers, joists) and the dark weathered edge boards.",
+      "sawn-softwood": "Lighter sawn boards from the sawpit — roof plank courses, door leaves, shutters, and lattice fills; warm medium browns, flatter grain than the frame oak.",
+      "lime-render": "Lime plaster over wattle — the cream infill panels between upper-storey frame timbers; never used at ground level where rain-splash erodes it.",
+      "clay-bricks": "A small batch of kiln-fired brick — expensive and fire-safe, reserved for chimney caps above the roof line."
+    },
+    "wealthClass": "Yeoman — dressed stone at corners and openings, cheap fieldstone elsewhere; no slate, no glass larger than a lattice pane.",
+    "roofingEconomy": "Sawn timber plank/shingle roofs at the steep 45° pitch class; ridge and eave edges boarded in the darker oak."
+  },
+  "palette": [
+    {
+      "role": "wall.field.ground",
+      "block": "cobblestone",
+      "rationale": "Ground-storey wall fields are the cheap material: uncoursed rubble fieldstone (the barn's recessed panels; the vernacular default a concept may override with dressed stone, as the cottage's ashlar ground storey does).",
+      "provenance": ["local-fieldstone"],
+      "zone": { "band": "base", "tier": "dominant" },
+      "valueCheck": { "formClass": "cube", "inTable": true, "family": "stone", "lab": [53.305, 0.571, -0.409] }
+    },
+    {
+      "role": "wall.dressing",
+      "block": "stone_bricks",
+      "rationale": "Quoins, buttress piers, plinth courses, jambs and heads are dressed quarry stone — crisp coursed blocks spent only where structure or weather demands them (the cottage/barn near-tone grey pair, kept distinct from the rubble field).",
+      "provenance": ["quarried-ashlar"],
+      "zone": { "band": "base", "tier": "preserve" },
+      "valueCheck": { "formClass": "cube", "inTable": true, "family": "stone", "lab": [51.223, -0.002, 0] }
+    },
+    {
+      "role": "frame.timber",
+      "block": "dark_oak_log",
+      "rationale": "The half-timber frame — corner posts, studs, eaves beams — is heavy coppice oak with visible round grain; near-black against the cream panels it carries.",
+      "provenance": ["oak-coppice"],
+      "zone": { "band": "upper", "tier": "preserve" },
+      "valueCheck": { "formClass": "cube", "inTable": true, "family": "log", "lab": [20.316, 2.64, 15.672] }
+    },
+    {
+      "role": "wall.infill.upper",
+      "block": "white_terracotta",
+      "rationale": "Upper-storey panels between the frame timbers are lime plaster over wattle — warm matte cream, never pure white, never used at ground level (rain-splash).",
+      "provenance": ["lime-render"],
+      "zone": { "band": "upper", "tier": "dominant" },
+      "valueCheck": { "formClass": "cube", "inTable": true, "family": "smooth", "lab": [74.899, 8.925, 12.982] }
+    },
+    {
+      "role": "roof.field",
+      "block": "spruce_planks",
+      "rationale": "Roof slopes are sawpit plank courses — warm medium brown, flatter grain and clearly lighter than the frame oak (the cottage roof field; a concept may darken the whole roof toward the oak, as the barn does).",
+      "provenance": ["sawn-softwood"],
+      "zone": { "band": "roof", "tier": "dominant" },
+      "valueCheck": { "formClass": "cube", "inTable": true, "family": "planks", "lab": [38.489, 7.86, 25.664] }
+    },
+    {
+      "role": "roof.trim",
+      "block": "dark_oak_planks",
+      "rationale": "Eaves, verge and rake fascia are boarded in the darker oak — the deep edge banding both concepts show over the lighter roof field (and the barn's whole-roof dominant).",
+      "provenance": ["oak-coppice"],
+      "zone": { "band": "roof", "tier": "preserve" },
+      "valueCheck": { "formClass": "cube", "inTable": true, "family": "planks", "lab": [19.931, 8.325, 19.228] }
+    },
+    {
+      "role": "roof.course",
+      "block": "spruce_stairs",
+      "rationale": "The stepped roof course realization of the sawn-plank field — the stair member of the roof family the generators emit.",
+      "provenance": ["sawn-softwood"],
+      "valueCheck": { "formClass": "fixture", "inTable": false, "family": null }
+    },
+    {
+      "role": "roof.step",
+      "block": "spruce_slab",
+      "rationale": "The half-step member of the roof family — shallow-pitch landings and ridge half-caps.",
+      "provenance": ["sawn-softwood"],
+      "valueCheck": { "formClass": "fixture", "inTable": false, "family": null }
+    },
+    {
+      "role": "chimney.cap",
+      "block": "bricks",
+      "rationale": "Chimney caps are the one brick element — fire-safe kiln brick crowning the cool fieldstone shaft, warm-on-cool (the cottage's red cap).",
+      "provenance": ["clay-bricks"],
+      "valueCheck": { "formClass": "cube", "inTable": true, "family": "brick", "lab": [46.897, 19.66, 17.39] }
+    },
+    {
+      "role": "door.main",
+      "block": "spruce_door",
+      "rationale": "Door leaves are sawn boards — warm panelled timber set in stone reveals.",
+      "provenance": ["sawn-softwood"],
+      "valueCheck": { "formClass": "fixture", "inTable": false, "family": null }
+    },
+    {
+      "role": "door.wagon",
+      "block": "oak_planks",
+      "rationale": "Barn wagon-door leaves are bright golden sawn boarding — the lighter, warmer timber kept distinct from the dark roof above (the barn's opening fill).",
+      "provenance": ["sawn-softwood"],
+      "valueCheck": { "formClass": "cube", "inTable": true, "family": "planks", "lab": [56.565, 5.118, 32.435] }
+    },
+    {
+      "role": "window.shutter",
+      "block": "dark_oak_trapdoor",
+      "rationale": "Shutters and slatted window fills are coppice-oak lattice — the gridded reveal both storeys of the cottage show.",
+      "provenance": ["oak-coppice"],
+      "valueCheck": { "formClass": "fixture", "inTable": false, "family": null }
+    },
+    {
+      "role": "window.infill",
+      "block": "spruce_fence",
+      "rationale": "Open lattice fills for unglazed lights — thin sawn members reading as leaded/lattice grid.",
+      "provenance": ["sawn-softwood"],
+      "valueCheck": { "formClass": "rail", "inTable": false, "family": null }
+    }
+  ],
+  "idioms": [
+    { "name": "roof.gable", "params": { "pitch": 1, "blocks": { "field": "spruce_planks", "stairs": "spruce_stairs", "slab": "spruce_slab" } } },
+    { "name": "roof.hip", "params": { "pitch": 1, "blocks": { "field": "spruce_planks", "stairs": "spruce_stairs", "slab": "spruce_slab" } } },
+    { "name": "roof.pyramid", "params": { "pitch": 1, "blocks": { "field": "spruce_planks", "stairs": "spruce_stairs", "slab": "spruce_slab" } } },
+    { "name": "dormer", "params": { "width": 3, "depth": 3, "wallHeight": 2, "wallBlock": "white_terracotta", "roofBlock": "spruce_stairs", "faceBlock": "white_terracotta", "ridgeBlock": "dark_oak_planks" } },
+    { "name": "chimney", "params": { "footprint": { "w": 1, "d": 1 }, "block": "cobblestone", "cap": "crown", "capBlock": "bricks" } },
+    { "name": "jetty", "params": { "overhang": 1, "joistEvery": 2, "beamBlock": "dark_oak_planks", "joistBlock": "dark_oak_log" } },
+    { "name": "plinth", "params": { "courses": 1, "block": "stone_bricks" } },
+    { "name": "arch", "params": { "block": "stone_bricks" } },
+    { "name": "head.flat", "params": { "block": "stone_bricks" } },
+    { "name": "course.stairs", "params": { "block": "spruce_stairs" } },
+    { "name": "course.slab", "params": { "block": "spruce_slab" } },
+    { "name": "timber-frame", "params": {} },
+    { "name": "opening-dressing", "params": {} },
+    { "name": "hollow", "params": {} },
+    { "name": "floorplan", "params": {} }
+  ],
+  "proportions": {
+    "storeyHeight": { "min": 3, "max": 4 },
+    "pitchClasses": [1],
+    "openingRhythm": { "minSpacing": 2, "maxSpacing": 5 }
+  },
+  "decoration": [
+    { "item": "door-lantern", "block": "lantern", "where": ["door"] }
+  ],
+  "conformance": {
+    "checks": ["courses-even", "symmetry-held", "openings-rhythm", "palette-in-pack", "watertight", "single-component"]
+  }
+}

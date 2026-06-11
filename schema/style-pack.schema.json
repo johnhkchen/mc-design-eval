@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mc-design-eval.local/schema/style-pack.schema.json",
+  "title": "style-pack/v1 — per-STYLE bundle: provenance story, curated palette, idiom set, proportion rules, decoration vocabulary, conformance gate (T-124-01, E-31)",
+  "type": "object",
+  "required": ["schema", "style", "provenance", "palette", "idioms", "proportions", "decoration", "conformance"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "style-pack/v1" },
+    "style": {
+      "description": "Style slug — the ONLY style-specific artifact is this file (E-31 Rule 2)",
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$"
+    },
+    "provenance": {
+      "description": "The material STORY — diegetic, not optical. Palette assignments derive from named sources here; GLB textures are never read for materials.",
+      "type": "object",
+      "required": ["setting", "sources"],
+      "additionalProperties": false,
+      "properties": {
+        "setting": { "type": "string", "minLength": 1 },
+        "sources": {
+          "description": "Named local-availability facts the palette cites (key → narrative)",
+          "type": "object",
+          "minProperties": 1,
+          "patternProperties": { "^[a-z][a-z0-9-]*$": { "type": "string", "minLength": 1 } },
+          "additionalProperties": false
+        },
+        "wealthClass": { "type": "string", "minLength": 1 },
+        "roofingEconomy": { "type": "string", "minLength": 1 }
+      }
+    },
+    "palette": {
+      "description": "Block per role, human-curated once per style; value-validated at authoring time (the committed valueCheck snapshot is re-derived by validateStylePack)",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["role", "block", "rationale", "provenance", "valueCheck"],
+        "additionalProperties": false,
+        "properties": {
+          "role": { "type": "string", "pattern": "^[a-z][a-z0-9.-]*$" },
+          "block": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "rationale": { "description": "Why THIS block for this role — must read from the provenance story", "type": "string", "minLength": 1 },
+          "provenance": {
+            "description": "Keys into provenance.sources this assignment derives from",
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" }
+          },
+          "zone": {
+            "description": "Optional zone-policy seat (packPolicy → composeVocabulary)",
+            "type": "object",
+            "required": ["band", "tier"],
+            "additionalProperties": false,
+            "properties": {
+              "band": { "type": "string", "minLength": 1 },
+              "tier": { "enum": ["dominant", "preserve"] }
+            }
+          },
+          "valueCheck": {
+            "description": "E-14/T-086 authoring-time snapshot (block-lab-table truth, deterministic re-check)",
+            "type": "object",
+            "required": ["formClass", "inTable"],
+            "additionalProperties": false,
+            "properties": {
+              "formClass": { "enum": ["cube", "fixture", "rail"] },
+              "inTable": { "type": "boolean" },
+              "family": { "type": ["string", "null"] },
+              "lab": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "number" } }
+            }
+          }
+        }
+      }
+    },
+    "idioms": {
+      "description": "The style's idiom set: registry names + style-level parameter defaults/bounds (partial — geometry arrives with the recognized program)",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "params": { "type": "object" }
+        }
+      }
+    },
+    "proportions": {
+      "type": "object",
+      "required": ["storeyHeight", "pitchClasses", "openingRhythm"],
+      "additionalProperties": false,
+      "properties": {
+        "storeyHeight": { "$ref": "#/$defs/intRange" },
+        "pitchClasses": {
+          "description": "Realizable roof pitches (rise per run — the generator vocabulary: 0.5 slab, 1 stair, 2 steep)",
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "number", "exclusiveMinimum": 0 }
+        },
+        "openingRhythm": {
+          "type": "object",
+          "required": ["minSpacing", "maxSpacing"],
+          "additionalProperties": false,
+          "properties": {
+            "minSpacing": { "type": "integer", "minimum": 1 },
+            "maxSpacing": { "type": "integer", "minimum": 1 }
+          }
+        }
+      }
+    },
+    "decoration": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["item", "block", "where"],
+        "additionalProperties": false,
+        "properties": {
+          "item": { "type": "string", "minLength": 1 },
+          "block": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "where": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+        }
+      }
+    },
+    "conformance": {
+      "description": "The workshop's per-round gate: check names (pack-conformance/v1 vocabulary) + optional per-check params",
+      "type": "object",
+      "required": ["checks"],
+      "additionalProperties": false,
+      "properties": {
+        "checks": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "params": { "type": "object" }
+      }
+    }
+  },
+  "$defs": {
+    "intRange": {
+      "type": "object",
+      "required": ["min", "max"],
+      "additionalProperties": false,
+      "properties": {
+        "min": { "type": "integer", "minimum": 1 },
+        "max": { "type": "integer", "minimum": 1 }
+      }
+    }
+  }
+}

@@ -9,6 +9,8 @@
     "validate:good": "node scripts/validate-artifact.mjs --expect valid schema/examples/valid-industrial-house.json",
     "validate:bad": "node scripts/validate-artifact.mjs --expect invalid schema/examples/invalid-industrial-house.json",
     "test:unit": "node --test \"src/**/*.test.mjs\"",
+    "pack:validate": "node scripts/validate-pack.mjs packs/rustic.json",
+    "idioms:card": "node benchmarks/sculpture/idiom-card.mjs",
     "trial:run": "node scripts/run-trial.mjs",
     "smoke:run": "node scripts/run-trial.mjs",
     "trial:iterative": "node scripts/run-iterative-trial.mjs",
