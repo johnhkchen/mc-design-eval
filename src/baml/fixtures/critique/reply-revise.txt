@@ -1,0 +1,22 @@
+Here is my read of the build.
+```json
+{
+  "critique": {
+    "issues": [
+      {
+        "region": "north wall",
+        "issue": "pink band off the pack palette",
+        "severity": "major"
+      }
+    ]
+  },
+  "decision": "revise",
+  "action": {
+    "action": "spray-paint",
+    "dir": "+z",
+    "toBlock": "oak_planks",
+    "fromBlock": "pink_wool"
+  },
+  "rationale": "Repaint the foreign band into the pack's wall block."
+}
+```

@@ -27,7 +27,7 @@ import { artifactOccupancy } from "../view/occupancy.mjs";
 import { applyPaint } from "../view/face-paint.mjs";
 import { realizeProgram } from "./program.mjs";
 import { applyAction, DEFAULT_APPLIERS } from "./actions.mjs";
-import { buildWorkshopPrompt, liveActionNames } from "./critique.mjs";
+import { liveActionNames } from "./critique.mjs";
 
 export const WORKSHOP_LEDGER_SCHEMA = "workshop-ledger/v1";
 
@@ -63,10 +63,13 @@ export function isRegression(before, after) {
  * @param {object} opts.program  a validated workshop program (the seed — committed for replay)
  * @param {object} opts.pack  a validated style pack
  * @param {object} opts.seams
- * @param {(args:{prompt:string, round:number, renders:object[]|null, program:object}) => Promise<{verdict:object|null, replies:object[], askCount:number}>} opts.seams.exchange
- *   the metered exchange (runner: reply-policy over the tiered shim; tests: synthetic). `program`
- *   is the CURRENT program so the runner's reply parser grounds actions against it. A null
- *   verdict means the bounded re-asks were exhausted — the loop records it and STOPS.
+ * @param {(args:{round:number, budget:number, renders:object[]|null, program:object, pack:object, conformance:object, lastRound:object|null, liveActions:string[], azimuths:string[]}) => Promise<{verdict:object|null, replies:object[], askCount:number}>} opts.seams.exchange
+ *   the metered exchange (runner: BAML render → reply-policy over the tiered shim; tests:
+ *   synthetic). The loop hands over the ROUND CONTEXT — everything the critique prompt needs
+ *   (T-129-01: prompt rendering is the runner's, through the BAML bridge; the pure core never
+ *   touches it). `program` is the CURRENT program so the runner's reply parser grounds actions
+ *   against it. A null verdict means the bounded re-asks were exhausted — the loop records it
+ *   and STOPS.
  * @param {(args:{artifact:object, round:number}) => Promise<object[]|null>} [opts.seams.render]
  *   evidence renders (runner: the 4 gate azimuths; tests/replay: absent → null)
  * @param {(args:{artifact:object, declarations:object}) => object} [opts.seams.conform]
@@ -99,11 +102,11 @@ export async function runWorkshopLoop({ program, pack, seams, appliers = DEFAULT
     const artifact = realize(current, paint);
     const before = conform({ artifact, declarations: current.declarations });
     const renders = render ? await render({ artifact, round: r }) : null;
-    const prompt = buildWorkshopPrompt({
-      program: current, pack, round: r, budget, liveActions, azimuths, conformance: before, lastRound,
-    });
 
-    const ex = await exchange({ prompt, round: r, renders, program: current });
+    const ex = await exchange({
+      round: r, budget, renders, program: current, pack,
+      conformance: before, lastRound, liveActions, azimuths,
+    });
     const base = { round: r, renders, replies: ex.replies, askCount: ex.askCount };
 
     if (ex.verdict === null || ex.verdict === undefined) {

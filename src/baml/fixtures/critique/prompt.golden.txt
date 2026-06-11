@@ -1,0 +1,61 @@
+You are the builder in the workshop (round 2 of 4). The images are:
+  1. the CONCEPT (the target)
+  2. your build, azimuth 45° (+x+z)
+  3. your build, azimuth 135° (+x-z)
+  4. your build, azimuth 225° (-x-z)
+  5. your build, azimuth 315° (-x+z)
+
+This build is YOURS and you may revise it. Compare your build against the concept and decide.
+
+THE CURRENT PROGRAM (the revisable object — elements realize in order):
+```json
+{
+  "elements": [
+    {
+      "id": "shell",
+      "kind": "shell",
+      "spec": {
+        "footprint": {
+          "x0": 0,
+          "x1": 4,
+          "z0": 0,
+          "z1": 3
+        },
+        "y0": 0,
+        "height": 3,
+        "wallBlock": "oak_planks"
+      }
+    }
+  ]
+}
+```
+
+THE PACK VOCABULARY (every block you paint or assign must come from it):
+  - wall.field: oak_planks
+  - roof.field: spruce_planks
+decoration:
+  - lantern: lantern
+
+THE CONFORMANCE GATE on the current build (a revision that scores worse is rolled back):
+  - palette-in-pack: FAIL — foreign block pink_wool ×6 (e.g. 2,1,3)
+  - watertight: PASS
+
+LAST ROUND: you chose {"action":"adjust-params","elementId":"shell","params":{"height":9}} — ROLLED BACK (regressed watertight). Do not repeat it unchanged.
+
+SANCTIONED ACTIONS (choose exactly ONE per round; live now: adjust-params, spray-paint):
+  - {"action":"adjust-params","elementId":"<element id>","params":{<spec keys to replace>}}
+  - {"action":"spray-paint","dir":"+x|-x|+z|-z|+y|-y|+x+z|+x-z|-x+z|-x-z","toBlock":"<pack block>","fromBlock":"<block, optional>","bounds":{"min":[x,y,z],"max":[x,y,z]} (optional)}
+  - {"action":"re-recognize","elementId":"<element id>"}
+
+Reply with EXACTLY ONE fenced json block, nothing else fenced:
+```json
+{
+  "critique": { "issues": [ { "region": "<where on the build>", "issue": "<what is wrong vs the concept>", "severity": "minor|major" } ] },
+  "decision": "revise" | "done",
+  "action": { ... },        // required when revising, forbidden when done
+  "rationale": "<one or two sentences>"
+}
+```
+Name at most 6 issues. Prefer fixing FAILING conformance checks and major visual
+divergences first. Declare "done" only when the build reads as the concept's building and the
+conformance gate passes.

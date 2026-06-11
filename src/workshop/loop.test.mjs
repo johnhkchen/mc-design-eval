@@ -50,15 +50,16 @@ const verdictRevise = (action, issue = "pink band off the palette") => ({
 });
 const verdictDone = () => ({ critique: { issues: [] }, decision: "done", rationale: "matches well enough" });
 
-/** A scripted exchange seam: pops verdicts in order; records the prompts it saw. */
+/** A scripted exchange seam: pops verdicts in order; records the round CONTEXTS it saw
+ *  (T-129-01: the loop hands over round context; prompt rendering is the runner's). */
 const scripted = (verdicts) => {
-  const prompts = [];
-  const seam = async ({ prompt }) => {
-    prompts.push(prompt);
+  const ctxs = [];
+  const seam = async (ctx) => {
+    ctxs.push(ctx);
     const v = verdicts.shift();
     return { verdict: v, replies: [{ attempt: 1, parsed: v !== null, rawReply: "synthetic", source: "live" }], askCount: 1 };
   };
-  return { seam, prompts };
+  return { seam, ctxs };
 };
 
 // --- SC: the score ----------------------------------------------------------------------------
@@ -84,7 +85,7 @@ test("SC2 isRegression is lexicographic and strict (lateral moves are not regres
 // --- L: the loop --------------------------------------------------------------------------------
 
 test("L1 accept path: paint shrinks the foreign band; round accepted; final artifact carries the paint", async () => {
-  const { seam, prompts } = scripted([verdictRevise(PAINT_PINK_OAK), verdictDone()]);
+  const { seam, ctxs } = scripted([verdictRevise(PAINT_PINK_OAK), verdictDone()]);
   const { ledger, artifact } = await runWorkshopLoop({ program: seedProgram(3), pack: PACK, seams: { exchange: seam } });
 
   const r1 = ledger.rounds[0];
@@ -101,12 +102,17 @@ test("L1 accept path: paint shrinks the foreign band; round accepted; final arti
   // the paint survives into the final artifact (applied after realization)
   const painted = artifact.placements.filter((p) => p.block === "minecraft:oak_planks" && p.pos[1] === 1 && p.pos[2] === 3);
   assert.equal(painted.length, 5);
-  // round 2's prompt told the model about round 1's acceptance
-  assert.match(prompts[1], /ACCEPTED/);
+  // round 2's context tells the runner (and so the model) about round 1's acceptance, and
+  // carries everything the critique prompt needs
+  assert.equal(ctxs[1].lastRound.accepted, true);
+  assert.equal(ctxs[1].round, 2);
+  assert.equal(ctxs[1].budget, 3);
+  assert.ok(Array.isArray(ctxs[1].liveActions) && ctxs[1].liveActions.includes("spray-paint"));
+  assert.ok(ctxs[1].conformance.checks, "the round's BEFORE conformance rides the seam");
 });
 
 test("L2 rollback path: a regressing paint is rolled back — program and paint unchanged, recorded", async () => {
-  const { seam, prompts } = scripted([verdictRevise(PAINT_OAK_COBBLE, "wrong trim")]);
+  const { seam, ctxs } = scripted([verdictRevise(PAINT_OAK_COBBLE, "wrong trim")]);
   const { ledger, artifact } = await runWorkshopLoop({ program: seedProgram(1), pack: PACK, seams: { exchange: seam } });
 
   const r1 = ledger.rounds[0];
@@ -114,13 +120,14 @@ test("L2 rollback path: a regressing paint is rolled back — program and paint 
   assert.match(r1.conformance.reason, /^regressed: /);
   assert.ok(!artifact.placements.some((p) => p.block === "minecraft:cobblestone"), "rolled-back paint never lands");
   assert.equal(ledger.final.outcome, "budget-exhausted");
-  void prompts;
+  void ctxs;
 });
 
-test("L3 a rolled-back round is reported to the next round's prompt", async () => {
-  const { seam, prompts } = scripted([verdictRevise(PAINT_OAK_COBBLE), verdictDone()]);
+test("L3 a rolled-back round is reported to the next round's context", async () => {
+  const { seam, ctxs } = scripted([verdictRevise(PAINT_OAK_COBBLE), verdictDone()]);
   await runWorkshopLoop({ program: seedProgram(2), pack: PACK, seams: { exchange: seam } });
-  assert.match(prompts[1], /ROLLED BACK \(regressed:/);
+  assert.equal(ctxs[1].lastRound.accepted, false);
+  assert.match(ctxs[1].lastRound.reason, /^regressed: /);
 });
 
 test("L4 done stops immediately; budget exhaustion records honestly", async () => {

@@ -1,14 +1,15 @@
-// workshop critique contract tests (T-126-01). Groups:
+// workshop critique contract tests (T-126-01; prompt layer migrated to BAML by T-129-01). Groups:
 //   E — extractReplyJson (fence discipline)
 //   C — parseWorkshopReply accept + rejection matrix
-//   B — buildWorkshopPrompt content pins (live actions, budget, image order, contract embedded)
+//   B — critiqueRenderArgs content pins (the BAML function's typed inputs; the full rendered
+//       prompt is byte-pinned to the captured golden by src/baml/fixtures.test.mjs)
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
 import {
   WORKSHOP_REPLY_SCHEMA, ISSUE_SEVERITIES, MAX_ISSUES,
-  buildWorkshopPrompt, extractReplyJson, parseWorkshopReply, liveActionNames,
+  critiqueRenderArgs, extractReplyJson, parseWorkshopReply, liveActionNames,
 } from "./critique.mjs";
 import { DEFAULT_APPLIERS } from "./actions.mjs";
 import { assertWorkshopProgram, WORKSHOP_PROGRAM_SCHEMA } from "./program.mjs";
@@ -81,41 +82,43 @@ test("C3 rejection matrix", () => {
   }
 });
 
-// --- B: prompt content pins -----------------------------------------------------------------------
+// --- B: render-args content pins (the BAML function's typed inputs) -------------------------------
 
-test("B1 the prompt names round/budget, image order, live actions, palette, conformance, contract", () => {
+test("B1 the render args carry round/budget, image order, live actions, palette, conformance, last round", () => {
   const conformance = {
     checks: [
       { name: "palette-in-pack", passed: false, findings: ["foreign block pink_wool ×6 (e.g. 2,1,3)"] },
       { name: "watertight", passed: true, findings: [] },
     ],
   };
-  const prompt = buildWorkshopPrompt({
+  const a = critiqueRenderArgs({
     program: PROGRAM, pack: PACK, round: 2, budget: 4,
     liveActions: liveActionNames(DEFAULT_APPLIERS),
     azimuths: ["+x+z", "+x-z", "-x-z", "-x+z"],
     conformance,
     lastRound: { action: { action: "adjust-params", elementId: "shell", params: { height: 9 } }, accepted: false, reason: "regressed watertight" },
   });
-  assert.match(prompt, /round 2 of 4/);
-  assert.match(prompt, /1\. the CONCEPT/);
-  assert.match(prompt, /azimuth 315° \(-x\+z\)/);
-  assert.match(prompt, /live now: adjust-params, spray-paint\)/); // re-recognize NOT live by default
-  assert.match(prompt, /wall\.field: oak_planks/);
-  assert.match(prompt, /palette-in-pack: FAIL — foreign block pink_wool/);
-  assert.match(prompt, /watertight: PASS/);
-  assert.match(prompt, /ROLLED BACK \(regressed watertight\)/);
-  assert.match(prompt, /"decision": "revise" \| "done"/);
-  assert.match(prompt, new RegExp(`at most ${MAX_ISSUES} issues`));
-  assert.match(prompt, /"elements"/); // the program is embedded
+  assert.equal(a.round_num, 2);
+  assert.equal(a.budget, 4);
+  assert.match(a.image_list, /1\. the CONCEPT/);
+  assert.match(a.image_list, /azimuth 315° \(-x\+z\)/);
+  assert.equal(a.live_actions, "adjust-params, spray-paint"); // re-recognize NOT live by default
+  assert.match(a.palette_block, /wall\.field: oak_planks/);
+  assert.match(a.palette_block, /decoration:\n {2}- lantern: lantern/);
+  assert.match(a.conformance_block, /palette-in-pack: FAIL — foreign block pink_wool/);
+  assert.match(a.conformance_block, /watertight: PASS/);
+  assert.match(a.last_round_note, /ROLLED BACK \(regressed watertight\)/);
+  assert.equal(a.max_issues, MAX_ISSUES);
+  assert.match(a.program_json, /"elements"/); // the program is embedded
 });
 
-test("B2 the prompt is deterministic in its inputs", () => {
+test("B2 the render args are deterministic in their inputs; no last round → empty note", () => {
   const args = {
     program: PROGRAM, pack: PACK, round: 1, budget: 3,
     liveActions: ["adjust-params", "spray-paint"],
     azimuths: ["+x+z", "+x-z", "-x-z", "-x+z"],
     conformance: { checks: [] },
   };
-  assert.equal(buildWorkshopPrompt(args), buildWorkshopPrompt(args));
+  assert.deepEqual(critiqueRenderArgs(args), critiqueRenderArgs(args));
+  assert.equal(critiqueRenderArgs(args).last_round_note, "");
 });

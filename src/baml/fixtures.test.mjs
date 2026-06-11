@@ -49,6 +49,8 @@ const recOps = (key) => ({
 const cottageReplies = readJson(`${REC}/cottage.replies.json`);
 const barnReplies = readJson(`${REC}/barn.replies.json`);
 
+const CRIT = "src/baml/fixtures/critique";
+
 let R; // batch results, by index
 
 before(async () => {
@@ -58,6 +60,11 @@ before(async () => {
     /* 2 */ { fn: "RecognizeBuildingProgram", mode: "parse", text: cottageReplies.rawTexts.at(-1) },
     /* 3 */ { fn: "RecognizeBuildingProgram", mode: "parse", text: barnReplies.rawTexts.at(-1) },
     /* 4 */ { fn: "RecognizeBuildingProgram", mode: "parse", text: "I would rather describe the building in prose." },
+    /* 5 */ { fn: "CritiqueWorkshopRound", mode: "render", args: readJson(`${CRIT}/inputs.json`),
+              images: { concept: PX, renders: [PX, PX, PX, PX] } },
+    /* 6 */ { fn: "CritiqueWorkshopRound", mode: "parse", text: read(`${CRIT}/reply-revise.txt`) },
+    /* 7 */ { fn: "CritiqueWorkshopRound", mode: "parse", text: read(`${CRIT}/reply-done.txt`) },
+    /* 8 */ { fn: "CritiqueWorkshopRound", mode: "parse", text: "The roof looks flat; I would revise it." },
   ]);
 });
 
@@ -78,4 +85,21 @@ test("FX-R2 b.parse over the committed ACCEPTED raw replies equals the committed
 
 test("FX-R3 a malformed reply rejects (prose is not a program)", () => {
   assert.equal(R[4].ok, false);
+});
+
+test("FX-C1 critique render is byte-identical to the captured golden (the retired .mjs builder's output)", () => {
+  assert.ok(R[5].ok, R[5].error);
+  assert.equal(R[5].prompt, read(`${CRIT}/prompt.golden.txt`), "critique prompt drifted from the golden");
+  assert.equal(R[5].images.length, 5, "concept + 4 azimuth renders, in template order");
+});
+
+test("FX-C2 b.parse over the canonical replies equals the pinned expectations (revise + done)", () => {
+  for (const [i, name] of [[6, "revise"], [7, "done"]]) {
+    assert.ok(R[i].ok, `${name}: ${R[i].error}`);
+    assert.deepEqual(dropNulls(R[i].parsed), readJson(`${CRIT}/expected-${name}.json`), name);
+  }
+});
+
+test("FX-C3 a malformed critique reply rejects (prose is not a reply)", () => {
+  assert.equal(R[8].ok, false);
 });

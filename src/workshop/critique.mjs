@@ -31,58 +31,34 @@ const ANGLE_DESCRIPTIONS = Object.freeze({
 const isNonEmptyString = (s) => typeof s === "string" && s.trim().length > 0;
 
 /**
- * Build the per-round workshop prompt. Deterministic in its inputs; the SAME prompt is re-sent on
- * a bounded re-ask (the reply policy's contract). The conformance report and the pack palette are
- * embedded so the model's action is grounded in the gate it must not regress and the vocabulary
- * it must paint from.
+ * The per-round critique prompt's DATA — the typed inputs of the BAML function
+ * CritiqueWorkshopRound (baml_src/critique.baml, T-129-01). The prose skeleton lives in the BAML
+ * template; this serializes the round's live objects into its string params. Deterministic in
+ * its inputs; the rendered prompt is byte-pinned to the captured golden by the fixture test, and
+ * the SAME rendered prompt is re-sent on a bounded re-ask (the reply policy's contract).
  */
-export function buildWorkshopPrompt({ program, pack, round, budget, liveActions, azimuths, conformance, lastRound = null }) {
+export function critiqueRenderArgs({ program, pack, round, budget, liveActions, azimuths, conformance, lastRound = null }) {
   const palette = (pack.palette ?? []).map((p) => `  - ${p.role}: ${p.block}`).join("\n");
   const decoration = (pack.decoration ?? []).map((d) => `  - ${d.item}: ${d.block}`).join("\n");
-  const checks = (conformance?.checks ?? [])
-    .map((c) => `  - ${c.name}: ${c.passed ? "PASS" : `FAIL — ${c.findings.join("; ")}`}`)
-    .join("\n");
-  const imageList = ["  1. the CONCEPT (the target)"]
-    .concat(azimuths.map((a, i) => `  ${i + 2}. your build, ${ANGLE_DESCRIPTIONS[a] ?? a}`))
-    .join("\n");
-  const last = lastRound
-    ? `\nLAST ROUND: you chose ${JSON.stringify(lastRound.action)} — ${lastRound.accepted
-      ? "ACCEPTED (conformance held or improved)."
-      : `ROLLED BACK (${lastRound.reason}). Do not repeat it unchanged.`}\n`
-    : "";
-  return `You are the builder in the workshop (round ${round} of ${budget}). The images are:
-${imageList}
-
-This build is YOURS and you may revise it. Compare your build against the concept and decide.
-
-THE CURRENT PROGRAM (the revisable object — elements realize in order):
-\`\`\`json
-${JSON.stringify({ elements: program.elements }, null, 2)}
-\`\`\`
-
-THE PACK VOCABULARY (every block you paint or assign must come from it):
-${palette}${decoration ? `\ndecoration:\n${decoration}` : ""}
-
-THE CONFORMANCE GATE on the current build (a revision that scores worse is rolled back):
-${checks}
-${last}
-SANCTIONED ACTIONS (choose exactly ONE per round; live now: ${liveActions.join(", ")}):
-  - {"action":"adjust-params","elementId":"<element id>","params":{<spec keys to replace>}}
-  - {"action":"spray-paint","dir":"+x|-x|+z|-z|+y|-y|+x+z|+x-z|-x+z|-x-z","toBlock":"<pack block>","fromBlock":"<block, optional>","bounds":{"min":[x,y,z],"max":[x,y,z]} (optional)}
-  - {"action":"re-recognize","elementId":"<element id>"}
-
-Reply with EXACTLY ONE fenced json block, nothing else fenced:
-\`\`\`json
-{
-  "critique": { "issues": [ { "region": "<where on the build>", "issue": "<what is wrong vs the concept>", "severity": "minor|major" } ] },
-  "decision": "revise" | "done",
-  "action": { ... },        // required when revising, forbidden when done
-  "rationale": "<one or two sentences>"
-}
-\`\`\`
-Name at most ${MAX_ISSUES} issues. Prefer fixing FAILING conformance checks and major visual
-divergences first. Declare "done" only when the build reads as the concept's building and the
-conformance gate passes.`;
+  return {
+    round_num: round,
+    budget,
+    image_list: ["  1. the CONCEPT (the target)"]
+      .concat(azimuths.map((a, i) => `  ${i + 2}. your build, ${ANGLE_DESCRIPTIONS[a] ?? a}`))
+      .join("\n"),
+    program_json: JSON.stringify({ elements: program.elements }, null, 2),
+    palette_block: `${palette}${decoration ? `\ndecoration:\n${decoration}` : ""}`,
+    conformance_block: (conformance?.checks ?? [])
+      .map((c) => `  - ${c.name}: ${c.passed ? "PASS" : `FAIL — ${c.findings.join("; ")}`}`)
+      .join("\n"),
+    last_round_note: lastRound
+      ? `\nLAST ROUND: you chose ${JSON.stringify(lastRound.action)} — ${lastRound.accepted
+        ? "ACCEPTED (conformance held or improved)."
+        : `ROLLED BACK (${lastRound.reason}). Do not repeat it unchanged.`}\n`
+      : "",
+    live_actions: liveActions.join(", "),
+    max_issues: MAX_ISSUES,
+  };
 }
 
 /** Extract the reply's single fenced JSON block (or accept a bare-JSON reply). Throws otherwise. */

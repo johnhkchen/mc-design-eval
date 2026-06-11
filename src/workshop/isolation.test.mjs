@@ -85,7 +85,9 @@ test("ISO4 the loop core never imports the model or render stacks (seams arrive 
   for (const name of ["loop.mjs", "program.mjs", "actions.mjs", "critique.mjs", "replay.mjs"]) {
     const src = readFileSync(join(HERE, name), "utf8");
     const importLines = src.split("\n").filter((l) => /^\s*import\b/.test(l));
-    for (const banned of ["sdk-binding", "model-tier", "render/", "prismarine"]) {
+    // "baml" joins the ban (T-129-01): prompt rendering is the RUNNER's, through the bridge —
+    // the pure core hands round context across the exchange seam and never touches the bridge.
+    for (const banned of ["sdk-binding", "model-tier", "render/", "prismarine", "baml"]) {
       for (const line of importLines) {
         assert.ok(!line.includes(banned), `${name} import must not reference "${banned}": ${line.trim()}`);
       }
