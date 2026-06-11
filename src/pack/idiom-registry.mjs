@@ -346,13 +346,16 @@ export const IDIOM_REGISTRY = Object.freeze({
     tests: "src/view/opening-dressing.test.mjs",
     composition: { consumes: ["occupancy", "features", "kit"], emits: ["placements", "report"] },
     preview: {
+      // openings ALIGN on both walls: the aperture detector reads enclosed air in the solid
+      // PROJECTION, so a preview hole must pierce the thin pavilion (a committed reference
+      // building reads the same way — holes are through the hollow shell)
       substrate: {
         kind: "shell",
         spec: {
           footprint: { x0: 0, x1: 8, z0: 0, z1: 4 }, y0: 0, height: 5, wallBlock: "white_terracotta",
           openings: [
-            { wall: "-z", at: [2, 2], w: 2, h: 2 },
-            { wall: "-z", at: [6, 0], w: 1, h: 3 },
+            { wall: "-z", at: [2, 2], w: 2, h: 2 }, { wall: "+z", at: [2, 2], w: 2, h: 2 },
+            { wall: "-z", at: [6, 0], w: 1, h: 3 }, { wall: "+z", at: [6, 0], w: 1, h: 3 },
           ],
         },
       },

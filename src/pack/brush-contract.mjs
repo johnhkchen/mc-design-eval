@@ -29,6 +29,7 @@ import addFormats from "ajv-formats";
 import { formatErrors } from "../artifact.mjs";
 import { IDIOM_REGISTRY } from "./idiom-registry.mjs";
 import { IDIOM_CARD_SPECS } from "./idiom-card.mjs";
+import { realizePassPreview } from "./brush-preview.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(here, "..", "..");
@@ -132,7 +133,7 @@ function realizerName(entry) {
  */
 export function validateBrushRegistry(
   registry = IDIOM_REGISTRY,
-  { cardSpecs = IDIOM_CARD_SPECS, readFile = defaultReadFile, realizePreview = null } = {}
+  { cardSpecs = IDIOM_CARD_SPECS, readFile = defaultReadFile, realizePreview = realizePassPreview } = {}
 ) {
   const findings = [];
   const err = (brush, msg) => findings.push({ level: "error", brush, msg });

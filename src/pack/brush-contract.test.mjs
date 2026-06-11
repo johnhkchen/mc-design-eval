@@ -209,3 +209,12 @@ test("a schema-invalid entry reports its descriptor errors and skips the semanti
   assert.equal(r.ok, false);
   assert.ok(errorsOf(r).every((e) => e.startsWith("fix.broken: descriptor:")));
 });
+
+// ---------------------------------------------------------------- THE META-TEST
+
+test("THE REAL REGISTRY validates clean under the brush contract — 19 brushes, the baseline", () => {
+  const r = validateBrushRegistry(); // real registry, real card specs, real files, real realizer
+  assert.deepEqual(errorsOf(r), []);
+  assert.equal(r.ok, true);
+  assert.equal(r.count, 19, "the factory baseline: 11 constructs + 8 passes");
+});
