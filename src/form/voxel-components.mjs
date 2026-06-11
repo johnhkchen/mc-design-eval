@@ -167,3 +167,55 @@ export function pruneStrays(occupancy, { connectivity = 6, minFraction = 0.5, mi
   delete pruned.thin;
   return pruned;
 }
+
+/** Declared per-component cell-fraction budget for the glb-smoke registration gate (T-120-01,
+ *  story S-120, epic E-30). A non-principal component at or below this fraction of total cells is a
+ *  SPECK — reported and delegated to the standing shellStage `componentStrip` (the barn probe:
+ *  voxelize@48 → shellStage → 1 component), never a gate failure. Grounding: the barn's worst sweep
+ *  point (scale 32) carries 1.87% TOTAL stray across 7 components (each necessarily smaller); the
+ *  moai control's duplicate mass is ≈ 48% of cells — an order-of-magnitude gap on both sides. */
+export const GLB_SMOKE_SPECK_FRACTION = 0.02;
+
+/**
+ * Sub-speck-tolerant single-mass verdict over a component size list (T-120-01). The strict
+ * single-bulky-mass gate (`components === 1`) over-fires on sub-speck mesh debris — the barn's GLB
+ * failed at every scale on ONE floating cell (largestFraction ≥ 0.9813 throughout). This keeps the
+ * gate's defect class (moai-style multi-mass fragmentation) while tolerating declared specks:
+ * every NON-principal component must individually be ≤ `speckFraction` of total cells; ANY larger
+ * component fails the gate (strict above the budget — no contract relaxed, the tolerance is
+ * declared and bounded). Specks/oversize are reported sorted by size descending (stable records).
+ * PURE; operates on `componentLabels(...).sizes` so the caller picks the connectivity.
+ * @param {number[]} sizes  per-component cell counts (componentLabels order)
+ * @param {number} total  total occupied cells (must equal the sizes sum for sane fractions)
+ * @param {{speckFraction?:number}} [opts]
+ * @returns {{pass:boolean, principal:{cells:number, fraction:number},
+ *            specks:{cells:number, fraction:number}[], oversize:{cells:number, fraction:number}[],
+ *            speckFraction:number}}
+ */
+export function speckVerdict(sizes, total, { speckFraction = GLB_SMOKE_SPECK_FRACTION } = {}) {
+  const frac = (cells) => Math.round((cells / total) * 1e6) / 1e6;
+  if (!total || !sizes.length) {
+    // an empty voxelization is never a registrable mesh — fail, don't divide by zero
+    return { pass: false, principal: { cells: 0, fraction: 0 }, specks: [], oversize: [], speckFraction };
+  }
+  // principal: max size, lowest index on ties (the strayVoxelStats idiom)
+  let principal = 0;
+  for (let l = 1; l < sizes.length; l++) if (sizes[l] > sizes[principal]) principal = l;
+  const specks = [];
+  const oversize = [];
+  for (let l = 0; l < sizes.length; l++) {
+    if (l === principal) continue;
+    const entry = { cells: sizes[l], fraction: frac(sizes[l]) };
+    (sizes[l] / total <= speckFraction ? specks : oversize).push(entry);
+  }
+  const bySize = (a, b) => b.cells - a.cells;
+  specks.sort(bySize);
+  oversize.sort(bySize);
+  return {
+    pass: oversize.length === 0,
+    principal: { cells: sizes[principal], fraction: frac(sizes[principal]) },
+    specks,
+    oversize,
+    speckFraction,
+  };
+}

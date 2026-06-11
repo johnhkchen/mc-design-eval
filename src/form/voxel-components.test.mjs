@@ -5,7 +5,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { componentLabels, strayVoxelStats, pruneStrays } from "./voxel-components.mjs";
+import {
+  componentLabels, strayVoxelStats, pruneStrays, speckVerdict, GLB_SMOKE_SPECK_FRACTION,
+} from "./voxel-components.mjs";
 import { connectedComponents } from "./glb-thin.mjs";
 
 /** Occupancy from a dims triple + an ordered [i,j,k] cell list (occupiedCells order = list order). */
@@ -187,4 +189,66 @@ test("connectedComponents delegates to componentLabels (same sizes, sorted desc)
     assert.equal(cc.count, core.count);
     assert.deepEqual(cc.sizes, [...core.sizes].sort((a, b) => b - a));
   }
+});
+
+// --- speckVerdict: the T-120-01 sub-speck-tolerant registration gate ---------
+
+
+test("speckVerdict: THE BARN SHAPE — one 1-cell speck beside a 3578-cell mass passes, reported", () => {
+  const v = speckVerdict([3578, 1], 3579);
+  assert.equal(v.pass, true);
+  assert.equal(v.specks.length, 1);
+  assert.equal(v.specks[0].cells, 1);
+  assert.ok(v.specks[0].fraction < 0.001);
+  assert.deepEqual(v.oversize, []);
+  assert.equal(v.principal.cells, 3578);
+  assert.equal(v.speckFraction, GLB_SMOKE_SPECK_FRACTION);
+});
+
+test("speckVerdict: THE MOAI SHAPE — a duplicate near-half mass fails as oversize", () => {
+  // recorded control: 3 components, largestFraction 0.5213
+  const v = speckVerdict([5213, 4700, 87], 10000);
+  assert.equal(v.pass, false);
+  assert.equal(v.oversize.length, 1);
+  assert.equal(v.oversize[0].cells, 4700);
+  assert.equal(v.specks.length, 1, "the small shard is still a reported speck");
+});
+
+test("speckVerdict: boundary — a component exactly at the budget passes, one cell over fails", () => {
+  // total 1000, budget 0.02 → 20 cells is a speck, 21 is oversize
+  const at = speckVerdict([980, 20], 1000);
+  assert.equal(at.pass, true);
+  assert.equal(at.specks[0].cells, 20);
+  const over = speckVerdict([979, 21], 1000);
+  assert.equal(over.pass, false);
+  assert.equal(over.oversize[0].cells, 21);
+});
+
+test("speckVerdict: many tiny specks all pass (the barn scale-32 sweep shape)", () => {
+  // 8 components, total stray 1.87% spread thin — every component individually sub-budget
+  const sizes = [9813, 50, 40, 30, 25, 20, 15, 7];
+  const v = speckVerdict(sizes, sizes.reduce((a, b) => a + b, 0));
+  assert.equal(v.pass, true);
+  assert.equal(v.specks.length, 7);
+  assert.deepEqual(v.specks.map((s) => s.cells), [50, 40, 30, 25, 20, 15, 7], "sorted descending");
+});
+
+test("speckVerdict: a single solid mass passes with empty lists", () => {
+  const v = speckVerdict([11423], 11423);
+  assert.equal(v.pass, true);
+  assert.deepEqual(v.specks, []);
+  assert.deepEqual(v.oversize, []);
+  assert.equal(v.principal.fraction, 1);
+});
+
+test("speckVerdict: an empty voxelization fails (never registrable)", () => {
+  const v = speckVerdict([], 0);
+  assert.equal(v.pass, false);
+  assert.deepEqual(v.principal, { cells: 0, fraction: 0 });
+});
+
+test("speckVerdict: a custom declared budget overrides the default", () => {
+  const v = speckVerdict([900, 100], 1000, { speckFraction: 0.1 });
+  assert.equal(v.pass, true, "a 10% component is a speck under a 0.1 budget");
+  assert.equal(speckVerdict([900, 100], 1000).pass, false, "and oversize under the default");
 });
