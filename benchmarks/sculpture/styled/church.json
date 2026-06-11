@@ -2,14 +2,15 @@
   "schema": "styled-milestone/v1",
   "subject": "church",
   "status": "pipeline-failed",
-  "stage": "kit",
-  "error": "no committed kit record (registry kitRecord=null) — kit extraction (kit-extract.mjs) requires a committed T-092 zone-map record (registry zoneMapRecord=null); zone derivation runs inside the skin chain, so both are blocked by this subject's upstream gate findings (see challenge/church.json). Run kit:extract once the chain passes its skin gates.",
+  "stage": "settle",
+  "error": "settle did not converge after 4 grammar+dressing re-runs (still wants: frame 14, foreign fill 170, gating dressing 0)",
   "inputs": {
     "build": null,
     "concept": "runs/016-vBuilding-a-village-church-with-a-square-bell-tower/concept.png",
     "glb": "glb/church.glb",
     "map": "material-map/church.json",
-    "kitRecord": null
+    "kitRecord": "kit/church.json",
+    "kitSha256": "164a2f7e2bfe81a935b58e020334a274da246c64faaaae2f961fa2411079a810"
   },
-  "note": "a named precondition, not a crash — recorded honestly (E-25 Rule 6); nothing was tuned in response"
+  "note": "a terminal gate or chain stage threw — recorded honestly (E-25 Rule 6); nothing was tuned in response"
 }
