@@ -168,3 +168,8 @@ benchmarks/sculpture/roof/**/*.png
 # + reconstructed/<subj>/e26-baseline.json; the committed evidence frames live in
 # pr/assets/frames/reconstructed-*.png and the gate sheets.
 benchmarks/sculpture/reconstructed/**/*.png
+
+# E-29 generated-milestone (T-115-01) working renders — the records are generated/<subj>.{json,md} +
+# generated/<subj>/{base-,grammar-,}artifact.json + component-plan.json + provision-fit.json; the
+# committed evidence frames live in pr/assets/frames/multi-angle-*-generated.png.
+benchmarks/sculpture/generated/**/*.png

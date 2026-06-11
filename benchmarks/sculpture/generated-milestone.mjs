@@ -133,7 +133,23 @@ async function provisionStage(def, kitRec, track) {
   const { mcData } = await import("../../render/src/version.mjs");
   const vocabNames = new Set(Object.keys(mcData().blocksByName));
   const family = roofFamily(kitRec?.kit ?? [], vocabNames);
-  const genOpts = { family, policy: def.policy, metadata: { trial_id: `${def.key}-generate-first` } };
+  // NAMED-space storey bands from the COMMITTED concept-derived zone-map record (registry data):
+  // generated walls paint per band so the skin's palette discipline finds every concept dominant
+  // in the manifest (the skin re-derives bands on THIS geometry and repaints — generation supplies
+  // presence, the skin supplies placement truth). Absent record → policy fallback, named.
+  let bands = null;
+  let sheetBlock = null;
+  const bandSource = { record: def.zoneMapRecord ?? null, used: false };
+  if (def.zoneMapRecord && existsSync(join(HERE, def.zoneMapRecord))) {
+    const zm = JSON.parse(await readFile(join(HERE, def.zoneMapRecord), "utf8"));
+    if (Array.isArray(zm.derived?.bands) && zm.derived.bands.length) {
+      bands = zm.derived.bands.map((b) => ({ yRange: b.yRange, block: b.dominantBlock }));
+      sheetBlock = zm.derived.roof?.dominantBlock ?? null;
+      bandSource.used = true;
+    }
+  }
+  const genOpts = { family, policy: def.policy, bands, sheetBlock,
+    metadata: { trial_id: `${def.key}-generate-first` } };
   const gen = generateProvision(fit, genOpts);
   assertArtifact(gen.artifact);
 
@@ -159,6 +175,7 @@ async function provisionStage(def, kitRec, track) {
 
   return {
     scale: def.generated.scale, refSils, evidenceOcc, conditioned, fit, fitSerialized, family, gen,
+    bandSource,
     zeroBlob: {
       ...zeroBlob,
       regeneratedFromRecord: true,
@@ -549,7 +566,7 @@ async function main() {
     pipelineOrder: PIPELINE_ORDER,
     inputs: {
       concept: def.concept, glb: def.glb, map: def.map, kitRecord: def.kitRecord, kitSha256: kitSha,
-      scale: r1.scale, alignment: "registry-scale",
+      scale: r1.scale, alignment: "registry-scale", generationBands: r1.bandSource,
     },
     fit: fitSummary(r1.fit),
     zeroBlob: r1.zeroBlob,

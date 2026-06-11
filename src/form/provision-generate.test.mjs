@@ -92,7 +92,7 @@ test("zero-blob check: a planted foreign cell REFUSES (provenance, not set-inter
 
 // ---- carving (exclusion, never burial) ------------------------------------------------------------
 
-test("apertures carve by exclusion: flat head rectangle, declared depth, nothing buried", () => {
+test("apertures carve THROUGH the wall slab: a true hole the openings detector can see", () => {
   const fit = flatFit({
     openings: [{
       id: "og-0", massId: "mass-0", dir: "-z", kind: "door",
@@ -108,12 +108,16 @@ test("apertures carve by exclusion: flat head rectangle, declared depth, nothing
   for (let x = 3; x <= 4; x++) {
     for (let y = 0; y <= 3; y++) {
       assert.equal(occ.has(x, y, 0), false, `carved at face (${x},${y},0)`);
-      assert.equal(occ.has(x, y, 1), false, `carved one deep (${x},${y},1)`);
-      assert.equal(occ.has(x, y, 2), true, `wall body stands behind the recess (${x},${y},2)`);
+      assert.equal(occ.has(x, y, 1), false, `carved through the slab (${x},${y},1)`);
     }
   }
-  assert.equal(occ.has(2, 0, 0), true, "jamb stands");
+  assert.equal(occ.has(2, 1, 0), true, "jamb stands");
   assert.equal(occ.has(3, 4, 0), true, "head course stands above the carve");
+  // hollow masses: interior is open (no floor slab — the zone-map anchor needs the eave widest),
+  // the far wall slab stands
+  assert.equal(occ.has(3, 2, 2), false, "interior hollow behind the wall slab");
+  assert.equal(occ.has(3, 0, 2), false, "no interior floor slab");
+  assert.equal(occ.has(3, 2, 5), true, "far wall slab stands");
   assert.ok(gen.counts.carved > 0);
   assertGeneratedProvenance(gen.artifact, gen.provenance);
 });
@@ -162,6 +166,22 @@ test("missing course family on a fitted roof is a NAMED finding, mass generated 
   const gen = generateProvision(fit, { family: { field: null, stairs: null, slab: null }, policy: POLICY });
   assert.ok(gen.findings.some((f) => f.code === "roof-family-missing"));
   assert.equal(gen.counts.roof, 0);
+});
+
+test("storey bands paint walls per yRange; sheet courses carry the fascia block", () => {
+  const fit = fitProvision({ occ: occupancyFromCells(gabledBox()) });
+  const gen = generateProvision(fit, {
+    family: FAMILY, policy: POLICY,
+    bands: [{ yRange: [0, 1], block: "stone_bricks" }, { yRange: [2, 9], block: "white_terracotta" }],
+    sheetBlock: "dark_oak_planks",
+  });
+  const blocks = new Set(gen.artifact.placements.map((p) => p.block));
+  assert.ok(blocks.has("minecraft:stone_bricks"), "band0 dominant present");
+  assert.ok(blocks.has("minecraft:white_terracotta"), "band1 dominant present");
+  for (const p of gen.artifact.placements) {
+    if (p.block === "minecraft:stone_bricks") assert.ok(p.pos[1] <= 1, "band0 stays in its yRange");
+  }
+  assertGeneratedProvenance(gen.artifact, gen.provenance);
 });
 
 // ---- determinism / the regenerate proof ------------------------------------------------------------
