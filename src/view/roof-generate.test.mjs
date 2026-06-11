@@ -176,3 +176,54 @@ test("determinism: two generations are deep-equal", () => {
   assert.deepEqual(a.cells, b.cells);
   assert.deepEqual(a.counts, b.counts);
 });
+
+// --- fitted ends (T-108-01): footprint trim + verge/eave sheet course ----------------------------
+
+/** The standard test gable with fitted ends attached (roof-end-fit shape, minimal fields). */
+function endedGable(ends, opts = {}) {
+  return { ...gable(opts), ends };
+}
+
+test("ends trim: columns past the fitted verge tip are not generated", () => {
+  // blob footprint z 0..5; fitted hi end: face at z=3, verge tip at z=4 → z=5 not generated
+  const g = endedGable({ lo: null, hi: { dir: "+z", coord: 4, faceCoord: 3, overhang: 1 } });
+  const { heights } = generateRoof([g], SPRUCE);
+  assert.equal(heights.has("0,5"), false, "column past the fitted end is trimmed");
+  assert.equal(heights.has("0,4"), true);
+  assert.equal(heights.get("0,4"), heights.get("0,3"), "the sheet keeps the gable surface height");
+});
+
+test("sheet strip: surface course only — open underside past the gable face", () => {
+  const g = endedGable({ lo: null, hi: { dir: "+z", coord: 5, faceCoord: 3, overhang: 2 } }, { pitch: 1 });
+  const { cells } = generateRoof([g], SPRUCE);
+  const m = byPos(cells);
+  // solid column inside the face (z=3): filled from the band floor (y10) to the surface
+  assert.ok(m.has("3,10,3") && m.has("3,11,3"), "solid wedge inside the gable face");
+  // sheet column (z=4,5): ONLY the surface course — x=3 surface is y11 (a stair tread), y10 open
+  assert.ok(m.has("3,11,4") && m.has("3,11,5"), "sheet places the surface course");
+  assert.equal(m.has("3,10,4"), false, "sheet underside is open (the overhang face)");
+  assert.equal(m.has("3,10,5"), false);
+  assert.equal(m.get("3,11,4").block, "spruce_stairs", "verge courses keep the stair vocabulary");
+  // the ridge column's sheet cell is full-height at the ridge cap
+  assert.ok(m.has("0,14,4") && !m.has("0,13,4"), "ridge sheet cell carries no fill below");
+});
+
+test("no ends → byte-identical to the un-ended generation (regression pin)", () => {
+  const a = generateRoof([gable({ pitch: 1 })], SPRUCE);
+  const b = generateRoof([endedGable(undefined, { pitch: 1 })], SPRUCE);
+  assert.deepEqual(a.cells, b.cells);
+  assert.deepEqual(a.counts, b.counts);
+});
+
+test("composition: a solid winner overrides a sheet loser at shared columns", () => {
+  // sheet gable (low ridge) overlapped by a taller solid cross gable at z=4
+  const sheetG = endedGable({ lo: null, hi: { dir: "+z", coord: 5, faceCoord: 3, overhang: 2 } }, { pitch: 1 });
+  const solidG = {
+    ...gable({ pitch: 1, eaveY: 12, ridgeY: 16, E: 4, z0: 4, z1: 5 }),
+    id: "gable-cross",
+  };
+  const { cells } = generateRoof([sheetG, solidG], SPRUCE);
+  const m = byPos(cells);
+  // at (0,*,4): the cross gable's ridge (y16) beats the sheet gable's surface (y14) → solid fill
+  assert.ok(m.has("0,12,4") && m.has("0,16,4"), "winning solid gable fills to its surface");
+});

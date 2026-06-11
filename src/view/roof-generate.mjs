@@ -89,8 +89,15 @@ function gableDownhillAt(gable, x, z, h) {
 /**
  * Compose the generated roof heightfield over all SANE gables: per column, the highest gable's
  * surface wins (valleys at intersections); heights quantized to halves.
+ *
+ * FITTED ENDS (T-108-01): a gable carrying `ends` (roof-end-fit) is TRIMMED along its ridge axis —
+ * columns past `ends.{lo,hi}.coord` are not generated (the swap still carves them: the blob past
+ * the fitted verge tip is removed, not kept) — and columns past `ends.{lo,hi}.faceCoord` are
+ * marked `sheet`: the verge/eave-overhang strip gets the surface course only, open underside.
+ * A solid winner overrides a sheet loser at shared columns (per-column max, unchanged).
  * @param {object[]} gables roof-fit gables (insane ones are skipped by the caller's filter)
- * @returns {{heights:Map<string,number>, owner:Map<string,{gableId:string, downhill:string|null}>,
+ * @returns {{heights:Map<string,number>,
+ *            owner:Map<string,{gableId:string, downhill:string|null, sheet:boolean}>,
  *            bandFloor:number}}
  */
 export function roofHeightfield(gables) {
@@ -99,12 +106,18 @@ export function roofHeightfield(gables) {
   let bandFloor = Infinity;
   for (const g of gables) {
     for (const s of g.sides) bandFloor = Math.min(bandFloor, Math.floor(s.eaveY));
+    const vIdx = g.ridge.axis === "x" ? 0 : 1;
+    const lo = g.ends?.lo ?? null;
+    const hi = g.ends?.hi ?? null;
     for (const key of g.footprint.cols) {
       const [x, z] = key.split(",").map(Number);
+      const v = vIdx === 0 ? x : z;
+      if ((hi && v > hi.coord) || (lo && v < lo.coord)) continue; // past the fitted verge tip
+      const sheet = Boolean((hi && v > hi.faceCoord) || (lo && v < lo.faceCoord));
       const h = roundHalf(gableSurfaceHeight(g, x, z));
       if (!heights.has(key) || h > heights.get(key)) {
         heights.set(key, h);
-        owner.set(key, { gableId: g.id, downhill: gableDownhillAt(g, x, z, h) });
+        owner.set(key, { gableId: g.id, downhill: gableDownhillAt(g, x, z, h), sheet });
       }
     }
   }
@@ -113,7 +126,9 @@ export function roofHeightfield(gables) {
 
 /**
  * Generate the roof cells from sane gables + the kit family: solid wedge from the band floor up,
- * stair treads on whole-step edges, slabs on half-steps, full blocks everywhere else.
+ * stair treads on whole-step edges, slabs on half-steps, full blocks everywhere else. SHEET
+ * columns (the fitted verge/eave-overhang strips, see {@link roofHeightfield}) place the surface
+ * course only — the underside stays open, which is what makes an overhang read as one.
  * @returns {{cells:{pos:number[], block:string, form?:string, state?:object}[],
  *            counts:{full:number, stairs:number, slabs:number},
  *            heights:Map<string,number>, owner:Map<string,object>, bandFloor:number}}
@@ -130,7 +145,8 @@ export function generateRoof(gables, family, opts = {}) {
     const [x, z] = key.split(",").map(Number);
     const hInt = Math.floor(h);
     const half = h - hInt > 0;
-    const d = owner.get(key)?.downhill ?? null;
+    const own = owner.get(key);
+    const d = own?.downhill ?? null;
     const at = (dir) => {
       const [dx, dz] = DELTA[dir];
       return heights.get(`${x + dx},${z + dz}`);
@@ -139,7 +155,7 @@ export function generateRoof(gables, family, opts = {}) {
     const stair = !half && family.stairs && d !== null &&
       (at(d) === undefined || at(d) <= h - 1) && (at(FLIP[d]) ?? -Infinity) >= h + 1;
     const top = hInt;
-    for (let y = floor; y <= top; y++) {
+    for (let y = own?.sheet ? top : floor; y <= top; y++) {
       if (y === top && stair) {
         cells.push({ pos: [x, y, z], block: family.stairs, form: "fixture",
           state: { facing: STAIR_FACING[FLIP[d]], half: "bottom", shape: "straight" } });
