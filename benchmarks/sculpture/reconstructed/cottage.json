@@ -1,0 +1,769 @@
+{
+  "schema": "reconstructed-milestone/v1",
+  "subject": "cottage",
+  "chain": {
+    "runner": "styled-milestone.mjs",
+    "record": "benchmarks/sculpture/styled/cottage.json",
+    "exitCode": 1,
+    "status": "gated",
+    "stage": null,
+    "error": null,
+    "gate": {
+      "outcome": "FAIL",
+      "resemblance": {
+        "decided": true,
+        "passed": false,
+        "gapCount": 10,
+        "gapBudget": 2,
+        "failures": [
+          {
+            "angle": "+x+z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x+z",
+            "reason": "drifted"
+          }
+        ],
+        "refusal": null
+      },
+      "kitPresence": {
+        "ran": null,
+        "passed": true,
+        "reason": null,
+        "gaps": [],
+        "skips": [
+          "openings:door (no door-kind aperture declared by the concept (T-099 D7 — detector gap, not absence))",
+          "openings:light (no door-kind aperture declared by the concept (T-099 D7 — detector gap, not absence))"
+        ]
+      },
+      "perView": [
+        {
+          "angle": "+x+z",
+          "azimuthDeg": 45,
+          "coverage": true,
+          "verdict": "drifted",
+          "gaps": [
+            {
+              "region": "roof across the whole top",
+              "attribute": "form",
+              "severity": "major"
+            },
+            {
+              "region": "upper storey gable ends",
+              "attribute": "massing",
+              "severity": "major"
+            },
+            {
+              "region": "timber-frame walls vs stone plinth",
+              "attribute": "material zoning",
+              "severity": "minor"
+            }
+          ]
+        },
+        {
+          "angle": "+x-z",
+          "azimuthDeg": 135,
+          "coverage": true,
+          "verdict": "same object",
+          "gaps": [
+            {
+              "region": "front gable wall, upper storey",
+              "attribute": "material zoning",
+              "severity": "minor"
+            },
+            {
+              "region": "timber roof eaves",
+              "attribute": "form",
+              "severity": "minor"
+            }
+          ]
+        },
+        {
+          "angle": "-x-z",
+          "azimuthDeg": 225,
+          "coverage": true,
+          "verdict": "same object",
+          "gaps": [
+            {
+              "region": "lower walls / stone foundation course",
+              "attribute": "material zoning",
+              "severity": "minor"
+            },
+            {
+              "region": "roof ridge and chimney profile",
+              "attribute": "form",
+              "severity": "minor"
+            }
+          ]
+        },
+        {
+          "angle": "-x+z",
+          "azimuthDeg": 315,
+          "coverage": true,
+          "verdict": "drifted",
+          "gaps": [
+            {
+              "region": "roof",
+              "attribute": "form",
+              "severity": "major"
+            },
+            {
+              "region": "overall building edges/eaves",
+              "attribute": "form",
+              "severity": "minor"
+            },
+            {
+              "region": "stone ground-floor base",
+              "attribute": "material zoning",
+              "severity": "minor"
+            }
+          ]
+        }
+      ],
+      "record": "benchmarks/sculpture/multi-angle/cottage-styled.json",
+      "sheet": "pr/assets/frames/multi-angle-cottage-styled.png"
+    }
+  },
+  "componentLayer": {
+    "inputs": {
+      "regularized": "regularize/cottage/artifact.json",
+      "component": "components/cottage.json",
+      "roof": "roof/cottage.json",
+      "shaped": "shaped/cottage.json"
+    },
+    "pins": {
+      "regularizedShell": "33b1ca02f2589f49dd8c678e2416bf81196be41bf91451c4c9e351baf24c0afd",
+      "component": "33b1ca02f2589f49dd8c678e2416bf81196be41bf91451c4c9e351baf24c0afd",
+      "roof": "33b1ca02f2589f49dd8c678e2416bf81196be41bf91451c4c9e351baf24c0afd",
+      "shaped": "33b1ca02f2589f49dd8c678e2416bf81196be41bf91451c4c9e351baf24c0afd"
+    },
+    "findings": []
+  },
+  "instrument": {
+    "frozen": true,
+    "comparedTo": "committed pre-run gate record",
+    "diffs": [],
+    "judgeModels": [
+      "claude-opus-4-8"
+    ],
+    "note": "carried from the live-run record (--distill-only; the live run captured the real pre/post contract compare)"
+  },
+  "verdicts": {
+    "views": [
+      {
+        "angle": "+x+z",
+        "azimuthDeg": 45,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof across the whole top",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "upper storey gable ends",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "timber-frame walls vs stone plinth",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "reason": null
+      },
+      {
+        "angle": "+x-z",
+        "azimuthDeg": 135,
+        "verdict": "same object",
+        "gaps": [
+          {
+            "region": "front gable wall, upper storey",
+            "attribute": "material zoning",
+            "severity": "minor"
+          },
+          {
+            "region": "timber roof eaves",
+            "attribute": "form",
+            "severity": "minor"
+          }
+        ],
+        "reason": null
+      },
+      {
+        "angle": "-x-z",
+        "azimuthDeg": 225,
+        "verdict": "same object",
+        "gaps": [
+          {
+            "region": "lower walls / stone foundation course",
+            "attribute": "material zoning",
+            "severity": "minor"
+          },
+          {
+            "region": "roof ridge and chimney profile",
+            "attribute": "form",
+            "severity": "minor"
+          }
+        ],
+        "reason": null
+      },
+      {
+        "angle": "-x+z",
+        "azimuthDeg": 315,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "overall building edges/eaves",
+            "attribute": "form",
+            "severity": "minor"
+          },
+          {
+            "region": "stone ground-floor base",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "reason": null
+      }
+    ],
+    "aggregate": {
+      "schema": "multi-angle-gate/v1",
+      "decided": true,
+      "passed": false,
+      "gapCount": 10,
+      "gapBudget": 2,
+      "gaps": [
+        {
+          "angle": "+x+z",
+          "region": "roof across the whole top",
+          "attribute": "form"
+        },
+        {
+          "angle": "+x+z",
+          "region": "upper storey gable ends",
+          "attribute": "massing"
+        },
+        {
+          "angle": "+x+z",
+          "region": "timber-frame walls vs stone plinth",
+          "attribute": "material zoning"
+        },
+        {
+          "angle": "+x-z",
+          "region": "front gable wall, upper storey",
+          "attribute": "material zoning"
+        },
+        {
+          "angle": "+x-z",
+          "region": "timber roof eaves",
+          "attribute": "form"
+        },
+        {
+          "angle": "-x-z",
+          "region": "lower walls / stone foundation course",
+          "attribute": "material zoning"
+        },
+        {
+          "angle": "-x-z",
+          "region": "roof ridge and chimney profile",
+          "attribute": "form"
+        },
+        {
+          "angle": "-x+z",
+          "region": "roof",
+          "attribute": "form"
+        },
+        {
+          "angle": "-x+z",
+          "region": "overall building edges/eaves",
+          "attribute": "form"
+        },
+        {
+          "angle": "-x+z",
+          "region": "stone ground-floor base",
+          "attribute": "material zoning"
+        }
+      ],
+      "failures": [
+        {
+          "angle": "+x+z",
+          "reason": "drifted"
+        },
+        {
+          "angle": "-x+z",
+          "reason": "drifted"
+        }
+      ],
+      "views": [
+        {
+          "angle": "+x+z",
+          "outcome": "drifted: form"
+        },
+        {
+          "angle": "+x-z",
+          "outcome": "same object (2 minor)"
+        },
+        {
+          "angle": "-x-z",
+          "outcome": "same object (2 minor)"
+        },
+        {
+          "angle": "-x+z",
+          "outcome": "drifted: form"
+        }
+      ]
+    },
+    "kitPresence": {
+      "schema": "kit-presence/v1",
+      "passed": true,
+      "checks": [
+        {
+          "feature": "frame",
+          "block": "spruce_planks",
+          "shipped": "spruce_planks",
+          "sites": 521,
+          "missing": 0,
+          "satisfied": 382,
+          "tolerated": {
+            "respected": 127,
+            "skippedIsolated": 12
+          },
+          "gating": true,
+          "passed": true
+        },
+        {
+          "feature": "panel:band0",
+          "block": "stone_bricks",
+          "shipped": "tuff",
+          "sites": 1483,
+          "missing": 0,
+          "tolerated": {
+            "residue": 0
+          },
+          "gating": true,
+          "passed": true
+        },
+        {
+          "feature": "panel:band1",
+          "block": "smooth_sandstone",
+          "shipped": "smooth_sandstone",
+          "sites": 1454,
+          "missing": 0,
+          "tolerated": {
+            "residue": 0
+          },
+          "gating": true,
+          "passed": true
+        },
+        {
+          "feature": "course",
+          "block": "spruce_planks",
+          "shipped": "spruce_planks",
+          "sites": 831,
+          "missing": 0,
+          "tolerated": {
+            "residue": 0
+          },
+          "gating": true,
+          "passed": true
+        },
+        {
+          "feature": "openings:infill",
+          "block": "spruce_fence",
+          "sites": 6,
+          "missingAt": [],
+          "toleratedAt": [],
+          "gating": true,
+          "passed": true
+        },
+        {
+          "feature": "openings:shutters",
+          "block": "spruce_trapdoor",
+          "sites": 6,
+          "missingAt": [],
+          "toleratedAt": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "gating": true,
+          "passed": true
+        },
+        {
+          "feature": "openings:lintel-sill",
+          "placed": 0,
+          "gating": false,
+          "passed": null
+        }
+      ],
+      "gaps": [],
+      "skips": [
+        {
+          "feature": "openings:door",
+          "reason": "no door-kind aperture declared by the concept (T-099 D7 — detector gap, not absence)"
+        },
+        {
+          "feature": "openings:light",
+          "reason": "no door-kind aperture declared by the concept (T-099 D7 — detector gap, not absence)"
+        }
+      ],
+      "grammar": {
+        "bindings": {
+          "frame": "spruce_planks",
+          "panels": {
+            "band0": "stone_bricks",
+            "band1": "smooth_sandstone"
+          },
+          "course": "spruce_planks",
+          "openingTreatments": [
+            "spruce_trapdoor",
+            "lantern",
+            "spruce_door"
+          ],
+          "skipped": []
+        },
+        "shipped": {
+          "frame": "spruce_planks",
+          "panels": {
+            "band0": "tuff",
+            "band1": "smooth_sandstone"
+          },
+          "course": "spruce_planks"
+        },
+        "frame": {
+          "counts": {
+            "wall": 2199,
+            "cornerPost": 46,
+            "roofline": 343,
+            "floorLine": 132
+          },
+          "painted": 0,
+          "adopted": 0,
+          "respected": 127,
+          "skippedIsolated": 12,
+          "alreadyFrame": 382
+        },
+        "fill": {
+          "placements": 0,
+          "byZone": {
+            "band0": {
+              "surface": 1483,
+              "filled": 0,
+              "kept": 1483
+            },
+            "band1": {
+              "surface": 1454,
+              "filled": 0,
+              "kept": 1454
+            },
+            "roof": {
+              "surface": 831,
+              "filled": 0,
+              "kept": 831
+            }
+          }
+        }
+      },
+      "dressing": {
+        "stats": {
+          "openings": 6,
+          "fullyDressed": 2,
+          "placements": 0,
+          "conflicts": 7,
+          "alreadyDressed": 15
+        },
+        "perOpening": [
+          {
+            "dir": "+x",
+            "kind": "window",
+            "bbox": {
+              "u0": 6,
+              "v0": 12,
+              "u1": 6,
+              "v1": 12
+            },
+            "applied": {
+              "infill": 1,
+              "shutterLeft": 1,
+              "shutterRight": 1,
+              "lintel": 2,
+              "sill": 3
+            },
+            "placed": {
+              "infill": 0,
+              "shutterLeft": 0,
+              "shutterRight": 0,
+              "lintel": 0,
+              "sill": 0
+            },
+            "conflicts": []
+          },
+          {
+            "dir": "+x",
+            "kind": "window",
+            "bbox": {
+              "u0": 14,
+              "v0": 17,
+              "u1": 14,
+              "v1": 17
+            },
+            "applied": {
+              "infill": 1,
+              "shutterLeft": 1,
+              "shutterRight": 0,
+              "lintel": 3,
+              "sill": 3
+            },
+            "placed": {
+              "infill": 0,
+              "shutterLeft": 0,
+              "shutterRight": 0,
+              "lintel": 0,
+              "sill": 0
+            },
+            "conflicts": [
+              {
+                "slot": "shutterRight",
+                "name": "shutter-no-jamb-right",
+                "reduction": "shutter-dropped"
+              }
+            ]
+          },
+          {
+            "dir": "+x",
+            "kind": "window",
+            "bbox": {
+              "u0": 5,
+              "v0": 20,
+              "u1": 6,
+              "v1": 20
+            },
+            "applied": {
+              "infill": 2,
+              "shutterLeft": 0,
+              "shutterRight": 1,
+              "lintel": 4,
+              "sill": 4
+            },
+            "placed": {
+              "infill": 0,
+              "shutterLeft": 0,
+              "shutterRight": 0,
+              "lintel": 0,
+              "sill": 0
+            },
+            "conflicts": [
+              {
+                "slot": "shutterLeft",
+                "name": "shutter-no-jamb-left",
+                "reduction": "shutter-dropped"
+              }
+            ]
+          },
+          {
+            "dir": "-x",
+            "kind": "window",
+            "bbox": {
+              "u0": 25,
+              "v0": 12,
+              "u1": 25,
+              "v1": 12
+            },
+            "applied": {
+              "infill": 1,
+              "shutterLeft": 0,
+              "shutterRight": 0,
+              "lintel": 0,
+              "sill": 0
+            },
+            "placed": {
+              "infill": 0,
+              "shutterLeft": 0,
+              "shutterRight": 0,
+              "lintel": 0,
+              "sill": 0
+            },
+            "conflicts": [
+              {
+                "slot": "shutterLeft",
+                "name": "shutter-blocked-left",
+                "reduction": "shutter-dropped",
+                "at": [
+                  [
+                    -8,
+                    14,
+                    -9
+                  ]
+                ]
+              },
+              {
+                "slot": "shutterRight",
+                "name": "shutter-blocked-right",
+                "reduction": "shutter-dropped",
+                "at": [
+                  [
+                    -8,
+                    14,
+                    -11
+                  ]
+                ]
+              },
+              {
+                "slot": "lintel",
+                "name": "lintel-no-band-cells",
+                "reduction": "lintel-skipped"
+              },
+              {
+                "slot": "sill",
+                "name": "sill-no-band-cells",
+                "reduction": "sill-skipped"
+              }
+            ]
+          },
+          {
+            "dir": "-x",
+            "kind": "window",
+            "bbox": {
+              "u0": 17,
+              "v0": 17,
+              "u1": 17,
+              "v1": 17
+            },
+            "applied": {
+              "infill": 1,
+              "shutterLeft": 0,
+              "shutterRight": 1,
+              "lintel": 2,
+              "sill": 2
+            },
+            "placed": {
+              "infill": 0,
+              "shutterLeft": 0,
+              "shutterRight": 0,
+              "lintel": 0,
+              "sill": 0
+            },
+            "conflicts": [
+              {
+                "slot": "shutterLeft",
+                "name": "shutter-no-jamb-left",
+                "reduction": "shutter-dropped"
+              }
+            ]
+          },
+          {
+            "dir": "-x",
+            "kind": "window",
+            "bbox": {
+              "u0": 25,
+              "v0": 20,
+              "u1": 26,
+              "v1": 20
+            },
+            "applied": {
+              "infill": 2,
+              "shutterLeft": 1,
+              "shutterRight": 1,
+              "lintel": 4,
+              "sill": 4
+            },
+            "placed": {
+              "infill": 0,
+              "shutterLeft": 0,
+              "shutterRight": 0,
+              "lintel": 0,
+              "sill": 0
+            },
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    "overall": {
+      "schema": "kit-aware-gate/v1",
+      "decided": true,
+      "passed": false,
+      "components": {
+        "resemblance": {
+          "decided": true,
+          "passed": false
+        },
+        "kitPresence": {
+          "ran": true,
+          "passed": true,
+          "gaps": []
+        }
+      }
+    },
+    "record": "benchmarks/sculpture/multi-angle/cottage-styled.json"
+  },
+  "metrics": {
+    "census": {
+      "before": {
+        "spikes": 265,
+        "ragged": 144,
+        "columns": 663,
+        "raggedRate": 0.2172,
+        "source": "benchmarks/sculpture/styled/cottage/artifact.json@5574d70",
+        "baselineSha256": "a1e781c9c48d5ce9b4fb57a94bd0fd667f278158593353faf2144a86c4ae00d1"
+      },
+      "after": {
+        "spikes": 51,
+        "ragged": 45,
+        "columns": 661,
+        "raggedRate": 0.0681,
+        "source": "styled/cottage/artifact.json"
+      }
+    },
+    "roofFit": {
+      "status": "accepted",
+      "gables": 2,
+      "sides": 4,
+      "adoptedPitchBy": {
+        "glb": 3,
+        "voxel": 1
+      },
+      "glbRejectedDivergence": {
+        "max": 5.59,
+        "count": 1,
+        "note": "glb pitch rejected by the attempt-ladder on these sides — the divergence is the rejection cause, not a build fit error"
+      }
+    },
+    "cage": {
+      "accepted": 2,
+      "rejected": 0,
+      "source": "regularize record"
+    },
+    "coverageRefusal": null
+  },
+  "sheets": {
+    "before": "pr/assets/frames/reconstructed-cottage-before.png",
+    "after": "pr/assets/frames/reconstructed-cottage-after.png",
+    "gate": "pr/assets/frames/multi-angle-cottage-styled.png"
+  },
+  "findings": [],
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  },
+  "reproducible": {
+    "milestoneSha256": {
+      "base": null,
+      "shell": "33b1ca02f2589f49dd8c678e2416bf81196be41bf91451c4c9e351baf24c0afd",
+      "reconstructed": "df4f749f27bc47ce784aedf41e8587ed9f4aea7ed99da1ba7043256cd7a16283",
+      "skinFinal": "ecca90d2be6a1c4e22e91f2a06db716347d1210052be8adc422b5e2f6e92c2cc",
+      "grammarFinal": "be6116b6934283b6544da333d96e29dbc3c18faa4547f01968ed806fe6749a37",
+      "styled": "8385a7a357252732b71f856a5aa54ffdb527fc64492a93c42b0e196189cc962b"
+    },
+    "determinism": "the milestone runner double-runs the deterministic chain and owns the byte-identity proof (--repro re-proves it fresh-process); this record distills committed outputs — same inputs, same record"
+  }
+}

@@ -901,10 +901,14 @@
     "trail": [
       {
         "frame": 3,
-        "fill": 1,
-        "dressing": 0
+        "foreignFill": 1,
+        "gatingDressing": 0
       }
-    ]
+    ],
+    "tolerated": {
+      "fillResidue": 0,
+      "dressing": 0
+    }
   },
   "reproducible": {
     "doubleRun": true,
@@ -955,17 +959,17 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof and upper storey",
+            "region": "roof across the whole top",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "overall silhouette vs. clean gabled mesh",
+            "region": "upper storey gable ends",
             "attribute": "massing",
-            "severity": "minor"
+            "severity": "major"
           },
           {
-            "region": "stone base relative to cream wall band",
+            "region": "timber-frame walls vs stone plinth",
             "attribute": "material zoning",
             "severity": "minor"
           }
@@ -978,13 +982,13 @@
         "verdict": "same object",
         "gaps": [
           {
-            "region": "roof ridge and upper massing",
-            "attribute": "form",
+            "region": "front gable wall, upper storey",
+            "attribute": "material zoning",
             "severity": "minor"
           },
           {
-            "region": "chimney on the roof",
-            "attribute": "massing",
+            "region": "timber roof eaves",
+            "attribute": "form",
             "severity": "minor"
           }
         ]
@@ -996,13 +1000,13 @@
         "verdict": "same object",
         "gaps": [
           {
-            "region": "roof ridge and eaves",
-            "attribute": "form",
+            "region": "lower walls / stone foundation course",
+            "attribute": "material zoning",
             "severity": "minor"
           },
           {
-            "region": "chimney on roof",
-            "attribute": "massing",
+            "region": "roof ridge and chimney profile",
+            "attribute": "form",
             "severity": "minor"
           }
         ]
@@ -1014,17 +1018,17 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof and upper massing",
+            "region": "roof",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "overall silhouette versus mesh",
-            "attribute": "massing",
+            "region": "overall building edges/eaves",
+            "attribute": "form",
             "severity": "minor"
           },
           {
-            "region": "stone base at lower right",
+            "region": "stone ground-floor base",
             "attribute": "material zoning",
             "severity": "minor"
           }

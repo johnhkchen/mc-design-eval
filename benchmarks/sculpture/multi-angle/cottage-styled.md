@@ -8,10 +8,10 @@ Artifact: `benchmarks/sculpture/styled/cottage/artifact.json` (sha256 `8385a7a35
 
 | view | azimuth | rendered | T-088 coverage | judge verdict |
 |---|---|---|---|---|
-| +x+z | 45° | yes | pass | drifted<br>major form @ roof and upper storey<br>minor massing @ overall silhouette vs. clean gabled mesh<br>minor material zoning @ stone base relative to cream wall band |
-| +x-z | 135° | yes | pass | same object<br>minor form @ roof ridge and upper massing<br>minor massing @ chimney on the roof |
-| -x-z | 225° | yes | pass | same object<br>minor form @ roof ridge and eaves<br>minor massing @ chimney on roof |
-| -x+z | 315° | yes | pass | drifted<br>major form @ roof and upper massing<br>minor massing @ overall silhouette versus mesh<br>minor material zoning @ stone base at lower right |
+| +x+z | 45° | yes | pass | drifted<br>major form @ roof across the whole top<br>major massing @ upper storey gable ends<br>minor material zoning @ timber-frame walls vs stone plinth |
+| +x-z | 135° | yes | pass | same object<br>minor material zoning @ front gable wall, upper storey<br>minor form @ timber roof eaves |
+| -x-z | 225° | yes | pass | same object<br>minor material zoning @ lower walls / stone foundation course<br>minor form @ roof ridge and chimney profile |
+| -x+z | 315° | yes | pass | drifted<br>major form @ roof<br>minor form @ overall building edges/eaves<br>minor material zoning @ stone ground-floor base |
 
 ## Resemblance aggregate (T-093)
 **FAIL** — gaps 10/2; failures: +x+z:drifted, -x+z:drifted

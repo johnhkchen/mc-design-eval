@@ -126,29 +126,29 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof and upper storey",
+            "region": "roof across the whole top",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "overall silhouette vs. clean gabled mesh",
+            "region": "upper storey gable ends",
             "attribute": "massing",
-            "severity": "minor"
+            "severity": "major"
           },
           {
-            "region": "stone base relative to cream wall band",
+            "region": "timber-frame walls vs stone plinth",
             "attribute": "material zoning",
             "severity": "minor"
           }
         ],
-        "rationale": "The three-zone palette (brown roof, cream walls, gray stone base) reads true, but the roof and upper massing are fragmented and jagged rather than the clean continuous gable shown in both the concept and the mesh silhouette at this angle."
+        "rationale": "The build reads as the same timber-framed cottage with stone plinth and brown plank roof, but the roof has collapsed into a lumpy, irregular mass with broken eave lines and the gable massing is deformed compared to the clean twin-pitched roof in the concept and mesh silhouette."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 11008,
-          "output_tokens": 558,
-          "cost_usd": 0.16859000000000002
+          "input_tokens": 10414,
+          "output_tokens": 214,
+          "cost_usd": 0.15505000000000002
         }
       }
     },
@@ -215,24 +215,24 @@
         "verdict": "same object",
         "gaps": [
           {
-            "region": "roof ridge and upper massing",
-            "attribute": "form",
+            "region": "front gable wall, upper storey",
+            "attribute": "material zoning",
             "severity": "minor"
           },
           {
-            "region": "chimney on the roof",
-            "attribute": "massing",
+            "region": "timber roof eaves",
+            "attribute": "form",
             "severity": "minor"
           }
         ],
-        "rationale": "The build reads as the same cottage from this angle — brown gabled roof, cream timbered upper walls, and gray stone base all zone true against the concept and match the mesh massing, with only minor jaggedness at the ridge and a less-defined chimney."
+        "rationale": "The build reads as the same half-timbered cottage from this angle — stone ground storey, cream-and-timber upper walls, and a dominant brown plank roof all match the references, with only minor softening of the framing pattern and eave line."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 11008,
-          "output_tokens": 619,
-          "cost_usd": 0.17011500000000002
+          "input_tokens": 10378,
+          "output_tokens": 165,
+          "cost_usd": 0.153645
         }
       }
     },
@@ -299,24 +299,24 @@
         "verdict": "same object",
         "gaps": [
           {
-            "region": "roof ridge and eaves",
-            "attribute": "form",
+            "region": "lower walls / stone foundation course",
+            "attribute": "material zoning",
             "severity": "minor"
           },
           {
-            "region": "chimney on roof",
-            "attribute": "massing",
+            "region": "roof ridge and chimney profile",
+            "attribute": "form",
             "severity": "minor"
           }
         ],
-        "rationale": "The build reads as the same half-timbered cottage from azimuth 225° — stone base, cream timber walls, and a dominant brown roof matching the concept and mesh silhouette, with only minor roof-edge and chimney irregularities."
+        "rationale": "From azimuth 225° the build matches the mesh silhouette and concept — timbered cream walls over a grey stone base under a brown stepped gable roof with a chimney — with only minor softening of the stone course and ridge/chimney crispness."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10917,
-          "output_tokens": 521,
-          "cost_usd": 0.16720999999999997
+          "input_tokens": 10378,
+          "output_tokens": 175,
+          "cost_usd": 0.153895
         }
       }
     },
@@ -383,29 +383,29 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof and upper massing",
+            "region": "roof",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "overall silhouette versus mesh",
-            "attribute": "massing",
+            "region": "overall building edges/eaves",
+            "attribute": "form",
             "severity": "minor"
           },
           {
-            "region": "stone base at lower right",
+            "region": "stone ground-floor base",
             "attribute": "material zoning",
             "severity": "minor"
           }
         ],
-        "rationale": "Palette and material zones (brown roof, cream timber walls, stone base) still read true, but from this back angle the roof and upper mass are fragmented and irregular rather than the clean compact silhouette the mesh shows, so the build is recognizably related but defective in form."
+        "rationale": "Palette and material zoning (brown roof, cream timbered walls, stone base) read as the same cottage, but the roof is ragged with chaotic overhanging planks and spiky eaves unlike the clean massing in the mesh and concept, a major form defect from this angle."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 11021,
-          "output_tokens": 905,
-          "cost_usd": 0.17733
+          "input_tokens": 10360,
+          "output_tokens": 807,
+          "cost_usd": 0.169605
         }
       }
     }
@@ -419,52 +419,52 @@
     "gaps": [
       {
         "angle": "+x+z",
-        "region": "roof and upper storey",
+        "region": "roof across the whole top",
         "attribute": "form"
       },
       {
         "angle": "+x+z",
-        "region": "overall silhouette vs. clean gabled mesh",
+        "region": "upper storey gable ends",
         "attribute": "massing"
       },
       {
         "angle": "+x+z",
-        "region": "stone base relative to cream wall band",
+        "region": "timber-frame walls vs stone plinth",
         "attribute": "material zoning"
       },
       {
         "angle": "+x-z",
-        "region": "roof ridge and upper massing",
-        "attribute": "form"
+        "region": "front gable wall, upper storey",
+        "attribute": "material zoning"
       },
       {
         "angle": "+x-z",
-        "region": "chimney on the roof",
-        "attribute": "massing"
-      },
-      {
-        "angle": "-x-z",
-        "region": "roof ridge and eaves",
+        "region": "timber roof eaves",
         "attribute": "form"
       },
       {
         "angle": "-x-z",
-        "region": "chimney on roof",
-        "attribute": "massing"
+        "region": "lower walls / stone foundation course",
+        "attribute": "material zoning"
       },
       {
-        "angle": "-x+z",
-        "region": "roof and upper massing",
+        "angle": "-x-z",
+        "region": "roof ridge and chimney profile",
         "attribute": "form"
       },
       {
         "angle": "-x+z",
-        "region": "overall silhouette versus mesh",
-        "attribute": "massing"
+        "region": "roof",
+        "attribute": "form"
       },
       {
         "angle": "-x+z",
-        "region": "stone base at lower right",
+        "region": "overall building edges/eaves",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x+z",
+        "region": "stone ground-floor base",
         "attribute": "material zoning"
       }
     ],

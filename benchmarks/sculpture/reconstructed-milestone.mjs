@@ -93,17 +93,22 @@ function instrumentDiff(preGate, freshGate) {
   return { frozen: diffs.length === 0, comparedTo: "src/config.mjs (no committed gate record predates this run)", diffs, judgeModels };
 }
 
-/** Roof fit deltas out of the committed roof-program record (AC #3 "roof fit errors"). */
+/** Roof fit out of the committed roof-program record (AC #3 "roof fit errors").
+ *  A side where the T-104 attempt-ladder REJECTED the glb pitch (cage-arbitrated, voxel won)
+ *  carries the glb/voxel DIVERGENCE — that number is WHY voxel won, not a fit error of the build. */
 function roofFitSummary(roofRec) {
   if (!roofRec) return null;
   const sides = (roofRec.fit?.gables ?? []).flatMap((g) => g.sides ?? []);
-  const deltas = sides.filter((s) => s.pitch != null && s.glbPitch != null).map((s) => Math.abs(s.pitch - s.glbPitch));
+  const adopted = sides.reduce((acc, s) => ((acc[s.pitchSource ?? "unknown"] = (acc[s.pitchSource ?? "unknown"] ?? 0) + 1), acc), {});
+  const rejectedGlb = sides
+    .filter((s) => s.pitchSource === "voxel" && s.pitch != null && s.glbPitch != null)
+    .map((s) => Number(Math.abs(s.pitch - s.glbPitch).toFixed(4)));
   return {
     status: roofRec.status ?? null,
     gables: roofRec.fit?.gables?.length ?? 0,
     sides: sides.length,
-    maxPitchDelta: deltas.length ? Number(Math.max(...deltas).toFixed(4)) : null,
-    pitchSources: sides.reduce((acc, s) => ((acc[s.pitchSource ?? "unknown"] = (acc[s.pitchSource ?? "unknown"] ?? 0) + 1), acc), {}),
+    adoptedPitchBy: adopted,
+    glbRejectedDivergence: rejectedGlb.length ? { max: Math.max(...rejectedGlb), count: rejectedGlb.length, note: "glb pitch rejected by the attempt-ladder on these sides — the divergence is the rejection cause, not a build fit error" } : null,
   };
 }
 
@@ -162,7 +167,7 @@ function renderMd(r) {
     `| ragged columns | ${f(r.metrics.census.before?.ragged)}/${f(r.metrics.census.before?.columns)} (${pct(r.metrics.census.before?.raggedRate)}) | ${f(r.metrics.census.after?.ragged)}/${f(r.metrics.census.after?.columns)} (${pct(r.metrics.census.after?.raggedRate)}) | same |`,
   );
   if (r.metrics.roofFit) {
-    lines.push(`| roof fit | — | ${r.metrics.roofFit.status}: ${r.metrics.roofFit.gables} gables, max |Δpitch| ${f(r.metrics.roofFit.maxPitchDelta)} | roof record |`);
+    lines.push(`| roof fit | — | ${r.metrics.roofFit.status}: ${r.metrics.roofFit.gables} gables, pitch by ${JSON.stringify(r.metrics.roofFit.adoptedPitchBy)}${r.metrics.roofFit.glbRejectedDivergence ? `, glb rejected on ${r.metrics.roofFit.glbRejectedDivergence.count} (divergence ≤ ${r.metrics.roofFit.glbRejectedDivergence.max})` : ""} | roof record |`);
   }
   if (r.metrics.cage) {
     lines.push(`| cage steps | — | ${r.metrics.cage.accepted} accepted / ${r.metrics.cage.rejected} rolled back | ${f(r.metrics.cage.source)} |`);
@@ -198,6 +203,10 @@ async function main() {
   if (!def) throw new Error(`--subject must be one of: ${Object.keys(SUBJECTS).join(", ")}`);
   const offline = argv.includes("--offline");
   const repro = argv.includes("--repro");
+  // --distill-only: rebuild THIS record from the committed milestone/gate outputs without
+  // re-running the chain or the judge (verdicts are judged ONCE — the no-re-roll rule). The
+  // instrument diff is carried from the live-run record (it captured the real pre/post compare).
+  const distillOnly = argv.includes("--distill-only");
   await mkdir(OUT_DIR, { recursive: true });
   await mkdir(join(OUT_DIR, key), { recursive: true });
   await mkdir(FRAMES_DIR, { recursive: true });
@@ -231,8 +240,16 @@ async function main() {
   console.error(`[${key}] component layer: ` + ["component", "roof", "shaped"].map((n) => `${n} ${layer.pins[n] ? "pinned" : "ABSENT"}`).join(", "));
 
   // --- 3. the chain --------------------------------------------------------------------------------
-  console.error(`[${key}] running ${runner}${repro ? " --repro (fresh-process re-proof; judge not re-run)" : " (full reconstructed chain)"}…`);
-  const code = await spawnMilestone(runner, key, repro ? ["--repro"] : []);
+  const prevRec = existsSync(recPath) ? JSON.parse(await readFile(recPath, "utf8")) : null;
+  let code;
+  if (distillOnly) {
+    if (!prevRec) throw new Error(`--distill-only needs a committed record — run npm run reconstructed:${key} first`);
+    code = prevRec.chain?.exitCode ?? 0;
+    console.error(`[${key}] --distill-only: re-distilling committed outputs (chain + judge NOT re-run)`);
+  } else {
+    console.error(`[${key}] running ${runner}${repro ? " --repro (fresh-process re-proof; judge not re-run)" : " (full reconstructed chain)"}…`);
+    code = await spawnMilestone(runner, key, repro ? ["--repro"] : []);
+  }
   if (repro) {
     console.error(`[repro] ${key}: milestone re-proof exit ${code}`);
     process.exitCode = code;
@@ -245,7 +262,9 @@ async function main() {
   // --- 4. instrument confirmation ------------------------------------------------------------------
   const freshGate = has(gateRecRel) ? await readJson(gateRecRel) : null;
   const gateIsFresh = freshGate && !failed; // a refused chain never reached the gate; an old record may linger
-  const instrument = instrumentDiff(preGate, gateIsFresh ? freshGate : null);
+  const instrument = distillOnly && prevRec?.instrument
+    ? { ...prevRec.instrument, note: "carried from the live-run record (--distill-only; the live run captured the real pre/post contract compare)" }
+    : instrumentDiff(preGate, gateIsFresh ? freshGate : null);
 
   // --- 5. metrics ----------------------------------------------------------------------------------
   if (!has(baselineRel)) throw new Error(`${baselineRel} absent — the pinned E-26 baseline is a committed input (see structure.md step 3)`);

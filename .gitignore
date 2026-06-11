@@ -163,3 +163,8 @@ benchmarks/sculpture/shaped/**/*.png
 # The durable record is roof/<subj>.{json,md} + roof/<subj>/artifact.json; the committed
 # evidence frames live in pr/assets/frames/roof-*.png.
 benchmarks/sculpture/roof/**/*.png
+
+# E-27 reconstructed-milestone (T-107-01) working renders — the records are reconstructed/<subj>.{json,md}
+# + reconstructed/<subj>/e26-baseline.json; the committed evidence frames live in
+# pr/assets/frames/reconstructed-*.png and the gate sheets.
+benchmarks/sculpture/reconstructed/**/*.png

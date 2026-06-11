@@ -13,7 +13,7 @@ Frame `spruce_planks`: 320 painted, 11 adopted, 123 respected, 14 isolates skipp
 
 ## Opening dressing (T-099)
 6 concept-declared apertures; 36 placements (2/6 fully dressed, 7 conflicts, 0 already dressed). Unfulfilled slots: none. Derivations: [{"slot":"infill","block":"spruce_fence","from":"spruce_trapdoor","reason":"no rail entry in kit; species-matched fence derived from the shutter block (the kit declared the window grille unidentified)"}].
-Settle (the T-100 seam): grammar re-run to its own fixpoint in 1 iteration(s) (frame 3 + fill 1) — the styled build is a no-op for the op the kit-presence checker re-runs.
+Settle (the T-100 seam): grammar re-run to its own fixpoint in 1 iteration(s) (frame 3 + fill undefined) — the styled build is a no-op for the op the kit-presence checker re-runs.
 
 ## Kit-aware multi-angle gate (T-100 ∘ T-093) — **FAIL**
 
@@ -23,10 +23,10 @@ Resemblance: FAIL (gaps 10/2) · Kit presence: PASS (zero gaps)
 
 | view | azimuth | coverage | verdict | gaps |
 |---|---|---|---|---|
-| +x+z | 45° | pass | drifted | major form@roof and upper storey; minor massing@overall silhouette vs. clean gabled mesh; minor material zoning@stone base relative to cream wall band |
-| +x-z | 135° | pass | same object | minor form@roof ridge and upper massing; minor massing@chimney on the roof |
-| -x-z | 225° | pass | same object | minor form@roof ridge and eaves; minor massing@chimney on roof |
-| -x+z | 315° | pass | drifted | major form@roof and upper massing; minor massing@overall silhouette versus mesh; minor material zoning@stone base at lower right |
+| +x+z | 45° | pass | drifted | major form@roof across the whole top; major massing@upper storey gable ends; minor material zoning@timber-frame walls vs stone plinth |
+| +x-z | 135° | pass | same object | minor material zoning@front gable wall, upper storey; minor form@timber roof eaves |
+| -x-z | 225° | pass | same object | minor material zoning@lower walls / stone foundation course; minor form@roof ridge and chimney profile |
+| -x+z | 315° | pass | drifted | major form@roof; minor form@overall building edges/eaves; minor material zoning@stone ground-floor base |
 
 Gate record: `benchmarks/sculpture/multi-angle/cottage-styled.json` (the sheet is the verdict artifact).
 
