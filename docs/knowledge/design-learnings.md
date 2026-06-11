@@ -2593,3 +2593,79 @@ fresh sheets at the canonical `multi-angle-<subj>-<label>.png` paths beside the 
 preserved as `…-t111pin.png` / `…-t115pin.png` / `…-prevpin.png`; prior records under
 `docs/active/work/T-121-01/before/`. The story beat: E-29 proved the generator; E-30 proved the
 *pipeline around it* — and relocated the frontier again, from the lenses to roof form itself.
+
+## Pattern-book builder (E-31) — recognition over reconstruction, judged once (S-123…S-127, T-127-01) · 2026-06-11
+
+**The thesis, banked.** Eleven epics of metrology tried to *reconstruct* the concept — fit the
+mesh, diff the roof, close the ridge — and the frontier kept relocating into roof form. E-31
+inverted the stance: the model **recognizes** the concept's forms (T-125: concept + conditioned
+sketch → a `building-program/v1` in the pack's vocabulary), canonical pattern-book realizations
+**substitute** for fitted geometry (T-124 registry constructs — clean by construction), and the
+model **revises its own work** in a conformance-caged workshop (T-126) that is structurally
+unable to reach the frozen judge. T-127 ran it end-to-end and convened the judge once per
+subject — the epic's only judge calls.
+
+**The chain.** `npm run patternbook:<subj>`: committed sketch → committed recognized program
+(re-asserted byte-identically, never re-sampled) → seed under the declared budget (6 rounds, the
+fixture calibration) → workshop loop → final build + consumption plan + chain record.
+`patternbook:repro`/`:offline` replay the whole chain byte-identically (no model, no GL).
+Judging stays outside: `gate:patternbook:<subj>`; `src/workshop/isolation.test.mjs` scans the
+chain runner itself, and the pin-guard's workshop-domain refusal covers every write. All
+milestone records were first writes — no pins rotated, nothing retired; one superseded
+(never-committed) cottage gate run is named below.
+
+**The head-to-head, whichever way it fell** (committed: `pattern-book/head-to-head.{json,md}`,
+sheets side by side in `pr/assets/pattern-book-milestone.md`):
+
+| subject | pattern-book | metrology best (generated, T-122) | read |
+| --- | --- | --- | --- |
+| barn | FAIL **8/2, all 8 MINOR — same-object 4/4**, kit presence PASS | FAIL 12/2, majors on every view — 0/4 | the roof-form seam (E-27→E-30's frontier) is GONE: a roof authored as a program reads as a solid shingled mass at every azimuth |
+| cottage | FAIL by coverage — **judge never called** (band1 invisible at the contract lens) | FAIL 10/2 — 2/4 | the build is legal, conformant, and proportioned wrong: eaves + jetty bury the upper storey at 30° elevation |
+
+The barn verdict is the epic's claim landing: **every view same-object** on a never-tuned
+subject, zero major gaps, and the residual minors are window dressing (literally: long-wall
+openings vs the concept's doored stone wall) — against a metrology best that never got a single
+same-object view. And it was the **seed draft**: the workshop accepted nothing on the barn.
+
+**What the model's own revision loop did and didn't catch.** Cottage (5 accepted, declared done):
+round 1 it named the concept's signature — half-timbering — and pursued it for four rounds
+(roof trim adjust + dark-oak stud paints), all cage-clean. What it never did: touch the
+*geometry* params that caused the defect it ALSO named four times ("eaves swallow the upper
+storey") — it painted walls it could not make visible. Barn (0 accepted, budget-exhausted):
+round 1 the cage **saved the build** from a wrong read (the model wanted the roof spruce; its
+own round-2 critique reversed: dark oak matched); round 2 the cage **blocked a right read**
+(wooden wagon doors — the T-126 static-band-declarations limit, confirmed live exactly as
+predicted); round 3 it reached for `re-recognize` (unwired, S-125 seam — second recorded
+demand); rounds 4–6 it fixated on repainting one door bay. The loop's value on real subjects is
+real but bounded by its action vocabulary: it sees proportion and aperture truths it cannot act
+on. That is a **measured limit of the model's revision reach**, not of its visual judgement —
+its critiques were right about every defect the judge (or the lens) later named.
+
+**The instrument lesson (chain-side, gate untouched).** The first cottage gate run
+coverage-rejected all four views: 632 spruce-stair roof courses censused as foreign because the
+pattern-book chain had not persisted its consumption plan — the roof course family enters the
+frozen gate's vocabulary ONLY via `componentPlan.roof.family` (the T-106/T-113 contract; zero
+judge calls were spent, the run was superseded in place, untracked — the T-125 precedent). Fix:
+`componentPlanFrom(program)` — the program is the authority; roof cells + family persist beside
+the final artifact, `--plan-only` backfills, `--repro` re-derives and byte-compares. The re-run
+then told the deeper truth: the 87 "upper-band" cells the first census saw were gable triangles
+(program-owned roof); the true upper wall has **zero visible cells** at the contract elevation.
+The lens did not lie — the proportions are the defect, and the workshop's own ledger had
+already said so.
+
+**Over/under-reach.** Over: expecting a budget-6 paint-and-params loop to act on massing
+critique — the actions exist (`adjust-params` can reshape the shell and roof) but the model
+never aimed them at proportions; nothing in the prompt teaches that reach. Under: the ticket's
+bar — beat cottage 10/2 (2/4) and barn 12/2 (0/4) — **met on the barn, decisively; missed on
+the cottage**, with the cause named per view (band1 occlusion → coverage refusal; the
+arithmetic "0 gaps" row carries an explicit under-statement warning in the table). Named next
+rungs, all with recorded demand: declarations that co-move with accepted actions (the barn lost
+a correct wagon-door read to it), the `re-recognize` applier (reached for twice now), and a
+proportion-aware revision action or prompt.
+
+**E-12 handoff.** `pr/assets/pattern-book-milestone.md` (both sheets side by side per subject),
+`pr/assets/frames/multi-angle-{cottage,barn}-patternbook.png`,
+`pr/assets/frames/workshop-{cottage,barn}-{before,after}.png`, the one-table
+`pattern-book/head-to-head.md`. The story beat: E-29/E-30 proved a pipeline that measures;
+E-31 proved a builder that *recognizes* — and on the subject where both ran clean, recognition
+won at a glance.
