@@ -133,13 +133,13 @@
             "sides": [
               {
                 "planeId": "roof-1",
-                "pitch": 0.933,
+                "pitch": 1.096,
                 "pitchSource": "glb",
                 "eaveY": 13.5
               },
               {
                 "planeId": "roof-8",
-                "pitch": 0.379,
+                "pitch": 0.651,
                 "pitchSource": "voxel",
                 "eaveY": 18
               }
@@ -700,7 +700,7 @@
   "generation": {
     "counts": {
       "mass": 5102,
-      "roof": 1481,
+      "roof": 1812,
       "carved": 1114
     },
     "findings": [
@@ -748,30 +748,30 @@
   },
   "zeroBlob": {
     "passed": true,
-    "cells": 6513,
+    "cells": 6844,
     "bySource": {
       "mass": 5032,
-      "roof": 1481
+      "roof": 1812
     },
     "regeneratedFromRecord": true,
     "blobOverlap": {
-      "cells": 1639,
-      "fraction": 0.2517,
+      "cells": 1787,
+      "fraction": 0.2611,
       "note": "EVIDENCE of fit quality — overlap with blob POSITIONS is the cage working; the gate is provenance"
     }
   },
   "cage": {
     "iouVsGlb": {
-      "+x+z": 0.8337832626301581,
-      "+x-z": 0.8524652822015544,
-      "-x-z": 0.8631821675634127,
-      "-x+z": 0.8847488115122704
+      "+x+z": 0.8788619979402678,
+      "+x-z": 0.9129484377009129,
+      "-x-z": 0.9024917365878464,
+      "-x+z": 0.9023397761953205
     },
     "iouVsBlob": {
-      "+x+z": 0.8434447300771208,
-      "+x-z": 0.864123500893085,
-      "-x-z": 0.8635963256574808,
-      "-x+z": 0.8854497018901434
+      "+x+z": 0.8846499678869622,
+      "+x-z": 0.904203821656051,
+      "-x-z": 0.9055423495558613,
+      "-x+z": 0.9160450120116324
     },
     "blobIouVsGlb": {
       "+x+z": 0.9473616473616474,
@@ -780,14 +780,14 @@
       "-x+z": 0.9309385277004807
     },
     "closure": {
-      "reached": 4710,
+      "reached": 4748,
       "byDirection": {
-        "+x": 39,
-        "-x": 16,
-        "+y": 2114,
+        "+x": 30,
+        "-x": 34,
+        "+y": 1936,
         "-y": 0,
-        "+z": 588,
-        "-z": 666
+        "+z": 617,
+        "-z": 671
       }
     },
     "conditioning": {
@@ -799,13 +799,13 @@
     }
   },
   "census": {
-    "spikes": 179,
-    "ragged": 113,
+    "spikes": 175,
+    "ragged": 118,
     "columns": 944,
-    "raggedRate": 0.1197,
+    "raggedRate": 0.125,
     "declared": {
       "sheetCells": 0,
-      "capCells": 0,
+      "capCells": 48,
       "note": "open-underside sheet courses and ridge caps are declared constructions (T-108/109)"
     }
   },
@@ -869,18 +869,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "walls and roof all around",
-            "attribute": "form",
-            "severity": "major"
-          },
-          {
-            "region": "long side wall surface",
+            "region": "walls all around",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "roof and wall blocks scattered throughout",
-            "attribute": "material zoning",
+            "region": "roof surface",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "stone base and brown roof",
+            "attribute": "palette",
             "severity": "minor"
           }
         ]
@@ -892,18 +892,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof, top of the building",
+            "region": "near roof slope and ridge",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "long side walls",
-            "attribute": "form",
-            "severity": "minor"
+            "region": "roof shingle coverage across the whole roof",
+            "attribute": "massing",
+            "severity": "major"
           },
           {
-            "region": "wall stonework",
-            "attribute": "material zoning",
+            "region": "upper gable wall, partly open",
+            "attribute": "form",
             "severity": "minor"
           }
         ]
@@ -915,18 +915,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "long wall and roof plane",
-            "attribute": "massing",
-            "severity": "major"
-          },
-          {
-            "region": "roof surface",
+            "region": "roof slope facing viewer",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "stone wall coursing",
-            "attribute": "material zoning",
+            "region": "roof shingle surface",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "near eave / wall-top junction",
+            "attribute": "form",
             "severity": "minor"
           }
         ]
@@ -938,17 +938,17 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof across the full ridge",
-            "attribute": "massing",
-            "severity": "major"
-          },
-          {
-            "region": "long side and gable walls",
+            "region": "both roof slopes — open rafter framing instead of a solid shingled mass",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "upper wall and roof courses",
+            "region": "roof shingle coverage across the whole span",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "upper gable/wall infill above the stone base",
             "attribute": "material zoning",
             "severity": "minor"
           }
@@ -996,9 +996,9 @@
       ],
       "kitPresence": true,
       "census": {
-        "spikes": 179,
-        "ragged": 113,
-        "raggedRate": 0.1197
+        "spikes": 175,
+        "ragged": 118,
+        "raggedRate": 0.125
       },
       "fitRefusals": 31
     },
@@ -1013,18 +1013,16 @@
     }
   },
   "generalization": {
-    "subjectKeysInRunner": [
-      "barn"
-    ],
-    "clean": false
+    "subjectKeysInRunner": [],
+    "clean": true
   },
   "reproducible": {
     "doubleRun": "byte-identical (in-process)",
     "sha256": {
-      "base": "f51c9c71513c761a54c3da2513eb600756ef98486f5db5e137fada9715042a70",
-      "grammarFinal": "3874f2ef4b100167f46800828dafda10fa04b584857866cc3757197f34195f01",
-      "styled": "8db2e8d3f4dcfd6c502fb453f362aae3db104e1a3a403f951fb23ea72b324cbe",
-      "fit": "1015cfc0cf97f791815be74c055970589e94889e2b6f272b36d2daaabc0761ac"
+      "base": "5d30cdef190562aba515107c442b865141cb1ac6b9f7a9145710318d931a6ed1",
+      "grammarFinal": "a7b1d5758e305c9127e83446670296477fd038a8bd287b4491a9a4e487b29cf0",
+      "styled": "8f33e3af1f45b312c9889418167aef4d2b004f3f943dccab8cfa9e70cad38bb1",
+      "fit": "f53b79c38ab7b0690c9021a0cc3db8c23154ec066c39952d7024678475703194"
     }
   },
   "sheets": {

@@ -4,14 +4,14 @@
 
 **The sheet is the verdict artifact** (E-25 Rule 1); this table is support.
 
-Artifact: `benchmarks/sculpture/generated/barn/artifact.json` (sha256 `8db2e8d3f4dc…`) · zones: concept · contract: +x+z, +x-z, -x-z, -x+z @ 30°, 512², coverage ≥ 0.5, gap budget 2
+Artifact: `benchmarks/sculpture/generated/barn/artifact.json` (sha256 `8f33e3af1f45…`) · zones: concept · contract: +x+z, +x-z, -x-z, -x+z @ 30°, 512², coverage ≥ 0.5, gap budget 2
 
 | view | azimuth | rendered | T-088 coverage | judge verdict |
 |---|---|---|---|---|
-| +x+z | 45° | yes | pass | drifted<br>major form @ walls and roof all around<br>major massing @ long side wall surface<br>minor material zoning @ roof and wall blocks scattered throughout |
-| +x-z | 135° | yes | pass | drifted<br>major form @ roof, top of the building<br>minor form @ long side walls<br>minor material zoning @ wall stonework |
-| -x-z | 225° | yes | pass | drifted<br>major massing @ long wall and roof plane<br>major form @ roof surface<br>minor material zoning @ stone wall coursing |
-| -x+z | 315° | yes | pass | drifted<br>major massing @ roof across the full ridge<br>major form @ long side and gable walls<br>minor material zoning @ upper wall and roof courses |
+| +x+z | 45° | yes | pass | drifted<br>major massing @ walls all around<br>major form @ roof surface<br>minor palette @ stone base and brown roof |
+| +x-z | 135° | yes | pass | drifted<br>major form @ near roof slope and ridge<br>major massing @ roof shingle coverage across the whole roof<br>minor form @ upper gable wall, partly open |
+| -x-z | 225° | yes | pass | drifted<br>major form @ roof slope facing viewer<br>major massing @ roof shingle surface<br>minor form @ near eave / wall-top junction |
+| -x+z | 315° | yes | pass | drifted<br>major form @ both roof slopes — open rafter framing instead of a solid shingled mass<br>major massing @ roof shingle coverage across the whole span<br>minor material zoning @ upper gable/wall infill above the stone base |
 
 ## Resemblance aggregate (T-093)
 **FAIL** — gaps 12/2; failures: +x+z:drifted, +x-z:drifted, -x-z:drifted, -x+z:drifted

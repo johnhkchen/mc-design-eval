@@ -50,13 +50,13 @@
             "sides": [
               {
                 "planeId": "roof-0",
-                "pitch": 0.765,
+                "pitch": 0.941,
                 "pitchSource": "glb",
                 "eaveY": 15
               },
               {
                 "planeId": "roof-4",
-                "pitch": 1.884,
+                "pitch": 1.286,
                 "pitchSource": "voxel",
                 "eaveY": 18.5
               }
@@ -72,13 +72,13 @@
             "sides": [
               {
                 "planeId": "roof-2",
-                "pitch": 0.453,
+                "pitch": 1.021,
                 "pitchSource": "glb",
                 "eaveY": 14.5
               },
               {
                 "planeId": "roof-3",
-                "pitch": 0.885,
+                "pitch": 1.216,
                 "pitchSource": "glb",
                 "eaveY": 15
               }
@@ -257,6 +257,11 @@
         "stage": "roof-end-fit"
       },
       {
+        "code": "apex-vs-profile-divergence",
+        "where": "gable-roof-0-roof-4",
+        "stage": "ridge-closure"
+      },
+      {
         "code": "flat-out-of-tolerance",
         "where": "og-2@+x",
         "stage": "opening-head-fit"
@@ -271,37 +276,37 @@
   "generation": {
     "counts": {
       "mass": 2601,
-      "roof": 2561,
+      "roof": 2960,
       "carved": 28
     },
     "findings": []
   },
   "zeroBlob": {
     "passed": true,
-    "cells": 5069,
+    "cells": 5464,
     "bySource": {
-      "mass": 2508,
-      "roof": 2561
+      "mass": 2504,
+      "roof": 2960
     },
     "regeneratedFromRecord": true,
     "blobOverlap": {
-      "cells": 1956,
-      "fraction": 0.3859,
+      "cells": 2199,
+      "fraction": 0.4025,
       "note": "EVIDENCE of fit quality — overlap with blob POSITIONS is the cage working; the gate is provenance"
     }
   },
   "cage": {
     "iouVsGlb": {
-      "+x+z": 0.8640167364016736,
-      "+x-z": 0.8673147898100639,
-      "-x-z": 0.8457647292203928,
-      "-x+z": 0.8644491800240897
+      "+x+z": 0.8693274489110621,
+      "+x-z": 0.8589129058514968,
+      "-x-z": 0.8706207441034245,
+      "-x+z": 0.8703481392557023
     },
     "iouVsBlob": {
-      "+x+z": 0.8366890380313199,
-      "+x-z": 0.8436291777644127,
-      "-x-z": 0.8350726616600019,
-      "-x+z": 0.8616100511865984
+      "+x+z": 0.8373358348968105,
+      "+x-z": 0.8279329608938547,
+      "-x-z": 0.8530947775628627,
+      "-x+z": 0.8560103244837758
     },
     "blobIouVsGlb": {
       "+x+z": 0.9273232724384433,
@@ -329,13 +334,13 @@
     }
   },
   "census": {
-    "spikes": 53,
+    "spikes": 57,
     "ragged": 50,
     "columns": 617,
     "raggedRate": 0.081,
     "declared": {
-      "sheetCells": 80,
-      "capCells": 0,
+      "sheetCells": 91,
+      "capCells": 14,
       "note": "open-underside sheet courses and ridge caps are declared constructions (T-108/109)"
     }
   },
@@ -356,17 +361,9 @@
     "resemblance": {
       "decided": true,
       "passed": false,
-      "gapCount": 12,
+      "gapCount": 10,
       "gapBudget": 2,
       "failures": [
-        {
-          "angle": "+x+z",
-          "reason": "drifted"
-        },
-        {
-          "angle": "+x-z",
-          "reason": "drifted"
-        },
         {
           "angle": "-x-z",
           "reason": "drifted"
@@ -390,21 +387,16 @@
         "angle": "+x+z",
         "azimuthDeg": 45,
         "coverage": true,
-        "verdict": "drifted",
+        "verdict": "same object",
         "gaps": [
           {
-            "region": "main roof",
-            "attribute": "form",
-            "severity": "major"
-          },
-          {
-            "region": "upper timber-framed walls",
-            "attribute": "material zoning",
+            "region": "roofline chimney",
+            "attribute": "massing",
             "severity": "minor"
           },
           {
-            "region": "eaves and roof overhang",
-            "attribute": "massing",
+            "region": "upper timber-framed walls in shadow under the eaves",
+            "attribute": "material zoning",
             "severity": "minor"
           }
         ]
@@ -413,21 +405,16 @@
         "angle": "+x-z",
         "azimuthDeg": 135,
         "coverage": true,
-        "verdict": "drifted",
+        "verdict": "same object",
         "gaps": [
           {
-            "region": "main roof",
+            "region": "roof ridge / apex",
             "attribute": "form",
-            "severity": "major"
-          },
-          {
-            "region": "eaves/roof overhang along the long wall",
-            "attribute": "massing",
             "severity": "minor"
           },
           {
-            "region": "upper timber-framed walls",
-            "attribute": "material zoning",
+            "region": "chimney on the roof",
+            "attribute": "massing",
             "severity": "minor"
           }
         ]
@@ -439,17 +426,17 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "main roof",
+            "region": "main roof, near slope",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "roof eaves and ridge — open gaps exposing interior",
+            "region": "roof shingle coverage",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "upper timber-framed storey",
+            "region": "upper walls and base",
             "attribute": "material zoning",
             "severity": "minor"
           }
@@ -462,17 +449,17 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "main roof",
+            "region": "roof apex / ridge",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "roof ridge/eaves enclosure",
+            "region": "upper roof massing (offset, gapped slabs)",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "upper timber-framed walls",
+            "region": "upper timber-framed wall under eaves",
             "attribute": "material zoning",
             "severity": "minor"
           }
@@ -494,18 +481,18 @@
     "subject": "cottage",
     "generated": {
       "outcome": "FAIL",
-      "gapCount": 12,
+      "gapCount": 10,
       "gapBudget": 2,
       "perView": [
         {
           "angle": "+x+z",
-          "verdict": "drifted",
-          "gaps": 3
+          "verdict": "same object",
+          "gaps": 2
         },
         {
           "angle": "+x-z",
-          "verdict": "drifted",
-          "gaps": 3
+          "verdict": "same object",
+          "gaps": 2
         },
         {
           "angle": "-x-z",
@@ -520,11 +507,11 @@
       ],
       "kitPresence": true,
       "census": {
-        "spikes": 53,
+        "spikes": 57,
         "ragged": 50,
         "raggedRate": 0.081
       },
-      "fitRefusals": 13
+      "fitRefusals": 14
     },
     "repairPath": {
       "source": "reconstructed/cottage.json (T-111-01)",
@@ -576,10 +563,10 @@
   "reproducible": {
     "doubleRun": "byte-identical (in-process)",
     "sha256": {
-      "base": "67fbbc93cbd4308f6ba0a7e51c6410c4f0cf38d7c2ef50acf6cee9625231a172",
-      "grammarFinal": "7cce1d0f52101fd940710e1203d3e4794d3ce39ee648bb15a99a04c6233a667b",
-      "styled": "5edf5892b938fd1c7b46e94cc4347def425bc92506351db969763e264efa7955",
-      "fit": "3fa2304dceb4dfca6e44356957900887d3986ff4ee093562267002f0ce4069fa"
+      "base": "2d14c73eabbf752546afdce49b7cdaaf12f1763a9f62ad85e0aac39162a14dc0",
+      "grammarFinal": "7729d0e75581da75746804839a000d2434d8f40c2a160b9b042852c73e30da5b",
+      "styled": "d6bfbd290bcaf4a112bb1e898d6ae7813502349d65516861da5c0a7bcf2ffb93",
+      "fit": "a5c31a1f6a2874df9d8685e6278d21bbbd9249db0a52e401b07096cc46ec4589"
     }
   },
   "sheets": {

@@ -4,7 +4,7 @@
   "label": "generated",
   "artifact": {
     "path": "benchmarks/sculpture/generated/barn/artifact.json",
-    "sha256": "8db2e8d3f4dcfd6c502fb453f362aae3db104e1a3a403f951fb23ea72b324cbe"
+    "sha256": "8f33e3af1f45b312c9889418167aef4d2b004f3f943dccab8cfa9e70cad38bb1"
   },
   "contract": {
     "azimuths": [
@@ -126,12 +126,12 @@
               "polished_deepslate",
               "oak_planks"
             ],
-            "dominantFraction": 0.88
+            "dominantFraction": 0.906
           },
           "roof": {
             "dominant": "dark_oak_planks",
-            "fraction": 0.985,
-            "total": 272,
+            "fraction": 0.989,
+            "total": 375,
             "passed": true,
             "metric": "own",
             "own": [
@@ -141,7 +141,7 @@
               "spruce_stairs",
               "spruce_slab"
             ],
-            "dominantFraction": 0.934
+            "dominantFraction": 0.923
           }
         }
       },
@@ -150,40 +150,40 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "walls and roof all around",
-            "attribute": "form",
-            "severity": "major"
-          },
-          {
-            "region": "long side wall surface",
+            "region": "walls all around",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "roof and wall blocks scattered throughout",
-            "attribute": "material zoning",
+            "region": "roof surface",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "stone base and brown roof",
+            "attribute": "palette",
             "severity": "minor"
           }
         ],
-        "rationale": "The barn's brown gable roof and cobblestone walls read as the same subject, but the build is riddled with large holes through walls and roof, reading as a broken hollow shell rather than the solid massing the concept and mesh show."
+        "rationale": "The stone-wall and dark-brown-roof palette and zoning still read as the same longhouse, but the build is a broken hollow shell with large holes punched through the walls and an incompletely filled roof, breaking the solid massing the mesh and concept show."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10375,
-          "output_tokens": 653,
-          "cost_usd": 0.17946
+          "input_tokens": 11274,
+          "output_tokens": 563,
+          "cost_usd": 0.18178699999999998
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"walls and roof all around\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"long side wall surface\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"roof and wall blocks scattered throughout\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The barn's brown gable roof and cobblestone walls read as the same subject, but the build is riddle",
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"walls all around\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"roof surface\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"stone base and brown roof\",\"attribute\":\"palette\",\"severity\":\"minor\"}],\"rationale\":\"The stone-wall and dark-brown-roof palette and zoning still read as the same longhouse, but the build is a broken hollow shell with large hole",
           "usage": {
-            "input_tokens": 10375,
-            "output_tokens": 653,
-            "cost_usd": 0.17946
+            "input_tokens": 11274,
+            "output_tokens": 563,
+            "cost_usd": 0.18178699999999998
           },
           "source": "live"
         }
@@ -212,12 +212,12 @@
               "polished_deepslate",
               "oak_planks"
             ],
-            "dominantFraction": 0.955
+            "dominantFraction": 0.964
           },
           "roof": {
             "dominant": "dark_oak_planks",
             "fraction": 1,
-            "total": 268,
+            "total": 380,
             "passed": true,
             "metric": "own",
             "own": [
@@ -227,7 +227,7 @@
               "spruce_stairs",
               "spruce_slab"
             ],
-            "dominantFraction": 0.526
+            "dominantFraction": 0.429
           }
         }
       },
@@ -236,40 +236,40 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof, top of the building",
+            "region": "near roof slope and ridge",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "long side walls",
-            "attribute": "form",
-            "severity": "minor"
+            "region": "roof shingle coverage across the whole roof",
+            "attribute": "massing",
+            "severity": "major"
           },
           {
-            "region": "wall stonework",
-            "attribute": "material zoning",
+            "region": "upper gable wall, partly open",
+            "attribute": "form",
             "severity": "minor"
           }
         ],
-        "rationale": "The elongated gabled massing and stone-wall/dark-wood palette match the references, but the build's roof is an open frame of exposed rafters with no covering skin where the concept and mesh show a solid closed roof, a major form defect that breaks the read from this angle."
+        "rationale": "Stone base and dark timber roof palette and zoning read true, but the roof is a skeletal open rafter frame with large gaps instead of the solid shingled mass shown in the mesh and concept, breaking the form from this angle."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10375,
-          "output_tokens": 787,
-          "cost_usd": 0.18281
+          "input_tokens": 11274,
+          "output_tokens": 194,
+          "cost_usd": 0.172562
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof, top of the building\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"long side walls\",\"attribute\":\"form\",\"severity\":\"minor\"},{\"region\":\"wall stonework\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The elongated gabled massing and stone-wall/dark-wood palette match the references, but the build's roof is an open frame of exposed raf",
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"near roof slope and ridge\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"roof shingle coverage across the whole roof\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"upper gable wall, partly open\",\"attribute\":\"form\",\"severity\":\"minor\"}],\"rationale\":\"Stone base and dark timber roof palette and zoning read true, but the roof is a skeletal open rafter ",
           "usage": {
-            "input_tokens": 10375,
-            "output_tokens": 787,
-            "cost_usd": 0.18281
+            "input_tokens": 11274,
+            "output_tokens": 194,
+            "cost_usd": 0.172562
           },
           "source": "live"
         }
@@ -298,12 +298,12 @@
               "polished_deepslate",
               "oak_planks"
             ],
-            "dominantFraction": 0.985
+            "dominantFraction": 0.992
           },
           "roof": {
             "dominant": "dark_oak_planks",
             "fraction": 1,
-            "total": 260,
+            "total": 368,
             "passed": true,
             "metric": "own",
             "own": [
@@ -313,7 +313,7 @@
               "spruce_stairs",
               "spruce_slab"
             ],
-            "dominantFraction": 0.438
+            "dominantFraction": 0.416
           }
         }
       },
@@ -322,40 +322,40 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "long wall and roof plane",
-            "attribute": "massing",
-            "severity": "major"
-          },
-          {
-            "region": "roof surface",
+            "region": "roof slope facing viewer",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "stone wall coursing",
-            "attribute": "material zoning",
+            "region": "roof shingle surface",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "near eave / wall-top junction",
+            "attribute": "form",
             "severity": "minor"
           }
         ],
-        "rationale": "The brown gable roof and cobblestone walls read as the same barn, but large holes punched through the long wall and roof break the solid massing shown in the concept and mesh, making it look like a broken hollow shell rather than a filled structure."
+        "rationale": "Stone-base and timber-roof palette and zoning read true, but the near roof slope is a skeletal open rafter frame with large gaps instead of the solid filled shingled mass shown in the mesh and concept, breaking the form from this angle."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10824,
-          "output_tokens": 396,
-          "cost_usd": 0.17528
+          "input_tokens": 11274,
+          "output_tokens": 197,
+          "cost_usd": 0.17263699999999998
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"long wall and roof plane\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"roof surface\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"stone wall coursing\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The brown gable roof and cobblestone walls read as the same barn, but large holes punched through the long wall and roof break the s",
+          "rawReply": "```json\n{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof slope facing viewer\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"roof shingle surface\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"near eave / wall-top junction\",\"attribute\":\"form\",\"severity\":\"minor\"}],\"rationale\":\"Stone-base and timber-roof palette and zoning read true, but the near roof slope is a skeletal open rafter frame with",
           "usage": {
-            "input_tokens": 10824,
-            "output_tokens": 396,
-            "cost_usd": 0.17528
+            "input_tokens": 11274,
+            "output_tokens": 197,
+            "cost_usd": 0.17263699999999998
           },
           "source": "live"
         }
@@ -384,12 +384,12 @@
               "polished_deepslate",
               "oak_planks"
             ],
-            "dominantFraction": 0.897
+            "dominantFraction": 0.917
           },
           "roof": {
             "dominant": "dark_oak_planks",
-            "fraction": 0.953,
-            "total": 276,
+            "fraction": 0.963,
+            "total": 383,
             "passed": true,
             "metric": "own",
             "own": [
@@ -399,7 +399,7 @@
               "spruce_stairs",
               "spruce_slab"
             ],
-            "dominantFraction": 0.833
+            "dominantFraction": 0.903
           }
         }
       },
@@ -408,40 +408,40 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof across the full ridge",
-            "attribute": "massing",
-            "severity": "major"
-          },
-          {
-            "region": "long side and gable walls",
+            "region": "both roof slopes — open rafter framing instead of a solid shingled mass",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "upper wall and roof courses",
+            "region": "roof shingle coverage across the whole span",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "upper gable/wall infill above the stone base",
             "attribute": "material zoning",
             "severity": "minor"
           }
         ],
-        "rationale": "The cobblestone base courses and brown gable roofing read as the same barn, but the build is a broken hollow shell with large holes through both roof and walls where the concept and mesh show a solid continuous mass."
+        "rationale": "The stone base and timber palette read true, but from this angle the roof is a skeletal open frame rather than the solid filled shingled mass shown in the concept and mesh, breaking same-object form."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10824,
-          "output_tokens": 637,
-          "cost_usd": 0.181305
+          "input_tokens": 11274,
+          "output_tokens": 203,
+          "cost_usd": 0.172787
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof across the full ridge\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"long side and gable walls\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"upper wall and roof courses\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The cobblestone base courses and brown gable roofing read as the same barn, but the build is a broken hollow ",
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"both roof slopes — open rafter framing instead of a solid shingled mass\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"roof shingle coverage across the whole span\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"upper gable/wall infill above the stone base\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The stone base and timber pal",
           "usage": {
-            "input_tokens": 10824,
-            "output_tokens": 637,
-            "cost_usd": 0.181305
+            "input_tokens": 11274,
+            "output_tokens": 203,
+            "cost_usd": 0.172787
           },
           "source": "live"
         }
@@ -457,62 +457,62 @@
     "gaps": [
       {
         "angle": "+x+z",
-        "region": "walls and roof all around",
-        "attribute": "form"
-      },
-      {
-        "angle": "+x+z",
-        "region": "long side wall surface",
+        "region": "walls all around",
         "attribute": "massing"
       },
       {
         "angle": "+x+z",
-        "region": "roof and wall blocks scattered throughout",
-        "attribute": "material zoning"
-      },
-      {
-        "angle": "+x-z",
-        "region": "roof, top of the building",
-        "attribute": "form"
-      },
-      {
-        "angle": "+x-z",
-        "region": "long side walls",
-        "attribute": "form"
-      },
-      {
-        "angle": "+x-z",
-        "region": "wall stonework",
-        "attribute": "material zoning"
-      },
-      {
-        "angle": "-x-z",
-        "region": "long wall and roof plane",
-        "attribute": "massing"
-      },
-      {
-        "angle": "-x-z",
         "region": "roof surface",
         "attribute": "form"
       },
       {
-        "angle": "-x-z",
-        "region": "stone wall coursing",
-        "attribute": "material zoning"
+        "angle": "+x+z",
+        "region": "stone base and brown roof",
+        "attribute": "palette"
       },
       {
-        "angle": "-x+z",
-        "region": "roof across the full ridge",
+        "angle": "+x-z",
+        "region": "near roof slope and ridge",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x-z",
+        "region": "roof shingle coverage across the whole roof",
         "attribute": "massing"
       },
       {
-        "angle": "-x+z",
-        "region": "long side and gable walls",
+        "angle": "+x-z",
+        "region": "upper gable wall, partly open",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x-z",
+        "region": "roof slope facing viewer",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x-z",
+        "region": "roof shingle surface",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x-z",
+        "region": "near eave / wall-top junction",
         "attribute": "form"
       },
       {
         "angle": "-x+z",
-        "region": "upper wall and roof courses",
+        "region": "both roof slopes — open rafter framing instead of a solid shingled mass",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x+z",
+        "region": "roof shingle coverage across the whole span",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x+z",
+        "region": "upper gable/wall infill above the stone base",
         "attribute": "material zoning"
       }
     ],
@@ -537,7 +537,7 @@
     "views": [
       {
         "angle": "+x+z",
-        "outcome": "drifted: form"
+        "outcome": "drifted: massing"
       },
       {
         "angle": "+x-z",
@@ -545,11 +545,11 @@
       },
       {
         "angle": "-x-z",
-        "outcome": "drifted: massing"
+        "outcome": "drifted: form"
       },
       {
         "angle": "-x+z",
-        "outcome": "drifted: massing"
+        "outcome": "drifted: form"
       }
     ]
   },
@@ -561,7 +561,7 @@
         "feature": "panel:band0",
         "block": "cobblestone",
         "shipped": "cobblestone",
-        "sites": 4866,
+        "sites": 4861,
         "missing": 0,
         "tolerated": {
           "residue": 19
@@ -644,14 +644,14 @@
         "placements": 25,
         "byZone": {
           "band0": {
-            "surface": 4866,
+            "surface": 4861,
             "filled": 19,
-            "kept": 4847
+            "kept": 4842
           },
           "roof": {
-            "surface": 1126,
+            "surface": 1251,
             "filled": 6,
-            "kept": 1120
+            "kept": 1245
           }
         }
       }
@@ -670,9 +670,9 @@
           "kind": "window",
           "bbox": {
             "u0": 31,
-            "v0": 7,
+            "v0": 8,
             "u1": 32,
-            "v1": 9
+            "v1": 10
           },
           "applied": {
             "infill": 0,
@@ -711,9 +711,9 @@
           "kind": "window",
           "bbox": {
             "u0": 40,
-            "v0": 7,
+            "v0": 8,
             "u1": 42,
-            "v1": 9
+            "v1": 10
           },
           "applied": {
             "infill": 0,
@@ -752,9 +752,9 @@
           "kind": "window",
           "bbox": {
             "u0": 32,
-            "v0": 13,
+            "v0": 14,
             "u1": 32,
-            "v1": 13
+            "v1": 14
           },
           "applied": {
             "infill": 0,
@@ -793,9 +793,9 @@
           "kind": "window",
           "bbox": {
             "u0": 40,
-            "v0": 13,
+            "v0": 14,
             "u1": 40,
-            "v1": 13
+            "v1": 14
           },
           "applied": {
             "infill": 0,
@@ -834,9 +834,9 @@
           "kind": "window",
           "bbox": {
             "u0": 40,
-            "v0": 15,
+            "v0": 16,
             "u1": 40,
-            "v1": 15
+            "v1": 16
           },
           "applied": {
             "infill": 0,
@@ -875,9 +875,9 @@
           "kind": "window",
           "bbox": {
             "u0": 5,
-            "v0": 7,
+            "v0": 8,
             "u1": 7,
-            "v1": 9
+            "v1": 10
           },
           "applied": {
             "infill": 0,
@@ -916,9 +916,9 @@
           "kind": "window",
           "bbox": {
             "u0": 15,
-            "v0": 7,
+            "v0": 8,
             "u1": 16,
-            "v1": 9
+            "v1": 10
           },
           "applied": {
             "infill": 0,
@@ -957,9 +957,9 @@
           "kind": "window",
           "bbox": {
             "u0": 7,
-            "v0": 13,
+            "v0": 14,
             "u1": 7,
-            "v1": 13
+            "v1": 14
           },
           "applied": {
             "infill": 0,
@@ -998,9 +998,9 @@
           "kind": "window",
           "bbox": {
             "u0": 15,
-            "v0": 13,
+            "v0": 14,
             "u1": 15,
-            "v1": 13
+            "v1": 14
           },
           "applied": {
             "infill": 0,
@@ -1039,9 +1039,9 @@
           "kind": "window",
           "bbox": {
             "u0": 7,
-            "v0": 15,
+            "v0": 16,
             "u1": 7,
-            "v1": 15
+            "v1": 16
           },
           "applied": {
             "infill": 0,
