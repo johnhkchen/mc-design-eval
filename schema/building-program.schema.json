@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mc-design-eval.local/schema/building-program.schema.json",
+  "title": "building-program/v1 — the model-AUTHORED recognition program: idiom instances with parameters, in pack vocabulary (T-125-01, E-31). Material slots name pack palette ROLES (never raw blocks); the compiler resolves roles and geometry deterministically.",
+  "type": "object",
+  "required": ["schema", "subject", "pack", "reading", "masses"],
+  "additionalProperties": false,
+  "$defs": {
+    "role": { "type": "string", "pattern": "^[a-z][a-z0-9.-]*$" },
+    "wall": { "enum": ["+x", "-x", "+z", "-z"] },
+    "posInt": { "type": "integer", "minimum": 1 }
+  },
+  "properties": {
+    "schema": { "const": "building-program/v1" },
+    "subject": { "type": "string", "minLength": 1 },
+    "pack": {
+      "description": "Style-pack slug the program speaks the vocabulary of",
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$"
+    },
+    "reading": {
+      "description": "The model's recognition evidence — recorded, never realized",
+      "type": "object",
+      "required": ["summary"],
+      "additionalProperties": false,
+      "properties": {
+        "summary": { "type": "string", "minLength": 1 },
+        "symmetryClaim": {
+          "description": "A claimed mirror axis (recorded; v1 never declares it to the conformance gate)",
+          "type": ["object", "null"],
+          "required": ["axis"],
+          "additionalProperties": false,
+          "properties": { "axis": { "enum": ["x", "z"] } }
+        }
+      }
+    },
+    "masses": {
+      "description": "Rectangular masses in plan coordinates — the model's decomposition of the building",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["id", "rect", "storeys", "storeyHeight", "walls", "roof", "openings"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+          "rect": {
+            "description": "Plan rectangle: origin cell + size in cells (w along x, d along z)",
+            "type": "object",
+            "required": ["x0", "z0", "w", "d"],
+            "additionalProperties": false,
+            "properties": {
+              "x0": { "type": "integer", "minimum": -64, "maximum": 64 },
+              "z0": { "type": "integer", "minimum": -64, "maximum": 64 },
+              "w": { "type": "integer", "minimum": 3, "maximum": 64 },
+              "d": { "type": "integer", "minimum": 3, "maximum": 64 }
+            }
+          },
+          "storeys": { "type": "integer", "minimum": 1, "maximum": 4 },
+          "storeyHeight": {
+            "description": "Blocks per storey — pack-validated against proportions.storeyHeight",
+            "type": "integer",
+            "minimum": 2,
+            "maximum": 6
+          },
+          "walls": {
+            "type": "object",
+            "required": ["ground", "upper"],
+            "additionalProperties": false,
+            "properties": {
+              "treatment": {
+                "description": "A pack PASS idiom (e.g. surface framing) — RECORDED on this schema; realization is the workshop's (S-126)",
+                "type": ["string", "null"],
+                "pattern": "^[a-z][a-z0-9.-]*$"
+              },
+              "ground": {
+                "type": "object",
+                "required": ["role"],
+                "additionalProperties": false,
+                "properties": { "role": { "$ref": "#/$defs/role" } }
+              },
+              "upper": {
+                "type": "object",
+                "required": ["role"],
+                "additionalProperties": false,
+                "properties": { "role": { "$ref": "#/$defs/role" } }
+              },
+              "dressing": {
+                "description": "Quoins/jambs/heads role — feeds opening heads",
+                "type": ["object", "null"],
+                "required": ["role"],
+                "additionalProperties": false,
+                "properties": { "role": { "$ref": "#/$defs/role" } }
+              }
+            }
+          },
+          "plinth": {
+            "type": ["object", "null"],
+            "required": ["courses", "role"],
+            "additionalProperties": false,
+            "properties": {
+              "courses": { "type": "integer", "minimum": 1, "maximum": 3 },
+              "role": { "$ref": "#/$defs/role" }
+            }
+          },
+          "jetty": {
+            "description": "Jettied upper-storey lip on the named walls (needs storeys ≥ 2 — pack-validated)",
+            "type": ["object", "null"],
+            "required": ["walls", "beamRole"],
+            "additionalProperties": false,
+            "properties": {
+              "walls": { "type": "array", "minItems": 1, "maxItems": 4, "items": { "$ref": "#/$defs/wall" }, "uniqueItems": true },
+              "beamRole": { "$ref": "#/$defs/role" },
+              "joistRole": { "anyOf": [{ "$ref": "#/$defs/role" }, { "type": "null" }] }
+            }
+          },
+          "roof": {
+            "type": "object",
+            "required": ["idiom", "pitchClass", "fieldRole"],
+            "additionalProperties": false,
+            "properties": {
+              "idiom": { "type": "string", "pattern": "^[a-z][a-z0-9.-]*$" },
+              "ridgeAxis": {
+                "description": "Required for ridge-bearing idioms; ignored by point-apex idioms",
+                "enum": ["x", "z"]
+              },
+              "pitchClass": { "type": "number", "exclusiveMinimum": 0 },
+              "fieldRole": { "$ref": "#/$defs/role" },
+              "trimRole": { "anyOf": [{ "$ref": "#/$defs/role" }, { "type": "null" }] },
+              "gableRole": {
+                "description": "Gable-end infill material (defaults to the upper wall role)",
+                "anyOf": [{ "$ref": "#/$defs/role" }, { "type": "null" }]
+              },
+              "dormers": {
+                "type": ["object", "null"],
+                "required": ["count"],
+                "additionalProperties": false,
+                "properties": {
+                  "count": { "type": "integer", "minimum": 1, "maximum": 4 },
+                  "wall": { "$ref": "#/$defs/wall" }
+                }
+              }
+            }
+          },
+          "chimney": {
+            "type": ["object", "null"],
+            "required": ["role", "capRole", "atEnd"],
+            "additionalProperties": false,
+            "properties": {
+              "role": { "$ref": "#/$defs/role" },
+              "capRole": { "$ref": "#/$defs/role" },
+              "atEnd": { "enum": ["lo", "hi", "center"] }
+            }
+          },
+          "openings": {
+            "type": "array",
+            "maxItems": 12,
+            "items": {
+              "type": "object",
+              "required": ["wall", "kind", "count", "w", "h", "sill"],
+              "additionalProperties": false,
+              "properties": {
+                "wall": { "$ref": "#/$defs/wall" },
+                "kind": { "enum": ["door", "window", "wagon-door"] },
+                "count": { "type": "integer", "minimum": 1, "maximum": 6 },
+                "w": { "type": "integer", "minimum": 1, "maximum": 8 },
+                "h": { "type": "integer", "minimum": 1, "maximum": 8 },
+                "sill": {
+                  "description": "Y of the opening's bottom row, relative to the mass base (doors: 0)",
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 16
+                },
+                "head": { "enum": ["arch", "flat", null] },
+                "headRole": { "anyOf": [{ "$ref": "#/$defs/role" }, { "type": "null" }] }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
