@@ -1,0 +1,559 @@
+{
+  "schema": "roof-program/v1",
+  "subject": "gatehouse",
+  "status": "accepted",
+  "inputs": {
+    "shell": "regularize/gatehouse/artifact.json",
+    "shellSha256": "b6c899187d50efeef411279640837f6b42e960975c76378edb8747073975e20c",
+    "componentRecord": "components/gatehouse.json",
+    "componentSourcePin": "b6c899187d50efeef411279640837f6b42e960975c76378edb8747073975e20c",
+    "kit": "kit/gatehouse.json",
+    "glb": "glb/stone-gatehouse.glb",
+    "note": "the component record's source.sha256 is hard-pinned against the on-disk regularized shell"
+  },
+  "params": {
+    "pitchAgreeDeg": 15,
+    "programRmseTol": 0.75,
+    "minRun": 2,
+    "maxPitch": 4,
+    "iouTolerance": 0.02,
+    "grid": 128,
+    "spikeFaces": 4,
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "note": "fit + cage parameters (declared, shared across subjects — no tuning); azimuths config-frozen"
+  },
+  "fit": {
+    "gables": [
+      {
+        "id": "gable-roof-0-roof-4",
+        "ridge": {
+          "axis": "x",
+          "y": 28
+        },
+        "sides": [
+          {
+            "planeId": "roof-0",
+            "eaveDir": "+z",
+            "pitch": 0.613,
+            "pitchSource": "glb",
+            "voxelPitch": 0.808,
+            "glbPitch": 0.613,
+            "glbAngleDeg": 7.603,
+            "eaveY": 19,
+            "eaveEdge": 13,
+            "overhang": 4,
+            "run": 9.5
+          },
+          {
+            "planeId": "roof-4",
+            "eaveDir": "-z",
+            "pitch": 1.558,
+            "pitchSource": "voxel",
+            "voxelPitch": 1.558,
+            "glbPitch": null,
+            "glbAngleDeg": null,
+            "eaveY": 26.5,
+            "eaveEdge": 1,
+            "overhang": -10,
+            "run": 2.5
+          }
+        ],
+        "footprint": {
+          "bbox": {
+            "minX": -12,
+            "maxX": 13,
+            "minZ": 1,
+            "maxZ": 13
+          },
+          "area": 301
+        },
+        "hip": {
+          "lo": true,
+          "hi": true,
+          "ridgeLo": 1,
+          "ridgeHi": 5,
+          "demanded": true
+        },
+        "sane": true,
+        "reasons": []
+      },
+      {
+        "id": "gable-roof-1-roof-6",
+        "ridge": {
+          "axis": "x",
+          "y": 21.5
+        },
+        "sides": [
+          {
+            "planeId": "roof-1",
+            "eaveDir": "-z",
+            "pitch": 0.809,
+            "pitchSource": "glb",
+            "voxelPitch": 0.962,
+            "glbPitch": 0.809,
+            "glbAngleDeg": 5.863,
+            "eaveY": 19,
+            "eaveEdge": -13,
+            "overhang": 4,
+            "run": 3.273
+          },
+          {
+            "planeId": "roof-6",
+            "eaveDir": "-x",
+            "pitch": null,
+            "pitchSource": null,
+            "voxelPitch": -0.676,
+            "glbPitch": null,
+            "glbAngleDeg": null,
+            "eaveY": 19,
+            "eaveEdge": -13,
+            "overhang": 0,
+            "run": 2.091
+          }
+        ],
+        "footprint": {
+          "bbox": {
+            "minX": -13,
+            "maxX": 13,
+            "minZ": -13,
+            "maxZ": -5
+          },
+          "area": 235
+        },
+        "hip": {
+          "lo": false,
+          "hi": true,
+          "ridgeLo": -13,
+          "ridgeHi": -9,
+          "demanded": true
+        },
+        "sane": false,
+        "reasons": [
+          "eave dir -x not perpendicular to ridge axis x",
+          "no sane pitch (voxel -0.676, glb n/a)",
+          "eave dirs not opposing (-z vs -x)"
+        ]
+      }
+    ],
+    "findings": [
+      {
+        "code": "fit-source-voxel",
+        "where": "roof-4",
+        "detail": "glb fit missing on this plane — voxel gradient stands (the cage-held shell)"
+      },
+      {
+        "code": "gable-insane",
+        "where": "gable-roof-1-roof-6",
+        "detail": "eave dir -x not perpendicular to ridge axis x; no sane pitch (voxel -0.676, glb n/a); eave dirs not opposing (-z vs -x)"
+      },
+      {
+        "code": "roof-region-unfitted",
+        "where": "roof-2",
+        "detail": "flat, no ridge pair (area 151) — regularized mass stays"
+      },
+      {
+        "code": "roof-region-unfitted",
+        "where": "roof-3",
+        "detail": "pitched, no ridge pair (area 28) — regularized mass stays"
+      },
+      {
+        "code": "roof-region-unfitted",
+        "where": "roof-5",
+        "detail": "pitched, no ridge pair (area 14) — regularized mass stays"
+      },
+      {
+        "code": "roof-region-unfitted",
+        "where": "roof-7",
+        "detail": "pitched, no ridge pair (area 9) — regularized mass stays"
+      },
+      {
+        "code": "roof-region-unfitted",
+        "where": "roof-8",
+        "detail": "pitched, no ridge pair (area 9) — regularized mass stays"
+      }
+    ]
+  },
+  "family": {
+    "field": "deepslate_bricks",
+    "stairs": "deepslate_brick_stairs",
+    "slab": "deepslate_brick_slab",
+    "findings": []
+  },
+  "swap": {
+    "accepted": true,
+    "reasons": [],
+    "attempt": "voxel-pitch-gable-ends",
+    "attempts": [
+      {
+        "name": "as-fitted",
+        "accepted": false,
+        "reasons": [
+          "silhouette IoU regressed @ +x-z: 0.9039 < 0.9299 − 0.02",
+          "silhouette IoU regressed @ -x-z: 0.8987 < 0.9343 − 0.02",
+          "silhouette IoU regressed @ -x+z: 0.8804 < 0.9226 − 0.02"
+        ],
+        "iou": {
+          "baseline": {
+            "+x+z": 0.9135,
+            "+x-z": 0.9299,
+            "-x-z": 0.9343,
+            "-x+z": 0.9226
+          },
+          "final": {
+            "+x+z": 0.901,
+            "+x-z": 0.9039,
+            "-x-z": 0.8987,
+            "-x+z": 0.8804
+          }
+        },
+        "census": {
+          "before": {
+            "spikes": 18,
+            "cells": 1561
+          },
+          "after": {
+            "spikes": 18,
+            "cells": 1561
+          }
+        },
+        "generated": {
+          "counts": {
+            "full": 1036,
+            "stairs": 41,
+            "slabs": 136
+          },
+          "gables": [
+            "gable-roof-0-roof-4"
+          ]
+        },
+        "findings": [],
+        "pitches": [
+          {
+            "id": "gable-roof-0-roof-4",
+            "sides": [
+              {
+                "planeId": "roof-0",
+                "pitch": 0.613,
+                "source": "glb"
+              },
+              {
+                "planeId": "roof-4",
+                "pitch": 1.558,
+                "source": "voxel"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "voxel-pitch",
+        "accepted": false,
+        "reasons": [
+          "silhouette IoU regressed @ -x-z: 0.9119 < 0.9343 − 0.02",
+          "silhouette IoU regressed @ -x+z: 0.8847 < 0.9226 − 0.02"
+        ],
+        "iou": {
+          "baseline": {
+            "+x+z": 0.9135,
+            "+x-z": 0.9299,
+            "-x-z": 0.9343,
+            "-x+z": 0.9226
+          },
+          "final": {
+            "+x+z": 0.9026,
+            "+x-z": 0.9202,
+            "-x-z": 0.9119,
+            "-x+z": 0.8847
+          }
+        },
+        "census": {
+          "before": {
+            "spikes": 18,
+            "cells": 1561
+          },
+          "after": {
+            "spikes": 18,
+            "cells": 1561
+          }
+        },
+        "generated": {
+          "counts": {
+            "full": 1209,
+            "stairs": 78,
+            "slabs": 135
+          },
+          "gables": [
+            "gable-roof-0-roof-4"
+          ]
+        },
+        "findings": [],
+        "pitches": [
+          {
+            "id": "gable-roof-0-roof-4",
+            "sides": [
+              {
+                "planeId": "roof-0",
+                "pitch": 0.808,
+                "source": "voxel"
+              },
+              {
+                "planeId": "roof-4",
+                "pitch": 1.558,
+                "source": "voxel"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "as-fitted-gable-ends",
+        "accepted": false,
+        "reasons": [
+          "silhouette IoU regressed @ +x-z: 0.906 < 0.9299 − 0.02",
+          "silhouette IoU regressed @ -x-z: 0.9022 < 0.9343 − 0.02"
+        ],
+        "iou": {
+          "baseline": {
+            "+x+z": 0.9135,
+            "+x-z": 0.9299,
+            "-x-z": 0.9343,
+            "-x+z": 0.9226
+          },
+          "final": {
+            "+x+z": 0.9081,
+            "+x-z": 0.906,
+            "-x-z": 0.9022,
+            "-x+z": 0.9042
+          }
+        },
+        "census": {
+          "before": {
+            "spikes": 18,
+            "cells": 1561
+          },
+          "after": {
+            "spikes": 18,
+            "cells": 1561
+          }
+        },
+        "generated": {
+          "counts": {
+            "full": 1240,
+            "stairs": 0,
+            "slabs": 152
+          },
+          "gables": [
+            "gable-roof-0-roof-4"
+          ]
+        },
+        "findings": [],
+        "pitches": [
+          {
+            "id": "gable-roof-0-roof-4",
+            "sides": [
+              {
+                "planeId": "roof-0",
+                "pitch": 0.613,
+                "source": "glb"
+              },
+              {
+                "planeId": "roof-4",
+                "pitch": 1.558,
+                "source": "voxel"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "voxel-pitch-gable-ends",
+        "accepted": true,
+        "reasons": [],
+        "iou": {
+          "baseline": {
+            "+x+z": 0.9135,
+            "+x-z": 0.9299,
+            "-x-z": 0.9343,
+            "-x+z": 0.9226
+          },
+          "final": {
+            "+x+z": 0.9133,
+            "+x-z": 0.9248,
+            "-x-z": 0.922,
+            "-x+z": 0.9147
+          }
+        },
+        "census": {
+          "before": {
+            "spikes": 18,
+            "cells": 1561
+          },
+          "after": {
+            "spikes": 2,
+            "cells": 1503
+          }
+        },
+        "generated": {
+          "counts": {
+            "full": 1503,
+            "stairs": 50,
+            "slabs": 139
+          },
+          "gables": [
+            "gable-roof-0-roof-4"
+          ]
+        },
+        "findings": [],
+        "pitches": [
+          {
+            "id": "gable-roof-0-roof-4",
+            "sides": [
+              {
+                "planeId": "roof-0",
+                "pitch": 0.808,
+                "source": "voxel"
+              },
+              {
+                "planeId": "roof-4",
+                "pitch": 1.558,
+                "source": "voxel"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "iou": {
+      "baseline": {
+        "+x+z": 0.9135,
+        "+x-z": 0.9299,
+        "-x-z": 0.9343,
+        "-x+z": 0.9226
+      },
+      "final": {
+        "+x+z": 0.9133,
+        "+x-z": 0.9248,
+        "-x-z": 0.922,
+        "-x+z": 0.9147
+      }
+    },
+    "closure": {
+      "input": {
+        "closed": true,
+        "reached": 0
+      },
+      "candidate": {
+        "closed": true,
+        "reached": 0
+      }
+    },
+    "carve": {
+      "removed": 1561
+    },
+    "generated": {
+      "counts": {
+        "full": 1503,
+        "stairs": 50,
+        "slabs": 139
+      },
+      "gables": [
+        "gable-roof-0-roof-4"
+      ]
+    },
+    "reseat": {
+      "added": 0,
+      "cells": []
+    },
+    "fitError": [
+      {
+        "gableId": "gable-roof-0-roof-4",
+        "perSide": [
+          {
+            "planeId": "roof-0",
+            "rmse": 0.148,
+            "cells": 247
+          },
+          {
+            "planeId": "roof-4",
+            "rmse": 0.079,
+            "cells": 19
+          }
+        ],
+        "rmse": 0.144
+      }
+    ],
+    "findings": [],
+    "bandFloor": 19,
+    "note": "ONE judged step with the T-102 cage's checks: per-azimuth silhouette IoU vs the GLB on a MASS VIEW (generated stair/slab courses count as silhouette mass; all other fixtures stay dressing), closure no-regress, protected chimney byte-identical (re-seat additions listed, judged without them). Any regression → auto-rollback, the regularized roof stays, the failure is named (Rule 1)."
+  },
+  "census": {
+    "before": {
+      "spikes": 18,
+      "cells": 1561
+    },
+    "after": {
+      "spikes": 2,
+      "cells": 1503
+    },
+    "note": "protrusions (≥4/6 faces exposed) restricted to the generated footprint at/above the band floor, chimney columns excluded. The honest residual is the ridge line's two end cells per gable (4 exposed faces by geometry) — the declared budget asserted by this run."
+  },
+  "protect": {
+    "chimney": {
+      "columns": 22,
+      "stackRidgeY": 31
+    },
+    "openings": "closure allow-list only (the carve never touches walls below the band floor)"
+  },
+  "unmapped": 0,
+  "reproducible": {
+    "doubleRun": true,
+    "sha256": "5ffc907ebb7ad4c9de13c6059113c0a19110b268a32d036fb15e70d567a35ed0",
+    "determinism": "no LLM, no GL on the decision path — silhouettes via the pure rasterizer; two in-process executions byte-matched."
+  },
+  "placements": {
+    "input": 9350,
+    "final": 9481
+  },
+  "renders": [
+    {
+      "when": "before",
+      "angle": "+x-z",
+      "path": "benchmarks/sculpture/roof/gatehouse/view-oblique135-before.png"
+    },
+    {
+      "when": "after",
+      "angle": "+x-z",
+      "path": "benchmarks/sculpture/roof/gatehouse/view-oblique135-after.png"
+    },
+    {
+      "when": "before",
+      "angle": "-x-z",
+      "path": "benchmarks/sculpture/roof/gatehouse/view-oblique225-before.png"
+    },
+    {
+      "when": "after",
+      "angle": "-x-z",
+      "path": "benchmarks/sculpture/roof/gatehouse/view-oblique225-after.png"
+    },
+    {
+      "when": "before",
+      "angle": "-x+z",
+      "path": "benchmarks/sculpture/roof/gatehouse/view-oblique315-before.png"
+    },
+    {
+      "when": "after",
+      "angle": "-x+z",
+      "path": "benchmarks/sculpture/roof/gatehouse/view-oblique315-after.png"
+    }
+  ],
+  "frames": [
+    "pr/assets/frames/roof-gatehouse-before.png",
+    "pr/assets/frames/roof-gatehouse-after.png"
+  ],
+  "lensNote": "stairs-invisible (pinned, T-097): prismarine-viewer 1.33.0 meshes NO stair block at any state — stair placement is proven by the unmapped gate + the committed states, not by pixels; renders show the solid wedge with tread notches."
+}
