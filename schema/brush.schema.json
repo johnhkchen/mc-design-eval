@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mc-design-eval.local/schema/brush.schema.json",
+  "title": "Brush descriptor (brush/v1) — the serializable projection of a registry entry",
+  "description": "E-32 T-128-01: the brush contract's schema half. Functions (generate/fn/apply/merge/preview.realize) exist only on the live entry; the semantic layer in src/pack/brush-contract.mjs checks them. This schema validates everything else: identity, kind, composition (the chaining declaration), style-level paramsSchema, preview declaration, and the test pointer.",
+  "type": "object",
+  "required": ["schema", "name", "kind", "source", "tests", "composition", "paramsSchema", "preview"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "brush/v1" },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*([.-][a-z0-9]+)*$",
+      "description": "Registry key; dotted namespaces (roof.gable, surface.fill)."
+    },
+    "kind": {
+      "enum": ["construct", "pass"],
+      "description": "construct: uniformly callable spec → {cells}. pass: build-transform with its natural signature over an occupancy + context."
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Repo-relative path of the module where the technique lives."
+    },
+    "tests": {
+      "type": "string",
+      "pattern": "\\.test\\.mjs$",
+      "description": "Repo-relative path of the unit-test file that proves the technique (the contract's test requirement)."
+    },
+    "composition": {
+      "type": "object",
+      "description": "What the brush consumes and emits, so brushes chain — closed vocabularies.",
+      "required": ["consumes", "emits"],
+      "additionalProperties": false,
+      "properties": {
+        "consumes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "enum": ["spec", "occupancy", "zones", "features", "kit", "artifact"] }
+        },
+        "emits": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "enum": ["cells", "placements", "report", "removeSet", "artifact"] }
+        }
+      }
+    },
+    "paramsSchema": {
+      "type": "object",
+      "description": "JSON-schema fragment over STYLE-level parameters (partial — must accept {}; the semantic layer compiles it)."
+    },
+    "preview": {
+      "description": "The preview-card requirement: a construct points at committed card specs; a pass declares a synthetic subject (substrate + params) its in-entry realize() acts on.",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["card"],
+          "additionalProperties": false,
+          "properties": {
+            "card": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["substrate", "params"],
+          "additionalProperties": false,
+          "properties": {
+            "substrate": {
+              "type": "object",
+              "required": ["kind", "spec"],
+              "additionalProperties": false,
+              "properties": {
+                "kind": { "enum": ["shell", "solid"] },
+                "spec": { "type": "object" }
+              }
+            },
+            "params": { "type": "object" }
+          }
+        }
+      ]
+    }
+  }
+}
