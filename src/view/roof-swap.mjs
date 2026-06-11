@@ -131,8 +131,19 @@ function judgeVariant(occ, { gables, family, refSils, regions = [], protect = []
   const programRmseTol = opts.programRmseTol ?? ROOF_FIT_DEFAULTS.programRmseTol;
 
   const { gen, fitErrors, pool, findings } = gatedGenerate(gables, family, programRmseTol);
+  // fitted ends (T-108-01): trims applied by the generator, named per gable for the record
+  const endCoords = pool
+    .filter((g) => g.ends?.lo || g.ends?.hi)
+    .map((g) => ({
+      id: g.id,
+      ...Object.fromEntries(["lo", "hi"].map((e) => [e, g.ends[e]
+        ? { coord: g.ends[e].coord, faceCoord: g.ends[e].faceCoord, overhang: g.ends[e].overhang }
+        : null])),
+    }));
+  const fittedEnds = endCoords.reduce((n, e) => n + (e.lo ? 1 : 0) + (e.hi ? 1 : 0), 0);
   const base = {
-    fitError: fitErrors, findings, generated: { counts: gen.counts, gables: pool.map((g) => g.id) },
+    fitError: fitErrors, findings,
+    generated: { counts: gen.counts, gables: pool.map((g) => g.id), fittedEnds, endCoords },
     bandFloor: gen.bandFloor,
   };
   if (!gen.cells.length) {
@@ -140,7 +151,10 @@ function judgeVariant(occ, { gables, family, refSils, regions = [], protect = []
       iou: null, closure: null, carve: { removed: 0 }, reseat: { added: [] }, census: null };
   }
 
-  const footCols = new Set(gen.heights.keys());
+  // carve/census over the surviving pool's UNTRIMMED footprints: the blob past a fitted verge tip
+  // is removed and measured, never silently kept (the generated set may be smaller than this)
+  const footCols = new Set();
+  for (const g of pool) for (const c of g.footprint.cols) footCols.add(c);
   const activeCols = new Set([...footCols].filter((c) => !chimney.has(c)));
   const before = roofBandCensus(occ, { cols: activeCols, bandFloor: gen.bandFloor, spikeFaces });
 
@@ -218,37 +232,62 @@ function mapRound(o) {
   return Object.fromEntries(Object.entries(o).map(([k, v]) => [k, round4(v)]));
 }
 
-/** The shape signature of a gable set — used to skip a variant identical to an earlier one. */
+/** The shape signature of a gable set — used to skip a variant identical to an earlier one.
+ *  Fitted ends are part of the shape (a no-end fit normalizes to null = the legacy shape). */
 const pitchKey = (gables) =>
-  JSON.stringify(gables.map((g) => [g.hip?.demanded ?? false, g.sides.map((s) => [s.pitch, s.pitchSource])]));
+  JSON.stringify(gables.map((g) => [
+    g.hip?.demanded ?? false,
+    g.sides.map((s) => [s.pitch, s.pitchSource]),
+    g.ends && (g.ends.lo || g.ends.hi)
+      ? ["lo", "hi"].map((e) => (g.ends[e] ? [g.ends[e].coord, g.ends[e].faceCoord] : null))
+      : null,
+  ]));
 
 /**
  * THE SWAP: carve the sampled roof over the generated footprint, compose the generated roof,
  * re-seat the chimney, judge with the cage's three checks, roll back on any regression.
  *
- * ATTEMPT LADDER (declared, deterministic, every attempt recorded): the as-fitted gables first
- * (glb-preferred pitches); then all-voxel pitches; then each again with detected hip ends
- * suppressed (plain gable ends). Two failure modes motivate the rungs, both measured live: a glb
- * gradient can pass the angle-agreement gate yet be inconsistent with the recorded eave/ridge
- * geometry (the cottage roof-0 apex shortfall — eave 15 + 0.773·run 8.5 never reaches ridge 24),
- * and a segmentation-fragmented ridge can invent a hip demand that deletes real end mass (the
- * gatehouse — ridge cells x 1..5 under a footprint x −12..13). The cage vs the GLB silhouette is
- * the arbiter between the declared hypotheses — the E-15 lesson as a mechanism, not a tuned
- * constant. Duplicate shapes are skipped; all rungs rejected → the input stands (Rule 1 fallback).
+ * ATTEMPT LADDER (declared, deterministic, every attempt recorded): END-FITTED rungs first when
+ * the caller supplies a roof-end-fit (T-108-01 — the better-fitted hypothesis: footprint trimmed
+ * at the fitted verge tip, sheet courses past the gable face), each in glb-preferred and all-voxel
+ * pitch flavors, hips-as-detected then suppressed; the four E-27 rungs follow verbatim as the
+ * honest tail. Two failure modes motivate the pitch/hip rungs, both measured live: a glb gradient
+ * can pass the angle-agreement gate yet be inconsistent with the recorded eave/ridge geometry
+ * (the cottage roof-0 apex shortfall — eave 15 + 0.773·run 8.5 never reaches ridge 24), and a
+ * segmentation-fragmented ridge can invent a hip demand that deletes real end mass (the gatehouse
+ * — ridge cells x 1..5 under a footprint x −12..13). The cage vs the GLB silhouette is the
+ * arbiter between the declared hypotheses — the E-15 lesson as a mechanism, not a tuned constant.
+ * Duplicate shapes are skipped; all rungs rejected → the input stands (Rule 1 fallback).
  * @param {import("./occupancy.mjs").Occupancy} occ the regularized shell
  * @param {{gables:object[], family:object, refSils:Record<string,object>, regions?:object[],
  *          protect?:{name:string, contains:(pos:number[])=>boolean}[], chimney?:Set<string>,
+ *          endFit?:{gables:object[], suppressed?:object[]},
  *          opts?:{iouTolerance?:number, grid?:number, spikeFaces?:number, programRmseTol?:number}}} args
+ *          `endFit.gables` = ends fitted on the as-detected gables; `endFit.suppressed` = ends
+ *          fitted AFTER hip suppression (a hip end is not fittable, its suppressed variant is).
  */
 export function swapRoof(occ, args) {
-  const { gables, opts = {} } = args;
+  const { gables, endFit = null, opts = {} } = args;
   const voxel = pitchVariant(gables, "voxel", opts);
-  const candidates = [
+  const candidates = [];
+  if (endFit?.gables) {
+    candidates.push(
+      { name: "end-fitted", gables: endFit.gables },
+      { name: "end-fitted-voxel-pitch", gables: pitchVariant(endFit.gables, "voxel", opts) },
+    );
+  }
+  if (endFit?.suppressed) {
+    candidates.push(
+      { name: "end-fitted-gable-ends", gables: endFit.suppressed },
+      { name: "end-fitted-voxel-pitch-gable-ends", gables: pitchVariant(endFit.suppressed, "voxel", opts) },
+    );
+  }
+  candidates.push(
     { name: "as-fitted", gables },
     { name: "voxel-pitch", gables: voxel },
     { name: "as-fitted-gable-ends", gables: gableEndsVariant(gables) },
     { name: "voxel-pitch-gable-ends", gables: gableEndsVariant(voxel) },
-  ];
+  );
   const seen = new Set();
   const variants = [];
   for (const v of candidates) {
@@ -265,7 +304,9 @@ export function swapRoof(occ, args) {
     attempts.push({ name: v.name, accepted: res.accepted, reasons: res.reasons, iou: res.iou,
       census: res.census, generated: res.generated, findings: res.findings,
       pitches: v.gables.filter((g) => g.sane).map((g) => ({
-        id: g.id, sides: g.sides.map((s) => ({ planeId: s.planeId, pitch: s.pitch, source: s.pitchSource })) })) });
+        id: g.id, sides: g.sides.map((s) => ({ planeId: s.planeId, pitch: s.pitch, source: s.pitchSource })) })),
+      ends: v.gables.filter((g) => g.sane && (g.ends?.lo || g.ends?.hi)).map((g) => ({
+        id: g.id, lo: g.ends.lo?.coord ?? null, hi: g.ends.hi?.coord ?? null })) });
     if (!first) first = res;
     if (res.accepted) return { ...res, attempt: v.name, attempts };
   }

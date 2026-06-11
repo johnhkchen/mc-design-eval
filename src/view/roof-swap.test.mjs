@@ -235,3 +235,100 @@ test("determinism: two swaps report identical metrics", () => {
   assert.deepEqual(a.generated, b.generated);
   assert.deepEqual([...a.occ.cells.entries()].sort(), [...b.occ.cells.entries()].sort());
 });
+
+// --- fitted ends (T-108-01): end-fitted rungs, carve over the untrimmed footprint ----------------
+
+/** The gable with fitted ends: blob footprint z 0..7, gable face at z=5, verge tip at z=6. */
+function endedGable(opts = {}) {
+  const g = gable(opts);
+  return {
+    ...g,
+    ends: {
+      lo: null, // the lo end stays as-built (an unfitted end is a named finding upstream)
+      hi: { dir: "+z", coord: 6, faceCoord: 5, overhang: 1, source: "glb" },
+    },
+  };
+}
+
+/** The clean ideal for the END-FITTED scene: walls to z=5, roof courses overhanging to z=6. */
+function endedIdealOcc() {
+  const cells = [];
+  for (let x = 0; x <= 8; x++) for (let y = 0; y <= 9; y++) for (let z = 0; z <= 5; z++) {
+    cells.push({ pos: [x, y, z], block: "stone" });
+  }
+  const wedge = generateRoof([endedGable()], { ...SPRUCE, stairs: null, slab: null, findings: [] });
+  cells.push(...wedge.cells);
+  return occupancyFromCells(cells);
+}
+
+/** The input: walls to z=5, blob roof over the FULL footprint z 0..7 (overrun past the wall). */
+function endedSpikyInput() {
+  const cells = [];
+  for (let x = 0; x <= 8; x++) for (let y = 0; y <= 9; y++) for (let z = 0; z <= 5; z++) {
+    cells.push({ pos: [x, y, z], block: "stone" });
+  }
+  for (let x = 0; x <= 8; x++) for (let z = 0; z <= 7; z++) {
+    const ideal = Math.min(14, 10 + Math.min(8 - x, x));
+    const top = (x * 31 + z * 17) % 5 === 0 ? ideal + 2 : ideal;
+    for (let y = 10; y <= top; y++) cells.push({ pos: [x, y, z], block: "stone" });
+  }
+  return occupancyFromCells(cells);
+}
+
+test("end-fitted rung: blob past the fitted verge tip is carved, not regenerated", () => {
+  const input = endedSpikyInput();
+  const res = swapRoof(input, {
+    gables: [gable()], endFit: { gables: [endedGable()] },
+    family: SPRUCE, refSils: refsOf(endedIdealOcc()),
+  });
+  assert.equal(res.accepted, true, res.reasons.join("; "));
+  assert.equal(res.attempt, "end-fitted");
+  // columns past the fitted tip (z=7) are gone above the band floor
+  for (let x = 0; x <= 8; x++) for (let y = 10; y <= 16; y++) {
+    assert.equal(res.occ.cells.has(`${x},${y},7`), false, `residue at ${x},${y},7 must be carved`);
+  }
+  // the sheet strip (z=6) carries the surface course with an OPEN underside
+  assert.equal(res.occ.cells.has("4,14,6"), true, "ridge course present on the verge sheet");
+  assert.equal(res.occ.cells.has("4,13,6"), false, "no fill under the verge sheet");
+  // ends are named in the result for the durable record
+  assert.equal(res.generated.fittedEnds, 1);
+  assert.deepEqual(res.generated.endCoords, [{ id: "gable-main", lo: null, hi: { coord: 6, faceCoord: 5, overhang: 1 } }]);
+  assert.deepEqual(res.attempts[0].ends, [{ id: "gable-main", lo: null, hi: 6 }]);
+});
+
+test("no endFit → ladder, names, and result are byte-identical to the legacy swap", () => {
+  const a = swapRoof(spikyInput(), { gables: [gable()], family: SPRUCE, refSils: refsOf(idealOcc()) });
+  const b = swapRoof(spikyInput(), { gables: [gable()], endFit: null, family: SPRUCE, refSils: refsOf(idealOcc()) });
+  assert.deepEqual(a.attempts.map((x) => x.name), b.attempts.map((x) => x.name));
+  assert.deepEqual([...a.occ.cells.entries()].sort(), [...b.occ.cells.entries()].sort());
+});
+
+test("endFit with no fitted ends collapses onto the legacy rungs (dedup by shape)", () => {
+  const unfitted = { ...gable(), ends: { lo: null, hi: null } };
+  const res = swapRoof(spikyInput(), {
+    gables: [gable()], endFit: { gables: [unfitted] },
+    family: SPRUCE, refSils: refsOf(idealOcc()),
+  });
+  assert.equal(res.attempts.length, 1, "no-end fit has the legacy shape — one attempt only");
+  assert.equal(res.attempt, "end-fitted", "the first-named rung wins the dedup");
+});
+
+test("all end-fitted rungs rejected → the legacy tail still stands (Rule 1 fallback order)", () => {
+  // refSils match the UNTRIMMED ideal and the fitted end trims MOST of the roof away → the
+  // silhouettes regress past tolerance, the end-fitted rung is rejected (named), and the legacy
+  // as-fitted rung accepts. (A 1-cell trim sits inside the cage's declared tolerance by design.)
+  const badEnds = {
+    ...gable(),
+    ends: { lo: null, hi: { dir: "+z", coord: 2, faceCoord: 1, overhang: 1, source: "glb" } },
+  };
+  const input = spikyInput();
+  const res = swapRoof(input, {
+    gables: [gable()], endFit: { gables: [badEnds] },
+    family: SPRUCE, refSils: refsOf(idealOcc()),
+  });
+  assert.equal(res.accepted, true, res.reasons.join("; "));
+  assert.equal(res.attempt, "as-fitted");
+  assert.equal(res.attempts[0].name, "end-fitted");
+  assert.equal(res.attempts[0].accepted, false);
+  assert.ok(res.attempts[0].reasons.length > 0, "the rejection is named");
+});
