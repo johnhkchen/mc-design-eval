@@ -104,7 +104,8 @@
     "patternbook:repro": "node benchmarks/sculpture/pattern-book.mjs --all --repro",
     "patternbook:offline": "node benchmarks/sculpture/pattern-book.mjs --all --offline",
     "gate:patternbook:cottage": "node benchmarks/sculpture/multi-angle-gate.mjs --subject cottage --label patternbook --artifact workshop/cottage/final-artifact.json --reference recognition/cottage.artifact.json",
-    "gate:patternbook:barn": "node benchmarks/sculpture/multi-angle-gate.mjs --subject barn --label patternbook --artifact workshop/barn/final-artifact.json --reference recognition/barn.artifact.json"
+    "gate:patternbook:barn": "node benchmarks/sculpture/multi-angle-gate.mjs --subject barn --label patternbook --artifact workshop/barn/final-artifact.json --reference recognition/barn.artifact.json",
+    "patternbook:compare": "node benchmarks/sculpture/pattern-book-compare.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
