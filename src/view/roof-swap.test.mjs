@@ -290,6 +290,9 @@ test("end-fitted rung: blob past the fitted verge tip is carved, not regenerated
   // the sheet strip (z=6) carries the surface course with an OPEN underside
   assert.equal(res.occ.cells.has("4,14,6"), true, "ridge course present on the verge sheet");
   assert.equal(res.occ.cells.has("4,13,6"), false, "no fill under the verge sheet");
+  // sheet courses are excluded from the after-census BY KEY and counted, never hidden
+  assert.ok(res.census.after.excluded.cells > 0, "sheet cells reported in the census exclusion");
+  assert.ok(res.census.after.spikes <= 2, `non-sheet residual stays in the ridge-end class, got ${res.census.after.spikes}`);
   // ends are named in the result for the durable record
   assert.equal(res.generated.fittedEnds, 1);
   assert.deepEqual(res.generated.endCoords, [{ id: "gable-main", lo: null, hi: { coord: 6, faceCoord: 5, overhang: 1 } }]);

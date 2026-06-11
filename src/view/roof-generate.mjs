@@ -131,7 +131,9 @@ export function roofHeightfield(gables) {
  * course only — the underside stays open, which is what makes an overhang read as one.
  * @returns {{cells:{pos:number[], block:string, form?:string, state?:object}[],
  *            counts:{full:number, stairs:number, slabs:number},
- *            heights:Map<string,number>, owner:Map<string,object>, bandFloor:number}}
+ *            heights:Map<string,number>, owner:Map<string,object>, bandFloor:number,
+ *            sheetKeys:Set<string>}} sheetKeys = "x,y,z" of every sheet-column cell — declared
+ *            construction whose open underside exposes ≥4 faces BY DESIGN (census exclusion)
  */
 export function generateRoof(gables, family, opts = {}) {
   const sane = gables.filter((g) => g.sane);
@@ -139,7 +141,8 @@ export function generateRoof(gables, family, opts = {}) {
   const floor = opts.bandFloor ?? bandFloor;
   const cells = [];
   const counts = { full: 0, stairs: 0, slabs: 0 };
-  if (!family?.field) return { cells, counts, heights, owner, bandFloor: floor };
+  const sheetKeys = new Set();
+  if (!family?.field) return { cells, counts, heights, owner, bandFloor: floor, sheetKeys };
 
   for (const [key, h] of heights) {
     const [x, z] = key.split(",").map(Number);
@@ -164,11 +167,13 @@ export function generateRoof(gables, family, opts = {}) {
         cells.push({ pos: [x, y, z], block: family.field });
         counts.full++;
       }
+      if (own?.sheet) sheetKeys.add(`${x},${y},${z}`);
     }
     if (half && family.slab) {
       cells.push({ pos: [x, top + 1, z], block: family.slab, form: "fixture", state: { type: "bottom" } });
       counts.slabs++;
+      if (own?.sheet) sheetKeys.add(`${x},${top + 1},${z}`);
     }
   }
-  return { cells, counts, heights, owner, bandFloor: floor };
+  return { cells, counts, heights, owner, bandFloor: floor, sheetKeys };
 }

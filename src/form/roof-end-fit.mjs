@@ -35,6 +35,9 @@ export const END_FIT_SCHEMA = "roof-end-fit/v1";
 export const END_FIT_DEFAULTS = Object.freeze({
   faceAngleDeg: 25, // end-face selection cone, |normal·dir| ≥ cos(this) — glbFitForPlane's default
   minTriangles: 1,  // a face plane is well-posed from one triangle (unlike a gradient fit)
+  anchorSlack: 1.5, // selection window's inward slack past the wall anchor: one quantization cell
+                    // + the half-cell face offset (geometry, not tuning) — lets the GLB wall sit
+                    // one cell inside a spread-inflated as-built anchor
 });
 
 const noNegZero = (v) => v + 0 === 0 ? 0 : v; // −0 → 0 (records and deep-equality stay canonical)
@@ -141,10 +144,21 @@ function fitEnd(gable, occ, tris, dir, opts) {
   const sortedW = [...outermost.values()].sort((a, b) => a - b);
   const wallAnchor = sortedW[Math.floor((sortedW.length - 1) / 2)]; // lower median (deterministic)
 
-  // GLB selections, all within the cross window and this end's half along the ridge axis
+  // GLB selections: the cross window × the END WINDOW along the ridge axis — the face can only
+  // live between the wall anchor (inner bound, with the declared slack) and the as-built footprint
+  // end (outer bound): the sanity gate's own bounds applied as the selection. Without this, a
+  // decimated organic mesh chains every end-facing scrap on this half of the building into one
+  // mega-cluster whose mean lands nowhere (measured live on the cottage: face 3.9 vs wall 12.5).
+  const selLo = wallAnchor - opts.anchorSlack;
+  const selHi = fpEnd * sign + 0.5;
+  if (selLo > selHi) {
+    return { reason: "end-unfitted", detail: `anchor window empty (wall anchor ${noNegZero(wallAnchor * sign)} outside the footprint end ${fpEnd} — a buried interior end)` };
+  }
   const cosFace = Math.cos((opts.faceAngleDeg * Math.PI) / 180);
-  const inWindow = (t) => t.centroid[crossIdx] >= crossLo && t.centroid[crossIdx] <= crossHi &&
-    t.centroid[idx] * sign >= mid * sign;
+  const inWindow = (t) => {
+    const v = t.centroid[idx] * sign;
+    return t.centroid[crossIdx] >= crossLo && t.centroid[crossIdx] <= crossHi && v >= selLo && v <= selHi;
+  };
   const faceCone = [];
   const wallCone = [];
   let roofEnd = -Infinity;
@@ -175,13 +189,18 @@ function fitEnd(gable, occ, tris, dir, opts) {
   const faceRmse = clusterRmse(face, idx, sign, glbFace);
 
   const dFace = Math.round(glbFace - glbWall);
-  const dVerge = Math.round(roofEnd - glbFace);
   const faceSigned = wallAnchor + dFace;
-  const coordSigned = faceSigned + dVerge;
+  // verge tip: the face plus the GLB overhang differential, bounded by the GLB's own tip CELL
+  // under the alignment (round(surface − ½) — at the building's axis extremes the aabb maps the
+  // mesh extreme onto the blob's outer face exactly, so the differential's half-cell rounding can
+  // overshoot by one; the surface cell is the conservative, equally-GLB-derived bound)
+  const dVerge = Math.round(roofEnd - glbFace);
+  const coordSigned = Math.min(faceSigned + dVerge, Math.round(roofEnd - 0.5));
+  const overhang = coordSigned - faceSigned;
   const reasons = [];
   if (dFace < 0) reasons.push(`gable face ${round3(glbFace * sign)} inside the wall plane ${round3(glbWall * sign)}`);
-  if (dVerge < 0) reasons.push(`roof end ${round3(roofEnd * sign)} inside the gable face ${round3(glbFace * sign)}`);
-  if (coordSigned > fpEnd * sign) reasons.push(`fitted verge tip ${coordSigned * sign} outside the as-built footprint end ${fpEnd}`);
+  if (overhang < 0) reasons.push(`roof end ${round3(roofEnd * sign)} inside the gable face ${round3(glbFace * sign)}`);
+  if (coordSigned > fpEnd * sign) reasons.push(`fitted verge tip ${noNegZero(coordSigned * sign)} outside the as-built footprint end ${fpEnd}`);
   if (reasons.length) return { reason: "end-fit-insane", detail: reasons.join("; ") };
 
   return {
@@ -189,7 +208,7 @@ function fitEnd(gable, occ, tris, dir, opts) {
       dir,
       coord: noNegZero(coordSigned * sign),
       faceCoord: noNegZero(faceSigned * sign),
-      overhang: dVerge,
+      overhang,
       source: "glb",
       asBuiltEnd: fpEnd,
       anchor: { wall: noNegZero(wallAnchor * sign), columns: outermost.size },

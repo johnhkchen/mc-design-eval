@@ -82,22 +82,31 @@ export function chimneyColumns(record, occ) {
  * still counts fixture neighbors as occupied). Solid-only follows the cage's own semantics —
  * fixtures are dressing, not shell mass: a slab half-step or stair tread at an eave edge exposes
  * 4 faces BY CONSTRUCTION (it is the declared shaped vocabulary, placed with states), which is
- * exactly what this census must not confuse with sampled-mesh noise.
- * @returns {{spikes:number, cells:number}}
+ * exactly what this census must not confuse with sampled-mesh noise. `exclude` (T-108-01) extends
+ * the same declaration to GENERATED SHEET COURSES — full field blocks the verge/eave-overhang
+ * strips place with an open underside (≥4 exposed faces by design, like a real overhang): the
+ * caller passes the generator's sheet keys, and what was excluded is COUNTED, never hidden.
+ * @returns {{spikes:number, cells:number, excluded:{cells:number, spikes:number}}}
  */
-export function roofBandCensus(occ, { cols, bandFloor, spikeFaces = REGULARIZE_DEFAULTS.spikeFaces }) {
+export function roofBandCensus(occ, { cols, bandFloor, spikeFaces = REGULARIZE_DEFAULTS.spikeFaces, exclude = null }) {
   let spikes = 0;
   let cells = 0;
+  const excluded = { cells: 0, spikes: 0 };
   for (const key of occ.cells.keys()) {
     if (occ.forms?.has(key)) continue; // shaped vocabulary, not sampled mass
     const [x, y, z] = keyPos(key);
     if (y < bandFloor || !cols.has(`${x},${z}`)) continue;
-    cells++;
+    const skip = exclude?.has(key) ?? false;
+    if (skip) excluded.cells++;
+    else cells++;
     let e = 0;
     for (const [dx, dy, dz] of NEIGH6) if (!occ.cells.has(`${x + dx},${y + dy},${z + dz}`)) e++;
-    if (e >= spikeFaces) spikes++;
+    if (e >= spikeFaces) {
+      if (skip) excluded.spikes++;
+      else spikes++;
+    }
   }
-  return { spikes, cells };
+  return { spikes, cells, excluded };
 }
 
 /** Generate with the per-gable fit-error gate: out-of-tolerance gables drop (named) and the rest
@@ -212,7 +221,12 @@ function judgeVariant(occ, { gables, family, refSils, regions = [], protect = []
 
   const accepted = reasons.length === 0;
   const out = accepted ? candidate : occ;
-  const after = roofBandCensus(out, { cols: activeCols, bandFloor: gen.bandFloor, spikeFaces });
+  // the after-census declares the generated sheet courses (open-underside overhang construction)
+  // the way the before-census never could — excluded by KEY and counted, not hidden
+  const after = roofBandCensus(out, {
+    cols: activeCols, bandFloor: gen.bandFloor, spikeFaces,
+    exclude: accepted ? gen.sheetKeys : null,
+  });
 
   return {
     ...base,
