@@ -1,0 +1,40 @@
+{
+  "materials": [
+    {
+      "role": "structural wall infill",
+      "block": "minecraft:cobblestone",
+      "placementRule": "walls",
+      "rationale": "The recessed wall panels between the piers show irregular, mottled, multi-tone grey rubble with no coursing — rough cobblestone masonry, distinct from the smooth dressed piers framing them."
+    },
+    {
+      "role": "buttress piers, quoins and opening frames",
+      "block": "minecraft:stone_bricks",
+      "placementRule": "corners-edges",
+      "rationale": "The vertical piers, corner quoins and door jambs read as crisp, regular rectangular blocks with clean mortar lines — dressed stone-brick, deliberately smoother and lighter than the cobblestone fields they border (the near-tone grey pair to preserve)."
+    },
+    {
+      "role": "plinth / ground banding course",
+      "block": "minecraft:stone_bricks",
+      "placementRule": "base",
+      "rationale": "A continuous dressed-stone banding course with a chamfered cap wraps the foot of all walls — the same crisp coursed masonry as the piers, set as the earth-bound base."
+    },
+    {
+      "role": "roof shingle planes",
+      "block": "minecraft:dark_oak_planks",
+      "placementRule": "roof",
+      "rationale": "The two steep roof planes are deep red-brown horizontal plank courses — the dark dominant timber mass, clearly distinct in value from the warmer door wood."
+    },
+    {
+      "role": "eave fascia lip",
+      "block": "minecraft:dark_oak_stairs",
+      "placementRule": "trim",
+      "rationale": "The roof oversails the wall on a crisp stepped lip at the eave line — a dark_oak stair course giving the overhang its shadow edge, same timber family as the roof field."
+    },
+    {
+      "role": "wagon-door leaves",
+      "block": "minecraft:oak_planks",
+      "placementRule": "openings",
+      "rationale": "The two cart openings are filled with bright, warm golden-orange vertical boarding — markedly lighter and warmer than the dark roof, a separate oak timber kept distinct from the dark_oak planes above."
+    }
+  ]
+}

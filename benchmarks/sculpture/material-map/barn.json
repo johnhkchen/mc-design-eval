@@ -1,0 +1,88 @@
+{
+  "schema": "material-map/v1",
+  "subject": "barn",
+  "generatedFrom": {
+    "concept": "runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png",
+    "designDoc": "design-doc.md"
+  },
+  "map": [
+    {
+      "role": "structural wall infill",
+      "block": "minecraft:cobblestone",
+      "placementRule": "walls",
+      "rationale": "The recessed wall panels between the piers show irregular, mottled, multi-tone grey rubble with no coursing — rough cobblestone masonry, distinct from the smooth dressed piers framing them."
+    },
+    {
+      "role": "buttress piers, quoins and opening frames",
+      "block": "minecraft:stone_bricks",
+      "placementRule": "corners-edges",
+      "rationale": "The vertical piers, corner quoins and door jambs read as crisp, regular rectangular blocks with clean mortar lines — dressed stone-brick, deliberately smoother and lighter than the cobblestone fields they border (the near-tone grey pair to preserve)."
+    },
+    {
+      "role": "plinth / ground banding course",
+      "block": "minecraft:stone_bricks",
+      "placementRule": "base",
+      "rationale": "A continuous dressed-stone banding course with a chamfered cap wraps the foot of all walls — the same crisp coursed masonry as the piers, set as the earth-bound base."
+    },
+    {
+      "role": "roof shingle planes",
+      "block": "minecraft:dark_oak_planks",
+      "placementRule": "roof",
+      "rationale": "The two steep roof planes are deep red-brown horizontal plank courses — the dark dominant timber mass, clearly distinct in value from the warmer door wood."
+    },
+    {
+      "role": "wagon-door leaves",
+      "block": "minecraft:oak_planks",
+      "placementRule": "openings",
+      "rationale": "The two cart openings are filled with bright, warm golden-orange vertical boarding — markedly lighter and warmer than the dark roof, a separate oak timber kept distinct from the dark_oak planes above."
+    }
+  ],
+  "palette": [
+    "minecraft:cobblestone",
+    "minecraft:stone_bricks",
+    "minecraft:dark_oak_planks",
+    "minecraft:oak_planks"
+  ],
+  "dropped": [
+    {
+      "reason": "unknown-block",
+      "entry": {
+        "role": "eave fascia lip",
+        "block": "minecraft:dark_oak_stairs",
+        "placementRule": "trim",
+        "rationale": "The roof oversails the wall on a crisp stepped lip at the eave line — a dark_oak stair course giving the overhang its shadow edge, same timber family as the roof field."
+      }
+    }
+  ],
+  "stats": {
+    "in": 6,
+    "kept": 5,
+    "dropped": 1,
+    "distinctBlocks": 4,
+    "placementRules": [
+      "walls",
+      "corners-edges",
+      "base",
+      "roof",
+      "openings"
+    ]
+  },
+  "preservesNearTone": true,
+  "nearTonePairs": [
+    {
+      "a": "minecraft:cobblestone",
+      "b": "minecraft:stone_bricks",
+      "dL": 2.082
+    },
+    {
+      "a": "minecraft:cobblestone",
+      "b": "minecraft:oak_planks",
+      "dL": 3.26
+    },
+    {
+      "a": "minecraft:stone_bricks",
+      "b": "minecraft:oak_planks",
+      "dL": 5.342
+    }
+  ]
+}

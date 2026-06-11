@@ -46,6 +46,9 @@ const SUBJECTS = [
   // E-25 challenge subject (T-095-01): registered concept-first by T-094-01; map generated ONCE
   // via --subject church and committed — the pin for the only LLM-authored input on its path.
   { key: "church", runDir: join(RUNS, "016-vBuilding-a-village-church-with-a-square-bell-tower") },
+  // E-29 fourth subject (T-116-01): registered concept-first per the S-094 checklist; map generated
+  // ONCE via --subject barn and committed — same pin discipline as the church.
+  { key: "barn", runDir: join(RUNS, "017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors") },
 ];
 
 const OFFLINE = process.argv.includes("--offline");
