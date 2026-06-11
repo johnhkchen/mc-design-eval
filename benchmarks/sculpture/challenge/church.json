@@ -1,14 +1,753 @@
 {
   "schema": "challenge-milestone/v1",
   "subject": "church",
-  "status": "pipeline-failed",
-  "stage": "skin",
-  "error": "coverage gate FAILED on the final skin: band0 stone=0.327 < 0.5 [census: band0={\"total\":2082,\"byBlock\":{\"polished_basalt\":1225,\"stone\":681,\"black_stained_glass\":100,\"dark_oak_planks\":76}}; band0:offslab={\"total\":5109,\"byBlock\":{\"polished_basalt\":3525,\"stone\":1270,\"dark_oak_planks\":5,\"black_stained_glass\":309}}]",
+  "status": "gated",
   "inputs": {
-    "build": null,
+    "build": "challenge/church/base-artifact.json",
     "concept": "runs/016-vBuilding-a-village-church-with-a-square-bell-tower/concept.png",
     "glb": "glb/church.glb",
-    "map": "material-map/church.json"
+    "map": "material-map/church.json",
+    "kitRecord": "kit/church.json",
+    "e23Before": null
   },
-  "note": "a terminal gate or chain stage threw — recorded honestly (E-25 Rule 6); nothing was tuned in response"
+  "provision": {
+    "scale": 48,
+    "cells": 11423,
+    "manifest": 4
+  },
+  "shell": {
+    "strip": {
+      "components": 70,
+      "kept": 3,
+      "strippedCells": 505
+    },
+    "openings": [
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window"
+    ],
+    "closureBefore": {
+      "reached": 7675,
+      "interiorCells": 7704,
+      "byDirection": {
+        "+x": 279,
+        "-x": 786,
+        "+y": 624,
+        "-y": 0,
+        "+z": 2249,
+        "-z": 263
+      }
+    },
+    "voids": {
+      "minDepth": 3,
+      "filled": 1992,
+      "byDir": {
+        "+x": {
+          "basinCells": 24,
+          "filled": 0,
+          "skippedAllowed": 24,
+          "skippedNoZone": 0
+        },
+        "-x": {
+          "basinCells": 53,
+          "filled": 522,
+          "skippedAllowed": 3,
+          "skippedNoZone": 0
+        },
+        "+z": {
+          "basinCells": 83,
+          "filled": 880,
+          "skippedAllowed": 6,
+          "skippedNoZone": 0
+        },
+        "-z": {
+          "basinCells": 40,
+          "filled": 205,
+          "skippedAllowed": 0,
+          "skippedNoZone": 0
+        },
+        "+y": {
+          "basinCells": 88,
+          "filled": 385,
+          "skippedAllowed": 44,
+          "skippedNoZone": 0
+        }
+      }
+    },
+    "plug": {
+      "cells": 737,
+      "iterations": 1
+    },
+    "regularize": {
+      "accepted": 2,
+      "rejected": 0,
+      "census": {
+        "before": {
+          "cells": 13647,
+          "spikes": 602,
+          "byExposure": [
+            3035,
+            4041,
+            3742,
+            2227,
+            546,
+            56,
+            0
+          ],
+          "ragged": 334,
+          "columns": 1376,
+          "raggedRate": 0.2427
+        },
+        "after": {
+          "cells": 16864,
+          "spikes": 217,
+          "byExposure": [
+            7309,
+            5442,
+            2885,
+            1011,
+            198,
+            19,
+            0
+          ],
+          "ragged": 193,
+          "columns": 1376,
+          "raggedRate": 0.1403
+        }
+      },
+      "iou": {
+        "baseline": {
+          "+x+z": 0.8984,
+          "+x-z": 0.9453,
+          "-x-z": 0.9229,
+          "-x+z": 0.8609
+        },
+        "final": {
+          "+x+z": 0.8978,
+          "+x-z": 0.9464,
+          "-x-z": 0.9248,
+          "-x+z": 0.8663
+        }
+      },
+      "steps": [
+        {
+          "step": "open",
+          "accepted": true,
+          "reasons": [],
+          "cells": {
+            "removed": 6,
+            "restoredComponents": [
+              {
+                "size": 8995,
+                "minY": 0
+              }
+            ],
+            "plugged": 5
+          },
+          "spikes": 601,
+          "raggedRate": 0.2427
+        },
+        {
+          "step": "close",
+          "accepted": true,
+          "reasons": [],
+          "cells": {
+            "added": 3186,
+            "plugged": 32
+          },
+          "spikes": 217,
+          "raggedRate": 0.1403
+        }
+      ]
+    }
+  },
+  "reconstruction": {
+    "inputs": {
+      "componentRecord": "components/church.json",
+      "roofRecord": "roof/church.json",
+      "shapedRecord": "shaped/church.json",
+      "shellSha": "50fce80f78ecf37617e773d864fcdecbd4a98b73dfe16f17eaf09a8797f8e4d3"
+    },
+    "composed": {
+      "perDelta": [
+        {
+          "name": "roof-program",
+          "changed": 131,
+          "added": 58,
+          "removed": 0
+        },
+        {
+          "name": "shaped-heads",
+          "changed": 0,
+          "added": 39,
+          "removed": 2
+        }
+      ],
+      "cells": 230
+    },
+    "findings": [],
+    "seamSources": {
+      "roofCourses": "program",
+      "wallFields": "slab-faces",
+      "upperTop": "occupancy (wall-top pin rejected: weak-dominant:roof)",
+      "zoneMap": "concept"
+    },
+    "conformance": {
+      "columns": 617,
+      "conforming": 601,
+      "deviations": [
+        {
+          "col": "-10,-1",
+          "want": 18,
+          "got": 19
+        },
+        {
+          "col": "-10,-2",
+          "want": 18,
+          "got": 19
+        },
+        {
+          "col": "-10,-3",
+          "want": 18,
+          "got": 19
+        },
+        {
+          "col": "-10,-4",
+          "want": 18,
+          "got": 19
+        },
+        {
+          "col": "-10,-5",
+          "want": 18,
+          "got": 19
+        },
+        {
+          "col": "-10,0",
+          "want": 18,
+          "got": 19
+        },
+        {
+          "col": "-17,-1",
+          "want": 18,
+          "got": 19
+        },
+        {
+          "col": "-17,-2",
+          "want": 18,
+          "got": 19
+        },
+        {
+          "col": "-17,-3",
+          "want": 18,
+          "got": 19
+        },
+        {
+          "col": "-17,-4",
+          "want": 18,
+          "got": 19
+        },
+        {
+          "col": "-2,-7",
+          "want": 7,
+          "got": 8
+        },
+        {
+          "col": "-24,-5",
+          "want": 15,
+          "got": 19
+        },
+        {
+          "col": "-24,0",
+          "want": 15,
+          "got": 19
+        },
+        {
+          "col": "1,-7",
+          "want": 7,
+          "got": 8
+        },
+        {
+          "col": "2,-7",
+          "want": 7,
+          "got": 8
+        },
+        {
+          "col": "3,-7",
+          "want": 7,
+          "got": 8
+        }
+      ]
+    }
+  },
+  "skin": {
+    "substitution": {
+      "cobblestone": "stone",
+      "stone_bricks": "polished_basalt"
+    },
+    "kit": {
+      "source": "kit/church.json",
+      "overrides": {}
+    },
+    "zoneMap": {
+      "source": "concept",
+      "bands": [
+        {
+          "name": "band0",
+          "yRange": [
+            0,
+            16
+          ],
+          "dominantBlock": "cobblestone",
+          "dominantRole": "structural wall body",
+          "share": 1,
+          "secondaries": [
+            {
+              "block": "polished_andesite",
+              "role": "window reveals and surrounds",
+              "share": 0.132
+            },
+            {
+              "block": "stone_bricks",
+              "role": "wall-head cornice and plinth course",
+              "share": 0.225
+            },
+            {
+              "block": "black_stained_glass",
+              "role": "window glazing fill",
+              "share": 0.397
+            },
+            {
+              "block": "dark_oak_planks",
+              "role": "roof mass and tower spire",
+              "share": 0.112
+            }
+          ]
+        }
+      ],
+      "roof": {
+        "dominantBlock": "dark_oak_planks",
+        "dominantRole": "roof mass and tower spire",
+        "share": 1,
+        "secondaries": [
+          {
+            "block": "black_stained_glass",
+            "role": "window glazing fill",
+            "share": 0.327
+          },
+          {
+            "block": "stone_bricks",
+            "role": "wall-head cornice and plinth course",
+            "share": 0.153
+          },
+          {
+            "block": "polished_andesite",
+            "role": "window reveals and surrounds",
+            "share": 0
+          }
+        ]
+      },
+      "reason": null
+    },
+    "zoneMapVsCommitted": {
+      "record": "zone-map/church.json",
+      "bandsIdentical": false,
+      "roofIdentical": true,
+      "committedBands": [
+        {
+          "name": "band0",
+          "yRange": [
+            0,
+            15
+          ],
+          "dominantBlock": "cobblestone",
+          "dominantRole": "structural wall body",
+          "share": 1,
+          "secondaries": [
+            {
+              "block": "polished_andesite",
+              "role": "window reveals and surrounds",
+              "share": 0.132
+            },
+            {
+              "block": "stone_bricks",
+              "role": "wall-head cornice and plinth course",
+              "share": 0.225
+            },
+            {
+              "block": "black_stained_glass",
+              "role": "window glazing fill",
+              "share": 0.397
+            },
+            {
+              "block": "dark_oak_planks",
+              "role": "roof mass and tower spire",
+              "share": 0.112
+            }
+          ]
+        }
+      ]
+    },
+    "fill": {
+      "placements": 2057,
+      "kept": 7644,
+      "byZone": {
+        "band0": {
+          "surface": 7186,
+          "filled": 122,
+          "kept": 7064
+        },
+        "roof": {
+          "surface": 2515,
+          "filled": 1935,
+          "kept": 580
+        }
+      }
+    },
+    "splat": {
+      "front": {
+        "dir": "+z",
+        "source": "concept",
+        "painted": 174,
+        "skipped": 167,
+        "offPalette": 0,
+        "zoneRejected": 943,
+        "accepted": true,
+        "coverageGate": {
+          "passed": true,
+          "threshold": 0.5,
+          "failures": [],
+          "byZone": {
+            "band0": {
+              "dominant": "stone",
+              "fraction": 1,
+              "total": 2078,
+              "passed": true,
+              "metric": "own",
+              "own": [
+                "stone",
+                "polished_andesite",
+                "polished_basalt",
+                "black_stained_glass",
+                "dark_oak_planks"
+              ],
+              "dominantFraction": 0.333
+            },
+            "roof": {
+              "dominant": "dark_oak_planks",
+              "fraction": 0.99,
+              "total": 2515,
+              "passed": true,
+              "metric": "own",
+              "own": [
+                "dark_oak_planks",
+                "black_stained_glass",
+                "polished_basalt",
+                "polished_andesite",
+                "spruce_stairs",
+                "spruce_slab"
+              ],
+              "dominantFraction": 0.759
+            }
+          }
+        },
+        "outOfPalette": 0
+      },
+      "side": {
+        "dir": "+x",
+        "source": "glb",
+        "painted": 266,
+        "skipped": 206,
+        "offPalette": 0,
+        "zoneRejected": 462,
+        "accepted": true
+      },
+      "collisions": 0
+    },
+    "course": {
+      "columnsRaised": 77,
+      "voxelsAdded": 77
+    },
+    "salt": {
+      "stripped": 357,
+      "kept": 1921
+    },
+    "coverage": {
+      "band0": {
+        "total": 2078,
+        "byBlock": {
+          "polished_basalt": 1229,
+          "stone": 672,
+          "black_stained_glass": 97,
+          "dark_oak_planks": 80
+        },
+        "dominant": "stone",
+        "dominantFraction": 0.323,
+        "own": [
+          "stone",
+          "polished_andesite",
+          "polished_basalt",
+          "black_stained_glass",
+          "dark_oak_planks"
+        ],
+        "ownFraction": 1
+      },
+      "band0:offslab": {
+        "total": 5108,
+        "byBlock": {
+          "polished_basalt": 3524,
+          "stone": 1270,
+          "dark_oak_planks": 5,
+          "black_stained_glass": 309
+        },
+        "dominant": null,
+        "dominantFraction": null,
+        "own": null,
+        "ownFraction": null
+      },
+      "roof": {
+        "total": 2515,
+        "byBlock": {
+          "polished_basalt": 316,
+          "dark_oak_planks": 2009,
+          "stone": 26,
+          "black_stained_glass": 164
+        },
+        "dominant": "dark_oak_planks",
+        "dominantFraction": 0.799,
+        "own": [
+          "dark_oak_planks",
+          "black_stained_glass",
+          "polished_basalt",
+          "polished_andesite",
+          "spruce_stairs",
+          "spruce_slab"
+        ],
+        "ownFraction": 0.99
+      }
+    },
+    "gates": {
+      "threshold": 0.5,
+      "splatOnly": {
+        "passed": false,
+        "threshold": 0.5,
+        "failures": [
+          {
+            "zone": "band0",
+            "dominant": "stone",
+            "fraction": 0.418,
+            "total": 2078
+          },
+          {
+            "zone": "roof",
+            "dominant": "dark_oak_planks",
+            "fraction": 0.101,
+            "total": 2515
+          }
+        ],
+        "byZone": {
+          "band0": {
+            "dominant": "stone",
+            "fraction": 0.418,
+            "total": 2078,
+            "passed": false
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.101,
+            "total": 2515,
+            "passed": false
+          }
+        }
+      },
+      "final": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "stone",
+            "fraction": 1,
+            "total": 2078,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "stone",
+              "polished_andesite",
+              "polished_basalt",
+              "black_stained_glass",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.323
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.99,
+            "total": 2515,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "black_stained_glass",
+              "polished_basalt",
+              "polished_andesite",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.799
+          }
+        }
+      }
+    },
+    "bands": {
+      "roofMaterialsFraction": 0.99,
+      "wallForeignResidue": {
+        "band0": 0
+      }
+    },
+    "notes": [
+      "wall-top pin 33 rejected — concept extraction weak-dominant:roof; occupancy upperTop 17 reads (named, attempt-ladder semantics)",
+      "roof program conformance: 16/617 columns deviate from the program top (recorded, not auto-fixed)"
+    ]
+  },
+  "reproducible": {
+    "doubleRun": true,
+    "sha256": {
+      "base": "d65380a18d9504e8381f36c6cde36d10510adbb0d489d357b8fbe40d3c5d23dd",
+      "shell": "50fce80f78ecf37617e773d864fcdecbd4a98b73dfe16f17eaf09a8797f8e4d3",
+      "reconstructed": "4e7ce245baebb8ea75f06aed49840e69907dbea0e66e210d19b31d6aaca81ba4",
+      "final": "0d5db5ac29f2cc0a8e8f238e1b23468156615d04ce701a1d39a1d080a828b836"
+    },
+    "determinism": "provision→shell→skin is a pure function of the committed inputs (concept PNG, material map, GLB, kit); two in-process executions byte-matched on every artifact; --repro re-proves from a fresh process. LLM-authored inputs are one-time committed records; the gate judge is the pinned model, single sample per view, verdicts committed in the gate record."
+  },
+  "gate": {
+    "outcome": "REFUSAL (unparsed:-x-z)",
+    "gapCount": null,
+    "gapBudget": null,
+    "failures": null,
+    "perView": [
+      {
+        "angle": "+x+z",
+        "azimuthDeg": 45,
+        "coverage": true,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "nave roof",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "tower roof/cap",
+            "attribute": "form",
+            "severity": "minor"
+          },
+          {
+            "region": "walls and roof color zones",
+            "attribute": "palette",
+            "severity": "minor"
+          }
+        ]
+      },
+      {
+        "angle": "+x-z",
+        "azimuthDeg": 135,
+        "coverage": true,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "nave roof ridge and edges",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "tower upper section",
+            "attribute": "material zoning",
+            "severity": "minor"
+          },
+          {
+            "region": "tower walls",
+            "attribute": "palette",
+            "severity": "minor"
+          }
+        ]
+      },
+      {
+        "angle": "-x-z",
+        "azimuthDeg": 225,
+        "coverage": true,
+        "verdict": "unparsed",
+        "gaps": []
+      },
+      {
+        "angle": "-x+z",
+        "azimuthDeg": 315,
+        "coverage": true,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "nave and tower roofs",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "upper walls under the eaves",
+            "attribute": "form",
+            "severity": "minor"
+          }
+        ]
+      }
+    ],
+    "record": "benchmarks/sculpture/multi-angle/church-challenge.json",
+    "sheet": "pr/assets/frames/multi-angle-church-challenge.png"
+  },
+  "artifacts": {
+    "base": "challenge/church/base-artifact.json",
+    "shell": "challenge/church/shell-artifact.json",
+    "final": "challenge/church/artifact.json"
+  },
+  "renders": [
+    {
+      "when": "final",
+      "angle": "-x-z",
+      "path": "benchmarks/sculpture/challenge/church/view-final-oblique225.png"
+    },
+    {
+      "when": "final",
+      "angle": "front",
+      "path": "benchmarks/sculpture/challenge/church/view-final-front.png"
+    },
+    {
+      "when": "final",
+      "angle": "top",
+      "path": "benchmarks/sculpture/challenge/church/view-final-top.png"
+    }
+  ],
+  "frames": [
+    "pr/assets/frames/challenge-church-after.png"
+  ]
 }
