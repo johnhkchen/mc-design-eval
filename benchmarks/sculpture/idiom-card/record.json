@@ -1,0 +1,328 @@
+{
+  "schema": "idiom-card/v1",
+  "ticket": "T-124-01",
+  "verdict": {
+    "ok": true,
+    "gate": "pass",
+    "unmapped": 0,
+    "plots": 20
+  },
+  "plots": [
+    {
+      "id": "gable-ridge-z",
+      "idiom": "roof.gable",
+      "origin": [
+        0,
+        1,
+        0
+      ],
+      "size": [
+        9,
+        5,
+        6
+      ]
+    },
+    {
+      "id": "gable-ridge-x",
+      "idiom": "roof.gable",
+      "origin": [
+        13,
+        1,
+        0
+      ],
+      "size": [
+        6,
+        5,
+        9
+      ]
+    },
+    {
+      "id": "hip",
+      "idiom": "roof.hip",
+      "origin": [
+        23,
+        1,
+        0
+      ],
+      "size": [
+        9,
+        5,
+        12
+      ]
+    },
+    {
+      "id": "pyramid",
+      "idiom": "roof.pyramid",
+      "origin": [
+        36,
+        1,
+        0
+      ],
+      "size": [
+        7,
+        4,
+        7
+      ]
+    },
+    {
+      "id": "arch",
+      "idiom": "arch",
+      "origin": [
+        0,
+        1,
+        16
+      ],
+      "size": [
+        7,
+        2,
+        1
+      ]
+    },
+    {
+      "id": "head-flat",
+      "idiom": "head.flat",
+      "origin": [
+        11,
+        1,
+        16
+      ],
+      "size": [
+        5,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "stairs-walk",
+      "idiom": "course.stairs",
+      "origin": [
+        20,
+        1,
+        16
+      ],
+      "size": [
+        4,
+        4,
+        2
+      ]
+    },
+    {
+      "id": "slab-course",
+      "idiom": "course.slab",
+      "origin": [
+        28,
+        1,
+        16
+      ],
+      "size": [
+        1,
+        1,
+        4
+      ]
+    },
+    {
+      "id": "dormer-px",
+      "idiom": "dormer",
+      "origin": [
+        33,
+        1,
+        16
+      ],
+      "size": [
+        3,
+        4,
+        3
+      ]
+    },
+    {
+      "id": "dormer-nx",
+      "idiom": "dormer",
+      "origin": [
+        40,
+        1,
+        16
+      ],
+      "size": [
+        3,
+        4,
+        3
+      ]
+    },
+    {
+      "id": "dormer-pz",
+      "idiom": "dormer",
+      "origin": [
+        0,
+        1,
+        24
+      ],
+      "size": [
+        3,
+        4,
+        3
+      ]
+    },
+    {
+      "id": "dormer-nz",
+      "idiom": "dormer",
+      "origin": [
+        7,
+        1,
+        24
+      ],
+      "size": [
+        3,
+        4,
+        3
+      ]
+    },
+    {
+      "id": "chimney-bare",
+      "idiom": "chimney",
+      "origin": [
+        14,
+        1,
+        24
+      ],
+      "size": [
+        1,
+        5,
+        1
+      ]
+    },
+    {
+      "id": "chimney-crown",
+      "idiom": "chimney",
+      "origin": [
+        19,
+        1,
+        24
+      ],
+      "size": [
+        4,
+        6,
+        4
+      ]
+    },
+    {
+      "id": "chimney-slab",
+      "idiom": "chimney",
+      "origin": [
+        27,
+        1,
+        24
+      ],
+      "size": [
+        2,
+        5,
+        1
+      ]
+    },
+    {
+      "id": "jetty-xp",
+      "idiom": "jetty",
+      "origin": [
+        33,
+        1,
+        24
+      ],
+      "size": [
+        7,
+        2,
+        1
+      ]
+    },
+    {
+      "id": "jetty-xn",
+      "idiom": "jetty",
+      "origin": [
+        0,
+        1,
+        32
+      ],
+      "size": [
+        7,
+        2,
+        1
+      ]
+    },
+    {
+      "id": "jetty-zp",
+      "idiom": "jetty",
+      "origin": [
+        11,
+        1,
+        32
+      ],
+      "size": [
+        1,
+        2,
+        7
+      ]
+    },
+    {
+      "id": "jetty-zn",
+      "idiom": "jetty",
+      "origin": [
+        16,
+        1,
+        32
+      ],
+      "size": [
+        1,
+        2,
+        7
+      ]
+    },
+    {
+      "id": "plinth",
+      "idiom": "plinth",
+      "origin": [
+        21,
+        1,
+        32
+      ],
+      "size": [
+        7,
+        2,
+        5
+      ]
+    }
+  ],
+  "unmapped": [],
+  "evidence": {
+    "renders": [
+      {
+        "angle": "+x+z",
+        "path": "benchmarks/sculpture/idiom-card/view-card-+x+z.png",
+        "bytes": 315859,
+        "sha256": "91b0b928d3becbe69fd52fe234a7e5f52d77d8eef5dd8762d0238de9fc9d2f42"
+      },
+      {
+        "angle": "+x-z",
+        "path": "benchmarks/sculpture/idiom-card/view-card-+x-z.png",
+        "bytes": 335653,
+        "sha256": "83dcdb0bc8c5ae1461267c665867a41fa6d89c078ecedfc75a106179a74af2ca"
+      },
+      {
+        "angle": "-x-z",
+        "path": "benchmarks/sculpture/idiom-card/view-card--x-z.png",
+        "bytes": 331784,
+        "sha256": "adcc31a402a1760d86c739f2faab57e943b89b88d27e97bae180a6448f50aaa2"
+      },
+      {
+        "angle": "-x+z",
+        "path": "benchmarks/sculpture/idiom-card/view-card--x+z.png",
+        "bytes": 319289,
+        "sha256": "b44bb2a2f35d4f22f664140e3c3151e3a472291e0adf1d7c4447cf5a3bb4111a"
+      },
+      {
+        "angle": "front",
+        "path": "benchmarks/sculpture/idiom-card/view-card-front.png",
+        "bytes": 65442,
+        "sha256": "9f61bf93fc3d549c8f6fa6d55c905de86dab08061181977840ffcf37a231cd82"
+      }
+    ],
+    "renderError": null
+  }
+}
