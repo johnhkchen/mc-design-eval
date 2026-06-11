@@ -69,9 +69,34 @@ Phase artifact 5/6. Step-by-step against plan.md.
   concept = tall half-timbered upper storey, build = nearly all roof. The workshop's own
   critique named this proportion problem in rounds 1/2/4/6 and never reached for the geometry
   params (it painted) — a measured limit of the model's revision reach, recorded first-class.
-- Barn gate convened 3:05pm.
+- **Barn gate (the committed record)**: **same-object 4/4** — 8 gaps, ALL MINOR, 0 majors;
+  kit presence PASS (frame/course skips: all-flagged barn kit, the known T-117 state);
+  aggregate FAIL on gap budget (8/2) but zero drifted views. One judge call per view, clean
+  parses (replies ledger 1/1/1/1), no re-judge needed. Offline asserts clean for both records.
+- Pin honesty: every milestone record was a FIRST write (untracked) — no rotations, nothing
+  retired; the superseded cottage run-1 record was never committed (T-125 precedent), named in
+  the journal.
 
-## Step 3 — live chains (cottage, barn) — pending
-## Step 4 — frozen gate ×2 — pending
-## Step 5 — head-to-head composer — pending
-## Step 6 — design-learnings + review — pending
+## Step 5 — head-to-head composer ✅ (run + committed)
+- `patternbook:compare` over the four committed gate records + chain records:
+  cottage patternbook 0/2 gaps, 0/4 same-object (coverage-refused; the md carries an explicit
+  "under-states the divergence" warning — H2H7 test) vs generated 10/2 (2/4);
+  barn patternbook **8/2 all-minor, 4/4 same-object** vs generated 12/2 (0/4).
+- Deterministic re-run byte-identical (verified). `pattern-book/head-to-head.{json,md}` +
+  `pr/assets/pattern-book-milestone.md` committed.
+
+## Step 6 — design-learnings + review ✅
+- E-31 section appended to `docs/knowledge/design-learnings.md`: thesis, the chain, the
+  head-to-head table, what the revision loop did/didn't catch (the cage saved a wrong read AND
+  blocked a right one; re-recognize demand ×2; proportion blindness as a measured limit of
+  revision REACH, not visual judgement), the consumption-plan instrument lesson,
+  over/under-reach, E-12 handoff.
+- Full `npm test` 1847/1847 green (includes sibling T-129-01 additions live in this tree).
+- review.md is the Review-phase artifact (6/6).
+
+## Deviations from plan (all recorded above)
+1. Step-5 machinery built during Step-3 wall-clock (pipelining; no dependency violated).
+2. seedWorkshopProgram returns conformance instead of throwing (the chain owns that verdict).
+3. The consumption-plan seam (componentPlanFrom, --plan-only, repro plan assert) was unplanned —
+   forced by the first cottage gate run; chain-side only, the frozen gate untouched.
+4. repro/offline sweep skips never-run subjects (the recognize --offline precedent).
