@@ -65,6 +65,9 @@
     "components:cottage": "node benchmarks/sculpture/component-decomposition.mjs --subject cottage",
     "components:gatehouse": "node benchmarks/sculpture/component-decomposition.mjs --subject gatehouse",
     "components:church": "node benchmarks/sculpture/component-decomposition.mjs --subject church",
+    "shaped:cottage": "node benchmarks/sculpture/shaped-vocabulary.mjs --subject cottage",
+    "shaped:gatehouse": "node benchmarks/sculpture/shaped-vocabulary.mjs --subject gatehouse",
+    "shaped:church": "node benchmarks/sculpture/shaped-vocabulary.mjs --subject church",
     "roof:cottage": "node benchmarks/sculpture/roof-program.mjs --subject cottage",
     "roof:gatehouse": "node benchmarks/sculpture/roof-program.mjs --subject gatehouse",
     "roof:church": "node benchmarks/sculpture/roof-program.mjs --subject church"

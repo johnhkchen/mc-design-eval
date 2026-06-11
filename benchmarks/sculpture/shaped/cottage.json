@@ -1,0 +1,739 @@
+{
+  "schema": "shaped-vocabulary/v1",
+  "subject": "cottage",
+  "inputs": {
+    "shell": "regularize/cottage/artifact.json",
+    "record": "components/cottage.json",
+    "glb": "glb/cottage.glb",
+    "recordSha": "33b1ca02f2589f49dd8c678e2416bf81196be41bf91451c4c9e351baf24c0afd"
+  },
+  "params": {
+    "rmseTol": 0.8,
+    "flatRmseTol": 0.6,
+    "minArchWidth": 5,
+    "minArchRise": 2,
+    "pitchTol": 0.25,
+    "slabPitchTol": 0.15,
+    "glbRmseTol": 1.5,
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "note": "declared op parameters (shared across subjects — no tuning); azimuths config-frozen"
+  },
+  "openings": {
+    "summary": {
+      "arch": 0,
+      "flat": 0,
+      "noop": 6,
+      "none": 2
+    },
+    "detail": [
+      {
+        "groupId": "og-0",
+        "openingIndex": 0,
+        "dir": "+x",
+        "kind": "flat",
+        "fitError": {
+          "rmse": 0
+        },
+        "spec": {
+          "level": 6,
+          "span": {
+            "axis": "z",
+            "range": [
+              -11,
+              -10
+            ]
+          },
+          "yRange": [
+            6,
+            7
+          ]
+        },
+        "noop": true,
+        "carved": 0,
+        "filled": 0,
+        "headCells": [],
+        "jambCells": [],
+        "findings": []
+      },
+      {
+        "groupId": "og-1",
+        "openingIndex": 0,
+        "dir": "+x",
+        "kind": "flat",
+        "fitError": {
+          "rmse": 0
+        },
+        "spec": {
+          "level": 14,
+          "span": {
+            "axis": "z",
+            "range": [
+              -10,
+              -10
+            ]
+          },
+          "yRange": [
+            14,
+            15
+          ]
+        },
+        "noop": true,
+        "carved": 0,
+        "filled": 0,
+        "headCells": [],
+        "jambCells": [],
+        "findings": []
+      },
+      {
+        "groupId": "og-2",
+        "openingIndex": 0,
+        "dir": "+x",
+        "kind": "none",
+        "fitError": {
+          "rmse": 0.707
+        },
+        "spec": null,
+        "noop": false,
+        "carved": 0,
+        "filled": 0,
+        "headCells": [],
+        "jambCells": [],
+        "findings": [
+          {
+            "code": "flat-out-of-tolerance",
+            "detail": "rmse 0.707 vs modal level 10 > flatRmseTol 0.6"
+          }
+        ]
+      },
+      {
+        "groupId": "og-3",
+        "openingIndex": 0,
+        "dir": "+x",
+        "kind": "flat",
+        "fitError": {
+          "rmse": 0
+        },
+        "spec": {
+          "level": 3,
+          "span": {
+            "axis": "z",
+            "range": [
+              2,
+              2
+            ]
+          },
+          "yRange": [
+            3,
+            4
+          ]
+        },
+        "noop": true,
+        "carved": 0,
+        "filled": 0,
+        "headCells": [],
+        "jambCells": [],
+        "findings": []
+      },
+      {
+        "groupId": "og-4",
+        "openingIndex": 0,
+        "dir": "-x",
+        "kind": "flat",
+        "fitError": {
+          "rmse": 0
+        },
+        "spec": {
+          "level": 6,
+          "span": {
+            "axis": "z",
+            "range": [
+              -11,
+              -10
+            ]
+          },
+          "yRange": [
+            6,
+            7
+          ]
+        },
+        "noop": true,
+        "carved": 0,
+        "filled": 0,
+        "headCells": [],
+        "jambCells": [],
+        "findings": []
+      },
+      {
+        "groupId": "og-5",
+        "openingIndex": 0,
+        "dir": "-x",
+        "kind": "flat",
+        "fitError": {
+          "rmse": 0
+        },
+        "spec": {
+          "level": 14,
+          "span": {
+            "axis": "z",
+            "range": [
+              -10,
+              -10
+            ]
+          },
+          "yRange": [
+            14,
+            15
+          ]
+        },
+        "noop": true,
+        "carved": 0,
+        "filled": 0,
+        "headCells": [],
+        "jambCells": [],
+        "findings": []
+      },
+      {
+        "groupId": "og-6",
+        "openingIndex": 0,
+        "dir": "-x",
+        "kind": "none",
+        "fitError": {
+          "rmse": 0.707
+        },
+        "spec": null,
+        "noop": false,
+        "carved": 0,
+        "filled": 0,
+        "headCells": [],
+        "jambCells": [],
+        "findings": [
+          {
+            "code": "flat-out-of-tolerance",
+            "detail": "rmse 0.707 vs modal level 10 > flatRmseTol 0.6"
+          }
+        ]
+      },
+      {
+        "groupId": "og-7",
+        "openingIndex": 0,
+        "dir": "-x",
+        "kind": "flat",
+        "fitError": {
+          "rmse": 0
+        },
+        "spec": {
+          "level": 3,
+          "span": {
+            "axis": "z",
+            "range": [
+              2,
+              2
+            ]
+          },
+          "yRange": [
+            3,
+            4
+          ]
+        },
+        "noop": true,
+        "carved": 0,
+        "filled": 0,
+        "headCells": [],
+        "jambCells": [],
+        "findings": []
+      }
+    ],
+    "note": "per-opening head fit (Rule 1: error recorded, misses named — the sampled head stays on a miss) and the carve/fill applied. jamb/head cells are labels for the dressing pass."
+  },
+  "planeFits": {
+    "detail": [
+      {
+        "plane": "roof-0",
+        "stairRun": {
+          "spec": {
+            "generator": "stairRun",
+            "ascent": "-x",
+            "winding": "walk",
+            "riseOverRun": 1
+          },
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 1.156,
+            "pitchDelta": 0.156,
+            "crossGradient": 0.004,
+            "sourceRmse": 0.398
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 8.35 > glbRmseTol 1.5 — voxelFit stands in"
+            }
+          ]
+        },
+        "slabStep": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 1.156,
+            "pitchDelta": 0.656,
+            "crossGradient": 0.004,
+            "sourceRmse": 0.398
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 8.35 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-slabStep-legal",
+              "detail": "|gradient| 1.156 not within 0.15 of 0.5"
+            }
+          ]
+        }
+      },
+      {
+        "plane": "roof-1",
+        "stairRun": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 0.058,
+            "pitchDelta": 0.942,
+            "crossGradient": 0.001,
+            "sourceRmse": 0.579
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 6.823 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-stairRun-legal",
+              "detail": "|gradient| 0.058 not within 0.25 of 1"
+            }
+          ]
+        },
+        "slabStep": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 0.058,
+            "pitchDelta": 0.442,
+            "crossGradient": 0.001,
+            "sourceRmse": 0.579
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 6.823 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-slabStep-legal",
+              "detail": "|gradient| 0.058 not within 0.15 of 0.5"
+            }
+          ]
+        }
+      },
+      {
+        "plane": "roof-2",
+        "stairRun": {
+          "spec": {
+            "generator": "stairRun",
+            "ascent": "+z",
+            "winding": "walk",
+            "riseOverRun": 1
+          },
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 0.759,
+            "pitchDelta": 0.241,
+            "crossGradient": 0.054,
+            "sourceRmse": 0.632
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 4.821 > glbRmseTol 1.5 — voxelFit stands in"
+            }
+          ]
+        },
+        "slabStep": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 0.759,
+            "pitchDelta": 0.259,
+            "crossGradient": 0.054,
+            "sourceRmse": 0.632
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 4.821 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-slabStep-legal",
+              "detail": "|gradient| 0.759 not within 0.15 of 0.5"
+            }
+          ]
+        }
+      },
+      {
+        "plane": "roof-3",
+        "stairRun": {
+          "spec": {
+            "generator": "stairRun",
+            "ascent": "-z",
+            "winding": "walk",
+            "riseOverRun": 1
+          },
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 1.016,
+            "pitchDelta": 0.016,
+            "crossGradient": 0.013,
+            "sourceRmse": 0.754
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 4.435 > glbRmseTol 1.5 — voxelFit stands in"
+            }
+          ]
+        },
+        "slabStep": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 1.016,
+            "pitchDelta": 0.516,
+            "crossGradient": 0.013,
+            "sourceRmse": 0.754
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 4.435 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-slabStep-legal",
+              "detail": "|gradient| 1.016 not within 0.15 of 0.5"
+            }
+          ]
+        }
+      },
+      {
+        "plane": "roof-4",
+        "stairRun": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 1.884,
+            "pitchDelta": 0.884,
+            "crossGradient": 0.002,
+            "sourceRmse": 0.171
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 7.328 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-stairRun-legal",
+              "detail": "|gradient| 1.884 not within 0.25 of 1"
+            }
+          ]
+        },
+        "slabStep": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 1.884,
+            "pitchDelta": 1.384,
+            "crossGradient": 0.002,
+            "sourceRmse": 0.171
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 7.328 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-slabStep-legal",
+              "detail": "|gradient| 1.884 not within 0.15 of 0.5"
+            }
+          ]
+        }
+      },
+      {
+        "plane": "roof-5",
+        "stairRun": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 0.361,
+            "pitchDelta": 0.639,
+            "crossGradient": 0.267,
+            "sourceRmse": 0.798
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 6.383 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-stairRun-legal",
+              "detail": "|gradient| 0.361 not within 0.25 of 1"
+            }
+          ]
+        },
+        "slabStep": {
+          "spec": {
+            "generator": "slabStep",
+            "ascent": "-z",
+            "winding": "walk",
+            "riseOverRun": 0.5
+          },
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 0.361,
+            "pitchDelta": 0.139,
+            "crossGradient": 0.267,
+            "sourceRmse": 0.798
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 6.383 > glbRmseTol 1.5 — voxelFit stands in"
+            }
+          ]
+        }
+      },
+      {
+        "plane": "roof-6",
+        "stairRun": {
+          "spec": {
+            "generator": "stairRun",
+            "ascent": "+x",
+            "winding": "walk",
+            "riseOverRun": 1
+          },
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 0.883,
+            "pitchDelta": 0.117,
+            "crossGradient": 0.004,
+            "sourceRmse": 0.345
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 1.852 > glbRmseTol 1.5 — voxelFit stands in"
+            }
+          ]
+        },
+        "slabStep": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 0.883,
+            "pitchDelta": 0.383,
+            "crossGradient": 0.004,
+            "sourceRmse": 0.345
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 1.852 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-slabStep-legal",
+              "detail": "|gradient| 0.883 not within 0.15 of 0.5"
+            }
+          ]
+        }
+      },
+      {
+        "plane": "roof-7",
+        "stairRun": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 0.726,
+            "pitchDelta": 0.274,
+            "crossGradient": 0.435,
+            "sourceRmse": 0.477
+          },
+          "findings": [
+            {
+              "code": "glb-fit-missing",
+              "detail": "plane has no glbFit — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-stairRun-legal",
+              "detail": "|gradient| 0.726 not within 0.25 of 1"
+            }
+          ]
+        },
+        "slabStep": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 0.726,
+            "pitchDelta": 0.226,
+            "crossGradient": 0.435,
+            "sourceRmse": 0.477
+          },
+          "findings": [
+            {
+              "code": "glb-fit-missing",
+              "detail": "plane has no glbFit — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-slabStep-legal",
+              "detail": "|gradient| 0.726 not within 0.15 of 0.5"
+            }
+          ]
+        }
+      }
+    ],
+    "note": "stair-run / slab-step construction-legality evidence on the record's roof planes (GLB fit preferred; a voxelFit substitution is itself a named finding). Applied by S-104 (roof-as-program), recorded here as the fit-from-component seam's witness."
+  },
+  "census": {
+    "spikes": {
+      "before": 57,
+      "after": 57
+    },
+    "note": "protrusion census is contextual evidence — the heads' edit domain is small; the cage gates (IoU/closure/protect) are the decision layer."
+  },
+  "cage": {
+    "accepted": 1,
+    "rejected": 0,
+    "iou": {
+      "baseline": {
+        "+x+z": 0.9273,
+        "+x-z": 0.893,
+        "-x-z": 0.941,
+        "-x+z": 0.9425
+      },
+      "final": {
+        "+x+z": 0.9273,
+        "+x-z": 0.893,
+        "-x-z": 0.941,
+        "-x+z": 0.9425
+      }
+    },
+    "protect": {
+      "chimney": {
+        "ridgeY": 24,
+        "columns": 3
+      }
+    },
+    "regions": 8,
+    "note": "the opening-heads step judged by all three T-102 gates; a rejection rolls back and FAILS this runner loudly (the step exists to be applied)."
+  },
+  "trace": [
+    {
+      "step": "opening-heads",
+      "params": {
+        "radius": 1
+      },
+      "accepted": true,
+      "reasons": [],
+      "iouByAzimuth": {
+        "+x+z": {
+          "baseline": 0.9273,
+          "candidate": 0.9273,
+          "floor": 0.9073
+        },
+        "+x-z": {
+          "baseline": 0.893,
+          "candidate": 0.893,
+          "floor": 0.873
+        },
+        "-x-z": {
+          "baseline": 0.941,
+          "candidate": 0.941,
+          "floor": 0.921
+        },
+        "-x+z": {
+          "baseline": 0.9425,
+          "candidate": 0.9425,
+          "floor": 0.9225
+        }
+      },
+      "closure": {
+        "closed": true,
+        "reached": 0,
+        "inputReached": 0
+      },
+      "protect": {
+        "violations": 0
+      },
+      "census": {
+        "cells": 10020,
+        "spikes": 57,
+        "byExposure": [
+          6174,
+          2596,
+          945,
+          248,
+          47,
+          10,
+          0
+        ],
+        "ragged": 63,
+        "columns": 657,
+        "raggedRate": 0.0959
+      },
+      "cells": {
+        "removed": 0,
+        "added": 0
+      }
+    }
+  ],
+  "reproducible": {
+    "doubleRun": true,
+    "sha256": "33b1ca02f2589f49dd8c678e2416bf81196be41bf91451c4c9e351baf24c0afd",
+    "determinism": "no LLM, no GL on the decision path; two in-process executions byte-matched."
+  },
+  "placements": {
+    "input": 10020,
+    "final": 10020
+  },
+  "renders": [
+    {
+      "when": "before",
+      "angle": "-x-z",
+      "path": "benchmarks/sculpture/shaped/cottage/view--x-z-before.png",
+      "unmapped": 0
+    },
+    {
+      "when": "before",
+      "angle": "+x+z",
+      "path": "benchmarks/sculpture/shaped/cottage/view-+x+z-before.png",
+      "unmapped": 0
+    },
+    {
+      "when": "after",
+      "angle": "-x-z",
+      "path": "benchmarks/sculpture/shaped/cottage/view--x-z-after.png",
+      "unmapped": 0
+    },
+    {
+      "when": "after",
+      "angle": "+x+z",
+      "path": "benchmarks/sculpture/shaped/cottage/view-+x+z-after.png",
+      "unmapped": 0
+    }
+  ],
+  "frames": [
+    "pr/assets/frames/shaped-cottage-before.png",
+    "pr/assets/frames/shaped-cottage-after.png"
+  ]
+}

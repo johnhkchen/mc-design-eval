@@ -153,3 +153,8 @@ benchmarks/sculpture/regularize/**/*.png
 # The durable record is components/<subj>.{json,md}; the committed evidence frames live in
 # pr/assets/frames/components-*.png.
 benchmarks/sculpture/components/**/*.png
+
+# T-105-01 shaped-vocabulary renders — regenerable via npm run shaped:{cottage,gatehouse,church}.
+# The durable record is shaped/<subj>.{json,md} + shaped/<subj>/artifact.json; the committed
+# evidence frames live in pr/assets/frames/shaped-*.png.
+benchmarks/sculpture/shaped/**/*.png

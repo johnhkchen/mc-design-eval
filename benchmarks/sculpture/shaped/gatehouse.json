@@ -1,0 +1,3020 @@
+{
+  "schema": "shaped-vocabulary/v1",
+  "subject": "gatehouse",
+  "inputs": {
+    "shell": "regularize/gatehouse/artifact.json",
+    "record": "components/gatehouse.json",
+    "glb": "glb/stone-gatehouse.glb",
+    "recordSha": "b6c899187d50efeef411279640837f6b42e960975c76378edb8747073975e20c"
+  },
+  "params": {
+    "rmseTol": 0.8,
+    "flatRmseTol": 0.6,
+    "minArchWidth": 5,
+    "minArchRise": 2,
+    "pitchTol": 0.25,
+    "slabPitchTol": 0.15,
+    "glbRmseTol": 1.5,
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "note": "declared op parameters (shared across subjects — no tuning); azimuths config-frozen"
+  },
+  "openings": {
+    "summary": {
+      "arch": 2,
+      "flat": 0,
+      "noop": 4,
+      "none": 0
+    },
+    "detail": [
+      {
+        "groupId": "og-0",
+        "openingIndex": 0,
+        "dir": "+x",
+        "kind": "arch",
+        "fitError": {
+          "rmse": 0.439,
+          "radialRmse": 0.379
+        },
+        "spec": {
+          "center": [
+            0,
+            8.444
+          ],
+          "radius": 7.103,
+          "span": {
+            "axis": "z",
+            "range": [
+              -6,
+              6
+            ]
+          },
+          "yRange": [
+            8,
+            17
+          ],
+          "depth": {
+            "axis": "x",
+            "range": [
+              -13,
+              13
+            ]
+          },
+          "block": null
+        },
+        "noop": false,
+        "carved": 723,
+        "filled": 118,
+        "headCells": [
+          "-13,13,-6",
+          "-13,13,6",
+          "-12,13,-6",
+          "-12,13,6",
+          "-11,13,-6",
+          "-11,13,6",
+          "-10,13,-6",
+          "-10,13,6",
+          "-9,13,-6",
+          "-9,13,6",
+          "-8,13,-6",
+          "-8,13,6",
+          "-7,13,-6",
+          "-7,13,6",
+          "-6,13,-6",
+          "-6,13,6",
+          "-5,13,-6",
+          "-5,13,6",
+          "-4,13,-6",
+          "-4,13,6",
+          "-3,13,-6",
+          "-3,13,6",
+          "-2,13,-6",
+          "-2,13,6",
+          "-1,13,-6",
+          "-1,13,6",
+          "0,13,-6",
+          "0,13,6",
+          "1,13,-6",
+          "1,13,6",
+          "2,13,-6",
+          "2,13,6",
+          "3,13,-6",
+          "3,13,6",
+          "4,13,-6",
+          "4,13,6",
+          "5,13,-6",
+          "5,13,6",
+          "6,13,-6",
+          "6,13,6",
+          "7,13,-6",
+          "7,13,6",
+          "8,13,-6",
+          "8,13,6",
+          "9,13,-6",
+          "9,13,6",
+          "10,13,-6",
+          "10,13,6",
+          "11,13,-6",
+          "11,13,6",
+          "12,13,-6",
+          "12,13,6",
+          "13,13,-6",
+          "13,13,6",
+          "-13,14,-5",
+          "-13,14,5",
+          "-12,14,-5",
+          "-12,14,5",
+          "-11,14,-5",
+          "-11,14,5",
+          "-10,14,-5",
+          "-10,14,5",
+          "-9,14,-5",
+          "-9,14,5",
+          "-8,14,-5",
+          "-8,14,5",
+          "-7,14,-5",
+          "-7,14,5",
+          "-6,14,-5",
+          "-6,14,5",
+          "-5,14,-5",
+          "-5,14,5",
+          "-4,14,-5",
+          "-4,14,5",
+          "-3,14,-5",
+          "-3,14,5",
+          "-2,14,-5",
+          "-2,14,5",
+          "-1,14,-5",
+          "-1,14,5",
+          "0,14,-5",
+          "0,14,5",
+          "1,14,-5",
+          "1,14,5",
+          "2,14,-5",
+          "2,14,5",
+          "3,14,-5",
+          "3,14,5",
+          "4,14,-5",
+          "4,14,5",
+          "5,14,-5",
+          "5,14,5",
+          "6,14,-5",
+          "6,14,5",
+          "7,14,-5",
+          "7,14,5",
+          "8,14,-5",
+          "8,14,5",
+          "9,14,-5",
+          "9,14,5",
+          "10,14,-5",
+          "10,14,5",
+          "11,14,-5",
+          "11,14,5",
+          "12,14,-5",
+          "12,14,5",
+          "13,14,-5",
+          "13,14,5",
+          "-13,15,-4",
+          "-13,15,-3",
+          "-13,15,3",
+          "-13,15,4",
+          "-12,15,-4",
+          "-12,15,-3",
+          "-12,15,3",
+          "-12,15,4",
+          "-11,15,-4",
+          "-11,15,-3",
+          "-11,15,3",
+          "-11,15,4",
+          "-10,15,-4",
+          "-10,15,-3",
+          "-10,15,3",
+          "-10,15,4",
+          "-9,15,-4",
+          "-9,15,-3",
+          "-9,15,3",
+          "-9,15,4",
+          "-8,15,-4",
+          "-8,15,-3",
+          "-8,15,3",
+          "-8,15,4",
+          "-7,15,-4",
+          "-7,15,-3",
+          "-7,15,3",
+          "-7,15,4",
+          "-6,15,-4",
+          "-6,15,-3",
+          "-6,15,3",
+          "-6,15,4",
+          "-5,15,-4",
+          "-5,15,-3",
+          "-5,15,3",
+          "-5,15,4",
+          "-4,15,-4",
+          "-4,15,-3",
+          "-4,15,3",
+          "-4,15,4",
+          "-3,15,-4",
+          "-3,15,-3",
+          "-3,15,3",
+          "-3,15,4",
+          "-2,15,-4",
+          "-2,15,-3",
+          "-2,15,3",
+          "-2,15,4",
+          "-1,15,-4",
+          "-1,15,-3",
+          "-1,15,3",
+          "-1,15,4",
+          "0,15,-4",
+          "0,15,-3",
+          "0,15,3",
+          "0,15,4",
+          "1,15,-4",
+          "1,15,-3",
+          "1,15,3",
+          "1,15,4",
+          "2,15,-4",
+          "2,15,-3",
+          "2,15,3",
+          "2,15,4",
+          "3,15,-4",
+          "3,15,-3",
+          "3,15,3",
+          "3,15,4",
+          "4,15,-4",
+          "4,15,-3",
+          "4,15,3",
+          "4,15,4",
+          "5,15,-4",
+          "5,15,-3",
+          "5,15,3",
+          "5,15,4",
+          "6,15,-4",
+          "6,15,-3",
+          "6,15,3",
+          "6,15,4",
+          "7,15,-4",
+          "7,15,-3",
+          "7,15,3",
+          "7,15,4",
+          "8,15,-4",
+          "8,15,-3",
+          "8,15,3",
+          "8,15,4",
+          "9,15,-4",
+          "9,15,-3",
+          "9,15,3",
+          "9,15,4",
+          "10,15,-4",
+          "10,15,-3",
+          "10,15,3",
+          "10,15,4",
+          "11,15,-4",
+          "11,15,-3",
+          "11,15,3",
+          "11,15,4",
+          "12,15,-4",
+          "12,15,-3",
+          "12,15,3",
+          "12,15,4",
+          "13,15,-4",
+          "13,15,-3",
+          "13,15,3",
+          "13,15,4",
+          "-13,16,-2",
+          "-13,16,-1",
+          "-13,16,0",
+          "-13,16,1",
+          "-13,16,2",
+          "-12,16,-2",
+          "-12,16,-1",
+          "-12,16,0",
+          "-12,16,1",
+          "-12,16,2",
+          "-11,16,-2",
+          "-11,16,-1",
+          "-11,16,0",
+          "-11,16,1",
+          "-11,16,2",
+          "-10,16,-2",
+          "-10,16,-1",
+          "-10,16,0",
+          "-10,16,1",
+          "-10,16,2",
+          "-9,16,-2",
+          "-9,16,-1",
+          "-9,16,0",
+          "-9,16,1",
+          "-9,16,2",
+          "-8,16,-2",
+          "-8,16,-1",
+          "-8,16,0",
+          "-8,16,1",
+          "-8,16,2",
+          "-7,16,-2",
+          "-7,16,-1",
+          "-7,16,0",
+          "-7,16,1",
+          "-7,16,2",
+          "-6,16,-2",
+          "-6,16,-1",
+          "-6,16,0",
+          "-6,16,1",
+          "-6,16,2",
+          "-5,16,-2",
+          "-5,16,-1",
+          "-5,16,0",
+          "-5,16,1",
+          "-5,16,2",
+          "-4,16,-2",
+          "-4,16,-1",
+          "-4,16,0",
+          "-4,16,1",
+          "-4,16,2",
+          "-3,16,-2",
+          "-3,16,-1",
+          "-3,16,0",
+          "-3,16,1",
+          "-3,16,2",
+          "-2,16,-2",
+          "-2,16,-1",
+          "-2,16,0",
+          "-2,16,1",
+          "-2,16,2",
+          "-1,16,-2",
+          "-1,16,-1",
+          "-1,16,0",
+          "-1,16,1",
+          "-1,16,2",
+          "0,16,-2",
+          "0,16,-1",
+          "0,16,0",
+          "0,16,1",
+          "0,16,2",
+          "1,16,-2",
+          "1,16,-1",
+          "1,16,0",
+          "1,16,1",
+          "1,16,2",
+          "2,16,-2",
+          "2,16,-1",
+          "2,16,0",
+          "2,16,1",
+          "2,16,2",
+          "3,16,-2",
+          "3,16,-1",
+          "3,16,0",
+          "3,16,1",
+          "3,16,2",
+          "4,16,-2",
+          "4,16,-1",
+          "4,16,0",
+          "4,16,1",
+          "4,16,2",
+          "5,16,-2",
+          "5,16,-1",
+          "5,16,0",
+          "5,16,1",
+          "5,16,2",
+          "6,16,-2",
+          "6,16,-1",
+          "6,16,0",
+          "6,16,1",
+          "6,16,2",
+          "7,16,-2",
+          "7,16,-1",
+          "7,16,0",
+          "7,16,1",
+          "7,16,2",
+          "8,16,-2",
+          "8,16,-1",
+          "8,16,0",
+          "8,16,1",
+          "8,16,2",
+          "9,16,-2",
+          "9,16,-1",
+          "9,16,0",
+          "9,16,1",
+          "9,16,2",
+          "10,16,-2",
+          "10,16,-1",
+          "10,16,0",
+          "10,16,1",
+          "10,16,2",
+          "11,16,-2",
+          "11,16,-1",
+          "11,16,0",
+          "11,16,1",
+          "11,16,2",
+          "12,16,-2",
+          "12,16,-1",
+          "12,16,0",
+          "12,16,1",
+          "12,16,2",
+          "13,16,-2",
+          "13,16,-1",
+          "13,16,0",
+          "13,16,1",
+          "13,16,2"
+        ],
+        "jambCells": [
+          "-13,8,-7",
+          "-13,8,7",
+          "-12,8,-7",
+          "-12,8,7",
+          "-11,8,-7",
+          "-11,8,7",
+          "-10,8,-7",
+          "-10,8,7",
+          "-9,8,-7",
+          "-9,8,7",
+          "-8,8,-7",
+          "-8,8,7",
+          "-7,8,-7",
+          "-7,8,7",
+          "-6,8,-7",
+          "-6,8,7",
+          "-5,8,-7",
+          "-5,8,7",
+          "-4,8,-7",
+          "-4,8,7",
+          "-3,8,-7",
+          "-3,8,7",
+          "-2,8,-7",
+          "-2,8,7",
+          "-1,8,-7",
+          "-1,8,7",
+          "0,8,-7",
+          "0,8,7",
+          "1,8,-7",
+          "1,8,7",
+          "2,8,-7",
+          "2,8,7",
+          "3,8,-7",
+          "3,8,7",
+          "4,8,-7",
+          "4,8,7",
+          "5,8,-7",
+          "5,8,7",
+          "6,8,-7",
+          "6,8,7",
+          "7,8,-7",
+          "7,8,7",
+          "8,8,-7",
+          "8,8,7",
+          "9,8,-7",
+          "9,8,7",
+          "10,8,-7",
+          "10,8,7",
+          "11,8,-7",
+          "11,8,7",
+          "12,8,-7",
+          "12,8,7",
+          "13,8,-7",
+          "13,8,7"
+        ],
+        "findings": [
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,13,-6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,13,6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,13,-6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,13,6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,13,-6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,13,6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,13,-6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,13,6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,14,-6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,14,-5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,14,5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,14,6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,14,-6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,14,-5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,14,5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,14,6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,14,-6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,14,-5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,14,5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,14,6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,14,-6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,14,-5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,14,5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,14,6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,15,-6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,15,-5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,15,-4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,15,-3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,15,3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,15,4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,15,5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,15,6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,15,-6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,15,-5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,15,-4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,15,-3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,15,3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,15,4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,15,5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,15,6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-11,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-11,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-10,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-10,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-9,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-9,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-8,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-8,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-7,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-7,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-6,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-6,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-5,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-5,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-4,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-4,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-3,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-3,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-2,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-2,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-1,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-1,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "0,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "0,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "1,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "1,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "2,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "2,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "3,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "3,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "4,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "4,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "5,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "5,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "6,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "6,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "7,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "7,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "8,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "8,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "9,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "9,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "10,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "10,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "11,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "11,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,15,-6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,15,-5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,15,-4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,15,-3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,15,3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,15,4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,15,5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,15,6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,15,-6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,15,-5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,15,-4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,15,-3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,15,3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,15,4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,15,5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,15,6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,-6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,-5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,-4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,-3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,-2 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,-1 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,0 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,1 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,2 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,-6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,-5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,-4 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,-2 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,-1 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,0 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,1 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,2 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,4 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,-6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,-5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,-4 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,-2 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,-1 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,0 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,1 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,2 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,4 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,-6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,-5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,-4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,-3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,-2 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,-1 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,0 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,1 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,2 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,-6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,-5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,-4 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,-2 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,-1 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,0 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,1 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,2 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,4 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,-6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,-5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,-4 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,-2 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,-1 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,0 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,1 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,2 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,4 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,6 support 1 < 2"
+          }
+        ]
+      },
+      {
+        "groupId": "og-1",
+        "openingIndex": 0,
+        "dir": "+x",
+        "kind": "flat",
+        "fitError": {
+          "rmse": 0
+        },
+        "spec": {
+          "level": 22,
+          "span": {
+            "axis": "z",
+            "range": [
+              -7,
+              -7
+            ]
+          },
+          "yRange": [
+            22,
+            23
+          ]
+        },
+        "noop": true,
+        "carved": 0,
+        "filled": 0,
+        "headCells": [],
+        "jambCells": [],
+        "findings": []
+      },
+      {
+        "groupId": "og-1",
+        "openingIndex": 1,
+        "dir": "+x",
+        "kind": "flat",
+        "fitError": {
+          "rmse": 0
+        },
+        "spec": {
+          "level": 22,
+          "span": {
+            "axis": "z",
+            "range": [
+              7,
+              7
+            ]
+          },
+          "yRange": [
+            22,
+            23
+          ]
+        },
+        "noop": true,
+        "carved": 0,
+        "filled": 0,
+        "headCells": [],
+        "jambCells": [],
+        "findings": []
+      },
+      {
+        "groupId": "og-2",
+        "openingIndex": 0,
+        "dir": "-x",
+        "kind": "arch",
+        "fitError": {
+          "rmse": 0.439,
+          "radialRmse": 0.379
+        },
+        "spec": {
+          "center": [
+            0,
+            8.444
+          ],
+          "radius": 7.103,
+          "span": {
+            "axis": "z",
+            "range": [
+              -6,
+              6
+            ]
+          },
+          "yRange": [
+            8,
+            17
+          ],
+          "depth": {
+            "axis": "x",
+            "range": [
+              -13,
+              13
+            ]
+          },
+          "block": null
+        },
+        "noop": false,
+        "carved": 723,
+        "filled": 118,
+        "headCells": [
+          "-13,13,-6",
+          "-13,13,6",
+          "-12,13,-6",
+          "-12,13,6",
+          "-11,13,-6",
+          "-11,13,6",
+          "-10,13,-6",
+          "-10,13,6",
+          "-9,13,-6",
+          "-9,13,6",
+          "-8,13,-6",
+          "-8,13,6",
+          "-7,13,-6",
+          "-7,13,6",
+          "-6,13,-6",
+          "-6,13,6",
+          "-5,13,-6",
+          "-5,13,6",
+          "-4,13,-6",
+          "-4,13,6",
+          "-3,13,-6",
+          "-3,13,6",
+          "-2,13,-6",
+          "-2,13,6",
+          "-1,13,-6",
+          "-1,13,6",
+          "0,13,-6",
+          "0,13,6",
+          "1,13,-6",
+          "1,13,6",
+          "2,13,-6",
+          "2,13,6",
+          "3,13,-6",
+          "3,13,6",
+          "4,13,-6",
+          "4,13,6",
+          "5,13,-6",
+          "5,13,6",
+          "6,13,-6",
+          "6,13,6",
+          "7,13,-6",
+          "7,13,6",
+          "8,13,-6",
+          "8,13,6",
+          "9,13,-6",
+          "9,13,6",
+          "10,13,-6",
+          "10,13,6",
+          "11,13,-6",
+          "11,13,6",
+          "12,13,-6",
+          "12,13,6",
+          "13,13,-6",
+          "13,13,6",
+          "-13,14,-5",
+          "-13,14,5",
+          "-12,14,-5",
+          "-12,14,5",
+          "-11,14,-5",
+          "-11,14,5",
+          "-10,14,-5",
+          "-10,14,5",
+          "-9,14,-5",
+          "-9,14,5",
+          "-8,14,-5",
+          "-8,14,5",
+          "-7,14,-5",
+          "-7,14,5",
+          "-6,14,-5",
+          "-6,14,5",
+          "-5,14,-5",
+          "-5,14,5",
+          "-4,14,-5",
+          "-4,14,5",
+          "-3,14,-5",
+          "-3,14,5",
+          "-2,14,-5",
+          "-2,14,5",
+          "-1,14,-5",
+          "-1,14,5",
+          "0,14,-5",
+          "0,14,5",
+          "1,14,-5",
+          "1,14,5",
+          "2,14,-5",
+          "2,14,5",
+          "3,14,-5",
+          "3,14,5",
+          "4,14,-5",
+          "4,14,5",
+          "5,14,-5",
+          "5,14,5",
+          "6,14,-5",
+          "6,14,5",
+          "7,14,-5",
+          "7,14,5",
+          "8,14,-5",
+          "8,14,5",
+          "9,14,-5",
+          "9,14,5",
+          "10,14,-5",
+          "10,14,5",
+          "11,14,-5",
+          "11,14,5",
+          "12,14,-5",
+          "12,14,5",
+          "13,14,-5",
+          "13,14,5",
+          "-13,15,-4",
+          "-13,15,-3",
+          "-13,15,3",
+          "-13,15,4",
+          "-12,15,-4",
+          "-12,15,-3",
+          "-12,15,3",
+          "-12,15,4",
+          "-11,15,-4",
+          "-11,15,-3",
+          "-11,15,3",
+          "-11,15,4",
+          "-10,15,-4",
+          "-10,15,-3",
+          "-10,15,3",
+          "-10,15,4",
+          "-9,15,-4",
+          "-9,15,-3",
+          "-9,15,3",
+          "-9,15,4",
+          "-8,15,-4",
+          "-8,15,-3",
+          "-8,15,3",
+          "-8,15,4",
+          "-7,15,-4",
+          "-7,15,-3",
+          "-7,15,3",
+          "-7,15,4",
+          "-6,15,-4",
+          "-6,15,-3",
+          "-6,15,3",
+          "-6,15,4",
+          "-5,15,-4",
+          "-5,15,-3",
+          "-5,15,3",
+          "-5,15,4",
+          "-4,15,-4",
+          "-4,15,-3",
+          "-4,15,3",
+          "-4,15,4",
+          "-3,15,-4",
+          "-3,15,-3",
+          "-3,15,3",
+          "-3,15,4",
+          "-2,15,-4",
+          "-2,15,-3",
+          "-2,15,3",
+          "-2,15,4",
+          "-1,15,-4",
+          "-1,15,-3",
+          "-1,15,3",
+          "-1,15,4",
+          "0,15,-4",
+          "0,15,-3",
+          "0,15,3",
+          "0,15,4",
+          "1,15,-4",
+          "1,15,-3",
+          "1,15,3",
+          "1,15,4",
+          "2,15,-4",
+          "2,15,-3",
+          "2,15,3",
+          "2,15,4",
+          "3,15,-4",
+          "3,15,-3",
+          "3,15,3",
+          "3,15,4",
+          "4,15,-4",
+          "4,15,-3",
+          "4,15,3",
+          "4,15,4",
+          "5,15,-4",
+          "5,15,-3",
+          "5,15,3",
+          "5,15,4",
+          "6,15,-4",
+          "6,15,-3",
+          "6,15,3",
+          "6,15,4",
+          "7,15,-4",
+          "7,15,-3",
+          "7,15,3",
+          "7,15,4",
+          "8,15,-4",
+          "8,15,-3",
+          "8,15,3",
+          "8,15,4",
+          "9,15,-4",
+          "9,15,-3",
+          "9,15,3",
+          "9,15,4",
+          "10,15,-4",
+          "10,15,-3",
+          "10,15,3",
+          "10,15,4",
+          "11,15,-4",
+          "11,15,-3",
+          "11,15,3",
+          "11,15,4",
+          "12,15,-4",
+          "12,15,-3",
+          "12,15,3",
+          "12,15,4",
+          "13,15,-4",
+          "13,15,-3",
+          "13,15,3",
+          "13,15,4",
+          "-13,16,-2",
+          "-13,16,-1",
+          "-13,16,0",
+          "-13,16,1",
+          "-13,16,2",
+          "-12,16,-2",
+          "-12,16,-1",
+          "-12,16,0",
+          "-12,16,1",
+          "-12,16,2",
+          "-11,16,-2",
+          "-11,16,-1",
+          "-11,16,0",
+          "-11,16,1",
+          "-11,16,2",
+          "-10,16,-2",
+          "-10,16,-1",
+          "-10,16,0",
+          "-10,16,1",
+          "-10,16,2",
+          "-9,16,-2",
+          "-9,16,-1",
+          "-9,16,0",
+          "-9,16,1",
+          "-9,16,2",
+          "-8,16,-2",
+          "-8,16,-1",
+          "-8,16,0",
+          "-8,16,1",
+          "-8,16,2",
+          "-7,16,-2",
+          "-7,16,-1",
+          "-7,16,0",
+          "-7,16,1",
+          "-7,16,2",
+          "-6,16,-2",
+          "-6,16,-1",
+          "-6,16,0",
+          "-6,16,1",
+          "-6,16,2",
+          "-5,16,-2",
+          "-5,16,-1",
+          "-5,16,0",
+          "-5,16,1",
+          "-5,16,2",
+          "-4,16,-2",
+          "-4,16,-1",
+          "-4,16,0",
+          "-4,16,1",
+          "-4,16,2",
+          "-3,16,-2",
+          "-3,16,-1",
+          "-3,16,0",
+          "-3,16,1",
+          "-3,16,2",
+          "-2,16,-2",
+          "-2,16,-1",
+          "-2,16,0",
+          "-2,16,1",
+          "-2,16,2",
+          "-1,16,-2",
+          "-1,16,-1",
+          "-1,16,0",
+          "-1,16,1",
+          "-1,16,2",
+          "0,16,-2",
+          "0,16,-1",
+          "0,16,0",
+          "0,16,1",
+          "0,16,2",
+          "1,16,-2",
+          "1,16,-1",
+          "1,16,0",
+          "1,16,1",
+          "1,16,2",
+          "2,16,-2",
+          "2,16,-1",
+          "2,16,0",
+          "2,16,1",
+          "2,16,2",
+          "3,16,-2",
+          "3,16,-1",
+          "3,16,0",
+          "3,16,1",
+          "3,16,2",
+          "4,16,-2",
+          "4,16,-1",
+          "4,16,0",
+          "4,16,1",
+          "4,16,2",
+          "5,16,-2",
+          "5,16,-1",
+          "5,16,0",
+          "5,16,1",
+          "5,16,2",
+          "6,16,-2",
+          "6,16,-1",
+          "6,16,0",
+          "6,16,1",
+          "6,16,2",
+          "7,16,-2",
+          "7,16,-1",
+          "7,16,0",
+          "7,16,1",
+          "7,16,2",
+          "8,16,-2",
+          "8,16,-1",
+          "8,16,0",
+          "8,16,1",
+          "8,16,2",
+          "9,16,-2",
+          "9,16,-1",
+          "9,16,0",
+          "9,16,1",
+          "9,16,2",
+          "10,16,-2",
+          "10,16,-1",
+          "10,16,0",
+          "10,16,1",
+          "10,16,2",
+          "11,16,-2",
+          "11,16,-1",
+          "11,16,0",
+          "11,16,1",
+          "11,16,2",
+          "12,16,-2",
+          "12,16,-1",
+          "12,16,0",
+          "12,16,1",
+          "12,16,2",
+          "13,16,-2",
+          "13,16,-1",
+          "13,16,0",
+          "13,16,1",
+          "13,16,2"
+        ],
+        "jambCells": [
+          "-13,8,-7",
+          "-13,8,7",
+          "-12,8,-7",
+          "-12,8,7",
+          "-11,8,-7",
+          "-11,8,7",
+          "-10,8,-7",
+          "-10,8,7",
+          "-9,8,-7",
+          "-9,8,7",
+          "-8,8,-7",
+          "-8,8,7",
+          "-7,8,-7",
+          "-7,8,7",
+          "-6,8,-7",
+          "-6,8,7",
+          "-5,8,-7",
+          "-5,8,7",
+          "-4,8,-7",
+          "-4,8,7",
+          "-3,8,-7",
+          "-3,8,7",
+          "-2,8,-7",
+          "-2,8,7",
+          "-1,8,-7",
+          "-1,8,7",
+          "0,8,-7",
+          "0,8,7",
+          "1,8,-7",
+          "1,8,7",
+          "2,8,-7",
+          "2,8,7",
+          "3,8,-7",
+          "3,8,7",
+          "4,8,-7",
+          "4,8,7",
+          "5,8,-7",
+          "5,8,7",
+          "6,8,-7",
+          "6,8,7",
+          "7,8,-7",
+          "7,8,7",
+          "8,8,-7",
+          "8,8,7",
+          "9,8,-7",
+          "9,8,7",
+          "10,8,-7",
+          "10,8,7",
+          "11,8,-7",
+          "11,8,7",
+          "12,8,-7",
+          "12,8,7",
+          "13,8,-7",
+          "13,8,7"
+        ],
+        "findings": [
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,13,-6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,13,6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,13,-6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,13,6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,13,-6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,13,6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,13,-6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,13,6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,14,-6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,14,-5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,14,5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,14,6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,14,-6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,14,-5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,14,5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,14,6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,14,-6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,14,-5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,14,5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,14,6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,14,-6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,14,-5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,14,5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,14,6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,15,-6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,15,-5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,15,-4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,15,-3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,15,3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,15,4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,15,5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,15,6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,15,-6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,15,-5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,15,-4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,15,-3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,15,3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,15,4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,15,5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,15,6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-11,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-11,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-10,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-10,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-9,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-9,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-8,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-8,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-7,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-7,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-6,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-6,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-5,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-5,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-4,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-4,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-3,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-3,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-2,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-2,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-1,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-1,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "0,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "0,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "1,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "1,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "2,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "2,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "3,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "3,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "4,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "4,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "5,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "5,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "6,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "6,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "7,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "7,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "8,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "8,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "9,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "9,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "10,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "10,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "11,15,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "11,15,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,15,-6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,15,-5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,15,-4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,15,-3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,15,3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,15,4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,15,5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,15,6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,15,-6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,15,-5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,15,-4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,15,-3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,15,3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,15,4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,15,5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,15,6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,-6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,-5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,-4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,-3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,-2 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,-1 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,0 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,1 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,2 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,16,6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,-6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,-5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,-4 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,-2 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,-1 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,0 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,1 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,2 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,4 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-12,16,6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,-6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,-5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,-4 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,-2 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,-1 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,0 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,1 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,2 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,4 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "12,16,6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,-6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,-5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,-4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,-3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,-2 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,-1 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,0 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,1 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,2 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,3 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,4 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,5 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,16,6 support 0 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,-6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,-5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,-4 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,-2 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,-1 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,0 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,1 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,2 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,4 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "-13,17,6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,-6 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,-5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,-4 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,-3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,-2 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,-1 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,0 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,1 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,2 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,3 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,4 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,5 support 1 < 2"
+          },
+          {
+            "code": "ring-unsupported",
+            "detail": "13,17,6 support 1 < 2"
+          }
+        ]
+      },
+      {
+        "groupId": "og-3",
+        "openingIndex": 0,
+        "dir": "-x",
+        "kind": "flat",
+        "fitError": {
+          "rmse": 0
+        },
+        "spec": {
+          "level": 22,
+          "span": {
+            "axis": "z",
+            "range": [
+              -7,
+              -7
+            ]
+          },
+          "yRange": [
+            22,
+            23
+          ]
+        },
+        "noop": true,
+        "carved": 0,
+        "filled": 0,
+        "headCells": [],
+        "jambCells": [],
+        "findings": []
+      },
+      {
+        "groupId": "og-3",
+        "openingIndex": 1,
+        "dir": "-x",
+        "kind": "flat",
+        "fitError": {
+          "rmse": 0
+        },
+        "spec": {
+          "level": 22,
+          "span": {
+            "axis": "z",
+            "range": [
+              7,
+              7
+            ]
+          },
+          "yRange": [
+            22,
+            23
+          ]
+        },
+        "noop": true,
+        "carved": 0,
+        "filled": 0,
+        "headCells": [],
+        "jambCells": [],
+        "findings": []
+      }
+    ],
+    "note": "per-opening head fit (Rule 1: error recorded, misses named — the sampled head stays on a miss) and the carve/fill applied. jamb/head cells are labels for the dressing pass."
+  },
+  "planeFits": {
+    "detail": [
+      {
+        "plane": "roof-0",
+        "stairRun": {
+          "spec": {
+            "generator": "stairRun",
+            "ascent": "-z",
+            "winding": "walk",
+            "riseOverRun": 1
+          },
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 0.808,
+            "pitchDelta": 0.192,
+            "crossGradient": 0.025,
+            "sourceRmse": 0.648
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 5.603 > glbRmseTol 1.5 — voxelFit stands in"
+            }
+          ]
+        },
+        "slabStep": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 0.808,
+            "pitchDelta": 0.308,
+            "crossGradient": 0.025,
+            "sourceRmse": 0.648
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 5.603 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-slabStep-legal",
+              "detail": "|gradient| 0.808 not within 0.15 of 0.5"
+            }
+          ]
+        }
+      },
+      {
+        "plane": "roof-1",
+        "stairRun": {
+          "spec": {
+            "generator": "stairRun",
+            "ascent": "+z",
+            "winding": "walk",
+            "riseOverRun": 1
+          },
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 0.962,
+            "pitchDelta": 0.038,
+            "crossGradient": 0,
+            "sourceRmse": 0.418
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 3.545 > glbRmseTol 1.5 — voxelFit stands in"
+            }
+          ]
+        },
+        "slabStep": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 0.962,
+            "pitchDelta": 0.462,
+            "crossGradient": 0,
+            "sourceRmse": 0.418
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 3.545 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-slabStep-legal",
+              "detail": "|gradient| 0.962 not within 0.15 of 0.5"
+            }
+          ]
+        }
+      },
+      {
+        "plane": "roof-2",
+        "stairRun": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 0.114,
+            "pitchDelta": 0.886,
+            "crossGradient": 0.004,
+            "sourceRmse": 0.308
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 8.483 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-stairRun-legal",
+              "detail": "|gradient| 0.114 not within 0.25 of 1"
+            }
+          ]
+        },
+        "slabStep": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 0.114,
+            "pitchDelta": 0.386,
+            "crossGradient": 0.004,
+            "sourceRmse": 0.308
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 8.483 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-slabStep-legal",
+              "detail": "|gradient| 0.114 not within 0.15 of 0.5"
+            }
+          ]
+        }
+      },
+      {
+        "plane": "roof-3",
+        "stairRun": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 1.391,
+            "pitchDelta": 0.391,
+            "crossGradient": 0.04,
+            "sourceRmse": 1.401
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 5.886 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-stairRun-legal",
+              "detail": "|gradient| 1.391 not within 0.25 of 1"
+            }
+          ]
+        },
+        "slabStep": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 1.391,
+            "pitchDelta": 0.891,
+            "crossGradient": 0.04,
+            "sourceRmse": 1.401
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 5.886 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-slabStep-legal",
+              "detail": "|gradient| 1.391 not within 0.15 of 0.5"
+            }
+          ]
+        }
+      },
+      {
+        "plane": "roof-4",
+        "stairRun": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 1.558,
+            "pitchDelta": 0.558,
+            "crossGradient": 0,
+            "sourceRmse": 0.707
+          },
+          "findings": [
+            {
+              "code": "glb-fit-missing",
+              "detail": "plane has no glbFit — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-stairRun-legal",
+              "detail": "|gradient| 1.558 not within 0.25 of 1"
+            }
+          ]
+        },
+        "slabStep": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 1.558,
+            "pitchDelta": 1.058,
+            "crossGradient": 0,
+            "sourceRmse": 0.707
+          },
+          "findings": [
+            {
+              "code": "glb-fit-missing",
+              "detail": "plane has no glbFit — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-slabStep-legal",
+              "detail": "|gradient| 1.558 not within 0.15 of 0.5"
+            }
+          ]
+        }
+      },
+      {
+        "plane": "roof-5",
+        "stairRun": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 1.26,
+            "pitchDelta": 0.26,
+            "crossGradient": 1.229,
+            "sourceRmse": 0.532
+          },
+          "findings": [
+            {
+              "code": "glb-fit-missing",
+              "detail": "plane has no glbFit — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-stairRun-legal",
+              "detail": "|gradient| 1.26 not within 0.25 of 1"
+            }
+          ]
+        },
+        "slabStep": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 1.26,
+            "pitchDelta": 0.76,
+            "crossGradient": 1.229,
+            "sourceRmse": 0.532
+          },
+          "findings": [
+            {
+              "code": "glb-fit-missing",
+              "detail": "plane has no glbFit — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-slabStep-legal",
+              "detail": "|gradient| 1.26 not within 0.15 of 0.5"
+            }
+          ]
+        }
+      },
+      {
+        "plane": "roof-6",
+        "stairRun": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 0.741,
+            "pitchDelta": 0.259,
+            "crossGradient": 0.676,
+            "sourceRmse": 0.415
+          },
+          "findings": [
+            {
+              "code": "glb-fit-missing",
+              "detail": "plane has no glbFit — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-stairRun-legal",
+              "detail": "|gradient| 0.741 not within 0.25 of 1"
+            }
+          ]
+        },
+        "slabStep": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 0.741,
+            "pitchDelta": 0.241,
+            "crossGradient": 0.676,
+            "sourceRmse": 0.415
+          },
+          "findings": [
+            {
+              "code": "glb-fit-missing",
+              "detail": "plane has no glbFit — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-slabStep-legal",
+              "detail": "|gradient| 0.741 not within 0.15 of 0.5"
+            }
+          ]
+        }
+      },
+      {
+        "plane": "roof-7",
+        "stairRun": {
+          "spec": {
+            "generator": "stairRun",
+            "ascent": "+x",
+            "winding": "walk",
+            "riseOverRun": 1
+          },
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 1.217,
+            "pitchDelta": 0.217,
+            "crossGradient": 0.528,
+            "sourceRmse": 0.551
+          },
+          "findings": [
+            {
+              "code": "glb-fit-missing",
+              "detail": "plane has no glbFit — voxelFit stands in"
+            }
+          ]
+        },
+        "slabStep": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 1.217,
+            "pitchDelta": 0.717,
+            "crossGradient": 0.528,
+            "sourceRmse": 0.551
+          },
+          "findings": [
+            {
+              "code": "glb-fit-missing",
+              "detail": "plane has no glbFit — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-slabStep-legal",
+              "detail": "|gradient| 1.217 not within 0.15 of 0.5"
+            }
+          ]
+        }
+      },
+      {
+        "plane": "roof-8",
+        "stairRun": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 1.648,
+            "pitchDelta": 0.648,
+            "crossGradient": 1.61,
+            "sourceRmse": 0.666
+          },
+          "findings": [
+            {
+              "code": "glb-fit-missing",
+              "detail": "plane has no glbFit — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-stairRun-legal",
+              "detail": "|gradient| 1.648 not within 0.25 of 1"
+            }
+          ]
+        },
+        "slabStep": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 1.648,
+            "pitchDelta": 1.148,
+            "crossGradient": 1.61,
+            "sourceRmse": 0.666
+          },
+          "findings": [
+            {
+              "code": "glb-fit-missing",
+              "detail": "plane has no glbFit — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-slabStep-legal",
+              "detail": "|gradient| 1.648 not within 0.15 of 0.5"
+            }
+          ]
+        }
+      }
+    ],
+    "note": "stair-run / slab-step construction-legality evidence on the record's roof planes (GLB fit preferred; a voxelFit substitution is itself a named finding). Applied by S-104 (roof-as-program), recorded here as the fit-from-component seam's witness."
+  },
+  "census": {
+    "spikes": {
+      "before": 44,
+      "after": 36
+    },
+    "note": "protrusion census is contextual evidence — the heads' edit domain is small; the cage gates (IoU/closure/protect) are the decision layer."
+  },
+  "cage": {
+    "accepted": 1,
+    "rejected": 0,
+    "iou": {
+      "baseline": {
+        "+x+z": 0.9135,
+        "+x-z": 0.9299,
+        "-x-z": 0.9343,
+        "-x+z": 0.9226
+      },
+      "final": {
+        "+x+z": 0.9135,
+        "+x-z": 0.9299,
+        "-x-z": 0.9343,
+        "-x+z": 0.9226
+      }
+    },
+    "protect": {
+      "chimney": {
+        "ridgeY": 31,
+        "columns": 0
+      }
+    },
+    "regions": 6,
+    "note": "the opening-heads step judged by all three T-102 gates; a rejection rolls back and FAILS this runner loudly (the step exists to be applied)."
+  },
+  "trace": [
+    {
+      "step": "opening-heads",
+      "params": {
+        "radius": 1
+      },
+      "accepted": true,
+      "reasons": [],
+      "iouByAzimuth": {
+        "+x+z": {
+          "baseline": 0.9135,
+          "candidate": 0.9135,
+          "floor": 0.8935
+        },
+        "+x-z": {
+          "baseline": 0.9299,
+          "candidate": 0.9299,
+          "floor": 0.9099
+        },
+        "-x-z": {
+          "baseline": 0.9343,
+          "candidate": 0.9343,
+          "floor": 0.9143
+        },
+        "-x+z": {
+          "baseline": 0.9226,
+          "candidate": 0.9226,
+          "floor": 0.9026
+        }
+      },
+      "closure": {
+        "closed": true,
+        "reached": 0,
+        "inputReached": 0
+      },
+      "protect": {
+        "violations": 0
+      },
+      "census": {
+        "cells": 8745,
+        "spikes": 36,
+        "byExposure": [
+          4311,
+          2632,
+          1487,
+          279,
+          35,
+          1,
+          0
+        ],
+        "ragged": 92,
+        "columns": 665,
+        "raggedRate": 0.1383
+      },
+      "cells": {
+        "removed": 723,
+        "added": 118
+      }
+    }
+  ],
+  "reproducible": {
+    "doubleRun": true,
+    "sha256": "888b2c14b8bd1b26c4fc2c4f1d5b1d233d3cf04387a425f62e6a410051e37b59",
+    "determinism": "no LLM, no GL on the decision path; two in-process executions byte-matched."
+  },
+  "placements": {
+    "input": 9350,
+    "final": 8745
+  },
+  "renders": [
+    {
+      "when": "before",
+      "angle": "-x-z",
+      "path": "benchmarks/sculpture/shaped/gatehouse/view--x-z-before.png",
+      "unmapped": 0
+    },
+    {
+      "when": "before",
+      "angle": "+x+z",
+      "path": "benchmarks/sculpture/shaped/gatehouse/view-+x+z-before.png",
+      "unmapped": 0
+    },
+    {
+      "when": "after",
+      "angle": "-x-z",
+      "path": "benchmarks/sculpture/shaped/gatehouse/view--x-z-after.png",
+      "unmapped": 0
+    },
+    {
+      "when": "after",
+      "angle": "+x+z",
+      "path": "benchmarks/sculpture/shaped/gatehouse/view-+x+z-after.png",
+      "unmapped": 0
+    }
+  ],
+  "frames": [
+    "pr/assets/frames/shaped-gatehouse-before.png",
+    "pr/assets/frames/shaped-gatehouse-after.png"
+  ]
+}
