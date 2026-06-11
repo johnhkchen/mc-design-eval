@@ -20,10 +20,22 @@
 // math is src/form/resemblance.mjs composeSheet. This file owns the impure edges: GL renders, decode,
 // the metered judge calls, label drawing, file I/O, exit codes.
 //
+// JUDGE-REPLY ROBUSTNESS (T-114-01): a malformed judge reply is NOT a verdict. Each judged view
+// asks through the bounded reply policy (src/form/judge-reply.mjs): a reply either parses — then
+// it is FINAL, no re-ask ever (structurally: the policy cannot ask past a parsed reply) — or is
+// malformed and gets bounded re-asks (MAX_REPLY_ATTEMPTS total) with the SAME prompt and pinned
+// model (no corrective addendum — the instrument is byte-identical). Every reply, malformed ones
+// included, is committed on the view as the `replies[]` audit ledger. `--rejudge` completes the
+// I/O of a committed record: it re-judges ONLY views that exhausted to `unparsed` (seeding their
+// ledger with the committed malformed reply), copies — never recomputes — zones/coverage/
+// kitPresence/contract, and refuses to write unless gateInstrumentDiff proves every parsed
+// verdict byte-untouched. Rule 4 stands: the mode has no lens/threshold/angle parameter.
+//
 //   npm run gate:multi -- --subject cottage                       # the durable-skin artifact (label "current")
 //   npm run gate:multi -- --subject cottage --label baseline \
 //       --artifact concept-materials/cottage/after-artifact.json  # the proof baseline
 //   npm run gate:multi -- --subject cottage --offline             # re-assert the committed record (no GL/judge)
+//   npm run gate:rejudge -- --subject church --label challenge    # re-judge the record's unparsed views only
 //
 // Exit codes: 0 = decided PASS (or --offline record valid) · 1 = decided FAIL · 2 = REFUSAL.
 // Writes multi-angle/<subj>-<label>.{json,md} (committed) + per-view PNGs (gitignored) + the sheet →
@@ -39,8 +51,9 @@ import { createRequire } from "node:module";
 import { MULTI_ANGLE_GATE, PHASE1_MODEL_ID } from "../../src/config.mjs";
 import {
   buildMultiAngleViewPrompt, parseMultiAngleVerdict, aggregateMultiAngle, viewOutcomeLabel,
-  MULTI_ANGLE_GATE_SCHEMA,
+  gateInstrumentDiff, MULTI_ANGLE_GATE_SCHEMA,
 } from "../../src/form/multi-angle-gate.mjs";
+import { runReplyPolicy, MAX_REPLY_ATTEMPTS } from "../../src/form/judge-reply.mjs";
 import {
   kitPresence, composeKitAwareVerdict, KIT_PRESENCE_SCHEMA,
 } from "../../src/form/kit-presence.mjs";
@@ -184,6 +197,35 @@ function policyInShippedPalette(zones, { matMap, gridResult, artifact, kitOverri
   return { zones: vocab.zones, substitution, kitOverrides, ship: vocab.sub, vocabulary: vocab };
 }
 
+/** The METERED ask through the reply policy (T-114-01). One thunk per view, closed over the
+ *  FIXED prompt + pinned model once — every re-ask is byte-identical by construction. `seed`
+ *  enters a committed malformed reply as attempt 1 (the --rejudge path). */
+async function judgeThroughPolicy({ slug, angle, azimuthDeg, triptychBuf, seed = [] }) {
+  const { requestTextWithImage } = await import("../../src/sdk-binding.mjs");
+  const prompt = buildMultiAngleViewPrompt(angle, azimuthDeg); // built ONCE — no per-attempt mutation
+  const ask = async () => {
+    const { text, raw } = await requestTextWithImage({
+      prompt,
+      images: [{ data: triptychBuf, mediaType: "image/png" }],
+      model: PHASE1_MODEL_ID,
+    });
+    return {
+      text,
+      usage: raw?.usage
+        ? { input_tokens: raw.usage.input_tokens, output_tokens: raw.usage.output_tokens, cost_usd: raw.total_cost_usd ?? null }
+        : null,
+    };
+  };
+  const out = await runReplyPolicy(ask, { parse: parseMultiAngleVerdict, seed });
+  for (const r of out.replies) {
+    if (!r.parsed && r.source === "live") {
+      console.error(`[${slug}] ${angle}: malformed reply, attempt ${r.attempt}/${MAX_REPLY_ATTEMPTS} — ` +
+        `${r.parseError}${r.attempt < MAX_REPLY_ATTEMPTS ? " — re-asking (same prompt, same model)" : ""}`);
+    }
+  }
+  return out;
+}
+
 async function main() {
   const argv = process.argv.slice(2);
   const arg = (name) => (argv.includes(name) ? argv[argv.indexOf(name) + 1] : null);
@@ -216,12 +258,28 @@ async function main() {
           expect.passed === rec.overall.passed && expect.refusal === rec.overall.refusal &&
           (rec.kitPresence.ran === false || rec.kitPresence.schema === KIT_PRESENCE_SCHEMA);
       })(),
+      // T-114 (additive — records without replies[] stay valid): the committed ledger must show
+      // the policy's invariants — bounded, parsed only as the LAST entry (no re-roll is visible
+      // in the artifact itself), and verdict present iff the last reply parsed.
+      replies: (rec.views ?? []).every((v) => !v.replies || (
+        Array.isArray(v.replies) && v.replies.length >= 1 && v.replies.length <= MAX_REPLY_ATTEMPTS &&
+        v.replies.every((r, i) => r && typeof r.parsed === "boolean" &&
+          (!r.parsed || i === v.replies.length - 1)) &&
+        !!v.verdict === v.replies.at(-1).parsed
+      )),
+      // T-114 (additive): a re-judged record carries its own instrument proof.
+      rejudge: !rec.rejudge || (
+        Array.isArray(rec.rejudge.angles) && rec.rejudge.angles.length >= 1 &&
+        Array.isArray(rec.rejudge.instrumentDiff) && rec.rejudge.instrumentDiff.length === 0
+      ),
     };
     const ok = Object.values(checks).every(Boolean);
     console.error(`[offline] ${slug}: schema ${checks.schema ? "OK" : "BAD"}; contract ${checks.contract ? "OK" : "VIOLATED"}; ` +
       `views ${checks.views ? "OK" : "BAD"}; T-088 short-circuit ${checks.shortCircuit ? "OK" : "VIOLATED"}; ` +
       `aggregate ${checks.aggregate ? "well-formed" : "MALFORMED"}; sheet ${checks.sheet ? "present" : "MISSING"}; ` +
-      `kit-aware ${rec.kitPresence ? (checks.kitAware ? "consistent" : "INCONSISTENT") : "n/a (pre-T-100)"} — ` +
+      `kit-aware ${rec.kitPresence ? (checks.kitAware ? "consistent" : "INCONSISTENT") : "n/a (pre-T-100)"}; ` +
+      `replies ${(rec.views ?? []).some((v) => v.replies) ? (checks.replies ? "ledger OK" : "LEDGER VIOLATED") : "n/a (pre-T-114)"}; ` +
+      `rejudge ${rec.rejudge ? (checks.rejudge ? "instrument-clean" : "INSTRUMENT DIRTY") : "n/a"} — ` +
       `recorded outcome: ${rec.aggregate?.decided ? (rec.aggregate.passed ? "PASS" : "FAIL") : `REFUSAL (${rec.aggregate?.refusal})`}` +
       (rec.overall ? ` → kit-aware ${rec.overall.decided ? (rec.overall.passed ? "PASS" : "FAIL") : `REFUSAL (${rec.overall.refusal})`}` : ""));
     if (!ok) process.exitCode = 1;
@@ -380,23 +438,17 @@ async function main() {
         const triptych = composeTriptych([conceptPanel, meshPanel, viewPanel], { gutter: RESEMBLANCE_DEFAULTS.gutter });
         const triptychBuf = encodeRgbaToPng(triptych.data, triptych.w, triptych.h);
         await writeFile(join(viewsDir, `judged-${a.replace(/[+]/g, "p").replace(/-/g, "m")}.png`), triptychBuf);
-        const { requestTextWithImage } = await import("../../src/sdk-binding.mjs");
-        const { text, raw } = await requestTextWithImage({
-          prompt: buildMultiAngleViewPrompt(a, az),
-          images: [{ data: triptychBuf, mediaType: "image/png" }],
-          model: PHASE1_MODEL_ID,
-        });
-        view.judge = {
-          model: PHASE1_MODEL_ID,
-          usage: raw?.usage ? { input_tokens: raw.usage.input_tokens, output_tokens: raw.usage.output_tokens, cost_usd: raw.total_cost_usd ?? null } : null,
-        };
-        try {
-          view.verdict = parseMultiAngleVerdict(text);
-        } catch (e) {
+        const { verdict, replies } = await judgeThroughPolicy({ slug, angle: a, azimuthDeg: az, triptychBuf });
+        view.replies = replies;
+        view.judge = { model: PHASE1_MODEL_ID, usage: replies.at(-1).usage };
+        if (verdict) {
+          view.verdict = verdict;
+        } else {
+          // every attempt malformed — the bound is exhausted; unparsed keeps its meaning downstream
           view.unparsed = true;
-          view.parseError = e.message;
-          view.rawReply = typeof text === "string" ? text.slice(0, 400) : null;
-          console.error(`[${slug}] ${a}: UNPARSED judge reply — ${e.message}`);
+          view.parseError = replies.at(-1).parseError;
+          view.rawReply = replies.at(-1).rawReply;
+          console.error(`[${slug}] ${a}: UNPARSED after ${replies.length}/${MAX_REPLY_ATTEMPTS} attempts — ${view.parseError}`);
         }
         if (view.verdict) {
           console.error(`[${slug}] ${a} (${az}°): ${view.verdict.verdict}` +
