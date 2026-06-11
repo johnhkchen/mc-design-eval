@@ -65,6 +65,12 @@ before(async () => {
     /* 6 */ { fn: "CritiqueWorkshopRound", mode: "parse", text: read(`${CRIT}/reply-revise.txt`) },
     /* 7 */ { fn: "CritiqueWorkshopRound", mode: "parse", text: read(`${CRIT}/reply-done.txt`) },
     /* 8 */ { fn: "CritiqueWorkshopRound", mode: "parse", text: "The roof looks flat; I would revise it." },
+    /*  9 */ { fn: "AuthorMaterialStory", mode: "render", args: readJson("src/baml/fixtures/vernacular/inputs.json") },
+    /* 10 */ { fn: "AuthorMaterialStory", mode: "parse", text: read("src/baml/fixtures/vernacular/reply.txt") },
+    /* 11 */ { fn: "AuthorMaterialStory", mode: "parse", text: "It is a cold place; they build with what they have." },
+    /* 12 */ { fn: "DecomposeBrushBacklog", mode: "render", args: readJson("src/baml/fixtures/decompose/inputs.json") },
+    /* 13 */ { fn: "DecomposeBrushBacklog", mode: "parse", text: read("src/baml/fixtures/decompose/reply.txt") },
+    /* 14 */ { fn: "DecomposeBrushBacklog", mode: "parse", text: "You need a roof brush and a wall brush." },
   ]);
 });
 
@@ -102,4 +108,30 @@ test("FX-C2 b.parse over the canonical replies equals the pinned expectations (r
 
 test("FX-C3 a malformed critique reply rejects (prose is not a reply)", () => {
   assert.equal(R[8].ok, false);
+});
+
+test("FX-V1 vernacular renders stably from the minted inputs and parses the minted reply", () => {
+  assert.ok(R[9].ok, R[9].error);
+  assert.equal(R[9].prompt, read("src/baml/fixtures/vernacular/prompt.txt"), "vernacular prompt drifted from mint");
+  assert.equal(sha256(R[9].prompt), readJson("src/baml/fixtures/vernacular/ledger.json").promptSha256);
+  assert.ok(R[10].ok, R[10].error);
+  assert.deepEqual(dropNulls(R[10].parsed), readJson("src/baml/fixtures/vernacular/expected.json"));
+  assert.equal(R[11].ok, false, "prose is not a material story");
+});
+
+test("FX-D1 decompose renders stably from the minted inputs and parses the minted reply", () => {
+  assert.ok(R[12].ok, R[12].error);
+  assert.equal(R[12].prompt, read("src/baml/fixtures/decompose/prompt.txt"), "decompose prompt drifted from mint");
+  assert.equal(sha256(R[12].prompt), readJson("src/baml/fixtures/decompose/ledger.json").promptSha256);
+  assert.ok(R[13].ok, R[13].error);
+  const parsed = dropNulls(R[13].parsed);
+  assert.deepEqual(parsed, readJson("src/baml/fixtures/decompose/expected.json"));
+  // the schema forces the T-131 duplicate-vs-registry distinction, both ways
+  assert.ok(parsed.items.length > 0, "new needs become work items");
+  assert.ok(parsed.parametrization_notes.length > 0, "owned coverage becomes notes, not duplicates");
+  // PINNED LENIENCY: a class of ONLY array fields never rejects — SAP degrades any malformed
+  // reply (prose included) to the EMPTY backlog. The T-131 runner's reply gate must therefore
+  // classify the empty union (no items AND no notes) as MALFORMED; b.parse alone cannot.
+  assert.ok(R[14].ok, "SAP leniency: prose coerces to an empty backlog (see note)");
+  assert.deepEqual(dropNulls(R[14].parsed), { items: [], parametrization_notes: [] });
 });

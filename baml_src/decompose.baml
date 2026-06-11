@@ -7,6 +7,10 @@
 //
 // Transport rides the subscription shim via the bridge (ClaudeStub is render-only). Fixture:
 // one live-minted reply committed under src/baml/fixtures/decompose/ (T-114 ledger).
+//
+// PARSE LENIENCY (pinned by FX-D1): a class of only array fields never rejects — SAP degrades
+// any malformed reply to the EMPTY backlog. The consuming runner (T-131) must classify the
+// empty union (no items AND no notes) as MALFORMED for the re-ask policy; b.parse alone cannot.
 
 class BrushWorkItem {
   name string @description("registry-style brush name: lowercase, dotted family, e.g. roof.gable")

@@ -163,6 +163,22 @@ function paramDocLines(schema) {
 }
 
 /**
+ * One-line-per-brush digest of the registry — the BAML decomposition function's
+ * `registry_state` input (T-129-01): name, kind, composition, parameter names with kinds.
+ * Pure and deterministic; what the factory model reads to avoid requesting brushes we own.
+ */
+export function registryDigest(registry = BRUSH_REGISTRY) {
+  const kindOf = (v) => v.type ?? (v.enum ? v.enum.join("|") : "any");
+  const paramLine = (schema) =>
+    Object.entries(schema?.properties ?? {}).map(([k, v]) => `${k}: ${kindOf(v)}`).join(", ") || "none";
+  return Object.entries(registry)
+    .map(([name, b]) =>
+      `- ${name} (${b.kind}; consumes ${b.composition.consumes.join("+")}, ` +
+      `emits ${b.composition.emits.join("+")}) — params: ${paramLine(b.paramsSchema)}`)
+    .join("\n");
+}
+
+/**
  * The committed catalog page: every brush — kind, source, tests, composition, parameter docs,
  * preview plot location — plus the deliberate non-brushes and THE COUNT.
  * @param {{plots:object[], renders?:{file:string, sha256:string}[]}} p layout plots + runner receipts

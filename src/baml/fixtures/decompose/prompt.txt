@@ -1,0 +1,91 @@
+You are the design-backlog factory of a Minecraft pattern-book builder. A formed STYLE and
+the CURRENT BRUSH REGISTRY follow. A brush is a parametrized, composable, unit-tested build
+technique (a gable course, a timber panel rhythm, a dormer, a weathering pass) — designed
+once, reused everywhere.
+
+Decompose the style into the brushes it needs to be buildable. For each need, FIRST check
+the registry:
+- if an owned brush already covers it (directly or via its parameters), emit a
+  parametrization_note naming that brush — NEVER a duplicate work item;
+- otherwise emit a work item: a self-contained draft spec another engineer can implement
+  without you, named the way the registry names brushes.
+
+Work items are DRAFTS for human promotion — self-contained, never scheduled by you. Keep the
+list honest: only brushes THIS style actually needs to read as itself, ordered most-needed
+first.
+
+## The formed style
+Style: rustic — An English yeoman farmstead family (Tudor/farmstead vernacular) on pastured lowland with a small stone quarry, managed oak coppice, and a sawpit — the cottage and the tithe barn are both buildings of this one place, so they draw on the same materials.
+
+Palette (role → block — the diegetic material assignments):
+- wall.field.ground → cobblestone: Ground-storey wall fields are the cheap material: uncoursed rubble fieldstone (the barn's recessed panels; the vernacular default a concept may override with dressed stone, as the cottage's ashlar ground storey does).
+- wall.dressing → stone_bricks: Quoins, buttress piers, plinth courses, jambs and heads are dressed quarry stone — crisp coursed blocks spent only where structure or weather demands them (the cottage/barn near-tone grey pair, kept distinct from the rubble field).
+- frame.timber → dark_oak_log: The half-timber frame — corner posts, studs, eaves beams — is heavy coppice oak with visible round grain; near-black against the cream panels it carries.
+- wall.infill.upper → white_terracotta: Upper-storey panels between the frame timbers are lime plaster over wattle — warm matte cream, never pure white, never used at ground level (rain-splash).
+- roof.field → spruce_planks: Roof slopes are sawpit plank courses — warm medium brown, flatter grain and clearly lighter than the frame oak (the cottage roof field; a concept may darken the whole roof toward the oak, as the barn does).
+- roof.trim → dark_oak_planks: Eaves, verge and rake fascia are boarded in the darker oak — the deep edge banding both concepts show over the lighter roof field (and the barn's whole-roof dominant).
+- roof.course → spruce_stairs: The stepped roof course realization of the sawn-plank field — the stair member of the roof family the generators emit.
+- roof.step → spruce_slab: The half-step member of the roof family — shallow-pitch landings and ridge half-caps.
+- chimney.cap → bricks: Chimney caps are the one brick element — fire-safe kiln brick crowning the cool fieldstone shaft, warm-on-cool (the cottage's red cap).
+- door.main → spruce_door: Door leaves are sawn boards — warm panelled timber set in stone reveals.
+- door.wagon → oak_planks: Barn wagon-door leaves are bright golden sawn boarding — the lighter, warmer timber kept distinct from the dark roof above (the barn's opening fill).
+- window.shutter → dark_oak_trapdoor: Shutters and slatted window fills are coppice-oak lattice — the gridded reveal both storeys of the cottage show.
+- window.infill → spruce_fence: Open lattice fills for unglazed lights — thin sawn members reading as leaded/lattice grid.
+
+Idioms in use: roof.gable, roof.hip, roof.pyramid, dormer, chimney, jetty, plinth, arch, head.flat, course.stairs, course.slab, timber-frame, opening-dressing, hollow, floorplan.
+Proportions: storey height 3–4 blocks; pitch classes [1]; opening spacing 2–5 cells.
+
+## The brush registry (what we already own)
+- roof.gable (construct; consumes spec, emits cells) — params: pitch: number, blocks: object
+- roof.hip (construct; consumes spec, emits cells) — params: pitch: number, blocks: object
+- roof.pyramid (construct; consumes spec, emits cells) — params: pitch: number, blocks: object
+- arch (construct; consumes spec, emits cells) — params: block: string
+- head.flat (construct; consumes spec, emits cells) — params: block: string
+- course.stairs (construct; consumes spec, emits cells) — params: block: string, winding: walk|soffit
+- course.slab (construct; consumes spec, emits cells) — params: block: string, kind: bottom|top|double
+- dormer (construct; consumes spec, emits cells) — params: width: integer, depth: integer, wallHeight: integer, wallBlock: string, roofBlock: string, faceBlock: string, ridgeBlock: string, aperture: object
+- chimney (construct; consumes spec, emits cells) — params: footprint: object, height: integer, block: string, cap: crown|slab|, capBlock: string
+- jetty (construct; consumes spec, emits cells) — params: overhang: integer, joistEvery: integer, beamBlock: string, joistBlock: string,null
+- plinth (construct; consumes spec, emits cells) — params: courses: integer, inset: integer, block: string
+- timber-frame (pass; consumes occupancy+kit+zones, emits placements+report) — params: none
+- opening-dressing (pass; consumes occupancy+features+kit, emits placements+report) — params: none
+- hollow (pass; consumes occupancy, emits removeSet+report) — params: none
+- floorplan (pass; consumes occupancy+features+spec, emits placements+report) — params: none
+- surface.fill (pass; consumes occupancy+zones, emits placements+report) — params: skin: projection|exposure, minRun: integer
+- surface.paint (pass; consumes occupancy+spec, emits placements+report) — params: priority: array
+- surface.roof-courses (pass; consumes occupancy+zones, emits placements+report) — params: none
+- surface.strip-salt (pass; consumes occupancy+zones, emits placements+report) — params: minKeep: integer, minExtent: integer
+
+Answer in JSON using this schema:
+{
+  items: [
+    {
+      // registry-style brush name: lowercase, dotted family, e.g. roof.gable
+      name: string,
+      // one sentence: what it paints/builds and where THIS style uses it
+      purpose: string,
+      // the parameters and their kinds, as a compact schema-like sketch
+      parameter_sketch: string,
+      // what it chains with; what must run before/after
+      composition_notes: string,
+      // the unit tests that would pin it
+      test_plan: string,
+      // the synthetic substrate its preview card renders on
+      preview_subject: string,
+      // 2-4 sentences of background a stranger needs to implement it
+      context: string,
+      // 3-6 verifiable checkboxes
+      acceptance_criteria: string[],
+    }
+  ],
+  parametrization_notes: [
+    {
+      // the style's need, in one line
+      need: string,
+      // the owned registry brush that covers it
+      existing_brush: string,
+      // how to parametrize the owned brush for this need
+      note: string,
+    }
+  ],
+}

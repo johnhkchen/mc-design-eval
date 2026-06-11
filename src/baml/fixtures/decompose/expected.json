@@ -1,0 +1,147 @@
+{
+  "items": [
+    {
+      "name": "opening-fill",
+      "purpose": "Fills each dressed aperture with its leaf or lattice member — spruce_door leaves, oak_planks wagon boarding, dark_oak_trapdoor shutters, spruce_fence lattice — so every opening in the cottage and barn reads as doored/shuttered/glazed rather than a void.",
+      "parameter_sketch": "{ kind: 'door'|'wagon'|'shutter'|'lattice', block: string, aperture: { at:[x,y,z], w:int, h:int, facing:'N'|'S'|'E'|'W' }, hinge?: 'left'|'right', coursing?: 'full'|'slatted' }",
+      "composition_notes": "Runs AFTER opening-dressing (jambs/heads must exist to seat against) and AFTER hollow (the aperture void must already be cut). Reads the same feature list opening-dressing consumes. Emits only inside the aperture — never widens it, never touches the stone reveal. The head above is formed by head.flat or arch; this brush owns the fill, not the frame.",
+      "test_plan": "door kind fills full aperture height and faces the declared wall normal; wagon kind tiles oak_planks edge-to-edge across a multi-cell opening with zero internal gaps; shutter kind hangs trapdoors off the jambs leaving the central light open; lattice kind emits connected spruce_fence with no floating segments; a degenerate 0-area aperture emits nothing; no emitted cell lands outside the aperture bounds; re-run on an already-filled aperture is a no-op.",
+      "preview_subject": "A single 1-block-thick dressed stone wall panel with one 2×3 aperture cut into it, rendered four times — once per kind (door, wagon, shutter, lattice).",
+      "context": "This style sets every door and window into a stone reveal, and the member that fills the aperture is a diegetic material deliberately distinct from the wall around it: golden oak_planks wagon boarding, near-black dark_oak_trapdoor shutters, spruce_fence reading as leaded lattice, panelled spruce_door leaves. The owned opening-dressing brush builds the stone jambs and heads but leaves the hole empty, so without a fill pass the build reads as a ruin. Minecraft's openable/directional blocks (doors, trapdoors, fences) carry facing and hinge state that must be resolved from the wall normal or they face inward. The barn's wagon door is a single wide multi-cell opening boarded solid, whereas cottage lights are narrow single apertures that take shutters or lattice.",
+      "acceptance_criteria": [
+        "Every aperture in the feature list receives a fill; none is left void",
+        "Door/trapdoor facing matches the aperture's outward wall normal",
+        "wagon kind tiles oak_planks across multi-cell openings with no internal gaps",
+        "lattice kind emits only connected spruce_fence (no floating segments)",
+        "No fill cell lands outside the aperture bounds — jambs and heads untouched",
+        "Re-running on an already-filled aperture changes nothing (idempotent)"
+      ]
+    },
+    {
+      "name": "corner-dressing",
+      "purpose": "Lays alternating dressed-stone quoins up the external vertical corners of a stone storey — the cottage's ashlar ground-storey angles in stone_bricks, read against the rubble/plaster field between them.",
+      "parameter_sketch": "{ block: string, pattern: 'alternating'|'every', longFace: int, shortFace: int, fromY: int, toY: int }",
+      "composition_notes": "Runs AFTER surface.fill has laid the rubble field (quoins overwrite the corner cells) and is independent of opening-dressing; both read corners-vs-edges from occupancy. A zone/Y restriction keeps it on stone storeys only — it must not overwrite the timber corner posts that timber-frame already places on the upper storey.",
+      "test_plan": "quoins land only on convex vertical corners derived from occupancy; alternating pattern flips the long and short return face each course; application is bounded to fromY..toY; a corner cell already owned by a timber post is skipped, not overwritten; the rubble field cell at the corner is overwritten (no field showing through); re-run is idempotent.",
+      "preview_subject": "A short hollow stone box (5×5×4) so all four external convex corners are visible, rubble-filled, with quoins applied up each angle.",
+      "context": "In dressed-stone vernacular a building's external corners are reinforced with quoins — larger coursed blocks laid alternating long-face / short-face up the angle — which visually separate the structural corner from the cheaper rubble or plaster field between them. Here the cottage's ashlar ground storey carries stone_bricks quoins against a cobblestone field, one of the cues that distinguishes its dressed ground storey from the barn's plain rubble. The brush must detect convex vertical corners from occupancy and course the quoins without disturbing the half-timber posts that occupy the same corners on the storey above. Because quoins only read on masonry, the brush is band-restricted to the stone storey via fromY/toY.",
+      "acceptance_criteria": [
+        "Quoins placed only on convex vertical corners derived from occupancy",
+        "Alternating pattern flips long/short return face on every course",
+        "Application is bounded to the fromY..toY (stone-storey) band",
+        "Cells already owned by a timber corner post are skipped",
+        "Field cells at the corner are overwritten, not left showing through",
+        "Idempotent on re-run"
+      ]
+    },
+    {
+      "name": "buttress",
+      "purpose": "Builds engaged dressed-stone buttress piers that step out from a long rubble wall with sloped weathering set-offs — the tithe barn's signature wall bracing and a primary silhouette cue that the long shed is a tithe barn.",
+      "parameter_sketch": "{ block: string, capBlock?: string, depth: int, width: int, height: int, setOffs: int, spacing: int|'auto', faces: Array<'N'|'S'|'E'|'W'> }",
+      "composition_notes": "Runs AFTER the wall occupancy and surface.fill exist; the pier is additive mass outside the wall plane. Reads the feature list to skip bays occupied by wagon doors or windows, and clamps height to the eave line. The weathering set-off slopes can be realized by chaining course.stairs / course.slab for the steps, or by emitting stepped cells directly.",
+      "test_plan": "piers distribute at even bays along each named wall face; each pier projects `depth` from the wall plane and tapers inward over `setOffs` steps; bays containing a door or window feature are skipped; pier height clamps at or below the eave; opposite-wall buttresses are mirror-symmetric; set-off slopes face outward and downward (shed rain, not catch it).",
+      "preview_subject": "A long straight rubble wall segment (12×1×5) with three buttresses ranged along one face.",
+      "context": "A tithe barn's long rubble walls are braced at intervals by buttresses — dressed-stone piers projecting from the wall face and stepping back as they rise via sloped weathering set-offs that throw off rainwater. They are among the strongest cues that a long shed reads as a tithe barn rather than a generic hall, so the barn needs them to read as itself. The brush adds mass outside the wall plane at regular bays, skipping any bay occupied by the big wagon doors, and clamps each pier's height to the eave. The set-offs are the diagonal stone weatherings; chaining the owned course.stairs/course.slab brushes gives them their stepped slope.",
+      "acceptance_criteria": [
+        "Piers distributed at even bays along the named wall faces",
+        "Each pier projects `depth` from the wall plane and tapers over `setOffs` steps",
+        "Bays containing a door or window feature are skipped",
+        "Pier height clamps at or below the eave line",
+        "Buttresses on opposite walls are mirror-symmetric",
+        "Weathering set-off slopes face outward/downward (shed rain)"
+      ]
+    }
+  ],
+  "parametrization_notes": [
+    {
+      "need": "Ground-storey rubble fieldstone wall fields (cobblestone), reading as uncoursed.",
+      "existing_brush": "surface.fill",
+      "note": "skin:'exposure' with minRun kept low so the field reads as broken rubble rather than coursed; cobblestone is supplied by the kit, not a param. Pair with surface.paint to settle the field block after framing."
+    },
+    {
+      "need": "Settle/repair the wall field to the field block after the frame breaks runs.",
+      "existing_brush": "surface.paint",
+      "note": "priority:['cobblestone', ...] so kept runs adopt the ground field block; runs after timber-frame and surface.fill."
+    },
+    {
+      "need": "Half-timber frame (dark_oak_log) with cream lime-plaster infill panels (white_terracotta).",
+      "existing_brush": "timber-frame",
+      "note": "No params — the kit maps frame.timber→dark_oak_log and wall.infill.upper→white_terracotta, and zones restrict infill to the upper storey only (never ground level — rain-splash rule)."
+    },
+    {
+      "need": "Steep gable roof slopes at the single pitch class, in plank courses.",
+      "existing_brush": "roof.gable",
+      "note": "pitch:1 (the only pitch class); blocks:{ field:'spruce_planks', trim:'dark_oak_planks', ridge:'dark_oak_planks' } — the roof.field/roof.trim family rides the blocks object."
+    },
+    {
+      "need": "Hipped or pyramidal roof masses where a concept's silhouette shows them.",
+      "existing_brush": "roof.hip",
+      "note": "Same blocks object and pitch:1 as roof.gable; use roof.hip or roof.pyramid per concept silhouette (e.g. a porch or tower cap)."
+    },
+    {
+      "need": "Stepped roof-course realization of the sawn-plank field (spruce_stairs).",
+      "existing_brush": "course.stairs",
+      "note": "block:'spruce_stairs', winding:'walk' on the slope and 'soffit' under the eaves — this is roof.course."
+    },
+    {
+      "need": "Half-step roof member — ridge half-caps and shallow landings (spruce_slab).",
+      "existing_brush": "course.slab",
+      "note": "block:'spruce_slab', kind:'bottom'|'top' for ridge half-caps and shallow-pitch landings — this is roof.step."
+    },
+    {
+      "need": "Lay the roof field as the stair/slab course family over the slope.",
+      "existing_brush": "surface.roof-courses",
+      "note": "No params; consumes zones and emits the spruce_stairs/spruce_slab course family across the gable/hip surface."
+    },
+    {
+      "need": "Dressed plinth courses at the wall base (stone_bricks).",
+      "existing_brush": "plinth",
+      "note": "block:'stone_bricks', courses:1–2, inset per concept; this is the plinth-course application of wall.dressing."
+    },
+    {
+      "need": "Stone jambs and heads dressing around openings (stone_bricks).",
+      "existing_brush": "opening-dressing",
+      "note": "No params; the kit maps wall.dressing→stone_bricks and the brush dresses jambs/heads from the feature list. Pairs with opening-fill, which fills the aperture afterward."
+    },
+    {
+      "need": "Flat dressed lintels over square-headed openings (stone_bricks).",
+      "existing_brush": "head.flat",
+      "note": "block:'stone_bricks' for openings whose concept head is flat/square."
+    },
+    {
+      "need": "Arched openings, including the barn wagon arch (stone_bricks).",
+      "existing_brush": "arch",
+      "note": "block:'stone_bricks'; fits the arch into the aperture for round-headed openings."
+    },
+    {
+      "need": "Cottage roof dormers.",
+      "existing_brush": "dormer",
+      "note": "wallBlock:'white_terracotta', roofBlock:'spruce_planks', ridgeBlock:'dark_oak_planks', faceBlock:'dark_oak_log'; width/depth/wallHeight to scale, aperture per light (fill via opening-fill)."
+    },
+    {
+      "need": "Jettied upper storey overhanging on dark-oak beams.",
+      "existing_brush": "jetty",
+      "note": "overhang:1, joistEvery per bay, beamBlock:'dark_oak_log', joistBlock:'dark_oak_log' (or null where the soffit is closed)."
+    },
+    {
+      "need": "Chimney with a fire-safe red brick cap on a cool fieldstone shaft.",
+      "existing_brush": "chimney",
+      "note": "footprint+height per concept, block:'cobblestone' (cool shaft), cap:'crown', capBlock:'bricks' (the one brick element, warm-on-cool)."
+    },
+    {
+      "need": "Hollow the shell so it isn't a solid mass.",
+      "existing_brush": "hollow",
+      "note": "No params; consumes occupancy and returns the interior removeSet — the eave must remain the widest layer (no floor cutting it back)."
+    },
+    {
+      "need": "Interior floor / wallTop lines.",
+      "existing_brush": "floorplan",
+      "note": "No params; consumes occupancy+features+spec and supplies the floor and wallTop lines for the storeys."
+    },
+    {
+      "need": "Clear residual own-vocabulary specks left when dressing breaks runs.",
+      "existing_brush": "surface.strip-salt",
+      "note": "minKeep/minExtent tuned so isolated speck strips clear while kept lines survive — the dressing-residue cleanup pass."
+    }
+  ]
+}
