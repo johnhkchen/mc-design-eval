@@ -408,18 +408,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof / top of structure",
+            "region": "entire roof / top of structure",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "walls (whole body)",
+            "region": "walls vs roof across the whole building",
             "attribute": "material zoning",
             "severity": "major"
           },
           {
-            "region": "overall body / interior",
-            "attribute": "massing",
+            "region": "front doorway / arched entrance",
+            "attribute": "form",
             "severity": "minor"
           }
         ]
@@ -431,18 +431,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof/top of structure",
+            "region": "whole structure — walls versus roof",
+            "attribute": "material zoning",
+            "severity": "major"
+          },
+          {
+            "region": "roof and upper body of the building",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "overall body — open hollow interior visible",
-            "attribute": "massing",
-            "severity": "major"
-          },
-          {
-            "region": "walls vs roof",
-            "attribute": "material zoning",
+            "region": "front entrance wall",
+            "attribute": "form",
             "severity": "minor"
           }
         ]
@@ -454,18 +454,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof / top of structure",
+            "region": "roof / entire top of the structure",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "walls vs roof across the whole body",
+            "region": "walls vs roof across the whole building",
             "attribute": "material zoning",
             "severity": "major"
           },
           {
-            "region": "interior / overall body",
-            "attribute": "massing",
+            "region": "upper wall courses near the eaves",
+            "attribute": "palette",
             "severity": "minor"
           }
         ]
@@ -477,17 +477,17 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof / top of structure",
-            "attribute": "form",
-            "severity": "major"
-          },
-          {
-            "region": "overall body / interior",
+            "region": "roof / top of the building",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "walls vs roof",
+            "region": "all four walls",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "front entrance",
             "attribute": "material zoning",
             "severity": "minor"
           }
@@ -591,7 +591,7 @@
   "reproducible": {
     "doubleRun": "byte-identical (in-process)",
     "sha256": {
-      "base": "789c7e9119756bd4d8978076488aeb9293b1ab4e5614dc43d888e5a94513b630",
+      "base": "d89948d66990c739318a6ed2b6d8b28831394a02974cfa52a9d9ee780f28afaa",
       "grammarFinal": "9cbf86f9497ca968d5e4a10ca6a6493655861a773e7c44f01c9985d7e6e4bf3c",
       "styled": "80c904c7861f24e3cc978497955e5fb0f50c4664887f6162716700a253eabf01",
       "fit": "1141a8f2d6730481d560bae65d0e4f1a6830572ee0e4bd0ded05fd4304e17176"

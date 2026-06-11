@@ -116,10 +116,13 @@ export function generateProvision(fit, { family, policy, bands = null, sheetBloc
     }
     const gen = generateRoof(roof.gables, family);
     for (const c of gen.cells) {
-      // sheet (fascia) courses carry the concept's fascia dominant — full course cells only,
-      // never the shaped stair/slab vocabulary (their family identity is the program's)
-      const isSheet = sheetBlock && c.form !== "fixture" && gen.sheetKeys.has(c.pos.join(","));
-      roofCells.push(isSheet ? { ...c, block: ns(sheetBlock) } : c);
+      // FASCIA: sheet (verge/eave overhang) courses AND the wedge's bottom (eave) course carry the
+      // concept's roof dominant — the dark eave/fascia edge every concept draws, and the guarantee
+      // that the concept-derived roof-zone dominant exists in the generated manifest (the skin's
+      // palette discipline). Full course cells only, never the shaped stair/slab vocabulary.
+      const isFascia = sheetBlock && c.form !== "fixture" &&
+        (gen.sheetKeys.has(c.pos.join(",")) || c.pos[1] === gen.bandFloor);
+      roofCells.push(isFascia ? { ...c, block: ns(sheetBlock) } : c);
       roofProvenance.push(`roof:${roof.massId}`);
     }
     for (const key of gen.sheetKeys) {

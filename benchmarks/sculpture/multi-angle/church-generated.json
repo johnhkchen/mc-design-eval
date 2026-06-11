@@ -1,0 +1,1641 @@
+{
+  "schema": "multi-angle-gate/v1",
+  "subject": "church",
+  "label": "generated",
+  "artifact": {
+    "path": "benchmarks/sculpture/generated/church/artifact.json",
+    "sha256": "77409a8613aa39ed8a094bc55691c04abcbbb862e53d958fe3062cfcc5511a9e"
+  },
+  "contract": {
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "elevationDeg": 30,
+    "width": 512,
+    "height": 512,
+    "gapBudget": 2,
+    "coverageThreshold": 0.5,
+    "note": "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them"
+  },
+  "zones": {
+    "source": "concept",
+    "reason": null,
+    "policy": {
+      "band0": {
+        "dominant": "stone",
+        "preserve": [
+          "polished_andesite",
+          "polished_basalt",
+          "black_stained_glass"
+        ],
+        "splat": [
+          "polished_andesite",
+          "polished_basalt",
+          "black_stained_glass"
+        ]
+      },
+      "roof": {
+        "dominant": "dark_oak_planks",
+        "preserve": [
+          "black_stained_glass",
+          "polished_basalt",
+          "polished_andesite",
+          "stone",
+          "spruce_stairs",
+          "spruce_slab"
+        ],
+        "splat": [
+          "black_stained_glass",
+          "polished_basalt",
+          "polished_andesite",
+          "stone"
+        ]
+      }
+    },
+    "substitutionApplied": {
+      "cobblestone": "stone",
+      "stone_bricks": "polished_basalt"
+    },
+    "kitOverridesApplied": {},
+    "vocabulary": {
+      "schema": "material-vocabulary/v1",
+      "policySpace": "named",
+      "guarded": true,
+      "substitution": {
+        "cobblestone": "stone",
+        "stone_bricks": "polished_basalt"
+      },
+      "kitOverrides": {},
+      "zones": {
+        "band0": {
+          "dominant": "stone",
+          "preserve": [
+            "polished_andesite",
+            "polished_basalt",
+            "black_stained_glass"
+          ],
+          "splat": [
+            "polished_andesite",
+            "polished_basalt",
+            "black_stained_glass"
+          ]
+        },
+        "roof": {
+          "dominant": "dark_oak_planks",
+          "preserve": [
+            "black_stained_glass",
+            "polished_basalt",
+            "polished_andesite",
+            "stone",
+            "spruce_stairs",
+            "spruce_slab"
+          ],
+          "splat": [
+            "black_stained_glass",
+            "polished_basalt",
+            "polished_andesite",
+            "stone"
+          ]
+        }
+      },
+      "treatmentSlots": {
+        "door": "spruce_door",
+        "frame": "polished_basalt"
+      },
+      "derivations": [],
+      "roofFamilyAppended": [
+        "spruce_stairs",
+        "spruce_slab"
+      ]
+    }
+  },
+  "views": [
+    {
+      "angle": "+x+z",
+      "azimuthDeg": 45,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/church-generated/view-+x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "stone",
+            "fraction": 1,
+            "total": 39,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "stone",
+              "polished_andesite",
+              "polished_basalt",
+              "black_stained_glass"
+            ],
+            "dominantFraction": 1
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 1,
+            "total": 575,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "black_stained_glass",
+              "polished_basalt",
+              "polished_andesite",
+              "stone",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.037
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "nave roof (entire upper structure)",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "whole building wall vs roof",
+            "attribute": "material zoning",
+            "severity": "major"
+          },
+          {
+            "region": "tower cap at back",
+            "attribute": "form",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The boxy footprint and rear tower mass still read as the same church, but the build is a roofless open shell missing the entire dark peaked roof and its light-wall/dark-roof material zoning, so it is recognizably related yet badly defective from this angle."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10686,
+          "output_tokens": 685,
+          "cost_usd": 0.173535
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"nave roof (entire upper structure)\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"whole building wall vs roof\",\"attribute\":\"material zoning\",\"severity\":\"major\"},{\"region\":\"tower cap at back\",\"attribute\":\"form\",\"severity\":\"minor\"}],\"rationale\":\"The boxy footprint and rear tower mass still read as the same church, but the build is a roofless open shell mis",
+          "usage": {
+            "input_tokens": 10686,
+            "output_tokens": 685,
+            "cost_usd": 0.173535
+          },
+          "source": "live"
+        }
+      ]
+    },
+    {
+      "angle": "+x-z",
+      "azimuthDeg": 135,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/church-generated/view-+x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "stone",
+            "fraction": 1,
+            "total": 77,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "stone",
+              "polished_andesite",
+              "polished_basalt",
+              "black_stained_glass"
+            ],
+            "dominantFraction": 0.961
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 1,
+            "total": 657,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "black_stained_glass",
+              "polished_basalt",
+              "polished_andesite",
+              "stone",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.037
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "main hall and tower roof",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "roof across whole structure",
+            "attribute": "material zoning",
+            "severity": "major"
+          },
+          {
+            "region": "nave body, open hollow shell",
+            "attribute": "massing",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The light-stone box-and-tower footprint still reads as the same church, but the steep dark peaked roof is entirely absent—replaced by an open hollow shell with flat stepped caps—and the light-wall/dark-roof zoning collapses into uniform pale stone, breaking the silhouette from this angle."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10686,
+          "output_tokens": 635,
+          "cost_usd": 0.17228500000000002
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"main hall and tower roof\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"roof across whole structure\",\"attribute\":\"material zoning\",\"severity\":\"major\"},{\"region\":\"nave body, open hollow shell\",\"attribute\":\"massing\",\"severity\":\"minor\"}],\"rationale\":\"The light-stone box-and-tower footprint still reads as the same church, but the steep dark peaked roof is en",
+          "usage": {
+            "input_tokens": 10686,
+            "output_tokens": 635,
+            "cost_usd": 0.17228500000000002
+          },
+          "source": "live"
+        }
+      ]
+    },
+    {
+      "angle": "-x-z",
+      "azimuthDeg": 225,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/church-generated/view--x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "stone",
+            "fraction": 1,
+            "total": 414,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "stone",
+              "polished_andesite",
+              "polished_basalt",
+              "black_stained_glass"
+            ],
+            "dominantFraction": 0.937
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 1,
+            "total": 576,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "black_stained_glass",
+              "polished_basalt",
+              "polished_andesite",
+              "stone",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.023
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof across the whole structure",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "walls vs roof (whole build)",
+            "attribute": "material zoning",
+            "severity": "major"
+          },
+          {
+            "region": "tower at the right end",
+            "attribute": "massing",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The footprint matches the mesh, but the steep dark peaked roof is replaced by an open flat-topped shell with a ragged recess, and the concept's light-stone-wall / dark-roof zoning collapses into one uniform gray material."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10686,
+          "output_tokens": 491,
+          "cost_usd": 0.168685
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof across the whole structure\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"walls vs roof (whole build)\",\"attribute\":\"material zoning\",\"severity\":\"major\"},{\"region\":\"tower at the right end\",\"attribute\":\"massing\",\"severity\":\"minor\"}],\"rationale\":\"The footprint matches the mesh, but the steep dark peaked roof is replaced by an open flat-topped shell wit",
+          "usage": {
+            "input_tokens": 10686,
+            "output_tokens": 491,
+            "cost_usd": 0.168685
+          },
+          "source": "live"
+        }
+      ]
+    },
+    {
+      "angle": "-x+z",
+      "azimuthDeg": 315,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/church-generated/view--x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "stone",
+            "fraction": 1,
+            "total": 397,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "stone",
+              "polished_andesite",
+              "polished_basalt",
+              "black_stained_glass"
+            ],
+            "dominantFraction": 0.935
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.988,
+            "total": 646,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "black_stained_glass",
+              "polished_basalt",
+              "polished_andesite",
+              "stone",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.029
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "entire roof / top of nave and tower",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "whole structure (walls vs roof)",
+            "attribute": "material zoning",
+            "severity": "major"
+          },
+          {
+            "region": "tower cap at near corner",
+            "attribute": "form",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The boxy L-shaped footprint matches the mesh, but the steep dark roof is entirely absent — replaced by an open, roofless shell — and the light-stone-wall / dark-roof zoning collapses into a uniform gray, so the build is recognizably the same church yet clearly drifted from this angle."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10686,
+          "output_tokens": 592,
+          "cost_usd": 0.17121
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"entire roof / top of nave and tower\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"whole structure (walls vs roof)\",\"attribute\":\"material zoning\",\"severity\":\"major\"},{\"region\":\"tower cap at near corner\",\"attribute\":\"form\",\"severity\":\"minor\"}],\"rationale\":\"The boxy L-shaped footprint matches the mesh, but the steep dark roof is entirely absent — replaced ",
+          "usage": {
+            "input_tokens": 10686,
+            "output_tokens": 592,
+            "cost_usd": 0.17121
+          },
+          "source": "live"
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "schema": "multi-angle-gate/v1",
+    "decided": true,
+    "passed": false,
+    "gapCount": 12,
+    "gapBudget": 2,
+    "gaps": [
+      {
+        "angle": "+x+z",
+        "region": "nave roof (entire upper structure)",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x+z",
+        "region": "whole building wall vs roof",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "+x+z",
+        "region": "tower cap at back",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x-z",
+        "region": "main hall and tower roof",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x-z",
+        "region": "roof across whole structure",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "+x-z",
+        "region": "nave body, open hollow shell",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x-z",
+        "region": "roof across the whole structure",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x-z",
+        "region": "walls vs roof (whole build)",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x-z",
+        "region": "tower at the right end",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x+z",
+        "region": "entire roof / top of nave and tower",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x+z",
+        "region": "whole structure (walls vs roof)",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x+z",
+        "region": "tower cap at near corner",
+        "attribute": "form"
+      }
+    ],
+    "failures": [
+      {
+        "angle": "+x+z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "+x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x+z",
+        "reason": "drifted"
+      }
+    ],
+    "views": [
+      {
+        "angle": "+x+z",
+        "outcome": "drifted: form"
+      },
+      {
+        "angle": "+x-z",
+        "outcome": "drifted: form"
+      },
+      {
+        "angle": "-x-z",
+        "outcome": "drifted: form"
+      },
+      {
+        "angle": "-x+z",
+        "outcome": "drifted: form"
+      }
+    ]
+  },
+  "kitPresence": {
+    "schema": "kit-presence/v1",
+    "passed": true,
+    "checks": [
+      {
+        "feature": "frame",
+        "block": "stone_bricks",
+        "shipped": "polished_basalt",
+        "sites": 100,
+        "missing": 0,
+        "satisfied": 100,
+        "tolerated": {
+          "respected": 0,
+          "skippedIsolated": 0
+        },
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "openings:lintel-sill",
+        "placed": 0,
+        "gating": false,
+        "passed": null
+      }
+    ],
+    "gaps": [],
+    "skips": [
+      {
+        "feature": "panel:band0",
+        "reason": "no-candidate"
+      },
+      {
+        "feature": "course",
+        "reason": "no-candidate"
+      },
+      {
+        "feature": "openings:infill",
+        "reason": "kit names no treatment for this slot"
+      },
+      {
+        "feature": "openings:shutters",
+        "reason": "kit names no treatment for this slot"
+      },
+      {
+        "feature": "openings:door",
+        "reason": "no door-kind aperture declared by the concept (T-099 D7 — detector gap, not absence)"
+      }
+    ],
+    "grammar": {
+      "bindings": {
+        "frame": "stone_bricks",
+        "panels": {
+          "band0": null
+        },
+        "course": null,
+        "openingTreatments": [
+          "spruce_door"
+        ],
+        "skipped": [
+          {
+            "feature": "panel:band0",
+            "reason": "no-candidate"
+          },
+          {
+            "feature": "course",
+            "reason": "no-candidate"
+          }
+        ]
+      },
+      "shipped": {
+        "frame": "polished_basalt",
+        "panels": {
+          "band0": null
+        },
+        "course": null
+      },
+      "frame": {
+        "counts": {
+          "wall": 4697,
+          "cornerPost": 54,
+          "roofline": 46,
+          "floorLine": 0
+        },
+        "painted": 0,
+        "adopted": 0,
+        "respected": 0,
+        "skippedIsolated": 0,
+        "alreadyFrame": 100
+      },
+      "fill": {
+        "placements": 4,
+        "byZone": {
+          "band0": {
+            "surface": 4748,
+            "filled": 4,
+            "kept": 4744
+          },
+          "roof": {
+            "surface": 2590,
+            "filled": 0,
+            "kept": 2590
+          }
+        }
+      }
+    },
+    "dressing": {
+      "stats": {
+        "openings": 22,
+        "fullyDressed": 0,
+        "placements": 0,
+        "conflicts": 72,
+        "alreadyDressed": 0
+      },
+      "perOpening": [
+        {
+          "dir": "+z",
+          "kind": "window",
+          "bbox": {
+            "u0": 16,
+            "v0": 21,
+            "u1": 18,
+            "v1": 21
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 5,
+            "sill": 5
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "+z",
+          "kind": "window",
+          "bbox": {
+            "u0": 20,
+            "v0": 21,
+            "u1": 22,
+            "v1": 21
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 5,
+            "sill": 5
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "+z",
+          "kind": "window",
+          "bbox": {
+            "u0": 24,
+            "v0": 21,
+            "u1": 24,
+            "v1": 23
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 3,
+            "sill": 3
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "+z",
+          "kind": "window",
+          "bbox": {
+            "u0": 26,
+            "v0": 21,
+            "u1": 29,
+            "v1": 26
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 6,
+            "sill": 6
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "+z",
+          "kind": "window",
+          "bbox": {
+            "u0": 4,
+            "v0": 22,
+            "u1": 5,
+            "v1": 22
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 4,
+            "sill": 4
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "+z",
+          "kind": "window",
+          "bbox": {
+            "u0": 8,
+            "v0": 23,
+            "u1": 10,
+            "v1": 24
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 5,
+            "sill": 5
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "+z",
+          "kind": "window",
+          "bbox": {
+            "u0": 12,
+            "v0": 23,
+            "u1": 18,
+            "v1": 24
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 9,
+            "sill": 9
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "+z",
+          "kind": "window",
+          "bbox": {
+            "u0": 20,
+            "v0": 23,
+            "u1": 22,
+            "v1": 23
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 5,
+            "sill": 5
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "+z",
+          "kind": "window",
+          "bbox": {
+            "u0": 23,
+            "v0": 24,
+            "u1": 23,
+            "v1": 24
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 3,
+            "sill": 3
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "+z",
+          "kind": "window",
+          "bbox": {
+            "u0": 24,
+            "v0": 25,
+            "u1": 24,
+            "v1": 26
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 3,
+            "sill": 3
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "+z",
+          "kind": "window",
+          "bbox": {
+            "u0": 4,
+            "v0": 26,
+            "u1": 5,
+            "v1": 26
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 4,
+            "sill": 4
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "-z",
+          "kind": "window",
+          "bbox": {
+            "u0": 18,
+            "v0": 21,
+            "u1": 21,
+            "v1": 26
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 6,
+            "sill": 6
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "-z",
+          "kind": "window",
+          "bbox": {
+            "u0": 23,
+            "v0": 21,
+            "u1": 23,
+            "v1": 23
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "lintel",
+              "name": "lintel-no-band-cells",
+              "reduction": "lintel-skipped"
+            },
+            {
+              "slot": "sill",
+              "name": "sill-no-band-cells",
+              "reduction": "sill-skipped"
+            }
+          ]
+        },
+        {
+          "dir": "-z",
+          "kind": "window",
+          "bbox": {
+            "u0": 25,
+            "v0": 21,
+            "u1": 27,
+            "v1": 21
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 5,
+            "sill": 5
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "-z",
+          "kind": "window",
+          "bbox": {
+            "u0": 29,
+            "v0": 21,
+            "u1": 31,
+            "v1": 21
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 5,
+            "sill": 5
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "-z",
+          "kind": "window",
+          "bbox": {
+            "u0": 42,
+            "v0": 22,
+            "u1": 43,
+            "v1": 22
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 4,
+            "sill": 4
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "-z",
+          "kind": "window",
+          "bbox": {
+            "u0": 25,
+            "v0": 23,
+            "u1": 27,
+            "v1": 23
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 4
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "lintel",
+              "name": "lintel-no-band-cells",
+              "reduction": "lintel-skipped"
+            }
+          ]
+        },
+        {
+          "dir": "-z",
+          "kind": "window",
+          "bbox": {
+            "u0": 29,
+            "v0": 23,
+            "u1": 35,
+            "v1": 24
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 9,
+            "sill": 9
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "-z",
+          "kind": "window",
+          "bbox": {
+            "u0": 37,
+            "v0": 23,
+            "u1": 39,
+            "v1": 24
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 5,
+            "sill": 5
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "-z",
+          "kind": "window",
+          "bbox": {
+            "u0": 24,
+            "v0": 24,
+            "u1": 24,
+            "v1": 24
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 1,
+            "sill": 0
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "sill",
+              "name": "sill-no-band-cells",
+              "reduction": "sill-skipped"
+            }
+          ]
+        },
+        {
+          "dir": "-z",
+          "kind": "window",
+          "bbox": {
+            "u0": 23,
+            "v0": 25,
+            "u1": 23,
+            "v1": 26
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "lintel",
+              "name": "lintel-no-band-cells",
+              "reduction": "lintel-skipped"
+            },
+            {
+              "slot": "sill",
+              "name": "sill-no-band-cells",
+              "reduction": "sill-skipped"
+            }
+          ]
+        },
+        {
+          "dir": "-z",
+          "kind": "window",
+          "bbox": {
+            "u0": 42,
+            "v0": 26,
+            "u1": 43,
+            "v1": 26
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 4,
+            "sill": 4
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "overall": {
+    "schema": "kit-aware-gate/v1",
+    "decided": true,
+    "passed": false,
+    "components": {
+      "resemblance": {
+        "decided": true,
+        "passed": false
+      },
+      "kitPresence": {
+        "ran": true,
+        "passed": true,
+        "gaps": []
+      }
+    }
+  },
+  "sheet": "pr/assets/frames/multi-angle-church-generated.png",
+  "labeled": true
+}

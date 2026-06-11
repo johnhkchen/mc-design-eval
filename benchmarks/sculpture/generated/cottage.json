@@ -268,6 +268,14 @@
       }
     ]
   },
+  "generation": {
+    "counts": {
+      "mass": 2601,
+      "roof": 2561,
+      "carved": 28
+    },
+    "findings": []
+  },
   "zeroBlob": {
     "passed": true,
     "cells": 5069,
@@ -348,7 +356,7 @@
     "resemblance": {
       "decided": true,
       "passed": false,
-      "gapCount": 11,
+      "gapCount": 12,
       "gapBudget": 2,
       "failures": [
         {
@@ -381,17 +389,17 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "main roof",
-            "attribute": "form",
-            "severity": "major"
-          },
-          {
-            "region": "overall building proportions",
+            "region": "overall body/interior",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "upper-storey walls",
+            "region": "roof top",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "walls and stone base",
             "attribute": "material zoning",
             "severity": "minor"
           }
@@ -409,7 +417,12 @@
             "severity": "minor"
           },
           {
-            "region": "near wall-to-roof junction (lower-left corner)",
+            "region": "near-side walls (slightly open/recessed read)",
+            "attribute": "form",
+            "severity": "minor"
+          },
+          {
+            "region": "chimney cap",
             "attribute": "form",
             "severity": "minor"
           }
@@ -422,18 +435,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof",
+            "region": "entire roof over both wings and ridge",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "overall building height and roofline",
+            "region": "upper timber-framed storey walls",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "upper-storey timber-frame walls",
-            "attribute": "material zoning",
+            "region": "chimney at ridge",
+            "attribute": "form",
             "severity": "minor"
           }
         ]
@@ -445,17 +458,17 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof",
+            "region": "roof over the whole house",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "overall building height and footprint",
+            "region": "upper storey / roof interior",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "upper-storey cream walls",
+            "region": "timber-frame banding on the cream walls",
             "attribute": "material zoning",
             "severity": "minor"
           }
@@ -477,7 +490,7 @@
     "subject": "cottage",
     "generated": {
       "outcome": "FAIL",
-      "gapCount": 11,
+      "gapCount": 12,
       "gapBudget": 2,
       "perView": [
         {
@@ -488,7 +501,7 @@
         {
           "angle": "+x-z",
           "verdict": "same object",
-          "gaps": 2
+          "gaps": 3
         },
         {
           "angle": "-x-z",
@@ -559,7 +572,7 @@
   "reproducible": {
     "doubleRun": "byte-identical (in-process)",
     "sha256": {
-      "base": "bce37412d449537056ce8de136742cbcdafcb1d8f202b1fa4dbaf382a1fae81f",
+      "base": "67fbbc93cbd4308f6ba0a7e51c6410c4f0cf38d7c2ef50acf6cee9625231a172",
       "grammarFinal": "7370102e5d1cd658f68f33cda01a2d7de07c69597c735f30772885acf5cff553",
       "styled": "e7f97344e4e3e836570d3b488ce24591b72860eea049903c51f2f3721e9f4fe6",
       "fit": "b3b36ef6f386c54bc259bee462e6a33049c1861d08cbdd8493a31dd37a4ddbeb"

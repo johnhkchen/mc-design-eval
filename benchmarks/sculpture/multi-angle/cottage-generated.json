@@ -227,40 +227,40 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "main roof",
-            "attribute": "form",
-            "severity": "major"
-          },
-          {
-            "region": "overall building proportions",
+            "region": "overall body/interior",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "upper-storey walls",
+            "region": "roof top",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "walls and stone base",
             "attribute": "material zoning",
             "severity": "minor"
           }
         ],
-        "rationale": "Palette and material zoning (stone base, cream walls, brown roof, chimney) read true, but the steep pitched gable of the concept and mesh has collapsed into a low, wide-spreading roof that flattens the overall massing from this angle."
+        "rationale": "The build keeps the cottage footprint and roughly correct light-wall/brown-roof/stone-base zoning, but reads as a hollow open shell with an irregular lumpy roof rather than the references' solid mass with a clean steep gable."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10804,
-          "output_tokens": 913,
-          "cost_usd": 0.180275
+          "input_tokens": 10791,
+          "output_tokens": 1018,
+          "cost_usd": 0.183425
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"main roof\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"overall building proportions\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"upper-storey walls\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"Palette and material zoning (stone base, cream walls, brown roof, chimney) read true, but the steep pitched gable of the concept and",
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"overall body/interior\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"roof top\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"walls and stone base\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The build keeps the cottage footprint and roughly correct light-wall/brown-roof/stone-base zoning, but reads as a hollow open shell with a",
           "usage": {
-            "input_tokens": 10804,
-            "output_tokens": 913,
-            "cost_usd": 0.180275
+            "input_tokens": 10791,
+            "output_tokens": 1018,
+            "cost_usd": 0.183425
           },
           "source": "live"
         }
@@ -335,30 +335,35 @@
             "severity": "minor"
           },
           {
-            "region": "near wall-to-roof junction (lower-left corner)",
+            "region": "near-side walls (slightly open/recessed read)",
+            "attribute": "form",
+            "severity": "minor"
+          },
+          {
+            "region": "chimney cap",
             "attribute": "form",
             "severity": "minor"
           }
         ],
-        "rationale": "Stone base, cream timber-frame walls, brown pitched roof with chimney all read true at this angle and match the mesh massing, with only minor roof-edge irregularity and a slightly open eave junction."
+        "rationale": "The brown shingled roof, cream timber-framed walls, and gray stone base all read true from this angle and match the mesh massing, so it is clearly the same cottage despite a slightly irregular roofline and chimney."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10804,
-          "output_tokens": 757,
-          "cost_usd": 0.176375
+          "input_tokens": 10764,
+          "output_tokens": 1088,
+          "cost_usd": 0.18503999999999998
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"same object\",\"gaps\":[{\"region\":\"roof ridge and eaves\",\"attribute\":\"form\",\"severity\":\"minor\"},{\"region\":\"near wall-to-roof junction (lower-left corner)\",\"attribute\":\"form\",\"severity\":\"minor\"}],\"rationale\":\"Stone base, cream timber-frame walls, brown pitched roof with chimney all read true at this angle and match the mesh massing, with only minor roof-edge irregularity and a slightly ope",
+          "rawReply": "{\"verdict\":\"same object\",\"gaps\":[{\"region\":\"roof ridge and eaves\",\"attribute\":\"form\",\"severity\":\"minor\"},{\"region\":\"near-side walls (slightly open/recessed read)\",\"attribute\":\"form\",\"severity\":\"minor\"},{\"region\":\"chimney cap\",\"attribute\":\"form\",\"severity\":\"minor\"}],\"rationale\":\"The brown shingled roof, cream timber-framed walls, and gray stone base all read true from this angle and match the mesh ",
           "usage": {
-            "input_tokens": 10804,
-            "output_tokens": 757,
-            "cost_usd": 0.176375
+            "input_tokens": 10764,
+            "output_tokens": 1088,
+            "cost_usd": 0.18503999999999998
           },
           "source": "live"
         }
@@ -428,40 +433,40 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof",
+            "region": "entire roof over both wings and ridge",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "overall building height and roofline",
+            "region": "upper timber-framed storey walls",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "upper-storey timber-frame walls",
-            "attribute": "material zoning",
+            "region": "chimney at ridge",
+            "attribute": "form",
             "severity": "minor"
           }
         ],
-        "rationale": "Palette and stone/cream/brown zoning read true, but the steep pitched roof of the concept and mesh is collapsed into a low open slab, flattening the silhouette and breaking the massing from this angle."
+        "rationale": "The stone base, cream upper walls, and brown timber/chimney palette read as the same cottage, but the steep enclosing gable roof seen in the concept and mesh is absent — the build's top is an open roofless shell of flat planks, so it has drifted from the reference."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10804,
-          "output_tokens": 561,
-          "cost_usd": 0.171475
+          "input_tokens": 10745,
+          "output_tokens": 209,
+          "cost_usd": 0.16297
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"overall building height and roofline\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"upper-storey timber-frame walls\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"Palette and stone/cream/brown zoning read true, but the steep pitched roof of the concept and mesh is collapsed into",
+          "rawReply": "```json\n{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"entire roof over both wings and ridge\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"upper timber-framed storey walls\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"chimney at ridge\",\"attribute\":\"form\",\"severity\":\"minor\"}],\"rationale\":\"The stone base, cream upper walls, and brown timber/chimney palette read as the same cottage, but the ste",
           "usage": {
-            "input_tokens": 10804,
-            "output_tokens": 561,
-            "cost_usd": 0.171475
+            "input_tokens": 10745,
+            "output_tokens": 209,
+            "cost_usd": 0.16297
           },
           "source": "live"
         }
@@ -531,40 +536,40 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof",
+            "region": "roof over the whole house",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "overall building height and footprint",
+            "region": "upper storey / roof interior",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "upper-storey cream walls",
+            "region": "timber-frame banding on the cream walls",
             "attribute": "material zoning",
             "severity": "minor"
           }
         ],
-        "rationale": "Stone base, cream walls, brown roof and chimney palette/zoning read true, but the steep peaked roof of the concept and mesh has collapsed into a low open slab over a flattened, elongated box, breaking the silhouette from this angle."
+        "rationale": "Stone base, cream walls and brown roof palette read true and the footprint matches the mesh, but the steep closed gabled roof of the concept/mesh is replaced by an open, partly-roofless shell, breaking the form and massing."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10804,
-          "output_tokens": 738,
-          "cost_usd": 0.1759
+          "input_tokens": 10745,
+          "output_tokens": 834,
+          "cost_usd": 0.178595
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"overall building height and footprint\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"upper-storey cream walls\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"Stone base, cream walls, brown roof and chimney palette/zoning read true, but the steep peaked roof of the concept and mes",
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof over the whole house\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"upper storey / roof interior\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"timber-frame banding on the cream walls\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"Stone base, cream walls and brown roof palette read true and the footprint matches the mesh, bu",
           "usage": {
-            "input_tokens": 10804,
-            "output_tokens": 738,
-            "cost_usd": 0.1759
+            "input_tokens": 10745,
+            "output_tokens": 834,
+            "cost_usd": 0.178595
           },
           "source": "live"
         }
@@ -575,22 +580,22 @@
     "schema": "multi-angle-gate/v1",
     "decided": true,
     "passed": false,
-    "gapCount": 11,
+    "gapCount": 12,
     "gapBudget": 2,
     "gaps": [
       {
         "angle": "+x+z",
-        "region": "main roof",
-        "attribute": "form"
-      },
-      {
-        "angle": "+x+z",
-        "region": "overall building proportions",
+        "region": "overall body/interior",
         "attribute": "massing"
       },
       {
         "angle": "+x+z",
-        "region": "upper-storey walls",
+        "region": "roof top",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x+z",
+        "region": "walls and stone base",
         "attribute": "material zoning"
       },
       {
@@ -600,37 +605,42 @@
       },
       {
         "angle": "+x-z",
-        "region": "near wall-to-roof junction (lower-left corner)",
+        "region": "near-side walls (slightly open/recessed read)",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x-z",
+        "region": "chimney cap",
         "attribute": "form"
       },
       {
         "angle": "-x-z",
-        "region": "roof",
+        "region": "entire roof over both wings and ridge",
         "attribute": "form"
       },
       {
         "angle": "-x-z",
-        "region": "overall building height and roofline",
+        "region": "upper timber-framed storey walls",
         "attribute": "massing"
       },
       {
         "angle": "-x-z",
-        "region": "upper-storey timber-frame walls",
-        "attribute": "material zoning"
-      },
-      {
-        "angle": "-x+z",
-        "region": "roof",
+        "region": "chimney at ridge",
         "attribute": "form"
       },
       {
         "angle": "-x+z",
-        "region": "overall building height and footprint",
+        "region": "roof over the whole house",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x+z",
+        "region": "upper storey / roof interior",
         "attribute": "massing"
       },
       {
         "angle": "-x+z",
-        "region": "upper-storey cream walls",
+        "region": "timber-frame banding on the cream walls",
         "attribute": "material zoning"
       }
     ],
@@ -651,11 +661,11 @@
     "views": [
       {
         "angle": "+x+z",
-        "outcome": "drifted: form"
+        "outcome": "drifted: massing"
       },
       {
         "angle": "+x-z",
-        "outcome": "same object (2 minor)"
+        "outcome": "same object (3 minor)"
       },
       {
         "angle": "-x-z",

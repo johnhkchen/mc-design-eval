@@ -8,10 +8,10 @@ Artifact: `benchmarks/sculpture/generated/gatehouse/artifact.json` (sha256 `80c9
 
 | view | azimuth | rendered | T-088 coverage | judge verdict |
 |---|---|---|---|---|
-| +x+z | 45° | yes | pass | drifted<br>major form @ roof / top of structure<br>major material zoning @ walls (whole body)<br>minor massing @ overall body / interior |
-| +x-z | 135° | yes | pass | drifted<br>major form @ roof/top of structure<br>major massing @ overall body — open hollow interior visible<br>minor material zoning @ walls vs roof |
-| -x-z | 225° | yes | pass | drifted<br>major form @ roof / top of structure<br>major material zoning @ walls vs roof across the whole body<br>minor massing @ interior / overall body |
-| -x+z | 315° | yes | pass | drifted<br>major form @ roof / top of structure<br>major massing @ overall body / interior<br>minor material zoning @ walls vs roof |
+| +x+z | 45° | yes | pass | drifted<br>major form @ entire roof / top of structure<br>major material zoning @ walls vs roof across the whole building<br>minor form @ front doorway / arched entrance |
+| +x-z | 135° | yes | pass | drifted<br>major material zoning @ whole structure — walls versus roof<br>major form @ roof and upper body of the building<br>minor form @ front entrance wall |
+| -x-z | 225° | yes | pass | drifted<br>major form @ roof / entire top of the structure<br>major material zoning @ walls vs roof across the whole building<br>minor palette @ upper wall courses near the eaves |
+| -x+z | 315° | yes | pass | drifted<br>major massing @ roof / top of the building<br>major form @ all four walls<br>minor material zoning @ front entrance |
 
 ## Resemblance aggregate (T-093)
 **FAIL** — gaps 12/2; failures: +x+z:drifted, +x-z:drifted, -x-z:drifted, -x+z:drifted

@@ -164,40 +164,40 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof / top of structure",
+            "region": "entire roof / top of structure",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "walls (whole body)",
+            "region": "walls vs roof across the whole building",
             "attribute": "material zoning",
             "severity": "major"
           },
           {
-            "region": "overall body / interior",
-            "attribute": "massing",
+            "region": "front doorway / arched entrance",
+            "attribute": "form",
             "severity": "minor"
           }
         ],
-        "rationale": "Same boxy gatehouse footprint and arched opening, but the steep peaked roof is replaced by a flat stepped cap and the light-stone walls are rendered in uniform dark material, breaking the form and zoning from this angle."
+        "rationale": "The build keeps the boxy footprint and matches the mesh massing, but the steep dark gable roof of the concept collapses into a flat stepped cap and the crisp light-stone-wall / dark-roof zoning is lost to a near-uniform gray, so it reads as related but drifted."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10749,
-          "output_tokens": 516,
-          "cost_usd": 0.170835
+          "input_tokens": 10745,
+          "output_tokens": 213,
+          "cost_usd": 0.16463
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof / top of structure\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"walls (whole body)\",\"attribute\":\"material zoning\",\"severity\":\"major\"},{\"region\":\"overall body / interior\",\"attribute\":\"massing\",\"severity\":\"minor\"}],\"rationale\":\"Same boxy gatehouse footprint and arched opening, but the steep peaked roof is replaced by a flat stepped cap and the light",
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"entire roof / top of structure\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"walls vs roof across the whole building\",\"attribute\":\"material zoning\",\"severity\":\"major\"},{\"region\":\"front doorway / arched entrance\",\"attribute\":\"form\",\"severity\":\"minor\"}],\"rationale\":\"The build keeps the boxy footprint and matches the mesh massing, but the steep dark gable ",
           "usage": {
-            "input_tokens": 10749,
-            "output_tokens": 516,
-            "cost_usd": 0.170835
+            "input_tokens": 10745,
+            "output_tokens": 213,
+            "cost_usd": 0.16463
           },
           "source": "live"
         }
@@ -252,40 +252,40 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof/top of structure",
+            "region": "whole structure — walls versus roof",
+            "attribute": "material zoning",
+            "severity": "major"
+          },
+          {
+            "region": "roof and upper body of the building",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "overall body — open hollow interior visible",
-            "attribute": "massing",
-            "severity": "major"
-          },
-          {
-            "region": "walls vs roof",
-            "attribute": "material zoning",
+            "region": "front entrance wall",
+            "attribute": "form",
             "severity": "minor"
           }
         ],
-        "rationale": "The build keeps the gatehouse footprint and boxy walls but replaces the references' steep peaked roof with an irregular open flat cap and reads as a hollow shell in uniform dark material rather than a solid body with light walls and a dark roof."
+        "rationale": "The massing roughly matches the mesh box-with-gable, but the build reads as a hollow open-topped shell with a collapsed roof and the light-stone-walls/dark-roof zoning of the concept flattens into uniform dark gray, so it is recognizably related but defective from this angle."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10749,
-          "output_tokens": 672,
-          "cost_usd": 0.17473499999999997
+          "input_tokens": 10745,
+          "output_tokens": 714,
+          "cost_usd": 0.177155
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof/top of structure\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"overall body — open hollow interior visible\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"walls vs roof\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The build keeps the gatehouse footprint and boxy walls but replaces the references' steep peaked roof with an ",
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"whole structure — walls versus roof\",\"attribute\":\"material zoning\",\"severity\":\"major\"},{\"region\":\"roof and upper body of the building\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"front entrance wall\",\"attribute\":\"form\",\"severity\":\"minor\"}],\"rationale\":\"The massing roughly matches the mesh box-with-gable, but the build reads as a hollow open-topped shel",
           "usage": {
-            "input_tokens": 10749,
-            "output_tokens": 672,
-            "cost_usd": 0.17473499999999997
+            "input_tokens": 10745,
+            "output_tokens": 714,
+            "cost_usd": 0.177155
           },
           "source": "live"
         }
@@ -340,40 +340,40 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof / top of structure",
+            "region": "roof / entire top of the structure",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "walls vs roof across the whole body",
+            "region": "walls vs roof across the whole building",
             "attribute": "material zoning",
             "severity": "major"
           },
           {
-            "region": "interior / overall body",
-            "attribute": "massing",
+            "region": "upper wall courses near the eaves",
+            "attribute": "palette",
             "severity": "minor"
           }
         ],
-        "rationale": "The build keeps the same boxy footprint but loses the steep peaked roof (open shell with a ragged hole on top) and abandons the light-stone-wall / dark-roof zoning for a uniform dark material, so it reads as recognizably related but defective from this angle."
+        "rationale": "The boxy footprint matches the mesh, but the concept's solid dark gabled roof is replaced by an open roofless shell you can see into, and the light-wall/dark-roof zoning collapses into near-uniform gray."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10749,
-          "output_tokens": 563,
-          "cost_usd": 0.17201
+          "input_tokens": 10745,
+          "output_tokens": 819,
+          "cost_usd": 0.17978
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof / top of structure\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"walls vs roof across the whole body\",\"attribute\":\"material zoning\",\"severity\":\"major\"},{\"region\":\"interior / overall body\",\"attribute\":\"massing\",\"severity\":\"minor\"}],\"rationale\":\"The build keeps the same boxy footprint but loses the steep peaked roof (open shell with a ragged hole on ",
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof / entire top of the structure\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"walls vs roof across the whole building\",\"attribute\":\"material zoning\",\"severity\":\"major\"},{\"region\":\"upper wall courses near the eaves\",\"attribute\":\"palette\",\"severity\":\"minor\"}],\"rationale\":\"The boxy footprint matches the mesh, but the concept's solid dark gabled roof is ",
           "usage": {
-            "input_tokens": 10749,
-            "output_tokens": 563,
-            "cost_usd": 0.17201
+            "input_tokens": 10745,
+            "output_tokens": 819,
+            "cost_usd": 0.17978
           },
           "source": "live"
         }
@@ -428,40 +428,40 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof / top of structure",
-            "attribute": "form",
-            "severity": "major"
-          },
-          {
-            "region": "overall body / interior",
+            "region": "roof / top of the building",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "walls vs roof",
+            "region": "all four walls",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "front entrance",
             "attribute": "material zoning",
             "severity": "minor"
           }
         ],
-        "rationale": "The build keeps the boxy footprint of the gatehouse but loses the steep peaked roof to an irregular flat/stepped cap and reads as a hollow open shell in uniform dark material rather than the references' solid mass with light stone walls and a distinct dark roof."
+        "rationale": "The dark-stone cubic mass and palette still read as the same subject, but the reference's single pitched gable roof is replaced by a flat top carrying a small central stepped pyramid and the walls are broken into heavy vertical fluting absent from the concept/mesh, so the form has drifted badly while the doorway no longer reads."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10749,
-          "output_tokens": 526,
-          "cost_usd": 0.171085
+          "input_tokens": 10302,
+          "output_tokens": 1143,
+          "cost_usd": 0.18566499999999997
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof / top of structure\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"overall body / interior\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"walls vs roof\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The build keeps the boxy footprint of the gatehouse but loses the steep peaked roof to an irregular flat/stepped cap and reads a",
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof / top of the building\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"all four walls\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"front entrance\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The dark-stone cubic mass and palette still read as the same subject, but the reference's single pitched gable roof is replaced by a ",
           "usage": {
-            "input_tokens": 10749,
-            "output_tokens": 526,
-            "cost_usd": 0.171085
+            "input_tokens": 10302,
+            "output_tokens": 1143,
+            "cost_usd": 0.18566499999999997
           },
           "source": "live"
         }
@@ -477,62 +477,62 @@
     "gaps": [
       {
         "angle": "+x+z",
-        "region": "roof / top of structure",
+        "region": "entire roof / top of structure",
         "attribute": "form"
       },
       {
         "angle": "+x+z",
-        "region": "walls (whole body)",
+        "region": "walls vs roof across the whole building",
         "attribute": "material zoning"
       },
       {
         "angle": "+x+z",
-        "region": "overall body / interior",
-        "attribute": "massing"
-      },
-      {
-        "angle": "+x-z",
-        "region": "roof/top of structure",
+        "region": "front doorway / arched entrance",
         "attribute": "form"
       },
       {
         "angle": "+x-z",
-        "region": "overall body — open hollow interior visible",
-        "attribute": "massing"
+        "region": "whole structure — walls versus roof",
+        "attribute": "material zoning"
       },
       {
         "angle": "+x-z",
-        "region": "walls vs roof",
+        "region": "roof and upper body of the building",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x-z",
+        "region": "front entrance wall",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x-z",
+        "region": "roof / entire top of the structure",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x-z",
+        "region": "walls vs roof across the whole building",
         "attribute": "material zoning"
       },
       {
         "angle": "-x-z",
-        "region": "roof / top of structure",
-        "attribute": "form"
+        "region": "upper wall courses near the eaves",
+        "attribute": "palette"
       },
       {
-        "angle": "-x-z",
-        "region": "walls vs roof across the whole body",
-        "attribute": "material zoning"
-      },
-      {
-        "angle": "-x-z",
-        "region": "interior / overall body",
+        "angle": "-x+z",
+        "region": "roof / top of the building",
         "attribute": "massing"
       },
       {
         "angle": "-x+z",
-        "region": "roof / top of structure",
+        "region": "all four walls",
         "attribute": "form"
       },
       {
         "angle": "-x+z",
-        "region": "overall body / interior",
-        "attribute": "massing"
-      },
-      {
-        "angle": "-x+z",
-        "region": "walls vs roof",
+        "region": "front entrance",
         "attribute": "material zoning"
       }
     ],
@@ -561,7 +561,7 @@
       },
       {
         "angle": "+x-z",
-        "outcome": "drifted: form"
+        "outcome": "drifted: material zoning"
       },
       {
         "angle": "-x-z",
@@ -569,7 +569,7 @@
       },
       {
         "angle": "-x+z",
-        "outcome": "drifted: form"
+        "outcome": "drifted: massing"
       }
     ]
   },

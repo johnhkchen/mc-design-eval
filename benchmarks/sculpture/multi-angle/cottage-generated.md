@@ -8,13 +8,13 @@ Artifact: `benchmarks/sculpture/generated/cottage/artifact.json` (sha256 `e7f973
 
 | view | azimuth | rendered | T-088 coverage | judge verdict |
 |---|---|---|---|---|
-| +x+z | 45° | yes | pass | drifted<br>major form @ main roof<br>major massing @ overall building proportions<br>minor material zoning @ upper-storey walls |
-| +x-z | 135° | yes | pass | same object<br>minor form @ roof ridge and eaves<br>minor form @ near wall-to-roof junction (lower-left corner) |
-| -x-z | 225° | yes | pass | drifted<br>major form @ roof<br>major massing @ overall building height and roofline<br>minor material zoning @ upper-storey timber-frame walls |
-| -x+z | 315° | yes | pass | drifted<br>major form @ roof<br>major massing @ overall building height and footprint<br>minor material zoning @ upper-storey cream walls |
+| +x+z | 45° | yes | pass | drifted<br>major massing @ overall body/interior<br>major form @ roof top<br>minor material zoning @ walls and stone base |
+| +x-z | 135° | yes | pass | same object<br>minor form @ roof ridge and eaves<br>minor form @ near-side walls (slightly open/recessed read)<br>minor form @ chimney cap |
+| -x-z | 225° | yes | pass | drifted<br>major form @ entire roof over both wings and ridge<br>major massing @ upper timber-framed storey walls<br>minor form @ chimney at ridge |
+| -x+z | 315° | yes | pass | drifted<br>major form @ roof over the whole house<br>major massing @ upper storey / roof interior<br>minor material zoning @ timber-frame banding on the cream walls |
 
 ## Resemblance aggregate (T-093)
-**FAIL** — gaps 11/2; failures: +x+z:drifted, -x-z:drifted, -x+z:drifted
+**FAIL** — gaps 12/2; failures: +x+z:drifted, -x-z:drifted, -x+z:drifted
 
 ## Kit presence (T-100)
 **PASS** — every kit entry present at its grammar sites
