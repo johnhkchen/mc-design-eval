@@ -2283,3 +2283,80 @@ its presence verdict). The deterministic presence verdict is the accountability 
 named, reproducible); the judge is the perceptual one (metered, pinned-model, single-sample) —
 score them as components, never collapse them: the epic's lesson is that one number hid the other
 for four epics.
+
+## Parametric reconstruction (E-27) — the reference is the spec, not the substrate (S-102…S-107, T-107-01) · 2026-06-10
+
+**The five-whys that opened the epic.** E-25/E-26 closed with `form @ roof` named at every oblique
+azimuth on cottage and gatehouse, untouched by styling — and why ×5 bottoms out in a *substrate*
+error: the chain treated the decimated mesh as geometry to copy rather than a spec to read. Spikes
+enter at voxelization (the styled cottage carried 265 protrusions / 21.7% ragged columns; the bare
+shell 276 / 23.9%); every downstream stage inherited them, and re-authored surfaces passed gates
+while mesh-inherited ones failed. E-27 rebuilt the middle of the chain around parameters: a
+regularization cage (T-102 — morphological open/close under per-azimuth IoU no-regress gates;
+close does the work, cross-SE can't shave spikes), blob→components (T-103 — slab decomposition
+with arbitration), roof as a *program* (T-104 — fitted gables emitting stair courses, the
+attempt-ladder letting the cage arbitrate glb-vs-voxel pitch instead of tuned constants), a shaped
+vocabulary (T-105 — stairRun/slabStep/archRing as subject-agnostic generators; the arch ring is
+full cubes, the Minecraft-native arch), and a chain that CONSUMES the component layer at four
+seams with pin-THROW staleness tripwires (T-106).
+
+**The terminal ticket found the lens lying again (T-107).** The T-106 verdicts still FAILed on
+roof form — but the judge was looking at a notched solid wedge, because **no stair block had ever
+rendered**: T-097 pinned "stairs-invisible" as a viewer limitation, and T-107's root-cause hunt
+landed on one line — prismarine-viewer's `getModelVariants` short-circuits any block whose *name
+contains the substring* `air`, and every `*_stairs` name does (st-**air**-s). The stair models were
+always present in blocksStates; only the lookup dropped them. The fix is one exact-name line,
+applied on disk (the mesher runs in worker threads — a monkey-patch can't reach it) by a
+postinstall script with an import-time tripwire that THROWS before any render through an unpatched
+install, plus a GL-free mesher regression suite and a re-cut fixture card (stair rows visible,
+25/25 read-back unchanged). This is the second E-22-class lesson: **when a verdict resists a form
+fix, audit the lens before the build** — render aliasing in E-22, mesh deletion here, both judged
+honest geometry as drift.
+
+**Instrument frozen, and proven frozen.** The re-verdicts were taken with zero contract diffs: the
+terminal runner pre-captures the committed gate record's contract + judge model, deep-diffs after
+the run, and records the diff (empty, all subjects; judge pinned `claude-opus-4-8`). The per-view
+coverage precondition is censused on the occupancy's diagonal projection, not pixels, so the lens
+fix *cannot* move coverage arithmetic — only the judge's eyes changed, and only where stairs exist.
+One gate run per subject is the verdict; no re-rolls (the flappy-budget anti-pattern).
+
+**Milestone outcomes — form moved; it did not close.** Against the pinned E-26 baselines
+(provenance-stamped snapshots from history; the cottage baseline re-derives the motivating census
+exactly):
+- **Cottage** (styled chain): protrusions **265→51**, ragged **21.7%→6.8%**; kit presence PASS;
+  135°/225° now judge **same object** (they were the E-26 failures); resemblance still FAIL 10/2 —
+  major form@roof at 45°/315° names the *gable-end massing*, a true voxel-form gap, not lens debt.
+- **Gatehouse** (styled chain): protrusions **118→25**, ragged **14.1%→9.9%**; kit presence PASS;
+  315° same-object; the 225° "colonnade instead of arched doorway" major gap is **gone** — the
+  generated arch reads as *minor* form; still FAIL 11/2 with major form@roof at three views
+  (ridge + upper edges).
+- **Church** (challenge chain, kit-less by registry): the refusal REPRODUCES at the skin coverage
+  gate, band0 stone=0.327 < 0.5, and the record carries its measured cause — the defined wall
+  field is 59% polished_basalt vs the concept's stone declaration, on-slab ≈ off-slab: a
+  **material-assignment divergence** (E-21 territory), not blob noise. The reconstruction itself
+  moved the shell census 602→202 spikes, 24.3%→14.0% ragged. Roof program is a named fallback
+  (every fitted gable pair insane on the blob); no kit, no zone-map — all registry data, all named.
+
+**Over-reach, honestly.** The lens fix changes every future render containing stairs — prior
+epochs' committed PNGs stand as their eras' evidence (records pin their own renders), but
+cross-epoch pixel comparisons now straddle two lenses; the instrument-diff record is the receipt
+that thresholds/azimuths/judge never moved. Cage outcomes are distilled from the *standalone*
+regularize records (the chain re-cuts in-process; the church standalone record is stale by the
+T-106 finding and labeled so in the terminal record). The roof-fit summary separates "fit error"
+from "ladder-rejection divergence" only after a first mislabel (glb pitch 7.47 vs adopted voxel
+1.88 is the *rejection cause*, not a build error) — fixed via `--distill-only`, which rebuilds the
+record from committed outputs without re-rolling the judge. Under-reach: the remaining
+form@roof majors (cottage gable ends, gatehouse ridge) are genuine geometry gaps the component fit
+hasn't reached; the church needs the E-21 assignment generalized (or a kit) before any verdict can
+exist; stairs in *kits* (T-096 scope) remain unexplored now that the lens permits them.
+
+**E-12 handoff.** The showcase layer should consume, per subject:
+`benchmarks/sculpture/reconstructed/<subj>.json` (the terminal record: instrument confirmation,
+census deltas vs the pinned E-26 baseline, roof fit, cage outcomes, refusal re-measurement, sheet
+paths), `multi-angle/<subj>-styled.json` (per-view verdicts + kit presence + overall), and
+`pr/assets/frames/reconstructed-<subj>-{before,after}.png` beside
+`pr/assets/reconstructed-milestone.md` (the epic sheet). The march-of-progress frame pair is
+before/after at the same four azimuths through the SAME fixed lens — and the story beat is the
+census table next to the verdict movement: deterministic metrics moved an order of magnitude,
+perceptual verdicts moved two views and one major gap; score them as components, never collapse
+them.
