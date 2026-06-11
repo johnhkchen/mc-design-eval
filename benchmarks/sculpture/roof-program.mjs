@@ -56,6 +56,7 @@ import { REGULARIZE_DEFAULTS, protrudingStackRegion, regularizeShell } from "../
 import { ROOF_FIT_DEFAULTS, gablesFromRecord, gableEndsVariant } from "../../src/form/roof-fit.mjs";
 import { END_FIT_DEFAULTS, fitGableEnds, alignedTriangles } from "../../src/form/roof-end-fit.mjs";
 import { RIDGE_FIT_DEFAULTS, ridgeFromPlanes, fitRidgeLine } from "../../src/form/roof-ridge-fit.mjs";
+import { HIP_FIT_SCHEMA, HIP_FIT_DEFAULTS, fitHipCap, fitHipEnds } from "../../src/form/roof-hip-fit.mjs";
 import { TERMINATE_SCHEMA, unconsumedPlanes, terminationSteps } from "../../src/view/plane-terminate.mjs";
 import { RESIDUAL_SCHEMA, residualPass } from "../../src/view/silhouette-residual.mjs";
 import { aabbAlignment } from "../../src/form/component-glb-fit.mjs";
@@ -189,6 +190,10 @@ async function runRoof(def) {
   const endsById = new Map(endFitPlain.gables.map((g) => [g.id, g]));
   const suppById = new Map(endFitSupp.gables.map((g) => [g.id, g]));
 
+  // T-112-01 (E-29): the GLB triangles in voxel space, shared by the hip fit below and the
+  // ridge-fit evidence pass (previously computed after the swaps — one computation, hoisted).
+  const aTris = alignedTriangles(meshTris, alignment);
+
   // T-110-01 (E-28): the swap ladder runs PER COMPONENT — a building can carry structurally
   // distinct roofs (the church: tower cap + nave pitch) that one whole-mass invocation judges
   // all-or-nothing. Gables group by their planes' massId (pure, src/form/component-roof.mjs),
@@ -198,12 +203,37 @@ async function runRoof(def) {
   const grouping = componentGableGroups({ record, gables: fit.gables });
   let occCur = occ;
   const components = [];
+  const hipFitEvidence = [];
   for (const grp of grouping.groups) {
     const endFit = {
       gables: grp.gables.map((g) => endsById.get(g.id) ?? g),
       suppressed: grp.gables.map((g) => suppById.get(g.id) ?? gableEndsVariant([g])[0]),
     };
-    const swap = swapRoof(occCur, { gables: grp.gables, endFit, family, refSils, regions, protect, chimney });
+    // T-112-01 (E-29): hip/pyramid hypotheses — a group whose planes REFUTED the ridge-pair
+    // hypothesis (no sane gable — the church tower) gets a fitted pyramidal/hip cap; a group
+    // with hip-demanded gables gets per-end GLB-fitted hip pitches. Both enter the ladder as
+    // appended tail rungs (roof-swap) — earlier acceptance never reaches them, which is what
+    // keeps single-mass subjects byte-identical (--repro is the proof).
+    const capRes = grp.gables.some((g) => g.sane) ? null
+      : fitHipCap({ record, massId: grp.massId, gables: grp.gables, occ: occCur, tris: aTris });
+    const hipEndsRes = grp.gables.some((g) => g.sane && g.hip?.demanded)
+      ? fitHipEnds(grp.gables, aTris) : null;
+    const hipFit = capRes?.gable || hipEndsRes
+      ? { cap: capRes?.gable ?? null, hipEnds: hipEndsRes?.gables ?? null }
+      : null;
+    if (capRes || hipEndsRes) {
+      hipFitEvidence.push({
+        massId: grp.massId,
+        capGable: capRes?.gable ?? null, // internal (Sets inside) — stripped from the record
+        cap: capRes ? (capRes.gable?.capFit ?? null) : null,
+        capFitted: Boolean(capRes?.gable),
+        hipEnds: hipEndsRes
+          ? hipEndsRes.gables.filter((g) => g.hip?.fitted).map((g) => ({ id: g.id, fitted: g.hip.fitted }))
+          : null,
+        findings: [...(capRes?.findings ?? []), ...(hipEndsRes?.findings ?? [])],
+      });
+    }
+    const swap = swapRoof(occCur, { gables: grp.gables, endFit, hipFit, family, refSils, regions, protect, chimney });
     if (swap.accepted) occCur = swap.occ;
     components.push({ massId: grp.massId, role: grp.role, gableIds: grp.gableIds, swap });
   }
@@ -212,8 +242,7 @@ async function runRoof(def) {
   // T-109-01: ridge fit — the plane-intersection construction per gable (the swap ladder already
   // tried the intersect rungs) + the GLB apex LINE measured in mesh space: height/direction/
   // length/rmse recorded as fit evidence, never applied as an absolute height (aabb-affine maps
-  // the mesh top onto the spike-inflated blob top).
-  const aTris = alignedTriangles(meshTris, alignment);
+  // the mesh top onto the spike-inflated blob top). aTris hoisted above the swaps (T-112-01).
   const ridgeFit = fit.gables.filter((g) => g.sane).map((g) => {
     const intersect = ridgeFromPlanes(g);
     return {
@@ -231,14 +260,17 @@ async function runRoof(def) {
   // auto-rollback, trace). The accepted gables' footprints are excluded; the chimney/protrusion
   // protects hold — protrusion arbitration belongs to the residual pass below.
   const acceptedGableIds = new Set(components.flatMap((c) => (c.swap.accepted ? c.swap.generated.gables : [])));
-  const gableById = new Map(fit.gables.map((g) => [g.id, g]));
+  // T-112-01: accepted hip-cap gables consume their recorded planes and exclude their footprint
+  // from the termination pass exactly like ridge-pair gables (synthetic faces carry planeId null)
+  const capGables = hipFitEvidence.map((h) => h.capGable).filter(Boolean);
+  const gableById = new Map([...fit.gables, ...capGables].map((g) => [g.id, g]));
   const consumedPlaneIds = new Set();
   const excludeCols = new Set();
   let profileGable = null;
   for (const id of acceptedGableIds) {
     const g = gableById.get(id);
     if (!g) continue;
-    for (const s of g.sides) consumedPlaneIds.add(s.planeId);
+    for (const s of g.sides) if (s.planeId) consumedPlaneIds.add(s.planeId);
     for (const c of g.footprint.cols) excludeCols.add(c);
     if (!profileGable || g.footprint.area > profileGable.footprint.area) profileGable = g;
   }
@@ -267,7 +299,7 @@ async function runRoof(def) {
     gables: endFitPlain.gables.filter((g) => g.ends).map((g) => ({ id: g.id, ends: g.ends })),
     suppressed: endFitSupp.gables.filter((g) => g.hip?.suppressed && g.ends).map((g) => ({ id: g.id, ends: g.ends })) };
   return { raw, occ, record, shellSha, shellPath, componentPath, fit, endFit, family, swap, components,
-    chimney, stack, artifact, ridgeFit, termPlanes, term, residual, ridgeAngle, changed };
+    hipFitEvidence, chimney, stack, artifact, ridgeFit, termPlanes, term, residual, ridgeAngle, changed };
 }
 
 /** Compose per-component swap outcomes into the record's top-level summary. For a single-mass
@@ -399,6 +431,20 @@ async function main() {
       console.error(`[${def.key}] ends ${g.id}${g.supp ? " (gable-ends)" : ""}: lo ${e(g.ends.lo)} · hi ${e(g.ends.hi)}`);
     }
     for (const f of r1.endFit.findings) console.error(`[${def.key}] end-fit ${f.code} @ ${f.where}: ${f.detail}`);
+    for (const h of r1.hipFitEvidence) {
+      if (h.cap) {
+        console.error(`[${def.key}] hip-cap ${h.massId}: FITTED — band ${h.cap.bandFloor}, apex ` +
+          `${h.cap.apex.constructedY} (glb evidence ${h.cap.apex.glbMaxY}), faces ` +
+          h.cap.faces.map((f) => `${f.dir} ${f.pitch} (${f.pitchSource})`).join(" · "));
+      } else if (h.capFitted === false && h.findings.some((f) => f.code.startsWith("hip-cap"))) {
+        console.error(`[${def.key}] hip-cap ${h.massId}: REFUSED`);
+      }
+      for (const e of h.hipEnds ?? []) {
+        console.error(`[${def.key}] hip-ends ${e.id}: ` + ["lo", "hi"].map((end) =>
+          `${end} ${e.fitted[end] ? `pitch ${e.fitted[end].pitch} (rmse ${e.fitted[end].rmse})` : "unfitted"}`).join(" · "));
+      }
+      for (const f of h.findings) console.error(`[${def.key}] hip-fit ${f.code} @ ${f.where}: ${f.detail}`);
+    }
     for (const c of r1.components) {
       console.error(`[${def.key}] component ${c.massId}${c.role ? ` (${c.role})` : ""}: ` +
         `${c.swap.accepted ? `ACCEPTED (${c.swap.attempt})` : `FALLBACK — ${c.swap.reasons.join("; ")}`} ` +
@@ -481,6 +527,11 @@ async function main() {
       await pair(OBLIQUE, `roof-${def.key}`);
       // T-108-01: the AC's named gable-end views
       for (const angle of END_FRAME_ANGLES) await pair(angle, `roof-${def.key}-end${ANGLE_DEG[angle]}`);
+      // T-112-01: the cap views — when a hip-cap hypothesis was attempted, the 45°/135° pairs
+      // (the azimuths whose judge verdicts named the church tower cap; generic per subject)
+      if (r1.hipFitEvidence.some((h) => h.cap || h.capFitted === false)) {
+        for (const angle of ["+x+z", "+x-z"]) await pair(angle, `roof-${def.key}-cap${ANGLE_DEG[angle]}`);
+      }
       // T-109-01: the ridge-profile view — side-on to the dominant accepted gable's ridge line
       if (r1.ridgeAngle) {
         renders.push({ when: "before", ...(await tryRender(r1.raw, r1.ridgeAngle, "ridge-before", subjDir)) });
@@ -535,6 +586,18 @@ async function main() {
         note: "exempt ⇔ spill-free at every gate azimuth after the one-voxel dilation (a mass " +
           "the GLB contains); refuted at ≥1 azimuth → removed under the cage (IoU floors, " +
           "closure no-regress), rolled back named otherwise" },
+      // T-112-01: the hip/pyramid fit — cap evidence per refused component (faces, constructed
+      // apex with the GLB apex as evidence, footprint) + per-end fitted hip pitches; every
+      // refusal named. The cap realizes as a FOUR-SIDED gable through the shared surface
+      // definition; the cage arbitrates it as the ladder's appended tail rung.
+      hipFit: {
+        schema: HIP_FIT_SCHEMA,
+        params: { ...HIP_FIT_DEFAULTS },
+        components: r1.hipFitEvidence.map(({ capGable, ...h }) => h),
+        note: "positions as-built (band-floor cross-section, bbox eave edges); slopes from " +
+          "recorded planes else GLB quadrant normals; apex CONSTRUCTED and sanity-bounded by " +
+          "the as-built top — glbMaxY is evidence, never applied (the aabb-affine lesson)",
+      },
       family: r1.family,
       // T-110-01: one entry per component mass — the roof program's tolerance-or-named-fallback
       // contract applied per component (the church's tower and nave are judged separately, in
@@ -599,8 +662,18 @@ function renderMd(r) {
   const gables = r.fit.gables.map((g) =>
     `- **${g.id}** (${g.sane ? "sane" : `insane: ${g.reasons.join("; ")}`}) ridge ${g.ridge.axis} @ y ${g.ridge.y}` +
     `${g.hip.demanded ? ", hip ends" : ""} — ${sides(g)}`).join("\n");
-  const findings = [...r.fit.findings, ...(r.endFit?.findings ?? []), ...r.swap.findings]
+  const findings = [...r.fit.findings, ...(r.endFit?.findings ?? []),
+    ...(r.hipFit?.components ?? []).flatMap((h) => h.findings ?? []), ...r.swap.findings]
     .map((f) => `- \`${f.code}\` @ ${f.where ?? "—"}: ${f.detail}`).join("\n") || "- (none)";
+  const hipRows = (r.hipFit?.components ?? []).map((h) => {
+    const cap = h.cap
+      ? `cap **FITTED** — band ${h.cap.bandFloor}, apex ${h.cap.apex.constructedY} (glb evidence ` +
+        `${h.cap.apex.glbMaxY}); faces ${h.cap.faces.map((f) => `${f.dir} **${f.pitch}** (${f.pitchSource})`).join(", ")}`
+      : "cap refused (named in findings)";
+    const ends = (h.hipEnds ?? []).map((e) => `${e.id} ends: ` + ["lo", "hi"]
+      .map((end) => `${end} ${e.fitted[end] ? `**${e.fitted[end].pitch}**` : "—"}`).join(" · ")).join("; ");
+    return `- **${h.massId}**: ${[h.cap || h.capFitted === false ? cap : null, ends || null].filter(Boolean).join("; ")}`;
+  }).join("\n");
   const ridgeRows = (r.ridgeFit?.gables ?? []).map((g) => {
     const ix = g.intersect.valid
       ? `intersect **y ${g.intersect.y}** @ v ${g.intersect.v} (Δ vs record ${g.deltaVsRecord})`
@@ -642,6 +715,7 @@ function renderMd(r) {
             ? `ACCEPTED (\`${c.swap.attempt}\`)${c.swap.fitError?.length ? ` — rmse ${c.swap.fitError.map((e) => `${e.gableId} ${e.rmse}`).join(", ")}` : ""}`
             : `FALLBACK — ${c.swap.reasons.join("; ")}`} (gables: ${c.gableIds.join(", ") || "—"})`).join("\n") + `\n\n`
       : "") +
+    (hipRows ? `## Hip/pyramid fit (T-112-01)\n${hipRows}\n\n` : "") +
     (ridgeRows ? `## Ridge fit (T-109-01)\n${ridgeRows}\n\nCap course cells in the accepted geometry: ` +
       `${r.swap.generated.counts.cap ?? 0}.\n\n` : "") +
     (r.terminations?.planes?.length
