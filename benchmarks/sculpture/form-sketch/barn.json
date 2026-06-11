@@ -1,0 +1,2071 @@
+{
+  "schema": "form-sketch/v1",
+  "subject": "barn",
+  "params": {
+    "sampleScale": 48,
+    "faceTarget": 100,
+    "weldEpsFrac": 0.0001,
+    "symmetryConfidence": 0.8,
+    "footprintSnapTolFrac": 0.06,
+    "pitchBucketsDeg": {
+      "flat": 15,
+      "low": 35,
+      "pitched45": 55
+    },
+    "storeyBandBlocks": [
+      3,
+      6
+    ],
+    "registryScale": 48
+  },
+  "source": {
+    "glbSha256": "38de9931c26a70f9e6d0b7ed56702030913705149d16bb1cfd336a96639e5985",
+    "triangleCount": 141220,
+    "bounds": {
+      "min": [
+        -0.500005,
+        -0.223901,
+        -0.273561
+      ],
+      "max": [
+        0.500009,
+        0.223846,
+        0.273593
+      ]
+    }
+  },
+  "substrate": {
+    "sampleScale": 48,
+    "voxelSize": 0.020834,
+    "dims": [
+      48,
+      21,
+      26
+    ],
+    "rawCount": 3579,
+    "count": 3085,
+    "conditionedCount": 3085
+  },
+  "grammar": {
+    "triangleCount": 141220,
+    "degenerateCount": 0,
+    "weldedVertices": 98200,
+    "regionCount": 11854,
+    "keptFaces": 100,
+    "droppedAreaFrac": 0.6506,
+    "meanResidualDeg": 0.24,
+    "areaShareByOrientation": {
+      "+x": 0.1016,
+      "-x": 0.0915,
+      "+y": 0.2658,
+      "-y": 0.1673,
+      "+z": 0.2344,
+      "-z": 0.1389,
+      "roof+x+y": 0.0001,
+      "roof-x+y": 0.0001,
+      "roof+z+y": 0,
+      "roof-z+y": 0,
+      "eave+x-y": 0.0001,
+      "eave-x-y": 0.0001,
+      "eave+z-y": 0,
+      "eave-z-y": 0.0001
+    }
+  },
+  "pitch": {
+    "class": "steep",
+    "dominantTiltDeg": 78.69,
+    "riseCells": 10,
+    "runCells": 2,
+    "ridgeAxis": "x",
+    "eaveLayer": 10,
+    "ridgeLayer": 20
+  },
+  "symmetry": {
+    "axis": "z",
+    "offsetCells": 12.5,
+    "offsetMesh": -0.002724,
+    "score": 0.5518,
+    "threshold": 0.8,
+    "applied": false,
+    "keptSide": null,
+    "scoreByAxis": {
+      "x": 0.516,
+      "z": 0.5518
+    }
+  },
+  "footprint": {
+    "polygon": [
+      [
+        0,
+        0
+      ],
+      [
+        48,
+        0
+      ],
+      [
+        48,
+        24
+      ],
+      [
+        0,
+        24
+      ]
+    ],
+    "isRectangle": true,
+    "toleranceCells": 3,
+    "maskArea": 956,
+    "polygonArea": 1152,
+    "planDims": [
+      48,
+      26
+    ]
+  },
+  "proportions": {
+    "heightCells": 21,
+    "eaveLayer": 10,
+    "ridgeLayer": 20,
+    "eaveFrac": 0.5238,
+    "eaveBlocks": 11,
+    "heightBlocks": 21,
+    "storeyCandidates": [
+      {
+        "n": 1,
+        "perStoreyBlocks": 11,
+        "plausible": false
+      },
+      {
+        "n": 2,
+        "perStoreyBlocks": 5.5,
+        "plausible": true
+      },
+      {
+        "n": 3,
+        "perStoreyBlocks": 3.7,
+        "plausible": true
+      },
+      {
+        "n": 4,
+        "perStoreyBlocks": 2.8,
+        "plausible": false
+      }
+    ],
+    "massCount": 1,
+    "masses": [
+      {
+        "id": "mass-0",
+        "role": "primary",
+        "areaCells": 921,
+        "bbox": {
+          "minX": 0,
+          "maxX": 47,
+          "minZ": 0,
+          "maxZ": 25
+        },
+        "yRange": [
+          0,
+          20
+        ],
+        "volume": 3011
+      },
+      {
+        "id": "mass-1",
+        "role": "protrusion",
+        "areaCells": 6,
+        "bbox": {
+          "minX": 5,
+          "maxX": 9,
+          "minZ": 20,
+          "maxZ": 21
+        },
+        "yRange": [
+          1,
+          12
+        ],
+        "volume": 6
+      },
+      {
+        "id": "mass-2",
+        "role": "protrusion",
+        "areaCells": 8,
+        "bbox": {
+          "minX": 6,
+          "maxX": 9,
+          "minZ": 10,
+          "maxZ": 12
+        },
+        "yRange": [
+          19,
+          19
+        ],
+        "volume": 2
+      },
+      {
+        "id": "mass-3",
+        "role": "protrusion",
+        "areaCells": 5,
+        "bbox": {
+          "minX": 29,
+          "maxX": 31,
+          "minZ": 2,
+          "maxZ": 3
+        },
+        "yRange": [
+          8,
+          9
+        ],
+        "volume": 5
+      },
+      {
+        "id": "mass-4",
+        "role": "protrusion",
+        "areaCells": 6,
+        "bbox": {
+          "minX": 36,
+          "maxX": 37,
+          "minZ": 5,
+          "maxZ": 7
+        },
+        "yRange": [
+          1,
+          15
+        ],
+        "volume": 6
+      },
+      {
+        "id": "mass-5",
+        "role": "protrusion",
+        "areaCells": 6,
+        "bbox": {
+          "minX": 36,
+          "maxX": 39,
+          "minZ": 20,
+          "maxZ": 21
+        },
+        "yRange": [
+          11,
+          12
+        ],
+        "volume": 4
+      },
+      {
+        "id": "mass-6",
+        "role": "protrusion",
+        "areaCells": 4,
+        "bbox": {
+          "minX": 41,
+          "maxX": 42,
+          "minZ": 17,
+          "maxZ": 18
+        },
+        "yRange": [
+          1,
+          16
+        ],
+        "volume": 6
+      }
+    ]
+  },
+  "faces": [
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": -0.223829,
+      "centroid": [
+        -0.00502,
+        -0.223829,
+        -0.000997
+      ],
+      "areaFrac": 0.065249,
+      "meanResidualDeg": 0.09,
+      "maxResidualDeg": 20.54,
+      "triangles": 7023
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": -0.200303,
+      "centroid": [
+        -0.002511,
+        -0.107783,
+        -0.200303
+      ],
+      "areaFrac": 0.020582,
+      "meanResidualDeg": 0.05,
+      "maxResidualDeg": 39.85,
+      "triangles": 2349
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.200283,
+      "centroid": [
+        -0.000298,
+        -0.109657,
+        0.200283
+      ],
+      "areaFrac": 0.020074,
+      "meanResidualDeg": 0.04,
+      "maxResidualDeg": 35.07,
+      "triangles": 2303
+    },
+    {
+      "orientation": "-x",
+      "normal": [
+        -1,
+        0,
+        0
+      ],
+      "offset": -0.47229,
+      "centroid": [
+        0.47229,
+        -0.057156,
+        -0.000037
+      ],
+      "areaFrac": 0.017506,
+      "meanResidualDeg": 0.03,
+      "maxResidualDeg": 42.61,
+      "triangles": 1956
+    },
+    {
+      "orientation": "+x",
+      "normal": [
+        1,
+        0,
+        0
+      ],
+      "offset": -0.47232,
+      "centroid": [
+        -0.47232,
+        -0.05755,
+        0.000236
+      ],
+      "areaFrac": 0.017496,
+      "meanResidualDeg": 0.05,
+      "maxResidualDeg": 29.19,
+      "triangles": 1957
+    },
+    {
+      "orientation": "+x",
+      "normal": [
+        1,
+        0,
+        0
+      ],
+      "offset": 0.444992,
+      "centroid": [
+        0.444992,
+        -0.057717,
+        -0.01061
+      ],
+      "areaFrac": 0.016808,
+      "meanResidualDeg": 0.04,
+      "maxResidualDeg": 24.38,
+      "triangles": 1908
+    },
+    {
+      "orientation": "-x",
+      "normal": [
+        -1,
+        0,
+        0
+      ],
+      "offset": 0.445033,
+      "centroid": [
+        -0.445033,
+        -0.055744,
+        -0.000318
+      ],
+      "areaFrac": 0.016021,
+      "meanResidualDeg": 0.04,
+      "maxResidualDeg": 18.67,
+      "triangles": 1900
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": 0.112406,
+      "centroid": [
+        -0.002343,
+        0.112406,
+        0.063968
+      ],
+      "areaFrac": 0.006966,
+      "meanResidualDeg": 0.05,
+      "maxResidualDeg": 26.43,
+      "triangles": 1110
+    },
+    {
+      "orientation": "-z",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0.038336,
+      "centroid": [
+        -0.000361,
+        0.136067,
+        -0.038336
+      ],
+      "areaFrac": 0.006323,
+      "meanResidualDeg": 0.07,
+      "maxResidualDeg": 25.18,
+      "triangles": 1240
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.038289,
+      "centroid": [
+        -0.000596,
+        0.136057,
+        0.038289
+      ],
+      "areaFrac": 0.00632,
+      "meanResidualDeg": 0.1,
+      "maxResidualDeg": 26.43,
+      "triangles": 1231
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": 0.186166,
+      "centroid": [
+        -0.030153,
+        0.186166,
+        -0.012652
+      ],
+      "areaFrac": 0.005803,
+      "meanResidualDeg": 0.05,
+      "maxResidualDeg": 18.91,
+      "triangles": 733
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": 0.112407,
+      "centroid": [
+        -0.090057,
+        0.112407,
+        -0.058565
+      ],
+      "areaFrac": 0.004728,
+      "meanResidualDeg": 0.04,
+      "maxResidualDeg": 6.46,
+      "triangles": 790
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": -0.22825,
+      "centroid": [
+        -0.012082,
+        -0.140464,
+        -0.22825
+      ],
+      "areaFrac": 0.004045,
+      "meanResidualDeg": 0.02,
+      "maxResidualDeg": 13.95,
+      "triangles": 424
+    },
+    {
+      "orientation": "-z",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0.192254,
+      "centroid": [
+        0.013155,
+        -0.020201,
+        -0.192254
+      ],
+      "areaFrac": 0.003881,
+      "meanResidualDeg": 0.1,
+      "maxResidualDeg": 9.26,
+      "triangles": 556
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.013769,
+      "centroid": [
+        0.000435,
+        0.175221,
+        0.013769
+      ],
+      "areaFrac": 0.003779,
+      "meanResidualDeg": 0.11,
+      "maxResidualDeg": 26.9,
+      "triangles": 737
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.192269,
+      "centroid": [
+        0.002941,
+        -0.020797,
+        0.192269
+      ],
+      "areaFrac": 0.003744,
+      "meanResidualDeg": 0.11,
+      "maxResidualDeg": 31.81,
+      "triangles": 549
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": -0.0138,
+      "centroid": [
+        -0.000101,
+        0.173339,
+        -0.0138
+      ],
+      "areaFrac": 0.003412,
+      "meanResidualDeg": 0.36,
+      "maxResidualDeg": 6.24,
+      "triangles": 674
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": -0.03342,
+      "centroid": [
+        -0.089941,
+        -0.03342,
+        0.214523
+      ],
+      "areaFrac": 0.003396,
+      "meanResidualDeg": 0.04,
+      "maxResidualDeg": 0.2,
+      "triangles": 538
+    },
+    {
+      "orientation": "-y",
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "offset": -0.160565,
+      "centroid": [
+        -0.014086,
+        0.160565,
+        -0.025867
+      ],
+      "areaFrac": 0.003325,
+      "meanResidualDeg": 0.11,
+      "maxResidualDeg": 15.02,
+      "triangles": 564
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": -0.063446,
+      "centroid": [
+        0.000562,
+        0.124949,
+        -0.063446
+      ],
+      "areaFrac": 0.003291,
+      "meanResidualDeg": 0.1,
+      "maxResidualDeg": 0.98,
+      "triangles": 602
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": 0.160563,
+      "centroid": [
+        -0.000567,
+        0.160563,
+        0.025805
+      ],
+      "areaFrac": 0.003209,
+      "meanResidualDeg": 0.1,
+      "maxResidualDeg": 15.91,
+      "triangles": 532
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.112377,
+      "centroid": [
+        0.061198,
+        0.074769,
+        0.112377
+      ],
+      "areaFrac": 0.003067,
+      "meanResidualDeg": 0.31,
+      "maxResidualDeg": 17.73,
+      "triangles": 442
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": -0.12376,
+      "centroid": [
+        0.069809,
+        0.051342,
+        -0.12376
+      ],
+      "areaFrac": 0.002892,
+      "meanResidualDeg": 0.2,
+      "maxResidualDeg": 18.04,
+      "triangles": 515
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": -0.111302,
+      "centroid": [
+        0.133192,
+        0.075744,
+        -0.111302
+      ],
+      "areaFrac": 0.002824,
+      "meanResidualDeg": 0.5,
+      "maxResidualDeg": 43.94,
+      "triangles": 484
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": 0.223831,
+      "centroid": [
+        -0.168163,
+        0.223831,
+        -0.000003
+      ],
+      "areaFrac": 0.002739,
+      "meanResidualDeg": 0.13,
+      "maxResidualDeg": 10.86,
+      "triangles": 383
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.228242,
+      "centroid": [
+        -0.059722,
+        -0.152399,
+        0.228242
+      ],
+      "areaFrac": 0.002269,
+      "meanResidualDeg": 0.02,
+      "maxResidualDeg": 11.94,
+      "triangles": 247
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": 0.186148,
+      "centroid": [
+        0.191229,
+        0.186148,
+        0.035834
+      ],
+      "areaFrac": 0.002234,
+      "meanResidualDeg": 0.11,
+      "maxResidualDeg": 18.71,
+      "triangles": 326
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": 0.137128,
+      "centroid": [
+        0.239139,
+        0.137128,
+        -0.074796
+      ],
+      "areaFrac": 0.002133,
+      "meanResidualDeg": 0.43,
+      "maxResidualDeg": 14.93,
+      "triangles": 358
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": 0.04017,
+      "centroid": [
+        0.003566,
+        0.04017,
+        0.141714
+      ],
+      "areaFrac": 0.00213,
+      "meanResidualDeg": 0.07,
+      "maxResidualDeg": 1.11,
+      "triangles": 329
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": -0.228252,
+      "centroid": [
+        0.416533,
+        -0.133642,
+        -0.228252
+      ],
+      "areaFrac": 0.002069,
+      "meanResidualDeg": 0.09,
+      "maxResidualDeg": 20.04,
+      "triangles": 206
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": -0.228254,
+      "centroid": [
+        -0.416485,
+        -0.13384,
+        -0.228254
+      ],
+      "areaFrac": 0.002066,
+      "meanResidualDeg": 0.05,
+      "maxResidualDeg": 5.74,
+      "triangles": 214
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": 0.052238,
+      "centroid": [
+        0.000081,
+        0.052238,
+        0.153689
+      ],
+      "areaFrac": 0.002056,
+      "meanResidualDeg": 0.07,
+      "maxResidualDeg": 21.93,
+      "triangles": 362
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.063393,
+      "centroid": [
+        0.169435,
+        0.124858,
+        0.063393
+      ],
+      "areaFrac": 0.002053,
+      "meanResidualDeg": 0.06,
+      "maxResidualDeg": 2.96,
+      "triangles": 362
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": -0.146929,
+      "centroid": [
+        0.249628,
+        0.028219,
+        -0.146929
+      ],
+      "areaFrac": 0.001864,
+      "meanResidualDeg": 0.12,
+      "maxResidualDeg": 16.32,
+      "triangles": 290
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": -0.03343,
+      "centroid": [
+        -0.105554,
+        -0.03343,
+        -0.20366
+      ],
+      "areaFrac": 0.001843,
+      "meanResidualDeg": 0.04,
+      "maxResidualDeg": 0.17,
+      "triangles": 276
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": 0.003563,
+      "centroid": [
+        0.000016,
+        0.003563,
+        -0.166689
+      ],
+      "areaFrac": 0.00182,
+      "meanResidualDeg": 0.13,
+      "maxResidualDeg": 14.29,
+      "triangles": 302
+    },
+    {
+      "orientation": "-z",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0.228251,
+      "centroid": [
+        0.300903,
+        -0.144928,
+        -0.228251
+      ],
+      "areaFrac": 0.001819,
+      "meanResidualDeg": 0.02,
+      "maxResidualDeg": 0.14,
+      "triangles": 202
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.160527,
+      "centroid": [
+        0.000029,
+        0.046216,
+        0.160527
+      ],
+      "areaFrac": 0.00181,
+      "meanResidualDeg": 0.08,
+      "maxResidualDeg": 35.41,
+      "triangles": 335
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": 0.003563,
+      "centroid": [
+        0.029184,
+        0.003563,
+        0.166599
+      ],
+      "areaFrac": 0.001718,
+      "meanResidualDeg": 0.09,
+      "maxResidualDeg": 7.44,
+      "triangles": 330
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": -0.228252,
+      "centroid": [
+        -0.286429,
+        -0.12989,
+        -0.228252
+      ],
+      "areaFrac": 0.001693,
+      "meanResidualDeg": 0.02,
+      "maxResidualDeg": 0.09,
+      "triangles": 149
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.228246,
+      "centroid": [
+        -0.403596,
+        -0.137756,
+        0.228246
+      ],
+      "areaFrac": 0.00165,
+      "meanResidualDeg": 0.02,
+      "maxResidualDeg": 0.26,
+      "triangles": 161
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": 0.052228,
+      "centroid": [
+        0.098401,
+        0.052228,
+        -0.153821
+      ],
+      "areaFrac": 0.001648,
+      "meanResidualDeg": 0.08,
+      "maxResidualDeg": 15.02,
+      "triangles": 297
+    },
+    {
+      "orientation": "-z",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": -0.228243,
+      "centroid": [
+        0.290125,
+        -0.129398,
+        0.228243
+      ],
+      "areaFrac": 0.001633,
+      "meanResidualDeg": 0.02,
+      "maxResidualDeg": 0.08,
+      "triangles": 169
+    },
+    {
+      "orientation": "-y",
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "offset": -0.040197,
+      "centroid": [
+        -0.289694,
+        0.040197,
+        0.159784
+      ],
+      "areaFrac": 0.001623,
+      "meanResidualDeg": 0.1,
+      "maxResidualDeg": 2.35,
+      "triangles": 238
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.160545,
+      "centroid": [
+        0.000374,
+        0.009588,
+        0.160545
+      ],
+      "areaFrac": 0.001612,
+      "meanResidualDeg": 0.05,
+      "maxResidualDeg": 2.22,
+      "triangles": 295
+    },
+    {
+      "orientation": "-z",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0.160636,
+      "centroid": [
+        0.000768,
+        0.009591,
+        -0.160636
+      ],
+      "areaFrac": 0.001611,
+      "meanResidualDeg": 0.02,
+      "maxResidualDeg": 1,
+      "triangles": 277
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.146834,
+      "centroid": [
+        -0.29248,
+        0.028406,
+        0.146834
+      ],
+      "areaFrac": 0.001591,
+      "meanResidualDeg": 0.1,
+      "maxResidualDeg": 31.81,
+      "triangles": 250
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.228245,
+      "centroid": [
+        0.402977,
+        -0.133495,
+        0.228245
+      ],
+      "areaFrac": 0.001556,
+      "meanResidualDeg": 0.01,
+      "maxResidualDeg": 0.06,
+      "triangles": 155
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.228243,
+      "centroid": [
+        -0.291324,
+        -0.133576,
+        0.228243
+      ],
+      "areaFrac": 0.001551,
+      "meanResidualDeg": 0.02,
+      "maxResidualDeg": 0.08,
+      "triangles": 150
+    },
+    {
+      "orientation": "-y",
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "offset": -0.040178,
+      "centroid": [
+        0.349774,
+        0.040178,
+        -0.144474
+      ],
+      "areaFrac": 0.001485,
+      "meanResidualDeg": 0.09,
+      "maxResidualDeg": 3.47,
+      "triangles": 222
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.228243,
+      "centroid": [
+        0.065858,
+        -0.133738,
+        0.228243
+      ],
+      "areaFrac": 0.001483,
+      "meanResidualDeg": 0.02,
+      "maxResidualDeg": 0.13,
+      "triangles": 169
+    },
+    {
+      "orientation": "-z",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0.160624,
+      "centroid": [
+        0.098682,
+        0.046231,
+        -0.160624
+      ],
+      "areaFrac": 0.001449,
+      "meanResidualDeg": 0.12,
+      "maxResidualDeg": 19.56,
+      "triangles": 267
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": 0.18615,
+      "centroid": [
+        -0.30137,
+        0.18615,
+        0.035626
+      ],
+      "areaFrac": 0.001417,
+      "meanResidualDeg": 0.11,
+      "maxResidualDeg": 6.6,
+      "triangles": 179
+    },
+    {
+      "orientation": "-y",
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "offset": -0.186166,
+      "centroid": [
+        0.322128,
+        0.186166,
+        -0.036817
+      ],
+      "areaFrac": 0.001409,
+      "meanResidualDeg": 0.08,
+      "maxResidualDeg": 9.29,
+      "triangles": 176
+    },
+    {
+      "orientation": "-y",
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "offset": -0.223826,
+      "centroid": [
+        0.331631,
+        0.223826,
+        -0.000004
+      ],
+      "areaFrac": 0.00139,
+      "meanResidualDeg": 0.25,
+      "maxResidualDeg": 17.43,
+      "triangles": 211
+    },
+    {
+      "orientation": "-y",
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "offset": 0.020292,
+      "centroid": [
+        0.014131,
+        -0.020292,
+        -0.222125
+      ],
+      "areaFrac": 0.001386,
+      "meanResidualDeg": 0.05,
+      "maxResidualDeg": 0.3,
+      "triangles": 234
+    },
+    {
+      "orientation": "-z",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0.0397,
+      "centroid": [
+        -0.169394,
+        0.193172,
+        -0.0397
+      ],
+      "areaFrac": 0.001359,
+      "meanResidualDeg": 0.14,
+      "maxResidualDeg": 13.99,
+      "triangles": 223
+    },
+    {
+      "orientation": "-z",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": -0.123131,
+      "centroid": [
+        0.235972,
+        0.091072,
+        0.123131
+      ],
+      "areaFrac": 0.001344,
+      "meanResidualDeg": 0.33,
+      "maxResidualDeg": 39.88,
+      "triangles": 233
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": 0.075082,
+      "centroid": [
+        -0.201208,
+        0.075082,
+        -0.139348
+      ],
+      "areaFrac": 0.001335,
+      "meanResidualDeg": 0.06,
+      "maxResidualDeg": 17.27,
+      "triangles": 229
+    },
+    {
+      "orientation": "-z",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": -0.146896,
+      "centroid": [
+        -0.183479,
+        0.068232,
+        0.146896
+      ],
+      "areaFrac": 0.001314,
+      "meanResidualDeg": 0.12,
+      "maxResidualDeg": 20.36,
+      "triangles": 233
+    },
+    {
+      "orientation": "-z",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0.08844,
+      "centroid": [
+        0.139385,
+        0.131033,
+        -0.08844
+      ],
+      "areaFrac": 0.00131,
+      "meanResidualDeg": 0.06,
+      "maxResidualDeg": 13.55,
+      "triangles": 283
+    },
+    {
+      "orientation": "-y",
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "offset": -0.112411,
+      "centroid": [
+        0.331029,
+        0.112411,
+        -0.077368
+      ],
+      "areaFrac": 0.001287,
+      "meanResidualDeg": 0.05,
+      "maxResidualDeg": 0.64,
+      "triangles": 161
+    },
+    {
+      "orientation": "-y",
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "offset": -0.040197,
+      "centroid": [
+        0.333446,
+        0.040197,
+        0.159848
+      ],
+      "areaFrac": 0.001275,
+      "meanResidualDeg": 0.11,
+      "maxResidualDeg": 10.03,
+      "triangles": 190
+    },
+    {
+      "orientation": "-z",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0.146982,
+      "centroid": [
+        -0.169804,
+        0.068735,
+        -0.146982
+      ],
+      "areaFrac": 0.001262,
+      "meanResidualDeg": 0.03,
+      "maxResidualDeg": 0.35,
+      "triangles": 222
+    },
+    {
+      "orientation": "-y",
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "offset": 0.009114,
+      "centroid": [
+        0.098977,
+        -0.009114,
+        -0.183425
+      ],
+      "areaFrac": 0.001261,
+      "meanResidualDeg": 0.07,
+      "maxResidualDeg": 0.22,
+      "triangles": 185
+    },
+    {
+      "orientation": "-z",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": -0.063393,
+      "centroid": [
+        -0.276884,
+        0.124931,
+        0.063393
+      ],
+      "areaFrac": 0.001248,
+      "meanResidualDeg": 0.06,
+      "maxResidualDeg": 0.27,
+      "triangles": 225
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.027865,
+      "centroid": [
+        -0.168315,
+        0.206264,
+        0.027865
+      ],
+      "areaFrac": 0.001245,
+      "meanResidualDeg": 0.21,
+      "maxResidualDeg": 9.56,
+      "triangles": 260
+    },
+    {
+      "orientation": "-z",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0.027741,
+      "centroid": [
+        -0.168368,
+        0.206265,
+        -0.027741
+      ],
+      "areaFrac": 0.001244,
+      "meanResidualDeg": 0.05,
+      "maxResidualDeg": 31.31,
+      "triangles": 265
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": 0.124992,
+      "centroid": [
+        0.139432,
+        0.124992,
+        -0.094131
+      ],
+      "areaFrac": 0.001235,
+      "meanResidualDeg": 0.07,
+      "maxResidualDeg": 17.6,
+      "triangles": 267
+    },
+    {
+      "orientation": "-z",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": -0.18446,
+      "centroid": [
+        -0.168671,
+        0.021846,
+        0.18446
+      ],
+      "areaFrac": 0.001229,
+      "meanResidualDeg": 0.07,
+      "maxResidualDeg": 9.54,
+      "triangles": 194
+    },
+    {
+      "orientation": "-z",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0.146931,
+      "centroid": [
+        -0.345513,
+        0.029157,
+        -0.146931
+      ],
+      "areaFrac": 0.001214,
+      "meanResidualDeg": 0.14,
+      "maxResidualDeg": 31.15,
+      "triangles": 192
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.122858,
+      "centroid": [
+        0.121477,
+        0.056585,
+        0.122858
+      ],
+      "areaFrac": 0.001202,
+      "meanResidualDeg": 0.33,
+      "maxResidualDeg": 7.95,
+      "triangles": 205
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": 0.200027,
+      "centroid": [
+        -0.168447,
+        0.200027,
+        -0.033709
+      ],
+      "areaFrac": 0.00119,
+      "meanResidualDeg": 0.03,
+      "maxResidualDeg": 14.64,
+      "triangles": 263
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": 0.100266,
+      "centroid": [
+        -0.169214,
+        0.100266,
+        -0.117858
+      ],
+      "areaFrac": 0.001185,
+      "meanResidualDeg": 0.06,
+      "maxResidualDeg": 0.43,
+      "triangles": 197
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": 0.200027,
+      "centroid": [
+        -0.168264,
+        0.200027,
+        0.033706
+      ],
+      "areaFrac": 0.001161,
+      "meanResidualDeg": 0.07,
+      "maxResidualDeg": 9.75,
+      "triangles": 273
+    },
+    {
+      "orientation": "+y",
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "offset": 0.212499,
+      "centroid": [
+        -0.224656,
+        0.212499,
+        -0.020742
+      ],
+      "areaFrac": 0.001158,
+      "meanResidualDeg": 0.06,
+      "maxResidualDeg": 11.64,
+      "triangles": 222
+    },
+    {
+      "orientation": "-y",
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "offset": -0.04017,
+      "centroid": [
+        -0.270956,
+        0.04017,
+        -0.138392
+      ],
+      "areaFrac": 0.001146,
+      "meanResidualDeg": 0.05,
+      "maxResidualDeg": 4.35,
+      "triangles": 171
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": -0.063446,
+      "centroid": [
+        0.331622,
+        0.162059,
+        -0.063446
+      ],
+      "areaFrac": 0.001143,
+      "meanResidualDeg": 0.06,
+      "maxResidualDeg": 42.29,
+      "triangles": 239
+    },
+    {
+      "orientation": "-y",
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "offset": -0.075064,
+      "centroid": [
+        -0.169948,
+        0.075064,
+        0.141391
+      ],
+      "areaFrac": 0.001098,
+      "meanResidualDeg": 0.17,
+      "maxResidualDeg": 8.62,
+      "triangles": 197
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": -0.088389,
+      "centroid": [
+        0.084718,
+        0.099666,
+        -0.088389
+      ],
+      "areaFrac": 0.001097,
+      "meanResidualDeg": 0.05,
+      "maxResidualDeg": 0.26,
+      "triangles": 142
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.122844,
+      "centroid": [
+        -0.125541,
+        0.054869,
+        0.122844
+      ],
+      "areaFrac": 0.001051,
+      "meanResidualDeg": 0.26,
+      "maxResidualDeg": 3.04,
+      "triangles": 189
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": -0.063445,
+      "centroid": [
+        -0.346402,
+        0.16206,
+        -0.063445
+      ],
+      "areaFrac": 0.001043,
+      "meanResidualDeg": 0.06,
+      "maxResidualDeg": 23.39,
+      "triangles": 209
+    },
+    {
+      "orientation": "-z",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": -0.063393,
+      "centroid": [
+        -0.346375,
+        0.162048,
+        0.063393
+      ],
+      "areaFrac": 0.00104,
+      "meanResidualDeg": 0.03,
+      "maxResidualDeg": 0.24,
+      "triangles": 211
+    },
+    {
+      "orientation": "-y",
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "offset": -0.17333,
+      "centroid": [
+        0.339092,
+        0.17333,
+        -0.051186
+      ],
+      "areaFrac": 0.001036,
+      "meanResidualDeg": 0.08,
+      "maxResidualDeg": 22.32,
+      "triangles": 154
+    },
+    {
+      "orientation": "-y",
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "offset": 0.033424,
+      "centroid": [
+        0.30847,
+        -0.033424,
+        0.225338
+      ],
+      "areaFrac": 0.001021,
+      "meanResidualDeg": 0.06,
+      "maxResidualDeg": 13.08,
+      "triangles": 174
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": -0.051353,
+      "centroid": [
+        -0.369067,
+        0.171905,
+        -0.051353
+      ],
+      "areaFrac": 0.000957,
+      "meanResidualDeg": 0.22,
+      "maxResidualDeg": 14.36,
+      "triangles": 163
+    },
+    {
+      "orientation": "-z",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0.123812,
+      "centroid": [
+        -0.092642,
+        0.092155,
+        -0.123812
+      ],
+      "areaFrac": 0.000944,
+      "meanResidualDeg": 0.04,
+      "maxResidualDeg": 0.59,
+      "triangles": 153
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.063394,
+      "centroid": [
+        0.360664,
+        0.162049,
+        0.063394
+      ],
+      "areaFrac": 0.000944,
+      "meanResidualDeg": 0.04,
+      "maxResidualDeg": 0.15,
+      "triangles": 189
+    },
+    {
+      "orientation": "-z",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": 0.013747,
+      "centroid": [
+        -0.112639,
+        0.218159,
+        -0.013747
+      ],
+      "areaFrac": 0.00094,
+      "meanResidualDeg": 0.24,
+      "maxResidualDeg": 31.1,
+      "triangles": 191
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.146837,
+      "centroid": [
+        0.375831,
+        0.027842,
+        0.146837
+      ],
+      "areaFrac": 0.000917,
+      "meanResidualDeg": 0.12,
+      "maxResidualDeg": 10.76,
+      "triangles": 131
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.122835,
+      "centroid": [
+        -0.377009,
+        0.054261,
+        0.122835
+      ],
+      "areaFrac": 0.000898,
+      "meanResidualDeg": 0.43,
+      "maxResidualDeg": 10.46,
+      "triangles": 146
+    },
+    {
+      "orientation": "-z",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": -0.112465,
+      "centroid": [
+        0.251417,
+        0.106427,
+        0.112465
+      ],
+      "areaFrac": 0.00089,
+      "meanResidualDeg": 0.3,
+      "maxResidualDeg": 34.54,
+      "triangles": 188
+    },
+    {
+      "orientation": "-y",
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "offset": -0.100341,
+      "centroid": [
+        0.22508,
+        0.100341,
+        0.117806
+      ],
+      "areaFrac": 0.000887,
+      "meanResidualDeg": 0.11,
+      "maxResidualDeg": 13.75,
+      "triangles": 218
+    },
+    {
+      "orientation": "-y",
+      "normal": [
+        0,
+        -1,
+        0
+      ],
+      "offset": -0.173331,
+      "centroid": [
+        -0.362143,
+        0.173331,
+        -0.05332
+      ],
+      "areaFrac": 0.000844,
+      "meanResidualDeg": 0.11,
+      "maxResidualDeg": 11.95,
+      "triangles": 129
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": -0.215966,
+      "centroid": [
+        0.249973,
+        -0.014683,
+        -0.215966
+      ],
+      "areaFrac": 0.000843,
+      "meanResidualDeg": 0.3,
+      "maxResidualDeg": 16.41,
+      "triangles": 159
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": -0.111328,
+      "centroid": [
+        -0.318946,
+        0.077137,
+        -0.111328
+      ],
+      "areaFrac": 0.000831,
+      "meanResidualDeg": 0.63,
+      "maxResidualDeg": 11.91,
+      "triangles": 148
+    },
+    {
+      "orientation": "-z",
+      "normal": [
+        0,
+        0,
+        -1
+      ],
+      "offset": -0.172689,
+      "centroid": [
+        -0.295273,
+        0.033445,
+        0.172689
+      ],
+      "areaFrac": 0.000815,
+      "meanResidualDeg": 0.04,
+      "maxResidualDeg": 12.35,
+      "triangles": 140
+    },
+    {
+      "orientation": "+z",
+      "normal": [
+        0,
+        0,
+        1
+      ],
+      "offset": 0.039525,
+      "centroid": [
+        -0.304992,
+        0.19313,
+        0.039525
+      ],
+      "areaFrac": 0.000814,
+      "meanResidualDeg": 0.1,
+      "maxResidualDeg": 36.21,
+      "triangles": 144
+    },
+    {
+      "orientation": "-x",
+      "normal": [
+        -1,
+        0,
+        0
+      ],
+      "offset": -0.444993,
+      "centroid": [
+        0.444993,
+        -0.128234,
+        0.214197
+      ],
+      "areaFrac": 0.000801,
+      "meanResidualDeg": 0.11,
+      "maxResidualDeg": 1.05,
+      "triangles": 77
+    },
+    {
+      "orientation": "+x",
+      "normal": [
+        1,
+        0,
+        0
+      ],
+      "offset": -0.445022,
+      "centroid": [
+        -0.445022,
+        -0.12858,
+        0.214161
+      ],
+      "areaFrac": 0.000801,
+      "meanResidualDeg": 0.07,
+      "maxResidualDeg": 31.9,
+      "triangles": 93
+    }
+  ]
+}

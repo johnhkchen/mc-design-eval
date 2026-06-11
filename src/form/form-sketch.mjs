@@ -31,6 +31,7 @@
 import { parseGlbMesh } from "./glb-mesh.mjs";
 import { occupancyFromCells } from "../view/occupancy.mjs";
 import { segmentMasses } from "./component-decompose.mjs";
+import { pruneStrays } from "./voxel-components.mjs";
 
 export const FORM_SKETCH_SCHEMA = "form-sketch/v1";
 
@@ -43,7 +44,6 @@ export const SKETCH_PARAMS = Object.freeze({
   weldEpsFrac: 1e-4, //        vertex-weld grid pitch, as a fraction of the bbox diagonal
   symmetryConfidence: 0.8, //  reflection-IoU below this → no mirror applied (recorded, not forced)
   footprintSnapTolFrac: 0.06, // jog-snap tolerance, fraction of the longer plan dimension
-  eaveAreaFrac: 0.8, //        eave = highest layer with plan area ≥ frac · footprint area
   pitchBucketsDeg: Object.freeze({ flat: 15, low: 35, pitched45: 55 }), // upper bounds; ≥55 = steep
   storeyBandBlocks: Object.freeze([3, 6]), // plausible per-storey height band, block-equivalents
 });
@@ -552,19 +552,39 @@ export function fitFootprint(occupied, params = SKETCH_PARAMS) {
     if (!mask.has(`${x + 1},${z}`)) addEdge(x + 1, z, x + 1, z + 1);
   }
 
-  // chain edges into loops; keep the loop with the largest |shoelace| as the outer boundary
+  // chain edges into loops; at a PINCH corner (two cells touching diagonally → two outgoing
+  // edges) take the LEFTMOST turn relative to the incoming direction, which keeps each loop
+  // simple (the figure-eight pairing is what produces zero-width polygon spikes). Keep the loop
+  // with the largest |shoelace| as the outer boundary.
+  const turnRank = (dIn, dOut) => {
+    // left turn ((-dz, dx)) best, then straight, then right; a reversal ranks last
+    if (dOut[0] === -dIn[1] && dOut[1] === dIn[0]) return 0;
+    if (dOut[0] === dIn[0] && dOut[1] === dIn[1]) return 1;
+    if (dOut[0] === dIn[1] && dOut[1] === -dIn[0]) return 2;
+    return 3;
+  };
   const loops = [];
   for (const start of [...edges.keys()].sort()) {
     while ((edges.get(start) ?? []).length > 0) {
       const loop = [];
       let key = start;
+      let dIn = null;
       do {
         const list = edges.get(key);
         /* c8 ignore next */
         if (!list || list.length === 0) throw new Error("fitFootprint: open boundary chain");
-        const next = list.shift();
         const [x, z] = key.split(",").map(Number);
+        let pickIdx = 0;
+        if (list.length > 1 && dIn) {
+          let bestRank = Infinity;
+          for (let i = 0; i < list.length; i++) {
+            const r = turnRank(dIn, [Math.sign(list[i][0] - x), Math.sign(list[i][1] - z)]);
+            if (r < bestRank) { bestRank = r; pickIdx = i; }
+          }
+        }
+        const next = list.splice(pickIdx, 1)[0];
         loop.push([x, z]);
+        dIn = [Math.sign(next[0] - x), Math.sign(next[1] - z)];
         key = `${next[0]},${next[1]}`;
       } while (key !== start);
       loops.push(loop);
@@ -599,6 +619,7 @@ export function fitFootprint(occupied, params = SKETCH_PARAMS) {
         const d1 = [Math.sign(cur[0] - prev[0]), Math.sign(cur[1] - prev[1])];
         const d2 = [Math.sign(nxt[0] - cur[0]), Math.sign(nxt[1] - cur[1])];
         if (d1[0] === d2[0] && d1[1] === d2[1]) { changed = true; continue; } // collinear
+        if (d1[0] === -d2[0] && d1[1] === -d2[1]) { changed = true; continue; } // out-and-back spike
         next.push(cur);
       }
       out = next;
@@ -654,6 +675,15 @@ export function fitFootprint(occupied, params = SKETCH_PARAMS) {
   }
   polygon = [...polygon.slice(startIdx), ...polygon.slice(0, startIdx)];
 
+  // a footprint is rectilinear BY CONTRACT — fail loudly rather than ever record a diagonal
+  for (let i = 0; i < polygon.length; i++) {
+    const [x1, z1] = polygon[i];
+    const [x2, z2] = polygon[(i + 1) % polygon.length];
+    if (x1 !== x2 && z1 !== z2) {
+      throw new Error(`fitFootprint: non-rectilinear edge [${x1},${z1}]→[${x2},${z2}] — polygon ${JSON.stringify(polygon)}`);
+    }
+  }
+
   return {
     polygon,
     isRectangle: polygon.length === 4,
@@ -666,43 +696,101 @@ export function fitFootprint(occupied, params = SKETCH_PARAMS) {
 
 // --- gross proportions --------------------------------------------------------------------------------
 
-/**
- * Roof pitch class from the RAW (pre-snap) normals — measured before the grammar snap so a steep
- * roof is not laundered into 45° by its own conditioning. Upward faces (ny > 0.05) vote with their
- * area into the declared tilt buckets; the dominant tilt is the area-weighted mean of the winning
- * bucket.
- */
-export function pitchClass(normals, areas, params = SKETCH_PARAMS) {
+/** Tilt → declared pitch bucket. */
+export function pitchBucket(tiltDeg, params = SKETCH_PARAMS) {
   const b = params.pitchBucketsDeg;
-  const buckets = ["flat", "low", "pitched45", "steep"];
-  const bucketOf = (tilt) => (tilt < b.flat ? "flat" : tilt < b.low ? "low" : tilt < b.pitched45 ? "pitched45" : "steep");
-  const area = { flat: 0, low: 0, pitched45: 0, steep: 0 };
-  const tiltSum = { flat: 0, low: 0, pitched45: 0, steep: 0 };
-  let upward = 0;
-  let total = 0;
-  const n = areas.length;
-  for (let t = 0; t < n; t++) {
-    const a = areas[t];
-    if (a === 0) continue;
-    total += a;
-    const ny = normals[t * 3 + 1];
-    if (ny <= 0.05) continue;
-    const tilt = acosDeg(ny);
-    const k = bucketOf(tilt);
-    area[k] += a;
-    tiltSum[k] += a * tilt;
-    upward += a;
+  return tiltDeg < b.flat ? "flat" : tiltDeg < b.low ? "low" : tiltDeg < b.pitched45 ? "pitched45" : "steep";
+}
+
+/**
+ * Roof profile from the occupancy's TOP SURFACE — not from face normals. The registered meshes
+ * are stair-stepped at the facet level (a pitched roof decomposes into flat+vertical micro-steps,
+ * so a per-triangle tilt vote reads "flat" on every pitched roof — the first-run failure), and
+ * some voxelize as hollow shells (double-skin geometry defeats parity layer counts). The column
+ * top heightfield is robust to both: 3×3-median-smoothed tops (the segmentMasses convention),
+ * eave = lower median of the BOUNDARY columns' tops (the wall line, where roof meets wall),
+ * ridge = max smoothed top, pitch = atan(rise / half-span perpendicular to the ridge band).
+ * The codebase precedent: T-118/T-122 — read the sampled profile, never the vertex apex.
+ */
+export function roofProfile(occupied, params = SKETCH_PARAMS) {
+  const tops = new Map(); // "x,z" → raw top y
+  let minY = Infinity;
+  let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+  for (let i = 0; i < occupied.length; i += 3) {
+    const x = occupied[i], y = occupied[i + 1], z = occupied[i + 2];
+    const k = `${x},${z}`;
+    if (!(tops.get(k) >= y)) tops.set(k, y);
+    if (y < minY) minY = y;
+    if (x < minX) minX = x;
+    if (x > maxX) maxX = x;
+    if (z < minZ) minZ = z;
+    if (z > maxZ) maxZ = z;
   }
-  if (upward === 0) return { class: "unknown", dominantTiltDeg: null, upwardAreaFrac: 0, areaShare: {} };
-  let winner = buckets[0];
-  for (const k of buckets) if (area[k] > area[winner]) winner = k;
-  const areaShare = {};
-  for (const k of buckets) if (area[k] > 0) areaShare[k] = round(area[k] / upward, 4);
+  if (tops.size === 0) throw new Error("roofProfile: empty occupancy");
+  // 3×3 lower-median smoothing (integer-stable, single-column spikes vanish, slope lines survive)
+  const smooth = new Map();
+  for (const k of tops.keys()) {
+    const [x, z] = k.split(",").map(Number);
+    const vals = [];
+    for (let dx = -1; dx <= 1; dx++) {
+      for (let dz = -1; dz <= 1; dz++) {
+        const v = tops.get(`${x + dx},${z + dz}`);
+        if (v !== undefined) vals.push(v);
+      }
+    }
+    vals.sort((a, b) => a - b);
+    smooth.set(k, vals[Math.floor((vals.length - 1) / 2)]);
+  }
+  const boundaryTops = [];
+  for (const k of smooth.keys()) {
+    const [x, z] = k.split(",").map(Number);
+    if (!tops.has(`${x - 1},${z}`) || !tops.has(`${x + 1},${z}`) ||
+        !tops.has(`${x},${z - 1}`) || !tops.has(`${x},${z + 1}`)) boundaryTops.push(smooth.get(k));
+  }
+  boundaryTops.sort((a, b) => a - b);
+  const eaveLayer = boundaryTops[Math.floor((boundaryTops.length - 1) / 2)];
+  let ridgeLayer = -Infinity;
+  for (const v of smooth.values()) if (v > ridgeLayer) ridgeLayer = v;
+  // ridge band orientation: where the near-ridge columns spread
+  let rMinX = Infinity, rMaxX = -Infinity, rMinZ = Infinity, rMaxZ = -Infinity;
+  for (const [k, v] of smooth) {
+    if (v < ridgeLayer - 1) continue;
+    const [x, z] = k.split(",").map(Number);
+    if (x < rMinX) rMinX = x;
+    if (x > rMaxX) rMaxX = x;
+    if (z < rMinZ) rMinZ = z;
+    if (z > rMaxZ) rMaxZ = z;
+  }
+  const ridgeAxis = (rMaxX - rMinX) >= (rMaxZ - rMinZ) ? "x" : "z";
+  // the run is the ridge band's distance to the nearest mask edge along the perpendicular axis —
+  // NOT half the whole plan (which overestimates the run on L-plans and tower-flanked roofs:
+  // the roof runs from ridge to ITS wing's eave, not to the far side of the building)
+  const runs = [];
+  for (const [k, v] of smooth) {
+    if (v < ridgeLayer - 1) continue;
+    const [x, z] = k.split(",").map(Number);
+    let dPlus = 0, dMinus = 0;
+    if (ridgeAxis === "x") {
+      while (tops.has(`${x},${z + dPlus + 1}`)) dPlus++;
+      while (tops.has(`${x},${z - dMinus - 1}`)) dMinus++;
+    } else {
+      while (tops.has(`${x + dPlus + 1},${z}`)) dPlus++;
+      while (tops.has(`${x - dMinus - 1},${z}`)) dMinus++;
+    }
+    runs.push(Math.min(dPlus, dMinus) + 1);
+  }
+  runs.sort((a, b) => a - b);
+  const runCells = Math.max(1, runs[Math.floor((runs.length - 1) / 2)]);
+  const riseCells = Math.max(0, ridgeLayer - eaveLayer);
+  const tiltDeg = (Math.atan2(riseCells, runCells) * 180) / Math.PI;
   return {
-    class: winner,
-    dominantTiltDeg: round(tiltSum[winner] / area[winner], 2),
-    upwardAreaFrac: round(upward / total, 4),
-    areaShare,
+    class: pitchBucket(tiltDeg, params),
+    dominantTiltDeg: round(tiltDeg, 2),
+    riseCells,
+    runCells: round(runCells, 1),
+    ridgeAxis,
+    eaveLayer,
+    ridgeLayer,
   };
 }
 
@@ -711,22 +799,16 @@ export function pitchClass(normals, areas, params = SKETCH_PARAMS) {
  * subject's registry working scale (registry DATA, not a constant), storey-count CANDIDATES (the
  * sketch proposes, recognition decides — E-31 Rule 3), and the mass inventory from segmentMasses.
  */
-export function proportionsOf(occupied, masses, params = SKETCH_PARAMS, { registryScale, sampleScale }) {
+export function proportionsOf(occupied, masses, params = SKETCH_PARAMS, { registryScale, sampleScale, profile }) {
   if (!(registryScale > 0) || !(sampleScale > 0)) throw new Error("proportionsOf: registryScale and sampleScale are required");
-  const layerCount = new Map();
-  const plan = new Set();
+  if (!profile) throw new Error("proportionsOf: a roofProfile is required (eave/ridge come from the top surface)");
   let minY = Infinity, maxY = -Infinity;
   for (let i = 0; i < occupied.length; i += 3) {
     const y = occupied[i + 1];
-    layerCount.set(y, (layerCount.get(y) ?? 0) + 1);
-    plan.add(`${occupied[i]},${occupied[i + 2]}`);
     if (y < minY) minY = y;
     if (y > maxY) maxY = y;
   }
-  let eaveLayer = minY;
-  for (let y = maxY; y >= minY; y--) {
-    if ((layerCount.get(y) ?? 0) >= params.eaveAreaFrac * plan.size) { eaveLayer = y; break; }
-  }
+  const { eaveLayer } = profile;
   const cellsToBlocks = registryScale / sampleScale;
   const heightCells = maxY - minY + 1;
   const eaveCells = eaveLayer - minY + 1;
@@ -747,7 +829,7 @@ export function proportionsOf(occupied, masses, params = SKETCH_PARAMS, { regist
   return {
     heightCells,
     eaveLayer,
-    ridgeLayer: maxY,
+    ridgeLayer: profile.ridgeLayer,
     eaveFrac: round(eaveCells / heightCells, 4),
     eaveBlocks: round(eaveCells * cellsToBlocks, 1),
     heightBlocks: round(heightCells * cellsToBlocks, 1),
@@ -770,10 +852,10 @@ export function proportionsOf(occupied, masses, params = SKETCH_PARAMS, { regist
  */
 export function conditionGlb(glbBytes, { subject, registryScale, params = SKETCH_PARAMS }) {
   const mesh = parseGlbMesh(glbBytes);
-  const geom = triangleGeometry(mesh.positions, mesh.triangleCount);
-  const pitch = pitchClass(geom.normals, geom.areas, params);
   const cf = coarseFaces(mesh.positions, mesh.triangleCount, params);
-  const sample = sampleOccupancy(mesh.positions, mesh.triangleCount, mesh.bounds, { scale: params.sampleScale });
+  const raw = sampleOccupancy(mesh.positions, mesh.triangleCount, mesh.bounds, { scale: params.sampleScale });
+  // parity pinholes/speckles are sampler noise, not form — drop stray components before measuring
+  const sample = pruneStrays(raw);
   const sym = detectSymmetry(sample, cf.faces, params);
   const cells = [];
   for (let i = 0; i < sym.occupied.length; i += 3) {
@@ -782,7 +864,8 @@ export function conditionGlb(glbBytes, { subject, registryScale, params = SKETCH
   const occ = occupancyFromCells(cells);
   const { masses } = segmentMasses(occ);
   const footprint = fitFootprint(sym.occupied, params);
-  const proportions = proportionsOf(sym.occupied, masses, params, { registryScale, sampleScale: sample.scale });
+  const pitch = roofProfile(sym.occupied, params);
+  const proportions = proportionsOf(sym.occupied, masses, params, { registryScale, sampleScale: sample.scale, profile: pitch });
   const { occupied: _occ, faces: symFaces, ...symmetry } = sym;
   const sketch = {
     schema: FORM_SKETCH_SCHEMA,
@@ -799,7 +882,8 @@ export function conditionGlb(glbBytes, { subject, registryScale, params = SKETCH
       sampleScale: sample.scale,
       voxelSize: round(sample.voxelSize, 6),
       dims: sample.dims,
-      count: sample.count,
+      rawCount: raw.count,
+      count: sample.count, // post-pruneStrays
       conditionedCount: sym.occupied.length / 3,
     },
     grammar: cf.stats,

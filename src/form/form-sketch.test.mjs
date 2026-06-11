@@ -10,7 +10,7 @@ import assert from "node:assert/strict";
 import {
   FORM_SKETCH_SCHEMA, SKETCH_PARAMS, GRAMMAR_ORIENTATIONS,
   triangleGeometry, snapNormal, coarseFaces, sampleOccupancy, detectSymmetry,
-  fitFootprint, pitchClass, proportionsOf, buildSketch,
+  fitFootprint, roofProfile, pitchBucket, proportionsOf, buildSketch,
 } from "./form-sketch.mjs";
 import { voxelizeGlb, occupiedCells } from "./glb-voxelize.mjs";
 
@@ -332,6 +332,14 @@ test("fitFootprint: wobble jogs within the declared tolerance snap to a clean re
   assert.equal(r.isRectangle, true, `polygon ${JSON.stringify(r.polygon)}`);
 });
 
+test("fitFootprint: diagonally-touching masses (pinch corner) chain into simple loops, no spikes", () => {
+  const cells = [...rectCells(0, 9, 0, 9), ...rectCells(10, 14, 10, 14)];
+  const r = fitFootprint(planOccupied(cells));
+  // leftmost-turn chaining separates the pinch into two simple loops; the larger wins
+  assert.deepEqual(r.polygon, [[0, 0], [10, 0], [10, 10], [0, 10]]);
+  assert.equal(r.isRectangle, true);
+});
+
 test("fitFootprint: a genuine L-plan keeps its 6 corners (arms far beyond tolerance)", () => {
   const cells = [...rectCells(0, 19, 0, 9), ...rectCells(0, 7, 10, 19)];
   const r = fitFootprint(planOccupied(cells));
@@ -342,25 +350,32 @@ test("fitFootprint: a genuine L-plan keeps its 6 corners (arms far beyond tolera
 
 // --- proportions --------------------------------------------------------------------------------------
 
-test("pitchClass: 45° prism → pitched45; 60° → steep; flat box → flat (measured pre-snap)", () => {
+test("roofProfile/pitch: profile-read tilt classes from the top surface, not facet normals", () => {
+  // pitch comes from the conditioned occupancy's profile (the registered meshes are stair-stepped
+  // at the facet level — a normal vote reads every pitched roof as flat, the first-run failure)
   for (const [pitchDeg, expected] of [[45, "pitched45"], [60, "steep"], [25, "low"]]) {
-    const { positions, triangleCount } = soupArrays(gabledPrismSoup({ pitchDeg }));
-    const g = triangleGeometry(positions, triangleCount);
-    const p = pitchClass(g.normals, g.areas);
-    assert.equal(p.class, expected, `pitch ${pitchDeg}`);
-    assert.ok(Math.abs(p.dominantTiltDeg - pitchDeg) < 0.1);
+    const sketch = buildSketch(soupToGlb(gabledPrismSoup({ pitchDeg })), PRISM_OPTS);
+    assert.equal(sketch.pitch.class, expected, `pitch ${pitchDeg} → ${sketch.pitch.dominantTiltDeg}°`);
+    assert.ok(Math.abs(sketch.pitch.dominantTiltDeg - pitchDeg) < 6, `tilt ${sketch.pitch.dominantTiltDeg} vs ${pitchDeg}`);
+    assert.equal(sketch.pitch.ridgeAxis, "x");
   }
-  const { positions, triangleCount } = soupArrays(boxSoup([0, 0, 0], [12, 4, 8]));
-  const g = triangleGeometry(positions, triangleCount);
-  assert.equal(pitchClass(g.normals, g.areas).class, "flat");
+  const flat = buildSketch(soupToGlb(boxSoup([0, 0, 0], [12, 4, 8])), PRISM_OPTS);
+  assert.equal(flat.pitch.class, "flat");
+  assert.equal(pitchBucket(0), "flat");
+  assert.equal(pitchBucket(50), "pitched45");
 });
 
-test("proportionsOf: eave where the plan area collapses; storey candidates flagged in the band", () => {
-  // 12×6 body up to y=5 with a narrow ridge band above (y=6..7, 12×1)
-  const cells = [...boxCells(0, 11, 0, 5, 0, 5), ...boxCells(0, 11, 6, 7, 2, 2)];
+test("proportionsOf: profile eave/ridge; storey candidates flagged in the band", () => {
+  // 12×6 body up to y=5 with a 3-wide ridge band above (y=6..7, z 2..4 — wide enough to survive
+  // the median smoothing; a 1-wide band is the voxelization-spike class and is smoothed away)
+  const cells = [...boxCells(0, 11, 0, 5, 0, 5), ...boxCells(0, 11, 6, 7, 2, 4)];
   const occupied = new Int32Array(cells.length * 3);
   cells.forEach((c, i) => occupied.set(c, i * 3));
-  const p = proportionsOf(occupied, [], SKETCH_PARAMS, { registryScale: 32, sampleScale: 16 });
+  const profile = roofProfile(occupied);
+  assert.equal(profile.eaveLayer, 5);
+  assert.equal(profile.ridgeLayer, 7);
+  assert.equal(profile.ridgeAxis, "x");
+  const p = proportionsOf(occupied, [], SKETCH_PARAMS, { registryScale: 32, sampleScale: 16, profile });
   assert.equal(p.eaveLayer, 5);
   assert.equal(p.ridgeLayer, 7);
   assert.equal(p.heightCells, 8);

@@ -86,7 +86,12 @@
     "generated:cottage": "node benchmarks/sculpture/generated-milestone.mjs --subject cottage",
     "generated:gatehouse": "node benchmarks/sculpture/generated-milestone.mjs --subject gatehouse",
     "generated:church": "node benchmarks/sculpture/generated-milestone.mjs --subject church",
-    "generated:barn": "node benchmarks/sculpture/generated-milestone.mjs --subject barn"
+    "generated:barn": "node benchmarks/sculpture/generated-milestone.mjs --subject barn",
+    "sketch:cottage": "node benchmarks/sculpture/form-sketch.mjs --subject cottage",
+    "sketch:gatehouse": "node benchmarks/sculpture/form-sketch.mjs --subject gatehouse",
+    "sketch:church": "node benchmarks/sculpture/form-sketch.mjs --subject church",
+    "sketch:barn": "node benchmarks/sculpture/form-sketch.mjs --subject barn",
+    "sketch:all": "node benchmarks/sculpture/form-sketch.mjs --all"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
