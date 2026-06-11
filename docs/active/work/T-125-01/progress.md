@@ -56,9 +56,34 @@ untouched):
 
 Suite after step 4: **1785 unit tests green** (was 1754).
 
-## Remaining
+## Step 5 — Runner + npm scripts ✓ (committed)
 
-- Step 5: runner + npm scripts
-- Step 6: LIVE cottage + barn drafts (metered, subscription)
-- Step 7: offline replay re-assert ×2 + full npm test + self-grep
-- Step 8: review.md
+`benchmarks/sculpture/recognize.mjs` (live | --offline | --rotate-pins), npm
+`recognize:cottage|barn|offline` (flags inside script strings — nothing rides through npm).
+
+## Step 6 — LIVE drafts ✓ (committed; one mid-flight contract fix)
+
+First cottage run REFUSED 3/3 — diagnostic, not waste: the model's natural facade reading
+(door + ground windows on one wall) hit the invented disjoint-vertical-ranges rule, unlearnable
+under the same-prompt policy. **Deviation from plan (documented rationale):** instead of
+re-rolling, replaced rejection with handling — joint opening LANES (vertically-overlapping
+entries spread evenly in one rhythm, singletons centered), lane-level feasibility validation,
+and the prompt now teaches the layout rules up front. Committed at `48d8197`; refusal ledger
+superseded by the accepted run (records were untracked — no pin rotation involved).
+
+- Cottage: accepted ask 1; two masses (main 18×28 + wing 8×8×15 cross-gable), ashlar-over-rubble
+  concept override, jetty, centered chimney, 5+2 openings; conformance 6/6 PASS; 4,993 cells.
+- Barn: accepted ask 3 (ledger: storeyHeight 5 off-band → malformed JSON → valid); single 48×24
+  mass, cobble walls, dark whole-roof (roof.trim field → full cubes, the no-derivation rule),
+  wagon door + window rhythm; conformance 6/6 PASS; 10,066 cells.
+- Renders at the 4 gate azimuths committed with sha256 receipts; eyeballed: clean, regular,
+  recognizable cottage/barn first drafts. No judge calls.
+
+## Step 7 — Replay + suite ✓
+
+`recognize:offline` ×2: both artifacts re-derive BYTE-IDENTICALLY from committed programs;
+conformance re-verdicts PASS. `npm test` 1818/1818 green (count includes the now-active sibling
+T-128-01's new tests). Self-grep: zero subject names anywhere in `src/recognition/` (fixture
+test now picks the first committed sketch by sorted dir listing).
+
+## Step 8 — review.md written; ticket work complete.
