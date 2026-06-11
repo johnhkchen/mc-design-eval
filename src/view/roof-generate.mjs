@@ -19,7 +19,7 @@
 //
 // PURE — no I/O, no GL, no Date/random; runs under the `src/**/*.test.mjs` glob.
 
-import { evalSideHeight, gableSurfaceHeight } from "../form/roof-fit.mjs";
+import { evalSideHeight, gableSurfaceHeight, hipEndPlanes, hipPlaneHeight } from "../form/roof-fit.mjs";
 
 /** Stair `facing` for an UPHILL direction (the stair's full half backs onto the rise). */
 export const STAIR_FACING = Object.freeze({ "+x": "east", "-x": "west", "+z": "south", "-z": "north" });
@@ -63,7 +63,9 @@ export function roofFamily(kitRows, vocab) {
 // generator and the fit-error measure, so hip clipping can never read as 'error' (the gatehouse
 // lesson). This module adds only the construction-facing question: which way is downhill.
 
-/** The downhill direction of a gable's ACTIVE constraint at a column (null at the ridge cap). */
+/** The downhill direction of a gable's ACTIVE constraint at a column (null at the ridge cap).
+ *  Hip end planes come from roof-fit's hipEndPlanes — the same single definition the surface
+ *  uses (T-112-01), so the downhill answer can never diverge from the realized geometry. */
 function gableDownhillAt(gable, x, z, h) {
   if (h >= gable.ridge.y) return null;
   let best = null;
@@ -72,16 +74,10 @@ function gableDownhillAt(gable, x, z, h) {
     const sh = evalSideHeight(side, gable.ridge.y, x, z);
     if (sh < bestH) { bestH = sh; best = side.eaveDir; }
   }
-  if (gable.hip?.demanded) {
-    const v = gable.ridge.axis === "x" ? x : z;
-    const eave = Math.min(...gable.sides.map((s) => s.eaveY));
-    const pitch = gable.sides.reduce((s, x2) => s + x2.pitch, 0) / gable.sides.length;
-    const fLo = gable.ridge.axis === "x" ? gable.footprint.bbox.minX : gable.footprint.bbox.minZ;
-    const fHi = gable.ridge.axis === "x" ? gable.footprint.bbox.maxX : gable.footprint.bbox.maxZ;
-    const loDir = gable.ridge.axis === "x" ? "-x" : "-z";
-    const hiDir = gable.ridge.axis === "x" ? "+x" : "+z";
-    if (gable.hip.lo && eave + pitch * (v - fLo) < bestH) { bestH = eave + pitch * (v - fLo); best = loDir; }
-    if (gable.hip.hi && eave + pitch * (fHi - v) < bestH) { bestH = eave + pitch * (fHi - v); best = hiDir; }
+  const v = gable.ridge.axis === "x" ? x : z;
+  for (const p of hipEndPlanes(gable)) {
+    const ph = hipPlaneHeight(p, v);
+    if (ph < bestH) { bestH = ph; best = p.dir; }
   }
   return best;
 }

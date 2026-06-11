@@ -6,7 +6,7 @@ import assert from "node:assert/strict";
 import { columnRuns } from "./component-decompose.mjs";
 import {
   ROOF_FIT_DEFAULTS, gablesFromRecord, evalSideHeight, programFitError, planeHeightAt, pitchVariant,
-  gableEndsVariant,
+  gableEndsVariant, gableSurfaceHeight, hipEndPlanes, hipPlaneHeight,
 } from "./roof-fit.mjs";
 
 /** Row runs over an inclusive plan rectangle. */
@@ -251,4 +251,50 @@ test("determinism: two fits of the same record are deep-equal", () => {
     JSON.parse(JSON.stringify(a, (k, v) => (v instanceof Set ? [...v].sort() : v))),
     JSON.parse(JSON.stringify(b, (k, v) => (v instanceof Set ? [...v].sort() : v))),
   );
+});
+
+// --- T-112-01: the single hip end-plane definition ------------------------------------------------
+
+test("hipEndPlanes realizes the legacy hip arithmetic verbatim (golden equivalence)", () => {
+  const { gables } = gablesFromRecord(gableRecord());
+  const g = { ...gables[0], hip: { demanded: true, lo: true, hi: true } };
+  // legacy arithmetic, restated by hand: mean side pitch, min eave, footprint-edge anchors
+  const eave = Math.min(...g.sides.map((s) => s.eaveY));
+  const pitch = g.sides.reduce((s, side) => s + side.pitch, 0) / g.sides.length;
+  const fLo = g.footprint.bbox.minZ;
+  const fHi = g.footprint.bbox.maxZ;
+  for (const [x, z] of [[0, 0], [0, 1], [2, 2], [-3, 6], [0, 7], [4, 3]]) {
+    const legacy = Math.min(
+      g.ridge.y,
+      ...g.sides.map((s) => evalSideHeight(s, g.ridge.y, x, z)),
+      eave + pitch * (z - fLo),
+      eave + pitch * (fHi - z),
+    );
+    assert.equal(gableSurfaceHeight(g, x, z), legacy, `surface @ ${x},${z}`);
+  }
+  const planes = hipEndPlanes(g);
+  assert.deepEqual(planes.map((p) => [p.end, p.dir, p.anchor, p.pitch]),
+    [["lo", "-z", fLo, pitch], ["hi", "+z", fHi, pitch]]);
+});
+
+test("hip.fitted per-end pitch overrides only its own end", () => {
+  const { gables } = gablesFromRecord(gableRecord());
+  const g = { ...gables[0], hip: { demanded: true, lo: true, hi: true, fitted: { lo: { pitch: 2 }, hi: null } } };
+  const planes = hipEndPlanes(g);
+  const mean = g.sides.reduce((s, side) => s + side.pitch, 0) / g.sides.length;
+  assert.equal(planes[0].pitch, 2, "lo end takes the fitted pitch");
+  assert.equal(planes[1].pitch, mean, "hi end keeps the mean-of-sides heuristic");
+  // a steeper fitted lo pitch raises the surface near the lo end; the hi end is untouched
+  const base = { ...g, hip: { demanded: true, lo: true, hi: true } };
+  assert.ok(gableSurfaceHeight(g, 0, 1) > gableSurfaceHeight(base, 0, 1));
+  assert.equal(gableSurfaceHeight(g, 0, 6), gableSurfaceHeight(base, 0, 6));
+});
+
+test("hipPlaneHeight rises from the anchor toward the interior on both ends", () => {
+  const lo = { end: "lo", dir: "-z", anchor: 0, eave: 10, pitch: 1 };
+  const hi = { end: "hi", dir: "+z", anchor: 7, eave: 10, pitch: 1 };
+  assert.equal(hipPlaneHeight(lo, 0), 10);
+  assert.equal(hipPlaneHeight(lo, 3), 13);
+  assert.equal(hipPlaneHeight(hi, 7), 10);
+  assert.equal(hipPlaneHeight(hi, 4), 13);
 });

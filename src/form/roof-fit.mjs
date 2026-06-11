@@ -178,23 +178,52 @@ export function evalSideHeight(side, ridgeY, x, z) {
 }
 
 /**
- * THE PARAMETRIC GABLE SURFACE at a column: min over the two side planes, the ridge cap, and the
+ * THE hip end planes of a gable — ONE definition consumed by {@link gableSurfaceHeight} AND the
+ * generator's downhill question (T-112-01: previously duplicated in roof-generate, the exact
+ * divergence the gatehouse lesson warns about). Per demanded end: the outward direction along
+ * the ridge axis, the footprint-edge anchor, the shared eave, and the pitch — the mean of the
+ * side pitches (the E-27 heuristic realization) unless a FITTED per-end pitch rides the gable
+ * (`hip.fitted.{lo,hi}.pitch`, roof-hip-fit.mjs); committed gables never carry `hip.fitted`, so
+ * the legacy arithmetic is byte-identical. Height at run coordinate v:
+ * `eave + pitch · (end === "lo" ? v − anchor : anchor − v)` — {@link hipPlaneHeight}.
+ */
+export function hipEndPlanes(gable) {
+  if (!gable.hip?.demanded) return [];
+  const axis = gable.ridge.axis;
+  const eave = Math.min(...gable.sides.map((s) => s.eaveY));
+  const mean = gable.sides.reduce((s, side) => s + side.pitch, 0) / gable.sides.length;
+  const fLo = axis === "x" ? gable.footprint.bbox.minX : gable.footprint.bbox.minZ;
+  const fHi = axis === "x" ? gable.footprint.bbox.maxX : gable.footprint.bbox.maxZ;
+  const planes = [];
+  if (gable.hip.lo) {
+    planes.push({ end: "lo", dir: axis === "x" ? "-x" : "-z", anchor: fLo, eave,
+      pitch: gable.hip.fitted?.lo?.pitch ?? mean });
+  }
+  if (gable.hip.hi) {
+    planes.push({ end: "hi", dir: axis === "x" ? "+x" : "+z", anchor: fHi, eave,
+      pitch: gable.hip.fitted?.hi?.pitch ?? mean });
+  }
+  return planes;
+}
+
+/** Height of one hip end plane (from {@link hipEndPlanes}) at run coordinate v. */
+export function hipPlaneHeight(p, v) {
+  return p.eave + p.pitch * (p.end === "lo" ? v - p.anchor : p.anchor - v);
+}
+
+/**
+ * THE PARAMETRIC GABLE SURFACE at a column: min over the side planes, the ridge cap, and the
  * hip end planes where the fit demands them. This single definition is what the generator
  * realizes AND what {@link programFitError} measures against — the two must never diverge (the
  * gatehouse hip ends, measured against bare side planes, read as 'error' and killed the gable).
+ * Generic over the number of sides: a 4-sided hip-cap gable (T-112-01) computes its pyramid /
+ * hip surface through the same min.
  */
 export function gableSurfaceHeight(gable, x, z) {
   let h = gable.ridge.y;
   for (const side of gable.sides) h = Math.min(h, evalSideHeight(side, gable.ridge.y, x, z));
-  if (gable.hip?.demanded) {
-    const v = gable.ridge.axis === "x" ? x : z;
-    const eave = Math.min(...gable.sides.map((s) => s.eaveY));
-    const pitch = gable.sides.reduce((s, side) => s + side.pitch, 0) / gable.sides.length;
-    const fLo = gable.ridge.axis === "x" ? gable.footprint.bbox.minX : gable.footprint.bbox.minZ;
-    const fHi = gable.ridge.axis === "x" ? gable.footprint.bbox.maxX : gable.footprint.bbox.maxZ;
-    if (gable.hip.lo) h = Math.min(h, eave + pitch * (v - fLo));
-    if (gable.hip.hi) h = Math.min(h, eave + pitch * (fHi - v));
-  }
+  const v = gable.ridge.axis === "x" ? x : z;
+  for (const p of hipEndPlanes(gable)) h = Math.min(h, hipPlaneHeight(p, v));
   return h;
 }
 
