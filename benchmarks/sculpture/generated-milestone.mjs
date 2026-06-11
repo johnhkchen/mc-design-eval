@@ -43,6 +43,8 @@
 //   npm run generated:<subj>                  # the full generate-first chain + frames + the gate
 //   npm run generated:<subj> -- --repro       # fresh-process re-proof of the deterministic chain
 //   npm run generated:<subj> -- --offline     # re-assert the committed record + artifacts
+//   npm run generated:<subj> -- --skip-gate   # chain + artifacts only, NO judge (instrument-first:
+//                                             # verify with diff:roof before the owned gated run)
 //
 // Writes generated/<subj>.{json,md} (committed) + generated/<subj>/{base-,grammar-,}artifact.json +
 // component-plan.json + provision-fit.json (committed) + PNGs (gitignored) + the gate's
@@ -430,6 +432,7 @@ async function main() {
   if (!def) throw new Error(`--subject must be one of: ${Object.keys(SUBJECTS).join(", ")}`);
   const offline = argv.includes("--offline");
   const repro = argv.includes("--repro");
+  const skipGate = argv.includes("--skip-gate");
   const subjDir = join(OUT_DIR, def.key);
   const recPath = join(OUT_DIR, `${def.key}.json`);
   const paths = {
@@ -537,6 +540,16 @@ async function main() {
   // --- persist the chain's artifacts (the inspectable file seam) ----------------------------------
   await writeRec(paths.grammarAbs, artifactJson(r1.grammar.final));
   await writeRec(paths.finalAbs, artifactJson(r1.styled));
+
+  // --- T-122-01: --skip-gate — the deterministic chain + artifacts only, NO judge spend. The
+  // instrument-before-judge order: refresh artifacts here, verify with diff:roof, and only then
+  // run the gate in an owned --rotate-pins run. The committed record/md stay pinned (intentionally
+  // stale until the gated run rewrites them); no renders, no gate spawn, no record write.
+  if (skipGate) {
+    console.error(`[${def.key}] --skip-gate: chain artifacts persisted (base/grammar/final/fit/plan); ` +
+      `no gate spawned; generated/${def.key}.{json,md} untouched`);
+    return;
+  }
 
   // --- evidence renders (a lens, never logic) ------------------------------------------------------
   let sheets = {};

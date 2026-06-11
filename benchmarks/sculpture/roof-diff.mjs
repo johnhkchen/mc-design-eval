@@ -13,7 +13,7 @@
 // NO JUDGE RUNS (S-121 owns verdicts), no GL (the pure rasterizer is the lens), no subject keys,
 // constants, branches, or thresholds in this file — subjects come from the durable-skin registry;
 // params are ROOF_DIFF_DEFAULTS, shared across subjects. A subject/path whose committed inputs are
-// absent gets a NAMED skip record — never a silent omission (the barn, until T-117 lands).
+// absent gets a NAMED skip record — never a silent omission (a subject whose chain has not run).
 //
 // Gables sources (recorded in each record's `inputs.gablesSource`):
 //   generated      — provision-fit.json roofs[].gables (revived; ends already merged by the fit)
