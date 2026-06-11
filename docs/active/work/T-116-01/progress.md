@@ -35,21 +35,58 @@
   (resemblance.mjs) deliberately NOT extended — it is the pre-promotion holding pen, consumed
   only by resemblance.mjs; barn entered SUBJECTS directly.
 
-## In flight
+- **Step 5 — challenge comparator (commit `74dd9c4`)**: `challenge:barn` ran END-TO-END untuned:
+  provision 3,579 cells/4 manifest blocks → shell (139→26 components, closure CLOSED) → regularize
+  (spikes 754→361) → skin (zone prior-fallback, coverage PASS) → gate label `challenge`:
+  **FAIL 12/2, 4/4 drifted** — major form@roof + major massing@walls on every azimuth, palette/
+  zoning minors; kit presence not run (no-kit-record). Double-run byte-identical (sha 80b66189…).
 
-- **Step 5 — `npm run challenge:barn`** (background): mints `challenge/barn/base-artifact.json`
-  (the zone-map bootstrap dependency); the remainder of the chain is the untuned repair-path
-  comparator — its verdicts or its honest refusal commit as they land.
+## Step 6–8 — THE MILESTONE RESULT: a NAMED BOOTSTRAP STALL (the honest record)
+
+`zone:map -- --subject barn --no-render` landed **`source: prior-fallback`, reason
+`no-field-cells`** (zone-map/barn.{json,md}, committed). Diagnosis, reproduced offline through the
+exact extraction path (decodeImage → gridFromPixels over the map palette → rowProfile):
+**cobblestone dominates ZERO concept rows.** Wall rows 33–47 are stone_bricks-dominated (e.g. row
+36: stone_bricks 49 / dark_oak_planks 28 / cobblestone absent from the top-2) — the piers/quoins/
+plinth are genuinely prominent at this aspect AND the cobble panels quantize into stone_bricks
+(near-tone pair, ΔL 2.082, far below shading variance). `fieldBlocks` = blocks with
+placementRule "walls" = {cobblestone} only ⇒ `segmentLayerBands` yields no field band ⇒
+`band-profile.mjs:424` refuses. This is the recorded E-21 mean-color collapse
+(`material-identity-is-semantic`) surfacing in the T-092 zone lens.
+
+The consequence chain is contractual, with receipts:
+1. `kit-extract --subject=barn` throws `bandRefsFromZoneRecord: record is not a concept-derived
+   zone map` (src/form/kit.mjs:122) — before any live call.
+2. `generated:barn` throws `no committed kit record (registry kitRecord=null)`
+   (generated-milestone.mjs:476) — the E-26 Rule 2 kit precondition.
+
+**Decision (T-111 church precedent — "closure = the question answered with receipts, not the
+gates passed"):** under E-25 Rule 3 the pipeline must consume a new subject UNTUNED; relaxing the
+kit/zone contracts to let the barn through would be tuning-to-pass and a pipeline-code change the
+AC forbids. The first-run milestone is recorded as **DID NOT RUN — named bootstrap stall in the
+input-prep lens**, with the pinned bar (cottage T-111 profile) recorded as not reached. The
+finding is routed, not fixed here (journal step). The asymmetry it exposes is itself the E-29
+answer material: the repair path tolerates an unreadable concept (policy fallback — it ran to a
+12/2 FAIL) while generate-first's kit precondition does not.
+
+Registry note: `zoneMapRecord` stays **null** in SUBJECTS — the committed zone record is a
+refusal (no derived bands to assert agreement with); the church flip precedent applies only to
+successful derivations.
+
+## Incident (named, resolved): npm flag swallowing
+
+`npm run kit:extract --subject=barn` (missing `--`) dropped the flag and started the FULL live
+sweep, re-recognizing cottage/gatehouse/church kits and overwriting the committed pins. Caught
+immediately; `git restore benchmarks/sculpture/kit/` restored all pins byte-identically from HEAD;
+the unsanctioned replies were discarded uncommitted. No record downstream consumed them. The barn
+refusal was then re-captured with the direct `node benchmarks/sculpture/kit-extract.mjs
+--subject=barn` invocation (which throws before any live call).
 
 ## Remaining
 
-- Step 6: `zone:map -- --subject barn --no-render` → flip zoneMapRecord (durable-skin +
-  kit-extract entries).
-- Step 7: `kit:extract --subject=barn` → flip kitRecord.
-- Step 8: THE MILESTONE — `generated:barn` + `--repro` + `--offline`.
 - Step 9: residual closure — `reskin:{cottage,gatehouse,church}` re-cuts.
 - Step 10: journal (design-learnings E-29 section) + pr/assets/generate-first.md barn columns +
-  E-12 handoff.
+  E-12 handoff, now including the stall finding + routing.
 - Step 11: final suite + review.md.
 
 ## Deviations from plan (running list)

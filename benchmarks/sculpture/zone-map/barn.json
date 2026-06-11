@@ -1,0 +1,69 @@
+{
+  "schema": "zone-map/v1",
+  "subject": "barn",
+  "inputs": {
+    "concept": "runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png",
+    "map": "material-map/barn.json",
+    "build": "challenge/barn/base-artifact.json"
+  },
+  "source": "prior-fallback",
+  "reason": "no-field-cells",
+  "derived": null,
+  "prior": {
+    "policy": {
+      "base": {
+        "dominant": "cobblestone",
+        "preserve": [
+          "stone_bricks",
+          "oak_planks"
+        ],
+        "splat": [
+          "stone_bricks",
+          "oak_planks"
+        ]
+      },
+      "upper": {
+        "dominant": "cobblestone",
+        "preserve": [
+          "stone_bricks",
+          "oak_planks"
+        ],
+        "splat": [
+          "stone_bricks",
+          "oak_planks"
+        ]
+      },
+      "roof": {
+        "dominant": "dark_oak_planks",
+        "preserve": [],
+        "splat": []
+      }
+    },
+    "storeyDivide": 6,
+    "upperTop": 13
+  },
+  "diff": null,
+  "params": {
+    "extentWidthFloor": 0.25,
+    "minBandHeight": 2,
+    "snapTolerance": 2,
+    "secondaryMinShare": 0.05,
+    "minDominantShare": 0.3,
+    "minProfileCells": 200,
+    "minExtentLayers": 4,
+    "anchorMaxPlateau": 0.25,
+    "crossBandRules": [
+      "trim",
+      "corners-edges",
+      "openings"
+    ],
+    "n": 96,
+    "m": 52,
+    "anchored": true,
+    "anchor": {
+      "row": 29,
+      "y": 0
+    }
+  },
+  "note": "bands/roof are NAMED (pre-substitution) block space; durable-skin asserts agreement with `derived` on every run (divergence throws). The prior is the recorded fallback + diff baseline."
+}
