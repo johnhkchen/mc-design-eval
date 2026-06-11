@@ -38,6 +38,8 @@ import { assertWorkshopProgram } from "../../src/workshop/program.mjs";
 import { runWorkshopLoop, conformanceScore } from "../../src/workshop/loop.mjs";
 import { parseWorkshopReply } from "../../src/workshop/critique.mjs";
 import { serializeArtifact, replayLedger, offlineAssert } from "../../src/workshop/replay.mjs";
+import { workshopSubjectsFrom } from "../../src/workshop/seed.mjs";
+import { SUBJECTS as REGISTRY } from "./durable-skin.mjs";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 const HERE = join(ROOT, "benchmarks/sculpture");
@@ -48,13 +50,17 @@ const FRAMES_DIR = join(ROOT, "pr/assets/frames");
 const TIER = "strong"; // op "workshop-critique" (model-tier OP_ROUTING)
 const RENDER = Object.freeze({ width: 512, height: 512 });
 
-/** Subjects are DATA (no per-building code): program + concept + pack, all committed paths. */
+/** Subjects are DATA (no per-building code): program + concept + pack, all committed paths.
+ *  The synthetic fixture stays the explicit row; pipeline subjects derive from the durable-skin
+ *  registry (T-127-01 — paths only, no subject key in this source; live mode fails loudly when
+ *  the derived program has not been committed by the pattern-book chain's seed stage). */
 const SUBJECTS = Object.freeze({
   fixture: Object.freeze({
     program: `${REL_DIR}/fixture/program.json`,
     concept: "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
     pack: "packs/rustic.json",
   }),
+  ...workshopSubjectsFrom(REGISTRY, { relDir: REL_DIR, packRel: "packs/rustic.json" }),
 });
 
 // ---------------------------------------------------------------- CLI
