@@ -250,10 +250,14 @@ function mapRound(o) {
 /** The shape signature of a gable set — used to skip a variant identical to an earlier one.
  *  Fitted ends are part of the shape (a no-end fit normalizes to null = the legacy shape), and so
  *  is the ridge height (T-109-01: a ridge-fitted gable is a distinct rung; an intersection that
- *  lands on the as-built height collapses into the plain rung and is skipped). */
+ *  lands on the as-built height collapses into the plain rung and is skipped). T-112-01 adds the
+ *  gable kind and the fitted hip-end pitches: a hip-cap or hip-end-fitted rung can never
+ *  dedup-collapse into a legacy rung (or vice versa). */
 const pitchKey = (gables) =>
   JSON.stringify(gables.map((g) => [
+    g.kind ?? null,
     g.hip?.demanded ?? false,
+    g.hip?.fitted ? ["lo", "hi"].map((e) => g.hip.fitted[e]?.pitch ?? null) : null,
     g.ridge?.y ?? null,
     g.sides.map((s) => [s.pitch, s.pitchSource]),
     g.ends && (g.ends.lo || g.ends.hi)
@@ -287,7 +291,7 @@ const pitchKey = (gables) =>
  *          fitted AFTER hip suppression (a hip end is not fittable, its suppressed variant is).
  */
 export function swapRoof(occ, args) {
-  const { gables, endFit = null, opts = {} } = args;
+  const { gables, endFit = null, hipFit = null, opts = {} } = args;
   const voxel = pitchVariant(gables, "voxel", opts);
   const candidates = [];
   if (endFit?.gables) {
@@ -308,6 +312,13 @@ export function swapRoof(occ, args) {
     { name: "as-fitted-gable-ends", gables: gableEndsVariant(gables) },
     { name: "voxel-pitch-gable-ends", gables: gableEndsVariant(voxel) },
   );
+  // T-112-01: the hip/pyramid hypotheses — APPENDED after every existing rung (the proven rungs
+  // keep their precedence; a component that accepts earlier never reaches these, which is what
+  // keeps single-mass subjects byte-identical), tried before the Rule 1 fallback:
+  //   hip-end-fitted — the group's gables with per-end GLB-fitted hip pitches (roof-hip-fit);
+  //   hip-cap — the four-plane pyramidal/hip cap replacing a ridge-pair-refuted group.
+  if (hipFit?.hipEnds) candidates.push({ name: "hip-end-fitted", gables: hipFit.hipEnds });
+  if (hipFit?.cap) candidates.push({ name: "hip-cap", gables: [hipFit.cap] });
   // T-109-01: each candidate gets a RIDGE-FITTED flavor first (the plane-intersection ridge —
   // the better-fitted hypothesis, like the end-fitted rungs before it), the plain candidate
   // follows as the honest tail. The flavor is emitted only when the intersection actually MOVES a

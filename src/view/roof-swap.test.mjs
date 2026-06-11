@@ -404,3 +404,99 @@ test("an unfittable ridge keeps the plain rungs and surfaces the named finding",
   assert.ok(res.attempts.every((a) => !a.name.includes("ridge-fit")));
   assert.ok(res.findings.some((f) => f.code === "ridge-unfitted"));
 });
+
+// --- T-112-01: hip/pyramid rungs ------------------------------------------------------------------
+
+/** A four-sided hip-cap gable over the square tower 0..6 × 0..6 (eave 10, pitch 1, apex 13). */
+function capGable() {
+  const cols = new Set();
+  for (let x = 0; x <= 6; x++) for (let z = 0; z <= 6; z++) cols.add(`${x},${z}`);
+  const side = (eaveDir, eaveEdge) => ({
+    planeId: null, eaveDir, pitch: 1, pitchSource: "glb-quadrant", eaveY: 10, eaveEdge, extentCells: [],
+  });
+  return {
+    id: "hip-cap-mass-1", kind: "hip-cap",
+    ridge: { axis: "x", y: 13 },
+    sides: [side("+x", 6), side("-x", 0), side("+z", 6), side("-z", 0)],
+    footprint: { cols, bbox: { minX: 0, maxX: 6, minZ: 0, maxZ: 6 }, area: 49 },
+    hip: { demanded: false }, sane: true, reasons: [],
+  };
+}
+
+/** The refused ridge-pair hypothesis of the tower (the church mass-1 shape). */
+function refusedGable() {
+  return { ...capGable(), id: "gable-roof-14-roof-15", kind: undefined, sane: false,
+    reasons: ["no sane pitch (voxel 19, glb 189.361)"],
+    sides: capGable().sides.slice(2) };
+}
+
+/** Square tower walls 0..6 × y0..9 × 0..6. */
+function towerBase() {
+  const cells = [];
+  for (let x = 0; x <= 6; x++) for (let y = 0; y <= 9; y++) for (let z = 0; z <= 6; z++) {
+    cells.push({ pos: [x, y, z], block: "stone" });
+  }
+  return cells;
+}
+
+/** The clean tower ideal: walls + a full-block pyramid cap (the GLB stand-in). */
+function towerIdeal() {
+  const wedge = generateRoof([capGable()], { ...SPRUCE, stairs: null, slab: null });
+  return occupancyFromCells([...towerBase(), ...wedge.cells]);
+}
+
+/** The input: walls + a NOISY sampled cap (pyramid heights with spikes and pits). */
+function towerSpiky() {
+  const cells = towerBase();
+  for (let x = 0; x <= 6; x++) for (let z = 0; z <= 6; z++) {
+    const ideal = Math.min(13, 10 + Math.min(x, 6 - x, z, 6 - z));
+    let top = ideal;
+    if ((x * 31 + z * 17) % 5 === 0) top = ideal + 2;
+    if ((x * 13 + z * 7) % 6 === 0) top = Math.max(10, ideal - 2);
+    for (let y = 10; y <= top; y++) cells.push({ pos: [x, y, z], block: "stone" });
+  }
+  return occupancyFromCells(cells);
+}
+
+test("hip-cap rung: a ridge-pair-refuted group swaps to the fitted cap under the cage", () => {
+  const input = towerSpiky();
+  const res = swapRoof(input, {
+    gables: [refusedGable()], hipFit: { cap: capGable() },
+    family: SPRUCE, refSils: refsOf(towerIdeal()), regions: [], protect: [], chimney: new Set(),
+  });
+  assert.equal(res.accepted, true, `reasons: ${res.reasons.join("; ")}`);
+  assert.equal(res.attempt, "hip-cap");
+  assert.deepEqual(res.generated.gables, ["hip-cap-mass-1"]);
+  assert.ok(res.carve.removed > 0, "the sampled cap was carved");
+  // corner stairs made it through the judged generation
+  const corners = [...res.occ.cells.keys()].filter((k) => res.occ.states?.get(k)?.shape?.startsWith("outer"));
+  assert.ok(corners.length >= 4, `outer corners placed (got ${corners.length})`);
+  assert.equal(res.census.after.spikes <= 6, true, "cap line features within the gable budget");
+});
+
+test("no hipFit → ladder, names, and result byte-identical to the legacy swap", () => {
+  const input = spikyInput();
+  const args = { gables: [gable()], family: SPRUCE, refSils: refsOf(idealOcc()), regions: [], protect: [], chimney: new Set() };
+  const a = swapRoof(input, args);
+  const b = swapRoof(input, { ...args, hipFit: null });
+  const norm = (r) => JSON.parse(JSON.stringify({ attempt: r.attempt, names: r.attempts.map((x) => x.name),
+    accepted: r.accepted, iou: r.iou, census: r.census }));
+  assert.deepEqual(norm(a), norm(b));
+});
+
+test("hip rungs sit at the ladder tail, after every legacy rung (precedence pin)", () => {
+  // protect the whole roof band → every rung's carve violates → all attempts recorded
+  const input = towerSpiky();
+  const res = swapRoof(input, {
+    gables: [{ ...capGable(), id: "gable-legacy", kind: undefined, sides: capGable().sides.slice(0, 2) }],
+    hipFit: { hipEnds: [{ ...capGable(), id: "gable-legacy", kind: undefined,
+      sides: capGable().sides.slice(0, 2), hip: { demanded: true, lo: true, hi: true, fitted: { lo: { pitch: 1 }, hi: null } } }],
+      cap: capGable() },
+    family: SPRUCE, refSils: refsOf(towerIdeal()), regions: [],
+    protect: [{ name: "all-roof", contains: ([, y]) => y >= 10 }], chimney: new Set(),
+  });
+  assert.equal(res.accepted, false);
+  const names = res.attempts.map((a) => a.name);
+  assert.deepEqual(names.slice(-2), ["hip-end-fitted", "hip-cap"], `tail of ${JSON.stringify(names)}`);
+  assert.ok(names.indexOf("as-fitted") < names.indexOf("hip-end-fitted"), "legacy rungs precede");
+});

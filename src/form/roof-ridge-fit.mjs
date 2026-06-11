@@ -168,6 +168,9 @@ export function ridgeVariant(gables) {
   const findings = [];
   const out = gables.map((g) => {
     if (!g.sane) return g;
+    // T-112-01: hip-cap (and any non-2-side) gables pass through — their apex is already a
+    // FITTED construction (roof-hip-fit), not an unfitted ridge; no finding, no flavor.
+    if (g.kind || (g.sides?.length ?? 0) !== 2) return g;
     const r = ridgeFromPlanes(g);
     if (!r.valid) {
       findings.push({

@@ -141,3 +141,17 @@ test("schema + defaults are declared and frozen", () => {
   assert.equal(RIDGE_FIT_DEFAULTS.apexGap, 1.0);
   assert.ok(Object.isFrozen(RIDGE_FIT_DEFAULTS));
 });
+
+// --- T-112-01 ---
+test("ridgeVariant: hip-cap / non-2-side gables pass through unchanged, no finding", () => {
+  const side = (eaveDir, eaveEdge) => ({ planeId: null, eaveDir, pitch: 1, eaveY: 10, eaveEdge });
+  const cap = {
+    id: "hip-cap-mass-1", kind: "hip-cap", ridge: { axis: "x", y: 13 },
+    sides: [side("+x", 6), side("-x", 0), side("+z", 6), side("-z", 0)],
+    footprint: { cols: new Set(), bbox: { minX: 0, maxX: 6, minZ: 0, maxZ: 6 }, area: 49 },
+    hip: { demanded: false }, sane: true, reasons: [],
+  };
+  const { gables, findings } = ridgeVariant([cap]);
+  assert.equal(gables[0], cap, "same reference — no flavor, no rewrite");
+  assert.equal(findings.length, 0);
+});
