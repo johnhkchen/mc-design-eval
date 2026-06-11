@@ -1,0 +1,605 @@
+{
+  "schema": "challenge-milestone/v1",
+  "subject": "barn",
+  "status": "gated",
+  "inputs": {
+    "build": "challenge/barn/base-artifact.json",
+    "concept": "runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png",
+    "glb": "glb/barn.glb",
+    "map": "material-map/barn.json",
+    "kitRecord": null,
+    "e23Before": null
+  },
+  "provision": {
+    "scale": 48,
+    "cells": 3579,
+    "manifest": 4
+  },
+  "shell": {
+    "strip": {
+      "components": 139,
+      "kept": 26,
+      "strippedCells": 276
+    },
+    "openings": [
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window",
+      "window"
+    ],
+    "closureBefore": {
+      "reached": 4394,
+      "interiorCells": 4476,
+      "byDirection": {
+        "+x": 0,
+        "-x": 14,
+        "+y": 181,
+        "-y": 0,
+        "+z": 1709,
+        "-z": 880
+      }
+    },
+    "voids": {
+      "minDepth": 3,
+      "filled": 454,
+      "byDir": {
+        "+x": {
+          "basinCells": 0,
+          "filled": 0,
+          "skippedAllowed": 0,
+          "skippedNoZone": 0
+        },
+        "-x": {
+          "basinCells": 2,
+          "filled": 15,
+          "skippedAllowed": 0,
+          "skippedNoZone": 0
+        },
+        "+z": {
+          "basinCells": 6,
+          "filled": 73,
+          "skippedAllowed": 1,
+          "skippedNoZone": 0
+        },
+        "-z": {
+          "basinCells": 26,
+          "filled": 366,
+          "skippedAllowed": 0,
+          "skippedNoZone": 0
+        },
+        "+y": {
+          "basinCells": 6,
+          "filled": 0,
+          "skippedAllowed": 6,
+          "skippedNoZone": 0
+        }
+      }
+    },
+    "plug": {
+      "cells": 1813,
+      "iterations": 1
+    },
+    "regularize": {
+      "accepted": 2,
+      "rejected": 0,
+      "census": {
+        "before": {
+          "cells": 5570,
+          "spikes": 754,
+          "byExposure": [
+            167,
+            1406,
+            1697,
+            1546,
+            646,
+            104,
+            4
+          ],
+          "ragged": 580,
+          "columns": 1187,
+          "raggedRate": 0.4886
+        },
+        "after": {
+          "cells": 7157,
+          "spikes": 361,
+          "byExposure": [
+            1372,
+            2803,
+            1546,
+            1075,
+            310,
+            50,
+            1
+          ],
+          "ragged": 472,
+          "columns": 1193,
+          "raggedRate": 0.3956
+        }
+      },
+      "iou": {
+        "baseline": {
+          "+x+z": 0.9421,
+          "+x-z": 0.9303,
+          "-x-z": 0.9205,
+          "-x+z": 0.9187
+        },
+        "final": {
+          "+x+z": 0.9474,
+          "+x-z": 0.935,
+          "-x-z": 0.9387,
+          "-x+z": 0.9309
+        }
+      },
+      "steps": [
+        {
+          "step": "open",
+          "accepted": true,
+          "reasons": [],
+          "cells": {
+            "removed": 0,
+            "restoredComponents": [
+              {
+                "size": 5045,
+                "minY": 0
+              }
+            ]
+          },
+          "spikes": 754,
+          "raggedRate": 0.4886
+        },
+        {
+          "step": "close",
+          "accepted": true,
+          "reasons": [],
+          "cells": {
+            "added": 1578,
+            "plugged": 9
+          },
+          "spikes": 361,
+          "raggedRate": 0.3956
+        }
+      ]
+    }
+  },
+  "reconstruction": null,
+  "skin": {
+    "substitution": {
+      "stone_bricks": "polished_deepslate"
+    },
+    "kit": {
+      "source": null,
+      "overrides": {},
+      "entries": []
+    },
+    "zoneMap": {
+      "source": "prior-fallback",
+      "bands": null,
+      "roof": null,
+      "reason": "no-field-cells"
+    },
+    "zoneMapVsCommitted": null,
+    "fill": {
+      "placements": 702,
+      "kept": 5386,
+      "byZone": {
+        "base": {
+          "surface": 3263,
+          "filled": 26,
+          "kept": 3237
+        },
+        "roof": {
+          "surface": 1629,
+          "filled": 541,
+          "kept": 1088
+        },
+        "upper": {
+          "surface": 1196,
+          "filled": 135,
+          "kept": 1061
+        }
+      }
+    },
+    "splat": {
+      "front": {
+        "dir": "+z",
+        "source": "concept",
+        "painted": 57,
+        "skipped": 494,
+        "offPalette": 0,
+        "zoneRejected": 356,
+        "accepted": true,
+        "coverageGate": {
+          "passed": true,
+          "threshold": 0.5,
+          "failures": [],
+          "byZone": {
+            "base": {
+              "dominant": "cobblestone",
+              "fraction": 1,
+              "total": 3263,
+              "passed": true,
+              "metric": "own",
+              "own": [
+                "cobblestone",
+                "polished_deepslate",
+                "oak_planks"
+              ],
+              "dominantFraction": 0.317
+            },
+            "upper": {
+              "dominant": "cobblestone",
+              "fraction": 1,
+              "total": 1196,
+              "passed": true,
+              "metric": "own",
+              "own": [
+                "cobblestone",
+                "polished_deepslate",
+                "oak_planks"
+              ],
+              "dominantFraction": 0.854
+            },
+            "roof": {
+              "dominant": "dark_oak_planks",
+              "fraction": 1,
+              "total": 1629,
+              "passed": true,
+              "metric": "own",
+              "own": [
+                "dark_oak_planks"
+              ],
+              "dominantFraction": 1
+            }
+          }
+        },
+        "outOfPalette": 0
+      },
+      "side": {
+        "dir": "+x",
+        "source": "glb",
+        "painted": 103,
+        "skipped": 54,
+        "offPalette": 0,
+        "zoneRejected": 214,
+        "accepted": true
+      },
+      "collisions": 0
+    },
+    "course": {
+      "columnsRaised": 302,
+      "voxelsAdded": 706
+    },
+    "salt": {
+      "stripped": 156,
+      "kept": 959
+    },
+    "coverage": {
+      "base": {
+        "total": 3342,
+        "byBlock": {
+          "polished_deepslate": 2156,
+          "cobblestone": 1023,
+          "oak_planks": 72,
+          "dark_oak_planks": 91
+        },
+        "dominant": "cobblestone",
+        "dominantFraction": 0.306,
+        "own": [
+          "cobblestone",
+          "polished_deepslate",
+          "oak_planks"
+        ],
+        "ownFraction": 0.973
+      },
+      "roof": {
+        "total": 1660,
+        "byBlock": {
+          "dark_oak_planks": 1660
+        },
+        "dominant": "dark_oak_planks",
+        "dominantFraction": 1,
+        "own": [
+          "dark_oak_planks"
+        ],
+        "ownFraction": 1
+      },
+      "upper": {
+        "total": 1603,
+        "byBlock": {
+          "cobblestone": 1034,
+          "polished_deepslate": 149,
+          "dark_oak_planks": 420
+        },
+        "dominant": "cobblestone",
+        "dominantFraction": 0.645,
+        "own": [
+          "cobblestone",
+          "polished_deepslate",
+          "oak_planks"
+        ],
+        "ownFraction": 0.738
+      }
+    },
+    "gates": {
+      "threshold": 0.5,
+      "splatOnly": {
+        "passed": false,
+        "threshold": 0.5,
+        "failures": [
+          {
+            "zone": "base",
+            "dominant": "cobblestone",
+            "fraction": 0.292,
+            "total": 3263
+          }
+        ],
+        "byZone": {
+          "base": {
+            "dominant": "cobblestone",
+            "fraction": 0.292,
+            "total": 3263,
+            "passed": false
+          },
+          "upper": {
+            "dominant": "cobblestone",
+            "fraction": 0.726,
+            "total": 1196,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.722,
+            "total": 1629,
+            "passed": true
+          }
+        }
+      },
+      "final": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "base": {
+            "dominant": "cobblestone",
+            "fraction": 0.973,
+            "total": 3342,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "polished_deepslate",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.306
+          },
+          "upper": {
+            "dominant": "cobblestone",
+            "fraction": 0.738,
+            "total": 1603,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "polished_deepslate",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.645
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 1,
+            "total": 1660,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 1
+          }
+        }
+      }
+    },
+    "bands": {
+      "roofMaterialsFraction": 1,
+      "wallForeignResidue": {
+        "base": 0,
+        "upper": 0
+      }
+    },
+    "notes": [
+      "zone map fell back to the prior: no-field-cells"
+    ]
+  },
+  "reproducible": {
+    "doubleRun": true,
+    "sha256": {
+      "base": "fff892e84111d24c1ffc5f3da5692a205b2f1c38634a33da7059d54dba6c3899",
+      "shell": "701665ea3b73b40d9e24356f90d14050db02a03271f1a7c5ed37b712410c34f5",
+      "reconstructed": null,
+      "final": "80b66189c6377e36a567b26866a0fe3eb4ac6c71b242ed73e4983619a2a65454"
+    },
+    "determinism": "provision→shell→skin is a pure function of the committed inputs (concept PNG, material map, GLB, kit); two in-process executions byte-matched on every artifact; --repro re-proves from a fresh process. LLM-authored inputs are one-time committed records; the gate judge is the pinned model, single sample per view, verdicts committed in the gate record."
+  },
+  "gate": {
+    "outcome": "FAIL",
+    "gapCount": 12,
+    "gapBudget": 2,
+    "failures": [
+      {
+        "angle": "+x+z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "+x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x+z",
+        "reason": "drifted"
+      }
+    ],
+    "perView": [
+      {
+        "angle": "+x+z",
+        "azimuthDeg": 45,
+        "coverage": true,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof ridge and slopes",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "long walls and overall body",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "roof and walls overall",
+            "attribute": "palette",
+            "severity": "minor"
+          }
+        ]
+      },
+      {
+        "angle": "+x-z",
+        "azimuthDeg": 135,
+        "coverage": true,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof ridge and slopes",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "long wall and eave line",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "overall stone-vs-timber zoning across walls and roof",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ]
+      },
+      {
+        "angle": "-x-z",
+        "azimuthDeg": 225,
+        "coverage": true,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "long walls / overall enclosure",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "stone wall zone vs timber",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ]
+      },
+      {
+        "angle": "-x+z",
+        "azimuthDeg": 315,
+        "coverage": true,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof ridge and slopes",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "overall body and long walls",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "roof and walls",
+            "attribute": "palette",
+            "severity": "minor"
+          }
+        ]
+      }
+    ],
+    "record": "benchmarks/sculpture/multi-angle/barn-challenge.json",
+    "sheet": "pr/assets/frames/multi-angle-barn-challenge.png"
+  },
+  "artifacts": {
+    "base": "challenge/barn/base-artifact.json",
+    "shell": "challenge/barn/shell-artifact.json",
+    "final": "challenge/barn/artifact.json"
+  },
+  "renders": [
+    {
+      "when": "final",
+      "angle": "-x-z",
+      "path": "benchmarks/sculpture/challenge/barn/view-final-oblique225.png"
+    },
+    {
+      "when": "final",
+      "angle": "front",
+      "path": "benchmarks/sculpture/challenge/barn/view-final-front.png"
+    },
+    {
+      "when": "final",
+      "angle": "top",
+      "path": "benchmarks/sculpture/challenge/barn/view-final-top.png"
+    }
+  ],
+  "frames": [
+    "pr/assets/frames/challenge-barn-after.png"
+  ]
+}

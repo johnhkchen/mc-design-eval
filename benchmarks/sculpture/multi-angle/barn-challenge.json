@@ -1,0 +1,587 @@
+{
+  "schema": "multi-angle-gate/v1",
+  "subject": "barn",
+  "label": "challenge",
+  "artifact": {
+    "path": "benchmarks/sculpture/challenge/barn/artifact.json",
+    "sha256": "80b66189c6377e36a567b26866a0fe3eb4ac6c71b242ed73e4983619a2a65454"
+  },
+  "contract": {
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "elevationDeg": 30,
+    "width": 512,
+    "height": 512,
+    "gapBudget": 2,
+    "coverageThreshold": 0.5,
+    "note": "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them"
+  },
+  "zones": {
+    "source": "prior-fallback",
+    "reason": "no-field-cells",
+    "policy": {
+      "base": {
+        "dominant": "cobblestone",
+        "preserve": [
+          "polished_deepslate",
+          "oak_planks"
+        ]
+      },
+      "upper": {
+        "dominant": "cobblestone",
+        "preserve": [
+          "polished_deepslate",
+          "oak_planks"
+        ]
+      },
+      "roof": {
+        "dominant": "dark_oak_planks",
+        "preserve": []
+      }
+    },
+    "substitutionApplied": {
+      "stone_bricks": "polished_deepslate"
+    },
+    "kitOverridesApplied": {},
+    "vocabulary": {
+      "schema": "material-vocabulary/v1",
+      "policySpace": "named",
+      "guarded": true,
+      "substitution": {
+        "stone_bricks": "polished_deepslate"
+      },
+      "kitOverrides": {},
+      "zones": {
+        "base": {
+          "dominant": "cobblestone",
+          "preserve": [
+            "polished_deepslate",
+            "oak_planks"
+          ]
+        },
+        "upper": {
+          "dominant": "cobblestone",
+          "preserve": [
+            "polished_deepslate",
+            "oak_planks"
+          ]
+        },
+        "roof": {
+          "dominant": "dark_oak_planks",
+          "preserve": []
+        }
+      },
+      "treatmentSlots": {},
+      "derivations": [],
+      "roofFamilyAppended": []
+    }
+  },
+  "views": [
+    {
+      "angle": "+x+z",
+      "azimuthDeg": 45,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/barn-challenge/view-+x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "base": {
+            "dominant": "cobblestone",
+            "fraction": 0.99,
+            "total": 507,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "polished_deepslate",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.306
+          },
+          "upper": {
+            "dominant": "cobblestone",
+            "fraction": 0.91,
+            "total": 290,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "polished_deepslate",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.628
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.992,
+            "total": 478,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.992
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof ridge and slopes",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "long walls and overall body",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "roof and walls overall",
+            "attribute": "palette",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The brown-roof-over-gray-stone palette still reads, but the clean steep continuous gable and solid rectangular body of the references have collapsed into a lumpy, broken, fragmented mass from this angle."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10294,
+          "output_tokens": 772,
+          "cost_usd": 0.17593999999999999
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof ridge and slopes\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"long walls and overall body\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"roof and walls overall\",\"attribute\":\"palette\",\"severity\":\"minor\"}],\"rationale\":\"The brown-roof-over-gray-stone palette still reads, but the clean steep continuous gable and solid rectangular body of the re",
+          "usage": {
+            "input_tokens": 10294,
+            "output_tokens": 772,
+            "cost_usd": 0.17593999999999999
+          },
+          "source": "live"
+        }
+      ]
+    },
+    {
+      "angle": "+x-z",
+      "azimuthDeg": 135,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/barn-challenge/view-+x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "base": {
+            "dominant": "cobblestone",
+            "fraction": 0.974,
+            "total": 509,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "polished_deepslate",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.299
+          },
+          "upper": {
+            "dominant": "cobblestone",
+            "fraction": 0.887,
+            "total": 311,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "polished_deepslate",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.534
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.991,
+            "total": 457,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.991
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof ridge and slopes",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "long wall and eave line",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "overall stone-vs-timber zoning across walls and roof",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The single clean stone-walled, brown-gabled barn of the references has fragmented into a jumbled, broken-ridged mass with stepped and gapped roof courses and an irregular eave, so it reads as a degraded version of the same building rather than a clean depiction of it."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10294,
+          "output_tokens": 213,
+          "cost_usd": 0.161965
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof ridge and slopes\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"long wall and eave line\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"overall stone-vs-timber zoning across walls and roof\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The single clean stone-walled, brown-gabled barn of the references has fragmented into a ju",
+          "usage": {
+            "input_tokens": 10294,
+            "output_tokens": 213,
+            "cost_usd": 0.161965
+          },
+          "source": "live"
+        }
+      ]
+    },
+    {
+      "angle": "-x-z",
+      "azimuthDeg": 225,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/barn-challenge/view--x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "base": {
+            "dominant": "cobblestone",
+            "fraction": 0.922,
+            "total": 500,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "polished_deepslate",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.444
+          },
+          "upper": {
+            "dominant": "cobblestone",
+            "fraction": 0.93,
+            "total": 300,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "polished_deepslate",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.66
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.996,
+            "total": 475,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.996
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "long walls / overall enclosure",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "stone wall zone vs timber",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The elongated gabled massing still reads as the barn, but from this rear angle the roof is broken into fragmented stepped courses with large gaps and the walls present as an open hollow shell rather than the solid stone enclosure the concept and mesh show, with timber dominating where the stone zone should read."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10294,
+          "output_tokens": 1103,
+          "cost_usd": 0.18421500000000002
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"long walls / overall enclosure\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"stone wall zone vs timber\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The elongated gabled massing still reads as the barn, but from this rear angle the roof is broken into fragmented stepped course",
+          "usage": {
+            "input_tokens": 10294,
+            "output_tokens": 1103,
+            "cost_usd": 0.18421500000000002
+          },
+          "source": "live"
+        }
+      ]
+    },
+    {
+      "angle": "-x+z",
+      "azimuthDeg": 315,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/barn-challenge/view--x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "base": {
+            "dominant": "cobblestone",
+            "fraction": 0.94,
+            "total": 497,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "polished_deepslate",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.487
+          },
+          "upper": {
+            "dominant": "cobblestone",
+            "fraction": 0.923,
+            "total": 287,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "polished_deepslate",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.767
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.994,
+            "total": 493,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.994
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof ridge and slopes",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "overall body and long walls",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "roof and walls",
+            "attribute": "palette",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The brown-roof-over-gray-stone palette still reads, but from this angle the steep continuous gable and the solid rectangular barn body have collapsed into a broken, lumpy, fragmented mass rather than the clean elongated form the concept and mesh show."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10807,
+          "output_tokens": 485,
+          "cost_usd": 0.17132999999999998
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof ridge and slopes\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"overall body and long walls\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"roof and walls\",\"attribute\":\"palette\",\"severity\":\"minor\"}],\"rationale\":\"The brown-roof-over-gray-stone palette still reads, but from this angle the steep continuous gable and the solid rectangular barn bod",
+          "usage": {
+            "input_tokens": 10807,
+            "output_tokens": 485,
+            "cost_usd": 0.17132999999999998
+          },
+          "source": "live"
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "schema": "multi-angle-gate/v1",
+    "decided": true,
+    "passed": false,
+    "gapCount": 12,
+    "gapBudget": 2,
+    "gaps": [
+      {
+        "angle": "+x+z",
+        "region": "roof ridge and slopes",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x+z",
+        "region": "long walls and overall body",
+        "attribute": "massing"
+      },
+      {
+        "angle": "+x+z",
+        "region": "roof and walls overall",
+        "attribute": "palette"
+      },
+      {
+        "angle": "+x-z",
+        "region": "roof ridge and slopes",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x-z",
+        "region": "long wall and eave line",
+        "attribute": "massing"
+      },
+      {
+        "angle": "+x-z",
+        "region": "overall stone-vs-timber zoning across walls and roof",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x-z",
+        "region": "roof",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x-z",
+        "region": "long walls / overall enclosure",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x-z",
+        "region": "stone wall zone vs timber",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x+z",
+        "region": "roof ridge and slopes",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x+z",
+        "region": "overall body and long walls",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x+z",
+        "region": "roof and walls",
+        "attribute": "palette"
+      }
+    ],
+    "failures": [
+      {
+        "angle": "+x+z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "+x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x+z",
+        "reason": "drifted"
+      }
+    ],
+    "views": [
+      {
+        "angle": "+x+z",
+        "outcome": "drifted: form"
+      },
+      {
+        "angle": "+x-z",
+        "outcome": "drifted: form"
+      },
+      {
+        "angle": "-x-z",
+        "outcome": "drifted: form"
+      },
+      {
+        "angle": "-x+z",
+        "outcome": "drifted: form"
+      }
+    ]
+  },
+  "kitPresence": {
+    "ran": false,
+    "reason": "no-kit-record"
+  },
+  "overall": {
+    "schema": "kit-aware-gate/v1",
+    "decided": true,
+    "passed": false,
+    "components": {
+      "resemblance": {
+        "decided": true,
+        "passed": false
+      },
+      "kitPresence": {
+        "ran": false,
+        "reason": "no-kit-record"
+      }
+    }
+  },
+  "sheet": "pr/assets/frames/multi-angle-barn-challenge.png",
+  "labeled": true
+}
