@@ -32,6 +32,10 @@
         "gapBudget": 2,
         "failures": [
           {
+            "angle": "+x+z",
+            "reason": "drifted"
+          },
+          {
             "angle": "+x-z",
             "reason": "drifted"
           },
@@ -63,21 +67,21 @@
           "angle": "+x+z",
           "azimuthDeg": 45,
           "coverage": true,
-          "verdict": "same object",
+          "verdict": "drifted",
           "gaps": [
             {
-              "region": "roof ridge and corner caps",
+              "region": "roof",
               "attribute": "form",
-              "severity": "minor"
+              "severity": "major"
             },
             {
-              "region": "right-hand wall brown timber strip",
+              "region": "walls / overall building enclosure",
+              "attribute": "massing",
+              "severity": "major"
+            },
+            {
+              "region": "timber framing on the right face where stone should dominate",
               "attribute": "material zoning",
-              "severity": "minor"
-            },
-            {
-              "region": "upper roof slope edges",
-              "attribute": "form",
               "severity": "minor"
             }
           ]
@@ -89,17 +93,17 @@
           "verdict": "drifted",
           "gaps": [
             {
-              "region": "roof ridge and eaves",
+              "region": "roof across the top",
               "attribute": "form",
               "severity": "major"
             },
             {
-              "region": "overall building silhouette",
+              "region": "walls / overall enclosure",
               "attribute": "massing",
               "severity": "major"
             },
             {
-              "region": "stone walls and timber accents",
+              "region": "upper-left eave where timber shows through the stone zone",
               "attribute": "material zoning",
               "severity": "minor"
             }
@@ -112,18 +116,18 @@
           "verdict": "drifted",
           "gaps": [
             {
-              "region": "overall building outline and roofline",
+              "region": "roof ridge and slopes",
+              "attribute": "form",
+              "severity": "major"
+            },
+            {
+              "region": "right-hand side and rear, extra protruding blocky masses",
               "attribute": "massing",
               "severity": "major"
             },
             {
-              "region": "front facade — colonnade/pillars instead of a single arched doorway",
-              "attribute": "form",
-              "severity": "major"
-            },
-            {
-              "region": "roof ridge and gable",
-              "attribute": "form",
+              "region": "wall surface, quoin vs field stone distinction",
+              "attribute": "material zoning",
               "severity": "minor"
             }
           ]
@@ -135,18 +139,18 @@
           "verdict": "drifted",
           "gaps": [
             {
-              "region": "roofline and ridge",
+              "region": "roof slopes and ridge",
               "attribute": "form",
               "severity": "major"
             },
             {
-              "region": "left side / upper corner, vertical posts protruding above the roof",
+              "region": "eaves and corners (protruding posts/specks)",
               "attribute": "massing",
               "severity": "major"
             },
             {
-              "region": "overall stone walls and dark roof",
-              "attribute": "palette",
+              "region": "overall wall body",
+              "attribute": "material zoning",
               "severity": "minor"
             }
           ]
@@ -168,8 +172,8 @@
         {
           "name": "roof-program",
           "changed": 1465,
-          "added": 227,
-          "removed": 96
+          "added": 228,
+          "removed": 199
         },
         {
           "name": "shaped-heads",
@@ -178,7 +182,7 @@
           "removed": 723
         }
       ],
-      "cells": 2629
+      "cells": 2733
     },
     "findings": [],
     "seamSources": {
@@ -189,8 +193,8 @@
       "frameLines": "component"
     },
     "conformance": {
-      "columns": 533,
-      "conforming": 533,
+      "columns": 534,
+      "conforming": 534,
       "deviations": []
     }
   },
@@ -202,34 +206,34 @@
     "frameLines": "component"
   },
   "conformance": {
-    "columns": 533,
-    "conforming": 533,
+    "columns": 534,
+    "conforming": 534,
     "deviations": []
   },
   "wallField": {
     "band0": {
       "field": {
-        "total": 1125,
+        "total": 1096,
         "dominant": "polished_basalt",
-        "dominantFraction": 0.7,
+        "dominantFraction": 0.48,
         "byBlock": {
-          "polished_basalt": 788,
-          "deepslate_bricks": 92,
-          "cobblestone": 224,
-          "dark_oak_planks": 11,
-          "dark_oak_log": 10
+          "polished_basalt": 526,
+          "deepslate_bricks": 150,
+          "cobblestone": 384,
+          "dark_oak_log": 29,
+          "dark_oak_planks": 7
         }
       },
       "offslab": {
-        "total": 2258,
+        "total": 2201,
         "dominant": null,
         "dominantFraction": null,
         "byBlock": {
-          "polished_basalt": 1533,
-          "cobblestone": 388,
-          "deepslate_bricks": 265,
-          "dark_oak_planks": 47,
-          "dark_oak_log": 25
+          "polished_basalt": 1473,
+          "cobblestone": 410,
+          "deepslate_bricks": 269,
+          "dark_oak_planks": 23,
+          "dark_oak_log": 26
         }
       }
     }
@@ -254,7 +258,7 @@
         "name": "band0",
         "yRange": [
           0,
-          22
+          21
         ],
         "dominantBlock": "stone_bricks",
         "dominantRole": "structural walls (dominant body)",
@@ -263,12 +267,12 @@
           {
             "block": "dark_oak_log",
             "role": "arch voussoir ring (warm accent)",
-            "share": 0.096
+            "share": 0.101
           },
           {
             "block": "deepslate_tiles",
             "role": "roof mass",
-            "share": 0.571
+            "share": 0.563
           },
           {
             "block": "cobblestone",
@@ -278,7 +282,7 @@
           {
             "block": "dark_oak_planks",
             "role": "gate door / passage leaf",
-            "share": 0.007
+            "share": 0.008
           }
         ]
       }
@@ -289,10 +293,10 @@
     "milestoneSha256": {
       "base": null,
       "shell": "b6c899187d50efeef411279640837f6b42e960975c76378edb8747073975e20c",
-      "reconstructed": "33305fce57339c50c5f67c04b1fe3183662203ca59af112dabf6f39274f3143e",
-      "skinFinal": "4a1add05dc2d5a295f59865bf05ab4bae363e7bcc441c9396cd4206f8ab9273a",
-      "grammarFinal": "f9c0a3068649d564d0b6afcaca6053bf52a5c80c673ef6ad0ecb73dca59e7c47",
-      "styled": "e3b89444f3a5365b4fb4cff655dfc57574ff397d104fd5674e962ad207ac2b8e"
+      "reconstructed": "463ce9e25ace7ca3e787c918504933bfa4fd031fc7b458caa30c4ade9eedfd82",
+      "skinFinal": "0719a638254798928a4b7cbad8cbc3bed6910f0323f2dc72516df60ed654c60b",
+      "grammarFinal": "e350000c955a815468b7ad8fc3114897411ada50816835a95ebde1852ce0d817",
+      "styled": "a8b4c58e3571d86e5edaa2130a04ab604ff6a940884b1a644bb2c0653567d90e"
     },
     "determinism": "the milestone runner double-runs the deterministic chain and owns the byte-identity proof; this record distills its committed output"
   }
