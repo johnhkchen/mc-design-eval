@@ -71,15 +71,27 @@ const fmtIdx = (indices) => indices.join("/");
  */
 export function kitPresence(occ, {
   kit, bandNames, policy, zoneOf, floorLines, upperTop, roofKeys,
-  sub = (b) => b, minRun = 2, apertures = [], treatments = null,
+  sub = (b) => b, minRun = 2, apertures = [], treatments = null, frames = null, definedCells = null,
 }) {
+  // T-106-01: `definedCells` ((voxel)=>bool) marks DEFINED geometry — the reconstruction's
+  // composed edits and the raw base's concept-declared cells (the caller decides the union). A
+  // shutter mount blocked ENTIRELY by defined cells (an eave course, the build's own timber stud
+  // beside an upper window) is a geometry-imposed reduction like no-jamb — the geometry ate the
+  // mount, the kit didn't fail to supply it. Blocked by anything else still gates (junk is a
+  // defect). Null (the fallback path) keeps the strict pre-T-106 behavior.
+  const definitionBlocked = (c) =>
+    definedCells != null && c.slot.startsWith("shutter") && c.name.startsWith("shutter-blocked") &&
+    (c.at?.length ?? 0) > 0 && c.at.every((p) => definedCells(p));
   const checks = [];
   const gaps = [];
   const skips = [];
 
   // --- cube half: the T-098 grammar fixpoint ------------------------------------------------------
+  // `frames` (T-106-01): the fixpoint rule demands the checker re-run the SAME op the chain ran —
+  // a component-framed build re-checked with occupancy frames would demand cells the definition
+  // deliberately never painted.
   const g = placementGrammar(occ, {
-    kit, bandNames, policy, zoneOf, floorLines, upperTop, roofKeys, sub, minRun,
+    kit, bandNames, policy, zoneOf, floorLines, upperTop, roofKeys, sub, minRun, frames,
   });
   for (const s of g.bindings.skipped) skips.push({ feature: s.feature, reason: s.reason });
 
@@ -169,7 +181,7 @@ export function kitPresence(occ, {
         const famConflicts = rep.conflicts.filter((c) => fam.slots.includes(c.slot));
         if (famConflicts.some(isNoTreatment)) { seenNoTreatment.add(fam.feature); return; }
         const placed = fam.slots.reduce((n, s) => n + (rep.placed?.[s] ?? 0), 0);
-        const bad = famConflicts.some((c) => !toleratedConflict(c) && !isNoTreatment(c));
+        const bad = famConflicts.some((c) => !toleratedConflict(c) && !isNoTreatment(c) && !definitionBlocked(c));
         if (placed > 0 || bad) missingAt.push(idx);
         else if (famConflicts.length) toleratedAt.push(idx);
       });

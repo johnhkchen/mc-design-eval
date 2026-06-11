@@ -222,3 +222,20 @@ test("buildComponentPlan: wallTop is the defined wall/roof boundary (max slab y 
   assert.equal(p.wallTop, 6); // slabs reach y5; first non-wall layer is 6 — the box's actual upperTop
   assert.equal(buildComponentPlan({ shellSha: SHA }).wallTop, null);
 });
+
+test("serialize/revive round-trip: the gate re-runs the SAME op the chain ran", async () => {
+  const { serializeComponentPlan, reviveComponentPlan } = await import("./component-plan.mjs");
+  const { recon, record, delta } = roofFixture();
+  const plan = buildComponentPlan({
+    componentRecord: RECORD, roofRecord: record, shapedRecord: { inputs: { recordSha: SHA } },
+    shellSha: SHA, roofDelta: delta, roofOcc: recon,
+  });
+  const revived = reviveComponentPlan(JSON.parse(JSON.stringify(serializeComponentPlan(plan))));
+  assert.deepEqual(sorted(revived.roof.cells), sorted(plan.roof.cells));
+  assert.deepEqual(sorted(revived.frames.cornerCols), sorted(plan.frames.cornerCols));
+  assert.deepEqual([...revived.roof.colTop.entries()].sort(), [...plan.roof.colTop.entries()].sort());
+  assert.equal(revived.wallTop, plan.wallTop);
+  assert.equal(revived.wallFaces.contains([0, 3, 2]), plan.wallFaces.contains([0, 3, 2]));
+  assert.equal(revived.wallFaces.contains([1, 3, 2]), plan.wallFaces.contains([1, 3, 2]));
+  assert.throws(() => reviveComponentPlan({ schema: "nope" }), /not a component-plan/);
+});

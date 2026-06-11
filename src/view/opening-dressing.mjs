@@ -256,7 +256,8 @@ export function dressOpenings(targetOcc, apertures, treatments) {
     const report = { dir: ap.dir, kind: ap.kind, bbox: { ...ap.bbox }, region: ap.region, paneSpan: null,
       applied: Object.fromEntries(applicable.map((s) => [s, 0])),
       placed: Object.fromEntries(applicable.map((s) => [s, 0])), conflicts: [] };
-    const conflict = (slot, name, reduction) => report.conflicts.push({ slot, name, reduction });
+    const conflict = (slot, name, reduction, at) =>
+      report.conflicts.push(at ? { slot, name, reduction, at } : { slot, name, reduction });
     perOpening.push(report);
 
     // --- the open-hole fallback depth: modal perimeter first-solid (nearest-to-camera tie-break) --
@@ -343,7 +344,13 @@ export function dressOpenings(targetOcc, apertures, treatments) {
         conflict(slot, `shutter-no-jamb-${side}`, "shutter-dropped");
         continue;
       }
-      if (flank.some((f) => targetOcc.has(...shutterPos(f)))) { conflict(slot, `shutter-blocked-${side}`, "shutter-dropped"); continue; }
+      const blockedAt = flank.filter((f) => targetOcc.has(...shutterPos(f))).map((f) => shutterPos(f));
+      if (blockedAt.length) {
+        // T-106-01: the blocking POSITIONS ride along so the kit-presence checker can tell a
+        // definition cell (a reconstruction edit that legitimately ate the mount) from junk
+        conflict(slot, `shutter-blocked-${side}`, "shutter-dropped", blockedAt);
+        continue;
+      }
       for (const f of flank) {
         if (place(shutterPos(f), slots.shutter.block,
           { facing: SHUTTER_FACING[ap.dir], half: "bottom", open: "true" })) {

@@ -47,6 +47,7 @@ import { surfaceZoneHistogram, dominantCoverage } from "../../src/view/zone-fill
 import { applyPaint } from "../../src/view/face-paint.mjs";
 import { coverageGate, DEFAULT_COVERAGE_THRESHOLD } from "../../src/view/face-resemblance.mjs";
 import { placementGrammar, GRAMMAR_SCHEMA } from "../../src/form/placement-grammar.mjs";
+import { frameLinesFromComponent, planCensusZoneOf, bandFloorLines } from "../../src/view/component-plan.mjs";
 import { composeSheet, resampleRgba, RESEMBLANCE_DEFAULTS } from "../../src/form/resemblance.mjs";
 import { decodeImage } from "../../src/color/palette-extract.mjs";
 import { encodeRgbaToPng } from "../../render/src/headless-canvas.mjs";
@@ -91,10 +92,16 @@ function bandEvidence(cov, policy) {
 /** The gated grammar core over ONE build: geometry re-read → bind+paint → THROW gates → re-gated
  *  final. Exported for the styled milestone (T-101), which feeds it from buildSkin's return value;
  *  the committed-record disk seam stays in runGrammar. Behavior identical either way. */
-export function grammarStage(build, { bands, roof, policy, substitution, kitRec, zoneOpts }) {
-  // geometry + the derived zone map (the same composition buildSkin records)
+export function grammarStage(build, { bands, roof, policy, substitution, kitRec, zoneOpts, componentPlan = null }) {
+  // geometry + the derived zone map (the same composition buildSkin records). T-106-01: the
+  // component plan pins the wall/roof boundary and supplies the frame-line definitions — the
+  // grammar re-materializes them against the CURRENT occupancy each pass (settle re-runs this op),
+  // never re-deriving the structure.
   const occ = artifactOccupancy(build);
-  const sz = structuralZones(occ, zoneOpts ?? {});
+  const zoEff = componentPlan?.wallTop != null
+    ? { ...(zoneOpts ?? {}), upperTop: componentPlan.wallTop }
+    : (zoneOpts ?? {});
+  const sz = structuralZones(occ, zoEff);
   const zb = zonesFromBands({ bands, roof, roofKeys: sz.roofKeys, upperTop: sz.upperTop });
   const bandNames = bands.map((b) => b.name);
 
@@ -102,9 +109,18 @@ export function grammarStage(build, { bands, roof, policy, substitution, kitRec,
   const combined = { ...(substitution ?? {}), ...(kitRec.overrides ?? {}) };
   const sub = (b) => combined[b] ?? b;
 
+  // floor lines: the concept-derived band boundaries (committed) — the occupancy storey scan reads
+  // every layer of a cage-solid shell as a floor (fill ≥ 0.6 everywhere) and would paint the whole
+  // wall as beams. Component subjects get the definition; the fallback path keeps the derivation.
+  const floorLinesEff = componentPlan ? bandFloorLines(bands) : sz.floorLines;
+  const frames = componentPlan?.frames
+    ? frameLinesFromComponent(occ,
+        { floorLines: floorLinesEff, upperTop: sz.upperTop, roofKeys: sz.roofKeys },
+        { ...componentPlan.frames, floorLineSource: "concept-bands" })
+    : null;
   const grammar = placementGrammar(occ, {
     kit: kitRec.kit, bandNames, policy, zoneOf: zb.zoneOf,
-    floorLines: sz.floorLines, upperTop: sz.upperTop, roofKeys: sz.roofKeys, sub,
+    floorLines: floorLinesEff, upperTop: sz.upperTop, roofKeys: sz.roofKeys, sub, frames,
   });
 
   // --- GATES (deterministic; a failing grammar writes no passing record) -------------------------
@@ -124,8 +140,11 @@ export function grammarStage(build, { bands, roof, policy, substitution, kitRec,
   }
   const final = applyPaint(build, grammar.placements);
   assertArtifact(final);
+  const censusZoneOf = componentPlan
+    ? planCensusZoneOf(zb.zoneOf, componentPlan, bandNames, { frameCells: frames?.cells ?? null })
+    : zb.zoneOf;
   const cov = dominantCoverage(
-    surfaceZoneHistogram(artifactOccupancy(final), zb.zoneOf, { skin: "exposure" }), policy);
+    surfaceZoneHistogram(artifactOccupancy(final), censusZoneOf, { skin: "exposure" }), policy);
   const gate = coverageGate(cov, { threshold: COVERAGE_THRESHOLD, zones: policy });
   if (!gate.passed) {
     throw new Error(`coverage gate FAILED after the grammar: ` +

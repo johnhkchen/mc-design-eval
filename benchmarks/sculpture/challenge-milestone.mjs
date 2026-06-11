@@ -66,7 +66,7 @@ import { decodeImage } from "../../src/color/palette-extract.mjs";
 import { assertArtifact } from "../../src/artifact.mjs";
 import { MULTI_ANGLE_GATE_SCHEMA } from "../../src/form/multi-angle-gate.mjs";
 import { occupancyDelta, composeReconstruction } from "../../src/view/reconstruct-compose.mjs";
-import { buildComponentPlan } from "../../src/view/component-plan.mjs";
+import { buildComponentPlan, serializeComponentPlan } from "../../src/view/component-plan.mjs";
 import { buildSkin, SUBJECTS } from "./durable-skin.mjs";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
@@ -250,6 +250,9 @@ async function loadReconstruction(def, shellArtifact, shellSha) {
   }
   const plan = buildComponentPlan({ componentRecord, roofRecord, shapedRecord, shellSha, roofDelta, roofOcc });
   const composed = deltas.length ? composeReconstruction(shellArtifact, deltas) : null;
+  // the composed edit set rides with the plan: the kit-presence checker uses it to tell a
+  // definition cell from junk when a treatment mount is blocked
+  if (composed) plan.touchedCells = composed.touched;
   return {
     plan, composed,
     inputs: {
@@ -288,6 +291,12 @@ export async function runChain(def, paths) {
     buildRel = paths.shellRel.replace("shell-artifact.json", "reconstructed-artifact.json");
     assertArtifact(reconstruction.composed.artifact);
     await writeFile(join(HERE, buildRel), artifactJson(reconstruction.composed.artifact));
+  }
+  if (reconstruction) {
+    // persisted so the kit-aware gate re-runs the SAME op (frames, wall top, census routing)
+    await writeFile(
+      join(HERE, paths.shellRel.replace("shell-artifact.json", "component-plan.json")),
+      JSON.stringify(serializeComponentPlan(reconstruction.plan), null, 2) + "\n");
   }
   // The D5 uniform transform: the skin consumes the SHELL-REPAIRED build; the committed zone-map
   // record was derived from the unrepaired build, so its agreement assert does not apply here —

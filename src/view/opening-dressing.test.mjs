@@ -225,7 +225,7 @@ test("blocked shutter cell ⇒ shutter-blocked, named and reduced", () => {
   const occ = occupancyFromCells(cells);
   const r = dressOpenings(occ, extractApertures(occ, ["+z"]), TREATMENTS);
   const c = r.perOpening[0].conflicts.find((x) => x.slot === "shutterRight");
-  assert.deepEqual(c, { slot: "shutterRight", name: "shutter-blocked-right", reduction: "shutter-dropped" });
+  assert.deepEqual(c, { slot: "shutterRight", name: "shutter-blocked-right", reduction: "shutter-dropped", at: [[1, 2, 1]] });
 });
 
 test("every absent treatment is a named conflict — nothing silent", () => {

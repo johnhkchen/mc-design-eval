@@ -85,15 +85,18 @@ const artifactJson = (a) => JSON.stringify(a, null, 2) + "\n";
  *  names the failing stage for the honest-failure record. */
 async function styledChain(def, kitRec, paths, track) {
   track.stage = "chain";
-  const { provision, base, shell, skin } = await runChain(def, paths);
+  const { provision, base, shell, reconstruction, skin } = await runChain(def, paths);
   track.stage = "grammar";
   if (skin.zoneMap?.source !== "concept" || !skin.zoneMap.bands) {
     throw new Error(`skin produced no concept-derived zone map (source=${skin.zoneMap?.source}) — ` +
       `the grammar binds to the T-092 derived bands, not the prior`);
   }
+  // T-106-01: the SAME consumption plan threads through grammar AND settle (the settle re-runs the
+  // same op — it must not flip frame derivations between passes).
   const gOpts = {
     bands: skin.zoneMap.bands, roof: skin.zoneMap.roof,
     policy: skin.policyS, substitution: skin.substitution, kitRec, zoneOpts: def.zoneOpts,
+    componentPlan: reconstruction?.plan ?? null,
   };
   const g = grammarStage(skin.final, gOpts);
   track.stage = "dressing";
@@ -114,20 +117,29 @@ async function styledChain(def, kitRec, paths, track) {
   const settle = { iterations: 0, trail: [] };
   for (;;) {
     const s = grammarStage(styled, gOpts);
-    const wants = s.grammar.frame.painted + s.grammar.frame.adopted + s.grammar.fill.placements.length;
+    // T-106-01: the settle fixpoint covers BOTH ops the kit-presence checker re-runs. A grammar
+    // re-run can paint a cell that turns a previously un-hangable shutter jamb hangable (the
+    // component frames paint different cells than the dressing saw) — the dressing must be a
+    // no-op on the styled build by the same rule the grammar is.
+    const dressAgain = dressOpenings(artifactOccupancy(s.final), apertures, treatments);
+    const wants = s.grammar.frame.painted + s.grammar.frame.adopted + s.grammar.fill.placements.length +
+      dressAgain.placements.length;
     if (wants === 0) break;
     if (++settle.iterations > 4) {
-      throw new Error(`settle did not converge after 4 grammar re-runs (still wants ${wants} cells: ` +
-        `frame ${s.grammar.frame.painted + s.grammar.frame.adopted}, fill ${s.grammar.fill.placements.length})`);
+      throw new Error(`settle did not converge after 4 grammar+dressing re-runs (still wants ${wants} cells: ` +
+        `frame ${s.grammar.frame.painted + s.grammar.frame.adopted}, fill ${s.grammar.fill.placements.length}, ` +
+        `dressing ${dressAgain.placements.length})`);
     }
     settle.trail.push({
       frame: s.grammar.frame.painted + s.grammar.frame.adopted,
       fill: s.grammar.fill.placements.length,
+      dressing: dressAgain.placements.length,
     });
-    styled = s.final;
+    styled = dressAgain.placements.length ? applyDressing(s.final, dressAgain.placements) : s.final;
+    assertArtifact(styled);
   }
   assertArtifact(styled);
-  return { provision, base, shell, skin, grammar: g, apertures, treatments, dress, settle, styled };
+  return { provision, base, shell, reconstruction, skin, grammar: g, apertures, treatments, dress, settle, styled };
 }
 
 /** Spawn the kit-aware gate through its own CLI (frozen contract). Exit 0/1/2 is a VERDICT. */
@@ -346,12 +358,14 @@ async function main() {
     const got = {
       base: def.provision ? sha256(artifactJson(r.base)) : null,
       shell: sha256(artifactJson(r.shell.artifact)),
+      reconstructed: r.reconstruction?.composed ? sha256(artifactJson(r.reconstruction.composed.artifact)) : null,
       skinFinal: sha256(artifactJson(r.skin.final)),
       grammarFinal: sha256(artifactJson(r.grammar.final)),
       styled: sha256(artifactJson(r.styled)),
     };
     const want = rec.reproducible?.sha256 ?? {};
     const same = (!got.base || got.base === want.base) && got.shell === want.shell &&
+      (got.reconstructed == null || want.reconstructed == null || got.reconstructed === want.reconstructed) &&
       got.skinFinal === want.skinFinal && got.grammarFinal === want.grammarFinal && got.styled === want.styled;
     console.error(`[repro] ${def.key}: fresh-process chain ${same ? "REPRODUCES the committed artifacts" : "DIVERGES"} ` +
       `(styled ${got.styled.slice(0, 12)}… vs ${String(want.styled).slice(0, 12)}…)`);
@@ -370,6 +384,7 @@ async function main() {
     for (const [stage, a, b] of [
       ["base", r1.base, r2.base],
       ["shell", r1.shell.artifact, r2.shell.artifact],
+      ["reconstructed", r1.reconstruction?.composed?.artifact ?? null, r2.reconstruction?.composed?.artifact ?? null],
       ["skin-final", r1.skin.final, r2.skin.final],
       ["grammar-final", r1.grammar.final, r2.grammar.final],
       ["styled", r1.styled, r2.styled],
@@ -400,11 +415,19 @@ async function main() {
   const shas = {
     base: def.provision ? sha256(artifactJson(r1.base)) : null,
     shell: sha256(artifactJson(r1.shell.artifact)),
+    reconstructed: r1.reconstruction?.composed ? sha256(artifactJson(r1.reconstruction.composed.artifact)) : null,
     skinFinal: sha256(artifactJson(r1.skin.final)),
     grammarFinal: sha256(grammarJson),
     styled: sha256(styledJson),
   };
   const g = r1.grammar.grammar;
+  if (r1.reconstruction) {
+    console.error(`[${def.key}] reconstruct (T-106): ${r1.reconstruction.composed
+      ? r1.reconstruction.composed.stats.perDelta.map((d) => `${d.name} ${d.changed}+${d.added}-${d.removed}`).join(", ")
+      : "records present, no composable artifacts"}; seams ${JSON.stringify(r1.skin.seamSources)}; ` +
+      `frame source ${g.frame.source}` +
+      (r1.reconstruction.plan.findings.length ? `; findings: ${r1.reconstruction.plan.findings.map((f) => f.code).join(", ")}` : ""));
+  }
   console.error(`[${def.key}] reproducible: double-run byte-identical (styled ${r1.styled.placements.length} placements, sha ${shas.styled.slice(0, 12)}…)`);
   if (r1.provision) console.error(`[${def.key}] provision: scale ${r1.provision.scale}, ${r1.provision.cells} cells`);
   console.error(`[${def.key}] shell: ${r1.shell.strip.components} → ${r1.shell.strip.kept} components; ` +
@@ -481,6 +504,16 @@ async function main() {
     },
     provision: r1.provision,
     shell: { strip: r1.shell.strip, openings: r1.shell.openings, voids: r1.shell.voids, plug: r1.shell.plug },
+    reconstruction: r1.reconstruction ? {
+      inputs: r1.reconstruction.inputs,
+      composed: r1.reconstruction.composed ? r1.reconstruction.composed.stats : null,
+      findings: r1.reconstruction.plan.findings,
+      seamSources: { ...r1.skin.seamSources, frameLines: g.frame.source },
+      conformance: r1.skin.conformance ? {
+        columns: r1.skin.conformance.columns, conforming: r1.skin.conformance.conforming,
+        deviations: r1.skin.conformance.deviations.slice(0, 50),
+      } : null,
+    } : null,
     skin: {
       substitution: r1.skin.substitution, kitOverrides: kitRec.overrides ?? {},
       zoneMap: { source: r1.skin.zoneMap.source, bands: r1.skin.zoneMap.bands, roof: r1.skin.zoneMap.roof },

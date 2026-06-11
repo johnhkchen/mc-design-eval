@@ -174,6 +174,13 @@ export function roofFootprintFromRecord(componentRecord) {
  *            counts:{wall:number, cornerPost:number, roofline:number, floorLine:number},
  *            source:{cornerPost:string, roofline:string, floorLine:string}}}
  */
+export function bandFloorLines(bands) {
+  // the concept-derived bands are a COMMITTED read: each upper band's floor is a storey line the
+  // concept claims. The occupancy storey scan (fill ≥ 0.6 per layer) reads every layer of a
+  // cage-solid or wedge-filled shell as a floor — definition over derivation here too.
+  return (bands ?? []).slice(1).map((b) => b.yRange[0]);
+}
+
 export function frameLinesFromComponent(occ, { floorLines = [], upperTop, roofKeys }, recipe) {
   const byKind = { cornerPost: [], roofline: [], floorLine: [] };
   const cells = new Map();
@@ -207,7 +214,7 @@ export function frameLinesFromComponent(occ, { floorLines = [], upperTop, roofKe
   }
   return {
     cells, byKind, counts,
-    source: { cornerPost: "component", roofline: "component", floorLine: "occupancy" },
+    source: { cornerPost: "component", roofline: "component", floorLine: recipe.floorLineSource ?? "occupancy" },
   };
 }
 
@@ -230,7 +237,57 @@ export function wallFacePredicate(componentRecord) {
   });
   return {
     contains: (voxel) => checks.some((c) => c(voxel)),
-    slabs: slabs.map((s) => ({ id: s.id, dir: s.dir, axis: s.axis, value: s.value })),
+    slabs: slabs.map((s) => ({ id: s.id, dir: s.dir, axis: s.axis, value: s.value, boundsWorld: s.boundsWorld })),
+  };
+}
+
+// --- serialization (the chain writes the plan beside the reconstructed artifact; the gate revives
+// it so the kit-presence fixpoint re-runs the SAME op — same frames, same wall top, same census) ---
+
+/** JSON-safe form of a plan (Sets/Maps → sorted arrays; predicates dropped, slabs kept). */
+export function serializeComponentPlan(plan) {
+  return {
+    schema: COMPONENT_PLAN_SCHEMA,
+    roof: plan.roof ? {
+      cells: [...plan.roof.cells].sort(),
+      footprintCols: [...plan.roof.footprintCols].sort(),
+      colTop: [...plan.roof.colTop.entries()].sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)),
+      family: plan.roof.family, source: plan.roof.source,
+    } : null,
+    frames: plan.frames ? {
+      cornerCols: [...plan.frames.cornerCols].sort(),
+      roofFootprintCols: [...plan.frames.roofFootprintCols].sort(),
+      rooflineSource: plan.frames.rooflineSource,
+    } : null,
+    wallSlabs: plan.wallFaces ? plan.wallFaces.slabs : null,
+    wallTop: plan.wallTop ?? null,
+    touchedCells: plan.touchedCells ? [...plan.touchedCells].sort() : null,
+    findings: plan.findings,
+  };
+}
+
+/** Revive a serialized plan: rebuild the Sets/Maps and the wall-face predicate. */
+export function reviveComponentPlan(json) {
+  if (!json || json.schema !== COMPONENT_PLAN_SCHEMA) {
+    throw new Error(`reviveComponentPlan: not a ${COMPONENT_PLAN_SCHEMA} document`);
+  }
+  return {
+    schema: json.schema,
+    roof: json.roof ? {
+      cells: new Set(json.roof.cells),
+      footprintCols: new Set(json.roof.footprintCols),
+      colTop: new Map(json.roof.colTop),
+      family: json.roof.family, source: json.roof.source,
+    } : null,
+    frames: json.frames ? {
+      cornerCols: new Set(json.frames.cornerCols),
+      roofFootprintCols: new Set(json.frames.roofFootprintCols),
+      rooflineSource: json.frames.rooflineSource,
+    } : null,
+    wallFaces: json.wallSlabs ? wallFacePredicate({ wallSlabs: json.wallSlabs }) : null,
+    wallTop: json.wallTop ?? null,
+    touchedCells: json.touchedCells ? new Set(json.touchedCells) : null,
+    findings: json.findings ?? [],
   };
 }
 
@@ -261,16 +318,28 @@ export function splitZoneOf(zoneOf, wallFaces, bandNames) {
  * plane must not be counted against the wall band it y-bins into), then wall bands split on the
  * defined wall field when one exists. Census-only — the FILL's zoneOf is untouched (paint policy
  * is geometry's, protection is the region's).
+ * `frameCells` (optional): the classified frame-line read — DEFINED lines (corner posts, the wall
+ * crown, storey beams) census as `<band>:frame`, measured but never gated; the wall-FIELD gate
+ * judges the field between the lines, not the kit's own timber against it.
  * @param {(voxel:number[])=>string} zoneOf
  * @param {{roof?:{cells:Set<string>}|null, wallFaces?:{contains:(voxel:number[])=>boolean}|null}} plan
  * @param {Iterable<string>} bandNames
+ * @param {{frameCells?:Map<string,string>|Set<string>|null}} [opts]
  * @returns {(voxel:number[])=>string}
  */
-export function planCensusZoneOf(zoneOf, plan, bandNames) {
+export function planCensusZoneOf(zoneOf, plan, bandNames, { frameCells = null } = {}) {
+  const bands = new Set(bandNames);
   const inner = plan?.wallFaces ? splitZoneOf(zoneOf, plan.wallFaces, bandNames) : zoneOf;
   const roofCells = plan?.roof?.cells ?? null;
-  if (!roofCells) return inner;
-  return (voxel) => (roofCells.has(voxel.join(",")) ? "roof" : inner(voxel));
+  return (voxel) => {
+    const key = voxel.join(",");
+    if (roofCells?.has(key)) return "roof";
+    if (frameCells?.has(key)) {
+      const zone = zoneOf(voxel);
+      return bands.has(zone) ? `${zone}:frame` : inner(voxel);
+    }
+    return inner(voxel);
+  };
 }
 
 // --- the plan -----------------------------------------------------------------------------------

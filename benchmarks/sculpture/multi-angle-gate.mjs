@@ -53,6 +53,7 @@ import { structuralZones } from "../../src/view/structural-read.mjs";
 import { surfaceZoneHistogram, ownCoverage } from "../../src/view/zone-fill.mjs";
 import { coverageGate, DEFAULT_COVERAGE_THRESHOLD } from "../../src/view/face-resemblance.mjs";
 import { layerCounts, zonesFromBands } from "../../src/view/zone-map.mjs";
+import { reviveComponentPlan, frameLinesFromComponent, planCensusZoneOf, bandFloorLines } from "../../src/view/component-plan.mjs";
 import { extractConceptZoneMap } from "../../src/color/band-profile.mjs";
 import {
   SAMPLE_GRID_N, estimateBorderColor, sampleRoleSwatches, selectValueTrueMap,
@@ -131,9 +132,11 @@ function encodeLabeledSheet(composed, labels, panelW, gutter) {
   return { buf: c.toBuffer("image/png"), labeled: true };
 }
 
-/** The T-092 zone derivation, re-run from the same committed inputs; prior policy as recorded fallback. */
-function deriveZones({ occ, conceptImg, matMap, fallbackPolicy }) {
-  const sz = structuralZones(occ, {});
+/** The T-092 zone derivation, re-run from the same committed inputs; prior policy as recorded
+ *  fallback. T-106-01: `componentPlan` (revived from the chain's persisted component-plan.json)
+ *  pins the wall/roof boundary so the gate reads the SAME geometry the chain skinned. */
+function deriveZones({ occ, conceptImg, matMap, fallbackPolicy, componentPlan = null }) {
+  const sz = structuralZones(occ, componentPlan?.wallTop != null ? { upperTop: componentPlan.wallTop } : {});
   const gridResult = gridFromPixels(conceptImg, {
     whitelist: bareList(matMap.palette), n: SAMPLE_GRID_N,
     dropColor: estimateBorderColor(conceptImg), cellMeans: true,
@@ -146,13 +149,13 @@ function deriveZones({ occ, conceptImg, matMap, fallbackPolicy }) {
     const zb = zonesFromBands({ bands: extracted.bands, roof: extracted.roof, roofKeys: sz.roofKeys, upperTop: sz.upperTop });
     return {
       zoneOf: zb.zoneOf, zones: zb.zones, source: "concept", reason: null, gridResult,
-      bandNames: extracted.bands.map((b) => b.name), sz,
+      bandNames: extracted.bands.map((b) => b.name), bands: extracted.bands, sz,
     };
   }
   return {
     zoneOf: sz.zoneOf,
     zones: Object.fromEntries(Object.entries(fallbackPolicy).map(([z, p]) => [z, { dominant: bare(p.dominant), preserve: p.preserve.map(bare) }])),
-    source: "prior-fallback", reason: extracted.reason, gridResult, bandNames: null, sz,
+    source: "prior-fallback", reason: extracted.reason, gridResult, bandNames: null, bands: null, sz,
   };
 }
 
@@ -246,12 +249,28 @@ async function main() {
     if (kitRec.schema !== "kit/v1") throw new Error(`${def.kitRecord} is not a kit/v1 record`);
     kitOverrides = kitRec.overrides ?? {};
   }
-  const derived = deriveZones({ occ, conceptImg, matMap, fallbackPolicy: def.policy });
+  // T-106-01: the chain persists its consumption plan beside the artifact under test — the
+  // kit-presence fixpoint must re-run the SAME op (frames, wall top, census routing). Absent file
+  // (pre-T-106 artifacts, record-less subjects) → null, the occupancy path exactly as before.
+  const planPath = join(HERE, artifactRel.replace(/[^/]+$/, "component-plan.json"));
+  const componentPlan = existsSync(planPath)
+    ? reviveComponentPlan(JSON.parse(await readFile(planPath, "utf8")))
+    : null;
+  if (componentPlan) {
+    console.error(`[${slug}] component plan: ${planPath.replace(HERE + "/", "")} — ` +
+      `wallTop ${componentPlan.wallTop ?? "—"}, frames ${componentPlan.frames ? componentPlan.frames.rooflineSource : "—"}, ` +
+      `roof cells ${componentPlan.roof ? componentPlan.roof.cells.size : 0}`);
+  }
+  const derived = deriveZones({ occ, conceptImg, matMap, fallbackPolicy: def.policy, componentPlan });
   const { zones: zonesShipped, substitution, ship } = policyInShippedPalette(derived.zones, {
     matMap, gridResult: derived.gridResult, artifact, kitOverrides,
   });
   console.error(`[${slug}] zones: ${derived.source}${derived.reason ? ` (${derived.reason})` : ""} — ` +
     Object.entries(zonesShipped).map(([z, p]) => `${z}=${p.dominant}`).join(", "));
+  // per-view census routing matches the chain's: program cells are roof, offslab cells measured
+  const gateCensusZoneOf = componentPlan
+    ? planCensusZoneOf(derived.zoneOf, componentPlan, derived.bandNames ?? [])
+    : derived.zoneOf;
 
   // --- T-100: the kit-presence COMPANION precondition (deterministic; runs whether or not the
   // judge later refuses — both run, both reported; the kit is the COMMITTED record, immutable) ----
@@ -264,12 +283,26 @@ async function main() {
     presence = { ran: false, reason: "no-reference-build" }; // apertures are concept-declared (T-099)
   } else {
     const refArt = JSON.parse(await readFile(join(HERE, def.build), "utf8"));
+    const refOcc = artifactOccupancy(refArt);
+    // the fixpoint rule re-runs the SAME op the chain ran: component frames + the concept-band
+    // floor lines (the occupancy storey scan reads every layer of a cage-solid shell as a floor)
+    const floorLinesEff = componentPlan && derived.bands ? bandFloorLines(derived.bands) : derived.sz.floorLines;
     presence = kitPresence(occ, {
       kit: kitRec.kit, bandNames: derived.bandNames, policy: zonesShipped, zoneOf: derived.zoneOf,
-      floorLines: derived.sz.floorLines, upperTop: derived.sz.upperTop, roofKeys: derived.sz.roofKeys,
+      floorLines: floorLinesEff, upperTop: derived.sz.upperTop, roofKeys: derived.sz.roofKeys,
       sub: ship,
-      apertures: extractApertures(artifactOccupancy(refArt)),
+      apertures: extractApertures(refOcc),
       treatments: treatmentsFromKit(kitRec),
+      frames: componentPlan?.frames
+        ? frameLinesFromComponent(occ,
+            { floorLines: floorLinesEff, upperTop: derived.sz.upperTop, roofKeys: derived.sz.roofKeys },
+            { ...componentPlan.frames, floorLineSource: "concept-bands" })
+        : null,
+      // defined geometry = reconstruction edits ∪ the raw base's concept-declared cells (the
+      // build's own timber beside a window is as defined as an eave course)
+      definedCells: componentPlan
+        ? (p) => (componentPlan.touchedCells?.has(p.join(",")) ?? false) || refOcc.has(...p)
+        : null,
     });
     console.error(`[${slug}] kit presence: ${presence.passed ? "PASS" : "FAIL"}` +
       (presence.gaps.length ? ` — ${presence.gaps.join("; ")}` : ""));
@@ -319,7 +352,7 @@ async function main() {
       // rejected exactly the ingredients the kit supplied. Monotone vs the old metric — any view
       // that passed dominant-only still passes; foreign leakage still fails.
       const cov = coverageGate(
-        ownCoverage(surfaceZoneHistogram(occ, derived.zoneOf, { faces: [a], skin: "projection" }), zonesShipped),
+        ownCoverage(surfaceZoneHistogram(occ, gateCensusZoneOf, { faces: [a], skin: "projection" }), zonesShipped),
         { threshold: DEFAULT_COVERAGE_THRESHOLD, zones: zonesShipped, metric: "own" });
       const viewImg = await decodeImage(r.path);
       const viewPanel = resampleRgba(viewImg, P, P, "aspect");
