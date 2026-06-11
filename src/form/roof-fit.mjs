@@ -68,6 +68,23 @@ function eaveEdgeCoord(eaveCells, eaveDir) {
   return edge;
 }
 
+/** Make every row (fixed z) and rib (fixed x) of a plan-column set contiguous, in place. */
+function fillBetween(cols) {
+  for (const [groupIdx, fillIdx] of [[1, 0], [0, 1]]) { // rows (group by z, fill x), then ribs
+    const groups = new Map();
+    for (const k of cols) {
+      const c = k.split(",").map(Number);
+      const g = c[groupIdx];
+      const cur = groups.get(g);
+      if (cur) { cur.lo = Math.min(cur.lo, c[fillIdx]); cur.hi = Math.max(cur.hi, c[fillIdx]); }
+      else groups.set(g, { lo: c[fillIdx], hi: c[fillIdx] });
+    }
+    for (const [g, { lo, hi }] of groups) {
+      for (let v = lo; v <= hi; v++) cols.add(fillIdx === 0 ? `${v},${g}` : `${g},${v}`);
+    }
+  }
+}
+
 /**
  * One side of a gable: pitch (source-selected), eave line, overhang. Returns `{side, findings}`;
  * `side.reasons` is non-empty when the side cannot be parameterized sanely.
@@ -161,6 +178,27 @@ export function evalSideHeight(side, ridgeY, x, z) {
 }
 
 /**
+ * THE PARAMETRIC GABLE SURFACE at a column: min over the two side planes, the ridge cap, and the
+ * hip end planes where the fit demands them. This single definition is what the generator
+ * realizes AND what {@link programFitError} measures against — the two must never diverge (the
+ * gatehouse hip ends, measured against bare side planes, read as 'error' and killed the gable).
+ */
+export function gableSurfaceHeight(gable, x, z) {
+  let h = gable.ridge.y;
+  for (const side of gable.sides) h = Math.min(h, evalSideHeight(side, gable.ridge.y, x, z));
+  if (gable.hip?.demanded) {
+    const v = gable.ridge.axis === "x" ? x : z;
+    const eave = Math.min(...gable.sides.map((s) => s.eaveY));
+    const pitch = gable.sides.reduce((s, side) => s + side.pitch, 0) / gable.sides.length;
+    const fLo = gable.ridge.axis === "x" ? gable.footprint.bbox.minX : gable.footprint.bbox.minZ;
+    const fHi = gable.ridge.axis === "x" ? gable.footprint.bbox.maxX : gable.footprint.bbox.maxZ;
+    if (gable.hip.lo) h = Math.min(h, eave + pitch * (v - fLo));
+    if (gable.hip.hi) h = Math.min(h, eave + pitch * (fHi - v));
+  }
+  return h;
+}
+
+/**
  * Extract parametric gables from a component record: one per reciprocal ridge pair of pitched
  * planes. Every plane that does not participate in a sane gable is a NAMED finding — flat planes,
  * unpaired fragments, broken pairs (Rule 1: the regularized mass stays for those regions).
@@ -203,7 +241,10 @@ export function gablesFromRecord(record, opts = {}) {
       if (!opposite) reasons.push(`eave dirs not opposing (${a.side.eaveDir} vs ${b.side.eaveDir})`);
     }
 
-    // footprint: union of both extents plus the ridge cells (the ridge line can sit between them)
+    // footprint: union of both extents plus the ridge cells (the ridge line can sit between them),
+    // then rows and ribs made CONTIGUOUS (fill-between). A parametric roof has straight edges; the
+    // blob extent's segmentation notches are not plan features — left ragged, the generated eave
+    // line inherits gaps whose flanking cells expose 4 faces (the gatehouse's z=13 eave row).
     const cols = new Set();
     const bbox = { minX: Infinity, maxX: -Infinity, minZ: Infinity, maxZ: -Infinity };
     for (const cells of [a.side.extentCells, b.side.extentCells, runCells(p.ridge.cells ?? [])]) {
@@ -215,6 +256,7 @@ export function gablesFromRecord(record, opts = {}) {
         if (z > bbox.maxZ) bbox.maxZ = z;
       }
     }
+    fillBetween(cols);
 
     // sanity: ridge above both eaves, a real run on both sides
     for (const s of sides) {
@@ -299,8 +341,24 @@ export function pitchVariant(gables, source, opts = {}) {
 }
 
 /**
- * The recorded FIT ERROR (Rule 1): RMSE of the generated column heights against each side's chosen
- * plane (evalSideHeight), over that side's own extent. Gates the gable at `programRmseTol`.
+ * The same gables with hip ends suppressed (plain gable ends) — the swap ladder's simpler-shape
+ * hypothesis when a cage rejection refutes a detected hip demand. Hip demand detection rests on
+ * the recorded ridge span, and a segmentation-fragmented ridge (the gatehouse: extent x −12..13,
+ * ridge cells x 1..5) under-spans badly enough to invent hips that delete real end mass. The
+ * suppression is recorded on the gable (`hip.suppressed`), never silent. PURE.
+ */
+export function gableEndsVariant(gables) {
+  return gables.map((g) => (g.hip?.demanded
+    ? { ...g, hip: { ...g.hip, demanded: false, suppressed: true } }
+    : g));
+}
+
+/**
+ * The recorded FIT ERROR (Rule 1): RMSE of the generated column heights against the gable's full
+ * parametric surface ({@link gableSurfaceHeight} — hip-aware), broken out over each side's own
+ * extent. Gates the gable at `programRmseTol`: it catches cross-gable burial and quantization
+ * pathologies; the per-plane fit quality vs the record is already carried by voxelFit/glbFit rmse,
+ * and the GLB check itself is the cage's silhouette IoU.
  * @param {object} gable a sane gable from {@link gablesFromRecord}
  * @param {Map<string,number>} heights generated column heights ("x,z" → top level, halves)
  * @returns {{perSide:{planeId:string, rmse:number|null, cells:number}[], rmse:number|null}}
@@ -315,7 +373,7 @@ export function programFitError(gable, heights) {
     for (const [x, z] of side.extentCells) {
       const got = heights.get(`${x},${z}`);
       if (got === undefined) continue;
-      const want = evalSideHeight(side, gable.ridge.y, x, z);
+      const want = gableSurfaceHeight(gable, x, z);
       const r = got - want;
       s += r * r;
       m++;

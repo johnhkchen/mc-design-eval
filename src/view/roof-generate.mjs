@@ -19,7 +19,7 @@
 //
 // PURE — no I/O, no GL, no Date/random; runs under the `src/**/*.test.mjs` glob.
 
-import { evalSideHeight } from "../form/roof-fit.mjs";
+import { evalSideHeight, gableSurfaceHeight } from "../form/roof-fit.mjs";
 
 /** Stair `facing` for an UPHILL direction (the stair's full half backs onto the rise). */
 export const STAIR_FACING = Object.freeze({ "+x": "east", "-x": "west", "+z": "south", "-z": "north" });
@@ -59,21 +59,9 @@ export function roofFamily(kitRows, vocab) {
   return out;
 }
 
-/** A gable's own surface at a column: min over its two side planes, hip end planes, and the ridge. */
-function gableHeightAt(gable, x, z) {
-  let h = gable.ridge.y;
-  for (const side of gable.sides) h = Math.min(h, evalSideHeight(side, gable.ridge.y, x, z));
-  if (gable.hip?.demanded) {
-    const v = gable.ridge.axis === "x" ? x : z;
-    const eave = Math.min(...gable.sides.map((s) => s.eaveY));
-    const pitch = gable.sides.reduce((s, x2) => s + x2.pitch, 0) / gable.sides.length;
-    const fLo = gable.ridge.axis === "x" ? gable.footprint.bbox.minX : gable.footprint.bbox.minZ;
-    const fHi = gable.ridge.axis === "x" ? gable.footprint.bbox.maxX : gable.footprint.bbox.maxZ;
-    if (gable.hip.lo) h = Math.min(h, eave + pitch * (v - fLo));
-    if (gable.hip.hi) h = Math.min(h, eave + pitch * (fHi - v));
-  }
-  return h;
-}
+// The gable surface itself lives in roof-fit (gableSurfaceHeight) — ONE definition shared by the
+// generator and the fit-error measure, so hip clipping can never read as 'error' (the gatehouse
+// lesson). This module adds only the construction-facing question: which way is downhill.
 
 /** The downhill direction of a gable's ACTIVE constraint at a column (null at the ridge cap). */
 function gableDownhillAt(gable, x, z, h) {
@@ -113,7 +101,7 @@ export function roofHeightfield(gables) {
     for (const s of g.sides) bandFloor = Math.min(bandFloor, Math.floor(s.eaveY));
     for (const key of g.footprint.cols) {
       const [x, z] = key.split(",").map(Number);
-      const h = roundHalf(gableHeightAt(g, x, z));
+      const h = roundHalf(gableSurfaceHeight(g, x, z));
       if (!heights.has(key) || h > heights.get(key)) {
         heights.set(key, h);
         owner.set(key, { gableId: g.id, downhill: gableDownhillAt(g, x, z, h) });

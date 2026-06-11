@@ -206,6 +206,19 @@ test("attempt ladder: a glb pitch inconsistent with the geometry falls back to v
   assert.deepEqual(res.attempts[1].pitches[0].sides.map((s) => s.source), ["voxel", "voxel"]);
 });
 
+test("attempt ladder: a refuted hip demand falls back to plain gable ends under the cage", () => {
+  // hip demand (a fragmented-ridge false positive) deletes real end mass → IoU rejection; the
+  // gable-ends rung regenerates the full-length prism and passes.
+  const g = { ...gable(), hip: { demanded: true, lo: true, hi: true } };
+  const input = spikyInput();
+  // tolerance tightened for the small synthetic scene so the hip's end-mass loss registers
+  const res = swapRoof(input, { gables: [g], family: SPRUCE, refSils: refsOf(idealOcc()),
+    opts: { iouTolerance: 0.005 } });
+  assert.equal(res.accepted, true, res.reasons.join("; "));
+  assert.equal(res.attempt, "as-fitted-gable-ends");
+  assert.ok(res.attempts.find((a) => a.name === "as-fitted" && !a.accepted));
+});
+
 test("attempt ladder: identical pitch sources collapse to a single attempt", () => {
   const input = spikyInput();
   const res = swapRoof(input, { gables: [gable()], family: SPRUCE, refSils: refsOf(idealOcc()) });

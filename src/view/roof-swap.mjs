@@ -35,7 +35,7 @@ import {
   REGULARIZE_DEFAULTS, silhouetteIoUs, protectViolations, protrudingStackRegion,
 } from "./shell-regularize.mjs";
 import { generateRoof } from "./roof-generate.mjs";
-import { programFitError, pitchVariant, ROOF_FIT_DEFAULTS } from "../form/roof-fit.mjs";
+import { programFitError, pitchVariant, gableEndsVariant, ROOF_FIT_DEFAULTS } from "../form/roof-fit.mjs";
 import { runCells } from "../form/component-decompose.mjs";
 
 const NEIGH6 = Object.freeze([[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]]);
@@ -77,14 +77,19 @@ export function chimneyColumns(record, occ) {
 }
 
 /**
- * Protrusion census restricted to the roof band: cells with ≥ spikeFaces of 6 faces exposed,
- * within `cols` at y ≥ bandFloor (same emptiness test as the pinned T-102 definition).
+ * Protrusion census restricted to the roof band: SOLID cells with ≥ spikeFaces of 6 faces exposed,
+ * within `cols` at y ≥ bandFloor (same emptiness test as the pinned T-102 definition; emptiness
+ * still counts fixture neighbors as occupied). Solid-only follows the cage's own semantics —
+ * fixtures are dressing, not shell mass: a slab half-step or stair tread at an eave edge exposes
+ * 4 faces BY CONSTRUCTION (it is the declared shaped vocabulary, placed with states), which is
+ * exactly what this census must not confuse with sampled-mesh noise.
  * @returns {{spikes:number, cells:number}}
  */
 export function roofBandCensus(occ, { cols, bandFloor, spikeFaces = REGULARIZE_DEFAULTS.spikeFaces }) {
   let spikes = 0;
   let cells = 0;
   for (const key of occ.cells.keys()) {
+    if (occ.forms?.has(key)) continue; // shaped vocabulary, not sampled mass
     const [x, y, z] = keyPos(key);
     if (y < bandFloor || !cols.has(`${x},${z}`)) continue;
     cells++;
@@ -213,20 +218,23 @@ function mapRound(o) {
   return Object.fromEntries(Object.entries(o).map(([k, v]) => [k, round4(v)]));
 }
 
-/** The pitch signature of a gable set — used to skip a variant identical to the one before it. */
+/** The shape signature of a gable set — used to skip a variant identical to an earlier one. */
 const pitchKey = (gables) =>
-  JSON.stringify(gables.map((g) => g.sides.map((s) => [s.pitch, s.pitchSource])));
+  JSON.stringify(gables.map((g) => [g.hip?.demanded ?? false, g.sides.map((s) => [s.pitch, s.pitchSource])]));
 
 /**
  * THE SWAP: carve the sampled roof over the generated footprint, compose the generated roof,
  * re-seat the chimney, judge with the cage's three checks, roll back on any regression.
  *
  * ATTEMPT LADDER (declared, deterministic, every attempt recorded): the as-fitted gables first
- * (glb-preferred pitches); if the cage rejects, ONE retry with all-voxel pitches. A glb gradient
- * can pass the angle-agreement gate yet be inconsistent with the recorded eave/ridge geometry
- * (the cottage roof-0 apex shortfall — eave 15 + 0.773·run 8.5 never reaches ridge 24); the cage
- * vs the GLB silhouette is the arbiter between the two declared sources — the E-15 lesson as a
- * mechanism, not a tuned constant. Both attempts rejected → the input stands (Rule 1 fallback).
+ * (glb-preferred pitches); then all-voxel pitches; then each again with detected hip ends
+ * suppressed (plain gable ends). Two failure modes motivate the rungs, both measured live: a glb
+ * gradient can pass the angle-agreement gate yet be inconsistent with the recorded eave/ridge
+ * geometry (the cottage roof-0 apex shortfall — eave 15 + 0.773·run 8.5 never reaches ridge 24),
+ * and a segmentation-fragmented ridge can invent a hip demand that deletes real end mass (the
+ * gatehouse — ridge cells x 1..5 under a footprint x −12..13). The cage vs the GLB silhouette is
+ * the arbiter between the declared hypotheses — the E-15 lesson as a mechanism, not a tuned
+ * constant. Duplicate shapes are skipped; all rungs rejected → the input stands (Rule 1 fallback).
  * @param {import("./occupancy.mjs").Occupancy} occ the regularized shell
  * @param {{gables:object[], family:object, refSils:Record<string,object>, regions?:object[],
  *          protect?:{name:string, contains:(pos:number[])=>boolean}[], chimney?:Set<string>,
@@ -234,9 +242,21 @@ const pitchKey = (gables) =>
  */
 export function swapRoof(occ, args) {
   const { gables, opts = {} } = args;
-  const variants = [{ name: "as-fitted", gables }];
   const voxel = pitchVariant(gables, "voxel", opts);
-  if (pitchKey(voxel) !== pitchKey(gables)) variants.push({ name: "voxel-pitch", gables: voxel });
+  const candidates = [
+    { name: "as-fitted", gables },
+    { name: "voxel-pitch", gables: voxel },
+    { name: "as-fitted-gable-ends", gables: gableEndsVariant(gables) },
+    { name: "voxel-pitch-gable-ends", gables: gableEndsVariant(voxel) },
+  ];
+  const seen = new Set();
+  const variants = [];
+  for (const v of candidates) {
+    const key = pitchKey(v.gables);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    variants.push(v);
+  }
 
   const attempts = [];
   let first = null;

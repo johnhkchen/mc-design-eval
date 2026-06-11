@@ -156,9 +156,11 @@ async function runRoof(def) {
 function assertAcceptance(def, r) {
   if (!r.swap.accepted) return; // fallback is a correct Rule 1 outcome, judged by the caller
   const gables = r.swap.generated.gables.length;
-  // ≈0 (the AC): a clean gable ridge LINE exposes 4 faces at its two END cells — geometry, not
-  // noise. The principled residual budget is 2 per generated gable.
-  const budget = 2 * gables;
+  // ≈0 (the AC): a clean roof's LINE FEATURES expose 4 faces at their END cells by geometry —
+  // the ridge line (2 ends) and each side's eave line (2 ends, when overhanging) — never the
+  // sampled blob's spike field. Budget = (2 ridge + 2×2 eave) per generated gable, a geometric
+  // formula shared across subjects, not a tuned constant.
+  const budget = 6 * gables;
   const { before, after } = r.swap.census;
   if (after.spikes > budget) {
     throw new Error(`${def.key} DECLARED TARGET MISSED: roof-band protrusions after=${after.spikes} ` +

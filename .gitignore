@@ -158,3 +158,8 @@ benchmarks/sculpture/components/**/*.png
 # The durable record is shaped/<subj>.{json,md} + shaped/<subj>/artifact.json; the committed
 # evidence frames live in pr/assets/frames/shaped-*.png.
 benchmarks/sculpture/shaped/**/*.png
+
+# T-104-01 roof-as-program renders — regenerable via npm run roof:{cottage,gatehouse,church}.
+# The durable record is roof/<subj>.{json,md} + roof/<subj>/artifact.json; the committed
+# evidence frames live in pr/assets/frames/roof-*.png.
+benchmarks/sculpture/roof/**/*.png

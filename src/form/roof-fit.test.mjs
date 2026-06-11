@@ -6,6 +6,7 @@ import assert from "node:assert/strict";
 import { columnRuns } from "./component-decompose.mjs";
 import {
   ROOF_FIT_DEFAULTS, gablesFromRecord, evalSideHeight, programFitError, planeHeightAt, pitchVariant,
+  gableEndsVariant,
 } from "./roof-fit.mjs";
 
 /** Row runs over an inclusive plan rectangle. */
@@ -204,6 +205,29 @@ test("programFitError measures generated heights against the chosen planes", () 
   // a flagrantly wrong surface fails the declared tolerance
   const flat = new Map([...heights.keys()].map((k) => [k, 10]));
   assert.ok(programFitError(g, flat).rmse > ROOF_FIT_DEFAULTS.programRmseTol);
+});
+
+test("footprint rows and ribs are contiguous even when the extent has notches", () => {
+  const rec = gableRecord((r) => {
+    // notch the +x plane's eave row (drop x=3..4 at z=3) — the gatehouse z=13 pathology
+    r.roofPlanes[0].extent.runs = r.roofPlanes[0].extent.runs.filter((run) => run.z !== 3)
+      .concat([{ z: 3, x0: 1, x1: 2 }]);
+    return r;
+  });
+  const { gables } = gablesFromRecord(rec);
+  const { cols } = gables[0].footprint;
+  assert.ok(cols.has("3,3") && cols.has("4,3"), "row gap filled between covered extremes");
+});
+
+test("gableEndsVariant suppresses only demanded hips and records it", () => {
+  const { gables } = gablesFromRecord(gableRecord());
+  const plain = gableEndsVariant(gables);
+  assert.equal(plain[0], gables[0], "no hip demand → gable untouched");
+  const hip = [{ ...gables[0], hip: { demanded: true, lo: true, hi: false } }];
+  const sup = gableEndsVariant(hip);
+  assert.equal(sup[0].hip.demanded, false);
+  assert.equal(sup[0].hip.suppressed, true);
+  assert.equal(hip[0].hip.demanded, true, "input not mutated");
 });
 
 test("pitchVariant switches sane sides to the named source and keeps the rest", () => {
