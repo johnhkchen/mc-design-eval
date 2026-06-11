@@ -55,6 +55,7 @@ import { loadGlbSplat, resampleBlockGrid } from "../../src/view/glb-splat.mjs";
 import { paintFace, mergePaints, applyPaint } from "../../src/view/face-paint.mjs";
 import { allowedPalette } from "../../src/view/palette-cans.mjs";
 import { regularizeRoofCourses, stripStraySalt } from "../../src/view/surface-pattern.mjs";
+import { splitZoneOf, programConformance } from "../../src/view/component-plan.mjs";
 import {
   faceResemblance, coverageGate, DEFAULT_COVERAGE_THRESHOLD,
 } from "../../src/view/face-resemblance.mjs";
@@ -399,10 +400,38 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
     if (!allowed.has(p.dominant)) throw new Error(`zone "${z}" dominant "${p.dominant}" not in the substituted manifest`);
   }
 
+  // --- T-106-01 COMPONENT CONSUMPTION (E-27 Rule 4: where a definition exists, the derivation is a
+  // bug). All four seams hang off `def.componentPlan` (component-plan.mjs, built by the chain's
+  // reconstruct stage); a null plan is byte-for-byte today's pipeline. Recorded in `seamSources`.
+  const plan = def.componentPlan ?? null;
+  if (plan?.roof && policyS.roof) {
+    // the program's course family is roof vocabulary: treads/slabs are roof material to the fill's
+    // keep rule, the own-materials band evidence, and the plaster invariant — never salt to strip
+    for (const member of [plan.roof.family.stairs, plan.roof.family.slab]) {
+      if (member && allowed.has(member) && !policyS.roof.preserve.includes(member)) {
+        policyS.roof.preserve.push(member);
+      }
+    }
+  }
+  const roofRegions = plan?.roof
+    ? [{ name: "roof-program", contains: (voxel) => plan.roof.cells.has(voxel.join(",")) }]
+    : [];
+  const skipProgram = plan?.roof ? (voxel) => plan.roof.cells.has(voxel.join(",")) : undefined;
+  // the gate census runs over the DEFINED wall field when the record provides one: wall-band cells
+  // off the slab faces report `<band>:offslab` — measured in the same coverage record, never gated
+  // (no policy entry), so the residual's cause ships with the verdict
+  const wallBandNames = () => Object.keys(policyS).filter((z) => z !== "roof");
+  const censusZoneOf = plan?.wallFaces ? splitZoneOf(zoneOf, plan.wallFaces, wallBandNames()) : zoneOf;
+  const seamSources = {
+    roofCourses: plan?.roof ? "program" : "occupancy",
+    wallFields: plan?.wallFaces ? "slab-faces" : "banded-exposure",
+    zoneMap: zoneMap.source,
+  };
+
   // --- 5. FULL-SHELL BASE COAT (T-085 + T-090 skin) ----------------------------------------------
   const fillZones = Object.fromEntries(
     Object.entries(policyS).map(([z, p]) => [z, { dominant: p.dominant, preserve: p.preserve }]));
-  const fill = zoneFill(occSealed, { zoneOf, zones: fillZones, skin: "exposure" });
+  const fill = zoneFill(occSealed, { zoneOf, zones: fillZones, skin: "exposure", regions: roofRegions });
   const based = applyPaint(sealed, fill.placements);
   const occBased = artifactOccupancy(based);
 
@@ -419,16 +448,16 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
   } catch (e) {
     notes.push(`side GLB splat skipped: ${e.message}`);
   }
-  const frontPass = paintFace(occBased, def.frontDir, frontTarget, { allowed, source: "concept", zoneOf, allowedByZone });
+  const frontPass = paintFace(occBased, def.frontDir, frontTarget, { allowed, source: "concept", zoneOf, allowedByZone, skip: skipProgram });
   const sidePass = sideSplat
-    ? paintFace(occBased, def.sideDir, sideSplat.grid, { allowed, source: "glb", zoneOf, allowedByZone })
+    ? paintFace(occBased, def.sideDir, sideSplat.grid, { allowed, source: "glb", zoneOf, allowedByZone, skip: skipProgram })
     : { dir: def.sideDir, source: "glb", placements: [], painted: 0, skipped: 0, offPalette: 0, zoneRejected: 0 };
   // T-088 PRECONDITION on the front candidate, GL-free (the deterministic acceptance: the concept IS the
   // truth for the front, so with coverage passed the paint is accepted; the resemblance delta is rendered
   // later as EVIDENCE — it cannot rescue a coverage failure, per the T-088 contract).
   const frontCandidate = applyPaint(based, frontPass.placements);
   const covFrontCandidate = dominantCoverage(
-    surfaceZoneHistogram(artifactOccupancy(frontCandidate), zoneOf, { skin: "exposure" }), policyS);
+    surfaceZoneHistogram(artifactOccupancy(frontCandidate), censusZoneOf, { skin: "exposure" }), policyS);
   const gateFrontCandidate = coverageGate(covFrontCandidate, { threshold: COVERAGE_THRESHOLD, zones: policyS });
   const frontAccepted = gateFrontCandidate.passed;
   const sideAccepted = sidePass.painted > 0;
@@ -453,16 +482,32 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
     [sideLegacy, frontLegacy].filter((p) => (p.placements?.length ?? 0) > 0),
     { priority: ["concept", "glb"] }).placements);
   const covSplatOnly = dominantCoverage(
-    surfaceZoneHistogram(artifactOccupancy(splatOnly), zoneOf, { skin: "exposure" }), policyS);
+    surfaceZoneHistogram(artifactOccupancy(splatOnly), censusZoneOf, { skin: "exposure" }), policyS);
   const gateSplatOnly = coverageGate(covSplatOnly, { threshold: COVERAGE_THRESHOLD, zones: policyS });
 
   // --- 8. COHERENT SURFACE (T-087: geometry first, pattern second) --------------------------------
-  const course = regularizeRoofCourses(artifactOccupancy(painted), { dominant: policyS.roof.dominant });
+  // T-106-01: on the roof PROGRAM's footprint the courses are the contract, not a height field to
+  // smooth — the basin-fill is restricted to off-footprint columns and the program gets a
+  // CONFORMANCE check instead (deviations recorded as evidence; the program is never auto-"fixed").
+  let course = regularizeRoofCourses(artifactOccupancy(painted), { dominant: policyS.roof.dominant });
+  if (plan?.roof) {
+    const before = course.placements.length;
+    const placements = course.placements.filter((p) => !plan.roof.footprintCols.has(`${p.pos[0]},${p.pos[2]}`));
+    course = { ...course, placements, programFiltered: before - placements.length };
+  }
   const courseBuild = applyPaint(painted, course.placements);
   const salt = stripStraySalt(artifactOccupancy(courseBuild), {
-    zoneOf, zones: policyS, minKeep: MIN_KEEP, minExtent: MIN_EXTENT,
+    zoneOf, zones: policyS, minKeep: MIN_KEEP, minExtent: MIN_EXTENT, regions: roofRegions,
   });
   const final = applyPaint(courseBuild, salt.placements);
+  let conformance = null;
+  if (plan?.roof) {
+    conformance = programConformance(artifactOccupancy(final), plan.roof);
+    if (conformance.deviations.length) {
+      notes.push(`roof program conformance: ${conformance.deviations.length}/${conformance.columns} ` +
+        `columns deviate from the program top (recorded, not auto-fixed)`);
+    }
+  }
 
   // --- 9. TERMINAL GATES (a failing skin can never write a record) --------------------------------
   // T-079-02 guard, generalized for derived zone names (T-092): the invariant block may appear ONLY
@@ -483,7 +528,7 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
     plaster = { block, histogram, allowedZones };
   }
   const covFinal = dominantCoverage(
-    surfaceZoneHistogram(artifactOccupancy(final), zoneOf, { skin: "exposure" }), policyS);
+    surfaceZoneHistogram(artifactOccupancy(final), censusZoneOf, { skin: "exposure" }), policyS);
   const gateFinal = coverageGate(covFinal, { threshold: COVERAGE_THRESHOLD, zones: policyS });
   if (!gateFinal.passed) {
     throw new Error(`coverage gate FAILED on the final skin: ` +
@@ -536,6 +581,7 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
     coverage: { splatOnly: covSplatOnly, final: covFinal },
     gates: { threshold: COVERAGE_THRESHOLD, splatOnly: gateSplatOnly, final: gateFinal },
     bands, plaster, notes,
+    seamSources, conformance,
   };
 }
 
