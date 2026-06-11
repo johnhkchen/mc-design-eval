@@ -3,7 +3,7 @@
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -75,7 +75,8 @@ test("prompt embeds the sketch digest numbers", () => {
 test("sketchDigest reads a COMMITTED sketch record's shape (contract with form-sketch/v1)", () => {
   // Any committed sketch works; pick deterministically (first by name) — digest data, never a target.
   const dir = resolve(root, "benchmarks", "sculpture", "form-sketch");
-  const committed = JSON.parse(readFileSync(resolve(dir, "barn.json"), "utf8"));
+  const first = readdirSync(dir).filter((f) => f.endsWith(".json")).sort()[0];
+  const committed = JSON.parse(readFileSync(resolve(dir, first), "utf8"));
   const d = sketchDigest(committed);
   assert.match(d, /subject: /);
   assert.match(d, /roof pitch read: /);
@@ -93,7 +94,7 @@ test("parseProgramReply: valid reply → frozen program; violations throw with e
   assert.equal(program.subject, "test-subject");
   assert.ok(Object.isFrozen(program));
 
-  assert.throws(() => parseProgramReply("I would build a lovely cottage!", { pack }), /invalid_json|invalid building program/);
+  assert.throws(() => parseProgramReply("I would build something lovely!", { pack }), /invalid_json|invalid building program/);
   const offSchema = validReply.replace('"storeys":2', '"storeys":99');
   assert.notEqual(offSchema, validReply);
   assert.throws(() => parseProgramReply(offSchema, { pack }), /invalid building program/);

@@ -1,0 +1,207 @@
+{
+  "schema": "recognition-draft/v1",
+  "ticket": "T-125-01",
+  "subject": "cottage",
+  "pack": "rustic",
+  "model": "claude-opus-4-8",
+  "promptSha256": "de71f2c551c02ab35ac3f6af4f7c075c1e78f5cb10cd0b0e2adab742487508d2",
+  "askCount": 1,
+  "budget": 3,
+  "cells": 4993,
+  "elements": [
+    {
+      "id": "main-shell",
+      "kind": "shell",
+      "cellCount": 683
+    },
+    {
+      "id": "main-plinth",
+      "kind": "idiom",
+      "idiom": "plinth",
+      "cellCount": 88
+    },
+    {
+      "id": "main-jetty--x",
+      "kind": "idiom",
+      "idiom": "jetty",
+      "cellCount": 42
+    },
+    {
+      "id": "main-jetty--z",
+      "kind": "idiom",
+      "idiom": "jetty",
+      "cellCount": 27
+    },
+    {
+      "id": "main-roof",
+      "kind": "idiom",
+      "idiom": "roof.gable",
+      "cellCount": 3080
+    },
+    {
+      "id": "main-chimney",
+      "kind": "idiom",
+      "idiom": "chimney",
+      "cellCount": 21
+    },
+    {
+      "id": "main-head--x-1-0",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "cellCount": 1
+    },
+    {
+      "id": "main-head--x-0-0",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "cellCount": 1
+    },
+    {
+      "id": "main-head--x-1-1",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "cellCount": 1
+    },
+    {
+      "id": "main-head--x-2-0",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "cellCount": 1
+    },
+    {
+      "id": "main-head--x-2-1",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "cellCount": 1
+    },
+    {
+      "id": "main-head-+z-3-0",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "cellCount": 1
+    },
+    {
+      "id": "main-head--z-4-0",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "cellCount": 1
+    },
+    {
+      "id": "wing-shell",
+      "kind": "shell",
+      "cellCount": 330
+    },
+    {
+      "id": "wing-plinth",
+      "kind": "idiom",
+      "idiom": "plinth",
+      "cellCount": 42
+    },
+    {
+      "id": "wing-jetty-+x",
+      "kind": "idiom",
+      "idiom": "jetty",
+      "cellCount": 23
+    },
+    {
+      "id": "wing-roof",
+      "kind": "idiom",
+      "idiom": "roof.gable",
+      "cellCount": 648
+    },
+    {
+      "id": "wing-head-+x-0-0",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "cellCount": 1
+    },
+    {
+      "id": "wing-head-+x-1-0",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "cellCount": 1
+    }
+  ],
+  "conformance": {
+    "schema": "pack-conformance/v1",
+    "passed": true,
+    "checks": [
+      {
+        "name": "courses-even",
+        "passed": true,
+        "findings": []
+      },
+      {
+        "name": "symmetry-held",
+        "passed": true,
+        "findings": []
+      },
+      {
+        "name": "openings-rhythm",
+        "passed": true,
+        "findings": []
+      },
+      {
+        "name": "palette-in-pack",
+        "passed": true,
+        "findings": []
+      },
+      {
+        "name": "watertight",
+        "passed": true,
+        "findings": [],
+        "mouths": 0
+      },
+      {
+        "name": "single-component",
+        "passed": true,
+        "findings": [],
+        "components": 1
+      }
+    ]
+  },
+  "evidence": {
+    "renders": [
+      {
+        "angle": "+x+z",
+        "path": "benchmarks/sculpture/recognition/view-cottage-+x+z.png",
+        "bytes": 405244,
+        "sha256": "48f43989464776df571c90ac173a8d48286d37dd8aac71fd9a07b17c4d12ce35"
+      },
+      {
+        "angle": "+x-z",
+        "path": "benchmarks/sculpture/recognition/view-cottage-+x-z.png",
+        "bytes": 388040,
+        "sha256": "54956a8d537b9cac97348dc8f0effbb3b99eeaadad4f42c86951e9fd766e9ee1"
+      },
+      {
+        "angle": "-x-z",
+        "path": "benchmarks/sculpture/recognition/view-cottage--x-z.png",
+        "bytes": 406587,
+        "sha256": "9de6fa229450f64a901bd33728bf79426ccdcb92c274beaae612b62eea9355b2"
+      },
+      {
+        "angle": "-x+z",
+        "path": "benchmarks/sculpture/recognition/view-cottage--x+z.png",
+        "bytes": 425164,
+        "sha256": "22e61b28226812fddac01587bdd5d3efd01d4580ecb97338ff56038dad03d510"
+      }
+    ],
+    "renderError": null
+  },
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  },
+  "replies": [
+    {
+      "attempt": 1,
+      "parsed": true,
+      "source": "live"
+    }
+  ],
+  "replay": {
+    "npmRun": "recognize:offline",
+    "asserts": "committed program → byte-identical artifact"
+  }
+}

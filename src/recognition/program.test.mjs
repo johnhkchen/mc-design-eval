@@ -172,7 +172,7 @@ test("openings must fit the wall: lane at min spacing, vertical incl. head clear
 });
 
 test("door + ground windows on ONE wall are a joint lane — valid, feasibility-checked together", () => {
-  // the live cottage refusals: sill-0 door beside sill-1 windows is a NATURAL facade reading
+  // the first live refusals: a sill-0 door beside sill-1 windows is a NATURAL facade reading
   const mixed = validateProgramAgainstPack(makeProgram((p) => {
     p.masses[0].openings = [
       { wall: "+z", kind: "door", count: 1, w: 2, h: 3, sill: 0, head: "flat", headRole: "wall.dressing" },
