@@ -2514,3 +2514,82 @@ and the fourth-subject section of `pr/assets/generate-first.md` (the comparison 
 robustness-asymmetry finding). The story beat: E-27 moved censuses, E-28 moved fit errors from
 improvised to measured, E-29 moved the *build* from repaired evidence to authored parameters — and
 its fourth subject relocated the frontier from the generator to the lenses that feed it.
+
+## First-run generalization (E-30) — the stalled proof runs, and what it cost to get there (S-117…S-121, T-117-01…T-121-01) · 2026-06-11
+
+**The weakest-lens finding, closed at its root (T-117).** E-29 ended with `generated:barn` never
+starting: the zone lens color-matched rows and the barn's cobble panels quantize into stone_bricks
+(ΔL 2.082 — the E-21 near-tone collapse, surfaced one lens downstream). The fix was the same move
+E-26 made on the kit: *recognize, don't color-match* — `fieldResolution` derives a bare
+feature-key → walls-key resolution entirely from the committed map's `placementRule` rows and
+`nearTonePairs`, engaging only from the exact prior failure state (rung-1 empty + field blocks
+present), with roof keys never eligible. The barn's zone map derived from the concept on the first
+post-fix run (`zone-map/barn.json`, band0 cobblestone share 1.0); the legacy maps regenerated
+byte-identically. The lens was the last color-matcher in the chain; nothing was tuned.
+
+**Diff-then-fit (T-118) and the instrument that refuses flattery.** The roof-region diff
+(`roof-diff/*`, GLB-anchored, per-region per-azimuth) was built BEFORE any refit — and then
+refuted every refit it was supposed to license: cottage ridge height was already right, gatehouse
+intersect-resolution would have *lowered* a correct ridge, the church pyramid stays refused by
+design. The only landed change was an evidence repair (`fitRidgeLine` protrusion exclusion —
+chimney-polluted apex lines). The discipline held in T-121's re-judge: the generated-cottage
+cross-gable ridge (`gable-roof-2-roof-3`, mean delta **−4.015**, the −3.445-class signal T-118
+named) is **still open** — the repair fixed the *reading*, not the build; the generated ridge sits
+~4 cells low. Standing target, now with a receipt at both ends.
+
+**Pins and registration became preconditions, not hopes (T-119/T-120).** Every record write in the
+pin-writing runners refuses by default (`--rotate-pins` explicit, preflight-before-spend, swallowed
+flags fail closed); `registration:smoke` runs the REAL lens against proxy geometry before any
+TRELLIS spend; the glb-smoke gate gained a declared speck budget. The barn entered T-121 with
+smoke-pass receipts and immutable inputs — and the F1 byte-match tripwire fired mid-ticket exactly
+as designed when the legacy milestone records rotated under it (reskin distillations re-rotated
+judge-free via `--distill-only`).
+
+**The barn proof (T-121) — first contact found three more lens/op defects, then judged honestly.**
+`generated:barn` stalled three times before its first verdict, each stall a generalization defect
+in machinery that legacy subjects never exercised, each fixed by a rule the codebase already
+stated: (1) the band census y-binned the steep gable's wall cells (and the wall-top course one
+notch above the committed zone-map eave) into the roof zone — `planCensusZoneOf` gained the DUAL
+of its own roof-program rule (generator-provenance mass cells census `roof:gable`, measured never
+gated; undefined cells still gate, so spikes survive); (2) `sealRoof`'s most-common-top-block read
+declared the WALL field "the roof" (gable tops out-project the roof planes on a steep gable) and
+stripped the program's slab/stair eave courses — the stage-8 course rule now applies to the seal
+(program footprint filtered, never auto-"fixed"); (3) the kit's only trim and roof cubes carry
+first-run `flagged-mismatch` value checks, and the grammar milestone hard-required a binding —
+`bindKit` now separates `all-flagged` (a review state: degrade to the recorded no-op, its own
+documented contract) from `no-candidate` (still a wiring-bug throw). The flags STAND; nothing
+shipped, nothing tuned. Then the chain ran end-to-end: zero-blob PASS (6513 cells, regenerated
+byte-identically), settle 0 iterations, `--repro`/`--offline` receipts exist for the first time,
+**verdict vs the pinned T-116 bar: kit presence PASS · resemblance FAIL 12/2, 0/4 same-object** —
+major form@roof on every azimuth, the roof-diff agreeing (4416px, roof share 35.1%, worst +x+z).
+The same 12/2 first-contact profile as the church. One honest wart: the committed record's
+generalization grep reads `clean:false` — it caught a code COMMENT this ticket added (the word,
+not a branch); comments reworded for every later run, the record not re-rolled to launder an
+evidence field.
+
+**The legacy re-judge — the ruler held, the holds did not.** One judge run per view under
+`--rotate-pins`, instrument receipts `diffs: []` on all four records (the receipt now lives in
+`src/form/gate-instrument.mjs`, one composition point, styled-milestone finally emits it):
+gatehouse 12/2→12/2 (held), church 12/2→12/2 (held), cottage styled **10/2→12/2** — the T-111
+135°/225° same-object holds did not survive the re-cut (the budget-edge flap T-111/T-116 named,
+now on a moved artifact: this ticket's seal/census fixes are in every chain), cottage generated
+12/2 with one hold → 12/2 with none. Movement is build+judge by receipt, never gate drift. The
+honest reading: **no legacy verdict beat its profile**; the epic's gains are upstream of the judge.
+
+**Over/under-reach, named.** Over-reach: hoping the T-118 evidence repair would close the
+cross-gable through a re-judge — it measurably did not (fit repair ≠ build repair). Under-reach:
+the pinned bar (≥2/4 same-object, ≤10/2) has now never been met by any generate-first run; roof
+FORM is still THE seam, unchanged since E-27, and kit-presence "PASS" on the barn is a fixpoint
+over what *shipped* — with frame/course unshipped (all-flagged) the check is honest but thin; a
+presence semantics for flagged-kit subjects is an open seam. The win this epic actually banked:
+a never-tuned subject now goes concept → registered → derived → generated → skinned → judged with
+receipts at every stage, and every stall it hit is now a named, regression-tested rule.
+
+**E-12 handoff.** Barn first-evers: `generated/barn.{json,md}` (zero-blob proof, fit refusals,
+census + fit-error tables), `multi-angle/barn-generated.{json,md}` + sheet
+`pr/assets/frames/multi-angle-barn-generated.png`, `roof-diff/barn-generated.{json,md}` + sheet
+`pr/assets/frames/roof-diff-barn-generated.png`, durable/styled frames. Legacy before/after:
+fresh sheets at the canonical `multi-angle-<subj>-<label>.png` paths beside the retired pins
+preserved as `…-t111pin.png` / `…-t115pin.png` / `…-prevpin.png`; prior records under
+`docs/active/work/T-121-01/before/`. The story beat: E-29 proved the generator; E-30 proved the
+*pipeline around it* — and relocated the frontier again, from the lenses to roof form itself.
