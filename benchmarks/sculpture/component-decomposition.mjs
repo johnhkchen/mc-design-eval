@@ -61,7 +61,7 @@ const EXTRAS = {
     expect: { archCandidates: 1 },
   },
   church: {
-    shells: ["regularize/church/artifact.json", "challenge/church/shell-artifact.json"],
+    shells: ["challenge/church/shell-artifact.json"], // chain-canonical caged shell (T-106-01; the standalone T-102 artifact is stale pre-cage-wiring evidence)
     expect: { masses: 2, roofPlanes: 2 },
   },
 };

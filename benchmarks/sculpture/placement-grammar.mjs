@@ -98,9 +98,8 @@ export function grammarStage(build, { bands, roof, policy, substitution, kitRec,
   // grammar re-materializes them against the CURRENT occupancy each pass (settle re-runs this op),
   // never re-deriving the structure.
   const occ = artifactOccupancy(build);
-  const zoEff = componentPlan?.wallTop != null
-    ? { ...(zoneOpts ?? {}), upperTop: componentPlan.wallTop }
-    : (zoneOpts ?? {});
+  const pinTop = componentPlan?.wallTopEffective ?? componentPlan?.wallTop ?? null; // the skin's arbitrated value wins
+  const zoEff = pinTop != null ? { ...(zoneOpts ?? {}), upperTop: pinTop } : (zoneOpts ?? {});
   const sz = structuralZones(occ, zoEff);
   const zb = zonesFromBands({ bands, roof, roofKeys: sz.roofKeys, upperTop: sz.upperTop });
   const bandNames = bands.map((b) => b.name);
@@ -156,7 +155,7 @@ export function grammarStage(build, { bands, roof, policy, substitution, kitRec,
     throw new Error(`band acceptance FAILED after the grammar: roof ${bandsEvidence.roofMaterialsFraction} ` +
       `(>= ${ROOF_BAND_TARGET}), residue ${JSON.stringify(bandsEvidence.wallForeignResidue)} (max ${UPPER_RESIDUE_MAX})`);
   }
-  return { grammar, final, coverage: cov, gate, bands: bandsEvidence, bandNames };
+  return { grammar, final, coverage: cov, gate, bands: bandsEvidence, bandNames, zoneOf: zb.zoneOf };
 }
 
 /** The deterministic core for one subject: committed inputs → grammar → gated final artifact. */

@@ -261,6 +261,7 @@ export function serializeComponentPlan(plan) {
     } : null,
     wallSlabs: plan.wallFaces ? plan.wallFaces.slabs : null,
     wallTop: plan.wallTop ?? null,
+    wallTopEffective: plan.wallTopEffective ?? null,
     touchedCells: plan.touchedCells ? [...plan.touchedCells].sort() : null,
     findings: plan.findings,
   };
@@ -286,6 +287,7 @@ export function reviveComponentPlan(json) {
     } : null,
     wallFaces: json.wallSlabs ? wallFacePredicate({ wallSlabs: json.wallSlabs }) : null,
     wallTop: json.wallTop ?? null,
+    wallTopEffective: json.wallTopEffective ?? null,
     touchedCells: json.touchedCells ? new Set(json.touchedCells) : null,
     findings: json.findings ?? [],
   };

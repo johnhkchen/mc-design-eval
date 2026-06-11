@@ -179,6 +179,10 @@ export const SUBJECTS = {
     zoneMapRecord: null,     // no committed derivation — the challenge record carries the first one
     kitRecord: null,         // kits are E-26 scope; optional in buildSkin
     provision: { scale: 48 },
+    // T-106-01: the chain-canonical caged shell — the standalone T-102 record was cut from the
+    // PRE-cage-wiring challenge shell (stale input; its expect pins describe that shell), so the
+    // component layer (T-103/104/105) pins THIS file, which every chain run reproduces.
+    regularizedShell: "challenge/church/shell-artifact.json",
     policy: { // FALLBACK PRIOR, from material-map/church.json roles (1:1 rule→block transcription)
       base: {
         dominant: "cobblestone",                                            // structural wall body
@@ -355,13 +359,37 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
   const occSealed = artifactOccupancy(sealed);
   // T-106-01 seam 4 (the re-pin protocol, mechanized): the wall/roof boundary comes from the
   // component DEFINITION when one exists — the occupancy-derived eave read drifts on a rebuilt
-  // roof and re-maps the concept's rows (a phantom band appeared on the cottage). zoneOptsEff is
-  // returned so the grammar reads the same geometry.
+  // roof and re-maps the concept's rows (a phantom band appeared on the cottage). The pin is an
+  // ATTEMPT (T-104's pitch-source ladder semantics): a multi-mass record's tallest slab can be a
+  // tower face, not the eave (the gatehouse) — if the concept extraction is unreadable WITH the
+  // pin but readable WITHOUT it, the occupancy read wins and the rejection is named. zoneOptsEff
+  // is returned so the grammar reads the same geometry.
   const plan = def.componentPlan ?? null;
-  const zoneOptsEff = plan?.wallTop != null
+  let upperTopSource = plan?.wallTop != null ? "component" : "occupancy";
+  let zoneOptsEff = plan?.wallTop != null
     ? { ...(def.zoneOpts ?? {}), upperTop: plan.wallTop }
     : (def.zoneOpts ?? {});
-  const sz = structuralZones(occSealed, zoneOptsEff);
+  let sz = structuralZones(occSealed, zoneOptsEff);
+  if (zoneSource === "derived" && plan?.wallTop != null) {
+    const pinned = extractConceptZoneMap({
+      gridResult, floorLines: sz.floorLines, layerCounts: layerCounts(occSealed),
+      upperTop: sz.upperTop, materialMap: matMap,
+    });
+    if (!pinned.readable) {
+      const szOcc = structuralZones(occSealed, def.zoneOpts ?? {});
+      const occRead = extractConceptZoneMap({
+        gridResult, floorLines: szOcc.floorLines, layerCounts: layerCounts(occSealed),
+        upperTop: szOcc.upperTop, materialMap: matMap,
+      });
+      if (occRead.readable) {
+        upperTopSource = `occupancy (wall-top pin rejected: ${pinned.reason})`;
+        zoneOptsEff = def.zoneOpts ?? {};
+        sz = szOcc;
+        notes.push(`wall-top pin ${plan.wallTop} rejected — concept extraction ${pinned.reason}; ` +
+          `occupancy upperTop ${szOcc.upperTop} reads (named, attempt-ladder semantics)`);
+      }
+    }
+  }
   const { storeyDivide, upperTop } = sz;
   // The band profile reads the SAME committed inputs the value-true step already decoded: the
   // step-1 gridResult (named-manifest validate quantize) + the geometric y-axis (floor-lines).
@@ -432,7 +460,7 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
   const seamSources = {
     roofCourses: plan?.roof ? "program" : "occupancy",
     wallFields: plan?.wallFaces ? "slab-faces" : "banded-exposure",
-    upperTop: plan?.wallTop != null ? "component" : "occupancy",
+    upperTop: upperTopSource,
     zoneMap: zoneMap.source,
   };
 
@@ -539,8 +567,15 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
     surfaceZoneHistogram(artifactOccupancy(final), censusZoneOf, { skin: "exposure" }), policyS);
   const gateFinal = coverageGate(covFinal, { threshold: COVERAGE_THRESHOLD, zones: policyS });
   if (!gateFinal.passed) {
-    throw new Error(`coverage gate FAILED on the final skin: ` +
-      gateFinal.failures.map((f) => `${f.zone} ${f.dominant}=${f.fraction} < ${COVERAGE_THRESHOLD}`).join(", "));
+    // the failure carries its MEASURED CAUSE (T-106-01 AC: "the residual is named") — the failing
+    // zone's full census plus its :offslab/:frame complements land in the pipeline-failed record
+    const cause = gateFinal.failures.map((f) => {
+      const parts = [f.zone, `${f.zone}:offslab`, `${f.zone}:frame`]
+        .filter((z) => covFinal[z])
+        .map((z) => `${z}=${JSON.stringify({ total: covFinal[z].total, byBlock: covFinal[z].byBlock })}`);
+      return `${f.zone} ${f.dominant}=${f.fraction} < ${COVERAGE_THRESHOLD} [census: ${parts.join("; ")}]`;
+    });
+    throw new Error(`coverage gate FAILED on the final skin: ${cause.join(", ")}`);
   }
   // T-090 band evidence on the same shell census, generalized for N wall bands (T-092): for each wall
   // band, the shell fraction covered by OTHER wall bands' dominants (its own dominant/preserve set

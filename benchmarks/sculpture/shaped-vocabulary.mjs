@@ -49,7 +49,7 @@ const OBLIQUE = "-x-z"; // azimuth 225° — the witness angle every E-25/E-27 s
 const SUBJECTS = {
   cottage: { key: "cottage", shell: "regularize/cottage/artifact.json", record: "components/cottage.json", glb: "glb/cottage.glb" },
   gatehouse: { key: "gatehouse", shell: "regularize/gatehouse/artifact.json", record: "components/gatehouse.json", glb: "glb/stone-gatehouse.glb" },
-  church: { key: "church", shell: "regularize/church/artifact.json", record: "components/church.json", glb: "glb/church.glb" },
+  church: { key: "church", shell: "challenge/church/shell-artifact.json", record: "components/church.json", glb: "glb/church.glb" }, // chain-canonical shell (T-106-01)
 };
 
 const sha256 = (s) => createHash("sha256").update(s).digest("hex");

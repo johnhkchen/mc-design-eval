@@ -292,16 +292,19 @@ export async function runChain(def, paths) {
     assertArtifact(reconstruction.composed.artifact);
     await writeFile(join(HERE, buildRel), artifactJson(reconstruction.composed.artifact));
   }
-  if (reconstruction) {
-    // persisted so the kit-aware gate re-runs the SAME op (frames, wall top, census routing)
-    await writeFile(
-      join(HERE, paths.shellRel.replace("shell-artifact.json", "component-plan.json")),
-      JSON.stringify(serializeComponentPlan(reconstruction.plan), null, 2) + "\n");
-  }
   // The D5 uniform transform: the skin consumes the SHELL-REPAIRED build; the committed zone-map
   // record was derived from the unrepaired build, so its agreement assert does not apply here —
   // the derived bands are recorded (and diffed against the committed record) instead.
   const skin = await buildSkin({ ...def, build: buildRel, zoneMapRecord: null, componentPlan: reconstruction?.plan ?? null });
+  if (reconstruction) {
+    // the skin ARBITRATES the wall-top pin (attempt-ladder; a rejected pin is named in its notes) —
+    // the persisted plan carries the EFFECTIVE value so the grammar/settle and the kit-aware gate
+    // re-run the SAME op. Written after the skin for exactly that reason.
+    reconstruction.plan.wallTopEffective = skin.zones.upperTop;
+    await writeFile(
+      join(HERE, paths.shellRel.replace("shell-artifact.json", "component-plan.json")),
+      JSON.stringify(serializeComponentPlan(reconstruction.plan), null, 2) + "\n");
+  }
   return { provision, base, shell, reconstruction, skin };
 }
 

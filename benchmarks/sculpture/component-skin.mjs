@@ -49,9 +49,9 @@ const readJson = async (rel) => JSON.parse(await readFile(join(HERE, rel), "utf8
 const has = (rel) => existsSync(join(HERE, rel));
 
 /** The component layer on disk for one subject: records, pins, named absences. */
-async function componentLayer(key) {
+async function componentLayer(key, def) {
   const rel = {
-    regularized: `regularize/${key}/artifact.json`,
+    regularized: def.regularizedShell ?? `regularize/${key}/artifact.json`, // chain-canonical override (church)
     component: `components/${key}.json`,
     roof: `roof/${key}.json`,
     shaped: `shaped/${key}.json`,
@@ -165,7 +165,7 @@ async function main() {
     return;
   }
 
-  const layer = await componentLayer(key);
+  const layer = await componentLayer(key, def);
   console.error(`[${key}] component layer: ` + ["component", "roof", "shaped"].map((n) => `${n} ${layer.pins[n] ? "pinned" : "ABSENT"}`).join(", ") +
     (layer.findings.length ? ` — findings: ${layer.findings.map((x) => x.code).join(", ")}` : ""));
 

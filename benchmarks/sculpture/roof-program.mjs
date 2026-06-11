@@ -102,7 +102,7 @@ function gableRecordView(g) {
 // THE DETERMINISTIC CORE — reads committed inputs, writes nothing, no GL. Run twice per live pass.
 // =================================================================================================
 async function runRoof(def) {
-  const shellPath = `regularize/${def.key}/artifact.json`;
+  const shellPath = def.regularizedShell ?? `regularize/${def.key}/artifact.json`; // T-106-01: registry override for chain-canonical shells
   const componentPath = `components/${def.key}.json`;
   const shellBytes = await readFile(join(HERE, shellPath), "utf8");
   const record = JSON.parse(await readFile(join(HERE, componentPath), "utf8"));

@@ -136,7 +136,8 @@ function encodeLabeledSheet(composed, labels, panelW, gutter) {
  *  fallback. T-106-01: `componentPlan` (revived from the chain's persisted component-plan.json)
  *  pins the wall/roof boundary so the gate reads the SAME geometry the chain skinned. */
 function deriveZones({ occ, conceptImg, matMap, fallbackPolicy, componentPlan = null }) {
-  const sz = structuralZones(occ, componentPlan?.wallTop != null ? { upperTop: componentPlan.wallTop } : {});
+  const pinTop = componentPlan?.wallTopEffective ?? componentPlan?.wallTop ?? null; // the chain's arbitrated value
+  const sz = structuralZones(occ, pinTop != null ? { upperTop: pinTop } : {});
   const gridResult = gridFromPixels(conceptImg, {
     whitelist: bareList(matMap.palette), n: SAMPLE_GRID_N,
     dropColor: estimateBorderColor(conceptImg), cellMeans: true,

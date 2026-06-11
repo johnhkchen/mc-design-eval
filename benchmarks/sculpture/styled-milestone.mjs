@@ -55,7 +55,7 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawn } from "node:child_process";
 
-import { artifactOccupancy } from "../../src/view/occupancy.mjs";
+import { artifactOccupancy, bareBlock } from "../../src/view/occupancy.mjs";
 import {
   treatmentsFromKit, extractApertures, dressOpenings, applyDressing,
 } from "../../src/view/opening-dressing.mjs";
@@ -114,27 +114,42 @@ async function styledChain(def, kitRec, paths, track) {
   // for the op the kit-presence checker re-runs (T-100's fixpoint rule), and the re-run IS the
   // post-dressing cleanliness pass. Non-convergence is a wiring bug, never smoothed.
   let styled = dressed;
-  const settle = { iterations: 0, trail: [] };
+  const settle = { iterations: 0, trail: [], tolerated: null };
+  // T-106-01: the settle fixpoint covers BOTH ops the kit-presence checker re-runs — by the
+  // CHECKER'S OWN criteria, not raw placement counts: frame wants (painted+adopted), FOREIGN fill
+  // (a placement over a block outside the zone's own vocabulary — own-vocab recolors are the
+  // checker's tolerated residue), and the GATING dressing slots (infill/shutters/door/light —
+  // lintel/sill is non-gating and legitimately ping-pongs with the fill's run rule: T-099 places
+  // band rows the T-090 fill strips as sub-run; both are correct, the checker tolerates it).
+  const GATING_SLOTS = ["infill", "shutterLeft", "shutterRight", "door", "light"];
+  const gatingDressing = (d) => d.perOpening.reduce(
+    (n, rep) => n + GATING_SLOTS.reduce((m, slot) => m + (rep.placed?.[slot] ?? 0), 0), 0);
+  const ownOf = new Map(Object.entries(gOpts.policy).map(([z, p]) =>
+    [z, new Set([p.dominant, ...(p.preserve ?? [])].map(bareBlock))]));
+  const foreignFill = (s, occBefore) => s.grammar.fill.placements.filter((p) => {
+    const own = ownOf.get(s.zoneOf(p.pos));
+    const cur = occBefore.block(...p.pos);
+    return !(own && cur != null && own.has(bareBlock(cur)));
+  }).length;
   for (;;) {
+    const occBefore = artifactOccupancy(styled);
     const s = grammarStage(styled, gOpts);
-    // T-106-01: the settle fixpoint covers BOTH ops the kit-presence checker re-runs. A grammar
-    // re-run can paint a cell that turns a previously un-hangable shutter jamb hangable (the
-    // component frames paint different cells than the dressing saw) — the dressing must be a
-    // no-op on the styled build by the same rule the grammar is.
     const dressAgain = dressOpenings(artifactOccupancy(s.final), apertures, treatments);
-    const wants = s.grammar.frame.painted + s.grammar.frame.adopted + s.grammar.fill.placements.length +
-      dressAgain.placements.length;
-    if (wants === 0) break;
-    if (++settle.iterations > 4) {
-      throw new Error(`settle did not converge after 4 grammar+dressing re-runs (still wants ${wants} cells: ` +
-        `frame ${s.grammar.frame.painted + s.grammar.frame.adopted}, fill ${s.grammar.fill.placements.length}, ` +
-        `dressing ${dressAgain.placements.length})`);
+    const frameWants = s.grammar.frame.painted + s.grammar.frame.adopted;
+    const foreign = foreignFill(s, occBefore);
+    const gating = gatingDressing(dressAgain);
+    if (frameWants + foreign + gating === 0) {
+      settle.tolerated = {
+        fillResidue: s.grammar.fill.placements.length,
+        dressing: dressAgain.placements.length,
+      };
+      break;
     }
-    settle.trail.push({
-      frame: s.grammar.frame.painted + s.grammar.frame.adopted,
-      fill: s.grammar.fill.placements.length,
-      dressing: dressAgain.placements.length,
-    });
+    if (++settle.iterations > 4) {
+      throw new Error(`settle did not converge after 4 grammar+dressing re-runs (still wants: ` +
+        `frame ${frameWants}, foreign fill ${foreign}, gating dressing ${gating})`);
+    }
+    settle.trail.push({ frame: frameWants, foreignFill: foreign, gatingDressing: gating });
     styled = dressAgain.placements.length ? applyDressing(s.final, dressAgain.placements) : s.final;
     assertArtifact(styled);
   }
