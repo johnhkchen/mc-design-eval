@@ -26,6 +26,10 @@ export const STAIR_FACING = Object.freeze({ "+x": "east", "-x": "west", "+z": "s
 
 const FLIP = Object.freeze({ "+x": "-x", "-x": "+x", "+z": "-z", "-z": "+z" });
 const DELTA = Object.freeze({ "+x": [1, 0], "-x": [-1, 0], "+z": [0, 1], "-z": [0, -1] });
+/** The two directions perpendicular to a downhill direction. */
+const PERP = Object.freeze({ "+x": ["+z", "-z"], "-x": ["+z", "-z"], "+z": ["+x", "-x"], "-z": ["+x", "-x"] });
+/** The direction to your LEFT when facing the key direction (+x=east, −z=north). */
+const LEFT_DIR = Object.freeze({ "+x": "-z", "-x": "+z", "+z": "+x", "-z": "-x" });
 const roundHalf = (v) => Math.round(v * 2) / 2;
 
 /** Stem a cube block id for shaped-family derivation (spruce_planks→spruce, *_bricks→*_brick). */
@@ -62,6 +66,44 @@ export function roofFamily(kitRows, vocab) {
 // The gable surface itself lives in roof-fit (gableSurfaceHeight) — ONE definition shared by the
 // generator and the fit-error measure, so hip clipping can never read as 'error' (the gatehouse
 // lesson). This module adds only the construction-facing question: which way is downhill.
+
+/**
+ * The stair SHAPE at a column from its neighborhood (T-112-01) — Minecraft's corner vocabulary
+ * for the diagonal arrises and valleys hip constructions introduce. `probe(dir)` returns the
+ * neighbor height (undefined past the roof). Relative to downhill `d` at height `h`:
+ *   • exactly one perpendicular neighbor DROPS (≤ h−1 / absent) → a convex hip arris:
+ *     `outer_left|outer_right` (side relative to `facing` = uphill, the stair's own frame);
+ *   • exactly one perpendicular neighbor RISES (≥ h+1) → a valley seat: `inner_left|inner_right`;
+ *   • BOTH drop → a promontory cell: no stair (`{stair:false}`) — the solid full block is the
+ *     honest mass, never an invented turn;
+ *   • otherwise → the straight tread.
+ * Emission is GATED to hip-construction owners (hip-cap gables / fitted hip ends): legacy gables
+ * — including the cottage's multi-gable valleys — keep today's straight-only output verbatim.
+ * PURE; exported for the exhaustive unit tests.
+ */
+export function stairShape(d, h, probe) {
+  const drop = (dir) => {
+    const v = probe(dir);
+    return v === undefined || v <= h - 1;
+  };
+  const rise = (dir) => (probe(dir) ?? -Infinity) >= h + 1;
+  const [p1, p2] = PERP[d];
+  const d1 = drop(p1);
+  const d2 = drop(p2);
+  if (d1 && d2) return { stair: false, shape: null };
+  const facing = FLIP[d];
+  if (d1 !== d2) {
+    const p = d1 ? p1 : p2;
+    return { stair: true, shape: p === LEFT_DIR[facing] ? "outer_left" : "outer_right" };
+  }
+  const r1 = rise(p1);
+  const r2 = rise(p2);
+  if (r1 !== r2) {
+    const p = r1 ? p1 : p2;
+    return { stair: true, shape: p === LEFT_DIR[facing] ? "inner_left" : "inner_right" };
+  }
+  return { stair: true, shape: "straight" };
+}
 
 /** The downhill direction of a gable's ACTIVE constraint at a column (null at the ridge cap).
  *  Hip end planes come from roof-fit's hipEndPlanes — the same single definition the surface
@@ -105,6 +147,11 @@ export function roofHeightfield(gables) {
     const vIdx = g.ridge.axis === "x" ? 0 : 1;
     const lo = g.ends?.lo ?? null;
     const hi = g.ends?.hi ?? null;
+    // T-112-01: corner-state eligibility — every column of a hip-cap gable; a fitted hip end's
+    // columns when its plane is the active (downhill) constraint. Legacy gables: never.
+    const fittedDirs = g.kind === "hip-cap"
+      ? null
+      : new Set(hipEndPlanes(g).filter((p) => g.hip?.fitted?.[p.end]).map((p) => p.dir));
     for (const key of g.footprint.cols) {
       const [x, z] = key.split(",").map(Number);
       const v = vIdx === 0 ? x : z;
@@ -117,7 +164,9 @@ export function roofHeightfield(gables) {
         // the (possibly ridge-fitted) ridge height; the generator marks the cap course so the
         // ridge is a declared construction, not an incidental heightfield top.
         const cap = h === roundHalf(g.ridge.y);
-        owner.set(key, { gableId: g.id, downhill: gableDownhillAt(g, x, z, h), sheet, cap });
+        const downhill = gableDownhillAt(g, x, z, h);
+        const cornerEligible = g.kind === "hip-cap" || (downhill !== null && fittedDirs.has(downhill));
+        owner.set(key, { gableId: g.id, downhill, sheet, cap, cornerEligible });
       }
     }
   }
@@ -160,13 +209,34 @@ export function generateRoof(gables, family, opts = {}) {
       return heights.get(`${x + dx},${z + dz}`);
     };
     // stair tread: a whole-step edge — drops toward the eave, rises toward the ridge
-    const stair = !half && family.stairs && d !== null &&
-      (at(d) === undefined || at(d) <= h - 1) && (at(FLIP[d]) ?? -Infinity) >= h + 1;
+    const drops = !half && family.stairs && d !== null && (at(d) === undefined || at(d) <= h - 1);
+    let stair = drops && (at(FLIP[d]) ?? -Infinity) >= h + 1;
+    // T-112-01: hip-construction owners turn their corners with the proven shape vocabulary;
+    // everyone else keeps the straight tread verbatim (the cottage valleys stay byte-identical).
+    // An OUTER corner backs onto the rising DIAGONAL (uphill + the kept perpendicular) — on a
+    // pyramid arris the cardinal uphill is level, the mass rises corner-to-corner.
+    let shape = "straight";
+    if (drops && own?.cornerEligible) {
+      const cs = stairShape(d, h, at);
+      if (!cs.stair) {
+        stair = false; // promontory cell: the solid full block is the honest mass
+      } else if (cs.shape === "outer_left" || cs.shape === "outer_right") {
+        const kept = PERP[d].find((p) => !(at(p) === undefined || at(p) <= h - 1));
+        const [ux, uz] = DELTA[FLIP[d]];
+        const [kx, kz] = DELTA[kept];
+        if ((heights.get(`${x + ux + kx},${z + uz + kz}`) ?? -Infinity) >= h + 1) {
+          stair = true;
+          shape = cs.shape;
+        } // else: no backing mass for a turn — the legacy emission stands
+      } else if (stair) {
+        shape = cs.shape; // inner/straight keep the legacy uphill-backing requirement
+      }
+    }
     const top = hInt;
     for (let y = own?.sheet ? top : floor; y <= top; y++) {
       if (y === top && stair) {
         cells.push({ pos: [x, y, z], block: family.stairs, form: "fixture",
-          state: { facing: STAIR_FACING[FLIP[d]], half: "bottom", shape: "straight" } });
+          state: { facing: STAIR_FACING[FLIP[d]], half: "bottom", shape } });
         counts.stairs++;
       } else {
         cells.push({ pos: [x, y, z], block: family.field });

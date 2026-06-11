@@ -3,7 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 
 import { CARD_ROWS } from "../form/fixture-card.mjs";
-import { STAIR_FACING, roofFamily, roofHeightfield, generateRoof } from "./roof-generate.mjs";
+import { STAIR_FACING, roofFamily, roofHeightfield, generateRoof, stairShape } from "./roof-generate.mjs";
 
 const VOCAB = new Set([
   "spruce_planks", "spruce_stairs", "spruce_slab",
@@ -257,4 +257,103 @@ test("cap marking changes no emission: cells byte-identical to the count-free vi
   const r = generateRoof([g], SPRUCE);
   for (const k of r.capKeys) assert.ok(r.cells.some((c) => c.pos.join(",") === k));
   assert.equal(r.counts.cap, r.capKeys.size);
+});
+
+// --- T-112-01: corner states for hip constructions ------------------------------------------------
+
+/** A four-sided hip-cap gable (roof-hip-fit's output shape) over an inclusive plan rectangle. */
+function hipCap({ pitch = 1, eaveY = 10, x0 = 0, x1 = 6, z0 = 0, z1 = 6, kind = "hip-cap" } = {}) {
+  const cols = new Set();
+  for (let x = x0; x <= x1; x++) for (let z = z0; z <= z1; z++) cols.add(`${x},${z}`);
+  const apex = eaveY + pitch * Math.min((x1 - x0) / 2, (z1 - z0) / 2);
+  const side = (eaveDir, eaveEdge) => ({
+    planeId: null, eaveDir, pitch, pitchSource: "glb-quadrant", eaveY, eaveEdge, extentCells: [],
+  });
+  return {
+    id: "hip-cap-test",
+    ...(kind ? { kind } : {}),
+    ridge: { axis: x1 - x0 >= z1 - z0 ? "x" : "z", y: apex },
+    sides: [side("+x", x1), side("-x", x0), side("+z", z1), side("-z", z0)],
+    footprint: { cols, bbox: { minX: x0, maxX: x1, minZ: z0, maxZ: z1 }, area: cols.size },
+    hip: { demanded: false, lo: false, hi: false },
+    sane: true,
+    reasons: [],
+  };
+}
+
+test("stairShape exhaustives: every (downhill × perpendicular-class²) configuration", () => {
+  // hand-written oracle: PERP order is [+z,-z] for x downhills, [+x,-x] for z downhills;
+  // facing = uphill; left-of-facing: east→north(-z), west→south(+z), south→east(+x), north→west(-x)
+  const LEFT_PERP = { "+x": "+z", "-x": "-z", "+z": "-x", "-z": "+x" }; // keyed by DOWNHILL d
+  for (const d of ["+x", "-x", "+z", "-z"]) {
+    const perps = d[1] === "x" ? ["+z", "-z"] : ["+x", "-x"];
+    const CLASSES = { drop: 9, level: 10, rise: 11 }; // h = 10
+    for (const [c1, v1] of Object.entries(CLASSES)) {
+      for (const [c2, v2] of Object.entries(CLASSES)) {
+        const probe = (dir) => (dir === perps[0] ? v1 : dir === perps[1] ? v2 : 10);
+        const r = stairShape(d, 10, probe);
+        const left = LEFT_PERP[d];
+        let want;
+        if (c1 === "drop" && c2 === "drop") want = { stair: false, shape: null };
+        else if (c1 === "drop") want = { stair: true, shape: perps[0] === left ? "outer_left" : "outer_right" };
+        else if (c2 === "drop") want = { stair: true, shape: perps[1] === left ? "outer_left" : "outer_right" };
+        else if (c1 === "rise" && c2 === "rise") want = { stair: true, shape: "straight" };
+        else if (c1 === "rise") want = { stair: true, shape: perps[0] === left ? "inner_left" : "inner_right" };
+        else if (c2 === "rise") want = { stair: true, shape: perps[1] === left ? "inner_left" : "inner_right" };
+        else want = { stair: true, shape: "straight" };
+        assert.deepEqual(r, want, `${d} ${c1}/${c2}`);
+      }
+    }
+    // absent neighbors count as drops
+    assert.deepEqual(stairShape(d, 10, () => undefined), { stair: false, shape: null }, `${d} absent/absent`);
+  }
+});
+
+test("square pyramid: all four eave corners turn with outer shapes, oriented per quadrant", () => {
+  const { cells } = generateRoof([hipCap()], SPRUCE);
+  const pos = byPos(cells);
+  const corner = (x, z) => {
+    const c = pos.get(`${x},10,${z}`);
+    assert.equal(c.block, "spruce_stairs", `corner ${x},${z} is a stair`);
+    return [c.state.facing, c.state.shape];
+  };
+  assert.deepEqual(corner(0, 0), ["east", "outer_left"]);
+  assert.deepEqual(corner(6, 0), ["west", "outer_right"]);
+  assert.deepEqual(corner(0, 6), ["east", "outer_right"]);
+  assert.deepEqual(corner(6, 6), ["west", "outer_left"]);
+  // the arris cells one step in keep turning the same way
+  assert.deepEqual(pos.get("1,11,1").state.shape, "outer_left");
+  assert.deepEqual(pos.get("5,11,5").state.shape, "outer_left");
+  // every emitted shape is in the proven vocabulary enum
+  const SHAPES = new Set(["straight", "inner_left", "inner_right", "outer_left", "outer_right"]);
+  for (const c of cells) if (c.state?.shape) assert.ok(SHAPES.has(c.state.shape), c.state.shape);
+});
+
+test("the same 4-sided geometry WITHOUT the hip-cap kind emits straight-only (the gate)", () => {
+  const { cells } = generateRoof([hipCap({ kind: null })], SPRUCE);
+  for (const c of cells) {
+    if (c.block === "spruce_stairs") assert.equal(c.state.shape, "straight");
+  }
+});
+
+test("legacy 2-side gables (incl. heuristic hips) stay byte-identical: never corner-eligible", () => {
+  const legacyHip = gable({ hip: { demanded: true, lo: true, hi: true } });
+  const a = generateRoof([legacyHip], SPRUCE);
+  for (const c of a.cells) if (c.state?.shape) assert.equal(c.state.shape, "straight");
+  for (const o of a.owner.values()) assert.equal(o.cornerEligible, false);
+});
+
+test("a fitted hip end marks its columns corner-eligible; the slopes stay ineligible", () => {
+  const g = gable({ hip: { demanded: true, lo: true, hi: false, fitted: { lo: { pitch: 1 } } } });
+  const { owner } = roofHeightfield([g]);
+  assert.equal(owner.get("0,0").downhill, "-z");
+  assert.equal(owner.get("0,0").cornerEligible, true, "fitted lo end column");
+  assert.equal(owner.get("3,3").cornerEligible, false, "side-slope column");
+});
+
+test("hip-cap generation is deterministic and the apex column is the cap course", () => {
+  const norm = (r) => JSON.parse(JSON.stringify({ cells: r.cells, counts: r.counts }));
+  const a = generateRoof([hipCap()], SPRUCE);
+  assert.deepEqual(norm(a), norm(generateRoof([hipCap()], SPRUCE)));
+  assert.ok(a.capKeys.has("3,13,3"), "apex cell marked as cap course");
 });
