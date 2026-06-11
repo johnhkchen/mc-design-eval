@@ -262,7 +262,7 @@ export function renderMd(r) {
     `${d.treatments.unfulfilled.length ? d.treatments.unfulfilled.map((u) => `${u.slot} (${u.reason})`).join(", ") : "none"}. Derivations: ` +
     `${Object.keys(d.treatments.derivations ?? {}).length ? JSON.stringify(d.treatments.derivations) : "none"}.\n` +
     `Settle (the T-100 seam): grammar re-run to its own fixpoint in ${r.settle.iterations} iteration(s)` +
-    (r.settle.trail.length ? ` (${r.settle.trail.map((t) => `frame ${t.frame} + fill ${t.fill}`).join("; ")})` : " (already a no-op)") +
+    (r.settle.trail.length ? ` (${r.settle.trail.map((t) => `frame ${t.frame} + foreign fill ${t.foreignFill} + gating dressing ${t.gatingDressing}`).join("; ")})` : " (already a no-op)") +
     ` — the styled build is a no-op for the op the kit-presence checker re-runs.\n\n` +
     `## Kit-aware multi-angle gate (T-100 ∘ T-093) — **${r.gate.outcome}**\n\n` +
     `Resemblance: ${r.gate.resemblance?.decided ? (r.gate.resemblance.passed ? "PASS" : "FAIL") : `REFUSAL (${r.gate.resemblance?.refusal})`}` +
@@ -458,7 +458,7 @@ async function main() {
     `(${r1.dress.stats.fullyDressed}/${r1.dress.stats.openings} fully dressed, ${r1.dress.stats.conflicts} conflicts); ` +
     `unfulfilled: ${r1.treatments.unfulfilled.map((u) => u.slot).join(", ") || "none"}`);
   console.error(`[${def.key}] settle: grammar fixpoint reached in ${r1.settle.iterations} re-run(s)` +
-    (r1.settle.trail.length ? ` — ${r1.settle.trail.map((t) => `frame ${t.frame} + fill ${t.fill}`).join("; ")}` : " — already a no-op"));
+    (r1.settle.trail.length ? ` — ${r1.settle.trail.map((t) => `frame ${t.frame} + foreign fill ${t.foreignFill} + gating dressing ${t.gatingDressing}`).join("; ")}` : " — already a no-op"));
 
   // audit: the chain's derived bands vs the committed zone-map record (chain runs on the repaired shell)
   let zoneMapDiff = null;
