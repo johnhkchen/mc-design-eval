@@ -205,6 +205,7 @@ async function runLive(def, { rotate }) {
     const { program, receipt: recognition } = await verifyRecognition(key, pack);
     track.stage = "seed";
     const seeded = stageSeed(program, pack);
+    await mkdir(join(ROOT, WORKSHOP_REL, key), { recursive: true });
     await write(seedRel, seeded.serialized);
     track.stage = "workshop";
     const args = [join(HERE, "workshop.mjs"), "--subject", key, ...(rotate ? [ROTATE_FLAG] : [])];

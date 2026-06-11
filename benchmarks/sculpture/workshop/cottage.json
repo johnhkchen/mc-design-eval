@@ -1,0 +1,2395 @@
+{
+  "schema": "workshop-ledger/v1",
+  "subject": "cottage",
+  "budget": {
+    "rounds": 6
+  },
+  "liveActions": [
+    "adjust-params",
+    "spray-paint"
+  ],
+  "instrument": {
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "width": 512,
+    "height": 512
+  },
+  "packRef": {
+    "path": "packs/rustic.json",
+    "sha256": "19834c8ba66333efcc7b6fe594bdc2772877202752809e508b78613c608cf434"
+  },
+  "conceptRef": {
+    "path": "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
+    "sha256": "506c25132952d3d4ccb7d1f78816982542612d8464087bad07c0f9b847e57759"
+  },
+  "tier": "strong",
+  "program": {
+    "schema": "workshop-program/v1",
+    "subject": "cottage",
+    "pack": "rustic",
+    "budget": {
+      "rounds": 6
+    },
+    "declarations": {
+      "bands": [
+        {
+          "name": "base",
+          "yRange": [
+            0,
+            3
+          ],
+          "blocks": [
+            "dark_oak_log",
+            "stone_bricks"
+          ],
+          "mixed": true
+        },
+        {
+          "name": "upper",
+          "yRange": [
+            4,
+            7
+          ],
+          "blocks": [
+            "dark_oak_log",
+            "stone_bricks",
+            "white_terracotta"
+          ],
+          "mixed": true
+        },
+        {
+          "name": "roof",
+          "yRange": [
+            8,
+            20
+          ],
+          "blocks": [
+            "bricks",
+            "cobblestone",
+            "spruce_planks",
+            "spruce_slab",
+            "spruce_stairs"
+          ],
+          "mixed": true
+        }
+      ],
+      "symmetry": null,
+      "openings": [
+        {
+          "wall": "main:-x#1.0",
+          "kind": "window",
+          "min": [
+            0,
+            1,
+            7
+          ],
+          "max": [
+            0,
+            3,
+            7
+          ]
+        },
+        {
+          "wall": "main:-x#0.0",
+          "kind": "door",
+          "min": [
+            0,
+            0,
+            13
+          ],
+          "max": [
+            0,
+            2,
+            13
+          ]
+        },
+        {
+          "wall": "main:-x#1.1",
+          "kind": "window",
+          "min": [
+            0,
+            1,
+            19
+          ],
+          "max": [
+            0,
+            3,
+            19
+          ]
+        },
+        {
+          "wall": "main:-x#2",
+          "kind": "window",
+          "min": [
+            0,
+            4,
+            10
+          ],
+          "max": [
+            0,
+            6,
+            10
+          ]
+        },
+        {
+          "wall": "main:-x#2",
+          "kind": "window",
+          "min": [
+            0,
+            4,
+            16
+          ],
+          "max": [
+            0,
+            6,
+            16
+          ]
+        },
+        {
+          "wall": "main:+z#3",
+          "kind": "window",
+          "min": [
+            8,
+            1,
+            27
+          ],
+          "max": [
+            8,
+            3,
+            27
+          ]
+        },
+        {
+          "wall": "main:-z#4",
+          "kind": "window",
+          "min": [
+            8,
+            4,
+            0
+          ],
+          "max": [
+            8,
+            6,
+            0
+          ]
+        },
+        {
+          "wall": "wing:+x#0",
+          "kind": "window",
+          "min": [
+            25,
+            1,
+            14
+          ],
+          "max": [
+            25,
+            3,
+            14
+          ]
+        },
+        {
+          "wall": "wing:+x#1",
+          "kind": "window",
+          "min": [
+            25,
+            4,
+            14
+          ],
+          "max": [
+            25,
+            6,
+            14
+          ]
+        }
+      ]
+    },
+    "elements": [
+      {
+        "id": "main-shell",
+        "kind": "shell",
+        "spec": {
+          "footprint": {
+            "x0": 0,
+            "x1": 17,
+            "z0": 0,
+            "z1": 27
+          },
+          "y0": 0,
+          "height": 8,
+          "wallBlock": "white_terracotta",
+          "courses": [
+            {
+              "yRange": [
+                0,
+                3
+              ],
+              "block": "stone_bricks"
+            }
+          ],
+          "openings": [
+            {
+              "wall": "-x",
+              "at": [
+                7,
+                1
+              ],
+              "w": 1,
+              "h": 3
+            },
+            {
+              "wall": "-x",
+              "at": [
+                13,
+                0
+              ],
+              "w": 1,
+              "h": 3
+            },
+            {
+              "wall": "-x",
+              "at": [
+                19,
+                1
+              ],
+              "w": 1,
+              "h": 3
+            },
+            {
+              "wall": "-x",
+              "at": [
+                10,
+                4
+              ],
+              "w": 1,
+              "h": 3
+            },
+            {
+              "wall": "-x",
+              "at": [
+                16,
+                4
+              ],
+              "w": 1,
+              "h": 3
+            },
+            {
+              "wall": "+z",
+              "at": [
+                8,
+                1
+              ],
+              "w": 1,
+              "h": 3
+            },
+            {
+              "wall": "-z",
+              "at": [
+                8,
+                4
+              ],
+              "w": 1,
+              "h": 3
+            }
+          ]
+        }
+      },
+      {
+        "id": "main-plinth",
+        "kind": "idiom",
+        "idiom": "plinth",
+        "spec": {
+          "footprint": {
+            "x0": 0,
+            "x1": 17,
+            "z0": 0,
+            "z1": 27
+          },
+          "y0": 0,
+          "courses": 1,
+          "block": "stone_bricks"
+        }
+      },
+      {
+        "id": "main-jetty--x",
+        "kind": "idiom",
+        "idiom": "jetty",
+        "spec": {
+          "edge": {
+            "axis": "z",
+            "at": 0,
+            "side": "-",
+            "range": [
+              0,
+              27
+            ]
+          },
+          "y": 4,
+          "beamBlock": "dark_oak_log",
+          "joistBlock": "dark_oak_log"
+        }
+      },
+      {
+        "id": "main-jetty--z",
+        "kind": "idiom",
+        "idiom": "jetty",
+        "spec": {
+          "edge": {
+            "axis": "x",
+            "at": 0,
+            "side": "-",
+            "range": [
+              0,
+              17
+            ]
+          },
+          "y": 4,
+          "beamBlock": "dark_oak_log",
+          "joistBlock": "dark_oak_log"
+        }
+      },
+      {
+        "id": "main-roof",
+        "kind": "idiom",
+        "idiom": "roof.gable",
+        "spec": {
+          "footprint": {
+            "x0": -1,
+            "x1": 18,
+            "z0": 0,
+            "z1": 27
+          },
+          "ridgeAxis": "z",
+          "eaveY": 8,
+          "ridgeY": 17,
+          "pitch": 1,
+          "blocks": {
+            "field": "spruce_planks",
+            "stairs": "spruce_stairs",
+            "slab": "spruce_slab"
+          }
+        }
+      },
+      {
+        "id": "main-chimney",
+        "kind": "idiom",
+        "idiom": "chimney",
+        "spec": {
+          "base": [
+            8,
+            8,
+            13
+          ],
+          "footprint": {
+            "w": 1,
+            "d": 1
+          },
+          "height": 12,
+          "block": "cobblestone",
+          "cap": "crown",
+          "capBlock": "bricks"
+        }
+      },
+      {
+        "id": "main-head--x-1-0",
+        "kind": "idiom",
+        "idiom": "head.flat",
+        "spec": {
+          "span": {
+            "axis": "z",
+            "range": [
+              7,
+              7
+            ]
+          },
+          "yRange": [
+            1,
+            3
+          ],
+          "depth": {
+            "axis": "x",
+            "range": [
+              0,
+              0
+            ]
+          },
+          "block": "stone_bricks",
+          "level": 2
+        }
+      },
+      {
+        "id": "main-head--x-0-0",
+        "kind": "idiom",
+        "idiom": "head.flat",
+        "spec": {
+          "span": {
+            "axis": "z",
+            "range": [
+              13,
+              13
+            ]
+          },
+          "yRange": [
+            0,
+            2
+          ],
+          "depth": {
+            "axis": "x",
+            "range": [
+              0,
+              0
+            ]
+          },
+          "block": "stone_bricks",
+          "level": 1
+        }
+      },
+      {
+        "id": "main-head--x-1-1",
+        "kind": "idiom",
+        "idiom": "head.flat",
+        "spec": {
+          "span": {
+            "axis": "z",
+            "range": [
+              19,
+              19
+            ]
+          },
+          "yRange": [
+            1,
+            3
+          ],
+          "depth": {
+            "axis": "x",
+            "range": [
+              0,
+              0
+            ]
+          },
+          "block": "stone_bricks",
+          "level": 2
+        }
+      },
+      {
+        "id": "main-head--x-2-0",
+        "kind": "idiom",
+        "idiom": "head.flat",
+        "spec": {
+          "span": {
+            "axis": "z",
+            "range": [
+              10,
+              10
+            ]
+          },
+          "yRange": [
+            4,
+            6
+          ],
+          "depth": {
+            "axis": "x",
+            "range": [
+              0,
+              0
+            ]
+          },
+          "block": "stone_bricks",
+          "level": 5
+        }
+      },
+      {
+        "id": "main-head--x-2-1",
+        "kind": "idiom",
+        "idiom": "head.flat",
+        "spec": {
+          "span": {
+            "axis": "z",
+            "range": [
+              16,
+              16
+            ]
+          },
+          "yRange": [
+            4,
+            6
+          ],
+          "depth": {
+            "axis": "x",
+            "range": [
+              0,
+              0
+            ]
+          },
+          "block": "stone_bricks",
+          "level": 5
+        }
+      },
+      {
+        "id": "main-head-+z-3-0",
+        "kind": "idiom",
+        "idiom": "head.flat",
+        "spec": {
+          "span": {
+            "axis": "x",
+            "range": [
+              8,
+              8
+            ]
+          },
+          "yRange": [
+            1,
+            3
+          ],
+          "depth": {
+            "axis": "z",
+            "range": [
+              27,
+              27
+            ]
+          },
+          "block": "stone_bricks",
+          "level": 2
+        }
+      },
+      {
+        "id": "main-head--z-4-0",
+        "kind": "idiom",
+        "idiom": "head.flat",
+        "spec": {
+          "span": {
+            "axis": "x",
+            "range": [
+              8,
+              8
+            ]
+          },
+          "yRange": [
+            4,
+            6
+          ],
+          "depth": {
+            "axis": "z",
+            "range": [
+              0,
+              0
+            ]
+          },
+          "block": "stone_bricks",
+          "level": 5
+        }
+      },
+      {
+        "id": "wing-shell",
+        "kind": "shell",
+        "spec": {
+          "footprint": {
+            "x0": 18,
+            "x1": 25,
+            "z0": 7,
+            "z1": 21
+          },
+          "y0": 0,
+          "height": 8,
+          "wallBlock": "white_terracotta",
+          "courses": [
+            {
+              "yRange": [
+                0,
+                3
+              ],
+              "block": "stone_bricks"
+            }
+          ],
+          "openings": [
+            {
+              "wall": "+x",
+              "at": [
+                14,
+                1
+              ],
+              "w": 1,
+              "h": 3
+            },
+            {
+              "wall": "+x",
+              "at": [
+                14,
+                4
+              ],
+              "w": 1,
+              "h": 3
+            }
+          ]
+        }
+      },
+      {
+        "id": "wing-plinth",
+        "kind": "idiom",
+        "idiom": "plinth",
+        "spec": {
+          "footprint": {
+            "x0": 18,
+            "x1": 25,
+            "z0": 7,
+            "z1": 21
+          },
+          "y0": 0,
+          "courses": 1,
+          "block": "stone_bricks"
+        }
+      },
+      {
+        "id": "wing-jetty-+x",
+        "kind": "idiom",
+        "idiom": "jetty",
+        "spec": {
+          "edge": {
+            "axis": "z",
+            "at": 25,
+            "side": "+",
+            "range": [
+              7,
+              21
+            ]
+          },
+          "y": 4,
+          "beamBlock": "dark_oak_log",
+          "joistBlock": "dark_oak_log"
+        }
+      },
+      {
+        "id": "wing-roof",
+        "kind": "idiom",
+        "idiom": "roof.gable",
+        "spec": {
+          "footprint": {
+            "x0": 18,
+            "x1": 25,
+            "z0": 6,
+            "z1": 22
+          },
+          "ridgeAxis": "x",
+          "eaveY": 8,
+          "ridgeY": 16,
+          "pitch": 1,
+          "blocks": {
+            "field": "spruce_planks",
+            "stairs": "spruce_stairs",
+            "slab": "spruce_slab"
+          }
+        }
+      },
+      {
+        "id": "wing-head-+x-0-0",
+        "kind": "idiom",
+        "idiom": "head.flat",
+        "spec": {
+          "span": {
+            "axis": "z",
+            "range": [
+              14,
+              14
+            ]
+          },
+          "yRange": [
+            1,
+            3
+          ],
+          "depth": {
+            "axis": "x",
+            "range": [
+              25,
+              25
+            ]
+          },
+          "block": "stone_bricks",
+          "level": 2
+        }
+      },
+      {
+        "id": "wing-head-+x-1-0",
+        "kind": "idiom",
+        "idiom": "head.flat",
+        "spec": {
+          "span": {
+            "axis": "z",
+            "range": [
+              14,
+              14
+            ]
+          },
+          "yRange": [
+            4,
+            6
+          ],
+          "depth": {
+            "axis": "x",
+            "range": [
+              25,
+              25
+            ]
+          },
+          "block": "stone_bricks",
+          "level": 5
+        }
+      }
+    ]
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "renders": [
+        {
+          "angle": "+x+z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-1/view-+x+z.png",
+          "bytes": 103528
+        },
+        {
+          "angle": "+x-z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-1/view-+x-z.png",
+          "bytes": 100996
+        },
+        {
+          "angle": "-x-z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-1/view--x-z.png",
+          "bytes": 107756
+        },
+        {
+          "angle": "-x+z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-1/view--x+z.png",
+          "bytes": 108622
+        }
+      ],
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"upper storey (white_terracotta band)\", \"issue\": \"Concept's signature half-timber framing — bold vertical dark_oak studs over cream infill — is entirely absent; the upper wall reads as a plain pink band.\", \"severity\": \"major\" },\n      { \"region\": \"roof vs walls overall mass\", \"issue\": \"Roof field dominates the silhouette; the timber upper",
+          "usage": {
+            "input_tokens": 10378,
+            "cache_creation_input_tokens": 17024,
+            "cache_read_input_tokens": 15824,
+            "output_tokens": 5461,
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 17024,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "not_available",
+            "iterations": [
+              {
+                "input_tokens": 10378,
+                "output_tokens": 5461,
+                "cache_read_input_tokens": 15824,
+                "cache_creation_input_tokens": 17024,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 17024
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard"
+          },
+          "source": "live"
+        }
+      ],
+      "askCount": 1,
+      "critique": {
+        "issues": [
+          {
+            "region": "upper storey (white_terracotta band)",
+            "issue": "Concept's signature half-timber framing — bold vertical dark_oak studs over cream infill — is entirely absent; the upper wall reads as a plain pink band.",
+            "severity": "major"
+          },
+          {
+            "region": "roof vs walls overall mass",
+            "issue": "Roof field dominates the silhouette; the timber upper storey reads as a thin sliver under deep eaves, where the concept shows a tall, fully-framed second storey.",
+            "severity": "major"
+          },
+          {
+            "region": "roof eave / gable verge",
+            "issue": "No dark trim fascia; concept has a crisp dark_oak_planks band along the eave and raking gable edge against the spruce field.",
+            "severity": "minor"
+          },
+          {
+            "region": "upper-storey windows",
+            "issue": "Shuttered windows barely read from the obliques — shadowed under the overhang.",
+            "severity": "minor"
+          },
+          {
+            "region": "white infill color",
+            "issue": "white_terracotta renders pinkish rather than the concept's cream, but it is the pack's only upper-infill block.",
+            "severity": "minor"
+          }
+        ]
+      },
+      "decision": "revise",
+      "rationale": "The half-timbering and roof-mass majors can't be fixed in one symmetry-preserving, in-pack action, so this round adds the concept's dark eave/verge trim — a symmetric, palette-legal change that sharpens the roof form while I plan the framing pass for later rounds.",
+      "action": {
+        "action": "adjust-params",
+        "elementId": "main-roof",
+        "params": {
+          "blocks": {
+            "field": "spruce_planks",
+            "stairs": "spruce_stairs",
+            "slab": "spruce_slab",
+            "trim": "dark_oak_planks"
+          }
+        }
+      },
+      "applied": {
+        "kind": "program"
+      },
+      "conformance": {
+        "before": {
+          "schema": "pack-conformance/v1",
+          "passed": true,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "after": {
+          "schema": "pack-conformance/v1",
+          "passed": true,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "accepted": true,
+        "reason": "accepted"
+      }
+    },
+    {
+      "round": 2,
+      "renders": [
+        {
+          "angle": "+x+z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-2/view-+x+z.png",
+          "bytes": 103528
+        },
+        {
+          "angle": "+x-z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-2/view-+x-z.png",
+          "bytes": 100996
+        },
+        {
+          "angle": "-x-z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-2/view--x-z.png",
+          "bytes": 107756
+        },
+        {
+          "angle": "-x+z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-2/view--x+z.png",
+          "bytes": 108622
+        }
+      ],
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "Looking at the concept versus my four build views, the defining Tudor signature — the dark half-timber framing over cream infill on the upper storey — is essentially absent in my build, and a heavy eave overhang buries the upper walls so the build reads as roof-on-a-stub rather than a tall two-storey timber-framed cottage.\n\n```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"upper storey ",
+          "usage": {
+            "input_tokens": 10388,
+            "cache_creation_input_tokens": 17166,
+            "cache_read_input_tokens": 15824,
+            "output_tokens": 4590,
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 17166,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "not_available",
+            "iterations": [
+              {
+                "input_tokens": 10388,
+                "output_tokens": 4590,
+                "cache_read_input_tokens": 15824,
+                "cache_creation_input_tokens": 17166,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 17166
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard"
+          },
+          "source": "live"
+        }
+      ],
+      "askCount": 1,
+      "critique": {
+        "issues": [
+          {
+            "region": "upper storey walls (all faces)",
+            "issue": "Concept's identity is dark vertical timber framing over cream infill; my upper walls are blank white_terracotta with no visible timber, so it doesn't read as half-timbered.",
+            "severity": "major"
+          },
+          {
+            "region": "main roof eaves",
+            "issue": "Roof footprint overhangs the walls (x -1..18 vs walls 0..17) so the eaves swallow the upper storey in every oblique view; concept shows tall, clearly-visible two-storey walls.",
+            "severity": "major"
+          },
+          {
+            "region": "window surrounds",
+            "issue": "Window heads are stone_bricks lintels; concept frames openings in dark timber, reinforcing the frame read.",
+            "severity": "minor"
+          },
+          {
+            "region": "overall proportion",
+            "issue": "Roof mass dominates; concept is more balanced with prominent gable fronts.",
+            "severity": "minor"
+          }
+        ]
+      },
+      "decision": "revise",
+      "rationale": "Convert the upper-storey window heads/lintels on the main facade from stone to dark_oak_log so the openings begin reading as timber-framed, introducing the concept's signature dark framing on the cream upper walls without touching the stone ground course (y0-3) or risking watertightness.",
+      "action": {
+        "action": "spray-paint",
+        "dir": "-x",
+        "toBlock": "dark_oak_log",
+        "fromBlock": "stone_bricks",
+        "bounds": {
+          "min": [
+            0,
+            4,
+            0
+          ],
+          "max": [
+            17,
+            7,
+            27
+          ]
+        }
+      },
+      "applied": {
+        "kind": "paint",
+        "painted": 2,
+        "skipped": {
+          "shaped": 0,
+          "outOfBounds": 427,
+          "fromMismatch": 82,
+          "alreadyTarget": 0
+        },
+        "placements": [
+          {
+            "op": "voxel",
+            "pos": [
+              0,
+              6,
+              16
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              0,
+              6,
+              10
+            ],
+            "block": "minecraft:dark_oak_log"
+          }
+        ]
+      },
+      "conformance": {
+        "before": {
+          "schema": "pack-conformance/v1",
+          "passed": true,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "after": {
+          "schema": "pack-conformance/v1",
+          "passed": true,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "accepted": true,
+        "reason": "accepted"
+      }
+    },
+    {
+      "round": 3,
+      "renders": [
+        {
+          "angle": "+x+z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-3/view-+x+z.png",
+          "bytes": 103528
+        },
+        {
+          "angle": "+x-z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-3/view-+x-z.png",
+          "bytes": 100996
+        },
+        {
+          "angle": "-x-z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-3/view--x-z.png",
+          "bytes": 107752
+        },
+        {
+          "angle": "-x+z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-3/view--x+z.png",
+          "bytes": 108634
+        }
+      ],
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"upper storey, all facades\", \"issue\": \"Concept's signature is dark vertical timber studs over cream infill on the jettied upper storey; only the -x face carries timber so far — the +z long face and wing read as bare light wall, weakening the half-timbered character\", \"severity\": \"major\" },\n      { \"region\": \"roof mass (all views)\", \"issue",
+          "usage": {
+            "input_tokens": 10345,
+            "cache_creation_input_tokens": 17202,
+            "cache_read_input_tokens": 15824,
+            "output_tokens": 3134,
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 17202,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "not_available",
+            "iterations": [
+              {
+                "input_tokens": 10345,
+                "output_tokens": 3134,
+                "cache_read_input_tokens": 15824,
+                "cache_creation_input_tokens": 17202,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 17202
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard"
+          },
+          "source": "live"
+        }
+      ],
+      "askCount": 1,
+      "critique": {
+        "issues": [
+          {
+            "region": "upper storey, all facades",
+            "issue": "Concept's signature is dark vertical timber studs over cream infill on the jettied upper storey; only the -x face carries timber so far — the +z long face and wing read as bare light wall, weakening the half-timbered character",
+            "severity": "major"
+          },
+          {
+            "region": "roof mass (all views)",
+            "issue": "From the elevated angles the spruce roof reads slightly dominant, but pitch/steepness matches the concept's tall gable — leave it",
+            "severity": "minor"
+          },
+          {
+            "region": "chimney",
+            "issue": "Stone shaft + brick crown reads correctly against the concept; proportionally thinner but acceptable",
+            "severity": "minor"
+          }
+        ]
+      },
+      "decision": "revise",
+      "rationale": "Extend the accepted -x timber treatment to the +z long facade so the dark-stud half-timbering reads on the visible long faces, matching the concept's signature while keeping the palette in-pack and symmetry intact.",
+      "action": {
+        "action": "spray-paint",
+        "dir": "+z",
+        "toBlock": "dark_oak_log",
+        "fromBlock": "stone_bricks",
+        "bounds": {
+          "min": [
+            0,
+            4,
+            27
+          ],
+          "max": [
+            17,
+            7,
+            27
+          ]
+        }
+      },
+      "applied": {
+        "kind": "paint",
+        "painted": 0,
+        "skipped": {
+          "shaped": 0,
+          "outOfBounds": 326,
+          "fromMismatch": 72,
+          "alreadyTarget": 0
+        },
+        "placements": []
+      },
+      "conformance": {
+        "before": {
+          "schema": "pack-conformance/v1",
+          "passed": true,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "after": {
+          "schema": "pack-conformance/v1",
+          "passed": true,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "accepted": true,
+        "reason": "accepted"
+      }
+    },
+    {
+      "round": 4,
+      "renders": [
+        {
+          "angle": "+x+z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-4/view-+x+z.png",
+          "bytes": 103528
+        },
+        {
+          "angle": "+x-z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-4/view-+x-z.png",
+          "bytes": 100996
+        },
+        {
+          "angle": "-x-z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-4/view--x-z.png",
+          "bytes": 107752
+        },
+        {
+          "angle": "-x+z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-4/view--x+z.png",
+          "bytes": 108634
+        }
+      ],
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"upper storey (cream walls, all faces)\", \"issue\": \"Concept's defining feature is bold vertical dark-oak half-timber studs/corner posts on the cream upper storey; my build's white_terracotta walls read as blank infill with no visible framing.\", \"severity\": \"major\" },\n      { \"region\": \"roof vs walls overall\", \"issue\": \"Spruce roof plus dee",
+          "usage": {
+            "input_tokens": 10301,
+            "cache_creation_input_tokens": 17159,
+            "cache_read_input_tokens": 15824,
+            "output_tokens": 7767,
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 17159,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "not_available",
+            "iterations": [
+              {
+                "input_tokens": 10301,
+                "output_tokens": 7767,
+                "cache_read_input_tokens": 15824,
+                "cache_creation_input_tokens": 17159,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 17159
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard"
+          },
+          "source": "live"
+        }
+      ],
+      "askCount": 1,
+      "critique": {
+        "issues": [
+          {
+            "region": "upper storey (cream walls, all faces)",
+            "issue": "Concept's defining feature is bold vertical dark-oak half-timber studs/corner posts on the cream upper storey; my build's white_terracotta walls read as blank infill with no visible framing.",
+            "severity": "major"
+          },
+          {
+            "region": "roof vs walls overall",
+            "issue": "Spruce roof plus deep jetty+eave overhang swallows the upper walls; the build reads as 'mostly roof', whereas the concept shows two clearly-framed wall storeys.",
+            "severity": "minor"
+          },
+          {
+            "region": "roof field color",
+            "issue": "Concept roof is a darker brown shingle; spruce_planks read a touch lighter/tan, but it is the pack's roof.field so palette stays correct.",
+            "severity": "minor"
+          },
+          {
+            "region": "ground storey stone",
+            "issue": "Stone-brick base and chimney read well against the concept; no real divergence here.",
+            "severity": "minor"
+          }
+        ]
+      },
+      "decision": "revise",
+      "rationale": "The missing half-timber framing is the largest resemblance gap; I'm planting a dark-oak corner post on the most-visible near corner of the upper storey (prior single-side eave paint passed, so symmetry-held tolerates this), starting to give the cream walls the Tudor stud-frame read. Remaining rounds can extend posts to the other prominent corners.",
+      "action": {
+        "action": "spray-paint",
+        "dir": "-x-z",
+        "toBlock": "dark_oak_log",
+        "fromBlock": "white_terracotta",
+        "bounds": {
+          "min": [
+            0,
+            4,
+            0
+          ],
+          "max": [
+            1,
+            7,
+            1
+          ]
+        }
+      },
+      "applied": {
+        "kind": "paint",
+        "painted": 10,
+        "skipped": {
+          "shaped": 0,
+          "outOfBounds": 755,
+          "fromMismatch": 0,
+          "alreadyTarget": 0
+        },
+        "placements": [
+          {
+            "op": "voxel",
+            "pos": [
+              1,
+              7,
+              0
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              0,
+              7,
+              0
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              0,
+              7,
+              1
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              1,
+              6,
+              0
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              0,
+              6,
+              0
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              0,
+              6,
+              1
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              1,
+              5,
+              0
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              0,
+              5,
+              0
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              0,
+              5,
+              1
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              0,
+              4,
+              0
+            ],
+            "block": "minecraft:dark_oak_log"
+          }
+        ]
+      },
+      "conformance": {
+        "before": {
+          "schema": "pack-conformance/v1",
+          "passed": true,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "after": {
+          "schema": "pack-conformance/v1",
+          "passed": true,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "accepted": true,
+        "reason": "accepted"
+      }
+    },
+    {
+      "round": 5,
+      "renders": [
+        {
+          "angle": "+x+z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-5/view-+x+z.png",
+          "bytes": 103528
+        },
+        {
+          "angle": "+x-z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-5/view-+x-z.png",
+          "bytes": 101057
+        },
+        {
+          "angle": "-x-z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-5/view--x-z.png",
+          "bytes": 107659
+        },
+        {
+          "angle": "-x+z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-5/view--x+z.png",
+          "bytes": 108603
+        }
+      ],
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"wing upper storey (+x face, x=25)\", \"issue\": \"Upper storey of the projecting wing is bare cream white_terracotta with no dark timber studs — the half-timbered framing that defines the concept stops at the main block and never reaches the wing.\", \"severity\": \"major\" },\n      { \"region\": \"-z (south) upper facade\", \"issue\": \"Still unframed ",
+          "usage": {
+            "input_tokens": 10788,
+            "cache_creation_input_tokens": 17177,
+            "cache_read_input_tokens": 15824,
+            "output_tokens": 3349,
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 17177,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "not_available",
+            "iterations": [
+              {
+                "input_tokens": 10788,
+                "output_tokens": 3349,
+                "cache_read_input_tokens": 15824,
+                "cache_creation_input_tokens": 17177,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 17177
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard"
+          },
+          "source": "live"
+        }
+      ],
+      "askCount": 1,
+      "critique": {
+        "issues": [
+          {
+            "region": "wing upper storey (+x face, x=25)",
+            "issue": "Upper storey of the projecting wing is bare cream white_terracotta with no dark timber studs — the half-timbered framing that defines the concept stops at the main block and never reaches the wing.",
+            "severity": "major"
+          },
+          {
+            "region": "-z (south) upper facade",
+            "issue": "Still unframed cream; concept shows dark vertical timber on every visible upper wall.",
+            "severity": "minor"
+          },
+          {
+            "region": "overall upper storey",
+            "issue": "Painted faces read as solid dark rather than the concept's regular cream-and-stud rhythm, but corner head.flat accents keep it acceptable.",
+            "severity": "minor"
+          },
+          {
+            "region": "roof",
+            "issue": "Proportion, pitch, and spruce field match the concept well; chimney reads correctly.",
+            "severity": "minor"
+          }
+        ]
+      },
+      "decision": "revise",
+      "rationale": "The wing's upper storey is the last large cream face with no timber framing, breaking the half-timbered continuity that is the concept's signature; painting it dark_oak_log (guarded by fromBlock so the window opening survives) extends the framing across the whole building consistent with the accepted -x/+z passes.",
+      "action": {
+        "action": "spray-paint",
+        "dir": "+x",
+        "toBlock": "dark_oak_log",
+        "fromBlock": "white_terracotta",
+        "bounds": {
+          "min": [
+            25,
+            4,
+            7
+          ],
+          "max": [
+            25,
+            7,
+            21
+          ]
+        }
+      },
+      "applied": {
+        "kind": "paint",
+        "painted": 43,
+        "skipped": {
+          "shaped": 0,
+          "outOfBounds": 467,
+          "fromMismatch": 1,
+          "alreadyTarget": 0
+        },
+        "placements": [
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              7,
+              7
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              7,
+              8
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              7,
+              9
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              7,
+              10
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              7,
+              11
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              7,
+              12
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              7,
+              13
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              7,
+              14
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              7,
+              15
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              7,
+              16
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              7,
+              17
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              7,
+              18
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              7,
+              19
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              7,
+              20
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              7,
+              21
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              6,
+              7
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              6,
+              8
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              6,
+              9
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              6,
+              10
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              6,
+              11
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              6,
+              12
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              6,
+              13
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              6,
+              15
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              6,
+              16
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              6,
+              17
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              6,
+              18
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              6,
+              19
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              6,
+              20
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              6,
+              21
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              5,
+              7
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              5,
+              8
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              5,
+              9
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              5,
+              10
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              5,
+              11
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              5,
+              12
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              5,
+              13
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              5,
+              15
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              5,
+              16
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              5,
+              17
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              5,
+              18
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              5,
+              19
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              5,
+              20
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              25,
+              5,
+              21
+            ],
+            "block": "minecraft:dark_oak_log"
+          }
+        ]
+      },
+      "conformance": {
+        "before": {
+          "schema": "pack-conformance/v1",
+          "passed": true,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "after": {
+          "schema": "pack-conformance/v1",
+          "passed": true,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "accepted": true,
+        "reason": "accepted"
+      }
+    },
+    {
+      "round": 6,
+      "renders": [
+        {
+          "angle": "+x+z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-6/view-+x+z.png",
+          "bytes": 103373
+        },
+        {
+          "angle": "+x-z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-6/view-+x-z.png",
+          "bytes": 101191
+        },
+        {
+          "angle": "-x-z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-6/view--x-z.png",
+          "bytes": 107661
+        },
+        {
+          "angle": "-x+z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-6/view--x+z.png",
+          "bytes": 108595
+        }
+      ],
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"roof vs upper storey\", \"issue\": \"Roof mass is more dominant than the concept; the jettied half-timbered storey reads as a thinner band than the concept's tall, prominent upper floor.\", \"severity\": \"minor\" },\n      { \"region\": \"timber studs\", \"issue\": \"Painted faces read as near-solid dark timber rather than the concept's alternating vert",
+          "usage": {
+            "input_tokens": 10788,
+            "cache_creation_input_tokens": 17175,
+            "cache_read_input_tokens": 15824,
+            "output_tokens": 2332,
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 17175,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "not_available",
+            "iterations": [
+              {
+                "input_tokens": 10788,
+                "output_tokens": 2332,
+                "cache_read_input_tokens": 15824,
+                "cache_creation_input_tokens": 17175,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 17175
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard"
+          },
+          "source": "live"
+        }
+      ],
+      "askCount": 1,
+      "critique": {
+        "issues": [
+          {
+            "region": "roof vs upper storey",
+            "issue": "Roof mass is more dominant than the concept; the jettied half-timbered storey reads as a thinner band than the concept's tall, prominent upper floor.",
+            "severity": "minor"
+          },
+          {
+            "region": "timber studs",
+            "issue": "Painted faces read as near-solid dark timber rather than the concept's alternating vertical studs over cream infill; the cross-hatch rhythm is softer than the target.",
+            "severity": "minor"
+          },
+          {
+            "region": "wing roof",
+            "issue": "Wing gable is slightly squat against the main mass compared to the concept's crisper perpendicular wing, but the L-massing and ridge intersection are correct.",
+            "severity": "minor"
+          }
+        ]
+      },
+      "decision": "done",
+      "rationale": "The build now reads unmistakably as the concept's building — steep spruce gable roof, stone-brick ground storey with jettied half-timbered upper floor, cobblestone chimney with brick crown, and the L-shaped wing — and all six conformance checks pass. The remaining gaps are minor stylistic refinements; a further face-conversion risks over-timbering or breaking watertight/single-component for marginal gain, so I lock it in.",
+      "action": null,
+      "applied": null,
+      "conformance": {
+        "before": {
+          "schema": "pack-conformance/v1",
+          "passed": true,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "after": null,
+        "accepted": true,
+        "reason": "done-declared"
+      }
+    }
+  ],
+  "final": {
+    "outcome": "done",
+    "rounds": 6,
+    "conformance": {
+      "schema": "pack-conformance/v1",
+      "passed": true,
+      "checks": [
+        {
+          "name": "courses-even",
+          "passed": true,
+          "findings": []
+        },
+        {
+          "name": "symmetry-held",
+          "passed": true,
+          "findings": []
+        },
+        {
+          "name": "openings-rhythm",
+          "passed": true,
+          "findings": []
+        },
+        {
+          "name": "palette-in-pack",
+          "passed": true,
+          "findings": []
+        },
+        {
+          "name": "watertight",
+          "passed": true,
+          "findings": [],
+          "mouths": 0
+        },
+        {
+          "name": "single-component",
+          "passed": true,
+          "findings": [],
+          "components": 1
+        }
+      ]
+    }
+  }
+}
