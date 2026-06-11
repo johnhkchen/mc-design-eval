@@ -2729,13 +2729,13 @@
           "id": "gable-roof-0-roof-4",
           "ridge": {
             "axis": "z",
-            "y": 24
+            "y": 23
           },
           "sides": [
             {
               "planeId": "roof-0",
               "eaveDir": "+x",
-              "pitch": 0.765,
+              "pitch": 0.941,
               "pitchSource": "glb",
               "glbAngleDeg": 11.826,
               "voxelPitch": 1.156,
@@ -3590,12 +3590,13 @@
                 ]
               ],
               "reasons": [],
-              "run": 8.5
+              "run": 8.5,
+              "pitchFitted": 0.765
             },
             {
               "planeId": "roof-4",
               "eaveDir": "-x",
-              "pitch": 1.884,
+              "pitch": 1.286,
               "pitchSource": "voxel",
               "glbAngleDeg": 20.889,
               "voxelPitch": 1.884,
@@ -3906,7 +3907,8 @@
                 ]
               ],
               "reasons": [],
-              "run": 3.5
+              "run": 3.5,
+              "pitchFitted": 1.884
             }
           ],
           "footprint": {
@@ -4340,13 +4342,13 @@
           "id": "gable-roof-2-roof-3",
           "ridge": {
             "axis": "x",
-            "y": 21
+            "y": 22.5
           },
           "sides": [
             {
               "planeId": "roof-2",
               "eaveDir": "-z",
-              "pitch": 0.453,
+              "pitch": 1.021,
               "pitchSource": "glb",
               "glbAngleDeg": 13.034,
               "voxelPitch": 0.759,
@@ -4713,12 +4715,13 @@
                 ]
               ],
               "reasons": [],
-              "run": 7.833
+              "run": 7.833,
+              "pitchFitted": 0.453
             },
             {
               "planeId": "roof-3",
               "eaveDir": "+z",
-              "pitch": 0.885,
+              "pitch": 1.216,
               "pitchSource": "glb",
               "glbAngleDeg": 4.536,
               "voxelPitch": 1.016,
@@ -5037,7 +5040,8 @@
                 ]
               ],
               "reasons": [],
-              "run": 6.167
+              "run": 6.167,
+              "pitchFitted": 0.885
             }
           ],
           "footprint": {
@@ -5282,6 +5286,44 @@
                 4
               ]
             }
+          },
+          "closure": {
+            "applied": true,
+            "from": 24,
+            "to": 23,
+            "profile": {
+              "height": 24.332,
+              "span": [
+                -16,
+                14
+              ],
+              "length": 31,
+              "rmse": 0
+            },
+            "anchors": {
+              "buildEave": 16.75,
+              "glbEave": 17.847,
+              "dropped": []
+            },
+            "apexCheck": -1.333,
+            "apexDiverges": true,
+            "sides": [
+              {
+                "planeId": "roof-0",
+                "pitchFrom": 0.765,
+                "pitchTo": 0.941
+              },
+              {
+                "planeId": "roof-4",
+                "pitchFrom": 1.884,
+                "pitchTo": 1.286
+              }
+            ],
+            "hip": {
+              "refuted": [],
+              "reanchored": []
+            },
+            "refusals": []
           }
         },
         {
@@ -5312,6 +5354,44 @@
                 2
               ]
             }
+          },
+          "closure": {
+            "applied": true,
+            "from": 21,
+            "to": 22.5,
+            "profile": {
+              "height": 22.792,
+              "span": [
+                -1,
+                12
+              ],
+              "length": 14,
+              "rmse": 0
+            },
+            "anchors": {
+              "buildEave": 14.75,
+              "glbEave": 15.025,
+              "dropped": []
+            },
+            "apexCheck": -0.292,
+            "apexDiverges": false,
+            "sides": [
+              {
+                "planeId": "roof-2",
+                "pitchFrom": 0.453,
+                "pitchTo": 1.021
+              },
+              {
+                "planeId": "roof-3",
+                "pitchFrom": 0.885,
+                "pitchTo": 1.216
+              }
+            ],
+            "hip": {
+              "refuted": [],
+              "reanchored": []
+            },
+            "refusals": []
           }
         }
       ],
@@ -5732,6 +5812,12 @@
       "where": "gable-roof-2-roof-3:-x",
       "detail": "anchor window empty (wall anchor -13 outside the footprint end -1 — a buried interior end) — as-built end stays (Rule 2)",
       "stage": "roof-end-fit"
+    },
+    {
+      "code": "apex-vs-profile-divergence",
+      "where": "gable-roof-0-roof-4",
+      "detail": "closed ridge 23 vs vertex apexLine 24.333 (apexCheck -1.333)",
+      "stage": "ridge-closure"
     },
     {
       "code": "flat-out-of-tolerance",

@@ -164,9 +164,25 @@
       {
         "gable": "gable-roof-0-roof-4",
         "anchors": {
-          "buildEave": 22.75,
+          "buildEave": 26.5,
           "glbEave": 30.317,
-          "glbEaveSamples": 13
+          "perSide": [
+            {
+              "planeId": "roof-0",
+              "eaveY": 19,
+              "samples": 0,
+              "median": null
+            },
+            {
+              "planeId": "roof-4",
+              "eaveY": 26.5,
+              "samples": 13,
+              "median": 30.317
+            }
+          ],
+          "dropped": [
+            "roof-0"
+          ]
         },
         "ridge": {
           "profile": [
@@ -174,175 +190,175 @@
               "v": -12,
               "build": 20,
               "glb": 20.805,
-              "delta": 6.762,
+              "delta": 3.012,
               "rawDelta": 0.195
             },
             {
               "v": -11,
               "build": 27,
               "glb": 27.954,
-              "delta": 6.613,
+              "delta": 2.863,
               "rawDelta": 0.046
             },
             {
               "v": -10,
               "build": 27,
               "glb": 27.954,
-              "delta": 6.613,
+              "delta": 2.863,
               "rawDelta": 0.046
             },
             {
               "v": -9,
               "build": 28,
               "glb": 29.144,
-              "delta": 6.423,
+              "delta": 2.673,
               "rawDelta": -0.144
             },
             {
               "v": -8,
               "build": 28,
               "glb": 29.144,
-              "delta": 6.423,
+              "delta": 2.673,
               "rawDelta": -0.144
             },
             {
               "v": -7,
               "build": 28,
               "glb": 29.144,
-              "delta": 6.423,
+              "delta": 2.673,
               "rawDelta": -0.144
             },
             {
               "v": -6,
               "build": 28,
               "glb": 29.144,
-              "delta": 6.423,
+              "delta": 2.673,
               "rawDelta": -0.144
             },
             {
               "v": -5,
               "build": 27,
               "glb": 29.144,
-              "delta": 5.423,
+              "delta": 1.673,
               "rawDelta": -1.144
             },
             {
               "v": -4,
               "build": 27,
               "glb": 29.144,
-              "delta": 5.423,
+              "delta": 1.673,
               "rawDelta": -1.144
             },
             {
               "v": -3,
               "build": 27,
               "glb": 29.144,
-              "delta": 5.423,
+              "delta": 1.673,
               "rawDelta": -1.144
             },
             {
               "v": -2,
               "build": 27,
               "glb": 29.144,
-              "delta": 5.423,
+              "delta": 1.673,
               "rawDelta": -1.144
             },
             {
               "v": -1,
               "build": 27,
               "glb": 29.144,
-              "delta": 5.423,
+              "delta": 1.673,
               "rawDelta": -1.144
             },
             {
               "v": 0,
               "build": 29,
               "glb": 30.317,
-              "delta": 6.25,
+              "delta": 2.5,
               "rawDelta": -0.317
             },
             {
               "v": 1,
               "build": 29,
               "glb": 30.317,
-              "delta": 6.25,
+              "delta": 2.5,
               "rawDelta": -0.317
             },
             {
               "v": 2,
               "build": 29,
               "glb": 30.317,
-              "delta": 6.25,
+              "delta": 2.5,
               "rawDelta": -0.317
             },
             {
               "v": 3,
               "build": 29,
               "glb": 30.317,
-              "delta": 6.25,
+              "delta": 2.5,
               "rawDelta": -0.317
             },
             {
               "v": 4,
               "build": 29,
               "glb": 30.317,
-              "delta": 6.25,
+              "delta": 2.5,
               "rawDelta": -0.317
             },
             {
               "v": 5,
               "build": 29,
               "glb": 30.317,
-              "delta": 6.25,
+              "delta": 2.5,
               "rawDelta": -0.317
             },
             {
               "v": 6,
               "build": 29,
               "glb": 30.317,
-              "delta": 6.25,
+              "delta": 2.5,
               "rawDelta": -0.317
             },
             {
               "v": 7,
               "build": 27,
               "glb": 30.317,
-              "delta": 4.25,
+              "delta": 0.5,
               "rawDelta": -2.317
             },
             {
               "v": 8,
               "build": 27,
               "glb": 30.317,
-              "delta": 4.25,
+              "delta": 0.5,
               "rawDelta": -2.317
             },
             {
               "v": 9,
               "build": 27,
               "glb": 30.317,
-              "delta": 4.25,
+              "delta": 0.5,
               "rawDelta": -2.317
             },
             {
               "v": 10,
               "build": 29,
               "glb": 30.317,
-              "delta": 6.25,
+              "delta": 2.5,
               "rawDelta": -0.317
             },
             {
               "v": 11,
               "build": 29,
               "glb": 30.317,
-              "delta": 6.25,
+              "delta": 2.5,
               "rawDelta": -0.317
             },
             {
               "v": 12,
               "build": 31,
               "glb": 30.316,
-              "delta": 8.251,
+              "delta": 4.501,
               "rawDelta": 1.684
             },
             {
@@ -354,9 +370,9 @@
             }
           ],
           "stats": {
-            "rmse": 6.063,
-            "maxAbs": 8.251,
-            "mean": 6.002,
+            "rmse": 2.411,
+            "maxAbs": 4.501,
+            "mean": 2.252,
             "uncovered": 1,
             "count": 25
           }
@@ -371,14 +387,14 @@
                 "v": 11,
                 "build": 20,
                 "glb": 20.805,
-                "delta": 6.762,
+                "delta": 3.012,
                 "rawDelta": 0.195
               }
             ],
             "stats": {
-              "rmse": 6.762,
-              "maxAbs": 6.762,
-              "mean": 6.762,
+              "rmse": 3.012,
+              "maxAbs": 3.012,
+              "mean": 3.012,
               "uncovered": 0,
               "count": 1
             }
@@ -515,7 +531,7 @@
   "reproducible": {
     "runs": 2,
     "byteIdentical": true,
-    "sha256": "d029295ed1a0d1c8683dcfbc38e456492b8a38dffe052016ec9fe36020fcd5aa"
+    "sha256": "25c125de529c1ea07aae1364796d5e0980eb648b793be9e59d8b81c295ad2211"
   },
   "renders": {
     "views": [

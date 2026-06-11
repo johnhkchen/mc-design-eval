@@ -5764,13 +5764,13 @@
           "id": "gable-roof-1-roof-8",
           "ridge": {
             "axis": "x",
-            "y": 19.5
+            "y": 20
           },
           "sides": [
             {
               "planeId": "roof-1",
               "eaveDir": "-z",
-              "pitch": 0.933,
+              "pitch": 1.096,
               "pitchSource": "glb",
               "glbAngleDeg": 0,
               "voxelPitch": 0.942,
@@ -6733,12 +6733,13 @@
                 ]
               ],
               "reasons": [],
-              "run": 5.929
+              "run": 5.929,
+              "pitchFitted": 0.933
             },
             {
               "planeId": "roof-8",
               "eaveDir": "+z",
-              "pitch": 0.379,
+              "pitch": 0.651,
               "pitchSource": "voxel",
               "glbAngleDeg": 23.117,
               "voxelPitch": 0.379,
@@ -6829,7 +6830,8 @@
                 ]
               ],
               "reasons": [],
-              "run": 3.071
+              "run": 3.071,
+              "pitchFitted": 0.379
             }
           ],
           "footprint": {
@@ -7166,11 +7168,11 @@
             "area": 320
           },
           "hip": {
-            "lo": true,
+            "lo": false,
             "hi": false,
             "ridgeLo": 17,
             "ridgeHi": 23,
-            "demanded": true,
+            "demanded": false,
             "fitted": {
               "lo": {
                 "pitch": 0.231,
@@ -7179,7 +7181,8 @@
                 "source": "glb"
               },
               "hi": null
-            }
+            },
+            "refuted": "ridge-profile-to-edge"
           },
           "sane": true,
           "reasons": [],
@@ -7211,6 +7214,46 @@
             "rmse": 0,
             "slices": 48,
             "excludedColumns": 45
+          },
+          "closure": {
+            "applied": true,
+            "from": 19.5,
+            "to": 20,
+            "profile": {
+              "height": 20.991,
+              "span": [
+                -24,
+                22
+              ],
+              "length": 47,
+              "rmse": 0
+            },
+            "anchors": {
+              "buildEave": 15.75,
+              "glbEave": 16.528,
+              "dropped": []
+            },
+            "apexCheck": -0.991,
+            "apexDiverges": false,
+            "sides": [
+              {
+                "planeId": "roof-1",
+                "pitchFrom": 0.933,
+                "pitchTo": 1.096
+              },
+              {
+                "planeId": "roof-8",
+                "pitchFrom": 0.379,
+                "pitchTo": 0.651
+              }
+            ],
+            "hip": {
+              "refuted": [
+                "lo"
+              ],
+              "reanchored": []
+            },
+            "refusals": []
           }
         }
       ],

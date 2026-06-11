@@ -179,9 +179,25 @@
       {
         "gable": "gable-roof-0-roof-4",
         "anchors": {
-          "buildEave": 22.75,
+          "buildEave": 26.5,
           "glbEave": 23.576,
-          "glbEaveSamples": 13
+          "perSide": [
+            {
+              "planeId": "roof-0",
+              "eaveY": 19,
+              "samples": 0,
+              "median": null
+            },
+            {
+              "planeId": "roof-4",
+              "eaveY": 26.5,
+              "samples": 13,
+              "median": 23.576
+            }
+          ],
+          "dropped": [
+            "roof-0"
+          ]
         },
         "ridge": {
           "profile": [
@@ -189,175 +205,175 @@
               "v": -12,
               "build": 19,
               "glb": 16.145,
-              "delta": 3.681,
+              "delta": -0.069,
               "rawDelta": 3.855
             },
             {
               "v": -11,
               "build": 19,
               "glb": 21.73,
-              "delta": -1.904,
+              "delta": -5.654,
               "rawDelta": -1.73
             },
             {
               "v": -10,
               "build": 19,
               "glb": 21.73,
-              "delta": -1.904,
+              "delta": -5.654,
               "rawDelta": -1.73
             },
             {
               "v": -9,
               "build": 20,
               "glb": 22.659,
-              "delta": -1.833,
+              "delta": -5.583,
               "rawDelta": -1.659
             },
             {
               "v": -8,
               "build": 20,
               "glb": 22.659,
-              "delta": -1.833,
+              "delta": -5.583,
               "rawDelta": -1.659
             },
             {
               "v": -7,
               "build": 21,
               "glb": 22.659,
-              "delta": -0.834,
+              "delta": -4.584,
               "rawDelta": -0.659
             },
             {
               "v": -6,
               "build": 21,
               "glb": 22.659,
-              "delta": -0.834,
+              "delta": -4.584,
               "rawDelta": -0.659
             },
             {
               "v": -5,
               "build": 22,
               "glb": 22.659,
-              "delta": 0.167,
+              "delta": -3.583,
               "rawDelta": 0.341
             },
             {
               "v": -4,
               "build": 22,
               "glb": 22.659,
-              "delta": 0.166,
+              "delta": -3.584,
               "rawDelta": 0.341
             },
             {
               "v": -3,
               "build": 23,
               "glb": 22.659,
-              "delta": 1.167,
+              "delta": -2.583,
               "rawDelta": 1.341
             },
             {
               "v": -2,
               "build": 23,
               "glb": 22.659,
-              "delta": 1.167,
+              "delta": -2.583,
               "rawDelta": 1.341
             },
             {
               "v": -1,
               "build": 23,
               "glb": 22.659,
-              "delta": 1.167,
+              "delta": -2.583,
               "rawDelta": 1.341
             },
             {
               "v": 0,
               "build": 23,
               "glb": 23.576,
-              "delta": 0.25,
+              "delta": -3.5,
               "rawDelta": 0.424
             },
             {
               "v": 1,
               "build": 22,
               "glb": 23.576,
-              "delta": -0.75,
+              "delta": -4.5,
               "rawDelta": -0.576
             },
             {
               "v": 2,
               "build": 22,
               "glb": 23.576,
-              "delta": -0.75,
+              "delta": -4.5,
               "rawDelta": -0.576
             },
             {
               "v": 3,
               "build": 22,
               "glb": 23.576,
-              "delta": -0.75,
+              "delta": -4.5,
               "rawDelta": -0.576
             },
             {
               "v": 4,
               "build": 21,
               "glb": 23.576,
-              "delta": -1.75,
+              "delta": -5.5,
               "rawDelta": -1.576
             },
             {
               "v": 5,
               "build": 21,
               "glb": 23.576,
-              "delta": -1.75,
+              "delta": -5.5,
               "rawDelta": -1.576
             },
             {
               "v": 6,
               "build": 21,
               "glb": 23.576,
-              "delta": -1.75,
+              "delta": -5.5,
               "rawDelta": -1.576
             },
             {
               "v": 7,
               "build": 20,
               "glb": 23.576,
-              "delta": -2.75,
+              "delta": -6.5,
               "rawDelta": -2.576
             },
             {
               "v": 8,
               "build": 20,
               "glb": 23.576,
-              "delta": -2.75,
+              "delta": -6.5,
               "rawDelta": -2.576
             },
             {
               "v": 9,
               "build": 20,
               "glb": 23.576,
-              "delta": -2.75,
+              "delta": -6.5,
               "rawDelta": -2.576
             },
             {
               "v": 10,
               "build": 19,
               "glb": 23.576,
-              "delta": -3.75,
+              "delta": -7.5,
               "rawDelta": -3.576
             },
             {
               "v": 11,
               "build": 19,
               "glb": 23.576,
-              "delta": -3.75,
+              "delta": -7.5,
               "rawDelta": -3.576
             },
             {
               "v": 12,
               "build": 19,
               "glb": 23.575,
-              "delta": -3.749,
+              "delta": -7.499,
               "rawDelta": -3.575
             },
             {
@@ -369,9 +385,9 @@
             }
           ],
           "stats": {
-            "rmse": 2.087,
-            "maxAbs": -3.75,
-            "mean": -1.135,
+            "rmse": 5.189,
+            "maxAbs": -7.5,
+            "mean": -4.885,
             "uncovered": 1,
             "count": 25
           }
@@ -386,14 +402,14 @@
                 "v": 11,
                 "build": 19,
                 "glb": 16.145,
-                "delta": 3.681,
+                "delta": -0.069,
                 "rawDelta": 3.855
               }
             ],
             "stats": {
-              "rmse": 3.681,
-              "maxAbs": 3.681,
-              "mean": 3.681,
+              "rmse": 0.069,
+              "maxAbs": -0.069,
+              "mean": -0.069,
               "uncovered": 0,
               "count": 1
             }
@@ -534,7 +550,7 @@
   "reproducible": {
     "runs": 2,
     "byteIdentical": true,
-    "sha256": "1176888a7b81d542a075cd202873a1540a892722bc8f8f8a6ed516c818150311"
+    "sha256": "27b0d2c0f06447f1c7bfce3da0a2d19c03086d4d3912f64afa510ffeb21b6bfa"
   },
   "renders": {
     "views": [

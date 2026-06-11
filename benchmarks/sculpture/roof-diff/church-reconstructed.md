@@ -11,6 +11,6 @@ Band floor 14; regions {"ridge":18,"ends":4,"slopes":20,"eaves":6}
 
 Cross-azimuth: 3080 px, roof share 53.214%, worst view -x+z.
 
-- **gable-roof-3-roof-7** ridge Δ(eave-rel) rmse 4.228 max -12.137; rakes: lo@-7 (unfitted) rmse 10.573, hi@1 (unfitted) rmse 0.872
+- **gable-roof-3-roof-7** ridge Δ(eave-rel) rmse 3.676 max -10.068; rakes: lo@-7 (unfitted) rmse 8.869, hi@1 (unfitted) rmse 1.197
 
-Reproducible: byte-identical ×2 (sha256 538fb8d05b21…).
+Reproducible: byte-identical ×2 (sha256 186f3f7a83b4…).
