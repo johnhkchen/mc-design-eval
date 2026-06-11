@@ -6,6 +6,7 @@
 // angles; the scaffold's job is to establish the contract and prove it round-trips
 // to a correct PNG, in-process, with no Minecraft server and no bot.
 
+import './lens-guard.mjs' // THROWS if the stair-lens patch is missing (T-107-01)
 import { createRequire } from 'node:module'
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { dirname } from 'node:path'
