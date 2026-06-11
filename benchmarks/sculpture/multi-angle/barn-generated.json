@@ -1,0 +1,1099 @@
+{
+  "schema": "multi-angle-gate/v1",
+  "subject": "barn",
+  "label": "generated",
+  "artifact": {
+    "path": "benchmarks/sculpture/generated/barn/artifact.json",
+    "sha256": "8db2e8d3f4dcfd6c502fb453f362aae3db104e1a3a403f951fb23ea72b324cbe"
+  },
+  "contract": {
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "elevationDeg": 30,
+    "width": 512,
+    "height": 512,
+    "gapBudget": 2,
+    "coverageThreshold": 0.5,
+    "note": "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them"
+  },
+  "zones": {
+    "source": "concept",
+    "reason": null,
+    "policy": {
+      "band0": {
+        "dominant": "cobblestone",
+        "preserve": [
+          "dark_oak_planks",
+          "polished_deepslate",
+          "oak_planks"
+        ],
+        "splat": [
+          "dark_oak_planks",
+          "polished_deepslate",
+          "oak_planks"
+        ]
+      },
+      "roof": {
+        "dominant": "dark_oak_planks",
+        "preserve": [
+          "polished_deepslate",
+          "oak_planks",
+          "spruce_stairs",
+          "spruce_slab"
+        ],
+        "splat": [
+          "polished_deepslate",
+          "oak_planks"
+        ]
+      }
+    },
+    "substitutionApplied": {
+      "stone_bricks": "polished_deepslate"
+    },
+    "kitOverridesApplied": {},
+    "vocabulary": {
+      "schema": "material-vocabulary/v1",
+      "policySpace": "named",
+      "guarded": true,
+      "substitution": {
+        "stone_bricks": "polished_deepslate"
+      },
+      "kitOverrides": {},
+      "zones": {
+        "band0": {
+          "dominant": "cobblestone",
+          "preserve": [
+            "dark_oak_planks",
+            "polished_deepslate",
+            "oak_planks"
+          ],
+          "splat": [
+            "dark_oak_planks",
+            "polished_deepslate",
+            "oak_planks"
+          ]
+        },
+        "roof": {
+          "dominant": "dark_oak_planks",
+          "preserve": [
+            "polished_deepslate",
+            "oak_planks",
+            "spruce_stairs",
+            "spruce_slab"
+          ],
+          "splat": [
+            "polished_deepslate",
+            "oak_planks"
+          ]
+        }
+      },
+      "treatmentSlots": {
+        "door": "oak_door",
+        "frame": "polished_deepslate"
+      },
+      "derivations": [],
+      "roofFamilyAppended": [
+        "spruce_stairs",
+        "spruce_slab"
+      ]
+    }
+  },
+  "views": [
+    {
+      "angle": "+x+z",
+      "azimuthDeg": 45,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/barn-generated/view-+x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "cobblestone",
+            "fraction": 1,
+            "total": 234,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "dark_oak_planks",
+              "polished_deepslate",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.88
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.985,
+            "total": 272,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "polished_deepslate",
+              "oak_planks",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.934
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "walls and roof all around",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "long side wall surface",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "roof and wall blocks scattered throughout",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The barn's brown gable roof and cobblestone walls read as the same subject, but the build is riddled with large holes through walls and roof, reading as a broken hollow shell rather than the solid massing the concept and mesh show."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10375,
+          "output_tokens": 653,
+          "cost_usd": 0.17946
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"walls and roof all around\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"long side wall surface\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"roof and wall blocks scattered throughout\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The barn's brown gable roof and cobblestone walls read as the same subject, but the build is riddle",
+          "usage": {
+            "input_tokens": 10375,
+            "output_tokens": 653,
+            "cost_usd": 0.17946
+          },
+          "source": "live"
+        }
+      ]
+    },
+    {
+      "angle": "+x-z",
+      "azimuthDeg": 135,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/barn-generated/view-+x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "cobblestone",
+            "fraction": 1,
+            "total": 110,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "dark_oak_planks",
+              "polished_deepslate",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.955
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 1,
+            "total": 268,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "polished_deepslate",
+              "oak_planks",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.526
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof, top of the building",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "long side walls",
+            "attribute": "form",
+            "severity": "minor"
+          },
+          {
+            "region": "wall stonework",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The elongated gabled massing and stone-wall/dark-wood palette match the references, but the build's roof is an open frame of exposed rafters with no covering skin where the concept and mesh show a solid closed roof, a major form defect that breaks the read from this angle."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10375,
+          "output_tokens": 787,
+          "cost_usd": 0.18281
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof, top of the building\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"long side walls\",\"attribute\":\"form\",\"severity\":\"minor\"},{\"region\":\"wall stonework\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The elongated gabled massing and stone-wall/dark-wood palette match the references, but the build's roof is an open frame of exposed raf",
+          "usage": {
+            "input_tokens": 10375,
+            "output_tokens": 787,
+            "cost_usd": 0.18281
+          },
+          "source": "live"
+        }
+      ]
+    },
+    {
+      "angle": "-x-z",
+      "azimuthDeg": 225,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/barn-generated/view--x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "cobblestone",
+            "fraction": 1,
+            "total": 132,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "dark_oak_planks",
+              "polished_deepslate",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.985
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 1,
+            "total": 260,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "polished_deepslate",
+              "oak_planks",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.438
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "long wall and roof plane",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "roof surface",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "stone wall coursing",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The brown gable roof and cobblestone walls read as the same barn, but large holes punched through the long wall and roof break the solid massing shown in the concept and mesh, making it look like a broken hollow shell rather than a filled structure."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10824,
+          "output_tokens": 396,
+          "cost_usd": 0.17528
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"long wall and roof plane\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"roof surface\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"stone wall coursing\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The brown gable roof and cobblestone walls read as the same barn, but large holes punched through the long wall and roof break the s",
+          "usage": {
+            "input_tokens": 10824,
+            "output_tokens": 396,
+            "cost_usd": 0.17528
+          },
+          "source": "live"
+        }
+      ]
+    },
+    {
+      "angle": "-x+z",
+      "azimuthDeg": 315,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/barn-generated/view--x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "cobblestone",
+            "fraction": 1,
+            "total": 242,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "dark_oak_planks",
+              "polished_deepslate",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.897
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.953,
+            "total": 276,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "polished_deepslate",
+              "oak_planks",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.833
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof across the full ridge",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "long side and gable walls",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "upper wall and roof courses",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The cobblestone base courses and brown gable roofing read as the same barn, but the build is a broken hollow shell with large holes through both roof and walls where the concept and mesh show a solid continuous mass."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10824,
+          "output_tokens": 637,
+          "cost_usd": 0.181305
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof across the full ridge\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"long side and gable walls\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"upper wall and roof courses\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The cobblestone base courses and brown gable roofing read as the same barn, but the build is a broken hollow ",
+          "usage": {
+            "input_tokens": 10824,
+            "output_tokens": 637,
+            "cost_usd": 0.181305
+          },
+          "source": "live"
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "schema": "multi-angle-gate/v1",
+    "decided": true,
+    "passed": false,
+    "gapCount": 12,
+    "gapBudget": 2,
+    "gaps": [
+      {
+        "angle": "+x+z",
+        "region": "walls and roof all around",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x+z",
+        "region": "long side wall surface",
+        "attribute": "massing"
+      },
+      {
+        "angle": "+x+z",
+        "region": "roof and wall blocks scattered throughout",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "+x-z",
+        "region": "roof, top of the building",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x-z",
+        "region": "long side walls",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x-z",
+        "region": "wall stonework",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x-z",
+        "region": "long wall and roof plane",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x-z",
+        "region": "roof surface",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x-z",
+        "region": "stone wall coursing",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x+z",
+        "region": "roof across the full ridge",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x+z",
+        "region": "long side and gable walls",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x+z",
+        "region": "upper wall and roof courses",
+        "attribute": "material zoning"
+      }
+    ],
+    "failures": [
+      {
+        "angle": "+x+z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "+x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x+z",
+        "reason": "drifted"
+      }
+    ],
+    "views": [
+      {
+        "angle": "+x+z",
+        "outcome": "drifted: form"
+      },
+      {
+        "angle": "+x-z",
+        "outcome": "drifted: form"
+      },
+      {
+        "angle": "-x-z",
+        "outcome": "drifted: massing"
+      },
+      {
+        "angle": "-x+z",
+        "outcome": "drifted: massing"
+      }
+    ]
+  },
+  "kitPresence": {
+    "schema": "kit-presence/v1",
+    "passed": true,
+    "checks": [
+      {
+        "feature": "panel:band0",
+        "block": "cobblestone",
+        "shipped": "cobblestone",
+        "sites": 4866,
+        "missing": 0,
+        "tolerated": {
+          "residue": 19
+        },
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "openings:lintel-sill",
+        "placed": 0,
+        "gating": false,
+        "passed": null
+      }
+    ],
+    "gaps": [],
+    "skips": [
+      {
+        "feature": "frame",
+        "reason": "all-flagged"
+      },
+      {
+        "feature": "course",
+        "reason": "all-flagged"
+      },
+      {
+        "feature": "openings:infill",
+        "reason": "kit names no treatment for this slot"
+      },
+      {
+        "feature": "openings:shutters",
+        "reason": "kit names no treatment for this slot"
+      },
+      {
+        "feature": "openings:door",
+        "reason": "no door-kind aperture declared by the concept (T-099 D7 — detector gap, not absence)"
+      }
+    ],
+    "grammar": {
+      "bindings": {
+        "frame": null,
+        "panels": {
+          "band0": "cobblestone"
+        },
+        "course": null,
+        "openingTreatments": [
+          "oak_door"
+        ],
+        "skipped": [
+          {
+            "feature": "frame",
+            "reason": "all-flagged"
+          },
+          {
+            "feature": "course",
+            "reason": "all-flagged"
+          }
+        ]
+      },
+      "shipped": {
+        "frame": null,
+        "panels": {
+          "band0": "cobblestone"
+        },
+        "course": null
+      },
+      "frame": {
+        "counts": {
+          "wall": 4655,
+          "cornerPost": 26,
+          "roofline": 128,
+          "floorLine": 0
+        },
+        "painted": 0,
+        "adopted": 0,
+        "respected": 0,
+        "skippedIsolated": 0,
+        "alreadyFrame": 0
+      },
+      "fill": {
+        "placements": 25,
+        "byZone": {
+          "band0": {
+            "surface": 4866,
+            "filled": 19,
+            "kept": 4847
+          },
+          "roof": {
+            "surface": 1126,
+            "filled": 6,
+            "kept": 1120
+          }
+        }
+      }
+    },
+    "dressing": {
+      "stats": {
+        "openings": 10,
+        "fullyDressed": 0,
+        "placements": 0,
+        "conflicts": 30,
+        "alreadyDressed": 0
+      },
+      "perOpening": [
+        {
+          "dir": "+z",
+          "kind": "window",
+          "bbox": {
+            "u0": 31,
+            "v0": 7,
+            "u1": 32,
+            "v1": 9
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 4,
+            "sill": 4
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "+z",
+          "kind": "window",
+          "bbox": {
+            "u0": 40,
+            "v0": 7,
+            "u1": 42,
+            "v1": 9
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 5,
+            "sill": 5
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "+z",
+          "kind": "window",
+          "bbox": {
+            "u0": 32,
+            "v0": 13,
+            "u1": 32,
+            "v1": 13
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 3,
+            "sill": 3
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "+z",
+          "kind": "window",
+          "bbox": {
+            "u0": 40,
+            "v0": 13,
+            "u1": 40,
+            "v1": 13
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 3,
+            "sill": 3
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "+z",
+          "kind": "window",
+          "bbox": {
+            "u0": 40,
+            "v0": 15,
+            "u1": 40,
+            "v1": 15
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 3,
+            "sill": 3
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "-z",
+          "kind": "window",
+          "bbox": {
+            "u0": 5,
+            "v0": 7,
+            "u1": 7,
+            "v1": 9
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 5,
+            "sill": 5
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "-z",
+          "kind": "window",
+          "bbox": {
+            "u0": 15,
+            "v0": 7,
+            "u1": 16,
+            "v1": 9
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 4,
+            "sill": 4
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "-z",
+          "kind": "window",
+          "bbox": {
+            "u0": 7,
+            "v0": 13,
+            "u1": 7,
+            "v1": 13
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 3,
+            "sill": 3
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "-z",
+          "kind": "window",
+          "bbox": {
+            "u0": 15,
+            "v0": 13,
+            "u1": 15,
+            "v1": 13
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 3,
+            "sill": 3
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "-z",
+          "kind": "window",
+          "bbox": {
+            "u0": 7,
+            "v0": 15,
+            "u1": 7,
+            "v1": 15
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 3,
+            "sill": 3
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "overall": {
+    "schema": "kit-aware-gate/v1",
+    "decided": true,
+    "passed": false,
+    "components": {
+      "resemblance": {
+        "decided": true,
+        "passed": false
+      },
+      "kitPresence": {
+        "ran": true,
+        "passed": true,
+        "gaps": []
+      }
+    }
+  },
+  "sheet": "pr/assets/frames/multi-angle-barn-generated.png",
+  "labeled": true
+}
