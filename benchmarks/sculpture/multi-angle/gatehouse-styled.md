@@ -8,13 +8,13 @@ Artifact: `benchmarks/sculpture/styled/gatehouse/artifact.json` (sha256 `e3b8944
 
 | view | azimuth | rendered | T-088 coverage | judge verdict |
 |---|---|---|---|---|
-| +x+z | 45° | yes | pass | same object<br>minor form @ roof ridge and corner caps<br>minor material zoning @ right-hand wall brown timber strip<br>minor form @ upper roof slope edges |
-| +x-z | 135° | yes | pass | drifted<br>major form @ roof ridge and eaves<br>major massing @ overall building silhouette<br>minor material zoning @ stone walls and timber accents |
-| -x-z | 225° | yes | pass | drifted<br>major massing @ overall building outline and roofline<br>major form @ front facade — colonnade/pillars instead of a single arched doorway<br>minor form @ roof ridge and gable |
-| -x+z | 315° | yes | pass | drifted<br>major form @ roofline and ridge<br>major massing @ left side / upper corner, vertical posts protruding above the roof<br>minor palette @ overall stone walls and dark roof |
+| +x+z | 45° | yes | pass | drifted<br>major form @ roof — ridge line and slopes<br>major massing @ upper roof edges and chimney-like protrusions<br>minor form @ front doorway / arch opening |
+| +x-z | 135° | yes | pass | drifted<br>major form @ roof and upper edges<br>minor massing @ overall silhouette / wall tops<br>minor palette @ stone walls and dark roof / wood trim |
+| -x-z | 225° | yes | pass | drifted<br>major form @ roof / upper massing<br>major massing @ overall silhouette vs mesh<br>minor form @ front facade and doorway |
+| -x+z | 315° | yes | pass | same object<br>minor form @ roof ridge, upper-left<br>minor form @ corner pilasters / wall surface |
 
 ## Resemblance aggregate (T-093)
-**FAIL** — gaps 12/2; failures: +x-z:drifted, -x-z:drifted, -x+z:drifted
+**FAIL** — gaps 11/2; failures: +x+z:drifted, +x-z:drifted, -x-z:drifted
 
 ## Kit presence (T-100)
 **PASS** — every kit entry present at its grammar sites

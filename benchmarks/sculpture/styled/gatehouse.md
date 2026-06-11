@@ -17,16 +17,16 @@ Settle (the T-100 seam): grammar re-run to its own fixpoint in 0 iteration(s) (a
 
 ## Kit-aware multi-angle gate (T-100 ∘ T-093) — **FAIL**
 
-Resemblance: FAIL (gaps 12/2) · Kit presence: PASS (zero gaps)
+Resemblance: FAIL (gaps 11/2) · Kit presence: PASS (zero gaps)
 
 ![sheet](../../../pr/assets/frames/multi-angle-gatehouse-styled.png)
 
 | view | azimuth | coverage | verdict | gaps |
 |---|---|---|---|---|
-| +x+z | 45° | pass | same object | minor form@roof ridge and corner caps; minor material zoning@right-hand wall brown timber strip; minor form@upper roof slope edges |
-| +x-z | 135° | pass | drifted | major form@roof ridge and eaves; major massing@overall building silhouette; minor material zoning@stone walls and timber accents |
-| -x-z | 225° | pass | drifted | major massing@overall building outline and roofline; major form@front facade — colonnade/pillars instead of a single arched doorway; minor form@roof ridge and gable |
-| -x+z | 315° | pass | drifted | major form@roofline and ridge; major massing@left side / upper corner, vertical posts protruding above the roof; minor palette@overall stone walls and dark roof |
+| +x+z | 45° | pass | drifted | major form@roof — ridge line and slopes; major massing@upper roof edges and chimney-like protrusions; minor form@front doorway / arch opening |
+| +x-z | 135° | pass | drifted | major form@roof and upper edges; minor massing@overall silhouette / wall tops; minor palette@stone walls and dark roof / wood trim |
+| -x-z | 225° | pass | drifted | major form@roof / upper massing; major massing@overall silhouette vs mesh; minor form@front facade and doorway |
+| -x+z | 315° | pass | same object | minor form@roof ridge, upper-left; minor form@corner pilasters / wall surface |
 
 Gate record: `benchmarks/sculpture/multi-angle/gatehouse-styled.json` (the sheet is the verdict artifact).
 

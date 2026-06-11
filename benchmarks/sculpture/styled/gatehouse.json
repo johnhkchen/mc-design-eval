@@ -1262,19 +1262,19 @@
     "resemblance": {
       "decided": true,
       "passed": false,
-      "gapCount": 12,
+      "gapCount": 11,
       "gapBudget": 2,
       "failures": [
+        {
+          "angle": "+x+z",
+          "reason": "drifted"
+        },
         {
           "angle": "+x-z",
           "reason": "drifted"
         },
         {
           "angle": "-x-z",
-          "reason": "drifted"
-        },
-        {
-          "angle": "-x+z",
           "reason": "drifted"
         }
       ],
@@ -1297,20 +1297,20 @@
         "angle": "+x+z",
         "azimuthDeg": 45,
         "coverage": true,
-        "verdict": "same object",
+        "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof ridge and corner caps",
+            "region": "roof — ridge line and slopes",
             "attribute": "form",
-            "severity": "minor"
+            "severity": "major"
           },
           {
-            "region": "right-hand wall brown timber strip",
-            "attribute": "material zoning",
-            "severity": "minor"
+            "region": "upper roof edges and chimney-like protrusions",
+            "attribute": "massing",
+            "severity": "major"
           },
           {
-            "region": "upper roof slope edges",
+            "region": "front doorway / arch opening",
             "attribute": "form",
             "severity": "minor"
           }
@@ -1323,18 +1323,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof ridge and eaves",
+            "region": "roof and upper edges",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "overall building silhouette",
+            "region": "overall silhouette / wall tops",
             "attribute": "massing",
-            "severity": "major"
+            "severity": "minor"
           },
           {
-            "region": "stone walls and timber accents",
-            "attribute": "material zoning",
+            "region": "stone walls and dark roof / wood trim",
+            "attribute": "palette",
             "severity": "minor"
           }
         ]
@@ -1346,17 +1346,17 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "overall building outline and roofline",
-            "attribute": "massing",
-            "severity": "major"
-          },
-          {
-            "region": "front facade — colonnade/pillars instead of a single arched doorway",
+            "region": "roof / upper massing",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "roof ridge and gable",
+            "region": "overall silhouette vs mesh",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "front facade and doorway",
             "attribute": "form",
             "severity": "minor"
           }
@@ -1366,21 +1366,16 @@
         "angle": "-x+z",
         "azimuthDeg": 315,
         "coverage": true,
-        "verdict": "drifted",
+        "verdict": "same object",
         "gaps": [
           {
-            "region": "roofline and ridge",
+            "region": "roof ridge, upper-left",
             "attribute": "form",
-            "severity": "major"
+            "severity": "minor"
           },
           {
-            "region": "left side / upper corner, vertical posts protruding above the roof",
-            "attribute": "massing",
-            "severity": "major"
-          },
-          {
-            "region": "overall stone walls and dark roof",
-            "attribute": "palette",
+            "region": "corner pilasters / wall surface",
+            "attribute": "form",
             "severity": "minor"
           }
         ]

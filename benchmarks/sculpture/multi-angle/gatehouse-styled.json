@@ -96,32 +96,32 @@
       },
       "verdict": {
         "schema": "multi-angle-verdict/v1",
-        "verdict": "same object",
+        "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof ridge and corner caps",
+            "region": "roof — ridge line and slopes",
             "attribute": "form",
-            "severity": "minor"
+            "severity": "major"
           },
           {
-            "region": "right-hand wall brown timber strip",
-            "attribute": "material zoning",
-            "severity": "minor"
+            "region": "upper roof edges and chimney-like protrusions",
+            "attribute": "massing",
+            "severity": "major"
           },
           {
-            "region": "upper roof slope edges",
+            "region": "front doorway / arch opening",
             "attribute": "form",
             "severity": "minor"
           }
         ],
-        "rationale": "The grey stone walls, dark stair-stepped gable roof, and overall gatehouse massing read true to the concept and mesh from this angle, with only cosmetic roughness in the roof edges and a small intrusive brown timber patch on the side wall."
+        "rationale": "Recognizably the same gabled stone cottage with a dark plank roof, but the build's roof is broken up by jagged protruding spikes and an uneven ridge that the clean concept and mesh silhouettes do not show."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10888,
-          "output_tokens": 942,
-          "cost_usd": 0.18170999999999998
+          "input_tokens": 10285,
+          "output_tokens": 200,
+          "cost_usd": 0.154425
         }
       }
     },
@@ -173,29 +173,29 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof ridge and eaves",
+            "region": "roof and upper edges",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "overall building silhouette",
+            "region": "overall silhouette / wall tops",
             "attribute": "massing",
-            "severity": "major"
+            "severity": "minor"
           },
           {
-            "region": "stone walls and timber accents",
-            "attribute": "material zoning",
+            "region": "stone walls and dark roof / wood trim",
+            "attribute": "palette",
             "severity": "minor"
           }
         ],
-        "rationale": "Palette and material families (dark roof, grey stone, brown timber) still read, but the build's roofline and overall mass are jagged and sprawling compared to the clean compact gable of the mesh silhouette, so the form has drifted from the reference."
+        "rationale": "The stone-wall, dark-roof, brown-wood palette and gabled massing still read as the same cottage, but the roof and upper edges are broken up by ragged protruding blocks that the clean mesh silhouette and concept gable do not show, a major form defect from this angle."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10888,
-          "output_tokens": 927,
-          "cost_usd": 0.181335
+          "input_tokens": 10285,
+          "output_tokens": 938,
+          "cost_usd": 0.172875
         }
       }
     },
@@ -247,29 +247,29 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "overall building outline and roofline",
+            "region": "roof / upper massing",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "overall silhouette vs mesh",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "front facade — colonnade/pillars instead of a single arched doorway",
-            "attribute": "form",
-            "severity": "major"
-          },
-          {
-            "region": "roof ridge and gable",
+            "region": "front facade and doorway",
             "attribute": "form",
             "severity": "minor"
           }
         ],
-        "rationale": "Grey-stone walls and dark roof palette read true, but the build sprawls into a busy multi-roofed colonnaded mass rather than the compact single-gable house shown in the concept and mesh silhouette."
+        "rationale": "The build reads as the same stone gatehouse with a dark plank roof and arched front opening, but the roof has collapsed into a cluttered, irregular ridgeline rather than the clean steep gable the concept and mesh show, breaking the same-object read from this angle."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10888,
-          "output_tokens": 627,
-          "cost_usd": 0.173835
+          "input_tokens": 10285,
+          "output_tokens": 198,
+          "cost_usd": 0.154375
         }
       }
     },
@@ -318,32 +318,27 @@
       },
       "verdict": {
         "schema": "multi-angle-verdict/v1",
-        "verdict": "drifted",
+        "verdict": "same object",
         "gaps": [
           {
-            "region": "roofline and ridge",
+            "region": "roof ridge, upper-left",
             "attribute": "form",
-            "severity": "major"
+            "severity": "minor"
           },
           {
-            "region": "left side / upper corner, vertical posts protruding above the roof",
-            "attribute": "massing",
-            "severity": "major"
-          },
-          {
-            "region": "overall stone walls and dark roof",
-            "attribute": "palette",
+            "region": "corner pilasters / wall surface",
+            "attribute": "form",
             "severity": "minor"
           }
         ],
-        "rationale": "The grey-stone-and-dark-roof palette and gabled gatehouse identity survive, but the build's jagged, broken roofline and spurious vertical posts jutting above the eaves depart sharply from the clean single gable shown in the mesh silhouette and concept."
+        "rationale": "The build reads as the same gabled stone cottage with dark pitched roof, stone walls, and arched base opening matching the concept and mesh silhouette, with only minor roof-ridge protrusions and slightly heavier pilaster relief as cosmetic deviations."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10888,
-          "output_tokens": 901,
-          "cost_usd": 0.18068499999999998
+          "input_tokens": 10285,
+          "output_tokens": 836,
+          "cost_usd": 0.170325
         }
       }
     }
@@ -352,88 +347,83 @@
     "schema": "multi-angle-gate/v1",
     "decided": true,
     "passed": false,
-    "gapCount": 12,
+    "gapCount": 11,
     "gapBudget": 2,
     "gaps": [
       {
         "angle": "+x+z",
-        "region": "roof ridge and corner caps",
+        "region": "roof — ridge line and slopes",
         "attribute": "form"
       },
       {
         "angle": "+x+z",
-        "region": "right-hand wall brown timber strip",
-        "attribute": "material zoning"
+        "region": "upper roof edges and chimney-like protrusions",
+        "attribute": "massing"
       },
       {
         "angle": "+x+z",
-        "region": "upper roof slope edges",
+        "region": "front doorway / arch opening",
         "attribute": "form"
       },
       {
         "angle": "+x-z",
-        "region": "roof ridge and eaves",
+        "region": "roof and upper edges",
         "attribute": "form"
       },
       {
         "angle": "+x-z",
-        "region": "overall building silhouette",
+        "region": "overall silhouette / wall tops",
         "attribute": "massing"
       },
       {
         "angle": "+x-z",
-        "region": "stone walls and timber accents",
-        "attribute": "material zoning"
-      },
-      {
-        "angle": "-x-z",
-        "region": "overall building outline and roofline",
-        "attribute": "massing"
-      },
-      {
-        "angle": "-x-z",
-        "region": "front facade — colonnade/pillars instead of a single arched doorway",
-        "attribute": "form"
-      },
-      {
-        "angle": "-x-z",
-        "region": "roof ridge and gable",
-        "attribute": "form"
-      },
-      {
-        "angle": "-x+z",
-        "region": "roofline and ridge",
-        "attribute": "form"
-      },
-      {
-        "angle": "-x+z",
-        "region": "left side / upper corner, vertical posts protruding above the roof",
-        "attribute": "massing"
-      },
-      {
-        "angle": "-x+z",
-        "region": "overall stone walls and dark roof",
+        "region": "stone walls and dark roof / wood trim",
         "attribute": "palette"
+      },
+      {
+        "angle": "-x-z",
+        "region": "roof / upper massing",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x-z",
+        "region": "overall silhouette vs mesh",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x-z",
+        "region": "front facade and doorway",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x+z",
+        "region": "roof ridge, upper-left",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x+z",
+        "region": "corner pilasters / wall surface",
+        "attribute": "form"
       }
     ],
     "failures": [
       {
+        "angle": "+x+z",
+        "reason": "drifted"
+      },
+      {
         "angle": "+x-z",
         "reason": "drifted"
       },
       {
         "angle": "-x-z",
-        "reason": "drifted"
-      },
-      {
-        "angle": "-x+z",
         "reason": "drifted"
       }
     ],
     "views": [
       {
         "angle": "+x+z",
-        "outcome": "same object (3 minor)"
+        "outcome": "drifted: form"
       },
       {
         "angle": "+x-z",
@@ -441,11 +431,11 @@
       },
       {
         "angle": "-x-z",
-        "outcome": "drifted: massing"
+        "outcome": "drifted: form"
       },
       {
         "angle": "-x+z",
-        "outcome": "drifted: form"
+        "outcome": "same object (2 minor)"
       }
     ]
   },
