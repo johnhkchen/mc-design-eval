@@ -28,15 +28,11 @@
       "resemblance": {
         "decided": true,
         "passed": false,
-        "gapCount": 11,
+        "gapCount": 10,
         "gapBudget": 2,
         "failures": [
           {
             "angle": "+x+z",
-            "reason": "drifted"
-          },
-          {
-            "angle": "-x-z",
             "reason": "drifted"
           },
           {
@@ -64,18 +60,18 @@
           "verdict": "drifted",
           "gaps": [
             {
-              "region": "upper storey walls between stone base and roof",
-              "attribute": "material zoning",
+              "region": "roof and upper storey",
+              "attribute": "form",
               "severity": "major"
             },
             {
-              "region": "roof eaves and ridge",
-              "attribute": "form",
+              "region": "overall silhouette vs. clean gabled mesh",
+              "attribute": "massing",
               "severity": "minor"
             },
             {
-              "region": "overall wall vs roof balance",
-              "attribute": "massing",
+              "region": "stone base relative to cream wall band",
+              "attribute": "material zoning",
               "severity": "minor"
             }
           ]
@@ -87,13 +83,13 @@
           "verdict": "same object",
           "gaps": [
             {
-              "region": "roof ridge / chimney",
-              "attribute": "massing",
+              "region": "roof ridge and upper massing",
+              "attribute": "form",
               "severity": "minor"
             },
             {
-              "region": "upper timber-framed storey",
-              "attribute": "material zoning",
+              "region": "chimney on the roof",
+              "attribute": "massing",
               "severity": "minor"
             }
           ]
@@ -102,21 +98,16 @@
           "angle": "-x-z",
           "azimuthDeg": 225,
           "coverage": true,
-          "verdict": "drifted",
+          "verdict": "same object",
           "gaps": [
             {
-              "region": "roof",
+              "region": "roof ridge and eaves",
               "attribute": "form",
-              "severity": "major"
-            },
-            {
-              "region": "upper-storey massing",
-              "attribute": "massing",
               "severity": "minor"
             },
             {
-              "region": "walls and base palette",
-              "attribute": "palette",
+              "region": "chimney on roof",
+              "attribute": "massing",
               "severity": "minor"
             }
           ]
@@ -128,17 +119,17 @@
           "verdict": "drifted",
           "gaps": [
             {
-              "region": "roof across the whole top",
+              "region": "roof and upper massing",
               "attribute": "form",
               "severity": "major"
             },
             {
-              "region": "long side and rear walls",
+              "region": "overall silhouette versus mesh",
               "attribute": "massing",
-              "severity": "major"
+              "severity": "minor"
             },
             {
-              "region": "lower stone storey",
+              "region": "stone base at lower right",
               "attribute": "material zoning",
               "severity": "minor"
             }
@@ -160,9 +151,9 @@
       "perDelta": [
         {
           "name": "roof-program",
-          "changed": 1483,
-          "added": 296,
-          "removed": 255
+          "changed": 1530,
+          "added": 413,
+          "removed": 70
         },
         {
           "name": "shaped-heads",
@@ -171,7 +162,7 @@
           "removed": 0
         }
       ],
-      "cells": 2034
+      "cells": 2013
     },
     "findings": [],
     "seamSources": {
@@ -182,8 +173,8 @@
       "frameLines": "component"
     },
     "conformance": {
-      "columns": 512,
-      "conforming": 512,
+      "columns": 507,
+      "conforming": 507,
       "deviations": []
     }
   },
@@ -195,8 +186,8 @@
     "frameLines": "component"
   },
   "conformance": {
-    "columns": 512,
-    "conforming": 512,
+    "columns": 507,
+    "conforming": 507,
     "deviations": []
   },
   "wallField": {
@@ -226,25 +217,25 @@
     },
     "band1": {
       "field": {
-        "total": 336,
+        "total": 340,
         "dominant": "smooth_sandstone",
-        "dominantFraction": 0.524,
+        "dominantFraction": 0.512,
         "byBlock": {
-          "cobblestone": 33,
+          "cobblestone": 34,
           "dark_oak_log": 71,
-          "smooth_sandstone": 176,
-          "spruce_planks": 56
+          "smooth_sandstone": 174,
+          "spruce_planks": 61
         }
       },
       "offslab": {
-        "total": 1059,
+        "total": 1112,
         "dominant": null,
         "dominantFraction": null,
         "byBlock": {
-          "smooth_sandstone": 630,
-          "dark_oak_log": 166,
-          "cobblestone": 100,
-          "spruce_planks": 163
+          "smooth_sandstone": 628,
+          "dark_oak_log": 170,
+          "cobblestone": 103,
+          "spruce_planks": 211
         }
       }
     }
@@ -344,10 +335,10 @@
     "milestoneSha256": {
       "base": null,
       "shell": "33b1ca02f2589f49dd8c678e2416bf81196be41bf91451c4c9e351baf24c0afd",
-      "reconstructed": "477399990e7c8b68e8980349f1627b240bd36fbfc1cd402d45ccd65f528046d6",
-      "skinFinal": "9bf220364ece6e1b8806b35241441d278fff550eb2614c13c9830473a197996e",
-      "grammarFinal": "2ddf360850512d8cc8b50d2ced4a81194b501208305a20eb2df10aa9e2f0146b",
-      "styled": "33ffd0c825a04eeb481740a22268386249a95581fe0af712d20cbb9232d4a48f"
+      "reconstructed": "df4f749f27bc47ce784aedf41e8587ed9f4aea7ed99da1ba7043256cd7a16283",
+      "skinFinal": "ecca90d2be6a1c4e22e91f2a06db716347d1210052be8adc422b5e2f6e92c2cc",
+      "grammarFinal": "be6116b6934283b6544da333d96e29dbc3c18faa4547f01968ed806fe6749a37",
+      "styled": "8385a7a357252732b71f856a5aa54ffdb527fc64492a93c42b0e196189cc962b"
     },
     "determinism": "the milestone runner double-runs the deterministic chain and owns the byte-identity proof; this record distills its committed output"
   }
