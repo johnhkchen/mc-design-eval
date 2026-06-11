@@ -4,6 +4,8 @@
 
 mc-design-eval — a measurement instrument for evaluating an LLM's spatial/material *design* capability via constrained, styled Minecraft builds. See `docs/specification.md`. Phase 1 holds the model fixed and compares prompting methods; the first milestone is an end-to-end "see an image" trial.
 
+**The architecture of record is `docs/knowledge/pipeline-philosophy.md`** (ratified 2026-06-11): AI at every stage, each in its native representation — language for world-building (materials are diegetic, not optical), image gen for the target, 3-D gen for form *evidence only* (never substrate, textures never read), VLM recognition for the building program, pure code (brushes) for construction, the workshop loop for model self-revision, and the frozen instrument for measurement. Creation is iterative and free; measurement is frozen and singular. Read it before proposing pipeline changes.
+
 ## Stack (Phase 1)
 
 - **Language:** JavaScript (Node 20+, ESM / `.mjs`). Single toolchain — no Python on the hot path this phase.
