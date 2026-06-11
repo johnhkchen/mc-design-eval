@@ -23,26 +23,11 @@ import { guardedWriteRecord, preflightPins, loadTrackedSet, isTracked, ROTATE_FL
 import { bamlRender, bamlParse } from "../src/baml/bridge.mjs";
 import { loadStylePack } from "../src/pack/style-pack.mjs";
 import { registryDigest } from "../src/pack/brush-catalog.mjs";
+import { packSummary } from "../src/factory/backlog.mjs";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const sha256 = (s) => createHash("sha256").update(s).digest("hex");
 const jsonOf = (x) => JSON.stringify(x, null, 2) + "\n";
-
-/** A neutral one-page digest of a committed style pack — decompose's style_summary input. */
-function packSummary(pack) {
-  const pr = pack.proportions;
-  return [
-    `Style: ${pack.style} — ${pack.provenance.setting}`,
-    "",
-    "Palette (role → block — the diegetic material assignments):",
-    ...pack.palette.map((p) => `- ${p.role} → ${p.block}: ${p.rationale}`),
-    "",
-    `Idioms in use: ${pack.idioms.map((i) => i.name).join(", ")}.`,
-    `Proportions: storey height ${pr.storeyHeight.min}–${pr.storeyHeight.max} blocks; ` +
-      `pitch classes ${JSON.stringify(pr.pitchClasses)}; ` +
-      `opening spacing ${pr.openingRhythm.minSpacing}–${pr.openingRhythm.maxSpacing} cells.`,
-  ].join("\n");
-}
 
 const FIXTURES = {
   vernacular: {
