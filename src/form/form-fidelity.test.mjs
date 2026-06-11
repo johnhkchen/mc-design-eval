@@ -138,6 +138,26 @@ test("B5 bad grid / fit throw", () => {
   assert.throws(() => normalizeSilhouette(sil, { fit: "warp" }), /aspect/);
 });
 
+test("B6 bbox override crops under the GIVEN window, not the mask's own (T-109-01)", () => {
+  // a single fg pixel at (1,1) inside an 8×8 mask; its own bbox would blow it up to fill the
+  // grid — under the full-frame override it stays one cell in the top-left quadrant.
+  const img = imageOf(8, 8, (x, y) => (x === 1 && y === 1 ? WHITE : BLACK));
+  const sil = extractSilhouette(img, CONCEPT_BG);
+  const own = normalizeSilhouette(sil, { grid: 8 });
+  assert.equal(own.fgCount, 64); // own-bbox crop: the pixel IS the bbox → fills the grid
+  const framed = normalizeSilhouette(sil, { grid: 8, bbox: { x0: 0, y0: 0, x1: 8, y1: 8 } });
+  assert.equal(framed.fgCount, 1);
+  assert.equal(framed.data[1 * 8 + 1], 1); // same relative position as in the source frame
+});
+
+test("B7 bbox override identical to the mask's own bbox is byte-identical to no override", () => {
+  const img = imageOf(8, 8, (x, y) => (x >= 3 && x < 5 && y >= 1 && y < 7 ? WHITE : BLACK));
+  const sil = extractSilhouette(img, CONCEPT_BG);
+  const a = normalizeSilhouette(sil, { grid: 12 });
+  const b = normalizeSilhouette(sil, { grid: 12, bbox: sil.bbox });
+  assert.deepEqual([...a.data], [...b.data]);
+});
+
 // --- Group C: iou ----------------------------------------------------------
 
 test("C1 identical masks → 1", () => {

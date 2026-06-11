@@ -347,13 +347,18 @@ export function closeShell(occ, {
  * Tri-soup of the occupancy's EXPOSED faces (2 triangles / 4 vertices per face, unit cubes, float
  * bounds [min, max+1]) — the adapter that lets the SAME rasterizeSilhouette + camera that measures
  * the GLB measure the voxel build. Solid cells only (fixtures are dressing, not silhouette mass).
+ * `opts.cells` (T-109-01) restricts the soup to a SUBSET of solid cells (faces relative to the
+ * subset) while the bounds stay the FULL occupancy's — so a sub-mass rasters under the same
+ * camera framing as the whole build (the silhouette-residual membership test's contract).
  * PURE.
  * @param {import("./occupancy.mjs").Occupancy} occ
+ * @param {{cells?:Set<string>}} [opts]
  * @returns {{positions:Float64Array, indices:Uint32Array, bounds:{min:number[],max:number[]}, triCount:number}}
  */
-export function exposedFaceMesh(occ) {
+export function exposedFaceMesh(occ, { cells = null } = {}) {
   if (!occ.size) throw new Error("exposedFaceMesh: empty occupancy has no silhouette");
-  const solid = solidKeys(occ);
+  let solid = solidKeys(occ);
+  if (cells) solid = new Set([...solid].filter((k) => cells.has(k)));
   const positions = [];
   const indices = [];
   // face corner tables: for each NEIGH6 direction, the 4 cube corners (offsets) of the face it exposes

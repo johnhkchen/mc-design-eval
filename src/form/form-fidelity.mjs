@@ -105,8 +105,12 @@ export function extractSilhouette(img, bgOpts) {
 
 /**
  * Normalize a silhouette mask to a common `G×G` occupancy grid via bbox-crop + resample. Pure.
+ * `opts.bbox` overrides the crop window (default: the mask's own bbox) — T-109-01's
+ * silhouette-residual pass normalizes a sub-mass mask under the FULL build's crop so both sides
+ * share one frame; with no override the behavior is byte-identical to before.
  * @param {{w:number,h:number,data:Uint8Array,bbox:object|null}} mask  an `extractSilhouette` result
- * @param {{grid?:number, fit?:string, coverageThreshold?:number}} [opts]
+ * @param {{grid?:number, fit?:string, coverageThreshold?:number,
+ *          bbox?:{x0:number,y0:number,x1:number,y1:number}|null}} [opts]
  * @returns {{w:number,h:number,data:Uint8Array,fgCount:number}}
  */
 export function normalizeSilhouette(mask, opts = {}) {
@@ -115,7 +119,7 @@ export function normalizeSilhouette(mask, opts = {}) {
   const covThresh = opts.coverageThreshold ?? FORM_DEFAULTS.coverageThreshold;
   if (!Number.isInteger(G) || G < 1) throw new Error(`normalizeSilhouette: grid must be a positive integer, got ${G}`);
   if (fit !== "aspect" && fit !== "stretch") throw new Error(`normalizeSilhouette: fit must be 'aspect'|'stretch', got ${fit}`);
-  const data = resampleInto(mask, G, fit, covThresh);
+  const data = resampleInto(mask, G, fit, covThresh, opts.bbox ?? null);
   let fgCount = 0;
   for (let i = 0; i < data.length; i++) if (data[i]) fgCount++;
   return { w: G, h: G, data, fgCount };
@@ -129,9 +133,10 @@ export function normalizeSilhouette(mask, opts = {}) {
  * proportion preserved); `fit:'stretch'` scales each axis independently to fill G².
  * @returns {Uint8Array}  length G·G
  */
-function resampleInto(mask, G, fit, covThresh) {
+function resampleInto(mask, G, fit, covThresh, bboxOverride = null) {
   const out = new Uint8Array(G * G);
-  const { bbox, w: mw, data } = mask;
+  const { w: mw, data } = mask;
+  const bbox = bboxOverride ?? mask.bbox;
   if (!bbox) return out;
   const bw = bbox.x1 - bbox.x0;
   const bh = bbox.y1 - bbox.y0;

@@ -193,6 +193,27 @@ test("exposedFaceMesh: interior faces are culled (2×1×1 bar shares one face pa
   assert.equal(m.triCount, 20); // 12 + 12 − 2·2 shared
 });
 
+test("exposedFaceMesh: cells subset keeps the FULL bounds and faces relative to the subset (T-109-01)", () => {
+  const occ = occupancyFromCells([
+    { pos: [0, 0, 0], block: "stone" }, { pos: [1, 0, 0], block: "stone" },
+    { pos: [5, 5, 5], block: "stone" },
+  ]);
+  const m = exposedFaceMesh(occ, { cells: new Set(["5,5,5"]) });
+  assert.equal(m.triCount, 12); // the lone subset cube exposes all 6 faces
+  assert.deepEqual(m.bounds, { min: [0, 0, 0], max: [6, 6, 6] }); // full-occupancy framing
+  // a single bar cell in the subset exposes the face its bar buddy used to cover
+  const half = exposedFaceMesh(occ, { cells: new Set(["0,0,0"]) });
+  assert.equal(half.triCount, 12);
+});
+
+test("exposedFaceMesh: no subset option is byte-identical to the legacy path", () => {
+  const occ = occupancyFromCells(boxCells(0, 2, 0, 2, 0, 2));
+  const a = exposedFaceMesh(occ);
+  const b = exposedFaceMesh(occ, {});
+  assert.deepEqual([...a.positions], [...b.positions]);
+  assert.deepEqual([...a.indices], [...b.indices]);
+});
+
 test("silhouetteIoUs ≈ 1 against a same-shape reference at a different scale (framing cancels)", () => {
   const small = occupancyFromCells(boxCells(0, 3, 0, 3, 0, 3));
   const big = occupancyFromCells(boxCells(0, 7, 0, 7, 0, 7));
