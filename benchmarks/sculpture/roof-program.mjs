@@ -6,6 +6,11 @@
 // roof-generate.mjs — stair courses via the proven T-097 state path, slab half-steps, solid
 // wedge), and swap it under the T-102 cage (src/view/roof-swap.mjs — per-azimuth silhouette IoU vs
 // the GLB on a mass view, closure no-regress, chimney byte-protected + re-seated, auto-rollback).
+// T-108-01 (E-28) extends the program past the slopes: gable ENDS are fitted against the GLB end
+// faces (src/form/roof-end-fit.mjs — as-built wall anchor + GLB differentials, fit error
+// recorded), the footprint trims at the fitted verge tip, and the end-overhang strip generates as
+// a SHEET course (open underside) — end-fitted rungs lead the swap ladder, the E-27 rungs remain
+// the honest tail.
 //
 // THE SEAM INVARIANT: this file is impure wiring only (file I/O, GLB load, the minecraft-data
 // vocabulary, best-effort GL renders, the durable record). DETERMINISM (E-24 Rule 2): the core
@@ -43,7 +48,10 @@ import { fileURLToPath } from "node:url";
 import { artifactOccupancy } from "../../src/view/occupancy.mjs";
 import { rebuildArtifact, openingRegions } from "../../src/view/shell-integrity.mjs";
 import { REGULARIZE_DEFAULTS, protrudingStackRegion } from "../../src/view/shell-regularize.mjs";
-import { ROOF_FIT_DEFAULTS, gablesFromRecord } from "../../src/form/roof-fit.mjs";
+import { ROOF_FIT_DEFAULTS, gablesFromRecord, gableEndsVariant } from "../../src/form/roof-fit.mjs";
+import { END_FIT_DEFAULTS, fitGableEnds } from "../../src/form/roof-end-fit.mjs";
+import { aabbAlignment } from "../../src/form/component-glb-fit.mjs";
+import { parseGlbMesh } from "../../src/form/glb-mesh.mjs";
 import { componentGableGroups } from "../../src/form/component-roof.mjs";
 import { roofFamily } from "../../src/view/roof-generate.mjs";
 import { swapRoof, chimneyColumns } from "../../src/view/roof-swap.mjs";
@@ -61,8 +69,11 @@ const OUT_DIR = join(HERE, "roof");
 const FRAMES_DIR = join(ROOT, "pr/assets/frames");
 
 const OBLIQUE = "-x-z"; // azimuth 225° — the durable-skin witness angle (before/after parity)
-// the azimuths the resemblance gate FAILED on (`form @ roof`) — the AC's evidence views
-const EVIDENCE_ANGLES = ["+x-z", "-x-z", "-x+z"]; // 135° · 225° · 315°
+// the azimuths the resemblance gate FAILED on (`form @ roof`, plus the T-108 gable-end majors at 45°)
+const EVIDENCE_ANGLES = ["+x+z", "+x-z", "-x-z", "-x+z"]; // 45° · 135° · 225° · 315°
+const ANGLE_DEG = { "+x+z": 45, "+x-z": 135, "-x-z": 225, "-x+z": 315 };
+// the T-108 AC's named gable-end views — before/after frame pairs for the epic sheet
+const END_FRAME_ANGLES = ["+x+z", "-x+z"];
 
 const LENS_NOTE = "stairs-rendered (T-107-01, supersedes the T-097 stairs-invisible pin): the " +
   "lens defect was getModelVariants' substring air-check matching every *_stairs name; fixed by " +
@@ -144,9 +155,31 @@ async function runRoof(def) {
   const regions = openingRegions(occ);
 
   // the GLB reference silhouettes at the 4 gate azimuths — the cage's 3-D target
-  const mesh = loadMeshFromGlb(await readFile(join(HERE, def.glb)));
+  const glbBytes = await readFile(join(HERE, def.glb));
+  const mesh = loadMeshFromGlb(glbBytes);
   const refSils = {};
   for (const a of MULTI_ANGLE_GATE.azimuths) refSils[a] = rasterizeSilhouette(mesh, { view: resolveAngle(a) });
+
+  // T-108-01 (E-28): gable ENDS fitted against the GLB end faces — expanded triangles under the
+  // decomposition's own aabb alignment, anchored to the as-built occupancy (differentials only;
+  // absolute aabb offsets are unreliable). Fitted once on the whole record (the fit is per gable),
+  // split per component group below; the hip-suppressed variant is fitted separately because a
+  // demanded hip end is a slope, not a face — the cage arbitrates between the rungs.
+  const meshTris = parseGlbMesh(glbBytes);
+  const alignment = aabbAlignment(meshTris.bounds, occ.bounds);
+  const endFitPlain = fitGableEnds(fit.gables, occ, meshTris, alignment);
+  const endFitSupp = fitGableEnds(gableEndsVariant(fit.gables), occ, meshTris, alignment);
+  const endFindings = [
+    ...endFitPlain.findings,
+    // the suppressed pass repeats the plain findings for unchanged gables — keep only what hip
+    // suppression newly exposed
+    ...endFitSupp.findings.filter((f) => {
+      const g = endFitSupp.gables.find((x) => f.where?.startsWith(`${x.id}:`));
+      return g?.hip?.suppressed;
+    }).map((f) => ({ ...f, variant: "gable-ends" })),
+  ];
+  const endsById = new Map(endFitPlain.gables.map((g) => [g.id, g]));
+  const suppById = new Map(endFitSupp.gables.map((g) => [g.id, g]));
 
   // T-110-01 (E-28): the swap ladder runs PER COMPONENT — a building can carry structurally
   // distinct roofs (the church: tower cap + nave pitch) that one whole-mass invocation judges
@@ -158,14 +191,21 @@ async function runRoof(def) {
   let occCur = occ;
   const components = [];
   for (const grp of grouping.groups) {
-    const swap = swapRoof(occCur, { gables: grp.gables, family, refSils, regions, protect, chimney });
+    const endFit = {
+      gables: grp.gables.map((g) => endsById.get(g.id) ?? g),
+      suppressed: grp.gables.map((g) => suppById.get(g.id) ?? gableEndsVariant([g])[0]),
+    };
+    const swap = swapRoof(occCur, { gables: grp.gables, endFit, family, refSils, regions, protect, chimney });
     if (swap.accepted) occCur = swap.occ;
     components.push({ massId: grp.massId, role: grp.role, gableIds: grp.gableIds, swap });
   }
   const swap = composeComponentSwaps(components, grouping.findings, occCur);
   const artifact = swap.accepted ? rebuildArtifact(occCur, raw) : null;
   if (artifact) assertArtifact(artifact);
-  return { raw, occ, record, shellSha, shellPath, componentPath, fit, family, swap, components, chimney, stack, artifact };
+  const endFit = { params: { ...END_FIT_DEFAULTS }, findings: endFindings,
+    gables: endFitPlain.gables.filter((g) => g.ends).map((g) => ({ id: g.id, ends: g.ends })),
+    suppressed: endFitSupp.gables.filter((g) => g.hip?.suppressed && g.ends).map((g) => ({ id: g.id, ends: g.ends })) };
+  return { raw, occ, record, shellSha, shellPath, componentPath, fit, endFit, family, swap, components, chimney, stack, artifact };
 }
 
 /** Compose per-component swap outcomes into the record's top-level summary. For a single-mass
@@ -201,6 +241,9 @@ function composeComponentSwaps(components, groupFindings, occFinal) {
         slabs: sum((s) => s.generated?.counts?.slabs),
       },
       gables: accepted.flatMap((c) => c.swap.generated?.gables ?? []),
+      // T-108-01: fitted ends over the ACCEPTED components only (a rolled-back trim never counts)
+      fittedEnds: accepted.reduce((n, c) => n + (c.swap.generated?.fittedEnds ?? 0), 0),
+      endCoords: accepted.flatMap((c) => c.swap.generated?.endCoords ?? []),
     },
     reseat: { added: components.flatMap((c) => c.swap.reseat?.added ?? []) },
     fitError: components.flatMap((c) => c.swap.fitError ?? []),
@@ -217,9 +260,12 @@ function assertAcceptance(def, r) {
   const gables = r.swap.generated.gables.length;
   // ≈0 (the AC): a clean roof's LINE FEATURES expose 4 faces at their END cells by geometry —
   // the ridge line (2 ends) and each side's eave line (2 ends, when overhanging) — never the
-  // sampled blob's spike field. Budget = (2 ridge + 2×2 eave) per generated gable, a geometric
-  // formula shared across subjects, not a tuned constant.
-  const budget = 6 * gables;
+  // sampled blob's spike field. Budget = (2 ridge + 2×2 eave) per generated gable, plus 2 per
+  // FITTED END (T-108-01: a verge sheet course terminates in two rake-corner cells with an open
+  // underside and outward face — 4 exposed faces by construction, the same class as ridge ends).
+  // A geometric formula shared across subjects, not a tuned constant.
+  const fittedEnds = r.swap.generated.fittedEnds ?? 0;
+  const budget = 6 * gables + 2 * fittedEnds;
   const { before, after } = r.swap.census;
   if (after.spikes > budget) {
     throw new Error(`${def.key} DECLARED TARGET MISSED: roof-band protrusions after=${after.spikes} ` +
@@ -273,6 +319,11 @@ async function main() {
         g.sides.map((s) => `${s.planeId} ${s.eaveDir} pitch ${s.pitch} (${s.pitchSource}) eaveY ${s.eaveY} overhang ${s.overhang ?? "—"}`).join(" · "));
     }
     console.error(`[${def.key}] family: field ${r1.family.field ?? "—"}, stairs ${r1.family.stairs ?? "—"}, slab ${r1.family.slab ?? "—"}`);
+    for (const g of [...r1.endFit.gables, ...r1.endFit.suppressed.map((s) => ({ ...s, supp: true }))]) {
+      const e = (end) => end ? `face ${end.faceCoord} tip ${end.coord} (overhang ${end.overhang}, rmse ${end.glb.faceRmse})` : "unfitted";
+      console.error(`[${def.key}] ends ${g.id}${g.supp ? " (gable-ends)" : ""}: lo ${e(g.ends.lo)} · hi ${e(g.ends.hi)}`);
+    }
+    for (const f of r1.endFit.findings) console.error(`[${def.key}] end-fit ${f.code} @ ${f.where}: ${f.detail}`);
     for (const c of r1.components) {
       console.error(`[${def.key}] component ${c.massId}${c.role ? ` (${c.role})` : ""}: ` +
         `${c.swap.accepted ? `ACCEPTED (${c.swap.attempt})` : `FALLBACK — ${c.swap.reasons.join("; ")}`} ` +
@@ -324,20 +375,24 @@ async function main() {
     track.stage = "renders";
     const renders = [];
     for (const angle of EVIDENCE_ANGLES) {
-      const deg = { "+x-z": 135, "-x-z": 225, "-x+z": 315 }[angle];
+      const deg = ANGLE_DEG[angle];
       renders.push({ when: "before", ...(await tryRender(r1.raw, angle, `oblique${deg}-before`, subjDir)) });
       if (r1.artifact) renders.push({ when: "after", ...(await tryRender(r1.artifact, angle, `oblique${deg}-after`, subjDir)) });
     }
     for (const r of renders) console.error(`render ${r.when} ${r.angle}: ${r.path ?? `unavailable (${r.error})`}`);
     const frames = [];
     try {
-      const b = renders.find((r) => r.when === "before" && r.angle === OBLIQUE && r.path);
-      const a = renders.find((r) => r.when === "after" && r.angle === OBLIQUE && r.path);
-      if (b && a) {
-        await copyFile(join(ROOT, b.path), join(FRAMES_DIR, `roof-${def.key}-before.png`));
-        await copyFile(join(ROOT, a.path), join(FRAMES_DIR, `roof-${def.key}-after.png`));
-        frames.push(`pr/assets/frames/roof-${def.key}-before.png`, `pr/assets/frames/roof-${def.key}-after.png`);
-      }
+      const pair = async (angle, name) => {
+        const b = renders.find((r) => r.when === "before" && r.angle === angle && r.path);
+        const a = renders.find((r) => r.when === "after" && r.angle === angle && r.path);
+        if (!b || !a) return;
+        await copyFile(join(ROOT, b.path), join(FRAMES_DIR, `${name}-before.png`));
+        await copyFile(join(ROOT, a.path), join(FRAMES_DIR, `${name}-after.png`));
+        frames.push(`pr/assets/frames/${name}-before.png`, `pr/assets/frames/${name}-after.png`);
+      };
+      await pair(OBLIQUE, `roof-${def.key}`);
+      // T-108-01: the AC's named gable-end views
+      for (const angle of END_FRAME_ANGLES) await pair(angle, `roof-${def.key}-end${ANGLE_DEG[angle]}`);
     } catch (e) {
       console.error(`frames: ${e.message}`);
     }
@@ -356,11 +411,15 @@ async function main() {
       },
       params: {
         ...ROOF_FIT_DEFAULTS,
+        endFit: { ...END_FIT_DEFAULTS },
         iouTolerance: REGULARIZE_DEFAULTS.iouTolerance, grid: REGULARIZE_DEFAULTS.grid,
         spikeFaces: REGULARIZE_DEFAULTS.spikeFaces, azimuths: MULTI_ANGLE_GATE.azimuths,
         note: "fit + cage parameters (declared, shared across subjects — no tuning); azimuths config-frozen",
       },
       fit: { gables: r1.fit.gables.map(gableRecordView), findings: r1.fit.findings },
+      // T-108-01: the gable-end fit — face plane / verge tip per end, GLB measurements and the
+      // as-built anchor recorded; `suppressed` carries the ends only hip suppression exposed
+      endFit: r1.endFit,
       family: r1.family,
       // T-110-01: one entry per component mass — the roof program's tolerance-or-named-fallback
       // contract applied per component (the church's tower and nave are judged separately, in
@@ -390,9 +449,10 @@ async function main() {
       },
       census: {
         ...(r1.swap.census ?? {}),
-        note: "protrusions (≥4/6 faces exposed) restricted to the generated footprint at/above the " +
+        note: "protrusions (≥4/6 faces exposed) restricted to the carved footprint at/above the " +
           "band floor, chimney columns excluded. The honest residual is the ridge line's two end " +
-          "cells per gable (4 exposed faces by geometry) — the declared budget asserted by this run.",
+          "cells per gable plus two rake-corner cells per fitted end (4 exposed faces by " +
+          "geometry) — the declared budget asserted by this run.",
       },
       protect: { chimney: { columns: r1.chimney.size, stackRidgeY: r1.stack.ridgeY }, openings: "closure allow-list only (the carve never touches walls below the band floor)" },
       unmapped,
@@ -424,13 +484,28 @@ function renderMd(r) {
   const gables = r.fit.gables.map((g) =>
     `- **${g.id}** (${g.sane ? "sane" : `insane: ${g.reasons.join("; ")}`}) ridge ${g.ridge.axis} @ y ${g.ridge.y}` +
     `${g.hip.demanded ? ", hip ends" : ""} — ${sides(g)}`).join("\n");
-  const findings = [...r.fit.findings, ...r.swap.findings].map((f) => `- \`${f.code}\` @ ${f.where ?? "—"}: ${f.detail}`).join("\n") || "- (none)";
+  const findings = [...r.fit.findings, ...(r.endFit?.findings ?? []), ...r.swap.findings]
+    .map((f) => `- \`${f.code}\` @ ${f.where ?? "—"}: ${f.detail}`).join("\n") || "- (none)";
   return `# Roof as program — ${r.subject} (T-104-01)\n\n` +
     `The sampled roof replaced by a roof GENERATED from parameters fitted against the component ` +
     `record's GLB fits — stair courses, slab half-steps, solid wedge — swapped under the T-102 ` +
     `cage, behind \`npm run roof:${r.subject}\`. **Status: ${r.status.toUpperCase()}**` +
     `${r.reproducible.sha256 ? ` — reproducible, artifact sha256 \`${r.reproducible.sha256.slice(0, 16)}…\`` : ""}.\n\n` +
     `## Fitted gables\n${gables}\n\n` +
+    (r.endFit ? `## Fitted ends (T-108-01)\n` +
+      ((r.endFit.gables.length || r.endFit.suppressed.length)
+        ? [...r.endFit.gables, ...r.endFit.suppressed.map((g) => ({ ...g, supp: true }))].map((g) => {
+            const e = (end) => end
+              ? `face **${end.faceCoord}**, verge tip **${end.coord}** (overhang ${end.overhang}, glb face rmse ${end.glb.faceRmse}, anchor ${end.anchor.wall})`
+              : "unfitted (named)";
+            return `- **${g.id}**${g.supp ? " (gable-ends variant)" : ""}: lo ${e(g.ends.lo)}; hi ${e(g.ends.hi)}`;
+          }).join("\n")
+        : "- (no end fitted — every end is a named finding below)") +
+      `\n\nEnds fitted in the accepted geometry: ${r.swap.generated.fittedEnds ?? 0}` +
+      ((r.swap.generated.endCoords ?? []).length
+        ? ` — ${r.swap.generated.endCoords.map((c) => `${c.id} [${c.lo ? `lo ${c.lo.coord}` : "lo —"} · ${c.hi ? `hi ${c.hi.coord}` : "hi —"}]`).join(", ")}`
+        : "") + `\n\n`
+      : "") +
     (r.components?.length
       ? `## Per-component outcomes (T-110-01)\n` + r.components.map((c) =>
           `- **${c.massId}**${c.role ? ` (${c.role})` : ""}: ${c.swap.accepted
@@ -448,7 +523,7 @@ function renderMd(r) {
       `(family ${r.family.field} / ${r.family.stairs ?? "—"} / ${r.family.slab ?? "—"}). Fit error (program rmse): ` +
       r.swap.fitError.map((e) => `${e.gableId} ${e.rmse}`).join(", ") + `.\n\n` : "") +
     `## Findings\n${findings}\n\n` +
-    `## Renders (135°/225°/315° — the azimuths the gate failed)\n` +
+    `## Renders (45°/135°/225°/315° — the gate azimuths; 45°/315° are the T-108 gable-end views)\n` +
     r.renders.map((f) => `- ${f.when} ${f.angle}: ${f.path ?? `GL unavailable (${f.error})`}`).join("\n") +
     `\n\nFrames: ${r.frames.join(", ") || "(none — GL unavailable)"}\n\n> ${r.lensNote}\n\n> ${r.swap.note}\n`;
 }

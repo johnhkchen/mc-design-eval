@@ -16,6 +16,11 @@
     "programRmseTol": 0.75,
     "minRun": 2,
     "maxPitch": 4,
+    "endFit": {
+      "faceAngleDeg": 25,
+      "minTriangles": 1,
+      "anchorSlack": 1.5
+    },
     "iouTolerance": 0.02,
     "grid": 128,
     "spikeFaces": 4,
@@ -178,19 +183,187 @@
       }
     ]
   },
+  "endFit": {
+    "params": {
+      "faceAngleDeg": 25,
+      "minTriangles": 1,
+      "anchorSlack": 1.5
+    },
+    "findings": [
+      {
+        "code": "end-hip",
+        "where": "gable-roof-0-roof-4:-x",
+        "detail": "hip demanded — the end is a slope, not a face; not fitted"
+      },
+      {
+        "code": "end-hip",
+        "where": "gable-roof-0-roof-4:+x",
+        "detail": "hip demanded — the end is a slope, not a face; not fitted"
+      },
+      {
+        "code": "end-fit-insane",
+        "where": "gable-roof-0-roof-4:-x",
+        "detail": "roof end -12.814 inside the gable face -12.253 — as-built end stays (Rule 2)",
+        "variant": "gable-ends"
+      }
+    ],
+    "gables": [
+      {
+        "id": "gable-roof-0-roof-4",
+        "ends": {
+          "lo": null,
+          "hi": null
+        }
+      }
+    ],
+    "suppressed": [
+      {
+        "id": "gable-roof-0-roof-4",
+        "ends": {
+          "lo": null,
+          "hi": {
+            "dir": "+x",
+            "coord": 13,
+            "faceCoord": 13,
+            "overhang": 0,
+            "source": "glb",
+            "asBuiltEnd": 13,
+            "anchor": {
+              "wall": 13,
+              "columns": 11
+            },
+            "glb": {
+              "wall": 13.499,
+              "face": 13.499,
+              "faceRmse": 0.001,
+              "roofEnd": 13.499,
+              "faceTriangles": 563,
+              "wallTriangles": 1449
+            }
+          }
+        }
+      }
+    ]
+  },
   "family": {
     "field": "deepslate_bricks",
     "stairs": "deepslate_brick_stairs",
     "slab": "deepslate_brick_slab",
     "findings": []
   },
+  "components": [
+    {
+      "massId": "mass-0",
+      "role": "primary",
+      "gableIds": [
+        "gable-roof-0-roof-4",
+        "gable-roof-1-roof-6"
+      ],
+      "swap": {
+        "accepted": true,
+        "attempt": "end-fitted-voxel-pitch-gable-ends",
+        "reasons": [],
+        "iou": {
+          "baseline": {
+            "+x+z": 0.9135,
+            "+x-z": 0.9299,
+            "-x-z": 0.9343,
+            "-x+z": 0.9226
+          },
+          "final": {
+            "+x+z": 0.9133,
+            "+x-z": 0.9248,
+            "-x-z": 0.922,
+            "-x+z": 0.9147
+          }
+        },
+        "closure": {
+          "input": {
+            "closed": true,
+            "reached": 0
+          },
+          "candidate": {
+            "closed": true,
+            "reached": 0
+          }
+        },
+        "carve": {
+          "removed": 1561
+        },
+        "generated": {
+          "counts": {
+            "full": 1503,
+            "stairs": 50,
+            "slabs": 139
+          },
+          "gables": [
+            "gable-roof-0-roof-4"
+          ],
+          "fittedEnds": 1,
+          "endCoords": [
+            {
+              "id": "gable-roof-0-roof-4",
+              "lo": null,
+              "hi": {
+                "coord": 13,
+                "faceCoord": 13,
+                "overhang": 0
+              }
+            }
+          ]
+        },
+        "reseat": {
+          "added": 0
+        },
+        "fitError": [
+          {
+            "gableId": "gable-roof-0-roof-4",
+            "perSide": [
+              {
+                "planeId": "roof-0",
+                "rmse": 0.148,
+                "cells": 247
+              },
+              {
+                "planeId": "roof-4",
+                "rmse": 0.079,
+                "cells": 19
+              }
+            ],
+            "rmse": 0.144
+          }
+        ],
+        "findings": [],
+        "bandFloor": 19,
+        "census": {
+          "before": {
+            "spikes": 18,
+            "cells": 1561,
+            "excluded": {
+              "cells": 0,
+              "spikes": 0
+            }
+          },
+          "after": {
+            "spikes": 2,
+            "cells": 1503,
+            "excluded": {
+              "cells": 0,
+              "spikes": 0
+            }
+          }
+        }
+      }
+    }
+  ],
   "swap": {
     "accepted": true,
     "reasons": [],
-    "attempt": "voxel-pitch-gable-ends",
+    "attempt": "mass-0:end-fitted-voxel-pitch-gable-ends",
     "attempts": [
       {
-        "name": "as-fitted",
+        "massId": "mass-0",
+        "name": "end-fitted",
         "accepted": false,
         "reasons": [
           "silhouette IoU regressed @ +x-z: 0.9039 < 0.9299 − 0.02",
@@ -214,11 +387,19 @@
         "census": {
           "before": {
             "spikes": 18,
-            "cells": 1561
+            "cells": 1561,
+            "excluded": {
+              "cells": 0,
+              "spikes": 0
+            }
           },
           "after": {
             "spikes": 18,
-            "cells": 1561
+            "cells": 1561,
+            "excluded": {
+              "cells": 0,
+              "spikes": 0
+            }
           }
         },
         "generated": {
@@ -229,7 +410,9 @@
           },
           "gables": [
             "gable-roof-0-roof-4"
-          ]
+          ],
+          "fittedEnds": 0,
+          "endCoords": []
         },
         "findings": [],
         "pitches": [
@@ -248,10 +431,12 @@
               }
             ]
           }
-        ]
+        ],
+        "ends": []
       },
       {
-        "name": "voxel-pitch",
+        "massId": "mass-0",
+        "name": "end-fitted-voxel-pitch",
         "accepted": false,
         "reasons": [
           "silhouette IoU regressed @ -x-z: 0.9119 < 0.9343 − 0.02",
@@ -274,11 +459,19 @@
         "census": {
           "before": {
             "spikes": 18,
-            "cells": 1561
+            "cells": 1561,
+            "excluded": {
+              "cells": 0,
+              "spikes": 0
+            }
           },
           "after": {
             "spikes": 18,
-            "cells": 1561
+            "cells": 1561,
+            "excluded": {
+              "cells": 0,
+              "spikes": 0
+            }
           }
         },
         "generated": {
@@ -289,7 +482,9 @@
           },
           "gables": [
             "gable-roof-0-roof-4"
-          ]
+          ],
+          "fittedEnds": 0,
+          "endCoords": []
         },
         "findings": [],
         "pitches": [
@@ -308,10 +503,12 @@
               }
             ]
           }
-        ]
+        ],
+        "ends": []
       },
       {
-        "name": "as-fitted-gable-ends",
+        "massId": "mass-0",
+        "name": "end-fitted-gable-ends",
         "accepted": false,
         "reasons": [
           "silhouette IoU regressed @ +x-z: 0.906 < 0.9299 − 0.02",
@@ -334,11 +531,19 @@
         "census": {
           "before": {
             "spikes": 18,
-            "cells": 1561
+            "cells": 1561,
+            "excluded": {
+              "cells": 0,
+              "spikes": 0
+            }
           },
           "after": {
             "spikes": 18,
-            "cells": 1561
+            "cells": 1561,
+            "excluded": {
+              "cells": 0,
+              "spikes": 0
+            }
           }
         },
         "generated": {
@@ -349,6 +554,18 @@
           },
           "gables": [
             "gable-roof-0-roof-4"
+          ],
+          "fittedEnds": 1,
+          "endCoords": [
+            {
+              "id": "gable-roof-0-roof-4",
+              "lo": null,
+              "hi": {
+                "coord": 13,
+                "faceCoord": 13,
+                "overhang": 0
+              }
+            }
           ]
         },
         "findings": [],
@@ -368,10 +585,18 @@
               }
             ]
           }
+        ],
+        "ends": [
+          {
+            "id": "gable-roof-0-roof-4",
+            "lo": null,
+            "hi": 13
+          }
         ]
       },
       {
-        "name": "voxel-pitch-gable-ends",
+        "massId": "mass-0",
+        "name": "end-fitted-voxel-pitch-gable-ends",
         "accepted": true,
         "reasons": [],
         "iou": {
@@ -391,11 +616,19 @@
         "census": {
           "before": {
             "spikes": 18,
-            "cells": 1561
+            "cells": 1561,
+            "excluded": {
+              "cells": 0,
+              "spikes": 0
+            }
           },
           "after": {
             "spikes": 2,
-            "cells": 1503
+            "cells": 1503,
+            "excluded": {
+              "cells": 0,
+              "spikes": 0
+            }
           }
         },
         "generated": {
@@ -406,6 +639,18 @@
           },
           "gables": [
             "gable-roof-0-roof-4"
+          ],
+          "fittedEnds": 1,
+          "endCoords": [
+            {
+              "id": "gable-roof-0-roof-4",
+              "lo": null,
+              "hi": {
+                "coord": 13,
+                "faceCoord": 13,
+                "overhang": 0
+              }
+            }
           ]
         },
         "findings": [],
@@ -424,6 +669,13 @@
                 "source": "voxel"
               }
             ]
+          }
+        ],
+        "ends": [
+          {
+            "id": "gable-roof-0-roof-4",
+            "lo": null,
+            "hi": 13
           }
         ]
       }
@@ -463,6 +715,18 @@
       },
       "gables": [
         "gable-roof-0-roof-4"
+      ],
+      "fittedEnds": 1,
+      "endCoords": [
+        {
+          "id": "gable-roof-0-roof-4",
+          "lo": null,
+          "hi": {
+            "coord": 13,
+            "faceCoord": 13,
+            "overhang": 0
+          }
+        }
       ]
     },
     "reseat": {
@@ -500,7 +764,7 @@
       "spikes": 2,
       "cells": 1503
     },
-    "note": "protrusions (≥4/6 faces exposed) restricted to the generated footprint at/above the band floor, chimney columns excluded. The honest residual is the ridge line's two end cells per gable (4 exposed faces by geometry) — the declared budget asserted by this run."
+    "note": "protrusions (≥4/6 faces exposed) restricted to the carved footprint at/above the band floor, chimney columns excluded. The honest residual is the ridge line's two end cells per gable plus two rake-corner cells per fitted end (4 exposed faces by geometry) — the declared budget asserted by this run."
   },
   "protect": {
     "chimney": {
@@ -520,6 +784,16 @@
     "final": 9481
   },
   "renders": [
+    {
+      "when": "before",
+      "angle": "+x+z",
+      "path": "benchmarks/sculpture/roof/gatehouse/view-oblique45-before.png"
+    },
+    {
+      "when": "after",
+      "angle": "+x+z",
+      "path": "benchmarks/sculpture/roof/gatehouse/view-oblique45-after.png"
+    },
     {
       "when": "before",
       "angle": "+x-z",
@@ -553,7 +827,11 @@
   ],
   "frames": [
     "pr/assets/frames/roof-gatehouse-before.png",
-    "pr/assets/frames/roof-gatehouse-after.png"
+    "pr/assets/frames/roof-gatehouse-after.png",
+    "pr/assets/frames/roof-gatehouse-end45-before.png",
+    "pr/assets/frames/roof-gatehouse-end45-after.png",
+    "pr/assets/frames/roof-gatehouse-end315-before.png",
+    "pr/assets/frames/roof-gatehouse-end315-after.png"
   ],
-  "lensNote": "stairs-invisible (pinned, T-097): prismarine-viewer 1.33.0 meshes NO stair block at any state — stair placement is proven by the unmapped gate + the committed states, not by pixels; renders show the solid wedge with tread notches."
+  "lensNote": "stairs-rendered (T-107-01, supersedes the T-097 stairs-invisible pin): the lens defect was getModelVariants' substring air-check matching every *_stairs name; fixed by render/scripts/patch-viewer-lens.mjs. Stair courses are visible in renders; placement remains proven by the unmapped gate + the committed states."
 }
