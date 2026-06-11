@@ -14,7 +14,7 @@
 
 Freshest repair-path verdict (cited): `styled/church.json` — FAIL, 12 gaps, kit presence true.
 
-Cage (evidence): IoU vs GLB {"+x+z":0.7954232837313993,"+x-z":0.8397999188860349,"-x-z":0.8187302765917951,"-x+z":0.7766527001862198}; vs blob {"+x+z":0.8384322398329033,"+x-z":0.8520555479169531,"-x-z":0.8422487543480305,"-x+z":0.8402409638554217} (evidence ceiling {"+x+z":0.8977915432265015,"+x-z":0.9463575250377281,"-x-z":0.9247555326814205,"-x+z":0.8663459281858719}).
+Cage (evidence): IoU vs GLB {"+x+z":0.7948525737131434,"+x-z":0.8369609301068001,"-x-z":0.8187302765917951,"-x+z":0.7630238481129891}; vs blob {"+x+z":0.840319606637984,"+x-z":0.8491681561941428,"-x-z":0.8422487543480305,"-x+z":0.8347983142685129} (evidence ceiling {"+x+z":0.8977915432265015,"+x-z":0.9463575250377281,"-x-z":0.9247555326814205,"-x+z":0.8663459281858719}).
 
 Fit refusals (E-29 Rule 1, every one named): `glb-fit-missing`, `slab-low-coverage`, `slab-low-coverage`, `slab-low-coverage`, `roof-region-unfitted`, `fit-source-voxel`, `fit-source-voxel`, `gable-insane`, `fit-source-voxel`, `fit-source-voxel`, `gable-insane`, `roof-region-unfitted`, `roof-region-unfitted`, `roof-region-unfitted`, `roof-region-unfitted`, `roof-region-unfitted`, `roof-region-unfitted`, `roof-region-unfitted`, `roof-region-unfitted`, `roof-region-unfitted`, `roof-region-unfitted`, `end-hip`, `end-hip`, `hip-end-unfitted`, `footprint-degenerate-run`, `footprint-degenerate-run`, `footprint-degenerate-run`, `footprint-degenerate-run`, `footprint-degenerate-run`, `footprint-degenerate-run`, `walltop-default`.
 

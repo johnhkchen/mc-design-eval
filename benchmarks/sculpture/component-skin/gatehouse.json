@@ -70,17 +70,17 @@
           "verdict": "drifted",
           "gaps": [
             {
-              "region": "roof — the build's roof is broken, stepped and lumpy with protruding blocks instead of one clean ridge-to-eave pitch",
+              "region": "roof planes and ridge",
               "attribute": "form",
               "severity": "major"
             },
             {
-              "region": "right end / overall outline — extra protruding masses and a ragged outline break the clean single rectangular box of the references",
+              "region": "side and rear walls",
               "attribute": "massing",
               "severity": "major"
             },
             {
-              "region": "front archway — the dark door/arch reads but is partly obscured and less centered than the concept",
+              "region": "timber framing across facade",
               "attribute": "material zoning",
               "severity": "minor"
             }
@@ -93,18 +93,18 @@
           "verdict": "drifted",
           "gaps": [
             {
-              "region": "roof",
+              "region": "roof ridge and upper-left corner",
               "attribute": "form",
               "severity": "major"
             },
             {
-              "region": "walls",
-              "attribute": "palette",
+              "region": "long wall planes",
+              "attribute": "massing",
               "severity": "major"
             },
             {
-              "region": "overall building mass",
-              "attribute": "massing",
+              "region": "timber accents at the eave",
+              "attribute": "material zoning",
               "severity": "minor"
             }
           ]
@@ -116,18 +116,18 @@
           "verdict": "drifted",
           "gaps": [
             {
-              "region": "roof across the whole top",
-              "attribute": "form",
-              "severity": "major"
-            },
-            {
-              "region": "right-hand end of the building",
+              "region": "roof and upper massing",
               "attribute": "massing",
               "severity": "major"
             },
             {
-              "region": "walls and roof stonework",
-              "attribute": "palette",
+              "region": "front gate opening",
+              "attribute": "form",
+              "severity": "major"
+            },
+            {
+              "region": "wall surface relief and pilasters",
+              "attribute": "form",
               "severity": "minor"
             }
           ]
@@ -139,18 +139,18 @@
           "verdict": "drifted",
           "gaps": [
             {
-              "region": "overall roof and walls",
-              "attribute": "form",
-              "severity": "major"
-            },
-            {
-              "region": "roof ridge and eaves",
+              "region": "side and front walls",
               "attribute": "massing",
               "severity": "major"
             },
             {
-              "region": "top corners and parapet",
+              "region": "roof ridge and slopes",
               "attribute": "form",
+              "severity": "major"
+            },
+            {
+              "region": "stone base and timber trim",
+              "attribute": "palette",
               "severity": "minor"
             }
           ]
@@ -294,9 +294,9 @@
       "base": null,
       "shell": "b6c899187d50efeef411279640837f6b42e960975c76378edb8747073975e20c",
       "reconstructed": "463ce9e25ace7ca3e787c918504933bfa4fd031fc7b458caa30c4ade9eedfd82",
-      "skinFinal": "0719a638254798928a4b7cbad8cbc3bed6910f0323f2dc72516df60ed654c60b",
-      "grammarFinal": "e350000c955a815468b7ad8fc3114897411ada50816835a95ebde1852ce0d817",
-      "styled": "a8b4c58e3571d86e5edaa2130a04ab604ff6a940884b1a644bb2c0653567d90e"
+      "skinFinal": "2b86628851790527379d521bd8132da698fc707d57b843d6155602dc7bbcf85f",
+      "grammarFinal": "c10903ee2a576bbb80f976adb881ae8d589e4a8bf7f59c384419ea5933f707df",
+      "styled": "b51dc93cae907fdc6dffd5cfaa02a0ff31ca34f5c535a49d7888847dab5dbe04"
     },
     "determinism": "the milestone runner double-runs the deterministic chain and owns the byte-identity proof; this record distills its committed output"
   }

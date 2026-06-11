@@ -646,16 +646,16 @@
   },
   "cage": {
     "iouVsGlb": {
-      "+x+z": 0.7954232837313993,
-      "+x-z": 0.8397999188860349,
+      "+x+z": 0.7948525737131434,
+      "+x-z": 0.8369609301068001,
       "-x-z": 0.8187302765917951,
-      "-x+z": 0.7766527001862198
+      "-x+z": 0.7630238481129891
     },
     "iouVsBlob": {
-      "+x+z": 0.8384322398329033,
-      "+x-z": 0.8520555479169531,
+      "+x+z": 0.840319606637984,
+      "+x-z": 0.8491681561941428,
       "-x-z": 0.8422487543480305,
-      "-x+z": 0.8402409638554217
+      "-x+z": 0.8347983142685129
     },
     "blobIouVsGlb": {
       "+x+z": 0.8977915432265015,
@@ -664,13 +664,13 @@
       "-x+z": 0.8663459281858719
     },
     "closure": {
-      "reached": 5262,
+      "reached": 5282,
       "byDirection": {
-        "+x": 13,
-        "-x": 22,
-        "+y": 2367,
+        "+x": 14,
+        "-x": 27,
+        "+y": 2399,
         "-y": 0,
-        "+z": 92,
+        "+z": 99,
         "-z": 0
       }
     },
@@ -738,8 +738,8 @@
       "reason": null,
       "gaps": [],
       "skips": [
-        "panel:band0 (no-candidate)",
-        "course (no-candidate)",
+        "panel:band0 (all-flagged)",
+        "course (all-flagged)",
         "openings:infill (kit names no treatment for this slot)",
         "openings:shutters (kit names no treatment for this slot)",
         "openings:door (no door-kind aperture declared by the concept (T-099 D7 — detector gap, not absence))"
@@ -753,19 +753,19 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "nave roof (entire upper structure)",
+            "region": "main nave roof over the long body",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "gabled roof covering",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "whole building wall vs roof",
+            "region": "brown roof material across the nave",
             "attribute": "material zoning",
             "severity": "major"
-          },
-          {
-            "region": "tower cap at back",
-            "attribute": "form",
-            "severity": "minor"
           }
         ]
       },
@@ -776,18 +776,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "main hall and tower roof",
+            "region": "nave roof over the main hall",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "roof across whole structure",
-            "attribute": "material zoning",
+            "region": "tower cap / upper massing",
+            "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "nave body, open hollow shell",
-            "attribute": "massing",
+            "region": "stone wall surfaces",
+            "attribute": "palette",
             "severity": "minor"
           }
         ]
@@ -799,18 +799,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof across the whole structure",
-            "attribute": "form",
+            "region": "roof / upper mass",
+            "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "walls vs roof (whole build)",
+            "region": "roof covering",
             "attribute": "material zoning",
             "severity": "major"
           },
           {
-            "region": "tower at the right end",
-            "attribute": "massing",
+            "region": "walls / lower body",
+            "attribute": "form",
             "severity": "minor"
           }
         ]
@@ -822,19 +822,19 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "entire roof / top of nave and tower",
+            "region": "main nave roof spanning the long hall",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "gabled roof form over the nave and tower cap",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "whole structure (walls vs roof)",
+            "region": "brown roof covering across the nave",
             "attribute": "material zoning",
             "severity": "major"
-          },
-          {
-            "region": "tower cap at near corner",
-            "attribute": "form",
-            "severity": "minor"
           }
         ]
       }
@@ -916,9 +916,9 @@
     "doubleRun": "byte-identical (in-process)",
     "sha256": {
       "base": "d42747271c92cfa32bdb73dc9dd54b58c409c404e8b6d4110a3ed4ec8b76f2b7",
-      "grammarFinal": "b7477fb7f80fb45f1aff098edeaefa541df2039bc0c7653cb24e9f0b5107d920",
-      "styled": "77409a8613aa39ed8a094bc55691c04abcbbb862e53d958fe3062cfcc5511a9e",
-      "fit": "6b5c3e27d5387758cb690a7d646a0163efc8fd58d36adb46fbf034d5785233c8"
+      "grammarFinal": "f6a7d36f2b2d0950efe3ebdfbd7db898a56f75552f916813d650412abb159d81",
+      "styled": "e52c38ddcf8defcf2034c313ead95c03923a88aa425a525d24464cf555355046",
+      "fit": "7ec4b33edeee6e68a284923af42ed33615815c00b9e46d22afa649d8a4a9c833"
     }
   },
   "sheets": {

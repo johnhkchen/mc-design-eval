@@ -5265,15 +5265,23 @@
           },
           "deltaVsRecord": -1.46,
           "apexLine": {
-            "height": 26.892,
-            "slopeDeg": -1.106,
+            "height": 24.333,
+            "slopeDeg": 0.002,
             "span": [
-              4,
-              7
+              -16,
+              3
             ],
-            "length": 4,
-            "rmse": 0.017,
-            "slices": 32
+            "length": 20,
+            "rmse": 0.001,
+            "slices": 32,
+            "excludedColumns": 24,
+            "spike": {
+              "height": 26.905,
+              "span": [
+                4,
+                4
+              ]
+            }
           }
         },
         {
@@ -5287,15 +5295,23 @@
           },
           "deltaVsRecord": -2.136,
           "apexLine": {
-            "height": 26.908,
-            "slopeDeg": -0.038,
+            "height": 22.792,
+            "slopeDeg": 0,
             "span": [
-              -1,
-              3
+              3,
+              12
             ],
-            "length": 5,
-            "rmse": 0.001,
-            "slices": 14
+            "length": 10,
+            "rmse": 0,
+            "slices": 14,
+            "excludedColumns": 3,
+            "spike": {
+              "height": 26.819,
+              "span": [
+                2,
+                2
+              ]
+            }
           }
         }
       ],

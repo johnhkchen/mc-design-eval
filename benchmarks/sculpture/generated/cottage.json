@@ -292,16 +292,16 @@
   },
   "cage": {
     "iouVsGlb": {
-      "+x+z": 0.8667560065090456,
-      "+x-z": 0.8460132311977716,
-      "-x-z": 0.8362137465236392,
-      "-x+z": 0.8685111501804386
+      "+x+z": 0.8640167364016736,
+      "+x-z": 0.8673147898100639,
+      "-x-z": 0.8457647292203928,
+      "-x+z": 0.8644491800240897
     },
     "iouVsBlob": {
-      "+x+z": 0.8316359899093712,
-      "+x-z": 0.8559817119634239,
-      "-x-z": 0.8260232489987301,
-      "-x+z": 0.8639613706007986
+      "+x+z": 0.8366890380313199,
+      "+x-z": 0.8436291777644127,
+      "-x-z": 0.8350726616600019,
+      "-x+z": 0.8616100511865984
     },
     "blobIouVsGlb": {
       "+x+z": 0.9273232724384433,
@@ -364,6 +364,10 @@
           "reason": "drifted"
         },
         {
+          "angle": "+x-z",
+          "reason": "drifted"
+        },
+        {
           "angle": "-x-z",
           "reason": "drifted"
         },
@@ -389,18 +393,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "overall body/interior",
-            "attribute": "massing",
-            "severity": "major"
-          },
-          {
-            "region": "roof top",
+            "region": "main roof",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "walls and stone base",
+            "region": "upper timber-framed walls",
             "attribute": "material zoning",
+            "severity": "minor"
+          },
+          {
+            "region": "eaves and roof overhang",
+            "attribute": "massing",
             "severity": "minor"
           }
         ]
@@ -409,21 +413,21 @@
         "angle": "+x-z",
         "azimuthDeg": 135,
         "coverage": true,
-        "verdict": "same object",
+        "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof ridge and eaves",
+            "region": "main roof",
             "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "eaves/roof overhang along the long wall",
+            "attribute": "massing",
             "severity": "minor"
           },
           {
-            "region": "near-side walls (slightly open/recessed read)",
-            "attribute": "form",
-            "severity": "minor"
-          },
-          {
-            "region": "chimney cap",
-            "attribute": "form",
+            "region": "upper timber-framed walls",
+            "attribute": "material zoning",
             "severity": "minor"
           }
         ]
@@ -435,18 +439,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "entire roof over both wings and ridge",
+            "region": "main roof",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "upper timber-framed storey walls",
+            "region": "roof eaves and ridge — open gaps exposing interior",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "chimney at ridge",
-            "attribute": "form",
+            "region": "upper timber-framed storey",
+            "attribute": "material zoning",
             "severity": "minor"
           }
         ]
@@ -458,17 +462,17 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof over the whole house",
+            "region": "main roof",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "upper storey / roof interior",
+            "region": "roof ridge/eaves enclosure",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "timber-frame banding on the cream walls",
+            "region": "upper timber-framed walls",
             "attribute": "material zoning",
             "severity": "minor"
           }
@@ -500,7 +504,7 @@
         },
         {
           "angle": "+x-z",
-          "verdict": "same object",
+          "verdict": "drifted",
           "gaps": 3
         },
         {
@@ -560,7 +564,7 @@
       "freshest": {
         "source": "styled/cottage.json",
         "outcome": "FAIL",
-        "gapCount": 10,
+        "gapCount": 12,
         "kitPresence": true
       }
     }
@@ -573,9 +577,9 @@
     "doubleRun": "byte-identical (in-process)",
     "sha256": {
       "base": "67fbbc93cbd4308f6ba0a7e51c6410c4f0cf38d7c2ef50acf6cee9625231a172",
-      "grammarFinal": "7370102e5d1cd658f68f33cda01a2d7de07c69597c735f30772885acf5cff553",
-      "styled": "e7f97344e4e3e836570d3b488ce24591b72860eea049903c51f2f3721e9f4fe6",
-      "fit": "b3b36ef6f386c54bc259bee462e6a33049c1861d08cbdd8493a31dd37a4ddbeb"
+      "grammarFinal": "7cce1d0f52101fd940710e1203d3e4794d3ce39ee648bb15a99a04c6233a667b",
+      "styled": "5edf5892b938fd1c7b46e94cc4347def425bc92506351db969763e264efa7955",
+      "fit": "3fa2304dceb4dfca6e44356957900887d3986ff4ee093562267002f0ce4069fa"
     }
   },
   "sheets": {

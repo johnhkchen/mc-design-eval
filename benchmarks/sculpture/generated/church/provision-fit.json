@@ -5567,15 +5567,23 @@
           },
           "deltaVsRecord": 0.378,
           "apexLine": {
-            "height": 31.51,
-            "slopeDeg": 0,
+            "height": 20.097,
+            "slopeDeg": 9.326,
             "span": [
-              -7,
-              -7
+              -6,
+              -2
             ],
-            "length": 1,
-            "rmse": 0,
-            "slices": 9
+            "length": 5,
+            "rmse": 0.345,
+            "slices": 9,
+            "excludedColumns": 0,
+            "spike": {
+              "height": 30.691,
+              "span": [
+                -7,
+                -7
+              ]
+            }
           }
         }
       ],

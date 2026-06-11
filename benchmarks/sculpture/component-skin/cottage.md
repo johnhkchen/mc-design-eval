@@ -13,4 +13,4 @@ Reconstruction: roof-program 1483+296-255, shaped-heads 0+0-0; seams {"roofCours
 
 Zone-map re-pin: bands SHIFTED — re-pinned at zone-map/cottage.reconstructed.json
 
-Milestone record: `benchmarks/sculpture/styled/cottage.json`; shas: `{"base":null,"shell":"33b1ca02f2589f49dd8c678e2416bf81196be41bf91451c4c9e351baf24c0afd","reconstructed":"477399990e7c8b68e8980349f1627b240bd36fbfc1cd402d45ccd65f528046d6","skinFinal":"9bf220364ece6e1b8806b35241441d278fff550eb2614c13c9830473a197996e","grammarFinal":"2ddf360850512d8cc8b50d2ced4a81194b501208305a20eb2df10aa9e2f0146b","styled":"33ffd0c825a04eeb481740a22268386249a95581fe0af712d20cbb9232d4a48f"}`
+Milestone record: `benchmarks/sculpture/styled/cottage.json`; shas: `{"base":null,"shell":"33b1ca02f2589f49dd8c678e2416bf81196be41bf91451c4c9e351baf24c0afd","reconstructed":"477399990e7c8b68e8980349f1627b240bd36fbfc1cd402d45ccd65f528046d6","skinFinal":"4e8222e0b06fddb5859073c893d0eafea2562bc76fc1387a23bf43663f031887","grammarFinal":"85e06fc074229cfb3f4119a918e4ed2b29145e1833a63906df6b21cdfa26ec77","styled":"55407a93bd7bb5a3b8da0e386dbe6947c6e7988fa7c53f82c2db5edf2314fdca"}`

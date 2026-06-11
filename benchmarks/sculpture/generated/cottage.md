@@ -8,13 +8,13 @@
 |---|---|---|
 | outcome | FAIL | FAIL |
 | gaps | 12/2 | 10/2 |
-| per-view | +x+z drifted (3); +x-z same object (3); -x-z drifted (3); -x+z drifted (3) | +x+z drifted (3); +x-z same object (2); -x-z same object (2); -x+z drifted (3) |
+| per-view | +x+z drifted (3); +x-z drifted (3); -x-z drifted (3); -x+z drifted (3) | +x+z drifted (3); +x-z same object (2); -x-z same object (2); -x+z drifted (3) |
 | kit presence | true | true |
 | census (spikes/ragged%) | 53 / 8.1% | 86 / 6.3% |
 
-Freshest repair-path verdict (cited): `styled/cottage.json` — FAIL, 10 gaps, kit presence true.
+Freshest repair-path verdict (cited): `styled/cottage.json` — FAIL, 12 gaps, kit presence true.
 
-Cage (evidence): IoU vs GLB {"+x+z":0.8667560065090456,"+x-z":0.8460132311977716,"-x-z":0.8362137465236392,"-x+z":0.8685111501804386}; vs blob {"+x+z":0.8316359899093712,"+x-z":0.8559817119634239,"-x-z":0.8260232489987301,"-x+z":0.8639613706007986} (evidence ceiling {"+x+z":0.9273232724384433,"+x-z":0.8929647350699982,"-x-z":0.941015625,"-x+z":0.942507068803016}).
+Cage (evidence): IoU vs GLB {"+x+z":0.8640167364016736,"+x-z":0.8673147898100639,"-x-z":0.8457647292203928,"-x+z":0.8644491800240897}; vs blob {"+x+z":0.8366890380313199,"+x-z":0.8436291777644127,"-x-z":0.8350726616600019,"-x+z":0.8616100511865984} (evidence ceiling {"+x+z":0.9273232724384433,"+x-z":0.8929647350699982,"-x-z":0.941015625,"-x+z":0.942507068803016}).
 
 Fit refusals (E-29 Rule 1, every one named): `glb-fit-missing`, `slab-low-coverage`, `slab-low-coverage`, `slab-low-coverage`, `slab-low-coverage`, `fit-source-voxel`, `roof-region-unfitted`, `roof-region-unfitted`, `roof-region-unfitted`, `roof-region-unfitted`, `end-unfitted`, `flat-out-of-tolerance`, `flat-out-of-tolerance`.
 

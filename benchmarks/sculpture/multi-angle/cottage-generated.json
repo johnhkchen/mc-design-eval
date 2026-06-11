@@ -4,7 +4,7 @@
   "label": "generated",
   "artifact": {
     "path": "benchmarks/sculpture/generated/cottage/artifact.json",
-    "sha256": "e7f97344e4e3e836570d3b488ce24591b72860eea049903c51f2f3721e9f4fe6"
+    "sha256": "5edf5892b938fd1c7b46e94cc4347def425bc92506351db969763e264efa7955"
   },
   "contract": {
     "azimuths": [
@@ -207,7 +207,7 @@
           "roof": {
             "dominant": "spruce_planks",
             "fraction": 1,
-            "total": 346,
+            "total": 288,
             "passed": true,
             "metric": "own",
             "own": [
@@ -218,7 +218,7 @@
               "spruce_stairs",
               "spruce_slab"
             ],
-            "dominantFraction": 0.462
+            "dominantFraction": 0.455
           }
         }
       },
@@ -227,40 +227,40 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "overall body/interior",
-            "attribute": "massing",
-            "severity": "major"
-          },
-          {
-            "region": "roof top",
+            "region": "main roof",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "walls and stone base",
+            "region": "upper timber-framed walls",
             "attribute": "material zoning",
+            "severity": "minor"
+          },
+          {
+            "region": "eaves and roof overhang",
+            "attribute": "massing",
             "severity": "minor"
           }
         ],
-        "rationale": "The build keeps the cottage footprint and roughly correct light-wall/brown-roof/stone-base zoning, but reads as a hollow open shell with an irregular lumpy roof rather than the references' solid mass with a clean steep gable."
+        "rationale": "The stone base, cream timber walls, and brown roof palette read as the same cottage, but the roof is an irregular lumpy stepped mass rather than the clean gable form shown in the concept and mesh panels."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10791,
-          "output_tokens": 1018,
-          "cost_usd": 0.183425
+          "input_tokens": 10737,
+          "output_tokens": 468,
+          "cost_usd": 0.181857
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"overall body/interior\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"roof top\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"walls and stone base\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The build keeps the cottage footprint and roughly correct light-wall/brown-roof/stone-base zoning, but reads as a hollow open shell with a",
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"main roof\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"upper timber-framed walls\",\"attribute\":\"material zoning\",\"severity\":\"minor\"},{\"region\":\"eaves and roof overhang\",\"attribute\":\"massing\",\"severity\":\"minor\"}],\"rationale\":\"The stone base, cream timber walls, and brown roof palette read as the same cottage, but the roof is an irregular lumpy stepped ma",
           "usage": {
-            "input_tokens": 10791,
-            "output_tokens": 1018,
-            "cost_usd": 0.183425
+            "input_tokens": 10737,
+            "output_tokens": 468,
+            "cost_usd": 0.181857
           },
           "source": "live"
         }
@@ -309,8 +309,8 @@
           },
           "roof": {
             "dominant": "spruce_planks",
-            "fraction": 0.994,
-            "total": 336,
+            "fraction": 0.996,
+            "total": 282,
             "passed": true,
             "metric": "own",
             "own": [
@@ -321,49 +321,49 @@
               "spruce_stairs",
               "spruce_slab"
             ],
-            "dominantFraction": 0.39
+            "dominantFraction": 0.411
           }
         }
       },
       "verdict": {
         "schema": "multi-angle-verdict/v1",
-        "verdict": "same object",
+        "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof ridge and eaves",
+            "region": "main roof",
             "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "eaves/roof overhang along the long wall",
+            "attribute": "massing",
             "severity": "minor"
           },
           {
-            "region": "near-side walls (slightly open/recessed read)",
-            "attribute": "form",
-            "severity": "minor"
-          },
-          {
-            "region": "chimney cap",
-            "attribute": "form",
+            "region": "upper timber-framed walls",
+            "attribute": "material zoning",
             "severity": "minor"
           }
         ],
-        "rationale": "The brown shingled roof, cream timber-framed walls, and gray stone base all read true from this angle and match the mesh massing, so it is clearly the same cottage despite a slightly irregular roofline and chimney."
+        "rationale": "Clearly the same stone-based half-timbered cottage with true palette and zoning, but the roof reads as a lumpy, irregularly stepped mass rather than the clean gable shown in both the concept and mesh silhouette."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10764,
-          "output_tokens": 1088,
-          "cost_usd": 0.18503999999999998
+          "input_tokens": 10737,
+          "output_tokens": 499,
+          "cost_usd": 0.182632
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"same object\",\"gaps\":[{\"region\":\"roof ridge and eaves\",\"attribute\":\"form\",\"severity\":\"minor\"},{\"region\":\"near-side walls (slightly open/recessed read)\",\"attribute\":\"form\",\"severity\":\"minor\"},{\"region\":\"chimney cap\",\"attribute\":\"form\",\"severity\":\"minor\"}],\"rationale\":\"The brown shingled roof, cream timber-framed walls, and gray stone base all read true from this angle and match the mesh ",
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"main roof\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"eaves/roof overhang along the long wall\",\"attribute\":\"massing\",\"severity\":\"minor\"},{\"region\":\"upper timber-framed walls\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"Clearly the same stone-based half-timbered cottage with true palette and zoning, but the roof reads as a lumpy, ir",
           "usage": {
-            "input_tokens": 10764,
-            "output_tokens": 1088,
-            "cost_usd": 0.18503999999999998
+            "input_tokens": 10737,
+            "output_tokens": 499,
+            "cost_usd": 0.182632
           },
           "source": "live"
         }
@@ -412,8 +412,8 @@
           },
           "roof": {
             "dominant": "spruce_planks",
-            "fraction": 0.982,
-            "total": 383,
+            "fraction": 0.981,
+            "total": 323,
             "passed": true,
             "metric": "own",
             "own": [
@@ -424,7 +424,7 @@
               "spruce_stairs",
               "spruce_slab"
             ],
-            "dominantFraction": 0.695
+            "dominantFraction": 0.783
           }
         }
       },
@@ -433,40 +433,40 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "entire roof over both wings and ridge",
+            "region": "main roof",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "upper timber-framed storey walls",
+            "region": "roof eaves and ridge — open gaps exposing interior",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "chimney at ridge",
-            "attribute": "form",
+            "region": "upper timber-framed storey",
+            "attribute": "material zoning",
             "severity": "minor"
           }
         ],
-        "rationale": "The stone base, cream upper walls, and brown timber/chimney palette read as the same cottage, but the steep enclosing gable roof seen in the concept and mesh is absent — the build's top is an open roofless shell of flat planks, so it has drifted from the reference."
+        "rationale": "The stone base, cream upper walls, chimney and brown timber palette read as the same cottage, but the roof is a broken, gap-riddled mass that exposes the interior rather than the clean solid gable shown in both the concept and mesh panels."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10745,
-          "output_tokens": 209,
-          "cost_usd": 0.16297
+          "input_tokens": 10737,
+          "output_tokens": 605,
+          "cost_usd": 0.185282
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "```json\n{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"entire roof over both wings and ridge\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"upper timber-framed storey walls\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"chimney at ridge\",\"attribute\":\"form\",\"severity\":\"minor\"}],\"rationale\":\"The stone base, cream upper walls, and brown timber/chimney palette read as the same cottage, but the ste",
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"main roof\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"roof eaves and ridge — open gaps exposing interior\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"upper timber-framed storey\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The stone base, cream upper walls, chimney and brown timber palette read as the same cottage, but the ",
           "usage": {
-            "input_tokens": 10745,
-            "output_tokens": 209,
-            "cost_usd": 0.16297
+            "input_tokens": 10737,
+            "output_tokens": 605,
+            "cost_usd": 0.185282
           },
           "source": "live"
         }
@@ -515,8 +515,8 @@
           },
           "roof": {
             "dominant": "spruce_planks",
-            "fraction": 0.984,
-            "total": 368,
+            "fraction": 0.98,
+            "total": 307,
             "passed": true,
             "metric": "own",
             "own": [
@@ -527,7 +527,7 @@
               "spruce_stairs",
               "spruce_slab"
             ],
-            "dominantFraction": 0.701
+            "dominantFraction": 0.779
           }
         }
       },
@@ -536,40 +536,40 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof over the whole house",
+            "region": "main roof",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "upper storey / roof interior",
+            "region": "roof ridge/eaves enclosure",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "timber-frame banding on the cream walls",
+            "region": "upper timber-framed walls",
             "attribute": "material zoning",
             "severity": "minor"
           }
         ],
-        "rationale": "Stone base, cream walls and brown roof palette read true and the footprint matches the mesh, but the steep closed gabled roof of the concept/mesh is replaced by an open, partly-roofless shell, breaking the form and massing."
+        "rationale": "The stone base, cream walls and brown roof palette read true, but the roof is a broken, open mass with no continuous gable ridge unlike the clean closed gable in both the concept and mesh panels."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10745,
-          "output_tokens": 834,
-          "cost_usd": 0.178595
+          "input_tokens": 10658,
+          "output_tokens": 488,
+          "cost_usd": 0.181962
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof over the whole house\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"upper storey / roof interior\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"timber-frame banding on the cream walls\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"Stone base, cream walls and brown roof palette read true and the footprint matches the mesh, bu",
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"main roof\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"roof ridge/eaves enclosure\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"upper timber-framed walls\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The stone base, cream walls and brown roof palette read true, but the roof is a broken, open mass with no continuous gable ridg",
           "usage": {
-            "input_tokens": 10745,
-            "output_tokens": 834,
-            "cost_usd": 0.178595
+            "input_tokens": 10658,
+            "output_tokens": 488,
+            "cost_usd": 0.181962
           },
           "source": "live"
         }
@@ -585,68 +585,72 @@
     "gaps": [
       {
         "angle": "+x+z",
-        "region": "overall body/interior",
-        "attribute": "massing"
-      },
-      {
-        "angle": "+x+z",
-        "region": "roof top",
+        "region": "main roof",
         "attribute": "form"
       },
       {
         "angle": "+x+z",
-        "region": "walls and stone base",
+        "region": "upper timber-framed walls",
         "attribute": "material zoning"
       },
       {
+        "angle": "+x+z",
+        "region": "eaves and roof overhang",
+        "attribute": "massing"
+      },
+      {
         "angle": "+x-z",
-        "region": "roof ridge and eaves",
+        "region": "main roof",
         "attribute": "form"
       },
       {
         "angle": "+x-z",
-        "region": "near-side walls (slightly open/recessed read)",
-        "attribute": "form"
+        "region": "eaves/roof overhang along the long wall",
+        "attribute": "massing"
       },
       {
         "angle": "+x-z",
-        "region": "chimney cap",
+        "region": "upper timber-framed walls",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x-z",
+        "region": "main roof",
         "attribute": "form"
       },
       {
         "angle": "-x-z",
-        "region": "entire roof over both wings and ridge",
-        "attribute": "form"
-      },
-      {
-        "angle": "-x-z",
-        "region": "upper timber-framed storey walls",
+        "region": "roof eaves and ridge — open gaps exposing interior",
         "attribute": "massing"
       },
       {
         "angle": "-x-z",
-        "region": "chimney at ridge",
+        "region": "upper timber-framed storey",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x+z",
+        "region": "main roof",
         "attribute": "form"
       },
       {
         "angle": "-x+z",
-        "region": "roof over the whole house",
-        "attribute": "form"
-      },
-      {
-        "angle": "-x+z",
-        "region": "upper storey / roof interior",
+        "region": "roof ridge/eaves enclosure",
         "attribute": "massing"
       },
       {
         "angle": "-x+z",
-        "region": "timber-frame banding on the cream walls",
+        "region": "upper timber-framed walls",
         "attribute": "material zoning"
       }
     ],
     "failures": [
       {
         "angle": "+x+z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "+x-z",
         "reason": "drifted"
       },
       {
@@ -661,11 +665,11 @@
     "views": [
       {
         "angle": "+x+z",
-        "outcome": "drifted: massing"
+        "outcome": "drifted: form"
       },
       {
         "angle": "+x-z",
-        "outcome": "same object (3 minor)"
+        "outcome": "drifted: form"
       },
       {
         "angle": "-x-z",
@@ -711,7 +715,7 @@
         "feature": "panel:band1",
         "block": "smooth_sandstone",
         "shipped": "smooth_sandstone",
-        "sites": 1532,
+        "sites": 1531,
         "missing": 0,
         "tolerated": {
           "residue": 0
@@ -723,7 +727,7 @@
         "feature": "course",
         "block": "spruce_planks",
         "shipped": "spruce_planks",
-        "sites": 787,
+        "sites": 792,
         "missing": 0,
         "tolerated": {
           "residue": 0
@@ -823,14 +827,14 @@
             "kept": 1159
           },
           "band1": {
-            "surface": 1532,
+            "surface": 1531,
             "filled": 0,
-            "kept": 1532
+            "kept": 1531
           },
           "roof": {
-            "surface": 787,
+            "surface": 792,
             "filled": 0,
-            "kept": 787
+            "kept": 792
           }
         }
       }

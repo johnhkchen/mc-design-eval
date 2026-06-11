@@ -4,7 +4,7 @@
   "label": "generated",
   "artifact": {
     "path": "benchmarks/sculpture/generated/church/artifact.json",
-    "sha256": "77409a8613aa39ed8a094bc55691c04abcbbb862e53d958fe3062cfcc5511a9e"
+    "sha256": "e52c38ddcf8defcf2034c313ead95c03923a88aa425a525d24464cf555355046"
   },
   "contract": {
     "azimuths": [
@@ -141,7 +141,7 @@
           "roof": {
             "dominant": "dark_oak_planks",
             "fraction": 1,
-            "total": 575,
+            "total": 90,
             "passed": true,
             "metric": "own",
             "own": [
@@ -153,7 +153,7 @@
               "spruce_stairs",
               "spruce_slab"
             ],
-            "dominantFraction": 0.037
+            "dominantFraction": 0.311
           }
         }
       },
@@ -162,40 +162,40 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "nave roof (entire upper structure)",
+            "region": "main nave roof over the long body",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "gabled roof covering",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "whole building wall vs roof",
+            "region": "brown roof material across the nave",
             "attribute": "material zoning",
             "severity": "major"
-          },
-          {
-            "region": "tower cap at back",
-            "attribute": "form",
-            "severity": "minor"
           }
         ],
-        "rationale": "The boxy footprint and rear tower mass still read as the same church, but the build is a roofless open shell missing the entire dark peaked roof and its light-wall/dark-roof material zoning, so it is recognizably related yet badly defective from this angle."
+        "rationale": "The stone walls and tower stub read as the same gatehouse footprint, but the entire gabled roof is missing—the nave is an open topless shell where the mesh shows a solid filled gable mass."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10686,
-          "output_tokens": 685,
-          "cost_usd": 0.173535
+          "input_tokens": 10828,
+          "output_tokens": 764,
+          "cost_usd": 0.19010200000000002
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"nave roof (entire upper structure)\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"whole building wall vs roof\",\"attribute\":\"material zoning\",\"severity\":\"major\"},{\"region\":\"tower cap at back\",\"attribute\":\"form\",\"severity\":\"minor\"}],\"rationale\":\"The boxy footprint and rear tower mass still read as the same church, but the build is a roofless open shell mis",
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"main nave roof over the long body\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"gabled roof covering\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"brown roof material across the nave\",\"attribute\":\"material zoning\",\"severity\":\"major\"}],\"rationale\":\"The stone walls and tower stub read as the same gatehouse footprint, but the entire gabled roof is ",
           "usage": {
-            "input_tokens": 10686,
-            "output_tokens": 685,
-            "cost_usd": 0.173535
+            "input_tokens": 10828,
+            "output_tokens": 764,
+            "cost_usd": 0.19010200000000002
           },
           "source": "live"
         }
@@ -229,7 +229,7 @@
           "roof": {
             "dominant": "dark_oak_planks",
             "fraction": 1,
-            "total": 657,
+            "total": 71,
             "passed": true,
             "metric": "own",
             "own": [
@@ -241,7 +241,7 @@
               "spruce_stairs",
               "spruce_slab"
             ],
-            "dominantFraction": 0.037
+            "dominantFraction": 0.352
           }
         }
       },
@@ -250,40 +250,40 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "main hall and tower roof",
+            "region": "nave roof over the main hall",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "roof across whole structure",
-            "attribute": "material zoning",
+            "region": "tower cap / upper massing",
+            "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "nave body, open hollow shell",
-            "attribute": "massing",
+            "region": "stone wall surfaces",
+            "attribute": "palette",
             "severity": "minor"
           }
         ],
-        "rationale": "The light-stone box-and-tower footprint still reads as the same church, but the steep dark peaked roof is entirely absent—replaced by an open hollow shell with flat stepped caps—and the light-wall/dark-roof zoning collapses into uniform pale stone, breaking the silhouette from this angle."
+        "rationale": "Recognizably the same stone-walled church-and-tower massing, but the dominant brown gabled roof is absent so the nave reads as an open-topped box and the tower cap is a jumbled pile rather than the clean pyramidal roof in the references."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10686,
-          "output_tokens": 635,
-          "cost_usd": 0.17228500000000002
+          "input_tokens": 10828,
+          "output_tokens": 470,
+          "cost_usd": 0.18275200000000003
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"main hall and tower roof\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"roof across whole structure\",\"attribute\":\"material zoning\",\"severity\":\"major\"},{\"region\":\"nave body, open hollow shell\",\"attribute\":\"massing\",\"severity\":\"minor\"}],\"rationale\":\"The light-stone box-and-tower footprint still reads as the same church, but the steep dark peaked roof is en",
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"nave roof over the main hall\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"tower cap / upper massing\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"stone wall surfaces\",\"attribute\":\"palette\",\"severity\":\"minor\"}],\"rationale\":\"Recognizably the same stone-walled church-and-tower massing, but the dominant brown gabled roof is absent so the nave reads",
           "usage": {
-            "input_tokens": 10686,
-            "output_tokens": 635,
-            "cost_usd": 0.17228500000000002
+            "input_tokens": 10828,
+            "output_tokens": 470,
+            "cost_usd": 0.18275200000000003
           },
           "source": "live"
         }
@@ -317,7 +317,7 @@
           "roof": {
             "dominant": "dark_oak_planks",
             "fraction": 1,
-            "total": 576,
+            "total": 47,
             "passed": true,
             "metric": "own",
             "own": [
@@ -329,7 +329,7 @@
               "spruce_stairs",
               "spruce_slab"
             ],
-            "dominantFraction": 0.023
+            "dominantFraction": 0.298
           }
         }
       },
@@ -338,40 +338,40 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof across the whole structure",
-            "attribute": "form",
+            "region": "roof / upper mass",
+            "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "walls vs roof (whole build)",
+            "region": "roof covering",
             "attribute": "material zoning",
             "severity": "major"
           },
           {
-            "region": "tower at the right end",
-            "attribute": "massing",
+            "region": "walls / lower body",
+            "attribute": "form",
             "severity": "minor"
           }
         ],
-        "rationale": "The footprint matches the mesh, but the steep dark peaked roof is replaced by an open flat-topped shell with a ragged recess, and the concept's light-stone-wall / dark-roof zoning collapses into one uniform gray material."
+        "rationale": "The grey stone body roughly fills the mesh silhouette, but the prominent dark-wood gabled roof has collapsed into a tiny pyramidal stack sunk into the top of an otherwise monolithic block, so the dark roof zone and gable massing read very differently from the references."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10686,
-          "output_tokens": 491,
-          "cost_usd": 0.168685
+          "input_tokens": 10828,
+          "output_tokens": 1241,
+          "cost_usd": 0.202027
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof across the whole structure\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"walls vs roof (whole build)\",\"attribute\":\"material zoning\",\"severity\":\"major\"},{\"region\":\"tower at the right end\",\"attribute\":\"massing\",\"severity\":\"minor\"}],\"rationale\":\"The footprint matches the mesh, but the steep dark peaked roof is replaced by an open flat-topped shell wit",
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof / upper mass\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"roof covering\",\"attribute\":\"material zoning\",\"severity\":\"major\"},{\"region\":\"walls / lower body\",\"attribute\":\"form\",\"severity\":\"minor\"}],\"rationale\":\"The grey stone body roughly fills the mesh silhouette, but the prominent dark-wood gabled roof has collapsed into a tiny pyramidal stack su",
           "usage": {
-            "input_tokens": 10686,
-            "output_tokens": 491,
-            "cost_usd": 0.168685
+            "input_tokens": 10828,
+            "output_tokens": 1241,
+            "cost_usd": 0.202027
           },
           "source": "live"
         }
@@ -404,8 +404,8 @@
           },
           "roof": {
             "dominant": "dark_oak_planks",
-            "fraction": 0.988,
-            "total": 646,
+            "fraction": 0.945,
+            "total": 91,
             "passed": true,
             "metric": "own",
             "own": [
@@ -417,7 +417,7 @@
               "spruce_stairs",
               "spruce_slab"
             ],
-            "dominantFraction": 0.029
+            "dominantFraction": 0.275
           }
         }
       },
@@ -426,40 +426,40 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "entire roof / top of nave and tower",
+            "region": "main nave roof spanning the long hall",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "gabled roof form over the nave and tower cap",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "whole structure (walls vs roof)",
+            "region": "brown roof covering across the nave",
             "attribute": "material zoning",
             "severity": "major"
-          },
-          {
-            "region": "tower cap at near corner",
-            "attribute": "form",
-            "severity": "minor"
           }
         ],
-        "rationale": "The boxy L-shaped footprint matches the mesh, but the steep dark roof is entirely absent — replaced by an open, roofless shell — and the light-stone-wall / dark-roof zoning collapses into a uniform gray, so the build is recognizably the same church yet clearly drifted from this angle."
+        "rationale": "The stone wall footprint and tower stub match the gatehouse, but the build is an open topless shell with the brown roof reduced to a small clump in one corner, whereas the mesh shows a solid filled gabled mass over the whole nave."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10686,
-          "output_tokens": 592,
-          "cost_usd": 0.17121
+          "input_tokens": 10779,
+          "output_tokens": 622,
+          "cost_usd": 0.186307
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"entire roof / top of nave and tower\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"whole structure (walls vs roof)\",\"attribute\":\"material zoning\",\"severity\":\"major\"},{\"region\":\"tower cap at near corner\",\"attribute\":\"form\",\"severity\":\"minor\"}],\"rationale\":\"The boxy L-shaped footprint matches the mesh, but the steep dark roof is entirely absent — replaced ",
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"main nave roof spanning the long hall\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"gabled roof form over the nave and tower cap\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"brown roof covering across the nave\",\"attribute\":\"material zoning\",\"severity\":\"major\"}],\"rationale\":\"The stone wall footprint and tower stub match the gatehouse, but the bu",
           "usage": {
-            "input_tokens": 10686,
-            "output_tokens": 592,
-            "cost_usd": 0.17121
+            "input_tokens": 10779,
+            "output_tokens": 622,
+            "cost_usd": 0.186307
           },
           "source": "live"
         }
@@ -475,63 +475,63 @@
     "gaps": [
       {
         "angle": "+x+z",
-        "region": "nave roof (entire upper structure)",
+        "region": "main nave roof over the long body",
+        "attribute": "massing"
+      },
+      {
+        "angle": "+x+z",
+        "region": "gabled roof covering",
         "attribute": "form"
       },
       {
         "angle": "+x+z",
-        "region": "whole building wall vs roof",
-        "attribute": "material zoning"
-      },
-      {
-        "angle": "+x+z",
-        "region": "tower cap at back",
-        "attribute": "form"
-      },
-      {
-        "angle": "+x-z",
-        "region": "main hall and tower roof",
-        "attribute": "form"
-      },
-      {
-        "angle": "+x-z",
-        "region": "roof across whole structure",
+        "region": "brown roof material across the nave",
         "attribute": "material zoning"
       },
       {
         "angle": "+x-z",
-        "region": "nave body, open hollow shell",
+        "region": "nave roof over the main hall",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x-z",
+        "region": "tower cap / upper massing",
+        "attribute": "massing"
+      },
+      {
+        "angle": "+x-z",
+        "region": "stone wall surfaces",
+        "attribute": "palette"
+      },
+      {
+        "angle": "-x-z",
+        "region": "roof / upper mass",
         "attribute": "massing"
       },
       {
         "angle": "-x-z",
-        "region": "roof across the whole structure",
-        "attribute": "form"
-      },
-      {
-        "angle": "-x-z",
-        "region": "walls vs roof (whole build)",
+        "region": "roof covering",
         "attribute": "material zoning"
       },
       {
         "angle": "-x-z",
-        "region": "tower at the right end",
+        "region": "walls / lower body",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x+z",
+        "region": "main nave roof spanning the long hall",
         "attribute": "massing"
       },
       {
         "angle": "-x+z",
-        "region": "entire roof / top of nave and tower",
+        "region": "gabled roof form over the nave and tower cap",
         "attribute": "form"
       },
       {
         "angle": "-x+z",
-        "region": "whole structure (walls vs roof)",
+        "region": "brown roof covering across the nave",
         "attribute": "material zoning"
-      },
-      {
-        "angle": "-x+z",
-        "region": "tower cap at near corner",
-        "attribute": "form"
       }
     ],
     "failures": [
@@ -555,7 +555,7 @@
     "views": [
       {
         "angle": "+x+z",
-        "outcome": "drifted: form"
+        "outcome": "drifted: massing"
       },
       {
         "angle": "+x-z",
@@ -563,11 +563,11 @@
       },
       {
         "angle": "-x-z",
-        "outcome": "drifted: form"
+        "outcome": "drifted: massing"
       },
       {
         "angle": "-x+z",
-        "outcome": "drifted: form"
+        "outcome": "drifted: massing"
       }
     ]
   },
@@ -600,11 +600,11 @@
     "skips": [
       {
         "feature": "panel:band0",
-        "reason": "no-candidate"
+        "reason": "all-flagged"
       },
       {
         "feature": "course",
-        "reason": "no-candidate"
+        "reason": "all-flagged"
       },
       {
         "feature": "openings:infill",
@@ -632,11 +632,11 @@
         "skipped": [
           {
             "feature": "panel:band0",
-            "reason": "no-candidate"
+            "reason": "all-flagged"
           },
           {
             "feature": "course",
-            "reason": "no-candidate"
+            "reason": "all-flagged"
           }
         ]
       },
@@ -669,9 +669,9 @@
             "kept": 4744
           },
           "roof": {
-            "surface": 2590,
+            "surface": 2527,
             "filled": 0,
-            "kept": 2590
+            "kept": 2527
           }
         }
       }
