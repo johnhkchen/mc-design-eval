@@ -23,10 +23,11 @@ The `.glb` binaries are **gitignored** (~5 MB each, regenerable); this manifest 
 | `cottage.glb` | **full building** (E-20 de-risk, one-off helper) | `runs/014-vConcept-a-cottage/concept.png` | 122,530 | 137,257 | 5.88 MB |
 | `stone-gatehouse.glb` | **full building** (E-20/S-067 **formal mode**) | `runs/015-vBuilding-…-gatehouse-…/concept.png` | 99,363 | 143,053 | 5.02 MB |
 | `church.glb` | **full building — the E-25 CHALLENGE subject** (T-094-01) | `runs/016-vBuilding-a-village-church-with-a-square-bell-tower/concept.png` | 132,892 | 146,118 | 6.47 MB |
+| `barn.glb` | **full building — the E-29 FOURTH SUBJECT** (T-116-01) | `runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png` | 138,513 | 141,220 | 6.51 MB |
 
 All: valid binary glTF v2, 1 mesh / 1 primitive, **2 textures** (the baseColor surface texture is what
 E-17's material-clean pass mines via the CIE-Lab palette technique), 1 material. Sculptures generated
-2026-06-05; cottage + stone-gatehouse 2026-06-06; church 2026-06-10.
+2026-06-05; cottage + stone-gatehouse 2026-06-06; church 2026-06-10; barn 2026-06-11 (sha256 38de9931c26a…, smoke sign-off incl. the named single-speck deviation in runs/017-…/concept-checklist.md).
 
 **church (T-094-01) — the checklist-gated challenge subject.** Cottage and gatehouse were both used to
 develop the E-25 building pipeline, so passing on them cannot prove generalization (Rule 3 needs a

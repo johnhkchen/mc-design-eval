@@ -29,6 +29,7 @@
     "challenge:cottage": "node benchmarks/sculpture/challenge-milestone.mjs --subject cottage",
     "challenge:gatehouse": "node benchmarks/sculpture/challenge-milestone.mjs --subject gatehouse",
     "challenge:church": "node benchmarks/sculpture/challenge-milestone.mjs --subject church",
+    "challenge:barn": "node benchmarks/sculpture/challenge-milestone.mjs --subject barn",
     "grammar:cottage": "node benchmarks/sculpture/placement-grammar.mjs --subject cottage",
     "grammar:gatehouse": "node benchmarks/sculpture/placement-grammar.mjs --subject gatehouse",
     "pattern:cottage": "node benchmarks/sculpture/surface-pattern.mjs",
@@ -80,7 +81,8 @@
     "reconstructed:church": "node benchmarks/sculpture/reconstructed-milestone.mjs --subject church",
     "generated:cottage": "node benchmarks/sculpture/generated-milestone.mjs --subject cottage",
     "generated:gatehouse": "node benchmarks/sculpture/generated-milestone.mjs --subject gatehouse",
-    "generated:church": "node benchmarks/sculpture/generated-milestone.mjs --subject church"
+    "generated:church": "node benchmarks/sculpture/generated-milestone.mjs --subject church",
+    "generated:barn": "node benchmarks/sculpture/generated-milestone.mjs --subject barn"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

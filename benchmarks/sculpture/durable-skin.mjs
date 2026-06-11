@@ -212,6 +212,50 @@ export const SUBJECTS = {
     frontDir: "+z", sideDir: "+x",
     generated: { scale: 48 }, // T-115-01: generate-first working scale (mirrors provision.scale)
   },
+  // THE E-29 FOURTH SUBJECT (T-116-01; S-094 checklist + glb-smoke sign-off in runs/017-…/
+  // concept-checklist.md, incl. the inn→barn fallback decision and the named single-speck smoke
+  // deviation). UNTUNED CONTRACT: registry DATA only — paths, the working scale, and a fallback
+  // prior transcribed 1:1 from the committed material-map roles (church precedent; transcription,
+  // not tuning): walls=cobblestone field, corners-edges/base=stone_bricks (piers/quoins/plinth),
+  // openings=oak_planks (wagon doors), roof=dark_oak_planks. First contact — zone-map/kit records
+  // are nullable and flip to committed paths in T-116-01 bootstrap order. `build` is provisioned
+  // BY the challenge runner (GLB + map at `provision.scale`).
+  barn: {
+    key: "barn",
+    build: "challenge/barn/base-artifact.json",
+    concept: "runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png",
+    glb: "glb/barn.glb",
+    map: "material-map/barn.json",
+    valueSelectRecord: null, // first run IS the value-true result (church precedent)
+    zoneMapRecord: null,     // → "zone-map/barn.json" once the T-116 derivation is committed
+    kitRecord: null,         // → "kit/barn.json" once the T-116 kit extraction is committed
+    provision: { scale: 48 },
+    policy: { // FALLBACK PRIOR, from material-map/barn.json roles (1:1 rule→block transcription)
+      base: {
+        dominant: "cobblestone",                      // structural wall infill
+        preserve: ["stone_bricks", "oak_planks"],     // piers/quoins/plinth + wagon-door leaves
+        splat: ["stone_bricks", "oak_planks"],
+      },
+      upper: {
+        dominant: "cobblestone",                      // same field — single-material body
+        preserve: ["stone_bricks", "oak_planks"],
+        splat: ["stone_bricks", "oak_planks"],
+      },
+      roof: {
+        dominant: "dark_oak_planks",                  // roof shingle planes
+        preserve: [],                                 // anything else on the roof is salt
+        splat: [],
+      },
+    },
+    legacy: { // the E-23 splat-only counterfactual (no E-23 skin ever existed — labeled in the record)
+      base: ["cobblestone", "stone_bricks", "oak_planks"],
+      upper: ["cobblestone", "stone_bricks", "oak_planks"],
+      roof: ["dark_oak_planks"],
+    },
+    plasterInvariant: null,
+    frontDir: "+z", sideDir: "+x",
+    generated: { scale: 48 }, // mirrors provision.scale (T-115 registry-scale alignment)
+  },
 };
 
 const bare = (id) => String(id).replace(/^minecraft:/, "");

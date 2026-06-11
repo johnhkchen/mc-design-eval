@@ -56,6 +56,12 @@ const SUBJECTS = [
     map: "material-map/church.json",
     zoneMapRecord: "zone-map/church.json",
   },
+  { // T-116-01: the E-29 fourth subject's first kit (zone-map/barn.json lands the same ticket)
+    key: "barn",
+    concept: "runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png",
+    map: "material-map/barn.json",
+    zoneMapRecord: "zone-map/barn.json",
+  },
 ];
 
 const OFFLINE = process.argv.includes("--offline");
