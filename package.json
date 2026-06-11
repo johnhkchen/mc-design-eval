@@ -70,7 +70,10 @@
     "shaped:church": "node benchmarks/sculpture/shaped-vocabulary.mjs --subject church",
     "roof:cottage": "node benchmarks/sculpture/roof-program.mjs --subject cottage",
     "roof:gatehouse": "node benchmarks/sculpture/roof-program.mjs --subject gatehouse",
-    "roof:church": "node benchmarks/sculpture/roof-program.mjs --subject church"
+    "roof:church": "node benchmarks/sculpture/roof-program.mjs --subject church",
+    "reskin:cottage": "node benchmarks/sculpture/component-skin.mjs --subject cottage",
+    "reskin:gatehouse": "node benchmarks/sculpture/component-skin.mjs --subject gatehouse",
+    "reskin:church": "node benchmarks/sculpture/component-skin.mjs --subject church"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
