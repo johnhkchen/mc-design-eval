@@ -1,0 +1,337 @@
+{
+  "schema": "brush-catalog/v1",
+  "ticket": "T-128-01",
+  "brushCount": 19,
+  "constructs": 11,
+  "passes": 8,
+  "verdict": {
+    "ok": true,
+    "contractOk": true,
+    "gate": "pass",
+    "unmapped": 0,
+    "plots": 19
+  },
+  "plots": [
+    {
+      "name": "arch",
+      "kind": "construct",
+      "via": "card:arch",
+      "origin": [
+        0,
+        1,
+        0
+      ],
+      "size": [
+        7,
+        2,
+        1
+      ]
+    },
+    {
+      "name": "chimney",
+      "kind": "construct",
+      "via": "card:chimney-bare",
+      "origin": [
+        11,
+        1,
+        0
+      ],
+      "size": [
+        1,
+        5,
+        1
+      ]
+    },
+    {
+      "name": "course.slab",
+      "kind": "construct",
+      "via": "card:slab-course",
+      "origin": [
+        16,
+        1,
+        0
+      ],
+      "size": [
+        1,
+        1,
+        4
+      ]
+    },
+    {
+      "name": "course.stairs",
+      "kind": "construct",
+      "via": "card:stairs-walk",
+      "origin": [
+        21,
+        1,
+        0
+      ],
+      "size": [
+        4,
+        4,
+        2
+      ]
+    },
+    {
+      "name": "dormer",
+      "kind": "construct",
+      "via": "card:dormer-px",
+      "origin": [
+        29,
+        1,
+        0
+      ],
+      "size": [
+        3,
+        4,
+        3
+      ]
+    },
+    {
+      "name": "floorplan",
+      "kind": "pass",
+      "via": "substrate:box (effect 13)",
+      "origin": [
+        36,
+        1,
+        0
+      ],
+      "size": [
+        9,
+        4,
+        7
+      ]
+    },
+    {
+      "name": "head.flat",
+      "kind": "construct",
+      "via": "card:head-flat",
+      "origin": [
+        49,
+        1,
+        0
+      ],
+      "size": [
+        5,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "hollow",
+      "kind": "pass",
+      "via": "substrate:solid (effect 60)",
+      "origin": [
+        0,
+        1,
+        11
+      ],
+      "size": [
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "name": "jetty",
+      "kind": "construct",
+      "via": "card:jetty-xp",
+      "origin": [
+        8,
+        1,
+        11
+      ],
+      "size": [
+        7,
+        2,
+        1
+      ]
+    },
+    {
+      "name": "opening-dressing",
+      "kind": "pass",
+      "via": "substrate:shell (effect 44)",
+      "origin": [
+        19,
+        1,
+        11
+      ],
+      "size": [
+        9,
+        5,
+        7
+      ]
+    },
+    {
+      "name": "plinth",
+      "kind": "construct",
+      "via": "card:plinth",
+      "origin": [
+        32,
+        1,
+        11
+      ],
+      "size": [
+        7,
+        2,
+        5
+      ]
+    },
+    {
+      "name": "roof.gable",
+      "kind": "construct",
+      "via": "card:gable-ridge-z",
+      "origin": [
+        43,
+        1,
+        11
+      ],
+      "size": [
+        9,
+        5,
+        6
+      ]
+    },
+    {
+      "name": "roof.hip",
+      "kind": "construct",
+      "via": "card:hip",
+      "origin": [
+        0,
+        1,
+        22
+      ],
+      "size": [
+        9,
+        5,
+        12
+      ]
+    },
+    {
+      "name": "roof.pyramid",
+      "kind": "construct",
+      "via": "card:pyramid",
+      "origin": [
+        13,
+        1,
+        22
+      ],
+      "size": [
+        7,
+        4,
+        7
+      ]
+    },
+    {
+      "name": "surface.fill",
+      "kind": "pass",
+      "via": "substrate:shell (effect 60)",
+      "origin": [
+        24,
+        1,
+        22
+      ],
+      "size": [
+        7,
+        4,
+        5
+      ]
+    },
+    {
+      "name": "surface.paint",
+      "kind": "pass",
+      "via": "substrate:shell (effect 12)",
+      "origin": [
+        35,
+        1,
+        22
+      ],
+      "size": [
+        7,
+        5,
+        4
+      ]
+    },
+    {
+      "name": "surface.roof-courses",
+      "kind": "pass",
+      "via": "substrate:solid (effect 2)",
+      "origin": [
+        46,
+        1,
+        22
+      ],
+      "size": [
+        6,
+        3,
+        5
+      ]
+    },
+    {
+      "name": "surface.strip-salt",
+      "kind": "pass",
+      "via": "substrate:shell (effect 3)",
+      "origin": [
+        0,
+        1,
+        38
+      ],
+      "size": [
+        7,
+        4,
+        5
+      ]
+    },
+    {
+      "name": "timber-frame",
+      "kind": "pass",
+      "via": "substrate:shell (effect 64)",
+      "origin": [
+        11,
+        1,
+        38
+      ],
+      "size": [
+        9,
+        6,
+        6
+      ]
+    }
+  ],
+  "unmapped": [],
+  "evidence": {
+    "renders": [
+      {
+        "angle": "+x+z",
+        "path": "benchmarks/sculpture/brush-catalog/view-catalog-+x+z.png",
+        "bytes": 315744,
+        "sha256": "a51f197027682d1a6c34e3793a1e451204c2337d9f4d4f59b19008253b25a105"
+      },
+      {
+        "angle": "+x-z",
+        "path": "benchmarks/sculpture/brush-catalog/view-catalog-+x-z.png",
+        "bytes": 331523,
+        "sha256": "e6d602fe3c15dfe1e17d5b8f7d466e8e7d6bbca5b19e00a49e820a7a854dae0e"
+      },
+      {
+        "angle": "-x-z",
+        "path": "benchmarks/sculpture/brush-catalog/view-catalog--x-z.png",
+        "bytes": 328864,
+        "sha256": "db959cfbfda6f89193fb18547637590ef8bb5b428bc83c86cf2ac2203772b57e"
+      },
+      {
+        "angle": "-x+z",
+        "path": "benchmarks/sculpture/brush-catalog/view-catalog--x+z.png",
+        "bytes": 332638,
+        "sha256": "ec26a981c506ace247ce3692340df11783b42632caa80b3aa7110e28f1d843a4"
+      },
+      {
+        "angle": "front",
+        "path": "benchmarks/sculpture/brush-catalog/view-catalog-front.png",
+        "bytes": 71152,
+        "sha256": "dfc5ecd6abce75434a6222222d4baae69bf0763254e5df6ced253aac590669f3"
+      }
+    ],
+    "renderError": null
+  }
+}
