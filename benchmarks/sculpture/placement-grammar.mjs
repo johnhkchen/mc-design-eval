@@ -43,7 +43,7 @@ import { fileURLToPath } from "node:url";
 import { artifactOccupancy, bareBlock } from "../../src/view/occupancy.mjs";
 import { structuralZones } from "../../src/view/structural-read.mjs";
 import { zonesFromBands } from "../../src/view/zone-map.mjs";
-import { surfaceZoneHistogram, dominantCoverage } from "../../src/view/zone-fill.mjs";
+import { surfaceZoneHistogram, ownCoverage } from "../../src/view/zone-fill.mjs";
 import { applyPaint } from "../../src/view/face-paint.mjs";
 import { coverageGate, DEFAULT_COVERAGE_THRESHOLD } from "../../src/view/face-resemblance.mjs";
 import { placementGrammar, GRAMMAR_SCHEMA } from "../../src/form/placement-grammar.mjs";
@@ -142,12 +142,16 @@ export function grammarStage(build, { bands, roof, policy, substitution, kitRec,
   const censusZoneOf = componentPlan
     ? planCensusZoneOf(zb.zoneOf, componentPlan, bandNames, { frameCells: frames?.cells ?? null })
     : zb.zoneOf;
-  const cov = dominantCoverage(
+  // T-110-01: the re-asserted gate matches durable-skin stage 9's role-family metric — the grammar
+  // legitimately paints declared secondaries (frames, courses); censusing one literal dominant name
+  // under-counts exactly what the kit placed (the T-095/T-101/T-110 kit-blind-gate lineage).
+  const cov = ownCoverage(
     surfaceZoneHistogram(artifactOccupancy(final), censusZoneOf, { skin: "exposure" }), policy);
-  const gate = coverageGate(cov, { threshold: COVERAGE_THRESHOLD, zones: policy });
+  const gate = coverageGate(cov, { threshold: COVERAGE_THRESHOLD, zones: policy, metric: "own" });
   if (!gate.passed) {
     throw new Error(`coverage gate FAILED after the grammar: ` +
-      gate.failures.map((f) => `${f.zone} ${f.dominant}=${f.fraction} < ${COVERAGE_THRESHOLD}`).join(", "));
+      gate.failures.map((f) => `${f.zone} own=${f.fraction} (dominant ${f.dominant}=` +
+        `${cov[f.zone]?.dominantFraction ?? "?"}) < ${COVERAGE_THRESHOLD}`).join(", "));
   }
   const bandsEvidence = bandEvidence(cov, policy);
   const worstResidue = Math.max(0, ...Object.values(bandsEvidence.wallForeignResidue).filter((v) => v != null));

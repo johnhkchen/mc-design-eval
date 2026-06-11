@@ -46,7 +46,7 @@ import { projectSurface } from "../../src/view/surface-grid.mjs";
 import { structuralZones } from "../../src/view/structural-read.mjs";
 import { sealRoof, sealWalls, applyDeltas } from "../../src/view/surface-coherence.mjs";
 import {
-  zoneFill, surfaceZoneHistogram, dominantCoverage, exposedVoxelEntries,
+  zoneFill, surfaceZoneHistogram, ownCoverage, exposedVoxelEntries,
 } from "../../src/view/zone-fill.mjs";
 import { extractConceptZoneMap } from "../../src/color/band-profile.mjs";
 import { layerCounts, zonesFromBands, diffZoneMaps } from "../../src/view/zone-map.mjs";
@@ -492,9 +492,16 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
   // truth for the front, so with coverage passed the paint is accepted; the resemblance delta is rendered
   // later as EVIDENCE — it cannot rescue a coverage failure, per the T-088 contract).
   const frontCandidate = applyPaint(based, frontPass.placements);
-  const covFrontCandidate = dominantCoverage(
+  // T-110-01 (E-28, the third kit-blind-gate instance after T-095/T-101): the live gates census the
+  // zone's OWN vocabulary — dominant ∪ preserve, i.e. the material map's roles for the band mapped
+  // through the one renaming point (subK). The church's band0 carries TWO stone-family blocks
+  // (wall-body + quoins/plinth) by assignment; gating one literal name read 0.327 where the
+  // role-family read 0.915. metric "own" is strictly monotone vs "dominant" (own ⊇ dominant) —
+  // proven over the committed records in src/view/coverage-monotone.test.mjs. Both fractions ship
+  // in every census row; thresholds untouched.
+  const covFrontCandidate = ownCoverage(
     surfaceZoneHistogram(artifactOccupancy(frontCandidate), censusZoneOf, { skin: "exposure" }), policyS);
-  const gateFrontCandidate = coverageGate(covFrontCandidate, { threshold: COVERAGE_THRESHOLD, zones: policyS });
+  const gateFrontCandidate = coverageGate(covFrontCandidate, { threshold: COVERAGE_THRESHOLD, zones: policyS, metric: "own" });
   const frontAccepted = gateFrontCandidate.passed;
   const sideAccepted = sidePass.painted > 0;
   const acceptedPasses = [];
@@ -517,9 +524,11 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
   const splatOnly = applyPaint(sealed, mergePaints(
     [sideLegacy, frontLegacy].filter((p) => (p.placements?.length ?? 0) > 0),
     { priority: ["concept", "glb"] }).placements);
-  const covSplatOnly = dominantCoverage(
+  const covSplatOnly = ownCoverage(
     surfaceZoneHistogram(artifactOccupancy(splatOnly), censusZoneOf, { skin: "exposure" }), policyS);
-  const gateSplatOnly = coverageGate(covSplatOnly, { threshold: COVERAGE_THRESHOLD, zones: policyS });
+  // the baseline keeps ITS historical metric (the legacy-replay rule above): the E-23 counterfactual
+  // is judged as E-23 was — switching it could flip the expected REJECT; both fractions still recorded
+  const gateSplatOnly = coverageGate(covSplatOnly, { threshold: COVERAGE_THRESHOLD, zones: policyS, metric: "dominant" });
 
   // --- 8. COHERENT SURFACE (T-087: geometry first, pattern second) --------------------------------
   // T-106-01: on the roof PROGRAM's footprint the courses are the contract, not a height field to
@@ -563,17 +572,19 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
     }
     plaster = { block, histogram, allowedZones };
   }
-  const covFinal = dominantCoverage(
+  const covFinal = ownCoverage(
     surfaceZoneHistogram(artifactOccupancy(final), censusZoneOf, { skin: "exposure" }), policyS);
-  const gateFinal = coverageGate(covFinal, { threshold: COVERAGE_THRESHOLD, zones: policyS });
+  const gateFinal = coverageGate(covFinal, { threshold: COVERAGE_THRESHOLD, zones: policyS, metric: "own" });
   if (!gateFinal.passed) {
     // the failure carries its MEASURED CAUSE (T-106-01 AC: "the residual is named") — the failing
-    // zone's full census plus its :offslab/:frame complements land in the pipeline-failed record
+    // zone's full census plus its :offslab/:frame complements land in the pipeline-failed record;
+    // T-110-01: both fractions named (the role-family "own" is the gated one)
     const cause = gateFinal.failures.map((f) => {
       const parts = [f.zone, `${f.zone}:offslab`, `${f.zone}:frame`]
         .filter((z) => covFinal[z])
         .map((z) => `${z}=${JSON.stringify({ total: covFinal[z].total, byBlock: covFinal[z].byBlock })}`);
-      return `${f.zone} ${f.dominant}=${f.fraction} < ${COVERAGE_THRESHOLD} [census: ${parts.join("; ")}]`;
+      return `${f.zone} own=${f.fraction} (dominant ${f.dominant}=${covFinal[f.zone]?.dominantFraction ?? "?"}) ` +
+        `< ${COVERAGE_THRESHOLD} [census: ${parts.join("; ")}]`;
     });
     throw new Error(`coverage gate FAILED on the final skin: ${cause.join(", ")}`);
   }
@@ -791,10 +802,16 @@ async function main() {
     coverage: r1.coverage,
     coverageGate: {
       threshold: COVERAGE_THRESHOLD,
+      metric: { final: "own", frontCandidate: "own", splatOnly: "dominant" },
       splatOnly: r1.gates.splatOnly, // expect passed:false — the E-23 baseline cannot establish a dominant
       final: r1.gates.final,         // expect passed:true  — a failing skin would have thrown, no record
       note: "coverage is a PRECONDITION (T-088): the splat-only replay is rejected delta-independently; " +
-        "the final skin must pass or the run throws. Census basis = the full 6-dir exposure shell (T-090).",
+        "the final skin must pass or the run throws. Census basis = the full 6-dir exposure shell (T-090). " +
+        "T-110-01 (third kit-blind-gate instance, after T-095/T-101): live gates use metric 'own' — the " +
+        "zone's role-family vocabulary (dominant ∪ preserve, the material-map roles at the renaming seam), " +
+        "strictly monotone vs 'dominant' (own ⊇ dominant; replay-proven in coverage-monotone.test.mjs). " +
+        "The splat-only baseline keeps its historical 'dominant' metric (frozen counterfactual). " +
+        "Both fractions are recorded in every census row; threshold unchanged.",
     },
     bands: { ...r1.bands, roofTarget: ROOF_BAND_TARGET, residueMax: UPPER_RESIDUE_MAX },
     invariants: { plaster: r1.plaster },
