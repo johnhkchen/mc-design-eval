@@ -227,8 +227,9 @@ function rebuildOccupancy(occ, keptSolid, added, blockOf) {
   return occupancyFromCells(cells);
 }
 
-/** Most common block over the cells map — close's total fallback (mirrors plugClosure's). */
-function dominantBlock(cells) {
+/** Most common block over the cells map — close's total fallback (mirrors plugClosure's).
+ *  Exported for T-109's plane terminations, which fill with the same deterministic rule. */
+export function dominantBlock(cells) {
   const counts = new Map();
   for (const b of cells.values()) counts.set(b, (counts.get(b) || 0) + 1);
   let dom = null, best = -1;
@@ -239,8 +240,9 @@ function dominantBlock(cells) {
 }
 
 /** Majority block among solid 6-neighbors (as written, namespaced like its siblings); ties break
- *  lexicographically on the BARE id; no solid neighbor → the build dominant. Deterministic. */
-function majorityNeighborBlock(pos, occ, fallback) {
+ *  lexicographically on the BARE id; no solid neighbor → the build dominant. Deterministic.
+ *  Exported for T-109's plane terminations (the closeShell addition rule, reused not forked). */
+export function majorityNeighborBlock(pos, occ, fallback) {
   const counts = new Map();
   const [x, y, z] = pos;
   for (const [dx, dy, dz] of NEIGH6) {
