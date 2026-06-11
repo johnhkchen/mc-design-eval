@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 import { loadStylePack } from "../pack/style-pack.mjs";
 import { BUILDING_PROGRAM_SCHEMA } from "./program.mjs";
 import {
-  buildRecognitionPrompt,
+  recognitionRenderArgs,
   packDigest,
   sketchDigest,
   stripReplyToJson,
@@ -51,25 +51,28 @@ const validReply = JSON.stringify({
   }],
 });
 
-test("prompt is deterministic and carries the whole vocabulary", () => {
-  const a = buildRecognitionPrompt({ pack, sketch });
-  const b = buildRecognitionPrompt({ pack, sketch });
-  assert.equal(a, b);
-  for (const p of pack.palette) assert.ok(a.includes(`\`${p.role}\``), `role ${p.role} taught`);
-  for (const name of ["roof.gable", "roof.hip", "roof.pyramid"]) assert.ok(a.includes(name));
-  assert.ok(a.includes("timber-frame"), "treatments taught");
-  assert.ok(a.includes('"building-program/v1"'), "schema embedded");
-  assert.ok(a.includes("pitch classes [1]"), "pitch vocabulary taught");
-  assert.ok(a.includes("concept-evidence > pack-assignment > vernacular-default"));
+// The prompt SKELETON moved to baml_src/recognition.baml (T-129-01); the full rendered prompt
+// is sha-pinned to the committed records by src/baml/fixtures.test.mjs. These tests pin the
+// DATA the template interpolates — the typed args of the BAML function.
+test("render args are deterministic and carry the whole vocabulary", () => {
+  const a = recognitionRenderArgs({ pack, sketch });
+  const b = recognitionRenderArgs({ pack, sketch });
+  assert.deepEqual(a, b);
+  for (const p of pack.palette) assert.ok(a.pack_digest.includes(`\`${p.role}\``), `role ${p.role} taught`);
+  for (const name of ["roof.gable", "roof.hip", "roof.pyramid"]) assert.ok(a.pack_digest.includes(name));
+  assert.ok(a.pack_digest.includes("timber-frame"), "treatments taught");
+  assert.ok(a.schema_json.includes('"building-program/v1"'), "schema embedded");
+  assert.ok(a.pack_digest.includes("pitch classes [1]"), "pitch vocabulary taught");
+  assert.ok(a.pack_digest.includes("concept-evidence > pack-assignment > vernacular-default"));
 });
 
-test("prompt embeds the sketch digest numbers", () => {
-  const a = buildRecognitionPrompt({ pack, sketch });
-  assert.ok(a.includes("40×48 cells"));
-  assert.ok(a.includes("pitched45"));
-  assert.ok(a.includes("eave ≈ 8 blocks, total height ≈ 14 blocks"));
-  assert.ok(a.includes("2 storeys (~4 blocks each)"));
-  assert.ok(!a.includes("5 storeys"), "implausible candidates filtered");
+test("render args embed the sketch digest numbers", () => {
+  const a = recognitionRenderArgs({ pack, sketch });
+  assert.ok(a.sketch_digest.includes("40×48 cells"));
+  assert.ok(a.sketch_digest.includes("pitched45"));
+  assert.ok(a.sketch_digest.includes("eave ≈ 8 blocks, total height ≈ 14 blocks"));
+  assert.ok(a.sketch_digest.includes("2 storeys (~4 blocks each)"));
+  assert.ok(!a.sketch_digest.includes("5 storeys"), "implausible candidates filtered");
 });
 
 test("sketchDigest reads a COMMITTED sketch record's shape (contract with form-sketch/v1)", () => {

@@ -29,7 +29,8 @@ import { guardedWriteRecord, preflightPins, loadTrackedSet, isTracked, ROTATE_FL
 import { loadStylePack } from "../../src/pack/style-pack.mjs";
 import { runConformance } from "../../src/pack/conformance.mjs";
 import { PROGRAM_REPLY_BUDGET } from "../../src/recognition/program.mjs";
-import { buildRecognitionPrompt, parseProgramReply } from "../../src/recognition/prompt.mjs";
+import { recognitionRenderArgs, parseProgramReply } from "../../src/recognition/prompt.mjs";
+import { bamlRender } from "../../src/baml/bridge.mjs";
 import { compileProgram } from "../../src/recognition/compile.mjs";
 import { assertWorkshopProgram, realizeProgram } from "../../src/workshop/program.mjs";
 import { assertArtifact } from "../../src/artifact.mjs";
@@ -126,16 +127,22 @@ async function runLive(def, { rotate }) {
   const conceptB64 = (await readFile(join(HERE, def.concept))).toString("base64");
   const sheetB64 = (await readFile(join(SKETCH_DIR, `${key}-sheet.png`))).toString("base64");
 
-  const prompt = buildRecognitionPrompt({ pack, sketch });
+  // The prompt is the BAML function's render (T-129-01) — text AND image order come from the
+  // rendered request; the sha pins it to the committed records (byte-identical to the retired
+  // .mjs builder, proven by the fixture test).
+  const { prompt, images } = await bamlRender({
+    fn: "RecognizeBuildingProgram",
+    args: recognitionRenderArgs({ pack, sketch }),
+    images: {
+      concept: { base64: conceptB64, mediaType: "image/png" },
+      sketch_sheet: { base64: sheetB64, mediaType: "image/png" },
+    },
+  });
   const promptSha256 = sha256(prompt);
   const model = MODEL_TIERS.strong;
   const rawTexts = [];
   const ask = async () => {
-    const { text } = await requestTextWithImage({
-      prompt,
-      images: [{ base64: conceptB64, mediaType: "image/png" }, { base64: sheetB64, mediaType: "image/png" }],
-      model,
-    });
+    const { text } = await requestTextWithImage({ prompt, images, model });
     rawTexts.push(text);
     return { text };
   };
