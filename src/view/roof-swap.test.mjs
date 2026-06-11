@@ -191,6 +191,28 @@ test("chimneyColumns unions the record's protrusion masses with the geometric st
   assert.ok(cols.has("2,3"));
 });
 
+test("attempt ladder: a glb pitch inconsistent with the geometry falls back to voxel under the cage", () => {
+  // as-fitted (glb) pitch 0.25 never reaches the ridge → flat-topped wedge → IoU rejection;
+  // the declared second attempt (all-voxel, pitch 1) realizes the recorded geometry and passes.
+  const g = gable();
+  for (const s of g.sides) Object.assign(s, { pitch: 0.25, pitchSource: "glb", glbPitch: 0.25, voxelPitch: 1 });
+  const input = spikyInput();
+  const res = swapRoof(input, { gables: [g], family: SPRUCE, refSils: refsOf(idealOcc()) });
+  assert.equal(res.accepted, true, res.reasons.join("; "));
+  assert.equal(res.attempt, "voxel-pitch");
+  assert.equal(res.attempts.length, 2);
+  assert.equal(res.attempts[0].accepted, false);
+  assert.ok(res.attempts[0].reasons.some((r) => /silhouette IoU regressed/.test(r)));
+  assert.deepEqual(res.attempts[1].pitches[0].sides.map((s) => s.source), ["voxel", "voxel"]);
+});
+
+test("attempt ladder: identical pitch sources collapse to a single attempt", () => {
+  const input = spikyInput();
+  const res = swapRoof(input, { gables: [gable()], family: SPRUCE, refSils: refsOf(idealOcc()) });
+  assert.equal(res.attempts.length, 1, "no voxelPitch on the synthetic sides → no second variant");
+  assert.equal(res.attempt, "as-fitted");
+});
+
 test("determinism: two swaps report identical metrics", () => {
   const args = () => ({ gables: [gable()], family: SPRUCE, refSils: refsOf(idealOcc()) });
   const a = swapRoof(spikyInput(), args());

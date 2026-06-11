@@ -35,7 +35,7 @@ import {
   REGULARIZE_DEFAULTS, silhouetteIoUs, protectViolations, protrudingStackRegion,
 } from "./shell-regularize.mjs";
 import { generateRoof } from "./roof-generate.mjs";
-import { programFitError, ROOF_FIT_DEFAULTS } from "../form/roof-fit.mjs";
+import { programFitError, pitchVariant, ROOF_FIT_DEFAULTS } from "../form/roof-fit.mjs";
 import { runCells } from "../form/component-decompose.mjs";
 
 const NEIGH6 = Object.freeze([[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]]);
@@ -118,15 +118,8 @@ function gatedGenerate(gables, family, programRmseTol) {
   return { gen: generateRoof([], family), fitErrors: [], pool: [], findings };
 }
 
-/**
- * THE SWAP: carve the sampled roof over the generated footprint, compose the generated roof,
- * re-seat the chimney, judge with the cage's three checks, roll back on any regression.
- * @param {import("./occupancy.mjs").Occupancy} occ the regularized shell
- * @param {{gables:object[], family:object, refSils:Record<string,object>, regions?:object[],
- *          protect?:{name:string, contains:(pos:number[])=>boolean}[], chimney?:Set<string>,
- *          opts?:{iouTolerance?:number, grid?:number, spikeFaces?:number, programRmseTol?:number}}} args
- */
-export function swapRoof(occ, { gables, family, refSils, regions = [], protect = [], chimney = new Set(), opts = {} }) {
+/** One judged carve-compose-judge pass for a fixed set of gables (one attempt of the ladder). */
+function judgeVariant(occ, { gables, family, refSils, regions = [], protect = [], chimney = new Set(), opts = {} }) {
   const iouTolerance = opts.iouTolerance ?? REGULARIZE_DEFAULTS.iouTolerance;
   const grid = opts.grid ?? REGULARIZE_DEFAULTS.grid;
   const spikeFaces = opts.spikeFaces ?? REGULARIZE_DEFAULTS.spikeFaces;
@@ -218,4 +211,43 @@ export function swapRoof(occ, { gables, family, refSils, regions = [], protect =
 
 function mapRound(o) {
   return Object.fromEntries(Object.entries(o).map(([k, v]) => [k, round4(v)]));
+}
+
+/** The pitch signature of a gable set — used to skip a variant identical to the one before it. */
+const pitchKey = (gables) =>
+  JSON.stringify(gables.map((g) => g.sides.map((s) => [s.pitch, s.pitchSource])));
+
+/**
+ * THE SWAP: carve the sampled roof over the generated footprint, compose the generated roof,
+ * re-seat the chimney, judge with the cage's three checks, roll back on any regression.
+ *
+ * ATTEMPT LADDER (declared, deterministic, every attempt recorded): the as-fitted gables first
+ * (glb-preferred pitches); if the cage rejects, ONE retry with all-voxel pitches. A glb gradient
+ * can pass the angle-agreement gate yet be inconsistent with the recorded eave/ridge geometry
+ * (the cottage roof-0 apex shortfall — eave 15 + 0.773·run 8.5 never reaches ridge 24); the cage
+ * vs the GLB silhouette is the arbiter between the two declared sources — the E-15 lesson as a
+ * mechanism, not a tuned constant. Both attempts rejected → the input stands (Rule 1 fallback).
+ * @param {import("./occupancy.mjs").Occupancy} occ the regularized shell
+ * @param {{gables:object[], family:object, refSils:Record<string,object>, regions?:object[],
+ *          protect?:{name:string, contains:(pos:number[])=>boolean}[], chimney?:Set<string>,
+ *          opts?:{iouTolerance?:number, grid?:number, spikeFaces?:number, programRmseTol?:number}}} args
+ */
+export function swapRoof(occ, args) {
+  const { gables, opts = {} } = args;
+  const variants = [{ name: "as-fitted", gables }];
+  const voxel = pitchVariant(gables, "voxel", opts);
+  if (pitchKey(voxel) !== pitchKey(gables)) variants.push({ name: "voxel-pitch", gables: voxel });
+
+  const attempts = [];
+  let first = null;
+  for (const v of variants) {
+    const res = judgeVariant(occ, { ...args, gables: v.gables });
+    attempts.push({ name: v.name, accepted: res.accepted, reasons: res.reasons, iou: res.iou,
+      census: res.census, generated: res.generated, findings: res.findings,
+      pitches: v.gables.filter((g) => g.sane).map((g) => ({
+        id: g.id, sides: g.sides.map((s) => ({ planeId: s.planeId, pitch: s.pitch, source: s.pitchSource })) })) });
+    if (!first) first = res;
+    if (res.accepted) return { ...res, attempt: v.name, attempts };
+  }
+  return { ...first, attempt: variants[0].name, attempts };
 }

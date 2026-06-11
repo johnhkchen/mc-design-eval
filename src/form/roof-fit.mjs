@@ -279,6 +279,26 @@ export function gablesFromRecord(record, opts = {}) {
 }
 
 /**
+ * The same gables with every side's pitch switched to the named source ("voxel" | "glb") where
+ * that source is sane (> 0, ≤ maxPitch); sides without a sane value keep their chosen pitch. Used
+ * by the swap's attempt ladder: when the glb-preferred pitches fail the cage (a glb gradient can
+ * pass the angle gate yet be inconsistent with the recorded eave/ridge geometry — the cottage
+ * roof-0 apex shortfall), the all-voxel variant is the declared second attempt and the cage
+ * arbitrates. PURE; does not mutate the input.
+ */
+export function pitchVariant(gables, source, opts = {}) {
+  const o = { ...ROOF_FIT_DEFAULTS, ...opts };
+  return gables.map((g) => ({
+    ...g,
+    sides: g.sides.map((s) => {
+      const p = source === "voxel" ? s.voxelPitch : s.glbPitch;
+      if (p === null || p === undefined || p <= 0 || p > o.maxPitch) return s;
+      return { ...s, pitch: p, pitchSource: source };
+    }),
+  }));
+}
+
+/**
  * The recorded FIT ERROR (Rule 1): RMSE of the generated column heights against each side's chosen
  * plane (evalSideHeight), over that side's own extent. Gates the gable at `programRmseTol`.
  * @param {object} gable a sane gable from {@link gablesFromRecord}

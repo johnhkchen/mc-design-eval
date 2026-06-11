@@ -5,7 +5,7 @@ import assert from "node:assert/strict";
 
 import { columnRuns } from "./component-decompose.mjs";
 import {
-  ROOF_FIT_DEFAULTS, gablesFromRecord, evalSideHeight, programFitError, planeHeightAt,
+  ROOF_FIT_DEFAULTS, gablesFromRecord, evalSideHeight, programFitError, planeHeightAt, pitchVariant,
 } from "./roof-fit.mjs";
 
 /** Row runs over an inclusive plan rectangle. */
@@ -204,6 +204,20 @@ test("programFitError measures generated heights against the chosen planes", () 
   // a flagrantly wrong surface fails the declared tolerance
   const flat = new Map([...heights.keys()].map((k) => [k, 10]));
   assert.ok(programFitError(g, flat).rmse > ROOF_FIT_DEFAULTS.programRmseTol);
+});
+
+test("pitchVariant switches sane sides to the named source and keeps the rest", () => {
+  const { gables } = gablesFromRecord(gableRecord());
+  const vox = pitchVariant(gables, "voxel");
+  for (const s of vox[0].sides) {
+    assert.equal(s.pitchSource, "voxel");
+    assert.equal(s.pitch, 1);
+  }
+  // original gables untouched (pure)
+  assert.equal(gables[0].sides[0].pitchSource, "glb");
+  // a side without a sane source value keeps its chosen pitch
+  const noVox = pitchVariant([{ ...gables[0], sides: gables[0].sides.map((s) => ({ ...s, voxelPitch: null })) }], "voxel");
+  assert.equal(noVox[0].sides[0].pitchSource, "glb");
 });
 
 test("determinism: two fits of the same record are deep-equal", () => {
