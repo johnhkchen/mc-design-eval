@@ -13,7 +13,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   rowProfile, robustExtent, mapRowsToLayers, segmentLayerBands, snapBands,
-  resolveBandRoles, extractConceptZoneMap,
+  resolveBandRoles, fieldResolution, extractConceptZoneMap,
   EXTENT_WIDTH_FLOOR, MIN_BAND_HEIGHT, SNAP_TOLERANCE, SECONDARY_MIN_SHARE,
 } from "./band-profile.mjs";
 import { gridFromPixels } from "./image-grid.mjs";
@@ -336,4 +336,119 @@ test("fallback results still report the params used (recorded, not silent)", () 
   const zm = extractConceptZoneMap({ gridResult: { grid, n: 8, m: 8 }, ...GEO, materialMap: MAT_MAP });
   assert.equal(zm.readable, false);
   assert.equal(zm.params.minProfileCells, 200);
+});
+
+// --- Group H: role-aware field resolution (T-117-01) --------------------------
+//
+// BARN_MAP transcribes material-map/barn.json's roles + recorded nearTonePairs (committed data,
+// not tuning): the ΔL 2.082 witness — under the concept's global lightness offset every cobble
+// field cell quantizes to stone_bricks, and the role structure must classify the field back.
+
+const BARN_MAP = {
+  map: [
+    { role: "structural wall infill", block: "minecraft:cobblestone", placementRule: "walls" },
+    { role: "buttress piers, quoins and opening frames", block: "minecraft:stone_bricks", placementRule: "corners-edges" },
+    { role: "plinth / ground banding course", block: "minecraft:stone_bricks", placementRule: "base" },
+    { role: "roof shingle planes", block: "minecraft:dark_oak_planks", placementRule: "roof" },
+    { role: "wagon-door leaves", block: "minecraft:oak_planks", placementRule: "openings" },
+  ],
+  nearTonePairs: [
+    { a: "minecraft:cobblestone", b: "minecraft:stone_bricks", dL: 2.082 },
+    { a: "minecraft:cobblestone", b: "minecraft:oak_planks", dL: 3.26 },
+    { a: "minecraft:stone_bricks", b: "minecraft:oak_planks", dL: 5.342 },
+  ],
+};
+
+test("fieldResolution: barn transcription resolves feature twins to the walls field", () => {
+  const r = fieldResolution(BARN_MAP);
+  assert.equal(r.get("stone_bricks"), "cobblestone"); // corners-edges+base twin at the recorded ΔL 2.082
+  assert.equal(r.get("oak_planks"), "cobblestone");   // openings twin (recorded pair)
+  assert.equal(r.has("dark_oak_planks"), false);      // roof rule → ineligible
+  assert.equal(r.has("cobblestone"), false);          // the field itself never resolves
+});
+
+test("fieldResolution: roof-rule keys never resolve even when a walls pair is recorded", () => {
+  const m = {
+    map: [
+      { role: "field", block: "minecraft:white_terracotta", placementRule: "walls" },
+      { role: "roof", block: "minecraft:spruce_planks", placementRule: "roof" },
+    ],
+    nearTonePairs: [{ a: "minecraft:spruce_planks", b: "minecraft:white_terracotta", dL: 1.5 }],
+  };
+  assert.equal(fieldResolution(m).size, 0);
+});
+
+test("fieldResolution: several walls partners → min dL; pairless or pair-absent maps → empty", () => {
+  const m = {
+    map: [
+      { role: "f1", block: "minecraft:stone_bricks", placementRule: "walls" },
+      { role: "f2", block: "minecraft:white_terracotta", placementRule: "walls" },
+      { role: "edge", block: "minecraft:cobblestone", placementRule: "corners-edges" },
+    ],
+    nearTonePairs: [
+      { a: "minecraft:cobblestone", b: "minecraft:stone_bricks", dL: 2.082 },
+      { a: "minecraft:cobblestone", b: "minecraft:white_terracotta", dL: 9.4 },
+    ],
+  };
+  assert.equal(fieldResolution(m).get("cobblestone"), "stone_bricks"); // 2.082 < 9.4
+  assert.equal(fieldResolution(MAT_MAP).size, 0); // no nearTonePairs recorded → the rung never engages
+  assert.equal(fieldResolution({ map: m.map, nearTonePairs: [] }).size, 0);
+});
+
+test("segmentLayerBands: fieldResolve projects the dominance/share view; counts stay original", () => {
+  const byY = new Map();
+  for (let y = 0; y <= 5; y++) byY.set(y, { filled: 10, counts: { stone_bricks: 8, dark_oak_planks: 2 } });
+  const fieldBlocks = new Set(["cobblestone"]);
+  // without resolution this is exactly today's empty result
+  assert.deepEqual(segmentLayerBands(byY, { yLo: 0, yHi: 5, fieldBlocks }), []);
+  const bands = segmentLayerBands(byY, {
+    yLo: 0, yHi: 5, fieldBlocks, fieldResolve: new Map([["stone_bricks", "cobblestone"]]),
+  });
+  assert.equal(bands.length, 1);
+  assert.equal(bands[0].dominant, "cobblestone");      // the projected field key
+  assert.equal(bands[0].share, 1);                     // share of the PROJECTED field cells
+  assert.equal(bands[0].counts.stone_bricks, 48);      // original histogram preserved (secondaries)
+  assert.equal(bands[0].counts.cobblestone, undefined);
+});
+
+test("THE BARN WITNESS: wholesale-flipped field rows classify cobble-dominant end-to-end", () => {
+  // the measured failure state: every wall cell snapped to stone_bricks (ΔL 2.082 twin), roof rows
+  // dark_oak — rung 1 sees zero field cells, the role-aware rung must read the field back
+  const grid = Array.from({ length: 48 }, () => new Array(32).fill(null));
+  for (let y = 8; y <= 15; y++) for (let x = 0; x < 32; x++) grid[y][x] = "dark_oak_planks";
+  for (let y = 16; y <= 47; y++) for (let x = 0; x < 32; x++) grid[y][x] = "stone_bricks";
+  const zm = extractConceptZoneMap({ gridResult: { grid, n: 32, m: 48 }, ...GEO, materialMap: BARN_MAP });
+  assert.equal(zm.readable, true);
+  assert.equal(zm.bands.length, 1);
+  assert.equal(zm.bands[0].dominantBlock, "cobblestone");
+  assert.equal(zm.bands[0].dominantRole, "structural wall infill");
+  assert.deepEqual(zm.bands[0].yRange, [0, GEO.upperTop - 1]); // tiles the full wall extent
+  assert.ok(zm.bands[0].share >= 0.99);
+  const sb = zm.bands[0].secondaries.find((s) => s.block === "stone_bricks");
+  assert.ok(sb, "the real stone_bricks cells stay visible as a secondary");
+  assert.deepEqual(zm.params.fieldResolution, { oak_planks: "cobblestone", stone_bricks: "cobblestone" });
+  assert.equal(zm.roof.dominantBlock, "dark_oak_planks");
+});
+
+test("the refusal path survives: a dominant the map does not license still refuses no-field-cells", () => {
+  // feature-dominated walls but NO recorded near-tone pair touching the walls block
+  const m = {
+    map: [
+      { role: "field", block: "minecraft:white_terracotta", placementRule: "walls" },
+      { role: "frame", block: "minecraft:dark_oak_log", placementRule: "trim" },
+      { role: "roof", block: "minecraft:spruce_planks", placementRule: "roof" },
+    ],
+    nearTonePairs: [{ a: "minecraft:dark_oak_log", b: "minecraft:spruce_planks", dL: 0.385 }],
+  };
+  const grid = Array.from({ length: 48 }, () => new Array(32).fill(null));
+  for (let y = 8; y <= 47; y++) for (let x = 0; x < 32; x++) grid[y][x] = "dark_oak_log";
+  const zm = extractConceptZoneMap({ gridResult: { grid, n: 32, m: 48 }, ...GEO, materialMap: m });
+  assert.deepEqual([zm.readable, zm.reason], [false, "no-field-cells"]);
+  assert.equal(zm.params.fieldResolution, undefined);
+});
+
+test("legacy invariance: a rung-1-readable concept records no fieldResolution param", () => {
+  const zm = extractSynthetic();
+  assert.equal(zm.readable, true);
+  assert.equal(zm.params.fieldResolution, undefined);
 });

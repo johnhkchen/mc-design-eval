@@ -34,6 +34,22 @@
 // wall bands; everything mapping at or above it aggregates into ONE roof histogram that supplies the
 // roof's materials. The concept decides what zones are MADE OF, never where the roof IS.
 //
+// ROLE-AWARE FIELD RESOLUTION (T-117-01, story S-117, epic E-30): a concept render can sit under a
+// GLOBAL lightness offset that flips a near-tone pair WHOLESALE — the barn's cobblestone field
+// quantizes into stone_bricks (ΔL 2.082) on every single cell, so the field-restricted segmentation
+// sees zero field cells and refuses. No per-pixel metric can split a pair whose distinction is almost
+// purely L* under an unknown global L* shift; the committed map's own structure can: stone_bricks is
+// corners-edges — a linear feature that by this module's model never dominates a row — and the map
+// RECORDS the pair (nearTonePairs, measured in Lab between the map's own blocks). So, ONLY from the
+// exact state that refuses today (zero rung-1 field cells), segmentation retries with a key→field
+// resolution derived from committed map data alone (placementRule + nearTonePairs — no new
+// thresholds): feature-rule keys re-count, for the DOMINANCE decision only, as their recorded
+// near-tone walls partner. Roof-rule keys are ineligible (foreshortening leakage must not manufacture
+// wall bands); band counts/secondaries stay original. A concept whose wall rows are dominated by keys
+// the map does not license still refuses no-field-cells verbatim — the rung sharpens sight, it does
+// not remove the gate. Engagement is recorded in params.fieldResolution (conditional — legacy records
+// regenerate byte-identical).
+//
 // An unreadable concept yields {readable:false, reason} — the caller falls back to its recorded prior
 // (recorded when used, NEVER overriding a readable concept — E-25). All thresholds are generic exported
 // constants: a subject contributes data only, no per-subject code (E-25 Rule 3).
@@ -219,6 +235,23 @@ function filterCounts(counts, set) {
 }
 
 /**
+ * Project a histogram into FIELD space: field keys pass through, resolved keys re-key to their
+ * walls partner (T-117-01 — the dominance view only; band counts stay original), everything else
+ * drops. With `fieldResolve` null this is exactly {@link filterCounts}. A null `fieldBlocks`
+ * (a map without rule annotations) stays unrestricted — resolution is meaningless without a field.
+ */
+function projectFieldCounts(counts, fieldBlocks, fieldResolve) {
+  if (!fieldBlocks) return counts;
+  if (!fieldResolve) return filterCounts(counts, fieldBlocks);
+  const out = {};
+  for (const [k, c] of Object.entries(counts)) {
+    const key = fieldBlocks.has(k) ? k : fieldResolve.get(k);
+    if (key !== undefined) out[key] = (out[key] || 0) + c;
+  }
+  return out;
+}
+
+/**
  * Segment voxel layers [yLo..yHi] into bands of consecutive layers sharing a dominant block. With
  * `fieldBlocks` (the map's `placementRule:"walls"` blocks) the per-layer dominant is decided among
  * FIELD materials only — a 3/4-view concept stacks roof slopes and feature trim (studs, shadows,
@@ -229,17 +262,21 @@ function filterCounts(counts, set) {
  * (field) cells inherits the previous layer's dominant (leading empties take the first real one).
  * Bands shorter than `minBandHeight` merge into a same-dominant neighbour when one exists, else the
  * taller neighbour (adopting its dominant).
+ * With `fieldResolve` (T-117-01, a Map from {@link fieldResolution}) the dominance and share views
+ * are PROJECTED — resolved feature keys count as their walls partner — while band `counts` stay the
+ * original histograms (the secondaries contract is untouched).
  * @param {Map<number,{filled:number,counts:Record<string,number>}>} byY  from mapRowsToLayers
- * @param {{yLo:number, yHi:number, minBandHeight?:number, fieldBlocks?:Set<string>|null}} opts
+ * @param {{yLo:number, yHi:number, minBandHeight?:number, fieldBlocks?:Set<string>|null,
+ *          fieldResolve?:Map<string,string>|null}} opts
  * @returns {{yRange:[number,number], dominant:string, share:number, filled:number,
  *            counts:Record<string,number>}[]} bottom-up; empty array when no layer has data
  */
-export function segmentLayerBands(byY, { yLo, yHi, minBandHeight = MIN_BAND_HEIGHT, fieldBlocks = null }) {
+export function segmentLayerBands(byY, { yLo, yHi, minBandHeight = MIN_BAND_HEIGHT, fieldBlocks = null, fieldResolve = null }) {
   // per-layer dominants over the FIELD cells, with inherit-forward (then backward for leading gaps)
   const doms = [];
   for (let y = yLo; y <= yHi; y++) {
     const h = byY.get(y);
-    doms.push(h && h.filled > 0 ? dominantOf(filterCounts(h.counts, fieldBlocks)) : null);
+    doms.push(h && h.filled > 0 ? dominantOf(projectFieldCounts(h.counts, fieldBlocks, fieldResolve)) : null);
   }
   let firstReal = doms.find((d) => d !== null) ?? null;
   if (firstReal === null) return [];
@@ -290,7 +327,7 @@ export function segmentLayerBands(byY, { yLo, yHi, minBandHeight = MIN_BAND_HEIG
     }
   }
   for (const b of bands) {
-    const field = filterCounts(b.counts, fieldBlocks);
+    const field = projectFieldCounts(b.counts, fieldBlocks, fieldResolve);
     const fieldFilled = Object.values(field).reduce((a, c) => a + c, 0);
     b.share = fieldFilled ? round3((field[b.dominant] || 0) / fieldFilled) : 0;
   }
@@ -370,6 +407,43 @@ export function resolveBandRoles(band, materialMap, opts = {}) {
 }
 
 /**
+ * Role-aware field resolution from the committed map's own data (T-117-01): bare feature-block key →
+ * bare walls-block key, for blocks the map BOTH classifies as wall-adjacent features (every row's
+ * placementRule in corners-edges/trim/openings/base — never walls, never roof; roof keys in wall rows
+ * are foreshortening leakage and must not manufacture wall bands) AND records as a near-tone pair of a
+ * walls block (`materialMap.nearTonePairs`, either orientation — the binary Lab decision between the
+ * map's own blocks, e.g. cobble vs stone_bricks at the recorded ΔL 2.082). Several walls partners →
+ * min dL, tie lexicographic (determinism idiom). Maps without pairs → empty Map (the rung never
+ * engages). PURE; committed data only, no thresholds.
+ * @param {{map:{block:string, placementRule?:string}[], nearTonePairs?:{a:string,b:string,dL:number}[]}} materialMap
+ * @returns {Map<string,string>}
+ */
+export function fieldResolution(materialMap) {
+  const rulesOf = new Map(); // bare key -> Set of placementRules across all its rows
+  for (const row of materialMap.map) {
+    const b = bare(row.block);
+    if (!rulesOf.has(b)) rulesOf.set(b, new Set());
+    if (row.placementRule) rulesOf.get(b).add(row.placementRule);
+  }
+  const isWalls = (b) => rulesOf.get(b)?.has("walls") === true;
+  const eligible = (b) => {
+    const rules = rulesOf.get(b);
+    if (!rules || rules.size === 0 || rules.has("walls") || rules.has("roof")) return false;
+    return [...rules].every((r) => ["corners-edges", "trim", "openings", "base"].includes(r));
+  };
+  const best = new Map(); // bare feature key -> {field, dL}
+  for (const pair of materialMap.nearTonePairs ?? []) {
+    const a = bare(pair.a), b = bare(pair.b);
+    for (const [k, f] of [[a, b], [b, a]]) {
+      if (!eligible(k) || !isWalls(f)) continue;
+      const cur = best.get(k);
+      if (!cur || pair.dL < cur.dL || (pair.dL === cur.dL && f < cur.field)) best.set(k, { field: f, dL: pair.dL });
+    }
+  }
+  return new Map([...best.entries()].map(([k, v]) => [k, v.field]));
+}
+
+/**
  * THE ORCHESTRATOR: concept grid + geometry → the concept-derived zone map (or an honest refusal).
  * See the module header for the model. All inputs are plain data; deterministic.
  * @param {{gridResult:object, floorLines:number[], layerCounts:{yMin:number, counts:number[]},
@@ -421,6 +495,18 @@ export function extractConceptZoneMap(input, opts = {}) {
   let bands = segmentLayerBands(byY, {
     yLo: layerExt.yLo, yHi: wallYHi, minBandHeight: o.minBandHeight, fieldBlocks,
   });
+  // T-117-01 rung 2: ONLY from the exact state that refuses today, retry with the role-aware
+  // resolution the committed map licenses (see module header). Conditional param — legacy records
+  // (rung-1 readable) regenerate byte-identical.
+  if (!bands.length && fieldBlocks) {
+    const resolve = fieldResolution(materialMap);
+    if (resolve.size) {
+      bands = segmentLayerBands(byY, {
+        yLo: layerExt.yLo, yHi: wallYHi, minBandHeight: o.minBandHeight, fieldBlocks, fieldResolve: resolve,
+      });
+      if (bands.length) params.fieldResolution = Object.fromEntries([...resolve.entries()].sort());
+    }
+  }
   if (!bands.length) return refuse("no-field-cells");
   bands = snapBands(bands, floorLines ?? [], o.snapTolerance);
   // tile the FULL wall extent: the build's real bottom and the eave (zoneOf must be total)
