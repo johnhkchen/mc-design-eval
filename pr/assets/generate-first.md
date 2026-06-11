@@ -69,3 +69,52 @@ The generate-first path is now a *peer* of the repair path under the same frozen
 −2 gaps on the judge, strictly cleaner under the craft censuses, with the blob's pathologies
 (spikes, ragged columns, inherited surfaces that fail azimuths) replaced by *named fit refusals*
 that point at exactly one seam: roof-form fitting. The next gap-closing work has an address.
+
+---
+
+## The fourth subject (S-116 / T-116-01) — first contact, and what it measured
+
+The terminal milestone registered a subject no pipeline file had ever seen: **a rectangular stone
+tithe barn** (`runs/017-vBuilding-…/concept.png`, S-094 checklist passed on attempt 1; the ticket's
+L-plan coaching inn candidate was declined with recorded reasons — the roof ladder has no valley
+rung, D2 decompose merges same-height L-wings into one mass, and a jetty is exactly what the
+`mass-unsupported` support check prunes). Registration was registry-data only; the generalization
+grep is clean over all six consuming runners (`grep -c "barn"` = 0 in challenge-/generated-/
+styled-milestone, zone-map, multi-angle-gate, component-skin).
+
+| | barn generate-first | barn untuned repair (challenge label) |
+|---|---|---|
+| gate outcome | **DID NOT RUN — named bootstrap stall** | FAIL |
+| gaps / budget | — | 12 / 2 |
+| per-view | — | 4/4 drifted (major form@roof + major massing@walls, every azimuth) |
+| kit presence | — (kit never minted; the stall) | not run (no-kit-record) |
+| reproducible | — | double-run byte-identical (final sha 80b66189…) |
+| spikes (post-regularize) | — | 754 → 361 |
+
+**The stall, with receipts.** The T-092 zone lens refused the barn concept:
+`zone-map/barn.json` = `source: prior-fallback`, reason **`no-field-cells`**. Reproduced through
+the exact extraction path: **cobblestone — the map's only `placementRule:"walls"` field block —
+dominates ZERO quantized concept rows**; the wall rows are stone_bricks-dominated (piers/quoins/
+plinth prominent at this aspect, and the cobble panels quantize INTO stone_bricks — the near-tone
+pair, ΔL 2.082, far below shading variance). That is the E-21 mean-color collapse
+(*material-identity-is-semantic*) surfacing in the zone lens. From there the chain is contractual:
+`kit-extract` requires a concept-derived zone record (`src/form/kit.mjs:122` throws), and the
+generated runner requires a committed kit (`generated-milestone.mjs:476` throws). Under E-25
+Rule 3 (a new subject runs UNTUNED) relaxing either contract would be tuning-to-pass; the stall is
+the measurement.
+
+**What the fourth subject actually measured — a robustness asymmetry.** The repair path tolerates
+an unreadable concept: its skin falls back to the registry prior (named) and it carried the barn
+end-to-end to an honest 12/2 FAIL — the same verdict profile as the gatehouse. Generate-first
+cannot start without a kit, and a kit cannot be minted without derived bands. The eleven-epic arc
+gave the cottage many chances to harden each lens; the one-run thesis concentrates ALL of that
+risk into input-prep preconditions. **First-run generalization is gated by the weakest lens, not
+by the strongest generator.** The fix has one address and it is already named by E-26: recognize
+blocks, don't color-match — the zone lens is the last color-matcher on the path (the kit prompt's
+band references are its only consumer that hard-requires it). Routed to the next epic; not fixed
+here.
+
+**Pinned bar, honestly missed.** The T-116 target was the cottage's T-111 profile (kit PASS, ≥2/4
+same-object, ≤10 gaps). Recorded result: not reached — not because the generator lost to the
+judge, but because the milestone never reached the judge. The barn's repair row (12/2, 4/4
+drifted) now sits in the table as the untuned-first-contact comparator the next attempt must beat.

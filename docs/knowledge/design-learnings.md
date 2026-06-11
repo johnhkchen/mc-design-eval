@@ -2428,3 +2428,70 @@ per-end faceRmse/overhang, ridge Δ, terminations, residual decisions), and
 story beat is the *kind* of movement: E-27 moved census numbers an order of magnitude; E-28 moved
 fit errors from "improvised" to "measured"; the remaining gap between measured geometry and
 perceptual same-object is E-29's question, with its targets pinned to these verdicts.
+
+## Generate-first (E-29) — the inversion measured, and what a fourth subject taught it (S-112…S-116, T-116-01) · 2026-06-11
+
+**The inversion thesis, machine-checked.** E-29 asked whether the pipeline should stop repairing
+voxelized TRELLIS blobs and instead *generate* the build from fitted parameters, demoting the blob
+to fit evidence and cage target. T-115 ran the head-to-head on all three legacy subjects under the
+frozen ruler: zero blob cells in every artifact (`assertGeneratedProvenance` + the
+regenerate-from-record byte proof), `instrument.diffs: []` on all three, one judge run per view.
+The verdict (`pr/assets/generate-first.md`): **a peer on the judge** (cottage 12 vs 10 gaps,
+gatehouse 12 = 12, church 12 = 12 — and the church runs end-to-end on this path where the T-111
+repair chain refused pre-gate), **strictly cleaner under the craft censuses** (spikes 86→53 /
+43→26 / 204→62; church ragged 15.9%→9.9%), every loss traced to a named fit refusal. Roof FORM
+remains THE seam on every azimuth of every subject — unchanged since E-27, now measured on fully
+authored roofs.
+
+**The fourth subject (T-116-01) — first-run generalization is gated by the weakest lens.** A
+checklist-clean tithe barn (S-094 passed attempt 1; inn→barn fallback decision recorded with
+code-grounded reasons) registered as pure registry data — and the generate-first milestone **did
+not run**: the T-092 zone lens refused the concept (`no-field-cells` — cobblestone, the only
+walls-rule field block, dominates zero quantized rows; the cobble panels quantize into
+stone_bricks, ΔL 2.082 — the E-21 near-tone collapse surfacing in the zone lens), kit-extract
+hard-requires derived bands (kit.mjs:122), the generated runner hard-requires kit
+(generated-milestone.mjs:476). Meanwhile the untuned repair chain *tolerated* the same unreadable
+concept via the named policy fallback and carried the barn to an honest FAIL 12/2 (4/4 drifted —
+the gatehouse profile). **That asymmetry is the epic's sharpest scaling result: the repair path
+degrades gracefully under lens failure; generate-first's preconditions concentrate eleven epics of
+lens-hardening risk into the first run.** Per E-25 Rule 3 the contracts were not relaxed; the
+stall is the measurement. The pinned bar (cottage T-111 profile: kit PASS, ≥2/4 same-object,
+≤10 gaps) is recorded as not reached — never judged.
+
+**Which path scales — the honest answer.** On *craft*, generate-first, decisively: authored
+geometry has nothing to exorcise. On *judge resemblance*, neither yet: roof-form fitting coverage
+is the single address for both. On *robustness to new subjects*, today, the repair path — by
+design accident, not virtue: its fallbacks are named and graceful where generate-first's
+preconditions are hard throws. The route forward is not to soften E-25 Rule 3 but to finish the
+E-26 move on the last color-matcher: the zone lens should *recognize* bands (the kit already
+recognizes blocks) instead of color-matching rows; the kit precondition could then keep its
+contract and still bootstrap any checklist-clean concept. One more named over-reach: the S-094
+checklist gates concept GEOMETRY but not LENS READABILITY — a pre-registration zone-extraction
+smoke (concept + map + conditioned evidence occupancy) would have caught this before the TRELLIS
+spend. And one under-reach worth keeping: the glb-smoke single-component gate failed the barn at
+every scale on ONE floating mesh cell (largestFraction ≥0.9813 everywhere) while the chain's own
+`shellStage` conditioning strips it — the strict gate over-fires on sub-speck debris; the
+conditioned-evidence probe is the truer read (named deviation in `runs/017-…/concept-checklist.md`).
+
+**The T-111 residual ledger, closed out.** (1) *Gatehouse 4/4-drifted / per-mass membership*:
+open by instrument-freeze; both paths sit at 12/2 with roof-form majors — routed to the roof-form
+epic with everything else at that address. (2) *Spike-census declared-cell ledger*: the
+generated-path records census beside declared cells — cottage 53 spikes with 80 declared
+sheet-cells, gatehouse 26 with 0, church 62 with 17 declared cap-cells (vs T-111 repair 86/43/204
+with the cottage's 36+2 declared verge/cap cells) — E-12 must read `census.declared` beside the
+naive numbers or census deltas lie. (3) *Church verdicts*: both seams closed upstream — settle by
+T-113 (vocabulary authority; 1 iteration), the challenge 225° REFUSAL by T-114 (re-judged under
+the bounded reply policy to a decided FAIL). Cited, no work here. (4) *Stale reskin pins*: re-cut
+this ticket for all three legacy subjects against the current styled shas (`component-skin/*.json`,
+chain gated, kit presence PASS ×3).
+
+**E-12 handoff.** Per legacy subject: `generated/<subj>.{json,md}` (terminal generate-first record:
+fit + refusals, zero-blob proof, cage evidence, head-to-head row), `multi-angle/<subj>-generated.
+{json,md}` + sheets `pr/assets/frames/multi-angle-<subj>-generated.png`, kit reports
+`kit/<subj>.md`. For the barn: `runs/017-…/concept-checklist.md` (registration + decisions),
+`challenge/barn.{json,md}` + `multi-angle/barn-challenge.{json,md}` + sheet (the untuned
+first-contact comparator), `zone-map/barn.{json,md}` (the refusal record with the stall's cause),
+and the fourth-subject section of `pr/assets/generate-first.md` (the comparison table + the
+robustness-asymmetry finding). The story beat: E-27 moved censuses, E-28 moved fit errors from
+improvised to measured, E-29 moved the *build* from repaired evidence to authored parameters — and
+its fourth subject relocated the frontier from the generator to the lenses that feed it.
