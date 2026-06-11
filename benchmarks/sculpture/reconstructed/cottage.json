@@ -45,18 +45,18 @@
           "verdict": "drifted",
           "gaps": [
             {
-              "region": "roof across the whole top",
-              "attribute": "form",
-              "severity": "major"
-            },
-            {
-              "region": "upper storey gable ends",
+              "region": "roof versus walls overall",
               "attribute": "massing",
               "severity": "major"
             },
             {
-              "region": "timber-frame walls vs stone plinth",
+              "region": "upper timber-framed storey",
               "attribute": "material zoning",
+              "severity": "minor"
+            },
+            {
+              "region": "roof slopes and ridge",
+              "attribute": "form",
               "severity": "minor"
             }
           ]
@@ -68,12 +68,12 @@
           "verdict": "same object",
           "gaps": [
             {
-              "region": "front gable wall, upper storey",
-              "attribute": "material zoning",
+              "region": "roof eaves overhang on the near side",
+              "attribute": "massing",
               "severity": "minor"
             },
             {
-              "region": "timber roof eaves",
+              "region": "chimney atop the roof",
               "attribute": "form",
               "severity": "minor"
             }
@@ -86,13 +86,13 @@
           "verdict": "same object",
           "gaps": [
             {
-              "region": "lower walls / stone foundation course",
-              "attribute": "material zoning",
+              "region": "roof ridge and slopes",
+              "attribute": "form",
               "severity": "minor"
             },
             {
-              "region": "roof ridge and chimney profile",
-              "attribute": "form",
+              "region": "upper-storey timber framing",
+              "attribute": "material zoning",
               "severity": "minor"
             }
           ]
@@ -104,17 +104,17 @@
           "verdict": "drifted",
           "gaps": [
             {
-              "region": "roof",
+              "region": "roof across the whole upper mass",
               "attribute": "form",
               "severity": "major"
             },
             {
-              "region": "overall building edges/eaves",
-              "attribute": "form",
-              "severity": "minor"
+              "region": "overall building outline / eaves",
+              "attribute": "massing",
+              "severity": "major"
             },
             {
-              "region": "stone ground-floor base",
+              "region": "stone ground storey base",
               "attribute": "material zoning",
               "severity": "minor"
             }
@@ -146,8 +146,7 @@
     "diffs": [],
     "judgeModels": [
       "claude-opus-4-8"
-    ],
-    "note": "carried from the live-run record (--distill-only; the live run captured the real pre/post contract compare)"
+    ]
   },
   "verdicts": {
     "views": [
@@ -157,18 +156,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof across the whole top",
-            "attribute": "form",
-            "severity": "major"
-          },
-          {
-            "region": "upper storey gable ends",
+            "region": "roof versus walls overall",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "timber-frame walls vs stone plinth",
+            "region": "upper timber-framed storey",
             "attribute": "material zoning",
+            "severity": "minor"
+          },
+          {
+            "region": "roof slopes and ridge",
+            "attribute": "form",
             "severity": "minor"
           }
         ],
@@ -180,12 +179,12 @@
         "verdict": "same object",
         "gaps": [
           {
-            "region": "front gable wall, upper storey",
-            "attribute": "material zoning",
+            "region": "roof eaves overhang on the near side",
+            "attribute": "massing",
             "severity": "minor"
           },
           {
-            "region": "timber roof eaves",
+            "region": "chimney atop the roof",
             "attribute": "form",
             "severity": "minor"
           }
@@ -198,13 +197,13 @@
         "verdict": "same object",
         "gaps": [
           {
-            "region": "lower walls / stone foundation course",
-            "attribute": "material zoning",
+            "region": "roof ridge and slopes",
+            "attribute": "form",
             "severity": "minor"
           },
           {
-            "region": "roof ridge and chimney profile",
-            "attribute": "form",
+            "region": "upper-storey timber framing",
+            "attribute": "material zoning",
             "severity": "minor"
           }
         ],
@@ -216,17 +215,17 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof",
+            "region": "roof across the whole upper mass",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "overall building edges/eaves",
-            "attribute": "form",
-            "severity": "minor"
+            "region": "overall building outline / eaves",
+            "attribute": "massing",
+            "severity": "major"
           },
           {
-            "region": "stone ground-floor base",
+            "region": "stone ground storey base",
             "attribute": "material zoning",
             "severity": "minor"
           }
@@ -243,52 +242,52 @@
       "gaps": [
         {
           "angle": "+x+z",
-          "region": "roof across the whole top",
-          "attribute": "form"
-        },
-        {
-          "angle": "+x+z",
-          "region": "upper storey gable ends",
+          "region": "roof versus walls overall",
           "attribute": "massing"
         },
         {
           "angle": "+x+z",
-          "region": "timber-frame walls vs stone plinth",
+          "region": "upper timber-framed storey",
           "attribute": "material zoning"
         },
         {
-          "angle": "+x-z",
-          "region": "front gable wall, upper storey",
-          "attribute": "material zoning"
+          "angle": "+x+z",
+          "region": "roof slopes and ridge",
+          "attribute": "form"
         },
         {
           "angle": "+x-z",
-          "region": "timber roof eaves",
+          "region": "roof eaves overhang on the near side",
+          "attribute": "massing"
+        },
+        {
+          "angle": "+x-z",
+          "region": "chimney atop the roof",
           "attribute": "form"
         },
         {
           "angle": "-x-z",
-          "region": "lower walls / stone foundation course",
-          "attribute": "material zoning"
+          "region": "roof ridge and slopes",
+          "attribute": "form"
         },
         {
           "angle": "-x-z",
-          "region": "roof ridge and chimney profile",
+          "region": "upper-storey timber framing",
+          "attribute": "material zoning"
+        },
+        {
+          "angle": "-x+z",
+          "region": "roof across the whole upper mass",
           "attribute": "form"
         },
         {
           "angle": "-x+z",
-          "region": "roof",
-          "attribute": "form"
+          "region": "overall building outline / eaves",
+          "attribute": "massing"
         },
         {
           "angle": "-x+z",
-          "region": "overall building edges/eaves",
-          "attribute": "form"
-        },
-        {
-          "angle": "-x+z",
-          "region": "stone ground-floor base",
+          "region": "stone ground storey base",
           "attribute": "material zoning"
         }
       ],
@@ -305,7 +304,7 @@
       "views": [
         {
           "angle": "+x+z",
-          "outcome": "drifted: form"
+          "outcome": "drifted: massing"
         },
         {
           "angle": "+x-z",
@@ -329,11 +328,11 @@
           "feature": "frame",
           "block": "spruce_planks",
           "shipped": "spruce_planks",
-          "sites": 521,
+          "sites": 520,
           "missing": 0,
-          "satisfied": 382,
+          "satisfied": 383,
           "tolerated": {
-            "respected": 127,
+            "respected": 125,
             "skippedIsolated": 12
           },
           "gating": true,
@@ -355,7 +354,7 @@
           "feature": "panel:band1",
           "block": "smooth_sandstone",
           "shipped": "smooth_sandstone",
-          "sites": 1454,
+          "sites": 1397,
           "missing": 0,
           "tolerated": {
             "residue": 0
@@ -367,7 +366,7 @@
           "feature": "course",
           "block": "spruce_planks",
           "shipped": "spruce_planks",
-          "sites": 831,
+          "sites": 812,
           "missing": 0,
           "tolerated": {
             "residue": 0
@@ -441,16 +440,16 @@
         },
         "frame": {
           "counts": {
-            "wall": 2199,
+            "wall": 2178,
             "cornerPost": 46,
-            "roofline": 343,
+            "roofline": 342,
             "floorLine": 132
           },
           "painted": 0,
           "adopted": 0,
-          "respected": 127,
+          "respected": 125,
           "skippedIsolated": 12,
-          "alreadyFrame": 382
+          "alreadyFrame": 383
         },
         "fill": {
           "placements": 0,
@@ -461,14 +460,14 @@
               "kept": 1483
             },
             "band1": {
-              "surface": 1454,
+              "surface": 1397,
               "filled": 0,
-              "kept": 1454
+              "kept": 1397
             },
             "roof": {
-              "surface": 831,
+              "surface": 812,
               "filled": 0,
-              "kept": 831
+              "kept": 812
             }
           }
         }
@@ -717,10 +716,10 @@
         "baselineSha256": "a1e781c9c48d5ce9b4fb57a94bd0fd667f278158593353faf2144a86c4ae00d1"
       },
       "after": {
-        "spikes": 51,
-        "ragged": 45,
+        "spikes": 86,
+        "ragged": 42,
         "columns": 661,
-        "raggedRate": 0.0681,
+        "raggedRate": 0.0635,
         "source": "styled/cottage/artifact.json"
       }
     },
@@ -759,10 +758,10 @@
     "milestoneSha256": {
       "base": null,
       "shell": "33b1ca02f2589f49dd8c678e2416bf81196be41bf91451c4c9e351baf24c0afd",
-      "reconstructed": "df4f749f27bc47ce784aedf41e8587ed9f4aea7ed99da1ba7043256cd7a16283",
-      "skinFinal": "ecca90d2be6a1c4e22e91f2a06db716347d1210052be8adc422b5e2f6e92c2cc",
-      "grammarFinal": "be6116b6934283b6544da333d96e29dbc3c18faa4547f01968ed806fe6749a37",
-      "styled": "8385a7a357252732b71f856a5aa54ffdb527fc64492a93c42b0e196189cc962b"
+      "reconstructed": "477399990e7c8b68e8980349f1627b240bd36fbfc1cd402d45ccd65f528046d6",
+      "skinFinal": "9bf220364ece6e1b8806b35241441d278fff550eb2614c13c9830473a197996e",
+      "grammarFinal": "2ddf360850512d8cc8b50d2ced4a81194b501208305a20eb2df10aa9e2f0146b",
+      "styled": "33ffd0c825a04eeb481740a22268386249a95581fe0af712d20cbb9232d4a48f"
     },
     "determinism": "the milestone runner double-runs the deterministic chain and owns the byte-identity proof (--repro re-proves it fresh-process); this record distills committed outputs — same inputs, same record"
   }

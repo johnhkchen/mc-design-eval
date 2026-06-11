@@ -82,9 +82,9 @@
       "perDelta": [
         {
           "name": "roof-program",
-          "changed": 1530,
-          "added": 413,
-          "removed": 70
+          "changed": 1483,
+          "added": 296,
+          "removed": 255
         },
         {
           "name": "shaped-heads",
@@ -93,7 +93,7 @@
           "removed": 0
         }
       ],
-      "cells": 2013
+      "cells": 2034
     },
     "findings": [],
     "seamSources": {
@@ -104,8 +104,8 @@
       "frameLines": "component"
     },
     "conformance": {
-      "columns": 507,
-      "conforming": 507,
+      "columns": 512,
+      "conforming": 512,
       "deviations": []
     }
   },
@@ -236,11 +236,11 @@
     },
     "fill": {
       "placements": 849,
-      "kept": 2921
+      "kept": 2847
     },
     "salt": {
-      "stripped": 243,
-      "kept": 800
+      "stripped": 247,
+      "kept": 769
     },
     "coverage": {
       "band0": {
@@ -252,7 +252,15 @@
           "spruce_planks": 21
         },
         "dominant": "tuff",
-        "dominantFraction": 0.679
+        "dominantFraction": 0.679,
+        "own": [
+          "tuff",
+          "dark_oak_log",
+          "spruce_planks",
+          "cobblestone",
+          "bricks"
+        ],
+        "ownFraction": 1
       },
       "band0:offslab": {
         "total": 1095,
@@ -263,40 +271,62 @@
           "spruce_planks": 39
         },
         "dominant": null,
-        "dominantFraction": null
+        "dominantFraction": null,
+        "own": null,
+        "ownFraction": null
       },
       "band1": {
-        "total": 340,
+        "total": 336,
         "byBlock": {
-          "cobblestone": 34,
+          "cobblestone": 33,
           "dark_oak_log": 71,
-          "smooth_sandstone": 174,
-          "spruce_planks": 61
+          "smooth_sandstone": 176,
+          "spruce_planks": 56
         },
         "dominant": "smooth_sandstone",
-        "dominantFraction": 0.512
+        "dominantFraction": 0.524,
+        "own": [
+          "smooth_sandstone",
+          "spruce_planks",
+          "dark_oak_log",
+          "cobblestone",
+          "bricks"
+        ],
+        "ownFraction": 1
       },
       "band1:offslab": {
-        "total": 1112,
+        "total": 1059,
         "byBlock": {
-          "smooth_sandstone": 628,
-          "dark_oak_log": 170,
-          "cobblestone": 103,
-          "spruce_planks": 211
+          "smooth_sandstone": 630,
+          "dark_oak_log": 166,
+          "cobblestone": 100,
+          "spruce_planks": 163
         },
         "dominant": null,
-        "dominantFraction": null
+        "dominantFraction": null,
+        "own": null,
+        "ownFraction": null
       },
       "roof": {
-        "total": 831,
+        "total": 812,
         "byBlock": {
-          "spruce_planks": 763,
-          "dark_oak_log": 48,
-          "cobblestone": 13,
-          "tuff": 7
+          "spruce_planks": 754,
+          "dark_oak_log": 46,
+          "tuff": 7,
+          "cobblestone": 5
         },
         "dominant": "spruce_planks",
-        "dominantFraction": 0.918
+        "dominantFraction": 0.929,
+        "own": [
+          "spruce_planks",
+          "dark_oak_log",
+          "tuff",
+          "cobblestone",
+          "bricks",
+          "spruce_stairs",
+          "spruce_slab"
+        ],
+        "ownFraction": 1
       }
     },
     "gates": {
@@ -308,8 +338,8 @@
           {
             "zone": "band1",
             "dominant": "smooth_sandstone",
-            "fraction": 0.088,
-            "total": 341
+            "fraction": 0.083,
+            "total": 336
           }
         ],
         "byZone": {
@@ -321,14 +351,14 @@
           },
           "band1": {
             "dominant": "smooth_sandstone",
-            "fraction": 0.088,
-            "total": 341,
+            "fraction": 0.083,
+            "total": 336,
             "passed": false
           },
           "roof": {
             "dominant": "spruce_planks",
-            "fraction": 0.924,
-            "total": 831,
+            "fraction": 0.936,
+            "total": 814,
             "passed": true
           }
         }
@@ -340,21 +370,50 @@
         "byZone": {
           "band0": {
             "dominant": "tuff",
-            "fraction": 0.679,
+            "fraction": 1,
             "total": 392,
-            "passed": true
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "tuff",
+              "dark_oak_log",
+              "spruce_planks",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.679
           },
           "band1": {
             "dominant": "smooth_sandstone",
-            "fraction": 0.512,
-            "total": 340,
-            "passed": true
+            "fraction": 1,
+            "total": 336,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "smooth_sandstone",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.524
           },
           "roof": {
             "dominant": "spruce_planks",
-            "fraction": 0.918,
-            "total": 831,
-            "passed": true
+            "fraction": 1,
+            "total": 812,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "spruce_planks",
+              "dark_oak_log",
+              "tuff",
+              "cobblestone",
+              "bricks",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.929
           }
         }
       }
@@ -385,20 +444,20 @@
     },
     "frame": {
       "counts": {
-        "wall": 2203,
+        "wall": 2182,
         "cornerPost": 46,
-        "roofline": 343,
+        "roofline": 342,
         "floorLine": 132
       },
-      "painted": 320,
-      "adopted": 11,
-      "respected": 123,
-      "skippedIsolated": 14,
-      "alreadyFrame": 53
+      "painted": 322,
+      "adopted": 9,
+      "respected": 122,
+      "skippedIsolated": 13,
+      "alreadyFrame": 54
     },
     "fill": {
-      "placements": 5,
-      "kept": 3765
+      "placements": 3,
+      "kept": 3691
     },
     "frameRefilled": 0,
     "preexistingFrameRefilled": 0,
@@ -412,7 +471,9 @@
           "dark_oak_log": 11
         },
         "dominant": null,
-        "dominantFraction": null
+        "dominantFraction": null,
+        "own": null,
+        "ownFraction": null
       },
       "band0": {
         "total": 371,
@@ -423,7 +484,15 @@
           "spruce_planks": 19
         },
         "dominant": "tuff",
-        "dominantFraction": 0.693
+        "dominantFraction": 0.693,
+        "own": [
+          "tuff",
+          "dark_oak_log",
+          "spruce_planks",
+          "cobblestone",
+          "bricks"
+        ],
+        "ownFraction": 1
       },
       "band0:offslab": {
         "total": 1034,
@@ -434,51 +503,75 @@
           "spruce_planks": 39
         },
         "dominant": null,
-        "dominantFraction": null
+        "dominantFraction": null,
+        "own": null,
+        "ownFraction": null
       },
       "band1:frame": {
-        "total": 439,
+        "total": 438,
         "byBlock": {
           "cobblestone": 20,
-          "spruce_planks": 326,
-          "dark_oak_log": 91,
-          "smooth_sandstone": 2
+          "spruce_planks": 329,
+          "dark_oak_log": 88,
+          "smooth_sandstone": 1
         },
         "dominant": null,
-        "dominantFraction": null
+        "dominantFraction": null,
+        "own": null,
+        "ownFraction": null
       },
       "band1": {
-        "total": 226,
+        "total": 221,
         "byBlock": {
-          "cobblestone": 23,
+          "cobblestone": 22,
           "dark_oak_log": 38,
-          "smooth_sandstone": 122,
-          "spruce_planks": 43
+          "smooth_sandstone": 124,
+          "spruce_planks": 37
         },
         "dominant": "smooth_sandstone",
-        "dominantFraction": 0.54
+        "dominantFraction": 0.561,
+        "own": [
+          "smooth_sandstone",
+          "spruce_planks",
+          "dark_oak_log",
+          "cobblestone",
+          "bricks"
+        ],
+        "ownFraction": 1
       },
       "band1:offslab": {
-        "total": 787,
+        "total": 736,
         "byBlock": {
-          "dark_oak_log": 114,
-          "cobblestone": 95,
-          "smooth_sandstone": 400,
-          "spruce_planks": 178
+          "dark_oak_log": 111,
+          "cobblestone": 92,
+          "smooth_sandstone": 403,
+          "spruce_planks": 130
         },
         "dominant": null,
-        "dominantFraction": null
+        "dominantFraction": null,
+        "own": null,
+        "ownFraction": null
       },
       "roof": {
-        "total": 831,
+        "total": 812,
         "byBlock": {
-          "spruce_planks": 763,
-          "dark_oak_log": 48,
-          "cobblestone": 13,
-          "tuff": 7
+          "spruce_planks": 754,
+          "dark_oak_log": 46,
+          "tuff": 7,
+          "cobblestone": 5
         },
         "dominant": "spruce_planks",
-        "dominantFraction": 0.918
+        "dominantFraction": 0.929,
+        "own": [
+          "spruce_planks",
+          "dark_oak_log",
+          "tuff",
+          "cobblestone",
+          "bricks",
+          "spruce_stairs",
+          "spruce_slab"
+        ],
+        "ownFraction": 1
       }
     },
     "bands": {
@@ -900,7 +993,7 @@
     "iterations": 1,
     "trail": [
       {
-        "frame": 3,
+        "frame": 2,
         "foreignFill": 1,
         "gatingDressing": 0
       }
@@ -915,10 +1008,10 @@
     "sha256": {
       "base": null,
       "shell": "33b1ca02f2589f49dd8c678e2416bf81196be41bf91451c4c9e351baf24c0afd",
-      "reconstructed": "df4f749f27bc47ce784aedf41e8587ed9f4aea7ed99da1ba7043256cd7a16283",
-      "skinFinal": "ecca90d2be6a1c4e22e91f2a06db716347d1210052be8adc422b5e2f6e92c2cc",
-      "grammarFinal": "be6116b6934283b6544da333d96e29dbc3c18faa4547f01968ed806fe6749a37",
-      "styled": "8385a7a357252732b71f856a5aa54ffdb527fc64492a93c42b0e196189cc962b"
+      "reconstructed": "477399990e7c8b68e8980349f1627b240bd36fbfc1cd402d45ccd65f528046d6",
+      "skinFinal": "9bf220364ece6e1b8806b35241441d278fff550eb2614c13c9830473a197996e",
+      "grammarFinal": "2ddf360850512d8cc8b50d2ced4a81194b501208305a20eb2df10aa9e2f0146b",
+      "styled": "33ffd0c825a04eeb481740a22268386249a95581fe0af712d20cbb9232d4a48f"
     },
     "determinism": "kit→shell→skin→grammar→dressing is a pure function of the committed inputs (concept PNG, material map, GLB, kit); two in-process executions byte-matched on every artifact; --repro re-proves from a fresh process. LLM-authored inputs are one-time committed records (the kit's raw model reply is pinned beside it); the gate judge is the pinned model, single sample per view, verdicts committed in the gate record."
   },
@@ -959,18 +1052,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof across the whole top",
-            "attribute": "form",
-            "severity": "major"
-          },
-          {
-            "region": "upper storey gable ends",
+            "region": "roof versus walls overall",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "timber-frame walls vs stone plinth",
+            "region": "upper timber-framed storey",
             "attribute": "material zoning",
+            "severity": "minor"
+          },
+          {
+            "region": "roof slopes and ridge",
+            "attribute": "form",
             "severity": "minor"
           }
         ]
@@ -982,12 +1075,12 @@
         "verdict": "same object",
         "gaps": [
           {
-            "region": "front gable wall, upper storey",
-            "attribute": "material zoning",
+            "region": "roof eaves overhang on the near side",
+            "attribute": "massing",
             "severity": "minor"
           },
           {
-            "region": "timber roof eaves",
+            "region": "chimney atop the roof",
             "attribute": "form",
             "severity": "minor"
           }
@@ -1000,13 +1093,13 @@
         "verdict": "same object",
         "gaps": [
           {
-            "region": "lower walls / stone foundation course",
-            "attribute": "material zoning",
+            "region": "roof ridge and slopes",
+            "attribute": "form",
             "severity": "minor"
           },
           {
-            "region": "roof ridge and chimney profile",
-            "attribute": "form",
+            "region": "upper-storey timber framing",
+            "attribute": "material zoning",
             "severity": "minor"
           }
         ]
@@ -1018,17 +1111,17 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof",
+            "region": "roof across the whole upper mass",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "overall building edges/eaves",
-            "attribute": "form",
-            "severity": "minor"
+            "region": "overall building outline / eaves",
+            "attribute": "massing",
+            "severity": "major"
           },
           {
-            "region": "stone ground-floor base",
+            "region": "stone ground storey base",
             "attribute": "material zoning",
             "severity": "minor"
           }

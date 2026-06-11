@@ -4,7 +4,7 @@
   "label": "styled",
   "artifact": {
     "path": "benchmarks/sculpture/styled/cottage/artifact.json",
-    "sha256": "8385a7a357252732b71f856a5aa54ffdb527fc64492a93c42b0e196189cc962b"
+    "sha256": "33ffd0c825a04eeb481740a22268386249a95581fe0af712d20cbb9232d4a48f"
   },
   "contract": {
     "azimuths": [
@@ -92,7 +92,7 @@
           "band1": {
             "dominant": "smooth_sandstone",
             "fraction": 0.957,
-            "total": 141,
+            "total": 138,
             "passed": true,
             "metric": "own",
             "own": [
@@ -102,12 +102,12 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.092
+            "dominantFraction": 0.101
           },
           "roof": {
             "dominant": "spruce_planks",
             "fraction": 1,
-            "total": 296,
+            "total": 298,
             "passed": true,
             "metric": "own",
             "own": [
@@ -117,7 +117,7 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.828
+            "dominantFraction": 0.832
           }
         }
       },
@@ -126,29 +126,29 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof across the whole top",
-            "attribute": "form",
-            "severity": "major"
-          },
-          {
-            "region": "upper storey gable ends",
+            "region": "roof versus walls overall",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "timber-frame walls vs stone plinth",
+            "region": "upper timber-framed storey",
             "attribute": "material zoning",
+            "severity": "minor"
+          },
+          {
+            "region": "roof slopes and ridge",
+            "attribute": "form",
             "severity": "minor"
           }
         ],
-        "rationale": "The build reads as the same timber-framed cottage with stone plinth and brown plank roof, but the roof has collapsed into a lumpy, irregular mass with broken eave lines and the gable massing is deformed compared to the clean twin-pitched roof in the concept and mesh silhouette."
+        "rationale": "The stone base, cream timber-framed storey, and dark roof palette all read as the same cottage, but the roof mass overhangs and swallows the upper storey so the building's storey proportions are visibly off from this angle."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10414,
-          "output_tokens": 214,
-          "cost_usd": 0.15505000000000002
+          "input_tokens": 10461,
+          "output_tokens": 715,
+          "cost_usd": 0.17042
         }
       }
     },
@@ -180,8 +180,8 @@
           },
           "band1": {
             "dominant": "smooth_sandstone",
-            "fraction": 0.893,
-            "total": 75,
+            "fraction": 0.895,
+            "total": 76,
             "passed": true,
             "metric": "own",
             "own": [
@@ -191,12 +191,12 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.253
+            "dominantFraction": 0.276
           },
           "roof": {
             "dominant": "spruce_planks",
             "fraction": 0.99,
-            "total": 293,
+            "total": 299,
             "passed": true,
             "metric": "own",
             "own": [
@@ -206,7 +206,7 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.898
+            "dominantFraction": 0.903
           }
         }
       },
@@ -215,24 +215,24 @@
         "verdict": "same object",
         "gaps": [
           {
-            "region": "front gable wall, upper storey",
-            "attribute": "material zoning",
+            "region": "roof eaves overhang on the near side",
+            "attribute": "massing",
             "severity": "minor"
           },
           {
-            "region": "timber roof eaves",
+            "region": "chimney atop the roof",
             "attribute": "form",
             "severity": "minor"
           }
         ],
-        "rationale": "The build reads as the same half-timbered cottage from this angle — stone ground storey, cream-and-timber upper walls, and a dominant brown plank roof all match the references, with only minor softening of the framing pattern and eave line."
+        "rationale": "Stone ground storey, cream-and-timber upper walls, and the dominant brown shingled roof all read true against the concept and match the mesh massing at this azimuth, with only a slightly heavier eave overhang and an indistinct chimney as cosmetic differences."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10378,
-          "output_tokens": 165,
-          "cost_usd": 0.153645
+          "input_tokens": 10461,
+          "output_tokens": 661,
+          "cost_usd": 0.16907
         }
       }
     },
@@ -264,8 +264,8 @@
           },
           "band1": {
             "dominant": "smooth_sandstone",
-            "fraction": 0.869,
-            "total": 130,
+            "fraction": 0.867,
+            "total": 128,
             "passed": true,
             "metric": "own",
             "own": [
@@ -275,12 +275,12 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.469
+            "dominantFraction": 0.484
           },
           "roof": {
             "dominant": "spruce_planks",
             "fraction": 0.992,
-            "total": 262,
+            "total": 264,
             "passed": true,
             "metric": "own",
             "own": [
@@ -290,7 +290,7 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.958
+            "dominantFraction": 0.992
           }
         }
       },
@@ -299,24 +299,24 @@
         "verdict": "same object",
         "gaps": [
           {
-            "region": "lower walls / stone foundation course",
-            "attribute": "material zoning",
+            "region": "roof ridge and slopes",
+            "attribute": "form",
             "severity": "minor"
           },
           {
-            "region": "roof ridge and chimney profile",
-            "attribute": "form",
+            "region": "upper-storey timber framing",
+            "attribute": "material zoning",
             "severity": "minor"
           }
         ],
-        "rationale": "From azimuth 225° the build matches the mesh silhouette and concept — timbered cream walls over a grey stone base under a brown stepped gable roof with a chimney — with only minor softening of the stone course and ridge/chimney crispness."
+        "rationale": "Stone base, cream timber-framed upper storey, brown pitched roof with chimney all read true from this angle and match the mesh massing; only the roof surface is slightly lumpier and the timber framing less crisp than the concept."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10378,
-          "output_tokens": 175,
-          "cost_usd": 0.153895
+          "input_tokens": 10461,
+          "output_tokens": 757,
+          "cost_usd": 0.17147
         }
       }
     },
@@ -348,8 +348,8 @@
           },
           "band1": {
             "dominant": "smooth_sandstone",
-            "fraction": 0.94,
-            "total": 184,
+            "fraction": 0.939,
+            "total": 181,
             "passed": true,
             "metric": "own",
             "own": [
@@ -359,12 +359,12 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.321
+            "dominantFraction": 0.331
           },
           "roof": {
             "dominant": "spruce_planks",
             "fraction": 0.992,
-            "total": 247,
+            "total": 263,
             "passed": true,
             "metric": "own",
             "own": [
@@ -374,7 +374,7 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.923
+            "dominantFraction": 0.939
           }
         }
       },
@@ -383,29 +383,29 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof",
+            "region": "roof across the whole upper mass",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "overall building edges/eaves",
-            "attribute": "form",
-            "severity": "minor"
+            "region": "overall building outline / eaves",
+            "attribute": "massing",
+            "severity": "major"
           },
           {
-            "region": "stone ground-floor base",
+            "region": "stone ground storey base",
             "attribute": "material zoning",
             "severity": "minor"
           }
         ],
-        "rationale": "Palette and material zoning (brown roof, cream timbered walls, stone base) read as the same cottage, but the roof is ragged with chaotic overhanging planks and spiky eaves unlike the clean massing in the mesh and concept, a major form defect from this angle."
+        "rationale": "The palette and three-zone stone/timber/wood material story still read as the same cottage, but the roof has collapsed into a lumpy, broken jumble that fails to match the clean gabled silhouette in the mesh panel, so the form has clearly drifted."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10360,
-          "output_tokens": 807,
-          "cost_usd": 0.169605
+          "input_tokens": 10461,
+          "output_tokens": 633,
+          "cost_usd": 0.16837
         }
       }
     }
@@ -419,52 +419,52 @@
     "gaps": [
       {
         "angle": "+x+z",
-        "region": "roof across the whole top",
-        "attribute": "form"
-      },
-      {
-        "angle": "+x+z",
-        "region": "upper storey gable ends",
+        "region": "roof versus walls overall",
         "attribute": "massing"
       },
       {
         "angle": "+x+z",
-        "region": "timber-frame walls vs stone plinth",
+        "region": "upper timber-framed storey",
         "attribute": "material zoning"
       },
       {
-        "angle": "+x-z",
-        "region": "front gable wall, upper storey",
-        "attribute": "material zoning"
+        "angle": "+x+z",
+        "region": "roof slopes and ridge",
+        "attribute": "form"
       },
       {
         "angle": "+x-z",
-        "region": "timber roof eaves",
+        "region": "roof eaves overhang on the near side",
+        "attribute": "massing"
+      },
+      {
+        "angle": "+x-z",
+        "region": "chimney atop the roof",
         "attribute": "form"
       },
       {
         "angle": "-x-z",
-        "region": "lower walls / stone foundation course",
-        "attribute": "material zoning"
+        "region": "roof ridge and slopes",
+        "attribute": "form"
       },
       {
         "angle": "-x-z",
-        "region": "roof ridge and chimney profile",
+        "region": "upper-storey timber framing",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x+z",
+        "region": "roof across the whole upper mass",
         "attribute": "form"
       },
       {
         "angle": "-x+z",
-        "region": "roof",
-        "attribute": "form"
+        "region": "overall building outline / eaves",
+        "attribute": "massing"
       },
       {
         "angle": "-x+z",
-        "region": "overall building edges/eaves",
-        "attribute": "form"
-      },
-      {
-        "angle": "-x+z",
-        "region": "stone ground-floor base",
+        "region": "stone ground storey base",
         "attribute": "material zoning"
       }
     ],
@@ -481,7 +481,7 @@
     "views": [
       {
         "angle": "+x+z",
-        "outcome": "drifted: form"
+        "outcome": "drifted: massing"
       },
       {
         "angle": "+x-z",
@@ -505,11 +505,11 @@
         "feature": "frame",
         "block": "spruce_planks",
         "shipped": "spruce_planks",
-        "sites": 521,
+        "sites": 520,
         "missing": 0,
-        "satisfied": 382,
+        "satisfied": 383,
         "tolerated": {
-          "respected": 127,
+          "respected": 125,
           "skippedIsolated": 12
         },
         "gating": true,
@@ -531,7 +531,7 @@
         "feature": "panel:band1",
         "block": "smooth_sandstone",
         "shipped": "smooth_sandstone",
-        "sites": 1454,
+        "sites": 1397,
         "missing": 0,
         "tolerated": {
           "residue": 0
@@ -543,7 +543,7 @@
         "feature": "course",
         "block": "spruce_planks",
         "shipped": "spruce_planks",
-        "sites": 831,
+        "sites": 812,
         "missing": 0,
         "tolerated": {
           "residue": 0
@@ -617,16 +617,16 @@
       },
       "frame": {
         "counts": {
-          "wall": 2199,
+          "wall": 2178,
           "cornerPost": 46,
-          "roofline": 343,
+          "roofline": 342,
           "floorLine": 132
         },
         "painted": 0,
         "adopted": 0,
-        "respected": 127,
+        "respected": 125,
         "skippedIsolated": 12,
-        "alreadyFrame": 382
+        "alreadyFrame": 383
       },
       "fill": {
         "placements": 0,
@@ -637,14 +637,14 @@
             "kept": 1483
           },
           "band1": {
-            "surface": 1454,
+            "surface": 1397,
             "filled": 0,
-            "kept": 1454
+            "kept": 1397
           },
           "roof": {
-            "surface": 831,
+            "surface": 812,
             "filled": 0,
-            "kept": 831
+            "kept": 812
           }
         }
       }
