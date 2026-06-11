@@ -19,7 +19,7 @@
 // AABBs it computed (the watertight allow-regions; rhythm groups are per program entry).
 
 import { WORKSHOP_PROGRAM_SCHEMA } from "../workshop/program.mjs";
-import { ROOF_LAYOUTS, headRows } from "./program.mjs";
+import { ROOF_LAYOUTS, headRows, openingLanes } from "./program.mjs";
 
 const fail = (msg) => { throw new Error(`compileProgram: ${msg}`); };
 
@@ -44,22 +44,41 @@ function planeOf(rect, wall) {
 }
 
 /**
- * Even distribution of `count` items of width `w` over the inclusive column range [uLo, uHi],
- * with the inter-item gap chosen INSIDE [minGap, maxGap] (closest to balancing the edge margins;
- * smaller gap wins ties — deterministic). Returns each item's first column.
+ * Even distribution of items (given widths, in order) over the inclusive column range
+ * [uLo, uHi], with ONE inter-item gap chosen INSIDE [minGap, maxGap] (closest to balancing the
+ * edge margins; smaller gap wins ties — deterministic). Returns each item's first column.
  */
-export function layoutRun({ uLo, uHi, count, w, minGap, maxGap }) {
+export function layoutRun({ uLo, uHi, widths, minGap, maxGap }) {
   const avail = uHi - uLo + 1;
+  const totalW = widths.reduce((s, w) => s + w, 0);
   let best = null;
   for (let g = minGap; g <= maxGap; g++) {
-    const leftover = avail - (count * w + (count - 1) * g);
+    const leftover = avail - (totalW + (widths.length - 1) * g);
     if (leftover < 0) break;
     const score = Math.abs(leftover / 2 - g);
     if (best === null || score < best.score) best = { g, leftover, score };
   }
-  if (best === null) fail(`${count}×${w} cannot lay out in ${avail} columns at gaps [${minGap}, ${maxGap}]`);
-  const m = Math.floor(best.leftover / 2);
-  return Array.from({ length: count }, (_, i) => uLo + m + i * (w + best.g));
+  if (best === null) fail(`widths [${widths}] cannot lay out in ${avail} columns at gaps [${minGap}, ${maxGap}]`);
+  let u = uLo + Math.floor(best.leftover / 2);
+  return widths.map((w) => { const at = u; u += w + best.g; return at; });
+}
+
+/**
+ * Merge a lane's entries into ONE display sequence by ideal-position spreading (each entry's
+ * instances spread evenly across the lane; a singleton centers between them — door flanked by
+ * its windows). Deterministic: ties break by declaration order. Returns lane instances in
+ * left-to-right order, each {entry, instance}.
+ */
+export function laneSequence(lane) {
+  const n = lane.entries.reduce((s, e) => s + e.count, 0);
+  const items = [];
+  for (const e of lane.entries) {
+    for (let i = 0; i < e.count; i++) {
+      items.push({ entry: e, instance: i, ideal: ((i + 0.5) * n) / e.count - 0.5 });
+    }
+  }
+  items.sort((a, b) => a.ideal - b.ideal || a.entry.index - b.entry.index);
+  return items.map(({ entry, instance }) => ({ entry, instance }));
 }
 
 /** The roof's {field, stairs, slab} family: stair/slab members ride ONLY when the program's
@@ -109,21 +128,35 @@ export function compileProgram(program, pack) {
     const upperBlock = roleBlock(pack, m.walls.upper.role);
     const dressBlock = m.walls.dressing ? roleBlock(pack, m.walls.dressing.role) : null;
 
-    // --- shell: banded courses, openings as TRUE holes (hole height includes the head rows) ---
+    // --- openings: per-lane joint layout (the door and its flanking windows share one rhythm),
+    //     TRUE holes whose height includes the head rows; world-AABB declarations per instance.
+    //     Rhythm declaration groups: per ENTRY on single-entry lanes (the gate verifies spacing
+    //     + shared sill); per INSTANCE on joint lanes (mixed sills/widths — recorded, vacuous).
     const shellOpenings = [];
-    m.openings.forEach((o, j) => {
-      const plane = planeOf(rect, o.wall);
-      const rows = headRows(o.head ?? null, o.w);
-      const us = layoutRun({ uLo: plane.uLo, uHi: plane.uHi, count: o.count, w: o.w, minGap: rhythm.minSpacing, maxGap: rhythm.maxSpacing });
-      for (const u of us) {
-        shellOpenings.push({ wall: o.wall, at: [u, o.sill], w: o.w, h: o.h + rows });
+    const placedOpenings = []; // {entry, u, plane} — heads consume these positions
+    for (const lane of openingLanes(m.openings)) {
+      const plane = planeOf(rect, lane.wall);
+      const seq = laneSequence(lane);
+      const us = layoutRun({
+        uLo: plane.uLo, uHi: plane.uHi,
+        widths: seq.map((s) => s.entry.w),
+        minGap: rhythm.minSpacing, maxGap: rhythm.maxSpacing,
+      });
+      const joint = lane.entries.length > 1;
+      seq.forEach((s, i) => {
+        const o = s.entry;
+        const u = us[i];
+        const rows = headRows(o.head ?? null, o.w);
+        shellOpenings.push({ wall: lane.wall, at: [u, o.sill], w: o.w, h: o.h + rows });
+        placedOpenings.push({ entry: o, u, plane });
         const lo = plane.uAxis === "x" ? [u, o.sill, plane.fixed] : [plane.fixed, o.sill, u];
         const hi = plane.uAxis === "x"
           ? [u + o.w - 1, o.sill + o.h + rows - 1, plane.fixed]
           : [plane.fixed, o.sill + o.h + rows - 1, u + o.w - 1];
-        openingDecls.push({ wall: `${m.id}:${o.wall}#${j}`, kind: o.kind, min: lo, max: hi });
-      }
-    });
+        const group = joint ? `${m.id}:${lane.wall}#${o.index}.${s.instance}` : `${m.id}:${lane.wall}#${o.index}`;
+        openingDecls.push({ wall: group, kind: o.kind, min: lo, max: hi });
+      });
+    }
     elements.push({
       id: `${m.id}-shell`, kind: "shell",
       spec: {
@@ -199,7 +232,7 @@ export function compileProgram(program, pack) {
       const facing = m.roof.dormers.wall ?? (m.roof.ridgeAxis === "x" ? "+z" : "+x");
       const width = dormerStyle.width ?? 3;
       const lane = m.roof.ridgeAxis === "x" ? { uLo: rect.x0 + 1, uHi: x1 - 1 } : { uLo: rect.z0 + 1, uHi: z1 - 1 };
-      const us = layoutRun({ ...lane, count: m.roof.dormers.count, w: width, minGap: 1, maxGap: Math.max(1, rhythm.maxSpacing) });
+      const us = layoutRun({ ...lane, widths: Array(m.roof.dormers.count).fill(width), minGap: 1, maxGap: Math.max(1, rhythm.maxSpacing) });
       // front face sits on the WALL plane (not the eave edge): the main roof's SOLID courses
       // back the face one cell in, so the dormer light is a sealed niche and the cheeks embed
       // in solid — watertight with stair-roofed dormers (stairs are fixtures and never seal)
@@ -245,34 +278,33 @@ export function compileProgram(program, pack) {
       tops.push(ridgeY + 3);
     }
 
-    // --- opening heads: arch ring / flat lintel in the dressing material ---
-    m.openings.forEach((o, j) => {
-      if (!o.head) return;
+    // --- opening heads: arch ring / flat lintel in the dressing material, at the placed columns ---
+    const headCounters = new Map();
+    for (const { entry: o, u, plane } of placedOpenings) {
+      if (!o.head) continue;
       const block = o.headRole ? roleBlock(pack, o.headRole) : dressBlock;
-      if (!block) fail(`${m.id}.openings[${j}] has a head but no headRole and no walls.dressing role`);
-      const plane = planeOf(rect, o.wall);
+      if (!block) fail(`${m.id}.openings[${o.index}] has a head but no headRole and no walls.dressing role`);
       const rows = headRows(o.head, o.w);
-      const us = layoutRun({ uLo: plane.uLo, uHi: plane.uHi, count: o.count, w: o.w, minGap: rhythm.minSpacing, maxGap: rhythm.maxSpacing });
       const spanAxis = plane.uAxis;
       const depthAxis = spanAxis === "x" ? "z" : "x";
-      us.forEach((u, i) => {
-        const common = {
-          span: { axis: spanAxis, range: [u, u + o.w - 1] },
-          yRange: [o.sill, o.sill + o.h + rows - 1],
-          depth: { axis: depthAxis, range: [plane.fixed, plane.fixed] },
-          block,
-        };
-        const spec = o.head === "arch"
-          ? { ...common, center: [u + (o.w - 1) / 2, o.sill + o.h - 1], radius: o.w / 2 }
-          : { ...common, level: o.sill + o.h - 1 };
-        elements.push({
-          id: `${m.id}-head-${o.wall}-${j}-${i}`, kind: "idiom",
-          idiom: o.head === "arch" ? "arch" : "head.flat",
-          spec,
-        });
+      const common = {
+        span: { axis: spanAxis, range: [u, u + o.w - 1] },
+        yRange: [o.sill, o.sill + o.h + rows - 1],
+        depth: { axis: depthAxis, range: [plane.fixed, plane.fixed] },
+        block,
+      };
+      const spec = o.head === "arch"
+        ? { ...common, center: [u + (o.w - 1) / 2, o.sill + o.h - 1], radius: o.w / 2 }
+        : { ...common, level: o.sill + o.h - 1 };
+      const i = headCounters.get(o.index) ?? 0;
+      headCounters.set(o.index, i + 1);
+      elements.push({
+        id: `${m.id}-head-${o.wall}-${o.index}-${i}`, kind: "idiom",
+        idiom: o.head === "arch" ? "arch" : "head.flat",
+        spec,
       });
       note(block, o.sill, o.sill + o.h + rows - 1);
-    });
+    }
   }
 
   // --- declarations: bands as y-slices carrying exactly the blocks assigned there -------------

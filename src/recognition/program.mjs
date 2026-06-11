@@ -89,6 +89,43 @@ export function headRows(head, w) {
   return 0;
 }
 
+/**
+ * Partition a mass's opening entries into per-wall LANES: entries whose vertical ranges
+ * (sill .. sill+h+head) overlap — transitively — share a lane and are laid out JOINTLY by the
+ * compiler (evenly spread, one rhythm); vertically disjoint entries lay out independently.
+ * Deterministic; shared by validation (feasibility per lane) and compile (layout per lane).
+ * @param {object[]} openings  a mass's openings array (schema-valid)
+ * @returns {{wall:string, entries:{index:number, count:number, w:number, h:number, sill:number,
+ *            kind:string, head:string|null, headRole:string|null}[]}[]}
+ */
+export function openingLanes(openings) {
+  const byWall = new Map();
+  openings.forEach((o, index) => {
+    if (!byWall.has(o.wall)) byWall.set(o.wall, []);
+    byWall.get(o.wall).push({ ...o, index, top: o.sill + o.h + headRows(o.head ?? null, o.w) });
+  });
+  const lanes = [];
+  for (const [wall, entries] of byWall) {
+    const pool = [...entries];
+    while (pool.length) {
+      const lane = [pool.shift()];
+      let grew = true;
+      while (grew) {
+        grew = false;
+        for (let i = pool.length - 1; i >= 0; i--) {
+          if (lane.some((e) => pool[i].sill < e.top && e.sill < pool[i].top)) {
+            lane.push(pool.splice(i, 1)[0]);
+            grew = true;
+          }
+        }
+      }
+      lane.sort((a, b) => a.index - b.index);
+      lanes.push({ wall, entries: lane });
+    }
+  }
+  return lanes;
+}
+
 /** Two plan rects touch (overlap or share an edge) — the single-component precondition. */
 function rectsTouch(a, b) {
   const ax1 = a.x0 + a.w - 1, az1 = a.z0 + a.d - 1;
@@ -177,26 +214,25 @@ export function validateProgramAgainstPack(program, pack, { registry = IDIOM_REG
       else if (registry[t]?.kind !== "pass") err(`${where}.walls.treatment`, `"${t}" is not a pass idiom (treatments are build transforms)`);
     }
 
-    // 6. openings fit — laterally at min spacing, vertically incl. head clearance; entries
-    //    sharing a wall must occupy DISJOINT vertical ranges (each entry lays out its own
-    //    rhythm lane; overlapping lanes could collide laterally)
+    // 6. openings fit — vertically incl. head clearance; laterally PER LANE at min spacing.
+    //    Entries on one wall whose vertical ranges overlap form a joint lane (a real facade
+    //    puts the door and its flanking ground windows on one wall — the compiler spreads the
+    //    whole lane evenly); vertically disjoint entries are independent lanes.
     const wallH = m.storeys * m.storeyHeight;
     m.openings.forEach((o, j) => {
       const ow = `${where}.openings[${j}] (${o.kind} on ${o.wall})`;
-      const avail = wallSpan(m.rect, o.wall) - 2; // corners stay (boxShell contract)
-      const need = o.count * o.w + (o.count - 1) * openingRhythm.minSpacing;
-      if (need > avail) err(ow, `${o.count}×${o.w} needs ${need} cells at min spacing; wall offers ${avail}`);
       const top = o.sill + o.h + headRows(o.head ?? null, o.w);
       if (top > wallH) err(ow, `opening + head reach y ${top}, above the wall top ${wallH}`);
-      for (let k = 0; k < j; k++) {
-        const p = m.openings[k];
-        if (p.wall !== o.wall) continue;
-        const pTop = p.sill + p.h + headRows(p.head ?? null, p.w);
-        if (o.sill < pTop && p.sill < top) {
-          err(ow, `vertical range [${o.sill}, ${top}) overlaps openings[${k}] [${p.sill}, ${pTop}) on the same wall`);
-        }
-      }
     });
+    for (const lane of openingLanes(m.openings)) {
+      const avail = wallSpan(m.rect, lane.wall) - 2; // corners stay (boxShell contract)
+      const n = lane.entries.reduce((s, e) => s + e.count, 0);
+      const need = lane.entries.reduce((s, e) => s + e.count * e.w, 0) + (n - 1) * openingRhythm.minSpacing;
+      if (need > avail) {
+        err(`${where}.openings (lane on ${lane.wall})`,
+          `${n} opening(s) need ${need} cells at min spacing; wall offers ${avail}`);
+      }
+    }
 
     // 7. dormers fit, on an eave-side slope (perpendicular to the ridge)
     const d = m.roof.dormers ?? null;

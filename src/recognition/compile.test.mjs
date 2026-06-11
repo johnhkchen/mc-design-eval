@@ -13,7 +13,7 @@ import { artifactOccupancy } from "../view/occupancy.mjs";
 import { assertArtifact } from "../artifact.mjs";
 import { assertWorkshopProgram, realizeProgram } from "../workshop/program.mjs";
 import { assertBuildingProgram, validateProgramAgainstPack } from "./program.mjs";
-import { compileProgram, layoutRun, roleBlock } from "./compile.mjs";
+import { compileProgram, layoutRun, laneSequence, roleBlock } from "./compile.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const pack = loadStylePack(resolve(here, "..", "..", "packs", "rustic.json"));
@@ -70,11 +70,27 @@ test("roleBlock resolves pack roles and throws on unknowns", () => {
 
 test("layoutRun distributes evenly, in-band, deterministically", () => {
   // 2 items of w=1 over 11 columns: gap candidates 2..5 — leftover 9-g balances at g=3 (m=3)
-  assert.deepEqual(layoutRun({ uLo: 1, uHi: 11, count: 2, w: 1, minGap: 2, maxGap: 5 }), [4, 8]);
+  assert.deepEqual(layoutRun({ uLo: 1, uHi: 11, widths: [1, 1], minGap: 2, maxGap: 5 }), [4, 8]);
   // single item centers
-  assert.deepEqual(layoutRun({ uLo: 1, uHi: 11, count: 1, w: 2, minGap: 2, maxGap: 5 }), [5]);
+  assert.deepEqual(layoutRun({ uLo: 1, uHi: 11, widths: [2], minGap: 2, maxGap: 5 }), [5]);
+  // mixed widths stay ordered with one shared gap
+  const us = layoutRun({ uLo: 0, uHi: 12, widths: [1, 2, 1], minGap: 2, maxGap: 5 });
+  assert.equal(us.length, 3);
+  assert.ok(us[1] - (us[0] + 1) === us[2] - (us[1] + 2), "uniform gap");
   // infeasible throws
-  assert.throws(() => layoutRun({ uLo: 1, uHi: 4, count: 3, w: 2, minGap: 2, maxGap: 5 }), /cannot lay out/);
+  assert.throws(() => layoutRun({ uLo: 1, uHi: 4, widths: [2, 2, 2], minGap: 2, maxGap: 5 }), /cannot lay out/);
+});
+
+test("laneSequence centers a singleton between a pair (window, door, window)", () => {
+  const lane = {
+    wall: "+z",
+    entries: [
+      { index: 0, count: 1, w: 2, kind: "door" },
+      { index: 1, count: 2, w: 1, kind: "window" },
+    ],
+  };
+  const kinds = laneSequence(lane).map((s) => s.entry.kind);
+  assert.deepEqual(kinds, ["window", "door", "window"]);
 });
 
 test("compile is deterministic and self-contained (program + pack only)", () => {
@@ -166,6 +182,26 @@ test("INTEGRATION: synthetic program realizes through the registry, conformance 
     "every pack conformance check passes on the realized synthetic build",
   );
   assert.equal(verdict.passed, true);
+});
+
+test("INTEGRATION: a joint lane (door flanked by ground windows) realizes conformance-clean", () => {
+  const p = validated(makeProgram((q) => {
+    q.masses[0].openings = [
+      { wall: "+z", kind: "door", count: 1, w: 2, h: 3, sill: 0, head: "flat", headRole: "wall.dressing" },
+      { wall: "+z", kind: "window", count: 2, w: 1, h: 2, sill: 1, head: null, headRole: null },
+    ];
+  }));
+  const { workshopProgram } = compileProgram(p, pack);
+  const shell = workshopProgram.elements.find((e) => e.id === "main-shell");
+  assert.equal(shell.spec.openings.length, 3);
+  const doorHole = shell.spec.openings.find((o) => o.w === 2);
+  const winUs = shell.spec.openings.filter((o) => o.w === 1).map((o) => o.at[0]);
+  assert.ok(winUs[0] < doorHole.at[0] && doorHole.at[0] < winUs[1], "door centered between windows");
+
+  const { artifact } = realizeProgram(assertWorkshopProgram(workshopProgram));
+  const occ = artifactOccupancy(artifact);
+  const verdict = runConformance({ occ, declarations: workshopProgram.declarations }, pack);
+  assert.deepEqual(verdict.checks.filter((c) => !c.passed).map((c) => ({ name: c.name, findings: c.findings.slice(0, 5) })), []);
 });
 
 test("INTEGRATION: pyramid + hip masses also realize and stay watertight/single-component", () => {

@@ -11,6 +11,7 @@ import {
   PROGRAM_REPLY_BUDGET,
   ROOF_LAYOUTS,
   headRows,
+  openingLanes,
   parseBuildingProgram,
   assertBuildingProgram,
   validateProgramAgainstPack,
@@ -160,7 +161,7 @@ test("treatment must be a pack PASS idiom", () => {
   assert.equal(none.ok, true);
 });
 
-test("openings must fit the wall: lateral at min spacing, vertical incl. head clearance", () => {
+test("openings must fit the wall: lane at min spacing, vertical incl. head clearance", () => {
   const wide = validateProgramAgainstPack(
     makeProgram((p) => { p.masses[0].openings[1].count = 5; }), pack); // 5×1 + 4×2 = 13 > w-2 = 11
   assert.match(wide.findings[0].msg, /wall offers 11/);
@@ -168,6 +169,36 @@ test("openings must fit the wall: lateral at min spacing, vertical incl. head cl
   const tallArch = validateProgramAgainstPack(
     makeProgram((p) => { p.masses[0].openings[0] = { wall: "+z", kind: "door", count: 1, w: 4, h: 7, sill: 0, head: "arch", headRole: "wall.dressing" }; }), pack);
   assert.match(tallArch.findings[0].msg, /above the wall top 8/); // 7 + ceil(4/2) = 9 > 2×4
+});
+
+test("door + ground windows on ONE wall are a joint lane — valid, feasibility-checked together", () => {
+  // the live cottage refusals: sill-0 door beside sill-1 windows is a NATURAL facade reading
+  const mixed = validateProgramAgainstPack(makeProgram((p) => {
+    p.masses[0].openings = [
+      { wall: "+z", kind: "door", count: 1, w: 2, h: 3, sill: 0, head: "flat", headRole: "wall.dressing" },
+      { wall: "+z", kind: "window", count: 2, w: 1, h: 2, sill: 1, head: null, headRole: null },
+    ];
+  }), pack);
+  assert.deepEqual(mixed.findings, []);
+
+  const overflow = validateProgramAgainstPack(makeProgram((p) => {
+    p.masses[0].openings = [
+      { wall: "+z", kind: "door", count: 1, w: 4, h: 3, sill: 0, head: null, headRole: null },
+      { wall: "+z", kind: "window", count: 3, w: 2, h: 2, sill: 1, head: null, headRole: null },
+    ]; // 4 + 3×2 + 3×2 = 16 > 11
+  }), pack);
+  assert.match(overflow.findings[0].msg, /4 opening\(s\) need 16 cells .* wall offers 11/);
+});
+
+test("openingLanes: vertical overlap merges transitively; disjoint stays independent", () => {
+  const lanes = openingLanes([
+    { wall: "+z", kind: "door", count: 1, w: 2, h: 3, sill: 0, head: "flat" },   // [0,4)
+    { wall: "+z", kind: "window", count: 2, w: 1, h: 2, sill: 5, head: null },   // [5,7) — disjoint
+    { wall: "+z", kind: "window", count: 2, w: 1, h: 2, sill: 3, head: null },   // [3,5) — overlaps the door
+    { wall: "-z", kind: "window", count: 1, w: 1, h: 2, sill: 0, head: null },   // other wall
+  ]);
+  const keyOf = (l) => `${l.wall}:[${l.entries.map((e) => e.index).join(",")}]`;
+  assert.deepEqual(lanes.map(keyOf).sort(), ["+z:[0,2]", "+z:[1]", "-z:[3]"]);
 });
 
 test("headRows: arch rises with width, flat is one lintel row, bare is zero", () => {
