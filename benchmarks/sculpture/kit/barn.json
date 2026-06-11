@@ -1,0 +1,192 @@
+{
+  "schema": "kit/v1",
+  "subject": "barn",
+  "generatedFrom": {
+    "concept": "runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png",
+    "materialMap": "material-map/barn.json",
+    "zoneMapRecord": "zone-map/barn.json"
+  },
+  "params": {
+    "model": "claude-opus-4-8",
+    "tier": "strong",
+    "gridN": 96,
+    "deltaMax": 16,
+    "chromaWeight": 2,
+    "minCells": 24,
+    "lightnessOffset": 0,
+    "offsetSamples": 2
+  },
+  "kit": [
+    {
+      "block": "stone_bricks",
+      "role": "wall pillars, corner posts, and panel framing trim",
+      "formClass": "cube",
+      "whereUsed": [
+        "band0",
+        "corners-edges",
+        "trim",
+        "openings"
+      ],
+      "confidence": "high",
+      "rationale": "Crisp rectangular mortar grid with clean straight seams and flat regular faces on the vertical posts and the borders around each panel — the unmistakable regular brick courses of stone_bricks, not the random lumps of cobble.",
+      "flags": [],
+      "valueCheck": {
+        "verdict": "flagged-mismatch",
+        "deltaE": 19.71,
+        "rawDeltaE": 19.71,
+        "cells": 1155,
+        "swatchLab": [
+          31.59,
+          0.278,
+          0.827
+        ],
+        "blockLab": [
+          51.223,
+          -0.002,
+          0
+        ],
+        "flaggedForReview": true
+      }
+    },
+    {
+      "block": "cobblestone",
+      "role": "infill panels between the stone-brick pillars and the gable field",
+      "formClass": "cube",
+      "whereUsed": [
+        "band0"
+      ],
+      "confidence": "high",
+      "rationale": "Mottled, rounded multi-pebble texture with irregular dark speckles and no straight mortar lines — the random cobblestone face, clearly distinct from the regular bricks framing it.",
+      "flags": [],
+      "valueCheck": {
+        "verdict": "no-swatch",
+        "flaggedForReview": true
+      }
+    },
+    {
+      "block": "spruce_planks",
+      "role": "pitched roof skin",
+      "formClass": "cube",
+      "whereUsed": [
+        "roof"
+      ],
+      "confidence": "high",
+      "rationale": "Dark chocolate-brown boards with tight horizontal plank seams and faint vertical board breaks — the dark, low-contrast grain of spruce_planks rather than the streaky reddish dark_oak.",
+      "flags": [],
+      "valueCheck": {
+        "verdict": "flagged-mismatch",
+        "deltaE": 33.487,
+        "rawDeltaE": 33.487,
+        "cells": 1623,
+        "swatchLab": [
+          14.408,
+          6.284,
+          14.137
+        ],
+        "blockLab": [
+          38.489,
+          7.86,
+          25.664
+        ],
+        "flaggedForReview": true
+      }
+    },
+    {
+      "block": "smooth_stone",
+      "role": "foundation plinth / base course under the walls",
+      "formClass": "cube",
+      "whereUsed": [
+        "base"
+      ],
+      "confidence": "medium",
+      "rationale": "The bottom band reads lighter and flatter than the stone bricks above it, with a smooth uniform grey face and only faint slab seams — the clean unbroken surface of smooth_stone forming the raised footing.",
+      "flags": [],
+      "valueCheck": {
+        "verdict": "no-swatch",
+        "flaggedForReview": true
+      }
+    },
+    {
+      "block": "oak_door",
+      "role": "double entry doors in the long wall",
+      "formClass": "fixture",
+      "whereUsed": [
+        "openings"
+      ],
+      "confidence": "high",
+      "rationale": "Tall two-tone orange-brown leaves with the recessed upper/lower panel split and a visible round handle — the standard oak_door, paired as a double doorway.",
+      "flags": [],
+      "valueCheck": {
+        "verdict": null,
+        "reason": "non-cube",
+        "flaggedForReview": false
+      }
+    }
+  ],
+  "unidentified": [
+    {
+      "surface": "thin vertical slit near the gable apex",
+      "reason": "A narrow dark vertical opening sits high in the gable; it could be a ladder rung, iron_bars, or a slit window, but the texture is too small and shadowed to name the block honestly.",
+      "fallback": {
+        "mode": "color-snap"
+      }
+    }
+  ],
+  "dropped": [],
+  "overrides": {},
+  "overrideRows": [
+    {
+      "bandName": "band0",
+      "named": "cobblestone",
+      "recognized": "cobblestone",
+      "verdict": "flagged-candidate"
+    },
+    {
+      "bandName": "roof",
+      "named": "dark_oak_planks",
+      "recognized": "spruce_planks",
+      "verdict": "flagged-candidate"
+    }
+  ],
+  "diff": {
+    "corrections": [
+      {
+        "band": "roof",
+        "old": "dark_oak_planks",
+        "new": "spruce_planks",
+        "ships": false,
+        "oldRole": "roof shingle planes"
+      }
+    ],
+    "recovered": [
+      {
+        "block": "smooth_stone",
+        "role": "foundation plinth / base course under the walls",
+        "formClass": "cube"
+      },
+      {
+        "block": "oak_door",
+        "role": "double entry doors in the long wall",
+        "formClass": "fixture"
+      }
+    ],
+    "unchanged": [
+      "stone_bricks",
+      "cobblestone"
+    ]
+  },
+  "stats": {
+    "in": 5,
+    "kept": 5,
+    "dropped": 0,
+    "unidentified": 1,
+    "flagged": 0,
+    "formClasses": {
+      "cube": 4,
+      "fixture": 1,
+      "rail": 0
+    },
+    "verified": 0,
+    "flaggedForReview": 4
+  }
+}

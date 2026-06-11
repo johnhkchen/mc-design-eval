@@ -230,7 +230,8 @@ export const SUBJECTS = {
     zoneMapRecord: "zone-map/barn.json", // T-117-01: derived via the role-aware rung (ΔL 2.082
                              // witness); the T-116 refusal is preserved beside it as
                              // zone-map/barn.prior-fallback.json
-    kitRecord: null,         // → "kit/barn.json" once the T-117 kit extraction is committed
+    kitRecord: "kit/barn.json", // T-117-01: first extraction on the derived bands (no shipping
+                             // overrides — all cube recognitions flagged-for-review, church precedent)
     provision: { scale: 48 },
     policy: { // FALLBACK PRIOR, from material-map/barn.json roles (1:1 rule→block transcription)
       base: {

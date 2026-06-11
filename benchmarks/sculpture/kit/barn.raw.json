@@ -1,0 +1,63 @@
+{
+  "ingredients": [
+    {
+      "block": "stone_bricks",
+      "role": "wall pillars, corner posts, and panel framing trim",
+      "formClass": "cube",
+      "whereUsed": [
+        "band0",
+        "corners-edges",
+        "trim",
+        "openings"
+      ],
+      "confidence": "high",
+      "rationale": "Crisp rectangular mortar grid with clean straight seams and flat regular faces on the vertical posts and the borders around each panel — the unmistakable regular brick courses of stone_bricks, not the random lumps of cobble."
+    },
+    {
+      "block": "cobblestone",
+      "role": "infill panels between the stone-brick pillars and the gable field",
+      "formClass": "cube",
+      "whereUsed": [
+        "band0"
+      ],
+      "confidence": "high",
+      "rationale": "Mottled, rounded multi-pebble texture with irregular dark speckles and no straight mortar lines — the random cobblestone face, clearly distinct from the regular bricks framing it."
+    },
+    {
+      "block": "spruce_planks",
+      "role": "pitched roof skin",
+      "formClass": "cube",
+      "whereUsed": [
+        "roof"
+      ],
+      "confidence": "high",
+      "rationale": "Dark chocolate-brown boards with tight horizontal plank seams and faint vertical board breaks — the dark, low-contrast grain of spruce_planks rather than the streaky reddish dark_oak."
+    },
+    {
+      "block": "smooth_stone",
+      "role": "foundation plinth / base course under the walls",
+      "formClass": "cube",
+      "whereUsed": [
+        "base"
+      ],
+      "confidence": "medium",
+      "rationale": "The bottom band reads lighter and flatter than the stone bricks above it, with a smooth uniform grey face and only faint slab seams — the clean unbroken surface of smooth_stone forming the raised footing."
+    },
+    {
+      "block": "oak_door",
+      "role": "double entry doors in the long wall",
+      "formClass": "fixture",
+      "whereUsed": [
+        "openings"
+      ],
+      "confidence": "high",
+      "rationale": "Tall two-tone orange-brown leaves with the recessed upper/lower panel split and a visible round handle — the standard oak_door, paired as a double doorway."
+    }
+  ],
+  "unidentified": [
+    {
+      "surface": "thin vertical slit near the gable apex",
+      "reason": "A narrow dark vertical opening sits high in the gable; it could be a ladder rung, iron_bars, or a slit window, but the texture is too small and shadowed to name the block honestly."
+    }
+  ]
+}
