@@ -64,7 +64,10 @@
     "styled:church": "node benchmarks/sculpture/styled-milestone.mjs --subject church",
     "components:cottage": "node benchmarks/sculpture/component-decomposition.mjs --subject cottage",
     "components:gatehouse": "node benchmarks/sculpture/component-decomposition.mjs --subject gatehouse",
-    "components:church": "node benchmarks/sculpture/component-decomposition.mjs --subject church"
+    "components:church": "node benchmarks/sculpture/component-decomposition.mjs --subject church",
+    "roof:cottage": "node benchmarks/sculpture/roof-program.mjs --subject cottage",
+    "roof:gatehouse": "node benchmarks/sculpture/roof-program.mjs --subject gatehouse",
+    "roof:church": "node benchmarks/sculpture/roof-program.mjs --subject church"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

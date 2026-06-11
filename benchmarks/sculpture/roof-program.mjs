@@ -1,0 +1,372 @@
+// IMPURE RUNNER — E-27 roof-as-program evidence pass (S-104 / T-104-01). Every failing resemblance
+// verdict names `form @ roof`: the roof is sampled from the decimated mesh into a stepped spiky
+// blob, then skinned faithfully. This runner REPLACES it: the PURE cores fit gable parameters from
+// the committed component record (src/form/roof-fit.mjs — glb-first pitch under a declared
+// agreement gate, fit error recorded), regenerate the roof Minecraft-native (src/view/
+// roof-generate.mjs — stair courses via the proven T-097 state path, slab half-steps, solid
+// wedge), and swap it under the T-102 cage (src/view/roof-swap.mjs — per-azimuth silhouette IoU vs
+// the GLB on a mass view, closure no-regress, chimney byte-protected + re-seated, auto-rollback).
+//
+// THE SEAM INVARIANT: this file is impure wiring only (file I/O, GLB load, the minecraft-data
+// vocabulary, best-effort GL renders, the durable record). DETERMINISM (E-24 Rule 2): the core
+// runs twice; the two outputs must be byte-identical (sha256 recorded, re-checked by --offline /
+// --repro). HONEST FALLBACK (E-27 Rule 1): an unfittable roof keeps the regularized shell and the
+// record names every reason — `status: "fallback"` is a CORRECT outcome, exit 0. A thrown stage
+// writes {status:"pipeline-failed", stage, error} and exits 1 (the styled-milestone convention).
+//
+// INPUT PINS: the component record was computed ON the committed regularized shell — the record's
+// source.sha256 must match the shell artifact on disk, or the run fails loudly (drift, not magic).
+//
+// UNMAPPED GATE (Rule 3): the swapped artifact is built into the in-memory world; ANY unmapped
+// block/state THROWS — this live-proves every stair/slab state through the blockStateId gate.
+// LENS NOTE (pinned, T-097): prismarine-viewer 1.33.0 meshes NO stair block at any state — stairs
+// place and read back correctly but do not draw; renders show the solid wedge with tread notches.
+// Renders are EVIDENCE, never decision inputs (the cage's silhouettes come from the pure
+// rasterizer).
+//
+// GL — run on demand, NOT in `npm test`:
+//   npm run roof:cottage                  # fit + generate + swap + censuses + renders + record
+//   npm run roof:gatehouse
+//   npm run roof:church                   # registry-generic; kit record is nullable registry data
+//   npm run roof:cottage -- --repro       # re-run the deterministic core, compare sha256s (no GL)
+//   npm run roof:cottage -- --offline     # re-assert the committed record + artifact hash (no recompute)
+//
+// Writes roof/<subj>.{json,md} (committed) + roof/<subj>/artifact.json (the swapped shell, when
+// accepted) + PNGs (gitignored) + pr/assets/frames/roof-<subj>-{before,after}.png (oblique 225°).
+
+import { readFile, writeFile, mkdir, copyFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+import { artifactOccupancy } from "../../src/view/occupancy.mjs";
+import { rebuildArtifact, openingRegions } from "../../src/view/shell-integrity.mjs";
+import { REGULARIZE_DEFAULTS, protrudingStackRegion } from "../../src/view/shell-regularize.mjs";
+import { ROOF_FIT_DEFAULTS, gablesFromRecord } from "../../src/form/roof-fit.mjs";
+import { roofFamily } from "../../src/view/roof-generate.mjs";
+import { swapRoof, chimneyColumns } from "../../src/view/roof-swap.mjs";
+import { runCells } from "../../src/form/component-decompose.mjs";
+import { loadMeshFromGlb, rasterizeSilhouette } from "../../src/form/glb-silhouette.mjs";
+import { resolveAngle } from "../../src/view/multi-angle.mjs";
+import { MULTI_ANGLE_GATE } from "../../src/config.mjs";
+import { assertArtifact } from "../../src/artifact.mjs";
+import { expandArtifact } from "../../src/expand.mjs";
+import { SUBJECTS } from "./durable-skin.mjs";
+
+const ROOT = fileURLToPath(new URL("../../", import.meta.url));
+const HERE = join(ROOT, "benchmarks/sculpture");
+const OUT_DIR = join(HERE, "roof");
+const FRAMES_DIR = join(ROOT, "pr/assets/frames");
+
+const OBLIQUE = "-x-z"; // azimuth 225° — the durable-skin witness angle (before/after parity)
+// the azimuths the resemblance gate FAILED on (`form @ roof`) — the AC's evidence views
+const EVIDENCE_ANGLES = ["+x-z", "-x-z", "-x+z"]; // 135° · 225° · 315°
+
+const LENS_NOTE = "stairs-invisible (pinned, T-097): prismarine-viewer 1.33.0 meshes NO stair " +
+  "block at any state — stair placement is proven by the unmapped gate + the committed states, " +
+  "not by pixels; renders show the solid wedge with tread notches.";
+
+const sha256 = (s) => createHash("sha256").update(s).digest("hex");
+const artifactJson = (a) => JSON.stringify(a, null, 2) + "\n";
+
+/** Best-effort GL render at a named angle (a lens, never logic). */
+async function tryRender(artifact, angle, label, subjDir) {
+  try {
+    const { renderViews } = await import("../../src/view/multi-angle.mjs");
+    const [r] = await renderViews(artifact, [angle], { outDir: subjDir, label: () => label });
+    return { angle, path: r.path.replace(ROOT, "") };
+  } catch (e) {
+    return { angle, error: e.message };
+  }
+}
+
+/** A gable serialized for the durable record (Sets and bulky cell lists stripped). */
+function gableRecordView(g) {
+  return {
+    id: g.id,
+    ridge: g.ridge,
+    sides: g.sides.map((s) => ({
+      planeId: s.planeId, eaveDir: s.eaveDir, pitch: s.pitch, pitchSource: s.pitchSource,
+      voxelPitch: s.voxelPitch, glbPitch: s.glbPitch, glbAngleDeg: s.glbAngleDeg,
+      eaveY: s.eaveY, eaveEdge: s.eaveEdge, overhang: s.overhang, run: s.run ?? null,
+    })),
+    footprint: { bbox: g.footprint.bbox, area: g.footprint.area },
+    hip: g.hip,
+    sane: g.sane,
+    reasons: g.reasons,
+  };
+}
+
+// =================================================================================================
+// THE DETERMINISTIC CORE — reads committed inputs, writes nothing, no GL. Run twice per live pass.
+// =================================================================================================
+async function runRoof(def) {
+  const shellPath = `regularize/${def.key}/artifact.json`;
+  const componentPath = `components/${def.key}.json`;
+  const shellBytes = await readFile(join(HERE, shellPath), "utf8");
+  const record = JSON.parse(await readFile(join(HERE, componentPath), "utf8"));
+  if (record.schema !== "component-record/v1") throw new Error(`${componentPath}: unexpected schema ${record.schema}`);
+  if (record.subject !== def.key) throw new Error(`${componentPath}: subject ${record.subject} ≠ ${def.key}`);
+  const shellSha = sha256(shellBytes);
+  if (record.source?.sha256 !== shellSha) {
+    throw new Error(`${def.key} input drift: component record fitted shell ${record.source?.sha256?.slice(0, 12)}…, ` +
+      `on-disk regularized shell is ${shellSha.slice(0, 12)}… — re-run components:${def.key} first`);
+  }
+
+  const raw = JSON.parse(shellBytes);
+  assertArtifact(raw);
+  const occ = artifactOccupancy(raw);
+
+  // kit → course family (nullable registry data: a missing kit is a named finding, not a crash)
+  const kit = def.kitRecord ? JSON.parse(await readFile(join(HERE, def.kitRecord), "utf8")) : null;
+  const { mcData } = await import("../../render/src/version.mjs");
+  const vocab = new Set(Object.keys(mcData().blocksByName));
+  const family = roofFamily(kit?.kit ?? [], vocab);
+
+  // fit (pure, record-space)
+  const fit = gablesFromRecord(record);
+
+  // chimney: record protrusion masses ∪ the cage's geometric stack; protect = both, declared
+  const chimney = chimneyColumns(record, occ);
+  const stack = protrudingStackRegion(occ);
+  const protect = [
+    { name: "chimney-stack", contains: stack.contains },
+    ...(record.masses ?? []).filter((m) => m.role === "protrusion").map((m) => {
+      const cols = new Set(runCells(m.plan?.runs ?? []).map(([x, z]) => `${x},${z}`));
+      const lo = m.yRange?.[0] ?? -Infinity;
+      return { name: m.id, contains: ([x, y, z]) => y >= lo && cols.has(`${x},${z}`) };
+    }),
+  ];
+  // openings stay an allow-list for closure (the carve never touches walls below the band floor)
+  const regions = openingRegions(occ);
+
+  // the GLB reference silhouettes at the 4 gate azimuths — the cage's 3-D target
+  const mesh = loadMeshFromGlb(await readFile(join(HERE, def.glb)));
+  const refSils = {};
+  for (const a of MULTI_ANGLE_GATE.azimuths) refSils[a] = rasterizeSilhouette(mesh, { view: resolveAngle(a) });
+
+  const swap = swapRoof(occ, { gables: fit.gables, family, refSils, regions, protect, chimney });
+  const artifact = swap.accepted ? rebuildArtifact(swap.occ, raw) : null;
+  if (artifact) assertArtifact(artifact);
+  return { raw, occ, record, shellSha, shellPath, componentPath, fit, family, swap, chimney, stack, artifact };
+}
+
+/** Declared targets, asserted (E-25 Rule 6 — honest gaps fail loudly, never quietly recorded). */
+function assertAcceptance(def, r) {
+  if (!r.swap.accepted) return; // fallback is a correct Rule 1 outcome, judged by the caller
+  const gables = r.swap.generated.gables.length;
+  // ≈0 (the AC): a clean gable ridge LINE exposes 4 faces at its two END cells — geometry, not
+  // noise. The principled residual budget is 2 per generated gable.
+  const budget = 2 * gables;
+  const { before, after } = r.swap.census;
+  if (after.spikes > budget) {
+    throw new Error(`${def.key} DECLARED TARGET MISSED: roof-band protrusions after=${after.spikes} ` +
+      `> ridge-end budget ${budget} (before=${before.spikes})`);
+  }
+  if (after.spikes >= before.spikes && before.spikes > 0) {
+    throw new Error(`${def.key} roof-band protrusions did not improve: ${before.spikes} → ${after.spikes}`);
+  }
+}
+
+// =================================================================================================
+async function main() {
+  const argv = process.argv.slice(2);
+  const def = SUBJECTS[argv[argv.indexOf("--subject") + 1]];
+  if (!def) throw new Error(`--subject must be one of: ${Object.keys(SUBJECTS).join(", ")}`);
+  const offline = argv.includes("--offline");
+  const repro = argv.includes("--repro");
+  const subjDir = join(OUT_DIR, def.key);
+  const recPath = join(OUT_DIR, `${def.key}.json`);
+  const artPath = join(subjDir, "artifact.json");
+  const track = { stage: "load" };
+
+  try {
+    if (offline) {
+      if (!existsSync(recPath)) throw new Error(`committed record absent — run npm run roof:${def.key} first`);
+      const rec = JSON.parse(await readFile(recPath, "utf8"));
+      const checks = { status: rec.status === "accepted" || rec.status === "fallback" };
+      if (rec.status === "accepted") {
+        const artBytes = await readFile(artPath, "utf8");
+        assertArtifact(JSON.parse(artBytes));
+        checks.sha = sha256(artBytes) === rec.reproducible?.sha256;
+        checks.unmapped = rec.unmapped === 0;
+      }
+      const ok = Object.values(checks).every(Boolean);
+      console.error(`[offline] ${def.key}: status ${rec.status}; ` +
+        Object.entries(checks).map(([k, v]) => `${k} ${v ? "OK" : "VIOLATED"}`).join("; "));
+      if (!ok) process.exitCode = 1;
+      return;
+    }
+
+    // THE REPRODUCIBILITY PROOF (E-24 Rule 2): the deterministic core, twice; byte-equal or no record.
+    track.stage = "core";
+    const r1 = await runRoof(def);
+    const r2 = await runRoof(def);
+    const j1 = r1.artifact ? artifactJson(r1.artifact) : JSON.stringify({ reasons: r1.swap.reasons, findings: r1.swap.findings });
+    const j2 = r2.artifact ? artifactJson(r2.artifact) : JSON.stringify({ reasons: r2.swap.reasons, findings: r2.swap.findings });
+    if (j1 !== j2) throw new Error("NON-DETERMINISTIC: two in-process runs produced different outputs");
+    track.stage = "acceptance";
+    assertAcceptance(def, r1);
+    const status = r1.swap.accepted ? "accepted" : "fallback";
+
+    for (const g of r1.fit.gables) {
+      console.error(`[${def.key}] ${g.id}: ${g.sane ? "sane" : `INSANE — ${g.reasons.join("; ")}`}; ` +
+        g.sides.map((s) => `${s.planeId} ${s.eaveDir} pitch ${s.pitch} (${s.pitchSource}) eaveY ${s.eaveY} overhang ${s.overhang ?? "—"}`).join(" · "));
+    }
+    console.error(`[${def.key}] family: field ${r1.family.field ?? "—"}, stairs ${r1.family.stairs ?? "—"}, slab ${r1.family.slab ?? "—"}`);
+    console.error(`[${def.key}] swap ${status.toUpperCase()}${r1.swap.reasons.length ? ` — ${r1.swap.reasons.join("; ")}` : ""}`);
+    if (r1.swap.iou) console.error(`[${def.key}] iou baseline ${JSON.stringify(r1.swap.iou.baseline)} → final ${JSON.stringify(r1.swap.iou.final)}`);
+    if (r1.swap.census) console.error(`[${def.key}] roof-band protrusions ${r1.swap.census.before.spikes} → ${r1.swap.census.after.spikes} ` +
+      `(carved ${r1.swap.carve.removed}, generated full ${r1.swap.generated.counts.full} / stairs ${r1.swap.generated.counts.stairs} / slabs ${r1.swap.generated.counts.slabs}, ` +
+      `reseat ${r1.swap.reseat.added.length})`);
+
+    // UNMAPPED GATE (Rule 3): every stair/slab state through the live blockStateId path
+    track.stage = "unmapped";
+    let unmapped = null;
+    if (r1.artifact) {
+      const { buildWorldFromVoxels } = await import("../../render/src/world.mjs");
+      const voxels = expandArtifact(r1.artifact);
+      const build = await buildWorldFromVoxels(voxels);
+      unmapped = build.unmapped.length;
+      if (unmapped > 0) {
+        for (const u of build.unmapped) console.error(`  UNMAPPED [${u.pos}] ${u.block}: ${u.reason}`);
+        throw new Error(`${def.key}: ${unmapped} unmapped placements — a render unmapped is a failure, not a warning (Rule 3)`);
+      }
+      console.error(`[${def.key}] unmapped 0/${voxels.length} — every state passed the live blockStateId gate`);
+    }
+
+    if (repro) {
+      const rec = existsSync(recPath) ? JSON.parse(await readFile(recPath, "utf8")) : null;
+      const shaNow = r1.artifact ? sha256(artifactJson(r1.artifact)) : null;
+      const match = rec ? rec.reproducible?.sha256 === shaNow && rec.status === status : null;
+      console.error(`[repro] ${def.key}: status ${status}; artifact sha ${shaNow?.slice(0, 12) ?? "—"} ` +
+        `${rec ? (match ? "MATCHES committed record" : "DIVERGES from committed record") : "(no committed record yet)"}`);
+      if (rec && !match) process.exitCode = 1;
+      return;
+    }
+
+    await mkdir(subjDir, { recursive: true });
+    await mkdir(FRAMES_DIR, { recursive: true });
+    let artSha = null;
+    if (r1.artifact) {
+      await writeFile(artPath, j1);
+      artSha = sha256(j1);
+    }
+
+    // --- before/after renders at the gate-failed azimuths (best-effort lens) ---------------------
+    track.stage = "renders";
+    const renders = [];
+    for (const angle of EVIDENCE_ANGLES) {
+      const deg = { "+x-z": 135, "-x-z": 225, "-x+z": 315 }[angle];
+      renders.push({ when: "before", ...(await tryRender(r1.raw, angle, `oblique${deg}-before`, subjDir)) });
+      if (r1.artifact) renders.push({ when: "after", ...(await tryRender(r1.artifact, angle, `oblique${deg}-after`, subjDir)) });
+    }
+    for (const r of renders) console.error(`render ${r.when} ${r.angle}: ${r.path ?? `unavailable (${r.error})`}`);
+    const frames = [];
+    try {
+      const b = renders.find((r) => r.when === "before" && r.angle === OBLIQUE && r.path);
+      const a = renders.find((r) => r.when === "after" && r.angle === OBLIQUE && r.path);
+      if (b && a) {
+        await copyFile(join(ROOT, b.path), join(FRAMES_DIR, `roof-${def.key}-before.png`));
+        await copyFile(join(ROOT, a.path), join(FRAMES_DIR, `roof-${def.key}-after.png`));
+        frames.push(`pr/assets/frames/roof-${def.key}-before.png`, `pr/assets/frames/roof-${def.key}-after.png`);
+      }
+    } catch (e) {
+      console.error(`frames: ${e.message}`);
+    }
+
+    // --- the durable record -----------------------------------------------------------------------
+    track.stage = "record";
+    const recordOut = {
+      schema: "roof-program/v1",
+      subject: def.key,
+      status,
+      inputs: {
+        shell: r1.shellPath, shellSha256: r1.shellSha,
+        componentRecord: r1.componentPath, componentSourcePin: r1.record.source.sha256,
+        kit: def.kitRecord ?? null, glb: def.glb,
+        note: "the component record's source.sha256 is hard-pinned against the on-disk regularized shell",
+      },
+      params: {
+        ...ROOF_FIT_DEFAULTS,
+        iouTolerance: REGULARIZE_DEFAULTS.iouTolerance, grid: REGULARIZE_DEFAULTS.grid,
+        spikeFaces: REGULARIZE_DEFAULTS.spikeFaces, azimuths: MULTI_ANGLE_GATE.azimuths,
+        note: "fit + cage parameters (declared, shared across subjects — no tuning); azimuths config-frozen",
+      },
+      fit: { gables: r1.fit.gables.map(gableRecordView), findings: r1.fit.findings },
+      family: r1.family,
+      swap: {
+        accepted: r1.swap.accepted, reasons: r1.swap.reasons,
+        iou: r1.swap.iou, closure: r1.swap.closure,
+        carve: r1.swap.carve, generated: r1.swap.generated,
+        reseat: { added: r1.swap.reseat.added.length, cells: r1.swap.reseat.added },
+        fitError: r1.swap.fitError, findings: r1.swap.findings, bandFloor: r1.swap.bandFloor,
+        note: "ONE judged step with the T-102 cage's checks: per-azimuth silhouette IoU vs the GLB " +
+          "on a MASS VIEW (generated stair/slab courses count as silhouette mass; all other " +
+          "fixtures stay dressing), closure no-regress, protected chimney byte-identical " +
+          "(re-seat additions listed, judged without them). Any regression → auto-rollback, the " +
+          "regularized roof stays, the failure is named (Rule 1).",
+      },
+      census: {
+        ...(r1.swap.census ?? {}),
+        note: "protrusions (≥4/6 faces exposed) restricted to the generated footprint at/above the " +
+          "band floor, chimney columns excluded. The honest residual is the ridge line's two end " +
+          "cells per gable (4 exposed faces by geometry) — the declared budget asserted by this run.",
+      },
+      protect: { chimney: { columns: r1.chimney.size, stackRidgeY: r1.stack.ridgeY }, openings: "closure allow-list only (the carve never touches walls below the band floor)" },
+      unmapped,
+      reproducible: { doubleRun: true, sha256: artSha,
+        determinism: "no LLM, no GL on the decision path — silhouettes via the pure rasterizer; " +
+          "two in-process executions byte-matched." },
+      placements: { input: r1.raw.placements.length, final: r1.artifact?.placements.length ?? null },
+      renders, frames,
+      lensNote: LENS_NOTE,
+    };
+    await writeFile(recPath, JSON.stringify(recordOut, null, 2) + "\n");
+    await writeFile(join(OUT_DIR, `${def.key}.md`), renderMd(recordOut));
+    console.error(`\n✓ wrote ${recPath}${artSha ? ` + ${artPath} (sha256 ${artSha.slice(0, 12)}…)` : " (fallback — regularized roof stays)"}`);
+  } catch (e) {
+    // honest failure (E-25 Rule 6): name the stage, write the record, exit 1
+    await mkdir(OUT_DIR, { recursive: true });
+    await writeFile(recPath, JSON.stringify({
+      schema: "roof-program/v1", subject: def.key, status: "pipeline-failed", stage: track.stage, error: e.message,
+    }, null, 2) + "\n");
+    throw e;
+  }
+}
+
+function renderMd(r) {
+  const iouRow = (o) => Object.entries(o).map(([a, v]) => `${a} ${v}`).join(" · ");
+  const sides = (g) => g.sides.map((s) =>
+    `${s.planeId} → ${s.eaveDir}: pitch **${s.pitch}** (${s.pitchSource}${s.glbAngleDeg !== null ? `, glb∠ ${s.glbAngleDeg}°` : ""}), ` +
+    `eave y ${s.eaveY}, overhang ${s.overhang ?? "—"}`).join("; ");
+  const gables = r.fit.gables.map((g) =>
+    `- **${g.id}** (${g.sane ? "sane" : `insane: ${g.reasons.join("; ")}`}) ridge ${g.ridge.axis} @ y ${g.ridge.y}` +
+    `${g.hip.demanded ? ", hip ends" : ""} — ${sides(g)}`).join("\n");
+  const findings = [...r.fit.findings, ...r.swap.findings].map((f) => `- \`${f.code}\` @ ${f.where ?? "—"}: ${f.detail}`).join("\n") || "- (none)";
+  return `# Roof as program — ${r.subject} (T-104-01)\n\n` +
+    `The sampled roof replaced by a roof GENERATED from parameters fitted against the component ` +
+    `record's GLB fits — stair courses, slab half-steps, solid wedge — swapped under the T-102 ` +
+    `cage, behind \`npm run roof:${r.subject}\`. **Status: ${r.status.toUpperCase()}**` +
+    `${r.reproducible.sha256 ? ` — reproducible, artifact sha256 \`${r.reproducible.sha256.slice(0, 16)}…\`` : ""}.\n\n` +
+    `## Fitted gables\n${gables}\n\n` +
+    (r.swap.iou ? `## The cage\nIoU vs GLB — baseline: ${iouRow(r.swap.iou.baseline)}; final: ${iouRow(r.swap.iou.final)} ` +
+      `(tolerance ${r.params.iouTolerance}, anchored to the input shell). Closure reached ` +
+      `${r.swap.closure.input.reached} → ${r.swap.closure.candidate.reached}. ` +
+      `Chimney: ${r.protect.chimney.columns} columns protected, ${r.swap.reseat.added} cells re-seated.\n\n` : "") +
+    (r.census?.before ? `## Roof-band protrusions\n| before | after |\n|---|---|\n` +
+      `| ${r.census.before.spikes} | ${r.census.after.spikes} |\n\n` +
+      `Carved ${r.swap.carve.removed} sampled cells; generated ${r.swap.generated.counts.full} full / ` +
+      `${r.swap.generated.counts.stairs} stairs / ${r.swap.generated.counts.slabs} slabs ` +
+      `(family ${r.family.field} / ${r.family.stairs ?? "—"} / ${r.family.slab ?? "—"}). Fit error (program rmse): ` +
+      r.swap.fitError.map((e) => `${e.gableId} ${e.rmse}`).join(", ") + `.\n\n` : "") +
+    `## Findings\n${findings}\n\n` +
+    `## Renders (135°/225°/315° — the azimuths the gate failed)\n` +
+    r.renders.map((f) => `- ${f.when} ${f.angle}: ${f.path ?? `GL unavailable (${f.error})`}`).join("\n") +
+    `\n\nFrames: ${r.frames.join(", ") || "(none — GL unavailable)"}\n\n> ${r.lensNote}\n\n> ${r.swap.note}\n`;
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch((e) => { console.error(e); process.exit(1); });
+}
