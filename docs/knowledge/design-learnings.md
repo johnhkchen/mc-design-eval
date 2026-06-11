@@ -2360,3 +2360,71 @@ before/after at the same four azimuths through the SAME fixed lens — and the s
 census table next to the verdict movement: deterministic metrics moved an order of magnitude,
 perceptual verdicts moved two views and one major gap; score them as components, never collapse
 them.
+
+## Component-fit closure (E-28) — finish the fit, then ask the question (S-108…S-111, T-111-01) · 2026-06-10
+
+**The five-whys that opened the epic.** E-27 closed with every FAIL converted into named, specific
+gaps — gable ends, verges, eaves, ridge lines, silhouette residue, and a church that had never
+reached its gates. Why ×5 on "form @ roof persists" bottoms out in *unfinished construction*, not
+mis-measurement: the roof program fitted side planes but improvised its ends and ridge, the
+regularized blob still carried unconsumed plane fragments, and protrusion judgments were blanket
+protections rather than per-mass GLB evidence. E-28's thesis — **finish the fit** — built each
+missing piece as cage-arbitrated construction: per-gable-end GLB fits with anchor-bounded windows
+(T-108: triangle on the fitted face plane, verge/rake as open-underside sheet courses, eaves ending
+at fitted tips), ridge as the side-planes' intersection with the GLB apex line recorded as evidence
+never applied as height (T-109), unconsumed planes clamped to their own fitted planes, a
+silhouette-residual pass that removes only what the GLB refutes at some azimuth (membership =
+spill-free at EVERY azimuth — 30° cameras hide near-side warts), and the church unblocked by its
+two measured causes (T-110: the band0 census was kit-blind — third instance of the class — and the
+whole-mass roof fit needed to run per component).
+
+**The instrument stayed frozen, third exception included.** The T-110 coverage-census fix moved the
+gate to the role-family metric (`ownCoverage`, `metric:"own"`) under E-28 Rule 1 discipline:
+monotone proven by committed-record replay + an own ⊇ dominant property test
+(`src/view/coverage-monotone.test.mjs`), both fractions reported in every new record, committed
+records untouched. The closure runs then proved the freeze the usual way: pre-captured contract
+deep-diffed per subject — **`diffs: []` on cottage and gatehouse, judge `claude-opus-4-8` pinned;
+the church never reached its gate, so its instrument is untouched by construction**. One judge run
+per view, verdicts committed as judged (the 4/4-drifted gatehouse included).
+
+**Milestone outcomes — construction landed; verdicts did not flip.**
+- **Cottage**: 3/4 gable ends fitted (faceRmse 1.0–1.5), ridge rung accepted
+  (`end-fitted-voxel-pitch-ridge-fit`, apex shortfall now a record value: Δ −1.404/−2.113),
+  4 terminations, chimney exempt-shown. Verdict: FAIL 10/2 — the two same-object views (135°/225°)
+  **held**, and the 45° major changed kind (form → roof-vs-walls *massing*); 315° form major
+  remains. Census 51→86 spikes vs E-27 — measured cell-by-cell: +38 = 36 `spruce_planks` + 2
+  `dark_oak_log` in the roof band, i.e. the **declared** verge sheets/caps the full-occupancy
+  census counts by design (ragged improved 6.8→6.3%).
+- **Gatehouse**: ladder accepted voxel-pitch gable-ends; ridge intersect invalid (named, as-built
+  stands); 7 terminations; both residual masses GLB-exempt (flat band @ y31.5). Verdict: FAIL 12/2,
+  **4/4 drifted** — the judge names the "extra protruding masses" the GLB corroborates. The
+  membership test is per-mass; the judge sees per-column. That divergence is the finding.
+- **Church**: first roof cut under the new cores (nave `end-fitted-gable-ends` accepted, ridge
+  Δ +0.378; tower fallback named — *a pyramidal cap is not a ridge pair*; 12/14 terminations;
+  18 residual cells removed with azimuth evidence) — then the first kit-routed styled chain
+  **refused at settle**, still wanting frame 13 / foreign fill 168 after 4 re-runs. The cause is
+  structural, the construction-side twin of the census-identity class: grammar and dressing each
+  compose map + kit + value-true substitution on their own, and disagree about ~170 cells
+  (`stone_bricks` bound vs `polished_basalt` shipped). Recorded, not tuned.
+
+**Over-reach, honestly.** Fitted construction was *necessary* (the E-27 verdicts named it) but on
+this evidence **not sufficient to flip a perceptual verdict**: deterministic fits moved (fit
+errors recorded everywhere), perceptual majors moved kind or persisted, and one subject regressed a
+view — score them as components, never collapse them. The naive ≥4/6-faces census now counts
+declared sheet/cap cells as "spikes"; the number is honest but its *meaning* changed — any future
+census comparison must read the declared-cell ledger beside it. Under-reach, all named and now
+owned by E-29: hip/pyramid caps (the tower), per-column silhouette membership (the gatehouse
+masses), one material-vocabulary authority (the church settle; S-113's proof is "the chain
+settles"), and judge-reply robustness (the 225° unparsed REFUSAL — a parse failure is not a
+verdict).
+
+**E-12 handoff.** The showcase layer should consume, per subject:
+`benchmarks/sculpture/reconstructed/<subj>.json` (terminal record: per-view
+angle/region/attribute/severity verdicts, instrument diff, census vs pinned baseline, roof fit,
+refusal cause), `multi-angle/{cottage,gatehouse}-styled.json` + `multi-angle/church-challenge.json`
+(the church's first and only gate verdicts, REFUSAL included), `roof/<subj>.json` (fit errors:
+per-end faceRmse/overhang, ridge Δ, terminations, residual decisions), and
+`pr/assets/frames/closure-<subj>-{before,after}.png` beside `pr/assets/closure-milestone.md`. The
+story beat is the *kind* of movement: E-27 moved census numbers an order of magnitude; E-28 moved
+fit errors from "improvised" to "measured"; the remaining gap between measured geometry and
+perceptual same-object is E-29's question, with its targets pinned to these verdicts.
