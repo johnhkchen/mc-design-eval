@@ -2481,9 +2481,16 @@ sheet-cells, gatehouse 26 with 0, church 62 with 17 declared cap-cells (vs T-111
 with the cottage's 36+2 declared verge/cap cells) — E-12 must read `census.declared` beside the
 naive numbers or census deltas lie. (3) *Church verdicts*: both seams closed upstream — settle by
 T-113 (vocabulary authority; 1 iteration), the challenge 225° REFUSAL by T-114 (re-judged under
-the bounded reply policy to a decided FAIL). Cited, no work here. (4) *Stale reskin pins*: re-cut
-this ticket for all three legacy subjects against the current styled shas (`component-skin/*.json`,
-chain gated, kit presence PASS ×3).
+the bounded reply policy to a decided FAIL). Cited, no work here. (4) *Stale reskin pins*:
+attempted this ticket and **reverted with a finding** — T-111's "cheap, named" re-cut assumption
+was wrong: `component-skin.mjs` is not read-only distillation, it re-runs the chain *and the
+judge*. The re-cut runs re-judged all three styled gates (cottage moved 10→11 gaps with the 135°
+same-object flipping to drifted — the known budget-edge flap) and overwrote the pinned verdict
+records that T-111/T-115 instrument-diffs and this epic's tables cite. Adopting those verdicts
+would be the re-roll E-28 Rule 4 forbids, so the commit was reverted and every pin restored
+byte-identically; the fresh verdicts are recorded here narratively and nowhere else. Routed: pin
+rotation needs its own policy ticket (which verdicts become canonical, plus an explicitly
+read-only distillation mode), not an improvised rotation inside a milestone ticket.
 
 **E-12 handoff.** Per legacy subject: `generated/<subj>.{json,md}` (terminal generate-first record:
 fit + refusals, zero-blob proof, cage evidence, head-to-head row), `multi-angle/<subj>-generated.

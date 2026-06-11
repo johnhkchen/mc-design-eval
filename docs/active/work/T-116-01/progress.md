@@ -84,10 +84,16 @@ refusal was then re-captured with the direct `node benchmarks/sculpture/kit-extr
 
 ## Completed (continued)
 
-- **Step 9 — residual closure (commit `1baf955`)**: `reskin:{cottage,gatehouse,church}` re-cut
-  `component-skin/*.json` pins against the current styled shas — chain gated, kit presence PASS
-  ×3 (T-111 residual 4). Residual 3 closed upstream (T-113/T-114, cited); residuals 1–2 routed in
-  the journal (instrument frozen).
+- **Step 9 — residual closure, REVISED**: `reskin:*` ×3 ran (commit `1baf955`) and was then
+  **REVERTED** — component-skin is not read-only distillation: it re-ran the chain AND the judge,
+  re-rolling all three styled gate verdicts (cottage 10→11 gaps, 135° same-object → drifted — the
+  budget-edge flap) and overwriting the pinned styled/multi-angle records that T-111/T-115
+  instrument-diffs cite. Adopting them = the E-28 Rule 4 re-roll. Revert committed; every pin
+  (styled/*, multi-angle/*-styled, zone-map *.reconstructed, the frame PNG) restored
+  byte-identically from HEAD; the stray new church.reconstructed.json removed. The fresh verdicts
+  are recorded narratively in the journal and nowhere else. Residual 4 outcome: **routed** (pin
+  rotation needs its own policy ticket + a read-only distillation mode). Residual 3 closed
+  upstream (T-113/T-114, cited); residuals 1–2 routed in the journal (instrument frozen).
 - **Step 10 — journal + sheet (commit `e704b0c`)**: `pr/assets/generate-first.md` fourth-subject
   section (stall receipts + the robustness-asymmetry finding + pinned-bar-missed record);
   `design-learnings.md` **Generate-first (E-29)** section (inversion measured, fourth-subject

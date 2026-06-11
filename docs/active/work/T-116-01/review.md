@@ -30,8 +30,10 @@ reached — never judged** (the stall), recorded as such everywhere the bar appe
 | `4f294de` | registration: SUBJECTS entry + kit-extract/material-map DATA lists + `challenge:barn`/`generated:barn` scripts + GLB manifest row |
 | `74dd9c4` | untuned challenge chain: FAIL 12/2, double-run byte-identical, base-artifact minted |
 | `2bdb83c` | zone-map refusal record + the stall decision with receipts |
-| `1baf955` | residual 4 closed: reskin re-cuts ×3 (kit presence PASS ×3) |
+| `1baf955` | reskin re-cuts ×3 — **subsequently REVERTED** (see concern 6) |
 | `e704b0c` | journal: design-learnings E-29 section + epic-sheet fourth-subject section |
+| (revert) | revert of `1baf955` + byte-identical restore of every styled/multi-angle/zone-map pin |
+| (final) | progress final + this review + journal/review corrections for the reskin finding |
 
 ## Acceptance criteria status
 
@@ -51,8 +53,9 @@ reached — never judged** (the stall), recorded as such everywhere the bar appe
 3. **T-111 residuals** — routed/closed per the design pin: (1) gatehouse membership — open by
    instrument freeze, routed to the roof-form epic; (2) declared-cell ledger — numbers journaled
    (53/80, 26/0, 62/17 vs repair 86, 43, 204), E-12 directed to `census.declared`; (3) church
-   settle + 225° REFUSAL — closed upstream by T-113/T-114, cited; (4) reskin pins — re-cut ×3
-   this ticket.
+   settle + 225° REFUSAL — closed upstream by T-113/T-114, cited; (4) reskin pins —
+   **attempted and REVERTED with a finding** (see concern 6): component-skin re-judges, so the
+   re-cut is a pin-rotation policy decision, not the "cheap" refresh T-111 assumed. Routed.
 4. **Comparison verdict journaled + E-12 handoff** — DONE: design-learnings **Generate-first
    (E-29)** section (inversion thesis, head-to-head, fourth-subject first-run vs the eleven-epic
    arc, which-path-scales with the robustness asymmetry, over/under-reach); epic sheet extended;
@@ -91,3 +94,12 @@ until the zone-lens fix lands (next epic).
    proof subject.
 5. **The challenge-label barn verdicts predate any kit** — kit presence "not run (no-kit-record)"
    is the honest gate state, not a gap count of zero.
+6. **The reskin re-cut was attempted and reverted** (residual 4). `component-skin.mjs` re-runs the
+   chain and the JUDGE — the re-cut re-rolled all three styled gate verdicts (cottage 10→11 gaps,
+   the 135° same-object hold flipping to drifted — the known budget-edge flap) and overwrote the
+   pinned styled/multi-angle records that T-111/T-115 instrument-diffs and the epic tables cite.
+   Adopting them would be the E-28 Rule 4 re-roll, so `1baf955` was reverted and every pin
+   restored byte-identically; the observed fresh verdicts are preserved narratively in the journal
+   so nothing is hidden. **Residual 4 is therefore ROUTED, not closed**: pin rotation needs a
+   policy ticket (canonical-verdict selection + an explicitly read-only distillation mode). The
+   judge spend of those three runs is sunk and acknowledged.
