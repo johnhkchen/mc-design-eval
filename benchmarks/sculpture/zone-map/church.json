@@ -1,0 +1,136 @@
+{
+  "schema": "zone-map/v1",
+  "subject": "church",
+  "inputs": {
+    "concept": "runs/016-vBuilding-a-village-church-with-a-square-bell-tower/concept.png",
+    "map": "material-map/church.json",
+    "build": "challenge/church/base-artifact.json"
+  },
+  "source": "concept",
+  "derived": {
+    "bands": [
+      {
+        "name": "band0",
+        "yRange": [
+          0,
+          15
+        ],
+        "dominantBlock": "cobblestone",
+        "dominantRole": "structural wall body",
+        "share": 1,
+        "secondaries": [
+          {
+            "block": "polished_andesite",
+            "role": "window reveals and surrounds",
+            "share": 0.132
+          },
+          {
+            "block": "stone_bricks",
+            "role": "wall-head cornice and plinth course",
+            "share": 0.225
+          },
+          {
+            "block": "black_stained_glass",
+            "role": "window glazing fill",
+            "share": 0.397
+          },
+          {
+            "block": "dark_oak_planks",
+            "role": "roof mass and tower spire",
+            "share": 0.112
+          }
+        ]
+      }
+    ],
+    "roof": {
+      "dominantBlock": "dark_oak_planks",
+      "dominantRole": "roof mass and tower spire",
+      "share": 1,
+      "secondaries": [
+        {
+          "block": "black_stained_glass",
+          "role": "window glazing fill",
+          "share": 0.327
+        },
+        {
+          "block": "stone_bricks",
+          "role": "wall-head cornice and plinth course",
+          "share": 0.153
+        },
+        {
+          "block": "polished_andesite",
+          "role": "window reveals and surrounds",
+          "share": 0
+        }
+      ]
+    }
+  },
+  "prior": {
+    "policy": {
+      "base": {
+        "dominant": "cobblestone",
+        "preserve": [
+          "stone_bricks",
+          "polished_andesite",
+          "black_stained_glass"
+        ],
+        "splat": [
+          "stone_bricks",
+          "polished_andesite",
+          "black_stained_glass"
+        ]
+      },
+      "upper": {
+        "dominant": "cobblestone",
+        "preserve": [
+          "stone_bricks",
+          "polished_andesite",
+          "black_stained_glass"
+        ],
+        "splat": [
+          "stone_bricks",
+          "polished_andesite",
+          "black_stained_glass"
+        ]
+      },
+      "roof": {
+        "dominant": "dark_oak_planks",
+        "preserve": [],
+        "splat": []
+      }
+    },
+    "storeyDivide": 14,
+    "upperTop": 16
+  },
+  "diff": {
+    "wallDiffs": [],
+    "roofDominant": {
+      "prior": "dark_oak_planks",
+      "derived": "dark_oak_planks",
+      "changed": false
+    }
+  },
+  "params": {
+    "extentWidthFloor": 0.25,
+    "minBandHeight": 2,
+    "snapTolerance": 2,
+    "secondaryMinShare": 0.05,
+    "minDominantShare": 0.3,
+    "minProfileCells": 200,
+    "minExtentLayers": 4,
+    "anchorMaxPlateau": 0.25,
+    "crossBandRules": [
+      "trim",
+      "corners-edges",
+      "openings"
+    ],
+    "n": 96,
+    "m": 52,
+    "anchored": true,
+    "anchor": {
+      "row": 29,
+      "y": 0
+    }
+  },
+  "note": "bands/roof are NAMED (pre-substitution) block space; durable-skin asserts agreement with `derived` on every run (divergence throws). The prior is the recorded fallback + diff baseline."
+}
