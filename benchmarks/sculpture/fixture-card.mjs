@@ -40,12 +40,12 @@ const { Vec3 } = renderRequire("vec3");
 const sha256 = (buf) => createHash("sha256").update(buf).digest("hex");
 
 /** Named residuals (Rule 7): defects of the LENS, not the placement path — placement is proven by
- *  read-back; these stay listed until the viewer is fixed and the reference re-cut. */
-const NAMED_RESIDUALS = [
-  "stairs-invisible: prismarine-viewer 1.33.0 meshes NO stair block at any state (probed oak/stone_brick/" +
-    "cobblestone, default and explicit states) — stairs are placed and read back correctly but do not " +
-    "appear in renders. S-099 must not rely on stair pixels until the lens is fixed.",
-];
+ *  read-back; these stay listed until the viewer is fixed and the reference re-cut.
+ *  RETIRED (T-107-01) "stairs-invisible": root cause was getModelVariants' SUBSTRING air-check —
+ *  `block.name.includes('air')` matches every *_stairs name ("st-AIR-s") — fixed on disk by
+ *  render/scripts/patch-viewer-lens.mjs (postinstall; lens-guard THROWS unpatched). The stair
+ *  rows in this card render now; the re-cut card below is the proof. */
+const NAMED_RESIDUALS = [];
 
 async function main() {
   await mkdir(OUT_DIR, { recursive: true });

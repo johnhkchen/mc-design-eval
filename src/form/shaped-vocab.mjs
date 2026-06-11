@@ -10,15 +10,17 @@
 //   • stairRun — a straight slope segment: 4 cardinal ascents × 2 windings. "walk" is the
 //     climbable course (half:"bottom", facing toward the ascent — Minecraft stairs face the
 //     direction you climb); "soffit" is the mirrored underside course (half:"top", facing
-//     REVERSED) for eaves and reveals. NOTE the T-097 named residual: prismarine-viewer 1.33.0
-//     meshes no stair block — stair correctness is proven by read-back, never by pixels.
+//     REVERSED) for eaves and reveals. (The T-097 "stairs-invisible" residual is RETIRED as of
+//     T-107-01 — the viewer's substring air-check ate every *_stairs name; lens patched. Stair
+//     correctness is still proven by read-back first; pixels now agree.)
 //   • slabStep — a half-block course at one level: the y+0.5 transition between full-block
 //     courses; `kind` maps 1:1 onto the proven slab `type` state (bottom|top|double).
 //   • archRing / flatHead — the opening-head constructs. The arch is a VOXEL CIRCLE: a cell is
 //     aperture iff its center lies inside the fitted disc (below the spring center the full span
 //     is aperture); ring = head-window cells outside the disc, FULL CUBES (the Minecraft-native
-//     arch at witnessed spans — and the deliberate render-evidence choice, since stairs are
-//     invisible in the current lens). `headCells`/`jambCells` are LABELS for the dressing pass
+//     arch at witnessed spans; originally also the render-evidence choice under the stairs-
+//     invisible lens — that lens is fixed as of T-107-01, the full-cube ring stands on the
+//     native-arch rationale alone). `headCells`/`jambCells` are LABELS for the dressing pass
 //     (T-097/E-26), not edits: head = ring cells 4-adjacent (in the wall plane) to the aperture
 //     above the spring center; jambs = the flanking wall columns just outside the span, sill to
 //     spring.

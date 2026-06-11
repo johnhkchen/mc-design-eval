@@ -683,37 +683,35 @@
       {
         "angle": "+x+z",
         "path": "benchmarks/sculpture/fixture-card/view-card-+x+z.png",
-        "bytes": 238923,
-        "sha256": "d520e3ca84726cec9e3b3f4164e97b8a3d18bb2abfccdecc09743c95ae52346b"
+        "bytes": 246733,
+        "sha256": "f324cee83a516442f01994eb8fd210f094cf1fbf18df40c4aa5ad491c0351e3a"
       },
       {
         "angle": "+x-z",
         "path": "benchmarks/sculpture/fixture-card/view-card-+x-z.png",
-        "bytes": 244455,
-        "sha256": "006b8dd01e0ff2026d1d391e3ed0f1357d353c595852156dbfcf0b7bc306ed0b"
+        "bytes": 254011,
+        "sha256": "6fd021cf36532c688e422f58a1ef64b30d20846fa9877ff972d3b5f4699838ed"
       },
       {
         "angle": "-x-z",
         "path": "benchmarks/sculpture/fixture-card/view-card--x-z.png",
-        "bytes": 249360,
-        "sha256": "8be510b3f4d101123d113cecab6fde8afeadeea44ba2462473470247c1ca87bd"
+        "bytes": 259767,
+        "sha256": "f6c12f20457e958caafcf08688bae8f13bb850ee5d555a669737f66d8353f095"
       },
       {
         "angle": "-x+z",
         "path": "benchmarks/sculpture/fixture-card/view-card--x+z.png",
-        "bytes": 247435,
-        "sha256": "d4139ea7f407b6a8604816089aad648e9b34fa9c5f807dd3431b6e72de45778b"
+        "bytes": 257061,
+        "sha256": "e7fdc544969c9a19f034eabedef5255eade37cbe41b527db281bf3276b465b52"
       },
       {
         "angle": "front",
         "path": "benchmarks/sculpture/fixture-card/view-card-front.png",
-        "bytes": 35170,
-        "sha256": "5e3fb39ecef37006f195e9c261ce1d287e2669503d3f190511caadf45935a1cc"
+        "bytes": 36628,
+        "sha256": "08933faf73160f645411eccecccbfe690ece4ba2f52284d847cf3d58944de038"
       }
     ],
     "renderError": null
   },
-  "namedResiduals": [
-    "stairs-invisible: prismarine-viewer 1.33.0 meshes NO stair block at any state (probed oak/stone_brick/cobblestone, default and explicit states) — stairs are placed and read back correctly but do not appear in renders. S-099 must not rely on stair pixels until the lens is fixed."
-  ]
+  "namedResiduals": []
 }

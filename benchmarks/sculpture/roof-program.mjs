@@ -63,9 +63,10 @@ const OBLIQUE = "-x-z"; // azimuth 225° — the durable-skin witness angle (bef
 // the azimuths the resemblance gate FAILED on (`form @ roof`) — the AC's evidence views
 const EVIDENCE_ANGLES = ["+x-z", "-x-z", "-x+z"]; // 135° · 225° · 315°
 
-const LENS_NOTE = "stairs-invisible (pinned, T-097): prismarine-viewer 1.33.0 meshes NO stair " +
-  "block at any state — stair placement is proven by the unmapped gate + the committed states, " +
-  "not by pixels; renders show the solid wedge with tread notches.";
+const LENS_NOTE = "stairs-rendered (T-107-01, supersedes the T-097 stairs-invisible pin): the " +
+  "lens defect was getModelVariants' substring air-check matching every *_stairs name; fixed by " +
+  "render/scripts/patch-viewer-lens.mjs. Stair courses are visible in renders; placement remains " +
+  "proven by the unmapped gate + the committed states.";
 
 const sha256 = (s) => createHash("sha256").update(s).digest("hex");
 const artifactJson = (a) => JSON.stringify(a, null, 2) + "\n";
