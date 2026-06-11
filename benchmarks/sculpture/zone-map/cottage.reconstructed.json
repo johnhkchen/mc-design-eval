@@ -1,0 +1,158 @@
+{
+  "schema": "zone-map/v1",
+  "subject": "cottage",
+  "source": "concept",
+  "derivedOn": "reconstructed-shell",
+  "repinnedBy": "T-106-01 (component-skin runner — the T-095 review's re-pin protocol)",
+  "shellSha256": "df4f749f27bc47ce784aedf41e8587ed9f4aea7ed99da1ba7043256cd7a16283",
+  "derived": {
+    "bands": [
+      {
+        "name": "band0",
+        "yRange": [
+          0,
+          7
+        ],
+        "dominantBlock": "stone_bricks",
+        "dominantRole": "load-bearing ground-floor wall field",
+        "share": 0.919,
+        "secondaries": [
+          {
+            "block": "dark_oak_log",
+            "role": "half-timbering frame — vertical studs, corner posts, eaves beams",
+            "share": 0.418
+          },
+          {
+            "block": "spruce_planks",
+            "role": "main roof field — plank courses",
+            "share": 0.15
+          },
+          {
+            "block": "dark_oak_planks",
+            "role": "roof eaves, verge & rake fascia (darker plank edge)",
+            "share": 0.119
+          },
+          {
+            "block": "cobblestone",
+            "role": "corner quoins, plinth course & chimney shaft (rough grey stone)",
+            "share": 0.002
+          },
+          {
+            "block": "bricks",
+            "role": "chimney cap",
+            "share": 0.033
+          }
+        ]
+      },
+      {
+        "name": "band1",
+        "yRange": [
+          8,
+          18
+        ],
+        "dominantBlock": "white_terracotta",
+        "dominantRole": "upper-storey plaster infill between the timbers",
+        "share": 0.969,
+        "secondaries": [
+          {
+            "block": "spruce_planks",
+            "role": "main roof field — plank courses",
+            "share": 0.295
+          },
+          {
+            "block": "dark_oak_planks",
+            "role": "roof eaves, verge & rake fascia (darker plank edge)",
+            "share": 0.309
+          },
+          {
+            "block": "dark_oak_log",
+            "role": "half-timbering frame — vertical studs, corner posts, eaves beams",
+            "share": 0.274
+          },
+          {
+            "block": "cobblestone",
+            "role": "corner quoins, plinth course & chimney shaft (rough grey stone)",
+            "share": 0.002
+          },
+          {
+            "block": "bricks",
+            "role": "chimney cap",
+            "share": 0.001
+          }
+        ]
+      }
+    ],
+    "roof": {
+      "dominantBlock": "dark_oak_planks",
+      "dominantRole": "roof eaves, verge & rake fascia (darker plank edge)",
+      "share": 0.772,
+      "secondaries": [
+        {
+          "block": "spruce_planks",
+          "role": "main roof field — plank courses",
+          "share": 0.126
+        },
+        {
+          "block": "dark_oak_log",
+          "role": "half-timbering frame — vertical studs, corner posts, eaves beams",
+          "share": 0.362
+        },
+        {
+          "block": "stone_bricks",
+          "role": "load-bearing ground-floor wall field",
+          "share": 0.079
+        },
+        {
+          "block": "cobblestone",
+          "role": "corner quoins, plinth course & chimney shaft (rough grey stone)",
+          "share": 0.008
+        },
+        {
+          "block": "bricks",
+          "role": "chimney cap",
+          "share": 0
+        }
+      ]
+    }
+  },
+  "diffVsCommitted": [
+    {
+      "band": "band0",
+      "change": "shifted",
+      "from": {
+        "yRange": [
+          0,
+          6
+        ],
+        "dominant": "stone_bricks"
+      },
+      "to": {
+        "yRange": [
+          0,
+          7
+        ],
+        "dominant": "stone_bricks"
+      }
+    },
+    {
+      "band": "band1",
+      "change": "shifted",
+      "from": {
+        "yRange": [
+          7,
+          13
+        ],
+        "dominant": "white_terracotta"
+      },
+      "to": {
+        "yRange": [
+          8,
+          18
+        ],
+        "dominant": "white_terracotta"
+      }
+    }
+  ],
+  "committedRecord": "zone-map/cottage.json",
+  "note": "the committed zone-map/v1 record describes the standalone E-24 derivation (unchanged path); this record pins the bands as derived on the reconstructed shell"
+}

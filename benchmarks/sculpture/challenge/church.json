@@ -3,7 +3,7 @@
   "subject": "church",
   "status": "pipeline-failed",
   "stage": "skin",
-  "error": "coverage gate FAILED on the final skin: band0 stone=0.332 < 0.5",
+  "error": "coverage gate FAILED on the final skin: band0 stone=0.327 < 0.5 [census: band0={\"total\":2082,\"byBlock\":{\"polished_basalt\":1225,\"stone\":681,\"black_stained_glass\":100,\"dark_oak_planks\":76}}; band0:offslab={\"total\":5109,\"byBlock\":{\"polished_basalt\":3525,\"stone\":1270,\"dark_oak_planks\":5,\"black_stained_glass\":309}}]",
   "inputs": {
     "build": null,
     "concept": "runs/016-vBuilding-a-village-church-with-a-square-bell-tower/concept.png",

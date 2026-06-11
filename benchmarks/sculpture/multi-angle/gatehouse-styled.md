@@ -4,17 +4,17 @@
 
 **The sheet is the verdict artifact** (E-25 Rule 1); this table is support.
 
-Artifact: `benchmarks/sculpture/styled/gatehouse/artifact.json` (sha256 `3ea1c65bd03a…`) · zones: concept · contract: +x+z, +x-z, -x-z, -x+z @ 30°, 512², coverage ≥ 0.5, gap budget 2
+Artifact: `benchmarks/sculpture/styled/gatehouse/artifact.json` (sha256 `e3b89444f3a5…`) · zones: concept · contract: +x+z, +x-z, -x-z, -x+z @ 30°, 512², coverage ≥ 0.5, gap budget 2
 
 | view | azimuth | rendered | T-088 coverage | judge verdict |
 |---|---|---|---|---|
-| +x+z | 45° | yes | pass | drifted<br>major form @ roofline along the top<br>major massing @ overall building mass and footprint<br>minor material zoning @ front and side walls |
-| +x-z | 135° | yes | pass | drifted<br>major form @ roof / ridge line<br>minor massing @ upper walls and eaves<br>minor palette @ stone base and dark-wood trim |
-| -x-z | 225° | yes | pass | different object<br>major massing @ overall building mass<br>major form @ roof — the gabled pitched roof of the concept/mesh<br>major form @ walls and entrance — should be a closed stone box with an arched door, instead reads as open colonnaded ruin |
-| -x+z | 315° | yes | pass | different object<br>major massing @ overall building body<br>major form @ walls — open colonnade of vertical columns instead of solid stone walls<br>major form @ roof and ridge |
+| +x+z | 45° | yes | pass | same object<br>minor form @ roof ridge and corner caps<br>minor material zoning @ right-hand wall brown timber strip<br>minor form @ upper roof slope edges |
+| +x-z | 135° | yes | pass | drifted<br>major form @ roof ridge and eaves<br>major massing @ overall building silhouette<br>minor material zoning @ stone walls and timber accents |
+| -x-z | 225° | yes | pass | drifted<br>major massing @ overall building outline and roofline<br>major form @ front facade — colonnade/pillars instead of a single arched doorway<br>minor form @ roof ridge and gable |
+| -x+z | 315° | yes | pass | drifted<br>major form @ roofline and ridge<br>major massing @ left side / upper corner, vertical posts protruding above the roof<br>minor palette @ overall stone walls and dark roof |
 
 ## Resemblance aggregate (T-093)
-**FAIL** — gaps 12/2; failures: +x+z:drifted, +x-z:drifted, -x-z:different object, -x+z:different object
+**FAIL** — gaps 12/2; failures: +x-z:drifted, -x-z:drifted, -x+z:drifted
 
 ## Kit presence (T-100)
 **PASS** — every kit entry present at its grammar sites

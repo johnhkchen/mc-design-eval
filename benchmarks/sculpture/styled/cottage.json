@@ -2,7 +2,7 @@
   "schema": "styled-milestone/v1",
   "subject": "cottage",
   "status": "gated",
-  "pipelineOrder": "kit (committed, T-096) → shell integrity (T-091) → skin (T-086 value-true → kit overrides → seal → T-092 zones → T-090 fill → T-087 coherence → T-088 gates) → placement grammar (T-098) → opening dressing (T-099) → grammar settle (the T-100 fixpoint seam) → kit-aware multi-angle gate (T-100 ∘ T-093)",
+  "pipelineOrder": "kit (committed, T-096) → shell integrity (T-091) → regularize (T-102 cage) → skin (T-086 value-true → kit overrides → seal → T-092 zones → T-090 fill → T-087 coherence → T-088 gates) → placement grammar (T-098) → opening dressing (T-099) → grammar settle (the T-100 fixpoint seam) → kit-aware multi-angle gate (T-100 ∘ T-093)",
   "inputs": {
     "build": "concept-materials/cottage/after-artifact.json",
     "concept": "runs/014-vConcept-a-cottage/concept.png",
@@ -71,6 +71,44 @@
       "iterations": 1
     }
   },
+  "reconstruction": {
+    "inputs": {
+      "componentRecord": "components/cottage.json",
+      "roofRecord": "roof/cottage.json",
+      "shapedRecord": "shaped/cottage.json",
+      "shellSha": "33b1ca02f2589f49dd8c678e2416bf81196be41bf91451c4c9e351baf24c0afd"
+    },
+    "composed": {
+      "perDelta": [
+        {
+          "name": "roof-program",
+          "changed": 1530,
+          "added": 413,
+          "removed": 70
+        },
+        {
+          "name": "shaped-heads",
+          "changed": 0,
+          "added": 0,
+          "removed": 0
+        }
+      ],
+      "cells": 2013
+    },
+    "findings": [],
+    "seamSources": {
+      "roofCourses": "program",
+      "wallFields": "slab-faces",
+      "upperTop": "component",
+      "zoneMap": "concept",
+      "frameLines": "component"
+    },
+    "conformance": {
+      "columns": 507,
+      "conforming": 507,
+      "deviations": []
+    }
+  },
   "skin": {
     "substitution": {
       "stone_bricks": "tuff",
@@ -87,7 +125,7 @@
           "name": "band0",
           "yRange": [
             0,
-            6
+            7
           ],
           "dominantBlock": "stone_bricks",
           "dominantRole": "load-bearing ground-floor wall field",
@@ -123,27 +161,27 @@
         {
           "name": "band1",
           "yRange": [
-            7,
-            16
+            8,
+            18
           ],
           "dominantBlock": "white_terracotta",
           "dominantRole": "upper-storey plaster infill between the timbers",
-          "share": 0.992,
+          "share": 0.969,
           "secondaries": [
             {
               "block": "spruce_planks",
               "role": "main roof field — plank courses",
-              "share": 0.328
+              "share": 0.295
             },
             {
               "block": "dark_oak_planks",
               "role": "roof eaves, verge & rake fascia (darker plank edge)",
-              "share": 0.288
+              "share": 0.309
             },
             {
               "block": "dark_oak_log",
               "role": "half-timbering frame — vertical studs, corner posts, eaves beams",
-              "share": 0.25
+              "share": 0.274
             },
             {
               "block": "cobblestone",
@@ -161,27 +199,27 @@
       "roof": {
         "dominantBlock": "dark_oak_planks",
         "dominantRole": "roof eaves, verge & rake fascia (darker plank edge)",
-        "share": 0.787,
+        "share": 0.772,
         "secondaries": [
           {
             "block": "spruce_planks",
             "role": "main roof field — plank courses",
-            "share": 0.116
+            "share": 0.126
           },
           {
             "block": "dark_oak_log",
             "role": "half-timbering frame — vertical studs, corner posts, eaves beams",
-            "share": 0.378
+            "share": 0.362
           },
           {
             "block": "stone_bricks",
             "role": "load-bearing ground-floor wall field",
-            "share": 0.063
+            "share": 0.079
           },
           {
             "block": "cobblestone",
             "role": "corner quoins, plinth course & chimney shaft (rough grey stone)",
-            "share": 0.006
+            "share": 0.008
           },
           {
             "block": "bricks",
@@ -197,46 +235,68 @@
       "roofIdentical": false
     },
     "fill": {
-      "placements": 1993,
-      "kept": 3985
+      "placements": 849,
+      "kept": 2921
     },
     "salt": {
-      "stripped": 413,
-      "kept": 706
+      "stripped": 243,
+      "kept": 800
     },
     "coverage": {
       "band0": {
-        "total": 1844,
+        "total": 392,
         "byBlock": {
-          "cobblestone": 57,
-          "tuff": 1379,
-          "dark_oak_log": 361,
-          "spruce_planks": 47
+          "cobblestone": 25,
+          "tuff": 266,
+          "dark_oak_log": 80,
+          "spruce_planks": 21
         },
         "dominant": "tuff",
-        "dominantFraction": 0.748
+        "dominantFraction": 0.679
+      },
+      "band0:offslab": {
+        "total": 1095,
+        "byBlock": {
+          "dark_oak_log": 300,
+          "tuff": 701,
+          "cobblestone": 55,
+          "spruce_planks": 39
+        },
+        "dominant": null,
+        "dominantFraction": null
       },
       "band1": {
-        "total": 2436,
+        "total": 340,
         "byBlock": {
-          "cobblestone": 126,
-          "smooth_sandstone": 1739,
-          "dark_oak_log": 258,
-          "spruce_planks": 313
+          "cobblestone": 34,
+          "dark_oak_log": 71,
+          "smooth_sandstone": 174,
+          "spruce_planks": 61
         },
         "dominant": "smooth_sandstone",
-        "dominantFraction": 0.714
+        "dominantFraction": 0.512
+      },
+      "band1:offslab": {
+        "total": 1112,
+        "byBlock": {
+          "smooth_sandstone": 628,
+          "dark_oak_log": 170,
+          "cobblestone": 103,
+          "spruce_planks": 211
+        },
+        "dominant": null,
+        "dominantFraction": null
       },
       "roof": {
-        "total": 1707,
+        "total": 831,
         "byBlock": {
-          "dark_oak_log": 215,
-          "spruce_planks": 1221,
-          "tuff": 198,
-          "cobblestone": 73
+          "spruce_planks": 763,
+          "dark_oak_log": 48,
+          "cobblestone": 13,
+          "tuff": 7
         },
         "dominant": "spruce_planks",
-        "dominantFraction": 0.715
+        "dominantFraction": 0.918
       }
     },
     "gates": {
@@ -248,27 +308,27 @@
           {
             "zone": "band1",
             "dominant": "smooth_sandstone",
-            "fraction": 0.041,
-            "total": 2442
+            "fraction": 0.088,
+            "total": 341
           }
         ],
         "byZone": {
           "band0": {
             "dominant": "tuff",
-            "fraction": 0.677,
-            "total": 1844,
+            "fraction": 0.643,
+            "total": 392,
             "passed": true
           },
           "band1": {
             "dominant": "smooth_sandstone",
-            "fraction": 0.041,
-            "total": 2442,
+            "fraction": 0.088,
+            "total": 341,
             "passed": false
           },
           "roof": {
             "dominant": "spruce_planks",
-            "fraction": 0.679,
-            "total": 1692,
+            "fraction": 0.924,
+            "total": 831,
             "passed": true
           }
         }
@@ -280,20 +340,20 @@
         "byZone": {
           "band0": {
             "dominant": "tuff",
-            "fraction": 0.748,
-            "total": 1844,
+            "fraction": 0.679,
+            "total": 392,
             "passed": true
           },
           "band1": {
             "dominant": "smooth_sandstone",
-            "fraction": 0.714,
-            "total": 2436,
+            "fraction": 0.512,
+            "total": 340,
             "passed": true
           },
           "roof": {
             "dominant": "spruce_planks",
-            "fraction": 0.715,
-            "total": 1707,
+            "fraction": 0.918,
+            "total": 831,
             "passed": true
           }
         }
@@ -325,56 +385,100 @@
     },
     "frame": {
       "counts": {
-        "wall": 2842,
-        "cornerPost": 69,
-        "roofline": 251,
-        "floorLine": 531
+        "wall": 2203,
+        "cornerPost": 46,
+        "roofline": 343,
+        "floorLine": 132
       },
-      "painted": 426,
-      "adopted": 5,
-      "respected": 201,
-      "skippedIsolated": 8,
-      "alreadyFrame": 211
+      "painted": 320,
+      "adopted": 11,
+      "respected": 123,
+      "skippedIsolated": 14,
+      "alreadyFrame": 53
     },
     "fill": {
-      "placements": 25,
-      "kept": 5962
+      "placements": 5,
+      "kept": 3765
     },
     "frameRefilled": 0,
     "preexistingFrameRefilled": 0,
     "coverage": {
-      "band0": {
-        "total": 1844,
+      "band0:frame": {
+        "total": 82,
         "byBlock": {
-          "cobblestone": 56,
-          "tuff": 1275,
-          "dark_oak_log": 361,
-          "spruce_planks": 152
+          "cobblestone": 12,
+          "spruce_planks": 47,
+          "tuff": 12,
+          "dark_oak_log": 11
+        },
+        "dominant": null,
+        "dominantFraction": null
+      },
+      "band0": {
+        "total": 371,
+        "byBlock": {
+          "tuff": 257,
+          "dark_oak_log": 78,
+          "cobblestone": 17,
+          "spruce_planks": 19
         },
         "dominant": "tuff",
-        "dominantFraction": 0.691
+        "dominantFraction": 0.693
+      },
+      "band0:offslab": {
+        "total": 1034,
+        "byBlock": {
+          "dark_oak_log": 294,
+          "tuff": 649,
+          "cobblestone": 52,
+          "spruce_planks": 39
+        },
+        "dominant": null,
+        "dominantFraction": null
+      },
+      "band1:frame": {
+        "total": 439,
+        "byBlock": {
+          "cobblestone": 20,
+          "spruce_planks": 326,
+          "dark_oak_log": 91,
+          "smooth_sandstone": 2
+        },
+        "dominant": null,
+        "dominantFraction": null
       },
       "band1": {
-        "total": 2442,
+        "total": 226,
         "byBlock": {
-          "cobblestone": 125,
-          "spruce_planks": 640,
-          "smooth_sandstone": 1424,
-          "dark_oak_log": 253
+          "cobblestone": 23,
+          "dark_oak_log": 38,
+          "smooth_sandstone": 122,
+          "spruce_planks": 43
         },
         "dominant": "smooth_sandstone",
-        "dominantFraction": 0.583
+        "dominantFraction": 0.54
+      },
+      "band1:offslab": {
+        "total": 787,
+        "byBlock": {
+          "dark_oak_log": 114,
+          "cobblestone": 95,
+          "smooth_sandstone": 400,
+          "spruce_planks": 178
+        },
+        "dominant": null,
+        "dominantFraction": null
       },
       "roof": {
-        "total": 1701,
+        "total": 831,
         "byBlock": {
-          "dark_oak_log": 211,
-          "spruce_planks": 1230,
-          "tuff": 194,
-          "cobblestone": 66
+          "spruce_planks": 763,
+          "dark_oak_log": 48,
+          "cobblestone": 13,
+          "tuff": 7
         },
         "dominant": "spruce_planks",
-        "dominantFraction": 0.723
+        "dominantFraction": 0.918
       }
     },
     "bands": {
@@ -482,7 +586,7 @@
       ],
       "unfulfilled": []
     },
-    "placements": 37,
+    "placements": 36,
     "perOpening": [
       {
         "dir": "+x",
@@ -506,40 +610,24 @@
           ]
         },
         "paneSpan": [
-          12,
-          12
+          4,
+          4
         ],
         "applied": {
           "infill": 1,
-          "shutterLeft": 0,
+          "shutterLeft": 1,
           "shutterRight": 1,
-          "lintel": 0,
-          "sill": 0
+          "lintel": 2,
+          "sill": 3
         },
         "placed": {
           "infill": 1,
-          "shutterLeft": 0,
+          "shutterLeft": 1,
           "shutterRight": 1,
           "lintel": 0,
-          "sill": 0
+          "sill": 1
         },
-        "conflicts": [
-          {
-            "slot": "shutterLeft",
-            "name": "shutter-no-jamb-left",
-            "reduction": "shutter-dropped"
-          },
-          {
-            "slot": "lintel",
-            "name": "lintel-no-band-cells",
-            "reduction": "lintel-skipped"
-          },
-          {
-            "slot": "sill",
-            "name": "sill-no-band-cells",
-            "reduction": "sill-skipped"
-          }
-        ]
+        "conflicts": []
       },
       {
         "dir": "+x",
@@ -578,7 +666,7 @@
           "shutterLeft": 1,
           "shutterRight": 0,
           "lintel": 3,
-          "sill": 3
+          "sill": 2
         },
         "conflicts": [
           {
@@ -624,7 +712,7 @@
           "infill": 2,
           "shutterLeft": 0,
           "shutterRight": 1,
-          "lintel": 3,
+          "lintel": 4,
           "sill": 2
         },
         "conflicts": [
@@ -657,24 +745,53 @@
           ]
         },
         "paneSpan": [
-          -13,
-          -13
+          -7,
+          -7
         ],
         "applied": {
           "infill": 1,
-          "shutterLeft": 1,
-          "shutterRight": 1,
-          "lintel": 3,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 0,
           "sill": 0
         },
         "placed": {
           "infill": 1,
-          "shutterLeft": 1,
-          "shutterRight": 1,
-          "lintel": 2,
+          "shutterLeft": 0,
+          "shutterRight": 0,
+          "lintel": 0,
           "sill": 0
         },
         "conflicts": [
+          {
+            "slot": "shutterLeft",
+            "name": "shutter-blocked-left",
+            "reduction": "shutter-dropped",
+            "at": [
+              [
+                -8,
+                14,
+                -9
+              ]
+            ]
+          },
+          {
+            "slot": "shutterRight",
+            "name": "shutter-blocked-right",
+            "reduction": "shutter-dropped",
+            "at": [
+              [
+                -8,
+                14,
+                -11
+              ]
+            ]
+          },
+          {
+            "slot": "lintel",
+            "name": "lintel-no-band-cells",
+            "reduction": "lintel-skipped"
+          },
           {
             "slot": "sill",
             "name": "sill-no-band-cells",
@@ -719,7 +836,7 @@
           "shutterLeft": 0,
           "shutterRight": 1,
           "lintel": 2,
-          "sill": 2
+          "sill": 0
         },
         "conflicts": [
           {
@@ -765,7 +882,7 @@
           "infill": 2,
           "shutterLeft": 1,
           "shutterRight": 1,
-          "lintel": 0,
+          "lintel": 3,
           "sill": 4
         },
         "conflicts": []
@@ -773,8 +890,8 @@
     ],
     "stats": {
       "openings": 6,
-      "fullyDressed": 1,
-      "placements": 37,
+      "fullyDressed": 2,
+      "placements": 36,
       "conflicts": 7,
       "alreadyDressed": 0
     }
@@ -783,8 +900,9 @@
     "iterations": 1,
     "trail": [
       {
-        "frame": 1,
-        "fill": 0
+        "frame": 3,
+        "fill": 1,
+        "dressing": 0
       }
     ]
   },
@@ -792,10 +910,11 @@
     "doubleRun": true,
     "sha256": {
       "base": null,
-      "shell": "6d7077f4e24f2afad74195f0d3c3818ffcf7340d53c402647e7f0926193ec8c0",
-      "skinFinal": "dbe9a083461d8888b4876361e44206f301ec9af6b4ca5c25beece4d480176da4",
-      "grammarFinal": "c33fa57a8470b7075c85c9bb6785e0e57c1515b0190f7971ce6031e6f06f300f",
-      "styled": "6c94b04ce4885aba32253a30f838a188ab17791b744d774c57e96a38bd825299"
+      "shell": "33b1ca02f2589f49dd8c678e2416bf81196be41bf91451c4c9e351baf24c0afd",
+      "reconstructed": "df4f749f27bc47ce784aedf41e8587ed9f4aea7ed99da1ba7043256cd7a16283",
+      "skinFinal": "ecca90d2be6a1c4e22e91f2a06db716347d1210052be8adc422b5e2f6e92c2cc",
+      "grammarFinal": "be6116b6934283b6544da333d96e29dbc3c18faa4547f01968ed806fe6749a37",
+      "styled": "8385a7a357252732b71f856a5aa54ffdb527fc64492a93c42b0e196189cc962b"
     },
     "determinism": "kit→shell→skin→grammar→dressing is a pure function of the committed inputs (concept PNG, material map, GLB, kit); two in-process executions byte-matched on every artifact; --repro re-proves from a fresh process. LLM-authored inputs are one-time committed records (the kit's raw model reply is pinned beside it); the gate judge is the pinned model, single sample per view, verdicts committed in the gate record."
   },
@@ -804,15 +923,11 @@
     "resemblance": {
       "decided": true,
       "passed": false,
-      "gapCount": 12,
+      "gapCount": 10,
       "gapBudget": 2,
       "failures": [
         {
           "angle": "+x+z",
-          "reason": "drifted"
-        },
-        {
-          "angle": "-x-z",
           "reason": "drifted"
         },
         {
@@ -840,18 +955,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof",
+            "region": "roof and upper storey",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "upper walls / timber framing",
-            "attribute": "material zoning",
+            "region": "overall silhouette vs. clean gabled mesh",
+            "attribute": "massing",
             "severity": "minor"
           },
           {
-            "region": "overall house body",
-            "attribute": "massing",
+            "region": "stone base relative to cream wall band",
+            "attribute": "material zoning",
             "severity": "minor"
           }
         ]
@@ -863,18 +978,13 @@
         "verdict": "same object",
         "gaps": [
           {
-            "region": "roofline and ridge",
+            "region": "roof ridge and upper massing",
             "attribute": "form",
             "severity": "minor"
           },
           {
             "region": "chimney on the roof",
             "attribute": "massing",
-            "severity": "minor"
-          },
-          {
-            "region": "timber-framed cream upper walls",
-            "attribute": "material zoning",
             "severity": "minor"
           }
         ]
@@ -883,20 +993,15 @@
         "angle": "-x-z",
         "azimuthDeg": 225,
         "coverage": true,
-        "verdict": "drifted",
+        "verdict": "same object",
         "gaps": [
           {
-            "region": "roof",
+            "region": "roof ridge and eaves",
             "attribute": "form",
-            "severity": "major"
-          },
-          {
-            "region": "upper walls timber framing",
-            "attribute": "material zoning",
             "severity": "minor"
           },
           {
-            "region": "overall house body",
+            "region": "chimney on roof",
             "attribute": "massing",
             "severity": "minor"
           }
@@ -909,18 +1014,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof",
+            "region": "roof and upper massing",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "upper walls / timber framing band",
-            "attribute": "material zoning",
+            "region": "overall silhouette versus mesh",
+            "attribute": "massing",
             "severity": "minor"
           },
           {
-            "region": "overall body",
-            "attribute": "massing",
+            "region": "stone base at lower right",
+            "attribute": "material zoning",
             "severity": "minor"
           }
         ]

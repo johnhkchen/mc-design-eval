@@ -2,10 +2,10 @@
   "schema": "shaped-vocabulary/v1",
   "subject": "church",
   "inputs": {
-    "shell": "regularize/church/artifact.json",
+    "shell": "challenge/church/shell-artifact.json",
     "record": "components/church.json",
     "glb": "glb/church.glb",
-    "recordSha": "02e78adb5cd445ac97d125bb0c6d55fdf42c7a3382d25ad036b9f15a52b2e83e"
+    "recordSha": "50fce80f78ecf37617e773d864fcdecbd4a98b73dfe16f17eaf09a8797f8e4d3"
   },
   "params": {
     "rmseTol": 0.8,
@@ -27,41 +27,12 @@
     "summary": {
       "arch": 0,
       "flat": 6,
-      "noop": 26,
+      "noop": 24,
       "none": 0
     },
     "detail": [
       {
         "groupId": "og-0",
-        "openingIndex": 0,
-        "dir": "+x",
-        "kind": "flat",
-        "fitError": {
-          "rmse": 0
-        },
-        "spec": {
-          "level": 20,
-          "span": {
-            "axis": "z",
-            "range": [
-              -8,
-              -8
-            ]
-          },
-          "yRange": [
-            20,
-            21
-          ]
-        },
-        "noop": true,
-        "carved": 0,
-        "filled": 0,
-        "headCells": [],
-        "jambCells": [],
-        "findings": []
-      },
-      {
-        "groupId": "og-1",
         "openingIndex": 0,
         "dir": "+x",
         "kind": "flat",
@@ -90,7 +61,7 @@
         "findings": []
       },
       {
-        "groupId": "og-1",
+        "groupId": "og-0",
         "openingIndex": 1,
         "dir": "+x",
         "kind": "flat",
@@ -119,7 +90,7 @@
         "findings": []
       },
       {
-        "groupId": "og-2",
+        "groupId": "og-1",
         "openingIndex": 0,
         "dir": "+x",
         "kind": "flat",
@@ -131,13 +102,71 @@
           "span": {
             "axis": "z",
             "range": [
-              -6,
-              3
+              -5,
+              0
             ]
           },
           "yRange": [
             20,
             21
+          ]
+        },
+        "noop": true,
+        "carved": 0,
+        "filled": 0,
+        "headCells": [],
+        "jambCells": [],
+        "findings": []
+      },
+      {
+        "groupId": "og-2",
+        "openingIndex": 0,
+        "dir": "-x",
+        "kind": "flat",
+        "fitError": {
+          "rmse": 0
+        },
+        "spec": {
+          "level": 7,
+          "span": {
+            "axis": "z",
+            "range": [
+              -8,
+              -8
+            ]
+          },
+          "yRange": [
+            7,
+            8
+          ]
+        },
+        "noop": true,
+        "carved": 0,
+        "filled": 0,
+        "headCells": [],
+        "jambCells": [],
+        "findings": []
+      },
+      {
+        "groupId": "og-2",
+        "openingIndex": 1,
+        "dir": "-x",
+        "kind": "flat",
+        "fitError": {
+          "rmse": 0
+        },
+        "spec": {
+          "level": 6,
+          "span": {
+            "axis": "z",
+            "range": [
+              -6,
+              -6
+            ]
+          },
+          "yRange": [
+            6,
+            7
           ]
         },
         "noop": true,
@@ -160,8 +189,8 @@
           "span": {
             "axis": "z",
             "range": [
-              -8,
-              -8
+              -5,
+              0
             ]
           },
           "yRange": [
@@ -178,93 +207,6 @@
       },
       {
         "groupId": "og-4",
-        "openingIndex": 0,
-        "dir": "-x",
-        "kind": "flat",
-        "fitError": {
-          "rmse": 0
-        },
-        "spec": {
-          "level": 7,
-          "span": {
-            "axis": "z",
-            "range": [
-              -8,
-              -8
-            ]
-          },
-          "yRange": [
-            7,
-            8
-          ]
-        },
-        "noop": true,
-        "carved": 0,
-        "filled": 0,
-        "headCells": [],
-        "jambCells": [],
-        "findings": []
-      },
-      {
-        "groupId": "og-4",
-        "openingIndex": 1,
-        "dir": "-x",
-        "kind": "flat",
-        "fitError": {
-          "rmse": 0
-        },
-        "spec": {
-          "level": 6,
-          "span": {
-            "axis": "z",
-            "range": [
-              -6,
-              -6
-            ]
-          },
-          "yRange": [
-            6,
-            7
-          ]
-        },
-        "noop": true,
-        "carved": 0,
-        "filled": 0,
-        "headCells": [],
-        "jambCells": [],
-        "findings": []
-      },
-      {
-        "groupId": "og-5",
-        "openingIndex": 0,
-        "dir": "-x",
-        "kind": "flat",
-        "fitError": {
-          "rmse": 0
-        },
-        "spec": {
-          "level": 20,
-          "span": {
-            "axis": "z",
-            "range": [
-              -6,
-              3
-            ]
-          },
-          "yRange": [
-            20,
-            21
-          ]
-        },
-        "noop": true,
-        "carved": 0,
-        "filled": 0,
-        "headCells": [],
-        "jambCells": [],
-        "findings": []
-      },
-      {
-        "groupId": "og-6",
         "openingIndex": 0,
         "dir": "+z",
         "kind": "flat",
@@ -293,7 +235,7 @@
         "findings": []
       },
       {
-        "groupId": "og-7",
+        "groupId": "og-5",
         "openingIndex": 0,
         "dir": "+z",
         "kind": "flat",
@@ -1093,7 +1035,7 @@
         ]
       },
       {
-        "groupId": "og-8",
+        "groupId": "og-6",
         "openingIndex": 0,
         "dir": "+z",
         "kind": "flat",
@@ -1493,7 +1435,7 @@
         ]
       },
       {
-        "groupId": "og-8",
+        "groupId": "og-6",
         "openingIndex": 1,
         "dir": "+z",
         "kind": "flat",
@@ -1522,7 +1464,7 @@
         "findings": []
       },
       {
-        "groupId": "og-9",
+        "groupId": "og-7",
         "openingIndex": 0,
         "dir": "+z",
         "kind": "flat",
@@ -1551,7 +1493,7 @@
         "findings": []
       },
       {
-        "groupId": "og-9",
+        "groupId": "og-7",
         "openingIndex": 1,
         "dir": "+z",
         "kind": "flat",
@@ -1580,7 +1522,7 @@
         "findings": []
       },
       {
-        "groupId": "og-10",
+        "groupId": "og-8",
         "openingIndex": 0,
         "dir": "+z",
         "kind": "flat",
@@ -1609,7 +1551,7 @@
         "findings": []
       },
       {
-        "groupId": "og-11",
+        "groupId": "og-9",
         "openingIndex": 0,
         "dir": "+z",
         "kind": "flat",
@@ -1638,7 +1580,7 @@
         "findings": []
       },
       {
-        "groupId": "og-11",
+        "groupId": "og-9",
         "openingIndex": 1,
         "dir": "+z",
         "kind": "flat",
@@ -1667,7 +1609,7 @@
         "findings": []
       },
       {
-        "groupId": "og-12",
+        "groupId": "og-10",
         "openingIndex": 0,
         "dir": "+z",
         "kind": "flat",
@@ -1696,7 +1638,7 @@
         "findings": []
       },
       {
-        "groupId": "og-12",
+        "groupId": "og-10",
         "openingIndex": 1,
         "dir": "+z",
         "kind": "flat",
@@ -1725,7 +1667,7 @@
         "findings": []
       },
       {
-        "groupId": "og-13",
+        "groupId": "og-11",
         "openingIndex": 0,
         "dir": "+z",
         "kind": "flat",
@@ -2459,7 +2401,7 @@
         ]
       },
       {
-        "groupId": "og-14",
+        "groupId": "og-12",
         "openingIndex": 0,
         "dir": "-z",
         "kind": "flat",
@@ -2488,7 +2430,7 @@
         "findings": []
       },
       {
-        "groupId": "og-15",
+        "groupId": "og-13",
         "openingIndex": 0,
         "dir": "-z",
         "kind": "flat",
@@ -3288,7 +3230,7 @@
         ]
       },
       {
-        "groupId": "og-16",
+        "groupId": "og-14",
         "openingIndex": 0,
         "dir": "-z",
         "kind": "flat",
@@ -3688,7 +3630,7 @@
         ]
       },
       {
-        "groupId": "og-16",
+        "groupId": "og-14",
         "openingIndex": 1,
         "dir": "-z",
         "kind": "flat",
@@ -3717,7 +3659,7 @@
         "findings": []
       },
       {
-        "groupId": "og-17",
+        "groupId": "og-15",
         "openingIndex": 0,
         "dir": "-z",
         "kind": "flat",
@@ -3746,7 +3688,7 @@
         "findings": []
       },
       {
-        "groupId": "og-17",
+        "groupId": "og-15",
         "openingIndex": 1,
         "dir": "-z",
         "kind": "flat",
@@ -3775,7 +3717,7 @@
         "findings": []
       },
       {
-        "groupId": "og-18",
+        "groupId": "og-16",
         "openingIndex": 0,
         "dir": "-z",
         "kind": "flat",
@@ -3804,7 +3746,7 @@
         "findings": []
       },
       {
-        "groupId": "og-19",
+        "groupId": "og-17",
         "openingIndex": 0,
         "dir": "-z",
         "kind": "flat",
@@ -3833,7 +3775,7 @@
         "findings": []
       },
       {
-        "groupId": "og-19",
+        "groupId": "og-17",
         "openingIndex": 1,
         "dir": "-z",
         "kind": "flat",
@@ -3862,7 +3804,7 @@
         "findings": []
       },
       {
-        "groupId": "og-20",
+        "groupId": "og-18",
         "openingIndex": 0,
         "dir": "-z",
         "kind": "flat",
@@ -3891,7 +3833,7 @@
         "findings": []
       },
       {
-        "groupId": "og-20",
+        "groupId": "og-18",
         "openingIndex": 1,
         "dir": "-z",
         "kind": "flat",
@@ -3920,7 +3862,7 @@
         "findings": []
       },
       {
-        "groupId": "og-21",
+        "groupId": "og-19",
         "openingIndex": 0,
         "dir": "-z",
         "kind": "flat",
@@ -4661,23 +4603,22 @@
       {
         "plane": "roof-0",
         "stairRun": {
-          "spec": {
-            "generator": "stairRun",
-            "ascent": "-z",
-            "winding": "walk",
-            "riseOverRun": 1
-          },
+          "spec": null,
           "source": "voxelFit",
           "fitError": {
-            "pitch": 0.752,
-            "pitchDelta": 0.248,
-            "crossGradient": 0.003,
-            "sourceRmse": 0.763
+            "pitch": 0.744,
+            "pitchDelta": 0.256,
+            "crossGradient": 0.002,
+            "sourceRmse": 0.536
           },
           "findings": [
             {
               "code": "glb-fit-unusable",
-              "detail": "glbFit rmse 4.357 > glbRmseTol 1.5 — voxelFit stands in"
+              "detail": "glbFit rmse 4.435 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-stairRun-legal",
+              "detail": "|gradient| 0.744 not within 0.25 of 1"
             }
           ]
         },
@@ -4685,19 +4626,19 @@
           "spec": null,
           "source": "voxelFit",
           "fitError": {
-            "pitch": 0.752,
-            "pitchDelta": 0.252,
-            "crossGradient": 0.003,
-            "sourceRmse": 0.763
+            "pitch": 0.744,
+            "pitchDelta": 0.244,
+            "crossGradient": 0.002,
+            "sourceRmse": 0.536
           },
           "findings": [
             {
               "code": "glb-fit-unusable",
-              "detail": "glbFit rmse 4.357 > glbRmseTol 1.5 — voxelFit stands in"
+              "detail": "glbFit rmse 4.435 > glbRmseTol 1.5 — voxelFit stands in"
             },
             {
               "code": "pitch-not-slabStep-legal",
-              "detail": "|gradient| 0.752 not within 0.15 of 0.5"
+              "detail": "|gradient| 0.744 not within 0.15 of 0.5"
             }
           ]
         }
@@ -4708,19 +4649,19 @@
           "spec": null,
           "source": "voxelFit",
           "fitError": {
-            "pitch": 0.366,
-            "pitchDelta": 0.634,
-            "crossGradient": 0.008,
-            "sourceRmse": 0.785
+            "pitch": 0.435,
+            "pitchDelta": 0.565,
+            "crossGradient": 0.022,
+            "sourceRmse": 0.611
           },
           "findings": [
             {
               "code": "glb-fit-unusable",
-              "detail": "glbFit rmse 9.871 > glbRmseTol 1.5 — voxelFit stands in"
+              "detail": "glbFit rmse 9.576 > glbRmseTol 1.5 — voxelFit stands in"
             },
             {
               "code": "pitch-not-stairRun-legal",
-              "detail": "|gradient| 0.366 not within 0.25 of 1"
+              "detail": "|gradient| 0.435 not within 0.25 of 1"
             }
           ]
         },
@@ -4733,15 +4674,15 @@
           },
           "source": "voxelFit",
           "fitError": {
-            "pitch": 0.366,
-            "pitchDelta": 0.134,
-            "crossGradient": 0.008,
-            "sourceRmse": 0.785
+            "pitch": 0.435,
+            "pitchDelta": 0.065,
+            "crossGradient": 0.022,
+            "sourceRmse": 0.611
           },
           "findings": [
             {
               "code": "glb-fit-unusable",
-              "detail": "glbFit rmse 9.871 > glbRmseTol 1.5 — voxelFit stands in"
+              "detail": "glbFit rmse 9.576 > glbRmseTol 1.5 — voxelFit stands in"
             }
           ]
         }
@@ -4749,22 +4690,23 @@
       {
         "plane": "roof-2",
         "stairRun": {
-          "spec": null,
+          "spec": {
+            "generator": "stairRun",
+            "ascent": "+z",
+            "winding": "walk",
+            "riseOverRun": 1
+          },
           "source": "voxelFit",
           "fitError": {
-            "pitch": 1.557,
-            "pitchDelta": 0.557,
-            "crossGradient": 0.005,
-            "sourceRmse": 0.448
+            "pitch": 0.876,
+            "pitchDelta": 0.124,
+            "crossGradient": 0.016,
+            "sourceRmse": 0.794
           },
           "findings": [
             {
               "code": "glb-fit-unusable",
-              "detail": "glbFit rmse 3.004 > glbRmseTol 1.5 — voxelFit stands in"
-            },
-            {
-              "code": "pitch-not-stairRun-legal",
-              "detail": "|gradient| 1.557 not within 0.25 of 1"
+              "detail": "glbFit rmse 1.683 > glbRmseTol 1.5 — voxelFit stands in"
             }
           ]
         },
@@ -4772,19 +4714,19 @@
           "spec": null,
           "source": "voxelFit",
           "fitError": {
-            "pitch": 1.557,
-            "pitchDelta": 1.057,
-            "crossGradient": 0.005,
-            "sourceRmse": 0.448
+            "pitch": 0.876,
+            "pitchDelta": 0.376,
+            "crossGradient": 0.016,
+            "sourceRmse": 0.794
           },
           "findings": [
             {
               "code": "glb-fit-unusable",
-              "detail": "glbFit rmse 3.004 > glbRmseTol 1.5 — voxelFit stands in"
+              "detail": "glbFit rmse 1.683 > glbRmseTol 1.5 — voxelFit stands in"
             },
             {
               "code": "pitch-not-slabStep-legal",
-              "detail": "|gradient| 1.557 not within 0.15 of 0.5"
+              "detail": "|gradient| 0.876 not within 0.15 of 0.5"
             }
           ]
         }
@@ -4792,34 +4734,42 @@
       {
         "plane": "roof-3",
         "stairRun": {
-          "spec": {
-            "generator": "stairRun",
-            "ascent": "+z",
-            "winding": "walk",
-            "riseOverRun": 1
-          },
-          "source": "glbFit",
-          "fitError": {
-            "pitch": 0.756,
-            "pitchDelta": 0.244,
-            "crossGradient": 0.008,
-            "sourceRmse": 1.273
-          },
-          "findings": []
-        },
-        "slabStep": {
           "spec": null,
-          "source": "glbFit",
+          "source": "voxelFit",
           "fitError": {
-            "pitch": 0.756,
-            "pitchDelta": 0.256,
-            "crossGradient": 0.008,
-            "sourceRmse": 1.273
+            "pitch": 1.258,
+            "pitchDelta": 0.258,
+            "crossGradient": 0.06,
+            "sourceRmse": 0.477
           },
           "findings": [
             {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 3.901 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-stairRun-legal",
+              "detail": "|gradient| 1.258 not within 0.25 of 1"
+            }
+          ]
+        },
+        "slabStep": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 1.258,
+            "pitchDelta": 0.758,
+            "crossGradient": 0.06,
+            "sourceRmse": 0.477
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 3.901 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
               "code": "pitch-not-slabStep-legal",
-              "detail": "|gradient| 0.756 not within 0.15 of 0.5"
+              "detail": "|gradient| 1.258 not within 0.15 of 0.5"
             }
           ]
         }
@@ -4830,19 +4780,19 @@
           "spec": null,
           "source": "voxelFit",
           "fitError": {
-            "pitch": 1.27,
-            "pitchDelta": 0.27,
-            "crossGradient": 0.051,
-            "sourceRmse": 0.476
+            "pitch": 0.209,
+            "pitchDelta": 0.791,
+            "crossGradient": 0.037,
+            "sourceRmse": 0.271
           },
           "findings": [
             {
               "code": "glb-fit-unusable",
-              "detail": "glbFit rmse 3.901 > glbRmseTol 1.5 — voxelFit stands in"
+              "detail": "glbFit rmse 6.05 > glbRmseTol 1.5 — voxelFit stands in"
             },
             {
               "code": "pitch-not-stairRun-legal",
-              "detail": "|gradient| 1.27 not within 0.25 of 1"
+              "detail": "|gradient| 0.209 not within 0.25 of 1"
             }
           ]
         },
@@ -4850,19 +4800,19 @@
           "spec": null,
           "source": "voxelFit",
           "fitError": {
-            "pitch": 1.27,
-            "pitchDelta": 0.77,
-            "crossGradient": 0.051,
-            "sourceRmse": 0.476
+            "pitch": 0.209,
+            "pitchDelta": 0.291,
+            "crossGradient": 0.037,
+            "sourceRmse": 0.271
           },
           "findings": [
             {
               "code": "glb-fit-unusable",
-              "detail": "glbFit rmse 3.901 > glbRmseTol 1.5 — voxelFit stands in"
+              "detail": "glbFit rmse 6.05 > glbRmseTol 1.5 — voxelFit stands in"
             },
             {
               "code": "pitch-not-slabStep-legal",
-              "detail": "|gradient| 1.27 not within 0.15 of 0.5"
+              "detail": "|gradient| 0.209 not within 0.15 of 0.5"
             }
           ]
         }
@@ -4871,41 +4821,33 @@
         "plane": "roof-5",
         "stairRun": {
           "spec": null,
-          "source": "voxelFit",
+          "source": "glbFit",
           "fitError": {
-            "pitch": 0.215,
-            "pitchDelta": 0.785,
-            "crossGradient": 0.058,
-            "sourceRmse": 0.763
+            "pitch": 1.729,
+            "pitchDelta": 0.729,
+            "crossGradient": 0.227,
+            "sourceRmse": 1.302
           },
           "findings": [
             {
-              "code": "glb-fit-unusable",
-              "detail": "glbFit rmse 6.017 > glbRmseTol 1.5 — voxelFit stands in"
-            },
-            {
               "code": "pitch-not-stairRun-legal",
-              "detail": "|gradient| 0.215 not within 0.25 of 1"
+              "detail": "|gradient| 1.729 not within 0.25 of 1"
             }
           ]
         },
         "slabStep": {
           "spec": null,
-          "source": "voxelFit",
+          "source": "glbFit",
           "fitError": {
-            "pitch": 0.215,
-            "pitchDelta": 0.285,
-            "crossGradient": 0.058,
-            "sourceRmse": 0.763
+            "pitch": 1.729,
+            "pitchDelta": 1.229,
+            "crossGradient": 0.227,
+            "sourceRmse": 1.302
           },
           "findings": [
             {
-              "code": "glb-fit-unusable",
-              "detail": "glbFit rmse 6.017 > glbRmseTol 1.5 — voxelFit stands in"
-            },
-            {
               "code": "pitch-not-slabStep-legal",
-              "detail": "|gradient| 0.215 not within 0.15 of 0.5"
+              "detail": "|gradient| 1.729 not within 0.15 of 0.5"
             }
           ]
         }
@@ -4913,23 +4855,22 @@
       {
         "plane": "roof-6",
         "stairRun": {
-          "spec": {
-            "generator": "stairRun",
-            "ascent": "-z",
-            "winding": "walk",
-            "riseOverRun": 1
-          },
+          "spec": null,
           "source": "voxelFit",
           "fitError": {
-            "pitch": 1.173,
-            "pitchDelta": 0.173,
-            "crossGradient": 0.432,
-            "sourceRmse": 0.362
+            "pitch": 8.526,
+            "pitchDelta": 7.526,
+            "crossGradient": 0.123,
+            "sourceRmse": 3.05
           },
           "findings": [
             {
               "code": "glb-fit-unusable",
-              "detail": "glbFit rmse 1.523 > glbRmseTol 1.5 — voxelFit stands in"
+              "detail": "glbFit rmse 129.39 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-stairRun-legal",
+              "detail": "|gradient| 8.526 not within 0.25 of 1"
             }
           ]
         },
@@ -4937,25 +4878,68 @@
           "spec": null,
           "source": "voxelFit",
           "fitError": {
-            "pitch": 1.173,
-            "pitchDelta": 0.673,
-            "crossGradient": 0.432,
-            "sourceRmse": 0.362
+            "pitch": 8.526,
+            "pitchDelta": 8.026,
+            "crossGradient": 0.123,
+            "sourceRmse": 3.05
           },
           "findings": [
             {
               "code": "glb-fit-unusable",
-              "detail": "glbFit rmse 1.523 > glbRmseTol 1.5 — voxelFit stands in"
+              "detail": "glbFit rmse 129.39 > glbRmseTol 1.5 — voxelFit stands in"
             },
             {
               "code": "pitch-not-slabStep-legal",
-              "detail": "|gradient| 1.173 not within 0.15 of 0.5"
+              "detail": "|gradient| 8.526 not within 0.15 of 0.5"
             }
           ]
         }
       },
       {
         "plane": "roof-7",
+        "stairRun": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 0.221,
+            "pitchDelta": 0.779,
+            "crossGradient": 0.004,
+            "sourceRmse": 0.205
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 9.923 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-stairRun-legal",
+              "detail": "|gradient| 0.221 not within 0.25 of 1"
+            }
+          ]
+        },
+        "slabStep": {
+          "spec": null,
+          "source": "voxelFit",
+          "fitError": {
+            "pitch": 0.221,
+            "pitchDelta": 0.279,
+            "crossGradient": 0.004,
+            "sourceRmse": 0.205
+          },
+          "findings": [
+            {
+              "code": "glb-fit-unusable",
+              "detail": "glbFit rmse 9.923 > glbRmseTol 1.5 — voxelFit stands in"
+            },
+            {
+              "code": "pitch-not-slabStep-legal",
+              "detail": "|gradient| 0.221 not within 0.15 of 0.5"
+            }
+          ]
+        }
+      },
+      {
+        "plane": "roof-8",
         "stairRun": {
           "spec": null,
           "source": "voxelFit",
@@ -4999,7 +4983,7 @@
         }
       },
       {
-        "plane": "roof-8",
+        "plane": "roof-9",
         "stairRun": {
           "spec": null,
           "source": "voxelFit",
@@ -5042,7 +5026,7 @@
         }
       },
       {
-        "plane": "roof-9",
+        "plane": "roof-10",
         "stairRun": {
           "spec": null,
           "source": "voxelFit",
@@ -5080,49 +5064,6 @@
             {
               "code": "pitch-not-slabStep-legal",
               "detail": "|gradient| 12.752 not within 0.15 of 0.5"
-            }
-          ]
-        }
-      },
-      {
-        "plane": "roof-10",
-        "stairRun": {
-          "spec": null,
-          "source": "voxelFit",
-          "fitError": {
-            "pitch": 9.868,
-            "pitchDelta": 8.868,
-            "crossGradient": 0.346,
-            "sourceRmse": 3.433
-          },
-          "findings": [
-            {
-              "code": "glb-fit-unusable",
-              "detail": "glbFit rmse 122.419 > glbRmseTol 1.5 — voxelFit stands in"
-            },
-            {
-              "code": "pitch-not-stairRun-legal",
-              "detail": "|gradient| 9.868 not within 0.25 of 1"
-            }
-          ]
-        },
-        "slabStep": {
-          "spec": null,
-          "source": "voxelFit",
-          "fitError": {
-            "pitch": 9.868,
-            "pitchDelta": 9.368,
-            "crossGradient": 0.346,
-            "sourceRmse": 3.433
-          },
-          "findings": [
-            {
-              "code": "glb-fit-unusable",
-              "detail": "glbFit rmse 122.419 > glbRmseTol 1.5 — voxelFit stands in"
-            },
-            {
-              "code": "pitch-not-slabStep-legal",
-              "detail": "|gradient| 9.868 not within 0.15 of 0.5"
             }
           ]
         }
@@ -5390,8 +5331,8 @@
   },
   "census": {
     "spikes": {
-      "before": 242,
-      "after": 227
+      "before": 217,
+      "after": 202
     },
     "note": "protrusion census is contextual evidence — the heads' edit domain is small; the cage gates (IoU/closure/protect) are the decision layer."
   },
@@ -5400,13 +5341,13 @@
     "rejected": 0,
     "iou": {
       "baseline": {
-        "+x+z": 0.898,
+        "+x+z": 0.8978,
         "+x-z": 0.9464,
         "-x-z": 0.9248,
         "-x+z": 0.8663
       },
       "final": {
-        "+x+z": 0.898,
+        "+x+z": 0.8978,
         "+x-z": 0.9464,
         "-x-z": 0.9248,
         "-x+z": 0.8663
@@ -5418,7 +5359,7 @@
         "columns": 0
       }
     },
-    "regions": 32,
+    "regions": 30,
     "note": "the opening-heads step judged by all three T-102 gates; a rejection rolls back and FAILS this runner loudly (the step exists to be applied)."
   },
   "trace": [
@@ -5431,9 +5372,9 @@
       "reasons": [],
       "iouByAzimuth": {
         "+x+z": {
-          "baseline": 0.898,
-          "candidate": 0.898,
-          "floor": 0.878
+          "baseline": 0.8978,
+          "candidate": 0.8978,
+          "floor": 0.8778
         },
         "+x-z": {
           "baseline": 0.9464,
@@ -5453,27 +5394,27 @@
       },
       "closure": {
         "closed": false,
-        "reached": 142,
-        "inputReached": 150
+        "reached": 10,
+        "inputReached": 10
       },
       "protect": {
         "violations": 0
       },
       "census": {
-        "cells": 16788,
-        "spikes": 227,
+        "cells": 16901,
+        "spikes": 202,
         "byExposure": [
-          7170,
-          5439,
-          2883,
-          1069,
-          209,
-          18,
+          7320,
+          5459,
+          2912,
+          1008,
+          187,
+          15,
           0
         ],
-        "ragged": 198,
+        "ragged": 193,
         "columns": 1376,
-        "raggedRate": 0.1439
+        "raggedRate": 0.1403
       },
       "cells": {
         "removed": 2,
@@ -5483,12 +5424,12 @@
   ],
   "reproducible": {
     "doubleRun": true,
-    "sha256": "dc3592490f99c07f05c6c23b41209ca9c6cb03b6cb11d971b7b67bb77a0c1649",
+    "sha256": "196795c7ac556be851a5ebf5fad8f2840d937e5babad97682728014a54e148d2",
     "determinism": "no LLM, no GL on the decision path; two in-process executions byte-matched."
   },
   "placements": {
-    "input": 16751,
-    "final": 16788
+    "input": 16864,
+    "final": 16901
   },
   "renders": [
     {

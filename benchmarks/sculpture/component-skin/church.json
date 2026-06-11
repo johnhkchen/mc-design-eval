@@ -1,0 +1,49 @@
+{
+  "schema": "component-skin/v1",
+  "subject": "church",
+  "componentLayer": {
+    "inputs": {
+      "regularized": "challenge/church/shell-artifact.json",
+      "component": "components/church.json",
+      "roof": "roof/church.json",
+      "shaped": "shaped/church.json"
+    },
+    "pins": {
+      "regularizedShell": "50fce80f78ecf37617e773d864fcdecbd4a98b73dfe16f17eaf09a8797f8e4d3",
+      "component": "50fce80f78ecf37617e773d864fcdecbd4a98b73dfe16f17eaf09a8797f8e4d3",
+      "roof": "50fce80f78ecf37617e773d864fcdecbd4a98b73dfe16f17eaf09a8797f8e4d3",
+      "shaped": "50fce80f78ecf37617e773d864fcdecbd4a98b73dfe16f17eaf09a8797f8e4d3"
+    },
+    "findings": [
+      {
+        "code": "roof-program-fallback",
+        "detail": "roof program not accepted — roof seam falls back, recorded by the chain"
+      }
+    ]
+  },
+  "chain": {
+    "runner": "challenge-milestone.mjs",
+    "record": "benchmarks/sculpture/challenge/church.json",
+    "exitCode": 1,
+    "status": "pipeline-failed",
+    "stage": "skin",
+    "error": "coverage gate FAILED on the final skin: band0 stone=0.327 < 0.5 [census: band0={\"total\":2082,\"byBlock\":{\"polished_basalt\":1225,\"stone\":681,\"black_stained_glass\":100,\"dark_oak_planks\":76}}; band0:offslab={\"total\":5109,\"byBlock\":{\"polished_basalt\":3525,\"stone\":1270,\"dark_oak_planks\":5,\"black_stained_glass\":309}}]",
+    "gate": null
+  },
+  "reconstruction": null,
+  "seamSources": null,
+  "conformance": null,
+  "wallField": null,
+  "kitPresence": null,
+  "zoneMapRepin": null,
+  "findings": [
+    {
+      "code": "roof-program-fallback",
+      "detail": "roof program not accepted — roof seam falls back, recorded by the chain"
+    }
+  ],
+  "reproducible": {
+    "milestoneSha256": null,
+    "determinism": "the milestone runner double-runs the deterministic chain and owns the byte-identity proof; this record distills its committed output"
+  }
+}

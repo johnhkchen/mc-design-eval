@@ -1,9 +1,9 @@
 # component record — church
 
-- shell: `regularize/church/artifact.json` (regularized: true)
-- shell sha256: `02e78adb5cd445ac97d125bb0c6d55fdf42c7a3382d25ad036b9f15a52b2e83e`
+- shell: `challenge/church/shell-artifact.json` (regularized: false)
+- shell sha256: `50fce80f78ecf37617e773d864fcdecbd4a98b73dfe16f17eaf09a8797f8e4d3`
 - alignment: registry-scale (voxelSize 0.021)
-- determinism: double-run record bodies byte-identical (sha256 `61f88e4807ba755fcaca99b6a9a1a7179aa2e7d7ee7739994002225996cab713`)
+- determinism: double-run record bodies byte-identical (sha256 `4ce62185afc956323ea14f6c7be6edd1374a17651803a0630c30506ea6a49ae2`)
 
 ## counts vs pinned minimums
 
@@ -16,7 +16,7 @@
 | flatRoofPlanes | 3 |  |
 | ridges | 4 |  |
 | wallSlabs | 12 |  |
-| openingGroups | 22 |  |
+| openingGroups | 20 |  |
 | archCandidates | 0 |  |
 | glbFits | 16 |  |
 | findings | 4 |  |
@@ -25,8 +25,8 @@
 
 | id | role | protected | plan area | yRange | volume | junctions |
 | --- | --- | --- | --- | --- | --- | --- |
-| mass-0 | primary | false | 1139 | 0..23 | 12491 | base→mass-4, side→mass-1, side→mass-2 |
-| mass-1 | attached | false | 207 | 0..32 | 3957 | base→mass-3, side→mass-0 |
+| mass-0 | primary | false | 1139 | 0..23 | 12593 | base→mass-4, side→mass-1, side→mass-2 |
+| mass-1 | attached | false | 207 | 0..32 | 3964 | base→mass-3, side→mass-0 |
 | mass-2 | attached | false | 13 | 7..7 | 13 | side→mass-0 |
 | mass-3 | protrusion | true | 5 | 31..32 | 5 | base→mass-1 |
 | mass-4 | protrusion | true | 12 | 18..22 | 18 | base→mass-0 |
@@ -35,17 +35,17 @@
 
 | id | mass | kind | gradient | rmse (raw) | eave | ridge | glbFit |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| roof-0 | mass-0 | pitched | [-0.003,-0.752] | 0.763 (1.56) | +z | x@21.946 | Δ1.333° / 826 tris / rmse 4.357 |
-| roof-1 | mass-0 | pitched | [-0.008,0.366] | 0.785 (0.92) | -z | x@17.588 | Δ20.018° / 8101 tris / rmse 9.871 |
-| roof-2 | mass-0 | pitched | [0.005,1.557] | 0.448 (0.546) | -z | — | Δ18.931° / 313 tris / rmse 3.004 |
-| roof-3 | mass-0 | pitched | [0.018,1.153] | 0.817 (0.965) | -z | — | Δ11.917° / 315 tris / rmse 1.273 |
-| roof-4 | mass-0 | pitched | [-1.27,-0.051] | 0.476 (0.361) | +x | — | Δ6.791° / 30 tris / rmse 3.901 |
-| roof-5 | mass-0 | pitched | [0.058,0.215] | 0.763 (1.02) | -z | x@17.125 | Δ9.365° / 13 tris / rmse 6.017 |
-| roof-6 | mass-0 | pitched | [-0.432,-1.173] | 0.362 (0.797) | +z | x@17.588 | Δ16.492° / 6 tris / rmse 1.523 |
-| roof-7 | mass-0 | pitched | [0.495,-0.603] | 0.503 (3.041) | +z | x@17.125 | MISS |
-| roof-8 | mass-0 | pitched | [0.302,-5.248] | 3.791 (3.791) | +z | — | Δ10.661° / 45 tris / rmse 46.289 |
-| roof-9 | mass-0 | pitched | [-12.752,-0.635] | 3.463 (3.661) | +x | — | Δ4.452° / 434 tris / rmse 42.839 |
-| roof-10 | mass-0 | pitched | [-9.868,0.346] | 3.433 (4.969) | +x | — | Δ6.086° / 1202 tris / rmse 122.419 |
+| roof-0 | mass-0 | pitched | [0.002,-0.744] | 0.536 (0.888) | +z | x@21.413 | Δ1.286° / 803 tris / rmse 4.435 |
+| roof-1 | mass-0 | pitched | [-0.022,0.435] | 0.611 (0.708) | -z | x@17.5 | Δ23.397° / 8186 tris / rmse 9.576 |
+| roof-2 | mass-0 | pitched | [0.016,0.876] | 0.794 (0.898) | -z | — | Δ6.013° / 419 tris / rmse 1.683 |
+| roof-3 | mass-0 | pitched | [-1.258,-0.06] | 0.477 (0.361) | +x | z@18 | Δ7.04° / 30 tris / rmse 3.901 |
+| roof-4 | mass-0 | pitched | [0.209,-0.037] | 0.271 (0.441) | -x | — | Δ10.75° / 13 tris / rmse 6.05 |
+| roof-5 | mass-0 | pitched | [-0.455,-1.095] | 0.451 (0.731) | +z | x@17.5 | Δ16.003° / 5 tris / rmse 1.302 |
+| roof-6 | mass-0 | pitched | [-8.526,-0.123] | 3.05 (6.051) | +x | — | Δ6.592° / 1631 tris / rmse 129.39 |
+| roof-7 | mass-0 | pitched | [0.221,-0.004] | 0.205 (0.205) | -x | z@18 | Δ12.58° / 581 tris / rmse 9.923 |
+| roof-8 | mass-0 | pitched | [0.495,-0.603] | 0.503 (3.041) | +z | — | MISS |
+| roof-9 | mass-0 | pitched | [0.302,-5.248] | 3.791 (3.791) | +z | — | Δ10.661° / 45 tris / rmse 46.289 |
+| roof-10 | mass-0 | pitched | [-12.752,-0.635] | 3.463 (3.661) | +x | — | Δ4.452° / 434 tris / rmse 42.839 |
 | roof-11 | mass-0 | pitched | [-14.591,0.061] | 0.283 (0.503) | +x | — | Δ3.059° / 432 tris / rmse 42.9 |
 | roof-12 | mass-1 | flat | [-0.131,0.041] | 0.689 (1.294) | perimeter | — | Δ7.674° / 7256 tris / rmse 12.756 |
 | roof-13 | mass-1 | flat | [0.083,-0.016] | 0.379 (0.519) | perimeter | — | Δ5.121° / 2860 tris / rmse 13.407 |
@@ -57,12 +57,12 @@
 
 | id | axis=value | coverage |
 | --- | --- | --- |
-| mass-0-wall-+x | x=22 | 0.668 |
-| mass-0-wall--x | x=-24 | 0.593 |
+| mass-0-wall-+x | x=22 | 0.663 |
+| mass-0-wall--x | x=-24 | 0.589 |
 | mass-0-wall-+z | z=17 | 0.494 |
 | mass-0-wall--z | z=-1 | 0.428 |
-| mass-1-wall-+x | x=-8 | 0.953 |
-| mass-1-wall--x | x=-19 | 0.659 |
+| mass-1-wall-+x | x=-8 | 0.95 |
+| mass-1-wall--x | x=-19 | 0.657 |
 | mass-1-wall-+z | z=-9 | 0.812 |
 | mass-1-wall--z | z=-18 | 0.812 |
 | mass-2-wall-+x | x=3 | 1 |
@@ -74,33 +74,31 @@
 
 | id | mass | dir | kind | n | arches |
 | --- | --- | --- | --- | --- | --- |
-| og-0 | mass-0 | +x | window | 1 | 0 |
-| og-1 | mass-0 | +x | window | 2 | 0 |
-| og-2 | mass-0 | +x | window | 1 | 0 |
+| og-0 | mass-0 | +x | window | 2 | 0 |
+| og-1 | mass-0 | +x | window | 1 | 0 |
+| og-2 | mass-0 | -x | window | 2 | 0 |
 | og-3 | mass-0 | -x | window | 1 | 0 |
-| og-4 | mass-0 | -x | window | 2 | 0 |
-| og-5 | mass-0 | -x | window | 1 | 0 |
-| og-6 | mass-0 | +z | window | 1 | 0 |
-| og-7 | mass-0 | +z | window | 1 | 0 |
-| og-8 | mass-0 | +z | window | 2 | 0 |
+| og-4 | mass-0 | +z | window | 1 | 0 |
+| og-5 | mass-0 | +z | window | 1 | 0 |
+| og-6 | mass-0 | +z | window | 2 | 0 |
+| og-7 | mass-0 | +z | window | 2 | 0 |
+| og-8 | mass-0 | +z | window | 1 | 0 |
 | og-9 | mass-0 | +z | window | 2 | 0 |
-| og-10 | mass-0 | +z | window | 1 | 0 |
-| og-11 | mass-0 | +z | window | 2 | 0 |
-| og-12 | mass-0 | +z | window | 2 | 0 |
-| og-13 | mass-0 | +z | window | 1 | 0 |
-| og-14 | mass-0 | -z | window | 1 | 0 |
-| og-15 | mass-0 | -z | window | 1 | 0 |
-| og-16 | mass-0 | -z | window | 2 | 0 |
+| og-10 | mass-0 | +z | window | 2 | 0 |
+| og-11 | mass-0 | +z | window | 1 | 0 |
+| og-12 | mass-0 | -z | window | 1 | 0 |
+| og-13 | mass-0 | -z | window | 1 | 0 |
+| og-14 | mass-0 | -z | window | 2 | 0 |
+| og-15 | mass-0 | -z | window | 2 | 0 |
+| og-16 | mass-0 | -z | window | 1 | 0 |
 | og-17 | mass-0 | -z | window | 2 | 0 |
-| og-18 | mass-0 | -z | window | 1 | 0 |
-| og-19 | mass-0 | -z | window | 2 | 0 |
-| og-20 | mass-0 | -z | window | 2 | 0 |
-| og-21 | mass-0 | -z | window | 1 | 0 |
+| og-18 | mass-0 | -z | window | 2 | 0 |
+| og-19 | mass-0 | -z | window | 1 | 0 |
 
 ## findings
 
-- **glb-fit-missing** @ roof-7 — no aligned triangles in the normal cone over this extent; voxel fit stands alone
-- **slab-low-coverage** @ mass-0-wall--x — coverage 0.593
+- **glb-fit-missing** @ roof-8 — no aligned triangles in the normal cone over this extent; voxel fit stands alone
+- **slab-low-coverage** @ mass-0-wall--x — coverage 0.589
 - **slab-low-coverage** @ mass-0-wall-+z — coverage 0.494
 - **slab-low-coverage** @ mass-0-wall--z — coverage 0.428
 

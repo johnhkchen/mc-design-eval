@@ -2,7 +2,7 @@
   "schema": "styled-milestone/v1",
   "subject": "gatehouse",
   "status": "gated",
-  "pipelineOrder": "kit (committed, T-096) → shell integrity (T-091) → skin (T-086 value-true → kit overrides → seal → T-092 zones → T-090 fill → T-087 coherence → T-088 gates) → placement grammar (T-098) → opening dressing (T-099) → grammar settle (the T-100 fixpoint seam) → kit-aware multi-angle gate (T-100 ∘ T-093)",
+  "pipelineOrder": "kit (committed, T-096) → shell integrity (T-091) → regularize (T-102 cage) → skin (T-086 value-true → kit overrides → seal → T-092 zones → T-090 fill → T-087 coherence → T-088 gates) → placement grammar (T-098) → opening dressing (T-099) → grammar settle (the T-100 fixpoint seam) → kit-aware multi-angle gate (T-100 ∘ T-093)",
   "inputs": {
     "build": "concept-materials/gatehouse/after-artifact.json",
     "concept": "runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
@@ -69,6 +69,44 @@
       "iterations": 1
     }
   },
+  "reconstruction": {
+    "inputs": {
+      "componentRecord": "components/gatehouse.json",
+      "roofRecord": "roof/gatehouse.json",
+      "shapedRecord": "shaped/gatehouse.json",
+      "shellSha": "b6c899187d50efeef411279640837f6b42e960975c76378edb8747073975e20c"
+    },
+    "composed": {
+      "perDelta": [
+        {
+          "name": "roof-program",
+          "changed": 1465,
+          "added": 227,
+          "removed": 96
+        },
+        {
+          "name": "shaped-heads",
+          "changed": 0,
+          "added": 118,
+          "removed": 723
+        }
+      ],
+      "cells": 2629
+    },
+    "findings": [],
+    "seamSources": {
+      "roofCourses": "program",
+      "wallFields": "slab-faces",
+      "upperTop": "occupancy (wall-top pin rejected: weak-dominant:roof)",
+      "zoneMap": "concept",
+      "frameLines": "component"
+    },
+    "conformance": {
+      "columns": 533,
+      "conforming": 533,
+      "deviations": []
+    }
+  },
   "skin": {
     "substitution": {
       "stone_bricks": "polished_basalt"
@@ -83,7 +121,7 @@
           "name": "band0",
           "yRange": [
             0,
-            20
+            22
           ],
           "dominantBlock": "stone_bricks",
           "dominantRole": "structural walls (dominant body)",
@@ -92,12 +130,12 @@
             {
               "block": "dark_oak_log",
               "role": "arch voussoir ring (warm accent)",
-              "share": 0.104
+              "share": 0.096
             },
             {
               "block": "deepslate_tiles",
               "role": "roof mass",
-              "share": 0.562
+              "share": 0.571
             },
             {
               "block": "cobblestone",
@@ -107,7 +145,7 @@
             {
               "block": "dark_oak_planks",
               "role": "gate door / passage leaf",
-              "share": 0.008
+              "share": 0.007
             }
           ]
         }
@@ -120,12 +158,12 @@
           {
             "block": "stone_bricks",
             "role": "structural walls (dominant body)",
-            "share": 0.203
+            "share": 0.152
           },
           {
             "block": "cobblestone",
             "role": "corner buttresses + rough string-course banding",
-            "share": 0.003
+            "share": 0.004
           },
           {
             "block": "dark_oak_log",
@@ -146,37 +184,49 @@
       "roofIdentical": false
     },
     "fill": {
-      "placements": 170,
-      "kept": 5515
+      "placements": 79,
+      "kept": 4187
     },
     "salt": {
-      "stripped": 245,
-      "kept": 796
+      "stripped": 177,
+      "kept": 755
     },
     "coverage": {
       "band0": {
-        "total": 4234,
+        "total": 1125,
         "byBlock": {
-          "polished_basalt": 3129,
-          "deepslate_bricks": 377,
-          "cobblestone": 616,
-          "dark_oak_planks": 96,
-          "dark_oak_log": 16
+          "polished_basalt": 788,
+          "deepslate_bricks": 92,
+          "cobblestone": 224,
+          "dark_oak_planks": 11,
+          "dark_oak_log": 10
         },
         "dominant": "polished_basalt",
-        "dominantFraction": 0.739
+        "dominantFraction": 0.7
+      },
+      "band0:offslab": {
+        "total": 2258,
+        "byBlock": {
+          "polished_basalt": 1533,
+          "cobblestone": 388,
+          "deepslate_bricks": 265,
+          "dark_oak_planks": 47,
+          "dark_oak_log": 25
+        },
+        "dominant": null,
+        "dominantFraction": null
       },
       "roof": {
-        "total": 1436,
+        "total": 883,
         "byBlock": {
-          "deepslate_bricks": 898,
-          "dark_oak_planks": 94,
-          "polished_basalt": 367,
-          "dark_oak_log": 43,
-          "cobblestone": 34
+          "deepslate_bricks": 772,
+          "dark_oak_planks": 8,
+          "polished_basalt": 70,
+          "cobblestone": 10,
+          "dark_oak_log": 23
         },
         "dominant": "deepslate_bricks",
-        "dominantFraction": 0.625
+        "dominantFraction": 0.874
       }
     },
     "gates": {
@@ -188,14 +238,14 @@
         "byZone": {
           "band0": {
             "dominant": "polished_basalt",
-            "fraction": 0.665,
-            "total": 4216,
+            "fraction": 0.533,
+            "total": 1125,
             "passed": true
           },
           "roof": {
             "dominant": "deepslate_bricks",
-            "fraction": 0.558,
-            "total": 1469,
+            "fraction": 0.845,
+            "total": 883,
             "passed": true
           }
         }
@@ -207,14 +257,14 @@
         "byZone": {
           "band0": {
             "dominant": "polished_basalt",
-            "fraction": 0.739,
-            "total": 4234,
+            "fraction": 0.7,
+            "total": 1125,
             "passed": true
           },
           "roof": {
             "dominant": "deepslate_bricks",
-            "fraction": 0.625,
-            "total": 1436,
+            "fraction": 0.874,
+            "total": 883,
             "passed": true
           }
         }
@@ -240,47 +290,71 @@
     },
     "frame": {
       "counts": {
-        "wall": 3551,
-        "cornerPost": 106,
-        "roofline": 238,
-        "floorLine": 597
+        "wall": 2903,
+        "cornerPost": 18,
+        "roofline": 365,
+        "floorLine": 0
       },
-      "painted": 548,
-      "adopted": 16,
-      "respected": 294,
-      "skippedIsolated": 2,
-      "alreadyFrame": 81
+      "painted": 270,
+      "adopted": 11,
+      "respected": 75,
+      "skippedIsolated": 11,
+      "alreadyFrame": 16
     },
     "fill": {
-      "placements": 10,
-      "kept": 5660
+      "placements": 5,
+      "kept": 4261
     },
     "frameRefilled": 0,
     "preexistingFrameRefilled": 0,
     "coverage": {
       "band0": {
-        "total": 4417,
+        "total": 1038,
         "byBlock": {
-          "polished_basalt": 2670,
-          "cobblestone": 1168,
-          "deepslate_bricks": 428,
-          "dark_oak_planks": 126,
-          "dark_oak_log": 25
+          "polished_basalt": 724,
+          "deepslate_bricks": 79,
+          "cobblestone": 218,
+          "dark_oak_planks": 8,
+          "dark_oak_log": 9
         },
         "dominant": "polished_basalt",
-        "dominantFraction": 0.604
+        "dominantFraction": 0.697
+      },
+      "band0:offslab": {
+        "total": 1962,
+        "byBlock": {
+          "polished_basalt": 1305,
+          "cobblestone": 378,
+          "deepslate_bricks": 237,
+          "dark_oak_planks": 21,
+          "dark_oak_log": 21
+        },
+        "dominant": null,
+        "dominantFraction": null
+      },
+      "band0:frame": {
+        "total": 383,
+        "byBlock": {
+          "polished_basalt": 11,
+          "cobblestone": 286,
+          "deepslate_bricks": 51,
+          "dark_oak_planks": 30,
+          "dark_oak_log": 5
+        },
+        "dominant": null,
+        "dominantFraction": null
       },
       "roof": {
-        "total": 1253,
+        "total": 883,
         "byBlock": {
-          "deepslate_bricks": 864,
-          "polished_basalt": 269,
-          "dark_oak_planks": 56,
-          "dark_oak_log": 35,
-          "cobblestone": 29
+          "deepslate_bricks": 777,
+          "dark_oak_planks": 5,
+          "polished_basalt": 69,
+          "cobblestone": 9,
+          "dark_oak_log": 23
         },
         "dominant": "deepslate_bricks",
-        "dominantFraction": 0.69
+        "dominantFraction": 0.88
       }
     },
     "bands": {
@@ -441,7 +515,7 @@
         }
       ]
     },
-    "placements": 51,
+    "placements": 72,
     "perOpening": [
       {
         "dir": "+x",
@@ -529,15 +603,15 @@
           "infill": 0,
           "shutterLeft": 0,
           "shutterRight": 0,
-          "lintel": 2,
-          "sill": 1
+          "lintel": 3,
+          "sill": 3
         },
         "placed": {
           "infill": 0,
           "shutterLeft": 0,
           "shutterRight": 0,
-          "lintel": 2,
-          "sill": 1
+          "lintel": 3,
+          "sill": 3
         },
         "conflicts": [
           {
@@ -589,7 +663,7 @@
         },
         "placed": {
           "door": 0,
-          "lintel": 10,
+          "lintel": 12,
           "light": 0
         },
         "conflicts": [
@@ -629,14 +703,14 @@
           "infill": 0,
           "shutterLeft": 0,
           "shutterRight": 0,
-          "lintel": 1,
+          "lintel": 3,
           "sill": 3
         },
         "placed": {
           "infill": 0,
           "shutterLeft": 0,
           "shutterRight": 0,
-          "lintel": 1,
+          "lintel": 3,
           "sill": 3
         },
         "conflicts": [
@@ -693,8 +767,8 @@
           "infill": 0,
           "shutterLeft": 0,
           "shutterRight": 0,
-          "lintel": 2,
-          "sill": 0
+          "lintel": 1,
+          "sill": 2
         },
         "conflicts": [
           {
@@ -746,7 +820,7 @@
         },
         "placed": {
           "door": 0,
-          "lintel": 0,
+          "lintel": 14,
           "light": 0
         },
         "conflicts": [
@@ -779,7 +853,7 @@
           ]
         },
         "paneSpan": [
-          4,
+          2,
           4
         ],
         "applied": {
@@ -903,22 +977,22 @@
           ]
         },
         "paneSpan": [
-          3,
-          3
+          2,
+          2
         ],
         "applied": {
           "infill": 0,
           "shutterLeft": 0,
           "shutterRight": 0,
-          "lintel": 1,
-          "sill": 4
+          "lintel": 2,
+          "sill": 5
         },
         "placed": {
           "infill": 0,
           "shutterLeft": 0,
           "shutterRight": 0,
-          "lintel": 1,
-          "sill": 4
+          "lintel": 2,
+          "sill": 5
         },
         "conflicts": [
           {
@@ -967,15 +1041,15 @@
           "infill": 0,
           "shutterLeft": 0,
           "shutterRight": 0,
-          "lintel": 1,
-          "sill": 4
+          "lintel": 0,
+          "sill": 0
         },
         "placed": {
           "infill": 0,
           "shutterLeft": 0,
           "shutterRight": 0,
-          "lintel": 1,
-          "sill": 4
+          "lintel": 0,
+          "sill": 0
         },
         "conflicts": [
           {
@@ -992,6 +1066,41 @@
             "slot": "shutterRight",
             "name": "no-shutter-treatment",
             "reduction": "shutter-dropped"
+          },
+          {
+            "slot": "opening",
+            "name": "duplicate-position",
+            "reduction": "cell-skipped"
+          },
+          {
+            "slot": "lintel",
+            "name": "lintel-no-band-cells",
+            "reduction": "lintel-skipped"
+          },
+          {
+            "slot": "opening",
+            "name": "duplicate-position",
+            "reduction": "cell-skipped"
+          },
+          {
+            "slot": "opening",
+            "name": "duplicate-position",
+            "reduction": "cell-skipped"
+          },
+          {
+            "slot": "opening",
+            "name": "duplicate-position",
+            "reduction": "cell-skipped"
+          },
+          {
+            "slot": "opening",
+            "name": "duplicate-position",
+            "reduction": "cell-skipped"
+          },
+          {
+            "slot": "sill",
+            "name": "sill-no-band-cells",
+            "reduction": "sill-skipped"
           }
         ]
       },
@@ -1032,7 +1141,7 @@
           "shutterLeft": 0,
           "shutterRight": 0,
           "lintel": 0,
-          "sill": 5
+          "sill": 6
         },
         "conflicts": [
           {
@@ -1079,7 +1188,7 @@
           ]
         },
         "paneSpan": [
-          2,
+          1,
           2
         ],
         "applied": {
@@ -1094,7 +1203,7 @@
           "shutterLeft": 0,
           "shutterRight": 0,
           "lintel": 0,
-          "sill": 3
+          "sill": 4
         },
         "conflicts": [
           {
@@ -1123,32 +1232,28 @@
     "stats": {
       "openings": 12,
       "fullyDressed": 0,
-      "placements": 51,
-      "conflicts": 36,
+      "placements": 72,
+      "conflicts": 43,
       "alreadyDressed": 0
     }
   },
   "settle": {
-    "iterations": 2,
-    "trail": [
-      {
-        "frame": 0,
-        "fill": 6
-      },
-      {
-        "frame": 2,
-        "fill": 0
-      }
-    ]
+    "iterations": 0,
+    "trail": [],
+    "tolerated": {
+      "fillResidue": 6,
+      "dressing": 4
+    }
   },
   "reproducible": {
     "doubleRun": true,
     "sha256": {
       "base": null,
-      "shell": "24fefe6da680b982a40c537fe3a41685af289863d079e5d62f7bae3e2478f281",
-      "skinFinal": "e4467844ffb4056d7bd0fc7cb7c66cffc9d4a6f046892e51a054e92df02c15dc",
-      "grammarFinal": "2dfb0c7d3e3e67df6a7d6c590aeeebe70656e69d0a04a401a52f6fe2a2d87240",
-      "styled": "3ea1c65bd03a117cb144a5eae3e2d2c2159ba26dd02e97122c328e853a92c114"
+      "shell": "b6c899187d50efeef411279640837f6b42e960975c76378edb8747073975e20c",
+      "reconstructed": "33305fce57339c50c5f67c04b1fe3183662203ca59af112dabf6f39274f3143e",
+      "skinFinal": "4a1add05dc2d5a295f59865bf05ab4bae363e7bcc441c9396cd4206f8ab9273a",
+      "grammarFinal": "f9c0a3068649d564d0b6afcaca6053bf52a5c80c673ef6ad0ecb73dca59e7c47",
+      "styled": "e3b89444f3a5365b4fb4cff655dfc57574ff397d104fd5674e962ad207ac2b8e"
     },
     "determinism": "kit→shell→skin→grammar→dressing is a pure function of the committed inputs (concept PNG, material map, GLB, kit); two in-process executions byte-matched on every artifact; --repro re-proves from a fresh process. LLM-authored inputs are one-time committed records (the kit's raw model reply is pinned beside it); the gate judge is the pinned model, single sample per view, verdicts committed in the gate record."
   },
@@ -1161,20 +1266,16 @@
       "gapBudget": 2,
       "failures": [
         {
-          "angle": "+x+z",
-          "reason": "drifted"
-        },
-        {
           "angle": "+x-z",
           "reason": "drifted"
         },
         {
           "angle": "-x-z",
-          "reason": "different object"
+          "reason": "drifted"
         },
         {
           "angle": "-x+z",
-          "reason": "different object"
+          "reason": "drifted"
         }
       ],
       "refusal": null
@@ -1196,21 +1297,21 @@
         "angle": "+x+z",
         "azimuthDeg": 45,
         "coverage": true,
-        "verdict": "drifted",
+        "verdict": "same object",
         "gaps": [
           {
-            "region": "roofline along the top",
+            "region": "roof ridge and corner caps",
             "attribute": "form",
-            "severity": "major"
+            "severity": "minor"
           },
           {
-            "region": "overall building mass and footprint",
-            "attribute": "massing",
-            "severity": "major"
-          },
-          {
-            "region": "front and side walls",
+            "region": "right-hand wall brown timber strip",
             "attribute": "material zoning",
+            "severity": "minor"
+          },
+          {
+            "region": "upper roof slope edges",
+            "attribute": "form",
             "severity": "minor"
           }
         ]
@@ -1222,18 +1323,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof / ridge line",
+            "region": "roof ridge and eaves",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "upper walls and eaves",
+            "region": "overall building silhouette",
             "attribute": "massing",
-            "severity": "minor"
+            "severity": "major"
           },
           {
-            "region": "stone base and dark-wood trim",
-            "attribute": "palette",
+            "region": "stone walls and timber accents",
+            "attribute": "material zoning",
             "severity": "minor"
           }
         ]
@@ -1242,22 +1343,22 @@
         "angle": "-x-z",
         "azimuthDeg": 225,
         "coverage": true,
-        "verdict": "different object",
+        "verdict": "drifted",
         "gaps": [
           {
-            "region": "overall building mass",
+            "region": "overall building outline and roofline",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "roof — the gabled pitched roof of the concept/mesh",
+            "region": "front facade — colonnade/pillars instead of a single arched doorway",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "walls and entrance — should be a closed stone box with an arched door, instead reads as open colonnaded ruin",
+            "region": "roof ridge and gable",
             "attribute": "form",
-            "severity": "major"
+            "severity": "minor"
           }
         ]
       },
@@ -1265,22 +1366,22 @@
         "angle": "-x+z",
         "azimuthDeg": 315,
         "coverage": true,
-        "verdict": "different object",
+        "verdict": "drifted",
         "gaps": [
           {
-            "region": "overall building body",
+            "region": "roofline and ridge",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "left side / upper corner, vertical posts protruding above the roof",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "walls — open colonnade of vertical columns instead of solid stone walls",
-            "attribute": "form",
-            "severity": "major"
-          },
-          {
-            "region": "roof and ridge",
-            "attribute": "form",
-            "severity": "major"
+            "region": "overall stone walls and dark roof",
+            "attribute": "palette",
+            "severity": "minor"
           }
         ]
       }

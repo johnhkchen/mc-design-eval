@@ -4,7 +4,7 @@
   "label": "styled",
   "artifact": {
     "path": "benchmarks/sculpture/styled/cottage/artifact.json",
-    "sha256": "6c94b04ce4885aba32253a30f838a188ab17791b744d774c57e96a38bd825299"
+    "sha256": "8385a7a357252732b71f856a5aa54ffdb527fc64492a93c42b0e196189cc962b"
   },
   "contract": {
     "azimuths": [
@@ -77,7 +77,7 @@
           "band0": {
             "dominant": "tuff",
             "fraction": 1,
-            "total": 274,
+            "total": 97,
             "passed": true,
             "metric": "own",
             "own": [
@@ -87,12 +87,12 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.507
+            "dominantFraction": 0.32
           },
           "band1": {
             "dominant": "smooth_sandstone",
-            "fraction": 0.962,
-            "total": 396,
+            "fraction": 0.957,
+            "total": 141,
             "passed": true,
             "metric": "own",
             "own": [
@@ -102,12 +102,12 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.232
+            "dominantFraction": 0.092
           },
           "roof": {
             "dominant": "spruce_planks",
-            "fraction": 0.997,
-            "total": 341,
+            "fraction": 1,
+            "total": 296,
             "passed": true,
             "metric": "own",
             "own": [
@@ -117,7 +117,7 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.566
+            "dominantFraction": 0.828
           }
         }
       },
@@ -126,29 +126,29 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof",
+            "region": "roof and upper storey",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "upper walls / timber framing",
-            "attribute": "material zoning",
+            "region": "overall silhouette vs. clean gabled mesh",
+            "attribute": "massing",
             "severity": "minor"
           },
           {
-            "region": "overall house body",
-            "attribute": "massing",
+            "region": "stone base relative to cream wall band",
+            "attribute": "material zoning",
             "severity": "minor"
           }
         ],
-        "rationale": "Palette and stone-base zoning read true, but the roof is a jumbled lumpy mass with no clean pitched ridge like the concept and mesh silhouette show, breaking the form from this angle."
+        "rationale": "The three-zone palette (brown roof, cream walls, gray stone base) reads true, but the roof and upper massing are fragmented and jagged rather than the clean continuous gable shown in both the concept and the mesh silhouette at this angle."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10413,
-          "output_tokens": 671,
-          "cost_usd": 0.16899999999999998
+          "input_tokens": 11008,
+          "output_tokens": 558,
+          "cost_usd": 0.16859000000000002
         }
       }
     },
@@ -165,8 +165,8 @@
         "byZone": {
           "band0": {
             "dominant": "tuff",
-            "fraction": 0.985,
-            "total": 268,
+            "fraction": 0.98,
+            "total": 149,
             "passed": true,
             "metric": "own",
             "own": [
@@ -176,12 +176,12 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.563
+            "dominantFraction": 0.604
           },
           "band1": {
             "dominant": "smooth_sandstone",
-            "fraction": 0.95,
-            "total": 383,
+            "fraction": 0.893,
+            "total": 75,
             "passed": true,
             "metric": "own",
             "own": [
@@ -191,12 +191,12 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.324
+            "dominantFraction": 0.253
           },
           "roof": {
             "dominant": "spruce_planks",
-            "fraction": 0.991,
-            "total": 332,
+            "fraction": 0.99,
+            "total": 293,
             "passed": true,
             "metric": "own",
             "own": [
@@ -206,7 +206,7 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.729
+            "dominantFraction": 0.898
           }
         }
       },
@@ -215,7 +215,7 @@
         "verdict": "same object",
         "gaps": [
           {
-            "region": "roofline and ridge",
+            "region": "roof ridge and upper massing",
             "attribute": "form",
             "severity": "minor"
           },
@@ -223,21 +223,16 @@
             "region": "chimney on the roof",
             "attribute": "massing",
             "severity": "minor"
-          },
-          {
-            "region": "timber-framed cream upper walls",
-            "attribute": "material zoning",
-            "severity": "minor"
           }
         ],
-        "rationale": "Stone base, cream timber-framed walls, and a dominant dark-wood gabled roof all read true against the concept and mesh from this angle, with only a lumpier ridge and a chimney that no longer stands clear as small imperfections."
+        "rationale": "The build reads as the same cottage from this angle — brown gabled roof, cream timbered upper walls, and gray stone base all zone true against the concept and match the mesh massing, with only minor jaggedness at the ridge and a less-defined chimney."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10413,
-          "output_tokens": 700,
-          "cost_usd": 0.16972500000000001
+          "input_tokens": 11008,
+          "output_tokens": 619,
+          "cost_usd": 0.17011500000000002
         }
       }
     },
@@ -254,8 +249,8 @@
         "byZone": {
           "band0": {
             "dominant": "tuff",
-            "fraction": 0.993,
-            "total": 273,
+            "fraction": 0.996,
+            "total": 232,
             "passed": true,
             "metric": "own",
             "own": [
@@ -265,12 +260,12 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.733
+            "dominantFraction": 0.797
           },
           "band1": {
             "dominant": "smooth_sandstone",
-            "fraction": 0.943,
-            "total": 400,
+            "fraction": 0.869,
+            "total": 130,
             "passed": true,
             "metric": "own",
             "own": [
@@ -280,12 +275,12 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.405
+            "dominantFraction": 0.469
           },
           "roof": {
             "dominant": "spruce_planks",
-            "fraction": 0.985,
-            "total": 338,
+            "fraction": 0.992,
+            "total": 262,
             "passed": true,
             "metric": "own",
             "own": [
@@ -295,38 +290,33 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.808
+            "dominantFraction": 0.958
           }
         }
       },
       "verdict": {
         "schema": "multi-angle-verdict/v1",
-        "verdict": "drifted",
+        "verdict": "same object",
         "gaps": [
           {
-            "region": "roof",
+            "region": "roof ridge and eaves",
             "attribute": "form",
-            "severity": "major"
-          },
-          {
-            "region": "upper walls timber framing",
-            "attribute": "material zoning",
             "severity": "minor"
           },
           {
-            "region": "overall house body",
+            "region": "chimney on roof",
             "attribute": "massing",
             "severity": "minor"
           }
         ],
-        "rationale": "Palette and stone-base zoning read true from this angle, but the roof is a lumpy jumble of protruding logs rather than the clean pitched ridge the concept and mesh both show, breaking the same-object read."
+        "rationale": "The build reads as the same half-timbered cottage from azimuth 225° — stone base, cream timber walls, and a dominant brown roof matching the concept and mesh silhouette, with only minor roof-edge and chimney irregularities."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10928,
-          "output_tokens": 436,
-          "cost_usd": 0.16570000000000001
+          "input_tokens": 10917,
+          "output_tokens": 521,
+          "cost_usd": 0.16720999999999997
         }
       }
     },
@@ -343,8 +333,8 @@
         "byZone": {
           "band0": {
             "dominant": "tuff",
-            "fraction": 0.993,
-            "total": 268,
+            "fraction": 1,
+            "total": 168,
             "passed": true,
             "metric": "own",
             "own": [
@@ -354,12 +344,12 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.634
+            "dominantFraction": 0.696
           },
           "band1": {
             "dominant": "smooth_sandstone",
-            "fraction": 0.947,
-            "total": 394,
+            "fraction": 0.94,
+            "total": 184,
             "passed": true,
             "metric": "own",
             "own": [
@@ -369,12 +359,12 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.363
+            "dominantFraction": 0.321
           },
           "roof": {
             "dominant": "spruce_planks",
-            "fraction": 0.988,
-            "total": 321,
+            "fraction": 0.992,
+            "total": 247,
             "passed": true,
             "metric": "own",
             "own": [
@@ -384,7 +374,7 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.735
+            "dominantFraction": 0.923
           }
         }
       },
@@ -393,29 +383,29 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof",
+            "region": "roof and upper massing",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "upper walls / timber framing band",
-            "attribute": "material zoning",
+            "region": "overall silhouette versus mesh",
+            "attribute": "massing",
             "severity": "minor"
           },
           {
-            "region": "overall body",
-            "attribute": "massing",
+            "region": "stone base at lower right",
+            "attribute": "material zoning",
             "severity": "minor"
           }
         ],
-        "rationale": "Palette and stone base read true and the massing roughly matches the mesh silhouette, but the roof is a jumbled, lumpy tangle of planks with no clean pitched ridge, breaking the match from this angle."
+        "rationale": "Palette and material zones (brown roof, cream timber walls, stone base) still read true, but from this back angle the roof and upper mass are fragmented and irregular rather than the clean compact silhouette the mesh shows, so the build is recognizably related but defective in form."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10928,
-          "output_tokens": 559,
-          "cost_usd": 0.168775
+          "input_tokens": 11021,
+          "output_tokens": 905,
+          "cost_usd": 0.17733
         }
       }
     }
@@ -424,27 +414,27 @@
     "schema": "multi-angle-gate/v1",
     "decided": true,
     "passed": false,
-    "gapCount": 12,
+    "gapCount": 10,
     "gapBudget": 2,
     "gaps": [
       {
         "angle": "+x+z",
-        "region": "roof",
+        "region": "roof and upper storey",
         "attribute": "form"
       },
       {
         "angle": "+x+z",
-        "region": "upper walls / timber framing",
-        "attribute": "material zoning"
-      },
-      {
-        "angle": "+x+z",
-        "region": "overall house body",
+        "region": "overall silhouette vs. clean gabled mesh",
         "attribute": "massing"
       },
       {
+        "angle": "+x+z",
+        "region": "stone base relative to cream wall band",
+        "attribute": "material zoning"
+      },
+      {
         "angle": "+x-z",
-        "region": "roofline and ridge",
+        "region": "roof ridge and upper massing",
         "attribute": "form"
       },
       {
@@ -453,48 +443,34 @@
         "attribute": "massing"
       },
       {
-        "angle": "+x-z",
-        "region": "timber-framed cream upper walls",
-        "attribute": "material zoning"
-      },
-      {
         "angle": "-x-z",
-        "region": "roof",
+        "region": "roof ridge and eaves",
         "attribute": "form"
       },
       {
         "angle": "-x-z",
-        "region": "upper walls timber framing",
-        "attribute": "material zoning"
-      },
-      {
-        "angle": "-x-z",
-        "region": "overall house body",
+        "region": "chimney on roof",
         "attribute": "massing"
       },
       {
         "angle": "-x+z",
-        "region": "roof",
+        "region": "roof and upper massing",
         "attribute": "form"
       },
       {
         "angle": "-x+z",
-        "region": "upper walls / timber framing band",
-        "attribute": "material zoning"
+        "region": "overall silhouette versus mesh",
+        "attribute": "massing"
       },
       {
         "angle": "-x+z",
-        "region": "overall body",
-        "attribute": "massing"
+        "region": "stone base at lower right",
+        "attribute": "material zoning"
       }
     ],
     "failures": [
       {
         "angle": "+x+z",
-        "reason": "drifted"
-      },
-      {
-        "angle": "-x-z",
         "reason": "drifted"
       },
       {
@@ -509,11 +485,11 @@
       },
       {
         "angle": "+x-z",
-        "outcome": "same object (3 minor)"
+        "outcome": "same object (2 minor)"
       },
       {
         "angle": "-x-z",
-        "outcome": "drifted: form"
+        "outcome": "same object (2 minor)"
       },
       {
         "angle": "-x+z",
@@ -529,12 +505,12 @@
         "feature": "frame",
         "block": "spruce_planks",
         "shipped": "spruce_planks",
-        "sites": 846,
+        "sites": 521,
         "missing": 0,
-        "satisfied": 638,
+        "satisfied": 382,
         "tolerated": {
-          "respected": 200,
-          "skippedIsolated": 8
+          "respected": 127,
+          "skippedIsolated": 12
         },
         "gating": true,
         "passed": true
@@ -543,7 +519,7 @@
         "feature": "panel:band0",
         "block": "stone_bricks",
         "shipped": "tuff",
-        "sites": 1840,
+        "sites": 1483,
         "missing": 0,
         "tolerated": {
           "residue": 0
@@ -555,7 +531,7 @@
         "feature": "panel:band1",
         "block": "smooth_sandstone",
         "shipped": "smooth_sandstone",
-        "sites": 2439,
+        "sites": 1454,
         "missing": 0,
         "tolerated": {
           "residue": 0
@@ -567,7 +543,7 @@
         "feature": "course",
         "block": "spruce_planks",
         "shipped": "spruce_planks",
-        "sites": 1700,
+        "sites": 831,
         "missing": 0,
         "tolerated": {
           "residue": 0
@@ -590,9 +566,9 @@
         "sites": 6,
         "missingAt": [],
         "toleratedAt": [
-          1,
           2,
           3,
+          4,
           5
         ],
         "gating": true,
@@ -641,34 +617,34 @@
       },
       "frame": {
         "counts": {
-          "wall": 2835,
-          "cornerPost": 69,
-          "roofline": 252,
-          "floorLine": 525
+          "wall": 2199,
+          "cornerPost": 46,
+          "roofline": 343,
+          "floorLine": 132
         },
         "painted": 0,
         "adopted": 0,
-        "respected": 200,
-        "skippedIsolated": 8,
-        "alreadyFrame": 638
+        "respected": 127,
+        "skippedIsolated": 12,
+        "alreadyFrame": 382
       },
       "fill": {
         "placements": 0,
         "byZone": {
           "band0": {
-            "surface": 1840,
+            "surface": 1483,
             "filled": 0,
-            "kept": 1840
+            "kept": 1483
           },
           "band1": {
-            "surface": 2439,
+            "surface": 1454,
             "filled": 0,
-            "kept": 2439
+            "kept": 1454
           },
           "roof": {
-            "surface": 1700,
+            "surface": 831,
             "filled": 0,
-            "kept": 1700
+            "kept": 831
           }
         }
       }
@@ -676,10 +652,10 @@
     "dressing": {
       "stats": {
         "openings": 6,
-        "fullyDressed": 1,
+        "fullyDressed": 2,
         "placements": 0,
         "conflicts": 7,
-        "alreadyDressed": 16
+        "alreadyDressed": 15
       },
       "perOpening": [
         {
@@ -693,10 +669,10 @@
           },
           "applied": {
             "infill": 1,
-            "shutterLeft": 0,
+            "shutterLeft": 1,
             "shutterRight": 1,
-            "lintel": 0,
-            "sill": 0
+            "lintel": 2,
+            "sill": 3
           },
           "placed": {
             "infill": 0,
@@ -705,23 +681,7 @@
             "lintel": 0,
             "sill": 0
           },
-          "conflicts": [
-            {
-              "slot": "shutterLeft",
-              "name": "shutter-no-jamb-left",
-              "reduction": "shutter-dropped"
-            },
-            {
-              "slot": "lintel",
-              "name": "lintel-no-band-cells",
-              "reduction": "lintel-skipped"
-            },
-            {
-              "slot": "sill",
-              "name": "sill-no-band-cells",
-              "reduction": "sill-skipped"
-            }
-          ]
+          "conflicts": []
         },
         {
           "dir": "+x",
@@ -796,9 +756,9 @@
           },
           "applied": {
             "infill": 1,
-            "shutterLeft": 1,
-            "shutterRight": 1,
-            "lintel": 3,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
             "sill": 0
           },
           "placed": {
@@ -809,6 +769,35 @@
             "sill": 0
           },
           "conflicts": [
+            {
+              "slot": "shutterLeft",
+              "name": "shutter-blocked-left",
+              "reduction": "shutter-dropped",
+              "at": [
+                [
+                  -8,
+                  14,
+                  -9
+                ]
+              ]
+            },
+            {
+              "slot": "shutterRight",
+              "name": "shutter-blocked-right",
+              "reduction": "shutter-dropped",
+              "at": [
+                [
+                  -8,
+                  14,
+                  -11
+                ]
+              ]
+            },
+            {
+              "slot": "lintel",
+              "name": "lintel-no-band-cells",
+              "reduction": "lintel-skipped"
+            },
             {
               "slot": "sill",
               "name": "sill-no-band-cells",

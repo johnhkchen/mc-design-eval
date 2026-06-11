@@ -1,0 +1,38 @@
+# Roof as program — church (T-104-01)
+
+The sampled roof replaced by a roof GENERATED from parameters fitted against the component record's GLB fits — stair courses, slab half-steps, solid wedge — swapped under the T-102 cage, behind `npm run roof:church`. **Status: FALLBACK**.
+
+## Fitted gables
+- **gable-roof-1-roof-5** (insane: ridge y 17.5 not above eave y 18.5 (roof-1); ridge y 17.5 not above eave y 17.5 (roof-5); run 0.5 < minRun 2 (roof-5)) ridge x @ y 17.5, hip ends — roof-1 → -z: pitch **0.435** (voxel, glb∠ 23.397°), eave y 18.5, overhang -1; roof-5 → +z: pitch **1.095** (voxel, glb∠ 16.003°), eave y 17.5, overhang -21
+- **gable-roof-3-roof-7** (sane) ridge z @ y 18, hip ends — roof-3 → +x: pitch **1.585** (glb, glb∠ 7.04°), eave y 14, overhang -29; roof-7 → -x: pitch **0.221** (voxel, glb∠ 12.58°), eave y 17, overhang -8
+- **gable-roof-14-roof-15** (insane: no sane pitch (voxel 19, glb 189.361); run 1.444 < minRun 2 (roof-15)) ridge x @ y 32, hip ends — roof-14 → +z: pitch **1.355** (voxel, glb∠ 16.431°), eave y 28, overhang -4; roof-15 → -z: pitch **null** (null, glb∠ 10.914°), eave y 11, overhang 1
+
+## Findings
+- `roof-region-unfitted` @ roof-0: ridge pair not reciprocal — regularized mass stays
+- `fit-source-voxel` @ roof-1: glb fit disagrees (23.397° > 15°) — voxel gradient stands (the cage-held shell)
+- `fit-source-voxel` @ roof-5: glb fit disagrees (16.003° > 15°) — voxel gradient stands (the cage-held shell)
+- `gable-insane` @ gable-roof-1-roof-5: ridge y 17.5 not above eave y 18.5 (roof-1); ridge y 17.5 not above eave y 17.5 (roof-5); run 0.5 < minRun 2 (roof-5)
+- `fit-source-voxel` @ roof-7: glb fit insane pitch 0 — voxel gradient stands (the cage-held shell)
+- `fit-source-voxel` @ roof-14: glb fit disagrees (16.431° > 15°) — voxel gradient stands (the cage-held shell)
+- `gable-insane` @ gable-roof-14-roof-15: no sane pitch (voxel 19, glb 189.361); run 1.444 < minRun 2 (roof-15)
+- `roof-region-unfitted` @ roof-2: pitched, no ridge pair (area 144) — regularized mass stays
+- `roof-region-unfitted` @ roof-4: pitched, no ridge pair (area 21) — regularized mass stays
+- `roof-region-unfitted` @ roof-6: pitched, no ridge pair (area 18) — regularized mass stays
+- `roof-region-unfitted` @ roof-8: pitched, no ridge pair (area 15) — regularized mass stays
+- `roof-region-unfitted` @ roof-9: pitched, no ridge pair (area 15) — regularized mass stays
+- `roof-region-unfitted` @ roof-10: pitched, no ridge pair (area 13) — regularized mass stays
+- `roof-region-unfitted` @ roof-11: pitched, no ridge pair (area 11) — regularized mass stays
+- `roof-region-unfitted` @ roof-12: flat, no ridge pair (area 125) — regularized mass stays
+- `roof-region-unfitted` @ roof-13: flat, no ridge pair (area 53) — regularized mass stays
+- `roof-region-unfitted` @ roof-16: flat, no ridge pair (area 13) — regularized mass stays
+
+## Renders (135°/225°/315° — the azimuths the gate failed)
+- before +x-z: benchmarks/sculpture/roof/church/view-oblique135-before.png
+- before -x-z: benchmarks/sculpture/roof/church/view-oblique225-before.png
+- before -x+z: benchmarks/sculpture/roof/church/view-oblique315-before.png
+
+Frames: (none — GL unavailable)
+
+> stairs-invisible (pinned, T-097): prismarine-viewer 1.33.0 meshes NO stair block at any state — stair placement is proven by the unmapped gate + the committed states, not by pixels; renders show the solid wedge with tread notches.
+
+> ONE judged step with the T-102 cage's checks: per-azimuth silhouette IoU vs the GLB on a MASS VIEW (generated stair/slab courses count as silhouette mass; all other fixtures stay dressing), closure no-regress, protected chimney byte-identical (re-seat additions listed, judged without them). Any regression → auto-rollback, the regularized roof stays, the failure is named (Rule 1).

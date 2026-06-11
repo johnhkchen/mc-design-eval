@@ -1,0 +1,93 @@
+{
+  "schema": "zone-map/v1",
+  "subject": "gatehouse",
+  "source": "concept",
+  "derivedOn": "reconstructed-shell",
+  "repinnedBy": "T-106-01 (component-skin runner — the T-095 review's re-pin protocol)",
+  "shellSha256": "33305fce57339c50c5f67c04b1fe3183662203ca59af112dabf6f39274f3143e",
+  "derived": {
+    "bands": [
+      {
+        "name": "band0",
+        "yRange": [
+          0,
+          22
+        ],
+        "dominantBlock": "stone_bricks",
+        "dominantRole": "structural walls (dominant body)",
+        "share": 1,
+        "secondaries": [
+          {
+            "block": "dark_oak_log",
+            "role": "arch voussoir ring (warm accent)",
+            "share": 0.096
+          },
+          {
+            "block": "deepslate_tiles",
+            "role": "roof mass",
+            "share": 0.571
+          },
+          {
+            "block": "cobblestone",
+            "role": "corner buttresses + rough string-course banding",
+            "share": 0.001
+          },
+          {
+            "block": "dark_oak_planks",
+            "role": "gate door / passage leaf",
+            "share": 0.007
+          }
+        ]
+      }
+    ],
+    "roof": {
+      "dominantBlock": "deepslate_tiles",
+      "dominantRole": "roof mass",
+      "share": 1,
+      "secondaries": [
+        {
+          "block": "stone_bricks",
+          "role": "structural walls (dominant body)",
+          "share": 0.152
+        },
+        {
+          "block": "cobblestone",
+          "role": "corner buttresses + rough string-course banding",
+          "share": 0.004
+        },
+        {
+          "block": "dark_oak_log",
+          "role": "arch voussoir ring (warm accent)",
+          "share": 0
+        },
+        {
+          "block": "dark_oak_planks",
+          "role": "gate door / passage leaf",
+          "share": 0
+        }
+      ]
+    }
+  },
+  "diffVsCommitted": [
+    {
+      "band": "band0",
+      "change": "shifted",
+      "from": {
+        "yRange": [
+          0,
+          17
+        ],
+        "dominant": "stone_bricks"
+      },
+      "to": {
+        "yRange": [
+          0,
+          22
+        ],
+        "dominant": "stone_bricks"
+      }
+    }
+  ],
+  "committedRecord": "zone-map/gatehouse.json",
+  "note": "the committed zone-map/v1 record describes the standalone E-24 derivation (unchanged path); this record pins the bands as derived on the reconstructed shell"
+}
