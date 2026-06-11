@@ -62,6 +62,7 @@ import {
 import { assertArtifact } from "../../src/artifact.mjs";
 import { MULTI_ANGLE_GATE_SCHEMA } from "../../src/form/multi-angle-gate.mjs";
 import { ROTATE_FLAG, guardedWriteRecord } from "../../src/form/pin-guard.mjs";
+import { instrumentReceipt } from "../../src/form/gate-instrument.mjs";
 import { runChain } from "./challenge-milestone.mjs";
 import { grammarStage, renderSheet } from "./placement-grammar.mjs";
 import { SUBJECTS } from "./durable-skin.mjs";
@@ -288,7 +289,10 @@ export function renderMd(r) {
     (kp?.gaps?.length ? `\n${kp.gaps.map((x) => `- \`${x}\``).join("\n")}` : "") + `\n\n` +
     `![sheet](../../../${r.gate.sheet})\n\n` +
     `| view | azimuth | coverage | verdict | gaps |\n|---|---|---|---|---|\n${viewRows}\n\n` +
-    `Gate record: \`${r.gate.record}\` (the sheet is the verdict artifact).\n\n` +
+    `Gate record: \`${r.gate.record}\` (the sheet is the verdict artifact).\n` +
+    (r.instrument
+      ? `Instrument: ${r.instrument.frozen ? `frozen (\`diffs: []\`)` : `DRIFTED — ${r.instrument.diffs.join("; ")}`} vs ${r.instrument.comparedTo}.\n\n`
+      : `\n`) +
     `## Evidence\nFrames: ${r.frames.join(", ") || "(none — GL unavailable)"}; kit report \`${r.kitReport}\`.\n\n` +
     `> ${r.reproducible.determinism}\n`;
 }
@@ -520,10 +524,19 @@ async function main() {
   }
 
   // --- THE GATE (T-100 ∘ T-093, its own CLI + record + sheet; exit code = the verdict) ------------
+  // The prior committed gate record is read BEFORE the gate runs: under --rotate-pins the gate
+  // overwrites it in place, and the same-ruler receipt (T-121-01) compares against that pin.
+  const committedGate = existsSync(gateRecPath) ? JSON.parse(await readFile(gateRecPath, "utf8")) : null;
   console.error(`\n[${def.key}] spawning the kit-aware multi-angle gate (label "${GATE_LABEL}")…`);
   const gateCode = await spawnGate(def.key, paths.finalRel, GATE_LABEL, rotate ? [ROTATE_FLAG] : []);
   const gateRec = existsSync(gateRecPath) ? JSON.parse(await readFile(gateRecPath, "utf8")) : null;
   const gate = distillGate(gateRec, def.key, gateCode);
+  const instrument = instrumentReceipt(committedGate, gateRec, {
+    comparedTo: "prior committed styled-label gate record",
+    fallbackComparedTo: "first styled gate run (no prior committed record)",
+    beforeName: "pinned",
+    afterName: "fresh",
+  });
 
   await writeRec(join(PR_ASSETS, `styled-${def.key}-kit.md`), kitReportMd(def, kitRec, kitSha, gate));
 
@@ -588,6 +601,7 @@ async function main() {
         "pinned model, single sample per view, verdicts committed in the gate record.",
     },
     gate,
+    instrument, // same-ruler receipt (T-121-01): contract + judge model vs the prior committed gate record
     artifacts: { base: def.provision ? paths.baseRel : null, shell: paths.shellRel, grammar: paths.grammarRel, styled: paths.finalRel },
     renders, frames,
     kitReport: kitReportRel,

@@ -84,6 +84,7 @@ import { buildSkin, SUBJECTS } from "./durable-skin.mjs";
 import { shellStage } from "./challenge-milestone.mjs";
 import { styledStretch, spawnGate, distillGate } from "./styled-milestone.mjs";
 import { ROTATE_FLAG, guardedWriteRecord } from "../../src/form/pin-guard.mjs";
+import { instrumentReceipt } from "../../src/form/gate-instrument.mjs";
 import { renderSheet } from "./placement-grammar.mjs";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
@@ -322,26 +323,14 @@ function cageOutcomes(styledArtifact, prov) {
   };
 }
 
-/** Instrument-diff receipts vs the committed styled-label gate record (same-ruler proof). */
-function instrumentDiff(committedGate, freshGate) {
-  if (!freshGate) return { frozen: false, comparedTo: null, diffs: ["no fresh gate record"], judgeModels: [] };
-  const diffs = [];
-  const judgeModels = [...new Set((freshGate.views ?? []).map((v) => v.judge?.model).filter(Boolean))];
-  if (!committedGate) {
-    return { frozen: true, comparedTo: "config (no committed styled-label record)", diffs, judgeModels };
-  }
-  const fields = ["azimuths", "elevationDeg", "width", "height", "gapBudget", "coverageThreshold"];
-  for (const f of fields) {
-    const want = JSON.stringify(committedGate.contract?.[f] ?? null);
-    const got = JSON.stringify(freshGate.contract?.[f] ?? null);
-    if (want !== got) diffs.push(`contract.${f}: styled ${want} → generated ${got}`);
-  }
-  const committedModels = new Set((committedGate.views ?? []).map((v) => v.judge?.model).filter(Boolean));
-  for (const m of judgeModels) {
-    if (committedModels.size && !committedModels.has(m)) diffs.push(`judge.model: ${m} not among styled-label models`);
-  }
-  return { frozen: diffs.length === 0, comparedTo: "committed styled-label gate record", diffs, judgeModels };
-}
+/** Instrument-diff receipt vs the committed styled-label gate record (same-ruler proof) —
+ *  the shared `instrumentReceipt` (T-121-01), parameterized for this runner's comparator. */
+const INSTRUMENT_NAMES = {
+  comparedTo: "committed styled-label gate record",
+  fallbackComparedTo: "config (no committed styled-label record)",
+  beforeName: "styled",
+  afterName: "generated",
+};
 
 /** AC #4 — the head-to-head row: this run beside the committed repair-path verdicts. */
 async function headToHead(def, gate, census, fit) {
@@ -559,7 +548,7 @@ async function main() {
   // --- receipts + evidence -------------------------------------------------------------------------
   const styledGateRecPath = join(HERE, "multi-angle", `${def.key}-styled.json`);
   const committedStyledGate = existsSync(styledGateRecPath) ? JSON.parse(await readFile(styledGateRecPath, "utf8")) : null;
-  const instrument = instrumentDiff(committedStyledGate, gateRec);
+  const instrument = instrumentReceipt(committedStyledGate, gateRec, INSTRUMENT_NAMES);
   const census = censusOf(artifactOccupancy(r1.styled), r1.gen);
   const cage = cageOutcomes(r1.styled, r1);
   const h2h = await headToHead(def, gate, census, r1.fit);
