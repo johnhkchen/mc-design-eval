@@ -1,0 +1,885 @@
+{
+  "schema": "multi-angle-gate/v1",
+  "subject": "cottage",
+  "label": "styled",
+  "artifact": {
+    "path": "benchmarks/sculpture/styled/cottage/artifact.json",
+    "sha256": "33ffd0c825a04eeb481740a22268386249a95581fe0af712d20cbb9232d4a48f"
+  },
+  "contract": {
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "elevationDeg": 30,
+    "width": 512,
+    "height": 512,
+    "gapBudget": 2,
+    "coverageThreshold": 0.5,
+    "note": "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them"
+  },
+  "zones": {
+    "source": "concept",
+    "reason": null,
+    "policy": {
+      "band0": {
+        "dominant": "tuff",
+        "preserve": [
+          "dark_oak_log",
+          "spruce_planks",
+          "cobblestone",
+          "bricks"
+        ]
+      },
+      "band1": {
+        "dominant": "smooth_sandstone",
+        "preserve": [
+          "spruce_planks",
+          "dark_oak_log",
+          "cobblestone",
+          "bricks"
+        ]
+      },
+      "roof": {
+        "dominant": "spruce_planks",
+        "preserve": [
+          "spruce_planks",
+          "dark_oak_log",
+          "tuff",
+          "cobblestone",
+          "bricks"
+        ]
+      }
+    },
+    "substitutionApplied": {
+      "stone_bricks": "tuff",
+      "white_terracotta": "sandstone"
+    },
+    "kitOverridesApplied": {
+      "white_terracotta": "smooth_sandstone",
+      "dark_oak_planks": "spruce_planks"
+    }
+  },
+  "views": [
+    {
+      "angle": "+x+z",
+      "azimuthDeg": 45,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-styled/view-+x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "tuff",
+            "fraction": 1,
+            "total": 97,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "tuff",
+              "dark_oak_log",
+              "spruce_planks",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.32
+          },
+          "band1": {
+            "dominant": "smooth_sandstone",
+            "fraction": 0.957,
+            "total": 138,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "smooth_sandstone",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.101
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 298,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "spruce_planks",
+              "dark_oak_log",
+              "tuff",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.832
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof versus walls overall",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "upper timber-framed storey",
+            "attribute": "material zoning",
+            "severity": "minor"
+          },
+          {
+            "region": "roof slopes and ridge",
+            "attribute": "form",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The stone base, cream timber-framed storey, and dark roof palette all read as the same cottage, but the roof mass overhangs and swallows the upper storey so the building's storey proportions are visibly off from this angle."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10461,
+          "output_tokens": 715,
+          "cost_usd": 0.17042
+        }
+      }
+    },
+    {
+      "angle": "+x-z",
+      "azimuthDeg": 135,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-styled/view-+x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "tuff",
+            "fraction": 0.98,
+            "total": 149,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "tuff",
+              "dark_oak_log",
+              "spruce_planks",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.604
+          },
+          "band1": {
+            "dominant": "smooth_sandstone",
+            "fraction": 0.895,
+            "total": 76,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "smooth_sandstone",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.276
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 0.99,
+            "total": 299,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "spruce_planks",
+              "dark_oak_log",
+              "tuff",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.903
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "same object",
+        "gaps": [
+          {
+            "region": "roof eaves overhang on the near side",
+            "attribute": "massing",
+            "severity": "minor"
+          },
+          {
+            "region": "chimney atop the roof",
+            "attribute": "form",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "Stone ground storey, cream-and-timber upper walls, and the dominant brown shingled roof all read true against the concept and match the mesh massing at this azimuth, with only a slightly heavier eave overhang and an indistinct chimney as cosmetic differences."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10461,
+          "output_tokens": 661,
+          "cost_usd": 0.16907
+        }
+      }
+    },
+    {
+      "angle": "-x-z",
+      "azimuthDeg": 225,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-styled/view--x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "tuff",
+            "fraction": 0.996,
+            "total": 232,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "tuff",
+              "dark_oak_log",
+              "spruce_planks",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.797
+          },
+          "band1": {
+            "dominant": "smooth_sandstone",
+            "fraction": 0.867,
+            "total": 128,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "smooth_sandstone",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.484
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 0.992,
+            "total": 264,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "spruce_planks",
+              "dark_oak_log",
+              "tuff",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.992
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "same object",
+        "gaps": [
+          {
+            "region": "roof ridge and slopes",
+            "attribute": "form",
+            "severity": "minor"
+          },
+          {
+            "region": "upper-storey timber framing",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "Stone base, cream timber-framed upper storey, brown pitched roof with chimney all read true from this angle and match the mesh massing; only the roof surface is slightly lumpier and the timber framing less crisp than the concept."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10461,
+          "output_tokens": 757,
+          "cost_usd": 0.17147
+        }
+      }
+    },
+    {
+      "angle": "-x+z",
+      "azimuthDeg": 315,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-styled/view--x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "tuff",
+            "fraction": 1,
+            "total": 168,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "tuff",
+              "dark_oak_log",
+              "spruce_planks",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.696
+          },
+          "band1": {
+            "dominant": "smooth_sandstone",
+            "fraction": 0.939,
+            "total": 181,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "smooth_sandstone",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.331
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 0.992,
+            "total": 263,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "spruce_planks",
+              "dark_oak_log",
+              "tuff",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.939
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof across the whole upper mass",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "overall building outline / eaves",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "stone ground storey base",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The palette and three-zone stone/timber/wood material story still read as the same cottage, but the roof has collapsed into a lumpy, broken jumble that fails to match the clean gabled silhouette in the mesh panel, so the form has clearly drifted."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10461,
+          "output_tokens": 633,
+          "cost_usd": 0.16837
+        }
+      }
+    }
+  ],
+  "aggregate": {
+    "schema": "multi-angle-gate/v1",
+    "decided": true,
+    "passed": false,
+    "gapCount": 10,
+    "gapBudget": 2,
+    "gaps": [
+      {
+        "angle": "+x+z",
+        "region": "roof versus walls overall",
+        "attribute": "massing"
+      },
+      {
+        "angle": "+x+z",
+        "region": "upper timber-framed storey",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "+x+z",
+        "region": "roof slopes and ridge",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x-z",
+        "region": "roof eaves overhang on the near side",
+        "attribute": "massing"
+      },
+      {
+        "angle": "+x-z",
+        "region": "chimney atop the roof",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x-z",
+        "region": "roof ridge and slopes",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x-z",
+        "region": "upper-storey timber framing",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x+z",
+        "region": "roof across the whole upper mass",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x+z",
+        "region": "overall building outline / eaves",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x+z",
+        "region": "stone ground storey base",
+        "attribute": "material zoning"
+      }
+    ],
+    "failures": [
+      {
+        "angle": "+x+z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x+z",
+        "reason": "drifted"
+      }
+    ],
+    "views": [
+      {
+        "angle": "+x+z",
+        "outcome": "drifted: massing"
+      },
+      {
+        "angle": "+x-z",
+        "outcome": "same object (2 minor)"
+      },
+      {
+        "angle": "-x-z",
+        "outcome": "same object (2 minor)"
+      },
+      {
+        "angle": "-x+z",
+        "outcome": "drifted: form"
+      }
+    ]
+  },
+  "kitPresence": {
+    "schema": "kit-presence/v1",
+    "passed": true,
+    "checks": [
+      {
+        "feature": "frame",
+        "block": "spruce_planks",
+        "shipped": "spruce_planks",
+        "sites": 520,
+        "missing": 0,
+        "satisfied": 383,
+        "tolerated": {
+          "respected": 125,
+          "skippedIsolated": 12
+        },
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "panel:band0",
+        "block": "stone_bricks",
+        "shipped": "tuff",
+        "sites": 1483,
+        "missing": 0,
+        "tolerated": {
+          "residue": 0
+        },
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "panel:band1",
+        "block": "smooth_sandstone",
+        "shipped": "smooth_sandstone",
+        "sites": 1397,
+        "missing": 0,
+        "tolerated": {
+          "residue": 0
+        },
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "course",
+        "block": "spruce_planks",
+        "shipped": "spruce_planks",
+        "sites": 812,
+        "missing": 0,
+        "tolerated": {
+          "residue": 0
+        },
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "openings:infill",
+        "block": "spruce_fence",
+        "sites": 6,
+        "missingAt": [],
+        "toleratedAt": [],
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "openings:shutters",
+        "block": "spruce_trapdoor",
+        "sites": 6,
+        "missingAt": [],
+        "toleratedAt": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "openings:lintel-sill",
+        "placed": 0,
+        "gating": false,
+        "passed": null
+      }
+    ],
+    "gaps": [],
+    "skips": [
+      {
+        "feature": "openings:door",
+        "reason": "no door-kind aperture declared by the concept (T-099 D7 — detector gap, not absence)"
+      },
+      {
+        "feature": "openings:light",
+        "reason": "no door-kind aperture declared by the concept (T-099 D7 — detector gap, not absence)"
+      }
+    ],
+    "grammar": {
+      "bindings": {
+        "frame": "spruce_planks",
+        "panels": {
+          "band0": "stone_bricks",
+          "band1": "smooth_sandstone"
+        },
+        "course": "spruce_planks",
+        "openingTreatments": [
+          "spruce_trapdoor",
+          "lantern",
+          "spruce_door"
+        ],
+        "skipped": []
+      },
+      "shipped": {
+        "frame": "spruce_planks",
+        "panels": {
+          "band0": "tuff",
+          "band1": "smooth_sandstone"
+        },
+        "course": "spruce_planks"
+      },
+      "frame": {
+        "counts": {
+          "wall": 2178,
+          "cornerPost": 46,
+          "roofline": 342,
+          "floorLine": 132
+        },
+        "painted": 0,
+        "adopted": 0,
+        "respected": 125,
+        "skippedIsolated": 12,
+        "alreadyFrame": 383
+      },
+      "fill": {
+        "placements": 0,
+        "byZone": {
+          "band0": {
+            "surface": 1483,
+            "filled": 0,
+            "kept": 1483
+          },
+          "band1": {
+            "surface": 1397,
+            "filled": 0,
+            "kept": 1397
+          },
+          "roof": {
+            "surface": 812,
+            "filled": 0,
+            "kept": 812
+          }
+        }
+      }
+    },
+    "dressing": {
+      "stats": {
+        "openings": 6,
+        "fullyDressed": 2,
+        "placements": 0,
+        "conflicts": 7,
+        "alreadyDressed": 15
+      },
+      "perOpening": [
+        {
+          "dir": "+x",
+          "kind": "window",
+          "bbox": {
+            "u0": 6,
+            "v0": 12,
+            "u1": 6,
+            "v1": 12
+          },
+          "applied": {
+            "infill": 1,
+            "shutterLeft": 1,
+            "shutterRight": 1,
+            "lintel": 2,
+            "sill": 3
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": []
+        },
+        {
+          "dir": "+x",
+          "kind": "window",
+          "bbox": {
+            "u0": 14,
+            "v0": 17,
+            "u1": 14,
+            "v1": 17
+          },
+          "applied": {
+            "infill": 1,
+            "shutterLeft": 1,
+            "shutterRight": 0,
+            "lintel": 3,
+            "sill": 3
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "shutterRight",
+              "name": "shutter-no-jamb-right",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "+x",
+          "kind": "window",
+          "bbox": {
+            "u0": 5,
+            "v0": 20,
+            "u1": 6,
+            "v1": 20
+          },
+          "applied": {
+            "infill": 2,
+            "shutterLeft": 0,
+            "shutterRight": 1,
+            "lintel": 4,
+            "sill": 4
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "shutterLeft",
+              "name": "shutter-no-jamb-left",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "-x",
+          "kind": "window",
+          "bbox": {
+            "u0": 25,
+            "v0": 12,
+            "u1": 25,
+            "v1": 12
+          },
+          "applied": {
+            "infill": 1,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "shutterLeft",
+              "name": "shutter-blocked-left",
+              "reduction": "shutter-dropped",
+              "at": [
+                [
+                  -8,
+                  14,
+                  -9
+                ]
+              ]
+            },
+            {
+              "slot": "shutterRight",
+              "name": "shutter-blocked-right",
+              "reduction": "shutter-dropped",
+              "at": [
+                [
+                  -8,
+                  14,
+                  -11
+                ]
+              ]
+            },
+            {
+              "slot": "lintel",
+              "name": "lintel-no-band-cells",
+              "reduction": "lintel-skipped"
+            },
+            {
+              "slot": "sill",
+              "name": "sill-no-band-cells",
+              "reduction": "sill-skipped"
+            }
+          ]
+        },
+        {
+          "dir": "-x",
+          "kind": "window",
+          "bbox": {
+            "u0": 17,
+            "v0": 17,
+            "u1": 17,
+            "v1": 17
+          },
+          "applied": {
+            "infill": 1,
+            "shutterLeft": 0,
+            "shutterRight": 1,
+            "lintel": 2,
+            "sill": 2
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "shutterLeft",
+              "name": "shutter-no-jamb-left",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "-x",
+          "kind": "window",
+          "bbox": {
+            "u0": 25,
+            "v0": 20,
+            "u1": 26,
+            "v1": 20
+          },
+          "applied": {
+            "infill": 2,
+            "shutterLeft": 1,
+            "shutterRight": 1,
+            "lintel": 4,
+            "sill": 4
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": []
+        }
+      ]
+    }
+  },
+  "overall": {
+    "schema": "kit-aware-gate/v1",
+    "decided": true,
+    "passed": false,
+    "components": {
+      "resemblance": {
+        "decided": true,
+        "passed": false
+      },
+      "kitPresence": {
+        "ran": true,
+        "passed": true,
+        "gaps": []
+      }
+    }
+  },
+  "sheet": "pr/assets/frames/multi-angle-cottage-styled.png",
+  "labeled": true
+}

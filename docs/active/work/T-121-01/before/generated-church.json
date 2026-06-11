@@ -1,0 +1,952 @@
+{
+  "schema": "generated-milestone/v1",
+  "subject": "church",
+  "status": "gated",
+  "pipelineOrder": "evidence (voxelize @ registry scale → in-memory shellStage conditioning) → provision-fit (full component set, named refusals) → provision-generate (zero blob cells, provenance-checked + record-regenerated) → skin (S-113 authority) → styled stretch (shared grammar/dressing/settle op) → frozen kit-aware gate (label generated) → cage evidence + head-to-head",
+  "inputs": {
+    "concept": "runs/016-vBuilding-a-village-church-with-a-square-bell-tower/concept.png",
+    "glb": "glb/church.glb",
+    "map": "material-map/church.json",
+    "kitRecord": "kit/church.json",
+    "kitSha256": "164a2f7e2bfe81a935b58e020334a274da246c64faaaae2f961fa2411079a810",
+    "scale": 48,
+    "alignment": "registry-scale",
+    "generationBands": {
+      "record": "zone-map/church.json",
+      "used": true
+    }
+  },
+  "fit": {
+    "masses": [
+      {
+        "id": "mass-0",
+        "role": "primary",
+        "area": 1139,
+        "baseY": 0,
+        "wallTop": 14,
+        "wallTopSource": "eave-fit",
+        "heightDisagreement": 9,
+        "findings": [
+          "footprint-degenerate-run",
+          "footprint-degenerate-run",
+          "footprint-degenerate-run",
+          "footprint-degenerate-run",
+          "footprint-degenerate-run"
+        ]
+      },
+      {
+        "id": "mass-1",
+        "role": "attached",
+        "area": 207,
+        "baseY": 0,
+        "wallTop": 28,
+        "wallTopSource": "eave-fit",
+        "heightDisagreement": 4,
+        "findings": []
+      },
+      {
+        "id": "mass-2",
+        "role": "attached",
+        "area": 13,
+        "baseY": 7,
+        "wallTop": 7,
+        "wallTopSource": "mass-top",
+        "heightDisagreement": 0,
+        "findings": [
+          "footprint-degenerate-run",
+          "walltop-default"
+        ]
+      },
+      {
+        "id": "mass-3",
+        "role": "protrusion",
+        "area": 5,
+        "baseY": 31,
+        "wallTop": 32,
+        "wallTopSource": "mass-top",
+        "heightDisagreement": 0,
+        "findings": []
+      },
+      {
+        "id": "mass-4",
+        "role": "protrusion",
+        "area": 12,
+        "baseY": 18,
+        "wallTop": 22,
+        "wallTopSource": "mass-top",
+        "heightDisagreement": 0,
+        "findings": []
+      }
+    ],
+    "roofs": [
+      {
+        "massId": "mass-0",
+        "kind": "gable",
+        "gables": [
+          {
+            "id": "gable-roof-3-roof-7",
+            "sane": true,
+            "sides": [
+              {
+                "planeId": "roof-3",
+                "pitch": 1.585,
+                "pitchSource": "glb",
+                "eaveY": 14
+              },
+              {
+                "planeId": "roof-7",
+                "pitch": 0.221,
+                "pitchSource": "voxel",
+                "eaveY": 17
+              }
+            ],
+            "ends": {
+              "lo": null,
+              "hi": null
+            }
+          }
+        ],
+        "ridgeFit": [
+          {
+            "id": "gable-roof-3-roof-7",
+            "deltaVsRecord": 0.378
+          }
+        ],
+        "findings": []
+      },
+      {
+        "massId": "mass-1",
+        "kind": "hip-cap",
+        "gables": [
+          {
+            "id": "hip-cap-mass-1",
+            "sane": true,
+            "sides": [
+              {
+                "planeId": null,
+                "pitch": 1.305,
+                "pitchSource": "glb-quadrant",
+                "eaveY": 28
+              },
+              {
+                "planeId": null,
+                "pitch": 0.43,
+                "pitchSource": "glb-quadrant",
+                "eaveY": 28
+              },
+              {
+                "planeId": "roof-14",
+                "pitch": 1.355,
+                "pitchSource": "voxel",
+                "eaveY": 28
+              },
+              {
+                "planeId": "roof-15",
+                "pitch": 2.495,
+                "pitchSource": "glb-quadrant",
+                "eaveY": 28
+              }
+            ],
+            "ends": null,
+            "capFit": {
+              "eaveY": 28,
+              "apex": {
+                "constructedY": 31.5,
+                "glbMaxY": 36.463
+              }
+            }
+          }
+        ],
+        "ridgeFit": [],
+        "findings": []
+      }
+    ],
+    "openings": [
+      {
+        "id": "og-0",
+        "dir": "+x",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          },
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-1",
+        "dir": "+x",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-2",
+        "dir": "-x",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          },
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-3",
+        "dir": "-x",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-4",
+        "dir": "+z",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-5",
+        "dir": "+z",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0.5,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-6",
+        "dir": "+z",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0.577,
+            "refusal": null
+          },
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-7",
+        "dir": "+z",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          },
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-8",
+        "dir": "+z",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-9",
+        "dir": "+z",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          },
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-10",
+        "dir": "+z",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          },
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-11",
+        "dir": "+z",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0.378,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-12",
+        "dir": "-z",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-13",
+        "dir": "-z",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0.5,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-14",
+        "dir": "-z",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0.577,
+            "refusal": null
+          },
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-15",
+        "dir": "-z",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          },
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-16",
+        "dir": "-z",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-17",
+        "dir": "-z",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          },
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-18",
+        "dir": "-z",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          },
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-19",
+        "dir": "-z",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0.378,
+            "refusal": null
+          }
+        ]
+      }
+    ],
+    "findings": [
+      {
+        "code": "glb-fit-missing",
+        "where": "roof-8",
+        "stage": "decompose"
+      },
+      {
+        "code": "slab-low-coverage",
+        "where": "mass-0-wall--x",
+        "stage": "decompose"
+      },
+      {
+        "code": "slab-low-coverage",
+        "where": "mass-0-wall-+z",
+        "stage": "decompose"
+      },
+      {
+        "code": "slab-low-coverage",
+        "where": "mass-0-wall--z",
+        "stage": "decompose"
+      },
+      {
+        "code": "roof-region-unfitted",
+        "where": "roof-0",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "fit-source-voxel",
+        "where": "roof-1",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "fit-source-voxel",
+        "where": "roof-5",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "gable-insane",
+        "where": "gable-roof-1-roof-5",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "fit-source-voxel",
+        "where": "roof-7",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "fit-source-voxel",
+        "where": "roof-14",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "gable-insane",
+        "where": "gable-roof-14-roof-15",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "roof-region-unfitted",
+        "where": "roof-2",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "roof-region-unfitted",
+        "where": "roof-4",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "roof-region-unfitted",
+        "where": "roof-6",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "roof-region-unfitted",
+        "where": "roof-8",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "roof-region-unfitted",
+        "where": "roof-9",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "roof-region-unfitted",
+        "where": "roof-10",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "roof-region-unfitted",
+        "where": "roof-11",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "roof-region-unfitted",
+        "where": "roof-12",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "roof-region-unfitted",
+        "where": "roof-13",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "roof-region-unfitted",
+        "where": "roof-16",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "end-hip",
+        "where": "gable-roof-3-roof-7:-z",
+        "stage": "roof-end-fit"
+      },
+      {
+        "code": "end-hip",
+        "where": "gable-roof-3-roof-7:+z",
+        "stage": "roof-end-fit"
+      },
+      {
+        "code": "hip-end-unfitted",
+        "where": "gable-roof-3-roof-7:hi",
+        "stage": "hip-end-fit"
+      },
+      {
+        "code": "footprint-degenerate-run",
+        "where": "mass-0",
+        "stage": "mass-fit"
+      },
+      {
+        "code": "footprint-degenerate-run",
+        "where": "mass-0",
+        "stage": "mass-fit"
+      },
+      {
+        "code": "footprint-degenerate-run",
+        "where": "mass-0",
+        "stage": "mass-fit"
+      },
+      {
+        "code": "footprint-degenerate-run",
+        "where": "mass-0",
+        "stage": "mass-fit"
+      },
+      {
+        "code": "footprint-degenerate-run",
+        "where": "mass-0",
+        "stage": "mass-fit"
+      },
+      {
+        "code": "footprint-degenerate-run",
+        "where": "mass-2",
+        "stage": "mass-fit"
+      },
+      {
+        "code": "walltop-default",
+        "where": "mass-2",
+        "stage": "mass-fit"
+      }
+    ]
+  },
+  "generation": {
+    "counts": {
+      "mass": 7441,
+      "roof": 471,
+      "carved": 270
+    },
+    "findings": [
+      {
+        "code": "mass-unsupported",
+        "where": "mass-3",
+        "detail": "protrusion base y=31 rests on no generated cell (the blob support was never built) — omitted, registered"
+      },
+      {
+        "code": "mass-unsupported",
+        "where": "mass-4",
+        "detail": "protrusion base y=18 rests on no generated cell (the blob support was never built) — omitted, registered"
+      }
+    ]
+  },
+  "zeroBlob": {
+    "passed": true,
+    "cells": 7859,
+    "bySource": {
+      "mass": 7388,
+      "roof": 471
+    },
+    "regeneratedFromRecord": true,
+    "blobOverlap": {
+      "cells": 3080,
+      "fraction": 0.3919,
+      "note": "EVIDENCE of fit quality — overlap with blob POSITIONS is the cage working; the gate is provenance"
+    }
+  },
+  "cage": {
+    "iouVsGlb": {
+      "+x+z": 0.7954232837313993,
+      "+x-z": 0.8397999188860349,
+      "-x-z": 0.8187302765917951,
+      "-x+z": 0.7766527001862198
+    },
+    "iouVsBlob": {
+      "+x+z": 0.8384322398329033,
+      "+x-z": 0.8520555479169531,
+      "-x-z": 0.8422487543480305,
+      "-x+z": 0.8402409638554217
+    },
+    "blobIouVsGlb": {
+      "+x+z": 0.8977915432265015,
+      "+x-z": 0.9463575250377281,
+      "-x-z": 0.9247555326814205,
+      "-x+z": 0.8663459281858719
+    },
+    "closure": {
+      "reached": 5262,
+      "byDirection": {
+        "+x": 13,
+        "-x": 22,
+        "+y": 2367,
+        "-y": 0,
+        "+z": 92,
+        "-z": 0
+      }
+    },
+    "conditioning": {
+      "regularize": {
+        "accepted": 2,
+        "rejected": 0
+      },
+      "note": "in-memory evidence conditioning (closure + T-102 cage on the blob) — never written, never copied"
+    }
+  },
+  "census": {
+    "spikes": 62,
+    "ragged": 70,
+    "columns": 708,
+    "raggedRate": 0.0989,
+    "declared": {
+      "sheetCells": 0,
+      "capCells": 17,
+      "note": "open-underside sheet courses and ridge caps are declared constructions (T-108/109)"
+    }
+  },
+  "skin": {
+    "upperTop": 13,
+    "zoneMapSource": "concept"
+  },
+  "settle": {
+    "iterations": 0,
+    "trail": [],
+    "tolerated": {
+      "fillResidue": 4,
+      "dressing": 4
+    }
+  },
+  "gate": {
+    "outcome": "FAIL",
+    "resemblance": {
+      "decided": true,
+      "passed": false,
+      "gapCount": 12,
+      "gapBudget": 2,
+      "failures": [
+        {
+          "angle": "+x+z",
+          "reason": "drifted"
+        },
+        {
+          "angle": "+x-z",
+          "reason": "drifted"
+        },
+        {
+          "angle": "-x-z",
+          "reason": "drifted"
+        },
+        {
+          "angle": "-x+z",
+          "reason": "drifted"
+        }
+      ],
+      "refusal": null
+    },
+    "kitPresence": {
+      "ran": null,
+      "passed": true,
+      "reason": null,
+      "gaps": [],
+      "skips": [
+        "panel:band0 (no-candidate)",
+        "course (no-candidate)",
+        "openings:infill (kit names no treatment for this slot)",
+        "openings:shutters (kit names no treatment for this slot)",
+        "openings:door (no door-kind aperture declared by the concept (T-099 D7 — detector gap, not absence))"
+      ]
+    },
+    "perView": [
+      {
+        "angle": "+x+z",
+        "azimuthDeg": 45,
+        "coverage": true,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "nave roof (entire upper structure)",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "whole building wall vs roof",
+            "attribute": "material zoning",
+            "severity": "major"
+          },
+          {
+            "region": "tower cap at back",
+            "attribute": "form",
+            "severity": "minor"
+          }
+        ]
+      },
+      {
+        "angle": "+x-z",
+        "azimuthDeg": 135,
+        "coverage": true,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "main hall and tower roof",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "roof across whole structure",
+            "attribute": "material zoning",
+            "severity": "major"
+          },
+          {
+            "region": "nave body, open hollow shell",
+            "attribute": "massing",
+            "severity": "minor"
+          }
+        ]
+      },
+      {
+        "angle": "-x-z",
+        "azimuthDeg": 225,
+        "coverage": true,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof across the whole structure",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "walls vs roof (whole build)",
+            "attribute": "material zoning",
+            "severity": "major"
+          },
+          {
+            "region": "tower at the right end",
+            "attribute": "massing",
+            "severity": "minor"
+          }
+        ]
+      },
+      {
+        "angle": "-x+z",
+        "azimuthDeg": 315,
+        "coverage": true,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "entire roof / top of nave and tower",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "whole structure (walls vs roof)",
+            "attribute": "material zoning",
+            "severity": "major"
+          },
+          {
+            "region": "tower cap at near corner",
+            "attribute": "form",
+            "severity": "minor"
+          }
+        ]
+      }
+    ],
+    "record": "benchmarks/sculpture/multi-angle/church-generated.json",
+    "sheet": "pr/assets/frames/multi-angle-church-generated.png"
+  },
+  "instrument": {
+    "frozen": true,
+    "comparedTo": "committed styled-label gate record",
+    "diffs": [],
+    "judgeModels": [
+      "claude-opus-4-8"
+    ]
+  },
+  "headToHead": {
+    "subject": "church",
+    "generated": {
+      "outcome": "FAIL",
+      "gapCount": 12,
+      "gapBudget": 2,
+      "perView": [
+        {
+          "angle": "+x+z",
+          "verdict": "drifted",
+          "gaps": 3
+        },
+        {
+          "angle": "+x-z",
+          "verdict": "drifted",
+          "gaps": 3
+        },
+        {
+          "angle": "-x-z",
+          "verdict": "drifted",
+          "gaps": 3
+        },
+        {
+          "angle": "-x+z",
+          "verdict": "drifted",
+          "gaps": 3
+        }
+      ],
+      "kitPresence": true,
+      "census": {
+        "spikes": 62,
+        "ragged": 70,
+        "raggedRate": 0.0989
+      },
+      "fitRefusals": 31
+    },
+    "repairPath": {
+      "source": "reconstructed/church.json (T-111-01)",
+      "outcome": "pipeline-failed",
+      "gapCount": null,
+      "gapBudget": null,
+      "perView": [],
+      "kitPresence": null,
+      "census": {
+        "spikes": 204,
+        "ragged": 218,
+        "columns": 1370,
+        "raggedRate": 0.1591,
+        "source": "styled/church/reconstructed-artifact.json"
+      },
+      "freshest": {
+        "source": "styled/church.json",
+        "outcome": "FAIL",
+        "gapCount": 12,
+        "kitPresence": true
+      }
+    }
+  },
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  },
+  "reproducible": {
+    "doubleRun": "byte-identical (in-process)",
+    "sha256": {
+      "base": "d42747271c92cfa32bdb73dc9dd54b58c409c404e8b6d4110a3ed4ec8b76f2b7",
+      "grammarFinal": "b7477fb7f80fb45f1aff098edeaefa541df2039bc0c7653cb24e9f0b5107d920",
+      "styled": "77409a8613aa39ed8a094bc55691c04abcbbb862e53d958fe3062cfcc5511a9e",
+      "fit": "6b5c3e27d5387758cb690a7d646a0163efc8fd58d36adb46fbf034d5785233c8"
+    }
+  },
+  "sheets": {
+    "generated": "benchmarks/sculpture/generated/church/generated-sheet.png",
+    "renders": [
+      {
+        "angle": "+x+z",
+        "path": "benchmarks/sculpture/generated/church/view-generated-pxpz.png"
+      },
+      {
+        "angle": "+x-z",
+        "path": "benchmarks/sculpture/generated/church/view-generated-pxmz.png"
+      },
+      {
+        "angle": "-x-z",
+        "path": "benchmarks/sculpture/generated/church/view-generated-mxmz.png"
+      },
+      {
+        "angle": "-x+z",
+        "path": "benchmarks/sculpture/generated/church/view-generated-mxpz.png"
+      }
+    ]
+  },
+  "artifacts": {
+    "base": "generated/church/base-artifact.json",
+    "grammar": "generated/church/grammar-artifact.json",
+    "final": "generated/church/artifact.json",
+    "fitRecord": "generated/church/provision-fit.json",
+    "plan": "generated/church/component-plan.json"
+  }
+}

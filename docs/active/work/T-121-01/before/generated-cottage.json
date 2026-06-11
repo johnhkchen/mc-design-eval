@@ -1,0 +1,609 @@
+{
+  "schema": "generated-milestone/v1",
+  "subject": "cottage",
+  "status": "gated",
+  "pipelineOrder": "evidence (voxelize @ registry scale → in-memory shellStage conditioning) → provision-fit (full component set, named refusals) → provision-generate (zero blob cells, provenance-checked + record-regenerated) → skin (S-113 authority) → styled stretch (shared grammar/dressing/settle op) → frozen kit-aware gate (label generated) → cage evidence + head-to-head",
+  "inputs": {
+    "concept": "runs/014-vConcept-a-cottage/concept.png",
+    "glb": "glb/cottage.glb",
+    "map": "material-map/cottage.json",
+    "kitRecord": "kit/cottage.json",
+    "kitSha256": "8cc6d06dc850e12b6e576dc56834a4d16b8c55a6b7e88ac68bb934551e8fa78b",
+    "scale": 32,
+    "alignment": "registry-scale",
+    "generationBands": {
+      "record": "zone-map/cottage.json",
+      "used": true
+    }
+  },
+  "fit": {
+    "masses": [
+      {
+        "id": "mass-0",
+        "role": "primary",
+        "area": 649,
+        "baseY": 0,
+        "wallTop": 14,
+        "wallTopSource": "eave-fit",
+        "heightDisagreement": 10,
+        "findings": []
+      },
+      {
+        "id": "mass-1",
+        "role": "protrusion",
+        "area": 8,
+        "baseY": 19,
+        "wallTop": 26,
+        "wallTopSource": "mass-top",
+        "heightDisagreement": 0,
+        "findings": []
+      }
+    ],
+    "roofs": [
+      {
+        "massId": "mass-0",
+        "kind": "gable",
+        "gables": [
+          {
+            "id": "gable-roof-0-roof-4",
+            "sane": true,
+            "sides": [
+              {
+                "planeId": "roof-0",
+                "pitch": 0.765,
+                "pitchSource": "glb",
+                "eaveY": 15
+              },
+              {
+                "planeId": "roof-4",
+                "pitch": 1.884,
+                "pitchSource": "voxel",
+                "eaveY": 18.5
+              }
+            ],
+            "ends": {
+              "lo": -16,
+              "hi": 15
+            }
+          },
+          {
+            "id": "gable-roof-2-roof-3",
+            "sane": true,
+            "sides": [
+              {
+                "planeId": "roof-2",
+                "pitch": 0.453,
+                "pitchSource": "glb",
+                "eaveY": 14.5
+              },
+              {
+                "planeId": "roof-3",
+                "pitch": 0.885,
+                "pitchSource": "glb",
+                "eaveY": 15
+              }
+            ],
+            "ends": {
+              "lo": null,
+              "hi": 12
+            }
+          }
+        ],
+        "ridgeFit": [
+          {
+            "id": "gable-roof-0-roof-4",
+            "deltaVsRecord": -1.46
+          },
+          {
+            "id": "gable-roof-2-roof-3",
+            "deltaVsRecord": -2.136
+          }
+        ],
+        "findings": []
+      }
+    ],
+    "openings": [
+      {
+        "id": "og-0",
+        "dir": "+x",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-1",
+        "dir": "+x",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-2",
+        "dir": "+x",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "none",
+            "rmse": 0.707,
+            "refusal": "flat-out-of-tolerance"
+          }
+        ]
+      },
+      {
+        "id": "og-3",
+        "dir": "+x",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-4",
+        "dir": "-x",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-5",
+        "dir": "-x",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      },
+      {
+        "id": "og-6",
+        "dir": "-x",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "none",
+            "rmse": 0.707,
+            "refusal": "flat-out-of-tolerance"
+          }
+        ]
+      },
+      {
+        "id": "og-7",
+        "dir": "-x",
+        "kind": "window",
+        "heads": [
+          {
+            "kind": "flat",
+            "rmse": 0,
+            "refusal": null
+          }
+        ]
+      }
+    ],
+    "findings": [
+      {
+        "code": "glb-fit-missing",
+        "where": "roof-7",
+        "stage": "decompose"
+      },
+      {
+        "code": "slab-low-coverage",
+        "where": "mass-0-wall-+x",
+        "stage": "decompose"
+      },
+      {
+        "code": "slab-low-coverage",
+        "where": "mass-0-wall--x",
+        "stage": "decompose"
+      },
+      {
+        "code": "slab-low-coverage",
+        "where": "mass-0-wall-+z",
+        "stage": "decompose"
+      },
+      {
+        "code": "slab-low-coverage",
+        "where": "mass-0-wall--z",
+        "stage": "decompose"
+      },
+      {
+        "code": "fit-source-voxel",
+        "where": "roof-4",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "roof-region-unfitted",
+        "where": "roof-1",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "roof-region-unfitted",
+        "where": "roof-5",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "roof-region-unfitted",
+        "where": "roof-6",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "roof-region-unfitted",
+        "where": "roof-7",
+        "stage": "roof-fit"
+      },
+      {
+        "code": "end-unfitted",
+        "where": "gable-roof-2-roof-3:-x",
+        "stage": "roof-end-fit"
+      },
+      {
+        "code": "flat-out-of-tolerance",
+        "where": "og-2@+x",
+        "stage": "opening-head-fit"
+      },
+      {
+        "code": "flat-out-of-tolerance",
+        "where": "og-6@-x",
+        "stage": "opening-head-fit"
+      }
+    ]
+  },
+  "generation": {
+    "counts": {
+      "mass": 2601,
+      "roof": 2561,
+      "carved": 28
+    },
+    "findings": []
+  },
+  "zeroBlob": {
+    "passed": true,
+    "cells": 5069,
+    "bySource": {
+      "mass": 2508,
+      "roof": 2561
+    },
+    "regeneratedFromRecord": true,
+    "blobOverlap": {
+      "cells": 1956,
+      "fraction": 0.3859,
+      "note": "EVIDENCE of fit quality — overlap with blob POSITIONS is the cage working; the gate is provenance"
+    }
+  },
+  "cage": {
+    "iouVsGlb": {
+      "+x+z": 0.8667560065090456,
+      "+x-z": 0.8460132311977716,
+      "-x-z": 0.8362137465236392,
+      "-x+z": 0.8685111501804386
+    },
+    "iouVsBlob": {
+      "+x+z": 0.8316359899093712,
+      "+x-z": 0.8559817119634239,
+      "-x-z": 0.8260232489987301,
+      "-x+z": 0.8639613706007986
+    },
+    "blobIouVsGlb": {
+      "+x+z": 0.9273232724384433,
+      "+x-z": 0.8929647350699982,
+      "-x-z": 0.941015625,
+      "-x+z": 0.942507068803016
+    },
+    "closure": {
+      "reached": 1564,
+      "byDirection": {
+        "+x": 150,
+        "-x": 10,
+        "+y": 485,
+        "-y": 0,
+        "+z": 2,
+        "-z": 2
+      }
+    },
+    "conditioning": {
+      "regularize": {
+        "accepted": 2,
+        "rejected": 0
+      },
+      "note": "in-memory evidence conditioning (closure + T-102 cage on the blob) — never written, never copied"
+    }
+  },
+  "census": {
+    "spikes": 53,
+    "ragged": 50,
+    "columns": 617,
+    "raggedRate": 0.081,
+    "declared": {
+      "sheetCells": 80,
+      "capCells": 0,
+      "note": "open-underside sheet courses and ridge caps are declared constructions (T-108/109)"
+    }
+  },
+  "skin": {
+    "upperTop": 15,
+    "zoneMapSource": "concept"
+  },
+  "settle": {
+    "iterations": 0,
+    "trail": [],
+    "tolerated": {
+      "fillResidue": 2,
+      "dressing": 2
+    }
+  },
+  "gate": {
+    "outcome": "FAIL",
+    "resemblance": {
+      "decided": true,
+      "passed": false,
+      "gapCount": 12,
+      "gapBudget": 2,
+      "failures": [
+        {
+          "angle": "+x+z",
+          "reason": "drifted"
+        },
+        {
+          "angle": "-x-z",
+          "reason": "drifted"
+        },
+        {
+          "angle": "-x+z",
+          "reason": "drifted"
+        }
+      ],
+      "refusal": null
+    },
+    "kitPresence": {
+      "ran": null,
+      "passed": true,
+      "reason": null,
+      "gaps": [],
+      "skips": []
+    },
+    "perView": [
+      {
+        "angle": "+x+z",
+        "azimuthDeg": 45,
+        "coverage": true,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "overall body/interior",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "roof top",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "walls and stone base",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ]
+      },
+      {
+        "angle": "+x-z",
+        "azimuthDeg": 135,
+        "coverage": true,
+        "verdict": "same object",
+        "gaps": [
+          {
+            "region": "roof ridge and eaves",
+            "attribute": "form",
+            "severity": "minor"
+          },
+          {
+            "region": "near-side walls (slightly open/recessed read)",
+            "attribute": "form",
+            "severity": "minor"
+          },
+          {
+            "region": "chimney cap",
+            "attribute": "form",
+            "severity": "minor"
+          }
+        ]
+      },
+      {
+        "angle": "-x-z",
+        "azimuthDeg": 225,
+        "coverage": true,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "entire roof over both wings and ridge",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "upper timber-framed storey walls",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "chimney at ridge",
+            "attribute": "form",
+            "severity": "minor"
+          }
+        ]
+      },
+      {
+        "angle": "-x+z",
+        "azimuthDeg": 315,
+        "coverage": true,
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof over the whole house",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "upper storey / roof interior",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "timber-frame banding on the cream walls",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ]
+      }
+    ],
+    "record": "benchmarks/sculpture/multi-angle/cottage-generated.json",
+    "sheet": "pr/assets/frames/multi-angle-cottage-generated.png"
+  },
+  "instrument": {
+    "frozen": true,
+    "comparedTo": "committed styled-label gate record",
+    "diffs": [],
+    "judgeModels": [
+      "claude-opus-4-8"
+    ]
+  },
+  "headToHead": {
+    "subject": "cottage",
+    "generated": {
+      "outcome": "FAIL",
+      "gapCount": 12,
+      "gapBudget": 2,
+      "perView": [
+        {
+          "angle": "+x+z",
+          "verdict": "drifted",
+          "gaps": 3
+        },
+        {
+          "angle": "+x-z",
+          "verdict": "same object",
+          "gaps": 3
+        },
+        {
+          "angle": "-x-z",
+          "verdict": "drifted",
+          "gaps": 3
+        },
+        {
+          "angle": "-x+z",
+          "verdict": "drifted",
+          "gaps": 3
+        }
+      ],
+      "kitPresence": true,
+      "census": {
+        "spikes": 53,
+        "ragged": 50,
+        "raggedRate": 0.081
+      },
+      "fitRefusals": 13
+    },
+    "repairPath": {
+      "source": "reconstructed/cottage.json (T-111-01)",
+      "outcome": "FAIL",
+      "gapCount": 10,
+      "gapBudget": 2,
+      "perView": [
+        {
+          "angle": "+x+z",
+          "verdict": "drifted",
+          "gaps": 3
+        },
+        {
+          "angle": "+x-z",
+          "verdict": "same object",
+          "gaps": 2
+        },
+        {
+          "angle": "-x-z",
+          "verdict": "same object",
+          "gaps": 2
+        },
+        {
+          "angle": "-x+z",
+          "verdict": "drifted",
+          "gaps": 3
+        }
+      ],
+      "kitPresence": true,
+      "census": {
+        "spikes": 86,
+        "ragged": 42,
+        "columns": 661,
+        "raggedRate": 0.0635,
+        "source": "styled/cottage/artifact.json"
+      },
+      "freshest": {
+        "source": "styled/cottage.json",
+        "outcome": "FAIL",
+        "gapCount": 10,
+        "kitPresence": true
+      }
+    }
+  },
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  },
+  "reproducible": {
+    "doubleRun": "byte-identical (in-process)",
+    "sha256": {
+      "base": "67fbbc93cbd4308f6ba0a7e51c6410c4f0cf38d7c2ef50acf6cee9625231a172",
+      "grammarFinal": "7370102e5d1cd658f68f33cda01a2d7de07c69597c735f30772885acf5cff553",
+      "styled": "e7f97344e4e3e836570d3b488ce24591b72860eea049903c51f2f3721e9f4fe6",
+      "fit": "b3b36ef6f386c54bc259bee462e6a33049c1861d08cbdd8493a31dd37a4ddbeb"
+    }
+  },
+  "sheets": {
+    "generated": "benchmarks/sculpture/generated/cottage/generated-sheet.png",
+    "renders": [
+      {
+        "angle": "+x+z",
+        "path": "benchmarks/sculpture/generated/cottage/view-generated-pxpz.png"
+      },
+      {
+        "angle": "+x-z",
+        "path": "benchmarks/sculpture/generated/cottage/view-generated-pxmz.png"
+      },
+      {
+        "angle": "-x-z",
+        "path": "benchmarks/sculpture/generated/cottage/view-generated-mxmz.png"
+      },
+      {
+        "angle": "-x+z",
+        "path": "benchmarks/sculpture/generated/cottage/view-generated-mxpz.png"
+      }
+    ]
+  },
+  "artifacts": {
+    "base": "generated/cottage/base-artifact.json",
+    "grammar": "generated/cottage/grammar-artifact.json",
+    "final": "generated/cottage/artifact.json",
+    "fitRecord": "generated/cottage/provision-fit.json",
+    "plan": "generated/cottage/component-plan.json"
+  }
+}
