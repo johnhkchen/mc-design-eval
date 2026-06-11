@@ -57,6 +57,7 @@ import { allowedPalette } from "../../src/view/palette-cans.mjs";
 import { regularizeRoofCourses, stripStraySalt } from "../../src/view/surface-pattern.mjs";
 import { planCensusZoneOf, programConformance } from "../../src/view/component-plan.mjs";
 import { composeVocabulary, ownSetsOf } from "../../src/form/material-vocabulary.mjs";
+import { ROTATE_FLAG, guardedWriteRecord } from "../../src/form/pin-guard.mjs";
 import {
   faceResemblance, coverageGate, DEFAULT_COVERAGE_THRESHOLD,
 } from "../../src/view/face-resemblance.mjs";
@@ -74,6 +75,11 @@ import { assertArtifact } from "../../src/artifact.mjs";
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 const HERE = join(ROOT, "benchmarks/sculpture");
 const OUT_DIR = join(HERE, "durable-skin");
+
+// T-119-01: committed-record overwrites are explicit (pin-guard); byte-identical rewrites pass.
+const ROTATE = process.argv.includes(ROTATE_FLAG);
+const writeRec = (abs, content) => guardedWriteRecord({ root: ROOT, rel: abs.replace(ROOT, ""), content, rotate: ROTATE });
+
 const FRAMES_DIR = join(ROOT, "pr/assets/frames");
 
 const COVERAGE_THRESHOLD = DEFAULT_COVERAGE_THRESHOLD; // T-088: the dominant is actually dominant
@@ -759,7 +765,7 @@ async function main() {
     Object.entries(r1.bands.wallForeignResidue).map(([z, v]) => `${z}=${v ?? "n/a"}`).join(", "));
 
   const artJson = JSON.stringify(r1.final, null, 2) + "\n";
-  await writeFile(artPath, artJson);
+  await writeRec(artPath, artJson);
   const sha256 = createHash("sha256").update(artJson).digest("hex");
 
   // --- renders + the resemblance EVIDENCE (best-effort; never gates the build) --------------------
@@ -875,8 +881,8 @@ async function main() {
     renders, frames,
     notes: r1.notes,
   };
-  await writeFile(recPath, JSON.stringify(record, null, 2) + "\n");
-  await writeFile(join(OUT_DIR, `${def.key}.md`), renderMd(record));
+  await writeRec(recPath, JSON.stringify(record, null, 2) + "\n");
+  await writeRec(join(OUT_DIR, `${def.key}.md`), renderMd(record));
   console.error(`\n✓ wrote ${recPath} + ${artPath} (sha256 ${sha256.slice(0, 12)}…)`);
 }
 

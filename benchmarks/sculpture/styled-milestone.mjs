@@ -61,6 +61,7 @@ import {
 } from "../../src/view/opening-dressing.mjs";
 import { assertArtifact } from "../../src/artifact.mjs";
 import { MULTI_ANGLE_GATE_SCHEMA } from "../../src/form/multi-angle-gate.mjs";
+import { ROTATE_FLAG, guardedWriteRecord } from "../../src/form/pin-guard.mjs";
 import { runChain } from "./challenge-milestone.mjs";
 import { grammarStage, renderSheet } from "./placement-grammar.mjs";
 import { SUBJECTS } from "./durable-skin.mjs";
@@ -299,6 +300,8 @@ async function main() {
   if (!def) throw new Error(`--subject must be one of: ${Object.keys(SUBJECTS).join(", ")}`);
   const offline = argv.includes("--offline");
   const repro = argv.includes("--repro");
+  const rotate = argv.includes(ROTATE_FLAG); // T-119-01: committed-record overwrites are explicit
+  const writeRec = (abs, content) => guardedWriteRecord({ root: ROOT, rel: abs.replace(ROOT, ""), content, rotate });
   const subjDir = join(OUT_DIR, def.key);
   const recPath = join(OUT_DIR, `${def.key}.json`);
   const paths = {
@@ -367,8 +370,8 @@ async function main() {
       inputs: { build: def.provision ? null : def.build, concept: def.concept, glb: def.glb, map: def.map, kitRecord: def.kitRecord ?? null },
       note: "a named precondition, not a crash — recorded honestly (E-25 Rule 6); nothing was tuned in response",
     };
-    await writeFile(recPath, JSON.stringify(record, null, 2) + "\n");
-    await writeFile(join(OUT_DIR, `${def.key}.md`), renderMd(record));
+    await writeRec(recPath, JSON.stringify(record, null, 2) + "\n");
+    await writeRec(join(OUT_DIR, `${def.key}.md`), renderMd(record));
     console.error(`[${def.key}] PIPELINE FAILED at kit: ${error}`);
     console.error(`✓ wrote ${recPath.replace(ROOT, "")} (status: pipeline-failed)`);
     process.exitCode = 1;
@@ -433,8 +436,8 @@ async function main() {
       inputs: { build: def.provision ? null : def.build, concept: def.concept, glb: def.glb, map: def.map, kitRecord: def.kitRecord, kitSha256: kitSha },
       note: "a terminal gate or chain stage threw — recorded honestly (E-25 Rule 6); nothing was tuned in response",
     };
-    await writeFile(recPath, JSON.stringify(record, null, 2) + "\n");
-    await writeFile(join(OUT_DIR, `${def.key}.md`), renderMd(record));
+    await writeRec(recPath, JSON.stringify(record, null, 2) + "\n");
+    await writeRec(join(OUT_DIR, `${def.key}.md`), renderMd(record));
     console.error(`[${def.key}] PIPELINE FAILED at ${stage}: ${e.message}`);
     console.error(`✓ wrote ${recPath.replace(ROOT, "")} (status: pipeline-failed)`);
     process.exitCode = 1;
@@ -443,8 +446,8 @@ async function main() {
 
   const grammarJson = artifactJson(r1.grammar.final);
   const styledJson = artifactJson(r1.styled);
-  await writeFile(paths.grammarAbs, grammarJson);
-  await writeFile(paths.finalAbs, styledJson);
+  await writeRec(paths.grammarAbs, grammarJson);
+  await writeRec(paths.finalAbs, styledJson);
   const shas = {
     base: def.provision ? sha256(artifactJson(r1.base)) : null,
     shell: sha256(artifactJson(r1.shell.artifact)),
@@ -518,11 +521,11 @@ async function main() {
 
   // --- THE GATE (T-100 ∘ T-093, its own CLI + record + sheet; exit code = the verdict) ------------
   console.error(`\n[${def.key}] spawning the kit-aware multi-angle gate (label "${GATE_LABEL}")…`);
-  const gateCode = await spawnGate(def.key, paths.finalRel);
+  const gateCode = await spawnGate(def.key, paths.finalRel, GATE_LABEL, rotate ? [ROTATE_FLAG] : []);
   const gateRec = existsSync(gateRecPath) ? JSON.parse(await readFile(gateRecPath, "utf8")) : null;
   const gate = distillGate(gateRec, def.key, gateCode);
 
-  await writeFile(join(PR_ASSETS, `styled-${def.key}-kit.md`), kitReportMd(def, kitRec, kitSha, gate));
+  await writeRec(join(PR_ASSETS, `styled-${def.key}-kit.md`), kitReportMd(def, kitRec, kitSha, gate));
 
   // --- the milestone record ------------------------------------------------------------------------
   const record = {
@@ -590,8 +593,8 @@ async function main() {
     kitReport: kitReportRel,
     generalization: "no subject keys, constants, branches, or thresholds in this runner — subjects are durable-skin registry data (E-25 Rule 3)",
   };
-  await writeFile(recPath, JSON.stringify(record, null, 2) + "\n");
-  await writeFile(join(OUT_DIR, `${def.key}.md`), renderMd(record));
+  await writeRec(recPath, JSON.stringify(record, null, 2) + "\n");
+  await writeRec(join(OUT_DIR, `${def.key}.md`), renderMd(record));
   console.error(`\n[${def.key}] styled milestone: chain COMPLETE, gate ${gate.outcome}`);
   console.error(`✓ wrote ${recPath.replace(ROOT, "")} + ${paths.finalRel} + ${kitReportRel}`);
   process.exitCode = gateCode;

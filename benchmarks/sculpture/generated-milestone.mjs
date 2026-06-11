@@ -83,11 +83,17 @@ import { closureCheck, openingRegions } from "../../src/view/shell-integrity.mjs
 import { buildSkin, SUBJECTS } from "./durable-skin.mjs";
 import { shellStage } from "./challenge-milestone.mjs";
 import { styledStretch, spawnGate, distillGate } from "./styled-milestone.mjs";
+import { ROTATE_FLAG, guardedWriteRecord } from "../../src/form/pin-guard.mjs";
 import { renderSheet } from "./placement-grammar.mjs";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 const HERE = join(ROOT, "benchmarks/sculpture");
 const OUT_DIR = join(HERE, "generated");
+
+// T-119-01: committed-record overwrites are explicit (pin-guard); byte-identical rewrites pass.
+const ROTATE = process.argv.includes(ROTATE_FLAG);
+const writeRec = (abs, content) => guardedWriteRecord({ root: ROOT, rel: abs.replace(ROOT, ""), content, rotate: ROTATE });
+
 const FRAMES_DIR = join(ROOT, "pr/assets/frames");
 
 const GATE_LABEL = "generated";
@@ -261,8 +267,8 @@ function assembleComponentPlan(prov) {
 /** The full deterministic chain: provision → skin → the SHARED styled stretch. */
 async function generatedChain(def, kitRec, paths, track) {
   const prov = await provisionStage(def, kitRec, track);
-  await writeFile(paths.baseAbs, artifactJson(prov.gen.artifact));
-  await writeFile(paths.fitAbs, JSON.stringify(prov.fitSerialized, null, 2) + "\n");
+  await writeRec(paths.baseAbs, artifactJson(prov.gen.artifact));
+  await writeRec(paths.fitAbs, JSON.stringify(prov.fitSerialized, null, 2) + "\n");
 
   track.stage = "skin";
   const plan = assembleComponentPlan(prov);
@@ -270,7 +276,7 @@ async function generatedChain(def, kitRec, paths, track) {
   // the skin ARBITRATES the wall-top pin (challenge-chain precedent) — persist the EFFECTIVE value
   // so grammar/settle and the gate's kit-presence fixpoint re-run the SAME op
   plan.wallTopEffective = skin.zones.upperTop;
-  await writeFile(paths.planAbs, JSON.stringify(serializeComponentPlan(plan), null, 2) + "\n");
+  await writeRec(paths.planAbs, JSON.stringify(serializeComponentPlan(plan), null, 2) + "\n");
 
   const stretch = styledStretch({ def, kitRec, base: prov.gen.artifact, skin, reconstruction: { plan }, track });
   return { ...prov, plan, skin, ...stretch };
@@ -524,16 +530,16 @@ async function main() {
       inputs: { concept: def.concept, glb: def.glb, map: def.map, kitRecord: def.kitRecord, kitSha256: kitSha, scale: def.generated?.scale ?? null },
       note: "a deterministic stage threw — recorded honestly (E-25 Rule 6); nothing was tuned in response",
     };
-    await writeFile(recPath, JSON.stringify(record, null, 2) + "\n");
-    await writeFile(join(OUT_DIR, `${def.key}.md`), renderMd(record));
+    await writeRec(recPath, JSON.stringify(record, null, 2) + "\n");
+    await writeRec(join(OUT_DIR, `${def.key}.md`), renderMd(record));
     console.error(`[${def.key}] PIPELINE FAILED at ${track.stage}: ${e.message}`);
     process.exitCode = 1;
     return;
   }
 
   // --- persist the chain's artifacts (the inspectable file seam) ----------------------------------
-  await writeFile(paths.grammarAbs, artifactJson(r1.grammar.final));
-  await writeFile(paths.finalAbs, artifactJson(r1.styled));
+  await writeRec(paths.grammarAbs, artifactJson(r1.grammar.final));
+  await writeRec(paths.finalAbs, artifactJson(r1.styled));
 
   // --- evidence renders (a lens, never logic) ------------------------------------------------------
   let sheets = {};
@@ -546,7 +552,7 @@ async function main() {
 
   // --- THE FROZEN GATE (spawned, label "generated", aperture reference = the generated base) ------
   console.error(`\n[${def.key}] spawning the kit-aware multi-angle gate (label "${GATE_LABEL}")…`);
-  const gateCode = await spawnGate(def.key, paths.finalRel, GATE_LABEL, ["--reference", paths.baseRel]);
+  const gateCode = await spawnGate(def.key, paths.finalRel, GATE_LABEL, ["--reference", paths.baseRel, ...(ROTATE ? [ROTATE_FLAG] : [])]);
   const gateRec = existsSync(gateRecPath) ? JSON.parse(await readFile(gateRecPath, "utf8")) : null;
   const gate = distillGate(gateRec, def.key, gateCode, GATE_LABEL);
 
@@ -591,8 +597,8 @@ async function main() {
     sheets,
     artifacts: { base: paths.baseRel, grammar: paths.grammarRel, final: paths.finalRel, fitRecord: paths.fitRel, plan: paths.planRel },
   };
-  await writeFile(recPath, JSON.stringify(record, null, 2) + "\n");
-  await writeFile(join(OUT_DIR, `${def.key}.md`), renderMd(record));
+  await writeRec(recPath, JSON.stringify(record, null, 2) + "\n");
+  await writeRec(join(OUT_DIR, `${def.key}.md`), renderMd(record));
   console.error(`\n✓ wrote benchmarks/sculpture/generated/${def.key}.{json,md} — gate ${gate.outcome}; ` +
     `zero-blob ${record.zeroBlob.passed ? "PASS" : "FAIL"} (${record.zeroBlob.cells} cells, overlap ` +
     `${(record.zeroBlob.blobOverlap.fraction * 100).toFixed(1)}%); instrument ${instrument.frozen ? "frozen" : "DIFFS"}`);

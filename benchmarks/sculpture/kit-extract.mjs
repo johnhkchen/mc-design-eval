@@ -17,10 +17,14 @@
 // E-24 Rule 2 (pinned re-runs): the verbatim model reply is committed as <subj>.raw.json;
 // --offline reproduces <subj>.json byte-identically from committed inputs alone.
 
-import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { readFile, mkdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+
+import {
+  ROTATE_FLAG, preflightPins, guardedWriteRecord, loadTrackedSet, isTracked,
+} from "../../src/form/pin-guard.mjs";
 
 import {
   KIT_SCHEMA, KIT_VERIFY_DELTA_MAX, loadBlockVocab, bandRefsFromZoneRecord, buildKitPrompt,
@@ -66,6 +70,10 @@ const SUBJECTS = [
 
 const OFFLINE = process.argv.includes("--offline");
 const ONLY = process.argv.find((a) => a.startsWith("--subject="))?.slice("--subject=".length) ?? null;
+const ROTATE = process.argv.includes(ROTATE_FLAG);
+
+const ROOT = fileURLToPath(new URL("../../", import.meta.url));
+const kitRel = (name) => `benchmarks/sculpture/kit/${name}`; // repo-root-relative, the pin-guard key
 
 /** Fence-strip + brace-slice a model reply down to its JSON object (the bridge idiom). */
 function extractJson(text) {
@@ -132,6 +140,22 @@ function kitMd(rec) {
 
 async function run() {
   await mkdir(OUT_DIR, { recursive: true });
+
+  // T-119-01 preflight, BEFORE any model spend. THE REGRESSION THIS GUARDS: `npm run kit:extract
+  // --subject=barn` (missing `--`) — npm swallows the flag, ONLY stays null, and the live sweep
+  // used to overwrite every committed kit pin. Now it refuses here, naming them, before a single
+  // call. (A swallowed --rotate-pins likewise never arrives: the run refuses — fail closed.)
+  if (!OFFLINE) {
+    const trackedSet = loadTrackedSet(ROOT);
+    const targets = SUBJECTS.filter((d) => !ONLY || d.key === ONLY)
+      .flatMap((d) => [`${d.key}.json`, `${d.key}.raw.json`, `${d.key}.md`].map(kitRel));
+    preflightPins({
+      pins: targets.map((rel) => ({ rel, tracked: isTracked(trackedSet, rel) })),
+      rotate: ROTATE,
+      intent: `live kit extraction${ONLY ? ` (--subject=${ONLY})` : " SWEEP (no --subject filter — was a flag swallowed by npm? use `npm run kit:extract -- --subject=…`)"}`,
+    });
+  }
+
   const vocab = loadBlockVocab();
   const summary = [];
 
@@ -161,7 +185,7 @@ async function run() {
       }
       console.error(`[${key}] live: recognizing the kit (strong tier, subscription shim)…`);
       raw = await callModel(prompt, conceptPath);
-      await writeFile(rawPath, JSON.stringify(raw, null, 2) + "\n");
+      await guardedWriteRecord({ root: ROOT, rel: kitRel(`${key}.raw.json`), content: JSON.stringify(raw, null, 2) + "\n", rotate: ROTATE });
     }
 
     const { kit: parsed, unidentified, dropped, stats } = parseKit(raw, { vocab, bandNames });
@@ -201,8 +225,8 @@ async function run() {
         flaggedForReview: kit.filter((e) => e.valueCheck.flaggedForReview).length,
       },
     };
-    await writeFile(join(OUT_DIR, `${key}.json`), JSON.stringify(record, null, 2) + "\n");
-    await writeFile(join(OUT_DIR, `${key}.md`), kitMd(record));
+    await guardedWriteRecord({ root: ROOT, rel: kitRel(`${key}.json`), content: JSON.stringify(record, null, 2) + "\n", rotate: ROTATE });
+    await guardedWriteRecord({ root: ROOT, rel: kitRel(`${key}.md`), content: kitMd(record), rotate: ROTATE });
 
     summary.push({ key, ...record.stats, overrides: Object.keys(ov.overrides).length });
     console.error(

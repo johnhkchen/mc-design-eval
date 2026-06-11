@@ -55,6 +55,9 @@ import {
 } from "../../src/form/multi-angle-gate.mjs";
 import { runReplyPolicy, MAX_REPLY_ATTEMPTS } from "../../src/form/judge-reply.mjs";
 import {
+  ROTATE_FLAG, preflightPins, guardedWriteRecord, loadTrackedSet, isTracked,
+} from "../../src/form/pin-guard.mjs";
+import {
   kitPresence, composeKitAwareVerdict, KIT_PRESENCE_SCHEMA,
 } from "../../src/form/kit-presence.mjs";
 import { extractApertures } from "../../src/view/opening-dressing.mjs";
@@ -240,6 +243,7 @@ async function main() {
   const referenceRel = arg("--reference") ?? def.build;
   const offline = argv.includes("--offline");
   const rejudge = argv.includes("--rejudge");
+  const rotate = argv.includes(ROTATE_FLAG);
   const slug = `${def.key}-${label}`;
   const recPath = join(OUT_DIR, `${slug}.json`);
   const sheetFrame = join(FRAMES_DIR, `multi-angle-${slug}.png`);
@@ -247,6 +251,18 @@ async function main() {
   if (rejudge) {
     await rejudgeMain({ def, label, slug, recPath, sheetFrame });
     return;
+  }
+
+  // T-119-01 preflight, BEFORE any render or judge call: a live gate run re-rolls the committed
+  // verdict record — that is a pin rotation and must be explicit (--rejudge stays the T-114-
+  // sanctioned completion of a committed record; --offline writes nothing).
+  if (!offline) {
+    const trackedSet = loadTrackedSet(ROOT);
+    const verdictPins = [`benchmarks/sculpture/multi-angle/${slug}.json`, `benchmarks/sculpture/multi-angle/${slug}.md`];
+    preflightPins({
+      pins: verdictPins.map((rel) => ({ rel, tracked: isTracked(trackedSet, rel) })),
+      rotate, intent: `live multi-angle gate (${slug}) — re-judging re-rolls committed verdicts (E-28 Rule 4)`,
+    });
   }
 
   if (offline) {
@@ -508,8 +524,8 @@ async function main() {
     sheet: sheetFrame.replace(ROOT, ""),
     labeled,
   };
-  await writeFile(recPath, JSON.stringify(record, null, 2) + "\n");
-  await writeFile(join(OUT_DIR, `${slug}.md`), recordMd(record));
+  await guardedWriteRecord({ root: ROOT, rel: `benchmarks/sculpture/multi-angle/${slug}.json`, content: JSON.stringify(record, null, 2) + "\n", rotate });
+  await guardedWriteRecord({ root: ROOT, rel: `benchmarks/sculpture/multi-angle/${slug}.md`, content: recordMd(record), rotate });
 
   const outcome = overall.decided ? (overall.passed ? "PASS" : "FAIL") : `REFUSAL (${overall.refusal})`;
   console.error(`\n[${slug}] kit-aware verdict: ${outcome} — resemblance ` +
@@ -647,8 +663,11 @@ async function rejudgeMain({ def, label, slug, recPath, sheetFrame }) {
   const sheetPath = join(OUT_DIR, `${slug}-sheet.png`);
   await writeFile(sheetPath, sheetBuf);
   await copyFile(sheetPath, sheetFrame);
-  await writeFile(recPath, JSON.stringify(record, null, 2) + "\n");
-  await writeFile(join(OUT_DIR, `${slug}.md`), recordMd(record));
+  // T-119-01: completing a committed record in place is the one T-114-sanctioned write — it fills
+  // unparsed verdicts only (this mode's own artifact-pin and parsed-view refusals enforce that).
+  const sanction = "rejudge (T-114 reply completion of a committed record)";
+  await guardedWriteRecord({ root: ROOT, rel: `benchmarks/sculpture/multi-angle/${slug}.json`, content: JSON.stringify(record, null, 2) + "\n", sanction });
+  await guardedWriteRecord({ root: ROOT, rel: `benchmarks/sculpture/multi-angle/${slug}.md`, content: recordMd(record), sanction });
 
   const outcome = overall.decided ? (overall.passed ? "PASS" : "FAIL") : `REFUSAL (${overall.refusal})`;
   console.error(`\n[${slug}] re-judged kit-aware verdict: ${outcome} — resemblance ` +

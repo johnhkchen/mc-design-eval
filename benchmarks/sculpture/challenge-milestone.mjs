@@ -65,6 +65,7 @@ import { classifyFeatures, assignFeatureBlocks, fallbackPalette } from "../../sr
 import { decodeImage } from "../../src/color/palette-extract.mjs";
 import { assertArtifact } from "../../src/artifact.mjs";
 import { MULTI_ANGLE_GATE_SCHEMA } from "../../src/form/multi-angle-gate.mjs";
+import { ROTATE_FLAG, guardedWriteRecord } from "../../src/form/pin-guard.mjs";
 import { occupancyDelta, composeReconstruction } from "../../src/view/reconstruct-compose.mjs";
 import { buildComponentPlan, serializeComponentPlan } from "../../src/view/component-plan.mjs";
 import { buildSkin, SUBJECTS } from "./durable-skin.mjs";
@@ -72,6 +73,11 @@ import { buildSkin, SUBJECTS } from "./durable-skin.mjs";
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 const HERE = join(ROOT, "benchmarks/sculpture");
 const OUT_DIR = join(HERE, "challenge");
+
+// T-119-01: committed-record overwrites are explicit (pin-guard); byte-identical rewrites pass.
+const ROTATE = process.argv.includes(ROTATE_FLAG);
+const writeRec = (abs, content) => guardedWriteRecord({ root: ROOT, rel: abs.replace(ROOT, ""), content, rotate: ROTATE });
+
 const FRAMES_DIR = join(ROOT, "pr/assets/frames");
 
 const MIN_DEPTH = 3;      // T-091 relief floor (op parameter, not a subject constant)
@@ -271,7 +277,7 @@ export async function runChain(def, paths) {
     const p = await provisionBase(def);
     base = p.artifact;
     provision = p.stats;
-    await writeFile(paths.baseAbs, artifactJson(base)); // provisioned subjects only — committed bases stay single-sourced
+    await writeRec(paths.baseAbs, artifactJson(base)); // provisioned subjects only — committed bases stay single-sourced
   } else {
     base = JSON.parse(await readFile(join(HERE, def.build), "utf8"));
     assertArtifact(base);
@@ -281,7 +287,7 @@ export async function runChain(def, paths) {
   const refSils = {};
   for (const a of MULTI_ANGLE_GATE.azimuths) refSils[a] = rasterizeSilhouette(mesh, { view: resolveAngle(a) });
   const shell = shellStage(base, refSils);
-  await writeFile(paths.shellAbs, artifactJson(shell.artifact));
+  await writeRec(paths.shellAbs, artifactJson(shell.artifact));
   // T-106-01: where the component layer defines the shell's parts, the skin consumes the COMPOSED
   // reconstruction (roof program + shaped heads over the regularized shell) and the component plan;
   // record-less subjects pass through untouched.
@@ -290,7 +296,7 @@ export async function runChain(def, paths) {
   if (reconstruction?.composed) {
     buildRel = paths.shellRel.replace("shell-artifact.json", "reconstructed-artifact.json");
     assertArtifact(reconstruction.composed.artifact);
-    await writeFile(join(HERE, buildRel), artifactJson(reconstruction.composed.artifact));
+    await writeRec(join(HERE, buildRel), artifactJson(reconstruction.composed.artifact));
   }
   // The D5 uniform transform: the skin consumes the SHELL-REPAIRED build; the committed zone-map
   // record was derived from the unrepaired build, so its agreement assert does not apply here —
@@ -301,7 +307,7 @@ export async function runChain(def, paths) {
     // the persisted plan carries the EFFECTIVE value so the grammar/settle and the kit-aware gate
     // re-run the SAME op. Written after the skin for exactly that reason.
     reconstruction.plan.wallTopEffective = skin.zones.upperTop;
-    await writeFile(
+    await writeRec(
       join(HERE, paths.shellRel.replace("shell-artifact.json", "component-plan.json")),
       JSON.stringify(serializeComponentPlan(reconstruction.plan), null, 2) + "\n");
   }
@@ -322,10 +328,10 @@ async function zoneMapVsCommitted(def, zoneMap) {
 }
 
 /** Spawn the T-093 gate through its own CLI (frozen contract). Exit 0/1/2 is a VERDICT, not an error. */
-function spawnGate(key, artifactRel) {
+function spawnGate(key, artifactRel, extraArgs = []) {
   return new Promise((resolve, reject) => {
     const child = spawn(process.execPath, [
-      join(HERE, "multi-angle-gate.mjs"), "--subject", key, "--label", GATE_LABEL, "--artifact", artifactRel,
+      join(HERE, "multi-angle-gate.mjs"), "--subject", key, "--label", GATE_LABEL, "--artifact", artifactRel, ...extraArgs,
     ], { stdio: ["ignore", "inherit", "inherit"] });
     child.on("error", reject);
     child.on("close", (code) => resolve(code));
@@ -426,8 +432,8 @@ async function main() {
       inputs: { build: def.provision ? null : def.build, concept: def.concept, glb: def.glb, map: def.map },
       note: "a terminal gate or chain stage threw — recorded honestly (E-25 Rule 6); nothing was tuned in response",
     };
-    await writeFile(recPath, JSON.stringify(record, null, 2) + "\n");
-    await writeFile(join(OUT_DIR, `${def.key}.md`), renderMd(record));
+    await writeRec(recPath, JSON.stringify(record, null, 2) + "\n");
+    await writeRec(join(OUT_DIR, `${def.key}.md`), renderMd(record));
     console.error(`[${def.key}] PIPELINE FAILED at ${stage}: ${e.message}`);
     console.error(`✓ wrote ${recPath} (status: pipeline-failed)`);
     process.exitCode = 1;
@@ -435,7 +441,7 @@ async function main() {
   }
 
   const finalJson = artifactJson(r1.skin.final);
-  await writeFile(paths.finalAbs, finalJson);
+  await writeRec(paths.finalAbs, finalJson);
   const shas = {
     base: def.provision ? sha256(artifactJson(r1.base)) : null,
     shell: sha256(artifactJson(r1.shell.artifact)),
@@ -496,7 +502,7 @@ async function main() {
 
   // --- THE GATE (T-093, its own CLI + record + sheet; exit code = the verdict) --------------------
   console.error(`\n[${def.key}] spawning the multi-angle gate (label "${GATE_LABEL}")…`);
-  const gateCode = await spawnGate(def.key, paths.finalRel);
+  const gateCode = await spawnGate(def.key, paths.finalRel, ROTATE ? [ROTATE_FLAG] : []);
   const gateRec = existsSync(gateRecPath) ? JSON.parse(await readFile(gateRecPath, "utf8")) : null;
   const gate = gateRec ? {
     outcome: gateRec.aggregate?.decided ? (gateRec.aggregate.passed ? "PASS" : "FAIL") : `REFUSAL (${gateRec.aggregate?.refusal})`,
@@ -555,8 +561,8 @@ async function main() {
     artifacts: paths.finalRel ? { base: def.provision ? paths.baseRel : null, shell: paths.shellRel, final: paths.finalRel } : null,
     renders, frames,
   };
-  await writeFile(recPath, JSON.stringify(record, null, 2) + "\n");
-  await writeFile(join(OUT_DIR, `${def.key}.md`), renderMd(record));
+  await writeRec(recPath, JSON.stringify(record, null, 2) + "\n");
+  await writeRec(join(OUT_DIR, `${def.key}.md`), renderMd(record));
   console.error(`\n[${def.key}] milestone: chain COMPLETE, gate ${gate.outcome}`);
   console.error(`✓ wrote ${recPath} + ${paths.finalRel}`);
   process.exitCode = gateCode;

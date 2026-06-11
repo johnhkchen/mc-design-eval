@@ -25,6 +25,7 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { buildSkin, SUBJECTS } from "./durable-skin.mjs";
+import { ROTATE_FLAG, guardedWriteRecord } from "../../src/form/pin-guard.mjs";
 import { ZONE_MAP_SCHEMA } from "../../src/color/band-profile.mjs";
 import { decodeImage } from "../../src/color/palette-extract.mjs";
 import { resampleRgba, composeTriptych, RESEMBLANCE_DEFAULTS } from "../../src/form/resemblance.mjs";
@@ -114,8 +115,11 @@ async function main() {
     }
     results[k] = r;
     const rec = recordOf(def, r);
-    await writeFile(join(OUT_DIR, `${k}.json`), JSON.stringify(rec, null, 2) + "\n");
-    await writeFile(join(OUT_DIR, `${k}.md`), recordMd(rec));
+    // T-119-01: the deterministic derivation regenerates committed maps byte-identically (passes
+    // the guard untouched); a DIFFERING derivation is a pin rotation and refuses without the flag.
+    const rotate = argv.includes(ROTATE_FLAG);
+    await guardedWriteRecord({ root: ROOT, rel: `benchmarks/sculpture/zone-map/${k}.json`, content: JSON.stringify(rec, null, 2) + "\n", rotate });
+    await guardedWriteRecord({ root: ROOT, rel: `benchmarks/sculpture/zone-map/${k}.md`, content: recordMd(rec), rotate });
     console.error(`[${k}] zone map: ${rec.source}` + (rec.reason ? ` (${rec.reason})` : ""));
     if (rec.derived) {
       for (const b of rec.derived.bands) {

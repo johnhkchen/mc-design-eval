@@ -42,6 +42,7 @@ import { spawn } from "node:child_process";
 
 import { SUBJECTS } from "./durable-skin.mjs";
 import { componentLayer } from "./component-skin.mjs";
+import { ROTATE_FLAG, guardedWriteRecord } from "../../src/form/pin-guard.mjs";
 import { renderSheet } from "./placement-grammar.mjs";
 import { artifactOccupancy } from "../../src/view/occupancy.mjs";
 import { protrusionCensus, raggedColumnRate } from "../../src/view/shell-regularize.mjs";
@@ -50,6 +51,11 @@ import { MULTI_ANGLE_GATE, PHASE1_MODEL_ID } from "../../src/config.mjs";
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 const HERE = join(ROOT, "benchmarks/sculpture");
 const OUT_DIR = join(HERE, "reconstructed");
+
+// T-119-01: committed-record overwrites are explicit (pin-guard); byte-identical rewrites pass.
+const ROTATE = process.argv.includes(ROTATE_FLAG);
+const writeRec = (abs, content) => guardedWriteRecord({ root: ROOT, rel: abs.replace(ROOT, ""), content, rotate: ROTATE });
+
 const FRAMES_DIR = join(ROOT, "pr/assets/frames");
 
 export const RECORD_SCHEMA = "reconstructed-milestone/v1";
@@ -248,7 +254,7 @@ async function main() {
     console.error(`[${key}] --distill-only: re-distilling committed outputs (chain + judge NOT re-run)`);
   } else {
     console.error(`[${key}] running ${runner}${repro ? " --repro (fresh-process re-proof; judge not re-run)" : " (full reconstructed chain)"}…`);
-    code = await spawnMilestone(runner, key, repro ? ["--repro"] : []);
+    code = await spawnMilestone(runner, key, [...(repro ? ["--repro"] : []), ...(ROTATE ? [ROTATE_FLAG] : [])]);
   }
   if (repro) {
     console.error(`[repro] ${key}: milestone re-proof exit ${code}`);
@@ -327,8 +333,8 @@ async function main() {
     },
   };
 
-  await writeFile(recPath, JSON.stringify(record, null, 2) + "\n");
-  await writeFile(join(OUT_DIR, `${key}.md`), renderMd(record));
+  await writeRec(recPath, JSON.stringify(record, null, 2) + "\n");
+  await writeRec(join(OUT_DIR, `${key}.md`), renderMd(record));
   console.error(`\n[${key}] reconstructed-milestone: chain ${record.chain.status}, gate ${record.chain.gate?.outcome ?? "—"}, instrument ${instrument.frozen === false ? "DIFFS" : "frozen/untouched"}`);
   console.error(`✓ wrote ${recPath.replace(ROOT, "")}`);
   process.exitCode = failed ? 1 : code;
