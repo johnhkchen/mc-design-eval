@@ -6,55 +6,9 @@
     "map": "material-map/barn.json",
     "build": "challenge/barn/base-artifact.json"
   },
-  "source": "concept",
-  "derived": {
-    "bands": [
-      {
-        "name": "band0",
-        "yRange": [
-          0,
-          12
-        ],
-        "dominantBlock": "cobblestone",
-        "dominantRole": "structural wall infill",
-        "share": 1,
-        "secondaries": [
-          {
-            "block": "dark_oak_planks",
-            "role": "roof shingle planes",
-            "share": 0.696
-          },
-          {
-            "block": "stone_bricks",
-            "role": "plinth / ground banding course",
-            "share": 0.304
-          },
-          {
-            "block": "oak_planks",
-            "role": "wagon-door leaves",
-            "share": 0
-          }
-        ]
-      }
-    ],
-    "roof": {
-      "dominantBlock": "dark_oak_planks",
-      "dominantRole": "roof shingle planes",
-      "share": 1,
-      "secondaries": [
-        {
-          "block": "stone_bricks",
-          "role": "buttress piers, quoins and opening frames",
-          "share": 0.014
-        },
-        {
-          "block": "oak_planks",
-          "role": "wagon-door leaves",
-          "share": 0
-        }
-      ]
-    }
-  },
+  "source": "prior-fallback",
+  "reason": "no-field-cells",
+  "derived": null,
   "prior": {
     "policy": {
       "base": {
@@ -88,14 +42,7 @@
     "storeyDivide": 6,
     "upperTop": 13
   },
-  "diff": {
-    "wallDiffs": [],
-    "roofDominant": {
-      "prior": "dark_oak_planks",
-      "derived": "dark_oak_planks",
-      "changed": false
-    }
-  },
+  "diff": null,
   "params": {
     "extentWidthFloor": 0.25,
     "minBandHeight": 2,
@@ -116,10 +63,6 @@
     "anchor": {
       "row": 29,
       "y": 0
-    },
-    "fieldResolution": {
-      "oak_planks": "cobblestone",
-      "stone_bricks": "cobblestone"
     }
   },
   "note": "bands/roof are NAMED (pre-substitution) block space; durable-skin asserts agreement with `derived` on every run (divergence throws). The prior is the recorded fallback + diff baseline."

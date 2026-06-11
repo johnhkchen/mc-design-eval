@@ -227,8 +227,10 @@ export const SUBJECTS = {
     glb: "glb/barn.glb",
     map: "material-map/barn.json",
     valueSelectRecord: null, // first run IS the value-true result (church precedent)
-    zoneMapRecord: null,     // → "zone-map/barn.json" once the T-116 derivation is committed
-    kitRecord: null,         // → "kit/barn.json" once the T-116 kit extraction is committed
+    zoneMapRecord: "zone-map/barn.json", // T-117-01: derived via the role-aware rung (ΔL 2.082
+                             // witness); the T-116 refusal is preserved beside it as
+                             // zone-map/barn.prior-fallback.json
+    kitRecord: null,         // → "kit/barn.json" once the T-117 kit extraction is committed
     provision: { scale: 48 },
     policy: { // FALLBACK PRIOR, from material-map/barn.json roles (1:1 rule→block transcription)
       base: {
