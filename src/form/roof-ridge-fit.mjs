@@ -21,8 +21,16 @@
 //     onto the spike-inflated blob top (the roof-end-fit offsetDelta lesson). Evidence, not
 //     geometry.
 //
+// T-122-01 (story S-122) adds the CLOSURE: fitRidgeProfile reads the GLB ridge as the roof-diff
+// instrument samples it (surface at column centers, not vertex peaks), and closeRidge applies it
+// to the gable DATA — eave-relatively (gableEaveAnchors' like-for-like arithmetic; absolute
+// aabb-affine verticals stay untrusted), with side pitches re-derived through the closed ridge
+// and hip demands the profile refutes cleared. The shared surface definition is untouched.
+//
 // An unfittable ridge is a NAMED finding and the as-built ridge stays (E-28 Rule 2).
 // PURE — no I/O, no GL, no Date/random; runs under the `src/**/*.test.mjs` glob.
+
+import { glbHeightAt, ROOF_FIT_DEFAULTS } from "./roof-fit.mjs";
 
 /** Schema tag for ridge-fit results embedded in durable records. */
 export const RIDGE_FIT_SCHEMA = "roof-ridge-fit/v1";
@@ -33,11 +41,98 @@ export const RIDGE_FIT_DEFAULTS = Object.freeze({
   excludeDilate: 1, // protrusion-exclusion grows by one plan cell — the GLB protrusion bleeds past
                     // the recorded columns under the aabb's sub-cell offsets (same ±-one-unit
                     // convention as apexGap and the fits' ±0.5 windows)
+  minProfileCoverage: 0.5, // closure precondition: the sampled dominant line must cover at least
+                           // half the ridge-axis extent (a fragmentary profile is not a ridge read)
 });
 
 const roundHalf = (v) => Math.round(v * 2) / 2;
 const noNegZero = (v) => (v + 0 === 0 ? 0 : v);
 const round3 = (v) => noNegZero(Math.round(v * 1e3) / 1e3);
+
+/** Protrusion-exclusion set grown by `excludeDilate` plan cells (the shared ±-one-unit bleed). */
+function buildExclusion(exclude, dilate) {
+  if (!exclude || !exclude.size || dilate <= 0) return exclude ?? null;
+  const grown = new Set(exclude);
+  for (const k of exclude) {
+    const [x, z] = k.split(",").map(Number);
+    for (let dx = -dilate; dx <= dilate; dx++) {
+      for (let dz = -dilate; dz <= dilate; dz++) grown.add(`${x + dx},${z + dz}`);
+    }
+  }
+  return grown;
+}
+
+/**
+ * The DOMINANT contiguous line over a bin→height map (T-118-01's selector, extracted so the
+ * vertex-sourced apex (fitRidgeLine) and the sampled-surface profile (fitRidgeProfile) share one
+ * definition): candidate clusters expand from every anchor bin while contiguous and within
+ * `apexGap` of the anchor; the LONGEST wins (ties: higher mean, then lower start). A
+ * higher-but-shorter cluster that lost is recorded as `spike` — counted, never hidden.
+ * Least-squares line over the winner; returns the fitRidgeLine record shape.
+ */
+function dominantLine(apex, o) {
+  const bins = [...apex.keys()].sort((p, q) => p - q);
+  const candidates = new Map(); // "lo,hi" → {lo, hi, mean}
+  for (const anchor of bins) {
+    const aY = apex.get(anchor);
+    const inBand = (bin) => apex.has(bin) && Math.abs(apex.get(bin) - aY) <= o.apexGap;
+    let cl = anchor;
+    let ch = anchor;
+    while (inBand(cl - 1)) cl--;
+    while (inBand(ch + 1)) ch++;
+    const key = `${cl},${ch}`;
+    if (!candidates.has(key)) {
+      let s = 0;
+      for (let bin = cl; bin <= ch; bin++) s += apex.get(bin);
+      candidates.set(key, { lo: cl, hi: ch, mean: s / (ch - cl + 1) });
+    }
+  }
+  const ranked = [...candidates.values()].sort((p, q) =>
+    (q.hi - q.lo) - (p.hi - p.lo) || q.mean - p.mean || p.lo - q.lo);
+  const sel = ranked[0];
+  const loBin = sel.lo;
+  const hiBin = sel.hi;
+  // the highest cluster, for the spike record when it lost to a longer line
+  let selMax = -Infinity;
+  for (let bin = loBin; bin <= hiBin; bin++) selMax = Math.max(selMax, apex.get(bin));
+  let peakY = -Infinity;
+  let peak = null;
+  for (const c of candidates.values()) {
+    let m = -Infinity;
+    for (let bin = c.lo; bin <= c.hi; bin++) m = Math.max(m, apex.get(bin));
+    if (m > peakY) { peakY = m; peak = c; }
+  }
+  const spike = peak && (peak.lo !== loBin || peak.hi !== hiBin) && peakY > selMax + o.apexGap
+    ? { height: round3(peakY), span: [peak.lo, peak.hi] }
+    : null;
+
+  // least-squares line over the cluster (direction = the apex line's slope along the ridge axis)
+  let n = 0, sv = 0, sy = 0, svv = 0, svy = 0;
+  for (let bin = loBin; bin <= hiBin; bin++) {
+    const y = apex.get(bin);
+    n++; sv += bin; sy += y; svv += bin * bin; svy += bin * y;
+  }
+  const denom = n * svv - sv * sv;
+  const slope = denom !== 0 ? (n * svy - sv * sy) / denom : 0;
+  const mean = sy / n;
+  let sse = 0;
+  const vMean = sv / n;
+  for (let bin = loBin; bin <= hiBin; bin++) {
+    const fit = mean + slope * (bin - vMean);
+    const r = apex.get(bin) - fit;
+    sse += r * r;
+  }
+  const out = {
+    height: round3(mean),
+    slopeDeg: round3((Math.atan(slope) * 180) / Math.PI),
+    span: [loBin, hiBin],
+    length: hiBin - loBin + 1,
+    rmse: round3(Math.sqrt(sse / n)),
+    slices: apex.size,
+  };
+  if (spike) out.spike = spike;
+  return out;
+}
 
 /** Slope/intercept of one side's surface along the run axis: y(v) = m·v + c (evalSideHeight's
  *  arithmetic, solved form). */
@@ -108,17 +203,7 @@ export function fitRidgeLine(gable, tris, opts = {}) {
   const bandFloor = Math.min(...gable.sides.map((s) => Math.floor(s.eaveY)));
   const rawCols = gable.footprint?.cols;
   const cols = rawCols instanceof Set ? rawCols : new Set(rawCols ?? []);
-  let exclude = o.exclude ?? null;
-  if (exclude && exclude.size && o.excludeDilate > 0) {
-    const grown = new Set(exclude);
-    for (const k of exclude) {
-      const [x, z] = k.split(",").map(Number);
-      for (let dx = -o.excludeDilate; dx <= o.excludeDilate; dx++) {
-        for (let dz = -o.excludeDilate; dz <= o.excludeDilate; dz++) grown.add(`${x + dx},${z + dz}`);
-      }
-    }
-    exclude = grown;
-  }
+  const exclude = buildExclusion(o.exclude ?? null, o.excludeDilate);
   const excludedCols = new Set();
   const colOf = (p) => `${Math.floor(p[0])},${Math.floor(p[2])}`;
   const inSample = (p) => {
@@ -151,70 +236,13 @@ export function fitRidgeLine(gable, tris, opts = {}) {
   // T-118-01 (the roof-diff findings): the ridge apex is the DOMINANT contiguous line, not the
   // highest cluster — a protrusion the exclusion misses (the GLB chimney is wider than the
   // recorded build columns) is a short spike, and "highest wins" handed it the whole apexLine.
-  // Candidate clusters expand from every anchor bin while contiguous and within apexGap of the
-  // anchor; the LONGEST wins (ties: higher mean, then lower start). A higher-but-shorter cluster
-  // that lost is recorded as `spike` — counted, never hidden.
-  const bins = [...apex.keys()].sort((p, q) => p - q);
-  const candidates = new Map(); // "lo,hi" → {lo, hi, mean}
-  for (const anchor of bins) {
-    const aY = apex.get(anchor);
-    const inBand = (bin) => apex.has(bin) && Math.abs(apex.get(bin) - aY) <= o.apexGap;
-    let cl = anchor;
-    let ch = anchor;
-    while (inBand(cl - 1)) cl--;
-    while (inBand(ch + 1)) ch++;
-    const key = `${cl},${ch}`;
-    if (!candidates.has(key)) {
-      let s = 0;
-      for (let bin = cl; bin <= ch; bin++) s += apex.get(bin);
-      candidates.set(key, { lo: cl, hi: ch, mean: s / (ch - cl + 1) });
-    }
-  }
-  const ranked = [...candidates.values()].sort((p, q) =>
-    (q.hi - q.lo) - (p.hi - p.lo) || q.mean - p.mean || p.lo - q.lo);
-  const sel = ranked[0];
-  const loBin = sel.lo;
-  const hiBin = sel.hi;
-  // the highest cluster, for the spike record when it lost to a longer line
-  let selMax = -Infinity;
-  for (let bin = loBin; bin <= hiBin; bin++) selMax = Math.max(selMax, apex.get(bin));
-  let peakY = -Infinity;
-  let peak = null;
-  for (const c of candidates.values()) {
-    let m = -Infinity;
-    for (let bin = c.lo; bin <= c.hi; bin++) m = Math.max(m, apex.get(bin));
-    if (m > peakY) { peakY = m; peak = c; }
-  }
-  const spike = peak && (peak.lo !== loBin || peak.hi !== hiBin) && peakY > selMax + o.apexGap
-    ? { height: round3(peakY), span: [peak.lo, peak.hi] }
-    : null;
-
-  // least-squares line over the cluster (direction = the apex line's slope along the ridge axis)
-  let n = 0, sv = 0, sy = 0, svv = 0, svy = 0;
-  for (let bin = loBin; bin <= hiBin; bin++) {
-    const y = apex.get(bin);
-    n++; sv += bin; sy += y; svv += bin * bin; svy += bin * y;
-  }
-  const denom = n * svv - sv * sv;
-  const slope = denom !== 0 ? (n * svy - sv * sy) / denom : 0;
-  const mean = sy / n;
-  let sse = 0;
-  const vMean = sv / n;
-  for (let bin = loBin; bin <= hiBin; bin++) {
-    const fit = mean + slope * (bin - vMean);
-    const r = apex.get(bin) - fit;
-    sse += r * r;
-  }
+  const line = dominantLine(apex, o);
+  // key order preserved exactly (committed fit records are byte-compared under --repro)
   const out = {
-    height: round3(mean),
-    slopeDeg: round3((Math.atan(slope) * 180) / Math.PI),
-    span: [loBin, hiBin],
-    length: hiBin - loBin + 1,
-    rmse: round3(Math.sqrt(sse / n)),
-    slices: apex.size,
-    excludedColumns: excludedCols.size,
+    height: line.height, slopeDeg: line.slopeDeg, span: line.span, length: line.length,
+    rmse: line.rmse, slices: line.slices, excludedColumns: excludedCols.size,
   };
-  if (spike) out.spike = spike;
+  if (line.spike) out.spike = line.spike;
   return out;
 }
 
@@ -251,4 +279,175 @@ export function ridgeVariant(gables) {
     };
   });
   return { gables: out, findings };
+}
+
+/**
+ * The GLB ridge line as the INSTRUMENT reads it (T-122-01): the surface sampled at footprint
+ * column centers (roof-fit glbHeightAt — the roof-region-diff sampler, one ruler), max across the
+ * gable's cross-section per ridge-axis station, protrusions excluded exactly as fitRidgeLine
+ * excludes them, dominant line selected by the same T-118 selector. This is the closure's height
+ * source: the vertex-sourced apexLine can rest on a handful of surviving bins after exclusion
+ * (the barn: 3 of 48) while the sampled profile covers the span the instrument will verify.
+ * @param {object} gable a sane gable from gablesFromRecord
+ * @param {{verts:number[][], centroid:number[], area:number}[]} aTris alignedTriangles output
+ * @param {object} [opts] RIDGE_FIT_DEFAULTS overrides + {exclude?:Set<string>}
+ * @returns {{height:number, slopeDeg:number, span:number[], length:number, rmse:number,
+ *            slices:number, excludedColumns:number, spike?:object} | {reason:string, detail:string}}
+ */
+export function fitRidgeProfile(gable, aTris, opts = {}) {
+  const o = { ...RIDGE_FIT_DEFAULTS, ...opts };
+  const idx = gable.ridge.axis === "x" ? 0 : 1;
+  const rawCols = gable.footprint?.cols;
+  const colSet = rawCols instanceof Set ? rawCols : new Set(rawCols ?? []);
+  const exclude = buildExclusion(o.exclude ?? null, o.excludeDilate);
+  const excludedCols = new Set();
+  const apex = new Map(); // bin (int along ridge axis) → max sampled surface height
+  for (const k of colSet) {
+    if (exclude && exclude.has(k)) {
+      excludedCols.add(k);
+      continue;
+    }
+    const col = k.split(",").map(Number);
+    const h = glbHeightAt(aTris, col[0], col[1]);
+    if (h === null) continue;
+    const bin = col[idx];
+    const cur = apex.get(bin);
+    if (cur === undefined || h > cur) apex.set(bin, h);
+  }
+  if (!apex.size) {
+    return { reason: "ridge-profile-unfitted", detail: "no GLB surface samples over the gable's footprint columns" };
+  }
+  const line = dominantLine(apex, o);
+  const out = {
+    height: line.height, slopeDeg: line.slopeDeg, span: line.span, length: line.length,
+    rmse: line.rmse, slices: line.slices, excludedColumns: excludedCols.size,
+  };
+  if (line.spike) out.spike = line.spike;
+  return out;
+}
+
+/**
+ * RIDGE CLOSURE (T-122-01, story S-122, epic E-30) — build the ridge at the fitted height.
+ *
+ * The parametric surface is min(ridge cap, side planes, hip end planes); committed fits carried
+ * three composing height losses: shallow independently-fitted side pitches intersecting BELOW the
+ * declared ridge, a misfitted hip end plane honored as a hard ceiling, and a ridge.y inherited
+ * from the blob median while the trusted GLB reading sat above it. This closes all three on the
+ * gable DATA (the shared surface definition is untouched):
+ *
+ *   • ridge.y ← roundHalf(buildEave + (profile.height − glbEave)) — the sampled GLB ridge line
+ *     applied EAVE-RELATIVELY (gableEaveAnchors' like-for-like arithmetic; absolute aabb-affine
+ *     verticals stay untrusted, the roof-end-fit lesson);
+ *   • each side's pitch ← (ridge.y − eaveY) / run — the plane forced through the two trustworthy
+ *     anchors (its own eave line and the closed ridge); the fitted pitch stays recorded as
+ *     `pitchFitted` evidence;
+ *   • a demanded hip end whose sampled profile holds the ridge to the footprint edge is REFUTED
+ *     (the short recorded ridge was a blob artifact — the profile can only refute, never invent);
+ *     a hip that survives is re-anchored through (ridgeEnd, ridge.y).
+ *
+ * Geometric sanity only (E-25 Rule 3 — shared gates, no subject tuning): profile coverage,
+ * target above both eaves, derived pitches in (0, maxPitch]. ANY failure → the gable is returned
+ * UNCHANGED and the refusal is named (E-28 Rule 2). The vertex apexLine is cross-checked and the
+ * divergence recorded (`apexCheck`) — named when it exceeds apexGap, never blocking.
+ *
+ * @param {object} gable a sane 2-side gable (hip-cap/kind gables pass through unchanged)
+ * @param {object} args {profile: fitRidgeProfile result, anchors: gableEaveAnchors result,
+ *                       apexLine?: fitRidgeLine result|null, opts?: overrides}
+ * @returns {{gable:object, closure:object}}
+ */
+export function closeRidge(gable, { profile, anchors, apexLine = null, opts = {} } = {}) {
+  const o = { ...RIDGE_FIT_DEFAULTS, ...opts };
+  const refusals = [];
+  const closure = { applied: false, from: gable.ridge?.y ?? null, to: null, refusals };
+  const refuse = (detail) => {
+    refusals.push(detail);
+    return { gable, closure };
+  };
+
+  if (!gable.sane || gable.kind || (gable.sides?.length ?? 0) !== 2) {
+    return refuse("not a sane 2-side gable — closure does not apply");
+  }
+  if (!profile || profile.reason) {
+    return refuse(`ridge profile unfitted${profile?.detail ? ` (${profile.detail})` : ""} — as-fitted gable stays (Rule 2)`);
+  }
+  if (!anchors || anchors.buildEave === null || anchors.glbEave === null) {
+    return refuse("eave anchors unavailable (no GLB samples on any eave edge) — as-fitted gable stays (Rule 2)");
+  }
+  const bbox = gable.footprint.bbox;
+  const axis = gable.ridge.axis;
+  const fLo = axis === "x" ? bbox.minX : bbox.minZ;
+  const fHi = axis === "x" ? bbox.maxX : bbox.maxZ;
+  const extent = fHi - fLo + 1;
+  const coverage = extent > 0 ? profile.length / extent : 0;
+  if (coverage < o.minProfileCoverage) {
+    return refuse(`profile covers ${round3(coverage)} of the ridge-axis extent < minProfileCoverage ${o.minProfileCoverage}`);
+  }
+
+  const toY = roundHalf(anchors.buildEave + (profile.height - anchors.glbEave));
+  for (const s of gable.sides) {
+    if (toY <= s.eaveY + 0.5) {
+      return refuse(`closed ridge y ${toY} not above eave y ${s.eaveY} (${s.planeId ?? "?"})`);
+    }
+  }
+  const sidesPlan = gable.sides.map((s) => {
+    const run = s.run ?? null;
+    if (run === null || run <= 0) return { side: s, error: `side ${s.planeId ?? "?"} has no recorded run` };
+    const pitch = round3((toY - s.eaveY) / run);
+    if (!(pitch > 0) || pitch > (o.maxPitch ?? ROOF_FIT_DEFAULTS.maxPitch)) {
+      return { side: s, error: `derived pitch ${pitch} outside (0, ${o.maxPitch ?? ROOF_FIT_DEFAULTS.maxPitch}] (${s.planeId ?? "?"})` };
+    }
+    return { side: s, pitch };
+  });
+  const sideError = sidesPlan.find((p) => p.error);
+  if (sideError) return refuse(sideError.error);
+
+  // hip arbitration: refute a demanded end the profile holds to the edge; re-anchor a survivor
+  let hip = gable.hip;
+  const hipPlan = { refuted: [], reanchored: [] };
+  if (hip?.demanded) {
+    hip = { ...hip, fitted: hip.fitted ? { ...hip.fitted } : undefined };
+    const eave = Math.min(...gable.sides.map((s) => s.eaveY));
+    for (const [end, edge] of [["lo", fLo], ["hi", fHi]]) {
+      if (!hip[end]) continue;
+      const atEdge = end === "lo" ? profile.span[0] <= edge + 1 : profile.span[1] >= edge - 1;
+      if (atEdge) {
+        hip[end] = false;
+        hipPlan.refuted.push(end);
+        continue;
+      }
+      const ridgeEnd = end === "lo" ? hip.ridgeLo : hip.ridgeHi;
+      const run = ridgeEnd === null || ridgeEnd === undefined ? null : Math.abs(edge - ridgeEnd);
+      if (run === null || run <= 0) return refuse(`hip ${end} has no usable ridge end for re-anchoring`);
+      const pitch = round3((toY - eave) / run);
+      if (!(pitch > 0) || pitch > (o.maxPitch ?? ROOF_FIT_DEFAULTS.maxPitch)) {
+        return refuse(`re-anchored hip ${end} pitch ${pitch} outside (0, ${o.maxPitch ?? ROOF_FIT_DEFAULTS.maxPitch}]`);
+      }
+      hip.fitted = { lo: hip.fitted?.lo ?? null, hi: hip.fitted?.hi ?? null, ...hip.fitted };
+      hip.fitted[end] = { pitch, rmse: null, triangles: null, source: "ridge-closure" };
+      hipPlan.reanchored.push({ end, pitch });
+    }
+    hip.demanded = hip.lo || hip.hi;
+    if (hipPlan.refuted.length) hip.refuted = "ridge-profile-to-edge";
+  }
+
+  const closed = {
+    ...gable,
+    ridge: { ...gable.ridge, y: toY },
+    sides: sidesPlan.map(({ side, pitch }) => ({ ...side, pitch, pitchFitted: side.pitch })),
+    ...(hip !== gable.hip ? { hip } : {}),
+  };
+  const apexCheck = apexLine && apexLine.height !== undefined ? round3(toY - apexLine.height) : null;
+  const out = {
+    applied: true,
+    from: closure.from,
+    to: toY,
+    profile: { height: profile.height, span: profile.span, length: profile.length, rmse: profile.rmse },
+    anchors: { buildEave: round3(anchors.buildEave), glbEave: round3(anchors.glbEave), dropped: anchors.dropped },
+    apexCheck,
+    apexDiverges: apexCheck !== null && Math.abs(apexCheck) > o.apexGap,
+    sides: sidesPlan.map(({ side, pitch }) => ({ planeId: side.planeId ?? null, pitchFrom: side.pitch, pitchTo: pitch })),
+    hip: hipPlan,
+    refusals,
+  };
+  return { gable: closed, closure: out };
 }
