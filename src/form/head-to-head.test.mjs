@@ -82,6 +82,17 @@ test("H2H5 a refusal record rows honestly (no pass/fail invented)", () => {
   assert.equal(row.gapCount, null);
 });
 
+test("H2H7 coverage-rejected rows carry the under-statement warning in the md", () => {
+  const md = headToHeadMd(composeHeadToHead({
+    subjects: [{ key: "hut", records: {
+      patternbook: gateRec({ gapCount: 0, views: [view("a", "coverage"), view("b", "coverage")] }),
+      generated: gateRec({ gapCount: 5 }),
+    } }],
+  }));
+  assert.match(md, /patternbook: 2 view\(s\) coverage-rejected/);
+  assert.match(md, /under-states/);
+});
+
 test("H2H6 the markdown carries both rows, deltas, and sheets per subject", () => {
   const md = headToHeadMd(composeHeadToHead({
     subjects: [{ key: "hut", records: { patternbook: gateRec({ gapCount: 1 }), generated: gateRec({ gapCount: 5 }) } }],

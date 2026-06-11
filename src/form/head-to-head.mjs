@@ -99,6 +99,12 @@ export function headToHeadMd(h2h, { title = "Pattern-book vs metrology-path best
     lines.push("",
       `Deltas (patternbook − generated): gaps ${s.deltas.gapCount ?? "n/a"}, same-object ${s.deltas.sameObject >= 0 ? "+" : ""}${s.deltas.sameObject}.`,
       "");
+    const unjudged = s.rows.filter((r) => r.views.some((v) => v.outcome === "coverage-rejected"));
+    for (const r of unjudged) {
+      lines.push(`> ⚠ ${r.label}: ${r.views.filter((v) => v.outcome === "coverage-rejected").length} view(s) ` +
+        `coverage-rejected — the judge was never called there, so this row's gap count under-states the ` +
+        `divergence; read the per-view column, not the arithmetic.`, "");
+    }
     for (const r of s.rows) {
       if (r.sheet) lines.push(`Sheet (${r.label}): \`${r.sheet}\``);
     }

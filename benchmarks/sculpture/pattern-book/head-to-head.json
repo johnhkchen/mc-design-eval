@@ -1,0 +1,501 @@
+{
+  "schema": "pattern-book-head-to-head/v1",
+  "subjects": [
+    {
+      "key": "cottage",
+      "rows": [
+        {
+          "label": "patternbook",
+          "subject": "cottage",
+          "artifact": {
+            "path": "benchmarks/sculpture/workshop/cottage/final-artifact.json",
+            "sha256": "cc9530aa6d5621947a29908b6f811c7bff2ad98ec9b75153b9fb1f5fa1b26c8f"
+          },
+          "decided": true,
+          "passed": false,
+          "refusal": null,
+          "gapCount": 0,
+          "gapBudget": 2,
+          "sameObject": {
+            "count": 0,
+            "total": 4
+          },
+          "kitPresence": {
+            "ran": true,
+            "passed": false,
+            "gaps": [
+              "missing: spruce_planks frame @ 16/324 frame-line cells",
+              "missing: stone_bricks panel @ band0 (447 cells)"
+            ],
+            "reason": null
+          },
+          "overall": {
+            "decided": true,
+            "passed": false,
+            "refusal": null
+          },
+          "views": [
+            {
+              "angle": "+x+z",
+              "azimuthDeg": 45,
+              "outcome": "coverage-rejected",
+              "gaps": [],
+              "coveragePassed": false
+            },
+            {
+              "angle": "+x-z",
+              "azimuthDeg": 135,
+              "outcome": "coverage-rejected",
+              "gaps": [],
+              "coveragePassed": false
+            },
+            {
+              "angle": "-x-z",
+              "azimuthDeg": 225,
+              "outcome": "coverage-rejected",
+              "gaps": [],
+              "coveragePassed": false
+            },
+            {
+              "angle": "-x+z",
+              "azimuthDeg": 315,
+              "outcome": "coverage-rejected",
+              "gaps": [],
+              "coveragePassed": false
+            }
+          ],
+          "sheet": "pr/assets/frames/multi-angle-cottage-patternbook.png",
+          "context": {
+            "budget": {
+              "rounds": 6
+            },
+            "workshop": {
+              "outcome": "done",
+              "rounds": {
+                "used": 6,
+                "budget": 6
+              },
+              "accepted": 5,
+              "rolledBack": 0,
+              "conformance": {
+                "first": {
+                  "passed": 6,
+                  "findings": 0
+                },
+                "final": {
+                  "passed": 6,
+                  "findings": 0
+                },
+                "finalPassed": true
+              }
+            },
+            "seedCells": 4993,
+            "recognitionAsks": {
+              "askCount": 1,
+              "budget": 3,
+              "accepted": true
+            }
+          }
+        },
+        {
+          "label": "generated",
+          "subject": "cottage",
+          "artifact": {
+            "path": "benchmarks/sculpture/generated/cottage/artifact.json",
+            "sha256": "d6bfbd290bcaf4a112bb1e898d6ae7813502349d65516861da5c0a7bcf2ffb93"
+          },
+          "decided": true,
+          "passed": false,
+          "refusal": null,
+          "gapCount": 10,
+          "gapBudget": 2,
+          "sameObject": {
+            "count": 2,
+            "total": 4
+          },
+          "kitPresence": {
+            "ran": true,
+            "passed": true,
+            "gaps": [],
+            "reason": null
+          },
+          "overall": {
+            "decided": true,
+            "passed": false,
+            "refusal": null
+          },
+          "views": [
+            {
+              "angle": "+x+z",
+              "azimuthDeg": 45,
+              "outcome": "same object",
+              "gaps": [
+                {
+                  "severity": "minor",
+                  "attribute": "massing",
+                  "region": "roofline chimney"
+                },
+                {
+                  "severity": "minor",
+                  "attribute": "material zoning",
+                  "region": "upper timber-framed walls in shadow under the eaves"
+                }
+              ],
+              "coveragePassed": true
+            },
+            {
+              "angle": "+x-z",
+              "azimuthDeg": 135,
+              "outcome": "same object",
+              "gaps": [
+                {
+                  "severity": "minor",
+                  "attribute": "form",
+                  "region": "roof ridge / apex"
+                },
+                {
+                  "severity": "minor",
+                  "attribute": "massing",
+                  "region": "chimney on the roof"
+                }
+              ],
+              "coveragePassed": true
+            },
+            {
+              "angle": "-x-z",
+              "azimuthDeg": 225,
+              "outcome": "drifted",
+              "gaps": [
+                {
+                  "severity": "major",
+                  "attribute": "form",
+                  "region": "main roof, near slope"
+                },
+                {
+                  "severity": "major",
+                  "attribute": "massing",
+                  "region": "roof shingle coverage"
+                },
+                {
+                  "severity": "minor",
+                  "attribute": "material zoning",
+                  "region": "upper walls and base"
+                }
+              ],
+              "coveragePassed": true
+            },
+            {
+              "angle": "-x+z",
+              "azimuthDeg": 315,
+              "outcome": "drifted",
+              "gaps": [
+                {
+                  "severity": "major",
+                  "attribute": "form",
+                  "region": "roof apex / ridge"
+                },
+                {
+                  "severity": "major",
+                  "attribute": "massing",
+                  "region": "upper roof massing (offset, gapped slabs)"
+                },
+                {
+                  "severity": "minor",
+                  "attribute": "material zoning",
+                  "region": "upper timber-framed wall under eaves"
+                }
+              ],
+              "coveragePassed": true
+            }
+          ],
+          "sheet": "pr/assets/frames/multi-angle-cottage-generated.png",
+          "context": {
+            "status": "gated",
+            "census": {
+              "spikes": 57,
+              "raggedRate": 0.081
+            }
+          }
+        }
+      ],
+      "deltas": {
+        "gapCount": -10,
+        "sameObject": -2
+      }
+    },
+    {
+      "key": "barn",
+      "rows": [
+        {
+          "label": "patternbook",
+          "subject": "barn",
+          "artifact": {
+            "path": "benchmarks/sculpture/workshop/barn/final-artifact.json",
+            "sha256": "91ee4b2e7b6dc2107e949303f919fb3c4e5dfb51eb245c79627f7a1f6dc29185"
+          },
+          "decided": true,
+          "passed": false,
+          "refusal": null,
+          "gapCount": 8,
+          "gapBudget": 2,
+          "sameObject": {
+            "count": 4,
+            "total": 4
+          },
+          "kitPresence": {
+            "ran": true,
+            "passed": true,
+            "gaps": [],
+            "reason": null
+          },
+          "overall": {
+            "decided": true,
+            "passed": false,
+            "refusal": null
+          },
+          "views": [
+            {
+              "angle": "+x+z",
+              "azimuthDeg": 45,
+              "outcome": "same object",
+              "gaps": [
+                {
+                  "severity": "minor",
+                  "attribute": "material zoning",
+                  "region": "long wall windows"
+                },
+                {
+                  "severity": "minor",
+                  "attribute": "form",
+                  "region": "roof eave overhang"
+                }
+              ],
+              "coveragePassed": true
+            },
+            {
+              "angle": "+x-z",
+              "azimuthDeg": 135,
+              "outcome": "same object",
+              "gaps": [
+                {
+                  "severity": "minor",
+                  "attribute": "form",
+                  "region": "roof pitch / apex"
+                },
+                {
+                  "severity": "minor",
+                  "attribute": "material zoning",
+                  "region": "long wall openings (windows)"
+                }
+              ],
+              "coveragePassed": true
+            },
+            {
+              "angle": "-x-z",
+              "azimuthDeg": 225,
+              "outcome": "same object",
+              "gaps": [
+                {
+                  "severity": "minor",
+                  "attribute": "massing",
+                  "region": "roof"
+                },
+                {
+                  "severity": "minor",
+                  "attribute": "form",
+                  "region": "long wall windows"
+                }
+              ],
+              "coveragePassed": true
+            },
+            {
+              "angle": "-x+z",
+              "azimuthDeg": 315,
+              "outcome": "same object",
+              "gaps": [
+                {
+                  "severity": "minor",
+                  "attribute": "form",
+                  "region": "roof ridge and pitch"
+                },
+                {
+                  "severity": "minor",
+                  "attribute": "material zoning",
+                  "region": "long wall openings (windows vs concept's doored stone wall)"
+                }
+              ],
+              "coveragePassed": true
+            }
+          ],
+          "sheet": "pr/assets/frames/multi-angle-barn-patternbook.png",
+          "context": {
+            "budget": {
+              "rounds": 6
+            },
+            "workshop": {
+              "outcome": "budget-exhausted",
+              "rounds": {
+                "used": 6,
+                "budget": 6
+              },
+              "accepted": 0,
+              "rolledBack": 5,
+              "conformance": {
+                "first": {
+                  "passed": 6,
+                  "findings": 0
+                },
+                "final": {
+                  "passed": 6,
+                  "findings": 0
+                },
+                "finalPassed": true
+              }
+            },
+            "seedCells": 10066,
+            "recognitionAsks": {
+              "askCount": 3,
+              "budget": 3,
+              "accepted": true
+            }
+          }
+        },
+        {
+          "label": "generated",
+          "subject": "barn",
+          "artifact": {
+            "path": "benchmarks/sculpture/generated/barn/artifact.json",
+            "sha256": "8f33e3af1f45b312c9889418167aef4d2b004f3f943dccab8cfa9e70cad38bb1"
+          },
+          "decided": true,
+          "passed": false,
+          "refusal": null,
+          "gapCount": 12,
+          "gapBudget": 2,
+          "sameObject": {
+            "count": 0,
+            "total": 4
+          },
+          "kitPresence": {
+            "ran": true,
+            "passed": true,
+            "gaps": [],
+            "reason": null
+          },
+          "overall": {
+            "decided": true,
+            "passed": false,
+            "refusal": null
+          },
+          "views": [
+            {
+              "angle": "+x+z",
+              "azimuthDeg": 45,
+              "outcome": "drifted",
+              "gaps": [
+                {
+                  "severity": "major",
+                  "attribute": "massing",
+                  "region": "walls all around"
+                },
+                {
+                  "severity": "major",
+                  "attribute": "form",
+                  "region": "roof surface"
+                },
+                {
+                  "severity": "minor",
+                  "attribute": "palette",
+                  "region": "stone base and brown roof"
+                }
+              ],
+              "coveragePassed": true
+            },
+            {
+              "angle": "+x-z",
+              "azimuthDeg": 135,
+              "outcome": "drifted",
+              "gaps": [
+                {
+                  "severity": "major",
+                  "attribute": "form",
+                  "region": "near roof slope and ridge"
+                },
+                {
+                  "severity": "major",
+                  "attribute": "massing",
+                  "region": "roof shingle coverage across the whole roof"
+                },
+                {
+                  "severity": "minor",
+                  "attribute": "form",
+                  "region": "upper gable wall, partly open"
+                }
+              ],
+              "coveragePassed": true
+            },
+            {
+              "angle": "-x-z",
+              "azimuthDeg": 225,
+              "outcome": "drifted",
+              "gaps": [
+                {
+                  "severity": "major",
+                  "attribute": "form",
+                  "region": "roof slope facing viewer"
+                },
+                {
+                  "severity": "major",
+                  "attribute": "massing",
+                  "region": "roof shingle surface"
+                },
+                {
+                  "severity": "minor",
+                  "attribute": "form",
+                  "region": "near eave / wall-top junction"
+                }
+              ],
+              "coveragePassed": true
+            },
+            {
+              "angle": "-x+z",
+              "azimuthDeg": 315,
+              "outcome": "drifted",
+              "gaps": [
+                {
+                  "severity": "major",
+                  "attribute": "form",
+                  "region": "both roof slopes — open rafter framing instead of a solid shingled mass"
+                },
+                {
+                  "severity": "major",
+                  "attribute": "massing",
+                  "region": "roof shingle coverage across the whole span"
+                },
+                {
+                  "severity": "minor",
+                  "attribute": "material zoning",
+                  "region": "upper gable/wall infill above the stone base"
+                }
+              ],
+              "coveragePassed": true
+            }
+          ],
+          "sheet": "pr/assets/frames/multi-angle-barn-generated.png",
+          "context": {
+            "status": "gated",
+            "census": {
+              "spikes": 175,
+              "raggedRate": 0.125
+            }
+          }
+        }
+      ],
+      "deltas": {
+        "gapCount": -4,
+        "sameObject": 4
+      }
+    }
+  ],
+  "ticket": "T-127-01"
+}
