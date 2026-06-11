@@ -237,18 +237,61 @@
           }
         }
       },
-      "verdict": null,
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "different object",
+        "gaps": [
+          {
+            "region": "roof across the whole structure",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "overall building mass — exposed hollow interior and jumbled walls",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "corner tower",
+            "attribute": "form",
+            "severity": "major"
+          }
+        ],
+        "rationale": "Though the brown-roof/gray-stone palette persists, the build reads as a fragmented, hollow jumble with a collapsed roof and no distinct nave or tower, so it is not identifiable as the same chapel from this angle."
+      },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10284,
-          "output_tokens": 226,
-          "cost_usd": 0.15548
+          "input_tokens": 10513,
+          "output_tokens": 655,
+          "cost_usd": 0.17010999999999998
         }
       },
-      "unparsed": true,
-      "parseError": "parseMultiAngleVerdict: response is not JSON (Expected ',' or '}' after property value in JSON at position 430 (line 1 column 431))",
-      "rawReply": "```json\n{\"verdict\":\"different object\",\"gaps\":[{\"region\":\"overall massing — the long nave + attached square tower\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"roof — should be a single clean gabled pitch, instead a chaotic stepped/terraced mass\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"walls — uniform stone with regular windows vs. broken multi-level cluttered facade\",\"attribute\":"
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": false,
+          "rawReply": "```json\n{\"verdict\":\"different object\",\"gaps\":[{\"region\":\"overall massing — the long nave + attached square tower\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"roof — should be a single clean gabled pitch, instead a chaotic stepped/terraced mass\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"walls — uniform stone with regular windows vs. broken multi-level cluttered facade\",\"attribute\":",
+          "parseError": "parseMultiAngleVerdict: response is not JSON (Expected ',' or '}' after property value in JSON at position 430 (line 1 column 431))",
+          "usage": {
+            "input_tokens": 10284,
+            "output_tokens": 226,
+            "cost_usd": 0.15548
+          },
+          "source": "committed"
+        },
+        {
+          "attempt": 2,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"different object\",\"gaps\":[{\"region\":\"roof across the whole structure\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"overall building mass — exposed hollow interior and jumbled walls\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"corner tower\",\"attribute\":\"form\",\"severity\":\"major\"}],\"rationale\":\"Though the brown-roof/gray-stone palette persists, the build reads as a fragmente",
+          "usage": {
+            "input_tokens": 10513,
+            "output_tokens": 655,
+            "cost_usd": 0.17010999999999998
+          },
+          "source": "live"
+        }
+      ]
     },
     {
       "angle": "-x+z",
@@ -321,8 +364,85 @@
   ],
   "aggregate": {
     "schema": "multi-angle-gate/v1",
-    "decided": false,
-    "refusal": "unparsed:-x-z",
+    "decided": true,
+    "passed": false,
+    "gapCount": 11,
+    "gapBudget": 2,
+    "gaps": [
+      {
+        "angle": "+x+z",
+        "region": "nave roof",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x+z",
+        "region": "tower roof/cap",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x+z",
+        "region": "walls and roof color zones",
+        "attribute": "palette"
+      },
+      {
+        "angle": "+x-z",
+        "region": "nave roof ridge and edges",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x-z",
+        "region": "tower upper section",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "+x-z",
+        "region": "tower walls",
+        "attribute": "palette"
+      },
+      {
+        "angle": "-x-z",
+        "region": "roof across the whole structure",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x-z",
+        "region": "overall building mass — exposed hollow interior and jumbled walls",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x-z",
+        "region": "corner tower",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x+z",
+        "region": "nave and tower roofs",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x+z",
+        "region": "upper walls under the eaves",
+        "attribute": "form"
+      }
+    ],
+    "failures": [
+      {
+        "angle": "+x+z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "+x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x-z",
+        "reason": "different object"
+      },
+      {
+        "angle": "-x+z",
+        "reason": "drifted"
+      }
+    ],
     "views": [
       {
         "angle": "+x+z",
@@ -334,7 +454,7 @@
       },
       {
         "angle": "-x-z",
-        "outcome": "unparsed"
+        "outcome": "different object: form"
       },
       {
         "angle": "-x+z",
@@ -2352,12 +2472,12 @@
   },
   "overall": {
     "schema": "kit-aware-gate/v1",
-    "decided": false,
-    "refusal": "unparsed:-x-z",
+    "decided": true,
+    "passed": false,
     "components": {
       "resemblance": {
-        "decided": false,
-        "refusal": "unparsed:-x-z"
+        "decided": true,
+        "passed": false
       },
       "kitPresence": {
         "ran": true,
@@ -2369,5 +2489,13 @@
     }
   },
   "sheet": "pr/assets/frames/multi-angle-church-challenge.png",
-  "labeled": true
+  "labeled": true,
+  "rejudge": {
+    "ticket": "T-114-01",
+    "angles": [
+      "-x-z"
+    ],
+    "seeded": true,
+    "instrumentDiff": []
+  }
 }
