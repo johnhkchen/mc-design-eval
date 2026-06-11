@@ -82,12 +82,20 @@ the unsanctioned replies were discarded uncommitted. No record downstream consum
 refusal was then re-captured with the direct `node benchmarks/sculpture/kit-extract.mjs
 --subject=barn` invocation (which throws before any live call).
 
-## Remaining
+## Completed (continued)
 
-- Step 9: residual closure — `reskin:{cottage,gatehouse,church}` re-cuts.
-- Step 10: journal (design-learnings E-29 section) + pr/assets/generate-first.md barn columns +
-  E-12 handoff, now including the stall finding + routing.
-- Step 11: final suite + review.md.
+- **Step 9 — residual closure (commit `1baf955`)**: `reskin:{cottage,gatehouse,church}` re-cut
+  `component-skin/*.json` pins against the current styled shas — chain gated, kit presence PASS
+  ×3 (T-111 residual 4). Residual 3 closed upstream (T-113/T-114, cited); residuals 1–2 routed in
+  the journal (instrument frozen).
+- **Step 10 — journal + sheet (commit `e704b0c`)**: `pr/assets/generate-first.md` fourth-subject
+  section (stall receipts + the robustness-asymmetry finding + pinned-bar-missed record);
+  `design-learnings.md` **Generate-first (E-29)** section (inversion measured, fourth-subject
+  lesson, which-path-scales honest answer, residual ledger incl. declared-cell numbers, E-12
+  handoff).
+- **Step 11**: generalization grep recorded (`grep -c "barn"` = 0 over challenge-/generated-/
+  styled-milestone, zone-map, multi-angle-gate, component-skin runners); suite **1514/1514 green**
+  at every commit boundary; review.md written.
 
 ## Deviations from plan (running list)
 
