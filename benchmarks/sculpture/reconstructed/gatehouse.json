@@ -13,7 +13,7 @@
       "resemblance": {
         "decided": true,
         "passed": false,
-        "gapCount": 11,
+        "gapCount": 12,
         "gapBudget": 2,
         "failures": [
           {
@@ -26,6 +26,10 @@
           },
           {
             "angle": "-x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x+z",
             "reason": "drifted"
           }
         ],
@@ -51,18 +55,18 @@
           "verdict": "drifted",
           "gaps": [
             {
-              "region": "roof — ridge line and slopes",
+              "region": "roof — the build's roof is broken, stepped and lumpy with protruding blocks instead of one clean ridge-to-eave pitch",
               "attribute": "form",
               "severity": "major"
             },
             {
-              "region": "upper roof edges and chimney-like protrusions",
+              "region": "right end / overall outline — extra protruding masses and a ragged outline break the clean single rectangular box of the references",
               "attribute": "massing",
               "severity": "major"
             },
             {
-              "region": "front doorway / arch opening",
-              "attribute": "form",
+              "region": "front archway — the dark door/arch reads but is partly obscured and less centered than the concept",
+              "attribute": "material zoning",
               "severity": "minor"
             }
           ]
@@ -74,18 +78,18 @@
           "verdict": "drifted",
           "gaps": [
             {
-              "region": "roof and upper edges",
+              "region": "roof",
               "attribute": "form",
               "severity": "major"
             },
             {
-              "region": "overall silhouette / wall tops",
-              "attribute": "massing",
-              "severity": "minor"
+              "region": "walls",
+              "attribute": "palette",
+              "severity": "major"
             },
             {
-              "region": "stone walls and dark roof / wood trim",
-              "attribute": "palette",
+              "region": "overall building mass",
+              "attribute": "massing",
               "severity": "minor"
             }
           ]
@@ -97,18 +101,18 @@
           "verdict": "drifted",
           "gaps": [
             {
-              "region": "roof / upper massing",
+              "region": "roof across the whole top",
               "attribute": "form",
               "severity": "major"
             },
             {
-              "region": "overall silhouette vs mesh",
+              "region": "right-hand end of the building",
               "attribute": "massing",
               "severity": "major"
             },
             {
-              "region": "front facade and doorway",
-              "attribute": "form",
+              "region": "walls and roof stonework",
+              "attribute": "palette",
               "severity": "minor"
             }
           ]
@@ -117,15 +121,20 @@
           "angle": "-x+z",
           "azimuthDeg": 315,
           "coverage": true,
-          "verdict": "same object",
+          "verdict": "drifted",
           "gaps": [
             {
-              "region": "roof ridge, upper-left",
+              "region": "overall roof and walls",
               "attribute": "form",
-              "severity": "minor"
+              "severity": "major"
             },
             {
-              "region": "corner pilasters / wall surface",
+              "region": "roof ridge and eaves",
+              "attribute": "massing",
+              "severity": "major"
+            },
+            {
+              "region": "top corners and parapet",
               "attribute": "form",
               "severity": "minor"
             }
@@ -167,18 +176,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof — ridge line and slopes",
+            "region": "roof — the build's roof is broken, stepped and lumpy with protruding blocks instead of one clean ridge-to-eave pitch",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "upper roof edges and chimney-like protrusions",
+            "region": "right end / overall outline — extra protruding masses and a ragged outline break the clean single rectangular box of the references",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "front doorway / arch opening",
-            "attribute": "form",
+            "region": "front archway — the dark door/arch reads but is partly obscured and less centered than the concept",
+            "attribute": "material zoning",
             "severity": "minor"
           }
         ],
@@ -190,18 +199,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof and upper edges",
+            "region": "roof",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "overall silhouette / wall tops",
-            "attribute": "massing",
-            "severity": "minor"
+            "region": "walls",
+            "attribute": "palette",
+            "severity": "major"
           },
           {
-            "region": "stone walls and dark roof / wood trim",
-            "attribute": "palette",
+            "region": "overall building mass",
+            "attribute": "massing",
             "severity": "minor"
           }
         ],
@@ -213,18 +222,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof / upper massing",
+            "region": "roof across the whole top",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "overall silhouette vs mesh",
+            "region": "right-hand end of the building",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "front facade and doorway",
-            "attribute": "form",
+            "region": "walls and roof stonework",
+            "attribute": "palette",
             "severity": "minor"
           }
         ],
@@ -233,15 +242,20 @@
       {
         "angle": "-x+z",
         "azimuthDeg": 315,
-        "verdict": "same object",
+        "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof ridge, upper-left",
+            "region": "overall roof and walls",
             "attribute": "form",
-            "severity": "minor"
+            "severity": "major"
           },
           {
-            "region": "corner pilasters / wall surface",
+            "region": "roof ridge and eaves",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "top corners and parapet",
             "attribute": "form",
             "severity": "minor"
           }
@@ -253,62 +267,67 @@
       "schema": "multi-angle-gate/v1",
       "decided": true,
       "passed": false,
-      "gapCount": 11,
+      "gapCount": 12,
       "gapBudget": 2,
       "gaps": [
         {
           "angle": "+x+z",
-          "region": "roof — ridge line and slopes",
+          "region": "roof — the build's roof is broken, stepped and lumpy with protruding blocks instead of one clean ridge-to-eave pitch",
           "attribute": "form"
         },
         {
           "angle": "+x+z",
-          "region": "upper roof edges and chimney-like protrusions",
+          "region": "right end / overall outline — extra protruding masses and a ragged outline break the clean single rectangular box of the references",
           "attribute": "massing"
         },
         {
           "angle": "+x+z",
-          "region": "front doorway / arch opening",
+          "region": "front archway — the dark door/arch reads but is partly obscured and less centered than the concept",
+          "attribute": "material zoning"
+        },
+        {
+          "angle": "+x-z",
+          "region": "roof",
           "attribute": "form"
         },
         {
           "angle": "+x-z",
-          "region": "roof and upper edges",
-          "attribute": "form"
-        },
-        {
-          "angle": "+x-z",
-          "region": "overall silhouette / wall tops",
-          "attribute": "massing"
-        },
-        {
-          "angle": "+x-z",
-          "region": "stone walls and dark roof / wood trim",
+          "region": "walls",
           "attribute": "palette"
         },
         {
-          "angle": "-x-z",
-          "region": "roof / upper massing",
-          "attribute": "form"
-        },
-        {
-          "angle": "-x-z",
-          "region": "overall silhouette vs mesh",
+          "angle": "+x-z",
+          "region": "overall building mass",
           "attribute": "massing"
         },
         {
           "angle": "-x-z",
-          "region": "front facade and doorway",
+          "region": "roof across the whole top",
+          "attribute": "form"
+        },
+        {
+          "angle": "-x-z",
+          "region": "right-hand end of the building",
+          "attribute": "massing"
+        },
+        {
+          "angle": "-x-z",
+          "region": "walls and roof stonework",
+          "attribute": "palette"
+        },
+        {
+          "angle": "-x+z",
+          "region": "overall roof and walls",
           "attribute": "form"
         },
         {
           "angle": "-x+z",
-          "region": "roof ridge, upper-left",
-          "attribute": "form"
+          "region": "roof ridge and eaves",
+          "attribute": "massing"
         },
         {
           "angle": "-x+z",
-          "region": "corner pilasters / wall surface",
+          "region": "top corners and parapet",
           "attribute": "form"
         }
       ],
@@ -323,6 +342,10 @@
         },
         {
           "angle": "-x-z",
+          "reason": "drifted"
+        },
+        {
+          "angle": "-x+z",
           "reason": "drifted"
         }
       ],
@@ -341,7 +364,7 @@
         },
         {
           "angle": "-x+z",
-          "outcome": "same object (2 minor)"
+          "outcome": "drifted: form"
         }
       ]
     },
@@ -353,11 +376,11 @@
           "feature": "frame",
           "block": "cobblestone",
           "shipped": "cobblestone",
-          "sites": 383,
+          "sites": 378,
           "missing": 0,
-          "satisfied": 289,
+          "satisfied": 307,
           "tolerated": {
-            "respected": 83,
+            "respected": 60,
             "skippedIsolated": 11
           },
           "gating": true,
@@ -367,7 +390,7 @@
           "feature": "panel:band0",
           "block": "stone_bricks",
           "shipped": "polished_basalt",
-          "sites": 3383,
+          "sites": 3297,
           "missing": 0,
           "tolerated": {
             "residue": 0
@@ -379,10 +402,10 @@
           "feature": "course",
           "block": "deepslate_bricks",
           "shipped": "deepslate_bricks",
-          "sites": 883,
+          "sites": 909,
           "missing": 0,
           "tolerated": {
-            "residue": 6
+            "residue": 5
           },
           "gating": true,
           "passed": true
@@ -432,29 +455,29 @@
         },
         "frame": {
           "counts": {
-            "wall": 2903,
+            "wall": 2817,
             "cornerPost": 18,
-            "roofline": 365,
+            "roofline": 360,
             "floorLine": 0
           },
           "painted": 0,
           "adopted": 0,
-          "respected": 83,
+          "respected": 60,
           "skippedIsolated": 11,
-          "alreadyFrame": 289
+          "alreadyFrame": 307
         },
         "fill": {
-          "placements": 6,
+          "placements": 5,
           "byZone": {
             "band0": {
-              "surface": 3383,
+              "surface": 3297,
               "filled": 0,
-              "kept": 3383
+              "kept": 3297
             },
             "roof": {
-              "surface": 883,
-              "filled": 6,
-              "kept": 877
+              "surface": 909,
+              "filled": 5,
+              "kept": 904
             }
           }
         }
@@ -464,7 +487,7 @@
           "openings": 12,
           "fullyDressed": 0,
           "placements": 0,
-          "conflicts": 36,
+          "conflicts": 37,
           "alreadyDressed": 0
         },
         "perOpening": [
@@ -791,8 +814,8 @@
               "infill": 0,
               "shutterLeft": 0,
               "shutterRight": 0,
-              "lintel": 2,
-              "sill": 5
+              "lintel": 1,
+              "sill": 2
             },
             "placed": {
               "infill": 0,
@@ -832,8 +855,8 @@
               "infill": 0,
               "shutterLeft": 0,
               "shutterRight": 0,
-              "lintel": 1,
-              "sill": 4
+              "lintel": 0,
+              "sill": 1
             },
             "placed": {
               "infill": 0,
@@ -857,6 +880,11 @@
                 "slot": "shutterRight",
                 "name": "no-shutter-treatment",
                 "reduction": "shutter-dropped"
+              },
+              {
+                "slot": "lintel",
+                "name": "lintel-no-band-cells",
+                "reduction": "lintel-skipped"
               }
             ]
           },
@@ -874,7 +902,7 @@
               "shutterLeft": 0,
               "shutterRight": 0,
               "lintel": 0,
-              "sill": 7
+              "sill": 6
             },
             "placed": {
               "infill": 0,
@@ -984,10 +1012,10 @@
         "baselineSha256": "64624261a84cce3639ced9d1d752863f471dd6ed34deb9998e4b29d0263d1622"
       },
       "after": {
-        "spikes": 25,
-        "ragged": 67,
+        "spikes": 43,
+        "ragged": 55,
         "columns": 679,
-        "raggedRate": 0.0987,
+        "raggedRate": 0.081,
         "source": "styled/gatehouse/artifact.json"
       }
     },
@@ -1023,10 +1051,10 @@
     "milestoneSha256": {
       "base": null,
       "shell": "b6c899187d50efeef411279640837f6b42e960975c76378edb8747073975e20c",
-      "reconstructed": "33305fce57339c50c5f67c04b1fe3183662203ca59af112dabf6f39274f3143e",
-      "skinFinal": "4a1add05dc2d5a295f59865bf05ab4bae363e7bcc441c9396cd4206f8ab9273a",
-      "grammarFinal": "f9c0a3068649d564d0b6afcaca6053bf52a5c80c673ef6ad0ecb73dca59e7c47",
-      "styled": "e3b89444f3a5365b4fb4cff655dfc57574ff397d104fd5674e962ad207ac2b8e"
+      "reconstructed": "463ce9e25ace7ca3e787c918504933bfa4fd031fc7b458caa30c4ade9eedfd82",
+      "skinFinal": "0719a638254798928a4b7cbad8cbc3bed6910f0323f2dc72516df60ed654c60b",
+      "grammarFinal": "e350000c955a815468b7ad8fc3114897411ada50816835a95ebde1852ce0d817",
+      "styled": "a8b4c58e3571d86e5edaa2130a04ab604ff6a940884b1a644bb2c0653567d90e"
     },
     "determinism": "the milestone runner double-runs the deterministic chain and owns the byte-identity proof (--repro re-proves it fresh-process); this record distills committed outputs — same inputs, same record"
   }

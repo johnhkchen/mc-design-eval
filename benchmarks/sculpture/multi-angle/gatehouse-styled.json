@@ -4,7 +4,7 @@
   "label": "styled",
   "artifact": {
     "path": "benchmarks/sculpture/styled/gatehouse/artifact.json",
-    "sha256": "e3b89444f3a5365b4fb4cff655dfc57574ff397d104fd5674e962ad207ac2b8e"
+    "sha256": "a8b4c58e3571d86e5edaa2130a04ab604ff6a940884b1a644bb2c0653567d90e"
   },
   "contract": {
     "azimuths": [
@@ -65,7 +65,7 @@
           "band0": {
             "dominant": "polished_basalt",
             "fraction": 1,
-            "total": 498,
+            "total": 489,
             "passed": true,
             "metric": "own",
             "own": [
@@ -75,12 +75,12 @@
               "cobblestone",
               "dark_oak_planks"
             ],
-            "dominantFraction": 0.602
+            "dominantFraction": 0.202
           },
           "roof": {
             "dominant": "deepslate_bricks",
             "fraction": 1,
-            "total": 348,
+            "total": 360,
             "passed": true,
             "metric": "own",
             "own": [
@@ -90,7 +90,7 @@
               "dark_oak_log",
               "dark_oak_planks"
             ],
-            "dominantFraction": 0.813
+            "dominantFraction": 0.694
           }
         }
       },
@@ -99,29 +99,29 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof — ridge line and slopes",
+            "region": "roof — the build's roof is broken, stepped and lumpy with protruding blocks instead of one clean ridge-to-eave pitch",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "upper roof edges and chimney-like protrusions",
+            "region": "right end / overall outline — extra protruding masses and a ragged outline break the clean single rectangular box of the references",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "front doorway / arch opening",
-            "attribute": "form",
+            "region": "front archway — the dark door/arch reads but is partly obscured and less centered than the concept",
+            "attribute": "material zoning",
             "severity": "minor"
           }
         ],
-        "rationale": "Recognizably the same gabled stone cottage with a dark plank roof, but the build's roof is broken up by jagged protruding spikes and an uneven ridge that the clean concept and mesh silhouettes do not show."
+        "rationale": "Palette and stone-wall + dark-roof zoning still read as the same gatehouse, but the roof has degraded into a lumpy stepped mass with ragged protrusions and extra outcroppings that break the clean single-pitch box of the reference."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10285,
-          "output_tokens": 200,
-          "cost_usd": 0.154425
+          "input_tokens": 10431,
+          "output_tokens": 278,
+          "cost_usd": 0.15958499999999998
         }
       }
     },
@@ -139,7 +139,7 @@
           "band0": {
             "dominant": "polished_basalt",
             "fraction": 1,
-            "total": 502,
+            "total": 495,
             "passed": true,
             "metric": "own",
             "own": [
@@ -149,12 +149,12 @@
               "cobblestone",
               "dark_oak_planks"
             ],
-            "dominantFraction": 0.643
+            "dominantFraction": 0.616
           },
           "roof": {
             "dominant": "deepslate_bricks",
             "fraction": 1,
-            "total": 300,
+            "total": 310,
             "passed": true,
             "metric": "own",
             "own": [
@@ -164,7 +164,7 @@
               "dark_oak_log",
               "dark_oak_planks"
             ],
-            "dominantFraction": 0.747
+            "dominantFraction": 0.745
           }
         }
       },
@@ -173,29 +173,29 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof and upper edges",
+            "region": "roof",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "overall silhouette / wall tops",
-            "attribute": "massing",
-            "severity": "minor"
+            "region": "walls",
+            "attribute": "palette",
+            "severity": "major"
           },
           {
-            "region": "stone walls and dark roof / wood trim",
-            "attribute": "palette",
+            "region": "overall building mass",
+            "attribute": "massing",
             "severity": "minor"
           }
         ],
-        "rationale": "The stone-wall, dark-roof, brown-wood palette and gabled massing still read as the same cottage, but the roof and upper edges are broken up by ragged protruding blocks that the clean mesh silhouette and concept gable do not show, a major form defect from this angle."
+        "rationale": "The gabled house mass still matches the silhouette, but the roof reads as a broken, spiky, irregular ridge rather than the clean pitch, and the walls have drifted to dark planks instead of the concept's light gray stone."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10285,
-          "output_tokens": 938,
-          "cost_usd": 0.172875
+          "input_tokens": 10439,
+          "output_tokens": 860,
+          "cost_usd": 0.17417500000000002
         }
       }
     },
@@ -213,7 +213,7 @@
           "band0": {
             "dominant": "polished_basalt",
             "fraction": 1,
-            "total": 503,
+            "total": 486,
             "passed": true,
             "metric": "own",
             "own": [
@@ -223,12 +223,12 @@
               "cobblestone",
               "dark_oak_planks"
             ],
-            "dominantFraction": 0.674
+            "dominantFraction": 0.648
           },
           "roof": {
             "dominant": "deepslate_bricks",
             "fraction": 1,
-            "total": 328,
+            "total": 343,
             "passed": true,
             "metric": "own",
             "own": [
@@ -238,7 +238,7 @@
               "dark_oak_log",
               "dark_oak_planks"
             ],
-            "dominantFraction": 0.838
+            "dominantFraction": 0.793
           }
         }
       },
@@ -247,29 +247,29 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof / upper massing",
+            "region": "roof across the whole top",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "overall silhouette vs mesh",
+            "region": "right-hand end of the building",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "front facade and doorway",
-            "attribute": "form",
+            "region": "walls and roof stonework",
+            "attribute": "palette",
             "severity": "minor"
           }
         ],
-        "rationale": "The build reads as the same stone gatehouse with a dark plank roof and arched front opening, but the roof has collapsed into a cluttered, irregular ridgeline rather than the clean steep gable the concept and mesh show, breaking the same-object read from this angle."
+        "rationale": "The gray-stone walls and dark roof keep the palette true, but the clean single gable of the concept/mesh has broken into a fragmented, spiky multi-plane roof with an extra protruding mass at the right end that the mesh silhouette does not show."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10285,
-          "output_tokens": 198,
-          "cost_usd": 0.154375
+          "input_tokens": 10452,
+          "output_tokens": 978,
+          "cost_usd": 0.17719000000000001
         }
       }
     },
@@ -287,7 +287,7 @@
           "band0": {
             "dominant": "polished_basalt",
             "fraction": 1,
-            "total": 512,
+            "total": 494,
             "passed": true,
             "metric": "own",
             "own": [
@@ -297,12 +297,12 @@
               "cobblestone",
               "dark_oak_planks"
             ],
-            "dominantFraction": 0.637
+            "dominantFraction": 0.233
           },
           "roof": {
             "dominant": "deepslate_bricks",
             "fraction": 1,
-            "total": 365,
+            "total": 383,
             "passed": true,
             "metric": "own",
             "own": [
@@ -312,33 +312,38 @@
               "dark_oak_log",
               "dark_oak_planks"
             ],
-            "dominantFraction": 0.858
+            "dominantFraction": 0.726
           }
         }
       },
       "verdict": {
         "schema": "multi-angle-verdict/v1",
-        "verdict": "same object",
+        "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof ridge, upper-left",
+            "region": "overall roof and walls",
             "attribute": "form",
-            "severity": "minor"
+            "severity": "major"
           },
           {
-            "region": "corner pilasters / wall surface",
+            "region": "roof ridge and eaves",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "top corners and parapet",
             "attribute": "form",
             "severity": "minor"
           }
         ],
-        "rationale": "The build reads as the same gabled stone cottage with dark pitched roof, stone walls, and arched base opening matching the concept and mesh silhouette, with only minor roof-ridge protrusions and slightly heavier pilaster relief as cosmetic deviations."
+        "rationale": "The build reads as the same stone-and-dark-roof gatehouse but the massing has lost the clean rectangular box and crisp single-ridge gable of the references, replaced by a lumpy, irregular roofline with stray protruding blocks at the corners."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10285,
-          "output_tokens": 836,
-          "cost_usd": 0.170325
+          "input_tokens": 10448,
+          "output_tokens": 193,
+          "cost_usd": 0.157545
         }
       }
     }
@@ -347,62 +352,67 @@
     "schema": "multi-angle-gate/v1",
     "decided": true,
     "passed": false,
-    "gapCount": 11,
+    "gapCount": 12,
     "gapBudget": 2,
     "gaps": [
       {
         "angle": "+x+z",
-        "region": "roof — ridge line and slopes",
+        "region": "roof — the build's roof is broken, stepped and lumpy with protruding blocks instead of one clean ridge-to-eave pitch",
         "attribute": "form"
       },
       {
         "angle": "+x+z",
-        "region": "upper roof edges and chimney-like protrusions",
+        "region": "right end / overall outline — extra protruding masses and a ragged outline break the clean single rectangular box of the references",
         "attribute": "massing"
       },
       {
         "angle": "+x+z",
-        "region": "front doorway / arch opening",
+        "region": "front archway — the dark door/arch reads but is partly obscured and less centered than the concept",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "+x-z",
+        "region": "roof",
         "attribute": "form"
       },
       {
         "angle": "+x-z",
-        "region": "roof and upper edges",
-        "attribute": "form"
-      },
-      {
-        "angle": "+x-z",
-        "region": "overall silhouette / wall tops",
-        "attribute": "massing"
-      },
-      {
-        "angle": "+x-z",
-        "region": "stone walls and dark roof / wood trim",
+        "region": "walls",
         "attribute": "palette"
       },
       {
-        "angle": "-x-z",
-        "region": "roof / upper massing",
-        "attribute": "form"
-      },
-      {
-        "angle": "-x-z",
-        "region": "overall silhouette vs mesh",
+        "angle": "+x-z",
+        "region": "overall building mass",
         "attribute": "massing"
       },
       {
         "angle": "-x-z",
-        "region": "front facade and doorway",
+        "region": "roof across the whole top",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x-z",
+        "region": "right-hand end of the building",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x-z",
+        "region": "walls and roof stonework",
+        "attribute": "palette"
+      },
+      {
+        "angle": "-x+z",
+        "region": "overall roof and walls",
         "attribute": "form"
       },
       {
         "angle": "-x+z",
-        "region": "roof ridge, upper-left",
-        "attribute": "form"
+        "region": "roof ridge and eaves",
+        "attribute": "massing"
       },
       {
         "angle": "-x+z",
-        "region": "corner pilasters / wall surface",
+        "region": "top corners and parapet",
         "attribute": "form"
       }
     ],
@@ -417,6 +427,10 @@
       },
       {
         "angle": "-x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x+z",
         "reason": "drifted"
       }
     ],
@@ -435,7 +449,7 @@
       },
       {
         "angle": "-x+z",
-        "outcome": "same object (2 minor)"
+        "outcome": "drifted: form"
       }
     ]
   },
@@ -447,11 +461,11 @@
         "feature": "frame",
         "block": "cobblestone",
         "shipped": "cobblestone",
-        "sites": 383,
+        "sites": 378,
         "missing": 0,
-        "satisfied": 289,
+        "satisfied": 307,
         "tolerated": {
-          "respected": 83,
+          "respected": 60,
           "skippedIsolated": 11
         },
         "gating": true,
@@ -461,7 +475,7 @@
         "feature": "panel:band0",
         "block": "stone_bricks",
         "shipped": "polished_basalt",
-        "sites": 3383,
+        "sites": 3297,
         "missing": 0,
         "tolerated": {
           "residue": 0
@@ -473,10 +487,10 @@
         "feature": "course",
         "block": "deepslate_bricks",
         "shipped": "deepslate_bricks",
-        "sites": 883,
+        "sites": 909,
         "missing": 0,
         "tolerated": {
-          "residue": 6
+          "residue": 5
         },
         "gating": true,
         "passed": true
@@ -526,29 +540,29 @@
       },
       "frame": {
         "counts": {
-          "wall": 2903,
+          "wall": 2817,
           "cornerPost": 18,
-          "roofline": 365,
+          "roofline": 360,
           "floorLine": 0
         },
         "painted": 0,
         "adopted": 0,
-        "respected": 83,
+        "respected": 60,
         "skippedIsolated": 11,
-        "alreadyFrame": 289
+        "alreadyFrame": 307
       },
       "fill": {
-        "placements": 6,
+        "placements": 5,
         "byZone": {
           "band0": {
-            "surface": 3383,
+            "surface": 3297,
             "filled": 0,
-            "kept": 3383
+            "kept": 3297
           },
           "roof": {
-            "surface": 883,
-            "filled": 6,
-            "kept": 877
+            "surface": 909,
+            "filled": 5,
+            "kept": 904
           }
         }
       }
@@ -558,7 +572,7 @@
         "openings": 12,
         "fullyDressed": 0,
         "placements": 0,
-        "conflicts": 36,
+        "conflicts": 37,
         "alreadyDressed": 0
       },
       "perOpening": [
@@ -885,8 +899,8 @@
             "infill": 0,
             "shutterLeft": 0,
             "shutterRight": 0,
-            "lintel": 2,
-            "sill": 5
+            "lintel": 1,
+            "sill": 2
           },
           "placed": {
             "infill": 0,
@@ -926,8 +940,8 @@
             "infill": 0,
             "shutterLeft": 0,
             "shutterRight": 0,
-            "lintel": 1,
-            "sill": 4
+            "lintel": 0,
+            "sill": 1
           },
           "placed": {
             "infill": 0,
@@ -951,6 +965,11 @@
               "slot": "shutterRight",
               "name": "no-shutter-treatment",
               "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "lintel",
+              "name": "lintel-no-band-cells",
+              "reduction": "lintel-skipped"
             }
           ]
         },
@@ -968,7 +987,7 @@
             "shutterLeft": 0,
             "shutterRight": 0,
             "lintel": 0,
-            "sill": 7
+            "sill": 6
           },
           "placed": {
             "infill": 0,
