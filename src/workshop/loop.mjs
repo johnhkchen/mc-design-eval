@@ -63,8 +63,9 @@ export function isRegression(before, after) {
  * @param {object} opts.program  a validated workshop program (the seed — committed for replay)
  * @param {object} opts.pack  a validated style pack
  * @param {object} opts.seams
- * @param {(args:{prompt:string, round:number, renders:object[]|null}) => Promise<{verdict:object|null, replies:object[], askCount:number}>} opts.seams.exchange
- *   the metered exchange (runner: reply-policy over the tiered shim; tests: synthetic). A null
+ * @param {(args:{prompt:string, round:number, renders:object[]|null, program:object}) => Promise<{verdict:object|null, replies:object[], askCount:number}>} opts.seams.exchange
+ *   the metered exchange (runner: reply-policy over the tiered shim; tests: synthetic). `program`
+ *   is the CURRENT program so the runner's reply parser grounds actions against it. A null
  *   verdict means the bounded re-asks were exhausted — the loop records it and STOPS.
  * @param {(args:{artifact:object, round:number}) => Promise<object[]|null>} [opts.seams.render]
  *   evidence renders (runner: the 4 gate azimuths; tests/replay: absent → null)
@@ -102,7 +103,7 @@ export async function runWorkshopLoop({ program, pack, seams, appliers = DEFAULT
       program: current, pack, round: r, budget, liveActions, azimuths, conformance: before, lastRound,
     });
 
-    const ex = await exchange({ prompt, round: r, renders });
+    const ex = await exchange({ prompt, round: r, renders, program: current });
     const base = { round: r, renders, replies: ex.replies, askCount: ex.askCount };
 
     if (ex.verdict === null || ex.verdict === undefined) {

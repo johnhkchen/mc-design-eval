@@ -119,6 +119,14 @@ export const OP_ROUTING = Object.freeze([
       "(no interior reference) — the rubric's named strong case (authoring a generator), not a one-view " +
       "label. (T-081-01, fills the T-080-01 hollow shell.)",
   }),
+  Object.freeze({
+    op: "workshop-critique",
+    tier: "strong",
+    rationale:
+      "The workshop round's one exchange (T-126-01): critique the build against the concept across the " +
+      "FOUR gate-azimuth renders AND author the revision action — cross-view judgement + producing new " +
+      "structure, the rubric's strong side twice over.",
+  }),
 ]);
 
 /**

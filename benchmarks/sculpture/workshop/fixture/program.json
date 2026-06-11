@@ -1,0 +1,69 @@
+{
+  "schema": "workshop-program/v1",
+  "subject": "fixture",
+  "pack": "rustic",
+  "budget": { "rounds": 6 },
+  "declarations": {
+    "bands": [
+      { "name": "ground", "yRange": [0, 2], "blocks": ["cobblestone"] },
+      { "name": "upper", "yRange": [3, 5], "blocks": ["white_terracotta"] },
+      { "name": "roof", "yRange": [6, 11], "blocks": ["spruce_planks", "cobblestone", "bricks"], "mixed": true }
+    ],
+    "symmetry": { "axis": "x", "at": 4 },
+    "openings": [
+      { "wall": "door-south", "min": [4, 0, 6], "max": [4, 1, 6] },
+      { "wall": "windows-south", "min": [2, 3, 6], "max": [2, 3, 6] },
+      { "wall": "windows-south", "min": [6, 3, 6], "max": [6, 3, 6] },
+      { "wall": "windows-north", "min": [2, 3, 0], "max": [2, 3, 0] },
+      { "wall": "windows-north", "min": [6, 3, 0], "max": [6, 3, 0] }
+    ]
+  },
+  "elements": [
+    {
+      "id": "shell",
+      "kind": "shell",
+      "spec": {
+        "footprint": { "x0": 0, "x1": 8, "z0": 0, "z1": 6 },
+        "y0": 0,
+        "height": 6,
+        "wallBlock": "white_terracotta",
+        "courses": [
+          { "yRange": [0, 2], "block": "cobblestone" },
+          { "yRange": [4, 4], "block": "pink_wool" }
+        ],
+        "openings": [
+          { "wall": "+z", "at": [4, 0], "w": 1, "h": 2 },
+          { "wall": "+z", "at": [2, 3], "w": 1, "h": 1 },
+          { "wall": "+z", "at": [6, 3], "w": 1, "h": 1 },
+          { "wall": "-z", "at": [2, 3], "w": 1, "h": 1 },
+          { "wall": "-z", "at": [6, 3], "w": 1, "h": 1 }
+        ]
+      }
+    },
+    {
+      "id": "roof",
+      "kind": "idiom",
+      "idiom": "roof.hip",
+      "spec": {
+        "footprint": { "x0": 0, "x1": 8, "z0": 0, "z1": 6 },
+        "ridgeAxis": "x",
+        "eaveY": 6,
+        "ridgeY": 7,
+        "blocks": { "field": "spruce_planks", "stairs": null, "slab": null }
+      }
+    },
+    {
+      "id": "chimney",
+      "kind": "idiom",
+      "idiom": "chimney",
+      "spec": {
+        "base": [4, 6, 3],
+        "footprint": { "w": 1, "d": 1 },
+        "height": 5,
+        "block": "cobblestone",
+        "cap": "crown",
+        "capBlock": "bricks"
+      }
+    }
+  ]
+}

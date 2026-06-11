@@ -174,3 +174,7 @@ benchmarks/sculpture/reconstructed/**/*.png
 # generated/<subj>/{base-,grammar-,}artifact.json + component-plan.json + provision-fit.json; the
 # committed evidence frames live in pr/assets/frames/multi-angle-*-generated.png.
 benchmarks/sculpture/generated/**/*.png
+
+# Workshop loop renders (T-126-01) — evidence only, regen via `npm run workshop:fixture`; the
+# durable record is the committed ledger + final artifact (json/md, pin-guarded).
+benchmarks/sculpture/workshop/**/*.png
