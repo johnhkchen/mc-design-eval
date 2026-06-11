@@ -1,0 +1,86 @@
+{
+  "schema": "pattern-book-chain/v1",
+  "ticket": "T-127-01",
+  "subject": "barn",
+  "pack": "rustic",
+  "budget": {
+    "rounds": 6
+  },
+  "stages": {
+    "sketch": {
+      "read": {
+        "path": "benchmarks/sculpture/form-sketch/barn.json",
+        "sha256": "8a0390e55ed0ef60a60c487c23a6b2bca47e5c03e4c5444d18cef2f9f44d69c1"
+      },
+      "sheet": {
+        "path": "benchmarks/sculpture/form-sketch/barn-sheet.png",
+        "sha256": "912e19e9bc757998449735a1d6d9461159f3c669adc4b60be593a576fea681fa"
+      }
+    },
+    "recognition": {
+      "program": {
+        "path": "benchmarks/sculpture/recognition/barn.program.json",
+        "sha256": "eb94efa934d59d1db392bc91774e34946d48c9e96a207acdfc9862bca1ad0728"
+      },
+      "artifact": {
+        "path": "benchmarks/sculpture/recognition/barn.artifact.json",
+        "sha256": "91ee4b2e7b6dc2107e949303f919fb3c4e5dfb51eb245c79627f7a1f6dc29185",
+        "reproduced": true
+      },
+      "conformance": {
+        "passed": true
+      },
+      "replies": {
+        "askCount": 3,
+        "budget": 3,
+        "accepted": true
+      }
+    },
+    "seed": {
+      "path": "benchmarks/sculpture/workshop/barn/program.json",
+      "sha256": "5286e8b3200f0158cd25a9b9e0e8b4f96dd5ab23ca137e63781dbfa9887b3e6d",
+      "cells": 10066,
+      "conformance": {
+        "passed": true
+      }
+    },
+    "workshop": {
+      "ledger": {
+        "path": "benchmarks/sculpture/workshop/barn.json",
+        "sha256": "11ec20dd9d3d8407c3ddcaf582b2c0e732237ab3f594f048714b8f8721606fbb"
+      },
+      "final": {
+        "path": "benchmarks/sculpture/workshop/barn/final-artifact.json",
+        "sha256": "91ee4b2e7b6dc2107e949303f919fb3c4e5dfb51eb245c79627f7a1f6dc29185"
+      },
+      "outcome": "budget-exhausted",
+      "rounds": {
+        "used": 6,
+        "budget": 6
+      },
+      "accepted": 0,
+      "rolledBack": 5,
+      "unavailable": 1,
+      "applyFailed": 0,
+      "conformance": {
+        "first": {
+          "passed": 6,
+          "findings": 0
+        },
+        "final": {
+          "passed": 6,
+          "findings": 0
+        },
+        "finalPassed": true
+      }
+    }
+  },
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  },
+  "replay": {
+    "npmRun": "patternbook:repro / patternbook:offline",
+    "asserts": "committed program+ledger → byte-identical final build"
+  }
+}

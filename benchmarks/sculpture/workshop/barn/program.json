@@ -1,0 +1,665 @@
+{
+  "schema": "workshop-program/v1",
+  "subject": "barn",
+  "pack": "rustic",
+  "budget": {
+    "rounds": 6
+  },
+  "declarations": {
+    "bands": [
+      {
+        "name": "base",
+        "yRange": [
+          0,
+          2
+        ],
+        "blocks": [
+          "cobblestone",
+          "stone_bricks"
+        ],
+        "mixed": true
+      },
+      {
+        "name": "upper",
+        "yRange": [
+          3,
+          8
+        ],
+        "blocks": [
+          "cobblestone",
+          "stone_bricks"
+        ],
+        "mixed": true
+      },
+      {
+        "name": "roof",
+        "yRange": [
+          9,
+          21
+        ],
+        "blocks": [
+          "dark_oak_planks"
+        ]
+      }
+    ],
+    "symmetry": null,
+    "openings": [
+      {
+        "wall": "barn:+z#1.0",
+        "kind": "window",
+        "min": [
+          8,
+          3,
+          23
+        ],
+        "max": [
+          9,
+          6,
+          23
+        ]
+      },
+      {
+        "wall": "barn:+z#0.0",
+        "kind": "wagon-door",
+        "min": [
+          15,
+          0,
+          23
+        ],
+        "max": [
+          17,
+          4,
+          23
+        ]
+      },
+      {
+        "wall": "barn:+z#1.1",
+        "kind": "window",
+        "min": [
+          23,
+          3,
+          23
+        ],
+        "max": [
+          24,
+          6,
+          23
+        ]
+      },
+      {
+        "wall": "barn:+z#0.1",
+        "kind": "wagon-door",
+        "min": [
+          30,
+          0,
+          23
+        ],
+        "max": [
+          32,
+          4,
+          23
+        ]
+      },
+      {
+        "wall": "barn:+z#1.2",
+        "kind": "window",
+        "min": [
+          38,
+          3,
+          23
+        ],
+        "max": [
+          39,
+          6,
+          23
+        ]
+      },
+      {
+        "wall": "barn:-z#2",
+        "kind": "window",
+        "min": [
+          12,
+          3,
+          0
+        ],
+        "max": [
+          13,
+          6,
+          0
+        ]
+      },
+      {
+        "wall": "barn:-z#2",
+        "kind": "window",
+        "min": [
+          19,
+          3,
+          0
+        ],
+        "max": [
+          20,
+          6,
+          0
+        ]
+      },
+      {
+        "wall": "barn:-z#2",
+        "kind": "window",
+        "min": [
+          26,
+          3,
+          0
+        ],
+        "max": [
+          27,
+          6,
+          0
+        ]
+      },
+      {
+        "wall": "barn:-z#2",
+        "kind": "window",
+        "min": [
+          33,
+          3,
+          0
+        ],
+        "max": [
+          34,
+          6,
+          0
+        ]
+      },
+      {
+        "wall": "barn:+x#3",
+        "kind": "window",
+        "min": [
+          47,
+          5,
+          11
+        ],
+        "max": [
+          47,
+          7,
+          11
+        ]
+      },
+      {
+        "wall": "barn:-x#4",
+        "kind": "window",
+        "min": [
+          0,
+          5,
+          11
+        ],
+        "max": [
+          0,
+          7,
+          11
+        ]
+      }
+    ]
+  },
+  "elements": [
+    {
+      "id": "barn-shell",
+      "kind": "shell",
+      "spec": {
+        "footprint": {
+          "x0": 0,
+          "x1": 47,
+          "z0": 0,
+          "z1": 23
+        },
+        "y0": 0,
+        "height": 9,
+        "wallBlock": "cobblestone",
+        "courses": [
+          {
+            "yRange": [
+              0,
+              2
+            ],
+            "block": "cobblestone"
+          }
+        ],
+        "openings": [
+          {
+            "wall": "+z",
+            "at": [
+              8,
+              3
+            ],
+            "w": 2,
+            "h": 4
+          },
+          {
+            "wall": "+z",
+            "at": [
+              15,
+              0
+            ],
+            "w": 3,
+            "h": 5
+          },
+          {
+            "wall": "+z",
+            "at": [
+              23,
+              3
+            ],
+            "w": 2,
+            "h": 4
+          },
+          {
+            "wall": "+z",
+            "at": [
+              30,
+              0
+            ],
+            "w": 3,
+            "h": 5
+          },
+          {
+            "wall": "+z",
+            "at": [
+              38,
+              3
+            ],
+            "w": 2,
+            "h": 4
+          },
+          {
+            "wall": "-z",
+            "at": [
+              12,
+              3
+            ],
+            "w": 2,
+            "h": 4
+          },
+          {
+            "wall": "-z",
+            "at": [
+              19,
+              3
+            ],
+            "w": 2,
+            "h": 4
+          },
+          {
+            "wall": "-z",
+            "at": [
+              26,
+              3
+            ],
+            "w": 2,
+            "h": 4
+          },
+          {
+            "wall": "-z",
+            "at": [
+              33,
+              3
+            ],
+            "w": 2,
+            "h": 4
+          },
+          {
+            "wall": "+x",
+            "at": [
+              11,
+              5
+            ],
+            "w": 1,
+            "h": 3
+          },
+          {
+            "wall": "-x",
+            "at": [
+              11,
+              5
+            ],
+            "w": 1,
+            "h": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "barn-plinth",
+      "kind": "idiom",
+      "idiom": "plinth",
+      "spec": {
+        "footprint": {
+          "x0": 0,
+          "x1": 47,
+          "z0": 0,
+          "z1": 23
+        },
+        "y0": 0,
+        "courses": 1,
+        "block": "stone_bricks"
+      }
+    },
+    {
+      "id": "barn-roof",
+      "kind": "idiom",
+      "idiom": "roof.gable",
+      "spec": {
+        "footprint": {
+          "x0": 0,
+          "x1": 47,
+          "z0": -1,
+          "z1": 24
+        },
+        "ridgeAxis": "x",
+        "eaveY": 9,
+        "ridgeY": 21,
+        "pitch": 1,
+        "blocks": {
+          "field": "dark_oak_planks",
+          "stairs": null,
+          "slab": null
+        }
+      }
+    },
+    {
+      "id": "barn-head-+z-1-0",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "spec": {
+        "span": {
+          "axis": "x",
+          "range": [
+            8,
+            9
+          ]
+        },
+        "yRange": [
+          3,
+          6
+        ],
+        "depth": {
+          "axis": "z",
+          "range": [
+            23,
+            23
+          ]
+        },
+        "block": "stone_bricks",
+        "level": 5
+      }
+    },
+    {
+      "id": "barn-head-+z-0-0",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "spec": {
+        "span": {
+          "axis": "x",
+          "range": [
+            15,
+            17
+          ]
+        },
+        "yRange": [
+          0,
+          4
+        ],
+        "depth": {
+          "axis": "z",
+          "range": [
+            23,
+            23
+          ]
+        },
+        "block": "stone_bricks",
+        "level": 3
+      }
+    },
+    {
+      "id": "barn-head-+z-1-1",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "spec": {
+        "span": {
+          "axis": "x",
+          "range": [
+            23,
+            24
+          ]
+        },
+        "yRange": [
+          3,
+          6
+        ],
+        "depth": {
+          "axis": "z",
+          "range": [
+            23,
+            23
+          ]
+        },
+        "block": "stone_bricks",
+        "level": 5
+      }
+    },
+    {
+      "id": "barn-head-+z-0-1",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "spec": {
+        "span": {
+          "axis": "x",
+          "range": [
+            30,
+            32
+          ]
+        },
+        "yRange": [
+          0,
+          4
+        ],
+        "depth": {
+          "axis": "z",
+          "range": [
+            23,
+            23
+          ]
+        },
+        "block": "stone_bricks",
+        "level": 3
+      }
+    },
+    {
+      "id": "barn-head-+z-1-2",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "spec": {
+        "span": {
+          "axis": "x",
+          "range": [
+            38,
+            39
+          ]
+        },
+        "yRange": [
+          3,
+          6
+        ],
+        "depth": {
+          "axis": "z",
+          "range": [
+            23,
+            23
+          ]
+        },
+        "block": "stone_bricks",
+        "level": 5
+      }
+    },
+    {
+      "id": "barn-head--z-2-0",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "spec": {
+        "span": {
+          "axis": "x",
+          "range": [
+            12,
+            13
+          ]
+        },
+        "yRange": [
+          3,
+          6
+        ],
+        "depth": {
+          "axis": "z",
+          "range": [
+            0,
+            0
+          ]
+        },
+        "block": "stone_bricks",
+        "level": 5
+      }
+    },
+    {
+      "id": "barn-head--z-2-1",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "spec": {
+        "span": {
+          "axis": "x",
+          "range": [
+            19,
+            20
+          ]
+        },
+        "yRange": [
+          3,
+          6
+        ],
+        "depth": {
+          "axis": "z",
+          "range": [
+            0,
+            0
+          ]
+        },
+        "block": "stone_bricks",
+        "level": 5
+      }
+    },
+    {
+      "id": "barn-head--z-2-2",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "spec": {
+        "span": {
+          "axis": "x",
+          "range": [
+            26,
+            27
+          ]
+        },
+        "yRange": [
+          3,
+          6
+        ],
+        "depth": {
+          "axis": "z",
+          "range": [
+            0,
+            0
+          ]
+        },
+        "block": "stone_bricks",
+        "level": 5
+      }
+    },
+    {
+      "id": "barn-head--z-2-3",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "spec": {
+        "span": {
+          "axis": "x",
+          "range": [
+            33,
+            34
+          ]
+        },
+        "yRange": [
+          3,
+          6
+        ],
+        "depth": {
+          "axis": "z",
+          "range": [
+            0,
+            0
+          ]
+        },
+        "block": "stone_bricks",
+        "level": 5
+      }
+    },
+    {
+      "id": "barn-head-+x-3-0",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "spec": {
+        "span": {
+          "axis": "z",
+          "range": [
+            11,
+            11
+          ]
+        },
+        "yRange": [
+          5,
+          7
+        ],
+        "depth": {
+          "axis": "x",
+          "range": [
+            47,
+            47
+          ]
+        },
+        "block": "stone_bricks",
+        "level": 6
+      }
+    },
+    {
+      "id": "barn-head--x-4-0",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "spec": {
+        "span": {
+          "axis": "z",
+          "range": [
+            11,
+            11
+          ]
+        },
+        "yRange": [
+          5,
+          7
+        ],
+        "depth": {
+          "axis": "x",
+          "range": [
+            0,
+            0
+          ]
+        },
+        "block": "stone_bricks",
+        "level": 6
+      }
+    }
+  ]
+}

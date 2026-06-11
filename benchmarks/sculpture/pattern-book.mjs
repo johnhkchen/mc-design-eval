@@ -247,6 +247,13 @@ async function runLive(def, { rotate }) {
 
 async function runRepro(def, { offline }) {
   const key = def.key;
+  // the recognize.mjs --offline precedent: a subject with no committed chain is SKIPPED, not
+  // failed — the sweep asserts every committed chain, and at least one must exist.
+  if (!existsSync(join(ROOT, `${RECOG_REL}/${key}.program.json`)) ||
+      !existsSync(join(ROOT, `${WORKSHOP_REL}/${key}/program.json`))) {
+    console.error(`[pattern-book ${offline ? "--offline" : "--repro"}] ${key}: no committed chain — skipped`);
+    return null;
+  }
   const pack = loadStylePack(PACK_PATH);
   const problems = [];
   try {
@@ -303,7 +310,9 @@ const selected = defs.filter((d) => !onlySubject || d.key === onlySubject);
 if (repro || offline) {
   const results = [];
   for (const def of selected) results.push(await runRepro(def, { offline }));
-  if (results.some((ok) => !ok)) process.exit(1);
+  const ran = results.filter((r) => r !== null);
+  if (ran.length === 0) throw new Error(`--${offline ? "offline" : "repro"}: no committed chains found for the selection`);
+  if (ran.some((ok) => !ok)) process.exit(1);
 } else {
   for (const def of selected) {
     const ok = await runLive(def, { rotate });
