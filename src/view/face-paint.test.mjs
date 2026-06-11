@@ -128,3 +128,18 @@ test("mergePaints unions non-colliding paints and dedups by voxelKey", () => {
   assert.equal(merged.collisions, 0);
   assert.equal(merged.placements.length, 2);
 });
+
+test("skip excludes declared cells before any palette/zone judgement (T-106-01)", () => {
+  const occ = occupancyFromCells(cube(3));
+  const grid = projectSurface(occ, "+x");
+  const skip = ([, y]) => y === 2; // the program courses' row
+  const pass = paintFace(occ, "+x", fillTarget(grid, "white_terracotta"), { allowed: ALLOWED, skip });
+  assert.equal(pass.regionKept, 3); // the 3 cells of the +x face's top row
+  assert.equal(pass.painted, grid.filled - 3);
+  assert.ok(pass.placements.every((p) => p.pos[1] !== 2), "no placement lands on a skipped cell");
+  // default-absent behavior unchanged
+  const plain = paintFace(occ, "+x", fillTarget(grid, "white_terracotta"), { allowed: ALLOWED });
+  assert.equal(plain.painted, grid.filled);
+  assert.equal(plain.regionKept, 0);
+  assert.throws(() => paintFace(occ, "+x", fillTarget(grid, "x"), { allowed: ALLOWED, skip: 5 }), /skip must be/);
+});

@@ -1,7 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { occupancyFromCells } from "../view/occupancy.mjs";
+import { occupancyFromCells, solidOccupancy } from "../view/occupancy.mjs";
+import { frameLines } from "../view/frame-lines.mjs";
 import { roofRegion } from "../view/structural-read.mjs";
 import { assertArtifact } from "../artifact.mjs";
 import { PHASE1_MODEL_ID } from "../config.mjs";
@@ -236,4 +237,20 @@ test("placementGrammar: output composes into a live-gate-valid artifact (AJV)", 
     placements,
   };
   assert.doesNotThrow(() => assertArtifact(artifact));
+});
+
+test("placementGrammar: a provided frames read is used VERBATIM and recorded (T-106-01)", () => {
+  const h = hut();
+  const derived = placementGrammar(h.occ, GOPTS(h));
+  assert.equal(derived.frame.source, "occupancy");
+  // hand the derived read back as the override: identical output, component-sourced
+  const fl = frameLines(solidOccupancy(h.occ), { floorLines: GOPTS(h).floorLines, upperTop: GOPTS(h).upperTop, roofKeys: GOPTS(h).roofKeys });
+  const overridden = placementGrammar(h.occ, { ...GOPTS(h), frames: fl });
+  assert.equal(overridden.frame.source, "component");
+  assert.deepEqual(overridden.placements, derived.placements);
+  // a NARROWED definition changes the paint: drop every roofline cell, the crown goes unpainted
+  const narrowed = { ...fl, cells: new Map([...fl.cells].filter(([, k]) => k !== "roofline")), counts: { ...fl.counts, roofline: 0 } };
+  const g2 = placementGrammar(h.occ, { ...GOPTS(h), frames: narrowed });
+  assert.ok(g2.frame.placements.length < derived.frame.placements.length);
+  assert.throws(() => placementGrammar(h.occ, { ...GOPTS(h), frames: { cells: [] } }), /frames must carry a cells Map/);
 });

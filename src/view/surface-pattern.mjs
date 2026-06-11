@@ -196,17 +196,26 @@ const NEIGH6 = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, 
  *           chimney);
  *   strip — anything smaller/blobbier (a lone speck, a 2×2 clump): recolor to the CELL's zone dominant.
  * Material legality was zoneFill's gate; this op judges pattern — a lawful material still strips when it
- * reads as salt. Zones absent from `zones` are untouched. RECOLOR-only. PURE.
+ * reads as salt. Zones absent from `zones` are untouched. A voxel inside a DECLARED SUB-REGION
+ * (`regions`, the zoneFill contract — T-106-01) is never a strip candidate: a generated roof
+ * program's lone ridge slab is a design element, not salt. RECOLOR-only. PURE.
  * @param {import("./occupancy.mjs").Occupancy} occ
  * @param {{zoneOf:(voxel:number[])=>string, zones:Record<string,{dominant:string}>,
- *          faces?:string[], minKeep?:number, minExtent?:number}} opts
+ *          faces?:string[], minKeep?:number, minExtent?:number,
+ *          regions?:{name:string, contains:(voxel:number[])=>boolean}[]}} opts
  * @returns {{placements:{op:"voxel",pos:number[],block:string}[], stripped:number, kept:number,
  *            byZone:Record<string,{offDominant:number, strippedCells:number, keptCells:number,
- *                                  byBlock:Record<string,{stripped:number,kept:number}>}>}}
+ *                                  byBlock:Record<string,{stripped:number,kept:number}>}>,
+ *            byRegion:Record<string,number>}}
  */
-export function stripStraySalt(occ, { zoneOf, zones, faces = FILL_FACES, minKeep = 3, minExtent = 3 } = {}) {
+export function stripStraySalt(occ, { zoneOf, zones, faces = FILL_FACES, minKeep = 3, minExtent = 3, regions = [] } = {}) {
   if (typeof zoneOf !== "function") throw new Error("stripStraySalt: opts.zoneOf must be a function");
   if (!zones || typeof zones !== "object") throw new Error("stripStraySalt: opts.zones must be a zone→policy map");
+  for (const r of regions) {
+    if (!r || typeof r.name !== "string" || typeof r.contains !== "function") {
+      throw new Error("stripStraySalt: each region must be {name:string, contains:(voxel)=>boolean}");
+    }
+  }
   const policy = new Map();
   for (const [zone, p] of Object.entries(zones)) {
     if (!p || typeof p.dominant !== "string") throw new Error(`stripStraySalt: zones.${zone}.dominant must be a bare block id`);
@@ -214,10 +223,13 @@ export function stripStraySalt(occ, { zoneOf, zones, faces = FILL_FACES, minKeep
   }
   // the off-dominant skin: key → {voxel, bare, zone}
   const off = new Map();
+  const byRegion = {};
   for (const { key, voxel, block } of surfaceVoxelEntries(occ, faces)) {
     const zone = zoneOf(voxel);
     const dom = policy.get(zone);
     if (dom === undefined) continue; // no policy — untouched
+    const region = regions.find((r) => r.contains(voxel));
+    if (region) { byRegion[region.name] = (byRegion[region.name] || 0) + 1; continue; }
     const bare = bareBlock(block);
     if (bare !== dom) off.set(key, { voxel, bare, zone });
   }
@@ -263,7 +275,7 @@ export function stripStraySalt(occ, { zoneOf, zones, faces = FILL_FACES, minKeep
       placements.push({ op: "voxel", pos: [...p.voxel], block: namespaced(policy.get(p.zone)) });
     }
   }
-  return { placements, stripped, kept, byZone };
+  return { placements, stripped, kept, byZone, byRegion };
 }
 
 /** A NEW occupancy with `placements` overlaid (last-write-wins) — measure after-state without a

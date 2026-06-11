@@ -37,6 +37,8 @@ function namespaced(id) {
  * @property {number} skipped  filled cells skipped (no target / no change)
  * @property {number} offPalette  target cells dropped for being off-palette
  * @property {number} zoneRejected  target cells dropped for being disallowed in the cell's structural zone
+ * @property {number} regionKept  cells inside a declared skip region (T-106-01: a generated roof
+ *   program's stair/slab cells are design elements — the splat never recolors them)
  */
 
 /**
@@ -54,23 +56,27 @@ function namespaced(id) {
  * @param {string|{name:string}} dir  an ortho/45° dir (surface-grid throws on arbitrary-oblique)
  * @param {(string|null)[][]} targetGrid  per-cell target block (bare or namespaced) or null; m×n
  * @param {{allowed:Set<string>, source?:string,
- *          zoneOf?:(voxel:number[])=>string, allowedByZone?:Map<string,Set<string>>}} opts
+ *          zoneOf?:(voxel:number[])=>string, allowedByZone?:Map<string,Set<string>>,
+ *          skip?:(voxel:number[])=>boolean}} opts
  *   `zoneOf` classifies a voxel into a zone; `allowedByZone` maps each zone → its allowed bare ids. When
  *   `zoneOf` is given, `allowedByZone` MUST be a Map. The effective per-cell palette is `allowed ∩
- *   allowedByZone.get(zone)`.
+ *   allowedByZone.get(zone)`. `skip` excludes declared cells (counted in `regionKept`) before any
+ *   palette/zone judgement.
  * @returns {PaintPass}
  */
-export function paintFace(occ, dir, targetGrid, { allowed, source = "concept", zoneOf, allowedByZone } = {}) {
+export function paintFace(occ, dir, targetGrid, { allowed, source = "concept", zoneOf, allowedByZone, skip } = {}) {
   if (!(allowed instanceof Set)) throw new Error("paintFace: opts.allowed must be a Set of bare block ids");
   if (zoneOf && !(allowedByZone instanceof Map)) throw new Error("paintFace: opts.allowedByZone must be a Map when zoneOf is given");
+  if (skip !== undefined && typeof skip !== "function") throw new Error("paintFace: opts.skip must be a (voxel)=>boolean");
   const grid = projectSurface(occ, dir);
   const placements = [];
-  let painted = 0, skipped = 0, offPalette = 0, zoneRejected = 0;
+  let painted = 0, skipped = 0, offPalette = 0, zoneRejected = 0, regionKept = 0;
   for (let v = 0; v < grid.m; v++) {
     const trow = targetGrid[v];
     for (let u = 0; u < grid.n; u++) {
       const cell = grid.cells[v][u];
       if (!cell) continue; // air column — nothing to paint
+      if (skip && skip(cell.voxel)) { regionKept++; continue; }
       const target = trow ? trow[u] : null;
       if (target == null) { skipped++; continue; }
       const bareTarget = bareBlock(target);
@@ -84,7 +90,7 @@ export function paintFace(occ, dir, targetGrid, { allowed, source = "concept", z
       painted++;
     }
   }
-  return { dir: grid.dir, source, placements, painted, skipped, offPalette, zoneRejected };
+  return { dir: grid.dir, source, placements, painted, skipped, offPalette, zoneRejected, regionKept };
 }
 
 /**

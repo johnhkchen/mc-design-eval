@@ -108,14 +108,19 @@ export function bindOpenings(instances, treatments) {
  * @param {import("../view/occupancy.mjs").Occupancy} occ  the shipped build's occupancy
  * @param {{kit:object[], bandNames:string[], policy:Record<string,{dominant:string,preserve?:string[]}>,
  *          zoneOf:(voxel:number[])=>string, floorLines:number[], upperTop:number,
- *          roofKeys:Set<string>, sideDirs?:string[], sub?:(b:string)=>string, minRun?:number}} opts
+ *          roofKeys:Set<string>, sideDirs?:string[], sub?:(b:string)=>string, minRun?:number,
+ *          frames?:{cells:Map<string,string>, byKind:Record<string,string[]>, counts:object}|null}} opts
+ *   `frames` (T-106-01): a pre-classified frame-line read (component-plan's
+ *   frameLinesFromComponent) used VERBATIM instead of the occupancy derivation — the definition is
+ *   the contract; everything downstream consumes the same shape either way.
  */
 export function placementGrammar(occ, {
   kit, bandNames, policy, zoneOf, floorLines, upperTop, roofKeys,
-  sideDirs = SIDE_DIRS, sub = (b) => b, minRun = 2,
+  sideDirs = SIDE_DIRS, sub = (b) => b, minRun = 2, frames = null,
 }) {
   if (typeof zoneOf !== "function") throw new Error("placementGrammar: opts.zoneOf must be a function");
   if (!policy || typeof policy !== "object") throw new Error("placementGrammar: opts.policy must be a zone→policy map");
+  if (frames !== null && !(frames.cells instanceof Map)) throw new Error("placementGrammar: opts.frames must carry a cells Map when given");
   const solid = solidOccupancy(occ);
   const geom = { floorLines, upperTop, roofKeys };
 
@@ -139,7 +144,8 @@ export function placementGrammar(occ, {
   // line isolate (debris columns, air-pocketed corners): SKIPPED, counted, never painted — a 1-cell
   // speck serves no rhythm and the fill would rightly strip it.
   const NB6 = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
-  const frame = frameLines(solid, geom);
+  const frame = frames ?? frameLines(solid, geom);
+  const frameSource = frames ? "component" : "occupancy";
   const preserveOf = new Map(Object.entries(policy).map(
     ([z, p]) => [z, new Set((p.preserve ?? []).map(bareBlock))]));
   const memo = new Map();
@@ -224,7 +230,7 @@ export function placementGrammar(occ, {
       skipped: bindings.skipped,
     },
     shipped,
-    frame: { counts: frame.counts, painted, respected, adopted, skippedIsolated, alreadyFrame, placements: framePlacements },
+    frame: { source: frameSource, counts: frame.counts, painted, respected, adopted, skippedIsolated, alreadyFrame, placements: framePlacements },
     fill,
     frameRefilled,
     preexistingFrameRefilled,

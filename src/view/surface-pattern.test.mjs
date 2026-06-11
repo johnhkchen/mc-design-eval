@@ -191,3 +191,16 @@ test("arg validation mirrors zoneFill's", () => {
   assert.throws(() => stripStraySalt(occ, { zoneOf }), /zones/);
   assert.throws(() => stripStraySalt(occ, { zoneOf, zones: { upper: {} } }), /dominant/);
 });
+
+test("a declared region cell is never a strip candidate — the lone ridge slab survives (T-106-01)", () => {
+  const occ = occupancyFromCells(hut());
+  // protect exactly the upper speck's cell; without the region it strips (proven above)
+  const regions = [{ name: "roof-program", contains: ([x, y, z]) => x === 4 && y === 4 && z === 4 }];
+  const r = stripStraySalt(occ, { zoneOf, zones: ZONES, regions });
+  assert.equal(blockAt(r.placements, [4, 4, 4]), undefined, "region cell untouched");
+  assert.equal(r.byRegion["roof-program"], 1);
+  // everything else behaves exactly as the unprotected run
+  const r0 = stripStraySalt(occ, { zoneOf, zones: ZONES });
+  assert.equal(r.stripped, r0.stripped - 1);
+  assert.throws(() => stripStraySalt(occ, { zoneOf, zones: ZONES, regions: [{ name: 1 }] }), /each region/);
+});
