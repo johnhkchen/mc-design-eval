@@ -117,7 +117,11 @@ export function roofHeightfield(gables) {
       const h = roundHalf(gableSurfaceHeight(g, x, z));
       if (!heights.has(key) || h > heights.get(key)) {
         heights.set(key, h);
-        owner.set(key, { gableId: g.id, downhill: gableDownhillAt(g, x, z, h), sheet });
+        // cap (T-109-01): the column sits on the owning gable's RIDGE LINE — the surface equals
+        // the (possibly ridge-fitted) ridge height; the generator marks the cap course so the
+        // ridge is a declared construction, not an incidental heightfield top.
+        const cap = h === roundHalf(g.ridge.y);
+        owner.set(key, { gableId: g.id, downhill: gableDownhillAt(g, x, z, h), sheet, cap });
       }
     }
   }
@@ -130,19 +134,24 @@ export function roofHeightfield(gables) {
  * columns (the fitted verge/eave-overhang strips, see {@link roofHeightfield}) place the surface
  * course only — the underside stays open, which is what makes an overhang read as one.
  * @returns {{cells:{pos:number[], block:string, form?:string, state?:object}[],
- *            counts:{full:number, stairs:number, slabs:number},
+ *            counts:{full:number, stairs:number, slabs:number, cap:number},
  *            heights:Map<string,number>, owner:Map<string,object>, bandFloor:number,
- *            sheetKeys:Set<string>}} sheetKeys = "x,y,z" of every sheet-column cell — declared
- *            construction whose open underside exposes ≥4 faces BY DESIGN (census exclusion)
+ *            sheetKeys:Set<string>, capKeys:Set<string>}} sheetKeys = "x,y,z" of every
+ *            sheet-column cell — declared construction whose open underside exposes ≥4 faces BY
+ *            DESIGN (census exclusion). capKeys (T-109-01) = the ridge CAP COURSE cells — one per
+ *            ridge column (the top full course, or the half-step slab when the fitted ridge lands
+ *            on a half); counts.cap = cap columns. A marking, not a new shape: emission is
+ *            unchanged, so the unmapped gate keeps proving every state.
  */
 export function generateRoof(gables, family, opts = {}) {
   const sane = gables.filter((g) => g.sane);
   const { heights, owner, bandFloor } = roofHeightfield(sane);
   const floor = opts.bandFloor ?? bandFloor;
   const cells = [];
-  const counts = { full: 0, stairs: 0, slabs: 0 };
+  const counts = { full: 0, stairs: 0, slabs: 0, cap: 0 };
   const sheetKeys = new Set();
-  if (!family?.field) return { cells, counts, heights, owner, bandFloor: floor, sheetKeys };
+  const capKeys = new Set();
+  if (!family?.field) return { cells, counts, heights, owner, bandFloor: floor, sheetKeys, capKeys };
 
   for (const [key, h] of heights) {
     const [x, z] = key.split(",").map(Number);
@@ -169,11 +178,16 @@ export function generateRoof(gables, family, opts = {}) {
       }
       if (own?.sheet) sheetKeys.add(`${x},${y},${z}`);
     }
-    if (half && family.slab) {
+    const slabbed = half && family.slab;
+    if (slabbed) {
       cells.push({ pos: [x, top + 1, z], block: family.slab, form: "fixture", state: { type: "bottom" } });
       counts.slabs++;
       if (own?.sheet) sheetKeys.add(`${x},${top + 1},${z}`);
     }
+    if (own?.cap) {
+      counts.cap++;
+      capKeys.add(slabbed ? `${x},${top + 1},${z}` : `${x},${top},${z}`);
+    }
   }
-  return { cells, counts, heights, owner, bandFloor: floor, sheetKeys };
+  return { cells, counts, heights, owner, bandFloor: floor, sheetKeys, capKeys };
 }

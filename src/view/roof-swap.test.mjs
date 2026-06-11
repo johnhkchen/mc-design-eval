@@ -200,10 +200,15 @@ test("attempt ladder: a glb pitch inconsistent with the geometry falls back to v
   const res = swapRoof(input, { gables: [g], family: SPRUCE, refSils: refsOf(idealOcc()) });
   assert.equal(res.accepted, true, res.reasons.join("; "));
   assert.equal(res.attempt, "voxel-pitch");
-  assert.equal(res.attempts.length, 2);
+  // T-109-01: the insane glb pitch also MOVES the intersection ridge, so the as-fitted candidate
+  // now carries a leading ridge-fit flavor (3 rungs); the voxel candidate's intersection lands on
+  // the recorded ridge and collapses into the plain rung.
+  assert.equal(res.attempts.length, 3);
+  assert.equal(res.attempts[0].name, "as-fitted-ridge-fit");
   assert.equal(res.attempts[0].accepted, false);
-  assert.ok(res.attempts[0].reasons.some((r) => /silhouette IoU regressed/.test(r)));
-  assert.deepEqual(res.attempts[1].pitches[0].sides.map((s) => s.source), ["voxel", "voxel"]);
+  assert.equal(res.attempts[1].accepted, false);
+  assert.ok(res.attempts[1].reasons.some((r) => /silhouette IoU regressed/.test(r)));
+  assert.deepEqual(res.attempts.at(-1).pitches[0].sides.map((s) => s.source), ["voxel", "voxel"]);
 });
 
 test("attempt ladder: a refuted hip demand falls back to plain gable ends under the cage", () => {
@@ -334,4 +339,68 @@ test("all end-fitted rungs rejected → the legacy tail still stands (Rule 1 fal
   assert.equal(res.attempts[0].name, "end-fitted");
   assert.equal(res.attempts[0].accepted, false);
   assert.ok(res.attempts[0].reasons.length > 0, "the rejection is named");
+});
+
+// ---------------------------------------------------------------- ridge-fitted rungs (T-109-01)
+
+test("ridge-fit rung repairs an apex shortfall: low recorded ridge raised to the plane intersection", () => {
+  // recorded ridge y12 sits BELOW the side planes' intersection (y14) → the as-built surface is a
+  // flat-topped wedge; the ideal (the GLB stand-in) has the sharp apex. The ridge-fit rung leads
+  // and accepts; the ridge info is on the attempt.
+  const input = spikyInput();
+  const res = swapRoof(input, { gables: [gable({ ridgeY: 12 })], family: SPRUCE,
+    refSils: refsOf(idealOcc()), opts: { iouTolerance: 0.005 } });
+  assert.equal(res.accepted, true, res.reasons.join("; "));
+  assert.equal(res.attempt, "as-fitted-ridge-fit");
+  const a = res.attempts[0];
+  assert.equal(a.name, "as-fitted-ridge-fit");
+  assert.equal(a.ridge.length, 1);
+  assert.equal(a.ridge[0].y, 14);
+  assert.equal(a.ridge[0].deltaVsRecord, 2);
+  // the swapped shell carries the sharp apex (cap at y14), not the flat top at y12
+  assert.ok(res.occ.cells.has("4,14,3"), "apex cell at the fitted ridge height");
+});
+
+test("ridge-fit rung rejected by the cage falls through to the as-built ridge (Rule 1 order)", () => {
+  // here the flat top IS the reference shape (ideal built at ridge y12) — raising the ridge to
+  // the intersection regresses the silhouette, the ridge-fit rung is rejected (named) and the
+  // plain rung stands. The input must be flat-topped too (a spiky FLAT roof), or the baseline
+  // anchor would already absorb the apex.
+  const flatIdeal = occupancyFromCells([
+    ...baseCells(),
+    ...generateRoof([gable({ ridgeY: 12 })], { ...SPRUCE, stairs: null, slab: null }).cells,
+  ]);
+  const flatSpiky = (() => {
+    const cells = baseCells();
+    for (let x = 0; x <= 8; x++) for (let z = 0; z <= 7; z++) {
+      const ideal = Math.min(12, 10 + Math.min(8 - x, x));
+      let top = ideal;
+      if ((x * 31 + z * 17) % 5 === 0) top = ideal + 1;
+      for (let y = 10; y <= top; y++) cells.push({ pos: [x, y, z], block: "stone" });
+    }
+    return occupancyFromCells(cells);
+  })();
+  const res = swapRoof(flatSpiky, { gables: [gable({ ridgeY: 12 })], family: SPRUCE,
+    refSils: refsOf(flatIdeal), opts: { iouTolerance: 0.005 } });
+  assert.equal(res.accepted, true, res.reasons.join("; "));
+  assert.equal(res.attempt, "as-fitted");
+  assert.equal(res.attempts[0].name, "as-fitted-ridge-fit");
+  assert.equal(res.attempts[0].accepted, false);
+  assert.ok(res.attempts[0].reasons.some((r) => /silhouette IoU regressed/.test(r)));
+});
+
+test("a consistent recorded ridge collapses the ridge-fit flavor (no extra rung, findings none)", () => {
+  // gable() is self-consistent: intersection = recorded y14 → the flavor never appears
+  const res = swapRoof(spikyInput(), { gables: [gable()], family: SPRUCE, refSils: refsOf(idealOcc()) });
+  assert.ok(res.attempts.every((a) => !a.name.includes("ridge-fit")));
+  assert.ok(!res.findings.some((f) => f.code === "ridge-unfitted"));
+});
+
+test("an unfittable ridge keeps the plain rungs and surfaces the named finding", () => {
+  const g = gable();
+  g.sides[0].pitch = null;
+  g.sides[0].reasons = []; // keep the gable nominally sane to reach ridgeVariant's gate
+  const res = swapRoof(spikyInput(), { gables: [g], family: SPRUCE, refSils: refsOf(idealOcc()) });
+  assert.ok(res.attempts.every((a) => !a.name.includes("ridge-fit")));
+  assert.ok(res.findings.some((f) => f.code === "ridge-unfitted"));
 });

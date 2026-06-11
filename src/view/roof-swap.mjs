@@ -36,6 +36,7 @@ import {
 } from "./shell-regularize.mjs";
 import { generateRoof } from "./roof-generate.mjs";
 import { programFitError, pitchVariant, gableEndsVariant, ROOF_FIT_DEFAULTS } from "../form/roof-fit.mjs";
+import { ridgeVariant } from "../form/roof-ridge-fit.mjs";
 import { runCells } from "../form/component-decompose.mjs";
 
 const NEIGH6 = Object.freeze([[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]]);
@@ -247,10 +248,13 @@ function mapRound(o) {
 }
 
 /** The shape signature of a gable set — used to skip a variant identical to an earlier one.
- *  Fitted ends are part of the shape (a no-end fit normalizes to null = the legacy shape). */
+ *  Fitted ends are part of the shape (a no-end fit normalizes to null = the legacy shape), and so
+ *  is the ridge height (T-109-01: a ridge-fitted gable is a distinct rung; an intersection that
+ *  lands on the as-built height collapses into the plain rung and is skipped). */
 const pitchKey = (gables) =>
   JSON.stringify(gables.map((g) => [
     g.hip?.demanded ?? false,
+    g.ridge?.y ?? null,
     g.sides.map((s) => [s.pitch, s.pitchSource]),
     g.ends && (g.ends.lo || g.ends.hi)
       ? ["lo", "hi"].map((e) => (g.ends[e] ? [g.ends[e].coord, g.ends[e].faceCoord] : null))
@@ -265,7 +269,9 @@ const pitchKey = (gables) =>
  * the caller supplies a roof-end-fit (T-108-01 — the better-fitted hypothesis: footprint trimmed
  * at the fitted verge tip, sheet courses past the gable face), each in glb-preferred and all-voxel
  * pitch flavors, hips-as-detected then suppressed; the four E-27 rungs follow verbatim as the
- * honest tail. Two failure modes motivate the pitch/hip rungs, both measured live: a glb gradient
+ * honest tail. T-109-01 doubles each rung with a leading RIDGE-FITTED flavor (the
+ * plane-intersection ridge height — roof-ridge-fit.mjs); the as-built-ridge rung remains the
+ * fallback, so the worst case is exactly the pre-T-109 geometry. Two failure modes motivate the pitch/hip rungs, both measured live: a glb gradient
  * can pass the angle-agreement gate yet be inconsistent with the recorded eave/ridge geometry
  * (the cottage roof-0 apex shortfall — eave 15 + 0.773·run 8.5 never reaches ridge 24), and a
  * segmentation-fragmented ridge can invent a hip demand that deletes real end mass (the gatehouse
@@ -302,9 +308,23 @@ export function swapRoof(occ, args) {
     { name: "as-fitted-gable-ends", gables: gableEndsVariant(gables) },
     { name: "voxel-pitch-gable-ends", gables: gableEndsVariant(voxel) },
   );
+  // T-109-01: each candidate gets a RIDGE-FITTED flavor first (the plane-intersection ridge —
+  // the better-fitted hypothesis, like the end-fitted rungs before it), the plain candidate
+  // follows as the honest tail. The flavor is emitted only when the intersection actually MOVES a
+  // ridge height — an unfittable or as-built-identical intersection collapses into the plain rung
+  // (which keeps its name and carries the ridge findings).
+  const flavored = candidates.flatMap((c) => {
+    const rv = ridgeVariant(c.gables);
+    const moved = rv.gables.some((g, i) => g.ridge?.y !== c.gables[i].ridge?.y);
+    if (!moved) return [{ ...c, ridgeFindings: rv.findings }];
+    return [
+      { name: `${c.name}-ridge-fit`, gables: rv.gables, ridgeFindings: rv.findings },
+      c,
+    ];
+  });
   const seen = new Set();
   const variants = [];
-  for (const v of candidates) {
+  for (const v of flavored) {
     const key = pitchKey(v.gables);
     if (seen.has(key)) continue;
     seen.add(key);
@@ -315,12 +335,16 @@ export function swapRoof(occ, args) {
   let first = null;
   for (const v of variants) {
     const res = judgeVariant(occ, { ...args, gables: v.gables });
+    if (v.ridgeFindings?.length) res.findings = [...res.findings, ...v.ridgeFindings];
     attempts.push({ name: v.name, accepted: res.accepted, reasons: res.reasons, iou: res.iou,
       census: res.census, generated: res.generated, findings: res.findings,
       pitches: v.gables.filter((g) => g.sane).map((g) => ({
         id: g.id, sides: g.sides.map((s) => ({ planeId: s.planeId, pitch: s.pitch, source: s.pitchSource })) })),
       ends: v.gables.filter((g) => g.sane && (g.ends?.lo || g.ends?.hi)).map((g) => ({
-        id: g.id, lo: g.ends.lo?.coord ?? null, hi: g.ends.hi?.coord ?? null })) });
+        id: g.id, lo: g.ends.lo?.coord ?? null, hi: g.ends.hi?.coord ?? null })),
+      ridge: v.gables.filter((g) => g.sane && g.ridgeIntersect).map((g) => ({
+        id: g.id, y: g.ridge.y, intersectY: g.ridgeIntersect.y, v: g.ridgeIntersect.v,
+        deltaVsRecord: g.ridgeIntersect.deltaVsRecord })) });
     if (!first) first = res;
     if (res.accepted) return { ...res, attempt: v.name, attempts };
   }

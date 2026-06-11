@@ -227,3 +227,34 @@ test("composition: a solid winner overrides a sheet loser at shared columns", ()
   // at (0,*,4): the cross gable's ridge (y16) beats the sheet gable's surface (y14) → solid fill
   assert.ok(m.has("0,12,4") && m.has("0,16,4"), "winning solid gable fills to its surface");
 });
+
+// ---------------------------------------------------------------- ridge cap courses (T-109-01)
+
+test("cap courses: every ridge column is marked, one cap cell per column (T-109-01)", () => {
+  const g = gable({ pitch: 1, eaveY: 10, ridgeY: 14, E: 4, z0: 0, z1: 5 });
+  const { counts, capKeys, owner } = generateRoof([g], SPRUCE);
+  assert.equal(counts.cap, 6, "x=0 reaches the ridge for every z 0..5");
+  for (let z = 0; z <= 5; z++) {
+    assert.ok(capKeys.has(`0,14,${z}`), `cap cell at z=${z}`);
+    assert.equal(owner.get(`0,${z}`).cap, true);
+  }
+  assert.equal(owner.get("3,0").cap, false, "slope columns are not cap");
+  assert.equal(capKeys.size, 6);
+});
+
+test("cap courses: a half-height fitted ridge caps with the slab cell (T-109-01)", () => {
+  const g = gable({ pitch: 1, eaveY: 10, ridgeY: 13.5, E: 4 });
+  const { cells, capKeys, counts } = generateRoof([g], SPRUCE);
+  const m = byPos(cells);
+  assert.equal(m.get("0,14,0").block, "spruce_slab", "the cap course is the slab half-step");
+  assert.ok(capKeys.has("0,14,0"), "the slab cell IS the cap cell");
+  assert.equal(capKeys.has("0,13,0"), false, "the solid course below is fill, not the cap");
+  assert.equal(counts.cap, 6);
+});
+
+test("cap marking changes no emission: cells byte-identical to the count-free view (T-109-01)", () => {
+  const g = gable({ pitch: 1 });
+  const r = generateRoof([g], SPRUCE);
+  for (const k of r.capKeys) assert.ok(r.cells.some((c) => c.pos.join(",") === k));
+  assert.equal(r.counts.cap, r.capKeys.size);
+});
