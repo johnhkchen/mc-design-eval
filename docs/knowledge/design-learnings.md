@@ -2492,6 +2492,18 @@ byte-identically; the fresh verdicts are recorded here narratively and nowhere e
 rotation needs its own policy ticket (which verdicts become canonical, plus an explicitly
 read-only distillation mode), not an improvised rotation inside a milestone ticket.
 
+**Pins are now structurally protected (E-30, T-119-01).** The two T-116 incidents (the reskin
+re-cut that silently re-ran the judge; the swallowed-`--` kit sweep) closed into mechanism, not
+vigilance: every record write in the nine pin-writing runners goes through the pin-guard
+(refuse-by-default, byte-identical always passes, `--rotate-pins` explicit, preflight before any
+model/judge spend — a swallowed flag now fails CLOSED), and `component-skin.mjs --distill-only`
+rebuilds reskin records from committed outputs through a pure distiller whose import graph cannot
+reach the judge. The binding rules live in **`pin-rotation-policy.md`** (citable; enforced by the
+S-119 conformance sweep). T-111 residual 4 is **decided** there: styled verdict pins retained as
+canonical (one judge run per view), the three stale `component-skin/*` summaries rotated
+judge-free with the retired pins named in the commit — the distillation also surfaced that ALL
+three reskin records (not church alone) had drifted from the milestone records they cite.
+
 **E-12 handoff.** Per legacy subject: `generated/<subj>.{json,md}` (terminal generate-first record:
 fit + refusals, zero-blob proof, cage evidence, head-to-head row), `multi-angle/<subj>-generated.
 {json,md}` + sheets `pr/assets/frames/multi-angle-<subj>-generated.png`, kit reports
