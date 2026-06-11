@@ -30,7 +30,7 @@
 
 import { parseGlbMesh } from "./glb-mesh.mjs";
 import { occupancyFromCells } from "../view/occupancy.mjs";
-import { segmentMasses } from "./component-decompose.mjs";
+import { segmentMasses, runCells } from "./component-decompose.mjs";
 import { pruneStrays } from "./voxel-components.mjs";
 
 export const FORM_SKETCH_SCHEMA = "form-sketch/v1";
@@ -762,22 +762,25 @@ export function roofProfile(occupied, params = SKETCH_PARAMS) {
     if (z > rMaxZ) rMaxZ = z;
   }
   const ridgeAxis = (rMaxX - rMinX) >= (rMaxZ - rMinZ) ? "x" : "z";
-  // the run is the ridge band's distance to the nearest mask edge along the perpendicular axis —
-  // NOT half the whole plan (which overestimates the run on L-plans and tower-flanked roofs:
-  // the roof runs from ridge to ITS wing's eave, not to the far side of the building)
+  // the run is the ridge band's distance to the plan's OUTER edge along the perpendicular axis —
+  // row extents, not contiguous-mask walks (hollow-shell substrates leave interior parity holes
+  // that would truncate a walk), and not half the whole plan (which overestimates the run on
+  // L-plans and tower-flanked roofs: the roof runs from ridge to ITS wing's eave)
+  const rowExtent = new Map(); // along-ridge coordinate → [min, max] of the perpendicular coordinate
+  for (const k of tops.keys()) {
+    const [x, z] = k.split(",").map(Number);
+    const [along, perp] = ridgeAxis === "x" ? [x, z] : [z, x];
+    const e = rowExtent.get(along);
+    if (e === undefined) rowExtent.set(along, [perp, perp]);
+    else { if (perp < e[0]) e[0] = perp; if (perp > e[1]) e[1] = perp; }
+  }
   const runs = [];
   for (const [k, v] of smooth) {
     if (v < ridgeLayer - 1) continue;
     const [x, z] = k.split(",").map(Number);
-    let dPlus = 0, dMinus = 0;
-    if (ridgeAxis === "x") {
-      while (tops.has(`${x},${z + dPlus + 1}`)) dPlus++;
-      while (tops.has(`${x},${z - dMinus - 1}`)) dMinus++;
-    } else {
-      while (tops.has(`${x + dPlus + 1},${z}`)) dPlus++;
-      while (tops.has(`${x - dMinus - 1},${z}`)) dMinus++;
-    }
-    runs.push(Math.min(dPlus, dMinus) + 1);
+    const [along, perp] = ridgeAxis === "x" ? [x, z] : [z, x];
+    const [lo2, hi2] = rowExtent.get(along);
+    runs.push(Math.min(perp - lo2, hi2 - perp) + 1);
   }
   runs.sort((a, b) => a - b);
   const runCells = Math.max(1, runs[Math.floor((runs.length - 1) / 2)]);
@@ -864,8 +867,26 @@ export function conditionGlb(glbBytes, { subject, registryScale, params = SKETCH
   const occ = occupancyFromCells(cells);
   const { masses } = segmentMasses(occ);
   const footprint = fitFootprint(sym.occupied, params);
-  const pitch = roofProfile(sym.occupied, params);
+  // pitch per BODY mass (a tower's spire must not become "the roof" of the whole building);
+  // the headline pitch is the primary mass's profile
+  const bodyProfiles = new Map();
+  for (const m of masses) {
+    if (m.role === "protrusion") continue;
+    const cols = new Set(runCells(m.plan.runs).map(([x, z]) => `${x},${z}`));
+    const subset = [];
+    for (let i = 0; i < sym.occupied.length; i += 3) {
+      if (cols.has(`${sym.occupied[i]},${sym.occupied[i + 2]}`)) {
+        subset.push(sym.occupied[i], sym.occupied[i + 1], sym.occupied[i + 2]);
+      }
+    }
+    if (subset.length) bodyProfiles.set(m.id, roofProfile(Int32Array.from(subset), params));
+  }
+  const pitch = bodyProfiles.get(masses[0]?.id) ?? roofProfile(sym.occupied, params);
   const proportions = proportionsOf(sym.occupied, masses, params, { registryScale, sampleScale: sample.scale, profile: pitch });
+  for (const m of proportions.masses) {
+    const p = bodyProfiles.get(m.id);
+    if (p) m.pitch = { class: p.class, dominantTiltDeg: p.dominantTiltDeg, eaveLayer: p.eaveLayer, ridgeLayer: p.ridgeLayer };
+  }
   const { occupied: _occ, faces: symFaces, ...symmetry } = sym;
   const sketch = {
     schema: FORM_SKETCH_SCHEMA,

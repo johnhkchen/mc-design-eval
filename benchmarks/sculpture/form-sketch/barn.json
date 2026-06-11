@@ -72,12 +72,12 @@
     }
   },
   "pitch": {
-    "class": "steep",
-    "dominantTiltDeg": 78.69,
-    "riseCells": 10,
-    "runCells": 2,
+    "class": "pitched45",
+    "dominantTiltDeg": 45,
+    "riseCells": 11,
+    "runCells": 11,
     "ridgeAxis": "x",
-    "eaveLayer": 10,
+    "eaveLayer": 9,
     "ridgeLayer": 20
   },
   "symmetry": {
@@ -123,30 +123,30 @@
   },
   "proportions": {
     "heightCells": 21,
-    "eaveLayer": 10,
+    "eaveLayer": 9,
     "ridgeLayer": 20,
-    "eaveFrac": 0.5238,
-    "eaveBlocks": 11,
+    "eaveFrac": 0.4762,
+    "eaveBlocks": 10,
     "heightBlocks": 21,
     "storeyCandidates": [
       {
         "n": 1,
-        "perStoreyBlocks": 11,
+        "perStoreyBlocks": 10,
         "plausible": false
       },
       {
         "n": 2,
-        "perStoreyBlocks": 5.5,
+        "perStoreyBlocks": 5,
         "plausible": true
       },
       {
         "n": 3,
-        "perStoreyBlocks": 3.7,
+        "perStoreyBlocks": 3.3,
         "plausible": true
       },
       {
         "n": 4,
-        "perStoreyBlocks": 2.8,
+        "perStoreyBlocks": 2.5,
         "plausible": false
       }
     ],
@@ -166,7 +166,13 @@
           0,
           20
         ],
-        "volume": 3011
+        "volume": 3011,
+        "pitch": {
+          "class": "pitched45",
+          "dominantTiltDeg": 45,
+          "eaveLayer": 9,
+          "ridgeLayer": 20
+        }
       },
       {
         "id": "mass-1",

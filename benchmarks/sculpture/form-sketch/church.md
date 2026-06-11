@@ -10,7 +10,7 @@ occupancy, black = raw mesh outline, red = footprint, blue = mirror, green/purpl
 | coarse faces | 100 kept of 11226 regions (target 100); dropped area 49.8% |
 | grammar fit | mean snap residual 0.71° |
 | orientation shares | `-y` 18.8%, `+z` 17.8%, `+y` 17.7%, `-z` 17.6%, `+x` 13.9%, `-x` 13.3%, `roof+z+y` 0.2%, `eave+z-y` 0.2%, `eave-z-y` 0.1%, `roof-z+y` 0.1%, `roof+x+y` 0.1%, `eave+x-y` 0.1%, `roof-x+y` 0.1%, `eave-x-y` 0.1% |
-| roof pitch | **steep** (dominant tilt 71.57°) |
+| roof pitch | **pitched45** (dominant tilt 36.03°) |
 | symmetry | axis z @ 28 cells, score 0.4161 (threshold 0.8) → not applied — stays asymmetric |
 | footprint | 6 vertices, 1362 cells² over a 48×39 plan |
 | masses | 3 body (primary, attached, attached, protrusion) |
