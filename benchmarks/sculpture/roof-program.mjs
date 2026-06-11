@@ -10,7 +10,12 @@
 // faces (src/form/roof-end-fit.mjs — as-built wall anchor + GLB differentials, fit error
 // recorded), the footprint trims at the fitted verge tip, and the end-overhang strip generates as
 // a SHEET course (open underside) — end-fitted rungs lead the swap ladder, the E-27 rungs remain
-// the honest tail.
+// the honest tail. T-109-01 (E-28) finishes the top of the build: the RIDGE is fitted (plane
+// intersection as ladder rungs via src/form/roof-ridge-fit.mjs, GLB apex line recorded as
+// evidence, cap courses tracked), UNCONSUMED planes are clamped to their fitted planes
+// (src/view/plane-terminate.mjs through regularizeShell's step seam), and the protrusion
+// candidates are arbitrated against the GLB silhouette (src/view/silhouette-residual.mjs) —
+// GLB-refuted lumps removed under the cage, GLB-shown masses (the cottage chimney) exempt.
 //
 // THE SEAM INVARIANT: this file is impure wiring only (file I/O, GLB load, the minecraft-data
 // vocabulary, best-effort GL renders, the durable record). DETERMINISM (E-24 Rule 2): the core
@@ -47,9 +52,12 @@ import { fileURLToPath } from "node:url";
 
 import { artifactOccupancy } from "../../src/view/occupancy.mjs";
 import { rebuildArtifact, openingRegions } from "../../src/view/shell-integrity.mjs";
-import { REGULARIZE_DEFAULTS, protrudingStackRegion } from "../../src/view/shell-regularize.mjs";
+import { REGULARIZE_DEFAULTS, protrudingStackRegion, regularizeShell } from "../../src/view/shell-regularize.mjs";
 import { ROOF_FIT_DEFAULTS, gablesFromRecord, gableEndsVariant } from "../../src/form/roof-fit.mjs";
-import { END_FIT_DEFAULTS, fitGableEnds } from "../../src/form/roof-end-fit.mjs";
+import { END_FIT_DEFAULTS, fitGableEnds, alignedTriangles } from "../../src/form/roof-end-fit.mjs";
+import { RIDGE_FIT_DEFAULTS, ridgeFromPlanes, fitRidgeLine } from "../../src/form/roof-ridge-fit.mjs";
+import { TERMINATE_SCHEMA, unconsumedPlanes, terminationSteps } from "../../src/view/plane-terminate.mjs";
+import { RESIDUAL_SCHEMA, residualPass } from "../../src/view/silhouette-residual.mjs";
 import { aabbAlignment } from "../../src/form/component-glb-fit.mjs";
 import { parseGlbMesh } from "../../src/form/glb-mesh.mjs";
 import { componentGableGroups } from "../../src/form/component-roof.mjs";
@@ -200,12 +208,66 @@ async function runRoof(def) {
     components.push({ massId: grp.massId, role: grp.role, gableIds: grp.gableIds, swap });
   }
   const swap = composeComponentSwaps(components, grouping.findings, occCur);
-  const artifact = swap.accepted ? rebuildArtifact(occCur, raw) : null;
+
+  // T-109-01: ridge fit — the plane-intersection construction per gable (the swap ladder already
+  // tried the intersect rungs) + the GLB apex LINE measured in mesh space: height/direction/
+  // length/rmse recorded as fit evidence, never applied as an absolute height (aabb-affine maps
+  // the mesh top onto the spike-inflated blob top).
+  const aTris = alignedTriangles(meshTris, alignment);
+  const ridgeFit = fit.gables.filter((g) => g.sane).map((g) => {
+    const intersect = ridgeFromPlanes(g);
+    return {
+      id: g.id,
+      recordY: g.ridge.y,
+      intersect,
+      deltaVsRecord: intersect.valid ? Math.round((intersect.y - g.ridge.y) * 1e3) / 1e3 : null,
+      apexLine: fitRidgeLine(g, aTris),
+    };
+  });
+
+  // T-109-01: upper-edge terminations — every recorded plane NOT consumed by an accepted gable
+  // is clamped to its own fitted plane, one cage-judged step per plane through regularizeShell's
+  // existing seam (IoU floors anchored to the post-swap shell, closure no-regress, protect,
+  // auto-rollback, trace). The accepted gables' footprints are excluded; the chimney/protrusion
+  // protects hold — protrusion arbitration belongs to the residual pass below.
+  const acceptedGableIds = new Set(components.flatMap((c) => (c.swap.accepted ? c.swap.generated.gables : [])));
+  const gableById = new Map(fit.gables.map((g) => [g.id, g]));
+  const consumedPlaneIds = new Set();
+  const excludeCols = new Set();
+  let profileGable = null;
+  for (const id of acceptedGableIds) {
+    const g = gableById.get(id);
+    if (!g) continue;
+    for (const s of g.sides) consumedPlaneIds.add(s.planeId);
+    for (const c of g.footprint.cols) excludeCols.add(c);
+    if (!profileGable || g.footprint.area > profileGable.footprint.area) profileGable = g;
+  }
+  const termPlanes = unconsumedPlanes(record, consumedPlaneIds);
+  let term = null;
+  if (termPlanes.length) {
+    term = regularizeShell(occCur, { refSils, regions, protect,
+      steps: terminationSteps(termPlanes, { excludeCols }) });
+    occCur = term.occ;
+  }
+
+  // T-109-01: silhouette-residual pass — the protrusion candidates (the very set chimneyColumns
+  // blanket-protects) arbitrated against the GLB silhouette; refuted masses removed under the
+  // cage, every decision logged with its per-azimuth spill evidence. No caller protects here:
+  // re-grounding that protection in the GLB is the point (openings stay closure regions).
+  const residual = residualPass(occCur, { record, refSils, regions, protect: [] });
+  occCur = residual.occ;
+
+  // the ridge-profile evidence angle: side-on to the dominant accepted gable's ridge line
+  const ridgeAngle = profileGable ? (profileGable.ridge.axis === "x" ? "front" : "right") : null;
+
+  const changed = swap.accepted || (term?.accepted ?? 0) > 0 || residual.removedCells > 0;
+  const artifact = changed ? rebuildArtifact(occCur, raw) : null;
   if (artifact) assertArtifact(artifact);
   const endFit = { params: { ...END_FIT_DEFAULTS }, findings: endFindings,
     gables: endFitPlain.gables.filter((g) => g.ends).map((g) => ({ id: g.id, ends: g.ends })),
     suppressed: endFitSupp.gables.filter((g) => g.hip?.suppressed && g.ends).map((g) => ({ id: g.id, ends: g.ends })) };
-  return { raw, occ, record, shellSha, shellPath, componentPath, fit, endFit, family, swap, components, chimney, stack, artifact };
+  return { raw, occ, record, shellSha, shellPath, componentPath, fit, endFit, family, swap, components,
+    chimney, stack, artifact, ridgeFit, termPlanes, term, residual, ridgeAngle, changed };
 }
 
 /** Compose per-component swap outcomes into the record's top-level summary. For a single-mass
@@ -256,6 +318,13 @@ function composeComponentSwaps(components, groupFindings, occFinal) {
 
 /** Declared targets, asserted (E-25 Rule 6 — honest gaps fail loudly, never quietly recorded). */
 function assertAcceptance(def, r) {
+  // T-109-01: no silent removals — every residual removal carries its refutation azimuths and
+  // per-azimuth spill evidence (the AC's "every removal logged with its azimuth evidence").
+  for (const e of r.residual?.log ?? []) {
+    if (e.outcome === "removed" && (!e.refutedAt?.length || !e.perAzimuth)) {
+      throw new Error(`${def.key} SILENT REMOVAL: residual ${e.id} removed without azimuth evidence`);
+    }
+  }
   if (!r.swap.accepted) return; // fallback is a correct Rule 1 outcome, judged by the caller
   const gables = r.swap.generated.gables.length;
   // ≈0 (the AC): a clean roof's LINE FEATURES expose 4 faces at their END cells by geometry —
@@ -307,12 +376,18 @@ async function main() {
     track.stage = "core";
     const r1 = await runRoof(def);
     const r2 = await runRoof(def);
-    const j1 = r1.artifact ? artifactJson(r1.artifact) : JSON.stringify({ reasons: r1.swap.reasons, findings: r1.swap.findings });
-    const j2 = r2.artifact ? artifactJson(r2.artifact) : JSON.stringify({ reasons: r2.swap.reasons, findings: r2.swap.findings });
+    const view = (r) => r.artifact
+      ? artifactJson(r.artifact)
+      : JSON.stringify({ reasons: r.swap.reasons, findings: r.swap.findings,
+        term: r.term?.trace ?? null, residual: r.residual.log });
+    const j1 = view(r1);
+    const j2 = view(r2);
     if (j1 !== j2) throw new Error("NON-DETERMINISTIC: two in-process runs produced different outputs");
     track.stage = "acceptance";
     assertAcceptance(def, r1);
-    const status = r1.swap.accepted ? "accepted" : "fallback";
+    // accepted ⇔ the program changed the shell under the cage (swap, termination or residual) —
+    // supersets the pre-T-109 swap-only rule; an artifact exists exactly when accepted.
+    const status = r1.changed ? "accepted" : "fallback";
 
     for (const g of r1.fit.gables) {
       console.error(`[${def.key}] ${g.id}: ${g.sane ? "sane" : `INSANE — ${g.reasons.join("; ")}`}; ` +
@@ -331,6 +406,19 @@ async function main() {
     }
     for (const a of r1.swap.attempts ?? []) {
       console.error(`[${def.key}] attempt ${a.massId}:${a.name}: ${a.accepted ? "ACCEPTED" : `rejected — ${a.reasons.join("; ")}`}`);
+    }
+    for (const rf of r1.ridgeFit) {
+      const ix = rf.intersect.valid ? `intersect y ${rf.intersect.y} @ v ${rf.intersect.v} (Δ ${rf.deltaVsRecord})` : `intersect invalid: ${rf.intersect.reasons.join("; ")}`;
+      const ax = rf.apexLine.reason ? `apex line ${rf.apexLine.reason}` : `apex line y ${rf.apexLine.height} slope ${rf.apexLine.slopeDeg}° len ${rf.apexLine.length} rmse ${rf.apexLine.rmse}`;
+      console.error(`[${def.key}] ridge ${rf.id}: record y ${rf.recordY}; ${ix}; ${ax}`);
+    }
+    for (const t of r1.term?.trace ?? []) {
+      console.error(`[${def.key}] termination ${t.step}: ${t.accepted ? `ACCEPTED (−${t.cells.removed ?? 0}/+${t.cells.added ?? 0})` : `rolled back — ${t.reasons.join("; ")}`}`);
+    }
+    for (const e of r1.residual.log) {
+      console.error(`[${def.key}] residual ${e.id} (${e.size} cells): ${e.outcome}` +
+        `${e.refutedAt?.length ? ` [refuted @ ${e.refutedAt.join(", ")}]` : ""}` +
+        `${e.reasons.length ? ` — ${e.reasons.join("; ")}` : ""}`);
     }
     console.error(`[${def.key}] swap ${status.toUpperCase()} (${r1.swap.attempt})${r1.swap.reasons.length ? ` — ${r1.swap.reasons.join("; ")}` : ""}`);
     if (r1.swap.iou) console.error(`[${def.key}] iou baseline ${JSON.stringify(r1.swap.iou.baseline)} → final ${JSON.stringify(r1.swap.iou.final)}`);
@@ -393,6 +481,12 @@ async function main() {
       await pair(OBLIQUE, `roof-${def.key}`);
       // T-108-01: the AC's named gable-end views
       for (const angle of END_FRAME_ANGLES) await pair(angle, `roof-${def.key}-end${ANGLE_DEG[angle]}`);
+      // T-109-01: the ridge-profile view — side-on to the dominant accepted gable's ridge line
+      if (r1.ridgeAngle) {
+        renders.push({ when: "before", ...(await tryRender(r1.raw, r1.ridgeAngle, "ridge-before", subjDir)) });
+        if (r1.artifact) renders.push({ when: "after", ...(await tryRender(r1.artifact, r1.ridgeAngle, "ridge-after", subjDir)) });
+        await pair(r1.ridgeAngle, `roof-${def.key}-ridge`);
+      }
     } catch (e) {
       console.error(`frames: ${e.message}`);
     }
@@ -412,6 +506,7 @@ async function main() {
       params: {
         ...ROOF_FIT_DEFAULTS,
         endFit: { ...END_FIT_DEFAULTS },
+        ridgeFit: { ...RIDGE_FIT_DEFAULTS },
         iouTolerance: REGULARIZE_DEFAULTS.iouTolerance, grid: REGULARIZE_DEFAULTS.grid,
         spikeFaces: REGULARIZE_DEFAULTS.spikeFaces, azimuths: MULTI_ANGLE_GATE.azimuths,
         note: "fit + cage parameters (declared, shared across subjects — no tuning); azimuths config-frozen",
@@ -420,6 +515,26 @@ async function main() {
       // T-108-01: the gable-end fit — face plane / verge tip per end, GLB measurements and the
       // as-built anchor recorded; `suppressed` carries the ends only hip suppression exposed
       endFit: r1.endFit,
+      // T-109-01: the ridge fit — plane-intersection construction per gable (the ladder's
+      // ridge-fit rungs realize it; the cage arbitrates) + the GLB apex line as mesh-space
+      // EVIDENCE (height/direction/length/rmse — never applied as an absolute height)
+      ridgeFit: { schema: "roof-ridge-fit/v1", gables: r1.ridgeFit,
+        note: "intersect = the ridge constructed from the FITTED side planes; apexLine = the GLB " +
+          "apex measured under the aabb alignment (evidence only — vertical absolutes are " +
+          "unreliable, the roof-end-fit lesson)" },
+      // T-109-01: upper-edge terminations — unconsumed planes clamped to their own fitted
+      // planes, one cage-judged step per plane (trace = regularizeShell's, rollbacks included)
+      terminations: { schema: TERMINATE_SCHEMA,
+        planes: r1.termPlanes.map((p) => ({ id: p.plane.id, kind: p.kind, area: p.plane.extent.area })),
+        trace: r1.term?.trace ?? [], accepted: r1.term?.accepted ?? 0, rejected: r1.term?.rejected ?? 0,
+        iou: r1.term?.iou ?? null },
+      // T-109-01: the silhouette-residual pass — the chimneyColumns candidate set arbitrated
+      // against the GLB; every exempt/removed/rolled-back decision with per-azimuth spill px
+      residual: { schema: RESIDUAL_SCHEMA, dilationPx: r1.residual.dilationPx,
+        removedCells: r1.residual.removedCells, log: r1.residual.log,
+        note: "exempt ⇔ spill-free at every gate azimuth after the one-voxel dilation (a mass " +
+          "the GLB contains); refuted at ≥1 azimuth → removed under the cage (IoU floors, " +
+          "closure no-regress), rolled back named otherwise" },
       family: r1.family,
       // T-110-01: one entry per component mass — the roof program's tolerance-or-named-fallback
       // contract applied per component (the church's tower and nave are judged separately, in
@@ -486,6 +601,21 @@ function renderMd(r) {
     `${g.hip.demanded ? ", hip ends" : ""} — ${sides(g)}`).join("\n");
   const findings = [...r.fit.findings, ...(r.endFit?.findings ?? []), ...r.swap.findings]
     .map((f) => `- \`${f.code}\` @ ${f.where ?? "—"}: ${f.detail}`).join("\n") || "- (none)";
+  const ridgeRows = (r.ridgeFit?.gables ?? []).map((g) => {
+    const ix = g.intersect.valid
+      ? `intersect **y ${g.intersect.y}** @ v ${g.intersect.v} (Δ vs record ${g.deltaVsRecord})`
+      : `intersect invalid (${g.intersect.reasons.join("; ")})`;
+    const ax = g.apexLine.reason
+      ? `GLB apex line: ${g.apexLine.reason}`
+      : `GLB apex line: y ${g.apexLine.height}, slope ${g.apexLine.slopeDeg}°, length ${g.apexLine.length}, rmse ${g.apexLine.rmse}`;
+    return `- **${g.id}**: record ridge y ${g.recordY}; ${ix}; ${ax}`;
+  }).join("\n");
+  const termRows = (r.terminations?.trace ?? []).map((t) =>
+    `- \`${t.step}\`: ${t.accepted ? `accepted (−${t.cells.removed ?? 0}/+${t.cells.added ?? 0})` : `rolled back — ${t.reasons.join("; ")}`}`).join("\n");
+  const residRows = (r.residual?.log ?? []).map((e) =>
+    `- **${e.id}** (${e.size} cells): ${e.outcome}` +
+    `${e.refutedAt?.length ? ` — refuted @ ${e.refutedAt.map((a) => `${a} (${e.perAzimuth[a].spillPx}px)`).join(", ")}` : ""}` +
+    `${e.reasons.length ? ` — ${e.reasons.join("; ")}` : ""}`).join("\n");
   return `# Roof as program — ${r.subject} (T-104-01)\n\n` +
     `The sampled roof replaced by a roof GENERATED from parameters fitted against the component ` +
     `record's GLB fits — stair courses, slab half-steps, solid wedge — swapped under the T-102 ` +
@@ -511,6 +641,15 @@ function renderMd(r) {
           `- **${c.massId}**${c.role ? ` (${c.role})` : ""}: ${c.swap.accepted
             ? `ACCEPTED (\`${c.swap.attempt}\`)${c.swap.fitError?.length ? ` — rmse ${c.swap.fitError.map((e) => `${e.gableId} ${e.rmse}`).join(", ")}` : ""}`
             : `FALLBACK — ${c.swap.reasons.join("; ")}`} (gables: ${c.gableIds.join(", ") || "—"})`).join("\n") + `\n\n`
+      : "") +
+    (ridgeRows ? `## Ridge fit (T-109-01)\n${ridgeRows}\n\nCap course cells in the accepted geometry: ` +
+      `${r.swap.generated.counts.cap ?? 0}.\n\n` : "") +
+    (r.terminations?.planes?.length
+      ? `## Upper-edge terminations (T-109-01)\nPlanes: ${r.terminations.planes.map((p) => `${p.id} (${p.kind}, ${p.area})`).join(", ")} — ` +
+        `${r.terminations.accepted} accepted / ${r.terminations.rejected} rolled back.\n${termRows}\n\n`
+      : "") +
+    (r.residual?.log?.length
+      ? `## Silhouette residual (T-109-01)\nDilation ${r.residual.dilationPx}px (one voxel); removed ${r.residual.removedCells} cells.\n${residRows}\n\n`
       : "") +
     (r.swap.iou ? `## The cage\nIoU vs GLB — baseline: ${iouRow(r.swap.iou.baseline)}; final: ${iouRow(r.swap.iou.final)} ` +
       `(tolerance ${r.params.iouTolerance}, anchored to the input shell). Closure reached ` +
