@@ -1,0 +1,704 @@
+{
+  "schema": "multi-angle-gate/v1",
+  "subject": "barn",
+  "label": "patternbook",
+  "artifact": {
+    "path": "benchmarks/sculpture/workshop/barn/final-artifact.json",
+    "sha256": "91ee4b2e7b6dc2107e949303f919fb3c4e5dfb51eb245c79627f7a1f6dc29185"
+  },
+  "contract": {
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "elevationDeg": 30,
+    "width": 512,
+    "height": 512,
+    "gapBudget": 2,
+    "coverageThreshold": 0.5,
+    "note": "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them"
+  },
+  "zones": {
+    "source": "concept",
+    "reason": null,
+    "policy": {
+      "band0": {
+        "dominant": "cobblestone",
+        "preserve": [
+          "dark_oak_planks",
+          "stone_bricks",
+          "oak_planks"
+        ],
+        "splat": [
+          "dark_oak_planks",
+          "stone_bricks",
+          "oak_planks"
+        ]
+      },
+      "roof": {
+        "dominant": "dark_oak_planks",
+        "preserve": [
+          "stone_bricks",
+          "oak_planks"
+        ],
+        "splat": [
+          "stone_bricks",
+          "oak_planks"
+        ]
+      }
+    },
+    "substitutionApplied": {
+      "stone_bricks": "polished_deepslate"
+    },
+    "kitOverridesApplied": {},
+    "vocabulary": {
+      "schema": "material-vocabulary/v1",
+      "policySpace": "named",
+      "guarded": true,
+      "substitution": {
+        "stone_bricks": "polished_deepslate"
+      },
+      "kitOverrides": {},
+      "zones": {
+        "band0": {
+          "dominant": "cobblestone",
+          "preserve": [
+            "dark_oak_planks",
+            "stone_bricks",
+            "oak_planks"
+          ],
+          "splat": [
+            "dark_oak_planks",
+            "stone_bricks",
+            "oak_planks"
+          ]
+        },
+        "roof": {
+          "dominant": "dark_oak_planks",
+          "preserve": [
+            "stone_bricks",
+            "oak_planks"
+          ],
+          "splat": [
+            "stone_bricks",
+            "oak_planks"
+          ]
+        }
+      },
+      "treatmentSlots": {
+        "door": "oak_door",
+        "frame": "stone_bricks"
+      },
+      "derivations": [],
+      "roofFamilyAppended": []
+    }
+  },
+  "views": [
+    {
+      "angle": "+x+z",
+      "azimuthDeg": 45,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/barn-patternbook/view-+x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "cobblestone",
+            "fraction": 1,
+            "total": 639,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "dark_oak_planks",
+              "stone_bricks",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.869
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 1,
+            "total": 793,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "stone_bricks",
+              "oak_planks"
+            ],
+            "dominantFraction": 1
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "same object",
+        "gaps": [
+          {
+            "region": "long wall windows",
+            "attribute": "material zoning",
+            "severity": "minor"
+          },
+          {
+            "region": "roof eave overhang",
+            "attribute": "form",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "Stone-walled lower storey with a steep warm-brown plank gable roof reads as the same barn from this angle, with only minor differences in window placement and eave overhang."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10778,
+          "output_tokens": 516,
+          "cost_usd": 0.19036199999999998
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"same object\",\"gaps\":[{\"region\":\"long wall windows\",\"attribute\":\"material zoning\",\"severity\":\"minor\"},{\"region\":\"roof eave overhang\",\"attribute\":\"form\",\"severity\":\"minor\"}],\"rationale\":\"Stone-walled lower storey with a steep warm-brown plank gable roof reads as the same barn from this angle, with only minor differences in window placement and eave overhang.\"}",
+          "usage": {
+            "input_tokens": 10778,
+            "output_tokens": 516,
+            "cost_usd": 0.19036199999999998
+          },
+          "source": "live"
+        }
+      ]
+    },
+    {
+      "angle": "+x-z",
+      "azimuthDeg": 135,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/barn-patternbook/view-+x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "cobblestone",
+            "fraction": 1,
+            "total": 639,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "dark_oak_planks",
+              "stone_bricks",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.875
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 1,
+            "total": 793,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "stone_bricks",
+              "oak_planks"
+            ],
+            "dominantFraction": 1
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "same object",
+        "gaps": [
+          {
+            "region": "roof pitch / apex",
+            "attribute": "form",
+            "severity": "minor"
+          },
+          {
+            "region": "long wall openings (windows)",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The build reads as the same long stone-walled, brown-plank-gable-roofed barn seen from this angle, with massing and palette matching the concept and mesh; only the roof apex slightly flatter and the windows smaller/sparser than the reference."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10778,
+          "output_tokens": 547,
+          "cost_usd": 0.19133699999999998
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"same object\",\"gaps\":[{\"region\":\"roof pitch / apex\",\"attribute\":\"form\",\"severity\":\"minor\"},{\"region\":\"long wall openings (windows)\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The build reads as the same long stone-walled, brown-plank-gable-roofed barn seen from this angle, with massing and palette matching the concept and mesh; only the roof apex slightly flatter an",
+          "usage": {
+            "input_tokens": 10778,
+            "output_tokens": 547,
+            "cost_usd": 0.19133699999999998
+          },
+          "source": "live"
+        }
+      ]
+    },
+    {
+      "angle": "-x-z",
+      "azimuthDeg": 225,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/barn-patternbook/view--x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "cobblestone",
+            "fraction": 1,
+            "total": 639,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "dark_oak_planks",
+              "stone_bricks",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.875
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 1,
+            "total": 793,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "stone_bricks",
+              "oak_planks"
+            ],
+            "dominantFraction": 1
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "same object",
+        "gaps": [
+          {
+            "region": "roof",
+            "attribute": "massing",
+            "severity": "minor"
+          },
+          {
+            "region": "long wall windows",
+            "attribute": "form",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The Minecraft panel reads as the same elongated gabled barn with a dark plank roof over light stone walls seen from the rear angle, with only minor differences in roof proportion and window detailing relative to the references."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10239,
+          "output_tokens": 441,
+          "cost_usd": 0.185992
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"same object\",\"gaps\":[{\"region\":\"roof\",\"attribute\":\"massing\",\"severity\":\"minor\"},{\"region\":\"long wall windows\",\"attribute\":\"form\",\"severity\":\"minor\"}],\"rationale\":\"The Minecraft panel reads as the same elongated gabled barn with a dark plank roof over light stone walls seen from the rear angle, with only minor differences in roof proportion and window detailing relative to the reference",
+          "usage": {
+            "input_tokens": 10239,
+            "output_tokens": 441,
+            "cost_usd": 0.185992
+          },
+          "source": "live"
+        }
+      ]
+    },
+    {
+      "angle": "-x+z",
+      "azimuthDeg": 315,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/barn-patternbook/view--x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "cobblestone",
+            "fraction": 1,
+            "total": 639,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "dark_oak_planks",
+              "stone_bricks",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.869
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 1,
+            "total": 793,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "stone_bricks",
+              "oak_planks"
+            ],
+            "dominantFraction": 1
+          }
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "same object",
+        "gaps": [
+          {
+            "region": "roof ridge and pitch",
+            "attribute": "form",
+            "severity": "minor"
+          },
+          {
+            "region": "long wall openings (windows vs concept's doored stone wall)",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "Same long stone-walled, steep brown-roofed building seen from the rear-side azimuth — massing, palette, and material zoning match the concept and mesh, with only minor opening and ridge differences."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10239,
+          "output_tokens": 163,
+          "cost_usd": 0.179042
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"same object\",\"gaps\":[{\"region\":\"roof ridge and pitch\",\"attribute\":\"form\",\"severity\":\"minor\"},{\"region\":\"long wall openings (windows vs concept's doored stone wall)\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"Same long stone-walled, steep brown-roofed building seen from the rear-side azimuth — massing, palette, and material zoning match the concept and mesh, with on",
+          "usage": {
+            "input_tokens": 10239,
+            "output_tokens": 163,
+            "cost_usd": 0.179042
+          },
+          "source": "live"
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "schema": "multi-angle-gate/v1",
+    "decided": true,
+    "passed": false,
+    "gapCount": 8,
+    "gapBudget": 2,
+    "gaps": [
+      {
+        "angle": "+x+z",
+        "region": "long wall windows",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "+x+z",
+        "region": "roof eave overhang",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x-z",
+        "region": "roof pitch / apex",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x-z",
+        "region": "long wall openings (windows)",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x-z",
+        "region": "roof",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x-z",
+        "region": "long wall windows",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x+z",
+        "region": "roof ridge and pitch",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x+z",
+        "region": "long wall openings (windows vs concept's doored stone wall)",
+        "attribute": "material zoning"
+      }
+    ],
+    "failures": [
+      {
+        "angle": "(all)",
+        "reason": "gap-budget"
+      }
+    ],
+    "views": [
+      {
+        "angle": "+x+z",
+        "outcome": "same object (2 minor)"
+      },
+      {
+        "angle": "+x-z",
+        "outcome": "same object (2 minor)"
+      },
+      {
+        "angle": "-x-z",
+        "outcome": "same object (2 minor)"
+      },
+      {
+        "angle": "-x+z",
+        "outcome": "same object (2 minor)"
+      }
+    ]
+  },
+  "kitPresence": {
+    "schema": "kit-presence/v1",
+    "passed": true,
+    "checks": [
+      {
+        "feature": "panel:band0",
+        "block": "cobblestone",
+        "shipped": "cobblestone",
+        "sites": 2408,
+        "missing": 0,
+        "tolerated": {
+          "residue": 2
+        },
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "openings:lintel-sill",
+        "placed": 10,
+        "gating": false,
+        "passed": null
+      }
+    ],
+    "gaps": [],
+    "skips": [
+      {
+        "feature": "frame",
+        "reason": "all-flagged"
+      },
+      {
+        "feature": "course",
+        "reason": "all-flagged"
+      },
+      {
+        "feature": "openings:infill",
+        "reason": "kit names no treatment for this slot"
+      },
+      {
+        "feature": "openings:shutters",
+        "reason": "kit names no treatment for this slot"
+      },
+      {
+        "feature": "openings:door",
+        "reason": "no door-kind aperture declared by the concept (T-099 D7 — detector gap, not absence)"
+      }
+    ],
+    "grammar": {
+      "bindings": {
+        "frame": null,
+        "panels": {
+          "band0": "cobblestone"
+        },
+        "course": null,
+        "openingTreatments": [
+          "oak_door"
+        ],
+        "skipped": [
+          {
+            "feature": "frame",
+            "reason": "all-flagged"
+          },
+          {
+            "feature": "course",
+            "reason": "all-flagged"
+          }
+        ]
+      },
+      "shipped": {
+        "frame": null,
+        "panels": {
+          "band0": "cobblestone"
+        },
+        "course": null
+      },
+      "frame": {
+        "counts": {
+          "wall": 1396,
+          "cornerPost": 40,
+          "roofline": 44,
+          "floorLine": 0
+        },
+        "painted": 0,
+        "adopted": 0,
+        "respected": 0,
+        "skippedIsolated": 0,
+        "alreadyFrame": 0
+      },
+      "fill": {
+        "placements": 2,
+        "byZone": {
+          "band0": {
+            "surface": 2408,
+            "filled": 2,
+            "kept": 2406
+          },
+          "roof": {
+            "surface": 1360,
+            "filled": 0,
+            "kept": 1360
+          }
+        }
+      }
+    },
+    "dressing": {
+      "stats": {
+        "openings": 2,
+        "fullyDressed": 0,
+        "placements": 10,
+        "conflicts": 6,
+        "alreadyDressed": 0
+      },
+      "perOpening": [
+        {
+          "dir": "+x",
+          "kind": "window",
+          "bbox": {
+            "u0": 12,
+            "v0": 15,
+            "u1": 12,
+            "v1": 16
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 3,
+            "sill": 3
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 2,
+            "sill": 3
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "-x",
+          "kind": "window",
+          "bbox": {
+            "u0": 13,
+            "v0": 15,
+            "u1": 13,
+            "v1": 16
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 3,
+            "sill": 3
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 2,
+            "sill": 3
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "overall": {
+    "schema": "kit-aware-gate/v1",
+    "decided": true,
+    "passed": false,
+    "components": {
+      "resemblance": {
+        "decided": true,
+        "passed": false
+      },
+      "kitPresence": {
+        "ran": true,
+        "passed": true,
+        "gaps": []
+      }
+    }
+  },
+  "sheet": "pr/assets/frames/multi-angle-barn-patternbook.png",
+  "labeled": true
+}

@@ -1,0 +1,585 @@
+{
+  "schema": "multi-angle-gate/v1",
+  "subject": "cottage",
+  "label": "patternbook",
+  "artifact": {
+    "path": "benchmarks/sculpture/workshop/cottage/final-artifact.json",
+    "sha256": "cc9530aa6d5621947a29908b6f811c7bff2ad98ec9b75153b9fb1f5fa1b26c8f"
+  },
+  "contract": {
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "elevationDeg": 30,
+    "width": 512,
+    "height": 512,
+    "gapBudget": 2,
+    "coverageThreshold": 0.5,
+    "note": "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them"
+  },
+  "zones": {
+    "source": "concept",
+    "reason": null,
+    "policy": {
+      "band0": {
+        "dominant": "stone_bricks",
+        "preserve": [
+          "dark_oak_log",
+          "spruce_planks",
+          "cobblestone",
+          "bricks"
+        ],
+        "splat": [
+          "dark_oak_log",
+          "spruce_planks",
+          "cobblestone",
+          "bricks"
+        ]
+      },
+      "band1": {
+        "dominant": "white_terracotta",
+        "preserve": [
+          "spruce_planks",
+          "dark_oak_log",
+          "cobblestone",
+          "bricks"
+        ],
+        "splat": [
+          "spruce_planks",
+          "dark_oak_log",
+          "cobblestone",
+          "bricks"
+        ]
+      },
+      "roof": {
+        "dominant": "spruce_planks",
+        "preserve": [
+          "spruce_planks",
+          "dark_oak_log",
+          "stone_bricks",
+          "cobblestone",
+          "bricks",
+          "spruce_stairs"
+        ],
+        "splat": [
+          "spruce_planks",
+          "dark_oak_log",
+          "stone_bricks",
+          "cobblestone",
+          "bricks"
+        ]
+      }
+    },
+    "substitutionApplied": {
+      "stone_bricks": "tuff",
+      "white_terracotta": "sandstone"
+    },
+    "kitOverridesApplied": {
+      "white_terracotta": "smooth_sandstone",
+      "dark_oak_planks": "spruce_planks"
+    },
+    "vocabulary": {
+      "schema": "material-vocabulary/v1",
+      "policySpace": "named",
+      "guarded": true,
+      "substitution": {
+        "stone_bricks": "tuff",
+        "white_terracotta": "sandstone"
+      },
+      "kitOverrides": {
+        "white_terracotta": "smooth_sandstone",
+        "dark_oak_planks": "spruce_planks"
+      },
+      "zones": {
+        "band0": {
+          "dominant": "stone_bricks",
+          "preserve": [
+            "dark_oak_log",
+            "spruce_planks",
+            "cobblestone",
+            "bricks"
+          ],
+          "splat": [
+            "dark_oak_log",
+            "spruce_planks",
+            "cobblestone",
+            "bricks"
+          ]
+        },
+        "band1": {
+          "dominant": "white_terracotta",
+          "preserve": [
+            "spruce_planks",
+            "dark_oak_log",
+            "cobblestone",
+            "bricks"
+          ],
+          "splat": [
+            "spruce_planks",
+            "dark_oak_log",
+            "cobblestone",
+            "bricks"
+          ]
+        },
+        "roof": {
+          "dominant": "spruce_planks",
+          "preserve": [
+            "spruce_planks",
+            "dark_oak_log",
+            "stone_bricks",
+            "cobblestone",
+            "bricks",
+            "spruce_stairs"
+          ],
+          "splat": [
+            "spruce_planks",
+            "dark_oak_log",
+            "stone_bricks",
+            "cobblestone",
+            "bricks"
+          ]
+        }
+      },
+      "treatmentSlots": {
+        "infill": "spruce_fence",
+        "shutter": "spruce_trapdoor",
+        "door": "spruce_door",
+        "light": "lantern",
+        "frame": "spruce_planks"
+      },
+      "derivations": [
+        {
+          "slot": "infill",
+          "block": "spruce_fence",
+          "from": "spruce_trapdoor",
+          "reason": "no rail entry in kit; species-matched fence derived from the shutter block (the kit declared the window grille unidentified)"
+        }
+      ],
+      "roofFamilyAppended": [
+        "spruce_stairs"
+      ]
+    }
+  },
+  "views": [
+    {
+      "angle": "+x+z",
+      "azimuthDeg": 45,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-patternbook/view-+x+z.png"
+      },
+      "coverage": {
+        "passed": false,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "stone_bricks",
+            "fraction": 0.644,
+            "total": 354,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "stone_bricks",
+              "dark_oak_log",
+              "spruce_planks",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.497
+          },
+          "band1": {
+            "dominant": null,
+            "fraction": null,
+            "total": 0,
+            "passed": false,
+            "metric": "own",
+            "own": null,
+            "dominantFraction": null
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 411,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "spruce_planks",
+              "dark_oak_log",
+              "stone_bricks",
+              "cobblestone",
+              "bricks",
+              "spruce_stairs"
+            ],
+            "dominantFraction": 0.465
+          }
+        }
+      },
+      "verdict": null,
+      "judge": null,
+      "reason": "coverage"
+    },
+    {
+      "angle": "+x-z",
+      "azimuthDeg": 135,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-patternbook/view-+x-z.png"
+      },
+      "coverage": {
+        "passed": false,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "stone_bricks",
+            "fraction": 0.695,
+            "total": 347,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "stone_bricks",
+              "dark_oak_log",
+              "spruce_planks",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.504
+          },
+          "band1": {
+            "dominant": null,
+            "fraction": null,
+            "total": 0,
+            "passed": false,
+            "metric": "own",
+            "own": null,
+            "dominantFraction": null
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 438,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "spruce_planks",
+              "dark_oak_log",
+              "stone_bricks",
+              "cobblestone",
+              "bricks",
+              "spruce_stairs"
+            ],
+            "dominantFraction": 0.436
+          }
+        }
+      },
+      "verdict": null,
+      "judge": null,
+      "reason": "coverage"
+    },
+    {
+      "angle": "-x-z",
+      "azimuthDeg": 225,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-patternbook/view--x-z.png"
+      },
+      "coverage": {
+        "passed": false,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "stone_bricks",
+            "fraction": 0.649,
+            "total": 350,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "stone_bricks",
+              "dark_oak_log",
+              "spruce_planks",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.457
+          },
+          "band1": {
+            "dominant": null,
+            "fraction": null,
+            "total": 0,
+            "passed": false,
+            "metric": "own",
+            "own": null,
+            "dominantFraction": null
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 415,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "spruce_planks",
+              "dark_oak_log",
+              "stone_bricks",
+              "cobblestone",
+              "bricks",
+              "spruce_stairs"
+            ],
+            "dominantFraction": 0.287
+          }
+        }
+      },
+      "verdict": null,
+      "judge": null,
+      "reason": "coverage"
+    },
+    {
+      "angle": "-x+z",
+      "azimuthDeg": 315,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-patternbook/view--x+z.png"
+      },
+      "coverage": {
+        "passed": false,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "stone_bricks",
+            "fraction": 0.604,
+            "total": 379,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "stone_bricks",
+              "dark_oak_log",
+              "spruce_planks",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.462
+          },
+          "band1": {
+            "dominant": null,
+            "fraction": null,
+            "total": 0,
+            "passed": false,
+            "metric": "own",
+            "own": null,
+            "dominantFraction": null
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 406,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "spruce_planks",
+              "dark_oak_log",
+              "stone_bricks",
+              "cobblestone",
+              "bricks",
+              "spruce_stairs"
+            ],
+            "dominantFraction": 0.296
+          }
+        }
+      },
+      "verdict": null,
+      "judge": null,
+      "reason": "coverage"
+    }
+  ],
+  "aggregate": {
+    "schema": "multi-angle-gate/v1",
+    "decided": true,
+    "passed": false,
+    "gapCount": 0,
+    "gapBudget": 2,
+    "gaps": [],
+    "failures": [
+      {
+        "angle": "+x+z",
+        "reason": "coverage"
+      },
+      {
+        "angle": "+x-z",
+        "reason": "coverage"
+      },
+      {
+        "angle": "-x-z",
+        "reason": "coverage"
+      },
+      {
+        "angle": "-x+z",
+        "reason": "coverage"
+      }
+    ],
+    "views": [
+      {
+        "angle": "+x+z",
+        "outcome": "coverage"
+      },
+      {
+        "angle": "+x-z",
+        "outcome": "coverage"
+      },
+      {
+        "angle": "-x-z",
+        "outcome": "coverage"
+      },
+      {
+        "angle": "-x+z",
+        "outcome": "coverage"
+      }
+    ]
+  },
+  "kitPresence": {
+    "schema": "kit-presence/v1",
+    "passed": false,
+    "checks": [
+      {
+        "feature": "frame",
+        "block": "spruce_planks",
+        "shipped": "spruce_planks",
+        "sites": 324,
+        "missing": 16,
+        "satisfied": 288,
+        "tolerated": {
+          "respected": 20,
+          "skippedIsolated": 0
+        },
+        "gating": true,
+        "passed": false
+      },
+      {
+        "feature": "panel:band0",
+        "block": "stone_bricks",
+        "shipped": "stone_bricks",
+        "sites": 1080,
+        "missing": 447,
+        "tolerated": {
+          "residue": 2
+        },
+        "gating": true,
+        "passed": false
+      },
+      {
+        "feature": "panel:band1",
+        "block": "smooth_sandstone",
+        "shipped": "smooth_sandstone",
+        "sites": 847,
+        "missing": 0,
+        "tolerated": {
+          "residue": 0
+        },
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "course",
+        "block": "spruce_planks",
+        "shipped": "spruce_planks",
+        "sites": 608,
+        "missing": 0,
+        "tolerated": {
+          "residue": 0
+        },
+        "gating": true,
+        "passed": true
+      }
+    ],
+    "gaps": [
+      "missing: spruce_planks frame @ 16/324 frame-line cells",
+      "missing: stone_bricks panel @ band0 (447 cells)"
+    ],
+    "skips": [
+      {
+        "feature": "openings",
+        "reason": "no concept-declared apertures supplied"
+      }
+    ],
+    "grammar": {
+      "bindings": {
+        "frame": "spruce_planks",
+        "panels": {
+          "band0": "stone_bricks",
+          "band1": "smooth_sandstone"
+        },
+        "course": "spruce_planks",
+        "openingTreatments": [
+          "spruce_trapdoor",
+          "lantern",
+          "spruce_door"
+        ],
+        "skipped": []
+      },
+      "shipped": {
+        "frame": "spruce_planks",
+        "panels": {
+          "band0": "stone_bricks",
+          "band1": "smooth_sandstone"
+        },
+        "course": "spruce_planks"
+      },
+      "frame": {
+        "counts": {
+          "wall": 1418,
+          "cornerPost": 38,
+          "roofline": 241,
+          "floorLine": 45
+        },
+        "painted": 16,
+        "adopted": 0,
+        "respected": 20,
+        "skippedIsolated": 0,
+        "alreadyFrame": 288
+      },
+      "fill": {
+        "placements": 449,
+        "byZone": {
+          "band0": {
+            "surface": 1080,
+            "filled": 449,
+            "kept": 631
+          },
+          "roof": {
+            "surface": 608,
+            "filled": 0,
+            "kept": 608
+          },
+          "band1": {
+            "surface": 847,
+            "filled": 0,
+            "kept": 847
+          }
+        }
+      }
+    },
+    "dressing": null
+  },
+  "overall": {
+    "schema": "kit-aware-gate/v1",
+    "decided": true,
+    "passed": false,
+    "components": {
+      "resemblance": {
+        "decided": true,
+        "passed": false
+      },
+      "kitPresence": {
+        "ran": true,
+        "passed": false,
+        "gaps": [
+          "missing: spruce_planks frame @ 16/324 frame-line cells",
+          "missing: stone_bricks panel @ band0 (447 cells)"
+        ]
+      }
+    }
+  },
+  "sheet": "pr/assets/frames/multi-angle-cottage-patternbook.png",
+  "labeled": true
+}
