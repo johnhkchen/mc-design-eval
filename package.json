@@ -98,7 +98,13 @@
     "sketch:all": "node benchmarks/sculpture/form-sketch.mjs --all",
     "recognize:cottage": "node benchmarks/sculpture/recognize.mjs --subject cottage",
     "recognize:barn": "node benchmarks/sculpture/recognize.mjs --subject barn",
-    "recognize:offline": "node benchmarks/sculpture/recognize.mjs --offline --all"
+    "recognize:offline": "node benchmarks/sculpture/recognize.mjs --offline --all",
+    "patternbook:cottage": "node benchmarks/sculpture/pattern-book.mjs --subject cottage",
+    "patternbook:barn": "node benchmarks/sculpture/pattern-book.mjs --subject barn",
+    "patternbook:repro": "node benchmarks/sculpture/pattern-book.mjs --all --repro",
+    "patternbook:offline": "node benchmarks/sculpture/pattern-book.mjs --all --offline",
+    "gate:patternbook:cottage": "node benchmarks/sculpture/multi-angle-gate.mjs --subject cottage --label patternbook --artifact workshop/cottage/final-artifact.json --reference recognition/cottage.artifact.json",
+    "gate:patternbook:barn": "node benchmarks/sculpture/multi-angle-gate.mjs --subject barn --label patternbook --artifact workshop/barn/final-artifact.json --reference recognition/barn.artifact.json"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

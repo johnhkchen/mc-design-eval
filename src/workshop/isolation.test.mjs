@@ -38,6 +38,10 @@ const workshopFiles = () => [
     .filter((f) => f.endsWith(".mjs") && !f.endsWith(".test.mjs"))
     .map((f) => join(HERE, f)),
   join(ROOT, "benchmarks", "sculpture", "workshop.mjs"), // the impure runner is held to the same bar
+  // T-127-01: the milestone chain composes the workshop (seed + spawn) — same bar. Its judging
+  // is convened from OUTSIDE (gate:patternbook:* scripts); the verdict READER
+  // (pattern-book-compare.mjs) must name gate-record paths and is deliberately NOT listed here.
+  join(ROOT, "benchmarks", "sculpture", "pattern-book.mjs"),
 ];
 
 test("ISO1 no workshop source references any judge seam (precise tokens, runner included)", () => {
