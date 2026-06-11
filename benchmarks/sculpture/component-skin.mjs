@@ -48,8 +48,10 @@ const sha256 = (s) => createHash("sha256").update(s).digest("hex");
 const readJson = async (rel) => JSON.parse(await readFile(join(HERE, rel), "utf8"));
 const has = (rel) => existsSync(join(HERE, rel));
 
-/** The component layer on disk for one subject: records, pins, named absences. */
-async function componentLayer(key, def) {
+/** The component layer on disk for one subject: records, pins, named absences.
+ *  Exported for the E-27 terminal runner (reconstructed-milestone.mjs) — same verification,
+ *  one source of truth. */
+export async function componentLayer(key, def) {
   const rel = {
     regularized: def.regularizedShell ?? `regularize/${key}/artifact.json`, // chain-canonical override (church)
     component: `components/${key}.json`,
