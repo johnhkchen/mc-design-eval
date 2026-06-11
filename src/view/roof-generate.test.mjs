@@ -1,0 +1,178 @@
+// Unit tests for roof-generate.mjs (T-104-01, story S-104, epic E-27) — synthetic gables only.
+import { test } from "node:test";
+import assert from "node:assert/strict";
+
+import { CARD_ROWS } from "../form/fixture-card.mjs";
+import { STAIR_FACING, roofFamily, roofHeightfield, generateRoof } from "./roof-generate.mjs";
+
+const VOCAB = new Set([
+  "spruce_planks", "spruce_stairs", "spruce_slab",
+  "deepslate_bricks", "deepslate_brick_stairs", "deepslate_brick_slab",
+]);
+
+/** A minimal sane gable: ridge along z at x=0, eaves at x=±E, symmetric pitch. */
+function gable({ pitch = 1, eaveY = 10, ridgeY = 14, E = 4, z0 = 0, z1 = 5, hip = null } = {}) {
+  const cols = new Set();
+  for (let x = -E; x <= E; x++) for (let z = z0; z <= z1; z++) cols.add(`${x},${z}`);
+  return {
+    id: "gable-test",
+    ridge: { axis: "z", y: ridgeY },
+    sides: [
+      { planeId: "roof-a", eaveDir: "+x", pitch, pitchSource: "glb", eaveY, eaveEdge: E, extentCells: [] },
+      { planeId: "roof-b", eaveDir: "-x", pitch, pitchSource: "glb", eaveY, eaveEdge: -E, extentCells: [] },
+    ],
+    footprint: { cols, bbox: { minX: -E, maxX: E, minZ: z0, maxZ: z1 }, area: cols.size },
+    hip: hip ?? { demanded: false, lo: false, hi: false },
+    sane: true,
+    reasons: [],
+  };
+}
+
+const SPRUCE = { field: "spruce_planks", stairs: "spruce_stairs", slab: "spruce_slab", findings: [] };
+const byPos = (cells) => new Map(cells.map((c) => [c.pos.join(","), c]));
+
+test("roofFamily derives and vocabulary-checks the kit course family", () => {
+  const planks = roofFamily([{ block: "spruce_planks", role: "roof field", formClass: "cube", whereUsed: ["roof"] }], VOCAB);
+  assert.deepEqual([planks.field, planks.stairs, planks.slab], ["spruce_planks", "spruce_stairs", "spruce_slab"]);
+  const bricks = roofFamily([{ block: "deepslate_bricks", role: "roof field (sloped courses)", formClass: "cube", whereUsed: ["roof"] }], VOCAB);
+  assert.deepEqual([bricks.field, bricks.stairs, bricks.slab], ["deepslate_bricks", "deepslate_brick_stairs", "deepslate_brick_slab"]);
+  // fixture rows never name the family; a missing shaped block is a named finding, not an invention
+  const odd = roofFamily([
+    { block: "stone_brick_stairs", role: "roof eaves", formClass: "fixture", whereUsed: ["roof"] },
+    { block: "sponge", role: "roof field", formClass: "cube", whereUsed: ["roof"] },
+  ], VOCAB);
+  assert.equal(odd.field, "sponge");
+  assert.equal(odd.stairs, null);
+  assert.ok(odd.findings.some((f) => f.code === "kit-roof-stairs-missing"));
+  const none = roofFamily([{ block: "oak_planks", role: "floor", formClass: "cube", whereUsed: ["band1"] }], VOCAB);
+  assert.equal(none.field, null);
+  assert.ok(none.findings.some((f) => f.code === "kit-roof-field-missing"));
+});
+
+test("pitch 1: the whole slope is stair courses facing the ridge", () => {
+  const g = gable({ pitch: 1 });
+  const { cells, counts } = generateRoof([g], SPRUCE);
+  const m = byPos(cells);
+  // column x=3 (one in from the +x eave): h = 10+1 = 11, uphill is −x → facing west
+  const top = m.get("3,11,0");
+  assert.equal(top.block, "spruce_stairs");
+  assert.deepEqual(top.state, { facing: "west", half: "bottom", shape: "straight" });
+  assert.equal(top.form, "fixture");
+  // mirrored side faces east
+  assert.deepEqual(m.get("-3,11,0").state.facing, "east");
+  // the eave course itself is a stair (downhill neighbor is off the footprint)
+  assert.equal(m.get("4,10,0").block, "spruce_stairs");
+  // the ridge cap is a full block (no downhill — owner is the ridge)
+  assert.equal(m.get("0,14,0").block, "spruce_planks");
+  assert.ok(counts.stairs > 0 && counts.slabs === 0);
+});
+
+test("pitch 0.5: slab half-steps, no stairs on half landings", () => {
+  const g = gable({ pitch: 0.5, ridgeY: 12 });
+  const { cells, counts } = generateRoof([g], SPRUCE);
+  const m = byPos(cells);
+  // x=3: h = 10.5 → solid to 10, slab type:bottom at 11
+  const slab = m.get("3,11,0");
+  assert.equal(slab.block, "spruce_slab");
+  assert.deepEqual(slab.state, { type: "bottom" });
+  assert.equal(m.get("3,10,0").block, "spruce_planks");
+  // x=2: h = 11 whole — but uphill neighbor is 11.5 (< h+1) → full block, not a stair
+  assert.equal(m.get("2,11,0").block, "spruce_planks");
+  assert.ok(counts.slabs > 0 && counts.stairs === 0);
+});
+
+test("pitch 2: full blocks carry the riser, stair only at the tread edge", () => {
+  const g = gable({ pitch: 2, ridgeY: 18 });
+  const { cells } = generateRoof([g], SPRUCE);
+  const m = byPos(cells);
+  // x=3: h = 12; downhill (x=4) h=10 ≤ 11, uphill (x=2) h=14 ≥ 13 → stair tread at 12
+  assert.equal(m.get("3,12,0").block, "spruce_stairs");
+  // the riser below the tread is solid field
+  assert.equal(m.get("3,11,0").block, "spruce_planks");
+  assert.equal(m.get("3,10,0").block, "spruce_planks");
+});
+
+test("solid infill: no air inside the wedge, footprint containment, legal states", () => {
+  const g = gable({ pitch: 1 });
+  const { cells, heights, bandFloor } = generateRoof([g], SPRUCE);
+  const m = byPos(cells);
+  for (const [key, h] of heights) {
+    const [x, z] = key.split(",").map(Number);
+    for (let y = bandFloor; y <= Math.floor(h); y++) {
+      assert.ok(m.has(`${x},${y},${z}`), `void at ${x},${y},${z} under h=${h}`);
+    }
+  }
+  const stairProps = new Set(["facing", "half", "shape"]);
+  const stairVals = { facing: new Set(Object.values(STAIR_FACING)), half: new Set(["bottom", "top"]), shape: new Set(["straight"]) };
+  for (const c of cells) {
+    assert.ok(g.footprint.cols.has(`${c.pos[0]},${c.pos[2]}`), `cell outside footprint: ${c.pos}`);
+    if (c.block.endsWith("_stairs")) {
+      assert.deepEqual(new Set(Object.keys(c.state)), stairProps);
+      for (const [k, v] of Object.entries(c.state)) assert.ok(stairVals[k].has(v), `${k}=${v}`);
+    }
+    if (c.block.endsWith("_slab")) assert.deepEqual(c.state, { type: "bottom" });
+  }
+  // the CARD_ROWS vocabulary covers every state shape we emit (the proven T-097 path)
+  const cardStair = CARD_ROWS.find((r) => r.family === "stairs");
+  assert.deepEqual(Object.keys(cardStair.state).sort(), [...stairProps].sort());
+});
+
+test("two intersecting gables: max-height composition makes the valley", () => {
+  const main = gable({ pitch: 1, eaveY: 10, ridgeY: 14, E: 4, z0: 0, z1: 9 });
+  // cross gable: ridge along x at z=4..5 region, lower ridge
+  const cols = new Set();
+  for (let x = 0; x <= 6; x++) for (let z = 2; z <= 7; z++) cols.add(`${x},${z}`);
+  const cross = {
+    id: "gable-cross",
+    ridge: { axis: "x", y: 13 },
+    sides: [
+      { planeId: "roof-c", eaveDir: "+z", pitch: 1, pitchSource: "glb", eaveY: 10, eaveEdge: 7, extentCells: [] },
+      { planeId: "roof-d", eaveDir: "-z", pitch: 1, pitchSource: "glb", eaveY: 10, eaveEdge: 2, extentCells: [] },
+    ],
+    footprint: { cols, bbox: { minX: 0, maxX: 6, minZ: 2, maxZ: 7 }, area: cols.size },
+    hip: { demanded: false, lo: false, hi: false },
+    sane: true, reasons: [],
+  };
+  const { heights, owner } = roofHeightfield([main, cross]);
+  // far from the main ridge (x=6), the cross gable is the only cover
+  assert.equal(heights.get("6,4"), 12); // min(ridge 13, −z side 10+1·(4−2)=12, +z side 10+1·(7−4)=13)
+  assert.equal(owner.get("6,4").gableId, "gable-cross");
+  // near the main ridge the main gable wins (h=14 at x=0)
+  assert.equal(heights.get("0,4"), 14);
+  assert.equal(owner.get("0,4").gableId, "gable-test");
+});
+
+test("hip ends slope down at the gable pitch when demanded", () => {
+  const g = gable({ pitch: 1, eaveY: 10, ridgeY: 14, E: 4, z0: 0, z1: 9,
+    hip: { demanded: true, lo: true, hi: true } });
+  const { heights } = roofHeightfield([g]);
+  assert.equal(heights.get("0,0"), 10);  // ridge column at the lo end pulled to the hip eave
+  assert.equal(heights.get("0,4"), 14);  // mid-ridge unaffected
+  assert.equal(heights.get("0,9"), 10);  // hi end
+});
+
+test("missing slab in the family floors half-steps; missing stairs keep full blocks", () => {
+  const g = gable({ pitch: 0.5, ridgeY: 12 });
+  const noSlab = generateRoof([g], { ...SPRUCE, slab: null });
+  assert.equal(noSlab.counts.slabs, 0);
+  assert.ok(noSlab.cells.every((c) => !c.block.endsWith("_slab")));
+  const steep = gable({ pitch: 1 });
+  const noStairs = generateRoof([steep], { ...SPRUCE, stairs: null });
+  assert.equal(noStairs.counts.stairs, 0);
+  assert.ok(noStairs.cells.every((c) => c.block === "spruce_planks"));
+});
+
+test("insane gables are skipped; empty family generates nothing", () => {
+  const bad = { ...gable(), sane: false, reasons: ["synthetic"] };
+  const { cells } = generateRoof([bad], SPRUCE);
+  assert.equal(cells.length, 0);
+  const none = generateRoof([gable()], { field: null, stairs: null, slab: null, findings: [] });
+  assert.equal(none.cells.length, 0);
+});
+
+test("determinism: two generations are deep-equal", () => {
+  const a = generateRoof([gable({ pitch: 1 })], SPRUCE);
+  const b = generateRoof([gable({ pitch: 1 })], SPRUCE);
+  assert.deepEqual(a.cells, b.cells);
+  assert.deepEqual(a.counts, b.counts);
+});
