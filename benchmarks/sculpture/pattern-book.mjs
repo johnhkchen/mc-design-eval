@@ -40,7 +40,7 @@ import { artifactOccupancy } from "../../src/view/occupancy.mjs";
 import { parseProgramReply } from "../../src/recognition/prompt.mjs";
 import { compileProgram } from "../../src/recognition/compile.mjs";
 import { assertWorkshopProgram, realizeProgram } from "../../src/workshop/program.mjs";
-import { PATTERN_BOOK_BUDGET, seedWorkshopProgram } from "../../src/workshop/seed.mjs";
+import { PATTERN_BOOK_BUDGET, seedWorkshopProgram, componentPlanFrom } from "../../src/workshop/seed.mjs";
 import { serializeArtifact, replayLedger, offlineAssert } from "../../src/workshop/replay.mjs";
 import { conformanceScore } from "../../src/workshop/loop.mjs";
 import {
@@ -125,6 +125,15 @@ function stageSeed(program, pack) {
     throw new Error(`seeded realization fails pack conformance (${bad}) — the chain refuses to spend on it`);
   }
   return seeded;
+}
+
+/** The chain's consumption plan (T-106 contract): derived from the committed ledger's FINAL
+ *  program (accepted adjusts included), persisted beside the artifact under test so the frozen
+ *  gate censuses the roof program + course family the chain actually built. Pure of model/GL. */
+async function derivePlan(key) {
+  const ledger = JSON.parse(await readRel(`${WORKSHOP_REL}/${key}.json`));
+  const { program: finalProgram } = replayLedger({ ledger });
+  return { planRel: `${WORKSHOP_REL}/${key}/component-plan.json`, planJson: jsonOf(componentPlanFrom(finalProgram)) };
 }
 
 /** Stage 5 — read back what the workshop committed; the chain record's workshop receipt. */
@@ -212,6 +221,8 @@ async function runLive(def, { rotate }) {
     const spawned = spawnSync(process.execPath, args, { stdio: "inherit", cwd: ROOT });
     if (spawned.status !== 0) throw new Error(`workshop loop exited ${spawned.status}`);
     track.stage = "record";
+    const { planRel, planJson } = await derivePlan(key);
+    await write(planRel, planJson);
     const { receipt: workshop } = await readBackWorkshop(key);
     const record = {
       schema: PATTERN_BOOK_SCHEMA,
@@ -224,6 +235,7 @@ async function runLive(def, { rotate }) {
         recognition,
         seed: { path: seedRel, sha256: sha256(seeded.serialized), cells: seeded.cells.length, conformance: { passed: true } },
         workshop,
+        plan: { path: planRel, sha256: sha256(planJson) },
       },
       generalization: await generalizationGrep(),
       replay: { npmRun: "patternbook:repro / patternbook:offline", asserts: "committed program+ledger → byte-identical final build" },
@@ -276,6 +288,10 @@ async function runRepro(def, { offline }) {
     if (JSON.stringify(conformanceScore(finalConf)) !== JSON.stringify(conformanceScore(ledger.final.conformance))) {
       problems.push("re-derived final conformance score diverges from the ledger's");
     }
+    const { planRel, planJson } = await derivePlan(key);
+    const committedPlan = await readRel(planRel).catch(() => null);
+    if (committedPlan === null) problems.push(`consumption plan absent (${planRel}) — backfill with --plan-only`);
+    else if (sha256(planJson) !== sha256(committedPlan)) problems.push("re-derived consumption plan DIVERGES from the committed one");
     if (offline) {
       const oa = offlineAssert({ ledger, finalArtifactText: finalText, conform });
       if (!oa.ok) problems.push(...oa.problems.map((p) => `offlineAssert: ${p}`));
@@ -298,6 +314,7 @@ const onlySubject = argOf("--subject");
 const all = argv.includes("--all");
 const repro = argv.includes("--repro");
 const offline = argv.includes("--offline");
+const planOnly = argv.includes("--plan-only");
 const rotate = argv.includes(ROTATE_FLAG);
 
 const defs = subjectDefs();
@@ -307,7 +324,28 @@ if (onlySubject && !defs.some((d) => d.key === onlySubject)) {
 }
 const selected = defs.filter((d) => !onlySubject || d.key === onlySubject);
 
-if (repro || offline) {
+if (planOnly) {
+  // Backfill the T-106 consumption plan from a COMMITTED chain (pure of model/GL; the plan is a
+  // function of the committed ledger's final program). First writes are free; a committed plan
+  // needs --rotate-pins like any record.
+  const trackedSet = loadTrackedSet(ROOT);
+  let wrote = 0;
+  for (const def of selected) {
+    if (!existsSync(join(ROOT, `${WORKSHOP_REL}/${def.key}.json`))) {
+      console.error(`[pattern-book --plan-only] ${def.key}: no committed ledger — skipped`);
+      continue;
+    }
+    const { planRel, planJson } = await derivePlan(def.key);
+    preflightPins({
+      pins: [{ rel: planRel, tracked: isTracked(trackedSet, planRel) }],
+      rotate, intent: `consumption-plan backfill (${def.key})`, domain: "workshop",
+    });
+    await guardedWriteRecord({ root: ROOT, rel: planRel, content: planJson, rotate, domain: "workshop", trackedSet });
+    console.error(`[pattern-book --plan-only] ${def.key}: wrote ${planRel}`);
+    wrote++;
+  }
+  if (wrote === 0) throw new Error("--plan-only: no committed ledgers found for the selection");
+} else if (repro || offline) {
   const results = [];
   for (const def of selected) results.push(await runRepro(def, { offline }));
   const ran = results.filter((r) => r !== null);

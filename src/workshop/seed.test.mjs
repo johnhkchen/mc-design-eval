@@ -9,7 +9,8 @@ import { fileURLToPath } from "node:url";
 
 import { loadStylePack } from "../pack/style-pack.mjs";
 import { assertBuildingProgram, validateProgramAgainstPack } from "../recognition/program.mjs";
-import { PATTERN_BOOK_BUDGET, seedWorkshopProgram, workshopSubjectsFrom } from "./seed.mjs";
+import { reviveComponentPlan } from "../view/component-plan.mjs";
+import { PATTERN_BOOK_BUDGET, seedWorkshopProgram, workshopSubjectsFrom, componentPlanFrom } from "./seed.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const pack = loadStylePack(resolve(here, "..", "..", "packs", "rustic.json"));
@@ -95,6 +96,43 @@ test("SEED5 workshopSubjectsFrom derives data rows by the recognize predicate, p
     pack: "packs/rustic.json",
   });
   assert.ok(Object.isFrozen(subjects) && Object.isFrozen(subjects.a));
+});
+
+test("SEED7 componentPlanFrom declares exactly the roof program: cells, course family, byte-stable", () => {
+  const { workshopProgram } = seedWorkshopProgram({ program: makeProgram(), pack });
+  const plan = componentPlanFrom(workshopProgram);
+  assert.equal(plan.schema, "component-plan/v1");
+  assert.ok(plan.roof, "a gabled program declares a roof");
+  assert.equal(plan.roof.source, "workshop-program");
+  // the family is the roof element's own spec — pack roof.field rustic = spruce family
+  const roofEl = workshopProgram.elements.find((e) => e.idiom?.startsWith("roof."));
+  assert.deepEqual(plan.roof.family, {
+    stairs: roofEl.spec.blocks.stairs ?? null,
+    slab: roofEl.spec.blocks.slab ?? null,
+  });
+  // cells are exactly the roof elements' realized cells, deduped + sorted (byte-stable)
+  assert.ok(plan.roof.cells.length > 0);
+  assert.deepEqual(plan.roof.cells, [...plan.roof.cells].sort());
+  assert.deepEqual(JSON.stringify(componentPlanFrom(workshopProgram)), JSON.stringify(plan));
+  // colTop carries the max y per declared column
+  const tops = new Map(plan.roof.colTop);
+  for (const key of plan.roof.cells) {
+    const [x, y, z] = key.split(",").map(Number);
+    assert.ok(tops.get(`${x},${z}`) >= y);
+  }
+  // the gate's reviver accepts it
+  const revived = reviveComponentPlan(JSON.parse(JSON.stringify(plan)));
+  assert.equal(revived.roof.cells.size, plan.roof.cells.length);
+  assert.equal(revived.roof.family.stairs, plan.roof.family.stairs);
+  assert.equal(revived.wallTop, null);
+  assert.equal(revived.frames, null);
+});
+
+test("SEED8 a program with no roof element yields a roof-less plan (honest absence)", () => {
+  const { workshopProgram } = seedWorkshopProgram({ program: makeProgram(), pack });
+  const stripped = { ...workshopProgram, elements: workshopProgram.elements.filter((e) => !e.idiom?.startsWith("roof.")) };
+  const plan = componentPlanFrom(stripped);
+  assert.equal(plan.roof, null);
 });
 
 test("SEED6 the real registry derives the milestone subjects without touching the fixture key", async () => {

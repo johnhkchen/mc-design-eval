@@ -12,10 +12,12 @@
 // program path has not been committed yet (the chain's stage 3 is what writes it).
 
 import { compileProgram } from "../recognition/compile.mjs";
-import { assertWorkshopProgram, realizeProgram } from "./program.mjs";
+import { assertWorkshopProgram, realizeProgram, boxShell } from "./program.mjs";
+import { getIdiom } from "../pack/idiom-registry.mjs";
 import { assertArtifact } from "../artifact.mjs";
 import { artifactOccupancy } from "../view/occupancy.mjs";
 import { runConformance } from "../pack/conformance.mjs";
+import { COMPONENT_PLAN_SCHEMA } from "../view/component-plan.mjs";
 
 /** The declared workshop revision budget for the milestone chain (D3): the fixture proof-run's
  *  calibrated value — the only calibration the project has (N=1, recorded honestly). */
@@ -64,6 +66,53 @@ export function seedWorkshopProgram({ program, pack, budget = PATTERN_BOOK_BUDGE
  *   packRel: the style pack path, ROOT-relative
  * @returns {object} frozen { [key]: { program, concept, pack } } — all paths ROOT-relative
  */
+/**
+ * The chain's consumption plan, derived from the program — T-106's contract: the gate reads the
+ * SAME geometry the chain built, persisted beside the artifact under test. For a program build
+ * the program IS the authority: every cell of a `roof.*` element is a declared roof course (a
+ * rake stair on the gable plane censuses as roof, never against the wall band it y-bins into —
+ * the T-121 dual), and the roof block family (stairs/slab members) is the element's own spec —
+ * without it the gate censuses a stair-coursed roof as foreign and coverage-rejects every view
+ * (measured live on the first cottage gate run, T-127-01).
+ *
+ * Only what the program defines is declared: no frames, no mass, no touched-cells — honest
+ * absence, the gate's null paths are first-run-proven. Byte-stable (sorted keys/cols).
+ *
+ * @param {object} program  a program that passed assertWorkshopProgram (the FINAL program —
+ *   replayLedger's output for a committed chain; accepted adjusts are part of the geometry)
+ * @returns {object} a component-plan/v1 JSON document (reviveComponentPlan-compatible)
+ */
+export function componentPlanFrom(program) {
+  const roofCells = [];
+  const family = { stairs: null, slab: null };
+  for (const el of program.elements) {
+    if (el.kind !== "idiom" || !el.idiom.startsWith("roof.")) continue;
+    for (const c of getIdiom(el.idiom).generate(el.spec).cells) roofCells.push(c.pos);
+    const blocks = el.spec.blocks ?? {};
+    family.stairs ??= blocks.stairs ?? null;
+    family.slab ??= blocks.slab ?? null;
+  }
+  const keys = [...new Set(roofCells.map((p) => p.join(",")))].sort();
+  const colTop = new Map();
+  for (const [x, y, z] of roofCells) {
+    const col = `${x},${z}`;
+    if (!(colTop.get(col) >= y)) colTop.set(col, y);
+  }
+  const cols = [...colTop.keys()].sort();
+  return {
+    schema: COMPONENT_PLAN_SCHEMA,
+    roof: roofCells.length ? {
+      cells: keys,
+      footprintCols: cols,
+      colTop: cols.map((c) => [c, colTop.get(c)]),
+      family,
+      source: "workshop-program",
+    } : null,
+    wallTop: null,
+    findings: [],
+  };
+}
+
 export function workshopSubjectsFrom(registry, { relDir, packRel }) {
   const rows = Object.values(registry)
     .filter((def) => def.glb && def.generated?.scale)
