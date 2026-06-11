@@ -123,6 +123,17 @@
         }
       }
     },
+    "ratification": {
+      "description": "The human taste gate's receipt (E-32 Rule 4, T-130-01): who ratified this style and when. Optional — a pack without it predates the formation chain (rustic); the formation flow stamps it at ratify time, never at draft time.",
+      "type": "object",
+      "required": ["by", "date"],
+      "additionalProperties": false,
+      "properties": {
+        "by": { "type": "string", "minLength": 1 },
+        "date": { "type": "string", "format": "date-time" },
+        "note": { "type": "string" }
+      }
+    },
     "conformance": {
       "description": "The workshop's per-round gate: check names (pack-conformance/v1 vocabulary) + optional per-check params",
       "type": "object",

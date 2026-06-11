@@ -186,3 +186,34 @@ test("rustic.json loads, schema-gates, and validates clean against the committed
   assert.equal(policy.roof.dominant, "spruce_planks");
   assert.ok(policy.roof.preserve.includes("dark_oak_planks"));
 });
+
+// ---------------------------------------------------------------- ratification (T-130-01)
+
+test("ratification: optional, but when present it is the complete who/when receipt", () => {
+  // a pack without ratification predates the formation chain — stays valid (rustic's case)
+  assert.equal(parseStylePack(minimalPack()).ok, true);
+
+  const stamped = minimalPack({
+    ratification: { by: "john", date: "2026-06-11T22:00:00Z", note: "taste pass on the draft README" },
+  });
+  assert.equal(parseStylePack(stamped).ok, true, "a stamped pack must parse");
+
+  for (const broken of [
+    { date: "2026-06-11T22:00:00Z" },               // missing by
+    { by: "john" },                                  // missing date
+    { by: "", date: "2026-06-11T22:00:00Z" },        // empty by
+    { by: "john", date: "yesterday" },               // not a date-time
+    { by: "john", date: "2026-06-11T22:00:00Z", sworn: true }, // extras rejected
+  ]) {
+    const r = parseStylePack(minimalPack({ ratification: broken }));
+    assert.equal(r.ok, false, JSON.stringify(broken));
+    assert.equal(r.code, "schema_invalid");
+  }
+});
+
+test("ratification: a draft-tagged bundle is structurally NOT a pack (the gate by construction)", () => {
+  const draft = { ...minimalPack(), schema: "style-pack/draft-v1" };
+  const r = parseStylePack(draft);
+  assert.equal(r.ok, false, "a draft must be rejected by the schema const");
+  assert.equal(r.code, "schema_invalid");
+});
