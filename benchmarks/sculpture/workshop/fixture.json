@@ -1,0 +1,1507 @@
+{
+  "schema": "workshop-ledger/v1",
+  "subject": "fixture",
+  "budget": {
+    "rounds": 6
+  },
+  "liveActions": [
+    "adjust-params",
+    "spray-paint"
+  ],
+  "instrument": {
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "width": 512,
+    "height": 512
+  },
+  "packRef": {
+    "path": "packs/rustic.json",
+    "sha256": "19834c8ba66333efcc7b6fe594bdc2772877202752809e508b78613c608cf434"
+  },
+  "conceptRef": {
+    "path": "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
+    "sha256": "506c25132952d3d4ccb7d1f78816982542612d8464087bad07c0f9b847e57759"
+  },
+  "tier": "strong",
+  "program": {
+    "schema": "workshop-program/v1",
+    "subject": "fixture",
+    "pack": "rustic",
+    "budget": {
+      "rounds": 6
+    },
+    "declarations": {
+      "bands": [
+        {
+          "name": "ground",
+          "yRange": [
+            0,
+            2
+          ],
+          "blocks": [
+            "cobblestone"
+          ]
+        },
+        {
+          "name": "upper",
+          "yRange": [
+            3,
+            5
+          ],
+          "blocks": [
+            "white_terracotta"
+          ]
+        },
+        {
+          "name": "roof",
+          "yRange": [
+            6,
+            11
+          ],
+          "blocks": [
+            "spruce_planks",
+            "cobblestone",
+            "bricks"
+          ],
+          "mixed": true
+        }
+      ],
+      "symmetry": {
+        "axis": "x",
+        "at": 4
+      },
+      "openings": [
+        {
+          "wall": "door-south",
+          "min": [
+            4,
+            0,
+            6
+          ],
+          "max": [
+            4,
+            1,
+            6
+          ]
+        },
+        {
+          "wall": "windows-south",
+          "min": [
+            2,
+            3,
+            6
+          ],
+          "max": [
+            2,
+            3,
+            6
+          ]
+        },
+        {
+          "wall": "windows-south",
+          "min": [
+            6,
+            3,
+            6
+          ],
+          "max": [
+            6,
+            3,
+            6
+          ]
+        },
+        {
+          "wall": "windows-north",
+          "min": [
+            2,
+            3,
+            0
+          ],
+          "max": [
+            2,
+            3,
+            0
+          ]
+        },
+        {
+          "wall": "windows-north",
+          "min": [
+            6,
+            3,
+            0
+          ],
+          "max": [
+            6,
+            3,
+            0
+          ]
+        }
+      ]
+    },
+    "elements": [
+      {
+        "id": "shell",
+        "kind": "shell",
+        "spec": {
+          "footprint": {
+            "x0": 0,
+            "x1": 8,
+            "z0": 0,
+            "z1": 6
+          },
+          "y0": 0,
+          "height": 6,
+          "wallBlock": "white_terracotta",
+          "courses": [
+            {
+              "yRange": [
+                0,
+                2
+              ],
+              "block": "cobblestone"
+            },
+            {
+              "yRange": [
+                4,
+                4
+              ],
+              "block": "pink_wool"
+            }
+          ],
+          "openings": [
+            {
+              "wall": "+z",
+              "at": [
+                4,
+                0
+              ],
+              "w": 1,
+              "h": 2
+            },
+            {
+              "wall": "+z",
+              "at": [
+                2,
+                3
+              ],
+              "w": 1,
+              "h": 1
+            },
+            {
+              "wall": "+z",
+              "at": [
+                6,
+                3
+              ],
+              "w": 1,
+              "h": 1
+            },
+            {
+              "wall": "-z",
+              "at": [
+                2,
+                3
+              ],
+              "w": 1,
+              "h": 1
+            },
+            {
+              "wall": "-z",
+              "at": [
+                6,
+                3
+              ],
+              "w": 1,
+              "h": 1
+            }
+          ]
+        }
+      },
+      {
+        "id": "roof",
+        "kind": "idiom",
+        "idiom": "roof.hip",
+        "spec": {
+          "footprint": {
+            "x0": 0,
+            "x1": 8,
+            "z0": 0,
+            "z1": 6
+          },
+          "ridgeAxis": "x",
+          "eaveY": 6,
+          "ridgeY": 7,
+          "blocks": {
+            "field": "spruce_planks",
+            "stairs": null,
+            "slab": null
+          }
+        }
+      },
+      {
+        "id": "chimney",
+        "kind": "idiom",
+        "idiom": "chimney",
+        "spec": {
+          "base": [
+            4,
+            6,
+            3
+          ],
+          "footprint": {
+            "w": 1,
+            "d": 1
+          },
+          "height": 5,
+          "block": "cobblestone",
+          "cap": "crown",
+          "capBlock": "bricks"
+        }
+      }
+    ]
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "renders": [
+        {
+          "angle": "+x+z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-1/view-+x+z.png",
+          "bytes": 113891
+        },
+        {
+          "angle": "+x-z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-1/view-+x-z.png",
+          "bytes": 112982
+        },
+        {
+          "angle": "-x-z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-1/view--x-z.png",
+          "bytes": 109753
+        },
+        {
+          "angle": "-x+z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-1/view--x+z.png",
+          "bytes": 112750
+        }
+      ],
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"upper wall band (y=4)\", \"issue\": \"pink_wool course is a foreign block — not in the pack vocabulary; fails palette-in-pack and courses-even\", \"severity\": \"major\" },\n      { \"region\": \"upper walls overall\", \"issue\": \"concept shows white_terracotta infill striped with dark_oak_log timber framing; my upper storey is a plain unframed band\", \"",
+          "usage": {
+            "input_tokens": 10716,
+            "cache_creation_input_tokens": 14163,
+            "cache_read_input_tokens": 15824,
+            "output_tokens": 1043,
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 14163,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "not_available",
+            "iterations": [
+              {
+                "input_tokens": 10716,
+                "output_tokens": 1043,
+                "cache_read_input_tokens": 15824,
+                "cache_creation_input_tokens": 14163,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 14163
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard"
+          },
+          "source": "live"
+        }
+      ],
+      "askCount": 1,
+      "critique": {
+        "issues": [
+          {
+            "region": "upper wall band (y=4)",
+            "issue": "pink_wool course is a foreign block — not in the pack vocabulary; fails palette-in-pack and courses-even",
+            "severity": "major"
+          },
+          {
+            "region": "upper walls overall",
+            "issue": "concept shows white_terracotta infill striped with dark_oak_log timber framing; my upper storey is a plain unframed band",
+            "severity": "major"
+          },
+          {
+            "region": "roof",
+            "issue": "concept roof reads as warm spruce planks with a stepped stair eave; mine is acceptable field but lacks the stair courses/trim",
+            "severity": "minor"
+          },
+          {
+            "region": "ground storey",
+            "issue": "cobblestone plinth matches the concept's stone base — good",
+            "severity": "minor"
+          }
+        ]
+      },
+      "decision": "revise",
+      "rationale": "Drop the pink_wool course so the upper storey reverts to the pack's white_terracotta infill — this clears both failing conformance checks (palette-in-pack and courses-even) in one move before pursuing the timber-framing read.",
+      "action": {
+        "action": "adjust-params",
+        "elementId": "shell",
+        "params": {
+          "courses": [
+            {
+              "yRange": [
+                0,
+                2
+              ],
+              "block": "cobblestone"
+            }
+          ]
+        }
+      },
+      "applied": {
+        "kind": "program"
+      },
+      "conformance": {
+        "before": {
+          "schema": "pack-conformance/v1",
+          "passed": false,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": false,
+              "findings": [
+                "band \"upper\": foreign block pink_wool at 0,4,0",
+                "band \"upper\": foreign block pink_wool at 1,4,0",
+                "band \"upper\": foreign block pink_wool at 2,4,0",
+                "band \"upper\": foreign block pink_wool at 3,4,0",
+                "band \"upper\": foreign block pink_wool at 4,4,0",
+                "band \"upper\": foreign block pink_wool at 5,4,0",
+                "band \"upper\": foreign block pink_wool at 6,4,0",
+                "band \"upper\": foreign block pink_wool at 7,4,0",
+                "band \"upper\": foreign block pink_wool at 8,4,0",
+                "band \"upper\": foreign block pink_wool at 0,4,1",
+                "band \"upper\": foreign block pink_wool at 8,4,1",
+                "band \"upper\": foreign block pink_wool at 0,4,2",
+                "… 16 more"
+              ]
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": false,
+              "findings": [
+                "foreign block pink_wool ×28 (e.g. 0,4,0)"
+              ]
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "after": {
+          "schema": "pack-conformance/v1",
+          "passed": true,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "accepted": true,
+        "reason": "accepted"
+      }
+    },
+    {
+      "round": 2,
+      "renders": [
+        {
+          "angle": "+x+z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-2/view-+x+z.png",
+          "bytes": 109450
+        },
+        {
+          "angle": "+x-z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-2/view-+x-z.png",
+          "bytes": 108552
+        },
+        {
+          "angle": "-x-z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-2/view--x-z.png",
+          "bytes": 105003
+        },
+        {
+          "angle": "-x+z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-2/view--x+z.png",
+          "bytes": 108067
+        }
+      ],
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"roof\", \"issue\": \"Roof is nearly flat (eaveY 6 → ridgeY 7, only 1 block of rise) and reads as a thin brown slab; the concept's roof is a tall, steep, dominant hip mass that occupies the upper half of the building.\", \"severity\": \"major\" },\n      { \"region\": \"upper walls\", \"issue\": \"No timber framing — the concept's defining feature is vert",
+          "usage": {
+            "input_tokens": 10716,
+            "cache_creation_input_tokens": 13871,
+            "cache_read_input_tokens": 15824,
+            "output_tokens": 1266,
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 13871,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "not_available",
+            "iterations": [
+              {
+                "input_tokens": 10716,
+                "output_tokens": 1266,
+                "cache_read_input_tokens": 15824,
+                "cache_creation_input_tokens": 13871,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 13871
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard"
+          },
+          "source": "live"
+        }
+      ],
+      "askCount": 1,
+      "critique": {
+        "issues": [
+          {
+            "region": "roof",
+            "issue": "Roof is nearly flat (eaveY 6 → ridgeY 7, only 1 block of rise) and reads as a thin brown slab; the concept's roof is a tall, steep, dominant hip mass that occupies the upper half of the building.",
+            "severity": "major"
+          },
+          {
+            "region": "upper walls",
+            "issue": "No timber framing — the concept's defining feature is vertical dark_oak_log studs over white infill (Tudor half-timber). My upper storey is a blank terracotta band.",
+            "severity": "major"
+          },
+          {
+            "region": "windows",
+            "issue": "No windows or shutters read on any face; concept has shuttered windows on both storeys.",
+            "severity": "minor"
+          },
+          {
+            "region": "ground storey",
+            "issue": "Cobblestone plinth reads correctly but lacks the door and dressing the concept shows.",
+            "severity": "minor"
+          }
+        ]
+      },
+      "decision": "revise",
+      "rationale": "The flat roof is the single largest glance divergence; raising ridgeY from 7 to 9 gives a ~3-block rise over the 6-deep footprint, turning the slab into a properly pitched hip roof that dominates the upper mass like the concept.",
+      "action": {
+        "action": "adjust-params",
+        "elementId": "roof",
+        "params": {
+          "ridgeY": 9
+        }
+      },
+      "applied": {
+        "kind": "program"
+      },
+      "conformance": {
+        "before": {
+          "schema": "pack-conformance/v1",
+          "passed": true,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "after": {
+          "schema": "pack-conformance/v1",
+          "passed": true,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "accepted": true,
+        "reason": "accepted"
+      }
+    },
+    {
+      "round": 3,
+      "renders": [
+        {
+          "angle": "+x+z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-3/view-+x+z.png",
+          "bytes": 111624
+        },
+        {
+          "angle": "+x-z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-3/view-+x-z.png",
+          "bytes": 110899
+        },
+        {
+          "angle": "-x-z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-3/view--x-z.png",
+          "bytes": 107176
+        },
+        {
+          "angle": "-x+z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-3/view--x+z.png",
+          "bytes": 110299
+        }
+      ],
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"roof\", \"issue\": \"Hip roof realizes as a crude stepped ziggurat (stairs/slab are null) — the concept's roof is a smooth, overhanging spruce hip with stair courses at the eave; this is the dominant silhouette divergence\", \"severity\": \"major\" },\n      { \"region\": \"upper wall\", \"issue\": \"white_terracotta band is plain — the concept shows str",
+          "usage": {
+            "input_tokens": 10716,
+            "cache_creation_input_tokens": 13851,
+            "cache_read_input_tokens": 15824,
+            "output_tokens": 2615,
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 13851,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "not_available",
+            "iterations": [
+              {
+                "input_tokens": 10716,
+                "output_tokens": 2615,
+                "cache_read_input_tokens": 15824,
+                "cache_creation_input_tokens": 13851,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 13851
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard"
+          },
+          "source": "live"
+        }
+      ],
+      "askCount": 1,
+      "critique": {
+        "issues": [
+          {
+            "region": "roof",
+            "issue": "Hip roof realizes as a crude stepped ziggurat (stairs/slab are null) — the concept's roof is a smooth, overhanging spruce hip with stair courses at the eave; this is the dominant silhouette divergence",
+            "severity": "major"
+          },
+          {
+            "region": "upper wall",
+            "issue": "white_terracotta band is plain — the concept shows strong vertical dark_oak_log timber framing between terracotta infill; no framing reads",
+            "severity": "major"
+          },
+          {
+            "region": "chimney cap",
+            "issue": "the brick 'crown' cap renders as an oversized mushroom on a thin stalk; concept chimney is slender with a modest brick mouth, not a flaring cap",
+            "severity": "major"
+          },
+          {
+            "region": "openings",
+            "issue": "no door, windows, or shutters read on any face vs the concept's shuttered windows and timber-framed door",
+            "severity": "minor"
+          }
+        ]
+      },
+      "decision": "revise",
+      "rationale": "The single largest divergence is the roof reading as a blocky stepped pyramid; wiring in the pack's spruce_stairs courses and spruce_slab steps gives the hip roof its eave overhang and smoother pitch, which is the cottage's defining silhouette — all pack-vocabulary, so conformance should hold.",
+      "action": {
+        "action": "adjust-params",
+        "elementId": "roof",
+        "params": {
+          "blocks": {
+            "field": "spruce_planks",
+            "stairs": "spruce_stairs",
+            "slab": "spruce_slab"
+          }
+        }
+      },
+      "applied": {
+        "kind": "program"
+      },
+      "conformance": {
+        "before": {
+          "schema": "pack-conformance/v1",
+          "passed": true,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "after": {
+          "schema": "pack-conformance/v1",
+          "passed": false,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": false,
+              "findings": [
+                "band \"roof\": foreign block spruce_stairs at 1,6,0",
+                "band \"roof\": foreign block spruce_stairs at 2,6,0",
+                "band \"roof\": foreign block spruce_stairs at 3,6,0",
+                "band \"roof\": foreign block spruce_stairs at 4,6,0",
+                "band \"roof\": foreign block spruce_stairs at 5,6,0",
+                "band \"roof\": foreign block spruce_stairs at 6,6,0",
+                "band \"roof\": foreign block spruce_stairs at 7,6,0",
+                "band \"roof\": foreign block spruce_stairs at 0,6,1",
+                "band \"roof\": foreign block spruce_stairs at 8,6,1",
+                "band \"roof\": foreign block spruce_stairs at 0,6,2",
+                "band \"roof\": foreign block spruce_stairs at 8,6,2",
+                "band \"roof\": foreign block spruce_stairs at 0,6,3",
+                "… 36 more"
+              ]
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "accepted": false,
+        "reason": "regressed: passed 6→5, findings 0→48"
+      }
+    },
+    {
+      "round": 4,
+      "renders": [
+        {
+          "angle": "+x+z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-4/view-+x+z.png",
+          "bytes": 111624
+        },
+        {
+          "angle": "+x-z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-4/view-+x-z.png",
+          "bytes": 110899
+        },
+        {
+          "angle": "-x-z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-4/view--x-z.png",
+          "bytes": 107176
+        },
+        {
+          "angle": "-x+z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-4/view--x+z.png",
+          "bytes": 110299
+        }
+      ],
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"upper storey walls (all four faces)\", \"issue\": \"bare white_terracotta with no half-timber framing; the concept's defining feature is vertical dark_oak_log studs over cream infill — mine reads as a blank pink box\", \"severity\": \"major\" },\n      { \"region\": \"facade openings\", \"issue\": \"windows/shutters and the door barely register in any vi",
+          "usage": {
+            "input_tokens": 8370,
+            "cache_creation_input_tokens": 13908,
+            "cache_read_input_tokens": 15824,
+            "output_tokens": 4007,
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 13908,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "not_available",
+            "iterations": [
+              {
+                "input_tokens": 8370,
+                "output_tokens": 4007,
+                "cache_read_input_tokens": 15824,
+                "cache_creation_input_tokens": 13908,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 13908
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard"
+          },
+          "source": "live"
+        }
+      ],
+      "askCount": 1,
+      "critique": {
+        "issues": [
+          {
+            "region": "upper storey walls (all four faces)",
+            "issue": "bare white_terracotta with no half-timber framing; the concept's defining feature is vertical dark_oak_log studs over cream infill — mine reads as a blank pink box",
+            "severity": "major"
+          },
+          {
+            "region": "facade openings",
+            "issue": "windows/shutters and the door barely register in any view; the concept has a clear window rhythm with dark_oak_trapdoor shutters and a lit main door",
+            "severity": "major"
+          },
+          {
+            "region": "overall mass",
+            "issue": "build reads as a tiny stepped ziggurat, not a two-storey timbered cottage — the upper storey lacks the articulation that gives the concept its silhouette",
+            "severity": "major"
+          },
+          {
+            "region": "roof",
+            "issue": "hip roof renders as a coarse stepped pyramid; acceptable as form but plainer than the concept's deep eaves and dressed verges",
+            "severity": "minor"
+          },
+          {
+            "region": "ground storey",
+            "issue": "cobblestone course is present and correct — matches the concept's stone base",
+            "severity": "minor"
+          }
+        ]
+      },
+      "decision": "revise",
+      "rationale": "The dominant, repeated divergence is the featureless untimbered upper storey — a recognition-level gap that spray-paint can't fix symmetrically in one box and shell params have no framing key for; re-recognizing the shell is the best single shot at recovering the half-timber studs and window rhythm, and the gate will roll it back if it regresses.",
+      "action": {
+        "action": "re-recognize",
+        "elementId": "shell"
+      },
+      "applied": {
+        "kind": "unavailable"
+      },
+      "conformance": {
+        "before": {
+          "schema": "pack-conformance/v1",
+          "passed": true,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "after": null,
+        "accepted": false,
+        "reason": "action \"re-recognize\" has no wired applier in this workshop (S-125 seam pending)"
+      }
+    },
+    {
+      "round": 5,
+      "renders": [
+        {
+          "angle": "+x+z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-5/view-+x+z.png",
+          "bytes": 111624
+        },
+        {
+          "angle": "+x-z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-5/view-+x-z.png",
+          "bytes": 110899
+        },
+        {
+          "angle": "-x-z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-5/view--x-z.png",
+          "bytes": 107176
+        },
+        {
+          "angle": "-x+z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-5/view--x+z.png",
+          "bytes": 110299
+        }
+      ],
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "Looking at the concept (a Tudor half-timbered house) against my build (a stepped ziggurat blob), the gap is severe. The single most damaging signal is that the roof renders as a blocky stepped pyramid because `stairs` and `slab` are null — forcing the hip idiom to stack full blocks. The pack provides `spruce_stairs`/`spruce_slab` exactly to pitch this roof smoothly.\n\n```json\n{\n  \"critique\": {\n    ",
+          "usage": {
+            "input_tokens": 8363,
+            "cache_creation_input_tokens": 13893,
+            "cache_read_input_tokens": 15824,
+            "output_tokens": 2731,
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 13893,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "not_available",
+            "iterations": [
+              {
+                "input_tokens": 8363,
+                "output_tokens": 2731,
+                "cache_read_input_tokens": 15824,
+                "cache_creation_input_tokens": 13893,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 13893
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard"
+          },
+          "source": "live"
+        }
+      ],
+      "askCount": 1,
+      "critique": {
+        "issues": [
+          {
+            "region": "roof",
+            "issue": "Hip roof has stairs:null/slab:null, so it builds as a stacked full-block ziggurat instead of a smooth pitched roof — the whole build reads as a pyramid, not a house.",
+            "severity": "major"
+          },
+          {
+            "region": "upper storey walls",
+            "issue": "Concept shows bold dark vertical timber framing (dark_oak_log posts) over white infill; my walls are blank white_terracotta with no framing at all.",
+            "severity": "major"
+          },
+          {
+            "region": "facades",
+            "issue": "Concept has prominent shuttered windows (dark_oak_trapdoor) and a main door with lantern; my openings are tiny/invisible and unadorned.",
+            "severity": "major"
+          },
+          {
+            "region": "overall massing",
+            "issue": "Build reads squat — roof mass rivals the wall height, where the concept's two storeys dominate over a moderate roof.",
+            "severity": "minor"
+          }
+        ]
+      },
+      "decision": "revise",
+      "rationale": "Wiring the hip roof's course/step to spruce_stairs/spruce_slab turns the stepped-pyramid stack into a smooth pitched roof — the biggest single move toward reading as the concept's house, and it should keep the build watertight and single-component.",
+      "action": {
+        "action": "adjust-params",
+        "elementId": "roof",
+        "params": {
+          "blocks": {
+            "field": "spruce_planks",
+            "stairs": "spruce_stairs",
+            "slab": "spruce_slab"
+          }
+        }
+      },
+      "applied": {
+        "kind": "program"
+      },
+      "conformance": {
+        "before": {
+          "schema": "pack-conformance/v1",
+          "passed": true,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "after": {
+          "schema": "pack-conformance/v1",
+          "passed": false,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": false,
+              "findings": [
+                "band \"roof\": foreign block spruce_stairs at 1,6,0",
+                "band \"roof\": foreign block spruce_stairs at 2,6,0",
+                "band \"roof\": foreign block spruce_stairs at 3,6,0",
+                "band \"roof\": foreign block spruce_stairs at 4,6,0",
+                "band \"roof\": foreign block spruce_stairs at 5,6,0",
+                "band \"roof\": foreign block spruce_stairs at 6,6,0",
+                "band \"roof\": foreign block spruce_stairs at 7,6,0",
+                "band \"roof\": foreign block spruce_stairs at 0,6,1",
+                "band \"roof\": foreign block spruce_stairs at 8,6,1",
+                "band \"roof\": foreign block spruce_stairs at 0,6,2",
+                "band \"roof\": foreign block spruce_stairs at 8,6,2",
+                "band \"roof\": foreign block spruce_stairs at 0,6,3",
+                "… 36 more"
+              ]
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "accepted": false,
+        "reason": "regressed: passed 6→5, findings 0→48"
+      }
+    },
+    {
+      "round": 6,
+      "renders": [
+        {
+          "angle": "+x+z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-6/view-+x+z.png",
+          "bytes": 111624
+        },
+        {
+          "angle": "+x-z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-6/view-+x-z.png",
+          "bytes": 110899
+        },
+        {
+          "angle": "-x-z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-6/view--x-z.png",
+          "bytes": 107176
+        },
+        {
+          "angle": "-x+z",
+          "path": "benchmarks/sculpture/workshop/fixture/round-6/view--x+z.png",
+          "bytes": 110299
+        }
+      ],
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"upper storey walls\", \"issue\": \"concept's signature is half-timbering — vertical dark_oak_log members over the cream infill; my upper storey is blank white_terracotta with no timber framing, so it doesn't read as Tudor\", \"severity\": \"major\" },\n      { \"region\": \"roof\", \"issue\": \"roof.hip with field-only renders as a stepped ziggurat rathe",
+          "usage": {
+            "input_tokens": 8374,
+            "cache_creation_input_tokens": 13927,
+            "cache_read_input_tokens": 15824,
+            "output_tokens": 4340,
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 13927,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "not_available",
+            "iterations": [
+              {
+                "input_tokens": 8374,
+                "output_tokens": 4340,
+                "cache_read_input_tokens": 15824,
+                "cache_creation_input_tokens": 13927,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 13927
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard"
+          },
+          "source": "live"
+        }
+      ],
+      "askCount": 1,
+      "critique": {
+        "issues": [
+          {
+            "region": "upper storey walls",
+            "issue": "concept's signature is half-timbering — vertical dark_oak_log members over the cream infill; my upper storey is blank white_terracotta with no timber framing, so it doesn't read as Tudor",
+            "severity": "major"
+          },
+          {
+            "region": "roof",
+            "issue": "roof.hip with field-only renders as a stepped ziggurat rather than the concept's clean pitched hip; but adding stairs/slabs regressed the gate 6→5 last round, so the field-only form is the one that passes",
+            "severity": "major"
+          },
+          {
+            "region": "storey division",
+            "issue": "concept shows a dark timber jetty beam dividing the cobblestone base from the cream upper; my build transitions block-to-block with no beam line",
+            "severity": "minor"
+          },
+          {
+            "region": "overall mass",
+            "issue": "build reads small/stacked vs the concept's broad two-storey cottage, but footprint/height are structural and not safely changeable in one final action",
+            "severity": "minor"
+          }
+        ]
+      },
+      "decision": "revise",
+      "rationale": "Add the concept's storey-division timber beam across the full front facade — a symmetric, palette-valid (frame.timber) solid-to-solid paint that introduces the Tudor dark-timber line without risking the watertight/symmetry/single-component checks the way the rolled-back roof change did.",
+      "action": {
+        "action": "spray-paint",
+        "dir": "+z",
+        "toBlock": "dark_oak_log",
+        "fromBlock": "white_terracotta",
+        "bounds": {
+          "min": [
+            0,
+            3,
+            6
+          ],
+          "max": [
+            8,
+            3,
+            6
+          ]
+        }
+      },
+      "applied": {
+        "kind": "paint",
+        "painted": 7,
+        "skipped": {
+          "shaped": 0,
+          "outOfBounds": 73,
+          "fromMismatch": 0,
+          "alreadyTarget": 0
+        },
+        "placements": [
+          {
+            "op": "voxel",
+            "pos": [
+              8,
+              3,
+              6
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              7,
+              3,
+              6
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              5,
+              3,
+              6
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              4,
+              3,
+              6
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              3,
+              3,
+              6
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              1,
+              3,
+              6
+            ],
+            "block": "minecraft:dark_oak_log"
+          },
+          {
+            "op": "voxel",
+            "pos": [
+              0,
+              3,
+              6
+            ],
+            "block": "minecraft:dark_oak_log"
+          }
+        ]
+      },
+      "conformance": {
+        "before": {
+          "schema": "pack-conformance/v1",
+          "passed": true,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "after": {
+          "schema": "pack-conformance/v1",
+          "passed": false,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": false,
+              "findings": [
+                "band \"upper\": foreign block dark_oak_log at 0,3,6",
+                "band \"upper\": foreign block dark_oak_log at 1,3,6",
+                "band \"upper\": foreign block dark_oak_log at 3,3,6",
+                "band \"upper\": foreign block dark_oak_log at 4,3,6",
+                "band \"upper\": foreign block dark_oak_log at 5,3,6",
+                "band \"upper\": foreign block dark_oak_log at 7,3,6",
+                "band \"upper\": foreign block dark_oak_log at 8,3,6"
+              ]
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            }
+          ]
+        },
+        "accepted": false,
+        "reason": "regressed: passed 6→5, findings 0→7"
+      }
+    }
+  ],
+  "final": {
+    "outcome": "budget-exhausted",
+    "rounds": 6,
+    "conformance": {
+      "schema": "pack-conformance/v1",
+      "passed": true,
+      "checks": [
+        {
+          "name": "courses-even",
+          "passed": true,
+          "findings": []
+        },
+        {
+          "name": "symmetry-held",
+          "passed": true,
+          "findings": []
+        },
+        {
+          "name": "openings-rhythm",
+          "passed": true,
+          "findings": []
+        },
+        {
+          "name": "palette-in-pack",
+          "passed": true,
+          "findings": []
+        },
+        {
+          "name": "watertight",
+          "passed": true,
+          "findings": [],
+          "mouths": 0
+        },
+        {
+          "name": "single-component",
+          "passed": true,
+          "findings": [],
+          "components": 1
+        }
+      ]
+    }
+  }
+}
