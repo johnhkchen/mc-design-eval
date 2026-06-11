@@ -44,6 +44,7 @@ import { artifactOccupancy } from "../../src/view/occupancy.mjs";
 import { rebuildArtifact, openingRegions } from "../../src/view/shell-integrity.mjs";
 import { REGULARIZE_DEFAULTS, protrudingStackRegion } from "../../src/view/shell-regularize.mjs";
 import { ROOF_FIT_DEFAULTS, gablesFromRecord } from "../../src/form/roof-fit.mjs";
+import { componentGableGroups } from "../../src/form/component-roof.mjs";
 import { roofFamily } from "../../src/view/roof-generate.mjs";
 import { swapRoof, chimneyColumns } from "../../src/view/roof-swap.mjs";
 import { runCells } from "../../src/form/component-decompose.mjs";
@@ -147,10 +148,67 @@ async function runRoof(def) {
   const refSils = {};
   for (const a of MULTI_ANGLE_GATE.azimuths) refSils[a] = rasterizeSilhouette(mesh, { view: resolveAngle(a) });
 
-  const swap = swapRoof(occ, { gables: fit.gables, family, refSils, regions, protect, chimney });
-  const artifact = swap.accepted ? rebuildArtifact(swap.occ, raw) : null;
+  // T-110-01 (E-28): the swap ladder runs PER COMPONENT — a building can carry structurally
+  // distinct roofs (the church: tower cap + nave pitch) that one whole-mass invocation judges
+  // all-or-nothing. Gables group by their planes' massId (pure, src/form/component-roof.mjs),
+  // primary mass first; each group gets the full existing attempt ladder under the cage, judged in
+  // the context of everything accepted so far (the occupancy threads through accepted swaps).
+  // A rejected component falls back NAMED — per component, never dragging its siblings down.
+  const grouping = componentGableGroups({ record, gables: fit.gables });
+  let occCur = occ;
+  const components = [];
+  for (const grp of grouping.groups) {
+    const swap = swapRoof(occCur, { gables: grp.gables, family, refSils, regions, protect, chimney });
+    if (swap.accepted) occCur = swap.occ;
+    components.push({ massId: grp.massId, role: grp.role, gableIds: grp.gableIds, swap });
+  }
+  const swap = composeComponentSwaps(components, grouping.findings, occCur);
+  const artifact = swap.accepted ? rebuildArtifact(occCur, raw) : null;
   if (artifact) assertArtifact(artifact);
-  return { raw, occ, record, shellSha, shellPath, componentPath, fit, family, swap, chimney, stack, artifact };
+  return { raw, occ, record, shellSha, shellPath, componentPath, fit, family, swap, components, chimney, stack, artifact };
+}
+
+/** Compose per-component swap outcomes into the record's top-level summary. For a single-mass
+ *  subject this is the identity view of its one swap (sums of one), so the cottage/gatehouse
+ *  records keep today's semantics. Aggregations are declared: counts/carve/reseat/fitError sum or
+ *  concat; iou/closure report the LAST ACCEPTED component (the final whole-build state the cage
+ *  judged); bandFloor is the min over generated components; reasons are massId-prefixed. */
+function composeComponentSwaps(components, groupFindings, occFinal) {
+  const accepted = components.filter((c) => c.swap.accepted);
+  const last = accepted[accepted.length - 1] ?? components[0] ?? null;
+  const sum = (sel) => components.reduce((a, c) => a + (sel(c.swap) ?? 0), 0);
+  const censusSum = (side) => {
+    const rows = components.map((c) => c.swap.census?.[side]).filter(Boolean);
+    return rows.length ? rows.reduce((a, r) => ({ spikes: a.spikes + r.spikes, cells: a.cells + r.cells }),
+      { spikes: 0, cells: 0 }) : null;
+  };
+  const floors = components.filter((c) => c.swap.accepted && Number.isFinite(c.swap.bandFloor))
+    .map((c) => c.swap.bandFloor);
+  return {
+    occ: occFinal,
+    accepted: accepted.length > 0,
+    perComponent: components.map((c) => ({ massId: c.massId, accepted: c.swap.accepted })),
+    reasons: components.flatMap((c) => c.swap.accepted ? [] : c.swap.reasons.map((r) => `[${c.massId}] ${r}`)),
+    attempt: components.map((c) => `${c.massId}:${c.swap.attempt}`).join(", "),
+    attempts: components.flatMap((c) => (c.swap.attempts ?? []).map((a) => ({ massId: c.massId, ...a }))),
+    iou: last?.swap.iou ?? null,
+    closure: last?.swap.closure ?? null,
+    carve: { removed: sum((s) => s.carve?.removed) },
+    generated: {
+      counts: {
+        full: sum((s) => s.generated?.counts?.full),
+        stairs: sum((s) => s.generated?.counts?.stairs),
+        slabs: sum((s) => s.generated?.counts?.slabs),
+      },
+      gables: accepted.flatMap((c) => c.swap.generated?.gables ?? []),
+    },
+    reseat: { added: components.flatMap((c) => c.swap.reseat?.added ?? []) },
+    fitError: components.flatMap((c) => c.swap.fitError ?? []),
+    findings: [...groupFindings, ...components.flatMap((c) =>
+      (c.swap.findings ?? []).map((f) => ({ ...f, where: f.where ?? c.massId })))],
+    bandFloor: floors.length ? Math.min(...floors) : last?.swap.bandFloor ?? null,
+    census: { before: censusSum("before"), after: censusSum("after") },
+  };
 }
 
 /** Declared targets, asserted (E-25 Rule 6 — honest gaps fail loudly, never quietly recorded). */
@@ -215,12 +273,17 @@ async function main() {
         g.sides.map((s) => `${s.planeId} ${s.eaveDir} pitch ${s.pitch} (${s.pitchSource}) eaveY ${s.eaveY} overhang ${s.overhang ?? "—"}`).join(" · "));
     }
     console.error(`[${def.key}] family: field ${r1.family.field ?? "—"}, stairs ${r1.family.stairs ?? "—"}, slab ${r1.family.slab ?? "—"}`);
+    for (const c of r1.components) {
+      console.error(`[${def.key}] component ${c.massId}${c.role ? ` (${c.role})` : ""}: ` +
+        `${c.swap.accepted ? `ACCEPTED (${c.swap.attempt})` : `FALLBACK — ${c.swap.reasons.join("; ")}`} ` +
+        `[gables: ${c.gableIds.join(", ") || "—"}]`);
+    }
     for (const a of r1.swap.attempts ?? []) {
-      console.error(`[${def.key}] attempt ${a.name}: ${a.accepted ? "ACCEPTED" : `rejected — ${a.reasons.join("; ")}`}`);
+      console.error(`[${def.key}] attempt ${a.massId}:${a.name}: ${a.accepted ? "ACCEPTED" : `rejected — ${a.reasons.join("; ")}`}`);
     }
     console.error(`[${def.key}] swap ${status.toUpperCase()} (${r1.swap.attempt})${r1.swap.reasons.length ? ` — ${r1.swap.reasons.join("; ")}` : ""}`);
     if (r1.swap.iou) console.error(`[${def.key}] iou baseline ${JSON.stringify(r1.swap.iou.baseline)} → final ${JSON.stringify(r1.swap.iou.final)}`);
-    if (r1.swap.census) console.error(`[${def.key}] roof-band protrusions ${r1.swap.census.before.spikes} → ${r1.swap.census.after.spikes} ` +
+    if (r1.swap.census?.before) console.error(`[${def.key}] roof-band protrusions ${r1.swap.census.before.spikes} → ${r1.swap.census.after.spikes} ` +
       `(carved ${r1.swap.carve.removed}, generated full ${r1.swap.generated.counts.full} / stairs ${r1.swap.generated.counts.stairs} / slabs ${r1.swap.generated.counts.slabs}, ` +
       `reseat ${r1.swap.reseat.added.length})`);
 
@@ -299,6 +362,19 @@ async function main() {
       },
       fit: { gables: r1.fit.gables.map(gableRecordView), findings: r1.fit.findings },
       family: r1.family,
+      // T-110-01: one entry per component mass — the roof program's tolerance-or-named-fallback
+      // contract applied per component (the church's tower and nave are judged separately, in
+      // primary-first order, each ladder run under the cage on the threaded occupancy)
+      components: r1.components.map((c) => ({
+        massId: c.massId, role: c.role, gableIds: c.gableIds,
+        swap: {
+          accepted: c.swap.accepted, attempt: c.swap.attempt, reasons: c.swap.reasons,
+          iou: c.swap.iou, closure: c.swap.closure, carve: c.swap.carve,
+          generated: c.swap.generated, reseat: { added: c.swap.reseat?.added?.length ?? 0 },
+          fitError: c.swap.fitError, findings: c.swap.findings, bandFloor: c.swap.bandFloor,
+          census: c.swap.census,
+        },
+      })),
       swap: {
         accepted: r1.swap.accepted, reasons: r1.swap.reasons,
         attempt: r1.swap.attempt, attempts: r1.swap.attempts,
@@ -355,6 +431,12 @@ function renderMd(r) {
     `cage, behind \`npm run roof:${r.subject}\`. **Status: ${r.status.toUpperCase()}**` +
     `${r.reproducible.sha256 ? ` — reproducible, artifact sha256 \`${r.reproducible.sha256.slice(0, 16)}…\`` : ""}.\n\n` +
     `## Fitted gables\n${gables}\n\n` +
+    (r.components?.length
+      ? `## Per-component outcomes (T-110-01)\n` + r.components.map((c) =>
+          `- **${c.massId}**${c.role ? ` (${c.role})` : ""}: ${c.swap.accepted
+            ? `ACCEPTED (\`${c.swap.attempt}\`)${c.swap.fitError?.length ? ` — rmse ${c.swap.fitError.map((e) => `${e.gableId} ${e.rmse}`).join(", ")}` : ""}`
+            : `FALLBACK — ${c.swap.reasons.join("; ")}`} (gables: ${c.gableIds.join(", ") || "—"})`).join("\n") + `\n\n`
+      : "") +
     (r.swap.iou ? `## The cage\nIoU vs GLB — baseline: ${iouRow(r.swap.iou.baseline)}; final: ${iouRow(r.swap.iou.final)} ` +
       `(tolerance ${r.params.iouTolerance}, anchored to the input shell). Closure reached ` +
       `${r.swap.closure.input.reached} → ${r.swap.closure.candidate.reached}. ` +
