@@ -234,6 +234,10 @@ async function main() {
   if (!def) throw new Error(`--subject must be one of: ${Object.keys(GATE_SUBJECTS).join(", ")}`);
   const label = arg("--label") ?? "current";
   const artifactRel = arg("--artifact") ?? (def.build?.startsWith("multi-angle/") ? def.build : `durable-skin/${def.key}/artifact.json`);
+  // T-115-01: optional APERTURE-REFERENCE input (like --artifact, an input path — the judged
+  // contract is untouched): the kit-presence fixpoint extracts concept-declared apertures from the
+  // chain's RAW input build; a generate-first chain's raw input is its GENERATED base, not def.build.
+  const referenceRel = arg("--reference") ?? def.build;
   const offline = argv.includes("--offline");
   const rejudge = argv.includes("--rejudge");
   const slug = `${def.key}-${label}`;
@@ -348,10 +352,10 @@ async function main() {
     presence = { ran: false, reason: "no-kit-record" };
   } else if (derived.source !== "concept") {
     presence = { ran: false, reason: "no-concept-bands" }; // kit whereUsed refs need the derived bands
-  } else if (!existsSync(join(HERE, def.build))) {
+  } else if (!existsSync(join(HERE, referenceRel))) {
     presence = { ran: false, reason: "no-reference-build" }; // apertures are concept-declared (T-099)
   } else {
-    const refArt = JSON.parse(await readFile(join(HERE, def.build), "utf8"));
+    const refArt = JSON.parse(await readFile(join(HERE, referenceRel), "utf8"));
     const refOcc = artifactOccupancy(refArt);
     // the fixpoint rule re-runs the SAME op the chain ran: component frames + the concept-band
     // floor lines (the occupancy storey scan reads every layer of a cage-solid shell as a floor)

@@ -175,10 +175,11 @@ export function styledStretch({ def, kitRec, base, skin, reconstruction = null, 
 /** Spawn the kit-aware gate through its own CLI (frozen contract). Exit 0/1/2 is a VERDICT.
  *  Exported (T-115-01) with the label parameterized so the generate-first runner reuses the
  *  spawn-not-reimplement rule under its own record label. */
-export function spawnGate(key, artifactRel, label = GATE_LABEL) {
+export function spawnGate(key, artifactRel, label = GATE_LABEL, extraArgs = []) {
   return new Promise((resolve, reject) => {
     const child = spawn(process.execPath, [
       join(HERE, "multi-angle-gate.mjs"), "--subject", key, "--label", label, "--artifact", artifactRel,
+      ...extraArgs,
     ], { stdio: ["ignore", "inherit", "inherit"] });
     child.on("error", reject);
     child.on("close", (code) => resolve(code));

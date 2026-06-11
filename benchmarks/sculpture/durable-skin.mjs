@@ -127,6 +127,7 @@ export const SUBJECTS = {
     },
     plasterInvariant: "white_terracotta",
     frontDir: "+z", sideDir: "+x",
+    generated: { scale: 32 }, // T-115-01: generate-first working scale (registry-scale alignment)
   },
   gatehouse: {
     key: "gatehouse",
@@ -161,6 +162,7 @@ export const SUBJECTS = {
     },
     plasterInvariant: null,
     frontDir: "+z", sideDir: "+x",
+    generated: { scale: 32 }, // T-115-01: generate-first working scale (registry-scale alignment)
   },
   // THE E-25 CHALLENGE SUBJECT (T-094-01 registered concept+GLB; T-095-01 ran it). UNTUNED
   // CONTRACT: this entry is registry DATA only — paths, the working scale, and a fallback prior
@@ -208,6 +210,7 @@ export const SUBJECTS = {
     },
     plasterInvariant: null,
     frontDir: "+z", sideDir: "+x",
+    generated: { scale: 48 }, // T-115-01: generate-first working scale (mirrors provision.scale)
   },
 };
 

@@ -77,7 +77,10 @@
     "reskin:church": "node benchmarks/sculpture/component-skin.mjs --subject church",
     "reconstructed:cottage": "node benchmarks/sculpture/reconstructed-milestone.mjs --subject cottage",
     "reconstructed:gatehouse": "node benchmarks/sculpture/reconstructed-milestone.mjs --subject gatehouse",
-    "reconstructed:church": "node benchmarks/sculpture/reconstructed-milestone.mjs --subject church"
+    "reconstructed:church": "node benchmarks/sculpture/reconstructed-milestone.mjs --subject church",
+    "generated:cottage": "node benchmarks/sculpture/generated-milestone.mjs --subject cottage",
+    "generated:gatehouse": "node benchmarks/sculpture/generated-milestone.mjs --subject gatehouse",
+    "generated:church": "node benchmarks/sculpture/generated-milestone.mjs --subject church"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
