@@ -4,6 +4,7 @@
 //   C — preflightPins, incl. THE REGRESSION FIXTURE: the verbatim swallowed-`--` kit sweep
 //   D — guardedWriteRecord against a synthetic pin (tmpdir + injected tracked set; no real git)
 //   E — loadTrackedSet / isTracked (fail-closed null set; repo smoke)
+//   F — domain refusal (T-126-01): workshop writes can never touch gate records
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -16,6 +17,7 @@ import {
   ROTATE_FLAG, POLICY_DOC, PinGuardError,
   decidePinWrite, refusalMessage, preflightPins,
   loadTrackedSet, isTracked, guardedWriteRecord,
+  GATE_RECORD_NAMESPACES, domainRefusal,
 } from "./pin-guard.mjs";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
@@ -172,4 +174,53 @@ test("E2 loadTrackedSet smoke on the real repo (cached, contains package.json)",
   const set = loadTrackedSet(ROOT);
   assert.ok(set instanceof Set && set.has("package.json"));
   assert.equal(loadTrackedSet(ROOT), set); // cache hit, same instance
+});
+
+// --- F: domain refusal — judge isolation (T-126-01) ------------------------------------------------
+
+const GATE_REL = "benchmarks/sculpture/multi-angle/cottage-styled.json";
+
+test("F1 domainRefusal: workshop into a gate namespace refuses; everything else is null", () => {
+  assert.match(domainRefusal("workshop", GATE_REL), /structurally isolated from the frozen judge/);
+  assert.equal(domainRefusal("workshop", "benchmarks/sculpture/workshop/fixture.json"), null);
+  assert.equal(domainRefusal(null, GATE_REL), null);
+  assert.equal(domainRefusal(undefined, GATE_REL), null);
+  assert.equal(domainRefusal("gate", GATE_REL), null);
+  assert.ok(GATE_RECORD_NAMESPACES.includes("benchmarks/sculpture/multi-angle/"));
+});
+
+test("F2 guardedWriteRecord: workshop-domain gate write THROWS — rotate and sanction do NOT override", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "pin-guard-dom-"));
+  try {
+    const trackedSet = new Set(); // even an UNTRACKED gate path refuses: isolation, not pin rotation
+    for (const opts of [{}, { rotate: true }, { sanction: "any named sanction" }]) {
+      await assert.rejects(
+        () => guardedWriteRecord({ root: dir, rel: GATE_REL, content: "{}\n", trackedSet, domain: "workshop", ...opts }),
+        (e) => e instanceof PinGuardError && /frozen judge/.test(e.message),
+      );
+    }
+    // same rel without the workshop domain behaves exactly as before (untracked → writes freely)
+    await writeFile(join(dir, "ok.json"), ""); // ensure dir usable
+    const w = await guardedWriteRecord({ root: dir, rel: "ok.json", content: "{}\n", trackedSet });
+    assert.equal(w.action, "write");
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test("F3 preflightPins: workshop-domain gate pin refuses even with rotate; clean workshop pins pass", () => {
+  assert.throws(
+    () => preflightPins({ pins: [{ rel: GATE_REL, tracked: false }], rotate: true, domain: "workshop", intent: "workshop run" }),
+    (e) => e instanceof PinGuardError && /judge-isolation boundary/.test(e.message) && /workshop run/.test(e.message),
+  );
+  const out = preflightPins({
+    pins: [{ rel: "benchmarks/sculpture/workshop/fixture.json", tracked: false }],
+    rotate: false,
+    domain: "workshop",
+  });
+  assert.deepEqual(out, { refused: [], rotating: [] });
+});
+
+test("F4 nested gate-record write under workshop domain refuses (prefix, not exact-dir match)", () => {
+  assert.match(domainRefusal("workshop", "benchmarks/sculpture/multi-angle/sub/dir/x.md"), /frozen judge/);
 });

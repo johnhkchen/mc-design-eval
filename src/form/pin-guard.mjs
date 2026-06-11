@@ -33,6 +33,24 @@ import { join } from "node:path";
 export const ROTATE_FLAG = "--rotate-pins";
 export const POLICY_DOC = "docs/knowledge/pin-rotation-policy.md";
 
+/** Gate-record namespaces — the frozen judge's committed verdicts. A WORKSHOP-domain caller
+ *  (E-31 Rule 1, T-126-01) may never write here: the refusal is structural and absolute —
+ *  neither the rotation flag nor a sanction overrides it (judge isolation, not pin rotation). */
+export const GATE_RECORD_NAMESPACES = Object.freeze(["benchmarks/sculpture/multi-angle/"]);
+
+/** Pure domain refusal: a "workshop" write into a gate-record namespace returns the refusal
+ *  reason; every other (domain, rel) pair returns null. Domains other than "workshop" are
+ *  untouched (the nine pre-T-126 writers pass no domain at all). */
+export function domainRefusal(domain, rel) {
+  if (domain !== "workshop") return null;
+  for (const ns of GATE_RECORD_NAMESPACES) {
+    if (rel.startsWith(ns)) {
+      return `workshop-domain write into the gate-record namespace "${ns}" — the workshop is structurally isolated from the frozen judge (E-31 Rule 1); no flag or sanction permits this`;
+    }
+  }
+  return null;
+}
+
 export class PinGuardError extends Error {
   constructor(message, pins = []) {
     super(message);
@@ -68,7 +86,17 @@ export function refusalMessage({ rel, reason, intent = "this write" }) {
 /** BEFORE-SPEND gate: a live run declares every record path it intends to (re)write; if any is a
  *  committed pin and the rotation flag is absent, throw ONE error naming them all. Returns the
  *  rotation ledger otherwise so callers can log what they are about to rotate. */
-export function preflightPins({ pins, rotate = false, intent = "live run" }) {
+export function preflightPins({ pins, rotate = false, intent = "live run", domain = null }) {
+  const denied = pins
+    .map((p) => ({ rel: p.rel, reason: domainRefusal(domain, p.rel) }))
+    .filter((p) => p.reason !== null);
+  if (denied.length > 0) {
+    throw new PinGuardError(
+      `pin-guard: REFUSED ${intent} — ${denied.length} write${denied.length === 1 ? "" : "s"} cross the judge-isolation boundary:\n` +
+      denied.map((p) => `  - ${p.rel} (${p.reason})`).join("\n"),
+      denied,
+    );
+  }
   const committed = pins.filter((p) => p.tracked).map((p) => p.rel);
   if (rotate || committed.length === 0) return { refused: [], rotating: rotate ? committed : [] };
   throw new PinGuardError(
@@ -103,7 +131,11 @@ export function isTracked(trackedSet, rel) {
 /** The drop-in for record writeFile()s. `rel` is repo-root-relative (matches git ls-files).
  *  `sanction` is a named standing allowance (e.g. the T-114 rejudge completion) — it permits the
  *  write like the flag does, and is logged in its own words. */
-export async function guardedWriteRecord({ root, rel, content, rotate = false, sanction = null, trackedSet = undefined }) {
+export async function guardedWriteRecord({ root, rel, content, rotate = false, sanction = null, trackedSet = undefined, domain = null }) {
+  const denial = domainRefusal(domain, rel);
+  if (denial !== null) {
+    throw new PinGuardError(`pin-guard: REFUSED write — ${rel}: ${denial}`, [{ rel, reason: denial }]);
+  }
   const set = trackedSet === undefined ? loadTrackedSet(root) : trackedSet;
   const tracked = isTracked(set, rel);
   const abs = join(root, rel);
