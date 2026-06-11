@@ -1,9 +1,13 @@
-// Unit tests for idiom-registry.mjs (T-124-01, story S-124, epic E-31).
+// Unit tests for idiom-registry.mjs (T-124-01, story S-124, epic E-31; brush surface T-128-01,
+// story S-128, epic E-32).
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import Ajv2020 from "ajv/dist/2020.js";
 
-import { IDIOM_REGISTRY, idiomNames, getIdiom } from "./idiom-registry.mjs";
+import {
+  IDIOM_REGISTRY, idiomNames, getIdiom,
+  BRUSH_REGISTRY, brushNames, getBrush,
+} from "./idiom-registry.mjs";
 
 /** Minimal synthetic spec per construct idiom — every construct must realize on these. */
 const SYNTH_SPECS = {
@@ -124,4 +128,42 @@ test("paramsSchema rejects off-contract style params (constructs are closed obje
   assert.equal(validate({ width: 3, roofBlock: "spruce_stairs" }), true);
   assert.equal(validate({ width: 2.5 }), false);
   assert.equal(validate({ swag: true }), false);
+});
+
+// ---------------------------------------------------------------- the brush surface (T-128-01)
+
+test("the brush aliases are the SAME frozen table (one door, two vocabularies)", () => {
+  assert.equal(BRUSH_REGISTRY, IDIOM_REGISTRY);
+  assert.equal(brushNames, idiomNames);
+  assert.equal(getBrush, getIdiom);
+});
+
+test("the E-23 surface brushes are registered as passes with closed paramsSchemas", () => {
+  const ajv = new Ajv2020({ strict: true });
+  for (const name of ["surface.fill", "surface.paint", "surface.roof-courses", "surface.strip-salt"]) {
+    const entry = BRUSH_REGISTRY[name];
+    assert.ok(entry, `missing brush: ${name}`);
+    assert.equal(entry.kind, "pass", name);
+    assert.equal(typeof entry.fn, "function", name);
+    const validate = ajv.compile(entry.paramsSchema);
+    assert.ok(validate({}), `${name}: accepts {}`);
+    assert.equal(validate({ swag: true }), false, `${name}: closed schema`);
+  }
+  assert.equal(typeof BRUSH_REGISTRY["surface.paint"].merge, "function");
+  assert.equal(typeof BRUSH_REGISTRY["surface.paint"].apply, "function");
+});
+
+test("every brush carries the contract metadata: composition, tests, preview", () => {
+  for (const name of brushNames()) {
+    const entry = BRUSH_REGISTRY[name];
+    assert.ok(Array.isArray(entry.composition?.consumes) && entry.composition.consumes.length > 0, `${name}: consumes`);
+    assert.ok(Array.isArray(entry.composition?.emits) && entry.composition.emits.length > 0, `${name}: emits`);
+    assert.equal(typeof entry.tests, "string", `${name}: tests`);
+    if (entry.kind === "construct") {
+      assert.ok(Array.isArray(entry.preview?.card) && entry.preview.card.length > 0, `${name}: card preview`);
+    } else {
+      assert.ok(entry.preview?.substrate && typeof entry.preview.realize === "function", `${name}: pass preview`);
+      assert.equal(typeof entry.preview.params, "object", `${name}: preview params`);
+    }
+  }
 });

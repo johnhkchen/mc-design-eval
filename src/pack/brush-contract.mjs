@@ -190,8 +190,11 @@ export function validateBrushRegistry(
         err(name, "no preview realizer provided (pass previews need realizePassPreview)");
       } else {
         try {
-          const { cells } = realizePreview(name, entry);
+          const { cells, effect } = realizePreview(name, entry);
           if (!Array.isArray(cells) || cells.length === 0) err(name, "preview realized no cells");
+          else if (effect !== undefined && effect === 0) {
+            err(name, "preview effect is empty (the card would show the bare substrate)");
+          }
         } catch (e) {
           err(name, `preview did not realize: ${e.message}`);
         }

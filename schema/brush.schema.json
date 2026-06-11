@@ -77,7 +77,7 @@
               "required": ["kind", "spec"],
               "additionalProperties": false,
               "properties": {
-                "kind": { "enum": ["shell", "solid"] },
+                "kind": { "enum": ["shell", "solid", "box"] },
                 "spec": { "type": "object" }
               }
             },

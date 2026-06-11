@@ -19,15 +19,41 @@
 // parameters (properties only, nothing required — a pack declares partial defaults/bounds;
 // the full program spec is validated by the generator's own fail-loud checks at realization).
 //
-// Subject-agnostic: no block names, no dimensions, no style names. PURE — no GL/IO/Date/random.
+// THE BRUSH CONTRACT (T-128-01, story S-128, epic E-32): every entry is a BRUSH — parametrized,
+// composable, unit-tested, preview-carded — and THIS TABLE IS THE ONLY DOOR to a build technique
+// (E-32 Rule 1; src/pack/brush-door.conformance.test.mjs enforces it). Each entry additionally
+// carries:
+//   • `composition` {consumes, emits} — the chaining declaration (closed vocabularies in
+//     src/pack/brush-contract.mjs): constructs are spec → cells; passes are occupancy + context →
+//     placements (or a removeSet their `apply` consumes).
+//   • `tests` — the unit-test file that proves the technique (contract-checked to exist and to
+//     name the brush).
+//   • `preview` — the preview-card requirement: constructs point at committed IDIOM_CARD_SPECS
+//     ids; passes declare a SYNTHETIC SUBJECT (substrate + params, fixture data — CARD_ROWS
+//     status) and an in-entry `realize({occ, cells})` that applies the pass and returns the
+//     final preview cells + the effect size. src/pack/brush-preview.mjs builds the substrate;
+//     src/pack/brush-catalog.mjs renders the catalog. Some realize closures stage their own
+//     defect (pits, salt) or cut the result away (hollow, floorplan) — DISPLAY choices that make
+//     the technique visible on a card; the ops' real semantics live in their `tests`.
+//   • brush-facing aliases at the bottom (BRUSH_REGISTRY/brushNames/getBrush) — same frozen
+//     table, the E-32/S-131 surface.
+//
+// Subject-agnostic: no block names, no dimensions, no style names in REALIZATION CODE — preview
+// substrates/params are committed synthetic fixture data, the same status as the card specs.
+// PURE — no GL/IO/Date/random.
 
 import { generateRoof } from "../view/roof-generate.mjs";
 import { archRing, flatHead, stairRun, slabStep } from "../form/shaped-vocab.mjs";
 import { dormerGable, chimneyStack, jettyOverhang, plinthBand } from "../form/idiom-constructs.mjs";
 import { placementGrammar } from "../form/placement-grammar.mjs";
-import { dressOpenings } from "../view/opening-dressing.mjs";
+import { dressOpenings, extractApertures } from "../view/opening-dressing.mjs";
 import { markHollowable, carveArtifact } from "../view/hollow-carve.mjs";
 import { generateFloorplan } from "../view/floorplan.mjs";
+import { zoneFill } from "../view/zone-fill.mjs";
+import { paintFace, mergePaints, applyPaint } from "../view/face-paint.mjs";
+import { regularizeRoofCourses, stripStraySalt } from "../view/surface-pattern.mjs";
+import { projectSurface } from "../view/surface-grid.mjs";
+import { occupancyFromCells, bareBlock } from "../view/occupancy.mjs";
 
 export const IDIOM_REGISTRY_SCHEMA = "idiom-registry/v1";
 
@@ -166,6 +192,23 @@ export function slabStepConstruct(spec) {
 
 // ---------------------------------------------------------------- the registry table
 
+/** Apply placements over base cells, last-writer-wins by position (the expand rule) — the pass
+ *  previews' merge. Blocks are stored bare (the artifact assembler namespaces). */
+function overlayCells(cells, placements) {
+  const byKey = new Map(cells.map((c) => [c.pos.join(","), c]));
+  for (const p of placements) {
+    byKey.set(p.pos.join(","), {
+      pos: [...p.pos],
+      block: bareBlock(p.block),
+      ...(p.state ? { state: { ...p.state } } : {}),
+    });
+  }
+  return [...byKey.values()];
+}
+
+/** Construct composition: the uniform spec → cells contract. */
+const CONSTRUCT_IO = Object.freeze({ consumes: Object.freeze(["spec"]), emits: Object.freeze(["cells"]) });
+
 const BLOCKS_FRAGMENT = {
   type: "object",
   properties: {
@@ -179,34 +222,50 @@ const BLOCKS_FRAGMENT = {
 export const IDIOM_REGISTRY = Object.freeze({
   "roof.gable": Object.freeze({
     kind: "construct", generate: roofGableConstruct, source: "src/view/roof-generate.mjs",
+    tests: "src/pack/idiom-registry.test.mjs", composition: CONSTRUCT_IO,
+    preview: { card: ["gable-ridge-z", "gable-ridge-x"] },
     paramsSchema: { type: "object", properties: { pitch: { type: "number", exclusiveMinimum: 0 }, blocks: BLOCKS_FRAGMENT }, additionalProperties: false },
   }),
   "roof.hip": Object.freeze({
     kind: "construct", generate: roofHipConstruct, source: "src/view/roof-generate.mjs",
+    tests: "src/pack/idiom-registry.test.mjs", composition: CONSTRUCT_IO,
+    preview: { card: ["hip"] },
     paramsSchema: { type: "object", properties: { pitch: { type: "number", exclusiveMinimum: 0 }, blocks: BLOCKS_FRAGMENT }, additionalProperties: false },
   }),
   "roof.pyramid": Object.freeze({
     kind: "construct", generate: roofPyramidConstruct, source: "src/view/roof-generate.mjs",
+    tests: "src/pack/idiom-registry.test.mjs", composition: CONSTRUCT_IO,
+    preview: { card: ["pyramid"] },
     paramsSchema: { type: "object", properties: { pitch: { type: "number", exclusiveMinimum: 0 }, blocks: BLOCKS_FRAGMENT }, additionalProperties: false },
   }),
   "arch": Object.freeze({
     kind: "construct", generate: archConstruct, source: "src/form/shaped-vocab.mjs",
+    tests: "src/pack/idiom-registry.test.mjs", composition: CONSTRUCT_IO,
+    preview: { card: ["arch"] },
     paramsSchema: { type: "object", properties: { block: { type: "string" } }, additionalProperties: false },
   }),
   "head.flat": Object.freeze({
     kind: "construct", generate: flatHeadConstruct, source: "src/form/shaped-vocab.mjs",
+    tests: "src/pack/idiom-registry.test.mjs", composition: CONSTRUCT_IO,
+    preview: { card: ["head-flat"] },
     paramsSchema: { type: "object", properties: { block: { type: "string" } }, additionalProperties: false },
   }),
   "course.stairs": Object.freeze({
     kind: "construct", generate: stairRunConstruct, source: "src/form/shaped-vocab.mjs",
+    tests: "src/pack/idiom-registry.test.mjs", composition: CONSTRUCT_IO,
+    preview: { card: ["stairs-walk"] },
     paramsSchema: { type: "object", properties: { block: { type: "string" }, winding: { enum: ["walk", "soffit"] } }, additionalProperties: false },
   }),
   "course.slab": Object.freeze({
     kind: "construct", generate: slabStepConstruct, source: "src/form/shaped-vocab.mjs",
+    tests: "src/pack/idiom-registry.test.mjs", composition: CONSTRUCT_IO,
+    preview: { card: ["slab-course"] },
     paramsSchema: { type: "object", properties: { block: { type: "string" }, kind: { enum: ["bottom", "top", "double"] } }, additionalProperties: false },
   }),
   "dormer": Object.freeze({
     kind: "construct", generate: dormerGable, source: "src/form/idiom-constructs.mjs",
+    tests: "src/form/idiom-constructs.test.mjs", composition: CONSTRUCT_IO,
+    preview: { card: ["dormer-px", "dormer-nx", "dormer-pz", "dormer-nz"] },
     paramsSchema: {
       type: "object",
       properties: {
@@ -221,6 +280,8 @@ export const IDIOM_REGISTRY = Object.freeze({
   }),
   "chimney": Object.freeze({
     kind: "construct", generate: chimneyStack, source: "src/form/idiom-constructs.mjs",
+    tests: "src/form/idiom-constructs.test.mjs", composition: CONSTRUCT_IO,
+    preview: { card: ["chimney-bare", "chimney-crown", "chimney-slab"] },
     paramsSchema: {
       type: "object",
       properties: {
@@ -233,6 +294,8 @@ export const IDIOM_REGISTRY = Object.freeze({
   }),
   "jetty": Object.freeze({
     kind: "construct", generate: jettyOverhang, source: "src/form/idiom-constructs.mjs",
+    tests: "src/form/idiom-constructs.test.mjs", composition: CONSTRUCT_IO,
+    preview: { card: ["jetty-xp", "jetty-xn", "jetty-zp", "jetty-zn"] },
     paramsSchema: {
       type: "object",
       properties: {
@@ -244,6 +307,8 @@ export const IDIOM_REGISTRY = Object.freeze({
   }),
   "plinth": Object.freeze({
     kind: "construct", generate: plinthBand, source: "src/form/idiom-constructs.mjs",
+    tests: "src/form/idiom-constructs.test.mjs", composition: CONSTRUCT_IO,
+    preview: { card: ["plinth"] },
     paramsSchema: {
       type: "object",
       properties: {
@@ -256,19 +321,184 @@ export const IDIOM_REGISTRY = Object.freeze({
   // ---- passes: registered for name resolution, natural signatures (see module header) ----
   "timber-frame": Object.freeze({
     kind: "pass", fn: placementGrammar, source: "src/form/placement-grammar.mjs",
+    tests: "src/form/placement-grammar.test.mjs",
+    composition: { consumes: ["occupancy", "kit", "zones"], emits: ["placements", "report"] },
+    preview: {
+      substrate: { kind: "shell", spec: { footprint: { x0: 0, x1: 8, z0: 0, z1: 5 }, y0: 0, height: 6, wallBlock: "white_terracotta" } },
+      params: { bandNames: ["upper"], frame: "dark_oak_planks", floorLines: [3], upperTop: 5 },
+      realize: ({ occ, cells }) => {
+        const kit = [
+          { block: "dark_oak_planks", confidence: "high", formClass: "cube", whereUsed: ["trim"] },
+          { block: "white_terracotta", confidence: "high", formClass: "cube", whereUsed: ["upper"] },
+        ];
+        const r = placementGrammar(occ, {
+          kit, bandNames: ["upper"],
+          policy: { upper: { dominant: "white_terracotta", preserve: ["dark_oak_planks"] } },
+          zoneOf: () => "upper", floorLines: [3], upperTop: 5, roofKeys: new Set(),
+        });
+        return { cells: overlayCells(cells, r.placements), effect: r.placements.length };
+      },
+    },
     paramsSchema: { type: "object", additionalProperties: true },
   }),
   "opening-dressing": Object.freeze({
     kind: "pass", fn: dressOpenings, source: "src/view/opening-dressing.mjs",
+    tests: "src/view/opening-dressing.test.mjs",
+    composition: { consumes: ["occupancy", "features", "kit"], emits: ["placements", "report"] },
+    preview: {
+      substrate: {
+        kind: "shell",
+        spec: {
+          footprint: { x0: 0, x1: 8, z0: 0, z1: 4 }, y0: 0, height: 5, wallBlock: "white_terracotta",
+          openings: [
+            { wall: "-z", at: [2, 2], w: 2, h: 2 },
+            { wall: "-z", at: [6, 0], w: 1, h: 3 },
+          ],
+        },
+      },
+      params: { slots: { infill: "oak_fence", shutter: "spruce_trapdoor", door: "oak_door", light: "lantern", frame: "dark_oak_planks" } },
+      realize: ({ occ, cells }) => {
+        const apertures = extractApertures(occ);
+        const treatments = { slots: {
+          infill: { block: "oak_fence" }, shutter: { block: "spruce_trapdoor" },
+          door: { block: "oak_door" }, light: { block: "lantern" }, frame: { block: "dark_oak_planks" },
+        } };
+        const r = dressOpenings(occ, apertures, treatments);
+        return { cells: overlayCells(cells, r.placements), effect: r.placements.length };
+      },
+    },
     paramsSchema: { type: "object", additionalProperties: true },
   }),
   "hollow": Object.freeze({
     kind: "pass", fn: markHollowable, apply: carveArtifact, source: "src/view/hollow-carve.mjs",
+    tests: "src/view/hollow-carve.test.mjs",
+    composition: { consumes: ["occupancy"], emits: ["removeSet", "report"] },
+    preview: {
+      // display CUTAWAY: the op's invariant is exteriorHeld (the carve is invisible from outside),
+      // so the card shows the kept shell sliced at mid-x to reveal the cavity and wall thickness
+      substrate: { kind: "solid", spec: { footprint: { x0: 0, x1: 6, z0: 0, z1: 5 }, y0: 0, height: 5, block: "stone_bricks" } },
+      params: { inset: 1, cutAtX: 3 },
+      realize: ({ occ, cells }) => {
+        const { remove } = markHollowable(occ, { inset: 1 });
+        const kept = cells.filter((c) => !remove.has(c.pos.join(",")));
+        return { cells: kept.filter((c) => c.pos[0] <= 3), effect: remove.size };
+      },
+    },
     paramsSchema: { type: "object", additionalProperties: true },
   }),
   "floorplan": Object.freeze({
     kind: "pass", fn: generateFloorplan, source: "src/view/floorplan.mjs",
+    tests: "src/view/floorplan.test.mjs",
+    composition: { consumes: ["occupancy", "features", "spec"], emits: ["placements", "report"] },
+    preview: {
+      // sealed box so the interior is camera-hidden (the op's safeAir predicate); the top course
+      // is then cut away for display so the divider walls read from the gate azimuths
+      substrate: { kind: "box", spec: { footprint: { x0: 0, x1: 8, z0: 0, z1: 6 }, y0: 0, height: 5, block: "stone_bricks" } },
+      params: { rows: 1, cols: 2, materials: { floor: "spruce_planks", wall: "oak_planks" } },
+      realize: ({ occ, cells }) => {
+        const read = {
+          footprint: { bbox: { minX: 0, maxX: 8, minZ: 0, maxZ: 6 } },
+          storeyBands: { floorLines: [0], bands: [{ yStart: 0, yEnd: 4 }] },
+        };
+        const { placements } = generateFloorplan(occ, read, {
+          rows: 1, cols: 2, materials: { floor: "spruce_planks", wall: "oak_planks" },
+        });
+        return { cells: overlayCells(cells, placements).filter((c) => c.pos[1] < 4), effect: placements.length };
+      },
+    },
     paramsSchema: { type: "object", additionalProperties: true },
+  }),
+  // ---- surface brushes: the E-23 spray/paint ops join the door (T-128-01) ----
+  "surface.fill": Object.freeze({
+    kind: "pass", fn: zoneFill, source: "src/view/zone-fill.mjs",
+    tests: "src/view/zone-fill.test.mjs",
+    composition: { consumes: ["occupancy", "zones"], emits: ["placements", "report"] },
+    preview: {
+      // cobble shell with a timber course: the fill recolors the field to the zone dominant and
+      // KEEPS the preserve-run (the base-coat + keep rule on one card)
+      substrate: {
+        kind: "shell",
+        spec: { footprint: { x0: 0, x1: 6, z0: 0, z1: 4 }, y0: 0, height: 4, wallBlock: "cobblestone", courses: [{ yRange: [2, 2], block: "dark_oak_log" }] },
+      },
+      params: { zones: { wall: { dominant: "white_terracotta", preserve: ["dark_oak_log"] } }, skin: "exposure", minRun: 2 },
+      realize: ({ occ, cells }) => {
+        const r = zoneFill(occ, {
+          zoneOf: () => "wall",
+          zones: { wall: { dominant: "white_terracotta", preserve: ["dark_oak_log"] } },
+          skin: "exposure", minRun: 2,
+        });
+        return { cells: overlayCells(cells, r.placements), effect: r.placements.length };
+      },
+    },
+    paramsSchema: {
+      type: "object",
+      properties: { skin: { enum: ["projection", "exposure"] }, minRun: { type: "integer", minimum: 1 } },
+      additionalProperties: false,
+    },
+  }),
+  "surface.paint": Object.freeze({
+    kind: "pass", fn: paintFace, merge: mergePaints, apply: applyPaint, source: "src/view/face-paint.mjs",
+    tests: "src/view/face-paint.test.mjs",
+    composition: { consumes: ["occupancy", "spec"], emits: ["placements", "report"] },
+    preview: {
+      // a target grid of alternating brick courses painted onto the +x face — the model points,
+      // the brush paints (recolor only, geometry untouched)
+      substrate: { kind: "shell", spec: { footprint: { x0: 0, x1: 6, z0: 0, z1: 3 }, y0: 0, height: 5, wallBlock: "white_terracotta" } },
+      params: { dir: "+x", allowed: ["bricks"], pattern: "even-rows" },
+      realize: ({ occ, cells }) => {
+        const grid = projectSurface(occ, "+x");
+        const target = grid.cells.map((row, v) => row.map((c) => (c && v % 2 === 0 ? "bricks" : null)));
+        const r = paintFace(occ, "+x", target, { allowed: new Set(["bricks"]) });
+        return { cells: overlayCells(cells, r.placements), effect: r.placements.length };
+      },
+    },
+    paramsSchema: {
+      type: "object",
+      properties: { priority: { type: "array", items: { type: "string" } } },
+      additionalProperties: false,
+    },
+  }),
+  "surface.roof-courses": Object.freeze({
+    kind: "pass", fn: regularizeRoofCourses, source: "src/view/surface-pattern.mjs",
+    tests: "src/view/surface-pattern.test.mjs",
+    composition: { consumes: ["occupancy", "zones"], emits: ["placements", "report"] },
+    preview: {
+      // the substrate is deliberately pitted (two top cells dropped) so the ADD-only hydrologic
+      // fill is visible: the pits refill in the dominant material
+      substrate: { kind: "solid", spec: { footprint: { x0: 0, x1: 5, z0: 0, z1: 4 }, y0: 0, height: 3, block: "spruce_planks" } },
+      params: { dominant: "dark_oak_planks", pits: [[2, 2, 2], [4, 2, 1]] },
+      realize: ({ cells }) => {
+        const pits = new Set(["2,2,2", "4,2,1"]);
+        const pitted = cells.filter((c) => !pits.has(c.pos.join(",")));
+        const r = regularizeRoofCourses(occupancyFromCells(pitted), { dominant: "dark_oak_planks" });
+        return { cells: overlayCells(pitted, r.placements), effect: r.placements.length };
+      },
+    },
+    paramsSchema: { type: "object", properties: {}, additionalProperties: false },
+  }),
+  "surface.strip-salt": Object.freeze({
+    kind: "pass", fn: stripStraySalt, source: "src/view/surface-pattern.mjs",
+    tests: "src/view/surface-pattern.test.mjs",
+    composition: { consumes: ["occupancy", "zones"], emits: ["placements", "report"] },
+    preview: {
+      // the substrate is deliberately salted (three isolated off-dominant specks on the front
+      // wall); the op recolors them back to the zone dominant — the card shows the clean wall
+      substrate: { kind: "shell", spec: { footprint: { x0: 0, x1: 6, z0: 0, z1: 4 }, y0: 0, height: 4, wallBlock: "cobblestone" } },
+      params: { zones: { wall: { dominant: "cobblestone" } }, minKeep: 3, salt: [[1, 1, 0], [3, 2, 0], [5, 1, 0]] },
+      realize: ({ cells }) => {
+        const salt = new Set(["1,1,0", "3,2,0", "5,1,0"]);
+        const salted = cells.map((c) => (salt.has(c.pos.join(",")) ? { ...c, block: "andesite" } : c));
+        const r = stripStraySalt(occupancyFromCells(salted), {
+          zoneOf: () => "wall", zones: { wall: { dominant: "cobblestone" } }, minKeep: 3,
+        });
+        return { cells: overlayCells(salted, r.placements), effect: r.placements.length };
+      },
+    },
+    paramsSchema: {
+      type: "object",
+      properties: { minKeep: { type: "integer", minimum: 1 }, minExtent: { type: "integer", minimum: 1 } },
+      additionalProperties: false,
+    },
   }),
 });
 
@@ -283,3 +513,16 @@ export function getIdiom(name) {
   if (!entry) fail("getIdiom", `unknown idiom "${name}" (known: ${idiomNames().join(", ")})`);
   return entry;
 }
+
+// ---------------------------------------------------------------- the brush surface (E-32)
+
+/** The brush registry IS the idiom registry — one frozen table, two vocabularies (E-31 programs
+ * name idioms; E-32's factory grows brushes). Same object by identity: registering a brush and
+ * registering an idiom are the same act, through the same door. */
+export const BRUSH_REGISTRY = IDIOM_REGISTRY;
+
+/** Sorted brush names (the catalog/factory iteration order). */
+export const brushNames = idiomNames;
+
+/** Resolve a brush or THROW. */
+export const getBrush = getIdiom;
