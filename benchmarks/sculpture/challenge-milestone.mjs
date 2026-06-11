@@ -166,7 +166,7 @@ async function provisionBase(def) {
  *  gated on per-azimuth silhouette IoU vs the GLB `refSils`, closure no-regress (strict here — the
  *  input is closed by construction), and derived protect regions (chimney stack + openings);
  *  rejected steps roll back and are recorded in the report. */
-function shellStage(baseArtifact, refSils) {
+export function shellStage(baseArtifact, refSils) {
   const occ0 = artifactOccupancy(baseArtifact);
   const strip = componentStrip(occ0);
   const stripped = rebuildArtifact(strip.occ, baseArtifact);

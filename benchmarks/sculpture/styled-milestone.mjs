@@ -86,6 +86,19 @@ const artifactJson = (a) => JSON.stringify(a, null, 2) + "\n";
 async function styledChain(def, kitRec, paths, track) {
   track.stage = "chain";
   const { provision, base, shell, reconstruction, skin } = await runChain(def, paths);
+  const stretch = styledStretch({ def, kitRec, base, skin, reconstruction, track });
+  return { provision, base, shell, reconstruction, skin, ...stretch };
+}
+
+/**
+ * THE POST-CHAIN STRETCH — grammar → opening dressing → the T-100 settle fixpoint — extracted
+ * (T-115-01) so the generate-first runner re-runs the SAME op the kit-presence checker re-runs,
+ * never a re-implementation (the settle seam stays single-sourced; the conformance tripwire pins
+ * vocabulary consumption to `skin.vocabulary`, the authority's composition). Pure given its
+ * inputs; `base` is the chain's RAW input build (T-099's aperture reference — for generate-first,
+ * the GENERATED base whose fitted apertures are carved in).
+ */
+export function styledStretch({ def, kitRec, base, skin, reconstruction = null, track = {} }) {
   track.stage = "grammar";
   if (skin.zoneMap?.source !== "concept" || !skin.zoneMap.bands) {
     throw new Error(`skin produced no concept-derived zone map (source=${skin.zoneMap?.source}) — ` +
@@ -156,14 +169,16 @@ async function styledChain(def, kitRec, paths, track) {
     assertArtifact(styled);
   }
   assertArtifact(styled);
-  return { provision, base, shell, reconstruction, skin, grammar: g, apertures, treatments, dress, settle, styled };
+  return { grammar: g, apertures, treatments, dress, settle, styled };
 }
 
-/** Spawn the kit-aware gate through its own CLI (frozen contract). Exit 0/1/2 is a VERDICT. */
-function spawnGate(key, artifactRel) {
+/** Spawn the kit-aware gate through its own CLI (frozen contract). Exit 0/1/2 is a VERDICT.
+ *  Exported (T-115-01) with the label parameterized so the generate-first runner reuses the
+ *  spawn-not-reimplement rule under its own record label. */
+export function spawnGate(key, artifactRel, label = GATE_LABEL) {
   return new Promise((resolve, reject) => {
     const child = spawn(process.execPath, [
-      join(HERE, "multi-angle-gate.mjs"), "--subject", key, "--label", GATE_LABEL, "--artifact", artifactRel,
+      join(HERE, "multi-angle-gate.mjs"), "--subject", key, "--label", label, "--artifact", artifactRel,
     ], { stdio: ["ignore", "inherit", "inherit"] });
     child.on("error", reject);
     child.on("close", (code) => resolve(code));
@@ -171,7 +186,7 @@ function spawnGate(key, artifactRel) {
 }
 
 /** Distill the gate record: the T-093 aggregate + the T-100 presence + the composed overall. */
-function distillGate(gateRec, key, gateCode) {
+export function distillGate(gateRec, key, gateCode, label = GATE_LABEL) {
   if (!gateRec) return { outcome: "MISSING-RECORD", exitCode: gateCode };
   const overall = gateRec.overall;
   const kp = gateRec.kitPresence;
@@ -194,7 +209,7 @@ function distillGate(gateRec, key, gateCode) {
       verdict: v.verdict?.verdict ?? (v.unparsed ? "unparsed" : v.reason === "coverage" ? "judge-not-called" : null),
       gaps: v.verdict?.gaps ?? [],
     })),
-    record: `benchmarks/sculpture/multi-angle/${key}-${GATE_LABEL}.json`,
+    record: `benchmarks/sculpture/multi-angle/${key}-${label}.json`,
     sheet: gateRec.sheet,
   };
 }
