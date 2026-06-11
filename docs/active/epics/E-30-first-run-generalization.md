@@ -6,7 +6,7 @@ status: open
 priority: high
 depends_on: [E-29]
 spec: "§1, §5, §6, §9"
-stories: [S-117, S-118, S-119, S-120, S-121]
+stories: [S-117, S-118, S-119, S-120, S-121, S-122]
 ---
 
 ## Background (read this first — self-contained)
