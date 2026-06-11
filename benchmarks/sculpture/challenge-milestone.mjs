@@ -65,6 +65,8 @@ import { classifyFeatures, assignFeatureBlocks, fallbackPalette } from "../../sr
 import { decodeImage } from "../../src/color/palette-extract.mjs";
 import { assertArtifact } from "../../src/artifact.mjs";
 import { MULTI_ANGLE_GATE_SCHEMA } from "../../src/form/multi-angle-gate.mjs";
+import { occupancyDelta, composeReconstruction } from "../../src/view/reconstruct-compose.mjs";
+import { buildComponentPlan } from "../../src/view/component-plan.mjs";
 import { buildSkin, SUBJECTS } from "./durable-skin.mjs";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
@@ -209,10 +211,56 @@ function shellStage(baseArtifact, refSils) {
 }
 
 // =================================================================================================
-// THE DETERMINISTIC CHAIN — provision? → shell → skin. Writes ONLY the two intermediate artifacts
-// (buildSkin reads its input from disk — a deliberate, inspectable file seam); run twice per live
-// pass, all produced artifacts byte-compared.
+// THE DETERMINISTIC CHAIN — provision? → shell → reconstruct? → skin. Writes ONLY the intermediate
+// artifacts (buildSkin reads its input from disk — a deliberate, inspectable file seam); run twice
+// per live pass, all produced artifacts byte-compared.
 // =================================================================================================
+
+/**
+ * T-106-01 RECONSTRUCT STAGE: load the committed component layer (T-103 record, T-104 roof program,
+ * T-105 shaped heads), verify every record's pin against the IN-CHAIN regularized shell (mismatch
+ * THROWS — a record cut from a different shell is input drift, never a graceful degrade), compose
+ * the two reconstruction deltas (disjointness asserted), and assemble the consumption plan. A
+ * subject with NO records returns null and the chain is byte-for-byte today's (the AC's recorded
+ * fallback lives in the plan's findings when only some records exist).
+ */
+async function loadReconstruction(def, shellArtifact, shellSha) {
+  const rel = { component: `components/${def.key}.json`, roof: `roof/${def.key}.json`, shaped: `shaped/${def.key}.json` };
+  const art = { roof: `roof/${def.key}/artifact.json`, shaped: `shaped/${def.key}/artifact.json` };
+  const readJson = async (p) => JSON.parse(await readFile(join(HERE, p), "utf8"));
+  const componentRecord = existsSync(join(HERE, rel.component)) ? await readJson(rel.component) : null;
+  const roofRecord = existsSync(join(HERE, rel.roof)) ? await readJson(rel.roof) : null;
+  const shapedRecord = existsSync(join(HERE, rel.shaped)) ? await readJson(rel.shaped) : null;
+  if (!componentRecord && !roofRecord && !shapedRecord) return null;
+
+  const baseOcc = artifactOccupancy(shellArtifact);
+  const deltas = [];
+  let roofDelta = null, roofOcc = null;
+  if (roofRecord?.status === "accepted" && roofRecord.swap?.accepted && existsSync(join(HERE, art.roof))) {
+    const roofArtifact = await readJson(art.roof);
+    assertArtifact(roofArtifact);
+    roofOcc = artifactOccupancy(roofArtifact);
+    roofDelta = occupancyDelta(baseOcc, roofOcc);
+    deltas.push({ name: "roof-program", delta: roofDelta });
+  }
+  if (shapedRecord && existsSync(join(HERE, art.shaped))) {
+    const shapedArtifact = await readJson(art.shaped);
+    assertArtifact(shapedArtifact);
+    deltas.push({ name: "shaped-heads", delta: occupancyDelta(baseOcc, artifactOccupancy(shapedArtifact)) });
+  }
+  const plan = buildComponentPlan({ componentRecord, roofRecord, shapedRecord, shellSha, roofDelta, roofOcc });
+  const composed = deltas.length ? composeReconstruction(shellArtifact, deltas) : null;
+  return {
+    plan, composed,
+    inputs: {
+      componentRecord: componentRecord ? rel.component : null,
+      roofRecord: roofRecord ? rel.roof : null,
+      shapedRecord: shapedRecord ? rel.shaped : null,
+      shellSha,
+    },
+  };
+}
+
 export async function runChain(def, paths) {
   let provision = null;
   let base;
@@ -231,11 +279,21 @@ export async function runChain(def, paths) {
   for (const a of MULTI_ANGLE_GATE.azimuths) refSils[a] = rasterizeSilhouette(mesh, { view: resolveAngle(a) });
   const shell = shellStage(base, refSils);
   await writeFile(paths.shellAbs, artifactJson(shell.artifact));
+  // T-106-01: where the component layer defines the shell's parts, the skin consumes the COMPOSED
+  // reconstruction (roof program + shaped heads over the regularized shell) and the component plan;
+  // record-less subjects pass through untouched.
+  const reconstruction = await loadReconstruction(def, shell.artifact, sha256(artifactJson(shell.artifact)));
+  let buildRel = paths.shellRel;
+  if (reconstruction?.composed) {
+    buildRel = paths.shellRel.replace("shell-artifact.json", "reconstructed-artifact.json");
+    assertArtifact(reconstruction.composed.artifact);
+    await writeFile(join(HERE, buildRel), artifactJson(reconstruction.composed.artifact));
+  }
   // The D5 uniform transform: the skin consumes the SHELL-REPAIRED build; the committed zone-map
   // record was derived from the unrepaired build, so its agreement assert does not apply here —
   // the derived bands are recorded (and diffed against the committed record) instead.
-  const skin = await buildSkin({ ...def, build: paths.shellRel, zoneMapRecord: null });
-  return { provision, base, shell, skin };
+  const skin = await buildSkin({ ...def, build: buildRel, zoneMapRecord: null, componentPlan: reconstruction?.plan ?? null });
+  return { provision, base, shell, reconstruction, skin };
 }
 
 /** Diff the chain's derived zone map against the committed zone-map record (audit, not a gate). */
@@ -321,10 +379,12 @@ async function main() {
     const got = {
       base: def.provision ? sha256(artifactJson(r.base)) : null,
       shell: sha256(artifactJson(r.shell.artifact)),
+      reconstructed: r.reconstruction?.composed ? sha256(artifactJson(r.reconstruction.composed.artifact)) : null,
       final: sha256(artifactJson(r.skin.final)),
     };
     const want = rec.reproducible?.sha256 ?? {};
-    const same = (!got.base || got.base === want.base) && got.shell === want.shell && got.final === want.final;
+    const same = (!got.base || got.base === want.base) && got.shell === want.shell && got.final === want.final &&
+      (got.reconstructed == null || want.reconstructed == null || got.reconstructed === want.reconstructed);
     console.error(`[repro] ${def.key}: fresh-process chain ${same ? "REPRODUCES the committed artifacts" : "DIVERGES"} ` +
       `(shell ${got.shell.slice(0, 12)}… vs ${String(want.shell).slice(0, 12)}…, final ${got.final.slice(0, 12)}… vs ${String(want.final).slice(0, 12)}…)`);
     if (!same) process.exitCode = 1;
@@ -341,6 +401,7 @@ async function main() {
     for (const [stage, a, b] of [
       ["base", r1.base, r2.base],
       ["shell", r1.shell.artifact, r2.shell.artifact],
+      ["reconstructed", r1.reconstruction?.composed?.artifact ?? null, r2.reconstruction?.composed?.artifact ?? null],
       ["final", r1.skin.final, r2.skin.final],
     ]) {
       if (JSON.stringify(a) !== JSON.stringify(b)) throw new Error(`NON-DETERMINISTIC: two in-process runs diverge at the ${stage} artifact`);
@@ -366,8 +427,16 @@ async function main() {
   const shas = {
     base: def.provision ? sha256(artifactJson(r1.base)) : null,
     shell: sha256(artifactJson(r1.shell.artifact)),
+    reconstructed: r1.reconstruction?.composed ? sha256(artifactJson(r1.reconstruction.composed.artifact)) : null,
     final: sha256(finalJson),
   };
+  if (r1.reconstruction) {
+    const rc = r1.reconstruction;
+    console.error(`[${def.key}] reconstruct (T-106): ${rc.composed
+      ? rc.composed.stats.perDelta.map((d) => `${d.name} ${d.changed}+${d.added}-${d.removed}`).join(", ") + ` (${rc.composed.stats.cells} cells)`
+      : "records present, no composable artifacts"}; seams ${JSON.stringify(r1.skin.seamSources)}` +
+      (rc.plan.findings.length ? `; findings: ${rc.plan.findings.map((f) => f.code).join(", ")}` : ""));
+  }
   console.error(`[${def.key}] reproducible: double-run byte-identical (final ${r1.skin.final.placements.length} placements, sha ${shas.final.slice(0, 12)}…)`);
   if (r1.provision) console.error(`[${def.key}] provision: scale ${r1.provision.scale}, ${r1.provision.cells} cells, ${r1.provision.manifest} manifest blocks`);
   console.error(`[${def.key}] shell: ${r1.shell.strip.components} → ${r1.shell.strip.kept} components (${r1.shell.strip.strippedCells} cells stripped); ` +
@@ -444,6 +513,16 @@ async function main() {
     },
     provision: r1.provision,
     shell: { strip: r1.shell.strip, openings: r1.shell.openings, closureBefore: r1.shell.closureBefore, voids: r1.shell.voids, plug: r1.shell.plug, regularize: r1.shell.regularize },
+    reconstruction: r1.reconstruction ? {
+      inputs: r1.reconstruction.inputs,
+      composed: r1.reconstruction.composed ? r1.reconstruction.composed.stats : null,
+      findings: r1.reconstruction.plan.findings,
+      seamSources: r1.skin.seamSources,
+      conformance: r1.skin.conformance ? {
+        columns: r1.skin.conformance.columns, conforming: r1.skin.conformance.conforming,
+        deviations: r1.skin.conformance.deviations.slice(0, 50),
+      } : null,
+    } : null,
     skin: {
       substitution: r1.skin.substitution, kit: r1.skin.kit,
       zoneMap: { source: r1.skin.zoneMap.source, bands: r1.skin.zoneMap.bands ?? null, roof: r1.skin.zoneMap.roof ?? null, reason: r1.skin.zoneMap.reason ?? null },

@@ -41,15 +41,30 @@ const finding = (code, detail) => ({ code, detail });
  * artifact against the pinned base + the artifact's occupancy. The program's authority is the
  * swapped artifact itself (the accepted rung's output) — not a re-evaluation of fit parameters, so
  * the attempt ladder's verdict is consumed, never re-litigated.
+ *
+ * `cells` (the paint-protection set) holds ONLY the program's SHAPED course cells — the
+ * stairs/slabs whose stateless recolor would cube them. The solid wedge and the gable-end fulls
+ * are recolor-safe geometry: material zoning on the rebuilt band is the SKIN's contract (the
+ * concept's gable accents stay wall material — the T-104 review's concern #5, resolved here),
+ * while FORM is held by `colTop`/`footprintCols` (the conformance target, full delta + fitted
+ * gable footprints, never narrowed).
  * @param {{record:object, delta:{changed:any[],added:any[]}, occ:import("./occupancy.mjs").Occupancy}} args
  * @returns {{cells:Set<string>, footprintCols:Set<string>, colTop:Map<string,number>,
  *            family:{field:string,stairs:string|null,slab:string|null}, source:"program"}|null}
  */
 export function roofPlanFromRecord({ record, delta, occ }) {
   if (!record || record.status !== "accepted" || !record.swap?.accepted) return null;
+  const famRaw = record.family ?? {};
+  const shapedIds = new Set([famRaw.stairs, famRaw.slab].filter(Boolean).map(bareBlock));
   const cells = new Set();
-  for (const e of delta.changed) cells.add(e.key);
-  for (const e of delta.added) cells.add(e.key);
+  const deltaCols = new Set();
+  for (const list of [delta.changed, delta.added]) {
+    for (const e of list) {
+      const [x, , z] = e.key.split(",").map(Number);
+      deltaCols.add(`${x},${z}`);
+      if (shapedIds.has(bareBlock(e.to.block)) || e.to.state != null) cells.add(e.key);
+    }
+  }
   // footprint = the RECORD's fitted gable footprints (the definition — a column the program
   // regenerated identically is still program territory) ∪ delta columns, clipped to columns the
   // swapped artifact actually occupies. colTop is read off the swapped artifact: unchanged columns
@@ -58,11 +73,7 @@ export function roofPlanFromRecord({ record, delta, occ }) {
     const b = g.footprint?.bbox;
     return b && x >= b.minX && x <= b.maxX && z >= b.minZ && z <= b.maxZ;
   });
-  const footprintCols = new Set();
-  for (const key of cells) {
-    const [x, , z] = key.split(",").map(Number);
-    footprintCols.add(`${x},${z}`);
-  }
+  const footprintCols = new Set(deltaCols);
   const colTop = new Map();
   for (const [key] of occ.cells) {
     const [x, y, z] = key.split(",").map(Number);
@@ -244,6 +255,24 @@ export function splitZoneOf(zoneOf, wallFaces, bandNames) {
   };
 }
 
+/**
+ * The full census zoneOf for a consumption plan: a roof-PROGRAM cell censuses as "roof" no matter
+ * what y-band it falls in (the definition says it is a roof course — a rake stair on the gable-end
+ * plane must not be counted against the wall band it y-bins into), then wall bands split on the
+ * defined wall field when one exists. Census-only — the FILL's zoneOf is untouched (paint policy
+ * is geometry's, protection is the region's).
+ * @param {(voxel:number[])=>string} zoneOf
+ * @param {{roof?:{cells:Set<string>}|null, wallFaces?:{contains:(voxel:number[])=>boolean}|null}} plan
+ * @param {Iterable<string>} bandNames
+ * @returns {(voxel:number[])=>string}
+ */
+export function planCensusZoneOf(zoneOf, plan, bandNames) {
+  const inner = plan?.wallFaces ? splitZoneOf(zoneOf, plan.wallFaces, bandNames) : zoneOf;
+  const roofCells = plan?.roof?.cells ?? null;
+  if (!roofCells) return inner;
+  return (voxel) => (roofCells.has(voxel.join(",")) ? "roof" : inner(voxel));
+}
+
 // --- the plan -----------------------------------------------------------------------------------
 
 /**
@@ -305,5 +334,13 @@ export function buildComponentPlan({ componentRecord = null, roofRecord = null, 
     findings.push(finding("component-slabs-empty", "component record has no wall slabs — wall-field census falls back to the banded exposure shell"));
   }
 
-  return { schema: COMPONENT_PLAN_SCHEMA, roof, frames, wallFaces, findings };
+  // seam 4's pin: the DEFINED wall/roof boundary (first layer above the tallest wall slab). The
+  // occupancy-derived upperTop drifts when a rebuilt roof changes the eave read (cottage: 19 → 20,
+  // which conjured a phantom 2-row band); the definition keeps the concept's y-mapping stable on
+  // rebuilt geometry — the re-pin protocol, mechanized.
+  const wallTop = wallFaces
+    ? Math.max(...(componentRecord.wallSlabs ?? []).map((s) => s.boundsWorld.max[1])) + 1
+    : null;
+
+  return { schema: COMPONENT_PLAN_SCHEMA, roof, frames, wallFaces, wallTop, findings };
 }

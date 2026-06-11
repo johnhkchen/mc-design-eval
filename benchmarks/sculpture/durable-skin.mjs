@@ -55,7 +55,7 @@ import { loadGlbSplat, resampleBlockGrid } from "../../src/view/glb-splat.mjs";
 import { paintFace, mergePaints, applyPaint } from "../../src/view/face-paint.mjs";
 import { allowedPalette } from "../../src/view/palette-cans.mjs";
 import { regularizeRoofCourses, stripStraySalt } from "../../src/view/surface-pattern.mjs";
-import { splitZoneOf, programConformance } from "../../src/view/component-plan.mjs";
+import { planCensusZoneOf, programConformance } from "../../src/view/component-plan.mjs";
 import {
   faceResemblance, coverageGate, DEFAULT_COVERAGE_THRESHOLD,
 } from "../../src/view/face-resemblance.mjs";
@@ -353,7 +353,15 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
   const occ0 = artifactOccupancy(artifact0);
   const sealed = applyDeltas(artifact0, [...sealRoof(occ0).placements, ...sealWalls(occ0).placements]);
   const occSealed = artifactOccupancy(sealed);
-  const sz = structuralZones(occSealed, def.zoneOpts ?? {});
+  // T-106-01 seam 4 (the re-pin protocol, mechanized): the wall/roof boundary comes from the
+  // component DEFINITION when one exists — the occupancy-derived eave read drifts on a rebuilt
+  // roof and re-maps the concept's rows (a phantom band appeared on the cottage). zoneOptsEff is
+  // returned so the grammar reads the same geometry.
+  const plan = def.componentPlan ?? null;
+  const zoneOptsEff = plan?.wallTop != null
+    ? { ...(def.zoneOpts ?? {}), upperTop: plan.wallTop }
+    : (def.zoneOpts ?? {});
+  const sz = structuralZones(occSealed, zoneOptsEff);
   const { storeyDivide, upperTop } = sz;
   // The band profile reads the SAME committed inputs the value-true step already decoded: the
   // step-1 gridResult (named-manifest validate quantize) + the geometric y-axis (floor-lines).
@@ -403,7 +411,6 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
   // --- T-106-01 COMPONENT CONSUMPTION (E-27 Rule 4: where a definition exists, the derivation is a
   // bug). All four seams hang off `def.componentPlan` (component-plan.mjs, built by the chain's
   // reconstruct stage); a null plan is byte-for-byte today's pipeline. Recorded in `seamSources`.
-  const plan = def.componentPlan ?? null;
   if (plan?.roof && policyS.roof) {
     // the program's course family is roof vocabulary: treads/slabs are roof material to the fill's
     // keep rule, the own-materials band evidence, and the plaster invariant — never salt to strip
@@ -417,14 +424,15 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
     ? [{ name: "roof-program", contains: (voxel) => plan.roof.cells.has(voxel.join(",")) }]
     : [];
   const skipProgram = plan?.roof ? (voxel) => plan.roof.cells.has(voxel.join(",")) : undefined;
-  // the gate census runs over the DEFINED wall field when the record provides one: wall-band cells
-  // off the slab faces report `<band>:offslab` — measured in the same coverage record, never gated
+  // the gate census runs over the DEFINITIONS: a roof-program cell censuses as roof (a rake stair
+  // on the gable-end plane is a roof course, not wall-band residue), and wall-band cells off the
+  // defined slab faces report `<band>:offslab` — measured in the same coverage record, never gated
   // (no policy entry), so the residual's cause ships with the verdict
-  const wallBandNames = () => Object.keys(policyS).filter((z) => z !== "roof");
-  const censusZoneOf = plan?.wallFaces ? splitZoneOf(zoneOf, plan.wallFaces, wallBandNames()) : zoneOf;
+  const censusZoneOf = plan ? planCensusZoneOf(zoneOf, plan, Object.keys(policyS).filter((z) => z !== "roof")) : zoneOf;
   const seamSources = {
     roofCourses: plan?.roof ? "program" : "occupancy",
     wallFields: plan?.wallFaces ? "slab-faces" : "banded-exposure",
+    upperTop: plan?.wallTop != null ? "component" : "occupancy",
     zoneMap: zoneMap.source,
   };
 
@@ -564,7 +572,7 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
   return {
     raw, artifact0, sealed, based, painted, splatOnly, final,
     substitution, kit, rows, agreesWithRecord, policyS, borderColor,
-    zones: { storeyDivide, upperTop }, zoneOf, zoneMap, fill,
+    zones: { storeyDivide, upperTop }, zoneOf, zoneMap, fill, zoneOpts: zoneOptsEff,
     splat: {
       front: {
         dir: def.frontDir, source: "concept", painted: frontPass.painted, skipped: frontPass.skipped,

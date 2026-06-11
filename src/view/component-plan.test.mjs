@@ -13,7 +13,8 @@ import { surfaceZoneHistogram } from "./zone-fill.mjs";
 import { occupancyDelta } from "./reconstruct-compose.mjs";
 import {
   COMPONENT_PLAN_SCHEMA, roofPlanFromRecord, programConformance, cornerColumnsFromSlabs,
-  roofFootprintFromRecord, frameLinesFromComponent, wallFacePredicate, splitZoneOf, buildComponentPlan,
+  roofFootprintFromRecord, frameLinesFromComponent, wallFacePredicate, splitZoneOf, planCensusZoneOf,
+  buildComponentPlan,
 } from "./component-plan.mjs";
 
 // --- fixture: a hollow 8×6 box (x∈[0,7], z∈[0,5]), walls y∈[0,5], flat roof slab at y=6 ----------
@@ -123,6 +124,7 @@ function roofFixture() {
       if (x >= 3 && x <= 4) cells.push({ pos: [x, 7, z], block: "spruce_stairs", state: { facing: "east", half: "bottom" } });
     }
   }
+  cells.push({ pos: [3, 8, 2], block: "spruce_planks" }); // a FULL-block cap: form, not protected paint
   const recon = occupancyFromCells(cells);
   const record = {
     status: "accepted", swap: { accepted: true },
@@ -133,11 +135,14 @@ function roofFixture() {
   return { base, recon, record, delta: occupancyDelta(base, recon) };
 }
 
-test("roofPlanFromRecord: cells/footprint/colTop from the accepted program; family bare-blocked", () => {
+test("roofPlanFromRecord: shaped cells protected, full cells form-only; colTop exact; family bare-blocked", () => {
   const { recon, record, delta } = roofFixture();
   const plan = roofPlanFromRecord({ record, delta, occ: recon });
-  assert.ok(plan.cells.has("3,7,2") && plan.cells.has("4,7,5"), "ridge cells are program cells");
-  assert.equal(plan.colTop.get("3,2"), 7);
+  assert.ok(plan.cells.has("3,7,2") && plan.cells.has("4,7,5"), "shaped course cells are protected");
+  assert.ok(!plan.cells.has("3,8,2"), "a full-block cap is FORM, not protected paint (the skin zones it)");
+  assert.ok(plan.footprintCols.has("3,2"), "…but its column is program footprint");
+  assert.equal(plan.colTop.get("3,2"), 8);
+  assert.equal(plan.colTop.get("4,2"), 7);
   assert.equal(plan.colTop.get("0,0"), 6);
   assert.deepEqual(plan.family, { field: "spruce_planks", stairs: "spruce_stairs", slab: null });
   // non-accepted records are not consumed
@@ -196,4 +201,24 @@ test("buildComponentPlan: pin mismatch THROWS — drift never degrades", () => {
     /roof-program inputs\.shellSha256 pin mismatch/
   );
   assert.throws(() => buildComponentPlan({}), /shellSha required/);
+});
+
+test("planCensusZoneOf: a program cell censuses as roof regardless of its y-band", () => {
+  const zoneOf = ([, y]) => (y >= 6 ? "roof" : y >= 3 ? "band1" : "band0");
+  const wf = wallFacePredicate(RECORD);
+  const plan = { roof: { cells: new Set(["0,4,2"]) }, wallFaces: wf };
+  const census = planCensusZoneOf(zoneOf, plan, ["band0", "band1"]);
+  assert.equal(census([0, 4, 2]), "roof");            // a rake stair on the wall plane: roof by definition
+  assert.equal(census([0, 4, 3]), "band1");           // its neighbour on the slab face: wall
+  assert.equal(census([1, 4, 3]), "band1:offslab");   // inboard cell: measured, not gated
+  // roof-only plan (no wallFaces): bands pass through unsplit
+  const roofOnly = planCensusZoneOf(zoneOf, { roof: { cells: new Set(["0,4,2"]) } }, ["band0", "band1"]);
+  assert.equal(roofOnly([1, 4, 3]), "band1");
+  assert.equal(roofOnly([0, 4, 2]), "roof");
+});
+
+test("buildComponentPlan: wallTop is the defined wall/roof boundary (max slab y + 1)", () => {
+  const p = buildComponentPlan({ componentRecord: RECORD, shellSha: SHA });
+  assert.equal(p.wallTop, 6); // slabs reach y5; first non-wall layer is 6 — the box's actual upperTop
+  assert.equal(buildComponentPlan({ shellSha: SHA }).wallTop, null);
 });
