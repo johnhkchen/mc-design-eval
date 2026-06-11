@@ -1425,6 +1425,110 @@
     ],
     "note": "exempt ⇔ spill-free at every gate azimuth after the one-voxel dilation (a mass the GLB contains); refuted at ≥1 azimuth → removed under the cage (IoU floors, closure no-regress), rolled back named otherwise"
   },
+  "hipFit": {
+    "schema": "roof-hip-fit/v1",
+    "params": {
+      "minTriangles": 1,
+      "apexSlack": 1
+    },
+    "components": [
+      {
+        "massId": "mass-0",
+        "cap": null,
+        "capFitted": false,
+        "hipEnds": [],
+        "findings": [
+          {
+            "code": "hip-end-unfitted",
+            "where": "gable-roof-3-roof-7:hi",
+            "detail": "no sane GLB end slope (pitch n/a over 0 sane tris, 97 rejected) — mean-of-sides heuristic stays (Rule 2)"
+          }
+        ]
+      },
+      {
+        "massId": "mass-1",
+        "cap": {
+          "schema": "roof-hip-fit/v1",
+          "massId": "mass-1",
+          "bandFloor": 11,
+          "eaveY": 11,
+          "faces": [
+            {
+              "dir": "+x",
+              "pitch": 1.716,
+              "pitchSource": "glb-quadrant",
+              "glb": {
+                "pitch": 1.716,
+                "rmse": 1.104,
+                "triangles": 149,
+                "rejected": 2625,
+                "area": 2.198
+              }
+            },
+            {
+              "dir": "-x",
+              "pitch": 1.674,
+              "pitchSource": "glb-quadrant",
+              "glb": {
+                "pitch": 1.674,
+                "rmse": 1.17,
+                "triangles": 169,
+                "rejected": 2373,
+                "area": 2.305
+              }
+            },
+            {
+              "dir": "+z",
+              "pitch": 1.355,
+              "pitchSource": "voxel",
+              "glb": {
+                "pitch": 1.729,
+                "rmse": 1.233,
+                "triangles": 168,
+                "rejected": 2802,
+                "area": 2.737
+              }
+            },
+            {
+              "dir": "-z",
+              "pitch": 1.732,
+              "pitchSource": "glb-quadrant",
+              "glb": {
+                "pitch": 1.732,
+                "rmse": 1.179,
+                "triangles": 126,
+                "rejected": 2501,
+                "area": 1.909
+              }
+            }
+          ],
+          "apex": {
+            "constructedY": 18,
+            "glbMaxY": 32.5
+          },
+          "footprint": {
+            "bbox": {
+              "minX": -19,
+              "maxX": -8,
+              "minZ": -18,
+              "maxZ": -8
+            },
+            "area": 125
+          }
+        },
+        "capFitted": true,
+        "hipEnds": null,
+        "findings": [
+          {
+            "code": "hip-cap-candidate-refused",
+            "where": "mass-1 @ eave 28",
+            "detail": "face +x unfittable (recorded none, glb n/a over 0 sane tris, 480 rejected)"
+          }
+        ]
+      }
+    ],
+    "note": "positions as-built (band-floor cross-section, bbox eave edges); slopes from recorded planes else GLB quadrant normals; apex CONSTRUCTED and sanity-bounded by the as-built top — glbMaxY is evidence, never applied (the aabb-affine lesson)"
+  },
   "family": {
     "field": "spruce_planks",
     "stairs": "spruce_stairs",
@@ -1999,6 +2103,92 @@
         "pitches": [],
         "ends": [],
         "ridge": []
+      },
+      {
+        "massId": "mass-1",
+        "name": "hip-cap",
+        "accepted": false,
+        "reasons": [
+          "silhouette IoU regressed @ +x+z: 0.8373 < 0.8978 − 0.02",
+          "silhouette IoU regressed @ +x-z: 0.921 < 0.9464 − 0.02",
+          "silhouette IoU regressed @ -x+z: 0.8145 < 0.8663 − 0.02",
+          "closure regressed: reached 11 → 203"
+        ],
+        "iou": {
+          "baseline": {
+            "+x+z": 0.8978,
+            "+x-z": 0.9464,
+            "-x-z": 0.9248,
+            "-x+z": 0.8663
+          },
+          "final": {
+            "+x+z": 0.8373,
+            "+x-z": 0.921,
+            "-x-z": 0.9238,
+            "-x+z": 0.8145
+          }
+        },
+        "census": {
+          "before": {
+            "spikes": 3,
+            "cells": 2140,
+            "excluded": {
+              "cells": 0,
+              "spikes": 0
+            }
+          },
+          "after": {
+            "spikes": 3,
+            "cells": 2140,
+            "excluded": {
+              "cells": 0,
+              "spikes": 0
+            }
+          }
+        },
+        "generated": {
+          "counts": {
+            "full": 334,
+            "stairs": 53,
+            "slabs": 66,
+            "cap": 6
+          },
+          "gables": [
+            "hip-cap-mass-1"
+          ],
+          "fittedEnds": 0,
+          "endCoords": []
+        },
+        "findings": [],
+        "pitches": [
+          {
+            "id": "hip-cap-mass-1",
+            "sides": [
+              {
+                "planeId": null,
+                "pitch": 1.716,
+                "source": "glb-quadrant"
+              },
+              {
+                "planeId": null,
+                "pitch": 1.674,
+                "source": "glb-quadrant"
+              },
+              {
+                "planeId": "roof-14",
+                "pitch": 1.355,
+                "source": "voxel"
+              },
+              {
+                "planeId": "roof-15",
+                "pitch": 1.732,
+                "source": "glb-quadrant"
+              }
+            ]
+          }
+        ],
+        "ends": [],
+        "ridge": []
       }
     ],
     "iou": {
@@ -2153,6 +2343,10 @@
     "pr/assets/frames/roof-church-end45-after.png",
     "pr/assets/frames/roof-church-end315-before.png",
     "pr/assets/frames/roof-church-end315-after.png",
+    "pr/assets/frames/roof-church-cap45-before.png",
+    "pr/assets/frames/roof-church-cap45-after.png",
+    "pr/assets/frames/roof-church-cap135-before.png",
+    "pr/assets/frames/roof-church-cap135-after.png",
     "pr/assets/frames/roof-church-ridge-before.png",
     "pr/assets/frames/roof-church-ridge-after.png"
   ],

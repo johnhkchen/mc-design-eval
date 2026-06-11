@@ -87,22 +87,34 @@ export function capFootprint(occ, planCols, bandFloor) {
   return { cols, bbox, massTop };
 }
 
-/** Area-weighted mean + rmse of per-triangle pitches (n·dir / n_y) for an upward-facing set. */
-function pitchOfTris(tris, idx, sign) {
+/** Area-weighted mean + rmse of per-triangle pitches (n·dir / n_y) over the SANE CONE: only
+ *  triangles whose own pitch is slope-like (minPitch ≤ p ≤ maxPitch) aggregate. Both bounds are
+ *  derived, not tuned: a decimated mesh fills the window with near-vertical wall scraps whose
+ *  n_y ≈ 0 explodes the raw mean into the hundreds (measured live on the church tower: 632 over
+ *  480 tris — maxPitch, the shared construction ceiling), and with near-flat parapet/ledge
+ *  triangles whose ≈ 0 pitch drowns the slope (measured live: mean 0.001 — minPitch = 1/run,
+ *  one quantization cell of rise over the face's own run, the least slope that can lift an apex
+ *  off the eave ring). What was dropped is COUNTED (`rejected`), never hidden. */
+function pitchOfTris(tris, idx, sign, { minPitch, maxPitch }) {
+  const pitchOf = (t) => (t.normal[idx] * sign) / t.normal[1];
+  const sane = tris.filter((t) => {
+    const p = pitchOf(t);
+    return p >= minPitch && p <= maxPitch;
+  });
   let area = 0;
   let sum = 0;
-  for (const t of tris) {
-    const p = (t.normal[idx] * sign) / t.normal[1];
+  for (const t of sane) {
     area += t.area;
-    sum += p * t.area;
+    sum += pitchOf(t) * t.area;
   }
   const mean = area > 0 ? sum / area : null;
   let sse = 0;
-  for (const t of tris) {
-    const r = (t.normal[idx] * sign) / t.normal[1] - mean;
+  for (const t of sane) {
+    const r = pitchOf(t) - mean;
     sse += t.area * r * r;
   }
-  return { pitch: mean, rmse: area > 0 ? Math.sqrt(sse / area) : null, triangles: tris.length, area: round3(area) };
+  return { pitch: mean, rmse: area > 0 ? Math.sqrt(sse / area) : null,
+    triangles: sane.length, rejected: tris.length - sane.length, area: round3(area) };
 }
 
 /** Upward roof-band triangles inside a plan window, quadrant-assigned to their dominant
@@ -192,7 +204,8 @@ function fitCapAt({ massId, planCols, sideByDir, eaveY, occ, tris, o }) {
   const faceEvidence = [];
   for (const f of FACES) {
     const recorded = sideByDir.get(f.dir);
-    const glb = pitchOfTris(byDir.get(f.dir), f.idx, f.sign);
+    const run = f.axis === "x" ? runX : runZ;
+    const glb = pitchOfTris(byDir.get(f.dir), f.idx, f.sign, { minPitch: 1 / run, maxPitch: o.maxPitch });
     const glbSane = saneP(glb.pitch) && glb.triangles >= o.minTriangles;
     let pitch = null;
     let pitchSource = null;
@@ -204,7 +217,7 @@ function fitCapAt({ massId, planCols, sideByDir, eaveY, occ, tris, o }) {
       pitchSource = "glb-quadrant";
     } else {
       reasons.push(`face ${f.dir} unfittable (recorded ${recorded ? recorded.pitch : "none"}, ` +
-        `glb ${glb.pitch === null ? "n/a" : round3(glb.pitch)} over ${glb.triangles} tris)`);
+        `glb ${glb.pitch === null ? "n/a" : round3(glb.pitch)} over ${glb.triangles} sane tris, ${glb.rejected} rejected)`);
       continue;
     }
     sides.push({
@@ -223,7 +236,7 @@ function fitCapAt({ massId, planCols, sideByDir, eaveY, occ, tris, o }) {
     });
     faceEvidence.push({ dir: f.dir, pitch: round3(pitch), pitchSource,
       glb: { pitch: glb.pitch === null ? null : round3(glb.pitch), rmse: glb.rmse === null ? null : round3(glb.rmse),
-        triangles: glb.triangles, area: glb.area } });
+        triangles: glb.triangles, rejected: glb.rejected, area: glb.area } });
   }
   if (reasons.length) return { reasons };
 
@@ -328,7 +341,8 @@ export function fitHipEnds(gables, tris, opts = {}) {
         if (t.normal[idx] * sign <= 0) continue; // faces the wrong way
         endTris.push(t);
       }
-      const fit = pitchOfTris(endTris, idx, sign);
+      const run = Math.max(1, Math.abs(edge * sign - (ridgeEnd ?? edge) * sign));
+      const fit = pitchOfTris(endTris, idx, sign, { minPitch: 1 / run, maxPitch: o.maxPitch });
       if (fit.triangles >= o.minTriangles && saneP(fit.pitch)) {
         fitted[end] = { pitch: round3(fit.pitch), rmse: fit.rmse === null ? null : round3(fit.rmse),
           triangles: fit.triangles, source: "glb" };
@@ -337,7 +351,7 @@ export function fitHipEnds(gables, tris, opts = {}) {
           code: "hip-end-unfitted",
           where: `${g.id}:${end}`,
           detail: `no sane GLB end slope (pitch ${fit.pitch === null ? "n/a" : round3(fit.pitch)} over ` +
-            `${fit.triangles} tris) — mean-of-sides heuristic stays (Rule 2)`,
+            `${fit.triangles} sane tris, ${fit.rejected} rejected) — mean-of-sides heuristic stays (Rule 2)`,
         });
       }
     }

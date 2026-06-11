@@ -17,6 +17,10 @@ Ends fitted in the accepted geometry: 0
 - **mass-0** (primary): ACCEPTED (`end-fitted-gable-ends`) — rmse gable-roof-3-roof-7 0.104 (gables: gable-roof-1-roof-5, gable-roof-3-roof-7)
 - **mass-1** (attached): FALLBACK — nothing generated (no sane in-tolerance gable or no kit family) (gables: gable-roof-14-roof-15)
 
+## Hip/pyramid fit (T-112-01)
+- **mass-0**: cap refused (named in findings)
+- **mass-1**: cap **FITTED** — band 11, apex 18 (glb evidence 32.5); faces +x **1.716** (glb-quadrant), -x **1.674** (glb-quadrant), +z **1.355** (voxel), -z **1.732** (glb-quadrant)
+
 ## Ridge fit (T-109-01)
 - **gable-roof-3-roof-7**: record ridge y 18; intersect **y 18.378** @ v -9.762 (Δ vs record 0.378); GLB apex line: y 28.723, slope 0°, length 1, rmse 0
 
@@ -77,6 +81,8 @@ Carved 131 sampled cells; generated 163 full / 14 stairs / 12 slabs (family spru
 - `end-hip` @ gable-roof-3-roof-7:+z: hip demanded — the end is a slope, not a face; not fitted
 - `end-unfitted` @ gable-roof-3-roof-7:-z: anchor window empty (wall anchor -18 outside the footprint end -7 — a buried interior end) — as-built end stays (Rule 2)
 - `end-unfitted` @ gable-roof-3-roof-7:+z: anchor window empty (wall anchor 17 outside the footprint end 1 — a buried interior end) — as-built end stays (Rule 2)
+- `hip-end-unfitted` @ gable-roof-3-roof-7:hi: no sane GLB end slope (pitch n/a over 0 sane tris, 97 rejected) — mean-of-sides heuristic stays (Rule 2)
+- `hip-cap-candidate-refused` @ mass-1 @ eave 28: face +x unfittable (recorded none, glb n/a over 0 sane tris, 480 rejected)
 
 ## Renders (45°/135°/225°/315° — the gate azimuths; 45°/315° are the T-108 gable-end views)
 - before +x+z: benchmarks/sculpture/roof/church/view-oblique45-before.png
@@ -90,7 +96,7 @@ Carved 131 sampled cells; generated 163 full / 14 stairs / 12 slabs (family spru
 - before right: benchmarks/sculpture/roof/church/view-ridge-before.png
 - after right: benchmarks/sculpture/roof/church/view-ridge-after.png
 
-Frames: pr/assets/frames/roof-church-before.png, pr/assets/frames/roof-church-after.png, pr/assets/frames/roof-church-end45-before.png, pr/assets/frames/roof-church-end45-after.png, pr/assets/frames/roof-church-end315-before.png, pr/assets/frames/roof-church-end315-after.png, pr/assets/frames/roof-church-ridge-before.png, pr/assets/frames/roof-church-ridge-after.png
+Frames: pr/assets/frames/roof-church-before.png, pr/assets/frames/roof-church-after.png, pr/assets/frames/roof-church-end45-before.png, pr/assets/frames/roof-church-end45-after.png, pr/assets/frames/roof-church-end315-before.png, pr/assets/frames/roof-church-end315-after.png, pr/assets/frames/roof-church-cap45-before.png, pr/assets/frames/roof-church-cap45-after.png, pr/assets/frames/roof-church-cap135-before.png, pr/assets/frames/roof-church-cap135-after.png, pr/assets/frames/roof-church-ridge-before.png, pr/assets/frames/roof-church-ridge-after.png
 
 > stairs-rendered (T-107-01, supersedes the T-097 stairs-invisible pin): the lens defect was getModelVariants' substring air-check matching every *_stairs name; fixed by render/scripts/patch-viewer-lens.mjs. Stair courses are visible in renders; placement remains proven by the unmapped gate + the committed states.
 

@@ -271,3 +271,16 @@ test("declared defaults are frozen and named", () => {
   assert.equal(HIP_FIT_DEFAULTS.apexSlack, 1.0);
   assert.ok(Object.isFrozen(HIP_FIT_DEFAULTS));
 });
+
+test("near-vertical wall scraps in the window are rejected from the cone, counted not hidden", () => {
+  // a wall scrap: tilted 0.05 cells per rise — pitch 20, far past maxPitch 4
+  const scrap = quad([6, 10, 1], [5.95, 14, 1], [5.95, 14, 5], [6, 10, 5]);
+  const tris = trisOf(faceQuad("+x", 1), scrap, faceQuad("-x", 1), faceQuad("+z", 1), faceQuad("-z", 1));
+  const { gable } = fitHipCap({
+    record: recordOf(), massId: "mass-1", gables: towerGables(), occ: towerOcc(), tris,
+  });
+  assert.ok(gable, "the sane cone survives the scrap");
+  const px = gable.capFit.faces.find((f) => f.dir === "+x");
+  assert.ok(Math.abs(px.glb.pitch - 1) < 1e-6, `scrap did not pollute the mean (got ${px.glb.pitch})`);
+  assert.equal(px.glb.rejected, 2, "the scrap's two triangles counted as rejected");
+});
