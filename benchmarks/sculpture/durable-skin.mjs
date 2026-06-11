@@ -56,7 +56,7 @@ import { paintFace, mergePaints, applyPaint } from "../../src/view/face-paint.mj
 import { allowedPalette } from "../../src/view/palette-cans.mjs";
 import { regularizeRoofCourses, stripStraySalt } from "../../src/view/surface-pattern.mjs";
 import { planCensusZoneOf, programConformance } from "../../src/view/component-plan.mjs";
-import { composeVocabulary } from "../../src/form/material-vocabulary.mjs";
+import { composeVocabulary, ownSetsOf } from "../../src/form/material-vocabulary.mjs";
 import {
   faceResemblance, coverageGate, DEFAULT_COVERAGE_THRESHOLD,
 } from "../../src/view/face-resemblance.mjs";
@@ -248,7 +248,7 @@ function exposedBlockByZone(artifact, zoneOf, block) {
 function zoneMaterialsFraction(cov, zone, policy) {
   const z = cov[zone];
   if (!z || !z.total) return null;
-  const mats = new Set([policy[zone].dominant, ...policy[zone].preserve].map(bareBlock));
+  const mats = ownSetsOf(policy).get(zone); // the authority's own-vocabulary (T-113-01)
   const n = Object.entries(z.byBlock).reduce((a, [b, c]) => a + (mats.has(b) ? c : 0), 0);
   return Math.round((n / z.total) * 1000) / 1000;
 }
@@ -596,8 +596,9 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
     roofMaterialsFraction: zoneMaterialsFraction(covFinal, "roof", policyS),
     wallForeignResidue: {},
   };
+  const ownSets = ownSetsOf(policyS); // the authority's own-vocabulary (T-113-01)
   for (const z of wallZoneNames) {
-    const own = new Set([policyS[z].dominant, ...policyS[z].preserve]);
+    const own = ownSets.get(z);
     const foreign = new Set(wallZoneNames.filter((w) => w !== z)
       .map((w) => policyS[w].dominant).filter((b) => !own.has(b)));
     const total = covFinal[z]?.total || 0;
