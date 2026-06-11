@@ -1,0 +1,207 @@
+{
+  "schema": "kit/v1",
+  "subject": "church",
+  "generatedFrom": {
+    "concept": "runs/016-vBuilding-a-village-church-with-a-square-bell-tower/concept.png",
+    "materialMap": "material-map/church.json",
+    "zoneMapRecord": "zone-map/church.json"
+  },
+  "params": {
+    "model": "claude-opus-4-8",
+    "tier": "strong",
+    "gridN": 96,
+    "deltaMax": 16,
+    "chromaWeight": 2,
+    "minCells": 24,
+    "lightnessOffset": -19.574,
+    "offsetSamples": 3
+  },
+  "kit": [
+    {
+      "block": "cobblestone",
+      "role": "main wall body / masonry infill of nave and tower",
+      "formClass": "cube",
+      "whereUsed": [
+        "band0"
+      ],
+      "confidence": "high",
+      "rationale": "Irregular rounded-pebble texture with random grey cobbles of mixed light/dark value and no straight mortar courses — the signature cobblestone face, not the regular rectangular brick grid.",
+      "flags": [],
+      "valueCheck": {
+        "verdict": "flagged-mismatch",
+        "deltaE": 21.386,
+        "rawDeltaE": 3.228,
+        "cells": 534,
+        "swatchLab": [
+          54.935,
+          -0.039,
+          0.843
+        ],
+        "blockLab": [
+          53.305,
+          0.571,
+          -0.409
+        ],
+        "flaggedForReview": true
+      }
+    },
+    {
+      "block": "stone_bricks",
+      "role": "quoins/corners, window surrounds, eaves & gable verge course, and base plinth",
+      "formClass": "cube",
+      "whereUsed": [
+        "corners-edges",
+        "trim",
+        "openings",
+        "base"
+      ],
+      "confidence": "high",
+      "rationale": "Clean regular rectangular blocks with even straight mortar seams framing every corner, the window jambs, the roof-line stringcourse and the ground course — the orderly stone_bricks grid contrasting deliberately against the rough cobblestone field.",
+      "flags": [],
+      "valueCheck": {
+        "verdict": "verified",
+        "deltaE": 8.64,
+        "rawDeltaE": 21.396,
+        "cells": 1001,
+        "swatchLab": [
+          31.649,
+          -0.423,
+          -4.299
+        ],
+        "blockLab": [
+          51.223,
+          -0.002,
+          0
+        ],
+        "flaggedForReview": false
+      }
+    },
+    {
+      "block": "spruce_planks",
+      "role": "main sloped nave roof sheeting",
+      "formClass": "cube",
+      "whereUsed": [
+        "roof"
+      ],
+      "confidence": "medium",
+      "rationale": "Warm medium-brown boards with long straight horizontal plank seams and a flat even grain running down the pitch — the smooth dark-brown spruce plank face rather than the streaky dark_oak grain.",
+      "flags": [],
+      "valueCheck": {
+        "verdict": "flagged-mismatch",
+        "deltaE": 27.76,
+        "rawDeltaE": 36.559,
+        "cells": 599,
+        "swatchLab": [
+          14.245,
+          5.283,
+          12.227
+        ],
+        "blockLab": [
+          38.489,
+          7.86,
+          25.664
+        ],
+        "flaggedForReview": true
+      }
+    },
+    {
+      "block": "spruce_stairs",
+      "role": "stepped pyramidal tower roof and the eave/verge course of the main roof",
+      "formClass": "fixture",
+      "whereUsed": [
+        "roof"
+      ],
+      "confidence": "medium",
+      "rationale": "The tower cap is built of receding tiers each stepping inward and the roof edges show a stepped overhanging lip — the right-angle profile of stacked stairs, matching the same brown plank wood.",
+      "flags": [],
+      "valueCheck": {
+        "verdict": null,
+        "reason": "non-cube",
+        "flaggedForReview": false
+      }
+    },
+    {
+      "block": "spruce_door",
+      "role": "tower entrance door at the base",
+      "formClass": "fixture",
+      "whereUsed": [
+        "openings",
+        "base"
+      ],
+      "confidence": "medium",
+      "rationale": "A two-tall brown wooden panel set into the tower's stone-brick surround at ground level with visible vertical plank divisions — a wooden door leaf, matching the spruce roof wood.",
+      "flags": [],
+      "valueCheck": {
+        "verdict": null,
+        "reason": "non-cube",
+        "flaggedForReview": false
+      }
+    }
+  ],
+  "unidentified": [
+    {
+      "surface": "tall narrow window slits in band0 (nave and tower)",
+      "reason": "The apertures read as solid dark recesses with no visible infill material (no bars, glass mullions, or shutter grain) — they appear to be empty shadowed openings, so I cannot honestly name a block placed in them.",
+      "fallback": {
+        "mode": "color-snap"
+      }
+    }
+  ],
+  "dropped": [],
+  "overrides": {},
+  "overrideRows": [
+    {
+      "bandName": "band0",
+      "named": "cobblestone",
+      "recognized": "cobblestone",
+      "verdict": "flagged-candidate"
+    },
+    {
+      "bandName": "roof",
+      "named": "dark_oak_planks",
+      "recognized": "spruce_planks",
+      "verdict": "flagged-candidate"
+    }
+  ],
+  "diff": {
+    "corrections": [
+      {
+        "band": "roof",
+        "old": "dark_oak_planks",
+        "new": "spruce_planks",
+        "ships": false,
+        "oldRole": "roof mass and tower spire"
+      }
+    ],
+    "recovered": [
+      {
+        "block": "spruce_stairs",
+        "role": "stepped pyramidal tower roof and the eave/verge course of the main roof",
+        "formClass": "fixture"
+      },
+      {
+        "block": "spruce_door",
+        "role": "tower entrance door at the base",
+        "formClass": "fixture"
+      }
+    ],
+    "unchanged": [
+      "cobblestone",
+      "stone_bricks"
+    ]
+  },
+  "stats": {
+    "in": 5,
+    "kept": 5,
+    "dropped": 0,
+    "unidentified": 1,
+    "flagged": 0,
+    "formClasses": {
+      "cube": 3,
+      "fixture": 2,
+      "rail": 0
+    },
+    "verified": 1,
+    "flaggedForReview": 2
+  }
+}

@@ -50,6 +50,12 @@ const SUBJECTS = [
     map: "material-map/gatehouse.json",
     zoneMapRecord: "zone-map/gatehouse.json",
   },
+  { // T-110-01: the E-25 challenge subject's first kit (zone-map/church.json landed the same ticket)
+    key: "church",
+    concept: "runs/016-vBuilding-a-village-church-with-a-square-bell-tower/concept.png",
+    map: "material-map/church.json",
+    zoneMapRecord: "zone-map/church.json",
+  },
 ];
 
 const OFFLINE = process.argv.includes("--offline");

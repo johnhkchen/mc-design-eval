@@ -1,0 +1,64 @@
+{
+  "ingredients": [
+    {
+      "block": "cobblestone",
+      "role": "main wall body / masonry infill of nave and tower",
+      "formClass": "cube",
+      "whereUsed": [
+        "band0"
+      ],
+      "confidence": "high",
+      "rationale": "Irregular rounded-pebble texture with random grey cobbles of mixed light/dark value and no straight mortar courses — the signature cobblestone face, not the regular rectangular brick grid."
+    },
+    {
+      "block": "stone_bricks",
+      "role": "quoins/corners, window surrounds, eaves & gable verge course, and base plinth",
+      "formClass": "cube",
+      "whereUsed": [
+        "corners-edges",
+        "trim",
+        "openings",
+        "base"
+      ],
+      "confidence": "high",
+      "rationale": "Clean regular rectangular blocks with even straight mortar seams framing every corner, the window jambs, the roof-line stringcourse and the ground course — the orderly stone_bricks grid contrasting deliberately against the rough cobblestone field."
+    },
+    {
+      "block": "spruce_planks",
+      "role": "main sloped nave roof sheeting",
+      "formClass": "cube",
+      "whereUsed": [
+        "roof"
+      ],
+      "confidence": "medium",
+      "rationale": "Warm medium-brown boards with long straight horizontal plank seams and a flat even grain running down the pitch — the smooth dark-brown spruce plank face rather than the streaky dark_oak grain."
+    },
+    {
+      "block": "spruce_stairs",
+      "role": "stepped pyramidal tower roof and the eave/verge course of the main roof",
+      "formClass": "fixture",
+      "whereUsed": [
+        "roof"
+      ],
+      "confidence": "medium",
+      "rationale": "The tower cap is built of receding tiers each stepping inward and the roof edges show a stepped overhanging lip — the right-angle profile of stacked stairs, matching the same brown plank wood."
+    },
+    {
+      "block": "spruce_door",
+      "role": "tower entrance door at the base",
+      "formClass": "fixture",
+      "whereUsed": [
+        "openings",
+        "base"
+      ],
+      "confidence": "medium",
+      "rationale": "A two-tall brown wooden panel set into the tower's stone-brick surround at ground level with visible vertical plank divisions — a wooden door leaf, matching the spruce roof wood."
+    }
+  ],
+  "unidentified": [
+    {
+      "surface": "tall narrow window slits in band0 (nave and tower)",
+      "reason": "The apertures read as solid dark recesses with no visible infill material (no bars, glass mullions, or shutter grain) — they appear to be empty shadowed openings, so I cannot honestly name a block placed in them."
+    }
+  ]
+}
