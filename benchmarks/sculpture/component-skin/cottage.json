@@ -60,18 +60,18 @@
           "verdict": "drifted",
           "gaps": [
             {
-              "region": "roof and upper storey",
-              "attribute": "form",
+              "region": "roof versus walls overall",
+              "attribute": "massing",
               "severity": "major"
             },
             {
-              "region": "overall silhouette vs. clean gabled mesh",
-              "attribute": "massing",
+              "region": "upper timber-framed storey",
+              "attribute": "material zoning",
               "severity": "minor"
             },
             {
-              "region": "stone base relative to cream wall band",
-              "attribute": "material zoning",
+              "region": "roof slopes and ridge",
+              "attribute": "form",
               "severity": "minor"
             }
           ]
@@ -83,13 +83,13 @@
           "verdict": "same object",
           "gaps": [
             {
-              "region": "roof ridge and upper massing",
-              "attribute": "form",
+              "region": "roof eaves overhang on the near side",
+              "attribute": "massing",
               "severity": "minor"
             },
             {
-              "region": "chimney on the roof",
-              "attribute": "massing",
+              "region": "chimney atop the roof",
+              "attribute": "form",
               "severity": "minor"
             }
           ]
@@ -101,13 +101,13 @@
           "verdict": "same object",
           "gaps": [
             {
-              "region": "roof ridge and eaves",
+              "region": "roof ridge and slopes",
               "attribute": "form",
               "severity": "minor"
             },
             {
-              "region": "chimney on roof",
-              "attribute": "massing",
+              "region": "upper-storey timber framing",
+              "attribute": "material zoning",
               "severity": "minor"
             }
           ]
@@ -119,17 +119,17 @@
           "verdict": "drifted",
           "gaps": [
             {
-              "region": "roof and upper massing",
+              "region": "roof across the whole upper mass",
               "attribute": "form",
               "severity": "major"
             },
             {
-              "region": "overall silhouette versus mesh",
+              "region": "overall building outline / eaves",
               "attribute": "massing",
-              "severity": "minor"
+              "severity": "major"
             },
             {
-              "region": "stone base at lower right",
+              "region": "stone ground storey base",
               "attribute": "material zoning",
               "severity": "minor"
             }
@@ -151,9 +151,9 @@
       "perDelta": [
         {
           "name": "roof-program",
-          "changed": 1530,
-          "added": 413,
-          "removed": 70
+          "changed": 1483,
+          "added": 296,
+          "removed": 255
         },
         {
           "name": "shaped-heads",
@@ -162,7 +162,7 @@
           "removed": 0
         }
       ],
-      "cells": 2013
+      "cells": 2034
     },
     "findings": [],
     "seamSources": {
@@ -173,8 +173,8 @@
       "frameLines": "component"
     },
     "conformance": {
-      "columns": 507,
-      "conforming": 507,
+      "columns": 512,
+      "conforming": 512,
       "deviations": []
     }
   },
@@ -186,8 +186,8 @@
     "frameLines": "component"
   },
   "conformance": {
-    "columns": 507,
-    "conforming": 507,
+    "columns": 512,
+    "conforming": 512,
     "deviations": []
   },
   "wallField": {
@@ -217,25 +217,25 @@
     },
     "band1": {
       "field": {
-        "total": 340,
+        "total": 336,
         "dominant": "smooth_sandstone",
-        "dominantFraction": 0.512,
+        "dominantFraction": 0.524,
         "byBlock": {
-          "cobblestone": 34,
+          "cobblestone": 33,
           "dark_oak_log": 71,
-          "smooth_sandstone": 174,
-          "spruce_planks": 61
+          "smooth_sandstone": 176,
+          "spruce_planks": 56
         }
       },
       "offslab": {
-        "total": 1112,
+        "total": 1059,
         "dominant": null,
         "dominantFraction": null,
         "byBlock": {
-          "smooth_sandstone": 628,
-          "dark_oak_log": 170,
-          "cobblestone": 103,
-          "spruce_planks": 211
+          "smooth_sandstone": 630,
+          "dark_oak_log": 166,
+          "cobblestone": 100,
+          "spruce_planks": 163
         }
       }
     }
@@ -335,10 +335,10 @@
     "milestoneSha256": {
       "base": null,
       "shell": "33b1ca02f2589f49dd8c678e2416bf81196be41bf91451c4c9e351baf24c0afd",
-      "reconstructed": "df4f749f27bc47ce784aedf41e8587ed9f4aea7ed99da1ba7043256cd7a16283",
-      "skinFinal": "ecca90d2be6a1c4e22e91f2a06db716347d1210052be8adc422b5e2f6e92c2cc",
-      "grammarFinal": "be6116b6934283b6544da333d96e29dbc3c18faa4547f01968ed806fe6749a37",
-      "styled": "8385a7a357252732b71f856a5aa54ffdb527fc64492a93c42b0e196189cc962b"
+      "reconstructed": "477399990e7c8b68e8980349f1627b240bd36fbfc1cd402d45ccd65f528046d6",
+      "skinFinal": "9bf220364ece6e1b8806b35241441d278fff550eb2614c13c9830473a197996e",
+      "grammarFinal": "2ddf360850512d8cc8b50d2ced4a81194b501208305a20eb2df10aa9e2f0146b",
+      "styled": "33ffd0c825a04eeb481740a22268386249a95581fe0af712d20cbb9232d4a48f"
     },
     "determinism": "the milestone runner double-runs the deterministic chain and owns the byte-identity proof; this record distills its committed output"
   }

@@ -4,14 +4,14 @@
   "source": "concept",
   "derivedOn": "reconstructed-shell",
   "repinnedBy": "T-106-01 (component-skin runner — the T-095 review's re-pin protocol)",
-  "shellSha256": "33305fce57339c50c5f67c04b1fe3183662203ca59af112dabf6f39274f3143e",
+  "shellSha256": "463ce9e25ace7ca3e787c918504933bfa4fd031fc7b458caa30c4ade9eedfd82",
   "derived": {
     "bands": [
       {
         "name": "band0",
         "yRange": [
           0,
-          22
+          21
         ],
         "dominantBlock": "stone_bricks",
         "dominantRole": "structural walls (dominant body)",
@@ -20,12 +20,12 @@
           {
             "block": "dark_oak_log",
             "role": "arch voussoir ring (warm accent)",
-            "share": 0.096
+            "share": 0.101
           },
           {
             "block": "deepslate_tiles",
             "role": "roof mass",
-            "share": 0.571
+            "share": 0.563
           },
           {
             "block": "cobblestone",
@@ -35,7 +35,7 @@
           {
             "block": "dark_oak_planks",
             "role": "gate door / passage leaf",
-            "share": 0.007
+            "share": 0.008
           }
         ]
       }
@@ -48,12 +48,12 @@
         {
           "block": "stone_bricks",
           "role": "structural walls (dominant body)",
-          "share": 0.152
+          "share": 0.178
         },
         {
           "block": "cobblestone",
           "role": "corner buttresses + rough string-course banding",
-          "share": 0.004
+          "share": 0.003
         },
         {
           "block": "dark_oak_log",
@@ -82,7 +82,7 @@
       "to": {
         "yRange": [
           0,
-          22
+          21
         ],
         "dominant": "stone_bricks"
       }

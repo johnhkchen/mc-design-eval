@@ -185,6 +185,51 @@ test("D5 wallFieldDecomposition ignores non-band zones and returns null on empty
   assert.equal(wallFieldDecomposition({ roof: { total: 3 } }), null);
 });
 
+// --- F: byte-match tripwire vs the committed pins (T-119-01 AC1) ----------------------------------
+
+/** Every committed component-skin pin must re-distill BYTE-IDENTICALLY from the committed
+ *  outputs it cites (the pin itself carries its rebuild spec: layer input paths, milestone
+ *  record path, runner). A divergence means a milestone record moved without rotating the
+ *  reskin pin — exactly the staleness T-111 residual 4 named; rotate under
+ *  docs/knowledge/pin-rotation-policy.md, never re-run the judge for a summary. */
+test("F1 byte-match: committed component-skin pins re-distill byte-identically on all legacy subjects", () => {
+  const SCULPT = join(ROOT, "benchmarks/sculpture");
+  const subjects = ["cottage", "gatehouse", "church", "barn"]
+    .filter((k) => existsSync(join(SCULPT, `component-skin/${k}.json`)));
+  assert.ok(subjects.length >= 3, "expected the three legacy reskin pins on disk");
+  for (const key of subjects) {
+    const pinBytes = readFileSync(join(SCULPT, `component-skin/${key}.json`), "utf8");
+    const pin = JSON.parse(pinBytes);
+    const inputs = pin.componentLayer.inputs; // incl. per-subject regularizedShell overrides
+    const readMaybe = (rel) => (existsSync(join(SCULPT, rel)) ? readFileSync(join(SCULPT, rel), "utf8") : null);
+    const layer = componentLayerFrom({
+      inputs,
+      contents: {
+        regularized: readMaybe(inputs.regularized),
+        component: JSON.parse(readMaybe(inputs.component) ?? "null"),
+        roof: JSON.parse(readMaybe(inputs.roof) ?? "null"),
+        shaped: JSON.parse(readMaybe(inputs.shaped) ?? "null"),
+      },
+    });
+    const milestoneRecRel = pin.chain.record.replace("benchmarks/sculpture/", "");
+    const milestone = JSON.parse(readFileSync(join(SCULPT, milestoneRecRel), "utf8"));
+    const zoneMapRecordRel = `zone-map/${key}.json`;
+    const committedZoneMap = JSON.parse(readMaybe(zoneMapRecordRel) ?? "null");
+    const { record, repin } = distillComponentSkin({
+      key, styled: pin.chain.runner === "styled-milestone.mjs", runner: pin.chain.runner,
+      milestoneRecRel, milestone, exitCode: deriveChainExitCode(milestone),
+      layer, committedZoneMap, zoneMapRecordRel: committedZoneMap ? zoneMapRecordRel : null,
+    });
+    assert.equal(JSON.stringify(record, null, 2) + "\n", pinBytes,
+      `${key}: distilled record diverges from the committed pin — a milestone record moved without ` +
+      `rotating the reskin pin (rotate via --distill-only --rotate-pins under pin-rotation-policy.md)`);
+    if (repin) {
+      assert.equal(repin.content, readMaybe(repin.rel),
+        `${key}: the ${repin.rel} repin diverges from the distilled bands`);
+    }
+  }
+});
+
 // --- E: judge-unreachability ----------------------------------------------------------------------
 
 /** Walk the distiller's TRANSITIVE relative-import graph; the judge seam must be absent —
