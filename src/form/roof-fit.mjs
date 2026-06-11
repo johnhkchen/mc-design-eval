@@ -68,8 +68,9 @@ function eaveEdgeCoord(eaveCells, eaveDir) {
   return edge;
 }
 
-/** Make every row (fixed z) and rib (fixed x) of a plan-column set contiguous, in place. */
-function fillBetween(cols) {
+/** Make every row (fixed z) and rib (fixed x) of a plan-column set contiguous, in place.
+ *  Exported for roof-hip-fit (T-112-01) — the cap footprint obeys the same straight-edge rule. */
+export function fillBetween(cols) {
   for (const [groupIdx, fillIdx] of [[1, 0], [0, 1]]) { // rows (group by z, fill x), then ribs
     const groups = new Map();
     for (const k of cols) {
