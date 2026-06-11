@@ -4,10 +4,9 @@
 //
 // LIVE (subscription shim, STRONG tier — never the metered API; this run IS the AC2 transport
 // proof): render through the bridge (BAML authority for prompt + schema), ask via requestText,
-// parse via b.parse — bounded SAME-PROMPT re-asks on malformed replies (the T-114 pattern;
-// implemented locally because judge-reply's classifyReply is sync and instrument surface, and
-// the bridge parse is async — fields and semantics identical: every attempt ledgered, full raw
-// texts committed, a parsed reply is final, transport throws are flagged).
+// parse via b.parse — bounded SAME-PROMPT re-asks on malformed replies via the shared async
+// policy (src/baml/reply-policy.mjs, T-114 semantics: every attempt ledgered, full raw texts
+// committed, a parsed reply is final, transport throws are flagged).
 //
 // Writes src/baml/fixtures/<fn>/{inputs.json, prompt.txt, reply.txt, expected.json, ledger.json}
 // — pin-guarded (T-119): committed fixtures never silently overwritten.
@@ -19,14 +18,13 @@ import { fileURLToPath } from "node:url";
 
 import { MODEL_TIERS } from "../src/config.mjs";
 import { requestText } from "../src/sdk-binding.mjs";
-import { MAX_REPLY_ATTEMPTS } from "../src/form/judge-reply.mjs";
+import { runAsyncReplyPolicy, MAX_REPLY_ATTEMPTS } from "../src/baml/reply-policy.mjs";
 import { guardedWriteRecord, preflightPins, loadTrackedSet, isTracked, ROTATE_FLAG } from "../src/form/pin-guard.mjs";
 import { bamlRender, bamlParse } from "../src/baml/bridge.mjs";
 import { loadStylePack } from "../src/pack/style-pack.mjs";
 import { registryDigest } from "../src/pack/brush-catalog.mjs";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
-const RAW_REPLY_CLIP = 400;
 const sha256 = (s) => createHash("sha256").update(s).digest("hex");
 const jsonOf = (x) => JSON.stringify(x, null, 2) + "\n";
 
@@ -84,26 +82,10 @@ const model = MODEL_TIERS.strong;
 console.error(`[mint] ${which}: asking ${def.fn} (budget ${MAX_REPLY_ATTEMPTS}, model ${model})…`);
 
 // Bounded same-prompt re-asks (T-114 semantics; async parse via the bridge — see header).
-const replies = [];
-const rawTexts = [];
-let expected = null;
-let askCount = 0;
-while (expected === null && replies.length < MAX_REPLY_ATTEMPTS) {
-  const attempt = replies.length + 1;
-  askCount += 1;
-  try {
-    const { text, raw } = await requestText({ prompt, model });
-    rawTexts.push(text);
-    try {
-      expected = await bamlParse({ fn: def.fn, text });
-      replies.push({ attempt, parsed: true, rawReply: text.slice(0, RAW_REPLY_CLIP), usage: raw?.usage ?? null, source: "live" });
-    } catch (e) {
-      replies.push({ attempt, parsed: false, rawReply: text.slice(0, RAW_REPLY_CLIP), parseError: e.message, usage: raw?.usage ?? null, source: "live" });
-    }
-  } catch (e) {
-    replies.push({ attempt, parsed: false, rawReply: null, parseError: `transport: ${e.message}`, transport: true, usage: null, source: "live" });
-  }
-}
+const { expected, replies, rawTexts, askCount } = await runAsyncReplyPolicy({
+  ask: () => requestText({ prompt, model }),
+  parse: (text) => bamlParse({ fn: def.fn, text }),
+});
 
 await mkdir(join(ROOT, relDir), { recursive: true });
 const write = (rel, content) => guardedWriteRecord({ root: ROOT, rel, content, rotate });
