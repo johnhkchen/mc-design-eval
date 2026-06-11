@@ -20,8 +20,9 @@
 //
 //   node benchmarks/sculpture/glb-smoke.mjs benchmarks/sculpture/glb/<name>.glb [--scale 48] \
 //     [--record benchmarks/sculpture/glb/smoke/<name>@<scale>.json]
-import { readFile } from "node:fs/promises";
+import { readFile, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
 
 import { ROTATE_FLAG, guardedWriteRecord } from "../../src/form/pin-guard.mjs";
 import { voxelizeGlb } from "../../src/form/glb-voxelize.mjs";
@@ -63,6 +64,7 @@ const report = {
   pass,
 };
 if (recordRel) {
+  await mkdir(dirname(join(ROOT, recordRel)), { recursive: true });
   await guardedWriteRecord({
     root: ROOT, rel: recordRel, content: JSON.stringify(report, null, 2) + "\n",
     rotate: argv.includes(ROTATE_FLAG),

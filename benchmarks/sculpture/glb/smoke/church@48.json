@@ -1,0 +1,46 @@
+{
+  "glb": "benchmarks/sculpture/glb/church.glb",
+  "bytes": 6469100,
+  "gltf": {
+    "ok": true,
+    "version": 2
+  },
+  "mesh": {
+    "vertices": 132892,
+    "triangles": 146118
+  },
+  "voxelization": {
+    "scale": 48,
+    "dims": [
+      48,
+      37,
+      40
+    ],
+    "cells": 11423
+  },
+  "conn26": {
+    "components": 1,
+    "largestCount": 11423,
+    "largestFraction": 1,
+    "strayCount": 0,
+    "subFloorCount": 0
+  },
+  "conn6": {
+    "components": 70,
+    "largestCount": 10911,
+    "largestFraction": 0.9551781493478071,
+    "strayCount": 512,
+    "subFloorCount": 0
+  },
+  "speckGate": {
+    "pass": true,
+    "principal": {
+      "cells": 11423,
+      "fraction": 1
+    },
+    "specks": [],
+    "oversize": [],
+    "speckFraction": 0.02
+  },
+  "pass": true
+}

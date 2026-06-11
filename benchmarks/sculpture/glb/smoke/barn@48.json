@@ -1,0 +1,51 @@
+{
+  "glb": "benchmarks/sculpture/glb/barn.glb",
+  "bytes": 6511456,
+  "gltf": {
+    "ok": true,
+    "version": 2
+  },
+  "mesh": {
+    "vertices": 138513,
+    "triangles": 141220
+  },
+  "voxelization": {
+    "scale": 48,
+    "dims": [
+      48,
+      21,
+      26
+    ],
+    "cells": 3579
+  },
+  "conn26": {
+    "components": 2,
+    "largestCount": 3578,
+    "largestFraction": 0.9997205923442303,
+    "strayCount": 1,
+    "subFloorCount": 0
+  },
+  "conn6": {
+    "components": 139,
+    "largestCount": 3085,
+    "largestFraction": 0.8619726180497346,
+    "strayCount": 494,
+    "subFloorCount": 0
+  },
+  "speckGate": {
+    "pass": true,
+    "principal": {
+      "cells": 3578,
+      "fraction": 0.999721
+    },
+    "specks": [
+      {
+        "cells": 1,
+        "fraction": 0.000279
+      }
+    ],
+    "oversize": [],
+    "speckFraction": 0.02
+  },
+  "pass": true
+}

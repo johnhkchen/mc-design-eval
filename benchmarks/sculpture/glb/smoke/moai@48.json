@@ -1,0 +1,55 @@
+{
+  "glb": "benchmarks/sculpture/glb/moai.glb",
+  "bytes": 5102596,
+  "gltf": {
+    "ok": true,
+    "version": 2
+  },
+  "mesh": {
+    "vertices": 96453,
+    "triangles": 142336
+  },
+  "voxelization": {
+    "scale": 48,
+    "dims": [
+      48,
+      33,
+      48
+    ],
+    "cells": 14270
+  },
+  "conn26": {
+    "components": 3,
+    "largestCount": 7439,
+    "largestFraction": 0.5213034337771548,
+    "strayCount": 6831,
+    "subFloorCount": 0
+  },
+  "conn6": {
+    "components": 8,
+    "largestCount": 7400,
+    "largestFraction": 0.5185704274702172,
+    "strayCount": 6870,
+    "subFloorCount": 0
+  },
+  "speckGate": {
+    "pass": false,
+    "principal": {
+      "cells": 7439,
+      "fraction": 0.521303
+    },
+    "specks": [],
+    "oversize": [
+      {
+        "cells": 3750,
+        "fraction": 0.262789
+      },
+      {
+        "cells": 3081,
+        "fraction": 0.215907
+      }
+    ],
+    "speckFraction": 0.02
+  },
+  "pass": false
+}

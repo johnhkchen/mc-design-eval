@@ -1,0 +1,102 @@
+{
+  "schema": "registration-smoke/v1",
+  "subject": "barn",
+  "note": "readability verdict only — band y-geometry is proxy-true, never registry data",
+  "pass": true,
+  "refusal": null,
+  "proxy": {
+    "upperTop": 18,
+    "eave": {
+      "source": "anchor",
+      "row": 29
+    },
+    "layers": 43
+  },
+  "lens": {
+    "readable": true,
+    "bands": [
+      {
+        "name": "band0",
+        "yRange": [
+          0,
+          17
+        ],
+        "dominantBlock": "cobblestone",
+        "dominantRole": "structural wall infill",
+        "share": 1,
+        "secondaries": [
+          {
+            "block": "dark_oak_planks",
+            "role": "roof shingle planes",
+            "share": 0.473
+          },
+          {
+            "block": "stone_bricks",
+            "role": "plinth / ground banding course",
+            "share": 0.527
+          },
+          {
+            "block": "oak_planks",
+            "role": "wagon-door leaves",
+            "share": 0
+          }
+        ]
+      }
+    ],
+    "roof": {
+      "dominantBlock": "dark_oak_planks",
+      "dominantRole": "roof shingle planes",
+      "share": 1,
+      "secondaries": [
+        {
+          "block": "stone_bricks",
+          "role": "plinth / ground banding course",
+          "share": 0.087
+        },
+        {
+          "block": "oak_planks",
+          "role": "wagon-door leaves",
+          "share": 0
+        }
+      ]
+    },
+    "params": {
+      "extentWidthFloor": 0.25,
+      "minBandHeight": 2,
+      "snapTolerance": 2,
+      "secondaryMinShare": 0.05,
+      "minDominantShare": 0.3,
+      "minProfileCells": 200,
+      "minExtentLayers": 4,
+      "anchorMaxPlateau": 0.25,
+      "crossBandRules": [
+        "trim",
+        "corners-edges",
+        "openings"
+      ],
+      "n": 96,
+      "m": 52,
+      "anchored": true,
+      "anchor": {
+        "row": 29,
+        "y": 18
+      },
+      "fieldResolution": {
+        "oak_planks": "cobblestone",
+        "stone_bricks": "cobblestone"
+      }
+    }
+  },
+  "kitDryRun": {
+    "ok": true,
+    "bandNames": [
+      "band0",
+      "roof"
+    ],
+    "promptChars": 1826
+  },
+  "inputs": {
+    "concept": "benchmarks/sculpture/runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png",
+    "map": "benchmarks/sculpture/material-map/barn.json"
+  }
+}
