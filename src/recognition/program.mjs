@@ -177,7 +177,9 @@ export function validateProgramAgainstPack(program, pack, { registry = IDIOM_REG
       else if (registry[t]?.kind !== "pass") err(`${where}.walls.treatment`, `"${t}" is not a pass idiom (treatments are build transforms)`);
     }
 
-    // 6. openings fit
+    // 6. openings fit — laterally at min spacing, vertically incl. head clearance; entries
+    //    sharing a wall must occupy DISJOINT vertical ranges (each entry lays out its own
+    //    rhythm lane; overlapping lanes could collide laterally)
     const wallH = m.storeys * m.storeyHeight;
     m.openings.forEach((o, j) => {
       const ow = `${where}.openings[${j}] (${o.kind} on ${o.wall})`;
@@ -186,9 +188,17 @@ export function validateProgramAgainstPack(program, pack, { registry = IDIOM_REG
       if (need > avail) err(ow, `${o.count}×${o.w} needs ${need} cells at min spacing; wall offers ${avail}`);
       const top = o.sill + o.h + headRows(o.head ?? null, o.w);
       if (top > wallH) err(ow, `opening + head reach y ${top}, above the wall top ${wallH}`);
+      for (let k = 0; k < j; k++) {
+        const p = m.openings[k];
+        if (p.wall !== o.wall) continue;
+        const pTop = p.sill + p.h + headRows(p.head ?? null, p.w);
+        if (o.sill < pTop && p.sill < top) {
+          err(ow, `vertical range [${o.sill}, ${top}) overlaps openings[${k}] [${p.sill}, ${pTop}) on the same wall`);
+        }
+      }
     });
 
-    // 7. dormers fit
+    // 7. dormers fit, on an eave-side slope (perpendicular to the ridge)
     const d = m.roof.dormers ?? null;
     if (d !== null && layout) {
       if (!layout.ridge) err(`${where}.roof.dormers`, "dormers need a ridge-bearing roof");
@@ -196,6 +206,9 @@ export function validateProgramAgainstPack(program, pack, { registry = IDIOM_REG
         const span = (m.roof.ridgeAxis === "x" ? m.rect.w : m.rect.d) - 2;
         const need = d.count * dormerWidth + (d.count - 1);
         if (need > span) err(`${where}.roof.dormers`, `${d.count} dormers of width ${dormerWidth} need ${need} cells; the ridge span offers ${span}`);
+        if (d.wall !== undefined && d.wall.endsWith(m.roof.ridgeAxis)) {
+          err(`${where}.roof.dormers`, `wall "${d.wall}" is a gable end — dormers sit on the eave-side slopes (perpendicular to ridge axis ${m.roof.ridgeAxis})`);
+        }
       }
     }
   });
