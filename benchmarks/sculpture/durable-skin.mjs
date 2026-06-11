@@ -56,6 +56,7 @@ import { paintFace, mergePaints, applyPaint } from "../../src/view/face-paint.mj
 import { allowedPalette } from "../../src/view/palette-cans.mjs";
 import { regularizeRoofCourses, stripStraySalt } from "../../src/view/surface-pattern.mjs";
 import { planCensusZoneOf, programConformance } from "../../src/view/component-plan.mjs";
+import { composeVocabulary } from "../../src/form/material-vocabulary.mjs";
 import {
   faceResemblance, coverageGate, DEFAULT_COVERAGE_THRESHOLD,
 } from "../../src/view/face-resemblance.mjs";
@@ -213,14 +214,6 @@ export const SUBJECTS = {
 const bare = (id) => String(id).replace(/^minecraft:/, "");
 
 /** Map a named-space zone policy through the value-true substitution — THE one renaming point. */
-function mapPolicy(policy, sub) {
-  return Object.fromEntries(Object.entries(policy).map(([z, p]) => [z, {
-    dominant: sub(p.dominant),
-    preserve: [...new Set(p.preserve.map(sub))],
-    splat: [...new Set(p.splat.map(sub))],
-  }]));
-}
-
 /** Rename switched blocks across manifest + placements (value-select.mjs precedent). */
 function applySubstitution(artifact, substitution) {
   const subbed = (b) => `minecraft:${substitution[bare(b)] ?? bare(b)}`;
@@ -336,14 +329,21 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
   // committed kit's `overrides` hold only VERIFIED cube recognitions that cover a derived band
   // (kitOverrides' contract); they compose OVER the color-snap — the snap `substitution` itself
   // stays untouched (the value-select agreement above compares it). No kit record ⇒ unchanged.
-  let kit = { source: null, overrides: {} };
+  let kit = { source: null, overrides: {}, entries: [] };
   if (def.kitRecord && existsSync(join(HERE, def.kitRecord))) {
     const kitRec = JSON.parse(await readFile(join(HERE, def.kitRecord), "utf8"));
     if (kitRec.schema !== "kit/v1") throw new Error(`${def.kitRecord} is not a kit/v1 record`);
-    kit = { source: def.kitRecord, overrides: kitRec.overrides ?? {} };
+    kit = { source: def.kitRecord, overrides: kitRec.overrides ?? {}, entries: kitRec.kit ?? [] };
   }
-  const combined = { ...substitution, ...kit.overrides };
-  const subK = (b) => combined[b] ?? b;
+  // T-113-01: the renaming map composes in the AUTHORITY and nowhere else. The zone policy isn't
+  // derived yet at this point (it needs the substituted occupancy), so this early call composes
+  // the map alone; the full vocabulary is composed below once policyNamed/plan/allowed exist —
+  // same module, same rule, the only composition point.
+  const vocabEarly = composeVocabulary({
+    policyNamed: {}, substitution, kitOverrides: kit.overrides, kit: kit.entries,
+  });
+  const combined = vocabEarly.combined;
+  const subK = vocabEarly.sub;
 
   // --- 2. SUBSTITUTED BUILD (the shipped palette, everywhere below) ------------------------------
   const artifact0 = applySubstitution(raw, combined);
@@ -431,7 +431,14 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
       notes.push(`zone map fell back to the prior: ${extracted.reason}`);
     }
   }
-  const policyS = mapPolicy(policyNamed, subK);
+  // T-113-01: THE vocabulary — policy shipped, roof program family appended, dressing slots
+  // shipped — composed once by the authority; every stage below (and the styled chain's grammar,
+  // settle, and dressing) consumes this object.
+  const vocab = composeVocabulary({
+    policyNamed, substitution, kitOverrides: kit.overrides, kit: kit.entries,
+    componentPlan: plan, roofFamilyAllowed: allowed,
+  });
+  const policyS = vocab.zones;
   for (const [z, p] of Object.entries(policyS)) {
     if (!allowed.has(p.dominant)) throw new Error(`zone "${z}" dominant "${p.dominant}" not in the substituted manifest`);
   }
@@ -439,15 +446,7 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
   // --- T-106-01 COMPONENT CONSUMPTION (E-27 Rule 4: where a definition exists, the derivation is a
   // bug). All four seams hang off `def.componentPlan` (component-plan.mjs, built by the chain's
   // reconstruct stage); a null plan is byte-for-byte today's pipeline. Recorded in `seamSources`.
-  if (plan?.roof && policyS.roof) {
-    // the program's course family is roof vocabulary: treads/slabs are roof material to the fill's
-    // keep rule, the own-materials band evidence, and the plaster invariant — never salt to strip
-    for (const member of [plan.roof.family.stairs, plan.roof.family.slab]) {
-      if (member && allowed.has(member) && !policyS.roof.preserve.includes(member)) {
-        policyS.roof.preserve.push(member);
-      }
-    }
-  }
+  // (the roof program's course family joined roof.preserve inside the authority — T-113-01)
   const roofRegions = plan?.roof
     ? [{ name: "roof-program", contains: (voxel) => plan.roof.cells.has(voxel.join(",")) }]
     : [];
@@ -617,7 +616,7 @@ export async function buildSkin(def, { zoneSource = "derived" } = {}) {
 
   return {
     raw, artifact0, sealed, based, painted, splatOnly, final,
-    substitution, kit, rows, agreesWithRecord, policyS, borderColor,
+    substitution, kit, rows, agreesWithRecord, policyS, vocabulary: vocab, borderColor,
     zones: { storeyDivide, upperTop }, zoneOf, zoneMap, fill, zoneOpts: zoneOptsEff,
     splat: {
       front: {

@@ -47,6 +47,7 @@ import { surfaceZoneHistogram, ownCoverage } from "../../src/view/zone-fill.mjs"
 import { applyPaint } from "../../src/view/face-paint.mjs";
 import { coverageGate, DEFAULT_COVERAGE_THRESHOLD } from "../../src/view/face-resemblance.mjs";
 import { placementGrammar, GRAMMAR_SCHEMA } from "../../src/form/placement-grammar.mjs";
+import { composeVocabulary, ownSetsOf } from "../../src/form/material-vocabulary.mjs";
 import { frameLinesFromComponent, planCensusZoneOf, bandFloorLines } from "../../src/view/component-plan.mjs";
 import { composeSheet, resampleRgba, RESEMBLANCE_DEFAULTS } from "../../src/form/resemblance.mjs";
 import { decodeImage } from "../../src/color/palette-extract.mjs";
@@ -71,7 +72,8 @@ const sha256 = (s) => createHash("sha256").update(s).digest("hex");
 
 /** T-090 band evidence on a dominantCoverage census (durable-skin stage 9's arithmetic). */
 function bandEvidence(cov, policy) {
-  const own = (zone) => new Set([policy[zone].dominant, ...(policy[zone].preserve ?? [])].map(bareBlock));
+  const ownSets = ownSetsOf(policy); // the authority's own-vocabulary composition (T-113-01)
+  const own = (zone) => ownSets.get(zone);
   const fraction = (zone, mats) => {
     const z = cov[zone];
     if (!z || !z.total) return null;
@@ -92,7 +94,10 @@ function bandEvidence(cov, policy) {
 /** The gated grammar core over ONE build: geometry re-read → bind+paint → THROW gates → re-gated
  *  final. Exported for the styled milestone (T-101), which feeds it from buildSkin's return value;
  *  the committed-record disk seam stays in runGrammar. Behavior identical either way. */
-export function grammarStage(build, { bands, roof, policy, substitution, kitRec, zoneOpts, componentPlan = null }) {
+export function grammarStage(build, { bands, roof, vocab, kitRec, zoneOpts, componentPlan = null }) {
+  // T-113-01: the material vocabulary arrives COMPOSED (the authority's output) — the grammar
+  // consumes zones + the renaming point, it never re-composes them.
+  const policy = vocab.zones;
   // geometry + the derived zone map (the same composition buildSkin records). T-106-01: the
   // component plan pins the wall/roof boundary and supplies the frame-line definitions — the
   // grammar re-materializes them against the CURRENT occupancy each pass (settle re-runs this op),
@@ -104,9 +109,8 @@ export function grammarStage(build, { bands, roof, policy, substitution, kitRec,
   const zb = zonesFromBands({ bands, roof, roofKeys: sz.roofKeys, upperTop: sz.upperTop });
   const bandNames = bands.map((b) => b.name);
 
-  // the one renaming point: value-true substitution ∘ kit overrides (buildSkin's subK)
-  const combined = { ...(substitution ?? {}), ...(kitRec.overrides ?? {}) };
-  const sub = (b) => combined[b] ?? b;
+  // the one renaming point: value-true substitution ∘ kit overrides — the authority's sub
+  const sub = vocab.sub;
 
   // floor lines: the concept-derived band boundaries (committed) — the occupancy storey scan reads
   // every layer of a cage-solid shell as a floor (fill ≥ 0.6 everywhere) and would paint the whole
@@ -183,12 +187,18 @@ async function runGrammar(def) {
       `the grammar binds to the T-092 derived bands, not the prior`);
   }
 
-  const policy = skinRec.fill.policy; // SHIPPED space (recorded by buildSkin after mapPolicy)
+  // T-113-01: the record-fed entry space — the committed skin record holds the ALREADY-shipped
+  // policy; the authority still composes the renaming point (and own-vocabulary) for the stage.
+  const vocab = composeVocabulary({
+    policyNamed: skinRec.fill.policy, policySpace: "shipped",
+    substitution: skinRec.valueTrue?.substitution ?? {},
+    kitOverrides: kitRec.overrides ?? {}, kit: kitRec.kit ?? [],
+  });
   const staged = grammarStage(build, {
     bands: skinRec.zoneMap.bands, roof: skinRec.zoneMap.roof,
-    policy, substitution: skinRec.valueTrue?.substitution, kitRec, zoneOpts: def.zoneOpts,
+    vocab, kitRec, zoneOpts: def.zoneOpts,
   });
-  return { skinRec, build, policy, ...staged };
+  return { skinRec, build, policy: vocab.zones, ...staged };
 }
 
 /** Render an artifact at the four config gate azimuths; compose a labeled-order 4-panel sheet.

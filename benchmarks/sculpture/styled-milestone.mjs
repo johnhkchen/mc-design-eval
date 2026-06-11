@@ -57,7 +57,7 @@ import { spawn } from "node:child_process";
 
 import { artifactOccupancy, bareBlock } from "../../src/view/occupancy.mjs";
 import {
-  treatmentsFromKit, extractApertures, dressOpenings, applyDressing,
+  extractApertures, dressOpenings, applyDressing,
 } from "../../src/view/opening-dressing.mjs";
 import { assertArtifact } from "../../src/artifact.mjs";
 import { MULTI_ANGLE_GATE_SCHEMA } from "../../src/form/multi-angle-gate.mjs";
@@ -95,7 +95,7 @@ async function styledChain(def, kitRec, paths, track) {
   // same op — it must not flip frame derivations between passes).
   const gOpts = {
     bands: skin.zoneMap.bands, roof: skin.zoneMap.roof,
-    policy: skin.policyS, substitution: skin.substitution, kitRec, zoneOpts: def.zoneOpts,
+    vocab: skin.vocabulary, kitRec, zoneOpts: def.zoneOpts,
     componentPlan: reconstruction?.plan ?? null,
   };
   const g = grammarStage(skin.final, gOpts);
@@ -103,7 +103,10 @@ async function styledChain(def, kitRec, paths, track) {
   // apertures are concept-declared: measured on the chain's RAW input build (T-099's reference) —
   // the provisioned base for challenge subjects, the committed pre-seal build otherwise
   const apertures = extractApertures(artifactOccupancy(base));
-  const treatments = treatmentsFromKit(kitRec);
+  // T-113-01: the dressing speaks the SHIPPED vocabulary — treatments come composed from the
+  // authority (the church's stone_bricks trim ships as polished_basalt, the same name the grammar
+  // paints; named-space dressing was the settle ping-pong's whole cause).
+  const treatments = skin.vocabulary.treatments;
   const dress = dressOpenings(artifactOccupancy(g.final), apertures, treatments);
   const dressed = applyDressing(g.final, dress.placements);
   assertArtifact(dressed);
@@ -124,8 +127,7 @@ async function styledChain(def, kitRec, paths, track) {
   const GATING_SLOTS = ["infill", "shutterLeft", "shutterRight", "door", "light"];
   const gatingDressing = (d) => d.perOpening.reduce(
     (n, rep) => n + GATING_SLOTS.reduce((m, slot) => m + (rep.placed?.[slot] ?? 0), 0), 0);
-  const ownOf = new Map(Object.entries(gOpts.policy).map(([z, p]) =>
-    [z, new Set([p.dominant, ...(p.preserve ?? [])].map(bareBlock))]));
+  const ownOf = skin.vocabulary.ownSets; // the authority's own-vocabulary (T-113-01)
   const foreignFill = (s, occBefore) => s.grammar.fill.placements.filter((p) => {
     const own = ownOf.get(s.zoneOf(p.pos));
     const cur = occBefore.block(...p.pos);
@@ -529,6 +531,7 @@ async function main() {
         deviations: r1.skin.conformance.deviations.slice(0, 50),
       } : null,
     } : null,
+    vocabulary: r1.skin.vocabulary.record, // the authority's composed lineage (T-113-01)
     skin: {
       substitution: r1.skin.substitution, kitOverrides: kitRec.overrides ?? {},
       zoneMap: { source: r1.skin.zoneMap.source, bands: r1.skin.zoneMap.bands, roof: r1.skin.zoneMap.roof },
