@@ -46,6 +46,14 @@ const FNS: Record<string, { request: (a: any, img: any) => Promise<any>; parse: 
     request: (a) => b.request.DecomposeBrushBacklog(a.style_summary, a.registry_state),
     parse: (t) => b.parse.DecomposeBrushBacklog(t),
   },
+  DerivePalette: {
+    request: (a) => b.request.DerivePalette(a.story_digest, a.source_keys, a.block_vocabulary),
+    parse: (t) => b.parse.DerivePalette(t),
+  },
+  DeriveProportions: {
+    request: (a) => b.request.DeriveProportions(a.story_digest, a.palette_digest),
+    parse: (t) => b.parse.DeriveProportions(t),
+  },
 };
 
 function readStdin(): Promise<string> {
