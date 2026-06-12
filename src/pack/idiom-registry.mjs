@@ -55,6 +55,7 @@ import { regularizeRoofCourses, stripStraySalt } from "../view/surface-pattern.m
 import { projectSurface } from "../view/surface-grid.mjs";
 import { occupancyFromCells, bareBlock } from "../view/occupancy.mjs";
 import { roofThatchConstruct } from "../view/roof-thatch.mjs";
+import { roofSteepGableConstruct, STEEP_PITCH_CLASSES } from "../view/roof-steep.mjs";
 import { clinkerCourses } from "../view/clinker.mjs";
 import { limewashAspect } from "../view/limewash.mjs";
 
@@ -199,6 +200,12 @@ export const IDIOM_REGISTRY = Object.freeze({
     tests: "src/pack/idiom-registry.test.mjs", composition: CONSTRUCT_IO,
     preview: { card: ["gable-ridge-z", "gable-ridge-x"] },
     paramsSchema: { type: "object", properties: { pitch: { type: "number", exclusiveMinimum: 0 }, blocks: BLOCKS_FRAGMENT }, additionalProperties: false },
+  }),
+  "roof.gable.steep": Object.freeze({
+    kind: "construct", generate: roofSteepGableConstruct, source: "src/view/roof-steep.mjs",
+    tests: "src/view/roof-steep.test.mjs", composition: CONSTRUCT_IO,
+    preview: { card: ["gable-steep-z", "gable-steep-x", "gable-steep-3"] },
+    paramsSchema: { type: "object", properties: { pitch: { enum: [...STEEP_PITCH_CLASSES] }, blocks: BLOCKS_FRAGMENT }, additionalProperties: false },
   }),
   "roof.hip": Object.freeze({
     kind: "construct", generate: roofHipConstruct, source: "src/view/roof-generate.mjs",

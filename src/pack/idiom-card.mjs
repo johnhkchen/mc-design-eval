@@ -31,6 +31,9 @@ const DORMER = Object.freeze({
 export const IDIOM_CARD_SPECS = Object.freeze([
   { id: "gable-ridge-z", idiom: "roof.gable", spec: { footprint: { x0: 0, x1: 8, z0: 0, z1: 5 }, ridgeAxis: "z", eaveY: 0, ridgeY: 4, blocks: ROOF_BLOCKS } },
   { id: "gable-ridge-x", idiom: "roof.gable", spec: { footprint: { x0: 0, x1: 5, z0: 0, z1: 8 }, ridgeAxis: "x", eaveY: 0, ridgeY: 4, blocks: ROOF_BLOCKS } },
+  { id: "gable-steep-z", idiom: "roof.gable.steep", spec: { footprint: { x0: 0, x1: 6, z0: 0, z1: 5 }, ridgeAxis: "z", eaveY: 0, ridgeY: 6, pitch: 2, blocks: ROOF_BLOCKS } },
+  { id: "gable-steep-x", idiom: "roof.gable.steep", spec: { footprint: { x0: 0, x1: 5, z0: 0, z1: 6 }, ridgeAxis: "x", eaveY: 0, ridgeY: 6, pitch: 2, blocks: ROOF_BLOCKS } },
+  { id: "gable-steep-3", idiom: "roof.gable.steep", spec: { footprint: { x0: 0, x1: 4, z0: 0, z1: 5 }, ridgeAxis: "z", eaveY: 0, ridgeY: 6, pitch: 3, blocks: ROOF_BLOCKS } },
   { id: "hip", idiom: "roof.hip", spec: { footprint: { x0: 0, x1: 8, z0: 0, z1: 11 }, ridgeAxis: "z", eaveY: 0, ridgeY: 4, blocks: ROOF_BLOCKS } },
   { id: "pyramid", idiom: "roof.pyramid", spec: { footprint: { x0: 0, x1: 6, z0: 0, z1: 6 }, eaveY: 0, blocks: ROOF_BLOCKS } },
   { id: "arch", idiom: "arch", spec: { center: [3, 2], radius: 3.2, span: { axis: "x", range: [0, 6] }, yRange: [0, 5], depth: { axis: "z", range: [0, 0] }, block: "stone_bricks" } },

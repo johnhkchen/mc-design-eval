@@ -31,6 +31,8 @@ const TECHNIQUES = [
   "opening-dressing", "hollow-carve", "floorplan", "zone-fill", "face-paint", "surface-pattern",
   // E-32/T-132-01: the factory-grown saltcrag brushes join the guarded set
   "roof-thatch", "clinker", "limewash",
+  // E-33/T-134-01: the steep-pitch brush joins the guarded set
+  "roof-steep",
 ];
 
 /** file → { modules, reason }. Exact: an extra technique import in an allowed file still trips. */
@@ -42,6 +44,7 @@ const ALLOWED = {
   "src/view/surface-pattern.mjs": { modules: ["zone-fill"], reason: "consumes the canonical skin iterators" },
   "src/view/shell-integrity.mjs": { modules: ["surface-pattern"], reason: "spill-level reuse in closure repair" },
   "src/view/roof-swap.mjs": { modules: ["roof-generate"], reason: "roof family swap over the generator's records" },
+  "src/view/roof-steep.mjs": { modules: ["roof-generate"], reason: "steep classes delegate to the ONE wedge/cap/sheet definition (T-134, no refork)" },
   "src/view/opening-reconstruct.mjs": { modules: ["shaped-vocab"], reason: "arch/head reconstruction over the shaped vocabulary" },
   "src/form/shaped-fit.mjs": { modules: ["shaped-vocab"], reason: "fit hypotheses realize shaped states" },
   "src/form/provision-generate.mjs": { modules: ["roof-generate"], reason: "generated-base chain emits roofs (T-115)" },

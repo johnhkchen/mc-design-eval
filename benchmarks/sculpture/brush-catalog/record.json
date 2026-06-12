@@ -1,15 +1,15 @@
 {
   "schema": "brush-catalog/v1",
   "ticket": "T-128-01",
-  "brushCount": 22,
-  "constructs": 12,
+  "brushCount": 23,
+  "constructs": 13,
   "passes": 10,
   "verdict": {
     "ok": true,
     "contractOk": true,
     "gate": "pass",
     "unmapped": 0,
-    "plots": 22
+    "plots": 23
   },
   "plots": [
     {
@@ -193,11 +193,26 @@
       ]
     },
     {
+      "name": "roof.gable.steep",
+      "kind": "construct",
+      "via": "card:gable-steep-z",
+      "origin": [
+        0,
+        1,
+        22
+      ],
+      "size": [
+        7,
+        7,
+        6
+      ]
+    },
+    {
       "name": "roof.hip",
       "kind": "construct",
       "via": "card:hip",
       "origin": [
-        0,
+        11,
         1,
         22
       ],
@@ -212,7 +227,7 @@
       "kind": "construct",
       "via": "card:pyramid",
       "origin": [
-        13,
+        24,
         1,
         22
       ],
@@ -227,7 +242,7 @@
       "kind": "construct",
       "via": "card:thatch",
       "origin": [
-        24,
+        35,
         1,
         22
       ],
@@ -242,9 +257,9 @@
       "kind": "pass",
       "via": "substrate:shell (effect 88)",
       "origin": [
-        39,
+        0,
         1,
-        22
+        38
       ],
       "size": [
         9,
@@ -257,7 +272,7 @@
       "kind": "pass",
       "via": "substrate:shell (effect 60)",
       "origin": [
-        0,
+        13,
         1,
         38
       ],
@@ -272,7 +287,7 @@
       "kind": "pass",
       "via": "substrate:shell (effect 35)",
       "origin": [
-        11,
+        24,
         1,
         38
       ],
@@ -287,7 +302,7 @@
       "kind": "pass",
       "via": "substrate:shell (effect 12)",
       "origin": [
-        22,
+        35,
         1,
         38
       ],
@@ -302,7 +317,7 @@
       "kind": "pass",
       "via": "substrate:solid (effect 2)",
       "origin": [
-        33,
+        46,
         1,
         38
       ],
@@ -317,9 +332,9 @@
       "kind": "pass",
       "via": "substrate:shell (effect 3)",
       "origin": [
-        43,
+        0,
         1,
-        38
+        49
       ],
       "size": [
         7,
@@ -332,9 +347,9 @@
       "kind": "pass",
       "via": "substrate:shell (effect 64)",
       "origin": [
-        0,
+        11,
         1,
-        47
+        49
       ],
       "size": [
         9,
@@ -349,32 +364,32 @@
       {
         "angle": "+x+z",
         "path": "benchmarks/sculpture/brush-catalog/view-catalog-+x+z.png",
-        "bytes": 336098,
-        "sha256": "1e8a7a968f72578634721d69e13a36f3d54b28e9127445cb135024daa29cfff5"
+        "bytes": 338470,
+        "sha256": "0cde4a1bab89e52e2195ba5b55541a667302766005e5d5d4f73bec4b27d1a092"
       },
       {
         "angle": "+x-z",
         "path": "benchmarks/sculpture/brush-catalog/view-catalog-+x-z.png",
-        "bytes": 345328,
-        "sha256": "33617b7d6904e88e7aa263e0bb91ea15ae8e808f13c7adabf24700cbf622326d"
+        "bytes": 346989,
+        "sha256": "67c543c1233970f286d20dcb4083991a9917612b0bfdcd87c412f7248a45ce82"
       },
       {
         "angle": "-x-z",
         "path": "benchmarks/sculpture/brush-catalog/view-catalog--x-z.png",
-        "bytes": 338238,
-        "sha256": "d400c40e2111c26820fadd90a01db146ed5f07d240d85dc621d5d7e462ff4504"
+        "bytes": 339631,
+        "sha256": "5b2cd1b8b706586e0fca2f5aaca9efae7f7ef1e2e37bbdd43b3dd03dca326264"
       },
       {
         "angle": "-x+z",
         "path": "benchmarks/sculpture/brush-catalog/view-catalog--x+z.png",
-        "bytes": 338441,
-        "sha256": "c5bb683b472b90fb67869158880ed7970a3a49f8a538719c1d66ecb693ae85bc"
+        "bytes": 346675,
+        "sha256": "0b126a06b8cd6dfc770d69dbaaca2b84632f355f73874ec226f64c11d9868884"
       },
       {
         "angle": "front",
         "path": "benchmarks/sculpture/brush-catalog/view-catalog-front.png",
-        "bytes": 75376,
-        "sha256": "ca8166a6e3b8b8eba137e86c1bf9f2aecec9294edc09d670baed160d544c0fab"
+        "bytes": 67813,
+        "sha256": "2b4f0a59cdd8d382d61bbaa69fd7d64c70065e378cb0420cfbf0f431c1b95598"
       }
     ],
     "renderError": null

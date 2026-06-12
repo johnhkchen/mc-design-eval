@@ -12,6 +12,7 @@ import {
 /** Minimal synthetic spec per construct idiom — every construct must realize on these. */
 const SYNTH_SPECS = {
   "roof.gable": { footprint: { x0: -4, x1: 4, z0: 0, z1: 5 }, ridgeAxis: "z", eaveY: 10, ridgeY: 14, blocks: { field: "spruce_planks", stairs: "spruce_stairs", slab: "spruce_slab" } },
+  "roof.gable.steep": { footprint: { x0: -3, x1: 3, z0: 0, z1: 4 }, ridgeAxis: "z", eaveY: 10, ridgeY: 16, pitch: 2, blocks: { field: "spruce_planks", stairs: "spruce_stairs", slab: "spruce_slab" } },
   "roof.hip": { footprint: { x0: -4, x1: 4, z0: 0, z1: 9 }, ridgeAxis: "z", eaveY: 10, ridgeY: 14, blocks: { field: "spruce_planks", stairs: "spruce_stairs", slab: "spruce_slab" } },
   "roof.pyramid": { footprint: { x0: 0, x1: 6, z0: 0, z1: 6 }, eaveY: 10, blocks: { field: "spruce_planks", stairs: "spruce_stairs", slab: "spruce_slab" } },
   "arch": { center: [5, 12], radius: 2.5, span: { axis: "x", range: [2, 8] }, yRange: [12, 15], depth: { axis: "z", range: [0, 0] }, block: "stone_bricks" },
