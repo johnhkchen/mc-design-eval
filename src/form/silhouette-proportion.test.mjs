@@ -382,7 +382,7 @@ test("SP-L2 the cottage 3× divergence reads as two correctly-labeled instrument
   const program = tagLens({ ridgeToEave: 1.5, roofShare: 0.33, aspect: 1.19 }, PROPORTION_LENS.PROGRAM);
   // OCCUPANCY lens: the realized voxels read roof-heavy (≈5) — a tall narrowing silhouette, exactly
   // the substrate where the plinth/realization artifact lives. Read by the real occupancy producer.
-  const occMask = maskFromRowExtents([1, 1, 2, 3, 12, 12]); // 4 roof rows over 2 wall rows
+  const occMask = maskFromRowExtents([1, 1, 2, 3, 4, 4]); // 4 roof rows over 2 wall rows → ridge:eave 6
   const occupancy = tagLens(ratiosFromMask(occMask), PROPORTION_LENS.OCCUPANCY);
   assert.equal(program.lens, "program");
   assert.equal(occupancy.lens, "occupancy");
