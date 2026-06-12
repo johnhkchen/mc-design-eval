@@ -25,6 +25,7 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { guardedWriteRecord, preflightPins, loadTrackedSet, isTracked, ROTATE_FLAG } from "../../src/form/pin-guard.mjs";
+import { classifyWitnessRepro, retiredEntry, WITNESS_REPRO_VERDICT } from "../../src/form/witness-repro.mjs";
 import { MULTI_ANGLE_GATE_SCHEMA } from "../../src/form/multi-angle-gate.mjs";
 import { visibilityAwareCoverage, VISIBILITY_COVERAGE_SCHEMA, DEFAULT_COVERAGE_THRESHOLD } from "../../src/view/face-resemblance.mjs";
 import { artifactOccupancy } from "../../src/view/occupancy.mjs";
@@ -108,8 +109,15 @@ async function derive(subject, label) {
   const occ = artifactOccupancy(artifact);
   const matMap = JSON.parse(await readFile(join(HERE, def.map), "utf8"));
   const conceptImg = await decodeImage(join(HERE, def.concept));
-  const planPath = join(ROOT, rec.artifact.path.replace(/[^/]+$/, "component-plan.json"));
-  const componentPlan = existsSync(planPath) ? reviveComponentPlan(JSON.parse(await readFile(planPath, "utf8"))) : null;
+  // a witness reads only COMMITTED inputs (T-142-01): consume the sibling component-plan only when
+  // it is git-tracked. An untracked plan (a stray local artifact its dir's authority never
+  // committed) is excluded — the re-census is then plan-less and reproducible from tracked inputs
+  // alone, in any worktree. A tracked plan is consumed exactly as before, so those records stay
+  // byte-identical.
+  const planRel = rec.artifact.path.replace(/[^/]+$/, "component-plan.json");
+  const planPath = join(ROOT, planRel);
+  const componentPlan = existsSync(planPath) && isTracked(loadTrackedSet(ROOT), planRel)
+    ? reviveComponentPlan(JSON.parse(await readFile(planPath, "utf8"))) : null;
   const derived = deriveZones({ occ, conceptImg, matMap, fallbackPolicy: def.policy, componentPlan });
   const zoneOf = componentPlan ? planCensusZoneOf(derived.zoneOf, componentPlan, derived.bandNames ?? []) : derived.zoneOf;
 
@@ -213,6 +221,10 @@ async function main() {
   const grep = await generalizationGrep();
   if (!grep.clean) throw new Error(`generalization grep: subject keys in runner source: ${grep.subjectKeysInRunner.join(", ")}`);
 
+  // the sanctioned-rotation registry (committed sidecar — subject keys live there, not in this
+  // source, so the self-grep above stays clean). T-142-01: T-138 re-judged these gate records.
+  const RETIRED_GATE = JSON.parse(await readFile(join(ROOT, "benchmarks/sculpture/retired-pins.json"), "utf8")).visibility;
+
   let failures = 0;
   for (const t of targets) {
     const rels = witnessRels(t.subject, t.label);
@@ -234,6 +246,28 @@ async function main() {
         continue;
       }
       const committed = await readFile(committedPath, "utf8");
+      // SKIP-vs-FAIL guard (T-142-01): a witness re-censuses a SPECIFIC committed gate record. When
+      // T-138's sanctioned rotation re-judged it, the pinned source sha no longer matches — a
+      // registered retirement SKIPs (named), an unchanged gate that diverges still FAILs below, an
+      // undeclared change FAILs here.
+      const committedRec = JSON.parse(committed);
+      const gateRel = committedRec.source?.record;
+      const currentGateSha = gateRel && existsSync(join(ROOT, gateRel))
+        ? sha256(await readFile(join(ROOT, gateRel), "utf8")) : null;
+      const verdict = classifyWitnessRepro({
+        pinnedSourceSha: committedRec.source?.sha256,
+        currentSourceSha: currentGateSha,
+        retired: retiredEntry(rels.slug, RETIRED_GATE),
+      });
+      if (verdict.verdict === WITNESS_REPRO_VERDICT.SKIP) {
+        console.error(`[${rels.slug}] SKIP — ${verdict.reason}`);
+        continue;
+      }
+      if (verdict.verdict === WITNESS_REPRO_VERDICT.FAIL) {
+        console.error(`[${rels.slug}] REPRO FAIL — ${verdict.reason}`);
+        failures++;
+        continue;
+      }
       const same = committed === recJson;
       console.error(`[${rels.slug}] repro: ${same ? "byte-identical" : "DIVERGES"}`);
       if (!same) failures++;
