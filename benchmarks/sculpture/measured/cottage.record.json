@@ -1,0 +1,86 @@
+{
+  "schema": "measured-proportions/v1",
+  "ticket": "T-133-01",
+  "subject": "cottage",
+  "runKey": "cottage",
+  "pack": "rustic",
+  "inputs": {
+    "recognitionProgram": {
+      "path": "benchmarks/sculpture/recognition/cottage.program.json",
+      "sha256": "a7b60b01857c0c8b0173e16c75495f7a3ce4c956ff142ce2d1ae398e31e134c1"
+    },
+    "sketch": {
+      "path": "benchmarks/sculpture/form-sketch/cottage.json",
+      "sha256": "fec1a6691882ec6a372354bc6957d4f57d45e38488642da5cc4c83b4919cc7ca"
+    }
+  },
+  "program": {
+    "path": "benchmarks/sculpture/measured/cottage.program.json",
+    "attempt": "fp:xz eave:measured",
+    "sources": {
+      "measured": 10
+    }
+  },
+  "seed": {
+    "sha256": "daba9e6644771ea6ce4f5f41682c5f690d981c06af2341b59e304ebb58e442e5",
+    "cells": 7803,
+    "conformance": {
+      "passed": true
+    }
+  },
+  "ratios": {
+    "before": {
+      "ridgeToEave": 2.25,
+      "roofShare": 0.5556,
+      "aspect": 1.0769
+    },
+    "beforeSource": "benchmarks/sculpture/workshop/cottage/program.json",
+    "after": {
+      "ridgeToEave": 1.55,
+      "roofShare": 0.3548,
+      "aspect": 1.1852
+    },
+    "target": {
+      "ridgeToEave": 1.4145,
+      "roofShare": 0.293,
+      "aspect": 1.1852
+    }
+  },
+  "evidence": {
+    "renders": [
+      {
+        "angle": "+x+z",
+        "path": "benchmarks/sculpture/measured/view-cottage-+x+z.png",
+        "bytes": 402172,
+        "sha256": "3c7cc75f40a7377e44d91e345d5d3b718bd6b50407bddbd9b50135b23c279026"
+      },
+      {
+        "angle": "+x-z",
+        "path": "benchmarks/sculpture/measured/view-cottage-+x-z.png",
+        "bytes": 389442,
+        "sha256": "bef2a75bae1db21b341a4a3b1a0d85644a7da05287b8d677bf56609cd5074acb"
+      },
+      {
+        "angle": "-x-z",
+        "path": "benchmarks/sculpture/measured/view-cottage--x-z.png",
+        "bytes": 393738,
+        "sha256": "4a4a8dc4db966cc2b5270294057271ec54a0faad7c913b802a3d0d5b69e088e1"
+      },
+      {
+        "angle": "-x+z",
+        "path": "benchmarks/sculpture/measured/view-cottage--x+z.png",
+        "bytes": 408363,
+        "sha256": "771ea201ab255fd73ee4a72a7ec3b7c823936c8c430509ddf3d7939d214feaf8"
+      }
+    ],
+    "renderError": null
+  },
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  },
+  "replay": {
+    "npmRun": "measured:repro / measured:offline",
+    "asserts": "committed sketch + recognition program → byte-identical measured program, artifact, ratios"
+  }
+}

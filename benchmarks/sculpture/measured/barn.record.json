@@ -1,0 +1,86 @@
+{
+  "schema": "measured-proportions/v1",
+  "ticket": "T-133-01",
+  "subject": "barn",
+  "runKey": "barn",
+  "pack": "rustic",
+  "inputs": {
+    "recognitionProgram": {
+      "path": "benchmarks/sculpture/recognition/barn.program.json",
+      "sha256": "eb94efa934d59d1db392bc91774e34946d48c9e96a207acdfc9862bca1ad0728"
+    },
+    "sketch": {
+      "path": "benchmarks/sculpture/form-sketch/barn.json",
+      "sha256": "8a0390e55ed0ef60a60c487c23a6b2bca47e5c03e4c5444d18cef2f9f44d69c1"
+    }
+  },
+  "program": {
+    "path": "benchmarks/sculpture/measured/barn.program.json",
+    "attempt": "fp:xz eave:measured",
+    "sources": {
+      "measured": 6
+    }
+  },
+  "seed": {
+    "sha256": "929ea39e20dcbf0e9aec58ead6039bf5ebd5f3f728297ba550b628d430d60585",
+    "cells": 11594,
+    "conformance": {
+      "passed": true
+    }
+  },
+  "ratios": {
+    "before": {
+      "ridgeToEave": 2.4444,
+      "roofShare": 0.5909,
+      "aspect": 2
+    },
+    "beforeSource": "benchmarks/sculpture/workshop/barn/program.json",
+    "after": {
+      "ridgeToEave": 2.4,
+      "roofShare": 0.5833,
+      "aspect": 1.8462
+    },
+    "target": {
+      "ridgeToEave": 2.1,
+      "roofShare": 0.5238,
+      "aspect": 1.8462
+    }
+  },
+  "evidence": {
+    "renders": [
+      {
+        "angle": "+x+z",
+        "path": "benchmarks/sculpture/measured/view-barn-+x+z.png",
+        "bytes": 408773,
+        "sha256": "ff444b44eb8e5f65236f74de45138c9a4f6e633b807b69d22ab15bb6c5954336"
+      },
+      {
+        "angle": "+x-z",
+        "path": "benchmarks/sculpture/measured/view-barn-+x-z.png",
+        "bytes": 411943,
+        "sha256": "6b2e9cc2aed65bb2b0b150e4aa849355777d0fbd8dca55ad790eb150ae8f54da"
+      },
+      {
+        "angle": "-x-z",
+        "path": "benchmarks/sculpture/measured/view-barn--x-z.png",
+        "bytes": 394353,
+        "sha256": "9dd73329b2616b4d64a2a9c3403f4ae72c591722b80b87bff7cf8e393834330a"
+      },
+      {
+        "angle": "-x+z",
+        "path": "benchmarks/sculpture/measured/view-barn--x+z.png",
+        "bytes": 409062,
+        "sha256": "3222dda23f27928f0de328bbff4134f2c0f5f77dbeb588f25213867a0e66f18d"
+      }
+    ],
+    "renderError": null
+  },
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  },
+  "replay": {
+    "npmRun": "measured:repro / measured:offline",
+    "asserts": "committed sketch + recognition program → byte-identical measured program, artifact, ratios"
+  }
+}

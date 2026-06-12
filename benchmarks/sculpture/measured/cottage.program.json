@@ -1,0 +1,332 @@
+{
+  "schema": "measured-program/v1",
+  "ticket": "T-133-01",
+  "subject": "cottage",
+  "runKey": "cottage",
+  "pack": "rustic",
+  "inputs": {
+    "recognitionProgram": {
+      "path": "benchmarks/sculpture/recognition/cottage.program.json",
+      "sha256": "a7b60b01857c0c8b0173e16c75495f7a3ce4c956ff142ce2d1ae398e31e134c1"
+    },
+    "sketch": {
+      "path": "benchmarks/sculpture/form-sketch/cottage.json",
+      "sha256": "fec1a6691882ec6a372354bc6957d4f57d45e38488642da5cc4c83b4919cc7ca"
+    }
+  },
+  "attempt": "fp:xz eave:measured",
+  "dimensions": [
+    {
+      "mass": "*",
+      "parameter": "footprint.w",
+      "source": "measured",
+      "measured": 27,
+      "used": 27,
+      "residual": 0,
+      "note": "sketch planDims (registry blocks), endpoint-scaled across masses"
+    },
+    {
+      "mass": "*",
+      "parameter": "footprint.d",
+      "source": "measured",
+      "measured": 32,
+      "used": 32,
+      "residual": 0,
+      "note": "sketch planDims (registry blocks), endpoint-scaled across masses"
+    },
+    {
+      "mass": "main",
+      "parameter": "eaveHeight",
+      "source": "measured",
+      "measured": 19.3,
+      "used": 20,
+      "residual": 0.7,
+      "note": "expressed as 4×5 (schema-bounded factorization)"
+    },
+    {
+      "mass": "main",
+      "parameter": "storeyFactorization",
+      "source": "measured",
+      "measured": 19.3,
+      "used": "4x5",
+      "residual": null,
+      "note": "recognition read 2x4"
+    },
+    {
+      "mass": "main",
+      "parameter": "pitchClass",
+      "source": "measured",
+      "measured": 0.7143,
+      "used": 1,
+      "residual": 0.2857,
+      "note": "tan(dominant tilt) snapped to the nearest pack pitch class"
+    },
+    {
+      "mass": "main",
+      "parameter": "ridgeHeight",
+      "source": "measured",
+      "measured": 27.3,
+      "used": 31,
+      "residual": 3.7,
+      "note": "derived: eave + pitch x half-span + 1 (all constituents sourced above)"
+    },
+    {
+      "mass": "wing",
+      "parameter": "eaveHeight",
+      "source": "measured",
+      "measured": 19.3,
+      "used": 20,
+      "residual": 0.7,
+      "note": "expressed as 4×5 (schema-bounded factorization)"
+    },
+    {
+      "mass": "wing",
+      "parameter": "storeyFactorization",
+      "source": "measured",
+      "measured": 19.3,
+      "used": "4x5",
+      "residual": null,
+      "note": "recognition read 2x4"
+    },
+    {
+      "mass": "wing",
+      "parameter": "pitchClass",
+      "source": "measured",
+      "measured": 0.7143,
+      "used": 1,
+      "residual": 0.2857,
+      "note": "tan(dominant tilt) snapped to the nearest pack pitch class"
+    },
+    {
+      "mass": "wing",
+      "parameter": "ridgeHeight",
+      "source": "measured",
+      "measured": 27.3,
+      "used": 30,
+      "residual": 2.7,
+      "note": "derived: eave + pitch x half-span + 1 (all constituents sourced above)"
+    }
+  ],
+  "conflicts": [
+    {
+      "mass": "*",
+      "parameter": "footprint.w",
+      "recognition": 26,
+      "sketch": 27,
+      "resolved": "sketch"
+    },
+    {
+      "mass": "*",
+      "parameter": "footprint.d",
+      "recognition": 28,
+      "sketch": 32,
+      "resolved": "sketch"
+    },
+    {
+      "mass": "main",
+      "parameter": "eaveHeight",
+      "recognition": 8,
+      "sketch": 19.3,
+      "resolved": "sketch"
+    },
+    {
+      "mass": "main",
+      "parameter": "storeyHeight.packBand",
+      "recognition": "[3, 4]",
+      "sketch": 5,
+      "resolved": "sketch",
+      "note": "pack proportions are the fallback tier (S-133); excursion recorded"
+    },
+    {
+      "mass": "wing",
+      "parameter": "eaveHeight",
+      "recognition": 8,
+      "sketch": 19.3,
+      "resolved": "sketch"
+    },
+    {
+      "mass": "wing",
+      "parameter": "storeyHeight.packBand",
+      "recognition": "[3, 4]",
+      "sketch": 5,
+      "resolved": "sketch",
+      "note": "pack proportions are the fallback tier (S-133); excursion recorded"
+    }
+  ],
+  "program": {
+    "schema": "building-program/v1",
+    "subject": "cottage",
+    "pack": "rustic",
+    "reading": {
+      "summary": "An English yeoman's cross-gabled cottage. Two perpendicular gable wings meet at a front corner with a stone chimney rising from the valley. The concept overrides the rustic rubble default: the GROUND storey is crisp coursed dressed stone (ashlar → wall.dressing), and the UPPER storey is cream lime-plaster infill (wall.infill.upper) carried in a near-black coppice-oak half-timber frame (timber-frame treatment) that jetties out over the stone base — classic Tudor oversailing. Roof is warm sawpit plank courses (roof.field) with the darker oak fascia banding (roof.trim) at eave and verge; gable ends show the cream infill. Shuttered lattice windows (dark-oak trapdoor reveals) appear both storeys; a boarded spruce door sits in a dressed-stone reveal at ground; brick-capped fieldstone chimney. The sketch read 4 storeys (~4.8 blocks) and a 27-block height — mesh noise; the concept plainly reads two storeys, so I substitute a regular 2-storey shell at storeyHeight 4. I decompose the L/T footprint into a long main mass (ridge along z) and a shorter cross wing protruding +x (ridge along x) so the two gables stand perpendicular as seen. Pitch read 35.5° rounds to the pack's single pitch class. Mirror score 0.54 is below threshold (asymmetric L) — no symmetry declared.",
+      "symmetryClaim": null
+    },
+    "masses": [
+      {
+        "id": "main",
+        "rect": {
+          "x0": 0,
+          "z0": 0,
+          "w": 19,
+          "d": 32
+        },
+        "storeys": 4,
+        "storeyHeight": 5,
+        "walls": {
+          "treatment": "timber-frame",
+          "ground": {
+            "role": "wall.dressing"
+          },
+          "upper": {
+            "role": "wall.infill.upper"
+          },
+          "dressing": {
+            "role": "wall.dressing"
+          }
+        },
+        "plinth": {
+          "courses": 1,
+          "role": "wall.dressing"
+        },
+        "jetty": {
+          "walls": [
+            "-x",
+            "-z"
+          ],
+          "beamRole": "frame.timber",
+          "joistRole": "frame.timber"
+        },
+        "roof": {
+          "idiom": "roof.gable",
+          "ridgeAxis": "z",
+          "pitchClass": 1,
+          "fieldRole": "roof.field",
+          "trimRole": "roof.trim",
+          "gableRole": "wall.infill.upper"
+        },
+        "chimney": {
+          "role": "wall.field.ground",
+          "capRole": "chimney.cap",
+          "atEnd": "center"
+        },
+        "openings": [
+          {
+            "wall": "-x",
+            "kind": "door",
+            "count": 1,
+            "w": 1,
+            "h": 2,
+            "sill": 0,
+            "head": "flat",
+            "headRole": "wall.dressing"
+          },
+          {
+            "wall": "-x",
+            "kind": "window",
+            "count": 2,
+            "w": 1,
+            "h": 2,
+            "sill": 1,
+            "head": "flat",
+            "headRole": "wall.dressing"
+          },
+          {
+            "wall": "-x",
+            "kind": "window",
+            "count": 2,
+            "w": 1,
+            "h": 2,
+            "sill": 4,
+            "head": "flat",
+            "headRole": "wall.dressing"
+          },
+          {
+            "wall": "+z",
+            "kind": "window",
+            "count": 1,
+            "w": 1,
+            "h": 2,
+            "sill": 1,
+            "head": "flat",
+            "headRole": "wall.dressing"
+          },
+          {
+            "wall": "-z",
+            "kind": "window",
+            "count": 1,
+            "w": 1,
+            "h": 2,
+            "sill": 4,
+            "head": "flat",
+            "headRole": "wall.dressing"
+          }
+        ]
+      },
+      {
+        "id": "wing",
+        "rect": {
+          "x0": 19,
+          "z0": 8,
+          "w": 8,
+          "d": 17
+        },
+        "storeys": 4,
+        "storeyHeight": 5,
+        "walls": {
+          "treatment": "timber-frame",
+          "ground": {
+            "role": "wall.dressing"
+          },
+          "upper": {
+            "role": "wall.infill.upper"
+          },
+          "dressing": {
+            "role": "wall.dressing"
+          }
+        },
+        "plinth": {
+          "courses": 1,
+          "role": "wall.dressing"
+        },
+        "jetty": {
+          "walls": [
+            "+x"
+          ],
+          "beamRole": "frame.timber",
+          "joistRole": "frame.timber"
+        },
+        "roof": {
+          "idiom": "roof.gable",
+          "ridgeAxis": "x",
+          "pitchClass": 1,
+          "fieldRole": "roof.field",
+          "trimRole": "roof.trim",
+          "gableRole": "wall.infill.upper"
+        },
+        "chimney": null,
+        "openings": [
+          {
+            "wall": "+x",
+            "kind": "window",
+            "count": 1,
+            "w": 1,
+            "h": 2,
+            "sill": 1,
+            "head": "flat",
+            "headRole": "wall.dressing"
+          },
+          {
+            "wall": "+x",
+            "kind": "window",
+            "count": 1,
+            "w": 1,
+            "h": 2,
+            "sill": 4,
+            "head": "flat",
+            "headRole": "wall.dressing"
+          }
+        ]
+      }
+    ]
+  }
+}

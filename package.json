@@ -114,6 +114,10 @@
     "patternbook:saltcrag:repro": "node benchmarks/sculpture/pattern-book.mjs --all --repro --pack packs/saltcrag.json",
     "patternbook:saltcrag:offline": "node benchmarks/sculpture/pattern-book.mjs --all --offline --pack packs/saltcrag.json",
     "gate:patternbook:barn:saltcrag": "node benchmarks/sculpture/multi-angle-gate.mjs --subject barn --label patternbook-saltcrag --artifact workshop/barn--saltcrag/final-artifact.json --reference recognition/barn--saltcrag.artifact.json",
+    "measured:cottage": "node benchmarks/sculpture/measured-proportions.mjs --subject cottage",
+    "measured:barn": "node benchmarks/sculpture/measured-proportions.mjs --subject barn",
+    "measured:repro": "node benchmarks/sculpture/measured-proportions.mjs --all --repro",
+    "measured:offline": "node benchmarks/sculpture/measured-proportions.mjs --all --offline",
     "style:form": "node scripts/form-style.mjs",
     "style:ratify": "node scripts/ratify-pack.mjs",
     "factory:receipts": "node scripts/factory-receipts.mjs --style saltcrag"

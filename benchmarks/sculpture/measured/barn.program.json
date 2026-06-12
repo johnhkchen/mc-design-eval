@@ -1,0 +1,197 @@
+{
+  "schema": "measured-program/v1",
+  "ticket": "T-133-01",
+  "subject": "barn",
+  "runKey": "barn",
+  "pack": "rustic",
+  "inputs": {
+    "recognitionProgram": {
+      "path": "benchmarks/sculpture/recognition/barn.program.json",
+      "sha256": "eb94efa934d59d1db392bc91774e34946d48c9e96a207acdfc9862bca1ad0728"
+    },
+    "sketch": {
+      "path": "benchmarks/sculpture/form-sketch/barn.json",
+      "sha256": "8a0390e55ed0ef60a60c487c23a6b2bca47e5c03e4c5444d18cef2f9f44d69c1"
+    }
+  },
+  "attempt": "fp:xz eave:measured",
+  "dimensions": [
+    {
+      "mass": "*",
+      "parameter": "footprint.w",
+      "source": "measured",
+      "measured": 48,
+      "used": 48,
+      "residual": 0,
+      "note": "sketch planDims (registry blocks), endpoint-scaled across masses"
+    },
+    {
+      "mass": "*",
+      "parameter": "footprint.d",
+      "source": "measured",
+      "measured": 26,
+      "used": 26,
+      "residual": 0,
+      "note": "sketch planDims (registry blocks), endpoint-scaled across masses"
+    },
+    {
+      "mass": "barn",
+      "parameter": "eaveHeight",
+      "source": "measured",
+      "measured": 10,
+      "used": 10,
+      "residual": 0,
+      "note": "expressed as 2×5 (schema-bounded factorization)"
+    },
+    {
+      "mass": "barn",
+      "parameter": "storeyFactorization",
+      "source": "measured",
+      "measured": 10,
+      "used": "2x5",
+      "residual": null,
+      "note": "recognition read 3x3"
+    },
+    {
+      "mass": "barn",
+      "parameter": "pitchClass",
+      "source": "measured",
+      "measured": 1,
+      "used": 1,
+      "residual": 0,
+      "note": "tan(dominant tilt) snapped to the nearest pack pitch class"
+    },
+    {
+      "mass": "barn",
+      "parameter": "ridgeHeight",
+      "source": "measured",
+      "measured": 21,
+      "used": 24,
+      "residual": 3,
+      "note": "derived: eave + pitch x half-span + 1 (all constituents sourced above)"
+    }
+  ],
+  "conflicts": [
+    {
+      "mass": "*",
+      "parameter": "footprint.d",
+      "recognition": 24,
+      "sketch": 26,
+      "resolved": "sketch"
+    },
+    {
+      "mass": "barn",
+      "parameter": "eaveHeight",
+      "recognition": 9,
+      "sketch": 10,
+      "resolved": "sketch"
+    },
+    {
+      "mass": "barn",
+      "parameter": "storeyHeight.packBand",
+      "recognition": "[3, 4]",
+      "sketch": 5,
+      "resolved": "sketch",
+      "note": "pack proportions are the fallback tier (S-133); excursion recorded"
+    }
+  ],
+  "program": {
+    "schema": "building-program/v1",
+    "subject": "barn",
+    "pack": "rustic",
+    "reading": {
+      "summary": "Tithe-barn read of one place's vernacular: a single clean rectangular mass (sketch footprint [0,0]-[48,24], a true 48x24 rectangle; mirror score 0.55 is below threshold so I do not declare symmetry, but the long walls are evidently a repeating bay rhythm). The lumpy black mesh outline over the gray occupancy is a steep gable — the side elevation's purple ridge well above the green eave, and the end elevation's triangular peak, both substitute cleanly to roof.gable with ridge along x (the long axis). Eave ~10 blocks, ridge ~21: a tall steep roof, which the concept darkens across its WHOLE field toward the oak, so I read the roof field itself as roof.trim (dark_oak_planks) rather than the lighter sawpit spruce — the barn exception the pack calls out. Walls are stone, not timber-frame: uncoursed rubble fieldstone recessed panels (wall.field.ground -> cobblestone) framed by dressed-quarry piers, quoins, jambs and heads and a continuous base plinth (wall.dressing -> stone_bricks); the gable end above the eave stays the same fieldstone. The two bright golden leaves on the long eave wall are wagon doors (door.wagon -> oak_planks, kept distinct from the dark roof). I regularize the digest's ~5-block storeys to the pack's 3-4 range as 3 storeys of 3 (wall top 9, just under the ~10 eave). No dormers (steep continuous slopes), no chimney (working barn). Sizes from the sketch; rhythm rounded to regular bays.",
+      "symmetryClaim": null
+    },
+    "masses": [
+      {
+        "id": "barn",
+        "rect": {
+          "x0": 0,
+          "z0": 0,
+          "w": 48,
+          "d": 26
+        },
+        "storeys": 2,
+        "storeyHeight": 5,
+        "walls": {
+          "treatment": "opening-dressing",
+          "ground": {
+            "role": "wall.field.ground"
+          },
+          "upper": {
+            "role": "wall.field.ground"
+          },
+          "dressing": {
+            "role": "wall.dressing"
+          }
+        },
+        "plinth": {
+          "courses": 1,
+          "role": "wall.dressing"
+        },
+        "roof": {
+          "idiom": "roof.gable",
+          "ridgeAxis": "x",
+          "pitchClass": 1,
+          "fieldRole": "roof.trim",
+          "trimRole": null,
+          "gableRole": "wall.field.ground"
+        },
+        "chimney": null,
+        "openings": [
+          {
+            "wall": "+z",
+            "kind": "wagon-door",
+            "count": 2,
+            "w": 3,
+            "h": 4,
+            "sill": 0,
+            "head": "flat",
+            "headRole": "wall.dressing"
+          },
+          {
+            "wall": "+z",
+            "kind": "window",
+            "count": 3,
+            "w": 2,
+            "h": 3,
+            "sill": 3,
+            "head": "flat",
+            "headRole": "wall.dressing"
+          },
+          {
+            "wall": "-z",
+            "kind": "window",
+            "count": 4,
+            "w": 2,
+            "h": 3,
+            "sill": 3,
+            "head": "flat",
+            "headRole": "wall.dressing"
+          },
+          {
+            "wall": "+x",
+            "kind": "window",
+            "count": 1,
+            "w": 1,
+            "h": 2,
+            "sill": 5,
+            "head": "flat",
+            "headRole": "wall.dressing"
+          },
+          {
+            "wall": "-x",
+            "kind": "window",
+            "count": 1,
+            "w": 1,
+            "h": 2,
+            "sill": 5,
+            "head": "flat",
+            "headRole": "wall.dressing"
+          }
+        ]
+      }
+    ]
+  }
+}
