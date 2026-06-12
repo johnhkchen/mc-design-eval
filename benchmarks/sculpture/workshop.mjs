@@ -21,6 +21,7 @@
 //        [--replay|--offline] [--rotate-pins]
 
 import { readFile, writeFile, mkdir, copyFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import { join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
@@ -38,14 +39,18 @@ import {
 import { assertWorkshopProgram } from "../../src/workshop/program.mjs";
 import { runWorkshopLoop, conformanceScore } from "../../src/workshop/loop.mjs";
 import { parseWorkshopReply, critiqueRenderArgs } from "../../src/workshop/critique.mjs";
+import { rerecognizeRenderArgs, parseMassReply } from "../../src/workshop/rerecognize.mjs";
+import { DEFAULT_APPLIERS } from "../../src/workshop/actions.mjs";
+import { parseProgramReply } from "../../src/recognition/prompt.mjs";
 import { bamlRender } from "../../src/baml/bridge.mjs";
 import { serializeArtifact, replayLedger, offlineAssert } from "../../src/workshop/replay.mjs";
-import { workshopSubjectsFrom, chainRels, DEFAULT_PACK_REL } from "../../src/workshop/seed.mjs";
+import { workshopSubjectsFrom, chainRels, recognitionRels, DEFAULT_PACK_REL } from "../../src/workshop/seed.mjs";
 import { SUBJECTS as REGISTRY } from "./durable-skin.mjs";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 const HERE = join(ROOT, "benchmarks/sculpture");
 const REL_DIR = "benchmarks/sculpture/workshop";
+const SKETCH_REL = "benchmarks/sculpture/form-sketch";
 const FRAMES_DIR = join(ROOT, "pr/assets/frames");
 
 const TIER = "strong"; // op "workshop-critique" (model-tier OP_ROUTING)
@@ -142,8 +147,9 @@ function digestMd(ledger) {
 // ---------------------------------------------------------------- modes
 
 async function runReplay() {
+  const pack = loadStylePack(join(ROOT, def.pack)); // geometry rounds recompile through the pack (T-136)
   const { ledger, finalArtifactText } = await loadCommitted();
-  const { artifact, applied } = replayLedger({ ledger });
+  const { artifact, applied } = replayLedger({ ledger, pack });
   const ok = serializeArtifact(artifact) === finalArtifactText;
   console.log(`workshop --replay: ${ledger.rounds.length} rounds, re-applied ${applied.programAdjusts} adjust(s) + ${applied.paintPlacements} paint placement(s)`);
   console.log(ok
@@ -155,7 +161,7 @@ async function runReplay() {
 async function runOffline() {
   const pack = loadStylePack(join(ROOT, def.pack));
   const { ledger, finalArtifactText } = await loadCommitted();
-  const { ok, problems } = offlineAssert({ ledger, finalArtifactText, conform: conformWith(pack) });
+  const { ok, problems } = offlineAssert({ ledger, finalArtifactText, pack, conform: conformWith(pack) });
   for (const p of problems) console.error(`workshop --offline: ${p}`);
   console.log(ok ? "workshop --offline: committed record re-asserted clean" : `workshop --offline: ${problems.length} problem(s)`);
   process.exit(ok ? 0 : 1);
@@ -167,6 +173,27 @@ async function runLive() {
   const programText = await readFile(join(ROOT, def.program), "utf8");
   const program = assertWorkshopProgram(programText);
   const conceptBuf = await readFile(join(ROOT, def.concept));
+
+  // T-138-01: THE HANDS (T-136) ENGAGE WHEN THE CHAIN'S INPUTS EXIST — the recognized source
+  // program (geometry levers + mass re-recognition need masses to aim at; the loop's geometry
+  // applier ships in DEFAULT_APPLIERS and activates on `source`) and the conditioned sketch
+  // (the re-recognition fragment's evidence). Data-driven, no per-building constants: the
+  // synthetic fixture has neither and runs the eyes-only loop with a byte-identical prompt
+  // (the empty source block inserts zero bytes — T-136 S1 pins it).
+  const sourceRel = recognitionRels(subjectKey, def.pack).program;
+  const sketchRel = `${SKETCH_REL}/${subjectKey}.json`;
+  const hands = existsSync(join(ROOT, sourceRel)) && existsSync(join(ROOT, sketchRel));
+  let source = null, sketch = null, handsRefs = {};
+  if (hands) {
+    const sourceText = await readFile(join(ROOT, sourceRel), "utf8");
+    source = parseProgramReply(sourceText, { pack }); // the same gates the record passed at commit
+    const sketchText = await readFile(join(ROOT, sketchRel), "utf8");
+    sketch = JSON.parse(sketchText);
+    handsRefs = {
+      sourceRef: { path: sourceRel, sha256: sha256(sourceText) },
+      sketchRef: { path: sketchRel, sha256: sha256(sketchText) },
+    };
+  }
 
   // BEFORE ANY SPEND (T-119): declare every record this run writes; workshop domain — the guard
   // additionally refuses gate-record paths outright, flag or no flag.
@@ -186,7 +213,7 @@ async function runLive() {
   };
 
   const exchange = async (ctx) => {
-    const { renders, program: current } = ctx;
+    const { renders, program: current, source: currentSource } = ctx;
     // The prompt AND the image order come from the BAML function's render (T-129-01): the loop
     // hands over the round context, critiqueRenderArgs serializes it into the typed inputs, and
     // the bridge renders CritiqueWorkshopRound. Transport stays on the tiered subscription shim;
@@ -207,17 +234,46 @@ async function runLive() {
       return { text, usage: raw?.usage };
     };
     const { verdict, replies, askCount } = await runReplyPolicy(ask, {
-      parse: (text) => parseWorkshopReply(text, { program: current, pack }),
+      parse: (text) => parseWorkshopReply(text, { program: current, pack, source: currentSource }),
       maxAttempts: MAX_REPLY_ATTEMPTS,
     });
     return { verdict, replies, askCount };
   };
 
+  // THE INJECTED re-recognize APPLIER (T-136's composition, chain-adopted by T-138-01): the
+  // fragment exchange — text-only (the sketch digest is the evidence), strong tier, bounded
+  // same-prompt re-asks, raw fragment replies returned for the round's ledger entry. A failed
+  // policy throws → the loop records apply-failed.
+  const reRecognize = async ({ program: current, source: currentSource, critique }, action) => {
+    const mass = currentSource.masses.find((m) => m.id === action.massId);
+    const { prompt } = await bamlRender({
+      fn: "ReRecognizeMass",
+      args: rerecognizeRenderArgs({ pack, sketch, mass, issues: critique?.issues ?? [] }),
+      images: {},
+    });
+    const ask = async () => {
+      const { text, raw } = await runTieredOp({ tier: TIER, prompt });
+      return { text, usage: raw?.usage };
+    };
+    const { verdict, replies, askCount } = await runReplyPolicy(ask, {
+      parse: (text) => parseMassReply(text, {
+        source: currentSource, massId: action.massId, pack,
+        budget: { ...current.budget },
+        proportions: current.declarations?.proportions ?? null,
+      }),
+      maxAttempts: MAX_REPLY_ATTEMPTS,
+    });
+    if (!verdict) throw new Error(`re-recognition re-asks exhausted after ${askCount} attempt(s)`);
+    return { kind: "recognize", mass: verdict.mass, replies, askCount, program: verdict.program, source: verdict.source };
+  };
+
   const { ledger, artifact } = await runWorkshopLoop({
-    program, pack, seams: { exchange, render },
+    program, pack, source, seams: { exchange, render },
+    appliers: hands ? { ...DEFAULT_APPLIERS, "re-recognize": reRecognize } : DEFAULT_APPLIERS,
     meta: {
       packRef: { path: def.pack, sha256: sha256(packBytes) },
       conceptRef: { path: def.concept, sha256: sha256(conceptBuf) },
+      ...handsRefs,
       tier: TIER,
       instrument: { azimuths: [...MULTI_ANGLE_GATE.azimuths], ...RENDER },
     },
