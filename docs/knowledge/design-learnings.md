@@ -2746,3 +2746,79 @@ chain record `pattern-book/barn--saltcrag.{json,md}`, the ratified pack `packs/s
 `docs/active/backlog/`. The story beat: one sentence of place ("a fishing village on a cold
 coast") became a ratified palette, three new tools, and a building the frozen judge reads as
 the same barn at every angle — for thirteen model calls.
+
+## Measured proportion loop (E-33) — the eyes learned to measure, the hands learned to aim, and the ruler bent (S-133…S-138, T-133-01…T-138-02) · 2026-06-12
+
+**The thesis.** E-31 proved recognition; E-32 proved the style stack compounds. E-33 asked
+whether the loop can hold a *quantity*: measure the concept's proportions (T-133), declare them
+as gate targets (T-135), give the workshop geometry levers that can move them (T-134/T-136),
+and re-run the three pattern-book subjects with the check armed — does the form read right
+*because the loop made it so*? The terminal evidence is
+`pattern-book/proportion-milestone.{json,md}` + `pr/assets/proportion-milestone.md` (baselines
+quoted pre-rotation, both gap-budget arithmetics beside every verdict, byte-reproducible).
+
+**Measured beats estimated, by a lot (T-133's numbers).** The estimated cottage seed sat at
+ridge:eave 2.25 / roofShare 0.5556 against sketch targets 1.4145 / 0.293; the measured re-seed
+lands 1.55 / 0.3548 (Δrel 0.59 → 0.096 on the headline ratio). The barn's estimated seed was
+nearer (2.4444 vs target 2.1) and the measured seed only trims it (2.4) — measurement pays
+most where estimation guessed worst. Footprints came in measured exactly (27×32 on the
+cottage, residual 0).
+
+**Eyes-to-hands closed on the first live run (the barns).** With the proportion check armed
+and the T-136 levers live, the rustic barn's critique aimed `eaveHeight:12` (round 1) and
+`depth:26` (round 2), both ACCEPTED by the cage, final ratios inside tolerance
+(2.1667/0.5385/1.7143 vs 2.1/0.5238/1.8462 — Δrel 0.164→0.0318, 0.1281→0.0281, 0.0833→0). The
+saltcrag barn repeated the same aims on its own pack. Proportion-flavored gaps fell 4 → 1;
+the survivor is the rustic pack's class-1 pitch ceiling — *pack data*, not loop failure,
+flagged to the reviewer. This is the T-127 finding closing: when the check names the delta,
+the model reaches for the lever that moves it.
+
+**The steep door was built, tested, and never walked through.** `roofIdiomForPitch` plus the
+re-aim at both seams (geometry lever, measured snap) is real and unit-proven (G3b/G3c/G3d,
+MP14) — but both committed sketches are TRELLIS-flattened to ≤45° (the T-123 facet-normal
+lesson from the other side), so no measured demand exceeded pitch 1: the cottage measured
+tan(tilt) 0.7143, snapped to class 1, residual recorded. The unlock compounds forward; no
+2026-06 run used it. Honest both ways: the ledgers prove the door opens, and prove nobody
+needed it.
+
+**The cottage is the epic's true finding: the loop hill-climbed a bent ruler.** The armed
+check measures the *realized occupancy* (`proportionRatios` → `maskProportions`), and the
+realized cottage carries a decorative plinth band at y3–4 that is 1–2 blocks wider than its
+walls. `eaveWidthFrac: 0.98` admits only that band as an eave candidate, so the instrument
+read eave≈4–5 where the build's true eave is ~12–15: recorded final 5.5/0.8182 vs a
+corrected-by-hand read of ≈1.7/0.45 (still off target — the judge's two drifted views name
+the same roof-heaviness — but not absurd). Worse than a wrong number, an *inverted gradient*:
+with the eave pinned to the plinth, every wall-raise only grows totalH, so the cage scored
+the model's correct aims as regressions. The ledger shows the model aiming the right lever in
+5/6 rounds (`eaveHeight:24`, `storeys:6×4`, `storeys:4×4`) — refused by the rustic
+storeyHeight band and the schema's storeys≤4 cap — and the one ACCEPTED move is the
+wrong-direction `storeys:3` that improved the misread ratio. Same family as the T-118
+roof-diff inversion and the T-122 steep-gable top-block misread: when an instrument's
+heuristic latches the wrong feature, the loop optimizes the artifact, faithfully. The defect
+is *flagged, not repaired* — re-shaping `proportionRatios` mid-milestone would re-derive
+conformance under every committed replay; the fix needs an owning ticket (eave detection must
+ignore sub-wall skirt bands, or measure per-mass walls instead of whole-silhouette extents).
+
+**Where the epic over- and under-reached, honestly.** (1) Tolerance 0.15 is uncalibrated —
+the barns pass inside it and read same-object 4/4; nothing yet ties the band to what a
+stranger's glance forgives. (2) The ≤2 gap budget again reads FAIL over decided all-minor
+profiles (barns 8/2; cottage 11/2 with 4 majors) — three E-31/E-32 data points now say the
+identity arithmetic and the budget arithmetic disagree; per Rule 3 the recalibration is the
+reviewer's, both arithmetics sit beside every verdict in the milestone record. (3) The
+program-level ratios (seed, prefix-replay diagnostics) and the occupancy-level check are two
+lenses on one quantity; the cottage proves they can disagree by 3× — any future gate work
+must name which lens it gates on. (4) The witness-degradation prediction ("named SKIPs after
+rotation") was half right: the SKIP guard covers artifact pins only; rotated *gate records*
+make `visibility:repro` DIVERGE and geometry-bearing ledgers make `proportion:repro` throw
+(`replayLedger` wants the pack) — both tripwires fire truthfully, neither names retirement;
+pre-existing since the barn rotations (proven at a `caf0d13` worktree), now expressed on all
+three subjects, owners needed.
+
+**E-12 handoff.** `pr/assets/proportion-milestone.md` (the glance page: concept beside sheet,
+before/after/target ratio rows, lever citations, both arithmetics) + its JSON record;
+baselines with retired pins named in `pattern-book/proportion-baselines.json`; chain records
+`pattern-book/{barn,barn--saltcrag,cottage}.{json,md}` with ledgers beside them; the gate
+records under `multi-angle/`; the head-to-head re-composed on the rotated verdicts
+(`pr/assets/pattern-book-milestone.md`). The story beat: taught to measure, the loop fixed
+two barns on its first try — and on the third building it obeyed a bent ruler so precisely
+that the failure names exactly which instrument to fix next.
