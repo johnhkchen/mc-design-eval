@@ -52,15 +52,52 @@ Phase: Implement, tracking plan.md's ten steps.
   against the LIVE registry — drifted the moment the brushes landed. Fixed (`4173674`):
   `ownedNamesFromRegistryDigest` recovers the registry AS RECORDED from the committed
   decompose inputs; replays are functions of committed records only.
-- [~] **Step 6 — the building** (in flight): `recognize:barn:saltcrag` accepted ask 1
+- [x] **Step 6 — the building** (committed): `recognize:barn:saltcrag` accepted ask 1
   (10117 cells, 6 elements, conformance PASS under saltcrag, grep clean);
-  `patternbook:barn:saltcrag` workshop loop running (round 2/6 at last check).
-- [ ] **Step 7 — frozen gate**: `gate:patternbook:barn:saltcrag` (the epic's only judge call).
-- [ ] **Step 8 — receipts** composer + run.
-- [ ] **Step 9 — design-learnings (E-32) + E-12 handoff**.
-- [ ] **Step 10 — review.md**.
+  `patternbook:barn:saltcrag` — workshop **done after 4/6 rounds** (1 accepted: plinth
+  courses; 2 regressions rolled back by the cage: a +z respray 0→12 findings and a
+  mossy-cobble wall swap 0→964 findings — the cage earned its keep twice); final
+  conformance 6✓/0f. `patternbook:saltcrag:repro` AND `:offline` byte-identical; rustic
+  chains unmoved.
+- [x] **Step 7 — frozen gate** (committed): the epic's only judge call —
+  **same-object 4/4, 8 gaps ALL MINOR** (aggregate FAIL on the 2-gap budget — the same
+  arithmetic rustic's best carries). Replies 1/1/1/1 (T-114 idle), offline re-assert clean,
+  every write a first write (nothing rotated). Kit presence skip→FAIL (no concept-declared
+  apertures on a program build — the known T-127 strain, recorded beside resemblance).
+- [x] **Step 8 — receipts** (committed): registry 19→22; reuse **11/14 (79%)**; rework 4
+  minor/0 spec-wrong; cost shape 13 model calls; instrument receipt frozen `diffs: []`;
+  re-run byte-identical. **DEVIATION 4**: reuse semantics corrected mid-step — demand =
+  pack idioms + factory-built drafts (a naive pack-vs-pack set difference mislabeled four
+  pre-existing surface.* brushes as "newly built").
+- [x] **Step 9 — design-learnings**: `## Brush factory (E-32)` appended with the numbers,
+  the found-live seams, and the E-12 handoff paths. `npm test` 1924/1924.
+- [x] **Step 10 — review.md** (this work dir).
 
 ## Deviations from plan
 
-1. (Step 2½ above) Substitution at recognition, not compile — one extra live ask; the
-   architecture is cleaner (the program contract "speaks one pack" stays intact).
+1. (Step 2½) Substitution at recognition, not compile — one extra live ask; the program
+   contract ("a program speaks one pack") stays intact.
+2. (Step 5) One commit for the three-brush wave instead of one per brush — the registry
+   table is one frozen literal; intermediate states would fail the count meta-test.
+3. (Step 5) Replay-vs-growing-registry bug class found and fixed (`4173674`).
+4. (Step 8) Reuse fraction measured against brush DEMAND, not pack-vs-pack set difference.
+
+## Acceptance-criteria trace
+
+1. **End-to-end run** ✅ — saltcrag formed (T-130 chain, sibling) → ratified provisional →
+   backlog (T-131 runner, ask 1) → 3 promoted drafts → 3 brushes through the single door
+   (19→22) → barn recognized + composed via the E-31 workshop under the saltcrag pack
+   (program → realization → budgeted ledgered revision, replay-reproducible) → one
+   frozen-gate run (fresh renders; instrument frozen `diffs: []`; T-119 preflights, all
+   first writes; T-114 replies 1/1/1/1).
+2. **Verdict + sheets recorded honestly** ✅ — FAIL at 8/2 recorded as it fell, beside
+   conformance 6✓/0f; the new style did NOT grade worse than rustic's best (identical
+   4/4 + 8-minor profile); the named findings: gap-budget arithmetic, kit-presence strain,
+   forward-compounding timing.
+3. **Compounding receipts, one table** ✅ — `benchmarks/sculpture/factory/receipts.{json,md}`.
+4. **Replay** ✅ — `patternbook:saltcrag:repro`/`:offline` byte-identical; registry-only
+   subject entry (barn is registry data; no subject key or style slug in any runner
+   source — npm scripts carry the flags); generalization grep `clean: true` in the chain
+   and recognition records.
+5. **design-learnings + E-12 + tests** ✅ — E-32 section appended; handoff paths named;
+   1924/1924 green.
