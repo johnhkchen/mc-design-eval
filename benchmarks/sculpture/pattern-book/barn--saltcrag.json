@@ -1,0 +1,91 @@
+{
+  "schema": "pattern-book-chain/v1",
+  "ticket": "T-132-01",
+  "subject": "barn",
+  "runKey": "barn--saltcrag",
+  "pack": "saltcrag",
+  "budget": {
+    "rounds": 6
+  },
+  "stages": {
+    "sketch": {
+      "read": {
+        "path": "benchmarks/sculpture/form-sketch/barn.json",
+        "sha256": "8a0390e55ed0ef60a60c487c23a6b2bca47e5c03e4c5444d18cef2f9f44d69c1"
+      },
+      "sheet": {
+        "path": "benchmarks/sculpture/form-sketch/barn-sheet.png",
+        "sha256": "912e19e9bc757998449735a1d6d9461159f3c669adc4b60be593a576fea681fa"
+      }
+    },
+    "recognition": {
+      "program": {
+        "path": "benchmarks/sculpture/recognition/barn--saltcrag.program.json",
+        "sha256": "de83dafbfd90f52a73563e722f2b9d5ec673538af5e1294e083272545293f24b"
+      },
+      "artifact": {
+        "path": "benchmarks/sculpture/recognition/barn--saltcrag.artifact.json",
+        "sha256": "5b6a8163fecec7809cba62550122dacf8dc7ae736c7c23f683bb8f07b6825849",
+        "reproduced": true
+      },
+      "conformance": {
+        "passed": true
+      },
+      "replies": {
+        "askCount": 1,
+        "budget": 3,
+        "accepted": true
+      }
+    },
+    "seed": {
+      "path": "benchmarks/sculpture/workshop/barn--saltcrag/program.json",
+      "sha256": "d962934d0acf471864bf856551f9b322c0e81be5cac996e446a023a9f06fe88b",
+      "cells": 10117,
+      "conformance": {
+        "passed": true
+      }
+    },
+    "workshop": {
+      "ledger": {
+        "path": "benchmarks/sculpture/workshop/barn--saltcrag.json",
+        "sha256": "d3876e5b8f4ffcca08b71f957238262cf4c05c43a153808fa4b816318a29903e"
+      },
+      "final": {
+        "path": "benchmarks/sculpture/workshop/barn--saltcrag/final-artifact.json",
+        "sha256": "6eedbc874362d200697e7f2d62a0373352b85001a4e8b0990eac13ab51c8629a"
+      },
+      "outcome": "done",
+      "rounds": {
+        "used": 4,
+        "budget": 6
+      },
+      "accepted": 1,
+      "rolledBack": 2,
+      "unavailable": 0,
+      "applyFailed": 0,
+      "conformance": {
+        "first": {
+          "passed": 6,
+          "findings": 0
+        },
+        "final": {
+          "passed": 6,
+          "findings": 0
+        },
+        "finalPassed": true
+      }
+    },
+    "plan": {
+      "path": "benchmarks/sculpture/workshop/barn--saltcrag/component-plan.json",
+      "sha256": "9625680b6320bc459a4797a68c5412d00f21690b14756347f4f4c88aa49c87bb"
+    }
+  },
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  },
+  "replay": {
+    "npmRun": "patternbook:saltcrag:repro / patternbook:saltcrag:offline",
+    "asserts": "committed program+ledger → byte-identical final build"
+  }
+}

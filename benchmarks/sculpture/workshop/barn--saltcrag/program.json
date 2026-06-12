@@ -1,0 +1,268 @@
+{
+  "schema": "workshop-program/v1",
+  "subject": "barn",
+  "pack": "saltcrag",
+  "budget": {
+    "rounds": 6
+  },
+  "declarations": {
+    "bands": [
+      {
+        "name": "base",
+        "yRange": [
+          0,
+          2
+        ],
+        "blocks": [
+          "cobblestone",
+          "spruce_log",
+          "stone_bricks"
+        ],
+        "mixed": true
+      },
+      {
+        "name": "upper",
+        "yRange": [
+          3,
+          8
+        ],
+        "blocks": [
+          "cobblestone",
+          "spruce_log"
+        ],
+        "mixed": true
+      },
+      {
+        "name": "roof",
+        "yRange": [
+          9,
+          21
+        ],
+        "blocks": [
+          "dark_oak_planks",
+          "dark_oak_stairs"
+        ],
+        "mixed": true
+      }
+    ],
+    "symmetry": null,
+    "openings": [
+      {
+        "wall": "hall:+z#0",
+        "kind": "door",
+        "min": [
+          19,
+          0,
+          23
+        ],
+        "max": [
+          20,
+          4,
+          23
+        ]
+      },
+      {
+        "wall": "hall:+z#0",
+        "kind": "door",
+        "min": [
+          27,
+          0,
+          23
+        ],
+        "max": [
+          28,
+          4,
+          23
+        ]
+      },
+      {
+        "wall": "hall:-x#1",
+        "kind": "window",
+        "min": [
+          0,
+          5,
+          11
+        ],
+        "max": [
+          0,
+          8,
+          11
+        ]
+      }
+    ]
+  },
+  "elements": [
+    {
+      "id": "hall-shell",
+      "kind": "shell",
+      "spec": {
+        "footprint": {
+          "x0": 0,
+          "x1": 47,
+          "z0": 0,
+          "z1": 23
+        },
+        "y0": 0,
+        "height": 9,
+        "wallBlock": "cobblestone",
+        "courses": [
+          {
+            "yRange": [
+              0,
+              2
+            ],
+            "block": "cobblestone"
+          }
+        ],
+        "openings": [
+          {
+            "wall": "+z",
+            "at": [
+              19,
+              0
+            ],
+            "w": 2,
+            "h": 5
+          },
+          {
+            "wall": "+z",
+            "at": [
+              27,
+              0
+            ],
+            "w": 2,
+            "h": 5
+          },
+          {
+            "wall": "-x",
+            "at": [
+              11,
+              5
+            ],
+            "w": 1,
+            "h": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "hall-plinth",
+      "kind": "idiom",
+      "idiom": "plinth",
+      "spec": {
+        "footprint": {
+          "x0": 0,
+          "x1": 47,
+          "z0": 0,
+          "z1": 23
+        },
+        "y0": 0,
+        "courses": 1,
+        "block": "stone_bricks"
+      }
+    },
+    {
+      "id": "hall-roof",
+      "kind": "idiom",
+      "idiom": "roof.gable",
+      "spec": {
+        "footprint": {
+          "x0": 0,
+          "x1": 47,
+          "z0": -1,
+          "z1": 24
+        },
+        "ridgeAxis": "x",
+        "eaveY": 9,
+        "ridgeY": 21,
+        "pitch": 1,
+        "blocks": {
+          "field": "dark_oak_planks",
+          "stairs": "dark_oak_stairs",
+          "slab": null
+        }
+      }
+    },
+    {
+      "id": "hall-head-+z-0-0",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "spec": {
+        "span": {
+          "axis": "x",
+          "range": [
+            19,
+            20
+          ]
+        },
+        "yRange": [
+          0,
+          4
+        ],
+        "depth": {
+          "axis": "z",
+          "range": [
+            23,
+            23
+          ]
+        },
+        "block": "spruce_log",
+        "level": 3
+      }
+    },
+    {
+      "id": "hall-head-+z-0-1",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "spec": {
+        "span": {
+          "axis": "x",
+          "range": [
+            27,
+            28
+          ]
+        },
+        "yRange": [
+          0,
+          4
+        ],
+        "depth": {
+          "axis": "z",
+          "range": [
+            23,
+            23
+          ]
+        },
+        "block": "spruce_log",
+        "level": 3
+      }
+    },
+    {
+      "id": "hall-head--x-1-0",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "spec": {
+        "span": {
+          "axis": "z",
+          "range": [
+            11,
+            11
+          ]
+        },
+        "yRange": [
+          5,
+          8
+        ],
+        "depth": {
+          "axis": "x",
+          "range": [
+            0,
+            0
+          ]
+        },
+        "block": "spruce_log",
+        "level": 7
+      }
+    }
+  ]
+}

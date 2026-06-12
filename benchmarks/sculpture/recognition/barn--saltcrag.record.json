@@ -1,0 +1,131 @@
+{
+  "schema": "recognition-draft/v1",
+  "ticket": "T-132-01",
+  "subject": "barn",
+  "runKey": "barn--saltcrag",
+  "pack": "saltcrag",
+  "model": "claude-opus-4-8",
+  "promptSha256": "c354a3f407807e111099a9ae584c4c8b06ba00770aaf122db9c2c6527e441bd2",
+  "askCount": 1,
+  "budget": 3,
+  "cells": 10117,
+  "elements": [
+    {
+      "id": "hall-shell",
+      "kind": "shell",
+      "cellCount": 1236
+    },
+    {
+      "id": "hall-plinth",
+      "kind": "idiom",
+      "idiom": "plinth",
+      "cellCount": 140
+    },
+    {
+      "id": "hall-roof",
+      "kind": "idiom",
+      "idiom": "roof.gable",
+      "cellCount": 8736
+    },
+    {
+      "id": "hall-head-+z-0-0",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "cellCount": 2
+    },
+    {
+      "id": "hall-head-+z-0-1",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "cellCount": 2
+    },
+    {
+      "id": "hall-head--x-1-0",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "cellCount": 1
+    }
+  ],
+  "conformance": {
+    "schema": "pack-conformance/v1",
+    "passed": true,
+    "checks": [
+      {
+        "name": "courses-even",
+        "passed": true,
+        "findings": []
+      },
+      {
+        "name": "symmetry-held",
+        "passed": true,
+        "findings": []
+      },
+      {
+        "name": "openings-rhythm",
+        "passed": true,
+        "findings": []
+      },
+      {
+        "name": "palette-in-pack",
+        "passed": true,
+        "findings": []
+      },
+      {
+        "name": "watertight",
+        "passed": true,
+        "findings": [],
+        "mouths": 0
+      },
+      {
+        "name": "single-component",
+        "passed": true,
+        "findings": [],
+        "components": 1
+      }
+    ]
+  },
+  "evidence": {
+    "renders": [
+      {
+        "angle": "+x+z",
+        "path": "benchmarks/sculpture/recognition/view-barn--saltcrag-+x+z.png",
+        "bytes": 417969,
+        "sha256": "e42ca5e7f38ff35a77106ef8145551f80ef2d378ba2045826b69660bb62cc6ca"
+      },
+      {
+        "angle": "+x-z",
+        "path": "benchmarks/sculpture/recognition/view-barn--saltcrag-+x-z.png",
+        "bytes": 414204,
+        "sha256": "5ca2d630e0cb7bdf43db9be1b13a6112215dc83bb01da3eef4e39d698fb40a18"
+      },
+      {
+        "angle": "-x-z",
+        "path": "benchmarks/sculpture/recognition/view-barn--saltcrag--x-z.png",
+        "bytes": 404483,
+        "sha256": "ea1bca149d8a39a095d54aa09142e7baa4ec29aafb1a2486a930719da199b3e6"
+      },
+      {
+        "angle": "-x+z",
+        "path": "benchmarks/sculpture/recognition/view-barn--saltcrag--x+z.png",
+        "bytes": 416726,
+        "sha256": "52bfda322e1d4ed250282aeb24c6ae7f14e267a6d493562c8d215cacce9c0383"
+      }
+    ],
+    "renderError": null
+  },
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  },
+  "replies": [
+    {
+      "attempt": 1,
+      "parsed": true,
+      "source": "live"
+    }
+  ],
+  "replay": {
+    "npmRun": "recognize:offline (--pack packs/saltcrag.json)",
+    "asserts": "committed program → byte-identical artifact"
+  }
+}

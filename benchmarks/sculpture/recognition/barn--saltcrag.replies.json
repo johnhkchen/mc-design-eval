@@ -1,0 +1,23 @@
+{
+  "schema": "recognition-replies/v1",
+  "ticket": "T-132-01",
+  "subject": "barn",
+  "pack": "saltcrag",
+  "model": "claude-opus-4-8",
+  "promptSha256": "c354a3f407807e111099a9ae584c4c8b06ba00770aaf122db9c2c6527e441bd2",
+  "budget": 3,
+  "askCount": 1,
+  "accepted": true,
+  "replies": [
+    {
+      "attempt": 1,
+      "parsed": true,
+      "rawReply": "{\n  \"schema\": \"building-program/v1\",\n  \"subject\": \"barn\",\n  \"pack\": \"saltcrag\",\n  \"reading\": {\n    \"summary\": \"A long single-mass barn under one steep gable. The sketch's clean 48×24 rectangle and ridge-along-x read directly as a rectangular hall, eave ~10 / total ~21 → a true 45° pitch (pitchClass 1, rise=run). The 'lumpy' end-elevation triangle with green eave / purple ridge is recognized as a p",
+      "usage": null,
+      "source": "live"
+    }
+  ],
+  "rawTexts": [
+    "{\n  \"schema\": \"building-program/v1\",\n  \"subject\": \"barn\",\n  \"pack\": \"saltcrag\",\n  \"reading\": {\n    \"summary\": \"A long single-mass barn under one steep gable. The sketch's clean 48×24 rectangle and ridge-along-x read directly as a rectangular hall, eave ~10 / total ~21 → a true 45° pitch (pitchClass 1, rise=run). The 'lumpy' end-elevation triangle with green eave / purple ridge is recognized as a plain gable end, not a literal mesh — substituted clean. Concept evidence overrides the saltcrag rubble default for the ground: the working face is undressed grey fieldstone (wall.field.ground=cobblestone) panelled between squared dressed-stone pilasters and quoins (wall.dressing.quoin=stone_bricks), seated on a single dressed plinth course, exactly the stone-brick base band in the picture. Walls run stone uniformly to the eave, so the upper band stays fieldstone rather than the pack's boarded loft, and the gable triangle is infilled in the same stone with a single tall slit vent high in the apex. The roof is the signature tarred dark-oak shingle (roof.field=dark_oak_planks) capped along the most-beaten ridge by a bought slate course (roof.ridge=deepslate_tiles). Two plain tarred deal doors on the eave-side long wall, spanned by salvaged driftwood lintels (opening.lintel=spruce_log). No chimney or dormers are present — it is an unheated working barn. Mirror is across the ridge (recorded, below the sketch's 0.8 threshold so not asserted).\",\n    \"symmetryClaim\": {\n      \"axis\": \"x\"\n    }\n  },\n  \"masses\": [\n    {\n      \"id\": \"hall\",\n      \"rect\": {\n        \"x0\": 0,\n        \"z0\": 0,\n        \"w\": 48,\n        \"d\": 24\n      },\n      \"storeys\": 3,\n      \"storeyHeight\": 3,\n      \"walls\": {\n        \"ground\": {\n          \"role\": \"wall.field.ground\"\n        },\n        \"upper\": {\n          \"role\": \"wall.field.ground\"\n        },\n        \"dressing\": {\n          \"role\": \"wall.dressing.quoin\"\n        }\n      },\n      \"plinth\": {\n        \"courses\": 1,\n        \"role\": \"wall.dressing.quoin\"\n      },\n      \"roof\": {\n        \"idiom\": \"roof.gable\",\n        \"ridgeAxis\": \"x\",\n        \"pitchClass\": 1,\n        \"fieldRole\": \"roof.field\",\n        \"trimRole\": \"roof.ridge\",\n        \"gableRole\": \"wall.field.ground\",\n        \"dormers\": null\n      },\n      \"chimney\": null,\n      \"openings\": [\n        {\n          \"wall\": \"+z\",\n          \"kind\": \"door\",\n          \"count\": 2,\n          \"w\": 2,\n          \"h\": 4,\n          \"sill\": 0,\n          \"head\": \"flat\",\n          \"headRole\": \"opening.lintel\"\n        },\n        {\n          \"wall\": \"-x\",\n          \"kind\": \"window\",\n          \"count\": 1,\n          \"w\": 1,\n          \"h\": 3,\n          \"sill\": 5,\n          \"head\": \"flat\",\n          \"headRole\": \"opening.lintel\"\n        }\n      ]\n    }\n  ]\n}"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "schema": "building-program/v1",
+  "subject": "barn",
+  "pack": "saltcrag",
+  "reading": {
+    "summary": "A long single-mass barn under one steep gable. The sketch's clean 48×24 rectangle and ridge-along-x read directly as a rectangular hall, eave ~10 / total ~21 → a true 45° pitch (pitchClass 1, rise=run). The 'lumpy' end-elevation triangle with green eave / purple ridge is recognized as a plain gable end, not a literal mesh — substituted clean. Concept evidence overrides the saltcrag rubble default for the ground: the working face is undressed grey fieldstone (wall.field.ground=cobblestone) panelled between squared dressed-stone pilasters and quoins (wall.dressing.quoin=stone_bricks), seated on a single dressed plinth course, exactly the stone-brick base band in the picture. Walls run stone uniformly to the eave, so the upper band stays fieldstone rather than the pack's boarded loft, and the gable triangle is infilled in the same stone with a single tall slit vent high in the apex. The roof is the signature tarred dark-oak shingle (roof.field=dark_oak_planks) capped along the most-beaten ridge by a bought slate course (roof.ridge=deepslate_tiles). Two plain tarred deal doors on the eave-side long wall, spanned by salvaged driftwood lintels (opening.lintel=spruce_log). No chimney or dormers are present — it is an unheated working barn. Mirror is across the ridge (recorded, below the sketch's 0.8 threshold so not asserted).",
+    "symmetryClaim": {
+      "axis": "x"
+    }
+  },
+  "masses": [
+    {
+      "id": "hall",
+      "rect": {
+        "x0": 0,
+        "z0": 0,
+        "w": 48,
+        "d": 24
+      },
+      "storeys": 3,
+      "storeyHeight": 3,
+      "walls": {
+        "ground": {
+          "role": "wall.field.ground"
+        },
+        "upper": {
+          "role": "wall.field.ground"
+        },
+        "dressing": {
+          "role": "wall.dressing.quoin"
+        }
+      },
+      "plinth": {
+        "courses": 1,
+        "role": "wall.dressing.quoin"
+      },
+      "roof": {
+        "idiom": "roof.gable",
+        "ridgeAxis": "x",
+        "pitchClass": 1,
+        "fieldRole": "roof.field",
+        "trimRole": "roof.ridge",
+        "gableRole": "wall.field.ground",
+        "dormers": null
+      },
+      "chimney": null,
+      "openings": [
+        {
+          "wall": "+z",
+          "kind": "door",
+          "count": 2,
+          "w": 2,
+          "h": 4,
+          "sill": 0,
+          "head": "flat",
+          "headRole": "opening.lintel"
+        },
+        {
+          "wall": "-x",
+          "kind": "window",
+          "count": 1,
+          "w": 1,
+          "h": 3,
+          "sill": 5,
+          "head": "flat",
+          "headRole": "opening.lintel"
+        }
+      ]
+    }
+  ]
+}
