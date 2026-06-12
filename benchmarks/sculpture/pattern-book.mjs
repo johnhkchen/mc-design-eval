@@ -44,6 +44,8 @@ import { artifactOccupancy } from "../../src/view/occupancy.mjs";
 import { parseProgramReply } from "../../src/recognition/prompt.mjs";
 import { compileProgram } from "../../src/recognition/compile.mjs";
 import { assertWorkshopProgram, realizeProgram } from "../../src/workshop/program.mjs";
+import { applyMeasuredProportions, silhouetteRatios } from "../../src/recognition/measured-program.mjs";
+import { deriveProportionDeclarations } from "../../src/form/silhouette-proportion.mjs";
 import { PATTERN_BOOK_BUDGET, seedWorkshopProgram, componentPlanFrom, chainRels, recognitionRels, DEFAULT_PACK_REL } from "../../src/workshop/seed.mjs";
 import { serializeArtifact, replayLedger, offlineAssert } from "../../src/workshop/replay.mjs";
 import { conformanceScore } from "../../src/workshop/loop.mjs";
@@ -82,16 +84,20 @@ async function generalizationGrep() {
 
 // ---------------------------------------------------------------- stages (pure of model + GL)
 
-/** Stage 1 — the committed conditioned sketch (T-123): present, sha-receipted. */
+/** Stage 1 — the committed conditioned sketch (T-123): present, sha-receipted. Returns the
+ *  parsed sketch too — stage 3 measures the program from it (T-133/T-138). */
 async function verifySketch(key) {
   const rels = [`${SKETCH_REL}/${key}.json`, `${SKETCH_REL}/${key}-sheet.png`];
   const out = {};
+  let sketch = null;
   for (const rel of rels) {
     const p = join(ROOT, rel);
     if (!existsSync(p)) throw new Error(`committed sketch input absent: ${rel} (run sketch:${key} under its own ticket)`);
-    out[rel.endsWith(".png") ? "sheet" : "read"] = { path: rel, sha256: sha256(await readFile(p)) };
+    const bytes = await readFile(p);
+    out[rel.endsWith(".png") ? "sheet" : "read"] = { path: rel, sha256: sha256(bytes) };
+    if (rel.endsWith(".json")) sketch = JSON.parse(bytes.toString("utf8"));
   }
-  return out;
+  return { receipt: out, sketch };
 }
 
 /** Stage 2 — the committed model-recognized program (T-125): re-parsed through the SAME gates
@@ -126,22 +132,43 @@ async function verifyRecognition(key, pack) {
   };
 }
 
-/** Stage 3 — seed: compile under the declared revision budget; the committed workshop program. */
-function stageSeed(program, pack) {
-  const seeded = seedWorkshopProgram({ program, pack });
+/** Stage 3 — seed: the MEASURED program (T-133 — quantity from geometry, identity from
+ *  language), compiled under the declared revision budget, then the proportion gate ARMED
+ *  (T-135) on the committed seed. T-138-01 closes T-133's chain-adoption handoff.
+ *
+ *  Ordering is load-bearing: the refuse-to-spend verdict is computed UNARMED — a regularity
+ *  failure refuses the loop (don't spend on a broken seed), but a seed failing
+ *  proportion-vs-concept is exactly what the loop exists to fix, never a reason to refuse it.
+ *  The declarations are merged after, so the COMMITTED seed carries them (replay re-derives
+ *  the armed gate from the seed alone; nothing rides on runner state). */
+function stageSeed({ program, sketch, pack }) {
+  const measured = applyMeasuredProportions({ program, sketch, pack });
+  const seeded = seedWorkshopProgram({ program: measured.program, pack });
   if (!seeded.conformance.passed) {
     const bad = seeded.conformance.checks.filter((c) => !c.passed).map((c) => c.name).join(", ");
     throw new Error(`seeded realization fails pack conformance (${bad}) — the chain refuses to spend on it`);
   }
-  return seeded;
+  const proportions = deriveProportionDeclarations({ sketch });
+  const workshopProgram = assertWorkshopProgram({
+    ...structuredClone(seeded.workshopProgram),
+    declarations: { ...structuredClone(seeded.workshopProgram.declarations), proportions },
+  });
+  return {
+    ...seeded,
+    workshopProgram,
+    serialized: jsonOf(workshopProgram),
+    measured: { dimensions: measured.dimensions, conflicts: measured.conflicts },
+    proportions,
+    ratios: silhouetteRatios(workshopProgram),
+  };
 }
 
 /** The chain's consumption plan (T-106 contract): derived from the committed ledger's FINAL
  *  program (accepted adjusts included), persisted beside the artifact under test so the frozen
  *  gate censuses the roof program + course family the chain actually built. Pure of model/GL. */
-async function derivePlan(rels) {
+async function derivePlan(rels, pack) {
   const ledger = JSON.parse(await readRel(rels.ledger));
-  const { program: finalProgram } = replayLedger({ ledger });
+  const { program: finalProgram } = replayLedger({ ledger, pack }); // geometry rounds recompile (T-136)
   return { planRel: rels.plan, planJson: jsonOf(componentPlanFrom(finalProgram)) };
 }
 
@@ -188,7 +215,7 @@ function chainMd(rec) {
     `| --- | --- |`,
     `| sketch | \`${rec.stages.sketch.read.sha256.slice(0, 16)}…\` + sheet \`${rec.stages.sketch.sheet.sha256.slice(0, 16)}…\` |`,
     `| recognition | program \`${rec.stages.recognition.program.sha256.slice(0, 16)}…\` — draft reproduced byte-identically; asks ${rec.stages.recognition.replies.askCount}/${rec.stages.recognition.replies.budget} |`,
-    `| seed | \`${rec.stages.seed.path}\` (\`${rec.stages.seed.sha256.slice(0, 16)}…\`), ${rec.stages.seed.cells} cells, conformance PASS |`,
+    `| seed | \`${rec.stages.seed.path}\` (\`${rec.stages.seed.sha256.slice(0, 16)}…\`), ${rec.stages.seed.cells} cells, regularity PASS${rec.stages.seed.ratios ? ` — MEASURED (T-133) + proportion gate ARMED (T-135): ridge:eave ${rec.stages.seed.ratios.ridgeToEave} / roofShare ${rec.stages.seed.ratios.roofShare} / aspect ${rec.stages.seed.ratios.aspect} vs targets ${rec.stages.seed.proportionsDeclared.targets.ridgeToEave} / ${rec.stages.seed.proportionsDeclared.targets.roofShare} / ${rec.stages.seed.proportionsDeclared.targets.aspect}` : ""} |`,
     `| workshop | **${w.outcome}** after ${w.rounds.used}/${w.rounds.budget} rounds — accepted ${w.accepted}, rolled back ${w.rolledBack}; gate ${w.conformance.first ? `${w.conformance.first.passed}✓/${w.conformance.first.findings}f` : "—"} → ${w.conformance.final.passed}✓/${w.conformance.final.findings}f |`,
     `| final | \`${w.final.path}\` (\`${w.final.sha256.slice(0, 16)}…\`) |`,
     "",
@@ -220,11 +247,11 @@ async function runLive(def, { rotate }) {
 
   const track = { stage: "sketch" };
   try {
-    const sketch = await verifySketch(key);
+    const { receipt: sketch, sketch: sketchDoc } = await verifySketch(key);
     track.stage = "recognition";
     const { program, receipt: recognition } = await verifyRecognition(key, buildPack);
     track.stage = "seed";
-    const seeded = stageSeed(program, buildPack);
+    const seeded = stageSeed({ program, sketch: sketchDoc, pack: buildPack });
     await mkdir(join(ROOT, rels.dir), { recursive: true });
     await write(seedRel, seeded.serialized);
     track.stage = "workshop";
@@ -232,7 +259,7 @@ async function runLive(def, { rotate }) {
     const spawned = spawnSync(process.execPath, args, { stdio: "inherit", cwd: ROOT });
     if (spawned.status !== 0) throw new Error(`workshop loop exited ${spawned.status}`);
     track.stage = "record";
-    const { planRel, planJson } = await derivePlan(rels);
+    const { planRel, planJson } = await derivePlan(rels, buildPack);
     await write(planRel, planJson);
     const { receipt: workshop } = await readBackWorkshop(rels);
     const record = {
@@ -245,7 +272,13 @@ async function runLive(def, { rotate }) {
       stages: {
         sketch,
         recognition,
-        seed: { path: seedRel, sha256: sha256(seeded.serialized), cells: seeded.cells.length, conformance: { passed: true } },
+        seed: {
+          path: seedRel, sha256: sha256(seeded.serialized), cells: seeded.cells.length,
+          conformance: { passed: true },
+          measured: seeded.measured,
+          proportionsDeclared: seeded.proportions,
+          ratios: seeded.ratios,
+        },
         workshop,
         plan: { path: planRel, sha256: sha256(planJson) },
       },
@@ -287,9 +320,9 @@ async function runRepro(def, { offline }) {
   const buildPack = loadStylePack(join(ROOT, buildPackRel));
   const problems = [];
   try {
-    await verifySketch(key);
+    const { sketch } = await verifySketch(key);
     const { program } = await verifyRecognition(key, buildPack);
-    const seeded = seedWorkshopProgram({ program, pack: buildPack });
+    const seeded = stageSeed({ program, sketch, pack: buildPack }); // the SAME measured+armed derivation live runs (T-138)
     const committedSeed = await readRel(rels.seed);
     if (sha256(seeded.serialized) !== sha256(committedSeed)) {
       problems.push("seeded program DIVERGES from the committed workshop program");
@@ -297,7 +330,7 @@ async function runRepro(def, { offline }) {
     const ledgerText = await readRel(rels.ledger);
     const finalText = await readRel(rels.final);
     const ledger = JSON.parse(ledgerText);
-    const { artifact, program: finalProgram } = replayLedger({ ledger });
+    const { artifact, program: finalProgram } = replayLedger({ ledger, pack: buildPack });
     if (serializeArtifact(artifact) !== finalText) {
       problems.push("ledger replay DIVERGES from the committed final artifact");
     }
@@ -306,12 +339,12 @@ async function runRepro(def, { offline }) {
     if (JSON.stringify(conformanceScore(finalConf)) !== JSON.stringify(conformanceScore(ledger.final.conformance))) {
       problems.push("re-derived final conformance score diverges from the ledger's");
     }
-    const { planRel, planJson } = await derivePlan(rels);
+    const { planRel, planJson } = await derivePlan(rels, buildPack);
     const committedPlan = await readRel(planRel).catch(() => null);
     if (committedPlan === null) problems.push(`consumption plan absent (${planRel}) — backfill with --plan-only`);
     else if (sha256(planJson) !== sha256(committedPlan)) problems.push("re-derived consumption plan DIVERGES from the committed one");
     if (offline) {
-      const oa = offlineAssert({ ledger, finalArtifactText: finalText, conform });
+      const oa = offlineAssert({ ledger, finalArtifactText: finalText, pack: buildPack, conform });
       if (!oa.ok) problems.push(...oa.problems.map((p) => `offlineAssert: ${p}`));
     }
   } catch (e) {
