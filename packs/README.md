@@ -26,8 +26,14 @@ re-derive byte-identically. Packs *may* also list `proportion-vs-concept` explic
 concept side = the E-22 `extractSilhouette` mask — one detection rule, two substrates):
 
 - **eave** = the topmost silhouette row whose horizontal extent is ≥ `eaveWidthFrac` (0.98) of the
-  max row extent — "the eave stays the widest layer". A jetty wider than the roof's overhang IS
-  the silhouette's eave line (the cottage's squat read measured honestly).
+  **eave-reference** extent — "the eave stays the widest layer". A jetty or eave overhang wider than
+  the roof IS the silhouette's eave line. The reference is the dominant **wall band**, not the
+  global max: a plinth/water-table course in the bottom `skirtBandFrac` (0.2) of the silhouette that
+  juts out past the body above it is a **skirt**, never the eave (T-139-01) — else the latched
+  plinth inverts the workshop's gradient (the E-33 cottage's bent-ruler read, 5.5 not ≈1.7). The
+  protrusion threshold reuses `eaveWidthFrac` (a skirt pokes beyond the body's own eave-tolerance
+  band, absorbing antialiasing); `skirtBandFrac` 0 recovers the legacy global-max ruler exactly, so
+  every skirt-free mask (the barn) derives byte-identical lines.
 - **ridge** = the topmost row with extent ≥ `ridgeMinWidthFrac` (0.25) of the max — a thin chimney
   or finial never reads as the ridge. The build measures both elevations: eave height is the MIN
   across views (the taper view sees the true eave), total height the MAX (the along-ridge view
