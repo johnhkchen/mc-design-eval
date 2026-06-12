@@ -34,6 +34,13 @@ export function gateRow(rec, label) {
     refusal: rec.aggregate.decided === true ? null : rec.aggregate.refusal,
     gapCount: rec.aggregate.gapCount ?? null,
     gapBudget: rec.aggregate.gapBudget ?? null,
+    // T-144-01 dual reporting (null on a pre-v2 committed record): the v2 budget arithmetic beside
+    // the legacy ≤2 verdict, so the table can show both as the policy demands.
+    policy: rec.aggregate.policy ?? null,
+    legacyPassed: rec.aggregate.legacy ? rec.aggregate.legacy.passed : null,
+    majorCount: rec.aggregate.majorCount ?? null,
+    minorCount: rec.aggregate.minorCount ?? null,
+    minorBudget: rec.aggregate.minorBudget ?? null,
     sameObject: { count: views.filter((v) => v.outcome === SAME_OBJECT).length, total: views.length },
     kitPresence: rec.kitPresence
       ? { ran: rec.kitPresence.ran !== false, passed: rec.kitPresence.passed ?? null, gaps: rec.kitPresence.gaps ?? [], reason: rec.kitPresence.reason ?? null }
@@ -94,7 +101,12 @@ export function headToHeadMd(h2h, { title = "Pattern-book vs metrology-path best
       const perView = r.views.map((v) =>
         `${v.angle} ${v.outcome}${v.gaps.length ? ` (${v.gaps.map((g) => `${g.severity} ${g.attribute}@${g.region}`).join("; ")})` : ""}`,
       ).join("<br>");
-      lines.push(`| **${r.label}** | ${verdict} | ${r.gapCount ?? "—"}/${r.gapBudget ?? "—"} | ${r.sameObject.count}/${r.sameObject.total} | ${kp} | ${perView} |`);
+      // v2 records show the severity-aware cap with the legacy ≤2 count beside; v1 records (no
+      // policy) render exactly as before (legacy count/budget only).
+      const gapsCell = r.policy
+        ? `${r.minorCount}m+${r.majorCount}M (≤${r.minorBudget}) · legacy ${r.gapCount}/${r.gapBudget}`
+        : `${r.gapCount ?? "—"}/${r.gapBudget ?? "—"}`;
+      lines.push(`| **${r.label}** | ${verdict} | ${gapsCell} | ${r.sameObject.count}/${r.sameObject.total} | ${kp} | ${perView} |`);
     }
     lines.push("",
       `Deltas (patternbook − generated): gaps ${s.deltas.gapCount ?? "n/a"}, same-object ${s.deltas.sameObject >= 0 ? "+" : ""}${s.deltas.sameObject}.`,

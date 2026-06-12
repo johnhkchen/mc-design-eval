@@ -19,7 +19,11 @@ const pct = (x) => `${Math.round(x * 100)}%`;
 function verdictCell(row) {
   if (!row) return "—";
   const verdict = row.decided ? (row.passed ? "PASS" : "FAIL") : `REFUSAL (${row.refusal})`;
-  const gaps = row.gapCount === null ? "" : `, ${row.gapCount} gap(s) vs budget ${row.gapBudget}`;
+  // T-144-01: a v2 budget row reports the severity-aware arithmetic with the legacy ≤2 beside it;
+  // a pre-v2 row (no policy) renders the legacy count/budget exactly as before.
+  const gaps = row.policy
+    ? `, ${row.minorCount} minor (≤${row.minorBudget}) + ${row.majorCount} major; legacy ${row.gapCount}/${row.gapBudget}`
+    : row.gapCount === null ? "" : `, ${row.gapCount} gap(s) vs budget ${row.gapBudget}`;
   return `${verdict} — same-object ${row.sameObject.count}/${row.sameObject.total}${gaps}`;
 }
 
