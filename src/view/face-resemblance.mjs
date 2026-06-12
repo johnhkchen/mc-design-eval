@@ -95,6 +95,101 @@ export function coverageGate(coverage, { threshold = DEFAULT_COVERAGE_THRESHOLD,
   return { passed: failures.length === 0, threshold, failures, byZone };
 }
 
+/** Schema tag for the visibility-aware multi-view coverage verdict (T-137-01). */
+export const VISIBILITY_COVERAGE_SCHEMA = "visibility-coverage/v1";
+
+/**
+ * Visibility-aware multi-view coverage (T-137-01, story S-137, epic E-33) — the fourth
+ * measurement-identity fix of the class (T-095 kit-renamed bands, T-101 dominant-only, T-110
+ * literal-name). A per-view census denominator is already "cells visible from that view" (the
+ * diagonal projection census); the defect was gating a band whose denominator is EMPTY — failing a
+ * view on a band the camera cannot see. Three conditions, named apart:
+ *   • visible at this view (total > 0)            → gated exactly as before (coverageGate);
+ *   • not visible HERE but visible elsewhere       → `not-visible-from-view`: recorded, excluded
+ *     from THIS view's precondition — the band must still pass from every view that can see it;
+ *   • not visible from ANY view:
+ *       – cells exist on the EXPOSURE skin         → `not-visible-from-any-view`: a NAMED failure
+ *         (material the contract lens cannot verify is never a free pass) — the band stays in
+ *         every view's gated set and fails on its empty census exactly as the legacy arithmetic;
+ *       – no cells in the census identity at all   → `not-on-skin`: excluded everywhere, named in
+ *         the record (nothing to census — form defects belong to the proportion check and the
+ *         judge's glance, not to a coverage refusal).
+ * Both arithmetics are returned for every view (aware + legacy — the unchanged full-set
+ * coverageGate), so any record built from this carries the before/after numbers by construction.
+ * Monotone by structure: a view's aware gated set ⊆ the legacy set and gating inside the set is
+ * identical, so legacy pass ⇒ aware pass. Thresholds/metric forwarded verbatim; `coverageGate`
+ * itself is untouched. PURE.
+ * @param {{views:{angle:string, coverage:Record<string,object>}[],
+ *          zones:Record<string,object>,
+ *          exposure:Record<string,{total:number}>,
+ *          threshold?:number, metric?:"dominant"|"own"}} args
+ *   `coverage` rows are dominantCoverage/ownCoverage-shaped ({total} + the metric's fraction —
+ *   committed byZone rows replay directly); `exposure` is a surfaceZoneHistogram over
+ *   skin:"exposure" in the SAME zone identity (the existence basis; {} means "no band has cells").
+ * @returns {{schema:string,
+ *            views:{angle:string, aware:object, legacy:object}[],
+ *            visibility:{byBand:Record<string,{status:string, visibleViews:string[],
+ *                                              exposedCells:number}>,
+ *                        failures:{band:string, reason:string}[], passed:boolean}}}
+ */
+export function visibilityAwareCoverage({ views, zones, exposure, threshold, metric = "dominant" }) {
+  if (!Array.isArray(views) || views.length === 0) {
+    throw new Error("visibilityAwareCoverage: views must be a non-empty [{angle, coverage}] array");
+  }
+  const seen = new Set();
+  for (const v of views) {
+    if (!v || typeof v.angle !== "string" || !v.angle) throw new Error("visibilityAwareCoverage: every view needs a string angle");
+    if (seen.has(v.angle)) throw new Error(`visibilityAwareCoverage: duplicate view angle "${v.angle}"`);
+    seen.add(v.angle);
+    if (!v.coverage || typeof v.coverage !== "object") throw new Error(`visibilityAwareCoverage: view "${v.angle}" needs a coverage record`);
+  }
+  if (!zones || typeof zones !== "object") throw new Error("visibilityAwareCoverage: zones must be the gated policy map");
+  if (!exposure || typeof exposure !== "object") {
+    throw new Error("visibilityAwareCoverage: exposure (the existence basis) is required — pass {} only when no band has cells");
+  }
+
+  // cross-view classification per gated band
+  const byBand = {};
+  const visFailures = [];
+  for (const band of Object.keys(zones)) {
+    const visibleViews = views.filter((v) => (v.coverage[band]?.total ?? 0) > 0).map((v) => v.angle);
+    const exposedCells = exposure[band]?.total ?? 0;
+    const status = visibleViews.length > 0 ? "visible"
+      : exposedCells > 0 ? "not-visible-from-any-view"
+      : "not-on-skin";
+    byBand[band] = { status, visibleViews, exposedCells };
+    if (status === "not-visible-from-any-view") visFailures.push({ band, reason: "not-visible-from-any-view" });
+  }
+
+  // per-view: aware (subset) + legacy (full set) arithmetics
+  const outViews = views.map((v) => {
+    const gated = {};
+    const excluded = [];
+    for (const [band, p] of Object.entries(zones)) {
+      const { status } = byBand[band];
+      const visibleHere = (v.coverage[band]?.total ?? 0) > 0;
+      // a hidden-but-existing band stays gated (fails on its empty census — never a free pass)
+      if (visibleHere || status === "not-visible-from-any-view") gated[band] = p;
+      else excluded.push(band);
+    }
+    const aware = coverageGate(v.coverage, { threshold, zones: gated, metric });
+    for (const band of excluded) {
+      aware.byZone[band] = {
+        total: 0, fraction: null, dominant: null, passed: null,
+        excluded: true, notVisible: true, status: "not-visible-from-view",
+      };
+    }
+    const legacy = coverageGate(v.coverage, { threshold, zones, metric });
+    return { angle: v.angle, aware, legacy };
+  });
+
+  return {
+    schema: VISIBILITY_COVERAGE_SCHEMA,
+    views: outViews,
+    visibility: { byBand, failures: visFailures, passed: visFailures.length === 0 },
+  };
+}
+
 /**
  * Coverage-aware accept (S-088): the coverage PRECONDITION runs FIRST — a skin whose base coat is
  * under-applied is rejected regardless of the marginal resemblance delta (coverage is a precondition,

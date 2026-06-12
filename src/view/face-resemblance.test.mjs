@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { loadBlockTable } from "../color/block-table.mjs";
 import {
   faceResemblance, acceptIfCloser, coverageGate, acceptWithCoverage, DEFAULT_COVERAGE_THRESHOLD,
+  visibilityAwareCoverage, VISIBILITY_COVERAGE_SCHEMA,
 } from "./face-resemblance.mjs";
 
 const TABLE = loadBlockTable();
@@ -124,4 +125,112 @@ test("coverageGate metric 'own': gates on ownFraction (declared vocabulary); def
   assert.deepEqual(g.byZone.band1.own, ["smooth_sandstone", "spruce_planks"]);
   assert.equal(coverageGate(rec, { metric: "own", threshold: 0.97 }).passed, false);
   assert.throws(() => coverageGate(rec, { metric: "best" }), /unknown metric/);
+});
+
+// ---- visibilityAwareCoverage (T-137-01) -----------------------------------------------------------
+
+/** A per-view coverage record from zone→{total, fraction-as-dominantFraction}. */
+function viewCov(byZone) {
+  return Object.fromEntries(Object.entries(byZone).map(([z, [total, frac]]) => [
+    z, { total, byBlock: {}, dominant: total ? "stone" : null, dominantFraction: frac },
+  ]));
+}
+const Z2 = { a: { dominant: "stone" }, b: { dominant: "stone" } };
+
+test("V1 visibilityAwareCoverage: all bands visible everywhere ⇒ aware ≡ legacy", () => {
+  const views = [
+    { angle: "+x+z", coverage: viewCov({ a: [100, 0.9], b: [50, 0.8] }) },
+    { angle: "-x-z", coverage: viewCov({ a: [90, 0.7], b: [40, 0.3] }) },
+  ];
+  const r = visibilityAwareCoverage({ views, zones: Z2, exposure: viewCov({ a: [300, 1], b: [200, 1] }) });
+  assert.equal(r.schema, VISIBILITY_COVERAGE_SCHEMA);
+  assert.equal(r.visibility.passed, true);
+  assert.deepEqual(r.visibility.byBand.a, { status: "visible", visibleViews: ["+x+z", "-x-z"], exposedCells: 300 });
+  for (const v of r.views) {
+    assert.equal(v.aware.passed, v.legacy.passed);
+    assert.deepEqual(v.aware.failures, v.legacy.failures);
+  }
+  assert.equal(r.views[1].aware.passed, false, "b fails at -x-z under both arithmetics (0.3 < 0.5)");
+});
+
+test("V2 a band empty at ONE view is excluded there (not-visible-from-view) and gated where visible", () => {
+  const views = [
+    { angle: "+x+z", coverage: viewCov({ a: [100, 0.9], b: [0, null] }) },
+    { angle: "-x-z", coverage: viewCov({ a: [90, 0.9], b: [40, 0.95] }) },
+  ];
+  const r = visibilityAwareCoverage({ views, zones: Z2, exposure: viewCov({ a: [300, 1], b: [60, 1] }) });
+  assert.equal(r.visibility.byBand.b.status, "visible");
+  const front = r.views[0];
+  assert.equal(front.aware.passed, true, "the occluded view no longer refuses on invisibility");
+  assert.equal(front.legacy.passed, false, "legacy arithmetic recorded beside it still fails");
+  assert.deepEqual(front.aware.byZone.b,
+    { total: 0, fraction: null, dominant: null, passed: null, excluded: true, notVisible: true, status: "not-visible-from-view" });
+  assert.equal(r.views[1].aware.byZone.b.passed, true, "gated normally where the camera sees it");
+});
+
+test("V3 a band invisible from ALL views but ON the exposure skin is a NAMED failure, never a free pass", () => {
+  const views = [
+    { angle: "+x+z", coverage: viewCov({ a: [100, 0.9], b: [0, null] }) },
+    { angle: "-x-z", coverage: viewCov({ a: [90, 0.9], b: [0, null] }) },
+  ];
+  const r = visibilityAwareCoverage({ views, zones: Z2, exposure: viewCov({ a: [300, 1], b: [12, 1] }) });
+  assert.deepEqual(r.visibility.failures, [{ band: "b", reason: "not-visible-from-any-view" }]);
+  assert.equal(r.visibility.passed, false);
+  assert.equal(r.visibility.byBand.b.status, "not-visible-from-any-view");
+  for (const v of r.views) {
+    assert.equal(v.aware.passed, false, `${v.angle}: the hidden band stays gated and fails`);
+    assert.deepEqual(v.aware.failures.map((f) => f.zone), ["b"]);
+  }
+});
+
+test("V4 a band with no cells in the census identity anywhere is not-on-skin: excluded, named, views pass", () => {
+  const views = [
+    { angle: "+x+z", coverage: viewCov({ a: [100, 0.9] }) },
+    { angle: "-x-z", coverage: viewCov({ a: [90, 0.9] }) },
+  ];
+  const r = visibilityAwareCoverage({ views, zones: Z2, exposure: viewCov({ a: [300, 1] }) });
+  assert.equal(r.visibility.byBand.b.status, "not-on-skin");
+  assert.equal(r.visibility.passed, true, "absence is named, not failed — the proportion check owns the form defect");
+  for (const v of r.views) {
+    assert.equal(v.aware.passed, true);
+    assert.equal(v.aware.byZone.b.status, "not-visible-from-view");
+    assert.equal(v.legacy.passed, false, "legacy still reports the refusal arithmetic");
+  }
+});
+
+test("V5 a band the view CAN see keeps failing when under threshold (visibility pardons only invisibility)", () => {
+  // the cottage-baseline shape: band1 visible (t290) at fraction 0 — must STILL fail
+  const views = [{ angle: "+x+z", coverage: viewCov({ a: [277, 0.581], b: [290, 0] }) }];
+  const r = visibilityAwareCoverage({ views, zones: Z2, exposure: viewCov({ a: [900, 1], b: [800, 1] }) });
+  assert.equal(r.views[0].aware.passed, false);
+  assert.deepEqual(r.views[0].aware.failures.map((f) => f.zone), ["b"]);
+});
+
+test("V6 monotone by structure: legacy pass ⇒ aware pass, view by view, across statuses and metrics", () => {
+  const grids = [
+    viewCov({ a: [100, 0.9], b: [50, 0.51] }),
+    viewCov({ a: [100, 0.49], b: [0, null] }),
+    viewCov({ a: [0, null], b: [0, null] }),
+    viewCov({ a: [10, 0.5], b: [3, 1] }),
+  ];
+  for (const exposure of [viewCov({}), viewCov({ a: [5, 1] }), viewCov({ a: [5, 1], b: [5, 1] })]) {
+    const r = visibilityAwareCoverage({ views: grids.map((coverage, i) => ({ angle: `v${i}`, coverage })), zones: Z2, exposure });
+    for (const v of r.views) {
+      if (v.legacy.passed) assert.equal(v.aware.passed, true, `${v.angle}: legacy pass ⇒ aware pass`);
+    }
+  }
+});
+
+test("V7 metric 'own' is forwarded; both arithmetics use it; misuse throws", () => {
+  const rec = { a: { total: 100, byBlock: {}, dominant: "stone", dominantFraction: 0.2, own: ["stone", "oak_planks"], ownFraction: 0.9 } };
+  const r = visibilityAwareCoverage({
+    views: [{ angle: "+x+z", coverage: rec }], zones: { a: { dominant: "stone", preserve: ["oak_planks"] } },
+    exposure: { a: { total: 400 } }, metric: "own",
+  });
+  assert.equal(r.views[0].aware.passed, true);
+  assert.equal(r.views[0].legacy.passed, true);
+  assert.equal(r.views[0].aware.byZone.a.fraction, 0.9);
+  assert.throws(() => visibilityAwareCoverage({ views: [], zones: Z2, exposure: {} }), /non-empty/);
+  assert.throws(() => visibilityAwareCoverage({ views: [{ angle: "+x+z", coverage: rec }, { angle: "+x+z", coverage: rec }], zones: Z2, exposure: {} }), /duplicate/);
+  assert.throws(() => visibilityAwareCoverage({ views: [{ angle: "+x+z", coverage: rec }], zones: Z2 }), /exposure/);
 });
