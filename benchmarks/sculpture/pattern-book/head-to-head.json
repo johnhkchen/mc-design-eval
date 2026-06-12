@@ -9,23 +9,23 @@
           "subject": "cottage",
           "artifact": {
             "path": "benchmarks/sculpture/workshop/cottage/final-artifact.json",
-            "sha256": "cc9530aa6d5621947a29908b6f811c7bff2ad98ec9b75153b9fb1f5fa1b26c8f"
+            "sha256": "377b65b6617e0a6993d04b94b6d7ff6cd2facb5ce64adb727f9878f69405bf14"
           },
           "decided": true,
           "passed": false,
           "refusal": null,
-          "gapCount": 0,
+          "gapCount": 11,
           "gapBudget": 2,
           "sameObject": {
-            "count": 0,
+            "count": 2,
             "total": 4
           },
           "kitPresence": {
             "ran": true,
             "passed": false,
             "gaps": [
-              "missing: spruce_planks frame @ 16/324 frame-line cells",
-              "missing: stone_bricks panel @ band0 (447 cells)"
+              "missing: spruce_planks frame @ 110/374 frame-line cells",
+              "missing: stone_bricks panel @ band0 (499 cells)"
             ],
             "reason": null
           },
@@ -38,30 +38,89 @@
             {
               "angle": "+x+z",
               "azimuthDeg": 45,
-              "outcome": "coverage-rejected",
-              "gaps": [],
-              "coveragePassed": false
+              "outcome": "same object",
+              "gaps": [
+                {
+                  "severity": "minor",
+                  "attribute": "material zoning",
+                  "region": "upper storey walls"
+                },
+                {
+                  "severity": "minor",
+                  "attribute": "massing",
+                  "region": "overall massing and roof footprint"
+                },
+                {
+                  "severity": "minor",
+                  "attribute": "palette",
+                  "region": "chimney"
+                }
+              ],
+              "coveragePassed": true
             },
             {
               "angle": "+x-z",
               "azimuthDeg": 135,
-              "outcome": "coverage-rejected",
-              "gaps": [],
-              "coveragePassed": false
+              "outcome": "same object",
+              "gaps": [
+                {
+                  "severity": "minor",
+                  "attribute": "palette",
+                  "region": "rooftop chimney"
+                },
+                {
+                  "severity": "minor",
+                  "attribute": "material zoning",
+                  "region": "upper-storey walls"
+                }
+              ],
+              "coveragePassed": true
             },
             {
               "angle": "-x-z",
               "azimuthDeg": 225,
-              "outcome": "coverage-rejected",
-              "gaps": [],
-              "coveragePassed": false
+              "outcome": "drifted",
+              "gaps": [
+                {
+                  "severity": "major",
+                  "attribute": "material zoning",
+                  "region": "walls (entire wall surface)"
+                },
+                {
+                  "severity": "major",
+                  "attribute": "massing",
+                  "region": "overall building height vs roof"
+                },
+                {
+                  "severity": "minor",
+                  "attribute": "palette",
+                  "region": "rooftop chimney"
+                }
+              ],
+              "coveragePassed": true
             },
             {
               "angle": "-x+z",
               "azimuthDeg": 315,
-              "outcome": "coverage-rejected",
-              "gaps": [],
-              "coveragePassed": false
+              "outcome": "drifted",
+              "gaps": [
+                {
+                  "severity": "major",
+                  "attribute": "massing",
+                  "region": "roof vs walls overall"
+                },
+                {
+                  "severity": "major",
+                  "attribute": "material zoning",
+                  "region": "ground storey and wall framing"
+                },
+                {
+                  "severity": "minor",
+                  "attribute": "palette",
+                  "region": "rooftop chimney"
+                }
+              ],
+              "coveragePassed": true
             }
           ],
           "sheet": "pr/assets/frames/multi-angle-cottage-patternbook.png",
@@ -70,26 +129,26 @@
               "rounds": 6
             },
             "workshop": {
-              "outcome": "done",
+              "outcome": "budget-exhausted",
               "rounds": {
                 "used": 6,
                 "budget": 6
               },
-              "accepted": 5,
-              "rolledBack": 0,
+              "accepted": 1,
+              "rolledBack": 1,
               "conformance": {
                 "first": {
                   "passed": 6,
-                  "findings": 0
+                  "findings": 2
                 },
                 "final": {
                   "passed": 6,
-                  "findings": 0
+                  "findings": 2
                 },
-                "finalPassed": true
+                "finalPassed": false
               }
             },
-            "seedCells": 4993,
+            "seedCells": 7803,
             "recognitionAsks": {
               "askCount": 1,
               "budget": 3,
@@ -219,8 +278,8 @@
         }
       ],
       "deltas": {
-        "gapCount": -10,
-        "sameObject": -2
+        "gapCount": 1,
+        "sameObject": 0
       }
     },
     {
@@ -231,7 +290,7 @@
           "subject": "barn",
           "artifact": {
             "path": "benchmarks/sculpture/workshop/barn/final-artifact.json",
-            "sha256": "91ee4b2e7b6dc2107e949303f919fb3c4e5dfb51eb245c79627f7a1f6dc29185"
+            "sha256": "58bc3725dbab97228bd60c8eb5ec78594729759ef46b28e983666bcd3444ae1c"
           },
           "decided": true,
           "passed": false,
@@ -262,12 +321,12 @@
                 {
                   "severity": "minor",
                   "attribute": "material zoning",
-                  "region": "long wall windows"
+                  "region": "long wall openings"
                 },
                 {
                   "severity": "minor",
                   "attribute": "form",
-                  "region": "roof eave overhang"
+                  "region": "gable apex trim"
                 }
               ],
               "coveragePassed": true
@@ -279,13 +338,13 @@
               "gaps": [
                 {
                   "severity": "minor",
-                  "attribute": "form",
-                  "region": "roof pitch / apex"
+                  "attribute": "material zoning",
+                  "region": "long side wall windows"
                 },
                 {
                   "severity": "minor",
-                  "attribute": "material zoning",
-                  "region": "long wall openings (windows)"
+                  "attribute": "form",
+                  "region": "roof pitch slightly shallower than concept gable"
                 }
               ],
               "coveragePassed": true
@@ -297,13 +356,13 @@
               "gaps": [
                 {
                   "severity": "minor",
-                  "attribute": "massing",
-                  "region": "roof"
+                  "attribute": "palette",
+                  "region": "long roof slope"
                 },
                 {
                   "severity": "minor",
-                  "attribute": "form",
-                  "region": "long wall windows"
+                  "attribute": "material zoning",
+                  "region": "side wall openings"
                 }
               ],
               "coveragePassed": true
@@ -315,13 +374,13 @@
               "gaps": [
                 {
                   "severity": "minor",
-                  "attribute": "form",
-                  "region": "roof ridge and pitch"
+                  "attribute": "massing",
+                  "region": "long side wall"
                 },
                 {
                   "severity": "minor",
-                  "attribute": "material zoning",
-                  "region": "long wall openings (windows vs concept's doored stone wall)"
+                  "attribute": "form",
+                  "region": "wall openings"
                 }
               ],
               "coveragePassed": true
@@ -333,26 +392,26 @@
               "rounds": 6
             },
             "workshop": {
-              "outcome": "budget-exhausted",
+              "outcome": "done",
               "rounds": {
-                "used": 6,
+                "used": 3,
                 "budget": 6
               },
-              "accepted": 0,
-              "rolledBack": 5,
+              "accepted": 2,
+              "rolledBack": 0,
               "conformance": {
                 "first": {
-                  "passed": 6,
+                  "passed": 7,
                   "findings": 0
                 },
                 "final": {
-                  "passed": 6,
+                  "passed": 7,
                   "findings": 0
                 },
                 "finalPassed": true
               }
             },
-            "seedCells": 10066,
+            "seedCells": 11594,
             "recognitionAsks": {
               "askCount": 3,
               "budget": 3,

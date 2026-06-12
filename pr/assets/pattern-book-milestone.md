@@ -9,7 +9,7 @@ path's project best (the E-29/T-122 generated chain). The sheet is the verdict a
 | pattern-book | metrology best (generated) |
 | --- | --- |
 | ![cottage patternbook](frames/multi-angle-cottage-patternbook.png) | ![cottage generated](frames/multi-angle-cottage-generated.png) |
-| patternbook: FAIL — gaps 0/2, same-object 0/4 | generated: FAIL — gaps 10/2, same-object 2/4 |
+| patternbook: FAIL — gaps 11/2, same-object 2/4 | generated: FAIL — gaps 10/2, same-object 2/4 |
 
 ## barn
 

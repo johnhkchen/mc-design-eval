@@ -1,0 +1,564 @@
+{
+  "schema": "proportion-milestone/v1",
+  "ticket": "T-138-01",
+  "baselines": {
+    "path": "benchmarks/sculpture/pattern-book/proportion-baselines.json",
+    "note": "pre-rotation quotes — the re-runs retire these pins; the bytes remain in git history at these shas"
+  },
+  "subjects": [
+    {
+      "runKey": "barn",
+      "subject": "barn",
+      "pack": "rustic",
+      "gateSlug": "barn-patternbook",
+      "proportionsDeclared": {
+        "schema": "silhouette-proportion/v1",
+        "targets": {
+          "ridgeToEave": 2.1,
+          "roofShare": 0.5238,
+          "aspect": 1.8462
+        },
+        "sources": {
+          "ridgeToEave": "sketch",
+          "roofShare": "sketch",
+          "aspect": "sketch"
+        },
+        "tolerance": 0.15
+      },
+      "ratios": {
+        "targets": {
+          "ridgeToEave": 2.1,
+          "roofShare": 0.5238,
+          "aspect": 1.8462
+        },
+        "rows": [
+          {
+            "round": 0,
+            "ridgeToEave": 2.4,
+            "roofShare": 0.5833,
+            "aspect": 1.8462
+          },
+          {
+            "round": 1,
+            "ridgeToEave": 2.0833,
+            "roofShare": 0.52,
+            "aspect": 2
+          },
+          {
+            "round": 2,
+            "ridgeToEave": 2.1667,
+            "roofShare": 0.5385,
+            "aspect": 1.8462
+          },
+          {
+            "round": 3,
+            "ridgeToEave": 2.1667,
+            "roofShare": 0.5385,
+            "aspect": 1.8462
+          }
+        ],
+        "deltas": {
+          "ridgeToEave": {
+            "baseline": 2.4444,
+            "seed": 2.4,
+            "final": 2.1667,
+            "target": 2.1,
+            "deltaRelBaseline": 0.164,
+            "deltaRelFinal": 0.0318
+          },
+          "roofShare": {
+            "baseline": 0.5909,
+            "seed": 0.5833,
+            "final": 0.5385,
+            "target": 0.5238,
+            "deltaRelBaseline": 0.1281,
+            "deltaRelFinal": 0.0281
+          },
+          "aspect": {
+            "baseline": 2,
+            "seed": 1.8462,
+            "final": 1.8462,
+            "target": 1.8462,
+            "deltaRelBaseline": 0.0833,
+            "deltaRelFinal": 0
+          }
+        }
+      },
+      "workshop": {
+        "outcome": "done",
+        "rounds": {
+          "used": 3,
+          "budget": 6
+        },
+        "leverUse": [
+          {
+            "round": 1,
+            "kind": "geometry",
+            "action": {
+              "action": "adjust-params",
+              "elementId": "barn",
+              "massId": "barn",
+              "params": {
+                "eaveHeight": 12
+              }
+            },
+            "accepted": true,
+            "reason": "accepted"
+          },
+          {
+            "round": 2,
+            "kind": "geometry",
+            "action": {
+              "action": "adjust-params",
+              "elementId": "barn",
+              "massId": "barn",
+              "params": {
+                "depth": 26
+              }
+            },
+            "accepted": true,
+            "reason": "accepted"
+          }
+        ],
+        "finalConformance": {
+          "passed": 7,
+          "findings": 0
+        },
+        "finalConformancePassed": true
+      },
+      "verdict": {
+        "baseline": {
+          "identity": {
+            "decided": true,
+            "sameObjectViews": 4,
+            "judgedViews": 4,
+            "severities": {
+              "minor": 8
+            }
+          },
+          "budget": {
+            "gapCount": 8,
+            "gapBudget": 2,
+            "passed": false
+          },
+          "coverageFailures": []
+        },
+        "after": {
+          "identity": {
+            "decided": true,
+            "sameObjectViews": 4,
+            "judgedViews": 4,
+            "severities": {
+              "minor": 8
+            }
+          },
+          "budget": {
+            "gapCount": 8,
+            "gapBudget": 2,
+            "passed": false
+          },
+          "coverageFailures": []
+        },
+        "movement": {
+          "gapCount": {
+            "before": 8,
+            "after": 8
+          },
+          "coverageRefusedViews": {
+            "before": 0,
+            "after": 0
+          },
+          "severities": {
+            "before": {
+              "minor": 8
+            },
+            "after": {
+              "minor": 8
+            }
+          }
+        }
+      },
+      "sheet": "pr/assets/frames/multi-angle-barn-patternbook.png",
+      "concept": "benchmarks/sculpture/runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png",
+      "budgetFlag": "REVIEWER: both arithmetics above are reported, not reconciled — whether the ≤2 gap budget should pass a decided all-minor verdict is E-33's open recalibration question (Rule 3), not decided here."
+    },
+    {
+      "runKey": "barn--saltcrag",
+      "subject": "barn",
+      "pack": "saltcrag",
+      "gateSlug": "barn-patternbook-saltcrag",
+      "proportionsDeclared": {
+        "schema": "silhouette-proportion/v1",
+        "targets": {
+          "ridgeToEave": 2.1,
+          "roofShare": 0.5238,
+          "aspect": 1.8462
+        },
+        "sources": {
+          "ridgeToEave": "sketch",
+          "roofShare": "sketch",
+          "aspect": "sketch"
+        },
+        "tolerance": 0.15
+      },
+      "ratios": {
+        "targets": {
+          "ridgeToEave": 2.1,
+          "roofShare": 0.5238,
+          "aspect": 1.8462
+        },
+        "rows": [
+          {
+            "round": 0,
+            "ridgeToEave": 2.4,
+            "roofShare": 0.5833,
+            "aspect": 1.8462
+          },
+          {
+            "round": 1,
+            "ridgeToEave": 2.0833,
+            "roofShare": 0.52,
+            "aspect": 2
+          },
+          {
+            "round": 2,
+            "ridgeToEave": 2.1667,
+            "roofShare": 0.5385,
+            "aspect": 1.8462
+          },
+          {
+            "round": 3,
+            "ridgeToEave": 2.1667,
+            "roofShare": 0.5385,
+            "aspect": 1.8462
+          }
+        ],
+        "deltas": {
+          "ridgeToEave": {
+            "baseline": 2.4444,
+            "seed": 2.4,
+            "final": 2.1667,
+            "target": 2.1,
+            "deltaRelBaseline": 0.164,
+            "deltaRelFinal": 0.0318
+          },
+          "roofShare": {
+            "baseline": 0.5909,
+            "seed": 0.5833,
+            "final": 0.5385,
+            "target": 0.5238,
+            "deltaRelBaseline": 0.1281,
+            "deltaRelFinal": 0.0281
+          },
+          "aspect": {
+            "baseline": 2,
+            "seed": 1.8462,
+            "final": 1.8462,
+            "target": 1.8462,
+            "deltaRelBaseline": 0.0833,
+            "deltaRelFinal": 0
+          }
+        }
+      },
+      "workshop": {
+        "outcome": "done",
+        "rounds": {
+          "used": 3,
+          "budget": 6
+        },
+        "leverUse": [
+          {
+            "round": 1,
+            "kind": "geometry",
+            "action": {
+              "action": "adjust-params",
+              "elementId": "hall",
+              "massId": "hall",
+              "params": {
+                "eaveHeight": 12
+              }
+            },
+            "accepted": true,
+            "reason": "accepted"
+          },
+          {
+            "round": 2,
+            "kind": "geometry",
+            "action": {
+              "action": "adjust-params",
+              "elementId": "hall",
+              "massId": "hall",
+              "params": {
+                "depth": 26
+              }
+            },
+            "accepted": true,
+            "reason": "accepted"
+          }
+        ],
+        "finalConformance": {
+          "passed": 7,
+          "findings": 0
+        },
+        "finalConformancePassed": true
+      },
+      "verdict": {
+        "baseline": {
+          "identity": {
+            "decided": true,
+            "sameObjectViews": 4,
+            "judgedViews": 4,
+            "severities": {
+              "minor": 8
+            }
+          },
+          "budget": {
+            "gapCount": 8,
+            "gapBudget": 2,
+            "passed": false
+          },
+          "coverageFailures": []
+        },
+        "after": {
+          "identity": {
+            "decided": true,
+            "sameObjectViews": 4,
+            "judgedViews": 4,
+            "severities": {
+              "minor": 8
+            }
+          },
+          "budget": {
+            "gapCount": 8,
+            "gapBudget": 2,
+            "passed": false
+          },
+          "coverageFailures": []
+        },
+        "movement": {
+          "gapCount": {
+            "before": 8,
+            "after": 8
+          },
+          "coverageRefusedViews": {
+            "before": 0,
+            "after": 0
+          },
+          "severities": {
+            "before": {
+              "minor": 8
+            },
+            "after": {
+              "minor": 8
+            }
+          }
+        }
+      },
+      "sheet": "pr/assets/frames/multi-angle-barn-patternbook-saltcrag.png",
+      "concept": "benchmarks/sculpture/runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png",
+      "budgetFlag": "REVIEWER: both arithmetics above are reported, not reconciled — whether the ≤2 gap budget should pass a decided all-minor verdict is E-33's open recalibration question (Rule 3), not decided here."
+    },
+    {
+      "runKey": "cottage",
+      "subject": "cottage",
+      "pack": "rustic",
+      "gateSlug": "cottage-patternbook",
+      "proportionsDeclared": {
+        "schema": "silhouette-proportion/v1",
+        "targets": {
+          "ridgeToEave": 1.4145,
+          "roofShare": 0.293,
+          "aspect": 1.1852
+        },
+        "sources": {
+          "ridgeToEave": "sketch",
+          "roofShare": "sketch",
+          "aspect": "sketch"
+        },
+        "tolerance": 0.15
+      },
+      "ratios": {
+        "targets": {
+          "ridgeToEave": 1.4145,
+          "roofShare": 0.293,
+          "aspect": 1.1852
+        },
+        "rows": [
+          {
+            "round": 0,
+            "ridgeToEave": 1.55,
+            "roofShare": 0.3548,
+            "aspect": 1.1852
+          },
+          {
+            "round": 1,
+            "ridgeToEave": 1.55,
+            "roofShare": 0.3548,
+            "aspect": 1.1852
+          },
+          {
+            "round": 2,
+            "ridgeToEave": 1.55,
+            "roofShare": 0.3548,
+            "aspect": 1.1852
+          },
+          {
+            "round": 3,
+            "ridgeToEave": 1.55,
+            "roofShare": 0.3548,
+            "aspect": 1.1852
+          },
+          {
+            "round": 4,
+            "ridgeToEave": 2.75,
+            "roofShare": 0.6364,
+            "aspect": 1.0769
+          },
+          {
+            "round": 5,
+            "ridgeToEave": 2.75,
+            "roofShare": 0.6364,
+            "aspect": 1.0769
+          },
+          {
+            "round": 6,
+            "ridgeToEave": 2.75,
+            "roofShare": 0.6364,
+            "aspect": 1.0769
+          }
+        ],
+        "deltas": {
+          "ridgeToEave": {
+            "baseline": 2.25,
+            "seed": 1.55,
+            "final": 2.75,
+            "target": 1.4145,
+            "deltaRelBaseline": 0.5907,
+            "deltaRelFinal": 0.9441
+          },
+          "roofShare": {
+            "baseline": 0.5556,
+            "seed": 0.3548,
+            "final": 0.6364,
+            "target": 0.293,
+            "deltaRelBaseline": 0.8962,
+            "deltaRelFinal": 1.172
+          },
+          "aspect": {
+            "baseline": 1.0769,
+            "seed": 1.1852,
+            "final": 1.0769,
+            "target": 1.1852,
+            "deltaRelBaseline": 0.0914,
+            "deltaRelFinal": 0.0914
+          }
+        }
+      },
+      "workshop": {
+        "outcome": "budget-exhausted",
+        "rounds": {
+          "used": 6,
+          "budget": 6
+        },
+        "leverUse": [
+          {
+            "round": 4,
+            "kind": "geometry",
+            "action": {
+              "action": "adjust-params",
+              "elementId": "main",
+              "massId": "main",
+              "params": {
+                "storeys": 3
+              }
+            },
+            "accepted": true,
+            "reason": "accepted"
+          },
+          {
+            "round": 6,
+            "kind": "geometry",
+            "action": {
+              "action": "adjust-params",
+              "elementId": "main",
+              "massId": "main",
+              "params": {
+                "storeys": 4,
+                "storeyHeight": 4
+              }
+            },
+            "accepted": false,
+            "reason": "regressed: passed 6→6, findings 2→2; ridgeToEave Δ 2.8883→3.5953 beyond tolerance"
+          }
+        ],
+        "finalConformance": {
+          "passed": 6,
+          "findings": 2
+        },
+        "finalConformancePassed": false
+      },
+      "verdict": {
+        "baseline": {
+          "identity": {
+            "decided": true,
+            "sameObjectViews": 0,
+            "judgedViews": 0,
+            "severities": {}
+          },
+          "budget": {
+            "gapCount": 0,
+            "gapBudget": 2,
+            "passed": false
+          },
+          "coverageFailures": [
+            "+x+z",
+            "+x-z",
+            "-x-z",
+            "-x+z"
+          ]
+        },
+        "after": {
+          "identity": {
+            "decided": true,
+            "sameObjectViews": 2,
+            "judgedViews": 4,
+            "severities": {
+              "minor": 7,
+              "major": 4
+            }
+          },
+          "budget": {
+            "gapCount": 11,
+            "gapBudget": 2,
+            "passed": false
+          },
+          "coverageFailures": []
+        },
+        "movement": {
+          "gapCount": {
+            "before": 0,
+            "after": 11
+          },
+          "coverageRefusedViews": {
+            "before": 4,
+            "after": 0
+          },
+          "severities": {
+            "before": {},
+            "after": {
+              "minor": 7,
+              "major": 4
+            }
+          }
+        }
+      },
+      "sheet": "pr/assets/frames/multi-angle-cottage-patternbook.png",
+      "concept": "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
+      "budgetFlag": "REVIEWER: both arithmetics above are reported, not reconciled — whether the ≤2 gap budget should pass a decided all-minor verdict is E-33's open recalibration question (Rule 3), not decided here."
+    }
+  ],
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  }
+}
