@@ -1,6 +1,6 @@
 {
   "schema": "pattern-book-chain/v1",
-  "ticket": "T-138-01",
+  "ticket": "T-143-01",
   "subject": "barn",
   "runKey": "barn--saltcrag",
   "pack": "saltcrag",
@@ -149,18 +149,18 @@
     "workshop": {
       "ledger": {
         "path": "benchmarks/sculpture/workshop/barn--saltcrag.json",
-        "sha256": "ef93290f0c3b25721bf1cac2f12b959575729cff3cff000ad370e8e62374c47c"
+        "sha256": "74395cbe3ea7657d0a670ce5bc1a4d5ec2cea873fa2bf1119a48023789e34de7"
       },
       "final": {
         "path": "benchmarks/sculpture/workshop/barn--saltcrag/final-artifact.json",
-        "sha256": "15554d3b10a3217b352bce3653adad3efa93d23aa20caf7b6ec50f131f61d958"
+        "sha256": "5185c878ce5e649f5d1c77633b713332dc53ae1d1a34ff003bbef0ed72125d0e"
       },
       "outcome": "done",
       "rounds": {
-        "used": 3,
+        "used": 2,
         "budget": 6
       },
-      "accepted": 2,
+      "accepted": 1,
       "rolledBack": 0,
       "unavailable": 0,
       "applyFailed": 0,
@@ -178,7 +178,7 @@
     },
     "plan": {
       "path": "benchmarks/sculpture/workshop/barn--saltcrag/component-plan.json",
-      "sha256": "4f015ae6de369fc2f08859c3e3c0e9c51be4fade52ef845d048a86758ac3c983"
+      "sha256": "9c8d016892ee68d5a3082c200cb6d98151db67c24c6e3a19431df1afcaca6ca1"
     }
   },
   "generalization": {

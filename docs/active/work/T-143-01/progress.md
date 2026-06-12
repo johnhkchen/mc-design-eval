@@ -45,4 +45,27 @@ live re-run changes only the workshop trajectory + the judge verdict; the seed p
   under v2 (4/4 same-object, all-minor). AC3-Q2: pitch stays **class 1** (the shallowness is a
   minor form gap, not a major; the seed pitch target reproduced class 1).
 
-## Step 2 — barn (saltcrag) — IN PROGRESS
+## Step 2 — barn (saltcrag) — DONE (committed)
+
+- **Chain**: `… --pack packs/saltcrag.json --ticket T-143-01 --rotate-pins` → workshop converged
+  **2/6 rounds**, conformance PASS (7 checks, 0 findings), grep clean. Seed byte-identical.
+- **Judge** (live, 4 azimuths): **all 4 views "same object"** → **4/4 same-object**, 8 minor / 0
+  major (material-zoning@windows/doors/courses, palette@roof). **Resemblance v2: PASS**
+  (`multi-angle-budget/v2`, minorBudget 10); **legacy: FAIL** (8 > 2) beside.
+- **DEVIATION / honest finding — kit-aware verdict: FAIL.** The gate's T-100 kit-presence
+  companion flags `panel:band0 cobblestone`: 3337 sites, **5 missing (foreign) cells**, residue
+  tolerance 0 → gating FAIL. So the *resemblance/proportion* (the straight-ruler question) passes
+  cleanly, but the composite kit-aware verdict is FAIL on a 0.15% band0 dressing residue. This is
+  the "dressing breaks runs" residue family (own-vocab specks), trajectory-dependent (the fast 2/6
+  convergence left band0 marginally under-dressed). **Per AC2 the judge run is singular — not
+  re-rolled.** Recorded as-is; flagged as an open concern in review.md. Orthogonal to the epic's
+  proportion finding (resemblance + ratios), which is clean.
+- **Witness (rotate)**: visibility `barn-patternbook-saltcrag` = legacy 4/4 → aware 4/4 (visibility
+  is per-view own-coverage, clean — distinct from the band0 kit-presence census).
+  No proportion witness (geometry identical to rustic barn; ratios carried by chain/milestone).
+- **Repro (after)**: `patternbook --repro` byte-identical; `visibility --repro` byte-identical;
+  `gate --offline` self-consistent (recorded outcome PASS → kit-aware FAIL, all 11 checks OK).
+- **Answer (AC3-Q3, saltcrag)**: resemblance records the pass (4/4 same-object v2 PASS); the
+  composite verdict trips a marginal 5-cell band0 kit-presence gate — recorded honestly.
+
+## Step 3 — cottage (the headline) — IN PROGRESS

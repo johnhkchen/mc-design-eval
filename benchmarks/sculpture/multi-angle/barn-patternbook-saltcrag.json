@@ -4,7 +4,7 @@
   "label": "patternbook-saltcrag",
   "artifact": {
     "path": "benchmarks/sculpture/workshop/barn--saltcrag/final-artifact.json",
-    "sha256": "15554d3b10a3217b352bce3653adad3efa93d23aa20caf7b6ec50f131f61d958"
+    "sha256": "5185c878ce5e649f5d1c77633b713332dc53ae1d1a34ff003bbef0ed72125d0e"
   },
   "contract": {
     "azimuths": [
@@ -17,6 +17,7 @@
     "width": 512,
     "height": 512,
     "gapBudget": 2,
+    "minorBudget": 10,
     "coverageThreshold": 0.5,
     "note": "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them"
   },
@@ -114,7 +115,7 @@
           "band0": {
             "dominant": "cobblestone",
             "fraction": 0.995,
-            "total": 876,
+            "total": 852,
             "passed": true,
             "metric": "own",
             "own": [
@@ -128,7 +129,7 @@
           "roof": {
             "dominant": "dark_oak_planks",
             "fraction": 1,
-            "total": 868,
+            "total": 793,
             "passed": true,
             "metric": "own",
             "own": [
@@ -137,7 +138,7 @@
               "oak_planks",
               "dark_oak_stairs"
             ],
-            "dominantFraction": 0.266
+            "dominantFraction": 0.259
           }
         },
         "legacy": {
@@ -150,35 +151,35 @@
         "verdict": "same object",
         "gaps": [
           {
-            "region": "long wall openings",
-            "attribute": "form",
+            "region": "long stone wall windows",
+            "attribute": "material zoning",
             "severity": "minor"
           },
           {
-            "region": "wall base plinth/quoin dressing",
-            "attribute": "material zoning",
+            "region": "roof surface",
+            "attribute": "palette",
             "severity": "minor"
           }
         ],
-        "rationale": "Same long gable barn with dark-wood roof, light cobblestone walls, and matching massing/proportions as the concept and mesh silhouette; only the long-wall openings read as small windows rather than the concept's prominent wagon doors and the stone-brick base dressing is less distinct from this angle."
+        "rationale": "Elongated stone-walled barn with a steep dark-wood gable roof reads as the same building from azimuth 45°, matching the concept's massing and the mesh silhouette with only minor window and roof-tone differences."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 11306,
-          "output_tokens": 741,
-          "cost_usd": 0.202517
+          "input_tokens": 10817,
+          "output_tokens": 506,
+          "cost_usd": 0.198267
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"same object\",\"gaps\":[{\"region\":\"long wall openings\",\"attribute\":\"form\",\"severity\":\"minor\"},{\"region\":\"wall base plinth/quoin dressing\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"Same long gable barn with dark-wood roof, light cobblestone walls, and matching massing/proportions as the concept and mesh silhouette; only the long-wall openings read as small windows rat",
+          "rawReply": "{\"verdict\":\"same object\",\"gaps\":[{\"region\":\"long stone wall windows\",\"attribute\":\"material zoning\",\"severity\":\"minor\"},{\"region\":\"roof surface\",\"attribute\":\"palette\",\"severity\":\"minor\"}],\"rationale\":\"Elongated stone-walled barn with a steep dark-wood gable roof reads as the same building from azimuth 45°, matching the concept's massing and the mesh silhouette with only minor window and roof-tone d",
           "usage": {
-            "input_tokens": 11306,
-            "output_tokens": 741,
-            "cost_usd": 0.202517
+            "input_tokens": 10817,
+            "output_tokens": 506,
+            "cost_usd": 0.198267
           },
           "source": "live"
         }
@@ -198,7 +199,7 @@
           "band0": {
             "dominant": "cobblestone",
             "fraction": 1,
-            "total": 876,
+            "total": 852,
             "passed": true,
             "metric": "own",
             "own": [
@@ -212,7 +213,7 @@
           "roof": {
             "dominant": "dark_oak_planks",
             "fraction": 1,
-            "total": 868,
+            "total": 793,
             "passed": true,
             "metric": "own",
             "own": [
@@ -221,7 +222,7 @@
               "oak_planks",
               "dark_oak_stairs"
             ],
-            "dominantFraction": 0.266
+            "dominantFraction": 0.259
           }
         },
         "legacy": {
@@ -234,35 +235,35 @@
         "verdict": "same object",
         "gaps": [
           {
-            "region": "stone walls",
-            "attribute": "palette",
+            "region": "long wall doors and window openings",
+            "attribute": "material zoning",
             "severity": "minor"
           },
           {
-            "region": "roof eaves along the long side",
-            "attribute": "form",
+            "region": "roof surface",
+            "attribute": "palette",
             "severity": "minor"
           }
         ],
-        "rationale": "The Minecraft barn matches the reference massing, steep gable roof, and stone-wall/brown-roof zoning from this azimuth, with only slightly lighter wall stone and a flusher eave as cosmetic differences."
+        "rationale": "The elongated stone-walled barn with a steep dark-wood gable roof matches the concept and mesh massing from this azimuth, reading as the same building with only minor wall-detail and roof-tone differences."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10719,
-          "output_tokens": 506,
-          "cost_usd": 0.19370700000000002
+          "input_tokens": 10817,
+          "output_tokens": 395,
+          "cost_usd": 0.195492
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"same object\",\"gaps\":[{\"region\":\"stone walls\",\"attribute\":\"palette\",\"severity\":\"minor\"},{\"region\":\"roof eaves along the long side\",\"attribute\":\"form\",\"severity\":\"minor\"}],\"rationale\":\"The Minecraft barn matches the reference massing, steep gable roof, and stone-wall/brown-roof zoning from this azimuth, with only slightly lighter wall stone and a flusher eave as cosmetic differences.\"}",
+          "rawReply": "{\"verdict\":\"same object\",\"gaps\":[{\"region\":\"long wall doors and window openings\",\"attribute\":\"material zoning\",\"severity\":\"minor\"},{\"region\":\"roof surface\",\"attribute\":\"palette\",\"severity\":\"minor\"}],\"rationale\":\"The elongated stone-walled barn with a steep dark-wood gable roof matches the concept and mesh massing from this azimuth, reading as the same building with only minor wall-detail and roof-",
           "usage": {
-            "input_tokens": 10719,
-            "output_tokens": 506,
-            "cost_usd": 0.19370700000000002
+            "input_tokens": 10817,
+            "output_tokens": 395,
+            "cost_usd": 0.195492
           },
           "source": "live"
         }
@@ -282,7 +283,7 @@
           "band0": {
             "dominant": "cobblestone",
             "fraction": 0.999,
-            "total": 876,
+            "total": 852,
             "passed": true,
             "metric": "own",
             "own": [
@@ -291,12 +292,12 @@
               "stone_bricks",
               "oak_planks"
             ],
-            "dominantFraction": 0.916
+            "dominantFraction": 0.915
           },
           "roof": {
             "dominant": "dark_oak_planks",
             "fraction": 1,
-            "total": 868,
+            "total": 793,
             "passed": true,
             "metric": "own",
             "own": [
@@ -305,7 +306,7 @@
               "oak_planks",
               "dark_oak_stairs"
             ],
-            "dominantFraction": 0.266
+            "dominantFraction": 0.259
           }
         },
         "legacy": {
@@ -318,35 +319,35 @@
         "verdict": "same object",
         "gaps": [
           {
-            "region": "long side wall",
-            "attribute": "massing",
+            "region": "roof surface",
+            "attribute": "palette",
             "severity": "minor"
           },
           {
-            "region": "gable-end wall openings (door/window punches)",
-            "attribute": "form",
+            "region": "long wall lower courses in shadow",
+            "attribute": "material zoning",
             "severity": "minor"
           }
         ],
-        "rationale": "The build reads as the same long stone barn with a steep brown plank roof and stone walls matching the concept and mesh silhouette from this angle, with only cosmetic differences in pilaster rhythm and opening detail."
+        "rationale": "The elongated stone-walled barn with a steep dark-wood gable roof matches the concept's form, massing, and palette when seen from this rear-oblique angle, with only a slightly darker roof tone."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 11222,
-          "output_tokens": 453,
-          "cost_usd": 0.194897
+          "input_tokens": 10817,
+          "output_tokens": 527,
+          "cost_usd": 0.198792
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"same object\",\"gaps\":[{\"region\":\"long side wall\",\"attribute\":\"massing\",\"severity\":\"minor\"},{\"region\":\"gable-end wall openings (door/window punches)\",\"attribute\":\"form\",\"severity\":\"minor\"}],\"rationale\":\"The build reads as the same long stone barn with a steep brown plank roof and stone walls matching the concept and mesh silhouette from this angle, with only cosmetic differences in pilas",
+          "rawReply": "{\"verdict\":\"same object\",\"gaps\":[{\"region\":\"roof surface\",\"attribute\":\"palette\",\"severity\":\"minor\"},{\"region\":\"long wall lower courses in shadow\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The elongated stone-walled barn with a steep dark-wood gable roof matches the concept's form, massing, and palette when seen from this rear-oblique angle, with only a slightly darker roof to",
           "usage": {
-            "input_tokens": 11222,
-            "output_tokens": 453,
-            "cost_usd": 0.194897
+            "input_tokens": 10817,
+            "output_tokens": 527,
+            "cost_usd": 0.198792
           },
           "source": "live"
         }
@@ -366,7 +367,7 @@
           "band0": {
             "dominant": "cobblestone",
             "fraction": 0.994,
-            "total": 876,
+            "total": 852,
             "passed": true,
             "metric": "own",
             "own": [
@@ -380,7 +381,7 @@
           "roof": {
             "dominant": "dark_oak_planks",
             "fraction": 1,
-            "total": 868,
+            "total": 793,
             "passed": true,
             "metric": "own",
             "own": [
@@ -389,7 +390,7 @@
               "oak_planks",
               "dark_oak_stairs"
             ],
-            "dominantFraction": 0.266
+            "dominantFraction": 0.259
           }
         },
         "legacy": {
@@ -402,35 +403,35 @@
         "verdict": "same object",
         "gaps": [
           {
-            "region": "long wall apertures",
+            "region": "long wall windows",
             "attribute": "material zoning",
             "severity": "minor"
           },
           {
-            "region": "roof ridge crispness",
-            "attribute": "form",
+            "region": "roof surface",
+            "attribute": "palette",
             "severity": "minor"
           }
         ],
-        "rationale": "The Minecraft build matches the concept and mesh in massing, steep brown gable roof and grey stone walls from this angle, with only minor differences in how wall openings read."
+        "rationale": "Elongated stone-walled barn with a steep dark-wood gable roof reads as the same building seen from azimuth 315°, with only minor window and roof-tone differences."
       },
       "judge": {
         "model": "claude-opus-4-8",
         "usage": {
-          "input_tokens": 10695,
-          "output_tokens": 421,
-          "cost_usd": 0.19146200000000002
+          "input_tokens": 10817,
+          "output_tokens": 140,
+          "cost_usd": 0.18911699999999998
         }
       },
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "{\"verdict\":\"same object\",\"gaps\":[{\"region\":\"long wall apertures\",\"attribute\":\"material zoning\",\"severity\":\"minor\"},{\"region\":\"roof ridge crispness\",\"attribute\":\"form\",\"severity\":\"minor\"}],\"rationale\":\"The Minecraft build matches the concept and mesh in massing, steep brown gable roof and grey stone walls from this angle, with only minor differences in how wall openings read.\"}",
+          "rawReply": "```json\n{\"verdict\":\"same object\",\"gaps\":[{\"region\":\"long wall windows\",\"attribute\":\"material zoning\",\"severity\":\"minor\"},{\"region\":\"roof surface\",\"attribute\":\"palette\",\"severity\":\"minor\"}],\"rationale\":\"Elongated stone-walled barn with a steep dark-wood gable roof reads as the same building seen from azimuth 315°, with only minor window and roof-tone differences.\"}\n```",
           "usage": {
-            "input_tokens": 10695,
-            "output_tokens": 421,
-            "cost_usd": 0.19146200000000002
+            "input_tokens": 10817,
+            "output_tokens": 140,
+            "cost_usd": 0.18911699999999998
           },
           "source": "live"
         }
@@ -440,57 +441,61 @@
   "aggregate": {
     "schema": "multi-angle-gate/v1",
     "decided": true,
-    "passed": false,
+    "passed": true,
+    "policy": "multi-angle-budget/v2",
+    "majorCount": 0,
+    "minorCount": 8,
+    "minorBudget": 10,
     "gapCount": 8,
     "gapBudget": 2,
     "gaps": [
       {
         "angle": "+x+z",
-        "region": "long wall openings",
-        "attribute": "form"
-      },
-      {
-        "angle": "+x+z",
-        "region": "wall base plinth/quoin dressing",
+        "region": "long stone wall windows",
         "attribute": "material zoning"
       },
       {
-        "angle": "+x-z",
-        "region": "stone walls",
+        "angle": "+x+z",
+        "region": "roof surface",
         "attribute": "palette"
       },
       {
         "angle": "+x-z",
-        "region": "roof eaves along the long side",
-        "attribute": "form"
+        "region": "long wall doors and window openings",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "+x-z",
+        "region": "roof surface",
+        "attribute": "palette"
       },
       {
         "angle": "-x-z",
-        "region": "long side wall",
-        "attribute": "massing"
+        "region": "roof surface",
+        "attribute": "palette"
       },
       {
         "angle": "-x-z",
-        "region": "gable-end wall openings (door/window punches)",
-        "attribute": "form"
-      },
-      {
-        "angle": "-x+z",
-        "region": "long wall apertures",
+        "region": "long wall lower courses in shadow",
         "attribute": "material zoning"
       },
       {
         "angle": "-x+z",
-        "region": "roof ridge crispness",
-        "attribute": "form"
-      }
-    ],
-    "failures": [
+        "region": "long wall windows",
+        "attribute": "material zoning"
+      },
       {
-        "angle": "(all)",
-        "reason": "gap-budget"
+        "angle": "-x+z",
+        "region": "roof surface",
+        "attribute": "palette"
       }
     ],
+    "failures": [],
+    "legacy": {
+      "passed": false,
+      "gapBudget": 2,
+      "gapCount": 8
+    },
     "views": [
       {
         "angle": "+x+z",
@@ -518,7 +523,7 @@
         "feature": "panel:band0",
         "block": "cobblestone",
         "shipped": "cobblestone",
-        "sites": 3497,
+        "sites": 3337,
         "missing": 5,
         "tolerated": {
           "residue": 0
@@ -574,9 +579,9 @@
       },
       "frame": {
         "counts": {
-          "wall": 2393,
+          "wall": 2325,
           "cornerPost": 52,
-          "roofline": 508,
+          "roofline": 504,
           "floorLine": 0
         },
         "painted": 0,
@@ -589,14 +594,14 @@
         "placements": 5,
         "byZone": {
           "band0": {
-            "surface": 3497,
+            "surface": 3337,
             "filled": 5,
-            "kept": 3492
+            "kept": 3332
           },
           "roof": {
-            "surface": 976,
+            "surface": 852,
             "filled": 0,
-            "kept": 976
+            "kept": 852
           }
         }
       }
@@ -610,7 +615,7 @@
     "components": {
       "resemblance": {
         "decided": true,
-        "passed": false
+        "passed": true
       },
       "kitPresence": {
         "ran": true,
@@ -631,7 +636,7 @@
           "-x-z",
           "-x+z"
         ],
-        "exposedCells": 1713
+        "exposedCells": 1665
       },
       "roof": {
         "status": "visible",
@@ -641,7 +646,7 @@
           "-x-z",
           "-x+z"
         ],
-        "exposedCells": 2812
+        "exposedCells": 2572
       }
     },
     "failures": [],

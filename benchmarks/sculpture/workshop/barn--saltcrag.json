@@ -21,7 +21,7 @@
   },
   "packRef": {
     "path": "packs/saltcrag.json",
-    "sha256": "0f39f2d9de80882e897d9e8a733bbe967dca746a7c52d0a5d9399be268bd902d"
+    "sha256": "6c10506ec3d1cde73fd73da261c299779be2cf8557ef59d9d2fbdc2581aabf74"
   },
   "conceptRef": {
     "path": "benchmarks/sculpture/runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png",
@@ -418,31 +418,31 @@
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "Analyzing the silhouette against the declared targets: the roof is sitting too tall on the walls.\n\n- **ridge:eave** is **2.4** vs target **2.1** — off by 0.30, well beyond the 0.15 tolerance.\n- **roof share** is **0.5833** vs target **0.5238** — the roof eats too much of the elevation.\n- **aspect** 1.8462 matches exactly.\n\nBoth off-target numbers share one cause: the walls are too short under a pi",
+          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"gable roof\", \"issue\": \"roof rides too tall/steep — ridge:eave is 2.4 vs declared 2.1 and roof share 0.583 vs 0.524, both beyond the 0.15 tolerance; the concept's eave sits higher relative to the ridge\", \"severity\": \"major\" },\n      { \"region\": \"long +z wall openings\", \"issue\": \"two spruce doors read correctly but the surrounding stone-br",
           "usage": {
-            "input_tokens": 11308,
-            "cache_creation_input_tokens": 29886,
-            "cache_read_input_tokens": 47450,
-            "output_tokens": 3567,
+            "input_tokens": 10850,
+            "cache_creation_input_tokens": 28958,
+            "cache_read_input_tokens": 47885,
+            "output_tokens": 2378,
             "server_tool_use": {
               "web_search_requests": 0,
               "web_fetch_requests": 0
             },
             "service_tier": "standard",
             "cache_creation": {
-              "ephemeral_1h_input_tokens": 29886,
+              "ephemeral_1h_input_tokens": 28958,
               "ephemeral_5m_input_tokens": 0
             },
             "inference_geo": "not_available",
             "iterations": [
               {
                 "input_tokens": 2,
-                "output_tokens": 849,
-                "cache_read_input_tokens": 31626,
-                "cache_creation_input_tokens": 14084,
+                "output_tokens": 571,
+                "cache_read_input_tokens": 32061,
+                "cache_creation_input_tokens": 12721,
                 "cache_creation": {
                   "ephemeral_5m_input_tokens": 0,
-                  "ephemeral_1h_input_tokens": 14084
+                  "ephemeral_1h_input_tokens": 12721
                 },
                 "type": "message"
               }
@@ -456,30 +456,30 @@
       "critique": {
         "issues": [
           {
-            "region": "roof vs walls (overall silhouette)",
-            "issue": "ridge:eave is 2.4 against the declared 2.1 target — the gable rides too tall over short walls",
+            "region": "gable roof",
+            "issue": "roof rides too tall/steep — ridge:eave is 2.4 vs declared 2.1 and roof share 0.583 vs 0.524, both beyond the 0.15 tolerance; the concept's eave sits higher relative to the ridge",
             "severity": "major"
           },
           {
-            "region": "roof mass share",
-            "issue": "roof occupies 0.5833 of the elevation vs target 0.5238 — slightly top-heavy versus the concept",
+            "region": "long +z wall openings",
+            "issue": "two spruce doors read correctly but the surrounding stone-brick pier rhythm is slightly tighter than the concept's wider quoined bays",
             "severity": "minor"
           },
           {
-            "region": "gable-roof voxel edges",
-            "issue": "stepped stair courses on the pitch read as terracing rather than a smooth slope, inherent to voxel geometry",
+            "region": "gable end window",
+            "issue": "single -x gable window present and placed, but reads a touch high vs the concept's mid-gable slit",
             "severity": "minor"
           }
         ]
       },
       "decision": "revise",
-      "rationale": "Raising the wall (eave) height to 12 under the kept pitch-1 gable pulls ridge:eave to ~2.08 and roof share to ~0.52, both inside the 0.15 tolerance, without altering palette or opening rhythm.",
+      "rationale": "The build is clearly the same stone-walled, dark-gabled hall, but the roof is proportionally too tall; raising the eave one course pulls ridge:eave down toward the declared 2.1 and roof share toward 0.524 without touching the recognized pitchClass.",
       "action": {
         "action": "adjust-params",
         "elementId": "hall",
         "massId": "hall",
         "params": {
-          "eaveHeight": 12
+          "eaveHeight": 11
         }
       },
       "applied": {
@@ -675,31 +675,31 @@
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"overall footprint\", \"issue\": \"Aspect ratio is 2.0 against the concept's 1.846 target — the barn reads slightly too long-and-narrow versus the picture; depth can be widened to nail the proportion exactly (48/26 = 1.846).\", \"severity\": \"minor\" },\n      { \"region\": \"gable roof slopes\", \"issue\": \"Dark_oak field has visible voxel stair-steppi",
+          "rawReply": "Comparing my build against the concept across all four azimuths: the elongated stone hall reads correctly — cobblestone bays framed by stone-brick quoin dressing, the stone-brick plinth course, two spruce doors on the +z front, the steep dark gable roof, and the gable-end light slit near the apex. The conformance gate is fully green, including proportion-vs-concept, and the silhouette metrics sit ",
           "usage": {
-            "input_tokens": 11306,
-            "cache_creation_input_tokens": 15868,
+            "input_tokens": 10817,
+            "cache_creation_input_tokens": 16303,
             "cache_read_input_tokens": 15824,
-            "output_tokens": 1754,
+            "output_tokens": 2489,
             "server_tool_use": {
               "web_search_requests": 0,
               "web_fetch_requests": 0
             },
             "service_tier": "standard",
             "cache_creation": {
-              "ephemeral_1h_input_tokens": 15868,
+              "ephemeral_1h_input_tokens": 16303,
               "ephemeral_5m_input_tokens": 0
             },
             "inference_geo": "not_available",
             "iterations": [
               {
-                "input_tokens": 11306,
-                "output_tokens": 1754,
+                "input_tokens": 10817,
+                "output_tokens": 2489,
                 "cache_read_input_tokens": 15824,
-                "cache_creation_input_tokens": 15868,
+                "cache_creation_input_tokens": 16303,
                 "cache_creation": {
                   "ephemeral_5m_input_tokens": 0,
-                  "ephemeral_1h_input_tokens": 15868
+                  "ephemeral_1h_input_tokens": 16303
                 },
                 "type": "message"
               }
@@ -713,36 +713,26 @@
       "critique": {
         "issues": [
           {
-            "region": "overall footprint",
-            "issue": "Aspect ratio is 2.0 against the concept's 1.846 target — the barn reads slightly too long-and-narrow versus the picture; depth can be widened to nail the proportion exactly (48/26 = 1.846).",
+            "region": "overall silhouette",
+            "issue": "footprint aspect 2.0 vs declared 1.846 — body reads marginally longer than the concept, but within the gate's proportion-vs-concept PASS",
             "severity": "minor"
           },
           {
-            "region": "gable roof slopes",
-            "issue": "Dark_oak field has visible voxel stair-stepping on the pitch, but it matches the concept's steep gable form and palette and is inherent to voxel geometry.",
+            "region": "roof surface",
+            "issue": "dark_oak_planks field reads a touch darker/flatter than the concept's roof tone, though correct material",
             "severity": "minor"
           },
           {
-            "region": "+z wagon doors",
-            "issue": "Both spruce wagon doors and the stone-brick quoin rhythm read correctly against the concept; no divergence.",
+            "region": "front (+z) wall windows",
+            "issue": "cobble bays between quoins read as plain panels; concept's mid-bay glazing/shutter detail is faint",
             "severity": "minor"
           }
         ]
       },
-      "decision": "revise",
-      "rationale": "Everything else conforms and reads as the concept barn; widening depth to 26 brings aspect from 2.0 to 1.846, matching the declared target exactly while keeping ridge:eave and roof share in tolerance.",
-      "action": {
-        "action": "adjust-params",
-        "elementId": "hall",
-        "massId": "hall",
-        "params": {
-          "depth": 26
-        }
-      },
-      "applied": {
-        "kind": "geometry",
-        "paintPruned": 0
-      },
+      "decision": "done",
+      "rationale": "The build reads unmistakably as the concept's elongated stone hall with steep dark gable roof, quoin-framed cobble bays, plinth, twin doors, and gable slit; all conformance checks pass and silhouette metrics are in tolerance, so the residual differences are cosmetic and not worth risking the clean build.",
+      "action": null,
+      "applied": null,
       "conformance": {
         "before": {
           "schema": "pack-conformance/v1",
@@ -822,248 +812,6 @@
             }
           ]
         },
-        "after": {
-          "schema": "pack-conformance/v1",
-          "passed": true,
-          "checks": [
-            {
-              "name": "courses-even",
-              "passed": true,
-              "findings": []
-            },
-            {
-              "name": "symmetry-held",
-              "passed": true,
-              "findings": []
-            },
-            {
-              "name": "openings-rhythm",
-              "passed": true,
-              "findings": []
-            },
-            {
-              "name": "palette-in-pack",
-              "passed": true,
-              "findings": []
-            },
-            {
-              "name": "watertight",
-              "passed": true,
-              "findings": [],
-              "mouths": 0
-            },
-            {
-              "name": "single-component",
-              "passed": true,
-              "findings": [],
-              "components": 1
-            },
-            {
-              "name": "proportion-vs-concept",
-              "passed": true,
-              "findings": [],
-              "ratios": {
-                "tolerance": 0.15,
-                "rows": [
-                  {
-                    "ratio": "ridgeToEave",
-                    "measured": 2.1667,
-                    "target": 2.1,
-                    "source": "sketch",
-                    "delta": 0.0667,
-                    "excess": 0.0318,
-                    "basis": "relative",
-                    "withinTolerance": true
-                  },
-                  {
-                    "ratio": "roofShare",
-                    "measured": 0.5385,
-                    "target": 0.5238,
-                    "source": "sketch",
-                    "delta": 0.0147,
-                    "excess": 0.0281,
-                    "basis": "relative",
-                    "withinTolerance": true
-                  },
-                  {
-                    "ratio": "aspect",
-                    "measured": 1.7143,
-                    "target": 1.8462,
-                    "source": "sketch",
-                    "delta": 0.1319,
-                    "excess": 0.0714,
-                    "basis": "relative",
-                    "withinTolerance": true
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        "accepted": true,
-        "reason": "accepted"
-      }
-    },
-    {
-      "round": 3,
-      "renders": [
-        {
-          "angle": "+x+z",
-          "path": "benchmarks/sculpture/workshop/barn--saltcrag/round-3/view-+x+z.png",
-          "bytes": 107184
-        },
-        {
-          "angle": "+x-z",
-          "path": "benchmarks/sculpture/workshop/barn--saltcrag/round-3/view-+x-z.png",
-          "bytes": 110787
-        },
-        {
-          "angle": "-x-z",
-          "path": "benchmarks/sculpture/workshop/barn--saltcrag/round-3/view--x-z.png",
-          "bytes": 105557
-        },
-        {
-          "angle": "-x+z",
-          "path": "benchmarks/sculpture/workshop/barn--saltcrag/round-3/view--x+z.png",
-          "bytes": 109404
-        }
-      ],
-      "replies": [
-        {
-          "attempt": 1,
-          "parsed": true,
-          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      {\n        \"region\": \"gable roof eave/ridge\",\n        \"issue\": \"voxel stepping along the pitched eave and ridge is visible, slightly coarser than the concept's clean rake line — inherent to the gable idiom at this scale\",\n        \"severity\": \"minor\"\n      },\n      {\n        \"region\": \"+z wagon doors\",\n        \"issue\": \"the two spruce doors read a touc",
-          "usage": {
-            "input_tokens": 11306,
-            "cache_creation_input_tokens": 15868,
-            "cache_read_input_tokens": 15824,
-            "output_tokens": 669,
-            "server_tool_use": {
-              "web_search_requests": 0,
-              "web_fetch_requests": 0
-            },
-            "service_tier": "standard",
-            "cache_creation": {
-              "ephemeral_1h_input_tokens": 15868,
-              "ephemeral_5m_input_tokens": 0
-            },
-            "inference_geo": "not_available",
-            "iterations": [
-              {
-                "input_tokens": 11306,
-                "output_tokens": 669,
-                "cache_read_input_tokens": 15824,
-                "cache_creation_input_tokens": 15868,
-                "cache_creation": {
-                  "ephemeral_5m_input_tokens": 0,
-                  "ephemeral_1h_input_tokens": 15868
-                },
-                "type": "message"
-              }
-            ],
-            "speed": "standard"
-          },
-          "source": "live"
-        }
-      ],
-      "askCount": 1,
-      "critique": {
-        "issues": [
-          {
-            "region": "gable roof eave/ridge",
-            "issue": "voxel stepping along the pitched eave and ridge is visible, slightly coarser than the concept's clean rake line — inherent to the gable idiom at this scale",
-            "severity": "minor"
-          },
-          {
-            "region": "+z wagon doors",
-            "issue": "the two spruce doors read a touch narrow/recessed versus the concept's broad wagon openings, but rhythm and lintels match",
-            "severity": "minor"
-          }
-        ]
-      },
-      "decision": "done",
-      "rationale": "The build reads as the concept's cobblestone barn — stone-brick quoins, plinth, dark-oak gable roof, and the two-door +z rhythm all present — and every conformance check passes with the silhouette ratios (ridge:eave 2.1667, roof share 0.5385, aspect 1.8462) inside the 0.15 tolerance; the only remaining differences are unavoidable voxel-stepping artifacts that no sanctioned action could fix without regressing a passing gate.",
-      "action": null,
-      "applied": null,
-      "conformance": {
-        "before": {
-          "schema": "pack-conformance/v1",
-          "passed": true,
-          "checks": [
-            {
-              "name": "courses-even",
-              "passed": true,
-              "findings": []
-            },
-            {
-              "name": "symmetry-held",
-              "passed": true,
-              "findings": []
-            },
-            {
-              "name": "openings-rhythm",
-              "passed": true,
-              "findings": []
-            },
-            {
-              "name": "palette-in-pack",
-              "passed": true,
-              "findings": []
-            },
-            {
-              "name": "watertight",
-              "passed": true,
-              "findings": [],
-              "mouths": 0
-            },
-            {
-              "name": "single-component",
-              "passed": true,
-              "findings": [],
-              "components": 1
-            },
-            {
-              "name": "proportion-vs-concept",
-              "passed": true,
-              "findings": [],
-              "ratios": {
-                "tolerance": 0.15,
-                "rows": [
-                  {
-                    "ratio": "ridgeToEave",
-                    "measured": 2.1667,
-                    "target": 2.1,
-                    "source": "sketch",
-                    "delta": 0.0667,
-                    "excess": 0.0318,
-                    "basis": "relative",
-                    "withinTolerance": true
-                  },
-                  {
-                    "ratio": "roofShare",
-                    "measured": 0.5385,
-                    "target": 0.5238,
-                    "source": "sketch",
-                    "delta": 0.0147,
-                    "excess": 0.0281,
-                    "basis": "relative",
-                    "withinTolerance": true
-                  },
-                  {
-                    "ratio": "aspect",
-                    "measured": 1.7143,
-                    "target": 1.8462,
-                    "source": "sketch",
-                    "delta": 0.1319,
-                    "excess": 0.0714,
-                    "basis": "relative",
-                    "withinTolerance": true
-                  }
-                ]
-              }
-            }
-          ]
-        },
         "after": null,
         "accepted": true,
         "reason": "done-declared"
@@ -1072,7 +820,7 @@
   ],
   "final": {
     "outcome": "done",
-    "rounds": 3,
+    "rounds": 2,
     "conformance": {
       "schema": "pack-conformance/v1",
       "passed": true,
@@ -1118,31 +866,31 @@
             "rows": [
               {
                 "ratio": "ridgeToEave",
-                "measured": 2.1667,
+                "measured": 2.0833,
                 "target": 2.1,
                 "source": "sketch",
-                "delta": 0.0667,
-                "excess": 0.0318,
+                "delta": 0.0167,
+                "excess": 0.008,
                 "basis": "relative",
                 "withinTolerance": true
               },
               {
                 "ratio": "roofShare",
-                "measured": 0.5385,
+                "measured": 0.52,
                 "target": 0.5238,
                 "source": "sketch",
-                "delta": 0.0147,
-                "excess": 0.0281,
+                "delta": 0.0038,
+                "excess": 0.0073,
                 "basis": "relative",
                 "withinTolerance": true
               },
               {
                 "ratio": "aspect",
-                "measured": 1.7143,
+                "measured": 1.8462,
                 "target": 1.8462,
                 "source": "sketch",
-                "delta": 0.1319,
-                "excess": 0.0714,
+                "delta": 0,
+                "excess": 0,
                 "basis": "relative",
                 "withinTolerance": true
               }
