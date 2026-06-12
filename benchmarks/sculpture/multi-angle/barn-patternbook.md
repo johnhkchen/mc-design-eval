@@ -4,14 +4,14 @@
 
 **The sheet is the verdict artifact** (E-25 Rule 1); this table is support.
 
-Artifact: `benchmarks/sculpture/workshop/barn/final-artifact.json` (sha256 `91ee4b2e7b6d…`) · zones: concept · contract: +x+z, +x-z, -x-z, -x+z @ 30°, 512², coverage ≥ 0.5, gap budget 2
+Artifact: `benchmarks/sculpture/workshop/barn/final-artifact.json` (sha256 `58bc3725dbab…`) · zones: concept · contract: +x+z, +x-z, -x-z, -x+z @ 30°, 512², coverage ≥ 0.5, gap budget 2
 
 | view | azimuth | rendered | T-088 coverage | judge verdict |
 |---|---|---|---|---|
-| +x+z | 45° | yes | pass | same object<br>minor material zoning @ long wall windows<br>minor form @ roof eave overhang |
-| +x-z | 135° | yes | pass | same object<br>minor form @ roof pitch / apex<br>minor material zoning @ long wall openings (windows) |
-| -x-z | 225° | yes | pass | same object<br>minor massing @ roof<br>minor form @ long wall windows |
-| -x+z | 315° | yes | pass | same object<br>minor form @ roof ridge and pitch<br>minor material zoning @ long wall openings (windows vs concept's doored stone wall) |
+| +x+z | 45° | yes | pass | same object<br>minor material zoning @ long wall openings<br>minor form @ gable apex trim |
+| +x-z | 135° | yes | pass | same object<br>minor material zoning @ long side wall windows<br>minor form @ roof pitch slightly shallower than concept gable |
+| -x-z | 225° | yes | pass | same object<br>minor palette @ long roof slope<br>minor material zoning @ side wall openings |
+| -x+z | 315° | yes | pass | same object<br>minor massing @ long side wall<br>minor form @ wall openings |
 
 ## Resemblance aggregate (T-093)
 **FAIL** — gaps 8/2; failures: (all):gap-budget

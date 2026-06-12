@@ -11,7 +11,7 @@
         "name": "base",
         "yRange": [
           0,
-          2
+          4
         ],
         "blocks": [
           "cobblestone",
@@ -22,8 +22,8 @@
       {
         "name": "upper",
         "yRange": [
-          3,
-          8
+          5,
+          9
         ],
         "blocks": [
           "cobblestone",
@@ -34,8 +34,8 @@
       {
         "name": "roof",
         "yRange": [
-          9,
-          21
+          10,
+          23
         ],
         "blocks": [
           "dark_oak_planks"
@@ -50,12 +50,12 @@
         "min": [
           8,
           3,
-          23
+          25
         ],
         "max": [
           9,
           6,
-          23
+          25
         ]
       },
       {
@@ -64,12 +64,12 @@
         "min": [
           15,
           0,
-          23
+          25
         ],
         "max": [
           17,
           4,
-          23
+          25
         ]
       },
       {
@@ -78,12 +78,12 @@
         "min": [
           23,
           3,
-          23
+          25
         ],
         "max": [
           24,
           6,
-          23
+          25
         ]
       },
       {
@@ -92,12 +92,12 @@
         "min": [
           30,
           0,
-          23
+          25
         ],
         "max": [
           32,
           4,
-          23
+          25
         ]
       },
       {
@@ -106,12 +106,12 @@
         "min": [
           38,
           3,
-          23
+          25
         ],
         "max": [
           39,
           6,
-          23
+          25
         ]
       },
       {
@@ -176,12 +176,12 @@
         "min": [
           47,
           5,
-          11
+          12
         ],
         "max": [
           47,
           7,
-          11
+          12
         ]
       },
       {
@@ -190,15 +190,29 @@
         "min": [
           0,
           5,
-          11
+          12
         ],
         "max": [
           0,
           7,
-          11
+          12
         ]
       }
-    ]
+    ],
+    "proportions": {
+      "schema": "silhouette-proportion/v1",
+      "targets": {
+        "ridgeToEave": 2.1,
+        "roofShare": 0.5238,
+        "aspect": 1.8462
+      },
+      "sources": {
+        "ridgeToEave": "sketch",
+        "roofShare": "sketch",
+        "aspect": "sketch"
+      },
+      "tolerance": 0.15
+    }
   },
   "elements": [
     {
@@ -209,16 +223,16 @@
           "x0": 0,
           "x1": 47,
           "z0": 0,
-          "z1": 23
+          "z1": 25
         },
         "y0": 0,
-        "height": 9,
+        "height": 10,
         "wallBlock": "cobblestone",
         "courses": [
           {
             "yRange": [
               0,
-              2
+              4
             ],
             "block": "cobblestone"
           }
@@ -308,7 +322,7 @@
           {
             "wall": "+x",
             "at": [
-              11,
+              12,
               5
             ],
             "w": 1,
@@ -317,7 +331,7 @@
           {
             "wall": "-x",
             "at": [
-              11,
+              12,
               5
             ],
             "w": 1,
@@ -335,7 +349,7 @@
           "x0": 0,
           "x1": 47,
           "z0": 0,
-          "z1": 23
+          "z1": 25
         },
         "y0": 0,
         "courses": 1,
@@ -351,11 +365,11 @@
           "x0": 0,
           "x1": 47,
           "z0": -1,
-          "z1": 24
+          "z1": 26
         },
         "ridgeAxis": "x",
-        "eaveY": 9,
-        "ridgeY": 21,
+        "eaveY": 10,
+        "ridgeY": 23,
         "pitch": 1,
         "blocks": {
           "field": "dark_oak_planks",
@@ -383,8 +397,8 @@
         "depth": {
           "axis": "z",
           "range": [
-            23,
-            23
+            25,
+            25
           ]
         },
         "block": "stone_bricks",
@@ -410,8 +424,8 @@
         "depth": {
           "axis": "z",
           "range": [
-            23,
-            23
+            25,
+            25
           ]
         },
         "block": "stone_bricks",
@@ -437,8 +451,8 @@
         "depth": {
           "axis": "z",
           "range": [
-            23,
-            23
+            25,
+            25
           ]
         },
         "block": "stone_bricks",
@@ -464,8 +478,8 @@
         "depth": {
           "axis": "z",
           "range": [
-            23,
-            23
+            25,
+            25
           ]
         },
         "block": "stone_bricks",
@@ -491,8 +505,8 @@
         "depth": {
           "axis": "z",
           "range": [
-            23,
-            23
+            25,
+            25
           ]
         },
         "block": "stone_bricks",
@@ -615,8 +629,8 @@
         "span": {
           "axis": "z",
           "range": [
-            11,
-            11
+            12,
+            12
           ]
         },
         "yRange": [
@@ -642,8 +656,8 @@
         "span": {
           "axis": "z",
           "range": [
-            11,
-            11
+            12,
+            12
           ]
         },
         "yRange": [

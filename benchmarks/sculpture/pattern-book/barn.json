@@ -1,7 +1,8 @@
 {
   "schema": "pattern-book-chain/v1",
-  "ticket": "T-127-01",
+  "ticket": "T-138-01",
   "subject": "barn",
+  "runKey": "barn",
   "pack": "rustic",
   "budget": {
     "rounds": 6
@@ -38,41 +39,146 @@
     },
     "seed": {
       "path": "benchmarks/sculpture/workshop/barn/program.json",
-      "sha256": "5286e8b3200f0158cd25a9b9e0e8b4f96dd5ab23ca137e63781dbfa9887b3e6d",
-      "cells": 10066,
+      "sha256": "de8d79b889e1bf708561491b6e8a6a38f65748a623c870dba204d4cd7e3fbb84",
+      "cells": 11594,
       "conformance": {
         "passed": true
+      },
+      "measured": {
+        "dimensions": [
+          {
+            "mass": "*",
+            "parameter": "footprint.w",
+            "source": "measured",
+            "measured": 48,
+            "used": 48,
+            "residual": 0,
+            "note": "sketch planDims (registry blocks), endpoint-scaled across masses"
+          },
+          {
+            "mass": "*",
+            "parameter": "footprint.d",
+            "source": "measured",
+            "measured": 26,
+            "used": 26,
+            "residual": 0,
+            "note": "sketch planDims (registry blocks), endpoint-scaled across masses"
+          },
+          {
+            "mass": "barn",
+            "parameter": "eaveHeight",
+            "source": "measured",
+            "measured": 10,
+            "used": 10,
+            "residual": 0,
+            "note": "expressed as 2×5 (schema-bounded factorization)"
+          },
+          {
+            "mass": "barn",
+            "parameter": "storeyFactorization",
+            "source": "measured",
+            "measured": 10,
+            "used": "2x5",
+            "residual": null,
+            "note": "recognition read 3x3"
+          },
+          {
+            "mass": "barn",
+            "parameter": "pitchClass",
+            "source": "measured",
+            "measured": 1,
+            "used": 1,
+            "residual": 0,
+            "note": "tan(dominant tilt) snapped to the nearest pack pitch class"
+          },
+          {
+            "mass": "barn",
+            "parameter": "ridgeHeight",
+            "source": "measured",
+            "measured": 21,
+            "used": 24,
+            "residual": 3,
+            "note": "derived: eave + pitch x half-span + 1 (all constituents sourced above)"
+          }
+        ],
+        "conflicts": [
+          {
+            "mass": "*",
+            "parameter": "footprint.d",
+            "recognition": 24,
+            "sketch": 26,
+            "resolved": "sketch"
+          },
+          {
+            "mass": "barn",
+            "parameter": "eaveHeight",
+            "recognition": 9,
+            "sketch": 10,
+            "resolved": "sketch"
+          },
+          {
+            "mass": "barn",
+            "parameter": "storeyHeight.packBand",
+            "recognition": "[3, 4]",
+            "sketch": 5,
+            "resolved": "sketch",
+            "note": "pack proportions are the fallback tier (S-133); excursion recorded"
+          }
+        ]
+      },
+      "proportionsDeclared": {
+        "schema": "silhouette-proportion/v1",
+        "targets": {
+          "ridgeToEave": 2.1,
+          "roofShare": 0.5238,
+          "aspect": 1.8462
+        },
+        "sources": {
+          "ridgeToEave": "sketch",
+          "roofShare": "sketch",
+          "aspect": "sketch"
+        },
+        "tolerance": 0.15
+      },
+      "ratios": {
+        "ridgeToEave": 2.4,
+        "roofShare": 0.5833,
+        "aspect": 1.8462
       }
     },
     "workshop": {
       "ledger": {
         "path": "benchmarks/sculpture/workshop/barn.json",
-        "sha256": "11ec20dd9d3d8407c3ddcaf582b2c0e732237ab3f594f048714b8f8721606fbb"
+        "sha256": "8280d5acf71ca307ffa6a2bb910d72fc98f90309741d76398246265e8e895437"
       },
       "final": {
         "path": "benchmarks/sculpture/workshop/barn/final-artifact.json",
-        "sha256": "91ee4b2e7b6dc2107e949303f919fb3c4e5dfb51eb245c79627f7a1f6dc29185"
+        "sha256": "58bc3725dbab97228bd60c8eb5ec78594729759ef46b28e983666bcd3444ae1c"
       },
-      "outcome": "budget-exhausted",
+      "outcome": "done",
       "rounds": {
-        "used": 6,
+        "used": 3,
         "budget": 6
       },
-      "accepted": 0,
-      "rolledBack": 5,
-      "unavailable": 1,
+      "accepted": 2,
+      "rolledBack": 0,
+      "unavailable": 0,
       "applyFailed": 0,
       "conformance": {
         "first": {
-          "passed": 6,
+          "passed": 7,
           "findings": 0
         },
         "final": {
-          "passed": 6,
+          "passed": 7,
           "findings": 0
         },
         "finalPassed": true
       }
+    },
+    "plan": {
+      "path": "benchmarks/sculpture/workshop/barn/component-plan.json",
+      "sha256": "46c66f5f86cb4bf7f38800b9f440f69901a436f076c35521bc9692e2db42f145"
     }
   },
   "generalization": {
