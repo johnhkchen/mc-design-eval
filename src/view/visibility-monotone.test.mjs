@@ -15,6 +15,13 @@
 // independent and replays with exposure {}. For the cottage witness, {} IS the measured truth:
 // band1 has zero cells in the census identity (planCensusZoneOf routes the roof program over its
 // whole y-range) — re-verified live by benchmarks/sculpture/visibility-witness.mjs.
+//
+// Witness provenance (T-138-02): the live cottage-patternbook record was ROTATED by the E-33
+// re-run (the new build shows band1 on skin and judges 4/4 — the flip's refusal no longer exists
+// at HEAD). The T-127 witness record is pinned VERBATIM at fixtures/
+// cottage-patternbook.t127-retired.json — sha f5567754f77c… , the exact retired pin quoted in
+// benchmarks/sculpture/pattern-book/proportion-baselines.json. The flip proof reads the fixture;
+// the monotone sweep keeps reading every LIVE committed record.
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -26,6 +33,8 @@ import { occupancyFromCells } from "./occupancy.mjs";
 import { surfaceZoneHistogram, ownCoverage } from "./zone-fill.mjs";
 
 const REC_DIR = fileURLToPath(new URL("../../benchmarks/sculpture/multi-angle", import.meta.url));
+const RETIRED_T127_COTTAGE = fileURLToPath(
+  new URL("./fixtures/cottage-patternbook.t127-retired.json", import.meta.url));
 const GATE_SCHEMA = "multi-angle-gate/v1";
 
 /** Recorded byZone row → a coverageGate-consumable census row (the record stores the gated
@@ -78,13 +87,17 @@ test("monotone replay: every committed gate view that passed coverage still pass
     }
   }
   assert.ok(replayedViews > 0, "replayed at least one committed view");
-  assert.ok(flipped > 0, "the class has at least one witness flip (the T-127 cottage)");
+  // the flip witness lives in the PINNED retired record (the live one was rotated by T-138-02);
+  // live records may legitimately contain zero flips
+  const fixtureRep = replayRecord(JSON.parse(readFileSync(RETIRED_T127_COTTAGE, "utf8")));
+  for (const view of fixtureRep.result.views) {
+    if (!view.legacy.passed && view.aware.passed) flipped++;
+  }
+  assert.ok(flipped > 0, "the class has at least one witness flip (the retired T-127 cottage fixture)");
 });
 
-test("the T-127 cottage witness: patternbook flips to aware-pass on all four views, band1 named, legacy beside it", (t) => {
-  const path = `${REC_DIR}/cottage-patternbook.json`;
-  if (!existsSync(path)) return t.skip("no committed cottage-patternbook record");
-  const rec = JSON.parse(readFileSync(path, "utf8"));
+test("the T-127 cottage witness (retired pin, sha-quoted in proportion-baselines.json): patternbook flips to aware-pass on all four views, band1 named, legacy beside it", () => {
+  const rec = JSON.parse(readFileSync(RETIRED_T127_COTTAGE, "utf8"));
   const rep = replayRecord(rec);
   assert.equal(rep.judged.length, 4, "all four contract views replay");
   assert.equal(rep.result.visibility.byBand.band1.status, "not-on-skin",
