@@ -201,15 +201,23 @@ test("G-V7 re-recognize grounding: mass id direct; element id resolves to the ow
 test("G-AP3 the geometry form applies through recompile; sourceless ctx reports unavailable", () => {
   const geo = parseAction({ action: "adjust-params", elementId: "main", params: { eaveHeight: 12 } }, srcCtx);
   const seedBudget = { rounds: 5 };
+  const proportions = {
+    schema: "silhouette-proportion/v1",
+    targets: { ridgeToEave: 1.4, roofShare: 0.29, aspect: 1.19 },
+    sources: { ridgeToEave: "sketch", roofShare: "sketch", aspect: "sketch" },
+    tolerance: 0.1,
+  };
   const live = assertWorkshopProgram({
     schema: WORKSHOP_PROGRAM_SCHEMA, subject: "synthetic", pack: "rustic",
-    budget: seedBudget, declarations: {}, elements: PROGRAM.elements,
+    budget: seedBudget, declarations: { proportions }, elements: PROGRAM.elements,
   });
   const r = applyAction({ program: live, occ: occ(), source: SOURCE, pack: RUSTIC }, geo);
   assert.equal(r.kind, "geometry");
   assert.equal(r.source.masses[0].storeys * r.source.masses[0].storeyHeight, 12);
   assert.equal(r.program.elements.find((e) => e.id === "main-shell").spec.height, 12);
   assert.deepEqual(r.program.budget, seedBudget, "live budget rides through the recompile");
+  assert.deepEqual(r.program.declarations.proportions, proportions,
+    "the APPLIER route carries the proportion declaration — dropping it disarms the T-135 gate (measured live)");
 
   const r2 = applyAction({ program: live, occ: occ() }, geo);
   assert.equal(r2.kind, "unavailable");

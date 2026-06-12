@@ -172,7 +172,9 @@ export const DEFAULT_APPLIERS = Object.freeze({
       return { kind: "unavailable", reason: "geometry adjust needs the source building program (this run carries none)" };
     }
     const r = applyGeometryAdjust(
-      { source, pack, budget: { ...program.budget } },
+      // the proportion declaration MUST ride the recompile — dropping it silently disarms the
+      // T-135 gate and the vanished check reads as an improvement (measured live, first run)
+      { source, pack, budget: { ...program.budget }, proportions: program.declarations?.proportions ?? null },
       { massId: action.massId, params: action.params },
     );
     return { kind: "geometry", program: r.program, source: r.source };
