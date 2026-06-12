@@ -1,0 +1,454 @@
+{
+  "schema": "visibility-witness/v1",
+  "ticket": "T-137-01",
+  "subject": "gatehouse",
+  "label": "styled",
+  "source": {
+    "record": "benchmarks/sculpture/multi-angle/gatehouse-styled.json",
+    "sha256": "ac7152b3ff804b3232ca862c18ff97a966980ea64eaa4bfcb4b45213e6fe2542",
+    "artifact": {
+      "path": "benchmarks/sculpture/styled/gatehouse/artifact.json",
+      "sha256": "b51dc93cae907fdc6dffd5cfaa02a0ff31ca34f5c535a49d7888847dab5dbe04"
+    }
+  },
+  "contract": {
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "elevationDeg": 30,
+    "width": 512,
+    "height": 512,
+    "gapBudget": 2,
+    "coverageThreshold": 0.5,
+    "note": "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them"
+  },
+  "zones": {
+    "source": "concept",
+    "policy": {
+      "band0": {
+        "dominant": "polished_basalt",
+        "preserve": [
+          "dark_oak_log",
+          "deepslate_bricks",
+          "cobblestone",
+          "dark_oak_planks"
+        ],
+        "splat": [
+          "dark_oak_log",
+          "deepslate_bricks",
+          "cobblestone",
+          "dark_oak_planks"
+        ]
+      },
+      "roof": {
+        "dominant": "deepslate_bricks",
+        "preserve": [
+          "polished_basalt",
+          "cobblestone",
+          "dark_oak_log",
+          "dark_oak_planks",
+          "deepslate_brick_stairs",
+          "deepslate_brick_slab"
+        ],
+        "splat": [
+          "polished_basalt",
+          "cobblestone",
+          "dark_oak_log",
+          "dark_oak_planks"
+        ]
+      }
+    }
+  },
+  "metric": "own",
+  "censusCheck": {
+    "rederivedMatchesRecord": true,
+    "drift": []
+  },
+  "exposure": {
+    "basis": "rederived",
+    "byBand": {
+      "band0": {
+        "total": 1096
+      },
+      "roof": {
+        "total": 785
+      }
+    }
+  },
+  "arithmetic": "visibility-coverage/v1",
+  "views": [
+    {
+      "angle": "+x+z",
+      "aware": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "polished_basalt",
+            "fraction": 1,
+            "total": 489,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "polished_basalt",
+              "dark_oak_log",
+              "deepslate_bricks",
+              "cobblestone",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.202
+          },
+          "roof": {
+            "dominant": "deepslate_bricks",
+            "fraction": 1,
+            "total": 324,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "deepslate_bricks",
+              "polished_basalt",
+              "cobblestone",
+              "dark_oak_log",
+              "dark_oak_planks",
+              "deepslate_brick_stairs",
+              "deepslate_brick_slab"
+            ],
+            "dominantFraction": 0.225
+          }
+        }
+      },
+      "legacy": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "polished_basalt",
+            "fraction": 1,
+            "total": 489,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "polished_basalt",
+              "dark_oak_log",
+              "deepslate_bricks",
+              "cobblestone",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.202
+          },
+          "roof": {
+            "dominant": "deepslate_bricks",
+            "fraction": 1,
+            "total": 324,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "deepslate_bricks",
+              "polished_basalt",
+              "cobblestone",
+              "dark_oak_log",
+              "dark_oak_planks",
+              "deepslate_brick_stairs",
+              "deepslate_brick_slab"
+            ],
+            "dominantFraction": 0.225
+          }
+        }
+      }
+    },
+    {
+      "angle": "+x-z",
+      "aware": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "polished_basalt",
+            "fraction": 1,
+            "total": 495,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "polished_basalt",
+              "dark_oak_log",
+              "deepslate_bricks",
+              "cobblestone",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.616
+          },
+          "roof": {
+            "dominant": "deepslate_bricks",
+            "fraction": 1,
+            "total": 269,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "deepslate_bricks",
+              "polished_basalt",
+              "cobblestone",
+              "dark_oak_log",
+              "dark_oak_planks",
+              "deepslate_brick_stairs",
+              "deepslate_brick_slab"
+            ],
+            "dominantFraction": 0.58
+          }
+        }
+      },
+      "legacy": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "polished_basalt",
+            "fraction": 1,
+            "total": 495,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "polished_basalt",
+              "dark_oak_log",
+              "deepslate_bricks",
+              "cobblestone",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.616
+          },
+          "roof": {
+            "dominant": "deepslate_bricks",
+            "fraction": 1,
+            "total": 269,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "deepslate_bricks",
+              "polished_basalt",
+              "cobblestone",
+              "dark_oak_log",
+              "dark_oak_planks",
+              "deepslate_brick_stairs",
+              "deepslate_brick_slab"
+            ],
+            "dominantFraction": 0.58
+          }
+        }
+      }
+    },
+    {
+      "angle": "-x-z",
+      "aware": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "polished_basalt",
+            "fraction": 1,
+            "total": 486,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "polished_basalt",
+              "dark_oak_log",
+              "deepslate_bricks",
+              "cobblestone",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.648
+          },
+          "roof": {
+            "dominant": "deepslate_bricks",
+            "fraction": 1,
+            "total": 297,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "deepslate_bricks",
+              "polished_basalt",
+              "cobblestone",
+              "dark_oak_log",
+              "dark_oak_planks",
+              "deepslate_brick_stairs",
+              "deepslate_brick_slab"
+            ],
+            "dominantFraction": 0.606
+          }
+        }
+      },
+      "legacy": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "polished_basalt",
+            "fraction": 1,
+            "total": 486,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "polished_basalt",
+              "dark_oak_log",
+              "deepslate_bricks",
+              "cobblestone",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.648
+          },
+          "roof": {
+            "dominant": "deepslate_bricks",
+            "fraction": 1,
+            "total": 297,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "deepslate_bricks",
+              "polished_basalt",
+              "cobblestone",
+              "dark_oak_log",
+              "dark_oak_planks",
+              "deepslate_brick_stairs",
+              "deepslate_brick_slab"
+            ],
+            "dominantFraction": 0.606
+          }
+        }
+      }
+    },
+    {
+      "angle": "-x+z",
+      "aware": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "polished_basalt",
+            "fraction": 1,
+            "total": 494,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "polished_basalt",
+              "dark_oak_log",
+              "deepslate_bricks",
+              "cobblestone",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.233
+          },
+          "roof": {
+            "dominant": "deepslate_bricks",
+            "fraction": 1,
+            "total": 348,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "deepslate_bricks",
+              "polished_basalt",
+              "cobblestone",
+              "dark_oak_log",
+              "dark_oak_planks",
+              "deepslate_brick_stairs",
+              "deepslate_brick_slab"
+            ],
+            "dominantFraction": 0.244
+          }
+        }
+      },
+      "legacy": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "polished_basalt",
+            "fraction": 1,
+            "total": 494,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "polished_basalt",
+              "dark_oak_log",
+              "deepslate_bricks",
+              "cobblestone",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.233
+          },
+          "roof": {
+            "dominant": "deepslate_bricks",
+            "fraction": 1,
+            "total": 348,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "deepslate_bricks",
+              "polished_basalt",
+              "cobblestone",
+              "dark_oak_log",
+              "dark_oak_planks",
+              "deepslate_brick_stairs",
+              "deepslate_brick_slab"
+            ],
+            "dominantFraction": 0.244
+          }
+        }
+      }
+    }
+  ],
+  "visibility": {
+    "byBand": {
+      "band0": {
+        "status": "visible",
+        "visibleViews": [
+          "+x+z",
+          "+x-z",
+          "-x-z",
+          "-x+z"
+        ],
+        "exposedCells": 1096
+      },
+      "roof": {
+        "status": "visible",
+        "visibleViews": [
+          "+x+z",
+          "+x-z",
+          "-x-z",
+          "-x+z"
+        ],
+        "exposedCells": 785
+      }
+    },
+    "failures": [],
+    "passed": true
+  },
+  "precondition": {
+    "legacyPassedViews": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "awarePassedViews": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "unblocked": false
+  },
+  "judge": "not-called — T-138-01 owns the epic's judge runs",
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  }
+}

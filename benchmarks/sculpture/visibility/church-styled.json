@@ -1,0 +1,469 @@
+{
+  "schema": "visibility-witness/v1",
+  "ticket": "T-137-01",
+  "subject": "church",
+  "label": "styled",
+  "source": {
+    "record": "benchmarks/sculpture/multi-angle/church-styled.json",
+    "sha256": "4834d6f96d925400da4130f5250ef7dace9ee18a1855e6e3dd2ff08551ab3199",
+    "artifact": {
+      "path": "benchmarks/sculpture/styled/church/artifact.json",
+      "sha256": "7275e77ba9e704edb682d80d3d1f5eb3885815aaedb20c47af7f71527141805d"
+    }
+  },
+  "contract": {
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "elevationDeg": 30,
+    "width": 512,
+    "height": 512,
+    "gapBudget": 2,
+    "coverageThreshold": 0.5,
+    "note": "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them"
+  },
+  "zones": {
+    "source": "concept",
+    "policy": {
+      "band0": {
+        "dominant": "stone",
+        "preserve": [
+          "polished_andesite",
+          "polished_basalt",
+          "black_stained_glass",
+          "dark_oak_planks"
+        ],
+        "splat": [
+          "polished_andesite",
+          "polished_basalt",
+          "black_stained_glass",
+          "dark_oak_planks"
+        ]
+      },
+      "roof": {
+        "dominant": "dark_oak_planks",
+        "preserve": [
+          "black_stained_glass",
+          "polished_basalt",
+          "polished_andesite",
+          "spruce_stairs",
+          "spruce_slab"
+        ],
+        "splat": [
+          "black_stained_glass",
+          "polished_basalt",
+          "polished_andesite"
+        ]
+      }
+    }
+  },
+  "metric": "own",
+  "censusCheck": {
+    "rederivedMatchesRecord": false,
+    "drift": [
+      {
+        "angle": "+x+z",
+        "band": "roof",
+        "recorded": 711,
+        "rederived": 423
+      },
+      {
+        "angle": "+x-z",
+        "band": "roof",
+        "recorded": 819,
+        "rederived": 425
+      },
+      {
+        "angle": "-x-z",
+        "band": "roof",
+        "recorded": 616,
+        "rederived": 291
+      },
+      {
+        "angle": "-x+z",
+        "band": "roof",
+        "recorded": 819,
+        "rederived": 534
+      }
+    ]
+  },
+  "exposure": {
+    "basis": "rederived-with-drift",
+    "byBand": {
+      "band0": {
+        "total": 2016
+      },
+      "roof": {
+        "total": 1666
+      }
+    }
+  },
+  "arithmetic": "visibility-coverage/v1",
+  "views": [
+    {
+      "angle": "+x+z",
+      "aware": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "stone",
+            "fraction": 1,
+            "total": 641,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "stone",
+              "polished_andesite",
+              "polished_basalt",
+              "black_stained_glass",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.371
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.999,
+            "total": 711,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "black_stained_glass",
+              "polished_basalt",
+              "polished_andesite",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.799
+          }
+        }
+      },
+      "legacy": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "stone",
+            "fraction": 1,
+            "total": 641,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "stone",
+              "polished_andesite",
+              "polished_basalt",
+              "black_stained_glass",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.371
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.999,
+            "total": 711,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "black_stained_glass",
+              "polished_basalt",
+              "polished_andesite",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.799
+          }
+        }
+      }
+    },
+    {
+      "angle": "+x-z",
+      "aware": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "stone",
+            "fraction": 1,
+            "total": 881,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "stone",
+              "polished_andesite",
+              "polished_basalt",
+              "black_stained_glass",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.384
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.993,
+            "total": 819,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "black_stained_glass",
+              "polished_basalt",
+              "polished_andesite",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.758
+          }
+        }
+      },
+      "legacy": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "stone",
+            "fraction": 1,
+            "total": 881,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "stone",
+              "polished_andesite",
+              "polished_basalt",
+              "black_stained_glass",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.384
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.993,
+            "total": 819,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "black_stained_glass",
+              "polished_basalt",
+              "polished_andesite",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.758
+          }
+        }
+      }
+    },
+    {
+      "angle": "-x-z",
+      "aware": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "stone",
+            "fraction": 1,
+            "total": 678,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "stone",
+              "polished_andesite",
+              "polished_basalt",
+              "black_stained_glass",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.338
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.987,
+            "total": 616,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "black_stained_glass",
+              "polished_basalt",
+              "polished_andesite",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.67
+          }
+        }
+      },
+      "legacy": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "stone",
+            "fraction": 1,
+            "total": 678,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "stone",
+              "polished_andesite",
+              "polished_basalt",
+              "black_stained_glass",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.338
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.987,
+            "total": 616,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "black_stained_glass",
+              "polished_basalt",
+              "polished_andesite",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.67
+          }
+        }
+      }
+    },
+    {
+      "angle": "-x+z",
+      "aware": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "stone",
+            "fraction": 1,
+            "total": 715,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "stone",
+              "polished_andesite",
+              "polished_basalt",
+              "black_stained_glass",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.297
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.994,
+            "total": 819,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "black_stained_glass",
+              "polished_basalt",
+              "polished_andesite",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.746
+          }
+        }
+      },
+      "legacy": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "stone",
+            "fraction": 1,
+            "total": 715,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "stone",
+              "polished_andesite",
+              "polished_basalt",
+              "black_stained_glass",
+              "dark_oak_planks"
+            ],
+            "dominantFraction": 0.297
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.994,
+            "total": 819,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "black_stained_glass",
+              "polished_basalt",
+              "polished_andesite",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.746
+          }
+        }
+      }
+    }
+  ],
+  "visibility": {
+    "byBand": {
+      "band0": {
+        "status": "visible",
+        "visibleViews": [
+          "+x+z",
+          "+x-z",
+          "-x-z",
+          "-x+z"
+        ],
+        "exposedCells": 2016
+      },
+      "roof": {
+        "status": "visible",
+        "visibleViews": [
+          "+x+z",
+          "+x-z",
+          "-x-z",
+          "-x+z"
+        ],
+        "exposedCells": 1666
+      }
+    },
+    "failures": [],
+    "passed": true
+  },
+  "precondition": {
+    "legacyPassedViews": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "awarePassedViews": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "unblocked": false
+  },
+  "judge": "not-called — T-138-01 owns the epic's judge runs",
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  }
+}

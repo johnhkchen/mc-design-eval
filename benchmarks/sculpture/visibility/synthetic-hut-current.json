@@ -1,0 +1,272 @@
+{
+  "schema": "visibility-witness/v1",
+  "ticket": "T-137-01",
+  "subject": "synthetic-hut",
+  "label": "current",
+  "source": {
+    "record": "benchmarks/sculpture/multi-angle/synthetic-hut-current.json",
+    "sha256": "5873f589ba3adb9422a57884ffa0cd077251b2a1a63d44d2bd1ccc7519529d13",
+    "artifact": {
+      "path": "benchmarks/sculpture/multi-angle/fixtures/hut/artifact.json",
+      "sha256": "0db4c89694f9095edd3598782b75ae740b07e5dc6eaf6621c4d0ad63a9ee4096"
+    }
+  },
+  "contract": {
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "elevationDeg": 30,
+    "width": 512,
+    "height": 512,
+    "gapBudget": 2,
+    "coverageThreshold": 0.5,
+    "note": "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them"
+  },
+  "zones": {
+    "source": "concept",
+    "policy": {
+      "band0": {
+        "dominant": "stone_bricks",
+        "preserve": [
+          "spruce_planks"
+        ]
+      },
+      "roof": {
+        "dominant": "spruce_planks",
+        "preserve": []
+      }
+    }
+  },
+  "metric": "dominant",
+  "censusCheck": {
+    "rederivedMatchesRecord": true,
+    "drift": []
+  },
+  "exposure": {
+    "basis": "rederived",
+    "byBand": {
+      "band0": {
+        "total": 361
+      },
+      "roof": {
+        "total": 169
+      }
+    }
+  },
+  "arithmetic": "visibility-coverage/v1",
+  "views": [
+    {
+      "angle": "+x+z",
+      "aware": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "stone_bricks",
+            "fraction": 1,
+            "total": 147,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 25,
+            "passed": true
+          }
+        }
+      },
+      "legacy": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "stone_bricks",
+            "fraction": 1,
+            "total": 147,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 25,
+            "passed": true
+          }
+        }
+      }
+    },
+    {
+      "angle": "+x-z",
+      "aware": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "stone_bricks",
+            "fraction": 1,
+            "total": 147,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 25,
+            "passed": true
+          }
+        }
+      },
+      "legacy": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "stone_bricks",
+            "fraction": 1,
+            "total": 147,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 25,
+            "passed": true
+          }
+        }
+      }
+    },
+    {
+      "angle": "-x-z",
+      "aware": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "stone_bricks",
+            "fraction": 1,
+            "total": 147,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 25,
+            "passed": true
+          }
+        }
+      },
+      "legacy": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "stone_bricks",
+            "fraction": 1,
+            "total": 147,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 25,
+            "passed": true
+          }
+        }
+      }
+    },
+    {
+      "angle": "-x+z",
+      "aware": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "stone_bricks",
+            "fraction": 1,
+            "total": 147,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 25,
+            "passed": true
+          }
+        }
+      },
+      "legacy": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "stone_bricks",
+            "fraction": 1,
+            "total": 147,
+            "passed": true
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 25,
+            "passed": true
+          }
+        }
+      }
+    }
+  ],
+  "visibility": {
+    "byBand": {
+      "band0": {
+        "status": "visible",
+        "visibleViews": [
+          "+x+z",
+          "+x-z",
+          "-x-z",
+          "-x+z"
+        ],
+        "exposedCells": 361
+      },
+      "roof": {
+        "status": "visible",
+        "visibleViews": [
+          "+x+z",
+          "+x-z",
+          "-x-z",
+          "-x+z"
+        ],
+        "exposedCells": 169
+      }
+    },
+    "failures": [],
+    "passed": true
+  },
+  "precondition": {
+    "legacyPassedViews": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "awarePassedViews": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "unblocked": false
+  },
+  "judge": "not-called — T-138-01 owns the epic's judge runs",
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  }
+}

@@ -1,0 +1,640 @@
+{
+  "schema": "visibility-witness/v1",
+  "ticket": "T-137-01",
+  "subject": "cottage",
+  "label": "challenge",
+  "source": {
+    "record": "benchmarks/sculpture/multi-angle/cottage-challenge.json",
+    "sha256": "a8e91f8c6c24d803c23cd452089f7f6246c2d5f2b7e6d94fc00f930ea617f03a",
+    "artifact": {
+      "path": "benchmarks/sculpture/challenge/cottage/artifact.json",
+      "sha256": "347def099ef05da18d8c814a6a0855dcd2a0bb0248cb3f93249f6f041d9ec212"
+    }
+  },
+  "contract": {
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "elevationDeg": 30,
+    "width": 512,
+    "height": 512,
+    "gapBudget": 2,
+    "coverageThreshold": 0.5,
+    "note": "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them"
+  },
+  "zones": {
+    "source": "concept",
+    "policy": {
+      "band0": {
+        "dominant": "tuff",
+        "preserve": [
+          "dark_oak_log",
+          "spruce_planks",
+          "cobblestone",
+          "bricks"
+        ]
+      },
+      "band1": {
+        "dominant": "smooth_sandstone",
+        "preserve": [
+          "spruce_planks",
+          "dark_oak_log",
+          "cobblestone",
+          "bricks"
+        ]
+      },
+      "roof": {
+        "dominant": "spruce_planks",
+        "preserve": [
+          "spruce_planks",
+          "dark_oak_log",
+          "tuff",
+          "cobblestone",
+          "bricks"
+        ]
+      }
+    }
+  },
+  "metric": "own",
+  "censusCheck": {
+    "rederivedMatchesRecord": false,
+    "drift": [
+      {
+        "angle": "+x+z",
+        "band": "band0",
+        "recorded": 315,
+        "rederived": 97
+      },
+      {
+        "angle": "+x+z",
+        "band": "band1",
+        "recorded": 402,
+        "rederived": 144
+      },
+      {
+        "angle": "+x+z",
+        "band": "roof",
+        "recorded": 298,
+        "rederived": 300
+      },
+      {
+        "angle": "+x-z",
+        "band": "band0",
+        "recorded": 308,
+        "rederived": 150
+      },
+      {
+        "angle": "+x-z",
+        "band": "band1",
+        "recorded": 390,
+        "rederived": 92
+      },
+      {
+        "angle": "+x-z",
+        "band": "roof",
+        "recorded": 289,
+        "rederived": 293
+      },
+      {
+        "angle": "-x-z",
+        "band": "band0",
+        "recorded": 316,
+        "rederived": 233
+      },
+      {
+        "angle": "-x-z",
+        "band": "band1",
+        "recorded": 437,
+        "rederived": 144
+      },
+      {
+        "angle": "-x-z",
+        "band": "roof",
+        "recorded": 262,
+        "rederived": 255
+      },
+      {
+        "angle": "-x+z",
+        "band": "band0",
+        "recorded": 309,
+        "rederived": 169
+      },
+      {
+        "angle": "-x+z",
+        "band": "band1",
+        "recorded": 436,
+        "rederived": 184
+      },
+      {
+        "angle": "-x+z",
+        "band": "roof",
+        "recorded": 242,
+        "rederived": 233
+      }
+    ]
+  },
+  "exposure": {
+    "basis": "rederived-with-drift",
+    "byBand": {
+      "band0": {
+        "total": 392
+      },
+      "band1": {
+        "total": 361
+      },
+      "roof": {
+        "total": 885
+      }
+    }
+  },
+  "arithmetic": "visibility-coverage/v1",
+  "views": [
+    {
+      "angle": "+x+z",
+      "aware": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "tuff",
+            "fraction": 1,
+            "total": 315,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "tuff",
+              "dark_oak_log",
+              "spruce_planks",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.502
+          },
+          "band1": {
+            "dominant": "smooth_sandstone",
+            "fraction": 0.973,
+            "total": 402,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "smooth_sandstone",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.301
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 298,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "spruce_planks",
+              "dark_oak_log",
+              "tuff",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.57
+          }
+        }
+      },
+      "legacy": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "tuff",
+            "fraction": 1,
+            "total": 315,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "tuff",
+              "dark_oak_log",
+              "spruce_planks",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.502
+          },
+          "band1": {
+            "dominant": "smooth_sandstone",
+            "fraction": 0.973,
+            "total": 402,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "smooth_sandstone",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.301
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 298,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "spruce_planks",
+              "dark_oak_log",
+              "tuff",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.57
+          }
+        }
+      }
+    },
+    {
+      "angle": "+x-z",
+      "aware": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "tuff",
+            "fraction": 1,
+            "total": 308,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "tuff",
+              "dark_oak_log",
+              "spruce_planks",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.649
+          },
+          "band1": {
+            "dominant": "smooth_sandstone",
+            "fraction": 0.974,
+            "total": 390,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "smooth_sandstone",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.479
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 289,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "spruce_planks",
+              "dark_oak_log",
+              "tuff",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.706
+          }
+        }
+      },
+      "legacy": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "tuff",
+            "fraction": 1,
+            "total": 308,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "tuff",
+              "dark_oak_log",
+              "spruce_planks",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.649
+          },
+          "band1": {
+            "dominant": "smooth_sandstone",
+            "fraction": 0.974,
+            "total": 390,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "smooth_sandstone",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.479
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 289,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "spruce_planks",
+              "dark_oak_log",
+              "tuff",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.706
+          }
+        }
+      }
+    },
+    {
+      "angle": "-x-z",
+      "aware": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "tuff",
+            "fraction": 1,
+            "total": 316,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "tuff",
+              "dark_oak_log",
+              "spruce_planks",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.772
+          },
+          "band1": {
+            "dominant": "smooth_sandstone",
+            "fraction": 0.947,
+            "total": 437,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "smooth_sandstone",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.54
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 0.996,
+            "total": 262,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "spruce_planks",
+              "dark_oak_log",
+              "tuff",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.775
+          }
+        }
+      },
+      "legacy": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "tuff",
+            "fraction": 1,
+            "total": 316,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "tuff",
+              "dark_oak_log",
+              "spruce_planks",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.772
+          },
+          "band1": {
+            "dominant": "smooth_sandstone",
+            "fraction": 0.947,
+            "total": 437,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "smooth_sandstone",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.54
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 0.996,
+            "total": 262,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "spruce_planks",
+              "dark_oak_log",
+              "tuff",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.775
+          }
+        }
+      }
+    },
+    {
+      "angle": "-x+z",
+      "aware": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "tuff",
+            "fraction": 1,
+            "total": 309,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "tuff",
+              "dark_oak_log",
+              "spruce_planks",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.638
+          },
+          "band1": {
+            "dominant": "smooth_sandstone",
+            "fraction": 0.961,
+            "total": 436,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "smooth_sandstone",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.463
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 242,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "spruce_planks",
+              "dark_oak_log",
+              "tuff",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.773
+          }
+        }
+      },
+      "legacy": {
+        "passed": true,
+        "threshold": 0.5,
+        "failures": [],
+        "byZone": {
+          "band0": {
+            "dominant": "tuff",
+            "fraction": 1,
+            "total": 309,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "tuff",
+              "dark_oak_log",
+              "spruce_planks",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.638
+          },
+          "band1": {
+            "dominant": "smooth_sandstone",
+            "fraction": 0.961,
+            "total": 436,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "smooth_sandstone",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.463
+          },
+          "roof": {
+            "dominant": "spruce_planks",
+            "fraction": 1,
+            "total": 242,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "spruce_planks",
+              "dark_oak_log",
+              "tuff",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 0.773
+          }
+        }
+      }
+    }
+  ],
+  "visibility": {
+    "byBand": {
+      "band0": {
+        "status": "visible",
+        "visibleViews": [
+          "+x+z",
+          "+x-z",
+          "-x-z",
+          "-x+z"
+        ],
+        "exposedCells": 392
+      },
+      "band1": {
+        "status": "visible",
+        "visibleViews": [
+          "+x+z",
+          "+x-z",
+          "-x-z",
+          "-x+z"
+        ],
+        "exposedCells": 361
+      },
+      "roof": {
+        "status": "visible",
+        "visibleViews": [
+          "+x+z",
+          "+x-z",
+          "-x-z",
+          "-x+z"
+        ],
+        "exposedCells": 885
+      }
+    },
+    "failures": [],
+    "passed": true
+  },
+  "precondition": {
+    "legacyPassedViews": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "awarePassedViews": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "unblocked": false
+  },
+  "judge": "not-called — T-138-01 owns the epic's judge runs",
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  }
+}
