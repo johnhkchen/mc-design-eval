@@ -29,18 +29,24 @@ export function serializeArtifact(artifact) {
 /**
  * Replay a committed ledger: seed program + accepted rounds → the final artifact. Throws on a
  * ledger whose accepted rounds it cannot re-apply (an unreplayable action is a corrupt ledger,
- * not a judgement call).
- * @param {{ledger:object}} args
+ * not a judgement call). `throughRound` (T-135-01) bounds the replay to rounds ≤ N — the
+ * per-round witness's prefix view (0 = the seed alone); omitted, the full-replay byte-identity
+ * contract is untouched.
+ * @param {{ledger:object, throughRound?:number}} args
  * @returns {{artifact:object, program:object, applied:{programAdjusts:number, paintPlacements:number}}}
  */
-export function replayLedger({ ledger }) {
+export function replayLedger({ ledger, throughRound }) {
   if (ledger?.schema !== WORKSHOP_LEDGER_SCHEMA) {
     throw new Error(`replayLedger: ledger.schema must be "${WORKSHOP_LEDGER_SCHEMA}"`);
+  }
+  if (throughRound !== undefined && (!Number.isInteger(throughRound) || throughRound < 0)) {
+    throw new Error(`replayLedger: throughRound must be an integer ≥ 0, got ${throughRound}`);
   }
   let program = assertWorkshopProgram(ledger.program);
   const paint = [];
   let programAdjusts = 0;
   for (const round of ledger.rounds ?? []) {
+    if (throughRound !== undefined && round.round > throughRound) continue;
     if (round.decision !== "revise" || !round.conformance?.accepted) continue;
     const kind = round.applied?.kind;
     if (kind === "program") {

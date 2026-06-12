@@ -82,6 +82,24 @@ test("R2 rejected rounds are skipped exactly as the cage skipped them (ledger ro
   assert.notEqual(serializeArtifact(replayed.artifact), serializeArtifact(artifact));
 });
 
+test("R4 throughRound bounds the replay to a prefix; the full default is byte-identical (T-135-01)", async () => {
+  const { ledger, artifact } = await run();
+  const seedOnly = replayLedger({ ledger, throughRound: 0 });
+  assert.deepEqual(seedOnly.applied, { programAdjusts: 0, paintPlacements: 0 });
+  const bare = replayLedger({ ledger: { ...structuredClone(ledger), rounds: [] } });
+  assert.equal(serializeArtifact(seedOnly.artifact), serializeArtifact(bare.artifact));
+
+  const afterPaint = replayLedger({ ledger, throughRound: 1 });
+  assert.deepEqual(afterPaint.applied, { programAdjusts: 0, paintPlacements: 5 });
+  assert.notEqual(serializeArtifact(afterPaint.artifact), serializeArtifact(artifact));
+
+  const full = replayLedger({ ledger, throughRound: ledger.rounds.length });
+  assert.equal(serializeArtifact(full.artifact), serializeArtifact(artifact));
+
+  assert.throws(() => replayLedger({ ledger, throughRound: -1 }), /throughRound/);
+  assert.throws(() => replayLedger({ ledger, throughRound: 1.5 }), /throughRound/);
+});
+
 test("R3 an unreplayable accepted round throws (corrupt ledger, not a judgement call)", async () => {
   const { ledger } = await run();
   const bad = structuredClone(ledger);

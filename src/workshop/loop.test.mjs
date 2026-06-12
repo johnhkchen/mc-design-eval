@@ -11,7 +11,8 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
 import {
-  WORKSHOP_LEDGER_SCHEMA, LOOP_DEFAULTS, conformanceScore, isRegression, runWorkshopLoop,
+  WORKSHOP_LEDGER_SCHEMA, LOOP_DEFAULTS, conformanceScore, isRegression, proportionRegression,
+  runWorkshopLoop,
 } from "./loop.mjs";
 import { assertWorkshopProgram, WORKSHOP_PROGRAM_SCHEMA } from "./program.mjs";
 
@@ -80,6 +81,53 @@ test("SC2 isRegression is lexicographic and strict (lateral moves are not regres
   assert.equal(isRegression(rep(1, 3), rep(1, 5)), true, "same passed, more findings = regression");
   assert.equal(isRegression(rep(1, 3), rep(1, 3)), false, "equal score is lateral, accepted");
   assert.equal(isRegression(rep(1, 3), rep(2, 9)), false, "more checks passed wins outright");
+});
+
+// --- SC: the proportion no-regress arm (T-135-01) ----------------------------------------------
+
+const propRow = (ratio, excess, withinTolerance, extra = {}) =>
+  ({ ratio, excess, withinTolerance, basis: "relative", ...extra });
+const propReport = (rows, others = 1) => ({
+  checks: [
+    ...Array.from({ length: others }, (_, i) => ({ name: `p${i}`, passed: true, findings: [] })),
+    {
+      name: "proportion-vs-concept",
+      passed: rows.every((r) => r.withinTolerance !== false),
+      findings: rows.filter((r) => r.withinTolerance === false).map((r) => r.ratio),
+      ratios: { tolerance: 0.1, rows },
+    },
+  ],
+});
+
+test("SC3 proportionRegression: an already-bad ratio drifting worse rolls back despite a findings tie", () => {
+  const before = propReport([propRow("aspect", 0.25, false)]);
+  const worse = propReport([propRow("aspect", 1.5, false)]);
+  const betterButBad = propReport([propRow("aspect", 0.12, false)]);
+  const within = propReport([propRow("aspect", 0.05, true)]);
+
+  assert.match(proportionRegression(before, worse), /aspect Δ 0\.25→1\.5 beyond tolerance/);
+  assert.equal(isRegression(before, worse), true, "the lexicographic tie alone would have accepted it");
+  assert.equal(proportionRegression(before, betterButBad), null, "hill-climbing toward the target is accepted");
+  assert.equal(proportionRegression(before, within), null);
+  assert.match(proportionRegression(within, before), /aspect/, "within→beyond is caught by both arms");
+  assert.equal(isRegression(within, before), true);
+});
+
+test("SC4 proportionRegression: inert without the check (old ledgers), per-mass matched, unmeasurable named", () => {
+  const plain = { checks: [{ name: "p0", passed: true, findings: [] }] };
+  const withProp = propReport([propRow("aspect", 0.25, false)]);
+  assert.equal(proportionRegression(plain, plain), null);
+  assert.equal(proportionRegression(plain, withProp), null);
+  assert.equal(proportionRegression(withProp, plain), null);
+
+  const bMass = propReport([propRow("roofShare", 0.2, false, { mass: "wing" }), propRow("roofShare", 0.5, false)]);
+  const aMass = propReport([propRow("roofShare", 0.3, false, { mass: "wing" }), propRow("roofShare", 0.4, false)]);
+  assert.match(proportionRegression(bMass, aMass), /mass "wing" roofShare Δ 0\.2→0\.3/);
+
+  const gone = propReport([propRow("roofShare", null, false, { basis: "unmeasurable" })]);
+  const was = propReport([propRow("roofShare", 0.2, false)]);
+  assert.match(proportionRegression(was, gone), /became unmeasurable/);
+  assert.equal(proportionRegression(gone, was), null, "unmeasurable-before rows don't compare");
 });
 
 // --- L: the loop --------------------------------------------------------------------------------
@@ -171,6 +219,50 @@ test("L7 an action that breaks the element contract is a rolled-back round, not 
 });
 
 // --- LG: ledger invariants ------------------------------------------------------------------------
+
+test("L8 declared proportions gate the round: worsening a bad ratio rolls back, improving is accepted, ratios ride the ledger", async () => {
+  // clean shell (no foreign band) so regularity stays at 0 findings throughout; footprint 5×4 →
+  // aspect 1.25 vs target 1 (tolerance 0.1) — beyond tolerance from the seed
+  const program = assertWorkshopProgram({
+    schema: WORKSHOP_PROGRAM_SCHEMA, subject: "synthetic", pack: "test-pack",
+    budget: { rounds: 3 },
+    declarations: {
+      bands: [{ name: "walls", yRange: [0, 2], blocks: ["oak_planks"] }],
+      proportions: { targets: { aspect: 1 }, sources: { aspect: "sketch" }, tolerance: 0.1 },
+    },
+    elements: [{
+      id: "shell", kind: "shell",
+      spec: { footprint: { x0: 0, x1: 4, z0: 0, z1: 3 }, y0: 0, height: 3, wallBlock: "oak_planks" },
+    }],
+  });
+  const stretch = { action: "adjust-params", elementId: "shell", params: { footprint: { x0: 0, x1: 9, z0: 0, z1: 3 } } }; // aspect 2.5
+  const square = { action: "adjust-params", elementId: "shell", params: { footprint: { x0: 0, x1: 3, z0: 0, z1: 3 } } }; // aspect 1.0
+  const { seam } = scripted([
+    verdictRevise(stretch, "build reads too long vs the concept"),
+    verdictRevise(square, "square the footprint"),
+    verdictDone(),
+  ]);
+  const { ledger } = await runWorkshopLoop({ program, pack: PACK, seams: { exchange: seam } });
+
+  const r1 = ledger.rounds[0];
+  assert.equal(r1.conformance.accepted, false, "a findings-count tie alone would have accepted the stretch");
+  assert.match(r1.conformance.reason, /aspect Δ 0\.25→1\.5 beyond tolerance/);
+
+  const r2 = ledger.rounds[1];
+  assert.equal(r2.conformance.accepted, true, "the squared footprint reaches the target");
+
+  // every round's ledger entry carries the ratio table — the number the critique can aim at
+  for (const round of ledger.rounds.slice(0, 2)) {
+    const check = round.conformance.before.checks.find((c) => c.name === "proportion-vs-concept");
+    assert.ok(check, "the proportion check rides the round's before-report");
+    const aspect = check.ratios.rows.find((r) => r.ratio === "aspect");
+    assert.equal(aspect.measured, 1.25);
+    assert.equal(aspect.target, 1);
+  }
+  const finalCheck = ledger.final.conformance.checks.find((c) => c.name === "proportion-vs-concept");
+  assert.equal(finalCheck.passed, true);
+  assert.equal(finalCheck.ratios.rows.find((r) => r.ratio === "aspect").measured, 1);
+});
 
 test("LG1 the ledger carries schema, seed program, budget, and per-round raw replies", async () => {
   const { seam } = scripted([verdictRevise(PAINT_PINK_OAK), verdictDone()]);

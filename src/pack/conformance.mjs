@@ -18,6 +18,7 @@
 
 import { closureCheck, componentStrip } from "../view/shell-integrity.mjs";
 import { bareBlock } from "../view/occupancy.mjs";
+import { proportionRatios, compareRatios, assertProportionDeclarations } from "../form/silhouette-proportion.mjs";
 
 export const CONFORMANCE_SCHEMA = "pack-conformance/v1";
 
@@ -25,6 +26,7 @@ export const CONFORMANCE_SCHEMA = "pack-conformance/v1";
 export const CONFORMANCE_CHECK_NAMES = Object.freeze([
   "courses-even", "symmetry-held", "openings-rhythm",
   "palette-in-pack", "watertight", "single-component",
+  "proportion-vs-concept",
 ]);
 
 /** Declared check defaults — op parameters, never subject-tuned. */
@@ -189,6 +191,36 @@ export function singleComponentCheck(occ) {
   return { ...v, components: r.components };
 }
 
+/**
+ * PROPORTION VS CONCEPT (T-135-01, story S-135, epic E-33) — the dimension no regularity check
+ * owned: silhouette ratios (ridge:eave, roof share of the elevation, footprint aspect) of the
+ * BUILD's orthographic projections, compared against DECLARED targets derived from the concept's
+ * silhouette (the contract; the conditioned sketch is the recorded fallback per ratio). The
+ * verdict carries the full ratio table (`ratios`) beside the findings — the round ledger and the
+ * critique prompt get the numbers, and the loop's no-regress predicate reads `excess` across
+ * rounds. Undeclared → vacuous pass (declared, never inferred — the symmetry precedent).
+ * @param {import("../view/occupancy.mjs").Occupancy} occ
+ * @param {{proportions?:object}} declarations
+ */
+export function proportionCheck(occ, { proportions } = {}) {
+  if (proportions == null) return verdict("proportion-vs-concept", []);
+  const decl = assertProportionDeclarations(proportions);
+  const measured = proportionRatios(occ, { masses: decl.masses });
+  const compared = compareRatios(measured, decl);
+  const findings = compared.rows
+    .filter((r) => r.withinTolerance === false)
+    .map((r) => {
+      const where = r.mass ? `mass "${r.mass}": ` : "";
+      if (r.basis === "unmeasurable") {
+        return `${where}${r.ratio} unmeasurable on the build vs target ${r.target} (${r.source})`;
+      }
+      return `${where}${r.ratio} ${r.measured} vs target ${r.target} (${r.source}) — `
+        + `${r.basis === "absolute" ? "Δ" : "Δrel"} ${r.excess} > tolerance ${decl.tolerance}`;
+    });
+  const v = verdict("proportion-vs-concept", findings);
+  return { ...v, ratios: { tolerance: decl.tolerance, rows: compared.rows } };
+}
+
 const CHECK_IMPL = Object.freeze({
   "courses-even": (occ, decl) => coursesEvenCheck(occ, decl),
   "symmetry-held": (occ, decl) => symmetryHeldCheck(occ, decl),
@@ -196,12 +228,20 @@ const CHECK_IMPL = Object.freeze({
   "palette-in-pack": (occ, decl, pack) => paletteInPackCheck(occ, pack),
   "watertight": (occ, decl) => watertightCheck(occ, decl),
   "single-component": (occ) => singleComponentCheck(occ),
+  "proportion-vs-concept": (occ, decl) => proportionCheck(occ, decl),
 });
 
 /**
  * RUN the pack's conformance gate: exactly the checks the pack lists, in the pack's order. An
  * unknown check name THROWS — the pack was schema/semantically validated upstream, so reaching
  * here with a bad name is a bug, not a finding.
+ *
+ * ONE deliberate, documented exception to "exactly the pack's list" (T-135-01): when the
+ * program DECLARES proportion targets (`declarations.proportions` — subject data measured from
+ * the concept/sketch, not style policy) and the pack does not already list the check,
+ * `proportion-vs-concept` is appended. Committed chains predate proportion declarations, so
+ * their re-derived reports are byte-identical (the offline re-assert contract holds without
+ * touching any pack file).
  * @param {{occ:import("../view/occupancy.mjs").Occupancy, declarations:object}} build
  * @param {object} pack  a (validated) style pack
  * @returns {{schema:string, passed:boolean, checks:object[]}}
@@ -211,10 +251,14 @@ export function runConformance({ occ, declarations }, pack) {
   if (!Array.isArray(names) || names.length === 0) {
     throw new Error("runConformance: pack.conformance.checks must be a non-empty array");
   }
+  const decl = declarations ?? {};
   const checks = names.map((name) => {
     const impl = CHECK_IMPL[name];
     if (!impl) throw new Error(`runConformance: unknown check "${name}" (known: ${CONFORMANCE_CHECK_NAMES.join(", ")})`);
-    return impl(occ, declarations ?? {}, pack);
+    return impl(occ, decl, pack);
   });
+  if (decl.proportions != null && !names.includes("proportion-vs-concept")) {
+    checks.push(proportionCheck(occ, decl));
+  }
   return { schema: CONFORMANCE_SCHEMA, passed: checks.every((c) => c.passed), checks };
 }

@@ -6,7 +6,7 @@ import { occupancyFromCells } from "../view/occupancy.mjs";
 import {
   CONFORMANCE_CHECK_NAMES,
   coursesEvenCheck, symmetryHeldCheck, openingsRhythmCheck,
-  paletteInPackCheck, watertightCheck, singleComponentCheck, runConformance,
+  paletteInPackCheck, watertightCheck, singleComponentCheck, proportionCheck, runConformance,
 } from "./conformance.mjs";
 
 /** A closed 5×3×5 box shell (hollow), symmetric about x=2: walls stone, roof course planks. */
@@ -152,6 +152,45 @@ test("single-component: one mass passes; floating debris fails; grounded annex i
   assert.equal(singleComponentCheck(annex).passed, true);
 });
 
+// ---------------------------------------------------------------- proportion-vs-concept
+
+/** The closed box measures: eaveH 3 (flat roof → topmost row is the "eave"), totalH 4, aspect 1
+ *  → ridgeToEave 1.3333, roofShare 0.25. */
+const BOX_TRUE_TARGETS = Object.freeze({
+  targets: { ridgeToEave: 1.3333, roofShare: 0.25, aspect: 1 },
+  sources: { ridgeToEave: "concept", roofShare: "concept", aspect: "sketch" },
+  tolerance: 0.15,
+});
+
+test("proportion-vs-concept: undeclared is vacuous; in-tolerance passes with the ratio table", () => {
+  const occ = occupancyFromCells(boxCells());
+  assert.equal(proportionCheck(occ, {}).passed, true);
+  assert.equal(proportionCheck(occ, { proportions: null }).passed, true);
+
+  const r = proportionCheck(occ, { proportions: BOX_TRUE_TARGETS });
+  assert.equal(r.passed, true);
+  assert.equal(r.ratios.tolerance, 0.15);
+  assert.deepEqual(r.ratios.rows.map((x) => x.ratio), ["ridgeToEave", "roofShare", "aspect"]);
+  assert.ok(r.ratios.rows.every((x) => x.withinTolerance === true));
+});
+
+test("proportion-vs-concept: an off-target ratio fails with the numbers in the finding", () => {
+  const occ = occupancyFromCells(boxCells());
+  const squat = { ...BOX_TRUE_TARGETS, targets: { ...BOX_TRUE_TARGETS.targets, roofShare: 0.6 } };
+  const r = proportionCheck(occ, { proportions: squat });
+  assert.equal(r.passed, false);
+  assert.equal(r.findings.length, 1);
+  assert.match(r.findings[0], /roofShare 0\.25 vs target 0\.6 \(concept\) — Δrel 0\.5833 > tolerance 0\.15/);
+  const row = r.ratios.rows.find((x) => x.ratio === "roofShare");
+  assert.equal(row.withinTolerance, false);
+  assert.equal(row.excess, 0.5833);
+});
+
+test("proportion-vs-concept: a malformed declaration throws (bug, not finding)", () => {
+  const occ = occupancyFromCells(boxCells());
+  assert.throws(() => proportionCheck(occ, { proportions: { targets: {}, tolerance: 0.1 } }), /at least one/);
+});
+
 // ---------------------------------------------------------------- runConformance
 
 const PACK = {
@@ -186,4 +225,25 @@ test("runConformance: one failing check fails the gate; unknown check name throw
     /unknown check "vibes"/,
   );
   assert.throws(() => runConformance(build, { ...PACK, conformance: { checks: [] } }), /non-empty/);
+});
+
+test("runConformance: proportion activates by declaration, never duplicates, never infers", () => {
+  const SIX = { ...PACK, conformance: { checks: CONFORMANCE_CHECK_NAMES.filter((n) => n !== "proportion-vs-concept") } };
+  const decl = { bands: BANDS, symmetry: null, openings: [] };
+  const occ = occupancyFromCells(boxCells());
+
+  // undeclared + unlisted (every committed chain): exactly the pack's checks — report unchanged
+  const before = runConformance({ occ, declarations: decl }, SIX);
+  assert.equal(before.checks.length, 6);
+  assert.ok(!before.checks.some((c) => c.name === "proportion-vs-concept"));
+
+  // declared + unlisted: appended after the pack's list, ratios carried
+  const declared = runConformance({ occ, declarations: { ...decl, proportions: BOX_TRUE_TARGETS } }, SIX);
+  assert.equal(declared.checks.length, 7);
+  assert.equal(declared.checks[6].name, "proportion-vs-concept");
+  assert.ok(Array.isArray(declared.checks[6].ratios.rows));
+
+  // declared + pack-listed: runs once, in the pack's position
+  const listed = runConformance({ occ, declarations: { ...decl, proportions: BOX_TRUE_TARGETS } }, PACK);
+  assert.equal(listed.checks.filter((c) => c.name === "proportion-vs-concept").length, 1);
 });

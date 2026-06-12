@@ -49,12 +49,40 @@ export function conformanceScore(report) {
   };
 }
 
-/** Strictly-worse comparison on the lexicographic score — the rollback predicate. Equal scores
- *  are NOT regressions (a lateral move is accepted; the budget bounds wandering). */
+/**
+ * Ratio-level no-regress (T-135-01, the E-15 cage lesson): a revision whose proportion ratio
+ * ENDS beyond tolerance strictly worse than before must roll back even when the findings COUNT
+ * ties (an already-bad ratio drifting further is invisible to the lexicographic score). Compares
+ * the proportion check's `excess` per row (matched by ratio + mass) between two reports; returns
+ * the offending row's description, or null. Reports without the check — every pre-T-135 ledger —
+ * are inert, so the offline re-assert of committed records is unchanged.
+ */
+export function proportionRegression(before, after) {
+  const rowsOf = (rep) => rep?.checks?.find((c) => c.name === "proportion-vs-concept")?.ratios?.rows ?? null;
+  const b = rowsOf(before);
+  const a = rowsOf(after);
+  if (!b || !a) return null;
+  for (const row of a) {
+    if (row.withinTolerance !== false) continue;
+    const prev = b.find((x) => x.ratio === row.ratio && (x.mass ?? null) === (row.mass ?? null));
+    if (!prev || !Number.isFinite(prev.excess)) continue; // new/unmeasured-before rows don't compare
+    const where = `${row.mass ? `mass "${row.mass}" ` : ""}${row.ratio}`;
+    if (row.basis === "unmeasurable") return `${where} became unmeasurable (was Δ ${prev.excess})`;
+    if (Number.isFinite(row.excess) && row.excess > prev.excess) {
+      return `${where} Δ ${prev.excess}→${row.excess} beyond tolerance`;
+    }
+  }
+  return null;
+}
+
+/** Strictly-worse comparison — the rollback predicate: the lexicographic score (checks passed,
+ *  then findings), OR a proportion ratio worsening beyond tolerance. Equal scores are NOT
+ *  regressions (a lateral move is accepted; the budget bounds wandering). */
 export function isRegression(before, after) {
   const b = conformanceScore(before);
   const a = conformanceScore(after);
-  return a.passed < b.passed || (a.passed === b.passed && a.findings > b.findings);
+  return a.passed < b.passed || (a.passed === b.passed && a.findings > b.findings)
+    || proportionRegression(before, after) !== null;
 }
 
 /**
@@ -147,7 +175,9 @@ export async function runWorkshopLoop({ program, pack, seams, appliers = DEFAULT
         if (isRegression(before, after)) {
           const b = conformanceScore(before);
           const a = conformanceScore(after);
-          reason = `regressed: passed ${b.passed}→${a.passed}, findings ${b.findings}→${a.findings}`;
+          const prop = proportionRegression(before, after);
+          reason = `regressed: passed ${b.passed}→${a.passed}, findings ${b.findings}→${a.findings}`
+            + (prop ? `; ${prop}` : "");
         } else {
           accepted = true;
           current = candidateProgram;
