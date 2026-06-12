@@ -25,6 +25,7 @@ import {
   validateProgramAgainstPack,
   ROOF_LAYOUTS,
 } from "./program.mjs";
+import { roofIdiomForPitch } from "./compile.mjs";
 
 export const MEASURED_PROGRAM_SCHEMA = "measured-program/v1";
 
@@ -288,10 +289,14 @@ export function applyMeasuredProportions({ program, sketch, pack }) {
       const ratio = primary?.pitchRatio ?? m.pitchRatio;
       if (ratio !== null) {
         const snap = snapPitch(ratio, classes);
-        next.roof = { ...mass.roof, pitchClass: snap.pitchClass };
+        // T-138-01: a snap across the 45° boundary crosses the door (roof.gable ⇄
+        // roof.gable.steep) — realization vocabulary, not a recognition-vs-sketch conflict
+        const idiom = roofIdiomForPitch(mass.roof.idiom, snap.pitchClass);
+        next.roof = { ...mass.roof, idiom, pitchClass: snap.pitchClass };
         note({ mass: mass.id, parameter: "pitchClass", source: "measured",
                measured: ratio, used: snap.pitchClass, residual: snap.residual,
-               note: "tan(dominant tilt) snapped to the nearest pack pitch class" });
+               note: "tan(dominant tilt) snapped to the nearest pack pitch class" +
+                 (idiom !== mass.roof.idiom ? ` (re-aimed through ${idiom})` : "") });
         if (snap.pitchClass !== mass.roof.pitchClass) {
           conflicts.push({ mass: mass.id, parameter: "pitchClass",
                            recognition: mass.roof.pitchClass, sketch: ratio, resolved: "sketch" });

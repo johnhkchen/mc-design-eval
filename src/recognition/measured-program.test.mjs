@@ -257,3 +257,29 @@ test("MP13 integration: a band-excursion measured program seeds through the real
   const shell = seeded.workshopProgram.elements.find((e) => e.kind === "shell");
   assert.equal(shell.spec.height, 20, "the eave the sketch measured (expressed 4×5)");
 });
+
+test("MP14 a steep snap crosses the door: idiom re-aimed to roof.gable.steep, note carries it, no conflict row (T-138-01)", () => {
+  const saltcrag = loadStylePack(resolve(here, "..", "..", "packs", "saltcrag.json"));
+  const program = makeProgram((p) => {
+    p.pack = "saltcrag";
+    for (const m of p.masses) {
+      m.walls = { ground: { role: "wall.field.ground" }, upper: { role: "wall.field.upper" } };
+      m.roof = { ...m.roof, gableRole: null, trimRole: null };
+      m.openings.forEach((o) => { o.headRole = "opening.lintel"; });
+    }
+  });
+  const steepSketch = makeSketch((x) => {
+    x.pitch.dominantTiltDeg = 60; // tan 60° ≈ 1.732 → nearest of [2, 1, 0.5] is 2
+    x.proportions.masses[0].pitch.dominantTiltDeg = 60;
+  });
+  const { program: measured, dimensions, conflicts } = applyMeasuredProportions({ program, sketch: steepSketch, pack: saltcrag });
+  assert.equal(measured.masses[0].roof.pitchClass, 2);
+  assert.equal(measured.masses[0].roof.idiom, "roof.gable.steep", "the snap re-aimed through the steep door");
+  const row = dimensions.find((d) => d.parameter === "pitchClass");
+  assert.match(row.note, /re-aimed through roof\.gable\.steep/);
+  assert.ok(conflicts.find((c) => c.parameter === "pitchClass"), "the class change is a recognition-vs-sketch conflict");
+  assert.ok(!conflicts.find((c) => String(c.parameter).includes("idiom")), "the door crossing itself is not a conflict row");
+  // the re-aimed program still passes the live reply gates and seeds (the steep family row)
+  const seeded = seedWorkshopProgram({ program: measured, pack: saltcrag });
+  assert.ok(seeded.cells.length > 0, "steep measured program realizes");
+});
