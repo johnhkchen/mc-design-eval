@@ -1,0 +1,682 @@
+{
+  "schema": "budget-calibration/v1",
+  "ticket": "T-144-01",
+  "policy": "multi-angle-budget/v2",
+  "minorBudget": 10,
+  "gapBudget": 2,
+  "derivation": "glance-passing observed ceiling 8 (two T-138 barns); structural ceiling 4×3=12; minorBudget=10 is the midpoint — a real papercut tripwire (bites 11–12) that clears both barn anchors.",
+  "anchors": [
+    {
+      "slug": "barn-patternbook",
+      "expected": true,
+      "why": "every view same-object, 8 minor, 0 major — glance-passing (T-138-01)",
+      "actual": true,
+      "ok": true
+    },
+    {
+      "slug": "barn-patternbook-saltcrag",
+      "expected": true,
+      "why": "every view same-object, 8 minor, 0 major — glance-passing (T-138-01)",
+      "actual": true,
+      "ok": true
+    },
+    {
+      "slug": "cottage-patternbook",
+      "expected": false,
+      "why": "2/4 same-object, 7 minor + 4 major — glance-failing (T-138-02)",
+      "actual": false,
+      "ok": true
+    }
+  ],
+  "rows": [
+    {
+      "slug": "barn-challenge",
+      "sameObject": 0,
+      "drifted": 4,
+      "coverageRefused": false,
+      "majorCount": 8,
+      "minorCount": 4,
+      "v2": {
+        "policy": "multi-angle-budget/v2",
+        "passed": false,
+        "minorBudget": 10,
+        "failures": [
+          {
+            "angle": "+x+z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "+x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x+z",
+            "reason": "drifted"
+          }
+        ]
+      },
+      "legacy": {
+        "passed": false,
+        "gapBudget": 2,
+        "gapCount": 12
+      },
+      "committed": {
+        "passed": false,
+        "gapCount": 12
+      }
+    },
+    {
+      "slug": "barn-generated",
+      "sameObject": 0,
+      "drifted": 4,
+      "coverageRefused": false,
+      "majorCount": 8,
+      "minorCount": 4,
+      "v2": {
+        "policy": "multi-angle-budget/v2",
+        "passed": false,
+        "minorBudget": 10,
+        "failures": [
+          {
+            "angle": "+x+z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "+x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x+z",
+            "reason": "drifted"
+          }
+        ]
+      },
+      "legacy": {
+        "passed": false,
+        "gapBudget": 2,
+        "gapCount": 12
+      },
+      "committed": {
+        "passed": false,
+        "gapCount": 12
+      }
+    },
+    {
+      "slug": "barn-patternbook",
+      "sameObject": 4,
+      "drifted": 0,
+      "coverageRefused": false,
+      "majorCount": 0,
+      "minorCount": 8,
+      "v2": {
+        "policy": "multi-angle-budget/v2",
+        "passed": true,
+        "minorBudget": 10,
+        "failures": []
+      },
+      "legacy": {
+        "passed": false,
+        "gapBudget": 2,
+        "gapCount": 8
+      },
+      "committed": {
+        "passed": false,
+        "gapCount": 8
+      }
+    },
+    {
+      "slug": "barn-patternbook-saltcrag",
+      "sameObject": 4,
+      "drifted": 0,
+      "coverageRefused": false,
+      "majorCount": 0,
+      "minorCount": 8,
+      "v2": {
+        "policy": "multi-angle-budget/v2",
+        "passed": true,
+        "minorBudget": 10,
+        "failures": []
+      },
+      "legacy": {
+        "passed": false,
+        "gapBudget": 2,
+        "gapCount": 8
+      },
+      "committed": {
+        "passed": false,
+        "gapCount": 8
+      }
+    },
+    {
+      "slug": "church-challenge",
+      "sameObject": 0,
+      "drifted": 4,
+      "coverageRefused": false,
+      "majorCount": 6,
+      "minorCount": 5,
+      "v2": {
+        "policy": "multi-angle-budget/v2",
+        "passed": false,
+        "minorBudget": 10,
+        "failures": [
+          {
+            "angle": "+x+z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "+x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x-z",
+            "reason": "different object"
+          },
+          {
+            "angle": "-x+z",
+            "reason": "drifted"
+          }
+        ]
+      },
+      "legacy": {
+        "passed": false,
+        "gapBudget": 2,
+        "gapCount": 11
+      },
+      "committed": {
+        "passed": false,
+        "gapCount": 11
+      }
+    },
+    {
+      "slug": "church-generated",
+      "sameObject": 0,
+      "drifted": 4,
+      "coverageRefused": false,
+      "majorCount": 10,
+      "minorCount": 2,
+      "v2": {
+        "policy": "multi-angle-budget/v2",
+        "passed": false,
+        "minorBudget": 10,
+        "failures": [
+          {
+            "angle": "+x+z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "+x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x+z",
+            "reason": "drifted"
+          }
+        ]
+      },
+      "legacy": {
+        "passed": false,
+        "gapBudget": 2,
+        "gapCount": 12
+      },
+      "committed": {
+        "passed": false,
+        "gapCount": 12
+      }
+    },
+    {
+      "slug": "church-styled",
+      "sameObject": 0,
+      "drifted": 4,
+      "coverageRefused": false,
+      "majorCount": 7,
+      "minorCount": 5,
+      "v2": {
+        "policy": "multi-angle-budget/v2",
+        "passed": false,
+        "minorBudget": 10,
+        "failures": [
+          {
+            "angle": "+x+z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "+x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x+z",
+            "reason": "drifted"
+          }
+        ]
+      },
+      "legacy": {
+        "passed": false,
+        "gapBudget": 2,
+        "gapCount": 12
+      },
+      "committed": {
+        "passed": false,
+        "gapCount": 12
+      }
+    },
+    {
+      "slug": "cottage-baseline",
+      "sameObject": 0,
+      "drifted": 0,
+      "coverageRefused": true,
+      "majorCount": 0,
+      "minorCount": 0,
+      "v2": {
+        "policy": "multi-angle-budget/v2",
+        "passed": false,
+        "minorBudget": 10,
+        "failures": [
+          {
+            "angle": "+x+z",
+            "reason": "coverage"
+          },
+          {
+            "angle": "+x-z",
+            "reason": "coverage"
+          },
+          {
+            "angle": "-x-z",
+            "reason": "coverage"
+          },
+          {
+            "angle": "-x+z",
+            "reason": "coverage"
+          }
+        ]
+      },
+      "legacy": {
+        "passed": false,
+        "gapBudget": 2,
+        "gapCount": 0
+      },
+      "committed": {
+        "passed": false,
+        "gapCount": 0
+      }
+    },
+    {
+      "slug": "cottage-challenge",
+      "sameObject": 1,
+      "drifted": 3,
+      "coverageRefused": false,
+      "majorCount": 4,
+      "minorCount": 7,
+      "v2": {
+        "policy": "multi-angle-budget/v2",
+        "passed": false,
+        "minorBudget": 10,
+        "failures": [
+          {
+            "angle": "+x+z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x+z",
+            "reason": "drifted"
+          }
+        ]
+      },
+      "legacy": {
+        "passed": false,
+        "gapBudget": 2,
+        "gapCount": 11
+      },
+      "committed": {
+        "passed": false,
+        "gapCount": 11
+      }
+    },
+    {
+      "slug": "cottage-current",
+      "sameObject": 0,
+      "drifted": 3,
+      "coverageRefused": true,
+      "majorCount": 4,
+      "minorCount": 5,
+      "v2": {
+        "policy": "multi-angle-budget/v2",
+        "passed": false,
+        "minorBudget": 10,
+        "failures": [
+          {
+            "angle": "+x+z",
+            "reason": "coverage"
+          },
+          {
+            "angle": "+x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x+z",
+            "reason": "drifted"
+          }
+        ]
+      },
+      "legacy": {
+        "passed": false,
+        "gapBudget": 2,
+        "gapCount": 9
+      },
+      "committed": {
+        "passed": false,
+        "gapCount": 9
+      }
+    },
+    {
+      "slug": "cottage-generated",
+      "sameObject": 2,
+      "drifted": 2,
+      "coverageRefused": false,
+      "majorCount": 4,
+      "minorCount": 6,
+      "v2": {
+        "policy": "multi-angle-budget/v2",
+        "passed": false,
+        "minorBudget": 10,
+        "failures": [
+          {
+            "angle": "-x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x+z",
+            "reason": "drifted"
+          }
+        ]
+      },
+      "legacy": {
+        "passed": false,
+        "gapBudget": 2,
+        "gapCount": 10
+      },
+      "committed": {
+        "passed": false,
+        "gapCount": 10
+      }
+    },
+    {
+      "slug": "cottage-patternbook",
+      "sameObject": 2,
+      "drifted": 2,
+      "coverageRefused": false,
+      "majorCount": 4,
+      "minorCount": 7,
+      "v2": {
+        "policy": "multi-angle-budget/v2",
+        "passed": false,
+        "minorBudget": 10,
+        "failures": [
+          {
+            "angle": "-x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x+z",
+            "reason": "drifted"
+          }
+        ]
+      },
+      "legacy": {
+        "passed": false,
+        "gapBudget": 2,
+        "gapCount": 11
+      },
+      "committed": {
+        "passed": false,
+        "gapCount": 11
+      }
+    },
+    {
+      "slug": "cottage-styled",
+      "sameObject": 0,
+      "drifted": 4,
+      "coverageRefused": false,
+      "majorCount": 6,
+      "minorCount": 6,
+      "v2": {
+        "policy": "multi-angle-budget/v2",
+        "passed": false,
+        "minorBudget": 10,
+        "failures": [
+          {
+            "angle": "+x+z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "+x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x+z",
+            "reason": "drifted"
+          }
+        ]
+      },
+      "legacy": {
+        "passed": false,
+        "gapBudget": 2,
+        "gapCount": 12
+      },
+      "committed": {
+        "passed": false,
+        "gapCount": 12
+      }
+    },
+    {
+      "slug": "gatehouse-challenge",
+      "sameObject": 0,
+      "drifted": 4,
+      "coverageRefused": false,
+      "majorCount": 8,
+      "minorCount": 4,
+      "v2": {
+        "policy": "multi-angle-budget/v2",
+        "passed": false,
+        "minorBudget": 10,
+        "failures": [
+          {
+            "angle": "+x+z",
+            "reason": "different object"
+          },
+          {
+            "angle": "+x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x-z",
+            "reason": "different object"
+          },
+          {
+            "angle": "-x+z",
+            "reason": "drifted"
+          }
+        ]
+      },
+      "legacy": {
+        "passed": false,
+        "gapBudget": 2,
+        "gapCount": 12
+      },
+      "committed": {
+        "passed": false,
+        "gapCount": 12
+      }
+    },
+    {
+      "slug": "gatehouse-current",
+      "sameObject": 0,
+      "drifted": 4,
+      "coverageRefused": false,
+      "majorCount": 7,
+      "minorCount": 5,
+      "v2": {
+        "policy": "multi-angle-budget/v2",
+        "passed": false,
+        "minorBudget": 10,
+        "failures": [
+          {
+            "angle": "+x+z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "+x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x-z",
+            "reason": "different object"
+          },
+          {
+            "angle": "-x+z",
+            "reason": "drifted"
+          }
+        ]
+      },
+      "legacy": {
+        "passed": false,
+        "gapBudget": 2,
+        "gapCount": 12
+      },
+      "committed": {
+        "passed": false,
+        "gapCount": 12
+      }
+    },
+    {
+      "slug": "gatehouse-generated",
+      "sameObject": 0,
+      "drifted": 4,
+      "coverageRefused": false,
+      "majorCount": 8,
+      "minorCount": 4,
+      "v2": {
+        "policy": "multi-angle-budget/v2",
+        "passed": false,
+        "minorBudget": 10,
+        "failures": [
+          {
+            "angle": "+x+z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "+x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x+z",
+            "reason": "drifted"
+          }
+        ]
+      },
+      "legacy": {
+        "passed": false,
+        "gapBudget": 2,
+        "gapCount": 12
+      },
+      "committed": {
+        "passed": false,
+        "gapCount": 12
+      }
+    },
+    {
+      "slug": "gatehouse-styled",
+      "sameObject": 0,
+      "drifted": 4,
+      "coverageRefused": false,
+      "majorCount": 8,
+      "minorCount": 4,
+      "v2": {
+        "policy": "multi-angle-budget/v2",
+        "passed": false,
+        "minorBudget": 10,
+        "failures": [
+          {
+            "angle": "+x+z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "+x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x-z",
+            "reason": "drifted"
+          },
+          {
+            "angle": "-x+z",
+            "reason": "drifted"
+          }
+        ]
+      },
+      "legacy": {
+        "passed": false,
+        "gapBudget": 2,
+        "gapCount": 12
+      },
+      "committed": {
+        "passed": false,
+        "gapCount": 12
+      }
+    },
+    {
+      "slug": "synthetic-hut-current",
+      "sameObject": 4,
+      "drifted": 0,
+      "coverageRefused": false,
+      "majorCount": 0,
+      "minorCount": 2,
+      "v2": {
+        "policy": "multi-angle-budget/v2",
+        "passed": true,
+        "minorBudget": 10,
+        "failures": []
+      },
+      "legacy": {
+        "passed": true,
+        "gapBudget": 2,
+        "gapCount": 2
+      },
+      "committed": {
+        "passed": true,
+        "gapCount": 2
+      }
+    }
+  ]
+}
