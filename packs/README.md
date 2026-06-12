@@ -56,5 +56,27 @@ strictly larger delta than before is a regression (`proportionRegression`, `src/
 even when the findings count ties — the no-regress cage on top of the lexicographic score. Every
 round's ledger entry carries the full ratio table inside the check verdict.
 
+**Lens** (T-140-01) names *which substrate* a number was measured on — orthogonal to `source`
+(concept|sketch, which says where a *target* came from). `PROGRAM` = ratios from program
+parameters (`silhouetteRatios`/`sketchTargetRatios` — clean eaveY/ridgeY/footprint); `OCCUPANCY` =
+ratios over realized voxels (`proportionRatios`/`maskProportions` — sees skirt, taper, every
+realization artifact). The two can disagree (≈3× where the realization diverges from its
+parameters; ≈1× otherwise), so a record that juxtaposes them **names each** (`PROPORTION_LENS`,
+`tagLens`; `compareRatios` stamps rows when handed `opts.lens`). Labels are additive/opt-in — the
+default shape is byte-identical, so committed records are untouched.
+
+The **tolerance** `0.15` is **calibrated, not guessed** (`TOLERANCE_CALIBRATION`): cross-subject
+from the committed E-33 witness records it is the tightest value that passes the achieved post-loop
+ratios (~0.03) yet flags the in-tolerance subject's seed ridge:eave 0.164 that the loop itself
+chased — the in-cluster (≤0.128) and out-cluster (≥0.164) split at it. It stays one frozen op
+parameter, never per-building; the evidence is reproduced in the ruler-calibration record.
+
+**Pitch precedence** (T-140-01) gives the declared pitch target a cited source: the concept wins
+when its silhouette is segmentable (the same `conceptMaxCoverage` guard), else the
+TRELLIS-flattened sketch (`sketch-fallback`); `derivePitchTarget` records both sides, the snapped
+class, and whether the T-134 **steep door** (`pitchClass > 1`) would be demanded.
+
 Witness on the committed T-127 chains: `npm run proportion:cottage` / `proportion:barn` /
-`proportion:repro` (records under `benchmarks/sculpture/proportion/`).
+`proportion:repro` (records under `benchmarks/sculpture/proportion/`). The straight-ruler record —
+lens divergence, tolerance evidence, pitch precedence — is `npm run ruler:calibrate` /
+`ruler:repro`.
