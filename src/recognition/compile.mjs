@@ -95,6 +95,16 @@ function roofBlocks(pack, roofIdiomName, fieldBlock) {
   return { field: fieldBlock, stairs: null, slab: null };
 }
 
+/** The steep door's selection rule, nameable (T-138-01): the gable family realizes pitch
+ *  classes ≤ 1 through `roof.gable` and > 1 through `roof.gable.steep` (the single-door
+ *  property — each brush refuses the other's classes by schema, so an aim across the boundary
+ *  must re-aim the idiom, never widen a door). Roof families without a steep variant return
+ *  unchanged: the door downstream stays the arbiter (T-134 names the refusal). */
+export function roofIdiomForPitch(idiomName, pitchClass) {
+  if (idiomName !== "roof.gable" && idiomName !== "roof.gable.steep") return idiomName;
+  return pitchClass > 1 ? "roof.gable.steep" : "roof.gable";
+}
+
 /**
  * Compile a validated building program against its (validated) pack.
  * @param {object} program  assertBuildingProgram + validateProgramAgainstPack first

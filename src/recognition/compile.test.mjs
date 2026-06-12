@@ -13,7 +13,7 @@ import { artifactOccupancy } from "../view/occupancy.mjs";
 import { assertArtifact } from "../artifact.mjs";
 import { assertWorkshopProgram, realizeProgram } from "../workshop/program.mjs";
 import { assertBuildingProgram, validateProgramAgainstPack } from "./program.mjs";
-import { compileProgram, layoutRun, laneSequence, roleBlock } from "./compile.mjs";
+import { compileProgram, layoutRun, laneSequence, roleBlock, roofIdiomForPitch } from "./compile.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const pack = loadStylePack(resolve(here, "..", "..", "packs", "rustic.json"));
@@ -255,4 +255,19 @@ test("INTEGRATION: pyramid + hip masses also realize and stay watertight/single-
     const c = verdict.checks.find((x) => x.name === name);
     assert.equal(c.passed, true, `${name}: ${JSON.stringify(c.findings.slice(0, 5))}`);
   }
+});
+
+test("roofIdiomForPitch: the gable family crosses the steep door at pitch > 1, others unchanged (T-138-01)", () => {
+  // up-aim: base gable at a steep class must re-aim through the steep door
+  assert.equal(roofIdiomForPitch("roof.gable", 2), "roof.gable.steep");
+  assert.equal(roofIdiomForPitch("roof.gable", 3), "roof.gable.steep");
+  // down-aim: a steep gable lowered to a legacy class returns to the base door
+  assert.equal(roofIdiomForPitch("roof.gable.steep", 1), "roof.gable");
+  assert.equal(roofIdiomForPitch("roof.gable.steep", 0.5), "roof.gable");
+  // identity inside each door's own classes
+  assert.equal(roofIdiomForPitch("roof.gable", 1), "roof.gable");
+  assert.equal(roofIdiomForPitch("roof.gable.steep", 2), "roof.gable.steep");
+  // non-gable families have no steep variant — unchanged; the door downstream arbitrates
+  assert.equal(roofIdiomForPitch("roof.hip", 2), "roof.hip");
+  assert.equal(roofIdiomForPitch("roof.pyramid", 2), "roof.pyramid");
 });
