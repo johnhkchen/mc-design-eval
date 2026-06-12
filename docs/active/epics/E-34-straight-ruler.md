@@ -6,7 +6,7 @@ status: open
 priority: high
 depends_on: [E-33]
 spec: "§1, §5, §6, §9"
-stories: [S-139, S-140, S-141, S-142, S-143]
+stories: [S-139, S-140, S-141, S-142, S-143, S-144]
 ---
 
 ## Background (read this first — self-contained)
@@ -75,8 +75,11 @@ RE-VERDICT                cottage (mandatory) + barns back through the loop; the
 3. **Pin rotations only in their owning ticket, pin-guard preflight always** (T-119). The witness
    ticket owns the measured-record refresh; the re-verdict ticket owns the chain/gate rotations.
    Baselines are quoted pre-rotation and never re-banked.
-4. **The gap-budget question stays the reviewer's** (three epics of data; both arithmetics beside
-   every verdict). **Inherited in full:** workshop/ruler mode split (the terminal story owns the
+4. **The gap budget: DECIDED by the reviewer 2026-06-12** — the budget must track the desired
+   look; the glance is the bar. S-144 owns the implementation (severity-aware identity-first v2,
+   calibrated from committed verdicts, legacy arithmetic reported beside; the judge contract
+   unmoved — aggregation only, never a re-judge). Likewise decided: **saltcrag is ratified**
+   (`style:ratify`, by John Chen, 2026-06-12). **Inherited in full:** workshop/ruler mode split (the terminal story owns the
    epic's only judge runs), replay reproducibility, reply policy (T-114), brush door (export, never
    widen).
 
@@ -85,7 +88,8 @@ RE-VERDICT                cottage (mandatory) + barns back through the loop; the
 ```
 S-139 skirt-aware-eave ──┬─▶ S-142 witness-pin-policy ──▶ S-143 re-verdict (terminal)
 S-140 ruler-calibration ─┤                                  ▲
-S-141 rustic-headroom ───┴──────────────────────────────────┘
+S-141 rustic-headroom ───┴──────────────────────────────────┤
+S-144 glance-true-budget ───────────────────────────────────┘
 ```
 
 - **S-139 — skirt-aware-eave.** The eave detection ignores bottom-anchored bands wider than the
@@ -101,11 +105,17 @@ S-141 rustic-headroom ───┴───────────────�
   threading; record-pin SKIP guard; measured `ratios.before` refresh under explicit rotation) plus
   the missing SKIP-vs-FAIL regression test; bar: a subsequent sanctioned rotation must NOT return
   them to FAIL — S-143 proves it.
+- **S-144 — glance-true-budget.** The reviewer's 2026-06-12 decision implemented: the flat ≤2
+  aggregate budget becomes a severity-aware identity-first policy (v2) calibrated from committed
+  verdicts — the glance-passing class (4/4 same-object all-minor: T-127/T-132/T-138-01 barns)
+  passes, the glance-failing class (the T-138-02 cottage, 2 drifted + 4 major) fails. Aggregation
+  only: no judge call, no re-judge; legacy arithmetic reported beside, forever.
 - **S-143 — re-verdict (terminal).** Cottage (mandatory) and both barns (their consumed pack row
   changed) back through the full loop; **this story owns the epic's only judge runs**; verdicts vs
-  the T-138-02 baselines (cottage 2/4, 7m+4M, 11/2; barns 4/4, 8 minor, 8/2); both arithmetics;
-  the sheets beside the concepts — the question answered: with a straight ruler and headroom, does
-  the cottage residual collapse to real-only, and do the barns' last proportion gaps close?
+  the T-138-02 baselines (cottage 2/4, 7m+4M; barns 4/4, 8 minor) decided under the v2 budget with
+  the legacy arithmetic beside; the sheets beside the concepts — the question answered: with a
+  straight ruler, headroom, and a glance-true budget, does the cottage residual collapse to
+  real-only, and do the barns finally RECORD the pass the glance already gives them?
 
 ## Definition of done
 
@@ -120,12 +130,14 @@ S-141 rustic-headroom ───┴───────────────�
 
 ## Orchestration notes
 
-- S-139/S-140/S-141 are mutually independent (disjoint seams: detection code / record vocabulary +
-  calibration / pack data) — parallel. S-142 follows S-139+S-140 so the witness pins rotate once,
-  after ratio derivation has settled. S-143 is terminal and owns the only judge runs.
+- S-139/S-140/S-141/S-144 are mutually independent (disjoint seams: detection code / record
+  vocabulary + calibration / pack data / gate aggregation) — parallel. S-142 follows S-139+S-140 so
+  the witness pins rotate once, after ratio derivation has settled. S-143 is terminal and owns the
+  only judge runs.
 - **Honesty.** If the corrected ruler says the cottage was never roof-heavy, that is the finding —
   the judge's two drifted views named roof-heaviness independently, so expect part-real residual.
   If the barns' pitch stays within class 1 when measured against the concept (not the flattened
   sketch), the headroom row simply goes unused — recorded, not forced.
-- The saltcrag ratification and the ≤2 gap-budget recalibration remain with the user; this epic
-  records, never decides.
+- Both formerly-pending user decisions landed 2026-06-12: saltcrag ratified (done, pack of
+  record updated); the gap budget rationalized to the glance (S-144 implements). The remaining
+  user-owned item is nothing — this epic has no decision debt.
