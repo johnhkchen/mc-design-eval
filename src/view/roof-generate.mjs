@@ -67,6 +67,41 @@ export function roofFamily(kitRows, vocab) {
 // generator and the fit-error measure, so hip clipping can never read as 'error' (the gatehouse
 // lesson). This module adds only the construction-facing question: which way is downhill.
 
+/** Every column key of an inclusive footprint rect. */
+export function colsOf({ x0, x1, z0, z1 }) {
+  const cols = new Set();
+  for (let x = x0; x <= x1; x++) for (let z = z0; z <= z1; z++) cols.add(`${x},${z}`);
+  return cols;
+}
+
+/**
+ * Build the 2-sided PROGRAM gable record {@link generateRoof} consumes (the roof-generate
+ * fixture shape) — the shared record builder for the registry's roof constructs (roof.gable,
+ * roof.hip, roof.gable.steep). Lives beside its consumer so brush modules can reuse it without
+ * importing the registry (T-134-01).
+ */
+export function gableRecord({ footprint, ridgeAxis, eaveY, ridgeY, pitch, hip }) {
+  const { x0, x1, z0, z1 } = footprint;
+  const sides = ridgeAxis === "z"
+    ? [
+        { planeId: "program-a", eaveDir: "+x", pitch, pitchSource: "program", eaveY, eaveEdge: x1, extentCells: [] },
+        { planeId: "program-b", eaveDir: "-x", pitch, pitchSource: "program", eaveY, eaveEdge: x0, extentCells: [] },
+      ]
+    : [
+        { planeId: "program-a", eaveDir: "+z", pitch, pitchSource: "program", eaveY, eaveEdge: z1, extentCells: [] },
+        { planeId: "program-b", eaveDir: "-z", pitch, pitchSource: "program", eaveY, eaveEdge: z0, extentCells: [] },
+      ];
+  return {
+    id: `program-gable-${ridgeAxis}`,
+    ridge: { axis: ridgeAxis, y: ridgeY },
+    sides,
+    footprint: { cols: colsOf(footprint), bbox: { minX: x0, maxX: x1, minZ: z0, maxZ: z1 }, area: (x1 - x0 + 1) * (z1 - z0 + 1) },
+    hip: hip ?? { demanded: false, lo: false, hi: false },
+    sane: true,
+    reasons: [],
+  };
+}
+
 /**
  * The stair SHAPE at a column from its neighborhood (T-112-01) — Minecraft's corner vocabulary
  * for the diagonal arrises and valleys hip constructions introduce. `probe(dir)` returns the
