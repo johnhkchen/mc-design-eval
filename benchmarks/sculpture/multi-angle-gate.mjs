@@ -68,7 +68,7 @@ import {
 import { resolveAngle, renderViews } from "../../src/view/multi-angle.mjs";
 import { structuralZones } from "../../src/view/structural-read.mjs";
 import { surfaceZoneHistogram, ownCoverage } from "../../src/view/zone-fill.mjs";
-import { coverageGate, DEFAULT_COVERAGE_THRESHOLD } from "../../src/view/face-resemblance.mjs";
+import { visibilityAwareCoverage, DEFAULT_COVERAGE_THRESHOLD } from "../../src/view/face-resemblance.mjs";
 import { layerCounts, zonesFromBands } from "../../src/view/zone-map.mjs";
 import { reviveComponentPlan, frameLinesFromComponent, planCensusZoneOf, bandFloorLines } from "../../src/view/component-plan.mjs";
 import { extractConceptZoneMap } from "../../src/color/band-profile.mjs";
@@ -88,8 +88,9 @@ import { SUBJECTS } from "./durable-skin.mjs";
 // THE GATE REGISTRY: the pipeline subjects + the synthetic-positive fixture (registry DATA only —
 // E-25 Rule 3). "synthetic-hut" exists to prove the gate's PASS path end-to-end: its "concept" is a
 // committed render of its own artifact, so ground truth is same-object by construction; it is labeled
-// synthetic in every record and is NOT a pipeline subject.
-const GATE_SUBJECTS = {
+// synthetic in every record and is NOT a pipeline subject. Exported (with deriveZones /
+// policyInShippedPalette) for the T-137 visibility witness — one derivation point, no refork.
+export const GATE_SUBJECTS = {
   ...SUBJECTS,
   "synthetic-hut": {
     key: "synthetic-hut",
@@ -152,7 +153,7 @@ function encodeLabeledSheet(composed, labels, panelW, gutter) {
 /** The T-092 zone derivation, re-run from the same committed inputs; prior policy as recorded
  *  fallback. T-106-01: `componentPlan` (revived from the chain's persisted component-plan.json)
  *  pins the wall/roof boundary so the gate reads the SAME geometry the chain skinned. */
-function deriveZones({ occ, conceptImg, matMap, fallbackPolicy, componentPlan = null }) {
+export function deriveZones({ occ, conceptImg, matMap, fallbackPolicy, componentPlan = null }) {
   const pinTop = componentPlan?.wallTopEffective ?? componentPlan?.wallTop ?? null; // the chain's arbitrated value
   const sz = structuralZones(occ, pinTop != null ? { upperTop: pinTop } : {});
   const gridResult = gridFromPixels(conceptImg, {
@@ -183,7 +184,7 @@ function deriveZones({ occ, conceptImg, matMap, fallbackPolicy, componentPlan = 
  *  smooth_sandstone where the named policy says white_terracotta — censusing the named block would
  *  fail the view on NAMING, not coverage). The allowed-guard keeps both renames unapplied on
  *  artifacts whose manifest doesn't carry them (the pre-substitution proof baseline). */
-function policyInShippedPalette(zones, { matMap, gridResult, artifact, kitOverrides = {}, kit = [], componentPlan = null }) {
+export function policyInShippedPalette(zones, { matMap, gridResult, artifact, kitOverrides = {}, kit = [], componentPlan = null }) {
   const namedManifest = bareList(matMap.palette);
   const swatches = sampleRoleSwatches(gridResult, namedManifest);
   const rows = selectValueTrueMap(matMap.map, swatches);
@@ -293,6 +294,13 @@ async function main() {
           (!r.parsed || i === v.replies.length - 1)) &&
         !!v.verdict === v.replies.at(-1).parsed
       )),
+      // T-137 (additive — records without visibility stay valid): the cross-view block must be
+      // internally consistent (passed ⇔ no named not-visible-from-any-view failure).
+      visibility: !rec.visibility || (
+        rec.visibility.byBand && Array.isArray(rec.visibility.failures) &&
+        rec.visibility.passed === (rec.visibility.failures.length === 0) &&
+        rec.visibility.failures.every((x) => rec.visibility.byBand[x.band]?.status === "not-visible-from-any-view")
+      ),
       // T-114 (additive): a re-judged record carries its own instrument proof.
       rejudge: !rec.rejudge || (
         Array.isArray(rec.rejudge.angles) && rec.rejudge.angles.length >= 1 &&
@@ -305,6 +313,7 @@ async function main() {
       `aggregate ${checks.aggregate ? "well-formed" : "MALFORMED"}; sheet ${checks.sheet ? "present" : "MISSING"}; ` +
       `kit-aware ${rec.kitPresence ? (checks.kitAware ? "consistent" : "INCONSISTENT") : "n/a (pre-T-100)"}; ` +
       `replies ${(rec.views ?? []).some((v) => v.replies) ? (checks.replies ? "ledger OK" : "LEDGER VIOLATED") : "n/a (pre-T-114)"}; ` +
+      `visibility ${rec.visibility ? (checks.visibility ? "consistent" : "INCONSISTENT") : "n/a (pre-T-137)"}; ` +
       `rejudge ${rec.rejudge ? (checks.rejudge ? "instrument-clean" : "INSTRUMENT DIRTY") : "n/a"} — ` +
       `recorded outcome: ${rec.aggregate?.decided ? (rec.aggregate.passed ? "PASS" : "FAIL") : `REFUSAL (${rec.aggregate?.refusal})`}` +
       (rec.overall ? ` → kit-aware ${rec.overall.decided ? (rec.overall.passed ? "PASS" : "FAIL") : `REFUSAL (${rec.overall.refusal})`}` : ""));
@@ -424,6 +433,33 @@ async function main() {
   const conceptPanel = resampleRgba(conceptImg, P, P, "aspect");
   const grey = { w: P, h: P, data: new Uint8Array(P * P * 4).fill(235) };
 
+  // --- T-137 visibility-aware coverage, all four views at once (pure, GL-free) ---------------------
+  // The per-view census denominator is that view's own visible skin (the diagonal projection —
+  // unchanged); what changed is the treatment of an EMPTY denominator: a band no gate view can see
+  // is excluded (not-on-skin) or NAMED (not-visible-from-any-view when the exposure skin carries
+  // it) instead of refusing the judge on invisibility. Both arithmetics land in the record.
+  const perViewCensus = azimuths.map((a) => ({
+    angle: a,
+    coverage: ownCoverage(surfaceZoneHistogram(occ, gateCensusZoneOf, { faces: [a], skin: "projection" }), zonesShipped),
+  }));
+  const vis = visibilityAwareCoverage({
+    views: perViewCensus,
+    zones: zonesShipped,
+    exposure: surfaceZoneHistogram(occ, gateCensusZoneOf, { skin: "exposure" }),
+    threshold: DEFAULT_COVERAGE_THRESHOLD,
+    metric: "own",
+  });
+  const visByAngle = new Map(vis.views.map((v) => [v.angle, v]));
+  for (const b of vis.visibility.failures) {
+    console.error(`[${slug}] visibility: band ${b.band} is on the exposure skin but NO gate view can see it — named failure`);
+  }
+  for (const [band, info] of Object.entries(vis.visibility.byBand)) {
+    if (info.status === "not-on-skin") {
+      console.error(`[${slug}] visibility: band ${band} has no cells in the census identity (not-on-skin) — ` +
+        "excluded from the precondition; the proportion check owns the form defect");
+    }
+  }
+
   const views = [];
   const panels = [conceptPanel];
   if (renderError) {
@@ -439,17 +475,19 @@ async function main() {
       // T-088 PRECONDITION on THIS view's visible skin: the diagonal projection census. Censused on
       // OWN materials (dominant + declared preserve — T-090's band-evidence set, T-101): a styled
       // zone legitimately carries frame lines and shutters over its dominant; dominant-only counting
-      // rejected exactly the ingredients the kit supplied. Monotone vs the old metric — any view
-      // that passed dominant-only still passes; foreign leakage still fails.
-      const cov = coverageGate(
-        ownCoverage(surfaceZoneHistogram(occ, gateCensusZoneOf, { faces: [a], skin: "projection" }), zonesShipped),
-        { threshold: DEFAULT_COVERAGE_THRESHOLD, zones: zonesShipped, metric: "own" });
+      // rejected exactly the ingredients the kit supplied. T-137: gated through the visibility-aware
+      // arithmetic computed above — a band this view cannot see is excluded HERE and gated wherever
+      // visible; the legacy arithmetic is recorded beside it. Monotone vs both prior metrics.
+      const { aware: cov, legacy } = visByAngle.get(a);
       const viewImg = await decodeImage(r.path);
       const viewPanel = resampleRgba(viewImg, P, P, "aspect");
       panels.push(viewPanel);
       const view = {
         angle: a, azimuthDeg: az, rendered: true, render: { path: r.path.replace(ROOT, "") },
-        coverage: { passed: cov.passed, threshold: cov.threshold, byZone: cov.byZone },
+        coverage: {
+          passed: cov.passed, threshold: cov.threshold, byZone: cov.byZone,
+          legacy: { passed: legacy.passed, failures: legacy.failures },
+        },
         verdict: null, judge: null,
       };
       if (!cov.passed) {
@@ -521,6 +559,9 @@ async function main() {
     aggregate,
     kitPresence: presence,
     overall,
+    // T-137 (additive — pre-T-137 records stay valid): the cross-view visibility verdict. The
+    // per-view exclusions live in each view's coverage.byZone; this names the band-level statuses.
+    visibility: vis.visibility,
     sheet: sheetFrame.replace(ROOT, ""),
     labeled,
   };
@@ -681,7 +722,8 @@ async function rejudgeMain({ def, label, slug, recPath, sheetFrame }) {
 function recordMd(r) {
   const viewRows = r.views.map((v) => {
     const covCell = v.coverage
-      ? (v.coverage.passed ? "pass" : Object.entries(v.coverage.byZone).map(([z, c]) => `${z} ${c.dominant}=${c.fraction ?? "?"}`).join("<br>"))
+      ? (v.coverage.passed ? "pass" : Object.entries(v.coverage.byZone)
+          .map(([z, c]) => (c.excluded ? `${z} ${c.status}` : `${z} ${c.dominant}=${c.fraction ?? "?"}`)).join("<br>"))
       : "—";
     const verdictCell = v.verdict
       ? `${v.verdict.verdict}${v.verdict.gaps.length ? `<br>${v.verdict.gaps.map((g) => `${g.severity} ${g.attribute} @ ${g.region}`).join("<br>")}` : ""}`
