@@ -1,0 +1,466 @@
+{
+  "schema": "proportion-witness/v1",
+  "ticket": "T-135-01",
+  "subject": "cottage",
+  "runKey": "cottage",
+  "inputs": {
+    "ledger": {
+      "path": "benchmarks/sculpture/workshop/cottage.json",
+      "sha256": "e1abd583ca3393b3c1bef19dbab10992b5937994563d27fc1ce9eb9605701c0c"
+    },
+    "finalArtifact": {
+      "path": "benchmarks/sculpture/workshop/cottage/final-artifact.json",
+      "sha256": "cc9530aa6d5621947a29908b6f811c7bff2ad98ec9b75153b9fb1f5fa1b26c8f"
+    },
+    "sketch": {
+      "path": "benchmarks/sculpture/form-sketch/cottage.json",
+      "sha256": "fec1a6691882ec6a372354bc6957d4f57d45e38488642da5cc4c83b4919cc7ca"
+    },
+    "concept": {
+      "path": "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
+      "sha256": "506c25132952d3d4ccb7d1f78816982542612d8464087bad07c0f9b847e57759"
+    }
+  },
+  "conceptSegmentation": {
+    "coverage": 0.9673,
+    "segmentable": false
+  },
+  "declarations": {
+    "schema": "silhouette-proportion/v1",
+    "targets": {
+      "ridgeToEave": 1.4145,
+      "roofShare": 0.293,
+      "aspect": 1.1852
+    },
+    "sources": {
+      "ridgeToEave": "sketch",
+      "roofShare": "sketch",
+      "aspect": "sketch"
+    },
+    "tolerance": 0.15
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "stage": "seed",
+      "ratios": {
+        "ridgeToEave": 4.5,
+        "roofShare": 0.7778,
+        "aspect": 1.0357
+      },
+      "pass": false,
+      "rows": [
+        {
+          "ratio": "ridgeToEave",
+          "measured": 4.5,
+          "target": 1.4145,
+          "source": "sketch",
+          "delta": 3.0855,
+          "excess": 2.1813,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "roofShare",
+          "measured": 0.7778,
+          "target": 0.293,
+          "source": "sketch",
+          "delta": 0.4848,
+          "excess": 1.6546,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "aspect",
+          "measured": 1.0357,
+          "target": 1.1852,
+          "source": "sketch",
+          "delta": 0.1495,
+          "excess": 0.1261,
+          "basis": "relative",
+          "withinTolerance": true
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "decision": "revise",
+      "accepted": true,
+      "critiqueIssues": [
+        {
+          "severity": "major",
+          "region": "upper storey (white_terracotta band)"
+        },
+        {
+          "severity": "major",
+          "region": "roof vs walls overall mass"
+        },
+        {
+          "severity": "minor",
+          "region": "roof eave / gable verge"
+        },
+        {
+          "severity": "minor",
+          "region": "upper-storey windows"
+        },
+        {
+          "severity": "minor",
+          "region": "white infill color"
+        }
+      ],
+      "ratios": {
+        "ridgeToEave": 4.5,
+        "roofShare": 0.7778,
+        "aspect": 1.0357
+      },
+      "pass": false,
+      "rows": [
+        {
+          "ratio": "ridgeToEave",
+          "measured": 4.5,
+          "target": 1.4145,
+          "source": "sketch",
+          "delta": 3.0855,
+          "excess": 2.1813,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "roofShare",
+          "measured": 0.7778,
+          "target": 0.293,
+          "source": "sketch",
+          "delta": 0.4848,
+          "excess": 1.6546,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "aspect",
+          "measured": 1.0357,
+          "target": 1.1852,
+          "source": "sketch",
+          "delta": 0.1495,
+          "excess": 0.1261,
+          "basis": "relative",
+          "withinTolerance": true
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "decision": "revise",
+      "accepted": true,
+      "critiqueIssues": [
+        {
+          "severity": "major",
+          "region": "upper storey walls (all faces)"
+        },
+        {
+          "severity": "major",
+          "region": "main roof eaves"
+        },
+        {
+          "severity": "minor",
+          "region": "window surrounds"
+        },
+        {
+          "severity": "minor",
+          "region": "overall proportion"
+        }
+      ],
+      "ratios": {
+        "ridgeToEave": 4.5,
+        "roofShare": 0.7778,
+        "aspect": 1.0357
+      },
+      "pass": false,
+      "rows": [
+        {
+          "ratio": "ridgeToEave",
+          "measured": 4.5,
+          "target": 1.4145,
+          "source": "sketch",
+          "delta": 3.0855,
+          "excess": 2.1813,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "roofShare",
+          "measured": 0.7778,
+          "target": 0.293,
+          "source": "sketch",
+          "delta": 0.4848,
+          "excess": 1.6546,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "aspect",
+          "measured": 1.0357,
+          "target": 1.1852,
+          "source": "sketch",
+          "delta": 0.1495,
+          "excess": 0.1261,
+          "basis": "relative",
+          "withinTolerance": true
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "decision": "revise",
+      "accepted": true,
+      "critiqueIssues": [
+        {
+          "severity": "major",
+          "region": "upper storey, all facades"
+        },
+        {
+          "severity": "minor",
+          "region": "roof mass (all views)"
+        },
+        {
+          "severity": "minor",
+          "region": "chimney"
+        }
+      ],
+      "ratios": {
+        "ridgeToEave": 4.5,
+        "roofShare": 0.7778,
+        "aspect": 1.0357
+      },
+      "pass": false,
+      "rows": [
+        {
+          "ratio": "ridgeToEave",
+          "measured": 4.5,
+          "target": 1.4145,
+          "source": "sketch",
+          "delta": 3.0855,
+          "excess": 2.1813,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "roofShare",
+          "measured": 0.7778,
+          "target": 0.293,
+          "source": "sketch",
+          "delta": 0.4848,
+          "excess": 1.6546,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "aspect",
+          "measured": 1.0357,
+          "target": 1.1852,
+          "source": "sketch",
+          "delta": 0.1495,
+          "excess": 0.1261,
+          "basis": "relative",
+          "withinTolerance": true
+        }
+      ]
+    },
+    {
+      "round": 4,
+      "decision": "revise",
+      "accepted": true,
+      "critiqueIssues": [
+        {
+          "severity": "major",
+          "region": "upper storey (cream walls, all faces)"
+        },
+        {
+          "severity": "minor",
+          "region": "roof vs walls overall"
+        },
+        {
+          "severity": "minor",
+          "region": "roof field color"
+        },
+        {
+          "severity": "minor",
+          "region": "ground storey stone"
+        }
+      ],
+      "ratios": {
+        "ridgeToEave": 4.5,
+        "roofShare": 0.7778,
+        "aspect": 1.0357
+      },
+      "pass": false,
+      "rows": [
+        {
+          "ratio": "ridgeToEave",
+          "measured": 4.5,
+          "target": 1.4145,
+          "source": "sketch",
+          "delta": 3.0855,
+          "excess": 2.1813,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "roofShare",
+          "measured": 0.7778,
+          "target": 0.293,
+          "source": "sketch",
+          "delta": 0.4848,
+          "excess": 1.6546,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "aspect",
+          "measured": 1.0357,
+          "target": 1.1852,
+          "source": "sketch",
+          "delta": 0.1495,
+          "excess": 0.1261,
+          "basis": "relative",
+          "withinTolerance": true
+        }
+      ]
+    },
+    {
+      "round": 5,
+      "decision": "revise",
+      "accepted": true,
+      "critiqueIssues": [
+        {
+          "severity": "major",
+          "region": "wing upper storey (+x face, x=25)"
+        },
+        {
+          "severity": "minor",
+          "region": "-z (south) upper facade"
+        },
+        {
+          "severity": "minor",
+          "region": "overall upper storey"
+        },
+        {
+          "severity": "minor",
+          "region": "roof"
+        }
+      ],
+      "ratios": {
+        "ridgeToEave": 4.5,
+        "roofShare": 0.7778,
+        "aspect": 1.0357
+      },
+      "pass": false,
+      "rows": [
+        {
+          "ratio": "ridgeToEave",
+          "measured": 4.5,
+          "target": 1.4145,
+          "source": "sketch",
+          "delta": 3.0855,
+          "excess": 2.1813,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "roofShare",
+          "measured": 0.7778,
+          "target": 0.293,
+          "source": "sketch",
+          "delta": 0.4848,
+          "excess": 1.6546,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "aspect",
+          "measured": 1.0357,
+          "target": 1.1852,
+          "source": "sketch",
+          "delta": 0.1495,
+          "excess": 0.1261,
+          "basis": "relative",
+          "withinTolerance": true
+        }
+      ]
+    },
+    {
+      "round": 6,
+      "decision": "done",
+      "accepted": true,
+      "critiqueIssues": [
+        {
+          "severity": "minor",
+          "region": "roof vs upper storey"
+        },
+        {
+          "severity": "minor",
+          "region": "timber studs"
+        },
+        {
+          "severity": "minor",
+          "region": "wing roof"
+        }
+      ],
+      "ratios": {
+        "ridgeToEave": 4.5,
+        "roofShare": 0.7778,
+        "aspect": 1.0357
+      },
+      "pass": false,
+      "rows": [
+        {
+          "ratio": "ridgeToEave",
+          "measured": 4.5,
+          "target": 1.4145,
+          "source": "sketch",
+          "delta": 3.0855,
+          "excess": 2.1813,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "roofShare",
+          "measured": 0.7778,
+          "target": 0.293,
+          "source": "sketch",
+          "delta": 0.4848,
+          "excess": 1.6546,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "aspect",
+          "measured": 1.0357,
+          "target": 1.1852,
+          "source": "sketch",
+          "delta": 0.1495,
+          "excess": 0.1261,
+          "basis": "relative",
+          "withinTolerance": true
+        }
+      ]
+    }
+  ],
+  "defect": {
+    "ratio": "ridgeToEave",
+    "measured": 4.5,
+    "target": 1.4145,
+    "source": "sketch",
+    "delta": 3.0855,
+    "excess": 2.1813,
+    "basis": "relative",
+    "withinTolerance": false
+  },
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  },
+  "replay": {
+    "npmRun": "proportion:repro",
+    "asserts": "committed ledger + sketch + concept → byte-identical witness record (prefix replay, no model, no GL, no judge)"
+  }
+}

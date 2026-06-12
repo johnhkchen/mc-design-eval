@@ -44,6 +44,8 @@ export const PROPORTION_DEFAULTS = Object.freeze({
   ridgeMinWidthFrac: 0.25, // a row narrower than this × maxExtent never reads as the ridge
   eaveWidthFrac: 0.98, // a row at least this × maxExtent is an eave-layer candidate (0.98, not
   // 1.0: antialiased concept masks put near-max rows a pixel or two apart)
+  conceptMaxCoverage: 0.5, // a concept "silhouette" covering more of its frame than this did not
+  // background-segment (a full illustrated scene, not a subject on black) — unusable, fall back
 });
 
 const r4 = (x) => Math.round(x * 1e4) / 1e4;
@@ -172,6 +174,17 @@ export function ratiosFromMask(mask, opts = {}) {
 /** Alias with the concept-side name (the witness/derivation call site reads as its meaning). */
 export const targetsFromConceptMask = ratiosFromMask;
 
+/** Foreground fraction of the WHOLE frame (uses fgCount when the mask carries one). */
+export function maskCoverage(mask) {
+  if (!mask || !mask.data) return 0;
+  let fg = mask.fgCount;
+  if (!Number.isFinite(fg)) {
+    fg = 0;
+    for (let i = 0; i < mask.data.length; i++) if (mask.data[i]) fg++;
+  }
+  return fg / (mask.w * mask.h);
+}
+
 // --- assembly over an occupancy ---------------------------------------------
 
 /**
@@ -226,7 +239,11 @@ function ratiosOver(occ, bbox, opts) {
  */
 export function deriveProportionDeclarations({ conceptMask = null, sketch, tolerance, masses } = {}) {
   if (!sketch) fail("deriveProportionDeclarations: sketch is required (the recorded fallback reference)");
-  const concept = conceptMask ? targetsFromConceptMask(conceptMask) : { ridgeToEave: null, roofShare: null };
+  // a mask that covers most of its frame is a failed background segmentation (the T-127 cottage
+  // concept is a full illustrated scene, not a subject on black) — deterministic guard, recorded
+  // through the per-ratio sources, never a silent bad number
+  const usable = conceptMask && maskCoverage(conceptMask) <= PROPORTION_DEFAULTS.conceptMaxCoverage;
+  const concept = usable ? targetsFromConceptMask(conceptMask) : { ridgeToEave: null, roofShare: null };
   const fromSketch = sketchTargetRatios(sketch);
   const targets = {};
   const sources = {};

@@ -149,6 +149,13 @@ test("SP7 deriveProportionDeclarations: concept-first, sketch fallback, aspect a
   // neither side measures heights → throws (never a silent default)
   const blind = { ...SKETCH, proportions: {} };
   assert.throws(() => deriveProportionDeclarations({ conceptMask: null, sketch: blind }), /unmeasurable/);
+
+  // a concept mask covering most of its frame failed to background-segment (a full illustrated
+  // scene, the T-127 cottage case) — deterministic guard, sketch takes over, sources say so
+  const scene = { w: 10, h: 10, data: new Uint8Array(100).fill(1), bbox: { x0: 0, y0: 0, x1: 10, y1: 10 } };
+  const guarded = deriveProportionDeclarations({ conceptMask: scene, sketch: SKETCH });
+  assert.equal(guarded.sources.ridgeToEave, "sketch");
+  assert.equal(guarded.targets.ridgeToEave, 1.4145);
 });
 
 test("SP8 assertProportionDeclarations rejects malformed shapes", () => {

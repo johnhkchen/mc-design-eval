@@ -1,0 +1,446 @@
+{
+  "schema": "proportion-witness/v1",
+  "ticket": "T-135-01",
+  "subject": "barn",
+  "runKey": "barn",
+  "inputs": {
+    "ledger": {
+      "path": "benchmarks/sculpture/workshop/barn.json",
+      "sha256": "11ec20dd9d3d8407c3ddcaf582b2c0e732237ab3f594f048714b8f8721606fbb"
+    },
+    "finalArtifact": {
+      "path": "benchmarks/sculpture/workshop/barn/final-artifact.json",
+      "sha256": "91ee4b2e7b6dc2107e949303f919fb3c4e5dfb51eb245c79627f7a1f6dc29185"
+    },
+    "sketch": {
+      "path": "benchmarks/sculpture/form-sketch/barn.json",
+      "sha256": "8a0390e55ed0ef60a60c487c23a6b2bca47e5c03e4c5444d18cef2f9f44d69c1"
+    },
+    "concept": {
+      "path": "benchmarks/sculpture/runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png",
+      "sha256": "1794ed0f3a3727756f4b393131cb8c5f348e57f26183278e5e0ff904b7a31773"
+    }
+  },
+  "conceptSegmentation": {
+    "coverage": 0.5148,
+    "segmentable": false
+  },
+  "declarations": {
+    "schema": "silhouette-proportion/v1",
+    "targets": {
+      "ridgeToEave": 2.1,
+      "roofShare": 0.5238,
+      "aspect": 1.8462
+    },
+    "sources": {
+      "ridgeToEave": "sketch",
+      "roofShare": "sketch",
+      "aspect": "sketch"
+    },
+    "tolerance": 0.15
+  },
+  "rounds": [
+    {
+      "round": 0,
+      "stage": "seed",
+      "ratios": {
+        "ridgeToEave": 2.4444,
+        "roofShare": 0.5909,
+        "aspect": 1.8462
+      },
+      "pass": false,
+      "rows": [
+        {
+          "ratio": "ridgeToEave",
+          "measured": 2.4444,
+          "target": 2.1,
+          "source": "sketch",
+          "delta": 0.3444,
+          "excess": 0.164,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "roofShare",
+          "measured": 0.5909,
+          "target": 0.5238,
+          "source": "sketch",
+          "delta": 0.0671,
+          "excess": 0.1281,
+          "basis": "relative",
+          "withinTolerance": true
+        },
+        {
+          "ratio": "aspect",
+          "measured": 1.8462,
+          "target": 1.8462,
+          "source": "sketch",
+          "delta": 0,
+          "excess": 0,
+          "basis": "relative",
+          "withinTolerance": true
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "decision": "revise",
+      "accepted": false,
+      "critiqueIssues": [
+        {
+          "severity": "major",
+          "region": "roof field"
+        },
+        {
+          "severity": "minor",
+          "region": "long walls (+z/-z)"
+        },
+        {
+          "severity": "minor",
+          "region": "gable apex vent"
+        }
+      ],
+      "ratios": {
+        "ridgeToEave": 2.4444,
+        "roofShare": 0.5909,
+        "aspect": 1.8462
+      },
+      "pass": false,
+      "rows": [
+        {
+          "ratio": "ridgeToEave",
+          "measured": 2.4444,
+          "target": 2.1,
+          "source": "sketch",
+          "delta": 0.3444,
+          "excess": 0.164,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "roofShare",
+          "measured": 0.5909,
+          "target": 0.5238,
+          "source": "sketch",
+          "delta": 0.0671,
+          "excess": 0.1281,
+          "basis": "relative",
+          "withinTolerance": true
+        },
+        {
+          "ratio": "aspect",
+          "measured": 1.8462,
+          "target": 1.8462,
+          "source": "sketch",
+          "delta": 0,
+          "excess": 0,
+          "basis": "relative",
+          "withinTolerance": true
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "decision": "revise",
+      "accepted": false,
+      "critiqueIssues": [
+        {
+          "severity": "major",
+          "region": "+z facade, large openings at x15-17 and x30-32"
+        },
+        {
+          "severity": "minor",
+          "region": "roof field"
+        },
+        {
+          "severity": "minor",
+          "region": "+x gable end"
+        }
+      ],
+      "ratios": {
+        "ridgeToEave": 2.4444,
+        "roofShare": 0.5909,
+        "aspect": 1.8462
+      },
+      "pass": false,
+      "rows": [
+        {
+          "ratio": "ridgeToEave",
+          "measured": 2.4444,
+          "target": 2.1,
+          "source": "sketch",
+          "delta": 0.3444,
+          "excess": 0.164,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "roofShare",
+          "measured": 0.5909,
+          "target": 0.5238,
+          "source": "sketch",
+          "delta": 0.0671,
+          "excess": 0.1281,
+          "basis": "relative",
+          "withinTolerance": true
+        },
+        {
+          "ratio": "aspect",
+          "measured": 1.8462,
+          "target": 1.8462,
+          "source": "sketch",
+          "delta": 0,
+          "excess": 0,
+          "basis": "relative",
+          "withinTolerance": true
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "decision": "revise",
+      "accepted": false,
+      "critiqueIssues": [
+        {
+          "severity": "major",
+          "region": "+z facade large openings (x15, x30)"
+        },
+        {
+          "severity": "major",
+          "region": "long-wall bays"
+        },
+        {
+          "severity": "minor",
+          "region": "overall mass / roof"
+        }
+      ],
+      "ratios": {
+        "ridgeToEave": 2.4444,
+        "roofShare": 0.5909,
+        "aspect": 1.8462
+      },
+      "pass": false,
+      "rows": [
+        {
+          "ratio": "ridgeToEave",
+          "measured": 2.4444,
+          "target": 2.1,
+          "source": "sketch",
+          "delta": 0.3444,
+          "excess": 0.164,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "roofShare",
+          "measured": 0.5909,
+          "target": 0.5238,
+          "source": "sketch",
+          "delta": 0.0671,
+          "excess": 0.1281,
+          "basis": "relative",
+          "withinTolerance": true
+        },
+        {
+          "ratio": "aspect",
+          "measured": 1.8462,
+          "target": 1.8462,
+          "source": "sketch",
+          "delta": 0,
+          "excess": 0,
+          "basis": "relative",
+          "withinTolerance": true
+        }
+      ]
+    },
+    {
+      "round": 4,
+      "decision": "revise",
+      "accepted": false,
+      "critiqueIssues": [
+        {
+          "severity": "major",
+          "region": "+z long wall, door bays at x15-17 and x30-32"
+        },
+        {
+          "severity": "minor",
+          "region": "+z/-z field walls"
+        },
+        {
+          "severity": "minor",
+          "region": "gable ends (±x triangles)"
+        }
+      ],
+      "ratios": {
+        "ridgeToEave": 2.4444,
+        "roofShare": 0.5909,
+        "aspect": 1.8462
+      },
+      "pass": false,
+      "rows": [
+        {
+          "ratio": "ridgeToEave",
+          "measured": 2.4444,
+          "target": 2.1,
+          "source": "sketch",
+          "delta": 0.3444,
+          "excess": 0.164,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "roofShare",
+          "measured": 0.5909,
+          "target": 0.5238,
+          "source": "sketch",
+          "delta": 0.0671,
+          "excess": 0.1281,
+          "basis": "relative",
+          "withinTolerance": true
+        },
+        {
+          "ratio": "aspect",
+          "measured": 1.8462,
+          "target": 1.8462,
+          "source": "sketch",
+          "delta": 0,
+          "excess": 0,
+          "basis": "relative",
+          "withinTolerance": true
+        }
+      ]
+    },
+    {
+      "round": 5,
+      "decision": "revise",
+      "accepted": false,
+      "critiqueIssues": [
+        {
+          "severity": "major",
+          "region": "+z facade, big bays at x15 and x30"
+        },
+        {
+          "severity": "minor",
+          "region": "+z / -z long walls"
+        },
+        {
+          "severity": "minor",
+          "region": "gable rake (+x end)"
+        }
+      ],
+      "ratios": {
+        "ridgeToEave": 2.4444,
+        "roofShare": 0.5909,
+        "aspect": 1.8462
+      },
+      "pass": false,
+      "rows": [
+        {
+          "ratio": "ridgeToEave",
+          "measured": 2.4444,
+          "target": 2.1,
+          "source": "sketch",
+          "delta": 0.3444,
+          "excess": 0.164,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "roofShare",
+          "measured": 0.5909,
+          "target": 0.5238,
+          "source": "sketch",
+          "delta": 0.0671,
+          "excess": 0.1281,
+          "basis": "relative",
+          "withinTolerance": true
+        },
+        {
+          "ratio": "aspect",
+          "measured": 1.8462,
+          "target": 1.8462,
+          "source": "sketch",
+          "delta": 0,
+          "excess": 0,
+          "basis": "relative",
+          "withinTolerance": true
+        }
+      ]
+    },
+    {
+      "round": 6,
+      "decision": "revise",
+      "accepted": false,
+      "critiqueIssues": [
+        {
+          "severity": "major",
+          "region": "+z long wall, x15-17 & x30-32 ground openings"
+        },
+        {
+          "severity": "minor",
+          "region": "+z facade overall"
+        },
+        {
+          "severity": "minor",
+          "region": "gable end"
+        }
+      ],
+      "ratios": {
+        "ridgeToEave": 2.4444,
+        "roofShare": 0.5909,
+        "aspect": 1.8462
+      },
+      "pass": false,
+      "rows": [
+        {
+          "ratio": "ridgeToEave",
+          "measured": 2.4444,
+          "target": 2.1,
+          "source": "sketch",
+          "delta": 0.3444,
+          "excess": 0.164,
+          "basis": "relative",
+          "withinTolerance": false
+        },
+        {
+          "ratio": "roofShare",
+          "measured": 0.5909,
+          "target": 0.5238,
+          "source": "sketch",
+          "delta": 0.0671,
+          "excess": 0.1281,
+          "basis": "relative",
+          "withinTolerance": true
+        },
+        {
+          "ratio": "aspect",
+          "measured": 1.8462,
+          "target": 1.8462,
+          "source": "sketch",
+          "delta": 0,
+          "excess": 0,
+          "basis": "relative",
+          "withinTolerance": true
+        }
+      ]
+    }
+  ],
+  "defect": {
+    "ratio": "ridgeToEave",
+    "measured": 2.4444,
+    "target": 2.1,
+    "source": "sketch",
+    "delta": 0.3444,
+    "excess": 0.164,
+    "basis": "relative",
+    "withinTolerance": false
+  },
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  },
+  "replay": {
+    "npmRun": "proportion:repro",
+    "asserts": "committed ledger + sketch + concept → byte-identical witness record (prefix replay, no model, no GL, no judge)"
+  }
+}
