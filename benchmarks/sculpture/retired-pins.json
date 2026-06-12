@@ -1,0 +1,39 @@
+{
+  "schema": "retired-pins/v1",
+  "owner": "T-142-01",
+  "note": "Sanctioned-rotation registry for the re-derivation witnesses (T-142-01, E-34). Each entry certifies that a witness's pinned source was retired by a named, owning rotation — so the witness SKIPs (named) at --repro instead of a bare DIVERGES. Keyed on retiredSourceSha: a FURTHER undeclared change of the same slug still FAILs. Subject keys live HERE (a data sidecar), never in a runner's .mjs source, so the generalization self-grep stays clean (E-25 Rule 3). A future sanctioned rotation (T-143's bar) adds its entry here as part of the rotation.",
+  "proportion": [
+    {
+      "slug": "cottage",
+      "retiredSourceSha": "e1abd583ca3393b3c1bef19dbab10992b5937994563d27fc1ce9eb9605701c0c",
+      "ticket": "T-138-02",
+      "reason": "cottage through the proportion loop — ledger re-banked (487fe2e); the witness's pinned ledger/final/concept were all rotated"
+    },
+    {
+      "slug": "barn",
+      "retiredSourceSha": "11ec20dd9d3d8407c3ddcaf582b2c0e732237ab3f594f048714b8f8721606fbb",
+      "ticket": "T-138-01",
+      "reason": "barn through the proportion loop — ledger re-banked (5db9a86); the witness's pinned ledger/final/concept were all rotated"
+    }
+  ],
+  "visibility": [
+    {
+      "slug": "barn-patternbook",
+      "retiredSourceSha": "3dc04c970f6781b9fcd84fb756d87ef0d23180e5af38756065141cde3295d492",
+      "ticket": "T-138-01",
+      "reason": "barn through the proportion loop — gate record re-judged (5db9a86)"
+    },
+    {
+      "slug": "barn-patternbook-saltcrag",
+      "retiredSourceSha": "88055c5f908483da2f8d791670430d9df9d64842dcd82716b837d991deaa080e",
+      "ticket": "T-138-01",
+      "reason": "saltcrag ratified — gate record re-banked to the glance (8ae7c65)"
+    },
+    {
+      "slug": "cottage-patternbook",
+      "retiredSourceSha": "f5567754f77c83278f2e7e2677de3773465269b552afa94cad762dc4d10dd0a7",
+      "ticket": "T-138-02",
+      "reason": "cottage through the proportion loop — gate record re-judged (487fe2e); the retired record is preserved at src/view/fixtures/cottage-patternbook.t127-retired.json"
+    }
+  ]
+}
