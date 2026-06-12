@@ -52,16 +52,17 @@ export function rerecognizeRenderArgs({ pack, sketch, mass, issues }) {
  * Throws on any violation (MALFORMED — the bounded re-ask). Returns the accepted fragment plus
  * the substituted, recompiled pair the applier hands the loop.
  * @param {string} text  raw model reply
- * @param {{source:object, massId:string, pack:object, budget:{rounds:number}}} ctx
+ * @param {{source:object, massId:string, pack:object, budget:{rounds:number},
+ *          proportions?:object|null}} ctx
  * @returns {{mass:object, program:object, source:object}}
  */
-export function parseMassReply(text, { source, massId, pack, budget }) {
+export function parseMassReply(text, { source, massId, pack, budget, proportions = null }) {
   let mass;
   try {
     mass = JSON.parse(stripReplyToJson(text));
   } catch (e) {
     fail(`fragment reply is not valid JSON: ${e.message}`);
   }
-  const r = substituteMass({ source, pack, budget }, { massId, mass });
+  const r = substituteMass({ source, pack, budget, proportions }, { massId, mass });
   return { mass: Object.freeze(structuredClone(mass)), program: r.program, source: r.source };
 }

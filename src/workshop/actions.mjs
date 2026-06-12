@@ -187,7 +187,8 @@ export const DEFAULT_APPLIERS = Object.freeze({
  * Apply a parsed action. Returns the applier's result (possibly a Promise — an injected
  * re-recognize applier is a metered exchange; the loop awaits), or {kind:"unavailable"} when the
  * action has no wired applier (the loop ledgers it and moves on).
- * @param {{program:object, occ:object, source?:object|null, pack?:object}} ctx
+ * @param {{program:object, occ:object, source?:object|null, pack?:object, critique?:object}} ctx
+ *   critique: the round's parsed critique (an injected re-recognize applier attaches it)
  * @param {object} action  a {@link parseAction} result
  * @param {{appliers?:object}} [opts]
  */

@@ -166,7 +166,7 @@ export async function runWorkshopLoop({ program, pack, source = null, seams, app
     let reason;
     try {
       const result = await applyAction(
-        { program: current, occ: artifactOccupancy(artifact), source: currentSource, pack },
+        { program: current, occ: artifactOccupancy(artifact), source: currentSource, pack, critique },
         action, { appliers },
       );
       if (result.kind === "unavailable") {

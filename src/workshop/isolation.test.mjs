@@ -42,6 +42,9 @@ const workshopFiles = () => [
   // is convened from OUTSIDE (gate:patternbook:* scripts); the verdict READER
   // (pattern-book-compare.mjs) must name gate-record paths and is deliberately NOT listed here.
   join(ROOT, "benchmarks", "sculpture", "pattern-book.mjs"),
+  // T-136-01: the geometry-levers runner composes the workshop (source-threaded loop + injected
+  // re-recognize exchange) — same bar.
+  join(ROOT, "benchmarks", "sculpture", "geometry-levers.mjs"),
 ];
 
 test("ISO1 no workshop source references any judge seam (precise tokens, runner included)", () => {
@@ -82,7 +85,7 @@ test("ISO3 pin-guard refuses workshop writes to gate records — rotate and sanc
 });
 
 test("ISO4 the loop core never imports the model or render stacks (seams arrive injected)", () => {
-  for (const name of ["loop.mjs", "program.mjs", "actions.mjs", "critique.mjs", "replay.mjs"]) {
+  for (const name of ["loop.mjs", "program.mjs", "actions.mjs", "critique.mjs", "replay.mjs", "geometry.mjs", "rerecognize.mjs"]) {
     const src = readFileSync(join(HERE, name), "utf8");
     const importLines = src.split("\n").filter((l) => /^\s*import\b/.test(l));
     // "baml" joins the ban (T-129-01): prompt rendering is the RUNNER's, through the bridge —
