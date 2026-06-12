@@ -17,7 +17,8 @@
 //   --offline       re-assert the committed record's internal consistency (no model, no GL).
 //                   Exit 0/1.
 //
-// Usage: node benchmarks/sculpture/workshop.mjs --subject fixture [--replay|--offline] [--rotate-pins]
+// Usage: node benchmarks/sculpture/workshop.mjs --subject fixture [--pack packs/<style>.json]
+//        [--replay|--offline] [--rotate-pins]
 
 import { readFile, writeFile, mkdir, copyFile } from "node:fs/promises";
 import { join, relative } from "node:path";
@@ -39,39 +40,40 @@ import { runWorkshopLoop, conformanceScore } from "../../src/workshop/loop.mjs";
 import { parseWorkshopReply, critiqueRenderArgs } from "../../src/workshop/critique.mjs";
 import { bamlRender } from "../../src/baml/bridge.mjs";
 import { serializeArtifact, replayLedger, offlineAssert } from "../../src/workshop/replay.mjs";
-import { workshopSubjectsFrom } from "../../src/workshop/seed.mjs";
+import { workshopSubjectsFrom, chainRels, DEFAULT_PACK_REL } from "../../src/workshop/seed.mjs";
 import { SUBJECTS as REGISTRY } from "./durable-skin.mjs";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 const HERE = join(ROOT, "benchmarks/sculpture");
-const OUT_DIR = join(HERE, "workshop");
 const REL_DIR = "benchmarks/sculpture/workshop";
 const FRAMES_DIR = join(ROOT, "pr/assets/frames");
 
 const TIER = "strong"; // op "workshop-critique" (model-tier OP_ROUTING)
 const RENDER = Object.freeze({ width: 512, height: 512 });
 
-/** Subjects are DATA (no per-building code): program + concept + pack, all committed paths.
- *  The synthetic fixture stays the explicit row; pipeline subjects derive from the durable-skin
- *  registry (T-127-01 — paths only, no subject key in this source; live mode fails loudly when
- *  the derived program has not been committed by the pattern-book chain's seed stage). */
-const SUBJECTS = Object.freeze({
-  fixture: Object.freeze({
-    program: `${REL_DIR}/fixture/program.json`,
-    concept: "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
-    pack: "packs/rustic.json",
-  }),
-  ...workshopSubjectsFrom(REGISTRY, { relDir: REL_DIR, packRel: "packs/rustic.json" }),
-});
-
 // ---------------------------------------------------------------- CLI
 
 const argv = process.argv.slice(2);
 const argOf = (flag) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : null; };
 const subjectKey = argOf("--subject") ?? "fixture";
+const packRel = argOf("--pack") ?? DEFAULT_PACK_REL; // T-132-01: the pack is invocation data
 const replay = argv.includes("--replay");
 const offline = argv.includes("--offline");
 const rotate = argv.includes(ROTATE_FLAG);
+
+/** Subjects are DATA (no per-building code): program + concept + pack, all committed paths.
+ *  The synthetic fixture stays the explicit row (its pack is part of the fixture contract);
+ *  pipeline subjects derive from the durable-skin registry under the invocation's pack
+ *  (T-127-01 — paths only, no subject key in this source; live mode fails loudly when the
+ *  derived program has not been committed by the pattern-book chain's seed stage). */
+const SUBJECTS = Object.freeze({
+  fixture: Object.freeze({
+    program: `${REL_DIR}/fixture/program.json`,
+    concept: "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
+    pack: DEFAULT_PACK_REL,
+  }),
+  ...workshopSubjectsFrom(REGISTRY, { relDir: REL_DIR, packRel }),
+});
 
 const def = SUBJECTS[subjectKey];
 if (!def) {
@@ -79,9 +81,13 @@ if (!def) {
   process.exit(2);
 }
 
-const ledgerRel = `${REL_DIR}/${subjectKey}.json`;
-const digestRel = `${REL_DIR}/${subjectKey}.md`;
-const finalRel = `${REL_DIR}/${subjectKey}/final-artifact.json`;
+// Record paths derive from the SUBJECT'S pack (the fixture's stays pinned to the default),
+// namespaced per pack so two packs' records of one subject can never collide (T-132-01).
+const rels = chainRels(subjectKey, def.pack);
+const runKey = rels.runKey;
+const ledgerRel = rels.ledger;
+const digestRel = rels.digest;
+const finalRel = rels.final;
 
 const sha256 = (buf) => createHash("sha256").update(buf).digest("hex");
 
@@ -115,7 +121,7 @@ function digestMd(ledger) {
     `# workshop — ${ledger.subject} (T-126-01)`,
     "",
     `The workshop loop's committed record: every round's critique, action, conformance both sides,`,
-    `and raw replies live in \`${subjectKey}.json\`. Replay: \`npm run workshop:replay\` (byte-identical,`,
+    `and raw replies live in \`${runKey}.json\`. Replay: \`npm run workshop:replay\` (byte-identical,`,
     `no model calls); offline re-assert: \`npm run workshop:offline\`.`,
     "",
     `- budget: ${ledger.budget.rounds} rounds (used ${ledger.final.rounds})`,
@@ -127,8 +133,8 @@ function digestMd(ledger) {
     "| --- | --- | --- | --- | --- |",
     ...rows,
     "",
-    `Render evidence (gitignored, regen via \`npm run workshop:${subjectKey}\`): \`workshop/${subjectKey}/round-N/\`;`,
-    `before/after frames: \`pr/assets/frames/workshop-${subjectKey}-{before,after}.png\`.`,
+    `Render evidence (gitignored, regen via the live runner): \`workshop/${runKey}/round-N/\`;`,
+    `before/after frames: \`pr/assets/frames/workshop-${runKey}-{before,after}.png\`.`,
     "",
   ].join("\n");
 }
@@ -170,7 +176,7 @@ async function runLive() {
     rotate, intent: `workshop live run (${subjectKey})`, domain: "workshop",
   });
 
-  const subjectDir = join(OUT_DIR, subjectKey);
+  const subjectDir = join(ROOT, rels.dir);
   await mkdir(subjectDir, { recursive: true });
 
   const render = async ({ artifact, round }) => {
@@ -227,9 +233,9 @@ async function runLive() {
   await mkdir(FRAMES_DIR, { recursive: true });
   const firstRender = ledger.rounds[0]?.renders?.[0];
   if (firstRender) {
-    await copyFile(join(ROOT, firstRender.path), join(FRAMES_DIR, `workshop-${subjectKey}-before.png`));
+    await copyFile(join(ROOT, firstRender.path), join(FRAMES_DIR, `workshop-${runKey}-before.png`));
     const finalViews = await renderViews(artifact, [MULTI_ANGLE_GATE.azimuths[0]], { outDir: join(subjectDir, "final"), ...RENDER });
-    await copyFile(finalViews[0].path, join(FRAMES_DIR, `workshop-${subjectKey}-after.png`));
+    await copyFile(finalViews[0].path, join(FRAMES_DIR, `workshop-${runKey}-after.png`));
   }
 
   const s = conformanceScore(ledger.final.conformance);

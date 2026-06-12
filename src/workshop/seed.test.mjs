@@ -144,3 +144,37 @@ test("SEED6 the real registry derives the milestone subjects without touching th
   }
   assert.ok(!("fixture" in subjects), "the synthetic fixture is the runner's own explicit row");
 });
+
+test("SEED9 packNs: the default pack keeps T-127's legacy paths; any other pack namespaces; junk throws", async () => {
+  const { packNs, DEFAULT_PACK_REL } = await import("./seed.mjs");
+  assert.equal(packNs(DEFAULT_PACK_REL), "");
+  assert.equal(packNs("packs/saltcrag.json"), "--saltcrag");
+  assert.equal(packNs("packs/a-b2.json"), "--a-b2");
+  assert.throws(() => packNs("packs/Bad_Slug.json"), /not a style-pack path/);
+  assert.throws(() => packNs("elsewhere/saltcrag.json"), /not a style-pack path/);
+});
+
+test("SEED10 chainRels: one derivation for every chain record path, namespaced per pack", async () => {
+  const { chainRels, DEFAULT_PACK_REL } = await import("./seed.mjs");
+  const legacy = chainRels("barn", DEFAULT_PACK_REL);
+  assert.equal(legacy.runKey, "barn");
+  assert.equal(legacy.seed, "benchmarks/sculpture/workshop/barn/program.json");
+  assert.equal(legacy.ledger, "benchmarks/sculpture/workshop/barn.json");
+  assert.equal(legacy.final, "benchmarks/sculpture/workshop/barn/final-artifact.json");
+  assert.equal(legacy.plan, "benchmarks/sculpture/workshop/barn/component-plan.json");
+  assert.equal(legacy.record, "benchmarks/sculpture/pattern-book/barn.json");
+  const ns = chainRels("barn", "packs/saltcrag.json");
+  assert.equal(ns.runKey, "barn--saltcrag");
+  for (const [name, rel] of Object.entries(ns)) {
+    if (name === "runKey") continue;
+    assert.ok(rel.includes("barn--saltcrag"), `${name} is namespaced (${rel})`);
+    assert.ok(!Object.values(legacy).includes(rel), `${name} cannot collide with a legacy path`);
+  }
+});
+
+test("SEED11 workshopSubjectsFrom namespaces derived program paths per pack", async () => {
+  const { SUBJECTS } = await import("../../benchmarks/sculpture/durable-skin.mjs");
+  const subjects = workshopSubjectsFrom(SUBJECTS, { relDir: "benchmarks/sculpture/workshop", packRel: "packs/saltcrag.json" });
+  assert.equal(subjects.barn.program, "benchmarks/sculpture/workshop/barn--saltcrag/program.json");
+  assert.equal(subjects.barn.pack, "packs/saltcrag.json");
+});

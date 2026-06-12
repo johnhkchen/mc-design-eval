@@ -25,7 +25,11 @@
 // GENERALIZATION (E-25 Rule 3 / E-31 Rule 2): subjects come from the durable-skin registry; the
 // self-grep pins that no subject key appears in this source, embedded in every record.
 //
-// Usage: node benchmarks/sculpture/pattern-book.mjs --subject <key> | --all [--repro|--offline] [--rotate-pins]
+// Usage: node benchmarks/sculpture/pattern-book.mjs --subject <key> | --all [--repro|--offline]
+//        [--pack packs/<style>.json] [--ticket <id>] [--rotate-pins]
+// The pack is invocation data (T-132-01): records namespace per pack (chainRels), the default
+// pack keeps T-127's committed paths, and the sketch/recognition seam is always verified under
+// the seam's own pack of record.
 
 import { readFile, mkdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
@@ -40,7 +44,7 @@ import { artifactOccupancy } from "../../src/view/occupancy.mjs";
 import { parseProgramReply } from "../../src/recognition/prompt.mjs";
 import { compileProgram } from "../../src/recognition/compile.mjs";
 import { assertWorkshopProgram, realizeProgram } from "../../src/workshop/program.mjs";
-import { PATTERN_BOOK_BUDGET, seedWorkshopProgram, componentPlanFrom } from "../../src/workshop/seed.mjs";
+import { PATTERN_BOOK_BUDGET, seedWorkshopProgram, componentPlanFrom, chainRels, DEFAULT_PACK_REL } from "../../src/workshop/seed.mjs";
 import { serializeArtifact, replayLedger, offlineAssert } from "../../src/workshop/replay.mjs";
 import { conformanceScore } from "../../src/workshop/loop.mjs";
 import {
@@ -56,8 +60,12 @@ const REL_DIR = "benchmarks/sculpture/pattern-book";
 const OUT_DIR = join(ROOT, REL_DIR);
 const SKETCH_REL = "benchmarks/sculpture/form-sketch";
 const RECOG_REL = "benchmarks/sculpture/recognition";
-const WORKSHOP_REL = "benchmarks/sculpture/workshop";
-const PACK_PATH = join(ROOT, "packs/rustic.json");
+
+// T-132-01: the pack is invocation data. The committed sketch/recognition seam is always
+// verified under ITS pack of record (the default — those records were minted under it); the
+// --pack flag selects the BUILD pack, substituted exactly once, at seed time. Record paths
+// namespace per pack via chainRels so a second-pack run never collides with committed records.
+const seamPackPath = () => join(ROOT, DEFAULT_PACK_REL);
 
 const sha256 = (buf) => createHash("sha256").update(buf).digest("hex");
 const jsonOf = (x) => JSON.stringify(x, null, 2) + "\n";
@@ -130,16 +138,16 @@ function stageSeed(program, pack) {
 /** The chain's consumption plan (T-106 contract): derived from the committed ledger's FINAL
  *  program (accepted adjusts included), persisted beside the artifact under test so the frozen
  *  gate censuses the roof program + course family the chain actually built. Pure of model/GL. */
-async function derivePlan(key) {
-  const ledger = JSON.parse(await readRel(`${WORKSHOP_REL}/${key}.json`));
+async function derivePlan(rels) {
+  const ledger = JSON.parse(await readRel(rels.ledger));
   const { program: finalProgram } = replayLedger({ ledger });
-  return { planRel: `${WORKSHOP_REL}/${key}/component-plan.json`, planJson: jsonOf(componentPlanFrom(finalProgram)) };
+  return { planRel: rels.plan, planJson: jsonOf(componentPlanFrom(finalProgram)) };
 }
 
 /** Stage 5 — read back what the workshop committed; the chain record's workshop receipt. */
-async function readBackWorkshop(key) {
-  const ledgerRel = `${WORKSHOP_REL}/${key}.json`;
-  const finalRel = `${WORKSHOP_REL}/${key}/final-artifact.json`;
+async function readBackWorkshop(rels) {
+  const ledgerRel = rels.ledger;
+  const finalRel = rels.final;
   const ledgerText = await readRel(ledgerRel);
   const finalText = await readRel(finalRel);
   const ledger = JSON.parse(ledgerText);
@@ -167,12 +175,13 @@ async function readBackWorkshop(key) {
 
 function chainMd(rec) {
   const w = rec.stages.workshop;
+  const nsPart = rec.runKey === rec.subject ? "" : `:${rec.pack}`;
   const lines = [
-    `# Pattern-book chain — ${rec.subject} (${PATTERN_BOOK_SCHEMA}, T-127-01)`,
+    `# Pattern-book chain — ${rec.runKey} (${PATTERN_BOOK_SCHEMA}, ${rec.ticket})`,
     "",
-    `Sketch (T-123) → recognized program (T-125, consumed) → seeded realization (declared budget`,
-    `${rec.budget.rounds} rounds) → workshop revision (T-126) → final build. Replay:`,
-    `\`npm run patternbook:repro\` / \`npm run patternbook:offline\` (byte-identical, no model, no GL).`,
+    `Sketch (T-123) → recognized program (T-125, consumed) → seeded realization (pack \`${rec.pack}\`,`,
+    `declared budget ${rec.budget.rounds} rounds) → workshop revision (T-126) → final build. Replay:`,
+    `\`npm run patternbook${nsPart}:repro\` / \`npm run patternbook${nsPart}:offline\` (byte-identical, no model, no GL).`,
     "",
     `| stage | receipt |`,
     `| --- | --- |`,
@@ -183,7 +192,7 @@ function chainMd(rec) {
     `| final | \`${w.final.path}\` (\`${w.final.sha256.slice(0, 16)}…\`) |`,
     "",
     `Judging is NOT this chain's: the frozen judge runs once per subject from outside the`,
-    `workshop (\`npm run gate:patternbook:${rec.subject}\`); the T-126 isolation receipt covers this file.`,
+    `workshop (\`npm run gate:patternbook:${rec.subject}${nsPart}\`); the T-126 isolation receipt covers this file.`,
     "",
   ];
   return lines.join("\n");
@@ -193,9 +202,11 @@ function chainMd(rec) {
 
 async function runLive(def, { rotate }) {
   const key = def.key;
-  const pack = loadStylePack(PACK_PATH);
-  const recordRels = [`${REL_DIR}/${key}.json`, `${REL_DIR}/${key}.md`];
-  const seedRel = `${WORKSHOP_REL}/${key}/program.json`;
+  const seamPack = loadStylePack(seamPackPath());
+  const buildPack = loadStylePack(join(ROOT, buildPackRel));
+  const rels = chainRels(key, buildPackRel);
+  const recordRels = [rels.record, rels.recordMd];
+  const seedRel = rels.seed;
 
   // T-119: BEFORE any spend — this chain's own writes. The workshop spawn preflights its
   // ledger/digest/final pins itself, before its first metered call.
@@ -211,24 +222,25 @@ async function runLive(def, { rotate }) {
   try {
     const sketch = await verifySketch(key);
     track.stage = "recognition";
-    const { program, receipt: recognition } = await verifyRecognition(key, pack);
+    const { program, receipt: recognition } = await verifyRecognition(key, seamPack);
     track.stage = "seed";
-    const seeded = stageSeed(program, pack);
-    await mkdir(join(ROOT, WORKSHOP_REL, key), { recursive: true });
+    const seeded = stageSeed(program, buildPack);
+    await mkdir(join(ROOT, rels.dir), { recursive: true });
     await write(seedRel, seeded.serialized);
     track.stage = "workshop";
-    const args = [join(HERE, "workshop.mjs"), "--subject", key, ...(rotate ? [ROTATE_FLAG] : [])];
+    const args = [join(HERE, "workshop.mjs"), "--subject", key, "--pack", buildPackRel, ...(rotate ? [ROTATE_FLAG] : [])];
     const spawned = spawnSync(process.execPath, args, { stdio: "inherit", cwd: ROOT });
     if (spawned.status !== 0) throw new Error(`workshop loop exited ${spawned.status}`);
     track.stage = "record";
-    const { planRel, planJson } = await derivePlan(key);
+    const { planRel, planJson } = await derivePlan(rels);
     await write(planRel, planJson);
-    const { receipt: workshop } = await readBackWorkshop(key);
+    const { receipt: workshop } = await readBackWorkshop(rels);
     const record = {
       schema: PATTERN_BOOK_SCHEMA,
-      ticket: "T-127-01",
+      ticket: ticketId,
       subject: key,
-      pack: pack.style,
+      runKey: rels.runKey,
+      pack: buildPack.style,
       budget: { ...PATTERN_BOOK_BUDGET },
       stages: {
         sketch,
@@ -238,20 +250,25 @@ async function runLive(def, { rotate }) {
         plan: { path: planRel, sha256: sha256(planJson) },
       },
       generalization: await generalizationGrep(),
-      replay: { npmRun: "patternbook:repro / patternbook:offline", asserts: "committed program+ledger → byte-identical final build" },
+      replay: {
+        npmRun: rels.runKey === key
+          ? "patternbook:repro / patternbook:offline"
+          : `patternbook:${buildPack.style}:repro / patternbook:${buildPack.style}:offline`,
+        asserts: "committed program+ledger → byte-identical final build",
+      },
     };
-    await write(`${REL_DIR}/${key}.json`, jsonOf(record));
-    await write(`${REL_DIR}/${key}.md`, chainMd(record));
+    await write(rels.record, jsonOf(record));
+    await write(rels.recordMd, chainMd(record));
     console.error(`[pattern-book] ${key}: ${workshop.outcome} after ${workshop.rounds.used}/${workshop.rounds.budget} rounds; ` +
       `final conformance ${workshop.conformance.finalPassed ? "PASS" : "FAIL"}; grep ${record.generalization.clean ? "clean" : "HITS"}`);
     return record.generalization.clean;
   } catch (e) {
     const failed = {
-      schema: PATTERN_BOOK_SCHEMA, ticket: "T-127-01", subject: key,
+      schema: PATTERN_BOOK_SCHEMA, ticket: ticketId, subject: key, runKey: rels.runKey, pack: buildPack.style,
       status: "pipeline-failed", stage: track.stage, error: e.message,
       generalization: await generalizationGrep(),
     };
-    await write(`${REL_DIR}/${key}.json`, jsonOf(failed));
+    await write(rels.record, jsonOf(failed));
     console.error(`[pattern-book] ${key}: PIPELINE FAILED at stage "${track.stage}" — ${e.message}`);
     return false;
   }
@@ -259,36 +276,38 @@ async function runLive(def, { rotate }) {
 
 async function runRepro(def, { offline }) {
   const key = def.key;
+  const rels = chainRels(key, buildPackRel);
   // the recognize.mjs --offline precedent: a subject with no committed chain is SKIPPED, not
   // failed — the sweep asserts every committed chain, and at least one must exist.
   if (!existsSync(join(ROOT, `${RECOG_REL}/${key}.program.json`)) ||
-      !existsSync(join(ROOT, `${WORKSHOP_REL}/${key}/program.json`))) {
-    console.error(`[pattern-book ${offline ? "--offline" : "--repro"}] ${key}: no committed chain — skipped`);
+      !existsSync(join(ROOT, rels.seed))) {
+    console.error(`[pattern-book ${offline ? "--offline" : "--repro"}] ${rels.runKey}: no committed chain — skipped`);
     return null;
   }
-  const pack = loadStylePack(PACK_PATH);
+  const seamPack = loadStylePack(seamPackPath());
+  const buildPack = loadStylePack(join(ROOT, buildPackRel));
   const problems = [];
   try {
     await verifySketch(key);
-    const { program } = await verifyRecognition(key, pack);
-    const seeded = seedWorkshopProgram({ program, pack });
-    const committedSeed = await readRel(`${WORKSHOP_REL}/${key}/program.json`);
+    const { program } = await verifyRecognition(key, seamPack);
+    const seeded = seedWorkshopProgram({ program, pack: buildPack });
+    const committedSeed = await readRel(rels.seed);
     if (sha256(seeded.serialized) !== sha256(committedSeed)) {
       problems.push("seeded program DIVERGES from the committed workshop program");
     }
-    const ledgerText = await readRel(`${WORKSHOP_REL}/${key}.json`);
-    const finalText = await readRel(`${WORKSHOP_REL}/${key}/final-artifact.json`);
+    const ledgerText = await readRel(rels.ledger);
+    const finalText = await readRel(rels.final);
     const ledger = JSON.parse(ledgerText);
     const { artifact, program: finalProgram } = replayLedger({ ledger });
     if (serializeArtifact(artifact) !== finalText) {
       problems.push("ledger replay DIVERGES from the committed final artifact");
     }
-    const conform = (a, d) => runConformance({ occ: artifactOccupancy(a), declarations: d }, pack);
+    const conform = (a, d) => runConformance({ occ: artifactOccupancy(a), declarations: d }, buildPack);
     const finalConf = conform(artifact, finalProgram.declarations);
     if (JSON.stringify(conformanceScore(finalConf)) !== JSON.stringify(conformanceScore(ledger.final.conformance))) {
       problems.push("re-derived final conformance score diverges from the ledger's");
     }
-    const { planRel, planJson } = await derivePlan(key);
+    const { planRel, planJson } = await derivePlan(rels);
     const committedPlan = await readRel(planRel).catch(() => null);
     if (committedPlan === null) problems.push(`consumption plan absent (${planRel}) — backfill with --plan-only`);
     else if (sha256(planJson) !== sha256(committedPlan)) problems.push("re-derived consumption plan DIVERGES from the committed one");
@@ -299,8 +318,8 @@ async function runRepro(def, { offline }) {
   } catch (e) {
     problems.push(e.message);
   }
-  for (const p of problems) console.error(`[pattern-book ${offline ? "--offline" : "--repro"}] ${key}: ${p}`);
-  console.error(`[pattern-book ${offline ? "--offline" : "--repro"}] ${key}: ${problems.length === 0
+  for (const p of problems) console.error(`[pattern-book ${offline ? "--offline" : "--repro"}] ${rels.runKey}: ${p}`);
+  console.error(`[pattern-book ${offline ? "--offline" : "--repro"}] ${rels.runKey}: ${problems.length === 0
     ? "chain REPRODUCES byte-identically (sketch → program → seed → replayed final)"
     : `${problems.length} problem(s)`}`);
   return problems.length === 0;
@@ -316,6 +335,8 @@ const repro = argv.includes("--repro");
 const offline = argv.includes("--offline");
 const planOnly = argv.includes("--plan-only");
 const rotate = argv.includes(ROTATE_FLAG);
+const buildPackRel = argOf("--pack") ?? DEFAULT_PACK_REL; // T-132-01: substitution pack (data)
+const ticketId = argOf("--ticket") ?? "T-127-01"; // the run's authority, named in the record
 
 const defs = subjectDefs();
 if (!all && !onlySubject) throw new Error(`pass --subject <${defs.map((d) => d.key).join("|")}> or --all`);
@@ -331,11 +352,12 @@ if (planOnly) {
   const trackedSet = loadTrackedSet(ROOT);
   let wrote = 0;
   for (const def of selected) {
-    if (!existsSync(join(ROOT, `${WORKSHOP_REL}/${def.key}.json`))) {
-      console.error(`[pattern-book --plan-only] ${def.key}: no committed ledger — skipped`);
+    const rels = chainRels(def.key, buildPackRel);
+    if (!existsSync(join(ROOT, rels.ledger))) {
+      console.error(`[pattern-book --plan-only] ${rels.runKey}: no committed ledger — skipped`);
       continue;
     }
-    const { planRel, planJson } = await derivePlan(def.key);
+    const { planRel, planJson } = await derivePlan(rels);
     preflightPins({
       pins: [{ rel: planRel, tracked: isTracked(trackedSet, planRel) }],
       rotate, intent: `consumption-plan backfill (${def.key})`, domain: "workshop",

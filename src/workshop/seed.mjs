@@ -23,6 +23,43 @@ import { COMPONENT_PLAN_SCHEMA } from "../view/component-plan.mjs";
  *  calibrated value — the only calibration the project has (N=1, recorded honestly). */
 export const PATTERN_BOOK_BUDGET = Object.freeze({ rounds: 6 });
 
+/** The chain's default style pack — T-127's pack of record. Single-sourced here so the runners'
+ *  `--pack` default and the legacy-path rule below cannot drift apart. */
+export const DEFAULT_PACK_REL = "packs/rustic.json";
+
+/**
+ * Record-namespace suffix for a pack (T-132-01): `""` for the default pack — rustic's chain
+ * records predate namespacing and relocating committed pins would be a re-roll — and
+ * `--<slug>` for any other pack, so a second-pack run of the same subject can never collide
+ * with (or demand rotation of) another pack's committed records.
+ */
+export function packNs(packRel) {
+  if (packRel === DEFAULT_PACK_REL) return "";
+  const m = /^packs\/([a-z][a-z0-9-]*)\.json$/.exec(packRel);
+  if (!m) throw new Error(`packNs: not a style-pack path: ${packRel}`);
+  return `--${m[1]}`;
+}
+
+/**
+ * The ONE place chain record paths are derived (both runners consume this, so the paths the
+ * pattern-book chain writes and the paths the workshop runner pins cannot drift apart).
+ * All ROOT-relative; `runKey` is the namespaced subject key (`<key>` or `<key>--<style>`).
+ */
+export function chainRels(key, packRel = DEFAULT_PACK_REL) {
+  const runKey = `${key}${packNs(packRel)}`;
+  return Object.freeze({
+    runKey,
+    dir: `benchmarks/sculpture/workshop/${runKey}`,
+    seed: `benchmarks/sculpture/workshop/${runKey}/program.json`,
+    ledger: `benchmarks/sculpture/workshop/${runKey}.json`,
+    digest: `benchmarks/sculpture/workshop/${runKey}.md`,
+    final: `benchmarks/sculpture/workshop/${runKey}/final-artifact.json`,
+    plan: `benchmarks/sculpture/workshop/${runKey}/component-plan.json`,
+    record: `benchmarks/sculpture/pattern-book/${runKey}.json`,
+    recordMd: `benchmarks/sculpture/pattern-book/${runKey}.md`,
+  });
+}
+
 const jsonOf = (x) => JSON.stringify(x, null, 2) + "\n";
 
 /**
@@ -114,10 +151,11 @@ export function componentPlanFrom(program) {
 }
 
 export function workshopSubjectsFrom(registry, { relDir, packRel }) {
+  const ns = packNs(packRel); // namespaced beside chainRels (relDir kept for the SEED5/8 contract)
   const rows = Object.values(registry)
     .filter((def) => def.glb && def.generated?.scale)
     .map((def) => [def.key, Object.freeze({
-      program: `${relDir}/${def.key}/program.json`,
+      program: `${relDir}/${def.key}${ns}/program.json`,
       concept: `benchmarks/sculpture/${def.concept}`,
       pack: packRel,
     })]);
