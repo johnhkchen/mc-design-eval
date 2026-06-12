@@ -32,6 +32,9 @@ import { MULTI_ANGLE_GATE } from "../config.mjs";
 /** Schema tags (downstream version-check). */
 export const MULTI_ANGLE_VERDICT_SCHEMA = "multi-angle-verdict/v1";
 export const MULTI_ANGLE_GATE_SCHEMA = "multi-angle-gate/v1";
+/** The aggregation/budget POLICY tag (T-144-01). The record envelope stays multi-angle-gate/v1
+ *  (additive fields); the deciding ARITHMETIC is versioned separately, like the per-view verdict. */
+export const MULTI_ANGLE_BUDGET_SCHEMA = "multi-angle-budget/v2";
 
 /** Gap severities (frozen — Rule 5). "minor" is the only severity a passing view may carry. */
 export const GAP_SEVERITIES = Object.freeze(["minor", "major"]);
@@ -130,18 +133,79 @@ export function parseMultiAngleVerdict(text) {
 }
 
 /**
+ * BUDGET POLICY v2 (T-144-01) — the DECIDING arithmetic over already-decidable views, PURE. Walks
+ * the views in azimuth order, classifying identity failures (coverage short-circuit, drift/different)
+ * and tallying gap severities, then applies the v2 rule with the LEGACY ≤2 arithmetic computed
+ * beside it (dual reporting). One definition, so the gate runner and the calibration sweep share it.
+ *
+ * v2 PASS ⇔ no identity failure (every view "same object", none coverage-short-circuited) ∧
+ *           majorCount === 0 ∧ minorCount ≤ minorBudget.
+ * The major/minor split is read from each view's recorded gap severities; per the parser contract a
+ * "same object" verdict carries only minor gaps, so `majorCount===0` is implied by the identity
+ * clause — we still compute & require it (severity-aware, self-documenting, parser-relaxation-proof).
+ *
+ * @param {Array<{angle:string, coverage:{passed:boolean}|null,
+ *                verdict:{verdict:string, gaps:object[]}|null}>} decidedViews  azimuth-ordered
+ * @param {{gapBudget:number, minorBudget:number}} budgets
+ * @returns {{policy:string, passed:boolean, majorCount:number, minorCount:number, minorBudget:number,
+ *            gapCount:number, gapBudget:number, legacyPassed:boolean,
+ *            gaps:{angle:string, region:string, attribute:string}[],
+ *            failures:{angle:string, reason:string}[]}}
+ */
+export function budgetVerdict(decidedViews, { gapBudget, minorBudget }) {
+  const failures = [];
+  const gaps = [];
+  let majorCount = 0;
+  let minorCount = 0;
+  for (const v of decidedViews) {
+    if (v.coverage?.passed === false) {
+      failures.push({ angle: v.angle, reason: "coverage" });
+      continue; // verdict null BY CONTRACT (T-088 short-circuit) — nothing to tally
+    }
+    if (v.verdict.verdict !== "same object") {
+      failures.push({ angle: v.angle, reason: v.verdict.verdict });
+    }
+    for (const g of v.verdict.gaps ?? []) {
+      gaps.push({ angle: v.angle, region: g.region, attribute: g.attribute });
+      if (g.severity === "major") majorCount += 1;
+      else minorCount += 1;
+    }
+  }
+  const gapCount = gaps.length;
+  const identityClean = failures.length === 0; // no coverage/drift/different failure
+  // v2 budget overflow — only consulted when identity is clean (else the failure already stands).
+  if (identityClean && (majorCount > 0 || minorCount > minorBudget)) {
+    failures.push({ angle: "(all)", reason: majorCount > 0 ? "major-gap" : "minor-budget" });
+  }
+  // legacy ≤2 arithmetic, computed independently so the dual-report column is exact.
+  const legacyPassed = identityClean && gapCount <= gapBudget;
+  return {
+    policy: MULTI_ANGLE_BUDGET_SCHEMA,
+    passed: failures.length === 0,
+    majorCount, minorCount, minorBudget,
+    gapCount, gapBudget, legacyPassed, gaps, failures,
+  };
+}
+
+/**
  * The aggregate pass rule over the gate's views. PURE (see module header for the REFUSE/DECIDE model).
+ * The DECIDE branch's deciding arithmetic is budget policy v2 (T-144-01: identity-first,
+ * severity-aware, `minorBudget` cap) with the legacy ≤2 arithmetic reported beside it; the REFUSE
+ * branch is unchanged (a partial sheet has no verdict to dual-report).
  * @param {Array<{angle:string, rendered?:boolean, coverage:{passed:boolean}|null,
  *                verdict:{verdict:string, gaps:object[]}|null, unparsed?:boolean}>} views
- * @param {{azimuths?:readonly string[], gapBudget?:number}} [opts]
- * @returns {{schema:string, decided:boolean, refusal?:string, passed?:boolean, gapCount?:number,
- *            gaps?:{angle:string, region:string, attribute:string}[],
+ * @param {{azimuths?:readonly string[], gapBudget?:number, minorBudget?:number}} [opts]
+ * @returns {{schema:string, decided:boolean, refusal?:string, passed?:boolean, policy?:string,
+ *            majorCount?:number, minorCount?:number, minorBudget?:number, gapCount?:number,
+ *            gapBudget?:number, gaps?:{angle:string, region:string, attribute:string}[],
  *            failures?:{angle:string, reason:string}[],
+ *            legacy?:{passed:boolean, gapBudget:number, gapCount:number},
  *            views:{angle:string, outcome:string}[]}}
  */
 export function aggregateMultiAngle(views, opts = {}) {
   const azimuths = opts.azimuths ?? MULTI_ANGLE_GATE.azimuths;
   const gapBudget = opts.gapBudget ?? MULTI_ANGLE_GATE.gapBudget;
+  const minorBudget = opts.minorBudget ?? MULTI_ANGLE_GATE.minorBudget;
   const list = Array.isArray(views) ? views : [];
   const byAngle = new Map();
   for (const v of list) {
@@ -169,31 +233,21 @@ export function aggregateMultiAngle(views, opts = {}) {
     }
   }
 
-  // 2. DECIDE.
-  const failures = [];
-  const gaps = [];
-  for (const a of azimuths) {
-    const v = byAngle.get(a);
-    if (v.coverage?.passed === false) {
-      failures.push({ angle: a, reason: "coverage" });
-      continue; // verdict is null BY CONTRACT (T-088 short-circuit) — nothing to tally
-    }
-    if (v.verdict.verdict !== "same object") {
-      failures.push({ angle: a, reason: v.verdict.verdict });
-    }
-    for (const g of v.verdict.gaps ?? []) gaps.push({ angle: a, region: g.region, attribute: g.attribute });
-  }
-  if (failures.length === 0 && gaps.length > gapBudget) {
-    failures.push({ angle: "(all)", reason: "gap-budget" });
-  }
+  // 2. DECIDE — budget policy v2 (identity-first, severity-aware) with the legacy ≤2 arithmetic beside.
+  const bv = budgetVerdict(azimuths.map((a) => byAngle.get(a)), { gapBudget, minorBudget });
   return {
     schema: MULTI_ANGLE_GATE_SCHEMA,
     decided: true,
-    passed: failures.length === 0,
-    gapCount: gaps.length,
+    passed: bv.passed,
+    policy: bv.policy,
+    majorCount: bv.majorCount,
+    minorCount: bv.minorCount,
+    minorBudget,
+    gapCount: bv.gapCount,
     gapBudget,
-    gaps,
-    failures,
+    gaps: bv.gaps,
+    failures: bv.failures,
+    legacy: { passed: bv.legacyPassed, gapBudget, gapCount: bv.gapCount },
     views: outcomes(),
   };
 }

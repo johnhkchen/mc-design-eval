@@ -6,8 +6,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
-  buildMultiAngleViewPrompt, parseMultiAngleVerdict, aggregateMultiAngle, viewOutcomeLabel,
-  gateInstrumentDiff, MULTI_ANGLE_VERDICT_SCHEMA, MULTI_ANGLE_GATE_SCHEMA, MAX_GAPS_PER_VIEW,
+  buildMultiAngleViewPrompt, parseMultiAngleVerdict, aggregateMultiAngle, budgetVerdict, viewOutcomeLabel,
+  gateInstrumentDiff, MULTI_ANGLE_VERDICT_SCHEMA, MULTI_ANGLE_GATE_SCHEMA, MULTI_ANGLE_BUDGET_SCHEMA,
+  MAX_GAPS_PER_VIEW,
 } from "./multi-angle-gate.mjs";
 import { MULTI_ANGLE_GATE } from "../config.mjs";
 
@@ -15,9 +16,10 @@ const AZ = MULTI_ANGLE_GATE.azimuths;
 
 // --- the contract itself ----------------------------------------------------
 
-test("the gate contract: four fixed ground-diagonal azimuths, gap budget 2, frozen", () => {
+test("the gate contract: four fixed ground-diagonal azimuths, gap budget 2, minor budget 10, frozen", () => {
   assert.deepEqual([...AZ], ["+x+z", "+x-z", "-x-z", "-x+z"]);
-  assert.equal(MULTI_ANGLE_GATE.gapBudget, 2);
+  assert.equal(MULTI_ANGLE_GATE.gapBudget, 2);      // LEGACY flat budget (dual-report continuity)
+  assert.equal(MULTI_ANGLE_GATE.minorBudget, 10);   // v2 calibrated cap (T-144-01)
   assert.ok(Object.isFrozen(MULTI_ANGLE_GATE) && Object.isFrozen(MULTI_ANGLE_GATE.azimuths));
 });
 
@@ -109,31 +111,50 @@ const ok = (angle, gaps = []) => ({
 });
 const minor = (region, attribute = "palette") => ({ region, attribute });
 
-// --- aggregation: pass/fail ------------------------------------------------------
+// a same-object view carrying `n` minor gaps (the v2 budget vocabulary).
+const minors = (angle, n) => ok(angle, Array.from({ length: n }, (_, i) => minor(`spot-${i}`)));
 
-test("all same-object, zero gaps → PASS", () => {
+// --- aggregation: budget policy v2 (identity-first, severity-aware) -----------------
+
+test("all same-object, zero gaps → v2 PASS; dual-report fields + policy present", () => {
   const agg = aggregateMultiAngle(AZ.map((a) => ok(a)));
   assert.equal(agg.schema, MULTI_ANGLE_GATE_SCHEMA);
   assert.deepEqual([agg.decided, agg.passed, agg.gapCount], [true, true, 0]);
   assert.deepEqual(agg.failures, []);
+  assert.equal(agg.policy, MULTI_ANGLE_BUDGET_SCHEMA);
+  assert.deepEqual([agg.majorCount, agg.minorCount, agg.minorBudget], [0, 0, 10]);
+  assert.deepEqual(agg.legacy, { passed: true, gapBudget: 2, gapCount: 0 });
 });
 
-test("exactly gapBudget minor gaps total → still PASS; budget+1 → FAIL named gap-budget", () => {
-  const two = aggregateMultiAngle([ok(AZ[0], [minor("ridge")]), ok(AZ[1], [minor("eave")]), ok(AZ[2]), ok(AZ[3])]);
-  assert.deepEqual([two.decided, two.passed, two.gapCount], [true, true, 2]);
-  const three = aggregateMultiAngle([ok(AZ[0], [minor("ridge"), minor("eave")]), ok(AZ[1], [minor("door")]), ok(AZ[2]), ok(AZ[3])]);
-  assert.deepEqual([three.decided, three.passed, three.gapCount], [true, false, 3]);
-  assert.deepEqual(three.failures, [{ angle: "(all)", reason: "gap-budget" }]);
+test("all same-object, 8 minors (the barn anchor shape) → v2 PASS though legacy ≤2 FAILs", () => {
+  // 8 minors across four same-object views: glance-passing, the exact T-138 barn evidence.
+  const agg = aggregateMultiAngle([minors(AZ[0], 2), minors(AZ[1], 2), minors(AZ[2], 2), minors(AZ[3], 2)]);
+  assert.deepEqual([agg.decided, agg.passed], [true, true]);          // v2 PASS — the glance
+  assert.deepEqual([agg.majorCount, agg.minorCount], [0, 8]);
+  assert.deepEqual(agg.failures, []);
+  assert.equal(agg.legacy.passed, false);                             // legacy ≤2 still FAILs, beside
+  assert.deepEqual([agg.legacy.gapBudget, agg.legacy.gapCount], [2, 8]);
 });
 
-test("one drifted view → decided FAIL with the angle named", () => {
+test("minorBudget boundary: 10 minors → v2 PASS; 11 minors → v2 FAIL named minor-budget", () => {
+  const ten = aggregateMultiAngle([minors(AZ[0], 3), minors(AZ[1], 3), minors(AZ[2], 2), minors(AZ[3], 2)]);
+  assert.deepEqual([ten.passed, ten.minorCount], [true, 10]);
+  const eleven = aggregateMultiAngle([minors(AZ[0], 3), minors(AZ[1], 3), minors(AZ[2], 3), minors(AZ[3], 2)]);
+  assert.deepEqual([eleven.passed, eleven.minorCount], [false, 11]);
+  assert.deepEqual(eleven.failures, [{ angle: "(all)", reason: "minor-budget" }]);
+  assert.equal(eleven.legacy.passed, false);
+});
+
+test("one drifted view → v2 FAIL with the angle named; majors tallied", () => {
   const drifted = {
     angle: AZ[2], rendered: true, coverage: { passed: true },
     verdict: { verdict: "drifted", gaps: [{ region: "roof sides", attribute: "material zoning", severity: "major" }] },
   };
   const agg = aggregateMultiAngle([ok(AZ[0]), ok(AZ[1]), drifted, ok(AZ[3])]);
   assert.deepEqual([agg.decided, agg.passed], [true, false]);
-  assert.deepEqual(agg.failures, [{ angle: AZ[2], reason: "drifted" }]);
+  assert.deepEqual(agg.failures, [{ angle: AZ[2], reason: "drifted" }]); // identity failure, not budget
+  assert.equal(agg.majorCount, 1);
+  assert.equal(agg.legacy.passed, false);
 });
 
 test("a coverage-failed view (judge never called) → decided FAIL, not a refusal", () => {
@@ -141,6 +162,44 @@ test("a coverage-failed view (judge never called) → decided FAIL, not a refusa
   const agg = aggregateMultiAngle([ok(AZ[0]), cov, ok(AZ[2]), ok(AZ[3])]);
   assert.deepEqual([agg.decided, agg.passed], [true, false]);
   assert.deepEqual(agg.failures, [{ angle: AZ[1], reason: "coverage" }]);
+});
+
+// --- the binding calibration anchors (AC2), pinned as a regression -------------------
+
+test("v2 calibration anchors: barn/saltcrag PASS, cottage FAIL, synthetic PASS", () => {
+  const sameWith = (sev) => (angle, gaps) => ({
+    angle, rendered: true, coverage: { passed: true },
+    verdict: { verdict: sev, gaps },
+  });
+  const so = sameWith("same object");
+  const dr = sameWith("drifted");
+  const mn = (attr) => ({ region: "x", attribute: attr, severity: "minor" });
+  const mj = (attr) => ({ region: "x", attribute: attr, severity: "major" });
+  // barn-patternbook / saltcrag: 4 same-object, 8 minor, 0 major → PASS-v2, FAIL-legacy.
+  const barn = aggregateMultiAngle([
+    so(AZ[0], [mn("material zoning"), mn("form")]), so(AZ[1], [mn("palette"), mn("form")]),
+    so(AZ[2], [mn("massing"), mn("form")]), so(AZ[3], [mn("material zoning"), mn("form")]),
+  ]);
+  assert.deepEqual([barn.passed, barn.majorCount, barn.minorCount, barn.legacy.passed], [true, 0, 8, false]);
+  // cottage-patternbook (T-138-02): 2 same + 2 drifted, 4 major, 7 minor → FAIL-v2 on identity.
+  const cottage = aggregateMultiAngle([
+    so(AZ[0], [mn("material zoning"), mn("form")]),
+    dr(AZ[1], [mj("form"), mj("massing"), mn("material zoning")]),
+    dr(AZ[2], [mj("form"), mj("massing"), mn("material zoning")]),
+    so(AZ[3], [mn("palette"), mn("massing"), mn("form")]),
+  ]);
+  assert.deepEqual([cottage.passed, cottage.majorCount, cottage.minorCount], [false, 4, 7]);
+  assert.ok(cottage.failures.some((f) => f.reason === "drifted"));
+  // synthetic-hut: 4 same-object, 2 minor → PASS both arithmetics.
+  const hut = aggregateMultiAngle([so(AZ[0], [mn("palette")]), so(AZ[1], [mn("form")]), so(AZ[2], []), so(AZ[3], [])]);
+  assert.deepEqual([hut.passed, hut.legacy.passed], [true, true]);
+});
+
+test("budgetVerdict is the shared pure core (gate runner + calibration sweep call one definition)", () => {
+  const views = AZ.map((a) => ok(a, [minor("a"), minor("b")]));
+  const bv = budgetVerdict(views, { gapBudget: 2, minorBudget: 10 });
+  assert.equal(bv.policy, MULTI_ANGLE_BUDGET_SCHEMA);
+  assert.deepEqual([bv.passed, bv.minorCount, bv.legacyPassed], [true, 8, false]);
 });
 
 // --- aggregation: refusals (AC: the gate refuses to produce a verdict) ------------

@@ -45,11 +45,21 @@ export const DEFAULT_TIER = "strong";
  * elevation — the E-22 3/4 lens elevation) and the aggregate gap budget. E-25 Rule 4: the set is
  * CONFIG, never a per-run option — no runner flag may drop an angle, change the elevation, or lower
  * the 512x512 render contract. Frozen here, single-sourced like every other contract id.
- * @type {Readonly<{azimuths: readonly string[], gapBudget: number}>}
+ *
+ * BUDGET POLICY v2 (T-144-01, E-34): the deciding arithmetic is identity-first + severity-aware
+ * (every view "same object" ∧ zero major gaps ∧ total minors ≤ minorBudget). `gapBudget` is the
+ * LEGACY flat budget, kept beside v2 for dual reporting and so every committed record (which pins
+ * contract.gapBudget:2) stays valid. `minorBudget` is the v2 cap, CALIBRATED from committed data:
+ * the glance-passing observed ceiling is 8 minors (the two T-138 barns); the structural ceiling is
+ * 4×MAX_GAPS_PER_VIEW = 12; 10 is the midpoint — it bites only at >2.5 cosmetic papercuts per view
+ * averaged (more hedging than any glance-passing build has shown) while clearing both barn anchors
+ * with headroom. Calibrated, then frozen — not declared, then frozen.
+ * @type {Readonly<{azimuths: readonly string[], gapBudget: number, minorBudget: number}>}
  */
 export const MULTI_ANGLE_GATE = Object.freeze({
   azimuths: Object.freeze(["+x+z", "+x-z", "-x-z", "-x+z"]),
   gapBudget: 2,
+  minorBudget: 10,
 });
 
 /**
