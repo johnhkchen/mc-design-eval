@@ -1,0 +1,136 @@
+{
+  "schema": "design-backlog/v1",
+  "styleName": "saltcrag",
+  "items": [
+    {
+      "name": "surface.limewash",
+      "purpose": "Brushes a thrifty lime sealing coat (white_terracotta) onto only the weather-facing exterior — saltcrag's seaward gable and gale-struck walls — preserving the grey rubble field everywhere else.",
+      "parameter_sketch": "{ block: string, aspect: \"weather\"|\"seaward\"|array<direction>, coverage: number(0..1), minRun: integer, preserveRoles: array<string> }",
+      "composition_notes": "Consumes occupancy+zones (needs a facing/aspect zone), emits placements+report. Runs AFTER surface.fill and surface.paint have laid the rubble skin (it overlays, never replaces the structural field) and AFTER opening-dressing (so it laps around dressed jambs/quoins instead of burying them). Must run BEFORE surface.strip-salt so weathering can streak the fresh coat.",
+      "test_plan": "Unit tests: (1) shell with exactly one seaward-flagged wall → every placement lands on that aspect's exterior; (2) landward walls have zero limewash placements; (3) cells whose role ∈ preserveRoles never appear in placements; (4) coverage=1.0 paints every eligible weather cell, coverage=0.5 paints ~half in contiguous runs ≥ minRun; (5) second pass emits zero new placements (idempotent); (6) report counts eligible/painted/preserved-skipped.",
+      "preview_subject": "A single gabled cottage shell with one wall flagged seaward and three flagged landward, rubble field already laid.",
+      "context": "Saltcrag's limewash is 'an accent of thrift, not a clad finish' — shell-burned lime is brushed only on the face the storm hits, so a white gable-end stands against grey rubble. No owned pass is aspect-aware: surface.paint applies by role-priority across the whole skin and surface.fill is zone- not direction-driven, so neither can restrict a coat to the gale-facing aspect while leaving the field showing. This brush adds directional, partial-coverage finishing that preserves the role beneath rather than overwriting it.",
+      "acceptance_criteria": [
+        "With one wall marked weather-facing, ≥90% of placements land on that aspect's exterior cells",
+        "Landward walls retain their underlying field role (zero limewash placements there)",
+        "Cells whose role is in preserveRoles (quoins, jambs) are never overpainted",
+        "coverage=0.5 yields limewash on ~half the eligible weather-face cells, contiguous in runs ≥ minRun",
+        "report lists painted aspect, eligible-vs-painted counts, and skipped preserved cells",
+        "Re-running on its own output is idempotent (zero new placements)"
+      ]
+    },
+    {
+      "name": "surface.clinker",
+      "purpose": "Clads the boarded upper storey and loft gable in lapped clinker boards (dark_oak family), stepping each horizontal course proud of the one below so the wall reads as overlapping tarred hull-planking.",
+      "parameter_sketch": "{ board: string, lap: integer(0..1 proud step in faces), course: integer(board height), trimBlock: string|null, zones: \"upper\"|array<zone> }",
+      "composition_notes": "Consumes occupancy+zones, emits placements+report. Runs on the upper zone AFTER hollow (clads a real shell, not solid) and AFTER timber-frame if any posts exist (laps between them); precedes roof.gable's eave so the topmost lap meets the wallplate. Mutually exclusive with surface.fill on the same zone — one or the other dresses the upper storey.",
+      "test_plan": "Unit tests: (1) every emitted course is exactly `course` blocks tall and horizontal; (2) adjacent courses differ in depth by `lap`, alternating proud/flush; (3) no placement outside the named zone or below the upper wallplate; (4) a gable-raked panel emits no cell past the slope line; (5) trimBlock set → top and bottom courses use it, null → board everywhere; (6) re-run is idempotent and reports course count + proud-cell count.",
+      "preview_subject": "A two-storey wall stub: a rubble ground course plus a 4-high upper panel awaiting cladding, with a raked gable on top.",
+      "context": "Saltcrag's loft and gable are 'boarded, not built' — thin softwood deals lapped clinker-fashion, the same craft that seals a hull, then tarred black. The visual signature is the horizontal shadow-line rhythm of overlapping boards, which neither surface.fill (a flat skin) nor timber-frame (post-and-beam infill panels) produces. This brush lays alternating proud/recessed courses to cast that lap shadow, and only on the light upper storey where thin boards belong.",
+      "acceptance_criteria": [
+        "Boards run horizontally; each course is offset by `lap` from the course below (alternating proud/flush)",
+        "Placements stay within the named zone; ground/rubble cells are untouched",
+        "On a gable, the rake follows the roof slope — no board protrudes past the gable line",
+        "Visible shadow-line count equals floor(panelHeight / course)",
+        "trimBlock caps the top and bottom course when set; null leaves raw board",
+        "Re-run on its own output is idempotent; report gives course count and proud-cell count"
+      ]
+    },
+    {
+      "name": "roof.thatch",
+      "purpose": "Builds the poorer cottage's steep reed/marram pitch (hay_block) with a thick, rounded, eyebrowed eave and rolled ridge — the raked thatch that reads distinctly from the village's tarred plank gables.",
+      "parameter_sketch": "{ pitch: number(≥1 steep), block: string, thickness: integer(≥2), ridgeRoll: boolean, ridgeBlock: string|null, eaveOvershoot: integer }",
+      "composition_notes": "Construct: consumes spec, emits cells. An alternative to roof.gable for a given footprint — never both on one roof. Runs AFTER the wall shell/wallplate exists; precedes surface.strip-salt (thatch greys but does not tar-streak). A bought slate ridge can still be requested via ridgeBlock; the default ridge is a rolled hay course.",
+      "test_plan": "Unit tests: (1) mass thickness normal to the pitch ≥ `thickness` at every sampled column; (2) eave cells extend `eaveOvershoot` past the wall plane and include a rounding cell (no hard 90° edge); (3) pitch below the configured minimum throws; (4) ridgeRoll toggles a raised apex course, ridgeBlock overrides its material; (5) underside is hollow — no fill cells beneath the pitch; (6) byte-stable cell list across two runs of one spec.",
+      "preview_subject": "A small square byre footprint with a wallplate ring at storey height, no roof yet.",
+      "context": "The cottages that can't afford shingle pin 'down steep reed and marram cut from the dune,' raked against the gale; the poorest outbuildings are turfed (moss). Thatch's identity is its thickness and rounded, overhanging eave — a flat plank gable (roof.gable) cannot render the soft eyebrow or the rolled ridge. This brush gives a ≥2-voxel-thick pitched mass with an overshooting, rounded eave for the roofscape's poorer-neighbour pitch; turf reuses the same shape at a lower pitch via the field block.",
+      "acceptance_criteria": [
+        "Roof mass is at least `thickness` voxels deep measured normal to the pitch",
+        "Eave overshoots the wall plane by `eaveOvershoot` and rounds rather than ending in a hard plank edge",
+        "Pitch below the steep minimum is rejected",
+        "ridgeRoll=true caps the apex with a raised rolled course; ridgeBlock overrides the material for a bought ridge",
+        "No interior cells are emitted below the pitch underside (roof is hollow)",
+        "Cell list is identical across two runs of a fixed spec"
+      ]
+    }
+  ],
+  "parametrization_notes": [
+    {
+      "need": "Storm-grey rubble ground storey of cleared fieldstone (cobblestone), laid up rough.",
+      "existing_brush": "surface.fill",
+      "note": "skin=exposure, minRun≈3 (opening spacing floor) over the ground zone; the cobblestone role is then locked by surface.paint. Exposure skin gives the undressed-rubble read without a flat projection."
+    },
+    {
+      "need": "Beach-cobble footings / damp packed plinth course (mossy_cobblestone).",
+      "existing_brush": "plinth",
+      "note": "courses=1–2, inset=0–1, block=mossy_cobblestone — the strand's sea-worn stone bedded at the base, reading damper than the cleared field above."
+    },
+    {
+      "need": "Rough cobble infill role assignment across the lower wall (mossy_cobblestone vs cobblestone).",
+      "existing_brush": "surface.paint",
+      "note": "priority array ordered [wall.dressing.quoin, wall.finish.limewash, wall.field.ground, wall.infill.cobble] so scarce/dressed roles win and the mossy infill fills the remainder."
+    },
+    {
+      "need": "Squared dressed quoins and worked jambs at corners and openings (stone_bricks).",
+      "existing_brush": "opening-dressing",
+      "note": "Feed stone_bricks as the kit's quoin/jamb dressing block; the pass already dresses corners and aperture flanks. Keep it scarce — dress only corners and door/window jambs, never field."
+    },
+    {
+      "need": "The tarred shingle roof field (dark_oak_planks) on the better cottages.",
+      "existing_brush": "roof.gable",
+      "note": "blocks.field=dark_oak_planks at a pitch from the [2,1,0.5] classes; surface.roof-courses then coordinates the field with the stair and slab courses so the whole pitch reads as one tarred skin."
+    },
+    {
+      "need": "Coursed-up pitched shingle runs (dark_oak_stairs).",
+      "existing_brush": "course.stairs",
+      "note": "block=dark_oak_stairs, winding=walk for the slope run; the courses lap against the wind and share the field's tar."
+    },
+    {
+      "need": "Flat shingle course at eave and shallow break (dark_oak_slab).",
+      "existing_brush": "course.slab",
+      "note": "block=dark_oak_slab, kind=bottom where the pitch eases at the eave; same riven tarred softwood laid level."
+    },
+    {
+      "need": "Prestige bought ridge cap on the most beaten seam (deepslate_tiles).",
+      "existing_brush": "roof.gable",
+      "note": "Set blocks.ridge=deepslate_tiles so the apex line caps in slate against the black shingle field — a single bought course, dark grey at L23. (roof.thatch carries the same ridgeBlock override for thatched cottages.)"
+    },
+    {
+      "need": "Green-grey turf roof on the poorest outbuildings (moss_block).",
+      "existing_brush": "roof.gable",
+      "note": "blocks.field=moss_block at the lowest pitch class (0.5) — the bottom rung of the roofing economy on byre and net-store. roof.thatch can also render it at higher thickness if a sod-over-bark depth is wanted."
+    },
+    {
+      "need": "Driftwood/salvaged-baulk heads over door and window (spruce_log).",
+      "existing_brush": "head.flat",
+      "note": "block=spruce_log — a flat salvaged-timber head carrying the rubble above each opening; the head.flat idiom is already in use."
+    },
+    {
+      "need": "Window glazing and tarred deal shutters (glass_pane / spruce_trapdoor).",
+      "existing_brush": "opening-dressing",
+      "note": "Glaze a few apertures with glass_pane and hang spruce_trapdoor shutters on the rest from the kit; the pass already handles aperture glazing and shutter placement, keeping glass the rare indulgence."
+    },
+    {
+      "need": "Plain milled-deal main door (spruce_door).",
+      "existing_brush": "floorplan",
+      "note": "floorplan places the door leaf (door.main=spruce_door) at the program's entrance feature; opening-dressing then jambs and lintels it."
+    },
+    {
+      "need": "Rubble chimney stack with a dressed weathering cap (cobblestone / stone_bricks).",
+      "existing_brush": "chimney",
+      "note": "footprint from the hearth feature, block=cobblestone, cap=slab (or crown), capBlock=stone_bricks — gathered fieldstone carried up, the one worked-stone touch at the weather-beaten head."
+    },
+    {
+      "need": "Salt-driven weathering streaks that hold the storm-grey of the place.",
+      "existing_brush": "surface.strip-salt",
+      "note": "minKeep / minExtent tuned so streaks survive as broad strips rather than speckle; runs last, after limewash, so it weathers both the rubble field and the fresh seaward coat."
+    },
+    {
+      "need": "Hollow shell and interior storey layout (generic, not style-specific).",
+      "existing_brush": "hollow",
+      "note": "hollow carves true interior voids before any cladding pass; floorplan then sets storey floors at the 3–4-block storey height. Both run before surface.clinker so the upper storey clads a real shell."
+    }
+  ],
+  "demotions": [],
+  "warnings": []
+}
