@@ -4,7 +4,7 @@
   "label": "patternbook",
   "artifact": {
     "path": "benchmarks/sculpture/workshop/cottage/final-artifact.json",
-    "sha256": "cc9530aa6d5621947a29908b6f811c7bff2ad98ec9b75153b9fb1f5fa1b26c8f"
+    "sha256": "377b65b6617e0a6993d04b94b6d7ff6cd2facb5ce64adb727f9878f69405bf14"
   },
   "contract": {
     "azimuths": [
@@ -27,14 +27,14 @@
       "band0": {
         "dominant": "stone_bricks",
         "preserve": [
-          "dark_oak_log",
           "spruce_planks",
+          "dark_oak_log",
           "cobblestone",
           "bricks"
         ],
         "splat": [
-          "dark_oak_log",
           "spruce_planks",
+          "dark_oak_log",
           "cobblestone",
           "bricks"
         ]
@@ -97,14 +97,14 @@
         "band0": {
           "dominant": "stone_bricks",
           "preserve": [
-            "dark_oak_log",
             "spruce_planks",
+            "dark_oak_log",
             "cobblestone",
             "bricks"
           ],
           "splat": [
-            "dark_oak_log",
             "spruce_planks",
+            "dark_oak_log",
             "cobblestone",
             "bricks"
           ]
@@ -172,37 +172,43 @@
         "path": "benchmarks/sculpture/multi-angle/cottage-patternbook/view-+x+z.png"
       },
       "coverage": {
-        "passed": false,
+        "passed": true,
         "threshold": 0.5,
         "byZone": {
           "band0": {
             "dominant": "stone_bricks",
-            "fraction": 0.644,
+            "fraction": 0.523,
             "total": 354,
             "passed": true,
             "metric": "own",
             "own": [
               "stone_bricks",
-              "dark_oak_log",
               "spruce_planks",
+              "dark_oak_log",
               "cobblestone",
               "bricks"
             ],
             "dominantFraction": 0.497
           },
           "band1": {
-            "dominant": null,
-            "fraction": null,
-            "total": 0,
-            "passed": false,
+            "dominant": "white_terracotta",
+            "fraction": 1,
+            "total": 99,
+            "passed": true,
             "metric": "own",
-            "own": null,
-            "dominantFraction": null
+            "own": [
+              "white_terracotta",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 1
           },
           "roof": {
             "dominant": "spruce_planks",
             "fraction": 1,
-            "total": 411,
+            "total": 486,
             "passed": true,
             "metric": "own",
             "own": [
@@ -213,13 +219,57 @@
               "bricks",
               "spruce_stairs"
             ],
-            "dominantFraction": 0.465
+            "dominantFraction": 0.393
           }
+        },
+        "legacy": {
+          "passed": true,
+          "failures": []
         }
       },
-      "verdict": null,
-      "judge": null,
-      "reason": "coverage"
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "same object",
+        "gaps": [
+          {
+            "region": "upper storey walls",
+            "attribute": "material zoning",
+            "severity": "minor"
+          },
+          {
+            "region": "overall massing and roof footprint",
+            "attribute": "massing",
+            "severity": "minor"
+          },
+          {
+            "region": "chimney",
+            "attribute": "palette",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "Same two-mass cottage with stone base, plaster walls, and a dominant brown gabled roof plus chimney, though this angle loses the timber-frame banding on the upper storey and the chimney reads pinker than the concept's stone stack."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10307,
+          "output_tokens": 195,
+          "cost_usd": 0.183162
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "```json\n{\"verdict\":\"same object\",\"gaps\":[{\"region\":\"upper storey walls\",\"attribute\":\"material zoning\",\"severity\":\"minor\"},{\"region\":\"overall massing and roof footprint\",\"attribute\":\"massing\",\"severity\":\"minor\"},{\"region\":\"chimney\",\"attribute\":\"palette\",\"severity\":\"minor\"}],\"rationale\":\"Same two-mass cottage with stone base, plaster walls, and a dominant brown gabled roof plus chimney, though this ",
+          "usage": {
+            "input_tokens": 10307,
+            "output_tokens": 195,
+            "cost_usd": 0.183162
+          },
+          "source": "live"
+        }
+      ]
     },
     {
       "angle": "+x-z",
@@ -229,37 +279,43 @@
         "path": "benchmarks/sculpture/multi-angle/cottage-patternbook/view-+x-z.png"
       },
       "coverage": {
-        "passed": false,
+        "passed": true,
         "threshold": 0.5,
         "byZone": {
           "band0": {
             "dominant": "stone_bricks",
-            "fraction": 0.695,
+            "fraction": 0.553,
             "total": 347,
             "passed": true,
             "metric": "own",
             "own": [
               "stone_bricks",
-              "dark_oak_log",
               "spruce_planks",
+              "dark_oak_log",
               "cobblestone",
               "bricks"
             ],
             "dominantFraction": 0.504
           },
           "band1": {
-            "dominant": null,
-            "fraction": null,
-            "total": 0,
-            "passed": false,
+            "dominant": "white_terracotta",
+            "fraction": 1,
+            "total": 102,
+            "passed": true,
             "metric": "own",
-            "own": null,
-            "dominantFraction": null
+            "own": [
+              "white_terracotta",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 1
           },
           "roof": {
             "dominant": "spruce_planks",
             "fraction": 1,
-            "total": 438,
+            "total": 504,
             "passed": true,
             "metric": "own",
             "own": [
@@ -270,13 +326,52 @@
               "bricks",
               "spruce_stairs"
             ],
-            "dominantFraction": 0.436
+            "dominantFraction": 0.379
           }
+        },
+        "legacy": {
+          "passed": true,
+          "failures": []
         }
       },
-      "verdict": null,
-      "judge": null,
-      "reason": "coverage"
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "same object",
+        "gaps": [
+          {
+            "region": "rooftop chimney",
+            "attribute": "palette",
+            "severity": "minor"
+          },
+          {
+            "region": "upper-storey walls",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The L-shaped massing, dominant steep brown roof, light upper walls, and stone base all read true from this angle, with only a red chimney (vs the concept's gray stone) and faint timber-frame detailing as minor differences."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10307,
+          "output_tokens": 687,
+          "cost_usd": 0.195462
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"same object\",\"gaps\":[{\"region\":\"rooftop chimney\",\"attribute\":\"palette\",\"severity\":\"minor\"},{\"region\":\"upper-storey walls\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The L-shaped massing, dominant steep brown roof, light upper walls, and stone base all read true from this angle, with only a red chimney (vs the concept's gray stone) and faint timber-frame detailing a",
+          "usage": {
+            "input_tokens": 10307,
+            "output_tokens": 687,
+            "cost_usd": 0.195462
+          },
+          "source": "live"
+        }
+      ]
     },
     {
       "angle": "-x-z",
@@ -286,37 +381,43 @@
         "path": "benchmarks/sculpture/multi-angle/cottage-patternbook/view--x-z.png"
       },
       "coverage": {
-        "passed": false,
+        "passed": true,
         "threshold": 0.5,
         "byZone": {
           "band0": {
             "dominant": "stone_bricks",
-            "fraction": 0.649,
+            "fraction": 0.611,
             "total": 350,
             "passed": true,
             "metric": "own",
             "own": [
               "stone_bricks",
-              "dark_oak_log",
               "spruce_planks",
+              "dark_oak_log",
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.457
+            "dominantFraction": 0.463
           },
           "band1": {
-            "dominant": null,
-            "fraction": null,
-            "total": 0,
-            "passed": false,
+            "dominant": "white_terracotta",
+            "fraction": 1,
+            "total": 180,
+            "passed": true,
             "metric": "own",
-            "own": null,
-            "dominantFraction": null
+            "own": [
+              "white_terracotta",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 1
           },
           "roof": {
             "dominant": "spruce_planks",
             "fraction": 1,
-            "total": 415,
+            "total": 409,
             "passed": true,
             "metric": "own",
             "own": [
@@ -327,13 +428,57 @@
               "bricks",
               "spruce_stairs"
             ],
-            "dominantFraction": 0.287
+            "dominantFraction": 0.289
           }
+        },
+        "legacy": {
+          "passed": true,
+          "failures": []
         }
       },
-      "verdict": null,
-      "judge": null,
-      "reason": "coverage"
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "walls (entire wall surface)",
+            "attribute": "material zoning",
+            "severity": "major"
+          },
+          {
+            "region": "overall building height vs roof",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "rooftop chimney",
+            "attribute": "palette",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "Recognizably the same gabled cottage with a chimney, but the build reads as a squat single mass with a roof-dominant profile and plain salmon walls — losing the references' taller two-storey proportion and the stone-base/timber-frame material zoning, with a red chimney where the concept shows stone."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10307,
+          "output_tokens": 972,
+          "cost_usd": 0.20258700000000002
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"walls (entire wall surface)\",\"attribute\":\"material zoning\",\"severity\":\"major\"},{\"region\":\"overall building height vs roof\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"rooftop chimney\",\"attribute\":\"palette\",\"severity\":\"minor\"}],\"rationale\":\"Recognizably the same gabled cottage with a chimney, but the build reads as a squat single mass with a roof-dom",
+          "usage": {
+            "input_tokens": 10307,
+            "output_tokens": 972,
+            "cost_usd": 0.20258700000000002
+          },
+          "source": "live"
+        }
+      ]
     },
     {
       "angle": "-x+z",
@@ -343,37 +488,43 @@
         "path": "benchmarks/sculpture/multi-angle/cottage-patternbook/view--x+z.png"
       },
       "coverage": {
-        "passed": false,
+        "passed": true,
         "threshold": 0.5,
         "byZone": {
           "band0": {
             "dominant": "stone_bricks",
-            "fraction": 0.604,
+            "fraction": 0.58,
             "total": 379,
             "passed": true,
             "metric": "own",
             "own": [
               "stone_bricks",
-              "dark_oak_log",
               "spruce_planks",
+              "dark_oak_log",
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.462
+            "dominantFraction": 0.467
           },
           "band1": {
-            "dominant": null,
-            "fraction": null,
-            "total": 0,
-            "passed": false,
+            "dominant": "white_terracotta",
+            "fraction": 1,
+            "total": 180,
+            "passed": true,
             "metric": "own",
-            "own": null,
-            "dominantFraction": null
+            "own": [
+              "white_terracotta",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 1
           },
           "roof": {
             "dominant": "spruce_planks",
             "fraction": 1,
-            "total": 406,
+            "total": 394,
             "passed": true,
             "metric": "own",
             "own": [
@@ -384,56 +535,148 @@
               "bricks",
               "spruce_stairs"
             ],
-            "dominantFraction": 0.296
+            "dominantFraction": 0.299
           }
+        },
+        "legacy": {
+          "passed": true,
+          "failures": []
         }
       },
-      "verdict": null,
-      "judge": null,
-      "reason": "coverage"
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof vs walls overall",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "ground storey and wall framing",
+            "attribute": "material zoning",
+            "severity": "major"
+          },
+          {
+            "region": "rooftop chimney",
+            "attribute": "palette",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "It reads as the same gabled cottage with a ridge chimney, but the roof now overwhelms a single squat wall band and the concept's stone ground storey plus timber-frame upper zoning has collapsed into plain plaster over a thin sill, so it has drifted."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 10429,
+          "output_tokens": 804,
+          "cost_usd": 0.198997
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof vs walls overall\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"ground storey and wall framing\",\"attribute\":\"material zoning\",\"severity\":\"major\"},{\"region\":\"rooftop chimney\",\"attribute\":\"palette\",\"severity\":\"minor\"}],\"rationale\":\"It reads as the same gabled cottage with a ridge chimney, but the roof now overwhelms a single squat wall band and the",
+          "usage": {
+            "input_tokens": 10429,
+            "output_tokens": 804,
+            "cost_usd": 0.198997
+          },
+          "source": "live"
+        }
+      ]
     }
   ],
   "aggregate": {
     "schema": "multi-angle-gate/v1",
     "decided": true,
     "passed": false,
-    "gapCount": 0,
+    "gapCount": 11,
     "gapBudget": 2,
-    "gaps": [],
-    "failures": [
+    "gaps": [
       {
         "angle": "+x+z",
-        "reason": "coverage"
+        "region": "upper storey walls",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "+x+z",
+        "region": "overall massing and roof footprint",
+        "attribute": "massing"
+      },
+      {
+        "angle": "+x+z",
+        "region": "chimney",
+        "attribute": "palette"
       },
       {
         "angle": "+x-z",
-        "reason": "coverage"
+        "region": "rooftop chimney",
+        "attribute": "palette"
+      },
+      {
+        "angle": "+x-z",
+        "region": "upper-storey walls",
+        "attribute": "material zoning"
       },
       {
         "angle": "-x-z",
-        "reason": "coverage"
+        "region": "walls (entire wall surface)",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x-z",
+        "region": "overall building height vs roof",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x-z",
+        "region": "rooftop chimney",
+        "attribute": "palette"
       },
       {
         "angle": "-x+z",
-        "reason": "coverage"
+        "region": "roof vs walls overall",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x+z",
+        "region": "ground storey and wall framing",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x+z",
+        "region": "rooftop chimney",
+        "attribute": "palette"
+      }
+    ],
+    "failures": [
+      {
+        "angle": "-x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x+z",
+        "reason": "drifted"
       }
     ],
     "views": [
       {
         "angle": "+x+z",
-        "outcome": "coverage"
+        "outcome": "same object (3 minor)"
       },
       {
         "angle": "+x-z",
-        "outcome": "coverage"
+        "outcome": "same object (2 minor)"
       },
       {
         "angle": "-x-z",
-        "outcome": "coverage"
+        "outcome": "drifted: material zoning"
       },
       {
         "angle": "-x+z",
-        "outcome": "coverage"
+        "outcome": "drifted: massing"
       }
     ]
   },
@@ -445,9 +688,9 @@
         "feature": "frame",
         "block": "spruce_planks",
         "shipped": "spruce_planks",
-        "sites": 324,
-        "missing": 16,
-        "satisfied": 288,
+        "sites": 374,
+        "missing": 110,
+        "satisfied": 244,
         "tolerated": {
           "respected": 20,
           "skippedIsolated": 0
@@ -460,9 +703,9 @@
         "block": "stone_bricks",
         "shipped": "stone_bricks",
         "sites": 1080,
-        "missing": 447,
+        "missing": 499,
         "tolerated": {
-          "residue": 2
+          "residue": 0
         },
         "gating": true,
         "passed": false
@@ -471,7 +714,7 @@
         "feature": "panel:band1",
         "block": "smooth_sandstone",
         "shipped": "smooth_sandstone",
-        "sites": 847,
+        "sites": 1165,
         "missing": 0,
         "tolerated": {
           "residue": 0
@@ -483,7 +726,7 @@
         "feature": "course",
         "block": "spruce_planks",
         "shipped": "spruce_planks",
-        "sites": 608,
+        "sites": 610,
         "missing": 0,
         "tolerated": {
           "residue": 0
@@ -493,8 +736,8 @@
       }
     ],
     "gaps": [
-      "missing: spruce_planks frame @ 16/324 frame-line cells",
-      "missing: stone_bricks panel @ band0 (447 cells)"
+      "missing: spruce_planks frame @ 110/374 frame-line cells",
+      "missing: stone_bricks panel @ band0 (499 cells)"
     ],
     "skips": [
       {
@@ -527,34 +770,34 @@
       },
       "frame": {
         "counts": {
-          "wall": 1418,
-          "cornerPost": 38,
-          "roofline": 241,
-          "floorLine": 45
+          "wall": 1744,
+          "cornerPost": 46,
+          "roofline": 227,
+          "floorLine": 101
         },
-        "painted": 16,
+        "painted": 110,
         "adopted": 0,
         "respected": 20,
         "skippedIsolated": 0,
-        "alreadyFrame": 288
+        "alreadyFrame": 244
       },
       "fill": {
-        "placements": 449,
+        "placements": 499,
         "byZone": {
           "band0": {
             "surface": 1080,
-            "filled": 449,
-            "kept": 631
+            "filled": 499,
+            "kept": 581
           },
           "roof": {
-            "surface": 608,
+            "surface": 610,
             "filled": 0,
-            "kept": 608
+            "kept": 610
           },
           "band1": {
-            "surface": 847,
+            "surface": 1165,
             "filled": 0,
-            "kept": 847
+            "kept": 1165
           }
         }
       }
@@ -574,11 +817,47 @@
         "ran": true,
         "passed": false,
         "gaps": [
-          "missing: spruce_planks frame @ 16/324 frame-line cells",
-          "missing: stone_bricks panel @ band0 (447 cells)"
+          "missing: spruce_planks frame @ 110/374 frame-line cells",
+          "missing: stone_bricks panel @ band0 (499 cells)"
         ]
       }
     }
+  },
+  "visibility": {
+    "byBand": {
+      "band0": {
+        "status": "visible",
+        "visibleViews": [
+          "+x+z",
+          "+x-z",
+          "-x-z",
+          "-x+z"
+        ],
+        "exposedCells": 1080
+      },
+      "band1": {
+        "status": "visible",
+        "visibleViews": [
+          "+x+z",
+          "+x-z",
+          "-x-z",
+          "-x+z"
+        ],
+        "exposedCells": 352
+      },
+      "roof": {
+        "status": "visible",
+        "visibleViews": [
+          "+x+z",
+          "+x-z",
+          "-x-z",
+          "-x+z"
+        ],
+        "exposedCells": 1473
+      }
+    },
+    "failures": [],
+    "passed": true
   },
   "sheet": "pr/assets/frames/multi-angle-cottage-patternbook.png",
   "labeled": true

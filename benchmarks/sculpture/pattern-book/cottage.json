@@ -1,7 +1,8 @@
 {
   "schema": "pattern-book-chain/v1",
-  "ticket": "T-127-01",
+  "ticket": "T-138-02",
   "subject": "cottage",
+  "runKey": "cottage",
   "pack": "rustic",
   "budget": {
     "rounds": 6
@@ -38,41 +39,204 @@
     },
     "seed": {
       "path": "benchmarks/sculpture/workshop/cottage/program.json",
-      "sha256": "4a0c3ca940e15d0d15a189a940a3f3c1bf94eb4c842c90488b57ef2d8dcd10e9",
-      "cells": 4993,
+      "sha256": "a78802b22e0cc087d235d6ba3b52f4c8aa3516a522c8d10ce035138e120f8cbb",
+      "cells": 7803,
       "conformance": {
         "passed": true
+      },
+      "measured": {
+        "dimensions": [
+          {
+            "mass": "*",
+            "parameter": "footprint.w",
+            "source": "measured",
+            "measured": 27,
+            "used": 27,
+            "residual": 0,
+            "note": "sketch planDims (registry blocks), endpoint-scaled across masses"
+          },
+          {
+            "mass": "*",
+            "parameter": "footprint.d",
+            "source": "measured",
+            "measured": 32,
+            "used": 32,
+            "residual": 0,
+            "note": "sketch planDims (registry blocks), endpoint-scaled across masses"
+          },
+          {
+            "mass": "main",
+            "parameter": "eaveHeight",
+            "source": "measured",
+            "measured": 19.3,
+            "used": 20,
+            "residual": 0.7,
+            "note": "expressed as 4×5 (schema-bounded factorization)"
+          },
+          {
+            "mass": "main",
+            "parameter": "storeyFactorization",
+            "source": "measured",
+            "measured": 19.3,
+            "used": "4x5",
+            "residual": null,
+            "note": "recognition read 2x4"
+          },
+          {
+            "mass": "main",
+            "parameter": "pitchClass",
+            "source": "measured",
+            "measured": 0.7143,
+            "used": 1,
+            "residual": 0.2857,
+            "note": "tan(dominant tilt) snapped to the nearest pack pitch class"
+          },
+          {
+            "mass": "main",
+            "parameter": "ridgeHeight",
+            "source": "measured",
+            "measured": 27.3,
+            "used": 31,
+            "residual": 3.7,
+            "note": "derived: eave + pitch x half-span + 1 (all constituents sourced above)"
+          },
+          {
+            "mass": "wing",
+            "parameter": "eaveHeight",
+            "source": "measured",
+            "measured": 19.3,
+            "used": 20,
+            "residual": 0.7,
+            "note": "expressed as 4×5 (schema-bounded factorization)"
+          },
+          {
+            "mass": "wing",
+            "parameter": "storeyFactorization",
+            "source": "measured",
+            "measured": 19.3,
+            "used": "4x5",
+            "residual": null,
+            "note": "recognition read 2x4"
+          },
+          {
+            "mass": "wing",
+            "parameter": "pitchClass",
+            "source": "measured",
+            "measured": 0.7143,
+            "used": 1,
+            "residual": 0.2857,
+            "note": "tan(dominant tilt) snapped to the nearest pack pitch class"
+          },
+          {
+            "mass": "wing",
+            "parameter": "ridgeHeight",
+            "source": "measured",
+            "measured": 27.3,
+            "used": 30,
+            "residual": 2.7,
+            "note": "derived: eave + pitch x half-span + 1 (all constituents sourced above)"
+          }
+        ],
+        "conflicts": [
+          {
+            "mass": "*",
+            "parameter": "footprint.w",
+            "recognition": 26,
+            "sketch": 27,
+            "resolved": "sketch"
+          },
+          {
+            "mass": "*",
+            "parameter": "footprint.d",
+            "recognition": 28,
+            "sketch": 32,
+            "resolved": "sketch"
+          },
+          {
+            "mass": "main",
+            "parameter": "eaveHeight",
+            "recognition": 8,
+            "sketch": 19.3,
+            "resolved": "sketch"
+          },
+          {
+            "mass": "main",
+            "parameter": "storeyHeight.packBand",
+            "recognition": "[3, 4]",
+            "sketch": 5,
+            "resolved": "sketch",
+            "note": "pack proportions are the fallback tier (S-133); excursion recorded"
+          },
+          {
+            "mass": "wing",
+            "parameter": "eaveHeight",
+            "recognition": 8,
+            "sketch": 19.3,
+            "resolved": "sketch"
+          },
+          {
+            "mass": "wing",
+            "parameter": "storeyHeight.packBand",
+            "recognition": "[3, 4]",
+            "sketch": 5,
+            "resolved": "sketch",
+            "note": "pack proportions are the fallback tier (S-133); excursion recorded"
+          }
+        ]
+      },
+      "proportionsDeclared": {
+        "schema": "silhouette-proportion/v1",
+        "targets": {
+          "ridgeToEave": 1.4145,
+          "roofShare": 0.293,
+          "aspect": 1.1852
+        },
+        "sources": {
+          "ridgeToEave": "sketch",
+          "roofShare": "sketch",
+          "aspect": "sketch"
+        },
+        "tolerance": 0.15
+      },
+      "ratios": {
+        "ridgeToEave": 1.55,
+        "roofShare": 0.3548,
+        "aspect": 1.1852
       }
     },
     "workshop": {
       "ledger": {
         "path": "benchmarks/sculpture/workshop/cottage.json",
-        "sha256": "e1abd583ca3393b3c1bef19dbab10992b5937994563d27fc1ce9eb9605701c0c"
+        "sha256": "ba878ac801dfaabfab88624ac289ba004bf1ebd22637e58d9f41cadad6e315f8"
       },
       "final": {
         "path": "benchmarks/sculpture/workshop/cottage/final-artifact.json",
-        "sha256": "cc9530aa6d5621947a29908b6f811c7bff2ad98ec9b75153b9fb1f5fa1b26c8f"
+        "sha256": "377b65b6617e0a6993d04b94b6d7ff6cd2facb5ce64adb727f9878f69405bf14"
       },
-      "outcome": "done",
+      "outcome": "budget-exhausted",
       "rounds": {
         "used": 6,
         "budget": 6
       },
-      "accepted": 5,
-      "rolledBack": 0,
+      "accepted": 1,
+      "rolledBack": 1,
       "unavailable": 0,
-      "applyFailed": 0,
+      "applyFailed": 4,
       "conformance": {
         "first": {
           "passed": 6,
-          "findings": 0
+          "findings": 2
         },
         "final": {
           "passed": 6,
-          "findings": 0
+          "findings": 2
         },
-        "finalPassed": true
+        "finalPassed": false
       }
+    },
+    "plan": {
+      "path": "benchmarks/sculpture/workshop/cottage/component-plan.json",
+      "sha256": "7749269604b497486f1f750fbe7e4ac5193764926aae249eee5f58335bc50cdf"
     }
   },
   "generalization": {
