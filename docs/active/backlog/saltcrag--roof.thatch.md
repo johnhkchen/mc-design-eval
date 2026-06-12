@@ -10,9 +10,9 @@ provenance:
   prompt_sha256: "db44b81821ec5e19914dfb2e2dd9766aa67c427ea463c95c7288df6942781ea6"
   generated: "2026-06-12T01:12:41.374Z"
 promotion:
-  promoted_by: null
-  date: null
-  ticket: null
+  promoted_by: "planner sanction via T-132-01 AC (gap brushes implemented off promoted drafts); executed in-ticket, no lisa dispatch"
+  date: "2026-06-11"
+  ticket: "T-132-01"
 rework: []
 ---
 
