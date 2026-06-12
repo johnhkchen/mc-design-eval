@@ -10,7 +10,7 @@ import {
   parseStylePack, assertStylePack, validateStylePack, loadStylePack, packPolicy,
 } from "./style-pack.mjs";
 import { composeVocabulary } from "../form/material-vocabulary.mjs";
-import { CONFORMANCE_CHECK_NAMES } from "./conformance.mjs";
+import { REGULARITY_CHECK_NAMES } from "./conformance.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const RUSTIC_PATH = resolve(here, "..", "..", "packs", "rustic.json");
@@ -181,8 +181,9 @@ test("rustic.json loads, schema-gates, and validates clean against the committed
   }
   // every palette role cites the provenance story (diegetic derivation is total)
   for (const p of pack.palette) assert.ok(p.provenance.length >= 1, p.role);
-  // the pack lists the full conformance vocabulary
-  assert.deepEqual(pack.conformance.checks, [...CONFORMANCE_CHECK_NAMES]);
+  // the pack lists the full REGULARITY vocabulary (proportion-vs-concept is declaration-driven,
+  // T-135-01 — committed chains predate proportion declarations and must re-derive identically)
+  assert.deepEqual(pack.conformance.checks, [...REGULARITY_CHECK_NAMES]);
   // zone seats produce a real three-band policy for composeVocabulary
   const policy = packPolicy(pack, ["base", "upper", "roof"]);
   assert.equal(policy.base.dominant, "cobblestone");

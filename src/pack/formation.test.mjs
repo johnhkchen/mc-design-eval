@@ -28,7 +28,7 @@ import {
   draftReadme,
 } from "./formation.mjs";
 import { parseStylePack, assertStylePack, validateStylePack } from "./style-pack.mjs";
-import { CONFORMANCE_CHECK_NAMES } from "./conformance.mjs";
+import { REGULARITY_CHECK_NAMES } from "./conformance.mjs";
 
 // ---------------------------------------------------------------- fixtures (injected)
 
@@ -221,7 +221,7 @@ test("assembleDraftPack: draft tag, full conformance set, parseStylePack REJECTS
     proportions: PROPS, idioms, styleSlug: "testcrag",
   });
   assert.equal(draft.schema, DRAFT_SCHEMA_TAG);
-  assert.deepEqual(draft.conformance.checks, [...CONFORMANCE_CHECK_NAMES]);
+  assert.deepEqual(draft.conformance.checks, [...REGULARITY_CHECK_NAMES]);
   assert.deepEqual(draft.proportions, { storeyHeight: { min: 3, max: 4 }, pitchClasses: [1], openingRhythm: { minSpacing: 2, maxSpacing: 5 } });
   const r = parseStylePack(draft);
   assert.equal(r.ok, false, "a draft is structurally not a pack");

@@ -22,10 +22,18 @@ import { proportionRatios, compareRatios, assertProportionDeclarations } from ".
 
 export const CONFORMANCE_SCHEMA = "pack-conformance/v1";
 
-/** The check vocabulary a pack may list (style-pack validation rejects unknown names). */
-export const CONFORMANCE_CHECK_NAMES = Object.freeze([
+/** The REGULARITY checks — what every pack lists (formation emits exactly these). */
+export const REGULARITY_CHECK_NAMES = Object.freeze([
   "courses-even", "symmetry-held", "openings-rhythm",
   "palette-in-pack", "watertight", "single-component",
+]);
+
+/** The full check vocabulary a pack may list (style-pack validation rejects unknown names).
+ *  "proportion-vs-concept" (T-135-01) is DECLARATION-driven — it runs whenever a program
+ *  declares proportion targets, listed or not — so packs and committed drafts stay on the
+ *  regularity six unless a style opts in explicitly. */
+export const CONFORMANCE_CHECK_NAMES = Object.freeze([
+  ...REGULARITY_CHECK_NAMES,
   "proportion-vs-concept",
 ]);
 

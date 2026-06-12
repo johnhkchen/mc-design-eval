@@ -32,7 +32,7 @@ import { deltaE76 } from "../color/cielab.mjs";
 import { familyOf, isExcludedCandidate, weightedDeltaE } from "../color/value-select.mjs";
 import { derivedFormClass, loadBlockVocab } from "../form/kit.mjs";
 import { assertNonEmptyBacklog, enforceRegistryDedup } from "../factory/backlog.mjs";
-import { CONFORMANCE_CHECK_NAMES } from "./conformance.mjs";
+import { REGULARITY_CHECK_NAMES } from "./conformance.mjs";
 
 /** A draft is structurally not a pack — parseStylePack rejects this tag by `const`. */
 export const DRAFT_SCHEMA_TAG = "style-pack/draft-v1";
@@ -379,7 +379,7 @@ export function assembleDraftPack({ story, paletteEntries, decoration, proportio
       openingRhythm: { minSpacing: proportions.opening_min, maxSpacing: proportions.opening_max },
     },
     decoration: (decoration ?? []).map((d) => ({ item: d.item, block: d.block, where: [...d.where] })),
-    conformance: { checks: [...CONFORMANCE_CHECK_NAMES] },
+    conformance: { checks: [...REGULARITY_CHECK_NAMES] },
   };
 }
 
