@@ -27,6 +27,7 @@ import { artifactOccupancy } from "../view/occupancy.mjs";
 import { applyPaint } from "../view/face-paint.mjs";
 import { realizeProgram } from "./program.mjs";
 import { applyAction, DEFAULT_APPLIERS } from "./actions.mjs";
+import { prunePaint } from "./geometry.mjs";
 import { liveActionNames } from "./critique.mjs";
 
 export const WORKSHOP_LEDGER_SCHEMA = "workshop-ledger/v1";
@@ -90,6 +91,10 @@ export function isRegression(before, after) {
  * @param {object} opts
  * @param {object} opts.program  a validated workshop program (the seed — committed for replay)
  * @param {object} opts.pack  a validated style pack
+ * @param {object|null} [opts.source]  the recognized building-program/v1 behind the seed
+ *   (T-136-01). When present, the geometry levers and mass-grounded re-recognize are reachable:
+ *   the exchange context and the appliers receive it, accepted geometry-bearing rounds advance
+ *   it alongside the compiled program, and the ledger records the SEED source for replay.
  * @param {object} opts.seams
  * @param {(args:{round:number, budget:number, renders:object[]|null, program:object, pack:object, conformance:object, lastRound:object|null, liveActions:string[], azimuths:string[]}) => Promise<{verdict:object|null, replies:object[], askCount:number}>} opts.seams.exchange
  *   the metered exchange (runner: BAML render → reply-policy over the tiered shim; tests:
@@ -106,7 +111,7 @@ export function isRegression(before, after) {
  * @param {object} [opts.meta]  runner-side header fields (packRef, tier, instrument…)
  * @returns {Promise<{ledger:object, program:object, artifact:object}>}
  */
-export async function runWorkshopLoop({ program, pack, seams, appliers = DEFAULT_APPLIERS, meta = {} }) {
+export async function runWorkshopLoop({ program, pack, source = null, seams, appliers = DEFAULT_APPLIERS, meta = {} }) {
   const { exchange, render } = seams ?? {};
   if (typeof exchange !== "function") throw new Error("runWorkshopLoop: seams.exchange is required");
   const conform = seams.conform
@@ -116,6 +121,7 @@ export async function runWorkshopLoop({ program, pack, seams, appliers = DEFAULT
   const liveActions = liveActionNames(appliers);
 
   let current = program;
+  let currentSource = source;
   let paint = []; // accepted spray-paint placements, applied after realization in arrival order
   const realize = (prog, paintTrail) => {
     const { artifact } = realizeProgram(prog);
@@ -132,7 +138,7 @@ export async function runWorkshopLoop({ program, pack, seams, appliers = DEFAULT
     const renders = render ? await render({ artifact, round: r }) : null;
 
     const ex = await exchange({
-      round: r, budget, renders, program: current, pack,
+      round: r, budget, renders, program: current, pack, source: currentSource,
       conformance: before, lastRound, liveActions, azimuths,
     });
     const base = { round: r, renders, replies: ex.replies, askCount: ex.askCount };
@@ -153,12 +159,16 @@ export async function runWorkshopLoop({ program, pack, seams, appliers = DEFAULT
     // revise: apply the ONE sanctioned action, gate the round, roll back on regression
     let applied;
     let candidateProgram = current;
+    let candidateSource = currentSource;
     let candidatePaint = paint;
     let after = null;
     let accepted = false;
     let reason;
     try {
-      const result = applyAction({ program: current, occ: artifactOccupancy(artifact) }, action, { appliers });
+      const result = await applyAction(
+        { program: current, occ: artifactOccupancy(artifact), source: currentSource, pack },
+        action, { appliers },
+      );
       if (result.kind === "unavailable") {
         applied = { kind: "unavailable" };
         reason = result.reason;
@@ -166,6 +176,18 @@ export async function runWorkshopLoop({ program, pack, seams, appliers = DEFAULT
         if (result.kind === "program") {
           candidateProgram = result.program;
           applied = { kind: "program" };
+        } else if (result.kind === "geometry" || result.kind === "recognize") {
+          // a geometry-bearing revision: the compiled program AND its source advance together;
+          // the accepted paint trail is pruned to surfaces the new realization still has (an
+          // orphaned recolor would be a floating voxel — watertight bait, an unfair veto)
+          candidateProgram = result.program;
+          candidateSource = result.source;
+          const pruned = prunePaint(candidateProgram, paint);
+          candidatePaint = pruned.paint;
+          applied = result.kind === "geometry"
+            ? { kind: "geometry", paintPruned: pruned.pruned }
+            : { kind: "recognize", massId: action.massId, mass: result.mass,
+                replies: result.replies, askCount: result.askCount, paintPruned: pruned.pruned };
         } else {
           candidatePaint = [...paint, ...result.placements];
           applied = { kind: "paint", painted: result.painted, skipped: result.skipped, placements: result.placements };
@@ -181,6 +203,7 @@ export async function runWorkshopLoop({ program, pack, seams, appliers = DEFAULT
         } else {
           accepted = true;
           current = candidateProgram;
+          currentSource = candidateSource;
           paint = candidatePaint;
           reason = "accepted";
         }
@@ -208,6 +231,7 @@ export async function runWorkshopLoop({ program, pack, seams, appliers = DEFAULT
     instrument: { azimuths },
     ...meta,
     program, // the SEED — replay starts here
+    ...(source !== null ? { source } : {}), // the SEED source (geometry/recognize replay tracks it)
     rounds,
     final,
   };

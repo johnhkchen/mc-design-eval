@@ -17,7 +17,9 @@
 
 import { MAX_REPLY_ATTEMPTS } from "../form/judge-reply.mjs";
 import { applyPaint } from "../view/face-paint.mjs";
+import { assertBuildingProgram } from "../recognition/program.mjs";
 import { WORKSHOP_LEDGER_SCHEMA, isRegression } from "./loop.mjs";
+import { applyGeometryAdjust, substituteMass, prunePaint } from "./geometry.mjs";
 import { parseWorkshopProgram, assertWorkshopProgram, realizeProgram, applyParamAdjust } from "./program.mjs";
 
 /** THE canonical artifact serialization — byte identity is equality of this function's output.
@@ -32,10 +34,18 @@ export function serializeArtifact(artifact) {
  * not a judgement call). `throughRound` (T-135-01) bounds the replay to rounds ≤ N — the
  * per-round witness's prefix view (0 = the seed alone); omitted, the full-replay byte-identity
  * contract is untouched.
- * @param {{ledger:object, throughRound?:number}} args
- * @returns {{artifact:object, program:object, applied:{programAdjusts:number, paintPlacements:number}}}
+ *
+ * GEOMETRY-BEARING ROUNDS (T-136-01) re-enter the deterministic levers: an accepted geometry
+ * adjust is RE-DERIVED (applyGeometryAdjust on the tracked source — re-derivation is stronger
+ * evidence than a copy), an accepted re-recognition re-applies the LEDGERED fragment verbatim
+ * (a model output; the ledger IS the input — the paint precedent). Both need `pack` (a committed
+ * input, sha-pinned in the ledger's packRef) and the ledger's seed `source`.
+ * @param {{ledger:object, pack?:object, throughRound?:number}} args
+ * @returns {{artifact:object, program:object, source:object|null,
+ *            applied:{programAdjusts:number, geometryAdjusts:number, recognized:number,
+ *                     paintPlacements:number, paintPruned:number}}}
  */
-export function replayLedger({ ledger, throughRound }) {
+export function replayLedger({ ledger, pack = null, throughRound }) {
   if (ledger?.schema !== WORKSHOP_LEDGER_SCHEMA) {
     throw new Error(`replayLedger: ledger.schema must be "${WORKSHOP_LEDGER_SCHEMA}"`);
   }
@@ -43,8 +53,24 @@ export function replayLedger({ ledger, throughRound }) {
     throw new Error(`replayLedger: throughRound must be an integer ≥ 0, got ${throughRound}`);
   }
   let program = assertWorkshopProgram(ledger.program);
-  const paint = [];
+  let source = ledger.source != null ? assertBuildingProgram(ledger.source) : null;
+  let paint = [];
   let programAdjusts = 0;
+  let geometryAdjusts = 0;
+  let recognized = 0;
+  let paintPruned = 0;
+  const geometryCtx = (round) => {
+    if (!pack) throw new Error(`replayLedger: round ${round.round} is geometry-bearing — pass the pack (a committed, sha-pinned input)`);
+    if (!source) throw new Error(`replayLedger: round ${round.round} is geometry-bearing but the ledger carries no seed source`);
+    return { source, pack, budget: { ...program.budget }, proportions: program.declarations?.proportions ?? null };
+  };
+  const advance = (r) => {
+    program = r.program;
+    source = r.source;
+    const pruned = prunePaint(program, paint); // the loop pruned at the same acceptance point
+    paint = pruned.paint;
+    paintPruned += pruned.pruned;
+  };
   for (const round of ledger.rounds ?? []) {
     if (throughRound !== undefined && round.round > throughRound) continue;
     if (round.decision !== "revise" || !round.conformance?.accepted) continue;
@@ -55,6 +81,12 @@ export function replayLedger({ ledger, throughRound }) {
       }
       program = applyParamAdjust(program, { elementId: round.action.elementId, params: round.action.params });
       programAdjusts++;
+    } else if (kind === "geometry") {
+      advance(applyGeometryAdjust(geometryCtx(round), { massId: round.action.massId, params: round.action.params }));
+      geometryAdjusts++;
+    } else if (kind === "recognize") {
+      advance(substituteMass(geometryCtx(round), { massId: round.applied.massId, mass: round.applied.mass }));
+      recognized++;
     } else if (kind === "paint") {
       paint.push(...round.applied.placements);
     } else {
@@ -63,7 +95,8 @@ export function replayLedger({ ledger, throughRound }) {
   }
   const { artifact: realized } = realizeProgram(program);
   const artifact = paint.length ? applyPaint(realized, paint) : realized;
-  return { artifact, program, applied: { programAdjusts, paintPlacements: paint.length } };
+  return { artifact, program, source,
+           applied: { programAdjusts, geometryAdjusts, recognized, paintPlacements: paint.length, paintPruned } };
 }
 
 const OUTCOMES = Object.freeze(["done", "budget-exhausted", "exchange-refused"]);
@@ -71,12 +104,14 @@ const OUTCOMES = Object.freeze(["done", "budget-exhausted", "exchange-refused"])
 /**
  * Re-assert a committed workshop record without renders or model calls. Collects every problem
  * (never stops at the first — the record is reviewed as a whole).
- * @param {{ledger:object, finalArtifactText:string, conform?:(artifact:object, declarations:object)=>object}} args
+ * @param {{ledger:object, finalArtifactText:string, conform?:(artifact:object, declarations:object)=>object,
+ *          pack?:object}} args
  *   `conform` (the pure gate closed over the pack) re-checks the recorded FINAL conformance;
- *   omit it to skip that re-derivation (replay byte-equality still runs).
+ *   omit it to skip that re-derivation (replay byte-equality still runs). `pack` is required
+ *   for ledgers with geometry-bearing rounds (replay re-derives them — T-136-01).
  * @returns {{ok:boolean, problems:string[]}}
  */
-export function offlineAssert({ ledger, finalArtifactText, conform }) {
+export function offlineAssert({ ledger, finalArtifactText, conform, pack = null }) {
   const problems = [];
   const p = (msg) => problems.push(msg);
 
@@ -98,6 +133,16 @@ export function offlineAssert({ ledger, finalArtifactText, conform }) {
     }
     if (r.decision === "revise" && !r.action) p(`${where}: decision "revise" without an action`);
     if (r.decision === "done" && r.action) p(`${where}: decision "done" carries an action`);
+    if (r.applied?.kind === "recognize") {
+      // the inner exchange is ledger material (T-114): without its raw replies the round is unreviewable
+      if (!Array.isArray(r.applied.replies) || r.applied.replies.length === 0) {
+        p(`${where}: re-recognize accepted without its raw fragment replies`);
+      }
+      if (Number.isInteger(r.applied.askCount) && r.applied.askCount > MAX_REPLY_ATTEMPTS) {
+        p(`${where}: re-recognize askCount ${r.applied.askCount} exceeds the reply-policy bound (${MAX_REPLY_ATTEMPTS})`);
+      }
+      if (r.applied.mass == null) p(`${where}: re-recognize accepted without the ledgered fragment`);
+    }
     const c = r.conformance ?? {};
     if (c.accepted) {
       if (r.decision === "revise") {
@@ -123,16 +168,16 @@ export function offlineAssert({ ledger, finalArtifactText, conform }) {
   // Rule 5: the replayed build byte-matches the committed final artifact
   if (problems.length === 0 || seed.ok) {
     try {
-      const { artifact } = replayLedger({ ledger });
+      const { artifact, program: replayedProgram } = replayLedger({ ledger, pack });
       if (typeof finalArtifactText !== "string" || finalArtifactText.length === 0) {
         p("finalArtifactText missing — nothing to byte-compare against");
       } else if (serializeArtifact(artifact) !== finalArtifactText) {
         p("REPLAY DIVERGES: serializeArtifact(replay) ≠ the committed final artifact");
       }
       if (conform) {
-        const program = assertWorkshopProgram(ledger.program);
-        // declarations are constant across adjust-params (specs only), so the seed's serve
-        const recheck = conform(artifact, program.declarations);
+        // the REPLAYED program's declarations (geometry rounds re-derive bands — T-136-01;
+        // constant across spec-merge adjusts, so legacy records re-derive identically)
+        const recheck = conform(artifact, replayedProgram.declarations);
         if (JSON.stringify(recheck) !== JSON.stringify(ledger?.final?.conformance)) {
           p("final conformance re-derivation differs from the recorded report");
         }
