@@ -212,9 +212,12 @@ test("a schema-invalid entry reports its descriptor errors and skips the semanti
 
 // ---------------------------------------------------------------- THE META-TEST
 
-test("THE REAL REGISTRY validates clean under the brush contract — 19 brushes, the baseline", () => {
+test("THE REAL REGISTRY validates clean under the brush contract — 22 brushes", () => {
   const r = validateBrushRegistry(); // real registry, real card specs, real files, real realizer
   assert.deepEqual(errorsOf(r), []);
   assert.equal(r.ok, true);
-  assert.equal(r.count, 19, "the factory baseline: 11 constructs + 8 passes");
+  // the T-128 factory baseline was 19 (11 constructs + 8 passes); T-132-01 grew it through the
+  // door with the saltcrag backlog's three (roof.thatch construct, surface.clinker +
+  // surface.limewash passes) — the E-32 receipts table carries the before/after
+  assert.equal(r.count, 22, "12 constructs + 10 passes after the first factory growth");
 });

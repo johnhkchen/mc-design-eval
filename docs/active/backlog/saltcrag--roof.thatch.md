@@ -13,7 +13,7 @@ promotion:
   promoted_by: "planner sanction via T-132-01 AC (gap brushes implemented off promoted drafts); executed in-ticket, no lisa dispatch"
   date: "2026-06-11"
   ticket: "T-132-01"
-rework: []
+rework: []  # none — implemented as drafted
 ---
 
 # Brush draft: `roof.thatch` (style: saltcrag)

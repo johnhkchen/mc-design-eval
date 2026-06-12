@@ -13,7 +13,9 @@ promotion:
   promoted_by: "planner sanction via T-132-01 AC (gap brushes implemented off promoted drafts); executed in-ticket, no lisa dispatch"
   date: "2026-06-11"
   ticket: "T-132-01"
-rework: []
+rework:
+  - "aspect: weather|seaward named values dropped — builds carry no compass; the contract is aspects: array<direction> and the caller names the weather face"
+  - "preserveRoles became preserve (block ids): passes see blocks, not roles; the role→block mapping is the caller's (material-identity-is-semantic)"
 ---
 
 # Brush draft: `surface.limewash` (style: saltcrag)

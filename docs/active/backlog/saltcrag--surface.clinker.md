@@ -13,7 +13,9 @@ promotion:
   promoted_by: "planner sanction via T-132-01 AC (gap brushes implemented off promoted drafts); executed in-ticket, no lisa dispatch"
   date: "2026-06-11"
   ticket: "T-132-01"
-rework: []
+rework:
+  - "zones param reshaped to the house pass convention: the sketch's zones: upper|array<zone> became the injected zoneOf lens + zone name every owned pass uses (timber-frame/surface.fill precedent)"
+  - "the sketch's shadow-line formula floor(panelHeight/course) counts COURSES; shadow lines are the proud half — report carries both (courses, shadowLines)"
 ---
 
 # Brush draft: `surface.clinker` (style: saltcrag)

@@ -29,6 +29,8 @@ const read = (rel) => readFileSync(join(ROOT, rel), "utf8");
 const TECHNIQUES = [
   "roof-generate", "shaped-vocab", "idiom-constructs", "placement-grammar",
   "opening-dressing", "hollow-carve", "floorplan", "zone-fill", "face-paint", "surface-pattern",
+  // E-32/T-132-01: the factory-grown saltcrag brushes join the guarded set
+  "roof-thatch", "clinker", "limewash",
 ];
 
 /** file → { modules, reason }. Exact: an extra technique import in an allowed file still trips. */

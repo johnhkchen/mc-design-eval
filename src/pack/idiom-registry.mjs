@@ -54,6 +54,9 @@ import { paintFace, mergePaints, applyPaint } from "../view/face-paint.mjs";
 import { regularizeRoofCourses, stripStraySalt } from "../view/surface-pattern.mjs";
 import { projectSurface } from "../view/surface-grid.mjs";
 import { occupancyFromCells, bareBlock } from "../view/occupancy.mjs";
+import { roofThatchConstruct } from "../view/roof-thatch.mjs";
+import { clinkerCourses } from "../view/clinker.mjs";
+import { limewashAspect } from "../view/limewash.mjs";
 
 export const IDIOM_REGISTRY_SCHEMA = "idiom-registry/v1";
 
@@ -314,6 +317,73 @@ export const IDIOM_REGISTRY = Object.freeze({
       properties: {
         courses: { type: "integer", minimum: 1 }, inset: { type: "integer", minimum: 0 },
         block: { type: "string" },
+      },
+      additionalProperties: false,
+    },
+  }),
+  // ---- factory-grown brushes (E-32/T-132-01: the saltcrag backlog's gap, through the door) ----
+  "roof.thatch": Object.freeze({
+    kind: "construct", generate: roofThatchConstruct, source: "src/view/roof-thatch.mjs",
+    tests: "src/view/roof-thatch.test.mjs", composition: CONSTRUCT_IO,
+    preview: { card: ["thatch"] },
+    paramsSchema: {
+      type: "object",
+      properties: {
+        pitch: { type: "number", minimum: 1 }, block: { type: "string" },
+        thickness: { type: "integer", minimum: 2 }, ridgeRoll: { type: "boolean" },
+        ridgeBlock: { type: ["string", "null"] }, eaveOvershoot: { type: "integer", minimum: 1 },
+      },
+      additionalProperties: false,
+    },
+  }),
+  "surface.clinker": Object.freeze({
+    kind: "pass", fn: clinkerCourses, source: "src/view/clinker.mjs",
+    tests: "src/view/clinker.test.mjs",
+    composition: { consumes: ["occupancy", "zones"], emits: ["placements", "report"] },
+    preview: {
+      // a plastered upper panel over a rubble ground course: the laps board the upper storey
+      // (odd courses proud of the wall plane), the rubble below stays showing
+      substrate: { kind: "shell", spec: { footprint: { x0: 0, x1: 6, z0: 0, z1: 4 }, y0: 0, height: 6, wallBlock: "cobblestone" } },
+      params: { board: "dark_oak_planks", upperFrom: 2 },
+      realize: ({ occ, cells }) => {
+        const r = clinkerCourses(occ, {
+          board: "dark_oak_planks",
+          zoneOf: (pos) => (pos[1] >= 2 ? "upper" : "ground"),
+        });
+        return { cells: overlayCells(cells, r.placements), effect: r.placements.length };
+      },
+    },
+    paramsSchema: {
+      type: "object",
+      properties: {
+        board: { type: "string" }, lap: { type: "integer", minimum: 0, maximum: 1 },
+        course: { type: "integer", minimum: 1 }, trimBlock: { type: ["string", "null"] },
+      },
+      additionalProperties: false,
+    },
+  }),
+  "surface.limewash": Object.freeze({
+    kind: "pass", fn: limewashAspect, source: "src/view/limewash.mjs",
+    tests: "src/view/limewash.test.mjs",
+    composition: { consumes: ["occupancy", "spec"], emits: ["placements", "report"] },
+    preview: {
+      // the thrift coat: ONE weather face turns white over the rubble field; the other walls
+      // keep grey — the card shows directionality, the brush's whole point
+      substrate: { kind: "shell", spec: { footprint: { x0: 0, x1: 6, z0: 0, z1: 4 }, y0: 0, height: 5, wallBlock: "cobblestone" } },
+      params: { block: "white_terracotta", aspects: ["-z"], coverage: 1, minRun: 2 },
+      realize: ({ occ, cells }) => {
+        const r = limewashAspect(occ, { block: "white_terracotta", aspects: ["-z"], coverage: 1, minRun: 2 });
+        return { cells: overlayCells(cells, r.placements), effect: r.placements.length };
+      },
+    },
+    paramsSchema: {
+      type: "object",
+      properties: {
+        block: { type: "string" },
+        aspects: { type: "array", items: { enum: ["+x", "-x", "+z", "-z"] }, minItems: 1 },
+        coverage: { type: "number", exclusiveMinimum: 0, maximum: 1 },
+        minRun: { type: "integer", minimum: 1 },
+        preserve: { type: "array", items: { type: "string" } },
       },
       additionalProperties: false,
     },

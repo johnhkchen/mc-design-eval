@@ -45,4 +45,6 @@ field): `none` is the target and a legitimate entry.
 
 | draft | promoted as | rework needed | notes |
 | --- | --- | --- | --- |
-| _(none promoted yet)_ | | | |
+| saltcrag--roof.thatch | in-ticket (T-132-01, planner sanction via AC) | **none** | implemented as drafted; 7 unit tests |
+| saltcrag--surface.clinker | in-ticket (T-132-01, planner sanction via AC) | minor (2) | zones param → house zoneOf convention; shadow-line formula clarified (courses vs proud lines) |
+| saltcrag--surface.limewash | in-ticket (T-132-01, planner sanction via AC) | minor (2) | named aspects → direction array; preserveRoles → preserve (block ids — passes see blocks) |

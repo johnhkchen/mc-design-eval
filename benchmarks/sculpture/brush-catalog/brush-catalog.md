@@ -1,6 +1,6 @@
 # Brush catalog — the registry's capability baseline
 
-**Brush count: 19** (11 constructs, 8 passes) — 
+**Brush count: 22** (12 constructs, 10 passes) — 
 the E-32 factory baseline (S-132 measures growth against this number).
 
 Every brush enters through `src/pack/idiom-registry.mjs` (E-32 Rule 1 — the only door) and
@@ -11,11 +11,11 @@ receipts, never verdicts.
 
 ## Renders
 
-- `benchmarks/sculpture/brush-catalog/view-catalog-+x+z.png` — sha256 `a51f197027682d1a6c34e3793a1e451204c2337d9f4d4f59b19008253b25a105`
-- `benchmarks/sculpture/brush-catalog/view-catalog-+x-z.png` — sha256 `e6d602fe3c15dfe1e17d5b8f7d466e8e7d6bbca5b19e00a49e820a7a854dae0e`
-- `benchmarks/sculpture/brush-catalog/view-catalog--x-z.png` — sha256 `db959cfbfda6f89193fb18547637590ef8bb5b428bc83c86cf2ac2203772b57e`
-- `benchmarks/sculpture/brush-catalog/view-catalog--x+z.png` — sha256 `ec26a981c506ace247ce3692340df11783b42632caa80b3aa7110e28f1d843a4`
-- `benchmarks/sculpture/brush-catalog/view-catalog-front.png` — sha256 `dfc5ecd6abce75434a6222222d4baae69bf0763254e5df6ced253aac590669f3`
+- `benchmarks/sculpture/brush-catalog/view-catalog-+x+z.png` — sha256 `1e8a7a968f72578634721d69e13a36f3d54b28e9127445cb135024daa29cfff5`
+- `benchmarks/sculpture/brush-catalog/view-catalog-+x-z.png` — sha256 `33617b7d6904e88e7aa263e0bb91ea15ae8e808f13c7adabf24700cbf622326d`
+- `benchmarks/sculpture/brush-catalog/view-catalog--x-z.png` — sha256 `d400c40e2111c26820fadd90a01db146ed5f07d240d85dc621d5d7e462ff4504`
+- `benchmarks/sculpture/brush-catalog/view-catalog--x+z.png` — sha256 `c5bb683b472b90fb67869158880ed7970a3a49f8a538719c1d66ecb693ae85bc`
+- `benchmarks/sculpture/brush-catalog/view-catalog-front.png` — sha256 `ca8166a6e3b8b8eba137e86c1bf9f2aecec9294edc09d670baed160d544c0fab`
 
 ## Brushes
 
@@ -153,21 +153,57 @@ receipts, never verdicts.
   - `pitch`: number, > 0
   - `blocks`: object
 
+### `roof.thatch` (construct)
+
+- **source:** `src/view/roof-thatch.mjs` — **tests:** `src/view/roof-thatch.test.mjs`
+- **composition:** consumes spec → emits cells
+- **preview:** card:thatch — plot at [24, 1, 22], size 11×8×6
+- **style parameters:**
+  - `pitch`: number, ≥ 1
+  - `block`: string
+  - `thickness`: integer, ≥ 2
+  - `ridgeRoll`: boolean
+  - `ridgeBlock`: string|null
+  - `eaveOvershoot`: integer, ≥ 1
+
+### `surface.clinker` (pass)
+
+- **source:** `src/view/clinker.mjs` — **tests:** `src/view/clinker.test.mjs`
+- **composition:** consumes occupancy, zones → emits placements, report
+- **preview:** substrate:shell (effect 88) — plot at [39, 1, 22], size 9×6×7
+- **style parameters:**
+  - `board`: string
+  - `lap`: integer, ≥ 0
+  - `course`: integer, ≥ 1
+  - `trimBlock`: string|null
+
 ### `surface.fill` (pass)
 
 - **source:** `src/view/zone-fill.mjs` — **tests:** `src/view/zone-fill.test.mjs`
 - **composition:** consumes occupancy, zones → emits placements, report
-- **preview:** substrate:shell (effect 60) — plot at [24, 1, 22], size 7×4×5
+- **preview:** substrate:shell (effect 60) — plot at [0, 1, 38], size 7×4×5
 - **style parameters:**
   - `skin`: "projection" | "exposure"
   - `minRun`: integer, ≥ 1
+
+### `surface.limewash` (pass)
+
+- **source:** `src/view/limewash.mjs` — **tests:** `src/view/limewash.test.mjs`
+- **composition:** consumes occupancy, spec → emits placements, report
+- **preview:** substrate:shell (effect 35) — plot at [11, 1, 38], size 7×5×5
+- **style parameters:**
+  - `block`: string
+  - `aspects`: array, of "+x" | "-x" | "+z" | "-z"
+  - `coverage`: number, > 0
+  - `minRun`: integer, ≥ 1
+  - `preserve`: array, of string
 
 ### `surface.paint` (pass)
 
 - **source:** `src/view/face-paint.mjs` — **tests:** `src/view/face-paint.test.mjs`
 - **composition:** consumes occupancy, spec → emits placements, report
 - **apply:** `applyPaint` — **merge:** `mergePaints`
-- **preview:** substrate:shell (effect 12) — plot at [35, 1, 22], size 7×5×4
+- **preview:** substrate:shell (effect 12) — plot at [22, 1, 38], size 7×5×4
 - **style parameters:**
   - `priority`: array, of string
 
@@ -175,7 +211,7 @@ receipts, never verdicts.
 
 - **source:** `src/view/surface-pattern.mjs` — **tests:** `src/view/surface-pattern.test.mjs`
 - **composition:** consumes occupancy, zones → emits placements, report
-- **preview:** substrate:solid (effect 2) — plot at [46, 1, 22], size 6×3×5
+- **preview:** substrate:solid (effect 2) — plot at [33, 1, 38], size 6×3×5
 - **style parameters:**
   - (no style-level parameters)
 
@@ -183,7 +219,7 @@ receipts, never verdicts.
 
 - **source:** `src/view/surface-pattern.mjs` — **tests:** `src/view/surface-pattern.test.mjs`
 - **composition:** consumes occupancy, zones → emits placements, report
-- **preview:** substrate:shell (effect 3) — plot at [0, 1, 38], size 7×4×5
+- **preview:** substrate:shell (effect 3) — plot at [43, 1, 38], size 7×4×5
 - **style parameters:**
   - `minKeep`: integer, ≥ 1
   - `minExtent`: integer, ≥ 1
@@ -192,7 +228,7 @@ receipts, never verdicts.
 
 - **source:** `src/form/placement-grammar.mjs` — **tests:** `src/form/placement-grammar.test.mjs`
 - **composition:** consumes occupancy, kit, zones → emits placements, report
-- **preview:** substrate:shell (effect 64) — plot at [11, 1, 38], size 9×6×6
+- **preview:** substrate:shell (effect 64) — plot at [0, 1, 47], size 9×6×6
 - **style parameters:**
   - open schema — parameters live in the module contract (tightening is S-125/S-126 territory)
 

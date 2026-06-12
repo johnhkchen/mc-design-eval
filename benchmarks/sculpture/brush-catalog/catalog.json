@@ -17,6 +17,7 @@
       "minecraft:cobblestone",
       "minecraft:dark_oak_log",
       "minecraft:dark_oak_planks",
+      "minecraft:hay_block",
       "minecraft:lantern",
       "minecraft:oak_door",
       "minecraft:oak_fence",
@@ -41,7 +42,7 @@
       "to": [
         54,
         0,
-        44
+        53
       ],
       "block": "minecraft:smooth_stone"
     },
@@ -9676,190 +9677,19 @@
       "op": "voxel",
       "pos": [
         24,
-        1,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        24,
-        1,
-        23
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        24,
-        1,
-        24
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        24,
-        1,
-        25
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        24,
-        1,
-        26
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        25,
-        1,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        25,
-        1,
-        26
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        26,
-        1,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        26,
-        1,
-        26
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        27,
-        1,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        27,
-        1,
-        26
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        28,
-        1,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        28,
-        1,
-        26
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        29,
-        1,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        29,
-        1,
-        26
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        30,
-        1,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        30,
-        1,
-        23
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        30,
-        1,
-        24
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        30,
-        1,
-        25
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        30,
-        1,
-        26
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        24,
         2,
         22
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        1,
+        22
+      ],
+      "block": "minecraft:hay_block"
     },
     {
       "op": "voxel",
@@ -9868,214 +9698,88 @@
         2,
         23
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:hay_block"
     },
     {
       "op": "voxel",
       "pos": [
         24,
-        2,
-        24
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        24,
-        2,
-        25
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        24,
-        2,
-        26
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        25,
-        2,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        25,
-        2,
-        26
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        26,
-        2,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        26,
-        2,
-        26
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        27,
-        2,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        27,
-        2,
-        26
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        28,
-        2,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        28,
-        2,
-        26
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        29,
-        2,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        29,
-        2,
-        26
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        30,
-        2,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        30,
-        2,
+        1,
         23
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:hay_block"
     },
     {
       "op": "voxel",
       "pos": [
-        30,
+        24,
         2,
         24
       ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        30,
-        2,
-        25
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        30,
-        2,
-        26
-      ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:hay_block"
     },
     {
       "op": "voxel",
       "pos": [
         24,
-        3,
-        22
-      ],
-      "block": "minecraft:dark_oak_log"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        24,
-        3,
-        23
-      ],
-      "block": "minecraft:dark_oak_log"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        24,
-        3,
+        1,
         24
       ],
-      "block": "minecraft:dark_oak_log"
+      "block": "minecraft:hay_block"
     },
     {
       "op": "voxel",
       "pos": [
         24,
-        3,
+        2,
         25
       ],
-      "block": "minecraft:dark_oak_log"
+      "block": "minecraft:hay_block"
     },
     {
       "op": "voxel",
       "pos": [
         24,
-        3,
+        1,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        2,
         26
       ],
-      "block": "minecraft:dark_oak_log"
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        1,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        2,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        1,
+        27
+      ],
+      "block": "minecraft:hay_block"
     },
     {
       "op": "voxel",
@@ -10084,7 +9788,106 @@
         3,
         22
       ],
-      "block": "minecraft:dark_oak_log"
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        2,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        1,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        3,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        2,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        1,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        3,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        2,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        1,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        3,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        2,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        1,
+        25
+      ],
+      "block": "minecraft:hay_block"
     },
     {
       "op": "voxel",
@@ -10093,7 +9896,61 @@
         3,
         26
       ],
-      "block": "minecraft:dark_oak_log"
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        2,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        1,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        3,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        2,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        1,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        4,
+        22
+      ],
+      "block": "minecraft:hay_block"
     },
     {
       "op": "voxel",
@@ -10102,7 +9959,106 @@
         3,
         22
       ],
-      "block": "minecraft:dark_oak_log"
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        2,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        4,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        3,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        2,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        4,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        3,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        2,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        4,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        3,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        2,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        4,
+        26
+      ],
+      "block": "minecraft:hay_block"
     },
     {
       "op": "voxel",
@@ -10111,7 +10067,61 @@
         3,
         26
       ],
-      "block": "minecraft:dark_oak_log"
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        2,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        4,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        3,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        2,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        5,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        4,
+        22
+      ],
+      "block": "minecraft:hay_block"
     },
     {
       "op": "voxel",
@@ -10120,7 +10130,106 @@
         3,
         22
       ],
-      "block": "minecraft:dark_oak_log"
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        5,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        4,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        3,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        5,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        4,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        3,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        5,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        4,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        3,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        5,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        4,
+        26
+      ],
+      "block": "minecraft:hay_block"
     },
     {
       "op": "voxel",
@@ -10129,95 +10238,4838 @@
         3,
         26
       ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        5,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        4,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        3,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        6,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        5,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        4,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        6,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        5,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        4,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        6,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        5,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        4,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        6,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        5,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        4,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        6,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        5,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        4,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        6,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        5,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        4,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        7,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        6,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        5,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        8,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        7,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        6,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        5,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        8,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        7,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        6,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        5,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        8,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        7,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        6,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        5,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        8,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        7,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        6,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        5,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        8,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        7,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        6,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        5,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        8,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        6,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        5,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        4,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        6,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        5,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        4,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        6,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        5,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        4,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        6,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        5,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        4,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        6,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        5,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        4,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        6,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        5,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        4,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        5,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        4,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        3,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        5,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        4,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        3,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        5,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        4,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        3,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        5,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        4,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        3,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        5,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        4,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        3,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        5,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        4,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        3,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        4,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        3,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        2,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        4,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        3,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        2,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        4,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        3,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        2,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        4,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        3,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        2,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        4,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        3,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        2,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        4,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        3,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        2,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        3,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        2,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        1,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        3,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        2,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        1,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        3,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        2,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        1,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        3,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        2,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        1,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        3,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        2,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        1,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        3,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        2,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        1,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        2,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        1,
+        22
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        2,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        1,
+        23
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        2,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        1,
+        24
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        2,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        1,
+        25
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        2,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        1,
+        26
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        2,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        1,
+        27
+      ],
+      "block": "minecraft:hay_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        1,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        1,
+        24
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        1,
+        25
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        1,
+        26
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        1,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        1,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        1,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        1,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        1,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        1,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        1,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        1,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        1,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        1,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        1,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        1,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        1,
+        24
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        1,
+        25
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        1,
+        26
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        1,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        2,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        2,
+        24
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        2,
+        25
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        2,
+        26
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        2,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        2,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        2,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        2,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        2,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        2,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        2,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        2,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        2,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        2,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        2,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        2,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        2,
+        24
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        2,
+        25
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        2,
+        26
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        2,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        3,
+        23
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        3,
+        24
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        3,
+        25
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        3,
+        26
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        3,
+        27
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        3,
+        23
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        3,
+        27
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        3,
+        23
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        3,
+        27
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        3,
+        23
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        3,
+        27
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        3,
+        23
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        3,
+        27
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        3,
+        23
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        3,
+        27
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        3,
+        23
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        3,
+        24
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        3,
+        25
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        3,
+        26
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        3,
+        27
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        4,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        4,
+        24
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        4,
+        25
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        4,
+        26
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        4,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        4,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        4,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        4,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        4,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        4,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        4,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        4,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        4,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        4,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        4,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        4,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        4,
+        24
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        4,
+        25
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        4,
+        26
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        4,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        5,
+        23
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        5,
+        24
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        5,
+        25
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        5,
+        26
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        5,
+        27
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        5,
+        23
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        5,
+        27
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        5,
+        23
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        5,
+        27
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        5,
+        23
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        5,
+        27
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        5,
+        23
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        5,
+        27
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        5,
+        23
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        5,
+        27
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        5,
+        23
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        5,
+        24
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        5,
+        25
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        5,
+        26
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        5,
+        27
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        6,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        6,
+        24
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        6,
+        25
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        6,
+        26
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        6,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        6,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        6,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        6,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        6,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        6,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        6,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        6,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        6,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        6,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        6,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        6,
+        23
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        6,
+        24
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        6,
+        25
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        6,
+        26
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        6,
+        27
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        39,
+        4,
+        23
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        4,
+        22
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        39,
+        4,
+        24
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        39,
+        4,
+        25
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        39,
+        4,
+        26
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        39,
+        4,
+        27
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        4,
+        28
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        39,
+        6,
+        23
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        6,
+        22
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        39,
+        6,
+        24
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        39,
+        6,
+        25
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        39,
+        6,
+        26
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        39,
+        6,
+        27
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        6,
+        28
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        4,
+        22
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        4,
+        28
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        6,
+        22
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        6,
+        28
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        4,
+        22
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        4,
+        28
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        6,
+        22
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        6,
+        28
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        4,
+        22
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        4,
+        28
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        6,
+        22
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        6,
+        28
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        4,
+        22
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        4,
+        28
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        6,
+        22
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        6,
+        28
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        4,
+        22
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        4,
+        28
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        6,
+        22
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        6,
+        28
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        47,
+        4,
+        23
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        4,
+        22
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        47,
+        4,
+        24
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        47,
+        4,
+        25
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        47,
+        4,
+        26
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        47,
+        4,
+        27
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        4,
+        28
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        47,
+        6,
+        23
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        6,
+        22
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        47,
+        6,
+        24
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        47,
+        6,
+        25
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        47,
+        6,
+        26
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        47,
+        6,
+        27
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        6,
+        28
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        1,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        1,
+        39
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        1,
+        40
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        1,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        1,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        1,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        1,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        1,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        1,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        1,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        1,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        1,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        1,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        1,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        1,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        1,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        1,
+        39
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        1,
+        40
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        1,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        1,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        2,
+        39
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        2,
+        40
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        2,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        2,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        2,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        2,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        2,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        2,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        2,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        2,
+        39
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        2,
+        40
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        2,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        2,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        3,
+        38
+      ],
       "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        3,
+        39
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        3,
+        40
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        3,
+        41
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        3,
+        42
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        3,
+        38
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        3,
+        42
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        3,
+        38
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        3,
+        42
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        3,
+        38
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        3,
+        42
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        3,
+        38
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        3,
+        42
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        3,
+        38
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        3,
+        42
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        3,
+        38
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        3,
+        39
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        3,
+        40
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        3,
+        41
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        3,
+        42
+      ],
+      "block": "minecraft:dark_oak_log"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        4,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        4,
+        39
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        4,
+        40
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        4,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        4,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        4,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        4,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        4,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        4,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        4,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        4,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        4,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        4,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        4,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        4,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        4,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        4,
+        39
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        4,
+        40
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        4,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        4,
+        42
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        1,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        1,
+        39
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        1,
+        40
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        1,
+        41
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        1,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        12,
+        1,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        12,
+        1,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        1,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        1,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        1,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        1,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        1,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        1,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        1,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        1,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        1,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        1,
+        39
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        1,
+        40
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        1,
+        41
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        1,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        2,
+        39
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        2,
+        40
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        2,
+        41
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        2,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        12,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        12,
+        2,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        2,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        2,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        2,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        2,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        2,
+        39
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        2,
+        40
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        2,
+        41
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        2,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        3,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        3,
+        39
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        3,
+        40
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        3,
+        41
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        3,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        12,
+        3,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        12,
+        3,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        3,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        3,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        3,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        3,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        3,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        3,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        3,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        3,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        3,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        3,
+        39
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        3,
+        40
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        3,
+        41
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        3,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        4,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        4,
+        39
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        4,
+        40
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        4,
+        41
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        4,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        12,
+        4,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        12,
+        4,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        4,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        4,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        4,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        4,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        4,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        4,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        4,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        4,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        4,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        4,
+        39
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        4,
+        40
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        4,
+        41
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        4,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        5,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        5,
+        39
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        5,
+        40
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        5,
+        41
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        5,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        12,
+        5,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        12,
+        5,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        5,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        5,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        5,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        5,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        5,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        5,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        5,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        5,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        5,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        5,
+        39
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        5,
+        40
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        5,
+        41
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        5,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        1,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        1,
+        39
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        1,
+        40
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        1,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        1,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        1,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        1,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        1,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        1,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        1,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        1,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        1,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        1,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        1,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        1,
+        38
+      ],
+      "block": "minecraft:bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        1,
+        39
+      ],
+      "block": "minecraft:bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        1,
+        40
+      ],
+      "block": "minecraft:bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        1,
+        41
+      ],
+      "block": "minecraft:bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        2,
+        39
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        2,
+        40
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        2,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        2,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        2,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        2,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        2,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        2,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        2,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        2,
+        39
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        2,
+        40
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        2,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        3,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        3,
+        39
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        3,
+        40
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        3,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        3,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        3,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        3,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        3,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        3,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        3,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        3,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        3,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        3,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        3,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         28,
         3,
-        22
+        38
       ],
-      "block": "minecraft:dark_oak_log"
+      "block": "minecraft:bricks"
     },
     {
       "op": "voxel",
       "pos": [
         28,
         3,
-        26
+        39
       ],
-      "block": "minecraft:dark_oak_log"
+      "block": "minecraft:bricks"
     },
     {
       "op": "voxel",
       "pos": [
-        29,
+        28,
         3,
-        22
+        40
       ],
-      "block": "minecraft:dark_oak_log"
+      "block": "minecraft:bricks"
     },
     {
       "op": "voxel",
       "pos": [
-        29,
+        28,
         3,
-        26
+        41
       ],
-      "block": "minecraft:dark_oak_log"
+      "block": "minecraft:bricks"
     },
     {
       "op": "voxel",
       "pos": [
-        30,
-        3,
-        22
-      ],
-      "block": "minecraft:dark_oak_log"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        30,
-        3,
-        23
-      ],
-      "block": "minecraft:dark_oak_log"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        30,
-        3,
-        24
-      ],
-      "block": "minecraft:dark_oak_log"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        30,
-        3,
-        25
-      ],
-      "block": "minecraft:dark_oak_log"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        30,
-        3,
-        26
-      ],
-      "block": "minecraft:dark_oak_log"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        24,
+        22,
         4,
-        22
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        4,
+        39
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        4,
+        40
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        4,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        4,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        4,
+        41
       ],
       "block": "minecraft:white_terracotta"
     },
@@ -10226,7 +15078,7 @@
       "pos": [
         24,
         4,
-        23
+        38
       ],
       "block": "minecraft:white_terracotta"
     },
@@ -10235,25 +15087,7 @@
       "pos": [
         24,
         4,
-        24
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        24,
-        4,
-        25
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        24,
-        4,
-        26
+        41
       ],
       "block": "minecraft:white_terracotta"
     },
@@ -10262,7 +15096,7 @@
       "pos": [
         25,
         4,
-        22
+        38
       ],
       "block": "minecraft:white_terracotta"
     },
@@ -10271,7 +15105,7 @@
       "pos": [
         25,
         4,
-        26
+        41
       ],
       "block": "minecraft:white_terracotta"
     },
@@ -10280,7 +15114,7 @@
       "pos": [
         26,
         4,
-        22
+        38
       ],
       "block": "minecraft:white_terracotta"
     },
@@ -10289,7 +15123,7 @@
       "pos": [
         26,
         4,
-        26
+        41
       ],
       "block": "minecraft:white_terracotta"
     },
@@ -10298,7 +15132,7 @@
       "pos": [
         27,
         4,
-        22
+        38
       ],
       "block": "minecraft:white_terracotta"
     },
@@ -10307,7 +15141,7 @@
       "pos": [
         27,
         4,
-        26
+        41
       ],
       "block": "minecraft:white_terracotta"
     },
@@ -10316,7 +15150,7 @@
       "pos": [
         28,
         4,
-        22
+        38
       ],
       "block": "minecraft:white_terracotta"
     },
@@ -10325,1699 +15159,1717 @@
       "pos": [
         28,
         4,
-        26
+        39
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        29,
+        28,
         4,
-        22
+        40
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        29,
+        28,
         4,
-        26
+        41
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        30,
-        4,
-        22
+        22,
+        5,
+        38
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        30,
-        4,
-        23
+        22,
+        5,
+        39
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        30,
-        4,
-        24
+        22,
+        5,
+        40
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        30,
-        4,
-        25
+        22,
+        5,
+        41
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        30,
-        4,
-        26
+        23,
+        5,
+        38
       ],
       "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        5,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        5,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        5,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        5,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        5,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        5,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        5,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        5,
+        38
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        5,
+        41
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        5,
+        38
+      ],
+      "block": "minecraft:bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        5,
+        39
+      ],
+      "block": "minecraft:bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        5,
+        40
+      ],
+      "block": "minecraft:bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        5,
+        41
+      ],
+      "block": "minecraft:bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        1,
+        38
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        1,
+        39
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        1,
+        40
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        1,
+        41
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        1,
+        42
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        1,
+        38
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        1,
+        39
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        1,
+        40
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        1,
+        41
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        1,
+        42
+      ],
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         35,
         1,
-        22
+        38
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         35,
         1,
-        23
+        39
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         35,
         1,
-        24
+        40
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         35,
         1,
-        25
+        41
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        35,
+        1,
+        42
+      ],
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         36,
         1,
-        22
+        38
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         36,
         1,
-        25
+        39
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        36,
+        1,
+        40
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        36,
+        1,
+        41
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        36,
+        1,
+        42
+      ],
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         37,
         1,
-        22
+        38
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         37,
         1,
-        25
+        39
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        37,
+        1,
+        40
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        37,
+        1,
+        41
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        37,
+        1,
+        42
+      ],
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         38,
         1,
-        22
+        38
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         38,
         1,
-        25
+        39
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        39,
+        38,
         1,
-        22
+        40
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        39,
+        38,
         1,
-        25
+        41
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        40,
+        38,
         1,
-        22
+        42
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        40,
-        1,
-        25
+        33,
+        2,
+        38
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        41,
-        1,
-        22
+        33,
+        2,
+        39
       ],
-      "block": "minecraft:bricks"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        41,
-        1,
-        23
+        33,
+        2,
+        40
       ],
-      "block": "minecraft:bricks"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        41,
-        1,
-        24
+        33,
+        2,
+        41
       ],
-      "block": "minecraft:bricks"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        41,
-        1,
-        25
+        33,
+        2,
+        42
       ],
-      "block": "minecraft:bricks"
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        2,
+        38
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        2,
+        39
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        2,
+        40
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        2,
+        41
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        2,
+        42
+      ],
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         35,
         2,
-        22
+        38
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         35,
         2,
-        23
+        39
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         35,
         2,
-        24
+        40
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         35,
         2,
-        25
+        41
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        35,
+        2,
+        42
+      ],
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         36,
         2,
-        22
+        38
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         36,
         2,
-        25
+        39
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        36,
+        2,
+        40
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        36,
+        2,
+        41
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        36,
+        2,
+        42
+      ],
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         37,
         2,
-        22
+        38
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         37,
         2,
-        25
+        39
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        37,
+        2,
+        40
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        37,
+        2,
+        41
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        37,
+        2,
+        42
+      ],
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         38,
         2,
-        22
+        38
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         38,
         2,
-        25
+        39
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        39,
+        38,
         2,
-        22
+        40
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        39,
+        38,
         2,
-        25
+        41
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        40,
+        38,
         2,
-        22
+        42
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        40,
-        2,
-        25
+        33,
+        3,
+        38
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        41,
-        2,
-        22
+        33,
+        3,
+        39
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        41,
-        2,
-        23
+        33,
+        3,
+        40
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        41,
-        2,
-        24
+        33,
+        3,
+        41
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        41,
-        2,
-        25
+        33,
+        3,
+        42
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        3,
+        38
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        3,
+        39
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        3,
+        40
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        3,
+        41
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        3,
+        42
+      ],
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         35,
         3,
-        22
+        38
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         35,
         3,
-        23
+        39
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         35,
         3,
-        24
+        41
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         35,
         3,
-        25
+        42
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         36,
         3,
-        22
+        38
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         36,
         3,
-        25
+        39
       ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        37,
-        3,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        37,
-        3,
-        25
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        38,
-        3,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        38,
-        3,
-        25
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        39,
-        3,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        39,
-        3,
-        25
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        40,
-        3,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        40,
-        3,
-        25
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        41,
-        3,
-        22
-      ],
-      "block": "minecraft:bricks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        41,
-        3,
-        23
-      ],
-      "block": "minecraft:bricks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        41,
-        3,
-        24
-      ],
-      "block": "minecraft:bricks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        41,
-        3,
-        25
-      ],
-      "block": "minecraft:bricks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        35,
-        4,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        35,
-        4,
-        23
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        35,
-        4,
-        24
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        35,
-        4,
-        25
-      ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         36,
-        4,
-        22
+        3,
+        40
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         36,
-        4,
-        25
+        3,
+        41
       ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        37,
-        4,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        37,
-        4,
-        25
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        38,
-        4,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        38,
-        4,
-        25
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        39,
-        4,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        39,
-        4,
-        25
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        40,
-        4,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        40,
-        4,
-        25
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        41,
-        4,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        41,
-        4,
-        23
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        41,
-        4,
-        24
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        41,
-        4,
-        25
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        35,
-        5,
-        22
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        35,
-        5,
-        23
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        35,
-        5,
-        24
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        35,
-        5,
-        25
-      ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         36,
-        5,
-        22
+        3,
+        42
       ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        36,
-        5,
-        25
-      ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         37,
-        5,
-        22
+        3,
+        38
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         37,
-        5,
-        25
+        3,
+        40
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        37,
+        3,
+        41
+      ],
+      "block": "minecraft:spruce_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        37,
+        3,
+        42
+      ],
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         38,
-        5,
-        22
+        3,
+        38
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
         38,
-        5,
-        25
+        3,
+        39
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        39,
-        5,
-        22
+        38,
+        3,
+        40
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        39,
-        5,
-        25
+        38,
+        3,
+        41
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        40,
-        5,
-        22
+        38,
+        3,
+        42
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:spruce_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        40,
-        5,
-        25
+        37,
+        3,
+        39
       ],
-      "block": "minecraft:white_terracotta"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        41,
-        5,
-        22
+        35,
+        3,
+        40
       ],
-      "block": "minecraft:bricks"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        41,
-        5,
-        23
+        43,
+        1,
+        38
       ],
-      "block": "minecraft:bricks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
-        41,
-        5,
-        24
+        43,
+        1,
+        39
       ],
-      "block": "minecraft:bricks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
-        41,
-        5,
-        25
+        43,
+        1,
+        40
       ],
-      "block": "minecraft:bricks"
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        1,
+        41
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        1,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        1,
+        38
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        1,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        1,
+        38
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        1,
+        42
+      ],
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         46,
         1,
-        22
+        38
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         46,
         1,
-        23
+        42
       ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        46,
-        1,
-        24
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        46,
-        1,
-        25
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        46,
-        1,
-        26
-      ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         47,
         1,
-        22
+        38
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         47,
         1,
-        23
+        42
       ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        47,
-        1,
-        24
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        47,
-        1,
-        25
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        47,
-        1,
-        26
-      ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         48,
         1,
-        22
+        38
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         48,
         1,
-        23
+        42
       ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        48,
-        1,
-        24
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        48,
-        1,
-        25
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        48,
-        1,
-        26
-      ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         49,
         1,
-        22
+        38
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         49,
         1,
-        23
+        39
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         49,
         1,
-        24
+        40
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         49,
         1,
-        25
+        41
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         49,
         1,
-        26
+        42
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
-        50,
-        1,
-        22
+        43,
+        2,
+        38
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
-        50,
-        1,
-        23
+        43,
+        2,
+        39
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
-        50,
-        1,
-        24
+        43,
+        2,
+        40
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
-        50,
-        1,
-        25
+        43,
+        2,
+        41
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
-        50,
-        1,
-        26
+        43,
+        2,
+        42
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
-        51,
-        1,
-        22
+        44,
+        2,
+        38
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
-        51,
-        1,
-        23
+        44,
+        2,
+        42
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
-        51,
-        1,
-        24
+        45,
+        2,
+        38
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
-        51,
-        1,
-        25
+        45,
+        2,
+        42
       ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        51,
-        1,
-        26
-      ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         46,
         2,
-        22
+        38
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         46,
         2,
-        23
+        42
       ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        46,
-        2,
-        24
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        46,
-        2,
-        25
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        46,
-        2,
-        26
-      ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         47,
         2,
-        22
+        38
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         47,
         2,
-        23
+        42
       ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        47,
-        2,
-        24
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        47,
-        2,
-        25
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        47,
-        2,
-        26
-      ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         48,
         2,
-        22
+        38
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         48,
         2,
-        23
+        42
       ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        48,
-        2,
-        24
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        48,
-        2,
-        25
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        48,
-        2,
-        26
-      ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         49,
         2,
-        22
+        38
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         49,
         2,
-        23
+        39
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         49,
         2,
-        24
+        40
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         49,
         2,
-        25
+        41
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         49,
         2,
-        26
+        42
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
-        50,
-        2,
-        22
+        43,
+        3,
+        38
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
-        50,
-        2,
-        23
+        43,
+        3,
+        39
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
-        50,
-        2,
-        24
+        43,
+        3,
+        40
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
-        50,
-        2,
-        25
+        43,
+        3,
+        41
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
-        50,
-        2,
-        26
+        43,
+        3,
+        42
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
-        51,
-        2,
-        22
+        44,
+        3,
+        38
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
-        51,
-        2,
-        23
+        44,
+        3,
+        42
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
-        51,
-        2,
-        24
+        45,
+        3,
+        38
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
-        51,
-        2,
-        25
+        45,
+        3,
+        42
       ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        51,
-        2,
-        26
-      ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         46,
         3,
-        22
+        38
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         46,
         3,
-        23
+        42
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        47,
+        3,
+        38
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        47,
+        3,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        48,
+        3,
+        38
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        48,
+        3,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        49,
+        3,
+        38
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        49,
+        3,
+        39
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        49,
+        3,
+        40
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        49,
+        3,
+        41
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        49,
+        3,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        4,
+        38
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        4,
+        39
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        4,
+        40
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        4,
+        41
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        4,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        4,
+        38
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        4,
+        42
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        4,
+        38
+      ],
+      "block": "minecraft:cobblestone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        4,
+        42
+      ],
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         46,
-        3,
-        24
+        4,
+        38
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         46,
-        3,
-        25
+        4,
+        42
       ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        46,
-        3,
-        26
-      ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         47,
-        3,
-        22
+        4,
+        38
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         47,
-        3,
-        23
+        4,
+        42
       ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        47,
-        3,
-        24
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        47,
-        3,
-        25
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        47,
-        3,
-        26
-      ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         48,
-        3,
-        22
+        4,
+        38
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         48,
-        3,
-        23
+        4,
+        42
       ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        48,
-        3,
-        25
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        48,
-        3,
-        26
-      ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         49,
-        3,
-        22
+        4,
+        38
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         49,
-        3,
-        23
+        4,
+        39
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         49,
-        3,
-        24
+        4,
+        40
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         49,
-        3,
-        25
+        4,
+        41
       ],
-      "block": "minecraft:spruce_planks"
+      "block": "minecraft:cobblestone"
     },
     {
       "op": "voxel",
       "pos": [
         49,
-        3,
-        26
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        50,
-        3,
-        22
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        50,
-        3,
-        24
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        50,
-        3,
-        25
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        50,
-        3,
-        26
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        51,
-        3,
-        22
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        51,
-        3,
-        23
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        51,
-        3,
-        24
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        51,
-        3,
-        25
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        51,
-        3,
-        26
-      ],
-      "block": "minecraft:spruce_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        50,
-        3,
-        23
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        48,
-        3,
-        24
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        0,
-        1,
-        38
+        4,
+        42
       ],
       "block": "minecraft:cobblestone"
     },
@@ -12026,2113 +16878,1402 @@
       "pos": [
         0,
         1,
-        39
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         0,
         1,
-        40
+        48
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         0,
         1,
-        41
+        49
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         0,
         1,
-        42
+        50
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        1,
+        51
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        1,
+        52
+      ],
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         1,
         1,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         1,
         1,
-        42
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         2,
         1,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         2,
         1,
-        42
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         3,
         1,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         3,
         1,
-        42
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         4,
         1,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         4,
         1,
-        42
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         5,
         1,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         5,
         1,
-        42
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         6,
         1,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         6,
         1,
-        39
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        6,
+        7,
         1,
-        40
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        6,
+        7,
         1,
-        41
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        6,
+        8,
         1,
-        42
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        1,
+        48
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        1,
+        49
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        1,
+        50
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        1,
+        51
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        1,
+        52
+      ],
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         0,
         2,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         0,
         2,
-        39
+        48
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         0,
         2,
-        40
+        49
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         0,
         2,
-        41
+        50
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         0,
         2,
-        42
+        51
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        2,
+        52
+      ],
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         1,
         2,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         1,
         2,
-        42
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         2,
         2,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         2,
         2,
-        42
+        52
       ],
-      "block": "minecraft:cobblestone"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        3,
-        2,
-        38
-      ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         3,
         2,
-        42
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        2,
+        52
+      ],
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         4,
         2,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         4,
         2,
-        42
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         5,
         2,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         5,
         2,
-        42
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         6,
         2,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         6,
         2,
-        39
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        6,
+        7,
         2,
-        40
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        6,
+        7,
         2,
-        41
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        6,
+        8,
         2,
-        42
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        2,
+        48
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        2,
+        49
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        2,
+        50
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        2,
+        51
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        2,
+        52
+      ],
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         0,
         3,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         0,
         3,
-        39
+        48
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         0,
         3,
-        40
+        49
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         0,
         3,
-        41
+        50
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         0,
         3,
-        42
+        51
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        3,
+        52
+      ],
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         1,
         3,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         1,
         3,
-        42
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         2,
         3,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         2,
         3,
-        42
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         3,
         3,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         3,
         3,
-        42
+        52
       ],
-      "block": "minecraft:cobblestone"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        4,
-        3,
-        38
-      ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         4,
         3,
-        42
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        3,
+        52
+      ],
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         5,
         3,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         5,
         3,
-        42
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         6,
         3,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
         6,
         3,
-        39
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        6,
+        7,
         3,
-        40
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        6,
+        7,
         3,
-        41
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        6,
+        8,
         3,
-        42
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        3,
+        48
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        3,
+        49
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        3,
+        50
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        3,
+        51
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        3,
+        52
+      ],
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         0,
         4,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         0,
         4,
-        39
+        48
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         0,
         4,
-        40
+        49
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         0,
         4,
-        41
+        50
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         0,
         4,
-        42
+        51
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        4,
+        52
+      ],
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         1,
         4,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         1,
         4,
-        42
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         2,
         4,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         2,
         4,
-        42
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         3,
         4,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         3,
         4,
-        42
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         4,
         4,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         4,
         4,
-        42
+        52
       ],
-      "block": "minecraft:cobblestone"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        5,
-        4,
-        38
-      ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         5,
         4,
-        42
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        4,
+        52
+      ],
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         6,
         4,
-        38
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
         6,
         4,
-        39
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        6,
+        7,
         4,
-        40
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        6,
+        7,
         4,
-        41
+        52
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        6,
+        8,
         4,
-        42
+        47
       ],
-      "block": "minecraft:cobblestone"
+      "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        11,
+        8,
+        4,
+        48
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        4,
+        49
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        4,
+        50
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        4,
+        51
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        4,
+        52
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        5,
+        47
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        5,
+        48
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        5,
+        49
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        5,
+        50
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        5,
+        51
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        5,
+        52
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
         1,
-        38
+        5,
+        47
       ],
       "block": "minecraft:dark_oak_planks"
     },
     {
       "op": "voxel",
       "pos": [
-        11,
         1,
-        39
+        5,
+        52
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        5,
+        47
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        5,
+        52
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        5,
+        47
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        5,
+        52
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        5,
+        47
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        5,
+        52
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        5,
+        47
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        5,
+        52
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        5,
+        47
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        5,
+        52
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        5,
+        47
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        5,
+        52
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        5,
+        47
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        5,
+        48
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        5,
+        49
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        5,
+        50
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        5,
+        51
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        5,
+        52
+      ],
+      "block": "minecraft:dark_oak_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        6,
+        47
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        11,
+        0,
+        6,
+        48
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        6,
+        49
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        6,
+        50
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        6,
+        51
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        6,
+        52
+      ],
+      "block": "minecraft:white_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
         1,
-        40
+        6,
+        47
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        11,
         1,
-        41
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        1,
-        42
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        1,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        12,
-        1,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        12,
-        1,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        13,
-        1,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        13,
-        1,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        14,
-        1,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        14,
-        1,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        15,
-        1,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        15,
-        1,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        16,
-        1,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        16,
-        1,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        17,
-        1,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        17,
-        1,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        18,
-        1,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        18,
-        1,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        1,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        1,
-        39
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        1,
-        40
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        1,
-        41
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        1,
-        42
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        1,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        2,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        2,
-        39
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        2,
-        40
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        2,
-        41
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        2,
-        42
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        2,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        12,
-        2,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        12,
-        2,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        13,
-        2,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        13,
-        2,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        14,
-        2,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        14,
-        2,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        15,
-        2,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        15,
-        2,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        16,
-        2,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        16,
-        2,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        17,
-        2,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        17,
-        2,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        18,
-        2,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        18,
-        2,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        2,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        2,
-        39
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        2,
-        40
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        2,
-        41
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        2,
-        42
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        2,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        3,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        3,
-        39
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        3,
-        40
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        3,
-        41
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        3,
-        42
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        3,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        12,
-        3,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        12,
-        3,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        13,
-        3,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        13,
-        3,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        14,
-        3,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        14,
-        3,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        15,
-        3,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        15,
-        3,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        16,
-        3,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        16,
-        3,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        17,
-        3,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        17,
-        3,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        18,
-        3,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        18,
-        3,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        3,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        3,
-        39
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        3,
-        40
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        3,
-        41
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        3,
-        42
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        3,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        4,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        4,
-        39
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        4,
-        40
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        4,
-        41
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        4,
-        42
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        4,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        12,
-        4,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        12,
-        4,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        13,
-        4,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        13,
-        4,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        14,
-        4,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        14,
-        4,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        15,
-        4,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        15,
-        4,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        16,
-        4,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        16,
-        4,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        17,
-        4,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        17,
-        4,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        18,
-        4,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        18,
-        4,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        4,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        4,
-        39
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        4,
-        40
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        4,
-        41
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        4,
-        42
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        4,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        5,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        5,
-        39
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        5,
-        40
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        5,
-        41
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        5,
-        42
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
-        5,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        12,
-        5,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        12,
-        5,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        13,
-        5,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        13,
-        5,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        14,
-        5,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        14,
-        5,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        15,
-        5,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        15,
-        5,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        16,
-        5,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        16,
-        5,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        17,
-        5,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        17,
-        5,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        18,
-        5,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        18,
-        5,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        5,
-        38
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        5,
-        39
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        5,
-        40
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        5,
-        41
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        5,
-        42
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        5,
-        43
-      ],
-      "block": "minecraft:dark_oak_planks"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        11,
         6,
-        38
+        52
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        11,
+        2,
         6,
-        39
+        47
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        11,
+        2,
         6,
-        40
+        52
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        11,
+        3,
         6,
-        41
+        47
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        11,
+        3,
         6,
-        42
+        52
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        11,
+        4,
         6,
-        43
+        47
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        12,
+        4,
         6,
-        38
+        52
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        12,
+        5,
         6,
-        43
+        47
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        13,
+        5,
         6,
-        38
+        52
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        13,
         6,
-        43
+        6,
+        47
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        14,
         6,
-        38
+        6,
+        52
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        14,
+        7,
         6,
-        43
+        47
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        15,
+        7,
         6,
-        38
+        52
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        15,
+        8,
         6,
-        43
+        47
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        16,
+        8,
         6,
-        38
+        48
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        16,
+        8,
         6,
-        43
+        49
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        17,
+        8,
         6,
-        38
+        50
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        17,
+        8,
         6,
-        43
+        51
       ],
       "block": "minecraft:white_terracotta"
     },
     {
       "op": "voxel",
       "pos": [
-        18,
+        8,
         6,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        18,
-        6,
-        43
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        6,
-        38
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        6,
-        39
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        6,
-        40
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        6,
-        41
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        6,
-        42
-      ],
-      "block": "minecraft:white_terracotta"
-    },
-    {
-      "op": "voxel",
-      "pos": [
-        19,
-        6,
-        43
+        52
       ],
       "block": "minecraft:white_terracotta"
     }

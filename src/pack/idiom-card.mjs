@@ -49,6 +49,7 @@ export const IDIOM_CARD_SPECS = Object.freeze([
   { id: "jetty-zp", idiom: "jetty", spec: { edge: { axis: "z", at: 0, side: "+", range: [0, 6] }, y: 2, beamBlock: "dark_oak_planks", joistBlock: "dark_oak_log" } },
   { id: "jetty-zn", idiom: "jetty", spec: { edge: { axis: "z", at: 0, side: "-", range: [0, 6] }, y: 2, beamBlock: "dark_oak_planks", joistBlock: "dark_oak_log" } },
   { id: "plinth", idiom: "plinth", spec: { footprint: { x0: 0, x1: 6, z0: 0, z1: 4 }, y0: 0, courses: 2, block: "stone_bricks" } },
+  { id: "thatch", idiom: "roof.thatch", spec: { footprint: { x0: 0, x1: 8, z0: 0, z1: 5 }, ridgeAxis: "z", eaveY: 2, pitch: 1, block: "hay_block", thickness: 2, ridgeRoll: true, ridgeBlock: null, eaveOvershoot: 1 } },
 ]);
 
 /**

@@ -22,6 +22,7 @@ const SYNTH_SPECS = {
   "chimney": { base: [0, 0, 0], height: 5, block: "bricks", cap: "crown" },
   "jetty": { edge: { axis: "x", at: 0, side: "+", range: [0, 6] }, y: 4, beamBlock: "dark_oak_planks" },
   "plinth": { footprint: { x0: 0, x1: 6, z0: 0, z1: 4 }, y0: 0, courses: 1, block: "cobblestone" },
+  "roof.thatch": { footprint: { x0: 0, x1: 6, z0: 0, z1: 4 }, ridgeAxis: "z", eaveY: 0, pitch: 1, block: "hay_block", thickness: 2, ridgeRoll: true, ridgeBlock: null, eaveOvershoot: 1 },
 };
 
 const PROVEN_STATE_KEYS = new Set(["facing", "half", "shape", "type"]);

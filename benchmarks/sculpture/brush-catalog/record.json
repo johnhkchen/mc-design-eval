@@ -1,15 +1,15 @@
 {
   "schema": "brush-catalog/v1",
   "ticket": "T-128-01",
-  "brushCount": 19,
-  "constructs": 11,
-  "passes": 8,
+  "brushCount": 22,
+  "constructs": 12,
+  "passes": 10,
   "verdict": {
     "ok": true,
     "contractOk": true,
     "gate": "pass",
     "unmapped": 0,
-    "plots": 19
+    "plots": 22
   },
   "plots": [
     {
@@ -223,13 +223,43 @@
       ]
     },
     {
-      "name": "surface.fill",
-      "kind": "pass",
-      "via": "substrate:shell (effect 60)",
+      "name": "roof.thatch",
+      "kind": "construct",
+      "via": "card:thatch",
       "origin": [
         24,
         1,
         22
+      ],
+      "size": [
+        11,
+        8,
+        6
+      ]
+    },
+    {
+      "name": "surface.clinker",
+      "kind": "pass",
+      "via": "substrate:shell (effect 88)",
+      "origin": [
+        39,
+        1,
+        22
+      ],
+      "size": [
+        9,
+        6,
+        7
+      ]
+    },
+    {
+      "name": "surface.fill",
+      "kind": "pass",
+      "via": "substrate:shell (effect 60)",
+      "origin": [
+        0,
+        1,
+        38
       ],
       "size": [
         7,
@@ -238,13 +268,28 @@
       ]
     },
     {
+      "name": "surface.limewash",
+      "kind": "pass",
+      "via": "substrate:shell (effect 35)",
+      "origin": [
+        11,
+        1,
+        38
+      ],
+      "size": [
+        7,
+        5,
+        5
+      ]
+    },
+    {
       "name": "surface.paint",
       "kind": "pass",
       "via": "substrate:shell (effect 12)",
       "origin": [
-        35,
+        22,
         1,
-        22
+        38
       ],
       "size": [
         7,
@@ -257,9 +302,9 @@
       "kind": "pass",
       "via": "substrate:solid (effect 2)",
       "origin": [
-        46,
+        33,
         1,
-        22
+        38
       ],
       "size": [
         6,
@@ -272,7 +317,7 @@
       "kind": "pass",
       "via": "substrate:shell (effect 3)",
       "origin": [
-        0,
+        43,
         1,
         38
       ],
@@ -287,9 +332,9 @@
       "kind": "pass",
       "via": "substrate:shell (effect 64)",
       "origin": [
-        11,
+        0,
         1,
-        38
+        47
       ],
       "size": [
         9,
@@ -304,32 +349,32 @@
       {
         "angle": "+x+z",
         "path": "benchmarks/sculpture/brush-catalog/view-catalog-+x+z.png",
-        "bytes": 315744,
-        "sha256": "a51f197027682d1a6c34e3793a1e451204c2337d9f4d4f59b19008253b25a105"
+        "bytes": 336098,
+        "sha256": "1e8a7a968f72578634721d69e13a36f3d54b28e9127445cb135024daa29cfff5"
       },
       {
         "angle": "+x-z",
         "path": "benchmarks/sculpture/brush-catalog/view-catalog-+x-z.png",
-        "bytes": 331523,
-        "sha256": "e6d602fe3c15dfe1e17d5b8f7d466e8e7d6bbca5b19e00a49e820a7a854dae0e"
+        "bytes": 345328,
+        "sha256": "33617b7d6904e88e7aa263e0bb91ea15ae8e808f13c7adabf24700cbf622326d"
       },
       {
         "angle": "-x-z",
         "path": "benchmarks/sculpture/brush-catalog/view-catalog--x-z.png",
-        "bytes": 328864,
-        "sha256": "db959cfbfda6f89193fb18547637590ef8bb5b428bc83c86cf2ac2203772b57e"
+        "bytes": 338238,
+        "sha256": "d400c40e2111c26820fadd90a01db146ed5f07d240d85dc621d5d7e462ff4504"
       },
       {
         "angle": "-x+z",
         "path": "benchmarks/sculpture/brush-catalog/view-catalog--x+z.png",
-        "bytes": 332638,
-        "sha256": "ec26a981c506ace247ce3692340df11783b42632caa80b3aa7110e28f1d843a4"
+        "bytes": 338441,
+        "sha256": "c5bb683b472b90fb67869158880ed7970a3a49f8a538719c1d66ecb693ae85bc"
       },
       {
         "angle": "front",
         "path": "benchmarks/sculpture/brush-catalog/view-catalog-front.png",
-        "bytes": 71152,
-        "sha256": "dfc5ecd6abce75434a6222222d4baae69bf0763254e5df6ced253aac590669f3"
+        "bytes": 75376,
+        "sha256": "ca8166a6e3b8b8eba137e86c1bf9f2aecec9294edc09d670baed160d544c0fab"
       }
     ],
     "renderError": null
