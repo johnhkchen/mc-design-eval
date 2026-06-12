@@ -26,6 +26,8 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { guardedWriteRecord, preflightPins, loadTrackedSet, isTracked, ROTATE_FLAG } from "../../src/form/pin-guard.mjs";
+import { classifyWitnessRepro, retiredEntry, WITNESS_REPRO_VERDICT } from "../../src/form/witness-repro.mjs";
+import { loadStylePack } from "../../src/pack/style-pack.mjs";
 import { decodeImage } from "../../src/color/palette-extract.mjs";
 import { extractSilhouette, CONCEPT_BG } from "../../src/form/form-fidelity.mjs";
 import {
@@ -78,8 +80,10 @@ async function derive(def) {
   const finalText = await readRel(rels.final);
   const ledger = JSON.parse(ledgerText);
 
-  // Rule 5 anchor: the prefix source must reproduce the committed final byte-identically
-  const full = replayLedger({ ledger });
+  // Rule 5 anchor: the prefix source must reproduce the committed final byte-identically. The pack
+  // is a committed, sha-pinned input — the geometry-bearing rounds (E-33) re-derive their levers
+  // through it (replayLedger throws without it).
+  const full = replayLedger({ ledger, pack });
   if (serializeArtifact(full.artifact) !== finalText) {
     throw new Error(`replay of ${rels.ledger} DIVERGES from the committed final artifact — refusing to witness a drifted chain`);
   }
@@ -103,7 +107,7 @@ async function derive(def) {
 
   const rounds = [];
   for (let r = 0; r <= ledger.rounds.length; r++) {
-    const { artifact } = replayLedger({ ledger, throughRound: r });
+    const { artifact } = replayLedger({ ledger, pack, throughRound: r });
     const measured = proportionRatios(artifactOccupancy(artifact));
     const cmp = compareRatios(measured, declarations);
     const entry = r === 0 ? { round: 0, stage: "seed" } : {
@@ -231,6 +235,25 @@ async function runRepro(def) {
     console.error(`[proportion --repro] ${rels.runKey}: no committed witness record — skipped`);
     return null;
   }
+  // SKIP-vs-FAIL guard (T-142-01): a witness reproduces against its PINNED source (the ledger).
+  // T-138's chains retired these ledgers — a registered rotation SKIPs (named), an unchanged source
+  // that diverges still FAILs in the byte-compare below, an undeclared change FAILs here.
+  const committed = JSON.parse(await readRel(rels.record));
+  const pinnedSourceSha = committed.inputs?.ledger?.sha256;
+  const ledgerRel = chainRels(def.key, packRel).ledger;
+  const currentSourceSha = existsSync(join(ROOT, ledgerRel)) ? sha256(await readRel(ledgerRel)) : null;
+  const verdict = classifyWitnessRepro({
+    pinnedSourceSha, currentSourceSha, retired: retiredEntry(def.key, RETIRED),
+  });
+  if (verdict.verdict === WITNESS_REPRO_VERDICT.SKIP) {
+    console.error(`[proportion --repro] ${rels.runKey}: SKIP — ${verdict.reason}`);
+    return true; // an acceptable outcome (NOT null — a SKIP must not read as "no record")
+  }
+  if (verdict.verdict === WITNESS_REPRO_VERDICT.FAIL) {
+    console.error(`[proportion --repro] ${rels.runKey}: ${verdict.reason}`);
+    return false;
+  }
+  // GREEN: the pinned ledger is unchanged — re-derive and byte-compare (the corruption detector)
   const problems = [];
   try {
     const { record } = await buildRecord(def);
@@ -260,6 +283,13 @@ const repro = argv.includes("--repro") || argv.includes("--offline");
 const rotate = argv.includes(ROTATE_FLAG);
 const packRel = argOf("--pack") ?? DEFAULT_PACK_REL;
 const ticketId = argOf("--ticket") ?? "T-135-01"; // the run's authority, named in the records
+
+// the pack is a committed, sha-pinned input — geometry-bearing E-33 ledgers re-derive their levers
+// through it (replayLedger throws without it). Loaded once for the whole run.
+const pack = loadStylePack(join(ROOT, packRel));
+// the sanctioned-rotation registry (committed sidecar — subject keys live there, not in this source,
+// so the generalization self-grep stays clean). T-142-01: T-138's chains retired these ledgers.
+const RETIRED = JSON.parse(await readRel("benchmarks/sculpture/retired-pins.json")).proportion;
 
 const defs = subjectDefs();
 if (!all && !onlySubject) throw new Error(`pass --subject <${defs.map((d) => d.key).join("|")}> or --all`);
