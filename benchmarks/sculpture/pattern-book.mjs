@@ -44,7 +44,7 @@ import { artifactOccupancy } from "../../src/view/occupancy.mjs";
 import { parseProgramReply } from "../../src/recognition/prompt.mjs";
 import { compileProgram } from "../../src/recognition/compile.mjs";
 import { assertWorkshopProgram, realizeProgram } from "../../src/workshop/program.mjs";
-import { PATTERN_BOOK_BUDGET, seedWorkshopProgram, componentPlanFrom, chainRels, DEFAULT_PACK_REL } from "../../src/workshop/seed.mjs";
+import { PATTERN_BOOK_BUDGET, seedWorkshopProgram, componentPlanFrom, chainRels, recognitionRels, DEFAULT_PACK_REL } from "../../src/workshop/seed.mjs";
 import { serializeArtifact, replayLedger, offlineAssert } from "../../src/workshop/replay.mjs";
 import { conformanceScore } from "../../src/workshop/loop.mjs";
 import {
@@ -59,13 +59,12 @@ const HERE = join(ROOT, "benchmarks/sculpture");
 const REL_DIR = "benchmarks/sculpture/pattern-book";
 const OUT_DIR = join(ROOT, REL_DIR);
 const SKETCH_REL = "benchmarks/sculpture/form-sketch";
-const RECOG_REL = "benchmarks/sculpture/recognition";
 
-// T-132-01: the pack is invocation data. The committed sketch/recognition seam is always
-// verified under ITS pack of record (the default — those records were minted under it); the
-// --pack flag selects the BUILD pack, substituted exactly once, at seed time. Record paths
-// namespace per pack via chainRels so a second-pack run never collides with committed records.
-const seamPackPath = () => join(ROOT, DEFAULT_PACK_REL);
+// T-132-01: the pack is invocation data. The sketch is the shared, pack-free form evidence;
+// the recognition record is PACK-CONDITIONED (recognitionRels — a program speaks one pack's
+// roles), so the chain consumes the invocation pack's own recognition record and every
+// downstream path namespaces per pack (chainRels). A second-pack run can never collide with
+// another pack's committed records.
 
 const sha256 = (buf) => createHash("sha256").update(buf).digest("hex");
 const jsonOf = (x) => JSON.stringify(x, null, 2) + "\n";
@@ -96,13 +95,15 @@ async function verifySketch(key) {
 }
 
 /** Stage 2 — the committed model-recognized program (T-125): re-parsed through the SAME gates
- *  as the live ask, re-compiled, re-realized, byte-compared to the committed first draft. */
+ *  as the live ask, re-compiled, re-realized, byte-compared to the committed first draft.
+ *  Pack-conditioned (T-132-01): the chain reads the invocation pack's own recognition record. */
 async function verifyRecognition(key, pack) {
-  const programRel = `${RECOG_REL}/${key}.program.json`;
-  const artifactRel = `${RECOG_REL}/${key}.artifact.json`;
-  const repliesRel = `${RECOG_REL}/${key}.replies.json`;
+  const recog = recognitionRels(key, buildPackRel);
+  const programRel = recog.program;
+  const artifactRel = recog.artifact;
+  const repliesRel = recog.replies;
   const programText = await readRel(programRel).catch(() => {
-    throw new Error(`committed recognition program absent: ${programRel} (T-125's record is this chain's input)`);
+    throw new Error(`committed recognition program absent: ${programRel} (T-125's record is this chain's input — run recognize with this pack first)`);
   });
   const program = parseProgramReply(programText, { pack }); // same gates as live
   const { workshopProgram } = compileProgram(program, pack);
@@ -202,7 +203,6 @@ function chainMd(rec) {
 
 async function runLive(def, { rotate }) {
   const key = def.key;
-  const seamPack = loadStylePack(seamPackPath());
   const buildPack = loadStylePack(join(ROOT, buildPackRel));
   const rels = chainRels(key, buildPackRel);
   const recordRels = [rels.record, rels.recordMd];
@@ -222,7 +222,7 @@ async function runLive(def, { rotate }) {
   try {
     const sketch = await verifySketch(key);
     track.stage = "recognition";
-    const { program, receipt: recognition } = await verifyRecognition(key, seamPack);
+    const { program, receipt: recognition } = await verifyRecognition(key, buildPack);
     track.stage = "seed";
     const seeded = stageSeed(program, buildPack);
     await mkdir(join(ROOT, rels.dir), { recursive: true });
@@ -279,17 +279,16 @@ async function runRepro(def, { offline }) {
   const rels = chainRels(key, buildPackRel);
   // the recognize.mjs --offline precedent: a subject with no committed chain is SKIPPED, not
   // failed — the sweep asserts every committed chain, and at least one must exist.
-  if (!existsSync(join(ROOT, `${RECOG_REL}/${key}.program.json`)) ||
+  if (!existsSync(join(ROOT, recognitionRels(key, buildPackRel).program)) ||
       !existsSync(join(ROOT, rels.seed))) {
     console.error(`[pattern-book ${offline ? "--offline" : "--repro"}] ${rels.runKey}: no committed chain — skipped`);
     return null;
   }
-  const seamPack = loadStylePack(seamPackPath());
   const buildPack = loadStylePack(join(ROOT, buildPackRel));
   const problems = [];
   try {
     await verifySketch(key);
-    const { program } = await verifyRecognition(key, seamPack);
+    const { program } = await verifyRecognition(key, buildPack);
     const seeded = seedWorkshopProgram({ program, pack: buildPack });
     const committedSeed = await readRel(rels.seed);
     if (sha256(seeded.serialized) !== sha256(committedSeed)) {

@@ -109,10 +109,11 @@
     "gate:patternbook:cottage": "node benchmarks/sculpture/multi-angle-gate.mjs --subject cottage --label patternbook --artifact workshop/cottage/final-artifact.json --reference recognition/cottage.artifact.json",
     "gate:patternbook:barn": "node benchmarks/sculpture/multi-angle-gate.mjs --subject barn --label patternbook --artifact workshop/barn/final-artifact.json --reference recognition/barn.artifact.json",
     "patternbook:compare": "node benchmarks/sculpture/pattern-book-compare.mjs",
+    "recognize:barn:saltcrag": "node benchmarks/sculpture/recognize.mjs --subject barn --pack packs/saltcrag.json --ticket T-132-01",
     "patternbook:barn:saltcrag": "node benchmarks/sculpture/pattern-book.mjs --subject barn --pack packs/saltcrag.json --ticket T-132-01",
     "patternbook:saltcrag:repro": "node benchmarks/sculpture/pattern-book.mjs --all --repro --pack packs/saltcrag.json",
     "patternbook:saltcrag:offline": "node benchmarks/sculpture/pattern-book.mjs --all --offline --pack packs/saltcrag.json",
-    "gate:patternbook:barn:saltcrag": "node benchmarks/sculpture/multi-angle-gate.mjs --subject barn --label patternbook-saltcrag --artifact workshop/barn--saltcrag/final-artifact.json --reference recognition/barn.artifact.json",
+    "gate:patternbook:barn:saltcrag": "node benchmarks/sculpture/multi-angle-gate.mjs --subject barn --label patternbook-saltcrag --artifact workshop/barn--saltcrag/final-artifact.json --reference recognition/barn--saltcrag.artifact.json",
     "style:form": "node scripts/form-style.mjs",
     "style:ratify": "node scripts/ratify-pack.mjs"
   },

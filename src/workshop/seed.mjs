@@ -45,6 +45,26 @@ export function packNs(packRel) {
  * pattern-book chain writes and the paths the workshop runner pins cannot drift apart).
  * All ROOT-relative; `runKey` is the namespaced subject key (`<key>` or `<key>--<style>`).
  */
+/**
+ * Recognition record paths, namespaced per pack like chainRels: programs are pack-stamped and
+ * role vocabularies are per-pack (parseProgramReply's vocabulary gates), so a building enters a
+ * new style through a pack-conditioned RECOGNITION pass — the sketch is the shared, pack-free
+ * form evidence; everything downstream of it speaks one pack (T-132-01).
+ */
+export function recognitionRels(key, packRel = DEFAULT_PACK_REL) {
+  const runKey = `${key}${packNs(packRel)}`;
+  const base = `benchmarks/sculpture/recognition/${runKey}`;
+  return Object.freeze({
+    runKey,
+    program: `${base}.program.json`,
+    artifact: `${base}.artifact.json`,
+    replies: `${base}.replies.json`,
+    prompt: `${base}.prompt.md`,
+    record: `${base}.record.json`,
+    md: `${base}.md`,
+  });
+}
+
 export function chainRels(key, packRel = DEFAULT_PACK_REL) {
   const runKey = `${key}${packNs(packRel)}`;
   return Object.freeze({

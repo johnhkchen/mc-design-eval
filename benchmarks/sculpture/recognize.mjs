@@ -1,7 +1,10 @@
 // RECOGNITION RUNNER (T-125-01, story S-125, epic E-31) — the model reads concept + conditioned
 // sketch and emits the building program; the program realizes through the registry into a clean
 // first draft. `node benchmarks/sculpture/recognize.mjs --subject <key> | --all [--offline]
-// [--rotate-pins]`, or `npm run recognize:<key>` / `npm run recognize:offline`.
+// [--pack packs/<style>.json] [--ticket <id>] [--rotate-pins]`, or `npm run recognize:<key>` /
+// `npm run recognize:offline`. Recognition is pack-conditioned (T-132-01): the sketch is the
+// shared, pack-free form evidence; the emitted program speaks the invocation pack's roles, and
+// records namespace per pack (recognitionRels) so packs' records never collide.
 //
 // LIVE (metered, subscription shim, STRONG tier — never the metered API): one recognition ask
 // driven by the T-114 reply policy (same-prompt bounded re-asks on malformed/off-vocabulary
@@ -35,6 +38,7 @@ import { compileProgram } from "../../src/recognition/compile.mjs";
 import { assertWorkshopProgram, realizeProgram } from "../../src/workshop/program.mjs";
 import { assertArtifact } from "../../src/artifact.mjs";
 import { artifactOccupancy } from "../../src/view/occupancy.mjs";
+import { recognitionRels, DEFAULT_PACK_REL } from "../../src/workshop/seed.mjs";
 import { SUBJECTS } from "./durable-skin.mjs";
 
 export const RECOGNITION_DRAFT_SCHEMA = "recognition-draft/v1";
@@ -42,19 +46,13 @@ export const RECOGNITION_DRAFT_SCHEMA = "recognition-draft/v1";
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 const HERE = join(ROOT, "benchmarks/sculpture");
 const OUT_DIR = join(HERE, "recognition");
-const REL_DIR = "benchmarks/sculpture/recognition";
 const SKETCH_DIR = join(HERE, "form-sketch");
-const PACK_PATH = join(ROOT, "packs/rustic.json");
 
 const sha256 = (buf) => createHash("sha256").update(buf).digest("hex");
 const jsonOf = (x) => JSON.stringify(x, null, 2) + "\n";
 
 /** Registered buildings that have a committed conditioned sketch to read from. */
 const subjectDefs = () => Object.values(SUBJECTS).filter((d) => d.glb && d.generated?.scale);
-
-const recordRels = (key) =>
-  ["program.json", "replies.json", "prompt.md", "artifact.json", "record.json", "md"]
-    .map((ext) => `${REL_DIR}/${key}.${ext === "md" ? "md" : ext}`);
 
 /** E-25 Rule 3 self-grep: no subject keys in this runner's source. */
 async function generalizationGrep() {
@@ -85,7 +83,7 @@ async function renderEvidence(artifact, key) {
 function draftMd(rec, program) {
   const c = rec.conformance;
   const lines = [
-    `# Recognition draft — ${rec.subject} (${RECOGNITION_DRAFT_SCHEMA}, T-125-01)`,
+    `# Recognition draft — ${rec.runKey ?? rec.subject} (${RECOGNITION_DRAFT_SCHEMA}, ${rec.ticket})`,
     "",
     `The model's reading: ${program.reading.summary}`,
     "",
@@ -115,14 +113,16 @@ function draftMd(rec, program) {
 
 async function runLive(def, { rotate }) {
   const key = def.key;
+  const rels = recognitionRels(key, packRel);
   const trackedSet = loadTrackedSet(ROOT);
   preflightPins({
-    pins: recordRels(key).map((rel) => ({ rel, tracked: isTracked(trackedSet, rel) })),
+    pins: [rels.program, rels.replies, rels.prompt, rels.artifact, rels.record, rels.md]
+      .map((rel) => ({ rel, tracked: isTracked(trackedSet, rel) })),
     rotate,
-    intent: `live recognition (${key})`,
+    intent: `live recognition (${rels.runKey})`,
   });
 
-  const pack = loadStylePack(PACK_PATH);
+  const pack = loadStylePack(join(ROOT, packRel));
   const sketch = JSON.parse(await readFile(join(SKETCH_DIR, `${key}.json`), "utf8"));
   const conceptB64 = (await readFile(join(HERE, def.concept))).toString("base64");
   const sheetB64 = (await readFile(join(SKETCH_DIR, `${key}-sheet.png`))).toString("base64");
@@ -158,8 +158,9 @@ async function runLive(def, { rotate }) {
 
   const repliesRecord = {
     schema: "recognition-replies/v1",
-    ticket: "T-125-01",
+    ticket: ticketId,
     subject: key,
+    pack: pack.style,
     model,
     promptSha256,
     budget: PROGRAM_REPLY_BUDGET,
@@ -168,8 +169,8 @@ async function runLive(def, { rotate }) {
     replies, // the T-114 ledger (clipped raws, parse status per attempt)
     rawTexts, // FULL raw texts, one per live ask (the AC's committed raw replies)
   };
-  await write(`${REL_DIR}/${key}.replies.json`, jsonOf(repliesRecord));
-  await write(`${REL_DIR}/${key}.prompt.md`, `# Recognition prompt — ${key} (T-125-01)\n\nsha256 \`${promptSha256}\`; schema: \`schema/building-program.schema.json\`.\n\n----\n\n${prompt}\n`);
+  await write(rels.replies, jsonOf(repliesRecord));
+  await write(rels.prompt, `# Recognition prompt — ${rels.runKey} (${ticketId})\n\nsha256 \`${promptSha256}\`; schema: \`schema/building-program.schema.json\`.\n\n----\n\n${prompt}\n`);
 
   if (program === null) {
     console.error(`[recognize] ${key}: REFUSED — every reply malformed within the budget (ledger committed).`);
@@ -180,13 +181,14 @@ async function runLive(def, { rotate }) {
   const { artifact, cells, elements } = realizeProgram(assertWorkshopProgram(workshopProgram));
   assertArtifact(artifact);
   const conformance = runConformance({ occ: artifactOccupancy(artifact), declarations: workshopProgram.declarations }, pack);
-  const evidence = await renderEvidence(artifact, key);
+  const evidence = await renderEvidence(artifact, rels.runKey);
   const grep = await generalizationGrep();
 
   const record = {
     schema: RECOGNITION_DRAFT_SCHEMA,
-    ticket: "T-125-01",
+    ticket: ticketId,
     subject: key,
+    runKey: rels.runKey,
     pack: pack.style,
     model,
     promptSha256,
@@ -198,36 +200,39 @@ async function runLive(def, { rotate }) {
     evidence,
     generalization: grep,
     replies: replies.map(({ attempt, parsed, source }) => ({ attempt, parsed, source })),
-    replay: { npmRun: "recognize:offline", asserts: "committed program → byte-identical artifact" },
+    replay: {
+      npmRun: packRel === DEFAULT_PACK_REL ? "recognize:offline" : `recognize:offline (--pack ${packRel})`,
+      asserts: "committed program → byte-identical artifact",
+    },
   };
 
-  await write(`${REL_DIR}/${key}.program.json`, jsonOf(program));
-  await write(`${REL_DIR}/${key}.artifact.json`, jsonOf(artifact));
-  await write(`${REL_DIR}/${key}.record.json`, jsonOf(record));
-  await write(`${REL_DIR}/${key}.md`, draftMd(record, program));
+  await write(rels.program, jsonOf(program));
+  await write(rels.artifact, jsonOf(artifact));
+  await write(rels.record, jsonOf(record));
+  await write(rels.md, draftMd(record, program));
 
-  console.error(`[recognize] ${key}: ${cells.length} cells from ${elements.length} elements; ` +
+  console.error(`[recognize] ${rels.runKey}: ${cells.length} cells from ${elements.length} elements; ` +
     `conformance ${conformance.passed ? "PASS" : "FAIL"}; asks ${askCount}; grep ${grep.clean ? "clean" : `HITS ${grep.subjectKeysInRunner}`}`);
   return conformance.passed && grep.clean;
 }
 
 async function runOffline(def) {
   const key = def.key;
-  const programPath = join(OUT_DIR, `${key}.program.json`);
-  const committedProgram = await readFile(programPath, "utf8").catch(() => null);
+  const rels = recognitionRels(key, packRel);
+  const committedProgram = await readFile(join(ROOT, rels.program), "utf8").catch(() => null);
   if (committedProgram === null) {
-    console.error(`[offline] ${key}: no committed program — skipped`);
+    console.error(`[offline] ${rels.runKey}: no committed program — skipped`);
     return null;
   }
-  const pack = loadStylePack(PACK_PATH);
+  const pack = loadStylePack(join(ROOT, packRel));
   const program = parseProgramReply(committedProgram, { pack }); // same gates as live
   const { workshopProgram } = compileProgram(program, pack);
   const { artifact } = realizeProgram(assertWorkshopProgram(workshopProgram));
   const fresh = jsonOf(artifact);
-  const committed = await readFile(join(OUT_DIR, `${key}.artifact.json`), "utf8");
+  const committed = await readFile(join(ROOT, rels.artifact), "utf8");
   const identical = sha256(fresh) === sha256(committed);
   const conformance = runConformance({ occ: artifactOccupancy(artifact), declarations: workshopProgram.declarations }, pack);
-  console.error(`[offline] ${key}: artifact ${identical ? "REPRODUCES byte-identically" : "DIVERGES"} ` +
+  console.error(`[offline] ${rels.runKey}: artifact ${identical ? "REPRODUCES byte-identically" : "DIVERGES"} ` +
     `(sha ${sha256(fresh).slice(0, 12)}… vs ${sha256(committed).slice(0, 12)}…); conformance ${conformance.passed ? "PASS" : "FAIL"}`);
   return identical && conformance.passed;
 }
@@ -243,6 +248,8 @@ const onlySubject = argOf("--subject");
 const all = argv.includes("--all");
 const offline = argv.includes("--offline");
 const rotate = argv.includes(ROTATE_FLAG);
+const packRel = argOf("--pack") ?? DEFAULT_PACK_REL; // T-132-01: recognition is pack-conditioned
+const ticketId = argOf("--ticket") ?? "T-125-01"; // the run's authority, named in the records
 
 const defs = subjectDefs();
 if (!all && !onlySubject) throw new Error(`pass --subject <${defs.map((d) => d.key).join("|")}> or --all`);

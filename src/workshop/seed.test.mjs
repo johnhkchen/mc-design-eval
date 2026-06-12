@@ -178,3 +178,16 @@ test("SEED11 workshopSubjectsFrom namespaces derived program paths per pack", as
   assert.equal(subjects.barn.program, "benchmarks/sculpture/workshop/barn--saltcrag/program.json");
   assert.equal(subjects.barn.pack, "packs/saltcrag.json");
 });
+
+test("SEED12 recognitionRels: pack-conditioned recognition records namespace like chainRels", async () => {
+  const { recognitionRels, DEFAULT_PACK_REL } = await import("./seed.mjs");
+  const legacy = recognitionRels("barn", DEFAULT_PACK_REL);
+  assert.equal(legacy.program, "benchmarks/sculpture/recognition/barn.program.json");
+  assert.equal(legacy.artifact, "benchmarks/sculpture/recognition/barn.artifact.json");
+  const ns = recognitionRels("barn", "packs/saltcrag.json");
+  assert.equal(ns.runKey, "barn--saltcrag");
+  for (const [name, rel] of Object.entries(ns)) {
+    if (name === "runKey") continue;
+    assert.ok(rel.includes("barn--saltcrag"), `${name} is namespaced (${rel})`);
+  }
+});
