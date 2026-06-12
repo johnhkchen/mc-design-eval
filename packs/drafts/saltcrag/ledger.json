@@ -1,0 +1,55 @@
+{
+  "schema": "style-formation-ledger/v1",
+  "ticket": "T-130-01",
+  "styleSlug": "saltcrag",
+  "briefSource": "story-replay (src/baml/fixtures/vernacular)",
+  "compare": null,
+  "model": "claude-opus-4-8",
+  "transport": "claude -p subscription shim (sdk-binding requestText) — no metered API key",
+  "generatedAt": "2026-06-12T01:01:12.541Z",
+  "accepted": true,
+  "refusedStage": null,
+  "stages": {
+    "vernacular": {
+      "fn": "AuthorMaterialStory",
+      "source": "replay-of-fixture",
+      "promptSha256": "50841e8907f0de14041c3566105b86bb1b14c95cd357be27b50e0d5e529f1083",
+      "askCount": 0,
+      "accepted": true
+    },
+    "palette": {
+      "fn": "DerivePalette",
+      "source": "live",
+      "promptSha256": "68f56f99e8c271c5bdc87c5f5d8e11cde0e8af7aadc1bd95d719be97db84ddba",
+      "askCount": 1,
+      "accepted": true
+    },
+    "proportions": {
+      "fn": "DeriveProportions",
+      "source": "live",
+      "promptSha256": "89c05d381f3ab4608f7ac24773293a6082f61a6e90b326626e89c96ce2224e09",
+      "askCount": 1,
+      "accepted": true
+    },
+    "decompose": {
+      "fn": "DecomposeBrushBacklog",
+      "source": "live",
+      "promptSha256": "6ed2c8bbd816eafebef8568f53624571ada9e93c33b239df69cc5de1b3f895f2",
+      "askCount": 1,
+      "accepted": true
+    }
+  },
+  "dedup": {
+    "demotions": [],
+    "warnings": [
+      "parametrization note \"Hollow the cottage shell and lay storey floors at the 3–4 block storey height.\" names a brush the registry does not own (\"hollow + floorplan\") — verify by hand before relying on it"
+    ]
+  },
+  "counts": {
+    "roles": 17,
+    "idioms": 11,
+    "newItems": 4,
+    "notes": 13
+  },
+  "absorbedSeats": []
+}

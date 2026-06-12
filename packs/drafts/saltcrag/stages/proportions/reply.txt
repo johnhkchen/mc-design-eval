@@ -1,0 +1,15 @@
+Reasoning from saltcrag's fabric:
+
+- **Storey height (3–4):** Walls are rough fieldstone bedded in lime, lofts boarded in thin tarred deal — no proud oak beams, just sawn boards and salvage. Low cottages built squat against the gale; timber spent thinly can't carry lofty rooms. Vernacular range, 3 to 4.
+- **Pitch (steep-first):** Roofs answer the gale, not fashion. The poorer cottage pins down *steep* reed/marram thatch (2); the signature tarred-shingle roof courses up the slope as 45° stair runs (1); and the poorest turf/sod roofs lie *shallow*, stormproof slab courses over bark (0.5). All three are genuinely used — steep is the storm-country default and most common, then the shingle stair-course, then the humble turf slab.
+- **Opening spacing (3–6):** A working village of fishing families — glass is bought-in, small, and dear, and most openings get a barred tarred shutter rather than a pane. Walls are kept solid against salt wind, so openings interrupt them sparingly and sit well apart.
+
+```json
+{
+  "storey_min": 3,
+  "storey_max": 4,
+  "pitch_classes": [2, 1, 0.5],
+  "opening_min": 3,
+  "opening_max": 6
+}
+```

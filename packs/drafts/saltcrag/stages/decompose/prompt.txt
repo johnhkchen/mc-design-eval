@@ -1,0 +1,94 @@
+You are the design-backlog factory of a Minecraft pattern-book builder. A formed STYLE and
+the CURRENT BRUSH REGISTRY follow. A brush is a parametrized, composable, unit-tested build
+technique (a gable course, a timber panel rhythm, a dormer, a weathering pass) — designed
+once, reused everywhere.
+
+Decompose the style into the brushes it needs to be buildable. For each need, FIRST check
+the registry:
+- if an owned brush already covers it (directly or via its parameters), emit a
+  parametrization_note naming that brush — NEVER a duplicate work item;
+- otherwise emit a work item: a self-contained draft spec another engineer can implement
+  without you, named the way the registry names brushes.
+
+Work items are DRAFTS for human promotion — self-contained, never scheduled by you. Keep the
+list honest: only brushes THIS style actually needs to read as itself, ordered most-needed
+first.
+
+## The formed style
+Style: saltcrag — A storm-grey fishing village wedged between granite headland and a cold northern sea, built of beach stone and tarred boat-timber.
+
+Palette (role → block — the diegetic material assignments):
+- wall.field.ground → cobblestone: The ground storey is what the headland gives for free — granite boulders and fieldstone cleared from the thin soil and hauled off the strand, laid up rough and bedded in shell-burned lime. Undressed grey rubble is the structural truth of every working cottage; at L53 it holds the storm-grey of the place without pretending to be worked.
+- wall.finish.limewash → white_terracotta: The cottage's one indulgence: a coat of lime burned from shell-sand in the coastal kilns, brushed over the rubble to seal the wind out and whiten the seaward face. It is an accent of thrift, not a clad finish — a sealing skin spared for where weather drives hardest, so it preserves over the grey field rather than replacing it.
+- wall.infill.cobble → mossy_cobblestone: Rounded beach cobble and shingle off the tideline pack the footings and the rough infill — sea-worn, weed-stained in its joints from the cold wet coast. It reads damper and more organic than the cleared fieldstone (L49), the strand's stone as opposed to the headland's.
+- wall.field.upper → dark_oak_planks: The loft and gable are boarded, not built — softwood deals and boatyard offcuts lapped clinker-fashion and soaked in barrelled tar, the same craft that seals a hull. Timber here comes as thin boards, so it is spent on the light upper storey; the tar drives it black (L20), the truest dark of the village.
+- wall.dressing.quoin → stone_bricks: Squared dressed stone is dear — it appears only where the community pools its money, worked by a mason. On an ordinary frontage it surfaces sparingly as quoins and worked jambs at corners and doorways, the one place rough rubble can't turn a clean edge. Scarce by economy, so preserve, never field.
+- roof.field → dark_oak_planks: The signature saltcrag cover: riven pine and spruce shingle, split thin and blackened with pitch — the roof of the better cottages and skippers' houses. It answers the gale and shares the boatyard's tar identity with the cladding, reading dead black at L20 across the whole pitch.
+- roof.course.stairs → dark_oak_stairs: The pitched run of tarred shingle, coursed up the slope — split softwood lapped against the wind, blackened with the same pitch as the field so the courses read as one tarred skin.
+- roof.course.slab → dark_oak_slab: The flat shingle course at eave and shallow break — the same riven, tarred softwood laid level where the pitch eases, member of the roof family with the field and stairs.
+- roof.ridge → deepslate_tiles: Slate is the prestige cover, landed costly by boat and saved for the church and merchant frontages — but a single bought course can cap the ridge, the most beaten seam of a tarred roof. Spent where it earns its keep and nowhere else; dark grey at L23, it sits honestly against the black shingle.
+- roof.field.thatch → hay_block: The modest cottage that can't run shingle pins down steep reed and marram cut from the dune and salt-marsh — cheap, local, raked against the gale. It belongs in the roofscape as the poorer neighbour's pitch, a preserve alternate to the tarred dominant.
+- roof.field.turf → moss_block: The poorest and most exposed outbuildings are turfed — sod cut from the thin coastal soil over a bark underlayer, cheap and stormproof. Green-grey living roof (L43), the bottom rung of the roofing economy held on the byre and net-store.
+- door.main → spruce_door: Doors are joined from sawn softwood deal landed across the sea — the only milled timber a fishing family buys — and tarred where they face the weather. Plain pine board, no proud oak in this country.
+- window.glazing → glass_pane: Window glass is bought-in and small, set in a sawn-deal frame — a few panes where a curer or skipper can pay, kept tight against salt wind. The joinery is the imported deal; the glass is the rare indulgence it holds.
+- window.shutter → spruce_trapdoor: Most openings get a tarred deal shutter rather than glass — sawn softwood board, pitch-soaked, barred shut against the gale. Cheaper than glazing and the working norm on lesser windows.
+- opening.lintel → spruce_log: Heads over door and window are spanned with what the sea returns — driftwood baulks and salvaged ship-timber, tarry and dark (L17), too crooked for boards but sound enough to carry rubble above an opening. Salvage doing the structural work milled deal is too thin for.
+- chimney.stack → cobblestone: The hearth that warms the cottage and dries the catch is stacked from the same gathered fieldstone as the walls, bedded in lime — rough rubble carried up around the flue. Fire here is met with what the headland gives, not with dear fired brick.
+- chimney.cap → stone_bricks: The one place a humble stack earns worked stone: a dressed capstone at the chimney head, where weather attacks hardest and rubble won't hold a clean weathering. A scarce mason's touch, spent because fire and gale together demand it.
+
+Proportions: storey height 3–4 blocks; pitch classes [2,1,0.5]; opening spacing 3–6 cells.
+
+## The brush registry (what we already own)
+- roof.gable (construct; consumes spec, emits cells) — params: pitch: number, blocks: object
+- roof.hip (construct; consumes spec, emits cells) — params: pitch: number, blocks: object
+- roof.pyramid (construct; consumes spec, emits cells) — params: pitch: number, blocks: object
+- arch (construct; consumes spec, emits cells) — params: block: string
+- head.flat (construct; consumes spec, emits cells) — params: block: string
+- course.stairs (construct; consumes spec, emits cells) — params: block: string, winding: walk|soffit
+- course.slab (construct; consumes spec, emits cells) — params: block: string, kind: bottom|top|double
+- dormer (construct; consumes spec, emits cells) — params: width: integer, depth: integer, wallHeight: integer, wallBlock: string, roofBlock: string, faceBlock: string, ridgeBlock: string, aperture: object
+- chimney (construct; consumes spec, emits cells) — params: footprint: object, height: integer, block: string, cap: crown|slab|, capBlock: string
+- jetty (construct; consumes spec, emits cells) — params: overhang: integer, joistEvery: integer, beamBlock: string, joistBlock: string,null
+- plinth (construct; consumes spec, emits cells) — params: courses: integer, inset: integer, block: string
+- timber-frame (pass; consumes occupancy+kit+zones, emits placements+report) — params: none
+- opening-dressing (pass; consumes occupancy+features+kit, emits placements+report) — params: none
+- hollow (pass; consumes occupancy, emits removeSet+report) — params: none
+- floorplan (pass; consumes occupancy+features+spec, emits placements+report) — params: none
+- surface.fill (pass; consumes occupancy+zones, emits placements+report) — params: skin: projection|exposure, minRun: integer
+- surface.paint (pass; consumes occupancy+spec, emits placements+report) — params: priority: array
+- surface.roof-courses (pass; consumes occupancy+zones, emits placements+report) — params: none
+- surface.strip-salt (pass; consumes occupancy+zones, emits placements+report) — params: minKeep: integer, minExtent: integer
+
+Answer in JSON using this schema:
+{
+  items: [
+    {
+      // registry-style brush name: lowercase, dotted family, e.g. roof.gable
+      name: string,
+      // one sentence: what it paints/builds and where THIS style uses it
+      purpose: string,
+      // the parameters and their kinds, as a compact schema-like sketch
+      parameter_sketch: string,
+      // what it chains with; what must run before/after
+      composition_notes: string,
+      // the unit tests that would pin it
+      test_plan: string,
+      // the synthetic substrate its preview card renders on
+      preview_subject: string,
+      // 2-4 sentences of background a stranger needs to implement it
+      context: string,
+      // 3-6 verifiable checkboxes
+      acceptance_criteria: string[],
+    }
+  ],
+  parametrization_notes: [
+    {
+      // the style's need, in one line
+      need: string,
+      // the owned registry brush that covers it
+      existing_brush: string,
+      // how to parametrize the owned brush for this need
+      note: string,
+    }
+  ],
+}

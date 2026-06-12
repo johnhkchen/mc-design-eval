@@ -1,0 +1,53 @@
+{
+  "schema": "style-formation-stage/v1",
+  "ticket": "T-130-01",
+  "fn": "DeriveProportions",
+  "model": "claude-opus-4-8",
+  "source": "live",
+  "transport": "claude -p subscription shim (sdk-binding requestText) — no metered API key",
+  "promptSha256": "89c05d381f3ab4608f7ac24773293a6082f61a6e90b326626e89c96ce2224e09",
+  "budget": 3,
+  "askCount": 1,
+  "accepted": true,
+  "replies": [
+    {
+      "attempt": 1,
+      "parsed": true,
+      "rawReply": "Reasoning from saltcrag's fabric:\n\n- **Storey height (3–4):** Walls are rough fieldstone bedded in lime, lofts boarded in thin tarred deal — no proud oak beams, just sawn boards and salvage. Low cottages built squat against the gale; timber spent thinly can't carry lofty rooms. Vernacular range, 3 to 4.\n- **Pitch (steep-first):** Roofs answer the gale, not fashion. The poorer cottage pins down *st",
+      "usage": {
+        "input_tokens": 10587,
+        "cache_creation_input_tokens": 13861,
+        "cache_read_input_tokens": 15824,
+        "output_tokens": 1641,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 13861,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 10587,
+            "output_tokens": 1641,
+            "cache_read_input_tokens": 15824,
+            "cache_creation_input_tokens": 13861,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 13861
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "source": "live"
+    }
+  ],
+  "rawTexts": [
+    "Reasoning from saltcrag's fabric:\n\n- **Storey height (3–4):** Walls are rough fieldstone bedded in lime, lofts boarded in thin tarred deal — no proud oak beams, just sawn boards and salvage. Low cottages built squat against the gale; timber spent thinly can't carry lofty rooms. Vernacular range, 3 to 4.\n- **Pitch (steep-first):** Roofs answer the gale, not fashion. The poorer cottage pins down *steep* reed/marram thatch (2); the signature tarred-shingle roof courses up the slope as 45° stair runs (1); and the poorest turf/sod roofs lie *shallow*, stormproof slab courses over bark (0.5). All three are genuinely used — steep is the storm-country default and most common, then the shingle stair-course, then the humble turf slab.\n- **Opening spacing (3–6):** A working village of fishing families — glass is bought-in, small, and dear, and most openings get a barred tarred shutter rather than a pane. Walls are kept solid against salt wind, so openings interrupt them sparingly and sit well apart.\n\n```json\n{\n  \"storey_min\": 3,\n  \"storey_max\": 4,\n  \"pitch_classes\": [2, 1, 0.5],\n  \"opening_min\": 3,\n  \"opening_max\": 6\n}\n```"
+  ]
+}

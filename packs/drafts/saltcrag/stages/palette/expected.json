@@ -1,0 +1,207 @@
+{
+  "roles": [
+    {
+      "role": "wall.field.ground",
+      "block": "cobblestone",
+      "rationale": "The ground storey is what the headland gives for free — granite boulders and fieldstone cleared from the thin soil and hauled off the strand, laid up rough and bedded in shell-burned lime. Undressed grey rubble is the structural truth of every working cottage; at L53 it holds the storm-grey of the place without pretending to be worked.",
+      "provenance": [
+        "gathered-grey-granite-fieldstone",
+        "lime-mortar-and-limewash"
+      ],
+      "band": "base",
+      "tier": "dominant"
+    },
+    {
+      "role": "wall.finish.limewash",
+      "block": "white_terracotta",
+      "rationale": "The cottage's one indulgence: a coat of lime burned from shell-sand in the coastal kilns, brushed over the rubble to seal the wind out and whiten the seaward face. It is an accent of thrift, not a clad finish — a sealing skin spared for where weather drives hardest, so it preserves over the grey field rather than replacing it.",
+      "provenance": [
+        "lime-mortar-and-limewash"
+      ],
+      "band": "base",
+      "tier": "preserve"
+    },
+    {
+      "role": "wall.infill.cobble",
+      "block": "mossy_cobblestone",
+      "rationale": "Rounded beach cobble and shingle off the tideline pack the footings and the rough infill — sea-worn, weed-stained in its joints from the cold wet coast. It reads damper and more organic than the cleared fieldstone (L49), the strand's stone as opposed to the headland's.",
+      "provenance": [
+        "rounded-beach-cobble-and-shingle"
+      ],
+      "band": "base",
+      "tier": "preserve"
+    },
+    {
+      "role": "wall.field.upper",
+      "block": "dark_oak_planks",
+      "rationale": "The loft and gable are boarded, not built — softwood deals and boatyard offcuts lapped clinker-fashion and soaked in barrelled tar, the same craft that seals a hull. Timber here comes as thin boards, so it is spent on the light upper storey; the tar drives it black (L20), the truest dark of the village.",
+      "provenance": [
+        "tarred-softwood-clinker-boarding",
+        "tar-and-pitch"
+      ],
+      "band": "upper",
+      "tier": "dominant"
+    },
+    {
+      "role": "wall.dressing.quoin",
+      "block": "stone_bricks",
+      "rationale": "Squared dressed stone is dear — it appears only where the community pools its money, worked by a mason. On an ordinary frontage it surfaces sparingly as quoins and worked jambs at corners and doorways, the one place rough rubble can't turn a clean edge. Scarce by economy, so preserve, never field.",
+      "provenance": [
+        "dressed-squared-stone"
+      ],
+      "band": "upper",
+      "tier": "preserve"
+    },
+    {
+      "role": "roof.field",
+      "block": "dark_oak_planks",
+      "rationale": "The signature saltcrag cover: riven pine and spruce shingle, split thin and blackened with pitch — the roof of the better cottages and skippers' houses. It answers the gale and shares the boatyard's tar identity with the cladding, reading dead black at L20 across the whole pitch.",
+      "provenance": [
+        "riven-softwood-shingle-tarred",
+        "tar-and-pitch"
+      ],
+      "band": "roof",
+      "tier": "dominant"
+    },
+    {
+      "role": "roof.course.stairs",
+      "block": "dark_oak_stairs",
+      "rationale": "The pitched run of tarred shingle, coursed up the slope — split softwood lapped against the wind, blackened with the same pitch as the field so the courses read as one tarred skin.",
+      "provenance": [
+        "riven-softwood-shingle-tarred",
+        "tar-and-pitch"
+      ],
+      "band": "roof",
+      "tier": "preserve"
+    },
+    {
+      "role": "roof.course.slab",
+      "block": "dark_oak_slab",
+      "rationale": "The flat shingle course at eave and shallow break — the same riven, tarred softwood laid level where the pitch eases, member of the roof family with the field and stairs.",
+      "provenance": [
+        "riven-softwood-shingle-tarred",
+        "tar-and-pitch"
+      ],
+      "band": "roof",
+      "tier": "preserve"
+    },
+    {
+      "role": "roof.ridge",
+      "block": "deepslate_tiles",
+      "rationale": "Slate is the prestige cover, landed costly by boat and saved for the church and merchant frontages — but a single bought course can cap the ridge, the most beaten seam of a tarred roof. Spent where it earns its keep and nowhere else; dark grey at L23, it sits honestly against the black shingle.",
+      "provenance": [
+        "imported-slate"
+      ],
+      "band": "roof",
+      "tier": "preserve"
+    },
+    {
+      "role": "roof.field.thatch",
+      "block": "hay_block",
+      "rationale": "The modest cottage that can't run shingle pins down steep reed and marram cut from the dune and salt-marsh — cheap, local, raked against the gale. It belongs in the roofscape as the poorer neighbour's pitch, a preserve alternate to the tarred dominant.",
+      "provenance": [
+        "reed-and-marram-thatch"
+      ],
+      "band": "roof",
+      "tier": "preserve"
+    },
+    {
+      "role": "roof.field.turf",
+      "block": "moss_block",
+      "rationale": "The poorest and most exposed outbuildings are turfed — sod cut from the thin coastal soil over a bark underlayer, cheap and stormproof. Green-grey living roof (L43), the bottom rung of the roofing economy held on the byre and net-store.",
+      "provenance": [
+        "turf-and-sod"
+      ],
+      "band": "roof",
+      "tier": "preserve"
+    },
+    {
+      "role": "door.main",
+      "block": "spruce_door",
+      "rationale": "Doors are joined from sawn softwood deal landed across the sea — the only milled timber a fishing family buys — and tarred where they face the weather. Plain pine board, no proud oak in this country.",
+      "provenance": [
+        "sawn-softwood-deal-pine-spruce",
+        "tar-and-pitch"
+      ],
+      "band": null,
+      "tier": null
+    },
+    {
+      "role": "window.glazing",
+      "block": "glass_pane",
+      "rationale": "Window glass is bought-in and small, set in a sawn-deal frame — a few panes where a curer or skipper can pay, kept tight against salt wind. The joinery is the imported deal; the glass is the rare indulgence it holds.",
+      "provenance": [
+        "sawn-softwood-deal-pine-spruce"
+      ],
+      "band": null,
+      "tier": null
+    },
+    {
+      "role": "window.shutter",
+      "block": "spruce_trapdoor",
+      "rationale": "Most openings get a tarred deal shutter rather than glass — sawn softwood board, pitch-soaked, barred shut against the gale. Cheaper than glazing and the working norm on lesser windows.",
+      "provenance": [
+        "sawn-softwood-deal-pine-spruce",
+        "tar-and-pitch"
+      ],
+      "band": null,
+      "tier": null
+    },
+    {
+      "role": "opening.lintel",
+      "block": "spruce_log",
+      "rationale": "Heads over door and window are spanned with what the sea returns — driftwood baulks and salvaged ship-timber, tarry and dark (L17), too crooked for boards but sound enough to carry rubble above an opening. Salvage doing the structural work milled deal is too thin for.",
+      "provenance": [
+        "driftwood-and-salvaged-ship-timber"
+      ],
+      "band": null,
+      "tier": null
+    },
+    {
+      "role": "chimney.stack",
+      "block": "cobblestone",
+      "rationale": "The hearth that warms the cottage and dries the catch is stacked from the same gathered fieldstone as the walls, bedded in lime — rough rubble carried up around the flue. Fire here is met with what the headland gives, not with dear fired brick.",
+      "provenance": [
+        "gathered-grey-granite-fieldstone",
+        "lime-mortar-and-limewash"
+      ],
+      "band": null,
+      "tier": null
+    },
+    {
+      "role": "chimney.cap",
+      "block": "stone_bricks",
+      "rationale": "The one place a humble stack earns worked stone: a dressed capstone at the chimney head, where weather attacks hardest and rubble won't hold a clean weathering. A scarce mason's touch, spent because fire and gale together demand it.",
+      "provenance": [
+        "dressed-squared-stone"
+      ],
+      "band": null,
+      "tier": null
+    }
+  ],
+  "decoration": [
+    {
+      "item": "door-lantern",
+      "block": "lantern",
+      "where": [
+        "door",
+        "eave"
+      ]
+    },
+    {
+      "item": "lantern-hook-chain",
+      "block": "chain",
+      "where": [
+        "eave",
+        "door"
+      ]
+    },
+    {
+      "item": "window-storm-bars",
+      "block": "iron_bars",
+      "where": [
+        "window"
+      ]
+    }
+  ]
+}

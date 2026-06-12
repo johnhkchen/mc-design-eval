@@ -1,0 +1,72 @@
+You are the proportion author of a Minecraft pattern-book builder. A MATERIAL STORY and the
+style's derived PALETTE follow. State the style's proportion rules — the numbers a generator
+obeys so buildings of this style read right.
+
+Reason from the place: timber lengths and wall material set storey heights; the roofing
+economy sets pitch (thatch and shingle want steep; turf and plank tolerate shallow); wealth
+and window glass set how often openings interrupt a wall. Rules you must satisfy:
+
+- storey heights in whole blocks, storey_min <= storey_max, both >= 1 (vernacular dwellings
+  sit around 3-4; grand or lofty traditions may go higher);
+- pitch_classes ONLY from the realizable vocabulary: 0.5 (shallow, slab courses), 1
+  (45-degree stair courses), 2 (steep); list every pitch the style genuinely uses,
+  most common first;
+- opening spacing in wall cells, opening_min <= opening_max, both >= 1.
+
+## The material story
+Style name: saltcrag
+Setting: A storm-grey fishing village wedged between granite headland and a cold northern sea, built of beach stone and tarred boat-timber.
+
+Geology: The coast is hard, old, and wet: granite and grey basalt break the surface as headlands and skerries, and the tideline is paved with rounded beach cobble and shingle. Stone is gathered more than quarried — fieldstone cleared from the thin soil and boulders hauled off the strand. The ground is too cold and sour for good brick clay, so fired material is rare and dear; lime for mortar and limewash is burned in small coastal kilns from shell-sand and sea-worn limestone.
+Timber: Trees here are wind-stunted and scarce — no proud oak. The working wood is softwood: pine and spruce, partly cut from sheltered inland valleys but mostly sawn deals landed from across the sea, plus driftwood and the offcuts of the boatyards. It comes as boards and battens, not great beams, so timber is spent thinly — clinker-lapped cladding, plank gables, and shingles — and everything that faces the weather is soaked in tar.
+Wealth: This is a working village of fishing families, curers, and a few boat-owning skippers — modest means, hard weather, nothing spared for show. Dressed and squared stone appears only where the community pools its money: the church, the harbour quay and slip, the merchant's counting-house and storehouse. Ordinary cottages are rough fieldstone or tarred board, their one indulgence a coat of limewash to seal the wind out.
+Roofing economy: Roofs answer to the gale, not to fashion. The poorest and most exposed are turfed — sod laid over birch-bark and battens, cheap and stormproof. Where reed and marram grass can be cut, steep thatch is pinned down against the wind. Skippers and the better houses run riven softwood shingle, tarred black. Slate is the prestige roof — imported, costly, and saved for the church and the harbour-front merchant houses that can afford to be seen.
+Trade: The sea is the road. Out goes salted and dried fish; in comes everything the cold ground can't give: sawn softwood deals, tar and pitch by the barrel for hulls and cladding, salt for the curing sheds, slate for the few who can pay, window glass and a little iron. Imported material is spent where it earns its keep — on the quay, the curing houses, and the merchant frontages that face arriving boats.
+
+Available materials:
+- gathered grey granite fieldstone (abundant; geology — boulders and fieldstone cleared from the headland and strand) — typical use: cottage walls, byre and store footings, harbour foundations
+- rounded beach cobble and shingle (abundant; geology — the tideline of the cold coast) — typical use: wall infill, rough paving, quay backing and yard surfaces
+- dressed squared stone (scarce; wealth_class — pooled money for community works, worked by a mason) — typical use: church quoins and openings, quay edge, merchant-house frontage, doorways
+- lime mortar and limewash (common; geology — shell-sand and sea-stone burned in small coastal kilns) — typical use: bedding rough stone, sealing and whitening cottage walls against the wind
+- tarred softwood clinker boarding (common; timber — pine/spruce deals and boatyard offcuts, soaked in imported tar) — typical use: weather-facing cladding, gable ends, sheds and net lofts
+- riven softwood shingle, tarred (common; timber — split pine/spruce, blackened with pitch) — typical use: roofs of better cottages and skippers' houses
+- turf and sod (abundant; roofing_economy — sod cut from the thin coastal soil over a bark underlayer) — typical use: stormproof roofs on the poorest and most exposed dwellings and outbuildings
+- reed and marram thatch (common; roofing_economy — grass cut from dune and salt-marsh) — typical use: steep pinned-down roofs on modest cottages
+- imported slate (imported; trade — landed by boat, costly) — typical use: church roof and harbour-front merchant houses — the prestige cover
+- sawn softwood deal (pine/spruce) (imported; trade — milled boards shipped across the sea) — typical use: framing, doors, shutters, jetties and quay decking
+- tar and pitch (imported; trade — barrelled, for boats and weatherproofing) — typical use: blackened cladding, shingles, and storm-facing timber
+- driftwood and salvaged ship-timber (common; timber — washed ashore or saved from wrecks and worn boats) — typical use: lintels, fence posts, slipway baulks, ad-hoc repairs
+- wrought iron fittings (scarce; trade — a little hard metal landed by boat) — typical use: door hinges, mooring rings, hooks and brackets
+
+## The derived palette
+- wall.field.ground → cobblestone [base/dominant]: The ground storey is what the headland gives for free — granite boulders and fieldstone cleared from the thin soil and hauled off the strand, laid up rough and bedded in shell-burned lime. Undressed grey rubble is the structural truth of every working cottage; at L53 it holds the storm-grey of the place without pretending to be worked.
+- wall.finish.limewash → white_terracotta [base/preserve]: The cottage's one indulgence: a coat of lime burned from shell-sand in the coastal kilns, brushed over the rubble to seal the wind out and whiten the seaward face. It is an accent of thrift, not a clad finish — a sealing skin spared for where weather drives hardest, so it preserves over the grey field rather than replacing it.
+- wall.infill.cobble → mossy_cobblestone [base/preserve]: Rounded beach cobble and shingle off the tideline pack the footings and the rough infill — sea-worn, weed-stained in its joints from the cold wet coast. It reads damper and more organic than the cleared fieldstone (L49), the strand's stone as opposed to the headland's.
+- wall.field.upper → dark_oak_planks [upper/dominant]: The loft and gable are boarded, not built — softwood deals and boatyard offcuts lapped clinker-fashion and soaked in barrelled tar, the same craft that seals a hull. Timber here comes as thin boards, so it is spent on the light upper storey; the tar drives it black (L20), the truest dark of the village.
+- wall.dressing.quoin → stone_bricks [upper/preserve]: Squared dressed stone is dear — it appears only where the community pools its money, worked by a mason. On an ordinary frontage it surfaces sparingly as quoins and worked jambs at corners and doorways, the one place rough rubble can't turn a clean edge. Scarce by economy, so preserve, never field.
+- roof.field → dark_oak_planks [roof/dominant]: The signature saltcrag cover: riven pine and spruce shingle, split thin and blackened with pitch — the roof of the better cottages and skippers' houses. It answers the gale and shares the boatyard's tar identity with the cladding, reading dead black at L20 across the whole pitch.
+- roof.course.stairs → dark_oak_stairs [roof/preserve]: The pitched run of tarred shingle, coursed up the slope — split softwood lapped against the wind, blackened with the same pitch as the field so the courses read as one tarred skin.
+- roof.course.slab → dark_oak_slab [roof/preserve]: The flat shingle course at eave and shallow break — the same riven, tarred softwood laid level where the pitch eases, member of the roof family with the field and stairs.
+- roof.ridge → deepslate_tiles [roof/preserve]: Slate is the prestige cover, landed costly by boat and saved for the church and merchant frontages — but a single bought course can cap the ridge, the most beaten seam of a tarred roof. Spent where it earns its keep and nowhere else; dark grey at L23, it sits honestly against the black shingle.
+- roof.field.thatch → hay_block [roof/preserve]: The modest cottage that can't run shingle pins down steep reed and marram cut from the dune and salt-marsh — cheap, local, raked against the gale. It belongs in the roofscape as the poorer neighbour's pitch, a preserve alternate to the tarred dominant.
+- roof.field.turf → moss_block [roof/preserve]: The poorest and most exposed outbuildings are turfed — sod cut from the thin coastal soil over a bark underlayer, cheap and stormproof. Green-grey living roof (L43), the bottom rung of the roofing economy held on the byre and net-store.
+- door.main → spruce_door: Doors are joined from sawn softwood deal landed across the sea — the only milled timber a fishing family buys — and tarred where they face the weather. Plain pine board, no proud oak in this country.
+- window.glazing → glass_pane: Window glass is bought-in and small, set in a sawn-deal frame — a few panes where a curer or skipper can pay, kept tight against salt wind. The joinery is the imported deal; the glass is the rare indulgence it holds.
+- window.shutter → spruce_trapdoor: Most openings get a tarred deal shutter rather than glass — sawn softwood board, pitch-soaked, barred shut against the gale. Cheaper than glazing and the working norm on lesser windows.
+- opening.lintel → spruce_log: Heads over door and window are spanned with what the sea returns — driftwood baulks and salvaged ship-timber, tarry and dark (L17), too crooked for boards but sound enough to carry rubble above an opening. Salvage doing the structural work milled deal is too thin for.
+- chimney.stack → cobblestone: The hearth that warms the cottage and dries the catch is stacked from the same gathered fieldstone as the walls, bedded in lime — rough rubble carried up around the flue. Fire here is met with what the headland gives, not with dear fired brick.
+- chimney.cap → stone_bricks: The one place a humble stack earns worked stone: a dressed capstone at the chimney head, where weather attacks hardest and rubble won't hold a clean weathering. A scarce mason's touch, spent because fire and gale together demand it.
+
+Answer in JSON using this schema:
+{
+  // minimum storey height in blocks (>= 1)
+  storey_min: int,
+  // maximum storey height in blocks (>= storey_min)
+  storey_max: int,
+  // roof pitches the style uses, ONLY from: 0.5 (shallow slab), 1 (stair), 2 (steep)
+  pitch_classes: float[],
+  // minimum spacing between wall openings, in cells (>= 1)
+  opening_min: int,
+  // maximum spacing between wall openings, in cells (>= opening_min)
+  opening_max: int,
+}

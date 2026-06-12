@@ -1,0 +1,135 @@
+{
+  "items": [
+    {
+      "name": "surface.weatherface",
+      "purpose": "Paints the limewash finish (white_terracotta) onto only the windward/seaward elevation of a cottage, sealing the grey rubble where weather drives hardest while preserving the field everywhere else.",
+      "parameter_sketch": "{ finishBlock: string, face: windward|seaward|all|{azimuth:int}, coverage: number(0..1, band height from ground/eave datum), preserveRoles: string[], minRun: int }",
+      "composition_notes": "Consumes occupancy+zones+spec (reads the building's exposed/seaward azimuth from spec). Runs AFTER surface.fill (rubble field present) and AFTER dressing.quoin + opening-dressing (so their cells can be named in preserveRoles), BEFORE surface.strip-salt. Chains under surface.paint priority so the finish never wins over quoins/jambs.",
+      "test_plan": "Unit: box occupancy + seaward azimuth → only that face takes finishBlock, opposite face untouched; preserveRoles cells skipped; coverage=0.5 finishes only the lower contiguous band; idempotent re-run is a no-op; committed run replays byte-identical.",
+      "preview_subject": "A single-storey rubble (cobblestone) cube with one quoined corner and one window, seaward face = +X; card shows white_terracotta on the +X elevation only.",
+      "context": "Saltcrag's one indulgence is a coat of lime burned from shell-sand in the coastal kilns, brushed over the rubble to seal the wind and whiten the seaward face. It is an accent of thrift, not a clad finish — spared for where weather drives hardest, so it must preserve over the grey field rather than replace it, and must never bury the scarce dressed stone (quoins, jambs). The pass therefore needs the building's exposed azimuth from the spec and paints only that elevation, optionally only a band of it.",
+      "acceptance_criteria": [
+        "Only cells on the designated weather face receive finishBlock; all other elevations keep their field block.",
+        "Cells whose role is in preserveRoles (quoin, jamb, lintel) are never overpainted.",
+        "coverage<1 limits the finish to a single contiguous band from the datum, rendered as a run of at least minRun.",
+        "Re-running the pass on its own output produces zero new placements (idempotent).",
+        "Replay of a committed run is byte-identical."
+      ]
+    },
+    {
+      "name": "surface.clinker",
+      "purpose": "Breaks the upper-storey board face (dark_oak_planks) into horizontal lapped weatherboard courses, casting the clinker shadow-line that reads as tarred boatyard cladding rather than a flat black wall.",
+      "parameter_sketch": "{ board: string(full cube), lip: string(slab|trapdoor proud member), courseEvery: int(rows per board), zone: upper|gable|named, skipOpenings: bool }",
+      "composition_notes": "Pass consuming occupancy+zones. Runs AFTER surface.fill has placed the upper field block and AFTER hollow; operates only on cells tagged upper/gable. Independent of surface.weatherface (the boarded upper is not limewashed). Emits the proud-lip placements + report; surface.strip-salt must treat lip members as kept, not specks.",
+      "test_plan": "Unit: a flat N-high board wall gets a lip every courseEvery rows at uniform spacing; lip members are non-cube and leave occupancy/footprint unchanged; a window head interrupts the lip; a gable triangle gets courses parallel to the eave that stop at the rake; idempotent; replays byte-identical.",
+      "preview_subject": "A 1-block-thick gable triangle of dark_oak_planks over a short rubble storey; card shows the lap lips stepping up the gable parallel to the eave.",
+      "context": "The saltcrag loft and gable are boarded, not built — softwood deals and boatyard offcuts lapped clinker-fashion and soaked in tar, the same craft that seals a hull. A flat fill of dark_oak_planks reads as a black slab; the style is recognizable only when the boards lap, each course overhanging the one below to throw a horizontal shadow line. The brush adds that proud lip (a slab or trapdoor) on a regular course spacing without changing the wall's structural footprint.",
+      "acceptance_criteria": [
+        "A flat board zone receives a proud lip every courseEvery rows at uniform spacing.",
+        "Lip members are non-cube (slab/trapdoor) and leave the wall occupancy and footprint unchanged.",
+        "A window or door head within the zone interrupts the lip (no lap crosses an opening).",
+        "On a gable triangle the courses run parallel to the eave and terminate at the rake.",
+        "Idempotent re-run yields no new placements; replay is byte-identical."
+      ]
+    },
+    {
+      "name": "dressing.quoin",
+      "purpose": "Lays squared dressed stone (stone_bricks) as an alternating long-and-short quoin up each external vertical corner of the rubble walls — the one place rough cobble can't turn a clean edge.",
+      "parameter_sketch": "{ block: string, pattern: alternating|stacked, toothing: {long:int, short:int}, height: full|storey|int, corners: all|street-facing }",
+      "composition_notes": "Pass consuming occupancy+features+kit; detects external convex vertical corners. Runs AFTER surface.fill (rubble field present) and BEFORE surface.weatherface and surface.paint priority (quoins enter preserveRoles / highest preserve rank). Shares the worked-stone material with opening-dressing's jambs at doorways.",
+      "test_plan": "Unit: a rectangular storey yields quoins on all four vertical corners; pattern=alternating tooths long/short up each corner; height=storey stops at the storey datum; an L-plan finds every convex external corner; quoin cells survive a strip-salt pass; idempotent; replays byte-identical.",
+      "preview_subject": "A one-storey rubble (cobblestone) cube; card shows stone_bricks quoins toothing up all four corners with the field left rubble between.",
+      "context": "In saltcrag, squared dressed stone is dear and worked by a mason, so it surfaces only where the community pools its money — as quoins at corners and worked jambs at doorways, where rough rubble can't hold a clean edge. A quoin is the alternating long-and-short toothing of dressed blocks up a building's external corner: both structural and the village's one frontage indulgence in stone. The pass must find the external vertical corners of the wall occupancy and lay the dressed block in that rhythm, leaving the rubble field between.",
+      "acceptance_criteria": [
+        "Every external vertical corner of the wall occupancy receives the quoin block.",
+        "The toothing alternates long/short up the corner per the pattern and toothing params.",
+        "height=storey stops the quoin at the storey datum; height=full runs corner to eave.",
+        "Quoin cells are flagged preserve so surface.weatherface and surface.strip-salt never overpaint or remove them.",
+        "Idempotent re-run yields no new placements; replay is byte-identical."
+      ]
+    },
+    {
+      "name": "roof.thatch",
+      "purpose": "Builds a steep, thick thatched roof (hay_block) with overhanging eaves and a rounded ridge roll — the poorer cottage's raked-reed pitch in the saltcrag roofscape.",
+      "parameter_sketch": "{ pitch: number(from classes [2,1,0.5], biased steep), block: string(hay_block), thickness: int(>=2 reed depth), eaveOverhang: int, ridgeRoll: bool }",
+      "composition_notes": "Roof construct in the same slot as roof.gable/roof.hip; consumes the roof spec (footprint, ridge line, pitch) and emits cells. Mutually exclusive with roof.gable on a given roof. NOT followed by surface.roof-courses — thatch is uncoursed, unlike the tarred-shingle field.",
+      "test_plan": "Unit: footprint+pitch → thatch mass is >= thickness deep across the whole pitch (no single-block skin); eave overhangs the wall by eaveOverhang on the eaves sides; ridgeRoll=true adds a continuous rounded cap along the ridge; steeper pitch raises the apex monotonically for fixed footprint; solid reed bed (no hollow); replays byte-identical.",
+      "preview_subject": "A rectangular storey footprint; card shows a steep hay_block roof with overhanging eaves and a rounded ridge sitting over the walls.",
+      "context": "The modest saltcrag cottage that can't run shingle pins down steep reed and marram cut from the dune and salt-marsh, raked thick against the gale. Thatch reads as itself through depth and shape — a thick bed, eaves that overhang to throw water clear of the rubble, and a rounded roll along the ridge — none of which a flat material swap on a plain gable gives. It is the poorer neighbour's pitch, steep where the tarred-shingle cottages are coursed.",
+      "acceptance_criteria": [
+        "The thatch mass is at least `thickness` blocks deep across the entire pitch (no thin single-block skin).",
+        "The eave overhangs the supporting wall by `eaveOverhang` on the eaves sides.",
+        "ridgeRoll=true produces a continuous rounded cap along the ridge line.",
+        "Steeper `pitch` raises the apex height monotonically for a fixed footprint.",
+        "Replay of a committed run is byte-identical."
+      ]
+    }
+  ],
+  "parametrization_notes": [
+    {
+      "need": "Gabled cottage / skipper's-house roof in tarred dark_oak shingle, capped at the ridge with a single bought slate course.",
+      "existing_brush": "roof.gable",
+      "note": "pitch from the style's pitch classes [2,1,0.5]; blocks: { field: dark_oak_planks, ridge: deepslate_tiles } so the one bought slate course caps the most-beaten seam. The ridge entry is selective — give it only to better cottages and skippers' houses; omit blocks.ridge on poorer ones."
+    },
+    {
+      "need": "roof.course.stairs — the tarred shingle run coursed up the slope.",
+      "existing_brush": "course.stairs",
+      "note": "block: dark_oak_stairs, winding: walk. Laid across the pitch by surface.roof-courses so the courses read as one tarred skin with the field."
+    },
+    {
+      "need": "roof.course.slab — the flat shingle course at eave and shallow break.",
+      "existing_brush": "course.slab",
+      "note": "block: dark_oak_slab, kind: bottom. Member of the roof family with the field and stairs, laid level where the pitch eases."
+    },
+    {
+      "need": "Coat the whole pitch into lapped stair+slab courses (the tarred-shingle roof skin).",
+      "existing_brush": "surface.roof-courses",
+      "note": "Runs after roof.gable; consumes the roof zone and emits dark_oak_stairs (walk) + dark_oak_slab (bottom) courses so field/stairs/slab read as one tarred skin. Do NOT run it over a roof.thatch roof."
+    },
+    {
+      "need": "opening.lintel — flat head over door/window spanned in salvaged ship-timber.",
+      "existing_brush": "head.flat",
+      "note": "block: spruce_log — the driftwood baulk carrying rubble above the opening. Chosen over arch because saltcrag heads are flat salvage, not worked arches."
+    },
+    {
+      "need": "Worked jambs at doorways plus door, glazing, and shutter placement (stone_bricks jamb, spruce_door, glass_pane, spruce_trapdoor).",
+      "existing_brush": "opening-dressing",
+      "note": "Kit supplies door=spruce_door, glazing=glass_pane, shutter=spruce_trapdoor, jamb=stone_bricks. The pass places them per feature and coordinates the flat lintel (head.flat with spruce_log) above each opening."
+    },
+    {
+      "need": "chimney.stack + chimney.cap — fieldstone flue with a dressed capstone.",
+      "existing_brush": "chimney",
+      "note": "block: cobblestone (rubble carried up around the flue), cap: slab (or crown), capBlock: stone_bricks — the one mason's touch at the head where fire and gale together demand it."
+    },
+    {
+      "need": "wall.infill.cobble — beach-cobble footing / rough infill course at the wall base.",
+      "existing_brush": "plinth",
+      "note": "block: mossy_cobblestone, courses: 1–2, inset: 0–1. The sea-worn strand stone packing the footings, reading damper and more organic than the cleared fieldstone field above it."
+    },
+    {
+      "need": "Rough rubble field walls — grey fieldstone ground storey, tarred boards on the light upper storey.",
+      "existing_brush": "surface.fill",
+      "note": "skin: exposure, minRun tuned to the 3–6 cell opening spacing. Field block resolved by zone — ground=cobblestone, upper=dark_oak_planks — before surface.clinker laps the upper boards."
+    },
+    {
+      "need": "Keep scarce materials from being fielded over (quoins, jambs, limewash).",
+      "existing_brush": "surface.paint",
+      "note": "priority orders preserve = [quoin/jamb stone_bricks, limewash white_terracotta] above the field blocks (cobblestone, dark_oak_planks) so the scarce dressings and the seaward finish survive overlap resolution. (Memory: presence is a fixpoint — the preserve set is the no-op set.)"
+    },
+    {
+      "need": "roof.field.turf — green-grey living sod roof on the poorest outbuildings (byre, net-store).",
+      "existing_brush": "roof.gable",
+      "note": "Low pitch (0.5) with blocks.field = moss_block, no coursing pass after. Material + low-pitch parametrization — the sod read here is flat enough not to need roof.thatch's depth/ridge-roll geometry."
+    },
+    {
+      "need": "Hollow the cottage shell and lay storey floors at the 3–4 block storey height.",
+      "existing_brush": "hollow + floorplan",
+      "note": "hollow emits the interior removeSet (true holes, eave stays widest layer); floorplan lays storey floors at storey heights of 3–4. Standard shell prep, unchanged for saltcrag."
+    },
+    {
+      "need": "Clean stray single-block specks left by quoining / clinker lapping.",
+      "existing_brush": "surface.strip-salt",
+      "note": "minKeep / minExtent tuned to honor the preserve flags — quoin, jamb, lintel and lap-lip members are never stripped even when isolated."
+    }
+  ]
+}

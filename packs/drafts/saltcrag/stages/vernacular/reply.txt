@@ -1,0 +1,89 @@
+{
+  "style_name": "saltcrag",
+  "setting": "A storm-grey fishing village wedged between granite headland and a cold northern sea, built of beach stone and tarred boat-timber.",
+  "geology": "The coast is hard, old, and wet: granite and grey basalt break the surface as headlands and skerries, and the tideline is paved with rounded beach cobble and shingle. Stone is gathered more than quarried — fieldstone cleared from the thin soil and boulders hauled off the strand. The ground is too cold and sour for good brick clay, so fired material is rare and dear; lime for mortar and limewash is burned in small coastal kilns from shell-sand and sea-worn limestone.",
+  "timber": "Trees here are wind-stunted and scarce — no proud oak. The working wood is softwood: pine and spruce, partly cut from sheltered inland valleys but mostly sawn deals landed from across the sea, plus driftwood and the offcuts of the boatyards. It comes as boards and battens, not great beams, so timber is spent thinly — clinker-lapped cladding, plank gables, and shingles — and everything that faces the weather is soaked in tar.",
+  "wealth_class": "This is a working village of fishing families, curers, and a few boat-owning skippers — modest means, hard weather, nothing spared for show. Dressed and squared stone appears only where the community pools its money: the church, the harbour quay and slip, the merchant's counting-house and storehouse. Ordinary cottages are rough fieldstone or tarred board, their one indulgence a coat of limewash to seal the wind out.",
+  "roofing_economy": "Roofs answer to the gale, not to fashion. The poorest and most exposed are turfed — sod laid over birch-bark and battens, cheap and stormproof. Where reed and marram grass can be cut, steep thatch is pinned down against the wind. Skippers and the better houses run riven softwood shingle, tarred black. Slate is the prestige roof — imported, costly, and saved for the church and the harbour-front merchant houses that can afford to be seen.",
+  "trade": "The sea is the road. Out goes salted and dried fish; in comes everything the cold ground can't give: sawn softwood deals, tar and pitch by the barrel for hulls and cladding, salt for the curing sheds, slate for the few who can pay, window glass and a little iron. Imported material is spent where it earns its keep — on the quay, the curing houses, and the merchant frontages that face arriving boats.",
+  "available_materials": [
+    {
+      "material": "gathered grey granite fieldstone",
+      "source": "geology — boulders and fieldstone cleared from the headland and strand",
+      "abundance": "abundant",
+      "typical_use": "cottage walls, byre and store footings, harbour foundations"
+    },
+    {
+      "material": "rounded beach cobble and shingle",
+      "source": "geology — the tideline of the cold coast",
+      "abundance": "abundant",
+      "typical_use": "wall infill, rough paving, quay backing and yard surfaces"
+    },
+    {
+      "material": "dressed squared stone",
+      "source": "wealth_class — pooled money for community works, worked by a mason",
+      "abundance": "scarce",
+      "typical_use": "church quoins and openings, quay edge, merchant-house frontage, doorways"
+    },
+    {
+      "material": "lime mortar and limewash",
+      "source": "geology — shell-sand and sea-stone burned in small coastal kilns",
+      "abundance": "common",
+      "typical_use": "bedding rough stone, sealing and whitening cottage walls against the wind"
+    },
+    {
+      "material": "tarred softwood clinker boarding",
+      "source": "timber — pine/spruce deals and boatyard offcuts, soaked in imported tar",
+      "abundance": "common",
+      "typical_use": "weather-facing cladding, gable ends, sheds and net lofts"
+    },
+    {
+      "material": "riven softwood shingle, tarred",
+      "source": "timber — split pine/spruce, blackened with pitch",
+      "abundance": "common",
+      "typical_use": "roofs of better cottages and skippers' houses"
+    },
+    {
+      "material": "turf and sod",
+      "source": "roofing_economy — sod cut from the thin coastal soil over a bark underlayer",
+      "abundance": "abundant",
+      "typical_use": "stormproof roofs on the poorest and most exposed dwellings and outbuildings"
+    },
+    {
+      "material": "reed and marram thatch",
+      "source": "roofing_economy — grass cut from dune and salt-marsh",
+      "abundance": "common",
+      "typical_use": "steep pinned-down roofs on modest cottages"
+    },
+    {
+      "material": "imported slate",
+      "source": "trade — landed by boat, costly",
+      "abundance": "imported",
+      "typical_use": "church roof and harbour-front merchant houses — the prestige cover"
+    },
+    {
+      "material": "sawn softwood deal (pine/spruce)",
+      "source": "trade — milled boards shipped across the sea",
+      "abundance": "imported",
+      "typical_use": "framing, doors, shutters, jetties and quay decking"
+    },
+    {
+      "material": "tar and pitch",
+      "source": "trade — barrelled, for boats and weatherproofing",
+      "abundance": "imported",
+      "typical_use": "blackened cladding, shingles, and storm-facing timber"
+    },
+    {
+      "material": "driftwood and salvaged ship-timber",
+      "source": "timber — washed ashore or saved from wrecks and worn boats",
+      "abundance": "common",
+      "typical_use": "lintels, fence posts, slipway baulks, ad-hoc repairs"
+    },
+    {
+      "material": "wrought iron fittings",
+      "source": "trade — a little hard metal landed by boat",
+      "abundance": "scarce",
+      "typical_use": "door hinges, mooring rings, hooks and brackets"
+    }
+  ]
+}
