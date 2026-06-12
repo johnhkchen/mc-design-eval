@@ -394,6 +394,22 @@ export function assembleDraftPack({ story, paletteEntries, decoration, proportio
  *   ownedNames = the registry's brush names (injected — vocabulary-authority stays upstream)
  * @returns {{draft:object, deduped:object, owned:string[], nearTone:object[], absorbedSeats:object[]}}
  */
+/**
+ * Recover the registry's brush names FROM a committed decompose stage's `registry_state`
+ * digest (brush-catalog registryDigest lines: `- <name> (<kind>; ...`). Replays must derive
+ * the draft against the registry AS RECORDED at formation time, never the live table — the
+ * registry GROWS (E-32 is the growing), and a replay that read the live table would drift
+ * the moment a factory-specified brush lands (surfaced live by this ticket's own brushes).
+ * @param {string} digest  the decompose inputs.json `registry_state` text
+ * @returns {string[]} brush names, in digest order
+ */
+export function ownedNamesFromRegistryDigest(digest) {
+  if (typeof digest !== "string") throw new Error("ownedNamesFromRegistryDigest: digest must be the registry_state text");
+  const names = [...digest.matchAll(/^- (\S+) \(/gm)].map((m) => m[1]);
+  if (!names.length) throw new Error("ownedNamesFromRegistryDigest: no brush lines found — not a registry digest");
+  return names;
+}
+
 export function deriveDraftFromStages({ story, palette, proportions, backlog, styleSlug, ownedNames, table = null }) {
   const deduped = enforceRegistryDedup(backlog, ownedNames);
   const ownedSet = new Set(ownedNames);

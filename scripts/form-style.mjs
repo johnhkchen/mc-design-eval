@@ -56,6 +56,7 @@ import {
   deriveDraftFromStages,
   comparePacks,
   draftReadme,
+  ownedNamesFromRegistryDigest,
 } from "../src/pack/formation.mjs";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
@@ -105,10 +106,12 @@ const readRel = (rel) => readFileSync(join(ROOT, rel), "utf8");
 // ---------------------------------------------------------------- shared derivation tail
 
 /** Stage expecteds → the emitted artifacts {rel → content}. ONE derivation for live and
- *  offline (deriveDraftFromStages + the curated comparison when --compare names a pack). */
-function deriveOutputs({ story, palette, proportions, backlog, compare }) {
+ *  offline (deriveDraftFromStages + the curated comparison when --compare names a pack).
+ *  ownedNames: live mode passes the live registry; offline passes the registry AS RECORDED
+ *  in the committed decompose inputs (the registry grows — a replay must not see the growth). */
+function deriveOutputs({ story, palette, proportions, backlog, compare, ownedNames }) {
   const { draft, deduped, owned, nearTone, absorbedSeats } = deriveDraftFromStages({
-    story, palette, proportions, backlog, styleSlug: slug, ownedNames: brushNames(),
+    story, palette, proportions, backlog, styleSlug: slug, ownedNames,
   });
   const comparison = compare ? comparePacks(draft, loadStylePack(join(ROOT, compare))) : null;
   const files = {
@@ -156,6 +159,7 @@ if (offline) {
     proportions: expected.proportions,
     backlog: expected.decompose,
     compare: runLedger.compare ?? null,
+    ownedNames: ownedNamesFromRegistryDigest(inputs.decompose.registry_state),
   });
   for (const [rel, content] of Object.entries(files)) {
     if (!existsSync(join(ROOT, rel)) || readRel(rel) !== content) drifted.push(rel);
@@ -320,7 +324,9 @@ const backlog = await runStage(
 );
 
 // --- pure assembly + the draft record
-const { deduped, owned, absorbedSeats, files } = deriveOutputs({ story, palette, proportions, backlog, compare: comparePath });
+const { deduped, owned, absorbedSeats, files } = deriveOutputs({
+  story, palette, proportions, backlog, compare: comparePath, ownedNames: brushNames(),
+});
 for (const [rel, content] of Object.entries(files)) await write(rel, content);
 await writeRunLedger({
   accepted: true,

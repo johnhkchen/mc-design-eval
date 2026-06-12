@@ -14,8 +14,7 @@ import { fileURLToPath } from "node:url";
 
 import { bamlBatch } from "../baml/bridge.mjs";
 import { loadStylePack } from "./style-pack.mjs";
-import { brushNames } from "./idiom-registry.mjs";
-import { deriveDraftFromStages, comparePacks, draftReadme } from "./formation.mjs";
+import { deriveDraftFromStages, comparePacks, draftReadme, ownedNamesFromRegistryDigest } from "./formation.mjs";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 const DRAFTS = "packs/drafts";
@@ -70,7 +69,8 @@ test(`formation replay: committed drafts re-derive byte-identically (${slugs.len
       proportions: expected.proportions,
       backlog: expected.decompose,
       styleSlug: slug,
-      ownedNames: brushNames(),
+      // the registry AS RECORDED at formation time — the live table grows (E-32)
+      ownedNames: ownedNamesFromRegistryDigest(readJson(`${DRAFTS}/${slug}/stages/decompose/inputs.json`).registry_state),
     });
     assert.equal(jsonOf(draft), read(`${DRAFTS}/${slug}/draft.json`), `${slug}: draft.json drifted`);
     const comparePath = readJson(`${DRAFTS}/${slug}/ledger.json`).compare ?? null;
