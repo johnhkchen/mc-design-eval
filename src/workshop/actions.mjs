@@ -5,17 +5,21 @@
 // the brush paints).
 //
 // THE VOCABULARY IS THE TICKET'S, THE APPLIERS ARE THE LANDED SEAMS':
-//   • adjust-params  → program.mjs applyParamAdjust (re-realization is implicit every round)
+//   • adjust-params  → TWO groundings (T-136-01): an elementId naming a program ELEMENT merges
+//     spec keys (program.mjs applyParamAdjust, the original form); an elementId naming a source
+//     MASS pulls the geometry levers (geometry.mjs applyGeometryAdjust — the T-133 measured
+//     surface, re-validated and recompiled through the registry). Element grounding wins a tie.
 //   • spray-paint    → the E-23 canvas: projectSurface + a fromBlock→toBlock surface recolor
-//   • re-recognize   → DECLARED BUT UNWIRED: recognition is S-125's seam (parallel, disjoint).
-//     The name parses (vocabulary-valid), but DEFAULT_APPLIERS carries no applier, so the loop
-//     records `action-unavailable` and continues. S-125 injects its applier here later.
+//   • re-recognize   → grounded against program elements OR source masses (resolved to the
+//     owning mass); the APPLIER stays the runner's to inject (the model transport may not enter
+//     the pure core — ISO4). Without an injected applier the loop records `unavailable`.
 //
 // PURE — no GL, no IO, no Date/random — runs under the `src/**/*.test.mjs` glob.
 
 import { projectSurface, resolveDir } from "../view/surface-grid.mjs";
 import { bareBlock } from "../view/occupancy.mjs";
 import { applyParamAdjust } from "./program.mjs";
+import { GEOMETRY_PARAM_KEYS, resolveMass, applyGeometryAdjust } from "./geometry.mjs";
 
 export const WORKSHOP_ACTION_SCHEMA = "workshop-action/v1";
 
@@ -37,25 +41,43 @@ export function packVocabulary(pack) {
 function fail(msg) { throw new Error(`parseAction: ${msg}`); }
 
 /**
- * Validate a model-proposed action against the CURRENT program and pack. Throws on anything
- * malformed or off-vocabulary (the critique parser routes the throw into the bounded re-ask
- * policy). Returns a frozen action carrying only sanctioned keys.
+ * Validate a model-proposed action against the CURRENT program, pack and (when the run carries
+ * one) source building-program. Throws on anything malformed or off-vocabulary (the critique
+ * parser routes the throw into the bounded re-ask policy). Returns a frozen action carrying only
+ * sanctioned keys; a geometry-form adjust and a mass-resolved re-recognize carry `massId`.
  * @param {object} obj  the model's `action` object
- * @param {{program:object, pack:object}} ctx
+ * @param {{program:object, pack:object, source?:object|null}} ctx
  */
-export function parseAction(obj, { program, pack }) {
+export function parseAction(obj, { program, pack, source = null }) {
   if (obj === null || typeof obj !== "object" || Array.isArray(obj)) fail("action must be an object");
   const name = obj.action;
   if (!ACTION_NAMES.includes(name)) fail(`action must be one of ${ACTION_NAMES.join(", ")} (got "${name}")`);
 
   if (name === "adjust-params") {
-    if (!program.elements.some((el) => el.id === obj.elementId)) {
-      fail(`adjust-params.elementId "${obj.elementId}" is not a program element (have: ${program.elements.map((e) => e.id).join(", ")})`);
-    }
     if (obj.params === null || typeof obj.params !== "object" || Array.isArray(obj.params) || Object.keys(obj.params).length === 0) {
       fail("adjust-params.params must be a non-empty object");
     }
-    return Object.freeze({ action: name, elementId: obj.elementId, params: Object.freeze(structuredClone(obj.params)) });
+    const isElement = program.elements.some((el) => el.id === obj.elementId);
+    if (isElement) {
+      return Object.freeze({ action: name, elementId: obj.elementId, params: Object.freeze(structuredClone(obj.params)) });
+    }
+    // geometry form: the elementId names a source MASS (T-136-01 — the measured surface)
+    if (source?.masses?.some((m) => m.id === obj.elementId)) {
+      const keys = Object.keys(obj.params);
+      const off = keys.filter((k) => !GEOMETRY_PARAM_KEYS.includes(k));
+      if (off.length > 0) {
+        fail(`adjust-params on mass "${obj.elementId}": unknown geometry param(s) ${off.join(", ")} (have: ${GEOMETRY_PARAM_KEYS.join(", ")})`);
+      }
+      if (keys.some((k) => !Number.isFinite(obj.params[k]))) fail("geometry params must be finite numbers");
+      if ("eaveHeight" in obj.params && ("storeys" in obj.params || "storeyHeight" in obj.params)) {
+        fail("eaveHeight is exclusive with storeys/storeyHeight — it factorizes into both");
+      }
+      return Object.freeze({
+        action: name, elementId: obj.elementId, massId: obj.elementId,
+        params: Object.freeze(structuredClone(obj.params)),
+      });
+    }
+    fail(`adjust-params.elementId "${obj.elementId}" is not a program element${source ? " or a source mass" : ""} (have: ${program.elements.map((e) => e.id).join(", ")}${source ? `; masses: ${source.masses.map((m) => m.id).join(", ")}` : ""})`);
   }
 
   if (name === "spray-paint") {
@@ -84,11 +106,17 @@ export function parseAction(obj, { program, pack }) {
     });
   }
 
-  // re-recognize — vocabulary-valid; the applier seam decides availability
-  if (!program.elements.some((el) => el.id === obj.elementId)) {
-    fail(`re-recognize.elementId "${obj.elementId}" is not a program element`);
+  // re-recognize — vocabulary-valid; the applier seam decides availability. Grounded against
+  // program elements OR source masses; when a source rides, the named part resolves to its
+  // owning mass (the compile naming rule) so the applier re-samples one whole mass.
+  const resolved = resolveMass(source, obj.elementId);
+  if (!program.elements.some((el) => el.id === obj.elementId) && resolved === null) {
+    fail(`re-recognize.elementId "${obj.elementId}" is not a program element${source ? " or a source mass" : ""}`);
   }
-  return Object.freeze({ action: name, elementId: obj.elementId });
+  return Object.freeze({
+    action: name, elementId: obj.elementId,
+    ...(resolved !== null ? { massId: resolved.massId } : {}),
+  });
 }
 
 const namespaced = (id) => (id.includes(":") ? id : `minecraft:${id}`);
@@ -127,14 +155,28 @@ export function sprayPaintApplier({ occ, action }) {
   return { placements, painted: placements.length, skipped };
 }
 
-/** The default applier table. `re-recognize` is deliberately ABSENT (S-125's seam) — selecting it
- *  yields {kind:"unavailable"} so the round is recorded, never crashed. Injectable for tests and
- *  for S-125 to wire recognition in. */
+/** The default applier table. `re-recognize` is deliberately ABSENT — its applier calls the
+ *  model, so the RUNNER injects it (the exchange precedent; ISO4 keeps transport out of the
+ *  core). Selecting it uninjected yields {kind:"unavailable"} so the round is recorded, never
+ *  crashed. The adjust-params applier routes by grounding: geometry form (massId — pure, so it
+ *  IS a default) when the run carries a source; element form unchanged. */
 export const DEFAULT_APPLIERS = Object.freeze({
-  "adjust-params": ({ program }, action) => ({
-    kind: "program",
-    program: applyParamAdjust(program, { elementId: action.elementId, params: action.params }),
-  }),
+  "adjust-params": ({ program, source = null, pack = null }, action) => {
+    if (action.massId === undefined) {
+      return {
+        kind: "program",
+        program: applyParamAdjust(program, { elementId: action.elementId, params: action.params }),
+      };
+    }
+    if (!source || !pack) {
+      return { kind: "unavailable", reason: "geometry adjust needs the source building program (this run carries none)" };
+    }
+    const r = applyGeometryAdjust(
+      { source, pack, budget: { ...program.budget } },
+      { massId: action.massId, params: action.params },
+    );
+    return { kind: "geometry", program: r.program, source: r.source };
+  },
   "spray-paint": ({ occ }, action) => {
     const r = sprayPaintApplier({ occ, action });
     return { kind: "paint", placements: r.placements, painted: r.painted, skipped: r.skipped };
@@ -142,16 +184,17 @@ export const DEFAULT_APPLIERS = Object.freeze({
 });
 
 /**
- * Apply a parsed action. Returns the applier's result, or {kind:"unavailable"} when the action
- * has no wired applier (the loop ledgers it and moves on).
- * @param {{program:object, occ:object}} ctx
+ * Apply a parsed action. Returns the applier's result (possibly a Promise — an injected
+ * re-recognize applier is a metered exchange; the loop awaits), or {kind:"unavailable"} when the
+ * action has no wired applier (the loop ledgers it and moves on).
+ * @param {{program:object, occ:object, source?:object|null, pack?:object}} ctx
  * @param {object} action  a {@link parseAction} result
  * @param {{appliers?:object}} [opts]
  */
 export function applyAction(ctx, action, { appliers = DEFAULT_APPLIERS } = {}) {
   const applier = appliers[action.action];
   if (!applier) {
-    return { kind: "unavailable", reason: `action "${action.action}" has no wired applier in this workshop (S-125 seam pending)` };
+    return { kind: "unavailable", reason: `action "${action.action}" has no wired applier in this workshop (the runner injects the re-recognize exchange — T-136-01)` };
   }
   return applier(ctx, action);
 }
