@@ -11,8 +11,8 @@
       "lime-render": "Lime plaster over wattle — the cream infill panels between upper-storey frame timbers; never used at ground level where rain-splash erodes it.",
       "clay-bricks": "A small batch of kiln-fired brick — expensive and fire-safe, reserved for chimney caps above the roof line."
     },
-    "wealthClass": "Yeoman — dressed stone at corners and openings, cheap fieldstone elsewhere; no slate, no glass larger than a lattice pane.",
-    "roofingEconomy": "Sawn timber plank/shingle roofs at the steep 45° pitch class; ridge and eave edges boarded in the darker oak."
+    "wealthClass": "Yeoman — dressed stone at corners and openings, cheap fieldstone elsewhere; no slate, no glass larger than a lattice pane. The frame carries the household's ambition where stone cannot: a generous open hall storey runs tall (storey columns up to 5 blocks), the one proportion a timber-framed yeoman spends on.",
+    "roofingEconomy": "Sawn timber plank/shingle roofs at the steep 45° pitch class; ridge and eave edges boarded in the darker oak. The steeper pitch class (class 2, above 45°) is period-plausible too — a steep plank/shingle roof sheds the lowland's rain and snow and crowns the taller-walled hall, so the pack carries both the 45° and the steep class."
   },
   "palette": [
     {
@@ -131,8 +131,8 @@
     { "name": "floorplan", "params": {} }
   ],
   "proportions": {
-    "storeyHeight": { "min": 3, "max": 4 },
-    "pitchClasses": [1],
+    "storeyHeight": { "min": 3, "max": 5 },
+    "pitchClasses": [1, 2],
     "openingRhythm": { "minSpacing": 2, "maxSpacing": 5 }
   },
   "decoration": [

@@ -172,14 +172,16 @@ test("MP6 the ledger is complete: every dimensional parameter of every mass has 
 });
 
 test("MP7 sketch-wins for quantity: measured eave overrides the recognized storeys, band excursion recorded (AC1)", () => {
-  const sketch = makeSketch((x) => { x.proportions.eaveBlocks = 19.3; x.proportions.heightBlocks = 27.3; });
+  // T-141-01: rustic band widened to {3,5}; the eave is raised so the measured factoring still
+  // forces a storeyHeight EXCURSION (6, outside [3,5]) — the band-excursion case this test guards.
+  const sketch = makeSketch((x) => { x.proportions.eaveBlocks = 23.3; x.proportions.heightBlocks = 27.3; });
   const { program, dimensions, conflicts, attempt } =
     applyMeasuredProportions({ program: makeProgram(), sketch, pack });
   assert.equal(attempt, "fp:xz eave:measured", "the most-measured rung wins");
   assert.equal(program.masses[0].storeys, 4);
-  assert.equal(program.masses[0].storeyHeight, 5, "outside the pack band [3,4] — sketch wins");
+  assert.equal(program.masses[0].storeyHeight, 6, "outside the pack band [3,5] — sketch wins");
   const eave = dimensions.find((d) => d.parameter === "eaveHeight");
-  assert.deepEqual([eave.source, eave.measured, eave.used, eave.residual], ["measured", 19.3, 20, 0.7]);
+  assert.deepEqual([eave.source, eave.measured, eave.used, eave.residual], ["measured", 23.3, 24, 0.7]);
   assert.ok(conflicts.some((c) => c.parameter === "eaveHeight" && c.recognition === 8 && c.resolved === "sketch"));
   assert.ok(conflicts.some((c) => c.parameter === "storeyHeight.packBand" && c.resolved === "sketch"));
   // the band excursion is the ONLY tolerated validation finding — everything else still gates

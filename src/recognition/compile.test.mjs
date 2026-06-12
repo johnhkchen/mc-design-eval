@@ -147,7 +147,8 @@ test("steep roof idiom: family via the roof.gable row fallback; dormer seat clea
   const p = makeProgram((q) => {
     q.masses[0].roof.idiom = "roof.gable.steep";
     q.masses[0].roof.pitchClass = 2;
-  }); // not `validated`: rustic declares pitchClasses [1] — steep adoption is a pack decision
+  }); // constructed directly to isolate compile from validation — rustic now declares [1, 2]
+      // (T-141-01), so this would also validate; compile never gates on pitchClasses regardless
   const { workshopProgram: wp } = compileProgram(p, pack);
   const roof = wp.elements.find((e) => e.id === "main-roof");
   assert.equal(roof.idiom, "roof.gable.steep");

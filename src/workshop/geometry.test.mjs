@@ -72,9 +72,11 @@ test("G2 width/depth lever: rect resizes at fixed origin, ridge rise re-derives"
 });
 
 test("G3 pitchClass outside the pack vocabulary throws (the gate's message names it)", () => {
+  // T-141-01: rustic now carries [1, 2]; the surviving forbidden class is 3 — the message lists
+  // the widened vocabulary, the honest refusal for what the pack still does not realize.
   assert.throws(
     () => applyGeometryAdjust(ctx(), { massId: "main", params: { pitchClass: 3 } }),
-    /pitchClass 3 is outside the pack vocabulary \[1\]/,
+    /pitchClass 3 is outside the pack vocabulary \[1, 2\]/,
   );
 });
 
@@ -99,10 +101,41 @@ test("G3b pitchClass change lands when the pack vocabulary carries it (saltcrag)
   assert.ok(cells.length > 0, "the steepened program realizes (mixed block/stair courses)");
 });
 
-test("G3c a steep aim under a style with no steep class is the honest refusal (rustic)", () => {
+test("G3c rustic's new class-2 aim lands across the steep door (T-141-01 headroom)", () => {
+  // E-33 left the barns' class-1 pitch ceiling as the one surviving proportion gap; T-141-01 adds
+  // class 2 to the rustic pack. The aim now crosses the steep door on rustic's OWN vocabulary
+  // (mirrors G3b's saltcrag proof) instead of recording apply-failed.
+  const { program, source: revised } = applyGeometryAdjust(ctx(),
+    { massId: "main", params: { pitchClass: 2 } });
+  const roof = program.elements.find((e) => e.id === "main-roof");
+  assert.equal(roof.spec.pitch, 2, "the steeper class compiled through");
+  assert.equal(revised.masses[0].roof.idiom, "roof.gable.steep", "the aim re-aimed the idiom through the steep door");
+  assert.equal(roof.idiom, "roof.gable.steep", "the compiled element carries the steep door");
+  assert.ok(realizeProgram(program).cells.length > 0, "the steepened rustic program realizes");
+});
+
+test("G3e cottage wall-raise round-trips: eaveHeight 10 → storeyHeight 5 (T-141-01)", () => {
+  // The move the rustic storeyHeight band {3,4} refused in 5/6 E-33 workshop rounds. With the band
+  // widened to {3,5}, the measured eave factorizes into storeys 2 × storeyHeight 5 and recompiles
+  // coherently — the previously-refused wall-raise now lands through adjust-params.
+  const { program, source } = applyGeometryAdjust(ctx(), { massId: "main", params: { eaveHeight: 10 } });
+  const m = source.masses.find((x) => x.id === "main");
+  assert.equal(m.storeys, 2, "storeys held");
+  assert.equal(m.storeyHeight, 5, "the taller storey column now in band [3, 5]");
+  const shell = program.elements.find((e) => e.id === "main-shell");
+  const roof = program.elements.find((e) => e.id === "main-roof");
+  assert.equal(shell.spec.height, 10, "shell rose to the new eave");
+  assert.equal(roof.spec.eaveY, 10, "roof eave moved WITH the shell");
+  assert.ok(realizeProgram(program).cells.length > 0, "the taller program realizes");
+});
+
+test("G3f the pack band is the binding constraint, not a hidden schema ceiling (T-141-01)", () => {
+  // storeyHeight 6 is SCHEMA-valid (building-program max 6) but outside the rustic band [3, 5]:
+  // the refusal must name the PACK row, never a schema ceiling (the T-138-02 conflation). The pack
+  // stays strictly tighter than the schema so a refusal is legible to the model.
   assert.throws(
-    () => applyGeometryAdjust(ctx(), { massId: "main", params: { pitchClass: 2 } }),
-    /pitchClass 2 is outside the pack vocabulary \[1\]/,
+    () => applyGeometryAdjust(ctx(), { massId: "main", params: { storeyHeight: 6 } }),
+    /storeyHeight.*6 outside the pack band \[3, 5\]/,
   );
 });
 

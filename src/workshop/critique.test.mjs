@@ -163,7 +163,7 @@ test("S2 with a source: masses JSON, lever vocabulary, silhouette row, declared 
   assert.match(block, /THE SOURCE GEOMETRY/);
   assert.match(block, /"id": "main"/);
   assert.match(block, /pitchClass, eaveHeight, storeys, storeyHeight, width, depth/);
-  assert.match(block, /pitchClass must be one of \[1\]/);
+  assert.match(block, /pitchClass must be one of \[1,2\]/); // T-141-01: rustic gained class 2
   assert.match(block, /Silhouette now: ridge:eave/);
   assert.match(block, /Declared targets: ridge:eave 1\.4, roof share 0\.29, aspect 1\.19 \(tolerance 0\.1\)/);
   const args = critiqueRenderArgs({

@@ -33,7 +33,7 @@ Palette (role → block — the diegetic material assignments):
 - window.infill → spruce_fence: Open lattice fills for unglazed lights — thin sawn members reading as leaded/lattice grid.
 
 Idioms in use: roof.gable, roof.hip, roof.pyramid, dormer, chimney, jetty, plinth, arch, head.flat, course.stairs, course.slab, timber-frame, opening-dressing, hollow, floorplan.
-Proportions: storey height 3–4 blocks; pitch classes [1]; opening spacing 2–5 cells.
+Proportions: storey height 3–5 blocks; pitch classes [1,2]; opening spacing 2–5 cells.
 
 ## The brush registry (what we already own)
 - roof.gable (construct; consumes spec, emits cells) — params: pitch: number, blocks: object

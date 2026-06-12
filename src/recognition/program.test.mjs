@@ -107,7 +107,7 @@ test("off-vocabulary is rejected: unknown role, foreign pack, off-pack pitch", (
   for (const [mutate, re] of [
     [(p) => { p.masses[0].walls.ground.role = "wall.marble"; }, /not in the pack palette/],
     [(p) => { p.pack = "baroque"; }, /validated against/],
-    [(p) => { p.masses[0].roof.pitchClass = 2; }, /outside the pack vocabulary/],
+    [(p) => { p.masses[0].roof.pitchClass = 3; }, /outside the pack vocabulary/], // T-141-01: rustic now carries [1, 2]; 3 stays off-vocabulary
   ]) {
     const { ok, findings } = validateProgramAgainstPack(makeProgram(mutate), pack);
     assert.equal(ok, false);
@@ -138,8 +138,10 @@ test("roof idiom must be a realizable ridge-coherent pack construct", () => {
 });
 
 test("proportions: storeyHeight band, jetty needs an upper storey", () => {
+  // T-141-01: rustic band widened to {3,5}; 6 is the value the pack now refuses (schema max is 6,
+  // so the pack band — not the schema — is the binding constraint that names the refusal).
   const tall = validateProgramAgainstPack(
-    makeProgram((p) => { p.masses[0].storeyHeight = 5; }), pack);
+    makeProgram((p) => { p.masses[0].storeyHeight = 6; }), pack);
   assert.match(tall.findings[0].msg, /outside the pack band/);
 
   const flatJetty = validateProgramAgainstPack(

@@ -62,7 +62,7 @@ test("render args are deterministic and carry the whole vocabulary", () => {
   for (const name of ["roof.gable", "roof.hip", "roof.pyramid"]) assert.ok(a.pack_digest.includes(name));
   assert.ok(a.pack_digest.includes("timber-frame"), "treatments taught");
   assert.ok(a.schema_json.includes('"building-program/v1"'), "schema embedded");
-  assert.ok(a.pack_digest.includes("pitch classes [1]"), "pitch vocabulary taught");
+  assert.ok(a.pack_digest.includes("pitch classes [1,2]"), "pitch vocabulary taught"); // T-141-01: rustic gained class 2
   assert.ok(a.pack_digest.includes("concept-evidence > pack-assignment > vernacular-default"));
 });
 
