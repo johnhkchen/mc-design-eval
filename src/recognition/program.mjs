@@ -37,6 +37,7 @@ export const PROGRAM_REPLY_BUDGET = MAX_REPLY_ATTEMPTS;
  *  registry-level fact (which constructs take ridgeAxis), not a style or subject fact. */
 export const ROOF_LAYOUTS = Object.freeze({
   "roof.gable": Object.freeze({ ridge: true, gableEnds: true }),
+  "roof.gable.steep": Object.freeze({ ridge: true, gableEnds: true }), // T-134-01: >45° classes
   "roof.hip": Object.freeze({ ridge: true, gableEnds: false }),
   "roof.pyramid": Object.freeze({ ridge: false, gableEnds: false }),
 });

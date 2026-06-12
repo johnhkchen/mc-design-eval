@@ -84,7 +84,11 @@ export function laneSequence(lane) {
 /** The roof's {field, stairs, slab} family: stair/slab members ride ONLY when the program's
  *  field role resolves to the pack roof idiom's own declared field (no name derivation). */
 function roofBlocks(pack, roofIdiomName, fieldBlock) {
-  const params = pack.idioms.find((i) => i.name === roofIdiomName)?.params?.blocks ?? null;
+  // T-134-01: a pack that has not adopted the steep idiom by name still supplies the course
+  // family through its roof.gable row (same field-match rule — steep composes the SAME family,
+  // just on steeper steps).
+  const params = (pack.idioms.find((i) => i.name === roofIdiomName)
+    ?? (roofIdiomName === "roof.gable.steep" ? pack.idioms.find((i) => i.name === "roof.gable") : null))?.params?.blocks ?? null;
   if (params && params.field === fieldBlock) {
     return { field: fieldBlock, stairs: params.stairs ?? null, slab: params.slab ?? null };
   }
@@ -237,9 +241,13 @@ export function compileProgram(program, pack) {
       // back the face one cell in, so the dormer light is a sealed niche and the cheeks embed
       // in solid — watertight with stair-roofed dormers (stairs are fixtures and never seal)
       const front = facing === "+x" ? x1 : facing === "-x" ? rect.x0 : facing === "+z" ? z1 : rect.z0;
+      // T-134-01: the seat clears the wedge at the wall plane (surface = eaveY + pitch·1 there) —
+      // on steep classes the legacy eaveY+1 seat floods the 1×1 light with a tread; ⌈pitch⌉ = 1
+      // for every legacy class, so pitch ≤ 1 programs are byte-identical
+      const seatY = eaveY + Math.max(1, Math.ceil(pitch));
       us.forEach((u, i) => {
         const center = u + (width - 1) / 2;
-        const origin = facing.endsWith("x") ? [front, eaveY + 1, center] : [center, eaveY + 1, front];
+        const origin = facing.endsWith("x") ? [front, seatY, center] : [center, seatY, front];
         elements.push({
           id: `${m.id}-dormer-${i}`, kind: "idiom", idiom: "dormer",
           spec: { origin, facing, width, depth: dormerStyle.depth ?? 3, wallHeight: dormerStyle.wallHeight ?? 2,

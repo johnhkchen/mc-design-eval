@@ -143,6 +143,33 @@ test("off-family roof field realizes full-cube (no name derivation)", () => {
   assert.equal(roof.spec.blocks.slab, null);
 });
 
+test("steep roof idiom: family via the roof.gable row fallback; dormer seat clears the wedge (T-134-01)", () => {
+  const p = makeProgram((q) => {
+    q.masses[0].roof.idiom = "roof.gable.steep";
+    q.masses[0].roof.pitchClass = 2;
+  }); // not `validated`: rustic declares pitchClasses [1] — steep adoption is a pack decision
+  const { workshopProgram: wp } = compileProgram(p, pack);
+  const roof = wp.elements.find((e) => e.id === "main-roof");
+  assert.equal(roof.idiom, "roof.gable.steep");
+  assert.equal(roof.spec.pitch, 2);
+  // no roof.gable.steep row in the pack: the course family rides the roof.gable row
+  assert.equal(roof.spec.blocks.field, "spruce_planks");
+  assert.equal(roof.spec.blocks.stairs, "spruce_stairs");
+  const { eaveY, ridgeY, footprint } = roof.spec;
+  const perpSpan = footprint.z1 - footprint.z0 + 1; // ridge along x
+  assert.equal(ridgeY, eaveY + 2 * Math.floor((perpSpan - 1) / 2), "ridge formula scales with the class");
+  assert.equal((ridgeY - eaveY) % 2, 0, "the compiled ridge lands on the stepping");
+  for (const d of wp.elements.filter((e) => e.idiom === "dormer")) {
+    assert.equal(d.spec.origin[1], eaveY + 2, "the seat clears the wedge at the wall plane (eaveY + ⌈pitch⌉)");
+  }
+  // legacy classes keep the legacy seat byte-identically
+  const { workshopProgram: legacy } = compileProgram(validated(makeProgram()), pack);
+  const eave1 = legacy.elements.find((e) => e.id === "main-roof").spec.eaveY;
+  for (const d of legacy.elements.filter((e) => e.idiom === "dormer")) {
+    assert.equal(d.spec.origin[1], eave1 + 1);
+  }
+});
+
 test("declarations: bands carry exactly the assigned blocks; openings are world AABBs", () => {
   const { workshopProgram: wp } = compileProgram(validated(makeProgram()), pack);
   const { bands, symmetry, openings } = wp.declarations;

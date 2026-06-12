@@ -8,6 +8,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 import { roofSteepGableConstruct, STEEP_PITCH_CLASSES, STEEP_REFUSALS } from "./roof-steep.mjs";
+import { roofGableConstruct } from "../pack/idiom-registry.mjs";
 import { generateRoof, gableRecord } from "./roof-generate.mjs";
 import { dormerGable } from "../form/idiom-constructs.mjs";
 import { occupancyFromCells } from "./occupancy.mjs";
@@ -181,6 +182,16 @@ test("ST7: refusals are named findings, never approximations", () => {
   for (const [over, needle] of cases) {
     assert.throws(() => roofSteepGableConstruct(spec(over)), new RegExp(needle.slice(0, 40).replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), JSON.stringify(over));
   }
+});
+
+test("ST10: the door is single — roof.gable refuses classes above 45°, naming the steep brush", () => {
+  assert.throws(
+    () => roofGableConstruct(spec({ pitch: 2 })),
+    /steep classes are roof\.gable\.steep's contract/,
+  );
+  // and the legacy domain is untouched
+  const legacy = roofGableConstruct(spec({ pitch: 1, ridgeY: 3 }));
+  assert.ok(legacy.cells.length > 0);
 });
 
 test("ST8: deterministic and byte-stable", () => {

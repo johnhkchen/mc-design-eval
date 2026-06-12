@@ -119,6 +119,10 @@ test("semantic: proportions sanity and conformance vocabulary", () => {
   const weirdPitch = minimalPack({ proportions: { storeyHeight: { min: 3, max: 4 }, pitchClasses: [0.75], openingRhythm: { minSpacing: 2, maxSpacing: 5 } } });
   assert.ok(errsOf(validateStylePack(assertStylePack(weirdPitch), { blockTable: MINI_TABLE })).some((e) => /generator vocabulary/.test(e)));
 
+  // T-134-01: the steep classes are declarable (roof.gable.steep realizes 2 and 3)
+  const steep = minimalPack({ proportions: { storeyHeight: { min: 3, max: 4 }, pitchClasses: [3, 2, 1], openingRhythm: { minSpacing: 2, maxSpacing: 5 } } });
+  assert.ok(!errsOf(validateStylePack(assertStylePack(steep), { blockTable: MINI_TABLE })).some((e) => /generator vocabulary/.test(e)));
+
   const vibes = minimalPack({ conformance: { checks: ["vibes"] } });
   assert.ok(errsOf(validateStylePack(assertStylePack(vibes), { blockTable: MINI_TABLE })).some((e) => /unknown check "vibes"/.test(e)));
 });

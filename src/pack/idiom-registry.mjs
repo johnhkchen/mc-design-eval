@@ -93,6 +93,10 @@ export function roofGableConstruct(spec) {
   if (ridgeAxis !== "x" && ridgeAxis !== "z") fail("roofGableConstruct", 'spec.ridgeAxis must be "x"|"z"');
   if (!Number.isFinite(ridgeY) || ridgeY <= eaveY) fail("roofGableConstruct", "spec.ridgeY must exceed spec.eaveY");
   if (!Number.isFinite(pitch) || pitch <= 0) fail("roofGableConstruct", "spec.pitch must be > 0");
+  // T-134-01: classes above the stair's native 45° belong to roof.gable.steep — the legacy
+  // pitch>1 emission here was unnamed and unproven; a silent second door would be an
+  // approximation, and refusals are named findings (E-33).
+  if (pitch > 1) fail("roofGableConstruct", `spec.pitch ${pitch} exceeds the 45° stair course — steep classes are roof.gable.steep's contract`);
   const g = gableRecord({ footprint, ridgeAxis, eaveY, ridgeY, pitch });
   const { cells, counts, capKeys, bandFloor } = generateRoof([g], familyOfBlocks(blocks));
   return { cells, counts, capKeys, bandFloor, ridgeY };
@@ -199,7 +203,7 @@ export const IDIOM_REGISTRY = Object.freeze({
     kind: "construct", generate: roofGableConstruct, source: "src/view/roof-generate.mjs",
     tests: "src/pack/idiom-registry.test.mjs", composition: CONSTRUCT_IO,
     preview: { card: ["gable-ridge-z", "gable-ridge-x"] },
-    paramsSchema: { type: "object", properties: { pitch: { type: "number", exclusiveMinimum: 0 }, blocks: BLOCKS_FRAGMENT }, additionalProperties: false },
+    paramsSchema: { type: "object", properties: { pitch: { type: "number", exclusiveMinimum: 0, maximum: 1 }, blocks: BLOCKS_FRAGMENT }, additionalProperties: false },
   }),
   "roof.gable.steep": Object.freeze({
     kind: "construct", generate: roofSteepGableConstruct, source: "src/view/roof-steep.mjs",

@@ -170,9 +170,9 @@ export function validateStylePack(pack, { registry = IDIOM_REGISTRY, blockTable 
   const { storeyHeight, pitchClasses, openingRhythm } = pack.proportions;
   if (storeyHeight.min > storeyHeight.max) err("proportions.storeyHeight", "min exceeds max");
   if (openingRhythm.minSpacing > openingRhythm.maxSpacing) err("proportions.openingRhythm", "minSpacing exceeds maxSpacing");
-  const REALIZABLE_PITCHES = new Set([0.5, 1, 2]);
+  const REALIZABLE_PITCHES = new Set([0.5, 1, 2, 3]);
   for (const pc of pitchClasses) {
-    if (!REALIZABLE_PITCHES.has(pc)) err("proportions.pitchClasses", `pitch ${pc} is outside the generator vocabulary (0.5 slab, 1 stair, 2 steep)`);
+    if (!REALIZABLE_PITCHES.has(pc)) err("proportions.pitchClasses", `pitch ${pc} is outside the generator vocabulary (0.5 slab, 1 stair — roof.gable; 2/3 steep — roof.gable.steep)`);
   }
 
   // 5. conformance vocabulary
