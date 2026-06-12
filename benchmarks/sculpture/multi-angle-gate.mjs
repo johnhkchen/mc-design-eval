@@ -290,6 +290,13 @@ async function main() {
       views: Array.isArray(rec.views) && rec.views.length === MULTI_ANGLE_GATE.azimuths.length,
       shortCircuit: (rec.views ?? []).every((v) => v.coverage?.passed !== false || v.verdict === null),
       aggregate: rec.aggregate && (rec.aggregate.decided === true) !== (typeof rec.aggregate.refusal === "string"),
+      // T-144-01 (additive — pre-v2 records carry no `policy` and stay valid): a v2 budget record
+      // must carry the legacy ≤2 arithmetic beside it and a numeric minorBudget (dual reporting).
+      budget: rec.aggregate?.policy !== "multi-angle-budget/v2" || (
+        rec.aggregate.legacy && typeof rec.aggregate.legacy.passed === "boolean" &&
+        typeof rec.aggregate.minorBudget === "number" &&
+        typeof rec.aggregate.majorCount === "number" && typeof rec.aggregate.minorCount === "number"
+      ),
       sheet: typeof rec.sheet === "string" && existsSync(join(ROOT, rec.sheet)),
       // T-100 (additive — records without kitPresence stay valid): the recorded overall verdict
       // must equal the pure composition of the recorded aggregate and presence result.
@@ -558,7 +565,8 @@ async function main() {
     contract: {
       azimuths: [...azimuths], elevationDeg: RENDER_CONTRACT.elevationDeg,
       width: RENDER_CONTRACT.width, height: RENDER_CONTRACT.height,
-      gapBudget: MULTI_ANGLE_GATE.gapBudget, coverageThreshold: DEFAULT_COVERAGE_THRESHOLD,
+      gapBudget: MULTI_ANGLE_GATE.gapBudget, minorBudget: MULTI_ANGLE_GATE.minorBudget,
+      coverageThreshold: DEFAULT_COVERAGE_THRESHOLD,
       note: "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them",
     },
     zones: {
