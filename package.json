@@ -115,7 +115,8 @@
     "patternbook:saltcrag:offline": "node benchmarks/sculpture/pattern-book.mjs --all --offline --pack packs/saltcrag.json",
     "gate:patternbook:barn:saltcrag": "node benchmarks/sculpture/multi-angle-gate.mjs --subject barn --label patternbook-saltcrag --artifact workshop/barn--saltcrag/final-artifact.json --reference recognition/barn--saltcrag.artifact.json",
     "style:form": "node scripts/form-style.mjs",
-    "style:ratify": "node scripts/ratify-pack.mjs"
+    "style:ratify": "node scripts/ratify-pack.mjs",
+    "factory:receipts": "node scripts/factory-receipts.mjs --style saltcrag"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
