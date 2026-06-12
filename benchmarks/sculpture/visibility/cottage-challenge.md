@@ -12,10 +12,10 @@ Committed gate record `benchmarks/sculpture/multi-angle/cottage-challenge.json` 
 | -x+z | pass | pass | — |
 
 ## Band visibility
-- `band0`: **visible** — visible from [+x+z, +x-z, -x-z, -x+z], 392 exposure-skin cells
-- `band1`: **visible** — visible from [+x+z, +x-z, -x-z, -x+z], 361 exposure-skin cells
-- `roof`: **visible** — visible from [+x+z, +x-z, -x-z, -x+z], 885 exposure-skin cells
+- `band0`: **visible** — visible from [+x+z, +x-z, -x-z, -x+z], 1486 exposure-skin cells
+- `band1`: **visible** — visible from [+x+z, +x-z, -x-z, -x+z], 1482 exposure-skin cells
+- `roof`: **visible** — visible from [+x+z, +x-z, -x-z, -x+z], 896 exposure-skin cells
 
 Cross-view verdict: no hidden band.
 
-Census fidelity: re-derivation DRIFTS on 12 band-view(s) — recorded numbers replayed, drift named; exposure basis: rederived-with-drift.
+Census fidelity: re-derivation reproduces every committed denominator; exposure basis: rederived.

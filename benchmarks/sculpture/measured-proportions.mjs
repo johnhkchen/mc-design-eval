@@ -30,6 +30,7 @@ import { fileURLToPath } from "node:url";
 
 import { MULTI_ANGLE_GATE } from "../../src/config.mjs";
 import { guardedWriteRecord, preflightPins, loadTrackedSet, isTracked, ROTATE_FLAG } from "../../src/form/pin-guard.mjs";
+import { classifyWitnessRepro, retiredEntry, WITNESS_REPRO_VERDICT } from "../../src/form/witness-repro.mjs";
 import { loadStylePack } from "../../src/pack/style-pack.mjs";
 import { parseProgramReply } from "../../src/recognition/prompt.mjs";
 import {
@@ -110,18 +111,22 @@ async function derive(key, pack) {
     const bad = seeded.conformance.checks.filter((c) => !c.passed).map((c) => c.name).join(", ");
     throw new Error(`measured realization fails pack conformance (${bad}) — refusing to record it as a seed`);
   }
-  // before = the committed chain seed (the squat baseline), absent for a chain-less subject
+  // before = the committed chain seed (the squat baseline), absent for a chain-less subject. The
+  // seed is PINNED (T-142-01): `before` reads a live chain seed that a sanctioned rotation can move
+  // (T-138 did), so the record records the seed's sha — a future rotation is then a named SKIP via
+  // classifyWitnessRepro, never a silent `before` drift that reads as a bug.
   const chainSeedRel = chainRels(key, packRel).seed;
-  const before = existsSync(join(ROOT, chainSeedRel))
-    ? silhouetteRatios(JSON.parse(await readRel(chainSeedRel)))
-    : null;
+  const seedExists = existsSync(join(ROOT, chainSeedRel));
+  const seedText = seedExists ? await readRel(chainSeedRel) : null;
+  const before = seedExists ? silhouetteRatios(JSON.parse(seedText)) : null;
   const ratios = {
     before,
     beforeSource: before ? chainSeedRel : null,
     after: silhouetteRatios(seeded.workshopProgram),
     target: sketchTargetRatios(sketch),
   };
-  return { rels, programRecord, seeded, ratios };
+  const seedPin = seedExists ? { path: chainSeedRel, sha256: sha256(seedText) } : null;
+  return { rels, programRecord, seeded, ratios, seedPin };
 }
 
 async function renderEvidence(artifact, runKey) {
@@ -200,7 +205,7 @@ async function runLive(def, { rotate }) {
 
   const track = { stage: "derive" };
   try {
-    const { programRecord, seeded, ratios } = await derive(key, pack);
+    const { programRecord, seeded, ratios, seedPin } = await derive(key, pack);
     track.stage = "render";
     const evidence = await renderEvidence(seeded.artifact, rels.runKey);
     track.stage = "record";
@@ -211,7 +216,7 @@ async function runLive(def, { rotate }) {
       subject: key,
       runKey: rels.runKey,
       pack: pack.style,
-      inputs: programRecord.inputs,
+      inputs: { ...programRecord.inputs, ...(seedPin ? { chainSeed: seedPin } : {}) },
       program: { path: rels.program, attempt: programRecord.attempt,
                  sources: programRecord.dimensions.reduce((acc, d) => {
                    acc[d.source] = (acc[d.source] ?? 0) + 1; return acc;
@@ -252,6 +257,26 @@ async function runRepro(def) {
     console.error(`[measured --repro] ${rels.runKey}: no committed measured records — skipped`);
     return null;
   }
+  // SKIP-vs-FAIL guard (T-142-01): `ratios.before` reads the live chain seed. A committed record
+  // that pins the seed (post-T-142) classifies a seed change — a registered sanctioned rotation
+  // SKIPs (named), an unregistered change FAILs named (not a silent `before` drift). Records
+  // predating the pin fall through to the existing byte-compare.
+  const committedPre = JSON.parse(await readRel(rels.record));
+  const pinnedSeedSha = committedPre.inputs?.chainSeed?.sha256;
+  if (pinnedSeedSha) {
+    const seedRel = chainRels(key, packRel).seed;
+    const currentSeedSha = existsSync(join(ROOT, seedRel)) ? sha256(await readRel(seedRel)) : null;
+    const verdict = classifyWitnessRepro({ pinnedSourceSha: pinnedSeedSha, currentSourceSha: currentSeedSha, retired: retiredEntry(key, RETIRED_SEED) });
+    if (verdict.verdict === WITNESS_REPRO_VERDICT.SKIP) {
+      console.error(`[measured --repro] ${rels.runKey}: SKIP — ${verdict.reason}`);
+      return true; // an acceptable outcome (NOT null — a SKIP must not read as "no record")
+    }
+    if (verdict.verdict === WITNESS_REPRO_VERDICT.FAIL && currentSeedSha !== pinnedSeedSha) {
+      console.error(`[measured --repro] ${rels.runKey}: ${verdict.reason}`);
+      return false;
+    }
+    // GREEN (seed unchanged) → fall through to the full byte-compare below
+  }
   const pack = loadStylePack(join(ROOT, packRel));
   const problems = [];
   try {
@@ -288,6 +313,11 @@ const repro = argv.includes("--repro") || argv.includes("--offline");
 const rotate = argv.includes(ROTATE_FLAG);
 const packRel = argOf("--pack") ?? DEFAULT_PACK_REL;
 const ticketId = argOf("--ticket") ?? "T-133-01"; // the run's authority, named in the records
+
+// the sanctioned-rotation registry for the chain seed `ratios.before` reads (committed sidecar —
+// subject keys live there, not in this source, so the generalization self-grep stays clean). Empty
+// until a future seed rotation (T-143's bar) registers its retirement; T-142 REFRESHES `before`.
+const RETIRED_SEED = JSON.parse(await readRel("benchmarks/sculpture/retired-pins.json")).measured ?? [];
 
 const defs = subjectDefs();
 if (!all && !onlySubject) throw new Error(`pass --subject <${defs.map((d) => d.key).join("|")}> or --all`);

@@ -12,6 +12,10 @@
     "sketch": {
       "path": "benchmarks/sculpture/form-sketch/barn.json",
       "sha256": "8a0390e55ed0ef60a60c487c23a6b2bca47e5c03e4c5444d18cef2f9f44d69c1"
+    },
+    "chainSeed": {
+      "path": "benchmarks/sculpture/workshop/barn/program.json",
+      "sha256": "de8d79b889e1bf708561491b6e8a6a38f65748a623c870dba204d4cd7e3fbb84"
     }
   },
   "program": {
@@ -30,9 +34,9 @@
   },
   "ratios": {
     "before": {
-      "ridgeToEave": 2.4444,
-      "roofShare": 0.5909,
-      "aspect": 2
+      "ridgeToEave": 2.4,
+      "roofShare": 0.5833,
+      "aspect": 1.8462
     },
     "beforeSource": "benchmarks/sculpture/workshop/barn/program.json",
     "after": {

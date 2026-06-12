@@ -12,6 +12,10 @@
     "sketch": {
       "path": "benchmarks/sculpture/form-sketch/cottage.json",
       "sha256": "fec1a6691882ec6a372354bc6957d4f57d45e38488642da5cc4c83b4919cc7ca"
+    },
+    "chainSeed": {
+      "path": "benchmarks/sculpture/workshop/cottage/program.json",
+      "sha256": "a78802b22e0cc087d235d6ba3b52f4c8aa3516a522c8d10ce035138e120f8cbb"
     }
   },
   "program": {
@@ -30,9 +34,9 @@
   },
   "ratios": {
     "before": {
-      "ridgeToEave": 2.25,
-      "roofShare": 0.5556,
-      "aspect": 1.0769
+      "ridgeToEave": 1.55,
+      "roofShare": 0.3548,
+      "aspect": 1.1852
     },
     "beforeSource": "benchmarks/sculpture/workshop/cottage/program.json",
     "after": {

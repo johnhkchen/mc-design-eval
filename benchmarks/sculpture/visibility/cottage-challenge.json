@@ -60,93 +60,20 @@
   },
   "metric": "own",
   "censusCheck": {
-    "rederivedMatchesRecord": false,
-    "drift": [
-      {
-        "angle": "+x+z",
-        "band": "band0",
-        "recorded": 315,
-        "rederived": 97
-      },
-      {
-        "angle": "+x+z",
-        "band": "band1",
-        "recorded": 402,
-        "rederived": 144
-      },
-      {
-        "angle": "+x+z",
-        "band": "roof",
-        "recorded": 298,
-        "rederived": 300
-      },
-      {
-        "angle": "+x-z",
-        "band": "band0",
-        "recorded": 308,
-        "rederived": 150
-      },
-      {
-        "angle": "+x-z",
-        "band": "band1",
-        "recorded": 390,
-        "rederived": 92
-      },
-      {
-        "angle": "+x-z",
-        "band": "roof",
-        "recorded": 289,
-        "rederived": 293
-      },
-      {
-        "angle": "-x-z",
-        "band": "band0",
-        "recorded": 316,
-        "rederived": 233
-      },
-      {
-        "angle": "-x-z",
-        "band": "band1",
-        "recorded": 437,
-        "rederived": 144
-      },
-      {
-        "angle": "-x-z",
-        "band": "roof",
-        "recorded": 262,
-        "rederived": 255
-      },
-      {
-        "angle": "-x+z",
-        "band": "band0",
-        "recorded": 309,
-        "rederived": 169
-      },
-      {
-        "angle": "-x+z",
-        "band": "band1",
-        "recorded": 436,
-        "rederived": 184
-      },
-      {
-        "angle": "-x+z",
-        "band": "roof",
-        "recorded": 242,
-        "rederived": 233
-      }
-    ]
+    "rederivedMatchesRecord": true,
+    "drift": []
   },
   "exposure": {
-    "basis": "rederived-with-drift",
+    "basis": "rederived",
     "byBand": {
       "band0": {
-        "total": 392
+        "total": 1486
       },
       "band1": {
-        "total": 361
+        "total": 1482
       },
       "roof": {
-        "total": 885
+        "total": 896
       }
     }
   },
@@ -591,7 +518,7 @@
           "-x-z",
           "-x+z"
         ],
-        "exposedCells": 392
+        "exposedCells": 1486
       },
       "band1": {
         "status": "visible",
@@ -601,7 +528,7 @@
           "-x-z",
           "-x+z"
         ],
-        "exposedCells": 361
+        "exposedCells": 1482
       },
       "roof": {
         "status": "visible",
@@ -611,7 +538,7 @@
           "-x-z",
           "-x+z"
         ],
-        "exposedCells": 885
+        "exposedCells": 896
       }
     },
     "failures": [],

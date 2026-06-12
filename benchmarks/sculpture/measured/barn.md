@@ -19,13 +19,12 @@ program, artifact and ratios from the committed inputs (no model, no GL).
 
 - `footprint.d` (*): recognition 24 vs sketch 26 → **sketch**
 - `eaveHeight` (barn): recognition 9 vs sketch 10 → **sketch**
-- `storeyHeight.packBand` (barn): recognition "[3, 4]" vs sketch 5 → **sketch** — pack proportions are the fallback tier (S-133); excursion recorded
 
 ## Silhouette ratios (standalone diagnostic — S-135 owns the gate metric)
 
 | | ridge:eave | roof share | aspect |
 | --- | --- | --- | --- |
-| before (benchmarks/sculpture/workshop/barn/program.json) | 2.4444 | 0.5909 | 2 |
+| before (benchmarks/sculpture/workshop/barn/program.json) | 2.4 | 0.5833 | 1.8462 |
 | **after** (measured seed) | 2.4 | 0.5833 | 1.8462 |
 | target (sketch) | 2.1 | 0.5238 | 1.8462 |
 
