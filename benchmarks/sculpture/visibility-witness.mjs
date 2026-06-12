@@ -27,12 +27,13 @@ import { fileURLToPath } from "node:url";
 import { guardedWriteRecord, preflightPins, loadTrackedSet, isTracked, ROTATE_FLAG } from "../../src/form/pin-guard.mjs";
 import { MULTI_ANGLE_GATE_SCHEMA } from "../../src/form/multi-angle-gate.mjs";
 import { visibilityAwareCoverage, VISIBILITY_COVERAGE_SCHEMA, DEFAULT_COVERAGE_THRESHOLD } from "../../src/view/face-resemblance.mjs";
-import { surfaceZoneHistogram } from "../../src/view/zone-fill.mjs";
 import { artifactOccupancy } from "../../src/view/occupancy.mjs";
 import { reviveComponentPlan, planCensusZoneOf } from "../../src/view/component-plan.mjs";
 import { decodeImage } from "../../src/color/palette-extract.mjs";
 import { assertArtifact } from "../../src/artifact.mjs";
-import { GATE_SUBJECTS, deriveZones } from "./multi-angle-gate.mjs";
+// the census comes from the gate's own exported definition — the witness provably re-runs the
+// gate's census, and the zone-fill technique stays behind the gate runner's allowlisted door
+import { GATE_SUBJECTS, deriveZones, gateCensuses } from "./multi-angle-gate.mjs";
 
 export const VISIBILITY_WITNESS_SCHEMA = "visibility-witness/v1";
 
@@ -112,18 +113,20 @@ async function derive(subject, label) {
   const derived = deriveZones({ occ, conceptImg, matMap, fallbackPolicy: def.policy, componentPlan });
   const zoneOf = componentPlan ? planCensusZoneOf(derived.zoneOf, componentPlan, derived.bandNames ?? []) : derived.zoneOf;
 
-  // fidelity check: the re-derived per-view totals must reproduce the committed denominators
+  // fidelity check: the re-derived per-view totals (the gate's OWN census export) must reproduce
+  // the committed denominators
+  const censuses = gateCensuses(occ, zoneOf, judged.map((v) => v.angle), zones);
+  const rederivedByAngle = new Map(censuses.perView.map((c) => [c.angle, c.coverage]));
   const drift = [];
   for (const v of judged) {
-    const hist = surfaceZoneHistogram(occ, zoneOf, { faces: [v.angle], skin: "projection" });
+    const hist = rederivedByAngle.get(v.angle);
     for (const band of Object.keys(zones)) {
       const recorded = v.coverage.byZone[band]?.total ?? 0;
       const rederived = hist[band]?.total ?? 0;
       if (recorded !== rederived) drift.push({ angle: v.angle, band, recorded, rederived });
     }
   }
-  const exposureHist = surfaceZoneHistogram(occ, zoneOf, { skin: "exposure" });
-  const exposure = Object.fromEntries(Object.keys(zones).map((b) => [b, { total: exposureHist[b]?.total ?? 0 }]));
+  const exposure = Object.fromEntries(Object.keys(zones).map((b) => [b, { total: censuses.exposure[b]?.total ?? 0 }]));
 
   // the re-census: RECORDED rows through the visibility-aware arithmetic (both arithmetics out)
   const vis = visibilityAwareCoverage({

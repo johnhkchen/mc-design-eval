@@ -201,6 +201,20 @@ export function policyInShippedPalette(zones, { matMap, gridResult, artifact, ki
   return { zones: vocab.zones, substitution, kitOverrides, ship: vocab.sub, vocabulary: vocab };
 }
 
+/** THE gate census, exported (T-137): the per-view own-coverage censuses on each view's own
+ *  visible skin (diagonal projection) + the exposure-skin existence basis, in ONE definition the
+ *  live gate and the visibility witness both consume (the witness provably runs the gate's own
+ *  census; zone-fill stays behind this runner's allowlisted door). Deterministic, GL-free. */
+export function gateCensuses(occ, zoneOf, azimuths, zones) {
+  return {
+    perView: azimuths.map((a) => ({
+      angle: a,
+      coverage: ownCoverage(surfaceZoneHistogram(occ, zoneOf, { faces: [a], skin: "projection" }), zones),
+    })),
+    exposure: surfaceZoneHistogram(occ, zoneOf, { skin: "exposure" }),
+  };
+}
+
 /** The METERED ask through the reply policy (T-114-01). One thunk per view, closed over the
  *  FIXED prompt + pinned model once — every re-ask is byte-identical by construction. `seed`
  *  enters a committed malformed reply as attempt 1 (the --rejudge path). */
@@ -438,14 +452,11 @@ async function main() {
   // unchanged); what changed is the treatment of an EMPTY denominator: a band no gate view can see
   // is excluded (not-on-skin) or NAMED (not-visible-from-any-view when the exposure skin carries
   // it) instead of refusing the judge on invisibility. Both arithmetics land in the record.
-  const perViewCensus = azimuths.map((a) => ({
-    angle: a,
-    coverage: ownCoverage(surfaceZoneHistogram(occ, gateCensusZoneOf, { faces: [a], skin: "projection" }), zonesShipped),
-  }));
+  const censuses = gateCensuses(occ, gateCensusZoneOf, azimuths, zonesShipped);
   const vis = visibilityAwareCoverage({
-    views: perViewCensus,
+    views: censuses.perView,
     zones: zonesShipped,
-    exposure: surfaceZoneHistogram(occ, gateCensusZoneOf, { skin: "exposure" }),
+    exposure: censuses.exposure,
     threshold: DEFAULT_COVERAGE_THRESHOLD,
     metric: "own",
   });
