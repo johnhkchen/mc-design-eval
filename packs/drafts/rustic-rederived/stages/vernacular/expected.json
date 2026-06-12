@@ -1,0 +1,83 @@
+{
+  "style_name": "yeoman-pasture",
+  "setting": "An English yeoman's farmstead on managed lowland pasture, built from the field it stands in.",
+  "geology": "The pasture sheds fieldstone every winter — rounded, undressed cobbles the family clears by hand and stacks for footings, plinths, and the lower courses that must shrug off ground-damp. A small local quarry yields a workable freestone that can be squared and dressed, but it costs labour to win and cart, so dressed blocks are won in small lots and hoarded for the few places that earn them: quoins, jambs, sills, the hearth and chimney stack. Beneath the topsoil is clay, dug and worked for the cob-and-lime of lesser walls and puddled to line the kiln and the bread-oven; sand and gravel from the same ground stretch the lime mortar.",
+  "timber": "A managed oak coppice-with-standards is the yard's structural bank: the standards are hewn green into heavy frame — sill-beams, posts, tie-beams, principal rafters, the cruck or box-frame of cottage and barn alike — worked square with the adze, not the saw, and pegged, never nailed. The coppice underwood gives straight light poles for common rafters, ladder-rungs, hurdles and wattle. At the family's own sawpit the lesser logs are ripped into boards and planks for floors, doors, lofts, partitions and the barn's great doors; oak butts too knotty for board are riven instead into shingles and pales. Hazel and willow from the hedgerows are cut for the wattle panels infilled between the frame.",
+  "wealth_class": "A comfortable but careful freeholding household — land-rich in their own materials, cash-poor for anything bought in. The rule is plain: worked material is spent only where structure or weather demands it. Dressed stone appears at corners, openings and the chimney; everywhere else is rubble, cob, render or frame. The barn, though large, is the more frugally finished of the two — undressed throughout, render spared, glory spent on its timber frame and its doors rather than its skin. Ornament is the honest kind: a moulded oak lintel, a date carved on a tie-beam, the pattern of the framing itself.",
+  "roofing_economy": "There is no slate in this country and none is bought. Roofs are thatched from the farm's own straw and reed over the same coppiced rafters and battens — deep, steep, overhanging pitches that throw the rain clear of the rendered walls. The one fired exception sits at the roof's most punished joint: a small reserved batch of kiln-fired ridge-tile and the hearth's clay caps the ridge and crowns the chimney, where thatch would burn or fail. Riven oak shingle covers the few small things a fire-spark must not reach — a porch hood, a wellhead, a dovecote cap.",
+  "trade": "Almost nothing arrives from elsewhere, and what does is dear and spent thin. Window glass comes in only as small lattice panes — leaded quarries the size of a hand — set in the cottage's best rooms; everywhere else is an oak-shuttered or horn-filled opening, and the barn takes only slit vents. Iron is bought sparingly from the smith for strap-hinges, the barn-door pintles, latches, a few nails for the joinery the pegs can't hold. Lead is begged for the cottage's one casement came. Lime is half-bought, half-burned: a clamp-kiln on the farm fires the local chalk-stone into quicklime for the render that protects the upper walls and the limewash that brightens them.",
+  "available_materials": [
+    {
+      "material": "rounded fieldstone cobble (undressed, dry-laid or lime-bedded)",
+      "source": "cleared off the family's own pasture each season",
+      "abundance": "abundant",
+      "typical_use": "footings, plinths and the damp-shedding lower wall courses of both cottage and barn"
+    },
+    {
+      "material": "dressed quarry freestone (squared, tooled blocks)",
+      "source": "won in small lots from the small local quarry",
+      "abundance": "scarce",
+      "typical_use": "quoins, door and window jambs, sills, lintels, and the chimney stack — spent only where structure or weather demands"
+    },
+    {
+      "material": "cob / clay-and-lime daub",
+      "source": "clay dug from beneath the farm's topsoil, tempered with straw and sand",
+      "abundance": "abundant",
+      "typical_use": "the mass of lesser walls and the infill between frame, rendered over for weather"
+    },
+    {
+      "material": "lime render and limewash",
+      "source": "chalk-stone burned in the farm's own clamp-kiln, slaked and sanded",
+      "abundance": "common",
+      "typical_use": "rendering and whitening the upper walls of the cottage; barn render spared except where most exposed"
+    },
+    {
+      "material": "hewn structural oak (heavy frame timber)",
+      "source": "standards hewn green from the managed oak coppice",
+      "abundance": "common",
+      "typical_use": "sills, posts, tie-beams and principal rafters — the box/cruck frame of cottage and barn"
+    },
+    {
+      "material": "sawn oak board and plank",
+      "source": "lesser logs ripped at the family's own sawpit",
+      "abundance": "common",
+      "typical_use": "floors, lofts, doors, partitions, and the barn's great doors"
+    },
+    {
+      "material": "riven oak shingle and pale",
+      "source": "knotty oak butts split, not sawn, at the yard",
+      "abundance": "common",
+      "typical_use": "fire-safe small roofs and hoods — porch, wellhead, dovecote — and fencing pales"
+    },
+    {
+      "material": "coppice underwood and wattle (hazel/willow rods)",
+      "source": "the coppice underwood and the hedgerows",
+      "abundance": "abundant",
+      "typical_use": "common rafters, battens, and the woven wattle panels behind the daub"
+    },
+    {
+      "material": "straw / reed thatch",
+      "source": "the farm's own harvest straw and reed",
+      "abundance": "abundant",
+      "typical_use": "the deep steep main roofs of both cottage and barn, overhanging to shed rain off the render"
+    },
+    {
+      "material": "kiln-fired clay ridge-tile and hearth brick",
+      "source": "a small reserved batch fired in the farm's kiln",
+      "abundance": "scarce",
+      "typical_use": "the ridge line, chimney crown, hearth and bread-oven — the few places that must survive fire"
+    },
+    {
+      "material": "wrought iron fittings",
+      "source": "bought sparingly from the village smith",
+      "abundance": "imported",
+      "typical_use": "strap-hinges, barn-door pintles, latches and the few nails the pegged joinery cannot hold"
+    },
+    {
+      "material": "leaded lattice glazing (small quarry panes)",
+      "source": "the only glass bought in, carried from town",
+      "abundance": "imported",
+      "typical_use": "small lattice casements in the cottage's best rooms; lesser openings shuttered, the barn left to slit vents"
+    }
+  ]
+}

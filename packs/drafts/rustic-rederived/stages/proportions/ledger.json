@@ -1,0 +1,53 @@
+{
+  "schema": "style-formation-stage/v1",
+  "ticket": "T-130-01",
+  "fn": "DeriveProportions",
+  "model": "claude-opus-4-8",
+  "source": "live",
+  "transport": "claude -p subscription shim (sdk-binding requestText) — no metered API key",
+  "promptSha256": "b5a39d4e9275b25e3c8333bb12f5111d1d723547342d3ad2de4fad3c4bb0ce89",
+  "budget": 3,
+  "askCount": 1,
+  "accepted": true,
+  "replies": [
+    {
+      "attempt": 1,
+      "parsed": true,
+      "rawReply": "## yeoman-pasture — proportion rules\n\n**Reasoning from the place:**\n\n- **Storeys (3–5):** Heavy adzed oak frame on cob-and-rubble walls puts the dwelling squarely in the vernacular band — ground storey + a chambered/lofted upper, around 3–4 blocks each. But the great barn is *large*, raised tall on its principal posts to clear a loaded wain and stack the loft, so the style must tolerate a loftier ",
+      "usage": {
+        "input_tokens": 11624,
+        "cache_creation_input_tokens": 13897,
+        "cache_read_input_tokens": 15824,
+        "output_tokens": 1122,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 13897,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 11624,
+            "output_tokens": 1122,
+            "cache_read_input_tokens": 15824,
+            "cache_creation_input_tokens": 13897,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 13897
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "source": "live"
+    }
+  ],
+  "rawTexts": [
+    "## yeoman-pasture — proportion rules\n\n**Reasoning from the place:**\n\n- **Storeys (3–5):** Heavy adzed oak frame on cob-and-rubble walls puts the dwelling squarely in the vernacular band — ground storey + a chambered/lofted upper, around 3–4 blocks each. But the great barn is *large*, raised tall on its principal posts to clear a loaded wain and stack the loft, so the style must tolerate a loftier bay up to 5. Below 3 the frame can't carry a usable upper room.\n- **Pitch (2 dominant, then 1, then 0.5):** The roofing economy is thatch — \"deep, steep, overhanging\" to throw rain off the render, so **2 (steep)** is the everyday roof and most common by far. The fire-safe riven-oak-shingle hoods (porch, wellhead, dovecote) lay pitched **1 (stair)** courses, and the same shingle laid flat at eave and hood underside gives the shallow **0.5 (slab)** verge — both real but rare, reserved for the small things.\n- **Openings (2–5 cells):** A cash-poor, material-rich freeholding spends bought glass thin — small lattice only in the best rooms, everything else shuttered, the barn only slit-vented. Walls are interrupted *sparingly*, so spacing runs wide: at least 2 cells of solid wall between lights, up to 5 across the frugal barn skin.\n\n```json\n{\n  \"storey_min\": 3,\n  \"storey_max\": 5,\n  \"pitch_classes\": [2, 1, 0.5],\n  \"opening_min\": 2,\n  \"opening_max\": 5\n}\n```"
+  ]
+}

@@ -51,8 +51,9 @@ function DerivePalette(story_digest: string, source_keys: string, block_vocabula
       wall dressing/trim, roof field, roof trim, roof course members (stairs + slab of the roof
       family), door(s), window treatment, chimney if the story heats with fire;
     - role names are lowercase dotted (wall.field.ground, roof.trim, door.main);
-    - zone seats: where a role clearly lives in a band (base / upper / roof), say so — and give
-      each named band exactly ONE dominant; accents and trims are preserve;
+    - zone seats: where a role clearly lives in a band (base / upper / roof), give band AND tier
+      TOGETHER (a half-seat — either one alone — is dropped); give each named band exactly ONE
+      dominant; accents and trims are preserve;
     - the Lab L value beside each cube block is its true rendered lightness (0 black … 100
       white): use it — a "dark" material story choice must actually be dark on screen;
     - decoration is the small vocabulary of fittings (a door lantern, a window box) — optional,

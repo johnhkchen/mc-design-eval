@@ -1,0 +1,108 @@
+{
+  "schema": "style-formation-ledger/v1",
+  "ticket": "T-130-01",
+  "styleSlug": "rustic-rederived",
+  "briefSource": "brief-file docs/active/work/T-130-01/rustic-brief.txt",
+  "compare": "packs/rustic.json",
+  "model": "claude-opus-4-8",
+  "transport": "claude -p subscription shim (sdk-binding requestText) — no metered API key",
+  "generatedAt": "2026-06-12T00:52:52.937Z",
+  "accepted": true,
+  "refusedStage": null,
+  "stages": {
+    "vernacular": {
+      "fn": "AuthorMaterialStory",
+      "source": "live",
+      "promptSha256": "e18963c9f0b14353aa173fc7652ae09d42ad7f078c993ccfb8bb4f0c2f3ee612",
+      "askCount": 1,
+      "accepted": true,
+      "reused": true
+    },
+    "palette": {
+      "fn": "DerivePalette",
+      "source": "live",
+      "promptSha256": "16974618a88850aaa2fa505b236d8175f2f104fe8f896221fd916e3f35ceebff",
+      "askCount": 1,
+      "accepted": true
+    },
+    "proportions": {
+      "fn": "DeriveProportions",
+      "source": "live",
+      "promptSha256": "b5a39d4e9275b25e3c8333bb12f5111d1d723547342d3ad2de4fad3c4bb0ce89",
+      "askCount": 1,
+      "accepted": true
+    },
+    "decompose": {
+      "fn": "DecomposeBrushBacklog",
+      "source": "live",
+      "promptSha256": "4e5f05d6bcbef736a9e65a4c128f1cc61a93cb6c23d845565de341a46d75b7cb",
+      "askCount": 1,
+      "accepted": true
+    }
+  },
+  "dedup": {
+    "demotions": [],
+    "warnings": [
+      "parametrization note \"Squared stone jambs, sills and flat (never arched) lintels at the openings.\" names a brush the registry does not own (\"opening-dressing + head.flat\") — verify by hand before relying on it",
+      "parametrization note \"Small pitched/pyramidal roof structures for the dovecote cap and porch hood.\" names a brush the registry does not own (\"roof.pyramid / roof.gable\") — verify by hand before relying on it"
+    ]
+  },
+  "counts": {
+    "roles": 13,
+    "idioms": 9,
+    "newItems": 2,
+    "notes": 12
+  },
+  "absorbedSeats": [
+    {
+      "role": "wall.dressing.quoin",
+      "band": null,
+      "tier": "preserve"
+    },
+    {
+      "role": "wall.trim.frame",
+      "band": null,
+      "tier": "preserve"
+    },
+    {
+      "role": "roof.ridge",
+      "band": null,
+      "tier": "preserve"
+    },
+    {
+      "role": "roof.course.stairs",
+      "band": null,
+      "tier": "preserve"
+    },
+    {
+      "role": "roof.course.slab",
+      "band": null,
+      "tier": "preserve"
+    },
+    {
+      "role": "door.main",
+      "band": null,
+      "tier": "preserve"
+    },
+    {
+      "role": "window.glazing",
+      "band": null,
+      "tier": "preserve"
+    },
+    {
+      "role": "window.shutter",
+      "band": null,
+      "tier": "preserve"
+    },
+    {
+      "role": "chimney.stack",
+      "band": null,
+      "tier": "preserve"
+    },
+    {
+      "role": "chimney.cap",
+      "band": null,
+      "tier": "preserve"
+    }
+  ]
+}

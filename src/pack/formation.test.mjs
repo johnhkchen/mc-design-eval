@@ -18,6 +18,7 @@ import {
   classifyPalette,
   classifyProportions,
   classifyBacklog,
+  danglingSeats,
   stampValueChecks,
   seedIdiomParams,
   assembleDraftPack,
@@ -135,13 +136,32 @@ test("classifyPalette: each taught rule fails with the offender named", () => {
   one([{ ...ROLES[0], provenance: ["imported-marble"] }], /not a supplied source key/);
   one([{ ...ROLES[0], provenance: [] }], /no provenance citation/);
   one([ROLES[0], { ...ROLES[1], tier: "dominant" }], /two dominants/);
-  one([{ ...ROLES[0], band: "base", tier: null }], /band and tier must arrive together/);
   one([{ ...ROLES[1] }], /preserve entries but no dominant/);
   one([{ ...ROLES[0], role: "Wall Field" }], /not a lowercase dotted name/);
   one([ROLES[0], { ...ROLES[1], role: "wall.field", band: null, tier: null }], /duplicate role/);
   const deco = classifyPalette({ roles: ROLES, decoration: [{ item: "pot", block: "poppy", where: ["sill"] }] }, GATE);
   assert.equal(deco.ok, false);
   assert.match(deco.reason, /outside the supplied vocabulary/);
+});
+
+test("classifyPalette + danglingSeats: half-seats are ABSORBED, never rejected (handle, don't reject)", () => {
+  // the live failure shape: tier without band starved 3 re-asks before absorption
+  const dangling = [
+    { ...ROLES[0] },
+    { role: "wall.quoin", block: "stone_bricks", rationale: "dressed corners", provenance: ["gathered-fieldstone"], band: null, tier: "preserve" },
+    { role: "wall.jamb", block: "stone_bricks", rationale: "dressed jambs", provenance: ["gathered-fieldstone"], band: "trimband", tier: null },
+  ];
+  assert.deepEqual(classifyPalette({ roles: dangling, decoration: [] }, GATE), { ok: true });
+  assert.deepEqual(danglingSeats(dangling), [
+    { role: "wall.quoin", band: null, tier: "preserve" },
+    { role: "wall.jamb", band: "trimband", tier: null },
+  ]);
+  // the assembler drops the half-seats: no zone key survives
+  const entries = stampValueChecks(dangling, { table: T });
+  assert.equal("zone" in entries[1], false);
+  assert.equal("zone" in entries[2], false);
+  // a half-seated preserve never triggers the no-dominant rule (its band is not a named band)
+  assert.equal(classifyPalette({ roles: [ROLES[0], dangling[1]], decoration: [] }, GATE).ok, true);
 });
 
 test("classifyProportions: vocabulary + ordering gates (SAP coercion survivors)", () => {

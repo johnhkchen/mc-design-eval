@@ -1,0 +1,102 @@
+```json
+{
+  "items": [
+    {
+      "name": "surface.thatch",
+      "purpose": "Course and overhang the hay_block roof mass so it reads as deep thatch — straw projected clear of the rendered wall, rounded verge, ridge bedded under the brick tile — on the cottage and barn dominant roofs.",
+      "parameter_sketch": "{ overhang: integer(1..3 cells beyond wall plane), courseEvery: integer(hay_block band depth), verge: 'wrap'|'flush', ridgeBlock: string }",
+      "composition_notes": "Runs AFTER roof.gable emits the hay_block field + bricks ridge and AFTER surface.fill skins the walls (it needs the wall plane to project the eave clear of). Before opening-dressing touches any gable-end light. Must skip roof zones tagged as fire-safe shingle (porch hood / dovecote cap / wellhead) — those are course.stairs/course.slab via surface.roof-courses.",
+      "test_plan": "Given a pitch-2 gable of width W over a one-storey wall: (1) the eave row projects exactly `overhang` cells beyond the wall plane on both eave edges, measured at the plate line; (2) the bricks ridge course is preserved, never overwritten by hay_block; (3) output introduces no block id other than hay_block and the untouched ridge; (4) verge='wrap' adds hay_block down the gable rake, 'flush' does not; (5) running the pass over its own output is a no-op (byte-identical); (6) no thatch cell is placed below the wall plate.",
+      "preview_subject": "A single steep gable (pitch 2) capped with a bricks ridge over a one-storey rendered wall stub, no openings.",
+      "context": "Thatch is the largest surface of an English yeoman roof and the feature that most separates it from a slated house: straw and reed laid deep over coppiced rafters, pitched steep, and thrown well beyond the wall so rain clears the soft limewashed render instead of staining it. roof.gable already emits the hay_block mass and the bricks ridge; this pass gives that mass its read — coursing the straw, building the overhanging eave lip, rounding the verge, and bedding the fired ridge tile. Nothing in the registry currently expresses eave projection (roof.gable exposes only pitch and blocks), and thatch is a continuous mass, not the discrete courses surface.roof-courses lays.",
+      "acceptance_criteria": [
+        "Eave projects `overhang` cells beyond the wall plane on every eave edge, measured at the plate line.",
+        "The bricks ridge course survives untouched; no hay_block overwrites the fired ridge.",
+        "Output contains only hay_block plus the pre-existing bricks ridge — no foreign block ids.",
+        "verge='wrap' lays hay_block down the gable rake; verge='flush' leaves the rake bare.",
+        "Re-running the pass on its own output changes nothing (replay byte-identity).",
+        "The pass refuses any roof zone tagged shingle, leaving it for surface.roof-courses."
+      ]
+    },
+    {
+      "name": "wall.quoin",
+      "purpose": "Lay alternating long-short dressed stone_bricks quoins up every external corner so the hoarded worked stone reads only at the edges that earn it.",
+      "parameter_sketch": "{ block: string, rhythm: [long:int, short:int], returns: integer(cells per face), toBand: 'ground'|'eave'|'full' }",
+      "composition_notes": "Runs AFTER surface.fill/surface.paint set the cobble ground band and render upper band — the quoin overwrites the corner cells of both. Independent of timber-frame, but the corner cell is the quoin's, not the frame's, where they meet. Pairs with opening-dressing, which spends the same stone on the openings.",
+      "test_plan": "Given a rectangular occupancy footprint two storeys tall: (1) every external convex corner up to `toBand` receives a quoin column; (2) faces alternate long/short per `rhythm`, identical on both adjoining faces at each course; (3) the quoin wraps exactly `returns` cells onto each face and leaves concave (interior) corners untouched; (4) only stone_bricks is placed; (5) toBand='ground' stops the quoin at the damp-course line, 'full' reaches the eave; (6) re-running over its own output is a no-op.",
+      "preview_subject": "An L-shaped corner of two short wall returns (cobble ground band below, render band above), two storeys tall.",
+      "context": "In this farmstead dressed freestone is scarce and carted at cost, so it is spent only where structure and weather demand a true edge — squared quoins at the corners and jambs. A quoin is the alternating long-and-short pattern of squared stones (stone_bricks here) toothing up an external corner, reading as worked stone against the rubble-and-render field. The existing opening-dressing pass already serves the openings, but nothing produces the corner quoin rhythm, which is a geometric alternation rather than the flat strip surface.paint would give a corner zone.",
+      "acceptance_criteria": [
+        "Every external convex corner up to `toBand` carries a stone_bricks quoin column.",
+        "Block faces alternate long/short per `rhythm`, matching on both adjoining faces at each course.",
+        "Quoins return exactly `returns` cells onto each face; concave corners are left untouched.",
+        "Only stone_bricks is placed — the cobble/render band ids are overwritten, not blended.",
+        "toBand='ground' halts at the damp-course line; toBand='full' reaches the eave.",
+        "Re-running the pass over its output changes nothing (replay byte-identity)."
+      ]
+    }
+  ],
+  "parametrization_notes": [
+    {
+      "need": "Steep, overhanging thatched roofs with a fired-clay ridge over both cottage and barn.",
+      "existing_brush": "roof.gable",
+      "note": "pitch=2 (steepest class), blocks={ field: hay_block, ridge: bricks }. The deep eave, coursing and rounded verge are then finished by the surface.thatch work item — roof.gable only lays the mass and the ridge line."
+    },
+    {
+      "need": "Oak box/cruck frame left proud of the limewashed render.",
+      "existing_brush": "timber-frame",
+      "note": "No params. Supply oak_wood as the kit's wall.trim.frame role plus the storey/bay zones; run it after the render band is painted so the framing reads proud of the wall plane."
+    },
+    {
+      "need": "Two-band wall — rounded cobble rubble on the wet ground storey, limewashed render above the damp course.",
+      "existing_brush": "surface.paint",
+      "note": "Pre-skin with surface.fill skin=exposure, minRun≈2 (rubble reads on exposed faces); then surface.paint priority=[wall.field.ground, wall.field.upper], painting cobblestone below the damp-course zone boundary and white_terracotta above it."
+    },
+    {
+      "need": "Proud cobble footing / damp-shedding course at the wall base.",
+      "existing_brush": "plinth",
+      "note": "block=cobblestone, courses=1–2, small inset (slightly proud) below the ground band — the dry-stacked footing the family clears from the field."
+    },
+    {
+      "need": "Squared stone jambs, sills and flat (never arched) lintels at the openings.",
+      "existing_brush": "opening-dressing + head.flat",
+      "note": "opening-dressing supplies stone_bricks for jambs and sills from the kit; head.flat block=stone_bricks for the square opening head. The arch brush is not used — yeoman openings are square-headed."
+    },
+    {
+      "need": "Plank oak doors, including the barn's wide great doors.",
+      "existing_brush": "opening-dressing",
+      "note": "door.main=oak_door fills the cottage aperture; wide barn cart apertures (opening spacing class 3–5) tile multiple oak_door leaves across the opening width, dressed by the same stone jambs."
+    },
+    {
+      "need": "Glass only in the cottage's best rooms; oak board shutters on every lesser light.",
+      "existing_brush": "opening-dressing",
+      "note": "kit window.glazing=glass_pane, window.shutter=oak_trapdoor. The pass fills the few best-room lights with pane and closes the remaining openings with hinged trapdoor shutters."
+    },
+    {
+      "need": "Pitched riven-oak shingle courses on the small fire-safe roofs (porch hood, dovecote cap, wellhead).",
+      "existing_brush": "course.stairs",
+      "note": "block=oak_stairs, winding=walk for the pitched shingle courses (winding=soffit for the hood underside run)."
+    },
+    {
+      "need": "Flat shingle course at the eave and verge of those same small roofs.",
+      "existing_brush": "course.slab",
+      "note": "block=oak_slab, kind=bottom at eave and verge (kind=top for the doubled over-course)."
+    },
+    {
+      "need": "Orchestrating the shingle members across each small-roof zone in pitch order.",
+      "existing_brush": "surface.roof-courses",
+      "note": "No params. It reads the hood/cap/well zones and lays the course.stairs and course.slab members; it must be the brush that claims these zones so surface.thatch skips them."
+    },
+    {
+      "need": "Small pitched/pyramidal roof structures for the dovecote cap and porch hood.",
+      "existing_brush": "roof.pyramid / roof.gable",
+      "note": "roof.pyramid pitch=1 for the dovecote cap, roof.gable pitch=1–2 (small) for the porch hood, blocks pointing at the oak shingle — then skinned by surface.roof-courses, not thatched."
+    },
+    {
+      "need": "Stone chimney stack rising through the thatch with a fired-clay crown.",
+      "existing_brush": "chimney",
+      "note": "block=stone_bricks, height set to clear the steep ridge, cap=crown, capBlock=bricks — the one stack of hoarded worked stone topped by the kiln-fired clay."
+    }
+  ]
+}
+```

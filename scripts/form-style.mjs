@@ -107,7 +107,7 @@ const readRel = (rel) => readFileSync(join(ROOT, rel), "utf8");
 /** Stage expecteds → the emitted artifacts {rel → content}. ONE derivation for live and
  *  offline (deriveDraftFromStages + the curated comparison when --compare names a pack). */
 function deriveOutputs({ story, palette, proportions, backlog, compare }) {
-  const { draft, deduped, owned, nearTone } = deriveDraftFromStages({
+  const { draft, deduped, owned, nearTone, absorbedSeats } = deriveDraftFromStages({
     story, palette, proportions, backlog, styleSlug: slug, ownedNames: brushNames(),
   });
   const comparison = compare ? comparePacks(draft, loadStylePack(join(ROOT, compare))) : null;
@@ -116,7 +116,7 @@ function deriveOutputs({ story, palette, proportions, backlog, compare }) {
     [`${draftDir}/README.md`]: draftReadme({ pack: draft, nearTone, needs: deduped, comparison }),
     ...(comparison ? { [`${draftDir}/comparison.json`]: jsonOf(comparison) } : {}),
   };
-  return { draft, deduped, owned, files };
+  return { draft, deduped, owned, absorbedSeats, files };
 }
 
 // ---------------------------------------------------------------- OFFLINE replay
@@ -189,10 +189,22 @@ const model = MODEL_TIERS.strong;
 const stageSummaries = {};
 
 /** Run one LIVE stage: render → bounded gated asks → commit the full mint-shape record.
- *  Refusal (budget exhausted) commits the honest ledger and exits nonzero. */
+ *  Refusal (budget exhausted) commits the honest ledger and exits nonzero.
+ *  IDEMPOTENT RESUME: an ACCEPTED stage record already on disk with byte-identical inputs and
+ *  prompt sha is REUSED, never re-asked — a later stage's refusal never re-buys earlier spends
+ *  (render is free; only the ask is money). */
 async function runStage(stage, args, classify) {
   const fn = FN_OF[stage];
   const { prompt } = await bamlRender({ fn, args });
+  const ledgerRel = `${stageDir(stage)}/ledger.json`;
+  if (existsSync(join(ROOT, ledgerRel))) {
+    const prior = JSON.parse(readRel(ledgerRel));
+    if (prior.accepted && prior.promptSha256 === sha256(prompt) && readRel(`${stageDir(stage)}/inputs.json`) === jsonOf(args)) {
+      console.error(`[form-style] ${slug}/${stage}: reusing the accepted on-disk record (inputs + prompt identical).`);
+      stageSummaries[stage] = { fn, source: prior.source, promptSha256: prior.promptSha256, askCount: prior.askCount, accepted: true, reused: true };
+      return JSON.parse(readRel(`${stageDir(stage)}/expected.json`));
+    }
+  }
   console.error(`[form-style] ${slug}/${stage}: asking ${fn} (budget ${MAX_REPLY_ATTEMPTS}, model ${model})…`);
   const { expected, replies, rawTexts, askCount } = await askParsed({ fn, prompt, model, classify, transport: requestText });
   await mkdir(join(ROOT, stageDir(stage)), { recursive: true });
@@ -251,7 +263,7 @@ async function replayVernacular() {
   return JSON.parse(readRel(`${VERNACULAR_FIXTURE}/expected.json`));
 }
 
-async function writeRunLedger({ accepted, refusedStage = null, dedup = null, counts = null }) {
+async function writeRunLedger({ accepted, refusedStage = null, dedup = null, counts = null, absorbedSeats = null }) {
   await write(`${draftDir}/ledger.json`, jsonOf({
     schema: FORMATION_LEDGER_SCHEMA,
     ticket: "T-130-01",
@@ -266,6 +278,7 @@ async function writeRunLedger({ accepted, refusedStage = null, dedup = null, cou
     stages: stageSummaries,
     dedup,
     counts,
+    absorbedSeats, // dangling half-seats dropped by the assembler — named, never hidden
   }));
 }
 
@@ -307,12 +320,13 @@ const backlog = await runStage(
 );
 
 // --- pure assembly + the draft record
-const { deduped, owned, files } = deriveOutputs({ story, palette, proportions, backlog, compare: comparePath });
+const { deduped, owned, absorbedSeats, files } = deriveOutputs({ story, palette, proportions, backlog, compare: comparePath });
 for (const [rel, content] of Object.entries(files)) await write(rel, content);
 await writeRunLedger({
   accepted: true,
   dedup: { demotions: deduped.demotions, warnings: deduped.warnings },
   counts: { roles: palette.roles.length, idioms: owned.length, newItems: deduped.items.length, notes: deduped.parametrization_notes.length },
+  absorbedSeats,
 });
 
 console.error(

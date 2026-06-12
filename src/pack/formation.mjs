@@ -181,9 +181,23 @@ export function styleSummaryFromParts({ story, roles, proportions: p }) {
 // ---------------------------------------------------------------- post-parse gates (ask.mjs classify)
 
 /**
+ * A zone seat is meaningful only COMPLETE (band AND tier). A dangling half-seat (the live
+ * failure mode: `tier: "preserve"` with `band: null`) is ABSORBED — dropped by the assembler,
+ * never rejected by the gate (same-prompt-seam-handle-dont-reject: three re-asks starved on
+ * this exact shape before absorption). Returns the dangling seats so the ledger can name them.
+ * @param {object[]} roles
+ */
+export function danglingSeats(roles) {
+  return roles
+    .filter((r) => (r.band != null) !== (r.tier != null))
+    .map((r) => ({ role: r.role, band: r.band ?? null, tier: r.tier ?? null }));
+}
+
+/**
  * The DerivePalette gate — every rule here is taught in the prompt (same-prompt-seam contract).
  * PaletteDerivation is an all-array class: any malformed reply SAP-degrades to zero roles, so
- * the empty palette is MALFORMED (the FX-D1 class), never a verdict.
+ * the empty palette is MALFORMED (the FX-D1 class), never a verdict. Zone-seat rules apply to
+ * COMPLETE seats only — dangling half-seats are absorbed (see danglingSeats), not rejected.
  * @param {object} parsed  a PaletteDerivation
  * @param {{sourceKeys:Iterable<string>, vocabNames:Set<string>}} p
  * @returns {{ok:true}|{ok:false, reason:string}}
@@ -205,17 +219,15 @@ export function classifyPalette(parsed, { sourceKeys, vocabNames }) {
     for (const k of r.provenance) {
       if (!keys.has(k)) return bad(`role ${r.role}: provenance key "${k}" is not a supplied source key`);
     }
-    const hasBand = r.band != null;
-    const hasTier = r.tier != null;
-    if (hasBand !== hasTier) return bad(`role ${r.role}: band and tier must arrive together`);
-    if (hasTier && r.tier !== "dominant" && r.tier !== "preserve") return bad(`role ${r.role}: unknown tier "${r.tier}"`);
-    if (r.tier === "dominant") {
+    const seated = r.band != null && r.tier != null; // half-seats are absorbed, never rejected
+    if (seated && r.tier !== "dominant" && r.tier !== "preserve") return bad(`role ${r.role}: unknown tier "${r.tier}"`);
+    if (seated && r.tier === "dominant") {
       if (dominants.has(r.band)) return bad(`band "${r.band}" has two dominants (${dominants.get(r.band)}, ${r.role})`);
       dominants.set(r.band, r.role);
     }
   }
   for (const r of roles) {
-    if (r.tier === "preserve" && !dominants.has(r.band)) {
+    if (r.band != null && r.tier === "preserve" && !dominants.has(r.band)) {
       return bad(`band "${r.band}" has preserve entries but no dominant`);
     }
   }
@@ -380,7 +392,7 @@ export function assembleDraftPack({ story, paletteEntries, decoration, proportio
  *          styleSlug:string, ownedNames:string[], table?:object}} p
  *   palette = PaletteDerivation, proportions = ProportionRules, backlog = BrushBacklog (raw);
  *   ownedNames = the registry's brush names (injected — vocabulary-authority stays upstream)
- * @returns {{draft:object, deduped:object, owned:string[], nearTone:object[]}}
+ * @returns {{draft:object, deduped:object, owned:string[], nearTone:object[], absorbedSeats:object[]}}
  */
 export function deriveDraftFromStages({ story, palette, proportions, backlog, styleSlug, ownedNames, table = null }) {
   const deduped = enforceRegistryDedup(backlog, ownedNames);
@@ -398,7 +410,11 @@ export function deriveDraftFromStages({ story, palette, proportions, backlog, st
     idioms,
     styleSlug,
   });
-  return { draft, deduped, owned, nearTone: nearToneReport(paletteEntries) };
+  return {
+    draft, deduped, owned,
+    nearTone: nearToneReport(paletteEntries),
+    absorbedSeats: danglingSeats(palette.roles), // named in the run ledger, dropped from the pack
+  };
 }
 
 // ---------------------------------------------------------------- evidence & comparison

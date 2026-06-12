@@ -1,0 +1,53 @@
+{
+  "schema": "style-formation-stage/v1",
+  "ticket": "T-130-01",
+  "fn": "DerivePalette",
+  "model": "claude-opus-4-8",
+  "source": "live",
+  "transport": "claude -p subscription shim (sdk-binding requestText) — no metered API key",
+  "promptSha256": "16974618a88850aaa2fa505b236d8175f2f104fe8f896221fd916e3f35ceebff",
+  "budget": 3,
+  "askCount": 1,
+  "accepted": true,
+  "replies": [
+    {
+      "attempt": 1,
+      "parsed": true,
+      "rawReply": "```json\n{\n  \"roles\": [\n    {\n      \"role\": \"wall.field.ground\",\n      \"block\": \"cobblestone\",\n      \"rationale\": \"The pasture sheds rounded, undressed cobbles every winter, cleared by hand and stacked dry or lime-bedded for the footings and damp-shedding lower courses of both cottage and barn. It is the freest material the family owns, so it carries the wet ground-storey where no worked stone need",
+      "usage": {
+        "input_tokens": 10365,
+        "cache_creation_input_tokens": 33768,
+        "cache_read_input_tokens": 50604,
+        "output_tokens": 7156,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 33768,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 2793,
+            "cache_read_input_tokens": 34780,
+            "cache_creation_input_tokens": 14812,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 14812
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard"
+      },
+      "source": "live"
+    }
+  ],
+  "rawTexts": [
+    "```json\n{\n  \"roles\": [\n    {\n      \"role\": \"wall.field.ground\",\n      \"block\": \"cobblestone\",\n      \"rationale\": \"The pasture sheds rounded, undressed cobbles every winter, cleared by hand and stacked dry or lime-bedded for the footings and damp-shedding lower courses of both cottage and barn. It is the freest material the family owns, so it carries the wet ground-storey where no worked stone need be spent. Cobblestone (L 53) is the unmistakable read of hand-gathered rubble.\",\n      \"provenance\": [\"rounded-fieldstone-cobble-undressed-dry-laid-or-lime-bedded\"],\n      \"band\": \"base\",\n      \"tier\": \"dominant\"\n    },\n    {\n      \"role\": \"wall.field.upper\",\n      \"block\": \"white_terracotta\",\n      \"rationale\": \"Above the damp courses the lesser walls are cob — clay dug from beneath the topsoil, tempered with straw — then rendered and limewashed with quicklime burned in the farm's own clamp-kiln to protect and brighten the upper storey. The pale limewashed render reads as a soft, weathered off-white (L 75), not a clean modern white, true to a half-bought, half-burned lime.\",\n      \"provenance\": [\"cob-clay-and-lime-daub\", \"lime-render-and-limewash\"],\n      \"band\": \"upper\",\n      \"tier\": \"dominant\"\n    },\n    {\n      \"role\": \"wall.dressing.quoin\",\n      \"block\": \"stone_bricks\",\n      \"rationale\": \"Dressed freestone is scarce, won in small lots and carted at cost, so it is hoarded for the few places that earn it: squared quoins, jambs, sills and lintels where structure and weather demand a true edge. Stone_bricks (L 51) read as the tooled, squared ashlar that the rubble field cannot give — the worked stone spent only at the corners and openings.\",\n      \"provenance\": [\"dressed-quarry-freestone-squared-tooled-blocks\"],\n      \"band\": null,\n      \"tier\": \"preserve\"\n    },\n    {\n      \"role\": \"wall.trim.frame\",\n      \"block\": \"oak_wood\",\n      \"rationale\": \"The yard's structural bank is the managed oak coppice-with-standards, hewn green and worked square with the adze, pegged never nailed, into the box or cruck frame. The honest ornament of this house is the pattern of its own framing, left proud of the render. Oak_wood (L 41) is the squared, all-faces timber of those posts and tie-beams.\",\n      \"provenance\": [\"hewn-structural-oak-heavy-frame-timber\"],\n      \"band\": null,\n      \"tier\": \"preserve\"\n    },\n    {\n      \"role\": \"roof.field\",\n      \"block\": \"hay_block\",\n      \"rationale\": \"There is no slate in this country and none is bought; the deep, steep, overhanging roofs of both cottage and barn are thatched from the farm's own harvest straw and reed over coppiced rafters, pitched to throw rain clear of the rendered walls. Hay_block (L 58) is the warm, coursed straw mass that thatch wants to be.\",\n      \"provenance\": [\"straw-reed-thatch\"],\n      \"band\": \"roof\",\n      \"tier\": \"dominant\"\n    },\n    {\n      \"role\": \"roof.ridge\",\n      \"block\": \"bricks\",\n      \"rationale\": \"Thatch fails at the roof's most punished joint, so a small reserved batch of kiln-fired clay ridge-tile caps the ridge line where straw would not hold. Bricks (L 47) are that same fired clay from the farm's kiln, marking the one fired course on an otherwise unfired roof.\",\n      \"provenance\": [\"kiln-fired-clay-ridge-tile-and-hearth-brick\"],\n      \"band\": null,\n      \"tier\": \"preserve\"\n    },\n    {\n      \"role\": \"roof.course.stairs\",\n      \"block\": \"oak_stairs\",\n      \"rationale\": \"The few small roofs a fire-spark must not reach — porch hood, wellhead, dovecote cap — are covered in riven oak shingle, knotty butts split (not sawn) at the yard. Oak_stairs lay the pitched shingle courses of those fire-safe hoods.\",\n      \"provenance\": [\"riven-oak-shingle-and-pale\"],\n      \"band\": null,\n      \"tier\": \"preserve\"\n    },\n    {\n      \"role\": \"roof.course.slab\",\n      \"block\": \"oak_slab\",\n      \"rationale\": \"The same riven oak shingle, laid flat at eave and hood underside, gives the shallow course and verge of the small fire-safe roofs. Oak_slab is the half-course member of that shingle family.\",\n      \"provenance\": [\"riven-oak-shingle-and-pale\"],\n      \"band\": null,\n      \"tier\": \"preserve\"\n    },\n    {\n      \"role\": \"door.main\",\n      \"block\": \"oak_door\",\n      \"rationale\": \"Doors — the cottage's and the barn's great doors alike — are made of sawn oak board ripped at the family's own sawpit, hung on the few pieces of bought iron. Oak_door is plank-built oak, the honest joinery this freeholding raises itself.\",\n      \"provenance\": [\"sawn-oak-board-and-plank\"],\n      \"band\": null,\n      \"tier\": \"preserve\"\n    },\n    {\n      \"role\": \"window.glazing\",\n      \"block\": \"glass_pane\",\n      \"rationale\": \"Glass is the only material carried from town, dear and spent thin: small leaded lattice quarries the size of a hand, set only in the cottage's best rooms. Glass_pane is that single bought-in luxury, kept rare against a house otherwise shuttered or horn-filled.\",\n      \"provenance\": [\"leaded-lattice-glazing-small-quarry-panes\"],\n      \"band\": null,\n      \"tier\": \"preserve\"\n    },\n    {\n      \"role\": \"window.shutter\",\n      \"block\": \"oak_trapdoor\",\n      \"rationale\": \"Everywhere the bought glass does not reach, the opening is closed by an oak shutter of sawn board — the cash-poor, material-rich answer to weather. Oak_trapdoor is that hinged board shutter over the lesser lights.\",\n      \"provenance\": [\"sawn-oak-board-and-plank\"],\n      \"band\": null,\n      \"tier\": \"preserve\"\n    },\n    {\n      \"role\": \"chimney.stack\",\n      \"block\": \"stone_bricks\",\n      \"rationale\": \"The chimney stack is one of the few places that earns dressed freestone, squared to carry the hearth's fire safely up through the thatch. Stone_bricks read as that tooled, hoarded stone rising where weather and fire together demand worked material.\",\n      \"provenance\": [\"dressed-quarry-freestone-squared-tooled-blocks\"],\n      \"band\": null,\n      \"tier\": \"preserve\"\n    },\n    {\n      \"role\": \"chimney.cap\",\n      \"block\": \"bricks\",\n      \"rationale\": \"The household heats with hearth and bread-oven, and the chimney crown — like the ridge — is the joint that must survive fire, so it takes the kiln-fired clay of the farm's reserved batch. Bricks (L 47) cap the stack where thatch and even render would burn.\",\n      \"provenance\": [\"kiln-fired-clay-ridge-tile-and-hearth-brick\"],\n      \"band\": null,\n      \"tier\": \"preserve\"\n    }\n  ],\n  \"decoration\": [\n    {\n      \"item\": \"door-lantern\",\n      \"block\": \"lantern\",\n      \"where\": [\"door\", \"porch\"]\n    },\n    {\n      \"item\": \"barn-slit-vent\",\n      \"block\": \"iron_bars\",\n      \"where\": [\"gable\", \"vent\"]\n    }\n  ]\n}\n```\n\nThe palette derives entirely from what the freeholding affords: rubble cobble for the damp ground-storey, limewashed cob above, and worked freestone hoarded for the corners, openings and chimney — the economy of \"worked material spent only where structure or weather demands it.\" The roof is the farm's own thatch (`hay_block`) with the one fired course at ridge and chimney crown, and riven-oak shingle stairs/slabs for the small fire-safe hoods. Glass stays rare (the single bought-in luxury), with oak shutters everywhere else, and the only metal — the smith's iron — shows as a door lantern and the barn's slit vents."
+  ]
+}

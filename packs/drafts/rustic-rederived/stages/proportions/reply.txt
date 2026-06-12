@@ -1,0 +1,17 @@
+## yeoman-pasture — proportion rules
+
+**Reasoning from the place:**
+
+- **Storeys (3–5):** Heavy adzed oak frame on cob-and-rubble walls puts the dwelling squarely in the vernacular band — ground storey + a chambered/lofted upper, around 3–4 blocks each. But the great barn is *large*, raised tall on its principal posts to clear a loaded wain and stack the loft, so the style must tolerate a loftier bay up to 5. Below 3 the frame can't carry a usable upper room.
+- **Pitch (2 dominant, then 1, then 0.5):** The roofing economy is thatch — "deep, steep, overhanging" to throw rain off the render, so **2 (steep)** is the everyday roof and most common by far. The fire-safe riven-oak-shingle hoods (porch, wellhead, dovecote) lay pitched **1 (stair)** courses, and the same shingle laid flat at eave and hood underside gives the shallow **0.5 (slab)** verge — both real but rare, reserved for the small things.
+- **Openings (2–5 cells):** A cash-poor, material-rich freeholding spends bought glass thin — small lattice only in the best rooms, everything else shuttered, the barn only slit-vented. Walls are interrupted *sparingly*, so spacing runs wide: at least 2 cells of solid wall between lights, up to 5 across the frugal barn skin.
+
+```json
+{
+  "storey_min": 3,
+  "storey_max": 5,
+  "pitch_classes": [2, 1, 0.5],
+  "opening_min": 2,
+  "opening_max": 5
+}
+```

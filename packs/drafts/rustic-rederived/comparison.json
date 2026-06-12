@@ -1,0 +1,223 @@
+{
+  "schema": "pack-comparison/v1",
+  "derivedStyle": "rustic-rederived",
+  "curatedStyle": "rustic",
+  "roles": [
+    {
+      "role": {
+        "derived": "wall.field.ground",
+        "curated": "wall.field.ground"
+      },
+      "alignedBy": "name",
+      "block": {
+        "derived": "cobblestone",
+        "curated": "cobblestone"
+      },
+      "verdict": "same-block",
+      "weightedDeltaE": 0,
+      "deltaE76": 0
+    },
+    {
+      "role": {
+        "derived": "roof.field",
+        "curated": "roof.field"
+      },
+      "alignedBy": "name",
+      "block": {
+        "derived": "hay_block",
+        "curated": "spruce_planks"
+      },
+      "verdict": "different",
+      "weightedDeltaE": 60.25,
+      "deltaE76": 34.5
+    },
+    {
+      "role": {
+        "derived": "door.main",
+        "curated": "door.main"
+      },
+      "alignedBy": "name",
+      "block": {
+        "derived": "oak_door",
+        "curated": "spruce_door"
+      },
+      "verdict": "different"
+    },
+    {
+      "role": {
+        "derived": "window.shutter",
+        "curated": "window.shutter"
+      },
+      "alignedBy": "name",
+      "block": {
+        "derived": "oak_trapdoor",
+        "curated": "dark_oak_trapdoor"
+      },
+      "verdict": "different"
+    },
+    {
+      "role": {
+        "derived": "chimney.cap",
+        "curated": "chimney.cap"
+      },
+      "alignedBy": "name",
+      "block": {
+        "derived": "bricks",
+        "curated": "bricks"
+      },
+      "verdict": "same-block",
+      "weightedDeltaE": 0,
+      "deltaE76": 0
+    },
+    {
+      "role": {
+        "derived": "wall.field.upper",
+        "curated": "wall.infill.upper"
+      },
+      "alignedBy": "zone",
+      "block": {
+        "derived": "white_terracotta",
+        "curated": "white_terracotta"
+      },
+      "verdict": "same-block",
+      "weightedDeltaE": 0,
+      "deltaE76": 0
+    }
+  ],
+  "missing": [
+    {
+      "role": "wall.dressing",
+      "block": "stone_bricks",
+      "zone": {
+        "band": "base",
+        "tier": "preserve"
+      }
+    },
+    {
+      "role": "frame.timber",
+      "block": "dark_oak_log",
+      "zone": {
+        "band": "upper",
+        "tier": "preserve"
+      }
+    },
+    {
+      "role": "roof.trim",
+      "block": "dark_oak_planks",
+      "zone": {
+        "band": "roof",
+        "tier": "preserve"
+      }
+    },
+    {
+      "role": "roof.course",
+      "block": "spruce_stairs"
+    },
+    {
+      "role": "roof.step",
+      "block": "spruce_slab"
+    },
+    {
+      "role": "door.wagon",
+      "block": "oak_planks"
+    },
+    {
+      "role": "window.infill",
+      "block": "spruce_fence"
+    }
+  ],
+  "extra": [
+    {
+      "role": "wall.dressing.quoin",
+      "block": "stone_bricks"
+    },
+    {
+      "role": "wall.trim.frame",
+      "block": "oak_wood"
+    },
+    {
+      "role": "roof.ridge",
+      "block": "bricks"
+    },
+    {
+      "role": "roof.course.stairs",
+      "block": "oak_stairs"
+    },
+    {
+      "role": "roof.course.slab",
+      "block": "oak_slab"
+    },
+    {
+      "role": "window.glazing",
+      "block": "glass_pane"
+    },
+    {
+      "role": "chimney.stack",
+      "block": "stone_bricks"
+    }
+  ],
+  "proportions": {
+    "storeyHeight": {
+      "derived": {
+        "min": 3,
+        "max": 5
+      },
+      "curated": {
+        "min": 3,
+        "max": 4
+      }
+    },
+    "pitchClasses": {
+      "derived": [
+        2,
+        1,
+        0.5
+      ],
+      "curated": [
+        1
+      ],
+      "common": [
+        1
+      ]
+    },
+    "openingRhythm": {
+      "derived": {
+        "minSpacing": 2,
+        "maxSpacing": 5
+      },
+      "curated": {
+        "minSpacing": 2,
+        "maxSpacing": 5
+      }
+    }
+  },
+  "idioms": {
+    "common": [
+      "chimney",
+      "course.slab",
+      "course.stairs",
+      "opening-dressing",
+      "plinth",
+      "roof.gable",
+      "timber-frame"
+    ],
+    "onlyDerived": [
+      "surface.paint",
+      "surface.roof-courses"
+    ],
+    "onlyCurated": [
+      "arch",
+      "dormer",
+      "floorplan",
+      "head.flat",
+      "hollow",
+      "jetty",
+      "roof.hip",
+      "roof.pyramid"
+    ]
+  },
+  "sources": {
+    "derived": 12,
+    "curated": 6
+  }
+}
