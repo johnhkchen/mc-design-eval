@@ -41,7 +41,7 @@ function verdictCell(row) {
 export function composeReceipts(p) {
   const {
     before, afterNames, baselineStyle, baselineIdioms, style, styleIdioms,
-    backlog, drafts, costShape, gates, conformance, chain,
+    backlog, drafts, costShape, gates, conformance, chain, instrument = null,
   } = p;
   if (!before?.names?.length || !Number.isInteger(before.count)) fail("before snapshot {count, names, ref} is required");
   if (before.count !== before.names.length) fail("before.count must equal before.names.length");
@@ -52,9 +52,15 @@ export function composeReceipts(p) {
   const beforeSet = new Set(before.names);
   const grown = afterNames.filter((n) => !beforeSet.has(n)).sort();
   const baselineSet = new Set(baselineIdioms);
-  const shared = styleIdioms.filter((n) => baselineSet.has(n)).sort();
-  const newlyBuilt = styleIdioms.filter((n) => !baselineSet.has(n)).sort();
-  const reuseFraction = shared.length / styleIdioms.length;
+  const sharedWithBaseline = styleIdioms.filter((n) => baselineSet.has(n)).sort();
+  // the style's BRUSH DEMAND = what its pack composes from (all pre-existing at formation
+  // time — the formation chain can only seat registry brushes) + what the factory had to
+  // build for it (the promoted drafts). Reuse = pre-existing / demand. NOTE the timing
+  // honesty: the pack's idiom list predates the new brushes — they grow the registry for
+  // the NEXT building, they are not in THIS one (compounding is forward-looking).
+  const newlyBuilt = drafts.map((d) => d.name).sort();
+  const demand = styleIdioms.length + newlyBuilt.length;
+  const reuseFraction = styleIdioms.length / demand;
   const reworkTotal = drafts.reduce((a, d) => a + d.rework.length, 0);
   const callsTotal = costShape.reduce((a, c) => a + c.calls, 0);
 
@@ -66,8 +72,9 @@ export function composeReceipts(p) {
     reuse: {
       baseline: baselineStyle,
       packIdioms: [...styleIdioms].sort(),
-      sharedWithBaseline: shared,
+      sharedWithBaseline,
       newlyBuilt,
+      demand,
       fraction: Number(reuseFraction.toFixed(4)),
     },
     factory: {
@@ -78,6 +85,7 @@ export function composeReceipts(p) {
     costShape: costShape.map((c) => ({ ...c })),
     callsTotal,
     verdict: { baseline: gates.baseline ?? null, candidate: gates.candidate },
+    instrument,
     conformance,
     chain: { ...chain },
   };
@@ -91,15 +99,16 @@ export function composeReceipts(p) {
     `| receipt | value |`,
     `| --- | --- |`,
     `| registry before → after | **${before.count} → ${afterNames.length}** (${grown.map((g) => `\`${g}\``).join(", ") || "no growth"}) at \`${before.ref}\` |`,
-    `| ${style} pack composes from | ${styleIdioms.length} brushes |`,
-    `| shared with \`${baselineStyle}\` | **${shared.length}/${styleIdioms.length} (${pct(reuseFraction)})** |`,
-    `| newly built for ${style} | ${newlyBuilt.length ? newlyBuilt.map((g) => `\`${g}\``).join(", ") : "none"} |`,
+    `| ${style}'s brush demand | ${demand} = ${styleIdioms.length} pack idioms (all pre-existing) + ${newlyBuilt.length} factory-built |`,
+    `| **reuse fraction** | **${styleIdioms.length}/${demand} (${pct(reuseFraction)}) pre-existing** — ${sharedWithBaseline.length} also in \`${baselineStyle}\`'s own pack list |`,
+    `| newly built for ${style} | ${newlyBuilt.length ? newlyBuilt.map((g) => `\`${g}\``).join(", ") : "none"} — in the registry for the NEXT building (the pack's idiom list predates them) |`,
     `| backlog (factory output) | ${backlog.items} work item(s), ${backlog.notes} parametrization note(s), ${backlog.demotions} demotion(s); accepted on ask ${backlog.askCount} |`,
     `| draft rework (T-131 metric) | ${reworkTotal} note(s) across ${drafts.length} promoted draft(s)${reworkTotal ? "" : " — none"} |`,
     `| cost shape | ${costShape.map((c) => `${c.stage} ${c.calls}`).join(" · ")} = **${callsTotal} model call(s)** |`,
     `| frozen gate — ${style} | ${verdictCell(gates.candidate)} |`,
     `| frozen gate — \`${baselineStyle}\` best (same subject) | ${verdictCell(gates.baseline)} |`,
     `| pack conformance (chain) | ${conformance.first ? `${conformance.first.passed}✓/${conformance.first.findings}f` : "—"} → ${conformance.final.passed}✓/${conformance.final.findings}f |`,
+    ...(instrument ? [`| instrument receipt | frozen: ${instrument.frozen}, diffs: ${JSON.stringify(instrument.diffs)} (vs ${instrument.comparedTo}) |`] : []),
     `| replay | \`${chain.replay}\` (byte-identical from committed program + ledger) |`,
     "",
     `Verdict context: the candidate is judged by the frozen instrument against the subject's`,

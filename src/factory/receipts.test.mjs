@@ -31,13 +31,14 @@ const P = Object.freeze({
   chain: { record: "benchmarks/sculpture/pattern-book/x.json", replay: "patternbook:saltcrag:repro" },
 });
 
-test("R1 registry growth and reuse arithmetic", () => {
+test("R1 registry growth and reuse arithmetic — demand = pack idioms + factory-built drafts", () => {
   const { receipts } = composeReceipts(P);
   assert.equal(receipts.schema, FACTORY_RECEIPTS_SCHEMA);
   assert.deepEqual(receipts.registry, { before: 3, beforeRef: "abc1234", after: 5, grown: ["d", "e"] });
   assert.deepEqual(receipts.reuse.sharedWithBaseline, ["a", "b"]);
-  assert.deepEqual(receipts.reuse.newlyBuilt, ["d", "e"]);
-  assert.equal(receipts.reuse.fraction, 0.5);
+  assert.deepEqual(receipts.reuse.newlyBuilt, ["d", "e"]); // the promoted drafts, NOT a set difference
+  assert.equal(receipts.reuse.demand, 6); // 4 pack idioms + 2 factory-built
+  assert.equal(receipts.reuse.fraction, Number((4 / 6).toFixed(4)));
 });
 
 test("R2 rework + cost totals; the verdict is carried verbatim (no smoothing)", () => {
@@ -47,7 +48,7 @@ test("R2 rework + cost totals; the verdict is carried verbatim (no smoothing)", 
   assert.equal(receipts.verdict.candidate.gapCount, 11);
   assert.match(md, /FAIL — same-object 3\/4, 11 gap\(s\) vs budget 2/);
   assert.match(md, /FAIL — same-object 4\/4, 8 gap\(s\) vs budget 2/);
-  assert.match(md, /50%/);
+  assert.match(md, /67%.*pre-existing/);
 });
 
 test("R3 a refusal row renders as refusal, never as a pass", () => {

@@ -13,13 +13,14 @@
 // convention). The registry BEFORE snapshot is committed DATA below (captured at the step-0
 // baseline, ref d679644), never re-derived — the live table is the AFTER.
 
-import { readFileSync, readdirSync } from "node:fs";
+import { readFileSync, readdirSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { brushNames } from "../src/pack/idiom-registry.mjs";
 import { loadStylePack } from "../src/pack/style-pack.mjs";
 import { gateRow } from "../src/form/head-to-head.mjs";
+import { instrumentReceipt } from "../src/form/gate-instrument.mjs";
 import { composeReceipts } from "../src/factory/receipts.mjs";
 import { guardedWriteRecord, preflightPins, loadTrackedSet, isTracked, ROTATE_FLAG } from "../src/form/pin-guard.mjs";
 
@@ -134,6 +135,18 @@ const { receipts, md } = composeReceipts({
     baseline: gateRow(readJson(`benchmarks/sculpture/multi-angle/${SUBJECT}-patternbook.json`), `${SUBJECT}-patternbook`),
     candidate: gateRow(readJson(`benchmarks/sculpture/multi-angle/${SUBJECT}-patternbook-${STYLE}.json`), `${SUBJECT}-patternbook-${STYLE}`),
   },
+  // the AC's "receipts diffs: []": the epic's one judge call ran the SAME frozen instrument
+  // (contract fields + judge model) as the committed baseline-label record
+  instrument: instrumentReceipt(
+    readJson(`benchmarks/sculpture/multi-angle/${SUBJECT}-patternbook.json`),
+    readJson(`benchmarks/sculpture/multi-angle/${SUBJECT}-patternbook-${STYLE}.json`),
+    {
+      comparedTo: "committed patternbook-label gate record",
+      fallbackComparedTo: "config (no committed patternbook-label record)",
+      beforeName: "patternbook",
+      afterName: `patternbook-${STYLE}`,
+    },
+  ),
   conformance: chainRecord.stages.workshop.conformance,
   chain: {
     record: `benchmarks/sculpture/pattern-book/${SUBJECT_RUN}.json`,
@@ -141,6 +154,7 @@ const { receipts, md } = composeReceipts({
   },
 });
 
+mkdirSync(join(ROOT, "benchmarks/sculpture/factory"), { recursive: true });
 const write = (rel, content) => guardedWriteRecord({ root: ROOT, rel, content, rotate, trackedSet });
 await write(OUT[0], jsonOf(receipts));
 await write(OUT[1], md);

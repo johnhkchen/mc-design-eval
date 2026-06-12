@@ -1,0 +1,347 @@
+{
+  "schema": "factory-receipts/v1",
+  "ticket": "T-132-01",
+  "style": "saltcrag",
+  "registry": {
+    "before": 19,
+    "beforeRef": "d679644",
+    "after": 22,
+    "grown": [
+      "roof.thatch",
+      "surface.clinker",
+      "surface.limewash"
+    ]
+  },
+  "reuse": {
+    "baseline": "rustic",
+    "packIdioms": [
+      "chimney",
+      "course.slab",
+      "course.stairs",
+      "head.flat",
+      "opening-dressing",
+      "plinth",
+      "roof.gable",
+      "surface.fill",
+      "surface.paint",
+      "surface.roof-courses",
+      "surface.strip-salt"
+    ],
+    "sharedWithBaseline": [
+      "chimney",
+      "course.slab",
+      "course.stairs",
+      "head.flat",
+      "opening-dressing",
+      "plinth",
+      "roof.gable"
+    ],
+    "newlyBuilt": [
+      "roof.thatch",
+      "surface.clinker",
+      "surface.limewash"
+    ],
+    "demand": 14,
+    "fraction": 0.7857
+  },
+  "factory": {
+    "backlog": {
+      "items": 3,
+      "notes": 15,
+      "demotions": 0,
+      "askCount": 1
+    },
+    "drafts": [
+      {
+        "name": "roof.thatch",
+        "rework": []
+      },
+      {
+        "name": "surface.clinker",
+        "rework": [
+          "zones param reshaped to the house pass convention: the sketch's zones: upper|array<zone> became the injected zoneOf lens + zone name every owned pass uses (timber-frame/surface.fill precedent)",
+          "the sketch's shadow-line formula floor(panelHeight/course) counts COURSES; shadow lines are the proud half — report carries both (courses, shadowLines)"
+        ]
+      },
+      {
+        "name": "surface.limewash",
+        "rework": [
+          "aspect: weather|seaward named values dropped — builds carry no compass; the contract is aspects: array<direction> and the caller names the weather face",
+          "preserveRoles became preserve (block ids): passes see blocks, not roles; the role→block mapping is the caller's (material-identity-is-semantic)"
+        ]
+      }
+    ],
+    "reworkTotal": 4
+  },
+  "costShape": [
+    {
+      "stage": "formation",
+      "calls": 3,
+      "source": "packs/drafts/saltcrag/stages/*/ledger.json"
+    },
+    {
+      "stage": "ratification",
+      "calls": 0,
+      "source": "scripts/ratify-pack.mjs (human gate, zero spend)"
+    },
+    {
+      "stage": "backlog",
+      "calls": 1,
+      "source": "docs/active/backlog/records/saltcrag/ledger.json"
+    },
+    {
+      "stage": "brush-implementation",
+      "calls": 0,
+      "source": "AI coding (lisa) — outside the chain's meter"
+    },
+    {
+      "stage": "recognition",
+      "calls": 1,
+      "source": "benchmarks/sculpture/recognition/barn--saltcrag.replies.json"
+    },
+    {
+      "stage": "workshop",
+      "calls": 4,
+      "source": "benchmarks/sculpture/workshop/barn--saltcrag.json"
+    },
+    {
+      "stage": "gate",
+      "calls": 4,
+      "source": "benchmarks/sculpture/multi-angle/barn-patternbook-saltcrag.json"
+    }
+  ],
+  "callsTotal": 13,
+  "verdict": {
+    "baseline": {
+      "label": "barn-patternbook",
+      "subject": "barn",
+      "artifact": {
+        "path": "benchmarks/sculpture/workshop/barn/final-artifact.json",
+        "sha256": "91ee4b2e7b6dc2107e949303f919fb3c4e5dfb51eb245c79627f7a1f6dc29185"
+      },
+      "decided": true,
+      "passed": false,
+      "refusal": null,
+      "gapCount": 8,
+      "gapBudget": 2,
+      "sameObject": {
+        "count": 4,
+        "total": 4
+      },
+      "kitPresence": {
+        "ran": true,
+        "passed": true,
+        "gaps": [],
+        "reason": null
+      },
+      "overall": {
+        "decided": true,
+        "passed": false,
+        "refusal": null
+      },
+      "views": [
+        {
+          "angle": "+x+z",
+          "azimuthDeg": 45,
+          "outcome": "same object",
+          "gaps": [
+            {
+              "severity": "minor",
+              "attribute": "material zoning",
+              "region": "long wall windows"
+            },
+            {
+              "severity": "minor",
+              "attribute": "form",
+              "region": "roof eave overhang"
+            }
+          ],
+          "coveragePassed": true
+        },
+        {
+          "angle": "+x-z",
+          "azimuthDeg": 135,
+          "outcome": "same object",
+          "gaps": [
+            {
+              "severity": "minor",
+              "attribute": "form",
+              "region": "roof pitch / apex"
+            },
+            {
+              "severity": "minor",
+              "attribute": "material zoning",
+              "region": "long wall openings (windows)"
+            }
+          ],
+          "coveragePassed": true
+        },
+        {
+          "angle": "-x-z",
+          "azimuthDeg": 225,
+          "outcome": "same object",
+          "gaps": [
+            {
+              "severity": "minor",
+              "attribute": "massing",
+              "region": "roof"
+            },
+            {
+              "severity": "minor",
+              "attribute": "form",
+              "region": "long wall windows"
+            }
+          ],
+          "coveragePassed": true
+        },
+        {
+          "angle": "-x+z",
+          "azimuthDeg": 315,
+          "outcome": "same object",
+          "gaps": [
+            {
+              "severity": "minor",
+              "attribute": "form",
+              "region": "roof ridge and pitch"
+            },
+            {
+              "severity": "minor",
+              "attribute": "material zoning",
+              "region": "long wall openings (windows vs concept's doored stone wall)"
+            }
+          ],
+          "coveragePassed": true
+        }
+      ],
+      "sheet": "pr/assets/frames/multi-angle-barn-patternbook.png"
+    },
+    "candidate": {
+      "label": "barn-patternbook-saltcrag",
+      "subject": "barn",
+      "artifact": {
+        "path": "benchmarks/sculpture/workshop/barn--saltcrag/final-artifact.json",
+        "sha256": "6eedbc874362d200697e7f2d62a0373352b85001a4e8b0990eac13ab51c8629a"
+      },
+      "decided": true,
+      "passed": false,
+      "refusal": null,
+      "gapCount": 8,
+      "gapBudget": 2,
+      "sameObject": {
+        "count": 4,
+        "total": 4
+      },
+      "kitPresence": {
+        "ran": true,
+        "passed": false,
+        "gaps": [
+          "missing: cobblestone panel @ band0 (5 cells)"
+        ],
+        "reason": null
+      },
+      "overall": {
+        "decided": true,
+        "passed": false,
+        "refusal": null
+      },
+      "views": [
+        {
+          "angle": "+x+z",
+          "azimuthDeg": 45,
+          "outcome": "same object",
+          "gaps": [
+            {
+              "severity": "minor",
+              "attribute": "form",
+              "region": "long side wall openings"
+            },
+            {
+              "severity": "minor",
+              "attribute": "massing",
+              "region": "roof pitch relative to wall height"
+            }
+          ],
+          "coveragePassed": true
+        },
+        {
+          "angle": "+x-z",
+          "azimuthDeg": 135,
+          "outcome": "same object",
+          "gaps": [
+            {
+              "severity": "minor",
+              "attribute": "massing",
+              "region": "long side walls"
+            },
+            {
+              "severity": "minor",
+              "attribute": "form",
+              "region": "roof eave overhang"
+            }
+          ],
+          "coveragePassed": true
+        },
+        {
+          "angle": "-x-z",
+          "azimuthDeg": 225,
+          "outcome": "same object",
+          "gaps": [
+            {
+              "severity": "minor",
+              "attribute": "material zoning",
+              "region": "lower stone wall along the long side"
+            },
+            {
+              "severity": "minor",
+              "attribute": "form",
+              "region": "gable-end door and openings"
+            }
+          ],
+          "coveragePassed": true
+        },
+        {
+          "angle": "-x+z",
+          "azimuthDeg": 315,
+          "outcome": "same object",
+          "gaps": [
+            {
+              "severity": "minor",
+              "attribute": "massing",
+              "region": "long wall openings"
+            },
+            {
+              "severity": "minor",
+              "attribute": "form",
+              "region": "roof eave overhang"
+            }
+          ],
+          "coveragePassed": true
+        }
+      ],
+      "sheet": "pr/assets/frames/multi-angle-barn-patternbook-saltcrag.png"
+    }
+  },
+  "instrument": {
+    "frozen": true,
+    "comparedTo": "committed patternbook-label gate record",
+    "diffs": [],
+    "judgeModels": [
+      "claude-opus-4-8"
+    ]
+  },
+  "conformance": {
+    "first": {
+      "passed": 6,
+      "findings": 0
+    },
+    "final": {
+      "passed": 6,
+      "findings": 0
+    },
+    "finalPassed": true
+  },
+  "chain": {
+    "record": "benchmarks/sculpture/pattern-book/barn--saltcrag.json",
+    "replay": "patternbook:saltcrag:repro / patternbook:saltcrag:offline"
+  }
+}
