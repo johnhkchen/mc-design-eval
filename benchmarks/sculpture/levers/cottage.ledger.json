@@ -1,0 +1,1751 @@
+{
+  "schema": "workshop-ledger/v1",
+  "subject": "cottage",
+  "budget": {
+    "rounds": 6
+  },
+  "liveActions": [
+    "adjust-params",
+    "spray-paint",
+    "re-recognize"
+  ],
+  "instrument": {
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "width": 512,
+    "height": 512
+  },
+  "ticket": "T-136-01",
+  "packRef": {
+    "path": "packs/rustic.json",
+    "sha256": "19834c8ba66333efcc7b6fe594bdc2772877202752809e508b78613c608cf434"
+  },
+  "conceptRef": {
+    "path": "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
+    "sha256": "506c25132952d3d4ccb7d1f78816982542612d8464087bad07c0f9b847e57759"
+  },
+  "sketchRef": {
+    "path": "benchmarks/sculpture/form-sketch/cottage.json",
+    "sha256": "fec1a6691882ec6a372354bc6957d4f57d45e38488642da5cc4c83b4919cc7ca"
+  },
+  "seedRef": {
+    "path": "benchmarks/sculpture/workshop/cottage/program.json",
+    "sha256": "4a0c3ca940e15d0d15a189a940a3f3c1bf94eb4c842c90488b57ef2d8dcd10e9"
+  },
+  "sourceRef": {
+    "path": "benchmarks/sculpture/recognition/cottage.program.json",
+    "sha256": "a7b60b01857c0c8b0173e16c75495f7a3ce4c956ff142ce2d1ae398e31e134c1"
+  },
+  "tier": "strong",
+  "program": {
+    "schema": "workshop-program/v1",
+    "subject": "cottage",
+    "pack": "rustic",
+    "budget": {
+      "rounds": 6
+    },
+    "declarations": {
+      "bands": [
+        {
+          "name": "base",
+          "yRange": [
+            0,
+            3
+          ],
+          "blocks": [
+            "dark_oak_log",
+            "stone_bricks"
+          ],
+          "mixed": true
+        },
+        {
+          "name": "upper",
+          "yRange": [
+            4,
+            7
+          ],
+          "blocks": [
+            "dark_oak_log",
+            "stone_bricks",
+            "white_terracotta"
+          ],
+          "mixed": true
+        },
+        {
+          "name": "roof",
+          "yRange": [
+            8,
+            20
+          ],
+          "blocks": [
+            "bricks",
+            "cobblestone",
+            "spruce_planks",
+            "spruce_slab",
+            "spruce_stairs"
+          ],
+          "mixed": true
+        }
+      ],
+      "symmetry": null,
+      "openings": [
+        {
+          "wall": "main:-x#1.0",
+          "kind": "window",
+          "min": [
+            0,
+            1,
+            7
+          ],
+          "max": [
+            0,
+            3,
+            7
+          ]
+        },
+        {
+          "wall": "main:-x#0.0",
+          "kind": "door",
+          "min": [
+            0,
+            0,
+            13
+          ],
+          "max": [
+            0,
+            2,
+            13
+          ]
+        },
+        {
+          "wall": "main:-x#1.1",
+          "kind": "window",
+          "min": [
+            0,
+            1,
+            19
+          ],
+          "max": [
+            0,
+            3,
+            19
+          ]
+        },
+        {
+          "wall": "main:-x#2",
+          "kind": "window",
+          "min": [
+            0,
+            4,
+            10
+          ],
+          "max": [
+            0,
+            6,
+            10
+          ]
+        },
+        {
+          "wall": "main:-x#2",
+          "kind": "window",
+          "min": [
+            0,
+            4,
+            16
+          ],
+          "max": [
+            0,
+            6,
+            16
+          ]
+        },
+        {
+          "wall": "main:+z#3",
+          "kind": "window",
+          "min": [
+            8,
+            1,
+            27
+          ],
+          "max": [
+            8,
+            3,
+            27
+          ]
+        },
+        {
+          "wall": "main:-z#4",
+          "kind": "window",
+          "min": [
+            8,
+            4,
+            0
+          ],
+          "max": [
+            8,
+            6,
+            0
+          ]
+        },
+        {
+          "wall": "wing:+x#0",
+          "kind": "window",
+          "min": [
+            25,
+            1,
+            14
+          ],
+          "max": [
+            25,
+            3,
+            14
+          ]
+        },
+        {
+          "wall": "wing:+x#1",
+          "kind": "window",
+          "min": [
+            25,
+            4,
+            14
+          ],
+          "max": [
+            25,
+            6,
+            14
+          ]
+        }
+      ],
+      "proportions": {
+        "schema": "silhouette-proportion/v1",
+        "targets": {
+          "ridgeToEave": 1.4145,
+          "roofShare": 0.293,
+          "aspect": 1.1852
+        },
+        "sources": {
+          "ridgeToEave": "sketch",
+          "roofShare": "sketch",
+          "aspect": "sketch"
+        },
+        "tolerance": 0.15
+      }
+    },
+    "elements": [
+      {
+        "id": "main-shell",
+        "kind": "shell",
+        "spec": {
+          "footprint": {
+            "x0": 0,
+            "x1": 17,
+            "z0": 0,
+            "z1": 27
+          },
+          "y0": 0,
+          "height": 8,
+          "wallBlock": "white_terracotta",
+          "courses": [
+            {
+              "yRange": [
+                0,
+                3
+              ],
+              "block": "stone_bricks"
+            }
+          ],
+          "openings": [
+            {
+              "wall": "-x",
+              "at": [
+                7,
+                1
+              ],
+              "w": 1,
+              "h": 3
+            },
+            {
+              "wall": "-x",
+              "at": [
+                13,
+                0
+              ],
+              "w": 1,
+              "h": 3
+            },
+            {
+              "wall": "-x",
+              "at": [
+                19,
+                1
+              ],
+              "w": 1,
+              "h": 3
+            },
+            {
+              "wall": "-x",
+              "at": [
+                10,
+                4
+              ],
+              "w": 1,
+              "h": 3
+            },
+            {
+              "wall": "-x",
+              "at": [
+                16,
+                4
+              ],
+              "w": 1,
+              "h": 3
+            },
+            {
+              "wall": "+z",
+              "at": [
+                8,
+                1
+              ],
+              "w": 1,
+              "h": 3
+            },
+            {
+              "wall": "-z",
+              "at": [
+                8,
+                4
+              ],
+              "w": 1,
+              "h": 3
+            }
+          ]
+        }
+      },
+      {
+        "id": "main-plinth",
+        "kind": "idiom",
+        "idiom": "plinth",
+        "spec": {
+          "footprint": {
+            "x0": 0,
+            "x1": 17,
+            "z0": 0,
+            "z1": 27
+          },
+          "y0": 0,
+          "courses": 1,
+          "block": "stone_bricks"
+        }
+      },
+      {
+        "id": "main-jetty--x",
+        "kind": "idiom",
+        "idiom": "jetty",
+        "spec": {
+          "edge": {
+            "axis": "z",
+            "at": 0,
+            "side": "-",
+            "range": [
+              0,
+              27
+            ]
+          },
+          "y": 4,
+          "beamBlock": "dark_oak_log",
+          "joistBlock": "dark_oak_log"
+        }
+      },
+      {
+        "id": "main-jetty--z",
+        "kind": "idiom",
+        "idiom": "jetty",
+        "spec": {
+          "edge": {
+            "axis": "x",
+            "at": 0,
+            "side": "-",
+            "range": [
+              0,
+              17
+            ]
+          },
+          "y": 4,
+          "beamBlock": "dark_oak_log",
+          "joistBlock": "dark_oak_log"
+        }
+      },
+      {
+        "id": "main-roof",
+        "kind": "idiom",
+        "idiom": "roof.gable",
+        "spec": {
+          "footprint": {
+            "x0": -1,
+            "x1": 18,
+            "z0": 0,
+            "z1": 27
+          },
+          "ridgeAxis": "z",
+          "eaveY": 8,
+          "ridgeY": 17,
+          "pitch": 1,
+          "blocks": {
+            "field": "spruce_planks",
+            "stairs": "spruce_stairs",
+            "slab": "spruce_slab"
+          }
+        }
+      },
+      {
+        "id": "main-chimney",
+        "kind": "idiom",
+        "idiom": "chimney",
+        "spec": {
+          "base": [
+            8,
+            8,
+            13
+          ],
+          "footprint": {
+            "w": 1,
+            "d": 1
+          },
+          "height": 12,
+          "block": "cobblestone",
+          "cap": "crown",
+          "capBlock": "bricks"
+        }
+      },
+      {
+        "id": "main-head--x-1-0",
+        "kind": "idiom",
+        "idiom": "head.flat",
+        "spec": {
+          "span": {
+            "axis": "z",
+            "range": [
+              7,
+              7
+            ]
+          },
+          "yRange": [
+            1,
+            3
+          ],
+          "depth": {
+            "axis": "x",
+            "range": [
+              0,
+              0
+            ]
+          },
+          "block": "stone_bricks",
+          "level": 2
+        }
+      },
+      {
+        "id": "main-head--x-0-0",
+        "kind": "idiom",
+        "idiom": "head.flat",
+        "spec": {
+          "span": {
+            "axis": "z",
+            "range": [
+              13,
+              13
+            ]
+          },
+          "yRange": [
+            0,
+            2
+          ],
+          "depth": {
+            "axis": "x",
+            "range": [
+              0,
+              0
+            ]
+          },
+          "block": "stone_bricks",
+          "level": 1
+        }
+      },
+      {
+        "id": "main-head--x-1-1",
+        "kind": "idiom",
+        "idiom": "head.flat",
+        "spec": {
+          "span": {
+            "axis": "z",
+            "range": [
+              19,
+              19
+            ]
+          },
+          "yRange": [
+            1,
+            3
+          ],
+          "depth": {
+            "axis": "x",
+            "range": [
+              0,
+              0
+            ]
+          },
+          "block": "stone_bricks",
+          "level": 2
+        }
+      },
+      {
+        "id": "main-head--x-2-0",
+        "kind": "idiom",
+        "idiom": "head.flat",
+        "spec": {
+          "span": {
+            "axis": "z",
+            "range": [
+              10,
+              10
+            ]
+          },
+          "yRange": [
+            4,
+            6
+          ],
+          "depth": {
+            "axis": "x",
+            "range": [
+              0,
+              0
+            ]
+          },
+          "block": "stone_bricks",
+          "level": 5
+        }
+      },
+      {
+        "id": "main-head--x-2-1",
+        "kind": "idiom",
+        "idiom": "head.flat",
+        "spec": {
+          "span": {
+            "axis": "z",
+            "range": [
+              16,
+              16
+            ]
+          },
+          "yRange": [
+            4,
+            6
+          ],
+          "depth": {
+            "axis": "x",
+            "range": [
+              0,
+              0
+            ]
+          },
+          "block": "stone_bricks",
+          "level": 5
+        }
+      },
+      {
+        "id": "main-head-+z-3-0",
+        "kind": "idiom",
+        "idiom": "head.flat",
+        "spec": {
+          "span": {
+            "axis": "x",
+            "range": [
+              8,
+              8
+            ]
+          },
+          "yRange": [
+            1,
+            3
+          ],
+          "depth": {
+            "axis": "z",
+            "range": [
+              27,
+              27
+            ]
+          },
+          "block": "stone_bricks",
+          "level": 2
+        }
+      },
+      {
+        "id": "main-head--z-4-0",
+        "kind": "idiom",
+        "idiom": "head.flat",
+        "spec": {
+          "span": {
+            "axis": "x",
+            "range": [
+              8,
+              8
+            ]
+          },
+          "yRange": [
+            4,
+            6
+          ],
+          "depth": {
+            "axis": "z",
+            "range": [
+              0,
+              0
+            ]
+          },
+          "block": "stone_bricks",
+          "level": 5
+        }
+      },
+      {
+        "id": "wing-shell",
+        "kind": "shell",
+        "spec": {
+          "footprint": {
+            "x0": 18,
+            "x1": 25,
+            "z0": 7,
+            "z1": 21
+          },
+          "y0": 0,
+          "height": 8,
+          "wallBlock": "white_terracotta",
+          "courses": [
+            {
+              "yRange": [
+                0,
+                3
+              ],
+              "block": "stone_bricks"
+            }
+          ],
+          "openings": [
+            {
+              "wall": "+x",
+              "at": [
+                14,
+                1
+              ],
+              "w": 1,
+              "h": 3
+            },
+            {
+              "wall": "+x",
+              "at": [
+                14,
+                4
+              ],
+              "w": 1,
+              "h": 3
+            }
+          ]
+        }
+      },
+      {
+        "id": "wing-plinth",
+        "kind": "idiom",
+        "idiom": "plinth",
+        "spec": {
+          "footprint": {
+            "x0": 18,
+            "x1": 25,
+            "z0": 7,
+            "z1": 21
+          },
+          "y0": 0,
+          "courses": 1,
+          "block": "stone_bricks"
+        }
+      },
+      {
+        "id": "wing-jetty-+x",
+        "kind": "idiom",
+        "idiom": "jetty",
+        "spec": {
+          "edge": {
+            "axis": "z",
+            "at": 25,
+            "side": "+",
+            "range": [
+              7,
+              21
+            ]
+          },
+          "y": 4,
+          "beamBlock": "dark_oak_log",
+          "joistBlock": "dark_oak_log"
+        }
+      },
+      {
+        "id": "wing-roof",
+        "kind": "idiom",
+        "idiom": "roof.gable",
+        "spec": {
+          "footprint": {
+            "x0": 18,
+            "x1": 25,
+            "z0": 6,
+            "z1": 22
+          },
+          "ridgeAxis": "x",
+          "eaveY": 8,
+          "ridgeY": 16,
+          "pitch": 1,
+          "blocks": {
+            "field": "spruce_planks",
+            "stairs": "spruce_stairs",
+            "slab": "spruce_slab"
+          }
+        }
+      },
+      {
+        "id": "wing-head-+x-0-0",
+        "kind": "idiom",
+        "idiom": "head.flat",
+        "spec": {
+          "span": {
+            "axis": "z",
+            "range": [
+              14,
+              14
+            ]
+          },
+          "yRange": [
+            1,
+            3
+          ],
+          "depth": {
+            "axis": "x",
+            "range": [
+              25,
+              25
+            ]
+          },
+          "block": "stone_bricks",
+          "level": 2
+        }
+      },
+      {
+        "id": "wing-head-+x-1-0",
+        "kind": "idiom",
+        "idiom": "head.flat",
+        "spec": {
+          "span": {
+            "axis": "z",
+            "range": [
+              14,
+              14
+            ]
+          },
+          "yRange": [
+            4,
+            6
+          ],
+          "depth": {
+            "axis": "x",
+            "range": [
+              25,
+              25
+            ]
+          },
+          "block": "stone_bricks",
+          "level": 5
+        }
+      }
+    ]
+  },
+  "source": {
+    "schema": "building-program/v1",
+    "subject": "cottage",
+    "pack": "rustic",
+    "reading": {
+      "summary": "An English yeoman's cross-gabled cottage. Two perpendicular gable wings meet at a front corner with a stone chimney rising from the valley. The concept overrides the rustic rubble default: the GROUND storey is crisp coursed dressed stone (ashlar → wall.dressing), and the UPPER storey is cream lime-plaster infill (wall.infill.upper) carried in a near-black coppice-oak half-timber frame (timber-frame treatment) that jetties out over the stone base — classic Tudor oversailing. Roof is warm sawpit plank courses (roof.field) with the darker oak fascia banding (roof.trim) at eave and verge; gable ends show the cream infill. Shuttered lattice windows (dark-oak trapdoor reveals) appear both storeys; a boarded spruce door sits in a dressed-stone reveal at ground; brick-capped fieldstone chimney. The sketch read 4 storeys (~4.8 blocks) and a 27-block height — mesh noise; the concept plainly reads two storeys, so I substitute a regular 2-storey shell at storeyHeight 4. I decompose the L/T footprint into a long main mass (ridge along z) and a shorter cross wing protruding +x (ridge along x) so the two gables stand perpendicular as seen. Pitch read 35.5° rounds to the pack's single pitch class. Mirror score 0.54 is below threshold (asymmetric L) — no symmetry declared.",
+      "symmetryClaim": null
+    },
+    "masses": [
+      {
+        "id": "main",
+        "rect": {
+          "x0": 0,
+          "z0": 0,
+          "w": 18,
+          "d": 28
+        },
+        "storeys": 2,
+        "storeyHeight": 4,
+        "walls": {
+          "treatment": "timber-frame",
+          "ground": {
+            "role": "wall.dressing"
+          },
+          "upper": {
+            "role": "wall.infill.upper"
+          },
+          "dressing": {
+            "role": "wall.dressing"
+          }
+        },
+        "plinth": {
+          "courses": 1,
+          "role": "wall.dressing"
+        },
+        "jetty": {
+          "walls": [
+            "-x",
+            "-z"
+          ],
+          "beamRole": "frame.timber",
+          "joistRole": "frame.timber"
+        },
+        "roof": {
+          "idiom": "roof.gable",
+          "ridgeAxis": "z",
+          "pitchClass": 1,
+          "fieldRole": "roof.field",
+          "trimRole": "roof.trim",
+          "gableRole": "wall.infill.upper"
+        },
+        "chimney": {
+          "role": "wall.field.ground",
+          "capRole": "chimney.cap",
+          "atEnd": "center"
+        },
+        "openings": [
+          {
+            "wall": "-x",
+            "kind": "door",
+            "count": 1,
+            "w": 1,
+            "h": 2,
+            "sill": 0,
+            "head": "flat",
+            "headRole": "wall.dressing"
+          },
+          {
+            "wall": "-x",
+            "kind": "window",
+            "count": 2,
+            "w": 1,
+            "h": 2,
+            "sill": 1,
+            "head": "flat",
+            "headRole": "wall.dressing"
+          },
+          {
+            "wall": "-x",
+            "kind": "window",
+            "count": 2,
+            "w": 1,
+            "h": 2,
+            "sill": 4,
+            "head": "flat",
+            "headRole": "wall.dressing"
+          },
+          {
+            "wall": "+z",
+            "kind": "window",
+            "count": 1,
+            "w": 1,
+            "h": 2,
+            "sill": 1,
+            "head": "flat",
+            "headRole": "wall.dressing"
+          },
+          {
+            "wall": "-z",
+            "kind": "window",
+            "count": 1,
+            "w": 1,
+            "h": 2,
+            "sill": 4,
+            "head": "flat",
+            "headRole": "wall.dressing"
+          }
+        ]
+      },
+      {
+        "id": "wing",
+        "rect": {
+          "x0": 18,
+          "z0": 7,
+          "w": 8,
+          "d": 15
+        },
+        "storeys": 2,
+        "storeyHeight": 4,
+        "walls": {
+          "treatment": "timber-frame",
+          "ground": {
+            "role": "wall.dressing"
+          },
+          "upper": {
+            "role": "wall.infill.upper"
+          },
+          "dressing": {
+            "role": "wall.dressing"
+          }
+        },
+        "plinth": {
+          "courses": 1,
+          "role": "wall.dressing"
+        },
+        "jetty": {
+          "walls": [
+            "+x"
+          ],
+          "beamRole": "frame.timber",
+          "joistRole": "frame.timber"
+        },
+        "roof": {
+          "idiom": "roof.gable",
+          "ridgeAxis": "x",
+          "pitchClass": 1,
+          "fieldRole": "roof.field",
+          "trimRole": "roof.trim",
+          "gableRole": "wall.infill.upper"
+        },
+        "chimney": null,
+        "openings": [
+          {
+            "wall": "+x",
+            "kind": "window",
+            "count": 1,
+            "w": 1,
+            "h": 2,
+            "sill": 1,
+            "head": "flat",
+            "headRole": "wall.dressing"
+          },
+          {
+            "wall": "+x",
+            "kind": "window",
+            "count": 1,
+            "w": 1,
+            "h": 2,
+            "sill": 4,
+            "head": "flat",
+            "headRole": "wall.dressing"
+          }
+        ]
+      }
+    ]
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "renders": [
+        {
+          "angle": "+x+z",
+          "path": "benchmarks/sculpture/levers/cottage/round-1/view-+x+z.png",
+          "bytes": 103528
+        },
+        {
+          "angle": "+x-z",
+          "path": "benchmarks/sculpture/levers/cottage/round-1/view-+x-z.png",
+          "bytes": 100996
+        },
+        {
+          "angle": "-x-z",
+          "path": "benchmarks/sculpture/levers/cottage/round-1/view--x-z.png",
+          "bytes": 107756
+        },
+        {
+          "angle": "-x+z",
+          "path": "benchmarks/sculpture/levers/cottage/round-1/view--x+z.png",
+          "bytes": 108622
+        }
+      ],
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"roof (both masses)\", \"issue\": \"Roof is grossly over-tall and dominates the silhouette; conformance proportion-vs-concept FAILS (ridgeToEave 4.5 vs 1.4145, roofShare 0.7778 vs 0.293). The concept reads as tall two-storey timber-frame walls under a moderate gable, but the build is almost all roof.\", \"severity\": \"major\" },\n      { \"region\":",
+          "usage": {
+            "input_tokens": 10766,
+            "cache_creation_input_tokens": 18922,
+            "cache_read_input_tokens": 15824,
+            "output_tokens": 11474,
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 18922,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "not_available",
+            "iterations": [
+              {
+                "input_tokens": 10766,
+                "output_tokens": 11474,
+                "cache_read_input_tokens": 15824,
+                "cache_creation_input_tokens": 18922,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 18922
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard"
+          },
+          "source": "live"
+        }
+      ],
+      "askCount": 1,
+      "critique": {
+        "issues": [
+          {
+            "region": "roof (both masses)",
+            "issue": "Roof is grossly over-tall and dominates the silhouette; conformance proportion-vs-concept FAILS (ridgeToEave 4.5 vs 1.4145, roofShare 0.7778 vs 0.293). The concept reads as tall two-storey timber-frame walls under a moderate gable, but the build is almost all roof.",
+            "severity": "major"
+          },
+          {
+            "region": "main walls",
+            "issue": "Eave height (8) is too short relative to the ~9-block gable rise, so the walls read as a low base under a giant hood instead of the prominent timber-frame storeys in the concept.",
+            "severity": "major"
+          },
+          {
+            "region": "facade detail vs concept",
+            "issue": "Concept shows stone ground storey, white timber-frame upper with dark studs, shutters and lantern; build's wall articulation is present but buried under the oversized roof — defer until proportion is fixed.",
+            "severity": "minor"
+          }
+        ]
+      },
+      "decision": "revise",
+      "rationale": "Pitch is locked at class 1, so the only way to cut the failing roofShare/ridgeToEave is to raise the walls; I bump the main mass eave from 8 to 16 (a large but sub-threshold step that improves both failing ratios without overshooting into a tower), and will climb further or fix the wing in later rounds.",
+      "action": {
+        "action": "adjust-params",
+        "elementId": "main",
+        "massId": "main",
+        "params": {
+          "eaveHeight": 16
+        }
+      },
+      "applied": {
+        "kind": "geometry",
+        "paintPruned": 0
+      },
+      "conformance": {
+        "before": {
+          "schema": "pack-conformance/v1",
+          "passed": false,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            },
+            {
+              "name": "proportion-vs-concept",
+              "passed": false,
+              "findings": [
+                "ridgeToEave 4.5 vs target 1.4145 (sketch) — Δrel 2.1813 > tolerance 0.15",
+                "roofShare 0.7778 vs target 0.293 (sketch) — Δrel 1.6546 > tolerance 0.15"
+              ],
+              "ratios": {
+                "tolerance": 0.15,
+                "rows": [
+                  {
+                    "ratio": "ridgeToEave",
+                    "measured": 4.5,
+                    "target": 1.4145,
+                    "source": "sketch",
+                    "delta": 3.0855,
+                    "excess": 2.1813,
+                    "basis": "relative",
+                    "withinTolerance": false
+                  },
+                  {
+                    "ratio": "roofShare",
+                    "measured": 0.7778,
+                    "target": 0.293,
+                    "source": "sketch",
+                    "delta": 0.4848,
+                    "excess": 1.6546,
+                    "basis": "relative",
+                    "withinTolerance": false
+                  },
+                  {
+                    "ratio": "aspect",
+                    "measured": 1.0357,
+                    "target": 1.1852,
+                    "source": "sketch",
+                    "delta": 0.1495,
+                    "excess": 0.1261,
+                    "basis": "relative",
+                    "withinTolerance": true
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "after": {
+          "schema": "pack-conformance/v1",
+          "passed": false,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            },
+            {
+              "name": "proportion-vs-concept",
+              "passed": false,
+              "findings": [
+                "ridgeToEave 6.5 vs target 1.4145 (sketch) — Δrel 3.5953 > tolerance 0.15",
+                "roofShare 0.8462 vs target 0.293 (sketch) — Δrel 1.8881 > tolerance 0.15"
+              ],
+              "ratios": {
+                "tolerance": 0.15,
+                "rows": [
+                  {
+                    "ratio": "ridgeToEave",
+                    "measured": 6.5,
+                    "target": 1.4145,
+                    "source": "sketch",
+                    "delta": 5.0855,
+                    "excess": 3.5953,
+                    "basis": "relative",
+                    "withinTolerance": false
+                  },
+                  {
+                    "ratio": "roofShare",
+                    "measured": 0.8462,
+                    "target": 0.293,
+                    "source": "sketch",
+                    "delta": 0.5532,
+                    "excess": 1.8881,
+                    "basis": "relative",
+                    "withinTolerance": false
+                  },
+                  {
+                    "ratio": "aspect",
+                    "measured": 1.0357,
+                    "target": 1.1852,
+                    "source": "sketch",
+                    "delta": 0.1495,
+                    "excess": 0.1261,
+                    "basis": "relative",
+                    "withinTolerance": true
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "accepted": false,
+        "reason": "regressed: passed 6→6, findings 2→2; ridgeToEave Δ 2.1813→3.5953 beyond tolerance"
+      }
+    },
+    {
+      "round": 2,
+      "renders": [
+        {
+          "angle": "+x+z",
+          "path": "benchmarks/sculpture/levers/cottage/round-2/view-+x+z.png",
+          "bytes": 103528
+        },
+        {
+          "angle": "+x-z",
+          "path": "benchmarks/sculpture/levers/cottage/round-2/view-+x-z.png",
+          "bytes": 100996
+        },
+        {
+          "angle": "-x-z",
+          "path": "benchmarks/sculpture/levers/cottage/round-2/view--x-z.png",
+          "bytes": 107756
+        },
+        {
+          "angle": "-x+z",
+          "path": "benchmarks/sculpture/levers/cottage/round-2/view--x+z.png",
+          "bytes": 108622
+        }
+      ],
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "Looking at the concept versus my build: the proportion gate fails because the roof dominates the silhouette (ridgeToEave 4.5 vs target 1.4145; roofShare 0.778 vs 0.293). The pitch is locked at class 1, so the steep roof's height (~9 blocks, set by the building width) can't be reduced via pitch. Last round I raised `eaveHeight` to 16 — but that lever held storeys at 2 (factorizing into a taller sto",
+          "usage": {
+            "input_tokens": 10781,
+            "cache_creation_input_tokens": 19012,
+            "cache_read_input_tokens": 15824,
+            "output_tokens": 16945,
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 19012,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "not_available",
+            "iterations": [
+              {
+                "input_tokens": 10781,
+                "output_tokens": 16945,
+                "cache_read_input_tokens": 15824,
+                "cache_creation_input_tokens": 19012,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 19012
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard"
+          },
+          "source": "live"
+        }
+      ],
+      "askCount": 1,
+      "critique": {
+        "issues": [
+          {
+            "region": "main roof / overall silhouette",
+            "issue": "Roof is far too tall relative to the walls — it eats over half the height (roofShare 0.778 vs target 0.293); the concept reads as substantial walls under a moderate roof.",
+            "severity": "major"
+          },
+          {
+            "region": "main + wing walls",
+            "issue": "Wall height is too short for the locked steep pitch, so ridgeToEave is 4.5 vs target 1.4145 — walls need to gain courses, not the roof lose pitch (pitch locked at class 1).",
+            "severity": "major"
+          },
+          {
+            "region": "eave course banding",
+            "issue": "Stone ground storey vs white-terracotta upper reads correctly, but with shallow walls the timber-frame upper band is cramped vs the concept's full upper storey.",
+            "severity": "minor"
+          }
+        ]
+      },
+      "decision": "revise",
+      "rationale": "Pitch is locked, so the only way to cut roofShare and ridge:eave is taller walls — and storeys (not eaveHeight, which regressed last round) is the lever that divides down ridge:eave (9/storeys) while lengthening the walls; storeys 2→4 strictly improves both failing sub-metrics without towering to the full-pass value of 6.",
+      "action": {
+        "action": "adjust-params",
+        "elementId": "main",
+        "massId": "main",
+        "params": {
+          "storeys": 4
+        }
+      },
+      "applied": {
+        "kind": "geometry",
+        "paintPruned": 0
+      },
+      "conformance": {
+        "before": {
+          "schema": "pack-conformance/v1",
+          "passed": false,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            },
+            {
+              "name": "proportion-vs-concept",
+              "passed": false,
+              "findings": [
+                "ridgeToEave 4.5 vs target 1.4145 (sketch) — Δrel 2.1813 > tolerance 0.15",
+                "roofShare 0.7778 vs target 0.293 (sketch) — Δrel 1.6546 > tolerance 0.15"
+              ],
+              "ratios": {
+                "tolerance": 0.15,
+                "rows": [
+                  {
+                    "ratio": "ridgeToEave",
+                    "measured": 4.5,
+                    "target": 1.4145,
+                    "source": "sketch",
+                    "delta": 3.0855,
+                    "excess": 2.1813,
+                    "basis": "relative",
+                    "withinTolerance": false
+                  },
+                  {
+                    "ratio": "roofShare",
+                    "measured": 0.7778,
+                    "target": 0.293,
+                    "source": "sketch",
+                    "delta": 0.4848,
+                    "excess": 1.6546,
+                    "basis": "relative",
+                    "withinTolerance": false
+                  },
+                  {
+                    "ratio": "aspect",
+                    "measured": 1.0357,
+                    "target": 1.1852,
+                    "source": "sketch",
+                    "delta": 0.1495,
+                    "excess": 0.1261,
+                    "basis": "relative",
+                    "withinTolerance": true
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "after": {
+          "schema": "pack-conformance/v1",
+          "passed": false,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            },
+            {
+              "name": "proportion-vs-concept",
+              "passed": false,
+              "findings": [
+                "ridgeToEave 6.5 vs target 1.4145 (sketch) — Δrel 3.5953 > tolerance 0.15",
+                "roofShare 0.8462 vs target 0.293 (sketch) — Δrel 1.8881 > tolerance 0.15"
+              ],
+              "ratios": {
+                "tolerance": 0.15,
+                "rows": [
+                  {
+                    "ratio": "ridgeToEave",
+                    "measured": 6.5,
+                    "target": 1.4145,
+                    "source": "sketch",
+                    "delta": 5.0855,
+                    "excess": 3.5953,
+                    "basis": "relative",
+                    "withinTolerance": false
+                  },
+                  {
+                    "ratio": "roofShare",
+                    "measured": 0.8462,
+                    "target": 0.293,
+                    "source": "sketch",
+                    "delta": 0.5532,
+                    "excess": 1.8881,
+                    "basis": "relative",
+                    "withinTolerance": false
+                  },
+                  {
+                    "ratio": "aspect",
+                    "measured": 1.0357,
+                    "target": 1.1852,
+                    "source": "sketch",
+                    "delta": 0.1495,
+                    "excess": 0.1261,
+                    "basis": "relative",
+                    "withinTolerance": true
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "accepted": false,
+        "reason": "regressed: passed 6→6, findings 2→2; ridgeToEave Δ 2.1813→3.5953 beyond tolerance"
+      }
+    },
+    {
+      "round": 3,
+      "renders": [
+        {
+          "angle": "+x+z",
+          "path": "benchmarks/sculpture/levers/cottage/round-3/view-+x+z.png",
+          "bytes": 103528
+        },
+        {
+          "angle": "+x-z",
+          "path": "benchmarks/sculpture/levers/cottage/round-3/view-+x-z.png",
+          "bytes": 100996
+        },
+        {
+          "angle": "-x-z",
+          "path": "benchmarks/sculpture/levers/cottage/round-3/view--x-z.png",
+          "bytes": 107756
+        },
+        {
+          "angle": "-x+z",
+          "path": "benchmarks/sculpture/levers/cottage/round-3/view--x+z.png",
+          "bytes": 108622
+        }
+      ],
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": false,
+          "rawReply": "You've hit your monthly spend limit · raise it at claude.ai/settings/usage",
+          "parseError": "reply is not valid JSON: Unexpected token 'Y', \"You've hit\"... is not valid JSON",
+          "usage": {
+            "input_tokens": 0,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "output_tokens": 0,
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 0,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "",
+            "iterations": [],
+            "speed": "standard"
+          },
+          "source": "live"
+        },
+        {
+          "attempt": 2,
+          "parsed": false,
+          "rawReply": "You've hit your monthly spend limit · raise it at claude.ai/settings/usage",
+          "parseError": "reply is not valid JSON: Unexpected token 'Y', \"You've hit\"... is not valid JSON",
+          "usage": {
+            "input_tokens": 0,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "output_tokens": 0,
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 0,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "",
+            "iterations": [],
+            "speed": "standard"
+          },
+          "source": "live"
+        },
+        {
+          "attempt": 3,
+          "parsed": false,
+          "rawReply": "You've hit your monthly spend limit · raise it at claude.ai/settings/usage",
+          "parseError": "reply is not valid JSON: Unexpected token 'Y', \"You've hit\"... is not valid JSON",
+          "usage": {
+            "input_tokens": 0,
+            "cache_creation_input_tokens": 0,
+            "cache_read_input_tokens": 0,
+            "output_tokens": 0,
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 0,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "",
+            "iterations": [],
+            "speed": "standard"
+          },
+          "source": "live"
+        }
+      ],
+      "askCount": 3,
+      "decision": null,
+      "action": null,
+      "applied": null,
+      "conformance": {
+        "before": {
+          "schema": "pack-conformance/v1",
+          "passed": false,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            },
+            {
+              "name": "proportion-vs-concept",
+              "passed": false,
+              "findings": [
+                "ridgeToEave 4.5 vs target 1.4145 (sketch) — Δrel 2.1813 > tolerance 0.15",
+                "roofShare 0.7778 vs target 0.293 (sketch) — Δrel 1.6546 > tolerance 0.15"
+              ],
+              "ratios": {
+                "tolerance": 0.15,
+                "rows": [
+                  {
+                    "ratio": "ridgeToEave",
+                    "measured": 4.5,
+                    "target": 1.4145,
+                    "source": "sketch",
+                    "delta": 3.0855,
+                    "excess": 2.1813,
+                    "basis": "relative",
+                    "withinTolerance": false
+                  },
+                  {
+                    "ratio": "roofShare",
+                    "measured": 0.7778,
+                    "target": 0.293,
+                    "source": "sketch",
+                    "delta": 0.4848,
+                    "excess": 1.6546,
+                    "basis": "relative",
+                    "withinTolerance": false
+                  },
+                  {
+                    "ratio": "aspect",
+                    "measured": 1.0357,
+                    "target": 1.1852,
+                    "source": "sketch",
+                    "delta": 0.1495,
+                    "excess": 0.1261,
+                    "basis": "relative",
+                    "withinTolerance": true
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "after": null,
+        "accepted": false,
+        "reason": "exchange-refused"
+      }
+    }
+  ],
+  "final": {
+    "outcome": "exchange-refused",
+    "rounds": 3,
+    "conformance": {
+      "schema": "pack-conformance/v1",
+      "passed": false,
+      "checks": [
+        {
+          "name": "courses-even",
+          "passed": true,
+          "findings": []
+        },
+        {
+          "name": "symmetry-held",
+          "passed": true,
+          "findings": []
+        },
+        {
+          "name": "openings-rhythm",
+          "passed": true,
+          "findings": []
+        },
+        {
+          "name": "palette-in-pack",
+          "passed": true,
+          "findings": []
+        },
+        {
+          "name": "watertight",
+          "passed": true,
+          "findings": [],
+          "mouths": 0
+        },
+        {
+          "name": "single-component",
+          "passed": true,
+          "findings": [],
+          "components": 1
+        },
+        {
+          "name": "proportion-vs-concept",
+          "passed": false,
+          "findings": [
+            "ridgeToEave 4.5 vs target 1.4145 (sketch) — Δrel 2.1813 > tolerance 0.15",
+            "roofShare 0.7778 vs target 0.293 (sketch) — Δrel 1.6546 > tolerance 0.15"
+          ],
+          "ratios": {
+            "tolerance": 0.15,
+            "rows": [
+              {
+                "ratio": "ridgeToEave",
+                "measured": 4.5,
+                "target": 1.4145,
+                "source": "sketch",
+                "delta": 3.0855,
+                "excess": 2.1813,
+                "basis": "relative",
+                "withinTolerance": false
+              },
+              {
+                "ratio": "roofShare",
+                "measured": 0.7778,
+                "target": 0.293,
+                "source": "sketch",
+                "delta": 0.4848,
+                "excess": 1.6546,
+                "basis": "relative",
+                "withinTolerance": false
+              },
+              {
+                "ratio": "aspect",
+                "measured": 1.0357,
+                "target": 1.1852,
+                "source": "sketch",
+                "delta": 0.1495,
+                "excess": 0.1261,
+                "basis": "relative",
+                "withinTolerance": true
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

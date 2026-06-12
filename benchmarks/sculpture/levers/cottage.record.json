@@ -1,0 +1,91 @@
+{
+  "schema": "geometry-levers/v1",
+  "ticket": "T-136-01",
+  "subject": "cottage",
+  "runKey": "cottage",
+  "pack": "rustic",
+  "inputs": {
+    "seed": {
+      "path": "benchmarks/sculpture/workshop/cottage/program.json",
+      "sha256": "4a0c3ca940e15d0d15a189a940a3f3c1bf94eb4c842c90488b57ef2d8dcd10e9"
+    },
+    "source": {
+      "path": "benchmarks/sculpture/recognition/cottage.program.json",
+      "sha256": "a7b60b01857c0c8b0173e16c75495f7a3ce4c956ff142ce2d1ae398e31e134c1"
+    },
+    "sketch": {
+      "path": "benchmarks/sculpture/form-sketch/cottage.json",
+      "sha256": "fec1a6691882ec6a372354bc6957d4f57d45e38488642da5cc4c83b4919cc7ca"
+    },
+    "pack": {
+      "path": "packs/rustic.json",
+      "sha256": "19834c8ba66333efcc7b6fe594bdc2772877202752809e508b78613c608cf434"
+    },
+    "concept": {
+      "path": "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
+      "sha256": "506c25132952d3d4ccb7d1f78816982542612d8464087bad07c0f9b847e57759"
+    }
+  },
+  "proportionsDeclared": {
+    "schema": "silhouette-proportion/v1",
+    "targets": {
+      "ridgeToEave": 1.4145,
+      "roofShare": 0.293,
+      "aspect": 1.1852
+    },
+    "sources": {
+      "ridgeToEave": "sketch",
+      "roofShare": "sketch",
+      "aspect": "sketch"
+    },
+    "tolerance": 0.15
+  },
+  "ratios": {
+    "targets": {
+      "ridgeToEave": 1.4145,
+      "roofShare": 0.293,
+      "aspect": 1.1852
+    },
+    "rows": [
+      {
+        "round": 0,
+        "ridgeToEave": 2.25,
+        "roofShare": 0.5556,
+        "aspect": 1.0769
+      },
+      {
+        "round": 1,
+        "ridgeToEave": 2.25,
+        "roofShare": 0.5556,
+        "aspect": 1.0769
+      },
+      {
+        "round": 2,
+        "ridgeToEave": 2.25,
+        "roofShare": 0.5556,
+        "aspect": 1.0769
+      },
+      {
+        "round": 3,
+        "ridgeToEave": 2.25,
+        "roofShare": 0.5556,
+        "aspect": 1.0769
+      }
+    ]
+  },
+  "outcome": "exchange-refused",
+  "geometryRounds": [
+    {
+      "round": 1,
+      "kind": "geometry",
+      "accepted": false,
+      "reason": "regressed: passed 6→6, findings 2→2; ridgeToEave Δ 2.1813→3.5953 beyond tolerance"
+    },
+    {
+      "round": 2,
+      "kind": "geometry",
+      "accepted": false,
+      "reason": "regressed: passed 6→6, findings 2→2; ridgeToEave Δ 2.1813→3.5953 beyond tolerance"
+    }
+  ]
+}
