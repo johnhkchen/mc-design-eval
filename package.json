@@ -118,6 +118,10 @@
     "measured:barn": "node benchmarks/sculpture/measured-proportions.mjs --subject barn",
     "measured:repro": "node benchmarks/sculpture/measured-proportions.mjs --all --repro",
     "measured:offline": "node benchmarks/sculpture/measured-proportions.mjs --all --offline",
+    "steep:barn": "node benchmarks/sculpture/steep-pitch.mjs --subject barn",
+    "steep:barn:saltcrag": "node benchmarks/sculpture/steep-pitch.mjs --subject barn --pack packs/saltcrag.json",
+    "steep:repro": "node benchmarks/sculpture/steep-pitch.mjs --all --repro",
+    "steep:offline": "node benchmarks/sculpture/steep-pitch.mjs --all --offline",
     "style:form": "node scripts/form-style.mjs",
     "style:ratify": "node scripts/ratify-pack.mjs",
     "factory:receipts": "node scripts/factory-receipts.mjs --style saltcrag"

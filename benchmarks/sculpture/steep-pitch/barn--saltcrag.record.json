@@ -1,0 +1,138 @@
+{
+  "schema": "steep-pitch/v1",
+  "ticket": "T-134-01",
+  "subject": "barn",
+  "runKey": "barn--saltcrag",
+  "pack": "saltcrag",
+  "inputs": {
+    "recognitionProgram": {
+      "path": "benchmarks/sculpture/recognition/barn--saltcrag.program.json",
+      "sha256": "de83dafbfd90f52a73563e722f2b9d5ec673538af5e1294e083272545293f24b"
+    },
+    "sketch": {
+      "path": "benchmarks/sculpture/form-sketch/barn.json",
+      "sha256": "8a0390e55ed0ef60a60c487c23a6b2bca47e5c03e4c5444d18cef2f9f44d69c1"
+    }
+  },
+  "demand": {
+    "conceptPath": "benchmarks/sculpture/runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png",
+    "sketchPitch": {
+      "class": "pitched45",
+      "dominantTiltDeg": 45
+    },
+    "packPitchClasses": [
+      2,
+      1,
+      0.5
+    ],
+    "steepClass": 2,
+    "note": "the mesh-derived sketch flattens pitched roofs (TRELLIS profile drift, T-123); the concept is the contract (E-33 Honesty) — the realized class is the style's steepest declared, the sketch's tilt recorded beside it"
+  },
+  "steepened": [
+    "hall"
+  ],
+  "before": {
+    "seedSha256": "d962934d0acf471864bf856551f9b322c0e81be5cac996e446a023a9f06fe88b",
+    "cells": 10117,
+    "roofs": [
+      {
+        "id": "hall-roof",
+        "eaveY": 9,
+        "ridgeY": 21,
+        "pitch": 1
+      }
+    ],
+    "ratios": {
+      "ridgeToEave": 2.4444,
+      "roofShare": 0.5909,
+      "aspect": 2
+    }
+  },
+  "after": {
+    "seedSha256": "e9e4025f7372306bd892ee384dbcf826456449fdd8969ca84ee8d5a449f6db97",
+    "cells": 17605,
+    "roofs": [
+      {
+        "id": "hall-roof",
+        "eaveY": 9,
+        "ridgeY": 33,
+        "pitch": 2
+      }
+    ],
+    "ratios": {
+      "ridgeToEave": 3.7778,
+      "roofShare": 0.7353,
+      "aspect": 2
+    },
+    "conformance": {
+      "passed": true
+    }
+  },
+  "target": {
+    "ridgeToEave": 2.1,
+    "roofShare": 0.5238,
+    "aspect": 1.8462
+  },
+  "evidence": {
+    "before": [
+      {
+        "angle": "+x+z",
+        "path": "benchmarks/sculpture/steep-pitch/view-barn--saltcrag-before-+x+z.png",
+        "bytes": 417969,
+        "sha256": "e42ca5e7f38ff35a77106ef8145551f80ef2d378ba2045826b69660bb62cc6ca"
+      },
+      {
+        "angle": "+x-z",
+        "path": "benchmarks/sculpture/steep-pitch/view-barn--saltcrag-before-+x-z.png",
+        "bytes": 414204,
+        "sha256": "5ca2d630e0cb7bdf43db9be1b13a6112215dc83bb01da3eef4e39d698fb40a18"
+      },
+      {
+        "angle": "-x-z",
+        "path": "benchmarks/sculpture/steep-pitch/view-barn--saltcrag-before--x-z.png",
+        "bytes": 404483,
+        "sha256": "ea1bca149d8a39a095d54aa09142e7baa4ec29aafb1a2486a930719da199b3e6"
+      },
+      {
+        "angle": "-x+z",
+        "path": "benchmarks/sculpture/steep-pitch/view-barn--saltcrag-before--x+z.png",
+        "bytes": 416726,
+        "sha256": "52bfda322e1d4ed250282aeb24c6ae7f14e267a6d493562c8d215cacce9c0383"
+      }
+    ],
+    "after": [
+      {
+        "angle": "+x+z",
+        "path": "benchmarks/sculpture/steep-pitch/view-barn--saltcrag-after-+x+z.png",
+        "bytes": 440812,
+        "sha256": "51062b737b0a6aca64dfa8b50a3eaaf2aa469f71036f19a48d2690b137eb0c1b"
+      },
+      {
+        "angle": "+x-z",
+        "path": "benchmarks/sculpture/steep-pitch/view-barn--saltcrag-after-+x-z.png",
+        "bytes": 429642,
+        "sha256": "0a68a0df89ee44c2e94ddb6509fc0797b02c9f605d006f5a369a6cf6476000ec"
+      },
+      {
+        "angle": "-x-z",
+        "path": "benchmarks/sculpture/steep-pitch/view-barn--saltcrag-after--x-z.png",
+        "bytes": 416257,
+        "sha256": "a15a4df042d35a00863e903a7381de888b03bb2a55af392727c740f04bfbe0eb"
+      },
+      {
+        "angle": "-x+z",
+        "path": "benchmarks/sculpture/steep-pitch/view-barn--saltcrag-after--x+z.png",
+        "bytes": 438917,
+        "sha256": "30c182f6d764b72e3f0146138efd68e374cc71bacd1b83b302da9a8e3e2fcd0e"
+      }
+    ]
+  },
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  },
+  "replay": {
+    "npmRun": "steep:repro (--pack packs/saltcrag.json)",
+    "asserts": "committed program + pack → byte-identical before/after seeds, ratios, after-artifact"
+  }
+}
