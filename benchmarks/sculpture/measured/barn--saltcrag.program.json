@@ -1,0 +1,169 @@
+{
+  "schema": "measured-program/v1",
+  "ticket": "T-138-01",
+  "subject": "barn",
+  "runKey": "barn--saltcrag",
+  "pack": "saltcrag",
+  "inputs": {
+    "recognitionProgram": {
+      "path": "benchmarks/sculpture/recognition/barn--saltcrag.program.json",
+      "sha256": "de83dafbfd90f52a73563e722f2b9d5ec673538af5e1294e083272545293f24b"
+    },
+    "sketch": {
+      "path": "benchmarks/sculpture/form-sketch/barn.json",
+      "sha256": "8a0390e55ed0ef60a60c487c23a6b2bca47e5c03e4c5444d18cef2f9f44d69c1"
+    }
+  },
+  "attempt": "fp:xz eave:measured",
+  "dimensions": [
+    {
+      "mass": "*",
+      "parameter": "footprint.w",
+      "source": "measured",
+      "measured": 48,
+      "used": 48,
+      "residual": 0,
+      "note": "sketch planDims (registry blocks), endpoint-scaled across masses"
+    },
+    {
+      "mass": "*",
+      "parameter": "footprint.d",
+      "source": "measured",
+      "measured": 26,
+      "used": 26,
+      "residual": 0,
+      "note": "sketch planDims (registry blocks), endpoint-scaled across masses"
+    },
+    {
+      "mass": "hall",
+      "parameter": "eaveHeight",
+      "source": "measured",
+      "measured": 10,
+      "used": 10,
+      "residual": 0,
+      "note": "expressed as 2×5 (schema-bounded factorization)"
+    },
+    {
+      "mass": "hall",
+      "parameter": "storeyFactorization",
+      "source": "measured",
+      "measured": 10,
+      "used": "2x5",
+      "residual": null,
+      "note": "recognition read 3x3"
+    },
+    {
+      "mass": "hall",
+      "parameter": "pitchClass",
+      "source": "measured",
+      "measured": 1,
+      "used": 1,
+      "residual": 0,
+      "note": "tan(dominant tilt) snapped to the nearest pack pitch class"
+    },
+    {
+      "mass": "hall",
+      "parameter": "ridgeHeight",
+      "source": "measured",
+      "measured": 21,
+      "used": 24,
+      "residual": 3,
+      "note": "derived: eave + pitch x half-span + 1 (all constituents sourced above)"
+    }
+  ],
+  "conflicts": [
+    {
+      "mass": "*",
+      "parameter": "footprint.d",
+      "recognition": 24,
+      "sketch": 26,
+      "resolved": "sketch"
+    },
+    {
+      "mass": "hall",
+      "parameter": "eaveHeight",
+      "recognition": 9,
+      "sketch": 10,
+      "resolved": "sketch"
+    },
+    {
+      "mass": "hall",
+      "parameter": "storeyHeight.packBand",
+      "recognition": "[3, 4]",
+      "sketch": 5,
+      "resolved": "sketch",
+      "note": "pack proportions are the fallback tier (S-133); excursion recorded"
+    }
+  ],
+  "program": {
+    "schema": "building-program/v1",
+    "subject": "barn",
+    "pack": "saltcrag",
+    "reading": {
+      "summary": "A long single-mass barn under one steep gable. The sketch's clean 48×24 rectangle and ridge-along-x read directly as a rectangular hall, eave ~10 / total ~21 → a true 45° pitch (pitchClass 1, rise=run). The 'lumpy' end-elevation triangle with green eave / purple ridge is recognized as a plain gable end, not a literal mesh — substituted clean. Concept evidence overrides the saltcrag rubble default for the ground: the working face is undressed grey fieldstone (wall.field.ground=cobblestone) panelled between squared dressed-stone pilasters and quoins (wall.dressing.quoin=stone_bricks), seated on a single dressed plinth course, exactly the stone-brick base band in the picture. Walls run stone uniformly to the eave, so the upper band stays fieldstone rather than the pack's boarded loft, and the gable triangle is infilled in the same stone with a single tall slit vent high in the apex. The roof is the signature tarred dark-oak shingle (roof.field=dark_oak_planks) capped along the most-beaten ridge by a bought slate course (roof.ridge=deepslate_tiles). Two plain tarred deal doors on the eave-side long wall, spanned by salvaged driftwood lintels (opening.lintel=spruce_log). No chimney or dormers are present — it is an unheated working barn. Mirror is across the ridge (recorded, below the sketch's 0.8 threshold so not asserted).",
+      "symmetryClaim": {
+        "axis": "x"
+      }
+    },
+    "masses": [
+      {
+        "id": "hall",
+        "rect": {
+          "x0": 0,
+          "z0": 0,
+          "w": 48,
+          "d": 26
+        },
+        "storeys": 2,
+        "storeyHeight": 5,
+        "walls": {
+          "ground": {
+            "role": "wall.field.ground"
+          },
+          "upper": {
+            "role": "wall.field.ground"
+          },
+          "dressing": {
+            "role": "wall.dressing.quoin"
+          }
+        },
+        "plinth": {
+          "courses": 1,
+          "role": "wall.dressing.quoin"
+        },
+        "roof": {
+          "idiom": "roof.gable",
+          "ridgeAxis": "x",
+          "pitchClass": 1,
+          "fieldRole": "roof.field",
+          "trimRole": "roof.ridge",
+          "gableRole": "wall.field.ground",
+          "dormers": null
+        },
+        "chimney": null,
+        "openings": [
+          {
+            "wall": "+z",
+            "kind": "door",
+            "count": 2,
+            "w": 2,
+            "h": 4,
+            "sill": 0,
+            "head": "flat",
+            "headRole": "opening.lintel"
+          },
+          {
+            "wall": "-x",
+            "kind": "window",
+            "count": 1,
+            "w": 1,
+            "h": 3,
+            "sill": 5,
+            "head": "flat",
+            "headRole": "opening.lintel"
+          }
+        ]
+      }
+    ]
+  }
+}

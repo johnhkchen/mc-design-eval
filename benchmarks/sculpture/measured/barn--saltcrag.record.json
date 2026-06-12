@@ -1,0 +1,86 @@
+{
+  "schema": "measured-proportions/v1",
+  "ticket": "T-138-01",
+  "subject": "barn",
+  "runKey": "barn--saltcrag",
+  "pack": "saltcrag",
+  "inputs": {
+    "recognitionProgram": {
+      "path": "benchmarks/sculpture/recognition/barn--saltcrag.program.json",
+      "sha256": "de83dafbfd90f52a73563e722f2b9d5ec673538af5e1294e083272545293f24b"
+    },
+    "sketch": {
+      "path": "benchmarks/sculpture/form-sketch/barn.json",
+      "sha256": "8a0390e55ed0ef60a60c487c23a6b2bca47e5c03e4c5444d18cef2f9f44d69c1"
+    }
+  },
+  "program": {
+    "path": "benchmarks/sculpture/measured/barn--saltcrag.program.json",
+    "attempt": "fp:xz eave:measured",
+    "sources": {
+      "measured": 6
+    }
+  },
+  "seed": {
+    "sha256": "d12a9a46bfbc62f258ddabf80f5f4b5e7176d3678939b9edb141bfc863d5b52d",
+    "cells": 11645,
+    "conformance": {
+      "passed": true
+    }
+  },
+  "ratios": {
+    "before": {
+      "ridgeToEave": 2.4444,
+      "roofShare": 0.5909,
+      "aspect": 2
+    },
+    "beforeSource": "benchmarks/sculpture/workshop/barn--saltcrag/program.json",
+    "after": {
+      "ridgeToEave": 2.4,
+      "roofShare": 0.5833,
+      "aspect": 1.8462
+    },
+    "target": {
+      "ridgeToEave": 2.1,
+      "roofShare": 0.5238,
+      "aspect": 1.8462
+    }
+  },
+  "evidence": {
+    "renders": [
+      {
+        "angle": "+x+z",
+        "path": "benchmarks/sculpture/measured/view-barn--saltcrag-+x+z.png",
+        "bytes": 433806,
+        "sha256": "809b05c41bd936e2e4f071c9d8004719980ac4e43aa7a6e028ae66b85f019080"
+      },
+      {
+        "angle": "+x-z",
+        "path": "benchmarks/sculpture/measured/view-barn--saltcrag-+x-z.png",
+        "bytes": 430881,
+        "sha256": "64583810e285df1b52f674643bc5afd985b16c9808bdcc07d38549909fd1651e"
+      },
+      {
+        "angle": "-x-z",
+        "path": "benchmarks/sculpture/measured/view-barn--saltcrag--x-z.png",
+        "bytes": 419355,
+        "sha256": "bb26318540fe8c8a840c76f2061d6d256e443ab2d28bdf03093cee429001d626"
+      },
+      {
+        "angle": "-x+z",
+        "path": "benchmarks/sculpture/measured/view-barn--saltcrag--x+z.png",
+        "bytes": 431979,
+        "sha256": "2cf30d1d7736af1c341debdfcfb5ac8ae85fc4570502e2c3d953196048bb33e3"
+      }
+    ],
+    "renderError": null
+  },
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  },
+  "replay": {
+    "npmRun": "measured:repro (--pack packs/saltcrag.json)",
+    "asserts": "committed sketch + recognition program → byte-identical measured program, artifact, ratios"
+  }
+}

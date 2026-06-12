@@ -70,8 +70,9 @@ function chainRunKeys() {
     .sort();
 }
 
-const gateLabelOf = (rec) => (rec.runKey === rec.subject ? "patternbook" : `patternbook-${rec.pack}`);
-const gateSlugOf = (rec) => `${rec.subject}-${gateLabelOf(rec)}`;
+// runKey comes from the FILENAME, not the record — pre-T-132 chain records carry no runKey field
+const gateLabelOf = (runKey, rec) => (runKey === rec.subject ? "patternbook" : `patternbook-${rec.pack}`);
+const gateSlugOf = (runKey, rec) => `${rec.subject}-${gateLabelOf(runKey, rec)}`;
 const packRelOf = (style) => `packs/${style}.json`;
 
 /** Both gap-budget arithmetics, quoted from one gate record — never reconciled (E-33 Rule 3). */
@@ -80,7 +81,9 @@ function arithmeticsOf(gate) {
   const judged = verdicts.filter((x) => x !== null).length;
   const sameObject = verdicts.filter((x) => x === "same object").length;
   const severities = {};
-  for (const g of gate.aggregate?.gaps ?? []) severities[g.severity ?? "unstated"] = (severities[g.severity ?? "unstated"] ?? 0) + 1;
+  for (const v of gate.views ?? []) {
+    for (const g of v.verdict?.gaps ?? []) severities[g.severity ?? "unstated"] = (severities[g.severity ?? "unstated"] ?? 0) + 1;
+  }
   return {
     identity: { decided: gate.aggregate?.decided ?? false, sameObjectViews: sameObject, judgedViews: judged, severities },
     budget: { gapCount: gate.aggregate?.gapCount ?? null, gapBudget: gate.aggregate?.gapBudget ?? null, passed: gate.aggregate?.passed ?? null },
@@ -125,7 +128,7 @@ async function runBaselines() {
     const chainText = await readRel(`${CHAIN_REL}/${runKey}.json`);
     const chain = JSON.parse(chainText);
     if (chain.status === "pipeline-failed") continue;
-    const slug = gateSlugOf(chain);
+    const slug = gateSlugOf(runKey, chain);
     const gateRel = `${GATE_REL}/${slug}.json`;
     if (!existsSync(join(ROOT, gateRel))) continue;
     const gateText = await readRel(gateRel);

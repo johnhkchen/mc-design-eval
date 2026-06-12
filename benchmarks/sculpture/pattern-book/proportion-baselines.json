@@ -1,0 +1,140 @@
+{
+  "schema": "proportion-baselines/v1",
+  "ticket": "T-138-01",
+  "note": "pre-rotation quotes — the re-runs retire these pins; the bytes remain in git history at these shas",
+  "subjects": [
+    {
+      "runKey": "barn",
+      "subject": "barn",
+      "pack": "rustic",
+      "gateSlug": "barn-patternbook",
+      "pins": {
+        "chain": {
+          "path": "benchmarks/sculpture/pattern-book/barn.json",
+          "sha256": "7c82fcb7495f50a1c3717956c4b57d69a557ea777db59cd74bab35a3a26080a2"
+        },
+        "ledger": {
+          "path": "benchmarks/sculpture/workshop/barn.json",
+          "sha256": "11ec20dd9d3d8407c3ddcaf582b2c0e732237ab3f594f048714b8f8721606fbb"
+        },
+        "gate": {
+          "path": "benchmarks/sculpture/multi-angle/barn-patternbook.json",
+          "sha256": "3dc04c970f6781b9fcd84fb756d87ef0d23180e5af38756065141cde3295d492"
+        }
+      },
+      "finalRatios": {
+        "round": 6,
+        "ridgeToEave": 2.4444,
+        "roofShare": 0.5909,
+        "aspect": 2
+      },
+      "arithmetics": {
+        "identity": {
+          "decided": true,
+          "sameObjectViews": 4,
+          "judgedViews": 4,
+          "severities": {
+            "minor": 8
+          }
+        },
+        "budget": {
+          "gapCount": 8,
+          "gapBudget": 2,
+          "passed": false
+        },
+        "coverageFailures": []
+      }
+    },
+    {
+      "runKey": "barn--saltcrag",
+      "subject": "barn",
+      "pack": "saltcrag",
+      "gateSlug": "barn-patternbook-saltcrag",
+      "pins": {
+        "chain": {
+          "path": "benchmarks/sculpture/pattern-book/barn--saltcrag.json",
+          "sha256": "628198778c841348423fef466204e1f7ddbfd30918330c217686ab49b3083a7f"
+        },
+        "ledger": {
+          "path": "benchmarks/sculpture/workshop/barn--saltcrag.json",
+          "sha256": "d3876e5b8f4ffcca08b71f957238262cf4c05c43a153808fa4b816318a29903e"
+        },
+        "gate": {
+          "path": "benchmarks/sculpture/multi-angle/barn-patternbook-saltcrag.json",
+          "sha256": "88055c5f908483da2f8d791670430d9df9d64842dcd82716b837d991deaa080e"
+        }
+      },
+      "finalRatios": {
+        "round": 4,
+        "ridgeToEave": 2.4444,
+        "roofShare": 0.5909,
+        "aspect": 2
+      },
+      "arithmetics": {
+        "identity": {
+          "decided": true,
+          "sameObjectViews": 4,
+          "judgedViews": 4,
+          "severities": {
+            "minor": 8
+          }
+        },
+        "budget": {
+          "gapCount": 8,
+          "gapBudget": 2,
+          "passed": false
+        },
+        "coverageFailures": []
+      }
+    },
+    {
+      "runKey": "cottage",
+      "subject": "cottage",
+      "pack": "rustic",
+      "gateSlug": "cottage-patternbook",
+      "pins": {
+        "chain": {
+          "path": "benchmarks/sculpture/pattern-book/cottage.json",
+          "sha256": "b4a390b7191e521f3215ff7f9e001069c1167de5944e4b9c957b48fe56a242d4"
+        },
+        "ledger": {
+          "path": "benchmarks/sculpture/workshop/cottage.json",
+          "sha256": "e1abd583ca3393b3c1bef19dbab10992b5937994563d27fc1ce9eb9605701c0c"
+        },
+        "gate": {
+          "path": "benchmarks/sculpture/multi-angle/cottage-patternbook.json",
+          "sha256": "f5567754f77c83278f2e7e2677de3773465269b552afa94cad762dc4d10dd0a7"
+        }
+      },
+      "finalRatios": {
+        "round": 6,
+        "ridgeToEave": 2.25,
+        "roofShare": 0.5556,
+        "aspect": 1.0769
+      },
+      "arithmetics": {
+        "identity": {
+          "decided": true,
+          "sameObjectViews": 0,
+          "judgedViews": 0,
+          "severities": {}
+        },
+        "budget": {
+          "gapCount": 0,
+          "gapBudget": 2,
+          "passed": false
+        },
+        "coverageFailures": [
+          "+x+z",
+          "+x-z",
+          "-x-z",
+          "-x+z"
+        ]
+      }
+    }
+  ],
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  }
+}
