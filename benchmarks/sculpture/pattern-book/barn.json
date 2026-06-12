@@ -1,6 +1,6 @@
 {
   "schema": "pattern-book-chain/v1",
-  "ticket": "T-138-01",
+  "ticket": "T-143-01",
   "subject": "barn",
   "runKey": "barn",
   "pack": "rustic",
@@ -115,14 +115,6 @@
             "recognition": 9,
             "sketch": 10,
             "resolved": "sketch"
-          },
-          {
-            "mass": "barn",
-            "parameter": "storeyHeight.packBand",
-            "recognition": "[3, 4]",
-            "sketch": 5,
-            "resolved": "sketch",
-            "note": "pack proportions are the fallback tier (S-133); excursion recorded"
           }
         ]
       },
@@ -149,19 +141,19 @@
     "workshop": {
       "ledger": {
         "path": "benchmarks/sculpture/workshop/barn.json",
-        "sha256": "8280d5acf71ca307ffa6a2bb910d72fc98f90309741d76398246265e8e895437"
+        "sha256": "aada53d968a403429a7e289c777b395440dd2c23f080c94eba1933a3bbebdbcc"
       },
       "final": {
         "path": "benchmarks/sculpture/workshop/barn/final-artifact.json",
-        "sha256": "58bc3725dbab97228bd60c8eb5ec78594729759ef46b28e983666bcd3444ae1c"
+        "sha256": "c3cdc6c6e706de1aa3907ed42e2a950287473e4eb6af5dbc1a4d1795a41c3aec"
       },
       "outcome": "done",
       "rounds": {
-        "used": 3,
+        "used": 4,
         "budget": 6
       },
-      "accepted": 2,
-      "rolledBack": 0,
+      "accepted": 1,
+      "rolledBack": 2,
       "unavailable": 0,
       "applyFailed": 0,
       "conformance": {
@@ -178,7 +170,7 @@
     },
     "plan": {
       "path": "benchmarks/sculpture/workshop/barn/component-plan.json",
-      "sha256": "46c66f5f86cb4bf7f38800b9f440f69901a436f076c35521bc9692e2db42f145"
+      "sha256": "153b6304baf76ccb2055a0f2307319c7df7abf7f325c04eea52b670004106015"
     }
   },
   "generalization": {

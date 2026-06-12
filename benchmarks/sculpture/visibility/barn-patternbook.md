@@ -12,7 +12,7 @@ Committed gate record `benchmarks/sculpture/multi-angle/barn-patternbook.json` r
 | -x+z | pass | pass | — |
 
 ## Band visibility
-- `band0`: **visible** — visible from [+x+z, +x-z, -x-z, -x+z], 1196 exposure-skin cells
+- `band0`: **visible** — visible from [+x+z, +x-z, -x-z, -x+z], 1616 exposure-skin cells
 - `roof`: **visible** — visible from [+x+z, +x-z, -x-z, -x+z], 2572 exposure-skin cells
 
 Cross-view verdict: no hidden band.

@@ -5,10 +5,10 @@
   "label": "patternbook",
   "source": {
     "record": "benchmarks/sculpture/multi-angle/barn-patternbook.json",
-    "sha256": "3dc04c970f6781b9fcd84fb756d87ef0d23180e5af38756065141cde3295d492",
+    "sha256": "8e23fb06fb4313ee3ae5381109f910f3bce9becec39b6a62b139e0b0bd5e6b56",
     "artifact": {
       "path": "benchmarks/sculpture/workshop/barn/final-artifact.json",
-      "sha256": "91ee4b2e7b6dc2107e949303f919fb3c4e5dfb51eb245c79627f7a1f6dc29185"
+      "sha256": "c3cdc6c6e706de1aa3907ed42e2a950287473e4eb6af5dbc1a4d1795a41c3aec"
     }
   },
   "contract": {
@@ -22,6 +22,7 @@
     "width": 512,
     "height": 512,
     "gapBudget": 2,
+    "minorBudget": 10,
     "coverageThreshold": 0.5,
     "note": "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them"
   },
@@ -63,7 +64,7 @@
     "basis": "rederived",
     "byBand": {
       "band0": {
-        "total": 1196
+        "total": 1616
       },
       "roof": {
         "total": 2572
@@ -82,7 +83,7 @@
           "band0": {
             "dominant": "cobblestone",
             "fraction": 1,
-            "total": 639,
+            "total": 852,
             "passed": true,
             "metric": "own",
             "own": [
@@ -91,7 +92,7 @@
               "stone_bricks",
               "oak_planks"
             ],
-            "dominantFraction": 0.869
+            "dominantFraction": 0.901
           },
           "roof": {
             "dominant": "dark_oak_planks",
@@ -116,7 +117,7 @@
           "band0": {
             "dominant": "cobblestone",
             "fraction": 1,
-            "total": 639,
+            "total": 852,
             "passed": true,
             "metric": "own",
             "own": [
@@ -125,7 +126,7 @@
               "stone_bricks",
               "oak_planks"
             ],
-            "dominantFraction": 0.869
+            "dominantFraction": 0.901
           },
           "roof": {
             "dominant": "dark_oak_planks",
@@ -153,7 +154,7 @@
           "band0": {
             "dominant": "cobblestone",
             "fraction": 1,
-            "total": 639,
+            "total": 852,
             "passed": true,
             "metric": "own",
             "own": [
@@ -162,7 +163,7 @@
               "stone_bricks",
               "oak_planks"
             ],
-            "dominantFraction": 0.875
+            "dominantFraction": 0.906
           },
           "roof": {
             "dominant": "dark_oak_planks",
@@ -187,7 +188,7 @@
           "band0": {
             "dominant": "cobblestone",
             "fraction": 1,
-            "total": 639,
+            "total": 852,
             "passed": true,
             "metric": "own",
             "own": [
@@ -196,7 +197,7 @@
               "stone_bricks",
               "oak_planks"
             ],
-            "dominantFraction": 0.875
+            "dominantFraction": 0.906
           },
           "roof": {
             "dominant": "dark_oak_planks",
@@ -224,7 +225,7 @@
           "band0": {
             "dominant": "cobblestone",
             "fraction": 1,
-            "total": 639,
+            "total": 852,
             "passed": true,
             "metric": "own",
             "own": [
@@ -233,7 +234,7 @@
               "stone_bricks",
               "oak_planks"
             ],
-            "dominantFraction": 0.875
+            "dominantFraction": 0.906
           },
           "roof": {
             "dominant": "dark_oak_planks",
@@ -258,7 +259,7 @@
           "band0": {
             "dominant": "cobblestone",
             "fraction": 1,
-            "total": 639,
+            "total": 852,
             "passed": true,
             "metric": "own",
             "own": [
@@ -267,7 +268,7 @@
               "stone_bricks",
               "oak_planks"
             ],
-            "dominantFraction": 0.875
+            "dominantFraction": 0.906
           },
           "roof": {
             "dominant": "dark_oak_planks",
@@ -295,7 +296,7 @@
           "band0": {
             "dominant": "cobblestone",
             "fraction": 1,
-            "total": 639,
+            "total": 852,
             "passed": true,
             "metric": "own",
             "own": [
@@ -304,7 +305,7 @@
               "stone_bricks",
               "oak_planks"
             ],
-            "dominantFraction": 0.869
+            "dominantFraction": 0.901
           },
           "roof": {
             "dominant": "dark_oak_planks",
@@ -329,7 +330,7 @@
           "band0": {
             "dominant": "cobblestone",
             "fraction": 1,
-            "total": 639,
+            "total": 852,
             "passed": true,
             "metric": "own",
             "own": [
@@ -338,7 +339,7 @@
               "stone_bricks",
               "oak_planks"
             ],
-            "dominantFraction": 0.869
+            "dominantFraction": 0.901
           },
           "roof": {
             "dominant": "dark_oak_planks",
@@ -367,7 +368,7 @@
           "-x-z",
           "-x+z"
         ],
-        "exposedCells": 1196
+        "exposedCells": 1616
       },
       "roof": {
         "status": "visible",

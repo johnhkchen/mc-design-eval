@@ -14,14 +14,12 @@ Reproduce: `npm run proportion:repro`.
 
 | round | action | critique issues | ridge:eave | roof share | aspect | proportion gate |
 | --- | --- | --- | --- | --- | --- | --- |
-| 0 | seed | — | 2.4444 | 0.5909 | 1.8462 | FAIL — ridgeToEave |
-| 1 | revise (rolled back) | major: roof field<br>minor: long walls (+z/-z)<br>minor: gable apex vent | 2.4444 | 0.5909 | 1.8462 | FAIL — ridgeToEave |
-| 2 | revise (rolled back) | major: +z facade, large openings at x15-17 and x30-32<br>minor: roof field<br>minor: +x gable end | 2.4444 | 0.5909 | 1.8462 | FAIL — ridgeToEave |
-| 3 | revise (rolled back) | major: +z facade large openings (x15, x30)<br>major: long-wall bays<br>minor: overall mass / roof | 2.4444 | 0.5909 | 1.8462 | FAIL — ridgeToEave |
-| 4 | revise (rolled back) | major: +z long wall, door bays at x15-17 and x30-32<br>minor: +z/-z field walls<br>minor: gable ends (±x triangles) | 2.4444 | 0.5909 | 1.8462 | FAIL — ridgeToEave |
-| 5 | revise (rolled back) | major: +z facade, big bays at x15 and x30<br>minor: +z / -z long walls<br>minor: gable rake (+x end) | 2.4444 | 0.5909 | 1.8462 | FAIL — ridgeToEave |
-| 6 | revise (rolled back) | major: +z long wall, x15-17 & x30-32 ground openings<br>minor: +z facade overall<br>minor: gable end | 2.4444 | 0.5909 | 1.8462 | FAIL — ridgeToEave |
+| 0 | seed | — | 2.4 | 0.5833 | 1.7143 | pass |
+| 1 | revise (rolled back) | major: +z long wall, wagon doors (x15-17, x30-32)<br>minor: overall silhouette / roof<br>minor: long-wall bay rhythm<br>minor: gable end | 2.4 | 0.5833 | 1.7143 | pass |
+| 2 | revise | major: roof / gable silhouette<br>minor: gable end wall<br>minor: +z facade windows | 2.0833 | 0.52 | 1.8462 | pass |
+| 3 | revise (rolled back) | major: +z front wall, right wagon doorway (x30–32)<br>minor: Wall panels (both long walls)<br>minor: Silhouette aspect<br>minor: Gable end | 2.0833 | 0.52 | 1.8462 | pass |
+| 4 | done | minor: long walls (windows)<br>minor: aspect ratio | 2.0833 | 0.52 | 1.8462 | pass |
 
 ## The named defect
 
-**ridgeToEave 2.4444 vs target 2.1 (sketch) — Δrel 0.164 > tolerance 0.15.** The build reads as mostly roof: the silhouette's widest layer (jetty + eave overhang) sits low, so the storeys below it are a sliver of the elevation — the squat-storey / shallow read the judge-side coverage rejection and the model's own critique kept describing, now with a number every round could have aimed at.
+No whole-object ratio ends beyond tolerance — the chain's proportions match the declared targets.
