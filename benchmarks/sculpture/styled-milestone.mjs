@@ -199,6 +199,10 @@ export function distillGate(gateRec, key, gateCode, label = GATE_LABEL) {
       : "MISSING-OVERALL",
     resemblance: gateRec.aggregate ? {
       decided: gateRec.aggregate.decided ?? false, passed: gateRec.aggregate.passed ?? null,
+      // T-144-01 dual reporting (null on pre-v2 records): v2 deciding arithmetic + legacy ≤2 beside.
+      policy: gateRec.aggregate.policy ?? null,
+      majorCount: gateRec.aggregate.majorCount ?? null, minorCount: gateRec.aggregate.minorCount ?? null,
+      minorBudget: gateRec.aggregate.minorBudget ?? null, legacy: gateRec.aggregate.legacy ?? null,
       gapCount: gateRec.aggregate.gapCount ?? null, gapBudget: gateRec.aggregate.gapBudget ?? null,
       failures: gateRec.aggregate.failures ?? null, refusal: gateRec.aggregate.refusal ?? null,
     } : null,

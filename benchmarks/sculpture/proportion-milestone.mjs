@@ -86,7 +86,17 @@ function arithmeticsOf(gate) {
   }
   return {
     identity: { decided: gate.aggregate?.decided ?? false, sameObjectViews: sameObject, judgedViews: judged, severities },
-    budget: { gapCount: gate.aggregate?.gapCount ?? null, gapBudget: gate.aggregate?.gapBudget ?? null, passed: gate.aggregate?.passed ?? null },
+    // T-144-01 dual reporting: v2 (deciding) beside the legacy ≤2 arithmetic. Pre-v2 records carry
+    // no policy/legacy → those fields are null and `passed` is the legacy verdict.
+    budget: {
+      passed: gate.aggregate?.passed ?? null,
+      policy: gate.aggregate?.policy ?? null,
+      majorCount: gate.aggregate?.majorCount ?? null,
+      minorCount: gate.aggregate?.minorCount ?? null,
+      minorBudget: gate.aggregate?.minorBudget ?? null,
+      gapCount: gate.aggregate?.gapCount ?? null, gapBudget: gate.aggregate?.gapBudget ?? null,
+      legacy: gate.aggregate?.legacy ?? null,
+    },
     coverageFailures: (gate.aggregate?.failures ?? []).filter((f) => f.reason === "coverage").map((f) => f.angle),
   };
 }
