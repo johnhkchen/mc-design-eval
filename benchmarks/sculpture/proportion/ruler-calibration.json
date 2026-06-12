@@ -1,0 +1,302 @@
+{
+  "schema": "ruler-calibration/v1",
+  "ticket": "T-140-01",
+  "note": "the straight ruler (E-34/S-140): name the lens, calibrate the tolerance, give pitch its source. Workshop-side; the frozen judge is untouched.",
+  "lensDivergence": [
+    {
+      "runKey": "barn",
+      "lenses": {
+        "program": "program",
+        "occupancy": "occupancy"
+      },
+      "programLens": {
+        "ridgeToEave": 2.1,
+        "roofShare": 0.5238,
+        "aspect": 1.8462,
+        "lens": "program"
+      },
+      "occupancyLens": {
+        "ridgeToEave": 2.4444,
+        "roofShare": 0.5909,
+        "aspect": 1.8462,
+        "lens": "occupancy"
+      },
+      "ratios": [
+        {
+          "ratio": "ridgeToEave",
+          "program": 2.1,
+          "programSource": "sketch",
+          "occupancy": 2.4444,
+          "factor": 1.164
+        },
+        {
+          "ratio": "roofShare",
+          "program": 0.5238,
+          "programSource": "sketch",
+          "occupancy": 0.5909,
+          "factor": 1.1281
+        },
+        {
+          "ratio": "aspect",
+          "program": 1.8462,
+          "programSource": "sketch",
+          "occupancy": 1.8462,
+          "factor": 1
+        }
+      ],
+      "maxDivergence": {
+        "ratio": "ridgeToEave",
+        "factor": 1.164
+      }
+    },
+    {
+      "runKey": "cottage",
+      "lenses": {
+        "program": "program",
+        "occupancy": "occupancy"
+      },
+      "programLens": {
+        "ridgeToEave": 1.4145,
+        "roofShare": 0.293,
+        "aspect": 1.1852,
+        "lens": "program"
+      },
+      "occupancyLens": {
+        "ridgeToEave": 4.5,
+        "roofShare": 0.7778,
+        "aspect": 1.0357,
+        "lens": "occupancy"
+      },
+      "ratios": [
+        {
+          "ratio": "ridgeToEave",
+          "program": 1.4145,
+          "programSource": "sketch",
+          "occupancy": 4.5,
+          "factor": 3.1813
+        },
+        {
+          "ratio": "roofShare",
+          "program": 0.293,
+          "programSource": "sketch",
+          "occupancy": 0.7778,
+          "factor": 2.6546
+        },
+        {
+          "ratio": "aspect",
+          "program": 1.1852,
+          "programSource": "sketch",
+          "occupancy": 1.0357,
+          "factor": 0.8739
+        }
+      ],
+      "maxDivergence": {
+        "ratio": "ridgeToEave",
+        "factor": 3.1813
+      }
+    }
+  ],
+  "toleranceCalibration": {
+    "tolerance": 0.15,
+    "derivedFrom": "E-33 committed proportion-witness records (barn, barn--saltcrag, cottage)",
+    "priorEvidence": [
+      {
+        "subject": "barn",
+        "stage": "seed",
+        "ratio": "ridgeToEave",
+        "excess": 0.164,
+        "within": false,
+        "note": "the loop chased this as a real defect — the sole boundary point"
+      },
+      {
+        "subject": "barn",
+        "stage": "seed",
+        "ratio": "roofShare",
+        "excess": 0.1281,
+        "within": true
+      },
+      {
+        "subject": "barn",
+        "stage": "post-loop",
+        "ratio": "ridgeToEave",
+        "excess": 0.03,
+        "within": true,
+        "note": "T-138-01 landed ratios into tolerance (review finding 2)"
+      },
+      {
+        "subject": "cottage",
+        "stage": "final",
+        "ratio": "ridgeToEave",
+        "excess": 2.1813,
+        "within": false,
+        "note": "OCCUPANCY-lens, plinth-confounded (T-139-01) — out-cluster only"
+      },
+      {
+        "subject": "cottage",
+        "stage": "final",
+        "ratio": "roofShare",
+        "excess": 1.6546,
+        "within": false,
+        "note": "OCCUPANCY-lens, plinth-confounded"
+      }
+    ],
+    "observedFinalRows": [
+      {
+        "runKey": "barn",
+        "ratio": "ridgeToEave",
+        "excess": 0.164,
+        "basis": "relative",
+        "within": false
+      },
+      {
+        "runKey": "barn",
+        "ratio": "roofShare",
+        "excess": 0.1281,
+        "basis": "relative",
+        "within": true
+      },
+      {
+        "runKey": "barn",
+        "ratio": "aspect",
+        "excess": 0,
+        "basis": "relative",
+        "within": true
+      },
+      {
+        "runKey": "cottage",
+        "ratio": "ridgeToEave",
+        "excess": 2.1813,
+        "basis": "relative",
+        "within": false
+      },
+      {
+        "runKey": "cottage",
+        "ratio": "roofShare",
+        "excess": 1.6546,
+        "basis": "relative",
+        "within": false
+      },
+      {
+        "runKey": "cottage",
+        "ratio": "aspect",
+        "excess": 0.1261,
+        "basis": "relative",
+        "within": true
+      }
+    ],
+    "split": {
+      "inClusterMax": 0.1281,
+      "outClusterMin": 0.164,
+      "separates": true
+    },
+    "conclusion": "survives — tightest value consistent with passing post-loop ~0.03 and flagging the barn seed 0.164 the loop chased; bimodal evidence under-determines it, 0.15 is not contradicted"
+  },
+  "pitchPrecedence": [
+    {
+      "runKey": "cottage",
+      "pack": "packs/rustic.json",
+      "concept": {
+        "path": "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
+        "sha256": "506c25132952d3d4ccb7d1f78816982542612d8464087bad07c0f9b847e57759",
+        "coverage": 0.9673,
+        "segmentable": false
+      },
+      "pitchClasses": [
+        1
+      ],
+      "pitchTarget": {
+        "schema": "pitch-target/v1",
+        "source": "sketch-fallback",
+        "ratio": 0.7143,
+        "deg": 35.5382,
+        "conceptRatio": null,
+        "conceptDeg": null,
+        "sketchRatio": 0.7143,
+        "sketchDeg": 35.5382,
+        "divergence": null,
+        "snapped": {
+          "pitchClass": 1,
+          "residual": 0.2857
+        },
+        "steepDoor": false,
+        "conceptSegmentable": false
+      },
+      "steepDoorDemanded": false,
+      "why": "concept unsegmentable (full scene) → sketch-fallback; the pack has NO steep class to demand"
+    },
+    {
+      "runKey": "barn",
+      "pack": "packs/rustic.json",
+      "concept": {
+        "path": "benchmarks/sculpture/runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png",
+        "sha256": "1794ed0f3a3727756f4b393131cb8c5f348e57f26183278e5e0ff904b7a31773",
+        "coverage": 0.5148,
+        "segmentable": false
+      },
+      "pitchClasses": [
+        1
+      ],
+      "pitchTarget": {
+        "schema": "pitch-target/v1",
+        "source": "sketch-fallback",
+        "ratio": 1,
+        "deg": 45,
+        "conceptRatio": null,
+        "conceptDeg": null,
+        "sketchRatio": 1,
+        "sketchDeg": 45,
+        "divergence": null,
+        "snapped": {
+          "pitchClass": 1,
+          "residual": 0
+        },
+        "steepDoor": false,
+        "conceptSegmentable": false
+      },
+      "steepDoorDemanded": false,
+      "why": "concept unsegmentable (full scene) → sketch-fallback; the pack has NO steep class to demand"
+    },
+    {
+      "runKey": "barn--saltcrag",
+      "pack": "packs/saltcrag.json",
+      "concept": {
+        "path": "benchmarks/sculpture/runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png",
+        "sha256": "1794ed0f3a3727756f4b393131cb8c5f348e57f26183278e5e0ff904b7a31773",
+        "coverage": 0.5148,
+        "segmentable": false
+      },
+      "pitchClasses": [
+        2,
+        1,
+        0.5
+      ],
+      "pitchTarget": {
+        "schema": "pitch-target/v1",
+        "source": "sketch-fallback",
+        "ratio": 1,
+        "deg": 45,
+        "conceptRatio": null,
+        "conceptDeg": null,
+        "sketchRatio": 1,
+        "sketchDeg": 45,
+        "divergence": null,
+        "snapped": {
+          "pitchClass": 1,
+          "residual": 0
+        },
+        "steepDoor": false,
+        "conceptSegmentable": false
+      },
+      "steepDoorDemanded": false,
+      "why": "concept unsegmentable (full scene) → sketch-fallback; the pack OFFERS a steep class but the TRELLIS-flattened sketch never reaches it"
+    }
+  ],
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  },
+  "replay": {
+    "npmRun": "ruler:repro",
+    "asserts": "committed witness records + concept PNGs + sketches + packs → byte-identical record (no model, no GL beyond PNG decode, no judge)"
+  }
+}
