@@ -56,6 +56,7 @@ function CritiqueWorkshopRound(
   budget: int,
   image_list: string,
   program_json: string,
+  source_block: string,
   palette_block: string,
   conformance_block: string,
   last_round_note: string,
@@ -75,7 +76,7 @@ function CritiqueWorkshopRound(
     ```json
     {{ program_json }}
     ```
-
+    {{ source_block }}
     THE PACK VOCABULARY (every block you paint or assign must come from it):
     {{ palette_block }}
 
@@ -84,8 +85,9 @@ function CritiqueWorkshopRound(
     {{ last_round_note }}
     SANCTIONED ACTIONS (choose exactly ONE per round; live now: {{ live_actions }}):
       - {"action":"adjust-params","elementId":"<element id>","params":{<spec keys to replace>}}
+        (with a MASS id instead, params are the GEOMETRY levers — proportion fixes go here)
       - {"action":"spray-paint","dir":"+x|-x|+z|-z|+y|-y|+x+z|+x-z|-x+z|-x-z","toBlock":"<pack block>","fromBlock":"<block, optional>","bounds":{"min":[x,y,z],"max":[x,y,z]} (optional)}
-      - {"action":"re-recognize","elementId":"<element id>"}
+      - {"action":"re-recognize","elementId":"<element id or mass id>"}
 
     Reply with EXACTLY ONE fenced json block, nothing else fenced:
     ```json

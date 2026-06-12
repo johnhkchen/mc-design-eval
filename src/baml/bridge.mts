@@ -32,7 +32,7 @@ const FNS: Record<string, { request: (a: any, img: any) => Promise<any>; parse: 
   CritiqueWorkshopRound: {
     request: (a, img) =>
       b.request.CritiqueWorkshopRound(
-        a.round_num, a.budget, a.image_list, a.program_json, a.palette_block,
+        a.round_num, a.budget, a.image_list, a.program_json, a.source_block, a.palette_block,
         a.conformance_block, a.last_round_note, a.live_actions, a.max_issues,
         toImage(img.concept), (img.renders ?? []).map(toImage),
       ),

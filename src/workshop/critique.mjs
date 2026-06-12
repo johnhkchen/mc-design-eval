@@ -17,6 +17,8 @@
 // PURE — no GL, no IO, no Date/random — runs under the `src/**/*.test.mjs` glob.
 
 import { parseAction, ACTION_NAMES } from "./actions.mjs";
+import { GEOMETRY_PARAM_KEYS } from "./geometry.mjs";
+import { silhouetteRatios } from "../recognition/measured-program.mjs";
 
 export const WORKSHOP_REPLY_SCHEMA = "workshop-reply/v1";
 export const ISSUE_SEVERITIES = Object.freeze(["minor", "major"]);
@@ -30,6 +32,34 @@ const ANGLE_DESCRIPTIONS = Object.freeze({
 
 const isNonEmptyString = (s) => typeof s === "string" && s.trim().length > 0;
 
+/** The source-geometry block (T-136-01) — rendered ONLY when the run carries the recognized
+ *  building program: the per-mass measured surface the geometry levers reach, the lever
+ *  vocabulary, and the silhouette ratios beside their declared targets (when T-135 targets are
+ *  declared). Sourceless runs render the empty string — their prompts stay byte-identical to
+ *  the pre-T-136 golden. */
+export function sourceBlock({ program, pack, source }) {
+  if (source == null) return "";
+  const lines = [
+    "THE SOURCE GEOMETRY (the building program your build compiles from — per-mass):",
+    "```json",
+    JSON.stringify({ masses: source.masses }, null, 2),
+    "```",
+    `Geometry levers (adjust-params with elementId = a MASS id, params from: ${GEOMETRY_PARAM_KEYS.join(", ")};`,
+    `pitchClass must be one of ${JSON.stringify(pack.proportions?.pitchClasses ?? [])}; eaveHeight is the wall height`,
+    "in blocks, factorized for you). re-recognize with a mass id re-reads that part from the sketch.",
+  ];
+  try {
+    const now = silhouetteRatios(program);
+    lines.push(`Silhouette now: ridge:eave ${now.ridgeToEave}, roof share ${now.roofShare}, aspect ${now.aspect}.`);
+  } catch { /* a program without roof/shell elements has no silhouette row */ }
+  const decl = program.declarations?.proportions;
+  if (decl?.targets) {
+    lines.push(`Declared targets: ridge:eave ${decl.targets.ridgeToEave}, roof share ${decl.targets.roofShare}, `
+      + `aspect ${decl.targets.aspect} (tolerance ${decl.tolerance}).`);
+  }
+  return `\n${lines.join("\n")}\n`;
+}
+
 /**
  * The per-round critique prompt's DATA — the typed inputs of the BAML function
  * CritiqueWorkshopRound (baml_src/critique.baml, T-129-01). The prose skeleton lives in the BAML
@@ -37,7 +67,7 @@ const isNonEmptyString = (s) => typeof s === "string" && s.trim().length > 0;
  * its inputs; the rendered prompt is byte-pinned to the captured golden by the fixture test, and
  * the SAME rendered prompt is re-sent on a bounded re-ask (the reply policy's contract).
  */
-export function critiqueRenderArgs({ program, pack, round, budget, liveActions, azimuths, conformance, lastRound = null }) {
+export function critiqueRenderArgs({ program, pack, round, budget, liveActions, azimuths, conformance, lastRound = null, source = null }) {
   const palette = (pack.palette ?? []).map((p) => `  - ${p.role}: ${p.block}`).join("\n");
   const decoration = (pack.decoration ?? []).map((d) => `  - ${d.item}: ${d.block}`).join("\n");
   return {
@@ -47,6 +77,7 @@ export function critiqueRenderArgs({ program, pack, round, budget, liveActions, 
       .concat(azimuths.map((a, i) => `  ${i + 2}. your build, ${ANGLE_DESCRIPTIONS[a] ?? a}`))
       .join("\n"),
     program_json: JSON.stringify({ elements: program.elements }, null, 2),
+    source_block: sourceBlock({ program, pack, source }),
     palette_block: `${palette}${decoration ? `\ndecoration:\n${decoration}` : ""}`,
     conformance_block: (conformance?.checks ?? [])
       .map((c) => `  - ${c.name}: ${c.passed ? "PASS" : `FAIL — ${c.findings.join("; ")}`}`)
@@ -77,10 +108,11 @@ export function extractReplyJson(text) {
 /**
  * Parse + validate one workshop reply. THROWS on any violation (the bounded re-ask contract).
  * @param {string} text  the raw model reply
- * @param {{program:object, pack:object}} ctx  the round's program + pack (actions ground here)
+ * @param {{program:object, pack:object, source?:object|null}} ctx  the round's program + pack
+ *   (+ the source building program when the run carries one) — actions ground here
  * @returns {{critique:{issues:object[]}, decision:"revise"|"done", action?:object, rationale:string}}
  */
-export function parseWorkshopReply(text, { program, pack }) {
+export function parseWorkshopReply(text, { program, pack, source = null }) {
   const r = extractReplyJson(text);
   if (r === null || typeof r !== "object" || Array.isArray(r)) throw new Error("reply must be a JSON object");
 
@@ -101,7 +133,7 @@ export function parseWorkshopReply(text, { program, pack }) {
   let action;
   if (r.decision === "revise") {
     if (r.action === undefined) throw new Error('decision "revise" requires an action');
-    action = parseAction(r.action, { program, pack }); // throws off-vocabulary / malformed
+    action = parseAction(r.action, { program, pack, source }); // throws off-vocabulary / malformed
     if (issues.length === 0) throw new Error('decision "revise" requires at least one named issue');
   } else if (r.action !== undefined) {
     throw new Error('decision "done" forbids an action');
