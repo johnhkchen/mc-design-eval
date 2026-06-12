@@ -2669,3 +2669,80 @@ proportion-aware revision action or prompt.
 `pattern-book/head-to-head.md`. The story beat: E-29/E-30 proved a pipeline that measures;
 E-31 proved a builder that *recognizes* — and on the subject where both ran clean, recognition
 won at a glance.
+
+## Brush factory (E-32) — design once, reuse many, measured (S-128…S-132, T-128-01…T-132-01) · 2026-06-11
+
+**The thesis, and the receipt.** E-31 proved a builder that recognizes; E-32 claimed the
+*capability compounds*: a style is formed in language space (diegetic materials, ratified once),
+the factory specifies its missing brushes, AI coding implements each once through the registry's
+single door, and a building in the new style composes from the registry — each later style
+cheaper because the library grows. T-132 ran the whole stack on one genuinely new style
+(`saltcrag`, a granite-coast fishing village grown from the committed T-129 material story) and
+banked the numbers in **one table** (`benchmarks/sculpture/factory/receipts.{json,md}`,
+`npm run factory:receipts`, byte-deterministic re-run):
+
+registry **19 → 22** · saltcrag's brush demand **14 = 11 pre-existing + 3 factory-built**
+(reuse **79%**; 7 of the 11 also sit in rustic's own pack list) · backlog accepted on ask 1
+(3 work items, 15 needs already covered, 0 demotions) · draft rework **4 minor notes, 0
+spec-wrong** · cost shape **13 model calls end-to-end** (formation 3 + backlog 1 + recognition
+1 + workshop 4 + gate 4; ratification and brush-implementation are zero-spend) · frozen gate:
+**same-object 4/4, 8 gaps all minor — the exact profile of rustic's best on the same subject**
+· instrument receipt frozen, `diffs: []` · replay `patternbook:saltcrag:repro`/`:offline`
+byte-identical.
+
+**Diegetic precedence held where optics kept failing.** The whole formation surface is text —
+the story's geology/timber/wealth/roofing economy cite into every palette role
+(`packs/drafts/saltcrag/`, raw replies committed), no image enters anywhere
+(formation-guard pins it), and the value check runs on the committed block-Lab table. The judge
+then looked at a barn whose walls turned from rustic's cobble/plaster to saltcrag's
+rubble/limewash and said **same object at every azimuth**, flagging material zoning exactly
+once, minor. Vernacular reasoning chose materials a TRELLIS texture read never could (the
+T-121/T-122 flagged-mismatch lesson, closed from the other side).
+
+**The substitution seam is at recognition, not compile — found live.** The design assumed the
+committed rustic barn program would compile under the saltcrag pack. A pure dry-run refuted it
+in minutes: programs are pack-stamped and role vocabularies are *per-pack* (rustic's program
+speaks `wall.dressing`/`roof.trim`; saltcrag's palette has neither). The honest seam: the
+conditioned sketch is the shared, pack-free form evidence; **recognition is pack-conditioned**
+(`recognize.mjs --pack`, records namespaced per pack via `recognitionRels`), and everything
+downstream speaks one pack. Cost: one extra model ask per (subject × style) — visible in the
+cost shape, cheap, and the program contract stays whole. Chain-side the same move:
+`--pack` is invocation data on `pattern-book.mjs`/`workshop.mjs`, every record path derives
+once (`chainRels`), rustic's committed paths pinned unsuffixed (relocating committed pins is a
+re-roll by another name).
+
+**A bug class the growth itself exposed.** The formation replay and `form-style --offline`
+derived drafts against the *live* registry — green for the registry's whole static life, and
+drifted the moment the first factory brush landed. Replays now recover the registry **as
+recorded** from the committed decompose inputs (`ownedNamesFromRegistryDigest`). The general
+lesson for a system whose library grows: *any* replay that reads a mutable table is a drift
+waiting for the table's first mutation; record the state, derive from the record.
+
+**What the factory got right.** The decompose prompt steered dedup upstream (15 of 18 needs
+arrived pre-classified as parametrization notes; the code gate stayed idle and is pinned by
+tests); the three work items were genuinely uncovered (thatch's thick rounded-eave mass,
+clinker's proud/flush lap, limewash's aspect-aware partial coat — none expressible by the 19);
+and the drafts were implementable nearly as written — all four rework notes are interface
+reshapes to house conventions (zoneOf lens, direction array, preserve-by-block), zero
+re-specification. T-131's quality metric finally has data, and it is good.
+
+**What it got wrong / the named seams.** (1) **Timing**: the formed pack can only seat brushes
+that exist at formation time, so saltcrag's own building never used its three new brushes —
+they compound *forward*, into the next style or a re-formed saltcrag; the receipts table names
+this rather than implying the building used them. (2) **Kit presence is still the styled
+path's contract**: a program build supplies no concept-declared apertures, so presence reports
+skip→FAIL noise beside an all-minor resemblance read (T-127 concern, now twice-measured — a
+presence contract for program builds is an open seam). (3) **Ratification ran
+autonomous-provisional** (the ticket's planner sanction, stamped as such with the taste pass
+pending) — the gate's meaning survives only if a human actually takes that pass. (4) The
+**gap-budget arithmetic** again under-credits an all-minor 4/4 profile (both styles' bests
+read FAIL at 8/2) — the same gate-policy question E-31 deferred, now with two data points.
+
+**E-12 handoff.** `benchmarks/sculpture/factory/receipts.{json,md}` (the one table),
+`multi-angle/barn-patternbook-saltcrag.{json,md}` + sheet
+`pr/assets/frames/multi-angle-barn-patternbook-saltcrag.png` beside the rustic-best sheet,
+chain record `pattern-book/barn--saltcrag.{json,md}`, the ratified pack `packs/saltcrag.json`
+(+ formation records under `packs/drafts/saltcrag/`), the backlog drafts + rework log under
+`docs/active/backlog/`. The story beat: one sentence of place ("a fishing village on a cold
+coast") became a ratified palette, three new tools, and a building the frozen judge reads as
+the same barn at every angle — for thirteen model calls.
