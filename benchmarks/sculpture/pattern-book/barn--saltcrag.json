@@ -1,6 +1,6 @@
 {
   "schema": "pattern-book-chain/v1",
-  "ticket": "T-132-01",
+  "ticket": "T-138-01",
   "subject": "barn",
   "runKey": "barn--saltcrag",
   "pack": "saltcrag",
@@ -39,37 +39,138 @@
     },
     "seed": {
       "path": "benchmarks/sculpture/workshop/barn--saltcrag/program.json",
-      "sha256": "d962934d0acf471864bf856551f9b322c0e81be5cac996e446a023a9f06fe88b",
-      "cells": 10117,
+      "sha256": "07e0b9f0a38f2193c84b1c1a9671f3c8366546097b660c4c785e4a89096b5b03",
+      "cells": 11645,
       "conformance": {
         "passed": true
+      },
+      "measured": {
+        "dimensions": [
+          {
+            "mass": "*",
+            "parameter": "footprint.w",
+            "source": "measured",
+            "measured": 48,
+            "used": 48,
+            "residual": 0,
+            "note": "sketch planDims (registry blocks), endpoint-scaled across masses"
+          },
+          {
+            "mass": "*",
+            "parameter": "footprint.d",
+            "source": "measured",
+            "measured": 26,
+            "used": 26,
+            "residual": 0,
+            "note": "sketch planDims (registry blocks), endpoint-scaled across masses"
+          },
+          {
+            "mass": "hall",
+            "parameter": "eaveHeight",
+            "source": "measured",
+            "measured": 10,
+            "used": 10,
+            "residual": 0,
+            "note": "expressed as 2×5 (schema-bounded factorization)"
+          },
+          {
+            "mass": "hall",
+            "parameter": "storeyFactorization",
+            "source": "measured",
+            "measured": 10,
+            "used": "2x5",
+            "residual": null,
+            "note": "recognition read 3x3"
+          },
+          {
+            "mass": "hall",
+            "parameter": "pitchClass",
+            "source": "measured",
+            "measured": 1,
+            "used": 1,
+            "residual": 0,
+            "note": "tan(dominant tilt) snapped to the nearest pack pitch class"
+          },
+          {
+            "mass": "hall",
+            "parameter": "ridgeHeight",
+            "source": "measured",
+            "measured": 21,
+            "used": 24,
+            "residual": 3,
+            "note": "derived: eave + pitch x half-span + 1 (all constituents sourced above)"
+          }
+        ],
+        "conflicts": [
+          {
+            "mass": "*",
+            "parameter": "footprint.d",
+            "recognition": 24,
+            "sketch": 26,
+            "resolved": "sketch"
+          },
+          {
+            "mass": "hall",
+            "parameter": "eaveHeight",
+            "recognition": 9,
+            "sketch": 10,
+            "resolved": "sketch"
+          },
+          {
+            "mass": "hall",
+            "parameter": "storeyHeight.packBand",
+            "recognition": "[3, 4]",
+            "sketch": 5,
+            "resolved": "sketch",
+            "note": "pack proportions are the fallback tier (S-133); excursion recorded"
+          }
+        ]
+      },
+      "proportionsDeclared": {
+        "schema": "silhouette-proportion/v1",
+        "targets": {
+          "ridgeToEave": 2.1,
+          "roofShare": 0.5238,
+          "aspect": 1.8462
+        },
+        "sources": {
+          "ridgeToEave": "sketch",
+          "roofShare": "sketch",
+          "aspect": "sketch"
+        },
+        "tolerance": 0.15
+      },
+      "ratios": {
+        "ridgeToEave": 2.4,
+        "roofShare": 0.5833,
+        "aspect": 1.8462
       }
     },
     "workshop": {
       "ledger": {
         "path": "benchmarks/sculpture/workshop/barn--saltcrag.json",
-        "sha256": "d3876e5b8f4ffcca08b71f957238262cf4c05c43a153808fa4b816318a29903e"
+        "sha256": "ef93290f0c3b25721bf1cac2f12b959575729cff3cff000ad370e8e62374c47c"
       },
       "final": {
         "path": "benchmarks/sculpture/workshop/barn--saltcrag/final-artifact.json",
-        "sha256": "6eedbc874362d200697e7f2d62a0373352b85001a4e8b0990eac13ab51c8629a"
+        "sha256": "15554d3b10a3217b352bce3653adad3efa93d23aa20caf7b6ec50f131f61d958"
       },
       "outcome": "done",
       "rounds": {
-        "used": 4,
+        "used": 3,
         "budget": 6
       },
-      "accepted": 1,
-      "rolledBack": 2,
+      "accepted": 2,
+      "rolledBack": 0,
       "unavailable": 0,
       "applyFailed": 0,
       "conformance": {
         "first": {
-          "passed": 6,
+          "passed": 7,
           "findings": 0
         },
         "final": {
-          "passed": 6,
+          "passed": 7,
           "findings": 0
         },
         "finalPassed": true
@@ -77,7 +178,7 @@
     },
     "plan": {
       "path": "benchmarks/sculpture/workshop/barn--saltcrag/component-plan.json",
-      "sha256": "9625680b6320bc459a4797a68c5412d00f21690b14756347f4f4c88aa49c87bb"
+      "sha256": "4f015ae6de369fc2f08859c3e3c0e9c51be4fade52ef845d048a86758ac3c983"
     }
   },
   "generalization": {

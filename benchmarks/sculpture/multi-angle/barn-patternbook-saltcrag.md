@@ -4,14 +4,14 @@
 
 **The sheet is the verdict artifact** (E-25 Rule 1); this table is support.
 
-Artifact: `benchmarks/sculpture/workshop/barn--saltcrag/final-artifact.json` (sha256 `6eedbc874362…`) · zones: concept · contract: +x+z, +x-z, -x-z, -x+z @ 30°, 512², coverage ≥ 0.5, gap budget 2
+Artifact: `benchmarks/sculpture/workshop/barn--saltcrag/final-artifact.json` (sha256 `15554d3b10a3…`) · zones: concept · contract: +x+z, +x-z, -x-z, -x+z @ 30°, 512², coverage ≥ 0.5, gap budget 2
 
 | view | azimuth | rendered | T-088 coverage | judge verdict |
 |---|---|---|---|---|
-| +x+z | 45° | yes | pass | same object<br>minor form @ long side wall openings<br>minor massing @ roof pitch relative to wall height |
-| +x-z | 135° | yes | pass | same object<br>minor massing @ long side walls<br>minor form @ roof eave overhang |
-| -x-z | 225° | yes | pass | same object<br>minor material zoning @ lower stone wall along the long side<br>minor form @ gable-end door and openings |
-| -x+z | 315° | yes | pass | same object<br>minor massing @ long wall openings<br>minor form @ roof eave overhang |
+| +x+z | 45° | yes | pass | same object<br>minor form @ long wall openings<br>minor material zoning @ wall base plinth/quoin dressing |
+| +x-z | 135° | yes | pass | same object<br>minor palette @ stone walls<br>minor form @ roof eaves along the long side |
+| -x-z | 225° | yes | pass | same object<br>minor massing @ long side wall<br>minor form @ gable-end wall openings (door/window punches) |
+| -x+z | 315° | yes | pass | same object<br>minor material zoning @ long wall apertures<br>minor form @ roof ridge crispness |
 
 ## Resemblance aggregate (T-093)
 **FAIL** — gaps 8/2; failures: (all):gap-budget
