@@ -127,6 +127,14 @@ export const OP_ROUTING = Object.freeze([
       "FOUR gate-azimuth renders AND author the revision action — cross-view judgement + producing new " +
       "structure, the rubric's strong side twice over.",
   }),
+  Object.freeze({
+    op: "workshop-rerecognize",
+    tier: "strong",
+    rationale:
+      "The workshop's re-recognize action (T-136-01): re-author ONE mass of the building program from " +
+      "the sketch's measured digest with the round's critique attached — generative authoring against " +
+      "a schema + pack vocabulary, the recognition op's strong case scoped to a fragment.",
+  }),
 ]);
 
 /**

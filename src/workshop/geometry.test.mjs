@@ -12,7 +12,7 @@ import { assertBuildingProgram } from "../recognition/program.mjs";
 import { silhouetteRatios } from "../recognition/measured-program.mjs";
 import { realizeProgram } from "./program.mjs";
 import {
-  GEOMETRY_PARAM_KEYS, resolveMass, applyGeometryAdjust, substituteMass, prunePaint, ratioGuard,
+  GEOMETRY_PARAM_KEYS, resolveMass, applyGeometryAdjust, substituteMass, prunePaint,
 } from "./geometry.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -143,25 +143,22 @@ test("G7 prunePaint keeps in-place recolors, drops orphans, reports the count", 
   assert.deepEqual(prunePaint(program, []), { paint: [], pruned: 0 });
 });
 
-test("G8 ratioGuard: improvement and lateral pass, strict worsening rejects, no targets vacuous", () => {
-  const current = applyGeometryAdjust(ctx(), { massId: "main", params: { eaveHeight: 8 } }).program;
-  // silhouette eave is the MIN over roofs — both masses must rise (two chained lever rounds)
-  const step1 = applyGeometryAdjust(ctx(), { massId: "main", params: { eaveHeight: 16 } });
-  const taller = applyGeometryAdjust(ctx({ source: step1.source }),
-    { massId: "main-annex", params: { eaveHeight: 16 } }).program;
-  // the fixture's ratios at eave 8 are roof-dominant; a 16-eave moves ridgeToEave toward 1.4
-  const targets = { ridgeToEave: 1.4, roofShare: 0.29, aspect: null };
-  const improve = ratioGuard({ current, candidate: taller, targets });
-  assert.equal(improve.ok, true);
-  assert.ok(improve.after < improve.before, "deviation shrank");
-  const worsen = ratioGuard({ current: taller, candidate: current, targets });
-  assert.equal(worsen.ok, false);
-  assert.match(worsen.reason, /ratio-guard: worst target deviation/);
-  const lateral = ratioGuard({ current, candidate: current, targets });
-  assert.equal(lateral.ok, true, "equal deviation is NOT a rejection (the isRegression posture)");
-  assert.deepEqual(ratioGuard({ current, candidate: taller, targets: null }), { ok: true, vacuous: true });
-  assert.deepEqual(ratioGuard({ current, candidate: taller, targets: { ridgeToEave: null } }),
-    { ok: true, vacuous: true });
+test("G8 the proportion declaration rides through the recompile (T-135's gate stays armed)", () => {
+  const proportions = {
+    schema: "silhouette-proportion/v1",
+    targets: { ridgeToEave: 1.4, roofShare: 0.29, aspect: 1.19 },
+    sources: { ridgeToEave: "sketch", roofShare: "sketch", aspect: "sketch" },
+    tolerance: 0.1,
+  };
+  const armed = applyGeometryAdjust(ctx({ proportions }), { massId: "main", params: { eaveHeight: 16 } });
+  assert.deepEqual(armed.program.declarations.proportions, proportions,
+    "targets carried verbatim — compile knows nothing of them");
+  const viaFragment = substituteMass({ ...ctx({ proportions }) },
+    { massId: "main", mass: structuredClone(makeSource().masses[0]) });
+  assert.deepEqual(viaFragment.program.declarations.proportions, proportions);
+  const unarmed = applyGeometryAdjust(ctx(), { massId: "main", params: { eaveHeight: 16 } });
+  assert.equal(unarmed.program.declarations.proportions, undefined,
+    "no declaration, none invented (declared, never inferred)");
 });
 
 test("G9 resolveMass: direct id, element-id prefix, longest match, unknown", () => {

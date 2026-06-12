@@ -38,6 +38,13 @@ const FNS: Record<string, { request: (a: any, img: any) => Promise<any>; parse: 
       ),
     parse: (t) => b.parse.CritiqueWorkshopRound(t),
   },
+  ReRecognizeMass: {
+    request: (a) =>
+      b.request.ReRecognizeMass(
+        a.mass_id, a.pack_digest, a.sketch_digest, a.mass_json, a.critique_block, a.mass_schema_json,
+      ),
+    parse: (t) => b.parse.ReRecognizeMass(t),
+  },
   AuthorMaterialStory: {
     request: (a) => b.request.AuthorMaterialStory(a.theme_brief),
     parse: (t) => b.parse.AuthorMaterialStory(t),

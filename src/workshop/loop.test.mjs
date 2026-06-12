@@ -191,13 +191,13 @@ test("L4 done stops immediately; budget exhaustion records honestly", async () =
   assert.equal(l2.rounds.length, 2);
 });
 
-test("L5 unavailable action (re-recognize, S-125 pending) consumes the round, never crashes", async () => {
+test("L5 unavailable action (re-recognize, uninjected) consumes the round, never crashes", async () => {
   const { seam } = scripted([verdictRevise({ action: "re-recognize", elementId: "shell" })]);
   const { ledger } = await runWorkshopLoop({ program: seedProgram(1), pack: PACK, seams: { exchange: seam } });
   const r1 = ledger.rounds[0];
   assert.equal(r1.applied.kind, "unavailable");
   assert.equal(r1.conformance.accepted, false);
-  assert.match(r1.conformance.reason, /S-125/);
+  assert.match(r1.conformance.reason, /runner injects/);
 });
 
 test("L6 exchange refusal (reply policy exhausted) stops the loop, recorded", async () => {

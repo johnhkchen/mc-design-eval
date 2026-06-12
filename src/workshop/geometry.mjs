@@ -12,13 +12,12 @@
 // The model transport for re-recognize lives in the RUNNER (ISO4); this module only supplies
 // the deterministic substitution both the live applier and replay share.
 
-import { factorEave, silhouetteRatios } from "../recognition/measured-program.mjs";
+import { factorEave } from "../recognition/measured-program.mjs";
 import { assertBuildingProgram, validateProgramAgainstPack } from "../recognition/program.mjs";
 import { compileProgram } from "../recognition/compile.mjs";
 import { assertWorkshopProgram, realizeProgram } from "./program.mjs";
 
 const fail = (msg) => { throw new Error(`geometry: ${msg}`); };
-const r4 = (x) => Math.round(x * 1e4) / 1e4;
 
 /** The lever vocabulary — the T-133 measured surface as flat scalars. `eaveHeight` is the
  *  measured quantity (factorized into storeys × storeyHeight under the schema bounds, the
@@ -47,10 +46,20 @@ export function resolveMass(source, id) {
 }
 
 /** Re-enter the compiler: source → workshop program, live budget preserved (compile commits
- *  drafts at rounds:1 — the seedWorkshopProgram override, single rule). */
-function recompile(source, pack, budget) {
+ *  drafts at rounds:1 — the seedWorkshopProgram override, single rule) and the PROPORTION
+ *  declaration carried through (T-135's targets are SUBJECT data the conductor declared;
+ *  compile re-derives bands/openings and knows nothing of them — without the carry, the first
+ *  geometry round would silently disarm the proportion gate). */
+function recompile(source, pack, budget, proportions = null) {
   const { workshopProgram } = compileProgram(source, pack);
-  return assertWorkshopProgram({ ...workshopProgram, budget: { ...budget } });
+  return assertWorkshopProgram({
+    ...workshopProgram,
+    budget: { ...budget },
+    declarations: {
+      ...workshopProgram.declarations,
+      ...(proportions != null ? { proportions: structuredClone(proportions) } : {}),
+    },
+  });
 }
 
 /** Validate a candidate source program through the SAME gates every recognized program passes;
@@ -68,11 +77,12 @@ function gateSource(candidate, pack) {
 /**
  * THE adjust-params GEOMETRY FORM — apply measured-surface params to ONE mass, re-validate,
  * recompile. Deterministic; throws on anything the gates refuse.
- * @param {{source:object, pack:object, budget:{rounds:number}}} ctx
+ * @param {{source:object, pack:object, budget:{rounds:number}, proportions?:object|null}} ctx
+ *   proportions: the live program's `declarations.proportions` (carried through the recompile)
  * @param {{massId:string, params:object}} args
  * @returns {{program:object, source:object}}  the recompiled workshop program + revised source
  */
-export function applyGeometryAdjust({ source, pack, budget }, { massId, params }) {
+export function applyGeometryAdjust({ source, pack, budget, proportions = null }, { massId, params }) {
   if (!source) fail("no source program — geometry levers need the recognized building program");
   const keys = Object.keys(params ?? {});
   if (keys.length === 0) fail("geometry params must be a non-empty object");
@@ -105,18 +115,18 @@ export function applyGeometryAdjust({ source, pack, budget }, { massId, params }
   if ("pitchClass" in params) mass.roof.pitchClass = params.pitchClass;
 
   const asserted = gateSource(next, pack);
-  return { program: recompile(asserted, pack, budget), source: asserted };
+  return { program: recompile(asserted, pack, budget, proportions), source: asserted };
 }
 
 /**
  * THE re-recognize SUBSTITUTION — replace ONE mass with a re-sampled fragment, re-validate,
  * recompile. The fragment is a MODEL output: live, the runner's applier feeds it from the
  * bounded exchange; replay feeds the LEDGERED fragment verbatim — both land here.
- * @param {{source:object, pack:object, budget:{rounds:number}}} ctx
+ * @param {{source:object, pack:object, budget:{rounds:number}, proportions?:object|null}} ctx
  * @param {{massId:string, mass:object}} args
  * @returns {{program:object, source:object}}
  */
-export function substituteMass({ source, pack, budget }, { massId, mass }) {
+export function substituteMass({ source, pack, budget, proportions = null }, { massId, mass }) {
   if (!source) fail("no source program — re-recognition needs the recognized building program");
   if (mass === null || typeof mass !== "object" || Array.isArray(mass)) fail("fragment must be an object");
   if (mass.id !== massId) fail(`fragment id "${mass.id}" must keep the named part's id "${massId}"`);
@@ -125,7 +135,7 @@ export function substituteMass({ source, pack, budget }, { massId, mass }) {
   const next = structuredClone(source);
   next.masses[idx] = structuredClone(mass);
   const asserted = gateSource(next, pack);
-  return { program: recompile(asserted, pack, budget), source: asserted };
+  return { program: recompile(asserted, pack, budget, proportions), source: asserted };
 }
 
 /**
@@ -140,28 +150,4 @@ export function prunePaint(program, paint) {
   const occupied = new Set(realizeProgram(program).cells.map((c) => c.pos.join(",")));
   const kept = paint.filter((p) => occupied.has(p.pos.join(",")));
   return { paint: kept, pruned: paint.length - kept.length };
-}
-
-/**
- * THE RATIO GUARD — the AC's fallback bound while S-135's proportion conformance check is in
- * flight (it lives HERE, in the loop's accept path, deliberately not in conformance.mjs).
- * A geometry-bearing revision is rejected iff its worst relative deviation from the target
- * silhouette ratios STRICTLY increases (lateral moves accepted — the isRegression posture).
- * No targets → vacuous pass, recorded.
- * @param {{current:object, candidate:object, targets:object|null}} args  workshop programs + sketchTargetRatios
- * @returns {{ok:boolean, vacuous?:true, before?:number, after?:number, reason?:string}}
- */
-export function ratioGuard({ current, candidate, targets }) {
-  const names = ["ridgeToEave", "roofShare", "aspect"]
-    .filter((k) => Number.isFinite(targets?.[k]));
-  if (names.length === 0) return { ok: true, vacuous: true };
-  const worst = (ratios) => r4(Math.max(...names.map(
-    (k) => Math.abs(ratios[k] - targets[k]) / Math.max(Math.abs(targets[k]), 1e-9),
-  )));
-  const before = worst(silhouetteRatios(current));
-  const after = worst(silhouetteRatios(candidate));
-  if (after > before) {
-    return { ok: false, before, after, reason: `ratio-guard: worst target deviation ${before}→${after}` };
-  }
-  return { ok: true, before, after };
 }
