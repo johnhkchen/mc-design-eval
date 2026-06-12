@@ -14,7 +14,7 @@
 
 import { factorEave } from "../recognition/measured-program.mjs";
 import { assertBuildingProgram, validateProgramAgainstPack } from "../recognition/program.mjs";
-import { compileProgram } from "../recognition/compile.mjs";
+import { compileProgram, roofIdiomForPitch } from "../recognition/compile.mjs";
 import { assertWorkshopProgram, realizeProgram } from "./program.mjs";
 
 const fail = (msg) => { throw new Error(`geometry: ${msg}`); };
@@ -112,7 +112,14 @@ export function applyGeometryAdjust({ source, pack, budget, proportions = null }
     mass.storeys = f.storeys;
     mass.storeyHeight = f.storeyHeight;
   }
-  if ("pitchClass" in params) mass.roof.pitchClass = params.pitchClass;
+  if ("pitchClass" in params) {
+    // T-138-01: a pitch aim that crosses the 45° boundary must also cross the door — the gable
+    // family realizes >1 only through roof.gable.steep (and ≤1 only through roof.gable); the
+    // pack's declared classes still arbitrate at gateSource/recompile (no steep class declared
+    // → the round records apply-failed, the honest refusal).
+    mass.roof.idiom = roofIdiomForPitch(mass.roof.idiom, params.pitchClass);
+    mass.roof.pitchClass = params.pitchClass;
+  }
 
   const asserted = gateSource(next, pack);
   return { program: recompile(asserted, pack, budget, proportions), source: asserted };

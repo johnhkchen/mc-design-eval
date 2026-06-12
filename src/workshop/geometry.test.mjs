@@ -87,10 +87,39 @@ test("G3b pitchClass change lands when the pack vocabulary carries it (saltcrag)
       m.openings.forEach((o) => { o.headRole = "opening.lintel"; });
     }
   });
-  const { program } = applyGeometryAdjust({ source, pack: saltcrag, budget: BUDGET },
+  const { program, source: revised } = applyGeometryAdjust({ source, pack: saltcrag, budget: BUDGET },
     { massId: "main", params: { pitchClass: 2 } });
   const roof = program.elements.find((e) => e.id === "main-roof");
   assert.equal(roof.spec.pitch, 2, "the steeper class compiled through");
+  // T-138-01: a >1 aim crosses the door — without the re-aim, realizeProgram refuses
+  // (roof.gable's 45° contract) and the steep unlock is unreachable through the lever
+  assert.equal(revised.masses[0].roof.idiom, "roof.gable.steep", "the aim re-aimed the idiom through the steep door");
+  assert.equal(roof.idiom, "roof.gable.steep", "the compiled element carries the steep door");
+  const { cells } = realizeProgram(program);
+  assert.ok(cells.length > 0, "the steepened program realizes (mixed block/stair courses)");
+});
+
+test("G3c a steep aim under a style with no steep class is the honest refusal (rustic)", () => {
+  assert.throws(
+    () => applyGeometryAdjust(ctx(), { massId: "main", params: { pitchClass: 2 } }),
+    /pitchClass 2 is outside the pack vocabulary \[1\]/,
+  );
+});
+
+test("G3d lowering a steep roof back to a legacy class returns through the base door", () => {
+  const source = makeSource((p) => {
+    p.pack = "saltcrag";
+    for (const m of p.masses) {
+      m.walls = { ground: { role: "wall.field.ground" }, upper: { role: "wall.field.upper" } };
+      m.roof = { ...m.roof, idiom: "roof.gable.steep", pitchClass: 2, gableRole: null, trimRole: null };
+      m.openings.forEach((o) => { o.headRole = "opening.lintel"; });
+    }
+  });
+  const { program, source: revised } = applyGeometryAdjust({ source, pack: saltcrag, budget: BUDGET },
+    { massId: "main", params: { pitchClass: 0.5 } });
+  assert.equal(revised.masses[0].roof.idiom, "roof.gable", "down-aim returned to the base door");
+  assert.equal(program.elements.find((e) => e.id === "main-roof").spec.pitch, 0.5);
+  assert.ok(realizeProgram(program).cells.length > 0);
 });
 
 test("G4 a lever that detaches the plan throws via the connectivity gate", () => {

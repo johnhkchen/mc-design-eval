@@ -194,7 +194,12 @@ export function validateProgramAgainstPack(program, pack, { registry = IDIOM_REG
     if (!layout) {
       err(`${where}.roof`, `idiom "${m.roof.idiom}" is not a realizable roof (have: ${Object.keys(ROOF_LAYOUTS).join(", ")})`);
     } else {
-      if (!packIdioms.has(m.roof.idiom)) err(`${where}.roof`, `idiom "${m.roof.idiom}" is not in the pack`);
+      // T-138-01: the steep variant rides the pack's roof.gable row — the SAME family fallback
+      // compile's roofBlocks grants (T-134); a pack adopts steepness by declaring a >1 pitch
+      // class, not by duplicating the idiom row. The pitchClass gate below still refuses a
+      // steep aim the style's vocabulary doesn't carry.
+      const familyIdiom = m.roof.idiom === "roof.gable.steep" ? "roof.gable" : m.roof.idiom;
+      if (!packIdioms.has(familyIdiom)) err(`${where}.roof`, `idiom "${familyIdiom}" is not in the pack`);
       if (registry[m.roof.idiom]?.kind !== "construct") err(`${where}.roof`, `idiom "${m.roof.idiom}" is not a registry construct`);
       if (layout.ridge && m.roof.ridgeAxis === undefined) err(`${where}.roof`, "ridgeAxis is required for a ridge-bearing roof");
     }
