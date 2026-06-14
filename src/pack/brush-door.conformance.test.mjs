@@ -35,6 +35,8 @@ const TECHNIQUES = [
   "roof-steep",
   // E-35/T-146-01: the shared relief op joins the guarded set
   "surface-relief",
+  // E-35/T-147-01: the articulation brushes (built ON the relief op) join the guarded set
+  "facade-articulation",
 ];
 
 /** file → { modules, reason }. Exact: an extra technique import in an allowed file still trips. */
@@ -47,6 +49,8 @@ const ALLOWED = {
   "src/view/shell-integrity.mjs": { modules: ["surface-pattern"], reason: "spill-level reuse in closure repair" },
   "src/view/roof-swap.mjs": { modules: ["roof-generate"], reason: "roof family swap over the generator's records" },
   "src/view/roof-steep.mjs": { modules: ["roof-generate"], reason: "steep classes delegate to the ONE wedge/cap/sheet definition (T-134, no refork)" },
+  "src/view/facade-articulation.mjs": { modules: ["surface-relief"], reason: "articulation idioms delegate to the ONE relief op (T-147, no refork)" },
+  "src/form/relief-presence.mjs": { modules: ["surface-relief"], reason: "the relief-aware lens reads the build's own relief via the ONE relief op (T-148, no refork)" },
   "src/view/opening-reconstruct.mjs": { modules: ["shaped-vocab"], reason: "arch/head reconstruction over the shaped vocabulary" },
   "src/form/shaped-fit.mjs": { modules: ["shaped-vocab"], reason: "fit hypotheses realize shaped states" },
   "src/form/provision-generate.mjs": { modules: ["roof-generate"], reason: "generated-base chain emits roofs (T-115)" },
@@ -74,6 +78,7 @@ const ALLOWED = {
   "benchmarks/sculpture/hollow-cottage-milestone.mjs": { modules: ["hollow-carve", "floorplan", "face-paint"], reason: "record-pinned E-23 milestone" },
   "benchmarks/sculpture/shell-integrity.mjs": { modules: ["zone-fill"], reason: "record-pinned shell runner (T-094)" },
   "benchmarks/sculpture/surface-pattern.mjs": { modules: ["surface-pattern", "face-paint"], reason: "record-pinned pattern runner (T-087)" },
+  "benchmarks/sculpture/relief-calibration.mjs": { modules: ["surface-relief"], reason: "record-pinned relief-aware-gate evidence sweep (T-148)" },
 };
 
 /** Closed sweep: every pipeline file is checked, enumerated or not. */

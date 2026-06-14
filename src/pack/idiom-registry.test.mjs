@@ -155,6 +155,20 @@ test("the E-23 surface brushes are registered as passes with closed paramsSchema
   assert.equal(typeof BRUSH_REGISTRY["surface.paint"].apply, "function");
 });
 
+test("the E-35 articulation brushes are registered as passes with closed paramsSchemas", () => {
+  const ajv = new Ajv2020({ strict: true });
+  for (const name of ["pilaster", "quoin", "infill-panel", "eave-overhang"]) {
+    const entry = BRUSH_REGISTRY[name];
+    assert.ok(entry, `missing brush: ${name}`);
+    assert.equal(entry.kind, "pass", name);
+    assert.equal(typeof entry.fn, "function", name);
+    assert.equal(entry.source, "src/view/facade-articulation.mjs", name);
+    const validate = ajv.compile(entry.paramsSchema);
+    assert.ok(validate({}), `${name}: accepts {}`);
+    assert.equal(validate({ swag: true }), false, `${name}: closed schema`);
+  }
+});
+
 test("every brush carries the contract metadata: composition, tests, preview", () => {
   for (const name of brushNames()) {
     const entry = BRUSH_REGISTRY[name];

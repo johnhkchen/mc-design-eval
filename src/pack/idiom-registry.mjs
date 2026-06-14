@@ -59,6 +59,7 @@ import { roofSteepGableConstruct, STEEP_PITCH_CLASSES } from "../view/roof-steep
 import { clinkerCourses } from "../view/clinker.mjs";
 import { limewashAspect } from "../view/limewash.mjs";
 import { surfaceRelief } from "../view/surface-relief.mjs";
+import { pilaster, quoin, infillPanel, eaveOverhang } from "../view/facade-articulation.mjs";
 
 export const IDIOM_REGISTRY_SCHEMA = "idiom-registry/v1";
 
@@ -401,6 +402,109 @@ export const IDIOM_REGISTRY = Object.freeze({
           additionalProperties: false,
         },
         depth: { type: "integer", minimum: 1 },
+      },
+      additionalProperties: false,
+    },
+  }),
+  // ---- facade articulation brushes (E-35/T-147-01: the recognized grammar's idioms, on the relief op) ----
+  "pilaster": Object.freeze({
+    kind: "pass", fn: pilaster, source: "src/view/facade-articulation.mjs",
+    tests: "src/view/facade-articulation.test.mjs",
+    composition: { consumes: ["occupancy"], emits: ["placements", "report"] },
+    preview: {
+      // proud vertical strips every third column on the -z face; the field between reads recessed
+      substrate: { kind: "shell", spec: { footprint: { x0: 0, x1: 8, z0: 0, z1: 4 }, y0: 0, height: 5, wallBlock: "white_terracotta" } },
+      params: { material: "stripped_oak_log", faces: ["-z"], rhythm: { period: 3 } },
+      realize: ({ occ, cells }) => {
+        const r = pilaster(occ, { material: "stripped_oak_log", faces: ["-z"], rhythm: { period: 3 } });
+        return { cells: overlayCells(cells, r.placements), effect: r.placements.length };
+      },
+    },
+    paramsSchema: {
+      type: "object",
+      properties: {
+        material: { type: "string" },
+        faces: { type: "array", items: { enum: ["+x", "-x", "+z", "-z"] }, minItems: 1 },
+        rhythm: {
+          type: "object",
+          properties: { period: { type: "integer", minimum: 1 }, phase: { type: "integer", minimum: 0 } },
+          additionalProperties: false,
+        },
+        span: { type: "integer", minimum: 1 }, depth: { type: "integer", minimum: 1 },
+      },
+      additionalProperties: false,
+    },
+  }),
+  "quoin": Object.freeze({
+    kind: "pass", fn: quoin, source: "src/view/facade-articulation.mjs",
+    tests: "src/view/facade-articulation.test.mjs",
+    composition: { consumes: ["occupancy"], emits: ["placements", "report"] },
+    preview: {
+      // a stepped corner run up the -z corners: stretcher/header depth alternates by course
+      substrate: { kind: "shell", spec: { footprint: { x0: 0, x1: 6, z0: 0, z1: 4 }, y0: 0, height: 5, wallBlock: "white_terracotta" } },
+      params: { material: "stone_bricks", faces: ["-z"], run: 4, headerDepth: 2 },
+      realize: ({ occ, cells }) => {
+        const r = quoin(occ, { material: "stone_bricks", faces: ["-z"], run: 4, headerDepth: 2 });
+        return { cells: overlayCells(cells, r.placements), effect: r.placements.length };
+      },
+    },
+    paramsSchema: {
+      type: "object",
+      properties: {
+        material: { type: "string" },
+        faces: { type: "array", items: { enum: ["+x", "-x", "+z", "-z"] }, minItems: 1 },
+        run: { type: "integer", minimum: 1 }, headerDepth: { type: "integer", minimum: 1 },
+      },
+      additionalProperties: false,
+    },
+  }),
+  "infill-panel": Object.freeze({
+    kind: "pass", fn: infillPanel, source: "src/view/facade-articulation.mjs",
+    tests: "src/view/facade-articulation.test.mjs",
+    composition: { consumes: ["occupancy", "zones"], emits: ["placements", "report"] },
+    preview: {
+      // proud studs every third column over a recolored panel field — the half-timber wall
+      substrate: { kind: "shell", spec: { footprint: { x0: 0, x1: 8, z0: 0, z1: 4 }, y0: 0, height: 5, wallBlock: "cobblestone" } },
+      params: { memberMaterial: "dark_oak_log", fieldMaterial: "white_terracotta", faces: ["-z"], rhythm: { period: 3 } },
+      realize: ({ occ, cells }) => {
+        const r = infillPanel(occ, { memberMaterial: "dark_oak_log", fieldMaterial: "white_terracotta", faces: ["-z"], rhythm: { period: 3 } });
+        return { cells: overlayCells(cells, r.placements), effect: r.placements.length };
+      },
+    },
+    paramsSchema: {
+      type: "object",
+      properties: {
+        memberMaterial: { type: "string" }, fieldMaterial: { type: "string" },
+        faces: { type: "array", items: { enum: ["+x", "-x", "+z", "-z"] }, minItems: 1 },
+        rhythm: {
+          type: "object",
+          properties: { period: { type: "integer", minimum: 1 }, phase: { type: "integer", minimum: 0 } },
+          additionalProperties: false,
+        },
+        span: { type: "integer", minimum: 1 }, depth: { type: "integer", minimum: 1 },
+      },
+      additionalProperties: false,
+    },
+  }),
+  "eave-overhang": Object.freeze({
+    kind: "pass", fn: eaveOverhang, source: "src/view/facade-articulation.mjs",
+    tests: "src/view/facade-articulation.test.mjs",
+    composition: { consumes: ["occupancy"], emits: ["placements", "report"] },
+    preview: {
+      // a soffit course proud of the wall plane at the eave row (the top of this flat shell)
+      substrate: { kind: "shell", spec: { footprint: { x0: 0, x1: 6, z0: 0, z1: 4 }, y0: 0, height: 5, wallBlock: "white_terracotta" } },
+      params: { material: "dark_oak_slab", faces: ["-z"], depth: 1 },
+      realize: ({ occ, cells }) => {
+        const r = eaveOverhang(occ, { material: "dark_oak_slab", faces: ["-z"], depth: 1 });
+        return { cells: overlayCells(cells, r.placements), effect: r.placements.length };
+      },
+    },
+    paramsSchema: {
+      type: "object",
+      properties: {
+        material: { type: "string" },
+        faces: { type: "array", items: { enum: ["+x", "-x", "+z", "-z"] }, minItems: 1 },
+        depth: { type: "integer", minimum: 1 }, eaveRow: { type: "integer", minimum: 0 },
       },
       additionalProperties: false,
     },
