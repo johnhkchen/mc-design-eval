@@ -158,13 +158,18 @@ test("AS1 BUILD_BUDGET is the single calibration; buildRels derives namespaced p
   assert.equal(BUILD_BUDGET, PATTERN_BOOK_BUDGET);
   const r = buildRels("cottage");
   assert.equal(r.buildKey, "cottage-build");
-  assert.equal(r.seedArtifact, "benchmarks/sculpture/workshop/cottage-build/seed-artifact.json");
-  assert.equal(r.ledger, "benchmarks/sculpture/workshop/cottage-build.json");
-  assert.equal(r.final, "benchmarks/sculpture/workshop/cottage-build/final-artifact.json");
-  assert.equal(r.record, "benchmarks/sculpture/build/cottage.json");
-  // the build ledger never collides with the committed pattern-book program-seed ledger
+  // T-155-01 (E-37): the unified chain is a DRAFT — it lives under the top-level builds/ home so
+  // location encodes status (free zone, no pin-guard). One subject = one self-contained directory.
+  assert.equal(r.dir, "builds/cottage");
+  assert.equal(r.seedArtifact, "builds/cottage/seed-artifact.json");
+  assert.equal(r.ledger, "builds/cottage/ledger.json");
+  assert.equal(r.final, "builds/cottage/final-artifact.json");
+  assert.equal(r.record, "builds/cottage/build.json");
+  // never under the frozen measurements/ prefix — the build chain is never a pin
+  assert.ok(!r.ledger.startsWith("measurements/"));
+  // and never collides with the committed pattern-book program-seed ledger
   assert.notEqual(r.ledger, "benchmarks/sculpture/workshop/cottage.json");
   const ns = buildRels("barn", "packs/saltcrag.json");
   assert.equal(ns.runKey, "barn--saltcrag");
-  assert.equal(ns.seedArtifact, "benchmarks/sculpture/workshop/barn--saltcrag-build/seed-artifact.json");
+  assert.equal(ns.seedArtifact, "builds/barn--saltcrag/seed-artifact.json");
 });

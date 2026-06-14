@@ -121,9 +121,18 @@ benchmarks/sculpture/zone-map/**/*.png
 # committed record is multi-angle/<subj>-<label>.{json,md}; the committed verdict SHEET lives in
 # pr/assets/frames/multi-angle-*.png.
 benchmarks/sculpture/multi-angle/**/*.png
+measurements/multi-angle/**/*.png
 benchmarks/sculpture/roof-diff/**/*.png
-# …except the synthetic-positive fixture's concept (a committed INPUT, not a regenerable output)
+# …except the synthetic-positive fixture's concept (a committed INPUT, not a regenerable output).
+# The fixtures subtree stays a DRAFT under benchmarks/ (it is test scaffolding, not a verdict) — only
+# the gate VERDICTS relocate to measurements/multi-angle/ (T-155-01, E-37).
 !benchmarks/sculpture/multi-angle/fixtures/**
+
+# T-155-01 (E-37): the unified build chain's draft home. Renders are image-heavy, regenerable per run
+# (regen via npm run build:<subject>); the durable draft record is builds/<subject>/{ledger,build}.json
+# + final-artifact.json + seed-artifact.json (tracked). The renders are local-only.
+builds/**/renders/
+builds/**/*.png
 
 # T-095-01 challenge-milestone renders — regenerable via npm run challenge:{cottage,gatehouse,church}.
 # The durable record is challenge/<subj>.{json,md} + challenge/<subj>/{base-,shell-,}artifact.json;

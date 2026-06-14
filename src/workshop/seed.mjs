@@ -87,24 +87,26 @@ export function chainRels(key, packRel = DEFAULT_PACK_REL) {
 
 /**
  * The unified chain's own paths (T-154-01, E-37) — the ONE place `build:<subject>` derives its seed
- * artifact, workshop record, and chain receipt locations, namespaced per pack like chainRels. The
- * build chain's workshop records live under a distinct `<runKey>-build` namespace so the unified
- * (artifact-base) ledger NEVER clobbers the committed pattern-book (program-seed) ledger at
- * `workshop/<runKey>.json` — the program-seed records stay replayable until S-156 archives them. The
- * build record is the chain receipt (recognition sha → seed sha → workshop outcome → final sha).
+ * artifact, workshop record, and chain receipt locations, namespaced per pack like chainRels. Every
+ * output of the unified chain is a DRAFT (freely regenerated, no pin-guard — the E-36 free zone), so
+ * it lives under the top-level `builds/<runKey>/` home: **location encodes status** (T-155-01, E-37).
+ * One subject = one self-contained build directory (seed → ledger → final → receipt), distinct from
+ * the committed pattern-book (program-seed) ledgers under `benchmarks/sculpture/workshop/` that S-156
+ * archives. The build record is the chain receipt (recognition sha → seed sha → workshop → final sha).
  */
 export function buildRels(key, packRel = DEFAULT_PACK_REL) {
   const runKey = `${key}${packNs(packRel)}`;
   const buildKey = `${runKey}-build`;
+  const base = `builds/${runKey}`;
   return Object.freeze({
     runKey, buildKey,
-    dir: `benchmarks/sculpture/workshop/${buildKey}`,
-    seedArtifact: `benchmarks/sculpture/workshop/${buildKey}/seed-artifact.json`,
-    ledger: `benchmarks/sculpture/workshop/${buildKey}.json`,
-    digest: `benchmarks/sculpture/workshop/${buildKey}.md`,
-    final: `benchmarks/sculpture/workshop/${buildKey}/final-artifact.json`,
-    record: `benchmarks/sculpture/build/${runKey}.json`,
-    recordMd: `benchmarks/sculpture/build/${runKey}.md`,
+    dir: base,
+    seedArtifact: `${base}/seed-artifact.json`,
+    ledger: `${base}/ledger.json`,
+    digest: `${base}/ledger.md`,
+    final: `${base}/final-artifact.json`,
+    record: `${base}/build.json`,
+    recordMd: `${base}/build.md`,
   });
 }
 
