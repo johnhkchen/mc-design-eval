@@ -44,6 +44,17 @@ function stripHit(every, span, phase, idx) {
   return r < span;
 }
 
+/** Build a {zoneOf, zone} relief restriction from a recognized storey band (T-145-02). The compiler
+ *  carries the band as PURE DATA `{yLo,yHi}` (inclusive) so the plan stays replay-stable; the brush
+ *  turns it into the y-band predicate surfaceRelief gates on. Returns null when no band is given, so a
+ *  bandless call is byte-identical to before the feature. An explicit `zoneOf` always wins (test seam). */
+function bandZone(band) {
+  if (!band) return null;
+  const { yLo, yHi } = band;
+  if (!isInt(yLo) || !isInt(yHi)) fail("bandZone", "band must be {yLo:int, yHi:int}");
+  return { zoneOf: (pos) => (pos[1] >= yLo && pos[1] <= yHi ? "band" : null), zone: "band" };
+}
+
 const checkMaterial = (where, m) => { if (typeof m !== "string" || !m.length) fail(where, "material must be a non-empty block id"); };
 const checkFaces = (where, faces) => {
   if (!Array.isArray(faces) || !faces.length) fail(where, "faces must name at least one face");
@@ -75,17 +86,18 @@ function faceSkin(occ, f) {
  * @returns {{placements:object[], report:object}}
  */
 export function pilaster(occ, opts = {}) {
-  const { material, faces, rhythm, span = ARTICULATION_DEFAULTS.span, depth = ARTICULATION_DEFAULTS.depth, zoneOf, zone } = opts;
+  const { material, faces, rhythm, span = ARTICULATION_DEFAULTS.span, depth = ARTICULATION_DEFAULTS.depth, zoneOf, zone, band } = opts;
   checkMaterial("pilaster", material);
   checkFaces("pilaster", faces);
   const period = rhythm?.period;
   const phase = rhythm?.phase ?? 0;
   if (!isInt(period) || period < 1) fail("pilaster", "rhythm.period must be an integer ≥ 1");
+  const zoneArgs = zoneOf ? { zoneOf, zone } : (bandZone(band) ?? {}); // band → storey y-gate (T-145-02)
   const r = surfaceRelief(occ, {
-    material, faces, depth, ...(zoneOf ? { zoneOf, zone } : {}),
+    material, faces, depth, ...zoneArgs,
     rhythm: { axis: "column", every: period, span, phase },
   });
-  return { placements: r.placements, report: { brush: "pilaster", period, phase, span, depth, ...r.report } };
+  return { placements: r.placements, report: { brush: "pilaster", period, phase, span, depth, band: band ?? null, ...r.report } };
 }
 
 /**
@@ -97,11 +109,13 @@ export function pilaster(occ, opts = {}) {
  *          zone?:string}} opts
  */
 export function quoin(occ, opts = {}) {
-  const { material, faces, run = ARTICULATION_DEFAULTS.run, headerDepth = ARTICULATION_DEFAULTS.headerDepth, zoneOf, zone } = opts;
+  const { material, faces, run = ARTICULATION_DEFAULTS.run, headerDepth = ARTICULATION_DEFAULTS.headerDepth, zoneOf, zone, band } = opts;
   checkMaterial("quoin", material);
   checkFaces("quoin", faces);
   if (!isInt(run) || run < 1) fail("quoin", "run must be an integer ≥ 1");
   if (!isInt(headerDepth) || headerDepth < 1) fail("quoin", "headerDepth must be an integer ≥ 1");
+  // an explicit zoneOf wins; otherwise the recognized band becomes the outer y-gate the run composes with
+  const outer = zoneOf ? { zoneOf, zone } : (bandZone(band) ?? { zoneOf: null, zone: undefined });
   const byKey = new Map();
   let corners = 0;
   for (const f of faces) {
@@ -119,7 +133,7 @@ export function quoin(occ, opts = {}) {
         const c = y - yMin;
         if (c < 0 || c >= run) return null;
         if (c % 2 !== parity) return null;
-        if (zoneOf && zoneOf(pos) !== zone) return null; // respect an outer zone restriction
+        if (outer.zoneOf && outer.zoneOf(pos) !== outer.zone) return null; // respect the outer zone/band restriction
         return Q;
       };
       const r = surfaceRelief(occ, { material, faces: [f], depth, zoneOf: restrict, zone: Q, rhythm: { axis: "row", every: 1, span: 1 } });
@@ -127,7 +141,7 @@ export function quoin(occ, opts = {}) {
     }
   }
   const placements = [...byKey.values()].sort((a, b) => a.pos[0] - b.pos[0] || a.pos[1] - b.pos[1] || a.pos[2] - b.pos[2]);
-  return { placements, report: { brush: "quoin", run, headerDepth, corners, proudCells: placements.length } };
+  return { placements, report: { brush: "quoin", run, headerDepth, corners, band: band ?? null, proudCells: placements.length } };
 }
 
 /**
@@ -140,16 +154,21 @@ export function quoin(occ, opts = {}) {
  *          zoneOf?:Function, zone?:string}} opts
  */
 export function infillPanel(occ, opts = {}) {
-  const { memberMaterial, fieldMaterial, faces, rhythm, span = ARTICULATION_DEFAULTS.span, depth = ARTICULATION_DEFAULTS.depth, zoneOf, zone } = opts;
+  const { memberMaterial, fieldMaterial, faces, rhythm, span = ARTICULATION_DEFAULTS.span, depth = ARTICULATION_DEFAULTS.depth, zoneOf, zone, band } = opts;
   checkMaterial("infillPanel(memberMaterial)", memberMaterial);
   checkMaterial("infillPanel(fieldMaterial)", fieldMaterial);
   checkFaces("infillPanel", faces);
   const period = rhythm?.period;
   const phase = rhythm?.phase ?? 0;
   if (!isInt(period) || period < 1) fail("infillPanel", "rhythm.period must be an integer ≥ 1");
+  // band → storey y-gate (T-145-02): studs AND the field recolor share it, so the half-timber stays in
+  // its storey (no plinth cover, no roof punch). An explicit zoneOf wins (test seam).
+  const zoneArgs = zoneOf ? { zoneOf, zone } : (bandZone(band) ?? {});
+  const fz = zoneArgs.zoneOf ?? null;
+  const fzone = zoneArgs.zone;
   // studs — proud, on the rhythm
   const studs = surfaceRelief(occ, {
-    material: memberMaterial, faces, depth, ...(zoneOf ? { zoneOf, zone } : {}),
+    material: memberMaterial, faces, depth, ...zoneArgs,
     rhythm: { axis: "column", every: period, span, phase },
   });
   // field — recolor the non-stud exterior skin cells (base plane, no geometry move)
@@ -157,7 +176,7 @@ export function infillPanel(occ, opts = {}) {
   const fieldByKey = new Map();
   for (const f of faces) {
     for (const [x, y, z] of faceSkin(occ, f).voxels) {
-      if (zoneOf && zoneOf([x, y, z]) !== zone) continue;
+      if (fz && fz([x, y, z]) !== fzone) continue;
       const along = f === "+x" || f === "-x" ? z : x;
       if (stripHit(period, span, phase, along)) continue; // stud column — handled by relief
       if (bareBlock(occ.cells.get(`${x},${y},${z}`)) === fieldBlock) continue; // already field
@@ -167,7 +186,7 @@ export function infillPanel(occ, opts = {}) {
   const fieldPlacements = [...fieldByKey.values()].sort((a, b) => a.pos[0] - b.pos[0] || a.pos[1] - b.pos[1] || a.pos[2] - b.pos[2]);
   return {
     placements: [...studs.placements, ...fieldPlacements],
-    report: { brush: "infill-panel", period, phase, studs: studs.report.proudCells, fieldCells: fieldPlacements.length },
+    report: { brush: "infill-panel", period, phase, band: band ?? null, studs: studs.report.proudCells, fieldCells: fieldPlacements.length },
   };
 }
 

@@ -131,3 +131,42 @@ test("FA9 every brush is pure — two calls return byte-identical placements", (
   ];
   for (const r of runs) assert.equal(JSON.stringify(r().placements), JSON.stringify(r().placements));
 });
+
+// ---- T-145-02: storey-band containment ------------------------------------------------------
+// An 8-tall box (y 0..7); the "upper" band of a 2×4 mass is y[4,7]. Relief must land ONLY there:
+// no plinth/ground cover, no roof punch — the spike's failure mode, structurally prevented.
+test("FA10 pilaster — a recognized band restricts proud strips to the storey y-range", () => {
+  const occ = occupancyFromCells(boxStub(6, 8, 4));
+  const band = { yLo: 4, yHi: 7 };
+  const { placements } = pilaster(occ, { material: "dark_oak_log", faces: ["-z"], rhythm: { period: 3 }, band });
+  assert.ok(placements.length > 0, "band still emits within its storey");
+  for (const p of placements) assert.ok(p.pos[1] >= 4 && p.pos[1] <= 7, `proud cell in-band, got y=${p.pos[1]}`);
+  // unbanded would also touch y<4 — prove the band actually excludes the ground rows
+  const { placements: whole } = pilaster(occ, { material: "dark_oak_log", faces: ["-z"], rhythm: { period: 3 } });
+  assert.ok(whole.some((p) => p.pos[1] < 4), "without a band the relief covers the ground rows");
+});
+
+test("FA11 infillPanel — band gates BOTH the studs and the recolored field", () => {
+  const occ = occupancyFromCells(boxStub(6, 8, 4));
+  const band = { yLo: 4, yHi: 7 };
+  const { placements } = infillPanel(occ, {
+    memberMaterial: "dark_oak_log", fieldMaterial: "oak_planks", faces: ["-z"], rhythm: { period: 3 }, band,
+  });
+  assert.ok(placements.length > 0);
+  for (const p of placements) assert.ok(p.pos[1] >= 4 && p.pos[1] <= 7, `stud/field in-band, got y=${p.pos[1]}`);
+});
+
+test("FA12 quoin — band composes with the corner/parity run (clips out-of-band courses)", () => {
+  const occ = occupancyFromCells(boxStub(6, 8, 4));
+  // the corner run anchors at the face-skin floor (y0); a band {0,2} clips the run=4 to y0..2
+  const band = { yLo: 0, yHi: 2 };
+  const { placements } = quoin(occ, { material: "stone_bricks", faces: ["-z"], run: 4, band });
+  assert.ok(placements.length > 0);
+  for (const p of placements) {
+    assert.ok(p.pos[1] >= 0 && p.pos[1] <= 2, `quoin cell in-band, got y=${p.pos[1]}`);
+    assert.ok(p.pos[0] === 0 || p.pos[0] === 5, "still only the corner columns");
+  }
+  // unbanded, the run reaches y=3 — prove the band actually clipped it
+  const { placements: whole } = quoin(occ, { material: "stone_bricks", faces: ["-z"], run: 4 });
+  assert.ok(whole.some((p) => p.pos[1] === 3), "without a band the run reaches course 3");
+});
