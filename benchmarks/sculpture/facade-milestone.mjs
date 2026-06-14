@@ -36,11 +36,12 @@ export const FACADE_MILESTONE_SCHEMA = "facade-milestone/v1";
 export const FACADE_BASELINES_SCHEMA = "facade-baselines/v1";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
-const CHAIN_REL = "benchmarks/sculpture/pattern-book";
-const GATE_REL = "benchmarks/sculpture/multi-angle";
-const BASELINES_REL = `${CHAIN_REL}/facade-baselines.json`;
-const MILESTONE_JSON_REL = `${CHAIN_REL}/facade-milestone.json`;
-const MILESTONE_MD_REL = "pr/assets/facade-milestone.md";
+const CHAIN_REL = "benchmarks/sculpture/pattern-book"; // chain DRAFTS (run ledgers) stay here
+const GATE_REL = "measurements/multi-angle";           // frozen gate verdicts (T-155-01)
+const MEAS_REL = "measurements/pattern-book";          // frozen baselines/milestone home (T-155-01)
+const BASELINES_REL = `${MEAS_REL}/facade-baselines.json`;
+const MILESTONE_JSON_REL = `${MEAS_REL}/facade-milestone.json`;
+const MILESTONE_MD_REL = "measurements/milestones/facade-milestone.md";
 
 const sha256 = (buf) => createHash("sha256").update(buf).digest("hex");
 const jsonOf = (x) => JSON.stringify(x, null, 2) + "\n";

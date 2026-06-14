@@ -29,7 +29,7 @@ import { SCULPTURE_VIEW_3Q } from "../../src/sculpture.mjs";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const RUNS_DIR = join(HERE, "runs");
 const OUT_DIR = join(HERE, "form-revise-ab");
-const BASELINE = join(HERE, "form-baseline.json");
+const BASELINE = join(HERE, "..", "..", "measurements", "form-baseline.json");
 
 // --- the categorical verdict vs the E-13 baseline (deterministic, no model — the form analogue of E-14's
 // codesign-ab `verdictOf`). The "before" is T-043-01's committed baseline whole-object IoU; the "after" is

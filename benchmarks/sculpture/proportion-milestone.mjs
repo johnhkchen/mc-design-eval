@@ -36,11 +36,12 @@ export const PROPORTION_MILESTONE_SCHEMA = "proportion-milestone/v1";
 export const PROPORTION_BASELINES_SCHEMA = "proportion-baselines/v1";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
-const CHAIN_REL = "benchmarks/sculpture/pattern-book";
+const CHAIN_REL = "benchmarks/sculpture/pattern-book"; // chain DRAFTS (run ledgers) stay here
 const WORKSHOP_REL = "benchmarks/sculpture/workshop";
-const GATE_REL = "benchmarks/sculpture/multi-angle";
-const BASELINES_REL = `${CHAIN_REL}/proportion-baselines.json`;
-const OUT_RELS = [`${CHAIN_REL}/proportion-milestone.json`, "pr/assets/proportion-milestone.md"];
+const GATE_REL = "measurements/multi-angle";           // frozen gate verdicts (T-155-01)
+const MEAS_REL = "measurements/pattern-book";          // frozen baselines/milestone home (T-155-01)
+const BASELINES_REL = `${MEAS_REL}/proportion-baselines.json`;
+const OUT_RELS = [`${MEAS_REL}/proportion-milestone.json`, "measurements/milestones/proportion-milestone.md"];
 
 const sha256 = (buf) => createHash("sha256").update(buf).digest("hex");
 const jsonOf = (x) => JSON.stringify(x, null, 2) + "\n";

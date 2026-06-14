@@ -227,7 +227,9 @@ async function main() {
   const gateRecRel = `measurements/multi-angle/${key}-${styled ? "styled" : "challenge"}.json`;
   const hasGate = () => existsSync(join(ROOT, gateRecRel));
   const readGate = async () => JSON.parse(await readFile(join(ROOT, gateRecRel), "utf8"));
-  const baselineRel = `reconstructed/${key}/e26-baseline.json`;
+  // T-155-01 (E-37): the pinned E-26 baseline is a frozen measurement under the measurements/ home
+  // (root-relative, read via join(ROOT, …) — NOT the HERE helpers).
+  const baselineRel = `measurements/reconstructed/${key}/e26-baseline.json`;
 
   if (offline) {
     if (!existsSync(recPath)) throw new Error(`committed record absent — run npm run reconstructed:${key} first`);
@@ -237,7 +239,7 @@ async function main() {
     // freely, so a regenerated (improved) milestone is drift, not a failure. --offline gates the
     // MEASUREMENT (the frozen instrument verdict + the pinned baseline + sheets), not the lineage.
     const sameShas = mile && canon(mile.reproducible?.sha256) === canon(rec.reproducible?.milestoneSha256);
-    const baselineOk = has(baselineRel) && sha256(await readFile(join(HERE, baselineRel), "utf8")) === rec.metrics?.census?.before?.baselineSha256;
+    const baselineOk = existsSync(join(ROOT, baselineRel)) && sha256(await readFile(join(ROOT, baselineRel), "utf8")) === rec.metrics?.census?.before?.baselineSha256;
     const sheetsOk = [rec.sheets?.before, rec.sheets?.after].every((p) => !p || existsSync(join(ROOT, p)));
     const ok = Boolean(baselineOk && sheetsOk && rec.instrument?.frozen !== false);
     console.error(`[offline] ${key}: milestone lineage ${sameShas == null ? "n/a" : sameShas ? "matches" : "DRIFTED"} (informational; drafts are free under E-36); baseline ${baselineOk ? "pinned" : "DIVERGED"}; sheets ${sheetsOk ? "present" : "MISSING"}; instrument ${rec.instrument?.frozen === false ? "DIFFS" : "frozen/untouched"}`);
@@ -280,8 +282,8 @@ async function main() {
     : instrumentDiff(preGate, gateIsFresh ? freshGate : null);
 
   // --- 5. metrics ----------------------------------------------------------------------------------
-  if (!has(baselineRel)) throw new Error(`${baselineRel} absent — the pinned E-26 baseline is a committed input (see structure.md step 3)`);
-  const baselineRaw = await readFile(join(HERE, baselineRel), "utf8");
+  if (!existsSync(join(ROOT, baselineRel))) throw new Error(`${baselineRel} absent — the pinned E-26 baseline is a committed input (see structure.md step 3)`);
+  const baselineRaw = await readFile(join(ROOT, baselineRel), "utf8");
   const baseline = JSON.parse(baselineRaw);
   const afterRel = afterArtifact(mile, milestonePrefix);
   const afterArt = afterRel ? JSON.parse(await readFile(join(HERE, afterRel), "utf8")) : null;

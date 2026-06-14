@@ -32,7 +32,7 @@ import { visibilityAwareCoverage } from "./face-resemblance.mjs";
 import { occupancyFromCells } from "./occupancy.mjs";
 import { surfaceZoneHistogram, ownCoverage } from "./zone-fill.mjs";
 
-const REC_DIR = fileURLToPath(new URL("../../benchmarks/sculpture/multi-angle", import.meta.url));
+const REC_DIR = fileURLToPath(new URL("../../measurements/multi-angle", import.meta.url));
 const RETIRED_T127_COTTAGE = fileURLToPath(
   new URL("./fixtures/cottage-patternbook.t127-retired.json", import.meta.url));
 const GATE_SCHEMA = "multi-angle-gate/v1";

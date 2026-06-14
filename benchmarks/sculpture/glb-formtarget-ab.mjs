@@ -34,7 +34,7 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const RUNS_DIR = join(HERE, "runs");
 const GLB_DIR = join(HERE, "glb");
 const OUT_DIR = join(HERE, "glb-formtarget-ab");
-const BASELINE = join(HERE, "form-baseline.json");
+const BASELINE = join(HERE, "..", "..", "measurements", "form-baseline.json");
 
 // Categorical verdict — APPLES-TO-APPLES against the GLB-measured whole-object "before" (NOT the concept
 // E-13 baseline). The E-13 number was measured against the FLAT CONCEPT; this run measures everything

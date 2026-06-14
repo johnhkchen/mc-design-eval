@@ -31,7 +31,7 @@ import { dirname, join } from "node:path";
 const HERE = dirname(fileURLToPath(import.meta.url));
 
 const SRC = {
-  baseline: join(HERE, "form-baseline.json"), // E-13 vs concept
+  baseline: join(HERE, "..", "..", "measurements", "form-baseline.json"), // E-13 vs concept
   formTarget: join(HERE, "glb-formtarget-ab.json"), // Arm A: text→JSON vs GLB + loop verdict
   voxKoi: join(HERE, "glb-voxel", "koi", "summary.json"), // Arm B
   voxHeart: join(HERE, "glb-voxel", "heart", "summary.json"),

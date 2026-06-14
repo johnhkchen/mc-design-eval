@@ -20,10 +20,10 @@ import { ROTATE_FLAG, preflightPins, guardedWriteRecord, loadTrackedSet, isTrack
 import { SUBJECTS } from "./durable-skin.mjs";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
-const GATE_REL = "benchmarks/sculpture/multi-angle";
+const GATE_REL = "measurements/multi-angle"; // frozen gate verdicts (T-155-01)
 const CHAIN_REL = "benchmarks/sculpture/pattern-book";
 const GENERATED_REL = "benchmarks/sculpture/generated";
-const H2H_RELS = [`${CHAIN_REL}/head-to-head.json`, `${CHAIN_REL}/head-to-head.md`, "pr/assets/pattern-book-milestone.md"];
+const H2H_RELS = [`${CHAIN_REL}/head-to-head.json`, `${CHAIN_REL}/head-to-head.md`, "measurements/milestones/pattern-book-milestone.md"];
 
 const jsonOf = (x) => JSON.stringify(x, null, 2) + "\n";
 const readJson = async (rel) => JSON.parse(await readFile(join(ROOT, rel), "utf8"));

@@ -121,8 +121,8 @@ async function main() {
     builds: BUILDS.map((b) => ({ id: b.id, label: b.label })),
     rows,
   };
-  await writeFile(join(HERE, "cleanliness-baseline.json"), JSON.stringify(json, null, 2) + "\n");
-  await writeFile(join(HERE, "cleanliness-baseline.md"), toMarkdown(rows));
+  await writeFile(join(HERE, "..", "..", "measurements", "cleanliness-baseline.json"), JSON.stringify(json, null, 2) + "\n");
+  await writeFile(join(HERE, "..", "..", "measurements", "cleanliness-baseline.md"), toMarkdown(rows));
   console.error(`wrote cleanliness-baseline.{md,json} (${rows.length} subjects × ${BUILDS.length} builds)`);
 }
 

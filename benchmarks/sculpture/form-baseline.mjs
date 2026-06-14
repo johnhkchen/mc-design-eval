@@ -94,7 +94,7 @@ async function main() {
     meanIoU: mean,
     subjects,
   };
-  writeFileSync(join(HERE, "form-baseline.json"), JSON.stringify(json, null, 2) + "\n");
+  writeFileSync(join(HERE, "..", "..", "measurements", "form-baseline.json"), JSON.stringify(json, null, 2) + "\n");
 
   const md = `# Form-fidelity baseline (E-15 "before")
 
@@ -129,7 +129,7 @@ The metric's worth is the **relative Δ between revisions** the loop reads, not 
 5. **Silhouette ≠ form** — two shapes can share an outline; IoU is necessary, not sufficient. Paired in the
    loop with the color gate, it is the cheap honest number, not a complete form judge.
 `;
-  writeFileSync(join(HERE, "form-baseline.md"), md);
+  writeFileSync(join(HERE, "..", "..", "measurements", "form-baseline.md"), md);
   console.log(`\nWrote form-baseline.{json,md} · ${subjects.length} subjects · mean IoU ${mean.toFixed(3)}`);
 }
 
