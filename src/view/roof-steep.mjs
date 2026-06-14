@@ -75,7 +75,9 @@ export function roofSteepGableConstruct(spec) {
 
   const g = gableRecord({ footprint, ridgeAxis, eaveY, ridgeY, pitch });
   const family = { field: blocks.field, stairs: blocks.stairs, slab: blocks.slab ?? null, findings: [] };
-  const { cells, counts, heights, owner, capKeys, bandFloor } = generateRoof([g], family);
+  // T-150-01: gable-end walls (envelope) when spec.blocks.gable is carried; the steep invariant
+  // checks each column's TOP cell (still the stair), so the sub-surface retag is invariant-safe.
+  const { cells, counts, heights, owner, capKeys, bandFloor, gableWallKeys } = generateRoof([g], family, { gableBlock: blocks?.gable ?? null });
 
   // THE STEEP INVARIANT — every non-cap slope column tops with a straight bottom-half tread
   // facing uphill (integer classes never half-step, so the top cell IS the column's surface).
@@ -101,5 +103,5 @@ export function roofSteepGableConstruct(spec) {
   }
   if (counts.slabs !== 0) fail(`steep invariant: ${counts.slabs} slab half-steps emitted on integer pitch (drift)`);
 
-  return { cells, counts, capKeys, bandFloor, ridgeY };
+  return { cells, counts, capKeys, bandFloor, gableWallKeys, ridgeY };
 }

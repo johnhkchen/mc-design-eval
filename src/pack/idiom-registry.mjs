@@ -100,8 +100,10 @@ export function roofGableConstruct(spec) {
   // approximation, and refusals are named findings (E-33).
   if (pitch > 1) fail("roofGableConstruct", `spec.pitch ${pitch} exceeds the 45° stair course — steep classes are roof.gable.steep's contract`);
   const g = gableRecord({ footprint, ridgeAxis, eaveY, ridgeY, pitch });
-  const { cells, counts, capKeys, bandFloor } = generateRoof([g], familyOfBlocks(blocks));
-  return { cells, counts, capKeys, bandFloor, ridgeY };
+  // T-150-01: spec.blocks.gable (when carried) builds the gable-end walls as envelope; absent ⇒
+  // legacy prism (gableEnd cells stay roof field). gableWallKeys flow to the zone map.
+  const { cells, counts, capKeys, bandFloor, gableWallKeys } = generateRoof([g], familyOfBlocks(blocks), { gableBlock: blocks?.gable ?? null });
+  return { cells, counts, capKeys, bandFloor, gableWallKeys, ridgeY };
 }
 
 /** HIP ROOF — the gable with both ridge ends hipped (heuristic hip, straight-only states). */
@@ -194,6 +196,7 @@ const BLOCKS_FRAGMENT = {
   type: "object",
   properties: {
     field: { type: "string" }, stairs: { type: ["string", "null"] }, slab: { type: ["string", "null"] },
+    gable: { type: ["string", "null"] }, // T-150-01: gable-end wall block (envelope), optional
   },
   additionalProperties: false,
 };

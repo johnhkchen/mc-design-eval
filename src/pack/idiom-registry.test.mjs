@@ -92,6 +92,20 @@ test("roof constructs: gable ridge realized, hip ends pulled down, pyramid corne
   assert.equal(pyr.apexY, 13);
 });
 
+test("roof.gable threads spec.blocks.gable → gable-end walls, absent ⇒ byte-identical (T-150-01)", () => {
+  const base = SYNTH_SPECS["roof.gable"]; // ridge along z → end walls at z=0 and z=5
+  const plain = IDIOM_REGISTRY["roof.gable"].generate(base);
+  assert.equal(plain.gableWallKeys.size, 0, "no blocks.gable ⇒ no gable-end walls");
+  const walled = IDIOM_REGISTRY["roof.gable"].generate({ ...base, blocks: { ...base.blocks, gable: "cobblestone" } });
+  assert.ok(walled.gableWallKeys.size > 0, "blocks.gable builds the gable-end walls");
+  // an end-slice sub-surface cell is now cobblestone; the ridge cap surface stays roof field
+  const endFill = walled.cells.find((c) => c.pos[2] === 0 && c.pos[1] === 11 && c.pos[0] === 0);
+  assert.equal(endFill.block, "cobblestone");
+  // the covering (fixtures: stairs/slabs) is byte-identical to the plain run
+  const cover = (r) => r.cells.filter((c) => c.form === "fixture");
+  assert.deepEqual(cover(walled), cover(plain), "the slope skin is unchanged by the gable wall");
+});
+
 test("arch/flat-head constructs require a concrete block and carry the dressing labels", () => {
   const arch = IDIOM_REGISTRY["arch"].generate(SYNTH_SPECS["arch"]);
   assert.ok(arch.aperture.length > 0 && arch.headCells.length > 0 && arch.jambCells.length > 0);
