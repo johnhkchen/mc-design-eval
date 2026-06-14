@@ -6,7 +6,7 @@ status: open
 priority: high
 depends_on: [E-34]
 spec: "§1, §5, §6, §9"
-stories: [S-145, S-146, S-147, S-148, S-149]
+stories: [S-145, S-146, S-147, S-148, S-149, S-150]
 ---
 
 ## Background (read this first — self-contained)
@@ -138,7 +138,18 @@ RE-SKIN + RE-VERDICT          cottage (the half-timber poster child) + barn back
 S-145 facade-grammar-recognition ─┐
 S-146 relief-by-construction ──▶ S-147 articulation-brushes ─┼─▶ S-149 re-skin-reverdict (terminal)
 S-148 relief-aware-gate ──────────────────────────────────────┘
+S-147 articulation-brushes ──▶ S-150 realistic-construction-gable-and-roof
 ```
+
+*Added after the first live loop (2026-06-14): the deterministic E-35 slice shipped green but the
+machine was left switched off (no real subject carries a facade; builds still flat) — **S-149 gains a
+second ticket T-149-02** (live facade build + the band0 coverage unblock the cottage re-verdict
+surfaced). And a construction-model defect distinct from surface texture: the roof is plotted as a
+**solid triangular prism of roof material dropped on a wall box** (`roof-generate.mjs:271-281`), the
+gable-end triangle reads as planks instead of the concept's stone (the declared `gableRole` is never
+consumed), and there is no eave/verge overhang — **S-150** fixes the generator to build the way
+construction works (wall envelope incl. gable ends, then roof covering as an overhanging skin), barn
+as the proving subject.*
 
 - **S-145 — facade-grammar-recognition.** Stage 3 emits a *facade-grammar* program: per-face rhythm
   (stud/pilaster spacing), panel fields (infill between frame), quoins at corners, course lines, eave
@@ -165,7 +176,15 @@ S-148 relief-aware-gate ──────────────────�
   barn back through the full loop with grammar recognition + relief brushes live; **this story owns
   the epic's only judge runs**; verdicts vs the committed E-34 baselines under the relief-aware gate
   with the legacy arithmetic beside; sheets beside concepts. The question: with grammar + relief +
-  an instrument that requires them, does the texture gap close at the glance?
+  an instrument that requires them, does the texture gap close at the glance? *(Second ticket
+  T-149-02, added after the first loop: the live facade build was never run — switch the machine on,
+  and unblock the cottage's band0 coverage reject first.)*
+- **S-150 — realistic-construction-gable-and-roof.** The construction-model defect, distinct from
+  surface texture: the roof is a *solid triangular prism of roof material dropped on a wall box*
+  (`roof-generate.mjs:271-281`), so the gable-end triangle reads as planks where the concept shows
+  stone (the declared `gableRole` is never consumed) and there is no eave/verge overhang. Build the
+  way construction works — **wall envelope first (incl. gable-end walls), then a roof covering as an
+  overhanging skin** — barn as the proving subject; deterministic re-run + sheet, no judge run.
 
 ## Definition of done
 
