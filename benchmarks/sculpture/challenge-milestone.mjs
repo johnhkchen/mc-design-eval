@@ -32,8 +32,8 @@
 //   npm run challenge:cottage                 # the full chain + renders + frames + the gate
 //   npm run challenge:gatehouse
 //   npm run challenge:church                  # the untuned challenge subject (provisions its base)
-//   npm run challenge:cottage -- --repro      # re-run the deterministic chain, compare sha256s (no GL/judge)
-//   npm run challenge:cottage -- --offline    # re-assert the committed record + artifacts (no recompute)
+//   npm run challenge:cottage -- --repro      # prove the chain is DETERMINISTIC (two fresh runs byte-identical; no GL/judge)
+//   npm run challenge:cottage -- --offline    # re-assert the committed measurement (gate record + sheet; drafts informational)
 //
 // Writes challenge/<subj>.{json,md} (committed) + challenge/<subj>/{base-,shell-,}artifact.json
 // (committed) + PNGs (gitignored) + pr/assets/frames/challenge-<subj>-{before,after}.png; the gate
@@ -370,10 +370,14 @@ async function main() {
     const shaOf = async (p) => sha256(await readFile(p, "utf8"));
     const gateRec = existsSync(gateRecPath) ? JSON.parse(await readFile(gateRecPath, "utf8")) : null;
     for (const p of [paths.shellAbs, paths.finalAbs]) assertArtifact(JSON.parse(await readFile(p, "utf8")));
+    const want = rec.reproducible?.sha256 ?? {};
+    // E-36 (T-153-01): draft artifact shas are INFORMATIONAL only — drafts rewrite freely, so a
+    // mismatch vs the recorded sha is drift, not a failure. --offline gates the MEASUREMENT
+    // (skin coverage gate + shell record + gate record + sheet + AJV), never the prior draft.
+    const draftsMatch = (await shaOf(paths.shellAbs)) === want.shell &&
+      (await shaOf(paths.finalAbs)) === want.final &&
+      (!want.base || (await shaOf(paths.baseAbs)) === want.base);
     const checks = {
-      shell: (await shaOf(paths.shellAbs)) === rec.reproducible?.sha256?.shell,
-      final: (await shaOf(paths.finalAbs)) === rec.reproducible?.sha256?.final,
-      base: !rec.reproducible?.sha256?.base || (await shaOf(paths.baseAbs)) === rec.reproducible.sha256.base,
       skinGate: rec.skin?.gates?.final?.passed === true,
       closure: rec.shell?.plug != null,
       gate: gateRec?.schema === MULTI_ANGLE_GATE_SCHEMA && gateRec?.label === GATE_LABEL &&
@@ -381,7 +385,7 @@ async function main() {
       sheet: typeof rec.gate?.sheet === "string" && existsSync(join(ROOT, rec.gate.sheet)),
     };
     const ok = Object.values(checks).every(Boolean);
-    console.error(`[offline] ${def.key}: artifact shas ${checks.base && checks.shell && checks.final ? "MATCH" : "DIVERGE"}; ` +
+    console.error(`[offline] ${def.key}: drafts ${draftsMatch ? "MATCH" : "DIFFER from"} recorded shas (informational; drafts are free under E-36); ` +
       `skin coverage gate ${checks.skinGate ? "passed" : "VIOLATED"}; shell record ${checks.closure ? "present" : "MISSING"}; ` +
       `gate record ${checks.gate ? "well-formed" : "MISSING/MALFORMED"}; sheet ${checks.sheet ? "present" : "MISSING"}; AJV ok — ` +
       `recorded gate outcome: ${rec.gate?.outcome ?? "?"}`);
@@ -390,22 +394,28 @@ async function main() {
   }
 
   if (repro) {
-    // AC4's fresh-process proof: re-run the deterministic chain (no GL, no judge) and compare
-    // against the committed shas. The judge is NOT re-run — its pin is the committed gate record.
+    // E-36 (T-153-01): --repro proves the chain is DETERMINISTIC across two fresh runs (no GL, no
+    // judge) — it no longer freezes the build to the committed DRAFT shas. An improved chain that
+    // moves the build closer to the concept stays green: both fresh runs produce the same NEW bytes.
+    // The judge is NOT re-run — its pin is the committed gate record. Drift from the recorded sha is
+    // reported informationally (drafts are free), never gated.
     if (!existsSync(recPath)) throw new Error(`committed record absent — run npm run challenge:${def.key} first`);
     const rec = JSON.parse(await readFile(recPath, "utf8"));
-    const r = await runChain(def, paths);
-    const got = {
+    const shaOfRun = (r) => ({
       base: def.provision ? sha256(artifactJson(r.base)) : null,
       shell: sha256(artifactJson(r.shell.artifact)),
       reconstructed: r.reconstruction?.composed ? sha256(artifactJson(r.reconstruction.composed.artifact)) : null,
       final: sha256(artifactJson(r.skin.final)),
-    };
+    });
+    const s1 = shaOfRun(await runChain(def, paths));
+    const s2 = shaOfRun(await runChain(def, paths));
+    const same = s1.base === s2.base && s1.shell === s2.shell && s1.final === s2.final &&
+      s1.reconstructed === s2.reconstructed;
     const want = rec.reproducible?.sha256 ?? {};
-    const same = (!got.base || got.base === want.base) && got.shell === want.shell && got.final === want.final &&
-      (got.reconstructed == null || want.reconstructed == null || got.reconstructed === want.reconstructed);
-    console.error(`[repro] ${def.key}: fresh-process chain ${same ? "REPRODUCES the committed artifacts" : "DIVERGES"} ` +
-      `(shell ${got.shell.slice(0, 12)}… vs ${String(want.shell).slice(0, 12)}…, final ${got.final.slice(0, 12)}… vs ${String(want.final).slice(0, 12)}…)`);
+    const drifted = s1.shell !== want.shell || s1.final !== want.final;
+    console.error(`[repro] ${def.key}: fresh-process chain is ${same ? "DETERMINISTIC (two runs byte-identical)" : "NON-DETERMINISTIC"} ` +
+      `(shell ${s1.shell.slice(0, 12)}…, final ${s1.final.slice(0, 12)}…)` +
+      (drifted ? " — note: drifted from recorded shas (drafts are free under E-36)" : ""));
     if (!same) process.exitCode = 1;
     return;
   }

@@ -28,9 +28,10 @@
 //
 // DETERMINISM (E-24 Rule 2 / E-25 Rule 5): evidence → fit → generate → skin → stretch is a pure
 // function of the committed inputs; it runs TWICE per live invocation, all produced artifacts
-// byte-compared; --repro re-proves from a fresh process (no GL, no judge); --offline re-asserts the
-// committed record. GL renders are evidence, never inputs to a decision; the judge is the pinned
-// model, one sample per view, verdicts committed as judged.
+// byte-compared; --repro re-proves DETERMINISM from a fresh process (two fresh runs byte-identical —
+// E-36/T-153-01: NOT frozen to the committed draft); --offline re-asserts the committed MEASUREMENT
+// (gate record + sheet + AJV), drafts informational. GL renders are evidence, never inputs to a
+// decision; the judge is the pinned model, one sample per view, verdicts committed as judged.
 //
 // HONEST FAILURE (E-25 Rule 6): a deterministic-stage THROW writes generated/<subj>.json with
 // {status: "pipeline-failed", stage, error} and exits 1. Nothing is weakened; the record names the gap.
@@ -41,8 +42,8 @@
 //
 // GL + METERED (gate judge) — run on demand, NOT in `npm test`:
 //   npm run generated:<subj>                  # the full generate-first chain + frames + the gate
-//   npm run generated:<subj> -- --repro       # fresh-process re-proof of the deterministic chain
-//   npm run generated:<subj> -- --offline     # re-assert the committed record + artifacts
+//   npm run generated:<subj> -- --repro       # prove the chain is DETERMINISTIC (two fresh runs byte-identical)
+//   npm run generated:<subj> -- --offline     # re-assert the committed measurement (gate record + sheet; drafts informational)
 //   npm run generated:<subj> -- --skip-gate   # chain + artifacts only, NO judge (instrument-first:
 //                                             # verify with diff:roof before the owned gated run)
 //
@@ -466,19 +467,22 @@ async function main() {
     for (const p of [paths.baseAbs, paths.grammarAbs, paths.finalAbs]) assertArtifact(JSON.parse(await readFile(p, "utf8")));
     const gateRec = existsSync(gateRecPath) ? JSON.parse(await readFile(gateRecPath, "utf8")) : null;
     const want = rec.reproducible?.sha256 ?? {};
+    // E-36 (T-153-01): draft artifact shas are INFORMATIONAL only — drafts rewrite freely, so a
+    // mismatch vs the recorded sha is drift, not a failure. --offline gates the MEASUREMENT
+    // (gate record + sheet + zero-blob + AJV), never the prior draft.
+    const draftsMatch = (await shaOf(paths.baseAbs)) === want.base &&
+      (await shaOf(paths.grammarAbs)) === want.grammarFinal &&
+      (await shaOf(paths.finalAbs)) === want.styled &&
+      (await shaOf(paths.fitAbs)) === want.fit;
     const checks = {
       schema: rec.schema === RECORD_SCHEMA,
-      base: (await shaOf(paths.baseAbs)) === want.base,
-      grammar: (await shaOf(paths.grammarAbs)) === want.grammarFinal,
-      styled: (await shaOf(paths.finalAbs)) === want.styled,
-      fit: (await shaOf(paths.fitAbs)) === want.fit,
       zeroBlob: rec.zeroBlob?.passed === true,
       gate: gateRec?.schema === MULTI_ANGLE_GATE_SCHEMA && gateRec?.label === GATE_LABEL &&
         (gateRec?.aggregate?.decided === true) !== (typeof gateRec?.aggregate?.refusal === "string"),
       sheet: typeof rec.gate?.sheet === "string" && existsSync(join(ROOT, rec.gate.sheet)),
     };
     const ok = Object.values(checks).every(Boolean);
-    console.error(`[offline] ${def.key}: artifact shas ${checks.base && checks.grammar && checks.styled && checks.fit ? "MATCH" : "DIVERGE"}; ` +
+    console.error(`[offline] ${def.key}: drafts ${draftsMatch ? "MATCH" : "DIFFER from"} recorded shas (informational; drafts are free under E-36); ` +
       `zero-blob ${checks.zeroBlob ? "recorded" : "MISSING"}; gate record ${checks.gate ? "well-formed" : "MISSING/MALFORMED"}; ` +
       `sheet ${checks.sheet ? "present" : "MISSING"}; AJV ok — recorded gate outcome: ${rec.gate?.outcome ?? "?"}`);
     if (!ok) process.exitCode = 1;
@@ -500,18 +504,26 @@ async function main() {
       process.exitCode = 1;
       return;
     }
-    const r = await generatedChain(def, kitRec, paths, {});
-    const got = {
+    // E-36 (T-153-01): --repro proves the chain is DETERMINISTIC across two fresh runs — it no
+    // longer freezes the build to the committed DRAFT shas. Improving the generator (it moves the
+    // build closer to the concept) keeps --repro green: both fresh runs produce the same NEW bytes.
+    // The judge is never re-run; the committed gate record is its pin. Drift from the recorded sha
+    // is reported informationally (drafts are free), never gated.
+    const shaOfRun = (r) => ({
       base: sha256(artifactJson(r.gen.artifact)),
       grammarFinal: sha256(artifactJson(r.grammar.final)),
       styled: sha256(artifactJson(r.styled)),
       fit: sha256(JSON.stringify(r.fitSerialized, null, 2) + "\n"),
-    };
+    });
+    const s1 = shaOfRun(await generatedChain(def, kitRec, paths, {}));
+    const s2 = shaOfRun(await generatedChain(def, kitRec, paths, {}));
+    const same = s1.base === s2.base && s1.grammarFinal === s2.grammarFinal &&
+      s1.styled === s2.styled && s1.fit === s2.fit;
     const want = rec.reproducible?.sha256 ?? {};
-    const same = got.base === want.base && got.grammarFinal === want.grammarFinal &&
-      got.styled === want.styled && got.fit === want.fit;
-    console.error(`[repro] ${def.key}: fresh-process chain ${same ? "REPRODUCES the committed artifacts" : "DIVERGES"} ` +
-      `(styled ${got.styled.slice(0, 12)}… vs ${String(want.styled).slice(0, 12)}…)`);
+    const drifted = s1.styled !== want.styled;
+    console.error(`[repro] ${def.key}: fresh-process chain is ${same ? "DETERMINISTIC (two runs byte-identical)" : "NON-DETERMINISTIC"} ` +
+      `(styled ${s1.styled.slice(0, 12)}…)` +
+      (drifted ? ` — note: drifted from recorded sha ${String(want.styled).slice(0, 12)}… (drafts are free under E-36)` : ""));
     if (!same) process.exitCode = 1;
     return;
   }
