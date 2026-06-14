@@ -1,0 +1,116 @@
+{
+  "schema": "facade-baselines/v1",
+  "ticket": "T-149-01",
+  "note": "pre-rotation texture quotes — the live relieved judge run retires these pins; the bytes remain in git history at these shas. Baselines are NEVER re-banked.",
+  "subjects": [
+    {
+      "runKey": "barn",
+      "subject": "barn",
+      "pack": "rustic",
+      "gateSlug": "barn-patternbook",
+      "gatePin": {
+        "path": "benchmarks/sculpture/multi-angle/barn-patternbook.json",
+        "sha256": "8e23fb06fb4313ee3ae5381109f910f3bce9becec39b6a62b139e0b0bd5e6b56"
+      },
+      "arithmetics": {
+        "kitAware": {
+          "schema": "kit-aware-gate/v1",
+          "passed": true,
+          "decided": true
+        },
+        "budget": {
+          "policy": "multi-angle-budget/v2",
+          "passed": true,
+          "majorCount": 0,
+          "minorCount": 8,
+          "minorBudget": 10,
+          "gapCount": 8,
+          "gapBudget": 2,
+          "legacy": {
+            "passed": false,
+            "gapBudget": 2,
+            "gapCount": 8
+          }
+        },
+        "reliefAware": {
+          "armed": false,
+          "note": "relief lens unarmed on this committed record (flat-build texture baseline)"
+        }
+      }
+    },
+    {
+      "runKey": "barn--saltcrag",
+      "subject": "barn",
+      "pack": "saltcrag",
+      "gateSlug": "barn-patternbook-saltcrag",
+      "gatePin": {
+        "path": "benchmarks/sculpture/multi-angle/barn-patternbook-saltcrag.json",
+        "sha256": "47843948d06f702a041e93cfd8361a491a4727e15439a128c681fb7275d5ea53"
+      },
+      "arithmetics": {
+        "kitAware": {
+          "schema": "kit-aware-gate/v1",
+          "passed": false,
+          "decided": true
+        },
+        "budget": {
+          "policy": "multi-angle-budget/v2",
+          "passed": true,
+          "majorCount": 0,
+          "minorCount": 8,
+          "minorBudget": 10,
+          "gapCount": 8,
+          "gapBudget": 2,
+          "legacy": {
+            "passed": false,
+            "gapBudget": 2,
+            "gapCount": 8
+          }
+        },
+        "reliefAware": {
+          "armed": false,
+          "note": "relief lens unarmed on this committed record (flat-build texture baseline)"
+        }
+      }
+    },
+    {
+      "runKey": "cottage",
+      "subject": "cottage",
+      "pack": "rustic",
+      "gateSlug": "cottage-patternbook",
+      "gatePin": {
+        "path": "benchmarks/sculpture/multi-angle/cottage-patternbook.json",
+        "sha256": "fc4bbeacc2ff3e03ea4ec16e90693a31e5ba3339891b09afd2f58b1dbe55b799"
+      },
+      "arithmetics": {
+        "kitAware": {
+          "schema": "kit-aware-gate/v1",
+          "passed": false,
+          "decided": true
+        },
+        "budget": {
+          "policy": "multi-angle-budget/v2",
+          "passed": false,
+          "majorCount": 0,
+          "minorCount": 0,
+          "minorBudget": 10,
+          "gapCount": 0,
+          "gapBudget": 2,
+          "legacy": {
+            "passed": false,
+            "gapBudget": 2,
+            "gapCount": 0
+          }
+        },
+        "reliefAware": {
+          "armed": false,
+          "note": "relief lens unarmed on this committed record (flat-build texture baseline)"
+        }
+      }
+    }
+  ],
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  }
+}
