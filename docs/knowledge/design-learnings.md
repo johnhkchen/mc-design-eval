@@ -3008,3 +3008,45 @@ are not a deterministic edit.** The lesson generalizes E-34 finding 4: a coverag
 geometry is answered by re-running the dress at the corrected band boundary, not by tuning the gate —
 and the re-dress is only legitimate inside a fresh, self-consistent chain, never bolted onto a committed
 ledger. T-149-02 named the residual with counts and scoped the fix to that run (GL absent in-session).
+
+### Construction model: prism-on-prism → envelope-then-covering (T-150-01) · 2026-06-14
+
+The gable roof was authored as a **solid triangular prism of roof material dropped on the wall box** —
+`generateRoof` filled every column floor→surface with `family.field`, and the header even named it a
+feature: *"gable-end walls fill to the ridge for free."* Construction is the inverse: a **wall
+envelope** (the two vertical gable-end triangular faces included) carries a **roof covering** (a sloped
+skin) that **overhangs**. Three coupled symptoms followed from the one wrong model: the gable end read
+as roof material (it was roof field), it zoned as roof (`zoneOf`'s `y ≥ upperTop` clause classifies any
+above-eave cell roof, even the non-top-exposed gable fill), and `gableRole` — the program's declared
+gable material — was **validated but never consumed** (it appeared only in the schema, `checkRole`, and
+fixtures).
+
+**The fix is silhouette-neutral where it can be, honest-widening where it must.** Gable-end-as-wall
+changes **material + zone only, never occupancy**: `generateRoof(opts.gableBlock)` retags the
+sub-surface fill of the two vertical end slices (`gableEndColumns` — the outermost ridge-axis slice;
+**empty for hip ends**, which have no vertical face) as wall and returns `gableWallKeys`; the sloped
+covering (top stair/full, slab, cap, every sheet/verge surface) is **byte-identical**. The zone map
+(`zonesFromBands`, `structuralZones`) takes `gableWallKeys` and classifies those cells by their y-band
+**before** the roof clause. Hollowness is preserved trivially — only block ids move. The overhang
+(AC3) is the *opposite* kind of change — honest perpendicular widening — and it **already had a tool**:
+the S-147 `eaveOverhang` brush over `surfaceRelief`, with `reliefNoRegress` proving the E-34 ruler reads
+the eave line unmoved (in-plane mask + ridge/eave ratios byte-identical) while recording the widening.
+The ruler reads the overhanging course AS the eave line — architecturally correct (the overhang *is* the
+eave); the reading is recorded both ways, never fought.
+
+**The discipline that kept it green: opt-in by default.** Every core (generator, zone map) is
+byte-identical when its new input is absent — `gableBlock` undefined ⇒ legacy prism, `gableWallKeys`
+empty ⇒ legacy `zoneOf`. So the machine landed on `main` with every committed chain byte-unmoved. It is
+**activated in the generate-first path** (`provision-generate` resolves the eave-band wall block — the
+realized `gableRole` intent, *"the gable end stays the same fieldstone"* — and bands the gable per y so
+the storey banding continues up the triangle; `generated-milestone` folds `gableWallKeys` into the mass
+census so the skin agrees). It is **deliberately NOT activated in the workshop/compile path**: wiring
+`blocks.gable` there made the realized barn build, but the **conformance gate (`courses-even`) is not yet
+`gableWallKeys`-aware** and read the gable wall as a *"foreign roof block"* — the same lesson as the
+multi-angle judge, and the same owner (the relief-aware gate, S-148, already exports `reliefNoRegress`
+for exactly this). Making that gate envelope-aware + rotating the judge pins is its own ticket; T-150-01
+shipped the construction model, the cores, the generate-first activation, and the tests, and named the
+gate-awareness as the next rung. The barn's corrected glance sheet (gable reads stone, roof reads
+covering-with-overhang, beside prior-flat and concept) is the operator GL step — `npm run generated:barn
+-- --repro` then `npm run diff:roof -- --subject barn` — deterministic and judge-free, the glance the
+proof (E-35's only judge runs were never burned speculatively).
