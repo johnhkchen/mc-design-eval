@@ -57,15 +57,41 @@ its output trees; see `_archive/README.md` for the full manifest.
 - `generated-milestone.mjs` **stays in the live tree** — its deterministic core IS Stage 4 (spawned by
   `build`); only its standalone-with-gate npm scripts (`generated:*`) were removed.
 
-## Invariants (enforced; S-157 formalizes)
+## Invariants (enforced — S-157, `src/form/topology.conformance.test.mjs`)
 
+The topology conformance suite goes **red on violation** (the [[vocabulary-authority-one-composition-point]]
+pattern). It reads this map and the live tree; if the two drift, the build fails.
+
+- **This map is authoritative + kept current** — every module the spine names must exist on disk
+  (forward), and every stage the one chain actually runs must be named here (reverse). It follows
+  that **any stage-changing ticket updates this map in the same commit**.
+- **One chain, one entry point** — exactly one live runner declares the `build-chain/v1` schema; a
+  second "build a subject" entry point fails the suite.
+- **No live module imports from `_archive/`** — the dead-code home is importable but the live spine
+  may not reach into it (provenance *comments* are fine; an `import`/`from` clause is not).
 - **Location encodes status** — drafts are free; `measurements/` + ratified `packs/` are the pin-guard
-  allowlist (E-36 / T-155-01, now a path prefix, not a hand-list). The unified chain writes its draft
-  under `builds/<key>/` so it never clobbers a committed program-seed ledger.
+  allowlist (E-36 / T-155-01, a path **prefix**, not a hand-list — the suite locks the prefix shape).
+  The unified chain writes its draft under `builds/<key>/` so it never clobbers a committed program-seed ledger.
 - **The workshop cannot call the judge** — `src/workshop/isolation.test.mjs` scans the runner sources;
   `build.mjs` imports no gate seam.
 - **No per-building constants; subscription shim only** — subjects are durable-skin registry data
   (E-25 Rule 3 self-grep); declarations derive from the committed recognition; the budget is the single
   `BUILD_BUDGET`.
-- **Done = delivered** — a creation run regenerates the artifact and renders it **beside the concept**
-  (E-36); the glance beats the gate (`docs/knowledge/milestones.md`).
+- **Done = delivered, not compiled** — a creation run regenerates the `builds/<subject>/` artifact and
+  renders it **beside the concept** (E-36); the chain reports success only after that glance. Green
+  tests alone are not done; the glance beats the gate (`docs/knowledge/milestones.md`).
+
+## Conventions (recorded — S-157)
+
+Thin-context autonomous runs need the *organizational* rules written where the structure can't
+enforce every nuance. These are conventions, backed by the invariants above where a test exists.
+
+- **Replace, don't accrete.** A superseding ticket **archives what it replaces in the same ticket**
+  (it does not leave the old chain beside the new one — T-156 archived the retired chains as E-37
+  required). A **shared dependency gets its own upstream ticket**, never a "share X" note duplicated
+  into sibling roots ([[parallel-roots-duplicate-shared-deps]]).
+- **Claim before you produce.** Lisa can hand one ticket to two threads
+  ([[lisa-same-ticket-concurrency]], [[ticket-double-dispatch]]). Before emitting a phase artifact,
+  a thread writes `docs/active/work/<ticket>/.lisa-claim.json` and a sibling **checks** it
+  (`npm run lisa:claim -- --ticket <id> --check`); a fresh foreign claim means *defer, don't race*.
+  The claim auto-frees after a stale interval so a crashed thread never wedges the ticket.
