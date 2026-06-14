@@ -70,6 +70,33 @@ test("generateProvision: gabled-box fit → AJV-valid artifact, every cell prove
   assert.ok(gen.roofPlan.footprintCols.size > 0);
 });
 
+test("gable-end walls: the vertical end faces are wall material, covering stays roof (T-150-01)", () => {
+  const fit = fitProvision({ occ: occupancyFromCells(gabledBox()) }); // ridge along z → ends at z=0,zMax
+  const bands = [{ yRange: [0, 4], block: "stone_bricks" }, { yRange: [5, 12], block: "white_terracotta" }];
+  const gen = generateProvision(fit, { family: FAMILY, policy: POLICY, bands, sheetBlock: "dark_oak_planks" });
+
+  // the roof plan reports the gable-end-wall cells
+  assert.ok(gen.roofPlan.gableWallKeys.size > 0, "gable-end-wall cells reported in the roof plan");
+  const byPos = new Map(gen.artifact.placements.map((p) => [p.pos.join(","), p]));
+  const zMax = fit.masses[0].footprint.bbox.maxZ;
+  const bandBlockAt = (y) => (y <= 4 ? "minecraft:stone_bricks" : "minecraft:white_terracotta");
+  let sawUpper = false;
+  for (const key of gen.roofPlan.gableWallKeys) {
+    const [, y, z] = key.split(",").map(Number);
+    assert.ok(z === 0 || z === zMax, `gable-wall key ${key} sits on an end slice`);
+    const cell = byPos.get(key);
+    // the gable wall is wall material BANDED per y (the storey banding continues up the triangle),
+    // NEVER the roof field/fascia (dark_oak_*) — it belongs to the envelope.
+    assert.ok(!cell.block.includes("dark_oak"), `gable-wall cell ${key} is wall, not roof/fascia`);
+    assert.equal(cell.block, bandBlockAt(y), `gable-wall cell ${key} follows the wall band`);
+    if (y > 4) sawUpper = true;
+  }
+  assert.ok(sawUpper, "the upper triangle is the upper wall band (banding continues up the gable)");
+  // the covering still exists as roof (stairs present) and provenance still passes (zero-blob)
+  assert.ok(gen.artifact.placements.some((p) => p.block === "minecraft:dark_oak_stairs"), "covering kept");
+  assert.equal(assertGeneratedProvenance(gen.artifact, gen.provenance).passed, true);
+});
+
 test("zero-blob check: a planted foreign cell REFUSES (provenance, not set-intersection)", () => {
   const fit = fitProvision({ occ: occupancyFromCells(gabledBox()) });
   const gen = generateProvision(fit, { family: FAMILY, policy: POLICY });

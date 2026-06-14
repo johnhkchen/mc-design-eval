@@ -222,6 +222,11 @@ export function compileProgram(program, pack) {
     const layout = ROOF_LAYOUTS[m.roof.idiom];
     const fieldBlock = roleBlock(pack, m.roof.fieldRole);
     const blocks = roofBlocks(pack, m.roof.idiom, fieldBlock);
+    // T-150-01 NOTE: the gable-end-wall envelope is consumed in the GENERATE-FIRST path
+    // (provision-generate, via the realized wall band == gableRole's intent). Wiring blocks.gable
+    // here (the workshop/compile path) is deferred: the conformance gate (courses-even) is not yet
+    // gableWallKeys-aware, so activating it reads the gable wall as a "foreign roof block" and would
+    // require a gate change + judge-pin rotation in an owning ticket (relief-aware-gate). See review.md.
     const allEaves = !layout.ridge || m.roof.idiom === "roof.hip";
     const ex = { // expanded footprint
       x0: rect.x0 - (allEaves || m.roof.ridgeAxis === "z" ? 1 : 0),

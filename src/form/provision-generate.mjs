@@ -79,7 +79,7 @@ function headTopAt(op, at) {
  * @returns {{schema:string, artifact:object, occ:object,
  *            provenance:{byCell:Map<string,string>, bySource:Record<string,number>},
  *            roofPlan:{cells:Set<string>, footprintCols:Set<string>, sheetKeys:Set<string>,
- *                      capKeys:Set<string>, bandFloor:number|null}|null,
+ *                      capKeys:Set<string>, gableWallKeys:Set<string>, bandFloor:number|null}|null,
  *            counts:object, findings:object[]}}
  */
 export function generateProvision(fit, { family, policy, bands = null, sheetBlock = null, opts = {}, metadata = {}, style = null } = {}) {
@@ -105,6 +105,7 @@ export function generateProvision(fit, { family, policy, bands = null, sheetBloc
   const roofFootprintCols = new Set();
   const allSheetKeys = new Set();
   const allCapKeys = new Set();
+  const allGableWallKeys = new Set(); // T-150-01: gable-end-wall cells (envelope), classified wall
   let bandFloorMin = null;
   const counts = { mass: 0, roof: 0, carved: 0 };
   for (const roof of fit.roofs ?? []) {
@@ -114,14 +115,29 @@ export function generateProvision(fit, { family, policy, bands = null, sheetBloc
         "no kit course family — fitted roof cannot generate; mass stays flat-topped (named)"));
       continue;
     }
-    const gen = generateRoof(roof.gables, family);
+    // T-150-01: ENVELOPE-THEN-COVERING. The two vertical gable-end triangular faces are wall, not
+    // roof: build their sub-surface fill in the wall material AT THE EAVE BAND (the realized
+    // gableRole intent — "the gable end stays the same fieldstone"). The sloped covering stays roof.
+    const eaveFloor = Math.min(...roof.gables.flatMap((g) => g.sides.map((s) => Math.floor(s.eaveY))));
+    const gableBlock = Number.isFinite(eaveFloor) ? wallBlockAt(eaveFloor) : null;
+    const gen = generateRoof(roof.gables, family, { gableBlock });
     for (const c of gen.cells) {
+      const key = c.pos.join(",");
+      const isGableWall = gen.gableWallKeys.has(key);
+      // GABLE-END WALL: envelope, not covering — banded like the wall it caps (wallBlockAt per y),
+      // so the storey banding continues up the triangle. (generateRoof seeds the eave-band block;
+      // the per-y recolour here keeps the gable consistent with the band map the skin reads.)
+      if (isGableWall) {
+        roofCells.push({ ...c, block: wallBlockAt(c.pos[1]) });
+        roofProvenance.push(`roof:${roof.massId}`);
+        continue;
+      }
       // FASCIA: sheet (verge/eave overhang) courses AND the wedge's bottom (eave) course carry the
       // concept's roof dominant — the dark eave/fascia edge every concept draws, and the guarantee
       // that the concept-derived roof-zone dominant exists in the generated manifest (the skin's
       // palette discipline). Full course cells only, never the shaped stair/slab vocabulary.
       const isFascia = sheetBlock && c.form !== "fixture" &&
-        (gen.sheetKeys.has(c.pos.join(",")) || c.pos[1] === gen.bandFloor);
+        (gen.sheetKeys.has(key) || c.pos[1] === gen.bandFloor);
       roofCells.push(isFascia ? { ...c, block: ns(sheetBlock) } : c);
       roofProvenance.push(`roof:${roof.massId}`);
     }
@@ -131,6 +147,7 @@ export function generateProvision(fit, { family, policy, bands = null, sheetBloc
       allSheetKeys.add(key);
     }
     for (const key of gen.capKeys) allCapKeys.add(key);
+    for (const key of gen.gableWallKeys) allGableWallKeys.add(key);
     for (const c of gen.cells) {
       if (c.form === "fixture") roofPlanCells.add(c.pos.join(","));
     }
@@ -260,7 +277,7 @@ export function generateProvision(fit, { family, policy, bands = null, sheetBloc
     provenance: { byCell, bySource },
     roofPlan: roofFootprintCols.size
       ? { cells: roofPlanCells, footprintCols: roofFootprintCols, sheetKeys: allSheetKeys,
-          capKeys: allCapKeys, bandFloor: bandFloorMin }
+          capKeys: allCapKeys, gableWallKeys: allGableWallKeys, bandFloor: bandFloorMin }
       : null,
     counts,
     findings,
