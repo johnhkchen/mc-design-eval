@@ -81,3 +81,27 @@ test("applyArticulation is deterministic — two runs are byte-identical", () =>
   const b = applyArticulation(occ, articulation).placements;
   assert.equal(JSON.stringify(a), JSON.stringify(b));
 });
+
+test("T-145-02: a recognized 'upper' band keeps the frame/field relief in its storey end-to-end", () => {
+  // clone the fixture mass (2 storeys × 4 ⇒ upper band y[4,7]) and band BOTH articulated faces upper
+  const banded = assertBuildingProgram(JSON.parse(JSON.stringify(program)));
+  for (const f of banded.masses[0].facade.faces) f.band = "upper";
+  assert.deepEqual(validateProgramAgainstPack(banded, pack).findings, [], "banded fixture is pack-valid");
+
+  const { workshopProgram, articulation } = compileProgram(banded, pack);
+  const { artifact } = realizeProgram(assertWorkshopProgram(workshopProgram));
+  const occ = artifactOccupancy(artifact);
+
+  // the frame/field/quoin brushes must land ONLY in y[4,7]: no plinth cover, no roof punch (the spike's
+  // failure mode, structurally prevented). The whole-mass eave-overhang + belt courses stay positional.
+  const FRAME = new Set(["infill-panel", "pilaster", "quoin"]);
+  let checked = 0;
+  for (const entry of articulation) {
+    if (!FRAME.has(entry.brush)) continue;
+    assert.ok(entry.params.band, `${entry.brush} carries the recognized band`);
+    const { placements } = applyArticulation(occ, [entry]);
+    for (const p of placements) assert.ok(p.pos[1] >= 4 && p.pos[1] <= 7, `${entry.brush} in-band, got y=${p.pos[1]}`);
+    checked += placements.length;
+  }
+  assert.ok(checked > 0, "the banded frame/field brushes actually emitted in-band relief");
+});
