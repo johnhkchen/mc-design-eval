@@ -2822,3 +2822,31 @@ records under `multi-angle/`; the head-to-head re-composed on the rotated verdic
 (`pr/assets/pattern-book-milestone.md`). The story beat: taught to measure, the loop fixed
 two barns on its first try — and on the third building it obeyed a bent ruler so precisely
 that the failure names exactly which instrument to fix next.
+
+## Ratified decision — "textures never read" narrowed to material identity (E-35) · 2026-06-14
+
+Drafting E-35 (facade-grammar-and-relief — M1's texture finish, the twin of E-34's proportion
+finish) surfaced a tension with the architecture of record. The look gap is plain at the glance:
+the barn that recorded the project's **first composite PASS** is a flat brown roof-tent on
+near-blank walls beside a concept of cobble infill, stone pilasters, brick quoins, and a plinth;
+the cottage is a flat pink box beside a jettied half-timber concept. **The frozen gate passes a
+build the glance rejects on texture** — Stage 6 measures proportion + block-resemblance +
+kit-presence and is blind to surface *grammar* (repeating motifs) and *relief* (proud/recessed of
+the wall plane). The crux: skinning is *recolor-on-fixed-geometry* over a voxelized smooth box
+(`face-paint.mjs`: "PAINT IS A RECOLOR, NOT A MOVE … There is NO air op"; `zone-fill.mjs`: one
+dominant block per zone) — and recoloring a box can never make a pilaster proud of its infill.
+Relief must be **construction**, as the one shipping relief idiom already proves (`clinker.mjs`:
+courses proud of the wall plane, in front of existing cells, in-plane silhouette preserved).
+
+The reviewer directed using the *textured* GLB, viewed from many angles, to help. That bumps
+§Stage 2's "textures never read." **Ratified resolution (narrowing, not overturning):** that rule
+exists for **material identity** — optics provably cannot separate brick from cobble, and TRELLIS
+textures are non-diegetic amalgam. Reading multi-angle textured-GLB renders for **spatial
+articulation layout** (where the studs/openings/pilasters/courses fall, and the rhythm, on the
+faces the single concept view never shows) is an orthogonal use that feeds **recognition**, never
+material choice. Palette stays diegetic, from the brief. The mesh is still never the substrate.
+Honest caveat: TRELLIS bakes detail as flat texture on a near-smooth mesh, so this gives *layout*
+evidence, not measurable relief depth — depth is idealized by the brushes (Stage 4), never fit to
+the mesh. The philosophy doc §Stage 2 carries this narrowing as standing architecture; E-35's
+terminal story tests whether grammar + relief + an instrument that requires them close the texture
+gap at the glance.

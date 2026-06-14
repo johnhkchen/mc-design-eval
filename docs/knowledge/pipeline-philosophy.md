@@ -48,9 +48,18 @@ footprint → the **conditioned form sketch**.
 **AI:** the 3-D generator — used *only* for gross massing and proportions.
 **Why this division:** image-to-3D is good at shape and terrible at semantics. Take exactly what it's
 good at (silhouette, proportion) and let code strip what it's bad at. **The mesh is evidence, never
-substrate; its textures are never read** (they are non-diegetic amalgam — the barn's
-`flagged-mismatch` kit entries were the optical system correctly reporting that optics cannot decide
-materials).
+substrate; its textures are never read *to decide materials*** (they are non-diegetic amalgam — the
+barn's `flagged-mismatch` kit entries were the optical system correctly reporting that optics cannot
+decide materials; palette stays diegetic, from the brief).
+
+*Narrowed 2026-06-14 (E-35, ratified by the reviewer).* "Textures never read" is a **material-identity**
+rule, not a blanket ban. Multi-angle renders of the *textured* GLB may be read for **spatial
+articulation layout** — *where* studs / openings / pilasters / courses fall, and the rhythm — on the
+faces the single concept view never shows (back, sides, roof), feeding **Stage 3 recognition** (the
+splat method anticipated in E-23). The mesh is still never the substrate, and texture still never
+decides a material. Honest caveat: TRELLIS bakes detail as flat texture on a near-smooth mesh, so this
+yields *layout* evidence, not measurable relief depth — relief depth is idealized by the brushes
+(Stage 4), never fit to the mesh.
 
 ### Stage 3 — Design (vision-language recognition)
 **What:** the model reads concept + sketch and writes the **building program** in pattern-book
