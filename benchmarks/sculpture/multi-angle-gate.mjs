@@ -60,6 +60,9 @@ import {
 import {
   kitPresence, composeKitAwareVerdict, KIT_PRESENCE_SCHEMA,
 } from "../../src/form/kit-presence.mjs";
+import {
+  reliefDemand, reliefPresence, composeReliefAwareVerdict, RELIEF_PRESENCE_SCHEMA,
+} from "../../src/form/relief-presence.mjs";
 import { extractApertures } from "../../src/view/opening-dressing.mjs";
 import { composeVocabulary } from "../../src/form/material-vocabulary.mjs";
 import {
@@ -113,6 +116,29 @@ const FRAMES_DIR = join(ROOT, "pr/assets/frames");
 const RENDER_CONTRACT = Object.freeze({ width: 512, height: 512, elevationDeg: 30 });
 
 const bare = (id) => String(id).replace(/^minecraft:/, "");
+
+/**
+ * The relief lens seam (T-148-01). A gate subject opts in by declaring `def.facadeGrammar` (a committed
+ * recognised building-program WITH a facade block) + `def.pack`; the lens then measures the build's
+ * relief against that recognised grammar and the verdict is composed BESIDE the kit-aware overall under
+ * relief-aware-gate/v1. NO committed subject declares `facadeGrammar` (S-145's facade is recorded, not
+ * realized; the first relieved build + opt-in is S-149's re-skin), so this returns null on every
+ * committed run and the record is byte-identical. The anti-anchor flip over the real flat barn is
+ * proven by the calibration sweep (benchmarks/sculpture/relief-calibration.mjs), not by mutating a
+ * committed gate record. Returns `{presence, verdict}` or null. Never throws on a missing file.
+ */
+async function loadReliefLens(def, occ, kitAwareOverall) {
+  if (!def.facadeGrammar || !def.pack) return null;
+  const grammarPath = join(HERE, def.facadeGrammar);
+  const packPath = join(ROOT, def.pack);
+  if (!existsSync(grammarPath) || !existsSync(packPath)) return null;
+  const grammar = JSON.parse(await readFile(grammarPath, "utf8"));
+  const pack = JSON.parse(await readFile(packPath, "utf8"));
+  const demand = reliefDemand(grammar, pack);
+  if (demand.length === 0) return null;
+  const presence = reliefPresence(occ, { demand });
+  return { presence, verdict: composeReliefAwareVerdict(kitAwareOverall, presence) };
+}
 
 // node-canvas resolves only from the render package (resemblance.mjs precedent); labels are cosmetic.
 let _canvasPkg = null;
@@ -327,6 +353,16 @@ async function main() {
         Array.isArray(rec.rejudge.angles) && rec.rejudge.angles.length >= 1 &&
         Array.isArray(rec.rejudge.instrumentDiff) && rec.rejudge.instrumentDiff.length === 0
       ),
+      // T-148 (additive — records without a relief lens stay valid): when a relief-aware verdict was
+      // recorded (a subject carried a recognised facade grammar), it must equal the pure composition
+      // of the recorded kit-aware overall and the relief presence result. Absent on every committed
+      // record (no facade is wired into a committed program) → n/a, byte-identical.
+      reliefAware: !rec.reliefAware || (() => {
+        const expect = composeReliefAwareVerdict(rec.overall, rec.relief);
+        return expect.decided === rec.reliefAware.decided &&
+          expect.passed === rec.reliefAware.passed && expect.refusal === rec.reliefAware.refusal &&
+          (!rec.relief || rec.relief.ran === false || rec.relief.schema === RELIEF_PRESENCE_SCHEMA);
+      })(),
     };
     const ok = Object.values(checks).every(Boolean);
     console.error(`[offline] ${slug}: schema ${checks.schema ? "OK" : "BAD"}; contract ${checks.contract ? "OK" : "VIOLATED"}; ` +
@@ -335,7 +371,8 @@ async function main() {
       `kit-aware ${rec.kitPresence ? (checks.kitAware ? "consistent" : "INCONSISTENT") : "n/a (pre-T-100)"}; ` +
       `replies ${(rec.views ?? []).some((v) => v.replies) ? (checks.replies ? "ledger OK" : "LEDGER VIOLATED") : "n/a (pre-T-114)"}; ` +
       `visibility ${rec.visibility ? (checks.visibility ? "consistent" : "INCONSISTENT") : "n/a (pre-T-137)"}; ` +
-      `rejudge ${rec.rejudge ? (checks.rejudge ? "instrument-clean" : "INSTRUMENT DIRTY") : "n/a"} — ` +
+      `rejudge ${rec.rejudge ? (checks.rejudge ? "instrument-clean" : "INSTRUMENT DIRTY") : "n/a"}; ` +
+      `relief-aware ${rec.reliefAware ? (checks.reliefAware ? "consistent" : "INCONSISTENT") : "n/a (no grammar)"} — ` +
       `recorded outcome: ${rec.aggregate?.decided ? (rec.aggregate.passed ? "PASS" : "FAIL") : `REFUSAL (${rec.aggregate?.refusal})`}` +
       (rec.overall ? ` → kit-aware ${rec.overall.decided ? (rec.overall.passed ? "PASS" : "FAIL") : `REFUSAL (${rec.overall.refusal})`}` : ""));
     if (!ok) process.exitCode = 1;
@@ -547,6 +584,9 @@ async function main() {
   })));
   // T-100: the kit-aware verdict — presence ANDs with the aggregate, never replaces it.
   const overall = composeKitAwareVerdict(aggregate, presence);
+  // T-148: the relief lens — null unless this subject opts in via def.facadeGrammar (none committed
+  // does), so the two optional fields below are absent on every committed record (byte-identical).
+  const reliefLens = await loadReliefLens(def, occ, overall);
 
   // --- THE CONTACT SHEET (the verdict artifact — Rule 1) ----------------------------------------------
   const sheetComposed = composeSheet(panels, { gutter: RESEMBLANCE_DEFAULTS.gutter });
@@ -578,6 +618,11 @@ async function main() {
     aggregate,
     kitPresence: presence,
     overall,
+    // T-148 (additive — absent unless the subject opts into the relief lens via def.facadeGrammar):
+    // the relief presence + the relief-aware verdict (relief-aware-gate/v1) BESIDE the kit-aware
+    // overall. The exit code stays on the kit-aware `overall` (committed parity); making the
+    // relief-aware verdict the exit gate is S-149's job, after a build actually carries relief.
+    ...(reliefLens ? { relief: reliefLens.presence, reliefAware: reliefLens.verdict } : {}),
     // T-137 (additive — pre-T-137 records stay valid): the cross-view visibility verdict. The
     // per-view exclusions live in each view's coverage.byZone; this names the band-level statuses.
     visibility: vis.visibility,
