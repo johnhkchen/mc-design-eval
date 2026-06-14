@@ -13,10 +13,16 @@ when the map and the code drift apart.
 | 1 | **Form sketch** — conditioned form evidence | `benchmarks/sculpture/form-sketch.mjs` | `form-sketch/<key>.json` + `-sheet.png` | `npm run sketch:<key>` |
 | 2 | **Concept** — the target image (language→image, out of band) | (image gen) | `runs/<run>/concept.png` | committed reference |
 | 3 | **Recognize** — VLM building program (the program the build serves) | `benchmarks/sculpture/recognize.mjs` · `src/recognition/*` | `recognition/<key>.{program,artifact,replies}.json` | `npm run recognize:<key>` |
-| 4 | **Generate-seed** — the parametric realizer (GLB-fit + kit, gable-as-wall, overhang, articulation) | `src/form/provision-fit.mjs` · `src/form/provision-generate.mjs` (via `generated-milestone.mjs --skip-gate`) | `generated/<key>/artifact.json` → `workshop/<key>-build/seed-artifact.json` | `npm run build:<key>` |
-| 5 | **Workshop** — the model revises SURFACE on the fixed seed (paint + relief), ledgered, judge-free render every round | `benchmarks/sculpture/workshop.mjs` · `src/workshop/{loop,actions,replay,articulate}.mjs` | `workshop/<key>-build/final-artifact.json` + `<key>-build` ledger | `npm run build:<key>` (spawns) |
+| 4 | **Generate-seed** — the parametric realizer (GLB-fit + kit, gable-as-wall, overhang, articulation) | `src/form/provision-fit.mjs` · `src/form/provision-generate.mjs` (via `generated-milestone.mjs --skip-gate`) | `generated/<key>/artifact.json` → `builds/<key>/seed-artifact.json` | `npm run build:<key>` |
+| 5 | **Workshop** — the model revises SURFACE on the fixed seed (paint + relief), ledgered, judge-free render every round | `benchmarks/sculpture/workshop.mjs` · `src/workshop/{loop,actions,replay,articulate}.mjs` | `builds/<key>/final-artifact.json` + `builds/<key>/ledger.json` | `npm run build:<key>` (spawns) |
 | — | **Final beside concept** — the E-36 judge-free glance | `src/view/render-beside.mjs` | `pr/assets/frames/beside-concept-<key>-build.png` | (inside `build`) |
-| ⊘ | **Gate** — the frozen judge (SEPARATE, billed; `build` never spawns it) | `benchmarks/sculpture/multi-angle-gate.mjs` | `multi-angle/<key>-<label>.json` | `npm run gate:patternbook:<key>` |
+| ⊘ | **Gate** — the frozen judge (SEPARATE, billed; `build` never spawns it) | `benchmarks/sculpture/multi-angle-gate.mjs` | `measurements/multi-angle/<key>-<label>.json` | `npm run gate:patternbook:<key>` |
+
+**Location encodes status (E-37 / T-155-01):** `builds/<subject>/` is the unified chain's DRAFT home (free
+zone, no pin-guard); `measurements/` holds the FROZEN records (gate verdicts, baselines, milestones,
+retired-pins) and IS the pin-guard allowlist alongside ratified `packs/`; `_archive/` is the DEAD-code
+home (populated by S-156). The ratified kit at `benchmarks/sculpture/kit/` is the one frozen class still
+awaiting relocation to `measurements/kit/` (deferred — HERE-relative loaders).
 
 **One entry point:** `npm run build:<subject>` runs Stage 3 (verify) → 4 → 5 → final. The gate is a
 separate explicit step (`docs/knowledge/pipeline-philosophy.md`: measurement is frozen and singular).
@@ -48,8 +54,8 @@ updated (E-37 Rule 2).
 ## Invariants (enforced; S-157 formalizes)
 
 - **Location encodes status** — drafts are free; `measurements/` + ratified `packs/` are the pin-guard
-  allowlist (E-36). The unified ledger writes under `<key>-build` so it never clobbers a committed
-  program-seed ledger.
+  allowlist (E-36 / T-155-01, now a path prefix, not a hand-list). The unified chain writes its draft
+  under `builds/<key>/` so it never clobbers a committed program-seed ledger.
 - **The workshop cannot call the judge** — `src/workshop/isolation.test.mjs` scans the runner sources;
   `build.mjs` imports no gate seam.
 - **No per-building constants; subscription shim only** — subjects are durable-skin registry data
