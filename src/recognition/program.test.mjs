@@ -16,6 +16,7 @@ import {
   assertBuildingProgram,
   validateProgramAgainstPack,
   facadeBounds,
+  bandYRange,
   assertFacadeDiegetic,
 } from "./program.mjs";
 import { loadStylePack } from "../pack/style-pack.mjs";
@@ -360,6 +361,59 @@ test("facade: jettyDepth needs a declared jetty; count rhythm must fit the wall"
     p.masses[0].facade = fac;
   }), pack);
   assert.match(wideCount.findings.map((f) => f.msg).join("\n"), /exceeds the .* interior cells/);
+});
+
+// ---------------------------------------------------------------- storey band (T-145-02, E-35)
+
+test("bandYRange maps named bands to mass-relative y-ranges (no per-building constant)", () => {
+  const cottage = { storeys: 2, storeyHeight: 4 }; // wall top y=8
+  assert.deepEqual(bandYRange(cottage, "ground"), { yLo: 0, yHi: 3 });
+  assert.deepEqual(bandYRange(cottage, "upper"), { yLo: 4, yHi: 7 });
+  assert.deepEqual(bandYRange(cottage, "all"), { yLo: 0, yHi: 7 });
+  const barn = { storeys: 3, storeyHeight: 3 }; // wall top y=9
+  assert.deepEqual(bandYRange(barn, "upper"), { yLo: 3, yHi: 8 });
+  assert.deepEqual(bandYRange(barn, "all"), { yLo: 0, yHi: 8 });
+  // absent band ⇒ no restriction (legacy whole wall)
+  assert.equal(bandYRange(cottage, null), null);
+  assert.equal(bandYRange(cottage, undefined), null);
+});
+
+test("facade: a recognized band is additive and passes the gates", () => {
+  const r = parseBuildingProgram(makeProgram((p) => {
+    const fac = makeFacade();
+    fac.faces[0].band = "upper";
+    fac.faces[1].band = "all";
+    p.masses[0].facade = fac;
+  }));
+  assert.equal(r.ok, true);
+  assert.equal(r.program.masses[0].facade.faces[0].band, "upper");
+  const { ok, findings } = validateProgramAgainstPack(makeProgram((p) => {
+    const fac = makeFacade();
+    fac.faces[0].band = "upper";
+    p.masses[0].facade = fac;
+  }), pack);
+  assert.deepEqual(findings, []);
+  assert.equal(ok, true);
+});
+
+test("facade: band 'upper' needs an upper storey; schema rejects a bogus band", () => {
+  const oneStorey = validateProgramAgainstPack(makeProgram((p) => {
+    p.masses[0].storeys = 1; // a single-storey mass has no upper band
+    p.masses[0].jetty = null; // a jetty needs storeys ≥ 2
+    const fac = makeFacade();
+    fac.faces[0].band = "upper";
+    fac.faces[0].jettyDepth = null;
+    p.masses[0].facade = fac;
+  }), pack);
+  assert.match(oneStorey.findings.map((f) => f.msg).join("\n"), /band 'upper' needs an upper storey/);
+
+  const bogus = parseBuildingProgram(makeProgram((p) => {
+    const fac = makeFacade();
+    fac.faces[0].band = "attic"; // off the enum
+    p.masses[0].facade = fac;
+  }));
+  assert.equal(bogus.ok, false);
+  assert.equal(bogus.code, "schema_invalid");
 });
 
 test("facade: assertFacadeDiegetic proves layout-only GLB evidence + a per-face receipt", () => {

@@ -156,6 +156,27 @@ export function facadeBounds(pack) {
 }
 
 /**
+ * The named storey band → mass-relative y-range (T-145-02, E-35). THE single mapping from a recognized
+ * facade `band` to the inclusive [yLo, yHi] cell band the relief occupies — derived from the mass's own
+ * `storeyHeight`/`eave`, so there is no per-building constant (AC#4). The compiler threads this into the
+ * brushes' zone; tests share the same authority.
+ *   ground → the lowest storey; upper → the storeys above it; all → the whole wall below the eave
+ *   (excludes the gable triangle, so framing never punches the roof — the spike's failure mode).
+ * @param {object} m     a building-program mass (carries storeys, storeyHeight)
+ * @param {?string} band one of "ground" | "upper" | "all", or null/undefined for no restriction
+ * @returns {{yLo:number, yHi:number}|null} the inclusive band, or null when no band is named
+ */
+export function bandYRange(m, band) {
+  if (band == null) return null;
+  const sh = m.storeyHeight;
+  const eaveY = m.storeys * sh;
+  if (band === "ground") return { yLo: 0, yHi: sh - 1 };
+  if (band === "upper") return { yLo: sh, yHi: eaveY - 1 };
+  if (band === "all") return { yLo: 0, yHi: eaveY - 1 };
+  throw new Error(`bandYRange: unknown band "${band}" (expected ground | upper | all)`);
+}
+
+/**
  * THE DIEGETIC PROOF (T-145-01 AC #2): prove the facade grammar carries no material decision sourced
  * from the GLB. Two-part: (a) every facade material is a pack-palette ROLE (the schema already
  * forbids a `block` field — this re-asserts it as a receipt); (b) every face whose layout evidence is
@@ -357,6 +378,11 @@ export function validateProgramAgainstPack(program, pack, { registry = IDIOM_REG
         if (f.jettyDepth != null) {
           if (!m.jetty) err(`${fw}.jettyDepth`, "jettyDepth needs masses[].jetty declared on this mass");
           if (f.jettyDepth > b.maxJettyDepth) err(`${fw}.jettyDepth`, `${f.jettyDepth} exceeds the pack jetty ceiling ${b.maxJettyDepth}`);
+        }
+
+        // storey band (T-145-02): enum is schema-gated; here an upper band needs an upper storey
+        if (f.band === "upper" && m.storeys < 2) {
+          err(`${fw}.band`, "band 'upper' needs an upper storey (storeys ≥ 2)");
         }
 
         // the diegetic rule: textured-glb informs layout only (materials stay diegetic)
