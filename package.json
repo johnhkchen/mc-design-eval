@@ -111,7 +111,8 @@
     "steep:offline": "node benchmarks/sculpture/steep-pitch.mjs --all --offline",
     "style:form": "node scripts/form-style.mjs",
     "style:ratify": "node scripts/ratify-pack.mjs",
-    "factory:receipts": "node scripts/factory-receipts.mjs --style saltcrag"
+    "factory:receipts": "node scripts/factory-receipts.mjs --style saltcrag",
+    "lisa:claim": "node scripts/lisa-claim.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
