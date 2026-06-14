@@ -49,11 +49,18 @@ its output trees; see `_archive/README.md` for the full manifest.
 - `_archive/pattern-book.mjs` — the **program-seed** chain (its `seedWorkshopProgram` Stage-4 brushes
   are replaced by the generate-first realizer). Its committed `pattern-book/` baselines + `workshop/`
   program-seed ledgers **stay in the live tree** (live tests/milestones read them).
-- `_archive/styled-milestone.mjs` · `_archive/challenge-milestone.mjs` ·
-  `_archive/reconstructed-milestone.mjs` · `_archive/regularize-shell.mjs` — terminal chains; their
-  shared `styledStretch` (grammar→dressing→settle) is reused **inside** Stage 4, not retired, and their
-  record dirs (`styled/`, `challenge/`, `reconstructed/`, `regularize/`) **stay** (they feed the kept
-  Stage-4 skin via `component-skin`).
+- `_archive/reconstructed-milestone.mjs` · `_archive/regularize-shell.mjs` — terminal E-27/28
+  chains, referenced live only in provenance comments; their record dirs (`reconstructed/`,
+  `regularize/`) **stay** (they feed the kept Stage-4 skin via `component-skin`).
+- `styled-milestone.mjs` · `challenge-milestone.mjs` **stay in the live tree** (T-158-01 restored
+  them from a S-156 mis-archive — the move broke the one chain, and running barn + cottage
+  end-to-end for the first time caught it). They **host the shared Stage-4 stages** —
+  `styledStretch` (grammar→dressing→settle), `shellStage`, `spawnGate`, `distillGate`, `runChain` —
+  that `generated-milestone.mjs` *imports* and `component-skin.mjs` *spawns by name*. The four
+  committed subject maps `material-map/{barn,church,cottage,gatehouse}.json` were restored with them
+  (live `durable-skin` `map:` inputs); only the retired-subject maps and `.raw.json` intermediates
+  stay archived. (The clean follow-up — extract those shared stages into a dedicated live module so
+  the terminal *chains* can archive without dragging them — is its own ticket.)
 - `generated-milestone.mjs` **stays in the live tree** — its deterministic core IS Stage 4 (spawned by
   `build`); only its standalone-with-gate npm scripts (`generated:*`) were removed.
 

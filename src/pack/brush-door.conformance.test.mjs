@@ -61,10 +61,10 @@ const ALLOWED = {
   "src/workshop/replay.mjs": { modules: ["face-paint"], reason: "replay re-applies accepted paint byte-identically" },
   // legacy runners whose committed records pin their call chains (challenge/durable-skin/
   // workshop offline+repro asserts re-verify them — the T-128 migration proof)
-  "benchmarks/sculpture/_archive/challenge-milestone.mjs": { modules: ["zone-fill"], reason: "record-pinned (challenge/*.json sha256)" },
+  "benchmarks/sculpture/challenge-milestone.mjs": { modules: ["zone-fill"], reason: "record-pinned (challenge/*.json sha256)" },
   "benchmarks/sculpture/durable-skin.mjs": { modules: ["zone-fill", "face-paint", "surface-pattern"], reason: "record-pinned (durable-skin/*.json sha256)" },
   "benchmarks/sculpture/spray-paint.mjs": { modules: ["zone-fill", "face-paint"], reason: "record-pinned E-23 canvas" },
-  "benchmarks/sculpture/_archive/styled-milestone.mjs": { modules: ["placement-grammar", "opening-dressing"], reason: "record-pinned styled chain (T-101)" },
+  "benchmarks/sculpture/styled-milestone.mjs": { modules: ["placement-grammar", "opening-dressing"], reason: "record-pinned styled chain (T-101)" },
   "benchmarks/sculpture/generated-milestone.mjs": { modules: ["roof-generate", "placement-grammar"], reason: "record-pinned generated chain (T-116)" },
   "benchmarks/sculpture/_archive/reconstructed-milestone.mjs": { modules: ["placement-grammar"], reason: "record-pinned reconstructed chain (T-106)" },
   "benchmarks/sculpture/placement-grammar.mjs": { modules: ["placement-grammar", "zone-fill", "face-paint"], reason: "record-pinned grammar runner (T-098)" },

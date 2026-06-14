@@ -29,7 +29,7 @@ const CONSUMERS = [
   // construction chain
   "benchmarks/sculpture/durable-skin.mjs",        // buildSkin: zones, fill policy, band instruments
   "benchmarks/sculpture/placement-grammar.mjs",   // grammarStage + runGrammar + band evidence
-  "benchmarks/sculpture/_archive/styled-milestone.mjs",    // dressing treatments + the settle fixpoint
+  "benchmarks/sculpture/styled-milestone.mjs",    // dressing treatments + the settle fixpoint
   // gates
   "benchmarks/sculpture/multi-angle-gate.mjs",    // guarded shipped policy + presence treatments
   "benchmarks/sculpture/kit-presence.mjs",        // the presence proof runner
@@ -45,7 +45,7 @@ const CONSUMERS = [
 const VOCAB_FED = {
   // the styled chain: buildSkin composes; the milestone consumes its vocabulary object for the
   // grammar opts, the dressing treatments, and the settle own-sets
-  "benchmarks/sculpture/_archive/styled-milestone.mjs": /skin\.vocabulary/,
+  "benchmarks/sculpture/styled-milestone.mjs": /skin\.vocabulary/,
 };
 const MUST_IMPORT = CONSUMERS.filter((rel) => !(rel in VOCAB_FED));
 

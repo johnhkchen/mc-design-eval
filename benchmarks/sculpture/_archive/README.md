@@ -24,9 +24,19 @@ refused. Nothing in the live spine imports `_archive/` (S-157 makes that a perma
 ## Manifest
 
 ### Superseded standalone chains (their stages now live inside the unified chain / `src/*`)
-- `styled-milestone.mjs`, `challenge-milestone.mjs`, `reconstructed-milestone.mjs` — terminal styled /
-  challenge / reconstruction chains (T-101/T-106). `styledStretch` reused inside Stage 4.
+- `reconstructed-milestone.mjs` — terminal E-27 reconstruction chain (T-106); referenced live only
+  in provenance comments, no live import/spawn.
 - `regularize-shell.mjs` — E-27/28 reconstruction ("the blob never becomes the build"; generate-first).
+
+> **Restored to the live tree (T-158-01, the E-37 proof).** `styled-milestone.mjs` and
+> `challenge-milestone.mjs` were originally archived here in S-156 but **host the shared Stage-4
+> stages** (`styledStretch` / `shellStage` / `spawnGate` / `distillGate` / `runChain`) that the
+> live `generated-milestone.mjs` *imports* and `component-skin.mjs` *spawns by name* — archiving
+> them broke the one chain (caught the first time barn/cottage ran end-to-end). They are live
+> shared-stage hosts, not dead code. Likewise the four committed subject maps
+> `material-map/{barn,church,cottage,gatehouse}.json` were restored (live `durable-skin` `map:`
+> inputs); only the retired-subject maps (`moai`/`pineapple`) and the `.raw.json` intermediates
+> remain archived here.
 - `pattern-book.mjs`, `pattern-book-compare.mjs` — the program-seed chain + its verdict reader,
   replaced by the generate-first realizer that seeds the workshop.
 
