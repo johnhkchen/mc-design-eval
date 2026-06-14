@@ -7,6 +7,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 
 import { occupancyFromCells } from "./occupancy.mjs";
+import { projectSurface, reliefProfile } from "./surface-grid.mjs";
 import { surfaceRelief, reliefNoRegress } from "./surface-relief.mjs";
 
 /** A gabled front wall on the -z face: body x0..6 × y0..4 at z=0, then a raked gable (y5 x1..5,
@@ -109,4 +110,18 @@ test("SR9 reliefNoRegress is the gate — in-plane mask + height ratios byte-unc
   assert.equal(verdict.perFace[0].maskEqual, true);
   assert.equal(verdict.perFace[0].propsEqual, true);
   assert.equal(verdict.expectedWidening.widened, true, "the perpendicular plan aspect widens — honest visible relief");
+});
+
+test("SR10 the 2.5-D layer reads the constructed relief (reliefProfile sees proud strips)", () => {
+  const base = wallStub();
+  const occ = occupancyFromCells(base);
+  const { placements } = surfaceRelief(occ, COL);
+  const after = occupancyFromCells([
+    ...base,
+    ...placements.map((p) => ({ pos: p.pos, block: p.block.replace("minecraft:", "") })),
+  ]);
+  const profile = reliefProfile(projectSurface(after, "-z"));
+  assert.ok(profile.proud > 0, "the proud pilaster strips are visible to the depth read");
+  assert.ok(profile.flush > 0, "the field between strips reads at the wall plane (recessed by exclusion)");
+  assert.equal(profile.recessed, 0, "relief only adds proud cells — nothing was dug behind the plane");
 });

@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { occupancyFromCells } from "./occupancy.mjs";
 import {
   projectSurface, backProject, gridMaskOf, resolveDir, ORTHO_DIRS, DIAG_DIRS,
-  orthoSpec, cellWorldPos,
+  orthoSpec, cellWorldPos, reliefProfile,
 } from "./surface-grid.mjs";
 
 /** Build a solid cube [0..s-1]^3 of one block. */
@@ -133,4 +133,37 @@ test("cellWorldPos inverts projectOrtho: it reproduces every filled cell's store
       }
     }
   }
+});
+
+test("reliefProfile reads proud/recessed structure from the per-cell depth field", () => {
+  // a flush front wall (z=0, modal plane) with two proud pilaster cells in front (z=-1) and one
+  // recessed pocket cell behind (z=+1) — viewed from -z (camera marches from min z).
+  const cells = [];
+  for (let x = 0; x <= 5; x++) for (let y = 0; y <= 3; y++) cells.push({ pos: [x, y, 0], block: "minecraft:plaster" });
+  cells.push({ pos: [1, 1, -1], block: "minecraft:beam" }); // proud
+  cells.push({ pos: [4, 2, -1], block: "minecraft:beam" }); // proud
+  // a recessed cell: remove the flush face at (3,0) and leave only a cell behind it
+  const occ = occupancyFromCells([
+    ...cells.filter((c) => !(c.pos[0] === 3 && c.pos[1] === 0 && c.pos[2] === 0)),
+    { pos: [3, 0, 1], block: "minecraft:plaster" },
+  ]);
+  const profile = reliefProfile(projectSurface(occ, "-z"));
+  assert.equal(profile.plane, 1, "the dominant wall plane is depth 1 (most cells sit one behind the proud beams)");
+  assert.equal(profile.proud, 2, "the two beam cells read proud");
+  assert.equal(profile.recessed, 1, "the lone behind cell reads recessed");
+  assert.ok(profile.flush > 0);
+});
+
+test("reliefProfile on a flat wall reports no relief", () => {
+  const cells = [];
+  for (let x = 0; x <= 4; x++) for (let y = 0; y <= 4; y++) cells.push({ pos: [x, y, 0], block: "minecraft:plaster" });
+  const profile = reliefProfile(projectSurface(occupancyFromCells(cells), "-z"));
+  assert.equal(profile.proud, 0);
+  assert.equal(profile.recessed, 0);
+});
+
+test("reliefProfile runs on a diagonal grid (depth carried there too)", () => {
+  const occ = cube(4);
+  const profile = reliefProfile(projectSurface(occ, "+x+z"));
+  assert.ok(Number.isInteger(profile.plane) && profile.proud + profile.flush + profile.recessed > 0);
 });

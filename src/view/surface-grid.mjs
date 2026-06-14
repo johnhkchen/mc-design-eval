@@ -228,6 +228,53 @@ export function backProject(grid) {
 }
 
 /**
+ * RELIEF-AWARE READ (T-146-01, story S-146, epic E-35). The 2.5-D layer can now SEE proud/recessed
+ * structure: every surface cell already carries its `depth` along the view ray (the front-most voxel's
+ * distance from the camera), so the workshop can read relief without touching geometry. The wall PLANE
+ * is the modal depth over filled cells (the dominant surface); a cell CLOSER than the plane is `proud`
+ * (depth < plane), FARTHER is `recessed` (depth > plane), equal is `flush`. Works on ortho AND diagonal
+ * grids (both store depth). This is a READ — relief itself is a CONSTRUCTION-stage op
+ * (src/view/surface-relief.mjs), NEVER a workshop paint air-op (the no-air-op rule stands for paint).
+ * @param {SurfaceGrid} grid
+ * @returns {{plane:number, proud:number, flush:number, recessed:number, max:number,
+ *            byCell:(number|null)[][]}}  byCell: -1 proud | 0 flush | +1 recessed | null air
+ */
+export function reliefProfile(grid) {
+  const m = grid.m;
+  const n = grid.n;
+  const byCell = Array.from({ length: m }, () => new Array(n).fill(null));
+  // modal depth = the dominant wall plane
+  const hist = new Map();
+  let plane = 0;
+  let maxCount = -1;
+  let max = 0;
+  for (const row of grid.cells) {
+    for (const c of row) {
+      if (!c) continue;
+      const d = c.depth;
+      if (d > max) max = d;
+      const k = (hist.get(d) ?? 0) + 1;
+      hist.set(d, k);
+      // tie-break toward the smaller depth (the nearer plane) for byte-stability
+      if (k > maxCount || (k === maxCount && d < plane)) { maxCount = k; plane = d; }
+    }
+  }
+  let proud = 0;
+  let flush = 0;
+  let recessed = 0;
+  for (let v = 0; v < m; v++) {
+    for (let u = 0; u < n; u++) {
+      const c = grid.cells[v][u];
+      if (!c) continue;
+      if (c.depth < plane) { byCell[v][u] = -1; proud++; }
+      else if (c.depth > plane) { byCell[v][u] = 1; recessed++; }
+      else { byCell[v][u] = 0; flush++; }
+    }
+  }
+  return { plane, proud, flush, recessed, max, byCell };
+}
+
+/**
  * Binary fill mask of a surface grid (filled cell → 1) in form-fidelity `{w,h,data}` convention. Used
  * by the structural read's opening detector and for visual debug. PURE.
  * @param {SurfaceGrid} grid
