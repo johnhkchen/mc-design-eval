@@ -2925,3 +2925,56 @@ evidence, not measurable relief depth — depth is idealized by the brushes (Sta
 the mesh. The philosophy doc §Stage 2 carries this narrowing as standing architecture; E-35's
 terminal story tests whether grammar + relief + an instrument that requires them close the texture
 gap at the glance.
+
+## Facade grammar & relief (E-35) — recolor can't make a pilaster proud; relief is construction, joined where the skin is built (S-145…S-149, T-145-01…T-149-01) · 2026-06-14
+
+The epic split the texture finish into four parts and a question. **S-145** taught recognition to read
+a facade *grammar* — per face a column rhythm (studs/pilasters every *N*), per course a row rhythm,
+jetty depth, eave overhang — recorded as a `facade` block on the building-program mass, with the
+multi-angle textured-GLB renders supplying the *layout* the single concept view can't (the §Stage 2
+narrowing, never material identity). **S-146** made relief **constructible** — `surfaceRelief` places
+proud cells *in front of* the existing skin, in-plane silhouette preserved (`reliefNoRegress`), the
+answer to the crux the drafting note named: a recolor of a voxelized box can never make a pilaster
+proud of its infill; only construction can. **S-147** lowered the grammar into four idiom-registry
+brushes (`pilaster`, `quoin`, `infillPanel`, `eaveOverhang`) and a compiler plan
+(`compileProgram → {workshopProgram, articulation}`). **S-148** built the **relief-aware gate**: a
+fixpoint, not a threshold — `surfaceRelief`'s *would-be* placements ARE the relief the build lacks, so
+`missing === 0` ⇒ the rhythm is realized; the period lives in committed grammar JSON, no per-building
+constant; the verdict (`relief-aware-gate/v1`) ANDs with the prior kit-aware verdict, both reported.
+
+**The terminal story (S-149) found and closed the one seam that left all four inert: the build never
+applied the plan.** `compileProgram` returned an `articulation` plan, but every realization site —
+`seedWorkshopProgram`, the workshop loop's per-round rebuild, and `replayLedger` — destructured only
+`workshopProgram` and dropped it. So even a facade-bearing program built flat; `applyArticulation` was
+exported, tested, and unreached. The fix is one pure join, `realizeWithArticulation`, called at all
+three sites: realize the skin, fold the plan's proud relief onto it (last-wins by position, the same
+rule realization uses for overlapping elements), recompute the manifest. **The discipline that made
+this safe:** a facade-less program compiles to an empty plan, so the join returns the bare realize
+*unchanged* — byte-identical. That structural no-regression let the wiring land on `main` with every
+committed chain (cottage, barn, fixture) byte-unmoved, proven by the offline/repro sweep, *before* any
+live build carries relief. The loop recompiles the plan from `currentSource` each round so a
+re-recognition that edits a facade re-plans, and the brushes resolve positions against the live
+occupancy — geometry-robust; only the explicit `eaveRow` is source-relative (a documented live-run
+edge). The replay site is the subtle one: a relieved build reproduces byte-identically *only* because
+replay reconstructs the same articulation from the seed source + the sha-pinned pack.
+
+**The honest terminal posture.** The texture *verdict* — does the flat box become the articulated build
+at the glance? — is a **live** question: it needs a model that recognizes a facade, a workshop that
+critiques relieved renders, and **the epic's only judge runs** (singular, billed, non-reproducible).
+Those are not byte-reproducible and were not burned speculatively; the deterministic slice (the join +
+tests + the milestone) shipped here, the live runbook is recorded in the S-149 review for an operator,
+and `milestone:facade` reports the pre-operator truth without faking it: relief `armed:false` on every
+flat-build gate record, beside the quoted E-34/T-143-02 baselines and both budget arithmetics. *If an
+articulated cottage still doesn't read once built, that is the finding, and it scopes the next rung
+before M3* — the milestone is wired to say so the moment the relieved records land.
+
+**E-12 handoff.** The scoring/showcase layer should consume, per subject: `pr/assets/facade-milestone.md`
+(the texture glance page — kit-aware + budget v2/legacy + relief-aware on every row) and
+`benchmarks/sculpture/pattern-book/facade-milestone.json` (the machine record), with
+`benchmarks/sculpture/pattern-book/facade-baselines.json` holding the pre-rotation quotes (never
+re-banked; the retired pins live in git history at their committed shas). Once the operator runs the
+live relieved chain + judge under `--ticket T-149-01 --rotate-pins`: the relieved pattern-book ledgers
+(`workshop/<subject>/`), the opted-in gate records carrying `relief` + `reliefAware`
+(`multi-angle/<subject>-patternbook.json`), and the composed sheets beside concepts in `pr/assets/`.
+The relief-aware verdict becomes a real exit-beside arithmetic at that point; until then it is wired,
+calibrated (`relief-calibration.json`), and inert by construction.
