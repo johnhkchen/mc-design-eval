@@ -8,10 +8,12 @@ same-object delta = more views judged the same object.
 
 | path | verdict | gaps (count/budget) | same-object | kit presence | per-view |
 | --- | --- | --- | --- | --- | --- |
-| **patternbook** | FAIL | 11/2 | 2/4 | fail | +x+z same object (minor material zoning@upper storey walls; minor massing@overall massing and roof footprint; minor palette@chimney)<br>+x-z same object (minor palette@rooftop chimney; minor material zoning@upper-storey walls)<br>-x-z drifted (major material zoning@walls (entire wall surface); major massing@overall building height vs roof; minor palette@rooftop chimney)<br>-x+z drifted (major massing@roof vs walls overall; major material zoning@ground storey and wall framing; minor palette@rooftop chimney) |
+| **patternbook** | FAIL | 0m+0M (≤10) · legacy 0/2 | 0/4 | fail | +x+z coverage-rejected<br>+x-z coverage-rejected<br>-x-z coverage-rejected<br>-x+z coverage-rejected |
 | **generated** | FAIL | 10/2 | 2/4 | pass | +x+z same object (minor massing@roofline chimney; minor material zoning@upper timber-framed walls in shadow under the eaves)<br>+x-z same object (minor form@roof ridge / apex; minor massing@chimney on the roof)<br>-x-z drifted (major form@main roof, near slope; major massing@roof shingle coverage; minor material zoning@upper walls and base)<br>-x+z drifted (major form@roof apex / ridge; major massing@upper roof massing (offset, gapped slabs); minor material zoning@upper timber-framed wall under eaves) |
 
-Deltas (patternbook − generated): gaps 1, same-object +0.
+Deltas (patternbook − generated): gaps -10, same-object -2.
+
+> ⚠ patternbook: 4 view(s) coverage-rejected — the judge was never called there, so this row's gap count under-states the divergence; read the per-view column, not the arithmetic.
 
 Sheet (patternbook): `pr/assets/frames/multi-angle-cottage-patternbook.png`
 Sheet (generated): `pr/assets/frames/multi-angle-cottage-generated.png`
@@ -20,7 +22,7 @@ Sheet (generated): `pr/assets/frames/multi-angle-cottage-generated.png`
 
 | path | verdict | gaps (count/budget) | same-object | kit presence | per-view |
 | --- | --- | --- | --- | --- | --- |
-| **patternbook** | FAIL | 8/2 | 4/4 | pass | +x+z same object (minor material zoning@long wall openings; minor form@gable apex trim)<br>+x-z same object (minor material zoning@long side wall windows; minor form@roof pitch slightly shallower than concept gable)<br>-x-z same object (minor palette@long roof slope; minor material zoning@side wall openings)<br>-x+z same object (minor massing@long side wall; minor form@wall openings) |
+| **patternbook** | PASS | 8m+0M (≤10) · legacy 8/2 | 4/4 | pass | +x+z same object (minor material zoning@long side wall openings; minor palette@roof surface shading)<br>+x-z same object (minor material zoning@long wall windows; minor palette@roof surface)<br>-x-z same object (minor material zoning@long wall openings; minor form@roof ridge pitch)<br>-x+z same object (minor form@long wall windows; minor form@gable-end apex) |
 | **generated** | FAIL | 12/2 | 0/4 | pass | +x+z drifted (major massing@walls all around; major form@roof surface; minor palette@stone base and brown roof)<br>+x-z drifted (major form@near roof slope and ridge; major massing@roof shingle coverage across the whole roof; minor form@upper gable wall, partly open)<br>-x-z drifted (major form@roof slope facing viewer; major massing@roof shingle surface; minor form@near eave / wall-top junction)<br>-x+z drifted (major form@both roof slopes — open rafter framing instead of a solid shingled mass; major massing@roof shingle coverage across the whole span; minor material zoning@upper gable/wall infill above the stone base) |
 
 Deltas (patternbook − generated): gaps -4, same-object +4.
@@ -31,9 +33,9 @@ Sheet (generated): `pr/assets/frames/multi-angle-barn-generated.png`
 ## Chain receipts (pattern-book side)
 
 ### cottage — chain receipts
-Workshop: **budget-exhausted** after 6/6 rounds (accepted 1, rolled back 1); conformance 6✓/2f → 6✓/2f; seed 7803 cells; recognition asks 1/3.
+Workshop: **budget-exhausted** after 6/6 rounds (accepted 0, rolled back 3); conformance 6✓/1f → 6✓/1f; seed 7803 cells; recognition asks 1/3.
 Generated-path census: spikes 57, ragged rate 0.081.
 
 ### barn — chain receipts
-Workshop: **done** after 3/6 rounds (accepted 2, rolled back 0); conformance 7✓/0f → 7✓/0f; seed 11594 cells; recognition asks 3/3.
+Workshop: **done** after 4/6 rounds (accepted 1, rolled back 2); conformance 7✓/0f → 7✓/0f; seed 11594 cells; recognition asks 3/3.
 Generated-path census: spikes 175, ragged rate 0.125.

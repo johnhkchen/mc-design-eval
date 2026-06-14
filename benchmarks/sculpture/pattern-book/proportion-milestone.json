@@ -40,59 +40,65 @@
           },
           {
             "round": 1,
+            "ridgeToEave": 2.4,
+            "roofShare": 0.5833,
+            "aspect": 1.8462
+          },
+          {
+            "round": 2,
             "ridgeToEave": 2.0833,
             "roofShare": 0.52,
             "aspect": 2
           },
           {
-            "round": 2,
-            "ridgeToEave": 2.1667,
-            "roofShare": 0.5385,
-            "aspect": 1.8462
+            "round": 3,
+            "ridgeToEave": 2.0833,
+            "roofShare": 0.52,
+            "aspect": 2
           },
           {
-            "round": 3,
-            "ridgeToEave": 2.1667,
-            "roofShare": 0.5385,
-            "aspect": 1.8462
+            "round": 4,
+            "ridgeToEave": 2.0833,
+            "roofShare": 0.52,
+            "aspect": 2
           }
         ],
         "deltas": {
           "ridgeToEave": {
             "baseline": 2.4444,
             "seed": 2.4,
-            "final": 2.1667,
+            "final": 2.0833,
             "target": 2.1,
             "deltaRelBaseline": 0.164,
-            "deltaRelFinal": 0.0318
+            "deltaRelFinal": 0.008
           },
           "roofShare": {
             "baseline": 0.5909,
             "seed": 0.5833,
-            "final": 0.5385,
+            "final": 0.52,
             "target": 0.5238,
             "deltaRelBaseline": 0.1281,
-            "deltaRelFinal": 0.0281
+            "deltaRelFinal": 0.0073
           },
           "aspect": {
             "baseline": 2,
             "seed": 1.8462,
-            "final": 1.8462,
+            "final": 2,
             "target": 1.8462,
             "deltaRelBaseline": 0.0833,
-            "deltaRelFinal": 0
+            "deltaRelFinal": 0.0833
           }
         }
       },
       "workshop": {
         "outcome": "done",
         "rounds": {
-          "used": 3,
+          "used": 4,
           "budget": 6
         },
         "leverUse": [
           {
-            "round": 1,
+            "round": 2,
             "kind": "geometry",
             "action": {
               "action": "adjust-params",
@@ -100,20 +106,6 @@
               "massId": "barn",
               "params": {
                 "eaveHeight": 12
-              }
-            },
-            "accepted": true,
-            "reason": "accepted"
-          },
-          {
-            "round": 2,
-            "kind": "geometry",
-            "action": {
-              "action": "adjust-params",
-              "elementId": "barn",
-              "massId": "barn",
-              "params": {
-                "depth": 26
               }
             },
             "accepted": true,
@@ -153,9 +145,18 @@
             }
           },
           "budget": {
+            "passed": true,
+            "policy": "multi-angle-budget/v2",
+            "majorCount": 0,
+            "minorCount": 8,
+            "minorBudget": 10,
             "gapCount": 8,
             "gapBudget": 2,
-            "passed": false
+            "legacy": {
+              "passed": false,
+              "gapBudget": 2,
+              "gapCount": 8
+            }
           },
           "coverageFailures": []
         },
@@ -222,48 +223,42 @@
           },
           {
             "round": 2,
-            "ridgeToEave": 2.1667,
-            "roofShare": 0.5385,
-            "aspect": 1.8462
-          },
-          {
-            "round": 3,
-            "ridgeToEave": 2.1667,
-            "roofShare": 0.5385,
-            "aspect": 1.8462
+            "ridgeToEave": 2.0833,
+            "roofShare": 0.52,
+            "aspect": 2
           }
         ],
         "deltas": {
           "ridgeToEave": {
             "baseline": 2.4444,
             "seed": 2.4,
-            "final": 2.1667,
+            "final": 2.0833,
             "target": 2.1,
             "deltaRelBaseline": 0.164,
-            "deltaRelFinal": 0.0318
+            "deltaRelFinal": 0.008
           },
           "roofShare": {
             "baseline": 0.5909,
             "seed": 0.5833,
-            "final": 0.5385,
+            "final": 0.52,
             "target": 0.5238,
             "deltaRelBaseline": 0.1281,
-            "deltaRelFinal": 0.0281
+            "deltaRelFinal": 0.0073
           },
           "aspect": {
             "baseline": 2,
             "seed": 1.8462,
-            "final": 1.8462,
+            "final": 2,
             "target": 1.8462,
             "deltaRelBaseline": 0.0833,
-            "deltaRelFinal": 0
+            "deltaRelFinal": 0.0833
           }
         }
       },
       "workshop": {
         "outcome": "done",
         "rounds": {
-          "used": 3,
+          "used": 2,
           "budget": 6
         },
         "leverUse": [
@@ -275,21 +270,7 @@
               "elementId": "hall",
               "massId": "hall",
               "params": {
-                "eaveHeight": 12
-              }
-            },
-            "accepted": true,
-            "reason": "accepted"
-          },
-          {
-            "round": 2,
-            "kind": "geometry",
-            "action": {
-              "action": "adjust-params",
-              "elementId": "hall",
-              "massId": "hall",
-              "params": {
-                "depth": 26
+                "eaveHeight": 11
               }
             },
             "accepted": true,
@@ -329,9 +310,18 @@
             }
           },
           "budget": {
+            "passed": true,
+            "policy": "multi-angle-budget/v2",
+            "majorCount": 0,
+            "minorCount": 8,
+            "minorBudget": 10,
             "gapCount": 8,
             "gapBudget": 2,
-            "passed": false
+            "legacy": {
+              "passed": false,
+              "gapBudget": 2,
+              "gapCount": 8
+            }
           },
           "coverageFailures": []
         },
@@ -410,47 +400,47 @@
           },
           {
             "round": 4,
-            "ridgeToEave": 2.75,
-            "roofShare": 0.6364,
-            "aspect": 1.0769
+            "ridgeToEave": 1.55,
+            "roofShare": 0.3548,
+            "aspect": 1.1852
           },
           {
             "round": 5,
-            "ridgeToEave": 2.75,
-            "roofShare": 0.6364,
-            "aspect": 1.0769
+            "ridgeToEave": 1.55,
+            "roofShare": 0.3548,
+            "aspect": 1.1852
           },
           {
             "round": 6,
-            "ridgeToEave": 2.75,
-            "roofShare": 0.6364,
-            "aspect": 1.0769
+            "ridgeToEave": 1.55,
+            "roofShare": 0.3548,
+            "aspect": 1.1852
           }
         ],
         "deltas": {
           "ridgeToEave": {
             "baseline": 2.25,
             "seed": 1.55,
-            "final": 2.75,
+            "final": 1.55,
             "target": 1.4145,
             "deltaRelBaseline": 0.5907,
-            "deltaRelFinal": 0.9441
+            "deltaRelFinal": 0.0958
           },
           "roofShare": {
             "baseline": 0.5556,
             "seed": 0.3548,
-            "final": 0.6364,
+            "final": 0.3548,
             "target": 0.293,
             "deltaRelBaseline": 0.8962,
-            "deltaRelFinal": 1.172
+            "deltaRelFinal": 0.2109
           },
           "aspect": {
             "baseline": 1.0769,
             "seed": 1.1852,
-            "final": 1.0769,
+            "final": 1.1852,
             "target": 1.1852,
             "deltaRelBaseline": 0.0914,
-            "deltaRelFinal": 0.0914
+            "deltaRelFinal": 0
           }
         }
       },
@@ -462,6 +452,34 @@
         },
         "leverUse": [
           {
+            "round": 1,
+            "kind": "geometry",
+            "action": {
+              "action": "adjust-params",
+              "elementId": "main",
+              "massId": "main",
+              "params": {
+                "storeyHeight": 5
+              }
+            },
+            "accepted": false,
+            "reason": "regressed: passed 6→6, findings 1→2; ridgeToEave Δ 0.0958→2.5348 beyond tolerance"
+          },
+          {
+            "round": 3,
+            "kind": "geometry",
+            "action": {
+              "action": "adjust-params",
+              "elementId": "main",
+              "massId": "main",
+              "params": {
+                "storeyHeight": 5
+              }
+            },
+            "accepted": false,
+            "reason": "regressed: passed 6→6, findings 1→2; ridgeToEave Δ 0.0958→2.5348 beyond tolerance"
+          },
+          {
             "round": 4,
             "kind": "geometry",
             "action": {
@@ -469,31 +487,16 @@
               "elementId": "main",
               "massId": "main",
               "params": {
-                "storeys": 3
-              }
-            },
-            "accepted": true,
-            "reason": "accepted"
-          },
-          {
-            "round": 6,
-            "kind": "geometry",
-            "action": {
-              "action": "adjust-params",
-              "elementId": "main",
-              "massId": "main",
-              "params": {
-                "storeys": 4,
-                "storeyHeight": 4
+                "eaveHeight": 9
               }
             },
             "accepted": false,
-            "reason": "regressed: passed 6→6, findings 2→2; ridgeToEave Δ 2.8883→3.5953 beyond tolerance"
+            "reason": "regressed: passed 6→6, findings 1→2; ridgeToEave Δ 0.0958→0.4925 beyond tolerance"
           }
         ],
         "finalConformance": {
           "passed": 6,
-          "findings": 2
+          "findings": 1
         },
         "finalConformancePassed": false
       },
@@ -520,35 +523,43 @@
         "after": {
           "identity": {
             "decided": true,
-            "sameObjectViews": 2,
-            "judgedViews": 4,
-            "severities": {
-              "minor": 7,
-              "major": 4
-            }
+            "sameObjectViews": 0,
+            "judgedViews": 0,
+            "severities": {}
           },
           "budget": {
-            "gapCount": 11,
+            "passed": false,
+            "policy": "multi-angle-budget/v2",
+            "majorCount": 0,
+            "minorCount": 0,
+            "minorBudget": 10,
+            "gapCount": 0,
             "gapBudget": 2,
-            "passed": false
+            "legacy": {
+              "passed": false,
+              "gapBudget": 2,
+              "gapCount": 0
+            }
           },
-          "coverageFailures": []
+          "coverageFailures": [
+            "+x+z",
+            "+x-z",
+            "-x-z",
+            "-x+z"
+          ]
         },
         "movement": {
           "gapCount": {
             "before": 0,
-            "after": 11
+            "after": 0
           },
           "coverageRefusedViews": {
             "before": 4,
-            "after": 0
+            "after": 4
           },
           "severities": {
             "before": {},
-            "after": {
-              "minor": 7,
-              "major": 4
-            }
+            "after": {}
           }
         }
       },
