@@ -199,6 +199,10 @@
                   "additionalProperties": false,
                   "properties": {
                     "wall": { "$ref": "#/$defs/wall" },
+                    "band": {
+                      "description": "The storey band this face's frame/field relief occupies. The y-range is mass-relative (derived from storeyHeight/eave), NEVER a constant: ground = the lowest storey, upper = the storeys above the ground band, all = the whole wall below the eave (excludes the gable triangle). Absent ⇒ whole wall (legacy). Recognized, not inferred from treatment.",
+                      "enum": ["ground", "upper", "all"]
+                    },
                     "rhythm": {
                       "description": "Pilaster/stud spacing: a period+phase OR a flat count. The 'exactly one form' rule is enforced by validateProgramAgainstPack (AJV strictRequired forbids it cleanly in-schema).",
                       "type": "object",
