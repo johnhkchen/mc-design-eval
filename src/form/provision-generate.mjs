@@ -25,11 +25,109 @@ export const PROVISION_GENERATE_DEFAULTS = Object.freeze({
                     // solid masses would make every carved aperture project solid and vanish from
                     // the openings detector — the dressing/presence seam needs true holes)
   carveDepth: 2,    // aperture carve depth = through the wall slab (facade-recess-by-exclusion)
+  planCloseRadius: 1, // T-159-01: morphological-close SE radius for footprint regularization — the
+                    // fitted runs are a NOISY voxelized-blob plan (ragged perimeter + enclosed holes);
+                    // close bridges ≤r-wide notches/run-gaps before the watertight hole-fill
+  minOpeningW: 2,   // T-159-01: an aperture narrower than this (cols) is a blob speck, not a window —
+  minOpeningH: 2,   //   …and shorter than this (rows) likewise; BOTH must hold or the carve is skipped
+                    //   (a 1-wide-or-tall hole in a 2-thick wall is projection noise, never carved)
+  maxOpeningSpanFrac: 0.8, // T-159-01: an aperture this fraction of the wall extent or wider is the
+                    //   blob's OPEN TOP/SIDE (the mass didn't reach that high), not a window — carving
+                    //   it strips a whole wall course; the wall is kept solid (named, never silent)
   schemaVersion: "1.0.0",
 });
 
 const ns = (b) => (b.includes(":") ? b : `minecraft:${b}`);
 const finding = (code, where, detail) => ({ code, where, detail });
+
+// ---- footprint regularization (T-159-01) --------------------------------------------------------
+// The fitted mass `runs` are the plan-view occupancy of the voxelized TRELLIS blob — ragged and
+// holey ([[reference-is-spec-not-substrate]]: mesh-inherited surfaces carry voxelization noise). The
+// wall envelope must be a WATERTIGHT closed ring, so the construction stage regularizes the plan
+// before building: morphological CLOSE (smooth notches) then enclosed-hole FILL (guarantee a closed
+// boundary loop). Identity on a clean (rectangular, hole-free) plan — inert where there were no
+// holes. The roof is already re-authored cleanly (roof-generate) and is untouched. PURE.
+
+/** The "x,z" key set's bbox {minX,maxX,minZ,maxZ}. */
+function bboxOf(cols) {
+  let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+  for (const k of cols) {
+    const [x, z] = k.split(",").map(Number);
+    if (x < minX) minX = x; if (x > maxX) maxX = x;
+    if (z < minZ) minZ = z; if (z > maxZ) maxZ = z;
+  }
+  return { minX, maxX, minZ, maxZ };
+}
+
+/** Erode a plan col-set: a cell survives iff all 4 ortho neighbours are present (the wall-thickness
+ *  ring carver — hoisted from the inline closure so the wall loop + tests share ONE definition). PURE. */
+export function erodePlan(cols) {
+  const out = new Set();
+  for (const k of cols) {
+    const [x, z] = k.split(",").map(Number);
+    if (cols.has(`${x + 1},${z}`) && cols.has(`${x - 1},${z}`) &&
+        cols.has(`${x},${z + 1}`) && cols.has(`${x},${z - 1}`)) out.add(k);
+  }
+  return out;
+}
+
+/** Dilate a plan col-set by the 4-neighbour SE. The outward growth is pulled back by the matching
+ *  erode in {@link regularizePlan}'s close, so the outer extent returns to the original. PURE. */
+function dilatePlan(cols) {
+  const out = new Set(cols);
+  for (const k of cols) {
+    const [x, z] = k.split(",").map(Number);
+    out.add(`${x + 1},${z}`); out.add(`${x - 1},${z}`);
+    out.add(`${x},${z + 1}`); out.add(`${x},${z - 1}`);
+  }
+  return out;
+}
+
+/** Fill ENCLOSED plan holes: flood 4-connected "air" inward from a 1-cell margin around `bbox`; any
+ *  in-bbox cell the flood never reaches is enclosed → add it. The result is hole-free, so its
+ *  boundary is a single closed loop (the watertight guarantee). PURE. */
+function fillPlanHoles(cols, bbox) {
+  const { minX, maxX, minZ, maxZ } = bbox;
+  const x0 = minX - 1, x1 = maxX + 1, z0 = minZ - 1, z1 = maxZ + 1;
+  const outside = new Set();
+  const stack = [[x0, z0]];
+  const inB = (x, z) => x >= x0 && x <= x1 && z >= z0 && z <= z1;
+  while (stack.length) {
+    const [x, z] = stack.pop();
+    const key = `${x},${z}`;
+    if (!inB(x, z) || outside.has(key) || cols.has(key)) continue;
+    outside.add(key);
+    stack.push([x + 1, z], [x - 1, z], [x, z + 1], [x, z - 1]);
+  }
+  const out = new Set(cols);
+  for (let x = minX; x <= maxX; x++) {
+    for (let z = minZ; z <= maxZ; z++) {
+      const key = `${x},${z}`;
+      if (!cols.has(key) && !outside.has(key)) out.add(key); // unreached interior cell = enclosed hole
+    }
+  }
+  return out;
+}
+
+/**
+ * Regularize a footprint plan into a watertight, hole-free col-set: morphological CLOSE (dilate^r
+ * then erode^r — bridges ≤r-wide notches and run-gaps) followed by enclosed-hole FILL. The boundary
+ * of the result is a single closed loop, so the wall ring built from it has no see-through gaps,
+ * regardless of how ragged the fitted runs were. IDENTITY on a clean rectangle (the close grows the
+ * border out and the erode removes exactly that growth; the fill finds no holes) — proven inert where
+ * the plan was already clean. PURE.
+ * @param {Set<string>} cols "x,z" plan-column keys
+ * @param {{radius?:number, bbox?:object}} [opts]
+ * @returns {Set<string>}
+ */
+export function regularizePlan(cols, { radius = 1, bbox } = {}) {
+  if (cols.size === 0) return new Set();
+  const bb = bbox ?? bboxOf(cols);
+  let cur = new Set(cols);
+  for (let i = 0; i < radius; i++) cur = dilatePlan(cur);
+  for (let i = 0; i < radius; i++) cur = erodePlan(cur);
+  return fillPlanHoles(cur, bb);
+}
 
 /** Per-z face coordinate of a run footprint along a direction (the wall plane the carve enters). */
 function facePos(runs, dir, at) {
@@ -163,18 +261,17 @@ export function generateProvision(fit, { family, policy, bands = null, sheetBloc
   //    zone-map's y-anchor pins the build's widest layer to the concept's widest row (the eave
   //    overhang) — a full floor course out-weighs the eave and flips the whole band mapping.
   const wallMap = new Map(); // key → {cell, provenance}
-  const erode = (set) => new Set([...set].filter((k) => {
-    const [x, z] = k.split(",").map(Number);
-    return set.has(`${x + 1},${z}`) && set.has(`${x - 1},${z}`) &&
-      set.has(`${x},${z + 1}`) && set.has(`${x},${z - 1}`);
-  }));
   const bodies = fit.masses.filter((m) => m.role !== "protrusion");
   const protrusions = fit.masses.filter((m) => m.role === "protrusion");
   for (const m of bodies) {
     let cols = new Set();
     for (const r of m.runs) for (let x = r.x0; x <= r.x1; x++) cols.add(`${x},${r.z}`);
+    // T-159-01: the fitted runs are a NOISY blob plan (ragged perimeter + enclosed holes) — regularize
+    // to a WATERTIGHT, hole-free footprint before building the ring (its boundary is then a single
+    // closed loop, no see-through slots). Identity on a clean rectangle ⇒ inert where the plan was OK.
+    cols = regularizePlan(cols, { radius: o.planCloseRadius });
     let interior = cols;
-    for (let i = 0; i < o.wallThickness; i++) interior = erode(interior);
+    for (let i = 0; i < o.wallThickness; i++) interior = erodePlan(interior);
     for (const col of cols) {
       if (sheetCols.has(col) || interior.has(col)) continue;
       const [x, z] = col.split(",").map(Number);
@@ -219,8 +316,32 @@ export function generateProvision(fit, { family, policy, bands = null, sheetBloc
     }
     const [dxs, dzs] = grp.dir === "+x" ? [-1, 0] : grp.dir === "-x" ? [1, 0]
       : grp.dir === "+z" ? [0, -1] : [0, 1]; // inward step
+    // wall extent along the opening axis — apertures on a ±z wall run along x; on a ±x wall, along z.
+    // A window spans a fraction of the wall, never the whole of it (T-159-01 span gate below).
+    const wallExtent = grp.dir.includes("z")
+      ? Math.max(...runs.map((r) => r.x1)) - Math.min(...runs.map((r) => r.x0)) + 1
+      : Math.max(...runs.map((r) => r.z)) - Math.min(...runs.map((r) => r.z)) + 1;
     for (const op of grp.openings) {
       const [lo, hi] = op.extent.range;
+      const w = hi - lo + 1;
+      const h = (op.crown ?? op.sillY) - op.sillY + 1;
+      // T-159-01 coherence gate (two failure modes of the noisy blob):
+      //  • a sub-minOpeningW×minOpeningH aperture is a projection SPECK (a stray air cell the openings
+      //    detector fired on), NOT a designed window;
+      //  • an aperture spanning ≥maxOpeningSpanFrac of the wall is the blob's OPEN TOP/SIDE (the mass
+      //    didn't reach that high), not a window — carving it strips a whole wall course (the barn's
+      //    eave band). A real opening occupies a fraction of its wall.
+      // Either way: skip the carve (leave the wall solid → watertight) and register it (Rule 1).
+      if (w < o.minOpeningW || h < o.minOpeningH) {
+        findings.push(finding("opening-incoherent", grp.id,
+          `aperture ${w}×${h} at sillY=${op.sillY} below ${o.minOpeningW}×${o.minOpeningH} — blob speck, not carved`));
+        continue;
+      }
+      if (wallExtent > 0 && w >= o.maxOpeningSpanFrac * wallExtent) {
+        findings.push(finding("opening-wall-spanning", grp.id,
+          `aperture width ${w} ≥ ${o.maxOpeningSpanFrac}×wall ${wallExtent} — blob open top/side, not a window; wall kept solid`));
+        continue;
+      }
       for (let at = lo; at <= hi; at++) {
         const face = facePos(runs, grp.dir, at);
         if (face === null) continue; // aperture column off the fitted footprint: nothing to carve

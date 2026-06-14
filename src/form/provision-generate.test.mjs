@@ -6,7 +6,15 @@ import { fitProvision, serializeProvisionFit, reviveProvisionFit } from "./provi
 import {
   PROVISION_GENERATE_SCHEMA, PROVENANCE_SOURCES,
   generateProvision, assertGeneratedProvenance,
+  erodePlan, regularizePlan,
 } from "./provision-generate.mjs";
+
+const colSet = (...keys) => new Set(keys);
+const rectCols = (x0, x1, z0, z1) => {
+  const s = new Set();
+  for (let x = x0; x <= x1; x++) for (let z = z0; z <= z1; z++) s.add(`${x},${z}`);
+  return s;
+};
 
 // ---- fixtures -----------------------------------------------------------------------------------
 
@@ -228,6 +236,107 @@ test("an unsupported protrusion is OMITTED with a named finding, never generated
     "floating protrusion registered, not built");
   assert.equal(gen.occ.has(2, 12, 2), false, "no floating cells");
   assert.equal(gen.occ.has(0, 7, 0), true, "wall-supported protrusion (base y6 on wallTop-5 wall... ) generated");
+  assertGeneratedProvenance(gen.artifact, gen.provenance);
+});
+
+// ---- footprint regularization (T-159-01) -----------------------------------------------------------
+
+test("erodePlan: a 4×4 plan erodes to its 2×2 interior (all-4-neighbours rule)", () => {
+  const e = erodePlan(rectCols(0, 3, 0, 3));
+  assert.deepEqual([...e].sort(), ["1,1", "1,2", "2,1", "2,2"].sort());
+});
+
+test("regularizePlan: IDENTITY on a clean rectangle (inert where the plan is already clean)", () => {
+  const rect = rectCols(0, 7, 0, 5); // hole-free, rectangular — the gabledBox footprint shape
+  const out = regularizePlan(rect, { radius: 1 });
+  assert.deepEqual([...out].sort(), [...rect].sort(), "close+fill leaves a clean rectangle unchanged");
+});
+
+test("regularizePlan: fills an enclosed plan hole (interior void → solid)", () => {
+  const holey = rectCols(0, 4, 0, 4);
+  holey.delete("2,2"); // punch one interior hole
+  const out = regularizePlan(holey, { radius: 1 });
+  assert.ok(out.has("2,2"), "the enclosed hole is filled (boundary becomes a closed loop)");
+  assert.equal(out.size, 25, "exactly the hole was added, extent unchanged");
+});
+
+test("regularizePlan: output is hole-free (closed boundary loop) and never grows the extent", () => {
+  // a ragged, holey plan: a rectangle with two enclosed voids and a perimeter notch
+  const ragged = rectCols(0, 7, 0, 5);
+  ragged.delete("2,2"); ragged.delete("5,3"); // enclosed voids
+  ragged.delete("4,0");                         // open perimeter notch (cosmetic, not see-through)
+  const out = regularizePlan(ragged, { radius: 1 });
+  // enclosed voids filled → no see-through; the open notch is NOT a hole and may remain
+  assert.ok(out.has("2,2") && out.has("5,3"), "enclosed voids filled (watertight loop)");
+  // extent never exceeds the input bbox (close grows then the matching erode pulls back)
+  for (const k of out) {
+    const [x, z] = k.split(",").map(Number);
+    assert.ok(x >= 0 && x <= 7 && z >= 0 && z <= 5, `${k} stays within the input extent`);
+  }
+});
+
+test("regularizePlan: a wide-open gap (real doorway) is NOT bridged by close-1, loop still closes", () => {
+  // two run segments on one row with a 4-wide gap → close-1 cannot bridge it; fill cannot either
+  // (it is open to the outside), so the gap survives as a genuine concavity — the wall ring routes
+  // around it without a see-through SLOT (no enclosed hole was created).
+  const cols = new Set([...rectCols(0, 9, 0, 3)]);
+  for (let x = 3; x <= 6; x++) cols.delete(`${x},0`); // 4-wide notch on the front edge
+  const out = regularizePlan(cols, { radius: 1 });
+  assert.equal(out.has("4,0"), false, "the wide gap is left open (not a hole to fill)");
+  assert.ok(out.has("4,1"), "the row behind the gap stands — the boundary stays continuous");
+});
+
+// ---- opening coherence gate (T-159-01) --------------------------------------------------------------
+
+test("opening gate: a 1×1 phantom aperture is NOT carved, recorded as opening-incoherent", () => {
+  const fit = flatFit({
+    openings: [{
+      id: "og-speck", massId: "mass-0", dir: "-z", kind: "window",
+      openings: [{
+        extent: { axis: "x", range: [3, 3], yRange: [2, 2] }, sillY: 2, crown: 2, width: 1, height: 1,
+        head: { kind: "flat", spec: { level: 2 }, fitError: { rmse: 0 } },
+      }],
+    }],
+  });
+  const gen = generateProvision(fit, { family: FAMILY, policy: POLICY });
+  assert.equal(gen.occ.has(3, 2, 0), true, "the wall stays SOLID where the phantom speck was");
+  assert.equal(gen.counts.carved, 0, "nothing carved");
+  assert.ok(gen.findings.some((f) => f.code === "opening-incoherent"), "speck recorded as a finding");
+  assertGeneratedProvenance(gen.artifact, gen.provenance);
+});
+
+test("opening gate: a real ≥2×2 aperture carves unchanged, no incoherent finding", () => {
+  const fit = flatFit({
+    openings: [{
+      id: "og-door", massId: "mass-0", dir: "-z", kind: "door",
+      openings: [{
+        extent: { axis: "x", range: [3, 5], yRange: [0, 2] }, sillY: 0, crown: 2, width: 3, height: 3,
+        head: { kind: "flat", spec: { level: 2 }, fitError: { rmse: 0 } },
+      }],
+    }],
+  });
+  const gen = generateProvision(fit, { family: FAMILY, policy: POLICY });
+  assert.equal(gen.occ.has(4, 1, 0), false, "the real 3×3 door is carved through");
+  assert.ok(gen.counts.carved > 0);
+  assert.ok(!gen.findings.some((f) => f.code === "opening-incoherent"), "no speck finding for a real door");
+  assertGeneratedProvenance(gen.artifact, gen.provenance);
+});
+
+test("opening gate: a wall-SPANNING aperture (blob open top) is NOT carved, wall kept solid", () => {
+  // flatFit wall x-extent is 0..7 (8 wide); a 7-wide opening (≥0.8×8=6.4) is the open top, not a window
+  const fit = flatFit({
+    openings: [{
+      id: "og-opentop", massId: "mass-0", dir: "-z", kind: "window",
+      openings: [{
+        extent: { axis: "x", range: [0, 6], yRange: [3, 4] }, sillY: 3, crown: 4, width: 7, height: 2,
+        head: { kind: "none", finding: { code: "head-refused", detail: "test" } },
+      }],
+    }],
+  });
+  const gen = generateProvision(fit, { family: FAMILY, policy: POLICY });
+  assert.equal(gen.counts.carved, 0, "the wall-spanning band is NOT carved");
+  assert.equal(gen.occ.has(3, 3, 0), true, "the wall course stays solid where the open-top band was");
+  assert.ok(gen.findings.some((f) => f.code === "opening-wall-spanning"), "recorded as wall-spanning");
   assertGeneratedProvenance(gen.artifact, gen.provenance);
 });
 
