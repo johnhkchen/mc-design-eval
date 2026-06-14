@@ -43,6 +43,15 @@ exits 1 — i.e. the build is rejected for *differing from last time*. This is t
 | 5 | `styled-milestone.mjs` `--repro` | 392–419 | fresh shas (base/shell/reconstructed/skinFinal/grammarFinal/styled) `=== want.*` | **DROP vs-committed; reframe** |
 | 6 | `styled-milestone.mjs` `--offline` | 343–365 | on-disk shas (shell/grammar/styled/base) `=== want.*` in `ok` | **DROP from `ok`** |
 
+A 7th site surfaced during the full milestone-runner audit (Implement): **`reconstructed-milestone.mjs`
+`--offline`** `sameShas` (≈232) ties the committed reconstructed record to the underlying milestone's
+chain **draft** lineage sha → **make informational** (a regenerated/improved milestone is drift, not a
+failure). Its `--repro` delegates to the child runner (inherits the determinism reframe). By contrast
+**`proportion-milestone.mjs` `--repro`** (≈302–316) re-derives the milestone **record** from committed
+**baselines + committed records** and asserts byte-identity — the **proportion ruler instrument
+re-derivation named in AC2** → **KEEP**. `facade-`/`hollow-cottage-milestone.mjs` have no vs-committed
+pattern.
+
 The in-process **double-run** in each runner (e.g. `generated-milestone.mjs:521–534`,
 `challenge:415–427`, `styled:422–436`) compares **two fresh runs to each other** (`NON-DETERMINISTIC`
 if they diverge). That is determinism, *not* vs-committed — it never rejects an improved build (both

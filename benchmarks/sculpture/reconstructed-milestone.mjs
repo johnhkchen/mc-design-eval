@@ -229,11 +229,14 @@ async function main() {
     if (!existsSync(recPath)) throw new Error(`committed record absent — run npm run reconstructed:${key} first`);
     const rec = JSON.parse(await readFile(recPath, "utf8"));
     const mile = has(milestoneRecRel) ? await readJson(milestoneRecRel) : null;
+    // E-36 (T-153-01): the milestone-lineage sha ties this record to a chain DRAFT; drafts rewrite
+    // freely, so a regenerated (improved) milestone is drift, not a failure. --offline gates the
+    // MEASUREMENT (the frozen instrument verdict + the pinned baseline + sheets), not the lineage.
     const sameShas = mile && canon(mile.reproducible?.sha256) === canon(rec.reproducible?.milestoneSha256);
     const baselineOk = has(baselineRel) && sha256(await readFile(join(HERE, baselineRel), "utf8")) === rec.metrics?.census?.before?.baselineSha256;
     const sheetsOk = [rec.sheets?.before, rec.sheets?.after].every((p) => !p || existsSync(join(ROOT, p)));
-    const ok = Boolean(sameShas !== false && baselineOk && sheetsOk && rec.instrument?.frozen !== false);
-    console.error(`[offline] ${key}: milestone shas ${sameShas == null ? "n/a" : sameShas ? "MATCH" : "DIVERGE"}; baseline ${baselineOk ? "pinned" : "DIVERGED"}; sheets ${sheetsOk ? "present" : "MISSING"}; instrument ${rec.instrument?.frozen === false ? "DIFFS" : "frozen/untouched"}`);
+    const ok = Boolean(baselineOk && sheetsOk && rec.instrument?.frozen !== false);
+    console.error(`[offline] ${key}: milestone lineage ${sameShas == null ? "n/a" : sameShas ? "matches" : "DRIFTED"} (informational; drafts are free under E-36); baseline ${baselineOk ? "pinned" : "DIVERGED"}; sheets ${sheetsOk ? "present" : "MISSING"}; instrument ${rec.instrument?.frozen === false ? "DIFFS" : "frozen/untouched"}`);
     if (!ok) process.exitCode = 1;
     return;
   }

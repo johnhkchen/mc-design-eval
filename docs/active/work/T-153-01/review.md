@@ -10,8 +10,26 @@ no new module, no new flag.
 | `benchmarks/sculpture/generated-milestone.mjs` | `--repro` → twice-fresh determinism; `--offline` drops draft-sha from `ok` (informational only); header docs updated |
 | `benchmarks/sculpture/challenge-milestone.mjs` | same reframe (base/shell/reconstructed/final) |
 | `benchmarks/sculpture/styled-milestone.mjs` | same reframe (base/shell/reconstructed/skinFinal/grammarFinal/styled) + header docs |
+| `benchmarks/sculpture/reconstructed-milestone.mjs` | `--offline` milestone-lineage sha → informational (drops from `ok`); `--repro` already delegated to the now-fixed child runner |
 
-Plus the six RDSPI artifacts under `docs/active/work/T-153-01/`.
+Plus the six RDSPI artifacts under `docs/active/work/T-153-01/`. Two follow-up commits: the four
+runner edits above, then the RDSPI docs.
+
+### Full milestone-runner audit (AC1 scope = *all* milestone runners)
+
+After the initial three (challenge/styled/generated), the remaining milestone runners were audited:
+
+- **`reconstructed-milestone.mjs`** — `--repro` spawns the child styled/challenge runner with
+  `--repro` (so it inherits the determinism reframe). Its `--offline` `sameShas` tied the committed
+  reconstructed record to the underlying milestone's chain **draft** sha → made informational
+  (regenerating an improved milestone no longer fails `reconstructed:<subj> --offline`). The baseline
+  pin, `instrument.frozen`, and sheet existence still gate (the measurement).
+- **`proportion-milestone.mjs`** — `--repro` re-derives the milestone **record** from committed
+  baselines + committed records ("pure I/O over committed records") and asserts byte-identity. This
+  is the **proportion ruler instrument re-derivation explicitly named in AC2** — a committed
+  *measurement* re-derived from committed *measurement* inputs (the E-33 baseline class). **KEEP,
+  untouched.** A legitimate DIVERGE here is a measurement-recompose signal, not a creation freeze.
+- **`facade-milestone.mjs`, `hollow-cottage-milestone.mjs`** — no vs-committed pattern.
 
 ## The core idea
 
