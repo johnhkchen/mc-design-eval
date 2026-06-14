@@ -176,6 +176,102 @@
                 "headRole": { "anyOf": [{ "$ref": "#/$defs/role" }, { "type": "null" }] }
               }
             }
+          },
+          "facade": {
+            "description": "RECORDED facade grammar (T-145-01, E-35): per-face articulation layout. Material refs are ROLES only (never blocks) — the diegetic proof: a GLB render can inform layout but has nowhere to inject a material. Read by recognition + the gate; NOT consumed by realize (relief is S-146/S-147's construction).",
+            "type": ["object", "null"],
+            "required": ["faces"],
+            "additionalProperties": false,
+            "properties": {
+              "eaveOverhang": {
+                "description": "Blocks the eave projects proud of the wall plane (pack-bounded)",
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 8
+              },
+              "faces": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 4,
+                "items": {
+                  "type": "object",
+                  "required": ["wall", "rhythm", "memberRole", "evidence"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "wall": { "$ref": "#/$defs/wall" },
+                    "rhythm": {
+                      "description": "Pilaster/stud spacing: a period+phase OR a flat count. The 'exactly one form' rule is enforced by validateProgramAgainstPack (AJV strictRequired forbids it cleanly in-schema).",
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "period": { "$ref": "#/$defs/posInt" },
+                        "phase": { "type": "integer", "minimum": 0 },
+                        "count": { "$ref": "#/$defs/posInt" }
+                      }
+                    },
+                    "memberRole": {
+                      "description": "The frame member (pilaster/stud/post) material role",
+                      "$ref": "#/$defs/role"
+                    },
+                    "fields": {
+                      "description": "Panel infill between frame members",
+                      "type": ["object", "null"],
+                      "required": ["role"],
+                      "additionalProperties": false,
+                      "properties": { "role": { "$ref": "#/$defs/role" } }
+                    },
+                    "quoins": {
+                      "description": "Corner run: a vertical chain of dressed blocks at the face corners",
+                      "type": ["object", "null"],
+                      "required": ["role", "run"],
+                      "additionalProperties": false,
+                      "properties": {
+                        "role": { "$ref": "#/$defs/role" },
+                        "run": { "$ref": "#/$defs/posInt" }
+                      }
+                    },
+                    "courseLines": {
+                      "description": "Horizontal course lines: y-row + material role",
+                      "type": "array",
+                      "maxItems": 8,
+                      "items": {
+                        "type": "object",
+                        "required": ["y", "role"],
+                        "additionalProperties": false,
+                        "properties": {
+                          "y": { "type": "integer", "minimum": 0 },
+                          "role": { "$ref": "#/$defs/role" }
+                        }
+                      }
+                    },
+                    "jettyDepth": {
+                      "description": "Per-storey jetty lip depth in blocks (refines masses[].jetty; needs a jetty)",
+                      "anyOf": [{ "$ref": "#/$defs/posInt" }, { "type": "null" }]
+                    },
+                    "openingsRhythm": {
+                      "description": "Openings placed on a rhythm (period+phase) rather than centred",
+                      "type": ["object", "null"],
+                      "required": ["period", "phase"],
+                      "additionalProperties": false,
+                      "properties": {
+                        "period": { "$ref": "#/$defs/posInt" },
+                        "phase": { "type": "integer", "minimum": 0 }
+                      }
+                    },
+                    "evidence": {
+                      "description": "Which view sourced this face's LAYOUT. textured-glb is spatial-layout evidence only (layoutOnly true) — never a material decision. pack-idealised is the honest fallback (a named state, never a silent default).",
+                      "type": "object",
+                      "required": ["source", "layoutOnly"],
+                      "additionalProperties": false,
+                      "properties": {
+                        "source": { "enum": ["concept", "textured-glb", "pack-idealised"] },
+                        "layoutOnly": { "type": "boolean" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

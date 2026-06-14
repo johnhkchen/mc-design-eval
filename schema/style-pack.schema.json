@@ -107,6 +107,18 @@
             "minSpacing": { "type": "integer", "minimum": 1 },
             "maxSpacing": { "type": "integer", "minimum": 1 }
           }
+        },
+        "articulation": {
+          "description": "OPTIONAL facade-grammar bounds (T-145-01, E-35). Absent → recognition falls back to openingRhythm spacing + storeyHeight.max ceilings (src/recognition/program.mjs facadeBounds). Pack-carried, so no facade number is building-specific.",
+          "type": "object",
+          "required": ["memberPeriod", "maxOverhang", "maxJettyDepth", "maxQuoinRun"],
+          "additionalProperties": false,
+          "properties": {
+            "memberPeriod": { "$ref": "#/$defs/intRange" },
+            "maxOverhang": { "type": "integer", "minimum": 0 },
+            "maxJettyDepth": { "type": "integer", "minimum": 1 },
+            "maxQuoinRun": { "type": "integer", "minimum": 1 }
+          }
         }
       }
     },

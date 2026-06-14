@@ -127,6 +127,67 @@ export function openingLanes(openings) {
   return lanes;
 }
 
+/**
+ * Pack-carried facade-grammar bounds (T-145-01, E-35). Reads `proportions.articulation` when the
+ * pack declares it; otherwise falls back to existing pack data — member spacing rides the
+ * openingRhythm band, the overhang/jetty/quoin ceilings ride storeyHeight.max. No building-specific
+ * number anywhere: every bound is the pack's own. PURE.
+ * @param {object} pack  a validated style pack
+ * @returns {{periodMin:number, periodMax:number, maxOverhang:number, maxJettyDepth:number, maxQuoinRun:number}}
+ */
+export function facadeBounds(pack) {
+  const { storeyHeight, openingRhythm, articulation } = pack.proportions;
+  if (articulation) {
+    return {
+      periodMin: articulation.memberPeriod.min,
+      periodMax: articulation.memberPeriod.max,
+      maxOverhang: articulation.maxOverhang,
+      maxJettyDepth: articulation.maxJettyDepth,
+      maxQuoinRun: articulation.maxQuoinRun,
+    };
+  }
+  return {
+    periodMin: openingRhythm.minSpacing,
+    periodMax: openingRhythm.maxSpacing,
+    maxOverhang: storeyHeight.max,
+    maxJettyDepth: storeyHeight.max,
+    maxQuoinRun: storeyHeight.max,
+  };
+}
+
+/**
+ * THE DIEGETIC PROOF (T-145-01 AC #2): prove the facade grammar carries no material decision sourced
+ * from the GLB. Two-part: (a) every facade material is a pack-palette ROLE (the schema already
+ * forbids a `block` field — this re-asserts it as a receipt); (b) every face whose layout evidence is
+ * `textured-glb` is `layoutOnly:true`, so the textured render informed geometry, never materials
+ * (palette stays diegetic — the 2026-06-14 ratified narrowing). The runner writes the receipt. PURE.
+ * @param {object} program  a schema-valid program
+ * @param {object} pack     a validated style pack
+ * @returns {{ok:boolean, findings:{level:"error", where:string, msg:string}[],
+ *            receipt:{wall:string, source:string, layoutOnly:boolean}[]}}
+ */
+export function assertFacadeDiegetic(program, pack) {
+  const findings = [];
+  const receipt = [];
+  const roles = new Set(pack.palette.map((p) => p.role));
+  program.masses.forEach((m, i) => {
+    if (!m.facade) return;
+    m.facade.faces.forEach((f, j) => {
+      const where = `masses[${i}].facade.faces[${j}] (${f.wall})`;
+      const matRoles = [f.memberRole, f.fields?.role, f.quoins?.role, ...(f.courseLines ?? []).map((c) => c.role)]
+        .filter((r) => r != null);
+      for (const r of matRoles) {
+        if (!roles.has(r)) findings.push({ level: "error", where, msg: `material role "${r}" is not in the pack palette (materials stay diegetic)` });
+      }
+      if (f.evidence.source === "textured-glb" && f.evidence.layoutOnly !== true) {
+        findings.push({ level: "error", where, msg: "textured-glb evidence must be layoutOnly:true (the GLB informs layout, never materials)" });
+      }
+      receipt.push({ wall: f.wall, source: f.evidence.source, layoutOnly: f.evidence.layoutOnly });
+    });
+  });
+  return { ok: findings.length === 0, findings, receipt };
+}
+
 /** Two plan rects touch (overlap or share an edge) — the single-component precondition. */
 function rectsTouch(a, b) {
   const ax1 = a.x0 + a.w - 1, az1 = a.z0 + a.d - 1;
@@ -252,6 +313,57 @@ export function validateProgramAgainstPack(program, pack, { registry = IDIOM_REG
           err(`${where}.roof.dormers`, `wall "${d.wall}" is a gable end — dormers sit on the eave-side slopes (perpendicular to ridge axis ${m.roof.ridgeAxis})`);
         }
       }
+    }
+
+    // 9. facade grammar (T-145-01, E-35) — RECORDED, not realized. Pack-bounded numbers + the
+    //    diegetic rule (textured-glb evidence is layout-only). Every facade material is a role
+    //    (checkRole); every number is pack-carried (facadeBounds). One face per wall.
+    const fac = m.facade ?? null;
+    if (fac) {
+      const b = facadeBounds(pack);
+      if (fac.eaveOverhang !== undefined && fac.eaveOverhang > b.maxOverhang) {
+        err(`${where}.facade.eaveOverhang`, `${fac.eaveOverhang} exceeds the pack overhang ceiling ${b.maxOverhang}`);
+      }
+      const seenWalls = new Set();
+      fac.faces.forEach((f, j) => {
+        const fw = `${where}.facade.faces[${j}] (${f.wall})`;
+        if (seenWalls.has(f.wall)) err(fw, `duplicate face for wall ${f.wall}`);
+        seenWalls.add(f.wall);
+
+        // rhythm: exactly one of {period, phase} | {count}; period in the pack band, count fits the wall
+        const { period, phase, count } = f.rhythm;
+        const periodForm = period !== undefined && phase !== undefined && count === undefined;
+        const countForm = count !== undefined && period === undefined && phase === undefined;
+        if (!periodForm && !countForm) {
+          err(`${fw}.rhythm`, "rhythm must be exactly {period, phase} OR {count}");
+        } else if (periodForm && (period < b.periodMin || period > b.periodMax)) {
+          err(`${fw}.rhythm`, `period ${period} outside the pack member-spacing band [${b.periodMin}, ${b.periodMax}]`);
+        } else if (countForm) {
+          const span = wallSpan(m.rect, f.wall) - 2; // corners stay (boxShell contract)
+          if (count > span) err(`${fw}.rhythm`, `count ${count} exceeds the ${span} interior cells on ${f.wall}`);
+        }
+
+        // material roles ∈ palette; course lines sit below the wall top
+        checkRole(`${fw}.memberRole`, f.memberRole);
+        checkRole(`${fw}.fields`, f.fields?.role ?? null);
+        checkRole(`${fw}.quoins`, f.quoins?.role ?? null);
+        (f.courseLines ?? []).forEach((c, k) => {
+          checkRole(`${fw}.courseLines[${k}]`, c.role);
+          if (c.y >= wallH) err(`${fw}.courseLines[${k}]`, `course y ${c.y} is at/above the wall top ${wallH}`);
+        });
+        if (f.quoins && f.quoins.run > b.maxQuoinRun) {
+          err(`${fw}.quoins`, `run ${f.quoins.run} exceeds the pack quoin ceiling ${b.maxQuoinRun}`);
+        }
+        if (f.jettyDepth != null) {
+          if (!m.jetty) err(`${fw}.jettyDepth`, "jettyDepth needs masses[].jetty declared on this mass");
+          if (f.jettyDepth > b.maxJettyDepth) err(`${fw}.jettyDepth`, `${f.jettyDepth} exceeds the pack jetty ceiling ${b.maxJettyDepth}`);
+        }
+
+        // the diegetic rule: textured-glb informs layout only (materials stay diegetic)
+        if (f.evidence.source === "textured-glb" && f.evidence.layoutOnly !== true) {
+          err(`${fw}.evidence`, "textured-glb evidence must be layoutOnly:true (the GLB informs layout, never materials)");
+        }
+      });
     }
   });
 

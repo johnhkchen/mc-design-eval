@@ -66,6 +66,21 @@ test("schema gate: the minimal pack parses; each missing field is a located erro
   assert.equal(extra.ok, false);
 });
 
+test("schema gate: optional proportions.articulation (T-145-01) is accepted, absence is the legacy state", () => {
+  const without = parseStylePack(minimalPack());
+  assert.equal(without.ok, true);
+  assert.equal(without.pack.proportions.articulation, undefined);
+
+  const withArt = parseStylePack(minimalPack({
+    proportions: {
+      storeyHeight: { min: 3, max: 4 }, pitchClasses: [1], openingRhythm: { minSpacing: 2, maxSpacing: 5 },
+      articulation: { memberPeriod: { min: 2, max: 5 }, maxOverhang: 2, maxJettyDepth: 2, maxQuoinRun: 8 },
+    },
+  }));
+  assert.equal(withArt.ok, true, JSON.stringify(withArt.errors));
+  assert.equal(withArt.pack.proportions.articulation.maxOverhang, 2);
+});
+
 // ---------------------------------------------------------------- semantic validation, both ways
 
 test("semantic: the minimal pack validates clean against the mini table", () => {

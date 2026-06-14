@@ -15,6 +15,8 @@ import {
   parseBuildingProgram,
   assertBuildingProgram,
   validateProgramAgainstPack,
+  facadeBounds,
+  assertFacadeDiegetic,
 } from "./program.mjs";
 import { loadStylePack } from "../pack/style-pack.mjs";
 
@@ -250,3 +252,141 @@ test("the declared budget rides the T-114 bound", () => {
   assert.equal(PROGRAM_REPLY_BUDGET, 3);
   assert.equal(ROOF_LAYOUTS["roof.gable"].gableEnds, true);
 });
+
+// ---------------------------------------------------------------- facade grammar (T-145-01, E-35)
+
+/** A clean per-mass facade block in rustic vocabulary, attachable to makeProgram()'s main mass. */
+function makeFacade() {
+  return {
+    eaveOverhang: 1,
+    faces: [
+      {
+        wall: "+z",
+        rhythm: { period: 3, phase: 0 },
+        memberRole: "frame.timber",
+        fields: { role: "wall.infill.upper" },
+        quoins: { role: "wall.dressing", run: 4 },
+        courseLines: [{ y: 4, role: "wall.dressing" }],
+        jettyDepth: 1,
+        openingsRhythm: { period: 4, phase: 1 },
+        evidence: { source: "concept", layoutOnly: false },
+      },
+      {
+        wall: "-z",
+        rhythm: { count: 4 },
+        memberRole: "frame.timber",
+        fields: null,
+        quoins: null,
+        courseLines: [],
+        jettyDepth: null,
+        openingsRhythm: null,
+        evidence: { source: "textured-glb", layoutOnly: true },
+      },
+    ],
+  };
+}
+
+test("facade: legacy program (no facade) still passes the schema and pack gates", () => {
+  const r = parseBuildingProgram(makeProgram());
+  assert.equal(r.ok, true);
+  assert.equal(r.program.masses[0].facade, undefined);
+  assert.equal(validateProgramAgainstPack(makeProgram(), pack).ok, true);
+});
+
+test("facade: a valid facade block passes the schema gate", () => {
+  const r = parseBuildingProgram(makeProgram((p) => { p.masses[0].facade = makeFacade(); }));
+  assert.equal(r.ok, true);
+  assert.equal(r.program.masses[0].facade.faces.length, 2);
+});
+
+test("facade: schema rejects a block id inside the facade (roles only — the diegetic substrate)", () => {
+  const r = parseBuildingProgram(makeProgram((p) => {
+    p.masses[0].facade = makeFacade();
+    p.masses[0].facade.faces[0].block = "minecraft:bricks";
+  }));
+  assert.equal(r.ok, false);
+  assert.equal(r.code, "schema_invalid");
+});
+
+test("facade: schema rejects a face missing its evidence tag", () => {
+  const r = parseBuildingProgram(makeProgram((p) => {
+    p.masses[0].facade = makeFacade();
+    delete p.masses[0].facade.faces[0].evidence;
+  }));
+  assert.equal(r.ok, false);
+  assert.equal(r.code, "schema_invalid");
+});
+
+test("facade: a clean facade passes pack validation", () => {
+  const { ok, findings } = validateProgramAgainstPack(
+    makeProgram((p) => { p.masses[0].facade = makeFacade(); }), pack);
+  assert.deepEqual(findings, []);
+  assert.equal(ok, true);
+});
+
+test("facade: pack validation rejects off-vocabulary / off-bound / non-diegetic faces", () => {
+  for (const [mutate, re] of [
+    [(f) => { f.faces[0].memberRole = "wall.marble"; }, /not in the pack palette/],
+    [(f) => { f.faces[0].rhythm = { period: 99, phase: 0 }; }, /outside the pack member-spacing band/],
+    [(f) => { f.faces[0].rhythm = { period: 3, phase: 0, count: 4 }; }, /exactly \{period, phase\} OR \{count\}/],
+    [(f) => { f.eaveOverhang = 99; }, /exceeds the pack overhang ceiling/],
+    [(f) => { f.faces[0].quoins = { role: "wall.dressing", run: 99 }; }, /exceeds the pack quoin ceiling/],
+    [(f) => { f.faces[0].courseLines = [{ y: 99, role: "wall.dressing" }]; }, /at\/above the wall top/],
+    [(f) => { f.faces[1].evidence = { source: "textured-glb", layoutOnly: false }; }, /must be layoutOnly:true/],
+    [(f) => { f.faces.push({ ...f.faces[0] }); }, /duplicate face for wall/],
+  ]) {
+    const { ok, findings } = validateProgramAgainstPack(makeProgram((p) => {
+      const fac = makeFacade();
+      mutate(fac);
+      p.masses[0].facade = fac;
+    }), pack);
+    assert.equal(ok, false);
+    assert.match(findings.map((f) => f.msg).join("\n"), re);
+  }
+});
+
+test("facade: jettyDepth needs a declared jetty; count rhythm must fit the wall", () => {
+  const noJetty = validateProgramAgainstPack(makeProgram((p) => {
+    p.masses[0].jetty = null;
+    const fac = makeFacade();
+    fac.faces[0].jettyDepth = 1;
+    p.masses[0].facade = fac;
+  }), pack);
+  assert.match(noJetty.findings.map((f) => f.msg).join("\n"), /jettyDepth needs masses\[\]\.jetty/);
+
+  const wideCount = validateProgramAgainstPack(makeProgram((p) => {
+    const fac = makeFacade();
+    fac.faces[1] = { ...fac.faces[1], wall: "-z", rhythm: { count: 99 } };
+    p.masses[0].facade = fac;
+  }), pack);
+  assert.match(wideCount.findings.map((f) => f.msg).join("\n"), /exceeds the .* interior cells/);
+});
+
+test("facade: assertFacadeDiegetic proves layout-only GLB evidence + a per-face receipt", () => {
+  const clean = assertFacadeDiegetic(makeProgram((p) => { p.masses[0].facade = makeFacade(); }), pack);
+  assert.equal(clean.ok, true);
+  assert.deepEqual(clean.receipt, [
+    { wall: "+z", source: "concept", layoutOnly: false },
+    { wall: "-z", source: "textured-glb", layoutOnly: true },
+  ]);
+
+  const leaked = assertFacadeDiegetic(makeProgram((p) => {
+    const fac = makeFacade();
+    fac.faces[1].evidence = { source: "textured-glb", layoutOnly: false };
+    p.masses[0].facade = fac;
+  }), pack);
+  assert.equal(leaked.ok, false);
+  assert.match(leaked.findings[0].msg, /layoutOnly:true/);
+});
+
+test("facade: facadeBounds rides articulation when present, else pack fallback", () => {
+  const fallback = facadeBounds(pack); // rustic has no articulation
+  assert.equal(fallback.periodMin, pack.proportions.openingRhythm.minSpacing);
+  assert.equal(fallback.periodMax, pack.proportions.openingRhythm.maxSpacing);
+  assert.equal(fallback.maxOverhang, pack.proportions.storeyHeight.max);
+
+  const withArt = { ...pack, proportions: { ...pack.proportions, articulation: { memberPeriod: { min: 1, max: 9 }, maxOverhang: 2, maxJettyDepth: 3, maxQuoinRun: 12 } } };
+  const b = facadeBounds(withArt);
+  assert.deepEqual(b, { periodMin: 1, periodMax: 9, maxOverhang: 2, maxJettyDepth: 3, maxQuoinRun: 12 });
+});
+
