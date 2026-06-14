@@ -19,10 +19,11 @@ import { MAX_REPLY_ATTEMPTS } from "../form/judge-reply.mjs";
 import { applyPaint } from "../view/face-paint.mjs";
 import { assertBuildingProgram } from "../recognition/program.mjs";
 import { compileProgram } from "../recognition/compile.mjs";
-import { realizeWithArticulation } from "./articulate.mjs";
+import { realizeWithArticulation, articulateArtifact } from "./articulate.mjs";
 import { WORKSHOP_LEDGER_SCHEMA, isRegression } from "./loop.mjs";
 import { applyGeometryAdjust, substituteMass, prunePaint } from "./geometry.mjs";
 import { parseWorkshopProgram, assertWorkshopProgram, applyParamAdjust } from "./program.mjs";
+import { assertArtifact } from "../artifact.mjs";
 
 /** THE canonical artifact serialization — byte identity is equality of this function's output.
  *  The runner writes final artifacts through it; replay compares through it. One definition. */
@@ -53,6 +54,13 @@ export function replayLedger({ ledger, pack = null, throughRound }) {
   }
   if (throughRound !== undefined && (!Number.isInteger(throughRound) || throughRound < 0)) {
     throw new Error(`replayLedger: throughRound must be an integer ≥ 0, got ${throughRound}`);
+  }
+  // T-154-01 (E-37): the UNIFIED CHAIN's artifact-base ledger. The seed is generate-first's frozen
+  // artifact (ledger.seedArtifact), not a workshop-program; the only accepted action is paint (the
+  // geometry levers are unavailable in artifact-base mode). Final = the seed + the recognized facade
+  // relief + the accepted paint trail — byte-identical, no model, no GL (Rule 5, artifact-anchored).
+  if (ledger.seedArtifact != null) {
+    return replaySeedArtifact({ ledger, pack, throughRound });
   }
   let program = assertWorkshopProgram(ledger.program);
   let source = ledger.source != null ? assertBuildingProgram(ledger.source) : null;
@@ -105,6 +113,36 @@ export function replayLedger({ ledger, pack = null, throughRound }) {
            applied: { programAdjusts, geometryAdjusts, recognized, paintPlacements: paint.length, paintPruned } };
 }
 
+/**
+ * Replay an artifact-base ledger (T-154-01, E-37): seed artifact + accepted PAINT rounds → final.
+ * The geometry is fixed (generate-first's build), so the only replayable accepted action is paint;
+ * any other accepted kind is a corrupt artifact-base ledger (the loop could not have produced it).
+ * The recognized facade relief is re-constructed from the seed `source` + the sha-pinned pack, the
+ * same join the loop folded each round. `throughRound` bounds the prefix view (0 = the seed alone).
+ */
+function replaySeedArtifact({ ledger, pack, throughRound }) {
+  const base = assertArtifact(ledger.seedArtifact);
+  const source = ledger.source != null ? assertBuildingProgram(ledger.source) : null;
+  const paint = [];
+  for (const round of ledger.rounds ?? []) {
+    if (throughRound !== undefined && round.round > throughRound) continue;
+    if (round.decision !== "revise" || !round.conformance?.accepted) continue;
+    const kind = round.applied?.kind;
+    if (kind === "paint") {
+      paint.push(...round.applied.placements);
+    } else {
+      throw new Error(`replayLedger: artifact-base round ${round.round} accepted with unreplayable applied.kind "${kind}" (only paint is replayable on a fixed-geometry seed)`);
+    }
+  }
+  const articulation = source && pack ? compileProgram(source, pack).articulation : [];
+  const relieved = articulateArtifact(base, articulation);
+  const artifact = paint.length ? applyPaint(relieved, paint) : relieved;
+  return {
+    artifact, program: ledger.program, source,
+    applied: { programAdjusts: 0, geometryAdjusts: 0, recognized: 0, paintPlacements: paint.length, paintPruned: 0 },
+  };
+}
+
 const OUTCOMES = Object.freeze(["done", "budget-exhausted", "exchange-refused"]);
 
 /**
@@ -122,8 +160,17 @@ export function offlineAssert({ ledger, finalArtifactText, conform, pack = null 
   const p = (msg) => problems.push(msg);
 
   if (ledger?.schema !== WORKSHOP_LEDGER_SCHEMA) p(`schema is "${ledger?.schema}", want "${WORKSHOP_LEDGER_SCHEMA}"`);
-  const seed = parseWorkshopProgram(ledger?.program ?? null);
-  if (!seed.ok) p(`seed program invalid: ${seed.errors.join("; ")}`);
+  // T-154-01 (E-37): an artifact-base ledger's seed is a frozen artifact, not a workshop-program.
+  const artifactBase = ledger?.seedArtifact != null;
+  let seedOk;
+  if (artifactBase) {
+    try { assertArtifact(ledger.seedArtifact); seedOk = true; }
+    catch (e) { p(`seed artifact invalid: ${e.message}`); seedOk = false; }
+  } else {
+    const seed = parseWorkshopProgram(ledger?.program ?? null);
+    seedOk = seed.ok;
+    if (!seed.ok) p(`seed program invalid: ${seed.errors.join("; ")}`);
+  }
   const rounds = Array.isArray(ledger?.rounds) ? ledger.rounds : (p("rounds must be an array"), []);
   const budget = ledger?.budget?.rounds;
   if (!Number.isInteger(budget) || budget < 1) p("budget.rounds must be an integer ≥ 1");
@@ -172,7 +219,7 @@ export function offlineAssert({ ledger, finalArtifactText, conform, pack = null 
   }
 
   // Rule 5: the replayed build byte-matches the committed final artifact
-  if (problems.length === 0 || seed.ok) {
+  if (problems.length === 0 || seedOk) {
     try {
       const { artifact, program: replayedProgram } = replayLedger({ ledger, pack });
       if (typeof finalArtifactText !== "string" || finalArtifactText.length === 0) {

@@ -26,7 +26,7 @@ import { runConformance } from "../pack/conformance.mjs";
 import { artifactOccupancy } from "../view/occupancy.mjs";
 import { applyPaint } from "../view/face-paint.mjs";
 import { compileProgram } from "../recognition/compile.mjs";
-import { realizeWithArticulation } from "./articulate.mjs";
+import { realizeWithArticulation, articulateArtifact } from "./articulate.mjs";
 import { applyAction, DEFAULT_APPLIERS } from "./actions.mjs";
 import { prunePaint } from "./geometry.mjs";
 import { liveActionNames } from "./critique.mjs";
@@ -110,9 +110,16 @@ export function isRegression(before, after) {
  *   the round gate (default: pure occupancy + runConformance)
  * @param {object} [opts.appliers]  action applier table (default: DEFAULT_APPLIERS)
  * @param {object} [opts.meta]  runner-side header fields (packRef, tier, instrument…)
+ * @param {object|null} [opts.seedArtifact]  the UNIFIED CHAIN's artifact-base seed (T-154-01, E-37):
+ *   a frozen, schema-valid design artifact (generate-first's parametric build). When present, the
+ *   loop's geometry is FIXED — `realize` returns this base (+ the recognized facade relief from
+ *   `source` + accepted paint), never a program realization, and the geometry/program appliers
+ *   degrade to `unavailable` (the runner passes a paint-only table). The seed is recorded on the
+ *   ledger for replay (the ledger IS the input — the program-seed precedent). Null ⇒ the program-seed
+ *   path, byte-identical to before.
  * @returns {Promise<{ledger:object, program:object, artifact:object}>}
  */
-export async function runWorkshopLoop({ program, pack, source = null, seams, appliers = DEFAULT_APPLIERS, meta = {} }) {
+export async function runWorkshopLoop({ program, pack, source = null, seams, appliers = DEFAULT_APPLIERS, meta = {}, seedArtifact = null }) {
   const { exchange, render } = seams ?? {};
   if (typeof exchange !== "function") throw new Error("runWorkshopLoop: seams.exchange is required");
   const conform = seams.conform
@@ -124,15 +131,23 @@ export async function runWorkshopLoop({ program, pack, source = null, seams, app
   let current = program;
   let currentSource = source;
   let paint = []; // accepted spray-paint placements, applied after realization in arrival order
-  const realize = (prog, paintTrail) => {
-    // T-149-01 (E-35): construct the recognized facade grammar's relief onto the skin each round, so
-    // the build the loop renders + critiques carries it. The plan is recompiled from currentSource so
-    // a re-recognition that changes a facade re-plans; the brushes resolve positions against the live
-    // occupancy. Facade-less rounds (no source / no facade) compile to [] ⇒ a bare realize.
-    const articulation = currentSource ? compileProgram(currentSource, pack).articulation : [];
-    const { artifact } = realizeWithArticulation(prog, articulation);
-    return paintTrail.length ? applyPaint(artifact, paintTrail) : artifact;
-  };
+  const articulationOf = (src) => (src ? compileProgram(src, pack).articulation : []);
+  const realize = seedArtifact !== null
+    ? // T-154-01 (E-37): the artifact-base seed. The geometry is generate-first's, fixed; the loop
+      // revises SURFACE — only the recognized facade relief (re-planned from currentSource) and the
+      // accepted paint change the build. No program is realized.
+      (_prog, paintTrail) => {
+        const relieved = articulateArtifact(seedArtifact, articulationOf(currentSource));
+        return paintTrail.length ? applyPaint(relieved, paintTrail) : relieved;
+      }
+    : (prog, paintTrail) => {
+        // T-149-01 (E-35): construct the recognized facade grammar's relief onto the skin each round, so
+        // the build the loop renders + critiques carries it. The plan is recompiled from currentSource so
+        // a re-recognition that changes a facade re-plans; the brushes resolve positions against the live
+        // occupancy. Facade-less rounds (no source / no facade) compile to [] ⇒ a bare realize.
+        const { artifact } = realizeWithArticulation(prog, articulationOf(currentSource));
+        return paintTrail.length ? applyPaint(artifact, paintTrail) : artifact;
+      };
 
   const rounds = [];
   let outcome = "budget-exhausted";
@@ -236,8 +251,9 @@ export async function runWorkshopLoop({ program, pack, source = null, seams, app
     liveActions,
     instrument: { azimuths },
     ...meta,
-    program, // the SEED — replay starts here
+    program, // the SEED — replay starts here (artifact-base: the envelope; seedArtifact is the geometry)
     ...(source !== null ? { source } : {}), // the SEED source (geometry/recognize replay tracks it)
+    ...(seedArtifact !== null ? { seedArtifact } : {}), // T-154-01: the artifact-base seed geometry
     rounds,
     final,
   };

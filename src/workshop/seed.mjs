@@ -24,6 +24,10 @@ import { COMPONENT_PLAN_SCHEMA } from "../view/component-plan.mjs";
  *  calibrated value — the only calibration the project has (N=1, recorded honestly). */
 export const PATTERN_BOOK_BUDGET = Object.freeze({ rounds: 6 });
 
+/** The unified chain's workshop budget (T-154-01, E-37) — the SAME single calibration the project
+ *  has (no new constant); the artifact-base loop refines surface within it. */
+export const BUILD_BUDGET = PATTERN_BOOK_BUDGET;
+
 /** The chain's default style pack — T-127's pack of record. Single-sourced here so the runners'
  *  `--pack` default and the legacy-path rule below cannot drift apart. */
 export const DEFAULT_PACK_REL = "packs/rustic.json";
@@ -78,6 +82,22 @@ export function chainRels(key, packRel = DEFAULT_PACK_REL) {
     plan: `benchmarks/sculpture/workshop/${runKey}/component-plan.json`,
     record: `benchmarks/sculpture/pattern-book/${runKey}.json`,
     recordMd: `benchmarks/sculpture/pattern-book/${runKey}.md`,
+  });
+}
+
+/**
+ * The unified chain's own paths (T-154-01, E-37) — the ONE place `build:<subject>` derives its seed
+ * artifact + record locations, namespaced per pack like chainRels. The seed artifact lives beside the
+ * workshop's own dir (the loop reads it through `--seed-artifact`); the build record is the chain
+ * receipt (recognition sha → seed sha → workshop outcome → final sha).
+ */
+export function buildRels(key, packRel = DEFAULT_PACK_REL) {
+  const runKey = `${key}${packNs(packRel)}`;
+  return Object.freeze({
+    runKey,
+    seedArtifact: `benchmarks/sculpture/workshop/${runKey}/seed-artifact.json`,
+    record: `benchmarks/sculpture/build/${runKey}.json`,
+    recordMd: `benchmarks/sculpture/build/${runKey}.md`,
   });
 }
 

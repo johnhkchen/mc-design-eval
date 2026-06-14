@@ -61,3 +61,25 @@ export function realizeWithArticulation(workshopProgram, articulation) {
   assertArtifact(artifact);
   return { ...base, artifact, articulation: report };
 }
+
+/**
+ * The artifact-input twin of {@link realizeWithArticulation} (T-154-01, E-37): fold the recognized
+ * facade grammar's relief onto an ALREADY-REALIZED artifact base (generate-first's parametric build),
+ * for the unified chain's artifact-base workshop seed. The geometry is fixed (the loop revises surface,
+ * not form), so there is no program to realize — only the same proud relief join. Byte-identical to the
+ * base when articulation is empty/places nothing (the facade-less no-regression). Pure; deterministic.
+ *
+ * @param {object} baseArtifact  a schema-valid design artifact (the frozen seed geometry)
+ * @param {object[]} [articulation]  compileProgram's plan ([] / undefined ⇒ no-op, byte-identical)
+ * @returns {object} the (possibly relieved) artifact — a NEW object; the input is never mutated
+ */
+export function articulateArtifact(baseArtifact, articulation) {
+  if (!Array.isArray(articulation) || articulation.length === 0) return baseArtifact; // facade-less
+  const { placements: relief } = applyArticulation(artifactOccupancy(baseArtifact), articulation);
+  if (!relief.length) return baseArtifact; // placed nothing ⇒ unchanged
+  const placements = mergePlacements(baseArtifact.placements, relief);
+  const manifest = [...new Set(placements.map((p) => p.block))].sort();
+  const artifact = { ...baseArtifact, palette: { manifest }, placements };
+  assertArtifact(artifact);
+  return artifact;
+}
