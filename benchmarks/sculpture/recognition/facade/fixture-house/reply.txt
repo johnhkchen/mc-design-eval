@@ -1,0 +1,59 @@
+Reading the concept (front +x/+z) and the textured-GLB renders for the unseen back/side faces.
+
+```json
+{
+  "facades": {
+    "main": {
+      "eaveOverhang": 1,
+      "faces": [
+        {
+          "wall": "+z",
+          "rhythm": { "period": 3, "phase": 0 },
+          "memberRole": "frame.timber",
+          "fields": { "role": "wall.infill.upper" },
+          "quoins": { "role": "wall.dressing", "run": 4 },
+          "courseLines": [{ "y": 4, "role": "wall.dressing" }],
+          "jettyDepth": 1,
+          "openingsRhythm": { "period": 4, "phase": 1 },
+          "evidence": { "source": "concept", "layoutOnly": false }
+        },
+        {
+          "wall": "+x",
+          "rhythm": { "period": 3, "phase": 0 },
+          "memberRole": "frame.timber",
+          "fields": { "role": "wall.infill.upper" },
+          "quoins": { "role": "wall.dressing", "run": 4 },
+          "courseLines": [{ "y": 4, "role": "wall.dressing" }],
+          "jettyDepth": null,
+          "openingsRhythm": null,
+          "evidence": { "source": "concept", "layoutOnly": false }
+        },
+        {
+          "wall": "-z",
+          "rhythm": { "count": 4 },
+          "memberRole": "frame.timber",
+          "fields": { "role": "wall.infill.upper" },
+          "quoins": { "role": "wall.dressing", "run": 4 },
+          "courseLines": [{ "y": 4, "role": "wall.dressing" }],
+          "jettyDepth": null,
+          "openingsRhythm": null,
+          "evidence": { "source": "textured-glb", "layoutOnly": true }
+        },
+        {
+          "wall": "-x",
+          "rhythm": { "count": 3 },
+          "memberRole": "frame.timber",
+          "fields": { "role": "wall.infill.upper" },
+          "quoins": null,
+          "courseLines": [],
+          "jettyDepth": null,
+          "openingsRhythm": null,
+          "evidence": { "source": "pack-idealised", "layoutOnly": true }
+        }
+      ]
+    }
+  }
+}
+```
+
+That completes the four faces — front and the lit side from the concept, the back from the textured GLB, the dark side idealised from the pack.

@@ -1,0 +1,192 @@
+{
+  "schema": "building-program/v1",
+  "subject": "fixture-house",
+  "pack": "rustic",
+  "reading": {
+    "summary": "two-storey banded mass, jettied upper, gable roof",
+    "symmetryClaim": {
+      "axis": "x"
+    }
+  },
+  "masses": [
+    {
+      "id": "main",
+      "rect": {
+        "x0": 0,
+        "z0": 0,
+        "w": 13,
+        "d": 9
+      },
+      "storeys": 2,
+      "storeyHeight": 4,
+      "walls": {
+        "treatment": "timber-frame",
+        "ground": {
+          "role": "wall.field.ground"
+        },
+        "upper": {
+          "role": "wall.infill.upper"
+        },
+        "dressing": {
+          "role": "wall.dressing"
+        }
+      },
+      "plinth": {
+        "courses": 1,
+        "role": "wall.dressing"
+      },
+      "jetty": {
+        "walls": [
+          "+z"
+        ],
+        "beamRole": "roof.trim",
+        "joistRole": "frame.timber"
+      },
+      "roof": {
+        "idiom": "roof.gable",
+        "ridgeAxis": "x",
+        "pitchClass": 1,
+        "fieldRole": "roof.field",
+        "trimRole": "roof.trim",
+        "gableRole": "wall.infill.upper",
+        "dormers": {
+          "count": 2,
+          "wall": "+z"
+        }
+      },
+      "chimney": {
+        "role": "wall.field.ground",
+        "capRole": "chimney.cap",
+        "atEnd": "hi"
+      },
+      "openings": [
+        {
+          "wall": "+z",
+          "kind": "door",
+          "count": 1,
+          "w": 2,
+          "h": 3,
+          "sill": 0,
+          "head": "flat",
+          "headRole": "wall.dressing"
+        },
+        {
+          "wall": "+z",
+          "kind": "window",
+          "count": 2,
+          "w": 1,
+          "h": 2,
+          "sill": 5,
+          "head": null,
+          "headRole": null
+        }
+      ],
+      "facade": {
+        "eaveOverhang": 1,
+        "faces": [
+          {
+            "wall": "+z",
+            "rhythm": {
+              "period": 3,
+              "phase": 0
+            },
+            "memberRole": "frame.timber",
+            "fields": {
+              "role": "wall.infill.upper"
+            },
+            "quoins": {
+              "role": "wall.dressing",
+              "run": 4
+            },
+            "courseLines": [
+              {
+                "y": 4,
+                "role": "wall.dressing"
+              }
+            ],
+            "jettyDepth": 1,
+            "openingsRhythm": {
+              "period": 4,
+              "phase": 1
+            },
+            "evidence": {
+              "source": "concept",
+              "layoutOnly": false
+            }
+          },
+          {
+            "wall": "+x",
+            "rhythm": {
+              "period": 3,
+              "phase": 0
+            },
+            "memberRole": "frame.timber",
+            "fields": {
+              "role": "wall.infill.upper"
+            },
+            "quoins": {
+              "role": "wall.dressing",
+              "run": 4
+            },
+            "courseLines": [
+              {
+                "y": 4,
+                "role": "wall.dressing"
+              }
+            ],
+            "jettyDepth": null,
+            "openingsRhythm": null,
+            "evidence": {
+              "source": "concept",
+              "layoutOnly": false
+            }
+          },
+          {
+            "wall": "-z",
+            "rhythm": {
+              "count": 4
+            },
+            "memberRole": "frame.timber",
+            "fields": {
+              "role": "wall.infill.upper"
+            },
+            "quoins": {
+              "role": "wall.dressing",
+              "run": 4
+            },
+            "courseLines": [
+              {
+                "y": 4,
+                "role": "wall.dressing"
+              }
+            ],
+            "jettyDepth": null,
+            "openingsRhythm": null,
+            "evidence": {
+              "source": "textured-glb",
+              "layoutOnly": true
+            }
+          },
+          {
+            "wall": "-x",
+            "rhythm": {
+              "count": 3
+            },
+            "memberRole": "frame.timber",
+            "fields": {
+              "role": "wall.infill.upper"
+            },
+            "quoins": null,
+            "courseLines": [],
+            "jettyDepth": null,
+            "openingsRhythm": null,
+            "evidence": {
+              "source": "pack-idealised",
+              "layoutOnly": true
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
