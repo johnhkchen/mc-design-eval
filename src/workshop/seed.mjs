@@ -87,15 +87,22 @@ export function chainRels(key, packRel = DEFAULT_PACK_REL) {
 
 /**
  * The unified chain's own paths (T-154-01, E-37) — the ONE place `build:<subject>` derives its seed
- * artifact + record locations, namespaced per pack like chainRels. The seed artifact lives beside the
- * workshop's own dir (the loop reads it through `--seed-artifact`); the build record is the chain
- * receipt (recognition sha → seed sha → workshop outcome → final sha).
+ * artifact, workshop record, and chain receipt locations, namespaced per pack like chainRels. The
+ * build chain's workshop records live under a distinct `<runKey>-build` namespace so the unified
+ * (artifact-base) ledger NEVER clobbers the committed pattern-book (program-seed) ledger at
+ * `workshop/<runKey>.json` — the program-seed records stay replayable until S-156 archives them. The
+ * build record is the chain receipt (recognition sha → seed sha → workshop outcome → final sha).
  */
 export function buildRels(key, packRel = DEFAULT_PACK_REL) {
   const runKey = `${key}${packNs(packRel)}`;
+  const buildKey = `${runKey}-build`;
   return Object.freeze({
-    runKey,
-    seedArtifact: `benchmarks/sculpture/workshop/${runKey}/seed-artifact.json`,
+    runKey, buildKey,
+    dir: `benchmarks/sculpture/workshop/${buildKey}`,
+    seedArtifact: `benchmarks/sculpture/workshop/${buildKey}/seed-artifact.json`,
+    ledger: `benchmarks/sculpture/workshop/${buildKey}.json`,
+    digest: `benchmarks/sculpture/workshop/${buildKey}.md`,
+    final: `benchmarks/sculpture/workshop/${buildKey}/final-artifact.json`,
     record: `benchmarks/sculpture/build/${runKey}.json`,
     recordMd: `benchmarks/sculpture/build/${runKey}.md`,
   });

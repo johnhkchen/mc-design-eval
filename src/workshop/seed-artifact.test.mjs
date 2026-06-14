@@ -157,9 +157,14 @@ test("AR3 offlineAssert re-asserts a clean artifact-base ledger and flags a tamp
 test("AS1 BUILD_BUDGET is the single calibration; buildRels derives namespaced paths", () => {
   assert.equal(BUILD_BUDGET, PATTERN_BOOK_BUDGET);
   const r = buildRels("cottage");
-  assert.equal(r.seedArtifact, "benchmarks/sculpture/workshop/cottage/seed-artifact.json");
+  assert.equal(r.buildKey, "cottage-build");
+  assert.equal(r.seedArtifact, "benchmarks/sculpture/workshop/cottage-build/seed-artifact.json");
+  assert.equal(r.ledger, "benchmarks/sculpture/workshop/cottage-build.json");
+  assert.equal(r.final, "benchmarks/sculpture/workshop/cottage-build/final-artifact.json");
   assert.equal(r.record, "benchmarks/sculpture/build/cottage.json");
+  // the build ledger never collides with the committed pattern-book program-seed ledger
+  assert.notEqual(r.ledger, "benchmarks/sculpture/workshop/cottage.json");
   const ns = buildRels("barn", "packs/saltcrag.json");
   assert.equal(ns.runKey, "barn--saltcrag");
-  assert.equal(ns.seedArtifact, "benchmarks/sculpture/workshop/barn--saltcrag/seed-artifact.json");
+  assert.equal(ns.seedArtifact, "benchmarks/sculpture/workshop/barn--saltcrag-build/seed-artifact.json");
 });

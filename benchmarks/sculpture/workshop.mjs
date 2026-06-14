@@ -42,9 +42,11 @@ import { parseWorkshopReply, critiqueRenderArgs } from "../../src/workshop/criti
 import { rerecognizeRenderArgs, parseMassReply } from "../../src/workshop/rerecognize.mjs";
 import { DEFAULT_APPLIERS } from "../../src/workshop/actions.mjs";
 import { parseProgramReply } from "../../src/recognition/prompt.mjs";
+import { compileProgram } from "../../src/recognition/compile.mjs";
+import { assertArtifact } from "../../src/artifact.mjs";
 import { bamlRender } from "../../src/baml/bridge.mjs";
 import { serializeArtifact, replayLedger, offlineAssert } from "../../src/workshop/replay.mjs";
-import { workshopSubjectsFrom, chainRels, recognitionRels, DEFAULT_PACK_REL } from "../../src/workshop/seed.mjs";
+import { workshopSubjectsFrom, chainRels, buildRels, recognitionRels, BUILD_BUDGET, DEFAULT_PACK_REL } from "../../src/workshop/seed.mjs";
 import { SUBJECTS as REGISTRY } from "./durable-skin.mjs";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
@@ -62,6 +64,8 @@ const argv = process.argv.slice(2);
 const argOf = (flag) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : null; };
 const subjectKey = argOf("--subject") ?? "fixture";
 const packRel = argOf("--pack") ?? DEFAULT_PACK_REL; // T-132-01: the pack is invocation data
+const seedArtifactRel = argOf("--seed-artifact"); // T-154-01: the unified chain's artifact-base seed
+const artifactBase = Boolean(seedArtifactRel);
 const replay = argv.includes("--replay");
 const offline = argv.includes("--offline");
 const rotate = argv.includes(ROTATE_FLAG);
@@ -87,8 +91,10 @@ if (!def) {
 }
 
 // Record paths derive from the SUBJECT'S pack (the fixture's stays pinned to the default),
-// namespaced per pack so two packs' records of one subject can never collide (T-132-01).
-const rels = chainRels(subjectKey, def.pack);
+// namespaced per pack so two packs' records of one subject can never collide (T-132-01). T-154-01:
+// the unified (artifact-base) run records under a distinct `<key>-build` namespace (buildRels) so it
+// never clobbers the committed pattern-book program-seed ledger at workshop/<key>.json.
+const rels = artifactBase ? buildRels(subjectKey, def.pack) : chainRels(subjectKey, def.pack);
 const runKey = rels.runKey;
 const ledgerRel = rels.ledger;
 const digestRel = rels.digest;
@@ -170,29 +176,54 @@ async function runOffline() {
 async function runLive() {
   const pack = loadStylePack(join(ROOT, def.pack));
   const packBytes = await readFile(join(ROOT, def.pack));
-  const programText = await readFile(join(ROOT, def.program), "utf8");
-  const program = assertWorkshopProgram(programText);
   const conceptBuf = await readFile(join(ROOT, def.concept));
 
-  // T-138-01: THE HANDS (T-136) ENGAGE WHEN THE CHAIN'S INPUTS EXIST — the recognized source
-  // program (geometry levers + mass re-recognition need masses to aim at; the loop's geometry
-  // applier ships in DEFAULT_APPLIERS and activates on `source`) and the conditioned sketch
-  // (the re-recognition fragment's evidence). Data-driven, no per-building constants: the
-  // synthetic fixture has neither and runs the eyes-only loop with a byte-identical prompt
-  // (the empty source block inserts zero bytes — T-136 S1 pins it).
+  // T-154-01 (E-37): the UNIFIED CHAIN's artifact-base seed (generate-first's frozen build) vs the
+  // legacy pattern-book program seed. Artifact-base: the geometry is fixed, the loop revises SURFACE
+  // — paint + the recognized facade relief (from `source`); the geometry levers are unavailable
+  // (paint-only appliers; the named AC#3 difference — a GLB-fit seed needs no geometry hill-climbing).
+  // The program-seed branch below is unchanged (byte-identical replay of committed records).
   const sourceRel = recognitionRels(subjectKey, def.pack).program;
   const sketchRel = `${SKETCH_REL}/${subjectKey}.json`;
-  const hands = existsSync(join(ROOT, sourceRel)) && existsSync(join(ROOT, sketchRel));
-  let source = null, sketch = null, handsRefs = {};
-  if (hands) {
+  let program, source = null, sketch = null, handsRefs = {}, seedArtifact = null, hands = false;
+  if (artifactBase) {
+    if (!existsSync(join(ROOT, seedArtifactRel))) {
+      console.error(`workshop: --seed-artifact ${seedArtifactRel} absent — run the generate-seed stage first (npm run build:${subjectKey})`);
+      process.exit(1);
+    }
+    if (!existsSync(join(ROOT, sourceRel))) {
+      console.error(`workshop: the artifact-base seed needs the committed recognition program (${sourceRel}) for facade relief + the conformance declarations`);
+      process.exit(1);
+    }
+    const seedText = await readFile(join(ROOT, seedArtifactRel), "utf8");
+    seedArtifact = assertArtifact(JSON.parse(seedText));
     const sourceText = await readFile(join(ROOT, sourceRel), "utf8");
     source = parseProgramReply(sourceText, { pack }); // the same gates the record passed at commit
-    const sketchText = await readFile(join(ROOT, sketchRel), "utf8");
-    sketch = JSON.parse(sketchText);
+    // declarations are DATA-DRIVEN from the committed recognition (no per-building constants)
+    const declarations = compileProgram(source, pack).workshopProgram.declarations;
+    program = { subject: subjectKey, pack: pack.style, budget: { ...BUILD_BUDGET }, declarations, elements: [] };
     handsRefs = {
       sourceRef: { path: sourceRel, sha256: sha256(sourceText) },
-      sketchRef: { path: sketchRel, sha256: sha256(sketchText) },
+      seedArtifactRef: { path: seedArtifactRel, sha256: sha256(seedText) },
     };
+  } else {
+    // T-138-01: THE HANDS (T-136) ENGAGE WHEN THE CHAIN'S INPUTS EXIST — the recognized source
+    // program (geometry levers + mass re-recognition need masses to aim at) and the conditioned
+    // sketch (the re-recognition fragment's evidence). Data-driven, no per-building constants: the
+    // synthetic fixture has neither and runs the eyes-only loop with a byte-identical prompt.
+    const programText = await readFile(join(ROOT, def.program), "utf8");
+    program = assertWorkshopProgram(programText);
+    hands = existsSync(join(ROOT, sourceRel)) && existsSync(join(ROOT, sketchRel));
+    if (hands) {
+      const sourceText = await readFile(join(ROOT, sourceRel), "utf8");
+      source = parseProgramReply(sourceText, { pack }); // the same gates the record passed at commit
+      const sketchText = await readFile(join(ROOT, sketchRel), "utf8");
+      sketch = JSON.parse(sketchText);
+      handsRefs = {
+        sourceRef: { path: sourceRel, sha256: sha256(sourceText) },
+        sketchRef: { path: sketchRel, sha256: sha256(sketchText) },
+      };
+    }
   }
 
   // BEFORE ANY SPEND (T-119): declare every record this run writes; workshop domain — the guard
@@ -268,8 +299,12 @@ async function runLive() {
   };
 
   const { ledger, artifact } = await runWorkshopLoop({
-    program, pack, source, seams: { exchange, render },
-    appliers: hands ? { ...DEFAULT_APPLIERS, "re-recognize": reRecognize } : DEFAULT_APPLIERS,
+    program, pack, source, seedArtifact, seams: { exchange, render },
+    // T-154-01: artifact-base ⇒ paint-only (geometry levers degrade to unavailable); legacy program
+    // seed ⇒ hands engage re-recognize when the chain's inputs exist.
+    appliers: artifactBase
+      ? { "spray-paint": DEFAULT_APPLIERS["spray-paint"] }
+      : (hands ? { ...DEFAULT_APPLIERS, "re-recognize": reRecognize } : DEFAULT_APPLIERS),
     meta: {
       packRef: { path: def.pack, sha256: sha256(packBytes) },
       conceptRef: { path: def.concept, sha256: sha256(conceptBuf) },
