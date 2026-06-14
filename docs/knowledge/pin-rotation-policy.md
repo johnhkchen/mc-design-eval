@@ -8,11 +8,24 @@ enforce it structurally.
 
 ## 1. What a pin is
 
-Any **git-tracked `.json`/`.md` record** under the runner output families (`kit/`, `zone-map/`,
-`multi-angle/`, `styled/`, `challenge/`, `generated/`, `reconstructed/`, `component-skin/`,
-`durable-skin/`, the committed `pr/assets` reports). Committed = pinned — there is no separate
-manifest to maintain. Renders (PNGs, sheets, triptychs) are **never** pins: GL bytes are
-evidence, not decisions (E-24/E-28).
+A pin is a **git-tracked `.json`/`.md` record on the INSTRUMENT ALLOWLIST** — the one named place,
+`src/form/pin-guard.mjs` `INSTRUMENT_ALLOWLIST` (`isInstrumentPath`): **judge verdict records**
+(`benchmarks/sculpture/multi-angle/`), **ratified packs of record** (`packs/*.json`, never
+`packs/drafts/*`), committed **baseline/milestone measurements** (the `-baseline(s)`/`-milestone`
+records), the ratified **kit vocabulary** (`benchmarks/sculpture/kit/` — an input-of-record to every
+committed verdict; frozen under the E-36 honesty clause), and the **`retired-pins.json`** registry.
+A path freezes only when it is on this list **and** committed.
+
+Updated by **E-36 / S-151** ("defreeze the creation loop"): pin-guard fires on the instrument
+allowlist, **not** on "tracked-in-git." **Draft creation artifacts are NOT pins and regenerate
+freely with no flag** — `generated/*` (incl. the `generated/<key>/{base,grammar,artifact,
+component-plan}.json` chain intermediates and the `generated/<key>.json` milestone record),
+`workshop/*` ledgers + final-artifacts that are not yet the subject of a committed verdict,
+`recognition/*` programs, and the styled/challenge/reconstructed/zone-map/component-skin/durable-skin
+build records. The dividing line: **frozen once MEASURED; draft until then.** A draft that is later
+proven load-bearing for a committed measurement joins the allowlist with its reason recorded (the
+kit is the standing example) — case by case, never a blanket re-freeze. Renders (PNGs, sheets,
+triptychs) are **never** pins: GL bytes are evidence, not decisions (E-24/E-28).
 
 ## 2. The rotation rule
 

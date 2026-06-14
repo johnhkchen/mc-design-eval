@@ -18,47 +18,48 @@ import {
   decidePinWrite, refusalMessage, preflightPins,
   loadTrackedSet, isTracked, guardedWriteRecord,
   GATE_RECORD_NAMESPACES, domainRefusal,
+  INSTRUMENT_ALLOWLIST, isInstrumentPath,
 } from "./pin-guard.mjs";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 
 // --- A: decision matrix ---------------------------------------------------------------------------
 
-test("A1 untracked path writes freely (first derivations are never blocked)", () => {
-  const d = decidePinWrite({ tracked: false, exists: false, nextContent: "x" });
+test("A1 unfrozen path writes freely (first derivations / drafts are never blocked)", () => {
+  const d = decidePinWrite({ frozen: false, exists: false, nextContent: "x" });
   assert.equal(d.action, "write");
-  const d2 = decidePinWrite({ tracked: false, exists: true, currentContent: "old", nextContent: "x" });
+  const d2 = decidePinWrite({ frozen: false, exists: true, currentContent: "old", nextContent: "x" });
   assert.equal(d2.action, "write");
 });
 
 test("A2 byte-identical rewrite of a committed pin always passes (determinism flows)", () => {
-  const d = decidePinWrite({ tracked: true, exists: true, currentContent: "same", nextContent: "same" });
+  const d = decidePinWrite({ frozen: true, exists: true, currentContent: "same", nextContent: "same" });
   assert.equal(d.action, "skip-identical");
 });
 
 test("A3 differing write to a committed pin REFUSES without the flag", () => {
-  const d = decidePinWrite({ tracked: true, exists: true, currentContent: "old", nextContent: "new" });
+  const d = decidePinWrite({ frozen: true, exists: true, currentContent: "old", nextContent: "new" });
   assert.equal(d.action, "refuse");
   assert.match(d.reason, /committed pin/);
 });
 
 test("A4 the explicit flag rotates", () => {
-  const d = decidePinWrite({ tracked: true, exists: true, currentContent: "old", nextContent: "new", rotate: true });
+  const d = decidePinWrite({ frozen: true, exists: true, currentContent: "old", nextContent: "new", rotate: true });
   assert.equal(d.action, "write");
   assert.match(d.reason, /rotation/);
 });
 
-test("A5 tracked-but-deleted pin refuses without the flag (restore is explicit too)", () => {
-  const d = decidePinWrite({ tracked: true, exists: false, nextContent: "new" });
+test("A5 frozen-but-deleted pin refuses without the flag (restore is explicit too)", () => {
+  const d = decidePinWrite({ frozen: true, exists: false, nextContent: "new" });
   assert.equal(d.action, "refuse");
-  const d2 = decidePinWrite({ tracked: true, exists: false, nextContent: "new", rotate: true });
+  const d2 = decidePinWrite({ frozen: true, exists: false, nextContent: "new", rotate: true });
   assert.equal(d2.action, "write");
 });
 
 test("A6 flag-swallow fails CLOSED: rotate undefined behaves as refuse", () => {
   // `npm run gate:multi --rotate-pins` (missing --): the flag never reaches argv → rotate is
   // simply absent. The guard must refuse, not sweep.
-  const d = decidePinWrite({ tracked: true, exists: true, currentContent: "old", nextContent: "new", rotate: undefined });
+  const d = decidePinWrite({ frozen: true, exists: true, currentContent: "old", nextContent: "new", rotate: undefined });
   assert.equal(d.action, "refuse");
 });
 
@@ -120,8 +121,10 @@ test("C4 preflight flag-swallow fails CLOSED (rotate undefined refuses)", () => 
 test("D guardedWriteRecord: write / skip-identical / refuse / rotate / sanction on a tmpdir pin", async () => {
   const dir = await mkdtemp(join(tmpdir(), "pin-guard-"));
   try {
-    const trackedSet = new Set(["pin.json"]); // the synthetic committed pin
-    await writeFile(join(dir, "pin.json"), "{\"v\":1}\n");
+    // The synthetic committed pin must be an INSTRUMENT path (frozen = allowlist ∧ tracked).
+    // "my-baseline.json" matches the baseline/milestone suffix rule and stays flat (no nested dir).
+    const trackedSet = new Set(["my-baseline.json"]); // the synthetic committed instrument pin
+    await writeFile(join(dir, "my-baseline.json"), "{\"v\":1}\n");
 
     // D1 untracked sibling writes freely
     const w = await guardedWriteRecord({ root: dir, rel: "fresh.json", content: "{}\n", trackedSet });
@@ -129,32 +132,32 @@ test("D guardedWriteRecord: write / skip-identical / refuse / rotate / sanction 
     assert.equal(await readFile(join(dir, "fresh.json"), "utf8"), "{}\n");
 
     // D2 byte-identical rewrite passes, pin untouched
-    const s = await guardedWriteRecord({ root: dir, rel: "pin.json", content: "{\"v\":1}\n", trackedSet });
+    const s = await guardedWriteRecord({ root: dir, rel: "my-baseline.json", content: "{\"v\":1}\n", trackedSet });
     assert.equal(s.action, "skip-identical");
 
     // D3 differing write refuses; the pin's bytes survive
     await assert.rejects(
-      () => guardedWriteRecord({ root: dir, rel: "pin.json", content: "{\"v\":2}\n", trackedSet }),
-      (e) => e instanceof PinGuardError && /pin\.json/.test(e.message) && e.message.includes(ROTATE_FLAG),
+      () => guardedWriteRecord({ root: dir, rel: "my-baseline.json", content: "{\"v\":2}\n", trackedSet }),
+      (e) => e instanceof PinGuardError && /my-baseline\.json/.test(e.message) && e.message.includes(ROTATE_FLAG),
     );
-    assert.equal(await readFile(join(dir, "pin.json"), "utf8"), "{\"v\":1}\n");
+    assert.equal(await readFile(join(dir, "my-baseline.json"), "utf8"), "{\"v\":1}\n");
 
     // D4 explicit rotation writes
-    const r = await guardedWriteRecord({ root: dir, rel: "pin.json", content: "{\"v\":2}\n", rotate: true, trackedSet });
+    const r = await guardedWriteRecord({ root: dir, rel: "my-baseline.json", content: "{\"v\":2}\n", rotate: true, trackedSet });
     assert.equal(r.action, "write");
-    assert.equal(await readFile(join(dir, "pin.json"), "utf8"), "{\"v\":2}\n");
+    assert.equal(await readFile(join(dir, "my-baseline.json"), "utf8"), "{\"v\":2}\n");
 
     // D5 a named sanction permits like the flag (the T-114 rejudge completion shape)
     const j = await guardedWriteRecord({
-      root: dir, rel: "pin.json", content: "{\"v\":3}\n",
+      root: dir, rel: "my-baseline.json", content: "{\"v\":3}\n",
       sanction: "rejudge (T-114 reply completion)", trackedSet,
     });
     assert.equal(j.action, "write");
 
     // D6 tracked-but-deleted refuses without the flag
-    await rm(join(dir, "pin.json"));
+    await rm(join(dir, "my-baseline.json"));
     await assert.rejects(
-      () => guardedWriteRecord({ root: dir, rel: "pin.json", content: "{}\n", trackedSet }),
+      () => guardedWriteRecord({ root: dir, rel: "my-baseline.json", content: "{}\n", trackedSet }),
       PinGuardError,
     );
   } finally {
@@ -164,9 +167,11 @@ test("D guardedWriteRecord: write / skip-identical / refuse / rotate / sanction 
 
 // --- E: tracked-set IO ----------------------------------------------------------------------------
 
-test("E1 null tracked set fails CLOSED: everything reads as tracked", () => {
+test("E1 null tracked set fails CLOSED: an instrument path reads as tracked → frozen", () => {
   assert.equal(isTracked(null, "anything/at/all.json"), true);
-  const d = decidePinWrite({ tracked: isTracked(null, "x.json"), exists: true, currentContent: "a", nextContent: "b" });
+  // fail-closed only freezes when the path is ALSO on the allowlist (retired-pins here)
+  const rel = "benchmarks/sculpture/retired-pins.json";
+  const d = decidePinWrite({ frozen: isInstrumentPath(rel) && isTracked(null, rel), exists: true, currentContent: "a", nextContent: "b" });
   assert.equal(d.action, "refuse");
 });
 
@@ -223,4 +228,115 @@ test("F3 preflightPins: workshop-domain gate pin refuses even with rotate; clean
 
 test("F4 nested gate-record write under workshop domain refuses (prefix, not exact-dir match)", () => {
   assert.match(domainRefusal("workshop", "benchmarks/sculpture/multi-angle/sub/dir/x.md"), /frozen judge/);
+});
+
+// --- G: instrument allowlist — the E-36 / S-151 freeze-narrowing -----------------------------------
+
+test("G1 isInstrumentPath: the four instrument families (+ kit) are frozen; drafts are not", () => {
+  // ON the allowlist (instruments / inputs-of-record)
+  for (const rel of [
+    "benchmarks/sculpture/multi-angle/cottage-styled.json",
+    "benchmarks/sculpture/multi-angle/cottage-styled.md",
+    "benchmarks/sculpture/kit/barn.json",
+    "benchmarks/sculpture/kit/barn.raw.json",
+    "benchmarks/sculpture/retired-pins.json",
+    "packs/rustic.json",
+    "benchmarks/sculpture/pattern-book/facade-baselines.json",
+    "benchmarks/sculpture/pattern-book/proportion-milestone.json",
+    "benchmarks/sculpture/pattern-book/facade-milestone.json",
+    "benchmarks/sculpture/cleanliness-baseline.json",
+  ]) assert.equal(isInstrumentPath(rel), true, `expected INSTRUMENT: ${rel}`);
+
+  // OFF the allowlist (drafts — regenerate freely)
+  for (const rel of [
+    "benchmarks/sculpture/generated/barn.json",
+    "benchmarks/sculpture/generated/barn/artifact.json",
+    "benchmarks/sculpture/generated/barn/base-artifact.json",
+    "benchmarks/sculpture/generated/barn/component-plan.json",
+    "benchmarks/sculpture/generated/barn/grammar-artifact.json",
+    "packs/drafts/rustic-rederived/draft.json",
+    "packs/README.md",
+    "benchmarks/sculpture/workshop/barn.json",
+    "benchmarks/sculpture/recognition/barn.program.json",
+    "benchmarks/sculpture/styled/cottage.json",
+    "benchmarks/sculpture/zone-map/barn.json",
+  ]) assert.equal(isInstrumentPath(rel), false, `expected DRAFT: ${rel}`);
+
+  // every allowlist entry carries a reason (the documented "one place")
+  for (const e of INSTRUMENT_ALLOWLIST) assert.ok(typeof e.reason === "string" && e.reason.length > 0);
+});
+
+test("G2 AC2 core: a TRACKED draft write is FREE (no flag) — the barn-regen bug fixed", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "pin-guard-draft-"));
+  try {
+    const rel = "benchmarks/sculpture/generated/barn/artifact.json";
+    const trackedSet = new Set([rel]); // committed, but a DRAFT (not on the allowlist)
+    const { mkdir } = await import("node:fs/promises");
+    await mkdir(join(dir, "benchmarks/sculpture/generated/barn"), { recursive: true });
+    await writeFile(join(dir, rel), "{\"v\":1}\n"); // the committed-bad draft on disk
+    // even though it is tracked, differing bytes write freely — no PinGuardError, no --rotate-pins
+    const w = await guardedWriteRecord({ root: dir, rel, content: "{\"v\":2}\n", trackedSet });
+    assert.equal(w.action, "write");
+    assert.equal(await readFile(join(dir, rel), "utf8"), "{\"v\":2}\n");
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test("G3 AC2: preflight of a tracked-draft run does not throw (returns empty ledger)", () => {
+  const out = preflightPins({
+    pins: [
+      { rel: "benchmarks/sculpture/generated/barn/artifact.json", tracked: true },
+      { rel: "benchmarks/sculpture/generated/barn/component-plan.json", tracked: true },
+      { rel: "benchmarks/sculpture/generated/barn.json", tracked: true },
+    ],
+    rotate: false,
+    intent: "generated:barn --skip-gate",
+  });
+  assert.deepEqual(out, { refused: [], rotating: [] });
+});
+
+test("G4 AC3: a TRACKED instrument write still REFUSES without the flag (guardedWriteRecord)", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "pin-guard-instr-"));
+  try {
+    const rel = "benchmarks/sculpture/multi-angle/cottage-styled.json";
+    const trackedSet = new Set([rel]);
+    // create the on-disk pin so `exists` is true (the verdict bytes)
+    const { mkdir } = await import("node:fs/promises");
+    await mkdir(join(dir, "benchmarks/sculpture/multi-angle"), { recursive: true });
+    await writeFile(join(dir, rel), "{\"verdict\":\"pass\"}\n");
+    await assert.rejects(
+      () => guardedWriteRecord({ root: dir, rel, content: "{\"verdict\":\"FAIL\"}\n", trackedSet }),
+      (e) => e instanceof PinGuardError && /multi-angle/.test(e.message) && e.message.includes(ROTATE_FLAG),
+    );
+    assert.equal(await readFile(join(dir, rel), "utf8"), "{\"verdict\":\"pass\"}\n"); // bytes survive
+    // with the flag, it rotates
+    const r = await guardedWriteRecord({ root: dir, rel, content: "{\"verdict\":\"FAIL\"}\n", rotate: true, trackedSet });
+    assert.equal(r.action, "write");
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test("G5 AC3: the frozen set refuses in preflight — verdict, pack, baseline, retired-pins", () => {
+  for (const rel of [
+    "benchmarks/sculpture/multi-angle/cottage-styled.json",
+    "packs/rustic.json",
+    "benchmarks/sculpture/pattern-book/proportion-baselines.json",
+    "benchmarks/sculpture/retired-pins.json",
+  ]) {
+    assert.throws(
+      () => preflightPins({ pins: [{ rel, tracked: true }], rotate: false, intent: `live ${rel}` }),
+      (e) => e instanceof PinGuardError && e.message.includes(rel) && e.message.includes(ROTATE_FLAG),
+      `expected ${rel} to refuse`,
+    );
+    // the flag turns the refusal into a rotation ledger (instrument contract: explicit rotation)
+    const out = preflightPins({ pins: [{ rel, tracked: true }], rotate: true });
+    assert.deepEqual(out.rotating, [rel]);
+  }
+});
+
+test("G6 decidePinWrite honors the `frozen` rename: false ⇒ write, true+differ ⇒ refuse", () => {
+  assert.equal(decidePinWrite({ frozen: false, exists: true, currentContent: "a", nextContent: "b" }).action, "write");
+  assert.equal(decidePinWrite({ frozen: true, exists: true, currentContent: "a", nextContent: "b" }).action, "refuse");
 });

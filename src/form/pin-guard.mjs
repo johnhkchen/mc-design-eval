@@ -8,8 +8,13 @@
 // THE RULE (docs/knowledge/pin-rotation-policy.md): a committed record changes only inside a
 // ticket that explicitly owns it, behind the explicit rotation flag. Mechanically:
 //
-//   - "committed pin" is LITERAL: the path is git-tracked (one cached `git ls-files`). New /
-//     untracked records write freely — first derivations are never blocked.
+//   - "frozen pin" = on the INSTRUMENT ALLOWLIST *and* git-tracked (E-36 / S-151: "frozen once
+//     MEASURED; draft until then"). A path freezes only if it is a measurement or an input-of-record
+//     to one (judge verdicts, ratified packs, committed baselines/milestones, the kit vocabulary,
+//     retired-pins) AND has been committed. DRAFT creation artifacts (generated/*, workshop/*
+//     pre-verdict, recognition/*, chain intermediates) are NOT pins and rewrite freely even when
+//     committed — being tracked no longer makes a draft infrastructure. New / untracked instrument
+//     records also write freely the first time — first derivations are never blocked.
 //   - byte-identical rewrites always pass: the determinism flows (zone:map regeneration,
 //     kit --offline, --repro double-runs) rewrite committed bytes on purpose.
 //   - everything else REFUSES, naming the pin, the reason, and the remedy. Refusal is the
@@ -32,6 +37,33 @@ import { join } from "node:path";
 
 export const ROTATE_FLAG = "--rotate-pins";
 export const POLICY_DOC = "docs/knowledge/pin-rotation-policy.md";
+
+/** THE INSTRUMENT ALLOWLIST (E-36 / S-151) — the one named, documented place that decides whether a
+ *  path is part of the frozen measurement. A path is a "pin" only if it matches one of these AND is
+ *  git-tracked (see guardedWriteRecord/preflightPins). Everything else is a DRAFT and rewrites
+ *  freely. The line is "measured or not", applied case by case: an entry added under the honesty
+ *  clause (E-36 line 124) because it is load-bearing for a committed measurement carries its reason.
+ *  Drafts are always subject-named (barn.json, artifact.json, component-plan.json) so the
+ *  baseline/milestone suffix match below is collision-free. */
+export const INSTRUMENT_ALLOWLIST = Object.freeze([
+  { reason: "judge verdict records — the frozen measurement (E-28/E-31)",
+    match: (rel) => rel.startsWith("benchmarks/sculpture/multi-angle/") },
+  { reason: "ratified packs of record (packs/drafts/* are structurally not packs)",
+    match: (rel) => rel.startsWith("packs/") && !rel.startsWith("packs/drafts/") && rel.endsWith(".json") },
+  { reason: "committed baseline / milestone measurements",
+    match: (rel) => /(?:^|\/)[^/]*-(?:baseline|baselines|milestone)\.(?:json|md)$/.test(rel) },
+  { reason: "the rotation registry",
+    match: (rel) => rel === "benchmarks/sculpture/retired-pins.json" },
+  { reason: "the ratified building-block kit — input-of-record to every committed verdict; " +
+            "load-bearing for reproducibility-by-replay (E-36 honesty clause, line 124)",
+    match: (rel) => rel.startsWith("benchmarks/sculpture/kit/") },
+]);
+
+/** Pure: is this repo-root-relative path part of the frozen instrument? (Membership only — the
+ *  freeze also requires git-tracked status; see guardedWriteRecord/preflightPins.) */
+export function isInstrumentPath(rel) {
+  return INSTRUMENT_ALLOWLIST.some((entry) => entry.match(rel));
+}
 
 /** Gate-record namespaces — the frozen judge's committed verdicts. A WORKSHOP-domain caller
  *  (E-31 Rule 1, T-126-01) may never write here: the refusal is structural and absolute —
@@ -59,10 +91,11 @@ export class PinGuardError extends Error {
   }
 }
 
-/** The decision core. `tracked` = path is committed (a pin); `rotate` = the explicit flag (or a
- *  named sanction). Returns { action: "write" | "skip-identical" | "refuse", reason }. */
-export function decidePinWrite({ tracked, exists, currentContent = null, nextContent, rotate = false }) {
-  if (!tracked) return { action: "write", reason: "unpinned (not git-tracked)" };
+/** The decision core. `frozen` = path is a committed instrument pin (on the allowlist AND tracked);
+ *  `rotate` = the explicit flag (or a named sanction). Returns { action: "write" | "skip-identical"
+ *  | "refuse", reason }. */
+export function decidePinWrite({ frozen, exists, currentContent = null, nextContent, rotate = false }) {
+  if (!frozen) return { action: "write", reason: "unpinned (draft — not a frozen instrument)" };
   if (exists && currentContent === nextContent) {
     return { action: "skip-identical", reason: "byte-identical rewrite of the committed pin" };
   }
@@ -97,13 +130,15 @@ export function preflightPins({ pins, rotate = false, intent = "live run", domai
       denied,
     );
   }
-  const committed = pins.filter((p) => p.tracked).map((p) => p.rel);
-  if (rotate || committed.length === 0) return { refused: [], rotating: rotate ? committed : [] };
+  // A pin is FROZEN only if it is on the instrument allowlist AND committed: tracked drafts
+  // (generated/*, workshop/* pre-verdict, recognition/*, chain intermediates) sail through (E-36).
+  const frozen = pins.filter((p) => p.tracked && isInstrumentPath(p.rel)).map((p) => p.rel);
+  if (rotate || frozen.length === 0) return { refused: [], rotating: rotate ? frozen : [] };
   throw new PinGuardError(
-    `pin-guard: REFUSED ${intent} — it would overwrite ${committed.length} committed pin${committed.length === 1 ? "" : "s"}:\n` +
-    committed.map((r) => `  - ${r}`).join("\n") +
+    `pin-guard: REFUSED ${intent} — it would overwrite ${frozen.length} committed pin${frozen.length === 1 ? "" : "s"}:\n` +
+    frozen.map((r) => `  - ${r}`).join("\n") +
     `\nCanonical records change only inside a ticket that owns them: re-run with ${ROTATE_FLAG} (see ${POLICY_DOC}).`,
-    committed.map((rel) => ({ rel, reason: "committed pin targeted by a live rebuild" })),
+    frozen.map((rel) => ({ rel, reason: "committed pin targeted by a live rebuild" })),
   );
 }
 
@@ -137,16 +172,17 @@ export async function guardedWriteRecord({ root, rel, content, rotate = false, s
     throw new PinGuardError(`pin-guard: REFUSED write — ${rel}: ${denial}`, [{ rel, reason: denial }]);
   }
   const set = trackedSet === undefined ? loadTrackedSet(root) : trackedSet;
-  const tracked = isTracked(set, rel);
+  // FROZEN = instrument allowlist ∧ committed (E-36 / S-151). A tracked draft is not frozen.
+  const frozen = isInstrumentPath(rel) && isTracked(set, rel);
   const abs = join(root, rel);
   const exists = existsSync(abs);
   const currentContent = exists ? await readFile(abs, "utf8") : null;
-  const d = decidePinWrite({ tracked, exists, currentContent, nextContent: content, rotate: Boolean(rotate) || Boolean(sanction) });
+  const d = decidePinWrite({ frozen, exists, currentContent, nextContent: content, rotate: Boolean(rotate) || Boolean(sanction) });
   if (d.action === "refuse") {
     throw new PinGuardError(refusalMessage({ rel, reason: d.reason }), [{ rel, reason: d.reason }]);
   }
   if (d.action === "skip-identical") return d;
-  if (tracked) console.error(`[pin-guard] ROTATING pin ${rel} (${sanction ?? `explicit ${ROTATE_FLAG}`})`);
+  if (frozen) console.error(`[pin-guard] ROTATING pin ${rel} (${sanction ?? `explicit ${ROTATE_FLAG}`})`);
   await writeFile(abs, content);
   return d;
 }
