@@ -43,16 +43,18 @@ export function layerCounts(occ) {
  * @param {{bands:{name:string, yRange:[number,number], dominantBlock:string,
  *                 secondaries:{block:string}[]}[],
  *          roof:{dominantBlock:string, secondaries:{block:string}[]},
- *          roofKeys:Set<string>, upperTop:number}} args
+ *          roofKeys:Set<string>, upperTop:number, gableWallKeys?:Set<string>}} args
  *   `bands`/`roof` from band-profile's extractConceptZoneMap; `roofKeys`/`upperTop` from structuralZones.
+ *   `gableWallKeys` (T-150-01, optional) = generated gable-end-wall cells classified wall, not roof.
  * @returns {{zoneOf:(voxel:number[])=>string,
  *            zones:Record<string,{dominant:string, preserve:string[], splat:string[]}>}}
  */
-export function zonesFromBands({ bands, roof, roofKeys, upperTop }) {
+export function zonesFromBands({ bands, roof, roofKeys, upperTop, gableWallKeys = new Set() }) {
   if (!Array.isArray(bands) || bands.length === 0) throw new Error("zonesFromBands: bands must be a non-empty array");
   if (!roof || typeof roof.dominantBlock !== "string") throw new Error("zonesFromBands: roof.dominantBlock required");
   if (!(roofKeys instanceof Set)) throw new Error("zonesFromBands: roofKeys must be a Set");
   if (!Number.isFinite(upperTop)) throw new Error("zonesFromBands: numeric upperTop required");
+  if (!(gableWallKeys instanceof Set)) throw new Error("zonesFromBands: gableWallKeys must be a Set");
 
   const sorted = [...bands].sort((a, b) => a.yRange[0] - b.yRange[0]);
   const policyOf = (dominant, secondaries) => {
@@ -64,13 +66,17 @@ export function zonesFromBands({ bands, roof, roofKeys, upperTop }) {
   for (const b of sorted) zones[b.name] = policyOf(b.dominantBlock, b.secondaries);
   zones.roof = policyOf(roof.dominantBlock, roof.secondaries);
 
+  // T-150-01: the gable-end WALLS (vertical triangular faces) sit above the eave line but belong to
+  // the wall envelope, not the roof covering — classify them by their y-band, BEFORE the roof rule.
+  const bandFor = (y) => {
+    for (const b of sorted) if (y >= b.yRange[0] && y <= b.yRange[1]) return b.name;
+    return y < sorted[0].yRange[0] ? sorted[0].name : sorted[sorted.length - 1].name; // clamp: total
+  };
   const zoneOf = (voxel) => {
     const [x, y, z] = voxel;
+    if (gableWallKeys.has(`${x},${y},${z}`)) return bandFor(y); // wall envelope, not roof
     if (y >= upperTop || roofKeys.has(`${x},${y},${z}`)) return "roof"; // structuralZones' rule, verbatim
-    for (const b of sorted) {
-      if (y >= b.yRange[0] && y <= b.yRange[1]) return b.name;
-    }
-    return y < sorted[0].yRange[0] ? sorted[0].name : sorted[sorted.length - 1].name; // clamp: total
+    return bandFor(y);
   };
   return { zoneOf, zones };
 }

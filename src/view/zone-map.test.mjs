@@ -52,6 +52,18 @@ test("zonesFromBands: zoneOf is total — out-of-band y clamps to the nearest en
   assert.equal(zoneOf([0, 10, 0]), "band1"); // wall gap between bands' top and the eave
 });
 
+test("zonesFromBands: gable-end-wall keys classify wall (band) above the eave, not roof (T-150-01)", () => {
+  const gableWallKeys = new Set(["3,9,1", "3,10,1"]); // above upperTop=8, the gable triangle face
+  const { zoneOf } = zonesFromBands({ bands: BANDS, roof: ROOF, roofKeys: new Set(), upperTop: 8, gableWallKeys });
+  assert.equal(zoneOf([3, 9, 1]), "band1", "gable-wall key above the eave is wall, not roof");
+  assert.equal(zoneOf([3, 10, 1]), "band1");
+  // a non-gable cell at the same y is still roof (the legacy contract is untouched)
+  assert.equal(zoneOf([5, 9, 1]), "roof");
+  // absent gableWallKeys ⇒ identical to legacy
+  const { zoneOf: legacy } = zonesFromBands({ bands: BANDS, roof: ROOF, roofKeys: new Set(), upperTop: 8 });
+  assert.equal(legacy([3, 9, 1]), "roof");
+});
+
 test("zonesFromBands: named-space policies — preserve = secondaries, splat = preserve − dominant", () => {
   const { zones } = zonesFromBands({ bands: BANDS, roof: ROOF, roofKeys: new Set(), upperTop: 8 });
   assert.deepEqual(zones.band0, { dominant: "stone_bricks", preserve: ["cobblestone"], splat: ["cobblestone"] });

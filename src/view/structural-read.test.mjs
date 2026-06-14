@@ -167,6 +167,18 @@ test("structuralZones: base / upper / roof from floor lines + top-exposed shell"
   assert.equal(z.zoneOf([0, 7, 0]), "roof");
 });
 
+test("structuralZones: gableWallKeys classify wall above the eave, not roof (T-150-01)", () => {
+  const cells = [];
+  for (let x = 0; x < 3; x++) for (let y = 0; y < 10; y++) for (let z = 0; z < 3; z++) cells.push({ pos: [x, y, z], block: "minecraft:stone_bricks" });
+  const occ = occupancyFromCells(cells);
+  const key = "0,9,0";
+  const baseline = structuralZones(occ, { storeyDivide: 4, upperTop: 8 });
+  assert.equal(baseline.zoneOf([0, 9, 0]), "roof", "above upperTop ⇒ roof by default");
+  const withGable = structuralZones(occ, { storeyDivide: 4, upperTop: 8, gableWallKeys: new Set([key]) });
+  assert.equal(withGable.zoneOf([0, 9, 0]), "upper", "a gable-wall key above the eave is wall (upper)");
+  assert.equal(withGable.zoneOf([1, 9, 1]), "roof", "a non-gable cell at the same y stays roof");
+});
+
 test("structuralZones: storeyDivide falls back to baseHeight when <2 floor lines", () => {
   // A solid 4-cube has a floor line only where fill is high; force the fallback via opts.
   const cells = [];

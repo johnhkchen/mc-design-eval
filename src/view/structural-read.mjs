@@ -316,9 +316,14 @@ export function structuralZones(occ, opts = {}) {
   // immune to the material collapse (it's a floor-slab geometry signal), unlike the dominant-block bands.
   const upperTop = opts.upperTop ??
     (floorLines.length >= 3 ? floorLines[floorLines.length - 1] : storeyDivide + (opts.storeyHeight ?? 7));
+  // T-150-01: gable-end walls (vertical triangular faces) sit above the eave but are wall envelope,
+  // not roof covering — classify them by storey BEFORE the roof rule. Default empty ⇒ legacy.
+  const gableWallKeys = opts.gableWallKeys instanceof Set ? opts.gableWallKeys : new Set();
   const zoneOf = (voxel) => {
     const [x, y, z] = voxel;
-    if (y >= upperTop || roofKeys.has(`${x},${y},${z}`)) return "roof";
+    const key = `${x},${y},${z}`;
+    if (gableWallKeys.has(key)) return y >= storeyDivide ? "upper" : "base";
+    if (y >= upperTop || roofKeys.has(key)) return "roof";
     return y >= storeyDivide ? "upper" : "base";
   };
   return { zoneOf, storeyDivide, upperTop, roofKeys, floorLines };
