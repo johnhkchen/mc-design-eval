@@ -2978,3 +2978,33 @@ live relieved chain + judge under `--ticket T-149-01 --rotate-pins`: the relieve
 (`multi-angle/<subject>-patternbook.json`), and the composed sheets beside concepts in `pr/assets/`.
 The relief-aware verdict becomes a real exit-beside arithmetic at that point; until then it is wired,
 calibrated (`relief-calibration.json`), and inert by construction.
+
+### Band0 reject root cause: the cottage build under-supplies stone, the census is faithful (T-149-02) · 2026-06-14
+
+T-143-02 finding 4 left the cottage coverage-rejected on band0 (`stone_bricks` ~40% own, 1135/1920
+"missing") and flagged it as the dressing/geometry coupling — "the dressing must learn to re-derive
+against the geometry it now moves." T-149-02 diagnosed it deterministically (the gate's exported
+`deriveZones` on the committed build, reproducing the committed own-fractions **exactly**) before
+touching anything, as the ticket demanded. **Verdict: it is a real build-vs-concept divergence, not a
+census/instrument bug.** band0's gate-zone is **y0–12** (concept stone, 0.919 share — and the
+pre-wall-raise `zone-map/cottage.json` agrees: a stable ~50/50 split), but the build put `stone_bricks`
+only at y0–4 and `white_terracotta` (band1's *correct* dominant) at y5–19. So 8 of band0's rows read
+foreign → ~40% own → coverage short-circuits the judge (T-088). The own-vocabulary metric (`metric:"own"`)
+is correct here — the 60% foreign is genuine band1 material, the **opposite** of the church literal-name
+case (`church-band0-is-material-assignment`), where a stone-family block was wrongly excluded. The
+wall-raise (E-34's landed `storeyHeight:5`) grew the white upper storey to 3× the stone ground storey;
+the gate is *correctly* flagging that the build's lower-half wall is white where the concept wants stone.
+
+**The deterministic-fix trap, measured.** The prescribed fix (a band-settle supplying op) is *not*
+monotone-clean as a global pass: barn band0 = 1.000 (true no-op, byte-identical ✓) but saltcrag = 0.995
+(its known 5/3337 residue cells) — and saltcrag's coverage already **passes**, so perturbing its bytes
+violates "every previously-passing coverage re-derives unchanged." Conditioning the settle on the gate
+threshold would couple the build to the judge (E-31 Rule 1 forbidden). And it cannot be a post-hoc
+replay: settling the *existing* cottage ledger yields a build the loop never critiqued, and
+`offlineAssert` byte-compares the replay against the committed artifact → the chain must be **regenerated
+fresh** (the loop critiques the corrected build, records consistent conformance). That fresh run is the
+relieved-build run itself — shim + GL. **The faithful fix and its validation are the same live run; they
+are not a deterministic edit.** The lesson generalizes E-34 finding 4: a coverage reject on a moved
+geometry is answered by re-running the dress at the corrected band boundary, not by tuning the gate —
+and the re-dress is only legitimate inside a fresh, self-consistent chain, never bolted onto a committed
+ledger. T-149-02 named the residual with counts and scoped the fix to that run (GL absent in-session).
