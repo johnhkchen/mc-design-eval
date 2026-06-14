@@ -111,7 +111,10 @@ export const GATE_SUBJECTS = {
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 const HERE = join(ROOT, "benchmarks/sculpture");
-const OUT_DIR = join(HERE, "multi-angle");
+// T-155-01 (E-37): gate VERDICTS are frozen measurements — they live under the top-level
+// measurements/ home (location encodes status). The fixtures subtree stays a DRAFT under
+// benchmarks/sculpture/multi-angle/fixtures/ (test scaffolding, read via join(HERE, def.*)).
+const OUT_DIR = join(ROOT, "measurements/multi-angle");
 const FRAMES_DIR = join(ROOT, "pr/assets/frames");
 const RENDER_CONTRACT = Object.freeze({ width: 512, height: 512, elevationDeg: 30 });
 
@@ -299,7 +302,7 @@ async function main() {
   // sanctioned completion of a committed record; --offline writes nothing).
   if (!offline) {
     const trackedSet = loadTrackedSet(ROOT);
-    const verdictPins = [`benchmarks/sculpture/multi-angle/${slug}.json`, `benchmarks/sculpture/multi-angle/${slug}.md`];
+    const verdictPins = [`measurements/multi-angle/${slug}.json`, `measurements/multi-angle/${slug}.md`];
     preflightPins({
       pins: verdictPins.map((rel) => ({ rel, tracked: isTracked(trackedSet, rel) })),
       rotate, intent: `live multi-angle gate (${slug}) — re-judging re-rolls committed verdicts (E-28 Rule 4)`,
@@ -629,8 +632,8 @@ async function main() {
     sheet: sheetFrame.replace(ROOT, ""),
     labeled,
   };
-  await guardedWriteRecord({ root: ROOT, rel: `benchmarks/sculpture/multi-angle/${slug}.json`, content: JSON.stringify(record, null, 2) + "\n", rotate });
-  await guardedWriteRecord({ root: ROOT, rel: `benchmarks/sculpture/multi-angle/${slug}.md`, content: recordMd(record), rotate });
+  await guardedWriteRecord({ root: ROOT, rel: `measurements/multi-angle/${slug}.json`, content: JSON.stringify(record, null, 2) + "\n", rotate });
+  await guardedWriteRecord({ root: ROOT, rel: `measurements/multi-angle/${slug}.md`, content: recordMd(record), rotate });
 
   const outcome = overall.decided ? (overall.passed ? "PASS" : "FAIL") : `REFUSAL (${overall.refusal})`;
   console.error(`\n[${slug}] kit-aware verdict: ${outcome} — resemblance ` +
@@ -771,8 +774,8 @@ async function rejudgeMain({ def, label, slug, recPath, sheetFrame }) {
   // T-119-01: completing a committed record in place is the one T-114-sanctioned write — it fills
   // unparsed verdicts only (this mode's own artifact-pin and parsed-view refusals enforce that).
   const sanction = "rejudge (T-114 reply completion of a committed record)";
-  await guardedWriteRecord({ root: ROOT, rel: `benchmarks/sculpture/multi-angle/${slug}.json`, content: JSON.stringify(record, null, 2) + "\n", sanction });
-  await guardedWriteRecord({ root: ROOT, rel: `benchmarks/sculpture/multi-angle/${slug}.md`, content: recordMd(record), sanction });
+  await guardedWriteRecord({ root: ROOT, rel: `measurements/multi-angle/${slug}.json`, content: JSON.stringify(record, null, 2) + "\n", sanction });
+  await guardedWriteRecord({ root: ROOT, rel: `measurements/multi-angle/${slug}.md`, content: recordMd(record), sanction });
 
   const outcome = overall.decided ? (overall.passed ? "PASS" : "FAIL") : `REFUSAL (${overall.refusal})`;
   console.error(`\n[${slug}] re-judged kit-aware verdict: ${outcome} — resemblance ` +

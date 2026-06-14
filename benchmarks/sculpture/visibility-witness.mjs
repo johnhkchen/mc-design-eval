@@ -40,7 +40,7 @@ export const VISIBILITY_WITNESS_SCHEMA = "visibility-witness/v1";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 const HERE = join(ROOT, "benchmarks/sculpture");
-const REC_DIR = join(HERE, "multi-angle");
+const REC_DIR = join(ROOT, "measurements/multi-angle");
 const OUT_REL = "benchmarks/sculpture/visibility";
 
 const sha256 = (buf) => createHash("sha256").update(buf).digest("hex");
@@ -80,7 +80,7 @@ async function generalizationGrep() {
 async function derive(subject, label) {
   const def = GATE_SUBJECTS[subject];
   if (!def) throw new Error(`unknown subject "${subject}" — the registry has: ${Object.keys(GATE_SUBJECTS).join(", ")}`);
-  const recRel = `benchmarks/sculpture/multi-angle/${subject}-${label}.json`;
+  const recRel = `measurements/multi-angle/${subject}-${label}.json`;
   const recPath = join(ROOT, recRel);
   if (!existsSync(recPath)) throw new Error(`no committed gate record at ${recRel} — the witness re-censuses committed records only`);
   const recText = await readFile(recPath, "utf8");

@@ -27,8 +27,8 @@ import { ROTATE_FLAG, guardedWriteRecord } from "../../src/form/pin-guard.mjs";
 export const BUDGET_CALIBRATION_SCHEMA = "budget-calibration/v1";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
-const REC_DIR = join(ROOT, "benchmarks/sculpture/multi-angle");
-const OUT_REL = "benchmarks/sculpture/multi-angle/budget-calibration";
+const REC_DIR = join(ROOT, "measurements/multi-angle");
+const OUT_REL = "measurements/multi-angle/budget-calibration";
 
 // The binding anchors (AC2): expected v2 verdict per record (legacy is reported, never asserted).
 const ANCHORS = {

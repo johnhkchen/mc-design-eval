@@ -179,8 +179,11 @@ async function main() {
   const trackedSet = loadTrackedSet(ROOT);
   const livePins = [
     `component-skin/${key}.json`, `component-skin/${key}.md`, milestoneRecRel,
-    `multi-angle/${key}-${styled ? "styled" : "challenge"}.json`,
-  ].map(sculptureRel);
+  ].map(sculptureRel).concat([
+    // the gate verdict is a frozen measurement under the top-level measurements/ home (T-155-01,
+    // E-37: location encodes status) — already root-relative, NOT under benchmarks/sculpture/.
+    `measurements/multi-angle/${key}-${styled ? "styled" : "challenge"}.json`,
+  ]);
   preflightPins({
     pins: livePins.map((rel) => ({ rel, tracked: isTracked(trackedSet, rel) })),
     rotate, intent: `reskin:${key} live chain (re-runs the chain AND the judge; --distill-only rebuilds judge-free)`,

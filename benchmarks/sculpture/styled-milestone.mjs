@@ -218,7 +218,7 @@ export function distillGate(gateRec, key, gateCode, label = GATE_LABEL) {
       verdict: v.verdict?.verdict ?? (v.unparsed ? "unparsed" : v.reason === "coverage" ? "judge-not-called" : null),
       gaps: v.verdict?.gaps ?? [],
     })),
-    record: `benchmarks/sculpture/multi-angle/${key}-${label}.json`,
+    record: `measurements/multi-angle/${key}-${label}.json`,
     sheet: gateRec.sheet,
   };
 }

@@ -30,7 +30,8 @@ const JUDGE_SEAM_TOKENS = Object.freeze([
   "judgeThroughPolicy",      // the metered judge ask
   "aggregateMultiAngle",     // the verdict aggregation rule
   "parseMultiAngleVerdict",  // the judge's verdict parser
-  "benchmarks/sculpture/multi-angle/", // the gate-record namespace (write target)
+  "measurements/multi-angle/", // the gate-record namespace (write target; T-155-01 frozen home)
+  "benchmarks/sculpture/multi-angle/", // the pre-T-155-01 gate-record namespace (legacy write target)
 ]);
 
 const workshopFiles = () => [

@@ -41,8 +41,8 @@ import { ROTATE_FLAG, guardedWriteRecord } from "../../src/form/pin-guard.mjs";
 export const RELIEF_CALIBRATION_SCHEMA = "relief-calibration/v1";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
-const REC_DIR = join(ROOT, "benchmarks/sculpture/multi-angle");
-const OUT_REL = "benchmarks/sculpture/multi-angle/relief-calibration";
+const REC_DIR = join(ROOT, "measurements/multi-angle");
+const OUT_REL = "measurements/multi-angle/relief-calibration";
 
 // The calibration subject (the T-143-01 first-composite-PASS barn) and its recognised grammar. The
 // build + grammar + the committed verdict are all committed data; this is the only place a subject is
@@ -129,7 +129,7 @@ async function main() {
   }
   const demand = reliefDemand(grammar, pack);
   const occ = artifactOccupancy(await rd(SUBJECT.artifact));
-  const committedGate = await rd(join("benchmarks/sculpture/multi-angle", SUBJECT.committedGate));
+  const committedGate = await rd(join("measurements/multi-angle", SUBJECT.committedGate));
   const kitAware = committedGate.overall; // the kit-aware-gate/v1 verdict, reported beside
 
   // ANTI-ANCHOR — the flat barn must FAIL the relief lens.
@@ -157,7 +157,7 @@ async function main() {
   let swept = 0;
   let drifted = 0;
   for (const f of files.sort()) {
-    const rec = await rd(join("benchmarks/sculpture/multi-angle", f));
+    const rec = await rd(join("measurements/multi-angle", f));
     if (rec.schema !== MULTI_ANGLE_GATE_SCHEMA) continue;
     swept += 1;
     // a committed record carries no facade-bearing program; the lens cannot have run.

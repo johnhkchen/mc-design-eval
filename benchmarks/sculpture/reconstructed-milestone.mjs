@@ -222,7 +222,11 @@ async function main() {
   const runner = styled ? "styled-milestone.mjs" : "challenge-milestone.mjs";
   const milestoneRecRel = styled ? `styled/${key}.json` : `challenge/${key}.json`;
   const milestonePrefix = styled ? `styled/${key}` : `challenge/${key}`;
-  const gateRecRel = `multi-angle/${key}-${styled ? "styled" : "challenge"}.json`;
+  // T-155-01 (E-37): the gate verdict is a frozen measurement under the top-level measurements/ home
+  // (root-relative, NOT under benchmarks/sculpture/ — so it is read via join(ROOT, …), not the HERE helpers).
+  const gateRecRel = `measurements/multi-angle/${key}-${styled ? "styled" : "challenge"}.json`;
+  const hasGate = () => existsSync(join(ROOT, gateRecRel));
+  const readGate = async () => JSON.parse(await readFile(join(ROOT, gateRecRel), "utf8"));
   const baselineRel = `reconstructed/${key}/e26-baseline.json`;
 
   if (offline) {
@@ -242,7 +246,7 @@ async function main() {
   }
 
   // --- 1. pre-capture the frozen instrument -------------------------------------------------------
-  const preGate = has(gateRecRel) ? await readJson(gateRecRel) : null;
+  const preGate = hasGate() ? await readGate() : null;
 
   // --- 2. component layer (shared verification) ---------------------------------------------------
   const layer = await componentLayer(key, def);
@@ -269,7 +273,7 @@ async function main() {
   const failed = mile.status === "pipeline-failed";
 
   // --- 4. instrument confirmation ------------------------------------------------------------------
-  const freshGate = has(gateRecRel) ? await readJson(gateRecRel) : null;
+  const freshGate = hasGate() ? await readGate() : null;
   const gateIsFresh = freshGate && !failed; // a refused chain never reached the gate; an old record may linger
   const instrument = distillOnly && prevRec?.instrument
     ? { ...prevRec.instrument, note: "carried from the live-run record (--distill-only; the live run captured the real pre/post contract compare)" }
@@ -324,7 +328,7 @@ async function main() {
       aggregate: freshGate.aggregate ?? null,
       kitPresence: freshGate.kitPresence ?? null,
       overall: freshGate.overall ?? null,
-      record: `benchmarks/sculpture/${gateRecRel}`,
+      record: gateRecRel,
     } : null,
     metrics,
     sheets: { before: frames.before, after: frames.after, gate: gateIsFresh ? freshGate.sheet ?? null : null },

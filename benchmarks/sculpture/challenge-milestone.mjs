@@ -531,7 +531,7 @@ async function main() {
       verdict: v.verdict?.verdict ?? (v.unparsed ? "unparsed" : v.reason === "coverage" ? "judge-not-called" : null),
       gaps: v.verdict?.gaps ?? [],
     })),
-    record: `benchmarks/sculpture/multi-angle/${def.key}-${GATE_LABEL}.json`,
+    record: `measurements/multi-angle/${def.key}-${GATE_LABEL}.json`,
     sheet: gateRec.sheet,
   } : { outcome: "MISSING-RECORD", exitCode: gateCode };
 
