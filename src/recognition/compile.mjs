@@ -20,6 +20,7 @@
 
 import { WORKSHOP_PROGRAM_SCHEMA } from "../workshop/program.mjs";
 import { ROOF_LAYOUTS, headRows, openingLanes } from "./program.mjs";
+import { getBrush } from "../pack/idiom-registry.mjs";
 
 const fail = (msg) => { throw new Error(`compileProgram: ${msg}`); };
 
@@ -119,6 +120,7 @@ export function compileProgram(program, pack) {
   const elements = [];
   const extents = []; // {block, yLo, yHi} — feeds the band declarations
   const openingDecls = [];
+  const articulation = []; // T-147-01: the facade grammar → ordered brush invocations (empty w/o facade)
   const note = (block, yLo, yHi) => extents.push({ block, yLo, yHi });
 
   let groundTopOfPrimary = null;
@@ -201,14 +203,20 @@ export function compileProgram(program, pack) {
         const axis = wall.endsWith("x") ? "z" : "x"; // the axis the edge RUNS ALONG
         const at = wall === "+x" ? x1 : wall === "-x" ? rect.x0 : wall === "+z" ? z1 : rect.z0;
         const range = axis === "x" ? [rect.x0, x1] : [rect.z0, z1];
+        // T-147-01: the recognized facade grammar refines the lip depth per wall (jettyDepth);
+        // absent ⇒ no overhang key ⇒ jettyOverhang's default holds ⇒ byte-identical to legacy.
+        const jettyDepth = m.facade?.faces?.find((f) => f.wall === wall)?.jettyDepth ?? null;
         elements.push({
           id: `${m.id}-jetty-${wall}`, kind: "idiom", idiom: "jetty",
-          spec: { edge: { axis, at, side: wall[0], range }, y: sh, beamBlock, joistBlock },
+          spec: { edge: { axis, at, side: wall[0], range }, y: sh, beamBlock, joistBlock, ...(jettyDepth ? { overhang: jettyDepth } : {}) },
         });
       }
       note(beamBlock, sh, sh);
       if (joistBlock) note(joistBlock, sh - 1, sh - 1);
     }
+
+    // --- facade articulation: the recognized grammar → ordered relief-brush invocations ---
+    articulation.push(...facadeArticulationPlan(m, pack));
 
     // --- roof: footprint widened one cell past each EAVE edge (the eave stays the widest layer) ---
     const layout = ROOF_LAYOUTS[m.roof.idiom];
@@ -348,5 +356,75 @@ export function compileProgram(program, pack) {
     declarations: { bands, symmetry: null, openings: openingDecls },
     elements,
   };
-  return { workshopProgram };
+  return { workshopProgram, articulation };
+}
+
+/**
+ * FACADE GRAMMAR → ARTICULATION PLAN (T-147-01, story S-147, epic E-35). The recognized per-mass
+ * facade record (T-145-01, recorded-only until now) becomes an ordered list of relief-brush
+ * invocations — `{massId, brush, params}` with EVERY role already resolved to a block via
+ * roleBlock (the program-path vocabulary authority; AC#3, no per-building constants). Pure data
+ * (no functions) so the plan is replay-stable. A mass without `facade` contributes nothing, so a
+ * facade-less program compiles byte-identically (AC#4). The brushes themselves are the four E-35
+ * passes (pilaster / quoin / infill-panel / eave-overhang); a belt course is an eave-overhang at an
+ * explicit row.
+ * @param {object} m  a building-program mass (may carry `facade`)
+ * @param {object} pack  the style pack (palette + idioms)
+ * @returns {{massId:string, brush:string, params:object}[]}
+ */
+function facadeArticulationPlan(m, pack) {
+  const facade = m.facade;
+  if (!facade || !Array.isArray(facade.faces) || !facade.faces.length) return [];
+  const eaveY = m.storeys * m.storeyHeight;
+  const wallSpan = (wall) => (wall === "+z" || wall === "-z" ? m.rect.w : m.rect.d);
+  const rhythmOf = (face, wall) => {
+    if (Number.isInteger(face.rhythm?.period)) return { period: face.rhythm.period, phase: face.rhythm.phase ?? 0 };
+    const count = Math.max(1, face.rhythm?.count ?? 1); // count → period over the wall extent (rhythm, not fitting)
+    return { period: Math.max(1, Math.floor(wallSpan(wall) / count)), phase: 0 };
+  };
+  const plan = [];
+  // whole-mass eave overhang: a soffit course proud of the top wall row. Its block is the roof's
+  // own trim/field (a deterministic mapping, NOT a facade material decision — facade records depth).
+  if (Number.isInteger(facade.eaveOverhang) && facade.eaveOverhang > 0) {
+    const soffit = m.roof.trimRole ? roleBlock(pack, m.roof.trimRole) : roleBlock(pack, m.roof.fieldRole);
+    plan.push({ massId: m.id, brush: "eave-overhang", params: { material: soffit, faces: facade.faces.map((f) => f.wall), depth: facade.eaveOverhang, eaveRow: eaveY - 1 } });
+  }
+  for (const face of facade.faces) {
+    const wall = face.wall;
+    const member = roleBlock(pack, face.memberRole);
+    const rhythm = rhythmOf(face, wall);
+    if (face.fields) {
+      plan.push({ massId: m.id, brush: "infill-panel", params: { memberMaterial: member, fieldMaterial: roleBlock(pack, face.fields.role), faces: [wall], rhythm } });
+    } else {
+      plan.push({ massId: m.id, brush: "pilaster", params: { material: member, faces: [wall], rhythm } });
+    }
+    if (face.quoins) {
+      plan.push({ massId: m.id, brush: "quoin", params: { material: roleBlock(pack, face.quoins.role), faces: [wall], run: face.quoins.run } });
+    }
+    for (const cl of face.courseLines ?? []) {
+      plan.push({ massId: m.id, brush: "eave-overhang", params: { material: roleBlock(pack, cl.role), faces: [wall], depth: 1, eaveRow: cl.y } });
+    }
+  }
+  return plan;
+}
+
+/**
+ * APPLY THE ARTICULATION PLAN over a realized occupancy — resolve each brush through the registry
+ * DOOR (getBrush, never a direct technique import) and run it; accumulate placements. The passes
+ * are independent (each on its own face/columns), so all run over the same base occupancy. Returns
+ * the merged placements + a per-brush report. PURE (the brushes are pure).
+ * @param {import("../view/occupancy.mjs").Occupancy} occ
+ * @param {{brush:string, params:object}[]} plan
+ */
+export function applyArticulation(occ, plan) {
+  const placements = [];
+  const perBrush = [];
+  for (const { brush, params } of plan ?? []) {
+    const entry = getBrush(brush);
+    if (entry.kind !== "pass" || typeof entry.fn !== "function") fail(`articulation brush "${brush}" is not a pass`);
+    const r = entry.fn(occ, params);
+    placements.push(...r.placements);
+    perBrush.push({ brush, placements: r.placements.length, report: r.report });
+  }
+  return { placements, report: { brushes: (plan ?? []).length, placements: placements.length, perBrush } };
 }

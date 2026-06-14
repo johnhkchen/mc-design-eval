@@ -101,6 +101,55 @@ test("compile is deterministic and self-contained (program + pack only)", () => 
   assert.equal(JSON.stringify(a), JSON.stringify(b));
 });
 
+// --- T-147-01: facade grammar → articulation plan (+ the byte-identity invariant) ------------
+
+/** Add a valid rustic-vocab facade to the +z face of the fixture mass. */
+const withFacade = (p) => {
+  p.masses[0].facade = {
+    eaveOverhang: 1,
+    faces: [
+      {
+        wall: "+z",
+        rhythm: { period: 3, phase: 0 },
+        memberRole: "frame.timber",
+        fields: { role: "wall.infill.upper" },
+        quoins: { role: "wall.dressing", run: 2 },
+        jettyDepth: 2,
+        evidence: { source: "concept", layoutOnly: true },
+      },
+    ],
+  };
+};
+
+test("a facade-less program compiles with an EMPTY articulation plan and no jetty overhang (byte-identity)", () => {
+  const { workshopProgram: wp, articulation } = compileProgram(validated(makeProgram()), pack);
+  assert.deepEqual(articulation, [], "no facade ⇒ no articulation");
+  const jetty = wp.elements.find((e) => e.id === "main-jetty-+z");
+  assert.ok(jetty, "the jetty still builds from m.jetty");
+  assert.equal(jetty.spec.overhang, undefined, "no overhang key ⇒ jettyOverhang default ⇒ legacy bytes");
+});
+
+test("a facade program compiles the recognized grammar into a resolved-block brush plan", () => {
+  const { workshopProgram: wp, articulation } = compileProgram(validated(makeProgram(withFacade)), pack);
+  // jetty depth refined from the grammar
+  const jetty = wp.elements.find((e) => e.id === "main-jetty-+z");
+  assert.equal(jetty.spec.overhang, 2, "jettyDepth flows into the jetty element");
+  // the plan: eave-overhang (whole mass) + infill-panel (fields present) + quoin
+  const brushes = articulation.map((a) => a.brush);
+  assert.deepEqual(brushes, ["eave-overhang", "infill-panel", "quoin"]);
+  const byBrush = Object.fromEntries(articulation.map((a) => [a.brush, a.params]));
+  // roles resolved to blocks via roleBlock (the program-path vocabulary authority)
+  assert.equal(byBrush["infill-panel"].memberMaterial, "dark_oak_log");
+  assert.equal(byBrush["infill-panel"].fieldMaterial, "white_terracotta");
+  assert.deepEqual(byBrush["infill-panel"].rhythm, { period: 3, phase: 0 });
+  assert.equal(byBrush["quoin"].material, "stone_bricks");
+  assert.equal(byBrush["quoin"].run, 2);
+  assert.equal(byBrush["eave-overhang"].material, "dark_oak_planks"); // roof trim, not a facade material
+  assert.equal(byBrush["eave-overhang"].depth, 1);
+  // no functions in the plan — replay-stable plain data
+  assert.equal(JSON.stringify(articulation), JSON.stringify(JSON.parse(JSON.stringify(articulation))));
+});
+
 test("compiled shape: workshop contract, banded shell, true-hole openings incl. head rows", () => {
   const { workshopProgram: wp } = compileProgram(validated(makeProgram()), pack);
   assert.equal(wp.schema, "workshop-program/v1");
