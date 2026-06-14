@@ -13,6 +13,7 @@
 
 import { compileProgram } from "../recognition/compile.mjs";
 import { assertWorkshopProgram, realizeProgram, boxShell } from "./program.mjs";
+import { realizeWithArticulation } from "./articulate.mjs";
 import { getIdiom } from "../pack/idiom-registry.mjs";
 import { assertArtifact } from "../artifact.mjs";
 import { artifactOccupancy } from "../view/occupancy.mjs";
@@ -100,16 +101,20 @@ const jsonOf = (x) => JSON.stringify(x, null, 2) + "\n";
  *            cells: object[], elements: object[], conformance: object}}
  */
 export function seedWorkshopProgram({ program, pack, budget = PATTERN_BOOK_BUDGET }) {
-  const { workshopProgram: compiled } = compileProgram(program, pack);
+  const { workshopProgram: compiled, articulation } = compileProgram(program, pack);
   const workshopProgram = assertWorkshopProgram({ ...compiled, budget: { ...budget } });
   const serialized = jsonOf(workshopProgram);
-  const { artifact, cells, elements } = realizeProgram(workshopProgram);
+  // T-149-01 (E-35): the recognized facade grammar's articulation plan is constructed onto the skin
+  // here, so the build the workshop renders + the gate censuses carries the relief. A facade-less
+  // program compiles to an empty plan ⇒ byte-identical to a bare realize (cottage/barn/fixture today).
+  const { artifact, cells, elements, articulation: articulationReport } =
+    realizeWithArticulation(workshopProgram, articulation);
   assertArtifact(artifact);
   const conformance = runConformance(
     { occ: artifactOccupancy(artifact), declarations: workshopProgram.declarations },
     pack,
   );
-  return { workshopProgram, serialized, artifact, cells, elements, conformance };
+  return { workshopProgram, serialized, artifact, cells, elements, conformance, articulation: articulationReport ?? null };
 }
 
 /**
