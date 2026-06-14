@@ -1,0 +1,49 @@
+{
+  "schema": "build-chain/v1",
+  "ticket": "T-154-01",
+  "subject": "barn",
+  "runKey": "barn",
+  "pack": "rustic",
+  "pipelineOrder": "recognize (committed) → generate-seed (generate-first realizer, --skip-gate) → seed-artifact → workshop (artifact-base, paint+relief) → final beside concept; gate is separate",
+  "stages": {
+    "recognition": {
+      "path": "benchmarks/sculpture/recognition/barn.program.json",
+      "sha256": "eb94efa934d59d1db392bc91774e34946d48c9e96a207acdfc9862bca1ad0728"
+    },
+    "generateSeed": {
+      "generatedFinal": {
+        "path": "benchmarks/sculpture/generated/barn/artifact.json",
+        "sha256": "9d068374f2ccd8e774b32df97f81e4c91b9dce04b9949f7bfd7c40bff8481f1f"
+      },
+      "seedArtifact": {
+        "path": "builds/barn/seed-artifact.json",
+        "sha256": "9d068374f2ccd8e774b32df97f81e4c91b9dce04b9949f7bfd7c40bff8481f1f"
+      }
+    },
+    "workshop": {
+      "ledger": {
+        "path": "builds/barn/ledger.json",
+        "sha256": "a4ff611a00ed917961b06358a75e1a5761f216ff317e1bfb814ca0abe697f7f8"
+      },
+      "final": {
+        "path": "builds/barn/final-artifact.json",
+        "sha256": "2234f40333e890aea7bdf42058174695bbe25c24a72311028492a65cb85238da"
+      },
+      "outcome": "budget-exhausted",
+      "rounds": {
+        "used": 6,
+        "budget": 6
+      }
+    }
+  },
+  "beside": "pr/assets/frames/beside-concept-barn-build.png",
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  },
+  "replay": {
+    "npmRun": "build:barn:repro",
+    "asserts": "generate-seed determinism + workshop loop replay (artifact-anchored)"
+  },
+  "note": "the gate is a SEPARATE billed step — this chain never spawns the frozen judge (E-37)"
+}

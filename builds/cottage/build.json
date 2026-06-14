@@ -1,0 +1,49 @@
+{
+  "schema": "build-chain/v1",
+  "ticket": "T-154-01",
+  "subject": "cottage",
+  "runKey": "cottage",
+  "pack": "rustic",
+  "pipelineOrder": "recognize (committed) → generate-seed (generate-first realizer, --skip-gate) → seed-artifact → workshop (artifact-base, paint+relief) → final beside concept; gate is separate",
+  "stages": {
+    "recognition": {
+      "path": "benchmarks/sculpture/recognition/cottage.program.json",
+      "sha256": "a7b60b01857c0c8b0173e16c75495f7a3ce4c956ff142ce2d1ae398e31e134c1"
+    },
+    "generateSeed": {
+      "generatedFinal": {
+        "path": "benchmarks/sculpture/generated/cottage/artifact.json",
+        "sha256": "bd1a45e743ee7d6fa6df8e7946b0c2e262c30c9f14dfcd5247beb1007efd2d96"
+      },
+      "seedArtifact": {
+        "path": "builds/cottage/seed-artifact.json",
+        "sha256": "bd1a45e743ee7d6fa6df8e7946b0c2e262c30c9f14dfcd5247beb1007efd2d96"
+      }
+    },
+    "workshop": {
+      "ledger": {
+        "path": "builds/cottage/ledger.json",
+        "sha256": "b5f34679f43ae07963c0736bc5fa8f71690ed1fcc4b60ed94464e824ba2807a1"
+      },
+      "final": {
+        "path": "builds/cottage/final-artifact.json",
+        "sha256": "79b68cf15946ad3f48e7cee8c1087c06b97770604535ff6a4e4862d9fbe08fc2"
+      },
+      "outcome": "budget-exhausted",
+      "rounds": {
+        "used": 6,
+        "budget": 6
+      }
+    }
+  },
+  "beside": "pr/assets/frames/beside-concept-cottage-build.png",
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  },
+  "replay": {
+    "npmRun": "build:cottage:repro",
+    "asserts": "generate-seed determinism + workshop loop replay (artifact-anchored)"
+  },
+  "note": "the gate is a SEPARATE billed step — this chain never spawns the frozen judge (E-37)"
+}
