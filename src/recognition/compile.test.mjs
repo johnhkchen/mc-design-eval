@@ -150,6 +150,25 @@ test("a facade program compiles the recognized grammar into a resolved-block bru
   assert.equal(JSON.stringify(articulation), JSON.stringify(JSON.parse(JSON.stringify(articulation))));
 });
 
+test("T-145-02: a recognized band threads a mass-relative {yLo,yHi} into the frame/field/quoin params", () => {
+  const withBand = (p) => { withFacade(p); p.masses[0].facade.faces[0].band = "upper"; };
+  const { articulation } = compileProgram(validated(makeProgram(withBand)), pack);
+  const byBrush = Object.fromEntries(articulation.map((a) => [a.brush, a.params]));
+  // mass is 2×4 ⇒ upper band is y[4,7]; carried as PURE DATA (no functions)
+  assert.deepEqual(byBrush["infill-panel"].band, { yLo: 4, yHi: 7 });
+  assert.deepEqual(byBrush["quoin"].band, { yLo: 4, yHi: 7 });
+  // the whole-mass eave-overhang soffit stays positional (no band)
+  assert.equal(byBrush["eave-overhang"].band, undefined);
+  assert.equal(JSON.stringify(articulation), JSON.stringify(JSON.parse(JSON.stringify(articulation))));
+});
+
+test("T-145-02: a bandless facade compiles BYTE-IDENTICAL params to before the band feature (AC#4)", () => {
+  const { articulation } = compileProgram(validated(makeProgram(withFacade)), pack);
+  for (const a of articulation) {
+    assert.equal("band" in a.params, false, `${a.brush} carries no band key when no band is recognized`);
+  }
+});
+
 test("compiled shape: workshop contract, banded shell, true-hole openings incl. head rows", () => {
   const { workshopProgram: wp } = compileProgram(validated(makeProgram()), pack);
   assert.equal(wp.schema, "workshop-program/v1");

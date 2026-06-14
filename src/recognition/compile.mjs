@@ -19,7 +19,7 @@
 // AABBs it computed (the watertight allow-regions; rhythm groups are per program entry).
 
 import { WORKSHOP_PROGRAM_SCHEMA } from "../workshop/program.mjs";
-import { ROOF_LAYOUTS, headRows, openingLanes } from "./program.mjs";
+import { ROOF_LAYOUTS, headRows, openingLanes, bandYRange } from "./program.mjs";
 import { getBrush } from "../pack/idiom-registry.mjs";
 
 const fail = (msg) => { throw new Error(`compileProgram: ${msg}`); };
@@ -398,13 +398,18 @@ function facadeArticulationPlan(m, pack) {
     const wall = face.wall;
     const member = roleBlock(pack, face.memberRole);
     const rhythm = rhythmOf(face, wall);
+    // T-145-02: the recognized storey band → a mass-relative {yLo,yHi} carried as PURE DATA (the brush
+    // builds the zone predicate). Absent ⇒ no band key ⇒ byte-identical legacy params (AC#4). The band
+    // restricts the frame/field relief (studs/piers/quoins) to its storey — no plinth cover, no roof punch.
+    const band = bandYRange(m, face.band);
+    const bandParam = band ? { band } : {};
     if (face.fields) {
-      plan.push({ massId: m.id, brush: "infill-panel", params: { memberMaterial: member, fieldMaterial: roleBlock(pack, face.fields.role), faces: [wall], rhythm } });
+      plan.push({ massId: m.id, brush: "infill-panel", params: { memberMaterial: member, fieldMaterial: roleBlock(pack, face.fields.role), faces: [wall], rhythm, ...bandParam } });
     } else {
-      plan.push({ massId: m.id, brush: "pilaster", params: { material: member, faces: [wall], rhythm } });
+      plan.push({ massId: m.id, brush: "pilaster", params: { material: member, faces: [wall], rhythm, ...bandParam } });
     }
     if (face.quoins) {
-      plan.push({ massId: m.id, brush: "quoin", params: { material: roleBlock(pack, face.quoins.role), faces: [wall], run: face.quoins.run } });
+      plan.push({ massId: m.id, brush: "quoin", params: { material: roleBlock(pack, face.quoins.role), faces: [wall], run: face.quoins.run, ...bandParam } });
     }
     for (const cl of face.courseLines ?? []) {
       plan.push({ massId: m.id, brush: "eave-overhang", params: { material: roleBlock(pack, cl.role), faces: [wall], depth: 1, eaveRow: cl.y } });
