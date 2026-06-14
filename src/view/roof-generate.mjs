@@ -75,6 +75,28 @@ export function colsOf({ x0, x1, z0, z1 }) {
 }
 
 /**
+ * The columns of a gable's two VERTICAL TRIANGULAR END FACES (T-150-01) — the outermost slice along
+ * the ridge axis: ridge=x → x∈{minX,maxX}; ridge=z → z∈{minZ,maxZ}. These are the gable-end *walls*
+ * (envelope), not the sloped covering. A HIP end has no vertical triangular face (the slope wraps the
+ * end), so a hip-demanded gable returns EMPTY — never name a hip end as a wall. PURE.
+ * @returns {Set<string>} "x,z" keys, ⊆ the gable footprint.
+ */
+export function gableEndColumns(gable) {
+  const out = new Set();
+  if (gable.hip?.demanded) return out; // hip ends are sloped, not vertical walls
+  const axis = gable.ridge.axis;
+  const { minX, maxX, minZ, maxZ } = gable.footprint.bbox;
+  const lo = axis === "x" ? minX : minZ;
+  const hi = axis === "x" ? maxX : maxZ;
+  for (const key of gable.footprint.cols) {
+    const [x, z] = key.split(",").map(Number);
+    const v = axis === "x" ? x : z;
+    if (v === lo || v === hi) out.add(key);
+  }
+  return out;
+}
+
+/**
  * Build the 2-sided PROGRAM gable record {@link generateRoof} consumes (the roof-generate
  * fixture shape) — the shared record builder for the registry's roof constructs (roof.gable,
  * roof.hip, roof.gable.steep). Lives beside its consumer so brush modules can reuse it without
@@ -179,6 +201,7 @@ export function roofHeightfield(gables) {
   let bandFloor = Infinity;
   for (const g of gables) {
     for (const s of g.sides) bandFloor = Math.min(bandFloor, Math.floor(s.eaveY));
+    const endCols = gableEndColumns(g); // T-150-01: this gable's vertical triangular end-wall columns
     const vIdx = g.ridge.axis === "x" ? 0 : 1;
     const lo = g.ends?.lo ?? null;
     const hi = g.ends?.hi ?? null;
@@ -201,7 +224,7 @@ export function roofHeightfield(gables) {
         const cap = h === roundHalf(g.ridge.y);
         const downhill = gableDownhillAt(g, x, z, h);
         const cornerEligible = g.kind === "hip-cap" || (downhill !== null && fittedDirs.has(downhill));
-        owner.set(key, { gableId: g.id, downhill, sheet, cap, cornerEligible });
+        owner.set(key, { gableId: g.id, downhill, sheet, cap, cornerEligible, gableEnd: endCols.has(key) });
       }
     }
   }
@@ -213,10 +236,18 @@ export function roofHeightfield(gables) {
  * stair treads on whole-step edges, slabs on half-steps, full blocks everywhere else. SHEET
  * columns (the fitted verge/eave-overhang strips, see {@link roofHeightfield}) place the surface
  * course only — the underside stays open, which is what makes an overhang read as one.
+ *
+ * ENVELOPE-THEN-COVERING (T-150-01): with `opts.gableBlock` set, the SUB-SURFACE fill of each
+ * vertical gable-end slice ({@link gableEndColumns}) is authored in that WALL block (the gable-end
+ * wall — the envelope), and its cells are returned in `gableWallKeys` so the zone map can classify
+ * them as wall, not roof. The sloped COVERING (top stair/full, slab, cap, and every sheet/verge
+ * surface) stays roof field. Absent ⇒ byte-identical legacy emission (the whole prism is roof).
  * @returns {{cells:{pos:number[], block:string, form?:string, state?:object}[],
  *            counts:{full:number, stairs:number, slabs:number, cap:number},
  *            heights:Map<string,number>, owner:Map<string,object>, bandFloor:number,
- *            sheetKeys:Set<string>, capKeys:Set<string>}} sheetKeys = "x,y,z" of every
+ *            sheetKeys:Set<string>, capKeys:Set<string>, gableWallKeys:Set<string>}}
+ *            gableWallKeys = "x,y,z" of every gable-end-wall cell (empty without opts.gableBlock).
+ *            sheetKeys = "x,y,z" of every
  *            sheet-column cell — declared construction whose open underside exposes ≥4 faces BY
  *            DESIGN (census exclusion). capKeys (T-109-01) = the ridge CAP COURSE cells — one per
  *            ridge column (the top full course, or the half-step slab when the fitted ridge lands
@@ -231,7 +262,9 @@ export function generateRoof(gables, family, opts = {}) {
   const counts = { full: 0, stairs: 0, slabs: 0, cap: 0 };
   const sheetKeys = new Set();
   const capKeys = new Set();
-  if (!family?.field) return { cells, counts, heights, owner, bandFloor: floor, sheetKeys, capKeys };
+  const gableWallKeys = new Set(); // T-150-01: sub-surface end-slice cells dressed as wall envelope
+  const gableBlock = opts.gableBlock ?? null;
+  if (!family?.field) return { cells, counts, heights, owner, bandFloor: floor, sheetKeys, capKeys, gableWallKeys };
 
   for (const [key, h] of heights) {
     const [x, z] = key.split(",").map(Number);
@@ -273,6 +306,12 @@ export function generateRoof(gables, family, opts = {}) {
         cells.push({ pos: [x, y, z], block: family.stairs, form: "fixture",
           state: { facing: STAIR_FACING[FLIP[d]], half: "bottom", shape } });
         counts.stairs++;
+      } else if (gableBlock && own?.gableEnd && y < top) {
+        // T-150-01: a gable-end column's SUB-SURFACE fill is the vertical triangular wall (envelope),
+        // not roof. The covering surface (y===top stair/full, the slab/cap above) stays roof field.
+        cells.push({ pos: [x, y, z], block: gableBlock });
+        counts.full++;
+        gableWallKeys.add(`${x},${y},${z}`);
       } else {
         cells.push({ pos: [x, y, z], block: family.field });
         counts.full++;
@@ -290,5 +329,5 @@ export function generateRoof(gables, family, opts = {}) {
       capKeys.add(slabbed ? `${x},${top + 1},${z}` : `${x},${top},${z}`);
     }
   }
-  return { cells, counts, heights, owner, bandFloor: floor, sheetKeys, capKeys };
+  return { cells, counts, heights, owner, bandFloor: floor, sheetKeys, capKeys, gableWallKeys };
 }

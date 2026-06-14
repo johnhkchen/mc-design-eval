@@ -3,7 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 
 import { CARD_ROWS } from "../form/fixture-card.mjs";
-import { STAIR_FACING, roofFamily, roofHeightfield, generateRoof, stairShape } from "./roof-generate.mjs";
+import { STAIR_FACING, roofFamily, roofHeightfield, generateRoof, stairShape, gableEndColumns } from "./roof-generate.mjs";
 
 const VOCAB = new Set([
   "spruce_planks", "spruce_stairs", "spruce_slab",
@@ -439,4 +439,55 @@ test("closed gables keep stair/slab cap states renderable: every shaped cell car
     assert.ok(["spruce_planks", "spruce_stairs", "spruce_slab"].includes(c.block), `unmapped block ${c.block}`);
     if (c.block !== "spruce_planks") assert.ok(c.state, `${c.block} at ${c.pos} carries a block state`);
   }
+});
+
+// --- T-150-01: envelope-then-covering (gable-end-as-wall, opt-in gableBlock) ---
+
+test("gableEndColumns: the outermost slice along the ridge axis, hip ends excluded", () => {
+  const g = gable({ E: 4, z0: 0, z1: 5 }); // ridge along z → end walls at z=0 and z=5
+  const ends = gableEndColumns(g);
+  // every x at z=0 and z=5 is an end column; none at z=1..4
+  for (let x = -4; x <= 4; x++) {
+    assert.ok(ends.has(`${x},0`), `z=0 end col x=${x}`);
+    assert.ok(ends.has(`${x},5`), `z=5 end col x=${x}`);
+    assert.ok(!ends.has(`${x},2`), `z=2 is interior, not an end col`);
+  }
+  // a hip-demanded gable has no vertical triangular face → empty
+  const hipped = gable({ hip: { demanded: true, lo: true, hi: true } });
+  assert.equal(gableEndColumns(hipped).size, 0);
+});
+
+test("gableBlock: gable-end sub-surface is wall, covering surface stays roof", () => {
+  const g = gable({ pitch: 1, eaveY: 10, ridgeY: 14, E: 4, z0: 0, z1: 5 });
+  const GABLE = "minecraft:cobblestone";
+  const { cells, gableWallKeys } = generateRoof([g], SPRUCE, { gableBlock: GABLE });
+  const m = byPos(cells);
+  // z=0 is a gable end. column x=0 (the ridge): surface at y=14 (ridge cap, full field), fill below is wall.
+  assert.equal(m.get("0,14,0").block, "spruce_planks", "ridge cap surface stays roof");
+  assert.equal(m.get("0,13,0").block, GABLE, "sub-surface end-slice cell is wall");
+  assert.equal(m.get("0,10,0").block, GABLE, "eave-level end-slice fill is wall");
+  // z=2 (interior slice) is untouched roof
+  assert.equal(m.get("0,13,2").block, "spruce_planks", "interior fill stays roof");
+  // gableWallKeys holds only sub-surface end cells, never the surface
+  assert.ok(gableWallKeys.has("0,13,0"));
+  assert.ok(!gableWallKeys.has("0,14,0"), "the covering surface is never a gable-wall key");
+  for (const k of gableWallKeys) {
+    const [, , z] = k.split(",").map(Number);
+    assert.ok(z === 0 || z === 5, `gable-wall key ${k} is on an end slice`);
+  }
+});
+
+test("gableBlock byte-identity: the sloped COVERING is unchanged on/off", () => {
+  const g = gable({ pitch: 1, eaveY: 10, ridgeY: 14, E: 4, z0: 0, z1: 5 });
+  const off = generateRoof([g], SPRUCE);
+  const on = generateRoof([g], SPRUCE, { gableBlock: "minecraft:cobblestone" });
+  // covering = every cell that is a fixture (stair/slab) or sits at the column top, plus caps.
+  // It must be byte-identical: the gable change only retags SUB-SURFACE fill of the end slices.
+  const coveringOff = off.cells.filter((c) => c.form === "fixture");
+  const coveringOn = on.cells.filter((c) => c.form === "fixture");
+  assert.deepEqual(coveringOn, coveringOff, "stairs/slabs (the slope skin) byte-identical");
+  // and with no gableBlock the whole emission is the legacy prism
+  const legacy = generateRoof([g], SPRUCE, {});
+  assert.deepEqual(legacy.cells, off.cells, "absent gableBlock ⇒ byte-identical legacy");
+  assert.equal(legacy.gableWallKeys.size, 0);
 });
