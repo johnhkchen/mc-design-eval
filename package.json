@@ -39,6 +39,7 @@
     "diff:roof": "node benchmarks/sculpture/roof-diff.mjs",
     "gate:rejudge": "node benchmarks/sculpture/multi-angle-gate.mjs --rejudge",
     "gate:calibrate": "node benchmarks/sculpture/budget-calibration.mjs",
+    "relief:calibrate": "node benchmarks/sculpture/relief-calibration.mjs",
     "challenge:cottage": "node benchmarks/sculpture/challenge-milestone.mjs --subject cottage",
     "challenge:gatehouse": "node benchmarks/sculpture/challenge-milestone.mjs --subject gatehouse",
     "challenge:church": "node benchmarks/sculpture/challenge-milestone.mjs --subject church",

@@ -1,0 +1,214 @@
+{
+  "schema": "relief-calibration/v1",
+  "ticket": "T-148-01",
+  "policy": "relief-aware-gate/v1",
+  "predicate": "relief fixpoint — surfaceRelief (S-146) re-run is a no-op on the demanded strips; missing===0 ⇒ realized. No threshold, no per-building constant (the period is the recognised grammar's).",
+  "subject": {
+    "artifact": "benchmarks/sculpture/workshop/barn/final-artifact.json",
+    "grammar": "benchmarks/sculpture/relief/barn-grammar.json",
+    "pack": "packs/rustic.json",
+    "committedGate": "barn-patternbook.json"
+  },
+  "demand": [
+    {
+      "massId": "barn",
+      "face": "+z",
+      "axis": "column",
+      "every": 4,
+      "span": 1,
+      "phase": 0,
+      "material": "dark_oak_log",
+      "depth": 1,
+      "role": "frame.timber",
+      "source": "concept"
+    },
+    {
+      "massId": "barn",
+      "face": "-z",
+      "axis": "column",
+      "every": 4,
+      "span": 1,
+      "phase": 0,
+      "material": "dark_oak_log",
+      "depth": 1,
+      "role": "frame.timber",
+      "source": "concept"
+    }
+  ],
+  "anti": {
+    "presence": {
+      "schema": "relief-presence/v1",
+      "ran": true,
+      "passed": false,
+      "checks": [
+        {
+          "massId": "barn",
+          "face": "+z",
+          "axis": "column",
+          "every": 4,
+          "material": "dark_oak_log",
+          "demandedStrips": 12,
+          "missingCells": 300,
+          "fieldCells": 900,
+          "passed": false
+        },
+        {
+          "massId": "barn",
+          "face": "-z",
+          "axis": "column",
+          "every": 4,
+          "material": "dark_oak_log",
+          "demandedStrips": 12,
+          "missingCells": 300,
+          "fieldCells": 900,
+          "passed": false
+        }
+      ],
+      "residual": [
+        "missing relief: dark_oak_log on +z @ column every 4 (300 cells)",
+        "missing relief: dark_oak_log on -z @ column every 4 (300 cells)"
+      ],
+      "evidence": [
+        {
+          "face": "+z",
+          "proud": 48,
+          "flush": 588,
+          "recessed": 564,
+          "plane": 1
+        },
+        {
+          "face": "-z",
+          "proud": 48,
+          "flush": 600,
+          "recessed": 552,
+          "plane": 1
+        }
+      ]
+    },
+    "composite": {
+      "schema": "relief-aware-gate/v1",
+      "decided": true,
+      "passed": false,
+      "components": {
+        "kitAware": {
+          "decided": true,
+          "passed": true
+        },
+        "relief": {
+          "ran": true,
+          "passed": false,
+          "residual": [
+            "missing relief: dark_oak_log on +z @ column every 4 (300 cells)",
+            "missing relief: dark_oak_log on -z @ column every 4 (300 cells)"
+          ]
+        }
+      }
+    }
+  },
+  "articulated": {
+    "presence": {
+      "schema": "relief-presence/v1",
+      "ran": true,
+      "passed": true,
+      "checks": [
+        {
+          "massId": "barn",
+          "face": "+z",
+          "axis": "column",
+          "every": 4,
+          "material": "dark_oak_log",
+          "demandedStrips": 0,
+          "missingCells": 0,
+          "fieldCells": 900,
+          "passed": true
+        },
+        {
+          "massId": "barn",
+          "face": "-z",
+          "axis": "column",
+          "every": 4,
+          "material": "dark_oak_log",
+          "demandedStrips": 0,
+          "missingCells": 0,
+          "fieldCells": 900,
+          "passed": true
+        }
+      ],
+      "residual": [],
+      "evidence": [
+        {
+          "face": "+z",
+          "proud": 192,
+          "flush": 456,
+          "recessed": 552,
+          "plane": 2
+        },
+        {
+          "face": "-z",
+          "proud": 198,
+          "flush": 462,
+          "recessed": 540,
+          "plane": 2
+        }
+      ]
+    }
+  },
+  "noRegress": {
+    "inPlanePreserved": true,
+    "ratiosPreserved": true,
+    "ratios": {
+      "before": {
+        "ridgeToEave": 2.0833,
+        "roofShare": 0.52
+      },
+      "after": {
+        "ridgeToEave": 2.0833,
+        "roofShare": 0.52
+      }
+    },
+    "expectedWidening": {
+      "aspectBefore": 1.8462,
+      "aspectAfter": 1.7143,
+      "widened": true
+    }
+  },
+  "committedUnchanged": {
+    "count": 18,
+    "drifted": 0
+  },
+  "anchors": [
+    {
+      "key": "anti-anchor",
+      "reliefPassed": false,
+      "kitAwarePassed": true,
+      "residual": [
+        "missing relief: dark_oak_log on +z @ column every 4 (300 cells)",
+        "missing relief: dark_oak_log on -z @ column every 4 (300 cells)"
+      ],
+      "composite": {
+        "schema": "relief-aware-gate/v1",
+        "passed": false
+      },
+      "expected": false,
+      "ok": true
+    },
+    {
+      "key": "articulated",
+      "reliefPassed": true,
+      "kitAwarePassed": true,
+      "missing": [
+        0,
+        0
+      ],
+      "expected": true,
+      "ok": true
+    },
+    {
+      "key": "committed-unchanged",
+      "count": 18,
+      "drifted": 0,
+      "expected": 0,
+      "ok": true
+    }
+  ]
+}
