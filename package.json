@@ -11,6 +11,7 @@
     "test:unit": "node --test \"src/**/*.test.mjs\"",
     "pack:validate": "node scripts/validate-pack.mjs packs/rustic.json",
     "idioms:card": "node benchmarks/sculpture/idiom-card.mjs",
+    "render:beside": "node benchmarks/sculpture/render-beside.mjs",
     "brush:catalog": "node benchmarks/sculpture/brush-catalog.mjs",
     "workshop:fixture": "node benchmarks/sculpture/workshop.mjs --subject fixture",
     "workshop:replay": "node benchmarks/sculpture/workshop.mjs --subject fixture --replay",
