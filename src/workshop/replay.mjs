@@ -18,9 +18,11 @@
 import { MAX_REPLY_ATTEMPTS } from "../form/judge-reply.mjs";
 import { applyPaint } from "../view/face-paint.mjs";
 import { assertBuildingProgram } from "../recognition/program.mjs";
+import { compileProgram } from "../recognition/compile.mjs";
+import { realizeWithArticulation } from "./articulate.mjs";
 import { WORKSHOP_LEDGER_SCHEMA, isRegression } from "./loop.mjs";
 import { applyGeometryAdjust, substituteMass, prunePaint } from "./geometry.mjs";
-import { parseWorkshopProgram, assertWorkshopProgram, realizeProgram, applyParamAdjust } from "./program.mjs";
+import { parseWorkshopProgram, assertWorkshopProgram, applyParamAdjust } from "./program.mjs";
 
 /** THE canonical artifact serialization — byte identity is equality of this function's output.
  *  The runner writes final artifacts through it; replay compares through it. One definition. */
@@ -93,7 +95,11 @@ export function replayLedger({ ledger, pack = null, throughRound }) {
       throw new Error(`replayLedger: round ${round.round} accepted with unreplayable applied.kind "${kind}"`);
     }
   }
-  const { artifact: realized } = realizeProgram(program);
+  // T-149-01 (E-35): a relieved build reproduces only if replay re-constructs the same articulation
+  // the loop did — from the (re-recognition-updated) seed source + the sha-pinned pack. Facade-less
+  // ledgers compile to an empty plan ⇒ byte-identical to a bare realize (every committed chain today).
+  const articulation = source && pack ? compileProgram(source, pack).articulation : [];
+  const { artifact: realized } = realizeWithArticulation(program, articulation);
   const artifact = paint.length ? applyPaint(realized, paint) : realized;
   return { artifact, program, source,
            applied: { programAdjusts, geometryAdjusts, recognized, paintPlacements: paint.length, paintPruned } };

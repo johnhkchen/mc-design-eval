@@ -25,7 +25,8 @@
 import { runConformance } from "../pack/conformance.mjs";
 import { artifactOccupancy } from "../view/occupancy.mjs";
 import { applyPaint } from "../view/face-paint.mjs";
-import { realizeProgram } from "./program.mjs";
+import { compileProgram } from "../recognition/compile.mjs";
+import { realizeWithArticulation } from "./articulate.mjs";
 import { applyAction, DEFAULT_APPLIERS } from "./actions.mjs";
 import { prunePaint } from "./geometry.mjs";
 import { liveActionNames } from "./critique.mjs";
@@ -124,7 +125,12 @@ export async function runWorkshopLoop({ program, pack, source = null, seams, app
   let currentSource = source;
   let paint = []; // accepted spray-paint placements, applied after realization in arrival order
   const realize = (prog, paintTrail) => {
-    const { artifact } = realizeProgram(prog);
+    // T-149-01 (E-35): construct the recognized facade grammar's relief onto the skin each round, so
+    // the build the loop renders + critiques carries it. The plan is recompiled from currentSource so
+    // a re-recognition that changes a facade re-plans; the brushes resolve positions against the live
+    // occupancy. Facade-less rounds (no source / no facade) compile to [] ⇒ a bare realize.
+    const articulation = currentSource ? compileProgram(currentSource, pack).articulation : [];
+    const { artifact } = realizeWithArticulation(prog, articulation);
     return paintTrail.length ? applyPaint(artifact, paintTrail) : artifact;
   };
 
