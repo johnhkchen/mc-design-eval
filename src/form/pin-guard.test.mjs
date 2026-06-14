@@ -232,23 +232,36 @@ test("F4 nested gate-record write under workshop domain refuses (prefix, not exa
 
 // --- G: instrument allowlist — the E-36 / S-151 freeze-narrowing -----------------------------------
 
-test("G1 isInstrumentPath: the four instrument families (+ kit) are frozen; drafts are not", () => {
-  // ON the allowlist (instruments / inputs-of-record)
+test("G1 isInstrumentPath: the measurements/ prefix + ratified packs freeze; drafts are not", () => {
+  // ON the allowlist — the measurements/ frozen home (T-155-01: location encodes status)
   for (const rel of [
-    "benchmarks/sculpture/multi-angle/cottage-styled.json",
-    "benchmarks/sculpture/multi-angle/cottage-styled.md",
-    "benchmarks/sculpture/kit/barn.json",
-    "benchmarks/sculpture/kit/barn.raw.json",
-    "benchmarks/sculpture/retired-pins.json",
+    "measurements/multi-angle/cottage-styled.json",
+    "measurements/multi-angle/cottage-styled.md",
+    "measurements/kit/barn.json",
+    "measurements/kit/barn.raw.json",
+    "measurements/retired-pins.json",
+    "measurements/pattern-book/facade-baselines.json",
+    "measurements/pattern-book/proportion-milestone.json",
+    "measurements/milestones/facade-milestone.md",
+    "measurements/cleanliness-baseline.json",
     "packs/rustic.json",
-    "benchmarks/sculpture/pattern-book/facade-baselines.json",
-    "benchmarks/sculpture/pattern-book/proportion-milestone.json",
-    "benchmarks/sculpture/pattern-book/facade-milestone.json",
-    "benchmarks/sculpture/cleanliness-baseline.json",
   ]) assert.equal(isInstrumentPath(rel), true, `expected INSTRUMENT: ${rel}`);
 
-  // OFF the allowlist (drafts — regenerate freely)
+  // ON the allowlist (TRANSITIONAL — pre-move scattered frozen locations; removed once every class
+  // has relocated under measurements/). These keep the freeze intact mid-migration.
   for (const rel of [
+    "benchmarks/sculpture/multi-angle/cottage-styled.json",
+    "benchmarks/sculpture/kit/barn.json",
+    "benchmarks/sculpture/retired-pins.json",
+    "benchmarks/sculpture/pattern-book/facade-baselines.json",
+    "benchmarks/sculpture/cleanliness-baseline.json",
+  ]) assert.equal(isInstrumentPath(rel), true, `expected TRANSITIONAL INSTRUMENT: ${rel}`);
+
+  // OFF the allowlist (drafts — regenerate freely), including the new builds/ free-zone home
+  for (const rel of [
+    "builds/cottage/final-artifact.json",
+    "builds/cottage/ledger.json",
+    "builds/barn--saltcrag/seed-artifact.json",
     "benchmarks/sculpture/generated/barn.json",
     "benchmarks/sculpture/generated/barn/artifact.json",
     "benchmarks/sculpture/generated/barn/base-artifact.json",

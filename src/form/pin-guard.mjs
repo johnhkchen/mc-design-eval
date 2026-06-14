@@ -38,25 +38,36 @@ import { join } from "node:path";
 export const ROTATE_FLAG = "--rotate-pins";
 export const POLICY_DOC = "docs/knowledge/pin-rotation-policy.md";
 
-/** THE INSTRUMENT ALLOWLIST (E-36 / S-151) — the one named, documented place that decides whether a
- *  path is part of the frozen measurement. A path is a "pin" only if it matches one of these AND is
- *  git-tracked (see guardedWriteRecord/preflightPins). Everything else is a DRAFT and rewrites
- *  freely. The line is "measured or not", applied case by case: an entry added under the honesty
- *  clause (E-36 line 124) because it is load-bearing for a committed measurement carries its reason.
- *  Drafts are always subject-named (barn.json, artifact.json, component-plan.json) so the
- *  baseline/milestone suffix match below is collision-free. */
+/** THE INSTRUMENT ALLOWLIST (E-36 / S-151; T-155-01 / E-37) — the one named, documented place that
+ *  decides whether a path is part of the frozen measurement. A path is a "pin" only if it matches one
+ *  of these AND is git-tracked (see guardedWriteRecord/preflightPins). Everything else is a DRAFT and
+ *  rewrites freely.
+ *
+ *  T-155-01 collapses the old five-entry hand-list into a PATH PREFIX: the frozen records now all live
+ *  under the top-level `measurements/` home (gate verdicts, baselines, milestones, kit, the rotation
+ *  registry) — **location encodes status**. The only other frozen home is ratified `packs/` (already
+ *  location-encoded, `packs/drafts/` being the draft exception). Two prefixes, not five predicates.
+ *
+ *  TRANSITIONAL (T-155-01, removed in the final step): while the frozen records are still mid-move from
+ *  their scattered `benchmarks/sculpture/` locations, the third entry keeps the OLD paths frozen so no
+ *  record un-freezes during the relocation. Each `git mv` step drops files into `measurements/` (caught
+ *  by the first prefix); the transitional entry is deleted once every class has moved. */
+export const MEASUREMENTS_PREFIX = "measurements/";
+
 export const INSTRUMENT_ALLOWLIST = Object.freeze([
-  { reason: "judge verdict records — the frozen measurement (E-28/E-31)",
-    match: (rel) => rel.startsWith("benchmarks/sculpture/multi-angle/") },
+  { reason: "the frozen-measurement home — gate verdicts, baselines, milestones, kit, the rotation " +
+            "registry (E-37: location encodes status)",
+    match: (rel) => rel.startsWith(MEASUREMENTS_PREFIX) },
   { reason: "ratified packs of record (packs/drafts/* are structurally not packs)",
     match: (rel) => rel.startsWith("packs/") && !rel.startsWith("packs/drafts/") && rel.endsWith(".json") },
-  { reason: "committed baseline / milestone measurements",
-    match: (rel) => /(?:^|\/)[^/]*-(?:baseline|baselines|milestone)\.(?:json|md)$/.test(rel) },
-  { reason: "the rotation registry",
-    match: (rel) => rel === "benchmarks/sculpture/retired-pins.json" },
-  { reason: "the ratified building-block kit — input-of-record to every committed verdict; " +
-            "load-bearing for reproducibility-by-replay (E-36 honesty clause, line 124)",
-    match: (rel) => rel.startsWith("benchmarks/sculpture/kit/") },
+  // TRANSITIONAL — the scattered pre-move frozen locations (T-155-01); deleted once every class lands
+  // under measurements/. Drafts are subject-named so the baseline/milestone suffix match is collision-free.
+  { reason: "TRANSITIONAL (T-155-01): frozen records not yet relocated to measurements/",
+    match: (rel) =>
+      rel.startsWith("benchmarks/sculpture/multi-angle/") ||
+      /(?:^|\/)[^/]*-(?:baseline|baselines|milestone)\.(?:json|md)$/.test(rel) ||
+      rel === "benchmarks/sculpture/retired-pins.json" ||
+      rel.startsWith("benchmarks/sculpture/kit/") },
 ]);
 
 /** Pure: is this repo-root-relative path part of the frozen instrument? (Membership only — the
@@ -68,7 +79,12 @@ export function isInstrumentPath(rel) {
 /** Gate-record namespaces — the frozen judge's committed verdicts. A WORKSHOP-domain caller
  *  (E-31 Rule 1, T-126-01) may never write here: the refusal is structural and absolute —
  *  neither the rotation flag nor a sanction overrides it (judge isolation, not pin rotation). */
-export const GATE_RECORD_NAMESPACES = Object.freeze(["benchmarks/sculpture/multi-angle/"]);
+// Both the new frozen home and the transitional pre-move location during T-155-01's gate-verdict move;
+// the old entry is dropped once measurements/multi-angle/ is the sole verdict home.
+export const GATE_RECORD_NAMESPACES = Object.freeze([
+  "measurements/multi-angle/",
+  "benchmarks/sculpture/multi-angle/",
+]);
 
 /** Pure domain refusal: a "workshop" write into a gate-record namespace returns the refusal
  *  reason; every other (domain, rel) pair returns null. Domains other than "workshop" are
