@@ -87,6 +87,13 @@ export function facadeDigest(program, pack, { seenFaces = unseenFaces() } = {}) 
       `eave overhang ≤ ${b.maxOverhang}; jetty depth ≤ ${b.maxJettyDepth}; quoin run ≤ ${b.maxQuoinRun}. ` +
       "rhythm is EITHER {period, phase} OR {count}. One face entry per wall.",
     "",
+    "Name the STOREY BAND each face's frame/field relief occupies via `band`: `ground` (the lowest " +
+      "storey), `upper` (the storeys above the ground band), or `all` (the whole wall below the eave — " +
+      "excludes the gable triangle). Half-timber studs over a plaster panel belong to the plaster " +
+      "`upper` storey; a stone field/pier that runs the full wall is `all`. The y-range is derived from " +
+      "the mass's own storeys — never name a row number. Omit `band` only if the relief truly spans the " +
+      "whole face.",
+    "",
     "If a face cannot be read from either the concept or the GLB, set " +
       "`evidence.source: \"pack-idealised\"` (the honest fallback — a named state, never a silent default).",
   ].join("\n");

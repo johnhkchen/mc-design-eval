@@ -54,6 +54,14 @@ test("the committed prompt digest replays byte-identically (the recorded prompt 
   assert.equal(facadeDigest(base, pack) + "\n", committed);
 });
 
+test("the digest teaches the storey band vocabulary (T-145-02) without naming a row number", () => {
+  const d = facadeDigest(base, pack);
+  assert.match(d, /STOREY BAND/);
+  assert.match(d, /`band`/);
+  assert.match(d, /ground.*upper.*all/s);
+  assert.match(d, /never name a row number/);
+});
+
 test("mergeFacade is pure: the base is untouched, the result carries the facade", () => {
   const before = JSON.stringify(base);
   const merged = mergeFacade(base, { main: { eaveOverhang: 0, faces: [
