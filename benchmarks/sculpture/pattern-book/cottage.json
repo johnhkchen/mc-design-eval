@@ -1,6 +1,6 @@
 {
   "schema": "pattern-book-chain/v1",
-  "ticket": "T-138-02",
+  "ticket": "T-143-02",
   "subject": "cottage",
   "runKey": "cottage",
   "pack": "rustic",
@@ -160,27 +160,11 @@
             "resolved": "sketch"
           },
           {
-            "mass": "main",
-            "parameter": "storeyHeight.packBand",
-            "recognition": "[3, 4]",
-            "sketch": 5,
-            "resolved": "sketch",
-            "note": "pack proportions are the fallback tier (S-133); excursion recorded"
-          },
-          {
             "mass": "wing",
             "parameter": "eaveHeight",
             "recognition": 8,
             "sketch": 19.3,
             "resolved": "sketch"
-          },
-          {
-            "mass": "wing",
-            "parameter": "storeyHeight.packBand",
-            "recognition": "[3, 4]",
-            "sketch": 5,
-            "resolved": "sketch",
-            "note": "pack proportions are the fallback tier (S-133); excursion recorded"
           }
         ]
       },
@@ -207,36 +191,36 @@
     "workshop": {
       "ledger": {
         "path": "benchmarks/sculpture/workshop/cottage.json",
-        "sha256": "ba878ac801dfaabfab88624ac289ba004bf1ebd22637e58d9f41cadad6e315f8"
+        "sha256": "5be4b1639be2c99d12a8ee6698e60914000ece4a540a149879882f84f5c028f9"
       },
       "final": {
         "path": "benchmarks/sculpture/workshop/cottage/final-artifact.json",
-        "sha256": "377b65b6617e0a6993d04b94b6d7ff6cd2facb5ce64adb727f9878f69405bf14"
+        "sha256": "3674856616afe77432de41f5c426eb66f9ff89339a2687120801914f0f8aa34c"
       },
       "outcome": "budget-exhausted",
       "rounds": {
         "used": 6,
         "budget": 6
       },
-      "accepted": 1,
-      "rolledBack": 1,
+      "accepted": 0,
+      "rolledBack": 3,
       "unavailable": 0,
-      "applyFailed": 4,
+      "applyFailed": 3,
       "conformance": {
         "first": {
           "passed": 6,
-          "findings": 2
+          "findings": 1
         },
         "final": {
           "passed": 6,
-          "findings": 2
+          "findings": 1
         },
         "finalPassed": false
       }
     },
     "plan": {
       "path": "benchmarks/sculpture/workshop/cottage/component-plan.json",
-      "sha256": "7749269604b497486f1f750fbe7e4ac5193764926aae249eee5f58335bc50cdf"
+      "sha256": "e1105255c3c8df2d9dd521a17e9a56e1ffb1643ba61b90c3809614da5767a5d7"
     }
   },
   "generalization": {

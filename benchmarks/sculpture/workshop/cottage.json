@@ -21,7 +21,7 @@
   },
   "packRef": {
     "path": "packs/rustic.json",
-    "sha256": "19834c8ba66333efcc7b6fe594bdc2772877202752809e508b78613c608cf434"
+    "sha256": "b71dbc9f972a03596d4430c270986c7dcc81a6982accc686145b956753ec432a"
   },
   "conceptRef": {
     "path": "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
@@ -967,31 +967,31 @@
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"overall silhouette\", \"issue\": \"proportion-vs-concept FAILS: roof reads as ~0.84 of the height (target 0.293) and ridge:eave ~6.2 (target 1.41) — the walls are too short for the roof mass; the concept is a tall two-storey body under a moderate gable\", \"severity\": \"major\" },\n      { \"region\": \"upper storey walls\", \"issue\": \"plain white_ter",
+          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"overall silhouette\", \"issue\": \"Roof is too dominant: roofShare 0.3548 vs target 0.293 and ridge:eave 1.55 vs 1.4145 — walls read too short for the roof mass, failing proportion-vs-concept.\", \"severity\": \"major\" },\n      { \"region\": \"upper storey walls\", \"issue\": \"Concept shows white timber-frame infill with dark vertical studs and a jett",
           "usage": {
-            "input_tokens": 10533,
-            "cache_creation_input_tokens": 19019,
-            "cache_read_input_tokens": 15824,
-            "output_tokens": 12995,
+            "input_tokens": 11075,
+            "cache_creation_input_tokens": 19441,
+            "cache_read_input_tokens": 15357,
+            "output_tokens": 2997,
             "server_tool_use": {
               "web_search_requests": 0,
               "web_fetch_requests": 0
             },
             "service_tier": "standard",
             "cache_creation": {
-              "ephemeral_1h_input_tokens": 19019,
+              "ephemeral_1h_input_tokens": 19441,
               "ephemeral_5m_input_tokens": 0
             },
             "inference_geo": "not_available",
             "iterations": [
               {
-                "input_tokens": 10533,
-                "output_tokens": 12995,
-                "cache_read_input_tokens": 15824,
-                "cache_creation_input_tokens": 19019,
+                "input_tokens": 11075,
+                "output_tokens": 2997,
+                "cache_read_input_tokens": 15357,
+                "cache_creation_input_tokens": 19441,
                 "cache_creation": {
                   "ephemeral_5m_input_tokens": 0,
-                  "ephemeral_1h_input_tokens": 19019
+                  "ephemeral_1h_input_tokens": 19441
                 },
                 "type": "message"
               }
@@ -1006,38 +1006,34 @@
         "issues": [
           {
             "region": "overall silhouette",
-            "issue": "proportion-vs-concept FAILS: roof reads as ~0.84 of the height (target 0.293) and ridge:eave ~6.2 (target 1.41) — the walls are too short for the roof mass; the concept is a tall two-storey body under a moderate gable",
+            "issue": "Roof is too dominant: roofShare 0.3548 vs target 0.293 and ridge:eave 1.55 vs 1.4145 — walls read too short for the roof mass, failing proportion-vs-concept.",
             "severity": "major"
           },
           {
             "region": "upper storey walls",
-            "issue": "plain white_terracotta with no timber studs; the concept's signature is half-timbered (dark_oak_log verticals over white infill) — the striped framing is absent",
-            "severity": "major"
-          },
-          {
-            "region": "chimney",
-            "issue": "cobblestone stack overshoots the ridge (top ~y33 vs ridge y30), inflating the apex/ridge measurement",
+            "issue": "Concept shows white timber-frame infill with dark vertical studs and a jettied overhang; my build's upper storey is flat white_terracotta with no framing relief.",
             "severity": "minor"
           },
           {
             "region": "ground storey",
-            "issue": "stone base reads acceptably but the jetty/overhang band is the strongest horizontal edge and pulls the detected eave down toward it",
+            "issue": "Concept's stone base reads as cobblestone-toned rubble with deeper window reveals; mine is flatter stone_bricks, acceptable but less rusticated.",
             "severity": "minor"
           }
         ]
       },
       "decision": "revise",
-      "rationale": "Proportion is the only failing gate; raising the main mass eave to ~24 against the fixed ~10-block roof rise targets roofShare 0.293 / ridge:eave 1.41, growing the two-storey wall body so the roof stops dominating the silhouette.",
+      "rationale": "Raising the main mass's per-storey height lifts the eave line, shrinking the roof's vertical share toward target (projected roofShare ≈0.29, ridge:eave ≈1.40) and clearing the only failing gate without touching plan aspect.",
       "action": {
         "action": "adjust-params",
         "elementId": "main",
         "massId": "main",
         "params": {
-          "eaveHeight": 24
+          "storeyHeight": 5
         }
       },
       "applied": {
-        "kind": "failed"
+        "kind": "geometry",
+        "paintPruned": 0
       },
       "conformance": {
         "before": {
@@ -1080,29 +1076,28 @@
               "name": "proportion-vs-concept",
               "passed": false,
               "findings": [
-                "ridgeToEave 6.2 vs target 1.4145 (sketch) — Δrel 3.3832 > tolerance 0.15",
-                "roofShare 0.8387 vs target 0.293 (sketch) — Δrel 1.8625 > tolerance 0.15"
+                "roofShare 0.3548 vs target 0.293 (sketch) — Δrel 0.2109 > tolerance 0.15"
               ],
               "ratios": {
                 "tolerance": 0.15,
                 "rows": [
                   {
                     "ratio": "ridgeToEave",
-                    "measured": 6.2,
+                    "measured": 1.55,
                     "target": 1.4145,
                     "source": "sketch",
-                    "delta": 4.7855,
-                    "excess": 3.3832,
+                    "delta": 0.1355,
+                    "excess": 0.0958,
                     "basis": "relative",
-                    "withinTolerance": false
+                    "withinTolerance": true
                   },
                   {
                     "ratio": "roofShare",
-                    "measured": 0.8387,
+                    "measured": 0.3548,
                     "target": 0.293,
                     "source": "sketch",
-                    "delta": 0.5457,
-                    "excess": 1.8625,
+                    "delta": 0.0618,
+                    "excess": 0.2109,
                     "basis": "relative",
                     "withinTolerance": false
                   },
@@ -1121,9 +1116,89 @@
             }
           ]
         },
-        "after": null,
+        "after": {
+          "schema": "pack-conformance/v1",
+          "passed": false,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            },
+            {
+              "name": "proportion-vs-concept",
+              "passed": false,
+              "findings": [
+                "ridgeToEave 5 vs target 1.4145 (sketch) — Δrel 2.5348 > tolerance 0.15",
+                "roofShare 0.8 vs target 0.293 (sketch) — Δrel 1.7304 > tolerance 0.15"
+              ],
+              "ratios": {
+                "tolerance": 0.15,
+                "rows": [
+                  {
+                    "ratio": "ridgeToEave",
+                    "measured": 5,
+                    "target": 1.4145,
+                    "source": "sketch",
+                    "delta": 3.5855,
+                    "excess": 2.5348,
+                    "basis": "relative",
+                    "withinTolerance": false
+                  },
+                  {
+                    "ratio": "roofShare",
+                    "measured": 0.8,
+                    "target": 0.293,
+                    "source": "sketch",
+                    "delta": 0.507,
+                    "excess": 1.7304,
+                    "basis": "relative",
+                    "withinTolerance": false
+                  },
+                  {
+                    "ratio": "aspect",
+                    "measured": 1.0357,
+                    "target": 1.1852,
+                    "source": "sketch",
+                    "delta": 0.1495,
+                    "excess": 0.1261,
+                    "basis": "relative",
+                    "withinTolerance": true
+                  }
+                ]
+              }
+            }
+          ]
+        },
         "accepted": false,
-        "reason": "apply-failed: geometry: candidate program is off the pack vocabulary:\n  at masses[0] (main).storeyHeight: 6 outside the pack band [3, 4]"
+        "reason": "regressed: passed 6→6, findings 1→2; ridgeToEave Δ 0.0958→2.5348 beyond tolerance"
       }
     },
     {
@@ -1154,214 +1229,31 @@
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"roof vs walls (overall silhouette)\", \"issue\": \"roof is too tall a share of the elevation — ridge:eave 1.55 and roofShare 0.3548 sit above target 1.4145 / 0.293; walls need to be taller relative to the fixed pitch-1 roof\", \"severity\": \"major\" },\n      { \"region\": \"conformance gate\", \"issue\": \"proportion-vs-concept FAILS; this is the only ",
+          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"overall silhouette\", \"issue\": \"roof occupies too much of the height — roofShare 0.3548 vs target 0.293 (proportion-vs-concept FAIL); walls read too short under a dominant roof\", \"severity\": \"major\" },\n      { \"region\": \"upper walls\", \"issue\": \"no timber-frame relief reads — concept shows dark vertical beams on white infill, my build is f",
           "usage": {
-            "input_tokens": 10497,
-            "cache_creation_input_tokens": 19150,
-            "cache_read_input_tokens": 15824,
-            "output_tokens": 7076,
+            "input_tokens": 11045,
+            "cache_creation_input_tokens": 19560,
+            "cache_read_input_tokens": 15357,
+            "output_tokens": 3221,
             "server_tool_use": {
               "web_search_requests": 0,
               "web_fetch_requests": 0
             },
             "service_tier": "standard",
             "cache_creation": {
-              "ephemeral_1h_input_tokens": 19150,
+              "ephemeral_1h_input_tokens": 19560,
               "ephemeral_5m_input_tokens": 0
             },
             "inference_geo": "not_available",
             "iterations": [
               {
-                "input_tokens": 10497,
-                "output_tokens": 7076,
-                "cache_read_input_tokens": 15824,
-                "cache_creation_input_tokens": 19150,
+                "input_tokens": 11045,
+                "output_tokens": 3221,
+                "cache_read_input_tokens": 15357,
+                "cache_creation_input_tokens": 19560,
                 "cache_creation": {
                   "ephemeral_5m_input_tokens": 0,
-                  "ephemeral_1h_input_tokens": 19150
-                },
-                "type": "message"
-              }
-            ],
-            "speed": "standard"
-          },
-          "source": "live"
-        }
-      ],
-      "askCount": 1,
-      "critique": {
-        "issues": [
-          {
-            "region": "roof vs walls (overall silhouette)",
-            "issue": "roof is too tall a share of the elevation — ridge:eave 1.55 and roofShare 0.3548 sit above target 1.4145 / 0.293; walls need to be taller relative to the fixed pitch-1 roof",
-            "severity": "major"
-          },
-          {
-            "region": "conformance gate",
-            "issue": "proportion-vs-concept FAILS; this is the only failing check and is the priority fix",
-            "severity": "major"
-          },
-          {
-            "region": "upper-storey timber framing",
-            "issue": "white infill + dark studs read correctly vs concept but the wall band is short, compressing the framed storey",
-            "severity": "minor"
-          }
-        ]
-      },
-      "decision": "revise",
-      "rationale": "Roof rise is fixed at ~10 by width+pitch-1, so the only proportion lever is taller walls: an eave of 24 (6×4, storeyHeight stays in the [3,4] band — avoiding last round's factorizer pick of storeyHeight 6) gives ridge:eave (24+10)/24≈1.417 and roofShare 10/34≈0.294, both inside the 0.15 tolerance. I set storeys/storeyHeight directly rather than eaveHeight to keep the factorization in-band.",
-      "action": {
-        "action": "adjust-params",
-        "elementId": "main",
-        "massId": "main",
-        "params": {
-          "storeys": 6,
-          "storeyHeight": 4
-        }
-      },
-      "applied": {
-        "kind": "failed"
-      },
-      "conformance": {
-        "before": {
-          "schema": "pack-conformance/v1",
-          "passed": false,
-          "checks": [
-            {
-              "name": "courses-even",
-              "passed": true,
-              "findings": []
-            },
-            {
-              "name": "symmetry-held",
-              "passed": true,
-              "findings": []
-            },
-            {
-              "name": "openings-rhythm",
-              "passed": true,
-              "findings": []
-            },
-            {
-              "name": "palette-in-pack",
-              "passed": true,
-              "findings": []
-            },
-            {
-              "name": "watertight",
-              "passed": true,
-              "findings": [],
-              "mouths": 0
-            },
-            {
-              "name": "single-component",
-              "passed": true,
-              "findings": [],
-              "components": 1
-            },
-            {
-              "name": "proportion-vs-concept",
-              "passed": false,
-              "findings": [
-                "ridgeToEave 6.2 vs target 1.4145 (sketch) — Δrel 3.3832 > tolerance 0.15",
-                "roofShare 0.8387 vs target 0.293 (sketch) — Δrel 1.8625 > tolerance 0.15"
-              ],
-              "ratios": {
-                "tolerance": 0.15,
-                "rows": [
-                  {
-                    "ratio": "ridgeToEave",
-                    "measured": 6.2,
-                    "target": 1.4145,
-                    "source": "sketch",
-                    "delta": 4.7855,
-                    "excess": 3.3832,
-                    "basis": "relative",
-                    "withinTolerance": false
-                  },
-                  {
-                    "ratio": "roofShare",
-                    "measured": 0.8387,
-                    "target": 0.293,
-                    "source": "sketch",
-                    "delta": 0.5457,
-                    "excess": 1.8625,
-                    "basis": "relative",
-                    "withinTolerance": false
-                  },
-                  {
-                    "ratio": "aspect",
-                    "measured": 1.1379,
-                    "target": 1.1852,
-                    "source": "sketch",
-                    "delta": 0.0473,
-                    "excess": 0.0399,
-                    "basis": "relative",
-                    "withinTolerance": true
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        "after": null,
-        "accepted": false,
-        "reason": "apply-failed: invalid building program (schema_invalid):\n  at /masses/0/storeys: must be <= 4"
-      }
-    },
-    {
-      "round": 3,
-      "renders": [
-        {
-          "angle": "+x+z",
-          "path": "benchmarks/sculpture/workshop/cottage/round-3/view-+x+z.png",
-          "bytes": 101475
-        },
-        {
-          "angle": "+x-z",
-          "path": "benchmarks/sculpture/workshop/cottage/round-3/view-+x-z.png",
-          "bytes": 99802
-        },
-        {
-          "angle": "-x-z",
-          "path": "benchmarks/sculpture/workshop/cottage/round-3/view--x-z.png",
-          "bytes": 103182
-        },
-        {
-          "angle": "-x+z",
-          "path": "benchmarks/sculpture/workshop/cottage/round-3/view--x+z.png",
-          "bytes": 103883
-        }
-      ],
-      "replies": [
-        {
-          "attempt": 1,
-          "parsed": true,
-          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"overall silhouette\", \"issue\": \"roof mass dominates the wall body — ridge:eave 1.55 and roofShare 0.355 still over the sketch targets (1.4145 / 0.293); walls read too short under the gable\", \"severity\": \"major\" },\n      { \"region\": \"upper storey walls\", \"issue\": \"concept shows half-timber vertical studs (dark_oak_log over white_terracotta",
-          "usage": {
-            "input_tokens": 11246,
-            "cache_creation_input_tokens": 19137,
-            "cache_read_input_tokens": 15824,
-            "output_tokens": 1577,
-            "server_tool_use": {
-              "web_search_requests": 0,
-              "web_fetch_requests": 0
-            },
-            "service_tier": "standard",
-            "cache_creation": {
-              "ephemeral_1h_input_tokens": 19137,
-              "ephemeral_5m_input_tokens": 0
-            },
-            "inference_geo": "not_available",
-            "iterations": [
-              {
-                "input_tokens": 11246,
-                "output_tokens": 1577,
-                "cache_read_input_tokens": 15824,
-                "cache_creation_input_tokens": 19137,
-                "cache_creation": {
-                  "ephemeral_5m_input_tokens": 0,
-                  "ephemeral_1h_input_tokens": 19137
+                  "ephemeral_1h_input_tokens": 19560
                 },
                 "type": "message"
               }
@@ -1376,23 +1268,23 @@
         "issues": [
           {
             "region": "overall silhouette",
-            "issue": "roof mass dominates the wall body — ridge:eave 1.55 and roofShare 0.355 still over the sketch targets (1.4145 / 0.293); walls read too short under the gable",
+            "issue": "roof occupies too much of the height — roofShare 0.3548 vs target 0.293 (proportion-vs-concept FAIL); walls read too short under a dominant roof",
             "severity": "major"
           },
           {
-            "region": "upper storey walls",
-            "issue": "concept shows half-timber vertical studs (dark_oak_log over white_terracotta); my upper walls are plain infill, so the timber-frame character is missing",
+            "region": "upper walls",
+            "issue": "no timber-frame relief reads — concept shows dark vertical beams on white infill, my build is flat pink terracotta",
             "severity": "minor"
           },
           {
-            "region": "chimney",
-            "issue": "chimney overshoots the ridge more than the concept's stubby stack",
+            "region": "ground storey",
+            "issue": "stone plinth/ground course is thinner and less pronounced than the concept's tall stone-brick ground floor",
             "severity": "minor"
           }
         ]
       },
       "decision": "revise",
-      "rationale": "Pitch is locked, so the only way to cut roofShare/ridge:eave is to grow the wall body: rise stays 10, and eaveHeight≈24 puts rise/eave at 0.414 → ridge:eave≈1.41 and roofShare≈0.293, both inside tolerance. Using the factorized eaveHeight lever avoids the storeys>4 schema reject from last round.",
+      "rationale": "pitchClass is already at the floor (1), so the only way to drop roofShare from 0.3548 toward 0.293 is to raise the wall height; bumping eaveHeight via the factorized lever (instead of last round's storeyHeight, which blew up ridge:eave) lifts the eave relative to a fixed ridge, shrinking the roof's share of the silhouette.",
       "action": {
         "action": "adjust-params",
         "elementId": "main",
@@ -1445,29 +1337,28 @@
               "name": "proportion-vs-concept",
               "passed": false,
               "findings": [
-                "ridgeToEave 6.2 vs target 1.4145 (sketch) — Δrel 3.3832 > tolerance 0.15",
-                "roofShare 0.8387 vs target 0.293 (sketch) — Δrel 1.8625 > tolerance 0.15"
+                "roofShare 0.3548 vs target 0.293 (sketch) — Δrel 0.2109 > tolerance 0.15"
               ],
               "ratios": {
                 "tolerance": 0.15,
                 "rows": [
                   {
                     "ratio": "ridgeToEave",
-                    "measured": 6.2,
+                    "measured": 1.55,
                     "target": 1.4145,
                     "source": "sketch",
-                    "delta": 4.7855,
-                    "excess": 3.3832,
+                    "delta": 0.1355,
+                    "excess": 0.0958,
                     "basis": "relative",
-                    "withinTolerance": false
+                    "withinTolerance": true
                   },
                   {
                     "ratio": "roofShare",
-                    "measured": 0.8387,
+                    "measured": 0.3548,
                     "target": 0.293,
                     "source": "sketch",
-                    "delta": 0.5457,
-                    "excess": 1.8625,
+                    "delta": 0.0618,
+                    "excess": 0.2109,
                     "basis": "relative",
                     "withinTolerance": false
                   },
@@ -1488,30 +1379,30 @@
         },
         "after": null,
         "accepted": false,
-        "reason": "apply-failed: geometry: candidate program is off the pack vocabulary:\n  at masses[0] (main).storeyHeight: 6 outside the pack band [3, 4]"
+        "reason": "apply-failed: geometry: candidate program is off the pack vocabulary:\n  at masses[0] (main).storeyHeight: 6 outside the pack band [3, 5]"
       }
     },
     {
-      "round": 4,
+      "round": 3,
       "renders": [
         {
           "angle": "+x+z",
-          "path": "benchmarks/sculpture/workshop/cottage/round-4/view-+x+z.png",
+          "path": "benchmarks/sculpture/workshop/cottage/round-3/view-+x+z.png",
           "bytes": 101475
         },
         {
           "angle": "+x-z",
-          "path": "benchmarks/sculpture/workshop/cottage/round-4/view-+x-z.png",
+          "path": "benchmarks/sculpture/workshop/cottage/round-3/view-+x-z.png",
           "bytes": 99802
         },
         {
           "angle": "-x-z",
-          "path": "benchmarks/sculpture/workshop/cottage/round-4/view--x-z.png",
+          "path": "benchmarks/sculpture/workshop/cottage/round-3/view--x-z.png",
           "bytes": 103182
         },
         {
           "angle": "-x+z",
-          "path": "benchmarks/sculpture/workshop/cottage/round-4/view--x+z.png",
+          "path": "benchmarks/sculpture/workshop/cottage/round-3/view--x+z.png",
           "bytes": 103883
         }
       ],
@@ -1519,31 +1410,31 @@
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "Looking at the concept (a tall‑walled half‑timbered manor with a moderate gable) versus my build (roof dominates, walls too short), the binding problem is the proportion gate: the roof is eating the silhouette. Last round's `eaveHeight:24` was rolled back because the factorizer chose `storeyHeight:6` (outside the [3,4] band). The clean fix is to grow the wall body via the `storeys` lever directly,",
+          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"overall silhouette\", \"issue\": \"Roof is too tall relative to the walls — roofShare 0.3548 vs target 0.293 (proportion-vs-concept FAILs). The concept's eave line sits higher; walls read as a full two storeys with the roof a smaller cap.\", \"severity\": \"major\" },\n      { \"region\": \"upper storey (white_terracotta)\", \"issue\": \"Flat, unframed i",
           "usage": {
-            "input_tokens": 11246,
-            "cache_creation_input_tokens": 19150,
-            "cache_read_input_tokens": 15824,
-            "output_tokens": 5546,
+            "input_tokens": 11719,
+            "cache_creation_input_tokens": 19572,
+            "cache_read_input_tokens": 15357,
+            "output_tokens": 3218,
             "server_tool_use": {
               "web_search_requests": 0,
               "web_fetch_requests": 0
             },
             "service_tier": "standard",
             "cache_creation": {
-              "ephemeral_1h_input_tokens": 19150,
+              "ephemeral_1h_input_tokens": 19572,
               "ephemeral_5m_input_tokens": 0
             },
             "inference_geo": "not_available",
             "iterations": [
               {
-                "input_tokens": 11246,
-                "output_tokens": 5546,
-                "cache_read_input_tokens": 15824,
-                "cache_creation_input_tokens": 19150,
+                "input_tokens": 11719,
+                "output_tokens": 3218,
+                "cache_read_input_tokens": 15357,
+                "cache_creation_input_tokens": 19572,
                 "cache_creation": {
                   "ephemeral_5m_input_tokens": 0,
-                  "ephemeral_1h_input_tokens": 19150
+                  "ephemeral_1h_input_tokens": 19572
                 },
                 "type": "message"
               }
@@ -1558,34 +1449,29 @@
         "issues": [
           {
             "region": "overall silhouette",
-            "issue": "roof share 0.84 / ridge:eave 6.2 vs targets 0.293 / 1.41 — the gable mass dominates because the wall body is too short under it",
+            "issue": "Roof is too tall relative to the walls — roofShare 0.3548 vs target 0.293 (proportion-vs-concept FAILs). The concept's eave line sits higher; walls read as a full two storeys with the roof a smaller cap.",
             "severity": "major"
           },
           {
-            "region": "upper storey walls",
-            "issue": "no timber-frame vertical studs (dark_oak_log over white_terracotta) — the half-timbered character of the concept is absent",
-            "severity": "major"
-          },
-          {
-            "region": "ground storey",
-            "issue": "stone-brick plinth reads correctly but is short; raising the wall will also restore the two-storey rhythm seen in the concept",
+            "region": "upper storey (white_terracotta)",
+            "issue": "Flat, unframed infill — the concept shows dark timber studs dividing the plaster panels; my upper walls lack that vertical framing relief.",
             "severity": "minor"
           },
           {
-            "region": "chimney",
-            "issue": "stack overshoots the ridge more than the concept's stubbier chimney",
+            "region": "ground storey (stone_bricks base)",
+            "issue": "Reads smoother/flatter than the concept's rusticated cobble-and-block plinth, but the pack assigns stone_bricks here so this is a texture-depth nuance, not a palette error.",
             "severity": "minor"
           }
         ]
       },
       "decision": "revise",
-      "rationale": "Grow the main wall body from 2 to 3 storeys (storeyHeight stays 4, in-band) to lower roofShare and ridge:eave toward target without repeating the rejected eaveHeight=24; this avoids the factorizer picking an out-of-band storeyHeight.",
+      "rationale": "pitchClass is already at its floor of 1, so the only lever to lower roofShare is a taller eave; raising main storeyHeight 4→5 (within the pack band [3,5], and avoiding last round's out-of-band eaveHeight:24) lifts the eave line ~2 blocks and is projected to bring roofShare to ~0.29–0.30, inside the 0.15 tolerance and clearing the proportion gate.",
       "action": {
         "action": "adjust-params",
         "elementId": "main",
         "massId": "main",
         "params": {
-          "storeys": 3
+          "storeyHeight": 5
         }
       },
       "applied": {
@@ -1633,29 +1519,28 @@
               "name": "proportion-vs-concept",
               "passed": false,
               "findings": [
-                "ridgeToEave 6.2 vs target 1.4145 (sketch) — Δrel 3.3832 > tolerance 0.15",
-                "roofShare 0.8387 vs target 0.293 (sketch) — Δrel 1.8625 > tolerance 0.15"
+                "roofShare 0.3548 vs target 0.293 (sketch) — Δrel 0.2109 > tolerance 0.15"
               ],
               "ratios": {
                 "tolerance": 0.15,
                 "rows": [
                   {
                     "ratio": "ridgeToEave",
-                    "measured": 6.2,
+                    "measured": 1.55,
                     "target": 1.4145,
                     "source": "sketch",
-                    "delta": 4.7855,
-                    "excess": 3.3832,
+                    "delta": 0.1355,
+                    "excess": 0.0958,
                     "basis": "relative",
-                    "withinTolerance": false
+                    "withinTolerance": true
                   },
                   {
                     "ratio": "roofShare",
-                    "measured": 0.8387,
+                    "measured": 0.3548,
                     "target": 0.293,
                     "source": "sketch",
-                    "delta": 0.5457,
-                    "excess": 1.8625,
+                    "delta": 0.0618,
+                    "excess": 0.2109,
                     "basis": "relative",
                     "withinTolerance": false
                   },
@@ -1714,29 +1599,29 @@
               "name": "proportion-vs-concept",
               "passed": false,
               "findings": [
-                "ridgeToEave 5.5 vs target 1.4145 (sketch) — Δrel 2.8883 > tolerance 0.15",
-                "roofShare 0.8182 vs target 0.293 (sketch) — Δrel 1.7925 > tolerance 0.15"
+                "ridgeToEave 5 vs target 1.4145 (sketch) — Δrel 2.5348 > tolerance 0.15",
+                "roofShare 0.8 vs target 0.293 (sketch) — Δrel 1.7304 > tolerance 0.15"
               ],
               "ratios": {
                 "tolerance": 0.15,
                 "rows": [
                   {
                     "ratio": "ridgeToEave",
-                    "measured": 5.5,
+                    "measured": 5,
                     "target": 1.4145,
                     "source": "sketch",
-                    "delta": 4.0855,
-                    "excess": 2.8883,
+                    "delta": 3.5855,
+                    "excess": 2.5348,
                     "basis": "relative",
                     "withinTolerance": false
                   },
                   {
                     "ratio": "roofShare",
-                    "measured": 0.8182,
+                    "measured": 0.8,
                     "target": 0.293,
                     "source": "sketch",
-                    "delta": 0.5252,
-                    "excess": 1.7925,
+                    "delta": 0.507,
+                    "excess": 1.7304,
                     "basis": "relative",
                     "withinTolerance": false
                   },
@@ -1755,63 +1640,63 @@
             }
           ]
         },
-        "accepted": true,
-        "reason": "accepted"
+        "accepted": false,
+        "reason": "regressed: passed 6→6, findings 1→2; ridgeToEave Δ 0.0958→2.5348 beyond tolerance"
       }
     },
     {
-      "round": 5,
+      "round": 4,
       "renders": [
         {
           "angle": "+x+z",
-          "path": "benchmarks/sculpture/workshop/cottage/round-5/view-+x+z.png",
-          "bytes": 105620
+          "path": "benchmarks/sculpture/workshop/cottage/round-4/view-+x+z.png",
+          "bytes": 101475
         },
         {
           "angle": "+x-z",
-          "path": "benchmarks/sculpture/workshop/cottage/round-5/view-+x-z.png",
-          "bytes": 102517
+          "path": "benchmarks/sculpture/workshop/cottage/round-4/view-+x-z.png",
+          "bytes": 99802
         },
         {
           "angle": "-x-z",
-          "path": "benchmarks/sculpture/workshop/cottage/round-5/view--x-z.png",
-          "bytes": 102470
+          "path": "benchmarks/sculpture/workshop/cottage/round-4/view--x-z.png",
+          "bytes": 103182
         },
         {
           "angle": "-x+z",
-          "path": "benchmarks/sculpture/workshop/cottage/round-5/view--x+z.png",
-          "bytes": 102903
+          "path": "benchmarks/sculpture/workshop/cottage/round-4/view--x+z.png",
+          "bytes": 103883
         }
       ],
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      {\n        \"region\": \"main mass roof vs walls\",\n        \"issue\": \"Roof dominates the silhouette — roofShare 0.6364 vs target 0.293 and ridge:eave 2.75 vs target 1.4145. Walls are far too short for the fixed pitch-1 roof rise, so the build reads as a roof on a stump instead of the concept's tall two-storey timber frame.\",\n        \"severity\": \"major\"\n  ",
+          "rawReply": "Looking at the four build views against the concept: the read is already quite close — timber-frame upper storey, stone base, spruce gable roofs, central chimney. The one failing gate is `proportion-vs-concept` (roofShare 0.3548 vs 0.293), and roofShare is algebraically tied to ridge:eave (roofShare = 1 − 1/ridgeEave). The roof is slightly too tall relative to the walls.\n\nLast round I raised `stor",
           "usage": {
-            "input_tokens": 11016,
-            "cache_creation_input_tokens": 19083,
-            "cache_read_input_tokens": 15824,
-            "output_tokens": 3000,
+            "input_tokens": 11719,
+            "cache_creation_input_tokens": 19560,
+            "cache_read_input_tokens": 15357,
+            "output_tokens": 10383,
             "server_tool_use": {
               "web_search_requests": 0,
               "web_fetch_requests": 0
             },
             "service_tier": "standard",
             "cache_creation": {
-              "ephemeral_1h_input_tokens": 19083,
+              "ephemeral_1h_input_tokens": 19560,
               "ephemeral_5m_input_tokens": 0
             },
             "inference_geo": "not_available",
             "iterations": [
               {
-                "input_tokens": 11016,
-                "output_tokens": 3000,
-                "cache_read_input_tokens": 15824,
-                "cache_creation_input_tokens": 19083,
+                "input_tokens": 11719,
+                "output_tokens": 10383,
+                "cache_read_input_tokens": 15357,
+                "cache_creation_input_tokens": 19560,
                 "cache_creation": {
                   "ephemeral_5m_input_tokens": 0,
-                  "ephemeral_1h_input_tokens": 19083
+                  "ephemeral_1h_input_tokens": 19560
                 },
                 "type": "message"
               }
@@ -1825,31 +1710,293 @@
       "critique": {
         "issues": [
           {
-            "region": "main mass roof vs walls",
-            "issue": "Roof dominates the silhouette — roofShare 0.6364 vs target 0.293 and ridge:eave 2.75 vs target 1.4145. Walls are far too short for the fixed pitch-1 roof rise, so the build reads as a roof on a stump instead of the concept's tall two-storey timber frame.",
+            "region": "overall silhouette",
+            "issue": "roof occupies too much of the height (roofShare 0.3548 vs 0.293); roof reads slightly too tall over the walls vs the concept's lower, longer roof",
             "severity": "major"
           },
           {
-            "region": "overall proportion",
-            "issue": "proportion-vs-concept conformance check is FAILING (the only failing gate); both ridge:eave and roofShare are well outside the 0.15 tolerance.",
-            "severity": "major"
+            "region": "upper storey walls",
+            "issue": "white_terracotta infill is flat; concept shows dark timber studs framing the plaster panels — relief not yet expressed",
+            "severity": "minor"
           },
           {
-            "region": "wing mass",
-            "issue": "Wing roof is similarly oversized relative to its short walls, but it is secondary to the main mass driving the silhouette.",
+            "region": "ground storey base",
+            "issue": "stone_bricks base is smooth; concept base is more rusticated/cobbled, but kit and read are acceptable",
             "severity": "minor"
           }
         ]
       },
       "decision": "revise",
-      "rationale": "Raising the main eave to 24 (6×4, keeping storeyHeight in the pack's [3,4] band so the factorizer stays legal) against the fixed ~10-block roof rise yields ridge:eave ≈1.42 and roofShare ≈0.294, both inside tolerance of the declared targets — the single move that clears the failing proportion gate. The wing can follow in round 6 if needed.",
+      "rationale": "roofShare and ridge:eave are the same coupled proportion constraint; a one-block taller eave (9, via the factorized eaveHeight lever) brings roofShare to ~0.30 and ridge:eave to ~1.43 — both inside tolerance — while avoiding the storeyHeight-5 measurement spike that rolled back last round.",
       "action": {
         "action": "adjust-params",
         "elementId": "main",
         "massId": "main",
         "params": {
-          "storeys": 6,
-          "storeyHeight": 4
+          "eaveHeight": 9
+        }
+      },
+      "applied": {
+        "kind": "geometry",
+        "paintPruned": 0
+      },
+      "conformance": {
+        "before": {
+          "schema": "pack-conformance/v1",
+          "passed": false,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            },
+            {
+              "name": "proportion-vs-concept",
+              "passed": false,
+              "findings": [
+                "roofShare 0.3548 vs target 0.293 (sketch) — Δrel 0.2109 > tolerance 0.15"
+              ],
+              "ratios": {
+                "tolerance": 0.15,
+                "rows": [
+                  {
+                    "ratio": "ridgeToEave",
+                    "measured": 1.55,
+                    "target": 1.4145,
+                    "source": "sketch",
+                    "delta": 0.1355,
+                    "excess": 0.0958,
+                    "basis": "relative",
+                    "withinTolerance": true
+                  },
+                  {
+                    "ratio": "roofShare",
+                    "measured": 0.3548,
+                    "target": 0.293,
+                    "source": "sketch",
+                    "delta": 0.0618,
+                    "excess": 0.2109,
+                    "basis": "relative",
+                    "withinTolerance": false
+                  },
+                  {
+                    "ratio": "aspect",
+                    "measured": 1.1379,
+                    "target": 1.1852,
+                    "source": "sketch",
+                    "delta": 0.0473,
+                    "excess": 0.0399,
+                    "basis": "relative",
+                    "withinTolerance": true
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "after": {
+          "schema": "pack-conformance/v1",
+          "passed": false,
+          "checks": [
+            {
+              "name": "courses-even",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "symmetry-held",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "openings-rhythm",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "palette-in-pack",
+              "passed": true,
+              "findings": []
+            },
+            {
+              "name": "watertight",
+              "passed": true,
+              "findings": [],
+              "mouths": 0
+            },
+            {
+              "name": "single-component",
+              "passed": true,
+              "findings": [],
+              "components": 1
+            },
+            {
+              "name": "proportion-vs-concept",
+              "passed": false,
+              "findings": [
+                "ridgeToEave 2.1111 vs target 1.4145 (sketch) — Δrel 0.4925 > tolerance 0.15",
+                "roofShare 0.5263 vs target 0.293 (sketch) — Δrel 0.7962 > tolerance 0.15"
+              ],
+              "ratios": {
+                "tolerance": 0.15,
+                "rows": [
+                  {
+                    "ratio": "ridgeToEave",
+                    "measured": 2.1111,
+                    "target": 1.4145,
+                    "source": "sketch",
+                    "delta": 0.6966,
+                    "excess": 0.4925,
+                    "basis": "relative",
+                    "withinTolerance": false
+                  },
+                  {
+                    "ratio": "roofShare",
+                    "measured": 0.5263,
+                    "target": 0.293,
+                    "source": "sketch",
+                    "delta": 0.2333,
+                    "excess": 0.7962,
+                    "basis": "relative",
+                    "withinTolerance": false
+                  },
+                  {
+                    "ratio": "aspect",
+                    "measured": 1.0357,
+                    "target": 1.1852,
+                    "source": "sketch",
+                    "delta": 0.1495,
+                    "excess": 0.1261,
+                    "basis": "relative",
+                    "withinTolerance": true
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "accepted": false,
+        "reason": "regressed: passed 6→6, findings 1→2; ridgeToEave Δ 0.0958→0.4925 beyond tolerance"
+      }
+    },
+    {
+      "round": 5,
+      "renders": [
+        {
+          "angle": "+x+z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-5/view-+x+z.png",
+          "bytes": 101475
+        },
+        {
+          "angle": "+x-z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-5/view-+x-z.png",
+          "bytes": 99802
+        },
+        {
+          "angle": "-x-z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-5/view--x-z.png",
+          "bytes": 103182
+        },
+        {
+          "angle": "-x+z",
+          "path": "benchmarks/sculpture/workshop/cottage/round-5/view--x+z.png",
+          "bytes": 103883
+        }
+      ],
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      { \"region\": \"roof vs walls (whole silhouette)\", \"issue\": \"roof is too tall a share of the building — roofShare 0.3548 vs concept 0.293 (ridge:eave 1.55 vs 1.4145); the gable dominates where the concept shows tall walls under a moderate roof\", \"severity\": \"major\" },\n      { \"region\": \"upper white_terracotta infill\", \"issue\": \"panels read as flat recol",
+          "usage": {
+            "input_tokens": 11776,
+            "cache_creation_input_tokens": 19560,
+            "cache_read_input_tokens": 15357,
+            "output_tokens": 15381,
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 19560,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "not_available",
+            "iterations": [
+              {
+                "input_tokens": 11776,
+                "output_tokens": 15381,
+                "cache_read_input_tokens": 15357,
+                "cache_creation_input_tokens": 19560,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 19560
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard"
+          },
+          "source": "live"
+        }
+      ],
+      "askCount": 1,
+      "critique": {
+        "issues": [
+          {
+            "region": "roof vs walls (whole silhouette)",
+            "issue": "roof is too tall a share of the building — roofShare 0.3548 vs concept 0.293 (ridge:eave 1.55 vs 1.4145); the gable dominates where the concept shows tall walls under a moderate roof",
+            "severity": "major"
+          },
+          {
+            "region": "upper white_terracotta infill",
+            "issue": "panels read as flat recolor; concept shows vertical dark-oak stud framing dividing the infill into bays",
+            "severity": "minor"
+          },
+          {
+            "region": "ground-storey plinth",
+            "issue": "stone_bricks reads smoother than the concept's rusticated/cobble base course",
+            "severity": "minor"
+          }
+        ]
+      },
+      "decision": "revise",
+      "rationale": "pitchClass is floored at 1 and roofHeight is fixed, so the only proportion lever is raising the eave — but eaveHeight=24 was rejected (factorizer→sh6) and eaveHeight=9 went the wrong way; supplying explicit in-band factors storeys=5×storeyHeight=5 forces eave≈25, projecting roofShare≈0.29 (ridge:eave≈1.4) inside the 0.15 tolerance without trusting the factorizer.",
+      "action": {
+        "action": "adjust-params",
+        "elementId": "main",
+        "massId": "main",
+        "params": {
+          "storeys": 5,
+          "storeyHeight": 5
         }
       },
       "applied": {
@@ -1896,39 +2043,38 @@
               "name": "proportion-vs-concept",
               "passed": false,
               "findings": [
-                "ridgeToEave 5.5 vs target 1.4145 (sketch) — Δrel 2.8883 > tolerance 0.15",
-                "roofShare 0.8182 vs target 0.293 (sketch) — Δrel 1.7925 > tolerance 0.15"
+                "roofShare 0.3548 vs target 0.293 (sketch) — Δrel 0.2109 > tolerance 0.15"
               ],
               "ratios": {
                 "tolerance": 0.15,
                 "rows": [
                   {
                     "ratio": "ridgeToEave",
-                    "measured": 5.5,
+                    "measured": 1.55,
                     "target": 1.4145,
                     "source": "sketch",
-                    "delta": 4.0855,
-                    "excess": 2.8883,
+                    "delta": 0.1355,
+                    "excess": 0.0958,
                     "basis": "relative",
-                    "withinTolerance": false
+                    "withinTolerance": true
                   },
                   {
                     "ratio": "roofShare",
-                    "measured": 0.8182,
+                    "measured": 0.3548,
                     "target": 0.293,
                     "source": "sketch",
-                    "delta": 0.5252,
-                    "excess": 1.7925,
+                    "delta": 0.0618,
+                    "excess": 0.2109,
                     "basis": "relative",
                     "withinTolerance": false
                   },
                   {
                     "ratio": "aspect",
-                    "measured": 1.0357,
+                    "measured": 1.1379,
                     "target": 1.1852,
                     "source": "sketch",
-                    "delta": 0.1495,
-                    "excess": 0.1261,
+                    "delta": 0.0473,
+                    "excess": 0.0399,
                     "basis": "relative",
                     "withinTolerance": true
                   }
@@ -1948,53 +2094,53 @@
         {
           "angle": "+x+z",
           "path": "benchmarks/sculpture/workshop/cottage/round-6/view-+x+z.png",
-          "bytes": 105620
+          "bytes": 101475
         },
         {
           "angle": "+x-z",
           "path": "benchmarks/sculpture/workshop/cottage/round-6/view-+x-z.png",
-          "bytes": 102517
+          "bytes": 99802
         },
         {
           "angle": "-x-z",
           "path": "benchmarks/sculpture/workshop/cottage/round-6/view--x-z.png",
-          "bytes": 102470
+          "bytes": 103182
         },
         {
           "angle": "-x+z",
           "path": "benchmarks/sculpture/workshop/cottage/round-6/view--x+z.png",
-          "bytes": 102903
+          "bytes": 103883
         }
       ],
       "replies": [
         {
           "attempt": 1,
           "parsed": true,
-          "rawReply": "Looking at the concept versus my build: the concept is a two‑storey timber‑frame house where the **walls carry most of the height** and the roof is a moderate cap. My build inverted this — the roof dominates the silhouette and the walls read as a short band, which is exactly what the failing `proportion-vs-concept` gate reports (roof/eave far too high). With `pitchClass` locked to [1] and `storeyH",
+          "rawReply": "```json\n{\n  \"critique\": {\n    \"issues\": [\n      {\n        \"region\": \"roof vs walls (whole silhouette)\",\n        \"issue\": \"Roof occupies too large a share of the height (roofShare 0.3548 vs target 0.293; ridge:eave 1.55 vs 1.4145). The concept's walls are taller relative to the roof — the gable sits on a fuller two-storey wall, whereas mine reads roof-heavy.\",\n        \"severity\": \"major\"\n      },\n ",
           "usage": {
-            "input_tokens": 11081,
-            "cache_creation_input_tokens": 19137,
-            "cache_read_input_tokens": 15824,
-            "output_tokens": 5534,
+            "input_tokens": 11016,
+            "cache_creation_input_tokens": 19559,
+            "cache_read_input_tokens": 15357,
+            "output_tokens": 4341,
             "server_tool_use": {
               "web_search_requests": 0,
               "web_fetch_requests": 0
             },
             "service_tier": "standard",
             "cache_creation": {
-              "ephemeral_1h_input_tokens": 19137,
+              "ephemeral_1h_input_tokens": 19559,
               "ephemeral_5m_input_tokens": 0
             },
             "inference_geo": "not_available",
             "iterations": [
               {
-                "input_tokens": 11081,
-                "output_tokens": 5534,
-                "cache_read_input_tokens": 15824,
-                "cache_creation_input_tokens": 19137,
+                "input_tokens": 11016,
+                "output_tokens": 4341,
+                "cache_read_input_tokens": 15357,
+                "cache_creation_input_tokens": 19559,
                 "cache_creation": {
                   "ephemeral_5m_input_tokens": 0,
-                  "ephemeral_1h_input_tokens": 19137
+                  "ephemeral_1h_input_tokens": 19559
                 },
                 "type": "message"
               }
@@ -2008,41 +2154,29 @@
       "critique": {
         "issues": [
           {
-            "region": "overall silhouette",
-            "issue": "roof occupies ~64-82% of the height; concept's walls are the dominant mass with a moderate roof cap (proportion-vs-concept FAIL)",
+            "region": "roof vs walls (whole silhouette)",
+            "issue": "Roof occupies too large a share of the height (roofShare 0.3548 vs target 0.293; ridge:eave 1.55 vs 1.4145). The concept's walls are taller relative to the roof — the gable sits on a fuller two-storey wall, whereas mine reads roof-heavy.",
             "severity": "major"
           },
           {
-            "region": "main wall body",
-            "issue": "only 3 short storeys read below the eave; concept shows a tall two-band timber-frame wall carrying the volume",
-            "severity": "major"
-          },
-          {
-            "region": "chimney",
-            "issue": "chimney overshoots the ridge by a large margin; concept's stack only just clears the ridge",
-            "severity": "minor"
-          },
-          {
-            "region": "wing",
-            "issue": "wing eave is even lower (8) so its roof reads as steep as the main; subordinate but same proportion problem",
+            "region": "front wing / cross-gable",
+            "issue": "Wing roof reads acceptably but the proportion failure is driven by the main mass; wing follows once the main eave lifts.",
             "severity": "minor"
           }
         ]
       },
       "decision": "revise",
-      "rationale": "Raise the main wall body to the in-band maximum (4 storeys × height 4 = eave 16) to drive roofShare and ridgeToEave down toward target; this is the only proportion lever that grows walls without breaking the pack's storeyHeight band, and differs from the rolled-back storeys:6.",
+      "rationale": "Pitch is already at the minimum class (1), so the only way to shed roof share is to raise the walls. With a fixed ~10-block roof rise, an eave of 24 gives roofShare 10/34 ≈ 0.294 and ridge:eave ≈ 1.42 — landing both metrics essentially on target, well inside tolerance, without touching the unchanged aspect.",
       "action": {
         "action": "adjust-params",
         "elementId": "main",
         "massId": "main",
         "params": {
-          "storeys": 4,
-          "storeyHeight": 4
+          "eaveHeight": 24
         }
       },
       "applied": {
-        "kind": "geometry",
-        "paintPruned": 0
+        "kind": "failed"
       },
       "conformance": {
         "before": {
@@ -2085,39 +2219,38 @@
               "name": "proportion-vs-concept",
               "passed": false,
               "findings": [
-                "ridgeToEave 5.5 vs target 1.4145 (sketch) — Δrel 2.8883 > tolerance 0.15",
-                "roofShare 0.8182 vs target 0.293 (sketch) — Δrel 1.7925 > tolerance 0.15"
+                "roofShare 0.3548 vs target 0.293 (sketch) — Δrel 0.2109 > tolerance 0.15"
               ],
               "ratios": {
                 "tolerance": 0.15,
                 "rows": [
                   {
                     "ratio": "ridgeToEave",
-                    "measured": 5.5,
+                    "measured": 1.55,
                     "target": 1.4145,
                     "source": "sketch",
-                    "delta": 4.0855,
-                    "excess": 2.8883,
+                    "delta": 0.1355,
+                    "excess": 0.0958,
                     "basis": "relative",
-                    "withinTolerance": false
+                    "withinTolerance": true
                   },
                   {
                     "ratio": "roofShare",
-                    "measured": 0.8182,
+                    "measured": 0.3548,
                     "target": 0.293,
                     "source": "sketch",
-                    "delta": 0.5252,
-                    "excess": 1.7925,
+                    "delta": 0.0618,
+                    "excess": 0.2109,
                     "basis": "relative",
                     "withinTolerance": false
                   },
                   {
                     "ratio": "aspect",
-                    "measured": 1.0357,
+                    "measured": 1.1379,
                     "target": 1.1852,
                     "source": "sketch",
-                    "delta": 0.1495,
-                    "excess": 0.1261,
+                    "delta": 0.0473,
+                    "excess": 0.0399,
                     "basis": "relative",
                     "withinTolerance": true
                   }
@@ -2126,89 +2259,9 @@
             }
           ]
         },
-        "after": {
-          "schema": "pack-conformance/v1",
-          "passed": false,
-          "checks": [
-            {
-              "name": "courses-even",
-              "passed": true,
-              "findings": []
-            },
-            {
-              "name": "symmetry-held",
-              "passed": true,
-              "findings": []
-            },
-            {
-              "name": "openings-rhythm",
-              "passed": true,
-              "findings": []
-            },
-            {
-              "name": "palette-in-pack",
-              "passed": true,
-              "findings": []
-            },
-            {
-              "name": "watertight",
-              "passed": true,
-              "findings": [],
-              "mouths": 0
-            },
-            {
-              "name": "single-component",
-              "passed": true,
-              "findings": [],
-              "components": 1
-            },
-            {
-              "name": "proportion-vs-concept",
-              "passed": false,
-              "findings": [
-                "ridgeToEave 6.5 vs target 1.4145 (sketch) — Δrel 3.5953 > tolerance 0.15",
-                "roofShare 0.8462 vs target 0.293 (sketch) — Δrel 1.8881 > tolerance 0.15"
-              ],
-              "ratios": {
-                "tolerance": 0.15,
-                "rows": [
-                  {
-                    "ratio": "ridgeToEave",
-                    "measured": 6.5,
-                    "target": 1.4145,
-                    "source": "sketch",
-                    "delta": 5.0855,
-                    "excess": 3.5953,
-                    "basis": "relative",
-                    "withinTolerance": false
-                  },
-                  {
-                    "ratio": "roofShare",
-                    "measured": 0.8462,
-                    "target": 0.293,
-                    "source": "sketch",
-                    "delta": 0.5532,
-                    "excess": 1.8881,
-                    "basis": "relative",
-                    "withinTolerance": false
-                  },
-                  {
-                    "ratio": "aspect",
-                    "measured": 1.0357,
-                    "target": 1.1852,
-                    "source": "sketch",
-                    "delta": 0.1495,
-                    "excess": 0.1261,
-                    "basis": "relative",
-                    "withinTolerance": true
-                  }
-                ]
-              }
-            }
-          ]
-        },
+        "after": null,
         "accepted": false,
-        "reason": "regressed: passed 6→6, findings 2→2; ridgeToEave Δ 2.8883→3.5953 beyond tolerance"
+        "reason": "apply-failed: geometry: candidate program is off the pack vocabulary:\n  at masses[0] (main).storeyHeight: 6 outside the pack band [3, 5]"
       }
     }
   ],
@@ -2255,39 +2308,38 @@
           "name": "proportion-vs-concept",
           "passed": false,
           "findings": [
-            "ridgeToEave 5.5 vs target 1.4145 (sketch) — Δrel 2.8883 > tolerance 0.15",
-            "roofShare 0.8182 vs target 0.293 (sketch) — Δrel 1.7925 > tolerance 0.15"
+            "roofShare 0.3548 vs target 0.293 (sketch) — Δrel 0.2109 > tolerance 0.15"
           ],
           "ratios": {
             "tolerance": 0.15,
             "rows": [
               {
                 "ratio": "ridgeToEave",
-                "measured": 5.5,
+                "measured": 1.55,
                 "target": 1.4145,
                 "source": "sketch",
-                "delta": 4.0855,
-                "excess": 2.8883,
+                "delta": 0.1355,
+                "excess": 0.0958,
                 "basis": "relative",
-                "withinTolerance": false
+                "withinTolerance": true
               },
               {
                 "ratio": "roofShare",
-                "measured": 0.8182,
+                "measured": 0.3548,
                 "target": 0.293,
                 "source": "sketch",
-                "delta": 0.5252,
-                "excess": 1.7925,
+                "delta": 0.0618,
+                "excess": 0.2109,
                 "basis": "relative",
                 "withinTolerance": false
               },
               {
                 "ratio": "aspect",
-                "measured": 1.0357,
+                "measured": 1.1379,
                 "target": 1.1852,
                 "source": "sketch",
-                "delta": 0.1495,
-                "excess": 0.1261,
+                "delta": 0.0473,
+                "excess": 0.0399,
                 "basis": "relative",
                 "withinTolerance": true
               }

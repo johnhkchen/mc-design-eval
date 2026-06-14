@@ -6,11 +6,11 @@
   "inputs": {
     "ledger": {
       "path": "benchmarks/sculpture/workshop/cottage.json",
-      "sha256": "e1abd583ca3393b3c1bef19dbab10992b5937994563d27fc1ce9eb9605701c0c"
+      "sha256": "5be4b1639be2c99d12a8ee6698e60914000ece4a540a149879882f84f5c028f9"
     },
     "finalArtifact": {
       "path": "benchmarks/sculpture/workshop/cottage/final-artifact.json",
-      "sha256": "cc9530aa6d5621947a29908b6f811c7bff2ad98ec9b75153b9fb1f5fa1b26c8f"
+      "sha256": "3674856616afe77432de41f5c426eb66f9ff89339a2687120801914f0f8aa34c"
     },
     "sketch": {
       "path": "benchmarks/sculpture/form-sketch/cottage.json",
@@ -44,39 +44,39 @@
       "round": 0,
       "stage": "seed",
       "ratios": {
-        "ridgeToEave": 4.5,
-        "roofShare": 0.7778,
-        "aspect": 1.0357
+        "ridgeToEave": 1.55,
+        "roofShare": 0.3548,
+        "aspect": 1.1379
       },
       "pass": false,
       "rows": [
         {
           "ratio": "ridgeToEave",
-          "measured": 4.5,
+          "measured": 1.55,
           "target": 1.4145,
           "source": "sketch",
-          "delta": 3.0855,
-          "excess": 2.1813,
+          "delta": 0.1355,
+          "excess": 0.0958,
           "basis": "relative",
-          "withinTolerance": false
+          "withinTolerance": true
         },
         {
           "ratio": "roofShare",
-          "measured": 0.7778,
+          "measured": 0.3548,
           "target": 0.293,
           "source": "sketch",
-          "delta": 0.4848,
-          "excess": 1.6546,
+          "delta": 0.0618,
+          "excess": 0.2109,
           "basis": "relative",
           "withinTolerance": false
         },
         {
           "ratio": "aspect",
-          "measured": 1.0357,
+          "measured": 1.1379,
           "target": 1.1852,
           "source": "sketch",
-          "delta": 0.1495,
-          "excess": 0.1261,
+          "delta": 0.0473,
+          "excess": 0.0399,
           "basis": "relative",
           "withinTolerance": true
         }
@@ -85,63 +85,55 @@
     {
       "round": 1,
       "decision": "revise",
-      "accepted": true,
+      "accepted": false,
       "critiqueIssues": [
         {
           "severity": "major",
-          "region": "upper storey (white_terracotta band)"
-        },
-        {
-          "severity": "major",
-          "region": "roof vs walls overall mass"
+          "region": "overall silhouette"
         },
         {
           "severity": "minor",
-          "region": "roof eave / gable verge"
+          "region": "upper storey walls"
         },
         {
           "severity": "minor",
-          "region": "upper-storey windows"
-        },
-        {
-          "severity": "minor",
-          "region": "white infill color"
+          "region": "ground storey"
         }
       ],
       "ratios": {
-        "ridgeToEave": 4.5,
-        "roofShare": 0.7778,
-        "aspect": 1.0357
+        "ridgeToEave": 1.55,
+        "roofShare": 0.3548,
+        "aspect": 1.1379
       },
       "pass": false,
       "rows": [
         {
           "ratio": "ridgeToEave",
-          "measured": 4.5,
+          "measured": 1.55,
           "target": 1.4145,
           "source": "sketch",
-          "delta": 3.0855,
-          "excess": 2.1813,
+          "delta": 0.1355,
+          "excess": 0.0958,
           "basis": "relative",
-          "withinTolerance": false
+          "withinTolerance": true
         },
         {
           "ratio": "roofShare",
-          "measured": 0.7778,
+          "measured": 0.3548,
           "target": 0.293,
           "source": "sketch",
-          "delta": 0.4848,
-          "excess": 1.6546,
+          "delta": 0.0618,
+          "excess": 0.2109,
           "basis": "relative",
           "withinTolerance": false
         },
         {
           "ratio": "aspect",
-          "measured": 1.0357,
+          "measured": 1.1379,
           "target": 1.1852,
           "source": "sketch",
-          "delta": 0.1495,
-          "excess": 0.1261,
+          "delta": 0.0473,
+          "excess": 0.0399,
           "basis": "relative",
           "withinTolerance": true
         }
@@ -150,59 +142,55 @@
     {
       "round": 2,
       "decision": "revise",
-      "accepted": true,
+      "accepted": false,
       "critiqueIssues": [
         {
           "severity": "major",
-          "region": "upper storey walls (all faces)"
-        },
-        {
-          "severity": "major",
-          "region": "main roof eaves"
+          "region": "overall silhouette"
         },
         {
           "severity": "minor",
-          "region": "window surrounds"
+          "region": "upper walls"
         },
         {
           "severity": "minor",
-          "region": "overall proportion"
+          "region": "ground storey"
         }
       ],
       "ratios": {
-        "ridgeToEave": 4.5,
-        "roofShare": 0.7778,
-        "aspect": 1.0357
+        "ridgeToEave": 1.55,
+        "roofShare": 0.3548,
+        "aspect": 1.1379
       },
       "pass": false,
       "rows": [
         {
           "ratio": "ridgeToEave",
-          "measured": 4.5,
+          "measured": 1.55,
           "target": 1.4145,
           "source": "sketch",
-          "delta": 3.0855,
-          "excess": 2.1813,
+          "delta": 0.1355,
+          "excess": 0.0958,
           "basis": "relative",
-          "withinTolerance": false
+          "withinTolerance": true
         },
         {
           "ratio": "roofShare",
-          "measured": 0.7778,
+          "measured": 0.3548,
           "target": 0.293,
           "source": "sketch",
-          "delta": 0.4848,
-          "excess": 1.6546,
+          "delta": 0.0618,
+          "excess": 0.2109,
           "basis": "relative",
           "withinTolerance": false
         },
         {
           "ratio": "aspect",
-          "measured": 1.0357,
+          "measured": 1.1379,
           "target": 1.1852,
           "source": "sketch",
-          "delta": 0.1495,
-          "excess": 0.1261,
+          "delta": 0.0473,
+          "excess": 0.0399,
           "basis": "relative",
           "withinTolerance": true
         }
@@ -211,55 +199,55 @@
     {
       "round": 3,
       "decision": "revise",
-      "accepted": true,
+      "accepted": false,
       "critiqueIssues": [
         {
           "severity": "major",
-          "region": "upper storey, all facades"
+          "region": "overall silhouette"
         },
         {
           "severity": "minor",
-          "region": "roof mass (all views)"
+          "region": "upper storey (white_terracotta)"
         },
         {
           "severity": "minor",
-          "region": "chimney"
+          "region": "ground storey (stone_bricks base)"
         }
       ],
       "ratios": {
-        "ridgeToEave": 4.5,
-        "roofShare": 0.7778,
-        "aspect": 1.0357
+        "ridgeToEave": 1.55,
+        "roofShare": 0.3548,
+        "aspect": 1.1379
       },
       "pass": false,
       "rows": [
         {
           "ratio": "ridgeToEave",
-          "measured": 4.5,
+          "measured": 1.55,
           "target": 1.4145,
           "source": "sketch",
-          "delta": 3.0855,
-          "excess": 2.1813,
+          "delta": 0.1355,
+          "excess": 0.0958,
           "basis": "relative",
-          "withinTolerance": false
+          "withinTolerance": true
         },
         {
           "ratio": "roofShare",
-          "measured": 0.7778,
+          "measured": 0.3548,
           "target": 0.293,
           "source": "sketch",
-          "delta": 0.4848,
-          "excess": 1.6546,
+          "delta": 0.0618,
+          "excess": 0.2109,
           "basis": "relative",
           "withinTolerance": false
         },
         {
           "ratio": "aspect",
-          "measured": 1.0357,
+          "measured": 1.1379,
           "target": 1.1852,
           "source": "sketch",
-          "delta": 0.1495,
-          "excess": 0.1261,
+          "delta": 0.0473,
+          "excess": 0.0399,
           "basis": "relative",
           "withinTolerance": true
         }
@@ -268,59 +256,55 @@
     {
       "round": 4,
       "decision": "revise",
-      "accepted": true,
+      "accepted": false,
       "critiqueIssues": [
         {
           "severity": "major",
-          "region": "upper storey (cream walls, all faces)"
+          "region": "overall silhouette"
         },
         {
           "severity": "minor",
-          "region": "roof vs walls overall"
+          "region": "upper storey walls"
         },
         {
           "severity": "minor",
-          "region": "roof field color"
-        },
-        {
-          "severity": "minor",
-          "region": "ground storey stone"
+          "region": "ground storey base"
         }
       ],
       "ratios": {
-        "ridgeToEave": 4.5,
-        "roofShare": 0.7778,
-        "aspect": 1.0357
+        "ridgeToEave": 1.55,
+        "roofShare": 0.3548,
+        "aspect": 1.1379
       },
       "pass": false,
       "rows": [
         {
           "ratio": "ridgeToEave",
-          "measured": 4.5,
+          "measured": 1.55,
           "target": 1.4145,
           "source": "sketch",
-          "delta": 3.0855,
-          "excess": 2.1813,
+          "delta": 0.1355,
+          "excess": 0.0958,
           "basis": "relative",
-          "withinTolerance": false
+          "withinTolerance": true
         },
         {
           "ratio": "roofShare",
-          "measured": 0.7778,
+          "measured": 0.3548,
           "target": 0.293,
           "source": "sketch",
-          "delta": 0.4848,
-          "excess": 1.6546,
+          "delta": 0.0618,
+          "excess": 0.2109,
           "basis": "relative",
           "withinTolerance": false
         },
         {
           "ratio": "aspect",
-          "measured": 1.0357,
+          "measured": 1.1379,
           "target": 1.1852,
           "source": "sketch",
-          "delta": 0.1495,
-          "excess": 0.1261,
+          "delta": 0.0473,
+          "excess": 0.0399,
           "basis": "relative",
           "withinTolerance": true
         }
@@ -329,59 +313,55 @@
     {
       "round": 5,
       "decision": "revise",
-      "accepted": true,
+      "accepted": false,
       "critiqueIssues": [
         {
           "severity": "major",
-          "region": "wing upper storey (+x face, x=25)"
+          "region": "roof vs walls (whole silhouette)"
         },
         {
           "severity": "minor",
-          "region": "-z (south) upper facade"
+          "region": "upper white_terracotta infill"
         },
         {
           "severity": "minor",
-          "region": "overall upper storey"
-        },
-        {
-          "severity": "minor",
-          "region": "roof"
+          "region": "ground-storey plinth"
         }
       ],
       "ratios": {
-        "ridgeToEave": 4.5,
-        "roofShare": 0.7778,
-        "aspect": 1.0357
+        "ridgeToEave": 1.55,
+        "roofShare": 0.3548,
+        "aspect": 1.1379
       },
       "pass": false,
       "rows": [
         {
           "ratio": "ridgeToEave",
-          "measured": 4.5,
+          "measured": 1.55,
           "target": 1.4145,
           "source": "sketch",
-          "delta": 3.0855,
-          "excess": 2.1813,
+          "delta": 0.1355,
+          "excess": 0.0958,
           "basis": "relative",
-          "withinTolerance": false
+          "withinTolerance": true
         },
         {
           "ratio": "roofShare",
-          "measured": 0.7778,
+          "measured": 0.3548,
           "target": 0.293,
           "source": "sketch",
-          "delta": 0.4848,
-          "excess": 1.6546,
+          "delta": 0.0618,
+          "excess": 0.2109,
           "basis": "relative",
           "withinTolerance": false
         },
         {
           "ratio": "aspect",
-          "measured": 1.0357,
+          "measured": 1.1379,
           "target": 1.1852,
           "source": "sketch",
-          "delta": 0.1495,
-          "excess": 0.1261,
+          "delta": 0.0473,
+          "excess": 0.0399,
           "basis": "relative",
           "withinTolerance": true
         }
@@ -389,56 +369,52 @@
     },
     {
       "round": 6,
-      "decision": "done",
-      "accepted": true,
+      "decision": "revise",
+      "accepted": false,
       "critiqueIssues": [
         {
-          "severity": "minor",
-          "region": "roof vs upper storey"
+          "severity": "major",
+          "region": "roof vs walls (whole silhouette)"
         },
         {
           "severity": "minor",
-          "region": "timber studs"
-        },
-        {
-          "severity": "minor",
-          "region": "wing roof"
+          "region": "front wing / cross-gable"
         }
       ],
       "ratios": {
-        "ridgeToEave": 4.5,
-        "roofShare": 0.7778,
-        "aspect": 1.0357
+        "ridgeToEave": 1.55,
+        "roofShare": 0.3548,
+        "aspect": 1.1379
       },
       "pass": false,
       "rows": [
         {
           "ratio": "ridgeToEave",
-          "measured": 4.5,
+          "measured": 1.55,
           "target": 1.4145,
           "source": "sketch",
-          "delta": 3.0855,
-          "excess": 2.1813,
+          "delta": 0.1355,
+          "excess": 0.0958,
           "basis": "relative",
-          "withinTolerance": false
+          "withinTolerance": true
         },
         {
           "ratio": "roofShare",
-          "measured": 0.7778,
+          "measured": 0.3548,
           "target": 0.293,
           "source": "sketch",
-          "delta": 0.4848,
-          "excess": 1.6546,
+          "delta": 0.0618,
+          "excess": 0.2109,
           "basis": "relative",
           "withinTolerance": false
         },
         {
           "ratio": "aspect",
-          "measured": 1.0357,
+          "measured": 1.1379,
           "target": 1.1852,
           "source": "sketch",
-          "delta": 0.1495,
-          "excess": 0.1261,
+          "delta": 0.0473,
+          "excess": 0.0399,
           "basis": "relative",
           "withinTolerance": true
         }
@@ -446,12 +422,12 @@
     }
   ],
   "defect": {
-    "ratio": "ridgeToEave",
-    "measured": 4.5,
-    "target": 1.4145,
+    "ratio": "roofShare",
+    "measured": 0.3548,
+    "target": 0.293,
     "source": "sketch",
-    "delta": 3.0855,
-    "excess": 2.1813,
+    "delta": 0.0618,
+    "excess": 0.2109,
     "basis": "relative",
     "withinTolerance": false
   },

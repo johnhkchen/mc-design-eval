@@ -5,10 +5,10 @@
   "label": "patternbook",
   "source": {
     "record": "benchmarks/sculpture/multi-angle/cottage-patternbook.json",
-    "sha256": "f5567754f77c83278f2e7e2677de3773465269b552afa94cad762dc4d10dd0a7",
+    "sha256": "fc4bbeacc2ff3e03ea4ec16e90693a31e5ba3339891b09afd2f58b1dbe55b799",
     "artifact": {
       "path": "benchmarks/sculpture/workshop/cottage/final-artifact.json",
-      "sha256": "cc9530aa6d5621947a29908b6f811c7bff2ad98ec9b75153b9fb1f5fa1b26c8f"
+      "sha256": "3674856616afe77432de41f5c426eb66f9ff89339a2687120801914f0f8aa34c"
     }
   },
   "contract": {
@@ -22,6 +22,7 @@
     "width": 512,
     "height": 512,
     "gapBudget": 2,
+    "minorBudget": 10,
     "coverageThreshold": 0.5,
     "note": "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them"
   },
@@ -87,13 +88,13 @@
     "basis": "rederived",
     "byBand": {
       "band0": {
-        "total": 1080
+        "total": 1920
       },
       "band1": {
-        "total": 0
+        "total": 1008
       },
       "roof": {
-        "total": 1497
+        "total": 1782
       }
     }
   },
@@ -102,15 +103,22 @@
     {
       "angle": "+x+z",
       "aware": {
-        "passed": true,
+        "passed": false,
         "threshold": 0.5,
-        "failures": [],
+        "failures": [
+          {
+            "zone": "band0",
+            "dominant": "stone_bricks",
+            "fraction": 0.398,
+            "total": 636
+          }
+        ],
         "byZone": {
           "band0": {
             "dominant": "stone_bricks",
-            "fraction": 0.644,
-            "total": 354,
-            "passed": true,
+            "fraction": 0.398,
+            "total": 636,
+            "passed": false,
             "metric": "own",
             "own": [
               "stone_bricks",
@@ -119,12 +127,27 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.497
+            "dominantFraction": 0.382
+          },
+          "band1": {
+            "dominant": "white_terracotta",
+            "fraction": 1,
+            "total": 350,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "white_terracotta",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 1
           },
           "roof": {
             "dominant": "spruce_planks",
             "fraction": 1,
-            "total": 411,
+            "total": 486,
             "passed": true,
             "metric": "own",
             "own": [
@@ -135,16 +158,7 @@
               "bricks",
               "spruce_stairs"
             ],
-            "dominantFraction": 0.465
-          },
-          "band1": {
-            "total": 0,
-            "fraction": null,
-            "dominant": null,
-            "passed": null,
-            "excluded": true,
-            "notVisible": true,
-            "status": "not-visible-from-view"
+            "dominantFraction": 0.453
           }
         }
       },
@@ -153,18 +167,18 @@
         "threshold": 0.5,
         "failures": [
           {
-            "zone": "band1",
-            "dominant": null,
-            "fraction": null,
-            "total": 0
+            "zone": "band0",
+            "dominant": "stone_bricks",
+            "fraction": 0.398,
+            "total": 636
           }
         ],
         "byZone": {
           "band0": {
             "dominant": "stone_bricks",
-            "fraction": 0.644,
-            "total": 354,
-            "passed": true,
+            "fraction": 0.398,
+            "total": 636,
+            "passed": false,
             "metric": "own",
             "own": [
               "stone_bricks",
@@ -173,21 +187,27 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.497
+            "dominantFraction": 0.382
           },
           "band1": {
-            "dominant": null,
-            "fraction": null,
-            "total": 0,
-            "passed": false,
+            "dominant": "white_terracotta",
+            "fraction": 1,
+            "total": 350,
+            "passed": true,
             "metric": "own",
-            "own": null,
-            "dominantFraction": null
+            "own": [
+              "white_terracotta",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 1
           },
           "roof": {
             "dominant": "spruce_planks",
             "fraction": 1,
-            "total": 411,
+            "total": 486,
             "passed": true,
             "metric": "own",
             "own": [
@@ -198,7 +218,7 @@
               "bricks",
               "spruce_stairs"
             ],
-            "dominantFraction": 0.465
+            "dominantFraction": 0.453
           }
         }
       }
@@ -206,15 +226,22 @@
     {
       "angle": "+x-z",
       "aware": {
-        "passed": true,
+        "passed": false,
         "threshold": 0.5,
-        "failures": [],
+        "failures": [
+          {
+            "zone": "band0",
+            "dominant": "stone_bricks",
+            "fraction": 0.41,
+            "total": 631
+          }
+        ],
         "byZone": {
           "band0": {
             "dominant": "stone_bricks",
-            "fraction": 0.695,
-            "total": 347,
-            "passed": true,
+            "fraction": 0.41,
+            "total": 631,
+            "passed": false,
             "metric": "own",
             "own": [
               "stone_bricks",
@@ -223,12 +250,27 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.504
+            "dominantFraction": 0.38
+          },
+          "band1": {
+            "dominant": "white_terracotta",
+            "fraction": 1,
+            "total": 357,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "white_terracotta",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 1
           },
           "roof": {
             "dominant": "spruce_planks",
             "fraction": 1,
-            "total": 438,
+            "total": 515,
             "passed": true,
             "metric": "own",
             "own": [
@@ -239,16 +281,7 @@
               "bricks",
               "spruce_stairs"
             ],
-            "dominantFraction": 0.436
-          },
-          "band1": {
-            "total": 0,
-            "fraction": null,
-            "dominant": null,
-            "passed": null,
-            "excluded": true,
-            "notVisible": true,
-            "status": "not-visible-from-view"
+            "dominantFraction": 0.427
           }
         }
       },
@@ -257,18 +290,18 @@
         "threshold": 0.5,
         "failures": [
           {
-            "zone": "band1",
-            "dominant": null,
-            "fraction": null,
-            "total": 0
+            "zone": "band0",
+            "dominant": "stone_bricks",
+            "fraction": 0.41,
+            "total": 631
           }
         ],
         "byZone": {
           "band0": {
             "dominant": "stone_bricks",
-            "fraction": 0.695,
-            "total": 347,
-            "passed": true,
+            "fraction": 0.41,
+            "total": 631,
+            "passed": false,
             "metric": "own",
             "own": [
               "stone_bricks",
@@ -277,21 +310,27 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.504
+            "dominantFraction": 0.38
           },
           "band1": {
-            "dominant": null,
-            "fraction": null,
-            "total": 0,
-            "passed": false,
+            "dominant": "white_terracotta",
+            "fraction": 1,
+            "total": 357,
+            "passed": true,
             "metric": "own",
-            "own": null,
-            "dominantFraction": null
+            "own": [
+              "white_terracotta",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 1
           },
           "roof": {
             "dominant": "spruce_planks",
             "fraction": 1,
-            "total": 438,
+            "total": 515,
             "passed": true,
             "metric": "own",
             "own": [
@@ -302,7 +341,7 @@
               "bricks",
               "spruce_stairs"
             ],
-            "dominantFraction": 0.436
+            "dominantFraction": 0.427
           }
         }
       }
@@ -310,15 +349,22 @@
     {
       "angle": "-x-z",
       "aware": {
-        "passed": true,
+        "passed": false,
         "threshold": 0.5,
-        "failures": [],
+        "failures": [
+          {
+            "zone": "band0",
+            "dominant": "stone_bricks",
+            "fraction": 0.451,
+            "total": 634
+          }
+        ],
         "byZone": {
           "band0": {
             "dominant": "stone_bricks",
-            "fraction": 0.649,
-            "total": 350,
-            "passed": true,
+            "fraction": 0.451,
+            "total": 634,
+            "passed": false,
             "metric": "own",
             "own": [
               "stone_bricks",
@@ -327,12 +373,27 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.457
+            "dominantFraction": 0.36
+          },
+          "band1": {
+            "dominant": "white_terracotta",
+            "fraction": 1,
+            "total": 350,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "white_terracotta",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 1
           },
           "roof": {
             "dominant": "spruce_planks",
             "fraction": 1,
-            "total": 415,
+            "total": 488,
             "passed": true,
             "metric": "own",
             "own": [
@@ -343,16 +404,7 @@
               "bricks",
               "spruce_stairs"
             ],
-            "dominantFraction": 0.287
-          },
-          "band1": {
-            "total": 0,
-            "fraction": null,
-            "dominant": null,
-            "passed": null,
-            "excluded": true,
-            "notVisible": true,
-            "status": "not-visible-from-view"
+            "dominantFraction": 0.268
           }
         }
       },
@@ -361,18 +413,18 @@
         "threshold": 0.5,
         "failures": [
           {
-            "zone": "band1",
-            "dominant": null,
-            "fraction": null,
-            "total": 0
+            "zone": "band0",
+            "dominant": "stone_bricks",
+            "fraction": 0.451,
+            "total": 634
           }
         ],
         "byZone": {
           "band0": {
             "dominant": "stone_bricks",
-            "fraction": 0.649,
-            "total": 350,
-            "passed": true,
+            "fraction": 0.451,
+            "total": 634,
+            "passed": false,
             "metric": "own",
             "own": [
               "stone_bricks",
@@ -381,21 +433,27 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.457
+            "dominantFraction": 0.36
           },
           "band1": {
-            "dominant": null,
-            "fraction": null,
-            "total": 0,
-            "passed": false,
+            "dominant": "white_terracotta",
+            "fraction": 1,
+            "total": 350,
+            "passed": true,
             "metric": "own",
-            "own": null,
-            "dominantFraction": null
+            "own": [
+              "white_terracotta",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 1
           },
           "roof": {
             "dominant": "spruce_planks",
             "fraction": 1,
-            "total": 415,
+            "total": 488,
             "passed": true,
             "metric": "own",
             "own": [
@@ -406,7 +464,7 @@
               "bricks",
               "spruce_stairs"
             ],
-            "dominantFraction": 0.287
+            "dominantFraction": 0.268
           }
         }
       }
@@ -414,15 +472,22 @@
     {
       "angle": "-x+z",
       "aware": {
-        "passed": true,
+        "passed": false,
         "threshold": 0.5,
-        "failures": [],
+        "failures": [
+          {
+            "zone": "band0",
+            "dominant": "stone_bricks",
+            "fraction": 0.437,
+            "total": 666
+          }
+        ],
         "byZone": {
           "band0": {
             "dominant": "stone_bricks",
-            "fraction": 0.604,
-            "total": 379,
-            "passed": true,
+            "fraction": 0.437,
+            "total": 666,
+            "passed": false,
             "metric": "own",
             "own": [
               "stone_bricks",
@@ -431,12 +496,27 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.462
+            "dominantFraction": 0.363
+          },
+          "band1": {
+            "dominant": "white_terracotta",
+            "fraction": 1,
+            "total": 357,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "white_terracotta",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 1
           },
           "roof": {
             "dominant": "spruce_planks",
             "fraction": 1,
-            "total": 406,
+            "total": 480,
             "passed": true,
             "metric": "own",
             "own": [
@@ -447,16 +527,7 @@
               "bricks",
               "spruce_stairs"
             ],
-            "dominantFraction": 0.296
-          },
-          "band1": {
-            "total": 0,
-            "fraction": null,
-            "dominant": null,
-            "passed": null,
-            "excluded": true,
-            "notVisible": true,
-            "status": "not-visible-from-view"
+            "dominantFraction": 0.275
           }
         }
       },
@@ -465,18 +536,18 @@
         "threshold": 0.5,
         "failures": [
           {
-            "zone": "band1",
-            "dominant": null,
-            "fraction": null,
-            "total": 0
+            "zone": "band0",
+            "dominant": "stone_bricks",
+            "fraction": 0.437,
+            "total": 666
           }
         ],
         "byZone": {
           "band0": {
             "dominant": "stone_bricks",
-            "fraction": 0.604,
-            "total": 379,
-            "passed": true,
+            "fraction": 0.437,
+            "total": 666,
+            "passed": false,
             "metric": "own",
             "own": [
               "stone_bricks",
@@ -485,21 +556,27 @@
               "cobblestone",
               "bricks"
             ],
-            "dominantFraction": 0.462
+            "dominantFraction": 0.363
           },
           "band1": {
-            "dominant": null,
-            "fraction": null,
-            "total": 0,
-            "passed": false,
+            "dominant": "white_terracotta",
+            "fraction": 1,
+            "total": 357,
+            "passed": true,
             "metric": "own",
-            "own": null,
-            "dominantFraction": null
+            "own": [
+              "white_terracotta",
+              "spruce_planks",
+              "dark_oak_log",
+              "cobblestone",
+              "bricks"
+            ],
+            "dominantFraction": 1
           },
           "roof": {
             "dominant": "spruce_planks",
             "fraction": 1,
-            "total": 406,
+            "total": 480,
             "passed": true,
             "metric": "own",
             "own": [
@@ -510,7 +587,7 @@
               "bricks",
               "spruce_stairs"
             ],
-            "dominantFraction": 0.296
+            "dominantFraction": 0.275
           }
         }
       }
@@ -526,12 +603,17 @@
           "-x-z",
           "-x+z"
         ],
-        "exposedCells": 1080
+        "exposedCells": 1920
       },
       "band1": {
-        "status": "not-on-skin",
-        "visibleViews": [],
-        "exposedCells": 0
+        "status": "visible",
+        "visibleViews": [
+          "+x+z",
+          "+x-z",
+          "-x-z",
+          "-x+z"
+        ],
+        "exposedCells": 1008
       },
       "roof": {
         "status": "visible",
@@ -541,7 +623,7 @@
           "-x-z",
           "-x+z"
         ],
-        "exposedCells": 1497
+        "exposedCells": 1782
       }
     },
     "failures": [],
@@ -549,13 +631,8 @@
   },
   "precondition": {
     "legacyPassedViews": [],
-    "awarePassedViews": [
-      "+x+z",
-      "+x-z",
-      "-x-z",
-      "-x+z"
-    ],
-    "unblocked": true
+    "awarePassedViews": [],
+    "unblocked": false
   },
   "judge": "not-called — T-138-01 owns the epic's judge runs",
   "generalization": {

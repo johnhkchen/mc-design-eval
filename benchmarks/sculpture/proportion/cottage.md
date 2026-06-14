@@ -14,14 +14,14 @@ Reproduce: `npm run proportion:repro`.
 
 | round | action | critique issues | ridge:eave | roof share | aspect | proportion gate |
 | --- | --- | --- | --- | --- | --- | --- |
-| 0 | seed | — | 4.5 | 0.7778 | 1.0357 | FAIL — ridgeToEave, roofShare |
-| 1 | revise | major: upper storey (white_terracotta band)<br>major: roof vs walls overall mass<br>minor: roof eave / gable verge<br>minor: upper-storey windows<br>minor: white infill color | 4.5 | 0.7778 | 1.0357 | FAIL — ridgeToEave, roofShare |
-| 2 | revise | major: upper storey walls (all faces)<br>major: main roof eaves<br>minor: window surrounds<br>minor: overall proportion | 4.5 | 0.7778 | 1.0357 | FAIL — ridgeToEave, roofShare |
-| 3 | revise | major: upper storey, all facades<br>minor: roof mass (all views)<br>minor: chimney | 4.5 | 0.7778 | 1.0357 | FAIL — ridgeToEave, roofShare |
-| 4 | revise | major: upper storey (cream walls, all faces)<br>minor: roof vs walls overall<br>minor: roof field color<br>minor: ground storey stone | 4.5 | 0.7778 | 1.0357 | FAIL — ridgeToEave, roofShare |
-| 5 | revise | major: wing upper storey (+x face, x=25)<br>minor: -z (south) upper facade<br>minor: overall upper storey<br>minor: roof | 4.5 | 0.7778 | 1.0357 | FAIL — ridgeToEave, roofShare |
-| 6 | done | minor: roof vs upper storey<br>minor: timber studs<br>minor: wing roof | 4.5 | 0.7778 | 1.0357 | FAIL — ridgeToEave, roofShare |
+| 0 | seed | — | 1.55 | 0.3548 | 1.1379 | FAIL — roofShare |
+| 1 | revise (rolled back) | major: overall silhouette<br>minor: upper storey walls<br>minor: ground storey | 1.55 | 0.3548 | 1.1379 | FAIL — roofShare |
+| 2 | revise (rolled back) | major: overall silhouette<br>minor: upper walls<br>minor: ground storey | 1.55 | 0.3548 | 1.1379 | FAIL — roofShare |
+| 3 | revise (rolled back) | major: overall silhouette<br>minor: upper storey (white_terracotta)<br>minor: ground storey (stone_bricks base) | 1.55 | 0.3548 | 1.1379 | FAIL — roofShare |
+| 4 | revise (rolled back) | major: overall silhouette<br>minor: upper storey walls<br>minor: ground storey base | 1.55 | 0.3548 | 1.1379 | FAIL — roofShare |
+| 5 | revise (rolled back) | major: roof vs walls (whole silhouette)<br>minor: upper white_terracotta infill<br>minor: ground-storey plinth | 1.55 | 0.3548 | 1.1379 | FAIL — roofShare |
+| 6 | revise (rolled back) | major: roof vs walls (whole silhouette)<br>minor: front wing / cross-gable | 1.55 | 0.3548 | 1.1379 | FAIL — roofShare |
 
 ## The named defect
 
-**ridgeToEave 4.5 vs target 1.4145 (sketch) — Δrel 2.1813 > tolerance 0.15.** The build reads as mostly roof: the silhouette's widest layer (jetty + eave overhang) sits low, so the storeys below it are a sliver of the elevation — the squat-storey / shallow read the judge-side coverage rejection and the model's own critique kept describing, now with a number every round could have aimed at.
+**roofShare 0.3548 vs target 0.293 (sketch) — Δrel 0.2109 > tolerance 0.15.** The build reads as mostly roof: the silhouette's widest layer (jetty + eave overhang) sits low, so the storeys below it are a sliver of the elevation — the squat-storey / shallow read the judge-side coverage rejection and the model's own critique kept describing, now with a number every round could have aimed at.
