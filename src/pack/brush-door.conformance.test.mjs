@@ -33,6 +33,8 @@ const TECHNIQUES = [
   "roof-thatch", "clinker", "limewash",
   // E-33/T-134-01: the steep-pitch brush joins the guarded set
   "roof-steep",
+  // E-35/T-146-01: the shared relief op joins the guarded set
+  "surface-relief",
 ];
 
 /** file → { modules, reason }. Exact: an extra technique import in an allowed file still trips. */

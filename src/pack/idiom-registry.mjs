@@ -58,6 +58,7 @@ import { roofThatchConstruct } from "../view/roof-thatch.mjs";
 import { roofSteepGableConstruct, STEEP_PITCH_CLASSES } from "../view/roof-steep.mjs";
 import { clinkerCourses } from "../view/clinker.mjs";
 import { limewashAspect } from "../view/limewash.mjs";
+import { surfaceRelief } from "../view/surface-relief.mjs";
 
 export const IDIOM_REGISTRY_SCHEMA = "idiom-registry/v1";
 
@@ -366,6 +367,40 @@ export const IDIOM_REGISTRY = Object.freeze({
         coverage: { type: "number", exclusiveMinimum: 0, maximum: 1 },
         minRun: { type: "integer", minimum: 1 },
         preserve: { type: "array", items: { type: "string" } },
+      },
+      additionalProperties: false,
+    },
+  }),
+  "surface.relief": Object.freeze({
+    kind: "pass", fn: surfaceRelief, source: "src/view/surface-relief.mjs",
+    tests: "src/view/surface-relief.test.mjs",
+    composition: { consumes: ["occupancy"], emits: ["placements", "report"] },
+    preview: {
+      // pilaster strips PROUD of a flush field: every third column on the -z face is relieved one
+      // cell forward; the field between reads recessed by exclusion (no air op) — relief is geometry
+      substrate: { kind: "shell", spec: { footprint: { x0: 0, x1: 8, z0: 0, z1: 4 }, y0: 0, height: 5, wallBlock: "white_terracotta" } },
+      params: { material: "stripped_oak_log", faces: ["-z"], rhythm: { axis: "column", every: 3, span: 1 } },
+      realize: ({ occ, cells }) => {
+        const r = surfaceRelief(occ, {
+          material: "stripped_oak_log", faces: ["-z"], rhythm: { axis: "column", every: 3, span: 1 },
+        });
+        return { cells: overlayCells(cells, r.placements), effect: r.placements.length };
+      },
+    },
+    paramsSchema: {
+      type: "object",
+      properties: {
+        material: { type: "string" },
+        faces: { type: "array", items: { enum: ["+x", "-x", "+z", "-z"] }, minItems: 1 },
+        rhythm: {
+          type: "object",
+          properties: {
+            axis: { enum: ["column", "row"] }, every: { type: "integer", minimum: 1 },
+            span: { type: "integer", minimum: 1 }, phase: { type: "integer", minimum: 0 },
+          },
+          additionalProperties: false,
+        },
+        depth: { type: "integer", minimum: 1 },
       },
       additionalProperties: false,
     },
