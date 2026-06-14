@@ -223,7 +223,7 @@ async function main() {
 
   // the sanctioned-rotation registry (committed sidecar — subject keys live there, not in this
   // source, so the self-grep above stays clean). T-142-01: T-138 re-judged these gate records.
-  const RETIRED_GATE = JSON.parse(await readFile(join(ROOT, "benchmarks/sculpture/retired-pins.json"), "utf8")).visibility;
+  const RETIRED_GATE = JSON.parse(await readFile(join(ROOT, "measurements/retired-pins.json"), "utf8")).visibility;
 
   let failures = 0;
   for (const t of targets) {

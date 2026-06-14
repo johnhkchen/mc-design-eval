@@ -122,9 +122,11 @@ test("D guardedWriteRecord: write / skip-identical / refuse / rotate / sanction 
   const dir = await mkdtemp(join(tmpdir(), "pin-guard-"));
   try {
     // The synthetic committed pin must be an INSTRUMENT path (frozen = allowlist ∧ tracked).
-    // "my-baseline.json" matches the baseline/milestone suffix rule and stays flat (no nested dir).
-    const trackedSet = new Set(["my-baseline.json"]); // the synthetic committed instrument pin
-    await writeFile(join(dir, "my-baseline.json"), "{\"v\":1}\n");
+    // T-155-01: the allowlist is the measurements/ prefix, so the synthetic pin lives there.
+    const { mkdir } = await import("node:fs/promises");
+    await mkdir(join(dir, "measurements"), { recursive: true });
+    const trackedSet = new Set(["measurements/baseline.json"]); // the synthetic committed instrument pin
+    await writeFile(join(dir, "measurements/baseline.json"), "{\"v\":1}\n");
 
     // D1 untracked sibling writes freely
     const w = await guardedWriteRecord({ root: dir, rel: "fresh.json", content: "{}\n", trackedSet });
@@ -132,32 +134,32 @@ test("D guardedWriteRecord: write / skip-identical / refuse / rotate / sanction 
     assert.equal(await readFile(join(dir, "fresh.json"), "utf8"), "{}\n");
 
     // D2 byte-identical rewrite passes, pin untouched
-    const s = await guardedWriteRecord({ root: dir, rel: "my-baseline.json", content: "{\"v\":1}\n", trackedSet });
+    const s = await guardedWriteRecord({ root: dir, rel: "measurements/baseline.json", content: "{\"v\":1}\n", trackedSet });
     assert.equal(s.action, "skip-identical");
 
     // D3 differing write refuses; the pin's bytes survive
     await assert.rejects(
-      () => guardedWriteRecord({ root: dir, rel: "my-baseline.json", content: "{\"v\":2}\n", trackedSet }),
-      (e) => e instanceof PinGuardError && /my-baseline\.json/.test(e.message) && e.message.includes(ROTATE_FLAG),
+      () => guardedWriteRecord({ root: dir, rel: "measurements/baseline.json", content: "{\"v\":2}\n", trackedSet }),
+      (e) => e instanceof PinGuardError && /measurements\/baseline\.json/.test(e.message) && e.message.includes(ROTATE_FLAG),
     );
-    assert.equal(await readFile(join(dir, "my-baseline.json"), "utf8"), "{\"v\":1}\n");
+    assert.equal(await readFile(join(dir, "measurements/baseline.json"), "utf8"), "{\"v\":1}\n");
 
     // D4 explicit rotation writes
-    const r = await guardedWriteRecord({ root: dir, rel: "my-baseline.json", content: "{\"v\":2}\n", rotate: true, trackedSet });
+    const r = await guardedWriteRecord({ root: dir, rel: "measurements/baseline.json", content: "{\"v\":2}\n", rotate: true, trackedSet });
     assert.equal(r.action, "write");
-    assert.equal(await readFile(join(dir, "my-baseline.json"), "utf8"), "{\"v\":2}\n");
+    assert.equal(await readFile(join(dir, "measurements/baseline.json"), "utf8"), "{\"v\":2}\n");
 
     // D5 a named sanction permits like the flag (the T-114 rejudge completion shape)
     const j = await guardedWriteRecord({
-      root: dir, rel: "my-baseline.json", content: "{\"v\":3}\n",
+      root: dir, rel: "measurements/baseline.json", content: "{\"v\":3}\n",
       sanction: "rejudge (T-114 reply completion)", trackedSet,
     });
     assert.equal(j.action, "write");
 
     // D6 tracked-but-deleted refuses without the flag
-    await rm(join(dir, "my-baseline.json"));
+    await rm(join(dir, "measurements/baseline.json"));
     await assert.rejects(
-      () => guardedWriteRecord({ root: dir, rel: "my-baseline.json", content: "{}\n", trackedSet }),
+      () => guardedWriteRecord({ root: dir, rel: "measurements/baseline.json", content: "{}\n", trackedSet }),
       PinGuardError,
     );
   } finally {
@@ -169,8 +171,8 @@ test("D guardedWriteRecord: write / skip-identical / refuse / rotate / sanction 
 
 test("E1 null tracked set fails CLOSED: an instrument path reads as tracked → frozen", () => {
   assert.equal(isTracked(null, "anything/at/all.json"), true);
-  // fail-closed only freezes when the path is ALSO on the allowlist (retired-pins here)
-  const rel = "benchmarks/sculpture/retired-pins.json";
+  // fail-closed only freezes when the path is ALSO on the allowlist (the frozen kit here)
+  const rel = "benchmarks/sculpture/kit/cottage.json";
   const d = decidePinWrite({ frozen: isInstrumentPath(rel) && isTracked(null, rel), exists: true, currentContent: "a", nextContent: "b" });
   assert.equal(d.action, "refuse");
 });
@@ -183,7 +185,7 @@ test("E2 loadTrackedSet smoke on the real repo (cached, contains package.json)",
 
 // --- F: domain refusal — judge isolation (T-126-01) ------------------------------------------------
 
-const GATE_REL = "benchmarks/sculpture/multi-angle/cottage-styled.json";
+const GATE_REL = "measurements/multi-angle/cottage-styled.json";
 
 test("F1 domainRefusal: workshop into a gate namespace refuses; everything else is null", () => {
   assert.match(domainRefusal("workshop", GATE_REL), /structurally isolated from the frozen judge/);
@@ -191,7 +193,7 @@ test("F1 domainRefusal: workshop into a gate namespace refuses; everything else 
   assert.equal(domainRefusal(null, GATE_REL), null);
   assert.equal(domainRefusal(undefined, GATE_REL), null);
   assert.equal(domainRefusal("gate", GATE_REL), null);
-  assert.ok(GATE_RECORD_NAMESPACES.includes("benchmarks/sculpture/multi-angle/"));
+  assert.ok(GATE_RECORD_NAMESPACES.includes("measurements/multi-angle/"));
 });
 
 test("F2 guardedWriteRecord: workshop-domain gate write THROWS — rotate and sanction do NOT override", async () => {
@@ -227,7 +229,7 @@ test("F3 preflightPins: workshop-domain gate pin refuses even with rotate; clean
 });
 
 test("F4 nested gate-record write under workshop domain refuses (prefix, not exact-dir match)", () => {
-  assert.match(domainRefusal("workshop", "benchmarks/sculpture/multi-angle/sub/dir/x.md"), /frozen judge/);
+  assert.match(domainRefusal("workshop", "measurements/multi-angle/sub/dir/x.md"), /frozen judge/);
 });
 
 // --- G: instrument allowlist — the E-36 / S-151 freeze-narrowing -----------------------------------
@@ -247,21 +249,24 @@ test("G1 isInstrumentPath: the measurements/ prefix + ratified packs freeze; dra
     "packs/rustic.json",
   ]) assert.equal(isInstrumentPath(rel), true, `expected INSTRUMENT: ${rel}`);
 
-  // ON the allowlist (TRANSITIONAL — pre-move scattered frozen locations; removed once every class
-  // has relocated under measurements/). These keep the freeze intact mid-migration.
+  // ON the allowlist (the ONE deferred class — the kit stays frozen at its current home until its
+  // HERE-relative loaders migrate to measurements/kit/; see T-155-01 review.md).
   for (const rel of [
-    "benchmarks/sculpture/multi-angle/cottage-styled.json",
     "benchmarks/sculpture/kit/barn.json",
-    "benchmarks/sculpture/retired-pins.json",
-    "benchmarks/sculpture/pattern-book/facade-baselines.json",
-    "benchmarks/sculpture/cleanliness-baseline.json",
-  ]) assert.equal(isInstrumentPath(rel), true, `expected TRANSITIONAL INSTRUMENT: ${rel}`);
+    "benchmarks/sculpture/kit/cottage.raw.json",
+  ]) assert.equal(isInstrumentPath(rel), true, `expected DEFERRED-KIT INSTRUMENT: ${rel}`);
 
-  // OFF the allowlist (drafts — regenerate freely), including the new builds/ free-zone home
+  // OFF the allowlist (drafts — regenerate freely): the new builds/ free-zone home AND the now-vacated
+  // pre-move locations (every frozen class except the kit has relocated under measurements/, so the OLD
+  // benchmarks/sculpture/ paths are drafts again — a stray re-derivation there is not a pin).
   for (const rel of [
     "builds/cottage/final-artifact.json",
     "builds/cottage/ledger.json",
     "builds/barn--saltcrag/seed-artifact.json",
+    "benchmarks/sculpture/multi-angle/cottage-styled.json",
+    "benchmarks/sculpture/retired-pins.json",
+    "benchmarks/sculpture/pattern-book/facade-baselines.json",
+    "benchmarks/sculpture/cleanliness-baseline.json",
     "benchmarks/sculpture/generated/barn.json",
     "benchmarks/sculpture/generated/barn/artifact.json",
     "benchmarks/sculpture/generated/barn/base-artifact.json",
@@ -312,11 +317,11 @@ test("G3 AC2: preflight of a tracked-draft run does not throw (returns empty led
 test("G4 AC3: a TRACKED instrument write still REFUSES without the flag (guardedWriteRecord)", async () => {
   const dir = await mkdtemp(join(tmpdir(), "pin-guard-instr-"));
   try {
-    const rel = "benchmarks/sculpture/multi-angle/cottage-styled.json";
+    const rel = "measurements/multi-angle/cottage-styled.json";
     const trackedSet = new Set([rel]);
     // create the on-disk pin so `exists` is true (the verdict bytes)
     const { mkdir } = await import("node:fs/promises");
-    await mkdir(join(dir, "benchmarks/sculpture/multi-angle"), { recursive: true });
+    await mkdir(join(dir, "measurements/multi-angle"), { recursive: true });
     await writeFile(join(dir, rel), "{\"verdict\":\"pass\"}\n");
     await assert.rejects(
       () => guardedWriteRecord({ root: dir, rel, content: "{\"verdict\":\"FAIL\"}\n", trackedSet }),
@@ -331,12 +336,13 @@ test("G4 AC3: a TRACKED instrument write still REFUSES without the flag (guarded
   }
 });
 
-test("G5 AC3: the frozen set refuses in preflight — verdict, pack, baseline, retired-pins", () => {
+test("G5 AC3: the frozen set refuses in preflight — verdict, pack, baseline, retired-pins, deferred kit", () => {
   for (const rel of [
-    "benchmarks/sculpture/multi-angle/cottage-styled.json",
+    "measurements/multi-angle/cottage-styled.json",
     "packs/rustic.json",
-    "benchmarks/sculpture/pattern-book/proportion-baselines.json",
-    "benchmarks/sculpture/retired-pins.json",
+    "measurements/pattern-book/proportion-baselines.json",
+    "measurements/retired-pins.json",
+    "benchmarks/sculpture/kit/cottage.json", // the one deferred class — still frozen at its old home
   ]) {
     assert.throws(
       () => preflightPins({ pins: [{ rel, tracked: true }], rotate: false, intent: `live ${rel}` }),

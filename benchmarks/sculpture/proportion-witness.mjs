@@ -289,7 +289,7 @@ const ticketId = argOf("--ticket") ?? "T-135-01"; // the run's authority, named 
 const pack = loadStylePack(join(ROOT, packRel));
 // the sanctioned-rotation registry (committed sidecar — subject keys live there, not in this source,
 // so the generalization self-grep stays clean). T-142-01: T-138's chains retired these ledgers.
-const RETIRED = JSON.parse(await readRel("benchmarks/sculpture/retired-pins.json")).proportion;
+const RETIRED = JSON.parse(await readRel("measurements/retired-pins.json")).proportion;
 
 const defs = subjectDefs();
 if (!all && !onlySubject) throw new Error(`pass --subject <${defs.map((d) => d.key).join("|")}> or --all`);

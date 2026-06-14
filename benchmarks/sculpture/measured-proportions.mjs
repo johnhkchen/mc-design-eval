@@ -317,7 +317,7 @@ const ticketId = argOf("--ticket") ?? "T-133-01"; // the run's authority, named 
 // the sanctioned-rotation registry for the chain seed `ratios.before` reads (committed sidecar —
 // subject keys live there, not in this source, so the generalization self-grep stays clean). Empty
 // until a future seed rotation (T-143's bar) registers its retirement; T-142 REFRESHES `before`.
-const RETIRED_SEED = JSON.parse(await readRel("benchmarks/sculpture/retired-pins.json")).measured ?? [];
+const RETIRED_SEED = JSON.parse(await readRel("measurements/retired-pins.json")).measured ?? [];
 
 const defs = subjectDefs();
 if (!all && !onlySubject) throw new Error(`pass --subject <${defs.map((d) => d.key).join("|")}> or --all`);
