@@ -56,6 +56,7 @@ import {
 import { regularizeShell, protrudingStackRegion } from "../../src/view/shell-regularize.mjs";
 import { loadMeshFromGlb, rasterizeSilhouette } from "../../src/form/glb-silhouette.mjs";
 import { resolveAngle } from "../../src/view/multi-angle.mjs";
+import { assertGlAvailable } from "../../src/view/render-beside.mjs";
 import { MULTI_ANGLE_GATE } from "../../src/config.mjs";
 import { applyDeltas } from "../../src/view/surface-coherence.mjs";
 import { voxelizeGlb } from "../../src/form/glb-voxelize.mjs";
@@ -474,6 +475,11 @@ async function main() {
   }
 
   // --- renders + the AC5 before/after frames (evidence, never logic) ------------------------------
+  // T-152-01 (E-36): a render-bearing run must fail LOUD on missing GL, not silently defer every
+  // angle to an "operator runbook". Assert once up-front so GL-absence is the named GlUnavailableError
+  // rather than N swallowed per-angle {error} records. (tryRenderAngle keeps its catch for genuinely
+  // per-angle issues; GL is no longer one of them.)
+  assertGlAvailable();
   const renders = [];
   const extras = EXTRAS[def.key] ?? {};
   const rFinalObl = await tryRenderAngle(r1.skin.final, OBLIQUE, "final-oblique225", subjDir);

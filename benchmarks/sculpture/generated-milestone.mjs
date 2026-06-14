@@ -88,6 +88,7 @@ import { styledStretch, spawnGate, distillGate } from "./styled-milestone.mjs";
 import { ROTATE_FLAG, guardedWriteRecord } from "../../src/form/pin-guard.mjs";
 import { instrumentReceipt } from "../../src/form/gate-instrument.mjs";
 import { renderSheet } from "./placement-grammar.mjs";
+import { assertGlAvailable, renderBesideConcept } from "../../src/view/render-beside.mjs";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 const HERE = join(ROOT, "benchmarks/sculpture");
@@ -532,15 +533,22 @@ async function main() {
       if (JSON.stringify(a) !== JSON.stringify(b)) throw new Error(`NON-DETERMINISTIC: two in-process runs diverge at the ${stage} artifact`);
     }
   } catch (e) {
+    // AC4 (T-151-01): surface the REAL cause FIRST — never let a failure-record write (guarded or
+    // otherwise) mask it. A guard refusal on the record write becomes a secondary note, not the
+    // error the operator sees.
+    console.error(`[${def.key}] PIPELINE FAILED at ${track.stage}: ${e.message}`);
+    process.exitCode = 1;
     const record = {
       schema: RECORD_SCHEMA, subject: def.key, status: "pipeline-failed", stage: track.stage, error: e.message,
       inputs: { concept: def.concept, glb: def.glb, map: def.map, kitRecord: def.kitRecord, kitSha256: kitSha, scale: def.generated?.scale ?? null },
       note: "a deterministic stage threw — recorded honestly (E-25 Rule 6); nothing was tuned in response",
     };
-    await writeRec(recPath, JSON.stringify(record, null, 2) + "\n");
-    await writeRec(join(OUT_DIR, `${def.key}.md`), renderMd(record));
-    console.error(`[${def.key}] PIPELINE FAILED at ${track.stage}: ${e.message}`);
-    process.exitCode = 1;
+    try {
+      await writeRec(recPath, JSON.stringify(record, null, 2) + "\n");
+      await writeRec(join(OUT_DIR, `${def.key}.md`), renderMd(record));
+    } catch (writeErr) {
+      console.error(`[${def.key}] (failure record not persisted: ${writeErr.message})`);
+    }
     return;
   }
 
@@ -551,14 +559,24 @@ async function main() {
   // --- T-122-01: --skip-gate — the deterministic chain + artifacts only, NO judge spend. The
   // instrument-before-judge order: refresh artifacts here, verify with diff:roof, and only then
   // run the gate in an owned --rotate-pins run. The committed record/md stay pinned (intentionally
-  // stale until the gated run rewrites them); no renders, no gate spawn, no record write.
+  // stale until the gated run rewrites them); no gate spawn, no record write.
+  //
+  // T-152-01 (E-36): the judge-free pass is the creation loop's feedback signal, so it MUST emit a
+  // textured render beside the concept (never the old silent defer to an "operator runbook"). GL is
+  // a hard precondition — assertGlAvailable throws a named error here rather than burying it.
   if (skipGate) {
+    assertGlAvailable();
+    const besideOut = join(FRAMES_DIR, `beside-concept-${def.key}.png`);
+    const beside = await renderBesideConcept(r1.styled, join(HERE, def.concept), besideOut, { label: def.key });
     console.error(`[${def.key}] --skip-gate: chain artifacts persisted (base/grammar/final/fit/plan); ` +
-      `no gate spawned; generated/${def.key}.{json,md} untouched`);
+      `no gate spawned; generated/${def.key}.{json,md} untouched; ` +
+      `render beside concept → ${beside.outPath.replace(ROOT, "")} (judge-free glance)`);
     return;
   }
 
   // --- evidence renders (a lens, never logic) ------------------------------------------------------
+  // T-152-01: GL-absence is a loud, named failure (assert up-front), never a swallowed sheets={error}.
+  assertGlAvailable();
   let sheets = {};
   try {
     const s = await renderSheet(r1.styled, "generated", subjDir);
