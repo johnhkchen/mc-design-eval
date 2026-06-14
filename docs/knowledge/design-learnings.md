@@ -3050,3 +3050,105 @@ gate-awareness as the next rung. The barn's corrected glance sheet (gable reads 
 covering-with-overhang, beside prior-flat and concept) is the operator GL step — `npm run generated:barn
 -- --repro` then `npm run diff:roof -- --subject barn` — deterministic and judge-free, the glance the
 proof (E-35's only judge runs were never burned speculatively).
+
+## Canonical-flow proof (E-37) — one chain, one home, the relay race retold (S-154…S-158, T-154-01…T-158-01) · 2026-06-14
+
+E-37 is the unification epic, and this is its capstone. By the end of E-35 the pipeline *worked* but
+existed as **four parallel chains** in 58 directories: a gable fix could land in the chain that
+*wasn't* the one being measured (the cost [[canonical-build-flow]] named). E-37 collapsed it to **one
+subject, one chain, one home**: the chain was unified (`build.mjs`, T-154-01: recognize →
+generate-seed → workshop → final-beside-concept), homed so **location encodes status**
+(T-155-01: `builds/` draft, `measurements/` frozen, `_archive/` dead), the sediment archived
+(T-156-01), and the drift guardrailed (T-157-01: the topology conformance suite goes red when the
+map and the tree disagree). This ticket (T-158-01) *ran* it on the two living subjects to prove the
+seam holds — and the run is the architecture of record (`pipeline-philosophy.md`) **realized, not
+re-derived**: same stage assignment, now expressed as a single executable path.
+
+### The relay race, in plain language — each leg's technique and what it buys that the alternative didn't
+
+The middle era (E-16…E-30) failed the same way at every stage: it asked a representation to do a job
+that wasn't native to it. The unified chain is a relay where each runner only runs their leg. Read
+top to bottom; each beat names the **alternative that broke** and **what the native representation
+allows** (the receipts are the epic sections above — this is a retelling, not a new claim).
+
+1. **language-not-optics** (Stage 0, world-building). *Alternative that broke:* deciding materials by
+   colour — colorimetry provably cannot separate brick from cobble, and TRELLIS textures are an
+   amalgam of other games' assets (E-21, [[material-identity-is-semantic]]). *What language allows:* a
+   theme brief becomes a **material story** — geology, timber, wealth, roofing economy — and the
+   palette derives role-by-role with cited rationale. Material choice is **diegetic, not optical**;
+   the model's vernacular-architecture knowledge is excellent and was simply never asked while
+   materials were routed through a camera.
+
+2. **image-not-prose** (Stage 1, the target). *Alternative that broke:* a prose spec you cannot judge
+   a build against. *What an image allows:* one beautiful, coherent concept view becomes the
+   **immutable contract** everything downstream is measured against. It need not be buildable; it
+   needs to be worth building.
+
+3. **shape-only-not-substrate** (Stage 2, form evidence). *Alternative that broke:* using the 3-D
+   mesh as the build — the voxel build inherited the decimated mesh's noise, and the cage then
+   *enforced* fidelity to that noise (E-27, [[trellis-facet-normals-lie]]). *What shape-only allows:*
+   take exactly what image→3D is good at — silhouette and proportion — and let code strip what it's
+   bad at. The mesh is **evidence, never substrate**; its textures never decide a material (E-35
+   narrowed this to a material-identity rule: layout evidence yes, material no).
+
+4. **recognition-not-fitting** (Stage 3, design). *Alternative that broke:* fitting geometry to the
+   mesh, which is exactly the noise-sensitive operation. *What recognition allows:* the VLM reads
+   concept + sketch and **names** idioms into the pattern-book vocabulary — "that lumpy thing is a
+   45° gable with two dormers." Naming a gable doesn't require the gable to be clean; recognition is
+   robust to precisely the noise that broke fitting (E-31, [[recognition-not-reconstruction]]). **This
+   is the moment the model designs** — the capability the instrument exists to measure.
+
+5. **parametric-not-surgery** (Stage 4, construction). *Alternative that broke:* placing 50k+ blocks
+   by LLM tokens — a 57k-voxel cloud overflows any context, and per-region surgical edits can't
+   refine it ([[surgical-edit-path-scale-limit]]). *What parametric code allows:* straight walls and
+   even courses are the generator's **native output**, not properties recovered from noise by surgery.
+   Regularity — what eyes key on first — is free here. (And it must stay reachable: see the proof's
+   own bug below.)
+
+6. **workshop-not-one-shot** (Stage 5, the workshop). *Alternative that broke:* one-shot generation
+   with no revision, or — worse — letting "no re-roll" measurement discipline leak into creation and
+   freeze the first draft as infrastructure (E-36, [[defreeze-creation-loop]]). *What the workshop
+   allows:* the model views 4-azimuth renders of its **own** build beside the concept, names what's
+   wrong, and revises through tools in ledgered rounds — the iteration every human builder relies on.
+   It is **structurally unable to call the judge** (`isolation.test.mjs`); creation is free.
+
+7. **frozen-judge-not-soft-gate** (Stage 6, measurement). *Alternative that broke:* a gate the thing
+   being measured can move — the fooled-gate ledger (aliasing, invisible stairs, census identity,
+   single camera angles). *What a frozen instrument allows:* categorical same-object/drifted verdicts
+   with named gaps are reliable **because the instrument cannot be moved by what it measures**. The
+   gate convenes **once**, billed and owned, a separate step the build chain never spawns.
+
+The two cross-cutting rules hold the whole thing up: **creation is iterative and free; measurement is
+frozen and singular** ([[pipeline-architecture-of-record]]), and **humans appear at two cheap points**
+— ratifying taste once per style, promoting work once per backlog item.
+
+### The proof — and the broken leg it caught
+
+Both living subjects ran end-to-end through `npm run build:<subject>`, landing in `builds/<subject>/`
+and rendered beside the concept (`pr/assets/frames/beside-concept-<subject>-build.png`). **Drafts,
+not verdicts** — the render is the evidence:
+
+- **cottage** reads as a recognizable timber-frame cottage: brown studs framing light plaster infill
+  (the E-35 relief reads as half-timber, [[look-proven-on-cottage-relief]]), a gabled roof with a
+  chimney, correct two-storey massing. Still weak: the roof reads flat-brown without the concept's
+  shingle texture, and some eaves read thin. Workshop budget-exhausted at 6/6 rounds.
+- **barn** reads as the long tithe-barn form under a steep gabled roof — but the long walls are holey
+  and spiky and the trim dropped: the known rough surface read. Workshop budget-exhausted at 6/6
+  rounds. Honestly a draft, not a win.
+
+The proof earned its keep by **breaking on the first real run**: Stage 4 (`generated-milestone.mjs`,
+the spawned realizer) imports `shellStage`, `styledStretch`, `spawnGate`, `distillGate` from
+`challenge-milestone.mjs` / `styled-milestone.mjs`, and reads `material-map/<key>.json` — all moved to
+`_archive/` by the S-156 archive sweep, even though STRUCTURE.md itself said *"styledStretch is reused
+inside Stage 4, not retired."* The chain was broken at runtime while **`npm test` stayed green**,
+because the topology guardrail checks that the chain's *spawned* stages exist and are mapped (TOPO2)
+but not that those stages' own *imports resolve*, and only catches literal `_archive/` import strings
+(TOPO4), not a stale `./sibling` path to a moved file. The fix restored the two modules + four
+committed subject maps to the live tree (they are **live shared-stage hosts**, not dead code) and
+repointed the three conformance suites' enumerated lists. **The lesson, the same one the whole project
+keeps relearning: green tests are not a delivered build; the glance — here, the run — beats the gate
+([[milestone-ladder]]). The map (`STRUCTURE.md`) and the architecture of record
+(`pipeline-philosophy.md`, stage assignment unchanged) are the inheritance; this run is the receipt
+that the one chain is real.** The follow-up the proof named: extract the shared Stage-4 stages into a
+dedicated live module so the terminal *chains* can archive without dragging them, and teach the
+topology suite to check that spawned stages' imports resolve — its own ticket.

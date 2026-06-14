@@ -1,7 +1,9 @@
 # The Pipeline — structure and philosophy
 
 *Ratified 2026-06-11 (after the E-16..E-30 retrospective; realized by E-31 `pattern-book-builder` and
-E-32 `brush-factory`). This document is the project's standing answer to "what is our approach?" —
+E-32 `brush-factory`, and unified into one executable chain by E-37 — `benchmarks/sculpture/build.mjs`;
+the plain-language retelling + barn/cottage proof is the E-37 capstone in `design-learnings.md`). This
+document is the project's standing answer to "what is our approach?" —
 agents should treat it as the architecture of record and challenge specific stages with evidence, not
 re-derive the whole from scratch.*
 

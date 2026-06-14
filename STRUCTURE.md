@@ -37,6 +37,13 @@ surface/material/relief (Stage 5). **One realizer feeds the one loop** — a con
 in the chain that gets measured (the cost T-150-01 exposed). Determinism: Stage 4 is a pure function of
 committed inputs (kit/GLB/zone-map/policy); the workshop replays seed + paint trail byte-identically.
 
+The **plain-language relay-race retelling** — each stage's technique and what it allows that the
+alternatives didn't (language-not-optics, image-not-prose, shape-only-not-substrate,
+recognition-not-fitting, parametric-not-surgery, workshop-not-one-shot, frozen-judge-not-soft-gate) —
+is the **E-37 capstone in `docs/knowledge/design-learnings.md`**, with the barn + cottage end-to-end
+proof (T-158-01). The architecture of record stays `docs/knowledge/pipeline-philosophy.md` (stage
+assignment unchanged — realized, not re-derived).
+
 ## Retired from the live path — ARCHIVED (S-156 / T-156-01)
 
 These ran the *old* parallel chains. They are now under `benchmarks/sculpture/_archive/` (importable,
