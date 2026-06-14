@@ -8,7 +8,7 @@
 // the judge prompt + thresholds are FIXED (Rule 5); the gap is NAMED, not hidden (Rule 7).
 //
 // THIS FILE IS PURE: no GL, no model, no file/network I/O, no Date/random — so it runs under the root
-// `src/**/*.test.mjs` glob. The impure runner (benchmarks/sculpture/resemblance.mjs) owns the GL re-render,
+// `src/**/*.test.mjs` glob. The impure runner (benchmarks/sculpture/_archive/resemblance.mjs) owns the GL re-render,
 // image decode/encode, the metered `claude -p` judge call, label drawing, and file I/O. The block→Lab table
 // is INJECTED (a loadBlockTable() result) so the core never touches the filesystem.
 //

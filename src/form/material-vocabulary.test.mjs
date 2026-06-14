@@ -1,6 +1,6 @@
 // Unit tests for material-vocabulary.mjs (T-113-01, story S-113, epic E-29) — the one composition
 // point. Synthetic policies/kits plus the committed church/cottage kits (committed-JSON idiom);
-// the live proof is the styled chain (benchmarks/sculpture/styled-milestone.mjs).
+// the live proof is the styled chain (benchmarks/sculpture/_archive/styled-milestone.mjs).
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";

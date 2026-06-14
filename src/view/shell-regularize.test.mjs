@@ -1,5 +1,5 @@
 // Unit tests for shell-regularize.mjs (T-102-01, story S-102, epic E-27) — synthetic spiky shells
-// only; the three-subject evidence runs live in the runner (benchmarks/sculpture/regularize-shell.mjs).
+// only; the three-subject evidence runs live in the runner (benchmarks/sculpture/_archive/regularize-shell.mjs).
 import { test } from "node:test";
 import assert from "node:assert/strict";
 

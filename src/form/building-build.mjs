@@ -8,7 +8,7 @@
 // and record which + why.
 //
 // PURE — no GL, no I/O, no Date/random — so it runs under the `src/**/*.test.mjs` glob. The impure runner
-// (benchmarks/sculpture/building-build.mjs) does the voxelize + segment + prune + GL render + score and feeds
+// (benchmarks/sculpture/_archive/building-build.mjs) does the voxelize + segment + prune + GL render + score and feeds
 // this the per-scale cells. Mirrors e19-cleanup.mjs's shape (schema const + assemble* + private render*Md);
 // null-tolerant (a failed scale → null formIoU → ranks last; never throws on a gap).
 

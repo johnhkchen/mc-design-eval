@@ -13,7 +13,7 @@
 // accepted region later altered; non-improving tweaks rolled back — AC#2), and the HONEST outcome
 // (Strong+ @round OR the topping-out point: best verdict + the specific unfixed detail — AC#3). PURE — no
 // GL, no I/O, no Date/random — so it runs under `src/**/*.test.mjs` (`npm test`). The impure runner
-// (benchmarks/sculpture/surgical-standard.mjs) owns the GL render + claude -p judge + the loop and feeds this
+// (benchmarks/sculpture/_archive/surgical-standard.mjs) owns the GL render + claude -p judge + the loop and feeds this
 // the cells/trace. Mirrors building-build.mjs (schema const + pure functions + private render*Md);
 // null-tolerant (a missing judge sample → "unknown"; a null IoU → ranks last; never throws on a gap).
 

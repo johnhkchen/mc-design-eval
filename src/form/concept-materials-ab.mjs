@@ -10,7 +10,7 @@
 // materials the concept shows) rather than a slide back to full-table bloat?
 //
 // PURE — no GL, no I/O, no Date/random — so it runs under the `src/**/*.test.mjs` glob. The impure runner
-// (benchmarks/sculpture/concept-materials-ab.mjs) owns the GL render + dwebp decode + metered map gen + file
+// (benchmarks/sculpture/_archive/concept-materials-ab.mjs) owns the GL render + dwebp decode + metered map gen + file
 // I/O and feeds this the before/after cells. Mirrors e19-cleanup.mjs's shape (schema const + assemble* +
 // private render*Md); tolerant of a missing subject cell (emits null / "—", never throws on a gap).
 

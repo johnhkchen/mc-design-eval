@@ -34,10 +34,10 @@ const PIN_WRITERS = [
   "benchmarks/sculpture/kit-extract.mjs",
   "benchmarks/sculpture/zone-map.mjs",
   "benchmarks/sculpture/multi-angle-gate.mjs",
-  "benchmarks/sculpture/styled-milestone.mjs",
-  "benchmarks/sculpture/challenge-milestone.mjs",
+  "benchmarks/sculpture/_archive/styled-milestone.mjs",
+  "benchmarks/sculpture/_archive/challenge-milestone.mjs",
   "benchmarks/sculpture/generated-milestone.mjs",
-  "benchmarks/sculpture/reconstructed-milestone.mjs",
+  "benchmarks/sculpture/_archive/reconstructed-milestone.mjs",
   "benchmarks/sculpture/component-skin.mjs",
   "benchmarks/sculpture/durable-skin.mjs",
   "benchmarks/sculpture/registration-smoke.mjs", // T-120-01: registration-smoke.{json,md} beside the concept

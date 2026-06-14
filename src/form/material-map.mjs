@@ -10,7 +10,7 @@
 //
 // PURITY (the project idiom — runs under `node --test "src/**/*.test.mjs"`): no GL, no I/O, no BAML, no
 // network, no Date/random. The LIVE multimodal call + fence-strip live in the tsx bridge
-// (src/form/material-map.mts); the impure runner (benchmarks/sculpture/material-map.mjs) does file I/O.
+// (src/form/material-map.mts); the impure runner (benchmarks/sculpture/_archive/material-map.mjs) does file I/O.
 //
 // REUSE, NOT REIMPLEMENTATION: the namespace boundary (tableKey/blockId) is material.mjs; the survival
 // block vocabulary + Lab values are the E-10 block→Lab table (block-table.mjs). No new color math.

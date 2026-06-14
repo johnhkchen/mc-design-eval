@@ -15,7 +15,7 @@
 //
 // It consumes the assembled spine JSON verbatim (no re-derivation → cannot drift from the record) and
 // emits the scorecard markdown + an `e18-scorecard/v1` JSON. No I/O, no GL, no imports outside src/. The
-// runner (benchmarks/sculpture/e18-scorecard.mjs) reads/writes files, stitches the before/after
+// runner (benchmarks/sculpture/_archive/e18-scorecard.mjs) reads/writes files, stitches the before/after
 // composites, and appends the qualitative E-12 handoff + sword/routing prose; this is the testable core.
 
 import { METRICS, BUILDS } from "./remeasure.mjs";
@@ -230,7 +230,7 @@ function renderMd(json) {
     "",
     "The E-18 terminal verdict. The combined glb-voxel build (`voxelizeGlbThin` → `segmentMaterials`) is",
     "scored on five axes against the E-17 **R1** (glb-voxel) and **R2** (material-clean) baselines. Source",
-    "spine: `benchmarks/sculpture/e18-remeasure.json` (T-060-01) — this scorecard is a pure transform of it.",
+    "spine: `benchmarks/sculpture/_archive/e18-remeasure.json` (T-060-01) — this scorecard is a pure transform of it.",
     "",
     "- **form IoU** — whole-build 3/4-view silhouette IoU vs the subject's image→3D GLB (higher = truer shape).",
     "- **speckle** — fraction of face-adjacent voxel pairs with differing blocks (lower = cleaner surface).",

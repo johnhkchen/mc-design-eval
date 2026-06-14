@@ -8,7 +8,7 @@
 // THIS MODULE IS THE PURE HALF: it takes ALREADY-COLLECTED per-subject metric rows and assembles the
 // `{ md, json }` record — direction-aware deltas (E18 vs R1 and vs R2), per-build averages, and an HONEST
 // list of cells where a fix did NOT help (zero/negative delta, AC #3). No GL, no I/O, no GLB — runs under
-// `src/**/*.test.mjs`. The GL/host runner (benchmarks/sculpture/e18-remeasure.mjs) collects the rows and
+// `src/**/*.test.mjs`. The GL/host runner (benchmarks/sculpture/_archive/e18-remeasure.mjs) collects the rows and
 // owns render + dwebp; this owns the arithmetic and formatting. Same pure/GL split as ablation.mjs.
 //
 // NOTE — the value-ΔE tautology (memory: ablation-value-ΔE-tautology): R2 and E18 both snap to the GLB's

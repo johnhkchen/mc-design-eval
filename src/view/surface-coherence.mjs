@@ -16,7 +16,7 @@
 // to a world pos is ORTHO-only (the +y roof, the four side faces); diagonals are out (`orthoSpec` throws).
 //
 // PURE — no GL, no I/O, no model, no Date/random — runs under the `src/**/*.test.mjs` glob. The metered
-// detector calls + the GL renders live in the runner (benchmarks/sculpture/surface-coherence.mjs).
+// detector calls + the GL renders live in the runner (benchmarks/sculpture/_archive/surface-coherence.mjs).
 
 import { projectSurface, gridMaskOf, orthoSpec, cellWorldPos } from "./surface-grid.mjs";
 import { airComponents, roofRegion } from "./structural-read.mjs";

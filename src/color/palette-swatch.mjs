@@ -14,7 +14,7 @@
 //
 // PURE, GL-FREE, NETWORK-FREE. Reuses E-10's `renderGridSwatch` (image-grid.mjs) for cell painting —
 // ZERO new pixel logic here, only the card→GridResult adapter + the legend text. Returns RGBA +
-// string; the runner (benchmarks/sculpture/concept-ab.mjs) encodes the PNG. Runs under the
+// string; the runner (benchmarks/sculpture/_archive/concept-ab.mjs) encodes the PNG. Runs under the
 // `src/**/*.test.mjs` glob with nothing mocked.
 
 import { renderGridSwatch } from "./image-grid.mjs";

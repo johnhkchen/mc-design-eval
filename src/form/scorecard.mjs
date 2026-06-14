@@ -11,7 +11,7 @@
 //
 // It consumes the already-assembled spine JSON verbatim (no re-derivation from renders → cannot drift
 // from the record) and emits the scorecard markdown + a `scorecard/v1` JSON. No I/O, no GL, no imports
-// outside src/. The runner (benchmarks/sculpture/sweep-scorecard.mjs) reads/writes files and stitches
+// outside src/. The runner (benchmarks/sculpture/_archive/sweep-scorecard.mjs) reads/writes files and stitches
 // the march PNGs; this is the testable core (src/**/*.test.mjs).
 
 import { RUNGS, VERDICT_GLOSS } from "./ablation.mjs";
@@ -164,7 +164,7 @@ function renderMd(json) {
     "One legible answer to *\"it's hard to tell what improvements got made.\"* All 7 sculptural subjects",
     "climb one canonical ladder (`R0 text→JSON → R1 glb-voxel → R2 +material-clean → R3 +surgical`); every",
     "rung is scored the same way against the subject's own image→3D GLB. Source spine:",
-    "`benchmarks/sculpture/sweep-ablation.json` (T-056-01) — this scorecard is a pure transform of it.",
+    "`benchmarks/sculpture/_archive/sweep-ablation.json` (T-056-01) — this scorecard is a pure transform of it.",
     "",
     "- **form IoU** — whole-build 3/4-view silhouette IoU vs the GLB mesh (normalized; higher = truer shape).",
     "- **value ΔE** — coverage-weighted CIE76 of the realized palette vs the GLB's own texture palette (lower = cleaner).",

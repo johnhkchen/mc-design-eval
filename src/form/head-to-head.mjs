@@ -2,7 +2,7 @@
 // comparison: committed multi-angle gate records in, one honest table out. No thresholds, no
 // judgement, no winner declaration beyond arithmetic deltas — verdicts are quoted as judged
 // (E-29 honesty: losses are findings with names, never hidden). The impure reader/writer is
-// benchmarks/sculpture/pattern-book-compare.mjs.
+// benchmarks/sculpture/_archive/pattern-book-compare.mjs.
 
 import { MULTI_ANGLE_GATE_SCHEMA } from "./multi-angle-gate.mjs";
 

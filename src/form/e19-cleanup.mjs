@@ -7,7 +7,7 @@
 // (routed + prune + clean). Per axis it reports the delta the whole cleanup bought and which fix bought it.
 //
 // PURE — no GL, no I/O, no Date/random — so it runs under the `src/**/*.test.mjs` glob. The impure runner
-// (`benchmarks/sculpture/e19-build.mjs`) does the GL render + WebP decode + file I/O and feeds this the cells.
+// (`benchmarks/sculpture/_archive/e19-build.mjs`) does the GL render + WebP decode + file I/O and feeds this the cells.
 // Mirrors `form-routing.mjs`'s shape (schema const + `assemble*` + private `render*Md`); tolerant of a missing
 // subject cell (emits null/`—`, never throws on a gap).
 

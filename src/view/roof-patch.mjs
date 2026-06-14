@@ -7,7 +7,7 @@
 // the top render; it never scans 6429 voxels.
 //
 // Follows the resemblance.mjs split: this file is the PURE core (geometric prior + FIXED prompt + parser),
-// imported by the metered runner (benchmarks/sculpture/detector-routing.mjs) which owns the GL render,
+// imported by the metered runner (benchmarks/sculpture/_archive/detector-routing.mjs) which owns the GL render,
 // image decode, and the light-tier `claude -p` call. NO model import, NO API key, NO GL here.
 //
 // PURE — runs under the `src/**/*.test.mjs` glob.

@@ -42,7 +42,7 @@ const workshopFiles = () => [
   // T-127-01: the milestone chain composes the workshop (seed + spawn) — same bar. Its judging
   // is convened from OUTSIDE (gate:patternbook:* scripts); the verdict READER
   // (pattern-book-compare.mjs) must name gate-record paths and is deliberately NOT listed here.
-  join(ROOT, "benchmarks", "sculpture", "pattern-book.mjs"),
+  join(ROOT, "benchmarks", "sculpture", "_archive", "pattern-book.mjs"), // archived S-156/T-156-01; still held to the judge-seam bar
   // T-136-01: the geometry-levers runner composes the workshop (source-threaded loop + injected
   // re-recognize exchange) — same bar.
   join(ROOT, "benchmarks", "sculpture", "geometry-levers.mjs"),

@@ -13,7 +13,7 @@
 //
 //   npm run registration:smoke -- --subject barn \
 //     --concept benchmarks/sculpture/runs/017-.../concept.png \
-//     --map benchmarks/sculpture/material-map/barn.json
+//     --map benchmarks/sculpture/_archive/material-map/barn.json
 //
 // Takes explicit paths — a pre-registration subject has no SUBJECTS entry and must not need one.
 // Writes registration-smoke.{json,md} BESIDE the concept (guarded; --rotate-pins to re-pin).

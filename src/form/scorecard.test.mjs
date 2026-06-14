@@ -18,7 +18,7 @@ function subj(name, cells) {
   return { subject: name, rungs };
 }
 
-// The real 7-subject marginals copied from benchmarks/sculpture/sweep-ablation.json (inlined so the
+// The real 7-subject marginals copied from benchmarks/sculpture/_archive/sweep-ablation.json (inlined so the
 // test is self-contained and PINS the headline averages — a spine change that breaks them fails here).
 const SPINE = {
   scale: 32,

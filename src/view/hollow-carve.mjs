@@ -15,7 +15,7 @@
 //                       voxel can change. exteriorSurfaceDigest over the 6 ortho views, equal before/after.
 //
 // PURE — no GL, no I/O, no model, no Date/random — runs under the `src/**/*.test.mjs` glob. The GL renders
-// + the metered detector call live in the runner (benchmarks/sculpture/hollow-cottage.mjs).
+// + the metered detector call live in the runner (benchmarks/sculpture/_archive/hollow-cottage.mjs).
 
 import { enclosedMassKeys } from "./surface-coherence.mjs";
 import { footprint } from "./structural-read.mjs";

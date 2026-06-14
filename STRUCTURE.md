@@ -37,19 +37,25 @@ surface/material/relief (Stage 5). **One realizer feeds the one loop** — a con
 in the chain that gets measured (the cost T-150-01 exposed). Determinism: Stage 4 is a pure function of
 committed inputs (kit/GLB/zone-map/policy); the workshop replays seed + paint trail byte-identically.
 
-## Retired from the live path (archive in S-156, not yet moved)
+## Retired from the live path — ARCHIVED (S-156 / T-156-01)
 
-These ran the *old* parallel chains; they remain in `benchmarks/sculpture/` (importable, committed) and
-are archived under their own ticket — a move is refused if a committed test/record reference can't be
-updated (E-37 Rule 2).
+These ran the *old* parallel chains. They are now under `benchmarks/sculpture/_archive/` (importable,
+committed, `git mv` byte-identical) so the live tree reads as the canonical spine only. Each move was
+reference-checked: every committed test/record/npm-script reference was updated or the move refused
+(E-37 Rule 2). The retired-epic sediment (E-13→E-24: `glb-voxel*`, `e18/e19`, `sweep-ablation`, the
+`*-ab` experiments, the material/palette epoch, `building`, `hollow-cottage`, baselines …) moved with
+its output trees; see `_archive/README.md` for the full manifest.
 
-- `pattern-book.mjs` — the **program-seed** chain (its `seedWorkshopProgram` Stage-4 brushes are
-  replaced by the generate-first realizer). Committed `workshop/<key>.json` program-seed ledgers stay
-  replayable (`npm run patternbook:repro`) until archived.
-- `styled-milestone.mjs` · `challenge-milestone.mjs` · `reconstructed-milestone.mjs` — terminal chains;
-  their shared `styledStretch` (grammar→dressing→settle) is reused **inside** Stage 4, not retired.
-- `generated-milestone.mjs` **as a terminal gated chain** — its deterministic core IS Stage 4 (kept,
-  spawned by `build`); only its standalone-with-gate role is superseded.
+- `_archive/pattern-book.mjs` — the **program-seed** chain (its `seedWorkshopProgram` Stage-4 brushes
+  are replaced by the generate-first realizer). Its committed `pattern-book/` baselines + `workshop/`
+  program-seed ledgers **stay in the live tree** (live tests/milestones read them).
+- `_archive/styled-milestone.mjs` · `_archive/challenge-milestone.mjs` ·
+  `_archive/reconstructed-milestone.mjs` · `_archive/regularize-shell.mjs` — terminal chains; their
+  shared `styledStretch` (grammar→dressing→settle) is reused **inside** Stage 4, not retired, and their
+  record dirs (`styled/`, `challenge/`, `reconstructed/`, `regularize/`) **stay** (they feed the kept
+  Stage-4 skin via `component-skin`).
+- `generated-milestone.mjs` **stays in the live tree** — its deterministic core IS Stage 4 (spawned by
+  `build`); only its standalone-with-gate npm scripts (`generated:*`) were removed.
 
 ## Invariants (enforced; S-157 formalizes)
 

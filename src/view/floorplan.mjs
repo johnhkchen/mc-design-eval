@@ -21,7 +21,7 @@
 // palette manifest, so the carved+filled artifact stays AJV-valid.
 //
 // PURE — no GL, no I/O, no model, no Date/random — runs under the `src/**/*.test.mjs` glob. The GL renders
-// + the metered steering call live in the runner (benchmarks/sculpture/floorplan-cottage.mjs).
+// + the metered steering call live in the runner (benchmarks/sculpture/_archive/floorplan-cottage.mjs).
 
 import { applyDeltas } from "./surface-coherence.mjs";
 import { openings, airComponents } from "./structural-read.mjs";

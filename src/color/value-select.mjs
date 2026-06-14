@@ -25,7 +25,7 @@
 // PURE, GL-FREE, NETWORK-FREE: committed-table read + arithmetic only, so it runs under the
 // `src/**/*.test.mjs` glob with nothing mocked. Imports only sibling color modules; cielab.mjs's
 // reuse boundary is untouched. The impure wiring (decode, render, record) lives in
-// benchmarks/sculpture/value-select.mjs. Integration into the paint pipeline is S-089's job —
+// benchmarks/sculpture/_archive/value-select.mjs. Integration into the paint pipeline is S-089's job —
 // downstream consumes this module's OUTPUT (a value-true role map), not its imports.
 
 import { srgbToLab, deltaE76, nearestFlat } from "./cielab.mjs";
