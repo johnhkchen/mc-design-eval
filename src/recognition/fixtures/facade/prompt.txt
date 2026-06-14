@@ -1,0 +1,25 @@
+Style pack: **rustic** — An English yeoman farmstead family (Tudor/farmstead vernacular) on pastured lowland with a small stone quarry, managed oak coppice, and a sawpit — the cottage and the tithe barn are both buildings of this one place, so they draw on the same materials.
+
+The building program (already recognized) — add a facade grammar to each mass:
+- mass `main`: 13×9 plan, 2×4-block storeys, jettied on +z
+
+Concept view shows faces: +x, +z (authoritative). Faces -x, -z are unseen by the concept — read the textured-GLB multi-angle renders for their SPATIAL LAYOUT (where studs/courses/openings fall), and tag those faces `evidence.source: "textured-glb"`, `layoutOnly: true`. Texture informs LAYOUT, never material — every material is a pack ROLE below.
+
+Material ROLES (the facade names roles, NEVER block ids):
+- `wall.field.ground`
+- `wall.dressing`
+- `frame.timber`
+- `wall.infill.upper`
+- `roof.field`
+- `roof.trim`
+- `roof.course`
+- `roof.step`
+- `chimney.cap`
+- `door.main`
+- `door.wagon`
+- `window.shutter`
+- `window.infill`
+
+Articulation bounds (pack-carried): member spacing period 2–5 cells; eave overhang ≤ 5; jetty depth ≤ 5; quoin run ≤ 5. rhythm is EITHER {period, phase} OR {count}. One face entry per wall.
+
+If a face cannot be read from either the concept or the GLB, set `evidence.source: "pack-idealised"` (the honest fallback — a named state, never a silent default).

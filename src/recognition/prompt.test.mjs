@@ -11,11 +11,13 @@ import { loadStylePack } from "../pack/style-pack.mjs";
 import { BUILDING_PROGRAM_SCHEMA } from "./program.mjs";
 import {
   recognitionRenderArgs,
+  baseRecognitionSchema,
   packDigest,
   sketchDigest,
   stripReplyToJson,
   parseProgramReply,
 } from "./prompt.mjs";
+import { loadProgramSchema } from "./program.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, "..", "..");
@@ -64,6 +66,18 @@ test("render args are deterministic and carry the whole vocabulary", () => {
   assert.ok(a.schema_json.includes('"building-program/v1"'), "schema embedded");
   assert.ok(a.pack_digest.includes("pitch classes [1,2]"), "pitch vocabulary taught"); // T-141-01: rustic gained class 2
   assert.ok(a.pack_digest.includes("concept-evidence > pack-assignment > vernacular-default"));
+});
+
+test("the base recognition prompt excludes the facade block (it is a separate pass — T-145-01)", () => {
+  // The facade grammar is authored by src/recognition/facade-grammar.mjs, NOT the base pass. The base
+  // prompt's schema must stay byte-identical to the pre-E-35 instrument (the FX-R1 sha pins), so the
+  // optional `facade` property is stripped from the schema the base pass shows the model.
+  const stripped = baseRecognitionSchema();
+  assert.equal(stripped.properties.masses.items.properties.facade, undefined);
+  // and the committed schema itself is untouched (facade still present on disk)
+  assert.ok(loadProgramSchema().properties.masses.items.properties.facade, "committed schema keeps facade");
+  // the render args' schema_json carries no facade text
+  assert.ok(!recognitionRenderArgs({ pack, sketch }).schema_json.includes('"facade"'));
 });
 
 test("render args embed the sketch digest numbers", () => {

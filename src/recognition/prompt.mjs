@@ -80,6 +80,19 @@ export function packDigest(pack, { registry = IDIOM_REGISTRY } = {}) {
 }
 
 /**
+ * The schema the BASE recognition pass shows the model: the program schema MINUS the optional
+ * `facade` block. The facade grammar is a SEPARATE second pass (T-145-01, src/recognition/
+ * facade-grammar.mjs); the base pass never authors it, so the base prompt stays byte-identical to
+ * the pre-E-35 instrument (the FX-R1 sha pins). Returns a fresh object; the committed schema is
+ * untouched. PURE.
+ */
+export function baseRecognitionSchema(schema = loadProgramSchema()) {
+  const s = structuredClone(schema);
+  delete s.properties?.masses?.items?.properties?.facade;
+  return s;
+}
+
+/**
  * The recognition prompt's DATA — the typed inputs of the BAML function
  * RecognizeBuildingProgram (baml_src/recognition.baml, T-129-01). The prose skeleton lives in
  * the BAML template; this serializes the live objects into its string params. The fixture test
@@ -87,7 +100,7 @@ export function packDigest(pack, { registry = IDIOM_REGISTRY } = {}) {
  * @param {{pack:object, sketch:object, schemaJson?:object}} p
  * @returns {{pack_digest:string, sketch_digest:string, schema_json:string}}
  */
-export function recognitionRenderArgs({ pack, sketch, schemaJson = loadProgramSchema() }) {
+export function recognitionRenderArgs({ pack, sketch, schemaJson = baseRecognitionSchema() }) {
   return {
     pack_digest: packDigest(pack),
     sketch_digest: sketchDigest(sketch),
