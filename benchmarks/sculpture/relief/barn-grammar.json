@@ -98,11 +98,15 @@
         "faces": [
           {
             "wall": "+z",
+            "band": "all",
             "rhythm": {
               "period": 4,
               "phase": 0
             },
-            "memberRole": "frame.timber",
+            "memberRole": "wall.dressing",
+            "fields": {
+              "role": "wall.field.ground"
+            },
             "evidence": {
               "source": "concept",
               "layoutOnly": false
@@ -110,11 +114,15 @@
           },
           {
             "wall": "-z",
+            "band": "all",
             "rhythm": {
               "period": 4,
               "phase": 0
             },
-            "memberRole": "frame.timber",
+            "memberRole": "wall.dressing",
+            "fields": {
+              "role": "wall.field.ground"
+            },
             "evidence": {
               "source": "concept",
               "layoutOnly": false
