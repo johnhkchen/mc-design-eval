@@ -270,6 +270,13 @@ function assembleComponentPlan(prov) {
   const mass = gen.provenance?.byCell
     ? { cells: new Set([...gen.provenance.byCell.entries()].filter(([, src]) => !String(src).startsWith("roof")).map(([k]) => k)), source: "provenance" }
     : null;
+  // T-150-01: the gable-end WALLS carry roof:* provenance (the roof construct authored them) but are
+  // ENVELOPE — fold them into the mass/wall census so planCensusZoneOf classifies them wall, not
+  // roof:gable, matching the zone-map's gableWallKeys contract. (Occupancy-neutral; the covering
+  // slopes/ridge stay roof.)
+  if (mass && gen.roofPlan?.gableWallKeys) {
+    for (const key of gen.roofPlan.gableWallKeys) mass.cells.add(key);
+  }
   const bodyTops = fit.masses.filter((m) => m.role !== "protrusion").map((m) => m.wallTop);
   const wallTop = bodyTops.length ? Math.max(...bodyTops) + 1 : null;
   return { schema: COMPONENT_PLAN_SCHEMA, roof, frames, wallFaces, mass, wallTop, findings };
