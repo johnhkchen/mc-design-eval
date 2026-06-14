@@ -2823,6 +2823,81 @@ records under `multi-angle/`; the head-to-head re-composed on the rotated verdic
 two barns on its first try — and on the third building it obeyed a bent ruler so precisely
 that the failure names exactly which instrument to fix next.
 
+## Straight ruler (E-34) — the bent ruler straightened, the lever landed, and fixing one stage surfaced the next (S-139…S-143, T-139-01…T-143-02) · 2026-06-14
+
+**The thesis.** E-33 ended with the cottage hill-climbing a *bent ruler* (the plinth-latched eave
+detection) and a wall-raise the model aimed but the cage refused. E-34 built the fixes — T-139
+straight ruler (eave detection ignores sub-wall skirt bands), T-140 named lens + concept-precedence
+pitch, T-141 rustic headroom (the wall-raise made admissible, storeyHeight≤5), T-142 re-derivation
+witnesses, T-144 v2 identity-first budget — and the terminal story S-143 **re-verdicts the same three
+subjects** to ask whether the residual was instrument or real. Delivered across two tickets because
+T-143-01's session died at the cottage's round-1 exchange (the recurring interruption class): the
+two barns landed under T-143-01 (`5d0743e`, `979d8b7`), the cottage + milestone + this section under
+T-143-02. Terminal evidence: `pattern-book/proportion-milestone.{json,md}` +
+`pr/assets/proportion-milestone.md`, baselines quoted pre-rotation, both rulers and both budget
+arithmetics beside every verdict, byte-reproducible.
+
+**The barns recorded the pass the glance already gave them (T-144 v2).** Rustic barn: 4/6 rounds,
+conformance PASS, judge **4/4 same-object / 8 minor / 0 major → v2 PASS — the project's first
+recorded composite pass**, with legacy FAIL (8>2) beside and kit-aware PASS. saltcrag: 4/4
+same-object / 8 minor → resemblance **v2 PASS**, but **kit-aware FAIL on 5 of 3,337 band0 cobblestone
+cells** (0.15% dressing residue, tolerance 0; singular judge honored, not re-rolled). The
+identity-first v2 arithmetic (minors≤10) is what let the glance's verdict be *recorded*; the legacy
+≤2 gap budget still reads FAIL over the same all-minor profile — the disagreement now has a third
+epic's data and a proposed resolution sitting beside it.
+
+**The cottage is the headline: the ruler straightened ~3.5×, and the lever landed.** Same
+byte-identical seed, read by the straight ruler (T-139): **ridgeToEave 5.5 → 1.55, roofShare 0.8182 →
+0.3548** — the bent-ruler artifact is gone (deltaRelFinal 0.0958 on ridge:eave, only 9.6% over
+target). And the wall-raise the model aimed and was refused 5/6 rounds in T-138-02 now **lands as
+geometry** under T-141 headroom: `storeyHeight:5` applied in rounds 1 and 3 (`kind: geometry`), the
+eyes-to-hands gradient no longer inverted. **AC3 answer: YES — the cottage proportion residual
+collapses to a real, modest roof-heaviness** (dark_oak_planks roof mass), not the instrument. E-33's
+"part-real, part-instrument" 2/4-with-4-majors verdict was *substantially* the instrument; the
+straight ruler removed the artifact and left the real roof mass (roofShare 0.3548 vs 0.293, 21% over
+relative — the survivor).
+
+**Fixing one stage surfaced the next: the dressing didn't track the geometry.** The wall-raise that
+landed grew the band0 ground-storey region — and the component-skin dressing did **not** keep pace.
+The cottage gate **coverage-rejected all 4 views** (band0 own(stone_bricks) coverage 0.40–0.45 <
+threshold), so the resemblance judge was **never called** (unlike T-138-02, where it ran: 2
+same-object + 2 drifted). Kit presence FAIL: band0 stone_bricks **1135/1920 missing** (59%), frame
+spruce_planks 163/456 — the same "dressing breaks runs" residue family as saltcrag's 5 cells, but at
+scale and **coupled to a geometry change**. The lesson is the pipeline's own shape: when a fix lets
+an upstream stage (proportion) finally move, the downstream stage (material dressing) must re-derive
+against the moved geometry, or the composite gate trips on the new gap. The proportion question E-34
+set out to answer is answered cleanly; the dressing coupling is the next stage's ticket, not this
+one's to repair (re-dressing mid-measurement would re-derive every committed replay). Singular judge
+honored, recorded as-is.
+
+**The rotation resolved E-33's concern 3 for free.** T-138-02 flagged three retired-pin tripwire
+families failing exit 1 (`proportion:repro`, `visibility:repro`, `measured:repro`) — the witnesses
+threw on rotated geometry-bearing ledgers. The E-34 re-runs **re-pinned those witnesses to current
+ledgers**, so all three now exit 0 (byte-identical re-derivation). No code or pin-registry change was
+needed; the sanctioned rotation itself was the fix. `milestone:proportion:repro` likewise went
+DIVERGES → byte-identical (the T-138-01-era staleness resolved by the recompose). Baselines never
+re-banked; `retired-pins.json` byte-unchanged (the clean re-pins never consult the retired-source
+path).
+
+**Where E-34 over- and under-reached, honestly.** (1) The cottage **could not be resemblance-judged
+this run** — the coverage pre-gate fired first; the proportion finding stands on the conformance +
+witness, not the judge. (2) Tolerance 0.15 stays uncalibrated; nothing yet ties it to a stranger's
+glance. (3) The ≤2 gap budget vs v2 identity arithmetic is still the **reviewer's** recalibration —
+E-34 ships v2 as the proposed resolution (the barns' first composite PASS depends on it) with legacy
+beside, but does not decide it. (4) The proportion check measures *occupancy*; the program-level seed
+ratios are a second lens — they agreed this time (both read 1.55) because the straight ruler removed
+the divergence, but the warning to name the lens stands.
+
+**E-12 handoff.** `pr/assets/proportion-milestone.md` (concept beside sheet, before/straight/target
+ratio rows, lever citations, both arithmetics) + its JSON; baselines with retired pins named in
+`pattern-book/proportion-baselines.json`; chain records `pattern-book/{barn,barn--saltcrag,cottage}`
+with ledgers; gate records under `multi-angle/`; head-to-head re-composed
+(`pr/assets/pattern-book-milestone.md`); the cottage glance sheet `pr/assets/frames/`. The story
+beat: taught to measure (E-33), the loop obeyed a bent ruler so faithfully it named the fix; given
+the straight ruler (E-34), it aimed right, the lever landed, the proportion residual collapsed to the
+real roof — and the very success of the geometry move exposed that the *next* stage, the skin, must
+learn to follow the geometry it now moves. One stage fixed; the next named.
+
 ## Ratified decision — "textures never read" narrowed to material identity (E-35) · 2026-06-14
 
 Drafting E-35 (facade-grammar-and-relief — M1's texture finish, the twin of E-34's proportion
