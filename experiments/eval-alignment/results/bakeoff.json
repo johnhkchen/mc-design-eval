@@ -1,0 +1,127 @@
+{
+  "schema": "bakeoff/v1",
+  "tier": "strong",
+  "votes": 3,
+  "states": [
+    {
+      "key": "barn-r1",
+      "ground": "ROOF",
+      "confidence": "high",
+      "why": "Open roofless shell — no roof present at all; the concept is a steep-gabled barn. ROOF is unmistakably the worst defect.",
+      "renderDir": "builds/barn/round-1"
+    },
+    {
+      "key": "cottage-newroof",
+      "ground": "WALL",
+      "confidence": "medium",
+      "why": "Roof present and coherent, but the lower-storey WALLS are holey/incomplete (gaps between stone base and roof) vs a tidy Tudor cottage. WALL is the worst defect — MEDIUM confidence (roof is fine, walls clearly broken).",
+      "renderDir": "builds/cottage/new-roof"
+    }
+  ],
+  "excluded": [
+    {
+      "key": "gatehouse-baseline/autonomy",
+      "reason": "Roofless (clean ROOF ground truth) but only ONE azimuth on disk — the 4-render gate lens cannot be fed; excluded rather than padded."
+    },
+    {
+      "key": "barn--saltcrag-r0",
+      "reason": "Near-complete barn at its single saved azimuth; sparse-skin gap is palette/coverage, not a clean department — ambiguous."
+    },
+    {
+      "key": "cottage-r1",
+      "reason": "Chaotic broken blob — the worst defect spans massing+roof+envelope at once; no single unambiguous department."
+    }
+  ],
+  "rows": [
+    {
+      "key": "barn-r1",
+      "ground": "ROOF",
+      "splitDept": "ROOF",
+      "fusedDept": "ROOF",
+      "fusedMatched": true,
+      "fusedRegion": "roof silhouette"
+    },
+    {
+      "key": "barn-r1",
+      "ground": "ROOF",
+      "splitDept": "ROOF",
+      "fusedDept": "ROOF",
+      "fusedMatched": true,
+      "fusedRegion": "roof silhouette"
+    },
+    {
+      "key": "barn-r1",
+      "ground": "ROOF",
+      "splitDept": "ROOF",
+      "fusedDept": "ROOF",
+      "fusedMatched": true,
+      "fusedRegion": "roof"
+    },
+    {
+      "key": "cottage-newroof",
+      "ground": "WALL",
+      "splitDept": "CHIMNEY",
+      "fusedDept": "WALL",
+      "fusedMatched": false,
+      "fusedRegion": "upper storey (both masses)"
+    },
+    {
+      "key": "cottage-newroof",
+      "ground": "WALL",
+      "splitDept": "CHIMNEY",
+      "fusedDept": "WALL",
+      "fusedMatched": true,
+      "fusedRegion": "upper storey walls (both masses)"
+    },
+    {
+      "key": "cottage-newroof",
+      "ground": "WALL",
+      "splitDept": "CHIMNEY",
+      "fusedDept": "WALL",
+      "fusedMatched": true,
+      "fusedRegion": "upper storey (all walls)"
+    }
+  ],
+  "summary": {
+    "n": 6,
+    "split": {
+      "correct": 3,
+      "rate": 0.5
+    },
+    "fused": {
+      "correct": 6,
+      "rate": 1,
+      "unmatchedRegions": 1
+    },
+    "perState": {
+      "barn-r1": {
+        "ground": "ROOF",
+        "split": [
+          "ROOF",
+          "ROOF",
+          "ROOF"
+        ],
+        "fused": [
+          "ROOF",
+          "ROOF",
+          "ROOF"
+        ]
+      },
+      "cottage-newroof": {
+        "ground": "WALL",
+        "split": [
+          "CHIMNEY",
+          "CHIMNEY",
+          "CHIMNEY"
+        ],
+        "fused": [
+          "WALL",
+          "WALL",
+          "WALL"
+        ]
+      }
+    },
+    "verdict": "FUSED WINS (collapse the split — report)"
+  },
+  "adapterNote": "fusedDept re-derived from saved raw fusedRegion strings under the corrected regionToDepartment (WALL-before-ROOM; storey is not a ROOM word). split outputs are the live model run, unchanged."
+}

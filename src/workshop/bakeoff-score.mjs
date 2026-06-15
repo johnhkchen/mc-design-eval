@@ -28,12 +28,17 @@ export const PENALTY = Object.freeze({ major: 20, minor: 8 });
 // Keyword → department. ORDER MATTERS for first-match: the more specific department predicates are
 // listed before WALL's generic envelope words so e.g. "roof" wins over a stray "wall" later in the text.
 // Unlike departmentOf (which throws on ambiguity), free text is allowed to be loose — first hit wins.
+//
+// WALL is checked BEFORE ROOM on purpose: a region like "upper storey walls" is a WALL defect (the words
+// name walls); only an explicit interior/floor word should win ROOM. (This precedence is consequential —
+// see T-166-01 FINDINGS: a "...storey walls" region mis-filed to ROOM flips the bake-off verdict.) "storey"
+// is NOT a ROOM word — it denotes a vertical envelope LEVEL, not an interior room.
 const KEYWORDS = Object.freeze([
   ["ROOF", ["roof", "gable", "ridge", "eave", "thatch", "dormer", "pitch", "rafter"]],
   ["OPENING", ["door", "window", "arch", "opening", "gate", "lintel", "voussoir", "jamb", "portal"]],
   ["CHIMNEY", ["chimney", "flue", "smokestack", "stack"]],
-  ["ROOM", ["floor", "interior", "room", "hollow", "storey", "story"]],
   ["WALL", ["wall", "facade", "façade", "plinth", "quoin", "corner", "masonry", "timber", "frame", "ashlar", "pilaster", "cladding"]],
+  ["ROOM", ["floor", "interior", "room", "hollow", "rafter-bay"]],
 ]);
 
 /**

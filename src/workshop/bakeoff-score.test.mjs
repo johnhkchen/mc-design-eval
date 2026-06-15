@@ -23,6 +23,9 @@ test("BO1 regionToDepartment maps each department's keywords and flags the unmat
   assert.deepEqual(regionToDepartment("the brick chimney"), { department: "CHIMNEY", matched: true });
   assert.deepEqual(regionToDepartment("ground floor interior"), { department: "ROOM", matched: true });
   assert.deepEqual(regionToDepartment("rubble masonry wall"), { department: "WALL", matched: true });
+  // precedence: a "...storey walls" region is a WALL defect — WALL is checked before ROOM, and "storey"
+  // is not a ROOM word (it is an envelope level). Pins the T-166-01 adapter fix that moved the bake-off.
+  assert.deepEqual(regionToDepartment("upper storey walls (both masses)"), { department: "WALL", matched: true });
   // no keyword → defaults to WALL but flags matched:false so the fused path's lossiness is visible
   const d = regionToDepartment("the overall vibe");
   assert.equal(d.department, "WALL");
