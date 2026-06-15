@@ -80,6 +80,17 @@ test("the base recognition prompt excludes the facade block (it is a separate pa
   assert.ok(!recognitionRenderArgs({ pack, sketch }).schema_json.includes('"facade"'));
 });
 
+test("the base recognition prompt excludes the optional `style` field (stamped at the seam — T-165-01)", () => {
+  // `style` is NOT model-authored: it is stamped from the conditioning pack at the recognition seam
+  // (today style == pack id). Strip it from the model-facing schema so the base prompt stays
+  // byte-identical to the FX-R1 pins, exactly as `facade` is stripped.
+  const stripped = baseRecognitionSchema();
+  assert.equal(stripped.properties.style, undefined, "base prompt must not show the stamped `style`");
+  assert.ok(loadProgramSchema().properties.style, "committed schema keeps the optional `style` property");
+  assert.ok(!recognitionRenderArgs({ pack, sketch }).schema_json.includes('"style"'),
+    "schema_json must carry no style text (FX-R1 stays pinned)");
+});
+
 test("render args embed the sketch digest numbers", () => {
   const a = recognitionRenderArgs({ pack, sketch });
   assert.ok(a.sketch_digest.includes("40×48 cells"));

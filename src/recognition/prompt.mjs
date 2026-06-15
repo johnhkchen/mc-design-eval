@@ -81,14 +81,16 @@ export function packDigest(pack, { registry = IDIOM_REGISTRY } = {}) {
 
 /**
  * The schema the BASE recognition pass shows the model: the program schema MINUS the optional
- * `facade` block. The facade grammar is a SEPARATE second pass (T-145-01, src/recognition/
- * facade-grammar.mjs); the base pass never authors it, so the base prompt stays byte-identical to
- * the pre-E-35 instrument (the FX-R1 sha pins). Returns a fresh object; the committed schema is
- * untouched. PURE.
+ * `facade` block AND the optional `style` field. The facade grammar is a SEPARATE second pass
+ * (T-145-01, src/recognition/facade-grammar.mjs); the base pass never authors it. `style` is NOT
+ * model-authored either — it is stamped at the recognition seam from the conditioning pack
+ * (T-165-01, E-39). Stripping both keeps the base prompt byte-identical to the pre-E-35 instrument
+ * (the FX-R1 sha pins). Returns a fresh object; the committed schema is untouched. PURE.
  */
 export function baseRecognitionSchema(schema = loadProgramSchema()) {
   const s = structuredClone(schema);
   delete s.properties?.masses?.items?.properties?.facade;
+  delete s.properties?.style;
   return s;
 }
 

@@ -18,6 +18,11 @@
       "type": "string",
       "pattern": "^[a-z][a-z0-9-]*$"
     },
+    "style": {
+      "description": "Style slug the program was recognized under (today == pack id). OPTIONAL: stamped at the recognition seam from the conditioning pack (benchmarks/sculpture/recognize.mjs); the eval's Layer-A diagnostic suite (DiagnoseBuild) selects its expected profile by it (T-165-01, E-39). NOT model-authored — stripped from the base recognition prompt so FX-R1 stays pinned.",
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$"
+    },
     "reading": {
       "description": "The model's recognition evidence — recorded, never realized",
       "type": "object",
