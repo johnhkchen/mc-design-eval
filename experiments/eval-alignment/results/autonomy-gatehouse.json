@@ -1,0 +1,55 @@
+{
+  "schema": "eval-alignment/autonomy/v1",
+  "subject": "gatehouse",
+  "agentModel": "claude-sonnet-4-6",
+  "evalModel": "claude-opus-4-8",
+  "trajectory": [
+    {
+      "round": 0,
+      "quality": 14,
+      "worstDefect": {
+        "axis": "massing",
+        "what": "undifferentiated dark blob with ragged drooping walls and a stepped lump on top — reads as a melting cube, not a gabled cottage"
+      },
+      "pick": {
+        "tool": "construct_walls",
+        "reason": "The worst defect is massing — ragged drooping walls and undifferentiated blob shape. construct_walls rebuilds the wall envelope from the recognized footprint, giving a clean solid ring that will replace the melting-cube silhouette with proper structure before the roof can read correctly."
+      }
+    },
+    {
+      "round": 1,
+      "quality": 20,
+      "worstDefect": {
+        "axis": "roof form",
+        "what": "chaotic stepped pyramid lump, no coherent gable or ridge line"
+      },
+      "pick": {
+        "tool": "apply_gable_roof",
+        "reason": "The worst defect is explicitly the roof form — chaotic stepped pyramid lump with no coherent gable or ridge line. apply_gable_roof replaces it with a crisp parametric gable, directly addressing this defect."
+      }
+    },
+    {
+      "round": 2,
+      "quality": 32,
+      "worstDefect": {
+        "axis": "structural integrity",
+        "what": "ragged non-watertight walls — vertical gaps and protruding column ribs leave the facade full of holes"
+      },
+      "pick": {
+        "tool": "construct_walls",
+        "reason": "The worst defect is structural integrity — ragged non-watertight walls with vertical gaps and protruding column ribs. construct_walls already improved quality (14→20), and the defect persists, so rebuilding the wall envelope again is the correct choice. The prior application improved but did not fully resolve the structural holes; a second pass should close the remaining gaps."
+      }
+    },
+    {
+      "round": 3,
+      "quality": 34,
+      "worstDefect": {
+        "axis": "palette",
+        "what": "roof is bright orange/terracotta instead of the concept's dark slate-grey"
+      },
+      "pick": {
+        "tool": "—"
+      }
+    }
+  ]
+}

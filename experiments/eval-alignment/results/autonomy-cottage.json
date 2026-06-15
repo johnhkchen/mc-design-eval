@@ -1,0 +1,55 @@
+{
+  "schema": "eval-alignment/autonomy/v1",
+  "subject": "cottage",
+  "agentModel": "claude-sonnet-4-6",
+  "evalModel": "claude-opus-4-8",
+  "trajectory": [
+    {
+      "round": 0,
+      "quality": 22,
+      "worstDefect": {
+        "axis": "roof form",
+        "what": "chaotic lumpy multi-ridge mass with no coherent gable or ridge line"
+      },
+      "pick": {
+        "tool": "apply_gable_roof",
+        "reason": "The worst defect is explicitly the roof form — chaotic lumpy multi-ridge mass with no coherent gable or ridge line. apply_gable_roof replaces it with a crisp parametric gable, directly addressing this defect."
+      }
+    },
+    {
+      "round": 1,
+      "quality": 22,
+      "worstDefect": {
+        "axis": "structural integrity",
+        "what": "walls are sparse and full of holes — the build is hollow and see-through under an oversized roof"
+      },
+      "pick": {
+        "tool": "construct_walls",
+        "reason": "Worst defect is structural integrity — walls are sparse and full of holes. construct_walls rebuilds the wall envelope from the recognized footprint, which directly addresses this defect. apply_gable_roof already failed to improve quality."
+      }
+    },
+    {
+      "round": 2,
+      "quality": 15,
+      "worstDefect": {
+        "axis": "palette",
+        "what": "entire build is a single uniform brown material — no stone base, plaster, or timber contrast"
+      },
+      "pick": {
+        "tool": "add_timber_framing",
+        "reason": "Worst defect is uniform brown palette with no material contrast — timber framing adds studs + plaster infill to break the monotone upper storey."
+      }
+    },
+    {
+      "round": 3,
+      "quality": 15,
+      "worstDefect": {
+        "axis": "structural integrity",
+        "what": "walls are isolated columns with see-through gaps; no enclosed envelope"
+      },
+      "pick": {
+        "tool": "—"
+      }
+    }
+  ]
+}
