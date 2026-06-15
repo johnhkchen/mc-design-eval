@@ -148,10 +148,15 @@ async function runLive(def, { rotate }) {
   };
 
   console.error(`[recognize] ${key}: asking (budget ${PROGRAM_REPLY_BUDGET}, model ${model})…`);
-  const { verdict: program, replies, askCount } = await runReplyPolicy(ask, {
+  const { verdict: recognized, replies, askCount } = await runReplyPolicy(ask, {
     parse: (t) => parseProgramReply(t, { pack }),
     maxAttempts: PROGRAM_REPLY_BUDGET,
   });
+  // Recognition DECLARES the style (T-165-01, E-39): stamp it from the conditioning pack onto a fresh
+  // program object (parseProgramReply freezes its result). Today style == pack id (the model never
+  // chooses a style — the --pack the run launched with fixes it), so this is the honest surfacing of
+  // the program's `style`. The eval's Layer-A suite (DiagnoseBuild) selects its expected profile by it.
+  const program = recognized === null ? null : { ...recognized, style: pack.style };
 
   await mkdir(OUT_DIR, { recursive: true });
   const write = (rel, content) => guardedWriteRecord({ root: ROOT, rel, content, rotate });
@@ -225,7 +230,9 @@ async function runOffline(def) {
     return null;
   }
   const pack = loadStylePack(join(ROOT, packRel));
-  const program = parseProgramReply(committedProgram, { pack }); // same gates as live
+  // same gates as live; stamp the declared style onto a fresh object (parseProgramReply freezes) so
+  // the offline path is consistent with the live path (T-165-01).
+  const program = { ...parseProgramReply(committedProgram, { pack }), style: pack.style };
   const { workshopProgram } = compileProgram(program, pack);
   const { artifact } = realizeProgram(assertWorkshopProgram(workshopProgram));
   const fresh = jsonOf(artifact);
