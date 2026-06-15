@@ -1,0 +1,23 @@
+{
+  "schema": "eval-alignment/roof-climb/v1",
+  "eaveY": 12,
+  "ridgeY": 24,
+  "gableCells": 8736,
+  "baseline": {
+    "worstDefect": {
+      "axis": "structural integrity",
+      "what": "hollow ragged shell, no roof, broken walls"
+    },
+    "quality": 12,
+    "rationale": "The build is a fragmentary open-topped shell with ragged holey walls and no gabled roof at all, so it fails to read as the solid stone-and-timber barn of the concept despite recognizable stone/wood materials."
+  },
+  "newRoof": {
+    "worstDefect": {
+      "axis": "structural integrity",
+      "what": "walls riddled with holes and ragged, broken lower courses"
+    },
+    "quality": 45,
+    "rationale": "The gable roof form and overall long massing read correctly, but the stone walls are perforated with holes and break down into chaotic, incomplete geometry along the lower courses—a glaring structural defect that caps the build well below the clean, solid walls of the concept."
+  },
+  "delta": 33
+}

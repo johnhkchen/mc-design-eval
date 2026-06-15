@@ -1,0 +1,72 @@
+{
+  "schema": "eval-alignment/round-rank/v1",
+  "claim": "spearman(round-order, quality) <= 0.30",
+  "rankerModel": "claude-sonnet-4-6",
+  "samples": 3,
+  "results": [
+    {
+      "subject": "barn",
+      "rounds": [
+        "round-1",
+        "round-2",
+        "round-3",
+        "round-4",
+        "round-5",
+        "round-6",
+        "final"
+      ],
+      "rankerModel": "claude-sonnet-4-6",
+      "view": "view-+x+z.png",
+      "samples": [
+        {
+          "sample": 0,
+          "rho": 0,
+          "scoresByRound": {
+            "round-2": 7,
+            "round-3": 7,
+            "round-1": 7,
+            "final": 7,
+            "round-4": 7,
+            "round-5": 7,
+            "round-6": 7
+          },
+          "rationale": "All seven candidates appear pixel-identical — an incomplete open shell with chaotic, spiky wood-and-stone framing and no coherent roof, walls, doors, or plinth — scoring uniformly low against the concept's clean steep-gabled barn with dressed stone walls and finished facade."
+        },
+        {
+          "sample": 1,
+          "rho": 0,
+          "scoresByRound": {
+            "round-5": 8,
+            "round-3": 8,
+            "round-4": 8,
+            "round-6": 8,
+            "final": 8,
+            "round-2": 8,
+            "round-1": 8
+          },
+          "rationale": "All seven candidates appear identical — roofless, structurally chaotic shells with no gable, no enclosed roof form, and ragged walls — scoring uniformly low against a concept that shows a clean stone barn with a complete dark-oak gabled roof and dressed pilaster facade."
+        },
+        {
+          "sample": 2,
+          "rho": 0,
+          "scoresByRound": {
+            "round-1": 5,
+            "round-5": 5,
+            "round-6": 5,
+            "round-2": 5,
+            "round-3": 5,
+            "final": 5,
+            "round-4": 5
+          },
+          "rationale": "All seven candidates are visually identical — a roofless, hollow shell with chaotic stone/wood wall fragments and no pitched roof, no pilasters, no doors, and no plinth — scoring uniformly near zero against a concept that shows a complete, well-massed longhouse with a steep dark-oak gable roof and clean stone-brick facade."
+        }
+      ],
+      "meanRho": 0,
+      "rhos": [
+        0,
+        0,
+        0
+      ]
+    }
+  ]
+}

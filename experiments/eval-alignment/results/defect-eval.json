@@ -1,0 +1,64 @@
+{
+  "schema": "eval-alignment/defect-eval/v1",
+  "evalModel": "claude-opus-4-8",
+  "results": [
+    {
+      "subject": "cottage",
+      "id": "round-1",
+      "note": "cream infill",
+      "quality": 18,
+      "worstDefect": {
+        "axis": "roof form & presence",
+        "what": "chaotic jumbled roof with no readable gables or ridge, stairs splaying in conflicting directions"
+      },
+      "rationale": "The roof collapses into a disordered brown mass with no coherent gable or ridge geometry, so the build fails to read as the crisp twin-gabled Tudor house even though palette zoning (stone base, cream walls, timber) is roughly present."
+    },
+    {
+      "subject": "cottage",
+      "id": "round-4",
+      "note": "mid",
+      "quality": 18,
+      "worstDefect": {
+        "axis": "roof form & presence",
+        "what": "roof is a chaotic, formless brown mass with no readable gable/pitch, jagged and lumpy where the concept has clean steep gables"
+      },
+      "rationale": "The dominant roof reads as a disordered brown blob rather than the concept's crisp gabled Tudor roof, capping the build despite a roughly correct stone-base-and-timber massing underneath."
+    },
+    {
+      "subject": "cottage",
+      "id": "final",
+      "note": "pink infill",
+      "quality": 20,
+      "worstDefect": {
+        "axis": "roof form & presence",
+        "what": "clean Tudor gabled roof replaced by a chaotic, lumpy brown mass with no readable ridge or pitch"
+      },
+      "rationale": "The defining gabled roof is a jagged blobby heap rather than the crisp dual-pitch form of the concept, and the upper-storey massing reads as broken geometry, capping it as a weak realization despite the recognizable stone base and timber-and-plaster palette cues."
+    },
+    {
+      "subject": "barn",
+      "id": "round-1",
+      "note": "",
+      "quality": 8,
+      "worstDefect": {
+        "axis": "roof form & presence",
+        "what": "roof essentially absent — only a couple of floating brown beams, no gabled roof over an open hollow shell"
+      },
+      "rationale": "The concept's defining steep gabled brown roof is missing entirely and the walls are ragged and holed, leaving a broken roofless shell that does not read as the barn."
+    },
+    {
+      "subject": "barn",
+      "id": "final",
+      "note": "",
+      "quality": 8,
+      "worstDefect": {
+        "axis": "roof form & presence",
+        "what": "no roof — only a couple of loose planks lie inside an open, roofless shell"
+      },
+      "rationale": "The concept's defining steep gabled roof is entirely absent and the stone walls are ragged and hole-riddled, so the build fails to read as the target barn despite a vaguely correct stone-and-timber palette."
+    }
+  ],
+  "cottageSpread": 2,
+  "barnSpread": 0,
+  "cottageVsBarnGap": 10.666666666666668
+}

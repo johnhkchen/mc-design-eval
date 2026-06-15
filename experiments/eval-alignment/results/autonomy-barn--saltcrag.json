@@ -1,0 +1,55 @@
+{
+  "schema": "eval-alignment/autonomy/v1",
+  "subject": "barn--saltcrag",
+  "agentModel": "claude-sonnet-4-6",
+  "evalModel": "claude-opus-4-8",
+  "trajectory": [
+    {
+      "round": 0,
+      "quality": 52,
+      "worstDefect": {
+        "axis": "detail",
+        "what": "facade is blank — pilaster columns, framed doorways, and gable articulation all absent"
+      },
+      "pick": {
+        "tool": "add_timber_framing",
+        "reason": "Worst defect is blank facade lacking detail/articulation — timber framing adds the stud+plaster relief that addresses missing surface detail on the upper storey."
+      }
+    },
+    {
+      "round": 1,
+      "quality": 15,
+      "worstDefect": {
+        "axis": "structural integrity",
+        "what": "walls are a gappy striped colonnade of detached posts, not a solid enclosed stone envelope"
+      },
+      "pick": {
+        "tool": "construct_walls",
+        "reason": "Worst defect is structural integrity — gappy colonnade walls need a full envelope rebuild. add_timber_framing already failed; construct_walls rebuilds from the recognized footprint with solid stone base and per-storey skin."
+      }
+    },
+    {
+      "round": 2,
+      "quality": 15,
+      "worstDefect": {
+        "axis": "structural integrity",
+        "what": "side walls are a row of disconnected pillars with open gaps, not an enclosed envelope"
+      },
+      "pick": {
+        "tool": "apply_gable_roof",
+        "reason": "construct_walls already failed to fix the structural integrity defect and add_timber_framing made it worse; the remaining untried tool is apply_gable_roof, which addresses a different defect axis (roof form) and may improve the overall quality score."
+      }
+    },
+    {
+      "round": 3,
+      "quality": 15,
+      "worstDefect": {
+        "axis": "structural integrity",
+        "what": "upper walls are a row of disconnected pillars with open gaps — the envelope is see-through"
+      },
+      "pick": {
+        "tool": "—"
+      }
+    }
+  ]
+}

@@ -8,12 +8,12 @@
       "round": 0,
       "quality": 14,
       "worstDefect": {
-        "axis": "massing",
-        "what": "undifferentiated dark blob with ragged drooping walls and a stepped lump on top — reads as a melting cube, not a gabled cottage"
+        "axis": "structural integrity",
+        "what": "walls are a ragged hanging colonnade of disconnected vertical strips with large gaps, no enclosed shell or floor"
       },
       "pick": {
         "tool": "construct_walls",
-        "reason": "The worst defect is massing — ragged drooping walls and undifferentiated blob shape. construct_walls rebuilds the wall envelope from the recognized footprint, giving a clean solid ring that will replace the melting-cube silhouette with proper structure before the roof can read correctly."
+        "reason": "Walls are a ragged colonnade with large gaps and no enclosed shell — construct_walls rebuilds the full wall envelope from the recognized footprint with solid ring floor-to-eave and per-storey material."
       }
     },
     {
@@ -21,31 +21,31 @@
       "quality": 20,
       "worstDefect": {
         "axis": "roof form",
-        "what": "chaotic stepped pyramid lump, no coherent gable or ridge line"
+        "what": "steep gable replaced by a stepped pyramidal/ziggurat lump"
       },
       "pick": {
         "tool": "apply_gable_roof",
-        "reason": "The worst defect is explicitly the roof form — chaotic stepped pyramid lump with no coherent gable or ridge line. apply_gable_roof replaces it with a crisp parametric gable, directly addressing this defect."
+        "reason": "Worst defect is roof form — stepped pyramidal/ziggurat lump instead of a steep gable. apply_gable_roof replaces the roof with a crisp parametric gable, directly addressing this defect."
       }
     },
     {
       "round": 2,
-      "quality": 32,
+      "quality": 35,
       "worstDefect": {
-        "axis": "structural integrity",
-        "what": "ragged non-watertight walls — vertical gaps and protruding column ribs leave the facade full of holes"
+        "axis": "palette",
+        "what": "roof reads as warm orange/tan planks instead of the concept's dark slate-gray stone tile"
       },
       "pick": {
-        "tool": "construct_walls",
-        "reason": "The worst defect is structural integrity — ragged non-watertight walls with vertical gaps and protruding column ribs. construct_walls already improved quality (14→20), and the defect persists, so rebuilding the wall envelope again is the correct choice. The prior application improved but did not fully resolve the structural holes; a second pass should close the remaining gaps."
+        "tool": "done",
+        "reason": "The worst defect is roof palette (warm planks vs dark slate), but the available tools don't address roof material — apply_gable_roof fixes roof form (already applied and helped), add_timber_framing targets wall palette, construct_walls targets wall structure. No tool in the set addresses roof material/color."
       }
     },
     {
       "round": 3,
-      "quality": 34,
+      "quality": 35,
       "worstDefect": {
-        "axis": "palette",
-        "what": "roof is bright orange/terracotta instead of the concept's dark slate-grey"
+        "axis": "structural integrity",
+        "what": "walls read as a ragged, gappy vertical colonnade with protruding base columns, not a solid enclosed stone envelope"
       },
       "pick": {
         "tool": "—"

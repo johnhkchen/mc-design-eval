@@ -6,46 +6,46 @@
   "trajectory": [
     {
       "round": 0,
-      "quality": 14,
+      "quality": 12,
       "worstDefect": {
         "axis": "structural integrity",
-        "what": "walls riddled with holes; envelope is a broken, see-through shell with no closed roof"
+        "what": "open roofless shell with gappy see-through walls, no enclosed envelope"
       },
       "pick": {
         "tool": "construct_walls",
-        "reason": "Worst defect is structural integrity — walls riddled with holes and a broken envelope. construct_walls rebuilds the full wall ring from the recognized footprint, which directly addresses this defect."
+        "reason": "Worst defect is structural integrity — open roofless shell with gappy see-through walls. construct_walls rebuilds the full wall envelope from the recognized footprint with solid floor-to-eave construction."
       }
     },
     {
       "round": 1,
-      "quality": 13,
+      "quality": 12,
       "worstDefect": {
         "axis": "structural integrity",
-        "what": "walls are gap-riddled and the roof/envelope is absent — an open, see-through shell"
+        "what": "open roofless shell with gappy see-through walls, no enclosed envelope"
       },
       "pick": {
         "tool": "apply_gable_roof",
-        "reason": "construct_walls already failed to improve quality; the eval also flags missing roof/envelope, so applying a gable roof addresses a different critical defect that hasn't been tried yet."
+        "reason": "construct_walls already failed to improve quality (12→12); the build is an open roofless shell, so the roof is the next structural defect to address."
       }
     },
     {
       "round": 2,
-      "quality": 15,
+      "quality": 48,
       "worstDefect": {
         "axis": "structural integrity",
-        "what": "walls riddled with holes — see-through, no enclosed envelope"
+        "what": "ragged lower walls with gaps/holes at the base and corners, not a clean solid envelope"
       },
       "pick": {
-        "tool": "add_timber_framing",
-        "reason": "construct_walls already failed on this build; apply_gable_roof improved the roof; the one untried tool is add_timber_framing — timber studs + plaster infill may fill wall gaps and add the material contrast the build lacks"
+        "tool": "construct_walls",
+        "reason": "The worst defect is structural integrity — ragged lower walls with gaps/holes at the base and corners. construct_walls rebuilds the wall envelope from the recognized footprint with a clean solid ring and per-storey material dressing. The prior construct_walls attempt at quality 12 ran on a broken open shell; now that the roof has been fixed (12→48), the wall envelope has a proper eave boundary to build against, so a second attempt should produce a clean result."
       }
     },
     {
       "round": 3,
-      "quality": 15,
+      "quality": 45,
       "worstDefect": {
         "axis": "structural integrity",
-        "what": "walls riddled with gaps — see-through envelope, no enclosed mass"
+        "what": "long facade reads as a gappy colonnade — recessed bays between pillars look open/see-through rather than the solid infilled stone walls of the concept"
       },
       "pick": {
         "tool": "—"

@@ -1,0 +1,72 @@
+{
+  "schema": "eval-alignment/round-rank/v1",
+  "claim": "spearman(round-order, quality) <= 0.30",
+  "rankerModel": "claude-sonnet-4-6",
+  "samples": 3,
+  "results": [
+    {
+      "subject": "cottage",
+      "rounds": [
+        "round-1",
+        "round-2",
+        "round-3",
+        "round-4",
+        "round-5",
+        "round-6",
+        "final"
+      ],
+      "rankerModel": "claude-sonnet-4-6",
+      "view": "view-+x+z.png",
+      "samples": [
+        {
+          "sample": 0,
+          "rho": -0.8669214468630108,
+          "scoresByRound": {
+            "round-2": 35,
+            "round-3": 28,
+            "round-1": 33,
+            "final": 27,
+            "round-4": 27,
+            "round-5": 27,
+            "round-6": 27
+          },
+          "rationale": "A and C edge out the rest by using cream/beige upper wall panels that match the concept's half-timber plaster infill, while B/D/E/F/G all substitute a pink/salmon tone that reads as a material error; all seven builds share the same fundamental gap against the concept — the stepped eave overhang, proper timber-framing relief, window shutters, and door lantern are absent, leaving every candidate a rough massing approximation rather than a realized Tudor craft piece."
+        },
+        {
+          "sample": 1,
+          "rho": -0.7572401854185358,
+          "scoresByRound": {
+            "round-5": 25,
+            "round-3": 25,
+            "round-4": 25,
+            "round-6": 25,
+            "final": 25,
+            "round-2": 34,
+            "round-1": 33
+          },
+          "rationale": "F and G use cream/sandstone infill panels that match the concept's plaster tone, while A–E use pink/salmon infill that clashes with the dark timber framing; across all builds the surface relief, window detail, lantern, and shuttered articulation of the concept are absent, keeping even the best candidates well below the target."
+        },
+        {
+          "sample": 2,
+          "rho": -0.5800729211379678,
+          "scoresByRound": {
+            "round-1": 33,
+            "round-5": 26,
+            "round-6": 26,
+            "round-2": 32,
+            "round-3": 25,
+            "final": 25,
+            "round-4": 25
+          },
+          "rationale": "A and D use cream/off-white wall infill panels that match the concept's Tudor half-timber plaster aesthetic, while B, C, E, F, and G substitute pink/salmon tones — a material error that breaks the palette — and all seven candidates share the same structural shortfalls versus the concept: no stepped eave trim with contrast border, plain windows without shutters, no door lantern, and simplified timber-framing relief."
+        }
+      ],
+      "meanRho": -0.7347448511398381,
+      "rhos": [
+        -0.8669214468630108,
+        -0.7572401854185358,
+        -0.5800729211379678
+      ]
+    }
+  ]
+}

@@ -7,33 +7,33 @@
     {
       "subject": "cottage",
       "q": [
-        22,
-        22,
+        20,
         15,
-        15
+        16,
+        18
       ],
-      "delta": -7,
+      "delta": -2,
       "climbed": false,
       "tools": [
         "apply_gable_roof",
         "construct_walls",
-        "add_timber_framing"
+        "construct_walls"
       ]
     },
     {
       "subject": "barn",
       "q": [
-        14,
-        13,
-        15,
-        15
+        12,
+        12,
+        48,
+        45
       ],
-      "delta": 1,
+      "delta": 33,
       "climbed": true,
       "tools": [
         "construct_walls",
         "apply_gable_roof",
-        "add_timber_framing"
+        "construct_walls"
       ]
     },
     {
@@ -41,15 +41,31 @@
       "q": [
         14,
         20,
-        32,
-        34
+        35,
+        35
       ],
-      "delta": 20,
+      "delta": 21,
       "climbed": true,
       "tools": [
         "construct_walls",
         "apply_gable_roof",
-        "construct_walls"
+        "done"
+      ]
+    },
+    {
+      "subject": "barn--saltcrag",
+      "q": [
+        52,
+        15,
+        15,
+        15
+      ],
+      "delta": -37,
+      "climbed": false,
+      "tools": [
+        "add_timber_framing",
+        "construct_walls",
+        "apply_gable_roof"
       ]
     }
   ]

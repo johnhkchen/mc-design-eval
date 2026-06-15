@@ -1,0 +1,23 @@
+{
+  "schema": "eval-alignment/roof-climb/v1",
+  "eaveY": 13,
+  "ridgeY": 24,
+  "gableCells": 4680,
+  "baseline": {
+    "worstDefect": {
+      "axis": "roof form & presence",
+      "what": "roof is a chaotic brown blob with no readable gables, sagging over the walls"
+    },
+    "quality": 18,
+    "rationale": "The concept's defining feature is a crisp steep gabled half-timber roofline, but the build's roof collapses into a shapeless brown mass that smothers the walls and leaves ragged holes, so it fails to read as the Tudor house."
+  },
+  "newRoof": {
+    "worstDefect": {
+      "axis": "structural integrity",
+      "what": "walls are ragged and full of holes, leaving a broken open shell beneath the roof"
+    },
+    "quality": 25,
+    "rationale": "The steep gabled roof is present and correctly colored, but the supporting walls are riddled with holes and gaps so the structure reads as a broken shell rather than the solid two-storey house of the concept."
+  },
+  "delta": 7
+}
