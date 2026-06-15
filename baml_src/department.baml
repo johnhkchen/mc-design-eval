@@ -52,6 +52,7 @@ function DiagnoseBuild(
   image_list: string,
   program_block: string,
   palette_block: string,
+  style_profile: string,
   departments: string,
   max_items: int,
   concept: image,
@@ -68,7 +69,10 @@ function DiagnoseBuild(
     THE STYLE'S MATERIAL VOCABULARY (what the concept's blocks should be):
     {{ palette_block }}
 
-    Compare the build renders against the concept. For each CONSTRUCTION DEPARTMENT that diverges,
+    {{ style_profile }}
+
+    Compare the build renders against the concept. Judge it against THIS STYLE'S grammar above — the
+    SAME build is correct under one style and wrong under another. For each CONSTRUCTION DEPARTMENT that diverges,
     state one item: what the style calls for there (expected), what the build currently has (present,
     empty if absent), and what is absent versus expected (missing, empty if nothing missing). Tag
     each item with the department that owns it — one of: {{ departments }}. Judge element-level

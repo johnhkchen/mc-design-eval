@@ -58,7 +58,7 @@ const FNS: Record<string, { request: (a: any, img: any) => Promise<any>; parse: 
   DiagnoseBuild: {
     request: (a, img) =>
       b.request.DiagnoseBuild(
-        a.style, a.image_list, a.program_block, a.palette_block, a.departments, a.max_items,
+        a.style, a.image_list, a.program_block, a.palette_block, a.style_profile, a.departments, a.max_items,
         toImage(img.concept), (img.renders ?? []).map(toImage),
       ),
     parse: (t) => b.parse.DiagnoseBuild(t),
