@@ -39,12 +39,15 @@ import {
 import { assertWorkshopProgram } from "../../src/workshop/program.mjs";
 import { runWorkshopLoop, conformanceScore } from "../../src/workshop/loop.mjs";
 import { parseWorkshopReply, critiqueRenderArgs } from "../../src/workshop/critique.mjs";
+import { diagnoseRenderArgs } from "../../src/workshop/diagnose.mjs";
+import { routeRenderArgs, resolveDispatch, dispatchToVerdict } from "../../src/workshop/route.mjs";
 import { rerecognizeRenderArgs, parseMassReply } from "../../src/workshop/rerecognize.mjs";
 import { DEFAULT_APPLIERS } from "../../src/workshop/actions.mjs";
 import { parseProgramReply } from "../../src/recognition/prompt.mjs";
 import { compileProgram } from "../../src/recognition/compile.mjs";
 import { assertArtifact } from "../../src/artifact.mjs";
-import { bamlRender } from "../../src/baml/bridge.mjs";
+import { bamlRender, bamlParse } from "../../src/baml/bridge.mjs";
+import { runAsyncReplyPolicy } from "../../src/baml/reply-policy.mjs";
 import { serializeArtifact, replayLedger, offlineAssert } from "../../src/workshop/replay.mjs";
 import { workshopSubjectsFrom, chainRels, buildRels, recognitionRels, BUILD_BUDGET, DEFAULT_PACK_REL } from "../../src/workshop/seed.mjs";
 import { SUBJECTS as REGISTRY } from "./durable-skin.mjs";
@@ -69,6 +72,10 @@ const artifactBase = Boolean(seedArtifactRel);
 const replay = argv.includes("--replay");
 const offline = argv.includes("--offline");
 const rotate = argv.includes(ROTATE_FLAG);
+// E-39 / T-164-02: run the loop on the SPLIT feedback path (Layer A DiagnoseBuild → Layer B RouteCritique)
+// instead of the fused CritiqueWorkshopRound. The fused path stays the DEFAULT (S-166 bake-off needs both);
+// --split is opt-in. The dispatch trace is written for the bake-off to score routing correctness.
+const split = argv.includes("--split");
 
 /** Subjects are DATA (no per-building code): program + concept + pack, all committed paths.
  *  The synthetic fixture stays the explicit row (its pack is part of the fixture contract);
@@ -271,6 +278,65 @@ async function runLive() {
     return { verdict, replies, askCount };
   };
 
+  // E-39 / T-164-02: the SPLIT exchange — diagnose→route, replacing the fused action path. TWO bridge
+  // renders + TWO tiered exchanges per round: Layer A DiagnoseBuild (concept + the build's gate renders →
+  // a structured per-department Critique) then Layer B RouteCritique (the Critique + the registry menu → a
+  // dispatch of {department, idiom, why}). Both parses ride the ASYNC reply policy (bamlParse spawns the
+  // bridge); the parse gates classify an emptied Critique / dispatch as malformed (the T-164-01 reply-gate
+  // warning) and reject an idiom outside its department (resolveDispatch). dispatchToVerdict adapts the
+  // routing into the loop's verdict (decision "done" once the dispatch is logged — applying a routed idiom
+  // is the generator-epic gap, the recorded S-164 boundary); the resolved dispatch is pushed to the trace.
+  const dispatchTrace = [];
+  const splitExchange = async (ctx) => {
+    const { renders, source: currentSource, round } = ctx;
+    const renderImgs = (await Promise.all(
+      renders.map(async (r) => (await readFile(join(ROOT, r.path))).toString("base64")),
+    )).map((base64) => ({ base64, mediaType: "image/png" }));
+    const conceptImg = { base64: conceptBuf.toString("base64"), mediaType: "image/png" };
+
+    // Layer A — DiagnoseBuild grounds on the recognized program (the loop's `source`); a sourceless run
+    // (the synthetic fixture) diagnoses ungrounded (empty masses) rather than crashing.
+    const diagProgram = currentSource ?? { masses: [], reading: {} };
+    const diag = await bamlRender({
+      fn: "DiagnoseBuild",
+      args: diagnoseRenderArgs({ program: diagProgram, pack, azimuths: ctx.azimuths }),
+      images: { concept: conceptImg, renders: renderImgs },
+    });
+    const diagPolicy = await runAsyncReplyPolicy({
+      ask: async () => { const { text, raw } = await runTieredOp({ tier: TIER, prompt: diag.prompt, images: diag.images }); return { text, usage: raw?.usage }; },
+      parse: async (text) => {
+        const c = await bamlParse({ fn: "DiagnoseBuild", text });
+        if (!(c?.items?.length > 0)) throw new Error("diagnosis emptied (no items — malformed, not a clean build)");
+        return c;
+      },
+      maxAttempts: MAX_REPLY_ATTEMPTS,
+    });
+    if (diagPolicy.expected === null) {
+      return { verdict: null, replies: diagPolicy.replies, askCount: diagPolicy.askCount };
+    }
+    const critique = diagPolicy.expected;
+
+    // Layer B — RouteCritique (no images): the structured critique + the single-sourced registry menu.
+    const route = await bamlRender({ fn: "RouteCritique", args: routeRenderArgs({ critique }) });
+    const routePolicy = await runAsyncReplyPolicy({
+      ask: async () => { const { text, raw } = await runTieredOp({ tier: TIER, prompt: route.prompt }); return { text, usage: raw?.usage }; },
+      parse: async (text) => {
+        const d = await bamlParse({ fn: "RouteCritique", text });
+        resolveDispatch(d); // throws on empty / off-department idiom — routes the re-ask
+        return d;
+      },
+      maxAttempts: MAX_REPLY_ATTEMPTS,
+    });
+    const replies = [...diagPolicy.replies, ...routePolicy.replies];
+    const askCount = diagPolicy.askCount + routePolicy.askCount;
+    if (routePolicy.expected === null) {
+      return { verdict: null, replies, askCount };
+    }
+    const { verdict, dispatch } = dispatchToVerdict({ critique, dispatch: routePolicy.expected });
+    dispatchTrace.push({ round, critique: critique.items, dispatch });
+    return { verdict, replies, askCount };
+  };
+
   // THE INJECTED re-recognize APPLIER (T-136's composition, chain-adopted by T-138-01): the
   // fragment exchange — text-only (the sketch digest is the evidence), strong tier, bounded
   // same-prompt re-asks, raw fragment replies returned for the round's ledger entry. A failed
@@ -299,7 +365,7 @@ async function runLive() {
   };
 
   const { ledger, artifact } = await runWorkshopLoop({
-    program, pack, source, seedArtifact, seams: { exchange, render },
+    program, pack, source, seedArtifact, seams: { exchange: split ? splitExchange : exchange, render },
     // T-154-01: artifact-base ⇒ paint-only (geometry levers degrade to unavailable); legacy program
     // seed ⇒ hands engage re-recognize when the chain's inputs exist.
     appliers: artifactBase
@@ -319,6 +385,17 @@ async function runLive() {
   await write(ledgerRel, JSON.stringify(ledger, null, 2) + "\n");
   await write(finalRel, serializeArtifact(artifact));
   await write(digestRel, digestMd(ledger));
+
+  // E-39 / T-164-02: the dispatch trace — every round's routing, for the S-166 bake-off to score routing
+  // correctness. Evidence (under the gitignored round dir), not a pin-guarded record; only the split path
+  // produces it. Logged to the console so a thin-context run sees the routing without opening the file.
+  if (split) {
+    await writeFile(join(subjectDir, "dispatch-trace.json"),
+      JSON.stringify({ schema: "dispatch-trace/v1", subject: subjectKey, rounds: dispatchTrace }, null, 2) + "\n");
+    for (const t of dispatchTrace) {
+      console.log(`workshop --split: round ${t.round} routed ${t.dispatch.map((d) => `${d.department}→${d.idiom}`).join(", ")}`);
+    }
+  }
 
   // evidence frames: first round's first azimuth (before) vs the final build re-rendered (after)
   await mkdir(FRAMES_DIR, { recursive: true });
