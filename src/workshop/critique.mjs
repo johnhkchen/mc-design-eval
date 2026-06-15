@@ -24,11 +24,22 @@ export const WORKSHOP_REPLY_SCHEMA = "workshop-reply/v1";
 export const ISSUE_SEVERITIES = Object.freeze(["minor", "major"]);
 export const MAX_ISSUES = 6;
 
-/** The azimuth names shown to the model, in image order (the fixed lens, config.MULTI_ANGLE_GATE). */
-const ANGLE_DESCRIPTIONS = Object.freeze({
+/** The azimuth names shown to the model, in image order (the fixed lens, config.MULTI_ANGLE_GATE).
+ *  Exported so the Layer A diagnostic judge (diagnose.mjs) labels the same renders the same way —
+ *  one definition, no drift between the two judges (E-39 single-composition-point discipline). */
+export const ANGLE_DESCRIPTIONS = Object.freeze({
   "+x+z": "azimuth 45° (+x+z)", "+x-z": "azimuth 135° (+x-z)",
   "-x-z": "azimuth 225° (-x-z)", "-x+z": "azimuth 315° (-x+z)",
 });
+
+/** The pack vocabulary block — `role: block` lines, then an optional `decoration:` list. The exact
+ *  string the fused critique and the Layer A diagnosis both render, so the material grammar reads
+ *  byte-identically in both prompts. Byte-neutral extraction of critiqueRenderArgs' inline builder. */
+export function paletteBlock({ pack }) {
+  const palette = (pack.palette ?? []).map((p) => `  - ${p.role}: ${p.block}`).join("\n");
+  const decoration = (pack.decoration ?? []).map((d) => `  - ${d.item}: ${d.block}`).join("\n");
+  return `${palette}${decoration ? `\ndecoration:\n${decoration}` : ""}`;
+}
 
 const isNonEmptyString = (s) => typeof s === "string" && s.trim().length > 0;
 
@@ -68,8 +79,6 @@ export function sourceBlock({ program, pack, source }) {
  * the SAME rendered prompt is re-sent on a bounded re-ask (the reply policy's contract).
  */
 export function critiqueRenderArgs({ program, pack, round, budget, liveActions, azimuths, conformance, lastRound = null, source = null }) {
-  const palette = (pack.palette ?? []).map((p) => `  - ${p.role}: ${p.block}`).join("\n");
-  const decoration = (pack.decoration ?? []).map((d) => `  - ${d.item}: ${d.block}`).join("\n");
   return {
     round_num: round,
     budget,
@@ -78,7 +87,7 @@ export function critiqueRenderArgs({ program, pack, round, budget, liveActions, 
       .join("\n"),
     program_json: JSON.stringify({ elements: program.elements }, null, 2),
     source_block: sourceBlock({ program, pack, source }),
-    palette_block: `${palette}${decoration ? `\ndecoration:\n${decoration}` : ""}`,
+    palette_block: paletteBlock({ pack }),
     conformance_block: (conformance?.checks ?? [])
       .map((c) => `  - ${c.name}: ${c.passed ? "PASS" : `FAIL — ${c.findings.join("; ")}`}`)
       .join("\n"),
