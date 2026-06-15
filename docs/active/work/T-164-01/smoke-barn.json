@@ -1,0 +1,31 @@
+{
+  "subject": "barn",
+  "round": "6",
+  "tier": "strong",
+  "raw": "I have enough from the renders to diagnose directly. The build's walls read well (cobblestone panels framed by stone-brick piers/quoins/plinth — matches the concept), but the entire top is an open, roofless shell: the dark planks lie flat as sagging interior beams instead of forming the steep enclosing gable.\n\n```json\n{\n  \"items\": [\n    {\n      \"department\": \"ROOF\",\n      \"expected\": \"a tall steep gable roof clad across its whole field in dark_oak_planks, ridge running along the long (x) axis, fully enclosing the mass with overhanging eaves\",\n      \"present\": \"a few dark planks lying flat and sagging across the open top as loose beams/lean-tos; the mass is left open to the sky\",\n      \"missing\": \"the pitched gable covering itself — no continuous sloped plank field, no ridge, no enclosure\",\n      \"severity\": \"major\"\n    },\n    {\n      \"department\": \"WALL\",\n      \"expected\": \"the gable-end triangle above the eave continues in the same cobblestone fieldstone, closing each short wall up to the ridge\",\n      \"present\": \"the short walls stop at eave height; the triangular gable infill is open\",\n      \"missing\": \"the cobblestone gable-end triangle above the eave on both ends\",\n      \"severity\": \"major\"\n    },\n    {\n      \"department\": \"OPENING\",\n      \"expected\": \"two oak_planks wagon doors on the long +z eave wall, kept bright and distinct from the dark roof\",\n      \"present\": \"openings in the bays but no distinct oak wagon-door leaves are read\",\n      \"missing\": \"the two golden oak wagon doors\",\n      \"severity\": \"minor\"\n    }\n  ]\n}\n```",
+  "critique": {
+    "items": [
+      {
+        "department": "ROOF",
+        "expected": "a tall steep gable roof clad across its whole field in dark_oak_planks, ridge running along the long (x) axis, fully enclosing the mass with overhanging eaves",
+        "present": "a few dark planks lying flat and sagging across the open top as loose beams/lean-tos; the mass is left open to the sky",
+        "missing": "the pitched gable covering itself — no continuous sloped plank field, no ridge, no enclosure",
+        "severity": "major"
+      },
+      {
+        "department": "WALL",
+        "expected": "the gable-end triangle above the eave continues in the same cobblestone fieldstone, closing each short wall up to the ridge",
+        "present": "the short walls stop at eave height; the triangular gable infill is open",
+        "missing": "the cobblestone gable-end triangle above the eave on both ends",
+        "severity": "major"
+      },
+      {
+        "department": "OPENING",
+        "expected": "two oak_planks wagon doors on the long +z eave wall, kept bright and distinct from the dark roof",
+        "present": "openings in the bays but no distinct oak wagon-door leaves are read",
+        "missing": "the two golden oak wagon doors",
+        "severity": "minor"
+      }
+    ]
+  }
+}
