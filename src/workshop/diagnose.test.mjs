@@ -16,6 +16,7 @@ import { assertBuildingProgram } from "../recognition/program.mjs";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const RUSTIC = loadStylePack(resolve(HERE, "..", "..", "packs", "rustic.json"));
 const SALTCRAG = loadStylePack(resolve(HERE, "..", "..", "packs", "saltcrag.json"));
+const GUILDHALL = loadStylePack(resolve(HERE, "..", "..", "packs", "guildhall.json"));
 
 const PROGRAM = assertBuildingProgram({
   schema: "building-program/v1", subject: "synthetic", pack: "rustic",
@@ -108,4 +109,52 @@ test("DG6 diagnoseRenderArgs selects style + suite BY the declared program.style
   // the declared style WINS over the pack default (proves selection flows from the program, not a const)
   const declaredWins = diagnoseRenderArgs({ program: { ...PROGRAM, style: "saltcrag" }, pack: RUSTIC, azimuths: AZ });
   assert.equal(declaredWins.style, "saltcrag");
+});
+
+test("DG7 a SECOND genuinely-different style (guildhall) critiques a rustic build as WRONG-STYLE, not wrong-colour (T-165-02)", () => {
+  // The breadth gate (S-165 AC2 / the falsifiable claim): guildhall is POLITE/CLASSICAL, not a third
+  // rustic-family reskin. The SAME synthetic rustic barn PROGRAM, critiqued under guildhall's expected
+  // profile, must read as wrong *grammar* — classical idioms it MISSES and vernacular idioms it PRESENTS
+  // that the classical style forbids. GUILDHALL having loaded at all proves the pack is schema+semantic
+  // valid (loadStylePack is fail-loud), i.e. the second style is expressible with REAL registry idioms.
+  const g = styleProfileBlock({ pack: GUILDHALL });
+  const r = styleProfileBlock({ pack: RUSTIC });
+  assert.notEqual(g, r, "guildhall and rustic expected grammar must differ");
+
+  // WALL grammar — IDIOM-level, not a recolor: classical pilaster/quoin order vs vernacular timber-frame.
+  // The wrong-style MISSING (the rustic build lacks the order) and PRESENT-but-forbidden (it has the frame).
+  assert.match(g, /pilaster/);
+  assert.match(g, /quoin/);
+  assert.doesNotMatch(g, /timber-frame/);   // classical walls are not framed
+  assert.match(r, /timber-frame/);          // the rustic build's wall grammar guildhall forbids
+  assert.match(r, /frame\.timber/);
+
+  // OPENING grammar — round arch (arch idiom) vs flat lintel (head.flat). A genuine grammar swap.
+  assert.match(g, /treatment idioms arch/);
+  assert.doesNotMatch(g, /head\.flat/);
+
+  // ROOF — guildhall is a shallow lead-grey STONE hip; rustic a steep warm TIMBER gable. Different idiom +
+  // material (the axis still resolves to a PITCHED roof — the registry ceiling, recorded in FINDINGS.md).
+  assert.match(g, /roof\.hip/);
+  assert.match(g, /deepslate_tiles/);
+  assert.doesNotMatch(g, /spruce_planks/);
+  assert.match(g, /pitch classes \[0\.5,1\]/);   // shallow, vs rustic's steep [1,2]
+
+  // suite selection by declared style: the SAME build under guildhall vs rustic → different expected.
+  const asGuild = diagnoseRenderArgs({ program: { ...PROGRAM, style: "guildhall" }, pack: GUILDHALL, azimuths: AZ });
+  const asRustic = diagnoseRenderArgs({ program: { ...PROGRAM, style: "rustic" }, pack: RUSTIC, azimuths: AZ });
+  assert.equal(asGuild.style, "guildhall");
+  assert.notEqual(asGuild.style_profile, asRustic.style_profile, "expected must differ by declared style");
+  assert.notEqual(asGuild.palette_block, asRustic.palette_block, "material vocab must differ by style");
+
+  // guildhall is also NOT a saltcrag reskin: it carries classical idioms saltcrag lacks.
+  const s = styleProfileBlock({ pack: SALTCRAG });
+  assert.doesNotMatch(s, /pilaster/);
+  assert.doesNotMatch(s, /treatment idioms arch/);
+
+  // single-source / self-grep discipline: derived from pack data, no subject names baked in.
+  for (const subj of ["barn", "cottage", "synthetic", "gatehouse", "church"]) {
+    assert.doesNotMatch(g, new RegExp(subj));
+  }
+  assert.equal(styleProfileBlock({ pack: GUILDHALL }), g); // deterministic
 });
