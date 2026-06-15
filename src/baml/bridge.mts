@@ -53,10 +53,14 @@ const FNS: Record<string, { request: (a: any, img: any) => Promise<any>; parse: 
     request: (a) => b.request.DecomposeBrushBacklog(a.style_summary, a.registry_state),
     parse: (t) => b.parse.DecomposeBrushBacklog(t),
   },
-  // S-163 typed-critique contract carrier — parse is the live use (the typed Critique fixture);
-  // request renders the stub prompt. S-164 authors the real diagnostic prompt on this signature.
+  // Layer A diagnostic judge (S-163 contract, S-164/T-164-01 prompt) — render grounds on concept +
+  // recognized program; parse yields the typed Critique. Serializer: src/workshop/diagnose.mjs.
   DiagnoseBuild: {
-    request: (a) => b.request.DiagnoseBuild(a.concept_block, a.build_block),
+    request: (a, img) =>
+      b.request.DiagnoseBuild(
+        a.style, a.image_list, a.program_block, a.palette_block, a.departments, a.max_items,
+        toImage(img.concept), (img.renders ?? []).map(toImage),
+      ),
     parse: (t) => b.parse.DiagnoseBuild(t),
   },
   DerivePalette: {

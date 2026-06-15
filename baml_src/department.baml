@@ -40,18 +40,44 @@ class Critique {
   items CritiqueItem[]
 }
 
-function DiagnoseBuild(concept_block: string, build_block: string) -> Critique {
+// LAYER A — the structured DIAGNOSTIC judge (T-164-01, story S-164). Authored on the T-163-01
+// carrier signature (DiagnoseBuild -> Critique, the name is fixed). It compares the build renders
+// against the concept, grounded on the recognized program (the per-mass intent), and names per
+// CONSTRUCTION DEPARTMENT what the style calls for (expected), what the build has (present), and
+// what is absent (missing). DIAGNOSIS ONLY — it does NOT propose actions/idioms (that is Layer B,
+// RouteCritique, T-164-02); it does NOT carry proportion/massing (that rides the mass adjust-params
+// levers, off this contract — the S-163 decision). The serializer is src/workshop/diagnose.mjs.
+function DiagnoseBuild(
+  style: string,
+  image_list: string,
+  program_block: string,
+  palette_block: string,
+  departments: string,
+  max_items: int,
+  concept: image,
+  renders: image[]
+) -> Critique {
   client ClaudeStub
   prompt #"
-    Compare the build against the concept and list construction-addressable issues, each tagged
-    with the department that owns the fix.
+    You are diagnosing a Minecraft build against the concept it should read as. The style is
+    {{ style }}. The images are:
+    {{ image_list }}
 
-    THE CONCEPT (what the build should read as):
-    {{ concept_block }}
+    {{ program_block }}
 
-    THE BUILD (what it currently is):
-    {{ build_block }}
+    THE STYLE'S MATERIAL VOCABULARY (what the concept's blocks should be):
+    {{ palette_block }}
+
+    Compare the build renders against the concept. For each CONSTRUCTION DEPARTMENT that diverges,
+    state one item: what the style calls for there (expected), what the build currently has (present,
+    empty if absent), and what is absent versus expected (missing, empty if nothing missing). Tag
+    each item with the department that owns it — one of: {{ departments }}. Judge element-level
+    construction (material, covering, feature presence), NOT overall size or proportion. Name at most
+    {{ max_items }} items, the most divergent first; emit no item for a department that already reads
+    correctly.
 
     {{ ctx.output_format }}
+    {{ concept }}
+    {% for r in renders %}{{ r }}{% endfor %}
   "#
 }
