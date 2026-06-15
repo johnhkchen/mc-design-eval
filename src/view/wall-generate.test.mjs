@@ -3,7 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 
 import { occupancyFromCells } from "./occupancy.mjs";
-import { closeColumns, perimeterColumns, spaceOpenings, constructWalls } from "./wall-generate.mjs";
+import { closeColumns, perimeterColumns, spaceOpenings, constructWalls, robustExtent, coverageOf, registerRect, closureOf } from "./wall-generate.mjs";
 
 const setOf = (...cs) => new Set(cs);
 /** A hollow rectangular ring (perimeter columns only) over [x0,x1]×[z0,z1], stacked floor..eave. */
@@ -145,7 +145,117 @@ test("WG8 constructWalls preserves L massing — the notch is not filled", () =>
   assert.ok(!out.has(8, 2, 8), "deep L-notch stays empty (massing preserved, not bbox-filled)");
 });
 
+// --- WG9 robustExtent + coverageOf (T-160-04 pures) ---
+test("WG9 robustExtent: clean set == raw bbox; an outlier post is trimmed (polluted flagged)", () => {
+  const clean = new Set();
+  for (let x = 0; x <= 10; x++) for (let z = 0; z <= 6; z++) clean.add(`${x},${z}`);
+  const e0 = robustExtent(clean, { pLo: 0.02, pHi: 0.98 });
+  assert.deepEqual([e0.x0, e0.x1, e0.z0, e0.z1], [0, 10, 0, 6], "dense clean set ⇒ percentile == bbox");
+  assert.equal(e0.polluted, false);
+  // inject ONE stray post far beyond the wall line
+  const dirty = new Set(clean); dirty.add("40,40");
+  const e1 = robustExtent(dirty, { pLo: 0.02, pHi: 0.98 });
+  assert.ok(e1.raw.x1 === 40 && e1.x1 < 40, "robust extent ignores the lone outlier the raw bbox keeps");
+  assert.equal(e1.polluted, true, "raw-vs-robust divergence flagged");
+});
+
+test("WG9b coverageOf: ring on the posts ⇒ ~1; off-by-one within tol ⇒ 1; far ⇒ low; empty ⇒ 0", () => {
+  const posts = setOf("0,0", "0,1", "1,0", "5,5");
+  assert.equal(coverageOf(posts, posts), 1, "identical ring covers all posts");
+  const shifted = setOf("1,0", "1,1", "2,0", "6,5"); // each one cell off (within tol=1)
+  assert.equal(coverageOf(shifted, posts), 1, "within-tol ring still covers");
+  const far = setOf("100,100");
+  assert.equal(coverageOf(far, posts), 0, "distant ring covers nothing");
+  assert.equal(coverageOf(posts, new Set()), 0, "empty cols ⇒ 0, no NaN");
+});
+
+// --- WG10 registerRect: affine fit, axis ladder, scale ---
+test("WG10 registerRect fits the program rect to a different-scale build ring (identity axis)", () => {
+  // build ring: a clean 24×12 rectangle in a NEGATIVE-coord frame; program rect is 48×24 (2× scale).
+  const cols = perimeterColumns(rectSet(-12, 11, -6, 5));
+  const reg = registerRect([{ rect: { x0: 0, z0: 0, w: 48, d: 24 } }], cols);
+  assert.equal(reg.axis, "identity", "long program axis aligns with the long build axis");
+  assert.ok(reg.coverage > 0.9, `ring traces the posts (cov=${reg.coverage})`);
+  assert.equal(reg.ambiguous, false);
+  assert.ok(Math.abs(reg.scale.sx - 0.5) < 0.05 && Math.abs(reg.scale.sz - 0.5) < 0.05, "≈0.5 per-axis scale");
+});
+
+test("WG10b registerRect picks the SWAP axis when the program is rotated vs the build", () => {
+  // build ring is 12 wide (x) × 24 deep (z); program rect is 48 (w,x) × 24 (d,z) — long axis is program-x,
+  // but the build's long axis is z ⇒ swap wins.
+  const cols = perimeterColumns(rectSet(0, 11, 0, 23));
+  const reg = registerRect([{ rect: { x0: 0, z0: 0, w: 48, d: 24 } }], cols);
+  assert.equal(reg.axis, "swap", "program long axis mapped onto the build long axis by swap");
+  assert.ok(reg.coverage > 0.9, `swap ring traces the posts (cov=${reg.coverage})`);
+});
+
+test("WG10c registerRect flags a near-square footprint as AMBIGUOUS (axis tie reported, not forced)", () => {
+  const cols = perimeterColumns(rectSet(0, 10, 0, 10));     // square build
+  const reg = registerRect([{ rect: { x0: 0, z0: 0, w: 20, d: 20 } }], cols); // square program
+  assert.equal(reg.ambiguous, true, "near-square axis tie ⇒ ambiguous=true (the finding, reported)");
+});
+
+// --- WG11 multi-mass union preserves the L (massing, not a bbox) ---
+test("WG11 registerRect unions per-mass perimeters and keeps the L-notch out of the ring", () => {
+  // L footprint occupancy: main 18 wide × 28 deep + a wing on +x for part of z. Build it as a clean L ring.
+  const main = rectSet(0, 17, 0, 27);
+  const wing = rectSet(18, 25, 7, 21);
+  const Lset = new Set([...main, ...wing]);
+  const cols = perimeterColumns(Lset);
+  const reg = registerRect([
+    { rect: { x0: 0, z0: 0, w: 18, d: 28 } },
+    { rect: { x0: 18, z0: 7, w: 8, d: 15 } },
+  ], cols);
+  assert.ok(reg.coverage > 0.7, `L ring traces most posts (cov=${reg.coverage})`);
+  // the deep notch (the +x+z quadrant NOT covered by either mass) must be OUTSIDE the ring
+  assert.ok(!reg.ring.has("22,2"), "notch column off the wing's z-range stays out of the ring (L preserved)");
+});
+
+// --- WG11b closureOf: a clean rect scores 1; a colonnade with a straight-run gap scores < 1 ---
+test("WG11b closureOf: watertight rect ⇒ 1; a straight-run gap ⇒ < 1 (the registered-vs-close discriminator)", () => {
+  const full = perimeterColumns(rectSet(0, 9, 0, 5));
+  assert.equal(closureOf(full), 1, "clean rectangle perimeter is fully closed");
+  const gappy = new Set(full); gappy.delete("4,0"); // a straight-run hole on a flat edge
+  assert.ok(closureOf(gappy) < 1, "a colonnade with a straight-run gap is not fully closed");
+  assert.equal(closureOf(new Set()), 0, "empty ⇒ 0");
+});
+
+// --- WG12 the AC's required companion to WG1: the straight-run gap CLOSES via the registered path ---
+test("WG12 a straight-run absent column that close cannot bridge is CLOSED by the registered rect", () => {
+  // a clean ring with a WHOLE perimeter column dropped from a flat edge run — WG1's documented limit case.
+  const x0 = -8, x1 = 8, z0 = -4, z1 = 4, floor = 0, eave = 4;
+  const occ = ringOcc({ x0, x1, z0, z1, floor, eave, drop: [`0,${z0}`] }); // column (0,z0) fully absent
+  assert.ok(!occ.has(0, 2, z0), "the straight-run gap really exists pre-brush");
+  // close path (no program) leaves it open — pins the WG1 limit
+  const noProg = constructWalls(occ, { floor, eaveY: eave, program: null });
+  assert.ok(!noProg.solid(0, 2, z0), "close path cannot bridge the straight-run gap (WG1 limit)");
+  // registered path: a single clean rect matching the ring closes it solid floor→eave
+  const prog = { masses: [{ rect: { x0: 0, z0: 0, w: x1 - x0, d: z1 - z0 } }] };
+  const withReg = constructWalls(occ, { floor, eaveY: eave, program: prog });
+  for (const y of [0, 1, 2, 3, 4]) assert.ok(withReg.solid(0, y, z0), `registered path closes the gap at y=${y}`);
+});
+
+// --- WG13 dense-shell no-regress: every real wall column stays solid under the registered path ---
+// (The registered ring is the CLEAN rect perimeter; the close path on a hollow ring adds a little corner
+//  bleed. We do NOT assert byte-identity — we assert no REGRESSION: every real post is still walled, and
+//  the registered envelope covers every real post (nothing the close path walled is dropped).)
+test("WG13 on a dense clean ring the registered path keeps every real wall column solid (no regression)", () => {
+  const x0 = 0, x1 = 12, z0 = 0, z1 = 8, floor = 0, eave = 5;
+  const occ = ringOcc({ x0, x1, z0, z1, floor, eave });
+  const prog = { masses: [{ rect: { x0: 0, z0: 0, w: x1 - x0, d: z1 - z0 } }] };
+  const out = constructWalls(occ, { floor, eaveY: eave, program: prog });
+  // every original perimeter column is solid floor→eave (envelope watertight, walls not lost)
+  for (let x = x0; x <= x1; x++) {
+    assert.ok(out.solid(x, eave, z0) && out.solid(x, eave, z1), `top of edge column x=${x} solid`);
+    assert.ok(out.solid(x, floor, z0) && out.solid(x, floor, z1), `floor of edge column x=${x} solid`);
+  }
+  for (let z = z0; z <= z1; z++) {
+    assert.ok(out.solid(x0, eave, z) && out.solid(x1, eave, z), `top of edge column z=${z} solid`);
+  }
+});
+
 // helpers
+function rectSet(x0, x1, z0, z1) { const s = new Set(); for (let x = x0; x <= x1; x++) for (let z = z0; z <= z1; z++) s.add(`${x},${z}`); return s; }
 function* iter(occ) { for (const [k, b] of occ.cells) yield { pos: k.split(",").map(Number), block: b }; }
 // mirror of spaceOpenings for the WG5 expectation (kept local so the test asserts against an independent calc)
 function spaceOpeningsRef(lo, hi, count) {

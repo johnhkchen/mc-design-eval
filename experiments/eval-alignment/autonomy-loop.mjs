@@ -82,6 +82,10 @@ function loadPack(program) {
 // a plinth base course, and dressed openings (the dressing fns are injected; wallSkin may not import the
 // technique — the brush-door rule). The last-resort envelope fill is the pack's ground role, not a
 // hardcoded block; no pack/program (gatehouse) ⇒ envelope only, skin is a graceful no-op.
+// T-160-04: when a program rect is present, constructWalls now REGISTERS that clean rectangle to the build
+// frame internally and builds the envelope on it IFF it is more watertight than the close-derived footprint
+// (closure-decided) — so sparse shells (barn) close their straight-run colonnade gaps. This is finer
+// geometry inside the SAME wall tool (program is already passed below); no loop change is needed.
 function construct_walls(occ) {
   const program = loadProgram(CFG.program ?? SUBJECT);
   const pack = loadPack(program);

@@ -100,6 +100,148 @@ function bboxOf(cols) {
 }
 
 /**
+ * Robust per-axis extent of a "x,z" column set. `raw` is the literal min/max bbox; the top-level
+ * {x0,x1,z0,z1} are the PERCENTILE bbox (trim a lone outlier post that overshoots the wall line — the
+ * glb-end-fit anchor-window lesson). `polluted` is true when raw and robust differ by >1 cell on any axis
+ * (the failure-mode-(a) flag the T-160-04 claim names). Defaults (pLo 0, pHi 1) reproduce the raw bbox, so
+ * the percentile path is opt-in. PURE.
+ */
+export function robustExtent(cols, { pLo = 0, pHi = 1 } = {}) {
+  const xs = [], zs = [];
+  for (const c of cols) { const [x, z] = c.split(",").map(Number); xs.push(x); zs.push(z); }
+  if (xs.length === 0) return null;
+  xs.sort((a, b) => a - b); zs.sort((a, b) => a - b);
+  const at = (arr, p) => arr[Math.min(arr.length - 1, Math.max(0, Math.round(p * (arr.length - 1))))];
+  const raw = { x0: xs[0], x1: xs[xs.length - 1], z0: zs[0], z1: zs[zs.length - 1] };
+  const rob = { x0: at(xs, pLo), x1: at(xs, pHi), z0: at(zs, pLo), z1: at(zs, pHi) };
+  const polluted = Math.abs(rob.x0 - raw.x0) > 1 || Math.abs(rob.x1 - raw.x1) > 1
+    || Math.abs(rob.z0 - raw.z0) > 1 || Math.abs(rob.z1 - raw.z1) > 1;
+  return { ...rob, raw, robust: { ...rob }, polluted };
+}
+
+/**
+ * Coverage of a candidate perimeter `ring` over the actual wall-band `cols`: the fraction of real columns
+ * that lie within Manhattan `tol` of the ring. The posts ARE the perimeter of a hollow shell, so a ring
+ * that traces the real posts scores ~1; a ring too big (posts sit well inside) or too small (posts sit
+ * outside) scores low — both over- and under-shoot are penalized with no tuned SIZE constant (tol=1 is one
+ * voxel of adjacency, a unit not a knob). Returns 0 on empty `cols`. PURE.
+ */
+export function coverageOf(ring, cols, tol = 1) {
+  if (!cols || cols.size === 0) return 0;
+  let hit = 0;
+  for (const c of cols) {
+    const [x, z] = c.split(",").map(Number);
+    let near = false;
+    for (let dx = -tol; dx <= tol && !near; dx++) for (let dz = -tol; dz <= tol; dz++) {
+      if (Math.abs(dx) + Math.abs(dz) > tol) continue;
+      if (ring.has(`${x + dx},${z + dz}`)) { near = true; break; }
+    }
+    if (near) hit++;
+  }
+  return hit / cols.size;
+}
+
+/**
+ * CLOSURE of a "x,z" ring: the fraction of its own bbox-rectangle perimeter that the ring actually
+ * occupies. A clean watertight rectangle scores 1; a COLONNADE (a ring with straight-run absent columns,
+ * the barn) scores < 1 because its rectangular outline has holes. This — not post-coverage — is the right
+ * discriminator for "registered clean rect BEATS close-derived footprint" (T-160-04): a close ring is built
+ * FROM the posts so it always traces them (coverage ≈ 1) yet may be full of straight-run gaps (closure < 1);
+ * the registered clean rectangle closes those gaps (closure 1). PURE.
+ */
+export function closureOf(ring) {
+  if (!ring || ring.size === 0) return 0;
+  const bb = bboxOf(ring);
+  const per = perimeterColumns(filledRect(bb));
+  let present = 0;
+  for (const c of per) if (ring.has(c)) present++;
+  return present / per.size;
+}
+
+/** Every "x,z" column in the inclusive rectangle {x0,x1,z0,z1}. PURE. */
+function filledRect({ x0, x1, z0, z1 }) {
+  const out = new Set();
+  for (let x = x0; x <= x1; x++) for (let z = z0; z <= z1; z++) out.add(`${x},${z}`);
+  return out;
+}
+
+/**
+ * Register a recognized program's `masses[].rect` (a clean 0-based rectangle, in sketch units that do NOT
+ * match the build's voxel scale) to the BUILD frame, using the occupancy's wall-band columns as the only
+ * build-frame signal (T-160-04). Returns an AFFINE transform fitting the program's overall bbox to the
+ * occupancy's robust extent, the union-of-masses perimeter `ring`, its post-coverage, the chosen axis
+ * assignment, and `ambiguous` (report-don't-force) / `polluted` diagnostics.
+ *
+ * The ladder is the 2 axis assignments {identity, swap}; the winner is the higher post-coverage, tie-broken
+ * by aspect agreement. Scale is per-axis extentSpan/programSpan ("scale only if the data demands it" — here
+ * it does). `ambiguous` flips a REPORT flag only (a near-square axis tie, or a best coverage below a
+ * diagnostic floor); it never gates a per-subject SELECTION constant. PURE.
+ *
+ * @param {Array<{rect:{x0:number,z0:number,w:number,d:number}}>} masses
+ * @param {Set<string>} cols  wall-band "x,z" columns (build frame)
+ * @param {{trim?:number, floor?:number, eps?:number}} [opts]
+ */
+export function registerRect(masses, cols, opts = {}) {
+  const trim = opts.trim ?? 0.02;
+  const FLOOR = opts.floor ?? 0.5;   // diagnostic: best coverage below this => report ambiguous
+  const EPS = opts.eps ?? 0.05;      // diagnostic: axis near-tie threshold
+  const rects = (masses ?? []).map((m) => m.rect).filter(Boolean);
+  if (rects.length === 0 || !cols || cols.size === 0) return null;
+  const ext = robustExtent(cols, { pLo: trim, pHi: 1 - trim });
+  if (!ext) return null;
+
+  // program overall bbox (program frame)
+  let px0 = Infinity, px1 = -Infinity, pz0 = Infinity, pz1 = -Infinity;
+  for (const r of rects) {
+    px0 = Math.min(px0, r.x0); px1 = Math.max(px1, r.x0 + r.w);
+    pz0 = Math.min(pz0, r.z0); pz1 = Math.max(pz1, r.z0 + r.d);
+  }
+  const pW = Math.max(1, px1 - px0), pD = Math.max(1, pz1 - pz0);
+  const EX = ext.x1 - ext.x0, EZ = ext.z1 - ext.z0;
+
+  // build a candidate per axis assignment. identity: program-x→build-x; swap: program-x→build-z.
+  const candidate = (axis) => {
+    // span of the program axis that feeds build-x / build-z
+    const progXspan = axis === "identity" ? pW : pD;
+    const progZspan = axis === "identity" ? pD : pW;
+    const sx = EX / progXspan, sz = EZ / progZspan;
+    // affine: program (px,pz) -> build (bx,bz)
+    const transform = (ppx, ppz) => {
+      const a = axis === "identity" ? ppx - px0 : ppz - pz0; // along build-x
+      const b = axis === "identity" ? ppz - pz0 : ppx - px0; // along build-z
+      return { x: Math.round(ext.x0 + a * sx), z: Math.round(ext.z0 + b * sz) };
+    };
+    const ring = new Set();
+    for (const r of rects) {
+      const c0 = transform(r.x0, r.z0), c1 = transform(r.x0 + r.w, r.z0 + r.d);
+      const rect = { x0: Math.min(c0.x, c1.x), x1: Math.max(c0.x, c1.x), z0: Math.min(c0.z, c1.z), z1: Math.max(c0.z, c1.z) };
+      for (const p of perimeterColumns(filledRect(rect))) ring.add(p);
+    }
+    const coverage = coverageOf(ring, cols);
+    const aspectErr = Math.abs((progXspan / progZspan) - (EX / Math.max(1, EZ)));
+    return { axis, transform, ring, coverage, aspectErr, scale: { sx, sz } };
+  };
+
+  const cands = [candidate("identity"), candidate("swap")];
+  cands.sort((a, b) => (b.coverage - a.coverage) || (a.aspectErr - b.aspectErr));
+  const best = cands[0];
+  const nearSquare = Math.abs(EX - EZ) <= 1;
+  const ambiguous = best.coverage < FLOOR
+    || (Math.abs(cands[0].coverage - cands[1].coverage) < EPS && nearSquare);
+  return {
+    transform: best.transform,
+    ring: best.ring,
+    coverage: best.coverage,
+    axis: best.axis,
+    scale: best.scale,
+    ambiguous,
+    extent: ext,
+    reason: `axis=${best.axis} cov=${best.coverage.toFixed(2)} scale=(${best.scale.sx.toFixed(2)},${best.scale.sz.toFixed(2)})`
+      + (ext.polluted ? " EXTENT-POLLUTED" : "") + (ambiguous ? " AMBIGUOUS" : ""),
+  };
+}
+
+/**
  * THE BRUSH. Replace the wall envelope of `occ` with a clean constructed ring and a regular opening
  * rhythm; keep the roof (above eave) and any interior cells verbatim. `occ → occ`. PURE.
  *
@@ -140,10 +282,21 @@ export function constructWalls(occ, params = {}) {
   const globalFill = [...globalBc].sort((a, b) => b[1] - a[1])[0]?.[0] ?? ns(null);
   const localFill = (c) => { const m = colHist.get(c); return m ? [...m].sort((a, b) => b[1] - a[1])[0][0] : globalFill; };
 
-  // 2. regularize footprint → perimeter ring (adds the MISSING columns seal_walls can't reach)
-  const F = new Set([...cols, ...closeColumns(cols, closeR)]);
-  const ring = perimeterColumns(F);
-  const bbox = bboxOf(F);
+  // 2. choose the perimeter ring. The close-derived footprint (Option B) repairs ragged notches but
+  //    PROVABLY can't bridge a straight-run absent column (WG1). When the recognized program supplies a
+  //    clean rect, REGISTER it to the build frame (T-160-04) and prefer that full clean ring IFF it
+  //    out-covers the close ring — so sparse shells (barn) close straight runs while dense shells
+  //    (gatehouse, no program / cottage already-solid) keep Option B. The route is decided by COVERAGE,
+  //    not a per-building density threshold or subject key.
+  const closeRing = perimeterColumns(new Set([...cols, ...closeColumns(cols, closeR)]));
+  const reg = params.program?.masses?.some((m) => m?.rect) ? registerRect(params.program.masses, cols) : null;
+  // Prefer the registered clean rectangle when it is a TRUSTED fit (not ambiguous — it traces a majority of
+  // the real posts) AND it is MORE WATERTIGHT than the close ring (closure, not post-coverage: the close
+  // ring always traces posts but may be a gappy colonnade). On a dense shell the close ring is already
+  // closed → tie → keep Option B (no regression). Decided by closure, not a density threshold or subject key.
+  const useReg = reg && !reg.ambiguous && closureOf(reg.ring) > closureOf(closeRing);
+  const ring = useReg ? reg.ring : closeRing;
+  const bbox = bboxOf(ring);
 
   // 3. REPLACE: drop every band cell in a ring column, then solidify the ring floor→eave in its material
   const cellMap = new Map(occ.cells);
