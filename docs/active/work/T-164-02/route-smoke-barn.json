@@ -1,0 +1,61 @@
+{
+  "subject": "barn",
+  "round": "6",
+  "tier": "strong",
+  "critique": {
+    "items": [
+      {
+        "department": "ROOF",
+        "expected": "A steep closed gable in dark_oak_planks (roof.trim) — two pitched slopes meeting at a ridge along the long axis, fully covering the mass from eave (~10) to ridge (~21).",
+        "present": "A flat raft of horizontal dark-plank beams floating across the open wall-tops; the interior is open to the sky.",
+        "missing": "The pitched slopes and ridge; the entire roof covering. There is no gable form — just unconnected beams, so the build has no actual roof.",
+        "severity": "major"
+      },
+      {
+        "department": "WALL",
+        "expected": "Triangular fieldstone gable ends (wall.field.ground -> cobblestone) rising above the eave to the ridge peak at each short wall, as a solid filled triangle.",
+        "present": "Short end walls stop at roughly eave height; their tops are flat and ragged with no triangular infill.",
+        "missing": "The gable-end triangles entirely — the end elevation never closes to a peak.",
+        "severity": "major"
+      },
+      {
+        "department": "WALL",
+        "expected": "Continuous watertight long walls of cobblestone recessed panels framed by stone_bricks piers/quoins, on a continuous stone_bricks plinth, rising the full storey height to a level eave.",
+        "present": "Holey, ragged stone shell — courses break up into isolated lumps and gaps, the wall-top line is uneven, and panels are not cleanly framed.",
+        "missing": "A dense, watertight wall surface and a level eave line; the field reads as a broken colonnade rather than a continuous bay rhythm.",
+        "severity": "major"
+      },
+      {
+        "department": "OPENING",
+        "expected": "Two oak_planks wagon doors (3w x 4h) plus dressed windows on the long +z wall and windows on -z/+x/-x, each set in stone_bricks jambs/heads.",
+        "present": "Mostly open gaps in the ragged wall; no distinct, framed wagon-door leaves or coherent window apertures are legible.",
+        "missing": "The recognizable oak wagon doors and the dressed window openings as discrete framed features.",
+        "severity": "minor"
+      }
+    ]
+  },
+  "dispatch": [
+    {
+      "department": "ROOF",
+      "idiom": "roof.gable.steep",
+      "why": "The build has no roof at all — only a flat raft of beams. The expected is explicitly a steep closed gable (two pitched slopes to a ridge from eave ~10 to ridge ~21); roof.gable.steep is the exact-named idiom for that steep-pitch gable form, building the slopes and ridge that are entirely missing."
+    },
+    {
+      "department": "WALL",
+      "idiom": "surface.fill",
+      "why": "The short end walls stop flat at eave height with no triangular infill. surface.fill is the direct operation to lay the solid cobblestone triangle above the eave up to the ridge peak, closing each end elevation to a filled gable as expected."
+    },
+    {
+      "department": "WALL",
+      "idiom": "surface.fill",
+      "why": "The long walls read as a holey, ragged colonnade with gaps and a broken wall-top. surface.fill densifies the shell into a continuous watertight surface and a level eave line, resolving the missing watertight wall body before any panel/pier articulation can read."
+    },
+    {
+      "department": "OPENING",
+      "idiom": "opening-dressing",
+      "why": "The apertures are just ragged open gaps with no framed leaves or heads. opening-dressing is the idiom that sets each door/window into stone_bricks jambs and heads, making the wagon doors and windows legible as discrete dressed features rather than holes."
+    }
+  ],
+  "rawDiagnose": "Comparing the renders against the concept:\n\n```json\n{\n  \"items\": [\n    {\n      \"department\": \"ROOF\",\n      \"expected\": \"A steep closed gable in dark_oak_planks (roof.trim) — two pitched slopes meeting at a ridge along the long axis, fully covering the mass from eave (~10) to ridge (~21).\",\n      \"present\": \"A flat raft of horizontal dark-plank beams floating across the open wall-tops; the interior is open to the sky.\",\n      \"missing\": \"The pitched slopes and ridge; the entire roof covering. There is no gable form — just unconnected beams, so the build has no actual roof.\",\n      \"severity\": \"major\"\n    },\n    {\n      \"department\": \"WALL\",\n      \"expected\": \"Triangular fieldstone gable ends (wall.field.ground -> cobblestone) rising above the eave to the ridge peak at each short wall, as a solid filled triangle.\",\n      \"present\": \"Short end walls stop at roughly eave height; their tops are flat and ragged with no triangular infill.\",\n      \"missing\": \"The gable-end triangles entirely — the end elevation never closes to a peak.\",\n      \"severity\": \"major\"\n    },\n    {\n      \"department\": \"WALL\",\n      \"expected\": \"Continuous watertight long walls of cobblestone recessed panels framed by stone_bricks piers/quoins, on a continuous stone_bricks plinth, rising the full storey height to a level eave.\",\n      \"present\": \"Holey, ragged stone shell — courses break up into isolated lumps and gaps, the wall-top line is uneven, and panels are not cleanly framed.\",\n      \"missing\": \"A dense, watertight wall surface and a level eave line; the field reads as a broken colonnade rather than a continuous bay rhythm.\",\n      \"severity\": \"major\"\n    },\n    {\n      \"department\": \"OPENING\",\n      \"expected\": \"Two oak_planks wagon doors (3w x 4h) plus dressed windows on the long +z wall and windows on -z/+x/-x, each set in stone_bricks jambs/heads.\",\n      \"present\": \"Mostly open gaps in the ragged wall; no distinct, framed wagon-door leaves or coherent window apertures are legible.\",\n      \"missing\": \"The recognizable oak wagon doors and the dressed window openings as discrete framed features.\",\n      \"severity\": \"minor\"\n    }\n  ]\n}\n```",
+  "rawRoute": "```json\n{\n  \"items\": [\n    {\n      \"department\": \"ROOF\",\n      \"idiom\": \"roof.gable.steep\",\n      \"why\": \"The build has no roof at all — only a flat raft of beams. The expected is explicitly a steep closed gable (two pitched slopes to a ridge from eave ~10 to ridge ~21); roof.gable.steep is the exact-named idiom for that steep-pitch gable form, building the slopes and ridge that are entirely missing.\"\n    },\n    {\n      \"department\": \"WALL\",\n      \"idiom\": \"surface.fill\",\n      \"why\": \"The short end walls stop flat at eave height with no triangular infill. surface.fill is the direct operation to lay the solid cobblestone triangle above the eave up to the ridge peak, closing each end elevation to a filled gable as expected.\"\n    },\n    {\n      \"department\": \"WALL\",\n      \"idiom\": \"surface.fill\",\n      \"why\": \"The long walls read as a holey, ragged colonnade with gaps and a broken wall-top. surface.fill densifies the shell into a continuous watertight surface and a level eave line, resolving the missing watertight wall body before any panel/pier articulation can read.\"\n    },\n    {\n      \"department\": \"OPENING\",\n      \"idiom\": \"opening-dressing\",\n      \"why\": \"The apertures are just ragged open gaps with no framed leaves or heads. opening-dressing is the idiom that sets each door/window into stone_bricks jambs and heads, making the wagon doors and windows legible as discrete dressed features rather than holes.\"\n    }\n  ]\n}\n```"
+}
