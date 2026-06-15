@@ -31,11 +31,22 @@
   PALETTE fix) + dressed quoins; the saltcrag barn gets quoins + limewash + plinth over a stone field.
 - `packTreatments(saltcrag)` → door/shutter/glazing/lintel/lantern; `(rustic)` → door/shutter/fence(infill).
 
-## Step 3 — wire into autonomy-loop.mjs ⏳ (next)
+## Step 3 — wire into autonomy-loop.mjs ✅
 
 `construct_walls` = envelope (`constructWalls`) → `wallSkin` (relief + injected dressing); `loadPack`;
-drop hardcoded `wallField`; add `barn--saltcrag` witness subject; update MENU.
+dropped hardcoded `wallField` (now the pack ground role); added `barn--saltcrag` witness subject + batch
+queue; MENU updated. `node --check` + dry-run on the witness clean. Commit `ddf4b33`.
 
-## Step 4–5 — volume batch + beside renders ⏳
+## Step 4–5 — volume batch + beside renders ✅
 
-## Step 6 — review ⏳
+GL confirmed (`render/src/headless-canvas.mjs` GL_AVAILABLE:true). Batch (4 subjects): cottage −2, barn
++33, gatehouse +21, barn--saltcrag −37; mean +3.8, 2/4. `skin-beside.mjs` rendered all four beside concept.
+Renders read: cottage skin = stone base + plaster upper + quoins (no longer monotone); barn = base+quoins
+under a dominant roof; gatehouse = bare envelope (no skin); barn--saltcrag = gappy colonnade (sparse shell).
+Commit `2ac0286`.
+
+## Step 6 — review ✅
+
+`review.md` written. Verdict: skin reads as construction on a closed envelope (cottage render proves it),
+but the eval is roof-capped + blind to wall relief (→ S-161), and the skin is wasted on a sparse shell
+(the envelope gap, T-160-01 follow-up #2). Honest mixed result; both named failure modes landed.
