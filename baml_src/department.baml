@@ -81,3 +81,51 @@ function DiagnoseBuild(
     {% for r in renders %}{{ r }}{% endfor %}
   "#
 }
+
+// LAYER B — the unified DISPATCH ROUTER (T-164-02, story S-164). Maps each Layer-A CritiqueItem to the
+// CONSTRUCTION DEPARTMENT that owns the fix and one concrete idiom-registry entry that addresses it. The
+// router is STYLE-AGNOSTIC by design (the S-164 split): a roof item routes to ROOF regardless of style —
+// only Layer A (T-165) is per-style. The candidate idioms per department are handed in
+// (department_idioms_block, single-sourced from src/pack/departments.mjs via departmentToIdioms) so the
+// model can only pick a REAL, buildable idiom; `resolveDispatch` (src/workshop/route.mjs) re-checks the
+// membership after parse and THROWS on an idiom outside its department's set — the "names an unbuildable
+// idiom" failure made loud, routed to the bounded re-ask. The serializer is src/workshop/route.mjs.
+//
+// `idiom` is a free STRING (not an enum): the registry holds 28 idioms and the E-32 factory grows it; a
+// second mirrored enum would be drift bait. The single authority is departments.mjs, enforced post-parse.
+// DISPATCH ONLY — no construction, no gate vocabulary (this is the creation-loop router, not the frozen
+// instrument; transport-guard TG5 scans this file).
+class DispatchItem {
+  department Department
+  idiom string @description("an idiom-registry name drawn from this department's candidate set")
+  why string @description("why this idiom addresses the critique item")
+}
+
+class Dispatch {
+  items DispatchItem[]
+}
+
+function RouteCritique(
+  critique_block: string,
+  department_idioms_block: string
+) -> Dispatch {
+  client ClaudeStub
+  prompt #"
+    You are routing a build diagnosis to the construction departments and idioms that can fix it. Each
+    diagnosis item names a construction department and what diverges from the concept. Your job: for EACH
+    item, choose the one idiom that best addresses it, drawn from that department's candidate set below.
+
+    THE DIAGNOSIS (one item per line — department, then expected / present / missing):
+    {{ critique_block }}
+
+    THE CANDIDATE IDIOMS PER DEPARTMENT (choose the idiom from the item's own department):
+    {{ department_idioms_block }}
+
+    For each diagnosis item emit one dispatch entry: the same department, ONE idiom from that department's
+    candidate set (never an idiom from another department), and a short why naming how that idiom resolves
+    the missing/divergent element. Keep the items in the diagnosis's order. Choose the most direct idiom;
+    if several fit, prefer the one whose name most specifically matches the missing element.
+
+    {{ ctx.output_format }}
+  "#
+}

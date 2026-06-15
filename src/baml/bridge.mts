@@ -63,6 +63,13 @@ const FNS: Record<string, { request: (a: any, img: any) => Promise<any>; parse: 
       ),
     parse: (t) => b.parse.DiagnoseBuild(t),
   },
+  // Layer B unified router (S-164/T-164-02) — render builds the routing prompt from the diagnosis block +
+  // the per-department candidate idioms (no images); parse yields the typed Dispatch. The idiom-membership
+  // check is resolveDispatch's (src/workshop/route.mjs), after parse. Serializer: src/workshop/route.mjs.
+  RouteCritique: {
+    request: (a) => b.request.RouteCritique(a.critique_block, a.department_idioms_block),
+    parse: (t) => b.parse.RouteCritique(t),
+  },
   DerivePalette: {
     request: (a) => b.request.DerivePalette(a.story_digest, a.source_keys, a.block_vocabulary),
     parse: (t) => b.parse.DerivePalette(t),
