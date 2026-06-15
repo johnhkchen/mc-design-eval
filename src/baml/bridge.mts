@@ -53,6 +53,12 @@ const FNS: Record<string, { request: (a: any, img: any) => Promise<any>; parse: 
     request: (a) => b.request.DecomposeBrushBacklog(a.style_summary, a.registry_state),
     parse: (t) => b.parse.DecomposeBrushBacklog(t),
   },
+  // S-163 typed-critique contract carrier — parse is the live use (the typed Critique fixture);
+  // request renders the stub prompt. S-164 authors the real diagnostic prompt on this signature.
+  DiagnoseBuild: {
+    request: (a) => b.request.DiagnoseBuild(a.concept_block, a.build_block),
+    parse: (t) => b.parse.DiagnoseBuild(t),
+  },
   DerivePalette: {
     request: (a) => b.request.DerivePalette(a.story_digest, a.source_keys, a.block_vocabulary),
     parse: (t) => b.parse.DerivePalette(t),
