@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "department": "ROOF",
+      "expected": "a steep thatched gable with a rolled ridge",
+      "present": "a shallow plank gable",
+      "missing": "the thatch covering and the ridge roll",
+      "severity": "major"
+    },
+    {
+      "department": "WALL",
+      "expected": "limewashed plaster over a stone plinth",
+      "present": "bare cobblestone to the ground",
+      "missing": "the limewash coat and the plinth band",
+      "severity": "minor"
+    },
+    {
+      "department": "OPENING",
+      "expected": "arched doorway with a timber frame",
+      "present": "a square hole",
+      "missing": "the arch head and the frame dressing",
+      "severity": "minor"
+    }
+  ]
+}
