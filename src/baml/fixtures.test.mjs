@@ -17,6 +17,7 @@ import { fileURLToPath } from "node:url";
 import { bamlBatch } from "./bridge.mjs";
 import { loadStylePack } from "../pack/style-pack.mjs";
 import { recognitionRenderArgs } from "../recognition/prompt.mjs";
+import { DEPARTMENTS } from "../pack/departments.mjs";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 const read = (rel) => readFileSync(join(ROOT, rel), "utf8");
@@ -50,6 +51,7 @@ const cottageReplies = readJson(`${REC}/cottage.replies.json`);
 const barnReplies = readJson(`${REC}/barn.replies.json`);
 
 const CRIT = "src/baml/fixtures/critique";
+const DIAG = "src/baml/fixtures/diagnose";
 
 let R; // batch results, by index
 
@@ -71,6 +73,10 @@ before(async () => {
     /* 12 */ { fn: "DecomposeBrushBacklog", mode: "render", args: readJson("src/baml/fixtures/decompose/inputs.json") },
     /* 13 */ { fn: "DecomposeBrushBacklog", mode: "parse", text: read("src/baml/fixtures/decompose/reply.txt") },
     /* 14 */ { fn: "DecomposeBrushBacklog", mode: "parse", text: "You need a roof brush and a wall brush." },
+    /* 15 */ { fn: "DiagnoseBuild", mode: "render", args: readJson(`${DIAG}/inputs.json`),
+               images: { concept: PX, renders: [PX, PX, PX, PX] } },
+    /* 16 */ { fn: "DiagnoseBuild", mode: "parse", text: read(`${DIAG}/reply.txt`) },
+    /* 17 */ { fn: "DiagnoseBuild", mode: "parse", text: "The roof looks pale and the walls are bare." },
   ]);
 });
 
@@ -117,6 +123,34 @@ test("FX-V1 vernacular renders stably from the minted inputs and parses the mint
   assert.ok(R[10].ok, R[10].error);
   assert.deepEqual(dropNulls(R[10].parsed), readJson("src/baml/fixtures/vernacular/expected.json"));
   assert.equal(R[11].ok, false, "prose is not a material story");
+});
+
+test("FX-DB1 DiagnoseBuild (Layer A) renders byte-identical to the committed golden (barn grounding)", () => {
+  assert.ok(R[15].ok, R[15].error);
+  assert.equal(R[15].prompt, read(`${DIAG}/prompt.golden.txt`), "diagnose prompt drifted from the golden");
+  assert.equal(R[15].images.length, 5, "concept + 4 azimuth renders, in template order");
+  // the prompt is GROUNDED, not vacuous: the recognized program + the style vocabulary + the enum
+  assert.match(R[15].prompt, /THE RECOGNIZED PROGRAM/);
+  assert.match(R[15].prompt, /"idiom": "roof\.gable"/);
+  assert.match(R[15].prompt, /CHIMNEY, OPENING, ROOF, ROOM, WALL/); // departments single-sourced
+});
+
+test("FX-DB2 b.parse over the canonical reply equals the minted Critique; fields are non-vacuous", () => {
+  assert.ok(R[16].ok, R[16].error);
+  assert.deepEqual(dropNulls(R[16].parsed), readJson(`${DIAG}/expected.json`), "diagnose parse drifted");
+  const items = R[16].parsed.items;
+  assert.ok(items.length >= 3, "the captured golden spans ≥3 departments");
+  for (const it of items) {
+    assert.ok(DEPARTMENTS.includes(it.department), `department ${it.department} must be in the enum`);
+    // the falsifiable-claim guard: structure must NOT be filled with vacuous text
+    assert.ok(it.expected.trim() && it.present.trim() && it.missing.trim(),
+      "expected/present/missing must be non-empty (non-vacuous diagnosis)");
+  }
+  // SAP behaviour for DiagnoseBuild (characterized in T-163-01's critique-contract.test.mjs): BARE
+  // PROSE (no JSON object) REJECTS (R[17], CC3's family), while a JSON object whose item carries an
+  // UNKNOWN department DROPS that item to {items:[]} (CC2 — the typing is a filter, not a gate).
+  // T-164-02's reply gate must therefore treat an emptied list as malformed; b.parse alone will not.
+  assert.equal(R[17].ok, false, "bare prose with no JSON object must fail to coerce to a Critique");
 });
 
 test("FX-D1 decompose renders stably from the minted inputs and parses the minted reply", () => {
