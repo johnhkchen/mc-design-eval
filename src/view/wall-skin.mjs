@@ -112,10 +112,13 @@ export function wallSkinPlan(program, pack, { floor, eaveY } = {}) {
     plan.push({ brush: "quoin", params: { material: dressing, faces: FACES, run: Math.max(1, eaveY - floor + 1) } });
   }
 
-  // 4. limewash banding — only when the pack declares the finish (saltcrag yes, rustic no); one weather face
+  // 4. limewash banding — only when the pack declares the finish (saltcrag yes, rustic no); one weather
+  //    face, as a PARTIAL accent coat (coverage<1 → broken runs = banding, not a solid whitewash; the
+  //    pack rationale: "an accent of thrift... spared for where weather drives hardest"). preserve keeps
+  //    the dressing so quoins survive the coat. Anti-flood: never the whole face (the ticket's caution).
   if (limewash) {
     plan.push({ brush: "surface.limewash", params: {
-      block: limewash, aspects: [weatherFace(mass)], coverage: 1, minRun: 2, preserve,
+      block: limewash, aspects: [weatherFace(mass)], coverage: 0.5, minRun: 2, preserve,
     } });
   }
 

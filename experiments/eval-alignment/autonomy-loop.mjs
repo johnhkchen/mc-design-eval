@@ -15,6 +15,9 @@ import { fileURLToPath } from "node:url";
 import { artifactOccupancy, occupancyFromCells } from "../../src/view/occupancy.mjs";
 import { gableRecord, generateRoof } from "../../src/view/roof-generate.mjs";
 import { constructWalls } from "../../src/view/wall-generate.mjs";
+import { wallSkin } from "../../src/view/wall-skin.mjs";
+import { extractApertures, dressOpenings } from "../../src/view/opening-dressing.mjs";
+import { roleBlock } from "../../src/recognition/compile.mjs";
 import { infillPanel } from "../../src/view/facade-articulation.mjs";
 import { rebuildArtifact } from "../../src/view/shell-integrity.mjs";
 import { renderViews } from "../../src/view/multi-angle.mjs";
@@ -23,10 +26,15 @@ import { requestText, requestTextWithImage } from "../../src/sdk-binding.mjs";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..", "..");
 const FAMILY = { field: "spruce_planks", stairs: "spruce_stairs", slab: "spruce_slab", findings: [] };
+// wallField is NO LONGER hardcoded (T-160-02): the wall tool derives its last-resort fill from the pack's
+// ground role and then SKINS the envelope from the program's declared roles (per-storey material, quoins,
+// courses, dressed openings). barn--saltcrag is the WITNESS — the saltcrag pack's rich wall vocabulary
+// (quoin/limewash/clinker) is where the construction-vs-recolor distinction shows hardest.
 const SUBJECTS = {
-  cottage: { artifact: "builds/cottage/final-artifact.json", concept: "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png", eaveY: 13, ridgeAxis: "z", wallField: "stone_bricks" },
-  barn: { artifact: "builds/barn/final-artifact.json", concept: "benchmarks/sculpture/runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png", eaveY: 12, ridgeAxis: "x", wallField: "stone_bricks" },
-  gatehouse: { artifact: "benchmarks/sculpture/generated/gatehouse/artifact.json", concept: "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png", eaveY: 18, ridgeAxis: "z", wallField: "stone_bricks" },
+  cottage: { artifact: "builds/cottage/final-artifact.json", concept: "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png", eaveY: 13, ridgeAxis: "z" },
+  barn: { artifact: "builds/barn/final-artifact.json", concept: "benchmarks/sculpture/runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png", eaveY: 12, ridgeAxis: "x" },
+  gatehouse: { artifact: "benchmarks/sculpture/generated/gatehouse/artifact.json", concept: "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png", eaveY: 18, ridgeAxis: "z" },
+  "barn--saltcrag": { artifact: "benchmarks/sculpture/workshop/barn--saltcrag/final-artifact.json", concept: "benchmarks/sculpture/runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png", eaveY: 9, ridgeAxis: "x", program: "barn--saltcrag" },
 };
 let SUBJECT, CFG;            // set per-subject by runSubject (so the batch runner can loop)
 const ROUNDS = 3;
@@ -64,11 +72,24 @@ function loadProgram(subject) {
   const p = join(ROOT, "benchmarks/sculpture/recognition", `${subject}.program.json`);
   return existsSync(p) ? JSON.parse(readFileSync(p, "utf8")) : null;
 }
+function loadPack(program) {
+  if (!program?.pack) return null;
+  const p = join(ROOT, "packs", `${program.pack}.json`);
+  return existsSync(p) ? JSON.parse(readFileSync(p, "utf8")) : null;
+}
+// T-160-02: construct the envelope (T-160-01), THEN skin it as CONSTRUCTION from the recognized roles +
+// pack — per-storey material, dressed-stone quoins, clinker courses on a boarded upper, limewash banding,
+// a plinth base course, and dressed openings (the dressing fns are injected; wallSkin may not import the
+// technique — the brush-door rule). The last-resort envelope fill is the pack's ground role, not a
+// hardcoded block; no pack/program (gatehouse) ⇒ envelope only, skin is a graceful no-op.
 function construct_walls(occ) {
-  return constructWalls(occ, {
-    floor: occ.bounds.min[1], eaveY: CFG.eaveY,
-    program: loadProgram(SUBJECT), wallField: CFG.wallField,
-  });
+  const program = loadProgram(CFG.program ?? SUBJECT);
+  const pack = loadPack(program);
+  const floor = occ.bounds.min[1];
+  const groundRole = program?.masses?.[0]?.walls?.ground?.role;
+  const wallField = (pack && groundRole) ? roleBlock(pack, groundRole) : undefined;
+  const env = constructWalls(occ, { floor, eaveY: CFG.eaveY, program, wallField });
+  return wallSkin(env, { program, pack, floor, eaveY: CFG.eaveY, extractApertures, dressOpenings });
 }
 // Canonical half-timber facade (E-35 infillPanel): timber studs on a rhythm + plaster infill, gated to
 // the UPPER storey. The material-contrast / detail tool — addresses the cottage's "uniform brown / no
@@ -86,7 +107,7 @@ function add_timber_framing(occ) {
 const TOOLS = { apply_gable_roof, construct_walls, add_timber_framing };
 const MENU = [
   "- apply_gable_roof: replace the roof with a crisp parametric gable. Best when the worst defect is the ROOF (form/presence/shape).",
-  "- construct_walls: REBUILD the wall envelope (replace, not patch) from the recognized footprint — a clean solid ring floor→eave with a regular window+door rhythm. Best when the worst defect is STRUCTURAL INTEGRITY / wall holes / MISSING walls.",
+  "- construct_walls: REBUILD the wall envelope (replace, not patch) from the recognized footprint AND SKIN IT AS CONSTRUCTION from the pack's declared roles — a clean solid ring floor→eave with per-storey material (stone base / boarded or plaster upper), dressed-stone quoins at the corners, clinker courses, a plinth base course, and dressed openings. Best when the worst defect is STRUCTURAL INTEGRITY / wall holes / MISSING walls, OR a monotone/single-material wall (no base-vs-upper contrast, no corner dressing).",
   "- add_timber_framing: add timber-frame studs + plaster infill on the upper storey. Best when the worst defect is PALETTE/MATERIAL (uniform or monotone walls, no material contrast, missing half-timber detail).",
   "- done: stop — the build is good enough or no tool addresses the worst defect.",
 ].join("\n");
@@ -168,7 +189,7 @@ async function runSubject(key) {
 // on every building subject on disk.
 async function main() {
   const arg = process.argv.slice(2).find((a) => !a.startsWith("--"));
-  const queue = arg ? [arg] : ["cottage", "barn", "gatehouse"];
+  const queue = arg ? [arg] : ["cottage", "barn", "gatehouse", "barn--saltcrag"];
   console.error(`=== VOLUME RUN over ${queue.length} building subjects: ${queue.join(", ")} ===`);
   const results = [];
   for (const key of queue) { try { results.push(await runSubject(key)); } catch (e) { console.error(`[${key}] FAILED: ${e.message}`); results.push({ subject: key, error: e.message, climbed: false }); } }
