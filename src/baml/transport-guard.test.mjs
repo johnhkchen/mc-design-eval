@@ -92,7 +92,7 @@ test("TG4 the judge path has no BAML dependency (E-32 Rule 2)", () => {
 });
 
 test("TG5 no facade-era judge function bleeds into the new BAML sources", () => {
-  for (const rel of ["recognition.baml", "critique.baml", "vernacular.baml", "decompose.baml", "formation.baml"]) {
+  for (const rel of ["recognition.baml", "critique.baml", "vernacular.baml", "decompose.baml", "formation.baml", "department.baml"]) {
     const src = read(join("baml_src", rel));
     assert.ok(!src.includes("JudgeFacade") && !/same object|drifted|different object/.test(src),
       `${rel} must not carry judge vocabulary`);

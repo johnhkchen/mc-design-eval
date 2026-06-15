@@ -52,6 +52,7 @@ const barnReplies = readJson(`${REC}/barn.replies.json`);
 
 const CRIT = "src/baml/fixtures/critique";
 const DIAG = "src/baml/fixtures/diagnose";
+const ROUTE = "src/baml/fixtures/route";
 
 let R; // batch results, by index
 
@@ -77,6 +78,9 @@ before(async () => {
                images: { concept: PX, renders: [PX, PX, PX, PX] } },
     /* 16 */ { fn: "DiagnoseBuild", mode: "parse", text: read(`${DIAG}/reply.txt`) },
     /* 17 */ { fn: "DiagnoseBuild", mode: "parse", text: "The roof looks pale and the walls are bare." },
+    /* 18 */ { fn: "RouteCritique", mode: "render", args: readJson(`${ROUTE}/inputs.json`) },
+    /* 19 */ { fn: "RouteCritique", mode: "parse", text: read(`${ROUTE}/reply.txt`) },
+    /* 20 */ { fn: "RouteCritique", mode: "parse", text: read(`${ROUTE}/reply-bad-idiom.txt`) },
   ]);
 });
 
@@ -151,6 +155,33 @@ test("FX-DB2 b.parse over the canonical reply equals the minted Critique; fields
   // UNKNOWN department DROPS that item to {items:[]} (CC2 — the typing is a filter, not a gate).
   // T-164-02's reply gate must therefore treat an emptied list as malformed; b.parse alone will not.
   assert.equal(R[17].ok, false, "bare prose with no JSON object must fail to coerce to a Critique");
+});
+
+test("FX-RT1 RouteCritique (Layer B) renders byte-identical to the golden; the menu is real + single-sourced", () => {
+  assert.ok(R[18].ok, R[18].error);
+  assert.equal(R[18].prompt, read(`${ROUTE}/prompt.golden.txt`), "route prompt drifted from the golden");
+  assert.equal(R[18].images.length, 0, "the router takes no images");
+  // the candidate menu lists every department with its real idioms (the single composition point)
+  assert.match(R[18].prompt, /ROOF: dormer, roof\.gable/);
+  assert.match(R[18].prompt, /WALL: .*\bquoin\b/);
+  assert.match(R[18].prompt, /OPENING: arch, head\.flat, opening-dressing/);
+});
+
+test("FX-RT2 b.parse over the canonical route reply equals the minted Dispatch; why is non-vacuous", () => {
+  assert.ok(R[19].ok, R[19].error);
+  assert.deepEqual(dropNulls(R[19].parsed), readJson(`${ROUTE}/expected.json`), "route parse drifted");
+  const items = R[19].parsed.items;
+  assert.equal(items.length, 3, "three dispatched items (ROOF/WALL/OPENING)");
+  assert.deepEqual(items.map((i) => i.department), ["ROOF", "WALL", "OPENING"]);
+  for (const it of items) {
+    assert.ok(DEPARTMENTS.includes(it.department), `department ${it.department} in the enum`);
+    assert.ok(it.idiom.trim() && it.why.trim(), "idiom + why non-vacuous");
+  }
+  // SAP leniency, same family as DiagnoseBuild: a JSON object whose item routes to an idiom OUTSIDE its
+  // department still PARSES (b.parse types the string idiom; it cannot know the registry). The membership
+  // failure is resolveDispatch's (src/workshop/route.mjs, RT3) — b.parse alone will not catch it. R[20]
+  // is that specimen: it parses ok here, and route.test.mjs proves resolveDispatch throws on it.
+  assert.ok(R[20].ok, "an off-department idiom string still parses (membership is resolveDispatch's gate)");
 });
 
 test("FX-D1 decompose renders stably from the minted inputs and parses the minted reply", () => {

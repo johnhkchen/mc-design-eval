@@ -1,0 +1,33 @@
+You are routing a build diagnosis to the construction departments and idioms that can fix it. Each
+diagnosis item names a construction department and what diverges from the concept. Your job: for EACH
+item, choose the one idiom that best addresses it, drawn from that department's candidate set below.
+
+THE DIAGNOSIS (one item per line — department, then expected / present / missing):
+  1. ROOF — expected: a steep dark roof field in dark_oak_planks (the barn exception darkens the whole field toward the oak) / present: a shallow spruce_planks gable that reads pale against the walls / missing: the dark_oak_planks field and the steeper pitch (major)
+  2. WALL — expected: uncoursed cobblestone fieldstone panels framed by stone_bricks quoins, piers and a base plinth / present: flat cobblestone walls with no dressed framing / missing: the stone_bricks quoins, piers and plinth band (major)
+  3. OPENING — expected: two oak_planks wagon doors on the long eave wall, kept distinct from the dark roof / present: two plain rectangular holes / missing: the oak_planks wagon-door leaves and their stone_bricks heads (minor)
+
+THE CANDIDATE IDIOMS PER DEPARTMENT (choose the idiom from the item's own department):
+  CHIMNEY: chimney
+  OPENING: arch, head.flat, opening-dressing
+  ROOF: dormer, roof.gable, roof.gable.steep, roof.hip, roof.pyramid, roof.thatch, surface.roof-courses
+  ROOM: floorplan, hollow
+  WALL: course.slab, course.stairs, eave-overhang, infill-panel, jetty, pilaster, plinth, quoin, surface.clinker, surface.fill, surface.limewash, surface.paint, surface.relief, surface.strip-salt, timber-frame
+
+For each diagnosis item emit one dispatch entry: the same department, ONE idiom from that department's
+candidate set (never an idiom from another department), and a short why naming how that idiom resolves
+the missing/divergent element. Keep the items in the diagnosis's order. Choose the most direct idiom;
+if several fit, prefer the one whose name most specifically matches the missing element.
+
+Answer in JSON using this schema:
+{
+  items: [
+    {
+      department: 'ROOF' or 'WALL' or 'OPENING' or 'CHIMNEY' or 'ROOM',
+      // an idiom-registry name drawn from this department's candidate set
+      idiom: string,
+      // why this idiom addresses the critique item
+      why: string,
+    }
+  ],
+}
