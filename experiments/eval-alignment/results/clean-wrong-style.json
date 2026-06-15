@@ -1,0 +1,215 @@
+{
+  "schema": "bakeoff/v1",
+  "tier": "strong",
+  "votes": 2,
+  "build": "builds/gatehouse/new-roof",
+  "program": "synthetic-gatehouse (fixed)",
+  "results": [
+    {
+      "key": "A-matched",
+      "tier": "MATCHED",
+      "pack": "packs/rustic.json",
+      "concept": "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+      "note": "rustic concept + rustic profile (build matches both)",
+      "style": "rustic",
+      "scoreMean": 52,
+      "votes": [
+        {
+          "score": 52,
+          "nItems": 3,
+          "nMajor": 2,
+          "departments": [
+            "OPENING",
+            "WALL",
+            "ROOF"
+          ],
+          "missing": [
+            "arch treatment, dark_oak_log frame surround, spruce_door",
+            "cobblestone field, stone_bricks quoin/opening dressing, dark_oak_log timber frame, watertight closed shell",
+            "spruce_stairs courses, spruce_slab steps, dark_oak_planks trim, eave overhang"
+          ]
+        },
+        {
+          "score": 52,
+          "nItems": 3,
+          "nMajor": 2,
+          "departments": [
+            "WALL",
+            "OPENING",
+            "ROOF"
+          ],
+          "missing": [
+            "stone_brick quoins and opening dressing, the cobblestone-vs-dressing material contrast, and a watertight ground course.",
+            "the arch treatment and the dark_oak_log timber-frame jambs/lintel dressing.",
+            "the dark_oak_planks ridge/trim cap."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "B-arc",
+      "tier": "WRONG",
+      "pack": "packs/guildhall.json",
+      "concept": "benchmarks/temple-facade/concepts/arc-A-flash.png",
+      "note": "classical arch concept + guildhall profile",
+      "style": "guildhall",
+      "scoreMean": 46,
+      "votes": [
+        {
+          "score": 52,
+          "nItems": 3,
+          "nMajor": 2,
+          "departments": [
+            "WALL",
+            "ROOF",
+            "OPENING"
+          ],
+          "missing": [
+            "Quoins, pilasters, plinth, and ground-vs-upper field differentiation — none of the dressing idioms (quoin, pilaster, plinth, eave-overhang) are built.",
+            "Deepslate-tile dark stone covering and the stone_brick stair/slab course dressing — the roof reads as warm timber/terracotta, not dressed dark ashlar.",
+            "Stone_bricks voussoir dressing around the arch and the dark_oak_door leaf — the arch is undressed and undoored."
+          ]
+        },
+        {
+          "score": 40,
+          "nItems": 3,
+          "nMajor": 3,
+          "departments": [
+            "ROOF",
+            "WALL",
+            "OPENING"
+          ],
+          "missing": [
+            "deepslate_tiles material, stone_brick_stairs step courses, stone_brick_slab ridge",
+            "chiseled_stone_bricks quoins, polished_diorite pilasters, plinth course, eave-overhang",
+            "dark_oak_door in the gate, stone_bricks voussoir dressing, glass_pane windows"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "B2-chapelle",
+      "tier": "WRONG",
+      "pack": "packs/guildhall.json",
+      "concept": "benchmarks/temple-facade/concepts/chapelle-A-flash.png",
+      "note": "Gothic cathedral concept + guildhall profile (triangulates arc-A's palette confound)",
+      "style": "guildhall",
+      "scoreMean": 40,
+      "votes": [
+        {
+          "score": 40,
+          "nItems": 3,
+          "nMajor": 3,
+          "departments": [
+            "ROOF",
+            "WALL",
+            "OPENING"
+          ],
+          "missing": [
+            "deepslate_tiles field material and stone_brick stair/slab eave courses",
+            "chiseled_stone_bricks quoins, polished_diorite pilasters, plinth course, and ground/upper field-material distinction",
+            "dark_oak_door, stone_bricks voussoir dressing, and glass_pane windows"
+          ]
+        },
+        {
+          "score": 40,
+          "nItems": 3,
+          "nMajor": 3,
+          "departments": [
+            "ROOF",
+            "WALL",
+            "OPENING"
+          ],
+          "missing": [
+            "deepslate_tiles material and the stone-brick stair/slab course banding; pitch is far steeper than the style's shallow class",
+            "chiseled_stone_brick quoins, polished_diorite pilasters, the plinth base, and the horizontal course bands — no ashlar dressing at all",
+            "stone_bricks voussoir dressing on the arch, the dark_oak_door, and glass_pane windows"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "C-control",
+      "tier": "CONTROL",
+      "pack": "packs/rustic.json",
+      "concept": "benchmarks/temple-facade/concepts/arc-A-flash.png",
+      "note": "classical concept + RUSTIC profile (isolates profile vs concept-image)",
+      "style": "rustic",
+      "scoreMean": 58,
+      "votes": [
+        {
+          "score": 52,
+          "nItems": 3,
+          "nMajor": 2,
+          "departments": [
+            "WALL",
+            "OPENING",
+            "ROOF"
+          ],
+          "missing": [
+            "dark_oak_log timber framing, white_terracotta upper infill, cobblestone/stone_bricks ground-vs-dressing split, plinth.",
+            "spruce_door / oak_planks gate leaf, dark_oak_trapdoor shutters, spruce_fence window infill.",
+            "spruce_stairs eave course, spruce_slab step, dark_oak_planks trim."
+          ]
+        },
+        {
+          "score": 64,
+          "nItems": 3,
+          "nMajor": 1,
+          "departments": [
+            "OPENING",
+            "ROOF",
+            "WALL"
+          ],
+          "missing": [
+            "spruce_door in the aperture and a door-lantern",
+            "dark_oak_planks trim and the spruce_stairs/spruce_slab eave course",
+            "stone_bricks dressing/quoins at corners and around the gate"
+          ]
+        }
+      ]
+    }
+  ],
+  "spreads": {
+    "A-B": 6,
+    "A-B2": 12,
+    "A-C": -6,
+    "B-vs-C (profile effect)": 12
+  },
+  "noiseBand": 12,
+  "cratered": false,
+  "profileDrivesIt": false,
+  "verdict": "DID NOT CRATER — per-style `expected` is cosmetic; blindness is in the model's reading → deeper-measurement epic",
+  "e38Baseline": [
+    {
+      "key": "gatehouse",
+      "tier": "MATCHED",
+      "q": 30
+    },
+    {
+      "key": "barn",
+      "tier": "same-family",
+      "q": 32
+    },
+    {
+      "key": "cottage",
+      "tier": "same-family",
+      "q": 27
+    },
+    {
+      "key": "church",
+      "tier": "diff-building",
+      "q": 22
+    },
+    {
+      "key": "koi-fish",
+      "tier": "ABSURD",
+      "q": 3
+    },
+    {
+      "key": "pineapple",
+      "tier": "ABSURD",
+      "q": 3
+    }
+  ]
+}
