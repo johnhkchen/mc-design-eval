@@ -1,0 +1,140 @@
+{
+  "schema": "style-pack/v1",
+  "style": "guildhall",
+  "provenance": {
+    "setting": "A prosperous wool-market town's square — the guild's hall and the merchant houses around it, raised in dressed limestone ashlar by masons to a polite classical order, not by carpenters in the vernacular. Money is spent on a formal frontage: pilastered bays, a round-arched ground arcade, worked quoins, and a shallow lead roof.",
+    "sources": {
+      "dressed-limestone-ashlar": "geology — limestone from the town quarry, squared and coursed by masons (abundant for a market town that can pay for the cutting) — typical use: wall fields, full height, in place of rubble and frame",
+      "fine-coursed-ashlar": "geology — finer, closer-jointed ashlar courses worked for the upper storey and the chimney shaft (common) — typical use: the storey above the arcade, stacks",
+      "polished-freestone": "geology — a pale freestone dressed and rubbed smooth for the pilaster order and string courses (costly, the frontage's pride) — typical use: the classical order articulating the bays",
+      "worked-quoin-stone": "wealth_class — crisply worked corner stones, arch voussoirs and a moulded chimney cap, cut by a mason where a clean classical edge must turn (scarce, spent on show) — typical use: quoins, voussoirs, cap",
+      "imported-lead-and-slate": "trade — lead and grey slate landed and carted in for a shallow prestige roof (imported) — typical use: the polite low-pitch roof a town frontage wears",
+      "riven-stone-slate-courses": "trade — stone-slate laid in graded courses up the shallow pitch (imported with the lead) — typical use: the coursed roof skin",
+      "panelled-hardwood-joinery": "timber — seasoned hardwood for a panelled town door, the one fine timber on a stone frontage (common) — typical use: the main door leaf",
+      "crown-glass": "trade — real crown-glass panes set in the windows, the mark of a town house over a cottage (imported) — typical use: glazed sash lights",
+      "wrought-iron-work": "trade — a little wrought iron landed for a door-lantern bracket and the area railings (scarce) — typical use: door lamp, railings to the area"
+    },
+    "wealthClass": "Burgess wealth — a market town that can afford masons and a classical frontage: dressed ashlar throughout (not rubble-and-frame), a pilaster order, round-arched openings, and glazed crown-glass windows. The polite architectural language is the point; nothing is left in the vernacular.",
+    "roofingEconomy": "A shallow lead-and-slate roof — the prestige low pitch a town frontage wears, laid in graded stone-slate courses. No steep timber gable: the roof is masonry's quiet partner, not a carpenter's pitch."
+  },
+  "palette": [
+    {
+      "role": "wall.field.ground",
+      "block": "smooth_stone",
+      "rationale": "The ground storey is full-height dressed limestone ashlar — squared and coursed by masons, the polite town wall that replaces the cottage's rubble-and-frame entirely. Pale worked stone at L65, it carries the arcade and reads as a built classical wall, not a vernacular field.",
+      "provenance": ["dressed-limestone-ashlar"],
+      "zone": { "band": "base", "tier": "dominant" },
+      "valueCheck": { "formClass": "cube", "inTable": true, "family": "stone", "lab": [65.491, -0.002, 0] }
+    },
+    {
+      "role": "wall.dressing.quoin",
+      "block": "chiseled_stone_bricks",
+      "rationale": "Crisply worked corner stones turn the classical edge the smooth field cannot — rusticated quoins a shade darker (L50) than the ashlar, the mason's hand where two faces meet. Spent on the corners and the chimney, the polite frontage's accent of worked stone.",
+      "provenance": ["worked-quoin-stone"],
+      "zone": { "band": "base", "tier": "preserve" },
+      "valueCheck": { "formClass": "cube", "inTable": true, "family": "stone", "lab": [50.148, 0.578, -0.414] }
+    },
+    {
+      "role": "wall.field.upper",
+      "block": "stone_bricks",
+      "rationale": "The storey over the arcade is finer closer-jointed ashlar — coursed stone brick at L51, the same masonry carried full height with no plaster-on-timber upper. The wall is one material from plinth to cornice; the storeys are read by the pilaster order, not by a change of stuff.",
+      "provenance": ["fine-coursed-ashlar"],
+      "zone": { "band": "upper", "tier": "dominant" },
+      "valueCheck": { "formClass": "cube", "inTable": true, "family": "stone", "lab": [51.223, -0.002, 0] }
+    },
+    {
+      "role": "wall.pilaster",
+      "block": "polished_diorite",
+      "rationale": "The pilaster order articulating the bays is pale freestone dressed and rubbed smooth — L78, the lightest worked stone on the frontage, standing proud of the field to read as the classical member. This is the polite style's signature: an applied order, not a structural timber frame.",
+      "provenance": ["polished-freestone"],
+      "zone": { "band": "upper", "tier": "preserve" },
+      "valueCheck": { "formClass": "cube", "inTable": true, "family": "stone", "lab": [78.121, 0.368, -1.002] }
+    },
+    {
+      "role": "roof.field",
+      "block": "deepslate_tiles",
+      "rationale": "The shallow prestige roof is lead and grey slate, carted in costly and laid low — dark grey at L23, the polite town pitch that no steep timber gable answers. It sits as masonry's quiet partner over the dressed walls, the opposite of a warm carpentered roof.",
+      "provenance": ["imported-lead-and-slate"],
+      "zone": { "band": "roof", "tier": "dominant" },
+      "valueCheck": { "formClass": "cube", "inTable": true, "family": "stone", "lab": [23.069, -0.001, 0] }
+    },
+    {
+      "role": "roof.course.stairs",
+      "block": "stone_brick_stairs",
+      "rationale": "The graded stone-slate courses stepped up the shallow pitch — the stair member of the roof family, riven stone laid in lapped courses, sharing the grey of the lead field.",
+      "provenance": ["riven-stone-slate-courses"],
+      "zone": { "band": "roof", "tier": "preserve" },
+      "valueCheck": { "formClass": "fixture", "inTable": false, "family": "stone" }
+    },
+    {
+      "role": "roof.course.slab",
+      "block": "stone_brick_slab",
+      "rationale": "The flat stone-slate course at eave and shallow break — the same graded slate laid level where the low pitch eases, the slab member of the roof family.",
+      "provenance": ["riven-stone-slate-courses"],
+      "zone": { "band": "roof", "tier": "preserve" },
+      "valueCheck": { "formClass": "fixture", "inTable": false, "family": "stone" }
+    },
+    {
+      "role": "opening.arch.voussoir",
+      "block": "stone_bricks",
+      "rationale": "The round-arched openings are turned in worked voussoirs of dressed stone — the classical arcade head, a semicircle of coursed stone brick, in place of a flat timber lintel. The arch is the opening grammar of the polite style.",
+      "provenance": ["worked-quoin-stone"],
+      "valueCheck": { "formClass": "cube", "inTable": true, "family": "stone", "lab": [51.223, -0.002, 0] }
+    },
+    {
+      "role": "door.main",
+      "block": "dark_oak_door",
+      "rationale": "The one fine timber on a stone frontage: a panelled hardwood town door, seasoned and dark, set in a dressed-stone reveal under the arcade. Joinery, not the cottage's sawn board.",
+      "provenance": ["panelled-hardwood-joinery"],
+      "valueCheck": { "formClass": "fixture", "inTable": false, "family": null }
+    },
+    {
+      "role": "window.glazing",
+      "block": "glass_pane",
+      "rationale": "Real crown-glass panes glaze the sash lights — the mark of a town house over a cottage's lattice or shutter. Bought-in glass set in the dressed-stone openings.",
+      "provenance": ["crown-glass"],
+      "valueCheck": { "formClass": "rail", "inTable": false, "family": null }
+    },
+    {
+      "role": "chimney.stack",
+      "block": "stone_bricks",
+      "rationale": "The stack is carried up in the same fine coursed ashlar as the upper wall — dressed stone, not rubble, the polite frontage holding its material to the chimney head.",
+      "provenance": ["fine-coursed-ashlar"],
+      "valueCheck": { "formClass": "cube", "inTable": true, "family": "stone", "lab": [51.223, -0.002, 0] }
+    },
+    {
+      "role": "chimney.cap",
+      "block": "chiseled_stone_bricks",
+      "rationale": "A moulded worked-stone cap crowns the stack where weather drives hardest — the same mason's hand as the quoins and voussoirs, a dressed weathering the coursed shaft cannot turn.",
+      "provenance": ["worked-quoin-stone"],
+      "valueCheck": { "formClass": "cube", "inTable": true, "family": "stone", "lab": [50.148, 0.578, -0.414] }
+    }
+  ],
+  "idioms": [
+    { "name": "roof.hip", "params": { "pitch": 0.5, "blocks": { "field": "deepslate_tiles", "stairs": "stone_brick_stairs", "slab": "stone_brick_slab" } } },
+    { "name": "surface.roof-courses" },
+    { "name": "pilaster" },
+    { "name": "quoin" },
+    { "name": "plinth", "params": { "courses": 1, "block": "chiseled_stone_bricks" } },
+    { "name": "course.slab", "params": { "block": "stone_brick_slab" } },
+    { "name": "eave-overhang" },
+    { "name": "arch", "params": { "block": "stone_bricks" } },
+    { "name": "opening-dressing" },
+    { "name": "chimney", "params": { "block": "stone_bricks", "cap": "crown", "capBlock": "chiseled_stone_bricks" } },
+    { "name": "hollow" },
+    { "name": "floorplan" }
+  ],
+  "proportions": {
+    "storeyHeight": { "min": 4, "max": 6 },
+    "pitchClasses": [0.5, 1],
+    "openingRhythm": { "minSpacing": 2, "maxSpacing": 4 },
+    "articulation": { "memberPeriod": { "min": 3, "max": 5 }, "maxOverhang": 1, "maxJettyDepth": 1, "maxQuoinRun": 3 }
+  },
+  "decoration": [
+    { "item": "door-lantern", "block": "lantern", "where": ["door"] },
+    { "item": "area-railings", "block": "iron_bars", "where": ["base"] }
+  ],
+  "conformance": {
+    "checks": ["courses-even", "symmetry-held", "openings-rhythm", "palette-in-pack", "watertight", "single-component"]
+  }
+}
