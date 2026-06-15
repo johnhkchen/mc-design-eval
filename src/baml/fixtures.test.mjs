@@ -137,6 +137,10 @@ test("FX-DB1 DiagnoseBuild (Layer A) renders byte-identical to the committed gol
   assert.match(R[15].prompt, /THE RECOGNIZED PROGRAM/);
   assert.match(R[15].prompt, /"idiom": "roof\.gable"/);
   assert.match(R[15].prompt, /CHIMNEY, OPENING, ROOF, ROOM, WALL/); // departments single-sourced
+  // the per-STYLE construction grammar (T-165-01): the rustic suite the judge keys `expected` on
+  assert.match(R[15].prompt, /THE STYLE'S CONSTRUCTION GRAMMAR/);
+  assert.match(R[15].prompt, /ROOF: materials roof\.field → spruce_planks/);
+  assert.match(R[15].prompt, /WALLS:.*timber-frame/);
 });
 
 test("FX-DB2 b.parse over the canonical reply equals the minted Critique; fields are non-vacuous", () => {

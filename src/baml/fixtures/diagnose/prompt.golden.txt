@@ -120,7 +120,13 @@ THE STYLE'S MATERIAL VOCABULARY (what the concept's blocks should be):
 decoration:
   - door-lantern: lantern
 
-Compare the build renders against the concept. For each CONSTRUCTION DEPARTMENT that diverges,
+THE STYLE'S CONSTRUCTION GRAMMAR (what a rustic build's roof / walls / openings should read as — element construction, not size):
+- ROOF: materials roof.field → spruce_planks, roof.trim → dark_oak_planks, roof.course → spruce_stairs, roof.step → spruce_slab; covering idioms dormer, roof.gable, roof.hip, roof.pyramid; pitch classes [1,2].
+- WALLS: materials wall.field.ground → cobblestone, wall.dressing → stone_bricks, frame.timber → dark_oak_log, wall.infill.upper → white_terracotta; construction idioms course.slab, course.stairs, jetty, plinth, timber-frame.
+- OPENINGS: materials door.main → spruce_door, door.wagon → oak_planks, window.shutter → dark_oak_trapdoor, window.infill → spruce_fence; treatment idioms arch, head.flat, opening-dressing.
+
+Compare the build renders against the concept. Judge it against THIS STYLE'S grammar above — the
+SAME build is correct under one style and wrong under another. For each CONSTRUCTION DEPARTMENT that diverges,
 state one item: what the style calls for there (expected), what the build currently has (present,
 empty if absent), and what is absent versus expected (missing, empty if nothing missing). Tag
 each item with the department that owns it — one of: CHIMNEY, OPENING, ROOF, ROOM, WALL. Judge element-level
