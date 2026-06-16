@@ -57,6 +57,10 @@ const TIER = "strong";
 const VOTES = 2;
 const NOISE = 12; // the E-38 per-call noise band
 const GUARD_ONLY = process.env.GUARD_ONLY === "1";
+// T-173-01 (E-42): run ONLY Section A (crater) — the faithfulness re-run question is purely
+// matched-vs-wrong on the gatehouse build; agreement + bake-off use the corpus and are out of scope
+// (and ~40 wasted model calls). Default unset → all three sections run exactly as before.
+const CRATER_ONLY = process.env.CRATER_ONLY === "1";
 const azimuths = [...MULTI_ANGLE_GATE.azimuths];
 
 const MATCHED_PACK = "packs/rustic.json";   // the subjects' matched style
@@ -116,7 +120,10 @@ async function diagnose({ program, pack, concept, renders }) {
 const renderB64s = async (renderDir) => Promise.all(azimuths.map((a) => toB64(join(ROOT, renderDir, `view-${a}.png`))));
 
 // ============================ SECTION A — CRATER (AC #1) ============================
-const CRATER_BUILD = "builds/gatehouse/new-roof";
+// T-173-01 (E-42): env-overridable so the faithfulness re-run can repoint at the materially-faithful
+// recognition build (S-171, staged at builds/gatehouse/faithful) or the roof-covering build (S-172)
+// WITHOUT touching the held-fixed PROGRAM/conditions. Default unchanged → E-40/T-170-02 reproducible.
+const CRATER_BUILD = process.env.CRATER_BUILD ?? "builds/gatehouse/new-roof";
 const CRATER_CONDITIONS = [
   { key: "A-matched",  tier: "MATCHED", pack: MATCHED_PACK, concept: "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png", note: "rustic concept + rustic pack (build matches both)" },
   { key: "B-arc",      tier: "WRONG",   pack: WRONG_PACK,   concept: "benchmarks/temple-facade/concepts/arc-A-flash.png",      note: "classical arch + guildhall pack" },
@@ -229,25 +236,30 @@ async function main() {
   const guardPaths = new Set();
   for (const p of azimuths.map((a) => join(ROOT, CRATER_BUILD, `view-${a}.png`))) guardPaths.add(p);
   for (const c of CRATER_CONDITIONS) guardPaths.add(join(ROOT, c.concept));
-  for (const s of pairStates(corpus)) {
-    for (const a of azimuths) guardPaths.add(join(ROOT, s.renderDir, `view-${a}.png`));
-    guardPaths.add(join(ROOT, s.labels.matchedConcept)); guardPaths.add(join(ROOT, s.labels.wrongStyleConcept));
-  }
-  for (const s of singleStates(corpus)) {
-    for (const a of azimuths) guardPaths.add(join(ROOT, s.renderDir, `view-${a}.png`));
-    guardPaths.add(join(ROOT, s.concept));
+  if (!CRATER_ONLY) { // T-173-01: corpus assets are only needed for the agreement + bake-off sections
+    for (const s of pairStates(corpus)) {
+      for (const a of azimuths) guardPaths.add(join(ROOT, s.renderDir, `view-${a}.png`));
+      guardPaths.add(join(ROOT, s.labels.matchedConcept)); guardPaths.add(join(ROOT, s.labels.wrongStyleConcept));
+    }
+    for (const s of singleStates(corpus)) {
+      for (const a of azimuths) guardPaths.add(join(ROOT, s.renderDir, `view-${a}.png`));
+      guardPaths.add(join(ROOT, s.concept));
+    }
   }
   for (const p of guardPaths) if (!existsSync(p)) throw new Error(`missing asset: ${p}`);
-  console.log(`[guard] ${guardPaths.size} assets present; corpus ${singleStates(corpus).length} single + ${pairStates(corpus).length} pair`);
+  console.log(`[guard] ${guardPaths.size} assets present; build=${CRATER_BUILD}${CRATER_ONLY ? " (CRATER_ONLY)" : `; corpus ${singleStates(corpus).length} single + ${pairStates(corpus).length} pair`}`);
   if (GUARD_ONLY) { console.log("[guard] GUARD_ONLY — no spend; exiting clean."); return; }
 
   const crater = await runCrater();
-  const agreement = await runAgreement(corpus);
-  const bakeoff = await runBakeoff(corpus);
+  // T-173-01: the faithfulness re-run scores ONLY the crater; the corpus sections + their E-39 baseline
+  // side-by-side are skipped (recorded as a sentinel so the result JSON stays self-describing).
+  const agreement = CRATER_ONLY ? { skipped: "CRATER_ONLY" } : await runAgreement(corpus);
+  const bakeoff = CRATER_ONLY ? { skipped: "CRATER_ONLY" } : await runBakeoff(corpus);
 
   // E-39 baseline for the side-by-side
   let baseline = {};
-  try {
+  if (CRATER_ONLY) baseline = { skipped: "CRATER_ONLY" };
+  else try {
     const cw = JSON.parse(readFileSync(join(HERE, "results", "clean-wrong-style.json"), "utf8"));
     const bo = JSON.parse(readFileSync(join(HERE, "results", "bakeoff.json"), "utf8"));
     baseline = {
@@ -264,8 +276,13 @@ async function main() {
   console.log("\n================ CORPUS REFEREE VERDICT ================");
   console.log(`CRATER:    A=${crater.scores.A} B=${crater.scores.B} B2=${crater.scores.B2} C=${crater.scores.C}  -> ${crater.verdict}`);
   console.log(`KIND:      contrast=${crater.kindReliability.replaceContrast}  -> ${crater.kindReliability.verdict}`);
-  console.log(`AGREEMENT: ${agreement.verdict}`);
-  console.log(`BAKE-OFF:  split ${bakeoff.summary.split.correct}/${bakeoff.summary.n}  fused ${bakeoff.summary.fused.correct}/${bakeoff.summary.n}  -> ${bakeoff.summary.verdict}`);
+  if (CRATER_ONLY) {
+    console.log(`AGREEMENT: skipped (CRATER_ONLY)`);
+    console.log(`BAKE-OFF:  skipped (CRATER_ONLY)`);
+  } else {
+    console.log(`AGREEMENT: ${agreement.verdict}`);
+    console.log(`BAKE-OFF:  split ${bakeoff.summary.split.correct}/${bakeoff.summary.n}  fused ${bakeoff.summary.fused.correct}/${bakeoff.summary.n}  -> ${bakeoff.summary.verdict}`);
+  }
   console.log("=======================================================");
 }
 main().catch((e) => { console.error("FATAL:", e.message); process.exit(1); });
