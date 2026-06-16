@@ -1,5 +1,5 @@
 # Lisa project configuration
-version = "0.2.10"
+version = "0.2.11"
 
 [dirs]
 tickets = "docs/active/tickets"
@@ -11,6 +11,7 @@ max_threads = 2
 # auto_advance = false
 # review_timeout_secs = 240
 # session_timeout_secs = 1800
+# wind_down_secs = 300
 
 # [scheduling.phase_timeouts]
 # research = 300

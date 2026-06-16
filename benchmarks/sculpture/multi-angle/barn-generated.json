@@ -1,0 +1,905 @@
+{
+  "schema": "multi-angle-gate/v1",
+  "subject": "barn",
+  "label": "generated",
+  "artifact": {
+    "path": "benchmarks/sculpture/generated/barn/artifact.json",
+    "sha256": "6b3b352f3b9833b378192390486901457f5feb1e3b7a101f32f58a1d4adea517"
+  },
+  "contract": {
+    "azimuths": [
+      "+x+z",
+      "+x-z",
+      "-x-z",
+      "-x+z"
+    ],
+    "elevationDeg": 30,
+    "width": 512,
+    "height": 512,
+    "gapBudget": 2,
+    "minorBudget": 10,
+    "coverageThreshold": 0.5,
+    "note": "the azimuth set/elevation/resolution are CONFIG (E-25 Rule 4) — this runner has no flag to change them"
+  },
+  "zones": {
+    "source": "concept",
+    "reason": null,
+    "policy": {
+      "band0": {
+        "dominant": "cobblestone",
+        "preserve": [
+          "dark_oak_planks",
+          "polished_deepslate",
+          "oak_planks"
+        ],
+        "splat": [
+          "dark_oak_planks",
+          "polished_deepslate",
+          "oak_planks"
+        ]
+      },
+      "roof": {
+        "dominant": "dark_oak_planks",
+        "preserve": [
+          "polished_deepslate",
+          "oak_planks",
+          "spruce_stairs",
+          "spruce_slab"
+        ],
+        "splat": [
+          "polished_deepslate",
+          "oak_planks"
+        ]
+      }
+    },
+    "substitutionApplied": {
+      "stone_bricks": "polished_deepslate"
+    },
+    "kitOverridesApplied": {},
+    "vocabulary": {
+      "schema": "material-vocabulary/v1",
+      "policySpace": "named",
+      "guarded": true,
+      "substitution": {
+        "stone_bricks": "polished_deepslate"
+      },
+      "kitOverrides": {},
+      "zones": {
+        "band0": {
+          "dominant": "cobblestone",
+          "preserve": [
+            "dark_oak_planks",
+            "polished_deepslate",
+            "oak_planks"
+          ],
+          "splat": [
+            "dark_oak_planks",
+            "polished_deepslate",
+            "oak_planks"
+          ]
+        },
+        "roof": {
+          "dominant": "dark_oak_planks",
+          "preserve": [
+            "polished_deepslate",
+            "oak_planks",
+            "spruce_stairs",
+            "spruce_slab"
+          ],
+          "splat": [
+            "polished_deepslate",
+            "oak_planks"
+          ]
+        }
+      },
+      "treatmentSlots": {
+        "door": "oak_door",
+        "frame": "polished_deepslate"
+      },
+      "derivations": [],
+      "roofFamilyAppended": [
+        "spruce_stairs",
+        "spruce_slab"
+      ]
+    }
+  },
+  "views": [
+    {
+      "angle": "+x+z",
+      "azimuthDeg": 45,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/barn-generated/view-+x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "cobblestone",
+            "fraction": 1,
+            "total": 322,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "dark_oak_planks",
+              "polished_deepslate",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.795
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.988,
+            "total": 320,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "polished_deepslate",
+              "oak_planks",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.941
+          }
+        },
+        "legacy": {
+          "passed": true,
+          "failures": []
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "walls and overall body",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "roof covering over the nave",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "front facade and door",
+            "attribute": "form",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "Stone-and-timber palette and material zoning read as the same barn, but the build is a hollow open shell with missing walls and an incomplete roof where the references show a fully enclosed, roofed mass."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 11057,
+          "output_tokens": 527,
+          "cost_usd": 0.21676850000000003
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"walls and overall body\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"roof covering over the nave\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"front facade and door\",\"attribute\":\"form\",\"severity\":\"minor\"}],\"rationale\":\"Stone-and-timber palette and material zoning read as the same barn, but the build is a hollow open shell with missing walls and ",
+          "usage": {
+            "input_tokens": 11057,
+            "output_tokens": 527,
+            "cost_usd": 0.21676850000000003
+          },
+          "source": "live"
+        }
+      ]
+    },
+    {
+      "angle": "+x-z",
+      "azimuthDeg": 135,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/barn-generated/view-+x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "cobblestone",
+            "fraction": 1,
+            "total": 161,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "dark_oak_planks",
+              "polished_deepslate",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.789
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 1,
+            "total": 339,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "polished_deepslate",
+              "oak_planks",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.428
+          }
+        },
+        "legacy": {
+          "passed": true,
+          "failures": []
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "building interior / overall mass",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "stone walls",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The stone-walled, wood-roofed barn is recognizable but its roof is an open lattice of loose planks leaving the shell hollow, whereas the mesh and concept show a fully closed gabled mass."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 11057,
+          "output_tokens": 625,
+          "cost_usd": 0.21927850000000002
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"building interior / overall mass\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"stone walls\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The stone-walled, wood-roofed barn is recognizable but its roof is an open lattice of loose planks leaving the shell hollow, whereas the mes",
+          "usage": {
+            "input_tokens": 11057,
+            "output_tokens": 625,
+            "cost_usd": 0.21927850000000002
+          },
+          "source": "live"
+        }
+      ]
+    },
+    {
+      "angle": "-x-z",
+      "azimuthDeg": 225,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/barn-generated/view--x-z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "cobblestone",
+            "fraction": 1,
+            "total": 187,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "dark_oak_planks",
+              "polished_deepslate",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.909
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 1,
+            "total": 331,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "polished_deepslate",
+              "oak_planks",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.414
+          }
+        },
+        "legacy": {
+          "passed": true,
+          "failures": []
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "upper structure / interior",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "loose ridge beams instead of a clad roof plane",
+            "attribute": "material zoning",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The long stone-walled footprint matches the references, but the build is an open-topped shell with only loose log beams spanning the top instead of the solid gable roof the concept and mesh show, so the entire upper massing reads as missing."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 11057,
+          "output_tokens": 611,
+          "cost_usd": 0.21892850000000003
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"upper structure / interior\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"loose ridge beams instead of a clad roof plane\",\"attribute\":\"material zoning\",\"severity\":\"minor\"}],\"rationale\":\"The long stone-walled footprint matches the references, but the build is an open-topped shell with only loose l",
+          "usage": {
+            "input_tokens": 11057,
+            "output_tokens": 611,
+            "cost_usd": 0.21892850000000003
+          },
+          "source": "live"
+        }
+      ]
+    },
+    {
+      "angle": "-x+z",
+      "azimuthDeg": 315,
+      "rendered": true,
+      "render": {
+        "path": "benchmarks/sculpture/multi-angle/barn-generated/view--x+z.png"
+      },
+      "coverage": {
+        "passed": true,
+        "threshold": 0.5,
+        "byZone": {
+          "band0": {
+            "dominant": "cobblestone",
+            "fraction": 1,
+            "total": 322,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "cobblestone",
+              "dark_oak_planks",
+              "polished_deepslate",
+              "oak_planks"
+            ],
+            "dominantFraction": 0.817
+          },
+          "roof": {
+            "dominant": "dark_oak_planks",
+            "fraction": 0.959,
+            "total": 339,
+            "passed": true,
+            "metric": "own",
+            "own": [
+              "dark_oak_planks",
+              "polished_deepslate",
+              "oak_planks",
+              "spruce_stairs",
+              "spruce_slab"
+            ],
+            "dominantFraction": 0.917
+          }
+        },
+        "legacy": {
+          "passed": true,
+          "failures": []
+        }
+      },
+      "verdict": {
+        "schema": "multi-angle-verdict/v1",
+        "verdict": "drifted",
+        "gaps": [
+          {
+            "region": "roof, near slope over the whole length",
+            "attribute": "form",
+            "severity": "major"
+          },
+          {
+            "region": "building interior visible from above (open top / floorless shell)",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "stone walls and dark-wood roof material",
+            "attribute": "palette",
+            "severity": "minor"
+          }
+        ],
+        "rationale": "The stone walls and brown roof material match the references, but the build reads as an open roofless shell with the interior exposed where the concept and mesh show a fully closed gable roof, a major form/massing defect from this angle."
+      },
+      "judge": {
+        "model": "claude-opus-4-8",
+        "usage": {
+          "input_tokens": 11057,
+          "output_tokens": 442,
+          "cost_usd": 0.21470350000000002
+        }
+      },
+      "replies": [
+        {
+          "attempt": 1,
+          "parsed": true,
+          "rawReply": "{\"verdict\":\"drifted\",\"gaps\":[{\"region\":\"roof, near slope over the whole length\",\"attribute\":\"form\",\"severity\":\"major\"},{\"region\":\"building interior visible from above (open top / floorless shell)\",\"attribute\":\"massing\",\"severity\":\"major\"},{\"region\":\"stone walls and dark-wood roof material\",\"attribute\":\"palette\",\"severity\":\"minor\"}],\"rationale\":\"The stone walls and brown roof material match the ref",
+          "usage": {
+            "input_tokens": 11057,
+            "output_tokens": 442,
+            "cost_usd": 0.21470350000000002
+          },
+          "source": "live"
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "schema": "multi-angle-gate/v1",
+    "decided": true,
+    "passed": false,
+    "policy": "multi-angle-budget/v2",
+    "majorCount": 8,
+    "minorCount": 4,
+    "minorBudget": 10,
+    "gapCount": 12,
+    "gapBudget": 2,
+    "gaps": [
+      {
+        "angle": "+x+z",
+        "region": "walls and overall body",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x+z",
+        "region": "roof covering over the nave",
+        "attribute": "massing"
+      },
+      {
+        "angle": "+x+z",
+        "region": "front facade and door",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x-z",
+        "region": "roof",
+        "attribute": "form"
+      },
+      {
+        "angle": "+x-z",
+        "region": "building interior / overall mass",
+        "attribute": "massing"
+      },
+      {
+        "angle": "+x-z",
+        "region": "stone walls",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x-z",
+        "region": "roof",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x-z",
+        "region": "upper structure / interior",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x-z",
+        "region": "loose ridge beams instead of a clad roof plane",
+        "attribute": "material zoning"
+      },
+      {
+        "angle": "-x+z",
+        "region": "roof, near slope over the whole length",
+        "attribute": "form"
+      },
+      {
+        "angle": "-x+z",
+        "region": "building interior visible from above (open top / floorless shell)",
+        "attribute": "massing"
+      },
+      {
+        "angle": "-x+z",
+        "region": "stone walls and dark-wood roof material",
+        "attribute": "palette"
+      }
+    ],
+    "failures": [
+      {
+        "angle": "+x+z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "+x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x-z",
+        "reason": "drifted"
+      },
+      {
+        "angle": "-x+z",
+        "reason": "drifted"
+      }
+    ],
+    "legacy": {
+      "passed": false,
+      "gapBudget": 2,
+      "gapCount": 12
+    },
+    "views": [
+      {
+        "angle": "+x+z",
+        "outcome": "drifted: form"
+      },
+      {
+        "angle": "+x-z",
+        "outcome": "drifted: form"
+      },
+      {
+        "angle": "-x-z",
+        "outcome": "drifted: form"
+      },
+      {
+        "angle": "-x+z",
+        "outcome": "drifted: form"
+      }
+    ]
+  },
+  "kitPresence": {
+    "schema": "kit-presence/v1",
+    "passed": true,
+    "checks": [
+      {
+        "feature": "panel:band0",
+        "block": "cobblestone",
+        "shipped": "cobblestone",
+        "sites": 3030,
+        "missing": 0,
+        "tolerated": {
+          "residue": 25
+        },
+        "gating": true,
+        "passed": true
+      },
+      {
+        "feature": "openings:lintel-sill",
+        "placed": 0,
+        "gating": false,
+        "passed": null
+      }
+    ],
+    "gaps": [],
+    "skips": [
+      {
+        "feature": "frame",
+        "reason": "all-flagged"
+      },
+      {
+        "feature": "course",
+        "reason": "all-flagged"
+      },
+      {
+        "feature": "openings:infill",
+        "reason": "kit names no treatment for this slot"
+      },
+      {
+        "feature": "openings:shutters",
+        "reason": "kit names no treatment for this slot"
+      },
+      {
+        "feature": "openings:door",
+        "reason": "no door-kind aperture declared by the concept (T-099 D7 — detector gap, not absence)"
+      }
+    ],
+    "grammar": {
+      "bindings": {
+        "frame": null,
+        "panels": {
+          "band0": "cobblestone"
+        },
+        "course": null,
+        "openingTreatments": [
+          "oak_door"
+        ],
+        "skipped": [
+          {
+            "feature": "frame",
+            "reason": "all-flagged"
+          },
+          {
+            "feature": "course",
+            "reason": "all-flagged"
+          }
+        ]
+      },
+      "shipped": {
+        "frame": null,
+        "panels": {
+          "band0": "cobblestone"
+        },
+        "course": null
+      },
+      "frame": {
+        "counts": {
+          "wall": 2819,
+          "cornerPost": 26,
+          "roofline": 115,
+          "floorLine": 0
+        },
+        "painted": 0,
+        "adopted": 0,
+        "respected": 0,
+        "skippedIsolated": 0,
+        "alreadyFrame": 0
+      },
+      "fill": {
+        "placements": 31,
+        "byZone": {
+          "band0": {
+            "surface": 3030,
+            "filled": 25,
+            "kept": 3005
+          },
+          "roof": {
+            "surface": 1077,
+            "filled": 6,
+            "kept": 1071
+          }
+        }
+      }
+    },
+    "dressing": {
+      "stats": {
+        "openings": 4,
+        "fullyDressed": 0,
+        "placements": 0,
+        "conflicts": 12,
+        "alreadyDressed": 0
+      },
+      "perOpening": [
+        {
+          "dir": "+z",
+          "kind": "window",
+          "bbox": {
+            "u0": 3,
+            "v0": 8,
+            "u1": 44,
+            "v1": 10
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 44,
+            "sill": 44
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "+z",
+          "kind": "window",
+          "bbox": {
+            "u0": 3,
+            "v0": 13,
+            "u1": 15,
+            "v1": 19
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 15,
+            "sill": 15
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "-z",
+          "kind": "window",
+          "bbox": {
+            "u0": 3,
+            "v0": 8,
+            "u1": 44,
+            "v1": 10
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 44,
+            "sill": 44
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        },
+        {
+          "dir": "-z",
+          "kind": "window",
+          "bbox": {
+            "u0": 32,
+            "v0": 13,
+            "u1": 44,
+            "v1": 19
+          },
+          "applied": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 15,
+            "sill": 15
+          },
+          "placed": {
+            "infill": 0,
+            "shutterLeft": 0,
+            "shutterRight": 0,
+            "lintel": 0,
+            "sill": 0
+          },
+          "conflicts": [
+            {
+              "slot": "infill",
+              "name": "no-infill-treatment",
+              "reduction": "aperture-left-open"
+            },
+            {
+              "slot": "shutterLeft",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            },
+            {
+              "slot": "shutterRight",
+              "name": "no-shutter-treatment",
+              "reduction": "shutter-dropped"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "overall": {
+    "schema": "kit-aware-gate/v1",
+    "decided": true,
+    "passed": false,
+    "components": {
+      "resemblance": {
+        "decided": true,
+        "passed": false
+      },
+      "kitPresence": {
+        "ran": true,
+        "passed": true,
+        "gaps": []
+      }
+    }
+  },
+  "visibility": {
+    "byBand": {
+      "band0": {
+        "status": "visible",
+        "visibleViews": [
+          "+x+z",
+          "+x-z",
+          "-x-z",
+          "-x+z"
+        ],
+        "exposedCells": 1252
+      },
+      "roof": {
+        "status": "visible",
+        "visibleViews": [
+          "+x+z",
+          "+x-z",
+          "-x-z",
+          "-x+z"
+        ],
+        "exposedCells": 812
+      }
+    },
+    "failures": [],
+    "passed": true
+  },
+  "sheet": "pr/assets/frames/multi-angle-barn-generated.png",
+  "labeled": true
+}

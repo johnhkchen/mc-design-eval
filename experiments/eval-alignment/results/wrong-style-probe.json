@@ -1,0 +1,84 @@
+{
+  "schema": "eval-alignment/wrong-style-probe/v1",
+  "evalModel": "claude-opus-4-8",
+  "build": "builds/gatehouse/new-roof/view-+x+z.png",
+  "votes": 3,
+  "results": [
+    {
+      "key": "gatehouse",
+      "tier": "MATCHED",
+      "path": "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+      "q": 30,
+      "votes": [
+        32,
+        28,
+        30
+      ],
+      "sampleDefect": "walls are ragged with vertical fin-like protrusions, uneven base, and a hole punched in the front face"
+    },
+    {
+      "key": "barn",
+      "tier": "same-family",
+      "path": "benchmarks/sculpture/runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png",
+      "q": 32,
+      "votes": [
+        35,
+        30,
+        30
+      ],
+      "sampleDefect": "large notch/hole gouged out of the lower front wall and ragged, gapped wall surfaces"
+    },
+    {
+      "key": "cottage",
+      "tier": "same-family",
+      "path": "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
+      "q": 27,
+      "votes": [
+        20,
+        30,
+        30
+      ],
+      "sampleDefect": "entire facade is monotone gray stone, none of the concept's half-timbered cream-plaster, dark-timber, and two-storey stone-vs-timber scheme is present"
+    },
+    {
+      "key": "church",
+      "tier": "diff-building",
+      "path": "benchmarks/sculpture/runs/016-vBuilding-a-village-church-with-a-square-bell-tower/concept.png",
+      "q": 22,
+      "votes": [
+        30,
+        18,
+        18
+      ],
+      "sampleDefect": "walls are ragged vertical fins with an uneven base and a hole punched through the front face, not a closed shell"
+    },
+    {
+      "key": "koi-fish",
+      "tier": "ABSURD",
+      "path": "benchmarks/sculpture/runs/009-vConcept-a-koi-fish/concept.png",
+      "q": 3,
+      "votes": [
+        2,
+        3,
+        3
+      ],
+      "sampleDefect": "build is a gabled house, concept is a koi fish — entirely wrong form"
+    },
+    {
+      "key": "pineapple",
+      "tier": "ABSURD",
+      "path": "benchmarks/sculpture/runs/004-vConcept-a-pineapple/concept.png",
+      "q": 3,
+      "votes": [
+        3,
+        3,
+        3
+      ],
+      "sampleDefect": "build is a gabled house, concept is a pineapple — entirely wrong overall form"
+    }
+  ],
+  "matched": 30,
+  "absurdMean": 3,
+  "spread": 27,
+  "verdict": "PARTIAL / MARGINAL — see scores"
+}

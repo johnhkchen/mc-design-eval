@@ -1,7 +1,16 @@
 # Specification: LLM-Driven Minecraft Design Evaluation Stack
 
-**Status:** Draft for review
+**Status:** Phase-1 spec of record, partially superseded — see banner.
 **Purpose:** Define a composed toolchain for using LLMs as a Minecraft *design* tool, instrumented so that prompting methods can be compared rigorously on constrained, styled survival-palette builds.
+
+> **Update 2026-06-15.** Sections 1–8 and 10–12 below are the original Phase-1 framing (the 3 × 3
+> prompting-method matrix) and are kept as historical record. The project has since pivoted to a
+> **recognition → construction pipeline** with a **measurement-first** purpose. The architecture of record
+> is now `docs/knowledge/pipeline-philosophy.md`; the governing charter is
+> `docs/knowledge/project-direction.md` (the differentiator is the *measurement*, not prettier builds) and
+> the goal ladder is `docs/knowledge/milestones.md`. **§9 (Evaluation) has been updated below** to reflect
+> the current evaluation architecture; the most recent sprint retro is
+> `docs/findings/2026-06-15-sprint-retro-foundations-through-measurement.md`.
 
 -----
 
@@ -149,6 +158,36 @@ Every trial is scored on **quality** and **cost** together; neither alone is the
 Token accounting comes directly from the Agent SDK's structured message objects (§4) — another reason to use the package rather than `claude -p`, since per-turn usage is available natively.
 
 Log the full Agent SDK transcript per trial alongside the artifact, scores, and token counts, keyed by the §5 metadata, so Phase 1 conclusions are reproducible and Phase 2 inherits the same scoring spine unchanged.
+
+### 9.1 Evaluation architecture (updated 2026-06-15) — measurement-first
+
+The original metrics above (palette adherence, survival buildability, token cost) still hold as cheap
+automatic checks. What changed is that **the evaluation *is* the deliverable**: the differentiator is
+defining quality where it is subjective, breaking the metric to find where it fails, fixing it, and showing
+an agent climb the corrected version (`docs/knowledge/project-direction.md`).
+
+- **Two evaluators, one wall between them** (the pipeline-philosophy rule: creation is free, measurement is
+  frozen):
+  - **The frozen instrument (the ruler).** A scalar, reproducible, concept-vs-render judge used for
+    *measurement*. Pinned and replay-stable; it does not route or revise. It is the thing whose numbers we
+    report and must not tune to taste.
+  - **The creation-loop feedback (the workshop critic).** Free to iterate; it tells the builder what to do
+    next. Never frozen, never the reported number.
+- **Quality is defect-dominated.** A build is only as good as its single worst defect relative to the
+  concept; sub-threshold differences (a slightly-off tint, one stray block) must not move a defect-capped
+  score. This corrected a holistic ranker that a human blind-rank refuted. Measured reliability: std ≤ 2 on
+  a fixed render (run-to-run noise is small; argmax is unstable only when two defects are genuinely
+  co-dominant).
+- **Known, measured gap (the open frontier).** The defect-dominated judge catches *category* errors
+  (a house scored against a koi-fish craters) but is **style-blind within a family** (a fixed building
+  scores ~flat against gatehouse/barn/cottage/church concepts, inside the noise). So it gives the agent no
+  gradient toward the concept's specific identity/style — which is *why* builds homogenize to one grammar.
+- **The fix in progress — structured, construction-addressed, per-style feedback (epic E-39).** The
+  creation critic is being split into two typed BAML layers: **Layer A**, a *per-style* diagnostic judge
+  emitting `{department, expected, present, missing, severity}` (the `expected` carries the style
+  knowledge); and **Layer B**, a *unified* router mapping each item to a construction **department**. The
+  `Department` vocabulary is **generated from the idiom-registry** (one source of truth), so the judge can
+  only name work the builder has tools for. The frozen instrument is untouched by this work.
 
 -----
 

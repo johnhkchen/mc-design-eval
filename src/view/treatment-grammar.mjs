@@ -161,18 +161,22 @@ export function composeTreatment(occ, spec, ctx = {}) {
   const placements = [];
   const layers = [];
   const byLayer = {};
-  let o = occ;
-  const apply = (layer, brush, r) => {
-    if (r.placements.length) { o = overlay(o, r.placements); placements.push(...r.placements); }
-    layers.push({ layer, brush, placed: r.placements.length });
-    byLayer[layer] = { brush, placed: r.placements.length, ...(r.report ? { report: r.report } : {}) };
+  // EACH LAYER RUNS INDEPENDENTLY AGAINST THE ORIGINAL occ (the applyArticulation model: passes are
+  // independent over one base), then we fold ONCE. Folding sequentially would let an earlier proud layer
+  // grow the footprint and corrupt a later layer's geometry derivation (e.g. a base course widening the
+  // corner the quoin then fails to find). Last-writer-wins by position resolves any overlap (fold order =
+  // layer order). PURE.
+  const record = (layer, brush, r, extra = {}) => {
+    if (r.placements.length) placements.push(...r.placements);
+    layers.push({ layer, brush, placed: r.placements.length, ...(extra.skipped ? { skipped: extra.skipped } : {}) });
+    byLayer[layer] = { brush, placed: r.placements.length, ...extra, ...(r.report ? { report: r.report } : {}) };
   };
 
   // 1. base — a proud water-table/plinth course at the floor row.
   if (spec.base) {
     if (typeof spec.base.material !== "string" || !spec.base.material) fail("composeTreatment", "base.material must be a block id");
     const depth = amp("composeTreatment(base)", spec.base, "depth", 1);
-    apply("base", "surface-relief", rowCourse(o, { material: spec.base.material, faces, depth, row: floor, zone: "base" }));
+    record("base", "surface-relief", rowCourse(occ, { material: spec.base.material, faces, depth, row: floor, zone: "base" }));
   }
 
   // 2. field — RECESS BY EXCLUSION: emit nothing. The field reads recessed relative to the proud edges.
@@ -190,7 +194,7 @@ export function composeTreatment(occ, spec, ctx = {}) {
     const run = (E.corners.amplitude?.run != null)
       ? amp("composeTreatment(corners)", E.corners, "run", eaveY - floor + 1)
       : eaveY - floor + 1;
-    apply("corners", "quoin", runBrush(o, "quoin", { material: E.corners.material, faces, run, headerDepth }));
+    record("corners", "quoin", runBrush(occ, "quoin", { material: E.corners.material, faces, run, headerDepth }));
   }
 
   // 4. edges.top — a corner-EXCLUDED eave cornice (the crisp quoin/cornice junction; surfaceRelief, not the
@@ -202,36 +206,34 @@ export function composeTreatment(occ, spec, ctx = {}) {
     let placed = 0;
     const subReports = [];
     for (let k = 0; k < courses; k++) {
-      const r = rowCourse(o, { material: E.top.material, faces, depth, row: eaveY - k, excludeKey: cornerSet, zone: "top" });
-      if (r.placements.length) { o = overlay(o, r.placements); placements.push(...r.placements); placed += r.placements.length; }
+      const r = rowCourse(occ, { material: E.top.material, faces, depth, row: eaveY - k, excludeKey: cornerSet, zone: "top" });
+      if (r.placements.length) { placements.push(...r.placements); placed += r.placements.length; }
       subReports.push({ row: eaveY - k, placed: r.placements.length });
     }
     layers.push({ layer: "top", brush: "surface-relief", placed });
     byLayer.top = { brush: "surface-relief", placed, courses: subReports };
   }
 
-  // 5. edges.opening — the injected dressOpenings arch reveal (frame/door/light). Skipped without the seam.
+  // 5. edges.opening — the injected dressOpenings arch reveal (frame/door/light). Runs on the original occ
+  //    (the walls carry the apertures; relief is independent). Skipped without the seam.
   if (E.opening) {
     const { extractApertures, dressOpenings } = ctx;
     if (typeof extractApertures === "function" && typeof dressOpenings === "function") {
-      const apertures = extractApertures(o);
+      const apertures = extractApertures(occ);
       const slots = {};
       if (E.opening.door) slots.door = { block: E.opening.door };
       if (E.opening.frame) slots.frame = { block: E.opening.frame };
       if (E.opening.light) slots.light = { block: E.opening.light };
-      let placed = 0;
-      if (apertures.length) {
-        const dr = dressOpenings(o, apertures, { slots });
-        if (dr.placements.length) { o = overlay(o, dr.placements); placements.push(...dr.placements); placed = dr.placements.length; }
-      }
-      layers.push({ layer: "opening", brush: "dress-openings", placed });
-      byLayer.opening = { brush: "dress-openings", placed, apertures: apertures.length };
+      const dr = apertures.length ? dressOpenings(occ, apertures, { slots }) : { placements: [] };
+      if (dr.placements.length) placements.push(...dr.placements);
+      record("opening", "dress-openings", { placements: dr.placements }, { apertures: apertures.length });
     } else {
-      layers.push({ layer: "opening", brush: null, placed: 0, skipped: "no dressing seam injected" });
-      byLayer.opening = { placed: 0, skipped: "no dressing seam injected" };
+      record("opening", null, { placements: [] }, { skipped: "no dressing seam injected" });
     }
   }
 
+  // fold ALL layers onto the base ONCE, last-writer-wins (fold order = layer/placement order).
+  const o = placements.length ? overlay(occ, placements) : occ;
   const closure = recessClosureGuard(occ, o, { floor, eaveY });
   return { occ: o, placements, edges, report: { layers, byLayer }, closure };
 }

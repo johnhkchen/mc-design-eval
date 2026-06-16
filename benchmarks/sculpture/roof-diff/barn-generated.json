@@ -8,7 +8,7 @@
     "fitRecord": "generated/barn/provision-fit.json",
     "gablesSource": "provision-fit roofs[].gables",
     "bandFloorSource": "provision-fit masses[].wallTop (per-column)",
-    "buildSha256": "8f33e3af1f45b312c9889418167aef4d2b004f3f943dccab8cfa9e70cad38bb1",
+    "buildSha256": "3eaa739238878142a9b5e612176861ee7ae92c4891312cbecb89ead62b054dc5",
     "glb": "glb/barn.glb",
     "gableCount": 1
   },
@@ -47,71 +47,75 @@
     },
     "views": {
       "+x+z": {
-        "iou": 0.879,
+        "iou": 0.88,
         "grid": 128,
-        "mismatchPx": 941,
+        "mismatchPx": 936,
         "extra": 241,
-        "missing": 700,
+        "missing": 695,
         "byRegion": {
           "ridge": {
             "extra": 0,
-            "missing": 224
+            "missing": 219
           },
           "unpartitioned": {
             "extra": 73,
-            "missing": 70
+            "missing": 68
           },
           "wall": {
             "extra": 168,
             "missing": 406
+          },
+          "ends": {
+            "extra": 0,
+            "missing": 2
           }
         },
         "unattributed": 0
       },
       "+x-z": {
-        "iou": 0.913,
+        "iou": 0.914,
         "grid": 128,
-        "mismatchPx": 677,
+        "mismatchPx": 666,
         "extra": 241,
-        "missing": 436,
+        "missing": 425,
         "byRegion": {
           "ridge": {
             "extra": 1,
-            "missing": 84
+            "missing": 70
           },
           "unpartitioned": {
             "extra": 92,
-            "missing": 48
+            "missing": 41
+          },
+          "ends": {
+            "extra": 0,
+            "missing": 15
           },
           "wall": {
             "extra": 148,
             "missing": 299
-          },
-          "ends": {
-            "extra": 0,
-            "missing": 5
           }
         },
         "unattributed": 0
       },
       "-x-z": {
-        "iou": 0.902,
+        "iou": 0.903,
         "grid": 128,
-        "mismatchPx": 767,
-        "extra": 315,
-        "missing": 452,
+        "mismatchPx": 760,
+        "extra": 317,
+        "missing": 443,
         "byRegion": {
           "ridge": {
-            "extra": 2,
-            "missing": 59
+            "extra": 3,
+            "missing": 50
           },
           "unpartitioned": {
             "extra": 101,
-            "missing": 46
+            "missing": 45
           },
           "ends": {
-            "extra": 0,
-            "missing": 2
+            "extra": 1,
+            "missing": 3
           },
           "wall": {
             "extra": 212,
@@ -125,15 +129,15 @@
         "unattributed": 0
       },
       "-x+z": {
-        "iou": 0.902,
+        "iou": 0.903,
         "grid": 128,
-        "mismatchPx": 768,
+        "mismatchPx": 762,
         "extra": 328,
-        "missing": 440,
+        "missing": 434,
         "byRegion": {
           "ridge": {
             "extra": 0,
-            "missing": 133
+            "missing": 129
           },
           "ends": {
             "extra": 0,
@@ -141,7 +145,7 @@
           },
           "unpartitioned": {
             "extra": 88,
-            "missing": 46
+            "missing": 44
           },
           "wall": {
             "extra": 240,
@@ -542,24 +546,24 @@
               },
               {
                 "v": -4,
-                "build": 16,
+                "build": 17,
                 "glb": 18.132,
-                "delta": -1.743,
-                "rawDelta": -1.132
+                "delta": -0.743,
+                "rawDelta": -0.132
               },
               {
                 "v": -3,
-                "build": 17,
+                "build": 18,
                 "glb": 18.732,
-                "delta": -1.344,
-                "rawDelta": -0.732
+                "delta": -0.344,
+                "rawDelta": 0.268
               },
               {
                 "v": -2,
-                "build": 18,
+                "build": 19,
                 "glb": 19.968,
-                "delta": -1.579,
-                "rawDelta": -0.968
+                "delta": -0.579,
+                "rawDelta": 0.032
               },
               {
                 "v": -1,
@@ -570,9 +574,9 @@
               }
             ],
             "stats": {
-              "rmse": 1.239,
-              "maxAbs": -1.743,
-              "mean": -1.116,
+              "rmse": 0.693,
+              "maxAbs": -1.042,
+              "mean": -0.616,
               "uncovered": 0,
               "count": 6
             }
@@ -598,21 +602,21 @@
               },
               {
                 "v": -4,
-                "build": 16,
-                "glb": null,
-                "delta": null,
-                "rawDelta": null
-              },
-              {
-                "v": -3,
                 "build": 17,
                 "glb": null,
                 "delta": null,
                 "rawDelta": null
               },
               {
-                "v": -2,
+                "v": -3,
                 "build": 18,
+                "glb": null,
+                "delta": null,
+                "rawDelta": null
+              },
+              {
+                "v": -2,
+                "build": 19,
                 "glb": null,
                 "delta": null,
                 "rawDelta": null
@@ -651,37 +655,37 @@
       }
     ],
     "summary": {
-      "mismatchPx": 3153,
+      "mismatchPx": 3124,
       "byRegion": {
         "ridge": {
-          "extra": 3,
-          "missing": 500
+          "extra": 4,
+          "missing": 468
         },
         "unpartitioned": {
           "extra": 354,
-          "missing": 210
+          "missing": 198
         },
         "wall": {
           "extra": 768,
           "missing": 1296
         },
         "ends": {
-          "extra": 0,
-          "missing": 21
+          "extra": 1,
+          "missing": 34
         },
         "slopes": {
           "extra": 0,
           "missing": 1
         }
       },
-      "roofSharePct": 34.539,
+      "roofSharePct": 33.931,
       "worstView": "+x+z"
     }
   },
   "reproducible": {
     "runs": 2,
     "byteIdentical": true,
-    "sha256": "80fd0d5f570076d15a85e8ebc29fc9d9ef421d6982ee4c84568958439eb084e4"
+    "sha256": "dbaa7aed64492f0c8072907a0979239355662dfde05c8bf561806e9882c0ff99"
   },
   "renders": {
     "views": [

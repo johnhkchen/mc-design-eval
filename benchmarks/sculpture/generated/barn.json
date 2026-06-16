@@ -699,16 +699,11 @@
   },
   "generation": {
     "counts": {
-      "mass": 5102,
+      "mass": 3514,
       "roof": 1812,
-      "carved": 1114
+      "carved": 364
     },
     "findings": [
-      {
-        "code": "mass-unsupported",
-        "where": "mass-1",
-        "detail": "protrusion base y=11 rests on no generated cell (the blob support was never built) — omitted, registered"
-      },
       {
         "code": "mass-unsupported",
         "where": "mass-2",
@@ -743,35 +738,235 @@
         "code": "mass-unsupported",
         "where": "mass-8",
         "detail": "protrusion base y=10 rests on no generated cell (the blob support was never built) — omitted, registered"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-0",
+        "detail": "aperture 1×2 at sillY=11 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-1",
+        "detail": "aperture 1×2 at sillY=11 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-wall-spanning",
+        "where": "og-2",
+        "detail": "aperture width 42 ≥ 0.8×wall 48 — blob open top/side, not a window; wall kept solid"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-3",
+        "detail": "aperture 1×1 at sillY=6 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-3",
+        "detail": "aperture 1×1 at sillY=6 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-3",
+        "detail": "aperture 1×1 at sillY=6 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-3",
+        "detail": "aperture 1×1 at sillY=6 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-3",
+        "detail": "aperture 1×1 at sillY=6 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-3",
+        "detail": "aperture 1×1 at sillY=6 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-3",
+        "detail": "aperture 2×1 at sillY=6 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-4",
+        "detail": "aperture 1×1 at sillY=4 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-4",
+        "detail": "aperture 1×1 at sillY=4 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-4",
+        "detail": "aperture 1×1 at sillY=4 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-5",
+        "detail": "aperture 1×1 at sillY=18 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-5",
+        "detail": "aperture 2×1 at sillY=18 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-6",
+        "detail": "aperture 4×1 at sillY=16 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-7",
+        "detail": "aperture 1×3 at sillY=4 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-8",
+        "detail": "aperture 4×1 at sillY=4 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-9",
+        "detail": "aperture 6×1 at sillY=16 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-11",
+        "detail": "aperture 5×1 at sillY=18 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-12",
+        "detail": "aperture 2×1 at sillY=11 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-wall-spanning",
+        "where": "og-13",
+        "detail": "aperture width 42 ≥ 0.8×wall 48 — blob open top/side, not a window; wall kept solid"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-14",
+        "detail": "aperture 1×1 at sillY=6 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-14",
+        "detail": "aperture 1×1 at sillY=6 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-14",
+        "detail": "aperture 1×1 at sillY=6 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-14",
+        "detail": "aperture 1×1 at sillY=6 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-14",
+        "detail": "aperture 1×1 at sillY=6 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-14",
+        "detail": "aperture 1×1 at sillY=6 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-14",
+        "detail": "aperture 2×1 at sillY=6 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-15",
+        "detail": "aperture 1×1 at sillY=4 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-15",
+        "detail": "aperture 1×1 at sillY=4 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-15",
+        "detail": "aperture 1×1 at sillY=4 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-16",
+        "detail": "aperture 1×1 at sillY=18 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-16",
+        "detail": "aperture 2×1 at sillY=18 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-17",
+        "detail": "aperture 4×1 at sillY=16 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-18",
+        "detail": "aperture 1×3 at sillY=4 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-19",
+        "detail": "aperture 4×1 at sillY=4 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-20",
+        "detail": "aperture 6×1 at sillY=16 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-22",
+        "detail": "aperture 5×1 at sillY=18 below 2×2 — blob speck, not carved"
+      },
+      {
+        "code": "opening-incoherent",
+        "where": "og-23",
+        "detail": "aperture 2×1 at sillY=11 below 2×2 — blob speck, not carved"
       }
     ]
   },
   "zeroBlob": {
     "passed": true,
-    "cells": 6844,
+    "cells": 5293,
     "bySource": {
-      "mass": 5032,
+      "mass": 3481,
       "roof": 1812
     },
     "regeneratedFromRecord": true,
     "blobOverlap": {
-      "cells": 1787,
-      "fraction": 0.2611,
+      "cells": 1635,
+      "fraction": 0.3089,
       "note": "EVIDENCE of fit quality — overlap with blob POSITIONS is the cage working; the gate is provenance"
     }
   },
   "cage": {
     "iouVsGlb": {
-      "+x+z": 0.8788619979402678,
-      "+x-z": 0.9129484377009129,
-      "-x-z": 0.9024917365878464,
-      "-x+z": 0.9023397761953205
+      "+x+z": 0.8605429049273124,
+      "+x-z": 0.8856225930680359,
+      "-x-z": 0.8910978852728885,
+      "-x+z": 0.8642539682539683
     },
     "iouVsBlob": {
-      "+x+z": 0.8846499678869622,
-      "+x-z": 0.904203821656051,
-      "-x-z": 0.9055423495558613,
-      "-x+z": 0.9160450120116324
+      "+x+z": 0.8668464304057525,
+      "+x-z": 0.8781015396360861,
+      "-x-z": 0.8903121502300709,
+      "-x+z": 0.8687185929648241
     },
     "blobIouVsGlb": {
       "+x+z": 0.9473616473616474,
@@ -780,14 +975,14 @@
       "-x+z": 0.9309385277004807
     },
     "closure": {
-      "reached": 4748,
+      "reached": 6342,
       "byDirection": {
-        "+x": 30,
-        "-x": 34,
-        "+y": 1936,
+        "+x": 44,
+        "-x": 65,
+        "+y": 2538,
         "-y": 0,
-        "+z": 617,
-        "-z": 671
+        "+z": 68,
+        "-z": 41
       }
     },
     "conditioning": {
@@ -799,10 +994,10 @@
     }
   },
   "census": {
-    "spikes": 175,
-    "ragged": 118,
-    "columns": 944,
-    "raggedRate": 0.125,
+    "spikes": 123,
+    "ragged": 11,
+    "columns": 761,
+    "raggedRate": 0.0145,
     "declared": {
       "sheetCells": 0,
       "capCells": 48,
@@ -817,8 +1012,8 @@
     "iterations": 0,
     "trail": [],
     "tolerated": {
-      "fillResidue": 25,
-      "dressing": 23
+      "fillResidue": 30,
+      "dressing": 28
     }
   },
   "gate": {
@@ -826,6 +1021,15 @@
     "resemblance": {
       "decided": true,
       "passed": false,
+      "policy": "multi-angle-budget/v2",
+      "majorCount": 8,
+      "minorCount": 4,
+      "minorBudget": 10,
+      "legacy": {
+        "passed": false,
+        "gapBudget": 2,
+        "gapCount": 12
+      },
       "gapCount": 12,
       "gapBudget": 2,
       "failures": [
@@ -869,18 +1073,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "walls all around",
-            "attribute": "massing",
-            "severity": "major"
-          },
-          {
-            "region": "roof surface",
+            "region": "walls and overall body",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "stone base and brown roof",
-            "attribute": "palette",
+            "region": "roof covering over the nave",
+            "attribute": "massing",
+            "severity": "major"
+          },
+          {
+            "region": "front facade and door",
+            "attribute": "form",
             "severity": "minor"
           }
         ]
@@ -892,18 +1096,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "near roof slope and ridge",
+            "region": "roof",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "roof shingle coverage across the whole roof",
+            "region": "building interior / overall mass",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "upper gable wall, partly open",
-            "attribute": "form",
+            "region": "stone walls",
+            "attribute": "material zoning",
             "severity": "minor"
           }
         ]
@@ -915,18 +1119,18 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "roof slope facing viewer",
+            "region": "roof",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "roof shingle surface",
+            "region": "upper structure / interior",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "near eave / wall-top junction",
-            "attribute": "form",
+            "region": "loose ridge beams instead of a clad roof plane",
+            "attribute": "material zoning",
             "severity": "minor"
           }
         ]
@@ -938,24 +1142,24 @@
         "verdict": "drifted",
         "gaps": [
           {
-            "region": "both roof slopes — open rafter framing instead of a solid shingled mass",
+            "region": "roof, near slope over the whole length",
             "attribute": "form",
             "severity": "major"
           },
           {
-            "region": "roof shingle coverage across the whole span",
+            "region": "building interior visible from above (open top / floorless shell)",
             "attribute": "massing",
             "severity": "major"
           },
           {
-            "region": "upper gable/wall infill above the stone base",
-            "attribute": "material zoning",
+            "region": "stone walls and dark-wood roof material",
+            "attribute": "palette",
             "severity": "minor"
           }
         ]
       }
     ],
-    "record": "benchmarks/sculpture/multi-angle/barn-generated.json",
+    "record": "measurements/multi-angle/barn-generated.json",
     "sheet": "pr/assets/frames/multi-angle-barn-generated.png"
   },
   "instrument": {
@@ -996,9 +1200,9 @@
       ],
       "kitPresence": true,
       "census": {
-        "spikes": 175,
-        "ragged": 118,
-        "raggedRate": 0.125
+        "spikes": 123,
+        "ragged": 11,
+        "raggedRate": 0.0145
       },
       "fitRefusals": 31
     },
@@ -1019,9 +1223,9 @@
   "reproducible": {
     "doubleRun": "byte-identical (in-process)",
     "sha256": {
-      "base": "5d30cdef190562aba515107c442b865141cb1ac6b9f7a9145710318d931a6ed1",
-      "grammarFinal": "a7b1d5758e305c9127e83446670296477fd038a8bd287b4491a9a4e487b29cf0",
-      "styled": "8f33e3af1f45b312c9889418167aef4d2b004f3f943dccab8cfa9e70cad38bb1",
+      "base": "6c9c7443cf448dd680a136ef25e92cd0bdbd3e0c657513c51d8f8ed9ee18affe",
+      "grammarFinal": "2c478bf29902a99ec0333529902b538206b81aa173e68b0a17d0313c42edcaff",
+      "styled": "9d068374f2ccd8e774b32df97f81e4c91b9dce04b9949f7bfd7c40bff8481f1f",
       "fit": "f53b79c38ab7b0690c9021a0cc3db8c23154ec066c39952d7024678475703194"
     }
   },

@@ -47,6 +47,16 @@ Source of truth: [`docs/specification.md`](../../specification.md).
 | E-35 | facade-grammar-and-relief                  | high   | E-34                | §1, §5, §6, §9 |
 | E-36 | defreeze-the-creation-loop                 | high   | —                   | §1, §5, §6, §9 |
 | E-37 | canonical-build-flow                       | high   | E-36                | §1, §5, §6, §9 |
+| E-38 | measurement-and-autonomous-climb           | high   | E-37                | §9             |
+| E-39 | structured-feedback-and-style-fidelity     | high   | E-38                | §9             |
+| E-40 | style-distance-severity                    | high   | E-39                | §9             |
+| E-41 | typed-critique-kind                        | high   | E-40                | §9             |
+| E-42 | build-faithfulness                         | high   | E-41                | §9             |
+| E-43 | surface-treatment-grammar                  | high   | E-42                | §9             |
+
+> E-01…E-38 archived. E-39 done (machinery; bets refuted → scalar is the gate). E-40 done (term over-caps
+> → typed `kind`). E-41 done (typed kind). **E-42 (build faithfulness) active → E-43 (surface-treatment
+> grammar: compositional trim/band/quoin/recess) queued after.** Forward plan: `docs/active/ROADMAP.md`.
 
 ## Dependency graph
 

@@ -1,0 +1,13 @@
+{
+  "schema": "treatment-grammar/v1",
+  "subject": "gatehouse",
+  "style": "rustic",
+  "rationale": "A's restraint (T-174-01 spike): the load-bearing trio — full-height geometry-derived rubble quoins + a single corner-excluded eave cornice + the timber arch reveal — plus a water-table base course. The RUBBLE DRESSING (cobblestone) treats every edge (corners, base, cornice) against the DRESSED-STONE field (stone_bricks): a coherent rustic grammar AND it reads, where a same-material course would no-op (surfaceRelief skips a source cell already carrying the relief material). NO mid-field string course (B's busy tell). Amplitude is first-class and tuned for readability at building scale.",
+  "base": { "material": "cobblestone", "amplitude": { "depth": 1 } },
+  "field": { "recess": true },
+  "edges": {
+    "corners": { "material": "cobblestone", "amplitude": { "headerDepth": 2 } },
+    "top": { "material": "cobblestone", "amplitude": { "depth": 1, "courses": 1 } },
+    "opening": { "frame": "dark_oak_log", "door": "spruce_door", "light": "lantern" }
+  }
+}
