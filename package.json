@@ -117,7 +117,8 @@
     "style:form": "node scripts/form-style.mjs",
     "style:ratify": "node scripts/ratify-pack.mjs",
     "factory:receipts": "node scripts/factory-receipts.mjs --style saltcrag",
-    "lisa:claim": "node scripts/lisa-claim.mjs"
+    "lisa:claim": "node scripts/lisa-claim.mjs",
+    "corpus-referee": "node experiments/eval-alignment/corpus-referee.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
