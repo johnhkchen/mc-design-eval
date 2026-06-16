@@ -25,7 +25,7 @@
  */
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { PNG } from "pngjs";
 
@@ -41,13 +41,18 @@ import { decodeImage } from "../../src/color/palette-extract.mjs";
 import {
   critiqueEvidence, itemStyleClass, styleFidelityScore,
   worstDepartmentOfDispatch, worstDepartmentOfFusedReply, dispatchCorrectness, pairAgreement,
+  kindReliability,
   BAKEOFF_SCHEMA,
 } from "../../src/workshop/bakeoff-score.mjs";
 import { loadDefectCorpus, singleStates, pairStates } from "../../src/workshop/defect-corpus.mjs";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 const HERE = fileURLToPath(new URL("./", import.meta.url));
-const OUT_DIR = join(ROOT, "docs/active/work/T-169-01");
+// Output sinks are env-gated with the T-169-01 (E-40 baseline) defaults so a baseline re-run still lands
+// where FINDINGS/recommendation.md cite it; T-170-02 routes both to its own dir + a `-kind.json` results
+// file so the post-`kind` run does NOT clobber the committed E-40 baseline.
+const OUT_DIR = join(ROOT, process.env.REFEREE_OUT_DIR ?? "docs/active/work/T-169-01");
+const RESULTS = join(ROOT, process.env.REFEREE_RESULTS ?? "experiments/eval-alignment/results/corpus-referee.json");
 const TIER = "strong";
 const VOTES = 2;
 const NOISE = 12; // the E-38 per-call noise band
@@ -76,7 +81,9 @@ const round = (x) => Math.round(x);
 /** Persist the full item triple + the SAME class the scorer uses — the audit trail critiqueEvidence drops. */
 const itemsOf = (critique) => (critique?.items ?? []).map((it) => ({
   department: it.department, severity: it.severity,
-  present: it.present ?? "", missing: it.missing ?? "", styleClass: itemStyleClass(it),
+  present: it.present ?? "", missing: it.missing ?? "",
+  kind: it.kind ?? null, // T-170-02: the RAW tag the judge chose (null ⇒ untagged ⇒ structural fallback)
+  styleClass: itemStyleClass(it),
 }));
 
 /** Minimal side-by-side composite (no GL, no model). decodeImage sniffs JPEG/PNG. */
@@ -140,6 +147,7 @@ async function runCrater() {
   const sc = (k) => conditions.find((c) => c.key === k)?.scoreMean ?? null;
   const A = sc("A-matched"), B = sc("B-arc"), B2 = sc("B2-chapelle"), C = sc("C-control");
   const spreads = { "A-B": A - B, "A-B2": A - B2, "A-C": A - C, "C-B (pack effect)": C - B };
+  const kindRel = kindReliability(conditions); // T-170-02: per-condition tag distribution + replace contrast
   const cratered = A != null && B != null && (A - B) > 2 * NOISE;
   const collapsed = A != null && B != null && A <= NOISE && B <= NOISE; // the new-term failure signature
   const verdict = cratered
@@ -147,7 +155,7 @@ async function runCrater() {
     : collapsed
       ? "COLLAPSED — matched AND wrong-style both FLOORED; the term over-penalizes the close style (live Layer A emits present+missing for every item → itemStyleClass caps everything). NOT a crater."
       : "DID NOT CRATER — matched and wrong-style stay close, inside the ±12 noise";
-  return { build: CRATER_BUILD, program: "synthetic-gatehouse (fixed)", conditions, spreads, cratered, collapsed, verdict, scores: { A, B, B2, C } };
+  return { build: CRATER_BUILD, program: "synthetic-gatehouse (fixed)", conditions, spreads, cratered, collapsed, verdict, scores: { A, B, B2, C }, kindReliability: kindRel };
 }
 
 // ====================== SECTION B — CORPUS AGREEMENT (AC #2) ======================
@@ -249,12 +257,13 @@ async function main() {
     };
   } catch { baseline = "not found"; }
 
-  await mkdir(join(HERE, "results"), { recursive: true });
-  await writeFile(join(HERE, "results", "corpus-referee.json"),
+  await mkdir(dirname(RESULTS), { recursive: true });
+  await writeFile(RESULTS,
     JSON.stringify({ schema: BAKEOFF_SCHEMA, tier: TIER, votes: VOTES, noiseBand: NOISE, crater, agreement, bakeoff, baseline }, null, 2) + "\n");
 
   console.log("\n================ CORPUS REFEREE VERDICT ================");
   console.log(`CRATER:    A=${crater.scores.A} B=${crater.scores.B} B2=${crater.scores.B2} C=${crater.scores.C}  -> ${crater.verdict}`);
+  console.log(`KIND:      contrast=${crater.kindReliability.replaceContrast}  -> ${crater.kindReliability.verdict}`);
   console.log(`AGREEMENT: ${agreement.verdict}`);
   console.log(`BAKE-OFF:  split ${bakeoff.summary.split.correct}/${bakeoff.summary.n}  fused ${bakeoff.summary.fused.correct}/${bakeoff.summary.n}  -> ${bakeoff.summary.verdict}`);
   console.log("=======================================================");
