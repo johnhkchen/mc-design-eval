@@ -58,6 +58,7 @@
     "baml:gen": "baml-cli generate --from baml_src",
     "baml:mint": "node scripts/mint-baml-fixture.mjs",
     "backlog:generate": "node scripts/design-backlog.mjs",
+    "corpus:check": "node -e \"import('./src/workshop/defect-corpus.mjs').then(m=>{const c=m.loadDefectCorpus();console.log('corpus OK:',c.states.length,'states,',c.excluded.length,'excluded')})\"",
     "presence:cottage": "node benchmarks/sculpture/kit-presence.mjs --subject cottage",
     "components:cottage": "node benchmarks/sculpture/component-decomposition.mjs --subject cottage",
     "components:gatehouse": "node benchmarks/sculpture/component-decomposition.mjs --subject gatehouse",

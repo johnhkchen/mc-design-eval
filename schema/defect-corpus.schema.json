@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "defect-corpus/v1",
+  "title": "Defect corpus (E-40 / S-167) — labeled (concept, build-render) states",
+  "description": "The labeled test corpus E-40's style-distance severity term validates against. Single-defect states carry a worst-construction-department label; wrong-style pairs carry a pairwise more-faithful label. Single-rater; no aggregation logic. worstDepartment membership in DEPARTMENTS is enforced in the loader (one composition point: src/pack/departments.mjs), not duplicated here.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "rater", "states"],
+  "properties": {
+    "schema": { "const": "eval-alignment/defect-corpus/v1" },
+    "rater": { "type": "string", "minLength": 1, "description": "single-rater identity + date + the no-aggregation limitation" },
+    "notes": { "type": "string" },
+    "states": {
+      "type": "array",
+      "minItems": 8,
+      "items": { "$ref": "#/$defs/state" }
+    },
+    "excluded": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/excluded" }
+    }
+  },
+  "$defs": {
+    "confidence": { "enum": ["high", "medium", "low"] },
+    "state": {
+      "oneOf": [
+        { "$ref": "#/$defs/singleState" },
+        { "$ref": "#/$defs/pairState" }
+      ]
+    },
+    "singleState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "subject", "concept", "renderDir", "axis", "labels"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "kind": { "const": "single" },
+        "subject": { "type": "string", "minLength": 1 },
+        "concept": { "type": "string", "minLength": 1 },
+        "renderDir": { "type": "string", "minLength": 1 },
+        "axis": { "type": "string", "minLength": 1 },
+        "note": { "type": "string" },
+        "labels": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["worstDepartment", "confidence"],
+          "properties": {
+            "worstDepartment": { "type": "string", "minLength": 1 },
+            "confidence": { "$ref": "#/$defs/confidence" }
+          }
+        }
+      }
+    },
+    "pairState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "subject", "renderDir", "axis", "labels"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "kind": { "const": "pair" },
+        "subject": { "type": "string", "minLength": 1 },
+        "renderDir": { "type": "string", "minLength": 1 },
+        "axis": { "type": "string", "minLength": 1 },
+        "note": { "type": "string" },
+        "labels": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["matchedConcept", "wrongStyleConcept", "moreFaithful", "confidence"],
+          "properties": {
+            "matchedConcept": { "type": "string", "minLength": 1 },
+            "wrongStyleConcept": { "type": "string", "minLength": 1 },
+            "moreFaithful": { "enum": ["matched", "wrongStyle"] },
+            "confidence": { "$ref": "#/$defs/confidence" }
+          }
+        }
+      }
+    },
+    "excluded": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "reason"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "renderDir": { "type": "string" },
+        "reason": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

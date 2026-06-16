@@ -1,0 +1,133 @@
+{
+  "schema": "eval-alignment/defect-corpus/v1",
+  "rater": "single-rater: claude (agent), 2026-06-16, labeled by direct render inspection beside each concept. Single-rater honest — this is one rater's ground truth, NOT inter-rater agreement (no aggregation logic exists or is implied). A limitation, recorded as such (S-167 note).",
+  "notes": "E-40 / S-167 labeled defect corpus. 8 states: 4 single-defect (worst construction department) + 4 wrong-style pairs (pairwise more-faithful). Spans roof / structural-integrity / surface-relief / opening, plus palette+style via the wrong-style pairs. GAP, stated honestly: massing/proportion is NOT a construction department (the S-163 decision — no idiom resizes a mass), so no clean single-department massing-worst state exists; massing-dominated candidates are in `excluded`, which is itself the multi-label signal the S-167 falsifiable claim asks us to report. Wrong-style pairs sit on CLEAN builds (a present, reading roof) so they test style distance, not a missing-roof confound — the corpus is not gated on the roof. Count is fixed at 8 by contract for S-168/S-169 stability.",
+  "states": [
+    {
+      "id": "barn-roofless",
+      "kind": "single",
+      "subject": "barn",
+      "concept": "benchmarks/sculpture/runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png",
+      "renderDir": "builds/barn/round-1",
+      "axis": "roof",
+      "labels": { "worstDepartment": "ROOF", "confidence": "high" },
+      "note": "Open box with NO roof at all vs the concept's steep gabled roof. Unambiguous worst defect — the roof department."
+    },
+    {
+      "id": "barn-holey-walls",
+      "kind": "single",
+      "subject": "barn",
+      "concept": "benchmarks/sculpture/runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png",
+      "renderDir": "builds/barn/new-roof",
+      "axis": "structural-integrity",
+      "labels": { "worstDepartment": "WALL", "confidence": "medium" },
+      "note": "Roof now present and reads; the walls are riddled with holes / ragged courses vs the concept's solid ashlar-and-rubble walls. Worst defect is the wall envelope (structural integrity). Medium: holes are a wall-integrity defect, not the missing-element class the dispatch metric is cleanest on."
+    },
+    {
+      "id": "cottage-plain-upper",
+      "kind": "single",
+      "subject": "cottage",
+      "concept": "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
+      "renderDir": "builds/cottage/new-roof",
+      "axis": "surface-relief",
+      "labels": { "worstDepartment": "WALL", "confidence": "medium" },
+      "note": "Roof + stone base read; the upper storey is plain — missing the concept's half-timber stud grammar (surface relief on the wall). Chimney is also absent (a secondary CHIMNEY divergence), which is why this is medium, not high — two departments diverge, WALL is the larger surface."
+    },
+    {
+      "id": "gatehouse-gaping-gate",
+      "kind": "single",
+      "subject": "gatehouse",
+      "concept": "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+      "renderDir": "builds/gatehouse/new-roof",
+      "axis": "opening",
+      "labels": { "worstDepartment": "OPENING", "confidence": "medium" },
+      "note": "Clean stone gatehouse, gable roof reads; the front gate is an unframed rectangular gap with no arch and no timber surround vs the concept's arched timber gate. Worst defect is the opening."
+    },
+    {
+      "id": "gatehouse-vs-arc",
+      "kind": "pair",
+      "subject": "gatehouse",
+      "renderDir": "builds/gatehouse/new-roof",
+      "axis": "style-distance",
+      "labels": {
+        "matchedConcept": "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+        "wrongStyleConcept": "benchmarks/temple-facade/concepts/arc-A-flash.png",
+        "moreFaithful": "matched",
+        "confidence": "high"
+      },
+      "note": "Clean rustic stone gatehouse. Far more faithful to the rustic gatehouse concept than to arc-A, a polychrome (orange/blue/gold) classical triumphal arch — wrong palette, wrong relief, wrong massing. An obvious pick; cross-style fidelity IS a stable signal here."
+    },
+    {
+      "id": "gatehouse-vs-chapelle",
+      "kind": "pair",
+      "subject": "gatehouse",
+      "renderDir": "builds/gatehouse/new-roof",
+      "axis": "style-distance",
+      "labels": {
+        "matchedConcept": "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+        "wrongStyleConcept": "benchmarks/temple-facade/concepts/chapelle-A-flash.png",
+        "moreFaithful": "matched",
+        "confidence": "high"
+      },
+      "note": "Triangulates gatehouse-vs-arc with a gothic cathedral concept (chapelle-A) instead of the classical arch — controls arc-A's polychrome-palette confound, mirroring clean-wrong-style.mjs's B/B2 design."
+    },
+    {
+      "id": "cottage-vs-arc",
+      "kind": "pair",
+      "subject": "cottage",
+      "renderDir": "builds/cottage/new-roof",
+      "axis": "style-distance",
+      "labels": {
+        "matchedConcept": "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
+        "wrongStyleConcept": "benchmarks/temple-facade/concepts/arc-A-flash.png",
+        "moreFaithful": "matched",
+        "confidence": "high"
+      },
+      "note": "Clean Tudor cottage (timber + plaster + stone base). Far more faithful to the cottage concept than to the polychrome classical arc-A. Second subject so the pair signal is not gatehouse-only."
+    },
+    {
+      "id": "cottage-vs-chapelle",
+      "kind": "pair",
+      "subject": "cottage",
+      "renderDir": "builds/cottage/new-roof",
+      "axis": "style-distance",
+      "labels": {
+        "matchedConcept": "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
+        "wrongStyleConcept": "benchmarks/temple-facade/concepts/chapelle-A-flash.png",
+        "moreFaithful": "matched",
+        "confidence": "high"
+      },
+      "note": "Cottage triangulation against the gothic cathedral concept — controls the arc-A palette confound for the cottage subject."
+    }
+  ],
+  "excluded": [
+    {
+      "id": "barn-round-3",
+      "renderDir": "builds/barn/round-3",
+      "reason": "Visually identical to builds/barn/round-1 (roofless box) — a non-unique frame. Including it would pad the count with a duplicate state; no padding (S-167 AC)."
+    },
+    {
+      "id": "barn-final",
+      "renderDir": "builds/barn/final",
+      "reason": "Also visually identical to the roofless round-1 state, and has only one azimuth. Duplicate frame — excluded, not padded."
+    },
+    {
+      "id": "cottage-round-1",
+      "renderDir": "builds/cottage/round-1",
+      "reason": "Chaotic / collapsed roof and holed walls — no single unambiguous worst department (could be ROOF or WALL or massing). Exactly the ambiguous-worst-defect case the falsifiable claim says to exclude rather than guess."
+    },
+    {
+      "id": "cottage-cream-vs-pink",
+      "renderDir": "builds/cottage/final",
+      "reason": "cottage round-3 vs final differ only in a sub-threshold cream->pink infill tint. E-38 human blind-rank found these FLAT (all D-); the 'more faithful' pick is genuinely ambiguous, so labeling moreFaithful here would launder noise into ground truth. This is the same-style sub-threshold wobble the S-167 claim warns about — recorded, not faked."
+    },
+    {
+      "id": "autonomy-and-saltcrag-dirs",
+      "reason": "builds/*/autonomy and builds/barn--saltcrag/* have 0 rendered view PNGs on disk — no usable (concept, render) state to label."
+    },
+    {
+      "id": "massing-proportion-axis",
+      "reason": "No clean single-department state exists for the massing/proportion axis: proportion is NOT a construction department (S-163 — no idiom resizes a mass; it rides the mass adjust-params levers). A massing-worst state cannot get a single worstDepartment, so it is reported here as the multi-label signal rather than force-fit to WALL."
+    }
+  ]
+}
