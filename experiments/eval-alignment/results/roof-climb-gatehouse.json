@@ -1,23 +1,21 @@
 {
-  "schema": "eval-alignment/roof-climb/v1",
+  "schema": "eval-alignment/roof-climb/v2",
+  "subject": "gatehouse",
   "eaveY": 18,
-  "ridgeY": 31,
-  "gableCells": 5292,
-  "baseline": {
-    "worstDefect": {
-      "axis": "massing/proportion",
-      "what": "build reads as a formless dark mass, not a gabled house — walls absent/ragged, no recognizable roof"
+  "gables": 1,
+  "census": {
+    "solidPrism": {
+      "roof": 5292,
+      "total": 8692,
+      "frac": 0.6088357109986194
     },
-    "quality": 15,
-    "rationale": "The concept is a clean stone house with a steep gabled roof, but the build collapses into an amorphous dark blob with hanging ragged walls, holes, and no legible massing or roof form, capping quality in the very low range."
+    "covering": {
+      "roof": 729,
+      "total": 4635,
+      "frac": 0.15728155339805824
+    }
   },
-  "newRoof": {
-    "worstDefect": {
-      "axis": "structural integrity",
-      "what": "walls riddled with holes/gaps and ragged, unfinished base courses — not watertight"
-    },
-    "quality": 25,
-    "rationale": "Massing and the gabled roof read correctly, but the stone walls are full of holes and end in ragged, incomplete base courses (plus the roof is brown rather than the concept's dark slate), and that structural failure caps the score in the low range."
-  },
-  "delta": 10
+  "closureWallBand": 0.6153846153846154,
+  "coveringCells": 1067,
+  "solidCells": 5292
 }

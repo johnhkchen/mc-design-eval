@@ -1,0 +1,21 @@
+{
+  "schema": "eval-alignment/roof-climb/v2",
+  "subject": "cottage",
+  "eaveY": 13,
+  "gables": 2,
+  "census": {
+    "solidPrism": {
+      "roof": 5099,
+      "total": 6559,
+      "frac": 0.7774050922396707
+    },
+    "covering": {
+      "roof": 1084,
+      "total": 2845,
+      "frac": 0.38101933216168715
+    }
+  },
+  "closureWallBand": 0.4519230769230769,
+  "coveringCells": 885,
+  "solidCells": 4680
+}

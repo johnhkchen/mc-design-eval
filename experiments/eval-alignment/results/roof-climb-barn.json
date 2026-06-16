@@ -1,23 +1,21 @@
 {
-  "schema": "eval-alignment/roof-climb/v1",
+  "schema": "eval-alignment/roof-climb/v2",
+  "subject": "barn",
   "eaveY": 12,
-  "ridgeY": 24,
-  "gableCells": 8736,
-  "baseline": {
-    "worstDefect": {
-      "axis": "structural integrity",
-      "what": "hollow ragged shell, no roof, broken walls"
+  "gables": 1,
+  "census": {
+    "solidPrism": {
+      "roof": 8736,
+      "total": 11758,
+      "frac": 0.7429835005953394
     },
-    "quality": 12,
-    "rationale": "The build is a fragmentary open-topped shell with ragged holey walls and no gabled roof at all, so it fails to read as the solid stone-and-timber barn of the concept despite recognizable stone/wood materials."
+    "covering": {
+      "roof": 1248,
+      "total": 4759,
+      "frac": 0.2622399663794915
+    }
   },
-  "newRoof": {
-    "worstDefect": {
-      "axis": "structural integrity",
-      "what": "walls riddled with holes and ragged, broken lower courses"
-    },
-    "quality": 45,
-    "rationale": "The gable roof form and overall long massing read correctly, but the stone walls are perforated with holes and break down into chaotic, incomplete geometry along the lower courses—a glaring structural defect that caps the build well below the clean, solid walls of the concept."
-  },
-  "delta": 33
+  "closureWallBand": 0.7013888888888888,
+  "coveringCells": 1560,
+  "solidCells": 8736
 }
