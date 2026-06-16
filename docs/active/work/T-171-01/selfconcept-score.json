@@ -1,0 +1,101 @@
+{
+  "schema": "selfconcept-score/v1",
+  "ticket": "T-171-01",
+  "tier": "strong",
+  "votes": 2,
+  "pack": "rustic",
+  "concept": "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+  "build": "benchmarks/sculpture/recognition/gatehouse.artifact.json",
+  "program": "benchmarks/sculpture/recognition/gatehouse.program.json",
+  "materials": {
+    "before": {
+      "minecraft:spruce_planks": 52.8,
+      "minecraft:polished_basalt": 35.8,
+      "minecraft:spruce_stairs": 8.1,
+      "minecraft:deepslate_bricks": 3.3,
+      "minecraft:cobblestone": 0
+    },
+    "after": {
+      "minecraft:dark_oak_planks": 53.1,
+      "minecraft:stone_bricks": 46.5,
+      "minecraft:dark_oak_log": 0.2,
+      "minecraft:cobblestone": 0.2
+    }
+  },
+  "e40Floor": 2,
+  "scoreMean": 42,
+  "lift": 40,
+  "verdict": "LIFTED — self-concept 42 ≫ the ~2 floor (faithful stone walls moved the score)",
+  "votesDetail": [
+    {
+      "score": 40,
+      "nWrongStyle": 0,
+      "wrongStyleCapped": false,
+      "items": [
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "uniform stone_bricks on all four walls, corners flush with the field",
+          "missing": "cobblestone rubble quoins at the corners",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "a bare rectangular passage opening cut straight into the stone, no timber surround",
+          "missing": "dark_oak_log arched timber frame around the passage",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "uniform brown stepped roof, eave and verge edges the same wood as the field",
+          "missing": "lighter stone eave/verge banding course",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ]
+    },
+    {
+      "score": 44,
+      "nWrongStyle": 0,
+      "wrongStyleCapped": false,
+      "items": [
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "bare stone-brick arched opening, no frame, door, or lantern",
+          "missing": "dark_oak_log timber surround, spruce_door, lantern",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "uniform stone_bricks walls with no corner contrast",
+          "missing": "cobblestone rubble quoins at the corners",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "bare slit openings in the stone field",
+          "missing": "dark_oak_trapdoor shutters, spruce_fence infill",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "ROOF",
+          "severity": "minor",
+          "present": "uniform brown stepped roof with no edge banding",
+          "missing": "contrasting eave/verge trim course",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ]
+    }
+  ]
+}
