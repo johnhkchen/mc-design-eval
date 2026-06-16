@@ -1,0 +1,430 @@
+{
+  "schema": "bakeoff/v1",
+  "tier": "strong",
+  "votes": 2,
+  "noiseBand": 12,
+  "crater": {
+    "build": "builds/gatehouse/faithful",
+    "program": "synthetic-gatehouse (fixed)",
+    "conditions": [
+      {
+        "key": "A-matched",
+        "tier": "MATCHED",
+        "pack": "packs/rustic.json",
+        "concept": "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+        "note": "rustic concept + rustic pack (build matches both)",
+        "scoreMean": 28,
+        "votes": [
+          {
+            "score": 40,
+            "nWrongStyle": 1,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "a bare rectangular doorway hole and unframed wall slits — no door, no arch, no surround",
+                "missing": "arch head, spruce_door, dark_oak_log timber frame/dressing, door-lantern, dark_oak_trapdoor shutters, spruce_fence window infill",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "uniform smooth stone_bricks across the whole wall field, no cobble texture and no field/dressing distinction",
+                "missing": "cobblestone field-stone coursing; quoin/dressing contrast against the field",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              }
+            ]
+          },
+          {
+            "score": 16,
+            "nWrongStyle": 2,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "bare arched gate opening (an empty stone hole) and bare slit windows",
+                "missing": "spruce_door, dark_oak_log timber frame, lantern, dark_oak_trapdoor shutters, spruce_fence window infill",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "walls are uniform stone_bricks on every face with no cobblestone field and no dressing distinction",
+                "missing": "cobblestone field; stone_bricks demoted to dressing only",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "a blocky stepped plank pyramid (full plank cubes terraced upward), no stair/slab courses and no contrasting trim",
+                "missing": "spruce_stairs courses, spruce_slab steps, dark_oak_planks trim",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "B-arc",
+        "tier": "WRONG",
+        "pack": "packs/guildhall.json",
+        "concept": "benchmarks/temple-facade/concepts/arc-A-flash.png",
+        "note": "classical arch + guildhall pack",
+        "scoreMean": 0,
+        "votes": [
+          {
+            "score": 0,
+            "nWrongStyle": 2,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "stepped gable in brown wood (spruce/dark-oak plank stairs)",
+                "missing": "stone roof material — deepslate_tiles field and stone-brick stair/slab courses",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "bare rectangular gate notch cut in the wall, no surround, no door",
+                "missing": "voussoir arch ring and dark_oak_door",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "plain stone-brick corners, undifferentiated",
+                "missing": "chiseled_stone_bricks quoins",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "WALL",
+                "severity": "minor",
+                "present": "flat unbroken stone-brick wall planes",
+                "missing": "polished_diorite pilasters",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "WALL",
+                "severity": "minor",
+                "present": "stone_bricks run uniformly from base to eave with no plinth or material change",
+                "missing": "smooth_stone ground field and plinth base course",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "nWrongStyle": 2,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "stepped courses of brown wooden stairs (spruce/dark-oak tone) forming a steep stepped pyramid",
+                "missing": "deepslate_tiles field, stone_brick_stairs courses, stone_brick_slab ridge",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "plain stone_bricks running uninterrupted around every corner",
+                "missing": "chiseled_stone_bricks quoins",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "flat unbroken stone_brick wall faces",
+                "missing": "polished_diorite pilasters",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "a rough arched gate aperture cut into the bare wall",
+                "missing": "stone_bricks voussoir dressing and dark_oak_door",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "WALL",
+                "severity": "minor",
+                "present": "stone_bricks used uniformly from base to eave with no ground-storey or plinth distinction",
+                "missing": "smooth_stone ground field and plinth banding",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "B2-chapelle",
+        "tier": "WRONG",
+        "pack": "packs/guildhall.json",
+        "concept": "benchmarks/temple-facade/concepts/chapelle-A-flash.png",
+        "note": "gothic cathedral + guildhall pack (triangulates arc-A's palette confound)",
+        "scoreMean": 20,
+        "votes": [
+          {
+            "score": 40,
+            "nWrongStyle": 1,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "Stepped gabled roof in a brown wood-toned material (reads as wood planks, not stone)",
+                "missing": "deepslate_tiles field material and stone_brick_stairs/slab coursing; eave-overhang course at the edge",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "A bare arched gate void cut in the wall and a few narrow window slits, all undressed and unglazed",
+                "missing": "stone_bricks arch voussoir / opening-dressing, dark_oak_door, glass_pane glazing",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "WALL",
+                "severity": "minor",
+                "present": "A single uniform stone_bricks field across the whole wall with no corner or vertical articulation",
+                "missing": "chiseled_stone_bricks quoins, polished_diorite pilasters, plinth, course.slab banding, ground/upper field split",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "nWrongStyle": 2,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "brown wood-toned stepped/terraced roof (reads as dark_oak plank/stair family)",
+                "missing": "stone roofing — deepslate_tiles field and stone_brick course trim",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "a bare rectangular gate hole punched in the wall, no dressing",
+                "missing": "stone_bricks arch voussoir ring, dark_oak_door leaf, glass_pane window glazing",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "plain undifferentiated stone-brick corners and faces, no relief",
+                "missing": "quoins, pilasters, and plinth",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "WALL",
+                "severity": "minor",
+                "present": "uniform stone_bricks for the full height with no ground/upper split",
+                "missing": "smooth_stone ground-storey field",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "C-control",
+        "tier": "CONTROL",
+        "pack": "packs/rustic.json",
+        "concept": "benchmarks/temple-facade/concepts/arc-A-flash.png",
+        "note": "classical concept + RUSTIC pack (isolates pack vs concept-image)",
+        "scoreMean": 8,
+        "votes": [
+          {
+            "score": 0,
+            "nWrongStyle": 3,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "Uniform light-grey stone_bricks covering every wall on all four faces",
+                "missing": "cobblestone field, dark_oak_log timber-frame studs, white_terracotta upper-storey infill",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "Stepped dark-brown wood stairs forming a terraced cap (reads dark_oak), no plank field or slab steps",
+                "missing": "spruce_planks field, spruce_slab step layer, dark_oak_planks trim — and a clean continuous gable pitch rather than a coarse stepped pyramid",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "A small flat-headed rectangular hole in the front wall, no door",
+                "missing": "arch treatment, spruce_door, door-lantern",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "Faint speckle marks on the wall reading as stray fence stubs, no framed window",
+                "missing": "dark_oak_trapdoor shutters, coherent spruce_fence window infill",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          },
+          {
+            "score": 16,
+            "nWrongStyle": 2,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "Entire wall envelope built in stone_bricks — the dressing material used as the whole field",
+                "missing": "cobblestone field; rustic rough-coursed masonry read",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "Stepped stair courses in a dark brown wood that reads as dark_oak_planks across the whole roof field",
+                "missing": "spruce_planks field tone; spruce/dark-oak field-vs-trim distinction",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "Plain square-cut rectangular opening punched into the front wall, no door",
+                "missing": "arch treatment/voussoir; spruce_door; door-lantern",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "spreads": {
+      "A-B": 28,
+      "A-B2": 8,
+      "A-C": 20,
+      "C-B (pack effect)": 8
+    },
+    "cratered": true,
+    "collapsed": false,
+    "verdict": "CRATERED — matched ≫ wrong-style outside the ±12 noise (the term produced the within-family gradient)",
+    "scores": {
+      "A": 28,
+      "B": 0,
+      "B2": 20,
+      "C": 8
+    },
+    "kindReliability": {
+      "perCondition": {
+        "A-matched": {
+          "tier": "MATCHED",
+          "nItems": 5,
+          "add": 2,
+          "replace": 3,
+          "remove": 0,
+          "untagged": 0,
+          "cappingRate": 0.6,
+          "replaceRate": 0.6
+        },
+        "B-arc": {
+          "tier": "WRONG",
+          "nItems": 10,
+          "add": 6,
+          "replace": 4,
+          "remove": 0,
+          "untagged": 0,
+          "cappingRate": 0.4,
+          "replaceRate": 0.4
+        },
+        "B2-chapelle": {
+          "tier": "WRONG",
+          "nItems": 7,
+          "add": 4,
+          "replace": 3,
+          "remove": 0,
+          "untagged": 0,
+          "cappingRate": 0.42857142857142855,
+          "replaceRate": 0.42857142857142855
+        },
+        "C-control": {
+          "tier": "CONTROL",
+          "nItems": 7,
+          "add": 2,
+          "replace": 5,
+          "remove": 0,
+          "untagged": 0,
+          "cappingRate": 0.7142857142857143,
+          "replaceRate": 0.7142857142857143
+        }
+      },
+      "byTier": {
+        "MATCHED": {
+          "nItems": 5,
+          "untagged": 0,
+          "replaceRate": 0.6,
+          "cappingRate": 0.6
+        },
+        "WRONG": {
+          "nItems": 17,
+          "untagged": 0,
+          "replaceRate": 0.4117647058823529,
+          "cappingRate": 0.4117647058823529
+        },
+        "CONTROL": {
+          "nItems": 7,
+          "untagged": 0,
+          "replaceRate": 0.7142857142857143,
+          "cappingRate": 0.7142857142857143
+        }
+      },
+      "replaceContrast": -0.18823529411764706,
+      "verdict": "NO CONTRAST — matched and wrong-style tag alike (the typed tag did not remove the over-cap)"
+    }
+  },
+  "agreement": {
+    "skipped": "CRATER_ONLY"
+  },
+  "bakeoff": {
+    "skipped": "CRATER_ONLY"
+  },
+  "baseline": {
+    "skipped": "CRATER_ONLY"
+  }
+}
