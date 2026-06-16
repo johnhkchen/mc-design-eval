@@ -258,6 +258,7 @@ export function generateRoof(gables, family, opts = {}) {
   const sane = gables.filter((g) => g.sane);
   const { heights, owner, bandFloor } = roofHeightfield(sane);
   const floor = opts.bandFloor ?? bandFloor;
+  const covering = opts.covering ?? false; // T-172-01: hollow the wedge interior (default-off)
   const cells = [];
   const counts = { full: 0, stairs: 0, slabs: 0, cap: 0 };
   const sheetKeys = new Set();
@@ -301,7 +302,22 @@ export function generateRoof(gables, family, opts = {}) {
       }
     }
     const top = hInt;
-    for (let y = own?.sheet ? top : floor; y <= top; y++) {
+    // COVERING (T-172-01): instead of filling the solid wedge floor→top, fill only the
+    // RISER-SEALING depth below the surface so the deep interior goes hollow. The one exposed slope
+    // face of a column is the riser down to its LOWEST present neighbour (at minNbrTop): sealing
+    // top…minNbrTop+1 leaves no daylight at any pitch (pitch 1 ⇒ surface course only; pitch 2 ⇒ two
+    // courses). Gable-END walls (the vertical triangular envelope) and sheet columns keep their own
+    // floors. Absent opts.covering ⇒ coverFloor===floor ⇒ byte-identical solid wedge.
+    let coverFloor = floor;
+    if (covering && !own?.sheet && !own?.gableEnd) {
+      let minNbrTop = Infinity;
+      for (const dir of ["+x", "-x", "+z", "-z"]) {
+        const nh = at(dir);
+        if (nh !== undefined) minNbrTop = Math.min(minNbrTop, Math.floor(nh));
+      }
+      coverFloor = Number.isFinite(minNbrTop) ? Math.max(floor, Math.min(top, minNbrTop + 1)) : top;
+    }
+    for (let y = own?.sheet ? top : coverFloor; y <= top; y++) {
       if (y === top && stair) {
         cells.push({ pos: [x, y, z], block: family.stairs, form: "fixture",
           state: { facing: STAIR_FACING[FLIP[d]], half: "bottom", shape } });
@@ -330,4 +346,21 @@ export function generateRoof(gables, family, opts = {}) {
     }
   }
   return { cells, counts, heights, owner, bandFloor: floor, sheetKeys, capKeys, gableWallKeys };
+}
+
+/**
+ * THE PRISM CENSUS (T-172-01): the fraction of a build's placements whose block is a roof material.
+ * A solid roof-prism dominates the build (~72 %); a covering-over-envelope roof is well under that.
+ * Block ids are compared modulo the `minecraft:` namespace so callers can pass either form. PURE.
+ * @param {{block:string}[]} placements  artifact placements (or generated cells)
+ * @param {Iterable<string>} roofBlocks  the roof material ids (family field/stairs/slab + any trim)
+ * @returns {{roof:number, total:number, frac:number}}
+ */
+export function roofMaterialFraction(placements, roofBlocks) {
+  const strip = (b) => (b ?? "").replace(/^minecraft:/, "");
+  const set = new Set([...roofBlocks].map(strip));
+  let roof = 0;
+  const total = placements.length;
+  for (const p of placements) if (set.has(strip(p.block))) roof++;
+  return { roof, total, frac: total ? roof / total : 0 };
 }
