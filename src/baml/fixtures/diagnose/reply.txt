@@ -8,6 +8,7 @@ Comparing the build renders against the concept, here is the per-department diag
       "expected": "a steep dark roof field in dark_oak_planks (the barn exception darkens the whole field toward the oak)",
       "present": "a shallow spruce_planks gable that reads pale against the walls",
       "missing": "the dark_oak_planks field and the steeper pitch",
+      "kind": "replace",
       "severity": "major"
     },
     {
@@ -15,6 +16,7 @@ Comparing the build renders against the concept, here is the per-department diag
       "expected": "uncoursed cobblestone fieldstone panels framed by stone_bricks quoins, piers and a base plinth",
       "present": "flat cobblestone walls with no dressed framing",
       "missing": "the stone_bricks quoins, piers and plinth band",
+      "kind": "add",
       "severity": "major"
     },
     {
@@ -22,6 +24,7 @@ Comparing the build renders against the concept, here is the per-department diag
       "expected": "two oak_planks wagon doors on the long eave wall, kept distinct from the dark roof",
       "present": "two plain rectangular holes",
       "missing": "the oak_planks wagon-door leaves and their stone_bricks heads",
+      "kind": "add",
       "severity": "minor"
     }
   ]

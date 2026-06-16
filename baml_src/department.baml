@@ -33,6 +33,7 @@ class CritiqueItem {
   expected string @description("what the concept's style calls for here")
   present string @description("what the build currently has (empty string if absent)")
   missing string @description("what is absent vs expected (empty string if nothing missing)")
+  kind "add" | "replace" | "remove" @description("add = element absent; replace = present but WRONG style/material; remove = an element that should not be there")
   severity "minor" | "major"
 }
 
@@ -74,7 +75,10 @@ function DiagnoseBuild(
     Compare the build renders against the concept. Judge it against THIS STYLE'S grammar above — the
     SAME build is correct under one style and wrong under another. For each CONSTRUCTION DEPARTMENT that diverges,
     state one item: what the style calls for there (expected), what the build currently has (present,
-    empty if absent), and what is absent versus expected (missing, empty if nothing missing). Tag
+    empty if absent), and what is absent versus expected (missing, empty if nothing missing). Also
+    tag each item with its kind: add if the element is absent (present is empty), replace if
+    something is present but in the WRONG style/material, remove if an element is present that the
+    style does not want. Tag
     each item with the department that owns it — one of: {{ departments }}. Judge element-level
     construction (material, covering, feature presence), NOT overall size or proportion. Name at most
     {{ max_items }} items, the most divergent first; emit no item for a department that already reads

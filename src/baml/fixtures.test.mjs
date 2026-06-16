@@ -18,6 +18,7 @@ import { bamlBatch } from "./bridge.mjs";
 import { loadStylePack } from "../pack/style-pack.mjs";
 import { recognitionRenderArgs } from "../recognition/prompt.mjs";
 import { DEPARTMENTS } from "../pack/departments.mjs";
+import { itemStyleClass } from "../workshop/bakeoff-score.mjs";
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 const read = (rel) => readFileSync(join(ROOT, rel), "utf8");
@@ -153,7 +154,24 @@ test("FX-DB2 b.parse over the canonical reply equals the minted Critique; fields
     // the falsifiable-claim guard: structure must NOT be filled with vacuous text
     assert.ok(it.expected.trim() && it.present.trim() && it.missing.trim(),
       "expected/present/missing must be non-empty (non-vacuous diagnosis)");
+    // T-170-01: Layer A now emits the typed `kind` discriminator on EVERY item.
+    assert.ok(["add", "replace", "remove"].includes(it.kind),
+      `kind ${it.kind} must be one of add/replace/remove (the typed discriminator is emitted)`);
   }
+  // T-170-01 — the BO11 separation, proven on a real parsed item: the WALL item has the RIGHT base
+  // material (cobblestone) with a MISSING DETAIL (the dressed quoins/plinth) — the F1 shape that the
+  // STRUCTURAL rule (present+missing both non-empty) mis-classed "wrong-style" and capped. The judge
+  // tags it `add`, NOT `replace`, and the scoring core (which already reads `kind`) reads it "absent"
+  // — so it no longer caps the score. This is the whole point of the typed tag, asserted end-to-end.
+  const wall = items.find((i) => i.department === "WALL");
+  assert.ok(wall, "the canonical diagnosis carries a WALL item");
+  assert.equal(wall.kind, "add", "the right-base-material/missing-detail WALL item is tagged add (not replace)");
+  assert.equal(itemStyleClass(wall), "absent", "kind=add ⇒ itemStyleClass absent ⇒ the over-cap is lifted");
+  // and a present-but-WRONG-material item (ROOF: spruce where dark_oak is called for) stays `replace`,
+  // so the two classes SEPARATE within one critique (not collapsed to a single tag).
+  const roof = items.find((i) => i.department === "ROOF");
+  assert.equal(roof.kind, "replace", "the wrong-material ROOF item is tagged replace");
+  assert.equal(itemStyleClass(roof), "wrong-style", "kind=replace ⇒ itemStyleClass wrong-style (capping)");
   // SAP behaviour for DiagnoseBuild (characterized in T-163-01's critique-contract.test.mjs): BARE
   // PROSE (no JSON object) REJECTS (R[17], CC3's family), while a JSON object whose item carries an
   // UNKNOWN department DROPS that item to {items:[]} (CC2 — the typing is a filter, not a gate).

@@ -8,6 +8,7 @@ Comparing the build against the concept, here is what I see:
       "expected": "a steep thatched gable with a rolled ridge",
       "present": "a shallow plank gable",
       "missing": "the thatch covering and the ridge roll",
+      "kind": "replace",
       "severity": "major"
     },
     {
@@ -15,6 +16,7 @@ Comparing the build against the concept, here is what I see:
       "expected": "limewashed plaster over a stone plinth",
       "present": "bare cobblestone to the ground",
       "missing": "the limewash coat and the plinth band",
+      "kind": "add",
       "severity": "minor"
     },
     {
@@ -22,6 +24,7 @@ Comparing the build against the concept, here is what I see:
       "expected": "arched doorway with a timber frame",
       "present": "a square hole",
       "missing": "the arch head and the frame dressing",
+      "kind": "add",
       "severity": "minor"
     }
   ]

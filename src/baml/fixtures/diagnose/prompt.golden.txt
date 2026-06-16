@@ -128,7 +128,10 @@ THE STYLE'S CONSTRUCTION GRAMMAR (what a rustic build's roof / walls / openings 
 Compare the build renders against the concept. Judge it against THIS STYLE'S grammar above — the
 SAME build is correct under one style and wrong under another. For each CONSTRUCTION DEPARTMENT that diverges,
 state one item: what the style calls for there (expected), what the build currently has (present,
-empty if absent), and what is absent versus expected (missing, empty if nothing missing). Tag
+empty if absent), and what is absent versus expected (missing, empty if nothing missing). Also
+tag each item with its kind: add if the element is absent (present is empty), replace if
+something is present but in the WRONG style/material, remove if an element is present that the
+style does not want. Tag
 each item with the department that owns it — one of: CHIMNEY, OPENING, ROOF, ROOM, WALL. Judge element-level
 construction (material, covering, feature presence), NOT overall size or proportion. Name at most
 6 items, the most divergent first; emit no item for a department that already reads
@@ -145,6 +148,8 @@ Answer in JSON using this schema:
       present: string,
       // what is absent vs expected (empty string if nothing missing)
       missing: string,
+      // add = element absent; replace = present but WRONG style/material; remove = an element that should not be there
+      kind: "add" or "replace" or "remove",
       severity: "minor" or "major",
     }
   ],
