@@ -3,7 +3,8 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 
 import { CARD_ROWS } from "../form/fixture-card.mjs";
-import { STAIR_FACING, roofFamily, roofHeightfield, generateRoof, stairShape, gableEndColumns } from "./roof-generate.mjs";
+import { STAIR_FACING, roofFamily, roofHeightfield, generateRoof, stairShape, gableEndColumns, roofMaterialFraction } from "./roof-generate.mjs";
+import { closureOf } from "./wall-generate.mjs";
 
 const VOCAB = new Set([
   "spruce_planks", "spruce_stairs", "spruce_slab",
@@ -475,6 +476,117 @@ test("gableBlock: gable-end sub-surface is wall, covering surface stays roof", (
     const [, , z] = k.split(",").map(Number);
     assert.ok(z === 0 || z === 5, `gable-wall key ${k} is on an end slice`);
   }
+});
+
+// --- T-172-01: covering (hollow over the envelope), opt-in opts.covering ---
+
+test("covering hollows the wedge interior; the surface stays put", () => {
+  const g = gable({ pitch: 1 }); // E=4, eaveY10, ridgeY14: x=±1→13, ±2→12, ±3→11, ±4→10
+  const solid = byPos(generateRoof([g], SPRUCE).cells);
+  const cov = byPos(generateRoof([g], SPRUCE, { covering: true }).cells);
+  // INTERIOR row z=3 (z=0/5 are gable-END walls — the envelope, kept solid by design).
+  // ridge column x=0 (h=14): solid fills 10..14; covering keeps only the surface course
+  assert.ok(solid.has("0,10,3") && solid.has("0,12,3"), "solid wedge fills the interior");
+  assert.equal(cov.has("0,10,3"), false, "covering hollows the deep interior (y=10 under the ridge)");
+  assert.equal(cov.has("0,12,3"), false, "covering hollows the interior (y=12 under the ridge)");
+  assert.ok(cov.has("0,14,3"), "covering keeps the surface/cap course");
+  // a slope column x=1 (h=13): interior 10..12 gone, surface 13 kept
+  assert.ok(solid.has("1,11,3"));
+  assert.equal(cov.has("1,11,3"), false, "slope-column interior hollowed");
+  assert.ok(cov.has("1,13,3"), "slope-column surface kept");
+});
+
+test("covering pitch 2 stays watertight: every riser is sealed (no daylight column)", () => {
+  const g = gable({ pitch: 2, ridgeY: 18 }); // x=±1→16, ±2→14, ±3→12, ±4→10
+  const { cells, heights } = generateRoof([g], SPRUCE, { covering: true });
+  const present = new Set(cells.map((c) => c.pos.join(",")));
+  // watertight invariant (impl-independent): for every column, the cells from its surface DOWN to
+  // one above its LOWEST orthogonal neighbour's surface must all be solid — that face has no gap.
+  for (const [key, h] of heights) {
+    const [x, z] = key.split(",").map(Number);
+    const top = Math.floor(h);
+    let minNbrTop = Infinity;
+    for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+      const nh = heights.get(`${x + dx},${z + dz}`);
+      if (nh !== undefined) minNbrTop = Math.min(minNbrTop, Math.floor(nh));
+    }
+    const lo = Number.isFinite(minNbrTop) ? Math.min(top, minNbrTop + 1) : top;
+    for (let y = lo; y <= top; y++) {
+      assert.ok(present.has(`${x},${y},${z}`), `daylight gap at ${x},${y},${z} (riser unsealed)`);
+    }
+  }
+});
+
+test("covering keeps the sloped surface + caps byte-identical (only interior fill differs)", () => {
+  const g = gable({ pitch: 1, eaveY: 10, ridgeY: 14, E: 4, z0: 0, z1: 5 });
+  const solid = generateRoof([g], SPRUCE);
+  const cov = generateRoof([g], SPRUCE, { covering: true });
+  const fixtures = (r) => r.cells.filter((c) => c.form === "fixture");
+  assert.deepEqual(fixtures(cov), fixtures(solid), "stairs/slabs (the slope skin) byte-identical");
+  assert.deepEqual([...cov.capKeys].sort(), [...solid.capKeys].sort(), "ridge caps unchanged");
+  assert.deepEqual([...cov.heights.keys()].sort(), [...solid.heights.keys()].sort(), "footprint cols unchanged");
+  assert.ok(cov.cells.length < solid.cells.length, "covering removes interior cells");
+});
+
+test("covering preserves gable-end walls + footprint closure (envelope intact)", () => {
+  const g = gable({ pitch: 1, eaveY: 10, ridgeY: 14, E: 4, z0: 0, z1: 5 });
+  const GABLE = "minecraft:cobblestone";
+  const solid = generateRoof([g], SPRUCE, { gableBlock: GABLE });
+  const cov = generateRoof([g], SPRUCE, { gableBlock: GABLE, covering: true });
+  assert.deepEqual([...cov.gableWallKeys].sort(), [...solid.gableWallKeys].sort(),
+    "gable-end walls (envelope) untouched by covering");
+  // closure of the footprint perimeter is identical (covering removes only sub-surface fill)
+  const ring = (r) => new Set([...r.heights.keys()]);
+  assert.equal(closureOf(ring(cov)), closureOf(ring(solid)), "footprint closure unchanged");
+  assert.equal(closureOf(ring(cov)), 1, "the test gable footprint is a watertight rectangle");
+});
+
+test("covering census: the SLOPE interior prism is hollowed out (envelope aside)", () => {
+  const g = gable({ pitch: 1, eaveY: 10, ridgeY: 14, E: 4, z0: 0, z1: 5 });
+  const GABLE = "minecraft:cobblestone";
+  const solid = generateRoof([g], SPRUCE, { gableBlock: GABLE });
+  const cov = generateRoof([g], SPRUCE, { gableBlock: GABLE, covering: true });
+  // count sub-surface, non-fixture, non-gable-WALL cells: the prism interior we mean to delete
+  const interiorFill = (r) => r.cells.filter((c) => {
+    const top = Math.floor(r.heights.get(`${c.pos[0]},${c.pos[2]}`));
+    return c.pos[1] < top && c.form !== "fixture" && !r.gableWallKeys.has(c.pos.join(","));
+  }).length;
+  assert.ok(interiorFill(solid) > 0, "the solid prism has interior fill");
+  assert.equal(interiorFill(cov), 0, "pitch-1 covering leaves NO slope interior fill (fully hollow)");
+  assert.ok(cov.cells.length < solid.cells.length, "covering is strictly smaller than the prism");
+  // roofMaterialFraction is a generic build census (namespace-insensitive)
+  const f = roofMaterialFraction(
+    [{ block: "spruce_planks" }, { block: "minecraft:stone_bricks" }, { block: "spruce_stairs" }],
+    ["spruce_planks", "spruce_stairs", "spruce_slab"]);
+  assert.deepEqual(f, { roof: 2, total: 3, frac: 2 / 3 });
+});
+
+test("absent covering ⇒ byte-identical legacy prism (regression pin)", () => {
+  const g = gable({ pitch: 1 });
+  assert.deepEqual(generateRoof([g], SPRUCE, {}).cells, generateRoof([g], SPRUCE).cells);
+  assert.deepEqual(generateRoof([g], SPRUCE, { covering: false }).cells, generateRoof([g], SPRUCE).cells);
+});
+
+test("covering composes multi-gable: the cross-gable valley still reads, both ridges kept", () => {
+  const main = gable({ pitch: 1, eaveY: 10, ridgeY: 14, E: 4, z0: 0, z1: 9 });
+  const cols = new Set();
+  for (let x = 0; x <= 6; x++) for (let z = 2; z <= 7; z++) cols.add(`${x},${z}`);
+  const cross = {
+    id: "gable-cross", ridge: { axis: "x", y: 13 },
+    sides: [
+      { planeId: "roof-c", eaveDir: "+z", pitch: 1, pitchSource: "glb", eaveY: 10, eaveEdge: 7, extentCells: [] },
+      { planeId: "roof-d", eaveDir: "-z", pitch: 1, pitchSource: "glb", eaveY: 10, eaveEdge: 2, extentCells: [] },
+    ],
+    footprint: { cols, bbox: { minX: 0, maxX: 6, minZ: 2, maxZ: 7 }, area: cols.size },
+    hip: { demanded: false, lo: false, hi: false }, sane: true, reasons: [],
+  };
+  const cov = generateRoof([main, cross], SPRUCE, { covering: true });
+  // heights/owner are emission-independent: composition is identical to solid
+  const solidHf = roofHeightfield([main, cross]);
+  for (const [k, h] of solidHf.heights) assert.equal(cov.heights.get(k), h, `valley/comp height at ${k}`);
+  const m = byPos(cov.cells);
+  assert.ok(m.has("0,14,0"), "main ridge cap present in covering");
+  assert.ok(cov.cells.some((c) => c.pos[1] === 13 && c.pos[2] >= 2 && c.pos[2] <= 7), "cross ridge present");
 });
 
 test("gableBlock byte-identity: the sloped COVERING is unchanged on/off", () => {
