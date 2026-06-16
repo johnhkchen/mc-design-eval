@@ -218,7 +218,9 @@ export function generateProvision(fit, { family, policy, bands = null, sheetBloc
     // gableRole intent — "the gable end stays the same fieldstone"). The sloped covering stays roof.
     const eaveFloor = Math.min(...roof.gables.flatMap((g) => g.sides.map((s) => Math.floor(s.eaveY))));
     const gableBlock = Number.isFinite(eaveFloor) ? wallBlockAt(eaveFloor) : null;
-    const gen = generateRoof(roof.gables, family, { gableBlock });
+    // T-172-01: the roof is a COVERING over the envelope, not a solid material prism — hollow the
+    // wedge interior (the gable-end walls + sheet verges are unchanged; the slope stays watertight).
+    const gen = generateRoof(roof.gables, family, { gableBlock, covering: true });
     for (const c of gen.cells) {
       const key = c.pos.join(",");
       const isGableWall = gen.gableWallKeys.has(key);
