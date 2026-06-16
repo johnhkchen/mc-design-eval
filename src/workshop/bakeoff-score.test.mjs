@@ -12,6 +12,7 @@ import {
   critiqueEvidence,
   dispatchCorrectness,
   pairAgreement,
+  kindReliability,
   itemStyleClass,
   PENALTY,
   WRONG_STYLE,
@@ -261,4 +262,59 @@ test("BO12b pairAgreement: empty contested bucket yields no NaN; defensive 'wron
     { key: "w", confidence: "high", moreFaithful: "wrong", matchedScore: 4, wrongScore: 40 },
   ]);
   assert.equal(wrong.easy.agree, 1); // wrong (40) > matched (4) and label says wrong ⇒ agree
+});
+
+// ---- BO13: kindReliability — condition-level tag distribution + the MATCHED/WRONG replace contrast ----
+test("BO13 kindReliability tallies per-condition kinds and the matched-vs-wrong replace contrast", () => {
+  // MATCHED build vs its own concept: detail-only divergences tag `add` (non-capping) — over-cap removed.
+  const matched = { key: "A-matched", tier: "MATCHED", votes: [{ items: [
+    { kind: "add", styleClass: "absent" },
+    { kind: "remove", styleClass: "match" },
+  ] }] };
+  // WRONG-style: wrong-material divergences tag `replace` (capping) — the correct cap.
+  const wrong = { key: "B-arc", tier: "WRONG", votes: [{ items: [
+    { kind: "replace", styleClass: "wrong-style" },
+    { kind: "replace", styleClass: "wrong-style" },
+  ] }] };
+  const r = kindReliability([matched, wrong]);
+
+  // per-condition counts + rates
+  assert.equal(r.perCondition["A-matched"].add, 1);
+  assert.equal(r.perCondition["A-matched"].remove, 1);
+  assert.equal(r.perCondition["A-matched"].replaceRate, 0);
+  assert.equal(r.perCondition["A-matched"].cappingRate, 0);
+  assert.equal(r.perCondition["B-arc"].replace, 2);
+  assert.equal(r.perCondition["B-arc"].replaceRate, 1);
+  assert.equal(r.perCondition["B-arc"].cappingRate, 1);
+
+  // contrast = WRONG.replaceRate (1) − MATCHED.replaceRate (0) = 1 ⇒ DISCRIMINATES
+  assert.equal(r.byTier.MATCHED.replaceRate, 0);
+  assert.equal(r.byTier.WRONG.replaceRate, 1);
+  assert.equal(r.replaceContrast, 1);
+  assert.match(r.verdict, /DISCRIMINATES/);
+
+  // NO CONTRAST: matched also tags replace (the E-40 collapse signature, now via kind)
+  const collapse = kindReliability([
+    { key: "m", tier: "MATCHED", votes: [{ items: [{ kind: "replace", styleClass: "wrong-style" }] }] },
+    { key: "w", tier: "WRONG", votes: [{ items: [{ kind: "replace", styleClass: "wrong-style" }] }] },
+  ]);
+  assert.equal(collapse.replaceContrast, 0);
+  assert.match(collapse.verdict, /NO CONTRAST/);
+
+  // UNRELIABLE: an item with no kind ⇒ structural fallback fired. styleClass recomputed when absent.
+  const untagged = kindReliability([
+    { key: "m", tier: "MATCHED", votes: [{ items: [{ present: "x", missing: "y" }] }] }, // no kind → untagged, recompute → wrong-style
+    { key: "w", tier: "WRONG", votes: [{ items: [{ kind: "replace", styleClass: "wrong-style" }] }] },
+  ]);
+  assert.equal(untagged.perCondition["m"].untagged, 1);
+  assert.equal(untagged.perCondition["m"].cappingRate, 1); // recomputed via itemStyleClass(present&&missing)
+  assert.match(untagged.verdict, /UNRELIABLE/);
+
+  // empty / single-tier safety: no NaN; contrast null when a tier is empty
+  const empty = kindReliability([]);
+  assert.equal(empty.replaceContrast, null);
+  assert.equal(empty.byTier.WRONG.replaceRate, 0);
+  assert.match(empty.verdict, /INSUFFICIENT/);
+  const onlyMatched = kindReliability([{ key: "m", tier: "MATCHED", votes: [{ items: [{ kind: "add" }] }] }]);
+  assert.equal(onlyMatched.replaceContrast, null);
 });

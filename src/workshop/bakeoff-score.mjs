@@ -256,4 +256,68 @@ export function pairAgreement(rows) {
   return { ...buckets, overall: { n, agree: agreeAll, rate: n ? agreeAll / n : 0 } };
 }
 
+/**
+ * Per-condition typed-kind distribution + capping-rate for the T-170-02 crater rerun (E-41/S-170). The
+ * defect corpus carries NO per-item kind ground truth, so reliability is reported as a CONDITION-LEVEL
+ * expectation, not a per-item join: a MATCHED condition's divergences SHOULD skew add/remove (non-capping);
+ * a WRONG-style condition's SHOULD skew replace (capping). The reliability signal is the CONTRAST
+ * (WRONG.replaceRate − MATCHED.replaceRate), reported BESIDE — never folded into — the score.
+ *
+ * `untagged` (an item the judge returned with no `kind`) is the red flag: it means Layer A did not emit the
+ * tag, so the scorer fell back to the structural triple read and the over-cap can persist for that reason.
+ *
+ * @param {Array<{key:string, tier:string, votes:Array<{items:Array<{kind?:string, styleClass?:string}>}>}>} conditions
+ *        crater conditions (tier ∈ MATCHED|WRONG|CONTROL), each with its VOTES of persisted items.
+ * @returns {{perCondition:Object, byTier:Object, replaceContrast:(number|null), verdict:string}}
+ */
+export function kindReliability(conditions) {
+  const tally = (items) => {
+    const c = { nItems: 0, add: 0, replace: 0, remove: 0, untagged: 0, capping: 0 };
+    for (const it of items ?? []) {
+      c.nItems += 1;
+      const k = it?.kind;
+      if (k === "add") c.add += 1;
+      else if (k === "replace") c.replace += 1;
+      else if (k === "remove") c.remove += 1;
+      else c.untagged += 1;
+      // styleClass is what the scorer derived; recompute defensively if the harness did not persist it.
+      const sc = it?.styleClass ?? itemStyleClass(it);
+      if (sc === "wrong-style") c.capping += 1;
+    }
+    return c;
+  };
+  const rate = (num, den) => (den ? num / den : 0);
+  const perCondition = {};
+  const tiers = { MATCHED: [], WRONG: [], CONTROL: [] };
+  for (const cond of conditions ?? []) {
+    const items = (cond.votes ?? []).flatMap((v) => v.items ?? []);
+    const c = tally(items);
+    perCondition[cond.key] = {
+      tier: cond.tier, nItems: c.nItems, add: c.add, replace: c.replace, remove: c.remove,
+      untagged: c.untagged, cappingRate: rate(c.capping, c.nItems), replaceRate: rate(c.replace, c.nItems),
+    };
+    if (tiers[cond.tier]) tiers[cond.tier].push(c);
+  }
+  const aggregate = (cs) => {
+    const sum = cs.reduce((a, c) => ({
+      nItems: a.nItems + c.nItems, replace: a.replace + c.replace,
+      untagged: a.untagged + c.untagged, capping: a.capping + c.capping,
+    }), { nItems: 0, replace: 0, untagged: 0, capping: 0 });
+    return { nItems: sum.nItems, untagged: sum.untagged,
+      replaceRate: rate(sum.replace, sum.nItems), cappingRate: rate(sum.capping, sum.nItems) };
+  };
+  const byTier = { MATCHED: aggregate(tiers.MATCHED), WRONG: aggregate(tiers.WRONG), CONTROL: aggregate(tiers.CONTROL) };
+  const replaceContrast = (byTier.MATCHED.nItems && byTier.WRONG.nItems)
+    ? byTier.WRONG.replaceRate - byTier.MATCHED.replaceRate : null;
+  const anyUntagged = Object.values(perCondition).some((p) => p.untagged > 0);
+  const verdict = anyUntagged
+    ? "TAG UNRELIABLE — the judge returned items with no kind (structural fallback fired)"
+    : replaceContrast === null
+      ? "INSUFFICIENT — a MATCHED or WRONG tier has no items to contrast"
+      : replaceContrast > 0
+        ? "DISCRIMINATES — wrong-style skews `replace` more than matched (the tag separates the classes)"
+        : "NO CONTRAST — matched and wrong-style tag alike (the typed tag did not remove the over-cap)";
+  return { perCondition, byTier, replaceContrast, verdict };
+}
+
 export { mean as _meanForHarness };
