@@ -25,6 +25,51 @@ export const BAKEOFF_SCHEMA = "bakeoff/v1";
 /** Severity penalties for styleFidelityScore — one source the test + FINDINGS both cite. */
 export const PENALTY = Object.freeze({ major: 20, minor: 8 });
 
+/**
+ * The STYLE-DISTANCE term's constants (E-40/S-168) — one source, the PENALTY pattern. A present-but-
+ * wrong-style item forces a MAJOR weight, adds `distance`, and CAPS the whole score at `cap` regardless
+ * of completeness: a clean build in the wrong style cannot buy its score back up by being complete. The
+ * cap sits well below a matched twin's typical score so the two SEPARATE (the E-39 crater the
+ * severity-only scalar could not produce — "blindness is in severity→scalar, not reading").
+ */
+export const WRONG_STYLE = Object.freeze({ cap: 40, distance: 12 });
+
+const nonEmpty = (s) => typeof s === "string" && s.trim().length > 0;
+
+/**
+ * Per-item style class from a Layer-A CritiqueItem — PURE and STRUCTURAL. It reads the EMPTINESS of the
+ * expected/present/missing triple (the repo's sanctioned element vocabulary: missing→ADD,
+ * present-but-wrong→REPLACE, absent→REMOVE — department.baml / departments.mjs), NOT the free-text
+ * CONTENT. So it never does the brittle keyword matching the ticket forbids; it asks only "did the build
+ * put SOMETHING here that differs from what the style wants?".
+ *
+ *   present non-empty AND missing non-empty  => "wrong-style" (replace — capping)
+ *   present empty                            => "absent"      (add — incomplete, NOT capping)
+ *   present non-empty AND missing empty      => "match"       (noted, nothing missing)
+ *
+ * If Layer A later ships a TYPED discriminator (`kind: "add"|"replace"|"remove"`, the scoped E-39 schema
+ * feedback this ticket files), it WINS over the structural read — forward-compatible, no code change.
+ *
+ * KNOWN BOUNDARY (the falsifiable-claim failure mode F1, pinned not faked — see BO11 + schema-feedback.md):
+ * a build with the RIGHT base material but a missing DETAIL (present="plain plaster", missing="timber
+ * studs") is structurally indistinguishable from wrong-material replace without comparing CONTENT, so it
+ * is currently classed "wrong-style". The fix is the typed tag, not a string heuristic.
+ *
+ * @param {{present?:string, missing?:string, kind?:string}} item a CritiqueItem-shaped object
+ * @returns {"wrong-style"|"absent"|"match"}
+ */
+export function itemStyleClass(item) {
+  const kind = item?.kind;
+  if (kind === "replace") return "wrong-style";
+  if (kind === "add") return "absent";
+  if (kind === "remove") return "match";
+  const present = nonEmpty(item?.present);
+  const missing = nonEmpty(item?.missing);
+  if (present && missing) return "wrong-style";
+  if (!present) return "absent";
+  return "match";
+}
+
 // Keyword → department. ORDER MATTERS for first-match: the more specific department predicates are
 // listed before WALL's generic envelope words so e.g. "roof" wins over a stray "wall" later in the text.
 // Unlike departmentOf (which throws on ambiguity), free text is allowed to be loose — first hit wins.
@@ -92,16 +137,33 @@ export function worstDepartmentOfFusedReply(reply) {
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
 /**
- * A 0-100 style-fidelity scalar derived from a per-style Critique: 100 minus a severity-weighted penalty
- * sum, clamped. An EXPLAINABLE convenience — the `missing` strings (critiqueEvidence) carry the meaning;
- * this is the number that sits beside the E-38 flat scalar. Empty critique ⇒ 100 (nothing wrong).
- * @param {{items:Array<{severity:string}>}} critique a Layer-A Critique
+ * A 0-100 style-fidelity scalar derived from a per-style Critique. Two terms (E-40/S-168):
+ *   (1) the MISSING-element term (unchanged from E-39): each absent/match item subtracts its severity
+ *       penalty — a build that is incomplete-but-RIGHT-style is docked only for what it has not built;
+ *   (2) the STYLE-DISTANCE term (new): each present-but-WRONG-style item (itemStyleClass) is a capping
+ *       MAJOR — it subtracts PENALTY.major + WRONG_STYLE.distance AND caps the whole score at
+ *       WRONG_STYLE.cap, so completeness cannot rescue a wrong-style build.
+ * The distance grades by BREADTH (more wrong-style departments ⇒ lower under the cap); per-item DEPTH
+ * (how far rustic is from classical) needs the typed grammar tag and is validated in T-169-01.
+ * Empty critique ⇒ 100. An item with no `present` field ⇒ "absent" ⇒ the exact pre-E-40 math (back-compat).
+ * @param {{items:Array<{severity?:string, present?:string, missing?:string, kind?:string}>}} critique
  * @returns {number} integer 0-100
  */
 export function styleFidelityScore(critique) {
   const items = critique?.items ?? [];
-  const penalty = items.reduce((s, it) => s + (PENALTY[it?.severity] ?? PENALTY.minor), 0);
-  return clamp(100 - penalty, 0, 100);
+  let penalty = 0;
+  let wrongStyle = 0;
+  for (const it of items) {
+    if (itemStyleClass(it) === "wrong-style") {
+      penalty += PENALTY.major + WRONG_STYLE.distance; // forced major + a distance unit
+      wrongStyle += 1;
+    } else {
+      penalty += PENALTY[it?.severity] ?? PENALTY.minor; // the unchanged missing-element severity path
+    }
+  }
+  let score = clamp(100 - penalty, 0, 100);
+  if (wrongStyle > 0) score = Math.min(score, WRONG_STYLE.cap); // completeness can't buy back wrong style
+  return score;
 }
 
 /**
@@ -111,12 +173,16 @@ export function styleFidelityScore(critique) {
  */
 export function critiqueEvidence(critique) {
   const items = critique?.items ?? [];
+  const nWrongStyle = items.filter((i) => itemStyleClass(i) === "wrong-style").length;
   return {
     score: styleFidelityScore(critique),
     nItems: items.length,
     nMajor: items.filter((i) => i?.severity === "major").length,
     departments: items.map((i) => i?.department).filter(Boolean),
     missing: items.map((i) => i?.missing).filter((m) => typeof m === "string" && m.trim().length > 0),
+    // E-40 additive: the style-distance crater's cause — how many present-but-wrong-style items capped it.
+    nWrongStyle,
+    wrongStyleCapped: nWrongStyle > 0,
   };
 }
 

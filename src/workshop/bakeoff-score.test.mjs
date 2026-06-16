@@ -11,7 +11,9 @@ import {
   styleFidelityScore,
   critiqueEvidence,
   dispatchCorrectness,
+  itemStyleClass,
   PENALTY,
+  WRONG_STYLE,
   BAKEOFF_SCHEMA,
 } from "./bakeoff-score.mjs";
 import { DEPARTMENTS } from "../pack/departments.mjs";
@@ -129,4 +131,88 @@ test("BO6b tie and fused-win verdicts are reported honestly", () => {
 test("BO7 schema + penalty constants are exported and stable", () => {
   assert.equal(BAKEOFF_SCHEMA, "bakeoff/v1");
   assert.deepEqual(PENALTY, { major: 20, minor: 8 });
+  assert.deepEqual(WRONG_STYLE, { cap: 40, distance: 12 }); // E-40 style-distance constants, one source
+});
+
+// ---- BO8: itemStyleClass — the structural triple read + the typed-kind short-circuit (E-40/S-168) ----
+// The classifier reads the EMPTINESS of the expected/present/missing triple (missing→add,
+// present-but-wrong→replace, absent→remove), never the free-text content.
+test("BO8 itemStyleClass reads the triple structurally and honours a typed kind", () => {
+  // structural: present non-empty + missing non-empty ⇒ wrong-style (replace)
+  assert.equal(itemStyleClass({ present: "rough rustic stone", missing: "polychrome glazed brick" }), "wrong-style");
+  // present empty ⇒ absent (add — the element is not built yet)
+  assert.equal(itemStyleClass({ present: "", missing: "the steep gable roof" }), "absent");
+  assert.equal(itemStyleClass({ present: "   ", missing: "a roof" }), "absent"); // whitespace is empty
+  // present non-empty + missing empty ⇒ match (noted, nothing missing)
+  assert.equal(itemStyleClass({ present: "ashlar wall", missing: "" }), "match");
+  // defensive defaults: no fields ⇒ absent (this is why BO4/BO5 severity-only items keep the old math)
+  assert.equal(itemStyleClass({ severity: "major" }), "absent");
+  assert.equal(itemStyleClass({}), "absent");
+  // the TYPED tag (scoped E-39 schema feedback) WINS over structure when present — forward-compatible
+  assert.equal(itemStyleClass({ kind: "replace", present: "" }), "wrong-style");
+  assert.equal(itemStyleClass({ kind: "add", present: "has something" }), "absent");
+  assert.equal(itemStyleClass({ kind: "remove", present: "", missing: "x" }), "match");
+});
+
+// ---- BO9: matched vs wrong-style now SEPARATE (were tied under the severity-only scalar) ----
+// The headline AC test. Hold the OLD signal (severity sum) EQUAL across the two builds, so only the new
+// present-aware term can separate them — making "was tied" concrete, not asserted.
+test("BO9 the style-distance term separates matched from wrong-style that the old scalar tied", () => {
+  // matched: incomplete-but-RIGHT-style — 3 absent majors (present empty). Old & new agree: 100 − 3×20 = 40.
+  const matched = { items: [
+    { department: "ROOF", present: "", missing: "a steeper ridge course", severity: "major" },
+    { department: "WALL", present: "", missing: "a quoin course", severity: "major" },
+    { department: "OPENING", present: "", missing: "a dressed lintel", severity: "major" },
+  ] };
+  // wrong-style: complete but WRONG — 3 present-but-wrong-style majors. SAME severity profile as matched.
+  const wrongStyle = { items: [
+    { department: "ROOF", present: "flat classical entablature", missing: "a pitched gable", severity: "major" },
+    { department: "WALL", present: "polychrome glazed brick", missing: "rustic rubble masonry", severity: "major" },
+    { department: "OPENING", present: "a Corinthian portico", missing: "a timber-framed arch", severity: "major" },
+  ] };
+
+  // OLD math (severity-only, the E-39 scalar) recomputed inline — the two builds were TIED.
+  const oldScore = (c) => Math.max(0, Math.min(100, 100 - c.items.reduce((s, i) => s + (PENALTY[i.severity] ?? PENALTY.minor), 0)));
+  assert.equal(oldScore(matched), 40);
+  assert.equal(oldScore(wrongStyle), 40);
+  assert.ok(Math.abs(oldScore(matched) - oldScore(wrongStyle)) <= 12, "old scalar tied them within the E-38 noise band");
+
+  // NEW math: matched stays 40 (all absent, no cap); wrong-style craters and is capped.
+  const mNew = styleFidelityScore(matched);
+  const wNew = styleFidelityScore(wrongStyle);
+  assert.equal(mNew, 40); // incomplete-but-right-style is untouched by the new term
+  assert.ok(wNew <= WRONG_STYLE.cap, `wrong-style is capped (${wNew} <= ${WRONG_STYLE.cap})`);
+  assert.equal(wNew, 4); // clamp(100 − 3×(20+12)) = clamp(4) = 4, min(4,40) = 4 — breadth-graded below the cap
+  assert.ok(mNew - wNew >= 30, `the new term separates what the old one tied (spread ${mNew - wNew})`);
+
+  // evidence reports the crater cause
+  const ev = critiqueEvidence(wrongStyle);
+  assert.equal(ev.nWrongStyle, 3);
+  assert.equal(ev.wrongStyleCapped, true);
+  assert.equal(critiqueEvidence(matched).nWrongStyle, 0);
+});
+
+// ---- BO10: incomplete-but-right-style is NOT over-penalized by the new term ----
+test("BO10 an incomplete-but-right-style (absent) build is docked only for severity, never capped", () => {
+  // present empty everywhere ⇒ absent ⇒ the new style-distance term does NOT fire.
+  const incomplete = { items: [
+    { department: "ROOF", present: "", missing: "the whole roof", severity: "major" },
+    { department: "CHIMNEY", present: "", missing: "the chimney stack", severity: "minor" },
+  ] };
+  const score = styleFidelityScore(incomplete);
+  assert.equal(score, 100 - PENALTY.major - PENALTY.minor); // 72 — pure missing-element math
+  assert.ok(score > WRONG_STYLE.cap, "not capped — it is the right style, just unfinished");
+  assert.equal(critiqueEvidence(incomplete).wrongStyleCapped, false);
+});
+
+// ---- BO11: the F1 boundary — a present-but-detail-incomplete item is a KNOWN over-penalty ----
+// Pins the CURRENT behavior so the typed-grammar-tag fix (schema-feedback.md) flips it DELIBERATELY.
+// A right-base-material-but-missing-detail item is structurally indistinguishable from wrong-material
+// replace without reading content — so it is (today) classed wrong-style and caps the score. We refuse
+// the brittle string-overlap hack; the remedy is the typed `kind` tag from Layer A (see schema-feedback.md).
+test("BO11 KNOWN LIMIT: present-but-detail-incomplete is classed wrong-style (typed tag is the fix)", () => {
+  const detailIncomplete = { present: "plain plaster", missing: "timber stud framing", severity: "major" };
+  assert.equal(itemStyleClass(detailIncomplete), "wrong-style"); // the over-penalty, pinned
+  // the typed tag would correct it to "absent" (an add of detail), un-capping the score:
+  assert.equal(itemStyleClass({ ...detailIncomplete, kind: "add" }), "absent");
 });
