@@ -1,0 +1,137 @@
+{
+  "schema": "recognition-draft/v1",
+  "ticket": "T-171-01",
+  "subject": "gatehouse",
+  "runKey": "gatehouse",
+  "pack": "rustic",
+  "model": "claude-opus-4-8",
+  "promptSha256": "95e9b4583c2d2b95814776fec24357137f27cf9e52a853559bfb1cc2bf830bf2",
+  "askCount": 1,
+  "budget": 3,
+  "cells": 2287,
+  "elements": [
+    {
+      "id": "hall-shell",
+      "kind": "shell",
+      "cellCount": 1064
+    },
+    {
+      "id": "hall-roof",
+      "kind": "idiom",
+      "idiom": "roof.gable",
+      "cellCount": 1215
+    },
+    {
+      "id": "hall-head--x-0-0",
+      "kind": "idiom",
+      "idiom": "arch",
+      "cellCount": 4
+    },
+    {
+      "id": "hall-head-+z-1-0",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "cellCount": 1
+    },
+    {
+      "id": "hall-head-+z-1-1",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "cellCount": 1
+    },
+    {
+      "id": "hall-head--z-2-0",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "cellCount": 1
+    },
+    {
+      "id": "hall-head--z-2-1",
+      "kind": "idiom",
+      "idiom": "head.flat",
+      "cellCount": 1
+    }
+  ],
+  "conformance": {
+    "schema": "pack-conformance/v1",
+    "passed": true,
+    "checks": [
+      {
+        "name": "courses-even",
+        "passed": true,
+        "findings": []
+      },
+      {
+        "name": "symmetry-held",
+        "passed": true,
+        "findings": []
+      },
+      {
+        "name": "openings-rhythm",
+        "passed": true,
+        "findings": []
+      },
+      {
+        "name": "palette-in-pack",
+        "passed": true,
+        "findings": []
+      },
+      {
+        "name": "watertight",
+        "passed": true,
+        "findings": [],
+        "mouths": 0
+      },
+      {
+        "name": "single-component",
+        "passed": true,
+        "findings": [],
+        "components": 1
+      }
+    ]
+  },
+  "evidence": {
+    "renders": [
+      {
+        "angle": "+x+z",
+        "path": "benchmarks/sculpture/recognition/view-gatehouse-+x+z.png",
+        "bytes": 443482,
+        "sha256": "f4a1fdf767ea361808af13a06ce2e45fe4a222b368a4d217697a48961068b38e"
+      },
+      {
+        "angle": "+x-z",
+        "path": "benchmarks/sculpture/recognition/view-gatehouse-+x-z.png",
+        "bytes": 428723,
+        "sha256": "69e82f4e5ca74fb6bcb70085a6648acaceee37e7ab68029134169a53b9797db4"
+      },
+      {
+        "angle": "-x-z",
+        "path": "benchmarks/sculpture/recognition/view-gatehouse--x-z.png",
+        "bytes": 401152,
+        "sha256": "51dce4909387fdf2d24aa631d016aeb00f7080fba07a429dc9052f1603161d3e"
+      },
+      {
+        "angle": "-x+z",
+        "path": "benchmarks/sculpture/recognition/view-gatehouse--x+z.png",
+        "bytes": 415528,
+        "sha256": "1aaad8071bd3621f601fa5d2cd84137c40404db3715795058b18d5357b88ff5b"
+      }
+    ],
+    "renderError": null
+  },
+  "generalization": {
+    "subjectKeysInRunner": [],
+    "clean": true
+  },
+  "replies": [
+    {
+      "attempt": 1,
+      "parsed": true,
+      "source": "live"
+    }
+  ],
+  "replay": {
+    "npmRun": "recognize:offline",
+    "asserts": "committed program → byte-identical artifact"
+  }
+}

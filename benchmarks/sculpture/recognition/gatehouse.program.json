@@ -1,0 +1,77 @@
+{
+  "schema": "building-program/v1",
+  "subject": "gatehouse",
+  "pack": "rustic",
+  "reading": {
+    "summary": "A small square stone gatehouse, one tall hall under a steep gable. The concept is grey throughout: coursed dressed-stone wall fields with rough rubble quoins running the corners, a single dark-timber-surrounded arched passage on the gable end, and a pair of narrow slit windows on the eave-side wall. Roof reads dark (whole-roof darkened toward oak, as the barn does) with a lighter stone eave/verge course banding the edges. The sketch confirms a near-square ~15-block footprint with mirror symmetry on x, eave ~21 blocks and a tall roof (eave fraction 0.70); the corner notches in the footprint polygon are the projecting rubble quoins, not separate masses. Per material precedence the concept inverts the rubble/dressed default — field is coursed stone (wall.dressing), corners are rubble (wall.field.ground). Ridge runs x so the arched gable end faces -x and the slope-and-window eave sides face ±z. One clean rectangular mass; protrusions in the digest are quoins. Pitch read 37.87°/rise~1.25 → pitchClass 1; no dormers or chimney visible.",
+    "symmetryClaim": {
+      "axis": "x"
+    }
+  },
+  "masses": [
+    {
+      "id": "hall",
+      "rect": {
+        "x0": 0,
+        "z0": 0,
+        "w": 15,
+        "d": 15
+      },
+      "storeys": 4,
+      "storeyHeight": 5,
+      "walls": {
+        "treatment": "opening-dressing",
+        "ground": {
+          "role": "wall.dressing"
+        },
+        "upper": {
+          "role": "wall.dressing"
+        },
+        "dressing": {
+          "role": "wall.field.ground"
+        }
+      },
+      "roof": {
+        "idiom": "roof.gable",
+        "ridgeAxis": "x",
+        "pitchClass": 1,
+        "fieldRole": "roof.trim",
+        "trimRole": "wall.dressing",
+        "gableRole": "wall.dressing"
+      },
+      "openings": [
+        {
+          "wall": "-x",
+          "kind": "door",
+          "count": 1,
+          "w": 4,
+          "h": 8,
+          "sill": 0,
+          "head": "arch",
+          "headRole": "frame.timber"
+        },
+        {
+          "wall": "+z",
+          "kind": "window",
+          "count": 2,
+          "w": 1,
+          "h": 3,
+          "sill": 8,
+          "head": "flat",
+          "headRole": "wall.field.ground"
+        },
+        {
+          "wall": "-z",
+          "kind": "window",
+          "count": 2,
+          "w": 1,
+          "h": 3,
+          "sill": 8,
+          "head": "flat",
+          "headRole": "wall.field.ground"
+        }
+      ]
+    }
+  ],
+  "style": "rustic"
+}
