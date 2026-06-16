@@ -221,4 +221,39 @@ export function dispatchCorrectness(rows) {
   };
 }
 
+/**
+ * Pairwise-label agreement for the style-distance crater (E-40/S-169, T-169-01). For each corpus PAIR
+ * state we score the build against its MATCHED concept and against its WRONG-STYLE concept; the human
+ * label (`moreFaithful`) says which should score higher. This aggregates whether the scored ORDERING
+ * agrees with the human, SPLIT BY CONFIDENCE so the easy pairs and the contested middle are reported
+ * SEPARATELY — never averaged. (The S-167 corpus excludes its contested pair as sub-threshold noise, so
+ * the contested bucket can legitimately be EMPTY; that must show, not be hidden by an average.)
+ *
+ *   agree := the scored ordering matches the human label
+ *     moreFaithful "matched" ⇒ agree iff matchedScore > wrongScore
+ *     moreFaithful "wrong"   ⇒ agree iff wrongScore  > matchedScore   (defensive; the corpus has none)
+ *   bucket := confidence === "high" ? "easy" : "contested"
+ *
+ * @param {Array<{key:string, confidence:string, moreFaithful:string, matchedScore:number,
+ *                wrongScore:number}>} rows
+ * @returns {{easy:Bucket, contested:Bucket, overall:{n:number, agree:number, rate:number}}}
+ *          where Bucket = {n, agree, rate, pairs:[{key, matchedScore, wrongScore, margin, agree}]}
+ */
+export function pairAgreement(rows) {
+  const mk = () => ({ n: 0, agree: 0, rate: 0, pairs: [] });
+  const buckets = { easy: mk(), contested: mk() };
+  let agreeAll = 0;
+  for (const r of rows) {
+    const margin = r.matchedScore - r.wrongScore; // matched minus wrong; >0 ⇒ matched scored higher
+    const agree = r.moreFaithful === "wrong" ? margin < 0 : margin > 0;
+    const b = r.confidence === "high" ? buckets.easy : buckets.contested;
+    b.n += 1;
+    if (agree) { b.agree += 1; agreeAll += 1; }
+    b.pairs.push({ key: r.key, matchedScore: r.matchedScore, wrongScore: r.wrongScore, margin, agree });
+  }
+  for (const b of Object.values(buckets)) b.rate = b.n ? b.agree / b.n : 0;
+  const n = rows.length;
+  return { ...buckets, overall: { n, agree: agreeAll, rate: n ? agreeAll / n : 0 } };
+}
+
 export { mean as _meanForHarness };

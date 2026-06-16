@@ -11,6 +11,7 @@ import {
   styleFidelityScore,
   critiqueEvidence,
   dispatchCorrectness,
+  pairAgreement,
   itemStyleClass,
   PENALTY,
   WRONG_STYLE,
@@ -215,4 +216,49 @@ test("BO11 KNOWN LIMIT: present-but-detail-incomplete is classed wrong-style (ty
   assert.equal(itemStyleClass(detailIncomplete), "wrong-style"); // the over-penalty, pinned
   // the typed tag would correct it to "absent" (an add of detail), un-capping the score:
   assert.equal(itemStyleClass({ ...detailIncomplete, kind: "add" }), "absent");
+});
+
+// ---- BO12: pairAgreement buckets easy vs contested SEPARATELY, never averages them ----
+// AC #2's referee: ordering agreement with the human moreFaithful label, split by confidence so an
+// empty contested bucket (the S-167 corpus excludes its contested pair) shows instead of being hidden.
+test("BO12 pairAgreement splits easy/contested by confidence and reports ordering agreement", () => {
+  const rows = [
+    { key: "g-arc", confidence: "high", moreFaithful: "matched", matchedScore: 40, wrongScore: 4 },   // agree
+    { key: "g-chap", confidence: "high", moreFaithful: "matched", matchedScore: 12, wrongScore: 30 }, // DISagree (ordering wrong)
+    { key: "c-mid", confidence: "medium", moreFaithful: "matched", matchedScore: 30, wrongScore: 10 },// contested, agree
+  ];
+  const r = pairAgreement(rows);
+  // easy bucket = the two high-confidence pairs; 1 of 2 ordered correctly
+  assert.equal(r.easy.n, 2);
+  assert.equal(r.easy.agree, 1);
+  assert.equal(r.easy.rate, 0.5);
+  assert.equal(r.easy.pairs[0].margin, 36); // matched 40 − wrong 4
+  assert.equal(r.easy.pairs[0].agree, true);
+  assert.equal(r.easy.pairs[1].agree, false);
+  // contested bucket = the medium-confidence pair, NOT folded into easy
+  assert.equal(r.contested.n, 1);
+  assert.equal(r.contested.agree, 1);
+  assert.equal(r.contested.rate, 1);
+  // overall is reported but the buckets are not averaged away
+  assert.equal(r.overall.n, 3);
+  assert.equal(r.overall.agree, 2);
+});
+
+test("BO12b pairAgreement: empty contested bucket yields no NaN; defensive 'wrong' branch", () => {
+  // The real corpus shape: all pairs high-confidence ⇒ contested is EMPTY by construction.
+  const allEasy = pairAgreement([
+    { key: "a", confidence: "high", moreFaithful: "matched", matchedScore: 40, wrongScore: 0 },
+  ]);
+  assert.equal(allEasy.contested.n, 0);
+  assert.equal(allEasy.contested.rate, 0); // not NaN
+  assert.deepEqual(allEasy.contested.pairs, []);
+  // empty input ⇒ all rates 0, no NaN
+  const empty = pairAgreement([]);
+  assert.equal(empty.overall.rate, 0);
+  assert.equal(empty.easy.rate, 0);
+  // defensive moreFaithful:"wrong" ⇒ agree iff wrong scored higher
+  const wrong = pairAgreement([
+    { key: "w", confidence: "high", moreFaithful: "wrong", matchedScore: 4, wrongScore: 40 },
+  ]);
+  assert.equal(wrong.easy.agree, 1); // wrong (40) > matched (4) and label says wrong ⇒ agree
 });
