@@ -1,0 +1,543 @@
+{
+  "schema": "picture-climb/v1",
+  "subject": "gatehouse",
+  "seed": "benchmarks/sculpture/generated/gatehouse/artifact.json",
+  "program": "benchmarks/sculpture/recognition/gatehouse.program.json",
+  "pack": "rustic",
+  "concept": "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+  "tier": "strong",
+  "votes": 3,
+  "margin": 4,
+  "stopReason": "agent-done",
+  "observedScoreSpread": {
+    "min": 12,
+    "max": 40,
+    "allRoundVotes": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      40,
+      32,
+      12
+    ]
+  },
+  "trajectory": [
+    {
+      "round": 0,
+      "score": 0,
+      "evidence": {
+        "score": 0,
+        "nItems": 5,
+        "nMajor": 4,
+        "nWrongStyle": 3,
+        "wrongStyleBreadth": 3,
+        "departments": [
+          "ROOF",
+          "WALL",
+          "OPENING",
+          "WALL",
+          "OPENING"
+        ],
+        "missing": [
+          "The gable form itself, full-footprint coverage, the lighter eave/verge banding course, and the overhang.",
+          "The grey dressed-stone material family and a closed, ground-to-eave watertight wall plane.",
+          "The arch form and the dark-timber frame around the passage.",
+          "The corner rubble quoins entirely — corners read as the same undifferentiated dark wall.",
+          "All four slit windows — the eave walls show no window openings."
+        ]
+      },
+      "items": [
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "A small stepped pyramid/ziggurat-like cap perched on top of the box, dark, not covering the footprint, no banding, open/sunken center on some angles.",
+          "missing": "The gable form itself, full-footprint coverage, the lighter eave/verge banding course, and the overhang.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Dark, vertically-striped wood-like walls that are ragged and incomplete at the base (gaps, leg-like voids) rather than coursed grey stone.",
+          "missing": "The grey dressed-stone material family and a closed, ground-to-eave watertight wall plane.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "A ragged irregular void at the base of one wall with no arch head and no timber surround.",
+          "missing": "The arch form and the dark-timber frame around the passage.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "",
+          "missing": "The corner rubble quoins entirely — corners read as the same undifferentiated dark wall.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "",
+          "missing": "All four slit windows — the eave walls show no window openings.",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "apply_gable_roof",
+        "reason": "ROOF is the top-ranked major divergence and it is explicitly about form — gable shape, full-footprint coverage, eave/verge banding, and overhang — not colour. Fix the form first before addressing wall material or openings."
+      },
+      "applied": false,
+      "accepted": false
+    },
+    {
+      "round": 1,
+      "score": 0,
+      "evidence": {
+        "score": 0,
+        "nItems": 5,
+        "nMajor": 4,
+        "nWrongStyle": 3,
+        "wrongStyleBreadth": 3,
+        "departments": [
+          "ROOF",
+          "WALL",
+          "OPENING",
+          "WALL",
+          "OPENING"
+        ],
+        "missing": [
+          "The gable form itself, full-footprint coverage, the lighter eave/verge banding course, and the overhang.",
+          "The grey dressed-stone material family and a closed, ground-to-eave watertight wall plane.",
+          "The arch form and the dark-timber frame around the passage.",
+          "The corner rubble quoins entirely — corners read as the same undifferentiated dark wall.",
+          "All four slit windows — the eave walls show no window openings."
+        ]
+      },
+      "items": [
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "A small stepped pyramid/ziggurat-like cap perched on top of the box, dark, not covering the footprint, no banding, open/sunken center on some angles.",
+          "missing": "The gable form itself, full-footprint coverage, the lighter eave/verge banding course, and the overhang.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Dark, vertically-striped wood-like walls that are ragged and incomplete at the base (gaps, leg-like voids) rather than coursed grey stone.",
+          "missing": "The grey dressed-stone material family and a closed, ground-to-eave watertight wall plane.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "A ragged irregular void at the base of one wall with no arch head and no timber surround.",
+          "missing": "The arch form and the dark-timber frame around the passage.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "",
+          "missing": "The corner rubble quoins entirely — corners read as the same undifferentiated dark wall.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "",
+          "missing": "All four slit windows — the eave walls show no window openings.",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "apply_gable_roof",
+        "reason": "ROOF is the top-ranked major divergence and it is explicitly about form — gable shape, full-footprint coverage, eave/verge banding, and overhang — not colour. Fix the form first before addressing wall material or openings."
+      },
+      "applied": true,
+      "accepted": true,
+      "gate": {
+        "accept": true,
+        "delta": 0,
+        "reason": "tie (0): coverage shrank"
+      },
+      "scoreAfter": {
+        "score": 0,
+        "scores": [
+          0,
+          0,
+          0
+        ]
+      },
+      "targetDepartments": [
+        "ROOF"
+      ],
+      "deptMajorsBefore": {
+        "ROOF": 1,
+        "WALL": 2,
+        "OPENING": 1
+      },
+      "deptMajorsAfter": {
+        "ROOF": 2,
+        "OPENING": 1
+      },
+      "deptItemsBefore": {
+        "ROOF": {
+          "major": 1,
+          "minor": 0
+        },
+        "WALL": {
+          "major": 2,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        }
+      },
+      "deptItemsAfter": {
+        "ROOF": {
+          "major": 2,
+          "minor": 1
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 0
+        },
+        "WALL": {
+          "major": 0,
+          "minor": 1
+        }
+      }
+    },
+    {
+      "round": 2,
+      "score": 0,
+      "evidence": {
+        "score": 0,
+        "nItems": 5,
+        "nMajor": 3,
+        "nWrongStyle": 2,
+        "wrongStyleBreadth": 1,
+        "departments": [
+          "ROOF",
+          "ROOF",
+          "OPENING",
+          "ROOF",
+          "WALL"
+        ],
+        "missing": [
+          "The dark roof tone the concept depicts.",
+          "The gable-end-over-the-arch alignment the concept shows.",
+          "The dressed/timber-framed sides of the passage opening.",
+          "The light stone eave/verge banding.",
+          "The rubble quoin contrast at the corners."
+        ]
+      },
+      "items": [
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "A warm light-brown / orange spruce-plank roof.",
+          "missing": "The dark roof tone the concept depicts.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "Ridge oriented so the gable peak faces the perpendicular axis — the arched passage sits under a sloping eave edge, not under a gable peak.",
+          "missing": "The gable-end-over-the-arch alignment the concept shows.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "A through-passage cut whose flanking reveals read as raw, undressed voids on both sides.",
+          "missing": "The dressed/timber-framed sides of the passage opening.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "ROOF",
+          "severity": "minor",
+          "present": "Roof edges are the same wood material as the field, with only a stepped lip.",
+          "missing": "The light stone eave/verge banding.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "WALL",
+          "severity": "minor",
+          "present": "Corners read as the same coursed material as the wall field, with no distinct rubble quoin.",
+          "missing": "The rubble quoin contrast at the corners.",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "recolor_roof",
+        "reason": "apply_gable_roof is already in place (kept); the top remaining major divergence is the roof material — the concept shows a dark-tone roof but the build's roof reads the wrong colour. recolor_roof rebuilds the roof in the concept-true material, directly addressing this."
+      },
+      "applied": true,
+      "accepted": true,
+      "gate": {
+        "accept": true,
+        "delta": 0,
+        "reason": "ROOF cleared a major (department-dominant override)"
+      },
+      "scoreAfter": {
+        "score": 0,
+        "scores": [
+          0,
+          0,
+          0
+        ]
+      },
+      "targetDepartments": [
+        "ROOF"
+      ],
+      "deptMajorsBefore": {
+        "ROOF": 2,
+        "OPENING": 1
+      },
+      "deptMajorsAfter": {
+        "WALL": 2,
+        "OPENING": 1
+      },
+      "deptItemsBefore": {
+        "ROOF": {
+          "major": 2,
+          "minor": 1
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 0
+        },
+        "WALL": {
+          "major": 0,
+          "minor": 1
+        }
+      },
+      "deptItemsAfter": {
+        "WALL": {
+          "major": 2,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        },
+        "ROOF": {
+          "major": 0,
+          "minor": 1
+        }
+      }
+    },
+    {
+      "round": 3,
+      "score": 0,
+      "evidence": {
+        "score": 0,
+        "nItems": 5,
+        "nMajor": 3,
+        "nWrongStyle": 2,
+        "wrongStyleBreadth": 2,
+        "departments": [
+          "WALL",
+          "OPENING",
+          "WALL",
+          "ROOF",
+          "OPENING"
+        ],
+        "missing": [
+          "The grey coursed-stone field material and a continuous closed wall surface",
+          "The arch head and the dark-timber frame around the passage",
+          "The contrasting rough rubble corner quoins",
+          "The lighter stone eave/verge band",
+          "The narrow slit windows on the ±z walls"
+        ]
+      },
+      "items": [
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Near-black, vertically-striped dark material walls with ragged gaps and torn edges; reads as dark timber/log, not grey stone",
+          "missing": "The grey coursed-stone field material and a continuous closed wall surface",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "A ragged torn void on the lower wall with no arch head and no coherent timber surround",
+          "missing": "The arch head and the dark-timber frame around the passage",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Uniform dark material at the corners, no light rubble quoins differentiated from the field",
+          "missing": "The contrasting rough rubble corner quoins",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "ROOF",
+          "severity": "minor",
+          "present": "Uniformly dark/black stepped roof with no lighter banding at eave or verge",
+          "missing": "The lighter stone eave/verge band",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "Eave-side walls are dark and broken; no clean paired slit windows read",
+          "missing": "The narrow slit windows on the ±z walls",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "construct_walls",
+        "reason": "Both major divergences are WALL: wrong field material and missing corner quoins. construct_walls rebuilds the envelope with per-storey material, dressed quoins, and clinker courses — directly addressing both."
+      },
+      "applied": true,
+      "accepted": true,
+      "gate": {
+        "accept": true,
+        "delta": 32,
+        "reason": "improved +32"
+      },
+      "scoreAfter": {
+        "score": 32,
+        "scores": [
+          40,
+          32,
+          12
+        ]
+      },
+      "targetDepartments": [
+        "WALL",
+        "OPENING"
+      ],
+      "deptMajorsBefore": {
+        "WALL": 2,
+        "OPENING": 1
+      },
+      "deptMajorsAfter": {
+        "WALL": 1,
+        "OPENING": 1
+      },
+      "deptItemsBefore": {
+        "WALL": {
+          "major": 2,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        },
+        "ROOF": {
+          "major": 0,
+          "minor": 1
+        }
+      },
+      "deptItemsAfter": {
+        "WALL": {
+          "major": 1,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        },
+        "ROOF": {
+          "major": 0,
+          "minor": 1
+        }
+      }
+    },
+    {
+      "round": 3,
+      "score": 32,
+      "items": [],
+      "pick": {
+        "tool": "—"
+      },
+      "applied": false,
+      "accepted": false,
+      "terminal": true
+    }
+  ],
+  "inventory": {
+    "actedOn": [
+      {
+        "department": "ROOF",
+        "byTool": [
+          "apply_gable_roof",
+          "recolor_roof"
+        ],
+        "rounds": [
+          1,
+          2
+        ],
+        "deltas": [
+          0,
+          0
+        ]
+      },
+      {
+        "department": "WALL",
+        "byTool": [
+          "construct_walls"
+        ],
+        "rounds": [
+          3
+        ],
+        "deltas": [
+          32
+        ]
+      },
+      {
+        "department": "OPENING",
+        "byTool": [
+          "construct_walls"
+        ],
+        "rounds": [
+          3
+        ],
+        "deltas": [
+          32
+        ]
+      }
+    ],
+    "eyesOnly": [],
+    "verdict": {
+      "climbed": true,
+      "stalled": false,
+      "oscillated": false,
+      "actionableFrac": 1,
+      "scoreFirst": 0,
+      "scoreLast": 32,
+      "delta": 32
+    }
+  }
+}
