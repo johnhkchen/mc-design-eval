@@ -36,14 +36,55 @@ export const TOOL_DEPARTMENTS = Object.freeze({
 });
 
 /**
- * Accept-gate (design C3). Keep `after` over `before` iff the median picture score improves past MARGIN;
- * on a within-margin tie, keep iff critique coverage shrank (fewer wrong-style departments OR fewer
- * majors); otherwise roll back. `before`/`after` are `critiqueEvidence` bundles.
+ * Per-department MAJOR counts, derived purely from a critique's `items`. `critiqueEvidence` exposes only the
+ * WHOLE-BUILD `nMajor`; this is the finer signal the department-aware accept-gate needs (T-190-01). When a
+ * tool clears the major in its OWN department, the judge often promotes a pre-existing major elsewhere, so
+ * whole-build `nMajor` stays flat (T-189 §3, "attention-shift, not regression") — only the per-department
+ * count moves. Skips items with no department. Pure (no mutation of `items`).
+ * @param {Array<{department?:string, severity?:string}>} items
+ * @returns {{[department:string]: number}}
+ */
+export function deptMajorCounts(items = []) {
+  const out = {};
+  for (const it of items) {
+    if (!it?.department || it.severity !== "major") continue;
+    out[it.department] = (out[it.department] ?? 0) + 1;
+  }
+  return out;
+}
+
+/**
+ * A stable, order-independent digest of a build's cells — equality is all the runner's no-op guard needs
+ * (no crypto). INCLUDES the block id, so a roof rebuilt in a different material (recolor_roof vs
+ * apply_gable_roof: same positions, different field block) hashes DIFFERENTLY — the guard suppresses true
+ * no-ops, never a real material change (T-190-01). Pure.
+ * @param {Array<{pos:number[], block:string}>} cells
+ * @returns {string}
+ */
+export function buildDigest(cells = []) {
+  return cells
+    .map((c) => `${(c.pos ?? []).join(",")}|${c.block ?? ""}`)
+    .sort()
+    .join("\n");
+}
+
+/**
+ * Accept-gate (design C3 + T-190-01 department-aware tie-break). Keep `after` over `before` iff the median
+ * picture score improves past MARGIN; on a within-margin tie, keep iff critique coverage shrank — either the
+ * WHOLE-BUILD coverage (fewer wrong-style departments OR fewer majors) OR a department the applied tool
+ * TARGETS lost a major (`beforeDeptMajors[d] > afterDeptMajors[d]`). The department-aware leg is the
+ * S-190 calibration T-189 §6.1 named: a tool that does its job in its own department is KEPT even when the
+ * judge's attention shifts to a pre-existing major elsewhere and the whole-build `nMajor` stays flat.
+ * Backward compatible: with no `targetDepartments`/`*DeptMajors`, the new leg is inert.
+ * `before`/`after` are `critiqueEvidence` bundles.
  * @param {{score:number, nMajor?:number, wrongStyleBreadth?:number}} before
  * @param {{score:number, nMajor?:number, wrongStyleBreadth?:number}} after
+ * @param {{margin?:number, targetDepartments?:string[], beforeDeptMajors?:object, afterDeptMajors?:object}} [opts]
  * @returns {{accept:boolean, delta:number, reason:string}}
  */
-export function acceptsRound(before, after, { margin = CLIMB_DEFAULTS.margin } = {}) {
+export function acceptsRound(before, after, {
+  margin = CLIMB_DEFAULTS.margin, targetDepartments = null, beforeDeptMajors = null, afterDeptMajors = null,
+} = {}) {
   if (!before || !after) fail("acceptsRound", "before and after evidence are required");
   const delta = num(after.score) - num(before.score);
   if (delta >= margin) return { accept: true, delta, reason: `improved +${Math.round(delta)}` };
@@ -53,6 +94,12 @@ export function acceptsRound(before, after, { margin = CLIMB_DEFAULTS.margin } =
   const majorsShrank = num(after.nMajor) < num(before.nMajor);
   if (breadthShrank || majorsShrank) {
     return { accept: true, delta, reason: `tie (${Math.round(delta)}): coverage shrank` };
+  }
+  // department-aware leg (T-190-01): the tool cleared a major in a department it targets, even though the
+  // whole-build coverage is flat (the judge promoted a pre-existing major elsewhere).
+  if (Array.isArray(targetDepartments) && beforeDeptMajors && afterDeptMajors) {
+    const cleared = targetDepartments.find((d) => num(beforeDeptMajors[d]) > num(afterDeptMajors[d]));
+    if (cleared) return { accept: true, delta, reason: `tie (${Math.round(delta)}): ${cleared} cleared a major` };
   }
   return { accept: false, delta, reason: `tie (${Math.round(delta)}): no shrink` };
 }

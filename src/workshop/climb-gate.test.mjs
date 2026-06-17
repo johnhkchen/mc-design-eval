@@ -9,6 +9,8 @@ import {
   acceptsRound,
   stoppingDecision,
   classifyInventory,
+  deptMajorCounts,
+  buildDigest,
   CLIMB_DEFAULTS,
   TOOL_DEPARTMENTS,
   CLIMB_GATE_SCHEMA,
@@ -146,4 +148,85 @@ test("CG8 classifyInventory reports a flat run as stalled and does not mutate in
 // ---- CG9: classifyInventory — empty trajectory is a loud failure, not a silent pass ----
 test("CG9 classifyInventory rejects an empty trajectory", () => {
   assert.throws(() => classifyInventory([]), /non-empty/);
+});
+
+// ---- CG10: deptMajorCounts — majors counted per department, minors ignored (T-190-01) ----
+test("CG10 deptMajorCounts counts majors per department and ignores minors", () => {
+  const items = [
+    { department: "ROOF", severity: "major" },
+    { department: "WALL", severity: "major" },
+    { department: "WALL", severity: "major" },
+    { department: "WALL", severity: "minor" },   // ignored
+    { department: "OPENING", severity: "minor" }, // ignored
+    { severity: "major" },                         // no department → skipped
+  ];
+  assert.deepEqual(deptMajorCounts(items), { ROOF: 1, WALL: 2 });
+  assert.deepEqual(deptMajorCounts([]), {});
+  assert.deepEqual(deptMajorCounts(undefined), {});
+});
+
+// ---- CG11: acceptsRound — department-aware tie-break keeps a tool that cleared its own major (T-190-01) ----
+test("CG11 acceptsRound keeps a tool that clears a major in its target department", () => {
+  // The T-189 scenario: ROOF major clears but a pre-existing WALL major is promoted, so whole-build nMajor
+  // and breadth are FLAT and the score is within margin — yet recolor_roof did its job. Department-aware
+  // leg keeps it.
+  const accept = acceptsRound(
+    { score: 40, wrongStyleBreadth: 1, nMajor: 1 },
+    { score: 42, wrongStyleBreadth: 1, nMajor: 1 },
+    {
+      margin: 4,
+      targetDepartments: ["ROOF"],
+      beforeDeptMajors: { ROOF: 1, WALL: 0 },
+      afterDeptMajors: { ROOF: 0, WALL: 1 }, // attention shifted to WALL
+    },
+  );
+  assert.equal(accept.accept, true);
+  assert.match(accept.reason, /ROOF cleared a major/);
+
+  // Negative: the target department did NOT clear → still reject (flat whole-build, no department clear).
+  const reject = acceptsRound(
+    { score: 40, wrongStyleBreadth: 1, nMajor: 1 },
+    { score: 41, wrongStyleBreadth: 1, nMajor: 1 },
+    {
+      margin: 4,
+      targetDepartments: ["ROOF"],
+      beforeDeptMajors: { ROOF: 1 },
+      afterDeptMajors: { ROOF: 1 },
+    },
+  );
+  assert.equal(reject.accept, false);
+  assert.match(reject.reason, /no shrink/);
+
+  // Backward compatibility: no department context → identical to the legacy tie verdict (CG3 inputs).
+  const legacy = acceptsRound(
+    { score: 20, wrongStyleBreadth: 2, nMajor: 1 },
+    { score: 21, wrongStyleBreadth: 2, nMajor: 1 },
+    { margin: 4 },
+  );
+  assert.equal(legacy.accept, false);
+  assert.match(legacy.reason, /no shrink/);
+
+  // A real regression past the margin still rejects BEFORE the department leg is reached.
+  const regress = acceptsRound(
+    { score: 50, nMajor: 1 }, { score: 30, nMajor: 1 },
+    { margin: 4, targetDepartments: ["ROOF"], beforeDeptMajors: { ROOF: 1 }, afterDeptMajors: { ROOF: 0 } },
+  );
+  assert.equal(regress.accept, false);
+  assert.match(regress.reason, /regressed/);
+});
+
+// ---- CG12: buildDigest — order-independent, block-sensitive, stable on empty (T-190-01) ----
+test("CG12 buildDigest is order-independent and block-sensitive", () => {
+  const a = [{ pos: [0, 0, 0], block: "stone" }, { pos: [1, 0, 0], block: "deepslate_tiles" }];
+  const aPermuted = [{ pos: [1, 0, 0], block: "deepslate_tiles" }, { pos: [0, 0, 0], block: "stone" }];
+  assert.equal(buildDigest(a), buildDigest(aPermuted)); // permutation → same digest
+
+  // Same positions, different block (recolor_roof vs apply_gable_roof) → DIFFERENT digest.
+  const brown = [{ pos: [0, 0, 0], block: "spruce_planks" }];
+  const grey = [{ pos: [0, 0, 0], block: "deepslate_tiles" }];
+  assert.notEqual(buildDigest(brown), buildDigest(grey));
+
+  // Empty is stable and non-throwing.
+  assert.equal(buildDigest([]), "");
+  assert.equal(buildDigest(), "");
 });
