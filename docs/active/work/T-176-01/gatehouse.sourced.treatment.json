@@ -1,0 +1,48 @@
+{
+  "schema": "treatment-grammar/v1",
+  "subject": "gatehouse",
+  "style": "rustic",
+  "provenance": "sourced",
+  "base": {
+    "material": "cobblestone",
+    "amplitude": {
+      "depth": 1
+    }
+  },
+  "field": {
+    "recess": true,
+    "material": "stone_bricks"
+  },
+  "edges": {
+    "corners": {
+      "material": "cobblestone",
+      "amplitude": {
+        "headerDepth": 2
+      }
+    },
+    "top": {
+      "material": "cobblestone",
+      "amplitude": {
+        "depth": 1,
+        "courses": 1
+      }
+    },
+    "opening": {
+      "frame": "dark_oak_log",
+      "door": "spruce_door",
+      "light": "lantern"
+    }
+  },
+  "roof": {
+    "edge": {
+      "material": "stone_bricks",
+      "amplitude": {
+        "eaveDepth": 1,
+        "ridgeCourses": 1
+      }
+    },
+    "field": {
+      "material": "dark_oak_planks"
+    }
+  }
+}
