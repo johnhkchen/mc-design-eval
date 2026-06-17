@@ -19,14 +19,19 @@
   stale).
 - **`npm test` green: 2283 pass / 0 fail** (was 2277; +6 TG21–TG26). Grammar file: 26/26.
 
-## Remaining
+- **Step 4 — witness render (committed).** Runner `treatment-verge-voussoir-beside.mjs` renders the faithful
+  gatehouse (rake verge reads: 34 proud cells vs the T-176 198-cell heavy band, `curve=true`) and a synthetic
+  arched passage (bare void vs voussoir-dressed, `curve=true`, 6 voussoirs) through the same compositor.
+  Closure ok on every build. Outputs `verge-voussoir-beside.png`, `arch-head-synthetic-beside.png`,
+  `gatehouse.vergehead.treatment.json`. Found + fixed an orientation bug in `deriveArchHead` (head direction
+  read from the lintel, not assumed) so live ±z apertures dress correctly.
+- **Step 5 — FINDINGS + review (done).** `FINDINGS.md` (glance call + the honest AC4 answer: edge classifier
+  was the sub-problem; the profile primitive closes both and generalizes) and `review.md` (handoff).
 
-- **Step 4 — witness render (in progress).** New runner `experiments/eval-alignment/treatment-verge-voussoir-beside.mjs`:
-  load the faithful gatehouse, source the spec (+ `roof.edge`, `edges.opening.voussoir`), compose wall →
-  roof(rake) → voussoir head, render the −x gable elevation beside the concept, assert closure. Output →
-  `docs/active/work/T-179-01/verge-voussoir-beside.png` + `gatehouse.vergehead.treatment.json`. Glance call
-  recorded in FINDINGS.
-- **Step 5 — FINDINGS + review.**
+## Honest negative recorded
+The faithful gatehouse gate is NOT a detected arched aperture (only 4 rectangular window slits), so the
+voussoir head no-ops on the real build — a BUILD gap (S-177), not a grammar gap. Witnessed on synthetic arch
+geometry + unit tests instead. The verge reads on the real build.
 
 ## Deviations from plan
 
