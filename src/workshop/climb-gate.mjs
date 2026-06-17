@@ -1,0 +1,139 @@
+// PICTURE-DRIVEN CLIMB — the accept-gate, the stopping rule, and the run-derived eyes-vs-hands
+// classifier (T-188-01, story S-188, epic E-48). PURE: no GL, no LLM, no I/O — so the climb's *decisions*
+// are unit-tested in isolation while the metered runner (experiments/eval-alignment/picture-climb.mjs)
+// stays thin and out of `npm test`.
+//
+// The climb wires the E-47 picture-anchored DiagnoseBuild critique as the gradient: render → critique →
+// pick a tool → apply → re-critique. This module supplies the two pieces the E-38 autonomy loop lacked:
+//   (1) an ACCEPT-GATE — keep a round only if it moved the build TOWARD the concept on the picture
+//       critique (a noisy, cap-dominated score), never just because it changed; and
+//   (2) a RESTRAINT / STOPPING rule — converge, don't oscillate (T-176's amplitude loop overshot).
+// And it derives, from the recorded trajectory alone, the EYES-vs-HANDS inventory: which named critiques
+// the loop could act on vs which it named but had no lever for (the discovered S-189 scope — no
+// speculative fix list, only what the run surfaced).
+
+export const CLIMB_GATE_SCHEMA = "climb-gate/v1";
+
+const fail = (where, msg) => { throw new Error(`${where}: ${msg}`); };
+const num = (v, d = 0) => (Number.isFinite(v) ? v : d);
+
+// Tunables (design C/D). MARGIN ≈ one minor critique item; the runner reports the OBSERVED vote spread
+// beside it so the gate is calibrated, not asserted. stallK rolled-back rounds ⇒ converged. ROUNDS gives
+// the climb room while bounding metered spend; minRounds enforces the ticket's "≥3 rounds run".
+export const CLIMB_DEFAULTS = Object.freeze({ margin: 4, stallK: 2, maxRounds: 5, minRounds: 3 });
+
+// Factual reach of the three EXISTING occ-tools (autonomy-loop.mjs) over the five departments — a
+// DESCRIPTION of what the hands touch, NOT a fix proposal. Used only to label "no tool targets this
+// department". OPENING under construct_walls is incidental (the skin's dressOpenings), recorded as such.
+export const TOOL_DEPARTMENTS = Object.freeze({
+  apply_gable_roof: Object.freeze(["ROOF"]),
+  construct_walls: Object.freeze(["WALL", "OPENING"]),
+  add_timber_framing: Object.freeze(["WALL"]),
+});
+
+/**
+ * Accept-gate (design C3). Keep `after` over `before` iff the median picture score improves past MARGIN;
+ * on a within-margin tie, keep iff critique coverage shrank (fewer wrong-style departments OR fewer
+ * majors); otherwise roll back. `before`/`after` are `critiqueEvidence` bundles.
+ * @param {{score:number, nMajor?:number, wrongStyleBreadth?:number}} before
+ * @param {{score:number, nMajor?:number, wrongStyleBreadth?:number}} after
+ * @returns {{accept:boolean, delta:number, reason:string}}
+ */
+export function acceptsRound(before, after, { margin = CLIMB_DEFAULTS.margin } = {}) {
+  if (!before || !after) fail("acceptsRound", "before and after evidence are required");
+  const delta = num(after.score) - num(before.score);
+  if (delta >= margin) return { accept: true, delta, reason: `improved +${Math.round(delta)}` };
+  if (delta <= -margin) return { accept: false, delta, reason: `regressed ${Math.round(delta)}` };
+  // tie zone: let coverage break the tie
+  const breadthShrank = num(after.wrongStyleBreadth) < num(before.wrongStyleBreadth);
+  const majorsShrank = num(after.nMajor) < num(before.nMajor);
+  if (breadthShrank || majorsShrank) {
+    return { accept: true, delta, reason: `tie (${Math.round(delta)}): coverage shrank` };
+  }
+  return { accept: false, delta, reason: `tie (${Math.round(delta)}): no shrink` };
+}
+
+/**
+ * Restraint / stopping rule (design D2). Stop on agent `done`, OR stallK consecutive rolled-back rounds,
+ * OR the round cap — but NEVER before minRounds (guarantees the ≥3-rounds AC even if the agent quits or
+ * the build converges early). `round` is the count of tool-rounds completed.
+ * @returns {{stop:boolean, reason:string|null}}
+ */
+export function stoppingDecision({
+  round, agentDone = false, noAcceptStreak = 0,
+  stallK = CLIMB_DEFAULTS.stallK, maxRounds = CLIMB_DEFAULTS.maxRounds, minRounds = CLIMB_DEFAULTS.minRounds,
+} = {}) {
+  if (!Number.isFinite(round)) fail("stoppingDecision", "round is required");
+  if (round < minRounds) return { stop: false, reason: null };
+  if (agentDone) return { stop: true, reason: "agent-done" };
+  if (noAcceptStreak >= stallK) return { stop: true, reason: `stalled (${noAcceptStreak} rolled back)` };
+  if (round >= maxRounds) return { stop: true, reason: "round cap" };
+  return { stop: false, reason: null };
+}
+
+const departmentsOfTool = (tool) => TOOL_DEPARTMENTS[tool] ?? [];
+
+/**
+ * The eyes-vs-hands inventory, derived PURELY from the recorded trajectory (no speculation). A department
+ * is ACTED-ON iff some round that APPLIED a tool and was ACCEPTED used a tool whose TOOL_DEPARTMENTS
+ * includes it; every department named in any round's critique items that is not acted-on is EYES-ONLY.
+ *
+ * Each trajectory round: { round, score, items:[{department, kind, severity, missing}], pick:{tool},
+ *   applied:boolean, accepted:boolean, scoreAfter?:{score} }. The terminal/done round may carry the final
+ *   build score as `score` (so scoreLast reads the kept build).
+ * @returns {{actedOn:Array, eyesOnly:Array, verdict:object}}
+ */
+export function classifyInventory(trajectory, { margin = CLIMB_DEFAULTS.margin } = {}) {
+  if (!Array.isArray(trajectory) || trajectory.length === 0) {
+    fail("classifyInventory", "trajectory must be a non-empty array");
+  }
+
+  // Acted-on: group accepted tool-applications by the departments they reach.
+  const actedMap = new Map(); // department -> {department, byTool:Set, rounds:[], deltas:[]}
+  const toolOutcomes = new Map(); // tool -> {accepted:bool, rejected:bool}
+  for (const r of trajectory) {
+    if (!r.applied || !r.pick?.tool) continue;
+    const o = toolOutcomes.get(r.pick.tool) ?? { accepted: false, rejected: false };
+    if (r.accepted) o.accepted = true; else o.rejected = true;
+    toolOutcomes.set(r.pick.tool, o);
+    if (!r.accepted) continue;
+    const delta = num(r.scoreAfter?.score) - num(r.score);
+    for (const dept of departmentsOfTool(r.pick.tool)) {
+      const e = actedMap.get(dept) ?? { department: dept, byTool: new Set(), rounds: [], deltas: [] };
+      e.byTool.add(r.pick.tool); e.rounds.push(r.round); e.deltas.push(Math.round(delta));
+      actedMap.set(dept, e);
+    }
+  }
+  const actedOn = [...actedMap.values()].map((e) => ({
+    department: e.department, byTool: [...e.byTool], rounds: e.rounds, deltas: e.deltas,
+  }));
+  const actedDepts = new Set(actedMap.keys());
+
+  // Eyes-only: every department NAMED in a critique that no accepted tool reached.
+  const namedMap = new Map(); // department -> [{round, kind, severity, missing}]
+  for (const r of trajectory) {
+    for (const it of r.items ?? []) {
+      if (!it?.department || actedDepts.has(it.department)) continue;
+      const list = namedMap.get(it.department) ?? [];
+      list.push({ round: r.round, kind: it.kind ?? null, severity: it.severity ?? null, missing: it.missing ?? "" });
+      namedMap.set(it.department, list);
+    }
+  }
+  const eyesOnly = [...namedMap.entries()].map(([department, namedItems]) => ({ department, namedItems }));
+
+  // Verdict (run-derived, honest).
+  const scoreFirst = num(trajectory[0].score);
+  const scoreLast = num(trajectory[trajectory.length - 1].score);
+  const delta = scoreLast - scoreFirst;
+  const oscillated = [...toolOutcomes.values()].some((o) => o.accepted && o.rejected);
+  const climbed = delta > margin;
+  const stalled = !climbed && !oscillated; // converged without a clear up-move
+  const applies = trajectory.filter((r) => r.applied).length;
+  const accepts = trajectory.filter((r) => r.applied && r.accepted).length;
+  const actionableFrac = applies ? +(accepts / applies).toFixed(3) : 0;
+
+  return {
+    actedOn, eyesOnly,
+    verdict: { climbed, stalled, oscillated, actionableFrac, scoreFirst, scoreLast, delta: Math.round(delta) },
+  };
+}
