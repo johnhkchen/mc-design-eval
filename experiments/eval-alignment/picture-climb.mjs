@@ -42,7 +42,7 @@ import { runTieredOp } from "../../src/model-tier.mjs";
 import { bamlRender, bamlParse } from "../../src/baml/bridge.mjs";
 import { diagnoseRenderArgs } from "../../src/workshop/diagnose.mjs";
 import { critiqueEvidence, itemStyleClass, styleFidelityScore } from "../../src/workshop/bakeoff-score.mjs";
-import { acceptsRound, stoppingDecision, classifyInventory, deptMajorCounts, buildDigest, TOOL_DEPARTMENTS, CLIMB_DEFAULTS } from "../../src/workshop/climb-gate.mjs";
+import { acceptsRound, stoppingDecision, classifyInventory, deptMajorCounts, deptItemCounts, buildDigest, TOOL_DEPARTMENTS, CLIMB_DEFAULTS } from "../../src/workshop/climb-gate.mjs";
 import { reconcileRoofMaterial } from "../../src/recognition/roof-material.mjs";
 import { assertMaterialMap } from "../../src/form/material-map.mjs";
 
@@ -301,12 +301,17 @@ async function main() {
     }
 
     const candScore = await scoreBuild(cand, template, round, "cand");
-    // Department-aware accept signal (T-190-01): keep a tool that cleared a major in a department it targets
-    // even when the whole-build scalar is flat (the judge promoted a pre-existing major elsewhere).
+    // Department-dominant accept signal (T-190-01 + T-191-01): keep a tool that cleared a major in a
+    // department it targets and grew no targeted dept's total burden, even on a whole-build scalar REGRESSION
+    // (the judge promoted a pre-existing major in an UNtargeted dept — attention-shift, not regression). The
+    // net (major+minor) counts are the falsification guard: they reject "cleared a major but added minors in
+    // its own target" (S-191). All counts are derived purely from the items already on each scored build.
     const targetDepartments = TOOL_DEPARTMENTS[pick.tool];
     const beforeDeptMajors = deptMajorCounts(prev.items);
     const afterDeptMajors = deptMajorCounts(candScore.items);
-    const gate = acceptsRound(prev, candScore, { margin, targetDepartments, beforeDeptMajors, afterDeptMajors });
+    const beforeDeptItems = deptItemCounts(prev.items);
+    const afterDeptItems = deptItemCounts(candScore.items);
+    const gate = acceptsRound(prev, candScore, { margin, targetDepartments, beforeDeptMajors, afterDeptMajors, beforeDeptItems, afterDeptItems });
     if (gate.accept) { occ = cand; prevDigest = candDigest; }
     noAcceptStreak = gate.accept ? 0 : noAcceptStreak + 1;
     history.push({ tool: pick.tool, qBefore: prev.score, qAfter: candScore.score, accepted: gate.accept, reason: gate.reason });
@@ -314,7 +319,8 @@ async function main() {
 
     trajectory.push({ round, score: prev.score, evidence: evOf(prev), items: prev.items,
       pick, applied: true, accepted: gate.accept, gate, scoreAfter: { score: candScore.score, scores: candScore.scores },
-      targetDepartments, deptMajorsBefore: beforeDeptMajors, deptMajorsAfter: afterDeptMajors });
+      targetDepartments, deptMajorsBefore: beforeDeptMajors, deptMajorsAfter: afterDeptMajors,
+      deptItemsBefore: beforeDeptItems, deptItemsAfter: afterDeptItems });
 
     prev = gate.accept ? candScore : prev;
     pick = await agentPick(prev, history);

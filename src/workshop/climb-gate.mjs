@@ -54,6 +54,26 @@ export function deptMajorCounts(items = []) {
 }
 
 /**
+ * Per-department {major, minor} item counts — the NET companion to deptMajorCounts (T-191-01). The
+ * department-dominant override needs the TOTAL burden per targeted department (not just majors) so it can
+ * REJECT a tool that clears a targeted major while adding new minors in its own target (net degradation),
+ * while still KEEPING a major→fewer-or-equal-total improvement (incl. a major→minor swap). Skips items with
+ * no department; counts only "major"/"minor" severities. Pure (no mutation of `items`).
+ * @param {Array<{department?:string, severity?:string}>} items
+ * @returns {{[department:string]: {major:number, minor:number}}}
+ */
+export function deptItemCounts(items = []) {
+  const out = {};
+  for (const it of items) {
+    if (!it?.department) continue;
+    if (it.severity !== "major" && it.severity !== "minor") continue;
+    const e = out[it.department] ?? (out[it.department] = { major: 0, minor: 0 });
+    e[it.severity] += 1;
+  }
+  return out;
+}
+
+/**
  * A stable, order-independent digest of a build's cells — equality is all the runner's no-op guard needs
  * (no crypto). INCLUDES the block id, so a roof rebuilt in a different material (recolor_roof vs
  * apply_gable_roof: same positions, different field block) hashes DIFFERENTLY — the guard suppresses true
@@ -69,37 +89,64 @@ export function buildDigest(cells = []) {
 }
 
 /**
- * Accept-gate (design C3 + T-190-01 department-aware tie-break). Keep `after` over `before` iff the median
- * picture score improves past MARGIN; on a within-margin tie, keep iff critique coverage shrank — either the
- * WHOLE-BUILD coverage (fewer wrong-style departments OR fewer majors) OR a department the applied tool
- * TARGETS lost a major (`beforeDeptMajors[d] > afterDeptMajors[d]`). The department-aware leg is the
- * S-190 calibration T-189 §6.1 named: a tool that does its job in its own department is KEPT even when the
- * judge's attention shifts to a pre-existing major elsewhere and the whole-build `nMajor` stays flat.
- * Backward compatible: with no `targetDepartments`/`*DeptMajors`, the new leg is inert.
- * `before`/`after` are `critiqueEvidence` bundles.
+ * The DEPARTMENT-DOMINANT OVERRIDE (T-191-01). Returns the name of a department the applied tool TARGETS and
+ * in which it cleared a major — but ONLY if the tool did not make any of its targeted departments worse —
+ * else `null`. The override lets a tool that did its job in its own department be KEPT even on a whole-build
+ * scalar regression (the judge promoted a pre-existing major in an UNtargeted department: attention-shift,
+ * not regression — T-190-01 §ceiling). Three guards:
+ *   (a) cleared — some targeted dept's major count fell (`beforeDeptMajors[d] > afterDeptMajors[d]`);
+ *   (b) no new major — no targeted dept's major count rose;
+ *   (c) net guard — no targeted dept's TOTAL item count (major+minor) rose. This is the net-minor tightening
+ *       the falsification (S-191) demands: it REJECTS "cleared a major but added minors in its own target"
+ *       (net degradation) while KEEPING a major→fewer-or-equal-total improvement. Active only when
+ *       `beforeDeptItems`/`afterDeptItems` are supplied; with majors-only data the guard degrades to (a)+(b)
+ *       (which LEAKS the added-minors case — see test CG15, the documented reason the net guard exists).
+ * Pure. Inert (returns `null`) without `targetDepartments` + `*DeptMajors`.
+ */
+function departmentDominant({ targetDepartments, beforeDeptMajors, afterDeptMajors, beforeDeptItems, afterDeptItems }) {
+  if (!Array.isArray(targetDepartments) || !beforeDeptMajors || !afterDeptMajors) return null;
+  const cleared = targetDepartments.find((d) => num(beforeDeptMajors[d]) > num(afterDeptMajors[d]));
+  if (!cleared) return null;                                                        // (a)
+  for (const d of targetDepartments) if (num(afterDeptMajors[d]) > num(beforeDeptMajors[d])) return null; // (b)
+  if (beforeDeptItems && afterDeptItems) {                                          // (c) net guard
+    const tot = (c) => num(c?.major) + num(c?.minor);
+    for (const d of targetDepartments) if (tot(afterDeptItems[d]) > tot(beforeDeptItems[d])) return null;
+  }
+  return cleared;
+}
+
+/**
+ * Accept-gate (design C3 + T-190-01 department-aware signal + T-191-01 department-dominant override). Keep
+ * `after` over `before` iff the median picture score improves past MARGIN; otherwise consult the
+ * DEPARTMENT-DOMINANT OVERRIDE — a tool that cleared a major in a department it TARGETS, added no new major
+ * in any targeted dept, and grew no targeted dept's total burden, is KEPT even on a whole-build scalar
+ * REGRESSION (the regression is then provably attention-shift to an UNtargeted department). Failing both, a
+ * within-margin tie is broken by whole-build coverage shrink (fewer wrong-style departments OR fewer majors),
+ * else the round is rolled back. The override supersedes T-190's tie-zone department leg (it is a superset:
+ * it fires on regressions too, and is net-guarded). Backward compatible: with no department context the
+ * override is inert. `before`/`after` are `critiqueEvidence` bundles.
  * @param {{score:number, nMajor?:number, wrongStyleBreadth?:number}} before
  * @param {{score:number, nMajor?:number, wrongStyleBreadth?:number}} after
- * @param {{margin?:number, targetDepartments?:string[], beforeDeptMajors?:object, afterDeptMajors?:object}} [opts]
+ * @param {{margin?:number, targetDepartments?:string[], beforeDeptMajors?:object, afterDeptMajors?:object, beforeDeptItems?:object, afterDeptItems?:object}} [opts]
  * @returns {{accept:boolean, delta:number, reason:string}}
  */
 export function acceptsRound(before, after, {
-  margin = CLIMB_DEFAULTS.margin, targetDepartments = null, beforeDeptMajors = null, afterDeptMajors = null,
+  margin = CLIMB_DEFAULTS.margin, targetDepartments = null,
+  beforeDeptMajors = null, afterDeptMajors = null, beforeDeptItems = null, afterDeptItems = null,
 } = {}) {
   if (!before || !after) fail("acceptsRound", "before and after evidence are required");
   const delta = num(after.score) - num(before.score);
   if (delta >= margin) return { accept: true, delta, reason: `improved +${Math.round(delta)}` };
+  // department-dominant override (T-191-01): runs BEFORE the regression reject so a tool that did its job in
+  // its own department survives a whole-build scalar regression caused by attention-shift elsewhere.
+  const dom = departmentDominant({ targetDepartments, beforeDeptMajors, afterDeptMajors, beforeDeptItems, afterDeptItems });
+  if (dom) return { accept: true, delta, reason: `${dom} cleared a major (department-dominant override)` };
   if (delta <= -margin) return { accept: false, delta, reason: `regressed ${Math.round(delta)}` };
-  // tie zone: let coverage break the tie
+  // tie zone: let whole-build coverage break the tie
   const breadthShrank = num(after.wrongStyleBreadth) < num(before.wrongStyleBreadth);
   const majorsShrank = num(after.nMajor) < num(before.nMajor);
   if (breadthShrank || majorsShrank) {
     return { accept: true, delta, reason: `tie (${Math.round(delta)}): coverage shrank` };
-  }
-  // department-aware leg (T-190-01): the tool cleared a major in a department it targets, even though the
-  // whole-build coverage is flat (the judge promoted a pre-existing major elsewhere).
-  if (Array.isArray(targetDepartments) && beforeDeptMajors && afterDeptMajors) {
-    const cleared = targetDepartments.find((d) => num(beforeDeptMajors[d]) > num(afterDeptMajors[d]));
-    if (cleared) return { accept: true, delta, reason: `tie (${Math.round(delta)}): ${cleared} cleared a major` };
   }
   return { accept: false, delta, reason: `tie (${Math.round(delta)}): no shrink` };
 }

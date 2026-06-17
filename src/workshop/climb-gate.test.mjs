@@ -10,6 +10,7 @@ import {
   stoppingDecision,
   classifyInventory,
   deptMajorCounts,
+  deptItemCounts,
   buildDigest,
   CLIMB_DEFAULTS,
   TOOL_DEPARTMENTS,
@@ -206,13 +207,21 @@ test("CG11 acceptsRound keeps a tool that clears a major in its target departmen
   assert.equal(legacy.accept, false);
   assert.match(legacy.reason, /no shrink/);
 
-  // A real regression past the margin still rejects BEFORE the department leg is reached.
-  const regress = acceptsRound(
+  // T-191-01 INTENDED SEMANTIC CHANGE: a past-margin regression where the tool CLEARED a major in its target
+  // department and grew no targeted dept's total burden is now KEPT by the department-dominant override (the
+  // regression is attention-shift to an UNtargeted dept). This is the case T-190 §ceiling named and T-191
+  // deliberately inverts — pre-T-191 this rejected at the regression branch.
+  const overrideKeep = acceptsRound(
     { score: 50, nMajor: 1 }, { score: 30, nMajor: 1 },
-    { margin: 4, targetDepartments: ["ROOF"], beforeDeptMajors: { ROOF: 1 }, afterDeptMajors: { ROOF: 0 } },
+    {
+      margin: 4, targetDepartments: ["ROOF"],
+      beforeDeptMajors: { ROOF: 1 }, afterDeptMajors: { ROOF: 0, WALL: 1 },
+      beforeDeptItems: { ROOF: { major: 1, minor: 0 } },
+      afterDeptItems: { ROOF: { major: 0, minor: 0 }, WALL: { major: 1, minor: 0 } },
+    },
   );
-  assert.equal(regress.accept, false);
-  assert.match(regress.reason, /regressed/);
+  assert.equal(overrideKeep.accept, true);
+  assert.match(overrideKeep.reason, /ROOF cleared a major \(department-dominant override\)/);
 });
 
 // ---- CG12: buildDigest — order-independent, block-sensitive, stable on empty (T-190-01) ----
@@ -229,4 +238,84 @@ test("CG12 buildDigest is order-independent and block-sensitive", () => {
   // Empty is stable and non-throwing.
   assert.equal(buildDigest([]), "");
   assert.equal(buildDigest(), "");
+});
+
+// ---- CG13: deptItemCounts — {major,minor} per department, no-department skipped (T-191-01) ----
+test("CG13 deptItemCounts counts majors and minors per department", () => {
+  const items = [
+    { department: "ROOF", severity: "major" },
+    { department: "ROOF", severity: "minor" },
+    { department: "WALL", severity: "major" },
+    { department: "WALL", severity: "major" },
+    { department: "WALL", severity: "minor" },
+    { severity: "major" },          // no department → skipped
+    { department: "OPENING" },      // no severity → skipped
+  ];
+  assert.deepEqual(deptItemCounts(items), {
+    ROOF: { major: 1, minor: 1 },
+    WALL: { major: 2, minor: 1 },
+  });
+  assert.deepEqual(deptItemCounts([]), {});
+  assert.deepEqual(deptItemCounts(undefined), {});
+});
+
+// ---- CG14: override KEEPS the glance-correct grey roof on a PAST-MARGIN regression (T-191-01) ----
+test("CG14 override keeps the grey roof on a past-margin regression (the real T-190 shape)", () => {
+  // The exact recorded T-190-01 round-3 shape: recolor_roof clears the ROOF major (reads brown→grey) and the
+  // judge promotes pre-existing WALL+OPENING majors (UNtargeted by recolor_roof). Whole-build score regresses
+  // 60→48 (delta -12, past margin). Targeted dept ROOF: total burden FALLS 2→1 (major→0, the eave/verge
+  // minor persists). Override fires → KEEP, where the old scalar gate rolled it back.
+  const r = acceptsRound(
+    { score: 60, nMajor: 1, wrongStyleBreadth: 1 },
+    { score: 48, nMajor: 2, wrongStyleBreadth: 2 },
+    {
+      margin: 4, targetDepartments: ["ROOF"],
+      beforeDeptMajors: { ROOF: 1 },
+      afterDeptMajors: { WALL: 1, OPENING: 1 },
+      beforeDeptItems: { ROOF: { major: 1, minor: 1 } },
+      afterDeptItems: { ROOF: { major: 0, minor: 1 }, WALL: { major: 1, minor: 0 }, OPENING: { major: 1, minor: 0 } },
+    },
+  );
+  assert.equal(r.accept, true);
+  assert.equal(r.delta, -12);
+  assert.match(r.reason, /ROOF cleared a major \(department-dominant override\)/);
+});
+
+// ---- CG15: override REJECTS the adversarial fixture (net guard) AND the major-only guard LEAKS (T-191-01) ----
+test("CG15 net guard rejects 'cleared a major but added minors in its own target'; major-only leaks", () => {
+  // Adversarial: the tool clears the ROOF major but adds 2 new ROOF MINORS in its own target — net
+  // degradation (ROOF total 1→2). The score regresses 60→48.
+  const opts = {
+    margin: 4, targetDepartments: ["ROOF"],
+    beforeDeptMajors: { ROOF: 1 }, afterDeptMajors: { ROOF: 0 },
+  };
+  // With item counts → the net guard (c) blocks the override → regression reject.
+  const guarded = acceptsRound(
+    { score: 60 }, { score: 48 },
+    { ...opts, beforeDeptItems: { ROOF: { major: 1, minor: 0 } }, afterDeptItems: { ROOF: { major: 0, minor: 2 } } },
+  );
+  assert.equal(guarded.accept, false);
+  assert.match(guarded.reason, /regressed/);
+
+  // WITHOUT item counts → major-only guard (a)+(b) LEAKS: it keeps the net-degraded fix. This documents
+  // exactly why the net (total-item) guard exists — it is the falsification co-lever, not decoration.
+  const leak = acceptsRound({ score: 60 }, { score: 48 }, opts);
+  assert.equal(leak.accept, true);
+  assert.match(leak.reason, /department-dominant override/);
+});
+
+// ---- CG16: override does NOT fire on a genuinely-bad change that clears nothing (T-191-01) ----
+test("CG16 override does not fire when no targeted department cleared a major", () => {
+  // A tool targets ROOF, regresses the whole-build score, and clears NO ROOF major (1→1). The override must
+  // not fire — this is the genuinely-bad change the gate must still reject.
+  const r = acceptsRound(
+    { score: 60 }, { score: 48 },
+    {
+      margin: 4, targetDepartments: ["ROOF"],
+      beforeDeptMajors: { ROOF: 1 }, afterDeptMajors: { ROOF: 1 },
+      beforeDeptItems: { ROOF: { major: 1, minor: 0 } }, afterDeptItems: { ROOF: { major: 1, minor: 0 } },
+    },
+  );
+  assert.equal(r.accept, false);
+  assert.match(r.reason, /regressed/);
 });
