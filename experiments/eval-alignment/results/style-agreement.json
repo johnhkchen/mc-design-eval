@@ -12,46 +12,46 @@
       "cellType": "match",
       "pack": "packs/rustic.json",
       "intendedFaithfulness": "high",
-      "score": 47,
-      "scoreStd": 14,
+      "score": 18,
+      "scoreStd": 15,
       "votes": [
-        56,
-        36,
-        56,
-        44,
-        64,
-        24
+        32,
+        40,
+        16,
+        20,
+        0,
+        0
       ],
       "items": [
         {
+          "department": "WALL",
+          "severity": "major",
+          "present": "A single uniform cobblestone box on every elevation — one rubble texture top to bottom, no framing.",
+          "missing": "All stone_bricks dressing: quoins, piers, plinth, and eave band. The defining framed look of the concept is absent.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
           "department": "OPENING",
           "severity": "major",
-          "present": "A plain rectangular hole cut straight into the stone wall on the front, with no framing and no door leaf.",
-          "missing": "Arch treatment, dark_oak_log timber jamb/head dressing, and the spruce_door.",
-          "kind": "add",
-          "styleClass": "absent"
-        },
-        {
-          "department": "WALL",
-          "severity": "minor",
-          "present": "A monotone wall surface of regular stone_bricks across the whole envelope.",
-          "missing": "The cobblestone field texture and the field-vs-dressing/quoin distinction (within the stone family).",
-          "kind": "add",
-          "styleClass": "absent"
-        },
-        {
-          "department": "OPENING",
-          "severity": "minor",
-          "present": "Bare narrow slit openings in the stone, no fittings.",
-          "missing": "spruce_fence infill and dark_oak_trapdoor shutters.",
-          "kind": "add",
-          "styleClass": "absent"
+          "present": "A plain rectangular notch cut into the cobblestone at the base of the front wall — bare-edged, no arch, no timber.",
+          "missing": "The arch treatment and the entire dark_oak_log timber surround; the opening does not read as the concept's framed gate at all.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
         },
         {
           "department": "ROOF",
           "severity": "minor",
-          "present": "A uniform stepped brown wooden gable roof (reads as the spruce field) with no contrasting edge treatment.",
-          "missing": "dark_oak_planks verge/trim and a distinct stair eave course.",
+          "present": "Steep dark_oak_planks gable with the correct pitch and material, but plain — rake edges and ridge are the same dark planks.",
+          "missing": "The light stone_brick verge and ridge trim. Roof form and field material already read like the concept; only this edge detailing is absent.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "Only faint, near-flush marks on the side walls; the windows barely register as openings.",
+          "missing": "Legible recessed slit windows with their stone_brick reveals.",
           "kind": "add",
           "styleClass": "absent"
         }
@@ -63,46 +63,54 @@
       "cellType": "match",
       "pack": "packs/rustic.json",
       "intendedFaithfulness": "high",
-      "score": 46,
-      "scoreStd": 4,
+      "score": 19,
+      "scoreStd": 24,
       "votes": [
-        44,
-        44,
-        56,
-        44,
-        44,
-        44
+        36,
+        0,
+        64,
+        0,
+        0,
+        12
       ],
       "items": [
         {
           "department": "OPENING",
           "severity": "major",
-          "present": "Bare recessed window openings cut into the cream infill and stone base",
-          "missing": "dark_oak_trapdoor shutters and spruce_fence lattice infill in the apertures",
+          "present": "Mostly empty dark bays / open gaps in the walls; one or two recesses but no shutter leaves, no lattice infill, no consistent window rhythm.",
+          "missing": "The dark-oak shutters, the lattice/fence window infill, and the regular two-per-wall window placement the concept shows.",
           "kind": "add",
           "styleClass": "absent"
         },
         {
-          "department": "ROOF",
+          "department": "WALL",
           "severity": "major",
-          "present": "Uniform spruce_planks slope with stepped courses, no contrasting edge banding",
-          "missing": "dark_oak_planks trim line at eave and verge",
+          "present": "Upper storey reads as broad plain cream/pinkish plaster panels with timber only at the corners and jetty edge; the interior stud rhythm is largely absent.",
+          "missing": "The regularly spaced vertical timber studs (the half-timber grammar) breaking up the cream panels.",
           "kind": "add",
           "styleClass": "absent"
         },
         {
           "department": "OPENING",
           "severity": "minor",
-          "present": "Door opening in the stone base reads, but no clear door leaf or light fitting",
-          "missing": "spruce_door leaf and door-lantern decoration",
+          "present": "A dark ground-floor opening with no clear boarded door leaf and no lantern visible in the build renders.",
+          "missing": "The boarded door leaf, the dressed-stone door surround, and the lantern.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "ROOF",
+          "severity": "minor",
+          "present": "A uniform warm-brown plank field with stepped eaves but no distinct darker fascia banding at eave or verge.",
+          "missing": "The darker oak eave/verge trim course that frames the roof in the concept.",
           "kind": "add",
           "styleClass": "absent"
         },
         {
           "department": "CHIMNEY",
           "severity": "minor",
-          "present": "Stone chimney stack at the gable valley",
-          "missing": "bricks chimney cap course",
+          "present": "A short stone chimney stub at the ridge, barely clearing the roof and without a contrasting brick cap.",
+          "missing": "The chimney's height/prominence and the brick cap course.",
           "kind": "add",
           "styleClass": "absent"
         }
@@ -114,46 +122,54 @@
       "cellType": "match",
       "pack": "packs/rustic.json",
       "intendedFaithfulness": "high",
-      "score": 66,
-      "scoreStd": 14,
+      "score": 25,
+      "scoreStd": 28,
       "votes": [
-        44,
-        72,
-        72,
-        72,
-        52,
-        84
+        0,
+        0,
+        32,
+        0,
+        40,
+        76
       ],
       "items": [
         {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "Dark ragged openings on the long wall; door leaves and their dressed reveals are not legible — the apertures read as voids rather than built doors.",
+          "missing": "Legible oak-plank door leaves and the stone_bricks jamb/head dressing around them.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "Irregular ragged gaps and dark holes scattered along the walls, with no dressed frames; openings do not align into the concept's regular bay rhythm.",
+          "missing": "Crisp stone-framed window apertures in a regular rhythm.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
           "department": "WALL",
           "severity": "major",
-          "present": "cobblestone field with stone_bricks dressing, but the panels are ragged and full of dark voids/holes — the masonry does not read as solid",
-          "missing": "complete cobblestone infill of the recessed field panels (no gaps)",
+          "present": "Largely undifferentiated rough cobblestone rubble; the dressed-stone piers, quoins and continuous plinth barely read, so the facade lacks the concept's ordered framing.",
+          "missing": "The legible stone_bricks dressing — piers/quoins between panels and the continuous base plinth.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Gaps and missing courses in the wall, especially just below the eave, leaving the shell looking unfinished / not watertight.",
+          "missing": "Wall infill blocks to close the holes up to the eave.",
           "kind": "add",
           "styleClass": "absent"
         },
         {
           "department": "OPENING",
-          "severity": "major",
-          "present": "window apertures read as raw dark holes with no shutter or fence treatment and inconsistent stone_brick framing",
-          "missing": "window.shutter (dark_oak_trapdoor) / window.infill (spruce_fence) and clean flat-head dressing on the openings",
-          "kind": "add",
-          "styleClass": "absent"
-        },
-        {
-          "department": "WALL",
           "severity": "minor",
-          "present": "at least one long wall (az 225) reads as flat undifferentiated cobblestone with no pier/quoin dressing",
-          "missing": "stone_bricks pier/quoin bay framing on the undressed elevation",
-          "kind": "add",
-          "styleClass": "absent"
-        },
-        {
-          "department": "ROOF",
-          "severity": "minor",
-          "present": "dark_oak_planks gable as a plain solid prism with no stepped eave courses",
-          "missing": "spruce_stairs course / spruce_slab step articulation at the eave",
+          "present": "Gable peak reads as solid fieldstone with no clear slit.",
+          "missing": "The single narrow vertical gable-peak opening.",
           "kind": "add",
           "styleClass": "absent"
         }
@@ -165,46 +181,62 @@
       "cellType": "same-pack-wrong-picture",
       "pack": "packs/rustic.json",
       "intendedFaithfulness": "low",
-      "score": 61,
-      "scoreStd": 7,
+      "score": 1,
+      "scoreStd": 1,
       "votes": [
-        44,
-        64,
-        64,
-        64,
-        64,
-        64
+        0,
+        4,
+        0,
+        0,
+        0,
+        0
       ],
       "items": [
         {
           "department": "OPENING",
           "severity": "major",
-          "present": "A plain rectangular hole cut straight through the masonry, undressed",
-          "missing": "arch treatment, dark_oak_log frame, spruce_door, door-lantern",
-          "kind": "add",
-          "styleClass": "absent"
+          "present": "A small plain rectangular doorway cut into the base of one wall",
+          "missing": "The arched head, the deep blue coffered reveal, the dressed pier jambs, and the monumental scale",
+          "kind": "replace",
+          "styleClass": "wrong-style"
         },
         {
           "department": "ROOF",
           "severity": "major",
-          "present": "A steep gable in a single dark plank covering, stepped in plain full-block courses",
-          "missing": "spruce_planks field material, spruce_stairs courses, spruce_slab steps, dark_oak_planks eave/ridge trim",
+          "present": "A brown wood-plank steep gabled roof",
+          "missing": "The flat entablature and gold dentil cornice",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Plain gray cobblestone / stone-brick wall faces with no color or framed panels",
+          "missing": "The warm terracotta facing and the dressed stone-brick panel frames",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "",
+          "missing": "The entire blue-and-gold medallion frieze band",
           "kind": "add",
           "styleClass": "absent"
         },
         {
           "department": "WALL",
-          "severity": "minor",
-          "present": "Uniform smooth stone_bricks across the whole wall with no field/dressing contrast and no framing",
-          "missing": "cobblestone field, stone_bricks quoin dressing, dark_oak_log timber-frame, white_terracotta upper infill, plinth",
+          "severity": "major",
+          "present": "",
+          "missing": "Both figurative relief panels",
           "kind": "add",
           "styleClass": "absent"
         },
         {
           "department": "OPENING",
           "severity": "minor",
-          "present": "Bare slit marks in the masonry with no joinery",
-          "missing": "dark_oak_trapdoor shutters, spruce_fence infill",
+          "present": "",
+          "missing": "The decorative spandrel scrollwork",
           "kind": "add",
           "styleClass": "absent"
         }
@@ -216,62 +248,46 @@
       "cellType": "same-pack-wrong-picture",
       "pack": "packs/rustic.json",
       "intendedFaithfulness": "low",
-      "score": 56,
-      "scoreStd": 13,
+      "score": 6,
+      "scoreStd": 7,
       "votes": [
-        28,
-        52,
-        64,
-        64,
-        64,
-        64
+        20,
+        0,
+        0,
+        8,
+        0,
+        8
       ],
       "items": [
         {
-          "department": "OPENING",
-          "severity": "major",
-          "present": "A bare rectangular notch cut in the front stone wall (visible azimuths 225/315), no leaf, no dressing",
-          "missing": "Arch treatment, spruce_door, stone_brick jamb/head dressing, door-lantern",
-          "kind": "add",
-          "styleClass": "absent"
-        },
-        {
           "department": "WALL",
           "severity": "major",
-          "present": "A single uniform field of light stone_bricks running unbroken from base to eave on every face",
-          "missing": "The dark_oak_log timber frame and white_terracotta infill of the upper storey",
-          "kind": "add",
-          "styleClass": "absent"
+          "present": "Uniform cobblestone masonry on every storey, top to bottom.",
+          "missing": "The entire timber-framed upper storey — cream infill panels and dark stud framing.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
         },
         {
           "department": "CHIMNEY",
-          "severity": "minor",
+          "severity": "major",
           "present": "",
-          "missing": "The entire chimney stack and brick cap",
+          "missing": "The whole chimney (stone shaft and brick cap).",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "A single bare arched opening cut into the stone at the base — an empty hole.",
+          "missing": "The door leaf, the lantern, and all shuttered windows.",
           "kind": "add",
           "styleClass": "absent"
         },
         {
           "department": "ROOF",
           "severity": "minor",
-          "present": "A plain stepped brown plank gable field, untrimmed at eave and verge",
-          "missing": "spruce_stairs eave course, dark_oak_planks verge trim, spruce_slab stepping",
-          "kind": "add",
-          "styleClass": "absent"
-        },
-        {
-          "department": "WALL",
-          "severity": "minor",
-          "present": "Undifferentiated stone_bricks with no cobblestone field, no quoins, no plinth course",
-          "missing": "Cobblestone field, stone_brick quoins/dressing, plinth",
-          "kind": "add",
-          "styleClass": "absent"
-        },
-        {
-          "department": "OPENING",
-          "severity": "minor",
-          "present": "No legible window openings (only faint surface marks on the stone faces)",
-          "missing": "dark_oak_trapdoor shutters, spruce_fence infill, opening dressing",
+          "present": "A plain brown gabled roof flush to the walls, no overhang or trim.",
+          "missing": "Overhanging eaves and the trim/fascia course.",
           "kind": "add",
           "styleClass": "absent"
         }
@@ -283,48 +299,48 @@
       "cellType": "same-pack-wrong-picture",
       "pack": "packs/rustic.json",
       "intendedFaithfulness": "low",
-      "score": 27,
-      "scoreStd": 19,
+      "score": 1,
+      "scoreStd": 1,
       "votes": [
-        44,
         0,
-        44,
-        44,
+        0,
         4,
-        28
+        0,
+        0,
+        0
       ],
       "items": [
         {
-          "department": "OPENING",
-          "severity": "major",
-          "present": "Plain rectangular openings cut straight through the wall — undressed reveals, no door leaf, no shutters, no arch shaping.",
-          "missing": "Arch treatment + opening-dressing, the spruce_door leaf, and dark_oak_trapdoor shutters / spruce_fence window infill.",
-          "kind": "add",
-          "styleClass": "absent"
-        },
-        {
           "department": "WALL",
           "severity": "major",
-          "present": "Cream plaster upper and grey cobblestone-ish base, but with only a token timber mark and stray salmon/pink blocks where plaster should read; no real stud grid.",
-          "missing": "The dark_oak_log half-timber stud-and-brace grid (timber-frame idiom) and clean stone_brick coursing/dressing on the ground storey.",
-          "kind": "add",
-          "styleClass": "absent"
+          "present": "Two-tone walls: grey stone only at the ground storey; the upper storey is cream lime-plaster infill carried in a dark half-timber frame that oversails the base.",
+          "missing": "Stone upper walls; the cobblestone quoins/framing that read on the concept's corners and openings.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "Small flat-headed rectangular windows and a modest door; no large arched gateway anywhere.",
+          "missing": "The signature timber arch / large gateway opening.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
         },
         {
           "department": "ROOF",
-          "severity": "minor",
-          "present": "Brown spruce-plank field with stepped courses and cream gable ends — correct material and pitch.",
-          "missing": "The dark_oak_planks verge/eave trim banding and the distinct spruce_stairs eave course.",
-          "kind": "add",
-          "styleClass": "absent"
+          "severity": "major",
+          "present": "A steep stepped gable in WARM BROWN spruce-plank courses with brown plank trim; gable ends show cream infill.",
+          "missing": "The dark roofing colour and the stone-brick verge/rake trim.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
         },
         {
           "department": "CHIMNEY",
           "severity": "minor",
-          "present": "A grey stone stack on the roof, uncapped.",
-          "missing": "The brick (chimney.cap) capping course.",
-          "kind": "add",
-          "styleClass": "absent"
+          "present": "A stone/brick-capped chimney rises from the roof of the build.",
+          "missing": "",
+          "kind": "remove",
+          "styleClass": "match"
         }
       ]
     },
@@ -334,62 +350,54 @@
       "cellType": "wrong-pack-right-picture",
       "pack": "packs/guildhall.json",
       "intendedFaithfulness": "high",
-      "score": 16,
-      "scoreStd": 8,
+      "score": 1,
+      "scoreStd": 3,
       "votes": [
-        4,
-        12,
-        20,
-        28,
-        20,
-        12
+        0,
+        8,
+        0,
+        0,
+        0,
+        0
       ],
       "items": [
         {
           "department": "ROOF",
           "severity": "major",
-          "present": "brown wooden plank roof field (dark_oak_planks) over the gabled field; only the eave courses read as grey stone stairs",
-          "missing": "deepslate_tiles stone covering on the main roof field",
+          "present": "A steep gable roof clad in uniform warm-BROWN planks (reads as dark_oak_planks / wood shingling)",
+          "missing": "The gray stone roof field and the stone-brick stair courses; the roof material is wood, not masonry",
           "kind": "replace",
           "styleClass": "wrong-style"
         },
         {
           "department": "OPENING",
           "severity": "major",
-          "present": "a bare stone arched opening on the front (no leaf)",
-          "missing": "dark_oak_door in the gate",
-          "kind": "add",
-          "styleClass": "absent"
+          "present": "A plain rectangular doorway/notch cut into one wall, no arch and no timber frame",
+          "missing": "The arched head and the dark-oak voussoir/jamb dressing around the gate",
+          "kind": "replace",
+          "styleClass": "wrong-style"
         },
         {
           "department": "WALL",
           "severity": "major",
-          "present": "plain stone_bricks running uninterrupted around the corners",
-          "missing": "chiseled_stone_bricks quoin dressing at the corners",
+          "present": "Uniform stone-brick walls with no corner articulation",
+          "missing": "The cobblestone rubble quoins / corner dressing",
           "kind": "add",
           "styleClass": "absent"
         },
         {
-          "department": "WALL",
+          "department": "ROOF",
           "severity": "minor",
-          "present": "uniform stone_bricks from plinth to eave with no storey distinction",
-          "missing": "smooth_stone ground-storey banding",
-          "kind": "add",
-          "styleClass": "absent"
-        },
-        {
-          "department": "WALL",
-          "severity": "minor",
-          "present": "flat stone_bricks walls with no vertical pilaster relief",
-          "missing": "polished_diorite pilasters",
+          "present": "Roof terminates flush with the wall face (no projection)",
+          "missing": "The overhanging eave/verge",
           "kind": "add",
           "styleClass": "absent"
         },
         {
           "department": "OPENING",
           "severity": "minor",
-          "present": "narrow open slot windows in bare stone, unglazed and undressed",
-          "missing": "glass_pane glazing in the side windows",
+          "present": "Faint, ragged narrow voids in the side walls",
+          "missing": "Clean reveals/framing on the windows",
           "kind": "add",
           "styleClass": "absent"
         }
@@ -401,62 +409,54 @@
       "cellType": "wrong-pack-right-picture",
       "pack": "packs/guildhall.json",
       "intendedFaithfulness": "high",
-      "score": 0,
-      "scoreStd": 0,
+      "score": 16,
+      "scoreStd": 15,
       "votes": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
+        24,
+        4,
+        4,
+        4,
+        16,
+        44
       ],
       "items": [
         {
-          "department": "ROOF",
-          "severity": "major",
-          "present": "brown sawn-plank roof field with darker plank fascia trim",
-          "missing": "deepslate tile covering and the stone stair/slab courses",
-          "kind": "replace",
-          "styleClass": "wrong-style"
-        },
-        {
           "department": "WALL",
           "severity": "major",
-          "present": "cream lime-plaster infill carried in a near-black half-timber frame that jetties over the base",
-          "missing": "stone_bricks masonry field, polished_diorite pilasters, chiseled_stone_bricks quoins",
+          "present": "Several upper-storey infill panels render as a salmon/pink block instead of cream, consistently across all four azimuths (corners and side bays).",
+          "missing": "Cream lime-plaster (wall.infill.upper) in the pink panels.",
           "kind": "replace",
           "styleClass": "wrong-style"
         },
         {
           "department": "OPENING",
           "severity": "major",
-          "present": "flat-headed openings shuttered with dark-oak trapdoor reveals, unglazed",
-          "missing": "voussoir arch treatment and glass_pane glazing",
+          "present": "Windows read as dark empty recesses framed by timber; no glazed/lattice fill is visible at any angle.",
+          "missing": "The light lattice glazing inside the apertures.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "ROOF",
+          "severity": "minor",
+          "present": "Roof reads as uniform warm-brown plank courses; the eave/verge terminates in the same field tone with no darker trim band.",
+          "missing": "The darker oak trim banding (roof.trim) at eave and verge.",
           "kind": "add",
           "styleClass": "absent"
         },
         {
           "department": "WALL",
           "severity": "minor",
-          "present": "grey coursed stone ground storey (correct stone family) with no corner dressing",
-          "missing": "chiseled_stone_bricks corner quoins and dressed plinth course",
+          "present": "Upper storey reads as half-timber (cream infill + visible studs) but the studs render as medium warm brown rather than near-black.",
+          "missing": "The dark, near-black tone of the timber framing.",
           "kind": "add",
           "styleClass": "absent"
         },
         {
           "department": "CHIMNEY",
           "severity": "minor",
-          "present": "rough fieldstone stack with a plain brick cap (same broad stone family)",
-          "missing": "stone_bricks coursing and the chiseled_stone_bricks cap",
-          "kind": "add",
-          "styleClass": "absent"
-        },
-        {
-          "department": "OPENING",
-          "severity": "minor",
-          "present": "boarded door with a lit lantern, no railing",
-          "missing": "iron_bars area-railings",
+          "present": "Stone chimney stack is present rising from the valley, but its cap reads as the same brown/dark course as the roof, not brick.",
+          "missing": "The reddish brick cap (chimney.cap) at the chimney head.",
           "kind": "add",
           "styleClass": "absent"
         }
@@ -468,54 +468,62 @@
       "cellType": "cross",
       "pack": "packs/rustic.json",
       "intendedFaithfulness": "low",
-      "score": 34,
-      "scoreStd": 16,
+      "score": 4,
+      "scoreStd": 6,
       "votes": [
+        0,
+        0,
         12,
-        28,
-        16,
-        52,
-        52,
-        44
+        0,
+        0,
+        12
       ],
       "items": [
         {
-          "department": "WALL",
-          "severity": "major",
-          "present": "Uncoursed cobblestone (wall.field.ground) carried unbroken from plinth to eave on every elevation; the upper storey is plain stone.",
-          "missing": "frame.timber (dark_oak_log) studwork and wall.infill.upper (white_terracotta) panels on the upper storey.",
-          "kind": "replace",
-          "styleClass": "wrong-style"
-        },
-        {
           "department": "ROOF",
           "severity": "major",
-          "present": "A light tan/orange plank field reading as the default spruce_planks (roof.field).",
-          "missing": "The dark_oak darkening of the roof field; the slope is the lighter rustic cousin where the concept is conspicuously dark.",
-          "kind": "add",
-          "styleClass": "absent"
+          "present": "Steep gable roof clad in bright orange/tan planks (reads as spruce/jungle), much lighter and warmer than the concept.",
+          "missing": "The dark-brown roof field value — the covering is the right gable form but the wrong color/material entirely.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
         },
         {
           "department": "CHIMNEY",
           "severity": "major",
           "present": "",
-          "missing": "The entire chimney (shaft + brick cap).",
+          "missing": "The entire stone chimney and its brick cap — no stack of any kind on the build.",
           "kind": "add",
           "styleClass": "absent"
         },
         {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Upper storey reads mostly as continued gray stone with only sparse mid-brown posts; infill panels are muddy/stone-toned, not cream.",
+          "missing": "The bright cream plaster panels and the dark-oak stud contrast that define the half-timber band.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
           "department": "ROOF",
           "severity": "minor",
-          "present": "A smooth plank prism flush to the wall plane, no stepped courses and no overhang.",
-          "missing": "roof.course (spruce_stairs) / roof.step (spruce_slab) eave-and-verge detailing and the eave overhang.",
+          "present": "Roof slope meets the wall with minimal overhang and no distinct fascia or stepped verge trim.",
+          "missing": "The eave/verge trim band and stepped gable-edge boards.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "WALL",
+          "severity": "minor",
+          "present": "Ground storey is rough gray cobble/fieldstone rubble — right color family, but uncoursed and lumpy.",
+          "missing": "The dressed coursing and crisp quoin/jamb articulation.",
           "kind": "add",
           "styleClass": "absent"
         },
         {
           "department": "OPENING",
           "severity": "minor",
-          "present": "Plain recessed voids in the cobblestone wall, undressed.",
-          "missing": "window.shutter (dark_oak_trapdoor), window.infill (spruce_fence), and the door-lantern.",
+          "present": "Dark recessed openings with only partial boarded shutters and plain oak doors; framing and glazing read faintly.",
+          "missing": "The crisp shutter+lattice+frame treatment and the dressed door surround/lantern detail.",
           "kind": "add",
           "styleClass": "absent"
         }
@@ -527,38 +535,46 @@
       "cellType": "hard-middle",
       "pack": "packs/rustic.json",
       "intendedFaithfulness": "middle",
-      "score": 43,
-      "scoreStd": 11,
+      "score": 9,
+      "scoreStd": 9,
       "votes": [
-        52,
-        44,
-        44,
-        20,
-        44,
-        52
+        0,
+        28,
+        8,
+        0,
+        8,
+        8
       ],
       "items": [
         {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "Steep gabled roof of the same stepped-course form but rendered in a light orange-brown plank material (spruce/oak planks).",
+          "missing": "The dark, near-black roof tone the concept shows.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
           "department": "OPENING",
           "severity": "major",
-          "present": "A plain arched void cut straight through the stone wall — bare reveal, no timber dressing and no door leaf",
-          "missing": "dark_oak_log / oak_planks arch dressing and the spruce_door (plus door-lantern)",
-          "kind": "add",
-          "styleClass": "absent"
+          "present": "A bare ragged rectangular notch cut into the wall, no arch head, no timber frame, no door.",
+          "missing": "Arched head, dark-oak timber frame/voussoir surround, and the door itself.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
         },
         {
           "department": "WALL",
           "severity": "major",
-          "present": "A single uniform stone-brick coursing across every face — same block top to bottom, no cobblestone field and no quoin/dressing distinction",
-          "missing": "cobblestone field-ground and the stone_bricks quoin/dressing articulation (within the stone family, so a detail is absent rather than the wrong material)",
-          "kind": "add",
-          "styleClass": "absent"
+          "present": "Uniform stone-brick coursing over the whole wall, no rubble field texture and no corner quoin contrast.",
+          "missing": "Cobblestone field texture and the dressed-stone quoins/corner articulation.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
         },
         {
           "department": "ROOF",
           "severity": "minor",
-          "present": "Stepped spruce stair courses forming the gable — correct field material but bare-edged",
-          "missing": "dark_oak_planks eave/verge trim band",
+          "present": "Roof courses that sit flush to / slightly inset from the wall line with no projecting eave.",
+          "missing": "The overhanging eave lip.",
           "kind": "add",
           "styleClass": "absent"
         }
@@ -570,46 +586,46 @@
       "cellType": "hard-middle",
       "pack": "packs/rustic.json",
       "intendedFaithfulness": "middle",
-      "score": 49,
-      "scoreStd": 10,
+      "score": 3,
+      "scoreStd": 4,
       "votes": [
-        44,
-        44,
-        44,
-        44,
-        44,
-        72
+        8,
+        0,
+        0,
+        8,
+        0,
+        0
       ],
       "items": [
         {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "Steep gable covered in a uniform warm-brown wood plank field, single tone, no stone stepped courses.",
+          "missing": "Dark stone tile material and the light stone-brick stair-course framing.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
           "department": "OPENING",
           "severity": "major",
-          "present": "A bare arched gate opening cut straight through the masonry — no frame, no door.",
-          "missing": "dark_oak_log timber arch frame and spruce_door leaf.",
-          "kind": "add",
-          "styleClass": "absent"
+          "present": "A plain dark rectangular notch cut into the front wall, no arch head and no dark-oak surround.",
+          "missing": "The arched head, stone voussoir, and dark-oak jamb framing.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
         },
         {
           "department": "WALL",
           "severity": "major",
-          "present": "Undifferentiated single-material walls reading as one flat stone tone across every face, no quoin or rubble articulation.",
-          "missing": "cobblestone field/quoin differentiation against the stone_bricks dressing.",
-          "kind": "add",
-          "styleClass": "absent"
-        },
-        {
-          "department": "ROOF",
-          "severity": "minor",
-          "present": "Plain spruce_planks gable, correct field material and steep gable form, but no contrasting trim or eave-course articulation.",
-          "missing": "dark_oak_planks ridge/verge trim and spruce_stairs eave course.",
+          "present": "Flat grey stone walls with vertical striping and no distinct corner quoins or gate-bay dressing band.",
+          "missing": "Cobblestone corner quoins and the dressed gate-bay framing band.",
           "kind": "add",
           "styleClass": "absent"
         },
         {
           "department": "OPENING",
           "severity": "minor",
-          "present": "Bare narrow slit openings in the side walls with no surround.",
-          "missing": "dark_oak_trapdoor shutters and spruce_fence infill.",
+          "present": "Rough, ragged slit gaps in the side wall.",
+          "missing": "Clean framed window slits.",
           "kind": "add",
           "styleClass": "absent"
         }
@@ -621,54 +637,54 @@
       "cellType": "hard-middle",
       "pack": "packs/rustic.json",
       "intendedFaithfulness": "middle",
-      "score": 23,
-      "scoreStd": 5,
+      "score": 10,
+      "scoreStd": 15,
       "votes": [
         24,
-        24,
-        12,
-        24,
-        24,
-        28
+        36,
+        0,
+        0,
+        0,
+        0
       ],
       "items": [
         {
           "department": "CHIMNEY",
           "severity": "major",
           "present": "",
-          "missing": "No chimney mass is visible above the roof at any azimuth — the apex/valley reads clean with no stone stack and no brick cap.",
+          "missing": "The entire chimney — no stack rises through the roof in any azimuth.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Cream/white infill panels with only sparse, faint timber studs and stray pinkish patches; the frame barely reads and the jetty overhang is weak.",
+          "missing": "The dense dark studwork-and-rail grid that makes the half-timbering the signature of the upper storey.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "WALL",
+          "severity": "minor",
+          "present": "Rough, mottled cobblestone-like grey masonry at ground level.",
+          "missing": "The regular dressed-stone coursing; the build reads as rubble rather than dressed ashlar.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "ROOF",
+          "severity": "minor",
+          "present": "Uniform warm-brown plank courses with no contrasting trim band at eave or verge and minimal overhang.",
+          "missing": "The dark fascia/verge banding that frames the roof edges.",
           "kind": "add",
           "styleClass": "absent"
         },
         {
           "department": "OPENING",
-          "severity": "major",
-          "present": "Window openings read as bare dark recesses; the ground entrance is barely articulated.",
-          "missing": "Dark-oak trapdoor shutters, spruce-fence window infill, and the shuttered/boarded door treatment with lantern are absent — openings are holes rather than dressed shuttered windows.",
-          "kind": "add",
-          "styleClass": "absent"
-        },
-        {
-          "department": "WALL",
-          "severity": "major",
-          "present": "Cream plaster upper storey with only sparse, mostly vertical timber studs.",
-          "missing": "The dense dark-oak framing grid (full stud rhythm) that defines the Tudor look — the panels read mostly as blank plaster rather than framed infill.",
-          "kind": "add",
-          "styleClass": "absent"
-        },
-        {
-          "department": "WALL",
           "severity": "minor",
-          "present": "Upper storey sits essentially flush above the ground storey.",
-          "missing": "The jetty overhang — no oversailing projection of the upper frame over the stone base.",
-          "kind": "add",
-          "styleClass": "absent"
-        },
-        {
-          "department": "ROOF",
-          "severity": "minor",
-          "present": "Uniform warm-brown plank field covering the whole roof, course-lined.",
-          "missing": "The darker dark-oak trim banding at eave/verge is absent, so the roof reads as one flat plank tone with no edge differentiation.",
+          "present": "Plain recessed window openings; shutter leaves read weakly and the lattice infill is largely absent.",
+          "missing": "The dark-oak shutter flanks and lattice infill that give the windows their shuttered-lattice read.",
           "kind": "add",
           "styleClass": "absent"
         }
@@ -679,7 +695,7 @@
     "cells": {
       "matchedRight": {
         "n": 3,
-        "mean": 53,
+        "mean": 21,
         "ids": [
           "gh-match",
           "ct-match",
@@ -688,7 +704,7 @@
       },
       "matchedWrong": {
         "n": 4,
-        "mean": 45,
+        "mean": 3,
         "ids": [
           "gh-samepack-classical",
           "gh-samepack-cottage",
@@ -698,7 +714,7 @@
       },
       "foreignRight": {
         "n": 2,
-        "mean": 8,
+        "mean": 9,
         "ids": [
           "gh-wrongpack",
           "ct-wrongpack"
@@ -710,21 +726,21 @@
         "ids": []
       }
     },
-    "conceptImageEffect": 8,
-    "packEffect": 45,
+    "conceptImageEffect": 18,
+    "packEffect": 12,
     "perSubject": {
       "gatehouse": {
         "cells": {
           "matchedRight": {
             "n": 1,
-            "mean": 47,
+            "mean": 18,
             "ids": [
               "gh-match"
             ]
           },
           "matchedWrong": {
             "n": 2,
-            "mean": 59,
+            "mean": 4,
             "ids": [
               "gh-samepack-classical",
               "gh-samepack-cottage"
@@ -732,7 +748,7 @@
           },
           "foreignRight": {
             "n": 1,
-            "mean": 16,
+            "mean": 1,
             "ids": [
               "gh-wrongpack"
             ]
@@ -743,28 +759,28 @@
             "ids": []
           }
         },
-        "conceptImageEffect": -12,
-        "packEffect": 31
+        "conceptImageEffect": 14,
+        "packEffect": 17
       },
       "cottage": {
         "cells": {
           "matchedRight": {
             "n": 1,
-            "mean": 46,
+            "mean": 19,
             "ids": [
               "ct-match"
             ]
           },
           "matchedWrong": {
             "n": 1,
-            "mean": 27,
+            "mean": 1,
             "ids": [
               "ct-samepack-gatehouse"
             ]
           },
           "foreignRight": {
             "n": 1,
-            "mean": 0,
+            "mean": 16,
             "ids": [
               "ct-wrongpack"
             ]
@@ -775,21 +791,21 @@
             "ids": []
           }
         },
-        "conceptImageEffect": 19,
-        "packEffect": 46
+        "conceptImageEffect": 18,
+        "packEffect": 3
       },
       "barn": {
         "cells": {
           "matchedRight": {
             "n": 1,
-            "mean": 66,
+            "mean": 25,
             "ids": [
               "bn-match"
             ]
           },
           "matchedWrong": {
             "n": 1,
-            "mean": 34,
+            "mean": 4,
             "ids": [
               "bn-cross"
             ]
@@ -805,41 +821,41 @@
             "ids": []
           }
         },
-        "conceptImageEffect": 32,
+        "conceptImageEffect": 21,
         "packEffect": null
       }
     },
-    "verdict": "PACK-DRIVEN — the score tracks the pack, not the picture (the T-182 confound generalizes → DO-NOT-PROMOTE, concept-image-conditioning fix)",
+    "verdict": "MIXED — pack and concept-image effects are within the noise band of each other (inseparable on this population; report, do not promote on a tie)",
     "noise": 12
   },
   "agreement": {
     "overall": {
       "n": 8,
-      "agree": 3,
-      "rate": 0.375
+      "agree": 8,
+      "rate": 1
     },
     "byBucket": {
       "easy": {
         "n": 3,
-        "agree": 2,
-        "rate": 0.6666666666666666,
+        "agree": 3,
+        "rate": 1,
         "pairs": [
           {
             "id": "E1",
             "bucket": "easy",
-            "termPick": "B",
+            "termPick": "A",
             "label": "A",
-            "termScoreA": 47,
-            "termScoreB": 61,
-            "agree": false
+            "termScoreA": 18,
+            "termScoreB": 1,
+            "agree": true
           },
           {
             "id": "E2",
             "bucket": "easy",
             "termPick": "A",
             "label": "A",
-            "termScoreA": 46,
-            "termScoreB": 27,
+            "termScoreA": 19,
+            "termScoreB": 1,
             "agree": true
           },
           {
@@ -847,61 +863,61 @@
             "bucket": "easy",
             "termPick": "A",
             "label": "A",
-            "termScoreA": 66,
-            "termScoreB": 34,
+            "termScoreA": 25,
+            "termScoreB": 4,
             "agree": true
           }
         ]
       },
       "hardMiddle": {
         "n": 5,
-        "agree": 1,
-        "rate": 0.2,
+        "agree": 5,
+        "rate": 1,
         "pairs": [
           {
             "id": "H1",
             "bucket": "hardMiddle",
             "termPick": "A",
             "label": "A",
-            "termScoreA": 47,
-            "termScoreB": 43,
+            "termScoreA": 18,
+            "termScoreB": 9,
             "agree": true
           },
           {
             "id": "H2",
             "bucket": "hardMiddle",
-            "termPick": "B",
+            "termPick": "A",
             "label": "A",
-            "termScoreA": 43,
-            "termScoreB": 49,
-            "agree": false
+            "termScoreA": 9,
+            "termScoreB": 3,
+            "agree": true
           },
           {
             "id": "H3",
             "bucket": "hardMiddle",
-            "termPick": "B",
+            "termPick": "A",
             "label": "A",
-            "termScoreA": 49,
-            "termScoreB": 61,
-            "agree": false
+            "termScoreA": 3,
+            "termScoreB": 1,
+            "agree": true
           },
           {
             "id": "H4",
             "bucket": "hardMiddle",
             "termPick": "A",
-            "label": "tie",
-            "termScoreA": 46,
-            "termScoreB": 23,
-            "agree": false
+            "label": "A",
+            "termScoreA": 19,
+            "termScoreB": 10,
+            "agree": true
           },
           {
             "id": "H5",
             "bucket": "hardMiddle",
-            "termPick": "B",
+            "termPick": "A",
             "label": "A",
-            "termScoreA": 23,
-            "termScoreB": 27,
-            "agree": false
+            "termScoreA": 10,
+            "termScoreB": 1,
+            "agree": true
           }
         ]
       }
@@ -922,7 +938,7 @@
       "E3": {
         "n": 6,
         "majority": "A",
-        "fraction": 1
+        "fraction": 0.8333333333333334
       },
       "H1": {
         "n": 6,
@@ -932,7 +948,7 @@
       "H2": {
         "n": 6,
         "majority": "A",
-        "fraction": 0.8333333333333334
+        "fraction": 0.6666666666666666
       },
       "H3": {
         "n": 6,
@@ -941,8 +957,8 @@
       },
       "H4": {
         "n": 6,
-        "majority": "tie",
-        "fraction": 0.6666666666666666
+        "majority": "A",
+        "fraction": 0.8333333333333334
       },
       "H5": {
         "n": 6,
@@ -953,7 +969,7 @@
     "byBucket": {
       "easy": {
         "n": 3,
-        "meanFraction": 1
+        "meanFraction": 0.94
       },
       "hardMiddle": {
         "n": 5,
@@ -962,22 +978,22 @@
     },
     "overall": {
       "n": 8,
-      "meanFraction": 0.94
+      "meanFraction": 0.92
     },
     "verdict": "LABELABLE — hard-middle self-consistency 0.9 ≥ 0.67; the contested pairs carry a stable majority",
     "floor": 0.67
   },
   "concordance": {
-    "concordant": 3,
-    "discordant": 4,
-    "n": 7,
-    "tau": -0.14285714285714285
+    "concordant": 8,
+    "discordant": 0,
+    "n": 8,
+    "tau": 1
   },
   "recommendation": {
-    "go": false,
-    "label": "DO-NOT-PROMOTE",
+    "go": null,
+    "label": "INCONCLUSIVE — magnitude/agreement do not clear the bar",
     "rationale": [
-      "decomposition PACK-DRIVEN — the score tracks the pack, not the picture (the T-182 confound generalizes → DO-NOT-PROMOTE, concept-image-conditioning fix)"
+      "decomposition MIXED — pack and concept-image effects are within the noise band of each other (inseparable on this population; report, do not promote on a tie); hard-middle agreement 1 (n=5)"
     ]
   },
   "pairAudit": [
@@ -987,9 +1003,9 @@
       "a": "gh-match",
       "b": "gh-samepack-classical",
       "intended": "A",
-      "termPick": "B",
-      "scoreA": 47,
-      "scoreB": 61,
+      "termPick": "A",
+      "scoreA": 18,
+      "scoreB": 1,
       "label": "A",
       "proxyVotes": [
         "A",
@@ -1007,8 +1023,8 @@
       "b": "ct-samepack-gatehouse",
       "intended": "A",
       "termPick": "A",
-      "scoreA": 46,
-      "scoreB": 27,
+      "scoreA": 19,
+      "scoreB": 1,
       "label": "A",
       "proxyVotes": [
         "A",
@@ -1026,11 +1042,11 @@
       "b": "bn-cross",
       "intended": "A",
       "termPick": "A",
-      "scoreA": 66,
-      "scoreB": 34,
+      "scoreA": 25,
+      "scoreB": 4,
       "label": "A",
       "proxyVotes": [
-        "A",
+        "B",
         "A",
         "A",
         "A",
@@ -1045,8 +1061,8 @@
       "b": "gh-mid-material",
       "intended": "A",
       "termPick": "A",
-      "scoreA": 47,
-      "scoreB": 43,
+      "scoreA": 18,
+      "scoreB": 9,
       "label": "A",
       "proxyVotes": [
         "A",
@@ -1063,17 +1079,17 @@
       "a": "gh-mid-material",
       "b": "gh-mid-gate",
       "intended": "tie",
-      "termPick": "B",
-      "scoreA": 43,
-      "scoreB": 49,
+      "termPick": "A",
+      "scoreA": 9,
+      "scoreB": 3,
       "label": "A",
       "proxyVotes": [
         "A",
         "A",
         "A",
         "A",
-        "A",
-        "B"
+        "B",
+        "tie"
       ]
     },
     {
@@ -1082,9 +1098,9 @@
       "a": "gh-mid-gate",
       "b": "gh-samepack-classical",
       "intended": "A",
-      "termPick": "B",
-      "scoreA": 49,
-      "scoreB": 61,
+      "termPick": "A",
+      "scoreA": 3,
+      "scoreB": 1,
       "label": "A",
       "proxyVotes": [
         "A",
@@ -1102,16 +1118,16 @@
       "b": "ct-mid-plain",
       "intended": "A",
       "termPick": "A",
-      "scoreA": 46,
-      "scoreB": 23,
-      "label": "tie",
+      "scoreA": 19,
+      "scoreB": 10,
+      "label": "A",
       "proxyVotes": [
         "tie",
-        "tie",
-        "tie",
         "A",
         "A",
-        "tie"
+        "A",
+        "A",
+        "A"
       ]
     },
     {
@@ -1120,9 +1136,9 @@
       "a": "ct-mid-plain",
       "b": "ct-samepack-gatehouse",
       "intended": "A",
-      "termPick": "B",
-      "scoreA": 23,
-      "scoreB": 27,
+      "termPick": "A",
+      "scoreA": 10,
+      "scoreB": 1,
       "label": "A",
       "proxyVotes": [
         "A",
