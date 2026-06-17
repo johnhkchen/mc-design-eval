@@ -54,7 +54,10 @@ const HERE = fileURLToPath(new URL("./", import.meta.url));
 const OUT_DIR = join(ROOT, process.env.REFEREE_OUT_DIR ?? "docs/active/work/T-169-01");
 const RESULTS = join(ROOT, process.env.REFEREE_RESULTS ?? "experiments/eval-alignment/results/corpus-referee.json");
 const TIER = "strong";
-const VOTES = 2;
+// T-178-01 (E-44): the explicit confirmation lever — re-run the crater at VOTES≥4–6 to tighten the means
+// and report std across votes. Default 2 keeps the E-40/T-170-02/T-173-01 reproductions byte-identical when
+// the env is unset.
+const VOTES = Number(process.env.VOTES ?? 2);
 const NOISE = 12; // the E-38 per-call noise band
 const GUARD_ONLY = process.env.GUARD_ONLY === "1";
 // T-173-01 (E-42): run ONLY Section A (crater) — the faithfulness re-run question is purely
@@ -81,6 +84,9 @@ const toB64 = async (p) => {
   return { base64: buf.toString("base64"), mediaType };
 };
 const mean = (a) => (a.length ? a.reduce((s, v) => s + v, 0) / a.length : 0);
+// T-178-01: population std across the per-vote scores — the robustness number S-178 turns on (fragile vs
+// robust is a variance question; a crater that only holds at VOTES=2 is a coin-flip, not a separation).
+const std = (a) => { const m = mean(a); return a.length ? Math.sqrt(mean(a.map((v) => (v - m) ** 2))) : 0; };
 const round = (x) => Math.round(x);
 /** Persist the full item triple + the SAME class the scorer uses — the audit trail critiqueEvidence drops. */
 const itemsOf = (critique) => (critique?.items ?? []).map((it) => ({
@@ -149,7 +155,8 @@ async function runCrater() {
       votes.push({ score: d.score, nWrongStyle: d.ev.nWrongStyle, wrongStyleCapped: d.ev.wrongStyleCapped, items: d.items });
       console.log(`[crater] ${c.key} v${v + 1}: score=${d.score} nWrongStyle=${d.ev.nWrongStyle}/${d.items.length}`);
     }
-    conditions.push({ ...c, scoreMean: round(mean(votes.map((x) => x.score))), votes });
+    const voteScores = votes.map((x) => x.score);
+    conditions.push({ ...c, scoreMean: round(mean(voteScores)), scoreStd: round(std(voteScores)), votes });
   }
   const sc = (k) => conditions.find((c) => c.key === k)?.scoreMean ?? null;
   const A = sc("A-matched"), B = sc("B-arc"), B2 = sc("B2-chapelle"), C = sc("C-control");
@@ -273,8 +280,9 @@ async function main() {
   await writeFile(RESULTS,
     JSON.stringify({ schema: BAKEOFF_SCHEMA, tier: TIER, votes: VOTES, noiseBand: NOISE, crater, agreement, bakeoff, baseline }, null, 2) + "\n");
 
+  const cstd = (k) => crater.conditions.find((c) => c.key === k)?.scoreStd ?? null;
   console.log("\n================ CORPUS REFEREE VERDICT ================");
-  console.log(`CRATER:    A=${crater.scores.A} B=${crater.scores.B} B2=${crater.scores.B2} C=${crater.scores.C}  -> ${crater.verdict}`);
+  console.log(`CRATER:    A=${crater.scores.A}±${cstd("A-matched")} B=${crater.scores.B}±${cstd("B-arc")} B2=${crater.scores.B2}±${cstd("B2-chapelle")} C=${crater.scores.C}±${cstd("C-control")} (votes=${VOTES})  -> ${crater.verdict}`);
   console.log(`KIND:      contrast=${crater.kindReliability.replaceContrast}  -> ${crater.kindReliability.verdict}`);
   if (CRATER_ONLY) {
     console.log(`AGREEMENT: skipped (CRATER_ONLY)`);
