@@ -1,0 +1,1154 @@
+{
+  "schema": "bakeoff/v1",
+  "tier": "strong",
+  "votes": 6,
+  "noiseBand": 12,
+  "crater": {
+    "build": "builds/gatehouse/faithful-covered",
+    "program": "synthetic-gatehouse (fixed)",
+    "conditions": [
+      {
+        "key": "A-matched",
+        "tier": "MATCHED",
+        "pack": "packs/rustic.json",
+        "concept": "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+        "note": "rustic concept + rustic pack (build matches both)",
+        "scoreMean": 13,
+        "scoreStd": 12,
+        "votes": [
+          {
+            "score": 0,
+            "nWrongStyle": 3,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "a plain rectangular opening cut straight into the stone wall, flat-headed, no timber surround and no door leaf",
+                "missing": "the arch curve, the dark_oak_log timber frame around the aperture, and the spruce_door",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "uniform stone_bricks across the entire wall on every face, no rough cobble field",
+                "missing": "the cobblestone field material; the field/dressing contrast",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "a uniform smooth brown plank roof (reads as dark_oak_planks) with no stair-course stepping and no ridge/eave trim differentiation",
+                "missing": "the spruce_planks field colour, the spruce_stairs course stepping, and the dark_oak_planks trim",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "bare narrow slit recesses scratched into the stone wall with no framing",
+                "missing": "the dark_oak_trapdoor shutters and spruce_fence infill",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          },
+          {
+            "score": 4,
+            "nWrongStyle": 3,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "A plain rectangular doorway with a flat square head, bare stone-brick reveals, no door and no timber surround; the other faces carry only narrow slit windows",
+                "missing": "Arch treatment, dark_oak_log timber dressing, spruce_door, and lantern",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "Uniform stone_bricks across every wall face, corner to corner, with no material contrast",
+                "missing": "Cobblestone field and the distinct cobble/stone-brick quoin reads",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "ROOF",
+                "severity": "minor",
+                "present": "A flat brown plank field with stepped verge edges, but no stair-course banding and no contrasting ridge trim",
+                "missing": "spruce_stairs courses and the dark_oak_planks ridge/eave trim",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              }
+            ]
+          },
+          {
+            "score": 20,
+            "nWrongStyle": 2,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "a plain square-cut hole punched through the front wall, bare stone all around, no door",
+                "missing": "arched head, dark_oak_log frame, spruce_door",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "uniform stone-brick-style coursing over every face, one flat material edge to edge",
+                "missing": "cobblestone field, distinguished stone_brick dressing/quoins",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "bare slit voids in the wall with no shutter or infill",
+                "missing": "dark_oak_trapdoor shutters, spruce_fence infill",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "ROOF",
+                "severity": "minor",
+                "present": "stepped spruce-plank covering with the verge/ridge left as the field material, no contrasting trim",
+                "missing": "dark_oak_planks ridge and verge trim",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          },
+          {
+            "score": 28,
+            "nWrongStyle": 2,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "A plain rectangular notch cut into the wall, square-headed, with no door, no timber frame, and no arch",
+                "missing": "Arched head, dark_oak_log timber jambs/dressing, spruce_door, door-lantern",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "Uniform stone_bricks across every face, edge to edge, with no field/dressing distinction",
+                "missing": "cobblestone field (wall.field.ground) and the stone_brick quoin/dressing contrast that reads it as masonry",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "ROOF",
+                "severity": "minor",
+                "present": "Brown stepped planks covering the gable, all one material with no contrasting ridge or verge line",
+                "missing": "dark_oak_planks ridge/verge trim contrast",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          },
+          {
+            "score": 28,
+            "nWrongStyle": 2,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "A plain rectangular doorway cut straight into the stone wall, no head shaping and no timber surround.",
+                "missing": "The arch head, the dark_oak_log timber jamb dressing, the spruce_door, and the lantern.",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "Uniform stone_bricks across every wall face, with no field/dressing distinction and no quoined corners.",
+                "missing": "The cobblestone field and the stone-brick quoin/dressing contrast that separates corners from the wall body.",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "ROOF",
+                "severity": "minor",
+                "present": "A bare spruce_planks gable with crude block stair-stepping at the verge and no contrasting trim.",
+                "missing": "The dark_oak_planks ridge/verge trim and the spruce_stairs eave courses.",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "nWrongStyle": 4,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "A plain rectangular notch/void cut into one wall face, no head treatment, no frame, no door leaf",
+                "missing": "Arch treatment, dark_oak_log timber frame, spruce_door",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "Uniform stone_bricks across the entire wall surface — the dressing material used as the field",
+                "missing": "Cobblestone field; the field/dressing contrast (rubble wall vs cut-stone trim)",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "ROOF",
+                "severity": "minor",
+                "present": "Gabled roof with correct stair-course stepping, but field reads as flat brown planks (oak/dark_oak), no grey spruce courses or dark trim differentiation",
+                "missing": "Spruce material palette (grey course/step), dark_oak_planks trim band",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "Bare slit windows punched into the side walls with no infill, shutters, or dressing",
+                "missing": "window.infill (spruce_fence), window.shutter (dark_oak_trapdoor), opening-dressing",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "B-arc",
+        "tier": "WRONG",
+        "pack": "packs/guildhall.json",
+        "concept": "benchmarks/temple-facade/concepts/arc-A-flash.png",
+        "note": "classical arch + guildhall pack",
+        "scoreMean": 0,
+        "scoreStd": 0,
+        "votes": [
+          {
+            "score": 0,
+            "nWrongStyle": 3,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "a brown plank-reading roof (dark_oak/wood tone) with stepped stair courses",
+                "missing": "deepslate_tiles stone field and stone-brick course material; the covering color is wrong",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "uniform stone_bricks over the entire wall, single material top to bottom, no base or corner articulation",
+                "missing": "smooth_stone ground storey, chiseled_stone_bricks quoins, polished_diorite pilasters, plinth course, eave-overhang",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "a single flat-headed rectangular cut on one face, undressed and doorless",
+                "missing": "arched head, stone_bricks voussoir ring, opening dressing, dark_oak_door",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "a few bare narrow slits, no glazing",
+                "missing": "glass_pane glazing and any window dressing",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "nWrongStyle": 3,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "brown plank roof (reads as dark_oak_planks) stepped into stairs courses",
+                "missing": "deepslate_tiles stone field; stone_brick_stairs/slab masonry courses",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "single uniform stone_bricks skin over the whole wall, corners undifferentiated",
+                "missing": "smooth_stone ground storey; chiseled_stone_bricks quoin read; ground/upper field contrast",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "plain flat-headed rectangular notch cut in the wall, no door, no dressing",
+                "missing": "arch head; stone_bricks voussoir ring; dark_oak_door; opening-dressing",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "flat stone_bricks wall with no vertical articulation",
+                "missing": "polished_diorite pilasters",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "WALL",
+                "severity": "minor",
+                "present": "wall meets ground and roof flush, no base or eave course",
+                "missing": "plinth course; eave-overhang",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "small open wall slits, unglazed",
+                "missing": "glass_pane glazing",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "nWrongStyle": 2,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "Brown wood-tone stepped gable (reads as dark_oak/wood planks) with stair-stepped courses.",
+                "missing": "Stone roof materials — deepslate_tiles field and stone_brick stair/slab courses; the wood material must be replaced.",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "A plain rectangular notch cut into one wall face (no head, no door, no surround).",
+                "missing": "Arched voussoir head, dark_oak_door, and opening-dressing — the square hole must be reworked into a dressed arched gate.",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "Uniform stone_bricks across every face, top to bottom, with no corner or base articulation.",
+                "missing": "smooth_stone ground field, chiseled_stone_bricks quoins, and a plinth — the corners and base read as plain wall.",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "WALL",
+                "severity": "minor",
+                "present": "Flat unbroken stone-brick faces; eave dies flush into the wall with no overhang.",
+                "missing": "polished_diorite pilasters and the eave-overhang course.",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "Only faint slit marks on the ±z faces; no glazed openings.",
+                "missing": "glass_pane windows.",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "nWrongStyle": 3,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "a plain rectangular notch cut in the wall, open, with no door and no dressing",
+                "missing": "arch/voussoir head, dark_oak_door, opening-dressing surround",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "a gabled roof clad in brown wood planks with stepped courses",
+                "missing": "deepslate_tiles field, stone_brick_stairs/slab courses",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "uniform stone_bricks carried straight around every corner",
+                "missing": "chiseled_stone_bricks quoins",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "flat uninterrupted stone-brick wall planes",
+                "missing": "polished_diorite pilasters",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "WALL",
+                "severity": "minor",
+                "present": "stone_bricks used uniformly from base to eave with no storey or plinth distinction",
+                "missing": "smooth_stone ground field, plinth base",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "only a few tiny unglazed slits on the eave faces",
+                "missing": "glass_pane glazed windows",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "nWrongStyle": 3,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "uniform brown plank-reading stepped roof (no tile field, no stair/slab courses)",
+                "missing": "deepslate_tiles field material and stone_brick_stairs/slab course banding",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "single uniform gray stone-brick wall, flat corners, no base/storey banding, no pilasters",
+                "missing": "ground/upper material split, quoin dressing, pilasters, plinth, eave-overhang",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "a single flat undressed rectangular notch cut in the wall",
+                "missing": "arched head, stone_bricks voussoir ring, opening-dressing, dark_oak_door",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "bare slit windows with no glazing",
+                "missing": "glass_pane glazing",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "nWrongStyle": 3,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "uniform brown plank-reading stepped roof, no course articulation",
+                "missing": "deepslate_tiles field material and stone-brick stair/slab courses",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "single undifferentiated gray stone-brick field over the whole box",
+                "missing": "ground/upper material split, quoin dressing, pilasters, plinth, eave-overhang",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "a single flat rectangular notch cut into one wall, no arch, no door, no dressing",
+                "missing": "arched head with stone-brick voussoirs and dark_oak_door leaf",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "bare unglazed slits in the walls",
+                "missing": "glass_pane glazing",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "B2-chapelle",
+        "tier": "WRONG",
+        "pack": "packs/guildhall.json",
+        "concept": "benchmarks/temple-facade/concepts/chapelle-A-flash.png",
+        "note": "gothic cathedral + guildhall pack (triangulates arc-A's palette confound)",
+        "scoreMean": 0,
+        "scoreStd": 0,
+        "votes": [
+          {
+            "score": 0,
+            "nWrongStyle": 3,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "uniform brown plank-reading stepped roof",
+                "missing": "deepslate_tiles field, stone_brick stair/slab courses",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "single uniform gray stone-brick field on every face",
+                "missing": "ground/upper differentiation, quoin dressing, pilasters, plinth, eave-overhang",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "single flat rectangular cut in the wall, no head, no door",
+                "missing": "arch voussoir head, dark_oak_door",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "bare unglazed slit openings",
+                "missing": "glass_pane glazing",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "nWrongStyle": 2,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "uniform stone_bricks carried straight to every corner",
+                "missing": "chiseled_stone_bricks quoin chains at the wall edges",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "brown stair-stepped roof reading as wood/dark_oak",
+                "missing": "deepslate_tiles covering and stone-brick course material",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "a plain square doorway notched into the wall, open (no door)",
+                "missing": "the arch head / voussoir ring and the dark_oak_door leaf",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "flat unbroken stone-brick wall plane",
+                "missing": "polished_diorite pilaster strips",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "WALL",
+                "severity": "minor",
+                "present": "single stone-brick material from base to eave, no plinth",
+                "missing": "smooth_stone ground course and the plinth base band",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "a few bare slit gaps on the eave faces, unglazed",
+                "missing": "glass_pane glazing and opening-dressing surrounds",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "nWrongStyle": 3,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "smooth brown plank-colored gable roof, no masonry courses",
+                "missing": "deepslate_tiles covering, stone_brick_stairs/slab course lines, masonry roof material",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "a single uniform light stone-brick skin from base to eave, no quoin dressing, no field break",
+                "missing": "smooth_stone ground storey, chiseled_stone_bricks corner quoins, ground/upper field distinction",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "a flat rectangular notch cut into the front wall, square-headed and empty",
+                "missing": "arch treatment, stone_bricks voussoir ring, dark_oak_door",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "",
+                "missing": "polished_diorite pilasters entirely",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "WALL",
+                "severity": "minor",
+                "present": "wall meets ground and roof flush, no base course, no overhang",
+                "missing": "plinth course, eave-overhang",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "narrow unglazed window slits",
+                "missing": "glass_pane glazing",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "nWrongStyle": 3,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "brown wood plank gable roof",
+                "missing": "deepslate_tiles covering and stone_brick stair/slab courses; the whole roof is the wrong material family",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "uniform stone_bricks skin on every face, no corner articulation",
+                "missing": "smooth_stone ground storey and chiseled_stone_bricks quoins — no field/dressing distinction",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "flat rectangular notch cut into one wall, open (no door)",
+                "missing": "arch treatment, stone_bricks voussoir surround, dark_oak_door",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "",
+                "missing": "polished_diorite pilasters entirely absent",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "WALL",
+                "severity": "minor",
+                "present": "wall rises straight from ground to a flush roof line",
+                "missing": "plinth base course and eave-overhang",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "narrow unglazed wall slits",
+                "missing": "glass_pane glazing in the window openings",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "nWrongStyle": 3,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "smooth brown plank roof surface, stepped but undressed",
+                "missing": "deepslate_tiles covering and stone_brick_stairs/slab masonry courses",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "a single uniform stone_bricks skin across the whole wall, no corner dressing",
+                "missing": "smooth_stone ground storey and chiseled_stone_bricks quoin courses",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "a flat rectangular notch cut into the wall, no arch, no door",
+                "missing": "voussoir arch ring and dark_oak_door leaf",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "",
+                "missing": "polished_diorite pilaster strips",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "WALL",
+                "severity": "minor",
+                "present": "wall meets ground and roof flush, no projecting courses",
+                "missing": "plinth base and eave-overhang",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "bare unglazed slit openings on the side faces",
+                "missing": "glass_pane glazing",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "nWrongStyle": 3,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "uniform brown plank-reading roof, no eave courses",
+                "missing": "deepslate_tiles field, stone_brick_stairs/slab courses, course/eave-course articulation",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "single flat stone_bricks wall, no storey split, no quoins, no pilasters, no plinth",
+                "missing": "ground/upper material split, quoin dressing, pilasters, plinth, eave-overhang",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "flat rectangular notch cut in wall, no arch, no door, no dressing",
+                "missing": "arched head, stone_bricks voussoir ring, opening-dressing, dark_oak_door",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "bare slit openings",
+                "missing": "glass_pane glazing",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "C-control",
+        "tier": "CONTROL",
+        "pack": "packs/rustic.json",
+        "concept": "benchmarks/temple-facade/concepts/arc-A-flash.png",
+        "note": "classical concept + RUSTIC pack (isolates pack vs concept-image)",
+        "scoreMean": 5,
+        "scoreStd": 7,
+        "votes": [
+          {
+            "score": 8,
+            "nWrongStyle": 2,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "A flat-headed rectangular notch cut into one wall at the base (visible azimuths 225°/315°), no arch and no door",
+                "missing": "Arched head, stone_bricks voussoir dressing, spruce_door leaf",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "A single undifferentiated grey cobblestone/stone field running floor-to-eave on every face, flat and unarticulated",
+                "missing": "Timber-frame (dark_oak_log) grid, white_terracotta upper infill, stone_bricks dressing, plinth course",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "A steep stepped-stair gable reading as one undifferentiated dark brown (dark_oak-toned) plank field",
+                "missing": "Spruce field material, differentiated stair course / slab step / dark_oak trim articulation",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "Bare narrow slit openings punched in the ±z wall faces, no shutters or infill",
+                "missing": "dark_oak_trapdoor shutters, spruce_fence infill",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          },
+          {
+            "score": 20,
+            "nWrongStyle": 2,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "A small flat-headed rectangular notch at the wall base; no arch, no door, no dressing.",
+                "missing": "Arched head, voussoir/opening-dressing, spruce_door, door-lantern.",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "An undifferentiated dark-brown stepped plank roof reading as a single dark material.",
+                "missing": "Spruce_planks field distinct from dark_oak trim; spruce_stairs course and spruce_slab step articulation.",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "Bare slit openings on the wall faces with no glazing or shutters.",
+                "missing": "Spruce_fence infill and dark_oak_trapdoor shutters.",
+                "kind": "add",
+                "styleClass": "absent"
+              },
+              {
+                "department": "WALL",
+                "severity": "minor",
+                "present": "Uniform cobblestone field across all faces with no corner dressing or plinth.",
+                "missing": "Stone_bricks dressing at quoins/openings and a plinth base course.",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "nWrongStyle": 3,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "A plain rectangular notch cut into one wall face (visible at 225°/315°), with a flat head",
+                "missing": "The arch treatment (curved voussoir head), the spruce_door, and the stone_bricks opening-dressing",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "A single undifferentiated grey stone-brick field over the whole wall, no storey break",
+                "missing": "Timber-frame framing, white_terracotta infill, cobblestone/stone-brick material split, and the plinth course",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "ROOF",
+                "severity": "minor",
+                "present": "A steep gable of plain brown planks with crude blocky stepping at the eaves",
+                "missing": "The spruce_planks field material, dark_oak_planks trim, and clean stairs/slab course articulation",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "Bare narrow slit openings on the wall faces",
+                "missing": "The dark_oak_trapdoor shutters and spruce_fence infill",
+                "kind": "add",
+                "styleClass": "absent"
+              }
+            ]
+          },
+          {
+            "score": 4,
+            "nWrongStyle": 3,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "A plain rectangular cut slot at the base of one wall, flat-headed, with no door, no arch dressing, and no lantern.",
+                "missing": "The arch treatment (curved voussoir head), the spruce_door, and the door-lantern decoration.",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "Uniform stone_bricks across every wall face — one flat material, no cobblestone field, no dressing distinction, no plinth.",
+                "missing": "The cobblestone field material and any plinth/course articulation; the wall is undifferentiated brick.",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "ROOF",
+                "severity": "major",
+                "present": "A uniform dark-brown plank gable, blocky stepped slope, single material edge-to-edge.",
+                "missing": "The lighter spruce_planks field, the spruce_stairs courses, and the dark_oak_planks verge trim.",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "nWrongStyle": 4,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "a plain rectangular void cut into the front wall, no door, no surround",
+                "missing": "arch head, dark_oak_log frame, spruce_door, opening-dressing",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "uniform stone_bricks across the entire wall surface, no field/dressing contrast, no plinth or quoins",
+                "missing": "cobblestone field, stone_bricks dressing localized to corners/openings",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "ROOF",
+                "severity": "minor",
+                "present": "stepped gable in brown oak/dark_oak planks as the primary field material — correct form, wrong palette",
+                "missing": "spruce_planks field, dark_oak_planks trim, spruce_stairs/spruce_slab eave articulation",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "bare narrow slits in the side walls, no infill or shutters",
+                "missing": "spruce_fence infill, dark_oak_trapdoor shutters, opening dressing",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "nWrongStyle": 4,
+            "wrongStyleCapped": true,
+            "items": [
+              {
+                "department": "OPENING",
+                "severity": "major",
+                "present": "A plain rectangular void cut into one wall, bare stone edges, no head treatment, frame, or door",
+                "missing": "Arch head, dark_oak_log frame, spruce_door, door-lantern",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "WALL",
+                "severity": "major",
+                "present": "Uniform stone_bricks (regular brick coursing) across every wall surface, no field/dressing distinction",
+                "missing": "Cobblestone field; dressing-only role for stone_bricks",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "ROOF",
+                "severity": "minor",
+                "present": "Stepped gable roof in brown oak/dark_oak planks (warm brown field)",
+                "missing": "Grey spruce_planks field, dark_oak_planks trim accent",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              },
+              {
+                "department": "OPENING",
+                "severity": "minor",
+                "present": "Bare narrow slit voids in the side walls",
+                "missing": "spruce_fence infill, dark_oak_trapdoor shutters, opening-dressing",
+                "kind": "replace",
+                "styleClass": "wrong-style"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "spreads": {
+      "A-B": 13,
+      "A-B2": 13,
+      "A-C": 8,
+      "C-B (pack effect)": 5
+    },
+    "cratered": false,
+    "collapsed": false,
+    "verdict": "DID NOT CRATER — matched and wrong-style stay close, inside the ±12 noise",
+    "scores": {
+      "A": 13,
+      "B": 0,
+      "B2": 0,
+      "C": 5
+    },
+    "kindReliability": {
+      "perCondition": {
+        "A-matched": {
+          "tier": "MATCHED",
+          "nItems": 21,
+          "add": 5,
+          "replace": 16,
+          "remove": 0,
+          "untagged": 0,
+          "cappingRate": 0.7619047619047619,
+          "replaceRate": 0.7619047619047619
+        },
+        "B-arc": {
+          "tier": "WRONG",
+          "nItems": 29,
+          "add": 12,
+          "replace": 17,
+          "remove": 0,
+          "untagged": 0,
+          "cappingRate": 0.5862068965517241,
+          "replaceRate": 0.5862068965517241
+        },
+        "B2-chapelle": {
+          "tier": "WRONG",
+          "nItems": 32,
+          "add": 15,
+          "replace": 17,
+          "remove": 0,
+          "untagged": 0,
+          "cappingRate": 0.53125,
+          "replaceRate": 0.53125
+        },
+        "C-control": {
+          "tier": "CONTROL",
+          "nItems": 23,
+          "add": 5,
+          "replace": 18,
+          "remove": 0,
+          "untagged": 0,
+          "cappingRate": 0.782608695652174,
+          "replaceRate": 0.782608695652174
+        }
+      },
+      "byTier": {
+        "MATCHED": {
+          "nItems": 21,
+          "untagged": 0,
+          "replaceRate": 0.7619047619047619,
+          "cappingRate": 0.7619047619047619
+        },
+        "WRONG": {
+          "nItems": 61,
+          "untagged": 0,
+          "replaceRate": 0.5573770491803278,
+          "cappingRate": 0.5573770491803278
+        },
+        "CONTROL": {
+          "nItems": 23,
+          "untagged": 0,
+          "replaceRate": 0.782608695652174,
+          "cappingRate": 0.782608695652174
+        }
+      },
+      "replaceContrast": -0.20452771272443404,
+      "verdict": "NO CONTRAST — matched and wrong-style tag alike (the typed tag did not remove the over-cap)"
+    }
+  },
+  "agreement": {
+    "skipped": "CRATER_ONLY"
+  },
+  "bakeoff": {
+    "skipped": "CRATER_ONLY"
+  },
+  "baseline": {
+    "skipped": "CRATER_ONLY"
+  }
+}
