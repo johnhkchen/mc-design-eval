@@ -53,6 +53,14 @@ export function programBlock({ program }) {
  * the CONSTRUCTION idioms bucketed by `departmentOf`. Element vocabulary only — NO proportion, NO
  * massing, NO verdict (the Layer A contract). PURE.
  *
+ * T-187-01 (story S-187, epic E-47 — voxel-vs-art tolerance): the E-46 re-gate (T-186 RE-GATE §2b)
+ * showed the foreign vocabulary still LEAKED as the expected MATERIAL — the SAME gatehouse roof read
+ * `add` under the rustic vocab but `replace` under the guildhall vocab (`gh-wrongpack` floored at 1),
+ * because the judge treated guildhall's `roof.field → deepslate_tiles` as the standard. The header now
+ * says EXPLICITLY these materials are never the expected material — picture-material wins — so a
+ * faithful build in a foreign pack is not flagged wrong (the D3 anti-leak). Pairs with the VOXEL-MEDIUM
+ * clause in the DiagnoseBuild prompt (department.baml) which forgives the blocky MEDIUM, not the content.
+ *
  * @param {object} args
  * @param {object} args.pack  a validated style pack (palette roles + idioms + proportions)
  * @returns {string} the multi-line vocabulary block for the prompt's `style_profile` input
@@ -71,7 +79,7 @@ export function styleProfileBlock({ pack }) {
   const dept = (d) => idioms.filter((n) => departmentOf(n) === d).sort().join(", ") || "none";
   const pitch = JSON.stringify(pack?.proportions?.pitchClasses ?? []);
   return [
-    `THE ${pack?.style ?? "?"} PACK'S NAMING VOCABULARY (materials & idioms available to DESCRIBE the build and its concept — NOT the standard; the CONCEPT IMAGE is the standard. A build that matches its concept image is correct even if its materials differ from this list):`,
+    `THE ${pack?.style ?? "?"} PACK'S NAMING VOCABULARY (materials & idioms available to DESCRIBE the build and its concept — NOT the standard; the CONCEPT IMAGE is the standard. A build that matches its concept image is correct even if its materials differ from this list. These materials are NEVER the expected material: if the build's roof / walls / openings match what the CONCEPT IMAGE shows but use materials unlike this list, that is a match, NOT a replace — do not flag it):`,
     `- ROOF: materials ${materials("roof")}; covering idioms ${dept("ROOF")}; pitch classes ${pitch}.`,
     `- WALLS: materials ${materials("wall", "frame")}; construction idioms ${dept("WALL")}.`,
     `- OPENINGS: materials ${materials("door", "window", "opening")}; treatment idioms ${dept("OPENING")}.`,

@@ -173,3 +173,17 @@ test("DG8 the style block is framed as NAMING VOCABULARY, NOT the standard (T-18
   assert.match(r, /spruce_planks/);
   assert.match(r, /timber-frame/);
 });
+
+test("DG9 the header carries the T-187 material anti-leak (vocab is NEVER the expected material)", () => {
+  // The voxel-vs-art follow-on (T-187-01 / E-47): the T-186 re-gate left a residual where the FOREIGN
+  // vocabulary still leaked as the expected MATERIAL — the same gatehouse roof read `add` under the
+  // rustic vocab but `replace` under the guildhall vocab (gh-wrongpack floored). The header now says
+  // EXPLICITLY these materials are never the expected material; picture-material wins. The gate re-run
+  // (style-agreement-run.mjs) is the real proof; this is the unit tripwire for the D3 anti-leak.
+  const r = styleProfileBlock({ pack: RUSTIC });
+  assert.match(r, /NEVER the expected material/i, "the vocabulary materials are never the expected material");
+  assert.match(r, /match.*NOT a replace/i, "picture-material wins: a foreign-pack build that matches the picture is a match, not a replace");
+  // it still preserves the T-186 frame (this is an APPEND, not a rewrite) — DG8's substrings hold.
+  assert.match(r, /NAMING VOCABULARY/);
+  assert.match(r, /CONCEPT IMAGE is the standard/i);
+});

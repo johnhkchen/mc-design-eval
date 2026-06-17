@@ -87,7 +87,18 @@ function DiagnoseBuild(
     concept image does not show. CONCEPT-CONDITIONAL: if the build's element already reads like the
     concept image and only a within-picture DETAIL differs or is still missing, tag it `add` (the
     missing detail), NOT `replace`; reserve `replace` for an element that does not look like the concept
-    image at all. Tag each item with the department that owns it — one of: {{ departments }}. Judge
+    image at all. VOXEL MEDIUM: the build is made of Minecraft blocks at finite resolution; the concept
+    image may be smooth painted art. Blockiness, stair-stepped curves and diagonals, and the coarser
+    block-texture palette are the MEDIUM, not divergence from the concept — judge whether the element
+    depicts the SAME THING the concept shows at block resolution (same form-class, same material family,
+    same feature presence), not whether it is as smooth or finely detailed as the painting. Do NOT tag
+    `replace`, and do NOT raise severity to `major`, merely because an element is blockier or
+    coarser-textured than the smooth concept; that is the medium, not a divergence. Ornament finer than
+    the block grid can resolve (filigree, thin scrollwork, fine moldings, hairline trim) is below the
+    medium's resolution — do not flag its absence as a divergence. Reserve `replace` and `major` for an
+    element that depicts a GENUINELY DIFFERENT thing than the concept image — a different form-class, a
+    different material FAMILY, or an element the concept does not show — never for the right thing
+    rendered blockily. Tag each item with the department that owns it — one of: {{ departments }}. Judge
     element-level construction (material, covering, feature presence) AS THE CONCEPT IMAGE SHOWS IT, NOT
     overall size or proportion. Name at most {{ max_items }} items, the most divergent first; emit no
     item for a department that already reads like the concept image.

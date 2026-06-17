@@ -144,6 +144,11 @@ test("FX-DB1 DiagnoseBuild (Layer A) renders byte-identical to the committed gol
   assert.match(R[15].prompt, /THE STANDARD IS THE CONCEPT IMAGE/);
   assert.match(R[15].prompt, /ROOF: materials roof\.field → spruce_planks/);
   assert.match(R[15].prompt, /WALLS:.*timber-frame/);
+  // the T-187-01 voxel-vs-art tolerance: the prompt forgives the blocky MEDIUM (not the content), and
+  // the header says the vocabulary materials are never the expected material (the gh-wrongpack anti-leak).
+  assert.match(R[15].prompt, /VOXEL MEDIUM/);
+  assert.match(R[15].prompt, /finer than\s+the block grid/, "sub-resolution ornament is exempt (the medium's resolution floor)");
+  assert.match(R[15].prompt, /NEVER the expected material/i, "the foreign vocabulary is not the expected material (D3 anti-leak)");
 });
 
 test("FX-DB2 b.parse over the canonical reply equals the minted Critique; fields are non-vacuous", () => {

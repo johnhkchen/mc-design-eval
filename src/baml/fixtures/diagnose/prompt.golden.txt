@@ -120,7 +120,7 @@ THE rustic PACK'S MATERIAL NAMES (a vocabulary to DESCRIBE blocks — NOT the ta
 decoration:
   - door-lantern: lantern
 
-THE rustic PACK'S NAMING VOCABULARY (materials & idioms available to DESCRIBE the build and its concept — NOT the standard; the CONCEPT IMAGE is the standard. A build that matches its concept image is correct even if its materials differ from this list):
+THE rustic PACK'S NAMING VOCABULARY (materials & idioms available to DESCRIBE the build and its concept — NOT the standard; the CONCEPT IMAGE is the standard. A build that matches its concept image is correct even if its materials differ from this list. These materials are NEVER the expected material: if the build's roof / walls / openings match what the CONCEPT IMAGE shows but use materials unlike this list, that is a match, NOT a replace — do not flag it):
 - ROOF: materials roof.field → spruce_planks, roof.trim → dark_oak_planks, roof.course → spruce_stairs, roof.step → spruce_slab; covering idioms dormer, roof.gable, roof.hip, roof.pyramid; pitch classes [1,2].
 - WALLS: materials wall.field.ground → cobblestone, wall.dressing → stone_bricks, frame.timber → dark_oak_log, wall.infill.upper → white_terracotta; construction idioms course.slab, course.stairs, jetty, plinth, timber-frame.
 - OPENINGS: materials door.main → spruce_door, door.wagon → oak_planks, window.shutter → dark_oak_trapdoor, window.infill → spruce_fence; treatment idioms arch, head.flat, opening-dressing.
@@ -140,7 +140,18 @@ image (different form or material than the PICTURE shows); remove if an element 
 concept image does not show. CONCEPT-CONDITIONAL: if the build's element already reads like the
 concept image and only a within-picture DETAIL differs or is still missing, tag it `add` (the
 missing detail), NOT `replace`; reserve `replace` for an element that does not look like the concept
-image at all. Tag each item with the department that owns it — one of: CHIMNEY, OPENING, ROOF, ROOM, WALL. Judge
+image at all. VOXEL MEDIUM: the build is made of Minecraft blocks at finite resolution; the concept
+image may be smooth painted art. Blockiness, stair-stepped curves and diagonals, and the coarser
+block-texture palette are the MEDIUM, not divergence from the concept — judge whether the element
+depicts the SAME THING the concept shows at block resolution (same form-class, same material family,
+same feature presence), not whether it is as smooth or finely detailed as the painting. Do NOT tag
+`replace`, and do NOT raise severity to `major`, merely because an element is blockier or
+coarser-textured than the smooth concept; that is the medium, not a divergence. Ornament finer than
+the block grid can resolve (filigree, thin scrollwork, fine moldings, hairline trim) is below the
+medium's resolution — do not flag its absence as a divergence. Reserve `replace` and `major` for an
+element that depicts a GENUINELY DIFFERENT thing than the concept image — a different form-class, a
+different material FAMILY, or an element the concept does not show — never for the right thing
+rendered blockily. Tag each item with the department that owns it — one of: CHIMNEY, OPENING, ROOF, ROOM, WALL. Judge
 element-level construction (material, covering, feature presence) AS THE CONCEPT IMAGE SHOWS IT, NOT
 overall size or proportion. Name at most 6 items, the most divergent first; emit no
 item for a department that already reads like the concept image.
