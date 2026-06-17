@@ -43,6 +43,8 @@ import { bamlRender, bamlParse } from "../../src/baml/bridge.mjs";
 import { diagnoseRenderArgs } from "../../src/workshop/diagnose.mjs";
 import { critiqueEvidence, itemStyleClass, styleFidelityScore } from "../../src/workshop/bakeoff-score.mjs";
 import { acceptsRound, stoppingDecision, classifyInventory, CLIMB_DEFAULTS } from "../../src/workshop/climb-gate.mjs";
+import { reconcileRoofMaterial } from "../../src/recognition/roof-material.mjs";
+import { assertMaterialMap } from "../../src/form/material-map.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..", "..");
@@ -52,6 +54,7 @@ const SUBJECT = "gatehouse";
 const SEED_ARTIFACT = "benchmarks/sculpture/generated/gatehouse/artifact.json";
 const PROGRAM_PATH = "benchmarks/sculpture/recognition/gatehouse.program.json";
 const PACK_PATH = "packs/rustic.json";
+const MATERIAL_MAP_PATH = "benchmarks/sculpture/material-map/gatehouse.json"; // the concept-read roof colour (T-189-01)
 const CONCEPT = "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png";
 const CFG = { eaveY: 18, ridgeAxis: "z" };
 
@@ -61,6 +64,7 @@ const VOTES = 3;                       // median out the matched-build 0-76 scor
 const AGENT_MODEL = "claude-sonnet-4-6";
 const { margin, stallK, maxRounds, minRounds } = CLIMB_DEFAULTS;
 const GUARD_ONLY = process.env.GUARD_ONLY === "1";
+const ROOF_MATERIAL_PROBE = process.env.ROOF_MATERIAL_PROBE === "1"; // T-189-01: render the brown→grey roof glance, zero spend
 
 const median = (xs) => [...xs].sort((a, b) => a - b)[Math.floor(xs.length / 2)];
 const toB64 = async (p) => {
@@ -110,9 +114,38 @@ function add_timber_framing(occ) {
   });
   return occupancyFromCells([...occToCells(occ), ...r.placements.map((p) => ({ pos: p.pos, block: p.block }))]);
 }
-const TOOLS = { apply_gable_roof, construct_walls, add_timber_framing };
+// THE ROOF-MATERIAL HAND (T-189-01): rebuild the roof in the CONCEPT-TRUE material recognition read, not
+// the program's default timber. The decision is pure (reconcileRoofMaterial: program ↔ material-map, the
+// seam where material identity is decided); this hand only loads, decides, and rebuilds. The gable GEOMETRY
+// is identical to apply_gable_roof (same footprint/eave/pitch) — only the field block changes (form-faithful,
+// honest grey cubes, no stair/slab name-derivation). A no-divergence reconcile is an honest no-op.
+function loadMaterialMap() {
+  const mm = JSON.parse(readFileSync(join(ROOT, MATERIAL_MAP_PATH), "utf8"));
+  assertMaterialMap(mm.map); // committed material-map/v1 is the already-parsed {map:[]} form
+  return mm;
+}
+function recolor_roof(occ) {
+  const program = loadProgram(PROGRAM_PATH);
+  const pack = loadPackOf(program);
+  const { roofBlock, corrected, reason } = reconcileRoofMaterial({ program, pack, materialMap: loadMaterialMap() });
+  if (!corrected) { console.error(`  [recolor_roof] no-op — ${reason}`); return occ; }
+  const kept = []; let x0 = Infinity, x1 = -Infinity, z0 = Infinity, z1 = -Infinity;
+  for (const [key, block] of occ.cells) {
+    const [x, y, z] = key.split(",").map(Number);
+    if (y >= CFG.eaveY + 1) continue;
+    kept.push({ pos: [x, y, z], block, form: occ.forms.get(key), state: occ.states.get(key) });
+    if (y === CFG.eaveY) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); z0 = Math.min(z0, z); z1 = Math.max(z1, z); }
+  }
+  const perp = CFG.ridgeAxis === "z" ? x1 - x0 : z1 - z0;
+  const gable = gableRecord({ footprint: { x0, x1, z0, z1 }, ridgeAxis: CFG.ridgeAxis, eaveY: CFG.eaveY, ridgeY: CFG.eaveY + Math.floor(perp / 2), pitch: 1, hip: { demanded: false } });
+  const FAMILY = { field: roofBlock.replace(/^minecraft:/, ""), stairs: null, slab: null, findings: [] };
+  console.error(`  [recolor_roof] ${reason}`);
+  return occupancyFromCells([...kept, ...generateRoof([gable], FAMILY).cells]);
+}
+const TOOLS = { apply_gable_roof, recolor_roof, construct_walls, add_timber_framing };
 const MENU = [
-  "- apply_gable_roof: replace the roof with a crisp parametric gable. Best when the worst divergence is the ROOF (form/shape/presence).",
+  "- apply_gable_roof: replace the roof with a crisp parametric gable. Best when the worst divergence is the ROOF FORM/SHAPE/presence (not its colour).",
+  "- recolor_roof: rebuild the roof in the CONCEPT-TRUE material recognition read (e.g. grey stone when the concept roof is stone, not the program's default brown timber). Best when the worst divergence is ROOF COLOUR / MATERIAL — the roof reads the wrong material vs the concept.",
   "- construct_walls: REBUILD the wall envelope and skin it as construction from the pack roles (per-storey material, dressed quoins, clinker courses, a plinth, dressed openings). Best for STRUCTURAL wall holes / missing walls / a monotone single-material wall.",
   "- add_timber_framing: add timber-frame studs + plaster infill on the upper storey. Best for a uniform/monotone WALL with no material contrast / missing half-timber detail.",
   "- done: stop — the build reads like the concept, or no tool addresses the worst remaining divergence.",
@@ -173,7 +206,7 @@ async function agentPick(build, history) {
     "- If no tool addresses the worst remaining divergence (e.g. it names a chimney, an interior, or fine",
     "  trim no tool builds), pick `done` — naming a defect you cannot fix is the honest answer.",
     "Pick ONE tool:", MENU,
-    'Output ONE JSON: {"tool":"<apply_gable_roof|construct_walls|add_timber_framing|done>","reason":"<short>"}',
+    'Output ONE JSON: {"tool":"<apply_gable_roof|recolor_roof|construct_walls|add_timber_framing|done>","reason":"<short>"}',
   ].join("\n");
   const { text } = await requestText({ prompt, model: AGENT_MODEL });
   return parse(text);
@@ -181,13 +214,31 @@ async function agentPick(build, history) {
 
 // ===================================== the loop with the accept-gate =====================================
 async function main() {
-  const guard = [SEED_ARTIFACT, PROGRAM_PATH, PACK_PATH, CONCEPT];
+  const guard = [SEED_ARTIFACT, PROGRAM_PATH, PACK_PATH, MATERIAL_MAP_PATH, CONCEPT];
   for (const rel of guard) if (!existsSync(join(ROOT, rel))) throw new Error(`missing asset: ${rel}`);
   assertGlAvailable();
   console.error(`[guard] assets present; GL available. subject=${SUBJECT} azimuths=${AZIMUTHS.join(",")} votes=${VOTES} margin=${margin}`);
 
   const template = JSON.parse(readFileSync(join(ROOT, SEED_ARTIFACT), "utf8"));
   let occ = artifactOccupancy(template);
+
+  // T-189-01 — the roof-material GLANCE: render the seed roof and the recolor_roof roof each beside the
+  // concept, print the reconcile reason, and exit BEFORE any LLM spend. The falsifiable deliverable
+  // (brown→grey) without the metered climb. The roof FORM is identical (recolor_roof reuses the gable
+  // geometry); only the material differs — so this isolates the colour change on the glance.
+  if (ROOF_MATERIAL_PROBE) {
+    const outDir = join(ROOT, `builds/${SUBJECT}/picture-climb/roof-material`);
+    await mkdir(outDir, { recursive: true });
+    // The triptych isolates the COLOUR change at the gable level: apply_gable_roof (the existing hand) gives
+    // a clean BROWN gable; recolor_roof (the new hand) gives a clean GREY gable of identical geometry.
+    const gabled = apply_gable_roof(occ);
+    const recolored = recolor_roof(occ);
+    await renderBesideConcept(rebuildArtifact(occ, template), join(ROOT, CONCEPT), join(outDir, "seed-beside.png"), { label: "seed (program roof, dark_oak)" });
+    await renderBesideConcept(rebuildArtifact(gabled, template), join(ROOT, CONCEPT), join(outDir, "gable-brown-beside.png"), { label: "apply_gable_roof (timber)" });
+    await renderBesideConcept(rebuildArtifact(recolored, template), join(ROOT, CONCEPT), join(outDir, "recolored-beside.png"), { label: "recolor_roof (grey stone)" });
+    console.error(`[ROOF_MATERIAL_PROBE] wrote seed/gable-brown/recolored beside sheets to ${outDir}; no spend; exiting clean.`);
+    return;
+  }
 
   if (GUARD_ONLY) {
     await scoreBuild(occ, template, 0, "guard"); // renders round-0 views + beside sheet, zero spend
