@@ -26,11 +26,19 @@ export const BAKEOFF_SCHEMA = "bakeoff/v1";
 export const PENALTY = Object.freeze({ major: 20, minor: 8 });
 
 /**
- * The STYLE-DISTANCE term's constants (E-40/S-168) — one source, the PENALTY pattern. A present-but-
- * wrong-style item forces a MAJOR weight, adds `distance`, and CAPS the whole score at `cap` regardless
- * of completeness: a clean build in the wrong style cannot buy its score back up by being complete. The
- * cap sits well below a matched twin's typical score so the two SEPARATE (the E-39 crater the
- * severity-only scalar could not produce — "blindness is in severity→scalar, not reading").
+ * The STYLE-DISTANCE term's constants (E-40/S-168; RE-CALIBRATED E-45/S-181/T-181-01) — one source, the
+ * PENALTY pattern. A present-but-wrong-style item adds a severity-weighted penalty plus one `distance`
+ * unit, and the whole score is capped by a GRADED ceiling that falls with the BREADTH of wrong-style
+ * (distinct departments). The two constants now do this:
+ *   - `distance` (12) is one "style-distance unit", used TWICE: the per-item surcharge above severity AND
+ *     the per-department cap-grade STEP (`cap(b) = max(cap, 100 − distance·b)`). It is the same quantity —
+ *     how far one wrong department sits from the style — so coupling them is principled, not a second knob.
+ *   - `cap` (40) is now the WRONG-IN-ALL FLOOR: with 5 departments, `cap(5) = 100 − 12·5 = 40`. A build
+ *     wrong in every department sinks to it; a build wrong in ONE sits near the ceiling (`cap(1) = 88`).
+ * This replaces the original BINARY hard cap (T-180-01 AUDIT: the flat `min(score,40)` compressed every
+ * ≥1-wrong build into [0,40], crushing a faithful-except-one build into the same band as a wrong-in-two —
+ * "the binary-cap collapse"). The graded cap is monotone non-increasing in breadth, so a faithful build
+ * with one legit off element (the dark-oak roof) ranks well above a wrong-in-every-department build.
  */
 export const WRONG_STYLE = Object.freeze({ cap: 40, distance: 12 });
 
@@ -137,32 +145,59 @@ export function worstDepartmentOfFusedReply(reply) {
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
 /**
- * A 0-100 style-fidelity scalar derived from a per-style Critique. Two terms (E-40/S-168):
+ * The BREADTH of wrong-style — the count of DISTINCT departments carrying a present-but-wrong-style item.
+ * This is the sanctioned style-distance measure (E-40 / T-180-01: "more wrong-style DEPARTMENTS ⇒ lower"):
+ * two wrong items in the SAME department are one department of wrong-ness, not two. An item with no
+ * `department` falls back to a per-index key so it still counts as breadth (conservative — more breadth
+ * lowers the cap). Single-sourced so styleFidelityScore and critiqueEvidence agree.
+ * @param {ReadonlyArray<object>} items CritiqueItem-shaped objects
+ * @returns {number} number of distinct wrong-style departments
+ */
+function wrongStyleBreadth(items) {
+  const depts = new Set();
+  (items ?? []).forEach((it, i) => {
+    if (itemStyleClass(it) === "wrong-style") depts.add(it?.department ?? `__item${i}`);
+  });
+  return depts.size;
+}
+
+/** The graded style-distance ceiling for a given wrong-style breadth (0 ⇒ no cap). */
+function gradedCapFor(breadth) {
+  return breadth > 0 ? Math.max(WRONG_STYLE.cap, 100 - breadth * WRONG_STYLE.distance) : null;
+}
+
+/**
+ * A 0-100 style-fidelity scalar derived from a per-style Critique. Two terms (E-40/S-168; RE-CALIBRATED
+ * E-45/S-181):
  *   (1) the MISSING-element term (unchanged from E-39): each absent/match item subtracts its severity
  *       penalty — a build that is incomplete-but-RIGHT-style is docked only for what it has not built;
- *   (2) the STYLE-DISTANCE term (new): each present-but-WRONG-style item (itemStyleClass) is a capping
- *       MAJOR — it subtracts PENALTY.major + WRONG_STYLE.distance AND caps the whole score at
- *       WRONG_STYLE.cap, so completeness cannot rescue a wrong-style build.
- * The distance grades by BREADTH (more wrong-style departments ⇒ lower under the cap); per-item DEPTH
- * (how far rustic is from classical) needs the typed grammar tag and is validated in T-169-01.
+ *   (2) the STYLE-DISTANCE term: each present-but-WRONG-style item (itemStyleClass) subtracts a
+ *       SEVERITY-RESPECTING penalty (PENALTY[severity], default major) + WRONG_STYLE.distance, and the
+ *       whole score is capped by a GRADED ceiling gradedCapFor(breadth) that falls with the number of
+ *       distinct wrong-style departments.
+ * The recalibration (T-180-01 AUDIT) replaces the original BINARY cap and the SEVERITY-BLIND forced major:
+ *   - severity-respecting per-item: a minor wrong-style no longer costs a forced major (the AUDIT's named
+ *     binding floor); missing severity still defaults to major (wrong-style is inherently serious);
+ *   - graded cap: one off element sits near the ceiling (cap(1)=88), wrong-in-every-department floors at
+ *     WRONG_STYLE.cap (40) — monotone in breadth, so the binary-cap collapse is gone.
  * Empty critique ⇒ 100. An item with no `present` field ⇒ "absent" ⇒ the exact pre-E-40 math (back-compat).
- * @param {{items:Array<{severity?:string, present?:string, missing?:string, kind?:string}>}} critique
+ * @param {{items:Array<{severity?:string, present?:string, missing?:string, kind?:string, department?:string}>}} critique
  * @returns {number} integer 0-100
  */
 export function styleFidelityScore(critique) {
   const items = critique?.items ?? [];
   let penalty = 0;
-  let wrongStyle = 0;
   for (const it of items) {
     if (itemStyleClass(it) === "wrong-style") {
-      penalty += PENALTY.major + WRONG_STYLE.distance; // forced major + a distance unit
-      wrongStyle += 1;
+      // severity-respecting (default major) + one distance unit — replaces the old forced 32-per-replace
+      penalty += (PENALTY[it?.severity] ?? PENALTY.major) + WRONG_STYLE.distance;
     } else {
       penalty += PENALTY[it?.severity] ?? PENALTY.minor; // the unchanged missing-element severity path
     }
   }
   let score = clamp(100 - penalty, 0, 100);
-  if (wrongStyle > 0) score = Math.min(score, WRONG_STYLE.cap); // completeness can't buy back wrong style
+  const cap = gradedCapFor(wrongStyleBreadth(items));
+  if (cap !== null) score = Math.min(score, cap); // completeness can't buy back wrong style; cap grades by breadth
   return score;
 }
 
@@ -174,6 +209,7 @@ export function styleFidelityScore(critique) {
 export function critiqueEvidence(critique) {
   const items = critique?.items ?? [];
   const nWrongStyle = items.filter((i) => itemStyleClass(i) === "wrong-style").length;
+  const breadth = wrongStyleBreadth(items);
   return {
     score: styleFidelityScore(critique),
     nItems: items.length,
@@ -182,7 +218,12 @@ export function critiqueEvidence(critique) {
     missing: items.map((i) => i?.missing).filter((m) => typeof m === "string" && m.trim().length > 0),
     // E-40 additive: the style-distance crater's cause — how many present-but-wrong-style items capped it.
     nWrongStyle,
+    // wrongStyleCapped = the style-distance term FIRED (≥1 wrong-style). NB under the E-45 graded cap it may
+    // not BIND for low breadth (the per-item penalty alone can already dominate) — see gradedCap below.
     wrongStyleCapped: nWrongStyle > 0,
+    // E-45 additive (T-181-01): the recalibrated mechanism, reported beside the score for the crater harness.
+    wrongStyleBreadth: breadth,           // distinct wrong-style departments — the style-distance measure
+    gradedCap: gradedCapFor(breadth),     // the ceiling applied (null when no wrong-style)
   };
 }
 

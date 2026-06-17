@@ -318,3 +318,110 @@ test("BO13 kindReliability tallies per-condition kinds and the matched-vs-wrong 
   const onlyMatched = kindReliability([{ key: "m", tier: "MATCHED", votes: [{ items: [{ kind: "add" }] }] }]);
   assert.equal(onlyMatched.replaceContrast, null);
 });
+
+// ---- BO14: the E-45/S-181 GRADED style-distance — faithful-except-one ≫ wrong-in-all ----
+// T-180-01 AUDIT decided the binary cap is an S defect: the flat min(score,40) compressed every ≥1-wrong
+// build into [0,40], crushing a faithful-except-one build (true merit ~68) into the same band as a
+// wrong-in-two (36). The recalibration replaces it with a breadth-graded cap + a severity-respecting
+// per-replace penalty. These tests are the falsifiable claim at unit level.
+
+// Helpers: a present-but-wrong-style (replace) item of a given department/severity, and a complete build.
+const wrongItem = (department, severity = "major") => ({ department, present: "p", missing: "m", kind: "replace", severity });
+const DEPTS5 = ["ROOF", "WALL", "OPENING", "CHIMNEY", "ROOM"];
+
+test("BO14a faithful-except-one scores clearly above wrong-in-all (the binary-cap collapse is gone)", () => {
+  // faithful build, ONE legit off element: the dark-oak roof (brown) vs the concept's grey — a CORRECT replace.
+  const faithfulExceptRoof = { items: [
+    { department: "ROOF", present: "brown dark_oak stepped roof", missing: "grey stone courses", kind: "replace", severity: "major" },
+  ] };
+  // wrong in EVERY department — 5 major replaces, one per department.
+  const wrongInAll = { items: DEPTS5.map((d) => wrongItem(d)) };
+
+  const faithful = styleFidelityScore(faithfulExceptRoof);
+  const wrongAll = styleFidelityScore(wrongInAll);
+  assert.equal(faithful, 68);  // 100 − 32, cap(1)=88 does not bind — no longer crushed to 40
+  assert.equal(wrongAll, 0);   // 100 − 5×32 floored at 0; cap(5)=40 is the wrong-in-all anchor
+  assert.ok(faithful >= 60, `faithful-except-one ranks high (${faithful})`);
+  assert.ok(wrongAll <= 5, `wrong-in-all floors (${wrongAll})`);
+  assert.ok(faithful - wrongAll >= 50, `clear separation (spread ${faithful - wrongAll})`);
+});
+
+test("BO14b REGRESSION FIXTURE: the old binary cap crushed faithful-except-one into the wrong-in-two band", () => {
+  const faithfulExceptOne = { items: [wrongItem("ROOF")] };          // 1 wrong-style, else complete
+  const wrongInTwo = { items: [wrongItem("ROOF"), wrongItem("WALL")] }; // 2 wrong-style
+
+  // OLD math, reconstructed inline (forced 32-per-replace + the flat min(score,40)) — the binary cap.
+  const oldScore = (c) => {
+    let p = 0, w = 0;
+    for (const it of c.items) {
+      if (itemStyleClass(it) === "wrong-style") { p += PENALTY.major + WRONG_STYLE.distance; w += 1; }
+      else p += PENALTY[it?.severity] ?? PENALTY.minor;
+    }
+    let s = Math.max(0, Math.min(100, 100 - p));
+    if (w > 0) s = Math.min(s, WRONG_STYLE.cap);
+    return s;
+  };
+  // OLD: faithful (40) sits barely above wrong-in-two (36) — the cap threw away faithful's true 68 ⇒ collapse.
+  assert.equal(oldScore(faithfulExceptOne), 40);
+  assert.equal(oldScore(wrongInTwo), 36);
+  assert.ok(oldScore(faithfulExceptOne) - oldScore(wrongInTwo) <= 4, "OLD: the two were compressed together");
+
+  // NEW: faithful (68) clearly above wrong-in-two (36) — the breadth information is recovered.
+  const newFaithful = styleFidelityScore(faithfulExceptOne);
+  const newTwo = styleFidelityScore(wrongInTwo);
+  assert.equal(newFaithful, 68);
+  assert.equal(newTwo, 36);
+  assert.ok(newFaithful - newTwo >= 30, `NEW: decompressed (spread ${newFaithful - newTwo})`);
+});
+
+test("BO14c the cap GRADES monotonically by wrong-style breadth (not binary)", () => {
+  // score is non-increasing in breadth; the applied gradedCap is STRICTLY decreasing 88→40 over b=1..5.
+  const scores = DEPTS5.map((_, i) => styleFidelityScore({ items: DEPTS5.slice(0, i + 1).map((d) => wrongItem(d)) }));
+  for (let i = 1; i < scores.length; i++) assert.ok(scores[i] <= scores[i - 1], `score non-increasing at b=${i + 1}`);
+  const caps = DEPTS5.map((_, i) => critiqueEvidence({ items: DEPTS5.slice(0, i + 1).map((d) => wrongItem(d)) }).gradedCap);
+  assert.deepEqual(caps, [88, 76, 64, 52, 40]); // 100 − 12·b, floored at WRONG_STYLE.cap=40
+  for (let i = 1; i < caps.length; i++) assert.ok(caps[i] < caps[i - 1], `cap strictly decreasing at b=${i + 1}`);
+});
+
+test("BO14d the per-replace penalty is severity-respecting (no longer a forced major)", () => {
+  const oneMinor = styleFidelityScore({ items: [wrongItem("ROOF", "minor")] });
+  const oneMajor = styleFidelityScore({ items: [wrongItem("ROOF", "major")] });
+  const oneUnspec = styleFidelityScore({ items: [{ department: "ROOF", present: "p", missing: "m", kind: "replace" }] });
+  assert.equal(oneMinor, 80);   // 100 − (8 + 12)
+  assert.equal(oneMajor, 68);   // 100 − (20 + 12)
+  assert.equal(oneUnspec, 68);  // missing severity ⇒ default major (preserves the old conservatism)
+  assert.ok(oneMinor > oneMajor, "a minor wrong-style costs less than a major (the AUDIT's softening)");
+});
+
+test("BO14e the legit roof:replace ranks above wrong-in-all and evidence reports the mechanism", () => {
+  const legitRoof = { items: [
+    { department: "ROOF", present: "brown dark_oak stepped roof", missing: "grey stone courses", kind: "replace", severity: "major" },
+  ] };
+  const wrongInAll = { items: DEPTS5.map((d) => wrongItem(d)) };
+  assert.ok(styleFidelityScore(legitRoof) - styleFidelityScore(wrongInAll) >= 50, "the named anchor separates cleanly");
+  const ev = critiqueEvidence(legitRoof);
+  assert.equal(ev.nWrongStyle, 1);
+  assert.equal(ev.wrongStyleBreadth, 1);
+  assert.equal(ev.gradedCap, 88);
+  assert.equal(ev.wrongStyleCapped, true);
+  // two wrong items in the SAME department are ONE department of wrong-ness (breadth, not item count)
+  const sameDept = critiqueEvidence({ items: [wrongItem("OPENING"), wrongItem("OPENING")] });
+  assert.equal(sameDept.nWrongStyle, 2);
+  assert.equal(sameDept.wrongStyleBreadth, 1);
+});
+
+test("BO14f back-compat guard: the E-40 BO9 pins survive the recalibration (no silent drift)", () => {
+  // Identical to BO9's two builds — duplicated here so a future scoring edit cannot quietly move them.
+  const matched = { items: [
+    { department: "ROOF", present: "", missing: "a steeper ridge course", severity: "major" },
+    { department: "WALL", present: "", missing: "a quoin course", severity: "major" },
+    { department: "OPENING", present: "", missing: "a dressed lintel", severity: "major" },
+  ] };
+  const wrongStyle = { items: [
+    { department: "ROOF", present: "flat classical entablature", missing: "a pitched gable", severity: "major" },
+    { department: "WALL", present: "polychrome glazed brick", missing: "rustic rubble masonry", severity: "major" },
+    { department: "OPENING", present: "a Corinthian portico", missing: "a timber-framed arch", severity: "major" },
+  ] };
+  assert.equal(styleFidelityScore(matched), 40);     // unchanged (no wrong-style, no cap)
+  assert.equal(styleFidelityScore(wrongStyle), 4);   // unchanged (3 majors → penalty 96; cap(3)=64 doesn't bind)
+});
