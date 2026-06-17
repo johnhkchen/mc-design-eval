@@ -1,0 +1,31 @@
+{
+  "schema": "eval-alignment/faithful-roof/v1",
+  "build": "builds/gatehouse/faithful/artifact.json",
+  "program": "benchmarks/sculpture/recognition/gatehouse.program.json",
+  "derived": {
+    "eaveY": 19,
+    "ridgeAxis": "x",
+    "pitch": 1,
+    "ridgeY": 26
+  },
+  "family": {
+    "field": "minecraft:dark_oak_planks",
+    "stairs": "minecraft:dark_oak_stairs",
+    "slab": "minecraft:dark_oak_slab"
+  },
+  "gableBlock": "minecraft:stone_bricks",
+  "census": {
+    "prism": {
+      "roof": 1215,
+      "total": 2287,
+      "frac": 0.5312636641888937
+    },
+    "covering": {
+      "roof": 225,
+      "total": 1339,
+      "frac": 0.16803584764749813
+    }
+  },
+  "closureEaveRing": 1,
+  "coveringCells": 323
+}
