@@ -1,0 +1,23 @@
+{
+  "schema": "eval-alignment/style-label-pairs/v1",
+  "note": "T-184-01 (E-46/S-184) curated pairwise labeling set over the S-183 corpus. SMALL by design (a focused human session, NOT the all-pairs matrix). `bucket` ∈ {easy, hardMiddle}: easy = match vs an obviously-worse cell (validates where the term didn't need to — reported SEPARATELY so it can't inflate the headline); hardMiddle = every pair touches a hard-middle state (genuinely rank-either-way). `a`/`b` are corpus state ids; `intended` is the SINGLE-RATER corpus reference (A/B/tie), NOT the label — the human (or the flagged LLM-proxy fallback) labels independently. Each composite (instrument/<id>.png) shows stateA-beside-its-concept ‖ stateB-beside-its-concept.",
+  "pairs": [
+    { "id": "E1", "bucket": "easy", "a": "gh-match", "b": "gh-samepack-classical", "intended": "A",
+      "rationale": "faithful rustic gatehouse (own concept) vs the same build judged against a CLASSICAL arc concept — obviously the match is more faithful." },
+    { "id": "E2", "bucket": "easy", "a": "ct-match", "b": "ct-samepack-gatehouse", "intended": "A",
+      "rationale": "faithful cottage (own concept) vs the same build against a GATEHOUSE concept — obvious." },
+    { "id": "E3", "bucket": "easy", "a": "bn-match", "b": "bn-cross", "intended": "A",
+      "rationale": "faithful barn (own concept) vs the same build against a COTTAGE concept — obvious." },
+
+    { "id": "H1", "bucket": "hardMiddle", "a": "gh-match", "b": "gh-mid-material", "intended": "A",
+      "rationale": "fully-faithful gatehouse vs the SAME build with the dark-oak roof swapped to warm spruce — clearly worse, or a plausible wood-shingle either-way? The single-factor-material contestable pair." },
+    { "id": "H2", "bucket": "hardMiddle", "a": "gh-mid-material", "b": "gh-mid-gate", "intended": "tie",
+      "rationale": "wrong roof MATERIAL (spruce vs dark timber) vs a MISSING dressing (unframed rectangular gate vs arched) — which partial defect costs more faithfulness? Genuinely rank-either-way." },
+    { "id": "H3", "bucket": "hardMiddle", "a": "gh-mid-gate", "b": "gh-samepack-classical", "intended": "A",
+      "rationale": "a real-but-incomplete rustic gatehouse (gaping gate) vs a faithful build judged against a WRONG (classical) concept — does a partially-faithful gatehouse beat a fully-wrong-picture one? Contestable." },
+    { "id": "H4", "bucket": "hardMiddle", "a": "ct-match", "b": "ct-mid-plain", "intended": "A",
+      "rationale": "faithful half-timber cottage vs the same form with a PLAIN upper storey (missing the stud grammar) — clearly worse, or close?" },
+    { "id": "H5", "bucket": "hardMiddle", "a": "ct-mid-plain", "b": "ct-samepack-gatehouse", "intended": "A",
+      "rationale": "a plain-but-real cottage vs a faithful cottage build against a WRONG (gatehouse) concept — does the incomplete-but-right-subject build beat the wrong-picture one? Contestable." }
+  ]
+}
