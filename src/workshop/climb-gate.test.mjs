@@ -339,6 +339,6 @@ test("CG17 department-dominant override keeps an OPENING-targeting hand that cle
 
   // and the new hands resolve to their departments
   assert.deepEqual(TOOL_DEPARTMENTS.frame_arch, ["OPENING"]);
-  assert.deepEqual(TOOL_DEPARTMENTS.articulate_quoins, ["WALL"]);
+  assert.deepEqual(TOOL_DEPARTMENTS.articulate_walls, ["WALL"]);
   assert.deepEqual(TOOL_DEPARTMENTS.band_eave, ["ROOF"]);
 });

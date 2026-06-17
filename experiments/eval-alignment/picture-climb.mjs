@@ -29,6 +29,8 @@ import { gableRecord, generateRoof } from "../../src/view/roof-generate.mjs";
 import { constructWalls } from "../../src/view/wall-generate.mjs";
 import { wallSkin } from "../../src/view/wall-skin.mjs";
 import { extractApertures, dressOpenings } from "../../src/view/opening-dressing.mjs";
+import { frameArchPlacements } from "../../src/view/arch-frame.mjs";
+import { composeRoofTreatment, bareBlock } from "../../src/view/treatment-grammar.mjs";
 import { roleBlock } from "../../src/recognition/compile.mjs";
 import { infillPanel } from "../../src/view/facade-articulation.mjs";
 import { rebuildArtifact } from "../../src/view/shell-integrity.mjs";
@@ -56,7 +58,14 @@ const PROGRAM_PATH = "benchmarks/sculpture/recognition/gatehouse.program.json";
 const PACK_PATH = "packs/rustic.json";
 const MATERIAL_MAP_PATH = "benchmarks/sculpture/material-map/gatehouse.json"; // the concept-read roof colour (T-189-01)
 const CONCEPT = "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png";
+// ridgeAxis is RECOGNITION-DECLARED, not a footprint guess (T-192-01): the gatehouse footprint is near-
+// square (15×15) so geometry alone is ambiguous; the program disambiguates — ridge runs x so the gable end
+// faces the arched -x gate. The runner previously hardcoded "z" (a 90° rotation vs the gate, the reviewer's
+// 2026-06-17 finding). NOTE: the picture-critique is BLIND to orientation (it never names rotation), so this
+// is a recognition-driven correction, NOT a climb-driven one — the eyes-gap is flagged for E-50 CRITIQUE
+// COVERAGE / E-49 (loadProgram is hoisted; PROGRAM_PATH is defined above).
 const CFG = { eaveY: 18, ridgeAxis: "z" };
+CFG.ridgeAxis = loadProgram(PROGRAM_PATH)?.masses?.[0]?.roof?.ridgeAxis ?? CFG.ridgeAxis;
 
 const AZIMUTHS = [...MULTI_ANGLE_GATE.azimuths];
 const TIER = "strong";
@@ -142,12 +151,84 @@ function recolor_roof(occ) {
   console.error(`  [recolor_roof] ${reason}`);
   return occupancyFromCells([...kept, ...generateRoof([gable], FAMILY).cells]);
 }
-const TOOLS = { apply_gable_roof, recolor_roof, construct_walls, add_timber_framing };
+// ====================== the S-192 HANDS (T-192-01) — the levers the resumed climb stalled on ======================
+// Each targets ONE department so the gate's department-dominant override (T-191) can keep it on a whole-build
+// regression. Materials are READ from the program roles via roleBlock — never a hardcoded block (the
+// gatehouse material inversion is data, not a constant). measurements/ untouched.
+
+// THE ARCHED-PASSAGE HAND (OPENING): build the dark-timber frame + voxel arch head over BOTH ±x through-
+// passages. Apertures are measured on the SEED reference (which carries the ±x doors — construct_walls loses
+// the door aperture; the opening-dressing reference-vs-target contract). On the gatehouse the passage is a
+// 1-wide slot, so this FRAMES both mouths in dark timber and RECORDS (per opening) that the true wide arched
+// gate needs a wider opening — a rebuild the loop can't reach, named for E-49 (frameArchPlacements.perOpening).
+function frame_arch(occ) {
+  const program = loadProgram(PROGRAM_PATH);
+  const pack = loadPackOf(program);
+  const door = program?.masses?.[0]?.openings?.find((o) => o.kind === "door");
+  const frameBlock = (pack && door?.headRole) ? roleBlock(pack, door.headRole) : "dark_oak_log";
+  const refOcc = artifactOccupancy(JSON.parse(readFileSync(join(ROOT, SEED_ARTIFACT), "utf8")));
+  const apertures = extractApertures(refOcc);
+  const { placements, perOpening } = frameArchPlacements(occ, apertures, { frameBlock });
+  for (const r of perOpening) console.error(`  [frame_arch] ${r.dir}: framed=${r.framed} arched=${r.arched}${r.reason ? ` — ${r.reason}` : ""}`);
+  if (!placements.length) { console.error("  [frame_arch] no door placements — no-op"); return occ; }
+  return occupancyFromCells([...occToCells(occ), ...placements.map((p) => ({ pos: p.pos, block: p.block }))]);
+}
+
+// THE WALL FIELD+CONTRAST HAND (WALL): the recorded WALL majors are (1) the field reads near-black/charcoal
+// (probed: it is polished_basalt/deepslate_bricks, not the pale dressed stone the concept shows) and (2) the
+// rubble-quoin contrast is lost — BECAUSE the dark field kills it (the cobblestone quoins are already
+// present, 220 cells). So the single lever is a RECOLOR of the wall-band FIELD cubes to the pale dressed
+// stone (roleBlock walls.ground.role = stone_bricks), PRESERVING the cobblestone quoins (and any dark_oak
+// frame). Pale field + kept rubble corners → both WALL items clear at once. Recolor = last-writer-wins, no
+// air op, closure held (no cell removed). composeTreatment's quoin brush is the WRONG lever here (proudCells=0
+// on the already-quoined corners; the defect is the field colour, not missing corner geometry).
+function articulate_walls(occ) {
+  const program = loadProgram(PROGRAM_PATH);
+  const pack = loadPackOf(program);
+  const fieldBlock = pack ? roleBlock(pack, program?.masses?.[0]?.walls?.ground?.role ?? "wall.dressing") : "stone_bricks";
+  const quoinBlock = pack ? roleBlock(pack, program?.masses?.[0]?.walls?.dressing?.role ?? "wall.field.ground") : "cobblestone";
+  const KEEP = new Set([bareBlock(quoinBlock), "dark_oak_log"]); // rubble quoins + the timber arch frame
+  const floor = occ.bounds.min[1];
+  const cells = []; let recolored = 0;
+  for (const [key, blk] of occ.cells) {
+    const [x, y, z] = key.split(",").map(Number);
+    let block = blk;
+    const isCube = !occ.forms.has(key);
+    if (isCube && y >= floor && y <= CFG.eaveY && !KEEP.has(bareBlock(blk)) && bareBlock(blk) !== bareBlock(fieldBlock)) {
+      block = fieldBlock; recolored += 1;
+    }
+    cells.push({ pos: [x, y, z], block, form: occ.forms.get(key), state: occ.states.get(key) });
+  }
+  console.error(`  [articulate_walls] pale-field recolor: ${recolored} wall cells → ${fieldBlock} (quoins kept ${quoinBlock})`);
+  return occupancyFromCells(cells);
+}
+
+// THE EAVE/VERGE BAND HAND (ROOF, a MINOR): a lighter-stone (roof.trimRole = wall.dressing = stone_bricks)
+// eave course + raking verge banding the dark roof edges. NOTE: this targets a ROOF MINOR; the override is
+// major-gated, so band_eave is kept only by a scalar improvement / tie — see review.md.
+function band_eave(occ) {
+  const program = loadProgram(PROGRAM_PATH);
+  const pack = loadPackOf(program);
+  const trimRole = program?.masses?.[0]?.roof?.trimRole ?? "wall.dressing";
+  const bandBlock = pack ? roleBlock(pack, trimRole) : "stone_bricks";
+  let ridgeY = CFG.eaveY;
+  for (const key of occ.cells.keys()) { const y = Number(key.split(",")[1]); if (y > ridgeY) ridgeY = y; }
+  if (ridgeY <= CFG.eaveY) { console.error("  [band_eave] no roof band above eave — no-op"); return occ; }
+  const { occ: out, closure } = composeRoofTreatment(occ, { edge: { material: bandBlock } },
+    { ridgeAxis: CFG.ridgeAxis, eaveY: CFG.eaveY, ridgeY });
+  if (!closure.ok) console.error(`  [band_eave] WARN closure regressed: ${JSON.stringify(closure)}`);
+  return out;
+}
+
+const TOOLS = { apply_gable_roof, recolor_roof, construct_walls, add_timber_framing, frame_arch, articulate_walls, band_eave };
 const MENU = [
   "- apply_gable_roof: replace the roof with a crisp parametric gable. Best when the worst divergence is the ROOF FORM/SHAPE/presence (not its colour).",
   "- recolor_roof: rebuild the roof in the CONCEPT-TRUE material recognition read (e.g. grey stone when the concept roof is stone, not the program's default brown timber). Best when the worst divergence is ROOF COLOUR / MATERIAL — the roof reads the wrong material vs the concept.",
   "- construct_walls: REBUILD the wall envelope and skin it as construction from the pack roles (per-storey material, dressed quoins, clinker courses, a plinth, dressed openings). Best for STRUCTURAL wall holes / missing walls / a monotone single-material wall.",
   "- add_timber_framing: add timber-frame studs + plaster infill on the upper storey. Best for a uniform/monotone WALL with no material contrast / missing half-timber detail.",
+  "- frame_arch: build a dark-timber FRAME + arch head over the through-passage(s). Best when the worst divergence is the OPENING — a raw/undressed passage void with no arch head or timber surround.",
+  "- articulate_walls: recolor the wall field to the pale dressed stone, keeping the rubble corner quoins. Best when the WALL field reads too dark/monotone, killing the contrast with the corner quoins.",
+  "- band_eave: add a lighter-stone eave/verge banding course along the roof edges. Best when the ROOF field runs to the edges with no contrasting eave/verge trim band.",
   "- done: stop — the build reads like the concept, or no tool addresses the worst remaining divergence.",
 ].join("\n");
 
@@ -206,7 +287,7 @@ async function agentPick(build, history) {
     "- If no tool addresses the worst remaining divergence (e.g. it names a chimney, an interior, or fine",
     "  trim no tool builds), pick `done` — naming a defect you cannot fix is the honest answer.",
     "Pick ONE tool:", MENU,
-    'Output ONE JSON: {"tool":"<apply_gable_roof|recolor_roof|construct_walls|add_timber_framing|done>","reason":"<short>"}',
+    'Output ONE JSON: {"tool":"<apply_gable_roof|recolor_roof|construct_walls|add_timber_framing|frame_arch|articulate_walls|band_eave|done>","reason":"<short>"}',
   ].join("\n");
   const { text } = await requestText({ prompt, model: AGENT_MODEL });
   return parse(text);

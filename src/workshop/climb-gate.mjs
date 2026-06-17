@@ -34,11 +34,11 @@ export const TOOL_DEPARTMENTS = Object.freeze({
   construct_walls: Object.freeze(["WALL", "OPENING"]),
   add_timber_framing: Object.freeze(["WALL"]),
   // T-192-01 (S-192) — the hands the resumed climb stalls on. frame_arch builds the framed arched passage
-  // (OPENING); articulate_quoins gives the rubble-quoin contrast (WALL); band_eave the lighter eave/verge
+  // (OPENING); articulate_walls gives the pale dressed field + kept rubble quoins (WALL); band_eave the lighter eave/verge
   // band (ROOF, a MINOR — the override is major-gated, so band_eave relies on the scalar/tie, not the
   // override: a recorded S-191 input, see design.md Decision 5).
   frame_arch: Object.freeze(["OPENING"]),
-  articulate_quoins: Object.freeze(["WALL"]),
+  articulate_walls: Object.freeze(["WALL"]),
   band_eave: Object.freeze(["ROOF"]),
 });
 
