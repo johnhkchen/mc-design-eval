@@ -1,0 +1,452 @@
+{
+  "schema": "picture-climb/v1",
+  "subject": "gatehouse",
+  "seed": "benchmarks/sculpture/generated/gatehouse/artifact.json",
+  "program": "benchmarks/sculpture/recognition/gatehouse.program.json",
+  "pack": "rustic",
+  "concept": "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+  "tier": "strong",
+  "votes": 3,
+  "margin": 4,
+  "stopReason": "agent-done",
+  "observedScoreSpread": {
+    "min": 60,
+    "max": 68,
+    "allRoundVotes": [
+      0,
+      8,
+      0,
+      48,
+      60,
+      52,
+      68,
+      60,
+      60,
+      68,
+      60,
+      0
+    ]
+  },
+  "trajectory": [
+    {
+      "round": 0,
+      "score": 0,
+      "evidence": {
+        "score": 0,
+        "nItems": 5,
+        "nMajor": 4,
+        "nWrongStyle": 3,
+        "wrongStyleBreadth": 3,
+        "departments": [
+          "WALL",
+          "ROOF",
+          "OPENING",
+          "WALL",
+          "OPENING"
+        ],
+        "missing": [
+          "The grey stone material family and the distinct rubble corner quoins",
+          "The gable form (single ridge, two slopes) and the light stone eave/verge course",
+          "The dark-timber arched frame (jambs + arched head) defining the passage",
+          "Solid infill closing the wall gaps so the mass reads as enclosed",
+          "The dressed slit window openings on the eave walls"
+        ]
+      },
+      "items": [
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Uniformly dark, near-black wall fields with vertical striations reading as dark wood (logs/planks), no quoin differentiation",
+          "missing": "The grey stone material family and the distinct rubble corner quoins",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "A dark stepped pyramidal/ziggurat top stepping concentrically to a center, open and incomplete, with no lighter eave/verge banding",
+          "missing": "The gable form (single ridge, two slopes) and the light stone eave/verge course",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "A ragged dark void where the passage should be, with no timber surround or arch form",
+          "missing": "The dark-timber arched frame (jambs + arched head) defining the passage",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Wall planes broken by large gaps/holes; the structure reads as hollow and open with no continuous enclosure",
+          "missing": "Solid infill closing the wall gaps so the mass reads as enclosed",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "No legible slit windows; eave walls are dark and ragged",
+          "missing": "The dressed slit window openings on the eave walls",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "construct_walls",
+        "reason": "The worst divergences are structural wall gaps (mass not enclosed) and missing grey stone material with rubble quoins — construct_walls rebuilds the envelope and skins it with pack roles addressing both WALL items before roof or opening work."
+      },
+      "applied": false,
+      "accepted": false
+    },
+    {
+      "round": 1,
+      "score": 0,
+      "evidence": {
+        "score": 0,
+        "nItems": 5,
+        "nMajor": 4,
+        "nWrongStyle": 3,
+        "wrongStyleBreadth": 3,
+        "departments": [
+          "WALL",
+          "ROOF",
+          "OPENING",
+          "WALL",
+          "OPENING"
+        ],
+        "missing": [
+          "The grey stone material family and the distinct rubble corner quoins",
+          "The gable form (single ridge, two slopes) and the light stone eave/verge course",
+          "The dark-timber arched frame (jambs + arched head) defining the passage",
+          "Solid infill closing the wall gaps so the mass reads as enclosed",
+          "The dressed slit window openings on the eave walls"
+        ]
+      },
+      "items": [
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Uniformly dark, near-black wall fields with vertical striations reading as dark wood (logs/planks), no quoin differentiation",
+          "missing": "The grey stone material family and the distinct rubble corner quoins",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "A dark stepped pyramidal/ziggurat top stepping concentrically to a center, open and incomplete, with no lighter eave/verge banding",
+          "missing": "The gable form (single ridge, two slopes) and the light stone eave/verge course",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "A ragged dark void where the passage should be, with no timber surround or arch form",
+          "missing": "The dark-timber arched frame (jambs + arched head) defining the passage",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Wall planes broken by large gaps/holes; the structure reads as hollow and open with no continuous enclosure",
+          "missing": "Solid infill closing the wall gaps so the mass reads as enclosed",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "No legible slit windows; eave walls are dark and ragged",
+          "missing": "The dressed slit window openings on the eave walls",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "construct_walls",
+        "reason": "The worst divergences are structural wall gaps (mass not enclosed) and missing grey stone material with rubble quoins — construct_walls rebuilds the envelope and skins it with pack roles addressing both WALL items before roof or opening work."
+      },
+      "applied": true,
+      "accepted": true,
+      "gate": {
+        "accept": true,
+        "delta": 0,
+        "reason": "tie (0): coverage shrank"
+      },
+      "scoreAfter": {
+        "score": 0,
+        "scores": [
+          0,
+          8,
+          0
+        ]
+      }
+    },
+    {
+      "round": 2,
+      "score": 0,
+      "evidence": {
+        "score": 0,
+        "nItems": 4,
+        "nMajor": 4,
+        "nWrongStyle": 2,
+        "wrongStyleBreadth": 2,
+        "departments": [
+          "WALL",
+          "OPENING",
+          "OPENING",
+          "ROOF"
+        ],
+        "missing": [
+          "The bright light-grey coursed dressed-stone field; the value/material family is wrong, not merely blockier.",
+          "The entire arched timber gateway / passage.",
+          "The narrow slit windows on the eave-side walls.",
+          "The clean two-slope gable silhouette over a visibly proportioned wall storey, and the distinct lighter eave/verge banding course."
+        ]
+      },
+      "items": [
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Near-black walls with strong vertical plank/log-like striations; the field reads dark and timbered rather than light coursed stone.",
+          "missing": "The bright light-grey coursed dressed-stone field; the value/material family is wrong, not merely blockier.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "Solid dark wall on the gable end; no passage, no opening, no timber surround.",
+          "missing": "The entire arched timber gateway / passage.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "Blank dark eave-side walls; no slit windows visible at any azimuth.",
+          "missing": "The narrow slit windows on the eave-side walls.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "An oversized dark roof mass that consumes nearly the whole structure and reads as a stepped pyramidal cap; little daylight between roof and ground, eave/verge banding faint.",
+          "missing": "The clean two-slope gable silhouette over a visibly proportioned wall storey, and the distinct lighter eave/verge banding course.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        }
+      ],
+      "pick": {
+        "tool": "apply_gable_roof",
+        "reason": "ROOF is a major divergence (missing two-slope gable silhouette + eave banding) and apply_gable_roof directly targets it; construct_walls was already applied and kept; no tool addresses the OPENING divergences."
+      },
+      "applied": true,
+      "accepted": true,
+      "gate": {
+        "accept": true,
+        "delta": 52,
+        "reason": "improved +52"
+      },
+      "scoreAfter": {
+        "score": 52,
+        "scores": [
+          48,
+          60,
+          52
+        ]
+      }
+    },
+    {
+      "round": 3,
+      "score": 52,
+      "evidence": {
+        "score": 52,
+        "nItems": 3,
+        "nMajor": 1,
+        "nWrongStyle": 1,
+        "wrongStyleBreadth": 1,
+        "departments": [
+          "ROOF",
+          "ROOF",
+          "WALL"
+        ],
+        "missing": [
+          "The dark-grey stone colour family; the build roof reads brown rather than the grey the picture shows.",
+          "The distinct lighter-grey stone eave/verge banding seen in the concept.",
+          "Clean solid infill along the wall base (some gaps/raggedness, beyond block-grid coarseness)."
+        ]
+      },
+      "items": [
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "A steep gable roof of uniform warm brown, wood-toned planks.",
+          "missing": "The dark-grey stone colour family; the build roof reads brown rather than the grey the picture shows.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "ROOF",
+          "severity": "minor",
+          "present": "Roof edges in the same brown plank material, with at most a faint edge course.",
+          "missing": "The distinct lighter-grey stone eave/verge banding seen in the concept.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "WALL",
+          "severity": "minor",
+          "present": "Stone-brick fields with cobble quoins read, but the lower courses are porous/ragged at the base in several azimuths.",
+          "missing": "Clean solid infill along the wall base (some gaps/raggedness, beyond block-grid coarseness).",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "apply_gable_roof",
+        "reason": "The worst remaining divergence is ROOF color (brown vs grey stone family) — a major replace. apply_gable_roof is the only tool that touches the roof and was KEPT, so re-applying it is the one shot at correcting the material palette toward grey stone."
+      },
+      "applied": true,
+      "accepted": true,
+      "gate": {
+        "accept": true,
+        "delta": 8,
+        "reason": "improved +8"
+      },
+      "scoreAfter": {
+        "score": 60,
+        "scores": [
+          68,
+          60,
+          60
+        ]
+      }
+    },
+    {
+      "round": 4,
+      "score": 60,
+      "evidence": {
+        "score": 60,
+        "nItems": 2,
+        "nMajor": 1,
+        "nWrongStyle": 1,
+        "wrongStyleBreadth": 1,
+        "departments": [
+          "ROOF",
+          "ROOF"
+        ],
+        "missing": [
+          "The dark near-black value that defines the concept roof at a glance.",
+          "The light stone eave/verge/ridge banding course."
+        ]
+      },
+      "items": [
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "A uniform medium warm-brown plank roof; clearly lighter and warmer in both hue and value than the concept's roof.",
+          "missing": "The dark near-black value that defines the concept roof at a glance.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "ROOF",
+          "severity": "minor",
+          "present": "A single uniform brown roof field running edge to edge with no contrasting lighter course along the eave, verge, or ridge.",
+          "missing": "The light stone eave/verge/ridge banding course.",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "apply_gable_roof",
+        "reason": "The dominant remaining gap is the roof material value — the concept shows a near-black roof at a glance. apply_gable_roof has moved the score twice and is the only tool that targets roof material/form; the minor eave banding is also roof-scope."
+      },
+      "applied": true,
+      "accepted": false,
+      "gate": {
+        "accept": false,
+        "delta": 0,
+        "reason": "tie (0): no shrink"
+      },
+      "scoreAfter": {
+        "score": 60,
+        "scores": [
+          68,
+          60,
+          0
+        ]
+      }
+    },
+    {
+      "round": 4,
+      "score": 60,
+      "items": [],
+      "pick": {
+        "tool": "—"
+      },
+      "applied": false,
+      "accepted": false,
+      "terminal": true
+    }
+  ],
+  "inventory": {
+    "actedOn": [
+      {
+        "department": "WALL",
+        "byTool": [
+          "construct_walls"
+        ],
+        "rounds": [
+          1
+        ],
+        "deltas": [
+          0
+        ]
+      },
+      {
+        "department": "OPENING",
+        "byTool": [
+          "construct_walls"
+        ],
+        "rounds": [
+          1
+        ],
+        "deltas": [
+          0
+        ]
+      },
+      {
+        "department": "ROOF",
+        "byTool": [
+          "apply_gable_roof"
+        ],
+        "rounds": [
+          2,
+          3
+        ],
+        "deltas": [
+          52,
+          8
+        ]
+      }
+    ],
+    "eyesOnly": [],
+    "verdict": {
+      "climbed": true,
+      "stalled": false,
+      "oscillated": true,
+      "actionableFrac": 0.75,
+      "scoreFirst": 0,
+      "scoreLast": 60,
+      "delta": 60
+    }
+  }
+}
