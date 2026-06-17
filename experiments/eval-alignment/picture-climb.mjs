@@ -42,7 +42,7 @@ import { runTieredOp } from "../../src/model-tier.mjs";
 import { bamlRender, bamlParse } from "../../src/baml/bridge.mjs";
 import { diagnoseRenderArgs } from "../../src/workshop/diagnose.mjs";
 import { critiqueEvidence, itemStyleClass, styleFidelityScore } from "../../src/workshop/bakeoff-score.mjs";
-import { acceptsRound, stoppingDecision, classifyInventory, CLIMB_DEFAULTS } from "../../src/workshop/climb-gate.mjs";
+import { acceptsRound, stoppingDecision, classifyInventory, deptMajorCounts, buildDigest, TOOL_DEPARTMENTS, CLIMB_DEFAULTS } from "../../src/workshop/climb-gate.mjs";
 import { reconcileRoofMaterial } from "../../src/recognition/roof-material.mjs";
 import { assertMaterialMap } from "../../src/form/material-map.mjs";
 
@@ -273,6 +273,7 @@ async function main() {
   const trajectory = [];
   const history = [];
   let prev = await scoreBuild(occ, template, 0, "seed");
+  let prevDigest = buildDigest(occToCells(occ)); // the kept build's digest (T-190-01 no-op guard)
   let pick = await agentPick(prev, history);
   console.error(`\n[round 0] score=${prev.score} (${prev.scores.join("/")}) → agent picks ${pick.tool}: ${pick.reason}`);
   trajectory.push({ round: 0, score: prev.score, evidence: evOf(prev), items: prev.items, pick, applied: false, accepted: false });
@@ -281,15 +282,39 @@ async function main() {
   for (; round <= maxRounds; round++) {
     if (pick.tool === "done" || !TOOLS[pick.tool]) { stopReason = "agent-done"; break; }
     const cand = TOOLS[pick.tool](occ);
+
+    // No-op guard (T-190-01): an idempotent re-pick that produces a byte-identical build is not progress and
+    // must not be re-scored (the +8 vote-noise phantom T-188 §2 accepted). Record it, advance the stall
+    // counter, spend nothing, do not change occ.
+    const candDigest = buildDigest(occToCells(cand));
+    if (candDigest === prevDigest) {
+      noAcceptStreak += 1;
+      history.push({ tool: pick.tool, qBefore: prev.score, qAfter: prev.score, accepted: false, reason: "no-op (identical build)" });
+      console.error(`[round ${round}] ${pick.tool}: no-op (identical build) — ROLLED BACK, no spend`);
+      trajectory.push({ round, score: prev.score, evidence: evOf(prev), items: prev.items,
+        pick, applied: true, accepted: false, gate: { accept: false, delta: 0, reason: "no-op (identical build)" }, noop: true });
+      pick = await agentPick(prev, history);
+      console.error(`           next: ${pick.tool} — ${pick.reason}`);
+      const stopNoop = stoppingDecision({ round, agentDone: pick.tool === "done", noAcceptStreak, margin, stallK, maxRounds, minRounds });
+      if (stopNoop.stop) { stopReason = stopNoop.reason; break; }
+      continue;
+    }
+
     const candScore = await scoreBuild(cand, template, round, "cand");
-    const gate = acceptsRound(prev, candScore, { margin });
-    if (gate.accept) { occ = cand; }
+    // Department-aware accept signal (T-190-01): keep a tool that cleared a major in a department it targets
+    // even when the whole-build scalar is flat (the judge promoted a pre-existing major elsewhere).
+    const targetDepartments = TOOL_DEPARTMENTS[pick.tool];
+    const beforeDeptMajors = deptMajorCounts(prev.items);
+    const afterDeptMajors = deptMajorCounts(candScore.items);
+    const gate = acceptsRound(prev, candScore, { margin, targetDepartments, beforeDeptMajors, afterDeptMajors });
+    if (gate.accept) { occ = cand; prevDigest = candDigest; }
     noAcceptStreak = gate.accept ? 0 : noAcceptStreak + 1;
     history.push({ tool: pick.tool, qBefore: prev.score, qAfter: candScore.score, accepted: gate.accept, reason: gate.reason });
     console.error(`[round ${round}] ${pick.tool}: ${prev.score}→${candScore.score} (${candScore.scores.join("/")}) — ${gate.accept ? "KEPT" : "ROLLED BACK"} (${gate.reason})`);
 
     trajectory.push({ round, score: prev.score, evidence: evOf(prev), items: prev.items,
-      pick, applied: true, accepted: gate.accept, gate, scoreAfter: { score: candScore.score, scores: candScore.scores } });
+      pick, applied: true, accepted: gate.accept, gate, scoreAfter: { score: candScore.score, scores: candScore.scores },
+      targetDepartments, deptMajorsBefore: beforeDeptMajors, deptMajorsAfter: afterDeptMajors });
 
     prev = gate.accept ? candScore : prev;
     pick = await agentPick(prev, history);
@@ -308,7 +333,7 @@ async function main() {
     observedScoreSpread: { min: Math.min(...prev.scores), max: Math.max(...prev.scores), allRoundVotes: spread },
     trajectory, inventory,
   };
-  const outPath = join(ROOT, "docs/active/work/T-188-01/trajectory.json");
+  const outPath = join(ROOT, process.env.CLIMB_OUT ?? "docs/active/work/T-188-01/trajectory.json");
   await mkdir(dirname(outPath), { recursive: true });
   await writeFile(outPath, JSON.stringify(out, null, 2) + "\n");
 
