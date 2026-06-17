@@ -83,8 +83,9 @@ function panelRoof(occ, spec) {
   const roofSpec = spec.roof ?? { edge: { material: "stone_bricks", amplitude: { eaveDepth: 1, ridgeCourses: 1 } } };
   const { occ: out, edges, report, closure } = composeRoofTreatment(walled, roofSpec, { faces: FACES, ridgeAxis: RIDGE_AXIS, eaveY: EAVE_Y, ridgeY: RIDGE_Y });
   console.error(`[roof] eaveRow=${edges.eaveRow} ridgeRow=${edges.ridgeRow} vergeCols=${edges.vergeColumns.length} | layers: ${report.layers.map((l) => `${l.layer}=${l.placed}`).join(" ")}`);
-  const leak = report.layers.find((l) => l.leak);
-  if (leak) console.error(`[roof] LEAK: ${leak.leak}`);
+  const verge = report.layers.find((l) => l.layer === "verge");
+  if (verge?.leak) console.error(`[roof] LEAK: ${verge.leak}`);
+  else if (verge?.resolves) console.error(`[roof] verge profile=${verge.profile} curve=${verge.curve} — ${verge.resolves} (T-179-01)`);
   assertClosure("roof", closure);
   return out;
 }

@@ -9,7 +9,8 @@ import assert from "node:assert/strict";
 import { occupancyFromCells } from "./occupancy.mjs";
 import { reliefNoRegress } from "./surface-relief.mjs";
 import { deriveEdges, composeTreatment, recessClosureGuard, TREATMENT_GRAMMAR_SCHEMA,
-  deriveRoofEdges, deriveOpeningEdges, composeRoofTreatment } from "./treatment-grammar.mjs";
+  deriveRoofEdges, deriveOpeningEdges, composeRoofTreatment,
+  deriveRakingVerge, deriveArchHead } from "./treatment-grammar.mjs";
 
 /** A solid box W×H×D — four exterior faces with real corners, floor=0, eaveY=H-1. */
 function boxStub(w = 6, h = 6, d = 4) {
@@ -200,7 +201,7 @@ test("TG15 deriveRoofEdges/ridge-z — verge columns swap to the z-ends (geometr
   assert.ok(e.vergeColumns.every((k) => k.endsWith(",0") || k.endsWith(",4")), "verge columns are the z-ends");
 });
 
-test("TG16 composeRoofTreatment — eave, ridge and verge layers all place; closure ok over the roof band", () => {
+test("TG16 composeRoofTreatment — eave, ridge place; the verge is a CRISP RAKE (T-179-01, leak closed)", () => {
   const occ = gableBoxStub({ eaveY: 4, ridgeY: 7 });
   const { report, closure, placements } = composeRoofTreatment(occ, { edge: { material: "stone_bricks", amplitude: { eaveDepth: 1, ridgeCourses: 1 } } },
     { ridgeAxis: "x", eaveY: 4, ridgeY: 7 });
@@ -208,7 +209,15 @@ test("TG16 composeRoofTreatment — eave, ridge and verge layers all place; clos
   assert.ok(byLayer.eave.placed > 0, "eave course placed");
   assert.ok(byLayer.ridge.placed > 0, "ridge cap placed");
   assert.ok(byLayer.verge.placed > 0, "verge course placed");
-  assert.ok(byLayer.verge.leak, "the verge layer records the sloped-line leak (reported, not hidden)");
+  // the leak is CLOSED: the verge now reports a raking profile (no `leak` field), follows the pitch (curve),
+  // and emits exactly the rake-line cells.
+  assert.equal(byLayer.verge.leak, undefined, "the sloped-line leak is closed (no leak field remains)");
+  assert.equal(byLayer.verge.profile, "raking", "the verge is a raking-profile edge");
+  assert.equal(byLayer.verge.curve, true, "the rake follows the gable pitch");
+  // crisp, not heavy: the verge emits strictly fewer cells than the full gable-end triangular face.
+  let bandFace = 0;
+  for (const key of occ.cells.keys()) { const [x, y] = key.split(",").map(Number); if ((x === 0 || x === 6) && y >= 5) bandFace++; }
+  assert.ok(byLayer.verge.placed < bandFace, `rake ${byLayer.verge.placed} < full end band ${bandFace} (crisp board, not heavy band)`);
   assert.equal(closure.ok, true);
   assert.ok(placements.every((p) => p.op === "voxel"));
 });
@@ -252,4 +261,84 @@ test("TG20 purity/serializable — roof edges round-trip JSON; composeRoofTreatm
   const before = occ.cells.size;
   composeRoofTreatment(occ, { edge: { material: "stone_bricks" } }, { ridgeAxis: "x", eaveY: 4, ridgeY: 7 });
   assert.equal(occ.cells.size, before, "input occupancy untouched");
+});
+
+// ---- T-179-01: the PROFILE edge primitive — raking verge (sloped line) + voussoir head (curve) ------
+
+/** A flat shed box (a roof band with no pitch: one constant-y course above the wall). */
+function shedBoxStub({ eaveY = 4 } = {}) {
+  const cells = [];
+  for (let x = 0; x <= 6; x++) for (let y = 0; y <= eaveY; y++) for (let z = 0; z <= 4; z++) cells.push({ pos: [x, y, z], block: "stone_bricks" });
+  for (let x = 0; x <= 6; x++) for (let z = 0; z <= 4; z++) cells.push({ pos: [x, eaveY + 1, z], block: "dark_oak_planks" }); // one flat course
+  return occupancyFromCells(cells);
+}
+
+test("TG21 deriveRakingVerge/ridge-x — the rake is the TOP cell per across-coord (a sloped line, not a band)", () => {
+  const occ = gableBoxStub({ eaveY: 4, ridgeY: 7 });
+  const v = deriveRakingVerge(occ, { ridgeAxis: "x", eaveY: 4, ridgeY: 7 });
+  assert.equal(v.curve, true, "a pitched gable end is a true rake");
+  assert.deepEqual(v.faces, ["+x", "-x"], "verge reads on the gable-end faces (ridge runs x)");
+  // both ends present (x=0 and x=6); each end's rake = top-y per z across z=0..4 → 5,6,7,6,5.
+  assert.ok(v.byEnd["0"] && v.byEnd["6"], "both gable ends produce a rake");
+  const end0 = v.byEnd["0"].map((k) => k.split(",").map(Number)).sort((a, b) => a[2] - b[2]);
+  assert.deepEqual(end0.map((c) => c[1]), [5, 6, 7, 6, 5], "the −x rake follows the pitch up to the apex and back");
+  // the rake is STRICTLY fewer cells than the full triangular gable-end face (the T-176 heavy band).
+  let bandCells = 0;
+  for (const key of occ.cells.keys()) { const [x, y] = key.split(",").map(Number); if ((x === 0 || x === 6) && y >= 5) bandCells++; }
+  assert.ok(v.rakeCells.length < bandCells, `rake ${v.rakeCells.length} < full band ${bandCells} (crisp, not heavy)`);
+});
+
+test("TG22 deriveRakingVerge/ridge-z — faces + rake swap to the z-ends (geometry, not assumed-x)", () => {
+  const occ = gableBoxStub({ eaveY: 4, ridgeY: 7 });
+  const v = deriveRakingVerge(occ, { ridgeAxis: "z", eaveY: 4, ridgeY: 7 });
+  assert.deepEqual(v.faces, ["+z", "-z"], "ridge=z → the verge reads on the z-faces");
+  assert.ok(v.rakeCells.every((k) => { const [, , z] = k.split(",").map(Number); return z === 0 || z === 4; }),
+    "rake cells live on the z-end slices");
+});
+
+test("TG23 deriveRakingVerge/flat-shed — curve=false (the honest degenerate, no invented rake)", () => {
+  const occ = shedBoxStub({ eaveY: 4 });
+  const v = deriveRakingVerge(occ, { ridgeAxis: "x", eaveY: 4, ridgeY: 5 });
+  assert.equal(v.curve, false, "a flat course is not a rake — the primitive does not invent one");
+  assert.deepEqual(JSON.parse(JSON.stringify(v)), v, "raking verge is pure data");
+});
+
+test("TG24 deriveArchHead/arch — crown av varies per column ⇒ curve=true; voussoirs trace the arc", () => {
+  // a 5-wide arched aperture (au 1..5): crown air steps up toward the keystone at the centre column.
+  // av grows DOWNWARD (lintel at v0-1), so a higher crown = a SMALLER av.
+  const cells = [];
+  const crownAv = { 1: 2, 2: 1, 3: 0, 4: 1, 5: 2 }; // the arc: corners low, keystone high
+  for (let au = 1; au <= 5; au++) for (let av = crownAv[au]; av <= 4; av++) cells.push({ au, av });
+  const arch = { kind: "door", bbox: { u0: 1, v0: 0, u1: 5, v1: 4 }, cells,
+    lintel: [{ au: 3, av: -1 }], perim: [{ au: 0, av: 0 }] };
+  const h = deriveArchHead(arch);
+  assert.equal(h.curve, true, "the crown follows a curve");
+  assert.equal(h.crown.length, 5, "one crown cell per opening column");
+  assert.deepEqual(h.crown.map((c) => c.av), [2, 1, 0, 1, 2], "crown av is the arc (keystone highest)");
+  assert.deepEqual(h.voussoirs.map((c) => c.av), [1, 0, -1, 0, 1], "voussoir = one cell toward the lintel");
+});
+
+test("TG25 deriveArchHead/flat — a rectangular aperture degenerates to a single crown row (curve=false)", () => {
+  const cells = [];
+  for (let au = 1; au <= 3; au++) for (let av = 0; av <= 2; av++) cells.push({ au, av }); // full rectangle
+  const flat = { kind: "window", bbox: { u0: 1, v0: 0, u1: 3, v1: 2 }, cells, lintel: [{ au: 2, av: -1 }] };
+  const h = deriveArchHead(flat);
+  assert.equal(h.curve, false, "a flat lintel is the degenerate of the same primitive (the unification)");
+  assert.deepEqual(h.crown.map((c) => c.av), [0, 0, 0], "every column's crown is the same row");
+});
+
+test("TG26 compose opening voussoir — recolors the arch head through the injected seam; skipped without it", () => {
+  const occ = boxWithOpening(6, 6, 4);
+  const spec = { schema: TREATMENT_GRAMMAR_SCHEMA, edges: { opening: { frame: "dark_oak_log", voussoir: "stone_bricks" } } };
+  // an injected seam returning ONE arched aperture (interior solids ⇒ isArch) + a dressing placement.
+  const arch = { dir: "-z", kind: "door", bbox: { u0: 1, v0: 0, u1: 3, v1: 2 },
+    cells: [{ au: 2, av: 0 }, { au: 1, av: 1 }, { au: 2, av: 1 }, { au: 3, av: 1 }],
+    perim: [{ au: 0, av: 1 }], lintel: [], region: { min: [1, 0, 0], max: [3, 2, 0] } };
+  const extractApertures = () => [arch];
+  const dressOpenings = () => ({ placements: [] });
+  const withSeam = composeTreatment(occ, spec, { floor: 0, eaveY: 5, extractApertures, dressOpenings });
+  assert.ok(withSeam.report.byLayer.opening.voussoirs > 0, "the voussoir head recolor placed cells");
+  assert.ok(withSeam.placements.some((p) => p.block === "minecraft:stone_bricks"), "voussoir material emitted");
+  const noSeam = composeTreatment(occ, spec, { floor: 0, eaveY: 5 });
+  assert.ok(noSeam.report.byLayer.opening.skipped, "no seam → opening (incl. voussoir) skipped gracefully");
 });

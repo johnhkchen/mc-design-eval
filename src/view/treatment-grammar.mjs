@@ -34,6 +34,12 @@ const FACES = Object.freeze(["+x", "-x", "+z", "-z"]);
 const DIRS = Object.freeze({ "+x": [1, 0, 0], "-x": [-1, 0, 0], "+z": [0, 0, 1], "-z": [0, 0, -1] });
 const isInt = (n) => Number.isInteger(n);
 const fail = (where, msg) => { throw new Error(`${where}: ${msg}`); };
+const namespaced = (id) => (typeof id === "string" && !id.includes(":") ? `minecraft:${id}` : id);
+/** Side-face dir → the {u (along), v (vertical), w (depth/normal)} world-axis indices. */
+const OPENING_AXES = Object.freeze({
+  "+x": { u: 2, v: 1, w: 0 }, "-x": { u: 2, v: 1, w: 0 },
+  "+z": { u: 0, v: 1, w: 2 }, "-z": { u: 0, v: 1, w: 2 },
+});
 const checkFaces = (where, faces) => {
   if (!Array.isArray(faces) || !faces.length) fail(where, "faces must name at least one face");
   for (const f of faces) if (!DIRS[f]) fail(where, `unknown face "${f}"`);
@@ -135,6 +141,32 @@ function amp(where, layer, key, def, min = 1) {
 }
 
 /**
+ * VOUSSOIR ARCH-HEAD recolor placements (T-179-01) — for each ARCHED aperture, recolor the wedge stones
+ * forming the crown CURVE with `material`. The curve cells come from {@link deriveArchHead} (pure, aperture-
+ * local); the world depth is probed here against `occ` along the opening's normal axis within the aperture's
+ * region span (the seam owns world coords; this stays a recolor of EXISTING solid stones — last-writer-wins,
+ * no air op, closure unaffected). Flat lintels carry no `isArch` ⇒ no voussoir (the existing flat head
+ * stands). PURE; byte-stable (aperture then sorted voussoir order). `occ.solid` selects the wall-plane stone.
+ */
+function archHeadPlacements(occ, apertures, material) {
+  const out = [];
+  for (const ap of apertures) {
+    if (!deriveOpeningEdges(ap).isArch) continue; // only an arch has a curved head to dress
+    const ax = OPENING_AXES[ap.dir];
+    if (!ax || !ap.region) continue;
+    const wLo = ap.region.min[ax.w], wHi = ap.region.max[ax.w];
+    for (const { au, av } of deriveArchHead(ap).voussoirs) {
+      for (let w = wLo; w <= wHi; w++) {
+        const pos = [0, 0, 0];
+        pos[ax.u] = au; pos[ax.v] = av; pos[ax.w] = w;
+        if (occ.solid(pos[0], pos[1], pos[2])) { out.push({ op: "voxel", pos, block: namespaced(material) }); break; }
+      }
+    }
+  }
+  return out;
+}
+
+/**
  * COMPOSE THE TREATMENT — apply the spec's layers in order over `occ`, each layer mapped to an existing
  * brush. Order: base (proud course at the floor row) → field (recess BY EXCLUSION: no proud emission) →
  * edges.corners (full-height geometry-derived quoins) → edges.top (a corner-EXCLUDED eave cornice) →
@@ -226,7 +258,12 @@ export function composeTreatment(occ, spec, ctx = {}) {
       if (E.opening.light) slots.light = { block: E.opening.light };
       const dr = apertures.length ? dressOpenings(occ, apertures, { slots }) : { placements: [] };
       if (dr.placements.length) placements.push(...dr.placements);
-      record("opening", "dress-openings", { placements: dr.placements }, { apertures: apertures.length });
+      // T-179-01: optional VOUSSOIR arch-head recolor — the curve the flat lintel cannot name. Additive
+      // recolor of existing wall-plane stones; flat openings carry no arch ⇒ no-op (the flat head stands).
+      const headPlc = (E.opening.voussoir && apertures.length) ? archHeadPlacements(occ, apertures, E.opening.voussoir) : [];
+      if (headPlc.length) placements.push(...headPlc);
+      const arches = apertures.filter((a) => deriveOpeningEdges(a).isArch).length;
+      record("opening", "dress-openings", { placements: dr.placements }, { apertures: apertures.length, arches, voussoirs: headPlc.length });
     } else {
       record("opening", null, { placements: [] }, { skipped: "no dressing seam injected" });
     }
@@ -318,6 +355,62 @@ export function deriveRoofEdges(occ, opts = {}) {
 }
 
 /**
+ * THE RAKING VERGE (T-179-01, story S-179) — the PROFILE edge primitive that closes T-176-01's verge leak.
+ * The wall/roof classifier vocabulary is {corner column, top row, bottom row} — all FLAT; it cannot name a
+ * SLOPED line, so `deriveRoofEdges.vergeColumns` (the whole gable-end column SET) made the verge a heavy
+ * triangular end band. A raking verge is the SLOPED TOP EDGE of that triangle: per ACROSS-coordinate of a
+ * gable-end slice, the TOP occupied cell. As the across-coordinate moves the top-y rises then falls — a
+ * sloped line. The same primitive expresses a curve in {@link deriveArchHead}; a flat course is its
+ * degenerate (all tops equal). PURE; JSON-round-trippable; the rake cells are 3-D "x,y,z" keys so a
+ * `surface.relief` zoneOf can key the proud emission to the SLOPE, not the face.
+ * @param {import("./occupancy.mjs").Occupancy} occ
+ * @param {{ridgeAxis:"x"|"z", eaveY:number, ridgeY:number}} opts
+ * @returns {{rakeCells:string[], byEnd:Record<string,string[]>, faces:string[],
+ *            curve:boolean, band:{yLo:number,yHi:number}}}
+ */
+export function deriveRakingVerge(occ, opts = {}) {
+  if (!occ?.bounds) fail("deriveRakingVerge", "occupancy is empty");
+  const { ridgeAxis, eaveY, ridgeY } = opts;
+  if (ridgeAxis !== "x" && ridgeAxis !== "z") fail("deriveRakingVerge", 'ridgeAxis must be "x" or "z"');
+  if (!isInt(eaveY) || !isInt(ridgeY) || ridgeY < eaveY) fail("deriveRakingVerge", "eaveY/ridgeY must be integers with ridgeY >= eaveY");
+  const yLo = eaveY + 1, yHi = ridgeY;
+  // the gable ends = the ridge-axis extrema of the roof band; the across axis is the perpendicular one.
+  let endLo = Infinity, endHi = -Infinity;
+  for (const key of occ.cells.keys()) {
+    const [x, y, z] = key.split(",").map(Number);
+    if (y < yLo || y > yHi) continue;
+    const e = ridgeAxis === "x" ? x : z;
+    if (e < endLo) endLo = e;
+    if (e > endHi) endHi = e;
+  }
+  if (!Number.isFinite(endLo)) fail("deriveRakingVerge", "no cells in the roof band [eaveY+1, ridgeY]");
+  const ends = endLo === endHi ? [endLo] : [endLo, endHi];
+  // per gable end, group band cells by the across coordinate and keep the TOP cell (the rake).
+  const byEnd = {};
+  const rake = new Set();
+  const topYs = [];
+  const faces = ridgeAxis === "x" ? ["+x", "-x"] : ["+z", "-z"];
+  for (const e of ends) {
+    const topByAcross = new Map(); // across -> {y, key}
+    for (const key of occ.cells.keys()) {
+      const [x, y, z] = key.split(",").map(Number);
+      if (y < yLo || y > yHi) continue;
+      const ev = ridgeAxis === "x" ? x : z;
+      if (ev !== e) continue;
+      const across = ridgeAxis === "x" ? z : x;
+      const cur = topByAcross.get(across);
+      if (!cur || y > cur.y) topByAcross.set(across, { y, key });
+    }
+    const cells = [...topByAcross.values()].map((c) => c.key).sort();
+    byEnd[e] = cells;
+    for (const { y, key } of topByAcross.values()) { rake.add(key); topYs.push(y); }
+  }
+  // a true rake has a non-constant top profile; a flat shed/mono band does not (the honest degenerate).
+  const curve = new Set(topYs).size > 1;
+  return { rakeCells: [...rake].sort(), byEnd, faces, curve, band: { yLo, yHi } };
+}
+
+/**
  * OPENING edges from one aperture record (the opening analog of deriveEdges) — PURE over data. `reveal` is
  * the solid perimeter ring (the jamb/head reveal the dressing recolors); `head` is the lintel band (flat) or
  * the shaped head cells (arch). `isArch` is true when the aperture's bbox carries interior SOLID cells (the
@@ -336,6 +429,37 @@ export function deriveOpeningEdges(aperture) {
   }
   const head = aperture.lintel ?? [];
   return { kind: aperture.kind ?? "opening", reveal, head, isArch };
+}
+
+/**
+ * THE VOUSSOIR ARCH HEAD (T-179-01, story S-179) — the PROFILE edge primitive for an opening, the twin of
+ * {@link deriveRakingVerge}. `deriveOpeningEdges.head` is the FLAT lintel band; a voussoir arch crown follows
+ * a CURVE the row cannot name. Per opening COLUMN (au), the crown air cell = the highest air cell toward the
+ * lintel (min `av` — the lintel sits at `v0-1`, see opening-dressing), and the VOUSSOIR = the bordering solid
+ * one step further toward the lintel (the wedge stone to recolor). As the column moves the crown av varies
+ * for an arch and is constant for a flat lintel — so `curve` separates them and a flat head is this
+ * primitive's degenerate (the unification). PURE over the aperture record (world au/av); depth is the seam's
+ * job, not this derivation's. The voussoir cells are returned sorted (au,av) for byte-stable consumption.
+ * @param {{cells?:Array<{au:number,av:number}>, lintel?:Array<{au:number,av:number}>}} aperture
+ * @returns {{crown:Array<{au:number,av:number}>, voussoirs:Array<{au:number,av:number}>,
+ *            curve:boolean, side:"top"}}
+ */
+export function deriveArchHead(aperture) {
+  if (!aperture || typeof aperture !== "object") fail("deriveArchHead", "aperture record is required");
+  const air = Array.isArray(aperture.cells) ? aperture.cells : [];
+  // group air by column; the crown is the cell toward the lintel (min av — the head side).
+  const crownByCol = new Map();
+  for (const c of air) {
+    if (!isInt(c?.au) || !isInt(c?.av)) continue;
+    const cur = crownByCol.get(c.au);
+    if (cur === undefined || c.av < cur) crownByCol.set(c.au, c.av);
+  }
+  const cols = [...crownByCol.keys()].sort((a, b) => a - b);
+  const crown = cols.map((au) => ({ au, av: crownByCol.get(au) }));
+  // the voussoir wedge stone is one cell toward the lintel from the crown air cell.
+  const voussoirs = crown.map(({ au, av }) => ({ au, av: av - 1 }));
+  const curve = new Set(crown.map((c) => c.av)).size > 1;
+  return { crown, voussoirs, curve, side: "top" };
 }
 
 /**
@@ -374,19 +498,22 @@ export function composeRoofTreatment(occ, roofSpec, ctx = {}) {
   }
   layers.push({ layer: "ridge", brush: "surface-relief", placed: ridgePlaced, row: edges.ridgeRow });
 
-  // verge — proud relief keyed to the gable-end (rake) columns across the roof band.
-  const vergeSet = new Set(edges.vergeColumns);
+  // verge — THE RAKING VERGE (T-179-01): proud relief keyed to the SLOPED rake line (the top cell per
+  // across-coordinate of each gable-end slice), not the whole gable-end column SET. This closes T-176-01's
+  // leak: the column-keyed course made the verge a heavy triangular end band; the rake-cell profile emits a
+  // crisp sloped board following the pitch. The profile is the missing edge classifier the flat row/column
+  // vocabulary lacked — a row is its degenerate (deriveRakingVerge.curve === false).
+  const rake = deriveRakingVerge(occ, { ridgeAxis: ctx.ridgeAxis, eaveY: ctx.eaveY, ridgeY: ctx.ridgeY });
+  const rakeSet = new Set(rake.rakeCells);
   const vr = runBrush(occ, "surface.relief", {
-    material, faces, depth: 1, zone: "verge",
-    zoneOf: (pos) => (pos[1] >= edges.band.yLo && pos[1] <= edges.band.yHi && vergeSet.has(`${pos[0]},${pos[2]}`) ? "verge" : null),
+    material, faces: rake.faces, depth: 1, zone: "verge",
+    zoneOf: (pos) => (rakeSet.has(`${pos[0]},${pos[1]},${pos[2]}`) ? "verge" : null),
     rhythm: { axis: "row", every: 1, span: 1 },
   });
   if (vr.placements.length) placements.push(...vr.placements);
-  // THE HONEST LEAK: the verge is a SLOPED rake line; this column-keyed row course treats the gable-end
-  // columns but does NOT follow the pitch per-column the way a true raking verge board would. Recorded, not
-  // hidden — the wall row/column vocabulary cannot name a sloped line.
   layers.push({ layer: "verge", brush: "surface-relief", placed: vr.placements.length,
-    leak: "verge is a sloped rake line; a flat column-keyed course under-treats the pitch (wall vocabulary cannot express a sloped line)" });
+    profile: "raking", rakeCells: rake.rakeCells.length, curve: rake.curve,
+    resolves: "the sloped-line leak — proud cells follow the top-cell-per-across rake profile, not a flat column band" });
 
   const o = placements.length ? overlay(occ, placements) : occ;
   const closure = recessClosureGuard(occ, o, { floor: edges.band.yLo, eaveY: edges.band.yHi });
