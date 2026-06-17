@@ -53,10 +53,23 @@ Source of truth: [`docs/specification.md`](../../specification.md).
 | E-41 | typed-critique-kind                        | high   | E-40                | §9             |
 | E-42 | build-faithfulness                         | high   | E-41                | §9             |
 | E-43 | surface-treatment-grammar                  | high   | E-42                | §9             |
+| E-44 | faithful-integration-and-promote-confirmation | high | E-43              | §9.1           |
+| E-45 | recalibrate-style-distance-term             | high   | E-44                | §9.1           |
+| E-46 | labeled-style-corpus-and-promotion-gate     | high   | E-45                | §9.1           |
+| E-47 | concept-image-conditioned-style-distance    | high   | E-46                | §9.1           |
 
-> E-01…E-38 archived. E-39 done (machinery; bets refuted → scalar is the gate). E-40 done (term over-caps
-> → typed `kind`). E-41 done (typed kind). **E-42 (build faithfulness) active → E-43 (surface-treatment
-> grammar: compositional trim/band/quoin/recess) queued after.** Forward plan: `docs/active/ROADMAP.md`.
+> E-01…E-38 archived. E-39–E-43 done (feedback machinery → typed kind → faithful build → treatment grammar).
+> E-44 done — the crater REFUTED at VOTES=6 (gate is the MEASURE, not the build). E-45 done — **measure
+> MECHANISM FIXED** (concept-conditional `replace` + graded cap; `replaceContrast −0.20→+0.245`) but
+> PROMOTE-LEANING, blocked by a **pack confound** (separation rides on the pack, not the concept image).
+> **E-46 done — the gate ran and returned DO-NOT-PROMOTE** (T-185-01): on the S-183 decoupling corpus @VOTES=6
+> the term is **PACK-DRIVEN** (`packEffect 45 ≫ conceptImageEffect 8`, hard-middle agreement 0.20 vs *labelable*
+> ground truth; a faithful build in the wrong pack scores 0, a wrong-picture build in the right pack outranks
+> the faithful one). E-45 fixed the mechanism but the term still grades against a **pack-derived** spec —
+> measuring materials, not the picture. `measurements/` untouched (no autonomous freeze).
+> **E-47 (concept-image-conditioned style distance) active:** make the term read the picture (anchor the
+> expectation on the concept image, not the pack), then re-run the *same* E-46 gate; promote only on a clean
+> PICTURE-DRIVEN re-gate behind human sign-off. Forward plan: `docs/active/ROADMAP.md`.
 
 ## Dependency graph
 
