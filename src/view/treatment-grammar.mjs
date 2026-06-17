@@ -273,5 +273,125 @@ export function recessClosureGuard(occBefore, occAfter, { floor, eaveY } = {}) {
   return { ok: after >= before && droppedColumns.length === 0, before, after, droppedColumns };
 }
 
+// ============================================================================================
+// GENERALIZATION (T-176-01, story S-176) — the SAME edges-from-geometry vocabulary applied to the ROOF
+// (eave / ridge / verge) and to OPENINGS (reveal / head). The honest finding is recorded in the code: the
+// wall vocabulary covers the eave BAND, the ridge CAP and the opening REVEAL cleanly, but the raking VERGE
+// (a sloped line, not a row) and the voussoir ARCH HEAD (a curve, not a row) LEAK — a flat row/column course
+// under-treats them. deriveRoofEdges/composeRoofTreatment name where they cover and where they leak.
+// ============================================================================================
+
+/**
+ * ROOF-BAND edges from the built occupancy — the sibling of deriveEdges over the band [eaveY+1, ridgeY].
+ * Names `eaveRow` (the lowest roof course), `ridgeRow` (the cap), and `vergeColumns` (the gable-end /
+ * rake columns: the footprint extrema along the axis PERPENDICULAR to the ridge — i.e. AT the ridge-axis
+ * ends). PURE; JSON-round-trippable. The ridge axis is geometry the program declares (program.roof.ridgeAxis).
+ * @param {import("./occupancy.mjs").Occupancy} occ
+ * @param {{ridgeAxis:"x"|"z", eaveY:number, ridgeY:number, faces?:string[]}} opts
+ * @returns {{band:{yLo,yHi}, eaveRow:number, ridgeRow:number, vergeColumns:string[],
+ *            footprint:{xMin,xMax,zMin,zMax}}}
+ */
+export function deriveRoofEdges(occ, opts = {}) {
+  if (!occ?.bounds) fail("deriveRoofEdges", "occupancy is empty");
+  const { ridgeAxis, eaveY, ridgeY } = opts;
+  if (ridgeAxis !== "x" && ridgeAxis !== "z") fail("deriveRoofEdges", 'ridgeAxis must be "x" or "z"');
+  if (!isInt(eaveY) || !isInt(ridgeY) || ridgeY < eaveY) fail("deriveRoofEdges", "eaveY/ridgeY must be integers with ridgeY >= eaveY");
+  const yLo = eaveY + 1, yHi = ridgeY;
+  let xMin = Infinity, xMax = -Infinity, zMin = Infinity, zMax = -Infinity;
+  for (const key of occ.cells.keys()) {
+    const [x, y, z] = key.split(",").map(Number);
+    if (y < yLo || y > yHi) continue;
+    if (x < xMin) xMin = x; if (x > xMax) xMax = x;
+    if (z < zMin) zMin = z; if (z > zMax) zMax = z;
+  }
+  if (!Number.isFinite(xMin)) fail("deriveRoofEdges", "no cells in the roof band [eaveY+1, ridgeY]");
+  const footprint = { xMin, xMax, zMin, zMax };
+  // verge / rake columns = the roof-band columns at the ridge-axis EXTREMA (the gable ends).
+  const verge = new Set();
+  for (const key of occ.cells.keys()) {
+    const [x, y, z] = key.split(",").map(Number);
+    if (y < yLo || y > yHi) continue;
+    const atEnd = ridgeAxis === "x" ? (x === xMin || x === xMax) : (z === zMin || z === zMax);
+    if (atEnd) verge.add(`${x},${z}`);
+  }
+  return { band: { yLo, yHi }, eaveRow: yLo, ridgeRow: yHi, vergeColumns: [...verge].sort(), footprint };
+}
+
+/**
+ * OPENING edges from one aperture record (the opening analog of deriveEdges) — PURE over data. `reveal` is
+ * the solid perimeter ring (the jamb/head reveal the dressing recolors); `head` is the lintel band (flat) or
+ * the shaped head cells (arch). `isArch` is true when the aperture's bbox carries interior SOLID cells (the
+ * arch corners extractApertures marks) — i.e. the air cells do not fill the bbox.
+ * @param {{kind?:string, bbox?:{u0,v0,u1,v1}, cells?:Array, perim?:Array, lintel?:Array}} aperture
+ * @returns {{kind:string, reveal:Array, head:Array, isArch:boolean}}
+ */
+export function deriveOpeningEdges(aperture) {
+  if (!aperture || typeof aperture !== "object") fail("deriveOpeningEdges", "aperture record is required");
+  const reveal = aperture.perim ?? [];
+  let isArch = false;
+  if (aperture.bbox && Array.isArray(aperture.cells)) {
+    const { u0, v0, u1, v1 } = aperture.bbox;
+    const area = (u1 - u0 + 1) * (v1 - v0 + 1);
+    isArch = aperture.cells.length < area; // some bbox interior is solid → a shaped (arched) head
+  }
+  const head = aperture.lintel ?? [];
+  return { kind: aperture.kind ?? "opening", reveal, head, isArch };
+}
+
+/**
+ * COMPOSE the roof-band treatment: a proud EAVE course (the door-reached eave-overhang at eaveRow), a RIDGE
+ * cap course (rowCourse at ridgeRow — the ridge has no corners, so corner-blind), and a VERGE course
+ * (surface.relief keyed to the gable-end columns). Single fold, last-writer-wins; closure guarded over the
+ * roof band (additive ⇒ holds). Returns the final occupancy, placements, derived edges, a per-layer report
+ * (carrying the VERGE LEAK note), and the closure verdict. PURE.
+ * @param {import("./occupancy.mjs").Occupancy} occ
+ * @param {{edge:{material:string, amplitude?:object}}} roofSpec
+ * @param {{ridgeAxis:"x"|"z", eaveY:number, ridgeY:number, faces?:string[]}} ctx
+ */
+export function composeRoofTreatment(occ, roofSpec, ctx = {}) {
+  if (!occ?.bounds) fail("composeRoofTreatment", "occupancy is empty");
+  if (typeof roofSpec?.edge?.material !== "string" || !roofSpec.edge.material) fail("composeRoofTreatment", "roofSpec.edge.material must be a block id");
+  const faces = ctx.faces ?? FACES;
+  checkFaces("composeRoofTreatment", faces);
+  const edges = deriveRoofEdges(occ, ctx);
+  const material = roofSpec.edge.material;
+  const amp = roofSpec.edge.amplitude ?? {};
+  const eaveDepth = isInt(amp.eaveDepth) ? amp.eaveDepth : 1;
+  const ridgeCourses = isInt(amp.ridgeCourses) ? amp.ridgeCourses : 1;
+  const placements = [];
+  const layers = [];
+
+  // eave — proud course at the lowest roof row (the door-reached eave-overhang).
+  const er = runBrush(occ, "eave-overhang", { material, faces, depth: eaveDepth, eaveRow: edges.eaveRow });
+  if (er.placements.length) placements.push(...er.placements);
+  layers.push({ layer: "eave", brush: "eave-overhang", placed: er.placements.length, row: edges.eaveRow });
+
+  // ridge — a cap course at the top row (corner-blind: the ridge line has no quoins).
+  let ridgePlaced = 0;
+  for (let k = 0; k < ridgeCourses; k++) {
+    const r = rowCourse(occ, { material, faces, depth: 1, row: edges.ridgeRow - k, zone: "ridge" });
+    if (r.placements.length) { placements.push(...r.placements); ridgePlaced += r.placements.length; }
+  }
+  layers.push({ layer: "ridge", brush: "surface-relief", placed: ridgePlaced, row: edges.ridgeRow });
+
+  // verge — proud relief keyed to the gable-end (rake) columns across the roof band.
+  const vergeSet = new Set(edges.vergeColumns);
+  const vr = runBrush(occ, "surface.relief", {
+    material, faces, depth: 1, zone: "verge",
+    zoneOf: (pos) => (pos[1] >= edges.band.yLo && pos[1] <= edges.band.yHi && vergeSet.has(`${pos[0]},${pos[2]}`) ? "verge" : null),
+    rhythm: { axis: "row", every: 1, span: 1 },
+  });
+  if (vr.placements.length) placements.push(...vr.placements);
+  // THE HONEST LEAK: the verge is a SLOPED rake line; this column-keyed row course treats the gable-end
+  // columns but does NOT follow the pitch per-column the way a true raking verge board would. Recorded, not
+  // hidden — the wall row/column vocabulary cannot name a sloped line.
+  layers.push({ layer: "verge", brush: "surface-relief", placed: vr.placements.length,
+    leak: "verge is a sloped rake line; a flat column-keyed course under-treats the pitch (wall vocabulary cannot express a sloped line)" });
+
+  const o = placements.length ? overlay(occ, placements) : occ;
+  const closure = recessClosureGuard(occ, o, { floor: edges.band.yLo, eaveY: edges.band.yHi });
+  return { occ: o, placements, edges, report: { layers }, closure };
+}
+
 /** Re-exported so a consumer can bare-compare blocks without a second import. */
 export { bareBlock };
