@@ -78,7 +78,10 @@ function DiagnoseBuild(
     empty if absent), and what is absent versus expected (missing, empty if nothing missing). Also
     tag each item with its kind: add if the element is absent (present is empty), replace if
     something is present but in the WRONG style/material, remove if an element is present that the
-    style does not want. Tag
+    style does not want. CONCEPT-CONDITIONAL: if the build's present material is in the SAME style
+    family as what is expected — only a within-style DETAIL differs or is still missing — tag it
+    `add` (the missing detail), NOT `replace`; reserve `replace` for an element built in a
+    genuinely WRONG material/style versus what the concept calls for. Tag
     each item with the department that owns it — one of: {{ departments }}. Judge element-level
     construction (material, covering, feature presence), NOT overall size or proportion. Name at most
     {{ max_items }} items, the most divergent first; emit no item for a department that already reads
