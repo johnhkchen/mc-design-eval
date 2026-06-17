@@ -319,3 +319,26 @@ test("CG16 override does not fire when no targeted department cleared a major", 
   assert.equal(r.accept, false);
   assert.match(r.reason, /regressed/);
 });
+
+// ---- CG17: the override GENERALIZES past ROOF — frame_arch clearing an OPENING major is KEPT (T-192-01) ----
+test("CG17 department-dominant override keeps an OPENING-targeting hand that cleared its major", () => {
+  // The S-192 falsification crux: frame_arch (the arched-passage hand) targets OPENING. If it clears the
+  // OPENING major and the judge promotes a pre-existing major in an UNtargeted dept (whole-build regression),
+  // the override must KEEP it — proving the override is NOT roof-specific. Net guard satisfied (OPENING
+  // total 1→0). This is CG14's shape on a DIFFERENT department, asserted deterministically (no spend).
+  const r = acceptsRound(
+    { score: 60 }, { score: 48 },
+    {
+      margin: 4, targetDepartments: TOOL_DEPARTMENTS.frame_arch, // ["OPENING"]
+      beforeDeptMajors: { OPENING: 1 }, afterDeptMajors: { OPENING: 0, WALL: 1 }, // WALL promoted (untargeted)
+      beforeDeptItems: { OPENING: { major: 1, minor: 0 } }, afterDeptItems: { OPENING: { major: 0, minor: 0 }, WALL: { major: 1, minor: 0 } },
+    },
+  );
+  assert.equal(r.accept, true);
+  assert.match(r.reason, /OPENING cleared a major \(department-dominant override\)/);
+
+  // and the new hands resolve to their departments
+  assert.deepEqual(TOOL_DEPARTMENTS.frame_arch, ["OPENING"]);
+  assert.deepEqual(TOOL_DEPARTMENTS.articulate_quoins, ["WALL"]);
+  assert.deepEqual(TOOL_DEPARTMENTS.band_eave, ["ROOF"]);
+});
