@@ -1,0 +1,156 @@
+{
+  "schema": "eval-alignment/style-corpus/v1",
+  "rater": "single-rater: claude (agent), 2026-06-17. Intended faithfulness labels are ONE rater's, set by render inspection beside each concept — NOT human-agreement ground truth (that is S-184, the human gate). Recorded as such (anti-hedge: the corpus's labels can refute a term but only human labels license a promote).",
+  "notes": "E-46 / S-183 decoupling corpus. 12 states, 3 subjects (gatehouse, cottage, barn), 2 packs (rustic matched, guildhall foreign).\nDECOUPLING IS BY CONSTRUCTION: every state hands the scorer a pack file and a concept file as INDEPENDENT diagnose() arguments — the corpus bypasses recognition, so pack-effect and concept-image-effect are separable. This generalizes corpus-referee.mjs's single-subject crater (A-matched/B/C-control); C-control IS the same-pack/wrong-picture crux cell.\nCONSTRUCTIBILITY (AC, honest): all four crux cell types were constructible — NONE refused. The S-183 'recognition always re-derives a matching pack -> inseparable' failure does NOT occur here because the corpus never runs recognition; it supplies (pack, concept) by hand. That structural-confound risk is a PRODUCTION-PIPELINE property (where the pack is derived from the concept), not a corpus one — which is also why this corpus can REFUTE the term (a same-pack/wrong-picture cell scored high = reads the pack) but cannot by itself prove the production path reads the picture.\nHARD MIDDLE: 3 partially-faithful states. gh-mid-material is a CONTROLLED single-factor mutation (synthesized, roof timber dark_oak->spruce — a visible-but-plausible wrong material); gh-mid-gate and ct-mid-plain are naturally-partial reuse builds (gatehouse with a gaping unframed gate / cottage with a plainer wall missing the half-timber grammar). Each was inspected on the render and confirmed genuinely contestable (a first invisible stone_bricks->cobblestone synth was rejected). Calls recorded in the T-183-01 review.",
+  "packs": {
+    "matched": "packs/rustic.json",
+    "foreign": "packs/guildhall.json"
+  },
+  "states": [
+    {
+      "id": "gh-match",
+      "subject": "gatehouse",
+      "cellType": "match",
+      "build": "builds/gatehouse/faithful-covered",
+      "pack": "packs/rustic.json",
+      "concept": "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+      "intendedFaithfulness": "high",
+      "note": "Fully-faithful gatehouse (E-44/S-177) · rustic pack · its own concept. The HIGH anchor.",
+      "renderDir": "builds/gatehouse/faithful-covered",
+      "beside": "experiments/eval-alignment/corpus/beside/gh-match.png"
+    },
+    {
+      "id": "ct-match",
+      "subject": "cottage",
+      "cellType": "match",
+      "build": "builds/cottage/roof-covering",
+      "pack": "packs/rustic.json",
+      "concept": "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
+      "intendedFaithfulness": "high",
+      "note": "Cottage roof-covering build · rustic pack · cottage concept. Second-subject HIGH anchor.",
+      "renderDir": "builds/cottage/roof-covering",
+      "beside": "experiments/eval-alignment/corpus/beside/ct-match.png"
+    },
+    {
+      "id": "bn-match",
+      "subject": "barn",
+      "cellType": "match",
+      "build": "builds/barn/roof-covering",
+      "pack": "packs/rustic.json",
+      "concept": "benchmarks/sculpture/runs/017-vBuilding-a-rectangular-stone-tithe-barn-with-a-steep-gabled-roof-and-large-timber-wagon-doors/concept.png",
+      "intendedFaithfulness": "high",
+      "note": "Barn roof-covering build · rustic pack · barn concept. Third-subject HIGH anchor.",
+      "renderDir": "builds/barn/roof-covering",
+      "beside": "experiments/eval-alignment/corpus/beside/bn-match.png"
+    },
+    {
+      "id": "gh-samepack-classical",
+      "subject": "gatehouse",
+      "cellType": "same-pack-wrong-picture",
+      "build": "builds/gatehouse/faithful-covered",
+      "pack": "packs/rustic.json",
+      "concept": "benchmarks/temple-facade/concepts/arc-A-flash.png",
+      "intendedFaithfulness": "low",
+      "note": "Rustic gatehouse · rustic pack · CLASSICAL arc concept. The cross-family crux (== referee C-control): if scored HIGH the term reads the pack, not the picture.",
+      "renderDir": "builds/gatehouse/faithful-covered",
+      "beside": "experiments/eval-alignment/corpus/beside/gh-samepack-classical.png"
+    },
+    {
+      "id": "gh-samepack-cottage",
+      "subject": "gatehouse",
+      "cellType": "same-pack-wrong-picture",
+      "build": "builds/gatehouse/faithful-covered",
+      "pack": "packs/rustic.json",
+      "concept": "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
+      "intendedFaithfulness": "low",
+      "note": "Rustic gatehouse · rustic pack · COTTAGE concept. WITHIN-rustic-family wrong picture: same pack, same broad style, wrong subject/form — the decisive 'reads the form not just the materials' cell.",
+      "renderDir": "builds/gatehouse/faithful-covered",
+      "beside": "experiments/eval-alignment/corpus/beside/gh-samepack-cottage.png"
+    },
+    {
+      "id": "ct-samepack-gatehouse",
+      "subject": "cottage",
+      "cellType": "same-pack-wrong-picture",
+      "build": "builds/cottage/roof-covering",
+      "pack": "packs/rustic.json",
+      "concept": "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+      "intendedFaithfulness": "low",
+      "note": "Rustic cottage · rustic pack · GATEHOUSE concept. Cross-subject same-family wrong picture (second subject).",
+      "renderDir": "builds/cottage/roof-covering",
+      "beside": "experiments/eval-alignment/corpus/beside/ct-samepack-gatehouse.png"
+    },
+    {
+      "id": "gh-wrongpack",
+      "subject": "gatehouse",
+      "cellType": "wrong-pack-right-picture",
+      "build": "builds/gatehouse/faithful-covered",
+      "pack": "packs/guildhall.json",
+      "concept": "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+      "intendedFaithfulness": "high",
+      "note": "Faithful gatehouse · GUILDHALL (foreign) pack · its own gatehouse concept. Build matches the picture; if the foreign pack tanks the score the term is pack-driven not picture-driven.",
+      "renderDir": "builds/gatehouse/faithful-covered",
+      "beside": "experiments/eval-alignment/corpus/beside/gh-wrongpack.png"
+    },
+    {
+      "id": "ct-wrongpack",
+      "subject": "cottage",
+      "cellType": "wrong-pack-right-picture",
+      "build": "builds/cottage/roof-covering",
+      "pack": "packs/guildhall.json",
+      "concept": "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
+      "intendedFaithfulness": "high",
+      "note": "Cottage build · guildhall pack · its own cottage concept. Second-subject pack-sensitivity probe.",
+      "renderDir": "builds/cottage/roof-covering",
+      "beside": "experiments/eval-alignment/corpus/beside/ct-wrongpack.png"
+    },
+    {
+      "id": "bn-cross",
+      "subject": "barn",
+      "cellType": "cross",
+      "build": "builds/barn/roof-covering",
+      "pack": "packs/rustic.json",
+      "concept": "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
+      "intendedFaithfulness": "low",
+      "note": "Barn build · rustic pack · COTTAGE concept. Off-diagonal: same pack, wrong subject — populates the matrix.",
+      "renderDir": "builds/barn/roof-covering",
+      "beside": "experiments/eval-alignment/corpus/beside/bn-cross.png"
+    },
+    {
+      "id": "gh-mid-material",
+      "subject": "gatehouse",
+      "cellType": "hard-middle",
+      "build": "builds/gatehouse/faithful-covered-mid",
+      "pack": "packs/rustic.json",
+      "concept": "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+      "intendedFaithfulness": "middle",
+      "synthesized": true,
+      "note": "ONE WRONG MATERIAL: the faithful gatehouse with its dark-oak roof timber swapped to spruce (warm brown vs the concept's near-black dark timber) — a plausible-but-wrong wood-shingle roof, prominent and VISIBLE but rank-either-way. (A first stone_bricks->cobblestone wall swap was invisible grey-on-grey and rejected at inspection.) Contestability call recorded in review.md after render inspection.",
+      "renderDir": "builds/gatehouse/faithful-covered-mid",
+      "beside": "experiments/eval-alignment/corpus/beside/gh-mid-material.png"
+    },
+    {
+      "id": "gh-mid-gate",
+      "subject": "gatehouse",
+      "cellType": "hard-middle",
+      "build": "builds/gatehouse/new-roof",
+      "pack": "packs/rustic.json",
+      "concept": "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+      "intendedFaithfulness": "middle",
+      "note": "MISSING DRESSING: clean stone gatehouse, gable roof reads, but the front gate is an unframed rectangular gap (no arch, no timber surround) vs the concept's arched timber gate. Naturally-partial (defect-corpus gatehouse-gaping-gate).",
+      "renderDir": "builds/gatehouse/new-roof",
+      "beside": "experiments/eval-alignment/corpus/beside/gh-mid-gate.png"
+    },
+    {
+      "id": "ct-mid-plain",
+      "subject": "cottage",
+      "cellType": "hard-middle",
+      "build": "builds/cottage/new-roof",
+      "pack": "packs/rustic.json",
+      "concept": "benchmarks/sculpture/runs/014-vConcept-a-cottage/concept.png",
+      "intendedFaithfulness": "middle",
+      "note": "MISSING DRESSING: roof + stone base read; the upper storey is plain — missing the concept's half-timber stud grammar. Naturally-partial (defect-corpus cottage-plain-upper).",
+      "renderDir": "builds/cottage/new-roof",
+      "beside": "experiments/eval-alignment/corpus/beside/ct-mid-plain.png"
+    }
+  ]
+}

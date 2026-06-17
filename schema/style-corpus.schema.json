@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "style-corpus/v1",
+  "title": "Style corpus (E-46 / S-183) — pack/concept-decoupled (build, pack, concept) states",
+  "description": "The decoupling corpus the S-185 promotion gate re-runs. Each state is a (BUILD, PACK, CONCEPT IMAGE) triple handed to the scorer with pack and concept supplied INDEPENDENTLY (the corpus bypasses recognition, so the three axes are separable by construction). cellType enumerates the E-46 crux table; intendedFaithfulness is one rater's label (NOT human-agreement ground truth — that is S-184). cellType/subject/intendedFaithfulness membership is re-checked in the loader (one composition point: src/workshop/style-corpus.mjs), and the AC-shape coverage (4 crux types + >=2 hard-middle + >=3 subjects) is asserted there too.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "rater", "states"],
+  "properties": {
+    "schema": { "const": "eval-alignment/style-corpus/v1" },
+    "rater": { "type": "string", "minLength": 1, "description": "single-rater identity + date + the no-aggregation limitation" },
+    "notes": { "type": "string", "description": "constructibility + structural-confound + contestability disclosures (anti-hedge honest reporting)" },
+    "packs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["matched", "foreign"],
+      "properties": {
+        "matched": { "type": "string", "minLength": 1 },
+        "foreign": { "type": "string", "minLength": 1 }
+      }
+    },
+    "states": {
+      "type": "array",
+      "minItems": 8,
+      "items": { "$ref": "#/$defs/state" }
+    },
+    "excluded": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/excluded" }
+    }
+  },
+  "$defs": {
+    "cellType": { "enum": ["match", "same-pack-wrong-picture", "wrong-pack-right-picture", "cross", "hard-middle"] },
+    "faithfulness": { "enum": ["high", "middle", "low"] },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "subject", "cellType", "build", "pack", "concept", "intendedFaithfulness", "renderDir", "beside"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "subject": { "type": "string", "minLength": 1 },
+        "cellType": { "$ref": "#/$defs/cellType" },
+        "build": { "type": "string", "minLength": 1, "description": "build dir relative to repo root" },
+        "pack": { "type": "string", "minLength": 1, "description": "style pack file path" },
+        "concept": { "type": "string", "minLength": 1, "description": "concept image the build is scored against" },
+        "intendedFaithfulness": { "$ref": "#/$defs/faithfulness" },
+        "renderDir": { "type": "string", "minLength": 1, "description": "dir holding the 4 view-*.png (usually == build)" },
+        "beside": { "type": "string", "minLength": 1, "description": "composed beside-concept PNG path" },
+        "synthesized": { "type": "boolean", "description": "true for replay-generated mutated builds" },
+        "note": { "type": "string" }
+      }
+    },
+    "excluded": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "reason"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "reason": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}
