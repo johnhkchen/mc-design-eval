@@ -446,18 +446,27 @@ export function deriveOpeningEdges(aperture) {
  */
 export function deriveArchHead(aperture) {
   if (!aperture || typeof aperture !== "object") fail("deriveArchHead", "aperture record is required");
-  const air = Array.isArray(aperture.cells) ? aperture.cells : [];
-  // group air by column; the crown is the cell toward the lintel (min av — the head side).
+  const air = Array.isArray(aperture.cells) ? aperture.cells.filter((c) => isInt(c?.au) && isInt(c?.av)) : [];
+  // HEAD DIRECTION (orientation-robust): the head is toward the lintel. `av` is world-y for the ±z/±x side
+  // faces, which may grow up or down relative to the grid — so we read the direction from the lintel band
+  // (which sits just past the opening top) rather than assuming it. Default −1 (toward smaller av) when no
+  // lintel is given, matching the simple synthetic case.
+  const lintel = Array.isArray(aperture.lintel) ? aperture.lintel.filter((c) => isInt(c?.av)) : [];
+  let headSign = -1;
+  if (lintel.length && air.length) {
+    const lAv = lintel.reduce((s, c) => s + c.av, 0) / lintel.length;
+    const aAv = air.reduce((s, c) => s + c.av, 0) / air.length;
+    headSign = lAv >= aAv ? +1 : -1;
+  }
+  // per column, the crown air cell = the one extreme toward the head; the voussoir is one step past it.
   const crownByCol = new Map();
   for (const c of air) {
-    if (!isInt(c?.au) || !isInt(c?.av)) continue;
     const cur = crownByCol.get(c.au);
-    if (cur === undefined || c.av < cur) crownByCol.set(c.au, c.av);
+    if (cur === undefined || (headSign > 0 ? c.av > cur : c.av < cur)) crownByCol.set(c.au, c.av);
   }
   const cols = [...crownByCol.keys()].sort((a, b) => a - b);
   const crown = cols.map((au) => ({ au, av: crownByCol.get(au) }));
-  // the voussoir wedge stone is one cell toward the lintel from the crown air cell.
-  const voussoirs = crown.map(({ au, av }) => ({ au, av: av - 1 }));
+  const voussoirs = crown.map(({ au, av }) => ({ au, av: av + headSign }));
   const curve = new Set(crown.map((c) => c.av)).size > 1;
   return { crown, voussoirs, curve, side: "top" };
 }
