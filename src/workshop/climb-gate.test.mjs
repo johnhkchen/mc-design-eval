@@ -140,6 +140,7 @@ test("CG8 classifyInventory reports a flat run as stalled and does not mutate in
   assert.equal(CLIMB_GATE_SCHEMA, "climb-gate/v1");
   assert.equal(CLIMB_DEFAULTS.minRounds, 3);
   assert.deepEqual(TOOL_DEPARTMENTS.apply_gable_roof, ["ROOF"]);
+  assert.deepEqual(TOOL_DEPARTMENTS.recolor_roof, ["ROOF"]); // T-189-01: the roof-MATERIAL hand
 });
 
 // ---- CG9: classifyInventory — empty trajectory is a loud failure, not a silent pass ----

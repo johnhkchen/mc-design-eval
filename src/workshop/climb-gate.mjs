@@ -22,11 +22,15 @@ const num = (v, d = 0) => (Number.isFinite(v) ? v : d);
 // the climb room while bounding metered spend; minRounds enforces the ticket's "≥3 rounds run".
 export const CLIMB_DEFAULTS = Object.freeze({ margin: 4, stallK: 2, maxRounds: 5, minRounds: 3 });
 
-// Factual reach of the three EXISTING occ-tools (autonomy-loop.mjs) over the five departments — a
-// DESCRIPTION of what the hands touch, NOT a fix proposal. Used only to label "no tool targets this
-// department". OPENING under construct_walls is incidental (the skin's dressOpenings), recorded as such.
+// Factual reach of the EXISTING occ-tools over the five departments — a DESCRIPTION of what the hands
+// touch, NOT a fix proposal. Used only to label "no tool targets this department". OPENING under
+// construct_walls is incidental (the skin's dressOpenings), recorded as such. recolor_roof (T-189-01) is
+// the roof-MATERIAL hand: it rebuilds the roof in the concept-true material read by recognition (the
+// reconcile of program ↔ material-map — see src/recognition/roof-material.mjs), so it moves ROOF colour
+// where apply_gable_roof (form only) cannot.
 export const TOOL_DEPARTMENTS = Object.freeze({
   apply_gable_roof: Object.freeze(["ROOF"]),
+  recolor_roof: Object.freeze(["ROOF"]),
   construct_walls: Object.freeze(["WALL", "OPENING"]),
   add_timber_framing: Object.freeze(["WALL"]),
 });
