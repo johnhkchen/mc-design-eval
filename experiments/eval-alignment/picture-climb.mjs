@@ -250,6 +250,26 @@ async function main() {
   PACK = loadStylePack(join(ROOT, PACK_PATH));
   CONCEPT_IMG = await toB64(join(ROOT, CONCEPT));
 
+  // T-189-01 — the METERED critique-fires→clears proof (the anti-hedge attack, run not asserted): score the
+  // BROWN gable (apply_gable_roof) and the GREY gable (recolor_roof) by the SAME picture-critique, and report
+  // each build's ROOF-department items. The claim is fixable iff the ROOF colour/material item present on the
+  // brown build is ABSENT (or no longer a wrong-material `replace`) on the grey build. VOTES median, no re-ask.
+  if (process.env.ROOF_MATERIAL_DIAGNOSE === "1") {
+    const roofItems = (b) => b.items.filter((it) => it.department === "ROOF");
+    const fmt = (its) => its.length ? its.map((it) => `${it.severity}/${it.kind ?? "?"}: ${it.missing || it.present}`).join(" | ") : "(none)";
+    const allFmt = (b) => b.items.map((it) => `${it.department} ${it.severity}/${it.kind ?? "?"}: ${it.missing || it.present}`).join("\n      ");
+    const brown = await scoreBuild(apply_gable_roof(occ), template, 901, "brown");
+    const grey = await scoreBuild(recolor_roof(occ), template, 902, "grey");
+    console.error(`\n[ROOF_MATERIAL_DIAGNOSE]`);
+    console.error(`  brown gable (apply_gable_roof): score ${brown.score} (${brown.scores.join("/")}) nMajor=${brown.nMajor} depts=${brown.departments}`);
+    console.error(`    ROOF → ${fmt(roofItems(brown))}`);
+    console.error(`    ALL items:\n      ${allFmt(brown)}`);
+    console.error(`  grey  gable (recolor_roof):     score ${grey.score} (${grey.scores.join("/")}) nMajor=${grey.nMajor} depts=${grey.departments}`);
+    console.error(`    ROOF → ${fmt(roofItems(grey))}`);
+    console.error(`    ALL items:\n      ${allFmt(grey)}`);
+    return;
+  }
+
   const trajectory = [];
   const history = [];
   let prev = await scoreBuild(occ, template, 0, "seed");
