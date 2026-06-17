@@ -1,0 +1,50 @@
+[guard] assets present; GL available. subject=gatehouse azimuths=+x+z,+x-z,-x-z,-x+z votes=3 margin=4
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+
+[round 0] score=0 (12/0/0) → agent picks construct_walls: WALL is the first major divergence — the build reads dark/monotone where the concept shows light-grey coursed dressed-stone with rubble quoins. construct_walls rebuilds the envelope with per-storey stone material, dressed quoins, and dressed openings, which also partially addresses the missing OPENING divergences. Roof form is wrong too, but fixing walls first gives the gable tool a clean shell to crown.
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+[round 1] construct_walls: 0→8 (8/32/8) — KEPT (improved +8)
+           next: apply_gable_roof — ROOF is major/replace and the divergence names form — clean steep gable with one x-ridge — which is exactly what apply_gable_roof addresses; construct_walls was already kept, so the roof shape is now the worst unfixed divergence.
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+[round 2] apply_gable_roof: 8→60 (60/60/52) — KEPT (improved +52)
+           next: recolor_roof — The worst remaining divergence is ROOF COLOUR/MATERIAL — the roof reads as warm brown wood but the concept shows dark grey/charcoal. recolor_roof targets exactly this: rebuilding the roof in the concept-true material (dark grey stone) rather than the program's default timber.
+  [recolor_roof] timber dark_oak_planks → stone deepslate_tiles (concept reads stone)
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+Using version: 1.20.1
+[round 3] recolor_roof: 60→48 (52/40/48) — ROLLED BACK (regressed -12)
+           next: done — The worst remaining divergence is roof material/colour (brown wood → dark grey), which only recolor_roof addresses — but recolor_roof was rolled back. No remaining tool targets roof colour, and the minor eave/verge trim band has no dedicated tool either.
+
+================ PICTURE-DRIVEN CLIMB (gatehouse) ================
+trend: 0 → 0 → 8 → 60 → 60  (Δ +60; stop: agent-done)
+verdict: climbed=true stalled=false oscillated=false actionable=0.667
+acted-on: WALL, OPENING, ROOF
+eyes-only (named, no lever): (none)
+wrote /Volumes/ext1/swe/repos/mc-design-eval/docs/active/work/T-190-01/trajectory.json + per-round beside renders under builds/gatehouse/picture-climb/
+==================================================================
