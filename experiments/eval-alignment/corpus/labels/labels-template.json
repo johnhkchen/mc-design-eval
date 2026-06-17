@@ -1,0 +1,93 @@
+{
+  "schema": "eval-alignment/style-labels-human/v1",
+  "instructions": [
+    "HUMAN LABELING — one rater (one-person panel for now). For each pair open instrument/<id>.png:",
+    "the LEFT half is state A beside ITS concept, the RIGHT half is state B beside ITS concept.",
+    "Set humanLabel to which build MORE FAITHFULLY realizes ITS OWN concept image:",
+    "  \"A\" (left more faithful), \"B\" (right more faithful), or \"tie\" (genuinely rank-either-way).",
+    "Judge the GLANCE — does the build look like its picture? — not block-level material agreement.",
+    "When done, save this file as labels.human.json in this directory; the agreement harness reads it as the GATE."
+  ],
+  "pairs": [
+    {
+      "id": "E1",
+      "bucket": "easy",
+      "a": "gh-match",
+      "b": "gh-samepack-classical",
+      "composite": "instrument/E1.png",
+      "rationale": "faithful rustic gatehouse (own concept) vs the same build judged against a CLASSICAL arc concept — obviously the match is more faithful.",
+      "intended": "A",
+      "humanLabel": ""
+    },
+    {
+      "id": "E2",
+      "bucket": "easy",
+      "a": "ct-match",
+      "b": "ct-samepack-gatehouse",
+      "composite": "instrument/E2.png",
+      "rationale": "faithful cottage (own concept) vs the same build against a GATEHOUSE concept — obvious.",
+      "intended": "A",
+      "humanLabel": ""
+    },
+    {
+      "id": "E3",
+      "bucket": "easy",
+      "a": "bn-match",
+      "b": "bn-cross",
+      "composite": "instrument/E3.png",
+      "rationale": "faithful barn (own concept) vs the same build against a COTTAGE concept — obvious.",
+      "intended": "A",
+      "humanLabel": ""
+    },
+    {
+      "id": "H1",
+      "bucket": "hardMiddle",
+      "a": "gh-match",
+      "b": "gh-mid-material",
+      "composite": "instrument/H1.png",
+      "rationale": "fully-faithful gatehouse vs the SAME build with the dark-oak roof swapped to warm spruce — clearly worse, or a plausible wood-shingle either-way? The single-factor-material contestable pair.",
+      "intended": "A",
+      "humanLabel": ""
+    },
+    {
+      "id": "H2",
+      "bucket": "hardMiddle",
+      "a": "gh-mid-material",
+      "b": "gh-mid-gate",
+      "composite": "instrument/H2.png",
+      "rationale": "wrong roof MATERIAL (spruce vs dark timber) vs a MISSING dressing (unframed rectangular gate vs arched) — which partial defect costs more faithfulness? Genuinely rank-either-way.",
+      "intended": "tie",
+      "humanLabel": ""
+    },
+    {
+      "id": "H3",
+      "bucket": "hardMiddle",
+      "a": "gh-mid-gate",
+      "b": "gh-samepack-classical",
+      "composite": "instrument/H3.png",
+      "rationale": "a real-but-incomplete rustic gatehouse (gaping gate) vs a faithful build judged against a WRONG (classical) concept — does a partially-faithful gatehouse beat a fully-wrong-picture one? Contestable.",
+      "intended": "A",
+      "humanLabel": ""
+    },
+    {
+      "id": "H4",
+      "bucket": "hardMiddle",
+      "a": "ct-match",
+      "b": "ct-mid-plain",
+      "composite": "instrument/H4.png",
+      "rationale": "faithful half-timber cottage vs the same form with a PLAIN upper storey (missing the stud grammar) — clearly worse, or close?",
+      "intended": "A",
+      "humanLabel": ""
+    },
+    {
+      "id": "H5",
+      "bucket": "hardMiddle",
+      "a": "ct-mid-plain",
+      "b": "ct-samepack-gatehouse",
+      "composite": "instrument/H5.png",
+      "rationale": "a plain-but-real cottage vs a faithful cottage build against a WRONG (gatehouse) concept — does the incomplete-but-right-subject build beat the wrong-picture one? Contestable.",
+      "intended": "A",
+      "humanLabel": ""
+    }
+  ]
+}
