@@ -65,10 +65,11 @@ test("DG4 programBlock degrades to masses-only JSON when there is no reading sum
   assert.doesNotMatch(b, /undefined/);
 });
 
-test("DG5 the style profile GENUINELY differs between rustic and saltcrag (the within-family gradient)", () => {
-  // AC2 / the falsifiable claim: keying `expected` on the declared style makes the SAME build's
-  // expected roof/wall/opening differ under two styles. Proven deterministically on the INPUT the
-  // judge forms `expected` from — the two suites are not reskins.
+test("DG5 the style profile GENUINELY differs between rustic and saltcrag (the per-pack vocabulary)", () => {
+  // The pack's NAMING VOCABULARY still differs per pack (different materials/idioms) — the two suites
+  // are not reskins. NB (T-186-01 / E-47): this block is no longer the EXPECTED standard — the concept
+  // image is (DG8); it is the vocabulary the judge uses to NAME departures. The body differing per pack
+  // is what keeps that naming style-specific; it is not what the build "should read as".
   const r = styleProfileBlock({ pack: RUSTIC });
   const s = styleProfileBlock({ pack: SALTCRAG });
   assert.notEqual(r, s, "the two suites' expected grammar must differ");
@@ -157,4 +158,18 @@ test("DG7 a SECOND genuinely-different style (guildhall) critiques a rustic buil
     assert.doesNotMatch(g, new RegExp(subj));
   }
   assert.equal(styleProfileBlock({ pack: GUILDHALL }), g); // deterministic
+});
+
+test("DG8 the style block is framed as NAMING VOCABULARY, NOT the standard (T-186-01 / E-47 re-frame)", () => {
+  // The concept-image-conditioning fix: the pack block stops claiming the build "should read as" it —
+  // the CONCEPT IMAGE is the standard, the pack supplies vocabulary to NAME departures. This is the
+  // unit tripwire for the re-frame; the gate re-run (style-agreement-run.mjs) is the real proof.
+  const r = styleProfileBlock({ pack: RUSTIC });
+  assert.doesNotMatch(r, /should read as/, "the pack block must not be framed as what the build should read as");
+  assert.match(r, /NAMING VOCABULARY/, "the pack block is a naming vocabulary");
+  assert.match(r, /NOT the standard/i, "the block must say it is NOT the standard");
+  assert.match(r, /CONCEPT IMAGE is the standard/i, "the standard is the concept image");
+  // the body (the role→block / idiom lists) is untouched — the re-frame is the header only.
+  assert.match(r, /spruce_planks/);
+  assert.match(r, /timber-frame/);
 });

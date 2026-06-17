@@ -61,31 +61,36 @@ function DiagnoseBuild(
 ) -> Critique {
   client ClaudeStub
   prompt #"
-    You are diagnosing a Minecraft build against the concept it should read as. The style is
-    {{ style }}. The images are:
+    You are diagnosing a Minecraft build against the CONCEPT IMAGE it should look like. The declared
+    style is {{ style }}. The images are:
     {{ image_list }}
 
     {{ program_block }}
 
-    THE STYLE'S MATERIAL VOCABULARY (what the concept's blocks should be):
+    THE {{ style }} PACK'S MATERIAL NAMES (a vocabulary to DESCRIBE blocks — NOT the target):
     {{ palette_block }}
 
     {{ style_profile }}
 
-    Compare the build renders against the concept. Judge it against THIS STYLE'S grammar above — the
-    SAME build is correct under one style and wrong under another. For each CONSTRUCTION DEPARTMENT that diverges,
-    state one item: what the style calls for there (expected), what the build currently has (present,
-    empty if absent), and what is absent versus expected (missing, empty if nothing missing). Also
-    tag each item with its kind: add if the element is absent (present is empty), replace if
-    something is present but in the WRONG style/material, remove if an element is present that the
-    style does not want. CONCEPT-CONDITIONAL: if the build's present material is in the SAME style
-    family as what is expected — only a within-style DETAIL differs or is still missing — tag it
-    `add` (the missing detail), NOT `replace`; reserve `replace` for an element built in a
-    genuinely WRONG material/style versus what the concept calls for. Tag
-    each item with the department that owns it — one of: {{ departments }}. Judge element-level
-    construction (material, covering, feature presence), NOT overall size or proportion. Name at most
-    {{ max_items }} items, the most divergent first; emit no item for a department that already reads
-    correctly.
+    THE STANDARD IS THE CONCEPT IMAGE, NOT THE VOCABULARY ABOVE. Compare the build renders against the
+    CONCEPT IMAGE: the expected roof / walls / openings are whatever the CONCEPT IMAGE shows there, NOT
+    whatever the pack vocabulary lists. A build that matches its concept image is CORRECT even if its
+    materials differ from the vocabulary; a build that does NOT match its concept image is WRONG even if
+    every material is drawn from it. The vocabulary above is only so you can NAME what you see.
+
+    For each CONSTRUCTION DEPARTMENT where the build renders diverge FROM THE CONCEPT IMAGE, state one
+    item: what the concept image shows there (expected), what the build currently has (present, empty if
+    absent), and what is absent versus the concept image (missing, empty if nothing missing). Tag each
+    item with its kind, judged build-render-vs-concept-image: add if the element the concept image shows
+    is absent (present is empty); replace if the build's element is built genuinely UNLIKE the concept
+    image (different form or material than the PICTURE shows); remove if an element is present that the
+    concept image does not show. CONCEPT-CONDITIONAL: if the build's element already reads like the
+    concept image and only a within-picture DETAIL differs or is still missing, tag it `add` (the
+    missing detail), NOT `replace`; reserve `replace` for an element that does not look like the concept
+    image at all. Tag each item with the department that owns it — one of: {{ departments }}. Judge
+    element-level construction (material, covering, feature presence) AS THE CONCEPT IMAGE SHOWS IT, NOT
+    overall size or proportion. Name at most {{ max_items }} items, the most divergent first; emit no
+    item for a department that already reads like the concept image.
 
     {{ ctx.output_format }}
     {{ concept }}

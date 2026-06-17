@@ -41,18 +41,21 @@ export function programBlock({ program }) {
 }
 
 /**
- * The per-STYLE construction-grammar block — the `expected` PROFILE the Layer-A judge selects by the
- * declared style (T-165-01, story S-165, epic E-39). This is what makes the SAME build yield a
- * DIFFERENT expected roof/wall/opening under two styles — the within-family gradient the scalar eval
- * lacked. DERIVED from the pack (the single source of style truth — never a hand-listed per-style or
- * per-subject table): roof/wall/opening MATERIALS from the palette roles, and the available CONSTRUCTION
- * idioms bucketed by `departmentOf` (the same idiom→department authority Layer B routes on). Editing the
- * pack updates the profile; there is no second source to drift. Element grammar only — NO proportion,
- * NO massing, NO verdict (the Layer A contract). PURE.
+ * The per-STYLE NAMING-VOCABULARY block — the pack's materials & idioms the Layer-A judge uses to
+ * DESCRIBE what it sees, NOT the standard it grades against (T-186-01, story S-186, epic E-47 —
+ * concept-image-conditioning). E-39/T-165-01 originally framed this as the pack-derived `expected`
+ * GRAMMAR; the E-46 gate (T-185-01) proved that made the term PACK-DRIVEN — it scored pack-material
+ * agreement, not picture resemblance. The standard is now the CONCEPT IMAGE (the prompt anchors
+ * `expected` on the picture); this block supplies only the vocabulary to NAME departures. It still
+ * differs per pack (different materials/idioms), so the within-pack vocabulary is real — but it is no
+ * longer the thing the build "should read as". DERIVED from the pack (the single source — never a
+ * hand-listed per-style or per-subject table): roof/wall/opening MATERIALS from the palette roles, and
+ * the CONSTRUCTION idioms bucketed by `departmentOf`. Element vocabulary only — NO proportion, NO
+ * massing, NO verdict (the Layer A contract). PURE.
  *
  * @param {object} args
  * @param {object} args.pack  a validated style pack (palette roles + idioms + proportions)
- * @returns {string} the multi-line grammar block for the prompt's `style_profile` input
+ * @returns {string} the multi-line vocabulary block for the prompt's `style_profile` input
  */
 export function styleProfileBlock({ pack }) {
   const palette = pack?.palette ?? [];
@@ -68,7 +71,7 @@ export function styleProfileBlock({ pack }) {
   const dept = (d) => idioms.filter((n) => departmentOf(n) === d).sort().join(", ") || "none";
   const pitch = JSON.stringify(pack?.proportions?.pitchClasses ?? []);
   return [
-    `THE STYLE'S CONSTRUCTION GRAMMAR (what a ${pack?.style ?? "?"} build's roof / walls / openings should read as — element construction, not size):`,
+    `THE ${pack?.style ?? "?"} PACK'S NAMING VOCABULARY (materials & idioms available to DESCRIBE the build and its concept — NOT the standard; the CONCEPT IMAGE is the standard. A build that matches its concept image is correct even if its materials differ from this list):`,
     `- ROOF: materials ${materials("roof")}; covering idioms ${dept("ROOF")}; pitch classes ${pitch}.`,
     `- WALLS: materials ${materials("wall", "frame")}; construction idioms ${dept("WALL")}.`,
     `- OPENINGS: materials ${materials("door", "window", "opening")}; treatment idioms ${dept("OPENING")}.`,
@@ -82,8 +85,10 @@ export function styleProfileBlock({ pack }) {
  * captured golden by the fixture test (FX-DB1).
  *
  * @param {object} args
- * @param {object} args.program  a recognized building-program/v1 (the diagnosis grounding — masses + reading)
- * @param {object} args.pack  a validated style pack (the material vocabulary + style name)
+ * @param {object} args.program  a recognized building-program/v1 (the FORM grounding — masses + reading)
+ * @param {object} args.pack  a validated style pack — supplies the NAMING VOCABULARY only (materials +
+ *   idioms + style name to label departures); the CONCEPT IMAGE is the standard the build is graded
+ *   against (T-186-01 / E-47 — the term reads the picture, not the pack)
  * @param {string[]} args.azimuths  the render azimuths, in image order (the fixed gate lens)
  * @param {number} [args.maxItems]  the per-diagnosis item cap
  * @returns {{style:string, image_list:string, program_block:string, palette_block:string, style_profile:string, departments:string, max_items:number}}
