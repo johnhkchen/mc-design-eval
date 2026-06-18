@@ -21,14 +21,6 @@ import { occupancyFromCells } from "./occupancy.mjs";
 
 const NB4 = [[1, 0], [-1, 0], [0, 1], [0, -1]];
 
-/**
- * Percentile to trim a thin PROUD detail fringe before measuring form-readiness closure. relief's quoin
- * tips (depth 2) + plinth (depth 1) stand 1–2 cells OUTSIDE the wall plane; left in, they make the band
- * bbox an oversized near-empty rectangle. This lands inside (fringe% ≈ 2, full-wall-side% ≈ 25) on every
- * realistic footprint, so it peels the sparse fringe but never a wall face. T-202-01 (S-202, E-52).
- */
-export const PROUD_TRIM = 0.05;
-
 /** Dilate a "x,z" column set by a Manhattan ball of radius r. */
 function dilate(set, r) {
   const o = new Set();
@@ -278,26 +270,32 @@ function bandHistogram(occ, floor, eaveY, ns) {
  * AND the form-before-detail ordering gate consumes (T-197-01) — no drift between "what closed" and "what the
  * gate tests". Returns 0 on an empty/absent band (a build with no wall band is not form-ready). PURE.
  *
- * INVARIANT TO PROUD DETAIL (T-202-01, S-202, E-52). relief's sparse quoin tips (depth 2) + plinth (depth 1)
- * stand OUTSIDE the wall plane; folding every band column into one bbox let them define an oversized,
- * near-empty rectangle and crater closure (1.000 → 0.068 on the T-201 gatehouse though the shell was
- * physically intact — the climb's form gate then turned on the build). So clamp the band columns to a robust
- * footprint (`robustExtent` trims the thin outlier fringe) BEFORE `closureOf`, measuring the dense ring not
- * the proud fringe. A genuine reopening still reads low — the proud plinth is emitted only in front of
- * existing exterior cells (so it mirrors the wall's holes), and the corners hold the bbox so a missing face
- * stays a visible empty edge. Reuses the ONE closure authority (`closureOf`); no new metric.
+ * MEASURED ON THE ABSOLUTE PROGRAM FOOTPRINT (T-206-01, S-206, E-53; supersedes the T-202 plane clamp).
+ * When the recognition `program` is supplied, register its `masses[].rect` to the build frame
+ * (`registerRect` — the SAME authority `closeShell` builds its dense ring from) and measure closure on that
+ * footprint: a footprint-perimeter column with NO wall cell reads OPEN (so the colonnade's distributed gaps
+ * crater it — exactly what the form gate must see); a cell PROUD of the footprint sits OFF the ring and is
+ * ignored (relief never craters it). This distinguishes *missing inside the footprint* (open) from *extra
+ * outside it* (fine) — which the T-202 `robustExtent` clamp conflated: trimming the perimeter extremes to
+ * forgive proud relief ALSO absorbed the colonnade's gaps, so an open colonnade read 0.980 = form-ready and
+ * close_shell was never picked (the E-52 capstone stall). Reuses the ONE closure authority (`closureOf`'s
+ * present/perimeter ratio); no new metric. `coverageFloor` gates registration trust (mirrors `closeShell`);
+ * `ambiguous` is IGNORED (a near-square axis tie gives the same square ring — the gatehouse case). Below
+ * trust, or with no program, falls back to the raw band-perimeter `closureOf` (honest about colonnades,
+ * proud-sensitive — the degenerate path; the real runner always has a program).
  *
  * CLOSURE-EXCEPT-APERTURE (T-203-01, S-203, E-52). `openCols` = the DECLARED-OPEN aperture columns (the
- * wide-arch rebuild's through-tunnel). A perimeter slot that is a declared-open column counts as SATISFIED:
- * it is intentionally open, not a hole. So once the gate is rebuilt, the plane metric reads ~1 again and the
+ * wide-arch rebuild's through-tunnel). A footprint slot that is a declared-open column counts as SATISFIED:
+ * it is intentionally open, not a hole. So once the gate is rebuilt, the metric reads ~1 again and the
  * climb's form gate stays satisfied instead of triggering close_shell (which would re-fill — and destroy —
- * the gate). Default `openCols=∅` ⇒ byte-identical to the T-202 metric (only columns the rebuild actually
- * opened are forgiven, so a genuine reopening still reads low). Reuses `closureOf`'s exact perimeter math.
+ * the gate). Default `openCols=∅` ⇒ only columns the rebuild actually opened are forgiven, so a genuine
+ * reopening still reads low.
  * @param {import("./occupancy.mjs").Occupancy} occ
- * @param {{floor?:number, eaveY:number, openCols?:Set<string>}} params  eaveY required; floor defaults to
- *   occ.bounds.min[1]; openCols default ∅ (no aperture forgiven)
+ * @param {{floor?:number, eaveY:number, openCols?:Set<string>, program?:object, coverageFloor?:number}} params
+ *   eaveY required; floor defaults to occ.bounds.min[1]; openCols default ∅; program default none (→ raw
+ *   fallback); coverageFloor default 0.5 (registration trust floor, as in closeShell)
  */
-export function eaveRingClosure(occ, { floor, eaveY, openCols } = {}) {
+export function eaveRingClosure(occ, { floor, eaveY, openCols, program, coverageFloor = 0.5 } = {}) {
   if (!occ?.bounds) return 0;
   if (eaveY === undefined) throw new Error("eaveRingClosure: eaveY required");
   const f = floor ?? occ.bounds.min[1];
@@ -308,14 +306,19 @@ export function eaveRingClosure(occ, { floor, eaveY, openCols } = {}) {
     cols.add(`${x},${z}`);
   }
   if (cols.size === 0) return 0;
-  // Clamp to the robust wall-plane footprint (drop the sparse proud fringe), then measure the dense ring.
-  const ext = robustExtent(cols, { pLo: PROUD_TRIM, pHi: 1 - PROUD_TRIM });
-  const footprint = new Set();
-  for (const c of cols) {
-    const [x, z] = c.split(",").map(Number);
-    if (x >= ext.x0 && x <= ext.x1 && z >= ext.z0 && z <= ext.z1) footprint.add(c);
+  // ABSOLUTE FOOTPRINT: register the recognized program rect to the build frame; measure the fraction of
+  // that footprint-perimeter the real wall cells back (forgiving declared-open cols). Proud cells are off
+  // the ring → ignored; colonnade gaps land on the ring → open. `ambiguous` is immaterial (square ring).
+  const reg = program?.masses?.some((m) => m?.rect) ? registerRect(program.masses, cols) : null;
+  if (reg && reg.coverage >= coverageFloor) {
+    const ring = reg.ring;
+    if (ring.size === 0) return 0;
+    let present = 0;
+    for (const c of ring) if (cols.has(c) || openCols?.has(c)) present++;
+    return present / ring.size;
   }
-  const ring = perimeterColumns(footprint);
+  // FALLBACK (no program / registration below trust): the raw band-perimeter closure, no clamp.
+  const ring = perimeterColumns(cols);
   if (!openCols || openCols.size === 0 || ring.size === 0) return closureOf(ring);
   // closure-EXCEPT-aperture: reproduce closureOf's present/perimeter ratio, forgiving the declared-open cols.
   const per = perimeterColumns(filledRect(bboxOf(ring)));
@@ -360,7 +363,9 @@ export function closeShell(occ, params = {}) {
   const ns = (b) => (b && b.startsWith("minecraft:") ? b : `minecraft:${wallField}`);
 
   const { cols, localFill } = bandHistogram(occ, floor, eaveY, ns);
-  const closureBefore = cols.size ? closureOf(perimeterColumns(cols)) : 0;
+  // Report closure through the SAME footprint metric the form gate reads (T-206-01) — so closeShell's
+  // internal measure and the gate agree byte-for-byte (the two-numbers-disagree bug is structurally closed).
+  const closureBefore = cols.size ? eaveRingClosure(occ, { floor, eaveY, program: params.program, coverageFloor }) : 0;
   if (cols.size === 0) return { occ, report: { closed: false, closureBefore, closureAfter: closureBefore, ringSize: 0, coverage: null, axis: null, reason: "no wall band to close" } };
 
   const reg = params.program?.masses?.some((m) => m?.rect) ? registerRect(params.program.masses, cols) : null;
@@ -396,7 +401,7 @@ export function closeShell(occ, params = {}) {
     cellList.push({ pos: k.split(",").map(Number), block: b, form: occ.forms.get(k), state: occ.states.get(k) });
   }
   const out = occupancyFromCells(cellList);
-  const closureAfter = eaveRingClosure(out, { floor, eaveY });
+  const closureAfter = eaveRingClosure(out, { floor, eaveY, program: params.program, coverageFloor });
   return { occ: out, report: { closed: true, closureBefore, closureAfter, ringSize: ring.size,
     coverage: reg.coverage, axis: reg.axis, reason: `dense shell from program footprint: closure ${closureBefore.toFixed(3)} → ${closureAfter.toFixed(3)} (${reg.reason})` } };
 }

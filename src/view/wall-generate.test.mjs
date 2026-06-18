@@ -6,10 +6,10 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
-import { occupancyFromCells } from "./occupancy.mjs";
-import { closeColumns, perimeterColumns, spaceOpenings, constructWalls, robustExtent, coverageOf, registerRect, closureOf, closeShell, eaveRingClosure, PROUD_TRIM } from "./wall-generate.mjs";
+import { occupancyFromCells, artifactOccupancy } from "./occupancy.mjs";
+import { closeColumns, perimeterColumns, spaceOpenings, constructWalls, robustExtent, coverageOf, registerRect, closureOf, closeShell, eaveRingClosure } from "./wall-generate.mjs";
 import { buildWallRelief } from "./wall-relief.mjs";
-import { FORM_READY_CLOSURE } from "../workshop/climb-gate.mjs";
+import { FORM_READY_CLOSURE, formReadyGate } from "../workshop/climb-gate.mjs";
 
 const setOf = (...cs) => new Set(cs);
 /** A hollow rectangular ring (perimeter columns only) over [x0,x1]×[z0,z1], stacked floor..eave. */
@@ -372,15 +372,15 @@ function naiveBandClosure(occ, eaveY) {
 // wall-plane metric clears the same 0.9 the gate uses.
 test("WG-CS6 relief_walls on a closed shell stays form-ready (proud detail no longer craters closure)", () => {
   const occ = closedGatehouse();
-  assert.equal(eaveRingClosure(occ, { floor: 0, eaveY: T202_EAVE }), 1, "the bare closed ring is watertight");
+  assert.equal(eaveRingClosure(occ, { floor: 0, eaveY: T202_EAVE, program: T202_PROGRAM }), 1, "the bare closed ring is watertight");
   const r = buildWallRelief(occ, { program: T202_PROGRAM, pack: T202_PACK, floor: 0, eaveY: T202_EAVE });
   // the real T-201 proud geometry: 224 proud quoin cells emitted (provenance pin)
   assert.equal(r.report.byLayer.corners.placed, 224, "real relief emits the T-201 quoin count");
   assert.ok(r.report.byLayer.base.placed > 0, "and a proud plinth course");
   // a NAIVE band-column closure craters on the proud fringe (the documented 1.000 → 0.068 failure)…
   assert.ok(naiveBandClosure(r.occ, T202_EAVE) < 0.2, "naive measure is cratered by the proud fringe (the bug)");
-  // …but the wall-plane metric stays form-ready (≥ the gate's threshold). No re-pin of 0.9 needed.
-  const c = eaveRingClosure(r.occ, { floor: 0, eaveY: T202_EAVE });
+  // …but the FOOTPRINT metric (T-206) ignores the off-ring proud cells and stays form-ready (≥ threshold).
+  const c = eaveRingClosure(r.occ, { floor: 0, eaveY: T202_EAVE, program: T202_PROGRAM });
   assert.ok(c >= FORM_READY_CLOSURE, `relief-on-closed reads form-ready (got ${c} ≥ ${FORM_READY_CLOSURE})`);
 });
 
@@ -389,19 +389,18 @@ test("WG-CS6 relief_walls on a closed shell stays form-ready (proud detail no lo
 test("WG-CS7 a reopened shell reads OPEN even after relief (the over-correction guard)", () => {
   const drop = ["3,0", "4,0", "5,0", "6,0", "7,0", "8,0", "9,0", "10,0", "11,0"]; // a straight run dropped on one face
   const openOcc = closedGatehouse({ drop });
-  const closedC = eaveRingClosure(closedGatehouse(), { floor: 0, eaveY: T202_EAVE });
-  const bareC = eaveRingClosure(openOcc, { floor: 0, eaveY: T202_EAVE });
+  const closedC = eaveRingClosure(closedGatehouse(), { floor: 0, eaveY: T202_EAVE, program: T202_PROGRAM });
+  const bareC = eaveRingClosure(openOcc, { floor: 0, eaveY: T202_EAVE, program: T202_PROGRAM });
   assert.ok(bareC < FORM_READY_CLOSURE, `bare reopened shell is not form-ready (got ${bareC})`);
   const ro = buildWallRelief(openOcc, { program: T202_PROGRAM, pack: T202_PACK, floor: 0, eaveY: T202_EAVE }).occ;
-  const reliefC = eaveRingClosure(ro, { floor: 0, eaveY: T202_EAVE });
+  const reliefC = eaveRingClosure(ro, { floor: 0, eaveY: T202_EAVE, program: T202_PROGRAM });
   assert.ok(reliefC < FORM_READY_CLOSURE, `relief did not mask the hole (got ${reliefC})`);
   assert.ok(reliefC < closedC, "reopened+relief reads strictly below closed+relief");
 });
 
-// WG-CS8: the robust trim is a NO-OP on proud-free rings — the existing closure readings are byte-identical,
-// so the percentile never bites a real wall face (no regression to the T-197 metric).
-test("WG-CS8 robust trim is a no-op on proud-free rings (no regression)", () => {
-  assert.ok(PROUD_TRIM > 0 && PROUD_TRIM < 0.25, "trim sits inside (fringe%, wall-side%)");
+// WG-CS8: the no-program fallback is the raw band perimeter (no clamp); on proud-free rings the readings
+// are byte-identical to the T-197 metric (the T-202 clamp was a documented no-op here — now removed, T-206).
+test("WG-CS8 no-program fallback is the raw band perimeter; proud-free readings unchanged", () => {
   const clean7 = ringOcc({ x0: 0, x1: 6, z0: 0, z1: 6, floor: 0, eave: 4 });
   assert.equal(eaveRingClosure(clean7, { floor: 0, eaveY: 4 }), 1, "clean 7×7 still 1");
   const gappy7 = ringOcc({ x0: 0, x1: 6, z0: 0, z1: 6, floor: 0, eave: 4, drop: ["1,0", "2,0", "3,0", "4,0", "5,0"] });
@@ -431,4 +430,61 @@ test("WG-CS9 eaveRingClosure: a declared-open aperture swath is forgiven by open
   // and openCols for a different swath has NO effect on this build (the z=0 cols are present anyway)
   assert.equal(eaveRingClosure(realHole, { floor: 0, eaveY: 5, openCols }),
     eaveRingClosure(realHole, { floor: 0, eaveY: 5 }), "forgiving an absent swath changes nothing here");
+});
+
+// ============== T-206-01 — form-readiness on the ABSOLUTE PROGRAM FOOTPRINT (S-206, E-53) ==============
+// The lead fix. T-202's robustExtent clamp absorbed the colonnade's distributed gaps → the real open
+// gatehouse seed read 0.980 = form-ready, so close_shell was never picked (the E-52 capstone stall). The
+// footprint metric reads the SAME seed open (~0.61), a closed shell + proud relief ≥0.9, a reopened shell
+// <0.9, and AGREES with close_shell's internal measure. Fixtures are the REAL gatehouse seed + the real
+// relief geometry (not the T-202 review's synthetic one-segment drop — the Notes' explicit caution).
+const T206_EAVE = 18;
+const T206_SEED = artifactOccupancy(JSON.parse(readFileSync(join(T202_ROOT, "benchmarks/sculpture/generated/gatehouse/artifact.json"), "utf8")));
+
+// WG-CS10: the REAL colonnade seed reads ~0.6 (< 0.9) on the footprint metric (was 0.980 under the clamp).
+test("WG-CS10 the colonnade seed reads ~0.6 (<0.9) on the program footprint", () => {
+  const c = eaveRingClosure(T206_SEED, { floor: T206_SEED.bounds.min[1], eaveY: T206_EAVE, program: T202_PROGRAM });
+  assert.ok(Math.abs(c - 0.608) < 0.02, `colonnade seed footprint reads ~0.608 (got ${c.toFixed(4)})`);
+  assert.ok(c < FORM_READY_CLOSURE, `the open colonnade is NOT form-ready (got ${c.toFixed(4)})`);
+});
+
+// WG-CS11: a closed shell + proud relief (224 quoins + plinth, the T-201 counts) reads ≥ 0.9 — proud cells
+// sit off the footprint ring and are ignored, so detail does not crater the form gate.
+test("WG-CS11 closed shell + proud relief reads form-ready (≥0.9) — proud cells ignored", () => {
+  const r = buildWallRelief(closedGatehouse(), { program: T202_PROGRAM, pack: T202_PACK, floor: 0, eaveY: T206_EAVE });
+  assert.equal(r.report.byLayer.corners.placed, 224, "the real T-201 proud quoin count");
+  const c = eaveRingClosure(r.occ, { floor: 0, eaveY: T206_EAVE, program: T202_PROGRAM });
+  assert.ok(c >= FORM_READY_CLOSURE, `closed+relief is form-ready (got ${c.toFixed(4)})`);
+});
+
+// WG-CS12: a genuinely reopened closed shell reads < 0.9 — footprint-perimeter columns with no wall cell
+// read OPEN, so the metric is not fooled by an intact-looking band.
+test("WG-CS12 a reopened closed shell reads OPEN (<0.9) on the footprint", () => {
+  const drop = ["3,0", "4,0", "5,0", "6,0", "7,0", "8,0", "9,0", "10,0", "11,0"];
+  const c = eaveRingClosure(closedGatehouse({ drop }), { floor: 0, eaveY: T206_EAVE, program: T202_PROGRAM });
+  assert.ok(c < FORM_READY_CLOSURE, `the reopened shell is not form-ready (got ${c.toFixed(4)})`);
+  assert.ok(Math.abs(c - 0.839) < 0.02, `reads ~0.839 on the 9-col drop (got ${c.toFixed(4)})`);
+});
+
+// WG-CS13: AGREEMENT — the metric's seed reading EQUALS close_shell's internal closureBefore (both now
+// route through the footprint metric), closing the two-numbers-disagree bug (was 0.980 vs 0.615).
+test("WG-CS13 the seed reading equals close_shell's internal closureBefore (agreement)", () => {
+  const floor = T206_SEED.bounds.min[1];
+  const metric = eaveRingClosure(T206_SEED, { floor, eaveY: T206_EAVE, program: T202_PROGRAM });
+  const { report } = closeShell(T206_SEED, { program: T202_PROGRAM, floor, eaveY: T206_EAVE });
+  assert.equal(metric, report.closureBefore, "the gate metric and close_shell's measure read the SAME number");
+  assert.ok(metric < FORM_READY_CLOSURE && report.closureBefore < FORM_READY_CLOSURE, "both agree the seed is OPEN");
+});
+
+// WG-CS14: the form-before-detail gate fires correctly on the real readings — detail BLOCKED on the open
+// seed (close_shell forced), ALLOWED on the closed+relief shell.
+test("WG-CS14 formReadyGate gates correctly on the real footprint readings", () => {
+  const floor = T206_SEED.bounds.min[1];
+  const seedC = eaveRingClosure(T206_SEED, { floor, eaveY: T206_EAVE, program: T202_PROGRAM });
+  const reliefC = eaveRingClosure(
+    buildWallRelief(closedGatehouse(), { program: T202_PROGRAM, pack: T202_PACK, floor: 0, eaveY: T206_EAVE }).occ,
+    { floor: 0, eaveY: T206_EAVE, program: T202_PROGRAM });
+  assert.equal(formReadyGate({ tool: "relief_walls", closure: seedC }).allow, false, "detail BLOCKED on the open seed");
+  assert.equal(formReadyGate({ tool: "close_shell", closure: seedC }).allow, true, "close_shell is always eligible");
+  assert.equal(formReadyGate({ tool: "relief_walls", closure: reliefC }).allow, true, "detail ALLOWED on the closed+relief shell");
 });
