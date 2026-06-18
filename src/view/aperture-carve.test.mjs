@@ -37,10 +37,10 @@ function closedBoxWithSlot({ slotZ = 3, slotYLo = 1, slotYHi = 4 } = {}) {
 
 const BAND = { floor: 0, eaveY: 6 };
 
-// ---- AC1: carveTargetCells widens the slot, centred, at the wall plane; only solid removed ----
-test("AC1 carveTargetCells widens the declared slot to T, centred, removing only wall", () => {
+// ---- AC1: carveTargetCells widens the slot, centred, at the wall plane (depth:"plane"); only solid removed ----
+test("AC1 carveTargetCells widens the declared slot to T, centred, removing only wall (plane)", () => {
   const { occ, aperture } = closedBoxWithSlot();
-  const { remove, target, widenedRegion } = carveTargetCells(occ, aperture, { programW: 4, scale: 1 });
+  const { remove, target, widenedRegion } = carveTargetCells(occ, aperture, { programW: 4, scale: 1, depth: "plane" });
   assert.equal(target.width, 5, "programW 4 clamps up to minArchWidth 5");
   assert.equal(target.uLo, 1); assert.equal(target.uHi, 5); // centred on z=3
   assert.equal(target.wStar, 0, "wall plane is x=0");
@@ -55,6 +55,15 @@ test("AC1 carveTargetCells widens the declared slot to T, centred, removing only
   // the slot column (z=3) was already air → not in remove; the four flanking columns are
   assert.ok(![...remove].some((k) => k.split(",")[2] === "3"), "the existing slot air is not re-removed");
   assert.equal([...remove].filter((k) => k.split(",")[2] === "1").length, 4, "z=1 column (4 cells) carved");
+});
+
+// ---- AC1b: the DEFAULT carve is a TUNNEL — it removes the full passage depth (both faces), region spans w ----
+test("AC1b the default tunnel carve removes the full passage depth", () => {
+  const { occ, aperture } = closedBoxWithSlot();
+  const { remove, target, widenedRegion } = carveTargetCells(occ, aperture, { programW: 4, scale: 1 });
+  assert.equal(widenedRegion.min[0], 0); assert.equal(widenedRegion.max[0], 6); // full x-depth
+  const xs = new Set([...remove].map((k) => Number(k.split(",")[0])));
+  assert.ok(xs.has(0) && xs.has(6), "both the near and far wall are carved (a through-passage)");
 });
 
 // ---- AC2: the gate PASSES a clean carve — scope, coherent, closure all ok ----
@@ -92,14 +101,15 @@ test("AC3 apertureCoherenceGate rejects a ragged carve (notched + multi-componen
 test("AC4 apertureCoherenceGate rejects a carve that leaks outside the declared aperture", () => {
   const { occ, aperture } = closedBoxWithSlot();
   const { remove, target } = carveTargetCells(occ, aperture, { programW: 4, scale: 1 });
-  // a clean carve PLUS one removed cell on the +x wall (x=6, well outside the −x aperture region)
+  // a clean carve PLUS one removed cell on the z=0 wall (z=0 is outside the aperture's z∈[1..5] span — a
+  // genuine NON-aperture surface, regardless of the tunnel's full x-depth region)
   const leaky = carveAperture(occ, remove);
   const cells = [];
-  for (const [k, b] of leaky.cells) if (k !== "6,3,3") cells.push({ pos: k.split(",").map(Number), block: b });
+  for (const [k, b] of leaky.cells) if (k !== "3,3,0") cells.push({ pos: k.split(",").map(Number), block: b });
   const after = occupancyFromCells(cells);
   const gate = apertureCoherenceGate(occ, after, target, BAND);
-  assert.equal(gate.scope.ok, false, "the +x removal must be flagged as a leak");
-  assert.ok(gate.scope.leaked.includes("6,3,3"));
+  assert.equal(gate.scope.ok, false, "the z=0 removal must be flagged as a leak");
+  assert.ok(gate.scope.leaked.includes("3,3,0"));
   assert.equal(gate.ok, false);
   assert.match(gate.reason, /leaked outside/);
 });
