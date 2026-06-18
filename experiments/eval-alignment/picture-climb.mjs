@@ -78,6 +78,7 @@ const AGENT_MODEL = "claude-sonnet-4-6";
 const { margin, stallK, maxRounds, minRounds } = CLIMB_DEFAULTS;
 const GUARD_ONLY = process.env.GUARD_ONLY === "1";
 const ROOF_MATERIAL_PROBE = process.env.ROOF_MATERIAL_PROBE === "1"; // T-189-01: render the brown→grey roof glance, zero spend
+const REBUILD_ARCH_PROBE = process.env.REBUILD_ARCH_PROBE === "1"; // T-203-01: render the wide-arch rebuild glance + gate numbers, zero spend
 
 const median = (xs) => [...xs].sort((a, b) => a - b)[Math.floor(xs.length / 2)];
 const toB64 = async (p) => {
@@ -621,6 +622,31 @@ async function main() {
     const synth = gableRidgeForRatio({ eaveY: CFG.eaveY, eaveHeight, perp: perpC, targetRatio: 1.1 });
     console.error(`[T-204 LEVER] synthetic out-of-tol target 1.1: changed=${synth.changed} ${synth.reason} → lever exists and moves the ratio on demand.`);
     console.error(`[ROOF_MATERIAL_PROBE] done; exiting clean.`);
+    return;
+  }
+
+  // T-203-01 — the WIDE-ARCH REBUILD glance (render-independent of any LLM spend): close the shell, gable it,
+  // then rebuild the gate. Prints the carve + arch-aware coherence + closure-EXCEPT-aperture numbers and
+  // renders the rebuilt build beside the concept. The falsifiable deliverable (a wide arched gate that PASSES
+  // the gate carve_arch could not) without the metered climb.
+  if (REBUILD_ARCH_PROBE) {
+    const outDir = join(ROOT, `builds/${SUBJECT}/picture-climb/rebuild-arch`);
+    await mkdir(outDir, { recursive: true });
+    const eaveY = CFG.eaveY;
+    const closed = close_shell(occ);
+    const gabled = apply_gable_roof(closed);
+    const cBeforeAll = eaveRingClosure(gabled, { floor: gabled.bounds.min[1], eaveY });
+    console.error(`\n[T-203 REBUILD] closed+gabled wall-plane closure: ${cBeforeAll.toFixed(3)}`);
+    const rebuilt = rebuild_arch(gabled); // logs width/carved/framed/arched/sill/voussoir + the gate verdict
+    const kept = rebuilt !== gabled && pendingRebuildCols; // the hand returned a gate-OK dressed build
+    const aperCols = pendingRebuildCols ?? new Set();
+    const cBare = eaveRingClosure(rebuilt, { floor: rebuilt.bounds.min[1], eaveY });
+    const cExcept = eaveRingClosure(rebuilt, { floor: rebuilt.bounds.min[1], eaveY, openCols: aperCols });
+    console.error(`[T-203 REBUILD] gate ${kept ? "PASSED — wide arched gate kept" : "REFUTED — reverted to frame (named bound)"}`);
+    console.error(`[T-203 REBUILD] closure-except-aperture: bare ${cBare.toFixed(3)} (the gate swath reads as a hole) → with the ${aperCols.size} declared-open columns forgiven ${cExcept.toFixed(3)} ${cExcept >= FORM_READY_CLOSURE ? "✓ ≥ form-ready (close_shell will NOT re-fill the gate)" : "✗ still dips (S-202/S-203 coupling — named)"}`);
+    await renderBesideConcept(rebuildArtifact(gabled, template), join(ROOT, CONCEPT), join(outDir, "before-beside.png"), { label: "closed+gabled (no gate)" });
+    await renderBesideConcept(rebuildArtifact(rebuilt, template), join(ROOT, CONCEPT), join(outDir, "rebuilt-beside.png"), { label: "rebuild_arch (wide arched gate)" });
+    console.error(`[T-203 REBUILD] wrote before/rebuilt beside sheets to ${outDir}; no spend; exiting clean.`);
     return;
   }
 
