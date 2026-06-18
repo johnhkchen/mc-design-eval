@@ -41,6 +41,64 @@ export const SDK_PACKAGE = "@anthropic-ai/claude-agent-sdk";
 export const CLAUDE_CLI = process.env.CLAUDE_CLI || "claude";
 
 /**
+ * Typed error raised when a `claude -p` child exceeds its per-call wall-clock budget and is killed
+ * (T-198-01). A CLASS (not a string sniff) so a caller can branch its DEGRADE path cleanly —
+ * `e.code === "ETIMEDOUT_CLAUDE"` distinguishes an infra hang (drop the vote / abort the round) from a
+ * malformed reply (drop + proceed). Carries the budget that was exceeded.
+ */
+export class ClaudeTimeoutError extends Error {
+  /** @param {number} timeoutMs @param {string} cli */
+  constructor(timeoutMs, cli) {
+    super(`\`${cli} -p\` exceeded ${timeoutMs}ms wall-clock and was killed (non-returning subprocess)`);
+    this.name = "ClaudeTimeoutError";
+    this.code = "ETIMEDOUT_CLAUDE";
+    this.timeoutMs = timeoutMs;
+  }
+}
+
+/**
+ * Await a spawned child's terminal event with an optional WALL-CLOCK timeout (T-198-01). This is the one
+ * line that used to hang: the close-promise resolved ONLY on `error`/`close`, so a non-returning `claude -p`
+ * child wedged the whole runner forever. Now, if `timeoutMs > 0`, a timer fires, SIGKILLs the child, and
+ * rejects with {@link ClaudeTimeoutError}. Exactly one of {timeout, close, error} settles the promise (a
+ * latch); the timer is cleared on settle, so it never dangles past the call. Exported and dependency-free
+ * so it is UNIT-TESTABLE with a fake child (an EventEmitter + a `kill` spy + a tiny `timeoutMs`) — no
+ * `claude` spawn, no live hang (the test rule for this module).
+ * @param {import("node:child_process").ChildProcess} child
+ * @param {{ cli?: string, timeoutMs?: number }} [opts]
+ * @returns {Promise<number>} the child's exit code (resolves on `close`)
+ */
+export function awaitChildClose(child, { cli = CLAUDE_CLI, timeoutMs } = {}) {
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    let timer = null;
+    const settle = (fn, arg) => {
+      if (settled) return;
+      settled = true;
+      if (timer) clearTimeout(timer);
+      fn(arg);
+    };
+    if (timeoutMs && timeoutMs > 0) {
+      timer = setTimeout(() => {
+        try {
+          child.kill("SIGKILL");
+        } catch {
+          // a child that already exited / can't be signalled — the reject below still surfaces the timeout
+        }
+        settle(reject, new ClaudeTimeoutError(timeoutMs, cli));
+      }, timeoutMs);
+    }
+    child.on("error", (err) =>
+      settle(
+        reject,
+        new Error(`failed to launch \`${cli} -p\` (${err.message}) — is it installed/logged in?`),
+      ),
+    );
+    child.on("close", (code) => settle(resolve, code));
+  });
+}
+
+/**
  * The structured-output option for the Agent SDK alternative path: spread into
  * `query({ options })` to platform-enforce the schema. Unused by the default
  * `claude -p` path (the CLI cannot enforce it), but kept as the binding for the SDK
@@ -200,7 +258,7 @@ export function serializeStreamJsonInput(message) {
  * @param {{ args: string[], stdin: string, onMessage?: (m: object) => void }} params
  * @returns {Promise<{ artifact: import("./artifact.mjs").DesignArtifact, raw: object }>}
  */
-async function invokeClaude({ args, stdin, onMessage }) {
+async function invokeClaude({ args, stdin, onMessage, timeoutMs }) {
   const child = spawn(CLAUDE_CLI, args, { stdio: ["pipe", "pipe", "pipe"] });
   child.stdin.end(stdin);
 
@@ -232,17 +290,9 @@ async function invokeClaude({ args, stdin, onMessage }) {
     stderr += chunk.toString();
   });
 
-  const exitCode = await new Promise((resolve, reject) => {
-    child.on("error", (err) =>
-      reject(
-        new Error(
-          `failed to launch \`${CLAUDE_CLI} -p\` (${err.message}) — ` +
-            "is the Claude CLI installed and on PATH and logged in?",
-        ),
-      ),
-    );
-    child.on("close", (code) => resolve(code));
-  });
+  // Wall-clock guard (T-198-01): a non-returning child is SIGKILLed and surfaces a typed ClaudeTimeoutError
+  // instead of hanging the run. `timeoutMs` undefined ⇒ no timer ⇒ behaviour byte-unchanged.
+  const exitCode = await awaitChildClose(child, { timeoutMs });
   if (buf.trim()) handleLine(buf); // flush a final unterminated line
 
   if (result === null) {
@@ -289,7 +339,7 @@ async function invokeClaude({ args, stdin, onMessage }) {
  *   and per-turn usage. Must not mutate the message.
  * @returns {Promise<{ artifact: import("./artifact.mjs").DesignArtifact, raw: object }>}
  */
-export async function requestDesignArtifact({ prompt, model, effort, system, options = {}, onMessage, retries = 2 } = {}) {
+export async function requestDesignArtifact({ prompt, model, effort, system, options = {}, onMessage, retries = 2, timeoutMs } = {}) {
   void options; // reserved (see jsdoc); single-shot runs tool-free on the CLI path
   const args = ["-p", "--output-format", "stream-json", "--verbose"];
   if (model) args.push("--model", model);
@@ -308,7 +358,7 @@ export async function requestDesignArtifact({ prompt, model, effort, system, opt
             "Output ONLY the single JSON object — no prose, no 'Done', no explanation, no code fences.",
     );
     try {
-      return await invokeClaude({ args, stdin, onMessage });
+      return await invokeClaude({ args, stdin, onMessage, timeoutMs });
     } catch (e) {
       lastErr = e;
       if (!/re-validation|invalid_json|no structured payload|valid artifact/i.test(e.message)) throw e;
@@ -349,7 +399,7 @@ export async function requestDesignArtifact({ prompt, model, effort, system, opt
  * @returns {Promise<{ artifact: import("./artifact.mjs").DesignArtifact, raw: object }>}
  */
 export async function requestDesignArtifactWithImage(
-  { prompt, images, model, effort, system, options = {}, onMessage, retries = 2 } = {},
+  { prompt, images, model, effort, system, options = {}, onMessage, retries = 2, timeoutMs } = {},
 ) {
   void options; // reserved (see jsdoc); parity with the text path
   const args = [
@@ -376,7 +426,7 @@ export async function requestDesignArtifactWithImage(
           "Output ONLY the single JSON object — no prose, no 'Done', no explanation, no code fences.";
     const turn = buildImageTurn(p, images); // throws on missing/empty images, pre-spawn
     try {
-      return await invokeClaude({ args, stdin: serializeStreamJsonInput(turn), onMessage });
+      return await invokeClaude({ args, stdin: serializeStreamJsonInput(turn), onMessage, timeoutMs });
     } catch (e) {
       lastErr = e;
       if (!/re-validation|invalid_json|no structured payload|valid artifact/i.test(e.message)) throw e;
@@ -392,7 +442,7 @@ export async function requestDesignArtifactWithImage(
  * @param {{ args: string[], stdin: string, onMessage?: (m: object) => void }} p
  * @returns {Promise<{ result: object|null, exitCode: number, stderr: string }>}
  */
-async function _runClaude({ args, stdin, onMessage }) {
+async function _runClaude({ args, stdin, onMessage, timeoutMs }) {
   const child = spawn(CLAUDE_CLI, args, { stdio: ["pipe", "pipe", "pipe"] });
   child.stdin.end(stdin);
 
@@ -422,12 +472,10 @@ async function _runClaude({ args, stdin, onMessage }) {
   child.stderr.on("data", (c) => {
     stderr += c.toString();
   });
-  const exitCode = await new Promise((resolve, reject) => {
-    child.on("error", (e) =>
-      reject(new Error(`failed to launch \`${CLAUDE_CLI} -p\` (${e.message}) — is it installed/logged in?`)),
-    );
-    child.on("close", (c) => resolve(c));
-  });
+  // Wall-clock guard (T-198-01): a non-returning child is SIGKILLed and surfaces a typed ClaudeTimeoutError
+  // instead of hanging the run (the strong-tier diagnose hang this ticket exists to fix). `timeoutMs`
+  // undefined ⇒ no timer ⇒ behaviour byte-unchanged for every existing caller.
+  const exitCode = await awaitChildClose(child, { timeoutMs });
   if (buf.trim()) handleLine(buf);
   return { result, exitCode, stderr };
 }
@@ -457,12 +505,12 @@ function textOf(result, exitCode, stderr) {
  *   onMessage?: (m: object) => void }} params
  * @returns {Promise<{ text: string, raw: object }>}
  */
-export async function requestText({ prompt, model, effort, system, onMessage } = {}) {
+export async function requestText({ prompt, model, effort, system, onMessage, timeoutMs } = {}) {
   const args = ["-p", "--output-format", "stream-json", "--verbose"];
   if (model) args.push("--model", model);
   if (effort) args.push("--effort", String(effort));
   if (system) args.push("--system-prompt", system);
-  const { result, exitCode, stderr } = await _runClaude({ args, stdin: prompt, onMessage });
+  const { result, exitCode, stderr } = await _runClaude({ args, stdin: prompt, onMessage, timeoutMs });
   return { text: textOf(result, exitCode, stderr), raw: result };
 }
 
@@ -475,7 +523,7 @@ export async function requestText({ prompt, model, effort, system, onMessage } =
  *   effort?: string, system?: string, onMessage?: (m: object) => void }} params
  * @returns {Promise<{ text: string, raw: object }>}
  */
-export async function requestTextWithImage({ prompt, images, model, effort, system, onMessage } = {}) {
+export async function requestTextWithImage({ prompt, images, model, effort, system, onMessage, timeoutMs } = {}) {
   if (!Array.isArray(images) || images.length === 0) {
     throw new Error("requestTextWithImage: at least one image is required");
   }
@@ -489,6 +537,7 @@ export async function requestTextWithImage({ prompt, images, model, effort, syst
     args,
     stdin: serializeStreamJsonInput(turn),
     onMessage,
+    timeoutMs,
   });
   return { text: textOf(result, exitCode, stderr), raw: result };
 }

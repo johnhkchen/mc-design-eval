@@ -10,6 +10,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
+import { EventEmitter } from "node:events";
 import Ajv2020 from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
 import {
@@ -20,6 +21,8 @@ import {
   toImageBlock,
   buildImageTurn,
   serializeStreamJsonInput,
+  awaitChildClose,
+  ClaudeTimeoutError,
 } from "./sdk-binding.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -186,4 +189,79 @@ test("serializeStreamJsonInput is a single newline-terminated JSON line", () => 
   assert.ok(line.endsWith("\n"));
   assert.equal(line.trimEnd().includes("\n"), false);
   assert.deepEqual(JSON.parse(line), turn);
+});
+
+// --- awaitChildClose / ClaudeTimeoutError: the subprocess-timeout guard (T-198-01) -----------------------
+// The PURE/offline test of the guard: a FAKE child (an EventEmitter + a `kill` spy) and a tiny `timeoutMs`.
+// No `claude` is spawned, no live hang — the ticket's "unit/abstracted test … not a live hang."
+
+/** A minimal stand-in for a spawned ChildProcess: emits close/error on demand; records kill() calls. */
+class FakeChild extends EventEmitter {
+  constructor() {
+    super();
+    this.killCalls = [];
+  }
+  kill(signal) {
+    this.killCalls.push(signal);
+    return true;
+  }
+}
+
+test("awaitChildClose resolves with the exit code when the child closes (no timer, no kill)", async () => {
+  const child = new FakeChild();
+  const p = awaitChildClose(child, { timeoutMs: 5000 });
+  child.emit("close", 0);
+  assert.equal(await p, 0);
+  assert.deepEqual(child.killCalls, []); // closed first → never killed
+});
+
+test("awaitChildClose with no timeoutMs never arms a timer — resolves only on close", async () => {
+  const child = new FakeChild();
+  const p = awaitChildClose(child, {}); // no timeoutMs ⇒ default-off (byte-unchanged for existing callers)
+  // give the loop a tick; nothing should reject in the meantime
+  await new Promise((r) => setTimeout(r, 10));
+  child.emit("close", 3);
+  assert.equal(await p, 3);
+  assert.deepEqual(child.killCalls, []);
+});
+
+test("awaitChildClose times out a non-returning child: SIGKILL + typed ClaudeTimeoutError", async () => {
+  const child = new FakeChild(); // never emits close — the hang this guard exists to break
+  const err = await awaitChildClose(child, { timeoutMs: 20, cli: "claude" }).then(
+    () => { throw new Error("expected a timeout rejection"); },
+    (e) => e,
+  );
+  assert.ok(err instanceof ClaudeTimeoutError);
+  assert.equal(err.code, "ETIMEDOUT_CLAUDE");
+  assert.equal(err.timeoutMs, 20);
+  assert.deepEqual(child.killCalls, ["SIGKILL"]); // the wedged child is killed exactly once
+  assert.match(err.message, /exceeded 20ms wall-clock/);
+});
+
+test("awaitChildClose: a close AFTER timeout is a no-op (single-settle latch, no double reject/resolve)", async () => {
+  const child = new FakeChild();
+  const p = awaitChildClose(child, { timeoutMs: 10 });
+  const err = await p.catch((e) => e);
+  assert.ok(err instanceof ClaudeTimeoutError);
+  // a late close must NOT flip the already-settled promise nor throw
+  child.emit("close", 0);
+  await new Promise((r) => setTimeout(r, 5)); // no unhandled rejection / second settle
+});
+
+test("awaitChildClose surfaces a launch error (child 'error' event) with the install/login hint", async () => {
+  const child = new FakeChild();
+  const p = awaitChildClose(child, { timeoutMs: 5000, cli: "claude" });
+  child.emit("error", new Error("ENOENT"));
+  const err = await p.catch((e) => e);
+  assert.ok(!(err instanceof ClaudeTimeoutError));
+  assert.match(err.message, /failed to launch `claude -p`.*installed\/logged in/);
+  assert.deepEqual(child.killCalls, []);
+});
+
+test("ClaudeTimeoutError carries name/code/timeoutMs and is an Error", () => {
+  const e = new ClaudeTimeoutError(180000, "claude");
+  assert.ok(e instanceof Error);
+  assert.equal(e.name, "ClaudeTimeoutError");
+  assert.equal(e.code, "ETIMEDOUT_CLAUDE");
+  assert.equal(e.timeoutMs, 180000);
 });

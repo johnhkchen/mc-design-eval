@@ -40,6 +40,17 @@ export const MODEL_TIERS = Object.freeze({
 export const DEFAULT_TIER = "strong";
 
 /**
+ * Per-call WALL-CLOCK bound (ms) on the `claude -p` subscription child, so a NON-RETURNING subprocess can
+ * never hang a metered runner (T-198-01). The motivating failure: a strong-tier diagnose child wedged for
+ * ~20 min (node idle, child blocked, spawn count frozen) and had to be killed by hand — twice. 3 min is
+ * comfortably above a healthy strong-tier multi-image diagnose (seconds-to-low-minutes) and far below that
+ * hang. `CLAUDE_TIMEOUT_MS` overrides it without a code edit. The transport layer arms a timer ONLY when a
+ * positive `timeoutMs` reaches it, so callers that pass nothing stay byte-unchanged (default-off contract).
+ * @type {number}
+ */
+export const CLAUDE_SUBPROCESS_TIMEOUT_MS = Number(process.env.CLAUDE_TIMEOUT_MS) || 180_000;
+
+/**
  * The multi-angle same-object gate contract (E-25 / S-093 / T-093-01). FOUR fixed ground-diagonal
  * azimuths (named per src/view/multi-angle.mjs VIEW_ANGLES: 45/135/225/315 deg at the 30 deg contract
  * elevation — the E-22 3/4 lens elevation) and the aggregate gap budget. E-25 Rule 4: the set is
