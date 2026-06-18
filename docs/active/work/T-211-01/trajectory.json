@@ -1,0 +1,1205 @@
+{
+  "schema": "picture-climb/v1",
+  "subject": "gatehouse",
+  "seed": "benchmarks/sculpture/generated/gatehouse/artifact.json",
+  "program": "benchmarks/sculpture/recognition/gatehouse.program.json",
+  "pack": "rustic",
+  "concept": "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+  "tier": "strong",
+  "votes": 3,
+  "margin": 4,
+  "stopReason": "stalled (2 rolled back)",
+  "observedScoreSpread": {
+    "min": 8,
+    "max": 8,
+    "allRoundVotes": [
+      0,
+      0,
+      0,
+      0,
+      12,
+      0,
+      8,
+      8,
+      8,
+      8,
+      0,
+      48,
+      8,
+      0,
+      0
+    ]
+  },
+  "framingResidual": [],
+  "formReadyClosure": 0.9,
+  "closureFirst": 0.6666666666666666,
+  "closureLast": 1,
+  "subprocessTimeoutMs": 180000,
+  "votesTimedOut": 0,
+  "trajectory": [
+    {
+      "round": 0,
+      "score": 0,
+      "evidence": {
+        "score": 0,
+        "nItems": 6,
+        "nMajor": 4,
+        "nWrongStyle": 2,
+        "wrongStyleBreadth": 2,
+        "departments": [
+          "ROOF",
+          "WALL",
+          "OPENING",
+          "WALL",
+          "ROOF",
+          "OPENING"
+        ],
+        "missing": [
+          "The closed steep gable covering spanning the whole footprint.",
+          "The light coursed dressed-stone surface and a fully closed wall plane.",
+          "The dark-timber arched doorway.",
+          "The contrasting rubble quoin corners.",
+          "The lighter stone eave/verge banding.",
+          "The paired slit windows on the eave walls."
+        ]
+      },
+      "items": [
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "An open/hollow top with only a small partial stepped pyramidal corner of dark material; no closed gable surface, the mass reads roofless from most angles.",
+          "missing": "The closed steep gable covering spanning the whole footprint.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Dark monochrome vertically-striped/fluted walls, ragged and open (colonnade-like gaps) at the base.",
+          "missing": "The light coursed dressed-stone surface and a fully closed wall plane.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "Ragged open gaps at the base; no framed arch or timber surround reads.",
+          "missing": "The dark-timber arched doorway.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Corners are the same dark striped material as the field; no rubble quoins distinguish them.",
+          "missing": "The contrasting rubble quoin corners.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "ROOF",
+          "severity": "minor",
+          "present": "Roof edges are the same dark tone as the field; no lighter banding course.",
+          "missing": "The lighter stone eave/verge banding.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "At most one irregular hole near the top; no paired narrow slits read.",
+          "missing": "The paired slit windows on the eave walls.",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "close_shell",
+        "reason": "Wall shell closure is 0.67 — the form is an open colonnade. Detail tools are locked until closure ≥ 0.9, and the worst divergences (roof, walls, opening) cannot be addressed on an unclosed form. close_shell must go first."
+      },
+      "applied": false,
+      "accepted": false,
+      "framing": {
+        "orientation": {
+          "axis": null,
+          "frontAxis": "x",
+          "frontSide": "-x",
+          "gableFacesFront": null,
+          "flagged": false,
+          "severity": null,
+          "note": "orientation SKIPPED (front=x, ridge=? — insufficient evidence)"
+        },
+        "scale": {
+          "build": {
+            "aspect": 1,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "target": {
+            "aspect": 1,
+            "ridgeToEave": 1.35,
+            "roofShare": 0.2593
+          },
+          "deltas": {
+            "aspect": 0,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "flagged": false,
+          "severity": null,
+          "note": "proportions within 0.2 of the recognized intent (uniform size is framing, not a divergence)"
+        },
+        "flags": [],
+        "residual": []
+      },
+      "closure": 0.6666666666666666,
+      "voteOutcomes": [
+        {
+          "vote": 1,
+          "status": "ok",
+          "ms": 63114
+        },
+        {
+          "vote": 2,
+          "status": "ok",
+          "ms": 40514
+        },
+        {
+          "vote": 3,
+          "status": "ok",
+          "ms": 28015
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "score": 0,
+      "evidence": {
+        "score": 0,
+        "nItems": 6,
+        "nMajor": 4,
+        "nWrongStyle": 2,
+        "wrongStyleBreadth": 2,
+        "departments": [
+          "ROOF",
+          "WALL",
+          "OPENING",
+          "WALL",
+          "ROOF",
+          "OPENING"
+        ],
+        "missing": [
+          "The closed steep gable covering spanning the whole footprint.",
+          "The light coursed dressed-stone surface and a fully closed wall plane.",
+          "The dark-timber arched doorway.",
+          "The contrasting rubble quoin corners.",
+          "The lighter stone eave/verge banding.",
+          "The paired slit windows on the eave walls."
+        ]
+      },
+      "items": [
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "An open/hollow top with only a small partial stepped pyramidal corner of dark material; no closed gable surface, the mass reads roofless from most angles.",
+          "missing": "The closed steep gable covering spanning the whole footprint.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Dark monochrome vertically-striped/fluted walls, ragged and open (colonnade-like gaps) at the base.",
+          "missing": "The light coursed dressed-stone surface and a fully closed wall plane.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "Ragged open gaps at the base; no framed arch or timber surround reads.",
+          "missing": "The dark-timber arched doorway.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Corners are the same dark striped material as the field; no rubble quoins distinguish them.",
+          "missing": "The contrasting rubble quoin corners.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "ROOF",
+          "severity": "minor",
+          "present": "Roof edges are the same dark tone as the field; no lighter banding course.",
+          "missing": "The lighter stone eave/verge banding.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "At most one irregular hole near the top; no paired narrow slits read.",
+          "missing": "The paired slit windows on the eave walls.",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "close_shell",
+        "reason": "Wall shell closure is 0.67 — the form is an open colonnade. Detail tools are locked until closure ≥ 0.9, and the worst divergences (roof, walls, opening) cannot be addressed on an unclosed form. close_shell must go first."
+      },
+      "applied": true,
+      "accepted": true,
+      "gate": {
+        "accept": true,
+        "delta": 0,
+        "reason": "closure +0.333 (0.667→1.000) form-credit"
+      },
+      "scoreAfter": {
+        "score": 0,
+        "scores": [
+          0,
+          0,
+          0
+        ]
+      },
+      "targetDepartments": [
+        "WALL"
+      ],
+      "deptMajorsBefore": {
+        "ROOF": 1,
+        "WALL": 2,
+        "OPENING": 1
+      },
+      "deptMajorsAfter": {
+        "ROOF": 1,
+        "WALL": 2,
+        "OPENING": 1
+      },
+      "deptItemsBefore": {
+        "ROOF": {
+          "major": 1,
+          "minor": 1
+        },
+        "WALL": {
+          "major": 2,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        }
+      },
+      "deptItemsAfter": {
+        "ROOF": {
+          "major": 1,
+          "minor": 1
+        },
+        "WALL": {
+          "major": 2,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        }
+      },
+      "framing": {
+        "orientation": {
+          "axis": null,
+          "frontAxis": "x",
+          "frontSide": "-x",
+          "gableFacesFront": null,
+          "flagged": false,
+          "severity": null,
+          "note": "orientation SKIPPED (front=x, ridge=? — insufficient evidence)"
+        },
+        "scale": {
+          "build": {
+            "aspect": 1,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "target": {
+            "aspect": 1,
+            "ridgeToEave": 1.35,
+            "roofShare": 0.2593
+          },
+          "deltas": {
+            "aspect": 0,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "flagged": false,
+          "severity": null,
+          "note": "proportions within 0.2 of the recognized intent (uniform size is framing, not a divergence)"
+        },
+        "flags": [],
+        "residual": []
+      },
+      "closure": 0.6666666666666666,
+      "closureAfter": 1,
+      "voteOutcomes": [
+        {
+          "vote": 1,
+          "status": "ok",
+          "ms": 41111
+        },
+        {
+          "vote": 2,
+          "status": "ok",
+          "ms": 43248
+        },
+        {
+          "vote": 3,
+          "status": "ok",
+          "ms": 30235
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "score": 0,
+      "evidence": {
+        "score": 0,
+        "nItems": 6,
+        "nMajor": 4,
+        "nWrongStyle": 2,
+        "wrongStyleBreadth": 2,
+        "departments": [
+          "ROOF",
+          "WALL",
+          "OPENING",
+          "WALL",
+          "OPENING",
+          "ROOF"
+        ],
+        "missing": [
+          "The entire closed gable covering (both slopes), the lighter eave/verge band, and the ridge.",
+          "The light-grey dressed-stone field tone across all four walls.",
+          "The whole arched timber passage and its frame.",
+          "The contrasting rubble corner quoins.",
+          "The four slit windows.",
+          "The lighter eave/verge edge course."
+        ]
+      },
+      "items": [
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "An open hollow box: the top reads roofless, with only fragmentary stepped courses sitting inside/atop the walls — no continuous closed slope, no eave/verge banding.",
+          "missing": "The entire closed gable covering (both slopes), the lighter eave/verge band, and the ridge.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Uniformly dark, vertically-striped wall surfaces that read near-black, not light grey, and not coursed dressed stone.",
+          "missing": "The light-grey dressed-stone field tone across all four walls.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "No visible arched doorway — the -x face reads as a closed dark wall.",
+          "missing": "The whole arched timber passage and its frame.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Corners read the same dark uniform material as the field — no distinct rubble quoin.",
+          "missing": "The contrasting rubble corner quoins.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "No discernible windows on the eave walls.",
+          "missing": "The four slit windows.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "ROOF",
+          "severity": "minor",
+          "present": "No banding — the upper edges are the same dark tone as the rest.",
+          "missing": "The lighter eave/verge edge course.",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "apply_gable_roof"
+      },
+      "applied": true,
+      "accepted": false,
+      "gate": {
+        "accept": false,
+        "delta": 0,
+        "reason": "compound tie at floor — no read (→ de-noise the judge)"
+      },
+      "scoreAfter": {
+        "score": 0,
+        "scores": [
+          0,
+          12,
+          0
+        ]
+      },
+      "targetDepartments": [
+        "ROOF"
+      ],
+      "deptMajorsBefore": {
+        "ROOF": 1,
+        "WALL": 2,
+        "OPENING": 1
+      },
+      "deptMajorsAfter": {
+        "OPENING": 2,
+        "WALL": 1,
+        "ROOF": 1
+      },
+      "deptItemsBefore": {
+        "ROOF": {
+          "major": 1,
+          "minor": 1
+        },
+        "WALL": {
+          "major": 2,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        }
+      },
+      "deptItemsAfter": {
+        "OPENING": {
+          "major": 2,
+          "minor": 0
+        },
+        "WALL": {
+          "major": 1,
+          "minor": 1
+        },
+        "ROOF": {
+          "major": 1,
+          "minor": 1
+        }
+      },
+      "framing": {
+        "orientation": {
+          "axis": "x",
+          "frontAxis": "x",
+          "frontSide": "-x",
+          "gableFacesFront": true,
+          "flagged": false,
+          "severity": null,
+          "note": "gable faces the declared -x front"
+        },
+        "scale": {
+          "build": {
+            "aspect": 1.0385,
+            "ridgeToEave": 1.25,
+            "roofShare": 0.2
+          },
+          "target": {
+            "aspect": 1,
+            "ridgeToEave": 1.35,
+            "roofShare": 0.2593
+          },
+          "deltas": {
+            "aspect": 0.0385,
+            "ridgeToEave": 0.0741,
+            "roofShare": 0.2287
+          },
+          "flagged": false,
+          "severity": null,
+          "note": "proportions within 0.2 of the recognized intent (uniform size is framing, not a divergence)"
+        },
+        "flags": [],
+        "residual": []
+      },
+      "closure": 1,
+      "closureAfter": 1,
+      "voteOutcomes": [
+        {
+          "vote": 1,
+          "status": "ok",
+          "ms": 42373
+        },
+        {
+          "vote": 2,
+          "status": "ok",
+          "ms": 63121
+        },
+        {
+          "vote": 3,
+          "status": "ok",
+          "ms": 55015
+        }
+      ],
+      "batch": {
+        "size": 1,
+        "picks": [
+          "apply_gable_roof"
+        ],
+        "accepted": false
+      }
+    },
+    {
+      "round": 3,
+      "score": 0,
+      "evidence": {
+        "score": 0,
+        "nItems": 6,
+        "nMajor": 4,
+        "nWrongStyle": 2,
+        "wrongStyleBreadth": 2,
+        "departments": [
+          "ROOF",
+          "WALL",
+          "OPENING",
+          "WALL",
+          "OPENING",
+          "ROOF"
+        ],
+        "missing": [
+          "The entire closed gable covering (both slopes), the lighter eave/verge band, and the ridge.",
+          "The light-grey dressed-stone field tone across all four walls.",
+          "The whole arched timber passage and its frame.",
+          "The contrasting rubble corner quoins.",
+          "The four slit windows.",
+          "The lighter eave/verge edge course."
+        ]
+      },
+      "items": [
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "An open hollow box: the top reads roofless, with only fragmentary stepped courses sitting inside/atop the walls — no continuous closed slope, no eave/verge banding.",
+          "missing": "The entire closed gable covering (both slopes), the lighter eave/verge band, and the ridge.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Uniformly dark, vertically-striped wall surfaces that read near-black, not light grey, and not coursed dressed stone.",
+          "missing": "The light-grey dressed-stone field tone across all four walls.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "No visible arched doorway — the -x face reads as a closed dark wall.",
+          "missing": "The whole arched timber passage and its frame.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Corners read the same dark uniform material as the field — no distinct rubble quoin.",
+          "missing": "The contrasting rubble corner quoins.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "No discernible windows on the eave walls.",
+          "missing": "The four slit windows.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "ROOF",
+          "severity": "minor",
+          "present": "No banding — the upper edges are the same dark tone as the rest.",
+          "missing": "The lighter eave/verge edge course.",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "construct_walls",
+        "reason": "The worst remaining divergences are WALL (major, replace) — light-grey dressed-stone field — and WALL (major, add) — contrasting rubble corner quoins. construct_walls rebuilds the wall envelope and skins it with per-storey material, dressed quoins, and dressed openings, directly addressing both major wall divergences at once."
+      },
+      "applied": true,
+      "accepted": true,
+      "gate": {
+        "accept": true,
+        "delta": 8,
+        "reason": "improved +8"
+      },
+      "scoreAfter": {
+        "score": 8,
+        "scores": [
+          8,
+          8,
+          8
+        ]
+      },
+      "targetDepartments": [
+        "WALL",
+        "OPENING"
+      ],
+      "deptMajorsBefore": {
+        "ROOF": 1,
+        "WALL": 2,
+        "OPENING": 1
+      },
+      "deptMajorsAfter": {
+        "ROOF": 1,
+        "WALL": 1,
+        "OPENING": 1
+      },
+      "deptItemsBefore": {
+        "ROOF": {
+          "major": 1,
+          "minor": 1
+        },
+        "WALL": {
+          "major": 2,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        }
+      },
+      "deptItemsAfter": {
+        "ROOF": {
+          "major": 1,
+          "minor": 0
+        },
+        "WALL": {
+          "major": 1,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        }
+      },
+      "framing": {
+        "orientation": {
+          "axis": null,
+          "frontAxis": "x",
+          "frontSide": "-x",
+          "gableFacesFront": null,
+          "flagged": false,
+          "severity": null,
+          "note": "orientation SKIPPED (front=x, ridge=? — insufficient evidence)"
+        },
+        "scale": {
+          "build": {
+            "aspect": 1.0333,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "target": {
+            "aspect": 1,
+            "ridgeToEave": 1.35,
+            "roofShare": 0.2593
+          },
+          "deltas": {
+            "aspect": 0.0333,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "flagged": false,
+          "severity": null,
+          "note": "proportions within 0.2 of the recognized intent (uniform size is framing, not a divergence)"
+        },
+        "flags": [],
+        "residual": []
+      },
+      "closure": 1,
+      "closureAfter": 1,
+      "voteOutcomes": [
+        {
+          "vote": 1,
+          "status": "ok",
+          "ms": 36707
+        },
+        {
+          "vote": 2,
+          "status": "ok",
+          "ms": 32620
+        },
+        {
+          "vote": 3,
+          "status": "ok",
+          "ms": 27793
+        }
+      ]
+    },
+    {
+      "round": 4,
+      "score": 8,
+      "evidence": {
+        "score": 8,
+        "nItems": 4,
+        "nMajor": 3,
+        "nWrongStyle": 2,
+        "wrongStyleBreadth": 2,
+        "departments": [
+          "ROOF",
+          "WALL",
+          "OPENING",
+          "OPENING"
+        ],
+        "missing": [
+          "The steep gable form itself and the lighter stone eave/verge course",
+          "The coursed dressed-stone masonry field material",
+          "The entire arched timber doorway/passage",
+          "The slit windows on the eave-side walls"
+        ]
+      },
+      "items": [
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "A low flat-topped dark box with a small stepped pyramid-like mound at the center of the top; no pitched gable, no light edge banding",
+          "missing": "The steep gable form itself and the lighter stone eave/verge course",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Dark vertical plank/log walls reading as wood, dark throughout",
+          "missing": "The coursed dressed-stone masonry field material",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "",
+          "missing": "The entire arched timber doorway/passage",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "",
+          "missing": "The slit windows on the eave-side walls",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "rebuild_arch",
+        "reason": "The OPENING (major, add) is the worst unaddressed divergence after walls are closed — the concept shows a wide arched gateway on the gable end, and rebuild_arch is the only tool that can create a wide arched opening with frame and voussoir arch head."
+      },
+      "applied": true,
+      "accepted": false,
+      "gate": {
+        "accept": false,
+        "delta": 0,
+        "reason": "tie (0): no shrink"
+      },
+      "scoreAfter": {
+        "score": 8,
+        "scores": [
+          8,
+          0,
+          48
+        ]
+      },
+      "targetDepartments": [
+        "OPENING"
+      ],
+      "deptMajorsBefore": {
+        "ROOF": 1,
+        "WALL": 1,
+        "OPENING": 1
+      },
+      "deptMajorsAfter": {
+        "ROOF": 1,
+        "WALL": 1,
+        "OPENING": 1
+      },
+      "deptItemsBefore": {
+        "ROOF": {
+          "major": 1,
+          "minor": 0
+        },
+        "WALL": {
+          "major": 1,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        }
+      },
+      "deptItemsAfter": {
+        "ROOF": {
+          "major": 1,
+          "minor": 0
+        },
+        "WALL": {
+          "major": 1,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        }
+      },
+      "framing": {
+        "orientation": {
+          "axis": null,
+          "frontAxis": "x",
+          "frontSide": "-x",
+          "gableFacesFront": null,
+          "flagged": false,
+          "severity": null,
+          "note": "orientation SKIPPED (front=x, ridge=? — insufficient evidence)"
+        },
+        "scale": {
+          "build": {
+            "aspect": 1.0333,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "target": {
+            "aspect": 1,
+            "ridgeToEave": 1.35,
+            "roofShare": 0.2593
+          },
+          "deltas": {
+            "aspect": 0.0333,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "flagged": false,
+          "severity": null,
+          "note": "proportions within 0.2 of the recognized intent (uniform size is framing, not a divergence)"
+        },
+        "flags": [],
+        "residual": []
+      },
+      "closure": 1,
+      "closureAfter": 1,
+      "voteOutcomes": [
+        {
+          "vote": 1,
+          "status": "ok",
+          "ms": 41001
+        },
+        {
+          "vote": 2,
+          "status": "ok",
+          "ms": 54464
+        },
+        {
+          "vote": 3,
+          "status": "ok",
+          "ms": 45098
+        }
+      ]
+    },
+    {
+      "round": 5,
+      "score": 8,
+      "evidence": {
+        "score": 8,
+        "nItems": 4,
+        "nMajor": 3,
+        "nWrongStyle": 2,
+        "wrongStyleBreadth": 2,
+        "departments": [
+          "ROOF",
+          "WALL",
+          "OPENING",
+          "OPENING"
+        ],
+        "missing": [
+          "The steep gable form itself and the lighter stone eave/verge course",
+          "The coursed dressed-stone masonry field material",
+          "The entire arched timber doorway/passage",
+          "The slit windows on the eave-side walls"
+        ]
+      },
+      "items": [
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "A low flat-topped dark box with a small stepped pyramid-like mound at the center of the top; no pitched gable, no light edge banding",
+          "missing": "The steep gable form itself and the lighter stone eave/verge course",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Dark vertical plank/log walls reading as wood, dark throughout",
+          "missing": "The coursed dressed-stone masonry field material",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "",
+          "missing": "The entire arched timber doorway/passage",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "",
+          "missing": "The slit windows on the eave-side walls",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "frame_arch",
+        "reason": "The arched timber doorway/passage is the worst remaining major divergence that no applied tool has yet addressed — rebuild_arch was rolled back for no shrink, but frame_arch builds the dark-timber frame + arch head over the passage void without widening, which is the missing element."
+      },
+      "applied": true,
+      "accepted": false,
+      "gate": {
+        "accept": false,
+        "delta": -8,
+        "reason": "regressed -8"
+      },
+      "scoreAfter": {
+        "score": 0,
+        "scores": [
+          8,
+          0,
+          0
+        ]
+      },
+      "targetDepartments": [
+        "OPENING"
+      ],
+      "deptMajorsBefore": {
+        "ROOF": 1,
+        "WALL": 1,
+        "OPENING": 1
+      },
+      "deptMajorsAfter": {
+        "ROOF": 1,
+        "WALL": 1,
+        "OPENING": 1
+      },
+      "deptItemsBefore": {
+        "ROOF": {
+          "major": 1,
+          "minor": 0
+        },
+        "WALL": {
+          "major": 1,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        }
+      },
+      "deptItemsAfter": {
+        "ROOF": {
+          "major": 1,
+          "minor": 0
+        },
+        "WALL": {
+          "major": 1,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        }
+      },
+      "framing": {
+        "orientation": {
+          "axis": null,
+          "frontAxis": "x",
+          "frontSide": "-x",
+          "gableFacesFront": null,
+          "flagged": false,
+          "severity": null,
+          "note": "orientation SKIPPED (front=x, ridge=? — insufficient evidence)"
+        },
+        "scale": {
+          "build": {
+            "aspect": 1.0333,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "target": {
+            "aspect": 1,
+            "ridgeToEave": 1.35,
+            "roofShare": 0.2593
+          },
+          "deltas": {
+            "aspect": 0.0333,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "flagged": false,
+          "severity": null,
+          "note": "proportions within 0.2 of the recognized intent (uniform size is framing, not a divergence)"
+        },
+        "flags": [],
+        "residual": []
+      },
+      "closure": 1,
+      "closureAfter": 1,
+      "voteOutcomes": [
+        {
+          "vote": 1,
+          "status": "ok",
+          "ms": 37434
+        },
+        {
+          "vote": 2,
+          "status": "ok",
+          "ms": 37663
+        },
+        {
+          "vote": 3,
+          "status": "ok",
+          "ms": 34440
+        }
+      ]
+    },
+    {
+      "round": 5,
+      "score": 8,
+      "items": [],
+      "pick": {
+        "tool": "—"
+      },
+      "applied": false,
+      "accepted": false,
+      "terminal": true
+    }
+  ],
+  "inventory": {
+    "actedOn": [
+      {
+        "department": "WALL",
+        "byTool": [
+          "close_shell",
+          "construct_walls"
+        ],
+        "rounds": [
+          1,
+          3
+        ],
+        "deltas": [
+          0,
+          8
+        ]
+      },
+      {
+        "department": "OPENING",
+        "byTool": [
+          "construct_walls"
+        ],
+        "rounds": [
+          3
+        ],
+        "deltas": [
+          8
+        ]
+      }
+    ],
+    "eyesOnly": [
+      {
+        "department": "ROOF",
+        "namedItems": [
+          {
+            "round": 0,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "The closed steep gable covering spanning the whole footprint."
+          },
+          {
+            "round": 0,
+            "kind": "add",
+            "severity": "minor",
+            "missing": "The lighter stone eave/verge banding."
+          },
+          {
+            "round": 1,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "The closed steep gable covering spanning the whole footprint."
+          },
+          {
+            "round": 1,
+            "kind": "add",
+            "severity": "minor",
+            "missing": "The lighter stone eave/verge banding."
+          },
+          {
+            "round": 2,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "The entire closed gable covering (both slopes), the lighter eave/verge band, and the ridge."
+          },
+          {
+            "round": 2,
+            "kind": "add",
+            "severity": "minor",
+            "missing": "The lighter eave/verge edge course."
+          },
+          {
+            "round": 3,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "The entire closed gable covering (both slopes), the lighter eave/verge band, and the ridge."
+          },
+          {
+            "round": 3,
+            "kind": "add",
+            "severity": "minor",
+            "missing": "The lighter eave/verge edge course."
+          },
+          {
+            "round": 4,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "The steep gable form itself and the lighter stone eave/verge course"
+          },
+          {
+            "round": 5,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "The steep gable form itself and the lighter stone eave/verge course"
+          }
+        ]
+      }
+    ],
+    "verdict": {
+      "climbed": true,
+      "stalled": false,
+      "oscillated": false,
+      "actionableFrac": 0.4,
+      "scoreFirst": 0,
+      "scoreLast": 8,
+      "delta": 8
+    }
+  }
+}
