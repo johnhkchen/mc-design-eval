@@ -32,6 +32,7 @@ import { extractApertures, dressOpenings } from "../../src/view/opening-dressing
 import { frameArchPlacements } from "../../src/view/arch-frame.mjs";
 import { carveTargetCells, apertureCoherenceGate, carveAperture } from "../../src/view/aperture-carve.mjs";
 import { buildWallRelief } from "../../src/view/wall-relief.mjs";
+import { framingReport } from "../../src/view/framing.mjs";
 import { composeRoofTreatment, bareBlock } from "../../src/view/treatment-grammar.mjs";
 import { roleBlock } from "../../src/recognition/compile.mjs";
 import { infillPanel } from "../../src/view/facade-articulation.mjs";
@@ -334,7 +335,12 @@ async function scoreBuild(occ, template, round, tag) {
   const artifact = rebuildArtifact(occ, template);
   await renderViews(artifact, AZIMUTHS, { outDir: roundDir, label: (a) => a, width: 512, height: 512 });
   await renderBesideConcept(artifact, join(ROOT, CONCEPT), join(roundDir, "beside-concept.png"), { label: `r${round}` });
-  if (GUARD_ONLY) return { score: null, dir: roundDir }; // render seam proven, no spend
+  // The WIDER EYES (T-196-01): a deterministic read of orientation + proportion the department-bound critique
+  // is blind to. GL-free, so it rides the render seam (computed even in GUARD_ONLY). REPORTED, never scored —
+  // there is no hand that rotates a roof or resizes a mass, so its residual is named for E-49, not a lever.
+  const framing = PROGRAM ? framingReport(PROGRAM, occ) : null;
+  if (framing?.flags.length) console.error(`  [${tag} r${round}] FRAMING: ${framing.flags.join(" | ")}`);
+  if (GUARD_ONLY) return { score: null, dir: roundDir, framing }; // render seam proven, no spend
   const renders = await Promise.all(AZIMUTHS.map((a) => toB64(join(roundDir, `view-${a}.png`))));
   const samples = [];
   for (let v = 0; v < VOTES; v++) {
@@ -344,7 +350,7 @@ async function scoreBuild(occ, template, round, tag) {
   if (!samples.length) throw new Error(`scoreBuild: all ${VOTES} diagnoses failed at round ${round}`);
   const scores = samples.map((s) => s.score);
   const med = samples.find((s) => s.score === median(scores)) ?? samples[0];
-  return { ...med.ev, score: med.score, items: med.items, scores, dir: roundDir };
+  return { ...med.ev, score: med.score, items: med.items, scores, dir: roundDir, framing };
 }
 
 const evOf = (b) => ({ score: b.score, nItems: b.nItems, nMajor: b.nMajor, nWrongStyle: b.nWrongStyle, wrongStyleBreadth: b.wrongStyleBreadth, departments: b.departments, missing: b.missing });
@@ -355,10 +361,16 @@ async function agentPick(build, history) {
   const hist = history.length
     ? history.map((h) => `- ${h.tool}: score ${h.qBefore}→${h.qAfter} (${h.accepted ? "KEPT" : "ROLLED BACK — " + h.reason})`).join("\n")
     : "(nothing tried yet)";
+  // The WIDER EYES (T-196-01): surface orientation/scale residuals the item-critique cannot. No tool fixes
+  // them, so they are shown only so the agent is not BLIND — if only these remain, `done` is the honest pick.
+  const framing = (build.framing?.flags ?? []).length
+    ? `FRAMING (orientation/scale — NO tool fixes these; if only these remain, pick \`done\`):\n${build.framing.flags.map((f) => `  - ${f}`).join("\n")}`
+    : "";
   const prompt = [
     "You improve a Minecraft build to look like its CONCEPT IMAGE. A picture-critique reports the build's",
     `current divergences from the concept (picture-fidelity score ${build.score}/100, higher = closer):`,
     top || "  (no items — the build reads like the concept)",
+    framing,
     "Tools already applied, and whether the accept-gate KEPT them (kept only if they moved toward the concept):",
     hist,
     "RULES:",
@@ -381,6 +393,7 @@ async function main() {
 
   const template = JSON.parse(readFileSync(join(ROOT, SEED_ARTIFACT), "utf8"));
   let occ = artifactOccupancy(template);
+  PROGRAM = JSON.parse(readFileSync(join(ROOT, PROGRAM_PATH), "utf8")); // load early so the framing eyes ride the GUARD_ONLY seam
 
   // T-189-01 — the roof-material GLANCE: render the seed roof and the recolor_roof roof each beside the
   // concept, print the reconcile reason, and exit BEFORE any LLM spend. The falsifiable deliverable
@@ -406,7 +419,6 @@ async function main() {
     return;
   }
 
-  PROGRAM = JSON.parse(await readFile(join(ROOT, PROGRAM_PATH), "utf8"));
   PACK = loadStylePack(join(ROOT, PACK_PATH));
   CONCEPT_IMG = await toB64(join(ROOT, CONCEPT));
 
@@ -436,7 +448,7 @@ async function main() {
   let prevDigest = buildDigest(occToCells(occ)); // the kept build's digest (T-190-01 no-op guard)
   let pick = await agentPick(prev, history);
   console.error(`\n[round 0] score=${prev.score} (${prev.scores.join("/")}) → agent picks ${pick.tool}: ${pick.reason}`);
-  trajectory.push({ round: 0, score: prev.score, evidence: evOf(prev), items: prev.items, pick, applied: false, accepted: false });
+  trajectory.push({ round: 0, score: prev.score, evidence: evOf(prev), items: prev.items, pick, applied: false, accepted: false, framing: prev.framing ?? null });
 
   let noAcceptStreak = 0, stopReason = "maxRounds", round = 1;
   for (; round <= maxRounds; round++) {
@@ -480,7 +492,7 @@ async function main() {
     trajectory.push({ round, score: prev.score, evidence: evOf(prev), items: prev.items,
       pick, applied: true, accepted: gate.accept, gate, scoreAfter: { score: candScore.score, scores: candScore.scores },
       targetDepartments, deptMajorsBefore: beforeDeptMajors, deptMajorsAfter: afterDeptMajors,
-      deptItemsBefore: beforeDeptItems, deptItemsAfter: afterDeptItems });
+      deptItemsBefore: beforeDeptItems, deptItemsAfter: afterDeptItems, framing: candScore.framing ?? null });
 
     prev = gate.accept ? candScore : prev;
     pick = await agentPick(prev, history);
@@ -497,6 +509,7 @@ async function main() {
     schema: "picture-climb/v1", subject: SUBJECT, seed: SEED_ARTIFACT, program: PROGRAM_PATH, pack: "rustic",
     concept: CONCEPT, tier: TIER, votes: VOTES, margin, stopReason,
     observedScoreSpread: { min: Math.min(...prev.scores), max: Math.max(...prev.scores), allRoundVotes: spread },
+    framingResidual: prev.framing?.residual ?? [], // the wider eyes' named gap on the kept build (→ E-49)
     trajectory, inventory,
   };
   const outPath = join(ROOT, process.env.CLIMB_OUT ?? "docs/active/work/T-188-01/trajectory.json");
@@ -509,6 +522,7 @@ async function main() {
   console.error(`verdict: climbed=${inventory.verdict.climbed} stalled=${inventory.verdict.stalled} oscillated=${inventory.verdict.oscillated} actionable=${inventory.verdict.actionableFrac}`);
   console.error(`acted-on: ${inventory.actedOn.map((a) => a.department).join(", ") || "(none)"}`);
   console.error(`eyes-only (named, no lever): ${inventory.eyesOnly.map((e) => e.department).join(", ") || "(none)"}`);
+  console.error(`framing residual (wider eyes, → E-49): ${out.framingResidual.map((r) => `${r.axis} (${r.note})`).join("; ") || "(none — orientation+scale read clean)"}`);
   console.error(`wrote ${outPath} + per-round beside renders under builds/${SUBJECT}/picture-climb/`);
   console.error("==================================================================");
 }
