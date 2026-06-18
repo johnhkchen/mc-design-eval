@@ -3,7 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 
 import { occupancyFromCells } from "./occupancy.mjs";
-import { closeColumns, perimeterColumns, spaceOpenings, constructWalls, robustExtent, coverageOf, registerRect, closureOf } from "./wall-generate.mjs";
+import { closeColumns, perimeterColumns, spaceOpenings, constructWalls, robustExtent, coverageOf, registerRect, closureOf, closeShell, eaveRingClosure } from "./wall-generate.mjs";
 
 const setOf = (...cs) => new Set(cs);
 /** A hollow rectangular ring (perimeter columns only) over [x0,x1]×[z0,z1], stacked floor..eave. */
@@ -263,3 +263,79 @@ function spaceOpeningsRef(lo, hi, count) {
   for (let i = 0; i < count; i++) { const raw = inLo + Math.round(((i + 0.5) * span) / count); const p = Math.max(prev + 2, Math.min(inHi, raw)); if (p > inHi) break; out.push(p); prev = p; }
   return out;
 }
+
+// ============================ T-197-01 — closeShell + eaveRingClosure (S-197, E-51) ============================
+// A colonnade fixture: a perimeter ring with a STRAIGHT RUN of dropped columns (close can't bridge it) + a
+// couple of roof cells above the eave (to assert the form hand leaves the won roof verbatim).
+function colonnadeWithRoof({ x0 = 0, x1 = 10, z0 = 0, z1 = 10, floor = 0, eave = 5, drop = [] } = {}) {
+  const o = ringOcc({ x0, x1, z0, z1, floor, eave, drop });
+  const cells = [];
+  for (const [k, b] of o.cells) cells.push({ pos: k.split(",").map(Number), block: b });
+  // a small ridge line at eave+1 (roof) — must be preserved count-for-count
+  for (let x = x0 + 2; x <= x1 - 2; x++) cells.push({ pos: [x, eave + 1, Math.round((z0 + z1) / 2)], block: "minecraft:spruce_planks" });
+  return occupancyFromCells(cells);
+}
+const matchingProgram = (x0, x1, z0, z1) => ({ masses: [{ rect: { x0: 0, z0: 0, w: x1 - x0, d: z1 - z0 } }] });
+const roofCount = (occ, eave) => [...occ.cells.keys()].filter((k) => Number(k.split(",")[1]) > eave).length;
+
+// WG-CS1: eaveRingClosure reads watertight=1, gappy<1, empty=0
+test("WG-CS1 eaveRingClosure: watertight ring=1, dropped runs <1, empty band=0", () => {
+  const clean = ringOcc({ x0: 0, x1: 6, z0: 0, z1: 6, floor: 0, eave: 4 });
+  assert.equal(eaveRingClosure(clean, { floor: 0, eaveY: 4 }), 1);
+  const gappy = ringOcc({ x0: 0, x1: 6, z0: 0, z1: 6, floor: 0, eave: 4, drop: ["1,0", "2,0", "3,0", "4,0", "5,0"] });
+  assert.ok(eaveRingClosure(gappy, { floor: 0, eaveY: 4 }) < 1, "a dropped straight run lowers closure");
+  // band entirely above eaveY → no band cols → 0 (not form-ready)
+  assert.equal(eaveRingClosure(clean, { floor: 10, eaveY: 12 }), 0);
+});
+
+// WG-CS2: closeShell closes a sparse colonnade and PRESERVES the roof
+test("WG-CS2 closeShell closes a colonnade (closure↑→~1) and preserves the roof verbatim", () => {
+  const eave = 5;
+  const occ = colonnadeWithRoof({ x0: 0, x1: 10, z0: 0, z1: 10, eave, drop: ["1,0", "2,0", "3,0", "4,0", "5,0", "6,0"] });
+  const before = eaveRingClosure(occ, { floor: 0, eaveY: eave });
+  const roofBefore = roofCount(occ, eave);
+  const { occ: out, report } = closeShell(occ, { program: matchingProgram(0, 10, 0, 10), floor: 0, eaveY: eave });
+  assert.equal(report.closed, true, report.reason);
+  assert.ok(report.closureBefore < 1, "started open");
+  assert.ok(report.closureAfter >= report.closureBefore, "closure did not regress");
+  assert.ok(report.closureAfter >= 0.9, `closed near watertight (got ${report.closureAfter})`);
+  assert.ok(report.closureAfter > before, "the hand raised closure on this build");
+  assert.equal(roofCount(out, eave), roofBefore, "roof cells (y>eave) preserved count-for-count");
+});
+
+// WG-CS3: an already-clean shell is not regressed (idempotent-ish)
+test("WG-CS3 closeShell never lowers closure on an already-watertight shell", () => {
+  const eave = 5;
+  const occ = colonnadeWithRoof({ x0: 0, x1: 10, z0: 0, z1: 10, eave, drop: [] });
+  const { occ: out, report } = closeShell(occ, { program: matchingProgram(0, 10, 0, 10), floor: 0, eaveY: eave });
+  assert.equal(report.closed, true);
+  assert.equal(report.closureAfter, 1, "stays watertight");
+  assert.equal(eaveRingClosure(out, { floor: 0, eaveY: eave }), 1);
+});
+
+// WG-CS4: honest no-close when registration can't trust the footprint (low coverage) — occ unchanged
+test("WG-CS4 closeShell honestly does NOT close when registration is below the trust floor", () => {
+  const eave = 5;
+  const occ = ringOcc({ x0: 0, x1: 10, z0: 0, z1: 10, floor: 0, eave });
+  // a rect that registers but with a coverage we force below the floor via coverageFloor=1.01 (nothing passes)
+  const { occ: out, report } = closeShell(occ, { program: matchingProgram(0, 10, 0, 10), floor: 0, eaveY: eave, coverageFloor: 1.01 });
+  assert.equal(report.closed, false, "did not fake a dense shell");
+  assert.match(report.reason, /geometry wall|trust floor/);
+  assert.equal(out.size, occ.size, "occupancy returned unchanged when not closed");
+  // and with no program at all → also an honest no-close
+  const none = closeShell(occ, { floor: 0, eaveY: eave });
+  assert.equal(none.report.closed, false);
+});
+
+// WG-CS5: a stray post outside the dense rect bbox is dropped (does not break the closed shell)
+test("WG-CS5 closeShell drops a stray post outside the dense footprint", () => {
+  const eave = 5;
+  const base = ringOcc({ x0: 0, x1: 10, z0: 0, z1: 10, floor: 0, eave, drop: ["1,0", "2,0", "3,0"] });
+  const cells = [...base.cells].map(([k, b]) => ({ pos: k.split(",").map(Number), block: b }));
+  for (let y = 0; y <= eave; y++) cells.push({ pos: [40, y, 40], block: "minecraft:stone_bricks" }); // far stray
+  const occ = occupancyFromCells(cells);
+  const { occ: out, report } = closeShell(occ, { program: matchingProgram(0, 10, 0, 10), floor: 0, eaveY: eave });
+  assert.equal(report.closed, true);
+  assert.ok(report.closureAfter >= 0.9, `stray did not break closure (got ${report.closureAfter})`);
+  assert.equal(out.has(40, 3, 40), false, "the far stray post was dropped");
+});

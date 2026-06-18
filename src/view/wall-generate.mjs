@@ -242,6 +242,127 @@ export function registerRect(masses, cols, opts = {}) {
 }
 
 /**
+ * Wall-band column histogram for `floor ≤ y ≤ eaveY`: the LOCAL per-column modal material + a global modal
+ * fill. Shared by `constructWalls` and `closeShell` so both solidify a column in its own stone. PURE.
+ * @returns {{cols:Set<string>, localFill:(c:string)=>string, globalFill:string}}
+ */
+function bandHistogram(occ, floor, eaveY, ns) {
+  const colHist = new Map();
+  const globalBc = new Map();
+  for (const [k, b] of occ.cells) {
+    const [x, y, z] = k.split(",").map(Number);
+    if (y < floor || y > eaveY) continue;
+    const c = `${x},${z}`;
+    if (!colHist.has(c)) colHist.set(c, new Map());
+    const m = colHist.get(c); m.set(b, (m.get(b) || 0) + 1);
+    globalBc.set(b, (globalBc.get(b) || 0) + 1);
+  }
+  const cols = new Set(colHist.keys());
+  const globalFill = [...globalBc].sort((a, b) => b[1] - a[1])[0]?.[0] ?? ns(null);
+  const localFill = (c) => { const m = colHist.get(c); return m ? [...m].sort((a, b) => b[1] - a[1])[0][0] : globalFill; };
+  return { cols, localFill, globalFill };
+}
+
+/**
+ * CLOSURE of a build's wall band (the form-readiness metric). The fraction of the band's bbox-rectangle
+ * perimeter the actual wall columns occupy — `closureOf(perimeterColumns(bandCols))`. A watertight shell → 1;
+ * a colonnade (straight-run gaps) → < 1. This is the ONE closure definition the close-the-shell hand reports
+ * AND the form-before-detail ordering gate consumes (T-197-01) — no drift between "what closed" and "what the
+ * gate tests". Returns 0 on an empty/absent band (a build with no wall band is not form-ready). PURE.
+ * @param {import("./occupancy.mjs").Occupancy} occ
+ * @param {{floor?:number, eaveY:number}} params  eaveY required; floor defaults to occ.bounds.min[1]
+ */
+export function eaveRingClosure(occ, { floor, eaveY } = {}) {
+  if (!occ?.bounds) return 0;
+  if (eaveY === undefined) throw new Error("eaveRingClosure: eaveY required");
+  const f = floor ?? occ.bounds.min[1];
+  const cols = new Set();
+  for (const k of occ.cells.keys()) {
+    const [x, y, z] = k.split(",").map(Number);
+    if (y < f || y > eaveY) continue;
+    cols.add(`${x},${z}`);
+  }
+  if (cols.size === 0) return 0;
+  return closureOf(perimeterColumns(cols));
+}
+
+/**
+ * THE CLOSE-THE-SHELL FORM HAND (T-197-01, story S-197, epic E-51). Build a DENSE, CLOSED wall shell from the
+ * recognition program's `masses[].rect` — NOT the ragged GLB-voxelized occupancy. The standing finding
+ * [[wall-construct-needs-dense-shell]] / [[cottage-gate-and-volume-gate-are-one-fix]]: replace-via-occupancy
+ * walls climb only on a dense shell; a sparse band stays a colonnade. `constructWalls` already registers the
+ * program rect (`registerRect` → a closure-1 ring) but SUPPRESSES it on a near-square footprint via the
+ * `ambiguous` axis-tie guard (the gatehouse 15×15 case: dense ring closure 1.000, coverage 0.69, thrown away).
+ *
+ * This is FORM ONLY — close the box, keep the roof and interior verbatim, NO skin / NO opening carve (those
+ * are the DETAIL stage, gated behind form-readiness). It accepts the registered dense ring whenever coverage
+ * clears the trust FLOOR, *ignoring* `ambiguous`: a near-square footprint's axis tie is immaterial (identity
+ * and swap give the same square ring), and coverage already proves the ring traces the real posts. Low
+ * coverage still rejects — and then the shell is HONESTLY not closed (anti-hedge: name the geometry wall,
+ * never fake density). Adds mass + drops strays only; no air op (recess-by-exclusion stays in carve_arch).
+ * `occ → {occ, report}`. PURE.
+ *
+ * @param {import("./occupancy.mjs").Occupancy} occ
+ * @param {object} params
+ * @param {object} params.program        building-program/v1 (masses[].rect is the footprint)
+ * @param {number} [params.floor]         band bottom (default occ.bounds.min[1])
+ * @param {number} params.eaveY           band top (wall→roof divide)
+ * @param {string} [params.wallField="stone_bricks"]  last-resort fill for a ring column with no local material
+ * @param {number} [params.coverageFloor=0.5]  registration trust floor (registerRect's FLOOR)
+ * @returns {{occ:import("./occupancy.mjs").Occupancy, report:object}}
+ */
+export function closeShell(occ, params = {}) {
+  if (!occ.bounds) return { occ, report: { closed: false, closureBefore: 0, closureAfter: 0, ringSize: 0, coverage: null, axis: null, reason: "empty occupancy" } };
+  const floor = params.floor ?? occ.bounds.min[1];
+  const eaveY = params.eaveY;
+  if (eaveY === undefined) throw new Error("closeShell: eaveY required");
+  const wallField = params.wallField ?? "stone_bricks";
+  const coverageFloor = params.coverageFloor ?? 0.5;
+  const ns = (b) => (b && b.startsWith("minecraft:") ? b : `minecraft:${wallField}`);
+
+  const { cols, localFill } = bandHistogram(occ, floor, eaveY, ns);
+  const closureBefore = cols.size ? closureOf(perimeterColumns(cols)) : 0;
+  if (cols.size === 0) return { occ, report: { closed: false, closureBefore, closureAfter: closureBefore, ringSize: 0, coverage: null, axis: null, reason: "no wall band to close" } };
+
+  const reg = params.program?.masses?.some((m) => m?.rect) ? registerRect(params.program.masses, cols) : null;
+  // ACCEPT the dense ring on COVERAGE alone — ignore `ambiguous`. A near-square axis tie is immaterial (the
+  // square ring is the same under axis swap); coverage ≥ floor already proves the ring traces the real posts.
+  if (!reg || reg.coverage < coverageFloor) {
+    return { occ, report: { closed: false, closureBefore, closureAfter: closureBefore, ringSize: 0,
+      coverage: reg?.coverage ?? null, axis: reg?.axis ?? null,
+      reason: `footprint registration below trust floor (cov ${(reg?.coverage ?? 0).toFixed(2)} < ${coverageFloor}) — shell not closed (geometry wall)` } };
+  }
+
+  const ring = reg.ring;
+  const bb = bboxOf(ring);
+  // REPLACE the band: drop every band cell on a ring column (re-solidified below) OR outside the dense ring's
+  // bbox (stray colonnade posts that would otherwise extend the bbox and break closure); keep interior band
+  // cells and everything above the eave / below the floor (roof + base preserved verbatim).
+  const cellMap = new Map(occ.cells);
+  for (const k of occ.cells.keys()) {
+    const [x, y, z] = k.split(",").map(Number);
+    if (y < floor || y > eaveY) continue;
+    const onRing = ring.has(`${x},${z}`);
+    const inBbox = x >= bb.x0 && x <= bb.x1 && z >= bb.z0 && z <= bb.z1;
+    if (onRing || !inBbox) cellMap.delete(k);
+  }
+  for (const c of ring) {
+    const [x, z] = c.split(",").map(Number);
+    const f = localFill(c);
+    for (let y = floor; y <= eaveY; y++) cellMap.set(`${x},${y},${z}`, f);
+  }
+
+  const cellList = [];
+  for (const [k, b] of cellMap) {
+    cellList.push({ pos: k.split(",").map(Number), block: b, form: occ.forms.get(k), state: occ.states.get(k) });
+  }
+  const out = occupancyFromCells(cellList);
+  const closureAfter = eaveRingClosure(out, { floor, eaveY });
+  return { occ: out, report: { closed: true, closureBefore, closureAfter, ringSize: ring.size,
+    coverage: reg.coverage, axis: reg.axis, reason: `dense shell from program footprint: closure ${closureBefore.toFixed(3)} → ${closureAfter.toFixed(3)} (${reg.reason})` } };
+}
+
+/**
  * THE BRUSH. Replace the wall envelope of `occ` with a clean constructed ring and a regular opening
  * rhythm; keep the roof (above eave) and any interior cells verbatim. `occ → occ`. PURE.
  *
