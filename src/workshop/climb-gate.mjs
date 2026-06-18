@@ -139,6 +139,68 @@ export function coldStartFloor({ score, closure, scoreFloor = BATCH_DEFAULTS.sco
   return num(score) <= scoreFloor && Number.isFinite(closure) && num(closure) >= formReadyThreshold;
 }
 
+// ============================ T-213-01 (S-213, E-55): the accept-rule spike candidates ============================
+// The S-212 bar found the per-move/batch gate disagrees with the human glance on 2/5 moves: the median DISCARDS
+// a strong-minority read (the centered arch's [8,0,48] → median 8 → delta 0 → rolled back) and the batch escape
+// fires ONLY at the score floor (the floor-only-batch asymmetry). These are the two candidate accept-rules
+// S-213 contests against the current rule. BOTH are PURE, OPT-IN, and DEFAULT OFF so every frozen comparison
+// run re-executes byte-identically; the runner reads CLIMB_AGGREGATOR / CLIMB_BATCH_MODE env knobs (defaults
+// "median" / "floor" = the current behavior). The frozen DiagnoseBuild scorer is UNTOUCHED — these change how
+// the climb AGGREGATES votes and WHEN it batches, never how a build is scored.
+
+// CANDIDATE 1 — NON-MEDIAN AGGREGATOR. The gate consumes a single `.score` scalar; today the runner passes the
+// MEDIAN of the per-vote DiagnoseBuild scores (picture-climb.mjs scoreBuild). The median throws away a
+// strong-minority read. These aggregators keep it — opt-in via CLIMB_AGGREGATOR. `trimmedMean` (drop the
+// single most-pessimistic vote, mean the rest; n=3 → mean of the top 2) is the robust upper estimator: it
+// rescues a lone-judge read WITHOUT `max`'s lone-spike rubber-stamp (two craters + one euphoric vote still
+// average low, because dropping one low vote leaves another). The ticket's "upper quantile" candidate.
+export const VOTE_AGGREGATORS = Object.freeze({
+  median: (xs) => [...xs].sort((a, b) => a - b)[Math.floor(xs.length / 2)],
+  max: (xs) => Math.max(...xs),
+  mean: (xs) => xs.reduce((a, b) => a + b, 0) / xs.length,
+  trimmedMean: (xs) => {
+    const s = [...xs].sort((a, b) => a - b).slice(1); // drop the single lowest vote
+    return s.length ? s.reduce((a, b) => a + b, 0) / s.length : [...xs][0];
+  },
+});
+
+/**
+ * Aggregate a per-vote score array to the single scalar the gate consumes. `kind` defaults to "median" — the
+ * CURRENT behavior — so `aggregateVotes(scores)` is byte-identical to the runner's median and the default
+ * climb is unperturbed. Unknown kind → median (fail-safe). Empty array → NaN (no votes is not a score of 0 —
+ * the runner aborts an all-failed round upstream). Pure; does not mutate `scores`.
+ * @param {number[]} scores
+ * @param {"median"|"max"|"mean"|"trimmedMean"} [kind]
+ * @returns {number}
+ */
+export function aggregateVotes(scores, kind = "median") {
+  if (!Array.isArray(scores) || scores.length === 0) return NaN;
+  return (VOTE_AGGREGATORS[kind] ?? VOTE_AGGREGATORS.median)(scores);
+}
+
+// CANDIDATE 2 — BATCH-WHILE-IMPROVING. The cold-start escape (T-208) batches detail moves ONLY at the score
+// floor (coldStartFloor). The same dressing reached OFF the floor gets the per-move gate and is rolled back
+// (the floor-only-batch asymmetry, S-212). batchEligible relaxes the ENTRY predicate: "improving" mode lets
+// detail compound on ANY closed form. The COMPOUND is still judged by acceptsBatch's full guard stack
+// (form-integrity → regression → added-major → net-minor → tie) — no-rubber-stamp is preserved (reuse, not
+// fork). Off the floor the runner passes the FULL margin to acceptsBatch (escaping 0 is no longer the signal),
+// so a +1 nudge on an already-decent build does not rubber-stamp through.
+export const BATCH_MODES = Object.freeze(["floor", "improving"]);
+
+/**
+ * BATCH ENTRY predicate (T-213-01). `mode:"floor"` (default) delegates to `coldStartFloor` — byte-identical to
+ * T-208, so the default climb batches exactly when it does today. `mode:"improving"` returns eligible on ANY
+ * closed form (`closure ≥ formReadyThreshold`) regardless of score — the batch-while-improving candidate.
+ * NaN/non-finite closure → not eligible (fail-safe: never batch an unknown form), in either mode. Pure.
+ * @param {{score:number, closure:number, mode?:string, scoreFloor?:number, formReadyThreshold?:number}} args
+ * @returns {boolean}
+ */
+export function batchEligible({ score, closure, mode = "floor",
+  scoreFloor = BATCH_DEFAULTS.scoreFloor, formReadyThreshold = FORM_READY_CLOSURE } = {}) {
+  if (mode === "improving") return Number.isFinite(closure) && num(closure) >= formReadyThreshold;
+  return coldStartFloor({ score, closure, scoreFloor, formReadyThreshold });
+}
+
 /**
  * Per-department MAJOR counts, derived purely from a critique's `items`. `critiqueEvidence` exposes only the
  * WHOLE-BUILD `nMajor`; this is the finer signal the department-aware accept-gate needs (T-190-01). When a

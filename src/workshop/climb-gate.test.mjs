@@ -23,6 +23,10 @@ import {
   acceptsBatch,
   coldStartFloor,
   BATCH_DEFAULTS,
+  VOTE_AGGREGATORS,
+  aggregateVotes,
+  batchEligible,
+  BATCH_MODES,
 } from "./climb-gate.mjs";
 
 // ---- CG1: acceptsRound — clear improvement past the margin is accepted ----
@@ -727,4 +731,114 @@ test("CG-coldStart2 coldStartFloor false off the floor, on an open form, and on 
 test("CG-coldStart3 BATCH_DEFAULTS are frozen with the documented knobs", () => {
   assert.deepEqual(BATCH_DEFAULTS, { batchSize: 4, scoreFloor: 0, batchMargin: 1 });
   assert.equal(Object.isFrozen(BATCH_DEFAULTS), true);
+});
+
+// ============================ T-213-01 (S-213, E-55): accept-rule spike candidates ============================
+// Candidate 1 = non-median aggregator (the median discarded the [8,0,48] arch's lone 48). Candidate 2 =
+// batch-while-improving (the batch escape fires only at the floor). BOTH pure, opt-in, default OFF. The KEEP
+// cases prove agreement with the glance; the NO-RUBBER-STAMP cases (CG-B2 style) prove a worse build is still
+// rejected — the monotonic corpus makes the reject set load-bearing, so it is asserted as a recorded fact.
+
+// CG-AGG1: DEFAULT-OFF byte-identity — aggregateVotes("median") equals the runner's median for every shape.
+test("CG-AGG1 aggregateVotes default 'median' is byte-identical to the runner's median", () => {
+  const median = (xs) => [...xs].sort((a, b) => a - b)[Math.floor(xs.length / 2)];
+  for (const xs of [[0, 12, 0], [8, 0, 48], [8, 8, 8], [20, 20, 0], [40, 40, 40], [5]]) {
+    assert.equal(aggregateVotes(xs), median(xs), `median(${xs})`);
+    assert.equal(aggregateVotes(xs, "median"), median(xs));
+  }
+  // empty → NaN (no votes is not a score of 0); unknown kind → median (fail-safe)
+  assert.ok(Number.isNaN(aggregateVotes([])));
+  assert.equal(aggregateVotes([8, 0, 48], "bogus"), median([8, 0, 48]));
+});
+
+// CG-AGG2: KEEP — a non-median aggregator rescues the M4 arch the median rolled back. before S3 [8,8,8],
+// after S4 [8,0,48]: median delta 0 (ROLL); max/mean/trimmedMean lift it past the margin (KEEP).
+test("CG-AGG2 a non-median aggregator keeps the [8,0,48] arch the median discarded", () => {
+  const before = [8, 8, 8], after = [8, 0, 48];
+  // the median rolls it (the documented headline disagreement)
+  const med = acceptsRound({ score: aggregateVotes(before) }, { score: aggregateVotes(after) }, { margin: 4 });
+  assert.equal(med.accept, false);
+  assert.match(med.reason, /no shrink/);
+  // every non-median aggregator keeps it
+  for (const k of ["max", "mean", "trimmedMean"]) {
+    const r = acceptsRound({ score: aggregateVotes(before, k) }, { score: aggregateVotes(after, k) }, { margin: 4 });
+    assert.equal(r.accept, true, `${k} should KEEP the arch`);
+    assert.match(r.reason, /improved/, k);
+  }
+  // trimmedMean is ROBUST (top-2 mean = 28, delta +20), not the knife-edge mean (+10.7) — both clear margin 4
+  assert.equal(aggregateVotes(after, "trimmedMean"), 28);
+});
+
+// CG-AGG3: THE FALSIFICATION (no-rubber-stamp). A genuinely-WORSE build — a good [40,40,40] two judges now
+// crater and one euphoric vote spikes [0,0,48]. median/mean/trimmedMean REJECT it; **max KEEPS it** — the
+// documented trade the contest turns on (the monotonic corpus alone would give max a false pass).
+test("CG-AGG3 median/mean/trimmedMean reject the lone-spike worse build; max rubber-stamps it", () => {
+  const before = [40, 40, 40], after = [0, 0, 48]; // two craters + one spike from a good build
+  for (const k of ["median", "mean", "trimmedMean"]) {
+    const r = acceptsRound({ score: aggregateVotes(before, k) }, { score: aggregateVotes(after, k) }, { margin: 4 });
+    assert.equal(r.accept, false, `${k} must REJECT the worse build`);
+    assert.match(r.reason, /regressed/, k);
+  }
+  // max is fooled by the lone 48 → KEEP (the rubber-stamp, recorded as a fact, not a footnote)
+  const mx = acceptsRound({ score: aggregateVotes(before, "max") }, { score: aggregateVotes(after, "max") }, { margin: 4 });
+  assert.equal(mx.accept, true);
+  assert.match(mx.reason, /improved/);
+});
+
+// CG-AGG4: VOTE_AGGREGATORS shape — frozen, the four kinds, single-element + ordering stability.
+test("CG-AGG4 VOTE_AGGREGATORS is frozen with the documented kinds", () => {
+  assert.equal(Object.isFrozen(VOTE_AGGREGATORS), true);
+  assert.deepEqual(Object.keys(VOTE_AGGREGATORS).sort(), ["max", "mean", "median", "trimmedMean"]);
+  assert.equal(aggregateVotes([5], "trimmedMean"), 5);            // n=1 → the lone value (slice empty → fallback)
+  assert.equal(aggregateVotes([0, 12, 0], "trimmedMean"), 6);     // sorted [0,0,12] drop lowest → [0,12] mean 6
+  assert.equal(aggregateVotes([8, 0, 48], "max"), 48);
+  assert.equal(aggregateVotes([0, 12, 0], "mean"), 4);
+});
+
+// CG-BWI1: DEFAULT-OFF byte-identity — batchEligible(mode:"floor") equals coldStartFloor for every fixture.
+test("CG-BWI1 batchEligible 'floor' mode is byte-identical to coldStartFloor", () => {
+  const cases = [
+    { score: 0, closure: 1.0 }, { score: 0, closure: FORM_READY_CLOSURE },
+    { score: 12, closure: 1.0 }, { score: 0, closure: 0.6 }, { score: 0, closure: NaN },
+    { score: 5, closure: 1.0, scoreFloor: 5 },
+  ];
+  for (const c of cases) {
+    assert.equal(batchEligible({ ...c, mode: "floor" }), coldStartFloor(c), JSON.stringify(c));
+    assert.equal(batchEligible(c), coldStartFloor(c)); // mode defaults to "floor"
+  }
+});
+
+// CG-BWI2: "improving" mode batches on ANY closed form (off the floor too) where "floor" mode does not;
+// still fail-safe on an open form / NaN closure (never batch an unknown or unclosed form).
+test("CG-BWI2 batchEligible 'improving' mode batches off the floor on a closed form", () => {
+  // off the floor (score 8) on a closed form: floor=false, improving=true (the asymmetry fix)
+  assert.equal(batchEligible({ score: 8, closure: 1.0, mode: "floor" }), false);
+  assert.equal(batchEligible({ score: 8, closure: 1.0, mode: "improving" }), true);
+  // at the floor: both true
+  assert.equal(batchEligible({ score: 0, closure: 1.0, mode: "improving" }), true);
+  // open form / NaN → never eligible, even improving (fail-safe)
+  assert.equal(batchEligible({ score: 8, closure: 0.6, mode: "improving" }), false);
+  assert.equal(batchEligible({ score: 8, closure: NaN, mode: "improving" }), false);
+});
+
+// CG-BWI3: NO-RUBBER-STAMP off the floor. Batch-while-improving still judges the COMPOUND with acceptsBatch;
+// off the floor the runner passes the FULL margin (4), so a +2 nudge is rejected and only a real +12 is kept.
+test("CG-BWI3 off-floor batch rejects a marginal compound and keeps a real one (full margin)", () => {
+  // off-floor margin = the climb margin (4), not the floor-escape batchMargin (1)
+  const weak = acceptsBatch({ score: 8, nMajor: 3 }, { score: 10, nMajor: 3 }, { batchMargin: 4 });
+  assert.equal(weak.accept, false);                       // +2 < 4 → no read
+  assert.match(weak.reason, /compound tie at floor — no read/);
+  const real = acceptsBatch({ score: 8, nMajor: 3 }, { score: 20, nMajor: 3 }, { batchMargin: 4 });
+  assert.equal(real.accept, true);                        // +12 ≥ 4 → kept (the M6 dressing off the floor)
+  assert.match(real.reason, /compound \+12/);
+  // a worse off-floor compound is still rejected by the regression guard
+  const worse = acceptsBatch({ score: 8, nMajor: 3 }, { score: 3, nMajor: 3 }, { batchMargin: 4 });
+  assert.equal(worse.accept, false);
+  assert.match(worse.reason, /regressed/);
+});
+
+// CG-BWI4: BATCH_MODES shape — frozen, the two documented modes.
+test("CG-BWI4 BATCH_MODES is frozen with the two documented modes", () => {
+  assert.equal(Object.isFrozen(BATCH_MODES), true);
+  assert.deepEqual([...BATCH_MODES], ["floor", "improving"]);
 });
