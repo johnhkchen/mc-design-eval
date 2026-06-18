@@ -22,6 +22,7 @@ import { infillPanel } from "../../src/view/facade-articulation.mjs";
 import { rebuildArtifact } from "../../src/view/shell-integrity.mjs";
 import { renderViews } from "../../src/view/multi-angle.mjs";
 import { requestText, requestTextWithImage } from "../../src/sdk-binding.mjs";
+import { parseFirstJsonObject } from "../../src/workshop/agent-reply.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..", "..");
@@ -42,7 +43,9 @@ const AGENT_MODEL = "claude-sonnet-4-6";
 const EVAL_MODEL = "claude-opus-4-8";
 
 function img(p) { return { data: readFileSync(p), mediaType: "image/png" }; }
-function parse(t) { const s = t.indexOf("{"), e = t.lastIndexOf("}"); return JSON.parse(t.slice(s, e + 1)); }
+// First-balanced-brace JSON extraction (T-198-01 hardening, ported here in T-200-01): the old
+// slice(firstBrace,lastBrace) form crashed on any TWO-object reply (the slice spanned both → invalid JSON).
+const parse = parseFirstJsonObject;
 function occToCells(occ) {
   const out = [];
   for (const [key, block] of occ.cells) out.push({ pos: key.split(",").map(Number), block, form: occ.forms.get(key), state: occ.states.get(key) });
@@ -156,8 +159,22 @@ async function agentPick(verdict, history) {
     MENU,
     'Output ONE JSON object: {"tool":"<apply_gable_roof|construct_walls|add_timber_framing|done>","reason":"<short>"}',
   ].join("\n");
-  const { text } = await requestText({ prompt, model: AGENT_MODEL });
-  return parse(text);
+  // Made ROBUST to a malformed reply (T-198-01 hardening, ported in T-200-01): a non-conforming pick must
+  // DEGRADE, never crash the subject and lose the trajectory. Try the reply; on a parse failure re-ask ONCE
+  // with a stern corrective; if that also fails, fall to a recorded `done` (the honest terminal the loop
+  // already handles) rather than throwing.
+  const ask = (extra) => requestText({ prompt: prompt + (extra ?? ""), model: AGENT_MODEL });
+  try {
+    return parse((await ask()).text);
+  } catch (e1) {
+    console.error(`  [agentPick] unparseable reply (${e1.message}) — re-asking once`);
+    try {
+      return parse((await ask("\n\nIMPORTANT: output EXACTLY ONE JSON object and nothing else — no second object, no prose.")).text);
+    } catch (e2) {
+      console.error(`  [agentPick] still unparseable (${e2.message}) — falling to \`done\` (recorded)`);
+      return { tool: "done", reason: "agent reply unparseable after one re-ask — terminating honestly" };
+    }
+  }
 }
 
 async function runSubject(key) {

@@ -47,7 +47,8 @@ import { runTieredOp } from "../../src/model-tier.mjs";
 import { bamlRender, bamlParse } from "../../src/baml/bridge.mjs";
 import { diagnoseRenderArgs } from "../../src/workshop/diagnose.mjs";
 import { critiqueEvidence, itemStyleClass, styleFidelityScore } from "../../src/workshop/bakeoff-score.mjs";
-import { acceptsRound, stoppingDecision, classifyInventory, deptMajorCounts, deptItemCounts, buildDigest, TOOL_DEPARTMENTS, CLIMB_DEFAULTS, formReadyGate, FORM_READY_CLOSURE } from "../../src/workshop/climb-gate.mjs";
+import { acceptsRound, stoppingDecision, classifyInventory, deptMajorCounts, deptItemCounts, buildDigest, TOOL_DEPARTMENTS, CLIMB_DEFAULTS, formReadyGate, FORM_READY_CLOSURE, closureDecidedMove } from "../../src/workshop/climb-gate.mjs";
+import { parseFirstJsonObject } from "../../src/workshop/agent-reply.mjs";
 import { reconcileRoofMaterial } from "../../src/recognition/roof-material.mjs";
 import { assertMaterialMap } from "../../src/form/material-map.mjs";
 
@@ -84,23 +85,9 @@ const toB64 = async (p) => {
   const mediaType = buf.slice(0, 3).toString("hex") === "ffd8ff" ? "image/jpeg" : "image/png";
   return { base64: buf.toString("base64"), mediaType };
 };
-// Extract the FIRST balanced-brace JSON object from a model reply (T-198-01). The old `slice(firstBrace,
-// lastBrace)` crashed when the agent emitted TWO objects (or an object + trailing prose) — the slice spanned
-// both → `Unexpected non-whitespace character after JSON`, which crashed the whole climb mid-run and lost the
-// trajectory. This scans for the first complete `{…}` (string-aware) and ignores anything after it.
-const parse = (t) => {
-  const s = t.indexOf("{");
-  if (s < 0) throw new Error(`no JSON object in reply: ${String(t).slice(0, 120)}`);
-  let depth = 0, inStr = false, esc = false;
-  for (let i = s; i < t.length; i++) {
-    const c = t[i];
-    if (inStr) { if (esc) esc = false; else if (c === "\\") esc = true; else if (c === '"') inStr = false; }
-    else if (c === '"') inStr = true;
-    else if (c === "{") depth++;
-    else if (c === "}" && --depth === 0) return JSON.parse(t.slice(s, i + 1));
-  }
-  throw new Error(`unbalanced JSON object in reply: ${t.slice(s, s + 120)}`);
-};
+// First-balanced-brace JSON extraction (T-198-01, shared in T-200-01) — now the single source in
+// src/workshop/agent-reply.mjs (so picture-climb and autonomy-loop decode replies identically).
+const parse = parseFirstJsonObject;
 const occToCells = (occ) => {
   const out = [];
   for (const [key, block] of occ.cells) out.push({ pos: key.split(",").map(Number), block, form: occ.forms.get(key), state: occ.states.get(key) });
@@ -625,7 +612,10 @@ async function main() {
     // the form-readiness signal the gate's form clause credits: close_shell raises it 0.615→1.000 and is now
     // KEPT on a picture-score tie instead of rolled back (the T-198 deadlock).
     const closureAfter = closureNow(cand);
-    const gate = acceptsRound(prev, candScore, { margin, targetDepartments, beforeDeptMajors, afterDeptMajors, beforeDeptItems, afterDeptItems, closureBefore: closure, closureAfter });
+    // FORM-MOVE ROUTING (T-200-01, S-200): a wall-shell form move (close_shell/construct_walls) is decided on
+    // closureOf ALONE — the picture vote (a 0–76 same-seed swing) is removed from its keep/rollback so the
+    // decision is stable across re-runs. Roof-form/detail picks keep the picture gradient (isFormMove false).
+    const gate = acceptsRound(prev, candScore, { margin, targetDepartments, beforeDeptMajors, afterDeptMajors, beforeDeptItems, afterDeptItems, closureBefore: closure, closureAfter, isFormMove: closureDecidedMove(pick.tool) });
     if (gate.accept) { occ = cand; prevDigest = candDigest; }
     noAcceptStreak = gate.accept ? 0 : noAcceptStreak + 1;
     history.push({ tool: pick.tool, qBefore: prev.score, qAfter: candScore.score, accepted: gate.accept, reason: gate.reason });
