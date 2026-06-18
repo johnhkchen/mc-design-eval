@@ -25,14 +25,14 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { artifactOccupancy, occupancyFromCells } from "../../src/view/occupancy.mjs";
-import { gableRecord, generateRoof } from "../../src/view/roof-generate.mjs";
+import { gableRecord, generateRoof, gableRidgeForRatio } from "../../src/view/roof-generate.mjs";
 import { constructWalls, closeShell, eaveRingClosure } from "../../src/view/wall-generate.mjs";
 import { wallSkin } from "../../src/view/wall-skin.mjs";
 import { extractApertures, dressOpenings } from "../../src/view/opening-dressing.mjs";
 import { frameArchPlacements } from "../../src/view/arch-frame.mjs";
 import { carveTargetCells, apertureCoherenceGate, carveAperture } from "../../src/view/aperture-carve.mjs";
 import { buildWallRelief } from "../../src/view/wall-relief.mjs";
-import { framingReport } from "../../src/view/framing.mjs";
+import { framingReport, targetRatiosOf } from "../../src/view/framing.mjs";
 import { composeRoofTreatment, bareBlock } from "../../src/view/treatment-grammar.mjs";
 import { roleBlock } from "../../src/recognition/compile.mjs";
 import { infillPanel } from "../../src/view/facade-articulation.mjs";
@@ -95,6 +95,22 @@ const occToCells = (occ) => {
 };
 
 // ====================== the three HANDS (reused verbatim from autonomy-loop.mjs) ======================
+// THE PITCH LEVER (T-204-01, S-204, E-52): the roof hands previously hardcoded `ridgeY = eaveY +
+// floor(perp/2), pitch:1` — a rise blind to the build's eave height, so the achieved ridgeToEave can drift
+// off the recognised concept proportion. leverGable picks the ridge/pitch from the recognised target
+// (targetRatiosOf(program).ridgeToEave) via the PURE, tolerance-gated gableRidgeForRatio. It is byte-IDENTICAL
+// to the old hardcode when the honest gable is within tolerance (the gatehouse: 1.55 vs 1.35, relDelta 0.148
+// < 0.2 → changed:false) — so wiring it in is a no-op here BY DESIGN, and only a genuine drift is corrected.
+function leverGable(occ, perp) {
+  const program = loadProgram(PROGRAM_PATH);
+  const eaveHeight = CFG.eaveY - occ.bounds.min[1] + 1;
+  const target = program ? (targetRatiosOf(program)?.ridgeToEave ?? null) : null;
+  const L = target
+    ? gableRidgeForRatio({ eaveY: CFG.eaveY, eaveHeight, perp, targetRatio: target })
+    : { ridgeY: CFG.eaveY + Math.floor(perp / 2), pitch: 1, changed: false, reason: "no program target — pitch 1" };
+  if (L.changed) console.error(`  [pitch-lever] ${L.reason}`);
+  return L;
+}
 function apply_gable_roof(occ) {
   const kept = []; let x0 = Infinity, x1 = -Infinity, z0 = Infinity, z1 = -Infinity;
   for (const [key, block] of occ.cells) {
@@ -104,7 +120,8 @@ function apply_gable_roof(occ) {
     if (y === CFG.eaveY) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); z0 = Math.min(z0, z); z1 = Math.max(z1, z); }
   }
   const perp = CFG.ridgeAxis === "z" ? x1 - x0 : z1 - z0;
-  const gable = gableRecord({ footprint: { x0, x1, z0, z1 }, ridgeAxis: CFG.ridgeAxis, eaveY: CFG.eaveY, ridgeY: CFG.eaveY + Math.floor(perp / 2), pitch: 1, hip: { demanded: false } });
+  const L = leverGable(occ, perp);
+  const gable = gableRecord({ footprint: { x0, x1, z0, z1 }, ridgeAxis: CFG.ridgeAxis, eaveY: CFG.eaveY, ridgeY: L.ridgeY, pitch: L.pitch, hip: { demanded: false } });
   const FAMILY = { field: "spruce_planks", stairs: "spruce_stairs", slab: "spruce_slab", findings: [] };
   return occupancyFromCells([...kept, ...generateRoof([gable], FAMILY).cells]);
 }
@@ -167,7 +184,8 @@ function recolor_roof(occ) {
     if (y === CFG.eaveY) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); z0 = Math.min(z0, z); z1 = Math.max(z1, z); }
   }
   const perp = CFG.ridgeAxis === "z" ? x1 - x0 : z1 - z0;
-  const gable = gableRecord({ footprint: { x0, x1, z0, z1 }, ridgeAxis: CFG.ridgeAxis, eaveY: CFG.eaveY, ridgeY: CFG.eaveY + Math.floor(perp / 2), pitch: 1, hip: { demanded: false } });
+  const L = leverGable(occ, perp);
+  const gable = gableRecord({ footprint: { x0, x1, z0, z1 }, ridgeAxis: CFG.ridgeAxis, eaveY: CFG.eaveY, ridgeY: L.ridgeY, pitch: L.pitch, hip: { demanded: false } });
   const FAMILY = { field: roofBlock.replace(/^minecraft:/, ""), stairs: null, slab: null, findings: [] };
   console.error(`  [recolor_roof] ${reason}`);
   return occupancyFromCells([...kept, ...generateRoof([gable], FAMILY).cells]);
@@ -501,7 +519,36 @@ async function main() {
     await renderBesideConcept(rebuildArtifact(occ, template), join(ROOT, CONCEPT), join(outDir, "seed-beside.png"), { label: "seed (program roof, dark_oak)" });
     await renderBesideConcept(rebuildArtifact(gabled, template), join(ROOT, CONCEPT), join(outDir, "gable-brown-beside.png"), { label: "apply_gable_roof (timber)" });
     await renderBesideConcept(rebuildArtifact(recolored, template), join(ROOT, CONCEPT), join(outDir, "recolored-beside.png"), { label: "recolor_roof (grey stone)" });
-    console.error(`[ROOF_MATERIAL_PROBE] wrote seed/gable-brown/recolored beside sheets to ${outDir}; no spend; exiting clean.`);
+    console.error(`[ROOF_MATERIAL_PROBE] wrote seed/gable-brown/recolored beside sheets to ${outDir}; no spend.`);
+
+    // T-204-01 (S-204, E-52) — the ROOF-TO-ITS-PICTURE evidence (render-independent, zero spend):
+    //   (1) COLOUR landed value-true: census the recolor_roof roof cells → all deepslate_tiles.
+    //   (2) PITCH is a MEASUREMENT artifact, not a steep roof: the honest closed+gabled build is WITHIN
+    //       tolerance (≈1.55, unflagged); relief_walls proud detail pushes the MEASURED ridgeToEave out of
+    //       tolerance by polluting framing's eaveYOf — the same proud-detail-pollutes-measurement family as
+    //       T-202's eaveRingClosure collapse (named residual, cross-ref T-202; NOT force-corrected here).
+    //   (3) the pitch LEVER EXISTS: fire gableRidgeForRatio on a synthetic out-of-tolerance target.
+    const prog = loadProgram(PROGRAM_PATH);
+    const roofCells = [...recolored.cells].filter(([k]) => Number(k.split(",")[1]) >= CFG.eaveY + 1);
+    const slate = roofCells.filter(([, b]) => b.replace(/^minecraft:/, "") === "deepslate_tiles").length;
+    console.error(`\n[T-204 COLOUR] recolor_roof roof-cell census: ${slate}/${roofCells.length} cells = deepslate_tiles ${slate === roofCells.length && roofCells.length > 0 ? "✓ value-true slate landed" : "✗"}`);
+
+    const fmtScale = (s) => s ? `ridgeToEave ${s.build?.ridgeToEave} vs ${s.target?.ridgeToEave} (Δ ${s.deltas?.ridgeToEave}) flagged=${s.flagged}${s.severity ? ` ${s.severity}` : ""}` : "(no ratios)";
+    const closed = close_shell(occ);
+    const gabledClosed = apply_gable_roof(closed);
+    console.error(`[T-204 PITCH] honest closed+gabled build: ${fmtScale(framingReport(prog, gabledClosed).scale)}`);
+    try {
+      const relief = relief_walls(gabledClosed);
+      console.error(`[T-204 PITCH] after relief_walls (proud detail): ${fmtScale(framingReport(prog, relief).scale)}`);
+      console.error(`[T-204 PITCH] → the flag is raised by relief, not the roof: same eaveYOf proud-detail pollution as T-202 (named residual).`);
+    } catch (e) {
+      console.error(`[T-204 PITCH] relief_walls threw (${e.message}); the flagged value is on record: T-201 trajectory r4 ridgeToEave 1.6316 vs 1.35 (after relief_walls).`);
+    }
+    const eaveHeight = CFG.eaveY - gabledClosed.bounds.min[1] + 1;
+    const perpC = (() => { let a = Infinity, b = -Infinity; for (const k of closed.cells.keys()) { const c = k.split(",").map(Number); if (c[1] === CFG.eaveY) { const u = CFG.ridgeAxis === "z" ? c[0] : c[2]; a = Math.min(a, u); b = Math.max(b, u); } } return Number.isFinite(a) ? b - a : 10; })();
+    const synth = gableRidgeForRatio({ eaveY: CFG.eaveY, eaveHeight, perp: perpC, targetRatio: 1.1 });
+    console.error(`[T-204 LEVER] synthetic out-of-tol target 1.1: changed=${synth.changed} ${synth.reason} → lever exists and moves the ratio on demand.`);
+    console.error(`[ROOF_MATERIAL_PROBE] done; exiting clean.`);
     return;
   }
 
