@@ -9,7 +9,9 @@ import { dirname, join } from "node:path";
 import { occupancyFromCells, artifactOccupancy } from "./occupancy.mjs";
 import { closeColumns, perimeterColumns, spaceOpenings, constructWalls, robustExtent, coverageOf, registerRect, closureOf, closeShell, eaveRingClosure } from "./wall-generate.mjs";
 import { buildWallRelief } from "./wall-relief.mjs";
-import { FORM_READY_CLOSURE, formReadyGate } from "../workshop/climb-gate.mjs";
+import { gableRecord, generateRoof } from "./roof-generate.mjs";
+import { roleBlock } from "../recognition/compile.mjs";
+import { FORM_READY_CLOSURE, formReadyGate, acceptsBatch } from "../workshop/climb-gate.mjs";
 
 const setOf = (...cs) => new Set(cs);
 /** A hollow rectangular ring (perimeter columns only) over [x0,x1]×[z0,z1], stacked floor..eave. */
@@ -491,4 +493,100 @@ test("WG-CS14 formReadyGate gates correctly on the real footprint readings", () 
   assert.equal(formReadyGate({ tool: "relief_walls", closure: seedC }).allow, false, "detail BLOCKED on the open seed");
   assert.equal(formReadyGate({ tool: "close_shell", closure: seedC }).allow, true, "close_shell is always eligible");
   assert.equal(formReadyGate({ tool: "relief_walls", closure: reliefC }).allow, true, "detail ALLOWED on the closed+relief shell");
+});
+
+// ============== T-209-01 — RELIEF-TOLERANT closure on the wall plane below the eave (S-209, E-54) ==============
+// The lead fix. E-53/T-208's glance-good +20 dressed batch was REJECTED because the live build's closure
+// collapsed 1.000 → 0.068 after relief_walls though the shell stayed closed: the gable roof's solid base
+// course at y=eaveY floods the wall band, dilutes registerRect coverage below the 0.5 trust floor → the
+// proud-sensitive raw fallback fires → 0.068. The synthetic WG-CS6/CS11 fixtures (bare rings, no roof) never
+// hit that path, which is how the collapse slipped through T-202/T-206 (the Notes' explicit caution). These
+// fixtures use the REAL gatehouse build assembled the way the runner does (closeShell → gable → relief), so
+// the roof-flood path is actually exercised. The metric now censuses [floor..eaveY-1] (below the roof base
+// course) with a ±1 outward-proud tolerance.
+const T209_RIDGE_AXIS = T202_PROGRAM?.masses?.[0]?.roof?.ridgeAxis ?? "z";
+const T209_WALL_FIELD = roleBlock(T202_PACK, T202_PROGRAM.masses[0].walls.ground.role);
+/** Apply the runner's apply_gable_roof: keep y ≤ eaveY, fit a gable to the eave footprint, append the prism. */
+function gableRoof(occ, eaveY = T206_EAVE) {
+  const kept = []; let x0 = Infinity, x1 = -Infinity, z0 = Infinity, z1 = -Infinity;
+  for (const [k, b] of occ.cells) {
+    const [x, y, z] = k.split(",").map(Number);
+    if (y >= eaveY + 1) continue;
+    kept.push({ pos: [x, y, z], block: b, form: occ.forms.get(k), state: occ.states.get(k) });
+    if (y === eaveY) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); z0 = Math.min(z0, z); z1 = Math.max(z1, z); }
+  }
+  const perp = T209_RIDGE_AXIS === "z" ? x1 - x0 : z1 - z0;
+  const gable = gableRecord({ footprint: { x0, x1, z0, z1 }, ridgeAxis: T209_RIDGE_AXIS, eaveY, ridgeY: eaveY + Math.round(perp * 0.5), pitch: 0.5, hip: { demanded: false } });
+  const FAMILY = { field: "spruce_planks", stairs: "spruce_stairs", slab: "spruce_slab", findings: [] };
+  return occupancyFromCells([...kept, ...generateRoof([gable], FAMILY).cells]);
+}
+/** The live close→gable→relief sequence the runner builds (mirrors closure-probe.mjs). */
+function liveStages() {
+  const floor = T206_SEED.bounds.min[1];
+  const { occ: closed } = closeShell(T206_SEED, { program: T202_PROGRAM, floor, eaveY: T206_EAVE, wallField: T209_WALL_FIELD });
+  const gabled = gableRoof(closed);
+  const { occ: relieved } = buildWallRelief(gabled, { program: T202_PROGRAM, pack: T202_PACK, floor: gabled.bounds.min[1], eaveY: T206_EAVE });
+  const cl = (o) => eaveRingClosure(o, { floor: o.bounds.min[1], eaveY: T206_EAVE, program: T202_PROGRAM });
+  return { closed, gabled, relieved, cl };
+}
+
+// WG-CS15: the open colonnade seed reads OPEN (<0.9) — the T-206 invariant held under the new census.
+test("WG-CS15 the colonnade seed reads OPEN (<0.9) on the wall-plane census", () => {
+  const c = eaveRingClosure(T206_SEED, { floor: T206_SEED.bounds.min[1], eaveY: T206_EAVE, program: T202_PROGRAM });
+  assert.ok(c < FORM_READY_CLOSURE, `the open colonnade is NOT form-ready (got ${c.toFixed(4)})`);
+});
+
+// WG-CS16: the LIVE close→gable→relief build (the T-208 proud-dressed batch) reads form-ready (≥0.9) — the
+// 1.000 → 0.068 collapse is gone. THE FIX: a roof-flooded relieved build no longer falls to the fallback.
+test("WG-CS16 the live close→gable→relief build is form-ready (≥0.9) — the collapse is gone", () => {
+  const { relieved, cl } = liveStages();
+  const c = cl(relieved);
+  assert.ok(c >= FORM_READY_CLOSURE, `relief-on-closed reads form-ready (got ${c.toFixed(4)} ≥ ${FORM_READY_CLOSURE})`);
+  assert.ok(c > 0.2, `not the cratered fallback reading (got ${c.toFixed(4)}; the bug was ~0.068)`);
+});
+
+// WG-CS17: an EXTENT-PRESERVING mid-face reopen of the closed+gabled shell reads OPEN (<0.9), and relief over
+// it stays open — the over-correction guard. The hole keeps the corners + flanks so registration does not
+// rescale the face away; the ±1-proud tolerance cannot rescue a bare gap (nothing outward).
+test("WG-CS17 an extent-preserving reopen reads OPEN (<0.9), bare and after relief", () => {
+  const { closed, cl } = liveStages();
+  // drop the inner run of one face, keeping ≥3 cols at each end so robustExtent does not shrink the face away
+  const band = new Set();
+  for (const k of closed.cells.keys()) { const [x, y, z] = k.split(",").map(Number); if (y >= 0 && y <= T206_EAVE) band.add(`${x},${z}`); }
+  let bx0 = Infinity, bx1 = -Infinity, bz0 = Infinity, bz1 = -Infinity;
+  for (const c of perimeterColumns(band)) { const [x, z] = c.split(",").map(Number); bx0 = Math.min(bx0, x); bx1 = Math.max(bx1, x); bz0 = Math.min(bz0, z); bz1 = Math.max(bz1, z); }
+  const run = new Set(); for (let x = bx0 + 3; x <= bx1 - 3; x++) run.add(`${x},${bz0}`);
+  const reopenCells = [];
+  for (const [k, b] of closed.cells) { const [x, y, z] = k.split(",").map(Number); if (run.has(`${x},${z}`)) continue; reopenCells.push({ pos: [x, y, z], block: b, form: closed.forms.get(k), state: closed.states.get(k) }); }
+  const reopenedGabled = gableRoof(occupancyFromCells(reopenCells));
+  const bareC = cl(reopenedGabled);
+  assert.ok(bareC < FORM_READY_CLOSURE, `the reopened (mid-face) shell is not form-ready (got ${bareC.toFixed(4)})`);
+  const { occ: reliefed } = buildWallRelief(reopenedGabled, { program: T202_PROGRAM, pack: T202_PACK, floor: reopenedGabled.bounds.min[1], eaveY: T206_EAVE });
+  const reliefC = cl(reliefed);
+  assert.ok(reliefC < FORM_READY_CLOSURE, `relief did not mask the reopen (got ${reliefC.toFixed(4)})`);
+});
+
+// WG-CS18: the close_shell → gable → relief sequence STAYS ≥0.9 across every stage after the shell is closed —
+// the relief step no longer collapses the reading (the 1.000 → 0.068 step is gone). The seed it starts from
+// is <0.9 (so the climb still picks close_shell first).
+test("WG-CS18 closure stays ≥0.9 across close→gable→relief (no relief-step collapse)", () => {
+  const { closed, gabled, relieved, cl } = liveStages();
+  assert.ok(cl(T206_SEED) < FORM_READY_CLOSURE, "the seed starts OPEN (close_shell is picked)");
+  assert.ok(cl(closed) >= FORM_READY_CLOSURE, `closed shell is form-ready (got ${cl(closed).toFixed(4)})`);
+  assert.ok(cl(gabled) >= FORM_READY_CLOSURE, `still form-ready after the gable (got ${cl(gabled).toFixed(4)})`);
+  assert.ok(cl(relieved) >= FORM_READY_CLOSURE, `STILL form-ready after relief (got ${cl(relieved).toFixed(4)})`);
+});
+
+// WG-CS19: the two consumers behave on the live readings — formReadyGate allows detail on the relieved build,
+// and acceptsBatch's form-integrity guard does NOT fire on the close→gable→relief compound (closureBefore and
+// closureAfter are both ≥0.9), so the +20 dressed batch is no longer rejected as a false reopen.
+test("WG-CS19 formReadyGate + acceptsBatch consume the new metric (the +20 batch is not rejected)", () => {
+  const { gabled, relieved, cl } = liveStages();
+  const closureBefore = cl(gabled), closureAfter = cl(relieved);
+  assert.equal(formReadyGate({ tool: "relief_walls", closure: closureAfter }).allow, true, "detail allowed on the relieved build");
+  // a compound that improved the picture score; the form-integrity guard must NOT fire (no reopen).
+  const before = { score: 0, nMajor: 3 }, after = { score: 12, nMajor: 3 };
+  const gate = acceptsBatch(before, after, { closureBefore, closureAfter });
+  assert.ok(!/reopen/i.test(gate.reason), `the batch is not rejected as a reopen (reason: "${gate.reason}")`);
+  assert.equal(gate.accept, true, `the +20 dressed batch is accepted (reason: "${gate.reason}")`);
 });
