@@ -409,3 +409,26 @@ test("WG-CS8 robust trim is a no-op on proud-free rings (no regression)", () => 
   const clean11 = ringOcc({ x0: 0, x1: 10, z0: 0, z1: 10, floor: 0, eave: 5 });
   assert.equal(eaveRingClosure(clean11, { floor: 0, eaveY: 5 }), 1, "clean 11×11 still 1");
 });
+
+// WG-CS9 (T-203-01, S-203, E-52): CLOSURE-EXCEPT-APERTURE. The wide-arch rebuild opens a perimeter swath (the
+// declared gate). Without openCols the plane metric dips (a hole); with openCols = the declared-open columns
+// the same swath is forgiven and closure reads form-ready — so the climb does not pick close_shell and eat the
+// gate. Default (∅) is byte-identical to WG-CS8, so a GENUINE hole still reads open.
+test("WG-CS9 eaveRingClosure: a declared-open aperture swath is forgiven by openCols, not by default", () => {
+  const aperture = ["4,0", "5,0", "6,0", "7,0", "8,0", "9,0", "10,0"]; // a width-7 gate swath on the z=0 face
+  const gated = ringOcc({ x0: 0, x1: 14, z0: 0, z1: 14, floor: 0, eave: 5, drop: aperture });
+  const bare = eaveRingClosure(gated, { floor: 0, eaveY: 5 });
+  assert.ok(bare < FORM_READY_CLOSURE, `the open gate swath reads as a hole by default (got ${bare})`);
+  const openCols = new Set(aperture);
+  const forgiven = eaveRingClosure(gated, { floor: 0, eaveY: 5, openCols });
+  assert.ok(forgiven >= FORM_READY_CLOSURE, `closure-except-aperture reads form-ready (got ${forgiven})`);
+  assert.equal(forgiven, 1, "every non-aperture perimeter column is present → exactly 1 with the aperture forgiven");
+  // the over-forgiveness guard: forgiving the WRONG columns does NOT rescue a real hole elsewhere
+  const otherFace = ["2,14", "3,14", "4,14", "5,14", "6,14", "7,14", "8,14", "9,14"]; // a real hole on the z=14 face
+  const realHole = ringOcc({ x0: 0, x1: 14, z0: 0, z1: 14, floor: 0, eave: 5, drop: otherFace });
+  assert.ok(eaveRingClosure(realHole, { floor: 0, eaveY: 5, openCols }) < FORM_READY_CLOSURE,
+    "an unrelated hole still reads open even with openCols set for a different swath");
+  // and openCols for a different swath has NO effect on this build (the z=0 cols are present anyway)
+  assert.equal(eaveRingClosure(realHole, { floor: 0, eaveY: 5, openCols }),
+    eaveRingClosure(realHole, { floor: 0, eaveY: 5 }), "forgiving an absent swath changes nothing here");
+});

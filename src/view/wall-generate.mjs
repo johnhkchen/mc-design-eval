@@ -286,10 +286,18 @@ function bandHistogram(occ, floor, eaveY, ns) {
  * the proud fringe. A genuine reopening still reads low — the proud plinth is emitted only in front of
  * existing exterior cells (so it mirrors the wall's holes), and the corners hold the bbox so a missing face
  * stays a visible empty edge. Reuses the ONE closure authority (`closureOf`); no new metric.
+ *
+ * CLOSURE-EXCEPT-APERTURE (T-203-01, S-203, E-52). `openCols` = the DECLARED-OPEN aperture columns (the
+ * wide-arch rebuild's through-tunnel). A perimeter slot that is a declared-open column counts as SATISFIED:
+ * it is intentionally open, not a hole. So once the gate is rebuilt, the plane metric reads ~1 again and the
+ * climb's form gate stays satisfied instead of triggering close_shell (which would re-fill — and destroy —
+ * the gate). Default `openCols=∅` ⇒ byte-identical to the T-202 metric (only columns the rebuild actually
+ * opened are forgiven, so a genuine reopening still reads low). Reuses `closureOf`'s exact perimeter math.
  * @param {import("./occupancy.mjs").Occupancy} occ
- * @param {{floor?:number, eaveY:number}} params  eaveY required; floor defaults to occ.bounds.min[1]
+ * @param {{floor?:number, eaveY:number, openCols?:Set<string>}} params  eaveY required; floor defaults to
+ *   occ.bounds.min[1]; openCols default ∅ (no aperture forgiven)
  */
-export function eaveRingClosure(occ, { floor, eaveY } = {}) {
+export function eaveRingClosure(occ, { floor, eaveY, openCols } = {}) {
   if (!occ?.bounds) return 0;
   if (eaveY === undefined) throw new Error("eaveRingClosure: eaveY required");
   const f = floor ?? occ.bounds.min[1];
@@ -307,7 +315,14 @@ export function eaveRingClosure(occ, { floor, eaveY } = {}) {
     const [x, z] = c.split(",").map(Number);
     if (x >= ext.x0 && x <= ext.x1 && z >= ext.z0 && z <= ext.z1) footprint.add(c);
   }
-  return closureOf(perimeterColumns(footprint));
+  const ring = perimeterColumns(footprint);
+  if (!openCols || openCols.size === 0 || ring.size === 0) return closureOf(ring);
+  // closure-EXCEPT-aperture: reproduce closureOf's present/perimeter ratio, forgiving the declared-open cols.
+  const per = perimeterColumns(filledRect(bboxOf(ring)));
+  if (per.size === 0) return 0;
+  let present = 0;
+  for (const c of per) if (ring.has(c) || openCols.has(c)) present++;
+  return present / per.size;
 }
 
 /**
