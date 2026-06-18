@@ -76,6 +76,16 @@ export const FORM_READY_CLOSURE = 0.9;
 // it, like CLIMB_DEFAULTS.margin.
 export const CLOSURE_GAIN_MARGIN = 0.1;
 
+// The COLD-START BATCH ESCAPE (T-208-01, S-208, E-53). On a genuinely-closed form the picture scalar can
+// saturate at its 0 floor (T-207 live: a clean wide arch scored 0→0 and the per-move gate rolled it back as
+// "tie (0): no shrink"). Every single detail move ties at 0, so the greedy gate can never let detail compound
+// even though several hands together would read. The escape: stack `batchSize` provisional detail moves
+// un-credited, then judge the COMPOUND once (the gradient several moves create together). scoreFloor = the
+// saturated floor the per-move gate can't leave; batchMargin = the smallest off-floor read that counts (one
+// point — escaping 0 is the signal). Frozen; the runner reads CLIMB_BATCH_SIZE / CLIMB_SCORE_FLOOR env knobs
+// (default OFF) like CLIMB_MAX_ROUNDS, so every prior climb re-runs byte-identically unless the escape is on.
+export const BATCH_DEFAULTS = Object.freeze({ batchSize: 4, scoreFloor: 0, batchMargin: 1 });
+
 // Tool → climb stage. FORM = massing/envelope/roof shape & material (the coarse build, always eligible).
 // DETAIL = carve/dress/band a finished form (gated on form-readiness). The ticket names carve_arch,
 // relief_walls, band_eave; the other dressing hands are the same class (they decorate an envelope) so they
@@ -113,6 +123,20 @@ export function formReadyGate({ tool, closure, threshold = FORM_READY_CLOSURE } 
   const c = num(closure);
   if (c >= threshold) return { allow: true, stage, reason: `form ready (closure ${c.toFixed(3)} ≥ ${threshold})` };
   return { allow: false, stage, reason: `form not ready (closure ${c.toFixed(3)} < ${threshold}) — close the shell before detail` };
+}
+
+/**
+ * COLD-START FLOOR (T-208-01). Is the build stuck at the saturated picture floor on a CLOSED form — the trap
+ * where every per-move detail gate ties at 0 (research §2)? True iff the form is closed (closure ≥ threshold)
+ * AND the picture score sits at/under `scoreFloor`. The runner uses this to decide whether to enter the batch
+ * escape; outside it the unchanged per-move `acceptsRound` governs (so a healthy climb never batches). Pure;
+ * NaN closure → not cold-start (fail-safe: never batch on an unknown form).
+ * @param {{score:number, closure:number, scoreFloor?:number, formReadyThreshold?:number}} args
+ * @returns {boolean}
+ */
+export function coldStartFloor({ score, closure, scoreFloor = BATCH_DEFAULTS.scoreFloor,
+  formReadyThreshold = FORM_READY_CLOSURE } = {}) {
+  return num(score) <= scoreFloor && Number.isFinite(closure) && num(closure) >= formReadyThreshold;
 }
 
 /**
@@ -309,6 +333,46 @@ export function acceptsRound(before, after, {
     return { accept: true, delta, reason: `tie (${Math.round(delta)}): coverage shrank` };
   }
   return { accept: false, delta, reason: `tie (${Math.round(delta)}): no shrink` };
+}
+
+/**
+ * ACCEPT-A-COMPOUND (T-208-01, S-208, E-53) — the score-0 cold-start escape. Keep N provisionally-stacked
+ * DETAIL moves vs the pre-batch build, judged by the picture score over the COMPOUND (`after`) — the gradient
+ * several moves create together, which the per-move gate's saturated 0-floor could not see (research §2;
+ * T-207 live: a clean wide arch scored 0→0 and rolled back). Reuses `departmentDominant` over the UNION of the
+ * batch's targeted departments. Guards, in order (the rubber-stamp / deliberately-bad-compound reject is the
+ * AC falsification — the escape must reject a worse batch, never rubber-stamp):
+ *   (3) `delta < 0`                → REJECT "regressed" (a compound that worsened the scalar; moot at floor 0
+ *                                    where `after.score ≥ 0`, kept as a guard for `scoreFloor > 0` callers);
+ *   (2) new whole-build major (`after.nMajor > before.nMajor`) → REJECT "added a major" (a bad batch that
+ *                                    paints wrong / floods openings raises a major → rejected — the rubber-stamp guard);
+ *   (1a) `delta >= batchMargin`    → ACCEPT "compound +delta" (the build LEFT the floor — what several reads did);
+ *   (1b) `departmentDominant` fires → ACCEPT "<dept> cleared a major" (a targeted major cleared though the
+ *                                    whole-build scalar is still saturated; net-guarded inside departmentDominant);
+ *   else                           → REJECT "compound tie at floor — no read": the honest residual — even the
+ *                                    compound can't move the judge off 0 → the ticket's failure-mode-3 (de-noise
+ *                                    the judge); do NOT rubber-stamp a tie through. Pure; same evidence bundles
+ *                                    (`critiqueEvidence`) as `acceptsRound`. Inert outside the cold start (the
+ *                                    runner only calls it there; the healthy per-move path is unchanged).
+ * @param {{score:number, nMajor?:number}} before
+ * @param {{score:number, nMajor?:number}} after
+ * @param {{batchMargin?:number, targetDepartments?:string[], beforeDeptMajors?:object, afterDeptMajors?:object, beforeDeptItems?:object, afterDeptItems?:object}} [opts]
+ * @returns {{accept:boolean, delta:number, reason:string}}
+ */
+export function acceptsBatch(before, after, {
+  batchMargin = BATCH_DEFAULTS.batchMargin, targetDepartments = null,
+  beforeDeptMajors = null, afterDeptMajors = null, beforeDeptItems = null, afterDeptItems = null,
+} = {}) {
+  if (!before || !after) fail("acceptsBatch", "before and after evidence are required");
+  const delta = num(after.score) - num(before.score);
+  if (delta < 0) return { accept: false, delta, reason: `regressed ${Math.round(delta)}` };
+  if (num(after.nMajor) > num(before.nMajor)) {
+    return { accept: false, delta, reason: `added a major (${num(before.nMajor)}→${num(after.nMajor)})` };
+  }
+  if (delta >= batchMargin) return { accept: true, delta, reason: `compound +${Math.round(delta)} (off the floor)` };
+  const dom = departmentDominant({ targetDepartments, beforeDeptMajors, afterDeptMajors, beforeDeptItems, afterDeptItems });
+  if (dom) return { accept: true, delta, reason: `${dom} cleared a major (department-dominant, batch)` };
+  return { accept: false, delta, reason: `compound tie at floor — no read (→ de-noise the judge)` };
 }
 
 /**

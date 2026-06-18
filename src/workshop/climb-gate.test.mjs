@@ -20,6 +20,9 @@ import {
   CLOSURE_GAIN_MARGIN,
   TOOL_STAGE,
   closureDecidedMove,
+  acceptsBatch,
+  coldStartFloor,
+  BATCH_DEFAULTS,
 } from "./climb-gate.mjs";
 
 // ---- CG1: acceptsRound — clear improvement past the margin is accepted ----
@@ -609,4 +612,98 @@ test("CG-FS6 detail decision is byte-stable with vs without the flag", () => {
   assert.deepEqual(withFlag, without);
   assert.equal(without.accept, false);
   assert.match(without.reason, /no shrink/);
+});
+
+// ============================ CG-B: the cold-start batch escape (T-208-01, S-208, E-53) ============================
+// acceptsBatch keeps a COMPOUND of N provisionally-stacked detail moves vs the pre-batch build, judged by the
+// picture score over the compound — the escape from the score-0 floor where every per-move detail gate ties at 0
+// (T-207 live: a clean wide arch scored 0→0 and rolled back). The deliberately-bad-compound reject (CG-B2/B3) is
+// the AC falsification: the escape must reject a worse batch, never rubber-stamp.
+
+// CG-B1: a good compound that LEFT the floor is kept (the whole point — several reads moved the judge off 0).
+test("CG-B1 acceptsBatch keeps a compound that escapes the score-0 floor", () => {
+  const r = acceptsBatch({ score: 0, nMajor: 3 }, { score: 14, nMajor: 3 }, { batchMargin: 1 });
+  assert.equal(r.accept, true);
+  assert.equal(r.delta, 14);
+  assert.match(r.reason, /compound \+14 \(off the floor\)/);
+});
+
+// CG-B2: THE FALSIFICATION — a deliberately-bad compound that ADDS a whole-build major is rejected (a bad batch
+// that paints wrong / floods openings raises a major). The escape must reject a worse batch.
+test("CG-B2 acceptsBatch REJECTS a deliberately-bad compound that adds a major", () => {
+  const r = acceptsBatch({ score: 0, nMajor: 3 }, { score: 0, nMajor: 5 }, { batchMargin: 1 });
+  assert.equal(r.accept, false);
+  assert.match(r.reason, /added a major \(3→5\)/);
+});
+
+// CG-B3: a compound that REGRESSED the scalar (a scoreFloor>0 caller) is rejected — the regression guard.
+test("CG-B3 acceptsBatch REJECTS a compound that regressed the scalar", () => {
+  const r = acceptsBatch({ score: 8, nMajor: 2 }, { score: 3, nMajor: 2 }, { batchMargin: 1 });
+  assert.equal(r.accept, false);
+  assert.match(r.reason, /regressed -5/);
+});
+
+// CG-B4: a USELESS compound (tie at the floor, no major change) is rejected — NO rubber-stamp. The honest
+// residual: even the compound can't move the judge off 0 → the ticket's failure-mode-3 (de-noise the judge).
+test("CG-B4 acceptsBatch REJECTS a tie at the floor — no rubber-stamp", () => {
+  const r = acceptsBatch({ score: 0, nMajor: 3 }, { score: 0, nMajor: 3 }, { batchMargin: 1 });
+  assert.equal(r.accept, false);
+  assert.match(r.reason, /compound tie at floor — no read/);
+});
+
+// CG-B5: a compound that CLEARED a targeted major (WALL) with the whole-build scalar still saturated at 0 is
+// kept via the department-dominant override (reused over the batch's targeted depts), net-guarded.
+test("CG-B5 acceptsBatch keeps a batch that cleared a targeted major at a flat scalar", () => {
+  const r = acceptsBatch(
+    { score: 0, nMajor: 1 }, { score: 0, nMajor: 1 }, // whole-build nMajor flat (attention shifted)
+    {
+      batchMargin: 1, targetDepartments: ["WALL"],
+      beforeDeptMajors: { WALL: 1 }, afterDeptMajors: { WALL: 0, ROOF: 1 },
+      beforeDeptItems: { WALL: { major: 1, minor: 0 } },
+      afterDeptItems: { WALL: { major: 0, minor: 0 }, ROOF: { major: 1, minor: 0 } },
+    },
+  );
+  assert.equal(r.accept, true);
+  assert.match(r.reason, /WALL cleared a major \(department-dominant, batch\)/);
+});
+
+// CG-B6: the net guard still bites in a batch — cleared the WALL major but grew WALL's total burden (added
+// minors in its own target) → rejected (the departmentDominant net guard (c), as in CG15).
+test("CG-B6 acceptsBatch net guard rejects 'cleared a major but added minors in its own target'", () => {
+  const r = acceptsBatch(
+    { score: 0, nMajor: 1 }, { score: 0, nMajor: 1 },
+    {
+      batchMargin: 1, targetDepartments: ["WALL"],
+      beforeDeptMajors: { WALL: 1 }, afterDeptMajors: { WALL: 0 },
+      beforeDeptItems: { WALL: { major: 1, minor: 0 } },
+      afterDeptItems: { WALL: { major: 0, minor: 3 } }, // total 1 → 3: net degradation in its own target
+    },
+  );
+  assert.equal(r.accept, false);
+  assert.match(r.reason, /compound tie at floor — no read/);
+});
+
+// CG-B7: acceptsBatch requires both evidence bundles (same contract as acceptsRound).
+test("CG-B7 acceptsBatch throws without before/after evidence", () => {
+  assert.throws(() => acceptsBatch(null, { score: 1 }), /before and after evidence are required/);
+});
+
+// CG-coldStart1: the entry predicate is TRUE only on a closed form stuck at the floor.
+test("CG-coldStart1 coldStartFloor true on a closed form at the score floor", () => {
+  assert.equal(coldStartFloor({ score: 0, closure: 1.0 }), true);
+  assert.equal(coldStartFloor({ score: 0, closure: FORM_READY_CLOSURE }), true); // boundary: ≥ threshold
+});
+
+// CG-coldStart2: FALSE off the floor or on an open form, and fail-safe on NaN closure (never batch unknown).
+test("CG-coldStart2 coldStartFloor false off the floor, on an open form, and on NaN closure", () => {
+  assert.equal(coldStartFloor({ score: 12, closure: 1.0 }), false);   // already off the floor
+  assert.equal(coldStartFloor({ score: 0, closure: 0.6 }), false);    // form still open (T-206 seed)
+  assert.equal(coldStartFloor({ score: 0, closure: NaN }), false);    // fail-safe: unknown form
+  assert.equal(coldStartFloor({ score: 5, closure: 1.0, scoreFloor: 5 }), true); // configurable floor
+});
+
+// CG-coldStart3: BATCH_DEFAULTS are frozen and shaped as the runner expects.
+test("CG-coldStart3 BATCH_DEFAULTS are frozen with the documented knobs", () => {
+  assert.deepEqual(BATCH_DEFAULTS, { batchSize: 4, scoreFloor: 0, batchMargin: 1 });
+  assert.equal(Object.isFrozen(BATCH_DEFAULTS), true);
 });
