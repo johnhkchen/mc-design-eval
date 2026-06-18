@@ -26,7 +26,7 @@ import { fileURLToPath } from "node:url";
 
 import { artifactOccupancy, occupancyFromCells } from "../../src/view/occupancy.mjs";
 import { gableRecord, generateRoof } from "../../src/view/roof-generate.mjs";
-import { constructWalls } from "../../src/view/wall-generate.mjs";
+import { constructWalls, closeShell, eaveRingClosure } from "../../src/view/wall-generate.mjs";
 import { wallSkin } from "../../src/view/wall-skin.mjs";
 import { extractApertures, dressOpenings } from "../../src/view/opening-dressing.mjs";
 import { frameArchPlacements } from "../../src/view/arch-frame.mjs";
@@ -47,7 +47,7 @@ import { runTieredOp } from "../../src/model-tier.mjs";
 import { bamlRender, bamlParse } from "../../src/baml/bridge.mjs";
 import { diagnoseRenderArgs } from "../../src/workshop/diagnose.mjs";
 import { critiqueEvidence, itemStyleClass, styleFidelityScore } from "../../src/workshop/bakeoff-score.mjs";
-import { acceptsRound, stoppingDecision, classifyInventory, deptMajorCounts, deptItemCounts, buildDigest, TOOL_DEPARTMENTS, CLIMB_DEFAULTS } from "../../src/workshop/climb-gate.mjs";
+import { acceptsRound, stoppingDecision, classifyInventory, deptMajorCounts, deptItemCounts, buildDigest, TOOL_DEPARTMENTS, CLIMB_DEFAULTS, formReadyGate, FORM_READY_CLOSURE } from "../../src/workshop/climb-gate.mjs";
 import { reconcileRoofMaterial } from "../../src/recognition/roof-material.mjs";
 import { assertMaterialMap } from "../../src/form/material-map.mjs";
 
@@ -115,6 +115,21 @@ function construct_walls(occ) {
   const wallField = (pack && groundRole) ? roleBlock(pack, groundRole) : undefined;
   const env = constructWalls(occ, { floor, eaveY: CFG.eaveY, program, wallField });
   return wallSkin(env, { program, pack, floor, eaveY: CFG.eaveY, extractApertures, dressOpenings });
+}
+// THE CLOSE-THE-SHELL FORM HAND (WALL, FORM stage) — T-197-01 (S-197, E-51). Build a DENSE closed wall shell
+// from the program footprint (closeShell): the gatehouse is an open colonnade (band closure ~0.615) because
+// constructWalls suppresses the dense program-rect ring on the near-square footprint. This is FORM ONLY — no
+// skin, no opening carve (those are the DETAIL stage, gated behind form-readiness). Keeps the roof verbatim.
+// Honest no-op (logs the geometry wall) if the footprint can't register above the trust floor.
+function close_shell(occ) {
+  const program = loadProgram(PROGRAM_PATH);
+  const pack = loadPackOf(program);
+  const floor = occ.bounds.min[1];
+  const groundRole = program?.masses?.[0]?.walls?.ground?.role;
+  const wallField = (pack && groundRole) ? roleBlock(pack, groundRole) : undefined;
+  const { occ: out, report } = closeShell(occ, { program, floor, eaveY: CFG.eaveY, wallField });
+  console.error(`  [close_shell] ${report.closed ? `CLOSED: closure ${report.closureBefore.toFixed(3)} → ${report.closureAfter.toFixed(3)} (ring ${report.ringSize}, cov ${report.coverage?.toFixed(2)})` : `no-op — ${report.reason}`}`);
+  return out;
 }
 function add_timber_framing(occ) {
   const eave = CFG.eaveY;
@@ -298,8 +313,9 @@ function band_eave(occ) {
   return out;
 }
 
-const TOOLS = { apply_gable_roof, recolor_roof, construct_walls, add_timber_framing, frame_arch, carve_arch, articulate_walls, relief_walls, band_eave };
+const TOOLS = { apply_gable_roof, recolor_roof, construct_walls, close_shell, add_timber_framing, frame_arch, carve_arch, articulate_walls, relief_walls, band_eave };
 const MENU = [
+  "- close_shell: CLOSE THE SHELL — rebuild the wall envelope as a DENSE, watertight box from the building footprint (form/massing only, no detail). Best when the walls are an OPEN COLONNADE / full of gaps / not a closed building. This is the FORM step: detail tools (carve_arch, relief_walls, band_eave) are LOCKED until the shell is closed.",
   "- apply_gable_roof: replace the roof with a crisp parametric gable. Best when the worst divergence is the ROOF FORM/SHAPE/presence (not its colour).",
   "- recolor_roof: rebuild the roof in the CONCEPT-TRUE material recognition read (e.g. grey stone when the concept roof is stone, not the program's default brown timber). Best when the worst divergence is ROOF COLOUR / MATERIAL — the roof reads the wrong material vs the concept.",
   "- construct_walls: REBUILD the wall envelope and skin it as construction from the pack roles (per-storey material, dressed quoins, clinker courses, a plinth, dressed openings). Best for STRUCTURAL wall holes / missing walls / a monotone single-material wall.",
@@ -355,9 +371,15 @@ async function scoreBuild(occ, template, round, tag) {
 
 const evOf = (b) => ({ score: b.score, nItems: b.nItems, nMajor: b.nMajor, nWrongStyle: b.nWrongStyle, wrongStyleBreadth: b.wrongStyleBreadth, departments: b.departments, missing: b.missing });
 
-async function agentPick(build, history) {
+async function agentPick(build, history, closure = null) {
   const top = [...build.items].sort((a, b) => (a.severity === "major" ? 0 : 1) - (b.severity === "major" ? 0 : 1))
     .slice(0, 5).map((it) => `  - ${it.department} (${it.severity}, ${it.kind ?? "?"}): ${it.missing || it.present || "diverges"}`).join("\n");
+  // FORM-BEFORE-DETAIL readiness (T-197-01): tell the agent whether the shell is closed enough to dress, so
+  // it picks close_shell FIRST on an open form. Detail picks on an open form are rejected by the runner.
+  const formReady = closure === null ? "" :
+    closure >= FORM_READY_CLOSURE
+      ? `FORM READINESS: wall shell closure ${closure.toFixed(2)}/1.0 — CLOSED. Detail tools (carve_arch, relief_walls, band_eave) are eligible.`
+      : `FORM READINESS: wall shell closure ${closure.toFixed(2)}/1.0 — OPEN (an unclosed colonnade). Detail tools (carve_arch, relief_walls, band_eave) are LOCKED until closure ≥ ${FORM_READY_CLOSURE}. Pick close_shell first to close the form.`;
   const hist = history.length
     ? history.map((h) => `- ${h.tool}: score ${h.qBefore}→${h.qAfter} (${h.accepted ? "KEPT" : "ROLLED BACK — " + h.reason})`).join("\n")
     : "(nothing tried yet)";
@@ -370,6 +392,7 @@ async function agentPick(build, history) {
     "You improve a Minecraft build to look like its CONCEPT IMAGE. A picture-critique reports the build's",
     `current divergences from the concept (picture-fidelity score ${build.score}/100, higher = closer):`,
     top || "  (no items — the build reads like the concept)",
+    formReady,
     framing,
     "Tools already applied, and whether the accept-gate KEPT them (kept only if they moved toward the concept):",
     hist,
@@ -378,7 +401,7 @@ async function agentPick(build, history) {
     "- If no tool addresses the worst remaining divergence (e.g. it names a chimney, an interior, or fine",
     "  trim no tool builds), pick `done` — naming a defect you cannot fix is the honest answer.",
     "Pick ONE tool:", MENU,
-    'Output ONE JSON: {"tool":"<apply_gable_roof|recolor_roof|construct_walls|add_timber_framing|frame_arch|carve_arch|articulate_walls|relief_walls|band_eave|done>","reason":"<short>"}',
+    'Output ONE JSON: {"tool":"<close_shell|apply_gable_roof|recolor_roof|construct_walls|add_timber_framing|frame_arch|carve_arch|articulate_walls|relief_walls|band_eave|done>","reason":"<short>"}',
   ].join("\n");
   const { text } = await requestText({ prompt, model: AGENT_MODEL });
   return parse(text);
@@ -442,17 +465,41 @@ async function main() {
     return;
   }
 
+  // Form-before-detail ordering (T-197-01): the build's wall-band closure — the form-readiness scalar the
+  // ordering gate consumes. The SAME definition closeShell reports (eaveRingClosure), so there is no drift.
+  const closureNow = (o) => eaveRingClosure(o, { floor: o.bounds.min[1], eaveY: CFG.eaveY });
+
   const trajectory = [];
   const history = [];
   let prev = await scoreBuild(occ, template, 0, "seed");
   let prevDigest = buildDigest(occToCells(occ)); // the kept build's digest (T-190-01 no-op guard)
-  let pick = await agentPick(prev, history);
-  console.error(`\n[round 0] score=${prev.score} (${prev.scores.join("/")}) → agent picks ${pick.tool}: ${pick.reason}`);
-  trajectory.push({ round: 0, score: prev.score, evidence: evOf(prev), items: prev.items, pick, applied: false, accepted: false, framing: prev.framing ?? null });
+  let pick = await agentPick(prev, history, closureNow(occ));
+  console.error(`\n[round 0] score=${prev.score} (${prev.scores.join("/")}) closure=${closureNow(occ).toFixed(3)} → agent picks ${pick.tool}: ${pick.reason}`);
+  trajectory.push({ round: 0, score: prev.score, evidence: evOf(prev), items: prev.items, pick, applied: false, accepted: false, framing: prev.framing ?? null, closure: closureNow(occ) });
 
   let noAcceptStreak = 0, stopReason = "maxRounds", round = 1;
   for (; round <= maxRounds; round++) {
     if (pick.tool === "done" || !TOOLS[pick.tool]) { stopReason = "agent-done"; break; }
+
+    // FORM-BEFORE-DETAIL ordering (T-197-01): a DETAIL tool is ineligible until the wall shell is form-ready
+    // (closure ≥ FORM_READY_CLOSURE). Block it with NO apply / NO spend, record the rolled-back round, advance
+    // the stall counter, and re-pick — the agent is told the form is open so it picks close_shell first. Form
+    // tools (close_shell, construct_walls, the roof hands) and `done` always pass straight through.
+    const closure = closureNow(occ);
+    const eligible = formReadyGate({ tool: pick.tool, closure });
+    if (!eligible.allow) {
+      noAcceptStreak += 1;
+      history.push({ tool: pick.tool, qBefore: prev.score, qAfter: prev.score, accepted: false, reason: eligible.reason });
+      console.error(`[round ${round}] ${pick.tool}: BLOCKED (form-before-detail) — ${eligible.reason}, no spend`);
+      trajectory.push({ round, score: prev.score, evidence: evOf(prev), items: prev.items,
+        pick, applied: true, accepted: false, gate: { accept: false, delta: 0, reason: eligible.reason }, blocked: true, closure });
+      pick = await agentPick(prev, history, closure);
+      console.error(`           next: ${pick.tool} — ${pick.reason}`);
+      const stopBlk = stoppingDecision({ round, agentDone: pick.tool === "done", noAcceptStreak, margin, stallK, maxRounds, minRounds });
+      if (stopBlk.stop) { stopReason = stopBlk.reason; break; }
+      continue;
+    }
+
     const cand = TOOLS[pick.tool](occ);
 
     // No-op guard (T-190-01): an idempotent re-pick that produces a byte-identical build is not progress and
@@ -464,8 +511,8 @@ async function main() {
       history.push({ tool: pick.tool, qBefore: prev.score, qAfter: prev.score, accepted: false, reason: "no-op (identical build)" });
       console.error(`[round ${round}] ${pick.tool}: no-op (identical build) — ROLLED BACK, no spend`);
       trajectory.push({ round, score: prev.score, evidence: evOf(prev), items: prev.items,
-        pick, applied: true, accepted: false, gate: { accept: false, delta: 0, reason: "no-op (identical build)" }, noop: true });
-      pick = await agentPick(prev, history);
+        pick, applied: true, accepted: false, gate: { accept: false, delta: 0, reason: "no-op (identical build)" }, noop: true, closure });
+      pick = await agentPick(prev, history, closure);
       console.error(`           next: ${pick.tool} — ${pick.reason}`);
       const stopNoop = stoppingDecision({ round, agentDone: pick.tool === "done", noAcceptStreak, margin, stallK, maxRounds, minRounds });
       if (stopNoop.stop) { stopReason = stopNoop.reason; break; }
@@ -492,10 +539,11 @@ async function main() {
     trajectory.push({ round, score: prev.score, evidence: evOf(prev), items: prev.items,
       pick, applied: true, accepted: gate.accept, gate, scoreAfter: { score: candScore.score, scores: candScore.scores },
       targetDepartments, deptMajorsBefore: beforeDeptMajors, deptMajorsAfter: afterDeptMajors,
-      deptItemsBefore: beforeDeptItems, deptItemsAfter: afterDeptItems, framing: candScore.framing ?? null });
+      deptItemsBefore: beforeDeptItems, deptItemsAfter: afterDeptItems, framing: candScore.framing ?? null,
+      closure, closureAfter: closureNow(gate.accept ? cand : occ) });
 
     prev = gate.accept ? candScore : prev;
-    pick = await agentPick(prev, history);
+    pick = await agentPick(prev, history, closureNow(occ));
     console.error(`           next: ${pick.tool} — ${pick.reason}`);
     const stop = stoppingDecision({ round, agentDone: pick.tool === "done", noAcceptStreak, margin, stallK, maxRounds, minRounds });
     if (stop.stop) { stopReason = stop.reason; break; }
@@ -510,6 +558,9 @@ async function main() {
     concept: CONCEPT, tier: TIER, votes: VOTES, margin, stopReason,
     observedScoreSpread: { min: Math.min(...prev.scores), max: Math.max(...prev.scores), allRoundVotes: spread },
     framingResidual: prev.framing?.residual ?? [], // the wider eyes' named gap on the kept build (→ E-49)
+    formReadyClosure: FORM_READY_CLOSURE,
+    closureFirst: trajectory[0]?.closure ?? null, // the seed's open shell
+    closureLast: closureNow(occ),                  // the kept build's shell after the climb
     trajectory, inventory,
   };
   const outPath = join(ROOT, process.env.CLIMB_OUT ?? "docs/active/work/T-188-01/trajectory.json");
@@ -520,6 +571,7 @@ async function main() {
   console.error(`\n================ PICTURE-DRIVEN CLIMB (gatehouse) ================`);
   console.error(`trend: ${trend}  (Δ ${inventory.verdict.delta >= 0 ? "+" : ""}${inventory.verdict.delta}; stop: ${stopReason})`);
   console.error(`verdict: climbed=${inventory.verdict.climbed} stalled=${inventory.verdict.stalled} oscillated=${inventory.verdict.oscillated} actionable=${inventory.verdict.actionableFrac}`);
+  console.error(`shell closure: ${(out.closureFirst ?? 0).toFixed(3)} → ${out.closureLast.toFixed(3)} (form-ready ≥ ${FORM_READY_CLOSURE})`);
   console.error(`acted-on: ${inventory.actedOn.map((a) => a.department).join(", ") || "(none)"}`);
   console.error(`eyes-only (named, no lever): ${inventory.eyesOnly.map((e) => e.department).join(", ") || "(none)"}`);
   console.error(`framing residual (wider eyes, → E-49): ${out.framingResidual.map((r) => `${r.axis} (${r.note})`).join("; ") || "(none — orientation+scale read clean)"}`);
