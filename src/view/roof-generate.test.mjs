@@ -627,11 +627,15 @@ test("RR2 gableRidgeForRatio fires and moves the ratio toward target when out of
   assert.ok(r.ratioAfter < r.ratioBefore, "the steep roof was flattened");
 });
 
-// RR3 cap: the achieved rise never exceeds the half-perp run (no roof taller than its own slope).
-test("RR3 gableRidgeForRatio never raises the ridge above the half-perp run", () => {
-  const eaveY = 5, eaveHeight = 3, perp = 8; // riseAtPitch1 = 4; a high target would over-demand
-  const r = gableRidgeForRatio({ eaveY, eaveHeight, perp, targetRatio: 5 });
-  assert.ok(r.ridgeY - eaveY <= Math.floor(perp / 2), "rise capped at floor(perp/2)");
+// RR3 clean apex: the ridge follows the CHOSEN pitch class's natural apex (pitch·half-perp, half-quantised) —
+// the slopes meet at a point, never a plateau-topped truncation. A too-flat roof is raised by a steeper class.
+test("RR3 gableRidgeForRatio sets the ridge to the chosen pitch's clean apex", () => {
+  const eaveY = 5, eaveHeight = 3, perp = 8; // riseAtPitch1 = 4; ratioBefore 2.33; target 3.5 → too flat
+  const r = gableRidgeForRatio({ eaveY, eaveHeight, perp, targetRatio: 3.5 });
+  assert.equal(r.changed, true);
+  const rise = r.ridgeY - eaveY;
+  assert.equal(rise, Math.round(Math.round(r.pitch * Math.floor(perp / 2) * 2) / 2), "ridge = round(roundHalf(pitch·half-perp))");
+  assert.ok(r.pitch > 1, "a too-flat target is raised by a steeper pitch class");
 });
 
 // RR4 degenerate input: no throw on the hand path; pitch-1 default returned.

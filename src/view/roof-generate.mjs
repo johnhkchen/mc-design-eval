@@ -156,12 +156,13 @@ export function gableRidgeForRatio({ eaveY, eaveHeight, perp, targetRatio, tol =
   if (relDelta(ratioBefore, targetRatio) <= tol) {
     return { ...def, ratioBefore, ratioAfter: ratioBefore, reason: `within tol — pitch 1 kept (${roundHalf(ratioBefore * 100) / 100} vs ${targetRatio})` };
   }
-  // Out of tolerance: snap to the supported pitch class whose achieved (capped, half-quantised) rise lands
-  // closest to the target. The rise can never exceed the half-perp run (no roof taller than its own slope).
-  const targetRise = eaveHeight * (targetRatio - 1);
+  // Out of tolerance: snap to the supported pitch class whose CLEAN apex (a symmetric gable meeting at a
+  // point — apex rise = pitch · half-perp run, half-quantised) lands closest to the target. The ridge follows
+  // the chosen pitch's apex (NOT a separately-capped height) so the slopes meet cleanly — no plateau-topped
+  // truncation. Shallower pitch (0.5) lowers a too-steep roof; steeper (2/3) raises a too-flat one.
   let best = null;
   for (const pitch of pitchClasses) {
-    const achievedRise = roundHalf(Math.min(riseAtPitch1 * pitch, riseAtPitch1, Math.max(0, targetRise)));
+    const achievedRise = roundHalf(riseAtPitch1 * pitch);
     const ratio = (eaveHeight + achievedRise) / eaveHeight;
     const err = Math.abs(ratio - targetRatio);
     if (!best || err < best.err) best = { pitch, achievedRise, ratio, err };
