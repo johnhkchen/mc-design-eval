@@ -54,6 +54,50 @@ function probeWallPlane(occ, ax, au, av) {
 const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
 
 /**
+ * CENTER-ON-FACE (T-210-01, story S-210, epic E-54). The by-construction placement helper. Given a wall FACE
+ * width and a desired opening width, return the opening's column span CENTRED ON THE FACE — independent of where
+ * any pre-existing (often GLB-inherited) slot happened to sit. This is the fix for the ergonomic gap the arch
+ * work exposed: {@link carveTargetCells} centres on the EXISTING slot (`uMid` from the air cells), so whether a
+ * gatehouse gate reads centred was hostage to a stray void's position, not to intent.
+ *
+ * PURE scalar arithmetic — face-relative, no occupancy, no axis/sign bookkeeping (the caller adds the face's
+ * world `uFaceLo` to get world `au`). The span is `uLo = floor((faceW − w)/2)`, `uHi = uLo + w − 1`, with the
+ * width clamped so an opening can never be wider than its face (`w ≤ faceW`). When parities differ the leftover
+ * cell biases to the HIGH side (floor), the documented convention.
+ * @param {number} faceW    width of the wall face along the u-axis (cells), ≥ 1
+ * @param {number} openingW  desired opening width (cells), ≥ 1
+ * @returns {{uLo:number, uHi:number, width:number, clamped:boolean}} FACE-RELATIVE span, uLo∈[0,faceW−1]
+ */
+export function centerOnFace(faceW, openingW) {
+  if (!Number.isFinite(faceW) || faceW < 1) fail("centerOnFace", `faceW must be ≥ 1 (got ${faceW})`);
+  if (!Number.isFinite(openingW) || openingW < 1) fail("centerOnFace", `openingW must be ≥ 1 (got ${openingW})`);
+  const want = Math.round(openingW);
+  const width = clamp(want, 1, Math.round(faceW));
+  const uLo = Math.floor((Math.round(faceW) - width) / 2);
+  const uHi = uLo + width - 1;
+  return { uLo, uHi, width, clamped: want > Math.round(faceW) };
+}
+
+/**
+ * The declared aperture's slot columns that fall OUTSIDE the chosen centred span (T-210-01). When a gate is
+ * re-centred on its face, an inherited slot that sat off-centre is left BESIDE the new opening — a double
+ * opening / ragged edge the SCOPE conjunct is blind to (it inspects REMOVED cells, not pre-existing air). The
+ * runner uses `columns` to FILL the residual back to solid (restoring the shell — adding wall, the opposite of
+ * an air op) before placing the centred gate. PURE.
+ * @param {object} declaredAperture an `extractApertures` entry (carries cells with au/av)
+ * @param {object} target from {@link carveTargetCells} (carries ax, uLo, uHi, vLo, vHi, wStar)
+ * @returns {{aus:number[], columns:Set<string>}} slot aus outside [target.uLo,target.uHi] + their wall-plane cols
+ */
+export function inheritedSlotResidual(declaredAperture, target) {
+  const cells = Array.isArray(declaredAperture?.cells) ? declaredAperture.cells : [];
+  const { ax, uLo, uHi, vLo, wStar } = target;
+  const aus = [...new Set(cells.map((c) => c.au))].filter((au) => au < uLo || au > uHi).sort((a, b) => a - b);
+  const columns = new Set();
+  for (const au of aus) { const p = posOf(ax, au, vLo, wStar); columns.add(`${p[0]},${p[2]}`); }
+  return { aus, columns };
+}
+
+/**
  * The removable cell set that widens a DECLARED gate into the intended opening, centred on the existing
  * slot. A gatehouse gate is a THROUGH-PASSAGE, so by default we carve the full passage DEPTH (the tunnel),
  * not a single face plane — a single-plane carve on a thick/voxelized wall exposes the cavity behind it and
@@ -67,7 +111,7 @@ const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
  * @param {{programW:number, scale?:number, minArchWidth?:number, maxWidth?:number, depth?:"tunnel"|"plane"}} opts
  * @returns {{remove:Set<string>, target:object, widenedRegion:{min:number[],max:number[]}}}
  */
-export function carveTargetCells(occ, declaredAperture, { programW, scale = 1, minArchWidth = 5, maxWidth = 9, depth = "tunnel" } = {}) {
+export function carveTargetCells(occ, declaredAperture, { programW, scale = 1, minArchWidth = 5, maxWidth = 9, depth = "tunnel", faceSpan } = {}) {
   if (!occ?.bounds) fail("carveTargetCells", "occupancy is empty");
   const ax = OPENING_AXES[declaredAperture?.dir];
   if (!ax) fail("carveTargetCells", `unknown declared aperture dir ${declaredAperture?.dir}`);
@@ -80,10 +124,24 @@ export function carveTargetCells(occ, declaredAperture, { programW, scale = 1, m
 
   // target width: scale the declared width into the build, clamp so an arch head is always buildable.
   const T = clamp(Math.round((programW ?? minArchWidth) * (scale || 1)), minArchWidth, maxWidth);
-  const uLo = Math.round(uMid - (T - 1) / 2), uHi = uLo + T - 1;
 
-  // exterior wall plane: probe at a known-SOLID jamb (one column outside the slot), where the slot centre is air.
-  const wStar = probeWallPlane(occ, ax, uLoSlot - 1, vLo) ?? probeWallPlane(occ, ax, uHiSlot + 1, vLo);
+  // CENTRE selection (T-210-01). With a declared wall FACE span, centre the opening ON THE FACE by construction
+  // (centerOnFace) — independent of where the inherited slot sat. Without it, the legacy slot-centred path runs
+  // byte-identically (the existing default for every test/subject that does not supply a face).
+  let uLo, uHi, centeredOnFace = false;
+  if (faceSpan && Number.isFinite(faceSpan.uLo) && Number.isFinite(faceSpan.uHi) && faceSpan.uHi >= faceSpan.uLo) {
+    const faceW = faceSpan.uHi - faceSpan.uLo + 1;
+    const rel = centerOnFace(faceW, T);
+    uLo = faceSpan.uLo + rel.uLo; uHi = faceSpan.uLo + rel.uHi;
+    centeredOnFace = true;
+  } else {
+    uLo = Math.round(uMid - (T - 1) / 2); uHi = uLo + T - 1;
+  }
+
+  // exterior wall plane: probe at a known-SOLID jamb (one column outside the CHOSEN span), where the span centre
+  // is air. For a flat wall this resolves the same wStar wherever the solid jamb sits (the default-path removal
+  // set is byte-stable — guarded by test); a face-centred span far from the slot still finds its wall plane.
+  const wStar = probeWallPlane(occ, ax, uLo - 1, vLo) ?? probeWallPlane(occ, ax, uHi + 1, vLo);
   if (wStar === null) fail("carveTargetCells", "could not resolve the exterior wall plane (no solid jamb)");
 
   // depth range: the full build extent along w (the tunnel) or the single exterior plane.
@@ -107,7 +165,7 @@ export function carveTargetCells(occ, declaredAperture, { programW, scale = 1, m
     min: [Math.min(c0[0], c1[0]), Math.min(c0[1], c1[1]), Math.min(c0[2], c1[2])],
     max: [Math.max(c0[0], c1[0]), Math.max(c0[1], c1[1]), Math.max(c0[2], c1[2])],
   };
-  const target = { dir: declaredAperture.dir, ax, uLo, uHi, vLo, vHi, wStar, wMin, wMax, width: T, widenedRegion };
+  const target = { dir: declaredAperture.dir, ax, uLo, uHi, vLo, vHi, wStar, wMin, wMax, width: T, widenedRegion, centeredOnFace };
   return { remove, target, widenedRegion };
 }
 

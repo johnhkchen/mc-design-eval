@@ -15,7 +15,7 @@ import { closureCheck } from "./shell-integrity.mjs";
 import { frameArchPlacements } from "./arch-frame.mjs";
 import {
   carveTargetCells, carvedVoidCoherence, archedVoidCoherence, apertureCoherenceGate, carveAperture,
-  apertureColumns, APERTURE_CARVE_SCHEMA,
+  apertureColumns, centerOnFace, inheritedSlotResidual, APERTURE_CARVE_SCHEMA,
 } from "./aperture-carve.mjs";
 
 // A closed box x,z∈[0..6], y∈[0..6] (all six faces solid), with a 1-wide slot on the −x wall (x=0) at z=3,
@@ -253,4 +253,66 @@ test("AR5 the arched rebuild + arch gate are byte-stable across runs; apertureCo
   // the declared-open aperture columns (a through-tunnel ⇒ the full u-span × w-depth footprint)
   const cols = apertureColumns(ra.target);
   assert.ok(cols.size > 0 && [...cols].every((c) => /^\d+,\d+$/.test(c)), "apertureColumns are x,z keys");
+});
+
+// ============================ T-210-01 (S-210, E-54) — center a gate on a wall by construction ============
+
+// ---- CF1: centerOnFace math — even/odd face × opening widths, the floor-bias convention ----
+test("CF1 centerOnFace centres the span, biasing the leftover cell high (floor)", () => {
+  assert.deepEqual(centerOnFace(8, 4), { uLo: 2, uHi: 5, width: 4, clamped: false }); // even/even, symmetric
+  assert.deepEqual(centerOnFace(7, 3), { uLo: 2, uHi: 4, width: 3, clamped: false }); // odd/odd, symmetric
+  assert.deepEqual(centerOnFace(8, 3), { uLo: 2, uHi: 4, width: 3, clamped: false }); // even/odd, floor bias high
+  assert.deepEqual(centerOnFace(7, 4), { uLo: 1, uHi: 4, width: 4, clamped: false }); // odd/even, 1 left/2 right
+});
+
+// ---- CF2: centerOnFace clamps the opening to the face (never wider than the wall) ----
+test("CF2 centerOnFace clamps openingW to faceW and reports it", () => {
+  assert.deepEqual(centerOnFace(5, 9), { uLo: 0, uHi: 4, width: 5, clamped: true }); // clamped to the face
+  assert.deepEqual(centerOnFace(1, 1), { uLo: 0, uHi: 0, width: 1, clamped: false }); // degenerate, no throw
+  assert.throws(() => centerOnFace(0, 3), /faceW must be/);
+  assert.throws(() => centerOnFace(7, 0), /openingW must be/);
+});
+
+// ---- CF3: the real gatehouse case — faceW 27, opening 7 → centred span face-relative [10,16] (world z[-3,3]) ----
+test("CF3 centerOnFace reproduces the gatehouse centred span", () => {
+  const rel = centerOnFace(27, 7);
+  assert.deepEqual(rel, { uLo: 10, uHi: 16, width: 7, clamped: false });
+  const uFaceLo = -13; // the gatehouse -x wall band runs z∈[-13,13]
+  assert.equal(uFaceLo + rel.uLo, -3); assert.equal(uFaceLo + rel.uHi, 3); // centred on z=0
+});
+
+// ---- CF4: carveTargetCells with faceSpan centres on the FACE, independent of where the slot sits ----
+test("CF4 carveTargetCells faceSpan centres on the wall face, not the slot", () => {
+  const { occ, aperture } = closedBoxWithSlot({ slotZ: 1 }); // slot OFF-centre (z=1) on the z∈[0,6] face
+  const { target } = carveTargetCells(occ, aperture, { programW: 4, scale: 1, faceSpan: { uLo: 0, uHi: 6 } });
+  // face-centred: centerOnFace(7,5) → rel[1,5], world [1,5] (NOT the slot-centred [-1,3])
+  assert.equal(target.uLo, 1); assert.equal(target.uHi, 5);
+  assert.equal(target.width, 5);
+  assert.equal(target.centeredOnFace, true);
+  assert.equal(target.wStar, 0, "wall plane still resolves at x=0");
+});
+
+// ---- CF5: inheritedSlotResidual names the slot columns OUTSIDE the centred span (the conflict to fill) ----
+test("CF5 inheritedSlotResidual flags an off-span slot, ignores an in-span one", () => {
+  const { occ, aperture } = closedBoxWithSlot({ slotZ: 1 });
+  const { target } = carveTargetCells(occ, aperture, { programW: 4, scale: 1, faceSpan: { uLo: 0, uHi: 6 } });
+  // target span is z∈[1,5]; a slot at au=6 is OUTSIDE → residual; a slot at au=3 is INSIDE → empty
+  const outside = inheritedSlotResidual({ cells: [{ au: 6, av: 1 }, { au: 6, av: 2 }] }, target);
+  assert.deepEqual(outside.aus, [6]);
+  assert.equal(outside.columns.size, 1);
+  assert.ok([...outside.columns][0] && /^\d+,\d+$|^-?\d+,-?\d+$/.test([...outside.columns][0]));
+  const inside = inheritedSlotResidual({ cells: [{ au: 3, av: 1 }] }, target);
+  assert.deepEqual(inside.aus, []);
+  assert.equal(inside.columns.size, 0);
+});
+
+// ---- CF6: BYTE-STABILITY — no faceSpan ⇒ the legacy slot-centred carve is unchanged (centeredOnFace=false) ----
+test("CF6 carveTargetCells without faceSpan is byte-identical to the legacy slot-centred path", () => {
+  const { occ, aperture } = closedBoxWithSlot(); // slot at z=3
+  const { remove, target } = carveTargetCells(occ, aperture, { programW: 4, scale: 1, depth: "plane" });
+  assert.equal(target.centeredOnFace, false);
+  assert.equal(target.uLo, 1); assert.equal(target.uHi, 5); // slot-centred on z=3 (unchanged from AC1)
+  assert.equal(target.wStar, 0);
+  assert.ok(![...remove].some((k) => k.split(",")[2] === "3"), "the existing slot air is not re-removed");
+  assert.equal([...remove].filter((k) => k.split(",")[2] === "1").length, 4, "z=1 column (4 cells) carved");
 });
