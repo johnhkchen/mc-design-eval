@@ -66,6 +66,12 @@ export const TOOL_DEPARTMENTS = Object.freeze({
 // dense shell 1.000 — a wide margin, so 0.9 is robust, not a knife-edge.
 export const FORM_READY_CLOSURE = 0.9;
 
+// The minimum closure RISE that counts as a form-readiness win (T-199-01, S-199, E-49 — the form-credit
+// clause). Calibrated against the measured gatehouse gap (seed band 0.615 → closed dense shell 1.000 =
+// +0.385); 0.1 sits well inside it, robust not a knife-edge. The runner reports the OBSERVED gain beside
+// it, like CLIMB_DEFAULTS.margin.
+export const CLOSURE_GAIN_MARGIN = 0.1;
+
 // Tool → climb stage. FORM = massing/envelope/roof shape & material (the coarse build, always eligible).
 // DETAIL = carve/dress/band a finished form (gated on form-readiness). The ticket names carve_arch,
 // relief_walls, band_eave; the other dressing hands are the same class (they decorate an envelope) so they
@@ -175,6 +181,48 @@ function departmentDominant({ targetDepartments, beforeDeptMajors, afterDeptMajo
 }
 
 /**
+ * The FORM-CREDIT clause (T-199-01, S-199, E-49) — the FORM-ANALOG of departmentDominant. Returns
+ * `{gain, closureAfter}` when a tool raised FORM-READINESS (wall-band `closure`, the SAME `eaveRingClosure`
+ * the runner / closeShell report — never a second metric) by a margin TOWARD the form-ready threshold, and
+ * otherwise `null`. It lets the form/massing hand (close_shell) be KEPT even at a picture-score TIE or
+ * REGRESSION — the deadlock the T-198 metered climb hit: close_shell closes the gatehouse shell
+ * (closureOf 0.615 → 1.000) but the noisy picture critique scores it a 16→16 tie, the gate rolled it back,
+ * and the form-before-detail gate then locked every DETAIL hand forever (closure never reaches 0.9).
+ *
+ * Where departmentDominant's guard (a) is "cleared a major", this clause's positive signal is "closure rose
+ * by `closureMargin` while a form gap remained". The E-50 guards are KEPT, with one deliberate tightening:
+ *   (1) closure evidence present (finite before/after) — else `null` (inert, backward compatible);
+ *   (b′) NO NEW department major ANYWHERE (whole-build) — STRICTER than departmentDominant's targeted-only
+ *        (b): form credit is justified by a STRUCTURAL scalar (perimeter occupancy), not by clearing a
+ *        department, so it must not introduce a major in ANY department. This is the no-rubber-stamp guard
+ *        that rejects a "closing" move that floods the interior / regresses the roof / adds a major. Needs
+ *        the major maps; absent → `null` (fail-safe);
+ *   (2) form gap remains — `closureBefore < formReadyThreshold`; once ready, the detail-gate governs and
+ *        crediting further closure would be closure-maximizing noise;
+ *   (3) real gain — `closureAfter - closureBefore >= closureMargin` (a trivial wobble does not qualify);
+ *   (c′) net guard — no TARGETED dept's TOTAL (major+minor) burden rose (the E-50 net-minor tightening,
+ *        targeted-only as in E-50; active only when `targetDepartments` + `*DeptItems` supplied).
+ * Pure. Inert (`null`) without closure or major-count data.
+ */
+function formCredit({
+  closureBefore, closureAfter, closureMargin = CLOSURE_GAIN_MARGIN, formReadyThreshold = FORM_READY_CLOSURE,
+  targetDepartments, beforeDeptMajors, afterDeptMajors, beforeDeptItems, afterDeptItems,
+}) {
+  if (!Number.isFinite(closureBefore) || !Number.isFinite(closureAfter)) return null; // (1) inert w/o closure
+  if (!beforeDeptMajors || !afterDeptMajors) return null;            // (b′) needs major data → fail-safe
+  if (closureBefore >= formReadyThreshold) return null;              // (2) only while a form gap remains
+  const gain = closureAfter - closureBefore;
+  if (gain < closureMargin) return null;                             // (3) real rise toward the threshold
+  const depts = new Set([...Object.keys(beforeDeptMajors), ...Object.keys(afterDeptMajors)]);
+  for (const d of depts) if (num(afterDeptMajors[d]) > num(beforeDeptMajors[d])) return null; // (b′) whole-build
+  if (Array.isArray(targetDepartments) && beforeDeptItems && afterDeptItems) {                 // (c′) net guard
+    const tot = (c) => num(c?.major) + num(c?.minor);
+    for (const d of targetDepartments) if (tot(afterDeptItems[d]) > tot(beforeDeptItems[d])) return null;
+  }
+  return { gain, closureAfter };
+}
+
+/**
  * Accept-gate (design C3 + T-190-01 department-aware signal + T-191-01 department-dominant override). Keep
  * `after` over `before` iff the median picture score improves past MARGIN; otherwise consult the
  * DEPARTMENT-DOMINANT OVERRIDE — a tool that cleared a major in a department it TARGETS, added no new major
@@ -182,16 +230,22 @@ function departmentDominant({ targetDepartments, beforeDeptMajors, afterDeptMajo
  * REGRESSION (the regression is then provably attention-shift to an UNtargeted department). Failing both, a
  * within-margin tie is broken by whole-build coverage shrink (fewer wrong-style departments OR fewer majors),
  * else the round is rolled back. The override supersedes T-190's tie-zone department leg (it is a superset:
- * it fires on regressions too, and is net-guarded). Backward compatible: with no department context the
- * override is inert. `before`/`after` are `critiqueEvidence` bundles.
+ * it fires on regressions too, and is net-guarded). The FORM-CREDIT clause (T-199-01) runs right after the
+ * department override and before the regression reject: a form/massing hand that raised wall-band `closure`
+ * by a margin toward form-ready, added no new major in ANY department, and grew no targeted dept's total is
+ * KEPT even on a tie or regression (see `formCredit`). Backward compatible: with no department context the
+ * override is inert, and with no `closureBefore`/`closureAfter` the form clause is inert. `before`/`after`
+ * are `critiqueEvidence` bundles.
  * @param {{score:number, nMajor?:number, wrongStyleBreadth?:number}} before
  * @param {{score:number, nMajor?:number, wrongStyleBreadth?:number}} after
- * @param {{margin?:number, targetDepartments?:string[], beforeDeptMajors?:object, afterDeptMajors?:object, beforeDeptItems?:object, afterDeptItems?:object}} [opts]
+ * @param {{margin?:number, targetDepartments?:string[], beforeDeptMajors?:object, afterDeptMajors?:object, beforeDeptItems?:object, afterDeptItems?:object, closureBefore?:number, closureAfter?:number, closureMargin?:number, formReadyThreshold?:number}} [opts]
  * @returns {{accept:boolean, delta:number, reason:string}}
  */
 export function acceptsRound(before, after, {
   margin = CLIMB_DEFAULTS.margin, targetDepartments = null,
   beforeDeptMajors = null, afterDeptMajors = null, beforeDeptItems = null, afterDeptItems = null,
+  closureBefore = null, closureAfter = null,
+  closureMargin = CLOSURE_GAIN_MARGIN, formReadyThreshold = FORM_READY_CLOSURE,
 } = {}) {
   if (!before || !after) fail("acceptsRound", "before and after evidence are required");
   const delta = num(after.score) - num(before.score);
@@ -200,6 +254,12 @@ export function acceptsRound(before, after, {
   // its own department survives a whole-build scalar regression caused by attention-shift elsewhere.
   const dom = departmentDominant({ targetDepartments, beforeDeptMajors, afterDeptMajors, beforeDeptItems, afterDeptItems });
   if (dom) return { accept: true, delta, reason: `${dom} cleared a major (department-dominant override)` };
+  // form-credit clause (T-199-01): the form-analog — a form hand that raised closure toward form-ready
+  // without adding a major anywhere or growing a targeted dept's burden is KEPT even at a tie/regression.
+  const form = formCredit({ closureBefore, closureAfter, closureMargin, formReadyThreshold,
+    targetDepartments, beforeDeptMajors, afterDeptMajors, beforeDeptItems, afterDeptItems });
+  if (form) return { accept: true, delta,
+    reason: `closure +${form.gain.toFixed(3)} (${num(closureBefore).toFixed(3)}→${num(closureAfter).toFixed(3)}) form-credit` };
   if (delta <= -margin) return { accept: false, delta, reason: `regressed ${Math.round(delta)}` };
   // tie zone: let whole-build coverage break the tie
   const breadthShrank = num(after.wrongStyleBreadth) < num(before.wrongStyleBreadth);

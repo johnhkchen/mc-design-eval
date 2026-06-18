@@ -620,7 +620,12 @@ async function main() {
     const afterDeptMajors = deptMajorCounts(candScore.items);
     const beforeDeptItems = deptItemCounts(prev.items);
     const afterDeptItems = deptItemCounts(candScore.items);
-    const gate = acceptsRound(prev, candScore, { margin, targetDepartments, beforeDeptMajors, afterDeptMajors, beforeDeptItems, afterDeptItems });
+    // FORM-CREDIT (T-199-01, E-49): the candidate's wall-band closure — the SAME eaveRingClosure definition,
+    // computed on the APPLIED build BEFORE the gate decision (the recorded value the gate evaluates). This is
+    // the form-readiness signal the gate's form clause credits: close_shell raises it 0.615→1.000 and is now
+    // KEPT on a picture-score tie instead of rolled back (the T-198 deadlock).
+    const closureAfter = closureNow(cand);
+    const gate = acceptsRound(prev, candScore, { margin, targetDepartments, beforeDeptMajors, afterDeptMajors, beforeDeptItems, afterDeptItems, closureBefore: closure, closureAfter });
     if (gate.accept) { occ = cand; prevDigest = candDigest; }
     noAcceptStreak = gate.accept ? 0 : noAcceptStreak + 1;
     history.push({ tool: pick.tool, qBefore: prev.score, qAfter: candScore.score, accepted: gate.accept, reason: gate.reason });
@@ -630,7 +635,7 @@ async function main() {
       pick, applied: true, accepted: gate.accept, gate, scoreAfter: { score: candScore.score, scores: candScore.scores },
       targetDepartments, deptMajorsBefore: beforeDeptMajors, deptMajorsAfter: afterDeptMajors,
       deptItemsBefore: beforeDeptItems, deptItemsAfter: afterDeptItems, framing: candScore.framing ?? null,
-      closure, closureAfter: closureNow(gate.accept ? cand : occ), voteOutcomes: candScore.voteOutcomes ?? null });
+      closure, closureAfter, voteOutcomes: candScore.voteOutcomes ?? null });
 
     prev = gate.accept ? candScore : prev;
     pick = await agentPick(prev, history, closureNow(occ));

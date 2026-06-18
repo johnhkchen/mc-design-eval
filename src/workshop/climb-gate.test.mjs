@@ -17,6 +17,7 @@ import {
   CLIMB_GATE_SCHEMA,
   formReadyGate,
   FORM_READY_CLOSURE,
+  CLOSURE_GAIN_MARGIN,
   TOOL_STAGE,
 } from "./climb-gate.mjs";
 
@@ -395,4 +396,137 @@ test("CG-FR6 close_shell is registered as a WALL form tool", () => {
 test("CG-FR7 formReadyGate fails safe on a non-finite closure", () => {
   assert.equal(formReadyGate({ tool: "carve_arch", closure: NaN }).allow, false);
   assert.equal(formReadyGate({ tool: "carve_arch", closure: undefined }).allow, false);
+});
+
+// ==================== T-199-01 — the form-credit accept clause (S-199, E-49) ====================
+// The form-analog of the department-dominant override: credit a form-readiness win (closure↑ toward 0.9)
+// over the noisy picture scalar — but guarded so a flood/regress/new-major "closing" move is rejected.
+// Falsified BOTH ways: CG-FC1 (the real T-198 KEEP) + CG-FC2/3/4 (the bad-move REJECTs).
+
+// CG-FC1: KEEP the real T-198 close_shell tie — the exact recorded round-1 counts. The seed band closes
+// 0.615→1.000 but the picture critique scores 16→16 (a tie); the OLD gate rolled this back as
+// "tie (0): no shrink", deadlocking the climb at a colonnade. Form credit fires → KEEP.
+test("CG-FC1 form-credit keeps the real T-198 close_shell tie (0.615→1.000, no new major)", () => {
+  const r = acceptsRound(
+    { score: 16, nMajor: 3, wrongStyleBreadth: 2 },
+    { score: 16, nMajor: 3, wrongStyleBreadth: 2 },
+    {
+      margin: 4, targetDepartments: ["WALL"],
+      closureBefore: 0.6153846153846154, closureAfter: 1.0,
+      beforeDeptMajors: { ROOF: 1, WALL: 1, OPENING: 1 },
+      afterDeptMajors: { ROOF: 1, WALL: 1, OPENING: 1 },
+      beforeDeptItems: { ROOF: { major: 1, minor: 0 }, WALL: { major: 1, minor: 0 }, OPENING: { major: 1, minor: 0 } },
+      afterDeptItems: { ROOF: { major: 1, minor: 0 }, WALL: { major: 1, minor: 0 }, OPENING: { major: 1, minor: 0 } },
+    },
+  );
+  assert.equal(r.accept, true);
+  assert.equal(r.delta, 0);
+  assert.match(r.reason, /form-credit/);
+  assert.match(r.reason, /0\.615->1\.000|0\.615.+1\.000/); // reports the observed closure gain
+});
+
+// CG-FC2: REJECT a "closing" move that ADDS A MAJOR (floods interior / regresses roof). Closure rises but
+// a new major appears (ROOM flood-major + ROOF promoted) → (b′) whole-build no-new-major blocks the form
+// clause; the whole-build score also regressed → reject as "regressed". No rubber-stamp.
+test("CG-FC2 form-credit rejects a closing move that adds a major (flood/roof regress)", () => {
+  const r = acceptsRound(
+    { score: 16, nMajor: 3 }, { score: 4, nMajor: 5 },
+    {
+      margin: 4, targetDepartments: ["WALL"],
+      closureBefore: 0.615, closureAfter: 1.0, // closure DID rise — the lure
+      beforeDeptMajors: { ROOF: 1, WALL: 1, OPENING: 1 },
+      afterDeptMajors: { ROOF: 2, WALL: 1, OPENING: 1, ROOM: 1 }, // ROOF regressed + a new ROOM major
+      beforeDeptItems: { ROOF: { major: 1, minor: 0 }, WALL: { major: 1, minor: 0 }, OPENING: { major: 1, minor: 0 } },
+      afterDeptItems: { ROOF: { major: 2, minor: 0 }, WALL: { major: 1, minor: 0 }, OPENING: { major: 1, minor: 0 }, ROOM: { major: 1, minor: 0 } },
+    },
+  );
+  assert.equal(r.accept, false);
+  assert.match(r.reason, /regressed/);
+});
+
+// CG-FC3: REJECT on the NET GUARD — closure rises, NO new major, but the TARGETED dept (WALL) total burden
+// grows via added minors (1→3). This is CG15's net-minor analog for the form clause: "closed the wall but
+// degraded its own target." (c′) blocks → falls through to the tie reject.
+test("CG-FC3 form-credit rejects when the targeted dept's net total grows (net guard)", () => {
+  const r = acceptsRound(
+    { score: 16, nMajor: 3, wrongStyleBreadth: 2 },
+    { score: 16, nMajor: 3, wrongStyleBreadth: 2 },
+    {
+      margin: 4, targetDepartments: ["WALL"],
+      closureBefore: 0.615, closureAfter: 1.0,
+      beforeDeptMajors: { ROOF: 1, WALL: 1, OPENING: 1 },
+      afterDeptMajors: { ROOF: 1, WALL: 1, OPENING: 1 }, // no new major
+      beforeDeptItems: { WALL: { major: 1, minor: 0 } },
+      afterDeptItems: { WALL: { major: 1, minor: 2 } },  // WALL total 1→3 (net degradation)
+    },
+  );
+  assert.equal(r.accept, false);
+  assert.match(r.reason, /no shrink/);
+});
+
+// CG-FC4: REJECT a move with NO REAL FORM GAIN. A tie, no major change, but closure barely moved
+// (0.615→0.62, gain 0.005 < margin 0.1) → guard (3) makes the clause inert → tie reject. Proves the clause
+// is NOT "accept any closure wobble" — it demands a real rise toward form-ready.
+test("CG-FC4 form-credit does not fire on a trivial closure wobble", () => {
+  const r = acceptsRound(
+    { score: 16, nMajor: 3, wrongStyleBreadth: 2 },
+    { score: 16, nMajor: 3, wrongStyleBreadth: 2 },
+    {
+      margin: 4, targetDepartments: ["WALL"],
+      closureBefore: 0.615, closureAfter: 0.62, // gain 0.005 < CLOSURE_GAIN_MARGIN
+      beforeDeptMajors: { WALL: 1 }, afterDeptMajors: { WALL: 1 },
+      beforeDeptItems: { WALL: { major: 1, minor: 0 } }, afterDeptItems: { WALL: { major: 1, minor: 0 } },
+    },
+  );
+  assert.equal(r.accept, false);
+  assert.match(r.reason, /no shrink/);
+});
+
+// CG-FC5: INERT / backward compatibility. With NO closure opts the form clause never fires — the CG3 tie
+// inputs reject exactly as before. And when the form is ALREADY ready (closureBefore ≥ 0.9), a further
+// closure rise earns no credit (guard 2) — the detail-gate governs there, not this clause.
+test("CG-FC5 form-credit is inert without closure data and once the form is already ready", () => {
+  // no closure context → legacy tie verdict, unchanged
+  const legacy = acceptsRound(
+    { score: 20, wrongStyleBreadth: 2, nMajor: 1 },
+    { score: 21, wrongStyleBreadth: 2, nMajor: 1 },
+    { margin: 4 },
+  );
+  assert.equal(legacy.accept, false);
+  assert.match(legacy.reason, /no shrink/);
+
+  // form already ready (0.95 ≥ 0.9) → no credit even on a rise + tie → tie reject
+  const ready = acceptsRound(
+    { score: 16, nMajor: 1, wrongStyleBreadth: 1 },
+    { score: 16, nMajor: 1, wrongStyleBreadth: 1 },
+    {
+      margin: 4, targetDepartments: ["WALL"],
+      closureBefore: 0.95, closureAfter: 1.0,
+      beforeDeptMajors: { WALL: 1 }, afterDeptMajors: { WALL: 1 },
+    },
+  );
+  assert.equal(ready.accept, false);
+  assert.match(ready.reason, /no shrink/);
+
+  assert.equal(CLOSURE_GAIN_MARGIN, 0.1);
+});
+
+// CG-FC6: REGRESSION-TOLERANT KEEP. The form clause, like the department override, fires even when the
+// picture score REGRESSED past the margin — the close is a real structural win the noisy critique
+// under-rates. Closure 0.615→1.0, no new major, net flat, score 16→8 (delta -8, past margin) → KEEP.
+test("CG-FC6 form-credit keeps a real close even on a past-margin score regression", () => {
+  const r = acceptsRound(
+    { score: 16, nMajor: 3 }, { score: 8, nMajor: 3 },
+    {
+      margin: 4, targetDepartments: ["WALL"],
+      closureBefore: 0.615, closureAfter: 1.0,
+      beforeDeptMajors: { ROOF: 1, WALL: 1, OPENING: 1 },
+      afterDeptMajors: { ROOF: 1, WALL: 1, OPENING: 1 },
+      beforeDeptItems: { WALL: { major: 1, minor: 0 } },
+      afterDeptItems: { WALL: { major: 1, minor: 0 } },
+    },
+  );
+  assert.equal(r.accept, true);
+  assert.equal(r.delta, -8);
+  assert.match(r.reason, /form-credit/);
 });
