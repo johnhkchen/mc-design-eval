@@ -290,6 +290,31 @@ function bandHistogram(occ, floor, eaveY, ns) {
  * climb's form gate stays satisfied instead of triggering close_shell (which would re-fill — and destroy —
  * the gate). Default `openCols=∅` ⇒ only columns the rebuild actually opened are forgiven, so a genuine
  * reopening still reads low.
+ *
+ * RELIEF-TOLERANT, ON THE WALL PLANE BELOW THE EAVE (T-209-01, S-209, E-54). Two refinements close the
+ * collapse the T-208 +20 dressed batch hit (closure 1.000 → 0.068 after `relief_walls`, though the shell
+ * stayed closed):
+ *   (1) CENSUS BELOW THE EAVE. The footprint columns are gathered over `[floor .. eaveY-1]`, not the full
+ *       `[floor .. eaveY]`. The roof is a solid prism whose base course sits at `y = eaveY` and fills the
+ *       ENTIRE footprint interior; folded into the band that (a) dilutes `registerRect`'s coverage below the
+ *       trust floor → the proud-sensitive raw fallback fires (the real 0.068), and (b) backs every footprint
+ *       column → MASKS reopens. Dropping that one row keeps the census on the actual wall: the relieved build
+ *       returns to the footprint path (≈0.96 ≥ 0.9) AND a reopen below the eave reads open again. The
+ *       no-program fallback still measures the FULL band (`fullCols`), byte-unchanged. (A single-course wall,
+ *       `eaveY == floor`, keeps the full row — never an empty band.)
+ *   (2) ±1 OUTWARD-PROUD tolerance. A ring column counts as backed if a wall cell sits ON it, on a
+ *       declared-open column, OR one step OUTWARD (away from the footprint centre). This forgives a proud
+ *       quoin/plinth that displaces the wall plane outward by one. A TRUE gap (colonnade / reopen) has
+ *       NOTHING outward, so it is not forgiven — the distinguisher is "is there a real cell just outside",
+ *       not the bare ring. `present` increments at most once per ring column, so the declared aperture is
+ *       never double-counted. Eave-exclusion is the load-bearing fix; this is a guarded margin (it keeps the
+ *       colonnade < 0.9 and an extent-preserving reopen < 0.9 — verified on real builds).
+ *
+ * LIMITATION (named, not hidden): `registerRect` fits the program rect to `robustExtent(cols)` — it scales
+ * to the data. It detects a hole WITHIN a face (extent preserved) but NOT the loss of a WHOLE face (the
+ * extent shrinks by one and the ring re-registers a row inward onto backed cells → reads ~1). Full-face
+ * collapse is outside this metric's reach (and the T-208 batch guard's reopen catch, which depends on
+ * closure cratering) — a named residual, not an assumed catch.
  * @param {import("./occupancy.mjs").Occupancy} occ
  * @param {{floor?:number, eaveY:number, openCols?:Set<string>, program?:object, coverageFloor?:number}} params
  *   eaveY required; floor defaults to occ.bounds.min[1]; openCols default ∅; program default none (→ raw
@@ -299,26 +324,41 @@ export function eaveRingClosure(occ, { floor, eaveY, openCols, program, coverage
   if (!occ?.bounds) return 0;
   if (eaveY === undefined) throw new Error("eaveRingClosure: eaveY required");
   const f = floor ?? occ.bounds.min[1];
+  // WALL PLANE: census BELOW the eave line (the roof prism's base course at y=eaveY floods the footprint and
+  // both dilutes registration coverage and masks reopens). `cols` feeds registration + the footprint census;
+  // `fullCols` keeps the full band for the unchanged no-program fallback.
+  const yHi = eaveY > f ? eaveY - 1 : eaveY;
   const cols = new Set();
+  const fullCols = new Set();
   for (const k of occ.cells.keys()) {
     const [x, y, z] = k.split(",").map(Number);
     if (y < f || y > eaveY) continue;
-    cols.add(`${x},${z}`);
+    fullCols.add(`${x},${z}`);
+    if (y <= yHi) cols.add(`${x},${z}`);
   }
   if (cols.size === 0) return 0;
   // ABSOLUTE FOOTPRINT: register the recognized program rect to the build frame; measure the fraction of
   // that footprint-perimeter the real wall cells back (forgiving declared-open cols). Proud cells are off
-  // the ring → ignored; colonnade gaps land on the ring → open. `ambiguous` is immaterial (square ring).
+  // the ring → ignored or forgiven by the ±1 outward step; colonnade gaps land on the ring with nothing
+  // outward → open. `ambiguous` is immaterial (square ring).
   const reg = program?.masses?.some((m) => m?.rect) ? registerRect(program.masses, cols) : null;
   if (reg && reg.coverage >= coverageFloor) {
     const ring = reg.ring;
     if (ring.size === 0) return 0;
+    const bb = bboxOf(ring);
+    const cx = (bb.x0 + bb.x1) / 2, cz = (bb.z0 + bb.z1) / 2;
     let present = 0;
-    for (const c of ring) if (cols.has(c) || openCols?.has(c)) present++;
+    for (const c of ring) {
+      if (cols.has(c) || openCols?.has(c)) { present++; continue; }
+      // ±1 OUTWARD-PROUD: one step away from the footprint centre (x, z, or diagonal). A bare gap has none.
+      const [x, z] = c.split(",").map(Number);
+      const ox = x + Math.sign(x - cx), oz = z + Math.sign(z - cz);
+      if (cols.has(`${ox},${z}`) || cols.has(`${x},${oz}`) || cols.has(`${ox},${oz}`)) present++;
+    }
     return present / ring.size;
   }
-  // FALLBACK (no program / registration below trust): the raw band-perimeter closure, no clamp.
-  const ring = perimeterColumns(cols);
+  // FALLBACK (no program / registration below trust): the raw FULL-band perimeter closure, no clamp.
+  const ring = perimeterColumns(fullCols);
   if (!openCols || openCols.size === 0 || ring.size === 0) return closureOf(ring);
   // closure-EXCEPT-aperture: reproduce closureOf's present/perimeter ratio, forgiving the declared-open cols.
   const per = perimeterColumns(filledRect(bboxOf(ring)));

@@ -444,7 +444,9 @@ const T206_SEED = artifactOccupancy(JSON.parse(readFileSync(join(T202_ROOT, "ben
 // WG-CS10: the REAL colonnade seed reads ~0.6 (< 0.9) on the footprint metric (was 0.980 under the clamp).
 test("WG-CS10 the colonnade seed reads ~0.6 (<0.9) on the program footprint", () => {
   const c = eaveRingClosure(T206_SEED, { floor: T206_SEED.bounds.min[1], eaveY: T206_EAVE, program: T202_PROGRAM });
-  assert.ok(Math.abs(c - 0.608) < 0.02, `colonnade seed footprint reads ~0.608 (got ${c.toFixed(4)})`);
+  // ~0.667 under the T-209-01 wall-plane + ±1-outward-proud census (was ~0.608 under the exact-ring census);
+  // the proud tolerance lifts it slightly but the open colonnade stays well below form-ready — the invariant.
+  assert.ok(Math.abs(c - 0.667) < 0.02, `colonnade seed footprint reads ~0.667 (got ${c.toFixed(4)})`);
   assert.ok(c < FORM_READY_CLOSURE, `the open colonnade is NOT form-ready (got ${c.toFixed(4)})`);
 });
 
@@ -463,7 +465,9 @@ test("WG-CS12 a reopened closed shell reads OPEN (<0.9) on the footprint", () =>
   const drop = ["3,0", "4,0", "5,0", "6,0", "7,0", "8,0", "9,0", "10,0", "11,0"];
   const c = eaveRingClosure(closedGatehouse({ drop }), { floor: 0, eaveY: T206_EAVE, program: T202_PROGRAM });
   assert.ok(c < FORM_READY_CLOSURE, `the reopened shell is not form-ready (got ${c.toFixed(4)})`);
-  assert.ok(Math.abs(c - 0.839) < 0.02, `reads ~0.839 on the 9-col drop (got ${c.toFixed(4)})`);
+  // ~0.875 under the T-209-01 census (was ~0.839); the ±1-proud tolerance cannot rescue a bare gap (nothing
+  // outward), so the 9-col mid-face hole still reads open — only the exact literal moved, not the verdict.
+  assert.ok(Math.abs(c - 0.875) < 0.02, `reads ~0.875 on the 9-col drop (got ${c.toFixed(4)})`);
 });
 
 // WG-CS13: AGREEMENT — the metric's seed reading EQUALS close_shell's internal closureBefore (both now
