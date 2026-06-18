@@ -1,0 +1,955 @@
+{
+  "schema": "picture-climb/v1",
+  "subject": "gatehouse",
+  "seed": "benchmarks/sculpture/generated/gatehouse/artifact.json",
+  "program": "benchmarks/sculpture/recognition/gatehouse.program.json",
+  "pack": "rustic",
+  "concept": "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+  "tier": "strong",
+  "votes": 3,
+  "margin": 4,
+  "stopReason": "stalled (3 rolled back)",
+  "observedScoreSpread": {
+    "min": 0,
+    "max": 8,
+    "allRoundVotes": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "framingResidual": [],
+  "formReadyClosure": 0.9,
+  "closureFirst": 0.9795918367346939,
+  "closureLast": 0.9795918367346939,
+  "subprocessTimeoutMs": 180000,
+  "votesTimedOut": 0,
+  "trajectory": [
+    {
+      "round": 0,
+      "score": 0,
+      "evidence": {
+        "score": 0,
+        "nItems": 6,
+        "nMajor": 4,
+        "nWrongStyle": 4,
+        "wrongStyleBreadth": 4,
+        "departments": [
+          "WALL",
+          "ROOF",
+          "OPENING",
+          "ROOF",
+          "OPENING",
+          "ROOM"
+        ],
+        "missing": [
+          "Light stone-brick field color, distinct rubble cobblestone corner quoins, and a clean closed wall plane.",
+          "A legible closed steep gable form.",
+          "The dark-oak-surrounded arched gateway as a built, recognizable feature.",
+          "The lighter stone eave/verge banding.",
+          "The narrow slit windows as deliberate openings.",
+          "Enclosure: closed walls and a sealed top."
+        ]
+      },
+      "items": [
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Uniform dark charcoal-slate walls with a vertical-striated texture, ragged bottom edges with deep colonnade gaps/notches, and no corner quoin articulation.",
+          "missing": "Light stone-brick field color, distinct rubble cobblestone corner quoins, and a clean closed wall plane.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "An irregular terraced/stepped dark mass on top that does not read as a gable, with an open hole rather than a closed ridge.",
+          "missing": "A legible closed steep gable form.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "A ragged dark gap in the wall with no timber frame and no legible arch.",
+          "missing": "The dark-oak-surrounded arched gateway as a built, recognizable feature.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "ROOF",
+          "severity": "minor",
+          "present": "No light edge course; roof edges are the same dark tone as the field, when present at all.",
+          "missing": "The lighter stone eave/verge banding.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "No discrete slit windows; eave walls are ragged striated surfaces with incidental gaps.",
+          "missing": "The narrow slit windows as deliberate openings.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "ROOM",
+          "severity": "major",
+          "present": "An open hollow shell — interior and top are visible through holes and gaps; reads as an unfinished/ruined box.",
+          "missing": "Enclosure: closed walls and a sealed top.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        }
+      ],
+      "pick": {
+        "tool": "relief_walls",
+        "reason": "WALL is the top major divergence — the concept shows a pale dressed-stone field with proud rubble cobblestone corner quoins; relief_walls both recolors the field pale AND stands quoins proud as construction, directly addressing the flat/monotone wall plane."
+      },
+      "applied": false,
+      "accepted": false,
+      "framing": {
+        "orientation": {
+          "axis": null,
+          "frontAxis": "x",
+          "frontSide": "-x",
+          "gableFacesFront": null,
+          "flagged": false,
+          "severity": null,
+          "note": "orientation SKIPPED (front=x, ridge=? — insufficient evidence)"
+        },
+        "scale": {
+          "build": {
+            "aspect": 1,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "target": {
+            "aspect": 1,
+            "ridgeToEave": 1.35,
+            "roofShare": 0.2593
+          },
+          "deltas": {
+            "aspect": 0,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "flagged": false,
+          "severity": null,
+          "note": "proportions within 0.2 of the recognized intent (uniform size is framing, not a divergence)"
+        },
+        "flags": [],
+        "residual": []
+      },
+      "closure": 0.9795918367346939,
+      "voteOutcomes": [
+        {
+          "vote": 1,
+          "status": "ok",
+          "ms": 56017
+        },
+        {
+          "vote": 2,
+          "status": "ok",
+          "ms": 44182
+        },
+        {
+          "vote": 3,
+          "status": "ok",
+          "ms": 30763
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "score": 0,
+      "evidence": {
+        "score": 0,
+        "nItems": 6,
+        "nMajor": 4,
+        "nWrongStyle": 4,
+        "wrongStyleBreadth": 4,
+        "departments": [
+          "WALL",
+          "ROOF",
+          "OPENING",
+          "ROOF",
+          "OPENING",
+          "ROOM"
+        ],
+        "missing": [
+          "Light stone-brick field color, distinct rubble cobblestone corner quoins, and a clean closed wall plane.",
+          "A legible closed steep gable form.",
+          "The dark-oak-surrounded arched gateway as a built, recognizable feature.",
+          "The lighter stone eave/verge banding.",
+          "The narrow slit windows as deliberate openings.",
+          "Enclosure: closed walls and a sealed top."
+        ]
+      },
+      "items": [
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Uniform dark charcoal-slate walls with a vertical-striated texture, ragged bottom edges with deep colonnade gaps/notches, and no corner quoin articulation.",
+          "missing": "Light stone-brick field color, distinct rubble cobblestone corner quoins, and a clean closed wall plane.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "An irregular terraced/stepped dark mass on top that does not read as a gable, with an open hole rather than a closed ridge.",
+          "missing": "A legible closed steep gable form.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "A ragged dark gap in the wall with no timber frame and no legible arch.",
+          "missing": "The dark-oak-surrounded arched gateway as a built, recognizable feature.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "ROOF",
+          "severity": "minor",
+          "present": "No light edge course; roof edges are the same dark tone as the field, when present at all.",
+          "missing": "The lighter stone eave/verge banding.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "No discrete slit windows; eave walls are ragged striated surfaces with incidental gaps.",
+          "missing": "The narrow slit windows as deliberate openings.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "ROOM",
+          "severity": "major",
+          "present": "An open hollow shell — interior and top are visible through holes and gaps; reads as an unfinished/ruined box.",
+          "missing": "Enclosure: closed walls and a sealed top.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        }
+      ],
+      "pick": {
+        "tool": "relief_walls",
+        "reason": "WALL is the top major divergence — the concept shows a pale dressed-stone field with proud rubble cobblestone corner quoins; relief_walls both recolors the field pale AND stands quoins proud as construction, directly addressing the flat/monotone wall plane."
+      },
+      "applied": true,
+      "accepted": false,
+      "gate": {
+        "accept": false,
+        "delta": 0,
+        "reason": "tie (0): no shrink"
+      },
+      "scoreAfter": {
+        "score": 0,
+        "scores": [
+          0,
+          0,
+          0
+        ]
+      },
+      "targetDepartments": [
+        "WALL"
+      ],
+      "deptMajorsBefore": {
+        "WALL": 1,
+        "ROOF": 1,
+        "OPENING": 1,
+        "ROOM": 1
+      },
+      "deptMajorsAfter": {
+        "ROOM": 1,
+        "ROOF": 1,
+        "WALL": 1,
+        "OPENING": 1
+      },
+      "deptItemsBefore": {
+        "WALL": {
+          "major": 1,
+          "minor": 0
+        },
+        "ROOF": {
+          "major": 1,
+          "minor": 1
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        },
+        "ROOM": {
+          "major": 1,
+          "minor": 0
+        }
+      },
+      "deptItemsAfter": {
+        "ROOM": {
+          "major": 1,
+          "minor": 0
+        },
+        "ROOF": {
+          "major": 1,
+          "minor": 1
+        },
+        "WALL": {
+          "major": 1,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        }
+      },
+      "framing": {
+        "orientation": {
+          "axis": null,
+          "frontAxis": "x",
+          "frontSide": "-x",
+          "gableFacesFront": null,
+          "flagged": false,
+          "severity": null,
+          "note": "orientation SKIPPED (front=x, ridge=? — insufficient evidence)"
+        },
+        "scale": {
+          "build": {
+            "aspect": 1,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "target": {
+            "aspect": 1,
+            "ridgeToEave": 1.35,
+            "roofShare": 0.2593
+          },
+          "deltas": {
+            "aspect": 0,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "flagged": false,
+          "severity": null,
+          "note": "proportions within 0.2 of the recognized intent (uniform size is framing, not a divergence)"
+        },
+        "flags": [],
+        "residual": []
+      },
+      "closure": 0.9795918367346939,
+      "closureAfter": 1,
+      "voteOutcomes": [
+        {
+          "vote": 1,
+          "status": "ok",
+          "ms": 34040
+        },
+        {
+          "vote": 2,
+          "status": "ok",
+          "ms": 35973
+        },
+        {
+          "vote": 3,
+          "status": "ok",
+          "ms": 53028
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "score": 0,
+      "evidence": {
+        "score": 0,
+        "nItems": 6,
+        "nMajor": 4,
+        "nWrongStyle": 4,
+        "wrongStyleBreadth": 4,
+        "departments": [
+          "WALL",
+          "ROOF",
+          "OPENING",
+          "ROOF",
+          "OPENING",
+          "ROOM"
+        ],
+        "missing": [
+          "Light stone-brick field color, distinct rubble cobblestone corner quoins, and a clean closed wall plane.",
+          "A legible closed steep gable form.",
+          "The dark-oak-surrounded arched gateway as a built, recognizable feature.",
+          "The lighter stone eave/verge banding.",
+          "The narrow slit windows as deliberate openings.",
+          "Enclosure: closed walls and a sealed top."
+        ]
+      },
+      "items": [
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Uniform dark charcoal-slate walls with a vertical-striated texture, ragged bottom edges with deep colonnade gaps/notches, and no corner quoin articulation.",
+          "missing": "Light stone-brick field color, distinct rubble cobblestone corner quoins, and a clean closed wall plane.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "An irregular terraced/stepped dark mass on top that does not read as a gable, with an open hole rather than a closed ridge.",
+          "missing": "A legible closed steep gable form.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "A ragged dark gap in the wall with no timber frame and no legible arch.",
+          "missing": "The dark-oak-surrounded arched gateway as a built, recognizable feature.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "ROOF",
+          "severity": "minor",
+          "present": "No light edge course; roof edges are the same dark tone as the field, when present at all.",
+          "missing": "The lighter stone eave/verge banding.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "No discrete slit windows; eave walls are ragged striated surfaces with incidental gaps.",
+          "missing": "The narrow slit windows as deliberate openings.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "ROOM",
+          "severity": "major",
+          "present": "An open hollow shell — interior and top are visible through holes and gaps; reads as an unfinished/ruined box.",
+          "missing": "Enclosure: closed walls and a sealed top.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        }
+      ],
+      "pick": {
+        "tool": "rebuild_arch",
+        "reason": "OPENING is a major divergence and relief_walls was rolled back; rebuild_arch is the only tool that can widen the narrow/missing gate into a recognizable wide arched gateway."
+      },
+      "applied": true,
+      "accepted": false,
+      "gate": {
+        "accept": false,
+        "delta": 0,
+        "reason": "tie (0): no shrink"
+      },
+      "scoreAfter": {
+        "score": 0,
+        "scores": [
+          0,
+          0,
+          0
+        ]
+      },
+      "targetDepartments": [
+        "OPENING"
+      ],
+      "deptMajorsBefore": {
+        "WALL": 1,
+        "ROOF": 1,
+        "OPENING": 1,
+        "ROOM": 1
+      },
+      "deptMajorsAfter": {
+        "ROOF": 1,
+        "ROOM": 1,
+        "WALL": 1,
+        "OPENING": 1
+      },
+      "deptItemsBefore": {
+        "WALL": {
+          "major": 1,
+          "minor": 0
+        },
+        "ROOF": {
+          "major": 1,
+          "minor": 1
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        },
+        "ROOM": {
+          "major": 1,
+          "minor": 0
+        }
+      },
+      "deptItemsAfter": {
+        "ROOF": {
+          "major": 1,
+          "minor": 1
+        },
+        "ROOM": {
+          "major": 1,
+          "minor": 0
+        },
+        "WALL": {
+          "major": 1,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        }
+      },
+      "framing": {
+        "orientation": {
+          "axis": null,
+          "frontAxis": "x",
+          "frontSide": "-x",
+          "gableFacesFront": null,
+          "flagged": false,
+          "severity": null,
+          "note": "orientation SKIPPED (front=x, ridge=? — insufficient evidence)"
+        },
+        "scale": {
+          "build": {
+            "aspect": 1,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "target": {
+            "aspect": 1,
+            "ridgeToEave": 1.35,
+            "roofShare": 0.2593
+          },
+          "deltas": {
+            "aspect": 0,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "flagged": false,
+          "severity": null,
+          "note": "proportions within 0.2 of the recognized intent (uniform size is framing, not a divergence)"
+        },
+        "flags": [],
+        "residual": []
+      },
+      "closure": 0.9795918367346939,
+      "closureAfter": 0.9795918367346939,
+      "voteOutcomes": [
+        {
+          "vote": 1,
+          "status": "ok",
+          "ms": 29635
+        },
+        {
+          "vote": 2,
+          "status": "ok",
+          "ms": 33961
+        },
+        {
+          "vote": 3,
+          "status": "ok",
+          "ms": 40700
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "score": 0,
+      "evidence": {
+        "score": 0,
+        "nItems": 6,
+        "nMajor": 4,
+        "nWrongStyle": 4,
+        "wrongStyleBreadth": 4,
+        "departments": [
+          "WALL",
+          "ROOF",
+          "OPENING",
+          "ROOF",
+          "OPENING",
+          "ROOM"
+        ],
+        "missing": [
+          "Light stone-brick field color, distinct rubble cobblestone corner quoins, and a clean closed wall plane.",
+          "A legible closed steep gable form.",
+          "The dark-oak-surrounded arched gateway as a built, recognizable feature.",
+          "The lighter stone eave/verge banding.",
+          "The narrow slit windows as deliberate openings.",
+          "Enclosure: closed walls and a sealed top."
+        ]
+      },
+      "items": [
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Uniform dark charcoal-slate walls with a vertical-striated texture, ragged bottom edges with deep colonnade gaps/notches, and no corner quoin articulation.",
+          "missing": "Light stone-brick field color, distinct rubble cobblestone corner quoins, and a clean closed wall plane.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "An irregular terraced/stepped dark mass on top that does not read as a gable, with an open hole rather than a closed ridge.",
+          "missing": "A legible closed steep gable form.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "A ragged dark gap in the wall with no timber frame and no legible arch.",
+          "missing": "The dark-oak-surrounded arched gateway as a built, recognizable feature.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "ROOF",
+          "severity": "minor",
+          "present": "No light edge course; roof edges are the same dark tone as the field, when present at all.",
+          "missing": "The lighter stone eave/verge banding.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "No discrete slit windows; eave walls are ragged striated surfaces with incidental gaps.",
+          "missing": "The narrow slit windows as deliberate openings.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "ROOM",
+          "severity": "major",
+          "present": "An open hollow shell — interior and top are visible through holes and gaps; reads as an unfinished/ruined box.",
+          "missing": "Enclosure: closed walls and a sealed top.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        }
+      ],
+      "pick": {
+        "tool": "apply_gable_roof",
+        "reason": "ROOF is a major divergence and has not been tried yet — close_shell confirmed form is ready, so the next priority is getting a legible closed steep gable form in place."
+      },
+      "applied": true,
+      "accepted": false,
+      "gate": {
+        "accept": false,
+        "delta": 0,
+        "reason": "tie (0): no shrink"
+      },
+      "scoreAfter": {
+        "score": 0,
+        "scores": [
+          0,
+          0,
+          0
+        ]
+      },
+      "targetDepartments": [
+        "ROOF"
+      ],
+      "deptMajorsBefore": {
+        "WALL": 1,
+        "ROOF": 1,
+        "OPENING": 1,
+        "ROOM": 1
+      },
+      "deptMajorsAfter": {
+        "ROOF": 1,
+        "ROOM": 1,
+        "WALL": 1,
+        "OPENING": 1
+      },
+      "deptItemsBefore": {
+        "WALL": {
+          "major": 1,
+          "minor": 0
+        },
+        "ROOF": {
+          "major": 1,
+          "minor": 1
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        },
+        "ROOM": {
+          "major": 1,
+          "minor": 0
+        }
+      },
+      "deptItemsAfter": {
+        "ROOF": {
+          "major": 1,
+          "minor": 1
+        },
+        "ROOM": {
+          "major": 1,
+          "minor": 0
+        },
+        "WALL": {
+          "major": 1,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        }
+      },
+      "framing": {
+        "orientation": {
+          "axis": "x",
+          "frontAxis": "x",
+          "frontSide": "-x",
+          "gableFacesFront": true,
+          "flagged": false,
+          "severity": null,
+          "note": "gable faces the declared -x front"
+        },
+        "scale": {
+          "build": {
+            "aspect": 1,
+            "ridgeToEave": 1.3,
+            "roofShare": 0.2308
+          },
+          "target": {
+            "aspect": 1,
+            "ridgeToEave": 1.35,
+            "roofShare": 0.2593
+          },
+          "deltas": {
+            "aspect": 0,
+            "ridgeToEave": 0.037,
+            "roofShare": 0.1099
+          },
+          "flagged": false,
+          "severity": null,
+          "note": "proportions within 0.2 of the recognized intent (uniform size is framing, not a divergence)"
+        },
+        "flags": [],
+        "residual": []
+      },
+      "closure": 0.9795918367346939,
+      "closureAfter": 1,
+      "voteOutcomes": [
+        {
+          "vote": 1,
+          "status": "ok",
+          "ms": 52854
+        },
+        {
+          "vote": 2,
+          "status": "ok",
+          "ms": 56732
+        },
+        {
+          "vote": 3,
+          "status": "ok",
+          "ms": 43744
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "score": 0,
+      "items": [],
+      "pick": {
+        "tool": "—"
+      },
+      "applied": false,
+      "accepted": false,
+      "terminal": true
+    }
+  ],
+  "inventory": {
+    "actedOn": [],
+    "eyesOnly": [
+      {
+        "department": "WALL",
+        "namedItems": [
+          {
+            "round": 0,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "Light stone-brick field color, distinct rubble cobblestone corner quoins, and a clean closed wall plane."
+          },
+          {
+            "round": 1,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "Light stone-brick field color, distinct rubble cobblestone corner quoins, and a clean closed wall plane."
+          },
+          {
+            "round": 2,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "Light stone-brick field color, distinct rubble cobblestone corner quoins, and a clean closed wall plane."
+          },
+          {
+            "round": 3,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "Light stone-brick field color, distinct rubble cobblestone corner quoins, and a clean closed wall plane."
+          }
+        ]
+      },
+      {
+        "department": "ROOF",
+        "namedItems": [
+          {
+            "round": 0,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "A legible closed steep gable form."
+          },
+          {
+            "round": 0,
+            "kind": "add",
+            "severity": "minor",
+            "missing": "The lighter stone eave/verge banding."
+          },
+          {
+            "round": 1,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "A legible closed steep gable form."
+          },
+          {
+            "round": 1,
+            "kind": "add",
+            "severity": "minor",
+            "missing": "The lighter stone eave/verge banding."
+          },
+          {
+            "round": 2,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "A legible closed steep gable form."
+          },
+          {
+            "round": 2,
+            "kind": "add",
+            "severity": "minor",
+            "missing": "The lighter stone eave/verge banding."
+          },
+          {
+            "round": 3,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "A legible closed steep gable form."
+          },
+          {
+            "round": 3,
+            "kind": "add",
+            "severity": "minor",
+            "missing": "The lighter stone eave/verge banding."
+          }
+        ]
+      },
+      {
+        "department": "OPENING",
+        "namedItems": [
+          {
+            "round": 0,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "The dark-oak-surrounded arched gateway as a built, recognizable feature."
+          },
+          {
+            "round": 0,
+            "kind": "add",
+            "severity": "minor",
+            "missing": "The narrow slit windows as deliberate openings."
+          },
+          {
+            "round": 1,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "The dark-oak-surrounded arched gateway as a built, recognizable feature."
+          },
+          {
+            "round": 1,
+            "kind": "add",
+            "severity": "minor",
+            "missing": "The narrow slit windows as deliberate openings."
+          },
+          {
+            "round": 2,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "The dark-oak-surrounded arched gateway as a built, recognizable feature."
+          },
+          {
+            "round": 2,
+            "kind": "add",
+            "severity": "minor",
+            "missing": "The narrow slit windows as deliberate openings."
+          },
+          {
+            "round": 3,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "The dark-oak-surrounded arched gateway as a built, recognizable feature."
+          },
+          {
+            "round": 3,
+            "kind": "add",
+            "severity": "minor",
+            "missing": "The narrow slit windows as deliberate openings."
+          }
+        ]
+      },
+      {
+        "department": "ROOM",
+        "namedItems": [
+          {
+            "round": 0,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "Enclosure: closed walls and a sealed top."
+          },
+          {
+            "round": 1,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "Enclosure: closed walls and a sealed top."
+          },
+          {
+            "round": 2,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "Enclosure: closed walls and a sealed top."
+          },
+          {
+            "round": 3,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "Enclosure: closed walls and a sealed top."
+          }
+        ]
+      }
+    ],
+    "verdict": {
+      "climbed": false,
+      "stalled": true,
+      "oscillated": false,
+      "actionableFrac": 0,
+      "scoreFirst": 0,
+      "scoreLast": 0,
+      "delta": 0
+    }
+  }
+}

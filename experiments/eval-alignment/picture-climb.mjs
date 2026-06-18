@@ -75,7 +75,13 @@ const AZIMUTHS = [...MULTI_ANGLE_GATE.azimuths];
 const TIER = "strong";
 const VOTES = 3;                       // median out the matched-build 0-76 score swing (T-187 research)
 const AGENT_MODEL = "claude-sonnet-4-6";
-const { margin, stallK, maxRounds, minRounds } = CLIMB_DEFAULTS;
+const { margin, stallK, minRounds } = CLIMB_DEFAULTS;
+// CLIMB_MAX_ROUNDS: metered-budget knob for the capstone re-climb (T-205-01). Defaults to the frozen
+// CLIMB_DEFAULTS.maxRounds (5) so `npm test` + every existing climb are byte-unchanged. Not a new hand — only
+// how many rounds the agent gets to act, in the VOTES/CLIMB_OUT family of run parameters. The capstone needs
+// five productive moves (close_shell → gable → rebuild_arch → relief → recolor) to express all three E-52
+// fixes; at the frozen 5 the run truncates before the roof (as T-201 did with recolor_roof unfired).
+const maxRounds = Number(process.env.CLIMB_MAX_ROUNDS) || CLIMB_DEFAULTS.maxRounds;
 const GUARD_ONLY = process.env.GUARD_ONLY === "1";
 const ROOF_MATERIAL_PROBE = process.env.ROOF_MATERIAL_PROBE === "1"; // T-189-01: render the brown→grey roof glance, zero spend
 const REBUILD_ARCH_PROBE = process.env.REBUILD_ARCH_PROBE === "1"; // T-203-01: render the wide-arch rebuild glance + gate numbers, zero spend
