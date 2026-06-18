@@ -41,7 +41,7 @@ import { renderViews } from "../../src/view/multi-angle.mjs";
 import { renderBesideConcept, assertGlAvailable } from "../../src/view/render-beside.mjs";
 import { requestText } from "../../src/sdk-binding.mjs";
 
-import { MULTI_ANGLE_GATE } from "../../src/config.mjs";
+import { MULTI_ANGLE_GATE, CLAUDE_SUBPROCESS_TIMEOUT_MS } from "../../src/config.mjs";
 import { loadStylePack } from "../../src/pack/style-pack.mjs";
 import { runTieredOp } from "../../src/model-tier.mjs";
 import { bamlRender, bamlParse } from "../../src/baml/bridge.mjs";
@@ -331,6 +331,43 @@ const MENU = [
 // ============================= the GRADIENT: picture-anchored DiagnoseBuild =============================
 let PROGRAM, PACK, CONCEPT_IMG;            // loaded once in main (after the guard)
 
+// A round whose EVERY diagnose vote failed (T-198-01). Carries the per-vote outcomes so the climb can REPORT
+// the failure (and whether it was a subprocess TIMEOUT — an infra/auth/spend signal — vs all-malformed)
+// rather than silently scoring the round 0. A measurement that lost every vote is corrupted, not a robust 0.
+class RoundAbortedError extends Error {
+  constructor(round, voteOutcomes) {
+    const timedOut = voteOutcomes.filter((o) => o.status === "timeout").length;
+    super(`round ${round}: all ${voteOutcomes.length} diagnose votes failed (${timedOut} timed out) — round aborted, NOT scored 0`);
+    this.name = "RoundAbortedError";
+    this.round = round;
+    this.voteOutcomes = voteOutcomes;
+    this.timedOut = timedOut;
+  }
+}
+
+/** Persist a recorded ABORT (every vote in a round failed) + the partial trajectory, then return cleanly with
+ * a non-zero exit code (T-198-01). The deliberate alternative to a fabricated 0 or a stack-trace crash: an
+ * all-timed-out round is an infra/auth/spend signal to SURFACE, an all-malformed round a no-usable-verdict
+ * signal — both reported, neither scored. */
+async function writeAbortRecord(err, trajectory, outPath) {
+  const allTimedOut = err.timedOut === err.voteOutcomes.length;
+  const out = {
+    schema: "picture-climb/v1", subject: SUBJECT, seed: SEED_ARTIFACT, program: PROGRAM_PATH, pack: "rustic",
+    concept: CONCEPT, tier: TIER, votes: VOTES, margin, stopReason: "round-aborted-all-votes-failed",
+    subprocessTimeoutMs: CLAUDE_SUBPROCESS_TIMEOUT_MS, aborted: true,
+    abort: { round: err.round, timedOut: err.timedOut, allTimedOut, voteOutcomes: err.voteOutcomes, reason: err.message },
+    trajectory,
+  };
+  await mkdir(dirname(outPath), { recursive: true });
+  await writeFile(outPath, JSON.stringify(out, null, 2) + "\n");
+  console.error(`\n[ABORT] ${err.message}`);
+  console.error(allTimedOut
+    ? "  All votes TIMED OUT → likely an infra/auth/spend failure, NOT a build signal. The guard WORKED (no hang); the metered diagnose is unreachable in this environment. Reported, NOT scored."
+    : "  All votes failed to parse (malformed) → the diagnose model returned no usable verdict. Reported, NOT scored.");
+  console.error(`  Wrote partial trajectory + abort block to ${outPath}.`);
+  process.exitCode = 2; // a recorded finding: non-zero, but a clean return — not a crash
+}
+
 const itemsOf = (critique) => (critique?.items ?? []).map((it) => ({
   department: it.department, severity: it.severity, present: it.present ?? "", missing: it.missing ?? "",
   kind: it.kind ?? null, styleClass: itemStyleClass(it),
@@ -340,7 +377,10 @@ const itemsOf = (critique) => (critique?.items ?? []).map((it) => ({
 async function diagnose(renders) {
   const args = diagnoseRenderArgs({ program: PROGRAM, pack: PACK, azimuths: AZIMUTHS });
   const { prompt, images } = await bamlRender({ fn: "DiagnoseBuild", args, images: { concept: CONCEPT_IMG, renders } });
-  const { text } = await runTieredOp({ tier: TIER, prompt, images });
+  // The subprocess-timeout guard (T-198-01): bound the strong-tier `claude -p` diagnose child so a
+  // non-returning subprocess (the ~20-min hang) is killed and surfaces a typed ClaudeTimeoutError the vote
+  // loop can DROP/ABORT, instead of hanging the whole climb.
+  const { text } = await runTieredOp({ tier: TIER, prompt, images, timeoutMs: CLAUDE_SUBPROCESS_TIMEOUT_MS });
   const critique = await bamlParse({ fn: "DiagnoseBuild", text });
   return { ev: critiqueEvidence(critique), items: itemsOf(critique), score: styleFidelityScore(critique) };
 }
@@ -358,15 +398,27 @@ async function scoreBuild(occ, template, round, tag) {
   if (framing?.flags.length) console.error(`  [${tag} r${round}] FRAMING: ${framing.flags.join(" | ")}`);
   if (GUARD_ONLY) return { score: null, dir: roundDir, framing }; // render seam proven, no spend
   const renders = await Promise.all(AZIMUTHS.map((a) => toB64(join(roundDir, `view-${a}.png`))));
-  const samples = [];
+  // Vote with the subprocess-timeout guard (T-198-01): a TIMED-OUT vote (typed ClaudeTimeoutError) is DROPPED
+  // like a malformed one — the median survives on the remaining votes — but every outcome is RECORDED
+  // (voteOutcomes), never console-only, so a degraded round is visible in the trajectory. If EVERY vote fails
+  // the round is ABORTED (RoundAbortedError), never scored 0 — an all-timed-out round is an infra/auth/spend
+  // signal to surface, not a measurement to fabricate.
+  const samples = [], voteOutcomes = [];
   for (let v = 0; v < VOTES; v++) {
-    try { samples.push(await diagnose(renders)); }
-    catch (e) { console.error(`  [${tag} r${round}] vote ${v + 1} dropped (malformed, no re-ask): ${e.message}`); }
+    const t0 = Date.now();
+    try {
+      samples.push(await diagnose(renders));
+      voteOutcomes.push({ vote: v + 1, status: "ok", ms: Date.now() - t0 });
+    } catch (e) {
+      const status = e.code === "ETIMEDOUT_CLAUDE" ? "timeout" : "malformed";
+      voteOutcomes.push({ vote: v + 1, status, ms: Date.now() - t0 });
+      console.error(`  [${tag} r${round}] vote ${v + 1} dropped (${status}, no re-ask): ${e.message}`);
+    }
   }
-  if (!samples.length) throw new Error(`scoreBuild: all ${VOTES} diagnoses failed at round ${round}`);
+  if (!samples.length) throw new RoundAbortedError(round, voteOutcomes);
   const scores = samples.map((s) => s.score);
   const med = samples.find((s) => s.score === median(scores)) ?? samples[0];
-  return { ...med.ev, score: med.score, items: med.items, scores, dir: roundDir, framing };
+  return { ...med.ev, score: med.score, items: med.items, scores, dir: roundDir, framing, voteOutcomes };
 }
 
 const evOf = (b) => ({ score: b.score, nItems: b.nItems, nMajor: b.nMajor, nWrongStyle: b.nWrongStyle, wrongStyleBreadth: b.wrongStyleBreadth, departments: b.departments, missing: b.missing });
@@ -471,11 +523,17 @@ async function main() {
 
   const trajectory = [];
   const history = [];
-  let prev = await scoreBuild(occ, template, 0, "seed");
+  const outPath = join(ROOT, process.env.CLIMB_OUT ?? "docs/active/work/T-188-01/trajectory.json");
+
+  // The seed score (round 0). A RoundAbortedError here (every diagnose vote failed/timed out) is RECORDED and
+  // returns cleanly — never a fabricated 0, never a stack-trace crash (T-198-01).
+  let prev;
+  try { prev = await scoreBuild(occ, template, 0, "seed"); }
+  catch (e) { if (e instanceof RoundAbortedError) { await writeAbortRecord(e, trajectory, outPath); return; } throw e; }
   let prevDigest = buildDigest(occToCells(occ)); // the kept build's digest (T-190-01 no-op guard)
   let pick = await agentPick(prev, history, closureNow(occ));
   console.error(`\n[round 0] score=${prev.score} (${prev.scores.join("/")}) closure=${closureNow(occ).toFixed(3)} → agent picks ${pick.tool}: ${pick.reason}`);
-  trajectory.push({ round: 0, score: prev.score, evidence: evOf(prev), items: prev.items, pick, applied: false, accepted: false, framing: prev.framing ?? null, closure: closureNow(occ) });
+  trajectory.push({ round: 0, score: prev.score, evidence: evOf(prev), items: prev.items, pick, applied: false, accepted: false, framing: prev.framing ?? null, closure: closureNow(occ), voteOutcomes: prev.voteOutcomes ?? null });
 
   let noAcceptStreak = 0, stopReason = "maxRounds", round = 1;
   for (; round <= maxRounds; round++) {
@@ -519,7 +577,9 @@ async function main() {
       continue;
     }
 
-    const candScore = await scoreBuild(cand, template, round, "cand");
+    let candScore;
+    try { candScore = await scoreBuild(cand, template, round, "cand"); }
+    catch (e) { if (e instanceof RoundAbortedError) { await writeAbortRecord(e, trajectory, outPath); return; } throw e; }
     // Department-dominant accept signal (T-190-01 + T-191-01): keep a tool that cleared a major in a
     // department it targets and grew no targeted dept's total burden, even on a whole-build scalar REGRESSION
     // (the judge promoted a pre-existing major in an UNtargeted dept — attention-shift, not regression). The
@@ -540,7 +600,7 @@ async function main() {
       pick, applied: true, accepted: gate.accept, gate, scoreAfter: { score: candScore.score, scores: candScore.scores },
       targetDepartments, deptMajorsBefore: beforeDeptMajors, deptMajorsAfter: afterDeptMajors,
       deptItemsBefore: beforeDeptItems, deptItemsAfter: afterDeptItems, framing: candScore.framing ?? null,
-      closure, closureAfter: closureNow(gate.accept ? cand : occ) });
+      closure, closureAfter: closureNow(gate.accept ? cand : occ), voteOutcomes: candScore.voteOutcomes ?? null });
 
     prev = gate.accept ? candScore : prev;
     pick = await agentPick(prev, history, closureNow(occ));
@@ -553,6 +613,10 @@ async function main() {
 
   const inventory = classifyInventory(trajectory, { margin });
   const spread = trajectory.filter((t) => t.scoreAfter?.scores).flatMap((t) => t.scoreAfter.scores);
+  // The guard's health summary (T-198-01): how many votes were dropped to a subprocess TIMEOUT across the
+  // climb. >0 with a completed climb = degraded-but-survived (median held on the surviving votes). The
+  // all-votes-timed-out case never reaches here — it returns via writeAbortRecord.
+  const votesTimedOut = trajectory.flatMap((t) => t.voteOutcomes ?? []).filter((o) => o.status === "timeout").length;
   const out = {
     schema: "picture-climb/v1", subject: SUBJECT, seed: SEED_ARTIFACT, program: PROGRAM_PATH, pack: "rustic",
     concept: CONCEPT, tier: TIER, votes: VOTES, margin, stopReason,
@@ -561,9 +625,9 @@ async function main() {
     formReadyClosure: FORM_READY_CLOSURE,
     closureFirst: trajectory[0]?.closure ?? null, // the seed's open shell
     closureLast: closureNow(occ),                  // the kept build's shell after the climb
+    subprocessTimeoutMs: CLAUDE_SUBPROCESS_TIMEOUT_MS, votesTimedOut,
     trajectory, inventory,
   };
-  const outPath = join(ROOT, process.env.CLIMB_OUT ?? "docs/active/work/T-188-01/trajectory.json");
   await mkdir(dirname(outPath), { recursive: true });
   await writeFile(outPath, JSON.stringify(out, null, 2) + "\n");
 
