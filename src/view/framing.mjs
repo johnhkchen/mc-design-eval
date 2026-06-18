@@ -23,12 +23,15 @@
 const fail = (msg) => { throw new Error(`framing: ${msg}`); };
 
 // Tunables. SCALE_TOL is a relative proportion drift (20%) — calibrated so the real gatehouse build is quiet
-// and a 2× height distortion flags (the real numbers are recorded in the work dir's progress.md). RIDGE_TOP_
-// LAYERS reads the ridge LINE; RIDGE_TIE is the min extent gap to call an axis (a near-square top is ambiguous
-// → SKIP). EAVE_FULL is the perp-extent fraction that still counts as full-width wall (below the roof taper).
+// and a proportion distortion flags (the real numbers are recorded in the work dir's progress.md). RIDGE_TOP_
+// LAYERS reads the ridge LINE. RIDGE_LINE_FRAC is the gate against a BLOB: a true gable ridge is a LINE (its
+// short perp extent ≪ its long ridge extent), so the axis is read only when the shorter top-extent is ≤
+// RIDGE_LINE_FRAC of the longer; a near-square top (a GLB-voxelized blob with no clean ridge) fails this and
+// SKIPS — the structural guard against fabricating a ridge on noisy occupancy. EAVE_FULL is the perp-extent
+// fraction that still counts as full-width wall (below the roof taper).
 export const SCALE_TOL = 0.2;
 export const RIDGE_TOP_LAYERS = 2;
-export const RIDGE_TIE = 2;
+export const RIDGE_LINE_FRAC = 0.5;
 export const EAVE_FULL = 0.9;
 
 const EPS = 1e-9;
@@ -79,7 +82,8 @@ export function buildRidgeAxis(occ) {
   }
   if (!any) return null;
   const xExt = x1 - x0, zExt = z1 - z0;
-  if (Math.abs(xExt - zExt) < RIDGE_TIE) return null; // ambiguous top → insufficient evidence
+  const long = Math.max(xExt, zExt), short = Math.min(xExt, zExt);
+  if (long <= 0 || short > RIDGE_LINE_FRAC * long) return null; // near-square / blob top → no clean ridge → SKIP
   return xExt > zExt ? "x" : "z";
 }
 
