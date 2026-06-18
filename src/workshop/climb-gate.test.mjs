@@ -15,6 +15,9 @@ import {
   CLIMB_DEFAULTS,
   TOOL_DEPARTMENTS,
   CLIMB_GATE_SCHEMA,
+  formReadyGate,
+  FORM_READY_CLOSURE,
+  TOOL_STAGE,
 } from "./climb-gate.mjs";
 
 // ---- CG1: acceptsRound — clear improvement past the margin is accepted ----
@@ -342,4 +345,54 @@ test("CG17 department-dominant override keeps an OPENING-targeting hand that cle
   assert.deepEqual(TOOL_DEPARTMENTS.articulate_walls, ["WALL"]);
   assert.deepEqual(TOOL_DEPARTMENTS.relief_walls, ["WALL"]); // T-195-01: the wall-RELIEF hand
   assert.deepEqual(TOOL_DEPARTMENTS.band_eave, ["ROOF"]);
+});
+
+// ==================== T-197-01 — form-before-detail ordering gate (S-197, E-51) ====================
+// CG-FR1: a DETAIL tool is BLOCKED on an open form (the colonnade — you can't carve a doorway into holes)
+test("CG-FR1 formReadyGate blocks a detail tool on an open form", () => {
+  const g = formReadyGate({ tool: "carve_arch", closure: 0.05 });
+  assert.equal(g.allow, false);
+  assert.equal(g.stage, "detail");
+  assert.match(g.reason, /form not ready/);
+});
+
+// CG-FR2: the SAME detail tool is ALLOWED once the form is closed
+test("CG-FR2 formReadyGate allows a detail tool on a closed form", () => {
+  const g = formReadyGate({ tool: "carve_arch", closure: 0.95 });
+  assert.equal(g.allow, true);
+  assert.match(g.reason, /form ready/);
+});
+
+// CG-FR3: FORM tools are always eligible (you must be able to close the shell, even when it is open)
+test("CG-FR3 formReadyGate always allows a form tool regardless of closure", () => {
+  assert.equal(formReadyGate({ tool: "close_shell", closure: 0.05 }).allow, true);
+  assert.equal(formReadyGate({ tool: "construct_walls", closure: 0 }).allow, true);
+  assert.equal(formReadyGate({ tool: "apply_gable_roof", closure: 0.1 }).allow, true);
+  assert.equal(formReadyGate({ tool: "close_shell", closure: 0.05 }).stage, "form");
+});
+
+// CG-FR4: boundary + the REAL measured seed closure (0.615) blocks detail; exactly-at-threshold allows
+test("CG-FR4 formReadyGate boundary: ≥threshold allows, the real 0.615 seed blocks detail", () => {
+  assert.equal(formReadyGate({ tool: "relief_walls", closure: FORM_READY_CLOSURE }).allow, true, "exactly at threshold is ready (≥)");
+  assert.equal(formReadyGate({ tool: "relief_walls", closure: 0.615 }).allow, false, "the real gatehouse seed band is not ready");
+  assert.equal(formReadyGate({ tool: "band_eave", closure: 0.615 }).allow, false);
+});
+
+// CG-FR5: `done` / unknown tools are never blocked (the gate never invents a block; a stop stays honest)
+test("CG-FR5 formReadyGate never blocks done or an unknown tool", () => {
+  assert.equal(formReadyGate({ tool: "done", closure: 0 }).allow, true);
+  assert.equal(formReadyGate({ tool: "nonexistent_tool", closure: 0 }).allow, true);
+});
+
+// CG-FR6: registry membership — close_shell labelled (WALL) and staged (form)
+test("CG-FR6 close_shell is registered as a WALL form tool", () => {
+  assert.deepEqual(TOOL_DEPARTMENTS.close_shell, ["WALL"]);
+  assert.equal(TOOL_STAGE.close_shell, "form");
+  assert.equal(TOOL_STAGE.carve_arch, "detail");
+});
+
+// CG-FR7: NaN/garbage closure fails safe (blocks detail rather than passing it on an unknown form)
+test("CG-FR7 formReadyGate fails safe on a non-finite closure", () => {
+  assert.equal(formReadyGate({ tool: "carve_arch", closure: NaN }).allow, false);
+  assert.equal(formReadyGate({ tool: "carve_arch", closure: undefined }).allow, false);
 });

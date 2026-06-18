@@ -48,7 +48,51 @@ export const TOOL_DEPARTMENTS = Object.freeze({
   // frame + arch it. An OPENING lever, like frame_arch, but it can reach the WIDE arched gate frame_arch can
   // only frame. Self-reverts to frame_arch (recess-only) if the aperture-coherence gate rejects the carve.
   carve_arch: Object.freeze(["OPENING"]),
+  // T-197-01 (S-197, E-51) — the close-the-shell FORM hand: build a dense closed wall shell from the program
+  // footprint (src/view/wall-generate.mjs closeShell). A WALL lever, but it is the form/massing stage, not a
+  // skin — it is what the form-before-detail ordering requires BEFORE the detail hands can read.
+  close_shell: Object.freeze(["WALL"]),
 });
+
+// ============================ FORM-BEFORE-DETAIL ORDERING (T-197-01, S-197, E-51) ============================
+// The reviewer's task-ordering note made structural: coarse FORM (close the shell / massing / roof shape)
+// before fine DETAIL (carve openings, relief, banding). "You can't carve a doorway into a wall that's already
+// full of holes." Each tool is labelled form|detail; a DETAIL tool is eligible only once the build's wall band
+// is form-ready (closure ≥ FORM_READY_CLOSURE). The decision is PURE and takes a CLOSURE SCALAR (the runner
+// computes it via wall-generate.mjs eaveRingClosure) — climb-gate stays occ-free / GL-free like the rest of
+// its decisions. Orthogonal to acceptsRound: this is an ELIGIBILITY filter that runs BEFORE keep/rollback.
+
+// Calibrated against the measured gatehouse gap (T-197 research): seed band closure 0.615 (open) vs a closed
+// dense shell 1.000 — a wide margin, so 0.9 is robust, not a knife-edge.
+export const FORM_READY_CLOSURE = 0.9;
+
+// Tool → climb stage. FORM = massing/envelope/roof shape & material (the coarse build, always eligible).
+// DETAIL = carve/dress/band a finished form (gated on form-readiness). The ticket names carve_arch,
+// relief_walls, band_eave; the other dressing hands are the same class (they decorate an envelope) so they
+// gate identically. A tool absent here (or `done`) is treated as non-detail → never blocked.
+export const TOOL_STAGE = Object.freeze({
+  close_shell: "form", construct_walls: "form", apply_gable_roof: "form", recolor_roof: "form",
+  carve_arch: "detail", relief_walls: "detail", band_eave: "detail",
+  articulate_walls: "detail", add_timber_framing: "detail", frame_arch: "detail",
+});
+
+/**
+ * FORM-READINESS GATE. Is `tool` eligible given the build's wall-band `closure`? Form (and unknown / `done`)
+ * tools are ALWAYS eligible — you must be able to close the shell, and a stop is always honest. A DETAIL tool
+ * is eligible only when `closure ≥ threshold` (the form is closed enough to carve/dress). NaN closure → 0 →
+ * blocks detail (fail safe). Pure; no occ, no mutation.
+ * @param {{tool:string, closure:number, threshold?:number}} args
+ * @returns {{allow:boolean, stage:string|null, reason:string}}
+ */
+export function formReadyGate({ tool, closure, threshold = FORM_READY_CLOSURE } = {}) {
+  const stage = TOOL_STAGE[tool] ?? null;
+  if (stage !== "detail") {
+    return { allow: true, stage, reason: `${stage ?? "non-detail"} tool — always eligible` };
+  }
+  const c = num(closure);
+  if (c >= threshold) return { allow: true, stage, reason: `form ready (closure ${c.toFixed(3)} ≥ ${threshold})` };
+  return { allow: false, stage, reason: `form not ready (closure ${c.toFixed(3)} < ${threshold}) — close the shell before detail` };
+}
 
 /**
  * Per-department MAJOR counts, derived purely from a critique's `items`. `critiqueEvidence` exposes only the
