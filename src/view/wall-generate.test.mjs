@@ -2,8 +2,14 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
+
 import { occupancyFromCells } from "./occupancy.mjs";
-import { closeColumns, perimeterColumns, spaceOpenings, constructWalls, robustExtent, coverageOf, registerRect, closureOf, closeShell, eaveRingClosure } from "./wall-generate.mjs";
+import { closeColumns, perimeterColumns, spaceOpenings, constructWalls, robustExtent, coverageOf, registerRect, closureOf, closeShell, eaveRingClosure, PROUD_TRIM } from "./wall-generate.mjs";
+import { buildWallRelief } from "./wall-relief.mjs";
+import { FORM_READY_CLOSURE } from "../workshop/climb-gate.mjs";
 
 const setOf = (...cs) => new Set(cs);
 /** A hollow rectangular ring (perimeter columns only) over [x0,x1]×[z0,z1], stacked floor..eave. */
@@ -338,4 +344,68 @@ test("WG-CS5 closeShell drops a stray post outside the dense footprint", () => {
   assert.equal(report.closed, true);
   assert.ok(report.closureAfter >= 0.9, `stray did not break closure (got ${report.closureAfter})`);
   assert.equal(out.has(40, 3, 40), false, "the far stray post was dropped");
+});
+
+// ============================ T-202-01 — closure invariant to PROUD DETAIL (S-202, E-52) ============================
+// The E-49 capstone (T-201) showed eaveRingClosure collapsing 1.000 → 0.068 after relief_walls though the
+// shell was physically intact: relief's proud quoins (224 cells) + plinth stand OUTSIDE the wall plane and,
+// folded into one bbox, define an oversized near-empty rectangle. The fix measures closure on the robust
+// WALL-PLANE footprint, so detail no longer turns the form gate on the build. These tests exercise the REAL
+// `relief_walls` geometry (buildWallRelief) BOTH ways: relief-on-closed stays form-ready; a genuinely
+// reopened shell still reads open. Counts are the real T-201 gatehouse counts (224 proud quoin cells).
+const T202_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
+const T202_PROGRAM = JSON.parse(readFileSync(join(T202_ROOT, "benchmarks/sculpture/recognition/gatehouse.program.json"), "utf8"));
+const T202_PACK = JSON.parse(readFileSync(join(T202_ROOT, "packs/rustic.json"), "utf8"));
+const T202_EAVE = 18;
+/** A solid closed gatehouse-sized ring (the close_shell output structure), optional dropped straight run. */
+function closedGatehouse({ drop = [] } = {}) {
+  return ringOcc({ x0: 0, x1: 14, z0: 0, z1: 14, floor: 0, eave: T202_EAVE, block: "minecraft:cobblestone", drop });
+}
+/** The naive (pre-fix) measure: closure over EVERY band column's perimeter — what cratered on relief. */
+function naiveBandClosure(occ, eaveY) {
+  const cols = new Set();
+  for (const k of occ.cells.keys()) { const [x, y, z] = k.split(",").map(Number); if (y < 0 || y > eaveY) continue; cols.add(`${x},${z}`); }
+  return closureOf(perimeterColumns(cols));
+}
+
+// WG-CS6: relief on a CLOSED shell stays form-ready (the bug, fixed). The naive measure craters; the
+// wall-plane metric clears the same 0.9 the gate uses.
+test("WG-CS6 relief_walls on a closed shell stays form-ready (proud detail no longer craters closure)", () => {
+  const occ = closedGatehouse();
+  assert.equal(eaveRingClosure(occ, { floor: 0, eaveY: T202_EAVE }), 1, "the bare closed ring is watertight");
+  const r = buildWallRelief(occ, { program: T202_PROGRAM, pack: T202_PACK, floor: 0, eaveY: T202_EAVE });
+  // the real T-201 proud geometry: 224 proud quoin cells emitted (provenance pin)
+  assert.equal(r.report.byLayer.corners.placed, 224, "real relief emits the T-201 quoin count");
+  assert.ok(r.report.byLayer.base.placed > 0, "and a proud plinth course");
+  // a NAIVE band-column closure craters on the proud fringe (the documented 1.000 → 0.068 failure)…
+  assert.ok(naiveBandClosure(r.occ, T202_EAVE) < 0.2, "naive measure is cratered by the proud fringe (the bug)");
+  // …but the wall-plane metric stays form-ready (≥ the gate's threshold). No re-pin of 0.9 needed.
+  const c = eaveRingClosure(r.occ, { floor: 0, eaveY: T202_EAVE });
+  assert.ok(c >= FORM_READY_CLOSURE, `relief-on-closed reads form-ready (got ${c} ≥ ${FORM_READY_CLOSURE})`);
+});
+
+// WG-CS7: a genuinely REOPENED shell still reads open — bare AND after relief (the over-correction guard).
+// The proud plinth mirrors the wall's holes, so detail cannot mask a real reopening.
+test("WG-CS7 a reopened shell reads OPEN even after relief (the over-correction guard)", () => {
+  const drop = ["3,0", "4,0", "5,0", "6,0", "7,0", "8,0", "9,0", "10,0", "11,0"]; // a straight run dropped on one face
+  const openOcc = closedGatehouse({ drop });
+  const closedC = eaveRingClosure(closedGatehouse(), { floor: 0, eaveY: T202_EAVE });
+  const bareC = eaveRingClosure(openOcc, { floor: 0, eaveY: T202_EAVE });
+  assert.ok(bareC < FORM_READY_CLOSURE, `bare reopened shell is not form-ready (got ${bareC})`);
+  const ro = buildWallRelief(openOcc, { program: T202_PROGRAM, pack: T202_PACK, floor: 0, eaveY: T202_EAVE }).occ;
+  const reliefC = eaveRingClosure(ro, { floor: 0, eaveY: T202_EAVE });
+  assert.ok(reliefC < FORM_READY_CLOSURE, `relief did not mask the hole (got ${reliefC})`);
+  assert.ok(reliefC < closedC, "reopened+relief reads strictly below closed+relief");
+});
+
+// WG-CS8: the robust trim is a NO-OP on proud-free rings — the existing closure readings are byte-identical,
+// so the percentile never bites a real wall face (no regression to the T-197 metric).
+test("WG-CS8 robust trim is a no-op on proud-free rings (no regression)", () => {
+  assert.ok(PROUD_TRIM > 0 && PROUD_TRIM < 0.25, "trim sits inside (fringe%, wall-side%)");
+  const clean7 = ringOcc({ x0: 0, x1: 6, z0: 0, z1: 6, floor: 0, eave: 4 });
+  assert.equal(eaveRingClosure(clean7, { floor: 0, eaveY: 4 }), 1, "clean 7×7 still 1");
+  const gappy7 = ringOcc({ x0: 0, x1: 6, z0: 0, z1: 6, floor: 0, eave: 4, drop: ["1,0", "2,0", "3,0", "4,0", "5,0"] });
+  assert.ok(Math.abs(eaveRingClosure(gappy7, { floor: 0, eaveY: 4 }) - 0.7917) < 0.001, "gappy 7×7 unchanged (≈0.7917)");
+  const clean11 = ringOcc({ x0: 0, x1: 10, z0: 0, z1: 10, floor: 0, eave: 5 });
+  assert.equal(eaveRingClosure(clean11, { floor: 0, eaveY: 5 }), 1, "clean 11×11 still 1");
 });

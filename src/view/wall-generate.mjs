@@ -21,6 +21,14 @@ import { occupancyFromCells } from "./occupancy.mjs";
 
 const NB4 = [[1, 0], [-1, 0], [0, 1], [0, -1]];
 
+/**
+ * Percentile to trim a thin PROUD detail fringe before measuring form-readiness closure. relief's quoin
+ * tips (depth 2) + plinth (depth 1) stand 1–2 cells OUTSIDE the wall plane; left in, they make the band
+ * bbox an oversized near-empty rectangle. This lands inside (fringe% ≈ 2, full-wall-side% ≈ 25) on every
+ * realistic footprint, so it peels the sparse fringe but never a wall face. T-202-01 (S-202, E-52).
+ */
+export const PROUD_TRIM = 0.05;
+
 /** Dilate a "x,z" column set by a Manhattan ball of radius r. */
 function dilate(set, r) {
   const o = new Set();
@@ -264,11 +272,20 @@ function bandHistogram(occ, floor, eaveY, ns) {
 }
 
 /**
- * CLOSURE of a build's wall band (the form-readiness metric). The fraction of the band's bbox-rectangle
- * perimeter the actual wall columns occupy — `closureOf(perimeterColumns(bandCols))`. A watertight shell → 1;
+ * CLOSURE of a build's wall band (the form-readiness metric), measured on the WALL PLANE. The fraction of
+ * the wall-plane footprint's bbox-rectangle perimeter the actual wall columns occupy. A watertight shell → 1;
  * a colonnade (straight-run gaps) → < 1. This is the ONE closure definition the close-the-shell hand reports
  * AND the form-before-detail ordering gate consumes (T-197-01) — no drift between "what closed" and "what the
  * gate tests". Returns 0 on an empty/absent band (a build with no wall band is not form-ready). PURE.
+ *
+ * INVARIANT TO PROUD DETAIL (T-202-01, S-202, E-52). relief's sparse quoin tips (depth 2) + plinth (depth 1)
+ * stand OUTSIDE the wall plane; folding every band column into one bbox let them define an oversized,
+ * near-empty rectangle and crater closure (1.000 → 0.068 on the T-201 gatehouse though the shell was
+ * physically intact — the climb's form gate then turned on the build). So clamp the band columns to a robust
+ * footprint (`robustExtent` trims the thin outlier fringe) BEFORE `closureOf`, measuring the dense ring not
+ * the proud fringe. A genuine reopening still reads low — the proud plinth is emitted only in front of
+ * existing exterior cells (so it mirrors the wall's holes), and the corners hold the bbox so a missing face
+ * stays a visible empty edge. Reuses the ONE closure authority (`closureOf`); no new metric.
  * @param {import("./occupancy.mjs").Occupancy} occ
  * @param {{floor?:number, eaveY:number}} params  eaveY required; floor defaults to occ.bounds.min[1]
  */
@@ -283,7 +300,14 @@ export function eaveRingClosure(occ, { floor, eaveY } = {}) {
     cols.add(`${x},${z}`);
   }
   if (cols.size === 0) return 0;
-  return closureOf(perimeterColumns(cols));
+  // Clamp to the robust wall-plane footprint (drop the sparse proud fringe), then measure the dense ring.
+  const ext = robustExtent(cols, { pLo: PROUD_TRIM, pHi: 1 - PROUD_TRIM });
+  const footprint = new Set();
+  for (const c of cols) {
+    const [x, z] = c.split(",").map(Number);
+    if (x >= ext.x0 && x <= ext.x1 && z >= ext.z0 && z <= ext.z1) footprint.add(c);
+  }
+  return closureOf(perimeterColumns(footprint));
 }
 
 /**
