@@ -48,6 +48,10 @@ export const TOOL_DEPARTMENTS = Object.freeze({
   // frame + arch it. An OPENING lever, like frame_arch, but it can reach the WIDE arched gate frame_arch can
   // only frame. Self-reverts to frame_arch (recess-only) if the aperture-coherence gate rejects the carve.
   carve_arch: Object.freeze(["OPENING"]),
+  // T-203-01 (S-203, E-52) — the wide-arch REBUILD hand: rebuild the declared gate to a WIDE arched opening
+  // (coherent head/jambs/sill + voussoir), passing the ARCH-AWARE coherence gate carve_arch's full-height
+  // check could not. THE OPENING lever (carve_arch is retired from the menu — it provably always refuted).
+  rebuild_arch: Object.freeze(["OPENING"]),
   // T-197-01 (S-197, E-51) — the close-the-shell FORM hand: build a dense closed wall shell from the program
   // footprint (src/view/wall-generate.mjs closeShell). A WALL lever, but it is the form/massing stage, not a
   // skin — it is what the form-before-detail ordering requires BEFORE the detail hands can read.
@@ -80,6 +84,7 @@ export const TOOL_STAGE = Object.freeze({
   close_shell: "form", construct_walls: "form", apply_gable_roof: "form", recolor_roof: "form",
   carve_arch: "detail", relief_walls: "detail", band_eave: "detail",
   articulate_walls: "detail", add_timber_framing: "detail", frame_arch: "detail",
+  rebuild_arch: "detail", // T-203-01: the OPENING rebuild gates on form-readiness like the other detail hands
 });
 
 // Tools whose KEEP decision is made on closureOf ALONE (T-200-01, S-200, E-49). The wall-shell FORM moves

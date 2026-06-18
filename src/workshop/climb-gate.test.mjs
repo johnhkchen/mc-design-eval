@@ -347,6 +347,14 @@ test("CG17 department-dominant override keeps an OPENING-targeting hand that cle
   assert.deepEqual(TOOL_DEPARTMENTS.articulate_walls, ["WALL"]);
   assert.deepEqual(TOOL_DEPARTMENTS.relief_walls, ["WALL"]); // T-195-01: the wall-RELIEF hand
   assert.deepEqual(TOOL_DEPARTMENTS.band_eave, ["ROOF"]);
+  assert.deepEqual(TOOL_DEPARTMENTS.rebuild_arch, ["OPENING"]); // T-203-01: the wide-arch REBUILD hand
+  assert.equal(TOOL_STAGE.rebuild_arch, "detail"); // gated on form-readiness like the other detail hands
+});
+
+// CG-REB1 (T-203-01): the wide-arch rebuild is a DETAIL OPENING tool — blocked on an open form, allowed closed.
+test("CG-REB1 rebuild_arch gates on form-readiness (detail stage)", () => {
+  assert.equal(formReadyGate({ tool: "rebuild_arch", closure: 0.05 }).allow, false);
+  assert.equal(formReadyGate({ tool: "rebuild_arch", closure: 0.95 }).allow, true);
 });
 
 // ==================== T-197-01 — form-before-detail ordering gate (S-197, E-51) ====================
