@@ -6,7 +6,7 @@ status: open
 priority: high
 depends_on: [E-46]
 spec: "§9.1"
-stories: [S-186]
+stories: [S-186, S-187]
 ---
 
 ## Background (the residual E-46 named)
@@ -48,6 +48,12 @@ decomposition, not on a hand-tuned constant ([[diverge-before-converge-experimen
 ## Stories
 
 - **S-186** — concept-image-conditioned style distance + re-gate (the fix, then the E-46 gate re-run).
+  *Outcome (T-186-01): made the term read the picture (packEffect 45→12, hard-middle agreement 0.20→1.00) but
+  re-gate landed MIXED/INCONCLUSIVE — matched builds compressed 53→21 (voxel renders graded vs concept art),
+  so the +6 picture lead sits inside the noise band.*
+- **S-187** — voxel-vs-art tolerance to restore matched dynamic range (blocky-but-faithful ≠ wrong-style)
+  without lifting wrong-picture builds + diagnose `gh-wrongpack`, then re-run the same gate. A clean
+  PICTURE-DRIVEN re-gate is what licenses the human-signed-off promotion.
 
 ## Note
 

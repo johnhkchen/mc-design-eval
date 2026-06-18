@@ -48,6 +48,7 @@ const ALLOWED = {
   "src/view/surface-pattern.mjs": { modules: ["zone-fill"], reason: "consumes the canonical skin iterators" },
   "src/view/shell-integrity.mjs": { modules: ["surface-pattern"], reason: "spill-level reuse in closure repair" },
   "src/view/roof-swap.mjs": { modules: ["roof-generate"], reason: "roof family swap over the generator's records" },
+  "src/view/aperture-carve.mjs": { modules: ["hollow-carve"], reason: "the aperture-coherence gate composes the ONE exclusion-carve definition (T-194, no refork)" },
   "src/view/roof-steep.mjs": { modules: ["roof-generate"], reason: "steep classes delegate to the ONE wedge/cap/sheet definition (T-134, no refork)" },
   "src/view/facade-articulation.mjs": { modules: ["surface-relief"], reason: "articulation idioms delegate to the ONE relief op (T-147, no refork)" },
   "src/form/relief-presence.mjs": { modules: ["surface-relief"], reason: "the relief-aware lens reads the build's own relief via the ONE relief op (T-148, no refork)" },

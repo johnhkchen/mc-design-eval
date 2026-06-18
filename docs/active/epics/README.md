@@ -57,6 +57,10 @@ Source of truth: [`docs/specification.md`](../../specification.md).
 | E-45 | recalibrate-style-distance-term             | high   | E-44                | §9.1           |
 | E-46 | labeled-style-corpus-and-promotion-gate     | high   | E-45                | §9.1           |
 | E-47 | concept-image-conditioned-style-distance    | high   | E-46                | §9.1           |
+| E-48 | turn-the-loop-loose-picture-driven-climb    | high   | E-47                | §1, §7, §9     |
+| E-50 | accept-gate-follows-the-glance              | high   | E-48                | §1, §7, §9     |
+| E-51 | real-construction-hands-and-wider-eyes      | high   | E-50                | §1, §5, §6, §9 |
+| E-49 | generalize-the-climb-across-subjects        | medium | E-51                | §1, §7, §9     |
 
 > E-01…E-38 archived. E-39–E-43 done (feedback machinery → typed kind → faithful build → treatment grammar).
 > E-44 done — the crater REFUTED at VOTES=6 (gate is the MEASURE, not the build). E-45 done — **measure

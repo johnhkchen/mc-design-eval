@@ -1,0 +1,736 @@
+{
+  "schema": "picture-climb/v1",
+  "subject": "gatehouse",
+  "seed": "benchmarks/sculpture/generated/gatehouse/artifact.json",
+  "program": "benchmarks/sculpture/recognition/gatehouse.program.json",
+  "pack": "rustic",
+  "concept": "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+  "tier": "strong",
+  "votes": 3,
+  "margin": 4,
+  "stopReason": "stalled (2 rolled back)",
+  "observedScoreSpread": {
+    "min": 20,
+    "max": 52,
+    "allRoundVotes": [
+      52,
+      52,
+      0,
+      52,
+      44,
+      20,
+      24,
+      32,
+      24,
+      0,
+      32,
+      32
+    ]
+  },
+  "trajectory": [
+    {
+      "round": 0,
+      "score": 0,
+      "evidence": {
+        "score": 0,
+        "nItems": 6,
+        "nMajor": 6,
+        "nWrongStyle": 3,
+        "wrongStyleBreadth": 3,
+        "departments": [
+          "ROOF",
+          "WALL",
+          "WALL",
+          "OPENING",
+          "OPENING",
+          "ROOM"
+        ],
+        "missing": [
+          "The steep gable form (paired slopes + ridge) and the lighter stone eave/verge banding course.",
+          "The mid-grey dressed-stone field value/material.",
+          "The contrasting rubble quoins at all four corners.",
+          "The framed arched passage with its dark-timber jambs and head.",
+          "The narrow slit windows on the eave walls.",
+          "The roof/wall-top closure that seals the mass."
+        ]
+      },
+      "items": [
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "A low stepped/terraced concentric cap mounded over an open wall-top; no ridge, no two clean slopes, no eave band.",
+          "missing": "The steep gable form (paired slopes + ridge) and the lighter stone eave/verge banding course.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Uniform near-black vertically-coursed material across all four faces, far darker than the concept and reading as a different (dark plank/deepslate) family.",
+          "missing": "The mid-grey dressed-stone field value/material.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Corners are the same uniform dark coursing as the field; no rubble quoin contrast.",
+          "missing": "The contrasting rubble quoins at all four corners.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "Ragged irregular gaps in the wall; no clean arched aperture and no timber surround.",
+          "missing": "The framed arched passage with its dark-timber jambs and head.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "Eave walls are blank dark coursing or carry only ragged holes; no clean paired slits.",
+          "missing": "The narrow slit windows on the eave walls.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "ROOM",
+          "severity": "major",
+          "present": "An open-topped hollow shell — wall tops are unsealed and the interior is visible from above at every azimuth.",
+          "missing": "The roof/wall-top closure that seals the mass.",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "apply_gable_roof",
+        "reason": "ROOF FORM is the first major divergence — the steep paired-slope gable with ridge is the dominant shape gap; fix form before colour or trim."
+      },
+      "applied": false,
+      "accepted": false
+    },
+    {
+      "round": 1,
+      "score": 0,
+      "evidence": {
+        "score": 0,
+        "nItems": 6,
+        "nMajor": 6,
+        "nWrongStyle": 3,
+        "wrongStyleBreadth": 3,
+        "departments": [
+          "ROOF",
+          "WALL",
+          "WALL",
+          "OPENING",
+          "OPENING",
+          "ROOM"
+        ],
+        "missing": [
+          "The steep gable form (paired slopes + ridge) and the lighter stone eave/verge banding course.",
+          "The mid-grey dressed-stone field value/material.",
+          "The contrasting rubble quoins at all four corners.",
+          "The framed arched passage with its dark-timber jambs and head.",
+          "The narrow slit windows on the eave walls.",
+          "The roof/wall-top closure that seals the mass."
+        ]
+      },
+      "items": [
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "A low stepped/terraced concentric cap mounded over an open wall-top; no ridge, no two clean slopes, no eave band.",
+          "missing": "The steep gable form (paired slopes + ridge) and the lighter stone eave/verge banding course.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Uniform near-black vertically-coursed material across all four faces, far darker than the concept and reading as a different (dark plank/deepslate) family.",
+          "missing": "The mid-grey dressed-stone field value/material.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Corners are the same uniform dark coursing as the field; no rubble quoin contrast.",
+          "missing": "The contrasting rubble quoins at all four corners.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "Ragged irregular gaps in the wall; no clean arched aperture and no timber surround.",
+          "missing": "The framed arched passage with its dark-timber jambs and head.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "Eave walls are blank dark coursing or carry only ragged holes; no clean paired slits.",
+          "missing": "The narrow slit windows on the eave walls.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "ROOM",
+          "severity": "major",
+          "present": "An open-topped hollow shell — wall tops are unsealed and the interior is visible from above at every azimuth.",
+          "missing": "The roof/wall-top closure that seals the mass.",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "apply_gable_roof",
+        "reason": "ROOF FORM is the first major divergence — the steep paired-slope gable with ridge is the dominant shape gap; fix form before colour or trim."
+      },
+      "applied": true,
+      "accepted": true,
+      "gate": {
+        "accept": true,
+        "delta": 52,
+        "reason": "improved +52"
+      },
+      "scoreAfter": {
+        "score": 52,
+        "scores": [
+          52,
+          52,
+          0
+        ]
+      },
+      "targetDepartments": [
+        "ROOF"
+      ],
+      "deptMajorsBefore": {
+        "ROOF": 1,
+        "WALL": 2,
+        "OPENING": 2,
+        "ROOM": 1
+      },
+      "deptMajorsAfter": {
+        "ROOF": 1
+      },
+      "deptItemsBefore": {
+        "ROOF": {
+          "major": 1,
+          "minor": 0
+        },
+        "WALL": {
+          "major": 2,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 2,
+          "minor": 0
+        },
+        "ROOM": {
+          "major": 1,
+          "minor": 0
+        }
+      },
+      "deptItemsAfter": {
+        "ROOF": {
+          "major": 1,
+          "minor": 1
+        },
+        "WALL": {
+          "major": 0,
+          "minor": 1
+        }
+      }
+    },
+    {
+      "round": 2,
+      "score": 52,
+      "evidence": {
+        "score": 52,
+        "nItems": 3,
+        "nMajor": 1,
+        "nWrongStyle": 1,
+        "wrongStyleBreadth": 1,
+        "departments": [
+          "ROOF",
+          "ROOF",
+          "WALL"
+        ],
+        "missing": [
+          "The lighter stone eave/verge banding course.",
+          "The coursed dressed-stone field reading distinct from the rough rubble corners."
+        ]
+      },
+      "items": [
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "A warm orange/brown plank roof covering the full gable.",
+          "missing": "",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "ROOF",
+          "severity": "minor",
+          "present": "Roof edge is the same brown plank/stair material running straight to the eave with no contrasting band.",
+          "missing": "The lighter stone eave/verge banding course.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "WALL",
+          "severity": "minor",
+          "present": "Walls read as one fairly uniform rough grey stone with little field-vs-quoin contrast.",
+          "missing": "The coursed dressed-stone field reading distinct from the rough rubble corners.",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "recolor_roof",
+        "reason": "The worst remaining divergence is the roof material — warm orange/brown planks instead of the dark charcoal-grey shown in the concept. The gable form is already correct (apply_gable_roof was kept), so recolor_roof addresses the dominant remaining gap."
+      },
+      "applied": true,
+      "accepted": true,
+      "gate": {
+        "accept": true,
+        "delta": -8,
+        "reason": "ROOF cleared a major (department-dominant override)"
+      },
+      "scoreAfter": {
+        "score": 44,
+        "scores": [
+          52,
+          44,
+          20
+        ]
+      },
+      "targetDepartments": [
+        "ROOF"
+      ],
+      "deptMajorsBefore": {
+        "ROOF": 1
+      },
+      "deptMajorsAfter": {
+        "WALL": 1
+      },
+      "deptItemsBefore": {
+        "ROOF": {
+          "major": 1,
+          "minor": 1
+        },
+        "WALL": {
+          "major": 0,
+          "minor": 1
+        }
+      },
+      "deptItemsAfter": {
+        "WALL": {
+          "major": 1,
+          "minor": 1
+        },
+        "ROOF": {
+          "major": 0,
+          "minor": 1
+        },
+        "OPENING": {
+          "major": 0,
+          "minor": 1
+        }
+      }
+    },
+    {
+      "round": 3,
+      "score": 44,
+      "evidence": {
+        "score": 44,
+        "nItems": 4,
+        "nMajor": 1,
+        "nWrongStyle": 1,
+        "wrongStyleBreadth": 1,
+        "departments": [
+          "WALL",
+          "WALL",
+          "ROOF",
+          "OPENING"
+        ],
+        "missing": [
+          "The light grey stone material and the wall-vs-roof tonal contrast that defines the concept.",
+          "The lighter cobblestone quoin treatment at the corners.",
+          "The lighter stone eave/verge banding course.",
+          "The clean arch head and the contrasting timber surround."
+        ]
+      },
+      "items": [
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Walls rendered in a near-black/dark-charcoal stone, almost as dark as the roof, so the whole mass reads as one dark block.",
+          "missing": "The light grey stone material and the wall-vs-roof tonal contrast that defines the concept.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "minor",
+          "present": "Corners read as the same dark stone as the wall field, with no lighter rubble distinction.",
+          "missing": "The lighter cobblestone quoin treatment at the corners.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "ROOF",
+          "severity": "minor",
+          "present": "Dark roof carried to the very edge with no lighter perimeter band.",
+          "missing": "The lighter stone eave/verge banding course.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "A dark, ragged-edged opening on the gable with no distinct lighter/warm timber frame and an indistinct arch head.",
+          "missing": "The clean arch head and the contrasting timber surround.",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "articulate_walls",
+        "reason": "The dominant remaining gap is a major WALL replace: the wall field reads the wrong material and kills the wall-vs-roof tonal contrast. articulate_walls recolors the field to pale dressed stone while keeping the rubble corner quoins — directly addressing the worst divergence."
+      },
+      "applied": true,
+      "accepted": false,
+      "gate": {
+        "accept": false,
+        "delta": -20,
+        "reason": "regressed -20"
+      },
+      "scoreAfter": {
+        "score": 24,
+        "scores": [
+          24,
+          32,
+          24
+        ]
+      },
+      "targetDepartments": [
+        "WALL"
+      ],
+      "deptMajorsBefore": {
+        "WALL": 1
+      },
+      "deptMajorsAfter": {
+        "WALL": 1,
+        "OPENING": 1
+      },
+      "deptItemsBefore": {
+        "WALL": {
+          "major": 1,
+          "minor": 1
+        },
+        "ROOF": {
+          "major": 0,
+          "minor": 1
+        },
+        "OPENING": {
+          "major": 0,
+          "minor": 1
+        }
+      },
+      "deptItemsAfter": {
+        "WALL": {
+          "major": 1,
+          "minor": 1
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        },
+        "ROOF": {
+          "major": 0,
+          "minor": 1
+        }
+      }
+    },
+    {
+      "round": 4,
+      "score": 44,
+      "evidence": {
+        "score": 44,
+        "nItems": 4,
+        "nMajor": 1,
+        "nWrongStyle": 1,
+        "wrongStyleBreadth": 1,
+        "departments": [
+          "WALL",
+          "WALL",
+          "ROOF",
+          "OPENING"
+        ],
+        "missing": [
+          "The light grey stone material and the wall-vs-roof tonal contrast that defines the concept.",
+          "The lighter cobblestone quoin treatment at the corners.",
+          "The lighter stone eave/verge banding course.",
+          "The clean arch head and the contrasting timber surround."
+        ]
+      },
+      "items": [
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Walls rendered in a near-black/dark-charcoal stone, almost as dark as the roof, so the whole mass reads as one dark block.",
+          "missing": "The light grey stone material and the wall-vs-roof tonal contrast that defines the concept.",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "minor",
+          "present": "Corners read as the same dark stone as the wall field, with no lighter rubble distinction.",
+          "missing": "The lighter cobblestone quoin treatment at the corners.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "ROOF",
+          "severity": "minor",
+          "present": "Dark roof carried to the very edge with no lighter perimeter band.",
+          "missing": "The lighter stone eave/verge banding course.",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "A dark, ragged-edged opening on the gable with no distinct lighter/warm timber frame and an indistinct arch head.",
+          "missing": "The clean arch head and the contrasting timber surround.",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "construct_walls",
+        "reason": "The worst divergence is WALL (major): dark monotone field material vs the concept's light grey stone. articulate_walls (recolor-only) was rolled back. construct_walls does a full rebuild from pack roles — per-storey material assignment, quoins, clinker — which should land the pale dressed stone field that articulate_walls failed to hold."
+      },
+      "applied": true,
+      "accepted": false,
+      "gate": {
+        "accept": false,
+        "delta": -12,
+        "reason": "regressed -12"
+      },
+      "scoreAfter": {
+        "score": 32,
+        "scores": [
+          0,
+          32,
+          32
+        ]
+      },
+      "targetDepartments": [
+        "WALL",
+        "OPENING"
+      ],
+      "deptMajorsBefore": {
+        "WALL": 1
+      },
+      "deptMajorsAfter": {
+        "WALL": 1,
+        "OPENING": 1
+      },
+      "deptItemsBefore": {
+        "WALL": {
+          "major": 1,
+          "minor": 1
+        },
+        "ROOF": {
+          "major": 0,
+          "minor": 1
+        },
+        "OPENING": {
+          "major": 0,
+          "minor": 1
+        }
+      },
+      "deptItemsAfter": {
+        "WALL": {
+          "major": 1,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        },
+        "ROOF": {
+          "major": 0,
+          "minor": 1
+        }
+      }
+    },
+    {
+      "round": 4,
+      "score": 44,
+      "items": [],
+      "pick": {
+        "tool": "—"
+      },
+      "applied": false,
+      "accepted": false,
+      "terminal": true
+    }
+  ],
+  "inventory": {
+    "actedOn": [
+      {
+        "department": "ROOF",
+        "byTool": [
+          "apply_gable_roof",
+          "recolor_roof"
+        ],
+        "rounds": [
+          1,
+          2
+        ],
+        "deltas": [
+          52,
+          -8
+        ]
+      }
+    ],
+    "eyesOnly": [
+      {
+        "department": "WALL",
+        "namedItems": [
+          {
+            "round": 0,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "The mid-grey dressed-stone field value/material."
+          },
+          {
+            "round": 0,
+            "kind": "add",
+            "severity": "major",
+            "missing": "The contrasting rubble quoins at all four corners."
+          },
+          {
+            "round": 1,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "The mid-grey dressed-stone field value/material."
+          },
+          {
+            "round": 1,
+            "kind": "add",
+            "severity": "major",
+            "missing": "The contrasting rubble quoins at all four corners."
+          },
+          {
+            "round": 2,
+            "kind": "add",
+            "severity": "minor",
+            "missing": "The coursed dressed-stone field reading distinct from the rough rubble corners."
+          },
+          {
+            "round": 3,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "The light grey stone material and the wall-vs-roof tonal contrast that defines the concept."
+          },
+          {
+            "round": 3,
+            "kind": "add",
+            "severity": "minor",
+            "missing": "The lighter cobblestone quoin treatment at the corners."
+          },
+          {
+            "round": 4,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "The light grey stone material and the wall-vs-roof tonal contrast that defines the concept."
+          },
+          {
+            "round": 4,
+            "kind": "add",
+            "severity": "minor",
+            "missing": "The lighter cobblestone quoin treatment at the corners."
+          }
+        ]
+      },
+      {
+        "department": "OPENING",
+        "namedItems": [
+          {
+            "round": 0,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "The framed arched passage with its dark-timber jambs and head."
+          },
+          {
+            "round": 0,
+            "kind": "add",
+            "severity": "major",
+            "missing": "The narrow slit windows on the eave walls."
+          },
+          {
+            "round": 1,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "The framed arched passage with its dark-timber jambs and head."
+          },
+          {
+            "round": 1,
+            "kind": "add",
+            "severity": "major",
+            "missing": "The narrow slit windows on the eave walls."
+          },
+          {
+            "round": 3,
+            "kind": "add",
+            "severity": "minor",
+            "missing": "The clean arch head and the contrasting timber surround."
+          },
+          {
+            "round": 4,
+            "kind": "add",
+            "severity": "minor",
+            "missing": "The clean arch head and the contrasting timber surround."
+          }
+        ]
+      },
+      {
+        "department": "ROOM",
+        "namedItems": [
+          {
+            "round": 0,
+            "kind": "add",
+            "severity": "major",
+            "missing": "The roof/wall-top closure that seals the mass."
+          },
+          {
+            "round": 1,
+            "kind": "add",
+            "severity": "major",
+            "missing": "The roof/wall-top closure that seals the mass."
+          }
+        ]
+      }
+    ],
+    "verdict": {
+      "climbed": true,
+      "stalled": false,
+      "oscillated": false,
+      "actionableFrac": 0.5,
+      "scoreFirst": 0,
+      "scoreLast": 44,
+      "delta": 44
+    }
+  }
+}

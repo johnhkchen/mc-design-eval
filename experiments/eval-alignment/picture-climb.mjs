@@ -30,6 +30,7 @@ import { constructWalls } from "../../src/view/wall-generate.mjs";
 import { wallSkin } from "../../src/view/wall-skin.mjs";
 import { extractApertures, dressOpenings } from "../../src/view/opening-dressing.mjs";
 import { frameArchPlacements } from "../../src/view/arch-frame.mjs";
+import { carveTargetCells, apertureCoherenceGate, carveAperture } from "../../src/view/aperture-carve.mjs";
 import { composeRoofTreatment, bareBlock } from "../../src/view/treatment-grammar.mjs";
 import { roleBlock } from "../../src/recognition/compile.mjs";
 import { infillPanel } from "../../src/view/facade-articulation.mjs";
@@ -174,6 +175,56 @@ function frame_arch(occ) {
   return occupancyFromCells([...occToCells(occ), ...placements.map((p) => ({ pos: p.pos, block: p.block }))]);
 }
 
+// THE CARVE+DRESS HAND (OPENING) — T-194-01 (S-194, E-51). The charter narrowing: CARVE the declared gate
+// WIDER (removing wall — an air op allowed ONLY here, ONLY inside the declared aperture, ONLY if the
+// aperture-coherence gate accepts it) then FRAME + ARCH it. frame_arch can only FRAME the 1-wide slot (the
+// T-193 plateau: "the true wide arch needs the opening widened"); this widens it so an arch head is buildable.
+// SELF-REVERTS to frame_arch (recess-only) if the gate rejects the carve — a leaky/ragged carve is NEVER
+// returned (the anti-hedge refute path, recorded). Materials READ via roleBlock; measurements/ untouched.
+const U_AXIS = Object.freeze({ "+x": 2, "-x": 2, "+z": 0, "-z": 0 }); // world index of the along-face axis
+function apertureFromTarget(t) {
+  const cells = [], flanks = { left: [], right: [] }, lintel = [];
+  for (let av = t.vLo; av <= t.vHi; av++) for (let au = t.uLo; au <= t.uHi; au++) cells.push({ au, av });
+  for (let av = t.vLo; av <= t.vHi; av++) { flanks.left.push({ au: t.uLo - 1, av }); flanks.right.push({ au: t.uHi + 1, av }); }
+  for (let au = t.uLo - 1; au <= t.uHi + 1; au++) lintel.push({ au, av: t.vHi + 1 });
+  return { kind: "door", dir: t.dir, cells, flanks, lintel };
+}
+function carve_arch(occ) {
+  const program = loadProgram(PROGRAM_PATH);
+  const pack = loadPackOf(program);
+  const door = program?.masses?.[0]?.openings?.find((o) => o.kind === "door" && o.head === "arch");
+  if (!door) { console.error("  [carve_arch] no declared arched door — no-op"); return occ; }
+  const frameBlock = (pack && door.headRole) ? roleBlock(pack, door.headRole) : "dark_oak_log";
+  const refOcc = artifactOccupancy(JSON.parse(readFileSync(join(ROOT, SEED_ARTIFACT), "utf8")));
+  const declared = extractApertures(refOcc).find((a) => a.dir === door.wall && a.kind === "door");
+  if (!declared) { console.error(`  [carve_arch] no seed door aperture on ${door.wall} — no-op`); return occ; }
+
+  // scale the declared width (program units) into the build: build wall-band u-span / program rect u-span.
+  const ax = U_AXIS[door.wall];
+  let uMin = Infinity, uMax = -Infinity;
+  for (const key of occ.cells.keys()) {
+    const c = key.split(",").map(Number);
+    if (c[1] < occ.bounds.min[1] || c[1] > CFG.eaveY) continue;
+    if (c[ax] < uMin) uMin = c[ax]; if (c[ax] > uMax) uMax = c[ax];
+  }
+  const progSpan = ax === 2 ? program?.masses?.[0]?.rect?.d : program?.masses?.[0]?.rect?.w;
+  const scale = (Number.isFinite(uMin) && progSpan) ? (uMax - uMin + 1) / progSpan : 1;
+
+  const { remove, target } = carveTargetCells(occ, declared, { programW: door.w, scale });
+  if (!remove.size) { console.error("  [carve_arch] nothing to carve (slot already at width) — framing only"); return frame_arch(occ); }
+  const carved = carveAperture(occ, remove);
+  const wideAp = apertureFromTarget(target);
+  const { placements, perOpening } = frameArchPlacements(carved, [wideAp], { frameBlock });
+  const dressed = occupancyFromCells([...occToCells(carved), ...placements.map((p) => ({ pos: p.pos, block: p.block }))]);
+
+  const gate = apertureCoherenceGate(occ, dressed, target, { floor: occ.bounds.min[1], eaveY: CFG.eaveY });
+  for (const r of perOpening) console.error(`  [carve_arch] ${r.dir}: width=${target.width} carved=${remove.size} framed=${r.framed} arched=${r.arched}`);
+  console.error(`  [carve_arch] gate ok=${gate.ok}${gate.reason ? ` — ${gate.reason}` : ""} (scope=${gate.scope.ok} coherent=${gate.coherent.ok} closure=${gate.closure.ok})`);
+  if (gate.ok) return dressed;
+  console.error("  [carve_arch] REFUTE: aperture-coherence gate rejected the carve — reverting to recess-only (frame_arch)");
+  return frame_arch(occ);
+}
+
 // THE WALL FIELD+CONTRAST HAND (WALL): the recorded WALL majors are (1) the field reads near-black/charcoal
 // (probed: it is polished_basalt/deepslate_bricks, not the pale dressed stone the concept shows) and (2) the
 // rubble-quoin contrast is lost — BECAUSE the dark field kills it (the cobblestone quoins are already
@@ -220,13 +271,14 @@ function band_eave(occ) {
   return out;
 }
 
-const TOOLS = { apply_gable_roof, recolor_roof, construct_walls, add_timber_framing, frame_arch, articulate_walls, band_eave };
+const TOOLS = { apply_gable_roof, recolor_roof, construct_walls, add_timber_framing, frame_arch, carve_arch, articulate_walls, band_eave };
 const MENU = [
   "- apply_gable_roof: replace the roof with a crisp parametric gable. Best when the worst divergence is the ROOF FORM/SHAPE/presence (not its colour).",
   "- recolor_roof: rebuild the roof in the CONCEPT-TRUE material recognition read (e.g. grey stone when the concept roof is stone, not the program's default brown timber). Best when the worst divergence is ROOF COLOUR / MATERIAL — the roof reads the wrong material vs the concept.",
   "- construct_walls: REBUILD the wall envelope and skin it as construction from the pack roles (per-storey material, dressed quoins, clinker courses, a plinth, dressed openings). Best for STRUCTURAL wall holes / missing walls / a monotone single-material wall.",
   "- add_timber_framing: add timber-frame studs + plaster infill on the upper storey. Best for a uniform/monotone WALL with no material contrast / missing half-timber detail.",
   "- frame_arch: build a dark-timber FRAME + arch head over the through-passage(s). Best when the worst divergence is the OPENING — a raw/undressed passage void with no arch head or timber surround.",
+  "- carve_arch: CARVE the declared gate WIDER then frame + arch it (the only tool that can WIDEN an opening). Best when the OPENING divergence is a NARROW slot where the concept shows a WIDE arched gate — frame_arch can only frame the narrow slot, this opens it. Self-reverts to a frame if the carve can't stay clean.",
   "- articulate_walls: recolor the wall field to the pale dressed stone, keeping the rubble corner quoins. Best when the WALL field reads too dark/monotone, killing the contrast with the corner quoins.",
   "- band_eave: add a lighter-stone eave/verge banding course along the roof edges. Best when the ROOF field runs to the edges with no contrasting eave/verge trim band.",
   "- done: stop — the build reads like the concept, or no tool addresses the worst remaining divergence.",
@@ -287,7 +339,7 @@ async function agentPick(build, history) {
     "- If no tool addresses the worst remaining divergence (e.g. it names a chimney, an interior, or fine",
     "  trim no tool builds), pick `done` — naming a defect you cannot fix is the honest answer.",
     "Pick ONE tool:", MENU,
-    'Output ONE JSON: {"tool":"<apply_gable_roof|recolor_roof|construct_walls|add_timber_framing|frame_arch|articulate_walls|band_eave|done>","reason":"<short>"}',
+    'Output ONE JSON: {"tool":"<apply_gable_roof|recolor_roof|construct_walls|add_timber_framing|frame_arch|carve_arch|articulate_walls|band_eave|done>","reason":"<short>"}',
   ].join("\n");
   const { text } = await requestText({ prompt, model: AGENT_MODEL });
   return parse(text);

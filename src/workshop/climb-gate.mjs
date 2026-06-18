@@ -40,6 +40,10 @@ export const TOOL_DEPARTMENTS = Object.freeze({
   frame_arch: Object.freeze(["OPENING"]),
   articulate_walls: Object.freeze(["WALL"]),
   band_eave: Object.freeze(["ROOF"]),
+  // T-194-01 (S-194, E-51) — the carve+dress hand: CARVE the declared gate WIDER (the charter narrowing) then
+  // frame + arch it. An OPENING lever, like frame_arch, but it can reach the WIDE arched gate frame_arch can
+  // only frame. Self-reverts to frame_arch (recess-only) if the aperture-coherence gate rejects the carve.
+  carve_arch: Object.freeze(["OPENING"]),
 });
 
 /**
