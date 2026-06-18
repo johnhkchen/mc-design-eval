@@ -51,6 +51,12 @@ test("runTieredOp defaults to the strong tier when none is declared", async () =
   assert.equal(seen.model, MODEL_TIERS.strong);
 });
 
+test("runTieredOp forwards timeoutMs to the invoker (the subprocess-timeout guard, T-198-01)", async () => {
+  let seen;
+  await runTieredOp({ prompt: "p", timeoutMs: 1234, invoke: async (a) => ((seen = a), { text: "", raw: {} }) });
+  assert.equal(seen.timeoutMs, 1234); // the wall-clock bound reaches the shim that spawns claude -p
+});
+
 test("the default invokers ARE the claude -p subscription functions (not the SDK)", () => {
   assert.equal(SHIM_INVOKERS.text, requestText);
   assert.equal(SHIM_INVOKERS.image, requestTextWithImage);

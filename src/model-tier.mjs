@@ -52,12 +52,15 @@ export function resolveTier(tier) {
  * @param {(m:object)=>void} [p.onMessage]
  * @param {(args:object)=>Promise<{text:string,raw:object}>} [p.invoke] injected invoker (tests); default
  *   is the matching {@link SHIM_INVOKERS} function.
+ * @param {number} [p.timeoutMs] per-call wall-clock bound forwarded to the shim (T-198-01) — a
+ *   non-returning `claude -p` child is killed and surfaces a typed timeout instead of hanging the caller.
+ *   Omitted ⇒ no timer ⇒ byte-unchanged.
  * @returns {Promise<{ text:string, raw:object, tier:string, model:string }>}
  */
-export async function runTieredOp({ tier = DEFAULT_TIER, prompt, images, system, onMessage, invoke } = {}) {
+export async function runTieredOp({ tier = DEFAULT_TIER, prompt, images, system, onMessage, invoke, timeoutMs } = {}) {
   const model = resolveTier(tier);
   const fn = invoke || (images && images.length ? SHIM_INVOKERS.image : SHIM_INVOKERS.text);
-  const res = await fn({ prompt, images, model, system, onMessage });
+  const res = await fn({ prompt, images, model, system, onMessage, timeoutMs });
   return { ...res, tier, model };
 }
 
