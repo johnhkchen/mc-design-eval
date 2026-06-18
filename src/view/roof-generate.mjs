@@ -125,6 +125,58 @@ export function gableRecord({ footprint, ridgeAxis, eaveY, ridgeY, pitch, hip })
 }
 
 /**
+ * The PITCH LEVER (T-204-01, S-204, epic E-52): pick a ridge height / pitch class so the constructed
+ * gable lands near a TARGET ridgeToEave proportion (the recognised concept proportion,
+ * `targetRatiosOf(program).ridgeToEave`) — INSTEAD of the unconditional `ridgeY = eaveY + floor(perp/2),
+ * pitch:1` the roof hands hardcode, which ignores the build's eave height and can drift off the picture.
+ *
+ * TOLERANCE-GATED (anti-hedge — never fake the lever): when the honest pitch-1 gable is already within
+ * `tol` of the target, the pitch-1 geometry is kept EXACTLY (`changed:false`) — byte-identical to today,
+ * so matched subjects (and the gatehouse, whose honest gable is 1.55 vs target 1.35, relDelta 0.148 < 0.2)
+ * are untouched. Only a genuine out-of-tolerance drift is corrected, by snapping the pitch to the nearest
+ * generator-supported class (0.5/1/2/3) that minimises |achievedRatio − target|, capped so the rise never
+ * exceeds the half-perp run. PURE — no IO/GL/Date/random.
+ *
+ * @param {{eaveY:number, eaveHeight:number, perp:number, targetRatio:number, tol?:number,
+ *          pitchClasses?:number[]}} p  eaveHeight = wall height to the eave (eaveY − floor + 1);
+ *          perp = the footprint extent perpendicular to the ridge (the run is floor(perp/2)).
+ * @returns {{ridgeY:number, pitch:number, changed:boolean, ratioBefore:number, ratioAfter:number,
+ *            reason:string}}
+ */
+export function gableRidgeForRatio({ eaveY, eaveHeight, perp, targetRatio, tol = 0.2, pitchClasses = [0.5, 1, 2, 3] }) {
+  const riseAtPitch1 = Math.floor((perp ?? 0) / 2);
+  const def = { ridgeY: eaveY + riseAtPitch1, pitch: 1, changed: false };
+  // Degenerate input → keep the pitch-1 default, never throw on the hand path. riseAtPitch1 ≤ 0 means there
+  // is no slope span to lever (perp 0/1), so there is nothing to correct.
+  if (!Number.isFinite(eaveHeight) || eaveHeight < 1 || !Number.isFinite(perp) || riseAtPitch1 <= 0 || !Number.isFinite(targetRatio) || targetRatio < 1) {
+    return { ...def, ratioBefore: NaN, ratioAfter: NaN, reason: "degenerate input — pitch 1 kept" };
+  }
+  const ratioBefore = (eaveHeight + riseAtPitch1) / eaveHeight;
+  const relDelta = (a, b) => Math.abs(a - b) / Math.max(Math.abs(b), 1e-9);
+  if (relDelta(ratioBefore, targetRatio) <= tol) {
+    return { ...def, ratioBefore, ratioAfter: ratioBefore, reason: `within tol — pitch 1 kept (${roundHalf(ratioBefore * 100) / 100} vs ${targetRatio})` };
+  }
+  // Out of tolerance: snap to the supported pitch class whose achieved (capped, half-quantised) rise lands
+  // closest to the target. The rise can never exceed the half-perp run (no roof taller than its own slope).
+  const targetRise = eaveHeight * (targetRatio - 1);
+  let best = null;
+  for (const pitch of pitchClasses) {
+    const achievedRise = roundHalf(Math.min(riseAtPitch1 * pitch, riseAtPitch1, Math.max(0, targetRise)));
+    const ratio = (eaveHeight + achievedRise) / eaveHeight;
+    const err = Math.abs(ratio - targetRatio);
+    if (!best || err < best.err) best = { pitch, achievedRise, ratio, err };
+  }
+  return {
+    ridgeY: eaveY + Math.round(best.achievedRise),
+    pitch: best.pitch,
+    changed: true,
+    ratioBefore,
+    ratioAfter: best.ratio,
+    reason: `ratio ${Math.round(ratioBefore * 100) / 100} → ${Math.round(best.ratio * 100) / 100} via pitch ${best.pitch} (target ${targetRatio})`,
+  };
+}
+
+/**
  * The stair SHAPE at a column from its neighborhood (T-112-01) — Minecraft's corner vocabulary
  * for the diagonal arrises and valleys hip constructions introduce. `probe(dir)` returns the
  * neighbor height (undefined past the roof). Relative to downhill `d` at height `h`:

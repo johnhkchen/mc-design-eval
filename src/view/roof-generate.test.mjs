@@ -3,7 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 
 import { CARD_ROWS } from "../form/fixture-card.mjs";
-import { STAIR_FACING, roofFamily, roofHeightfield, generateRoof, stairShape, gableEndColumns, roofMaterialFraction } from "./roof-generate.mjs";
+import { STAIR_FACING, roofFamily, roofHeightfield, generateRoof, stairShape, gableEndColumns, roofMaterialFraction, gableRidgeForRatio } from "./roof-generate.mjs";
 import { closureOf } from "./wall-generate.mjs";
 
 const VOCAB = new Set([
@@ -602,4 +602,56 @@ test("gableBlock byte-identity: the sloped COVERING is unchanged on/off", () => 
   const legacy = generateRoof([g], SPRUCE, {});
   assert.deepEqual(legacy.cells, off.cells, "absent gableBlock ⇒ byte-identical legacy");
   assert.equal(legacy.gableWallKeys.size, 0);
+});
+
+// ─── gableRidgeForRatio — the pitch lever (T-204-01, S-204, E-52) ───────────────────────────────────
+// RR1 in-tolerance no-op: the gatehouse-like honest gable (≈1.55 vs target 1.35, relDelta 0.148 < 0.2)
+// is kept EXACTLY at pitch 1 — the byte-identical guarantee that makes wiring the lever a no-op there.
+test("RR1 gableRidgeForRatio keeps pitch 1 byte-identical when within tolerance", () => {
+  const eaveY = 18, eaveHeight = 9, perp = 11; // ratioBefore = (9+5)/9 = 1.5556
+  const r = gableRidgeForRatio({ eaveY, eaveHeight, perp, targetRatio: 1.35 });
+  assert.equal(r.changed, false);
+  assert.equal(r.pitch, 1);
+  assert.equal(r.ridgeY, eaveY + Math.floor(perp / 2), "ridgeY identical to the hardcoded eaveY+floor(perp/2)");
+  assert.ok(Math.abs(r.ratioBefore - 14 / 9) < 1e-9);
+});
+
+// RR2 correcting fire: a clearly out-of-tolerance (too-steep) gable IS corrected toward the target, and
+// the achieved ratio is no worse than the pitch-1 ratio. This refutes "the pitch lever doesn't exist".
+test("RR2 gableRidgeForRatio fires and moves the ratio toward target when out of tolerance", () => {
+  const eaveY = 12, eaveHeight = 6, perp = 20; // ratioBefore = (6+10)/6 = 2.667, target 1.2 → far out of tol
+  const r = gableRidgeForRatio({ eaveY, eaveHeight, perp, targetRatio: 1.2 });
+  assert.equal(r.changed, true);
+  assert.ok(r.pitch < 1, "snaps to a shallower pitch class");
+  assert.ok(Math.abs(r.ratioAfter - 1.2) <= Math.abs(r.ratioBefore - 1.2), "ratio moves toward (not past, no worse than) target");
+  assert.ok(r.ratioAfter < r.ratioBefore, "the steep roof was flattened");
+});
+
+// RR3 cap: the achieved rise never exceeds the half-perp run (no roof taller than its own slope).
+test("RR3 gableRidgeForRatio never raises the ridge above the half-perp run", () => {
+  const eaveY = 5, eaveHeight = 3, perp = 8; // riseAtPitch1 = 4; a high target would over-demand
+  const r = gableRidgeForRatio({ eaveY, eaveHeight, perp, targetRatio: 5 });
+  assert.ok(r.ridgeY - eaveY <= Math.floor(perp / 2), "rise capped at floor(perp/2)");
+});
+
+// RR4 degenerate input: no throw on the hand path; pitch-1 default returned.
+test("RR4 gableRidgeForRatio tolerates degenerate input without throwing", () => {
+  for (const bad of [
+    { eaveY: 10, eaveHeight: 0, perp: 8, targetRatio: 1.3 },
+    { eaveY: 10, eaveHeight: 6, perp: 0, targetRatio: 1.3 },
+    { eaveY: 10, eaveHeight: 6, perp: 8, targetRatio: 0.5 },
+  ]) {
+    const r = gableRidgeForRatio(bad);
+    assert.equal(r.changed, false);
+    assert.equal(r.pitch, 1);
+  }
+});
+
+// RR5 the returned pitch is always a generator-supported class.
+test("RR5 gableRidgeForRatio returns a supported pitch class", () => {
+  const supported = new Set([0.5, 1, 2, 3]);
+  for (const t of [1.1, 1.35, 1.8, 2.5, 4]) {
+    const r = gableRidgeForRatio({ eaveY: 12, eaveHeight: 6, perp: 16, targetRatio: t });
+    assert.ok(supported.has(r.pitch), `pitch ${r.pitch} ∈ {0.5,1,2,3} for target ${t}`);
+  }
 });
