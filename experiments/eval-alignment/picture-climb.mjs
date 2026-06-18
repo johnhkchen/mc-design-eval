@@ -30,10 +30,10 @@ import { constructWalls, closeShell, eaveRingClosure } from "../../src/view/wall
 import { wallSkin } from "../../src/view/wall-skin.mjs";
 import { extractApertures, dressOpenings } from "../../src/view/opening-dressing.mjs";
 import { frameArchPlacements } from "../../src/view/arch-frame.mjs";
-import { carveTargetCells, apertureCoherenceGate, carveAperture } from "../../src/view/aperture-carve.mjs";
+import { carveTargetCells, apertureCoherenceGate, carveAperture, apertureColumns } from "../../src/view/aperture-carve.mjs";
 import { buildWallRelief } from "../../src/view/wall-relief.mjs";
 import { framingReport, targetRatiosOf } from "../../src/view/framing.mjs";
-import { composeRoofTreatment, bareBlock } from "../../src/view/treatment-grammar.mjs";
+import { composeRoofTreatment, bareBlock, deriveArchHead } from "../../src/view/treatment-grammar.mjs";
 import { roleBlock } from "../../src/recognition/compile.mjs";
 import { infillPanel } from "../../src/view/facade-articulation.mjs";
 import { rebuildArtifact } from "../../src/view/shell-integrity.mjs";
@@ -266,6 +266,78 @@ function carve_arch(occ) {
   return frame_arch(occ);
 }
 
+// THE WIDE-ARCH REBUILD HAND (OPENING) — T-203-01 (S-203, E-52). THE defining feature of a *gatehouse*: a
+// WIDE arched gate. The E-49 capstone proved carve_arch can never KEEP an arch — it carves a clean wide
+// rectangle then adds a voxel arch ring, and the gate's FULL-HEIGHT coherence check reads the arch spandrels
+// as "notched columns 3,4,8,9" → refute → fall back to a too-narrow framed slot. The fix is not a different
+// carve (carveTargetCells already widens correctly) but an ARCH-AWARE coherence gate: gate the rectangular
+// PASSAGE below the springline, CREDIT the arch HEAD (spandrels) above it (apertureCoherenceGate's arch
+// option). This hand rebuilds the declared gate to its wide arched form — frame jambs/lintel + the voxel
+// voussoir ring (S-179 deriveArchHead names the wedge crown) + a sill course — and on a KEEP registers the
+// declared-open aperture columns so the plane metric reads closure-EXCEPT-aperture (the gate survives the
+// next round instead of close_shell re-filling it). Self-reverts to frame_arch on a true refute, like
+// carve_arch (the anti-hedge path, recorded). Materials READ via roleBlock; measurements/ untouched.
+let openColumns = new Set();        // declared-open aperture columns; threaded into closureNow once a rebuild KEEPS
+let pendingRebuildCols = null;      // the cols of the last rebuild candidate (promoted to openColumns on accept)
+function rebuild_arch(occ) {
+  pendingRebuildCols = null;
+  const program = loadProgram(PROGRAM_PATH);
+  const pack = loadPackOf(program);
+  const door = program?.masses?.[0]?.openings?.find((o) => o.kind === "door" && o.head === "arch");
+  if (!door) { console.error("  [rebuild_arch] no declared arched door — no-op"); return occ; }
+  const frameBlock = (pack && door.headRole) ? roleBlock(pack, door.headRole) : "dark_oak_log";
+  const onBuild = extractApertures(occ).find((a) => a.dir === door.wall && a.kind === "door");
+  const refOcc = artifactOccupancy(JSON.parse(readFileSync(join(ROOT, SEED_ARTIFACT), "utf8")));
+  const declared = onBuild ?? extractApertures(refOcc).find((a) => a.dir === door.wall && a.kind === "door");
+  if (!declared) { console.error(`  [rebuild_arch] no door aperture on ${door.wall} — no-op`); return occ; }
+
+  // scale the declared width (program units) into the build — identical to carve_arch's preamble.
+  const ax = U_AXIS[door.wall];
+  let uMin = Infinity, uMax = -Infinity;
+  for (const key of occ.cells.keys()) {
+    const c = key.split(",").map(Number);
+    if (c[1] < occ.bounds.min[1] || c[1] > CFG.eaveY) continue;
+    if (c[ax] < uMin) uMin = c[ax]; if (c[ax] > uMax) uMax = c[ax];
+  }
+  const progSpan = ax === 2 ? program?.masses?.[0]?.rect?.d : program?.masses?.[0]?.rect?.w;
+  const scale = (Number.isFinite(uMin) && progSpan) ? (uMax - uMin + 1) / progSpan : 1;
+
+  const { remove, target } = carveTargetCells(occ, declared, { programW: door.w, scale });
+  if (!remove.size) { console.error("  [rebuild_arch] nothing to carve (slot already at width) — framing only"); return frame_arch(occ); }
+  const carved = carveAperture(occ, remove);
+
+  // the wide aperture record; build frame + the voxel arch ring (the voussoir wedge stones).
+  const wideAp = apertureFromTarget(target);
+  const { placements, perOpening } = frameArchPlacements(carved, [wideAp], { frameBlock });
+  // a SILL course: recolor the band row just below the opening across the span, at both passage mouths.
+  const sill = [];
+  const AX = { u: ax, v: 1, w: ax === 2 ? 0 : 2 };
+  const posOf = (au, av, w) => { const p = [0, 0, 0]; p[AX.u] = au; p[AX.v] = av; p[AX.w] = w; return p; };
+  for (let au = target.uLo; au <= target.uHi; au++) for (const w of [target.wMin, target.wMax]) {
+    const p = posOf(au, target.vLo - 1, w);
+    if (carved.solid(p[0], p[1], p[2])) sill.push({ pos: p, block: frameBlock });
+  }
+  const dressed = occupancyFromCells([...occToCells(carved), ...placements.map((p) => ({ pos: p.pos, block: p.block })), ...sill]);
+
+  // S-179 voussoir reuse: name the wedge crown the arch ring built (evidence the head IS a voussoir curve).
+  const archedAir = [];
+  for (let av = target.vLo; av <= target.vHi; av++) for (let au = target.uLo; au <= target.uHi; au++) {
+    const p = posOf(au, av, target.wStar);
+    if (!dressed.solid(p[0], p[1], p[2])) archedAir.push({ au, av });
+  }
+  const lintelRow = []; for (let au = target.uLo - 1; au <= target.uHi + 1; au++) lintelRow.push({ au, av: target.vHi + 1 });
+  const vouss = deriveArchHead({ cells: archedAir, lintel: lintelRow });
+
+  const radius = target.width / 2;
+  const spring = Math.max(target.vLo + 1, target.vHi - Math.floor(radius));
+  const gate = apertureCoherenceGate(occ, dressed, target, { floor: occ.bounds.min[1], eaveY: CFG.eaveY, arch: { spring } });
+  for (const r of perOpening) console.error(`  [rebuild_arch] ${r.dir}: width=${target.width} carved=${remove.size} framed=${r.framed} arched=${r.arched} sill=${sill.length} voussoir=${vouss.voussoirs.length}${vouss.curve ? " (curved head)" : ""}`);
+  console.error(`  [rebuild_arch] gate ok=${gate.ok}${gate.reason ? ` — ${gate.reason}` : ""} (scope=${gate.scope.ok} coherent=${gate.coherent.ok} [single=${gate.coherent.single} passage=${gate.coherent.passageContinuous} head=${gate.coherent.headBuilt}] closure=${gate.closure.ok})`);
+  if (gate.ok) { pendingRebuildCols = apertureColumns(target); return dressed; }
+  console.error("  [rebuild_arch] REFUTE: arch-aware coherence gate rejected the rebuild — reverting to recess-only (frame_arch)");
+  return frame_arch(occ);
+}
+
 // THE WALL FIELD+CONTRAST HAND (WALL): the recorded WALL majors are (1) the field reads near-black/charcoal
 // (probed: it is polished_basalt/deepslate_bricks, not the pale dressed stone the concept shows) and (2) the
 // rubble-quoin contrast is lost — BECAUSE the dark field kills it (the cobblestone quoins are already
@@ -334,7 +406,7 @@ function band_eave(occ) {
   return out;
 }
 
-const TOOLS = { apply_gable_roof, recolor_roof, construct_walls, close_shell, add_timber_framing, frame_arch, carve_arch, articulate_walls, relief_walls, band_eave };
+const TOOLS = { apply_gable_roof, recolor_roof, construct_walls, close_shell, add_timber_framing, frame_arch, carve_arch, rebuild_arch, articulate_walls, relief_walls, band_eave };
 const MENU = [
   "- close_shell: CLOSE THE SHELL — rebuild the wall envelope as a DENSE, watertight box from the building footprint (form/massing only, no detail). Best when the walls are an OPEN COLONNADE / full of gaps / not a closed building. This is the FORM step: detail tools (carve_arch, relief_walls, band_eave) are LOCKED until the shell is closed.",
   "- apply_gable_roof: replace the roof with a crisp parametric gable. Best when the worst divergence is the ROOF FORM/SHAPE/presence (not its colour).",
@@ -342,7 +414,7 @@ const MENU = [
   "- construct_walls: REBUILD the wall envelope and skin it as construction from the pack roles (per-storey material, dressed quoins, clinker courses, a plinth, dressed openings). Best for STRUCTURAL wall holes / missing walls / a monotone single-material wall.",
   "- add_timber_framing: add timber-frame studs + plaster infill on the upper storey. Best for a uniform/monotone WALL with no material contrast / missing half-timber detail.",
   "- frame_arch: build a dark-timber FRAME + arch head over the through-passage(s). Best when the worst divergence is the OPENING — a raw/undressed passage void with no arch head or timber surround.",
-  "- carve_arch: CARVE the declared gate WIDER then frame + arch it (the only tool that can WIDEN an opening). Best when the OPENING divergence is a NARROW slot where the concept shows a WIDE arched gate — frame_arch can only frame the narrow slot, this opens it. Self-reverts to a frame if the carve can't stay clean.",
+  "- rebuild_arch: REBUILD the declared gate as a WIDE ARCHED opening — frame + voxel voussoir arch + sill, the wide arched gate (the only tool that can WIDEN an opening to a real arch). Best when the OPENING divergence is a NARROW slot / missing gate where the concept shows a WIDE arched gateway. Self-reverts to a frame if the rebuild can't stay a clean coherent arch.",
   "- articulate_walls: recolor the wall field to the pale dressed stone, keeping the rubble corner quoins. Best when the WALL field reads too dark/monotone, killing the contrast with the corner quoins.",
   "- relief_walls: build proud dressed-stone RELIEF — recolor the field pale AND stand cobblestone quoins + a plinth course PROUD of it (construction, not a flat recolor). Best when the WALL reads flat: the dressed field must read DISTINCT FROM / recessed behind the rough rubble corners, not just a colour swap.",
   "- band_eave: add a lighter-stone eave/verge banding course along the roof edges. Best when the ROOF field runs to the edges with no contrasting eave/verge trim band.",
@@ -451,8 +523,8 @@ async function agentPick(build, history, closure = null) {
   // it picks close_shell FIRST on an open form. Detail picks on an open form are rejected by the runner.
   const formReady = closure === null ? "" :
     closure >= FORM_READY_CLOSURE
-      ? `FORM READINESS: wall shell closure ${closure.toFixed(2)}/1.0 — CLOSED. Detail tools (carve_arch, relief_walls, band_eave) are eligible.`
-      : `FORM READINESS: wall shell closure ${closure.toFixed(2)}/1.0 — OPEN (an unclosed colonnade). Detail tools (carve_arch, relief_walls, band_eave) are LOCKED until closure ≥ ${FORM_READY_CLOSURE}. Pick close_shell first to close the form.`;
+      ? `FORM READINESS: wall shell closure ${closure.toFixed(2)}/1.0 — CLOSED. Detail tools (rebuild_arch, relief_walls, band_eave) are eligible.`
+      : `FORM READINESS: wall shell closure ${closure.toFixed(2)}/1.0 — OPEN (an unclosed colonnade). Detail tools (rebuild_arch, relief_walls, band_eave) are LOCKED until closure ≥ ${FORM_READY_CLOSURE}. Pick close_shell first to close the form.`;
   const hist = history.length
     ? history.map((h) => `- ${h.tool}: score ${h.qBefore}→${h.qAfter} (${h.accepted ? "KEPT" : "ROLLED BACK — " + h.reason})`).join("\n")
     : "(nothing tried yet)";
@@ -474,7 +546,7 @@ async function agentPick(build, history, closure = null) {
     "- If no tool addresses the worst remaining divergence (e.g. it names a chimney, an interior, or fine",
     "  trim no tool builds), pick `done` — naming a defect you cannot fix is the honest answer.",
     "Pick ONE tool:", MENU,
-    'Output ONE JSON: {"tool":"<close_shell|apply_gable_roof|recolor_roof|construct_walls|add_timber_framing|frame_arch|carve_arch|articulate_walls|relief_walls|band_eave|done>","reason":"<short>"}',
+    'Output ONE JSON: {"tool":"<close_shell|apply_gable_roof|recolor_roof|construct_walls|add_timber_framing|frame_arch|rebuild_arch|articulate_walls|relief_walls|band_eave|done>","reason":"<short>"}',
   ].join("\n");
   // The agent-pick reply is bounded by the same subprocess guard, and made ROBUST to a malformed reply
   // (T-198-01): a non-conforming pick must DEGRADE, never crash the climb and lose the trajectory. Try the
@@ -583,7 +655,10 @@ async function main() {
 
   // Form-before-detail ordering (T-197-01): the build's wall-band closure — the form-readiness scalar the
   // ordering gate consumes. The SAME definition closeShell reports (eaveRingClosure), so there is no drift.
-  const closureNow = (o) => eaveRingClosure(o, { floor: o.bounds.min[1], eaveY: CFG.eaveY });
+  // CLOSURE-EXCEPT-APERTURE (T-203-01): once a wide-arch rebuild is KEPT, its declared-open columns
+  // (`openColumns`) are forgiven by the plane metric, so the form gate stays satisfied and the climb does not
+  // pick close_shell and re-fill the gate. Empty until a rebuild keeps → byte-identical to the T-202 metric.
+  const closureNow = (o) => eaveRingClosure(o, { floor: o.bounds.min[1], eaveY: CFG.eaveY, openCols: openColumns });
 
   const trajectory = [];
   const history = [];
@@ -658,12 +733,20 @@ async function main() {
     // computed on the APPLIED build BEFORE the gate decision (the recorded value the gate evaluates). This is
     // the form-readiness signal the gate's form clause credits: close_shell raises it 0.615→1.000 and is now
     // KEPT on a picture-score tie instead of rolled back (the T-198 deadlock).
-    const closureAfter = closureNow(cand);
+    // the candidate's closure-except-aperture: a rebuild candidate forgives ITS OWN pending aperture columns
+    // too, so the recorded closureAfter reflects the gate-surviving reading (not the mid-build dip).
+    const closureAfter = eaveRingClosure(cand, { floor: cand.bounds.min[1], eaveY: CFG.eaveY,
+      openCols: pendingRebuildCols ? new Set([...openColumns, ...pendingRebuildCols]) : openColumns });
     // FORM-MOVE ROUTING (T-200-01, S-200): a wall-shell form move (close_shell/construct_walls) is decided on
     // closureOf ALONE — the picture vote (a 0–76 same-seed swing) is removed from its keep/rollback so the
     // decision is stable across re-runs. Roof-form/detail picks keep the picture gradient (isFormMove false).
     const gate = acceptsRound(prev, candScore, { margin, targetDepartments, beforeDeptMajors, afterDeptMajors, beforeDeptItems, afterDeptItems, closureBefore: closure, closureAfter, isFormMove: closureDecidedMove(pick.tool) });
-    if (gate.accept) { occ = cand; prevDigest = candDigest; }
+    if (gate.accept) {
+      occ = cand; prevDigest = candDigest;
+      // promote the kept rebuild's declared-open columns into the closure-except-aperture set (T-203-01).
+      if (pick.tool === "rebuild_arch" && pendingRebuildCols) { openColumns = new Set([...openColumns, ...pendingRebuildCols]); console.error(`  [rebuild_arch] kept → ${pendingRebuildCols.size} aperture columns now declared-open (closure-except-aperture)`); }
+    }
+    pendingRebuildCols = null;
     noAcceptStreak = gate.accept ? 0 : noAcceptStreak + 1;
     history.push({ tool: pick.tool, qBefore: prev.score, qAfter: candScore.score, accepted: gate.accept, reason: gate.reason });
     console.error(`[round ${round}] ${pick.tool}: ${prev.score}→${candScore.score} (${candScore.scores.join("/")}) — ${gate.accept ? "KEPT" : "ROLLED BACK"} (${gate.reason})`);
