@@ -39,6 +39,10 @@ export const TOOL_DEPARTMENTS = Object.freeze({
   // override: a recorded S-191 input, see design.md Decision 5).
   frame_arch: Object.freeze(["OPENING"]),
   articulate_walls: Object.freeze(["WALL"]),
+  // T-195-01 (S-195, E-51) — the wall-RELIEF hand: recolor the field pale AND build proud quoins/plinth
+  // (construction, not recolor). A WALL lever like articulate_walls, but it can clear the field-vs-quoin
+  // RELIEF major the flat recolor cannot — so the S-191 override keeps it on a whole-build scalar regression.
+  relief_walls: Object.freeze(["WALL"]),
   band_eave: Object.freeze(["ROOF"]),
   // T-194-01 (S-194, E-51) — the carve+dress hand: CARVE the declared gate WIDER (the charter narrowing) then
   // frame + arch it. An OPENING lever, like frame_arch, but it can reach the WIDE arched gate frame_arch can

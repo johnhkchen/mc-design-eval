@@ -31,6 +31,7 @@ import { wallSkin } from "../../src/view/wall-skin.mjs";
 import { extractApertures, dressOpenings } from "../../src/view/opening-dressing.mjs";
 import { frameArchPlacements } from "../../src/view/arch-frame.mjs";
 import { carveTargetCells, apertureCoherenceGate, carveAperture } from "../../src/view/aperture-carve.mjs";
+import { buildWallRelief } from "../../src/view/wall-relief.mjs";
 import { composeRoofTreatment, bareBlock } from "../../src/view/treatment-grammar.mjs";
 import { roleBlock } from "../../src/recognition/compile.mjs";
 import { infillPanel } from "../../src/view/facade-articulation.mjs";
@@ -195,9 +196,12 @@ function carve_arch(occ) {
   const door = program?.masses?.[0]?.openings?.find((o) => o.kind === "door" && o.head === "arch");
   if (!door) { console.error("  [carve_arch] no declared arched door — no-op"); return occ; }
   const frameBlock = (pack && door.headRole) ? roleBlock(pack, door.headRole) : "dark_oak_log";
+  // measure the slot on the LIVE build (positions match the carve); fall back to the seed ref if the door
+  // has been dressed shut / lost on this build state.
+  const onBuild = extractApertures(occ).find((a) => a.dir === door.wall && a.kind === "door");
   const refOcc = artifactOccupancy(JSON.parse(readFileSync(join(ROOT, SEED_ARTIFACT), "utf8")));
-  const declared = extractApertures(refOcc).find((a) => a.dir === door.wall && a.kind === "door");
-  if (!declared) { console.error(`  [carve_arch] no seed door aperture on ${door.wall} — no-op`); return occ; }
+  const declared = onBuild ?? extractApertures(refOcc).find((a) => a.dir === door.wall && a.kind === "door");
+  if (!declared) { console.error(`  [carve_arch] no door aperture on ${door.wall} — no-op`); return occ; }
 
   // scale the declared width (program units) into the build: build wall-band u-span / program rect u-span.
   const ax = U_AXIS[door.wall];
@@ -254,6 +258,28 @@ function articulate_walls(occ) {
   return occupancyFromCells(cells);
 }
 
+// THE WALL-RELIEF HAND (WALL) — T-195-01 (S-195, E-51). CONSTRUCTION, not recolor: recolor the wall field
+// to the pale dressed stone AND build proud cobblestone quoins + a plinth course standing PROUD of it, so
+// the dressed field reads DISTINCT FROM the rough rubble corners — the residual WALL critique item
+// articulate_walls' flat recolor could not clear ("the coursed dressed field reading distinct from the rough
+// rubble corners"). The recolor-FIRST is load-bearing: surfaceRelief skips a proud column whose SOURCE cell
+// already IS the relief block (idempotence), which is exactly why composeTreatment's quoin no-op'd on the
+// already-cobblestone corners in articulate_walls (proudCells=0). Recoloring the corners to the field first
+// makes the proud quoin EMIT. All proud geometry is the E-43 composeTreatment engine (door-routed), pure in
+// src/view/wall-relief.mjs; restrained amplitude (base plinth + corner quoins, no field clinker belt, no
+// cornice) per the amplitude-is-the-lever lesson. closure (recessClosureGuard) is reported, not assumed.
+function relief_walls(occ) {
+  const program = loadProgram(PROGRAM_PATH);
+  const pack = loadPackOf(program);
+  const floor = occ.bounds.min[1];
+  const { occ: out, closure, report, materials, recolored } =
+    buildWallRelief(occ, { program, pack, floor, eaveY: CFG.eaveY });
+  const corners = report.byLayer?.corners?.placed ?? 0;
+  const base = report.byLayer?.base?.placed ?? 0;
+  console.error(`  [relief_walls] recolor ${recolored}→${materials.fieldBlock}; proud ${materials.dressBlock} quoins=${corners} plinth=${base}; closure ${closure.ok ? "held" : "REGRESSED " + JSON.stringify(closure)}`);
+  return out;
+}
+
 // THE EAVE/VERGE BAND HAND (ROOF, a MINOR): a lighter-stone (roof.trimRole = wall.dressing = stone_bricks)
 // eave course + raking verge banding the dark roof edges. NOTE: this targets a ROOF MINOR; the override is
 // major-gated, so band_eave is kept only by a scalar improvement / tie — see review.md.
@@ -271,7 +297,7 @@ function band_eave(occ) {
   return out;
 }
 
-const TOOLS = { apply_gable_roof, recolor_roof, construct_walls, add_timber_framing, frame_arch, carve_arch, articulate_walls, band_eave };
+const TOOLS = { apply_gable_roof, recolor_roof, construct_walls, add_timber_framing, frame_arch, carve_arch, articulate_walls, relief_walls, band_eave };
 const MENU = [
   "- apply_gable_roof: replace the roof with a crisp parametric gable. Best when the worst divergence is the ROOF FORM/SHAPE/presence (not its colour).",
   "- recolor_roof: rebuild the roof in the CONCEPT-TRUE material recognition read (e.g. grey stone when the concept roof is stone, not the program's default brown timber). Best when the worst divergence is ROOF COLOUR / MATERIAL — the roof reads the wrong material vs the concept.",
@@ -280,6 +306,7 @@ const MENU = [
   "- frame_arch: build a dark-timber FRAME + arch head over the through-passage(s). Best when the worst divergence is the OPENING — a raw/undressed passage void with no arch head or timber surround.",
   "- carve_arch: CARVE the declared gate WIDER then frame + arch it (the only tool that can WIDEN an opening). Best when the OPENING divergence is a NARROW slot where the concept shows a WIDE arched gate — frame_arch can only frame the narrow slot, this opens it. Self-reverts to a frame if the carve can't stay clean.",
   "- articulate_walls: recolor the wall field to the pale dressed stone, keeping the rubble corner quoins. Best when the WALL field reads too dark/monotone, killing the contrast with the corner quoins.",
+  "- relief_walls: build proud dressed-stone RELIEF — recolor the field pale AND stand cobblestone quoins + a plinth course PROUD of it (construction, not a flat recolor). Best when the WALL reads flat: the dressed field must read DISTINCT FROM / recessed behind the rough rubble corners, not just a colour swap.",
   "- band_eave: add a lighter-stone eave/verge banding course along the roof edges. Best when the ROOF field runs to the edges with no contrasting eave/verge trim band.",
   "- done: stop — the build reads like the concept, or no tool addresses the worst remaining divergence.",
 ].join("\n");
@@ -339,7 +366,7 @@ async function agentPick(build, history) {
     "- If no tool addresses the worst remaining divergence (e.g. it names a chimney, an interior, or fine",
     "  trim no tool builds), pick `done` — naming a defect you cannot fix is the honest answer.",
     "Pick ONE tool:", MENU,
-    'Output ONE JSON: {"tool":"<apply_gable_roof|recolor_roof|construct_walls|add_timber_framing|frame_arch|carve_arch|articulate_walls|band_eave|done>","reason":"<short>"}',
+    'Output ONE JSON: {"tool":"<apply_gable_roof|recolor_roof|construct_walls|add_timber_framing|frame_arch|carve_arch|articulate_walls|relief_walls|band_eave|done>","reason":"<short>"}',
   ].join("\n");
   const { text } = await requestText({ prompt, model: AGENT_MODEL });
   return parse(text);
