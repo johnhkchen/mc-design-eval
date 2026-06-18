@@ -688,6 +688,27 @@ test("CG-B7 acceptsBatch throws without before/after evidence", () => {
   assert.throws(() => acceptsBatch(null, { score: 1 }), /before and after evidence are required/);
 });
 
+// CG-B8: FORM-INTEGRITY — a batch that REOPENED a closed shell is rejected even on a picture-score gain (the
+// re-climb-1 failure: construct_walls dropped closure 1.000→0.068 yet scored +12; dressing over a broken form).
+test("CG-B8 acceptsBatch REJECTS a batch that reopened a closed shell despite a score gain", () => {
+  const r = acceptsBatch(
+    { score: 0, nMajor: 3 }, { score: 12, nMajor: 3 },
+    { batchMargin: 1, closureBefore: 1.0, closureAfter: 0.068 },
+  );
+  assert.equal(r.accept, false);
+  assert.match(r.reason, /batch reopened the form \(closure 1\.000→0\.068\)/);
+  // The guard is inert when the form STAYED closed → the +12 gain is kept.
+  const kept = acceptsBatch(
+    { score: 0, nMajor: 3 }, { score: 12, nMajor: 3 },
+    { batchMargin: 1, closureBefore: 1.0, closureAfter: 1.0 },
+  );
+  assert.equal(kept.accept, true);
+  assert.match(kept.reason, /compound \+12/);
+  // Inert without closure evidence (backward-compatible): the +12 gain is kept.
+  const nocl = acceptsBatch({ score: 0, nMajor: 3 }, { score: 12, nMajor: 3 }, { batchMargin: 1 });
+  assert.equal(nocl.accept, true);
+});
+
 // CG-coldStart1: the entry predicate is TRUE only on a closed form stuck at the floor.
 test("CG-coldStart1 coldStartFloor true on a closed form at the score floor", () => {
   assert.equal(coldStartFloor({ score: 0, closure: 1.0 }), true);

@@ -342,6 +342,11 @@ export function acceptsRound(before, after, {
  * T-207 live: a clean wide arch scored 0→0 and rolled back). Reuses `departmentDominant` over the UNION of the
  * batch's targeted departments. Guards, in order (the rubber-stamp / deliberately-bad-compound reject is the
  * AC falsification — the escape must reject a worse batch, never rubber-stamp):
+ *   (0) form-integrity (re-climb 1): a batch that REOPENED a closed shell (`closureBefore ≥ threshold` but
+ *                                    `closureAfter < threshold`) → REJECT "batch reopened the form", whatever
+ *                                    the picture read — a high score on collapsed massing is dressing over a
+ *                                    broken form (re-climb 1: construct_walls in the batch dropped closure
+ *                                    1.000→0.068, scored +12). Inert without finite closure evidence;
  *   (3) `delta < 0`                → REJECT "regressed" (a compound that worsened the scalar; moot at floor 0
  *                                    where `after.score ≥ 0`, kept as a guard for `scoreFloor > 0` callers);
  *   (2) new whole-build major (`after.nMajor > before.nMajor`) → REJECT "added a major" (a bad batch that
@@ -356,15 +361,26 @@ export function acceptsRound(before, after, {
  *                                    runner only calls it there; the healthy per-move path is unchanged).
  * @param {{score:number, nMajor?:number}} before
  * @param {{score:number, nMajor?:number}} after
- * @param {{batchMargin?:number, targetDepartments?:string[], beforeDeptMajors?:object, afterDeptMajors?:object, beforeDeptItems?:object, afterDeptItems?:object}} [opts]
+ * @param {{batchMargin?:number, targetDepartments?:string[], beforeDeptMajors?:object, afterDeptMajors?:object, beforeDeptItems?:object, afterDeptItems?:object, closureBefore?:number, closureAfter?:number, formReadyThreshold?:number}} [opts]
  * @returns {{accept:boolean, delta:number, reason:string}}
  */
 export function acceptsBatch(before, after, {
   batchMargin = BATCH_DEFAULTS.batchMargin, targetDepartments = null,
   beforeDeptMajors = null, afterDeptMajors = null, beforeDeptItems = null, afterDeptItems = null,
+  closureBefore = null, closureAfter = null, formReadyThreshold = FORM_READY_CLOSURE,
 } = {}) {
   if (!before || !after) fail("acceptsBatch", "before and after evidence are required");
   const delta = num(after.score) - num(before.score);
+  // (0) FORM-INTEGRITY guard (T-208-01 re-climb 1). A batch must NOT reopen a closed shell. If the form was
+  // ready before and the compound dropped it below ready, REJECT regardless of the picture read — a higher
+  // score on a broken form is the judge rewarding dressing while the massing collapsed (re-climb 1: a
+  // construct_walls move inside the batch dropped closure 1.000→0.068, scored +12, and the shell could not
+  // re-close). Active only with finite closure evidence (inert / backward-compatible otherwise).
+  if (Number.isFinite(closureBefore) && Number.isFinite(closureAfter)
+      && num(closureBefore) >= formReadyThreshold && num(closureAfter) < formReadyThreshold) {
+    return { accept: false, delta,
+      reason: `batch reopened the form (closure ${num(closureBefore).toFixed(3)}→${num(closureAfter).toFixed(3)})` };
+  }
   if (delta < 0) return { accept: false, delta, reason: `regressed ${Math.round(delta)}` };
   if (num(after.nMajor) > num(before.nMajor)) {
     return { accept: false, delta, reason: `added a major (${num(before.nMajor)}→${num(after.nMajor)})` };

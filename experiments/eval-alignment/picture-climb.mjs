@@ -750,6 +750,10 @@ async function main() {
       const batchPicks = [], batchDepts = new Set();
       while (batchPicks.length < BATCH_SIZE && round + batchPicks.length <= maxRounds) {
         if (bp.tool === "done" || !TOOLS[bp.tool]) break;
+        // A wall-shell FORM move (close_shell/construct_walls) must NOT be stacked in a detail batch — it moves
+        // the perimeter and can REOPEN the shell (re-climb 1: construct_walls dropped closure 1.000→0.068). End
+        // the batch and let it go through the per-move form-credit path (which judges its closure delta).
+        if (closureDecidedMove(bp.tool)) break;
         if (!formReadyGate({ tool: bp.tool, closure: batchClosure(occN) }).allow) break; // shell re-opened — stop
         const candOcc = TOOLS[bp.tool](occN);
         const stagedCols = pendingRebuildCols; pendingRebuildCols = null;
@@ -772,8 +776,8 @@ async function main() {
         const targetDepartments = [...batchDepts];
         const beforeDeptMajors = deptMajorCounts(prev.items), afterDeptMajors = deptMajorCounts(compound.items);
         const beforeDeptItems = deptItemCounts(prev.items), afterDeptItems = deptItemCounts(compound.items);
-        const gate = acceptsBatch(prev, compound, { targetDepartments, beforeDeptMajors, afterDeptMajors, beforeDeptItems, afterDeptItems });
         const closureAfter = batchClosure(occN);
+        const gate = acceptsBatch(prev, compound, { targetDepartments, beforeDeptMajors, afterDeptMajors, beforeDeptItems, afterDeptItems, closureBefore: closure, closureAfter });
         if (gate.accept) { occ = occN; prevDigest = batchDigest; openColumns = new Set([...openColumns, ...batchApertureCols]); }
         noAcceptStreak = gate.accept ? 0 : noAcceptStreak + 1;
         history.push({ tool: `batch[${batchPicks.join("+")}]`, qBefore: prev.score, qAfter: compound.score, accepted: gate.accept, reason: gate.reason });
