@@ -47,7 +47,7 @@ import { runTieredOp } from "../../src/model-tier.mjs";
 import { bamlRender, bamlParse } from "../../src/baml/bridge.mjs";
 import { diagnoseRenderArgs } from "../../src/workshop/diagnose.mjs";
 import { critiqueEvidence, itemStyleClass, styleFidelityScore } from "../../src/workshop/bakeoff-score.mjs";
-import { acceptsRound, acceptsBatch, coldStartFloor, BATCH_DEFAULTS, stoppingDecision, classifyInventory, deptMajorCounts, deptItemCounts, buildDigest, TOOL_DEPARTMENTS, CLIMB_DEFAULTS, formReadyGate, FORM_READY_CLOSURE, closureDecidedMove } from "../../src/workshop/climb-gate.mjs";
+import { acceptsRound, acceptsBatch, coldStartFloor, batchEligible, aggregateVotes, BATCH_DEFAULTS, stoppingDecision, classifyInventory, deptMajorCounts, deptItemCounts, buildDigest, TOOL_DEPARTMENTS, CLIMB_DEFAULTS, formReadyGate, FORM_READY_CLOSURE, closureDecidedMove } from "../../src/workshop/climb-gate.mjs";
 import { parseFirstJsonObject } from "../../src/workshop/agent-reply.mjs";
 import { reconcileRoofMaterial } from "../../src/recognition/roof-material.mjs";
 import { assertMaterialMap } from "../../src/form/material-map.mjs";
@@ -89,6 +89,12 @@ const maxRounds = Number(process.env.CLIMB_MAX_ROUNDS) || CLIMB_DEFAULTS.maxRoun
 // Follows the CLIMB_MAX_ROUNDS knob discipline — a run parameter, not a new hand.
 const BATCH_SIZE = Number(process.env.CLIMB_BATCH_SIZE) || 0;
 const SCORE_FLOOR = process.env.CLIMB_SCORE_FLOOR != null ? Number(process.env.CLIMB_SCORE_FLOOR) : BATCH_DEFAULTS.scoreFloor;
+// ACCEPT-RULE SPIKE knobs (T-213-01, S-213, E-55 — the S-214 levers). CLIMB_AGGREGATOR replaces the per-vote
+// MEDIAN the gate consumes (the median discarded the [8,0,48] arch's lone 48); CLIMB_BATCH_MODE="improving"
+// lets detail compound off the floor (the floor-only-batch asymmetry). Both DEFAULT OFF (median/floor = the
+// current behavior), so every prior climb re-runs byte-identically. Contest winner (S-213): trimmedMean + improving.
+const AGGREGATOR = process.env.CLIMB_AGGREGATOR || "median";
+const BATCH_MODE = process.env.CLIMB_BATCH_MODE || "floor";
 const GUARD_ONLY = process.env.GUARD_ONLY === "1";
 const ROOF_MATERIAL_PROBE = process.env.ROOF_MATERIAL_PROBE === "1"; // T-189-01: render the brown→grey roof glance, zero spend
 const REBUILD_ARCH_PROBE = process.env.REBUILD_ARCH_PROBE === "1"; // T-203-01: render the wide-arch rebuild glance + gate numbers, zero spend
@@ -557,7 +563,11 @@ async function scoreBuild(occ, template, round, tag) {
   if (!samples.length) throw new RoundAbortedError(round, voteOutcomes);
   const scores = samples.map((s) => s.score);
   const med = samples.find((s) => s.score === median(scores)) ?? samples[0];
-  return { ...med.ev, score: med.score, items: med.items, scores, dir: roundDir, framing, voteOutcomes };
+  // The scalar the gate consumes (T-213-01). Default "median" → aggregateVotes returns exactly median(scores)
+  // → byte-identical to the prior runner. A non-median aggregator (CLIMB_AGGREGATOR) keeps a strong-minority
+  // read; items/ev still come from the median-representative sample (dept counts are an orthogonal signal).
+  const score = AGGREGATOR === "median" ? med.score : aggregateVotes(scores, AGGREGATOR);
+  return { ...med.ev, score, items: med.items, scores, dir: roundDir, framing, voteOutcomes };
 }
 
 const evOf = (b) => ({ score: b.score, nItems: b.nItems, nMajor: b.nMajor, nWrongStyle: b.nWrongStyle, wrongStyleBreadth: b.wrongStyleBreadth, departments: b.departments, missing: b.missing });
@@ -774,7 +784,9 @@ async function main() {
     // shrink"), stack up to BATCH_SIZE provisional DETAIL picks as a pure occ-chain and judge the COMPOUND once
     // (acceptsBatch) — the gradient several reads create together. occ is preserved until accept → rollback is
     // free. OPT-IN (BATCH_SIZE>0); inert on a healthy climb (coldStartFloor false off the floor / on an open form).
-    if (BATCH_SIZE > 0 && coldStartFloor({ score: prev.score, closure, scoreFloor: SCORE_FLOOR })) {
+    // ENTRY (T-213-01): "floor" mode (default) == coldStartFloor (byte-identical to T-208); "improving" mode
+    // (CLIMB_BATCH_MODE=improving) also batches OFF the floor on a closed form (the floor-only-batch fix).
+    if (BATCH_SIZE > 0 && batchEligible({ score: prev.score, closure, mode: BATCH_MODE, scoreFloor: SCORE_FLOOR })) {
       const batchApertureCols = new Set();                 // rebuild aperture cols staged for accept-only promotion
       const batchClosure = (o) => eaveRingClosure(o, { floor: o.bounds.min[1], eaveY: CFG.eaveY, program: PROGRAM,
         openCols: new Set([...openColumns, ...batchApertureCols]) });
@@ -809,7 +821,12 @@ async function main() {
         const beforeDeptMajors = deptMajorCounts(prev.items), afterDeptMajors = deptMajorCounts(compound.items);
         const beforeDeptItems = deptItemCounts(prev.items), afterDeptItems = deptItemCounts(compound.items);
         const closureAfter = batchClosure(occN);
-        const gate = acceptsBatch(prev, compound, { targetDepartments, beforeDeptMajors, afterDeptMajors, beforeDeptItems, afterDeptItems, closureBefore: closure, closureAfter });
+        // OFF-FLOOR margin (T-213-01): escaping 0 is the signal only AT the floor (batchMargin 1). Off the
+        // floor (batch-while-improving) the compound must clear the FULL climb margin, so a +1 nudge on an
+        // already-decent build does not rubber-stamp through. At the floor this is byte-identical to T-208.
+        const atFloor = coldStartFloor({ score: prev.score, closure, scoreFloor: SCORE_FLOOR });
+        const batchMargin = atFloor ? BATCH_DEFAULTS.batchMargin : margin;
+        const gate = acceptsBatch(prev, compound, { batchMargin, targetDepartments, beforeDeptMajors, afterDeptMajors, beforeDeptItems, afterDeptItems, closureBefore: closure, closureAfter });
         if (gate.accept) { occ = occN; prevDigest = batchDigest; openColumns = new Set([...openColumns, ...batchApertureCols]); }
         noAcceptStreak = gate.accept ? 0 : noAcceptStreak + 1;
         history.push({ tool: `batch[${batchPicks.join("+")}]`, qBefore: prev.score, qAfter: compound.score, accepted: gate.accept, reason: gate.reason });
