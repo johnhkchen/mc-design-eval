@@ -112,8 +112,10 @@ export function carveTargetCells(occ, declaredAperture, { programW, scale = 1, m
 }
 
 /** Every "x,z" column the widened aperture occupies across its depth (excluded from the non-aperture closure
- *  check — these columns are INTENTIONALLY open). For a tunnel this is the full u-span × w-depth footprint. */
-function aperColumns(target) {
+ *  check — these columns are INTENTIONALLY open). For a tunnel this is the full u-span × w-depth footprint.
+ *  EXPORTED (T-203-01) so the runner's closure-except-aperture `openCols` tracks exactly what the gate
+ *  forgives — one aperture-column definition, no drift. */
+export function apertureColumns(target) {
   const cols = new Set();
   const { ax, uLo, uHi, vLo, wMin, wMax, wStar } = target;
   const wLo = wMin ?? wStar, wHi = wMax ?? wStar;
@@ -157,6 +159,49 @@ export function carvedVoidCoherence(afterOcc, target) {
 }
 
 /**
+ * ARCH-AWARE void coherence (T-203-01, story S-203, epic E-52). The wide-arch REBUILD carves a clean wide
+ * rectangle then ADDS a voxel arch ring (spandrels) into the upper corners — which {@link carvedVoidCoherence}'s
+ * FULL-HEIGHT continuity check reads as notches (the T-201 capstone refute: "notched columns 3,4,8,9" were the
+ * arch spandrels, not a ragged carve). An arch fills its upper corners BY DEFINITION; the `continuous` conjunct
+ * is the wrong shape for it. This redefines coherence for an ARCHED void, gating the PASSAGE (below the spring)
+ * and crediting the HEAD (above it):
+ *   • single            — the void air cells (rectangular passage + arch intrados) form ONE 6-connected
+ *                         component (a split void is still a hole).
+ *   • passageContinuous — every column au∈[uLo,uHi] is air over [vLo, spring] (the rectangular passage up to and
+ *                         including the springline). A SOLID cell there is a real blockage/notch. ABOVE the
+ *                         spring the arch shapes the void, so spandrel solids are the HEAD, never notches.
+ *   • headBuilt         — ≥1 solid ring cell exists in [spring+1, vHi] at the wall plane (the arch was actually
+ *                         built; a bare rectangle with no head is not an arched gate).
+ * `spring` is PASSED IN (not re-derived) so the runner and tests use the same value frameArchPlacements used.
+ * @param {import("./occupancy.mjs").Occupancy} afterOcc the carved + arch-dressed build
+ * @param {object} target from {@link carveTargetCells}
+ * @param {{spring:number}} arch the arch springline (av); passage = [vLo, spring], head = (spring, vHi]
+ * @returns {{single:boolean, passageContinuous:boolean, headBuilt:boolean, components:number, notches:string[]}}
+ */
+export function archedVoidCoherence(afterOcc, target, { spring } = {}) {
+  const { ax, uLo, uHi, vLo, vHi, wStar } = target;
+  if (!Number.isFinite(spring)) fail("archedVoidCoherence", "arch.spring must be a finite av (springline)");
+  const voidKeys = [];
+  const notches = [];
+  let headBuilt = false;
+  for (let au = uLo; au <= uHi; au++) {
+    let passageOpen = true;
+    for (let av = vLo; av <= vHi; av++) {
+      const p = posOf(ax, au, av, wStar);
+      const solid = afterOcc.solid(p[0], p[1], p[2]);
+      if (!solid) { voidKeys.push(`${p[0]},${p[1]},${p[2]}`); continue; }
+      if (av <= spring) passageOpen = false;       // a solid in the passage window is a real blockage
+      else headBuilt = true;                        // a solid above the spring is the arch head (expected)
+    }
+    if (!passageOpen) notches.push(String(au));
+  }
+  voidKeys.sort();
+  const { sizes } = voidKeys.length ? componentLabels(int32ShapeOfKeys(voidKeys), { connectivity: 6 }) : { sizes: [] };
+  const components = sizes.length;
+  return { single: components === 1, passageContinuous: notches.length === 0, headBuilt, components, notches };
+}
+
+/**
  * THE APERTURE-COHERENCE GATE. A carve is accepted iff ALL THREE conjuncts hold (design Decision 2):
  *   1 SCOPE    — every removed cell (solid-before ∧ air-after) lies inside the declared widened region.
  *   2 COHERENT — the carved void is a single, continuous opening (carvedVoidCoherence).
@@ -166,10 +211,13 @@ export function carvedVoidCoherence(afterOcc, target) {
  * @param {import("./occupancy.mjs").Occupancy} beforeOcc
  * @param {import("./occupancy.mjs").Occupancy} afterOcc
  * @param {object} target from {@link carveTargetCells}
- * @param {{floor:number, eaveY:number}} band wall-band y-range for the column-drop guard
+ * @param {{floor:number, eaveY:number, arch?:{spring:number}}} band wall-band y-range for the column-drop
+ *   guard; `arch.spring` (T-203-01) routes COHERENT to {@link archedVoidCoherence} (spandrels are the head,
+ *   not notches) — the wide-arch REBUILD. Omitted → the legacy full-height {@link carvedVoidCoherence} (a
+ *   rectangular carve), byte-identical to before.
  * @returns {{ok:boolean, scope:object, coherent:object, closure:object, reason:string|null}}
  */
-export function apertureCoherenceGate(beforeOcc, afterOcc, target, { floor, eaveY } = {}) {
+export function apertureCoherenceGate(beforeOcc, afterOcc, target, { floor, eaveY, arch } = {}) {
   if (!beforeOcc?.bounds || !afterOcc?.bounds) fail("apertureCoherenceGate", "occupancy is empty");
   const region = target.widenedRegion;
   const inRegion = (x, y, z) =>
@@ -186,9 +234,13 @@ export function apertureCoherenceGate(beforeOcc, afterOcc, target, { floor, eave
   leaked.sort();
   const scope = { ok: leaked.length === 0, leaked };
 
-  // 2 COHERENT
-  const coherent = carvedVoidCoherence(afterOcc, target);
-  coherent.ok = coherent.single && coherent.continuous;
+  // 2 COHERENT — arch-aware when `arch` given (spandrels = head, not notches; T-203-01), else legacy.
+  const coherent = arch
+    ? archedVoidCoherence(afterOcc, target, arch)
+    : carvedVoidCoherence(afterOcc, target);
+  coherent.ok = arch
+    ? (coherent.single && coherent.passageContinuous && coherent.headBuilt)
+    : (coherent.single && coherent.continuous);
 
   // 3 CLOSURE-EXCEPT-APERTURE, as NO-REGRESSION on the established metric. The closure GATE is the column-level
   // recessClosureGuard with the aperture columns EXCLUDED: no NON-aperture wall-band column dropped, and
@@ -204,7 +256,7 @@ export function apertureCoherenceGate(beforeOcc, afterOcc, target, { floor, eave
   let columnGuard = { ok: true, nonAperture: [], before: null, after: null };
   if (Number.isInteger(floor) && Number.isInteger(eaveY) && eaveY >= floor) {
     const guard = recessClosureGuard(beforeOcc, afterOcc, { floor, eaveY });
-    const aperCols = aperColumns(target);
+    const aperCols = apertureColumns(target);
     // closureOf is a perimeter ratio, so widening a PERIMETER door legitimately lowers it (the door columns
     // are perimeter columns). The real no-regression property is therefore "no NON-aperture before-column was
     // dropped" — every wall column that closed before still closes, except the intentional aperture. The raw
@@ -218,9 +270,16 @@ export function apertureCoherenceGate(beforeOcc, afterOcc, target, { floor, eave
   };
 
   const ok = scope.ok && coherent.ok && closure.ok;
+  const coherentReason = !coherent.ok
+    ? (!coherent.single ? `ragged carve: ${coherent.components} void components`
+      : arch
+        ? (!coherent.passageContinuous ? `blocked passage: notched columns ${coherent.notches.join(",")}`
+          : `no arch head built (bare rectangle, no spandrels above the spring)`)
+        : `ragged carve: notched columns ${coherent.notches.join(",")}`)
+    : null;
   const reason = ok ? null
     : !scope.ok ? `carve leaked outside declared aperture (${leaked.length} cell(s), e.g. ${leaked[0]})`
-    : !coherent.ok ? (coherent.single ? `ragged carve: notched columns ${coherent.notches.join(",")}` : `ragged carve: ${coherent.components} void components`)
+    : !coherent.ok ? coherentReason
     : `non-aperture wall column(s) dropped / closureOf fell: ${columnGuard.nonAperture.join(",")} (${columnGuard.before}→${columnGuard.after})`;
   return { ok, scope, coherent, closure, reason };
 }

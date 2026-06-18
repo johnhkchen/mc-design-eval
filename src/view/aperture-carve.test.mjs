@@ -12,8 +12,10 @@ import assert from "node:assert/strict";
 
 import { occupancyFromCells } from "./occupancy.mjs";
 import { closureCheck } from "./shell-integrity.mjs";
+import { frameArchPlacements } from "./arch-frame.mjs";
 import {
-  carveTargetCells, carvedVoidCoherence, apertureCoherenceGate, carveAperture, APERTURE_CARVE_SCHEMA,
+  carveTargetCells, carvedVoidCoherence, archedVoidCoherence, apertureCoherenceGate, carveAperture,
+  apertureColumns, APERTURE_CARVE_SCHEMA,
 } from "./aperture-carve.mjs";
 
 // A closed box x,z∈[0..6], y∈[0..6] (all six faces solid), with a 1-wide slot on the −x wall (x=0) at z=3,
@@ -154,4 +156,101 @@ test("AC8 carvedVoidCoherence reports single+continuous on a clean carve", () =>
   assert.equal(c.single, true);
   assert.equal(c.continuous, true);
   assert.equal(c.components, 1);
+});
+
+// ===== T-203-01 (S-203, E-52): the wide-arch REBUILD — arch-aware coherence + closure-except-aperture =====
+// The capstone failure (T-201): carve_arch carved a CLEAN wide rectangle then ADDED a voxel arch ring, and the
+// SAME full-height coherence check refuted the arch spandrels as "notched columns 3,4,8,9". These tests run the
+// REAL frameArchPlacements/archRing geometry (not a mock) and prove the arch-aware gate KEEPS what carve_arch
+// could not, while still refuting a true passage blockage.
+
+const cellsOf = (occ) => [...occ.cells].map(([k, b]) => ({ pos: k.split(",").map(Number), block: b }));
+
+/** Mirror the picture-climb rebuild_arch hand on a synthetic box: carve the wide tunnel, then dress with the
+ *  REAL frame + arch ring. Returns { target, carved, dressed, spring }. */
+function archedRebuild(occ, aperture, programW = 5) {
+  const { remove, target } = carveTargetCells(occ, aperture, { programW, scale: 1 });
+  const carved = carveAperture(occ, remove);
+  // the wide aperture record (mirrors picture-climb apertureFromTarget)
+  const cells = [], flanks = { left: [], right: [] }, lintel = [];
+  for (let av = target.vLo; av <= target.vHi; av++) for (let au = target.uLo; au <= target.uHi; au++) cells.push({ au, av });
+  for (let av = target.vLo; av <= target.vHi; av++) { flanks.left.push({ au: target.uLo - 1, av }); flanks.right.push({ au: target.uHi + 1, av }); }
+  for (let au = target.uLo - 1; au <= target.uHi + 1; au++) lintel.push({ au, av: target.vHi + 1 });
+  const wideAp = { kind: "door", dir: target.dir, cells, flanks, lintel };
+  const { placements } = frameArchPlacements(carved, [wideAp], { frameBlock: "dark_oak_log" });
+  const dressed = occupancyFromCells([...cellsOf(carved), ...placements.map((p) => ({ pos: p.pos, block: p.block }))]);
+  const radius = target.width / 2;
+  const spring = Math.max(target.vLo + 1, target.vHi - Math.floor(radius));
+  return { target, carved, dressed, spring };
+}
+
+// A wider closed box so a width-5 arch fits (z,y∈[0..8]); 1-wide slot on −x at z=4, y∈[1..4].
+function wideClosedBoxWithSlot() {
+  const N = 8, slotZ = 4, slotYLo = 1, slotYHi = 4;
+  const slot = new Set();
+  for (let y = slotYLo; y <= slotYHi; y++) slot.add(`${slotZ},${y}`);
+  const cells = [];
+  for (let x = 0; x <= N; x++) for (let y = 0; y <= N; y++) for (let z = 0; z <= N; z++) {
+    const onFace = x === 0 || x === N || y === 0 || y === N || z === 0 || z === N;
+    if (!onFace) continue;
+    if (x === 0 && slot.has(`${z},${y}`)) continue;
+    cells.push({ pos: [x, y, z], block: "stone_bricks" });
+  }
+  const apCells = [];
+  for (let y = slotYLo; y <= slotYHi; y++) apCells.push({ au: slotZ, av: y });
+  return { occ: occupancyFromCells(cells), aperture: { kind: "door", dir: "-x", cells: apCells } };
+}
+const WIDE_BAND = { floor: 0, eaveY: 8 };
+
+// ---- AR1: arch-aware coherence credits the spandrels the legacy full-height check refutes (same build) ----
+test("AR1 archedVoidCoherence: single+passageContinuous+headBuilt where carvedVoidCoherence reads notched", () => {
+  const { occ, aperture } = wideClosedBoxWithSlot();
+  const { dressed, target, spring } = archedRebuild(occ, aperture);
+  const arched = archedVoidCoherence(dressed, target, { spring });
+  assert.equal(arched.single, true, "the arched void is one component");
+  assert.equal(arched.passageContinuous, true, "the rectangular passage below the spring is clean");
+  assert.equal(arched.headBuilt, true, "an arch head (spandrels) was built above the spring");
+  // the SAME build read by the legacy full-height check: the spandrels read as notches (the T-201 bug)
+  const legacy = carvedVoidCoherence(dressed, target);
+  assert.equal(legacy.continuous, false, "legacy full-height continuity refutes the arch spandrels");
+  assert.ok(legacy.notches.length > 0, "the notched columns are the arch's end (spandrel) columns");
+});
+
+// ---- AR2: the gate ACCEPTS the rebuilt arch with arch:{spring}, and REFUTES it without (the exact regression) ----
+test("AR2 apertureCoherenceGate accepts the arched rebuild with arch:{spring}, refutes it without", () => {
+  const { occ, aperture } = wideClosedBoxWithSlot();
+  const { dressed, target, spring } = archedRebuild(occ, aperture);
+  const archGate = apertureCoherenceGate(occ, dressed, target, { ...WIDE_BAND, arch: { spring } });
+  assert.equal(archGate.ok, true, archGate.reason ?? "arch-aware gate should accept the rebuilt arch");
+  assert.equal(archGate.scope.ok, true);
+  assert.equal(archGate.closure.ok, true);
+  const legacyGate = apertureCoherenceGate(occ, dressed, target, WIDE_BAND);
+  assert.equal(legacyGate.ok, false, "the legacy full-height gate refutes the arch (the T-201 fallback)");
+  assert.match(legacyGate.reason, /ragged/);
+});
+
+// ---- AR3: a real blockage BELOW the spring is still refuted, even with arch (the gate is not blinded) ----
+test("AR3 apertureCoherenceGate(arch) still refutes a solid blockage in the passage", () => {
+  const { occ, aperture } = wideClosedBoxWithSlot();
+  const { dressed, target, spring } = archedRebuild(occ, aperture);
+  // re-fill one passage cell at the wall plane (av=1 ≤ spring) — a botched carve / blockage
+  const blocked = occupancyFromCells([...cellsOf(dressed), { pos: [target.wStar, 1, target.uLo + 1], block: "stone_bricks" }]);
+  const c = archedVoidCoherence(blocked, target, { spring });
+  assert.equal(c.passageContinuous, false, "the passage blockage is a notch below the spring");
+  const gate = apertureCoherenceGate(occ, blocked, target, { ...WIDE_BAND, arch: { spring } });
+  assert.equal(gate.ok, false);
+  assert.match(gate.reason, /blocked passage/);
+});
+
+// ---- AR5: PURE / byte-stable — two rebuilds give the identical dressed cells + identical verdict ----
+test("AR5 the arched rebuild + arch gate are byte-stable across runs; apertureColumns covers the tunnel", () => {
+  const a = wideClosedBoxWithSlot(), b = wideClosedBoxWithSlot();
+  const ra = archedRebuild(a.occ, a.aperture), rb = archedRebuild(b.occ, b.aperture);
+  assert.deepEqual([...ra.dressed.cells.keys()].sort(), [...rb.dressed.cells.keys()].sort());
+  const ga = apertureCoherenceGate(a.occ, ra.dressed, ra.target, { ...WIDE_BAND, arch: { spring: ra.spring } });
+  const gb = apertureCoherenceGate(b.occ, rb.dressed, rb.target, { ...WIDE_BAND, arch: { spring: rb.spring } });
+  assert.equal(ga.ok, gb.ok);
+  // the declared-open aperture columns (a through-tunnel ⇒ the full u-span × w-depth footprint)
+  const cols = apertureColumns(ra.target);
+  assert.ok(cols.size > 0 && [...cols].every((c) => /^\d+,\d+$/.test(c)), "apertureColumns are x,z keys");
 });
