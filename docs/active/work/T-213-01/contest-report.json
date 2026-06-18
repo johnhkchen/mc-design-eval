@@ -1,0 +1,672 @@
+{
+  "schema": "accept-rule-contest/v1",
+  "ticket": "T-213-01",
+  "story": "S-213",
+  "epic": "E-55",
+  "subject": "gatehouse",
+  "corpus": "/Volumes/ext1/swe/repos/mc-design-eval/docs/active/work/T-212-01/corpus.json",
+  "note": "Candidate accept-rules judged on the S-212 bar (agreement with the glance) AND a no-rubber-stamp reject battery. The monotonic corpus rewards keeping everything, so the reject battery is the discriminator. Frozen DiagnoseBuild scorer untouched; this contests aggregation/acceptance only.",
+  "margin": 4,
+  "glanceRank": {
+    "source": "agent-vision-glance over the on-disk renders vs concept.png, pending human confirmation",
+    "order": [
+      "S0",
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5"
+    ],
+    "comment": "worst -> best. Mass-level reads (pale stone field, the gable roof, the centered arch) weighted over minor banding/slits, as a glance does.",
+    "contestableAdjacencies": [
+      [
+        "S4",
+        "S5"
+      ]
+    ],
+    "contestableNote": "S4 has a crisp centered arch but is dark and roofless; S5 has roof + pale stone (mass-level) but a weaker arch. Ranked S5>S4 (a roofed pale mass reads as 'the picture' more than a dark roofless box-with-a-hole). A human may flip this one adjacency; it does NOT change the headline (both S4 and S5 are KEEP-worthy moves the current rule rolled back)."
+  },
+  "candidates": [
+    {
+      "aggregator": "median",
+      "agreement": {
+        "matches": 3,
+        "total": 5,
+        "fraction": 0.6,
+        "disagreements": [
+          {
+            "id": "M2",
+            "tool": "apply_gable_roof",
+            "transition": "S1->S2",
+            "scores": [
+              0,
+              12,
+              0
+            ],
+            "glance": "keep",
+            "rule": "rollback",
+            "ruleReason": "compound tie at floor — no read (→ de-noise the judge)"
+          },
+          {
+            "id": "M4",
+            "tool": "rebuild_arch",
+            "transition": "S3->S4",
+            "scores": [
+              8,
+              0,
+              48
+            ],
+            "glance": "keep",
+            "rule": "rollback",
+            "ruleReason": "tie (0): no shrink"
+          }
+        ]
+      },
+      "rejectBattery": {
+        "passed": true,
+        "results": [
+          {
+            "id": "spike",
+            "note": "good build, two judges crater + one euphoric vote",
+            "before": [
+              40,
+              40,
+              40
+            ],
+            "after": [
+              0,
+              0,
+              48
+            ],
+            "rejected": true,
+            "reason": "regressed -40"
+          },
+          {
+            "id": "regression",
+            "note": "every vote drops",
+            "before": [
+              8,
+              8,
+              8
+            ],
+            "after": [
+              2,
+              2,
+              2
+            ],
+            "rejected": true,
+            "reason": "regressed -6"
+          },
+          {
+            "id": "sideways",
+            "note": "M5-style: one vote holds, two drop (a recess-only frame)",
+            "before": [
+              8,
+              8,
+              8
+            ],
+            "after": [
+              8,
+              0,
+              0
+            ],
+            "rejected": true,
+            "reason": "regressed -8"
+          }
+        ]
+      },
+      "minKeepSlack": null,
+      "moves": [
+        {
+          "id": "M1",
+          "tool": "close_shell",
+          "transition": "S0->S1",
+          "scores": [
+            0,
+            0,
+            0
+          ],
+          "glance": "keep",
+          "rule": "keep",
+          "ruleReason": "closure +0.333 (0.667→1.000) form-credit",
+          "agree": true
+        },
+        {
+          "id": "M2",
+          "tool": "apply_gable_roof",
+          "transition": "S1->S2",
+          "scores": [
+            0,
+            12,
+            0
+          ],
+          "glance": "keep",
+          "rule": "roll",
+          "ruleReason": "compound tie at floor — no read (→ de-noise the judge)",
+          "agree": false
+        },
+        {
+          "id": "M3",
+          "tool": "construct_walls",
+          "transition": "S1->S3",
+          "scores": [
+            8,
+            8,
+            8
+          ],
+          "glance": "keep",
+          "rule": "keep",
+          "ruleReason": "improved +8",
+          "agree": true
+        },
+        {
+          "id": "M4",
+          "tool": "rebuild_arch",
+          "transition": "S3->S4",
+          "scores": [
+            8,
+            0,
+            48
+          ],
+          "glance": "keep",
+          "rule": "roll",
+          "ruleReason": "tie (0): no shrink",
+          "agree": false
+        },
+        {
+          "id": "M5",
+          "tool": "frame_arch",
+          "transition": "S3->S3+frame",
+          "scores": [
+            8,
+            0,
+            0
+          ],
+          "glance": "excluded",
+          "rule": "roll",
+          "ruleReason": "regressed -8",
+          "agree": null
+        },
+        {
+          "id": "M6",
+          "tool": "batch[apply_gable_roof+rebuild_arch+relief_walls]",
+          "transition": "S1->S5",
+          "scores": [
+            20,
+            20,
+            0
+          ],
+          "glance": "keep",
+          "rule": "keep",
+          "ruleReason": "compound +20 (off the floor)",
+          "agree": true
+        }
+      ]
+    },
+    {
+      "aggregator": "max",
+      "agreement": {
+        "matches": 5,
+        "total": 5,
+        "fraction": 1,
+        "disagreements": []
+      },
+      "rejectBattery": {
+        "passed": false,
+        "results": [
+          {
+            "id": "spike",
+            "note": "good build, two judges crater + one euphoric vote",
+            "before": [
+              40,
+              40,
+              40
+            ],
+            "after": [
+              0,
+              0,
+              48
+            ],
+            "rejected": false,
+            "reason": "improved +8"
+          },
+          {
+            "id": "regression",
+            "note": "every vote drops",
+            "before": [
+              8,
+              8,
+              8
+            ],
+            "after": [
+              2,
+              2,
+              2
+            ],
+            "rejected": true,
+            "reason": "regressed -6"
+          },
+          {
+            "id": "sideways",
+            "note": "M5-style: one vote holds, two drop (a recess-only frame)",
+            "before": [
+              8,
+              8,
+              8
+            ],
+            "after": [
+              8,
+              0,
+              0
+            ],
+            "rejected": true,
+            "reason": "tie (0): no shrink"
+          }
+        ]
+      },
+      "minKeepSlack": 36,
+      "moves": [
+        {
+          "id": "M1",
+          "tool": "close_shell",
+          "transition": "S0->S1",
+          "scores": [
+            0,
+            0,
+            0
+          ],
+          "glance": "keep",
+          "rule": "keep",
+          "ruleReason": "closure +0.333 (0.667→1.000) form-credit",
+          "agree": true
+        },
+        {
+          "id": "M2",
+          "tool": "apply_gable_roof",
+          "transition": "S1->S2",
+          "scores": [
+            0,
+            12,
+            0
+          ],
+          "glance": "keep",
+          "rule": "keep",
+          "ruleReason": "compound +12 (off the floor)",
+          "agree": true
+        },
+        {
+          "id": "M3",
+          "tool": "construct_walls",
+          "transition": "S1->S3",
+          "scores": [
+            8,
+            8,
+            8
+          ],
+          "glance": "keep",
+          "rule": "keep",
+          "ruleReason": "improved +8",
+          "agree": true
+        },
+        {
+          "id": "M4",
+          "tool": "rebuild_arch",
+          "transition": "S3->S4",
+          "scores": [
+            8,
+            0,
+            48
+          ],
+          "glance": "keep",
+          "rule": "keep",
+          "ruleReason": "improved +40",
+          "agree": true
+        },
+        {
+          "id": "M5",
+          "tool": "frame_arch",
+          "transition": "S3->S3+frame",
+          "scores": [
+            8,
+            0,
+            0
+          ],
+          "glance": "excluded",
+          "rule": "roll",
+          "ruleReason": "regressed -8",
+          "agree": null
+        },
+        {
+          "id": "M6",
+          "tool": "batch[apply_gable_roof+rebuild_arch+relief_walls]",
+          "transition": "S1->S5",
+          "scores": [
+            20,
+            20,
+            0
+          ],
+          "glance": "keep",
+          "rule": "keep",
+          "ruleReason": "compound +20 (off the floor)",
+          "agree": true
+        }
+      ]
+    },
+    {
+      "aggregator": "mean",
+      "agreement": {
+        "matches": 5,
+        "total": 5,
+        "fraction": 1,
+        "disagreements": []
+      },
+      "rejectBattery": {
+        "passed": true,
+        "results": [
+          {
+            "id": "spike",
+            "note": "good build, two judges crater + one euphoric vote",
+            "before": [
+              40,
+              40,
+              40
+            ],
+            "after": [
+              0,
+              0,
+              48
+            ],
+            "rejected": true,
+            "reason": "regressed -24"
+          },
+          {
+            "id": "regression",
+            "note": "every vote drops",
+            "before": [
+              8,
+              8,
+              8
+            ],
+            "after": [
+              2,
+              2,
+              2
+            ],
+            "rejected": true,
+            "reason": "regressed -6"
+          },
+          {
+            "id": "sideways",
+            "note": "M5-style: one vote holds, two drop (a recess-only frame)",
+            "before": [
+              8,
+              8,
+              8
+            ],
+            "after": [
+              8,
+              0,
+              0
+            ],
+            "rejected": true,
+            "reason": "regressed -5"
+          }
+        ]
+      },
+      "minKeepSlack": 6.666666666666668,
+      "moves": [
+        {
+          "id": "M1",
+          "tool": "close_shell",
+          "transition": "S0->S1",
+          "scores": [
+            0,
+            0,
+            0
+          ],
+          "glance": "keep",
+          "rule": "keep",
+          "ruleReason": "closure +0.333 (0.667→1.000) form-credit",
+          "agree": true
+        },
+        {
+          "id": "M2",
+          "tool": "apply_gable_roof",
+          "transition": "S1->S2",
+          "scores": [
+            0,
+            12,
+            0
+          ],
+          "glance": "keep",
+          "rule": "keep",
+          "ruleReason": "compound +4 (off the floor)",
+          "agree": true
+        },
+        {
+          "id": "M3",
+          "tool": "construct_walls",
+          "transition": "S1->S3",
+          "scores": [
+            8,
+            8,
+            8
+          ],
+          "glance": "keep",
+          "rule": "keep",
+          "ruleReason": "improved +8",
+          "agree": true
+        },
+        {
+          "id": "M4",
+          "tool": "rebuild_arch",
+          "transition": "S3->S4",
+          "scores": [
+            8,
+            0,
+            48
+          ],
+          "glance": "keep",
+          "rule": "keep",
+          "ruleReason": "improved +11",
+          "agree": true
+        },
+        {
+          "id": "M5",
+          "tool": "frame_arch",
+          "transition": "S3->S3+frame",
+          "scores": [
+            8,
+            0,
+            0
+          ],
+          "glance": "excluded",
+          "rule": "roll",
+          "ruleReason": "regressed -8",
+          "agree": null
+        },
+        {
+          "id": "M6",
+          "tool": "batch[apply_gable_roof+rebuild_arch+relief_walls]",
+          "transition": "S1->S5",
+          "scores": [
+            20,
+            20,
+            0
+          ],
+          "glance": "keep",
+          "rule": "keep",
+          "ruleReason": "compound +13 (off the floor)",
+          "agree": true
+        }
+      ]
+    },
+    {
+      "aggregator": "trimmedMean",
+      "agreement": {
+        "matches": 5,
+        "total": 5,
+        "fraction": 1,
+        "disagreements": []
+      },
+      "rejectBattery": {
+        "passed": true,
+        "results": [
+          {
+            "id": "spike",
+            "note": "good build, two judges crater + one euphoric vote",
+            "before": [
+              40,
+              40,
+              40
+            ],
+            "after": [
+              0,
+              0,
+              48
+            ],
+            "rejected": true,
+            "reason": "regressed -16"
+          },
+          {
+            "id": "regression",
+            "note": "every vote drops",
+            "before": [
+              8,
+              8,
+              8
+            ],
+            "after": [
+              2,
+              2,
+              2
+            ],
+            "rejected": true,
+            "reason": "regressed -6"
+          },
+          {
+            "id": "sideways",
+            "note": "M5-style: one vote holds, two drop (a recess-only frame)",
+            "before": [
+              8,
+              8,
+              8
+            ],
+            "after": [
+              8,
+              0,
+              0
+            ],
+            "rejected": true,
+            "reason": "regressed -4"
+          }
+        ]
+      },
+      "minKeepSlack": 16,
+      "moves": [
+        {
+          "id": "M1",
+          "tool": "close_shell",
+          "transition": "S0->S1",
+          "scores": [
+            0,
+            0,
+            0
+          ],
+          "glance": "keep",
+          "rule": "keep",
+          "ruleReason": "closure +0.333 (0.667→1.000) form-credit",
+          "agree": true
+        },
+        {
+          "id": "M2",
+          "tool": "apply_gable_roof",
+          "transition": "S1->S2",
+          "scores": [
+            0,
+            12,
+            0
+          ],
+          "glance": "keep",
+          "rule": "keep",
+          "ruleReason": "compound +6 (off the floor)",
+          "agree": true
+        },
+        {
+          "id": "M3",
+          "tool": "construct_walls",
+          "transition": "S1->S3",
+          "scores": [
+            8,
+            8,
+            8
+          ],
+          "glance": "keep",
+          "rule": "keep",
+          "ruleReason": "improved +8",
+          "agree": true
+        },
+        {
+          "id": "M4",
+          "tool": "rebuild_arch",
+          "transition": "S3->S4",
+          "scores": [
+            8,
+            0,
+            48
+          ],
+          "glance": "keep",
+          "rule": "keep",
+          "ruleReason": "improved +20",
+          "agree": true
+        },
+        {
+          "id": "M5",
+          "tool": "frame_arch",
+          "transition": "S3->S3+frame",
+          "scores": [
+            8,
+            0,
+            0
+          ],
+          "glance": "excluded",
+          "rule": "roll",
+          "ruleReason": "regressed -8",
+          "agree": null
+        },
+        {
+          "id": "M6",
+          "tool": "batch[apply_gable_roof+rebuild_arch+relief_walls]",
+          "transition": "S1->S5",
+          "scores": [
+            20,
+            20,
+            0
+          ],
+          "glance": "keep",
+          "rule": "keep",
+          "ruleReason": "compound +20 (off the floor)",
+          "agree": true
+        }
+      ]
+    }
+  ],
+  "batchWhileImproving": {
+    "note": "On THIS corpus batch-while-improving changes no verdict: the only compound (M6) is AT the floor, so floor-mode already batches it. Its value is the OFF-floor compound the corpus cannot isolate (it manifests as M4-style per-move rolls, which the aggregator already rescues). Falsified in the unit tests (CG-BWI3: off-floor full-margin rejects a +2 nudge, keeps a +12). Complementary entry-symmetry change → carried to S-214, not credited as an independent corpus win."
+  },
+  "winner": {
+    "aggregator": "trimmedMean",
+    "agreement": 1,
+    "rejectPassed": true,
+    "reason": "trimmedMean agrees 5/5 (vs median 3/5 corrected) AND rejects all 3 worse-build fixtures; chosen over equal-agreement candidates by robustness (min keep-slack 16). Carry with batch-while-improving (CLIMB_BATCH_MODE=improving) to S-214.",
+    "disqualified": [
+      {
+        "aggregator": "max",
+        "agreement": 1,
+        "why": "rubber-stamps the worse-build battery: spike"
+      }
+    ]
+  },
+  "judgeGradientRedirect": false,
+  "frozenInstrument": "untouched (aggregateVotes/batchEligible/acceptsRound/acceptsBatch imported read-only; no measurements/ change)"
+}
