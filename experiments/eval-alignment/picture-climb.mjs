@@ -47,7 +47,7 @@ import { runTieredOp } from "../../src/model-tier.mjs";
 import { bamlRender, bamlParse } from "../../src/baml/bridge.mjs";
 import { diagnoseRenderArgs } from "../../src/workshop/diagnose.mjs";
 import { critiqueEvidence, itemStyleClass, styleFidelityScore } from "../../src/workshop/bakeoff-score.mjs";
-import { acceptsRound, stoppingDecision, classifyInventory, deptMajorCounts, deptItemCounts, buildDigest, TOOL_DEPARTMENTS, CLIMB_DEFAULTS, formReadyGate, FORM_READY_CLOSURE, closureDecidedMove } from "../../src/workshop/climb-gate.mjs";
+import { acceptsRound, acceptsBatch, coldStartFloor, BATCH_DEFAULTS, stoppingDecision, classifyInventory, deptMajorCounts, deptItemCounts, buildDigest, TOOL_DEPARTMENTS, CLIMB_DEFAULTS, formReadyGate, FORM_READY_CLOSURE, closureDecidedMove } from "../../src/workshop/climb-gate.mjs";
 import { parseFirstJsonObject } from "../../src/workshop/agent-reply.mjs";
 import { reconcileRoofMaterial } from "../../src/recognition/roof-material.mjs";
 import { assertMaterialMap } from "../../src/form/material-map.mjs";
@@ -82,6 +82,13 @@ const { margin, stallK, minRounds } = CLIMB_DEFAULTS;
 // five productive moves (close_shell → gable → rebuild_arch → relief → recolor) to express all three E-52
 // fixes; at the frozen 5 the run truncates before the roof (as T-201 did with recolor_roof unfired).
 const maxRounds = Number(process.env.CLIMB_MAX_ROUNDS) || CLIMB_DEFAULTS.maxRounds;
+// COLD-START BATCH ESCAPE (T-208-01, S-208, E-53). When a genuinely-closed form is stuck at the saturated
+// picture floor (T-207 live: detail moves score 0→0 and the per-move gate rolls them back), stack BATCH_SIZE
+// provisional detail moves and judge the COMPOUND once (acceptsBatch). OPT-IN: default 0 = OFF, so the per-move
+// path and every prior climb (T-201/T-205/T-207) re-run byte-identically; the escape proof sets CLIMB_BATCH_SIZE.
+// Follows the CLIMB_MAX_ROUNDS knob discipline — a run parameter, not a new hand.
+const BATCH_SIZE = Number(process.env.CLIMB_BATCH_SIZE) || 0;
+const SCORE_FLOOR = process.env.CLIMB_SCORE_FLOOR != null ? Number(process.env.CLIMB_SCORE_FLOOR) : BATCH_DEFAULTS.scoreFloor;
 const GUARD_ONLY = process.env.GUARD_ONLY === "1";
 const ROOF_MATERIAL_PROBE = process.env.ROOF_MATERIAL_PROBE === "1"; // T-189-01: render the brown→grey roof glance, zero spend
 const REBUILD_ARCH_PROBE = process.env.REBUILD_ARCH_PROBE === "1"; // T-203-01: render the wide-arch rebuild glance + gate numbers, zero spend
@@ -728,6 +735,65 @@ async function main() {
       const stopBlk = stoppingDecision({ round, agentDone: pick.tool === "done", noAcceptStreak, margin, stallK, maxRounds, minRounds });
       if (stopBlk.stop) { stopReason = stopBlk.reason; break; }
       continue;
+    }
+
+    // COLD-START BATCH ESCAPE (T-208-01, S-208, E-53). On a genuinely-closed form stuck at the saturated
+    // picture floor (T-207 live: detail moves score 0→0 and the per-move gate rolls them back as "tie (0): no
+    // shrink"), stack up to BATCH_SIZE provisional DETAIL picks as a pure occ-chain and judge the COMPOUND once
+    // (acceptsBatch) — the gradient several reads create together. occ is preserved until accept → rollback is
+    // free. OPT-IN (BATCH_SIZE>0); inert on a healthy climb (coldStartFloor false off the floor / on an open form).
+    if (BATCH_SIZE > 0 && coldStartFloor({ score: prev.score, closure, scoreFloor: SCORE_FLOOR })) {
+      const batchApertureCols = new Set();                 // rebuild aperture cols staged for accept-only promotion
+      const batchClosure = (o) => eaveRingClosure(o, { floor: o.bounds.min[1], eaveY: CFG.eaveY, program: PROGRAM,
+        openCols: new Set([...openColumns, ...batchApertureCols]) });
+      let occN = occ, batchDigest = prevDigest, bp = pick;
+      const batchPicks = [], batchDepts = new Set();
+      while (batchPicks.length < BATCH_SIZE && round + batchPicks.length <= maxRounds) {
+        if (bp.tool === "done" || !TOOLS[bp.tool]) break;
+        if (!formReadyGate({ tool: bp.tool, closure: batchClosure(occN) }).allow) break; // shell re-opened — stop
+        const candOcc = TOOLS[bp.tool](occN);
+        const stagedCols = pendingRebuildCols; pendingRebuildCols = null;
+        const d = buildDigest(occToCells(candOcc));
+        if (d === batchDigest) {                            // no-op / self-revert — skip, re-ask, don't count it
+          history.push({ tool: bp.tool, qBefore: prev.score, qAfter: prev.score, accepted: false, reason: "no-op (batch, identical build)" });
+          bp = await agentPick(prev, history, batchClosure(occN));
+          continue;
+        }
+        occN = candOcc; batchDigest = d; batchPicks.push(bp.tool);
+        for (const dep of (TOOL_DEPARTMENTS[bp.tool] ?? [])) batchDepts.add(dep);
+        if (bp.tool === "rebuild_arch" && stagedCols) for (const c of stagedCols) batchApertureCols.add(c);
+        history.push({ tool: bp.tool, qBefore: prev.score, qAfter: prev.score, accepted: true, reason: `provisional (batch ${batchPicks.length}/${BATCH_SIZE})` });
+        bp = await agentPick(prev, history, batchClosure(occN)); // re-pick on the UNCHANGED prev score
+      }
+      if (batchPicks.length > 0) {                          // something stacked → judge the compound once
+        let compound;
+        try { compound = await scoreBuild(occN, template, round, "batch"); }
+        catch (e) { if (e instanceof RoundAbortedError) { await writeAbortRecord(e, trajectory, outPath); return; } throw e; }
+        const targetDepartments = [...batchDepts];
+        const beforeDeptMajors = deptMajorCounts(prev.items), afterDeptMajors = deptMajorCounts(compound.items);
+        const beforeDeptItems = deptItemCounts(prev.items), afterDeptItems = deptItemCounts(compound.items);
+        const gate = acceptsBatch(prev, compound, { targetDepartments, beforeDeptMajors, afterDeptMajors, beforeDeptItems, afterDeptItems });
+        const closureAfter = batchClosure(occN);
+        if (gate.accept) { occ = occN; prevDigest = batchDigest; openColumns = new Set([...openColumns, ...batchApertureCols]); }
+        noAcceptStreak = gate.accept ? 0 : noAcceptStreak + 1;
+        history.push({ tool: `batch[${batchPicks.join("+")}]`, qBefore: prev.score, qAfter: compound.score, accepted: gate.accept, reason: gate.reason });
+        console.error(`[round ${round}] BATCH ${batchPicks.join("+")}: ${prev.score}→${compound.score} (${compound.scores.join("/")}) — ${gate.accept ? "KEPT" : "ROLLED BACK"} (${gate.reason})`);
+        trajectory.push({ round, score: prev.score, evidence: evOf(prev), items: prev.items,
+          pick: { tool: batchPicks[batchPicks.length - 1] }, applied: true, accepted: gate.accept, gate,
+          scoreAfter: { score: compound.score, scores: compound.scores },
+          targetDepartments, deptMajorsBefore: beforeDeptMajors, deptMajorsAfter: afterDeptMajors,
+          deptItemsBefore: beforeDeptItems, deptItemsAfter: afterDeptItems, framing: compound.framing ?? null,
+          closure, closureAfter, voteOutcomes: compound.voteOutcomes ?? null,
+          batch: { size: batchPicks.length, picks: batchPicks, accepted: gate.accept } });
+        prev = gate.accept ? compound : prev;
+        round += batchPicks.length - 1;                     // the batch consumed batchPicks.length budget rounds
+        pick = (bp.tool && TOOLS[bp.tool]) ? bp : await agentPick(prev, history, closureNow(occ));
+        console.error(`           next: ${pick.tool} — ${pick.reason}`);
+        const stopB = stoppingDecision({ round, agentDone: pick.tool === "done", noAcceptStreak, margin, stallK, maxRounds, minRounds });
+        if (stopB.stop) { stopReason = stopB.reason; break; }
+        continue;
+      }
+      // nothing stacked (all no-ops / agent done immediately) → fall through to the per-move path below.
     }
 
     const cand = TOOLS[pick.tool](occ);
