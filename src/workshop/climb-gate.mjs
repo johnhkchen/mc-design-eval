@@ -82,6 +82,16 @@ export const TOOL_STAGE = Object.freeze({
   articulate_walls: "detail", add_timber_framing: "detail", frame_arch: "detail",
 });
 
+// Tools whose KEEP decision is made on closureOf ALONE (T-200-01, S-200, E-49). The wall-shell FORM moves
+// (close_shell, construct_walls) move the perimeter-occupancy ring, so closureOf — the deterministic
+// eaveRingClosure — is the right, noise-free signal for them. The ROOF-form moves (apply_gable_roof,
+// recolor_roof) do NOT change wall closure: closureOf is blind to the roof, so they are NOT closure-decided
+// and keep the picture gradient (the recorded blind spot — a richer roof-form signal is named, not built).
+// Derived from the registries above (no new hardcoded list). The runner passes `closureDecidedMove(tool)` as
+// `acceptsRound`'s `isFormMove`; the gate's decision itself stays tool-string-free.
+export const closureDecidedMove = (tool) =>
+  TOOL_STAGE[tool] === "form" && (TOOL_DEPARTMENTS[tool] ?? []).includes("WALL");
+
 /**
  * FORM-READINESS GATE. Is `tool` eligible given the build's wall-band `closure`? Form (and unknown / `done`)
  * tools are ALWAYS eligible — you must be able to close the shell, and a stop is always honest. A DETAIL tool
@@ -233,12 +243,20 @@ function formCredit({
  * it fires on regressions too, and is net-guarded). The FORM-CREDIT clause (T-199-01) runs right after the
  * department override and before the regression reject: a form/massing hand that raised wall-band `closure`
  * by a margin toward form-ready, added no new major in ANY department, and grew no targeted dept's total is
- * KEPT even on a tie or regression (see `formCredit`). Backward compatible: with no department context the
- * override is inert, and with no `closureBefore`/`closureAfter` the form clause is inert. `before`/`after`
- * are `critiqueEvidence` bundles.
+ * KEPT even on a tie or regression (see `formCredit`).
+ *
+ * FORM-MOVE ROUTING (T-200-01): when `isFormMove` is set (the runner passes `closureDecidedMove(tool)` — a
+ * wall-shell form move: close_shell / construct_walls) AND a form gap remains (`closureBefore <
+ * formReadyThreshold`), the decision is made ENTIRELY on closureOf — `formCredit` fires → KEEP, else ROLL
+ * BACK — and the picture vote is removed from that decision (it has a documented 0–76 same-seed swing). This
+ * makes the form decision STABLE across re-runs. Roof-form moves are NOT closure-decided (closureOf is blind
+ * to the roof) and form-ready moves fall through, so both keep the picture gradient — detail-path-unchanged.
+ * Backward compatible: with no department context the override is inert, with no `closureBefore`/
+ * `closureAfter` the form clause is inert, and with `isFormMove` omitted (default false) the form branch is
+ * skipped entirely. `before`/`after` are `critiqueEvidence` bundles.
  * @param {{score:number, nMajor?:number, wrongStyleBreadth?:number}} before
  * @param {{score:number, nMajor?:number, wrongStyleBreadth?:number}} after
- * @param {{margin?:number, targetDepartments?:string[], beforeDeptMajors?:object, afterDeptMajors?:object, beforeDeptItems?:object, afterDeptItems?:object, closureBefore?:number, closureAfter?:number, closureMargin?:number, formReadyThreshold?:number}} [opts]
+ * @param {{margin?:number, targetDepartments?:string[], beforeDeptMajors?:object, afterDeptMajors?:object, beforeDeptItems?:object, afterDeptItems?:object, closureBefore?:number, closureAfter?:number, closureMargin?:number, formReadyThreshold?:number, isFormMove?:boolean}} [opts]
  * @returns {{accept:boolean, delta:number, reason:string}}
  */
 export function acceptsRound(before, after, {
@@ -246,9 +264,28 @@ export function acceptsRound(before, after, {
   beforeDeptMajors = null, afterDeptMajors = null, beforeDeptItems = null, afterDeptItems = null,
   closureBefore = null, closureAfter = null,
   closureMargin = CLOSURE_GAIN_MARGIN, formReadyThreshold = FORM_READY_CLOSURE,
+  isFormMove = false,
 } = {}) {
   if (!before || !after) fail("acceptsRound", "before and after evidence are required");
   const delta = num(after.score) - num(before.score);
+  // form-credit (T-199-01) — computed once (pure) and reused by both the form-move branch and the picture
+  // path below: a form hand that raised closure toward form-ready without adding a major anywhere or growing
+  // a targeted dept's burden.
+  const form = formCredit({ closureBefore, closureAfter, closureMargin, formReadyThreshold,
+    targetDepartments, beforeDeptMajors, afterDeptMajors, beforeDeptItems, afterDeptItems });
+  // FORM-MOVE DECISION (T-200-01, S-200): a wall-shell form move (isFormMove, via closureDecidedMove) with a
+  // form gap still open is judged ENTIRELY on closureOf (deterministic) — never the noisy picture vote (a
+  // documented 0–76 swing on the same seed). closure rose by a margin → KEEP; else ROLL BACK; the picture
+  // delta is RECORDED but NOT consulted, so the same form move yields the same decision across any vote draw.
+  // Detail / roof-form / already-form-ready moves fall through to the unchanged picture path below.
+  if (isFormMove && Number.isFinite(closureBefore) && num(closureBefore) < formReadyThreshold) {
+    if (form) return { accept: true, delta,
+      reason: `closure +${form.gain.toFixed(3)} (${num(closureBefore).toFixed(3)}→${num(closureAfter).toFixed(3)}) form-credit` };
+    const gain = num(closureAfter) - num(closureBefore);
+    return { accept: false, delta, reason: gain < closureMargin
+      ? `form: no closure gain (${num(closureBefore).toFixed(3)}→${num(closureAfter).toFixed(3)})`
+      : `form: closure rose but blocked (new major / net-grow)` };
+  }
   if (delta >= margin) return { accept: true, delta, reason: `improved +${Math.round(delta)}` };
   // department-dominant override (T-191-01): runs BEFORE the regression reject so a tool that did its job in
   // its own department survives a whole-build scalar regression caused by attention-shift elsewhere.
@@ -256,8 +293,7 @@ export function acceptsRound(before, after, {
   if (dom) return { accept: true, delta, reason: `${dom} cleared a major (department-dominant override)` };
   // form-credit clause (T-199-01): the form-analog — a form hand that raised closure toward form-ready
   // without adding a major anywhere or growing a targeted dept's burden is KEPT even at a tie/regression.
-  const form = formCredit({ closureBefore, closureAfter, closureMargin, formReadyThreshold,
-    targetDepartments, beforeDeptMajors, afterDeptMajors, beforeDeptItems, afterDeptItems });
+  // Retained for non-form-move callers (and the T-199 CG-FC suite, which omits isFormMove).
   if (form) return { accept: true, delta,
     reason: `closure +${form.gain.toFixed(3)} (${num(closureBefore).toFixed(3)}→${num(closureAfter).toFixed(3)}) form-credit` };
   if (delta <= -margin) return { accept: false, delta, reason: `regressed ${Math.round(delta)}` };

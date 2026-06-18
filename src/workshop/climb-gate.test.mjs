@@ -19,6 +19,7 @@ import {
   FORM_READY_CLOSURE,
   CLOSURE_GAIN_MARGIN,
   TOOL_STAGE,
+  closureDecidedMove,
 } from "./climb-gate.mjs";
 
 // ---- CG1: acceptsRound — clear improvement past the margin is accepted ----
@@ -529,4 +530,75 @@ test("CG-FC6 form-credit keeps a real close even on a past-margin score regressi
   assert.equal(r.accept, true);
   assert.equal(r.delta, -8);
   assert.match(r.reason, /form-credit/);
+});
+
+// ============================ T-200-01 (S-200, E-49): de-noise the form decision ============================
+// A wall-shell FORM move is judged on closureOf (deterministic), never the noisy picture vote (a documented
+// 0–76 same-seed swing). CG-FS1/2 are the abstracted re-run-stability fixtures: the SAME form move → the SAME
+// decision across every simulated vote draw. The flat dept maps below keep formCredit's guards satisfied.
+const FLAT_MAJORS = { ROOF: 1, WALL: 1, OPENING: 1 };
+const FLAT_ITEMS = { ROOF: { major: 1, minor: 0 }, WALL: { major: 1, minor: 0 }, OPENING: { major: 1, minor: 0 } };
+const VOTE_DRAWS = [[16, 16], [0, 76], [76, 0], [0, 0], [76, 76]]; // the documented picture-scalar swing
+const formOpts = (closureAfter) => ({
+  isFormMove: true, closureBefore: 0.6153846153846154, closureAfter,
+  beforeDeptMajors: FLAT_MAJORS, afterDeptMajors: FLAT_MAJORS,
+  beforeDeptItems: FLAT_ITEMS, afterDeptItems: FLAT_ITEMS, targetDepartments: ["WALL"],
+});
+
+// CG-FS1: a real closure win (0.615→1.0) is KEPT for EVERY picture draw — the keep does not flip with noise.
+test("CG-FS1 form KEEP is invariant to the picture vote draw", () => {
+  for (const [before, after] of VOTE_DRAWS) {
+    const r = acceptsRound({ score: before }, { score: after }, formOpts(1.0));
+    assert.equal(r.accept, true, `draw ${before}→${after} should KEEP`);
+    assert.match(r.reason, /form-credit/);
+  }
+});
+
+// CG-FS2: no closure gain (0.615→0.615) is ROLLED BACK for EVERY draw — a noisy spike cannot accept it.
+test("CG-FS2 form ROLLBACK is invariant to the picture vote draw", () => {
+  for (const [before, after] of VOTE_DRAWS) {
+    const r = acceptsRound({ score: before }, { score: after }, formOpts(0.6153846153846154));
+    assert.equal(r.accept, false, `draw ${before}→${after} should ROLL BACK`);
+    assert.match(r.reason, /no closure gain/);
+  }
+});
+
+// CG-FS3: only the wall-shell form moves are closure-decided; roof-form / detail / unknown are not.
+test("CG-FS3 closureDecidedMove selects only wall-shell form moves", () => {
+  for (const t of ["close_shell", "construct_walls"]) assert.equal(closureDecidedMove(t), true, t);
+  for (const t of ["apply_gable_roof", "recolor_roof", "relief_walls", "carve_arch", "done", undefined]) {
+    assert.equal(closureDecidedMove(t), false, String(t));
+  }
+});
+
+// CG-FS4: a roof-form move (isFormMove false) keeps the picture gradient — closureOf is blind to the roof.
+test("CG-FS4 roof-form move is decided on the picture gradient", () => {
+  const up = acceptsRound({ score: 20 }, { score: 30 }, { isFormMove: false, closureBefore: 0.6, closureAfter: 0.6 });
+  assert.equal(up.accept, true);
+  assert.match(up.reason, /improved/);
+  const down = acceptsRound({ score: 30 }, { score: 20 }, { isFormMove: false, closureBefore: 0.6, closureAfter: 0.6 });
+  assert.equal(down.accept, false);
+  assert.match(down.reason, /regressed/);
+});
+
+// CG-FS5: a wall-form move on an ALREADY form-ready shell falls through to the picture path — it is not
+// rejected for "no closure gain" when the form job is already done.
+test("CG-FS5 form-ready wall move falls through to the picture gradient", () => {
+  const r = acceptsRound({ score: 20 }, { score: 30 }, {
+    isFormMove: true, closureBefore: 0.95, closureAfter: 0.95, margin: 4,
+    beforeDeptMajors: FLAT_MAJORS, afterDeptMajors: FLAT_MAJORS,
+  });
+  assert.equal(r.accept, true);
+  assert.match(r.reason, /improved/);
+});
+
+// CG-FS6: the detail gradient is byte-stable — passing isFormMove:false is identical to omitting it.
+test("CG-FS6 detail decision is byte-stable with vs without the flag", () => {
+  const before = { score: 20, nMajor: 3, wrongStyleBreadth: 2 };
+  const after = { score: 20, nMajor: 3, wrongStyleBreadth: 2 }; // CG3-shape tie, no shrink
+  const withFlag = acceptsRound(before, after, { margin: 4, isFormMove: false });
+  const without = acceptsRound(before, after, { margin: 4 });
+  assert.deepEqual(withFlag, without);
+  assert.equal(without.accept, false);
+  assert.match(without.reason, /no shrink/);
 });
