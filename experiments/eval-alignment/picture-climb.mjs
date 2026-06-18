@@ -641,13 +641,13 @@ async function main() {
     const eaveY = CFG.eaveY;
     const closed = close_shell(occ);
     const gabled = apply_gable_roof(closed);
-    const cBeforeAll = eaveRingClosure(gabled, { floor: gabled.bounds.min[1], eaveY });
-    console.error(`\n[T-203 REBUILD] closed+gabled wall-plane closure: ${cBeforeAll.toFixed(3)}`);
+    const cBeforeAll = eaveRingClosure(gabled, { floor: gabled.bounds.min[1], eaveY, program: PROGRAM });
+    console.error(`\n[T-203 REBUILD] closed+gabled footprint closure: ${cBeforeAll.toFixed(3)}`);
     const rebuilt = rebuild_arch(gabled); // logs width/carved/framed/arched/sill/voussoir + the gate verdict
     const kept = rebuilt !== gabled && pendingRebuildCols; // the hand returned a gate-OK dressed build
     const aperCols = pendingRebuildCols ?? new Set();
-    const cBare = eaveRingClosure(rebuilt, { floor: rebuilt.bounds.min[1], eaveY });
-    const cExcept = eaveRingClosure(rebuilt, { floor: rebuilt.bounds.min[1], eaveY, openCols: aperCols });
+    const cBare = eaveRingClosure(rebuilt, { floor: rebuilt.bounds.min[1], eaveY, program: PROGRAM });
+    const cExcept = eaveRingClosure(rebuilt, { floor: rebuilt.bounds.min[1], eaveY, openCols: aperCols, program: PROGRAM });
     console.error(`[T-203 REBUILD] gate ${kept ? "PASSED — wide arched gate kept" : "REFUTED — reverted to frame (named bound)"}`);
     console.error(`[T-203 REBUILD] closure-except-aperture: bare ${cBare.toFixed(3)} (the gate swath reads as a hole) → with the ${aperCols.size} declared-open columns forgiven ${cExcept.toFixed(3)} ${cExcept >= FORM_READY_CLOSURE ? "✓ ≥ form-ready (close_shell will NOT re-fill the gate)" : "✗ still dips (S-202/S-203 coupling — named)"}`);
     await renderBesideConcept(rebuildArtifact(gabled, template), join(ROOT, CONCEPT), join(outDir, "before-beside.png"), { label: "closed+gabled (no gate)" });
@@ -686,11 +686,12 @@ async function main() {
   }
 
   // Form-before-detail ordering (T-197-01): the build's wall-band closure — the form-readiness scalar the
-  // ordering gate consumes. The SAME definition closeShell reports (eaveRingClosure), so there is no drift.
-  // CLOSURE-EXCEPT-APERTURE (T-203-01): once a wide-arch rebuild is KEPT, its declared-open columns
-  // (`openColumns`) are forgiven by the plane metric, so the form gate stays satisfied and the climb does not
-  // pick close_shell and re-fill the gate. Empty until a rebuild keeps → byte-identical to the T-202 metric.
-  const closureNow = (o) => eaveRingClosure(o, { floor: o.bounds.min[1], eaveY: CFG.eaveY, openCols: openColumns });
+  // ordering gate consumes. Measured on the ABSOLUTE PROGRAM FOOTPRINT (T-206-01, supersedes the T-202 plane
+  // clamp): an open colonnade reads ~0.6 (close_shell forced); proud relief is off-ring and ignored. The SAME
+  // metric closeShell reports, so the gate and the hand agree. CLOSURE-EXCEPT-APERTURE (T-203-01): once a
+  // wide-arch rebuild is KEPT, its declared-open columns (`openColumns`) are forgiven so the form gate stays
+  // satisfied and the climb does not pick close_shell and re-fill the gate.
+  const closureNow = (o) => eaveRingClosure(o, { floor: o.bounds.min[1], eaveY: CFG.eaveY, openCols: openColumns, program: PROGRAM });
 
   const trajectory = [];
   const history = [];
@@ -767,7 +768,7 @@ async function main() {
     // KEPT on a picture-score tie instead of rolled back (the T-198 deadlock).
     // the candidate's closure-except-aperture: a rebuild candidate forgives ITS OWN pending aperture columns
     // too, so the recorded closureAfter reflects the gate-surviving reading (not the mid-build dip).
-    const closureAfter = eaveRingClosure(cand, { floor: cand.bounds.min[1], eaveY: CFG.eaveY,
+    const closureAfter = eaveRingClosure(cand, { floor: cand.bounds.min[1], eaveY: CFG.eaveY, program: PROGRAM,
       openCols: pendingRebuildCols ? new Set([...openColumns, ...pendingRebuildCols]) : openColumns });
     // FORM-MOVE ROUTING (T-200-01, S-200): a wall-shell form move (close_shell/construct_walls) is decided on
     // closureOf ALONE — the picture vote (a 0–76 same-seed swing) is removed from its keep/rollback so the
