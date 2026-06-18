@@ -30,7 +30,7 @@ import { constructWalls, closeShell, eaveRingClosure } from "../../src/view/wall
 import { wallSkin } from "../../src/view/wall-skin.mjs";
 import { extractApertures, dressOpenings } from "../../src/view/opening-dressing.mjs";
 import { frameArchPlacements } from "../../src/view/arch-frame.mjs";
-import { carveTargetCells, apertureCoherenceGate, carveAperture, apertureColumns } from "../../src/view/aperture-carve.mjs";
+import { carveTargetCells, apertureCoherenceGate, carveAperture, apertureColumns, inheritedSlotResidual } from "../../src/view/aperture-carve.mjs";
 import { buildWallRelief } from "../../src/view/wall-relief.mjs";
 import { framingReport, targetRatiosOf } from "../../src/view/framing.mjs";
 import { composeRoofTreatment, bareBlock, deriveArchHead } from "../../src/view/treatment-grammar.mjs";
@@ -265,14 +265,28 @@ function carve_arch(occ) {
   const progSpan = ax === 2 ? program?.masses?.[0]?.rect?.d : program?.masses?.[0]?.rect?.w;
   const scale = (Number.isFinite(uMin) && progSpan) ? (uMax - uMin + 1) / progSpan : 1;
 
-  const { remove, target } = carveTargetCells(occ, declared, { programW: door.w, scale });
+  // T-210-01: centre on the wall face by construction (same faceSpan lever as rebuild_arch).
+  const faceSpan = (Number.isFinite(uMin) && Number.isFinite(uMax) && uMax >= uMin) ? { uLo: uMin, uHi: uMax } : undefined;
+  const { remove, target } = carveTargetCells(occ, declared, { programW: door.w, scale, faceSpan });
   if (!remove.size) { console.error("  [carve_arch] nothing to carve (slot already at width) — framing only"); return frame_arch(occ); }
   const carved = carveAperture(occ, remove);
   const wideAp = apertureFromTarget(target);
   const { placements, perOpening } = frameArchPlacements(carved, [wideAp], { frameBlock });
-  const dressed = occupancyFromCells([...occToCells(carved), ...placements.map((p) => ({ pos: p.pos, block: p.block }))]);
+  // INHERITED-SLOT CONFLICT (T-210-01): fill an off-centre slot left outside the centred span (exterior plane,
+  // air-only, wall field block — restoring the shell, not an air op). See rebuild_arch for the rationale.
+  const groundRole = program?.masses?.[0]?.walls?.ground?.role;
+  const wallField = (pack && groundRole) ? roleBlock(pack, groundRole) : "stone_bricks";
+  const residual = inheritedSlotResidual(declared, target);
+  const cposOf = (au, av, w) => { const p = [0, 0, 0]; p[ax] = au; p[1] = av; p[ax === 2 ? 0 : 2] = w; return p; };
+  const fill = [];
+  for (const au of residual.aus) for (let av = target.vLo; av <= target.vHi; av++) {
+    const p = cposOf(au, av, target.wStar);
+    if (!carved.solid(p[0], p[1], p[2])) fill.push({ pos: p, block: wallField });
+  }
+  const dressed = occupancyFromCells([...occToCells(carved), ...placements.map((p) => ({ pos: p.pos, block: p.block })), ...fill]);
 
   const gate = apertureCoherenceGate(occ, dressed, target, { floor: occ.bounds.min[1], eaveY: CFG.eaveY });
+  console.error(`  [carve_arch] centeredByConstruction=${target.centeredOnFace} span=[${target.uLo},${target.uHi}] inheritedSlot residual=${residual.aus.length} filled=${fill.length}`);
   for (const r of perOpening) console.error(`  [carve_arch] ${r.dir}: width=${target.width} carved=${remove.size} framed=${r.framed} arched=${r.arched}`);
   console.error(`  [carve_arch] gate ok=${gate.ok}${gate.reason ? ` — ${gate.reason}` : ""} (scope=${gate.scope.ok} coherent=${gate.coherent.ok} closure=${gate.closure.ok})`);
   if (gate.ok) return dressed;
@@ -316,7 +330,12 @@ function rebuild_arch(occ) {
   const progSpan = ax === 2 ? program?.masses?.[0]?.rect?.d : program?.masses?.[0]?.rect?.w;
   const scale = (Number.isFinite(uMin) && progSpan) ? (uMax - uMin + 1) / progSpan : 1;
 
-  const { remove, target } = carveTargetCells(occ, declared, { programW: door.w, scale });
+  // T-210-01 (S-210, E-54): centre the gate on its WALL FACE by construction — the wall-band u-span IS the face
+  // (the front face is recognition-declared via door.wall). faceSpan overrides the slot-centred placement so the
+  // gate lands centred regardless of where the (often GLB-inherited) slot sat. Finite-guarded so a degenerate
+  // band falls back to the legacy slot centre.
+  const faceSpan = (Number.isFinite(uMin) && Number.isFinite(uMax) && uMax >= uMin) ? { uLo: uMin, uHi: uMax } : undefined;
+  const { remove, target } = carveTargetCells(occ, declared, { programW: door.w, scale, faceSpan });
   if (!remove.size) { console.error("  [rebuild_arch] nothing to carve (slot already at width) — framing only"); return frame_arch(occ); }
   const carved = carveAperture(occ, remove);
 
@@ -331,7 +350,19 @@ function rebuild_arch(occ) {
     const p = posOf(au, target.vLo - 1, w);
     if (carved.solid(p[0], p[1], p[2])) sill.push({ pos: p, block: frameBlock });
   }
-  const dressed = occupancyFromCells([...occToCells(carved), ...placements.map((p) => ({ pos: p.pos, block: p.block })), ...sill]);
+  // INHERITED-SLOT CONFLICT (T-210-01): an off-centre slot left OUTSIDE the centred span reads as a second
+  // opening beside the gate (the SCOPE gate is blind to pre-existing air). FILL its exterior wall-plane cells
+  // back to solid with the wall field block — restoring the shell (adding wall, NOT an air op). Air-only, so it
+  // never recolours existing wall and is a no-op when close_shell already sealed the slot. Reported honestly.
+  const groundRole = program?.masses?.[0]?.walls?.ground?.role;
+  const wallField = (pack && groundRole) ? roleBlock(pack, groundRole) : "stone_bricks";
+  const residual = inheritedSlotResidual(declared, target);
+  const fill = [];
+  for (const au of residual.aus) for (let av = target.vLo; av <= target.vHi; av++) {
+    const p = posOf(au, av, target.wStar);
+    if (!carved.solid(p[0], p[1], p[2])) fill.push({ pos: p, block: wallField });
+  }
+  const dressed = occupancyFromCells([...occToCells(carved), ...placements.map((p) => ({ pos: p.pos, block: p.block })), ...sill, ...fill]);
 
   // S-179 voussoir reuse: name the wedge crown the arch ring built (evidence the head IS a voussoir curve).
   const archedAir = [];
@@ -345,6 +376,7 @@ function rebuild_arch(occ) {
   const radius = target.width / 2;
   const spring = Math.max(target.vLo + 1, target.vHi - Math.floor(radius));
   const gate = apertureCoherenceGate(occ, dressed, target, { floor: occ.bounds.min[1], eaveY: CFG.eaveY, arch: { spring } });
+  console.error(`  [rebuild_arch] centeredByConstruction=${target.centeredOnFace} faceW=${faceSpan ? faceSpan.uHi - faceSpan.uLo + 1 : "?"} span=[${target.uLo},${target.uHi}] inheritedSlot residual=${residual.aus.length}${residual.aus.length ? ` (au ${residual.aus.join(",")})` : ""} filled=${fill.length}`);
   for (const r of perOpening) console.error(`  [rebuild_arch] ${r.dir}: width=${target.width} carved=${remove.size} framed=${r.framed} arched=${r.arched} sill=${sill.length} voussoir=${vouss.voussoirs.length}${vouss.curve ? " (curved head)" : ""}`);
   console.error(`  [rebuild_arch] gate ok=${gate.ok}${gate.reason ? ` — ${gate.reason}` : ""} (scope=${gate.scope.ok} coherent=${gate.coherent.ok} [single=${gate.coherent.single} passage=${gate.coherent.passageContinuous} head=${gate.coherent.headBuilt}] closure=${gate.closure.ok})`);
   if (gate.ok) { pendingRebuildCols = apertureColumns(target); return dressed; }
