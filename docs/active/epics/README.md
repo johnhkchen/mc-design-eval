@@ -60,7 +60,11 @@ Source of truth: [`docs/specification.md`](../../specification.md).
 | E-48 | turn-the-loop-loose-picture-driven-climb    | high   | E-47                | §1, §7, §9     |
 | E-50 | accept-gate-follows-the-glance              | high   | E-48                | §1, §7, §9     |
 | E-51 | real-construction-hands-and-wider-eyes      | high   | E-50                | §1, §5, §6, §9 |
-| E-49 | generalize-the-climb-across-subjects        | medium | E-51                | §1, §7, §9     |
+| E-49 | credit-the-form-win-and-finish-the-gatehouse | high   | E-51                | §1, §7, §9     |
+| E-52 | finish-the-gatehouse-to-its-picture          | high   | E-49                | §1, §5, §6, §9 |
+| E-53 | form-readiness-truth-and-finish-the-gatehouse | high  | E-52                | §1, §5, §6, §9 |
+| E-54 | relief-tolerant-closure-and-the-m1-stop-line | high   | E-53                | §1, §5, §6, §9 |
+| E-55 | acceptance-gradient-and-the-finish-test      | high   | E-54                | §1, §7, §9     |
 
 > E-01…E-38 archived. E-39–E-43 done (feedback machinery → typed kind → faithful build → treatment grammar).
 > E-44 done — the crater REFUTED at VOTES=6 (gate is the MEASURE, not the build). E-45 done — **measure
@@ -74,6 +78,60 @@ Source of truth: [`docs/specification.md`](../../specification.md).
 > **E-47 (concept-image-conditioned style distance) active:** make the term read the picture (anchor the
 > expectation on the concept image, not the pack), then re-run the *same* E-46 gate; promote only on a clean
 > PICTURE-DRIVEN re-gate behind human sign-off. Forward plan: `docs/active/ROADMAP.md`.
+>
+> **E-48→E-51 (the build climb) done.** E-48 the build CLIMBED autonomously (box→gabled gatehouse, +52 — first
+> real build gain). E-50 the department-dominant accept-gate override followed the glance live but the climb
+> PLATEAUED (hands were recolor, not construction). E-51 built real construction hands (carve + relief +
+> close-shell), a form-before-detail ordering gate, framing eyes, and a subprocess-timeout guard — all proven
+> in isolation — but the metered climb **refuted M1 and named the fourth gap: a form-vs-score GATE-ARBITRATION
+> conflict** (the accept-gate rolls back `close_shell` on a picture-score tie, so the form-fix the ordering gate
+> demands is rejected → the shell never closes → the climb stalls at the open colonnade). **E-49 is repurposed**
+> from the (premature) generalize-across-subjects stub to **credit-the-form-win-and-finish-the-gatehouse** —
+> the M1-finish arbitration fix.
+>
+> **E-49 done (T-201) — the form-credit fix took live; the constraint moved from the instrument to construction
+> geometry.** The metered capstone climb broke the gate-arbitration deadlock (`close_shell` now sticks on a
+> tie), closed the shell, unlocked detail, cleared the WALL majors, and relief read as construction — the best
+> the gatehouse has looked. But it missed its picture (no arched gate, brown-not-slate roof, too-steep pitch)
+> and named a **fifth gap**: proud relief detail collapses the form-readiness metric (`eaveRingClosure`
+> 1.0→0.068), so the climb's own gate turns against the build. **E-52 (finish-the-gatehouse-to-its-picture)**
+> fixes the three ranked geometry gaps — form-metric invariance, wide-arch rebuild, roof slate+pitch — then
+> re-climbs for the M1 glance verdict. Generalizing across subjects moves to a future epic, shaped from the
+> outcome. One M1 house before multiplying.
+>
+> **E-52 done (T-205) — the capstone REGRESSED; the form metric was over-corrected.** The metered re-climb
+> stalled at score 0 (worse than E-49's 32) because **T-202 over-corrected**: its extent-clamp made the open
+> colonnade seed read 0.980 (form-ready), so `close_shell` was never picked, detail ran on an open form, the
+> build stayed a dark colonnade, and the judge scored it 0 / kept all majors (nothing ever cleared). The E-52
+> hands all *work* (pitch lever 1.68→1.34, arch rebuilt, relief applied) — the metric lied. **E-53
+> (form-readiness-truth-and-finish-the-gatehouse)** fixes the metric (measure on the absolute program
+> footprint: colonnade gaps read open, proud relief ignored), re-climbs to test if that alone lands M1, and
+> holds a detail-credit / score-0 cold-start fix as a **contingent** third story (built only if the re-climb
+> still stalls on a genuinely-closed form).
+>
+> **E-53 done — form fix worked, M1 not landed; the binding constraint is the MEASURE.** T-206 made the form
+> metric truthful (colonnade reads open, `close_shell` fires, shell closes & stays). T-207 then proved every
+> hand works geometrically on a closed form but the **median judge scores each detail move 0 and rolls it
+> back** (the wide-arch build drew one vote of 44 — the judge can see it, the median discards it). T-208 built a
+> **cold-start batch escape** that gets the climb off 0 (+20, a trustworthy glance signal) and produced the best
+> build of the arc (`beside-batch-rollback.png` — a dressed stone gatehouse) — but it was rejected because
+> `relief_walls` stands the wall proud of the footprint, so T-206's ring metric reads a proud-dressed *closed*
+> wall as open (1.000→0.068). **E-54 (relief-tolerant-closure-and-the-m1-stop-line)** makes the closure metric
+> tolerant of ±1 proud relief (holding "colonnade reads open"), makes the gate center on its face by
+> construction, re-climbs with the batch escape on, and draws a **pre-committed stop-line**: if the kept build
+> still isn't M1 on the glance, the next epic is a step-back (can the picture-climb finish *any* subject), not a
+> seventh gatehouse fix.
+>
+> **E-54 done — M1 near-miss, the STOP-LINE FIRED.** Both fixes worked (T-209 relief-tolerant closure held —
+> form stayed closed through dressing; T-210 centered the gate, which drew a 48 vote) but the kept build is a
+> dark boxy near-miss: a *form* move (`construct_walls` +8) lifted the score off the floor, **disengaging** the
+> cold-start batch escape (scoped to `score≤0`), so the dressing fell back to the **per-move median gate** —
+> which discarded the centered arch (`8/0/48`). Seven epics (E-48→E-54) on one house; the binding constraint
+> was the **measure** every time. Per the pre-commitment, the gatehouse-patch sequence **ends**. **E-55
+> (acceptance-gradient-and-the-finish-test)** is the step-back: build the quality-varied human-rankable test set
+> the E-38 finding named, spike accept-rules (batch-while-improving, non-median aggregator) against it, and
+> answer whether the picture-climb can finish *any* subject to M1 — or name the architecture ceiling.
+> Generalization deferred to a future **E-56**.
 
 ## Dependency graph
 
