@@ -1,0 +1,692 @@
+{
+  "schema": "picture-climb/v1",
+  "subject": "gatehouse",
+  "seed": "benchmarks/sculpture/generated/gatehouse/artifact.json",
+  "program": "benchmarks/sculpture/recognition/gatehouse.program.json",
+  "pack": "rustic",
+  "concept": "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+  "tier": "strong",
+  "votes": 3,
+  "margin": 4,
+  "stopReason": "agent-done",
+  "observedScoreSpread": {
+    "min": 0,
+    "max": 32,
+    "allRoundVotes": [
+      0,
+      0,
+      0,
+      0,
+      20,
+      32
+    ]
+  },
+  "framingResidual": [],
+  "formReadyClosure": 0.9,
+  "closureFirst": 0.6666666666666666,
+  "closureLast": 0.6666666666666666,
+  "subprocessTimeoutMs": 180000,
+  "votesTimedOut": 0,
+  "trajectory": [
+    {
+      "round": 0,
+      "score": 16,
+      "evidence": {
+        "score": 16,
+        "nItems": 6,
+        "nMajor": 5,
+        "nWrongStyle": 3,
+        "wrongStyleBreadth": 2,
+        "departments": [
+          "WALL",
+          "ROOF",
+          "OPENING",
+          "WALL",
+          "WALL",
+          "OPENING"
+        ],
+        "missing": [
+          "The grey coursed stone-brick field; solid watertight wall surface",
+          "Gable form (two slopes to a ridge) and the lighter stone eave/verge course",
+          "The arched timber gateway entirely",
+          "Cobblestone rubble corner quoins",
+          "A closed, watertight envelope",
+          "The paired slit windows"
+        ]
+      },
+      "items": [
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Walls clad in a uniformly dark, vertically-striped material reading as dark logs/planks, not grey stone; faces are also ragged with missing chunks",
+          "missing": "The grey coursed stone-brick field; solid watertight wall surface",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "A stepped, terraced pyramidal dark cap sitting on the box; no clear pitched gable ridge, no lighter eave/verge banding",
+          "missing": "Gable form (two slopes to a ridge) and the lighter stone eave/verge course",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "Ragged gaps in the wall; no framed arch, no timber surround, no centered passage",
+          "missing": "The arched timber gateway entirely",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Corners are the same dark striped material as the field; no rubble quoins, no light/dark contrast at the edges",
+          "missing": "Cobblestone rubble corner quoins",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Walls are holey and ragged — vertical gaps and missing sections leave the shell open in several places",
+          "missing": "A closed, watertight envelope",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "No readable slit windows on the eave walls; the dark ragged surface shows only incidental gaps",
+          "missing": "The paired slit windows",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "close_shell",
+        "reason": "Shell is open (closure 0.67) and detail tools are locked; must close the form before any other divergence can be addressed."
+      },
+      "applied": false,
+      "accepted": false,
+      "framing": {
+        "orientation": {
+          "axis": null,
+          "frontAxis": "x",
+          "frontSide": "-x",
+          "gableFacesFront": null,
+          "flagged": false,
+          "severity": null,
+          "note": "orientation SKIPPED (front=x, ridge=? — insufficient evidence)"
+        },
+        "scale": {
+          "build": {
+            "aspect": 1,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "target": {
+            "aspect": 1,
+            "ridgeToEave": 1.35,
+            "roofShare": 0.2593
+          },
+          "deltas": {
+            "aspect": 0,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "flagged": false,
+          "severity": null,
+          "note": "proportions within 0.2 of the recognized intent (uniform size is framing, not a divergence)"
+        },
+        "flags": [],
+        "residual": []
+      },
+      "closure": 0.6666666666666666,
+      "voteOutcomes": [
+        {
+          "vote": 1,
+          "status": "ok",
+          "ms": 56302
+        },
+        {
+          "vote": 2,
+          "status": "ok",
+          "ms": 49360
+        },
+        {
+          "vote": 3,
+          "status": "ok",
+          "ms": 47315
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "score": 16,
+      "evidence": {
+        "score": 16,
+        "nItems": 6,
+        "nMajor": 5,
+        "nWrongStyle": 3,
+        "wrongStyleBreadth": 2,
+        "departments": [
+          "WALL",
+          "ROOF",
+          "OPENING",
+          "WALL",
+          "WALL",
+          "OPENING"
+        ],
+        "missing": [
+          "The grey coursed stone-brick field; solid watertight wall surface",
+          "Gable form (two slopes to a ridge) and the lighter stone eave/verge course",
+          "The arched timber gateway entirely",
+          "Cobblestone rubble corner quoins",
+          "A closed, watertight envelope",
+          "The paired slit windows"
+        ]
+      },
+      "items": [
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Walls clad in a uniformly dark, vertically-striped material reading as dark logs/planks, not grey stone; faces are also ragged with missing chunks",
+          "missing": "The grey coursed stone-brick field; solid watertight wall surface",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "A stepped, terraced pyramidal dark cap sitting on the box; no clear pitched gable ridge, no lighter eave/verge banding",
+          "missing": "Gable form (two slopes to a ridge) and the lighter stone eave/verge course",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "Ragged gaps in the wall; no framed arch, no timber surround, no centered passage",
+          "missing": "The arched timber gateway entirely",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Corners are the same dark striped material as the field; no rubble quoins, no light/dark contrast at the edges",
+          "missing": "Cobblestone rubble corner quoins",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Walls are holey and ragged — vertical gaps and missing sections leave the shell open in several places",
+          "missing": "A closed, watertight envelope",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "No readable slit windows on the eave walls; the dark ragged surface shows only incidental gaps",
+          "missing": "The paired slit windows",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "close_shell",
+        "reason": "Shell is open (closure 0.67) and detail tools are locked; must close the form before any other divergence can be addressed."
+      },
+      "applied": true,
+      "accepted": false,
+      "gate": {
+        "accept": false,
+        "delta": -16,
+        "reason": "form: closure rose but blocked (new major / net-grow)"
+      },
+      "scoreAfter": {
+        "score": 0,
+        "scores": [
+          0,
+          0,
+          0
+        ]
+      },
+      "targetDepartments": [
+        "WALL"
+      ],
+      "deptMajorsBefore": {
+        "WALL": 3,
+        "ROOF": 1,
+        "OPENING": 1
+      },
+      "deptMajorsAfter": {
+        "ROOF": 1,
+        "OPENING": 2,
+        "WALL": 2
+      },
+      "deptItemsBefore": {
+        "WALL": {
+          "major": 3,
+          "minor": 0
+        },
+        "ROOF": {
+          "major": 1,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        }
+      },
+      "deptItemsAfter": {
+        "ROOF": {
+          "major": 1,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 2,
+          "minor": 0
+        },
+        "WALL": {
+          "major": 2,
+          "minor": 0
+        }
+      },
+      "framing": {
+        "orientation": {
+          "axis": null,
+          "frontAxis": "x",
+          "frontSide": "-x",
+          "gableFacesFront": null,
+          "flagged": false,
+          "severity": null,
+          "note": "orientation SKIPPED (front=x, ridge=? — insufficient evidence)"
+        },
+        "scale": {
+          "build": {
+            "aspect": 1,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "target": {
+            "aspect": 1,
+            "ridgeToEave": 1.35,
+            "roofShare": 0.2593
+          },
+          "deltas": {
+            "aspect": 0,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "flagged": false,
+          "severity": null,
+          "note": "proportions within 0.2 of the recognized intent (uniform size is framing, not a divergence)"
+        },
+        "flags": [],
+        "residual": []
+      },
+      "closure": 0.6666666666666666,
+      "closureAfter": 1,
+      "voteOutcomes": [
+        {
+          "vote": 1,
+          "status": "ok",
+          "ms": 37917
+        },
+        {
+          "vote": 2,
+          "status": "ok",
+          "ms": 35753
+        },
+        {
+          "vote": 3,
+          "status": "ok",
+          "ms": 29077
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "score": 16,
+      "evidence": {
+        "score": 16,
+        "nItems": 6,
+        "nMajor": 5,
+        "nWrongStyle": 3,
+        "wrongStyleBreadth": 2,
+        "departments": [
+          "WALL",
+          "ROOF",
+          "OPENING",
+          "WALL",
+          "WALL",
+          "OPENING"
+        ],
+        "missing": [
+          "The grey coursed stone-brick field; solid watertight wall surface",
+          "Gable form (two slopes to a ridge) and the lighter stone eave/verge course",
+          "The arched timber gateway entirely",
+          "Cobblestone rubble corner quoins",
+          "A closed, watertight envelope",
+          "The paired slit windows"
+        ]
+      },
+      "items": [
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Walls clad in a uniformly dark, vertically-striped material reading as dark logs/planks, not grey stone; faces are also ragged with missing chunks",
+          "missing": "The grey coursed stone-brick field; solid watertight wall surface",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "ROOF",
+          "severity": "major",
+          "present": "A stepped, terraced pyramidal dark cap sitting on the box; no clear pitched gable ridge, no lighter eave/verge banding",
+          "missing": "Gable form (two slopes to a ridge) and the lighter stone eave/verge course",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "OPENING",
+          "severity": "major",
+          "present": "Ragged gaps in the wall; no framed arch, no timber surround, no centered passage",
+          "missing": "The arched timber gateway entirely",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Corners are the same dark striped material as the field; no rubble quoins, no light/dark contrast at the edges",
+          "missing": "Cobblestone rubble corner quoins",
+          "kind": "replace",
+          "styleClass": "wrong-style"
+        },
+        {
+          "department": "WALL",
+          "severity": "major",
+          "present": "Walls are holey and ragged — vertical gaps and missing sections leave the shell open in several places",
+          "missing": "A closed, watertight envelope",
+          "kind": "add",
+          "styleClass": "absent"
+        },
+        {
+          "department": "OPENING",
+          "severity": "minor",
+          "present": "No readable slit windows on the eave walls; the dark ragged surface shows only incidental gaps",
+          "missing": "The paired slit windows",
+          "kind": "add",
+          "styleClass": "absent"
+        }
+      ],
+      "pick": {
+        "tool": "construct_walls",
+        "reason": "close_shell was rolled back and is barred from reuse; the shell is still open (0.67) and the worst remaining divergence is the missing closed watertight envelope. construct_walls rebuilds from the program masses/roles rather than the occupancy footprint, giving it a better chance to bridge the colonnade gaps and lay down the grey stone-brick field in one pass."
+      },
+      "applied": true,
+      "accepted": false,
+      "gate": {
+        "accept": false,
+        "delta": 10,
+        "reason": "form: no closure gain (0.667→0.702)"
+      },
+      "scoreAfter": {
+        "score": 26,
+        "scores": [
+          0,
+          20,
+          32
+        ]
+      },
+      "targetDepartments": [
+        "WALL",
+        "OPENING"
+      ],
+      "deptMajorsBefore": {
+        "WALL": 3,
+        "ROOF": 1,
+        "OPENING": 1
+      },
+      "deptMajorsAfter": {
+        "WALL": 1,
+        "OPENING": 2
+      },
+      "deptItemsBefore": {
+        "WALL": {
+          "major": 3,
+          "minor": 0
+        },
+        "ROOF": {
+          "major": 1,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 1,
+          "minor": 1
+        }
+      },
+      "deptItemsAfter": {
+        "WALL": {
+          "major": 1,
+          "minor": 0
+        },
+        "OPENING": {
+          "major": 2,
+          "minor": 0
+        },
+        "ROOF": {
+          "major": 0,
+          "minor": 1
+        }
+      },
+      "framing": {
+        "orientation": {
+          "axis": null,
+          "frontAxis": "x",
+          "frontSide": "-x",
+          "gableFacesFront": null,
+          "flagged": false,
+          "severity": null,
+          "note": "orientation SKIPPED (front=x, ridge=? — insufficient evidence)"
+        },
+        "scale": {
+          "build": {
+            "aspect": 1,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "target": {
+            "aspect": 1,
+            "ridgeToEave": 1.35,
+            "roofShare": 0.2593
+          },
+          "deltas": {
+            "aspect": 0,
+            "ridgeToEave": null,
+            "roofShare": null
+          },
+          "flagged": false,
+          "severity": null,
+          "note": "proportions within 0.2 of the recognized intent (uniform size is framing, not a divergence)"
+        },
+        "flags": [],
+        "residual": []
+      },
+      "closure": 0.6666666666666666,
+      "closureAfter": 0.7019230769230769,
+      "voteOutcomes": [
+        {
+          "vote": 1,
+          "status": "ok",
+          "ms": 28231
+        },
+        {
+          "vote": 2,
+          "status": "ok",
+          "ms": 44272
+        },
+        {
+          "vote": 3,
+          "status": "ok",
+          "ms": 32686
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "score": 16,
+      "items": [],
+      "pick": {
+        "tool": "—"
+      },
+      "applied": false,
+      "accepted": false,
+      "terminal": true
+    }
+  ],
+  "inventory": {
+    "actedOn": [],
+    "eyesOnly": [
+      {
+        "department": "WALL",
+        "namedItems": [
+          {
+            "round": 0,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "The grey coursed stone-brick field; solid watertight wall surface"
+          },
+          {
+            "round": 0,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "Cobblestone rubble corner quoins"
+          },
+          {
+            "round": 0,
+            "kind": "add",
+            "severity": "major",
+            "missing": "A closed, watertight envelope"
+          },
+          {
+            "round": 1,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "The grey coursed stone-brick field; solid watertight wall surface"
+          },
+          {
+            "round": 1,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "Cobblestone rubble corner quoins"
+          },
+          {
+            "round": 1,
+            "kind": "add",
+            "severity": "major",
+            "missing": "A closed, watertight envelope"
+          },
+          {
+            "round": 2,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "The grey coursed stone-brick field; solid watertight wall surface"
+          },
+          {
+            "round": 2,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "Cobblestone rubble corner quoins"
+          },
+          {
+            "round": 2,
+            "kind": "add",
+            "severity": "major",
+            "missing": "A closed, watertight envelope"
+          }
+        ]
+      },
+      {
+        "department": "ROOF",
+        "namedItems": [
+          {
+            "round": 0,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "Gable form (two slopes to a ridge) and the lighter stone eave/verge course"
+          },
+          {
+            "round": 1,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "Gable form (two slopes to a ridge) and the lighter stone eave/verge course"
+          },
+          {
+            "round": 2,
+            "kind": "replace",
+            "severity": "major",
+            "missing": "Gable form (two slopes to a ridge) and the lighter stone eave/verge course"
+          }
+        ]
+      },
+      {
+        "department": "OPENING",
+        "namedItems": [
+          {
+            "round": 0,
+            "kind": "add",
+            "severity": "major",
+            "missing": "The arched timber gateway entirely"
+          },
+          {
+            "round": 0,
+            "kind": "add",
+            "severity": "minor",
+            "missing": "The paired slit windows"
+          },
+          {
+            "round": 1,
+            "kind": "add",
+            "severity": "major",
+            "missing": "The arched timber gateway entirely"
+          },
+          {
+            "round": 1,
+            "kind": "add",
+            "severity": "minor",
+            "missing": "The paired slit windows"
+          },
+          {
+            "round": 2,
+            "kind": "add",
+            "severity": "major",
+            "missing": "The arched timber gateway entirely"
+          },
+          {
+            "round": 2,
+            "kind": "add",
+            "severity": "minor",
+            "missing": "The paired slit windows"
+          }
+        ]
+      }
+    ],
+    "verdict": {
+      "climbed": false,
+      "stalled": true,
+      "oscillated": false,
+      "actionableFrac": 0,
+      "scoreFirst": 16,
+      "scoreLast": 16,
+      "delta": 0
+    }
+  }
+}
