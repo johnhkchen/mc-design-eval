@@ -1,0 +1,155 @@
+{
+  "schema": "accept-rule-corpus/v1",
+  "ticket": "T-212-01",
+  "story": "S-212",
+  "epic": "E-55",
+  "subject": "gatehouse",
+  "concept": "benchmarks/sculpture/runs/015-vBuilding-a-stone-gatehouse-with-a-peaked-gable-roof-and-an-arched-gate/concept.png",
+  "note": "Quality-varied climb-state corpus for diagnosing the creation-loop accept-rule (per-move median + floor-only batch) against a human glance-rank. References on-disk T-208/T-211 trajectory states + beside renders; copies the rule-input fields verbatim from those trajectory JSONs (single source of truth). Validates the creation-loop accept-rule, NEVER the frozen DiagnoseBuild scorer.",
+  "glanceRank": {
+    "source": "agent-vision-glance over the on-disk renders vs concept.png, pending human confirmation",
+    "order": ["S0", "S1", "S2", "S3", "S4", "S5"],
+    "comment": "worst -> best. Mass-level reads (pale stone field, the gable roof, the centered arch) weighted over minor banding/slits, as a glance does.",
+    "contestableAdjacencies": [["S4", "S5"]],
+    "contestableNote": "S4 has a crisp centered arch but is dark and roofless; S5 has roof + pale stone (mass-level) but a weaker arch. Ranked S5>S4 (a roofed pale mass reads as 'the picture' more than a dark roofless box-with-a-hole). A human may flip this one adjacency; it does NOT change the headline (both S4 and S5 are KEEP-worthy moves the current rule rolled back)."
+  },
+  "states": [
+    {
+      "id": "S0",
+      "label": "seed open colonnade (roofless, ragged, no walls)",
+      "rank": 1,
+      "render": "docs/active/work/T-211-01/beside-first.png",
+      "renderless": false,
+      "source": { "trajectory": "docs/active/work/T-211-01/trajectory.json", "round": 0 },
+      "scores": [0, 0, 0],
+      "medianScore": 0,
+      "evidence": { "nMajor": 4, "wrongStyleBreadth": 2 },
+      "deptMajors": { "ROOF": 1, "WALL": 2, "OPENING": 1 },
+      "closure": 0.6666666666666666
+    },
+    {
+      "id": "S1",
+      "label": "closed dark box (form reads; dark, no quoins, no roof, no gate)",
+      "rank": 2,
+      "render": null,
+      "renderless": true,
+      "renderlessNote": "close_shell was kept but never rendered standalone; glance position inferred from the trajectory (closed form, no detail). Scored 0.",
+      "source": { "trajectory": "docs/active/work/T-211-01/trajectory.json", "round": 1, "stage": "after close_shell (kept)" },
+      "scores": [0, 0, 0],
+      "medianScore": 0,
+      "evidence": { "nMajor": 4, "wrongStyleBreadth": 2 },
+      "deptMajors": { "ROOF": 1, "WALL": 2, "OPENING": 1 },
+      "closure": 1
+    },
+    {
+      "id": "S2",
+      "label": "dark box + partial gable (a roof begins; dark, no quoins, no gate)",
+      "rank": 3,
+      "render": null,
+      "renderless": true,
+      "renderlessNote": "apply_gable_roof was rolled back, never rendered standalone; glance position inferred (roof mass added over the box).",
+      "source": { "trajectory": "docs/active/work/T-211-01/trajectory.json", "round": 2, "stage": "after apply_gable_roof (rolled back)" },
+      "scores": [0, 12, 0],
+      "medianScore": 0,
+      "evidence": { "nMajor": 4, "wrongStyleBreadth": 2 },
+      "deptMajors": { "OPENING": 2, "WALL": 1, "ROOF": 1 },
+      "closure": 1
+    },
+    {
+      "id": "S3",
+      "label": "dark dressed walls + light quoins + stepped cap (KEPT high-water; no roof, no gate)",
+      "rank": 4,
+      "render": "docs/active/work/T-211-01/beside-kept.png",
+      "renderless": false,
+      "source": { "trajectory": "docs/active/work/T-211-01/trajectory.json", "round": 3, "stage": "after construct_walls (kept)" },
+      "scores": [8, 8, 8],
+      "medianScore": 8,
+      "evidence": { "nMajor": 3, "wrongStyleBreadth": 2 },
+      "deptMajors": { "ROOF": 1, "WALL": 1, "OPENING": 1 },
+      "closure": 1
+    },
+    {
+      "id": "S4",
+      "label": "+ centered arched gate (dark walls + quoins + the defining gatehouse feature; dark, roofless)",
+      "rank": 5,
+      "render": "docs/active/work/T-211-01/beside-arch-rolledback.png",
+      "renderless": false,
+      "source": { "trajectory": "docs/active/work/T-211-01/trajectory.json", "round": 4, "stage": "after rebuild_arch (rolled back)" },
+      "scores": [8, 0, 48],
+      "medianScore": 8,
+      "evidence": { "nMajor": 3, "wrongStyleBreadth": 2 },
+      "deptMajors": { "ROOF": 1, "WALL": 1, "OPENING": 1 },
+      "closure": 1
+    },
+    {
+      "id": "S5",
+      "label": "+ dressed compound: PALE walls + quoins + gabled ROOF (most concept-like mass the climb produced)",
+      "rank": 6,
+      "render": "docs/active/work/T-208-01/beside-batch-rollback.png",
+      "renderless": false,
+      "source": { "trajectory": "docs/active/work/T-208-01/trajectory.json", "round": 2, "stage": "after BATCH[apply_gable_roof+rebuild_arch+relief_walls] (rolled back)" },
+      "scores": [20, 20, 0],
+      "medianScore": 20,
+      "evidence": { "nMajor": 2, "wrongStyleBreadth": 2 },
+      "deptMajors": { "ROOF": 1, "OPENING": 1 },
+      "closure": 1,
+      "closureAfterRecorded": 0.06779661016949153,
+      "closureAfterCorrected": 1,
+      "staleClosureNote": "This state is from the T-208 run, which executed BEFORE the T-209 relief-tolerant closure fix. The recorded closureAfter=0.068 is a FALSE reopen (the old eaveRingClosure folded the relief into the perimeter). T-209 (held in T-211, closure stayed 1.000 through dressing) makes the corrected closure >=0.9 -> use closureAfterCorrected for the current-rule replay."
+    }
+  ],
+  "moves": [
+    {
+      "id": "M1", "tool": "close_shell", "from": "S0", "to": "S1",
+      "trajectory": "docs/active/work/T-211-01/trajectory.json", "round": 1,
+      "kind": "per-move", "isFormMove": true,
+      "recordedDecision": true, "recordedReason": "closure +0.333 (0.667->1.000) form-credit",
+      "glanceVerdict": "keep"
+    },
+    {
+      "id": "M2", "tool": "apply_gable_roof", "from": "S1", "to": "S2",
+      "trajectory": "docs/active/work/T-211-01/trajectory.json", "round": 2,
+      "kind": "batch", "isFormMove": false, "atFloor": true,
+      "recordedDecision": false, "recordedReason": "compound tie at floor — no read (single-pick batch at floor; construct_walls form-move broke the batch)",
+      "glanceVerdict": "keep",
+      "disagreement": "median([0,12,0])=0 discards the 12; rolled back a roof move the glance keeps."
+    },
+    {
+      "id": "M3", "tool": "construct_walls", "from": "S1", "to": "S3",
+      "trajectory": "docs/active/work/T-211-01/trajectory.json", "round": 3,
+      "kind": "per-move", "isFormMove": true,
+      "recordedDecision": true, "recordedReason": "improved +8",
+      "glanceVerdict": "keep",
+      "fromNote": "after M2 (gable) rolled back, the build is the S1 closed box; construct_walls dressed it to S3."
+    },
+    {
+      "id": "M4", "tool": "rebuild_arch", "from": "S3", "to": "S4",
+      "trajectory": "docs/active/work/T-211-01/trajectory.json", "round": 4,
+      "kind": "per-move", "isFormMove": false,
+      "recordedDecision": false, "recordedReason": "tie (0): no shrink",
+      "glanceVerdict": "keep",
+      "headline": true,
+      "disagreement": "THE HEADLINE. median([8,0,48])=8 vs before 8 -> delta 0 -> tie-no-shrink -> rollback. The 48 (a judge seeing the centered arch land) is discarded. The build that looks MOST like the concept's defining feature is thrown away."
+    },
+    {
+      "id": "M5", "tool": "frame_arch", "from": "S3", "to": "S3+frame",
+      "trajectory": "docs/active/work/T-211-01/trajectory.json", "round": 5,
+      "kind": "per-move", "isFormMove": false,
+      "recordedDecision": false, "recordedReason": "regressed -8",
+      "glanceVerdict": "ambiguous-excluded",
+      "excludedNote": "No standalone render; a recess-only frame on the gate void after the arch was rolled back. median([8,0,0])=0 -> regressed -8. Excluded from the agreement fraction (cannot glance it honestly)."
+    },
+    {
+      "id": "M6", "tool": "batch[apply_gable_roof+rebuild_arch+relief_walls]", "from": "S1", "to": "S5",
+      "trajectory": "docs/active/work/T-208-01/trajectory.json", "round": 2,
+      "kind": "batch", "atFloor": true,
+      "recordedDecision": false, "recordedReason": "batch reopened the form (closure 1.000->0.068) [STALE pre-T-209]",
+      "glanceVerdict": "keep",
+      "disagreement": "Under the recorded STALE closure the batch is rejected (the bug T-209 fixed). Under T-209-corrected closure (>=0.9) the batch ACCEPTS (compound +20 off the floor) — BUT only because S5 was reached AT the score floor. The same dressing reached OFF the floor (T-211, after construct_walls' +8) gets the per-move median gate and is rolled back. The floor-only-batch asymmetry."
+    }
+  ],
+  "agreementSpec": {
+    "definition": "For each applied move: glanceVerdict = keep iff rank(to) > rank(from). ruleVerdict = the current accept-rule's recomputed decision. agreement = fraction of (non-excluded) moves where the two match.",
+    "frozenInstrument": "untouched — this validates the creation-loop accept-rule (acceptsRound/acceptsBatch), never the frozen DiagnoseBuild scorer."
+  }
+}

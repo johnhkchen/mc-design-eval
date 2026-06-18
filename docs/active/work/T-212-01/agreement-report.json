@@ -1,0 +1,346 @@
+{
+  "schema": "accept-rule-agreement/v1",
+  "ticket": "T-212-01",
+  "subject": "gatehouse",
+  "corpus": "/Volumes/ext1/swe/repos/mc-design-eval/docs/active/work/T-212-01/corpus.json",
+  "glanceRank": {
+    "source": "agent-vision-glance over the on-disk renders vs concept.png, pending human confirmation",
+    "order": [
+      "S0",
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5"
+    ],
+    "comment": "worst -> best. Mass-level reads (pale stone field, the gable roof, the centered arch) weighted over minor banding/slits, as a glance does.",
+    "contestableAdjacencies": [
+      [
+        "S4",
+        "S5"
+      ]
+    ],
+    "contestableNote": "S4 has a crisp centered arch but is dark and roofless; S5 has roof + pale stone (mass-level) but a weaker arch. Ranked S5>S4 (a roofed pale mass reads as 'the picture' more than a dark roofless box-with-a-hole). A human may flip this one adjacency; it does NOT change the headline (both S4 and S5 are KEEP-worthy moves the current rule rolled back)."
+  },
+  "reproducibility": {
+    "allReproducible": true,
+    "failures": []
+  },
+  "agreement": {
+    "matches": 2,
+    "total": 5,
+    "fraction": 0.4,
+    "disagreements": [
+      {
+        "id": "M2",
+        "tool": "apply_gable_roof",
+        "transition": "S1->S2",
+        "scores": [
+          0,
+          12,
+          0
+        ],
+        "glance": "keep",
+        "rule": "rollback",
+        "ruleReason": "compound tie at floor — no read (→ de-noise the judge)"
+      },
+      {
+        "id": "M4",
+        "tool": "rebuild_arch",
+        "transition": "S3->S4",
+        "scores": [
+          8,
+          0,
+          48
+        ],
+        "glance": "keep",
+        "rule": "rollback",
+        "ruleReason": "tie (0): no shrink"
+      },
+      {
+        "id": "M6",
+        "tool": "batch[apply_gable_roof+rebuild_arch+relief_walls]",
+        "transition": "S1->S5",
+        "scores": [
+          20,
+          20,
+          0
+        ],
+        "glance": "keep",
+        "rule": "rollback",
+        "ruleReason": "batch reopened the form (closure 1.000→0.068)"
+      }
+    ]
+  },
+  "moves": [
+    {
+      "id": "M1",
+      "tool": "close_shell",
+      "from": "S0",
+      "to": "S1",
+      "kind": "per-move",
+      "scores": [
+        0,
+        0,
+        0
+      ],
+      "median": 0,
+      "max": 0,
+      "glanceVerdict": "keep",
+      "glanceKeep": true,
+      "ruleDecision": true,
+      "ruleReason": "closure +0.333 (0.667→1.000) form-credit",
+      "recordedDecision": true,
+      "reproducible": true,
+      "agree": true,
+      "atFloor": null
+    },
+    {
+      "id": "M2",
+      "tool": "apply_gable_roof",
+      "from": "S1",
+      "to": "S2",
+      "kind": "batch",
+      "scores": [
+        0,
+        12,
+        0
+      ],
+      "median": 0,
+      "max": 12,
+      "glanceVerdict": "keep",
+      "glanceKeep": true,
+      "ruleDecision": false,
+      "ruleReason": "compound tie at floor — no read (→ de-noise the judge)",
+      "recordedDecision": false,
+      "reproducible": true,
+      "agree": false,
+      "atFloor": true
+    },
+    {
+      "id": "M3",
+      "tool": "construct_walls",
+      "from": "S1",
+      "to": "S3",
+      "kind": "per-move",
+      "scores": [
+        8,
+        8,
+        8
+      ],
+      "median": 8,
+      "max": 8,
+      "glanceVerdict": "keep",
+      "glanceKeep": true,
+      "ruleDecision": true,
+      "ruleReason": "improved +8",
+      "recordedDecision": true,
+      "reproducible": true,
+      "agree": true,
+      "atFloor": null
+    },
+    {
+      "id": "M4",
+      "tool": "rebuild_arch",
+      "from": "S3",
+      "to": "S4",
+      "kind": "per-move",
+      "scores": [
+        8,
+        0,
+        48
+      ],
+      "median": 8,
+      "max": 48,
+      "glanceVerdict": "keep",
+      "glanceKeep": true,
+      "ruleDecision": false,
+      "ruleReason": "tie (0): no shrink",
+      "recordedDecision": false,
+      "reproducible": true,
+      "agree": false,
+      "atFloor": null
+    },
+    {
+      "id": "M5",
+      "tool": "frame_arch",
+      "from": "S3",
+      "to": "S3+frame",
+      "kind": "per-move",
+      "scores": [
+        8,
+        0,
+        0
+      ],
+      "median": 0,
+      "max": 8,
+      "glanceVerdict": "ambiguous-excluded",
+      "glanceKeep": null,
+      "ruleDecision": false,
+      "ruleReason": "regressed -8",
+      "recordedDecision": false,
+      "reproducible": true,
+      "agree": null,
+      "atFloor": null
+    },
+    {
+      "id": "M6",
+      "tool": "batch[apply_gable_roof+rebuild_arch+relief_walls]",
+      "from": "S1",
+      "to": "S5",
+      "kind": "batch",
+      "scores": [
+        20,
+        20,
+        0
+      ],
+      "median": 20,
+      "max": 20,
+      "glanceVerdict": "keep",
+      "glanceKeep": true,
+      "ruleDecision": false,
+      "ruleReason": "batch reopened the form (closure 1.000→0.068)",
+      "recordedDecision": false,
+      "reproducible": true,
+      "agree": false,
+      "atFloor": true,
+      "stale": {
+        "id": "M6",
+        "tool": "batch[apply_gable_roof+rebuild_arch+relief_walls]",
+        "from": "S1",
+        "to": "S5",
+        "kind": "batch",
+        "scores": [
+          20,
+          20,
+          0
+        ],
+        "median": 20,
+        "max": 20,
+        "glanceVerdict": "keep",
+        "glanceKeep": true,
+        "ruleDecision": false,
+        "ruleReason": "batch reopened the form (closure 1.000→0.068)",
+        "recordedDecision": false,
+        "reproducible": true,
+        "agree": false,
+        "atFloor": true
+      },
+      "corrected": {
+        "id": "M6",
+        "tool": "batch[apply_gable_roof+rebuild_arch+relief_walls]",
+        "from": "S1",
+        "to": "S5",
+        "kind": "batch",
+        "scores": [
+          20,
+          20,
+          0
+        ],
+        "median": 20,
+        "max": 20,
+        "glanceVerdict": "keep",
+        "glanceKeep": true,
+        "ruleDecision": true,
+        "ruleReason": "compound +20 (off the floor)",
+        "recordedDecision": false,
+        "reproducible": false,
+        "agree": true,
+        "atFloor": true
+      }
+    }
+  ],
+  "aggregatorPreview": [
+    {
+      "id": "M1",
+      "votes": [
+        0,
+        0,
+        0
+      ],
+      "beforeMedian": 0,
+      "medianDelta": 0,
+      "medianKeep": false,
+      "maxDelta": 0,
+      "maxKeep": false,
+      "meanDelta": 0,
+      "meanKeep": false
+    },
+    {
+      "id": "M2",
+      "votes": [
+        0,
+        12,
+        0
+      ],
+      "beforeMedian": 0,
+      "medianDelta": 0,
+      "medianKeep": false,
+      "maxDelta": 12,
+      "maxKeep": true,
+      "meanDelta": 4,
+      "meanKeep": true
+    },
+    {
+      "id": "M3",
+      "votes": [
+        8,
+        8,
+        8
+      ],
+      "beforeMedian": 0,
+      "medianDelta": 8,
+      "medianKeep": true,
+      "maxDelta": 8,
+      "maxKeep": true,
+      "meanDelta": 8,
+      "meanKeep": true
+    },
+    {
+      "id": "M4",
+      "votes": [
+        8,
+        0,
+        48
+      ],
+      "beforeMedian": 8,
+      "medianDelta": 0,
+      "medianKeep": false,
+      "maxDelta": 40,
+      "maxKeep": true,
+      "meanDelta": 10.7,
+      "meanKeep": true
+    },
+    {
+      "id": "M5",
+      "votes": [
+        8,
+        0,
+        0
+      ],
+      "beforeMedian": 8,
+      "medianDelta": -8,
+      "medianKeep": false,
+      "maxDelta": 0,
+      "maxKeep": false,
+      "meanDelta": -5.3,
+      "meanKeep": false
+    },
+    {
+      "id": "M6",
+      "votes": [
+        20,
+        20,
+        0
+      ],
+      "beforeMedian": 0,
+      "medianDelta": 20,
+      "medianKeep": true,
+      "maxDelta": 20,
+      "maxKeep": true,
+      "meanDelta": 13.3,
+      "meanKeep": true
+    }
+  ],
+  "frozenInstrument": "untouched (acceptsRound/acceptsBatch imported read-only; no measurements/ change)"
+}
