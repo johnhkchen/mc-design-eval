@@ -84,7 +84,23 @@ const toB64 = async (p) => {
   const mediaType = buf.slice(0, 3).toString("hex") === "ffd8ff" ? "image/jpeg" : "image/png";
   return { base64: buf.toString("base64"), mediaType };
 };
-const parse = (t) => { const s = t.indexOf("{"), e = t.lastIndexOf("}"); return JSON.parse(t.slice(s, e + 1)); };
+// Extract the FIRST balanced-brace JSON object from a model reply (T-198-01). The old `slice(firstBrace,
+// lastBrace)` crashed when the agent emitted TWO objects (or an object + trailing prose) — the slice spanned
+// both → `Unexpected non-whitespace character after JSON`, which crashed the whole climb mid-run and lost the
+// trajectory. This scans for the first complete `{…}` (string-aware) and ignores anything after it.
+const parse = (t) => {
+  const s = t.indexOf("{");
+  if (s < 0) throw new Error(`no JSON object in reply: ${String(t).slice(0, 120)}`);
+  let depth = 0, inStr = false, esc = false;
+  for (let i = s; i < t.length; i++) {
+    const c = t[i];
+    if (inStr) { if (esc) esc = false; else if (c === "\\") esc = true; else if (c === '"') inStr = false; }
+    else if (c === '"') inStr = true;
+    else if (c === "{") depth++;
+    else if (c === "}" && --depth === 0) return JSON.parse(t.slice(s, i + 1));
+  }
+  throw new Error(`unbalanced JSON object in reply: ${t.slice(s, s + 120)}`);
+};
 const occToCells = (occ) => {
   const out = [];
   for (const [key, block] of occ.cells) out.push({ pos: key.split(",").map(Number), block, form: occ.forms.get(key), state: occ.states.get(key) });
@@ -455,8 +471,22 @@ async function agentPick(build, history, closure = null) {
     "Pick ONE tool:", MENU,
     'Output ONE JSON: {"tool":"<close_shell|apply_gable_roof|recolor_roof|construct_walls|add_timber_framing|frame_arch|carve_arch|articulate_walls|relief_walls|band_eave|done>","reason":"<short>"}',
   ].join("\n");
-  const { text } = await requestText({ prompt, model: AGENT_MODEL });
-  return parse(text);
+  // The agent-pick reply is bounded by the same subprocess guard, and made ROBUST to a malformed reply
+  // (T-198-01): a non-conforming pick must DEGRADE, never crash the climb and lose the trajectory. Try the
+  // reply; on a parse failure re-ask ONCE with a stern corrective; if that also fails, fall to a recorded
+  // `done` (the honest terminal) rather than throwing. Mirrors the handle-don't-reject seam lesson.
+  const ask = (extra) => requestText({ prompt: prompt + (extra ?? ""), model: AGENT_MODEL, timeoutMs: CLAUDE_SUBPROCESS_TIMEOUT_MS });
+  try {
+    return parse((await ask()).text);
+  } catch (e1) {
+    console.error(`  [agentPick] unparseable reply (${e1.message}) — re-asking once`);
+    try {
+      return parse((await ask("\n\nIMPORTANT: output EXACTLY ONE JSON object and nothing else — no second object, no prose.")).text);
+    } catch (e2) {
+      console.error(`  [agentPick] still unparseable (${e2.message}) — falling to \`done\` (recorded)`);
+      return { tool: "done", reason: "agent reply unparseable after one re-ask — terminating honestly" };
+    }
+  }
 }
 
 // ===================================== the loop with the accept-gate =====================================
