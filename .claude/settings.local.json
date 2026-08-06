@@ -1,0 +1,46 @@
+{
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "command": "test -x .lisa/hooks/on-idle.sh && .lisa/hooks/on-idle.sh",
+            "type": "command"
+          }
+        ],
+        "matcher": "idle_prompt"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "test -x .lisa/hooks/on-heartbeat.sh && .lisa/hooks/on-heartbeat.sh",
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "command": "test -x .lisa/hooks/on-clear.sh && .lisa/hooks/on-clear.sh",
+            "type": "command"
+          }
+        ],
+        "matcher": "clear"
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "command": "test -x .lisa/hooks/on-stop.sh && .lisa/hooks/on-stop.sh",
+            "type": "command"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -6,7 +6,7 @@ status: open
 priority: high
 depends_on: [E-50]
 spec: "§1, §5, §6, §9"
-stories: [S-194, S-195, S-196]
+stories: [S-194, S-195, S-196, S-197]
 ---
 
 ## Background (read this first — the plateau named the gap, and it's the same gap)
@@ -57,10 +57,22 @@ the loop carve openings.** Scoped as a **narrowing, not an abolition** (the way 
 - **S-195 — real wall-relief hand (construction, not recolor).** A hand that builds proud quoins/clinker
   *relief* (reuse the E-43 treatment-grammar relief ops as primitives), so the WALL major can actually clear
   and the concept's pale **dressed** stone reads — the lever `articulate_walls` lacked.
-- **S-196 — widen the critique's eyes + re-climb to the M1 finish.** Teach the picture-critique to see
-  **roof-orientation-vs-facade** and **scale/proportion** (the glance-audit gaps), so the loop can stall on
-  and fix them; then re-run the gatehouse climb with the new hands + wider eyes and judge on the glance: does
-  it now reach *its* picture (pale dressed walls, arched gate, dark roof, right orientation/scale)?
+- **S-196 — widen the critique's eyes** (roof-orientation-vs-facade + scale/proportion, the glance-audit gaps,
+  so the loop can stall on what it couldn't see). The integration re-climb is gated behind S-197 (it must
+  climb a *ready form*, not a colonnade).
+- **S-197 — form first: close the shell + climb ordering.** The T-194/T-195 renders showed the gatehouse is
+  an **open colonnade** — the carve and relief are correct but can't read because there's no closed wall under
+  them. Build a dense closed shell from the program footprint ([[wall-construct-needs-dense-shell]]), and make
+  the climb do **coarse form before fine detail** (detail tools gated on form-readiness). The reviewer's
+  task-ordering note, made structural.
+
+## Task-ordering principle (reviewer, 2026-06-17 — applies to the climb AND to ticket scoping)
+
+**Form before detail.** Carving a doorway, adding relief, banding eaves — these are *detail* operations that
+only read on a *ready form* (a closed, dense shell). The climb must sequence coarse→fine, not do everything at
+once up front; detail tools are gated on form-readiness (S-197). And **tickets stay one-stage** — the reviewer
+flagged T-196 bundling eyes + re-climb as "one ticket stuck running many stages"; the re-climb is now gated
+behind the form stage so it runs in order, and new work is scoped one focused stage per ticket.
 
 ## How this epic can fail (state it up front — anti-hedge)
 
