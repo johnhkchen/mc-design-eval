@@ -1,0 +1,62 @@
+{
+  "seq": 37,
+  "runId": "037-vRefRevise-designdoc",
+  "date": "2026-10-08",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-sonnet-5-5",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "persona": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 5771,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      -1,
+      0,
+      0
+    ],
+    "max": [
+      33,
+      35,
+      6
+    ]
+  },
+  "tokensIn": 6,
+  "tokensOut": 39475,
+  "costUsd": 0.806194,
+  "durationMs": 370502,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A disciplined, clearly intentional temple face with a legible base→middle→crown. The massing is symmetric and the bay logic is readable: a dark plinth, a mid-register framed by gold-capped pilasters (nice torch/flame motifs), a central arched portal with a chevron keystone device, and a crown that reads as a dentiled cornice carrying a colonnade of teal-infilled bays plus a projecting parapet. Color is the strongest card — a dominant near-black ground with gold as the structuring accent and teal as the supporting hue is a well-judged, Egyptian/Deco-flavored scheme that gives the building its identity without tipping into garish. Detail is genuinely rich through the upper two-thirds (pilaster capitals, the entablature band, the portal surround), which keeps it above competent. What holds every dimension at strong rather than exceptional: the lower corners and the plinth are large flat dark fields with no articulation, the parapet caps read slightly clumsy/stuck-on against the otherwise tight cornice, and the central doorway itself is a plain dark void with only a thin teal sill — the most important element is the least resolved. Each of those is an easy, nameable improvement, so none of the dimensions reach the apex. Reads unmistakably as a grand temple and would photograph well, but it is not yet a namable landmark.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "strong",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 6,
+      "output_tokens": 3965,
+      "cost_usd": 0.968893
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": "sonnet-5-5 Arc (judge pinned opus-4-8)"
+}

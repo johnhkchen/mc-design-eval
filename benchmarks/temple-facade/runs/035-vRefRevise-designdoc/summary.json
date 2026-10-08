@@ -1,0 +1,62 @@
+{
+  "seq": 35,
+  "runId": "035-vRefRevise-designdoc",
+  "date": "2026-10-08",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-sonnet-5-5",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "persona": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 10264,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      56,
+      47,
+      7
+    ]
+  },
+  "tokensIn": 6,
+  "tokensOut": 54779,
+  "costUsd": 0.9718262,
+  "durationMs": 435389,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A confident Mughal/Taj-adjacent temple face: strong bilateral symmetry with flanking minarets framing a tiered central mass and crowning teal dome, giving a clear base→middle→crown and a readable bay rhythm — deliberate and coherent proportion, though the minarets read a touch thin and detached. Color is the strongest note: an ochre-orange dominant, teal-green supporting domes, with purple and gold accents forming a disciplined, harmonious scheme that gives the building identity. Fidelity is clear and characterful — an unmistakable, grand place of worship with a well-marked central iwan entrance. Detail holds it back from higher marks: the arched openings, gold banding and ribbed domes are pleasant, but the wall fields between bays stay flat and the relief depth is shallow — ornament sits on the surface rather than building layered depth, so no dimension feels inevitable or surprising enough for exceptional.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "strong",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 6,
+      "output_tokens": 2994,
+      "cost_usd": 0.945238
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": "sonnet-5-5 Taj (judge pinned opus-4-8)"
+}

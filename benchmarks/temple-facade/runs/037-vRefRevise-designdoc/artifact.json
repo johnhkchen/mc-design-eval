@@ -1,0 +1,1296 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "037-vRefRevise-designdoc",
+    "prompting_method_id": "temple-facade-reference-revise.v0",
+    "model_id": "claude-sonnet-5-5",
+    "seed": 11,
+    "server_state_id": "flat-creative-superflat.v1"
+  },
+  "style": {
+    "name": "The Gate of the Sunwardens — Temple Facade",
+    "rationale": "Kept the terracotta/teal/gold/blackstone split-complementary palette and rebuilt the facade as one bonded plane: a true round-arched vault (stepped teal voussoir ring, gold keystone, gold sunburst rays on the dark soffit), engaged piers with blackstone pilaster strips, gold-framed teal relief panels carrying gold figures, dark niches with gold sills, a layered gold/teal entablature with a dentil frieze, and a five-panel attic under a stepped gold-capped crenellated crown. Every wide field now carries banding or relief."
+  },
+  "palette": {
+    "manifest": [
+      "minecraft:terracotta",
+      "minecraft:warped_planks",
+      "minecraft:prismarine_bricks",
+      "minecraft:gold_block",
+      "minecraft:blackstone"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [
+        -1,
+        0,
+        0
+      ],
+      "to": [
+        33,
+        2,
+        5
+      ],
+      "block": "minecraft:blackstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        3,
+        0
+      ],
+      "to": [
+        23,
+        20,
+        0
+      ],
+      "block": "minecraft:blackstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        3,
+        0
+      ],
+      "to": [
+        8,
+        24,
+        4
+      ],
+      "block": "minecraft:terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        3,
+        0
+      ],
+      "to": [
+        32,
+        24,
+        4
+      ],
+      "block": "minecraft:terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        3,
+        5
+      ],
+      "to": [
+        8,
+        4,
+        5
+      ],
+      "block": "minecraft:blackstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        3,
+        5
+      ],
+      "to": [
+        32,
+        4,
+        5
+      ],
+      "block": "minecraft:blackstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        5,
+        5
+      ],
+      "to": [
+        0,
+        23,
+        5
+      ],
+      "block": "minecraft:blackstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        8,
+        5,
+        5
+      ],
+      "to": [
+        8,
+        23,
+        5
+      ],
+      "block": "minecraft:blackstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        5,
+        5
+      ],
+      "to": [
+        24,
+        23,
+        5
+      ],
+      "block": "minecraft:blackstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        32,
+        5,
+        5
+      ],
+      "to": [
+        32,
+        23,
+        5
+      ],
+      "block": "minecraft:blackstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        5,
+        4
+      ],
+      "to": [
+        5,
+        10,
+        4
+      ],
+      "block": "minecraft:blackstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        11,
+        4
+      ],
+      "block": "minecraft:blackstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        4,
+        5
+      ],
+      "to": [
+        5,
+        4,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        27,
+        5,
+        4
+      ],
+      "to": [
+        29,
+        10,
+        4
+      ],
+      "block": "minecraft:blackstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        11,
+        4
+      ],
+      "block": "minecraft:blackstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        27,
+        4,
+        5
+      ],
+      "to": [
+        29,
+        4,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "box",
+      "from": [
+        1,
+        12,
+        5
+      ],
+      "to": [
+        7,
+        22,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        2,
+        13,
+        5
+      ],
+      "to": [
+        6,
+        21,
+        5
+      ],
+      "block": "minecraft:warped_planks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        15,
+        6
+      ],
+      "to": [
+        4,
+        19,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        20,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        3,
+        17,
+        6
+      ],
+      "to": [
+        5,
+        17,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        3,
+        14,
+        6
+      ],
+      "to": [
+        5,
+        14,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "box",
+      "from": [
+        25,
+        12,
+        5
+      ],
+      "to": [
+        31,
+        22,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        26,
+        13,
+        5
+      ],
+      "to": [
+        30,
+        21,
+        5
+      ],
+      "block": "minecraft:warped_planks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        28,
+        15,
+        6
+      ],
+      "to": [
+        28,
+        19,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        20,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        27,
+        17,
+        6
+      ],
+      "to": [
+        29,
+        17,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        27,
+        14,
+        6
+      ],
+      "to": [
+        29,
+        14,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        18,
+        1
+      ],
+      "to": [
+        9,
+        18,
+        4
+      ],
+      "block": "minecraft:terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        23,
+        18,
+        1
+      ],
+      "to": [
+        23,
+        18,
+        4
+      ],
+      "block": "minecraft:terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        19,
+        1
+      ],
+      "to": [
+        11,
+        19,
+        4
+      ],
+      "block": "minecraft:terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        21,
+        19,
+        1
+      ],
+      "to": [
+        23,
+        19,
+        4
+      ],
+      "block": "minecraft:terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        20,
+        1
+      ],
+      "to": [
+        13,
+        20,
+        4
+      ],
+      "block": "minecraft:terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        20,
+        1
+      ],
+      "to": [
+        23,
+        20,
+        4
+      ],
+      "block": "minecraft:terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        21,
+        0
+      ],
+      "to": [
+        23,
+        23,
+        4
+      ],
+      "block": "minecraft:terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        7,
+        12,
+        4
+      ],
+      "to": [
+        8,
+        14,
+        5
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        12,
+        4
+      ],
+      "to": [
+        25,
+        14,
+        5
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        8,
+        15,
+        4
+      ],
+      "to": [
+        9,
+        16,
+        5
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        23,
+        15,
+        4
+      ],
+      "to": [
+        24,
+        16,
+        5
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        17,
+        4
+      ],
+      "to": [
+        10,
+        17,
+        5
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        17,
+        4
+      ],
+      "to": [
+        23,
+        17,
+        5
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        18,
+        4
+      ],
+      "to": [
+        11,
+        18,
+        5
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        21,
+        18,
+        4
+      ],
+      "to": [
+        22,
+        18,
+        5
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        12,
+        19,
+        4
+      ],
+      "to": [
+        13,
+        19,
+        5
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        19,
+        4
+      ],
+      "to": [
+        20,
+        19,
+        5
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        20,
+        4
+      ],
+      "to": [
+        15,
+        20,
+        5
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        20,
+        4
+      ],
+      "to": [
+        18,
+        20,
+        5
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        12,
+        21,
+        4
+      ],
+      "to": [
+        20,
+        21,
+        5
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        21,
+        5
+      ],
+      "to": [
+        17,
+        22,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        20,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "box",
+      "from": [
+        9,
+        22,
+        5
+      ],
+      "to": [
+        11,
+        23,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "box",
+      "from": [
+        21,
+        22,
+        5
+      ],
+      "to": [
+        23,
+        23,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        16,
+        12,
+        1
+      ],
+      "to": [
+        16,
+        19,
+        1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        16,
+        12,
+        1
+      ],
+      "to": [
+        10,
+        18,
+        1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        16,
+        12,
+        1
+      ],
+      "to": [
+        22,
+        18,
+        1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        10,
+        11,
+        1
+      ],
+      "to": [
+        22,
+        11,
+        1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        10,
+        6,
+        1
+      ],
+      "to": [
+        22,
+        6,
+        1
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        24,
+        0
+      ],
+      "to": [
+        32,
+        26,
+        4
+      ],
+      "block": "minecraft:terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -1,
+        24,
+        5
+      ],
+      "to": [
+        33,
+        24,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -1,
+        25,
+        5
+      ],
+      "to": [
+        33,
+        25,
+        5
+      ],
+      "block": "minecraft:blackstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -1,
+        26,
+        5
+      ],
+      "to": [
+        33,
+        26,
+        5
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        26,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        26,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        26,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        26,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        26,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        10,
+        26,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        12,
+        26,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        26,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        26,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        18,
+        26,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        20,
+        26,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        26,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        26,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        26,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        26,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        26,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        26,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        27,
+        0
+      ],
+      "to": [
+        32,
+        32,
+        4
+      ],
+      "block": "minecraft:terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -1,
+        27,
+        5
+      ],
+      "to": [
+        33,
+        27,
+        5
+      ],
+      "block": "minecraft:blackstone"
+    },
+    {
+      "op": "box",
+      "from": [
+        2,
+        28,
+        5
+      ],
+      "to": [
+        6,
+        32,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        29,
+        5
+      ],
+      "to": [
+        5,
+        31,
+        5
+      ],
+      "block": "minecraft:warped_planks"
+    },
+    {
+      "op": "box",
+      "from": [
+        8,
+        28,
+        5
+      ],
+      "to": [
+        12,
+        32,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        29,
+        5
+      ],
+      "to": [
+        11,
+        31,
+        5
+      ],
+      "block": "minecraft:warped_planks"
+    },
+    {
+      "op": "box",
+      "from": [
+        14,
+        28,
+        5
+      ],
+      "to": [
+        18,
+        32,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        29,
+        5
+      ],
+      "to": [
+        17,
+        31,
+        5
+      ],
+      "block": "minecraft:warped_planks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        30,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "box",
+      "from": [
+        20,
+        28,
+        5
+      ],
+      "to": [
+        24,
+        32,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        21,
+        29,
+        5
+      ],
+      "to": [
+        23,
+        31,
+        5
+      ],
+      "block": "minecraft:warped_planks"
+    },
+    {
+      "op": "box",
+      "from": [
+        26,
+        28,
+        5
+      ],
+      "to": [
+        30,
+        32,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        27,
+        29,
+        5
+      ],
+      "to": [
+        29,
+        31,
+        5
+      ],
+      "block": "minecraft:warped_planks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -1,
+        33,
+        0
+      ],
+      "to": [
+        33,
+        33,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        34,
+        0
+      ],
+      "to": [
+        3,
+        35,
+        4
+      ],
+      "block": "minecraft:terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        5,
+        34,
+        0
+      ],
+      "to": [
+        8,
+        34,
+        4
+      ],
+      "block": "minecraft:terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        34,
+        0
+      ],
+      "to": [
+        27,
+        34,
+        4
+      ],
+      "block": "minecraft:terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        29,
+        34,
+        0
+      ],
+      "to": [
+        32,
+        35,
+        4
+      ],
+      "block": "minecraft:terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        34,
+        0
+      ],
+      "to": [
+        21,
+        35,
+        4
+      ],
+      "block": "minecraft:terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        35,
+        5
+      ],
+      "to": [
+        19,
+        35,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        34,
+        5
+      ],
+      "to": [
+        21,
+        34,
+        5
+      ],
+      "block": "minecraft:prismarine_bricks"
+    }
+  ]
+}

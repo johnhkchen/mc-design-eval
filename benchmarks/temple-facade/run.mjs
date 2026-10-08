@@ -487,6 +487,7 @@ const APPROACHES = {
     const { artifact, raw } = await requestDesignArtifact({
       prompt,
       model: PHASE1_MODEL_ID,
+      effort: ctx.effort,                                  // --effort (was silently ignored by v0 before 2026-10-08)
       onMessage: (m) => messages.push(m),
     });
     return { artifact, raw, messages, prompt, promptMethodId };

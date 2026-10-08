@@ -1,0 +1,60 @@
+{
+  "seq": 33,
+  "runId": "033-v0-facade",
+  "date": "2026-10-08",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "v0-facade",
+  "promptMethodId": "temple-facade-singleshot.v0",
+  "model": "claude-sonnet-5-5",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "persona": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 2392,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      30,
+      23,
+      5
+    ]
+  },
+  "tokensIn": 2,
+  "tokensOut": 14159,
+  "costUsd": 0.2924084,
+  "durationMs": 167624,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A confidently symmetrical, tiered composition with a clear base→middle→crown progression: a dark stone plinth with stepped buttresses, an orange-walled body ranked by green pilasters and yellow cornices, and a pagoda-like crown capped with a pale orb. The bay rhythm is deliberate and the central dark-green entrance with its ornamented tympanum reads as an unmistakable temple with real presence — East-Asian-leaning but invented. Detail is genuinely rich: speckled crimson/warped fields, dentil-like yellow trim, framed windows, a jeweled central aperture, and relief depth from the stepped base and projecting cornices rather than a flat wall. What holds it back from exceptional: the palette, while colorful and roughly organized as orange-dominant with green support and yellow/purple accents, tips toward busy — the purple band and competing yellows fight the warm field rather than resolving into a single identity, and the crown reads slightly top-heavy and crowded against the broad lower tiers. Easy improvements remain (calm the accent count, unify the purple into the scheme, let the crown breathe), so it sits firmly at strong, not apex.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "strong",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 6,
+      "output_tokens": 3147,
+      "cost_usd": 1.029237
+    }
+  },
+  "roundImages": [],
+  "bestof": null,
+  "note": "sonnet-5-5 (judge pinned opus-4-8)"
+}

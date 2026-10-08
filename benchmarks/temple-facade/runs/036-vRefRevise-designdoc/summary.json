@@ -1,0 +1,62 @@
+{
+  "seq": 36,
+  "runId": "036-vRefRevise-designdoc",
+  "date": "2026-10-08",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-haiku-5-5",
+  "seed": 11,
+  "temperature": null,
+  "effort": "max",
+  "persona": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 1277,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      6
+    ],
+    "max": [
+      44,
+      24,
+      8
+    ]
+  },
+  "tokensIn": 10,
+  "tokensOut": 535461,
+  "costUsd": 0.30395297,
+  "durationMs": 4043187,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong",
+    "overall": "competent",
+    "notes": "Clear base→middle→crown reading: a broad symmetrical wall of orange piers flanking a recessed central portal, rising to a stepped teal ziggurat crown capped with a gold finial. Bay rhythm is deliberate and balanced — paired corner towers, flanking window bays, and a dominant centered entrance. The palette is the strongest move: weathered terracotta-orange dominant, teal/verdigris supporting, with lapis-blue and gold accents that read as genuinely temple-like (Mesoamerican/Mesopotamian flavor), disciplined rather than garish. Fidelity is clear and characterful — the stepped crown, finial, and arched central doorway unmistakably read as a temple with a legible grand entrance. Detail is where it falls short of strong: the orange piers are large flat fields, the windows are simple dark insets, and relief depth is mostly confined to the central portal recess and the crown's stepping. Easy improvements remain — articulate the piers, add cornice/string courses, deepen window reveals — so detail stays competent and the whole lands at a solid strong rather than exceptional.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "competent",
+      "competent"
+    ],
+    "usage": {
+      "input_tokens": 6,
+      "output_tokens": 2438,
+      "cost_usd": 0.919948
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": "haiku-5-5 effort max Taj (judge pinned opus-4-8)"
+}

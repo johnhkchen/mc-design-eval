@@ -74,6 +74,11 @@ auto-injected corpus). Review and update it after each run.
 | 30 | 2026-10-08 | `v0-facade` | strong | 2639 | 2/22512 | $0.0188 | 165s | haiku-5-5 rerun of 001/028 (judge pinned opus-4-8) |
 | 31 | 2026-10-08 | `vRefRevise-designdoc` | strong | 2819 | 6/78810 | $0.0606 | 542s | haiku-5-5 rerun of 014/027 (judge pinned opus-4-8) |
 | 32 | 2026-10-08 | `vRefRevise-designdoc` | strong | 2312 | 6/75276 | $0.0580 | 412s | haiku-5-5 rerun of 021/029 (judge pinned opus-4-8) |
+| 33 | 2026-10-08 | `v0-facade` | strong | 2392 | 2/14159 | $0.2924 | 168s | sonnet-5-5 (judge pinned opus-4-8) |
+| 34 | 2026-10-08 | `v0-facade` | strong | 2778 | 2/28960 | $0.0220 | 197s | haiku-5-5 effort max (judge pinned opus-4-8) |
+| 35 | 2026-10-08 | `vRefRevise-designdoc` | strong | 10264 | 6/54779 | $0.9718 | 435s | sonnet-5-5 Taj (judge pinned opus-4-8) |
+| 36 | 2026-10-08 | `vRefRevise-designdoc` | competent | 1277 | 10/535461 | $0.3040 | 4043s | haiku-5-5 effort max Taj (judge pinned opus-4-8) |
+| 37 | 2026-10-08 | `vRefRevise-designdoc` | strong | 5771 | 6/39475 | $0.8062 | 371s | sonnet-5-5 Arc (judge pinned opus-4-8) |
 
 ## Gallery
 
@@ -306,5 +311,45 @@ auto-injected corpus). Review and update it after each run.
 **strong** · 2312 blocks · 6/75276 tok · $0.0580
 
 > haiku-5-5 rerun of 021/029 (judge pinned opus-4-8)
+
+### 033 — `v0-facade` · 2026-10-08
+
+![temple-facade run 33](runs/033-v0-facade/render.png)
+
+**strong** · 2392 blocks · 2/14159 tok · $0.2924
+
+> sonnet-5-5 (judge pinned opus-4-8)
+
+### 034 — `v0-facade` · 2026-10-08
+
+![temple-facade run 34](runs/034-v0-facade/render.png)
+
+**strong** · 2778 blocks · 2/28960 tok · $0.0220
+
+> haiku-5-5 effort max (judge pinned opus-4-8)
+
+### 035 — `vRefRevise-designdoc` · 2026-10-08
+
+![temple-facade run 35](runs/035-vRefRevise-designdoc/render.png)
+
+**strong** · 10264 blocks · 6/54779 tok · $0.9718
+
+> sonnet-5-5 Taj (judge pinned opus-4-8)
+
+### 036 — `vRefRevise-designdoc` · 2026-10-08
+
+![temple-facade run 36](runs/036-vRefRevise-designdoc/render.png)
+
+**competent** · 1277 blocks · 10/535461 tok · $0.3040
+
+> haiku-5-5 effort max Taj (judge pinned opus-4-8)
+
+### 037 — `vRefRevise-designdoc` · 2026-10-08
+
+![temple-facade run 37](runs/037-vRefRevise-designdoc/render.png)
+
+**strong** · 5771 blocks · 6/39475 tok · $0.8062
+
+> sonnet-5-5 Arc (judge pinned opus-4-8)
 
 <!-- RUNS:END -->

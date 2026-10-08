@@ -1,0 +1,60 @@
+{
+  "seq": 34,
+  "runId": "034-v0-facade",
+  "date": "2026-10-08",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "v0-facade",
+  "promptMethodId": "temple-facade-singleshot.v0",
+  "model": "claude-haiku-5-5",
+  "seed": 11,
+  "temperature": null,
+  "effort": "max",
+  "persona": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 2778,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      1
+    ],
+    "max": [
+      31,
+      23,
+      5
+    ]
+  },
+  "tokensIn": 2,
+  "tokensOut": 28960,
+  "costUsd": 0.02202352,
+  "durationMs": 197395,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A disciplined, symmetric classical temple front with a clear base→shaft→crown reading: a dark patterned plinth, a colonnade of teal columns bracketing recessed window bays, a gold-banded entablature, and a small crowning pediment. Proportion is deliberate — the recessed central portal is given extra height and the bay rhythm is even and balanced — though the crown feels undersized against the broad body, an easy improvement that keeps it out of exceptional. Color is the standout: a dominant teal, warm orange supporting fields, and gold/blue accents form a genuine harmony that is colorful without tipping into garish. Detail is only competent: the columns carry capitals and the friezes and window grilles add articulation, but the large orange wall panels read as flat uninterrupted fields with little relief depth, so ornament is not resolved across the whole facade. Fidelity is strong — it unmistakably reads as a grand columned temple with a clear recessed entrance and civic presence, if closer to a generic classical/bank idiom than a namable, iconic landmark. Holistically a strong, confident build; the flat mid-wall fields and timid pediment are the named improvements keeping it short of exceptional.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "strong",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 6,
+      "output_tokens": 3574,
+      "cost_usd": 0.9526680000000001
+    }
+  },
+  "roundImages": [],
+  "bestof": null,
+  "note": "haiku-5-5 effort max (judge pinned opus-4-8)"
+}

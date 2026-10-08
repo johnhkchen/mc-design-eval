@@ -265,6 +265,29 @@ Same harness, judge still pinned to Opus 4.8. [V]
   violations. It produced a sensible rock-cut mine identity, rougher than Opus 5.5 ($0.86): a busy mossy floor,
   leftover torches, a single round. A cheap decorator is viable for iterating; Opus for the final pass.
 
+### Model and effort sweep: Opus / Sonnet / Haiku 5.5 (2026-10-08)
+
+Same harness, judge pinned to Opus 4.8. [V]
+
+![facade sweep](assets/facade-model-sweep.png)
+
+| | Opus 5.5 | **Sonnet 5.5** | Haiku 5.5 | Haiku 5.5, `--effort max` |
+|---|---|---|---|---|
+| v0 one-shot | $0.78 · 4.6 min | **$0.29 · 2.8 min** | $0.02 · 2.8 min | (034 ran at default effort: harness bug, now fixed) |
+| Taj reference | $3.36 · 15 min · 23k blocks | **$0.97 · 7 min · 10k** | $0.06 · 9 min · 2.8k | $0.30 · **67 min** · 1.3k · judge "competent" |
+| Arc reference | $2.38 · 15 min · 19k | **$0.81 · 6 min · 5.8k** | $0.06 · 7 min · 2.3k | stopped after 36 min |
+| Plugin hallway e2e | $0.86 · 2.6 min | $0.41 · 4.6 min | $0.044 · 5 min | $0.67 · 11 min · 55 turns |
+
+![hallway sweep](assets/hallway-model-sweep.png)
+
+- **Sonnet 5.5 is the price/quality sweet spot** for single builds: its Taj is close to Opus at about ⅓ the cost.
+- **Max effort did not help Haiku on single-shot generation.** It emitted 535k output tokens over 67 minutes for a
+  smaller, flatter facade. It **did** help on the agentic plugin task: two rounds, a pairwise keep, and a form
+  change (a gabled roof), at near-Opus cost and 4× the time. Effort pays when the model iterates with tools, not
+  when it writes one big artifact.
+- **The categorical judge still can't separate the models.** Everything scores "strong" except Haiku-max's Taj.
+- The `v0-facade` approach silently ignored `--effort` before this sweep; it's fixed in `run.mjs`.
+
 ### Why the good-looking approach is slow (from the transcripts)
 
 Measured on 014 and 027. [V]
