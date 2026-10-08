@@ -1,0 +1,61 @@
+{
+  "seq": 19,
+  "runId": "019-vRefRevise-designdoc",
+  "date": "2026-06-05",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 4953,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      -2,
+      0,
+      0
+    ],
+    "max": [
+      46,
+      38,
+      10
+    ]
+  },
+  "tokensIn": 31809,
+  "tokensOut": 47581,
+  "costUsd": 1.5247997499999997,
+  "durationMs": 687688,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A clean, symmetrical East-Asian temple with a genuine base→middle→crown: gray stone plinth, a red colonnaded main register, a recessed upper tier, stacked green eaves, and a gilded finial. Proportion is deliberate and coherent — the bay rhythm of white window panels framed by pale columns is regular and balanced, though the upper tier sits a touch narrow and its transition to the main floor is slightly abrupt, so it stops short of inevitable. Color is the build's strength: vermilion dominant, jade-green eaves as the supporting tone, gold accents on the finial and central window, grounded by gray — a disciplined, classic palette, just held back from exceptional by the slightly muddy base and the chalky flatness of the white panels. Detail is where it lags: the layered eaves, column rhythm, window frames, and finial show real articulation, but large flat fields persist — the plain red of the upper wall and the big undifferentiated white window panels read as empty, so it doesn't earn 'rich across the whole facade.' Fidelity is clear and characterful — it unmistakably reads as a temple with a defined central entrance and presence, though the cross-form finial atop a pagoda massing is an oddly syncretic signal that muddies the cultural identity rather than sharpening it. Holistically a strong, photogenic build that resolves proportion and palette well but is held below the apex by flat interior fields and one incongruous crowning gesture.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "strong",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 31777,
+      "output_tokens": 4852,
+      "cost_usd": 0.3426855
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": "Horyu-ji generalization (T-007-01): P12/P13 stress on a wooden pagoda — near-monochrome timber palette, freestanding stacked-tier tower"
+}

@@ -1,0 +1,64 @@
+You are a master Minecraft architect making a SECOND, improving pass on your own work. TWO
+images are attached: (1) the REFERENCE building, and (2) a head-on render of your CURRENT build.
+The reference is a CRAFT reference ONLY — borrow its proportion, massing, silhouette, relief, and
+ornament. It is NOT a color reference: do NOT copy its palette. Your COLOR comes from your design
+document and the brief's demand for a distinctive, COLORFUL look — even if the reference is white.
+
+## Your finalized design document (honor it)
+# Temple of the Azure Meridian — Facade Design Document
+
+## 1. Lore & Setting
+A river-delta sanctuary of the **Tide-Keeper cult**, raised by a grief-stricken navigator-queen to enshrine the star she steered by. Like its proven inspiration — a domed Mughal mausoleum of perfect symmetry — it is a monument to devotion rendered as geometry: serenity made architectural.
+
+## 2. Aesthetic & Architectural Logic
+The reference teaches **bilateral symmetry around a single recessed portal**, a heavy crowning mass balanced by slender vertical accents at the corners, and ornament concentrated in framed panels rather than smeared across the wall. This works because the eye is given one dominant event (the dome), one threshold (the iwan), and calm field between them. I adopt that hierarchy exactly — and reject the reference's *whiteness*, which would collapse a Minecraft build into a flat slab.
+
+## 3. Color Palette — *Cool Analogous with Warm Accent*
+- **Dominant:** `warped_planks` / `prismarine_bricks` — deep teal-blue body (the "azure" of the meridian star).
+- **Supporting:** `cyan_terracotta` — muted blue-green for recessed panels and the drum, holding the analogous cool family together.
+- **Frame & relief:** `dark_prismarine` — denser shadow-line outlining every arch and panel.
+- **Accent:** `gold_block` — finial, portal keystone, chattri caps; a single warm complementary spark against the cool field so the crown reads instantly.
+
+This is a confident cool-analogous harmony (blue→teal→green) pierced by gold — bold, not monochrome, honoring the brief while keeping the reference's disciplined restraint.
+
+## 4. Motifs & Ornament
+From the reference: the **pointed-arch (iwan) frame**, the **pishtaq** rectangular surround projecting beyond the wall, repeated **blind-arch niches** flanking the entrance, and **lotus-finial** crowns. Adapted: niches become 1-deep recesses (carved by omission, never buried), each gold-keystoned.
+
+## 5. Architectural Features & Proportion
+- **Base:** a wide plinth, ~⅕ of total height, grounding the mass.
+- **Body:** square central block, **height ≈ width** (1:1), pierced by one tall central iwan rising ~⅔ of the body.
+- **Corners:** four slender minaret-towers, **height ≈ 1.6× the body**, framing — not crowding — the dome.
+- **Crown:** an **onion dome on a tall drum**, belly **overhanging** the drum (≈1.15× drum width) so it never reads as a pyramid; gold finial above. Drum:dome:finial ≈ 1:2:0.6.
+- **Chattris:** four small domed kiosks at the body's outer corners, echoing the great dome at ⅓ scale.
+
+## Improve — compare your build (image 2) to the reference (image 1)
+- Proportion & silhouette: match the reference's balance, rhythm, and crowning silhouette more closely.
+- Relief & depth: deepen and model where your build reads flat next to the reference.
+- Ornament & detail: add the reference's character — arch profiles, framing, motifs, texture — where
+  your build is bare; resolve large blank fields.
+- Color (CRITICAL): do NOT adopt the reference's colors. Hold your document's COLORFUL palette and
+  its dominant/supporting/accent hierarchy. If your build (image 2) reads monochrome, white, or
+  washed-out next to the brief's intent, ADD color back — restore the accent fields and contrast.
+  The brief asks for bold color; a build that drifted toward white is a regression to FIX, not keep.
+- Fix anything broken, floating, misaligned, or awkward.
+
+## Orientation & scale (unchanged)
+Facade FACES +Z, X-Y plane (X = width, Y = height, y = 0 ground), relief into -Z, front face at the
+highest Z. Width up to ~56, height up to ~48, deep relief up to ~24 into -Z. Front and relief only.
+
+## Materials
+Primarily the document's palette; declare the blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "013-vRefRevise-designdoc"
+- metadata.prompting_method_id = "temple-facade-reference-revise.v0"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Keep style.name as the document's style; set style.rationale to one line on what you improved.
+
+## Output (critical)
+Emit ONE complete improved design artifact — the full set of placements, not a diff. Local origin
+at x = 0, y = 0, z = 0 (ground at y = 0).

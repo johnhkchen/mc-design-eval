@@ -1,0 +1,62 @@
+{
+  "seq": 23,
+  "runId": "023-vRefRevise-designdoc",
+  "date": "2026-06-05",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "persona": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 5196,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      -6
+    ],
+    "max": [
+      49,
+      49,
+      0
+    ]
+  },
+  "tokensIn": 32634,
+  "tokensOut": 58118,
+  "costUsd": 1.8111685,
+  "durationMs": 830085,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A clean, symmetric front elevation with a clear tripartite reading: crimson studded plinth (base), a three-bay arched wall (middle), and a stepped gabled crown with a gold finial. The bay rhythm is deliberate — a taller central niche flanked by two matched panels, bracketed by four corner towers — so proportion reads as coherent rather than arbitrary, though the crown sits a touch small and lumpy atop the body and the corner towers are thin/stubby, which is why it stops short of inevitable. Color is the standout: a disciplined four-part scheme (royal lapis dominant, quartz-white supporting, gold accent, crimson base) with genuine hierarchy and harmony; it loses 'exceptional' only because the white begins to overtake the upper crown and dilute the identity. Detail is concentrated rather than pervasive — the three niches are nicely framed and recessed with gold ornament, and the plinth is studded, but the white inter-bay fields, the tower shafts, and the gable are flat, and the gold panel motifs read as somewhat crude plus/cross forms. Fidelity is solid: it unmistakably reads as a temple/shrine facade with central presence, a clear entrance niche, and a votive, vaguely ecclesiastical character — clear and characterful, but not a namable landmark.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "strong",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 32610,
+      "output_tokens": 5724,
+      "cost_usd": 0.4033815
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": "persona A/B OFF (T-013-01): champion default, no system prompt"
+}

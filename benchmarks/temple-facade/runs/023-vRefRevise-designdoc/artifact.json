@@ -1,0 +1,1496 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "023-vRefRevise-designdoc",
+    "prompting_method_id": "temple-facade-reference-revise.v0",
+    "model_id": "claude-opus-4-8",
+    "seed": 11,
+    "server_state_id": "flat-creative-superflat.v1"
+  },
+  "style": {
+    "name": "Mughal river-temple — lapis & gold",
+    "rationale": "Second pass: deepened the pishtaq to a true 3-block recess with quartz reveals and back wall; broke every flat field with relief — paneled the red plinth, banded the corner pilasters, ran gold string-courses across the bays, and framed the side niches; rebuilt the crown as a belly-overhanging onion dome with converging gold ribs flanked by engaged chhatri kiosks and guldasta corner finials; held the lapis/quartz/gold/terracotta complementary palette and refused the reference's white."
+  },
+  "palette": {
+    "manifest": [
+      "minecraft:lapis_block",
+      "minecraft:smooth_quartz",
+      "minecraft:gold_block",
+      "minecraft:red_nether_bricks"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [
+        0,
+        0,
+        -6
+      ],
+      "to": [
+        49,
+        6,
+        -1
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        3,
+        6,
+        0
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        12,
+        0,
+        0
+      ],
+      "to": [
+        13,
+        6,
+        0
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        0,
+        0
+      ],
+      "to": [
+        25,
+        6,
+        0
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        36,
+        0,
+        0
+      ],
+      "to": [
+        37,
+        6,
+        0
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        46,
+        0,
+        0
+      ],
+      "to": [
+        49,
+        6,
+        0
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        3,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        18,
+        3,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        3,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        3,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        7,
+        -1
+      ],
+      "to": [
+        49,
+        7,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        8,
+        -1
+      ],
+      "to": [
+        18,
+        31,
+        -1
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        31,
+        8,
+        -1
+      ],
+      "to": [
+        49,
+        31,
+        -1
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        8,
+        0
+      ],
+      "to": [
+        3,
+        31,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        46,
+        8,
+        0
+      ],
+      "to": [
+        49,
+        31,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        12,
+        0
+      ],
+      "to": [
+        3,
+        12,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        18,
+        0
+      ],
+      "to": [
+        3,
+        18,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        24,
+        0
+      ],
+      "to": [
+        3,
+        24,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        46,
+        12,
+        0
+      ],
+      "to": [
+        49,
+        12,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        46,
+        18,
+        0
+      ],
+      "to": [
+        49,
+        18,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        46,
+        24,
+        0
+      ],
+      "to": [
+        49,
+        24,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        8,
+        0
+      ],
+      "to": [
+        18,
+        31,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        31,
+        8,
+        0
+      ],
+      "to": [
+        32,
+        31,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        8,
+        0
+      ],
+      "to": [
+        16,
+        11,
+        0
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        27,
+        0
+      ],
+      "to": [
+        16,
+        31,
+        0
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        12,
+        0
+      ],
+      "to": [
+        7,
+        26,
+        0
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        12,
+        0
+      ],
+      "to": [
+        16,
+        26,
+        0
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        7,
+        11,
+        0
+      ],
+      "to": [
+        14,
+        11,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        7,
+        12,
+        0
+      ],
+      "to": [
+        7,
+        26,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        12,
+        0
+      ],
+      "to": [
+        14,
+        26,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        7,
+        26,
+        0
+      ],
+      "to": [
+        14,
+        26,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "line",
+      "from": [
+        8,
+        26,
+        0
+      ],
+      "to": [
+        10,
+        28,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "line",
+      "from": [
+        13,
+        26,
+        0
+      ],
+      "to": [
+        11,
+        28,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        15,
+        -1
+      ],
+      "to": [
+        11,
+        23,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        18,
+        -1
+      ],
+      "to": [
+        12,
+        19,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        10,
+        0
+      ],
+      "to": [
+        16,
+        10,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        33,
+        8,
+        0
+      ],
+      "to": [
+        45,
+        11,
+        0
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        33,
+        27,
+        0
+      ],
+      "to": [
+        45,
+        31,
+        0
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        33,
+        12,
+        0
+      ],
+      "to": [
+        35,
+        26,
+        0
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        42,
+        12,
+        0
+      ],
+      "to": [
+        45,
+        26,
+        0
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        35,
+        11,
+        0
+      ],
+      "to": [
+        42,
+        11,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        35,
+        12,
+        0
+      ],
+      "to": [
+        35,
+        26,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        42,
+        12,
+        0
+      ],
+      "to": [
+        42,
+        26,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        35,
+        26,
+        0
+      ],
+      "to": [
+        42,
+        26,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "line",
+      "from": [
+        36,
+        26,
+        0
+      ],
+      "to": [
+        38,
+        28,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "line",
+      "from": [
+        41,
+        26,
+        0
+      ],
+      "to": [
+        39,
+        28,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        38,
+        15,
+        -1
+      ],
+      "to": [
+        39,
+        23,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        37,
+        18,
+        -1
+      ],
+      "to": [
+        40,
+        19,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        33,
+        10,
+        0
+      ],
+      "to": [
+        45,
+        10,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        8,
+        -3
+      ],
+      "to": [
+        29,
+        29,
+        -3
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        8,
+        -3
+      ],
+      "to": [
+        19,
+        30,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        30,
+        8,
+        -3
+      ],
+      "to": [
+        30,
+        30,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        24,
+        0
+      ],
+      "to": [
+        29,
+        31,
+        0
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        30,
+        0
+      ],
+      "to": [
+        32,
+        31,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "line",
+      "from": [
+        20,
+        24,
+        0
+      ],
+      "to": [
+        24,
+        28,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "line",
+      "from": [
+        29,
+        24,
+        0
+      ],
+      "to": [
+        25,
+        28,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        29,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        29,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        26,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        26,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        10,
+        -3
+      ],
+      "to": [
+        22,
+        20,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        27,
+        10,
+        -3
+      ],
+      "to": [
+        27,
+        20,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        22,
+        20,
+        -3
+      ],
+      "to": [
+        24,
+        22,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        27,
+        20,
+        -3
+      ],
+      "to": [
+        25,
+        22,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        23,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        23,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        15,
+        -3
+      ],
+      "to": [
+        25,
+        16,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        15,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        15,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        13,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        17,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        32,
+        0
+      ],
+      "to": [
+        49,
+        32,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        33,
+        -1
+      ],
+      "to": [
+        49,
+        34,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        33,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        33,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        12,
+        33,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        33,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        33,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        33,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        33,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        37,
+        33,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        33,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        47,
+        33,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        16,
+        35,
+        -2
+      ],
+      "to": [
+        33,
+        37,
+        -1
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        16,
+        35,
+        0
+      ],
+      "to": [
+        33,
+        37,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        16,
+        35,
+        0
+      ],
+      "to": [
+        33,
+        35,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        20,
+        36,
+        -1
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        36,
+        -1
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        30,
+        -1
+      ],
+      "to": [
+        13,
+        35,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        36,
+        0
+      ],
+      "to": [
+        12,
+        36,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        37,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        36,
+        30,
+        -1
+      ],
+      "to": [
+        40,
+        35,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        37,
+        36,
+        0
+      ],
+      "to": [
+        39,
+        36,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        38,
+        37,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        35,
+        0
+      ],
+      "to": [
+        2,
+        41,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        42,
+        0
+      ],
+      "to": [
+        2,
+        43,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        47,
+        35,
+        0
+      ],
+      "to": [
+        48,
+        41,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        47,
+        42,
+        0
+      ],
+      "to": [
+        48,
+        43,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        38,
+        -1
+      ],
+      "to": [
+        35,
+        38,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        39,
+        -1
+      ],
+      "to": [
+        36,
+        40,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        41,
+        -1
+      ],
+      "to": [
+        34,
+        41,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        42,
+        -1
+      ],
+      "to": [
+        32,
+        42,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        43,
+        -1
+      ],
+      "to": [
+        30,
+        43,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        21,
+        44,
+        -1
+      ],
+      "to": [
+        28,
+        44,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        23,
+        45,
+        -1
+      ],
+      "to": [
+        26,
+        45,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        46,
+        -1
+      ],
+      "to": [
+        25,
+        46,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        38,
+        0
+      ],
+      "to": [
+        35,
+        38,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        38,
+        0
+      ],
+      "to": [
+        24,
+        46,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        25,
+        38,
+        0
+      ],
+      "to": [
+        25,
+        46,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        40,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        18,
+        42,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        20,
+        43,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        44,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        40,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        42,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        29,
+        43,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        44,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        47,
+        0
+      ],
+      "to": [
+        25,
+        49,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    }
+  ]
+}

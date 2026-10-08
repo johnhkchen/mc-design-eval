@@ -1,0 +1,1263 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "010-vRefRevise-designdoc",
+    "prompting_method_id": "temple-facade-reference-revise.v0",
+    "model_id": "claude-opus-4-8",
+    "seed": 11,
+    "server_state_id": "flat-creative-superflat.v1"
+  },
+  "style": {
+    "name": "Mughal dawn-shrine",
+    "rationale": "Second pass: enlarged belly-overhang onion dome on a taller drum, deepened the iwan and twin-register niches as true exclusion-carved recesses, added diorite string-courses and single-border pietra-dura iwan framing, a red-sandstone doorway accent, and slender balcony-ringed minarets with chattri finials to match the reference's ordered arch-hierarchy."
+  },
+  "palette": {
+    "manifest": [
+      "minecraft:smooth_quartz",
+      "minecraft:diorite",
+      "minecraft:red_sandstone",
+      "minecraft:gold_block",
+      "minecraft:blackstone"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [
+        0,
+        0,
+        -8
+      ],
+      "to": [
+        48,
+        5,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        6,
+        -8
+      ],
+      "to": [
+        48,
+        6,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        7,
+        -6
+      ],
+      "to": [
+        42,
+        28,
+        -2
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        7,
+        -1
+      ],
+      "to": [
+        8,
+        28,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        40,
+        7,
+        -1
+      ],
+      "to": [
+        42,
+        28,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        16,
+        7,
+        -1
+      ],
+      "to": [
+        17,
+        28,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        31,
+        7,
+        -1
+      ],
+      "to": [
+        32,
+        28,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        7,
+        -1
+      ],
+      "to": [
+        15,
+        7,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        17,
+        -1
+      ],
+      "to": [
+        15,
+        18,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        28,
+        -1
+      ],
+      "to": [
+        15,
+        28,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        33,
+        7,
+        -1
+      ],
+      "to": [
+        39,
+        7,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        33,
+        17,
+        -1
+      ],
+      "to": [
+        39,
+        18,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        33,
+        28,
+        -1
+      ],
+      "to": [
+        39,
+        28,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        7,
+        -1
+      ],
+      "to": [
+        30,
+        7,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        27,
+        -1
+      ],
+      "to": [
+        30,
+        28,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        24,
+        -1
+      ],
+      "to": [
+        18,
+        24,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        25,
+        -1
+      ],
+      "to": [
+        20,
+        25,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        26,
+        -1
+      ],
+      "to": [
+        22,
+        26,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        30,
+        24,
+        -1
+      ],
+      "to": [
+        30,
+        24,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        28,
+        25,
+        -1
+      ],
+      "to": [
+        30,
+        25,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        26,
+        26,
+        -1
+      ],
+      "to": [
+        30,
+        26,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        15,
+        -1
+      ],
+      "to": [
+        9,
+        16,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        15,
+        -1
+      ],
+      "to": [
+        15,
+        16,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        26,
+        -1
+      ],
+      "to": [
+        9,
+        27,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        26,
+        -1
+      ],
+      "to": [
+        15,
+        27,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        33,
+        15,
+        -1
+      ],
+      "to": [
+        33,
+        16,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        39,
+        15,
+        -1
+      ],
+      "to": [
+        39,
+        16,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        33,
+        26,
+        -1
+      ],
+      "to": [
+        33,
+        27,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        39,
+        26,
+        -1
+      ],
+      "to": [
+        39,
+        27,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        18,
+        0
+      ],
+      "to": [
+        17,
+        18,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        31,
+        18,
+        0
+      ],
+      "to": [
+        42,
+        18,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        29,
+        -6
+      ],
+      "to": [
+        42,
+        29,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        7,
+        0
+      ],
+      "to": [
+        17,
+        23,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        31,
+        7,
+        0
+      ],
+      "to": [
+        31,
+        23,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        18,
+        24,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        24,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        20,
+        25,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        25,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        26,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        26,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        27,
+        0
+      ],
+      "to": [
+        26,
+        27,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        17,
+        0
+      ],
+      "to": [
+        15,
+        17,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        33,
+        17,
+        0
+      ],
+      "to": [
+        39,
+        17,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        20,
+        26,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        26,
+        0
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        8,
+        -2
+      ],
+      "to": [
+        26,
+        13,
+        -2
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        30,
+        -6
+      ],
+      "to": [
+        31,
+        30,
+        -2
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        31,
+        -6
+      ],
+      "to": [
+        31,
+        33,
+        -2
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        34,
+        -6
+      ],
+      "to": [
+        31,
+        34,
+        -2
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        35,
+        -6
+      ],
+      "to": [
+        30,
+        35,
+        -2
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        36,
+        -6
+      ],
+      "to": [
+        31,
+        36,
+        -2
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        37,
+        -6
+      ],
+      "to": [
+        33,
+        37,
+        -2
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        38,
+        -6
+      ],
+      "to": [
+        34,
+        38,
+        -2
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        39,
+        -6
+      ],
+      "to": [
+        34,
+        39,
+        -2
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        40,
+        -6
+      ],
+      "to": [
+        33,
+        40,
+        -2
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        41,
+        -6
+      ],
+      "to": [
+        31,
+        41,
+        -2
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        42,
+        -6
+      ],
+      "to": [
+        29,
+        42,
+        -2
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        21,
+        43,
+        -6
+      ],
+      "to": [
+        27,
+        43,
+        -2
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        44,
+        -6
+      ],
+      "to": [
+        26,
+        44,
+        -2
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        23,
+        45,
+        -5
+      ],
+      "to": [
+        25,
+        45,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        46,
+        -4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        47,
+        -4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        7,
+        -3
+      ],
+      "to": [
+        4,
+        38,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        16,
+        -4
+      ],
+      "to": [
+        5,
+        16,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        15,
+        -3
+      ],
+      "to": [
+        4,
+        15,
+        0
+      ],
+      "block": "minecraft:blackstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        24,
+        -4
+      ],
+      "to": [
+        5,
+        24,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        23,
+        -3
+      ],
+      "to": [
+        4,
+        23,
+        0
+      ],
+      "block": "minecraft:blackstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        32,
+        -4
+      ],
+      "to": [
+        5,
+        32,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        31,
+        -3
+      ],
+      "to": [
+        4,
+        31,
+        0
+      ],
+      "block": "minecraft:blackstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        38,
+        -4
+      ],
+      "to": [
+        5,
+        38,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        39,
+        -3
+      ],
+      "to": [
+        4,
+        40,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        2,
+        41,
+        -3
+      ],
+      "to": [
+        3,
+        41,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        2,
+        42,
+        -2
+      ],
+      "to": [
+        3,
+        42,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        44,
+        7,
+        -3
+      ],
+      "to": [
+        47,
+        38,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        43,
+        16,
+        -4
+      ],
+      "to": [
+        48,
+        16,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        44,
+        15,
+        -3
+      ],
+      "to": [
+        47,
+        15,
+        0
+      ],
+      "block": "minecraft:blackstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        43,
+        24,
+        -4
+      ],
+      "to": [
+        48,
+        24,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        44,
+        23,
+        -3
+      ],
+      "to": [
+        47,
+        23,
+        0
+      ],
+      "block": "minecraft:blackstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        43,
+        32,
+        -4
+      ],
+      "to": [
+        48,
+        32,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        44,
+        31,
+        -3
+      ],
+      "to": [
+        47,
+        31,
+        0
+      ],
+      "block": "minecraft:blackstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        43,
+        38,
+        -4
+      ],
+      "to": [
+        48,
+        38,
+        0
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        44,
+        39,
+        -3
+      ],
+      "to": [
+        47,
+        40,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        45,
+        41,
+        -3
+      ],
+      "to": [
+        46,
+        41,
+        0
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        45,
+        42,
+        -2
+      ],
+      "to": [
+        46,
+        42,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        30,
+        -5
+      ],
+      "to": [
+        13,
+        30,
+        -2
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        31,
+        -5
+      ],
+      "to": [
+        13,
+        32,
+        -2
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        33,
+        -4
+      ],
+      "to": [
+        12,
+        33,
+        -3
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        34,
+        -4
+      ],
+      "to": [
+        12,
+        34,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        35,
+        30,
+        -5
+      ],
+      "to": [
+        38,
+        30,
+        -2
+      ],
+      "block": "minecraft:diorite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        35,
+        31,
+        -5
+      ],
+      "to": [
+        38,
+        32,
+        -2
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        36,
+        33,
+        -4
+      ],
+      "to": [
+        37,
+        33,
+        -3
+      ],
+      "block": "minecraft:smooth_quartz"
+    },
+    {
+      "op": "fill",
+      "from": [
+        36,
+        34,
+        -4
+      ],
+      "to": [
+        37,
+        34,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    }
+  ]
+}

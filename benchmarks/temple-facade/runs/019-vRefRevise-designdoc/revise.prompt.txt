@@ -1,0 +1,77 @@
+You are a master Minecraft architect making a SECOND, improving pass on your own work. TWO
+images are attached: (1) the REFERENCE building, and (2) a head-on render of your CURRENT build.
+The reference is a CRAFT reference ONLY — borrow its proportion, massing, silhouette, relief, and
+ornament. It is NOT a color reference: do NOT copy its palette. Your COLOR comes from your design
+document and the brief's demand for a distinctive, COLORFUL look — even if the reference is white.
+
+## Your finalized design document (honor it)
+# Temple of the Vermilion Eaves
+
+## 1. Lore & setting
+A mountain monastery of the **Cinnabar Way**, a pilgrim cult that lacquered its halls vermilion to ward decay and honor the sunrise. The reference — Hōryū-ji's Kondō and pagoda — gives a 7th-century East-Asian timber grammar: a religion expressed through roofs, not walls. This facade is the Kondō's front, the one hall a pilgrim meets head-on.
+
+## 2. Aesthetic & architectural logic
+What I read: **deep, double-tiered hipped-gable roofs** with enormous eave overhangs carried on visible bracket clusters; a post-and-beam wall of rhythmic bays; a stone podium with a central stair. The logic is *shelter as ornament* — the eaves' shadow-line is the building's strongest gesture. I keep that, stacking two roofs so silhouette reads at distance, and fold the pagoda's diminishing tiered spire into the crown rather than copying it as a detached tower.
+
+## 3. Color palette (complementary, red–green axis)
+The reference is white plaster, dark wood, gray tile — information, not mandate. I translate it to lacquered temple color:
+- **Red Concrete** — *dominant*: columns, beams, wall posts (vermilion).
+- **Prismarine Bricks** — *supporting/complement*: glazed celadon-jade roofs; the textured face breaks flat fields and casts micro-shadow.
+- **Calcite** — *neutral ground*: plaster infill panels between the red posts.
+- **Gold Block** — *accent, sparing*: the sōrin finial, bracket caps, ridge ends.
+
+Red against jade is a true complementary pair; gold (a warm near-split of red) lifts the crown; calcite keeps it from screaming. Bold, never monochrome.
+
+## 4. Motifs & ornament
+- **Bracket clusters (tokyō)** stepped out under each eave as corbel relief — gold-capped.
+- **Rhythmic bays**: red posts framing recessed calcite panels (recess by *omission* of the front course, not by burying a block).
+- **Ridge finials** and a sōrin-style stacked crown.
+- **Balustrade** banding the upper tier.
+
+## 5. Architectural features & proportion
+- **Base:** calcite/deepslate podium, ~1/6 of total height, with a centered ascending stair.
+- **Body:** two bays of red post-and-panel, lower tier wider.
+- **Eaves:** roof depth ≈ wall height (1:1) — deep overhang is the whole point.
+- **Crown:** double jade roof, the upper ~0.75× the lower, topped by the gold sōrin spire.
+- **Symmetry:** strict bilateral; central bay widest (~1.4× side bays); facade roughly **3 wide : 2 tall**.
+
+## A facade is ONE connected plane (critical)
+Borrow the reference's RHYTHM, not its 3-D standalone parts. A real building's corner towers or
+minarets are freestanding in the round; in a flat elevation they must read as ENGAGED — bonded to
+the wall and projecting forward as relief, NEVER as detached pillars with sky between them. Do not
+pull columns, towers, or framing off the body; every mass stays connected into a single facade.
+
+## Improve — compare your build (image 2) to the reference (image 1)
+- Proportion & rhythm: match the reference's balance and bay rhythm; resolve columns into integrated
+  bays, NOT freestanding pillars. Tighten the crowning silhouette without detaching it.
+- Relief & depth: deepen and model where your build reads flat next to the reference.
+- Detail — NO LARGE FLAT FIELDS: any wall plane wider than ~6 blocks must carry layered relief —
+  recessed panels, pilaster strips, string-courses, banding, or inset ornament. Add the reference's
+  character (arch profiles, framing, motifs, texture) where your build is bare; treat any blank
+  field as unfinished, especially the base/plinth and the flanks.
+- Color (CRITICAL): do NOT adopt the reference's colors. Hold your document's COLORFUL palette and
+  its dominant/supporting/accent hierarchy. If your build (image 2) reads monochrome, white, or
+  washed-out next to the brief's intent, ADD color back — restore the accent fields and contrast.
+  The brief asks for bold color; a build that drifted toward white is a regression to FIX, not keep.
+- Fix anything broken, floating, misaligned, or awkward.
+
+## Orientation & scale (unchanged)
+Facade FACES +Z, X-Y plane (X = width, Y = height, y = 0 ground), relief into -Z, front face at the
+highest Z. Width up to ~56, height up to ~48, deep relief up to ~24 into -Z. Front and relief only.
+
+## Materials
+Primarily the document's palette; declare the blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "019-vRefRevise-designdoc"
+- metadata.prompting_method_id = "temple-facade-reference-revise.v0"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Keep style.name as the document's style; set style.rationale to one line on what you improved.
+
+## Output (critical)
+Emit ONE complete improved design artifact — the full set of placements, not a diff. Local origin
+at x = 0, y = 0, z = 0 (ground at y = 0).

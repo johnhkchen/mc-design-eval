@@ -1,0 +1,85 @@
+You are a master Minecraft architect making a SECOND, improving pass on your own work. TWO
+images are attached: (1) the REFERENCE building, and (2) a head-on render of your CURRENT build.
+The reference is a CRAFT reference ONLY — borrow its proportion, massing, silhouette, relief, and
+ornament. It is NOT a color reference: do NOT copy its palette. Your COLOR comes from your design
+document and the brief's demand for a distinctive, COLORFUL look — even if the reference is white.
+
+## Your finalized design document (honor it)
+# Temple of the Amber Meridian — Facade Design Document
+
+## 1. Lore & setting
+A sun-temple of an invented desert dynasty, the *Meridian Order*, who worshipped the moment noon light strikes water. The reference reads as a serene, perfectly symmetrical mausoleum-shrine; I keep that funerary calm but recast it as a living temple to the daytime sky — heat below, heaven above.
+
+## 2. Aesthetic & architectural logic
+From the Taj I read **rigorous bilateral symmetry**, a **dominant central iwan** (recessed pointed-arch portal) framed by **stacked half-height niches**, a swelling **onion dome on a tall drum**, **four corner chattri kiosks**, and **flanking minaret towers** that fence the composition. This works because one giant arch commands the eye while the smaller niches set a rhythm and scale ladder. I adopt all of it — the strong centerpiece plus repeated subordinate openings — translated to voxel relief.
+
+## 3. Color palette (color theory)
+The reference is white marble — information, not mandate. I commit to a **complementary amber↔azure harmony**:
+- **Smooth red sandstone** — dominant warm amber mass (plinth, walls, minarets).
+- **Smooth sandstone** — supporting honey-pale courses and arch frames.
+- **Lapis lazuli block** — azure complement; the dome and iwan spandrel inlay.
+- **Gold block** — sparing accent on finial and the calligraphic border band.
+- **Quartz** — thin crisp white pinstripe edging only.
+
+Warm body, cool crown: the blue dome reads as captured sky against amber stone.
+
+## 4. Motifs & ornament
+The Taj's *pietra dura* inlay, calligraphic arch borders, and herringbone spandrels become: a **gold-and-quartz border band** outlining the central iwan, **lapis quatrefoil inlays** set into each niche tympanum, and a **vertical pinstripe** rhythm articulating the minarets.
+
+## 5. Architectural features & proportion
+- **Base:** raised quartz-edged plinth, ~1/6 of total height, lifting the facade off the ground.
+- **Body:** square amber block; central iwan rises ~2/3 of body height, niches ~1/2.
+- **Entablature:** a sandstone cornice with gold dentil band.
+- **Crown:** lapis onion dome whose belly **overhangs the drum** (so it never collapses into a pyramid), capped by a gold finial; four corner chattris echo it.
+- **Openings:** one deep recessed iwan, four flanking half-niches per side.
+- **Key ratios:** facade width ≈ height (1:1 square mass before dome); iwan height ≈ φ × niche height; dome diameter ≈ drum width.
+
+## A facade is ONE connected plane (critical)
+Borrow the reference's RHYTHM, not its 3-D standalone parts. A real building's corner towers or
+minarets are freestanding in the round; in a flat elevation they must read as ENGAGED — bonded to
+the wall and projecting forward as relief, NEVER as detached pillars with sky between them. Do not
+pull columns, towers, or framing off the body; every mass stays connected into a single facade.
+
+## Improve — compare your build (image 2) to the reference (image 1)
+- Proportion & rhythm: match the reference's balance and bay rhythm; resolve columns into integrated
+  bays, NOT freestanding pillars. Tighten the crowning silhouette without detaching it.
+- Relief & depth: deepen and model where your build reads flat next to the reference.
+- Detail — APPLY THIS PANEL GRAMMAR to every flat field (this is a recipe, not a menu; execute
+  it on EACH offender — the flanking wall fields, the spandrels, the base/plinth, and the window
+  insets, which currently read flat): (1) RECESS the field 1-2 blocks into -Z by exclusion (do NOT
+  place the front layer there — there is no air op; carve by not filling). (2) FRAME the sunken
+  panel with a raised border: a pilaster strip up each side and a string-course capping its top and
+  bottom, stepped with stairs/slabs. (3) Run a continuous horizontal STRING-COURSE across the whole
+  body every ~6-8 rows of height, so no tall field rises unbroken. No wall plane wider than ~6 may
+  remain a single flat surface. Build all of this with fill/box/line + voxel stair/slab state so it
+  stays cheap at scale.
+- Detail comes from RELIEF, not from new colors: source the articulation from DEPTH and shadow
+  (recess + frame + course) using the SAME palette blocks at varied Z — do NOT introduce extra
+  materials or 2-3-related-block 'grain' to fake texture; that collapses the color hierarchy. Hold
+  the document's dominant/supporting/accent scheme exactly while you add the panels.
+- Color (CRITICAL): do NOT adopt the reference's colors. Hold your document's COLORFUL palette and
+  its dominant/supporting/accent hierarchy. If your build (image 2) reads monochrome, white, or
+  washed-out next to the brief's intent, ADD color back — restore the accent fields and contrast.
+  The brief asks for bold color; a build that drifted toward white is a regression to FIX, not keep.
+- Fix anything broken, floating, misaligned, or awkward.
+
+## Orientation & scale (unchanged)
+Facade FACES +Z, X-Y plane (X = width, Y = height, y = 0 ground), relief into -Z, front face at the
+highest Z. Width up to ~56, height up to ~48, deep relief up to ~24 into -Z. Front and relief only.
+
+## Materials
+Primarily the document's palette; declare the blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "016-vRefRevise-designdoc"
+- metadata.prompting_method_id = "temple-facade-reference-revise.v0"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Keep style.name as the document's style; set style.rationale to one line on what you improved.
+
+## Output (critical)
+Emit ONE complete improved design artifact — the full set of placements, not a diff. Local origin
+at x = 0, y = 0, z = 0 (ground at y = 0).

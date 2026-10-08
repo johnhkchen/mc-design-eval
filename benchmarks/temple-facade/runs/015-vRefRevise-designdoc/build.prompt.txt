@@ -1,0 +1,71 @@
+You are a master Minecraft architect. Below is your FINALIZED design document for a temple
+facade. Build it as a structured design artifact that faithfully realizes the document, at
+GENEROUS SCALE and with DEEP RELIEF. Earlier facades were too small and too flat — do not
+repeat that; use the room you are given.
+
+## Finalized design document
+# Temple of the Lapis Meridian
+
+## 1. Lore & setting
+A sun-and-water temple of an invented Indo-Persian dynasty, raised over a sacred reflecting tank. Where the reference is a tomb of mourning rendered in pale marble, this is a temple of *daybreak* — the same disciplined Mughal grammar turned jubilant, built to catch the first light and throw it back in color.
+
+## 2. Aesthetic & architectural logic
+The reference reads as a single cubic mass with **chamfered corners**, crowned by a bulbous onion dome on a high drum, attended by four corner chattris and framed by four detached minarets. Its power is *centered symmetry*: one dominant pointed-arch iwan governs a facade of stacked, recessed niches. I keep this hierarchy intact — one great arch, subordinate twins — because it makes a flat front read as deep, monumental architecture rather than wall.
+
+## 3. Color palette (color theory)
+A **complementary harmony, amber ↔ azure**, gilded:
+- **Red Sandstone** (smooth + cut) — *dominant* warm-terracotta mass.
+- **Blue Glazed Terracotta** — *supporting* azure for iwan spandrels and inlay panels; the direct complement makes the body glow.
+- **Gold Block** — *accent*: dome cap, finial, and calligraphic arch-border.
+- **Dark Prismarine** — small jade note in the inlay, echoing pietra dura jadework.
+
+This refuses the reference's white: the marble becomes vermilion stone, the inlay becomes saturated lapis and jade — bold, not bleached.
+
+## 4. Motifs & ornament
+- **Pishtaq calligraphy band** — gold border framing the central arch (adapts the reference's inscription bands).
+- **Pietra-dura panels** — azure-and-jade recessed medallions in the spandrels.
+- **Guldasta pinnacles** — slender gold-tipped finials at the corners of the iwan frame.
+- **Recessed niche grid** — paired stacked arches flanking the center, carved by *omitting* front material for true relief depth.
+
+## 5. Architectural features & proportion
+- **Base:** a raised plinth, ~1/8 of facade height, in cut red sandstone.
+- **Mass:** chamfered cube; iwan width ≈ **½** the facade width.
+- **Crowning:** gold onion dome whose belly **overhangs its drum** (so it reads as a dome, not a pyramid); height of dome ≈ cube height, holding the famous near-1:1 square envelope.
+- **Flanking chattris:** four small domed kiosks at the mass corners.
+- **Entrance:** single tall pointed-arch iwan, deeply recessed, gold-framed, over a dark threshold.
+
+## Orientation (photographed head-on)
+Facade FACES +Z, in the X–Y plane (X = width, Y = height, y = 0 ground). Front face at the
+highest Z; relief recedes into −Z. Model only the front and its relief.
+
+## Scale & RELIEF — use it (this is judged)
+- Width up to ~56 (X), height up to ~48 (Y) including the crown. Build big.
+- DEEP relief: up to ~24 blocks of depth into −Z, and genuinely use it. Columns/buttresses
+  project several blocks PROUD of the wall; the central portal RECESSES several blocks deep;
+  cornices, string courses, and the crown step forward and back across MULTIPLE Z-layers. A
+  near-flat screen only 4–6 deep is a failure.
+- CROWN proportion: the crowning element (pediment / parapet / attic / cresting) must span the
+  facade's full width and have real height — a deliberate culmination of the body, never a
+  small cap perched on a wide base.
+
+## Realize the document with craft
+- Build every feature the document specifies; honor its proportion ratios and palette.
+- Frame openings with deep reveals; avoid uniform 45° slopes (vary pitch with slab+stair
+  combos; step curves/arches); use voxel block `state` for mouldings and trim.
+- Use `fill`/`box` for masses and `line` for shafts/edges to stay efficient at this scale.
+
+## Materials
+Primarily the document's palette; declare the blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "015-vRefRevise-designdoc"
+- metadata.prompting_method_id = "temple-facade-reference-revise.v0"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Set style.name to the document's style label and style.rationale to one line tying the build
+to the document.
+
+Local origin at x = 0, y = 0, z = 0 (ground at y = 0).

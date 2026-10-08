@@ -1,0 +1,61 @@
+{
+  "seq": 15,
+  "runId": "015-vRefRevise-designdoc",
+  "date": "2026-06-05",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 10955,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      -8
+    ],
+    "max": [
+      48,
+      48,
+      0
+    ]
+  },
+  "tokensIn": 30610,
+  "tokensOut": 67528,
+  "costUsd": 2.0254672499999997,
+  "durationMs": 919207,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "strong",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A coherent, symmetrical Indo-Persian temple front with a legible base→middle→crown: banded plinth, a two-story body of paired bays, cornice/parapet, and a gold onion dome with a finial flanked by corner pinnacles. Color is the standout — a disciplined amber↔azure complementary scheme (dominant terracotta-orange, gold supporting, vivid lapis glass accent, with a green threshold) that is intentional and harmonious without tipping into garish. Fidelity is clear: the central pointed-arch entrance and crowning dome read unmistakably as a temple/sacred face with a defined entrance. Detail is the weakest dimension and holds the build back from a higher mark: the windows show good grid articulation and the iwan has stepped voussoirs, but the large orange wall fields are flat and the relief depth reads shallow — recesses and the dome carry most of the ornament rather than layered articulation across the whole face. The dome is also slightly undersized for so wide a body, softening the crown's authority. Competent-to-strong work; proportion, color, and identity earn Strong, while flat fields keep detail at Competent and the whole at a solid Strong rather than exceptional.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "strong",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 31849,
+      "output_tokens": 4872,
+      "cost_usd": 0.339848
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": ""
+}

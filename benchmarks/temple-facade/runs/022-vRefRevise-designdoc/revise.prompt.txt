@@ -1,0 +1,74 @@
+You are a master Minecraft architect making a SECOND, improving pass on your own work. TWO
+images are attached: (1) the REFERENCE building, and (2) a head-on render of your CURRENT build.
+The reference is a CRAFT reference ONLY — borrow its proportion, massing, silhouette, relief, and
+ornament. It is NOT a color reference: do NOT copy its palette. Your COLOR comes from your design
+document and the brief's demand for a distinctive, COLORFUL look — even if the reference is white.
+
+## Your finalized design document (honor it)
+# Temple of the Cobalt Ascendant
+
+## 1. Lore & Setting
+A memorial-temple to a unifier-sage of an invented Azure Dynasty, raised on a mountain stair so pilgrims *climb* to meet it — echoing the reference's monumental podium and processional steps. It is a hall of remembrance, not worship: solemn, civic, eternal. The character is grave dignity made radiant, exactly the mood of that blue-crowned hall floating above white granite.
+
+## 2. Aesthetic & Architectural Logic
+The reference speaks a clear tripartite language: **massive pale stone body, deep bracketed eaves, a dominant glazed roof.** It works because weight is honest — a heavy granite podium grounds a lighter, soaring roof, and the eye is led up. I borrow the **double-eave silhouette**, the **three-arch front**, the **crowning tablet**, and the **dougong bracket band** that visually carries the overhang. Symmetry is absolute; every mass mirrors across the central axis.
+
+## 3. Color Palette (Complementary: Cobalt ↔ Gold)
+The reference hands me one true color — that cobalt roof — and I commit to it boldly rather than collapsing to its white walls.
+- **Dominant:** `blue_glazed_terracotta` — the glazed tile roof, vivid and patterned like real琉璃 tile.
+- **Field:** `calcite` — pale granite body, cool and luminous (neutral, never the star).
+- **Accent (complement):** `gold_block` — gilded tablet, characters, finials. Gold opposite blue is the harmony's engine.
+- **Counter-accent:** `red_concrete` — vermilion doors, the imperial spark against cool stone.
+
+Blue + gold + a vermilion heartbeat on pale stone reads unmistakably bold and ceremonial.
+
+## 4. Motifs & Ornament
+From the reference: the **carved tablet over the central bay**, **gilded inscription characters** across the lintel band, **arched spandrels** with relief scrollwork, **bracket clusters** repeating under each eave, and **upturned roof horns**. I adapt these as a gold-framed central plaque, a row of three gold glyph-panels, calcite voussoir arches with stepped relief, and a rhythmic gold-tipped bracket course.
+
+## 5. Architectural Features & Proportion
+- **Base:** broad calcite podium with central stair, ~1/3 of total height.
+- **Body:** three engaged bays; **central bay 1.3× the side bays**, pierced by the tallest arch.
+- **Entablature:** projecting bracket band, eave overhang ≈ ¼ of wall width.
+- **Crown:** double cobalt roof; **roof height ≈ wall height (1:1)**, the defining gesture.
+- **Openings:** three vermilion-doored arches, central tallest, flanked by gilded glyph-panels.
+
+## A facade is ONE connected plane (critical)
+Borrow the reference's RHYTHM, not its 3-D standalone parts. A real building's corner towers or
+minarets are freestanding in the round; in a flat elevation they must read as ENGAGED — bonded to
+the wall and projecting forward as relief, NEVER as detached pillars with sky between them. Do not
+pull columns, towers, or framing off the body; every mass stays connected into a single facade.
+
+## Improve — compare your build (image 2) to the reference (image 1)
+- Proportion & rhythm: match the reference's balance and bay rhythm; resolve columns into integrated
+  bays, NOT freestanding pillars. Tighten the crowning silhouette without detaching it.
+- Relief & depth: deepen and model where your build reads flat next to the reference.
+- Detail — NO LARGE FLAT FIELDS: any wall plane wider than ~6 blocks must carry layered relief —
+  recessed panels, pilaster strips, string-courses, banding, or inset ornament. Add the reference's
+  character (arch profiles, framing, motifs, texture) where your build is bare; treat any blank
+  field as unfinished, especially the base/plinth and the flanks.
+- Color (CRITICAL): do NOT adopt the reference's colors. Hold your document's COLORFUL palette and
+  its dominant/supporting/accent hierarchy. If your build (image 2) reads monochrome, white, or
+  washed-out next to the brief's intent, ADD color back — restore the accent fields and contrast.
+  The brief asks for bold color; a build that drifted toward white is a regression to FIX, not keep.
+- Fix anything broken, floating, misaligned, or awkward.
+
+## Orientation & scale (unchanged)
+Facade FACES +Z, X-Y plane (X = width, Y = height, y = 0 ground), relief into -Z, front face at the
+highest Z. Width up to ~56, height up to ~48, deep relief up to ~24 into -Z. Front and relief only.
+
+## Materials
+Primarily the document's palette; declare the blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "022-vRefRevise-designdoc"
+- metadata.prompting_method_id = "temple-facade-reference-revise.v0"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Keep style.name as the document's style; set style.rationale to one line on what you improved.
+
+## Output (critical)
+Emit ONE complete improved design artifact — the full set of placements, not a diff. Local origin
+at x = 0, y = 0, z = 0 (ground at y = 0).

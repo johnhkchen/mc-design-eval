@@ -1,0 +1,61 @@
+{
+  "seq": 22,
+  "runId": "022-vRefRevise-designdoc",
+  "date": "2026-06-05",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 11325,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      -1,
+      0,
+      -6
+    ],
+    "max": [
+      55,
+      47,
+      5
+    ]
+  },
+  "tokensIn": 32038,
+  "tokensOut": 42093,
+  "costUsd": 1.405401,
+  "durationMs": 640267,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A clean, legible East Asian temple/pagoda facade with genuine character. Proportion is Strong: a clear base→body→crown reads top to bottom, the three-bay rhythm (wide central door flanked by two narrower niches) is symmetric and deliberate, and the two-tier upturned-eave roof gives a coherent crown — though the roof mass is a touch heavy over a slightly squat body, an easy improvement that keeps it short of exceptional. Color is Strong and is the build's strongest asset: a disciplined East Asian scheme of dominant pale stone walls, a supporting cobalt tile roof, with gold cornices/eave ornaments and vermilion doorways as well-judged accents — harmonious and culturally coherent, but the blue is a single flat saturation and could be modulated, so not exceptional. Detail is only Competent: the ornament is real but unevenly distributed — rich at the roof (textured tiles, upturned gold corner brackets, a coffered gold dentil course) and at the framed red niches, yet the wall plane and base are large flat fields with shallow, drawn-on relief rather than carved depth. Fidelity is Strong: unmistakably an East Asian temple with clear presence and a centered, stepped entrance, characterful but not iconic to a specific namable landmark. Overall Strong — attractive and coherent with obvious next moves (deepen relief, articulate the flat walls, modulate the roof) keeping every dimension below the exceptional apex.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "strong",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 31297,
+      "output_tokens": 4840,
+      "cost_usd": 0.42686125
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": "Sun Yat-sen Mausoleum re-run (T-012-01): cumulative-progress on the reference that first proved grounding (run 008). P12 on a blue-white reference; P13 on double-eaved stacked roof + battered wings; detail lever vs 008's named blank base register + shallow portico."
+}

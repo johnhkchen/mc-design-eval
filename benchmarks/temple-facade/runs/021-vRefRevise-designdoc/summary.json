@@ -1,0 +1,61 @@
+{
+  "seq": 21,
+  "runId": "021-vRefRevise-designdoc",
+  "date": "2026-06-05",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 12696,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      43,
+      47,
+      8
+    ]
+  },
+  "tokensIn": 30973,
+  "tokensOut": 71671,
+  "costUsd": 2.125126,
+  "durationMs": 1005776,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "strong",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A confident triumphal-gateway temple: warm brick body, gold trim, deep-blue recessed panels — a disciplined dominant/supporting/accent scheme that gives the build a clear identity. Clean base→middle→crown: plinth, great central arch flanked by tall framed side windows, then a coffered panel band and a dentil/crenellated cornice. Ornament is purposeful and dense around every opening (gold archivolt, framed lights, coffers) and it reads unmistakably as a grand temple with a commanding entrance. Held back from exceptional by easy-to-name improvements: the enormous central tympanum is one large flat lattice field, the brick side fields are fairly plain, and the side bays feel squeezed against the oversized arch. The upper coffer row is also a touch mechanical. Very good, but not the rare one-in-ten apex.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "strong",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 32857,
+      "output_tokens": 3935,
+      "cost_usd": 0.40784525
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": "Arc de Triomphe generalization (T-011-01): single colossal opening; tests P12 color off a 4th pale ref, P13 proportion on arch massing, and the detail lever on the broad flat attic/spandrel fields."
+}

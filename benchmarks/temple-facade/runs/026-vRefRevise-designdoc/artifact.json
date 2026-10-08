@@ -1,0 +1,2333 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "026-vRefRevise-designdoc",
+    "prompting_method_id": "temple-facade-reference-revise.v0",
+    "model_id": "claude-opus-4-8",
+    "seed": 11,
+    "server_state_id": "flat-creative-superflat.v1"
+  },
+  "style": {
+    "name": "Temple of the Cobalt Dawn — Mughal sun-and-sky paradise-gate",
+    "rationale": "Second pass: dissolved the three flat blue fields into framed pointed-arch niches with gold mullions and amethyst medallions; turned the blind center into a deep amethyst-doored iwan with colonnettes and chevron bands; widened the onion dome belly to overhang the drum; added a dentilled gold cornice, engaged corner/iwan pilasters, a relieved dado plinth, four chhatri and flanking guldasta spires; held the terracotta/lapis/gold/amethyst palette against the white reference."
+  },
+  "palette": {
+    "manifest": [
+      "minecraft:smooth_red_sandstone",
+      "minecraft:cut_red_sandstone",
+      "minecraft:lapis_block",
+      "minecraft:gold_block",
+      "minecraft:amethyst_block"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        44,
+        3,
+        7
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        3,
+        0
+      ],
+      "to": [
+        44,
+        3,
+        8
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        3,
+        8
+      ],
+      "to": [
+        44,
+        3,
+        8
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        4,
+        0,
+        8
+      ],
+      "to": [
+        4,
+        2,
+        8
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        10,
+        0,
+        8
+      ],
+      "to": [
+        10,
+        2,
+        8
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        16,
+        0,
+        8
+      ],
+      "to": [
+        16,
+        2,
+        8
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        22,
+        0,
+        8
+      ],
+      "to": [
+        22,
+        2,
+        8
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        28,
+        0,
+        8
+      ],
+      "to": [
+        28,
+        2,
+        8
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        34,
+        0,
+        8
+      ],
+      "to": [
+        34,
+        2,
+        8
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        40,
+        0,
+        8
+      ],
+      "to": [
+        40,
+        2,
+        8
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        1,
+        8
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        1,
+        8
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        19,
+        1,
+        8
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        1,
+        8
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        31,
+        1,
+        8
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        37,
+        1,
+        8
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        4,
+        0
+      ],
+      "to": [
+        3,
+        29,
+        5
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        41,
+        4,
+        0
+      ],
+      "to": [
+        44,
+        29,
+        5
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        4,
+        0
+      ],
+      "to": [
+        16,
+        29,
+        5
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        28,
+        4,
+        0
+      ],
+      "to": [
+        29,
+        29,
+        5
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        4,
+        0
+      ],
+      "to": [
+        5,
+        29,
+        5
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        4,
+        0
+      ],
+      "to": [
+        14,
+        29,
+        5
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        4,
+        0
+      ],
+      "to": [
+        12,
+        6,
+        5
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        16,
+        0
+      ],
+      "to": [
+        12,
+        17,
+        5
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        27,
+        0
+      ],
+      "to": [
+        12,
+        29,
+        5
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        30,
+        4,
+        0
+      ],
+      "to": [
+        31,
+        29,
+        5
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        39,
+        4,
+        0
+      ],
+      "to": [
+        40,
+        29,
+        5
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        32,
+        4,
+        0
+      ],
+      "to": [
+        38,
+        6,
+        5
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        32,
+        16,
+        0
+      ],
+      "to": [
+        38,
+        17,
+        5
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        32,
+        27,
+        0
+      ],
+      "to": [
+        38,
+        29,
+        5
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        7,
+        0
+      ],
+      "to": [
+        12,
+        15,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        18,
+        0
+      ],
+      "to": [
+        12,
+        26,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        32,
+        7,
+        0
+      ],
+      "to": [
+        38,
+        15,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        32,
+        18,
+        0
+      ],
+      "to": [
+        38,
+        26,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        6,
+        13,
+        3
+      ],
+      "to": [
+        8,
+        15,
+        3
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        12,
+        13,
+        3
+      ],
+      "to": [
+        10,
+        15,
+        3
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        9,
+        15,
+        3
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        9,
+        7,
+        3
+      ],
+      "to": [
+        9,
+        12,
+        3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        10,
+        3
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        10,
+        10,
+        3
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        6,
+        24,
+        3
+      ],
+      "to": [
+        8,
+        26,
+        3
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        12,
+        24,
+        3
+      ],
+      "to": [
+        10,
+        26,
+        3
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        9,
+        26,
+        3
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        9,
+        18,
+        3
+      ],
+      "to": [
+        9,
+        23,
+        3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        8,
+        21,
+        3
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        10,
+        21,
+        3
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        32,
+        13,
+        3
+      ],
+      "to": [
+        34,
+        15,
+        3
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        38,
+        13,
+        3
+      ],
+      "to": [
+        36,
+        15,
+        3
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        35,
+        15,
+        3
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        35,
+        7,
+        3
+      ],
+      "to": [
+        35,
+        12,
+        3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        10,
+        3
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        36,
+        10,
+        3
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        32,
+        24,
+        3
+      ],
+      "to": [
+        34,
+        26,
+        3
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        38,
+        24,
+        3
+      ],
+      "to": [
+        36,
+        26,
+        3
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        35,
+        26,
+        3
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        35,
+        18,
+        3
+      ],
+      "to": [
+        35,
+        23,
+        3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        21,
+        3
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        36,
+        21,
+        3
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        4,
+        0
+      ],
+      "to": [
+        27,
+        27,
+        1
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        28,
+        0
+      ],
+      "to": [
+        27,
+        29,
+        5
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        18,
+        4,
+        2
+      ],
+      "to": [
+        18,
+        22,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        26,
+        4,
+        2
+      ],
+      "to": [
+        26,
+        22,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        21,
+        4,
+        2
+      ],
+      "to": [
+        23,
+        13,
+        2
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        20,
+        4,
+        2
+      ],
+      "to": [
+        20,
+        14,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        24,
+        4,
+        2
+      ],
+      "to": [
+        24,
+        14,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        20,
+        4,
+        2
+      ],
+      "to": [
+        24,
+        4,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        20,
+        14,
+        2
+      ],
+      "to": [
+        22,
+        16,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        24,
+        14,
+        2
+      ],
+      "to": [
+        22,
+        16,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        15,
+        2
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        18,
+        18,
+        2
+      ],
+      "to": [
+        26,
+        18,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        19,
+        20,
+        2
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        20,
+        2
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        20,
+        2
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        18,
+        23,
+        2
+      ],
+      "to": [
+        26,
+        23,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        22,
+        3
+      ],
+      "to": [
+        25,
+        26,
+        3
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        26,
+        3
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        22,
+        4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        23,
+        4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        18,
+        24,
+        4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        19,
+        25,
+        4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        20,
+        26,
+        4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        21,
+        27,
+        4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        28,
+        4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        22,
+        4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        23,
+        4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        24,
+        4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        25,
+        4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        26,
+        4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        27,
+        4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        18,
+        29,
+        4
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        29,
+        4
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        4,
+        6
+      ],
+      "to": [
+        16,
+        29,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        28,
+        4,
+        6
+      ],
+      "to": [
+        29,
+        29,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        29,
+        6
+      ],
+      "to": [
+        29,
+        29,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        8,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        14,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        20,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        26,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        8,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        14,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        20,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        26,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        4,
+        6
+      ],
+      "to": [
+        14,
+        29,
+        6
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        30,
+        4,
+        6
+      ],
+      "to": [
+        30,
+        29,
+        6
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        29,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        29,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        4,
+        6
+      ],
+      "to": [
+        2,
+        29,
+        6
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        42,
+        4,
+        6
+      ],
+      "to": [
+        43,
+        29,
+        6
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        29,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        29,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        29,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        29,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        5,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        5,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        5,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        5,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        10,
+        6
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        10,
+        6
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        22,
+        6
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        22,
+        6
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        10,
+        6
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        10,
+        6
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        22,
+        6
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        22,
+        6
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        16,
+        6
+      ],
+      "to": [
+        14,
+        16,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        30,
+        16,
+        6
+      ],
+      "to": [
+        44,
+        16,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        30,
+        5
+      ],
+      "to": [
+        44,
+        30,
+        7
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        31,
+        5
+      ],
+      "to": [
+        44,
+        31,
+        7
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        31,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        31,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        10,
+        31,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        31,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        18,
+        31,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        31,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        31,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        30,
+        31,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        31,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        38,
+        31,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        42,
+        31,
+        7
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        32,
+        5
+      ],
+      "to": [
+        44,
+        32,
+        8
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        33,
+        0
+      ],
+      "to": [
+        44,
+        33,
+        6
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        34,
+        0
+      ],
+      "to": [
+        26,
+        38,
+        5
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        18,
+        34,
+        5
+      ],
+      "to": [
+        18,
+        38,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        26,
+        34,
+        5
+      ],
+      "to": [
+        26,
+        38,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        22,
+        34,
+        5
+      ],
+      "to": [
+        22,
+        38,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        19,
+        34,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        21,
+        34,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        34,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        34,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        20,
+        34,
+        5
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        34,
+        5
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        20,
+        36,
+        5
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        36,
+        5
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        38,
+        5
+      ],
+      "to": [
+        27,
+        38,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        39,
+        0
+      ],
+      "to": [
+        27,
+        39,
+        5
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        16,
+        40,
+        0
+      ],
+      "to": [
+        28,
+        40,
+        5
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        16,
+        41,
+        0
+      ],
+      "to": [
+        28,
+        41,
+        5
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        42,
+        0
+      ],
+      "to": [
+        27,
+        42,
+        5
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        43,
+        0
+      ],
+      "to": [
+        26,
+        43,
+        5
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        44,
+        0
+      ],
+      "to": [
+        25,
+        44,
+        5
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        45,
+        0
+      ],
+      "to": [
+        24,
+        45,
+        5
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        21,
+        46,
+        0
+      ],
+      "to": [
+        23,
+        46,
+        5
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        39,
+        5
+      ],
+      "to": [
+        27,
+        39,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        22,
+        40,
+        5
+      ],
+      "to": [
+        22,
+        46,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        40,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        40,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        41,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        41,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        19,
+        42,
+        5
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        42,
+        5
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        44,
+        5
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        22,
+        47,
+        5
+      ],
+      "to": [
+        22,
+        48,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        2,
+        34,
+        4
+      ],
+      "to": [
+        2,
+        37,
+        4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        6,
+        34,
+        4
+      ],
+      "to": [
+        6,
+        37,
+        4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        2,
+        37,
+        4
+      ],
+      "to": [
+        6,
+        37,
+        4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        2,
+        38,
+        4
+      ],
+      "to": [
+        6,
+        38,
+        4
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        39,
+        4
+      ],
+      "to": [
+        5,
+        39,
+        4
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        40,
+        4
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        41,
+        4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        35,
+        3
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        36,
+        3
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        38,
+        34,
+        4
+      ],
+      "to": [
+        38,
+        37,
+        4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        42,
+        34,
+        4
+      ],
+      "to": [
+        42,
+        37,
+        4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        38,
+        37,
+        4
+      ],
+      "to": [
+        42,
+        37,
+        4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        38,
+        38,
+        4
+      ],
+      "to": [
+        42,
+        38,
+        4
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        39,
+        39,
+        4
+      ],
+      "to": [
+        41,
+        39,
+        4
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        40,
+        4
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        41,
+        4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        35,
+        3
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        40,
+        36,
+        3
+      ],
+      "block": "minecraft:amethyst_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        11,
+        34,
+        3
+      ],
+      "to": [
+        11,
+        36,
+        3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        13,
+        34,
+        3
+      ],
+      "to": [
+        13,
+        36,
+        3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        12,
+        37,
+        3
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        12,
+        38,
+        3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        31,
+        34,
+        3
+      ],
+      "to": [
+        31,
+        36,
+        3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        33,
+        34,
+        3
+      ],
+      "to": [
+        33,
+        36,
+        3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        37,
+        3
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        38,
+        3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        34,
+        4
+      ],
+      "to": [
+        0,
+        39,
+        4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        0,
+        40,
+        4
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        44,
+        34,
+        4
+      ],
+      "to": [
+        44,
+        39,
+        4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        44,
+        40,
+        4
+      ],
+      "block": "minecraft:gold_block"
+    }
+  ]
+}

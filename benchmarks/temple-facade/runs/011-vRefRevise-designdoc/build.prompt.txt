@@ -1,0 +1,70 @@
+You are a master Minecraft architect. Below is your FINALIZED design document for a temple
+facade. Build it as a structured design artifact that faithfully realizes the document, at
+GENEROUS SCALE and with DEEP RELIEF. Earlier facades were too small and too flat — do not
+repeat that; use the room you are given.
+
+## Finalized design document
+# Temple of the Lapis Meridian — Facade Design Document
+
+## 1. Lore & setting
+A dawn-shrine of an invented river civilization, the *Meridian Cult*, who worship the first light striking water. Like the reference mausoleum, it is a memorial-temple: serene, symmetrical, built to be mirrored in a reflecting pool. Its calm, weightless monumentality is read directly from the reference's floating-white poise.
+
+## 2. Aesthetic & architectural logic
+The reference teaches **perfect bilateral symmetry around a central vertical axis**: a dominant pishtaq (arched portal-screen) crowned by a swelling onion dome on a tall drum, flanked by recessed twin niches, with corner chamfers and freestanding minarets pinning the composition. This works because the eye climbs the central arch into the dome, while the minarets cage the silhouette and stop it from drifting. I adopt that hierarchy wholesale; I translate its material into color.
+
+## 3. Color palette (color theory)
+The reference is white — information, not mandate. I commit to a **split-complementary harmony**:
+- **Dominant:** Warped Planks (deep teal-blue) — the body, standing in for the marble mass.
+- **Supporting:** Smooth Quartz — crisp framing of arches and the dome, the "light" the cult worships.
+- **Accent 1:** Gold Block — finial, dome cap, niche keystones.
+- **Accent 2:** Purpur Block — pietra-dura inlay bands (violet against teal-gold).
+- **Base:** Polished Deepslate plinth.
+
+Teal dominant, gold + violet split accents: bold, jewel-like, unmistakably *not* a white wall.
+
+## 4. Motifs & ornament
+From the reference: **the pointed-arch frame repeated at three scales** (great pishtaq, flanking niches, drum blind-arches), and **flat inlay banding** outlining every arch. Adapted: quartz arch-outlines on the teal field, purpur inlay running the spandrels and plinth course, gold rosettes at arch crowns — the Taj's calligraphic borders rendered as crisp voxel ribbons.
+
+## 5. Architectural features & proportion
+- **Base:** wide deepslate plinth, ~1/6 of total height, projecting one block.
+- **Body:** square teal mass with chamfered corners; central pishtaq recessed 3 blocks deep, ~0.55 of the body width.
+- **Niches:** two stacked recessed arches per flank, half the pishtaq's width.
+- **Crown:** quartz drum, then bulbous onion dome whose belly **overhangs** the drum, gold finial spike. Four corner chattris (mini domed kiosks) echo the center.
+- **Minarets:** four slender towers, ~1.4× the body height, framing the face.
+- **Key ratios:** dome height ≈ body height (1:1); minaret : facade ≈ 1.4:1; pishtaq : body width ≈ 0.55.
+
+## Orientation (photographed head-on)
+Facade FACES +Z, in the X–Y plane (X = width, Y = height, y = 0 ground). Front face at the
+highest Z; relief recedes into −Z. Model only the front and its relief.
+
+## Scale & RELIEF — use it (this is judged)
+- Width up to ~56 (X), height up to ~48 (Y) including the crown. Build big.
+- DEEP relief: up to ~24 blocks of depth into −Z, and genuinely use it. Columns/buttresses
+  project several blocks PROUD of the wall; the central portal RECESSES several blocks deep;
+  cornices, string courses, and the crown step forward and back across MULTIPLE Z-layers. A
+  near-flat screen only 4–6 deep is a failure.
+- CROWN proportion: the crowning element (pediment / parapet / attic / cresting) must span the
+  facade's full width and have real height — a deliberate culmination of the body, never a
+  small cap perched on a wide base.
+
+## Realize the document with craft
+- Build every feature the document specifies; honor its proportion ratios and palette.
+- Frame openings with deep reveals; avoid uniform 45° slopes (vary pitch with slab+stair
+  combos; step curves/arches); use voxel block `state` for mouldings and trim.
+- Use `fill`/`box` for masses and `line` for shafts/edges to stay efficient at this scale.
+
+## Materials
+Primarily the document's palette; declare the blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "011-vRefRevise-designdoc"
+- metadata.prompting_method_id = "temple-facade-reference-revise.v0"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Set style.name to the document's style label and style.rationale to one line tying the build
+to the document.
+
+Local origin at x = 0, y = 0, z = 0 (ground at y = 0).

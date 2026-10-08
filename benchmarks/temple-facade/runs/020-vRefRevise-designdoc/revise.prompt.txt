@@ -1,0 +1,74 @@
+You are a master Minecraft architect making a SECOND, improving pass on your own work. TWO
+images are attached: (1) the REFERENCE building, and (2) a head-on render of your CURRENT build.
+The reference is a CRAFT reference ONLY — borrow its proportion, massing, silhouette, relief, and
+ornament. It is NOT a color reference: do NOT copy its palette. Your COLOR comes from your design
+document and the brief's demand for a distinctive, COLORFUL look — even if the reference is white.
+
+## Your finalized design document (honor it)
+# Temple of the Sevenfold Dawn — Facade Design Document
+
+## 1. Lore & setting
+A pilgrim-chapel of a sun-and-star cult, built by flame-carvers of a late "Flamboyant" age — the era when stone was worked thin as lace and worship meant *light through glass*. The reference (Sainte-Chapelle de Vincennes) reads as a single soaring devotional face: vertical, restless, crowned. I keep that mood — a reliquary turned to architecture.
+
+## 2. Aesthetic & architectural logic
+The reference's language is **verticality and bristling silhouette**: a steep crowning gable, slender buttresses dividing the face, and a skyline that *erupts* in pinnacles and spirelets. Nothing is flat — every plane is broken by relief. This works because the eye is dragged upward in stages (portal → rose → gable → finial), never resting. I adopt this staged ascent and the flanking-turret frame, translating tracery into stepped voxel relief.
+
+## 3. Color palette (color theory)
+The reference is pale honey limestone under a slate-blue roof — I take its *structure*, not its pallor. **Harmony: warm split-complementary.**
+- **Dominant (~55%) — Red Sandstone** (warm amber body), the sun-baked stone.
+- **Supporting (~30%) — Blue Terracotta** (steep roof, turret spires, gable field), the slate echoed but saturated.
+- **Accent — Gold Block** (crockets, finials, tracery ribs) and **Blue + Red Stained Glass** blazing in the rose.
+
+Amber against blue, lit by gold and jewel-glass: confident, devotional, unmistakably colorful.
+
+## 4. Motifs & ornament
+From the reference: the **flamboyant rose window**, **crocketed gable**, **pinnacle spires**, and **deep pointed portal**. Adapted — the rose becomes a stepped concentric glass medallion; crockets become regular gold studs climbing the gable rake; pinnacles become engaged blue-terracotta spirelets bonded to the corner turrets (never detached, no sky between).
+
+## 5. Architectural features & proportion
+- **Base:** broad sandstone plinth and stepped portal landing.
+- **Supports:** two engaged buttress-turrets framing a central bay; quoined sandstone with gold bands every 8 rows.
+- **Entrance:** deep pointed iwan-portal, recessed, gold-edged.
+- **Openings:** one great rose (jewel glass) above the portal; paired lancets in each turret.
+- **Crown:** steep ~60° gable, gold finial at apex.
+- **Ratios:** facade height : width ≈ **1.6 : 1** (golden); rose diameter ≈ **0.45×** central-bay width; gable occupies the top **~40%**.
+
+## A facade is ONE connected plane (critical)
+Borrow the reference's RHYTHM, not its 3-D standalone parts. A real building's corner towers or
+minarets are freestanding in the round; in a flat elevation they must read as ENGAGED — bonded to
+the wall and projecting forward as relief, NEVER as detached pillars with sky between them. Do not
+pull columns, towers, or framing off the body; every mass stays connected into a single facade.
+
+## Improve — compare your build (image 2) to the reference (image 1)
+- Proportion & rhythm: match the reference's balance and bay rhythm; resolve columns into integrated
+  bays, NOT freestanding pillars. Tighten the crowning silhouette without detaching it.
+- Relief & depth: deepen and model where your build reads flat next to the reference.
+- Detail — NO LARGE FLAT FIELDS: any wall plane wider than ~6 blocks must carry layered relief —
+  recessed panels, pilaster strips, string-courses, banding, or inset ornament. Add the reference's
+  character (arch profiles, framing, motifs, texture) where your build is bare; treat any blank
+  field as unfinished, especially the base/plinth and the flanks.
+- Color (CRITICAL): do NOT adopt the reference's colors. Hold your document's COLORFUL palette and
+  its dominant/supporting/accent hierarchy. If your build (image 2) reads monochrome, white, or
+  washed-out next to the brief's intent, ADD color back — restore the accent fields and contrast.
+  The brief asks for bold color; a build that drifted toward white is a regression to FIX, not keep.
+- Fix anything broken, floating, misaligned, or awkward.
+
+## Orientation & scale (unchanged)
+Facade FACES +Z, X-Y plane (X = width, Y = height, y = 0 ground), relief into -Z, front face at the
+highest Z. Width up to ~56, height up to ~48, deep relief up to ~24 into -Z. Front and relief only.
+
+## Materials
+Primarily the document's palette; declare the blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "020-vRefRevise-designdoc"
+- metadata.prompting_method_id = "temple-facade-reference-revise.v0"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Keep style.name as the document's style; set style.rationale to one line on what you improved.
+
+## Output (critical)
+Emit ONE complete improved design artifact — the full set of placements, not a diff. Local origin
+at x = 0, y = 0, z = 0 (ground at y = 0).

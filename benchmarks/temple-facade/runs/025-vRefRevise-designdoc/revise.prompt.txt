@@ -1,0 +1,76 @@
+You are a master Minecraft architect making a SECOND, improving pass on your own work. TWO
+images are attached: (1) the REFERENCE building, and (2) a head-on render of your CURRENT build.
+The reference is a CRAFT reference ONLY — borrow its proportion, massing, silhouette, relief, and
+ornament. It is NOT a color reference: do NOT copy its palette. Your COLOR comes from your design
+document and the brief's demand for a distinctive, COLORFUL look — even if the reference is white.
+
+## Your finalized design document (honor it)
+# Temple of the Jade Meridian
+
+## 1. Lore & setting
+A tide-temple of the Asravi, a river people who borrowed the Mughal imperial grammar but turned its funerary grief into living devotion — the white tomb's stillness reforged as a shrine to the green dawn over water. Same proportion, opposite mood: not mourning, but renewal.
+
+## 2. Aesthetic & architectural logic
+The reference gives perfect bilateral symmetry and a tripartite front: a tall central **pīshtāq** (recessed pointed-arch iwan) flanked by two stacked registers of smaller arched niches, the whole crowned by a bulbous onion dome on a high drum and pinned by four corner minarets. The iwan's deep shadow does the heavy lifting — relief, not paint, carries the drama. I keep that hierarchy: one commanding void, framed silence around it.
+
+## 3. Color palette (split-complementary)
+Jade-green dominant against its split-complements, amber-gold and vermilion.
+- **prismarine_bricks** — dominant body (~60%), the jade field.
+- **dark_prismarine** — recess and iwan interior (~15%), deepening the shadow the reference earns with depth.
+- **gold_block** — string-courses, dome, finials (~12%), the amber accent.
+- **red_nether_bricks** — calligraphic borders and rosettes (~8%), vermilion punctuation.
+- **smooth_quartz** — plinth and crisp arch trim (~5%), to frame, never to fill.
+
+The pale marble of the reference becomes information only; the temple commits to bold green.
+
+## 4. Motifs & ornament
+Gold ogee frames around every niche; a continuous gold string-course banding base, drum, and minarets into one read. The reference's calligraphic pīshtāq border becomes a vermilion fret. Lotus-petal collar in gold at the dome's base; four small chattri kiosks shouldering the central dome.
+
+## 5. Architectural features & proportion
+- **Base:** quartz plinth, 1 part of an 8-part facade height.
+- **Body:** jade cube, the central iwan recessed 5 blocks deep, its arch rising to ⅔ of the cube.
+- **Flanks:** two-over-two niche registers, each half the iwan's width.
+- **Entrance:** pointed-arch portal inside the iwan, gold-framed, ~1:1.6 portal-to-body.
+- **Crown:** onion dome whose belly **overhangs the drum** (never a pyramid), height ≈ ⅓ of the total; gold finial spike.
+- **Minarets:** four engaged corner shafts at full facade height, gold-ringed, balconied chattris atop.
+
+## A facade is ONE connected plane (critical)
+Borrow the reference's RHYTHM, not its 3-D standalone parts. A real building's corner towers or
+minarets are freestanding in the round; in a flat elevation they must read as ENGAGED — bonded to
+the wall and projecting forward as relief, NEVER as detached pillars with sky between them. Do not
+pull columns, towers, or framing off the body; every mass stays connected into a single facade.
+
+## Improve — compare your build (image 2) to the reference (image 1)
+- Proportion & rhythm: match the reference's balance and bay rhythm; resolve columns into integrated
+  bays, NOT freestanding pillars. Tighten the crowning silhouette without detaching it.
+- Relief & depth: deepen and model where your build reads flat next to the reference.
+- Detail — NO LARGE FLAT FIELDS: any wall plane wider than ~6 blocks must carry layered relief —
+  recessed panels, pilaster strips, string-courses, banding, or inset ornament. Add the reference's
+  character (arch profiles, framing, motifs, texture) where your build is bare; treat any blank
+  field as unfinished, especially the base/plinth and the flanks.
+- Color (CRITICAL): do NOT adopt the reference's colors. Hold your document's COLORFUL palette and
+  its dominant/supporting/accent hierarchy. If your build (image 2) reads monochrome, white, or
+  washed-out next to the brief's intent, ADD color back — restore the accent fields and contrast.
+  The brief asks for bold color; a build that drifted toward white is a regression to FIX, not keep.
+- Fix anything broken, floating, misaligned, or awkward.
+
+## Orientation & scale (unchanged)
+Facade FACES +Z, X-Y plane (X = width, Y = height, y = 0 ground), relief into -Z, front face at the
+highest Z. Width up to ~56, height up to ~48, deep relief up to ~24 into -Z. Front and relief only.
+
+## Materials
+Primarily the document's palette; declare the blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "025-vRefRevise-designdoc"
+- metadata.prompting_method_id = "temple-facade-reference-revise.v0"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Keep style.name as the document's style; set style.rationale to one line on what you improved.
+
+## Output (critical)
+Emit ONE complete improved design artifact — the full set of placements, not a diff. Local origin
+at x = 0, y = 0, z = 0 (ground at y = 0).

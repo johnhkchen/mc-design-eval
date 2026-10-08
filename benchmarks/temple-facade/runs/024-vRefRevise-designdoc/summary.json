@@ -1,0 +1,62 @@
+{
+  "seq": 24,
+  "runId": "024-vRefRevise-designdoc",
+  "date": "2026-06-05",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "persona": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 9500,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      2,
+      0,
+      -6
+    ],
+    "max": [
+      54,
+      52,
+      0
+    ]
+  },
+  "tokensIn": 32558,
+  "tokensOut": 53970,
+  "costUsd": 1.70843225,
+  "durationMs": 723319,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A confident, symmetrical Mughal-inflected facade with a clear base→body→crown reading: white plinth with inset studs, a lapis-blue body of three recessed bays, and a stepped gold onion-dome crown with a slender finial, flanked by banded corner minarets. Proportion is deliberate and coherent — the side-center-side bay rhythm and framing towers are well judged — but it stops short of inevitable: the crowning dome reads slightly undersized against the broad, faintly squat body, and the corner finials are stubby, so a designer could still tune the massing. Color is disciplined and harmonious — gold dominant, lapis supporting, quartz-white structure, crimson notes — genuinely colorful and on-brief, though the gold runs hot enough to flatten hierarchy in places, keeping it short of an identity-defining scheme. Detail is the weakest axis: the relief gestures (recessed bays, gold string-courses, pilaster banding, stepped dome) are real, but the three large blue panels are mostly flat fields carrying only sparse applied ornament — small crimson plus-motifs and a thin diamond drop — so close inspection finds empty wall rather than layered articulation. Fidelity is strong: the dome, twin minarets, and central gold ogee-arch portal make it unmistakably a temple with genuine presence and a legible entrance, though the central niche reads more as a blind decorative arch than a deep doorway, so it lands as a characterful temple rather than an iconic, namable landmark. Holistically a strong, photogenic build held back from exceptional by flat bay fields and a crown that wants a touch more height and authority.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "strong",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 21448,
+      "output_tokens": 3260,
+      "cost_usd": 0.320806
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": "T-009-01 effort A/B: DEFAULT (no --effort)"
+}

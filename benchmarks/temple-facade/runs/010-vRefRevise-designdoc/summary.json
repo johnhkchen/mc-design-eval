@@ -1,0 +1,61 @@
+{
+  "seq": 10,
+  "runId": "010-vRefRevise-designdoc",
+  "date": "2026-06-05",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 10566,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      -8
+    ],
+    "max": [
+      48,
+      47,
+      0
+    ]
+  },
+  "tokensIn": 30759,
+  "tokensOut": 73003,
+  "costUsd": 2.092376,
+  "durationMs": 1697001,
+  "score": {
+    "proportion": "strong",
+    "color": "competent",
+    "detail": "competent",
+    "fidelity": "strong",
+    "overall": "competent",
+    "notes": "A clean, symmetrical Mughal/Taj-style mausoleum facade with a clear base→middle→crown reading: terracotta plinth, an arcaded white middle of one central iwan flanked by paired recessed niches, and a crown of a central onion dome with corner chhatris and four banded minarets. Proportion is the strength — the bay rhythm is deliberate and the massing is coherent and balanced, though the central dome reads slightly squat and the minarets a touch thin. Fidelity is strong: it's unmistakably a grand temple/mausoleum with a legible central entrance (the small terracotta door under the great arch). Where it falls short of the brief is color and detail. The brief explicitly asks for a COLORFUL, distinctive scheme, and this is essentially a white build — white dominant with grey arch tracery, gold finials, black minaret bands, and a terracotta base/door as accents. That palette is disciplined and pleasant but reads close to monochrome rather than the intended colorful identity. Detail is present but uneven: the recessed arches and layered minarets give real relief depth and the niches are articulated, yet large flat white fields dominate and the base is a plain undifferentiated slab with no molding, paneling, or step. Holistically a competent, well-composed temple that nails identity and proportion but under-commits on the colorful, ornament-packed ambition the brief demands.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "competent",
+      "competent",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 29287,
+      "output_tokens": 5538,
+      "cost_usd": 0.3411795000000001
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": "Taj Mahal; 2nd pass compares build to reference; both build seams retries=2"
+}

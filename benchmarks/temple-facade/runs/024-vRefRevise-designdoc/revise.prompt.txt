@@ -1,0 +1,75 @@
+You are a master Minecraft architect making a SECOND, improving pass on your own work. TWO
+images are attached: (1) the REFERENCE building, and (2) a head-on render of your CURRENT build.
+The reference is a CRAFT reference ONLY — borrow its proportion, massing, silhouette, relief, and
+ornament. It is NOT a color reference: do NOT copy its palette. Your COLOR comes from your design
+document and the brief's demand for a distinctive, COLORFUL look — even if the reference is white.
+
+## Your finalized design document (honor it)
+# Temple of the Lapis Meridian — Facade Design Document
+
+## 1. Lore & setting
+A Mughal-descended sun-temple of an invented dynasty that mineralized devotion: where the reference is a *tomb* of mourning rendered in pale marble, this is a *living shrine* to a midday god, so its stone is dyed the blue of zenith sky veined with gold. Same imperial grammar, opposite emotional key — grief made into triumph.
+
+## 2. Aesthetic & architectural logic
+Read from the reference: rigorous bilateral symmetry, a tripartite front — central **pīshtāq** (the great recessed pointed-arch portal) flanked by two stacked register of smaller arched niches — capped by a bulbous onion dome on a high drum, with four engaged corner minarets pinning the cube. It works because the deep central iwan reads as a shadowed gateway pulling the eye in, while the framed flanking panels keep the wall from going blank. I keep all of it and translate only the surface color.
+
+## 3. Color palette (color theory)
+**Split-complementary**, blue-anchored:
+- **lapis_block** — dominant field (the sky-stone body, ~65%)
+- **smooth_quartz** — supporting (plinth, arch rings, minaret shafts — the original marble, demoted to trim)
+- **gold_block** — supporting accent (string-courses, pilasters, dome, finials — the divine metal)
+- **red_nether_bricks** — sparing crimson accent (~5%, rosettes/inlay)
+
+Blue against gold-and-crimson is the proven Mughal-inlay chord; quartz cools it so it never turns garish.
+
+## 4. Motifs & ornament
+From the pietra dura inlay and spandrel work: **gold ogee frames** around every niche, **crimson quatrefoil rosettes** set in recessed lapis panels, **continuous gold string-courses** echoing the reference's horizontal banding, and **chattri kiosks** (quartz columns, gold finials) flanking the dome base.
+
+## 5. Architectural features & proportion
+- **Base:** quartz plinth, y0–6, gold cap course.
+- **Body:** lapis cube, central iwan recessed **5 blocks** deep with a quartz pointed-arch ring; two flanking niche-bays per side.
+- **Supports:** engaged 4-wide lapis minarets bonded to corners, quartz pinstripes, gold balcony rings.
+- **Entablature:** three gold string-courses (≈ every 6–8 rows) so no tall field rises unbroken.
+- **Crown:** onion dome whose **belly is wider than its drum** (or it reads as a pyramid), gold finial spire.
+- **Proportion:** iwan height ≈ ⅔ facade; dome ≈ ⅓; minarets frame at full height — the reference's ~1:1.6 portal-to-body ratio held throughout.
+
+## A facade is ONE connected plane (critical)
+Borrow the reference's RHYTHM, not its 3-D standalone parts. A real building's corner towers or
+minarets are freestanding in the round; in a flat elevation they must read as ENGAGED — bonded to
+the wall and projecting forward as relief, NEVER as detached pillars with sky between them. Do not
+pull columns, towers, or framing off the body; every mass stays connected into a single facade.
+
+## Improve — compare your build (image 2) to the reference (image 1)
+- Proportion & rhythm: match the reference's balance and bay rhythm; resolve columns into integrated
+  bays, NOT freestanding pillars. Tighten the crowning silhouette without detaching it.
+- Relief & depth: deepen and model where your build reads flat next to the reference.
+- Detail — NO LARGE FLAT FIELDS: any wall plane wider than ~6 blocks must carry layered relief —
+  recessed panels, pilaster strips, string-courses, banding, or inset ornament. Add the reference's
+  character (arch profiles, framing, motifs, texture) where your build is bare; treat any blank
+  field as unfinished, especially the base/plinth and the flanks.
+- Color (CRITICAL): do NOT adopt the reference's colors. Hold your document's COLORFUL palette and
+  its dominant/supporting/accent hierarchy. If your build (image 2) reads monochrome, white, or
+  washed-out next to the brief's intent, ADD color back — restore the accent fields and contrast.
+  The brief asks for bold color; a build that drifted toward white is a regression to FIX, not keep.
+- Fix anything broken, floating, misaligned, or awkward.
+
+## Orientation & scale (unchanged)
+Facade FACES +Z, X-Y plane (X = width, Y = height, y = 0 ground), relief into -Z, front face at the
+highest Z. Width up to ~56, height up to ~48, deep relief up to ~24 into -Z. Front and relief only.
+
+## Materials
+Primarily the document's palette; declare the blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "024-vRefRevise-designdoc"
+- metadata.prompting_method_id = "temple-facade-reference-revise.v0"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Keep style.name as the document's style; set style.rationale to one line on what you improved.
+
+## Output (critical)
+Emit ONE complete improved design artifact — the full set of placements, not a diff. Local origin
+at x = 0, y = 0, z = 0 (ground at y = 0).

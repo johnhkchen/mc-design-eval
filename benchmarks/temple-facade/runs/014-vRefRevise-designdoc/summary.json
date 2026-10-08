@@ -1,0 +1,61 @@
+{
+  "seq": 14,
+  "runId": "014-vRefRevise-designdoc",
+  "date": "2026-06-05",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 10013,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      -1,
+      0,
+      -2
+    ],
+    "max": [
+      49,
+      48,
+      6
+    ]
+  },
+  "tokensIn": 30745,
+  "tokensOut": 52174,
+  "costUsd": 1.6413047499999998,
+  "durationMs": 1099592,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A coherent, clearly Mughal/Taj-inspired front elevation with a confident base→middle→crown reading: white plinth, terracotta body, and a crown of corner towers plus a central onion dome. Symmetry and bay rhythm are deliberate, and the palette is genuinely disciplined — dominant warm brick, supporting gold trim, lapis-blue accents in the openings — a distinctive scheme that lifts the whole. Fidelity is high: the gold-framed pointed pishtaq gives an unmistakable central entrance and strong temple presence. It falls short of exceptional on two counts. Detail is only competent — the central arch and pilaster framing carry real relief, but the flanking wall fields and the windows read as flat insets rather than layered ornament, so articulation is concentrated rather than pervasive. Proportionally the dome is squat and the corner towers stubby, slightly undercutting the crown against the broad body. Strong, attractive, and characterful, but the flat fields and undersized crown keep it from the top tier.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "strong",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 21541,
+      "output_tokens": 3709,
+      "cost_usd": 0.32938075
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": ""
+}

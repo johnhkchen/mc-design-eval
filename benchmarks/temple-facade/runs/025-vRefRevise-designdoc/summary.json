@@ -1,0 +1,62 @@
+{
+  "seq": 25,
+  "runId": "025-vRefRevise-designdoc",
+  "date": "2026-06-05",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "persona": "persona.md",
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 8614,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      1
+    ],
+    "max": [
+      47,
+      52,
+      12
+    ]
+  },
+  "tokensIn": 32916,
+  "tokensOut": 71370,
+  "costUsd": 2.18183175,
+  "durationMs": 980326,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "strong",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A confident Mughal/Taj-grammar facade with genuine end-to-end intent: tripartite base→body→crown, perfect bilateral symmetry, a recessed pointed-arch pishtaq on axis, and two clean registers of gold-framed arched windows flanking it. The teal-dominant / gold-accent / white-pivot palette with a red-and-white striped plinth arcade is disciplined and harmonious — the scheme is the building's identity, and it firmly clears the 'colorful, not monochrome' bar. Detail is rich and purposeful (dome ribs and finial, gold string-courses, dentil banding, the arcaded base) though the broad teal wall panels between window bays stay fairly flat, so it is not whole-facade resolved. Two named, easy improvements keep it short of exceptional: the bulbous dome reads slightly oversized/heavy for the drum, and the four corner minarets are stubby relative to the body, weakening the vertical crown. Clear entrance, strong temple presence, unmistakable but just short of iconic — strong across the board.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "strong",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 22128,
+      "output_tokens": 4058,
+      "cost_usd": 0.34676675
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": "persona A/B ON (T-013-01): master-architect system prompt across all 3 stages"
+}

@@ -1,0 +1,61 @@
+{
+  "seq": 13,
+  "runId": "013-vRefRevise-designdoc",
+  "date": "2026-06-05",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 10448,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      -8
+    ],
+    "max": [
+      54,
+      48,
+      0
+    ]
+  },
+  "tokensIn": 30771,
+  "tokensOut": 57236,
+  "costUsd": 1.7644597499999999,
+  "durationMs": 818331,
+  "score": {
+    "proportion": "competent",
+    "color": "competent",
+    "detail": "competent",
+    "fidelity": "strong",
+    "overall": "competent",
+    "notes": "Symmetric framing with four freestanding columns, a central recessed shrine, and a stepped crown gives a clear base→middle→crown reading, and the glowing gold portal lends genuine temple presence — fidelity is the standout: this reads unmistakably as a shrine with a clear sacred entrance. But the four columns hover as detached pillars rather than resolving into integrated bays, and the crown is small and slightly busy relative to the body, so the proportion is balanced but not deliberate. Color is the weakest brief-fit: despite the 'colorful' mandate the build is essentially monochrome teal/prismarine relieved only by the gold portal and finial accents — disciplined and not garish, but a single cool family rather than a dominant/supporting/accent scheme. Detail is present (column banding, dotted frieze, stepped dome, recessed glowing door with some relief depth) yet large flat teal-brick fields dominate the flanks and base. A competent, legible temple held back by near-monochrome color and disconnected column massing.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "competent",
+      "competent",
+      "competent"
+    ],
+    "usage": {
+      "input_tokens": 32991,
+      "output_tokens": 3921,
+      "cost_usd": 0.403148
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": ""
+}

@@ -1,0 +1,1332 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "019-vRefRevise-designdoc",
+    "prompting_method_id": "temple-facade-reference-revise.v0",
+    "model_id": "claude-opus-4-8",
+    "seed": 11,
+    "server_state_id": "flat-creative-superflat.v1"
+  },
+  "style": {
+    "name": "Vermilion Eaves — Cinnabar Way lacquered timber temple",
+    "rationale": "Second pass: (1) broke every flat field — calcite panels are now recessed (omitted front course over a z1 backstop) and framed, each split by a raised red mullion; the podium gained deepslate pilaster strips and a red string-cap; (2) resolved columns into ENGAGED bays — six red posts bonded to the wall and projecting only as relief (z0-3), never freestanding, with a continuous red architrave beam tying them; (3) deepened relief — gold-capped tokyo bracket clusters step out under the eaves, and both jade roofs are terraced (4 stepped courses) with the lower eave overhanging the wall by 3 in z and past the body in x for a true shadow-line; (4) HELD the colorful complementary palette against the white reference — red_concrete dominant, prismarine_bricks jade roofs supporting, calcite neutral infill only, gold_block sparing on finials/brackets/lintel; (5) folded the pagoda spire into an engaged sorin crown seated on the upper ridge, not a detached tower; central bay widened to 1.4x side bays with a dark deepslate doorway niche under a gold lintel."
+  },
+  "palette": {
+    "manifest": [
+      "minecraft:red_concrete",
+      "minecraft:prismarine_bricks",
+      "minecraft:calcite",
+      "minecraft:gold_block",
+      "minecraft:deepslate",
+      "minecraft:polished_deepslate"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        44,
+        0,
+        5
+      ],
+      "block": "minecraft:deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        1,
+        1
+      ],
+      "to": [
+        43,
+        4,
+        4
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        1,
+        4
+      ],
+      "to": [
+        2,
+        4,
+        5
+      ],
+      "block": "minecraft:deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        8,
+        1,
+        4
+      ],
+      "to": [
+        10,
+        4,
+        5
+      ],
+      "block": "minecraft:deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        16,
+        1,
+        4
+      ],
+      "to": [
+        18,
+        4,
+        5
+      ],
+      "block": "minecraft:deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        26,
+        1,
+        4
+      ],
+      "to": [
+        28,
+        4,
+        5
+      ],
+      "block": "minecraft:deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        34,
+        1,
+        4
+      ],
+      "to": [
+        36,
+        4,
+        5
+      ],
+      "block": "minecraft:deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        42,
+        1,
+        4
+      ],
+      "to": [
+        44,
+        4,
+        5
+      ],
+      "block": "minecraft:deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        5,
+        0
+      ],
+      "to": [
+        44,
+        5,
+        5
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        4,
+        5
+      ],
+      "to": [
+        25,
+        4,
+        6
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        3,
+        6
+      ],
+      "to": [
+        25,
+        3,
+        7
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        2,
+        7
+      ],
+      "to": [
+        25,
+        2,
+        8
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        1,
+        8
+      ],
+      "to": [
+        25,
+        1,
+        9
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        0,
+        9
+      ],
+      "to": [
+        25,
+        0,
+        10
+      ],
+      "block": "minecraft:polished_deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        6,
+        0
+      ],
+      "to": [
+        44,
+        17,
+        1
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        6,
+        0
+      ],
+      "to": [
+        24,
+        12,
+        1
+      ],
+      "block": "minecraft:deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        6,
+        0
+      ],
+      "to": [
+        2,
+        17,
+        3
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        8,
+        6,
+        0
+      ],
+      "to": [
+        10,
+        17,
+        3
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        16,
+        6,
+        0
+      ],
+      "to": [
+        18,
+        17,
+        3
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        26,
+        6,
+        0
+      ],
+      "to": [
+        28,
+        17,
+        3
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        34,
+        6,
+        0
+      ],
+      "to": [
+        36,
+        17,
+        3
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        42,
+        6,
+        0
+      ],
+      "to": [
+        44,
+        17,
+        3
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        6,
+        2
+      ],
+      "to": [
+        7,
+        7,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        16,
+        2
+      ],
+      "to": [
+        7,
+        17,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        8,
+        2
+      ],
+      "to": [
+        3,
+        15,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        7,
+        8,
+        2
+      ],
+      "to": [
+        7,
+        15,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        5,
+        8,
+        2
+      ],
+      "to": [
+        5,
+        15,
+        2
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        6,
+        2
+      ],
+      "to": [
+        15,
+        7,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        16,
+        2
+      ],
+      "to": [
+        15,
+        17,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        8,
+        2
+      ],
+      "to": [
+        11,
+        15,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        8,
+        2
+      ],
+      "to": [
+        15,
+        15,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        8,
+        2
+      ],
+      "to": [
+        13,
+        15,
+        2
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        29,
+        6,
+        2
+      ],
+      "to": [
+        33,
+        7,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        29,
+        16,
+        2
+      ],
+      "to": [
+        33,
+        17,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        29,
+        8,
+        2
+      ],
+      "to": [
+        29,
+        15,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        33,
+        8,
+        2
+      ],
+      "to": [
+        33,
+        15,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        31,
+        8,
+        2
+      ],
+      "to": [
+        31,
+        15,
+        2
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        37,
+        6,
+        2
+      ],
+      "to": [
+        41,
+        7,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        37,
+        16,
+        2
+      ],
+      "to": [
+        41,
+        17,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        37,
+        8,
+        2
+      ],
+      "to": [
+        37,
+        15,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        41,
+        8,
+        2
+      ],
+      "to": [
+        41,
+        15,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        39,
+        8,
+        2
+      ],
+      "to": [
+        39,
+        15,
+        2
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        6,
+        2
+      ],
+      "to": [
+        19,
+        13,
+        3
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        25,
+        6,
+        2
+      ],
+      "to": [
+        25,
+        13,
+        3
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        13,
+        2
+      ],
+      "to": [
+        25,
+        13,
+        3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        14,
+        2
+      ],
+      "to": [
+        25,
+        14,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        17,
+        2
+      ],
+      "to": [
+        25,
+        17,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        14,
+        2
+      ],
+      "to": [
+        19,
+        16,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        25,
+        14,
+        2
+      ],
+      "to": [
+        25,
+        16,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        14,
+        2
+      ],
+      "to": [
+        22,
+        16,
+        2
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        18,
+        0
+      ],
+      "to": [
+        44,
+        19,
+        3
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        19,
+        4
+      ],
+      "to": [
+        2,
+        19,
+        5
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        1,
+        19,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        8,
+        19,
+        4
+      ],
+      "to": [
+        10,
+        19,
+        5
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        9,
+        19,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        16,
+        19,
+        4
+      ],
+      "to": [
+        18,
+        19,
+        5
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        19,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        26,
+        19,
+        4
+      ],
+      "to": [
+        28,
+        19,
+        5
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        19,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        34,
+        19,
+        4
+      ],
+      "to": [
+        36,
+        19,
+        5
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        35,
+        19,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        42,
+        19,
+        4
+      ],
+      "to": [
+        44,
+        19,
+        5
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        19,
+        5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        -2,
+        20,
+        2
+      ],
+      "to": [
+        46,
+        20,
+        6
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        21,
+        2
+      ],
+      "to": [
+        44,
+        21,
+        5
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        22,
+        2
+      ],
+      "to": [
+        41,
+        22,
+        4
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        23,
+        2
+      ],
+      "to": [
+        38,
+        23,
+        3
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        24,
+        2
+      ],
+      "to": [
+        38,
+        24,
+        3
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        25,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        38,
+        25,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        -2,
+        20,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        46,
+        20,
+        6
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        8,
+        25,
+        0
+      ],
+      "to": [
+        36,
+        27,
+        1
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        8,
+        25,
+        0
+      ],
+      "to": [
+        10,
+        27,
+        3
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        16,
+        25,
+        0
+      ],
+      "to": [
+        18,
+        27,
+        3
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        26,
+        25,
+        0
+      ],
+      "to": [
+        28,
+        27,
+        3
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        34,
+        25,
+        0
+      ],
+      "to": [
+        36,
+        27,
+        3
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        25,
+        2
+      ],
+      "to": [
+        15,
+        25,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        27,
+        2
+      ],
+      "to": [
+        15,
+        27,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        26,
+        2
+      ],
+      "to": [
+        13,
+        26,
+        2
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        29,
+        25,
+        2
+      ],
+      "to": [
+        33,
+        25,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        29,
+        27,
+        2
+      ],
+      "to": [
+        33,
+        27,
+        2
+      ],
+      "block": "minecraft:calcite"
+    },
+    {
+      "op": "fill",
+      "from": [
+        31,
+        26,
+        2
+      ],
+      "to": [
+        31,
+        26,
+        2
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        25,
+        0
+      ],
+      "to": [
+        25,
+        27,
+        1
+      ],
+      "block": "minecraft:deepslate"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        26,
+        2
+      ],
+      "to": [
+        24,
+        26,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        8,
+        28,
+        0
+      ],
+      "to": [
+        36,
+        28,
+        3
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "fill",
+      "from": [
+        4,
+        29,
+        2
+      ],
+      "to": [
+        40,
+        29,
+        5
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        7,
+        30,
+        2
+      ],
+      "to": [
+        37,
+        30,
+        4
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        31,
+        2
+      ],
+      "to": [
+        34,
+        31,
+        3
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        32,
+        2
+      ],
+      "to": [
+        34,
+        32,
+        3
+      ],
+      "block": "minecraft:red_concrete"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        10,
+        33,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        33,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        33,
+        2
+      ],
+      "to": [
+        24,
+        33,
+        3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        21,
+        34,
+        2
+      ],
+      "to": [
+        23,
+        34,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        22,
+        35,
+        2
+      ],
+      "to": [
+        22,
+        38,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        20,
+        35,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        35,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        21,
+        37,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        37,
+        2
+      ],
+      "block": "minecraft:gold_block"
+    }
+  ]
+}

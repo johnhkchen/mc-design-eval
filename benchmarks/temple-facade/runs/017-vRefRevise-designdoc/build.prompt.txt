@@ -1,0 +1,67 @@
+You are a master Minecraft architect. Below is your FINALIZED design document for a temple
+facade. Build it as a structured design artifact that faithfully realizes the document, at
+GENEROUS SCALE and with DEEP RELIEF. Earlier facades were too small and too flat — do not
+repeat that; use the room you are given.
+
+## Finalized design document
+# Temple of the Tidal Crown
+
+## 1. Lore & setting
+A monsoon-coast pilgrimage temple to a sea-and-sky deity, raised by a maritime dynasty at the height of its wealth. Like the reference — a perfectly symmetric, garden-fronted monument built as an act of devotion and memory — this facade is ceremonial, axial, and meant to be approached head-on across water. It is a jewel-box, not a fortress.
+
+## 2. Aesthetic & architectural logic
+The reference speaks a clear grammar: a cubic body with **chamfered corners**, one dominant **iwan** (recessed pointed-arch portal) flanked by **stacked twin niches**, the whole crowned by a great **onion dome on a drum**, ringed by four small **chattri kiosks** and bracketed by **corner minarets**. This works because a single deep central void organizes the whole face, and the bulb dome resolves the rising vertical pull. I keep every move; I only change the skin.
+
+## 3. Color palette (color theory)
+Where the reference is white marble, the brief demands color. **Complementary harmony, azure ↔ amber, with a crimson accent:**
+- **Dominant — lapis_block** (deep azure body)
+- **Supporting — smooth_quartz** (cool light to let blue breathe) + **gold_block** (warm amber frames, the complement)
+- **Accent — red_nether_bricks** (crimson inlay, ~5% — the spark)
+
+Blue body against gold framing is maximum contrast; quartz keeps it from going garish; crimson punctuates the tympana.
+
+## 4. Motifs & ornament
+From the reference's **pietra dura** and arch spandrels: gold **ogee-arch jambs** outlining the iwan and every niche; **crimson quatrefoil rosettes** set in each spandrel; horizontal **gold string-courses** every 6–7 rows splitting flat fields; a quartz **pinstripe** running each minaret.
+
+## 5. Architectural features & proportion
+- **Base:** quartz plinth, ~⅙ of height, with a gold cap course.
+- **Body:** lapis, chamfered corners; central iwan recessed **5 blocks** deep, ~⅓ the facade width, rising two-thirds of the wall.
+- **Supports:** four **engaged** minarets bonded to the corners (no sky-gap), gold finials.
+- **Crown:** lapis onion dome whose belly **overhangs its drum by 2 blocks per side**, topped by a gold finial spire; four chattris at the dome's base.
+- **Proportion:** dome height ≈ body height (1:1); iwan width:height ≈ 1:2; minaret:body ≈ 1:1.1. Symmetry absolute about the central axis.
+
+## Orientation (photographed head-on)
+Facade FACES +Z, in the X–Y plane (X = width, Y = height, y = 0 ground). Front face at the
+highest Z; relief recedes into −Z. Model only the front and its relief.
+
+## Scale & RELIEF — use it (this is judged)
+- Width up to ~56 (X), height up to ~48 (Y) including the crown. Build big.
+- DEEP relief: up to ~24 blocks of depth into −Z, and genuinely use it. Columns/buttresses
+  project several blocks PROUD of the wall; the central portal RECESSES several blocks deep;
+  cornices, string courses, and the crown step forward and back across MULTIPLE Z-layers. A
+  near-flat screen only 4–6 deep is a failure.
+- CROWN proportion: the crowning element (pediment / parapet / attic / cresting) must span the
+  facade's full width and have real height — a deliberate culmination of the body, never a
+  small cap perched on a wide base.
+
+## Realize the document with craft
+- Build every feature the document specifies; honor its proportion ratios and palette.
+- Frame openings with deep reveals; avoid uniform 45° slopes (vary pitch with slab+stair
+  combos; step curves/arches); use voxel block `state` for mouldings and trim.
+- Use `fill`/`box` for masses and `line` for shafts/edges to stay efficient at this scale.
+
+## Materials
+Primarily the document's palette; declare the blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "017-vRefRevise-designdoc"
+- metadata.prompting_method_id = "temple-facade-reference-revise.v0"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Set style.name to the document's style label and style.rationale to one line tying the build
+to the document.
+
+Local origin at x = 0, y = 0, z = 0 (ground at y = 0).

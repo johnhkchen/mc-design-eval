@@ -1,0 +1,62 @@
+{
+  "seq": 26,
+  "runId": "026-vRefRevise-designdoc",
+  "date": "2026-06-05",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": "high",
+  "persona": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 8802,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      44,
+      48,
+      8
+    ]
+  },
+  "tokensIn": 32855,
+  "tokensOut": 71208,
+  "costUsd": 2.143386,
+  "durationMs": 946380,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "strong",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A confident, symmetric Mughal-leaning facade with a coherent base→body→crown reading: crenellated plinth, a two-register body of framed arched niches, and a crown of a central blue onion dome with gold finial flanked by two corner pavilion-turrets. The dominant terracotta-orange / supporting gold-frame / deep-lapis-blue accent scheme is disciplined and genuinely colorful — a clear, harmonious identity. The central arched portal with its glowing violet gradient is the strongest move, giving an unmistakable grand entrance and real temple presence. Detail is purposeful where it counts: recessed niches with arched gold surrounds, pilaster bays, and articulated crown pavilions read with actual relief depth. What holds each dimension back from exceptional, and I can name the improvements: the broad orange wall fields between niches stay flat, and the scattered purple specks across them read as pixel noise rather than intentional ornament rather than resolving the whole surface; the crown trio perches slightly small and detached atop a fairly plain box, so the massing is coherent but not inevitable. Strong across the board, not iconic — a very good build, but each measure has an easy lever left.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "strong",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 21373,
+      "output_tokens": 4271,
+      "cost_usd": 0.430721
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": "T-009-01 effort A/B: HIGH (--effort high)"
+}

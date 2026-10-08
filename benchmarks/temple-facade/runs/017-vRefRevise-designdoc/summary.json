@@ -1,0 +1,61 @@
+{
+  "seq": 17,
+  "runId": "017-vRefRevise-designdoc",
+  "date": "2026-06-05",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 6541,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      -24,
+      0,
+      -5
+    ],
+    "max": [
+      24,
+      53,
+      2
+    ]
+  },
+  "tokensIn": 32907,
+  "tokensOut": 62901,
+  "costUsd": 1.925671,
+  "durationMs": 851615,
+  "score": {
+    "proportion": "competent",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A clean, symmetrical front elevation with a legible base→middle→crown: an arcaded plinth, a windowed main body, and a tiered, spired crown. The tripartite massing is balanced and the central white entrance with its red cross reads instantly as a temple/shrine with real presence — fidelity is its strongest suit. The palette is the other win: a disciplined cobalt-dominant field with gold framing as the supporting hue, white openings, and sparing red accents — a coherent dominant/supporting/accent scheme that earns the 'colorful' brief without going garish. What holds it back from higher marks: the two flanking columns float as detached vertical bars rather than integrating with the body, an easy proportion fix, and the crown stacking is slightly fussy. Detail is only competent because large flat cobalt fields persist on the main walls and the base — the window frames and cross motifs add articulation, but relief depth isn't carried across the whole face. Solid, characterful work with namable improvements in three of four dimensions.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "competent",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 20638,
+      "output_tokens": 5111,
+      "cost_usd": 0.38601375
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": ""
+}

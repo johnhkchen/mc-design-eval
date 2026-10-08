@@ -1,0 +1,61 @@
+{
+  "seq": 20,
+  "runId": "020-vRefRevise-designdoc",
+  "date": "2026-06-05",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 4068,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      -3
+    ],
+    "max": [
+      31,
+      48,
+      0
+    ]
+  },
+  "tokensIn": 33106,
+  "tokensOut": 66402,
+  "costUsd": 2.01899725,
+  "durationMs": 928839,
+  "score": {
+    "proportion": "competent",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "competent",
+    "overall": "competent",
+    "notes": "A confident three-gable composition — a tall central pediment flanked by two lower turret gables, each capped with a gold finial. The base→middle→crown reading is clear: a course-banded brick base with a recessed porch, a mid-register of framed windows, and a crown of stepped, gold-studded gables. Bay rhythm is deliberate and symmetric (paired vertical windows in each flanking tower mirror cleanly). Color is the strongest move: terracotta brick as dominant, eggplant-purple roofs as the supporting mass, gold as a disciplined accent on rakes/finials/window frames, with cool blue glass as a controlled secondary — genuinely colorful and harmonious, a Flemish/Hanseatic guildhall-temple identity. Detail is rich where it counts: gold-dotted stepped gable rakes, framed lancet windows, a tracery-filled blue rose/oculus over a recessed arched entrance with its own surround. Fidelity is high — it reads unmistakably as a grand civic temple with a clear, emphasized doorway and real frontal presence. What keeps every dimension at strong rather than exceptional: the large flat gold panel filling the central pediment is an inert field — its scale is slightly arbitrary and it carries no relief or ornament, the one easy improvement I can name. Break that gold plane with coursing, a relief emblem, or a recessed niche and the crown would resolve as well as the base. The brick fields are also a touch flat between openings. Resolved, intentional, and characterful end to end — a strong build, just short of iconic.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "competent",
+      "competent"
+    ],
+    "usage": {
+      "input_tokens": 32060,
+      "output_tokens": 4625,
+      "cost_usd": 0.5111254999999999
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": "Sainte-Chapelle generalization (T-008-01): inverse P12 test (ref intended colorful); but provided image is grey-limestone EXTERIOR. Read: did color come out strong regardless? + Gothic verticality on proportion (P13), tracery on detail (S-006)."
+}

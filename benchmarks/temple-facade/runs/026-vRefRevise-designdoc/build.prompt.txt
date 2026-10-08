@@ -1,0 +1,71 @@
+You are a master Minecraft architect. Below is your FINALIZED design document for a temple
+facade. Build it as a structured design artifact that faithfully realizes the document, at
+GENEROUS SCALE and with DEEP RELIEF. Earlier facades were too small and too flat — do not
+repeat that; use the room you are given.
+
+## Finalized design document
+# Temple of the Cobalt Dawn — Facade Design Document
+
+## 1. Lore & Setting
+A Mughal-descended sun-and-sky temple of an invented river dynasty — a paradise-gate where pilgrims greet the dawn. The reference's serene, perfectly mirrored calm becomes sacred symmetry: a face built to be photographed head-on at sunrise, when its cobalt crown catches first light.
+
+## 2. Aesthetic & Architectural Logic
+Read from the reference: a cubic block with **chamfered corners**, a deep double-height central **iwan** (great pointed-arch portal) framed by a rectangular **pishtaq** band, flanked by two stacked registers of recessed niche-arches. A bulbous **onion dome** on a tall drum crowns it, echoed by four corner **chhatri** kiosks and flanking spires. The logic works because every void is framed and every mass is mirrored — relief reads cleanly from straight on, exactly what a facade-only build needs.
+
+## 3. Color Palette — Warm-Complementary, Cobalt-Crowned
+The reference is white marble; I refuse the white wall. I borrow Mughal **red sandstone** instead and strike it against a cold crown — a confident **complementary** harmony.
+- **Smooth red sandstone** — dominant terracotta body
+- **Cut red sandstone** — supporting relief banding & string-courses
+- **Lapis block** — the onion dome, drum chevrons, iwan vault (cold complement, the crown)
+- **Gold block** — finial, pishtaq calligraphy frame, voussoir ring, chhatri caps (metallic accent)
+- **Amethyst block** — pietra-dura floral medallions in spandrels (jewel accent)
+
+Terracotta vs. cobalt makes the dome blaze; gold and amethyst are the inlay sparkle.
+
+## 4. Motifs & Ornament
+Adapted from the reference: the **pishtaq** rectangular frame in gold calligraphic banding around the iwan; **spandrel medallions** rendered as amethyst-and-gold rosettes; the **lotus-chevron** dome base in alternating lapis/gold; floral **pietra-dura** strips along every string-course; gold **guldasta** corner finials.
+
+## 5. Architectural Features & Proportion
+- **Base:** raised cut-sandstone plinth, full width.
+- **Body:** cube ~36 wide × ~36 to cornice, chamfered corners; iwan ~⅓ width, rising ⅔ of cube height; flanking niches in two registers, each ~half the iwan width.
+- **Entablature:** gold-banded cornice with amethyst dentils.
+- **Crown:** lapis drum (~⅓ cube height) + onion dome belly **overhanging** the drum, gold finial — dome diameter ≈ iwan width, total crown ≈ ½ cube height.
+- **Openings:** deep recessed iwan (relief to z-depth), framed by engaged pilasters; four chhatri at roof corners.
+
+Ratios: cube ≈ 1:1; iwan 1:3 of width; crown 1:2 of body.
+
+## Orientation (photographed head-on)
+Facade FACES +Z, in the X–Y plane (X = width, Y = height, y = 0 ground). Front face at the
+highest Z; relief recedes into −Z. Model only the front and its relief.
+
+## Scale & RELIEF — use it (this is judged)
+- Width up to ~56 (X), height up to ~48 (Y) including the crown. Build big.
+- DEEP relief: up to ~24 blocks of depth into −Z, and genuinely use it. Columns/buttresses
+  project several blocks PROUD of the wall; the central portal RECESSES several blocks deep;
+  cornices, string courses, and the crown step forward and back across MULTIPLE Z-layers. A
+  near-flat screen only 4–6 deep is a failure.
+- CROWN proportion: the crowning element (pediment / parapet / attic / cresting) must span the
+  facade's full width and have real height — a deliberate culmination of the body, never a
+  small cap perched on a wide base.
+
+## Realize the document with craft
+- Build every feature the document specifies; honor its proportion ratios and palette.
+- Frame openings with deep reveals; avoid uniform 45° slopes (vary pitch with slab+stair
+  combos; step curves/arches); use voxel block `state` for mouldings and trim.
+- Use `fill`/`box` for masses and `line` for shafts/edges to stay efficient at this scale.
+
+## Materials
+Primarily the document's palette; declare the blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "026-vRefRevise-designdoc"
+- metadata.prompting_method_id = "temple-facade-reference-revise.v0"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Set style.name to the document's style label and style.rationale to one line tying the build
+to the document.
+
+Local origin at x = 0, y = 0, z = 0 (ground at y = 0).

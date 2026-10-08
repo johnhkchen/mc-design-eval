@@ -1,0 +1,81 @@
+You are a master Minecraft architect making a SECOND, improving pass on your own work. TWO
+images are attached: (1) the REFERENCE building, and (2) a head-on render of your CURRENT build.
+The reference is a CRAFT reference ONLY — borrow its proportion, massing, silhouette, relief, and
+ornament. It is NOT a color reference: do NOT copy its palette. Your COLOR comes from your design
+document and the brief's demand for a distinctive, COLORFUL look — even if the reference is white.
+
+## Your finalized design document (honor it)
+# Temple of the Vermilion Dawn
+
+## 1. Lore & setting
+A sun-temple of an invented Indo-Persian river-cult, raised where the delta meets the desert. Like its white forebear it is a *threshold* — a serene, perfectly symmetric face built to be read head-on across still water — but consecrated to first light rather than mourning: a monument to dawn, not to the dead.
+
+## 2. Aesthetic & architectural logic
+The reference reads as one chamfered cube crowned by a bulbous onion dome on a constricted drum, its front opened by a single towering **pishtaq** — a rectangular frame enclosing a deep pointed-arch iwan — flanked by two tiers of smaller recessed arches, the corners answered by domed chhatris and edge minarets. It works because every element is nested and self-similar: the great arch echoes the small ones, the dome echoes the kiosks. I keep that recursive, mirror-symmetric grammar; it makes a flat face read as deep and inevitable.
+
+## 3. Color palette (color theory)
+**Complementary, warm-vs-cool.** The brief demands color where the marble is white, so I invert it:
+- **Red Sandstone** — dominant warm body (~60%).
+- **Dark Prismarine** — the onion dome and string-courses, a teal complement (~25%).
+- **Gold Block** — finial, spandrel medallions, crowning accent (~8%).
+- **Lapis Lazuli Block** — inlaid panel-fields, cool depth (~5%).
+- **Polished Blackstone** — the dark calligraphic band framing the iwan (~2%).
+
+Orange against teal, lit by gold: confident, unmistakably not-white.
+
+## 4. Motifs & ornament
+Adapted from the reference: the dark inlay border tracing the pishtaq (blackstone), pietra-dura medallions in the spandrels (gold-and-lapis), stacked niche-pairs on the chamfered corners, and a lotus finial. No flat fields — every panel is framed once by a recessed course.
+
+## 5. Architectural features & proportion
+Base: a one-block plinth. Body: a chamfered cube, **width ≈ height-to-cornice (1:1)**. Pishtaq: **two-thirds** the body height, recessed 3 blocks. Drum + dome ≈ the body's upper third, the dome's belly **overhanging the drum** so it never collapses into a pyramid. Engaged minaret-pylons at the facade's outer edges and chhatris at each shoulder hold the silhouette; guldasta pinnacles cap the frame corners.
+
+## A facade is ONE connected plane (critical)
+Borrow the reference's RHYTHM, not its 3-D standalone parts. A real building's corner towers or
+minarets are freestanding in the round; in a flat elevation they must read as ENGAGED — bonded to
+the wall and projecting forward as relief, NEVER as detached pillars with sky between them. Do not
+pull columns, towers, or framing off the body; every mass stays connected into a single facade.
+
+## Improve — compare your build (image 2) to the reference (image 1)
+- Proportion & rhythm: match the reference's balance and bay rhythm; resolve columns into integrated
+  bays, NOT freestanding pillars. Tighten the crowning silhouette without detaching it.
+- Relief & depth: deepen and model where your build reads flat next to the reference.
+- Detail — APPLY THIS TEXTURE-GRAIN to every flat field (a recipe, not a menu; execute it on EACH
+  offender — the flanking wall fields, the spandrels, the base/plinth, and the window insets, which
+  currently read flat): break the field with a DELIBERATE, PATTERNED grain built from TEXTURE
+  VARIANTS of that field's OWN material family — alternate smooth/cut/chiselled courses, brick-vs-cut
+  banding, a quoined or checkered panel motif, or stair/slab string-grain. The pattern must be
+  REGULAR and legible (coursing, banding, quoining, a repeating motif), never random speckle. No wall
+  plane wider than ~6 may remain a single uniform block. Build it with fill/box/line runs so it stays
+  cheap at scale, and declare every variant block in palette.manifest.
+- Grain changes TEXTURE, not HUE (CRITICAL — protect the color hierarchy): every variant in a field
+  stays the SAME color family, so the field still reads as its assigned dominant/supporting/accent
+  color — just textured. NEVER let grain lower a field's contrast against its neighbors or smear the
+  build toward monochrome (that is the v5 regression — a fail, not a keep). Keep the dominant field
+  clearly dominant and leave the ACCENT blocks single and saturated (do NOT grain the accents). If a
+  grain choice would wash the palette out, drop it and keep the solid color.
+- Color (CRITICAL): do NOT adopt the reference's colors. Hold your document's COLORFUL palette and
+  its dominant/supporting/accent hierarchy. If your build (image 2) reads monochrome, white, or
+  washed-out next to the brief's intent, ADD color back — restore the accent fields and contrast.
+  The brief asks for bold color; a build that drifted toward white is a regression to FIX, not keep.
+- Fix anything broken, floating, misaligned, or awkward.
+
+## Orientation & scale (unchanged)
+Facade FACES +Z, X-Y plane (X = width, Y = height, y = 0 ground), relief into -Z, front face at the
+highest Z. Width up to ~56, height up to ~48, deep relief up to ~24 into -Z. Front and relief only.
+
+## Materials
+Primarily the document's palette; declare the blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "018-vRefRevise-designdoc"
+- metadata.prompting_method_id = "temple-facade-reference-revise.v0"
+- metadata.model_id = "claude-opus-4-8"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Keep style.name as the document's style; set style.rationale to one line on what you improved.
+
+## Output (critical)
+Emit ONE complete improved design artifact — the full set of placements, not a diff. Local origin
+at x = 0, y = 0, z = 0 (ground at y = 0).

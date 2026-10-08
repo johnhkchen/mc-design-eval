@@ -1,0 +1,61 @@
+{
+  "seq": 16,
+  "runId": "016-vRefRevise-designdoc",
+  "date": "2026-06-05",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 17710,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      -8
+    ],
+    "max": [
+      48,
+      64,
+      2
+    ]
+  },
+  "tokensIn": 30167,
+  "tokensOut": 66094,
+  "costUsd": 1.9909897500000002,
+  "durationMs": 910345,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A clean, legible temple front with a coherent base→middle→crown: stepped plinth, a bayed main body, and a tiered blue dome with a gold finial, flanked by two corner towers. The massing is deliberate and symmetrical, and reads unmistakably as a temple/mausoleum with a clear central entrance — the gold-trimmed pointed arch is the right focal move. Color is the strongest dimension: a disciplined amber-terracotta dominant against an azure-blue support with gold as a true accent — a complementary scheme held consistently from dome to door. Where it falls short is detail. The articulation is largely drawn-on outlines: flat orange panels each holding a single small blue cross, a plain unmodeled plinth, and broad uninterrupted wall fields with little actual relief depth. The dome's shingling and the arch surround show the build CAN do layered relief, which makes the empty panels and base read as missed opportunities. Easy improvements are nameable everywhere (break up the side panels, model the plinth, deepen the window reveals), so detail stays competent and the whole tops out at a solid strong rather than exceptional. The corner towers are also slightly stubby relative to the dome drum, keeping the proportion from feeling inevitable.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "strong",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 21098,
+      "output_tokens": 3872,
+      "cost_usd": 0.33197775
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": ""
+}

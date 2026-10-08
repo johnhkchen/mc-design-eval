@@ -1,0 +1,61 @@
+{
+  "seq": 18,
+  "runId": "018-vRefRevise-designdoc",
+  "date": "2026-06-05",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-opus-4-8",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 6533,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      -3
+    ],
+    "max": [
+      44,
+      48,
+      2
+    ]
+  },
+  "tokensIn": 31643,
+  "tokensOut": 53789,
+  "costUsd": 1.6926510000000001,
+  "durationMs": 1074735,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A clean, deliberately symmetric facade with a clear tripartite reading: a banded terracotta base, an articulated central bay, and a green gabled crown with gold finials. Proportion is coherent and balanced — the flanking piers anchor a busy central entrance — though the crown reads slightly undersized against the broad body. Color is the build's strength: a genuine dominant/supporting/accent scheme (terracotta orange, teal banding, complementary deep-blue panels, gold studs) that is disciplined and harmonious rather than garish. Fidelity is clear — the dark recessed doorway, flanking blue window panels, and crowning roof give it real temple presence and a characterful identity. Detail holds it back from higher marks: the central bay rewards inspection (recessed panels, course lines, gold dots), but the large orange flank fields are flat and uniform, and the side windows are simple framed squares. The obvious improvement — break up those blank flanks with relief or ornament — is exactly why detail caps at competent and the build overall stops short of exceptional.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "competent",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 21378,
+      "output_tokens": 5254,
+      "cost_usd": 0.37055499999999997
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": "T-010-01 detail lever B: contrast-preserving block-texture grain (vs S-006 relief panels)"
+}
