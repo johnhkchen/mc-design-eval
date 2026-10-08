@@ -7,6 +7,7 @@
 import { readFileSync } from "node:fs";
 
 const BASE = "https://generativelanguage.googleapis.com/v1beta";
+export const NANO_BANANA_21 = "gemini-nano-banana-2.1"; // default since 2026-10-08 (owner's pick in the concept bake-off)
 export const NANO_BANANA_PRO = "gemini-3-pro-image-preview"; // richer color/composition
 export const NANO_BANANA_FLASH = "gemini-3.1-flash-image-preview"; // faster/cheaper
 
@@ -25,7 +26,7 @@ function loadKey() {
  * @param {{prompt:string, images?:{base64:string,mediaType:string}[], model?:string, retries?:number}} p
  * @returns {Promise<{base64:string, mediaType:string, ms:number, model:string}>}
  */
-export async function generateImage({ prompt, images = [], model = NANO_BANANA_PRO, retries = 2 } = {}) {
+export async function generateImage({ prompt, images = [], model = process.env.MC_IMAGE_MODEL || NANO_BANANA_21, retries = 2 } = {}) {
   const key = loadKey();
   const parts = [
     ...images.map((im) => ({ inlineData: { mimeType: im.mediaType, data: im.base64 } })),
