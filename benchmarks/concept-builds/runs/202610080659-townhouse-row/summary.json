@@ -1,0 +1,28 @@
+{
+ "runId": "202610080659-townhouse-row",
+ "subject": "townhouse-row",
+ "model": "claude-opus-5-5",
+ "tokensOut": 81029,
+ "costUsd": 2.4403987999999996,
+ "durationMs": 769887,
+ "stages": [
+  {
+   "n": "concept",
+   "s": 20
+  },
+  {
+   "n": "doc",
+   "s": 45
+  },
+  {
+   "n": "build",
+   "s": 415,
+   "ops": 207
+  },
+  {
+   "n": "revise",
+   "s": 769,
+   "ops": 224
+  }
+ ]
+}

@@ -1,0 +1,28 @@
+{
+ "runId": "202610080659-corner-cafe",
+ "subject": "corner-cafe",
+ "model": "claude-opus-5-5",
+ "tokensOut": 99021,
+ "costUsd": 2.8153508,
+ "durationMs": 921480,
+ "stages": [
+  {
+   "n": "concept",
+   "s": 21
+  },
+  {
+   "n": "doc",
+   "s": 43
+  },
+  {
+   "n": "build",
+   "s": 460,
+   "ops": 302
+  },
+  {
+   "n": "revise",
+   "s": 921,
+   "ops": 310
+  }
+ ]
+}
