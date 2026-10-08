@@ -54,3 +54,21 @@ were judged on redshelf's street-view sheets.
 - Colour coherence across a street.
 - Front relief would need the host's clearance rule extended.
 - Running it on the server.
+
+## Addendum: design-first vs function-first, and the contract between them
+
+- **Design-first on #66's envelope** was clearly the best looking (`benchmarks/shophouse-design/`), but it
+  ignored the reserve.
+- **Trim knobs inside the fixed massing** barely registered.
+- **A designed type program inside the contract**: a timber frame, a stone cornice, gable collars. It reached
+  about half of the design-first look in 3 passes. Pass 1 over-framed into a dark box, and passes 2 and 3
+  restored the infill. Still 47 of 47 checks.
+- **The gap is the contract, not effort.** Three function-side terms cost most of the look:
+  1. a red-wool reserve placeholder visible on every shopfront (a render-only what-if with dark oak closes much
+     of the gap);
+  2. no projections at all in the 2-cell street clearance;
+  3. every face cell must be solid, so windows can't be recessed.
+- **The general lesson for the skill.** Function and form shouldn't take turns. Function declares a machine-
+  checked contract (reserve, clearance, solidity); design works design-first inside it, in parallel; and when
+  the look is blocked, the skill names the contract term that blocks it, so the owner can trade it. It doesn't
+  quietly settle for less.
