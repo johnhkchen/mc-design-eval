@@ -1,0 +1,32 @@
+{
+ "runId": "202610082319-dance-hall-sonnet-high-rerun-respec",
+ "subject": "dance-hall",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-2",
+ "why": "Build B's central tower is solid and stepped with a vertical window, like the reference's spire; Build A's tower is a hollow grey arch that looks unfinished.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 1.7302452000000001,
+ "durationMs": 502367,
+ "stages": [
+  {
+   "n": "spec",
+   "s": 52
+  },
+  {
+   "n": "agentic build",
+   "s": 494,
+   "turns": 25,
+   "cost": 1.3087952
+  },
+  {
+   "n": "keep-better",
+   "s": 502,
+   "kept": "round-2",
+   "why": "Build B's central tower is solid and stepped with a vertical window, like the reference's spire; Build A's tower is a hollow grey arch that looks unfinished."
+  }
+ ]
+}

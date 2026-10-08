@@ -1,0 +1,38 @@
+{
+ "runId": "202610082320-dance-hall-sonnet-high-rerun-respec-trace",
+ "subject": "dance-hall",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-2",
+ "why": "B's tower ends in a stepped, pointed crown like the reference's spire, and its roofline has a stepped edge; A's tower ends in an odd open arch that doesn't match the sheet.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 1.4278278,
+ "durationMs": 369862,
+ "stages": [
+  {
+   "n": "trace",
+   "s": 0,
+   "cols": 27,
+   "rows": 30
+  },
+  {
+   "n": "spec",
+   "s": 55
+  },
+  {
+   "n": "agentic build",
+   "s": 361,
+   "turns": 22,
+   "cost": 0.9866898000000001
+  },
+  {
+   "n": "keep-better",
+   "s": 370,
+   "kept": "round-2",
+   "why": "B's tower ends in a stepped, pointed crown like the reference's spire, and its roofline has a stepped edge; A's tower ends in an odd open arch that doesn't match the sheet."
+  }
+ ]
+}

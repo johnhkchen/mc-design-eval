@@ -397,7 +397,25 @@ The reruns used the same concept + spec as the gauntlet. [V]
   over-weights the dark inlay), and the dance hall's vertical fins are lost the same way in every run. Next: a
   palette-tone check (concept vs rendered elevation, CIELAB), and naming which brush fits which concept feature.
 
-### Why the good-looking approach is slow (from the transcripts)
+### The dance hall mismatch: a spec that squashed the picture (2026-10-08)
+
+The dance hall concept was solid but the builds hardly resembled it. Cause, found by measuring: the concept is drawn in
+blocks at about 21 px per block, so it is about **27 wide by 30 tall**. The subject text said "22 wide, about 16 tall";
+the spec followed the text ("heights are compressed to the stated 16"), and the build prompt called the spec binding.
+Halving the height alone destroyed every vertical feature that makes art deco: fins, the tall window, the spire.
+Nothing downstream could recover it. Rerun from the same concept (Sonnet high), `benchmarks/gauntlet/dance-hall-fidelity.png`:
+
+| Run | Size | Cost | Result |
+|---|---|---|---|
+| before (`*1605*-rerun`) | 22 × 16 | $1.10 | squat box; reads as a different building |
+| A: "the sheet wins" spec (`*-respec`) | 42 × 50 (pitch mismeasured, about 1.6× too big) | $1.73 | **closest look**: thin separate fins, stepped marquee crown, spire |
+| B: same + block-grid tracing (`*-respec-trace`) | 27 × 30 (exact) | $1.43 | right silhouette and proportions; fins merge into 2-wide blue slabs, wing detail thin |
+
+- **When the text and the picture disagree, the picture must win**, and nothing may squash one axis. Both rules are now in the gauntlet's spec and build prompts.
+- **Models misread block pitch.** Told to count, the spec model measured 13 px per block, not 21. A traced grid (`--trace x,y,w,h,cols,rows`: box-downsample the front elevation to cols × rows, as `trace.png` plus `trace.txt`) fixes the count exactly.
+- **Resolution is a design choice.** At true scale a 1-px fin is blurred by the downsample into its neighbour; the accidentally oversized build had room for detail. Next: trace at true scale for proportions, then build at an integer multiple (2×) when the detail is finer than a block, and find the elevation box automatically instead of measuring it by hand.
+
+## Why the good-looking approach is slow (from the transcripts)
 
 Measured on 014 and 027. [V]
 - **Wall-clock ≈ output tokens ÷ ~75–115 tok/s.** 014's build call: 26k tokens, 339 s.

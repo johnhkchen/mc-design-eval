@@ -19,6 +19,11 @@ const PICKER = process.env.MC_PICK_MODEL_ID || "claude-opus-5-5";
 const arg = (k, d) => (process.argv.includes(k) ? process.argv[process.argv.indexOf(k) + 1] : d);
 const key = arg("--subject"), effort = arg("--effort", "high");
 const from = arg("--from");          // reuse an earlier run's concept.jpg + spec.md (isolate toolkit/model changes)
+const respec = process.argv.includes("--respec");   // with --from: keep the concept, write a fresh spec
+// --trace x,y,w,h,cols,rows : the front elevation's pixel box on the sheet and its size in blocks. Downsamples it to a
+// block grid (trace.png with coordinates + trace.txt of hex colours) that the spec and the builder read as a tracing.
+const trace = arg("--trace")?.split(",").map(Number);
+if (trace && !from) throw new Error("--trace needs --from (the pixel box is measured on an existing concept)");
 
 export const SUBJECTS = {
   "grocery-store": {
@@ -41,7 +46,7 @@ export const SUBJECTS = {
 const s = SUBJECTS[key];
 if (!s) throw new Error(`--subject one of ${Object.keys(SUBJECTS).join(", ")}`);
 const tag = PHASE1_MODEL_ID.replace(/^claude-/, "").replace(/-\d.*$/, "");
-const runId = `${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "")}-${key}-${tag}-${effort}${from ? "-rerun" : ""}`;
+const runId = `${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "")}-${key}-${tag}-${effort}${from ? "-rerun" : ""}${respec ? "-respec" : ""}${trace ? "-trace" : ""}`;
 const dir = join(HERE, "runs", runId);
 mkdirSync(dir, { recursive: true });
 const t0 = Date.now(), usage = { cost: 0 }, stages = [];
@@ -50,26 +55,51 @@ const img = (p) => ({ data: readFileSync(p), mediaType: /\.jpe?g$/i.test(p) ? "i
 
 // 1-2. concept sheet + spec (fresh, or reused with --from)
 let concept;
+const reuseSpec = from && !respec;
 if (from) {
   const src = join(HERE, "runs", from);
   concept = join(dir, "concept.jpg");
   writeFileSync(concept, readFileSync(join(src, "concept.jpg")));
-  writeFileSync(join(dir, "spec.md"), readFileSync(join(src, "spec.md")));
+}
+let traceNote = "";
+if (trace) {
+  const [x, y, w, h, cols, rows] = trace;
+  const raw = join(dir, "trace-raw.png");
+  execFileSync("magick", [concept, "-crop", `${w}x${h}+${x}+${y}`, "+repage", "-filter", "box", "-resize", `${cols}x${rows}!`, raw]);
+  const txt = execFileSync("magick", [raw, "txt:-"], { encoding: "utf8" });
+  const grid = Array.from({ length: rows }, () => Array(cols).fill("------"));
+  for (const m of txt.matchAll(/^(\d+),(\d+):.*#([0-9A-F]{6})/gim)) grid[+m[2]][+m[1]] = m[3].toLowerCase();
+  writeFileSync(join(dir, "trace.txt"), [`# front elevation traced at ${cols} x ${rows} blocks; row 1 = top (y=${rows - 1}), last row = ground (y=0); columns x=0..${cols - 1} left to right; hex = mean colour`,
+    ...grid.map((r, i) => `y${String(rows - 1 - i).padStart(2, "0")} ${r.join(" ")}`)].join("\n") + "\n");
+  const big = join(dir, "trace.png"), px = 24;
+  execFileSync("magick", [raw, "-filter", "point", "-scale", `${cols * px}x${rows * px}!`, "-fill", "none", "-stroke", "#0004",
+    ...Array.from({ length: cols + 1 }, (_, i) => ["-draw", `line ${i * px},0 ${i * px},${rows * px}`]).flat(),
+    ...Array.from({ length: rows + 1 }, (_, i) => ["-draw", `line 0,${i * px} ${cols * px},${i * px}`]).flat(), big]);
+  traceNote = `trace.png / trace.txt: the front elevation downsampled to a ${cols} x ${rows} block grid (x left to right, y=0 at the ground). ` +
+    `It is a TRACING: use it for the outline, the position and size of every feature, and the colour regions, block by block.`;
+  mark("trace", { cols, rows });
+}
+if (reuseSpec) {
+  writeFileSync(join(dir, "spec.md"), readFileSync(join(HERE, "runs", from, "spec.md")));
   mark("concept + spec reused", { from });
-} else {
+} else if (!from) {
   const conceptPrompt = referenceSheetPrompt(s);
   writeFileSync(join(dir, "concept.prompt.txt"), conceptPrompt + "\n");
   const c = await generateImage({ prompt: conceptPrompt });
   concept = join(dir, c.mediaType === "image/jpeg" ? "concept.jpg" : "concept.png");
   writeFileSync(concept, Buffer.from(c.base64, "base64"));
   mark("concept", { model: c.model });
-
+}
+if (!reuseSpec) {
   // 2. spec measured off the sheet, with an exact material map
   const specPrompt = [
     "You are a master Minecraft architect. ATTACHED is a builder's reference sheet (front elevation left, 3/4 right). Write a BUILD SPEC that",
     "lets another builder reproduce it faithfully. Use these sections:",
     "1. Identity (one line).",
-    "2. Footprint and height in blocks (measure off the front elevation; respect the stated size).",
+    "2. Footprint and height in blocks. The sheet is drawn in blocks: measure the block pitch and COUNT blocks off the front elevation.",
+    "   If your counts disagree with the stated size, THE SHEET WINS: keep the sheet's proportions (scale uniformly if you must), never squash one axis",
+    "   to fit a stated number — squashing destroys the tall/slender features that make the design.",
+    ...(traceNote ? [`   ${traceNote} Its grid size is authoritative for width and height.`] : []),
     "3. Vertical zones bottom to top with heights in blocks; horizontal bays left to right with widths in blocks; the roof/top form and its edges.",
     "4. MATERIAL MAP: a table mapping every distinct colour/texture region you can see on the sheet to an exact vanilla 1.20+ block id",
     "   (e.g. 'cream wall field → smooth_sandstone', 'gold trim → gold_block'), with where each region is. Match the sheet's materials, not generic ones.",
@@ -78,7 +108,7 @@ if (from) {
     `Stated subject: ${s.what}. Stated size: ${s.size}.`,
     "Under ~600 words. Output ONLY the spec (markdown).",
   ].join("\n");
-  const spec = await requestTextWithImage({ prompt: specPrompt, images: [img(concept)], model: PHASE1_MODEL_ID, effort });
+  const spec = await requestTextWithImage({ prompt: specPrompt, images: [img(concept), ...(trace ? [img(join(dir, "trace.png"))] : [])], model: PHASE1_MODEL_ID, effort });
   usage.cost += spec.raw?.total_cost_usd || 0;
   writeFileSync(join(dir, "spec.md"), spec.text + "\n");
   mark("spec");
@@ -89,6 +119,8 @@ if (from) {
 const agentPrompt = [
   "Load and follow the minecraft-design skill. Build the building shown in concept.jpg (left: front elevation, right: 3/4 view) as structure",
   "files in this directory, following spec.md (its sizes and its MATERIAL MAP are binding: use exactly those block ids for those regions).",
+  "Where spec.md and concept.jpg disagree on form, the CONCEPT wins.",
+  ...(traceNote ? [traceNote + " Build the front face to match the tracing cell for cell (then add the depth the 3/4 view shows), and compare your front elevation against trace.png in each round."] : []),
   "Geometry: the main front faces NORTH (−z); x runs along the street; y = 0 is the ground. Author it as code (mcd new build.mjs; design one bay,",
   "tile it, mirror for symmetry). For curved and stepped forms use the build library's SHAPE BRUSHES (see the skill's references/shapes-curved.md",
   "and references/shapes-massing.md: dome, cylinder, minaret, arch, setbacks, gableRoof, hipRoof, fins, parapet, cornice) instead of placing those",
