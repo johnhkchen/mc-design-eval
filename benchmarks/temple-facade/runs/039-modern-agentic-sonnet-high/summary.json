@@ -1,0 +1,26 @@
+{
+ "source": "/private/tmp/claude-501/-Volumes-ext1-swe-repos-mc-design-eval/09638d4e-75b5-4c77-bb3e-1afdfe79a145/scratchpad/arc-agentic/facade.nbt",
+ "blocks": 29046,
+ "unmapped": 0,
+ "score": {
+  "proportion": "strong",
+  "color": "strong",
+  "detail": "strong",
+  "fidelity": "strong",
+  "overall": "strong",
+  "notes": "A confident, symmetrical triumphal-arch elevation with a clear base→middle→crown reading: battered sculpted piers, a keystoned central arch, a dentil cornice, and a crenellated attic. Proportion is deliberate and well-balanced — the single-bay massing and the weight of the piers against the void feel intentional, though a single grand arch offers less rhythm to resolve than a multi-bay front, so it stops short of inevitable. Color is the strongest move: a disciplined teal/verdigris dominant, copper-orange accent, and cream supporting field read as a genuine patinated-bronze-and-stone harmony rather than a random palette — close to identity-making but the cream fields sit a touch inert. Detail is rich where it counts (dentil course, the relief sculpture groups in the pier reveals, moldings and keystone) but the attic band and upper spandrels flatten into plain fields, so it isn't resolved edge to edge. Fidelity is high — it is instantly legible as an Arc de Triomphe, which is a namable landmark — but that's the catch against this brief: it reads as a triumphal monument/arch, not a temple with a cella or a worship frontage; the central void is a passage, not an entrance into a sanctuary. Characterful and clear, held at strong rather than exceptional because the temple identity is borrowed from monument vocabulary and I can still name easy improvements (break up the flat attic, carry relief into the spandrels).",
+  "samples": 3,
+  "rubric": "v2-categorical-baml",
+  "perSample": [
+   "strong",
+   "strong",
+   "strong"
+  ],
+  "usage": {
+   "input_tokens": 6,
+   "output_tokens": 3587,
+   "cost_usd": 1.0856569999999999
+  }
+ },
+ "note": "minecraft-design plugin, claude -p sonnet-5-5 --effort high, concept from 038"
+}

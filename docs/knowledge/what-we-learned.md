@@ -332,6 +332,29 @@ reference sheet**. [V]
   second and Sonnet-low r0 last. The saloon scatter meant "these are equal".
 - **Revise helped the high-effort runs** (r1 > r0). **Sonnet high is the value pick:** near Opus at ⅓ the cost.
 
+### The Arc, again, with modern techniques (2026-10-08)
+
+The same task and reference photo as runs 021/029/037/032, through two modern pipelines (Sonnet 5.5, high effort),
+classic camera, classic judge (Opus 4.8). [V]
+
+![old vs modern Arc](assets/arc-modern.png)
+
+| Run | Pipeline | Cost | Time | Judge (overall / detail) |
+|---|---|---|---|---|
+| 021 | old, Opus 4.8 | $2.13 | 17 min | strong / strong |
+| 029 | old, Opus 5.5 | $2.38 | 15 min | strong / strong |
+| 037 | old, Sonnet 5.5 | $0.81 | 6 min | strong / competent |
+| **038** | **modern harness** (`modern.mjs`): reference-sheet concept from the photo → doc reads sizes off the sheet → build *sees* the concept → matched-view critique → keep the better | $1.30 | 11.6 min | strong / strong |
+| **039** | **minecraft-design plugin, agentic** (`claude -p --plugin-dir`): same concept, authored as code (mirror), rendered and compared, 2 rounds, kept the better | **$0.76** | **4.4 min** | strong / strong |
+
+- **Both modern builds read unmistakably as the Arc de Triomphe**: a true open arch, the right proportions,
+  sculpture groups on the piers, relief panels, frieze, cornice, attic. Every old-pipeline Arc was a wall with an
+  arch-shaped panel and borrowed motifs.
+- **What did it:** a concept that is a build spec (made from the photo), a builder that sees it or works against it,
+  matched-view comparison, keep the better.
+- **The plugin's agentic, code-authored path was the closest match and the cheapest and fastest.** That is the best
+  evidence yet that the plugin's method is the right default.
+
 ### Why the good-looking approach is slow (from the transcripts)
 
 Measured on 014 and 027. [V]

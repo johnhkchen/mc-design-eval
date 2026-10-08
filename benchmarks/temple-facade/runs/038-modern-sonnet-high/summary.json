@@ -1,0 +1,68 @@
+{
+ "runId": "038-modern-sonnet-high",
+ "approach": "modern",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-1",
+ "pick": {
+  "better": "B",
+  "why": "B gets more of the reference right: the lower piers carry blocky sculpture groups like the reference instead of A's window-like pointed niches, its teal-framed relief panels sit on the yellow band as in the reference, and its frieze is more fully banded, though its arch is a little more jagged than A's."
+ },
+ "blocks": 10976,
+ "tokensOut": 90264,
+ "costUsd": 1.3017083999999999,
+ "durationMs": 696097,
+ "stages": [
+  {
+   "n": "concept",
+   "s": 13,
+   "model": "gemini-nano-banana-2.1"
+  },
+  {
+   "n": "doc",
+   "s": 59
+  },
+  {
+   "n": "build",
+   "s": 315,
+   "ops": 255
+  },
+  {
+   "n": "revise",
+   "s": 623,
+   "ops": 272
+  },
+  {
+   "n": "keep-better",
+   "s": 632,
+   "better": "B",
+   "why": "B gets more of the reference right: the lower piers carry blocky sculpture groups like the reference instead of A's window-like pointed niches, its teal-framed relief panels sit on the yellow band as in the reference, and its frieze is more fully banded, though its arch is a little more jagged than A's."
+  },
+  {
+   "n": "judge",
+   "s": 696,
+   "overall": "strong",
+   "detail": "strong"
+  }
+ ],
+ "score": {
+  "proportion": "strong",
+  "color": "strong",
+  "detail": "strong",
+  "fidelity": "strong",
+  "overall": "strong",
+  "notes": "A confident, symmetric triumphal-arch facade with a genuinely coherent base→middle→crown: cream rusticated piers, a gold middle field, a teal-and-terracotta frieze, a layered orange cornice, and a crenellated attic. The palette is the strongest move — a disciplined teal/terracotta/gold/cream harmony with clear dominant-supporting-accent roles that gives the build a real identity rather than a monochrome wall. Proportion is deliberate and balanced; the single central arch reads as a clear, grand entrance with presence. Detail is rich across the crown (dentils, crenellations, framed panels) and the piers carry sculptural niches, so little reads as flat. It stops short of exceptional in each dimension for nameable reasons: the arch is stepped rather than cleanly voussoired/round, the sculpture groups in the piers are crude undifferentiated blobs, and the gold spandrel fields are comparatively flat next to the busy crown. Identity-wise it lands as a Beaux-Arts triumphal arch more than an unmistakable 'temple,' but it is characterful and landmark-adjacent. Overall a strong, screenshot-worthy facade with obvious but minor improvements remaining.",
+  "samples": 3,
+  "rubric": "v2-categorical-baml",
+  "perSample": [
+   "strong",
+   "strong",
+   "strong"
+  ],
+  "usage": {
+   "input_tokens": 6,
+   "output_tokens": 3597,
+   "cost_usd": 0.981473
+  }
+ }
+}
