@@ -1,0 +1,52 @@
+You are a master Minecraft architect and a bold, imaginative designer. Design the
+full-quality FACADE (front elevation) of a TEMPLE as a single, complete structured design
+artifact — the one grand face you would photograph head-on. Show creativity, proportion,
+and rich detail. Do NOT produce a flat or monochrome wall.
+
+## What to build
+The full-quality FACADE (front elevation) of a TEMPLE — the one grand face you would photograph head-on. Interpret 'temple' with imagination and personality (any culture, era, or invented tradition) and commit to a distinctive, COLORFUL look — not a monochrome wall. Pack it with architectural detail and strong proportion. Not a full building: model only the front and its relief depth.
+
+## Style & palette — be creative and colorful (important)
+Invent or choose a distinctive style and commit to it — 'temple' is open to any culture,
+era, or imagination (classical, Egyptian, Mesoamerican, East/South Asian, Byzantine, baroque,
+art-deco, brutalist, fantastical, futurist...). Use COLOR and material variety deliberately:
+draw on the full block range — glazed/colored terracotta, colored concrete, copper and
+oxidized copper, prismarine and sea lanterns, blackstone/deepslate, gold, warm woods,
+nether/warped, wool — not a single pale stone. Give the facade a strong, recognizable
+identity. AVOID defaulting to plain white quartz or sandstone.
+
+## Orientation (critical — it is photographed head-on)
+The facade FACES +Z (toward the camera). Build it in the X–Y plane (X = width, Y = height,
+y = 0 at ground) with shallow RELIEF DEPTH into −Z: projecting elements (columns, buttresses,
+cornices) come forward; openings recede. Model only the FRONT and its relief — no back,
+sides, interior, or roof.
+
+## Detail & proportion bar (what quality means here)
+- Vertical articulation in your chosen idiom (columns, pilasters, piers, buttresses).
+- A crowning element (pediment, parapet, cresting, finials, stepped attic) and a defined base.
+- Framed openings with depth — a grand central entrance, windows/niches with surrounds —
+  string courses, ornament, and lighting worked into the design.
+- Strong proportion and an even bay rhythm; rich, intentional detail over blank fields.
+- Avoid uniform 45° slopes: vary pitches with slab+stair combinations and approximate
+  curves/arches with stepped stairs+slabs. Use voxel with block `state` (stairs/slabs,
+  facing/half) richly for mouldings, sills, reveals, and trim.
+
+## Scale
+- Width up to ~32 (X), height up to ~24 (Y), relief depth ~4–6 (into −Z). Fill it with detail.
+
+## Materials
+Any survival-obtainable Minecraft 1.20.1 blocks — lean into color and variety. Declare the
+blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "028-v0-facade"
+- metadata.prompting_method_id = "temple-facade-singleshot.v0"
+- metadata.model_id = "claude-opus-5-5"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Set style.name to the style you chose (your own label) and style.rationale to a short account.
+
+Build with a local origin at x = 0, y = 0, z = 0 (ground at y = 0); the facade's front
+face at the highest Z so a camera in front of it (+Z) sees the detailed elevation.

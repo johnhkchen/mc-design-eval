@@ -68,6 +68,9 @@ auto-injected corpus). Review and update it after each run.
 | 24 | 2026-06-05 | `vRefRevise-designdoc` | strong | 9500 | 32558/53970 | $1.7084 | 723s | T-009-01 effort A/B: DEFAULT (no --effort) |
 | 25 | 2026-06-05 | `vRefRevise-designdoc` | strong | 8614 | 32916/71370 | $2.1818 | 980s | persona A/B ON (T-013-01): master-architect system prompt across all 3 stages |
 | 26 | 2026-06-05 | `vRefRevise-designdoc` | strong | 8802 | 32855/71208 | $2.1434 | 946s | T-009-01 effort A/B: HIGH (--effort high) |
+| 27 | 2026-10-08 | `vRefRevise-designdoc` | strong | 23467 | 34/93811 | $3.3571 | 881s | opus-5-5 rerun of 014 (judge pinned opus-4-8) |
+| 28 | 2026-10-08 | `v0-facade` | strong | 2319 | 2/24022 | $0.7797 | 275s | opus-5-5 rerun of 001 (judge pinned opus-4-8) |
+| 29 | 2026-10-08 | `vRefRevise-designdoc` | strong | 19456 | 8/69409 | $2.3755 | 887s | opus-5-5 rerun of 021 (judge pinned opus-4-8) |
 
 ## Gallery
 
@@ -252,5 +255,29 @@ auto-injected corpus). Review and update it after each run.
 **strong** · 8802 blocks · 32855/71208 tok · $2.1434
 
 > T-009-01 effort A/B: HIGH (--effort high)
+
+### 027 — `vRefRevise-designdoc` · 2026-10-08
+
+![temple-facade run 27](runs/027-vRefRevise-designdoc/render.png)
+
+**strong** · 23467 blocks · 34/93811 tok · $3.3571
+
+> opus-5-5 rerun of 014 (judge pinned opus-4-8)
+
+### 028 — `v0-facade` · 2026-10-08
+
+![temple-facade run 28](runs/028-v0-facade/render.png)
+
+**strong** · 2319 blocks · 2/24022 tok · $0.7797
+
+> opus-5-5 rerun of 001 (judge pinned opus-4-8)
+
+### 029 — `vRefRevise-designdoc` · 2026-10-08
+
+![temple-facade run 29](runs/029-vRefRevise-designdoc/render.png)
+
+**strong** · 19456 blocks · 8/69409 tok · $2.3755
+
+> opus-5-5 rerun of 021 (judge pinned opus-4-8)
 
 <!-- RUNS:END -->

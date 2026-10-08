@@ -1,0 +1,4416 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "027-vRefRevise-designdoc",
+    "prompting_method_id": "temple-facade-reference-revise.v0",
+    "model_id": "claude-opus-5-5",
+    "seed": 11,
+    "server_state_id": "flat-creative-superflat.v1"
+  },
+  "style": {
+    "name": "The Verdigris Sanctuary of Qamar-Ashan (Mughal red-sandstone and verdigris)",
+    "rationale": "Second pass: the minarets are now engaged. Each is bonded to the main block by a two-tier niched flanking bay, so no sky shows between the tower and the body at the base. The 11-wide pishtaq projects 2 blocks ahead of the wings. Its gold calligraphy frame wraps verdigris spandrels, and its 7-wide pointed iwan has a stepped chiseled inner jamb before a dark-prismarine back. That back carries a copper lattice window and a recessed copper doorway with a gold head. The wings are split into integrated bays by projecting pilasters that rise into gold-tipped pinnacles. Each wing has two tiers of 2-deep pointed niches with copper spandrels and lattice windows, plus string courses, a cornice, a copper frieze and a merlon parapet, so no field is left flat. The chamfered corners carry dark inset panels. The plinth is a full blind arcade with dark-prismarine recesses and a copper arch-head band, and a central stair leads up to it. The crown is tightened into one stepped pyramid: an engaged guldasta shaft on each side of the pishtaq, a gold-banded drum, a 19-wide onion dome modeled in curving relief, two copper-domed chhatris with dark interiors, and minaret chhatris with gold finials. The coral cut red sandstone stays dominant against verdigris copper, with dark-prismarine shadow and sparing gold accents, so the facade holds its colour instead of drifting toward the reference's white."
+  },
+  "palette": {
+    "manifest": [
+      "minecraft:cut_red_sandstone",
+      "minecraft:smooth_red_sandstone",
+      "minecraft:chiseled_red_sandstone",
+      "minecraft:red_sandstone",
+      "minecraft:waxed_oxidized_cut_copper",
+      "minecraft:dark_prismarine",
+      "minecraft:gold_block"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [
+        0,
+        0,
+        -19
+      ],
+      "to": [
+        54,
+        4,
+        -2
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        1,
+        -1
+      ],
+      "to": [
+        54,
+        3,
+        -1
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        0,
+        -1
+      ],
+      "to": [
+        54,
+        0,
+        -1
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        4,
+        -1
+      ],
+      "to": [
+        54,
+        4,
+        -1
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        54,
+        0,
+        0
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        4,
+        0
+      ],
+      "to": [
+        54,
+        4,
+        0
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        1,
+        0
+      ],
+      "to": [
+        1,
+        2,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        53,
+        1,
+        0
+      ],
+      "to": [
+        54,
+        2,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        5,
+        1,
+        0
+      ],
+      "to": [
+        5,
+        2,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        9,
+        1,
+        0
+      ],
+      "to": [
+        9,
+        2,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        13,
+        1,
+        0
+      ],
+      "to": [
+        13,
+        2,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        17,
+        1,
+        0
+      ],
+      "to": [
+        17,
+        2,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        21,
+        1,
+        0
+      ],
+      "to": [
+        21,
+        2,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        25,
+        1,
+        0
+      ],
+      "to": [
+        25,
+        2,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        29,
+        1,
+        0
+      ],
+      "to": [
+        29,
+        2,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        33,
+        1,
+        0
+      ],
+      "to": [
+        33,
+        2,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        37,
+        1,
+        0
+      ],
+      "to": [
+        37,
+        2,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        41,
+        1,
+        0
+      ],
+      "to": [
+        41,
+        2,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        45,
+        1,
+        0
+      ],
+      "to": [
+        45,
+        2,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        49,
+        1,
+        0
+      ],
+      "to": [
+        49,
+        2,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        3,
+        0
+      ],
+      "to": [
+        2,
+        3,
+        0
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        4,
+        3,
+        0
+      ],
+      "to": [
+        6,
+        3,
+        0
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        8,
+        3,
+        0
+      ],
+      "to": [
+        10,
+        3,
+        0
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        12,
+        3,
+        0
+      ],
+      "to": [
+        14,
+        3,
+        0
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        16,
+        3,
+        0
+      ],
+      "to": [
+        18,
+        3,
+        0
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        20,
+        3,
+        0
+      ],
+      "to": [
+        22,
+        3,
+        0
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        24,
+        3,
+        0
+      ],
+      "to": [
+        26,
+        3,
+        0
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        28,
+        3,
+        0
+      ],
+      "to": [
+        30,
+        3,
+        0
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        32,
+        3,
+        0
+      ],
+      "to": [
+        34,
+        3,
+        0
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        36,
+        3,
+        0
+      ],
+      "to": [
+        38,
+        3,
+        0
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        40,
+        3,
+        0
+      ],
+      "to": [
+        42,
+        3,
+        0
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        44,
+        3,
+        0
+      ],
+      "to": [
+        46,
+        3,
+        0
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        48,
+        3,
+        0
+      ],
+      "to": [
+        50,
+        3,
+        0
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        52,
+        3,
+        0
+      ],
+      "to": [
+        54,
+        3,
+        0
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        25,
+        0,
+        1
+      ],
+      "to": [
+        29,
+        0,
+        4
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        25,
+        1,
+        1
+      ],
+      "to": [
+        29,
+        1,
+        3
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        25,
+        2,
+        1
+      ],
+      "to": [
+        29,
+        2,
+        2
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        25,
+        3,
+        1
+      ],
+      "to": [
+        29,
+        3,
+        1
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        5,
+        -16
+      ],
+      "to": [
+        43,
+        30,
+        -6
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        5,
+        -5
+      ],
+      "to": [
+        25,
+        30,
+        -5
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        29,
+        5,
+        -5
+      ],
+      "to": [
+        43,
+        30,
+        -5
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        26,
+        11,
+        -5
+      ],
+      "to": [
+        28,
+        30,
+        -5
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        5,
+        -12
+      ],
+      "to": [
+        10,
+        26,
+        -5
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        44,
+        5,
+        -12
+      ],
+      "to": [
+        48,
+        26,
+        -5
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        7,
+        7,
+        -5
+      ],
+      "to": [
+        9,
+        12,
+        -5
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "fill",
+      "from": [
+        7,
+        16,
+        -5
+      ],
+      "to": [
+        9,
+        21,
+        -5
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "fill",
+      "from": [
+        45,
+        7,
+        -5
+      ],
+      "to": [
+        47,
+        12,
+        -5
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "fill",
+      "from": [
+        45,
+        16,
+        -5
+      ],
+      "to": [
+        47,
+        21,
+        -5
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        5,
+        -4
+      ],
+      "to": [
+        10,
+        6,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        6,
+        7,
+        -4
+      ],
+      "to": [
+        6,
+        11,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        10,
+        7,
+        -4
+      ],
+      "to": [
+        10,
+        11,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        6,
+        12,
+        -4
+      ],
+      "to": [
+        7,
+        12,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        9,
+        12,
+        -4
+      ],
+      "to": [
+        10,
+        12,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        13,
+        -4
+      ],
+      "to": [
+        10,
+        15,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        6,
+        16,
+        -4
+      ],
+      "to": [
+        6,
+        20,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        10,
+        16,
+        -4
+      ],
+      "to": [
+        10,
+        20,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        6,
+        21,
+        -4
+      ],
+      "to": [
+        7,
+        21,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        9,
+        21,
+        -4
+      ],
+      "to": [
+        10,
+        21,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        22,
+        -4
+      ],
+      "to": [
+        10,
+        26,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        6,
+        24,
+        -4
+      ],
+      "to": [
+        10,
+        24,
+        -4
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        6,
+        25,
+        -3
+      ],
+      "to": [
+        10,
+        25,
+        -3
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        6,
+        14,
+        -3
+      ],
+      "to": [
+        10,
+        14,
+        -3
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        27,
+        -5
+      ],
+      "to": [
+        6,
+        27,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        8,
+        27,
+        -5
+      ],
+      "to": [
+        8,
+        27,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        27,
+        -5
+      ],
+      "to": [
+        10,
+        27,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        12,
+        -4
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        9,
+        12,
+        -4
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        21,
+        -4
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        9,
+        21,
+        -4
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        44,
+        5,
+        -4
+      ],
+      "to": [
+        48,
+        6,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        44,
+        7,
+        -4
+      ],
+      "to": [
+        44,
+        11,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        48,
+        7,
+        -4
+      ],
+      "to": [
+        48,
+        11,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        44,
+        12,
+        -4
+      ],
+      "to": [
+        45,
+        12,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        47,
+        12,
+        -4
+      ],
+      "to": [
+        48,
+        12,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        44,
+        13,
+        -4
+      ],
+      "to": [
+        48,
+        15,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        44,
+        16,
+        -4
+      ],
+      "to": [
+        44,
+        20,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        48,
+        16,
+        -4
+      ],
+      "to": [
+        48,
+        20,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        44,
+        21,
+        -4
+      ],
+      "to": [
+        45,
+        21,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        47,
+        21,
+        -4
+      ],
+      "to": [
+        48,
+        21,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        44,
+        22,
+        -4
+      ],
+      "to": [
+        48,
+        26,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        44,
+        24,
+        -4
+      ],
+      "to": [
+        48,
+        24,
+        -4
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        44,
+        25,
+        -3
+      ],
+      "to": [
+        48,
+        25,
+        -3
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        44,
+        14,
+        -3
+      ],
+      "to": [
+        48,
+        14,
+        -3
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        44,
+        27,
+        -5
+      ],
+      "to": [
+        44,
+        27,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        46,
+        27,
+        -5
+      ],
+      "to": [
+        46,
+        27,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        48,
+        27,
+        -5
+      ],
+      "to": [
+        48,
+        27,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        12,
+        -4
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        47,
+        12,
+        -4
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        45,
+        21,
+        -4
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        47,
+        21,
+        -4
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        2,
+        5,
+        -5
+      ],
+      "to": [
+        4,
+        40,
+        -1
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        5,
+        -4
+      ],
+      "to": [
+        5,
+        40,
+        -2
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        2,
+        5,
+        -1
+      ],
+      "to": [
+        2,
+        40,
+        -1
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        4,
+        5,
+        -1
+      ],
+      "to": [
+        4,
+        40,
+        -1
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        3,
+        9,
+        -1
+      ],
+      "to": [
+        3,
+        11,
+        -1
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "line",
+      "from": [
+        3,
+        18,
+        -1
+      ],
+      "to": [
+        3,
+        20,
+        -1
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "line",
+      "from": [
+        3,
+        27,
+        -1
+      ],
+      "to": [
+        3,
+        29,
+        -1
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "line",
+      "from": [
+        3,
+        36,
+        -1
+      ],
+      "to": [
+        3,
+        38,
+        -1
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "line",
+      "from": [
+        2,
+        13,
+        -1
+      ],
+      "to": [
+        4,
+        13,
+        -1
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        2,
+        22,
+        -1
+      ],
+      "to": [
+        4,
+        22,
+        -1
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        2,
+        31,
+        -1
+      ],
+      "to": [
+        4,
+        31,
+        -1
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        2,
+        40,
+        -1
+      ],
+      "to": [
+        4,
+        40,
+        -1
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        14,
+        -5
+      ],
+      "to": [
+        6,
+        14,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        23,
+        -5
+      ],
+      "to": [
+        6,
+        23,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        32,
+        -5
+      ],
+      "to": [
+        6,
+        32,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        41,
+        -5
+      ],
+      "to": [
+        6,
+        41,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        2,
+        42,
+        -4
+      ],
+      "to": [
+        4,
+        44,
+        -4
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "line",
+      "from": [
+        1,
+        42,
+        -2
+      ],
+      "to": [
+        1,
+        44,
+        -2
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        5,
+        42,
+        -2
+      ],
+      "to": [
+        5,
+        44,
+        -2
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        1,
+        42,
+        -4
+      ],
+      "to": [
+        1,
+        44,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        5,
+        42,
+        -4
+      ],
+      "to": [
+        5,
+        44,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        44,
+        -2
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        44,
+        -2
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        45,
+        -6
+      ],
+      "to": [
+        6,
+        45,
+        0
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        1,
+        46,
+        -5
+      ],
+      "to": [
+        5,
+        46,
+        -1
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        2,
+        47,
+        -4
+      ],
+      "to": [
+        4,
+        47,
+        -2
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        48,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        50,
+        5,
+        -5
+      ],
+      "to": [
+        52,
+        40,
+        -1
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        49,
+        5,
+        -4
+      ],
+      "to": [
+        53,
+        40,
+        -2
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        50,
+        5,
+        -1
+      ],
+      "to": [
+        50,
+        40,
+        -1
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        52,
+        5,
+        -1
+      ],
+      "to": [
+        52,
+        40,
+        -1
+      ],
+      "block": "minecraft:red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        51,
+        9,
+        -1
+      ],
+      "to": [
+        51,
+        11,
+        -1
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "line",
+      "from": [
+        51,
+        18,
+        -1
+      ],
+      "to": [
+        51,
+        20,
+        -1
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "line",
+      "from": [
+        51,
+        27,
+        -1
+      ],
+      "to": [
+        51,
+        29,
+        -1
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "line",
+      "from": [
+        51,
+        36,
+        -1
+      ],
+      "to": [
+        51,
+        38,
+        -1
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "line",
+      "from": [
+        50,
+        13,
+        -1
+      ],
+      "to": [
+        52,
+        13,
+        -1
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        50,
+        22,
+        -1
+      ],
+      "to": [
+        52,
+        22,
+        -1
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        50,
+        31,
+        -1
+      ],
+      "to": [
+        52,
+        31,
+        -1
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        50,
+        40,
+        -1
+      ],
+      "to": [
+        52,
+        40,
+        -1
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        48,
+        14,
+        -5
+      ],
+      "to": [
+        54,
+        14,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        48,
+        23,
+        -5
+      ],
+      "to": [
+        54,
+        23,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        48,
+        32,
+        -5
+      ],
+      "to": [
+        54,
+        32,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        48,
+        41,
+        -5
+      ],
+      "to": [
+        54,
+        41,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        50,
+        42,
+        -4
+      ],
+      "to": [
+        52,
+        44,
+        -4
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "line",
+      "from": [
+        53,
+        42,
+        -2
+      ],
+      "to": [
+        53,
+        44,
+        -2
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        49,
+        42,
+        -2
+      ],
+      "to": [
+        49,
+        44,
+        -2
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        53,
+        42,
+        -4
+      ],
+      "to": [
+        53,
+        44,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        49,
+        42,
+        -4
+      ],
+      "to": [
+        49,
+        44,
+        -4
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        52,
+        44,
+        -2
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        50,
+        44,
+        -2
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        48,
+        45,
+        -6
+      ],
+      "to": [
+        54,
+        45,
+        0
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        49,
+        46,
+        -5
+      ],
+      "to": [
+        53,
+        46,
+        -1
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        50,
+        47,
+        -4
+      ],
+      "to": [
+        52,
+        47,
+        -2
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        51,
+        48,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        8,
+        -5
+      ],
+      "to": [
+        12,
+        13,
+        -5
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        19,
+        -5
+      ],
+      "to": [
+        12,
+        24,
+        -5
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "fill",
+      "from": [
+        42,
+        8,
+        -5
+      ],
+      "to": [
+        43,
+        13,
+        -5
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "fill",
+      "from": [
+        42,
+        19,
+        -5
+      ],
+      "to": [
+        43,
+        24,
+        -5
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "line",
+      "from": [
+        11,
+        16,
+        -5
+      ],
+      "to": [
+        12,
+        16,
+        -5
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        42,
+        16,
+        -5
+      ],
+      "to": [
+        43,
+        16,
+        -5
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        5,
+        -4
+      ],
+      "to": [
+        13,
+        30,
+        -2
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        21,
+        5,
+        -4
+      ],
+      "to": [
+        21,
+        30,
+        -2
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        33,
+        5,
+        -4
+      ],
+      "to": [
+        33,
+        30,
+        -2
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        41,
+        5,
+        -4
+      ],
+      "to": [
+        41,
+        30,
+        -2
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        7,
+        -5
+      ],
+      "to": [
+        19,
+        14,
+        -5
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        18,
+        -5
+      ],
+      "to": [
+        19,
+        25,
+        -5
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "fill",
+      "from": [
+        16,
+        9,
+        -5
+      ],
+      "to": [
+        18,
+        12,
+        -5
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        16,
+        20,
+        -5
+      ],
+      "to": [
+        18,
+        23,
+        -5
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        35,
+        7,
+        -5
+      ],
+      "to": [
+        39,
+        14,
+        -5
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "fill",
+      "from": [
+        35,
+        18,
+        -5
+      ],
+      "to": [
+        39,
+        25,
+        -5
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "fill",
+      "from": [
+        36,
+        9,
+        -5
+      ],
+      "to": [
+        38,
+        12,
+        -5
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        36,
+        20,
+        -5
+      ],
+      "to": [
+        38,
+        23,
+        -5
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        5,
+        -4
+      ],
+      "to": [
+        20,
+        6,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        7,
+        -4
+      ],
+      "to": [
+        14,
+        12,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        7,
+        -4
+      ],
+      "to": [
+        20,
+        12,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        13,
+        -4
+      ],
+      "to": [
+        15,
+        13,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        13,
+        -4
+      ],
+      "to": [
+        20,
+        13,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        14,
+        -4
+      ],
+      "to": [
+        16,
+        14,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        14,
+        -4
+      ],
+      "to": [
+        20,
+        14,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        15,
+        -4
+      ],
+      "to": [
+        20,
+        17,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        18,
+        -4
+      ],
+      "to": [
+        14,
+        23,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        18,
+        -4
+      ],
+      "to": [
+        20,
+        23,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        24,
+        -4
+      ],
+      "to": [
+        15,
+        24,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        24,
+        -4
+      ],
+      "to": [
+        20,
+        24,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        25,
+        -4
+      ],
+      "to": [
+        16,
+        25,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        25,
+        -4
+      ],
+      "to": [
+        20,
+        25,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        26,
+        -4
+      ],
+      "to": [
+        20,
+        29,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        30,
+        -4
+      ],
+      "to": [
+        14,
+        30,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        16,
+        30,
+        -4
+      ],
+      "to": [
+        16,
+        30,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        30,
+        -4
+      ],
+      "to": [
+        18,
+        30,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        30,
+        -4
+      ],
+      "to": [
+        20,
+        30,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        15,
+        13,
+        -3
+      ],
+      "to": [
+        15,
+        14,
+        -3
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        19,
+        13,
+        -3
+      ],
+      "to": [
+        19,
+        14,
+        -3
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        14,
+        -3
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        18,
+        14,
+        -3
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        15,
+        24,
+        -3
+      ],
+      "to": [
+        15,
+        25,
+        -3
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        19,
+        24,
+        -3
+      ],
+      "to": [
+        19,
+        25,
+        -3
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        25,
+        -3
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        18,
+        25,
+        -3
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        13,
+        5,
+        -2
+      ],
+      "to": [
+        21,
+        5,
+        -2
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        13,
+        16,
+        -2
+      ],
+      "to": [
+        21,
+        16,
+        -2
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        13,
+        27,
+        -2
+      ],
+      "to": [
+        21,
+        27,
+        -2
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        14,
+        29,
+        -3
+      ],
+      "to": [
+        20,
+        29,
+        -3
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        34,
+        5,
+        -4
+      ],
+      "to": [
+        40,
+        6,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        34,
+        7,
+        -4
+      ],
+      "to": [
+        34,
+        12,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        40,
+        7,
+        -4
+      ],
+      "to": [
+        40,
+        12,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        34,
+        13,
+        -4
+      ],
+      "to": [
+        35,
+        13,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        39,
+        13,
+        -4
+      ],
+      "to": [
+        40,
+        13,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        34,
+        14,
+        -4
+      ],
+      "to": [
+        36,
+        14,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        38,
+        14,
+        -4
+      ],
+      "to": [
+        40,
+        14,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        34,
+        15,
+        -4
+      ],
+      "to": [
+        40,
+        17,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        34,
+        18,
+        -4
+      ],
+      "to": [
+        34,
+        23,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        40,
+        18,
+        -4
+      ],
+      "to": [
+        40,
+        23,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        34,
+        24,
+        -4
+      ],
+      "to": [
+        35,
+        24,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        39,
+        24,
+        -4
+      ],
+      "to": [
+        40,
+        24,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        34,
+        25,
+        -4
+      ],
+      "to": [
+        36,
+        25,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        38,
+        25,
+        -4
+      ],
+      "to": [
+        40,
+        25,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        34,
+        26,
+        -4
+      ],
+      "to": [
+        40,
+        29,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        34,
+        30,
+        -4
+      ],
+      "to": [
+        34,
+        30,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        36,
+        30,
+        -4
+      ],
+      "to": [
+        36,
+        30,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        38,
+        30,
+        -4
+      ],
+      "to": [
+        38,
+        30,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        40,
+        30,
+        -4
+      ],
+      "to": [
+        40,
+        30,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        35,
+        13,
+        -3
+      ],
+      "to": [
+        35,
+        14,
+        -3
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        39,
+        13,
+        -3
+      ],
+      "to": [
+        39,
+        14,
+        -3
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        36,
+        14,
+        -3
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        38,
+        14,
+        -3
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        35,
+        24,
+        -3
+      ],
+      "to": [
+        35,
+        25,
+        -3
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        39,
+        24,
+        -3
+      ],
+      "to": [
+        39,
+        25,
+        -3
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        36,
+        25,
+        -3
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        38,
+        25,
+        -3
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        33,
+        5,
+        -2
+      ],
+      "to": [
+        41,
+        5,
+        -2
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        33,
+        16,
+        -2
+      ],
+      "to": [
+        41,
+        16,
+        -2
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        33,
+        27,
+        -2
+      ],
+      "to": [
+        41,
+        27,
+        -2
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        34,
+        29,
+        -3
+      ],
+      "to": [
+        40,
+        29,
+        -3
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        13,
+        31,
+        -3
+      ],
+      "to": [
+        13,
+        33,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        34,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        21,
+        31,
+        -3
+      ],
+      "to": [
+        21,
+        33,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        21,
+        34,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        33,
+        31,
+        -3
+      ],
+      "to": [
+        33,
+        33,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        33,
+        34,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        41,
+        31,
+        -3
+      ],
+      "to": [
+        41,
+        33,
+        -3
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        41,
+        34,
+        -3
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        11,
+        31,
+        -5
+      ],
+      "to": [
+        11,
+        33,
+        -5
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        34,
+        -5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        43,
+        31,
+        -5
+      ],
+      "to": [
+        43,
+        33,
+        -5
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        43,
+        34,
+        -5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        5,
+        -5
+      ],
+      "to": [
+        25,
+        23,
+        -5
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "fill",
+      "from": [
+        29,
+        5,
+        -5
+      ],
+      "to": [
+        30,
+        23,
+        -5
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "fill",
+      "from": [
+        26,
+        11,
+        -5
+      ],
+      "to": [
+        28,
+        23,
+        -5
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "fill",
+      "from": [
+        25,
+        13,
+        -5
+      ],
+      "to": [
+        29,
+        17,
+        -5
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        25,
+        15,
+        -5
+      ],
+      "to": [
+        29,
+        15,
+        -5
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "line",
+      "from": [
+        27,
+        13,
+        -5
+      ],
+      "to": [
+        27,
+        17,
+        -5
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        15,
+        -5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        26,
+        5,
+        -6
+      ],
+      "to": [
+        28,
+        9,
+        -6
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        10,
+        -6
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        10,
+        -5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        10,
+        -5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        11,
+        -5
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        5,
+        -4
+      ],
+      "to": [
+        23,
+        34,
+        -1
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        31,
+        5,
+        -4
+      ],
+      "to": [
+        32,
+        34,
+        -1
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        24,
+        -4
+      ],
+      "to": [
+        30,
+        34,
+        -1
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        19,
+        -4
+      ],
+      "to": [
+        24,
+        20,
+        -1
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        30,
+        19,
+        -4
+      ],
+      "to": [
+        30,
+        20,
+        -1
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        21,
+        -4
+      ],
+      "to": [
+        25,
+        22,
+        -1
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        29,
+        21,
+        -4
+      ],
+      "to": [
+        30,
+        22,
+        -1
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        23,
+        -4
+      ],
+      "to": [
+        26,
+        23,
+        -1
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        28,
+        23,
+        -4
+      ],
+      "to": [
+        30,
+        23,
+        -1
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        24,
+        5,
+        -4
+      ],
+      "to": [
+        24,
+        18,
+        -4
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        30,
+        5,
+        -4
+      ],
+      "to": [
+        30,
+        18,
+        -4
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        25,
+        19,
+        -4
+      ],
+      "to": [
+        25,
+        20,
+        -4
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        29,
+        19,
+        -4
+      ],
+      "to": [
+        29,
+        20,
+        -4
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        26,
+        21,
+        -4
+      ],
+      "to": [
+        26,
+        22,
+        -4
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        28,
+        21,
+        -4
+      ],
+      "to": [
+        28,
+        22,
+        -4
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        23,
+        -4
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        24,
+        19,
+        -1
+      ],
+      "to": [
+        24,
+        20,
+        -1
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        30,
+        19,
+        -1
+      ],
+      "to": [
+        30,
+        20,
+        -1
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        21,
+        -1
+      ],
+      "to": [
+        25,
+        22,
+        -1
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        29,
+        21,
+        -1
+      ],
+      "to": [
+        30,
+        22,
+        -1
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        24,
+        23,
+        -1
+      ],
+      "to": [
+        26,
+        23,
+        -1
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        28,
+        23,
+        -1
+      ],
+      "to": [
+        30,
+        23,
+        -1
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        24,
+        -1
+      ],
+      "to": [
+        30,
+        28,
+        -1
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        24,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        23,
+        5,
+        -1
+      ],
+      "to": [
+        23,
+        29,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        31,
+        5,
+        -1
+      ],
+      "to": [
+        31,
+        29,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        23,
+        29,
+        -1
+      ],
+      "to": [
+        31,
+        29,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        22,
+        30,
+        -1
+      ],
+      "to": [
+        32,
+        30,
+        -1
+      ],
+      "block": "minecraft:smooth_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        25,
+        31,
+        -1
+      ],
+      "to": [
+        29,
+        32,
+        -1
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "line",
+      "from": [
+        26,
+        31,
+        -1
+      ],
+      "to": [
+        28,
+        31,
+        -1
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        22,
+        34,
+        -1
+      ],
+      "to": [
+        32,
+        34,
+        -1
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        35,
+        -2
+      ],
+      "to": [
+        24,
+        35,
+        -1
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        26,
+        35,
+        -2
+      ],
+      "to": [
+        26,
+        35,
+        -1
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        28,
+        35,
+        -2
+      ],
+      "to": [
+        28,
+        35,
+        -1
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        30,
+        35,
+        -2
+      ],
+      "to": [
+        30,
+        35,
+        -1
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        22,
+        5,
+        0
+      ],
+      "to": [
+        22,
+        37,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        32,
+        5,
+        0
+      ],
+      "to": [
+        32,
+        37,
+        0
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        16,
+        0
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        16,
+        0
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        27,
+        0
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        27,
+        0
+      ],
+      "block": "minecraft:chiseled_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        22,
+        35,
+        -1
+      ],
+      "to": [
+        22,
+        37,
+        -1
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        32,
+        35,
+        -1
+      ],
+      "to": [
+        32,
+        37,
+        -1
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        22,
+        38,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        32,
+        38,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        31,
+        -14
+      ],
+      "to": [
+        34,
+        33,
+        -7
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        20,
+        32,
+        -7
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        34,
+        32,
+        -7
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        34,
+        -14
+      ],
+      "to": [
+        34,
+        34,
+        -7
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        35,
+        -15
+      ],
+      "to": [
+        35,
+        35,
+        -7
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        36,
+        -15
+      ],
+      "to": [
+        36,
+        39,
+        -6
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        40,
+        -15
+      ],
+      "to": [
+        35,
+        40,
+        -7
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        41,
+        -15
+      ],
+      "to": [
+        34,
+        41,
+        -8
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        21,
+        42,
+        -15
+      ],
+      "to": [
+        33,
+        42,
+        -9
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        23,
+        43,
+        -15
+      ],
+      "to": [
+        31,
+        43,
+        -11
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        44,
+        -15
+      ],
+      "to": [
+        30,
+        44,
+        -12
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        25,
+        45,
+        -15
+      ],
+      "to": [
+        29,
+        45,
+        -13
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        26,
+        46,
+        -15
+      ],
+      "to": [
+        28,
+        46,
+        -14
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        27,
+        47,
+        -15
+      ],
+      "to": [
+        27,
+        48,
+        -15
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        31,
+        -9
+      ],
+      "to": [
+        17,
+        33,
+        -9
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "line",
+      "from": [
+        14,
+        31,
+        -6
+      ],
+      "to": [
+        14,
+        33,
+        -6
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        18,
+        31,
+        -6
+      ],
+      "to": [
+        18,
+        33,
+        -6
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        14,
+        31,
+        -9
+      ],
+      "to": [
+        14,
+        33,
+        -9
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        18,
+        31,
+        -9
+      ],
+      "to": [
+        18,
+        33,
+        -9
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        33,
+        -6
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        33,
+        -6
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        34,
+        -10
+      ],
+      "to": [
+        19,
+        34,
+        -5
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        35,
+        -9
+      ],
+      "to": [
+        18,
+        35,
+        -6
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        36,
+        -9
+      ],
+      "to": [
+        17,
+        36,
+        -6
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        16,
+        37,
+        -8
+      ],
+      "to": [
+        16,
+        37,
+        -7
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        38,
+        -7
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        37,
+        31,
+        -9
+      ],
+      "to": [
+        39,
+        33,
+        -9
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "line",
+      "from": [
+        40,
+        31,
+        -6
+      ],
+      "to": [
+        40,
+        33,
+        -6
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        36,
+        31,
+        -6
+      ],
+      "to": [
+        36,
+        33,
+        -6
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        40,
+        31,
+        -9
+      ],
+      "to": [
+        40,
+        33,
+        -9
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "line",
+      "from": [
+        36,
+        31,
+        -9
+      ],
+      "to": [
+        36,
+        33,
+        -9
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        39,
+        33,
+        -6
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        37,
+        33,
+        -6
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        35,
+        34,
+        -10
+      ],
+      "to": [
+        41,
+        34,
+        -5
+      ],
+      "block": "minecraft:cut_red_sandstone"
+    },
+    {
+      "op": "fill",
+      "from": [
+        36,
+        35,
+        -9
+      ],
+      "to": [
+        40,
+        35,
+        -6
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        37,
+        36,
+        -9
+      ],
+      "to": [
+        39,
+        36,
+        -6
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "fill",
+      "from": [
+        38,
+        37,
+        -8
+      ],
+      "to": [
+        38,
+        37,
+        -7
+      ],
+      "block": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        38,
+        38,
+        -7
+      ],
+      "block": "minecraft:gold_block"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "seq": 29,
+  "runId": "029-vRefRevise-designdoc",
+  "date": "2026-10-08",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-opus-5-5",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "persona": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 19456,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      -1,
+      0,
+      -10
+    ],
+    "max": [
+      45,
+      47,
+      2
+    ]
+  },
+  "tokensIn": 8,
+  "tokensOut": 69409,
+  "costUsd": 2.3755298,
+  "durationMs": 887051,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "strong",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A triumphal-arch temple gate with a confident three-bay reading: solid base plinth, a tall central arch flanked by relief-packed side bays, and a crowning entablature with gold-lit clerestory panels and a central rosette medallion. Base→middle→crown is deliberate and the composition is cleanly symmetric — proportion is coherent, though the crown entablature sits a touch heavy over the bays, which is a nameable tweak, so it stops short of inevitable. Color is the build's strength: a disciplined verdigris-dominant field with terracotta-orange supporting frames and gold as a true accent — a harmonious triad that gives it identity; it reads as considered rather than garish, but the large flat teal fields keep it from being apex-level. Detail is rich and purposeful — scroll brackets, studded gold panels, the heraldic animal niches, arch voussoirs and the medallion reward a look — yet the central arch tympanum and the plain recessed door are comparatively empty flat fields, so it isn't resolved edge-to-edge. Fidelity is clear and characterful: it unmistakably reads as a grand ceremonial temple gate with a dominant central entrance and real presence, but it reads as a type (a verdigris triumphal arch) rather than a single namable landmark. Strong across the board; the empty arch field and plain door are the easy improvements that cap it below exceptional.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "strong",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 6,
+      "output_tokens": 3129,
+      "cost_usd": 0.912933
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": "opus-5-5 rerun of 021 (judge pinned opus-4-8)"
+}

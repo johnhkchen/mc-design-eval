@@ -1,0 +1,62 @@
+{
+  "seq": 27,
+  "runId": "027-vRefRevise-designdoc",
+  "date": "2026-10-08",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-opus-5-5",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "persona": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 23467,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      -19
+    ],
+    "max": [
+      54,
+      48,
+      4
+    ]
+  },
+  "tokensIn": 34,
+  "tokensOut": 93811,
+  "costUsd": 3.3570678000000003,
+  "durationMs": 880744,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "strong",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A confident, symmetrical Indo-Islamic temple/mausoleum face — paired flanking minaret-towers, a ribbed teal dome on a raised central block, and a clearly marked central entrance give it a legible base→middle→crown and a strong front. Proportion is deliberate and balanced, though the towers read slightly stubby against the broad central mass and a designer could nudge their height, so it stays short of inevitable. Color is the highlight: a disciplined terracotta-orange dominant, teal-green supporting (dome, window recesses), and gold accents form a genuine complementary harmony that is colorful without being garish. Fidelity is clear and characterful — unmistakably a grand temple. Detail is the weak link: the windows, crenellated base, tower banding and dome ribs give real articulation, but the large wall fields are essentially flat recolor rather than relief, and the ornament doesn't resolve across the whole facade, so it lands at competent. Holistically a strong, photogenic build with one easy improvement named (break up the flat wall fields with actual relief), which keeps it below exceptional.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "strong",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 6,
+      "output_tokens": 2986,
+      "cost_usd": 1.022452
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": "opus-5-5 rerun of 014 (judge pinned opus-4-8)"
+}

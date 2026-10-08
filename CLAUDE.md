@@ -2,6 +2,11 @@
 
 ## Project
 
+**Restarted 2026-10-07 — read `docs/knowledge/what-we-learned.md` first.** It harvests June's work
+(the facade system that worked, the 3-D path that stalled, the anti-patterns). It also states the new
+direction: beautify a plain functional build (e.g. a redstone hallway) without the user supplying
+every input. The June framing below is history; the owner sets current direction.
+
 mc-design-eval — a measurement instrument for evaluating an LLM's spatial/material *design* capability via constrained, styled Minecraft builds. See `docs/specification.md`. Phase 1 holds the model fixed and compares prompting methods; the first milestone is an end-to-end "see an image" trial.
 
 **The architecture of record is `docs/knowledge/pipeline-philosophy.md`** (ratified 2026-06-11): AI at every stage, each in its native representation — language for world-building (materials are diegetic, not optical), image gen for the target, 3-D gen for form *evidence only* (never substrate, textures never read), VLM recognition for the building program, pure code (brushes) for construction, the workshop loop for model self-revision, and the frozen instrument for measurement. Creation is iterative and free; measurement is frozen and singular. Read it before proposing pipeline changes.

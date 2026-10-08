@@ -1,0 +1,60 @@
+{
+  "seq": 28,
+  "runId": "028-v0-facade",
+  "date": "2026-10-08",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "v0-facade",
+  "promptMethodId": "temple-facade-singleshot.v0",
+  "model": "claude-opus-5-5",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "persona": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 2319,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      -5
+    ],
+    "max": [
+      30,
+      26,
+      1
+    ]
+  },
+  "tokensIn": 2,
+  "tokensOut": 24022,
+  "costUsd": 0.7796886000000001,
+  "durationMs": 275371,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "strong",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A disciplined East-Asian pagoda temple read head-on, and the strongest dimension is its coherence as a whole. Proportion is deliberate: a dark ashlar base, a red colonnaded middle with evenly spaced bays, and a two-tiered green crown give a clear base→middle→crown with a believable upward taper — the tiered roofs with their upturned ridge accents and gold finial sit convincingly over the colonnade. The palette is genuinely harmonious and identity-giving: verdigris-green roofs as the dominant, lacquer-red columns as the support, and gold plus turquoise-diamond panels as accents — colorful without tipping into garish. Detail is purposeful — recessed bays behind the columns, gold stud courses, patterned frieze/soffit panels, a framed central doorway with a lit interior — and it rewards a look. Fidelity is clear and characterful: it unmistakably reads as a grand temple with real presence and an obvious entrance. What keeps each dimension at strong rather than exceptional: the wall fields between columns and above the entablature are fairly flat, the gold stud/diamond panels repeat mechanically rather than developing across the facade, the relief depth is shallow (mostly one-block in/out), and the crown tiers are close copies rather than a developed progression. All are easy-to-name improvements, so this tops out as a very good, not apex, build.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "strong",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 6,
+      "output_tokens": 3013,
+      "cost_usd": 0.907573
+    }
+  },
+  "roundImages": [],
+  "bestof": null,
+  "note": "opus-5-5 rerun of 001 (judge pinned opus-4-8)"
+}
