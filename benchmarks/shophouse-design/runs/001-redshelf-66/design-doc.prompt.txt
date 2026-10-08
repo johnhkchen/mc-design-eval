@@ -1,0 +1,35 @@
+You are a master architect and Minecraft builder. ATTACHED is CONCEPT ART for this building. Write a DESIGN
+DOCUMENT for it that takes its CRAFT from the concept and fits the fixed envelope below exactly.
+Materials are diegetic: yellow terracotta walls and a mud-brick roof are given; choose the supporting and accent
+blocks for reasons (what a market-town builder would use for dressings, frames, shopfronts).
+
+## Context
+A medium shophouse on a busy market street in a market town of terracotta, brick and stone shophouses built shoulder to shoulder. Two small shops share the ground floor; the owners live upstairs. The town assigned this house YELLOW TERRACOTTA walls and a MUD BRICK roof — keep those as the dominant materials.
+
+## The envelope (fixed — this replaces a real building in a real street)
+- Footprint: exactly 12 × 12. Local x = 0..11 runs ALONG the street; local z = 0..11 runs from the STREET
+  FRONT (z = 0, the facade, facing −z toward the street) to the back (z = 11). y = 0 is the ground-floor slab
+  at street level; walls start at y = 1.
+- Nothing outside 0 ≤ x ≤ 11, 0 ≤ z ≤ 11 — the lot line is hard (the street needs 2 clear cells in front).
+  Depth on the facade comes from RECESSING into the footprint (recessed shopfronts, inset panels, reveals),
+  never from projecting past z = 0.
+- Ground storey y 1–4: TWO shop units side by side, each 6 wide (x 0–5 and x 6–11), each with a door and a
+  display window on the street. Upper floor at y = 5 (living quarters), windows on y 6–8. Eave at y = 9.
+- Roof: ridge no higher than y = 13. The town's version used a pair of front-facing gables (one per shop
+  bay); you may keep that or choose another roof form that suits the design.
+- The LEFT side (x = 0 face) is a party wall against a taller neighbour: keep it a plain solid wall.
+  The RIGHT side (x = 11 face) and the BACK (z = 11) are seen from the street and a yard — finish them.
+- Interior can stay hollow (floors at y = 0 and y = 5 only).
+- Use Minecraft 1.20.1 block ids. Every directional block needs its `state` (facing/half/type/axis).
+
+## Write — firm decisions with REASONS
+1. **Identity** — one line.
+2. **Palette by role** — dominant (given), supporting, accent; 3–5 blocks; named relationship.
+3. **Facade composition** — the two shop bays, the upper floor, the roofline: what aligns with what (piers
+   between bays, window rhythm over shop doors, base / middle / top).
+4. **Depth plan** — exactly what recesses and by how much (shopfronts, window reveals, panels) given the hard
+   lot line at z = 0.
+5. **Shopfronts** — doors, display windows, stall-risers, fascia/sign band, awnings (only within the lot).
+6. **Sides, back, roof** — how the right side and back are finished; roof form and its edges.
+
+Under ~400 words. Output ONLY the document (markdown).

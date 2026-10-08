@@ -1,0 +1,2140 @@
+{
+ "schema_version": "1.0.0",
+ "metadata": {
+  "trial_id": "001-redshelf-66",
+  "prompting_method_id": "shophouse-design-concept-revise.v0",
+  "model_id": "claude-opus-5-5",
+  "seed": 11,
+  "server_state_id": "redshelf-66-envelope.v1"
+ },
+ "style": {
+  "name": "Yellow terracotta twin-gable merchant shophouse",
+  "rationale": "Second pass against the concept, looking from the street. (1) The roof read as one heavy mass and the gables as stray yellow chunks. Now each bay is a clear stepped mud-brick gable. The roof runs the full depth z0-z11, and the gable infill is set back to z1 (and z10 at the back), so the roof verge overhangs inside the lot and casts a soffit shadow over a 2x2 attic window. That recalls the concept's dormers without projecting past z=0. (2) The right side was the largest plain surface, so it now has a full storey grammar: dark oak corner posts, a floor beam at y5 (axis=z) wrapping from the front, two recessed ground windows with plank lintels, a recessed side door to the living quarters (the 'home above' entrance), two shuttered and potted upper windows, a pier between them that mirrors the front, and the stone cornice carried round. Shutters are open trapdoors set against the inner edge (facing=east), so they read as inset panels. (3) The back repeats the front's upper windows and shutters, has two recessed back doors beside the centre pier, two ground windows, the beam and the cornice. (4) Shopfronts: a 2-deep covered porch under awnings striped across both rows (orange/white and blue/white), dark oak risers, glass, a lintel and transom at z2, doors beside the terracotta pier, and hanging signs. A stone-brick slab at y0 gives the whole block a plinth line. Palette hierarchy is kept: yellow terracotta dominant; dark oak for posts, beams, shutters and frames; stone only for cornice and plinth; wool as trade colours. Both bays are consistent and mirrored. Nothing leaves 0..11, and the ridge slab tops out at y13."
+ },
+ "palette": {
+  "manifest": [
+   "minecraft:stone_bricks",
+   "minecraft:yellow_terracotta",
+   "minecraft:stripped_dark_oak_log",
+   "minecraft:dark_oak_planks",
+   "minecraft:dark_oak_door",
+   "minecraft:dark_oak_trapdoor",
+   "minecraft:glass_pane",
+   "minecraft:stone_brick_stairs",
+   "minecraft:mud_brick_stairs",
+   "minecraft:mud_brick_slab",
+   "minecraft:orange_wool",
+   "minecraft:white_wool",
+   "minecraft:blue_wool",
+   "minecraft:dark_oak_hanging_sign",
+   "minecraft:potted_poppy",
+   "minecraft:potted_allium"
+  ]
+ },
+ "placements": [
+  {
+   "op": "fill",
+   "from": [
+    0,
+    0,
+    0
+   ],
+   "to": [
+    11,
+    0,
+    11
+   ],
+   "block": "minecraft:stone_bricks"
+  },
+  {
+   "op": "fill",
+   "from": [
+    1,
+    5,
+    1
+   ],
+   "to": [
+    10,
+    5,
+    10
+   ],
+   "block": "minecraft:dark_oak_planks"
+  },
+  {
+   "op": "fill",
+   "from": [
+    0,
+    1,
+    1
+   ],
+   "to": [
+    0,
+    9,
+    10
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    1,
+    0
+   ],
+   "to": [
+    0,
+    4,
+    0
+   ],
+   "block": "minecraft:stripped_dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    1,
+    0
+   ],
+   "to": [
+    11,
+    4,
+    0
+   ],
+   "block": "minecraft:stripped_dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    1,
+    11
+   ],
+   "to": [
+    0,
+    4,
+    11
+   ],
+   "block": "minecraft:stripped_dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    1,
+    11
+   ],
+   "to": [
+    11,
+    4,
+    11
+   ],
+   "block": "minecraft:stripped_dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    6,
+    0
+   ],
+   "to": [
+    0,
+    8,
+    0
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    6,
+    0
+   ],
+   "to": [
+    11,
+    8,
+    0
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    6,
+    11
+   ],
+   "to": [
+    0,
+    8,
+    11
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    6,
+    11
+   ],
+   "to": [
+    11,
+    8,
+    11
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    5,
+    0
+   ],
+   "to": [
+    11,
+    5,
+    0
+   ],
+   "block": "minecraft:stripped_dark_oak_log",
+   "state": {
+    "axis": "x"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    5,
+    11
+   ],
+   "to": [
+    11,
+    5,
+    11
+   ],
+   "block": "minecraft:stripped_dark_oak_log",
+   "state": {
+    "axis": "x"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    5,
+    1
+   ],
+   "to": [
+    11,
+    5,
+    10
+   ],
+   "block": "minecraft:stripped_dark_oak_log",
+   "state": {
+    "axis": "z"
+   }
+  },
+  {
+   "op": "fill",
+   "from": [
+    5,
+    1,
+    0
+   ],
+   "to": [
+    6,
+    4,
+    2
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "fill",
+   "from": [
+    5,
+    6,
+    0
+   ],
+   "to": [
+    6,
+    8,
+    0
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    1,
+    6,
+    1
+   ],
+   "to": [
+    1,
+    8,
+    1
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    4,
+    6,
+    1
+   ],
+   "to": [
+    4,
+    8,
+    1
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    7,
+    6,
+    1
+   ],
+   "to": [
+    7,
+    8,
+    1
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    10,
+    6,
+    1
+   ],
+   "to": [
+    10,
+    8,
+    1
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "fill",
+   "from": [
+    2,
+    6,
+    1
+   ],
+   "to": [
+    3,
+    8,
+    1
+   ],
+   "block": "minecraft:glass_pane"
+  },
+  {
+   "op": "fill",
+   "from": [
+    8,
+    6,
+    1
+   ],
+   "to": [
+    9,
+    8,
+    1
+   ],
+   "block": "minecraft:glass_pane"
+  },
+  {
+   "op": "line",
+   "from": [
+    1,
+    6,
+    0
+   ],
+   "to": [
+    1,
+    8,
+    0
+   ],
+   "block": "minecraft:dark_oak_trapdoor",
+   "state": {
+    "facing": "north",
+    "half": "top",
+    "open": "true"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    4,
+    6,
+    0
+   ],
+   "to": [
+    4,
+    8,
+    0
+   ],
+   "block": "minecraft:dark_oak_trapdoor",
+   "state": {
+    "facing": "north",
+    "half": "top",
+    "open": "true"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    7,
+    6,
+    0
+   ],
+   "to": [
+    7,
+    8,
+    0
+   ],
+   "block": "minecraft:dark_oak_trapdoor",
+   "state": {
+    "facing": "north",
+    "half": "top",
+    "open": "true"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    10,
+    6,
+    0
+   ],
+   "to": [
+    10,
+    8,
+    0
+   ],
+   "block": "minecraft:dark_oak_trapdoor",
+   "state": {
+    "facing": "north",
+    "half": "top",
+    "open": "true"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    2,
+    8,
+    0
+   ],
+   "to": [
+    3,
+    8,
+    0
+   ],
+   "block": "minecraft:dark_oak_trapdoor",
+   "state": {
+    "facing": "north",
+    "half": "top",
+    "open": "false"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    8,
+    8,
+    0
+   ],
+   "to": [
+    9,
+    8,
+    0
+   ],
+   "block": "minecraft:dark_oak_trapdoor",
+   "state": {
+    "facing": "north",
+    "half": "top",
+    "open": "false"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    2,
+    6,
+    0
+   ],
+   "block": "minecraft:potted_poppy"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    3,
+    6,
+    0
+   ],
+   "block": "minecraft:potted_allium"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    8,
+    6,
+    0
+   ],
+   "block": "minecraft:potted_allium"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    9,
+    6,
+    0
+   ],
+   "block": "minecraft:potted_poppy"
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    9,
+    0
+   ],
+   "to": [
+    11,
+    9,
+    0
+   ],
+   "block": "minecraft:stone_brick_stairs",
+   "state": {
+    "facing": "south",
+    "half": "top"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    1,
+    1,
+    2
+   ],
+   "to": [
+    3,
+    1,
+    2
+   ],
+   "block": "minecraft:dark_oak_planks"
+  },
+  {
+   "op": "fill",
+   "from": [
+    1,
+    2,
+    2
+   ],
+   "to": [
+    3,
+    3,
+    2
+   ],
+   "block": "minecraft:glass_pane"
+  },
+  {
+   "op": "line",
+   "from": [
+    1,
+    4,
+    2
+   ],
+   "to": [
+    4,
+    4,
+    2
+   ],
+   "block": "minecraft:dark_oak_planks"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    4,
+    3,
+    2
+   ],
+   "block": "minecraft:dark_oak_planks"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    4,
+    1,
+    2
+   ],
+   "block": "minecraft:dark_oak_door",
+   "state": {
+    "facing": "north",
+    "half": "lower",
+    "hinge": "right",
+    "open": "false"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    4,
+    2,
+    2
+   ],
+   "block": "minecraft:dark_oak_door",
+   "state": {
+    "facing": "north",
+    "half": "upper",
+    "hinge": "right",
+    "open": "false"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    8,
+    1,
+    2
+   ],
+   "to": [
+    10,
+    1,
+    2
+   ],
+   "block": "minecraft:dark_oak_planks"
+  },
+  {
+   "op": "fill",
+   "from": [
+    8,
+    2,
+    2
+   ],
+   "to": [
+    10,
+    3,
+    2
+   ],
+   "block": "minecraft:glass_pane"
+  },
+  {
+   "op": "line",
+   "from": [
+    7,
+    4,
+    2
+   ],
+   "to": [
+    10,
+    4,
+    2
+   ],
+   "block": "minecraft:dark_oak_planks"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    7,
+    3,
+    2
+   ],
+   "block": "minecraft:dark_oak_planks"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    7,
+    1,
+    2
+   ],
+   "block": "minecraft:dark_oak_door",
+   "state": {
+    "facing": "north",
+    "half": "lower",
+    "hinge": "left",
+    "open": "false"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    7,
+    2,
+    2
+   ],
+   "block": "minecraft:dark_oak_door",
+   "state": {
+    "facing": "north",
+    "half": "upper",
+    "hinge": "left",
+    "open": "false"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    1,
+    4,
+    0
+   ],
+   "to": [
+    1,
+    4,
+    1
+   ],
+   "block": "minecraft:orange_wool"
+  },
+  {
+   "op": "line",
+   "from": [
+    2,
+    4,
+    0
+   ],
+   "to": [
+    2,
+    4,
+    1
+   ],
+   "block": "minecraft:white_wool"
+  },
+  {
+   "op": "line",
+   "from": [
+    3,
+    4,
+    0
+   ],
+   "to": [
+    3,
+    4,
+    1
+   ],
+   "block": "minecraft:orange_wool"
+  },
+  {
+   "op": "line",
+   "from": [
+    4,
+    4,
+    0
+   ],
+   "to": [
+    4,
+    4,
+    1
+   ],
+   "block": "minecraft:white_wool"
+  },
+  {
+   "op": "line",
+   "from": [
+    7,
+    4,
+    0
+   ],
+   "to": [
+    7,
+    4,
+    1
+   ],
+   "block": "minecraft:white_wool"
+  },
+  {
+   "op": "line",
+   "from": [
+    8,
+    4,
+    0
+   ],
+   "to": [
+    8,
+    4,
+    1
+   ],
+   "block": "minecraft:blue_wool"
+  },
+  {
+   "op": "line",
+   "from": [
+    9,
+    4,
+    0
+   ],
+   "to": [
+    9,
+    4,
+    1
+   ],
+   "block": "minecraft:white_wool"
+  },
+  {
+   "op": "line",
+   "from": [
+    10,
+    4,
+    0
+   ],
+   "to": [
+    10,
+    4,
+    1
+   ],
+   "block": "minecraft:blue_wool"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    2,
+    3,
+    0
+   ],
+   "block": "minecraft:dark_oak_hanging_sign",
+   "state": {
+    "rotation": "8",
+    "attached": "false"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    9,
+    3,
+    0
+   ],
+   "block": "minecraft:dark_oak_hanging_sign",
+   "state": {
+    "rotation": "8",
+    "attached": "false"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    1,
+    1
+   ],
+   "to": [
+    11,
+    1,
+    4
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    1,
+    6
+   ],
+   "to": [
+    11,
+    1,
+    10
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    2,
+    1
+   ],
+   "to": [
+    11,
+    3,
+    1
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    2,
+    4
+   ],
+   "to": [
+    11,
+    3,
+    4
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "fill",
+   "from": [
+    11,
+    2,
+    6
+   ],
+   "to": [
+    11,
+    3,
+    7
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    2,
+    10
+   ],
+   "to": [
+    11,
+    3,
+    10
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    11,
+    3,
+    5
+   ],
+   "block": "minecraft:dark_oak_planks"
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    4,
+    1
+   ],
+   "to": [
+    11,
+    4,
+    10
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    4,
+    2
+   ],
+   "to": [
+    11,
+    4,
+    3
+   ],
+   "block": "minecraft:dark_oak_planks"
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    4,
+    8
+   ],
+   "to": [
+    11,
+    4,
+    9
+   ],
+   "block": "minecraft:dark_oak_planks"
+  },
+  {
+   "op": "fill",
+   "from": [
+    10,
+    2,
+    2
+   ],
+   "to": [
+    10,
+    3,
+    3
+   ],
+   "block": "minecraft:glass_pane"
+  },
+  {
+   "op": "fill",
+   "from": [
+    10,
+    2,
+    8
+   ],
+   "to": [
+    10,
+    3,
+    9
+   ],
+   "block": "minecraft:glass_pane"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    10,
+    1,
+    5
+   ],
+   "block": "minecraft:dark_oak_door",
+   "state": {
+    "facing": "east",
+    "half": "lower",
+    "hinge": "left",
+    "open": "false"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    10,
+    2,
+    5
+   ],
+   "block": "minecraft:dark_oak_door",
+   "state": {
+    "facing": "east",
+    "half": "upper",
+    "hinge": "left",
+    "open": "false"
+   }
+  },
+  {
+   "op": "fill",
+   "from": [
+    11,
+    6,
+    5
+   ],
+   "to": [
+    11,
+    8,
+    6
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    10,
+    6,
+    4
+   ],
+   "to": [
+    10,
+    8,
+    4
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    10,
+    6,
+    7
+   ],
+   "to": [
+    10,
+    8,
+    7
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    10,
+    6,
+    10
+   ],
+   "to": [
+    10,
+    8,
+    10
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "fill",
+   "from": [
+    10,
+    6,
+    2
+   ],
+   "to": [
+    10,
+    8,
+    3
+   ],
+   "block": "minecraft:glass_pane"
+  },
+  {
+   "op": "fill",
+   "from": [
+    10,
+    6,
+    8
+   ],
+   "to": [
+    10,
+    8,
+    9
+   ],
+   "block": "minecraft:glass_pane"
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    6,
+    1
+   ],
+   "to": [
+    11,
+    8,
+    1
+   ],
+   "block": "minecraft:dark_oak_trapdoor",
+   "state": {
+    "facing": "east",
+    "half": "top",
+    "open": "true"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    6,
+    4
+   ],
+   "to": [
+    11,
+    8,
+    4
+   ],
+   "block": "minecraft:dark_oak_trapdoor",
+   "state": {
+    "facing": "east",
+    "half": "top",
+    "open": "true"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    6,
+    7
+   ],
+   "to": [
+    11,
+    8,
+    7
+   ],
+   "block": "minecraft:dark_oak_trapdoor",
+   "state": {
+    "facing": "east",
+    "half": "top",
+    "open": "true"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    6,
+    10
+   ],
+   "to": [
+    11,
+    8,
+    10
+   ],
+   "block": "minecraft:dark_oak_trapdoor",
+   "state": {
+    "facing": "east",
+    "half": "top",
+    "open": "true"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    8,
+    2
+   ],
+   "to": [
+    11,
+    8,
+    3
+   ],
+   "block": "minecraft:dark_oak_trapdoor",
+   "state": {
+    "facing": "east",
+    "half": "top",
+    "open": "false"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    8,
+    8
+   ],
+   "to": [
+    11,
+    8,
+    9
+   ],
+   "block": "minecraft:dark_oak_trapdoor",
+   "state": {
+    "facing": "east",
+    "half": "top",
+    "open": "false"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    11,
+    6,
+    2
+   ],
+   "block": "minecraft:potted_poppy"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    11,
+    6,
+    3
+   ],
+   "block": "minecraft:potted_allium"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    11,
+    6,
+    8
+   ],
+   "block": "minecraft:potted_allium"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    11,
+    6,
+    9
+   ],
+   "block": "minecraft:potted_poppy"
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    9,
+    1
+   ],
+   "to": [
+    11,
+    9,
+    10
+   ],
+   "block": "minecraft:stone_brick_stairs",
+   "state": {
+    "facing": "west",
+    "half": "top"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    1,
+    1,
+    11
+   ],
+   "to": [
+    3,
+    1,
+    11
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    5,
+    1,
+    11
+   ],
+   "to": [
+    6,
+    1,
+    11
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    8,
+    1,
+    11
+   ],
+   "to": [
+    10,
+    1,
+    11
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    3,
+    2,
+    11
+   ],
+   "to": [
+    3,
+    3,
+    11
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "fill",
+   "from": [
+    5,
+    2,
+    11
+   ],
+   "to": [
+    6,
+    3,
+    11
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    8,
+    2,
+    11
+   ],
+   "to": [
+    8,
+    3,
+    11
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    4,
+    3,
+    11
+   ],
+   "block": "minecraft:dark_oak_planks"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    7,
+    3,
+    11
+   ],
+   "block": "minecraft:dark_oak_planks"
+  },
+  {
+   "op": "line",
+   "from": [
+    1,
+    4,
+    11
+   ],
+   "to": [
+    10,
+    4,
+    11
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    1,
+    4,
+    11
+   ],
+   "to": [
+    2,
+    4,
+    11
+   ],
+   "block": "minecraft:dark_oak_planks"
+  },
+  {
+   "op": "line",
+   "from": [
+    9,
+    4,
+    11
+   ],
+   "to": [
+    10,
+    4,
+    11
+   ],
+   "block": "minecraft:dark_oak_planks"
+  },
+  {
+   "op": "fill",
+   "from": [
+    1,
+    2,
+    10
+   ],
+   "to": [
+    2,
+    3,
+    10
+   ],
+   "block": "minecraft:glass_pane"
+  },
+  {
+   "op": "fill",
+   "from": [
+    9,
+    2,
+    10
+   ],
+   "to": [
+    10,
+    3,
+    10
+   ],
+   "block": "minecraft:glass_pane"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    4,
+    1,
+    10
+   ],
+   "block": "minecraft:dark_oak_door",
+   "state": {
+    "facing": "south",
+    "half": "lower",
+    "hinge": "left",
+    "open": "false"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    4,
+    2,
+    10
+   ],
+   "block": "minecraft:dark_oak_door",
+   "state": {
+    "facing": "south",
+    "half": "upper",
+    "hinge": "left",
+    "open": "false"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    7,
+    1,
+    10
+   ],
+   "block": "minecraft:dark_oak_door",
+   "state": {
+    "facing": "south",
+    "half": "lower",
+    "hinge": "right",
+    "open": "false"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    7,
+    2,
+    10
+   ],
+   "block": "minecraft:dark_oak_door",
+   "state": {
+    "facing": "south",
+    "half": "upper",
+    "hinge": "right",
+    "open": "false"
+   }
+  },
+  {
+   "op": "fill",
+   "from": [
+    5,
+    6,
+    11
+   ],
+   "to": [
+    6,
+    8,
+    11
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    1,
+    6,
+    10
+   ],
+   "to": [
+    1,
+    8,
+    10
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    4,
+    6,
+    10
+   ],
+   "to": [
+    4,
+    8,
+    10
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "line",
+   "from": [
+    7,
+    6,
+    10
+   ],
+   "to": [
+    7,
+    8,
+    10
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "fill",
+   "from": [
+    2,
+    6,
+    10
+   ],
+   "to": [
+    3,
+    8,
+    10
+   ],
+   "block": "minecraft:glass_pane"
+  },
+  {
+   "op": "fill",
+   "from": [
+    8,
+    6,
+    10
+   ],
+   "to": [
+    9,
+    8,
+    10
+   ],
+   "block": "minecraft:glass_pane"
+  },
+  {
+   "op": "line",
+   "from": [
+    1,
+    6,
+    11
+   ],
+   "to": [
+    1,
+    8,
+    11
+   ],
+   "block": "minecraft:dark_oak_trapdoor",
+   "state": {
+    "facing": "south",
+    "half": "top",
+    "open": "true"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    4,
+    6,
+    11
+   ],
+   "to": [
+    4,
+    8,
+    11
+   ],
+   "block": "minecraft:dark_oak_trapdoor",
+   "state": {
+    "facing": "south",
+    "half": "top",
+    "open": "true"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    7,
+    6,
+    11
+   ],
+   "to": [
+    7,
+    8,
+    11
+   ],
+   "block": "minecraft:dark_oak_trapdoor",
+   "state": {
+    "facing": "south",
+    "half": "top",
+    "open": "true"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    10,
+    6,
+    11
+   ],
+   "to": [
+    10,
+    8,
+    11
+   ],
+   "block": "minecraft:dark_oak_trapdoor",
+   "state": {
+    "facing": "south",
+    "half": "top",
+    "open": "true"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    2,
+    8,
+    11
+   ],
+   "to": [
+    3,
+    8,
+    11
+   ],
+   "block": "minecraft:dark_oak_trapdoor",
+   "state": {
+    "facing": "south",
+    "half": "top",
+    "open": "false"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    8,
+    8,
+    11
+   ],
+   "to": [
+    9,
+    8,
+    11
+   ],
+   "block": "minecraft:dark_oak_trapdoor",
+   "state": {
+    "facing": "south",
+    "half": "top",
+    "open": "false"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    2,
+    6,
+    11
+   ],
+   "block": "minecraft:potted_poppy"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    3,
+    6,
+    11
+   ],
+   "block": "minecraft:potted_allium"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    8,
+    6,
+    11
+   ],
+   "block": "minecraft:potted_allium"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    9,
+    6,
+    11
+   ],
+   "block": "minecraft:potted_poppy"
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    9,
+    11
+   ],
+   "to": [
+    11,
+    9,
+    11
+   ],
+   "block": "minecraft:stone_brick_stairs",
+   "state": {
+    "facing": "north",
+    "half": "top"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    10,
+    0
+   ],
+   "to": [
+    0,
+    10,
+    11
+   ],
+   "block": "minecraft:mud_brick_stairs",
+   "state": {
+    "facing": "east",
+    "half": "bottom"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    1,
+    11,
+    0
+   ],
+   "to": [
+    1,
+    11,
+    11
+   ],
+   "block": "minecraft:mud_brick_stairs",
+   "state": {
+    "facing": "east",
+    "half": "bottom"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    2,
+    12,
+    0
+   ],
+   "to": [
+    2,
+    12,
+    11
+   ],
+   "block": "minecraft:mud_brick_stairs",
+   "state": {
+    "facing": "east",
+    "half": "bottom"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    3,
+    12,
+    0
+   ],
+   "to": [
+    3,
+    12,
+    11
+   ],
+   "block": "minecraft:mud_brick_stairs",
+   "state": {
+    "facing": "west",
+    "half": "bottom"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    4,
+    11,
+    0
+   ],
+   "to": [
+    4,
+    11,
+    11
+   ],
+   "block": "minecraft:mud_brick_stairs",
+   "state": {
+    "facing": "west",
+    "half": "bottom"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    5,
+    10,
+    0
+   ],
+   "to": [
+    5,
+    10,
+    11
+   ],
+   "block": "minecraft:mud_brick_stairs",
+   "state": {
+    "facing": "west",
+    "half": "bottom"
+   }
+  },
+  {
+   "op": "fill",
+   "from": [
+    2,
+    13,
+    0
+   ],
+   "to": [
+    3,
+    13,
+    11
+   ],
+   "block": "minecraft:mud_brick_slab",
+   "state": {
+    "type": "bottom"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    6,
+    10,
+    0
+   ],
+   "to": [
+    6,
+    10,
+    11
+   ],
+   "block": "minecraft:mud_brick_stairs",
+   "state": {
+    "facing": "east",
+    "half": "bottom"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    7,
+    11,
+    0
+   ],
+   "to": [
+    7,
+    11,
+    11
+   ],
+   "block": "minecraft:mud_brick_stairs",
+   "state": {
+    "facing": "east",
+    "half": "bottom"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    8,
+    12,
+    0
+   ],
+   "to": [
+    8,
+    12,
+    11
+   ],
+   "block": "minecraft:mud_brick_stairs",
+   "state": {
+    "facing": "east",
+    "half": "bottom"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    9,
+    12,
+    0
+   ],
+   "to": [
+    9,
+    12,
+    11
+   ],
+   "block": "minecraft:mud_brick_stairs",
+   "state": {
+    "facing": "west",
+    "half": "bottom"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    10,
+    11,
+    0
+   ],
+   "to": [
+    10,
+    11,
+    11
+   ],
+   "block": "minecraft:mud_brick_stairs",
+   "state": {
+    "facing": "west",
+    "half": "bottom"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    10,
+    0
+   ],
+   "to": [
+    11,
+    10,
+    11
+   ],
+   "block": "minecraft:mud_brick_stairs",
+   "state": {
+    "facing": "west",
+    "half": "bottom"
+   }
+  },
+  {
+   "op": "fill",
+   "from": [
+    8,
+    13,
+    0
+   ],
+   "to": [
+    9,
+    13,
+    11
+   ],
+   "block": "minecraft:mud_brick_slab",
+   "state": {
+    "type": "bottom"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    1,
+    10,
+    1
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    4,
+    10,
+    1
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "fill",
+   "from": [
+    2,
+    10,
+    1
+   ],
+   "to": [
+    3,
+    11,
+    1
+   ],
+   "block": "minecraft:glass_pane"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    7,
+    10,
+    1
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    10,
+    10,
+    1
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "fill",
+   "from": [
+    8,
+    10,
+    1
+   ],
+   "to": [
+    9,
+    11,
+    1
+   ],
+   "block": "minecraft:glass_pane"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    1,
+    10,
+    10
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    4,
+    10,
+    10
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "fill",
+   "from": [
+    2,
+    10,
+    10
+   ],
+   "to": [
+    3,
+    11,
+    10
+   ],
+   "block": "minecraft:glass_pane"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    7,
+    10,
+    10
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    10,
+    10,
+    10
+   ],
+   "block": "minecraft:yellow_terracotta"
+  },
+  {
+   "op": "fill",
+   "from": [
+    8,
+    10,
+    10
+   ],
+   "to": [
+    9,
+    11,
+    10
+   ],
+   "block": "minecraft:glass_pane"
+  }
+ ]
+}

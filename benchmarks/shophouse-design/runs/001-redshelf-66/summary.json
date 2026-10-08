@@ -1,0 +1,31 @@
+{
+ "runId": "001-redshelf-66",
+ "model": "claude-opus-5-5",
+ "context": "A medium shophouse on a busy market street in a market town of terracotta, brick and stone shophouses built shoulder to shoulder. Two small shops share the ground floor; the owners live upstairs. The town assigned this house YELLOW TERRACOTTA walls and a MUD BRICK roof — keep those as the dominant materials.",
+ "tokensOut": 56239,
+ "costUsd": 1.9496706000000001,
+ "durationMs": 548519,
+ "stages": [
+  {
+   "name": "0 concept",
+   "s": 17,
+   "ms": 16733
+  },
+  {
+   "name": "1 design doc",
+   "s": 88,
+   "chars": 3762
+  },
+  {
+   "name": "2 build",
+   "s": 274,
+   "ops": 117
+  },
+  {
+   "name": "3 revise",
+   "s": 548,
+   "ops": 146
+  }
+ ],
+ "note": "design-first pass on redshelf #66 envelope"
+}
