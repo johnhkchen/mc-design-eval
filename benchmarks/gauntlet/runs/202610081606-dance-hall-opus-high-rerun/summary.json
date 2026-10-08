@@ -1,0 +1,33 @@
+{
+ "runId": "202610081606-dance-hall-opus-high-rerun",
+ "subject": "dance-hall",
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "kept": "round-1",
+ "why": "Both have nearly the same front, but A's roof steps back in tiers like the reference's terraced setback massing, while B's is a flat parapet slab that loses that silhouette.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 1.9537460000000002,
+ "durationMs": 378129,
+ "stages": [
+  {
+   "n": "concept + spec reused",
+   "s": 0,
+   "from": "202610081532-dance-hall-sonnet-high"
+  },
+  {
+   "n": "agentic build",
+   "s": 360,
+   "turns": 26,
+   "cost": 1.715089
+  },
+  {
+   "n": "keep-better",
+   "s": 378,
+   "kept": "round-1",
+   "why": "Both have nearly the same front, but A's roof steps back in tiers like the reference's terraced setback massing, while B's is a flat parapet slab that loses that silhouette."
+  }
+ ]
+}

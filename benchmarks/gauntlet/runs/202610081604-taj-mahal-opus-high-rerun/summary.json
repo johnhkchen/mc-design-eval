@@ -1,0 +1,33 @@
+{
+ "runId": "202610081604-taj-mahal-opus-high-rerun",
+ "subject": "taj-mahal",
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "kept": "round-1",
+ "why": "Build A's slender, tiered minarets with small caps and its cleaner onion dome are closer to the reference, while Build B's oversized hollow-cage minaret tops and odd gold ring painted on the dome read as cruder and less faithful.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 2.488671,
+ "durationMs": 474981,
+ "stages": [
+  {
+   "n": "concept + spec reused",
+   "s": 0,
+   "from": "202610081532-taj-mahal-sonnet-high"
+  },
+  {
+   "n": "agentic build",
+   "s": 465,
+   "turns": 34,
+   "cost": 2.24891
+  },
+  {
+   "n": "keep-better",
+   "s": 475,
+   "kept": "round-1",
+   "why": "Build A's slender, tiered minarets with small caps and its cleaner onion dome are closer to the reference, while Build B's oversized hollow-cage minaret tops and odd gold ring painted on the dome read as cruder and less faithful."
+  }
+ ]
+}

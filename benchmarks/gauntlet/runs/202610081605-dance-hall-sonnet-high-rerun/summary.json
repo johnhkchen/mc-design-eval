@@ -1,0 +1,33 @@
+{
+ "runId": "202610081605-dance-hall-sonnet-high-rerun",
+ "subject": "dance-hall",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-2",
+ "why": "Both have nearly the same front elevation, but B closes the main volume with a solid roof, while A is an open-topped hollow shell with its inner walls exposed, so B looks more like the reference's finished massing.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 1.1007742,
+ "durationMs": 266932,
+ "stages": [
+  {
+   "n": "concept + spec reused",
+   "s": 0,
+   "from": "202610081532-dance-hall-sonnet-high"
+  },
+  {
+   "n": "agentic build",
+   "s": 259,
+   "turns": 21,
+   "cost": 0.8638452000000001
+  },
+  {
+   "n": "keep-better",
+   "s": 267,
+   "kept": "round-2",
+   "why": "Both have nearly the same front elevation, but B closes the main volume with a solid roof, while A is an open-topped hollow shell with its inner walls exposed, so B looks more like the reference's finished massing."
+  }
+ ]
+}

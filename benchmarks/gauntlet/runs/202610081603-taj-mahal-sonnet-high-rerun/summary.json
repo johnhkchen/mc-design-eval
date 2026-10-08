@@ -1,0 +1,33 @@
+{
+ "runId": "202610081603-taj-mahal-sonnet-high-rerun",
+ "subject": "taj-mahal",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-2",
+ "why": "B's dome is rounder and more like the reference's bulbous onion dome, and its side bays have pilasters, while A's dome is a stepped pyramid that misreads the main form.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 1.4545374000000002,
+ "durationMs": 399175,
+ "stages": [
+  {
+   "n": "concept + spec reused",
+   "s": 0,
+   "from": "202610081532-taj-mahal-sonnet-high"
+  },
+  {
+   "n": "agentic build",
+   "s": 391,
+   "turns": 27,
+   "cost": 1.2162404000000002
+  },
+  {
+   "n": "keep-better",
+   "s": 399,
+   "kept": "round-2",
+   "why": "B's dome is rounder and more like the reference's bulbous onion dome, and its side bays have pilasters, while A's dome is a stepped pyramid that misreads the main form."
+  }
+ ]
+}

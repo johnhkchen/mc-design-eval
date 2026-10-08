@@ -18,6 +18,7 @@ const MCD = join(PLUGIN, "tools", "bin", "mcd.mjs");
 const PICKER = process.env.MC_PICK_MODEL_ID || "claude-opus-5-5";
 const arg = (k, d) => (process.argv.includes(k) ? process.argv[process.argv.indexOf(k) + 1] : d);
 const key = arg("--subject"), effort = arg("--effort", "high");
+const from = arg("--from");          // reuse an earlier run's concept.jpg + spec.md (isolate toolkit/model changes)
 
 export const SUBJECTS = {
   "grocery-store": {
@@ -40,46 +41,58 @@ export const SUBJECTS = {
 const s = SUBJECTS[key];
 if (!s) throw new Error(`--subject one of ${Object.keys(SUBJECTS).join(", ")}`);
 const tag = PHASE1_MODEL_ID.replace(/^claude-/, "").replace(/-\d.*$/, "");
-const runId = `${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "")}-${key}-${tag}-${effort}`;
+const runId = `${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "")}-${key}-${tag}-${effort}${from ? "-rerun" : ""}`;
 const dir = join(HERE, "runs", runId);
 mkdirSync(dir, { recursive: true });
 const t0 = Date.now(), usage = { cost: 0 }, stages = [];
 const mark = (n, e = {}) => { stages.push({ n, s: Math.round((Date.now() - t0) / 1000), ...e }); console.log(`[${key}] ${stages.at(-1).s}s ${n}`, JSON.stringify(e)); };
 const img = (p) => ({ data: readFileSync(p), mediaType: /\.jpe?g$/i.test(p) ? "image/jpeg" : "image/png" });
 
-// 1. concept sheet
-const conceptPrompt = referenceSheetPrompt(s);
-writeFileSync(join(dir, "concept.prompt.txt"), conceptPrompt + "\n");
-const c = await generateImage({ prompt: conceptPrompt });
-const concept = join(dir, c.mediaType === "image/jpeg" ? "concept.jpg" : "concept.png");
-writeFileSync(concept, Buffer.from(c.base64, "base64"));
-mark("concept", { model: c.model });
+// 1-2. concept sheet + spec (fresh, or reused with --from)
+let concept;
+if (from) {
+  const src = join(HERE, "runs", from);
+  concept = join(dir, "concept.jpg");
+  writeFileSync(concept, readFileSync(join(src, "concept.jpg")));
+  writeFileSync(join(dir, "spec.md"), readFileSync(join(src, "spec.md")));
+  mark("concept + spec reused", { from });
+} else {
+  const conceptPrompt = referenceSheetPrompt(s);
+  writeFileSync(join(dir, "concept.prompt.txt"), conceptPrompt + "\n");
+  const c = await generateImage({ prompt: conceptPrompt });
+  concept = join(dir, c.mediaType === "image/jpeg" ? "concept.jpg" : "concept.png");
+  writeFileSync(concept, Buffer.from(c.base64, "base64"));
+  mark("concept", { model: c.model });
 
-// 2. spec measured off the sheet, with an exact material map
-const specPrompt = [
-  "You are a master Minecraft architect. ATTACHED is a builder's reference sheet (front elevation left, 3/4 right). Write a BUILD SPEC that",
-  "lets another builder reproduce it faithfully. Use these sections:",
-  "1. Identity (one line).",
-  "2. Footprint and height in blocks (measure off the front elevation; respect the stated size).",
-  "3. Vertical zones bottom to top with heights in blocks; horizontal bays left to right with widths in blocks; the roof/top form and its edges.",
-  "4. MATERIAL MAP: a table mapping every distinct colour/texture region you can see on the sheet to an exact vanilla 1.20+ block id",
-  "   (e.g. 'cream wall field → smooth_sandstone', 'gold trim → gold_block'), with where each region is. Match the sheet's materials, not generic ones.",
-  "5. Features and where they sit (doors, windows, signs, ornaments, props), in block coordinates from the front-left ground corner.",
-  "6. Depth plan: what projects and recesses, by how much.",
-  `Stated subject: ${s.what}. Stated size: ${s.size}.`,
-  "Under ~600 words. Output ONLY the spec (markdown).",
-].join("\n");
-const spec = await requestTextWithImage({ prompt: specPrompt, images: [img(concept)], model: PHASE1_MODEL_ID, effort });
-usage.cost += spec.raw?.total_cost_usd || 0;
-writeFileSync(join(dir, "spec.md"), spec.text + "\n");
-mark("spec");
+  // 2. spec measured off the sheet, with an exact material map
+  const specPrompt = [
+    "You are a master Minecraft architect. ATTACHED is a builder's reference sheet (front elevation left, 3/4 right). Write a BUILD SPEC that",
+    "lets another builder reproduce it faithfully. Use these sections:",
+    "1. Identity (one line).",
+    "2. Footprint and height in blocks (measure off the front elevation; respect the stated size).",
+    "3. Vertical zones bottom to top with heights in blocks; horizontal bays left to right with widths in blocks; the roof/top form and its edges.",
+    "4. MATERIAL MAP: a table mapping every distinct colour/texture region you can see on the sheet to an exact vanilla 1.20+ block id",
+    "   (e.g. 'cream wall field → smooth_sandstone', 'gold trim → gold_block'), with where each region is. Match the sheet's materials, not generic ones.",
+    "5. Features and where they sit (doors, windows, signs, ornaments, props), in block coordinates from the front-left ground corner.",
+    "6. Depth plan: what projects and recesses, by how much.",
+    `Stated subject: ${s.what}. Stated size: ${s.size}.`,
+    "Under ~600 words. Output ONLY the spec (markdown).",
+  ].join("\n");
+  const spec = await requestTextWithImage({ prompt: specPrompt, images: [img(concept)], model: PHASE1_MODEL_ID, effort });
+  usage.cost += spec.raw?.total_cost_usd || 0;
+  writeFileSync(join(dir, "spec.md"), spec.text + "\n");
+  mark("spec");
+
+}
 
 // 3. agentic build with the plugin (two rounds saved)
 const agentPrompt = [
   "Load and follow the minecraft-design skill. Build the building shown in concept.jpg (left: front elevation, right: 3/4 view) as structure",
   "files in this directory, following spec.md (its sizes and its MATERIAL MAP are binding: use exactly those block ids for those regions).",
   "Geometry: the main front faces NORTH (−z); x runs along the street; y = 0 is the ground. Author it as code (mcd new build.mjs; design one bay,",
-  "tile it, mirror for symmetry).",
+  "tile it, mirror for symmetry). For curved and stepped forms use the build library's SHAPE BRUSHES (see the skill's references/shapes-curved.md",
+  "and references/shapes-massing.md: dome, cylinder, minaret, arch, setbacks, gableRoof, hipRoof, fins, parapet, cornice) instead of placing those",
+  "blocks by hand — get the silhouette and massing right first (critique the 3/4 view for massing before details).",
   "ROUND 1: build, save round-1.nbt, then render: mcd render round-1.nbt --front n --tiles r1-tiles. Read r1-tiles/front-elevation.png and",
   "r1-tiles/front-left.png next to concept.jpg and list the biggest mismatches (silhouette, roof, zones, bays, openings, materials, depth).",
   "ROUND 2: fix them, save round-2.nbt, render it the same way (r2-tiles), and compare again.",

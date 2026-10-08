@@ -373,6 +373,30 @@ parallel, about 6 min and $1.24–1.39 each: [V]
   Next: parametric shape brushes in the build library (domes from a profile, setbacks, cylinders and tapers),
   more rounds aimed at massing for complex subjects, and Opus for the hard ones.
 
+### Shape brushes: Taj Mahal and dance hall rerun (2026-10-08)
+
+Two Opus 5.5 subagents built shape brushes into the plugin: domes, cylinders, minarets and arches (curved), and
+setbacks, gable/hip roofs, fins, parapets, cornices, false fronts and stepped gables (massing), each render-verified.
+The reruns used the same concept + spec as the gauntlet. [V]
+
+![before/after brushes](../../benchmarks/gauntlet/gauntlet-brushes.png)
+
+| Run | Cost | Kept | Result |
+|---|---|---|---|
+| Taj, Sonnet high, before | $1.39 | r2 | faceted lumpy dome, odd minaret tops |
+| Taj, Sonnet high, with brushes | $1.45 | r2 | a real onion dome on a drum, tiered minarets |
+| Taj, Opus high, with brushes | $2.49 | **r1** (r2 got worse) | the cleanest dome and minarets |
+| Dance hall, Sonnet high, before | $1.33 | r2 | decorated front, box behind |
+| Dance hall, Sonnet high, with brushes | $1.10 | r2 | front ≈ same, roof closed, still a box |
+| Dance hall, Opus high, with brushes | $1.95 | **r1** (r2 got worse) | tiered setback roof; the fins still don't read |
+
+- **Brushes fix form when they are used.** Domes and minarets improved; only Opus used `setbacks`, and only it gained
+  tiered massing.
+- **Keep-the-better is essential**: both Opus second rounds regressed.
+- **The remaining gaps are upstream in the spec**: the Taj reads grey, not marble, in every run (the material map
+  over-weights the dark inlay), and the dance hall's vertical fins are lost the same way in every run. Next: a
+  palette-tone check (concept vs rendered elevation, CIELAB), and naming which brush fits which concept feature.
+
 ### Why the good-looking approach is slow (from the transcripts)
 
 Measured on 014 and 027. [V]

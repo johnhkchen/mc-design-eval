@@ -1,0 +1,23 @@
+I built the Taj Mahal and saved `round-1.nbt` and `round-2.nbt` here, and I think round 2 is the better one. Both come from `build.mjs`: `node build.mjs 1` or `node build.mjs 2`. Both renders are in `r1-tiles/` and `r2-tiles/`. `mcd info` lists no unknown blocks.
+
+- **Round 1:** it has the brick apron and plinth with a parapet and recessed panels. The 25×25 mausoleum has piers and 2×4 niches at both tiers, with a pishtaq on all four faces. It also has a stepped iwan (arched recess) with an andesite back wall, a black door frame and an iron-bars jali. The roof has a cornice, balustrade and kiosks. The shape brushes (`cylinder`, `dome`, `minaret`, `ring`) produced the drum, the onion dome, four minarets and the chhatris, using the spec's block ids. Overall height is 40, matching the spec.
+- **Biggest round-1 mismatches:**
+  - The dome read as a cone or tent and was too plain.
+  - The minaret caps ran to y36 against the spec's y34.
+  - The chhatris were fat pumpkin domes that hid their pillars.
+  - The plinth parapet looked like battlements.
+  - The wall field had no tier division between the lower and upper niches.
+- **Round 2 fixes:**
+  - The onion profile is fuller, with a pinched neck.
+  - The dome has quartz ring highlights, `smooth_sandstone` lancet panels and a stair lotus ring at y36.
+  - The chhatri eaves are thin slabs with smaller domes.
+  - The minaret caps are cut so the tip lands on y34.
+  - The plinth parapet is a continuous low rail with piers every 8.
+  - Quartz string courses at y10 and y15 mark the two niche tiers.
+- **Which is better:** round 2. The dome and the tier division read much closer to the concept, and the chhatris and minarets are less clumsy.
+- **Still off (both rounds):**
+  - The facade is too dark and heavy next to the concept's light pishtaq, because `andesite` niche backs and black bands dominate.
+  - `smooth_sandstone` reads mustard rather than cream.
+  - The pishtaq's rise above the parapet is small.
+  - The dome is faceted.
+- **Spec deviations:** I used a 1-cell corner notch instead of the 3×3 chamfer, because a bigger chamfer cuts through the x9–10 niche bay. The chhatri pillars are y19–21 with a slab eave at y22. The door opening is y5–8, with the black frame's top bar at y9.
