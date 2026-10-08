@@ -8,7 +8,7 @@ import { b } from "../../baml_client/index.ts";
 import bamlpkg from "@boundaryml/baml"; // CJS: `Image` isn't an ESM named export, only on the default
 const { Image } = bamlpkg as any;
 import { requestTextWithImage } from "../../src/sdk-binding.mjs";
-import { PHASE1_MODEL_ID } from "../../src/config.mjs";
+import { JUDGE_MODEL_ID } from "../../src/config.mjs";
 
 const CATEGORIES = ["weak", "competent", "strong", "exceptional"];
 const RANK: Record<string, number> = Object.fromEntries(CATEGORIES.map((c, i) => [c, i]));
@@ -46,7 +46,7 @@ for (let i = 0; i < samples; i++) {
   const { text, raw } = await requestTextWithImage({
     prompt: textBlock,
     images: [{ base64: imgBlock.source.data, mediaType: imgBlock.source.media_type }],
-    model: PHASE1_MODEL_ID,
+    model: JUDGE_MODEL_ID,
   });
 
   let cleaned = text.trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "").trim();

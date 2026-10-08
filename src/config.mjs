@@ -12,10 +12,17 @@
 /**
  * The Phase-1 pinned model id (spec §4). Phase 2 sweeps the model by overriding
  * this constant or passing `model` to runTrial. Kept current per spec §4's
- * warning against hardcoding deprecated ids.
+ * warning against hardcoding deprecated ids. `MC_MODEL_ID` overrides it for a sweep without an edit.
  * @type {string}
  */
-export const PHASE1_MODEL_ID = "claude-opus-4-8";
+export const PHASE1_MODEL_ID = process.env.MC_MODEL_ID || "claude-opus-4-8";
+
+/**
+ * The judge's model. Defaults to {@link PHASE1_MODEL_ID}; `MC_JUDGE_MODEL_ID` pins it separately so a
+ * builder-model sweep is scored by an UNCHANGED judge (otherwise the A/B confounds builder and judge).
+ * @type {string}
+ */
+export const JUDGE_MODEL_ID = process.env.MC_JUDGE_MODEL_ID || PHASE1_MODEL_ID;
 
 /**
  * Per-op MODEL TIERS for the agentic-engineering seam (E-23 / S-082 / T-082-01). Because the 2.5-D view
