@@ -1,0 +1,100 @@
+{
+ "runId": "001-concept-revise",
+ "date": "2026-10-08",
+ "task": "hallway-section",
+ "taskVersion": 1,
+ "brief": "A service corridor inside a spruce-taiga hillside base. It connects the storage wing to the operator's room of a redstone part-picking machine; a live redstone signal line runs along the floor in a channel against the far wall.",
+ "promptMethodId": "hallway-section-concept-revise.v0",
+ "model": "claude-opus-5-5",
+ "judgeModel": "claude-opus-4-8",
+ "view": {
+  "azimuthDeg": 0,
+  "elevationDeg": 6,
+  "fov": 40
+ },
+ "blocks": 3948,
+ "unmapped": 0,
+ "tokensIn": 6,
+ "tokensOut": 43268,
+ "costUsd": 1.6782826,
+ "durationMs": 573806,
+ "stages": [
+  {
+   "name": "0 concept",
+   "s": 20,
+   "model": "gemini-3-pro-image-preview",
+   "ms": 19852
+  },
+  {
+   "name": "1 design doc",
+   "s": 39,
+   "chars": 3324
+  },
+  {
+   "name": "2 build",
+   "s": 257,
+   "ops": 207,
+   "outTok": 25379
+  },
+  {
+   "name": "3 revise",
+   "s": 397,
+   "ops": 151,
+   "outTok": 16324
+  },
+  {
+   "name": "renders",
+   "s": 398,
+   "blocks": 3948,
+   "unmapped": 0,
+   "round0Blocks": 5016
+  },
+  {
+   "name": "judge",
+   "s": 574,
+   "final": "competent",
+   "round0": "strong"
+  }
+ ],
+ "score": {
+  "proportion": "strong",
+  "color": "competent",
+  "detail": "competent",
+  "fidelity": "competent",
+  "overall": "competent",
+  "notes": "A clean, regular colonnade read head-on. Proportion is the build's strength: the bay rhythm is even and deliberate, and there is a legible base (stone plinth) → middle (column screen with recessed bays) → crown (timber entablature with a modest overhanging cornice). Nothing feels arbitrary, so it earns Strong here, though the massing stays low and horizontal with no central emphasis or climax. Color is disciplined but unremarkable — a dark stone/charcoal base, spruce-brown entablature, and dark column shafts form a coherent earthy scheme, with the lantern points as the only accent; pleasant and restrained rather than a scheme with real identity, and the overall darkness reads a touch muddy. Detail is the weak point relative to the brief: the recessed bays, lanterns, and stone plinth texture give some articulation and a sense of depth, but the column faces, entablature, and base are largely flat fields with shallow relief and little ornament — competent, not rich. Fidelity: it is clearly a repeating columned structure and recognizable as a classical portico/stoa, but it does not project grand-temple presence — no dominant entrance, no pediment or vertical accent, no landmark gesture; it reads as a long low arcade rather than an iconic temple. Holistically a tidy, well-ordered colonnade that is competent throughout — it would benefit most from a central focus and deeper, more varied relief to climb toward strong.",
+  "samples": 3,
+  "rubric": "v2-categorical-baml",
+  "perSample": [
+   "competent",
+   "competent",
+   "competent"
+  ],
+  "usage": {
+   "input_tokens": 6,
+   "output_tokens": 3779,
+   "cost_usd": 0.942673
+  }
+ },
+ "scoreRound0": {
+  "proportion": "strong",
+  "color": "strong",
+  "detail": "competent",
+  "fidelity": "strong",
+  "overall": "strong",
+  "notes": "Read as a longitudinal corridor section against the brief, not as a temple facade (the fidelity anchor's temple framing doesn't match this hallway brief; judged as the decorated corridor it was meant to be). PROPORTION is the strength: a clean, regular bay rhythm set by evenly-spaced columns, with a legible base (floor band) → middle (lit alcove register) → crown (cornice line under a dark ceiling slab). Deliberate and coherent; held back from exceptional only because the bays are uniform rather than hierarchically composed (no accent bay, portal, or terminus). COLOR is disciplined and harmonious — dominant deepslate grey, supporting warm spruce/brown, and warm lantern glow as a consistent accent; the scheme suits a hillside service corridor well. DETAIL is where it stays competent: the articulation (recessed alcoves, projecting posts, lanterns, furnace/prop clutter that says who uses the space) is genuinely purposeful but confined almost entirely to the mid-band. The ceiling reads as a flat deepslate field and the floor is a plain band — large undecorated surfaces, and the named redstone signal channel against the far wall doesn't register at this scale. Treat/articulate the ceiling and floor and the whole thing lifts. FIDELITY is strong as the intended subject: it convincingly reads as a real, walkable, atmospherically lit corridor cut in section, with props establishing use. Easy improvements (flat ceiling/floor, single-register detail, uniform bays) are nameable, so it lands Strong, not exceptional.",
+  "samples": 3,
+  "rubric": "v2-categorical-baml",
+  "perSample": [
+   "strong",
+   "competent",
+   "strong"
+  ],
+  "usage": {
+   "input_tokens": 6,
+   "output_tokens": 6209,
+   "cost_usd": 1.004143
+  }
+ },
+ "note": "first hallway-section run: champion facade pipeline + concept stage"
+}

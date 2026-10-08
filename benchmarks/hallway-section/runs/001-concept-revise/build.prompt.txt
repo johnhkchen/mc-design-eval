@@ -1,0 +1,88 @@
+You are a master Minecraft architect. Below is your FINALIZED design document for a hallway section.
+Build it as a structured design artifact that faithfully realizes the document, at GENEROUS SCALE and
+with DEEP RELIEF. Plain, boxy corridors are the failure this exercise exists to fix — use the room.
+
+## Finalized design document
+# Taiga Service Corridor: Design Document
+
+## 1. Identity
+A working spruce-and-stone passage dug into a taiga hillside, with heavy timber frames over a stone floor. Its job is to carry the redstone signal from the storage wing to the operator's room, and it should feel calm and orderly, like a well-kept mine gallery that clearly belongs to a machine.
+
+## 2. Palette by role
+*Relationship: dark timber on cut slate, with red signal and iron light.*
+- **Dominant (~60%), spruce planks and stripped spruce logs:** used for the wall panels and beams. The base sits in a spruce forest, so spruce is the timber the builder would fell on site.
+- **Supporting (~30%), deepslate bricks and deepslate tiles:** used for the footing, floor and window surrounds. This is the stone you hit when you dig into the hillside. It is hard-wearing, so it suits heavy foot traffic and machine work.
+- **Accent (~10%), dark oak logs, iron lanterns on chains, and the redstone itself:** dark oak marks each bay frame. Iron belongs to a working machine room. The redstone line is the reason the corridor exists, so it is treated as ornament.
+
+## 3. Bay rhythm
+Each **bay is 5 blocks**: a 1-block dark-oak post followed by a 4-block panel. Every bay repeats the same set of parts:
+- A post and a beam running across the ceiling.
+- A spruce panel over a deepslate-brick footing.
+- A recessed polished-deepslate niche.
+- One lantern hanging on a chain from the beam.
+- One repeater in the floor channel, sitting at the foot of the post.
+
+## 4. Floor / walls / ceiling
+- **Floor:** a deepslate-tile field with a 1-block border of polished deepslate on the walkway side. A **spruce-slab sill** separates the walkway from the channel.
+- **Redstone channel:** the channel runs 1 block wide and 1 block deep along the foot of the far wall. The redstone dust is left exposed and lined with smooth stone so the signal reads clearly. The repeater in each bay faces the operator's room, so you can see which way the signal flows.
+- **Walls:**
+  - Footing: 2 courses of deepslate bricks.
+  - Field: 3 courses of spruce-plank panels.
+  - Frieze: a stripped-spruce stair cornice, with item frames holding tools set every other bay.
+- **Ceiling:** a dark-oak beam over every post. Between the beams sit spruce-plank coffers recessed 1 block, with spruce trapdoors forming the coffer lips.
+
+## 5. Light & life
+- **Light:** one lantern per bay, hanging 2 chain links below the beam and centred in the bay. Light from the redstone channel fills in along the floor. There are no torches on the walls, because the rhythm should come from the ceiling.
+- **Props:**
+  - Chests and barrels for stock in transit, placed in alternate bays.
+  - Item frames holding pickaxes and redstone parts.
+  - A potted fern or poppy now and then, to show the operator spends time here and looks after the place.
+
+## 6. Proportions
+- **Clear height:** 5 blocks from floor to beam soffit, or 6 to the coffer.
+- **Corridor width:** 3 blocks of walkway plus 1 block of channel.
+- **Bay:** 5 blocks from post centre to post centre.
+- **Relief on the far wall:**
+  - Posts stand **proud by 1**.
+  - Panels are **flush with the wall plane**.
+  - Niches are **recessed by 1**.
+  - The cornice overhangs by half a block, using stairs.
+  - The channel is cut **down by 1**, below the floor plane.
+
+## Orientation & geometry (a section, photographed head-on)
+- The corridor runs along X (length up to ~44). Y is up; the floor surface is at y = 1 (a structural
+  floor slab fills y = 0 and may go deeper below as foundations/section poché). Interior clear height
+  is your call (≈6–10) — the ceiling/roof structure sits above it.
+- The FAR WALL's interior face looks toward +Z (toward the viewer) at about z = 0; the wall's own
+  thickness and anything behind it go into −Z (up to ~6 deep). The corridor's walkable floor extends
+  from the far wall toward +Z for its full width (5–7 blocks); the NEAR wall is CUT AWAY — the section
+  plane is the highest Z. Floor slab and ceiling extend to the section plane and read as cut bands.
+- Keep a clear walk line: at least 3 blocks wide and 3 high along the whole length.
+
+## Craft (this is judged)
+- BAYS: a full structural frame (posts/pillars + beam + ceiling rib) on the document's rhythm, repeated
+  the whole length. Pillars stand PROUD of the far wall by 1–2; panels between them RECESS by 1–2.
+  Recesses are carved by NOT placing wall material there (there is no air op; last write wins).
+- NO LARGE FLAT FIELDS: every wall panel wider than ~3 gets relief, trim, a frieze, or a feature.
+- Sub-block detail carries the craft: stairs (upside-down as brackets/corbels), slabs, trapdoors as
+  panels, walls/fences as posts and rails, chains + lanterns, buttons as rivets. Use voxel `state`
+  (facing/half/type) for every directional block.
+- Floor: border + field pattern; the redstone channel shown as a deliberate feature. Ceiling: beams or
+  coffers on the bay rhythm. Lights on the rhythm. A few props that say who uses it.
+- Everything attaches to the far wall, the floor, or the ceiling — nothing floats.
+- Use `fill`/`box` for masses and `line` for runs to stay efficient; repeat bays consistently.
+
+## Materials
+Primarily the document's palette; declare the blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "001-concept-revise"
+- metadata.prompting_method_id = "hallway-section-concept-revise.v0"
+- metadata.model_id = "claude-opus-5-5"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+style.name = the document's identity; style.rationale = one line tying the build to the document.
+
+Local origin at x = 0, y = 0, z = 0.

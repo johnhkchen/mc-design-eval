@@ -1,0 +1,2206 @@
+{
+ "schema_version": "1.0.0",
+ "metadata": {
+  "trial_id": "001-concept-revise",
+  "prompting_method_id": "hallway-section-concept-revise.v0",
+  "model_id": "claude-opus-5-5",
+  "seed": 11,
+  "server_state_id": "flat-creative-superflat.v1"
+ },
+ "style": {
+  "name": "Taiga Service Corridor",
+  "rationale": "Second pass: the heavy grey roof slab that dominated the render is now a timber ceiling section of dark-oak beams over coffers recessed 1 block, with stripped-spruce ribs and a log band on the cut face. Each post now carries a knee brace and two side brackets. The far wall's relief is layered: a deepslate stair plinth, panels set flush, polished niches recessed with tile lintels, and an overhanging spruce-stair cornice over a two-course stripped-spruce frieze. The floor is now patterned, with polished-deepslate bands under each post, a tile field and a polished edge at the section. The redstone channel is cut 1 block down, lined with smooth stone, and has a repeater at every post. Lanterns hang on 2 chain links over the channel. Barrels, chests and potted plants alternate in the niches. The 3-wide walk is kept clear."
+ },
+ "palette": {
+  "manifest": [
+   "minecraft:cobbled_deepslate",
+   "minecraft:deepslate_bricks",
+   "minecraft:deepslate_tiles",
+   "minecraft:polished_deepslate",
+   "minecraft:polished_deepslate_stairs",
+   "minecraft:smooth_stone",
+   "minecraft:redstone_wire",
+   "minecraft:repeater",
+   "minecraft:spruce_slab",
+   "minecraft:spruce_planks",
+   "minecraft:spruce_stairs",
+   "minecraft:stripped_spruce_log",
+   "minecraft:dark_oak_log",
+   "minecraft:dark_oak_stairs",
+   "minecraft:dark_oak_planks",
+   "minecraft:stripped_dark_oak_log",
+   "minecraft:chain",
+   "minecraft:lantern",
+   "minecraft:barrel",
+   "minecraft:chest",
+   "minecraft:potted_fern",
+   "minecraft:potted_poppy"
+  ]
+ },
+ "placements": [
+  {
+   "op": "fill",
+   "from": [
+    0,
+    -3,
+    -3
+   ],
+   "to": [
+    40,
+    -1,
+    6
+   ],
+   "block": "minecraft:cobbled_deepslate"
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    -1,
+    6
+   ],
+   "to": [
+    40,
+    -1,
+    6
+   ],
+   "block": "minecraft:polished_deepslate"
+  },
+  {
+   "op": "fill",
+   "from": [
+    0,
+    0,
+    -3
+   ],
+   "to": [
+    40,
+    7,
+    -2
+   ],
+   "block": "minecraft:deepslate_bricks"
+  },
+  {
+   "op": "fill",
+   "from": [
+    0,
+    0,
+    -1
+   ],
+   "to": [
+    40,
+    0,
+    0
+   ],
+   "block": "minecraft:deepslate_bricks"
+  },
+  {
+   "op": "fill",
+   "from": [
+    0,
+    0,
+    3
+   ],
+   "to": [
+    40,
+    0,
+    6
+   ],
+   "block": "minecraft:deepslate_tiles"
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    0,
+    6
+   ],
+   "to": [
+    40,
+    0,
+    6
+   ],
+   "block": "minecraft:polished_deepslate"
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    -1,
+    1
+   ],
+   "to": [
+    40,
+    -1,
+    1
+   ],
+   "block": "minecraft:smooth_stone"
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    0,
+    2
+   ],
+   "to": [
+    40,
+    0,
+    2
+   ],
+   "block": "minecraft:smooth_stone"
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    0,
+    1
+   ],
+   "to": [
+    40,
+    0,
+    1
+   ],
+   "block": "minecraft:redstone_wire",
+   "state": {
+    "east": "side",
+    "west": "side",
+    "power": "0"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    1,
+    2
+   ],
+   "to": [
+    40,
+    1,
+    2
+   ],
+   "block": "minecraft:spruce_slab",
+   "state": {
+    "type": "bottom"
+   }
+  },
+  {
+   "op": "fill",
+   "from": [
+    0,
+    1,
+    -1
+   ],
+   "to": [
+    40,
+    2,
+    -1
+   ],
+   "block": "minecraft:deepslate_bricks"
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    6,
+    -1
+   ],
+   "to": [
+    40,
+    6,
+    -1
+   ],
+   "block": "minecraft:stripped_spruce_log",
+   "state": {
+    "axis": "x"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    7,
+    -1
+   ],
+   "to": [
+    40,
+    7,
+    -1
+   ],
+   "block": "minecraft:stripped_spruce_log",
+   "state": {
+    "axis": "x"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    1,
+    0
+   ],
+   "to": [
+    40,
+    1,
+    0
+   ],
+   "block": "minecraft:polished_deepslate_stairs",
+   "state": {
+    "facing": "north",
+    "half": "bottom"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    6,
+    0
+   ],
+   "to": [
+    40,
+    6,
+    0
+   ],
+   "block": "minecraft:spruce_stairs",
+   "state": {
+    "facing": "north",
+    "half": "top"
+   }
+  },
+  {
+   "op": "fill",
+   "from": [
+    0,
+    8,
+    -1
+   ],
+   "to": [
+    40,
+    8,
+    6
+   ],
+   "block": "minecraft:spruce_planks"
+  },
+  {
+   "op": "fill",
+   "from": [
+    0,
+    9,
+    -3
+   ],
+   "to": [
+    40,
+    9,
+    6
+   ],
+   "block": "minecraft:dark_oak_planks"
+  },
+  {
+   "op": "fill",
+   "from": [
+    0,
+    10,
+    -3
+   ],
+   "to": [
+    40,
+    10,
+    6
+   ],
+   "block": "minecraft:deepslate_tiles"
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    9,
+    6
+   ],
+   "to": [
+    40,
+    9,
+    6
+   ],
+   "block": "minecraft:stripped_dark_oak_log",
+   "state": {
+    "axis": "x"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    7,
+    3
+   ],
+   "to": [
+    40,
+    7,
+    3
+   ],
+   "block": "minecraft:stripped_spruce_log",
+   "state": {
+    "axis": "x"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    7,
+    6
+   ],
+   "to": [
+    40,
+    7,
+    6
+   ],
+   "block": "minecraft:stripped_spruce_log",
+   "state": {
+    "axis": "x"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    1,
+    3,
+    -1
+   ],
+   "to": [
+    1,
+    5,
+    -1
+   ],
+   "block": "minecraft:spruce_planks"
+  },
+  {
+   "op": "line",
+   "from": [
+    4,
+    3,
+    -1
+   ],
+   "to": [
+    4,
+    5,
+    -1
+   ],
+   "block": "minecraft:spruce_planks"
+  },
+  {
+   "op": "line",
+   "from": [
+    2,
+    5,
+    -1
+   ],
+   "to": [
+    3,
+    5,
+    -1
+   ],
+   "block": "minecraft:deepslate_tiles"
+  },
+  {
+   "op": "fill",
+   "from": [
+    2,
+    3,
+    -2
+   ],
+   "to": [
+    3,
+    4,
+    -2
+   ],
+   "block": "minecraft:polished_deepslate"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    2,
+    3,
+    -1
+   ],
+   "block": "minecraft:barrel",
+   "state": {
+    "facing": "up"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    3,
+    3,
+    -1
+   ],
+   "block": "minecraft:chest",
+   "state": {
+    "facing": "south"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    2,
+    6,
+    1
+   ],
+   "to": [
+    2,
+    7,
+    1
+   ],
+   "block": "minecraft:chain",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    2,
+    5,
+    1
+   ],
+   "block": "minecraft:lantern",
+   "state": {
+    "hanging": "true"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    6,
+    3,
+    -1
+   ],
+   "to": [
+    6,
+    5,
+    -1
+   ],
+   "block": "minecraft:spruce_planks"
+  },
+  {
+   "op": "line",
+   "from": [
+    9,
+    3,
+    -1
+   ],
+   "to": [
+    9,
+    5,
+    -1
+   ],
+   "block": "minecraft:spruce_planks"
+  },
+  {
+   "op": "line",
+   "from": [
+    7,
+    5,
+    -1
+   ],
+   "to": [
+    8,
+    5,
+    -1
+   ],
+   "block": "minecraft:deepslate_tiles"
+  },
+  {
+   "op": "fill",
+   "from": [
+    7,
+    3,
+    -2
+   ],
+   "to": [
+    8,
+    4,
+    -2
+   ],
+   "block": "minecraft:polished_deepslate"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    7,
+    3,
+    -1
+   ],
+   "block": "minecraft:potted_fern"
+  },
+  {
+   "op": "line",
+   "from": [
+    7,
+    6,
+    1
+   ],
+   "to": [
+    7,
+    7,
+    1
+   ],
+   "block": "minecraft:chain",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    7,
+    5,
+    1
+   ],
+   "block": "minecraft:lantern",
+   "state": {
+    "hanging": "true"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    11,
+    3,
+    -1
+   ],
+   "to": [
+    11,
+    5,
+    -1
+   ],
+   "block": "minecraft:spruce_planks"
+  },
+  {
+   "op": "line",
+   "from": [
+    14,
+    3,
+    -1
+   ],
+   "to": [
+    14,
+    5,
+    -1
+   ],
+   "block": "minecraft:spruce_planks"
+  },
+  {
+   "op": "line",
+   "from": [
+    12,
+    5,
+    -1
+   ],
+   "to": [
+    13,
+    5,
+    -1
+   ],
+   "block": "minecraft:deepslate_tiles"
+  },
+  {
+   "op": "fill",
+   "from": [
+    12,
+    3,
+    -2
+   ],
+   "to": [
+    13,
+    4,
+    -2
+   ],
+   "block": "minecraft:polished_deepslate"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    12,
+    3,
+    -1
+   ],
+   "block": "minecraft:barrel",
+   "state": {
+    "facing": "up"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    13,
+    3,
+    -1
+   ],
+   "block": "minecraft:chest",
+   "state": {
+    "facing": "south"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    12,
+    6,
+    1
+   ],
+   "to": [
+    12,
+    7,
+    1
+   ],
+   "block": "minecraft:chain",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    12,
+    5,
+    1
+   ],
+   "block": "minecraft:lantern",
+   "state": {
+    "hanging": "true"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    16,
+    3,
+    -1
+   ],
+   "to": [
+    16,
+    5,
+    -1
+   ],
+   "block": "minecraft:spruce_planks"
+  },
+  {
+   "op": "line",
+   "from": [
+    19,
+    3,
+    -1
+   ],
+   "to": [
+    19,
+    5,
+    -1
+   ],
+   "block": "minecraft:spruce_planks"
+  },
+  {
+   "op": "line",
+   "from": [
+    17,
+    5,
+    -1
+   ],
+   "to": [
+    18,
+    5,
+    -1
+   ],
+   "block": "minecraft:deepslate_tiles"
+  },
+  {
+   "op": "fill",
+   "from": [
+    17,
+    3,
+    -2
+   ],
+   "to": [
+    18,
+    4,
+    -2
+   ],
+   "block": "minecraft:polished_deepslate"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    18,
+    3,
+    -1
+   ],
+   "block": "minecraft:potted_poppy"
+  },
+  {
+   "op": "line",
+   "from": [
+    17,
+    6,
+    1
+   ],
+   "to": [
+    17,
+    7,
+    1
+   ],
+   "block": "minecraft:chain",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    17,
+    5,
+    1
+   ],
+   "block": "minecraft:lantern",
+   "state": {
+    "hanging": "true"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    21,
+    3,
+    -1
+   ],
+   "to": [
+    21,
+    5,
+    -1
+   ],
+   "block": "minecraft:spruce_planks"
+  },
+  {
+   "op": "line",
+   "from": [
+    24,
+    3,
+    -1
+   ],
+   "to": [
+    24,
+    5,
+    -1
+   ],
+   "block": "minecraft:spruce_planks"
+  },
+  {
+   "op": "line",
+   "from": [
+    22,
+    5,
+    -1
+   ],
+   "to": [
+    23,
+    5,
+    -1
+   ],
+   "block": "minecraft:deepslate_tiles"
+  },
+  {
+   "op": "fill",
+   "from": [
+    22,
+    3,
+    -2
+   ],
+   "to": [
+    23,
+    4,
+    -2
+   ],
+   "block": "minecraft:polished_deepslate"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    22,
+    3,
+    -1
+   ],
+   "block": "minecraft:barrel",
+   "state": {
+    "facing": "up"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    23,
+    3,
+    -1
+   ],
+   "block": "minecraft:chest",
+   "state": {
+    "facing": "south"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    22,
+    6,
+    1
+   ],
+   "to": [
+    22,
+    7,
+    1
+   ],
+   "block": "minecraft:chain",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    22,
+    5,
+    1
+   ],
+   "block": "minecraft:lantern",
+   "state": {
+    "hanging": "true"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    26,
+    3,
+    -1
+   ],
+   "to": [
+    26,
+    5,
+    -1
+   ],
+   "block": "minecraft:spruce_planks"
+  },
+  {
+   "op": "line",
+   "from": [
+    29,
+    3,
+    -1
+   ],
+   "to": [
+    29,
+    5,
+    -1
+   ],
+   "block": "minecraft:spruce_planks"
+  },
+  {
+   "op": "line",
+   "from": [
+    27,
+    5,
+    -1
+   ],
+   "to": [
+    28,
+    5,
+    -1
+   ],
+   "block": "minecraft:deepslate_tiles"
+  },
+  {
+   "op": "fill",
+   "from": [
+    27,
+    3,
+    -2
+   ],
+   "to": [
+    28,
+    4,
+    -2
+   ],
+   "block": "minecraft:polished_deepslate"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    27,
+    3,
+    -1
+   ],
+   "block": "minecraft:potted_fern"
+  },
+  {
+   "op": "line",
+   "from": [
+    27,
+    6,
+    1
+   ],
+   "to": [
+    27,
+    7,
+    1
+   ],
+   "block": "minecraft:chain",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    27,
+    5,
+    1
+   ],
+   "block": "minecraft:lantern",
+   "state": {
+    "hanging": "true"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    31,
+    3,
+    -1
+   ],
+   "to": [
+    31,
+    5,
+    -1
+   ],
+   "block": "minecraft:spruce_planks"
+  },
+  {
+   "op": "line",
+   "from": [
+    34,
+    3,
+    -1
+   ],
+   "to": [
+    34,
+    5,
+    -1
+   ],
+   "block": "minecraft:spruce_planks"
+  },
+  {
+   "op": "line",
+   "from": [
+    32,
+    5,
+    -1
+   ],
+   "to": [
+    33,
+    5,
+    -1
+   ],
+   "block": "minecraft:deepslate_tiles"
+  },
+  {
+   "op": "fill",
+   "from": [
+    32,
+    3,
+    -2
+   ],
+   "to": [
+    33,
+    4,
+    -2
+   ],
+   "block": "minecraft:polished_deepslate"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    32,
+    3,
+    -1
+   ],
+   "block": "minecraft:barrel",
+   "state": {
+    "facing": "up"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    33,
+    3,
+    -1
+   ],
+   "block": "minecraft:chest",
+   "state": {
+    "facing": "south"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    32,
+    6,
+    1
+   ],
+   "to": [
+    32,
+    7,
+    1
+   ],
+   "block": "minecraft:chain",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    32,
+    5,
+    1
+   ],
+   "block": "minecraft:lantern",
+   "state": {
+    "hanging": "true"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    36,
+    3,
+    -1
+   ],
+   "to": [
+    36,
+    5,
+    -1
+   ],
+   "block": "minecraft:spruce_planks"
+  },
+  {
+   "op": "line",
+   "from": [
+    39,
+    3,
+    -1
+   ],
+   "to": [
+    39,
+    5,
+    -1
+   ],
+   "block": "minecraft:spruce_planks"
+  },
+  {
+   "op": "line",
+   "from": [
+    37,
+    5,
+    -1
+   ],
+   "to": [
+    38,
+    5,
+    -1
+   ],
+   "block": "minecraft:deepslate_tiles"
+  },
+  {
+   "op": "fill",
+   "from": [
+    37,
+    3,
+    -2
+   ],
+   "to": [
+    38,
+    4,
+    -2
+   ],
+   "block": "minecraft:polished_deepslate"
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    38,
+    3,
+    -1
+   ],
+   "block": "minecraft:potted_poppy"
+  },
+  {
+   "op": "line",
+   "from": [
+    37,
+    6,
+    1
+   ],
+   "to": [
+    37,
+    7,
+    1
+   ],
+   "block": "minecraft:chain",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    37,
+    5,
+    1
+   ],
+   "block": "minecraft:lantern",
+   "state": {
+    "hanging": "true"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    1,
+    -1
+   ],
+   "to": [
+    0,
+    7,
+    -1
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    1,
+    0
+   ],
+   "to": [
+    0,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    7,
+    0
+   ],
+   "to": [
+    0,
+    7,
+    6
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "z"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    0,
+    6,
+    1
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "north",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    1,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "west",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    0,
+    0,
+    1
+   ],
+   "block": "minecraft:repeater",
+   "state": {
+    "facing": "west",
+    "delay": "1"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    0,
+    0,
+    3
+   ],
+   "to": [
+    0,
+    0,
+    5
+   ],
+   "block": "minecraft:polished_deepslate"
+  },
+  {
+   "op": "line",
+   "from": [
+    5,
+    1,
+    -1
+   ],
+   "to": [
+    5,
+    7,
+    -1
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    5,
+    1,
+    0
+   ],
+   "to": [
+    5,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    5,
+    7,
+    0
+   ],
+   "to": [
+    5,
+    7,
+    6
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "z"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    5,
+    6,
+    1
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "north",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    4,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "east",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    6,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "west",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    5,
+    0,
+    1
+   ],
+   "block": "minecraft:repeater",
+   "state": {
+    "facing": "west",
+    "delay": "1"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    5,
+    0,
+    3
+   ],
+   "to": [
+    5,
+    0,
+    5
+   ],
+   "block": "minecraft:polished_deepslate"
+  },
+  {
+   "op": "line",
+   "from": [
+    10,
+    1,
+    -1
+   ],
+   "to": [
+    10,
+    7,
+    -1
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    10,
+    1,
+    0
+   ],
+   "to": [
+    10,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    10,
+    7,
+    0
+   ],
+   "to": [
+    10,
+    7,
+    6
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "z"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    10,
+    6,
+    1
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "north",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    9,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "east",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    11,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "west",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    10,
+    0,
+    1
+   ],
+   "block": "minecraft:repeater",
+   "state": {
+    "facing": "west",
+    "delay": "1"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    10,
+    0,
+    3
+   ],
+   "to": [
+    10,
+    0,
+    5
+   ],
+   "block": "minecraft:polished_deepslate"
+  },
+  {
+   "op": "line",
+   "from": [
+    15,
+    1,
+    -1
+   ],
+   "to": [
+    15,
+    7,
+    -1
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    15,
+    1,
+    0
+   ],
+   "to": [
+    15,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    15,
+    7,
+    0
+   ],
+   "to": [
+    15,
+    7,
+    6
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "z"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    15,
+    6,
+    1
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "north",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    14,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "east",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    16,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "west",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    15,
+    0,
+    1
+   ],
+   "block": "minecraft:repeater",
+   "state": {
+    "facing": "west",
+    "delay": "1"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    15,
+    0,
+    3
+   ],
+   "to": [
+    15,
+    0,
+    5
+   ],
+   "block": "minecraft:polished_deepslate"
+  },
+  {
+   "op": "line",
+   "from": [
+    20,
+    1,
+    -1
+   ],
+   "to": [
+    20,
+    7,
+    -1
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    20,
+    1,
+    0
+   ],
+   "to": [
+    20,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    20,
+    7,
+    0
+   ],
+   "to": [
+    20,
+    7,
+    6
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "z"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    20,
+    6,
+    1
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "north",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    19,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "east",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    21,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "west",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    20,
+    0,
+    1
+   ],
+   "block": "minecraft:repeater",
+   "state": {
+    "facing": "west",
+    "delay": "1"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    20,
+    0,
+    3
+   ],
+   "to": [
+    20,
+    0,
+    5
+   ],
+   "block": "minecraft:polished_deepslate"
+  },
+  {
+   "op": "line",
+   "from": [
+    25,
+    1,
+    -1
+   ],
+   "to": [
+    25,
+    7,
+    -1
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    25,
+    1,
+    0
+   ],
+   "to": [
+    25,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    25,
+    7,
+    0
+   ],
+   "to": [
+    25,
+    7,
+    6
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "z"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    25,
+    6,
+    1
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "north",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    24,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "east",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    26,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "west",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    25,
+    0,
+    1
+   ],
+   "block": "minecraft:repeater",
+   "state": {
+    "facing": "west",
+    "delay": "1"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    25,
+    0,
+    3
+   ],
+   "to": [
+    25,
+    0,
+    5
+   ],
+   "block": "minecraft:polished_deepslate"
+  },
+  {
+   "op": "line",
+   "from": [
+    30,
+    1,
+    -1
+   ],
+   "to": [
+    30,
+    7,
+    -1
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    30,
+    1,
+    0
+   ],
+   "to": [
+    30,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    30,
+    7,
+    0
+   ],
+   "to": [
+    30,
+    7,
+    6
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "z"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    30,
+    6,
+    1
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "north",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    29,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "east",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    31,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "west",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    30,
+    0,
+    1
+   ],
+   "block": "minecraft:repeater",
+   "state": {
+    "facing": "west",
+    "delay": "1"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    30,
+    0,
+    3
+   ],
+   "to": [
+    30,
+    0,
+    5
+   ],
+   "block": "minecraft:polished_deepslate"
+  },
+  {
+   "op": "line",
+   "from": [
+    35,
+    1,
+    -1
+   ],
+   "to": [
+    35,
+    7,
+    -1
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    35,
+    1,
+    0
+   ],
+   "to": [
+    35,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    35,
+    7,
+    0
+   ],
+   "to": [
+    35,
+    7,
+    6
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "z"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    35,
+    6,
+    1
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "north",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    34,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "east",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    36,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "west",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    35,
+    0,
+    1
+   ],
+   "block": "minecraft:repeater",
+   "state": {
+    "facing": "west",
+    "delay": "1"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    35,
+    0,
+    3
+   ],
+   "to": [
+    35,
+    0,
+    5
+   ],
+   "block": "minecraft:polished_deepslate"
+  },
+  {
+   "op": "line",
+   "from": [
+    40,
+    1,
+    -1
+   ],
+   "to": [
+    40,
+    7,
+    -1
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    40,
+    1,
+    0
+   ],
+   "to": [
+    40,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "y"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    40,
+    7,
+    0
+   ],
+   "to": [
+    40,
+    7,
+    6
+   ],
+   "block": "minecraft:dark_oak_log",
+   "state": {
+    "axis": "z"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    40,
+    6,
+    1
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "north",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    39,
+    6,
+    0
+   ],
+   "block": "minecraft:dark_oak_stairs",
+   "state": {
+    "facing": "east",
+    "half": "top"
+   }
+  },
+  {
+   "op": "voxel",
+   "pos": [
+    40,
+    0,
+    1
+   ],
+   "block": "minecraft:repeater",
+   "state": {
+    "facing": "west",
+    "delay": "1"
+   }
+  },
+  {
+   "op": "line",
+   "from": [
+    40,
+    0,
+    3
+   ],
+   "to": [
+    40,
+    0,
+    5
+   ],
+   "block": "minecraft:polished_deepslate"
+  }
+ ]
+}
