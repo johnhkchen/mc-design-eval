@@ -4,6 +4,9 @@ A measurement instrument for evaluating an LLM's spatial/material *design* capab
 constrained, styled Minecraft builds. See `docs/specification.md`. Phase 1 holds the model
 fixed and compares prompting methods.
 
+**The product distilled from this repo is [`../minecraft-design`](../minecraft-design)** — a Claude Code plugin
+(design-first skill, slash commands, a zero-dependency renderer and checks). This repo is the lab notebook.
+
 **New here (human or agent)? Read [`docs/knowledge/what-we-learned.md`](docs/knowledge/what-we-learned.md)
 first** — the harvest of what worked, what stalled, and why.
 
