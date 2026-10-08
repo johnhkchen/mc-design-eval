@@ -1,0 +1,30 @@
+{
+ "runId": "202610081400-old-west-saloon-effort-xhigh",
+ "subject": "old-west-saloon",
+ "model": "claude-sonnet-5-5",
+ "effort": "xhigh",
+ "conceptShared": true,
+ "tokensOut": 149423,
+ "costUsd": 2.3875562,
+ "durationMs": 1087443,
+ "stages": [
+  {
+   "n": "concept (shared)",
+   "s": 1
+  },
+  {
+   "n": "doc",
+   "s": 109
+  },
+  {
+   "n": "build",
+   "s": 536,
+   "ops": 111
+  },
+  {
+   "n": "revise",
+   "s": 1087,
+   "ops": 151
+  }
+ ]
+}

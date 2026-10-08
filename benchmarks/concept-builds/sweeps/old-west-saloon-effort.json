@@ -1,0 +1,240 @@
+{
+ "judge": "claude-opus-5-5",
+ "shuffles": 3,
+ "builds": [
+  {
+   "run": "202610081400-old-west-saloon-effort-low",
+   "effort": "low",
+   "round": 1,
+   "costUsd": 0.7574424,
+   "durationMs": 244815,
+   "tokensOut": 32687,
+   "grade": {
+    "overall": "competent",
+    "proportion": "competent",
+    "color": "competent",
+    "detail": "strong",
+    "fidelity": "competent"
+   },
+   "meanRank": 3,
+   "composite": "runs/202610081400-old-west-saloon-effort-low/round-1-judge.png"
+  },
+  {
+   "run": "202610081400-old-west-saloon-effort-high",
+   "effort": "high",
+   "round": 0,
+   "costUsd": 1.1173262,
+   "durationMs": 498120,
+   "tokensOut": 69587,
+   "grade": {
+    "overall": "competent",
+    "proportion": "competent",
+    "color": "competent",
+    "detail": "competent",
+    "fidelity": "competent"
+   },
+   "meanRank": 3.6666666666666665,
+   "composite": "runs/202610081400-old-west-saloon-effort-high/round-0-judge.png"
+  },
+  {
+   "run": "202610081400-old-west-saloon-effort-medium",
+   "effort": "medium",
+   "round": 1,
+   "costUsd": 0.9004222,
+   "durationMs": 352186,
+   "tokensOut": 47843,
+   "grade": {
+    "overall": "competent",
+    "proportion": "competent",
+    "color": "competent",
+    "detail": "competent",
+    "fidelity": "competent"
+   },
+   "meanRank": 3.6666666666666665,
+   "composite": "runs/202610081400-old-west-saloon-effort-medium/round-1-judge.png"
+  },
+  {
+   "run": "202610081400-old-west-saloon-effort-low",
+   "effort": "low",
+   "round": 0,
+   "costUsd": 0.7574424,
+   "durationMs": 244815,
+   "tokensOut": 32687,
+   "grade": {
+    "overall": "competent",
+    "proportion": "competent",
+    "color": "competent",
+    "detail": "competent",
+    "fidelity": "competent"
+   },
+   "meanRank": 4,
+   "composite": "runs/202610081400-old-west-saloon-effort-low/round-0-judge.png"
+  },
+  {
+   "run": "202610081400-old-west-saloon-effort-medium",
+   "effort": "medium",
+   "round": 0,
+   "costUsd": 0.9004222,
+   "durationMs": 352186,
+   "tokensOut": 47843,
+   "grade": {
+    "overall": "competent",
+    "proportion": "competent",
+    "color": "competent",
+    "detail": "competent",
+    "fidelity": "competent"
+   },
+   "meanRank": 4,
+   "composite": "runs/202610081400-old-west-saloon-effort-medium/round-0-judge.png"
+  },
+  {
+   "run": "202610081400-old-west-saloon-effort-xhigh",
+   "effort": "xhigh",
+   "round": 0,
+   "costUsd": 2.3875562,
+   "durationMs": 1087443,
+   "tokensOut": 149423,
+   "grade": {
+    "overall": "competent",
+    "proportion": "competent",
+    "color": "competent",
+    "detail": "competent",
+    "fidelity": "competent"
+   },
+   "meanRank": 5,
+   "composite": "runs/202610081400-old-west-saloon-effort-xhigh/round-0-judge.png"
+  },
+  {
+   "run": "202610081400-old-west-saloon-effort-xhigh",
+   "effort": "xhigh",
+   "round": 1,
+   "costUsd": 2.3875562,
+   "durationMs": 1087443,
+   "tokensOut": 149423,
+   "grade": {
+    "overall": "competent",
+    "proportion": "competent",
+    "color": "competent",
+    "detail": "competent",
+    "fidelity": "competent"
+   },
+   "meanRank": 5.666666666666667,
+   "composite": "runs/202610081400-old-west-saloon-effort-xhigh/round-1-judge.png"
+  },
+  {
+   "run": "202610081400-old-west-saloon-effort-high",
+   "effort": "high",
+   "round": 1,
+   "costUsd": 1.1173262,
+   "durationMs": 498120,
+   "tokensOut": 69587,
+   "grade": {
+    "overall": "competent",
+    "proportion": "competent",
+    "color": "competent",
+    "detail": "competent",
+    "fidelity": "competent"
+   },
+   "meanRank": 7,
+   "composite": "runs/202610081400-old-west-saloon-effort-high/round-1-judge.png"
+  }
+ ],
+ "rankings": [
+  {
+   "order": [
+    "high/r1",
+    "low/r0",
+    "xhigh/r1",
+    "medium/r0",
+    "low/r1",
+    "high/r0",
+    "xhigh/r0",
+    "medium/r1"
+   ],
+   "ranking": [
+    "high/r0",
+    "medium/r0",
+    "medium/r1",
+    "low/r0",
+    "low/r1",
+    "high/r1",
+    "xhigh/r1",
+    "xhigh/r0"
+   ],
+   "notes": {
+    "high/r0": "Best match to the concept's key feature: the upper balcony stands on posts out at the street edge over a deep porch. The stone-and-timber palette is right. Hurt by stray sign blocks floating above the roof and uneven railing posts.",
+    "medium/r0": "Strong saloon front: a bracketed dark-wood cornice, a small stepped parapet, stone walls framed by timber pilasters, plus barrels and lanterns. The balcony is cantilevered rather than on posts, so it is less faithful to the concept.",
+    "medium/r1": "Very close to D, with a solid cornice, stone-and-timber walls, a chimney and a layered plank roof. The front is a bit flat and the balcony reads thin.",
+    "low/r0": "Good stone-and-timber rhythm with a cluttered, lived-in porch and a balcony. The upper-floor window openings render as see-through holes, and the roofline is plain.",
+    "low/r1": "Lots of layering from stacked beams and cornices, with good relief. The protruding beam ends make it busy and the openings look see-through, so it reads less as a clean saloon.",
+    "high/r1": "Tidy dark-wood mass with tall timber pilasters and a balcony. The palette is mostly dark wood and loses the concept's grey stone walls, and the roof and eave are generic.",
+    "xhigh/r1": "Western-style stepped false front with flower pots on the balcony. The flat dirt-coloured roof is exposed, the facade is blocky with a large shadowed central panel, and it looks more like a townhouse than a saloon.",
+    "xhigh/r0": "Nearly identical to C with the same flat exposed roof and blocky front. Slightly weaker porch and base detail, so it ranks last."
+   }
+  },
+  {
+   "order": [
+    "medium/r0",
+    "low/r1",
+    "low/r0",
+    "high/r1",
+    "high/r0",
+    "medium/r1",
+    "xhigh/r1",
+    "xhigh/r0"
+   ],
+   "ranking": [
+    "xhigh/r0",
+    "xhigh/r1",
+    "low/r1",
+    "medium/r1",
+    "medium/r0",
+    "low/r0",
+    "high/r0",
+    "high/r1"
+   ],
+   "notes": {
+    "xhigh/r0": "Closest to the concept: grey stone walls between dark wood pilasters, flat roof behind a stone parapet with a stepped false-front, a stone plinth, and a balcony with planters. It reads as a clean, finished storefront. Weak points are the plain flat roof deck and a slightly flat front.",
+    "xhigh/r1": "Nearly the same build as H with the same strengths. A small chimney and slightly muddier front detailing put it just behind H.",
+    "low/r1": "Flat roof with a stone rim and layered wood cornice and belt beams gives good horizontal depth and a busy saloon porch. The see-through voids in the upper front and the cluttered ground-floor props make it look less finished.",
+    "medium/r1": "Good half-timbered stone walls with a balcony, chimney and stepped roof crown, and the craft is solid. The pitched shingle roof makes it read as a Tudor house rather than a flat-fronted western saloon.",
+    "medium/r0": "Close to F in craft, with timber framing, a balcony and a small stone false-front. The large pitched plank roof and heavy dark front read more medieval inn than frontier saloon.",
+    "low/r0": "Similar language to B, but the roof is unresolved: part pitched, part flat with a parapet. There are see-through gaps in the front, so it looks unfinished.",
+    "high/r0": "The only build with a posted veranda holding up the balcony, the concept's signature feature, but it is poorly made: crooked posts, railing stubs floating above the deck, and a sign bar hovering over the roof.",
+    "high/r1": "Plain box with a heavy flat cornice and two tall centre pilasters. The pale glass-grey infill overwhelms the palette and there is little relief, so it reads as a generic townhouse rather than a saloon."
+   }
+  },
+  {
+   "order": [
+    "low/r1",
+    "low/r0",
+    "medium/r0",
+    "xhigh/r0",
+    "high/r0",
+    "xhigh/r1",
+    "high/r1",
+    "medium/r1"
+   ],
+   "ranking": [
+    "low/r1",
+    "low/r0",
+    "high/r0",
+    "medium/r1",
+    "medium/r0",
+    "xhigh/r0",
+    "high/r1",
+    "xhigh/r1"
+   ],
+   "notes": {
+    "low/r1": "Closest to the concept: grey stone walls between heavy dark-timber posts, a flat roof with a deep cornice, a railed balcony over a furnished porch, and a layered, finished front; it lacks the sign and the corner entry.",
+    "low/r0": "Similar character and palette to A with good post-and-beam rhythm and a railed balcony; the shallow pitched roof and the tall open voids in the elevation read slightly less finished.",
+    "high/r0": "The only build with a true posted porch and a railed gallery like the concept, which gives it good depth; the walls are muddy and dark with patchy grey, and the spiky railing tops look odd.",
+    "medium/r1": "Solid two-storey mass with a timber frame, porch, lanterns and a chimney for interest; the pitched roof and solid balcony band drift from the concept's flat-roofed, railed look.",
+    "medium/r0": "Similar to H with decent grey-stone infill and a stepped stone crown; the hipped roof and solid wooden balcony fascia make it read more like a townhouse than a saloon.",
+    "xhigh/r0": "Clean and legible, with paned windows, planters and a railed balcony, but the stone parapet, flat walls and thin porch read as a general store, with little relief.",
+    "high/r1": "Echoes E's layout but is darker and flatter, with no porch posts, dominant central pilasters and washed-out grey panels; the front lacks a clear saloon entry.",
+    "xhigh/r1": "A near-copy of D with broken, irregular window openings and a heavy shadow artifact on the front; it reads as unfinished."
+   }
+  }
+ ]
+}

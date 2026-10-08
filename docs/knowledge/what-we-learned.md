@@ -288,6 +288,28 @@ Same harness, judge pinned to Opus 4.8. [V]
 - **The categorical judge still can't separate the models.** Everything scores "strong" except Haiku-max's Taj.
 - The `v0-facade` approach silently ignored `--effort` before this sweep; it's fixed in `run.mjs`.
 
+### Sonnet 5.5 effort sweep on a new subject (old west saloon, 2026-10-08)
+
+Concept builds (concept → doc → build → revise) from one shared concept image, with the judge changed to Opus 5.5:
+a categorical grade per build, plus 3 blind shuffled rankings of all 8 builds (4 efforts × 2 rounds). [V]
+
+![saloon sweep](../../benchmarks/concept-builds/saloon-effort-sweep.png)
+
+| Effort | Cost | Time | Mean rank (r0 / r1, of 8) |
+|---|---|---|---|
+| low | $0.76 | 4 min | 4.0 / **3.0** |
+| medium | $0.90 | 6 min | 4.0 / 3.7 |
+| high | $1.12 | 8 min | 3.7 / 7.0 |
+| xhigh | $2.39 | 18 min | 5.0 / 5.7 |
+
+- **Effort isn't the lever.** xhigh cost 3× low and took 4.5× as long for no visible gain; every build got a
+  "competent" grade. Use low or default effort for Sonnet on this pipeline.
+- **The blind rankings disagreed wildly across shuffles** (xhigh r0 came 1st in one and 6th in another): the builds
+  really are about the same quality, and no judge can rank a flat field. Judging needs clearly separated builds or
+  a human glance.
+- The shared concept was the old scene-style prompt. The bigger lever is probably the reference-sheet concept
+  (see the concept bake-off).
+
 ### Why the good-looking approach is slow (from the transcripts)
 
 Measured on 014 and 027. [V]
