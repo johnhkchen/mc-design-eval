@@ -1,0 +1,37 @@
+{
+ "runId": "202610081532-grocery-store-sonnet-high",
+ "subject": "grocery-store",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-2",
+ "why": "B is closer to the reference in more ways: the chimney sits on the right, it has lanterns at the entrance, and the ground floor has real glass shop windows. Its cornice and roof edge also read cleaner and more continuous than A's brown parapet roof, though A's striped awnings are fuller.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 1.2350674000000001,
+ "durationMs": 363066,
+ "stages": [
+  {
+   "n": "concept",
+   "s": 15,
+   "model": "gemini-nano-banana-2.1"
+  },
+  {
+   "n": "spec",
+   "s": 79
+  },
+  {
+   "n": "agentic build",
+   "s": 351,
+   "turns": 19,
+   "cost": 0.7948396000000001
+  },
+  {
+   "n": "keep-better",
+   "s": 363,
+   "kept": "round-2",
+   "why": "B is closer to the reference in more ways: the chimney sits on the right, it has lanterns at the entrance, and the ground floor has real glass shop windows. Its cornice and roof edge also read cleaner and more continuous than A's brown parapet roof, though A's striped awnings are fuller."
+  }
+ ]
+}

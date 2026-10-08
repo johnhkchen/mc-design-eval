@@ -1,0 +1,37 @@
+{
+ "runId": "202610081532-taj-mahal-sonnet-high",
+ "subject": "taj-mahal",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-2",
+ "why": "The two builds are almost identical, but B adds a gold ornament on the dome's face and a raised rim along the edge of the platform, so it matches the reference's ornate dome and bordered base a little more closely.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 1.3938398,
+ "durationMs": 364128,
+ "stages": [
+  {
+   "n": "concept",
+   "s": 18,
+   "model": "gemini-nano-banana-2.1"
+  },
+  {
+   "n": "spec",
+   "s": 79
+  },
+  {
+   "n": "agentic build",
+   "s": 353,
+   "turns": 29,
+   "cost": 0.9673320000000001
+  },
+  {
+   "n": "keep-better",
+   "s": 364,
+   "kept": "round-2",
+   "why": "The two builds are almost identical, but B adds a gold ornament on the dome's face and a raised rim along the edge of the platform, so it matches the reference's ornate dome and bordered base a little more closely."
+  }
+ ]
+}

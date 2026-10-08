@@ -1,0 +1,23 @@
+Both rounds are saved, `round-1.nbt` and `round-2.nbt`, but neither is a close match to the concept, and the rear stepping is still not fixed. `build.mjs` generates both (`node build.mjs 1|2`), and the renders are in `r1-tiles/` and `r2-tiles/`.
+
+- **Built:** the symmetric 22×20×16 hall from spec.md, with the MATERIAL MAP block ids used as written.
+  - Front: end piers, wings with recessed glass and gold rosettes, a navy and sand fin pylon with a recessed 4×4 stained-glass window, a gold sunburst, and an open-arch spire.
+  - Entrance: double dark oak doors, birch door piers, and a gold-crowned marquee projecting 3 blocks.
+  - Rear and sides: three rear terraces and pilastered side walls.
+- **Mismatches found in round 1:**
+  - The rear mass reads as one flat sand slab with only 1-block steps.
+  - The marquee's bottom border ran full width as a terracotta stripe, where the concept has 2-tall white sign panels.
+  - The pylon is heavier and boxier than the concept's slender one.
+  - Stained glass is muted, the wing crest is small, and the side-wall slits clash with the lower tier heights.
+- **Fixed in round 2:**
+  - Terrace tops now drop 8, 6, 5 instead of 8, 7, 6.
+  - The marquee has white panels with terracotta only on its end borders.
+  - The side slits and cornice follow each tier's height.
+  - I removed a stray white strip above the rear lip.
+- **Still wrong in round 2:**
+  - The terrace risers face the rear, so from the front-left angle the roof still looks flat.
+  - The wing shoulders don't step up toward the pylon as in the concept.
+  - The window mullion cross is only a 2×2 centre.
+  - The crown is two tiers where the concept has a stepped fan.
+- **Better round:** round 2, but only slightly. It has fewer visible errors and a more readable marquee, and the front elevation is nearly the same as round 1.
+- **Check:** the walkability check reports "walkable end to end: false" on round 2, so the interior isn't reachable as built. I didn't investigate it.

@@ -1,0 +1,37 @@
+{
+ "runId": "202610081532-dance-hall-sonnet-high",
+ "subject": "dance-hall",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-2",
+ "why": "B's side bays have stained-glass windows with framed orange trim, which matches the reference's decorated wing windows more closely; A's wings are flat gray panels, and otherwise the two builds share the same massing, flat roof and central marquee.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 1.3260334,
+ "durationMs": 330784,
+ "stages": [
+  {
+   "n": "concept",
+   "s": 18,
+   "model": "gemini-nano-banana-2.1"
+  },
+  {
+   "n": "spec",
+   "s": 66
+  },
+  {
+   "n": "agentic build",
+   "s": 324,
+   "turns": 24,
+   "cost": 0.9174356
+  },
+  {
+   "n": "keep-better",
+   "s": 331,
+   "kept": "round-2",
+   "why": "B's side bays have stained-glass windows with framed orange trim, which matches the reference's decorated wing windows more closely; A's wings are flat gray panels, and otherwise the two builds share the same massing, flat roof and central marquee."
+  }
+ ]
+}

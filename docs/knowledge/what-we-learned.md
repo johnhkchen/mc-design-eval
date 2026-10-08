@@ -355,6 +355,24 @@ classic camera, classic judge (Opus 4.8). [V]
 - **The plugin's agentic, code-authored path was the closest match and the cheapest and fastest.** That is the best
   evidence yet that the plugin's method is the right default.
 
+### Gauntlet: the combined pipeline on a grocery store, the Taj Mahal and a dance hall (2026-10-08)
+
+The combined pipeline (`benchmarks/gauntlet/run.mjs`) on Sonnet 5.5, high effort, with the three subjects run in
+parallel, about 6 min and $1.24–1.39 each: [V]
+1. a Nano Banana 2.1 reference sheet;
+2. a spec measured off the sheet, with an exact **material map**;
+3. the plugin's agentic code-authored build, two rounds, each with a matched-view self-critique;
+4. an external Opus 5.5 keep-the-better pick.
+
+![gauntlet](../../benchmarks/gauntlet/gauntlet.png)
+
+- **The grocery store is a clear success.** Facade-led buildings now work, and the material map makes the materials match.
+- **The Taj Mahal is recognisable but rough.** The dome is faceted and too small, and the walls read grey, not marble.
+  **The dance hall is the weakest.** The vertical fins and stepped deco massing are missing; the agent said so itself.
+- **The new limit is complex 3D form:** curved domes, setbacks, fin rhythm. Per-block authoring approximates them.
+  Next: parametric shape brushes in the build library (domes from a profile, setbacks, cylinders and tapers),
+  more rounds aimed at massing for complex subjects, and Opus for the hard ones.
+
 ### Why the good-looking approach is slow (from the transcripts)
 
 Measured on 014 and 027. [V]
