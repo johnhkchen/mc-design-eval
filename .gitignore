@@ -17,7 +17,9 @@ baml_client/
 benchmarks/temple-facade/runs/
 
 # Stage-1 concept-art outputs (E-09) — reproducible, local-only
-benchmarks/temple-facade/concepts/
+benchmarks/temple-facade/concepts/*
+!benchmarks/temple-facade/concepts/arc-A-flash.png
+!benchmarks/temple-facade/concepts/chapelle-A-flash.png
 
 # TRELLIS GLB binaries (E-09 stage-2) — ~5 MB each, regenerable from concept.png via
 # benchmarks/sculpture/trellis-glb.mjs; the durable record is glb/README.md (the manifest).
@@ -187,3 +189,16 @@ benchmarks/sculpture/generated/**/*.png
 # Workshop loop renders (T-126-01) — evidence only, regen via `npm run workshop:fixture`; the
 # durable record is the committed ledger + final artifact (json/md, pin-guarded).
 benchmarks/sculpture/workshop/**/*.png
+
+# Corpus fixture INPUTS (E-55 S-212 style corpus + defect corpus) — the human ranking was made on
+# THESE exact renders, so they are committed inputs, not regenerable outputs (a re-render need not be
+# byte-identical and would silently detach the ratings). Guarded by DC6/SC4; keep in sync with
+# experiments/eval-alignment/corpus/{style,defect}-corpus.json. Un-ignored so a fresh clone passes npm test.
+!builds/barn/new-roof/view-*.png
+!builds/barn/round-1/view-*.png
+!builds/barn/roof-covering/view-*.png
+!builds/cottage/new-roof/view-*.png
+!builds/cottage/roof-covering/view-*.png
+!builds/gatehouse/faithful-covered/view-*.png
+!builds/gatehouse/faithful-covered-mid/view-*.png
+!builds/gatehouse/new-roof/view-*.png
