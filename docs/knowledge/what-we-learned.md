@@ -310,6 +310,28 @@ a categorical grade per build, plus 3 blind shuffled rankings of all 8 builds (4
 - The shared concept was the old scene-style prompt. The bigger lever is probably the reference-sheet concept
   (see the concept bake-off).
 
+### Nether temple: the reference-sheet concept + Sonnet low/medium/high + Opus high (2026-10-08)
+
+Same pipeline and Opus 5.5 judge as the saloon sweep, but the shared concept is a **Nano Banana 2.1 builder's
+reference sheet**. [V]
+
+![nether temple sweep](../../benchmarks/concept-builds/nether-temple-sweep.png)
+
+| Builder | Cost | Time | Mean blind rank (r0 / r1, of 8) |
+|---|---|---|---|
+| Sonnet low | $0.81 | 5 min | 8.0 / 4.7 |
+| Sonnet medium | $1.41 | 9 min | 5.7 / 6.0 |
+| Sonnet high | $1.23 | 13 min | 4.3 / **1.7** |
+| Opus high | $3.89 | 17 min | 4.3 / **1.3** |
+
+- **The concept is the biggest lever.** Every build is recognisably the concept (a stepped blackstone temple, lava
+  moat, soul-fire pillars, gold, spire). In the saloon sweep they were generic boxes.
+- **Effort pays only with a clear target.** On the vague saloon concept it did nothing; here Sonnet high clearly beat
+  low and medium.
+- **The judge separates real differences.** All 3 shuffled rankings put Opus-high r1 and Sonnet-high r1 first and
+  second and Sonnet-low r0 last. The saloon scatter meant "these are equal".
+- **Revise helped the high-effort runs** (r1 > r0). **Sonnet high is the value pick:** near Opus at ⅓ the cost.
+
 ### Why the good-looking approach is slow (from the transcripts)
 
 Measured on 014 and 027. [V]

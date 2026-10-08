@@ -41,12 +41,13 @@ for (const r of runs) {
     execFileSync("node", [MCD, "render", nbt, "--front", "n", "--out", join(dir, `round-${round}-sheet.png`), "--tiles", tiles], { stdio: ["ignore", "ignore", "ignore"] });
     const composite = join(dir, `round-${round}-judge.png`);
     execFileSync("magick", [join(tiles, "street.png"), "(", join(tiles, "front-left.png"), "-resize", "x350", ")", "(", join(tiles, "front-elevation.png"), "-resize", "x350", ")", "+append", composite]);
-    builds.push({ run: r, effort: summary.effort, round, composite, costUsd: summary.costUsd, durationMs: summary.durationMs, tokensOut: summary.tokensOut });
+    const label = `${(summary.model || "").replace(/^claude-/, "").replace(/-\d.*$/, "")}-${summary.effort ?? "default"}`;
+    builds.push({ run: r, effort: label, model: summary.model, round, composite, costUsd: summary.costUsd, durationMs: summary.durationMs, tokensOut: summary.tokensOut });
   }
 }
 const concept = readdirSync(join(HERE, "runs", runs[0])).find((f) => f.startsWith("concept."));
 const conceptImg = { data: readFileSync(join(HERE, "runs", runs[0], concept)), mediaType: concept.endsWith(".jpg") ? "image/jpeg" : "image/png" };
-const brief = "An old west saloon on a frontier main street: tall false front with a sign, swinging doors, covered boardwalk porch, balcony with railings, weathered timber — a skilled-builder Minecraft build matching its concept art.";
+const brief = arg("--brief", "A skilled-builder Minecraft build matching its concept art (image 1 in rankings).");
 
 // (1) categorical grade per build
 process.env.MC_JUDGE_MODEL_ID = JUDGE;
@@ -67,7 +68,7 @@ for (let s = 0; s < shuffles; s++) {
     `labelled in order ${letters.slice(0, order.length).split("").join(", ")} (image 2 = A, image 3 = B, ...). Each build image shows a`,
     "street view at eye height, a front-corner view, and the front elevation.",
     "Rank ALL builds from best to worst as a skilled human builder would judge them: fidelity to the concept's character,",
-    "massing and roofline, depth and relief, detail craft, palette, and whether it reads as a finished saloon from the street.",
+    "massing and roofline, depth and relief, detail craft, palette, and whether it reads as the finished building the concept shows.",
     "Be decisive; no ties. Reply with ONLY JSON: {\"ranking\": [\"letters best to worst\"], \"notes\": {\"A\": \"one line\", ...}}",
   ].join(" ");
   const { text } = await requestTextWithImage({ prompt, images: [conceptImg, ...order.map((b) => ({ data: readFileSync(b.composite), mediaType: "image/png" }))], model: JUDGE });

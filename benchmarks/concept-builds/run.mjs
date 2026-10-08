@@ -69,6 +69,12 @@ const SUBJECTS = {
       "sign, swinging doors, a covered boardwalk porch on posts, a second-floor balcony with railings, hitching rails, " +
       "weathered timber. The liveliest building on the street.",
   },
+  "nether-temple": {
+    size: "about 21 wide × 21 deep, 3 stepped tiers plus a central spire (about 24 tall), on a platform over lava",
+    brief: "A nether temple: a stepped blackstone ziggurat shrine in the Nether, approached by a grand stair over a lava " +
+      "moat, flanked by basalt pillars with soul-fire braziers, gilded blackstone and gold trim, crimson and warped " +
+      "accents, a central spire, carved polished-blackstone friezes, chains and lanterns. Ominous, ceremonial, crafted.",
+  },
   "townhouse-row": {
     size: "three attached townhouses, each 6–7 wide (about 20 wide in total) × 10 deep, three storeys plus roof",
     brief: "A row of three narrow attached townhouses on a canal-side street: varied but clearly belonging " +
@@ -151,7 +157,8 @@ async function main() {
   const s = SUBJECTS[key];
   if (!s) throw new Error(`--subject one of ${Object.keys(SUBJECTS).join(", ")}`);
   const pm = "concept-build-free.v0";
-  const runId = `${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "")}-${key}${effort ? `-effort-${effort}` : ""}`;
+  const modelTag = PHASE1_MODEL_ID.replace(/^claude-/, "").replace(/-\d.*$/, "");     // opus / sonnet / haiku
+  const runId = `${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "")}-${key}-${modelTag}${effort ? `-effort-${effort}` : ""}`;
   const dir = join(HERE, "runs", runId);
   mkdirSync(dir, { recursive: true });
   const t0 = Date.now(), usage = { out: 0, cost: 0 }, stages = [];

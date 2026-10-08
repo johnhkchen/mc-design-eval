@@ -1,0 +1,248 @@
+{
+ "judge": "claude-opus-5-5",
+ "shuffles": 3,
+ "builds": [
+  {
+   "run": "202610081431-nether-temple-opus-effort-high",
+   "effort": "opus-high",
+   "model": "claude-opus-5-5",
+   "round": 1,
+   "costUsd": 3.8913766,
+   "durationMs": 1026165,
+   "tokensOut": 115920,
+   "grade": {
+    "overall": "competent",
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong"
+   },
+   "meanRank": 1.3333333333333333,
+   "composite": "runs/202610081431-nether-temple-opus-effort-high/round-1-judge.png"
+  },
+  {
+   "run": "202610081431-nether-temple-sonnet-effort-high",
+   "effort": "sonnet-high",
+   "model": "claude-sonnet-5-5",
+   "round": 1,
+   "costUsd": 1.234472,
+   "durationMs": 806524,
+   "tokensOut": 80910,
+   "grade": {
+    "overall": "competent",
+    "proportion": "competent",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong"
+   },
+   "meanRank": 1.6666666666666667,
+   "composite": "runs/202610081431-nether-temple-sonnet-effort-high/round-1-judge.png"
+  },
+  {
+   "run": "202610081431-nether-temple-opus-effort-high",
+   "effort": "opus-high",
+   "model": "claude-opus-5-5",
+   "round": 0,
+   "costUsd": 3.8913766,
+   "durationMs": 1026165,
+   "tokensOut": 115920,
+   "grade": {
+    "overall": "competent",
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong"
+   },
+   "meanRank": 4.333333333333333,
+   "composite": "runs/202610081431-nether-temple-opus-effort-high/round-0-judge.png"
+  },
+  {
+   "run": "202610081431-nether-temple-sonnet-effort-high",
+   "effort": "sonnet-high",
+   "model": "claude-sonnet-5-5",
+   "round": 0,
+   "costUsd": 1.234472,
+   "durationMs": 806524,
+   "tokensOut": 80910,
+   "grade": {
+    "overall": "competent",
+    "proportion": "competent",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong"
+   },
+   "meanRank": 4.333333333333333,
+   "composite": "runs/202610081431-nether-temple-sonnet-effort-high/round-0-judge.png"
+  },
+  {
+   "run": "202610081431-nether-temple-sonnet-effort-low",
+   "effort": "sonnet-low",
+   "model": "claude-sonnet-5-5",
+   "round": 1,
+   "costUsd": 0.812828,
+   "durationMs": 272260,
+   "tokensOut": 38724,
+   "grade": {
+    "overall": "competent",
+    "proportion": "competent",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "competent"
+   },
+   "meanRank": 4.666666666666667,
+   "composite": "runs/202610081431-nether-temple-sonnet-effort-low/round-1-judge.png"
+  },
+  {
+   "run": "202610081431-nether-temple-sonnet-effort-medium",
+   "effort": "sonnet-medium",
+   "model": "claude-sonnet-5-5",
+   "round": 0,
+   "costUsd": 1.4064174,
+   "durationMs": 526927,
+   "tokensOut": 78806,
+   "grade": {
+    "overall": "competent",
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong"
+   },
+   "meanRank": 5.666666666666667,
+   "composite": "runs/202610081431-nether-temple-sonnet-effort-medium/round-0-judge.png"
+  },
+  {
+   "run": "202610081431-nether-temple-sonnet-effort-medium",
+   "effort": "sonnet-medium",
+   "model": "claude-sonnet-5-5",
+   "round": 1,
+   "costUsd": 1.4064174,
+   "durationMs": 526927,
+   "tokensOut": 78806,
+   "grade": {
+    "overall": "competent",
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "competent"
+   },
+   "meanRank": 6,
+   "composite": "runs/202610081431-nether-temple-sonnet-effort-medium/round-1-judge.png"
+  },
+  {
+   "run": "202610081431-nether-temple-sonnet-effort-low",
+   "effort": "sonnet-low",
+   "model": "claude-sonnet-5-5",
+   "round": 0,
+   "costUsd": 0.812828,
+   "durationMs": 272260,
+   "tokensOut": 38724,
+   "grade": {
+    "overall": "competent",
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "competent"
+   },
+   "meanRank": 8,
+   "composite": "runs/202610081431-nether-temple-sonnet-effort-low/round-0-judge.png"
+  }
+ ],
+ "rankings": [
+  {
+   "order": [
+    "sonnet-medium/r1",
+    "opus-high/r1",
+    "sonnet-low/r0",
+    "sonnet-medium/r0",
+    "sonnet-low/r1",
+    "opus-high/r0",
+    "sonnet-high/r0",
+    "sonnet-high/r1"
+   ],
+   "ranking": [
+    "sonnet-high/r1",
+    "opus-high/r1",
+    "sonnet-high/r0",
+    "sonnet-low/r1",
+    "sonnet-medium/r1",
+    "sonnet-medium/r0",
+    "opus-high/r0",
+    "sonnet-low/r0"
+   ],
+   "notes": {
+    "sonnet-high/r1": "Closest to the concept overall: a stepped plinth with a lava moat, a gray colonnade, a gold-framed central portal, red under the eaves, hanging chain lanterns and soul-fire pillars; the pyramid roof is thinner and less tiered than the concept's broad hipped roof.",
+    "opus-high/r1": "Strong concept character with a gold-trimmed broad roof, gold corner caps, soul-fire pillars in front of a stepped plinth and red infill; the gold cross on the facade is heavier than the concept's framing, and the lava border is thin.",
+    "sonnet-high/r0": "Same strong plinth, colonnade and lava moat as H with a good gold eave band and a teal/gold spire; the facade is plainer, without the concept's gold portal framing, and the floating soul lanterns off to the sides look stray.",
+    "sonnet-low/r1": "Clean tiered roof with overhangs, a gold-framed door, soul-fire pillars and a lava border; it reads as a pagoda rather than the concept's broad temple roof, and gold is sparse.",
+    "sonnet-medium/r1": "A well-layered three-tier roof with good eaves and a lava border, but almost no gold trim and the soul fire is set into the facade, so it lacks the concept's columned richness.",
+    "sonnet-medium/r0": "Decent tiered massing and lava, with the soul braziers moved up onto a roof tier; little gold, a flat facade and weak portal emphasis.",
+    "opus-high/r0": "Gold edging on every edge turns garish and noisy; the massing is narrow and tall without the concept's broad roof spread, though the plinth and pillars are present.",
+    "sonnet-low/r0": "A boxy stepped ziggurat with flat walls and no overhanging eaves; the palette is right, but the roofline and depth miss the concept's character."
+   }
+  },
+  {
+   "order": [
+    "opus-high/r0",
+    "sonnet-medium/r1",
+    "opus-high/r1",
+    "sonnet-high/r0",
+    "sonnet-medium/r0",
+    "sonnet-high/r1",
+    "sonnet-low/r1",
+    "sonnet-low/r0"
+   ],
+   "ranking": [
+    "opus-high/r1",
+    "sonnet-high/r1",
+    "opus-high/r0",
+    "sonnet-low/r1",
+    "sonnet-high/r0",
+    "sonnet-medium/r1",
+    "sonnet-medium/r0",
+    "sonnet-low/r0"
+   ],
+   "notes": {
+    "opus-high/r1": "Closest overall: hipped main roof with a stepped upper tier, gold-framed central door and eaves, gray soul-lamp pillars, chained lanterns and a stepped plinth with a lava edge. The gold cross on the gable is heavier than in the concept.",
+    "sonnet-high/r1": "Strong plinth, lava moat, wide stair and soul-lamp pillar colonnade. The gold door frame and red frieze read well, but the plain stepped-pyramid roof has none of the broad flared hip the concept shows.",
+    "opus-high/r0": "Rich palette and gold trim, with pillars, soul fire and red infill all present. The massing is too tall and narrow, like a tower, and the gold is scattered and busy rather than framing the facade.",
+    "sonnet-low/r1": "Clean three-tier roof, gold-framed door, pillar lamps and lanterns on a lava-rimmed base. The roof tiers are boxy slabs and there's too little gold and red to carry the concept's ornament.",
+    "sonnet-high/r0": "Faithful platform: stepped plinth, moat, stair and lamp pillars. The temple itself is a small colonnade under a flat pyramid with one crude gold ring, so it reads unfinished next to the concept.",
+    "sonnet-medium/r1": "Good broad hipped eaves in a three-tier pagoda roofline over a lava base. Almost no gold, the soul fire is pushed into the windows instead of onto pillars, and there's no grand stair, so it loses the concept's character.",
+    "sonnet-medium/r0": "Tiered roof massing on a lava plinth with some soul lamps. The gold is token, the facade is flat with little relief, and the lamps float off the roof edges awkwardly.",
+    "sonnet-low/r0": "Heavy stepped ziggurat with crenellated-looking walls and almost no eave overhang. It reads as a fortress, not the ornate temple, though the palette and pillars are present."
+   }
+  },
+  {
+   "order": [
+    "sonnet-high/r1",
+    "opus-high/r0",
+    "sonnet-low/r1",
+    "sonnet-medium/r1",
+    "sonnet-high/r0",
+    "sonnet-low/r0",
+    "opus-high/r1",
+    "sonnet-medium/r0"
+   ],
+   "ranking": [
+    "opus-high/r1",
+    "sonnet-high/r1",
+    "opus-high/r0",
+    "sonnet-medium/r0",
+    "sonnet-high/r0",
+    "sonnet-low/r1",
+    "sonnet-medium/r1",
+    "sonnet-low/r0"
+   ],
+   "notes": {
+    "opus-high/r1": "Best match to the concept's character: gold frames the central portal, the roof has gold-capped corners, lanterns hang on chains, and the stepped plinth carries basalt soul-fire posts. The gold cross on the front is a bit heavy, and the roof overhang is shallower than the concept's.",
+    "sonnet-high/r1": "Massing and front elevation are faithful: a wide stepped plinth with a lava border, a basalt colonnade, soul-fire posts and a spire with a teal and gold crown. The roof is thin with little overhang, and the plain gold stripes in the doorway lack craft.",
+    "opus-high/r0": "Rich gold trim and a layered crown come close to the concept's ornament. The gold is scattered too widely, the hipped roof barely overhangs, the lava border is a sliver, and the outline is busy.",
+    "sonnet-medium/r0": "The tiered roofs have real eaves, and the lava apron and soul-fire accents are good. It reads more as a pagoda than the concept's broad hipped temple, and gold is almost missing below the crown.",
+    "sonnet-high/r0": "The plinth, colonnade, posts and lava match the concept well. A flat gold ring around the roof is not in the concept, the lanterns float, and the facade depth is shallow.",
+    "sonnet-low/r1": "A clean three-tier massing with a lava base and a gold-framed entry. It lacks the gold-trimmed colonnade and the ornate crown, so it reads as a generic dark pagoda.",
+    "sonnet-medium/r1": "The stacked roofs show competent depth, and the soul fire in the windows is a nice touch. There is very little gold, the posts are weak, and the plinth is shallow, so it drifts from the concept.",
+    "sonnet-low/r0": "A crenellated ziggurat with flat stepped walls and almost no overhang or relief. The roofline is wrong for the concept, and only a few gold accents survive."
+   }
+  }
+ ]
+}

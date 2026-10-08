@@ -1,0 +1,30 @@
+{
+ "runId": "202610081431-nether-temple-sonnet-effort-medium",
+ "subject": "nether-temple",
+ "model": "claude-sonnet-5-5",
+ "effort": "medium",
+ "conceptShared": true,
+ "tokensOut": 78806,
+ "costUsd": 1.4064174,
+ "durationMs": 526927,
+ "stages": [
+  {
+   "n": "concept (shared)",
+   "s": 0
+  },
+  {
+   "n": "doc",
+   "s": 18
+  },
+  {
+   "n": "build",
+   "s": 301,
+   "ops": 275
+  },
+  {
+   "n": "revise",
+   "s": 526,
+   "ops": 232
+  }
+ ]
+}
