@@ -31,6 +31,38 @@ const SUBJECTS = {
       "part-picking machine, with a big window or open bay where passers-by can watch it work, an operator's " +
       "office, chimneys or vents, signage. Workshop, not factory — proud of its machine.",
   },
+  "shophouse-contract": {
+    size: "exactly 12 wide × 12 deep, two storeys (eave at y = 9), roof ridge no higher than y = 13",
+    brief: "A shophouse on a busy market street: three small open-fronted shop stalls on the ground floor, the " +
+      "owners' home above. Charming, crafted, lived-in. It must work as the town's redstone shop: the stalls and " +
+      "the machinery space behind them are fixed (see the contract) — design the building AROUND them.",
+    contract: [
+      "## Geometry and FUNCTION CONTRACT (hard — this building houses real redstone)",
+      "- Footprint exactly 12 × 12: local x = 0..11 along the street, z = 0..11 from the STREET FRONT (z = 0, facing",
+      "  −z) to the back. y = 0 is the ground slab at street level. Nothing outside 0 ≤ x ≤ 11, 0 ≤ z ≤ 11.",
+      "- Ground storey y 1–4 is the machine's. Plan (x →, z ↓), legend below:",
+      "    z0  W...W...W...",
+      "    z1  W...W...W...",
+      "    z2  WHHHW.H.WHHH",
+      "    z3–z8 WRRRWRRRWRRR",
+      "    z9  .BBBWRRRWBBB",
+      "    z10 ....WRRRW...",
+      "    z11 ....WRRRW...",
+      "  W = stall walls: white_concrete, x = 0, 4, 8, y 1–4 (placed for you; do not change them).",
+      "  B = stall backs: light_gray_stained_glass, y 1–4 (placed for you).",
+      "  R = the redstone space, y 1–4: place NOTHING there — machinery fills it later.",
+      "  H = hoppers in the floor slab (y = 0): place nothing at y 0–4 on those cells.",
+      "  '.' at z 0–1 = the three open stall fronts / counters (x 1–3, 5–7, 9–11): keep them OPEN, y 1–4.",
+      "  You may design freely: the ground-storey cells NOT listed (e.g. x 0–3 and 9–11 at z 10–11, the x = 11",
+      "  edge... wherever the plan shows '.' outside the stall fronts), everything from y = 5 up, the roof.",
+      "- Street clearance: nothing at z < 0 below y = 10 (the street needs 2 clear cells up to the eave). Every",
+      "  street-facing cell of the front wall from y = 5 to the eave must be a block (windows = glass panes) — no",
+      "  holes; depth on the upper front comes from the wall plane's own detail, not recesses of air.",
+      "- Upper floor at y = 5; living quarters y 6–8; eave at y = 9; ridge ≤ 13.",
+      "- Both side walls show above lower neighbours from about y = 5 up — finish them. The back faces a yard.",
+      "- Use Minecraft 1.20.1 block ids. Every directional block needs its `state`.",
+    ].join("\n"),
+  },
   "townhouse-row": {
     size: "three attached townhouses, each 6–7 wide (about 20 wide in total) × 10 deep, three storeys plus roof",
     brief: "A row of three narrow attached townhouses on a canal-side street: varied but clearly belonging " +
@@ -39,7 +71,7 @@ const SUBJECTS = {
   },
 };
 
-const ENVELOPE = (s) => [
+const ENVELOPE = (s) => s.contract ? s.contract : [
   "## Geometry",
   `- Size: ${s.size}. The main street front faces −z (toward the viewer at the street); local z = 0 is the street`,
   "  front, z grows toward the back. x runs along the street. y = 0 is the ground slab at street level.",
