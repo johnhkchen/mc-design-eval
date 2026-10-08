@@ -63,6 +63,12 @@ const SUBJECTS = {
       "- Use Minecraft 1.20.1 block ids. Every directional block needs its `state`.",
     ].join("\n"),
   },
+  "old-west-saloon": {
+    size: "about 14 wide (along the main street) × 16 deep, two storeys plus a tall false front, a boardwalk in front",
+    brief: "An old west saloon on the dusty main street of a frontier town: a tall false-front facade with a painted " +
+      "sign, swinging doors, a covered boardwalk porch on posts, a second-floor balcony with railings, hitching rails, " +
+      "weathered timber. The liveliest building on the street.",
+  },
   "townhouse-row": {
     size: "three attached townhouses, each 6–7 wide (about 20 wide in total) × 10 deep, three storeys plus roof",
     brief: "A row of three narrow attached townhouses on a canal-side street: varied but clearly belonging " +
@@ -138,11 +144,14 @@ const revisePrompt = (s, runId, pm, doc) => [
 ].join("\n");
 
 async function main() {
-  const key = process.argv[process.argv.indexOf("--subject") + 1];
+  const arg = (k) => (process.argv.includes(k) ? process.argv[process.argv.indexOf(k) + 1] : undefined);
+  const key = arg("--subject");
+  const effort = arg("--effort");                 // low | medium | high | xhigh | max (claude -p --effort)
+  const conceptIn = arg("--concept");             // reuse one concept image across runs (fair comparisons)
   const s = SUBJECTS[key];
   if (!s) throw new Error(`--subject one of ${Object.keys(SUBJECTS).join(", ")}`);
   const pm = "concept-build-free.v0";
-  const runId = `${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "")}-${key}`;
+  const runId = `${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "")}-${key}${effort ? `-effort-${effort}` : ""}`;
   const dir = join(HERE, "runs", runId);
   mkdirSync(dir, { recursive: true });
   const t0 = Date.now(), usage = { out: 0, cost: 0 }, stages = [];
@@ -151,14 +160,22 @@ async function main() {
   const { renderArtifact } = await import("../../render/src/render-tool.mjs");
   const views = { fl: { azimuthDeg: 225, elevationDeg: 20 }, fr: { azimuthDeg: 135, elevationDeg: 20 } };
 
-  const img = await generateImage({ prompt: conceptPrompt(s) });
-  const cpath = join(dir, img.mediaType === "image/jpeg" ? "concept.jpg" : "concept.png");
-  writeFileSync(cpath, Buffer.from(img.base64, "base64"));
-  const ref = { data: readFileSync(cpath), mediaType: img.mediaType };
-  mark("concept");
-  const dd = await requestTextWithImage({ prompt: designDocPrompt(s), images: [ref], model: PHASE1_MODEL_ID });
+  let ref;
+  if (conceptIn) {
+    const mt = /\.jpe?g$/i.test(conceptIn) ? "image/jpeg" : "image/png";
+    writeFileSync(join(dir, mt === "image/jpeg" ? "concept.jpg" : "concept.png"), readFileSync(conceptIn));
+    ref = { data: readFileSync(conceptIn), mediaType: mt };
+    mark("concept (shared)");
+  } else {
+    const img = await generateImage({ prompt: conceptPrompt(s) });
+    const cpath = join(dir, img.mediaType === "image/jpeg" ? "concept.jpg" : "concept.png");
+    writeFileSync(cpath, Buffer.from(img.base64, "base64"));
+    ref = { data: readFileSync(cpath), mediaType: img.mediaType };
+    mark("concept");
+  }
+  const dd = await requestTextWithImage({ prompt: designDocPrompt(s), images: [ref], model: PHASE1_MODEL_ID, effort });
   acc(dd.raw); writeFileSync(join(dir, "design-doc.md"), dd.text + "\n"); mark("doc");
-  let res = await requestDesignArtifact({ prompt: buildPrompt(s, runId, pm, dd.text), model: PHASE1_MODEL_ID });
+  let res = await requestDesignArtifact({ prompt: buildPrompt(s, runId, pm, dd.text), model: PHASE1_MODEL_ID, effort });
   acc(res.raw); writeFileSync(join(dir, "round-0.artifact.json"), JSON.stringify(res.artifact) + "\n");
   mark("build", { ops: res.artifact.placements?.length });
   for (const [k, v] of Object.entries(views)) await renderArtifact(res.artifact, { outPath: join(dir, `round-0-${k}.png`), view: v });
@@ -166,11 +183,12 @@ async function main() {
     prompt: revisePrompt(s, runId, pm, dd.text),
     images: [ref, readFileSync(join(dir, "round-0-fl.png")), readFileSync(join(dir, "round-0-fr.png"))],
     model: PHASE1_MODEL_ID,
+    effort,
   });
   acc(res.raw); writeFileSync(join(dir, "round-1.artifact.json"), JSON.stringify(res.artifact) + "\n");
   mark("revise", { ops: res.artifact.placements?.length });
   for (const [k, v] of Object.entries(views)) await renderArtifact(res.artifact, { outPath: join(dir, `round-1-${k}.png`), view: v });
-  writeFileSync(join(dir, "summary.json"), JSON.stringify({ runId, subject: key, model: PHASE1_MODEL_ID, tokensOut: usage.out, costUsd: usage.cost, durationMs: Date.now() - t0, stages }, null, 1) + "\n");
+  writeFileSync(join(dir, "summary.json"), JSON.stringify({ runId, subject: key, model: PHASE1_MODEL_ID, effort: effort ?? null, conceptShared: !!conceptIn, tokensOut: usage.out, costUsd: usage.cost, durationMs: Date.now() - t0, stages }, null, 1) + "\n");
   console.log(`[${key}] done: $${usage.cost.toFixed(2)}, ${Math.round((Date.now() - t0) / 1000)}s`);
 }
 

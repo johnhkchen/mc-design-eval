@@ -202,3 +202,7 @@ benchmarks/sculpture/workshop/**/*.png
 !builds/gatehouse/faithful-covered/view-*.png
 !builds/gatehouse/faithful-covered-mid/view-*.png
 !builds/gatehouse/new-roof/view-*.png
+
+# concept bake-off raw model outputs (composites in */sheet.png are committed)
+benchmarks/concept-builds/concept-bakeoff/*/*.jpg
+benchmarks/concept-builds/concept-bakeoff/*.jpg
