@@ -246,6 +246,25 @@ Same prompts, same references, same harness as June. Only the builder model chan
 - **Most important for the new direction:** the *plain one-shot* improved the most. A strong base model
   plus good prompt discipline gets most of the way without a heavy pipeline.
 
+### Haiku 5.5 on the same benchmark (2026-10-08)
+
+Same harness, judge still pinned to Opus 4.8. [V]
+
+![June / Opus 5.5 / Haiku 5.5](assets/facade-haiku-55.png)
+
+| Run | Time | Cost | Blocks | Judge (overall / detail) | Glance |
+|---|---|---|---|---|---|
+| 030 v0 | 165 s | **$0.019** | 2,639 | strong / competent | Competitive: coherent and colourful, cleaner than June's 001, less refined than Opus 5.5's 028 |
+| 031 Taj | 542 s | **$0.061** | 2,819 | strong / competent | Behind: low, wide and sparse, thin relief. Opus built 10–23k blocks |
+| 032 Arc | 412 s | **$0.058** | 2,312 | strong / competent | Weakest: a chunky gateway with crude, garish motifs |
+
+- **Haiku 5.5 is 40–55× cheaper.** It holds up on short, simple tasks but **scales down** the long,
+  reference-grounded high-res ones: it ignored "build big" and lost detail.
+- The judge still says "strong" for everything; it can't separate these.
+- **The plugin end-to-end test on Haiku** (`minecraft-design`, same hallway prompt): 5 min 2 s, **$0.044**, 0 function
+  violations. It produced a sensible rock-cut mine identity, rougher than Opus 5.5 ($0.86): a busy mossy floor,
+  leftover torches, a single round. A cheap decorator is viable for iterating; Opus for the final pass.
+
 ### Why the good-looking approach is slow (from the transcripts)
 
 Measured on 014 and 027. [V]

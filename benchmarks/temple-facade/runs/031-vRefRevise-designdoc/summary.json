@@ -1,0 +1,62 @@
+{
+  "seq": 31,
+  "runId": "031-vRefRevise-designdoc",
+  "date": "2026-10-08",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-haiku-5-5",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "persona": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 2819,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      40,
+      24,
+      4
+    ]
+  },
+  "tokensIn": 6,
+  "tokensOut": 78810,
+  "costUsd": 0.06055961,
+  "durationMs": 542006,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A confident, symmetrical temple front with a clear base→middle→crown reading: a terracotta-and-white arcaded body, a dominant blue central dome flanked by stepped minaret-towers with gold finials, and a disciplined bay rhythm of recessed white windows framing a taller central portal. Proportion is deliberate — the stepped silhouette from outer towers inward to the dome feels intentional and balanced, though the flanking towers read slightly stubby against the dome's mass. Color is the strongest asset: a well-judged terracotta/white/cobalt scheme with turquoise diaper-work banding and gold accents forms a genuine dominant-supporting-accent harmony with Byzantine/Mughal character. Detail is where it falls short of 'rich' — the turquoise tile banding and dome scaling add texture, but the large white wall fields and window surrounds stay flat and repetitive; relief depth is shallow and the ornament is applied as color rather than carved articulation, leaving sizable flat fields. Fidelity is clear and characterful — it reads unmistakably as a grand temple/shrine with a legible central entrance and presence, distinctive rather than generic, but not quite an iconic, namable landmark. An easy improvement — deepening the relief and breaking up the plain white bays — keeps every dimension short of exceptional.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "strong",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 6,
+      "output_tokens": 1958,
+      "cost_usd": 0.909108
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": "haiku-5-5 rerun of 014/027 (judge pinned opus-4-8)"
+}

@@ -1,0 +1,1328 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "032-vRefRevise-designdoc",
+    "prompting_method_id": "temple-facade-reference-revise.v0",
+    "model_id": "claude-haiku-5-5",
+    "seed": 11,
+    "server_state_id": "flat-creative-superflat.v1"
+  },
+  "style": {
+    "name": "Temple of the Vermilion Tide",
+    "rationale": "Kept the red/yellow/lapis/copper split-complementary palette and the reference's rhythm: piers now bonded to the body with lapis-framed recessed panels and pilaster strips, a yellow springline and arch ring with a lapis keystone, a 2x2 yellow/red coffer soffit, lapis-framed attic tablets, and a copper-ringed rosette crown with a lapis peak; no white or grey, and no detached elements."
+  },
+  "palette": {
+    "manifest": [
+      "minecraft:red_nether_bricks",
+      "minecraft:red_nether_brick_stairs",
+      "minecraft:yellow_terracotta",
+      "minecraft:lapis_block",
+      "minecraft:oxidized_cut_copper",
+      "minecraft:oxidized_cut_copper_stairs",
+      "minecraft:oxidized_cut_copper_slab"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        10,
+        30,
+        1
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        0,
+        0
+      ],
+      "to": [
+        30,
+        30,
+        1
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        17,
+        0
+      ],
+      "to": [
+        19,
+        30,
+        1
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        15,
+        0
+      ],
+      "to": [
+        11,
+        16,
+        1
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        15,
+        0
+      ],
+      "to": [
+        19,
+        16,
+        1
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        12,
+        16,
+        0
+      ],
+      "to": [
+        12,
+        16,
+        1
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        16,
+        0
+      ],
+      "to": [
+        18,
+        16,
+        1
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        12,
+        0
+      ],
+      "to": [
+        12,
+        13,
+        0
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        12,
+        0
+      ],
+      "to": [
+        14,
+        13,
+        0
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        12,
+        0
+      ],
+      "to": [
+        16,
+        13,
+        0
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        12,
+        0
+      ],
+      "to": [
+        18,
+        13,
+        0
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        12,
+        0
+      ],
+      "to": [
+        19,
+        13,
+        0
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        14,
+        0
+      ],
+      "to": [
+        12,
+        15,
+        0
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        14,
+        0
+      ],
+      "to": [
+        14,
+        15,
+        0
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        14,
+        0
+      ],
+      "to": [
+        16,
+        15,
+        0
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        14,
+        0
+      ],
+      "to": [
+        18,
+        15,
+        0
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        19,
+        14,
+        0
+      ],
+      "to": [
+        19,
+        14,
+        0
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        16,
+        0
+      ],
+      "to": [
+        14,
+        16,
+        0
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        15,
+        16,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        0
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        16,
+        0
+      ],
+      "to": [
+        17,
+        16,
+        0
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        0,
+        2
+      ],
+      "to": [
+        8,
+        5,
+        2
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        6,
+        2
+      ],
+      "to": [
+        2,
+        10,
+        2
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        6,
+        2
+      ],
+      "to": [
+        8,
+        10,
+        2
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        11,
+        2
+      ],
+      "to": [
+        8,
+        27,
+        2
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        0,
+        2
+      ],
+      "to": [
+        30,
+        5,
+        2
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        6,
+        2
+      ],
+      "to": [
+        24,
+        10,
+        2
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        28,
+        6,
+        2
+      ],
+      "to": [
+        30,
+        10,
+        2
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        11,
+        2
+      ],
+      "to": [
+        30,
+        27,
+        2
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        12,
+        2
+      ],
+      "to": [
+        8,
+        12,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        12,
+        2
+      ],
+      "to": [
+        30,
+        12,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        13,
+        2
+      ],
+      "to": [
+        0,
+        27,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        8,
+        13,
+        2
+      ],
+      "to": [
+        8,
+        27,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        13,
+        2
+      ],
+      "to": [
+        22,
+        27,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        30,
+        13,
+        2
+      ],
+      "to": [
+        30,
+        27,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        0,
+        2
+      ],
+      "to": [
+        10,
+        14,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        0,
+        2
+      ],
+      "to": [
+        20,
+        14,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        15,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        19,
+        15,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        12,
+        16,
+        2
+      ],
+      "to": [
+        18,
+        16,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        16,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        1,
+        1
+      ],
+      "to": [
+        10,
+        1,
+        1
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        20,
+        1,
+        1
+      ],
+      "to": [
+        30,
+        1,
+        1
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        1,
+        2
+      ],
+      "to": [
+        8,
+        1,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        1,
+        2
+      ],
+      "to": [
+        30,
+        1,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        3,
+        3
+      ],
+      "to": [
+        8,
+        3,
+        3
+      ],
+      "block": "minecraft:red_nether_brick_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        3,
+        3
+      ],
+      "to": [
+        30,
+        3,
+        3
+      ],
+      "block": "minecraft:red_nether_brick_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "fill",
+      "from": [
+        2,
+        5,
+        2
+      ],
+      "to": [
+        2,
+        11,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        5,
+        2
+      ],
+      "to": [
+        6,
+        11,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        5,
+        2
+      ],
+      "to": [
+        5,
+        5,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        11,
+        2
+      ],
+      "to": [
+        5,
+        11,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        5,
+        2
+      ],
+      "to": [
+        24,
+        11,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        28,
+        5,
+        2
+      ],
+      "to": [
+        28,
+        11,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        25,
+        5,
+        2
+      ],
+      "to": [
+        27,
+        5,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        25,
+        11,
+        2
+      ],
+      "to": [
+        27,
+        11,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        17,
+        1
+      ],
+      "to": [
+        30,
+        19,
+        1
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        17,
+        2
+      ],
+      "to": [
+        8,
+        19,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        17,
+        2
+      ],
+      "to": [
+        30,
+        19,
+        2
+      ],
+      "block": "minecraft:yellow_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        18,
+        2
+      ],
+      "to": [
+        5,
+        18,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        4,
+        19,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        17,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        5,
+        17,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        25,
+        18,
+        2
+      ],
+      "to": [
+        27,
+        18,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        26,
+        19,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        25,
+        17,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        17,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        18,
+        1
+      ],
+      "to": [
+        16,
+        18,
+        1
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        19,
+        1
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        14,
+        17,
+        1
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        16,
+        17,
+        1
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        20,
+        2
+      ],
+      "to": [
+        7,
+        20,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        24,
+        2
+      ],
+      "to": [
+        7,
+        24,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        21,
+        2
+      ],
+      "to": [
+        3,
+        23,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        7,
+        21,
+        2
+      ],
+      "to": [
+        7,
+        23,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        20,
+        2
+      ],
+      "to": [
+        17,
+        20,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        24,
+        2
+      ],
+      "to": [
+        17,
+        24,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        13,
+        21,
+        2
+      ],
+      "to": [
+        13,
+        23,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        21,
+        2
+      ],
+      "to": [
+        17,
+        23,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        21,
+        2
+      ],
+      "to": [
+        16,
+        23,
+        2
+      ],
+      "block": "minecraft:red_nether_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        23,
+        20,
+        2
+      ],
+      "to": [
+        27,
+        20,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        23,
+        24,
+        2
+      ],
+      "to": [
+        27,
+        24,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        23,
+        21,
+        2
+      ],
+      "to": [
+        23,
+        23,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        27,
+        21,
+        2
+      ],
+      "to": [
+        27,
+        23,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        26,
+        2
+      ],
+      "to": [
+        30,
+        26,
+        2
+      ],
+      "block": "minecraft:oxidized_cut_copper_stairs",
+      "state": {
+        "facing": "south",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        27,
+        2
+      ],
+      "to": [
+        30,
+        27,
+        2
+      ],
+      "block": "minecraft:oxidized_cut_copper_slab",
+      "state": {
+        "type": "top"
+      }
+    },
+    {
+      "op": "fill",
+      "from": [
+        2,
+        28,
+        2
+      ],
+      "to": [
+        4,
+        30,
+        2
+      ],
+      "block": "minecraft:oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        3,
+        29,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        28,
+        2
+      ],
+      "to": [
+        8,
+        30,
+        2
+      ],
+      "block": "minecraft:oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        7,
+        29,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        28,
+        2
+      ],
+      "to": [
+        12,
+        30,
+        2
+      ],
+      "block": "minecraft:oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        11,
+        29,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        28,
+        2
+      ],
+      "to": [
+        16,
+        30,
+        2
+      ],
+      "block": "minecraft:oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        29,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        18,
+        28,
+        2
+      ],
+      "to": [
+        20,
+        30,
+        2
+      ],
+      "block": "minecraft:oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        19,
+        29,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        28,
+        2
+      ],
+      "to": [
+        24,
+        30,
+        2
+      ],
+      "block": "minecraft:oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        23,
+        29,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        26,
+        28,
+        2
+      ],
+      "to": [
+        28,
+        30,
+        2
+      ],
+      "block": "minecraft:oxidized_cut_copper"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        27,
+        29,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        30,
+        2
+      ],
+      "block": "minecraft:lapis_block"
+    }
+  ]
+}

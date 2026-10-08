@@ -1,0 +1,94 @@
+You are a master Minecraft architect making a SECOND, improving pass on your own work. TWO
+images are attached: (1) the REFERENCE building, and (2) a head-on render of your CURRENT build.
+The reference is a CRAFT reference ONLY — borrow its proportion, massing, silhouette, relief, and
+ornament. It is NOT a color reference: do NOT copy its palette. Your COLOR comes from your design
+document and the brief's demand for a distinctive, COLORFUL look — even if the reference is white.
+
+## Your finalized design document (honor it)
+# Design Document: The Temple of the Ninefold Lamp
+
+## 1. Lore & Setting
+
+A memorial-temple built in the 1690s on a harbor city's cliff, commissioned by a merchant-widow for her husband, a lamp-keeper of the sea guilds. The tradition holds that a lamp kept burning on the terrace guides ships home. Glazed tile stands in for the lantern: at dusk the inlay catches the light the way the reference's marble catches the sky. The temple is a memorial and a navigation mark, so its face must read from far out at sea.
+
+## 2. Aesthetic & Architectural Logic
+
+The reference's language is **a single dominant mass, symmetrical, with slender verticals that lift it**. The dome crowns a block, minarets frame it, and recessed arches give depth. Its surface detail is inlay (pietra dura), not sculpture, so ornament reads as pattern at distance and as craft up close. I keep that logic and take the reference's form, not its color. Its marble-white body becomes a warm terracotta body, because the brief demands color and a white wall would fail it.
+
+## 3. Color Palette
+
+Five Minecraft 1.20.1 blocks. **Harmony: complementary.** Warm orange carries the body, cool blue-cyan carries the ornament and crown, and gold adds a warm accent.
+
+| Role | Block | Share | Use |
+|---|---|---|---|
+| Dominant | `orange_terracotta` | ~60% | Walls, plinth, drum |
+| Supporting | `cyan_glazed_terracotta` | ~15% | Inlay bands, arch spandrels, medallions (rotated for pattern) |
+| Crown | `lapis_block` | ~10% | Main dome, chhatri domes |
+| Trim | `smooth_quartz` | ~10% | Cornices, window frames, minaret rings (never a full wall) |
+| Accent | `gold_block` | <3% | Finials, lotus caps, lamp at the peak |
+
+Orange against cyan-blue sits at the widest hue distance, so the ornament pops against the body.
+
+## 4. Motifs & Ornament
+
+- **Pointed pishtaq arch:** the central recessed entrance, framed by a tall rectangular panel.
+- **Chhatri kiosks:** four domed pavilions at the corners of the roofline, echoing the reference's flanking domes.
+- **Minaret rings:** stacked balconies on each slender tower.
+- **Glazed medallions:** cyan lozenges set in the orange wall beside each arch.
+- **Lattice tracery:** window openings patterned with quartz-and-cyan grids.
+
+## 5. Architectural Features & Proportion
+
+Ratios read from the reference, taken from the photograph's proportions (not the building's documented dimensions):
+
+- **Overall width : central block width ≈ 2 : 1.** Facade 41 blocks wide, central block 21.
+- **Minaret height ≈ 1.7 × central wall height.** Minarets 3×3 at base, about 17 blocks above the plinth. The wall is 10 blocks.
+- **Dome diameter ≈ 0.44 × central block width** (9 blocks), dome height ≈ 0.8 × diameter (about 7 blocks).
+- **Pishtaq width ≈ 0.23 × central block width** (5 blocks), arch height ≈ 0.7 × wall height (7 blocks).
+
+**Base:** a 2-block plinth in orange terracotta, capped with a quartz course.
+**Supports:** orange wall piers with cyan spandrels between arches.
+**Entablature:** a quartz cornice with a cyan inlay band beneath.
+**Crown:** a lapis dome on a quartz drum, with a gold finial and lamp at the apex.
+**Entrance:** a 5-wide pishtaq, recessed two blocks, with the cyan medallion above.
+
+## A facade is ONE connected plane (critical)
+Borrow the reference's RHYTHM, not its 3-D standalone parts. A real building's corner towers or
+minarets are freestanding in the round; in a flat elevation they must read as ENGAGED — bonded to
+the wall and projecting forward as relief, NEVER as detached pillars with sky between them. Do not
+pull columns, towers, or framing off the body; every mass stays connected into a single facade.
+
+## Improve — compare your build (image 2) to the reference (image 1)
+- Proportion & rhythm: match the reference's balance and bay rhythm; resolve columns into integrated
+  bays, NOT freestanding pillars. Tighten the crowning silhouette without detaching it.
+- Relief & depth: deepen and model where your build reads flat next to the reference.
+- Detail — NO LARGE FLAT FIELDS: any wall plane wider than ~6 blocks must carry layered relief —
+  recessed panels, pilaster strips, string-courses, banding, or inset ornament. Add the reference's
+  character (arch profiles, framing, motifs, texture) where your build is bare; treat any blank
+  field as unfinished, especially the base/plinth and the flanks.
+- Color (CRITICAL): do NOT adopt the reference's colors. Hold your document's COLORFUL palette and
+  its dominant/supporting/accent hierarchy. If your build (image 2) reads monochrome, white, or
+  washed-out next to the brief's intent, ADD color back — restore the accent fields and contrast.
+  The brief asks for bold color; a build that drifted toward white is a regression to FIX, not keep.
+- Fix anything broken, floating, misaligned, or awkward.
+
+## Orientation & scale (unchanged)
+Facade FACES +Z, X-Y plane (X = width, Y = height, y = 0 ground), relief into -Z, front face at the
+highest Z. Width up to ~56, height up to ~48, deep relief up to ~24 into -Z. Front and relief only.
+
+## Materials
+Primarily the document's palette; declare the blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "031-vRefRevise-designdoc"
+- metadata.prompting_method_id = "temple-facade-reference-revise.v0"
+- metadata.model_id = "claude-haiku-5-5"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Keep style.name as the document's style; set style.rationale to one line on what you improved.
+
+## Output (critical)
+Emit ONE complete improved design artifact — the full set of placements, not a diff. Local origin
+at x = 0, y = 0, z = 0 (ground at y = 0).

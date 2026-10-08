@@ -1,0 +1,85 @@
+You are a master Minecraft architect making a SECOND, improving pass on your own work. TWO
+images are attached: (1) the REFERENCE building, and (2) a head-on render of your CURRENT build.
+The reference is a CRAFT reference ONLY — borrow its proportion, massing, silhouette, relief, and
+ornament. It is NOT a color reference: do NOT copy its palette. Your COLOR comes from your design
+document and the brief's demand for a distinctive, COLORFUL look — even if the reference is white.
+
+## Your finalized design document (honor it)
+# Temple of the Vermilion Tide: Front Elevation
+
+## 1. Lore & Setting
+A river-harbour guild raised this gate in a late-classical age to mark the Tide Procession. Each year a painted barge passes under the central arch on the feast of the Vermilion Tide. The face celebrates passage, return, and the sea-guilds' prosperity. It is a ceremonial threshold, not a wall.
+
+## 2. Aesthetic & Architectural Logic
+From the reference: a near-square block pierced by one tall round-headed arch; heavy piers that read as load-bearing; horizontal bands (frieze, attic, cornice) dividing the mass into tiers; figural sculpture at eye level; a row of small square panels crowning the attic.
+
+It works because the single large void gives an immediate focal point, the heavy piers make the mass feel authoritative, and the repeated small panels create rhythm without clutter. We keep this grammar and translate it into block-scale relief.
+
+## 3. Color Palette
+**Harmony: split-complementary.** A warm red dominant, a yellow-ochre support, and two opposing cool accents (lapis blue and oxidised-copper teal) give a festive, high-contrast face.
+
+- **Red Nether Bricks** (dominant, ~60%): piers, body, attic field.
+- **Yellow Terracotta** (support, ~20%): frieze band, arch coffers, plinth stripe.
+- **Lapis Block** (accent, ~10%): keystone, tablet frames, figure bases.
+- **Oxidized Cut Copper** (crown accent, ~10%): cornice and rosette crown.
+
+The reference's pale stone informs form only. No white or grey blocks appear on the facade.
+
+## 4. Motifs & Ornament
+- **Figural frieze:** stair-and-slab silhouettes on yellow terracotta, outlined in lapis.
+- **Attic tablets:** 3×3 recessed inscription panels in red bricks with lapis frames.
+- **Rosette row:** small copper-ringed medallions along the crown, each with a lapis centre.
+- **Coffered soffit:** the arch ceiling alternates yellow terracotta and red bricks in a 2×2 coffer grid.
+- **Keystone:** one lapis block at the arch crown.
+
+## 5. Architectural Features & Proportion
+**Grid: 31 blocks wide × 31 tall** (height ≈ width, as in the reference).
+
+- **Base:** 3-block red-brick plinth with a 1-block projecting stair course.
+- **Piers:** two 9-block piers (x 0–8 and 22–30), set 1 block proud of the centre, with recessed panels giving 1–2 blocks of relief depth.
+- **Central span:** 13 blocks (x 9–21). The arch opening is 9 wide (x 11–19), about one-third of facade width. Springing at y=12, crown at y=16.
+- **Frieze:** y 17–19, yellow terracotta with lapis figures, full width.
+- **Attic:** y 20–25, red bricks with tablets and the rosette row.
+- **Cornice:** y 26–27, oxidized copper stairs and slabs, projecting 1 block.
+- **Crown:** y 28–30, copper rosettes, with one lapis block marking the centre peak.
+
+## A facade is ONE connected plane (critical)
+Borrow the reference's RHYTHM, not its 3-D standalone parts. A real building's corner towers or
+minarets are freestanding in the round; in a flat elevation they must read as ENGAGED — bonded to
+the wall and projecting forward as relief, NEVER as detached pillars with sky between them. Do not
+pull columns, towers, or framing off the body; every mass stays connected into a single facade.
+
+## Improve — compare your build (image 2) to the reference (image 1)
+- Proportion & rhythm: match the reference's balance and bay rhythm; resolve columns into integrated
+  bays, NOT freestanding pillars. Tighten the crowning silhouette without detaching it.
+- Relief & depth: deepen and model where your build reads flat next to the reference.
+- Detail — NO LARGE FLAT FIELDS: any wall plane wider than ~6 blocks must carry layered relief —
+  recessed panels, pilaster strips, string-courses, banding, or inset ornament. Add the reference's
+  character (arch profiles, framing, motifs, texture) where your build is bare; treat any blank
+  field as unfinished, especially the base/plinth and the flanks.
+- Color (CRITICAL): do NOT adopt the reference's colors. Hold your document's COLORFUL palette and
+  its dominant/supporting/accent hierarchy. If your build (image 2) reads monochrome, white, or
+  washed-out next to the brief's intent, ADD color back — restore the accent fields and contrast.
+  The brief asks for bold color; a build that drifted toward white is a regression to FIX, not keep.
+- Fix anything broken, floating, misaligned, or awkward.
+
+## Orientation & scale (unchanged)
+Facade FACES +Z, X-Y plane (X = width, Y = height, y = 0 ground), relief into -Z, front face at the
+highest Z. Width up to ~56, height up to ~48, deep relief up to ~24 into -Z. Front and relief only.
+
+## Materials
+Primarily the document's palette; declare the blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "032-vRefRevise-designdoc"
+- metadata.prompting_method_id = "temple-facade-reference-revise.v0"
+- metadata.model_id = "claude-haiku-5-5"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Keep style.name as the document's style; set style.rationale to one line on what you improved.
+
+## Output (critical)
+Emit ONE complete improved design artifact — the full set of placements, not a diff. Local origin
+at x = 0, y = 0, z = 0 (ground at y = 0).

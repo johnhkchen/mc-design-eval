@@ -1,0 +1,60 @@
+{
+  "seq": 30,
+  "runId": "030-v0-facade",
+  "date": "2026-10-08",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "v0-facade",
+  "promptMethodId": "temple-facade-singleshot.v0",
+  "model": "claude-haiku-5-5",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "persona": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 2639,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      -4
+    ],
+    "max": [
+      30,
+      23,
+      0
+    ]
+  },
+  "tokensIn": 2,
+  "tokensOut": 22512,
+  "costUsd": 0.01881452,
+  "durationMs": 165390,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A confident, symmetrical temple front with a genuine base→middle→crown: dark rusticated plinth, a colonnaded body of paired teal pilasters framing recessed grilled windows, and a raised central clerestory block reading as a crown. The bay rhythm is deliberate and the entrance is unmistakably the focus — a tall blue dressed portal dead-center. Proportion and fidelity are the strengths: it reads instantly as a grand temple (an Egyptian/Mesoamerican hybrid flavor), with clear presence and a namable entrance, though the crown block sits a touch squat and I could nudge it taller — so strong, not exceptional. Color is disciplined: terracotta dominant, teal supporting, with blue and gold accents and a dark base anchoring it; harmonious rather than garish, and it gives the building identity. Detail is where it falls to competent: the pilasters, crenellated frieze, lamp-cubes and voussoir door carry real articulation, but the large orange wall panels and the plain window surrounds are flat fields, and the relief depth is shallow — the facade does not reward close inspection the way the brief wants. Add carved string courses, a pediment motif, or texture to the blank terracotta and it climbs. Overall a clean, characterful, well-proportioned temple that lands as strong.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "strong",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 6,
+      "output_tokens": 3558,
+      "cost_usd": 1.065072
+    }
+  },
+  "roundImages": [],
+  "bestof": null,
+  "note": "haiku-5-5 rerun of 001/028 (judge pinned opus-4-8)"
+}

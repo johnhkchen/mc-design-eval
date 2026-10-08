@@ -1,0 +1,1116 @@
+{
+  "schema_version": "1.0.0",
+  "metadata": {
+    "trial_id": "030-v0-facade",
+    "prompting_method_id": "temple-facade-singleshot.v0",
+    "model_id": "claude-haiku-5-5",
+    "seed": 11,
+    "server_state_id": "flat-creative-superflat.v1"
+  },
+  "style": {
+    "name": "Lapis Sun-Temple (Mesoamerican-Byzantine hybrid)",
+    "rationale": "A warm orange terracotta wall skin framed by deep-blue lapis and glazed terracotta friezes, teal prismarine pilasters with gold capitals, a central pylon with a sun medallion, and a green oxidized-copper crown. Relief: wall skin at z=-1, core at z=-4..-2, projecting pilasters, cornices, and door frame at z=0. Openings are recessed by leaving the front layer unplaced, with glass or dark prismarine set behind. Bay rhythm is mirrored about x=15: pilasters at 2/6/9 and 21/24/28, windows at 3-5 and 7-8 and their mirrors, and a three-wide central portal with a stepped arch. Plinth at y0-1 in polished blackstone, cornice at y2 and y16, copper parapet at y17, crown at y23."
+  },
+  "palette": {
+    "manifest": [
+      "minecraft:polished_blackstone_bricks",
+      "minecraft:polished_blackstone_brick_slab",
+      "minecraft:polished_blackstone_brick_stairs",
+      "minecraft:deepslate_bricks",
+      "minecraft:deepslate_brick_slab",
+      "minecraft:orange_terracotta",
+      "minecraft:prismarine_bricks",
+      "minecraft:dark_prismarine",
+      "minecraft:gold_block",
+      "minecraft:lapis_block",
+      "minecraft:blue_glazed_terracotta",
+      "minecraft:lime_glazed_terracotta",
+      "minecraft:yellow_glazed_terracotta",
+      "minecraft:oxidized_cut_copper",
+      "minecraft:oxidized_cut_copper_slab",
+      "minecraft:sea_lantern",
+      "minecraft:light_blue_stained_glass"
+    ]
+  },
+  "placements": [
+    {
+      "op": "fill",
+      "from": [
+        0,
+        0,
+        -4
+      ],
+      "to": [
+        30,
+        1,
+        0
+      ],
+      "block": "minecraft:polished_blackstone_bricks"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        2,
+        0
+      ],
+      "to": [
+        30,
+        2,
+        0
+      ],
+      "block": "minecraft:polished_blackstone_brick_slab",
+      "state": {
+        "type": "bottom"
+      }
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        2,
+        -4
+      ],
+      "to": [
+        30,
+        16,
+        -2
+      ],
+      "block": "minecraft:deepslate_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        17,
+        -4
+      ],
+      "to": [
+        20,
+        23,
+        -2
+      ],
+      "block": "minecraft:deepslate_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        0,
+        2,
+        -1
+      ],
+      "to": [
+        1,
+        14,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        2,
+        -1
+      ],
+      "to": [
+        5,
+        5,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        12,
+        -1
+      ],
+      "to": [
+        5,
+        14,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        7,
+        2,
+        -1
+      ],
+      "to": [
+        8,
+        5,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        7,
+        12,
+        -1
+      ],
+      "to": [
+        8,
+        14,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        2,
+        -1
+      ],
+      "to": [
+        9,
+        14,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        29,
+        2,
+        -1
+      ],
+      "to": [
+        30,
+        14,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        25,
+        2,
+        -1
+      ],
+      "to": [
+        27,
+        5,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        25,
+        12,
+        -1
+      ],
+      "to": [
+        27,
+        14,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        2,
+        -1
+      ],
+      "to": [
+        23,
+        5,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        12,
+        -1
+      ],
+      "to": [
+        23,
+        14,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        21,
+        2,
+        -1
+      ],
+      "to": [
+        21,
+        14,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        10,
+        2,
+        -1
+      ],
+      "to": [
+        13,
+        22,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        17,
+        2,
+        -1
+      ],
+      "to": [
+        20,
+        22,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        11,
+        -1
+      ],
+      "to": [
+        16,
+        22,
+        -1
+      ],
+      "block": "minecraft:orange_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        2,
+        -1
+      ],
+      "to": [
+        16,
+        2,
+        -1
+      ],
+      "block": "minecraft:polished_blackstone_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        3,
+        -2
+      ],
+      "to": [
+        16,
+        10,
+        -2
+      ],
+      "block": "minecraft:dark_prismarine"
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        15,
+        -1
+      ],
+      "to": [
+        9,
+        15,
+        -1
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "line",
+      "from": [
+        21,
+        15,
+        -1
+      ],
+      "to": [
+        30,
+        15,
+        -1
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "line",
+      "from": [
+        10,
+        15,
+        -1
+      ],
+      "to": [
+        20,
+        15,
+        -1
+      ],
+      "block": "minecraft:lime_glazed_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        14,
+        17,
+        -1
+      ],
+      "to": [
+        16,
+        19,
+        -1
+      ],
+      "block": "minecraft:yellow_glazed_terracotta"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        18,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        10,
+        20,
+        -1
+      ],
+      "to": [
+        20,
+        20,
+        -1
+      ],
+      "block": "minecraft:blue_glazed_terracotta"
+    },
+    {
+      "op": "fill",
+      "from": [
+        2,
+        2,
+        -1
+      ],
+      "to": [
+        2,
+        14,
+        0
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        6,
+        2,
+        -1
+      ],
+      "to": [
+        6,
+        14,
+        0
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        9,
+        2,
+        -1
+      ],
+      "to": [
+        9,
+        14,
+        0
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        21,
+        2,
+        -1
+      ],
+      "to": [
+        21,
+        14,
+        0
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        24,
+        2,
+        -1
+      ],
+      "to": [
+        24,
+        14,
+        0
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "fill",
+      "from": [
+        28,
+        2,
+        -1
+      ],
+      "to": [
+        28,
+        14,
+        0
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "line",
+      "from": [
+        10,
+        3,
+        0
+      ],
+      "to": [
+        10,
+        16,
+        0
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "line",
+      "from": [
+        20,
+        3,
+        0
+      ],
+      "to": [
+        20,
+        16,
+        0
+      ],
+      "block": "minecraft:prismarine_bricks"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        15,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        15,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        15,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        15,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        9,
+        15,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        9,
+        15,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        21,
+        15,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        21,
+        15,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        15,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        15,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        15,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        15,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        10,
+        15,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        20,
+        15,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "fill",
+      "from": [
+        3,
+        6,
+        -2
+      ],
+      "to": [
+        5,
+        11,
+        -2
+      ],
+      "block": "minecraft:light_blue_stained_glass"
+    },
+    {
+      "op": "fill",
+      "from": [
+        7,
+        6,
+        -2
+      ],
+      "to": [
+        8,
+        11,
+        -2
+      ],
+      "block": "minecraft:light_blue_stained_glass"
+    },
+    {
+      "op": "fill",
+      "from": [
+        22,
+        6,
+        -2
+      ],
+      "to": [
+        23,
+        11,
+        -2
+      ],
+      "block": "minecraft:light_blue_stained_glass"
+    },
+    {
+      "op": "fill",
+      "from": [
+        25,
+        6,
+        -2
+      ],
+      "to": [
+        27,
+        11,
+        -2
+      ],
+      "block": "minecraft:light_blue_stained_glass"
+    },
+    {
+      "op": "line",
+      "from": [
+        3,
+        5,
+        0
+      ],
+      "to": [
+        5,
+        5,
+        0
+      ],
+      "block": "minecraft:deepslate_brick_slab",
+      "state": {
+        "type": "top"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        7,
+        5,
+        0
+      ],
+      "to": [
+        8,
+        5,
+        0
+      ],
+      "block": "minecraft:deepslate_brick_slab",
+      "state": {
+        "type": "top"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        22,
+        5,
+        0
+      ],
+      "to": [
+        23,
+        5,
+        0
+      ],
+      "block": "minecraft:deepslate_brick_slab",
+      "state": {
+        "type": "top"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        25,
+        5,
+        0
+      ],
+      "to": [
+        27,
+        5,
+        0
+      ],
+      "block": "minecraft:deepslate_brick_slab",
+      "state": {
+        "type": "top"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        3,
+        12,
+        0
+      ],
+      "to": [
+        5,
+        12,
+        0
+      ],
+      "block": "minecraft:deepslate_brick_slab",
+      "state": {
+        "type": "bottom"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        7,
+        12,
+        0
+      ],
+      "to": [
+        8,
+        12,
+        0
+      ],
+      "block": "minecraft:deepslate_brick_slab",
+      "state": {
+        "type": "bottom"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        22,
+        12,
+        0
+      ],
+      "to": [
+        23,
+        12,
+        0
+      ],
+      "block": "minecraft:deepslate_brick_slab",
+      "state": {
+        "type": "bottom"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        25,
+        12,
+        0
+      ],
+      "to": [
+        27,
+        12,
+        0
+      ],
+      "block": "minecraft:deepslate_brick_slab",
+      "state": {
+        "type": "bottom"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        13,
+        3,
+        0
+      ],
+      "to": [
+        13,
+        11,
+        0
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        17,
+        3,
+        0
+      ],
+      "to": [
+        17,
+        11,
+        0
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        13,
+        11,
+        0
+      ],
+      "to": [
+        17,
+        11,
+        0
+      ],
+      "block": "minecraft:lapis_block"
+    },
+    {
+      "op": "line",
+      "from": [
+        14,
+        12,
+        0
+      ],
+      "to": [
+        16,
+        12,
+        0
+      ],
+      "block": "minecraft:polished_blackstone_brick_slab",
+      "state": {
+        "type": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        13,
+        12,
+        0
+      ],
+      "block": "minecraft:polished_blackstone_brick_stairs",
+      "state": {
+        "facing": "east",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        17,
+        12,
+        0
+      ],
+      "block": "minecraft:polished_blackstone_brick_stairs",
+      "state": {
+        "facing": "west",
+        "half": "bottom"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        10,
+        21,
+        0
+      ],
+      "to": [
+        20,
+        21,
+        0
+      ],
+      "block": "minecraft:deepslate_brick_slab",
+      "state": {
+        "type": "bottom"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        16,
+        0
+      ],
+      "to": [
+        30,
+        16,
+        0
+      ],
+      "block": "minecraft:deepslate_brick_slab",
+      "state": {
+        "type": "bottom"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        0,
+        17,
+        0
+      ],
+      "to": [
+        9,
+        17,
+        0
+      ],
+      "block": "minecraft:oxidized_cut_copper_slab",
+      "state": {
+        "type": "bottom"
+      }
+    },
+    {
+      "op": "line",
+      "from": [
+        21,
+        17,
+        0
+      ],
+      "to": [
+        30,
+        17,
+        0
+      ],
+      "block": "minecraft:oxidized_cut_copper_slab",
+      "state": {
+        "type": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        2,
+        18,
+        0
+      ],
+      "block": "minecraft:sea_lantern"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        6,
+        18,
+        0
+      ],
+      "block": "minecraft:sea_lantern"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        9,
+        18,
+        0
+      ],
+      "block": "minecraft:sea_lantern"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        21,
+        18,
+        0
+      ],
+      "block": "minecraft:sea_lantern"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        24,
+        18,
+        0
+      ],
+      "block": "minecraft:sea_lantern"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        28,
+        18,
+        0
+      ],
+      "block": "minecraft:sea_lantern"
+    },
+    {
+      "op": "line",
+      "from": [
+        10,
+        22,
+        0
+      ],
+      "to": [
+        20,
+        22,
+        0
+      ],
+      "block": "minecraft:oxidized_cut_copper_slab",
+      "state": {
+        "type": "bottom"
+      }
+    },
+    {
+      "op": "fill",
+      "from": [
+        11,
+        23,
+        -1
+      ],
+      "to": [
+        19,
+        23,
+        -1
+      ],
+      "block": "minecraft:oxidized_cut_copper"
+    },
+    {
+      "op": "line",
+      "from": [
+        12,
+        23,
+        0
+      ],
+      "to": [
+        18,
+        23,
+        0
+      ],
+      "block": "minecraft:oxidized_cut_copper_slab",
+      "state": {
+        "type": "bottom"
+      }
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        23,
+        -1
+      ],
+      "block": "minecraft:gold_block"
+    },
+    {
+      "op": "voxel",
+      "pos": [
+        15,
+        23,
+        0
+      ],
+      "block": "minecraft:gold_block"
+    }
+  ]
+}

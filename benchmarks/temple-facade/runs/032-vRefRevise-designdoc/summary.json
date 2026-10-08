@@ -1,0 +1,62 @@
+{
+  "seq": 32,
+  "runId": "032-vRefRevise-designdoc",
+  "date": "2026-10-08",
+  "task": "temple-facade",
+  "taskVersion": 1,
+  "approach": "vRefRevise-designdoc",
+  "promptMethodId": "temple-facade-reference-revise.v0",
+  "model": "claude-haiku-5-5",
+  "seed": 11,
+  "temperature": null,
+  "effort": null,
+  "persona": null,
+  "view": {
+    "azimuthDeg": 0,
+    "elevationDeg": 0,
+    "fov": 40
+  },
+  "blocks": 2312,
+  "unmapped": 0,
+  "bounds": {
+    "min": [
+      0,
+      0,
+      0
+    ],
+    "max": [
+      30,
+      30,
+      3
+    ]
+  },
+  "tokensIn": 6,
+  "tokensOut": 75276,
+  "costUsd": 0.05800559999999999,
+  "durationMs": 411890,
+  "score": {
+    "proportion": "strong",
+    "color": "strong",
+    "detail": "competent",
+    "fidelity": "strong",
+    "overall": "strong",
+    "notes": "A confident, symmetrical three-bay gate-temple with a clear tripartite reading: a gold plinth band at the base, paneled maroon middle, and a green dentil crown topped with a central blue keystone block. The bay rhythm is deliberate and the central arched entrance gives genuine presence and a legible grandeur — it reads as a Babylonian/Ishtar-Gate-flavored temple gateway, which is characterful rather than generic. Color is the standout: a disciplined dominant (deep maroon) / supporting (gold) / accent (blue) scheme with the green crown — colorful and harmonious, committing to an identity. It stops short of exceptional because the palette is quite flat and saturated and the green cornice sits slightly apart from the body. Detail is the clear weakness: the blue-in-gold panels are shallow flat insets that repeat without variation, and large maroon brick fields stay flat with no real relief depth — articulation is present but not layered. Proportion is coherent but the arch springs a touch abruptly and the columns read stubby; a designer could still tighten it, so it is strong, not inevitable. Overall a strong, legible, colorful facade held back from the apex by flat ornament and a lack of modeled depth.",
+    "samples": 3,
+    "rubric": "v2-categorical-baml",
+    "perSample": [
+      "strong",
+      "competent",
+      "strong"
+    ],
+    "usage": {
+      "input_tokens": 6,
+      "output_tokens": 3942,
+      "cost_usd": 0.9593780000000001
+    }
+  },
+  "roundImages": [
+    "round-0.png"
+  ],
+  "bestof": null,
+  "note": "haiku-5-5 rerun of 021/029 (judge pinned opus-4-8)"
+}

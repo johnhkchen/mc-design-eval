@@ -71,6 +71,9 @@ auto-injected corpus). Review and update it after each run.
 | 27 | 2026-10-08 | `vRefRevise-designdoc` | strong | 23467 | 34/93811 | $3.3571 | 881s | opus-5-5 rerun of 014 (judge pinned opus-4-8) |
 | 28 | 2026-10-08 | `v0-facade` | strong | 2319 | 2/24022 | $0.7797 | 275s | opus-5-5 rerun of 001 (judge pinned opus-4-8) |
 | 29 | 2026-10-08 | `vRefRevise-designdoc` | strong | 19456 | 8/69409 | $2.3755 | 887s | opus-5-5 rerun of 021 (judge pinned opus-4-8) |
+| 30 | 2026-10-08 | `v0-facade` | strong | 2639 | 2/22512 | $0.0188 | 165s | haiku-5-5 rerun of 001/028 (judge pinned opus-4-8) |
+| 31 | 2026-10-08 | `vRefRevise-designdoc` | strong | 2819 | 6/78810 | $0.0606 | 542s | haiku-5-5 rerun of 014/027 (judge pinned opus-4-8) |
+| 32 | 2026-10-08 | `vRefRevise-designdoc` | strong | 2312 | 6/75276 | $0.0580 | 412s | haiku-5-5 rerun of 021/029 (judge pinned opus-4-8) |
 
 ## Gallery
 
@@ -279,5 +282,29 @@ auto-injected corpus). Review and update it after each run.
 **strong** · 19456 blocks · 8/69409 tok · $2.3755
 
 > opus-5-5 rerun of 021 (judge pinned opus-4-8)
+
+### 030 — `v0-facade` · 2026-10-08
+
+![temple-facade run 30](runs/030-v0-facade/render.png)
+
+**strong** · 2639 blocks · 2/22512 tok · $0.0188
+
+> haiku-5-5 rerun of 001/028 (judge pinned opus-4-8)
+
+### 031 — `vRefRevise-designdoc` · 2026-10-08
+
+![temple-facade run 31](runs/031-vRefRevise-designdoc/render.png)
+
+**strong** · 2819 blocks · 6/78810 tok · $0.0606
+
+> haiku-5-5 rerun of 014/027 (judge pinned opus-4-8)
+
+### 032 — `vRefRevise-designdoc` · 2026-10-08
+
+![temple-facade run 32](runs/032-vRefRevise-designdoc/render.png)
+
+**strong** · 2312 blocks · 6/75276 tok · $0.0580
+
+> haiku-5-5 rerun of 021/029 (judge pinned opus-4-8)
 
 <!-- RUNS:END -->

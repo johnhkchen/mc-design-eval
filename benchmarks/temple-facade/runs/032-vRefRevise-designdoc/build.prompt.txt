@@ -1,0 +1,79 @@
+You are a master Minecraft architect. Below is your FINALIZED design document for a temple
+facade. Build it as a structured design artifact that faithfully realizes the document, at
+GENEROUS SCALE and with DEEP RELIEF. Earlier facades were too small and too flat — do not
+repeat that; use the room you are given.
+
+## Finalized design document
+# Temple of the Vermilion Tide: Front Elevation
+
+## 1. Lore & Setting
+A river-harbour guild raised this gate in a late-classical age to mark the Tide Procession. Each year a painted barge passes under the central arch on the feast of the Vermilion Tide. The face celebrates passage, return, and the sea-guilds' prosperity. It is a ceremonial threshold, not a wall.
+
+## 2. Aesthetic & Architectural Logic
+From the reference: a near-square block pierced by one tall round-headed arch; heavy piers that read as load-bearing; horizontal bands (frieze, attic, cornice) dividing the mass into tiers; figural sculpture at eye level; a row of small square panels crowning the attic.
+
+It works because the single large void gives an immediate focal point, the heavy piers make the mass feel authoritative, and the repeated small panels create rhythm without clutter. We keep this grammar and translate it into block-scale relief.
+
+## 3. Color Palette
+**Harmony: split-complementary.** A warm red dominant, a yellow-ochre support, and two opposing cool accents (lapis blue and oxidised-copper teal) give a festive, high-contrast face.
+
+- **Red Nether Bricks** (dominant, ~60%): piers, body, attic field.
+- **Yellow Terracotta** (support, ~20%): frieze band, arch coffers, plinth stripe.
+- **Lapis Block** (accent, ~10%): keystone, tablet frames, figure bases.
+- **Oxidized Cut Copper** (crown accent, ~10%): cornice and rosette crown.
+
+The reference's pale stone informs form only. No white or grey blocks appear on the facade.
+
+## 4. Motifs & Ornament
+- **Figural frieze:** stair-and-slab silhouettes on yellow terracotta, outlined in lapis.
+- **Attic tablets:** 3×3 recessed inscription panels in red bricks with lapis frames.
+- **Rosette row:** small copper-ringed medallions along the crown, each with a lapis centre.
+- **Coffered soffit:** the arch ceiling alternates yellow terracotta and red bricks in a 2×2 coffer grid.
+- **Keystone:** one lapis block at the arch crown.
+
+## 5. Architectural Features & Proportion
+**Grid: 31 blocks wide × 31 tall** (height ≈ width, as in the reference).
+
+- **Base:** 3-block red-brick plinth with a 1-block projecting stair course.
+- **Piers:** two 9-block piers (x 0–8 and 22–30), set 1 block proud of the centre, with recessed panels giving 1–2 blocks of relief depth.
+- **Central span:** 13 blocks (x 9–21). The arch opening is 9 wide (x 11–19), about one-third of facade width. Springing at y=12, crown at y=16.
+- **Frieze:** y 17–19, yellow terracotta with lapis figures, full width.
+- **Attic:** y 20–25, red bricks with tablets and the rosette row.
+- **Cornice:** y 26–27, oxidized copper stairs and slabs, projecting 1 block.
+- **Crown:** y 28–30, copper rosettes, with one lapis block marking the centre peak.
+
+## Orientation (photographed head-on)
+Facade FACES +Z, in the X–Y plane (X = width, Y = height, y = 0 ground). Front face at the
+highest Z; relief recedes into −Z. Model only the front and its relief.
+
+## Scale & RELIEF — use it (this is judged)
+- Width up to ~56 (X), height up to ~48 (Y) including the crown. Build big.
+- DEEP relief: up to ~24 blocks of depth into −Z, and genuinely use it. Columns/buttresses
+  project several blocks PROUD of the wall; the central portal RECESSES several blocks deep;
+  cornices, string courses, and the crown step forward and back across MULTIPLE Z-layers. A
+  near-flat screen only 4–6 deep is a failure.
+- CROWN proportion: the crowning element (pediment / parapet / attic / cresting) must span the
+  facade's full width and have real height — a deliberate culmination of the body, never a
+  small cap perched on a wide base.
+
+## Realize the document with craft
+- Build every feature the document specifies; honor its proportion ratios and palette.
+- Frame openings with deep reveals; avoid uniform 45° slopes (vary pitch with slab+stair
+  combos; step curves/arches); use voxel block `state` for mouldings and trim.
+- Use `fill`/`box` for masses and `line` for shafts/edges to stay efficient at this scale.
+
+## Materials
+Primarily the document's palette; declare the blocks you place in palette.manifest.
+
+## Required metadata (set EXACTLY)
+- metadata.trial_id = "032-vRefRevise-designdoc"
+- metadata.prompting_method_id = "temple-facade-reference-revise.v0"
+- metadata.model_id = "claude-haiku-5-5"
+- metadata.seed = 11
+- metadata.server_state_id = "flat-creative-superflat.v1"
+
+## Style record
+Set style.name to the document's style label and style.rationale to one line tying the build
+to the document.
+
+Local origin at x = 0, y = 0, z = 0 (ground at y = 0).
