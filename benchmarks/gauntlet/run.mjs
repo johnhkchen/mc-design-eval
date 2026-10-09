@@ -46,7 +46,7 @@ export const SUBJECTS = {
 const s = SUBJECTS[key];
 if (!s) throw new Error(`--subject one of ${Object.keys(SUBJECTS).join(", ")}`);
 const tag = PHASE1_MODEL_ID.replace(/^claude-/, "").replace(/-\d.*$/, "");
-const runId = `${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "")}-${key}-${tag}-${effort}${from ? "-rerun" : ""}${respec ? "-respec" : ""}${trace ? "-trace" : ""}`;
+const runId = `${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "")}-${key}-${tag}-${effort}${from ? "-rerun" : ""}${respec ? "-respec" : ""}${trace ? "-trace" : ""}${process.argv.includes("--redraw") ? "-redraw" : ""}${process.argv.includes("--thin") ? "-thin" : ""}`;
 const dir = join(HERE, "runs", runId);
 mkdirSync(dir, { recursive: true });
 const t0 = Date.now(), usage = { cost: 0 }, stages = [];
@@ -70,12 +70,36 @@ if (trace) {
   if (spec_.startsWith("auto")) {
     const scale = Number(spec_.split(":")[1] || 1);
     t = traceElevation(concept, dir, { scale, box: await locateWithGemini(concept) });
+    if (process.argv.includes("--redraw")) {
+      // right-size by DESIGN, not by averaging: the image model redraws the elevation as pixel art on the target grid,
+      // making the simplification choices (which fins to keep, how the spire reads); the tracer then checks the grid
+      const [gc, gr] = (arg("--grid") || `${t.cols}x${t.rows}`).split("x").map(Number);
+      // a "sprite" prompt (make a WxH sprite, show it nearest-neighbour enlarged) holds the grid far better than "redraw on
+      // a grid" (which draws grid lines and paints half-cells inside them); several candidates, keep the one that is
+      // most truly drawn on the grid (flattest cells, fitGrid)
+      const prompt = `Make a ${gc}x${gr} pixel sprite of the FRONT ELEVATION of the building in the attached reference sheet, then show it enlarged with nearest-neighbour scaling so every sprite pixel is a big crisp square. ${gc} pixels wide, ${gr} tall, flat colours only, no grid lines, no shading, no text, plain light-grey background. Simplify to fit like an architect drawing at small scale: keep the silhouette, the main rhythm, the focal features and the colour scheme; merge or drop detail that cannot be one pixel or more.`;
+      const { fitGrid } = await import("./sheet-trace.mjs");
+      const cands = await Promise.all([1, 2, 3].map(async (attempt) => {
+        const r = await generateImage({ prompt, images: [{ base64: readFileSync(concept).toString("base64"), mediaType: "image/jpeg" }] });
+        const rp = join(dir, `redraw-${attempt}.${r.mediaType === "image/png" ? "png" : "jpg"}`);
+        writeFileSync(rp, Buffer.from(r.base64, "base64"));
+        const fit = fitGrid(rp, join(dir, `redraw-${attempt}-trace`), await locateWithGemini(rp), gc, gr);
+        mark("redraw", { attempt, ...fit });
+        return { rp, fit, attempt };
+      }));
+      const best = cands.sort((x, y) => x.fit.score - y.fit.score)[0];
+      for (const f of ["trace.txt", "trace.png", "trace-raw.png"]) writeFileSync(join(dir, f), readFileSync(join(dir, `redraw-${best.attempt}-trace`, f)));
+      writeFileSync(join(dir, "redraw.png"), readFileSync(best.rp));
+      t = { ...best.fit, redrawErr: best.fit.score, redrawPick: best.attempt, measuredFromConcept: `${t.cols}x${t.rows}` };
+      mark("redraw pick", { attempt: best.attempt, cols: t.cols, rows: t.rows, score: t.score });
+    }
   } else {
     const [x, y, w, h, cols, rows] = spec_.split(",").map(Number);
     t = traceElevation(concept, dir, { box: { x, y, w, h }, cols, rows });
   }
   writeFileSync(join(dir, "trace.json"), JSON.stringify(t, null, 1) + "\n");
-  traceNote = `trace.png / trace.txt: the front elevation downsampled to a ${t.cols} x ${t.rows} block grid (x left to right, y=0 at the ground). ` +
+  traceNote = (t.redrawErr !== undefined ? "redraw.png is the concept's front elevation redrawn by design at the build's true block size; " : "") +
+    `trace.png / trace.txt: the front elevation downsampled to a ${t.cols} x ${t.rows} block grid (x left to right, y=0 at the ground). ` +
     `It is a TRACING: use it for the outline, the position and size of every feature, and the colour regions, block by block.` +
     (t.scale > 1 ? ` The building is built at ${t.scale}x the concept's block scale, so each concept block is ${t.scale}x${t.scale} blocks here: ` +
       `use the extra resolution for the detail the concept draws within a block (thin fins, mouldings, insets, sub-block steps), and scale depth by ${t.scale} too.` : "");
@@ -123,6 +147,12 @@ const agentPrompt = [
   "files in this directory, following spec.md (its sizes and its MATERIAL MAP are binding: use exactly those block ids for those regions).",
   "Where spec.md and concept.jpg disagree on form, the CONCEPT wins.",
   ...(traceNote ? [traceNote + " Build the front face to match the tracing cell for cell (then add the depth the 3/4 view shows), and compare your front elevation against trace.png in each round."] : []),
+  ...(process.argv.includes("--thin") ? [
+    "SIZE IS FIXED: do not scale the building up to fit detail. Detail finer than a block goes into SUB-BLOCK parts, the way skilled builders detail small builds:",
+    "a thin vertical line or fin → wall / fence / glass pane / iron bars or a trapdoor on the face; a half-height ledge, sill or step → slab;",
+    "a diagonal or sloped edge → stairs (with the right facing and half); small ornaments → buttons, heads, lanterns, end rods, banners.",
+    "Separate neighbouring elements by DEPTH, not only colour: push alternate fins/piers 1 block proud, recess windows 1, so each casts its own shadow.",
+  ] : []),
   "Geometry: the main front faces NORTH (−z); x runs along the street; y = 0 is the ground. Author it as code (mcd new build.mjs; design one bay,",
   "tile it, mirror for symmetry). For curved and stepped forms use the build library's SHAPE BRUSHES (see the skill's references/shapes-curved.md",
   "and references/shapes-massing.md: dome, cylinder, minaret, arch, setbacks, gableRoof, hipRoof, fins, parapet, cornice) instead of placing those",

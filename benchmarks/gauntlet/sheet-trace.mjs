@@ -104,8 +104,102 @@ export async function locateWithGemini(path, model = process.env.MC_LOCATE_MODEL
   const body = { contents: [{ parts: [{ inlineData: { mimeType: /\.png$/i.test(path) ? "image/png" : "image/jpeg", data: readFileSync(path).toString("base64") } },
     { text: "This is a Minecraft builder's reference sheet. Detect the FRONT ELEVATION drawing of the building (the flat, straight-on view; not the 3/4 view, not labels, not swatches). The box must include the whole building: every tower, minaret, spire tip, finial, parapet and the plinth or base, and nothing else. Reply JSON: {\"box_2d\": [ymin, xmin, ymax, xmax]} normalised 0-1000." }] }],
     generationConfig: { responseMimeType: "application/json" } };
-  const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
-  const j = await r.json();
-  const [ymin, xmin, ymax, xmax] = JSON.parse(j.candidates[0].content.parts.map((p) => p.text).join("")).box_2d;
+  let ymin, xmin, ymax, xmax;
+  for (let attempt = 1; ; attempt++) {
+    try {
+      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
+      const j = await r.json();
+      let o = JSON.parse(j.candidates[0].content.parts.map((p) => p.text).join(""));
+      if (Array.isArray(o)) o = Array.isArray(o[0]) || typeof o[0] === "number" ? { box_2d: Array.isArray(o[0]) ? o[0] : o } : o[0];
+      [ymin, xmin, ymax, xmax] = o.box_2d;
+      break;
+    } catch (e) { if (attempt >= 3) throw e; }
+  }
   return { x: Math.round(xmin / 1000 * w), y: Math.round(ymin / 1000 * h), w: Math.round((xmax - xmin) / 1000 * w), h: Math.round((ymax - ymin) / 1000 * h) };
+}
+
+// For crisp pixel art (a redraw): find the grid's pitch AND phase, snap the located box to grid lines, and read each
+// cell's centre colour, so cells never blend with their neighbours.
+export function traceCrisp(path, dir, box) {
+  const { w, h, px } = rgbOf(path);
+  const at = (x, y) => 3 * (y * w + x);
+  const gray = (x, y) => { const i = at(x, y); return px[i] * 0.3 + px[i + 1] * 0.59 + px[i + 2] * 0.11; };
+  const f = findElevation(path, box);
+  const p = f.pitch;
+  const phase = (axis) => {          // grid offset that puts most edge energy on grid lines
+    const e = new Float64Array(Math.ceil(p));
+    if (axis === "x") { for (let x = box.x; x < box.x + box.w - 1; x++) for (let y = box.y; y < box.y + box.h; y += 2) e[Math.floor(x % p)] += Math.abs(gray(x + 1, y) - gray(x, y)); }
+    else { for (let y = box.y; y < box.y + box.h - 1; y++) for (let x = box.x; x < box.x + box.w; x += 2) e[Math.floor(y % p)] += Math.abs(gray(x, y + 1) - gray(x, y)); }
+    return e.indexOf(Math.max(...e)) + 0.5;
+  };
+  const ox = phase("x"), oy = phase("y");
+  const snap = (v, o) => o + Math.round((v - o) / p) * p;
+  const x0 = snap(box.x, ox), x1 = snap(box.x + box.w, ox), y0 = snap(box.y, oy), y1 = snap(box.y + box.h, oy);
+  const cols = Math.round((x1 - x0) / p), rows = Math.round((y1 - y0) / p);
+  const grid = [];
+  for (let r = 0; r < rows; r++) {
+    const row = [];
+    for (let c = 0; c < cols; c++) {   // median of the central half of the cell
+      const vals = [[], [], []];
+      for (let y = Math.round(y0 + (r + 0.25) * p); y < y0 + (r + 0.75) * p; y++) for (let x = Math.round(x0 + (c + 0.25) * p); x < x0 + (c + 0.75) * p; x++) {
+        if (x < 0 || y < 0 || x >= w || y >= h) continue; const i = at(x, y); for (let k = 0; k < 3; k++) vals[k].push(px[i + k]);
+      }
+      row.push(vals.map((v) => v.sort((a, b) => a - b)[v.length >> 1] ?? 0));
+    }
+    grid.push(row);
+  }
+  mkdirSync(dir, { recursive: true });
+  const hex = (c) => c.map((v) => v.toString(16).padStart(2, "0")).join("");
+  writeFileSync(join(dir, "trace.txt"), [`# front elevation traced at ${cols} x ${rows} blocks; first row = top (y=${rows - 1}), last row = ground (y=0); x=0..${cols - 1} left to right; hex = cell colour`,
+    ...grid.map((r, i) => `y${String(rows - 1 - i).padStart(2, "0")} ${r.map(hex).join(" ")}`)].join("\n") + "\n");
+  const raw = join(dir, "trace-raw.png");
+  execFileSync("magick", ["-size", `${cols}x${rows}`, "-depth", "8", "rgb:-", raw], { input: Buffer.from(grid.flat(2)) });
+  const cell = Math.max(8, Math.round(720 / rows));
+  execFileSync("magick", [raw, "-filter", "point", "-scale", `${cols * cell}x${rows * cell}!`, "-fill", "none", "-stroke", "#0004",
+    ...Array.from({ length: cols + 1 }, (_, i) => ["-draw", `line ${i * cell},0 ${i * cell},${rows * cell}`]).flat(),
+    ...Array.from({ length: rows + 1 }, (_, i) => ["-draw", `line 0,${i * cell} ${cols * cell},${i * cell}`]).flat(), join(dir, "trace.png")]);
+  return { box: { x: x0, y: y0, w: x1 - x0, h: y1 - y0 }, pitch: p, cols, rows, scale: 1 };
+}
+
+// How well is this image really drawn on a cols x rows block grid? Search grid sizes near the target and small box
+// offsets; score = mean deviation of pixels from their cell's median colour (low = flat cells = truly that grid).
+// Returns the best fit and writes the cell-centre tracing for it.
+export function fitGrid(path, dir, box, gc, gr, { spread = 2 } = {}) {
+  const { w, h, px } = rgbOf(path);
+  const at = (x, y) => 3 * (y * w + x);
+  let best = null;
+  for (let cols = gc - spread; cols <= gc + spread; cols++) for (let rows = gr - spread; rows <= gr + spread; rows++) {
+    const pw = box.w / cols, ph = box.h / rows;
+    for (const dx of [-0.4, -0.2, 0, 0.2, 0.4]) for (const dy of [-0.4, -0.2, 0, 0.2, 0.4]) {
+      const x0 = box.x + dx * pw, y0 = box.y + dy * ph;
+      let dev = 0, n = 0; const grid = [];
+      for (let r = 0; r < rows; r++) {
+        const row = [];
+        for (let c = 0; c < cols; c++) {
+          const vals = [[], [], []];
+          for (let y = Math.round(y0 + (r + 0.15) * ph); y < y0 + (r + 0.85) * ph; y += 2) for (let x = Math.round(x0 + (c + 0.15) * pw); x < x0 + (c + 0.85) * pw; x += 2) {
+            if (x < 0 || y < 0 || x >= w || y >= h) continue; const i = at(x, y); for (let k = 0; k < 3; k++) vals[k].push(px[i + k]);
+          }
+          const med = vals.map((v) => [...v].sort((a, b) => a - b)[v.length >> 1] ?? 0);
+          for (let j = 0; j < vals[0].length; j++) { dev += Math.abs(vals[0][j] - med[0]) + Math.abs(vals[1][j] - med[1]) + Math.abs(vals[2][j] - med[2]); n++; }
+          row.push(med);
+        }
+        grid.push(row);
+      }
+      const score = dev / Math.max(1, n);
+      if (!best || score < best.score) best = { score, cols, rows, grid, box: { x: x0, y: y0, w: box.w, h: box.h } };
+    }
+  }
+  mkdirSync(dir, { recursive: true });
+  const { cols, rows, grid } = best;
+  const hex = (c) => c.map((v) => v.toString(16).padStart(2, "0")).join("");
+  writeFileSync(join(dir, "trace.txt"), [`# front elevation traced at ${cols} x ${rows} blocks; first row = top (y=${rows - 1}), last row = ground (y=0); x=0..${cols - 1} left to right; hex = cell colour`,
+    ...grid.map((r, i) => `y${String(rows - 1 - i).padStart(2, "0")} ${r.map(hex).join(" ")}`)].join("\n") + "\n");
+  const raw = join(dir, "trace-raw.png");
+  execFileSync("magick", ["-size", `${cols}x${rows}`, "-depth", "8", "rgb:-", raw], { input: Buffer.from(grid.flat(2)) });
+  const cell = Math.max(8, Math.round(720 / rows));
+  execFileSync("magick", [raw, "-filter", "point", "-scale", `${cols * cell}x${rows * cell}!`, "-fill", "none", "-stroke", "#0004",
+    ...Array.from({ length: cols + 1 }, (_, i) => ["-draw", `line ${i * cell},0 ${i * cell},${rows * cell}`]).flat(),
+    ...Array.from({ length: rows + 1 }, (_, i) => ["-draw", `line 0,${i * cell} ${cols * cell},${i * cell}`]).flat(), join(dir, "trace.png")]);
+  return { cols, rows, score: +best.score.toFixed(1), box: best.box, scale: 1 };
 }

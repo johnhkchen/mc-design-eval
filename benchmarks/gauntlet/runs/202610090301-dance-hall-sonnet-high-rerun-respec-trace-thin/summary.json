@@ -1,0 +1,46 @@
+{
+ "runId": "202610090301-dance-hall-sonnet-high-rerun-respec-trace-thin",
+ "subject": "dance-hall",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-2",
+ "why": "B's central tower is a clean stained-glass column topped by a gold crown and its side windows are paler, both closer to the reference, while A clutters the tower with stacked gold blocks; the massing, roof and marquee are almost the same in both.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 1.6825976000000002,
+ "durationMs": 485645,
+ "stages": [
+  {
+   "n": "trace",
+   "s": 7,
+   "cols": 26,
+   "rows": 30,
+   "scale": 1,
+   "pitch": 21.5,
+   "box": {
+    "x": 42,
+    "y": 78,
+    "w": 561,
+    "h": 644
+   }
+  },
+  {
+   "n": "spec",
+   "s": 45
+  },
+  {
+   "n": "agentic build",
+   "s": 478,
+   "turns": 23,
+   "cost": 1.2784098000000002
+  },
+  {
+   "n": "keep-better",
+   "s": 486,
+   "kept": "round-2",
+   "why": "B's central tower is a clean stained-glass column topped by a gold crown and its side windows are paler, both closer to the reference, while A clutters the tower with stacked gold blocks; the massing, roof and marquee are almost the same in both."
+  }
+ ]
+}

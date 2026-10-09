@@ -428,6 +428,23 @@ Sonnet high, same concepts (`dance-hall-trace-2x.png`, `taj-trace.png`, newest r
 
 Takeaways: the tracing is now the strongest lever after the concept itself. It fixes size, proportions and tone in one step, at no model cost beyond one Gemini call. Use 2× when the concept draws detail finer than a block, and when the building is small (the grocery's 15-wide tracing is too coarse at 1×).
 
+### Right-sizing without 2× (2026-10-08)
+
+The owner's point: 2× is not a design answer; the build must be the right size. Two arms at the true 26 × 30, Sonnet
+high, both with a "thin-block" guide (detail finer than a block goes into slabs, stairs, walls, panes and trapdoors;
+separate neighbours by depth). Grid in `benchmarks/gauntlet/dance-hall-true-size.png` (2× reference, A, B):
+
+| Arm | Cost | Result |
+|---|---|---|
+| A: blur tracing at 26 × 30 + thin-block guide | $1.68 | right size and silhouette; the fins are heavy blue slabs; murky colours where the blur mixed cells |
+| B: Nano Banana redraw at 26 × 30, traced + thin-block guide | $1.81 | **cleanest right-sized front**: crisp spire, crown, marquee, clear colour zones; the fins are still wide blue bands |
+
+- **The redraw is the better tracing source.** An image model simplifies by design; a blur filter only averages.
+- **A "sprite" prompt works far better than "redraw on a grid".** "Make a W×H pixel sprite and show it nearest-neighbour enlarged" holds the grid; "redraw on a grid of W×H blocks" drew grid lines at the target pitch and then painted half-size cells inside them (secretly 2×).
+- **Grid fidelity varies by draw.** Score = how flat each cell is on the best-fitting grid (`fitGrid`). One sprite scored 7.4, but this run's three scored 27–31, so keep generating several candidates and pick by score.
+- **The fins did not come back.** At 26 wide, the concept's cluster of four navy and four cream lines per side cannot be drawn in whole blocks. Every redraw merged it into one wide blue band, and the builders followed. The thin-block guide was used elsewhere (wall reeds, end rods, stair crowns) but not to rebuild the fins from panes or walls. That needs naming per feature, not a general guide.
+- **The real fix is upstream: design for the size.** This concept was drawn with about 52-block detail. A concept generated at the target size from the start (the reference-sheet prompt with a block grid and a minimum feature of one block, checked by `fitGrid`) would never ask for what cannot fit.
+
 ## Why the good-looking approach is slow (from the transcripts)
 
 Measured on 014 and 027. [V]

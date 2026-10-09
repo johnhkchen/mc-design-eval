@@ -1,0 +1,98 @@
+{
+ "runId": "202610090302-dance-hall-sonnet-high-rerun-respec-trace-redraw-thin",
+ "subject": "dance-hall",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-2",
+ "why": "B carries over the reference's stained-glass windows in the central tower and the side bays, and adds trim and coursing to the side walls and roof, while A's facade is plain white with almost no window detail.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 1.8123652,
+ "durationMs": 595897,
+ "stages": [
+  {
+   "n": "redraw",
+   "s": 27,
+   "attempt": 3,
+   "cols": 26,
+   "rows": 30,
+   "score": 27.2,
+   "box": {
+    "x": 192.87692307692308,
+    "y": 21.386666666666667,
+    "w": 788,
+    "h": 842
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw",
+   "s": 35,
+   "attempt": 1,
+   "cols": 26,
+   "rows": 30,
+   "score": 29.3,
+   "box": {
+    "x": 212.46153846153845,
+    "y": 28,
+    "w": 750,
+    "h": 840
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw",
+   "s": 48,
+   "attempt": 2,
+   "cols": 28,
+   "rows": 32,
+   "score": 31.2,
+   "box": {
+    "x": 212.25714285714287,
+    "y": 5.6000000000000005,
+    "w": 752,
+    "h": 896
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw pick",
+   "s": 48,
+   "attempt": 3,
+   "cols": 26,
+   "rows": 30,
+   "score": 27.2
+  },
+  {
+   "n": "trace",
+   "s": 48,
+   "cols": 26,
+   "rows": 30,
+   "scale": 1,
+   "box": {
+    "x": 192.87692307692308,
+    "y": 21.386666666666667,
+    "w": 788,
+    "h": 842
+   }
+  },
+  {
+   "n": "spec",
+   "s": 101
+  },
+  {
+   "n": "agentic build",
+   "s": 587,
+   "turns": 24,
+   "cost": 1.3947133999999999
+  },
+  {
+   "n": "keep-better",
+   "s": 596,
+   "kept": "round-2",
+   "why": "B carries over the reference's stained-glass windows in the central tower and the side bays, and adds trim and coursing to the side walls and roof, while A's facade is plain white with almost no window detail."
+  }
+ ]
+}
