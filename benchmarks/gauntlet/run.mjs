@@ -23,7 +23,11 @@ const respec = process.argv.includes("--respec");   // with --from: keep the con
 // --trace x,y,w,h,cols,rows : the front elevation's pixel box on the sheet and its size in blocks. Downsamples it to a
 // block grid (trace.png with coordinates + trace.txt of hex colours) that the spec and the builder read as a tracing.
 const trace = arg("--trace");
-if (trace && !from) throw new Error("--trace needs --from (the pixel box is measured on an existing concept)");
+// --native WxH: design the concept AT the build size — the reference sheet is generated as a block drawing that is
+// exactly W x H blocks on the front, several candidates, the one most truly on that grid wins (fitGrid), and its front
+// is traced 1:1. Nothing is shrunk afterwards.
+const native = arg("--native")?.split("x").map(Number);
+if (trace && !from && !native) throw new Error("--trace needs --from (the pixel box is measured on an existing concept)");
 
 export const SUBJECTS = {
   "grocery-store": {
@@ -46,7 +50,7 @@ export const SUBJECTS = {
 const s = SUBJECTS[key];
 if (!s) throw new Error(`--subject one of ${Object.keys(SUBJECTS).join(", ")}`);
 const tag = PHASE1_MODEL_ID.replace(/^claude-/, "").replace(/-\d.*$/, "");
-const runId = `${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "")}-${key}-${tag}-${effort}${from ? "-rerun" : ""}${respec ? "-respec" : ""}${trace ? "-trace" : ""}${process.argv.includes("--redraw") ? "-redraw" : ""}${process.argv.includes("--thin") ? "-thin" : ""}`;
+const runId = `${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "")}-${key}-${tag}-${effort}${from ? "-rerun" : ""}${respec ? "-respec" : ""}${trace ? "-trace" : ""}${process.argv.includes("--redraw") ? "-redraw" : ""}${process.argv.includes("--thin") ? "-thin" : ""}${native ? `-native${native.join("x")}` : ""}`;
 const dir = join(HERE, "runs", runId);
 mkdirSync(dir, { recursive: true });
 const t0 = Date.now(), usage = { cost: 0 }, stages = [];
@@ -108,6 +112,38 @@ if (trace) {
 if (reuseSpec) {
   writeFileSync(join(dir, "spec.md"), readFileSync(join(HERE, "runs", from, "spec.md")));
   mark("concept + spec reused", { from });
+} else if (!from && native) {
+  const [gc, gr] = native;
+  const { fitGrid, locateWithGemini, findElevation } = await import("./sheet-trace.mjs");
+  const conceptPrompt = referenceSheetPrompt({ ...s, size: `EXACTLY ${gc} blocks wide and ${gr} blocks tall on the front elevation, about ${Math.round(gc * 0.9)} deep` }) +
+    ` DESIGNED AT THIS EXACT SIZE: draw both views as a clear block drawing where every block is one equal, clearly visible square (${gc} squares across the front, ${gr} up),` +
+    " every feature a whole number of blocks and nothing thinner than one block. Design the detail to fit this size, the way a skilled builder plans a build of this size:" +
+    " choose a few strong elements that read at this scale rather than fine detail that cannot fit. No grid lines, no text labels.";
+  writeFileSync(join(dir, "concept.prompt.txt"), conceptPrompt + "\n");
+  const cands = await Promise.all([1, 2, 3, 4].map(async (n) => {
+    const c = await generateImage({ prompt: conceptPrompt });
+    const cp = join(dir, `concept-${n}.${c.mediaType === "image/jpeg" ? "jpg" : "png"}`);
+    writeFileSync(cp, Buffer.from(c.base64, "base64"));
+    try {
+      // measure the size it was REALLY drawn at (block pitch), then fit/trace the grid at that size; fitGrid alone only
+      // searches near the target and cannot see a concept drawn at the wrong size
+      const box = await locateWithGemini(cp);
+      const m = findElevation(cp, box);
+      const sizeErr = Math.max(Math.abs(m.cols - gc) / gc, Math.abs(m.rows - gr) / gr);
+      const fit = fitGrid(cp, join(dir, `concept-${n}-trace`), box, m.cols, m.rows, { spread: 1 });
+      mark("native concept", { n, measured: `${m.cols}x${m.rows}`, sizeErr: +sizeErr.toFixed(2), ...fit });
+      return { cp, fit: { ...fit, sizeErr }, n };
+    } catch (e) { mark("native concept failed", { n, e: String(e).slice(0, 120) }); return null; }
+  }));
+  // closest to the target size wins; grid flatness breaks near-ties
+  const best = cands.filter(Boolean).sort((a, b) => (a.fit.sizeErr + a.fit.score / 1000) - (b.fit.sizeErr + b.fit.score / 1000))[0];
+  concept = join(dir, "concept" + best.cp.slice(best.cp.lastIndexOf(".")));
+  writeFileSync(concept, readFileSync(best.cp));
+  for (const f of ["trace.txt", "trace.png", "trace-raw.png"]) writeFileSync(join(dir, f), readFileSync(join(dir, `concept-${best.n}-trace`, f)));
+  writeFileSync(join(dir, "trace.json"), JSON.stringify({ ...best.fit, pick: best.n, native }, null, 1) + "\n");
+  traceNote = `trace.png / trace.txt: the concept's front elevation read cell by cell at its designed size of ${best.fit.cols} x ${best.fit.rows} blocks (x left to right, y=0 at the ground). ` +
+    `It is a TRACING: use it for the outline, the position and size of every feature, and the colour regions, block by block.`;
+  mark("native pick", { n: best.n, cols: best.fit.cols, rows: best.fit.rows, score: best.fit.score });
 } else if (!from) {
   const conceptPrompt = referenceSheetPrompt(s);
   writeFileSync(join(dir, "concept.prompt.txt"), conceptPrompt + "\n");
@@ -131,10 +167,10 @@ if (!reuseSpec) {
     "   (e.g. 'cream wall field → smooth_sandstone', 'gold trim → gold_block'), with where each region is. Match the sheet's materials, not generic ones.",
     "5. Features and where they sit (doors, windows, signs, ornaments, props), in block coordinates from the front-left ground corner.",
     "6. Depth plan: what projects and recesses, by how much.",
-    `Stated subject: ${s.what}. Stated size: ${s.size}.`,
+    `Stated subject: ${s.what}. Stated size: ${native ? `${native[0]} wide x ${native[1]} tall on the front (the concept was designed at this size)` : s.size}.`,
     "Under ~600 words. Output ONLY the spec (markdown).",
   ].join("\n");
-  const spec = await requestTextWithImage({ prompt: specPrompt, images: [img(concept), ...(trace ? [img(join(dir, "trace.png"))] : [])], model: PHASE1_MODEL_ID, effort });
+  const spec = await requestTextWithImage({ prompt: specPrompt, images: [img(concept), ...(trace || native ? [img(join(dir, "trace.png"))] : [])], model: PHASE1_MODEL_ID, effort });
   usage.cost += spec.raw?.total_cost_usd || 0;
   writeFileSync(join(dir, "spec.md"), spec.text + "\n");
   mark("spec");

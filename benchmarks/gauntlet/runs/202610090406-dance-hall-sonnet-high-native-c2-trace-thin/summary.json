@@ -1,0 +1,46 @@
+{
+ "runId": "202610090406-dance-hall-sonnet-high-rerun-respec-trace-thin",
+ "subject": "dance-hall",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-1",
+ "why": "Both builds share the same form, marquee and palette, but A's stepped crown is cleaner and its checkered stained-glass bays are closer to the reference, while B's crown has jagged, noisy shading and its gridded window panes stray further from the sheet.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 1.3160116000000002,
+ "durationMs": 340591,
+ "stages": [
+  {
+   "n": "trace",
+   "s": 7,
+   "cols": 24,
+   "rows": 27,
+   "scale": 1,
+   "pitch": 24,
+   "box": {
+    "x": 56,
+    "y": 55,
+    "w": 586,
+    "h": 653
+   }
+  },
+  {
+   "n": "spec",
+   "s": 62
+  },
+  {
+   "n": "agentic build",
+   "s": 329,
+   "turns": 23,
+   "cost": 0.8851118000000001
+  },
+  {
+   "n": "keep-better",
+   "s": 341,
+   "kept": "round-1",
+   "why": "Both builds share the same form, marquee and palette, but A's stepped crown is cleaner and its checkered stained-glass bays are closer to the reference, while B's crown has jagged, noisy shading and its gridded window panes stray further from the sheet."
+  }
+ ]
+}

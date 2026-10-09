@@ -445,6 +445,17 @@ separate neighbours by depth). Grid in `benchmarks/gauntlet/dance-hall-true-size
 - **The fins did not come back.** At 26 wide, the concept's cluster of four navy and four cream lines per side cannot be drawn in whole blocks. Every redraw merged it into one wide blue band, and the builders followed. The thin-block guide was used elsewhere (wall reeds, end rods, stair crowns) but not to rebuild the fins from panes or walls. That needs naming per feature, not a general guide.
 - **The real fix is upstream: design for the size.** This concept was drawn with about 52-block detail. A concept generated at the target size from the start (the reference-sheet prompt with a block grid and a minimum feature of one block, checked by `fitGrid`) would never ask for what cannot fit.
 
+### Designing the concept at the build size (2026-10-08)
+
+`--native 26x30` generates the reference sheet as a block drawing at the target size (4 candidates), measures the
+size each was really drawn at, and traces the pick 1:1. Grid: `benchmarks/gauntlet/dance-hall-native.png`.
+
+- **The concepts changed in kind.** They used fewer, bolder elements (full-block fins, a big sunburst arch, a simple marquee): the right instinct for the size.
+- **The image model hits the size about half the time.** Two of four came out near 24 × 28; two were about 31 × 38. The first pick used only the grid-flatness score, which searches near the target and cannot see a wrong size, so it chose a 31 × 38 concept. Fixed: measure the real size from the block pitch, prefer the closest, then break ties on flatness.
+- **The builds were worse than the redraw run,** even from the correctly sized concept (24 × 27, $1.32). The crown lost its stepped cream fins and became a flat sandstone mass; the wing sunbursts shrank; the massing went boxy.
+- **Why: a tracing records colour, not relief.** The redraw dance hall's character is colour (navy fins on cream), and tracing carries that. These concepts' character is relief (cream fins stepped on cream, deep reveals, a stepped crown), which is all one colour in a flat elevation. The tracing shows a uniform cream area, and the builder fills it flat.
+- **Next lever:** carry depth as well as colour. Options: have the image model draw a depth or relief map of the front alongside the elevation; read the 3/4 view for depth per region; or have the spec assign a depth to every traced region. The redraw route plus thin blocks remains the best right-sized result so far.
+
 ## Why the good-looking approach is slow (from the transcripts)
 
 Measured on 014 and 027. [V]

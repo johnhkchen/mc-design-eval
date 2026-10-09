@@ -1,0 +1,95 @@
+{
+ "runId": "202610090404-dance-hall-sonnet-high-thin-native26x30",
+ "subject": "dance-hall",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-2",
+ "why": "Both fronts are identical, but B's side wall has windows, a blue accent band and pilasters, close to the reference's detailed side elevation, where A's side wall is a bare sandstone slab.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 1.6670879999999997,
+ "durationMs": 461298,
+ "stages": [
+  {
+   "n": 3,
+   "s": 24,
+   "cols": 27,
+   "rows": 30,
+   "score": 40.3,
+   "box": {
+    "x": 66,
+    "y": 31.973333333333333,
+    "w": 556,
+    "h": 677
+   },
+   "scale": 1
+  },
+  {
+   "n": 2,
+   "s": 29,
+   "cols": 24,
+   "rows": 30,
+   "score": 49.3,
+   "box": {
+    "x": 48.25,
+    "y": 45.28,
+    "w": 585,
+    "h": 654
+   },
+   "scale": 1
+  },
+  {
+   "n": 4,
+   "s": 34,
+   "cols": 28,
+   "rows": 32,
+   "score": 65.5,
+   "box": {
+    "x": 72.00714285714285,
+    "y": 38.9375,
+    "w": 559,
+    "h": 650
+   },
+   "scale": 1
+  },
+  {
+   "n": 1,
+   "s": 42,
+   "cols": 24,
+   "rows": 29,
+   "score": 48.9,
+   "box": {
+    "x": 74.43333333333334,
+    "y": 43,
+    "w": 566,
+    "h": 665
+   },
+   "scale": 1
+  },
+  {
+   "n": 3,
+   "s": 42,
+   "cols": 27,
+   "rows": 30,
+   "score": 40.3
+  },
+  {
+   "n": "spec",
+   "s": 82
+  },
+  {
+   "n": "agentic build",
+   "s": 452,
+   "turns": 27,
+   "cost": 1.252012
+  },
+  {
+   "n": "keep-better",
+   "s": 461,
+   "kept": "round-2",
+   "why": "Both fronts are identical, but B's side wall has windows, a blue accent band and pilasters, close to the reference's detailed side elevation, where A's side wall is a bare sandstone slab."
+  }
+ ]
+}
