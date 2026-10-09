@@ -1,0 +1,8 @@
+# Deepslate Holdings detail pass. North = front (col0=x35 .. col35=x0); west = shaft side (col = z, front at left); roof col=x row=z.
+# Texture first, construction after.
+
+## JOB 27: mossy plinth / foundation course
+all faces rows 0-2 -> gradient mossy_stone_bricks..stone_bricks up
+north row 0 cols 0-8,26-35 -> plinth stone_bricks 3
+west ground row -> plinth stone_bricks 3
+

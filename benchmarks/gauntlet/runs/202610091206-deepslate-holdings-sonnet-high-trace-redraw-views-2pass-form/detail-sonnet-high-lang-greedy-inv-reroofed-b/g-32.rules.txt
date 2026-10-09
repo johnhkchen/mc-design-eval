@@ -1,0 +1,93 @@
+# Deepslate Holdings detail pass. North = front (col0=x35 .. col35=x0); west = shaft side (col = z, front at left); roof col=x row=z.
+# Texture first, construction after.
+
+## JOB 27: mossy plinth / foundation course
+all faces rows 0-2 -> gradient mossy_stone_bricks..stone_bricks up
+north row 0 cols 0-8,26-35 -> plinth stone_bricks 3
+west ground row -> plinth stone_bricks 3
+
+
+## JOB 40: weathering and variation on the deepslate wall field
+north where G -> weather 0.25
+west where G -> weather 0.25
+north where G -> vary
+west where G -> vary
+
+
+## JOB 1: entrance sign band
+north row 10 cols 9-25 -> alt raw_gold_block/smooth_quartz by col force
+north row 12 cols 11-23 -> oak_wall_sign out 1
+north row 11 cols 13-21 -> birch_wall_sign out 1
+
+
+## JOB 3: timber piers - weathered grain and a capital course
+north rows 15-17 where K -> oak_log axis=y
+
+
+## JOB 5: glass stair shaft - mullions and white stair
+north cols 30-32 rows 3-30 openings -> mullions iron_bars every 4 h
+north cols 30-32 rows 3-30 where E -> stairs smooth_quartz
+
+
+## JOB 6: lanterns hung in the shaft and behind the window glazing
+north cols 31 rows 8,14,20,26 where glass -> lantern hanging=true force
+north cols 6,13,21 rows 20,27 where glass -> lantern hanging=true force
+
+
+## JOB 8: timber window sills
+north rows 16-27 cols 4-28 openings -> sills oak_slab
+
+
+## JOB 11: wall lanterns on brackets
+north row 14 cols 8,11,16,18,23,25 -> attach lantern
+north row 5 cols 10,24 -> attach lantern
+
+
+## JOB 15: pediment louvre slit
+north cols 18 rows 36-38 -> louvres oak_fence
+
+
+## JOB 18: tower louvre slot
+west cols 14-15 rows 38-41 -> louvres oak_trapdoor vertical force
+
+
+## JOB 19: tower corner buttress strips
+west cols 12-18 rows 37-42 corners -> quoins polished_deepslate
+
+
+## JOB 21: porch lintel course
+north row 13 cols 8-26 -> cornice stepped quartz_block
+
+
+## JOB 26: flower beds
+north row 3 cols 4-5,27-28 -> flowering_azalea out 1 force
+
+
+## JOB 30: side balconies with corbels
+west rows 12,20,27 cols 17,20 -> oak_stairs top out 1
+
+
+## JOB 31: timber colonnettes under the balconies
+west rows 9-12,17-20,24-27 cols 17,20 -> oak_fence out 2
+
+
+## JOB 32: exterior side stair
+west rows 3+k cols 12+k for k=0..3 -> stone_brick_stairs left out 1
+west rows 4+k cols 12+k for k=0..3 -> oak_fence out 1
+
+
+## JOB 33: side wall lanterns
+west rows 9,17,25 cols 13-14 -> attach lantern
+
+
+## JOB 34: dark downpipe
+west cols 10 rows 3-31 where black_concrete -> wall polished_blackstone force
+
+
+## JOB 35: quartz cap and string courses on the shaft
+north rows 14,28 cols 30-32 -> cornice simple smooth_quartz
+
+
+## JOB 36: timber edge piers framing the shaft
+# already present: stripped_oak_log piers at cols 29 and 33 with chiselled capitals; nothing to add.
+

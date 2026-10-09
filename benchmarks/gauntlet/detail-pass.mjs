@@ -83,6 +83,10 @@ export async function detailPass(runDir, { input = "final.nbt", model = "claude-
       "building: base/plinth, every kind of opening (sills, lintels, frames), the entrance, piers/pilasters (capitals, bases), string courses,",
       "eaves and cornices, wall tops/copings, the roof edge, the sides and the back, and restrained surface treatment (weathering is welcome).",
       "Do not be lazy: a careful detailer writes many precise jobs; small ones are fine.",
+      "When a job REPLACES something that is already there (e.g. battlements that should become a railing, a wrong chimney, a stub), write it as",
+      "two passes inside the job: the clearing rules, a line 'then', and the building rules; after 'then' refer to blocks by NAME, not letter.",
+      "Ornaments must read at street distance and suit the palette: prefer the treatments' visible defaults (lantern fittings, handrails with posts,",
+      "mullions on big glass) and avoid colours that clash with the walls and trim.",
     ] : []),
     "Never edit .nbt files or write build scripts; only rules. Report in ≤6 lines: the treatments you chose and whether detail-2 beats input.",
   ].join("\n");

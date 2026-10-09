@@ -1,0 +1,38 @@
+1. **Entrance sign band "DEEPSLATE HOLDINGS / COMMUNITY SERVICES"**: entrance porch, front fascia above the doors, ground level. About 14-18 wide x 3 tall, with a smaller second line. Blocks: quartz_block or smooth_quartz panel, oak_wall_sign or oak_hanging_sign for the lettering, gold-toned trim line. Treatment: attach, plus lintels for the white fascia.
+2. **Teal hanging banners**: entrance porch, on the two outer white pilasters. 1 wide x 3 tall, 2 total. Blocks: cyan_banner. Treatment: attach.
+3. **Timber pilasters / piers**: main block, front face, between window bays on the upper storeys, about 4 piers. 2 wide x 8-9 tall, 1 deep. Blocks: stripped_oak_log, oak_log. Treatment: pilasters.
+4. **Chiselled Greek-key capitals and key blocks**: main block, front face, top and base of each pier under the cornice and above the porch, plus the shaft corner. 1-2 blocks, 2x2 projecting. Blocks: chiseled_deepslate, chiseled_stone_bricks, chiseled_polished_blackstone. Treatment: brackets (capitals) or quoins (corner blocks).
+5. **Glass stair shaft with white dogleg stair inside**: east edge of the front face, full height. 3-4 wide x all storeys, 1-block mullions. Blocks: glass_pane, iron_bars, quartz_stairs, smooth_quartz_stairs. Treatment: frames, plus attach for the stair.
+6. **Lanterns hung inside the glass shaft and behind window glazing**: shaft landings and every main-block window. 1 x 1-2 tall. Blocks: lantern (hanging), chain. Treatment: attach.
+7. **Window lintel hoods**: main block, front face, above every upper-storey window, plus the shaft windows. 4 wide x 1 tall, projecting 1. Blocks: stone_brick_stairs, polished_deepslate_slab, deepslate_brick_stairs. Treatment: lintels.
+8. **Timber window sills / sill boxes**: main block, front face, under every upper-storey window. 3-4 wide x 1 tall, projecting 1. Blocks: oak_slab, oak_planks, oak_stairs (upside down). Treatment: sills.
+9. **Window surrounds and jambs**: main block, front face, each window. 1 wide each side, full window height. Blocks: deepslate_bricks, polished_deepslate, chiseled_deepslate. Treatment: frames.
+10. **Window mullions and glazing bars**: main block windows, porch glazing, side arched windows. 1-block bars dividing a roughly 3x2 to 3x4 pane grid. Blocks: glass_pane, iron_bars, white_stained_glass_pane. Treatment: frames.
+11. **Wall lanterns on brackets**: main block, front face, at the base of the lower-storey pilasters, the facade ends and below each porch banner. 1-2 blocks. Blocks: lantern, oak_fence stub, iron_bars. Treatment: brackets and attach.
+12. **Heavy cornice / entablature with dentil row**: main block, eave line, full width, and a lighter string course between storeys and over the porch. 2-3 tall, projecting 1. Blocks: polished_deepslate_stairs (upside down), deepslate_brick_slab, stone_brick_stairs. Treatment: cornice.
+13. **Pediment rake trim in golden timber**: main block, front gable, stepped diagonal band along both slopes. 1 thick, about 10-14 per slope. Blocks: oak_stairs, oak_slab, stripped_oak_log. Treatment: raw rules.
+14. **Pediment finial / spire**: gable apex. 1 wide, 4-5 tall. Blocks: lightning_rod on an oak_fence or end_rod stack. Treatment: finial.
+15. **Pediment louvre slit**: centre of the gable face. 1 wide x 3 tall. Blocks: oak_fence or spruce_trapdoor lattice, stone surround. Treatment: louvres.
+16. **Tower roof railing**: elevator head, top and down the stepped shoulder on the east side. About 5-6 along the front, plus a 4-5 run down the shoulder, 1 tall. Blocks: oak_fence, oak_fence_gate. Treatment: railing.
+17. **Tower flagpole / rod**: elevator head roof, near the left corner behind the railing. 1 wide x 3-4 tall. Blocks: lightning_rod, end_rod, oak_fence stack. Treatment: finial.
+18. **Tower louvre / grille slot**: elevator head, front face, tall slot. 2 wide x 3-4 tall. Blocks: oak_trapdoor (open), oak_fence, jungle_trapdoor. Treatment: louvres.
+19. **Tower corner buttress strips**: elevator head, front and side corners. 1 wide, full tower height. Blocks: polished_deepslate, deepslate_bricks. Treatment: quoins.
+20. **Entrance double doors with brass fittings**: porch, centre, ground. 2 wide x 3 tall. Blocks: dark_oak_door, glass_pane. Treatment: frames.
+21. **White porch colonnade and lintel**: entrance porch, front. About 17 wide x 4 tall, pillars 1-2 wide. Blocks: quartz_pillar, quartz_block, quartz_slab. Treatment: pilasters and lintels.
+22. **Entrance steps**: ground, centre front. About 8 wide x 3 treads. Blocks: stone_brick_stairs, smooth_stone_slab. Treatment: raw rules.
+23. **Handrails with newel posts beside the steps**: both sides of the steps, rising diagonally. 3-4 blocks long, 1 tall. Blocks: oak_fence, oak_stairs. Treatment: railing.
+24. **Lantern posts at the steps and plinth ends**: ground, flanking the steps, with timber caps at the plinth wall ends. 1 x 3-4 tall with a lantern on top. Blocks: oak_fence or stripped_oak_log, lantern. Treatment: attach.
+25. **Potted trees / clipped shrubs**: ground, either side of the porch, plus two inside the porch bays. 2 x 3-5 tall. Blocks: oak_leaves, azalea_leaves, oak_fence trunk. Treatment: raw rules.
+26. **Flower beds with pink blooms**: ground, in front of the porch pilasters and along the plinth. 2-3 wide x 1-2 tall. Blocks: flowering_azalea, azalea_leaves, allium, pink_tulip, peony, stone_brick_slab edging. Treatment: raw rules.
+27. **Mossy plinth / foundation course**: ground, all around the base, incl. the shaft base. 2-3 tall, full width. Blocks: mossy_stone_bricks, mossy_cobblestone, stone_bricks. Treatment: plinth.
+28. **Arched ground-floor window surrounds**: ground storey, front face, left and right of the porch. 3 wide x 4 tall (2-wide glass) with a muntin grid. Blocks: stone_brick_stairs, deepslate_brick_stairs, glass_pane, iron_bars. Treatment: lintels and frames.
+29. **Pot plants on lower-storey window sills**: front face, lower-storey windows. 1-2 blocks. Blocks: potted_azalea, azalea_leaves, fern. Treatment: attach.
+30. **Stacked side balconies with corbels**: east face, one per storey. 2-3 projecting, 2 tall each. Blocks: oak_stairs (upside down), oak_slab, polished_deepslate_stairs, stone_brick_slab. Treatment: brackets.
+31. **Timber colonnettes under the balconies**: east face, in pairs, 3 storeys. 1 wide x 3-4 tall. Blocks: oak_fence, stripped_oak_log. Treatment: pilasters.
+32. **Exterior side stair with landings**: east face, zig-zagging from ground to the upper storeys. 1-wide flights, 2x2 landings. Blocks: stone_brick_stairs, deepslate_brick_stairs, oak_fence. Treatment: railing and raw rules.
+33. **Side wall lanterns**: east face and the dark column, 3-4 along the height. 1 x 1. Blocks: lantern, chain. Treatment: attach.
+34. **Dark downpipe / column**: rear corner beside the shaft, full height (about 15). 1 wide. Blocks: polished_blackstone_wall, deepslate_tile_wall, iron_bars. Treatment: raw rules.
+35. **Quartz cap and string courses on the shaft**: shaft head and at the glazing bands. 1-2 tall x 3-4 wide, 1 projection. Blocks: smooth_quartz_slab, quartz_stairs, quartz_block. Treatment: coping and cornice.
+36. **Timber edge piers framing the shaft**: both vertical edges of the shaft, with a capital at the top of the right pier. 1-2 wide, full height. Blocks: stripped_oak_log, oak_planks. Treatment: pilasters.
+37. **Left-roof chimney stack**: main block, roof, far left. About 2 x 2 x 3 tall. Blocks: deepslate_bricks, deepslate_brick_slab cap. Treatment: coping.
+38. **Side door with small arch**: east face, ground, far right. 1 wide x 2 tall. Blocks: spruce_door, stone_brick_stairs arch. Treatment: frames and lintels.

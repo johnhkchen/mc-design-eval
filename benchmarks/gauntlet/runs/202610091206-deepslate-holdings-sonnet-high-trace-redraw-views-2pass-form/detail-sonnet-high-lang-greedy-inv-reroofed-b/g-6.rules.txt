@@ -1,0 +1,30 @@
+# Deepslate Holdings detail pass. North = front (col0=x35 .. col35=x0); west = shaft side (col = z, front at left); roof col=x row=z.
+# Texture first, construction after.
+
+## JOB 27: mossy plinth / foundation course
+all faces rows 0-2 -> gradient mossy_stone_bricks..stone_bricks up
+north row 0 cols 0-8,26-35 -> plinth stone_bricks 3
+west ground row -> plinth stone_bricks 3
+
+
+## JOB 40: weathering and variation on the deepslate wall field
+north where G -> weather 0.25
+west where G -> weather 0.25
+north where G -> vary
+west where G -> vary
+
+
+## JOB 1: entrance sign band
+north row 10 cols 9-25 -> alt raw_gold_block/smooth_quartz by col force
+north row 12 cols 11-23 -> oak_wall_sign out 1
+north row 11 cols 13-21 -> birch_wall_sign out 1
+
+
+## JOB 3: timber piers - weathered grain and a capital course
+north rows 15-17 where K -> oak_log axis=y
+
+
+## JOB 4: chiselled capitals and corner key blocks
+north where K -> brackets polished_deepslate_stairs at pilasters
+north rows 3-31 corners -> quoins chiseled_deepslate
+

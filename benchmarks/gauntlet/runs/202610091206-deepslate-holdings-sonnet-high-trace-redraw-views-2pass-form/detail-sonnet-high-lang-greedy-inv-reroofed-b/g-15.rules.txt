@@ -1,0 +1,48 @@
+# Deepslate Holdings detail pass. North = front (col0=x35 .. col35=x0); west = shaft side (col = z, front at left); roof col=x row=z.
+# Texture first, construction after.
+
+## JOB 27: mossy plinth / foundation course
+all faces rows 0-2 -> gradient mossy_stone_bricks..stone_bricks up
+north row 0 cols 0-8,26-35 -> plinth stone_bricks 3
+west ground row -> plinth stone_bricks 3
+
+
+## JOB 40: weathering and variation on the deepslate wall field
+north where G -> weather 0.25
+west where G -> weather 0.25
+north where G -> vary
+west where G -> vary
+
+
+## JOB 1: entrance sign band
+north row 10 cols 9-25 -> alt raw_gold_block/smooth_quartz by col force
+north row 12 cols 11-23 -> oak_wall_sign out 1
+north row 11 cols 13-21 -> birch_wall_sign out 1
+
+
+## JOB 3: timber piers - weathered grain and a capital course
+north rows 15-17 where K -> oak_log axis=y
+
+
+## JOB 5: glass stair shaft - mullions and white stair
+north cols 30-32 rows 3-30 openings -> mullions iron_bars every 4 h
+north cols 30-32 rows 3-30 where E -> stairs smooth_quartz
+
+
+## JOB 6: lanterns hung in the shaft and behind the window glazing
+north cols 31 rows 8,14,20,26 where glass -> lantern hanging=true force
+north cols 6,13,21 rows 20,27 where glass -> lantern hanging=true force
+
+
+## JOB 8: timber window sills
+north rows 16-27 cols 4-28 openings -> sills oak_slab
+
+
+## JOB 11: wall lanterns on brackets
+north row 14 cols 8,11,16,18,23,25 -> attach lantern
+north row 5 cols 10,24 -> attach lantern
+
+
+## JOB 13: pediment rake trim in golden timber
+# already present: stepped oak_stairs (T) run along both slopes of the front gable; nothing to add.
+
