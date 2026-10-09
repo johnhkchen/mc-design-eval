@@ -1,0 +1,746 @@
+[
+ {
+  "what": "Spire finial on pediment apex",
+  "where": "Main block, central pediment peak, roof top",
+  "size": "1 block wide, ~5-6 tall (rod plus small knob/collar)",
+  "blocks": "lightning_rod, or end_rod on a gold/copper block or cut_copper_stairs/waxed_copper collar"
+ },
+ {
+  "what": "Finial on the right gable",
+  "where": "Main block, right/side gable peak (crop 4), roof top",
+  "size": "1 wide, ~3-4 tall",
+  "blocks": "lightning_rod, end_rod, oak_fence"
+ },
+ {
+  "what": "Roof-top railing (widow's walk)",
+  "where": "Tower/elevator head, flat top of the tower, roof top",
+  "size": "about 5x5 blocks of perimeter, 1-2 tall",
+  "blocks": "oak_fence, jungle_fence, oak_fence_gate"
+ },
+ {
+  "what": "Corner post or flagpole rod above the railing",
+  "where": "Tower/elevator head, top corner, roof top",
+  "size": "1 wide, 2-3 tall",
+  "blocks": "oak_fence, lightning_rod, end_rod"
+ },
+ {
+  "what": "Louvred/slatted vent opening",
+  "where": "Tower/elevator head, front face, upper part of tower",
+  "size": "2 wide x 4 tall",
+  "blocks": "jungle_trapdoor, oak_trapdoor, oak_fence, spruce_trapdoor, iron_bars"
+ },
+ {
+  "what": "Narrow louvre slot with a vertical rod",
+  "where": "Main block, pediment/gable centre, roof level",
+  "size": "1 wide x 3 tall opening framed by stone brick, 1-block rod inside",
+  "blocks": "oak_fence, oak_trapdoor, stone_brick_stairs/wall frame"
+ },
+ {
+  "what": "Chimney stack with a cap",
+  "where": "Main block, far-left roof edge (crop 2)",
+  "size": "1-2 wide x 2-3 tall above the roof",
+  "blocks": "stone_bricks, stone_brick_wall, polished_deepslate_slab or stone_brick_slab cap"
+ },
+ {
+  "what": "Chimney stack at the far right",
+  "where": "Main block, right roof (crop 4), beside the tower",
+  "size": "2 wide x 3-4 tall",
+  "blocks": "stone_bricks, stone_brick_wall, stone_brick_slab"
+ },
+ {
+  "what": "Small roof chimney pots or vents",
+  "where": "Main block, right roof slope (crop 4)",
+  "size": "1x1, 1 tall",
+  "blocks": "stone_brick_wall, polished_deepslate_wall, dark_oak_trapdoor, stone_button"
+ },
+ {
+  "what": "Contrasting wood raking trim (a stepped diagonal line up each pediment slope)",
+  "where": "Main block, pediment on both slopes, roof edge",
+  "size": "1 block per step, running the full ~10-block slope",
+  "blocks": "oak_stairs, oak_slab, stripped_oak_log, spruce_stairs"
+ },
+ {
+  "what": "Wood blocks at the pediment foot and the pilaster heads",
+  "where": "Main block, top of each pier at the eave",
+  "size": "2-3 wide x 1 tall",
+  "blocks": "oak_planks, oak_slab, stripped_oak_log"
+ },
+ {
+  "what": "Stacked cornice/eave course",
+  "where": "Main block, front face at the eave under the roof",
+  "size": "full width, 2-3 courses deep, with a 1-block overhang",
+  "blocks": "stone_brick_stairs, stone_brick_slab (upside-down), polished_deepslate_stairs, chiseled_stone_bricks"
+ },
+ {
+  "what": "Carved capitals (Greek-key/relief blocks) at the top of each pier",
+  "where": "Main block, front and side faces, under the eave on the upper storey, on every pier",
+  "size": "2 wide x 2 tall",
+  "blocks": "chiseled_stone_bricks, chiseled_deepslate, smooth_stone with stone_button/lever"
+ },
+ {
+  "what": "Window head lintels (stepped brow over each window)",
+  "where": "Main block, front face, upper storeys, above every window",
+  "size": "4-5 wide x 1-2 tall",
+  "blocks": "stone_brick_stairs, stone_brick_slab, polished_andesite_stairs"
+ },
+ {
+  "what": "Window mullions and glazing bars",
+  "where": "Main block, front face, upper-storey windows (and the lower ones)",
+  "size": "3 wide x 4 tall panes with a cross grid",
+  "blocks": "glass_pane, iron_bars, white_stained_glass_pane"
+ },
+ {
+  "what": "Hanging lanterns inside windows",
+  "where": "Main block, front face windows, upper storeys",
+  "size": "1 block each, 1-2 per window",
+  "blocks": "lantern, chain"
+ },
+ {
+  "what": "Sills (timber under each window)",
+  "where": "Main block, front face, below each window on the upper storeys",
+  "size": "3-4 wide x 1 tall",
+  "blocks": "oak_planks, oak_slab, oak_stairs, oak_trapdoor"
+ },
+ {
+  "what": "Vertical timber pilasters/piers with plain wood shafts",
+  "where": "Main block, front face between window bays, upper storeys",
+  "size": "2 wide x full storey height",
+  "blocks": "stripped_oak_log, oak_log, oak_planks"
+ },
+ {
+  "what": "Corner timber posts on the elevator shaft",
+  "where": "Glass shaft, both vertical edges of the shaft, full height",
+  "size": "1-2 wide x full height",
+  "blocks": "stripped_oak_log, oak_log"
+ },
+ {
+  "what": "White quartz bands (a horizontal course at shaft floor levels)",
+  "where": "Glass shaft, at the top and at the mid-level between glass sections",
+  "size": "3 wide x 1-2 tall",
+  "blocks": "smooth_quartz, quartz_slab, quartz_block, white_concrete"
+ },
+ {
+  "what": "Glass shaft glazing with a mullion grid",
+  "where": "Glass shaft, front face and the full height",
+  "size": "3 wide x 12+ tall",
+  "blocks": "glass_pane, glass, white_stained_glass_pane"
+ },
+ {
+  "what": "Interior stair run visible through the glass",
+  "where": "Glass shaft, the whole inside",
+  "size": "2-3 wide, diagonal runs",
+  "blocks": "quartz_stairs, smooth_quartz_stairs, diorite_stairs"
+ },
+ {
+  "what": "Hanging lamps inside the shaft",
+  "where": "Glass shaft, at each landing",
+  "size": "1 block each",
+  "blocks": "lantern, chain"
+ },
+ {
+  "what": "Stepped corbelled balconies/brackets down the shaft side",
+  "where": "Glass shaft, east/right side face, each storey",
+  "size": "3-4 wide x 2-3 tall projecting 1-2",
+  "blocks": "stone_brick_stairs, oak_stairs, oak_slab, stone_brick_slab, oak_fence"
+ },
+ {
+  "what": "Supporting posts and rods under each balcony",
+  "where": "Glass shaft, right side, under each balcony",
+  "size": "1 wide x 3-4 tall",
+  "blocks": "oak_fence, stripped_oak_log, oak_log"
+ },
+ {
+  "what": "Cap or coping on top of the glass shaft",
+  "where": "Glass shaft, roof top",
+  "size": "4 wide x 1-2 tall, full width",
+  "blocks": "stone_brick_slab, smooth_quartz_slab, stone_brick_stairs, snow or white_carpet"
+ },
+ {
+  "what": "Small side-face doorways or window frames framed in stone",
+  "where": "Main block, pediment face (small vertical slot window) and side gable (crop 4)",
+  "size": "1-2 wide x 3 tall",
+  "blocks": "stone_brick_wall, stone_brick_stairs, oak_trapdoor, iron_bars"
+ },
+ {
+  "what": "Roof-top railing (fence) around the tower lantern deck",
+  "where": "Tower/elevator head, roof top, front and right sides",
+  "size": "about 4-5 blocks long on the front and 3-4 on the side, 1 block high",
+  "blocks": "jungle_fence or oak_fence (gold-tan colour); stripped_jungle_log or oak_planks for the stair-stepped rail run"
+ },
+ {
+  "what": "Lightning rod / flagpole spire",
+  "where": "Tower head, roof top, standing on the parapet near the back corner",
+  "size": "1 block wide, about 3-4 blocks tall",
+  "blocks": "lightning_rod, or end_rod, or a gold-tinted fence"
+ },
+ {
+  "what": "Spire finial on the pediment apex",
+  "where": "Main block, front pediment peak (also visible on the 3/4 view)",
+  "size": "1 block wide, about 3-5 blocks tall",
+  "blocks": "lightning_rod, end_rod, or oak_fence"
+ },
+ {
+  "what": "Tower louvre / slatted vent window",
+  "where": "Tower head, front face, upper level, left of centre",
+  "size": "2 wide x 3 tall",
+  "blocks": "jungle_trapdoor or oak_trapdoor (open), or jungle_fence / oak_fence lattice; iron_bars is an alternative"
+ },
+ {
+  "what": "Tower side vent slot with an inset column",
+  "where": "Tower head, right face, upper level",
+  "size": "1 wide x 2 tall",
+  "blocks": "jungle_trapdoor or oak_trapdoor behind a stripped_jungle_log or oak_fence post"
+ },
+ {
+  "what": "Pediment louvre slot",
+  "where": "Main block, front pediment, centre, just below the apex",
+  "size": "1 wide x 3 tall",
+  "blocks": "jungle_trapdoor or oak_trapdoor (open), or oak_fence, in a dark recess"
+ },
+ {
+  "what": "Pediment raking trim (stepped diagonal band of contrasting material)",
+  "where": "Main block, front pediment, both rakes; continues on the 3/4 view",
+  "size": "1 block thick, stepping up about 8 blocks per side",
+  "blocks": "stripped_jungle_log, oak_planks, or jungle_planks as stairs and slabs"
+ },
+ {
+  "what": "Corner and pier capitals with carved-key (Greek key) blocks",
+  "where": "Main block, tops of the piers at the eave; the left and right corners; above the porch",
+  "size": "1x1 or 2x1 blocks, one per pier",
+  "blocks": "chiseled_stone_bricks, chiseled_deepslate, or deepslate_tiles"
+ },
+ {
+  "what": "Pier base plinth blocks (Greek key)",
+  "where": "Main block, bases of the timber piers, just above the porch roofline at the first-floor sill",
+  "size": "1-2 blocks wide x 1 tall, under each pier",
+  "blocks": "chiseled_deepslate or chiseled_stone_bricks"
+ },
+ {
+  "what": "Eave cornice course (stepped projecting band)",
+  "where": "Main block, top of the upper storey under the roof; the tower base cornice",
+  "size": "1 block deep projection, running the full facade width",
+  "blocks": "deepslate_tile_stairs and slabs, or polished_deepslate_stairs inverted, or stone_brick_stairs"
+ },
+ {
+  "what": "Timber pilasters/pier posts with dark corner quoins",
+  "where": "Main block, front face, full height between bays",
+  "size": "2 wide x 8-9 tall",
+  "blocks": "stripped_jungle_log or oak_log / stripped_oak_log; outside corner quoins in deepslate_bricks"
+ },
+ {
+  "what": "Window sills (timber), upper and lower rows",
+  "where": "Main block, front face, under each of the two window rows (2 storeys, 4 bays each)",
+  "size": "3 wide x 1-2 tall each",
+  "blocks": "oak_planks or jungle_planks with oak_slab or oak_stairs"
+ },
+ {
+  "what": "Window mullions and glazing grid",
+  "where": "Main block, front and side windows, both storeys",
+  "size": "3 wide x 4 tall panes, with 1-block mullions",
+  "blocks": "glass_panes, or white_stained_glass_pane for the white mullions; iron_bars or white stripes as mullion lines"
+ },
+ {
+  "what": "Interior hanging lanterns visible through windows",
+  "where": "Main block, behind each upper window; the glass shaft; the porch",
+  "size": "1x1, 1-2 per window",
+  "blocks": "lantern on chain, or lantern on iron_chain; the glass shaft uses hanging lanterns every 2-3 blocks"
+ },
+ {
+  "what": "Interior potted plants / planters in windows",
+  "where": "Main block, lower-row windows behind the glass, centre and right bays",
+  "size": "1-2 blocks",
+  "blocks": "potted_azalea_bush, flowering_azalea, oak_leaves, or potted_fern"
+ },
+ {
+  "what": "Interior bookshelves/shelving",
+  "where": "Main block, upper-row windows, behind the glass",
+  "size": "2-3 blocks wide",
+  "blocks": "bookshelf, chiseled_bookshelf, or oak_slab"
+ },
+ {
+  "what": "Exterior wall lanterns (sconces) on the piers",
+  "where": "Main block, front face, the ground-floor pier bases below the lower window row; the 3/4 right face; the shaft",
+  "size": "1x2: a lantern with a gold bracket/chain above it",
+  "blocks": "lantern hanging on a chain with oak_fence, or a lantern on a jungle_fence bracket; tripwire_hook or oak_button as a bracket tip"
+ },
+ {
+  "what": "Small lanterns beside the stair at the porch",
+  "where": "Entrance porch, ground level, flanking the steps",
+  "size": "1x2: a post with a lantern",
+  "blocks": "oak_fence or jungle_fence post topped with lantern"
+ },
+ {
+  "what": "Business sign band with gold lettering",
+  "where": "Entrance porch, front face, above the glass doors, spanning the porch fascia",
+  "size": "about 15 wide x 3 tall",
+  "blocks": "white_concrete or quartz_block band, birch_planks; the letters via oak_sign / glow_ink signs or gold_block / yellow_concrete pixels; also a smaller line of text 'COMMUNITY SERVICES' in black_concrete or black_wool"
+ },
+ {
+  "what": "Banners (teal) hanging from the porch",
+  "where": "Entrance porch, on both outer corner columns, ground level",
+  "size": "1 wide x 3 tall",
+  "blocks": "cyan_banner or light_blue_banner, or a teal/cyan wall banner"
+ },
+ {
+  "what": "Porch columns and mullioned glazed doors",
+  "where": "Entrance porch, ground level, front",
+  "size": "columns 1 wide x 4 tall; double door 2 wide x 3 tall",
+  "blocks": "quartz_pillar, smooth_quartz, white_stained_glass_pane, and dark_oak_door or jungle_door (double)"
+ },
+ {
+  "what": "Entrance steps with brass handrails",
+  "where": "Entrance porch, ground level, centre front; on the 3/4 view the rail is on the right",
+  "size": "about 7 wide x 3-4 steps; rails 3-4 long",
+  "blocks": "stone_brick_stairs or andesite_stairs / polished_andesite_stairs; oak_fence or jungle_fence with a lantern at the base"
+ },
+ {
+  "what": "Planters and shrubs flanking the porch",
+  "where": "Ground level, left and right of the porch, plinth wall; along the front",
+  "size": "2-3 blocks tall; the shrub trees are 3-4 tall",
+  "blocks": "oak_leaves, azalea_leaves, flowering_azalea_leaves, potted_flowering_azalea, allium, lilac, peony, pink_tulip in stone planters"
+ },
+ {
+  "what": "Moss and cracked patches on the plinth",
+  "where": "Ground level, base plinth, front and sides",
+  "size": "1-3 blocks per patch",
+  "blocks": "mossy_stone_bricks, cracked_stone_bricks, moss_carpet, vine"
+ },
+ {
+  "what": "Glass shaft (curtain wall) with white stair flights and mullions",
+  "where": "Glass shaft, right of the front face, full height; on the 3/4 view, centre",
+  "size": "3-4 wide x about 25 tall, with a white stair every 4 blocks",
+  "blocks": "glass or glass_pane, white_stained_glass, quartz_stairs or diorite_stairs for the flights; oak_trapdoor or iron_bars for the frame bars"
+ },
+ {
+  "what": "White cap band above the shaft",
+  "where": "Glass shaft, top, just under the tower head",
+  "size": "3-4 wide x 1-2 tall",
+  "blocks": "quartz_slab or quartz_block, smooth_quartz"
+ },
+ {
+  "what": "Timber pilasters flanking the glass shaft",
+  "where": "Both sides of the glass shaft, full height",
+  "size": "2 wide x full height",
+  "blocks": "stripped_jungle_log or stripped_oak_log, oak_planks"
+ },
+ {
+  "what": "Side-face stepped balconies/corbels with timber brackets",
+  "where": "Right side face, stepping up each level; stair tower with timber columns",
+  "size": "3-4 blocks wide, 1-2 projecting, one per level, 4-5 levels",
+  "blocks": "stone_brick_stairs/slabs (inverted) on oak_fence or jungle_fence posts; oak_stairs as a bracket; oak_log or stripped_jungle_log"
+ },
+ {
+  "what": "Fence-post colonnettes under the balconies",
+  "where": "Right side face, below each balcony, 4-5 levels",
+  "size": "1 wide x 3-4 tall",
+  "blocks": "oak_fence or jungle_fence, or stripped_jungle_log; spruce_fence as an alternative"
+ },
+ {
+  "what": "Dark downpipe/pilaster beside the shaft",
+  "where": "Right side face, vertical strip adjacent to the shaft, full height",
+  "size": "1 wide x full height",
+  "blocks": "deepslate_bricks or blackstone, polished_blackstone_wall, or iron_bars"
+ },
+ {
+  "what": "Side-face lanterns on bracket posts",
+  "where": "Right/side face on the 3/4 view, several heights along the vertical",
+  "size": "1x1 with a hanging 1-block bracket",
+  "blocks": "lantern with oak_fence / chain"
+ },
+ {
+  "what": "Hanging banner tip and decorative corbel under the sign",
+  "where": "Entrance porch, under the sign band at the ends, and under the ground-floor eaves",
+  "size": "1x1",
+  "blocks": "oak_trapdoor, lantern, or stone_brick_stairs"
+ },
+ {
+  "what": "Small arched windows with mullions at the ground floor, both ends",
+  "where": "Main block, ground level, left and right of the porch; the side arches near the base",
+  "size": "2 wide x 3-4 tall",
+  "blocks": "glass_pane in a stone_brick_stairs arch; iron_bars; the dark recess in blackstone"
+ },
+ {
+  "what": "Lanterns on wall brackets (wall-mounted lamps)",
+  "where": "Main block, front face, ground-floor-to-first-floor piers: one under each timber pilaster at the upper-storey sill line, plus one beside the entrance porch columns; on the glass shaft's east-side dark stone pier, three at storey intervals",
+  "size": "1 block each, with a 1-block iron/gold bracket stub above",
+  "blocks": "lantern (wall-hung on a chain or fence/tripwire-hook stub), soul_lantern"
+ },
+ {
+  "what": "Hanging pendant lamps inside windows",
+  "where": "Main block, front face, upper-storey windows, one per window, hanging from the head; also inside the glass shaft and behind the porch glazing",
+  "size": "1-2 blocks (chain plus lantern)",
+  "blocks": "chain + lantern, glass_pane for the glazing"
+ },
+ {
+  "what": "Window sills / timber planter boxes",
+  "where": "Main block, front face, under each upper-storey window (2 levels)",
+  "size": "1 block high, 2-3 blocks wide, projecting 1 block",
+  "blocks": "oak_trapdoor (open, or upright oak_slab), spruce_slab, oak_planks"
+ },
+ {
+  "what": "Planters with shrubs or flowers in window boxes",
+  "where": "Main block, front face, ground and first-floor window sills",
+  "size": "1 block each",
+  "blocks": "flower_pot, azalea or flowering_azalea, oak_leaves"
+ },
+ {
+  "what": "Window mullions and muntins (glazing bars)",
+  "where": "Main block, front face, all tall upper-storey windows; the porch glazing; the glass shaft; the ground-floor arched window",
+  "size": "1 block wide, window height 3-4 blocks, divided into 2x2 or 2x3 panes",
+  "blocks": "glass_pane, iron_bars, or oak_trapdoor/spruce_fence as bars"
+ },
+ {
+  "what": "Corbel / capital blocks at pilaster heads",
+  "where": "Main block, front face, the top of each timber pilaster below the cornice, plus the plinth blocks at each pilaster foot",
+  "size": "1-2 blocks, projecting 1 block",
+  "blocks": "chiseled_deepslate, deepslate_tile_stairs, polished_deepslate_stairs (upside-down), stone_brick_stairs"
+ },
+ {
+  "what": "Greek-key (meander) carved panels",
+  "where": "Main block, front face, at the top and base of each pilaster; the glass shaft's timber piers at storey intervals; the corners",
+  "size": "1 block each",
+  "blocks": "chiseled_stone_bricks, chiseled_deepslate, chiseled_polished_blackstone"
+ },
+ {
+  "what": "Cornice and string-course bands",
+  "where": "Main block, front face, at the eave and between storeys, projecting course under the roof edge",
+  "size": "1 block high, projecting 1 block, full width",
+  "blocks": "deepslate_tile_slab, polished_deepslate_stairs (upside-down), stone_brick_slab"
+ },
+ {
+  "what": "Dentil row",
+  "where": "Main block, under the eave cornice",
+  "size": "1 block high, alternating blocks, projecting 1",
+  "blocks": "stone_brick_stairs, deepslate_brick_stairs (upside-down), or trapdoors"
+ },
+ {
+  "what": "Contrasting timber pilasters and quoin trims",
+  "where": "Main block, front face and side wall, running full height between window bays; the glass shaft's piers",
+  "size": "1-2 blocks wide, 3 storeys tall",
+  "blocks": "stripped_oak_log, oak_log, spruce_log"
+ },
+ {
+  "what": "Entrance sign band with lettering 'DEEPSLATE HOLDINGS / COMMUNITY SERVICES'",
+  "where": "Entrance porch, front face, the white entablature above the columns",
+  "size": "about 14-16 blocks wide, 2-3 blocks high, in two lines",
+  "blocks": "quartz_block/smooth_quartz as the band; oak_sign or dark_oak_sign with glow ink (or gold/yellow terracotta lettering built from blocks)"
+ },
+ {
+  "what": "Teal hanging banners",
+  "where": "Entrance porch, front face, hung on each side column at upper-door level, with one lantern below each",
+  "size": "1 block wide, 2-3 blocks long",
+  "blocks": "cyan_banner (wall banner) or light_blue_banner, over a lantern"
+ },
+ {
+  "what": "Porch columns and pilasters",
+  "where": "Entrance porch, ground level, between the glazed bays",
+  "size": "1 block wide, 3-4 blocks tall",
+  "blocks": "quartz_pillar, smooth_quartz, polished_diorite"
+ },
+ {
+  "what": "Porch glazing with mullions",
+  "where": "Entrance porch, ground level, three glazed bays flanking the door",
+  "size": "3 bays, 4 blocks high, framed by 1-block mullions",
+  "blocks": "glass_pane or white_stained_glass_pane, iron_bars"
+ },
+ {
+  "what": "Double entrance door with brass handles",
+  "where": "Entrance porch, centre, ground level",
+  "size": "2 wide x 2-3 high",
+  "blocks": "dark_oak_door (x2) or spruce_door, with a glass_pane transom above"
+ },
+ {
+  "what": "Entrance steps",
+  "where": "Entrance porch, ground level, centre, 3-4 treads",
+  "size": "about 8 wide, 1 block per tread",
+  "blocks": "stone_brick_stairs, smooth_stone_slab, andesite_stairs, polished_andesite_stairs"
+ },
+ {
+  "what": "Hand-rails flanking the steps",
+  "where": "Entrance porch steps, both sides",
+  "size": "3-4 blocks long, sloping or stepped",
+  "blocks": "oak_fence, jungle_fence, stripped_jungle_log topped with a lantern"
+ },
+ {
+  "what": "Fence-post lamps (lamp posts)",
+  "where": "Ground level at the base of the steps, one on each side, plus near the plinth wall on the left",
+  "size": "2 blocks tall (post plus lantern)",
+  "blocks": "oak_fence or jungle_fence + lantern"
+ },
+ {
+  "what": "Small trees in tubs and hedges",
+  "where": "Ground level, flanking the entrance on the front face, along the base and on the porch landing; potted shrubs inside the porch",
+  "size": "3-5 blocks tall, 2-3 wide",
+  "blocks": "oak_leaves or azalea_leaves on oak_log trunks, potted_azalea_bush"
+ },
+ {
+  "what": "Flower beds and planters",
+  "where": "Ground level, the front garden between the trees and the plinth wall",
+  "size": "1-2 blocks each, mixed pink and purple",
+  "blocks": "allium, pink_tulip, lilac, peony, azalea_leaves, flowering_azalea"
+ },
+ {
+  "what": "Mossy plinth / base wall",
+  "where": "Ground level, the whole base perimeter, the garden wall and the timber gate post",
+  "size": "2 blocks high",
+  "blocks": "mossy_stone_bricks, stone_bricks, cracked_stone_bricks, moss_carpet"
+ },
+ {
+  "what": "Timber gatepost in the plinth wall",
+  "where": "Ground level, left of the entrance in the garden wall",
+  "size": "1 wide x 2 tall",
+  "blocks": "stripped_oak_log, oak_planks"
+ },
+ {
+  "what": "Arched ground-floor window with hood and lintel",
+  "where": "Main block, front face, ground level, left of the porch and at the east side of the building",
+  "size": "2 wide x 4 tall, with a 1-block stone hood",
+  "blocks": "deepslate_brick_stairs/stone_brick_stairs as hood, glass_pane, stone_brick_slab as the sill"
+ },
+ {
+  "what": "Exterior stair landings with balconies (fire-escape-style) on the east side",
+  "where": "Side (east) face, upper storeys, a stacked run of timber-and-stone balconies with turned posts",
+  "size": "each landing 2-3 blocks deep, 3-4 wide, on posts 3 high",
+  "blocks": "stone_brick_stairs, stone_brick_slab, oak_fence, stripped_oak_log, oak_slab, oak_stairs"
+ },
+ {
+  "what": "Turned timber posts / balusters under the balconies",
+  "where": "East side, below each landing",
+  "size": "1 block wide, 2-3 tall",
+  "blocks": "oak_fence, stripped_oak_log, oak_trapdoor"
+ },
+ {
+  "what": "Spiral stair visible inside the glass shaft",
+  "where": "Glass shaft, all levels, behind the glass",
+  "size": "1 block steps, rotating around the core",
+  "blocks": "quartz_stairs, smooth_quartz_stairs, white_concrete stairs"
+ },
+ {
+  "what": "Glass shaft panelling and quartz capstone",
+  "where": "Glass shaft, tall shaft face, at the top of each stage and the base",
+  "size": "1 block high bands",
+  "blocks": "quartz_slab, glass, white_stained_glass"
+ },
+ {
+  "what": "Door frame and arched stone lintel at the east ground-floor opening",
+  "where": "East face, ground level, far right",
+  "size": "1-2 wide x 3 high",
+  "blocks": "stone_brick_stairs, spruce_door, oak_trapdoor"
+ },
+ {
+  "what": "Pediment rake trim in a contrasting timber",
+  "where": "Pediment, front face, running up the gable diagonal and across the base",
+  "size": "1 block wide, about 12 blocks long each side",
+  "blocks": "oak_stairs, oak_slab, stripped_oak_log"
+ },
+ {
+  "what": "Slit window and louvre in the pediment",
+  "where": "Pediment, centre, a narrow vertical opening with a timber grille",
+  "size": "1 x 3",
+  "blocks": "oak_trapdoor, iron_bars, spruce_fence"
+ },
+ {
+  "what": "Gold finial and spire rod",
+  "where": "Roof top, pediment apex, a thin spike above the ridge",
+  "size": "1 x 6-8 high",
+  "blocks": "lightning_rod (copper), end_rod, or gold-coloured chain"
+ },
+ {
+  "what": "Roof-top railing and platform",
+  "where": "Tower/elevator head, top, a timber railing round the roof",
+  "size": "about 5x5 perimeter, 1 block high",
+  "blocks": "oak_fence, spruce_fence, oak_slab"
+ },
+ {
+  "what": "Louvred opening and flagpole on the tower",
+  "where": "Tower/elevator head, front face, upper section; a slat grille window",
+  "size": "2 wide x 3 high, with a rod above",
+  "blocks": "oak_trapdoor, spruce_fence, iron_bars; lightning_rod for the pole"
+ },
+ {
+  "what": "Small chimney or roof stack",
+  "where": "Roof, left eave, top left",
+  "size": "2x2 block, 2-3 high",
+  "blocks": "stone_bricks, deepslate_bricks, campfire (for smoke)"
+ },
+ {
+  "what": "Stair-step roof edge with trimmed rake",
+  "where": "Roof, both slopes, the stepped edge",
+  "size": "1 block",
+  "blocks": "deepslate_tile_stairs, deepslate_tile_slab"
+ },
+ {
+  "what": "Entrance sign band with gold lettering 'DEEPSLATE HOLDINGS' and a smaller 'COMMUNITY SERVICES' line",
+  "where": "entrance porch, front face, fascia above the glazed doors (ground level)",
+  "size": "about 12-14 wide x 3 high",
+  "blocks": "quartz_block or smooth_quartz band, oak_wall_sign or oak_sign with glow ink, or item frames/banners for the lettering; gold accents in waxed_cut_copper or gold_block"
+ },
+ {
+  "what": "Teal hanging banners",
+  "where": "entrance porch, front face, on the quartz pilasters either side of the doors",
+  "size": "1 wide x 3 tall",
+  "blocks": "cyan_banner or light_blue_banner (wall banner)"
+ },
+ {
+  "what": "Wall lanterns below the banners",
+  "where": "entrance porch, front face, on the pilasters below the banners; also on the pilaster face at the right side of the porch",
+  "size": "1 block",
+  "blocks": "lantern, hung from a chain or placed on a fence stub or oak_trapdoor bracket"
+ },
+ {
+  "what": "Lamp posts flanking the entrance steps",
+  "where": "ground level, front face, at the foot of the steps, one each side of the stairs",
+  "size": "1 wide x 2-3 tall",
+  "blocks": "oak_fence or stripped_oak_log post with lantern on top"
+ },
+ {
+  "what": "Low lanterns on the porch plinth, plus lanterns on garden-wall posts",
+  "where": "ground level, front face, either side of the steps and on the low wall in front of the planters; small ones also on the plinth by the shaft",
+  "size": "1 block",
+  "blocks": "lantern, soul_lantern"
+ },
+ {
+  "what": "Stair handrails",
+  "where": "entrance steps, front face, both sides of the central flight",
+  "size": "about 4 long, stepping up 1 per tread",
+  "blocks": "oak_fence on top of stair steps, or oak_trapdoor/oak_slab rails"
+ },
+ {
+  "what": "Entrance steps",
+  "where": "ground level, front face, in front of the porch",
+  "size": "about 10-12 wide, 3-4 treads",
+  "blocks": "stone_brick_stairs, smooth_stone_slab, stone_stairs"
+ },
+ {
+  "what": "Double entrance doors with transom and glazed side lights",
+  "where": "entrance porch, front face, ground level",
+  "size": "2 wide x 3 high doors; side lights 2 wide x 4 high",
+  "blocks": "dark_oak_door or spruce_door, glass_pane, iron_bars for the mullions, oak_trapdoor for a transom"
+ },
+ {
+  "what": "Window mullions (grid glazing)",
+  "where": "main block front face, ground-level arched windows and upper-storey windows; entrance side lights; glass shaft",
+  "size": "1-block grid lines, 3-4 panes high",
+  "blocks": "glass_pane, iron_bars, or oak_fence/spruce_trapdoor as frames"
+ },
+ {
+  "what": "Window sills and flower boxes in light wood",
+  "where": "main block front face, below each upper-storey window on levels 2 and 3",
+  "size": "2-3 wide x 1 high",
+  "blocks": "oak_slab or oak_planks sill; oak_trapdoor under a window; flowering_azalea or fern as box planting"
+ },
+ {
+  "what": "Potted plants and window-box greenery",
+  "where": "main block front face, inside and behind the lower upper-storey windows",
+  "size": "1 block",
+  "blocks": "flower_pot with fern, azalea or oak_sapling; azalea_leaves"
+ },
+ {
+  "what": "Trimmed small trees (round topiary)",
+  "where": "ground level, front face, by the entrance and the shaft base; one tall tree by the right window",
+  "size": "1 wide x 2-4 tall",
+  "blocks": "oak_fence or oak_log trunk with oak_leaves or azalea_leaves; flowering_azalea"
+ },
+ {
+  "what": "Flowering shrub planters",
+  "where": "ground level, front face, in front of the porch and along the plinth wall",
+  "size": "1-2 wide x 1-2 high",
+  "blocks": "flowering_azalea_leaves, allium, lilac, peony, pink_petals, azalea_leaves, in a stone_brick_wall or stone_brick_slab planter edge"
+ },
+ {
+  "what": "Garden wall posts in wood",
+  "where": "ground level, front face, at the ends of the low plinth wall and at the step sides",
+  "size": "1 wide x 2 high",
+  "blocks": "stripped_oak_log or oak_log with an oak_slab cap"
+ },
+ {
+  "what": "Mossy stone plinth",
+  "where": "base of all faces, ground level",
+  "size": "1-2 high band",
+  "blocks": "mossy_stone_bricks, stone_bricks, cracked_stone_bricks, mossy_cobblestone"
+ },
+ {
+  "what": "Carved greek-key blocks at pier heads and bases",
+  "where": "main block front face, pier capitals at the top of the ground storey and between storeys; also on the shaft corner",
+  "size": "1-2 blocks",
+  "blocks": "chiseled_stone_bricks, chiseled_deepslate, or stone_brick_stairs with trapdoors"
+ },
+ {
+  "what": "Cornice and string-course ledges (stepped stair courses)",
+  "where": "main block front face, over the porch and between storeys; eaves",
+  "size": "1 high, runs the full width",
+  "blocks": "polished_deepslate_stairs, deepslate_tile_stairs, deepslate_brick_slab (upside-down stairs for projecting ledges)"
+ },
+ {
+  "what": "Pilaster trim, vertical wood piers",
+  "where": "main block front face, between window bays on all upper storeys; shaft sides",
+  "size": "2 wide x full height",
+  "blocks": "stripped_oak_log, oak_planks, or oak_log with oak_trapdoor capitals"
+ },
+ {
+  "what": "Gold lintel drops and brackets over windows",
+  "where": "main block front face, over the ground-floor arched windows and over the side doorway",
+  "size": "1 block",
+  "blocks": "oak_fence, chain, oak_trapdoor, lightning_rod (gold look)"
+ },
+ {
+  "what": "Sill lanterns beside upper windows",
+  "where": "main block front face, at the base of the pier by each upper-storey window, and at the rear corner",
+  "size": "1 block",
+  "blocks": "lantern on a fence post, hung lantern"
+ },
+ {
+  "what": "Wall-mounted lanterns on the corner pier of the shaft",
+  "where": "glass shaft side face, at ground and first-floor level beside the stair",
+  "size": "1 block",
+  "blocks": "lantern with oak_fence mount"
+ },
+ {
+  "what": "Hanging lanterns behind the glass of the stair shaft and porch",
+  "where": "glass shaft interior, each landing; porch interior behind the glazing",
+  "size": "1-2 blocks",
+  "blocks": "lantern on chain, glow_lichen not needed"
+ },
+ {
+  "what": "External timber stair with landings and railings",
+  "where": "rear/side face, wrapping up the dark-stone tower beside the glass shaft, ground to upper levels",
+  "size": "about 2 wide, 4-5 flights",
+  "blocks": "oak_stairs, oak_planks, oak_slab landings, oak_fence rails and posts, stripped_oak_log supports"
+ },
+ {
+  "what": "Timber balconies and bracketed landings",
+  "where": "side face of the stone tower, upper storeys, at each external landing",
+  "size": "3 x 3",
+  "blocks": "oak_slab, oak_planks, oak_fence, oak_stairs as corbels, oak_trapdoor"
+ },
+ {
+  "what": "Side service door with stone surround",
+  "where": "side face, ground level, far right",
+  "size": "1 wide x 2 high in a 3 high arch",
+  "blocks": "spruce_door or dark_oak_door, stone_brick_stairs for the arch"
+ },
+ {
+  "what": "Side-face tall arched window with glazing bars",
+  "where": "main block side face, at the ground storey beside the porch",
+  "size": "2 wide x 5 high",
+  "blocks": "glass_pane, stone_brick_stairs arch, iron_bars"
+ },
+ {
+  "what": "Rooftop railing and finial rod",
+  "where": "tower roof top (elevator head), around the top; spire on the main gable",
+  "size": "railing about 5x5 square; spire 4-6 tall",
+  "blocks": "oak_fence or oak_fence railing; lightning_rod or end_rod finial; copper accents"
+ },
+ {
+  "what": "Louvred vent in the tower and pediment",
+  "where": "tower/elevator head front face; central gable (pediment) vertical slot",
+  "size": "2 wide x 3 high; pediment slot 1 x 3",
+  "blocks": "oak_trapdoor or spruce_trapdoor open, iron_bars, oak_fence"
+ },
+ {
+  "what": "Gold pediment rake trim (stepped diagonal band)",
+  "where": "main block roof gable front face, tracing the pediment slope",
+  "size": "1 high stepped, 18-20 long",
+  "blocks": "oak_planks and oak_stairs, or stripped_oak_log and oak_slab"
+ }
+]

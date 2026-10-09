@@ -16,12 +16,12 @@ const MCD = join(PLUGIN, "tools", "bin", "mcd.mjs");
 const PICKER = process.env.MC_PICK_MODEL_ID || "claude-opus-5-5";
 const img = (p) => ({ data: readFileSync(p), mediaType: /\.jpe?g$/i.test(p) ? "image/jpeg" : "image/png" });
 
-export async function detailPass(runDir, { input = "final.nbt", model = "claude-haiku-5-5", effort = "high", lang = false, faces = "north,west,roof", jobs = false, jobsModel = "claude-sonnet-5-5", greedy = false, judgeModel = "claude-sonnet-5-5", scale = 2 } = {}) {
+export async function detailPass(runDir, { input = "final.nbt", model = "claude-haiku-5-5", effort = "high", lang = false, faces = "north,west,roof", jobs = false, jobsModel = "claude-sonnet-5-5", greedy = false, judgeModel = "claude-sonnet-5-5", scale = 2, inventory = false } = {}) {
   // big renders for everyone (detailer, judges): fine detail is invisible on 300 px tiles
   process.env.MCD_TILE_SCALE = String(scale);
   const t0 = Date.now();
   let cost0 = 0;
-  const dir = join(runDir, `detail-${model.replace(/^claude-/, "").replace(/-\d.*$/, "")}-${effort}${lang ? "-lang" : ""}${jobs ? "-jobs" : ""}${greedy ? "-greedy" : ""}${input !== "final.nbt" ? "-" + basename(input, ".nbt") : ""}`);
+  const dir = join(runDir, `detail-${model.replace(/^claude-/, "").replace(/-\d.*$/, "")}-${effort}${lang ? "-lang" : ""}${jobs ? "-jobs" : ""}${greedy ? "-greedy" : ""}${inventory ? "-inv" : ""}${input !== "final.nbt" ? "-" + basename(input, ".nbt") : ""}`);
   mkdirSync(dir, { recursive: true });
   copyFileSync(join(runDir, input), join(dir, "input.nbt"));
   const concept = ["concept.jpg", "concept.png"].map((f) => join(runDir, f)).find(existsSync);
@@ -52,6 +52,15 @@ export async function detailPass(runDir, { input = "final.nbt", model = "claude-
     cost0 += j.raw?.total_cost_usd || 0;
     writeFileSync(join(dir, "jobs.md"), jobsText + "\n");
   }
+  // INVENTORY: close-up crops of the concept -> every small feature (railings, finials, louvres, brackets, lamps, ...);
+  // each becomes a required job (the zoomed-out jobs step never sees them)
+  if (inventory) {
+    const { featureInventory } = await import("./inventory.mjs");
+    const inv = await featureInventory(concept, join(dir, "inventory"));
+    jobsText = "FEATURE INVENTORY of the concept's small features (from close-up crops). Implement EACH item as its own JOB, most visible first; " +
+      "skip an item only if the build already has it or it cannot fit (say so in a # comment):\n" + readFileSync(inv.file, "utf8");
+    writeFileSync(join(dir, "jobs.md"), jobsText + "\n");
+  }
   // LANG mode: the face-map rule language (rows, columns, faces) that Haiku itself converged on, run by mcd paint
   const langPrompt = [
     "You are the DETAIL pass for a finished Minecraft build. The form is done and correct: do NOT change massing, layout or the design.",
@@ -70,7 +79,7 @@ export async function detailPass(runDir, { input = "final.nbt", model = "claude-
     `5. Edit rules.txt (drop what hurt, add what is missing) and paint AGAIN FROM input.nbt: $MCD paint input.nbt detail-2.nbt --rules rules.txt --face ${faces} ; render to t2.`,
     ...(greedy ? [
       "FORMAT: group rules.txt into JOBS, each starting with a header line '## JOB <n>: <short title>' followed by its 1-6 rules. Each job must stand",
-      "on its own (it will be accepted or rejected separately by a reviewer looking at large renders). Aim for 8-14 jobs covering the whole",
+      "on its own (it will be accepted or rejected separately by a reviewer looking at large renders). " + (inventory ? "One job per inventory item. Then add" : "Aim for 8-14 jobs") + " covering the whole",
       "building: base/plinth, every kind of opening (sills, lintels, frames), the entrance, piers/pilasters (capitals, bases), string courses,",
       "eaves and cornices, wall tops/copings, the roof edge, the sides and the back, and restrained surface treatment (weathering is welcome).",
       "Do not be lazy: a careful detailer writes many precise jobs; small ones are fine.",
@@ -187,6 +196,6 @@ export async function detailPass(runDir, { input = "final.nbt", model = "claude-
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const arg = (k, d) => (process.argv.includes(k) ? process.argv[process.argv.indexOf(k) + 1] : d);
-  const r = await detailPass(process.argv[2], { input: arg("--input", "final.nbt"), model: arg("--model", "claude-haiku-5-5"), effort: arg("--effort", "high"), lang: process.argv.includes("--lang"), faces: arg("--faces", "north,west,roof"), jobs: process.argv.includes("--jobs"), greedy: process.argv.includes("--greedy"), scale: Number(arg("--scale", 2)) });
+  const r = await detailPass(process.argv[2], { input: arg("--input", "final.nbt"), model: arg("--model", "claude-haiku-5-5"), effort: arg("--effort", "high"), lang: process.argv.includes("--lang"), faces: arg("--faces", "north,west,roof"), jobs: process.argv.includes("--jobs"), greedy: process.argv.includes("--greedy"), scale: Number(arg("--scale", 2)), inventory: process.argv.includes("--inventory") });
   console.log(JSON.stringify(r));
 }

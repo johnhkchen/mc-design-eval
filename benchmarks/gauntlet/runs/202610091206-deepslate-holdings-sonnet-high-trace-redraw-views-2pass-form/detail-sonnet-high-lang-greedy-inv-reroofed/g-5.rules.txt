@@ -1,0 +1,23 @@
+
+## JOB 3: Window sills / planter boxes with a timber front
+north rows 15,23 where Q -> oak_trapdoor north open=true out 1
+north rows 15,22 cols 5..7,12..14,20..22,26..27 where Q -> oak_planks
+
+
+## JOB 4: Window mullions and glazing bars
+north rows 18 cols 5..7,12..14,20..22,26..27 where L -> iron_bars force
+north rows 25 cols 5..7,12..14,20..22,26..27 where L -> iron_bars force
+north row 6 cols 12..13,21..22 where L -> iron_bars force
+north rows 3..9 cols 12,22 where L -> white_stained_glass_pane force
+
+
+## JOB 5: Hanging lanterns inside windows, porch glazing and shaft landings
+north row 20 cols 6,13,21 where L -> chain force
+north row 19 cols 6,13,21 where L -> lantern hanging=true force
+north row 27 cols 6,13,21 where L -> chain force
+north row 26 cols 6,13,21 where L -> lantern hanging=true force
+north row 9 cols 12,22 where L -> chain force
+north row 8 cols 12,22 where L -> lantern hanging=true force
+north rows 26,20,15,9 col 31 where L -> chain force
+north rows 25,19,14,8 col 31 where L -> lantern hanging=true force
+

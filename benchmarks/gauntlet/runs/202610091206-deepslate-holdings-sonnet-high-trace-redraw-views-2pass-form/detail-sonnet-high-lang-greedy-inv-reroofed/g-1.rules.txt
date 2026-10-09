@@ -1,0 +1,9 @@
+
+## JOB 1: Entrance sign band, gold lettering DEEPSLATE HOLDINGS / COMMUNITY SERVICES
+# fascia recess is y11-12 on the porch (cols 10-25); big line on y12 (3-on-1-off letters), hollow second row y11, small line on y10
+north row 12 cols 11..24 where E and col mod 4 != 3 -> gold_block force
+north row 11 cols 11..24 where E and col mod 4 == 0 -> gold_block force
+north row 11 cols 11..24 where E and col mod 4 == 2 -> gold_block force
+north row 10 cols 13..22 where E and col mod 2 == 1 -> yellow_terracotta force
+north row 12 cols 10,25 where E -> gold_block force
+

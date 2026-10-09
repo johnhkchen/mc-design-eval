@@ -1,0 +1,69 @@
+
+## JOB 3: Window sills / planter boxes with a timber front
+north rows 15,23 where Q -> oak_trapdoor north open=true out 1
+north rows 15,22 cols 5..7,12..14,20..22,26..27 where Q -> oak_planks
+
+
+## JOB 4: Window mullions and glazing bars
+north rows 18 cols 5..7,12..14,20..22,26..27 where L -> iron_bars force
+north rows 25 cols 5..7,12..14,20..22,26..27 where L -> iron_bars force
+north row 6 cols 12..13,21..22 where L -> iron_bars force
+north rows 3..9 cols 12,22 where L -> white_stained_glass_pane force
+
+
+## JOB 5: Hanging lanterns inside windows, porch glazing and shaft landings
+north row 20 cols 6,13,21 where L -> chain force
+north row 19 cols 6,13,21 where L -> lantern hanging=true force
+north row 27 cols 6,13,21 where L -> chain force
+north row 26 cols 6,13,21 where L -> lantern hanging=true force
+north row 9 cols 12,22 where L -> chain force
+north row 8 cols 12,22 where L -> lantern hanging=true force
+north rows 26,20,15,9 col 31 where L -> chain force
+north rows 25,19,14,8 col 31 where L -> lantern hanging=true force
+
+
+## JOB 9: Eave cornice and string-course bands
+north row 31 where G -> cornice stepped polished_deepslate
+north row 21 where G -> cornice simple polished_deepslate
+north row 13 where M -> cornice stepped polished_deepslate
+north row 13 where E -> cornice simple smooth_quartz
+
+
+## JOB 11: Spire finial on the pediment apex
+north row 41 col 18 -> finial oak_fence+oak_fence+lightning_rod
+
+
+## JOB 13: Pediment louvre slot
+north rows 36..38 cols 17..19 where L -> louvres oak_trapdoor vertical
+
+
+## JOB 20: Porch columns, capitals and transom
+north row 9 where H -> quartz_slab top out 1
+north row 3 where H -> chiseled_quartz_block
+north rows 5 cols 15..19 where I -> dark_oak_planks
+
+
+## JOB 23: Mossy plinth and garden wall
+all faces rows 0..2 where stone_bricks -> weather 0.4
+all faces rows 0..2 -> gradient mossy_stone_bricks..stone_bricks up
+north ground row cols 0..8,26..35 -> plinth stone_bricks 2
+west ground row -> plinth stone_bricks 2
+
+
+## JOB 25: Interior planters and shelving behind the glass
+north row 24 cols 6,13,21 where L -> potted_azalea_bush force
+north row 24 cols 12,14 where L -> bookshelf force
+
+
+## JOB 28: Corbelled balconies down the shaft side
+west rows 12,20,27 cols 17..20 -> stone_brick_stairs top out 1
+west rows 12,20,27 cols 17,20 -> oak_stairs top out 2
+
+
+## JOB 29: Fence-post colonnettes under the balconies
+west rows 10..11,18..19,25..26 cols 17,20 -> oak_fence out 1
+
+
+## JOB 31: Dark downpipe beside the shaft
+west col 10 where X -> deepslate_bricks
+
