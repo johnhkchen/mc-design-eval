@@ -22,7 +22,7 @@ const from = arg("--from");          // reuse an earlier run's concept.jpg + spe
 const respec = process.argv.includes("--respec");   // with --from: keep the concept, write a fresh spec
 // --trace x,y,w,h,cols,rows : the front elevation's pixel box on the sheet and its size in blocks. Downsamples it to a
 // block grid (trace.png with coordinates + trace.txt of hex colours) that the spec and the builder read as a tracing.
-const trace = arg("--trace")?.split(",").map(Number);
+const trace = arg("--trace");
 if (trace && !from) throw new Error("--trace needs --from (the pixel box is measured on an existing concept)");
 
 export const SUBJECTS = {
@@ -63,21 +63,23 @@ if (from) {
 }
 let traceNote = "";
 if (trace) {
-  const [x, y, w, h, cols, rows] = trace;
-  const raw = join(dir, "trace-raw.png");
-  execFileSync("magick", [concept, "-crop", `${w}x${h}+${x}+${y}`, "+repage", "-filter", "box", "-resize", `${cols}x${rows}!`, raw]);
-  const txt = execFileSync("magick", [raw, "txt:-"], { encoding: "utf8" });
-  const grid = Array.from({ length: rows }, () => Array(cols).fill("------"));
-  for (const m of txt.matchAll(/^(\d+),(\d+):.*#([0-9A-F]{6})/gim)) grid[+m[2]][+m[1]] = m[3].toLowerCase();
-  writeFileSync(join(dir, "trace.txt"), [`# front elevation traced at ${cols} x ${rows} blocks; row 1 = top (y=${rows - 1}), last row = ground (y=0); columns x=0..${cols - 1} left to right; hex = mean colour`,
-    ...grid.map((r, i) => `y${String(rows - 1 - i).padStart(2, "0")} ${r.join(" ")}`)].join("\n") + "\n");
-  const big = join(dir, "trace.png"), px = 24;
-  execFileSync("magick", [raw, "-filter", "point", "-scale", `${cols * px}x${rows * px}!`, "-fill", "none", "-stroke", "#0004",
-    ...Array.from({ length: cols + 1 }, (_, i) => ["-draw", `line ${i * px},0 ${i * px},${rows * px}`]).flat(),
-    ...Array.from({ length: rows + 1 }, (_, i) => ["-draw", `line 0,${i * px} ${cols * px},${i * px}`]).flat(), big]);
-  traceNote = `trace.png / trace.txt: the front elevation downsampled to a ${cols} x ${rows} block grid (x left to right, y=0 at the ground). ` +
-    `It is a TRACING: use it for the outline, the position and size of every feature, and the colour regions, block by block.`;
-  mark("trace", { cols, rows });
+  // --trace auto[:scale] finds the elevation (Gemini box + pixel pitch); --trace x,y,w,h,cols,rows is the manual form
+  const { traceElevation, locateWithGemini } = await import("./sheet-trace.mjs");
+  const spec_ = arg("--trace");
+  let t;
+  if (spec_.startsWith("auto")) {
+    const scale = Number(spec_.split(":")[1] || 1);
+    t = traceElevation(concept, dir, { scale, box: await locateWithGemini(concept) });
+  } else {
+    const [x, y, w, h, cols, rows] = spec_.split(",").map(Number);
+    t = traceElevation(concept, dir, { box: { x, y, w, h }, cols, rows });
+  }
+  writeFileSync(join(dir, "trace.json"), JSON.stringify(t, null, 1) + "\n");
+  traceNote = `trace.png / trace.txt: the front elevation downsampled to a ${t.cols} x ${t.rows} block grid (x left to right, y=0 at the ground). ` +
+    `It is a TRACING: use it for the outline, the position and size of every feature, and the colour regions, block by block.` +
+    (t.scale > 1 ? ` The building is built at ${t.scale}x the concept's block scale, so each concept block is ${t.scale}x${t.scale} blocks here: ` +
+      `use the extra resolution for the detail the concept draws within a block (thin fins, mouldings, insets, sub-block steps), and scale depth by ${t.scale} too.` : "");
+  mark("trace", { cols: t.cols, rows: t.rows, scale: t.scale, pitch: t.pitch, box: t.box });
 }
 if (reuseSpec) {
   writeFileSync(join(dir, "spec.md"), readFileSync(join(HERE, "runs", from, "spec.md")));

@@ -1,0 +1,46 @@
+{
+ "runId": "202610090214-dance-hall-sonnet-high-rerun-respec-trace",
+ "subject": "dance-hall",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-2",
+ "why": "Build B carries the reference's multicolored stained-glass panels into the central tower and side bays and adds the stepped gold crown over the marquee, while A leaves those bays as plain sandstone with an empty spire window, so B is both more faithful and more finished.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 2.2020776000000004,
+ "durationMs": 650065,
+ "stages": [
+  {
+   "n": "trace",
+   "s": 3,
+   "cols": 52,
+   "rows": 60,
+   "scale": 2,
+   "pitch": 21.5,
+   "box": {
+    "x": 40,
+    "y": 80,
+    "w": 562,
+    "h": 643
+   }
+  },
+  {
+   "n": "spec",
+   "s": 52
+  },
+  {
+   "n": "agentic build",
+   "s": 631,
+   "turns": 29,
+   "cost": 1.7827116000000003
+  },
+  {
+   "n": "keep-better",
+   "s": 650,
+   "kept": "round-2",
+   "why": "Build B carries the reference's multicolored stained-glass panels into the central tower and side bays and adds the stepped gold crown over the marquee, while A leaves those bays as plain sandstone with an empty spire window, so B is both more faithful and more finished."
+  }
+ ]
+}

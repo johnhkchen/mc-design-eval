@@ -415,6 +415,19 @@ Nothing downstream could recover it. Rerun from the same concept (Sonnet high), 
 - **Models misread block pitch.** Told to count, the spec model measured 13 px per block, not 21. A traced grid (`--trace x,y,w,h,cols,rows`: box-downsample the front elevation to cols × rows, as `trace.png` plus `trace.txt`) fixes the count exactly.
 - **Resolution is a design choice.** At true scale a 1-px fin is blurred by the downsample into its neighbour; the accidentally oversized build had room for detail. Next: trace at true scale for proportions, then build at an integer multiple (2×) when the detail is finer than a block, and find the elevation box automatically instead of measuring it by hand.
 
+### Automatic tracing, and building at 2× (2026-10-08)
+
+`benchmarks/gauntlet/sheet-trace.mjs` replaces the hand-measured box. `--trace auto[:scale]` works in two steps:
+- **Find the front view:** Gemini (`gemini-3.1-pro-preview`) gives its bounding box. My pixel-only detector cut off the Taj's minarets and plinth (white on white, graph paper) and the grocery store's parapet. Asked for block counts, Gemini was off by up to 2×, so it is only trusted for the box.
+- **Measure the block size:** an autocorrelation of the edges inside the box. Blocks are square, so when x and y differ by a whole multiple (the grocery's brick courses read as half-blocks) the larger wins. Results: dance hall 21.5 px (26 × 30), Taj 11 px (58 × 56), grocery 37 px (15 × 17).
+
+Sonnet high, same concepts (`dance-hall-trace-2x.png`, `taj-trace.png`, newest row last):
+- **Dance hall, traced at 2× (52 × 60), $2.20, 11 min:** truest tower yet (thin separate fins, the open-arch spire frame, the stepped gold crown). The wings are plainer than in the oversized run, and the roof terraces are shallow from 3/4.
+- **Taj, traced at 1× (58 × 56), $1.50, 5 min:** **the grey-tone problem is gone.** The traced colours anchored the palette to white marble, with black only as frame lines. The proportions are right too (drum, pishtaq, slim minarets). The dome is still blocky and stubby; at this size it needs the `dome` brush's onion profile.
+- **The builder used the tracing as a check without being asked:** the Taj agent counted silhouette cells it lacked against the tracing (79 → 36 between rounds). That suggests making a silhouette/colour diff against the tracing a built-in check.
+
+Takeaways: the tracing is now the strongest lever after the concept itself. It fixes size, proportions and tone in one step, at no model cost beyond one Gemini call. Use 2× when the concept draws detail finer than a block, and when the building is small (the grocery's 15-wide tracing is too coarse at 1×).
+
 ## Why the good-looking approach is slow (from the transcripts)
 
 Measured on 014 and 027. [V]

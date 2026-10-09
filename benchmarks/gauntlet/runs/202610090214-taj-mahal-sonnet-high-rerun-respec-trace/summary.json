@@ -1,0 +1,46 @@
+{
+ "runId": "202610090214-taj-mahal-sonnet-high-rerun-respec-trace",
+ "subject": "taj-mahal",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-2",
+ "why": "B's dome is fuller and more bulbous, closer to the reference's onion dome, and its facade has recessed vertical bays that suggest the reference's arched niches, while A's dome is a narrow stepped stack that reads more like a pagoda; the rest of the two builds (minarets, chhatris, plinth) is nearly identical.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 1.4971417999999999,
+ "durationMs": 290070,
+ "stages": [
+  {
+   "n": "trace",
+   "s": 3,
+   "cols": 59,
+   "rows": 57,
+   "scale": 1,
+   "pitch": 11,
+   "box": {
+    "x": 26,
+    "y": 43,
+    "w": 644,
+    "h": 622
+   }
+  },
+  {
+   "n": "spec",
+   "s": 36
+  },
+  {
+   "n": "agentic build",
+   "s": 277,
+   "turns": 28,
+   "cost": 1.0770195999999999
+  },
+  {
+   "n": "keep-better",
+   "s": 290,
+   "kept": "round-2",
+   "why": "B's dome is fuller and more bulbous, closer to the reference's onion dome, and its facade has recessed vertical bays that suggest the reference's arched niches, while A's dome is a narrow stepped stack that reads more like a pagoda; the rest of the two builds (minarets, chhatris, plinth) is nearly identical."
+  }
+ ]
+}

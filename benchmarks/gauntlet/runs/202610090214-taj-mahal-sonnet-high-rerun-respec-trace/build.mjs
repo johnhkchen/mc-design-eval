@@ -1,0 +1,144 @@
+// Taj Mahal generator. ROUND=1 (default) or ROUND=2 -> round-N.nbt. Front faces north (-z); x east, y up, z south.
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { Grid, DIRS } from "../../../../../minecraft-design/tools/src/build.mjs";
+import { dome, cylinder, minaret, arch, disc, ring } from "../../../../../minecraft-design/tools/src/shapes-curved.mjs";
+import { cornice, parapet } from "../../../../../minecraft-design/tools/src/shapes-massing.mjs";
+
+const ROUND = Number(process.env.ROUND ?? 1);
+const R2 = ROUND >= 2;
+const HERE = dirname(fileURLToPath(import.meta.url));
+const g = new Grid([59, 58, 59]);
+const N = 58, C = 29;                       // last index, centre
+
+// palette (spec MATERIAL MAP, binding)
+const M = { marble: "quartz_block", smooth: "smooth_quartz", calcite: "calcite", grey: "polished_diorite",
+  shadow: "light_gray_concrete", black: "black_concrete", brick: "bricks", gold: "gold_block", rod: "lightning_rod",
+  bars: "iron_bars", stairs: "quartz_stairs", slab: "quartz_slab" };
+
+// ---- face-local frame: u across the face (0..58), d depth from the outer face plane, y up. Four-fold symmetry. ----
+const FACES = {
+  n: (u, d) => [u, d], s: (u, d) => [N - u, N - d], w: (u, d) => [d, u], e: (u, d) => [N - d, u],
+};
+const setF = (f, u, y, d, b, st) => { const [x, z] = FACES[f](u, d); g.set(x, y, z, b, st); };
+const fillF = (f, [u0, y0, d0], [u1, y1, d1], b, only) => {
+  for (let u = u0; u <= u1; u++) for (let y = y0; y <= y1; y++) for (let d = d0; d <= d1; d++) {
+    const [x, z] = FACES[f](u, d);
+    if (!only || g.blockAt(x, y, z) === "minecraft:" + only) g.set(x, y, z, b);
+  }
+};
+const archF = (f, u0, y, d0, width, height, depth, opts = {}) => {
+  const axis = f === "n" || f === "s" ? "x" : "z";
+  let at;
+  if (f === "n") at = [u0, y, d0];
+  else if (f === "s") at = [u0, y, N - d0 - depth + 1];
+  else if (f === "w") at = [d0, y, u0];
+  else at = [N - d0 - depth + 1, y, u0];
+  return arch(g, { at, width, height, depth, axis, block: M.marble, ...opts });
+};
+
+// ---- 1. brick base + plinth (y0-1 bricks, y2-7 marble wall, y7 smooth top) ----
+g.fill([0, 0, 0], [N, 1, N], M.brick);
+g.fill([0, 2, 0], [N, 6, N], M.marble);
+g.fill([0, 7, 0], [N, 7, N], M.smooth);
+for (const f of "nsew") {                      // shallow recessed panels every 4 blocks, y3-6 (recess by exclusion)
+  for (let u = 1; u + 2 <= N - 1; u += 4) {
+    fillF(f, [u, 3, 0], [u + 2, 5, 0], M.grey);                // panel face one back...
+    for (let uu = u; uu <= u + 2; uu++) for (let y = 3; y <= 5; y++) { const [x, z] = FACES[f](uu, 0); g.set(x, y, z, "air"); }
+    fillF(f, [u, 3, 1], [u + 2, 5, 1], M.calcite);              // ...shaded marble back
+  }
+  fillF(f, [0, 6, 0], [N, 6, 0], M.smooth);                    // ledge course under the terrace
+}
+// terrace balustrade: low rail round the plinth edge
+for (let i = 0; i <= N; i++) for (const [x, z] of [[i, 0], [i, N], [0, i], [N, i]]) g.set(x, 8, z, M.slab);
+
+// ---- 2. mausoleum body x10-48, z10-48, y8-25 ----
+g.fill([10, 8, 10], [48, 25, 48], M.marble);
+for (const f of "nsew") {
+  // pishtaq block: u22-36, proud 1 (d9), rising to y28
+  fillF(f, [22, 8, 9], [36, 28, 22], M.marble);
+  // black frame bands 1 proud (d8) at u23 and u35, y8-27, top bar y26-27
+  fillF(f, [23, 8, 8], [23, 27, 8], M.black);
+  fillF(f, [35, 8, 8], [35, 27, 8], M.black);
+  fillF(f, [23, 26, 8], [35, 27, 8], M.black);
+  // nested iwan: three stepped pointed arches, each one step back, 6 deep in all
+  archF(f, 25, 8, 9, 9, 16, 2, { profile: "pointed" });
+  archF(f, 26, 8, 11, 7, 14, 2, { profile: "pointed" });
+  archF(f, 27, 8, 13, 5, 12, 2, { profile: "pointed" });
+  fillF(f, [25, 8, 9], [33, 23, 10], M.calcite, "quartz_block");            // outer reveal: shaded marble
+  fillF(f, [26, 8, 11], [32, 21, 15], M.shadow, "quartz_block");            // deep iwan
+  fillF(f, [27, 8, 15], [31, 19, 15], M.shadow);                            // back wall
+  // inner window of bars, lower door arch, black frame lines
+  fillF(f, [28, 12, 14], [30, 18, 14], M.bars);
+  fillF(f, [27, 8, 14], [27, 12, 14], M.black);
+  fillF(f, [31, 8, 14], [31, 12, 14], M.black);
+  fillF(f, [27, 12, 14], [31, 12, 14], M.black);
+  archF(f, 28, 8, 14, 3, 4, 2, { profile: "round", block: R2 ? M.marble : M.shadow });
+  fillF(f, [28, 8, 16], [30, 11, 16], M.black);
+  // wing arches: 4 per wing, 3 wide, 2 deep; lower y9-14 and upper y17-22; centres 13/18 and 40/45
+  for (const cu of [13, 18, 40, 45]) {
+    for (const y0 of [9, 17]) {
+      archF(f, cu - 1, y0, 10, 3, 6, 2, { profile: "pointed" });
+      fillF(f, [cu - 1, y0, 12], [cu + 1, y0 + 5, 12], M.calcite);          // recessed shaded back
+      fillF(f, [cu, y0 + 1, 11], [cu, y0 + 3, 11], M.bars);                 // window lattice
+    }
+    // grey pilaster panel inset beside each arch pair
+  }
+  if (R2) {   // grey panel fields between white proud pilasters (relief by contrast and depth)
+    for (const [a, b] of [[10, 21], [37, 48]]) fillF(f, [a, 9, 10], [b, 22, 10], M.grey, "quartz_block");
+    for (const pu of [10, 11, 15, 16, 20, 21, 37, 38, 42, 43, 47, 48]) fillF(f, [pu, 9, 9], [pu, 22, 9], M.marble);
+  } else for (const pu of [10, 15, 16, 21, 37, 38, 43, 44, 48]) fillF(f, [pu, 9, 9], [pu, 22, 9], M.grey);
+  // cornice and parapet band
+  fillF(f, [10, 23, 10], [21, 25, 10], M.smooth);
+  fillF(f, [37, 23, 10], [48, 25, 10], M.smooth);
+}
+cornice(g, { from: [10, 22, 10], to: [48, 48], material: "quartz", profile: "deep" });
+parapet(g, { from: [10, 26, 10], to: [48, 48], block: M.marble, style: "solid", coping: { block: M.slab } });
+// pinnacle spires at the four roof corners, and beside the pishtaq
+for (const [x, z] of [[10, 10], [48, 10], [10, 48], [48, 48]]) {
+  g.fill([x, 27, z], [x, 32, z], M.marble); g.set(x, 33, z, M.rod); g.set(x, 34, z, M.rod);
+}
+
+// ---- 3. drum (x20-38, y27-36), black bands y33 and y35, neck ring y36 ----
+cylinder(g, { base: [C, 27, C], radius: 9, height: 10, block: M.marble });
+ring(g, { center: [C, 33, C], radius: 9, block: M.black });
+ring(g, { center: [C, 35, C], radius: 9, block: M.black });
+ring(g, { center: [C, 36, C], radius: 9, block: M.smooth });
+
+// ---- 4. onion dome y37-50, widest ~y41, lotus + finial ----
+const onion = (t) => t < 0.28 ? 0.9 + 0.1 * Math.sin((Math.PI / 2) * (t / 0.28))     // neck swells to the bulge by ~y41
+  : Math.pow(Math.max(0, 1 - Math.pow((t - 0.28) / 0.72, 2)), 0.62);                     // full shoulders, then the crown
+dome(g, { center: [C, 37, C], radius: 10, height: R2 ? 14 : 14, profile: R2 ? onion : "onion", block: M.marble });
+if (R2) {
+  // calcite relief oval on the front (and every) face of the bulge, centred y41, ~8 wide x 6 tall
+  for (const f of "nsew") for (let u = C - 4; u <= C + 4; u++) for (let y = 38; y <= 44; y++) {
+    const du = (u - C) / 4.3, dy = (y - 41) / 3.3;
+    if (du * du + dy * dy > 1) continue;
+    for (let d = 0; d <= 29; d++) {
+      const [x, z] = FACES[f](u, d), c = g.get(x, y, z);
+      if (!c || c.block === "minecraft:air") continue;
+      if (c.block === "minecraft:quartz_block") g.set(x, y, z, M.calcite);
+      break;
+    }
+  }
+}
+for (let y = 51; y <= 54; y++) g.set(C, y, C, M.gold);
+g.set(C, 55, C, M.rod); g.set(C, 56, C, M.rod);
+
+// ---- 5. chhatris on the four roof corners ----
+for (const [x, z] of [[17, 17], [41, 17], [17, 41], [41, 41]]) {
+  minaret(g, { base: [x, 27, z], height: 1, radius: 2, block: M.marble, cap: "chhatri", capHeight: R2 ? 2 : 3, capBlock: M.marble,
+    finial: { block: M.gold, height: R2 ? 1 : 2 } });
+}
+
+// ---- 6. corner minarets (x4/x54, z4/z54): footing, three balconies, chhatri cap ----
+for (const [x, z] of [[4, 4], [54, 4], [4, 54], [54, 54]]) {
+  cylinder(g, { base: [x, 8, z], radius: 3, height: 3, shape: "square", block: M.marble });
+  const mn = minaret(g, { base: [x, 11, z], height: 21, radius: 2, block: M.marble, balconies: [{ y: 3 }, { y: 11 }, { y: 21 }],
+    cap: "chhatri", capHeight: R2 ? 2 : 3, capBlock: M.marble, ...(R2 ? {} : { finial: { block: M.gold, height: 1 } }) });
+  if (R2) { g.set(x, mn.top, z, M.gold); g.set(x, mn.top + 1, z, M.rod); }
+}
+
+const out = join(HERE, `round-${ROUND}.nbt`);
+g.save(out);
+console.log(JSON.stringify({ saved: out, blocks: g.solids().length }));
