@@ -97,7 +97,52 @@ if (import.meta.url === `file://${process.argv[1]}`) {
 
 // A vision model locates the elevation (pixel heuristics fail on white-on-white subjects and graph-paper sheets);
 // the pixel pass still measures the block pitch, which models get wrong by up to 2x.
-export async function locateWithGemini(path, model = process.env.MC_LOCATE_MODEL || "gemini-3.1-pro-preview", target) {
+// Locate the elevation: Gemini's detection when available, else Claude (rough box), then a pixel pass tightens either
+// box to the drawing's real edges, so the model's box only has to be roughly right.
+export async function locateWithGemini(path, model, target) {
+  let box;
+  try { box = await locateGemini(path, model || process.env.MC_LOCATE_MODEL || "gemini-3.1-pro-preview", target); }
+  catch { box = await locateClaude(path, target); }
+  return refineBox(path, box);
+}
+
+async function locateClaude(path, target) {
+  const { readFileSync } = await import("node:fs");
+  const { requestTextWithImage } = await import("../../src/sdk-binding.mjs");
+  const [w, h] = execFileSync("magick", [path, "-format", "%w %h", "info:"], { encoding: "utf8" }).trim().split(" ").map(Number);
+  const what = target || "the FRONT ELEVATION drawing of the building (the flat, straight-on view; not the 3/4 view, not labels, not swatches), including every tower, spire, chimney, parapet and the base";
+  const r = await requestTextWithImage({
+    prompt: `This image is ${w} x ${h} pixels. Give the bounding box of ${what}. Reply ONLY JSON: {"box_2d": [ymin, xmin, ymax, xmax]} normalised 0-1000.`,
+    images: [{ data: readFileSync(path), mediaType: /\.png$/i.test(path) ? "image/png" : "image/jpeg" }], model: process.env.MC_LOCATE_CLAUDE || "claude-sonnet-5-5", effort: "low",
+  });
+  const [ymin, xmin, ymax, xmax] = JSON.parse(r.text.slice(r.text.indexOf("{"), r.text.lastIndexOf("}") + 1)).box_2d;
+  return { x: Math.round(xmin / 1000 * w), y: Math.round(ymin / 1000 * h), w: Math.round((xmax - xmin) / 1000 * w), h: Math.round((ymax - ymin) / 1000 * h) };
+}
+
+/** Grow the box by a margin, then shrink it to the pixels that differ from the sheet background (rows/columns with at
+ *  least a sliver of foreground), never past the region between the box and its neighbours. */
+export function refineBox(path, box, { margin = 0.06 } = {}) {
+  const { w, h, px } = rgbOf(path);
+  const at = (x, y) => 3 * (y * w + x);
+  const border = [];
+  for (let x = 0; x < w; x += 4) for (const y of [2, h - 3]) border.push(at(x, y));
+  for (let y = 0; y < h; y += 4) for (const x of [2, w - 3]) border.push(at(x, y));
+  const bg = [0, 1, 2].map((c) => border.map((i) => px[i + c]).sort((a, b) => a - b)[border.length >> 1]);
+  const fg = (x, y) => { const i = at(x, y); return Math.abs(px[i] - bg[0]) + Math.abs(px[i + 1] - bg[1]) + Math.abs(px[i + 2] - bg[2]) > 45; };
+  const mx = Math.round(box.w * margin), my = Math.round(box.h * margin);
+  const X0 = Math.max(0, box.x - mx), X1 = Math.min(w - 1, box.x + box.w + mx), Y0 = Math.max(0, box.y - my), Y1 = Math.min(h - 1, box.y + box.h + my);
+  const colHas = (x) => { let n = 0; for (let y = Y0; y <= Y1; y++) n += fg(x, y); return n >= 3; };
+  const rowHas = (y, a, b) => { let n = 0; for (let x = a; x <= b; x++) n += fg(x, y); return n >= 3; };
+  // shrink from each side while the edge column/row is empty; stop at the drawing
+  let a = X0, b = X1, c = Y0, d = Y1;
+  while (a < b && !colHas(a)) a++;
+  while (b > a && !colHas(b)) b--;
+  while (c < d && !rowHas(c, a, b)) c++;
+  while (d > c && !rowHas(d, a, b)) d--;
+  return { x: a, y: c, w: b - a + 1, h: d - c + 1 };
+}
+
+async function locateGemini(path, model, target) {
   const { readFileSync } = await import("node:fs");
   const key = process.env.GEMINI_API_KEY?.trim() || readFileSync(new URL("../../.env", import.meta.url), "utf8").match(/^GEMINI_API_KEY=(.*)$/m)[1].trim();
   const [w, h] = execFileSync("magick", [path, "-format", "%w %h", "info:"], { encoding: "utf8" }).trim().split(" ").map(Number);

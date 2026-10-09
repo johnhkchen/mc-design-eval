@@ -10,6 +10,7 @@ import { execFileSync, spawnSync } from "node:child_process";
 import { requestTextWithImage } from "../../src/sdk-binding.mjs";
 import { PHASE1_MODEL_ID } from "../../src/config.mjs";
 import { generateImage } from "../../src/nano-banana.mjs";
+import { makeImage } from "../../src/images.mjs";
 import { referenceSheetPrompt } from "../concept-builds/concept-bakeoff.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -17,8 +18,10 @@ const PLUGIN = join(HERE, "..", "..", "..", "minecraft-design");
 const MCD = join(PLUGIN, "tools", "bin", "mcd.mjs");
 const PICKER = process.env.MC_PICK_MODEL_ID || "claude-opus-5-5";
 const arg = (k, d) => (process.argv.includes(k) ? process.argv[process.argv.indexOf(k) + 1] : d);
-const key = arg("--subject"), effort = arg("--effort", "high");
+const key = arg("--subject") || arg("--charter"), effort = arg("--effort", "high");
 const from = arg("--from");          // reuse an earlier run's concept.jpg + spec.md (isolate toolkit/model changes)
+const conceptFile = arg("--concept");   // start from a chosen concept image (e.g. a Charter Row sheet); a spec is written for it
+const formOnly = process.argv.includes("--form-only");   // build passes do form only; detailing is a later phase
 const respec = process.argv.includes("--respec");   // with --from: keep the concept, write a fresh spec
 // --trace x,y,w,h,cols,rows : the front elevation's pixel box on the sheet and its size in blocks. Downsamples it to a
 // block grid (trace.png with coordinates + trace.txt of hex colours) that the spec and the builder read as a tracing.
@@ -27,7 +30,7 @@ const trace = arg("--trace");
 // exactly W x H blocks on the front, several candidates, the one most truly on that grid wins (fitGrid), and its front
 // is traced 1:1. Nothing is shrunk afterwards.
 const native = arg("--native")?.split("x").map(Number);
-if (trace && !from && !native) throw new Error("--trace needs --from (the pixel box is measured on an existing concept)");
+if (trace && !from && !native && !conceptFile) throw new Error("--trace needs --from (the pixel box is measured on an existing concept)");
 
 export const SUBJECTS = {
   "grocery-store": {
@@ -47,10 +50,17 @@ export const SUBJECTS = {
   },
 };
 
-const s = SUBJECTS[key];
+let s = SUBJECTS[key];
+if (!s && arg("--charter")) {
+  // a Charter Row building: its brief + the Row style guide (benchmarks/charter-row/row.mjs)
+  const { BUILDINGS, STYLE, SCALE } = await import("../charter-row/row.mjs");
+  const b = BUILDINGS[arg("--charter")];
+  s = { what: `${b.name}: ${b.what}. ${STYLE.read}`, size: `${b.size.w} blocks wide along the street, ${b.size.d} deep, about ${b.size.h} tall. ${SCALE}`,
+    palette: `${STYLE.concord} ${STYLE.operator}${b.funding ? " " + STYLE.have_nots : ""}` };
+}
 if (!s) throw new Error(`--subject one of ${Object.keys(SUBJECTS).join(", ")}`);
 const tag = PHASE1_MODEL_ID.replace(/^claude-/, "").replace(/-\d.*$/, "");
-const runId = `${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "")}-${key}-${tag}-${effort}${from ? "-rerun" : ""}${respec ? "-respec" : ""}${trace ? "-trace" : ""}${process.argv.includes("--redraw") ? "-redraw" : ""}${process.argv.includes("--thin") ? "-thin" : ""}${native ? `-native${native.join("x")}` : ""}${process.argv.includes("--views") ? "-views" : ""}${process.argv.includes("--two-pass") ? "-2pass" : ""}`;
+const runId = `${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "")}-${key}-${tag}-${effort}${from ? "-rerun" : ""}${respec ? "-respec" : ""}${trace ? "-trace" : ""}${process.argv.includes("--redraw") ? "-redraw" : ""}${process.argv.includes("--thin") ? "-thin" : ""}${native ? `-native${native.join("x")}` : ""}${process.argv.includes("--views") ? "-views" : ""}${process.argv.includes("--two-pass") ? "-2pass" : ""}${formOnly ? "-form" : ""}`;
 const dir = join(HERE, "runs", runId);
 mkdirSync(dir, { recursive: true });
 const t0 = Date.now(), usage = { cost: 0 }, stages = [];
@@ -60,6 +70,11 @@ const img = (p) => ({ data: readFileSync(p), mediaType: /\.jpe?g$/i.test(p) ? "i
 // 1-2. concept sheet + spec (fresh, or reused with --from)
 let concept;
 const reuseSpec = from && !respec;
+if (conceptFile) {
+  concept = join(dir, "concept.jpg");
+  execFileSync("magick", [conceptFile, "-quality", "95", concept]);
+  mark("concept chosen", { from: conceptFile });
+}
 if (from) {
   const src = join(HERE, "runs", from);
   concept = join(dir, "concept.jpg");
@@ -84,7 +99,7 @@ if (trace) {
       const prompt = `Make a ${gc}x${gr} pixel sprite of the FRONT ELEVATION of the building in the attached reference sheet, then show it enlarged with nearest-neighbour scaling so every sprite pixel is a big crisp square. ${gc} pixels wide, ${gr} tall, flat colours only, no grid lines, no shading, no text, plain light-grey background. Simplify to fit like an architect drawing at small scale: keep the silhouette, the main rhythm, the focal features and the colour scheme; merge or drop detail that cannot be one pixel or more.`;
       const { fitGrid } = await import("./sheet-trace.mjs");
       const cands = await Promise.all([1, 2, 3].map(async (attempt) => {
-        const r = await generateImage({ prompt, images: [{ base64: readFileSync(concept).toString("base64"), mediaType: "image/jpeg" }] });
+        const r = await makeImage({ prompt, images: [{ base64: readFileSync(concept).toString("base64"), mediaType: "image/jpeg" }], variant: `redraw-${attempt}`, purpose: `${key} redraw ${gc}x${gr} #${attempt}` });
         const rp = join(dir, `redraw-${attempt}.${r.mediaType === "image/png" ? "png" : "jpg"}`);
         writeFileSync(rp, Buffer.from(r.base64, "base64"));
         const fit = fitGrid(rp, join(dir, `redraw-${attempt}-trace`), await locateWithGemini(rp), gc, gr);
@@ -146,7 +161,7 @@ if (reuseSpec) {
     `It is a TRACING: use it for the outline, the position and size of every feature, and the colour regions, block by block.`;
   traceSize = [best.fit.cols, best.fit.rows];
   mark("native pick", { n: best.n, cols: best.fit.cols, rows: best.fit.rows, score: best.fit.score });
-} else if (!from) {
+} else if (!from && !conceptFile) {
   const conceptPrompt = referenceSheetPrompt(s);
   writeFileSync(join(dir, "concept.prompt.txt"), conceptPrompt + "\n");
   const c = await generateImage({ prompt: conceptPrompt });
@@ -202,6 +217,11 @@ const thinRules = process.argv.includes("--thin") ? [
   "a diagonal or sloped edge → stairs (with the right facing and half); small ornaments → buttons, heads, lanterns, end rods, banners.",
   "Separate neighbouring elements by DEPTH, not only colour: push alternate fins/piers 1 block proud, recess windows 1, so each casts its own shadow.",
 ] : [];
+const formRules = formOnly ? [
+  "FORM ONLY: this pass builds the FORM, a later detail pass adds the craft. Use FULL BLOCKS (plus glass, panes, doors and anything functional);",
+  "no stairs, slabs, walls, fences, trapdoors, lanterns, buttons, banners or trim. Get exactly right: the outline and roofline, the storeys and bays,",
+  "every opening's position and size, the depth layers (what is proud, flush, recessed), and the material of each zone. Leave plain surfaces plain.",
+] : [];
 const geometry = [
   "Geometry: the main front faces NORTH (−z); x runs along the street; y = 0 is the ground. MIRROR TRAP: a person on the street looks SOUTH, so their",
   "left is world +x: a front tracing's column c (left to right as drawn) is world x = W−1−c, not x = c. Asymmetric fronts come out mirrored if you",
@@ -235,7 +255,7 @@ if (twoPass) {
     ...(traceNote ? [traceNote + " Build the front face to match the tracing cell for cell."] : []),
     ...(viewsNote.includes("depth.txt") ? ["depth.png / depth.txt: a DEPTH MAP of the front: for every front cell, how many blocks it sits proud of (+) or recessed from (-) the main wall plane. " +
       "Build the relief from it: fins, piers, mouldings, reveals, recessed openings. Same-colour features (cream on cream) exist ONLY in this map, so follow it."] : []),
-    ...thinRules, ...geometry,
+    ...thinRules, ...formRules, ...geometry,
     "ROUND 1: build, save round-1.nbt, render: mcd render round-1.nbt --front n --tiles r1-tiles. Compare r1-tiles/front-elevation.png with trace.png and",
     "concept.jpg, and r1-tiles/front-left.png with the 3/4 view, cell by cell for the front: list the mismatches (outline, zones, openings, colours, relief).",
     "Fix them in build.mjs and re-render until the front matches, then save the final as round-1.nbt (overwrite). Keep build.mjs readable: the front in",
@@ -250,7 +270,7 @@ if (twoPass) {
     "Read the concept's 3/4 view for how the side meets the front and how the roof steps; give the side walls the same quality as the front: the side",
     "elevation's silhouette, storey and band lines and bay rhythm, piers and frames with depth, a designed roof (steps, parapets, copings), and a back",
     "that finishes the building (it can be simpler).",
-    ...thinRules, ...geometry,
+    ...thinRules, ...formRules, ...geometry,
     "Render: mcd render round-2.nbt --front n --tiles r2-tiles. Compare r2-tiles/right-elevation.png with side-trace.png and r2-tiles/front-left.png with",
     "the 3/4 view; fix the biggest mismatches, re-render, and save the final as round-2.nbt. Keep round-1.nbt untouched. Report in ≤6 lines.",
   ].join(" ");

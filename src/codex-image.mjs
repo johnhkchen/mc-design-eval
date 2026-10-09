@@ -8,9 +8,11 @@ import { spawn } from "node:child_process";
 
 const TIMEOUT_MS = Number(process.env.MC_CODEX_TIMEOUT_MS || 600000);
 
-function run(args, cwd) {
+// the prompt goes on stdin: `-i <FILE>...` is variadic and would swallow a positional prompt as another image
+function run(args, cwd, input) {
   return new Promise((resolve, reject) => {
-    const p = spawn("codex", args, { cwd, stdio: ["ignore", "pipe", "pipe"] });
+    const p = spawn("codex", args, { cwd, stdio: ["pipe", "pipe", "pipe"] });
+    p.stdin.end(input);
     let out = "";
     p.stdout.on("data", (d) => (out += d));
     p.stderr.on("data", (d) => (out += d));
@@ -37,7 +39,7 @@ export async function codexImage({ prompt, images = [], size }) {
       "PROMPT:",
       prompt,
     ].filter(Boolean).join("\n");
-    const log = await run(["exec", "--skip-git-repo-check", "-s", "workspace-write", "-C", dir, ...inputs.flatMap((f) => ["-i", f]), task], dir);
+    const log = await run(["exec", "--skip-git-repo-check", "-s", "workspace-write", "-C", dir, ...inputs.flatMap((f) => ["-i", f])], dir, task);
     const file = readdirSync(dir).find((f) => /^out\.(png|jpe?g|webp)$/.test(f));
     if (!file) throw new Error(`codex produced no out.png: ${log.slice(-600)}`);
     const model = (log.match(/^model: (.+)$/m) || [])[1];

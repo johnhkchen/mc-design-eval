@@ -4,7 +4,7 @@
 //   node benchmarks/gauntlet/views.mjs <concept> <out-dir> <W>x<H> <D>
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
-import { generateImage } from "../../src/nano-banana.mjs";
+import { makeImage } from "../../src/images.mjs";
 import { locateWithGemini, findElevation, fitGrid } from "./sheet-trace.mjs";
 
 // depth levels: grey value -> blocks proud of the main wall plane (+ forward, - recessed)
@@ -27,7 +27,7 @@ export function prompts(W, H, D) {
 
 async function best(kind, concept, dir, w, h, prompt, n = 3) {
   const cands = await Promise.all(Array.from({ length: n }, async (_, i) => {
-    const r = await generateImage({ prompt, images: [{ base64: readFileSync(concept).toString("base64"), mediaType: /\.png$/.test(concept) ? "image/png" : "image/jpeg" }] });
+    const r = await makeImage({ prompt, images: [{ base64: readFileSync(concept).toString("base64"), mediaType: /\.png$/.test(concept) ? "image/png" : "image/jpeg" }], variant: `${kind}-${i + 1}`, purpose: `${kind} view #${i + 1}` });
     const p = join(dir, `${kind}-${i + 1}.${r.mediaType === "image/png" ? "png" : "jpg"}`);
     writeFileSync(p, Buffer.from(r.base64, "base64"));
     try {

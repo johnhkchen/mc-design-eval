@@ -1,0 +1,115 @@
+{
+ "runId": "202610091048-deepslate-holdings-sonnet-high-trace-redraw-views-2pass-form",
+ "subject": "deepslate-holdings",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-2",
+ "why": "Build B carries the reference's design onto the sides: its side elevation has a glazed stair tower, timber pilasters and windows, and its roof is properly hipped, while Build A's side is a blank deepslate wall under a flat slab that ignores the reference side view.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 3.3456952,
+ "durationMs": 1383361,
+ "stages": [
+  {
+   "n": "concept chosen",
+   "s": 0,
+   "from": "benchmarks/charter-row/concepts/deepslate-holdings/cx-c1.png"
+  },
+  {
+   "n": "redraw",
+   "s": 88,
+   "attempt": 1,
+   "cols": 19,
+   "rows": 24,
+   "score": 50,
+   "box": {
+    "x": 44.51578947368421,
+    "y": 35.28333333333333,
+    "w": 973,
+    "h": 1303
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw",
+   "s": 111,
+   "attempt": 2,
+   "cols": 19,
+   "rows": 23,
+   "score": 64.5,
+   "box": {
+    "x": 42.43157894736842,
+    "y": 32.565217391304344,
+    "w": 977,
+    "h": 1290
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw",
+   "s": 129,
+   "attempt": 3,
+   "cols": 18,
+   "rows": 24,
+   "score": 56.1,
+   "box": {
+    "x": 21.62222222222222,
+    "y": -0.46666666666666856,
+    "w": 1007,
+    "h": 1348
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw pick",
+   "s": 129,
+   "attempt": 1,
+   "cols": 19,
+   "rows": 24,
+   "score": 50
+  },
+  {
+   "n": "trace",
+   "s": 129,
+   "cols": 19,
+   "rows": 24,
+   "scale": 1,
+   "box": {
+    "x": 44.51578947368421,
+    "y": 35.28333333333333,
+    "w": 973,
+    "h": 1303
+   }
+  },
+  {
+   "n": "views",
+   "s": 245,
+   "side": "19x39",
+   "depth": "29x38"
+  },
+  {
+   "n": "spec",
+   "s": 346
+  },
+  {
+   "n": "pass 1 (front)",
+   "s": 806,
+   "turns": 25,
+   "cost": 1.3809654000000002
+  },
+  {
+   "n": "pass 2 (sides, back, roof)",
+   "s": 1376,
+   "turns": 25,
+   "cost": 1.4449998000000002
+  },
+  {
+   "n": "keep-better",
+   "s": 1383,
+   "kept": "round-2",
+   "why": "Build B carries the reference's design onto the sides: its side elevation has a glazed stair tower, timber pilasters and windows, and its roof is properly hipped, while Build A's side is a blank deepslate wall under a flat slab that ignores the reference side view."
+  }
+ ]
+}

@@ -1,0 +1,38 @@
+# Texture first, construction after (later rules win)
+
+# 7. Wall texture: crack and tone variation on the brick field
+all faces where P -> vary 0.12 cracked_deepslate_bricks
+all faces where P,Q -> weather 0.25
+north rows 19-22 where P -> vary
+
+# 1. Base: mossy weathered footing, then plinth
+all faces rows 0-2 where B,G,P -> gradient mossy_stone_bricks..stone_bricks up
+all faces rows 0-2 where B,G,P -> weather 0.4
+all faces ground row -> plinth cobbled_deepslate 2
+
+# 8. Floor-line banding
+west cols 3-6 where E -> courses 6 dark_oak_planks
+north row 8 where R,P -> courses 1 polished_deepslate
+
+# 3. Window sills and lintels
+north openings -> sills oak_slab
+north openings -> lintels hood deepslate_brick_stairs
+west openings -> sills oak_slab
+west openings -> lintels hood deepslate_brick_stairs
+
+# 2. Eave cornice and gable shoulder coping
+north row 17 where N -> cornice deep polished_deepslate
+west row 17 where N -> cornice deep polished_deepslate
+north wall tops where T -> coping slab polished_deepslate
+
+# 4. Entrance portico cap
+north row 7 where J -> cornice stepped smooth_quartz
+north row 7 -> coping slab smooth_quartz
+
+# 5. Pilaster capitals (bases dropped: row 1 has no E under the pilasters)
+north row 16 where R -> cornice simple chiseled_deepslate
+
+# 6. Roof surface and rim
+roof rows 5-20 where T -> vary 0.1 cracked_deepslate_bricks
+roof rows 5-20 where T -> gradient deepslate_tiles..polished_deepslate up
+roof wall tops -> coping slab polished_deepslate
