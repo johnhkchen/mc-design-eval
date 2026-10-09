@@ -11,6 +11,7 @@ import { BUILDINGS, conceptPrompt } from "./row.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const arg = (k, d) => (process.argv.includes(k) ? process.argv[process.argv.indexOf(k) + 1] : d);
+const tag = arg("--tag", "");          // e.g. v2: files v2-c1.png ..., strip v2-strip.jpg (keeps earlier rounds)
 const keys = arg("--only") ? arg("--only").split(",") : Object.keys(BUILDINGS), n = Number(arg("--n", 3));
 const stripsOnly = process.argv.includes("--strips-only");   // re-measure existing candidates and rebuild the strips
 const FONT = ["/System/Library/Fonts/Supplemental/Arial.ttf", "/System/Library/Fonts/Helvetica.ttc"].find(existsSync);
@@ -22,8 +23,8 @@ async function worker() {
     const { k, i } = jobs[next++];
     const dir = join(HERE, "concepts", k);
     mkdirSync(dir, { recursive: true });
-    writeFileSync(join(dir, "prompt.txt"), conceptPrompt(k) + "\n");
-    const file = join(dir, `c${i}.png`);
+    writeFileSync(join(dir, `${tag ? tag + "-" : ""}prompt.txt`), conceptPrompt(k) + "\n");
+    const file = join(dir, `${tag ? tag + "-" : ""}c${i}.png`);
     try {
       const img = stripsOnly ? { ms: 0 } : await generateImage({ prompt: conceptPrompt(k) });
       if (stripsOnly && !existsSync(file)) continue;
@@ -44,6 +45,6 @@ for (const k of keys) {
   const b = BUILDINGS[k];
   const parts = rs.flatMap((r) => ["(", r.file, "-resize", "x360", "-gravity", "north", "-background", "white", "-splice", "0x28", ...(FONT ? ["-font", FONT] : []), "-pointsize", "20", "-annotate", "+0+4",
     `c${r.i}  ${r.measured ? `${r.measured.cols}x${r.measured.rows} blocks` : "?"}`, ")"]);
-  execFileSync("magick", [...parts, "+append", "-gravity", "northwest", "-splice", "0x34", ...(FONT ? ["-font", FONT] : []), "-pointsize", "24", "-annotate", "+8+4", `${b.name}  (brief ${b.size.w}w x ${b.size.h}h, newness ${b.newness})`, join(HERE, "concepts", k, "strip.jpg")]);
+  execFileSync("magick", [...parts, "+append", "-gravity", "northwest", "-splice", "0x34", ...(FONT ? ["-font", FONT] : []), "-pointsize", "24", "-annotate", "+8+4", `${b.name}  (brief ${b.size.w}w x ${b.size.h}h, newness ${b.newness})`, join(HERE, "concepts", k, `${tag ? tag + "-" : ""}strip.jpg`)]);
 }
-writeFileSync(join(HERE, "concepts", "results.json"), JSON.stringify(results.map((r) => ({ ...r, file: r.file.replace(HERE + "/", "") })), null, 1) + "\n");
+writeFileSync(join(HERE, "concepts", `${tag ? tag + "-" : ""}results.json`), JSON.stringify(results.map((r) => ({ ...r, file: r.file.replace(HERE + "/", "") })), null, 1) + "\n");

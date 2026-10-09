@@ -10,16 +10,21 @@ export const SCALE = [
 
 // Two layers every building is made of, in a different mix. `newness` 0 = untouched Concord, 1 = all operator.
 export const STYLE = {
-  concord: "THE CONCORD (original, older, below): deepslate bricks and deepslate tiles for walls, polished deepslate and chiseled deepslate for trim, " +
+  concord: "THE CONCORD (original, older): deepslate bricks and deepslate tiles for walls, polished deepslate and chiseled deepslate for trim, " +
     "stripped oak and oak logs for columns, posts and beams, oak doors and frames, a stone-brick or cobbled deepslate plinth; heavy, honest, " +
     "symmetrical civic architecture with cornices, pediments and deep window reveals; weathered (cracked deepslate, a little moss at the base).",
-  operator: "THE OPERATORS (later, newer, added on top): smooth quartz, quartz pillars, calcite and white concrete cladding, large glass panes and " +
-    "glass storefronts, slim light-grey or cyan accents, small gold or copper lettering and fittings; clean, bright, new, unweathered; " +
-    "added as new upper storeys, new entrances, cladding over old walls, and new signs over old ones.",
+  operator: "THE OPERATORS (later, newer): smooth quartz, calcite, white concrete, large clean glass panes, slim light-grey or cyan accents, small " +
+    "gold or copper lettering and fittings. They ADAPTED the old buildings the way real buildings get reused, not by stacking new floors on " +
+    "top: the original building stays whole and readable (its walls, roof, columns, cornices, proportions), and the new layer appears where " +
+    "people touch and look: a new shopfront or glass vestibule set INTO the old ground-floor openings, old windows re-glazed with big clean " +
+    "panes inside the original stone frames, a new sign hung over (or beside) the old carved name, fresh quartz trim on doorways and steps, " +
+    "cleaned stone at street level against weathered stone above, lamps, planters, railings; occasionally a modest glass extension at the side " +
+    "or a small rooftop pavilion set back from the edge. The more an owner spent, the more of these interventions, never a building-on-a-building.",
   have_nots: "THE HAVE-NOTS (patched, cheap): repairs in cobblestone, mud bricks and plain planks, wool banners and painted signs, " +
     "hand-made additions; worn but cared for.",
   read: "The Row is read by walking it: from the Tribunal end the buildings get newer, brighter and better funded; walking back they get older " +
-    "and quieter. On every building the history must be readable from the materials: original deepslate and oak below, quartz and glass on top.",
+    "and quieter. On every building the history is readable the way it is in a real old town: the original Concord building in deepslate and " +
+    "oak is still the building, and the newer owners' quartz, glass and signs are woven into it at the street, the entrance and the windows.",
 };
 
 export const BUILDINGS = {
@@ -31,15 +36,17 @@ export const BUILDINGS = {
   },
   "inspectorate": {
     name: "The Inspectorate", newness: 0.35, where: "old Concord core", size: { w: 17, d: 13, h: 11 },
-    what: "a two-storey civic office built to be walked into: a wide, open, welcoming ground floor (now rented to the Permit Office, with a new " +
-      "quartz-and-glass shopfront and a bright PERMIT OFFICE sign over the old carved INSPECTORATE lettering) and a dark upper floor with " +
-      "shuttered or unlit windows; a battered complaint box by the door, overflowing",
+    what: "a two-storey Concord civic office built to be walked into: a wide arcade of open arches on the ground floor. The Permit Office " +
+      "rents the ground floor and has glazed those arches with a clean quartz-and-glass shopfront, and hung a bright PERMIT OFFICE sign just " +
+      "below the old carved INSPECTORATE lettering, which is still there. The upper floor is untouched and dark: old windows, unlit, a shutter " +
+      "or two closed. A battered complaint box by the door, overflowing",
   },
   "press-gallery": {
     name: "The Press Gallery", newness: 0.4, where: "old Concord core", size: { w: 19, d: 29, h: 15 },
     what: "a long print hall, once the loudest building on the Row: tall arched hall windows along the sides, a clerestory and roof vents or a " +
       "chimney for the presses, a big loading door, a viewing balcony expressed on the facade; the operators bought it: a new bright " +
-      "SETTLEMENT COURIER sign and fresh paint on the front, while the back end stays old and sooty where a small hand press still runs",
+      "SETTLEMENT COURIER sign mounted on the old facade, the front doors and balcony railings renewed in quartz and glass, the front stone " +
+      "cleaned, while the long side walls and the back end stay old and sooty where a small hand press still runs",
   },
   "reading-room": {
     name: "The Reading Room", newness: 0.15, where: "behind the Press Gallery", size: { w: 7, d: 9, h: 7 },
@@ -49,9 +56,10 @@ export const BUILDINGS = {
   },
   "stronghold-institute": {
     name: "The Stronghold Institute", newness: 0.75, where: "operator avenue", size: { w: 23, d: 17, h: 16 },
-    what: "a think tank built on top of the old Concord library: the library's deepslate ground floor and tall reading-room windows remain, " +
-      "with a new quartz-and-glass upper storey and a new formal entrance with an engraved STRONGHOLD INSTITUTE name band; serious, " +
-      "expensive, slightly fortified-looking",
+    what: "a think tank that moved into the old Concord library and kept its shelves: the library itself is intact, a dignified two-storey " +
+      "deepslate-and-oak hall with tall reading-room windows; the Institute re-glazed those windows with heavy clean glass, rebuilt the entrance " +
+      "as a quartz-framed portal with bronze-coloured doors and an engraved STRONGHOLD INSTITUTE name band, added quartz copings and " +
+      "security railings; serious, expensive, slightly fortified-looking",
   },
   "bench-fellows": {
     name: "The Bench Fellows Society", newness: 0.6, where: "operator avenue", size: { w: 13, d: 23, h: 16 },
@@ -60,20 +68,23 @@ export const BUILDINGS = {
   },
   "founders-circle": {
     name: "The Founders' Circle", newness: 0.65, where: "operator avenue", size: { w: 15, d: 13, h: 13 },
-    what: "a former guesthouse for visiting dignitaries, three storeys: a refined front with a canopy over a glass lobby door, a plaque wall " +
-      "visible inside, two upper floors of identical offices, and ONE shared mailbox by the door; elegant old bones, new gloss",
+    what: "a former Concord guesthouse for visiting dignitaries, three storeys of handsome deepslate and oak with a balcony and good " +
+      "proportions, still entirely the old building; the new owners added a slim quartz canopy over a glass lobby door, polished the steps, " +
+      "re-glazed the windows, put a row of identical brass name plates by the door and ONE shared mailbox; elegant old bones, new gloss",
   },
   "deepslate-holdings": {
     name: "Deepslate Holdings", newness: 0.7, where: "operator avenue", size: { w: 17, d: 15, h: 22 },
-    what: "built on the old Concord granary: the tall deepslate granary body, the elevator head at the top and the grain chutes on the side " +
-      "survive, the chutes now glazed as people-movers or stair shafts; a new low quartz-and-glass lobby grafted onto the front with a " +
-      "COMMUNITY SERVICES sign; industrial old bones dressed as a friendly corporate front",
+    what: "the old Concord granary, still standing as the granary: a tall deepslate-and-oak storehouse with an elevator head on the roof and " +
+      "grain chutes running down the side. The new owners glazed the chutes as stair shafts with clean glass, opened a glass entrance with a " +
+      "friendly quartz surround and a COMMUNITY SERVICES sign into the old loading bays at street level, and added planters and lamps; " +
+      "industrial old bones dressed as a friendly corporate front",
   },
   "meridian": {
     name: "Meridian Yield & Exchange", newness: 0.95, where: "operator avenue", size: { w: 35, d: 31, h: 20 },
-    what: "the nicest building on the Row: a bright campus on the Concord's former guest square, buildings of quartz, calcite and glass around a " +
-      "landscaped courtyard, crisp and young; a few Concord deepslate paving stones and an old fountain basin survive in the courtyard; the " +
-      "founder's study is a glass pavilion on the top floor of the main block",
+    what: "the nicest building on the Row: a bright, low-rise campus of two or three linked buildings of quartz, calcite and glass around a " +
+      "landscaped courtyard that was the Concord's guest square, crisp and young; the old square's deepslate paving, its oak-shaded fountain and " +
+      "a stretch of the old Concord arcade are kept as features in the courtyard; the founder's study is a glass pavilion set back on the roof " +
+      "of the main building",
   },
   "settlers-league": {
     name: "The Settlers' League hall", newness: 0.5, funding: "cheapest", where: "operator avenue", size: { w: 7, d: 9, h: 8 },
@@ -93,8 +104,8 @@ export const BUILDINGS = {
 export function conceptPrompt(key) {
   const b = BUILDINGS[key];
   const mix = b.newness < 0.3 ? "almost entirely the Concord layer, with at most a small later addition"
-    : b.newness < 0.6 ? "a clear mix: the Concord building below and behind, operator additions on the front and above"
-    : b.newness < 0.9 ? "mostly the operator layer, with the Concord building clearly showing through below and at the back"
+    : b.newness < 0.6 ? "the Concord building, adapted: a few clear operator interventions at the street, entrance and windows"
+    : b.newness < 0.9 ? "the Concord building, extensively adapted by a wealthy owner: many operator interventions, but still recognisably the old building"
     : "almost entirely the operator layer, with only small Concord remnants";
   return [
     "Minecraft builder reference sheet for ONE building, vanilla Minecraft blocks only, crisp voxel style, plain light background,",
