@@ -1,0 +1,110 @@
+{
+ "runId": "202610090515-grocery-store-sonnet-high-rerun-respec-trace-redraw-thin-views-2pass",
+ "subject": "grocery-store",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-1",
+ "why": "The fronts are almost identical, but A's side wall is clean brick with a chimney and few openings, much like the reference side elevation, while B's side has stray stone patches, a white cross artifact and ragged openings, which hurts both fidelity and craft.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 2.7922092000000003,
+ "durationMs": 972016,
+ "stages": [
+  {
+   "n": "redraw",
+   "s": 53,
+   "attempt": 1,
+   "cols": 15,
+   "rows": 19,
+   "score": 49.5,
+   "box": {
+    "x": 21,
+    "y": 10.768421052631581,
+    "w": 967,
+    "h": 1023
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw",
+   "s": 67,
+   "attempt": 3,
+   "cols": 15,
+   "rows": 18,
+   "score": 47,
+   "box": {
+    "x": 59,
+    "y": 0,
+    "w": 886,
+    "h": 989
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw",
+   "s": 100,
+   "attempt": 2,
+   "cols": 15,
+   "rows": 18,
+   "score": 51.2,
+   "box": {
+    "x": 60,
+    "y": 32,
+    "w": 887,
+    "h": 1024
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw pick",
+   "s": 100,
+   "attempt": 3,
+   "cols": 15,
+   "rows": 18,
+   "score": 47
+  },
+  {
+   "n": "trace",
+   "s": 100,
+   "cols": 15,
+   "rows": 18,
+   "scale": 1,
+   "box": {
+    "x": 59,
+    "y": 0,
+    "w": 886,
+    "h": 989
+   }
+  },
+  {
+   "n": "views",
+   "s": 155,
+   "side": "15x19",
+   "depth": "15x18"
+  },
+  {
+   "n": "spec",
+   "s": 255
+  },
+  {
+   "n": "pass 1 (front)",
+   "s": 629,
+   "turns": 23,
+   "cost": 1.1088324
+  },
+  {
+   "n": "pass 2 (sides, back, roof)",
+   "s": 963,
+   "turns": 29,
+   "cost": 1.178745
+  },
+  {
+   "n": "keep-better",
+   "s": 972,
+   "kept": "round-1",
+   "why": "The fronts are almost identical, but A's side wall is clean brick with a chimney and few openings, much like the reference side elevation, while B's side has stray stone patches, a white cross artifact and ragged openings, which hurts both fidelity and craft."
+  }
+ ]
+}

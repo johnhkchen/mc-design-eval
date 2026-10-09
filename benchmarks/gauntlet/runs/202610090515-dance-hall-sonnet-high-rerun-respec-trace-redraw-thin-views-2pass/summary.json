@@ -1,0 +1,110 @@
+{
+ "runId": "202610090515-dance-hall-sonnet-high-rerun-respec-trace-redraw-thin-views-2pass",
+ "subject": "dance-hall",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-2",
+ "why": "The two fronts are identical, but B's side wall has windows, pilasters and stepped massing like the reference, while A's side and 3/4 views show a blank flat slab.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 2.6119646000000003,
+ "durationMs": 871056,
+ "stages": [
+  {
+   "n": "redraw",
+   "s": 28,
+   "attempt": 2,
+   "cols": 26,
+   "rows": 30,
+   "score": 20.8,
+   "box": {
+    "x": 198.01538461538462,
+    "y": 21.68,
+    "w": 779,
+    "h": 852
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw",
+   "s": 33,
+   "attempt": 1,
+   "cols": 26,
+   "rows": 30,
+   "score": 22.8,
+   "box": {
+    "x": 367.44615384615383,
+    "y": 16.19333333333333,
+    "w": 621,
+    "h": 721
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw",
+   "s": 44,
+   "attempt": 3,
+   "cols": 26,
+   "rows": 28,
+   "score": 27.7,
+   "box": {
+    "x": 181.53846153846155,
+    "y": 22.07857142857143,
+    "w": 810,
+    "h": 851
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw pick",
+   "s": 44,
+   "attempt": 2,
+   "cols": 26,
+   "rows": 30,
+   "score": 20.8
+  },
+  {
+   "n": "trace",
+   "s": 44,
+   "cols": 26,
+   "rows": 30,
+   "scale": 1,
+   "box": {
+    "x": 198.01538461538462,
+    "y": 21.68,
+    "w": 779,
+    "h": 852
+   }
+  },
+  {
+   "n": "views",
+   "s": 92,
+   "side": "35x29",
+   "depth": "26x30"
+  },
+  {
+   "n": "spec",
+   "s": 209
+  },
+  {
+   "n": "pass 1 (front)",
+   "s": 478,
+   "turns": 23,
+   "cost": 0.9278606
+  },
+  {
+   "n": "pass 2 (sides, back, roof)",
+   "s": 864,
+   "turns": 27,
+   "cost": 1.150322
+  },
+  {
+   "n": "keep-better",
+   "s": 871,
+   "kept": "round-2",
+   "why": "The two fronts are identical, but B's side wall has windows, pilasters and stepped massing like the reference, while A's side and 3/4 views show a blank flat slab."
+  }
+ ]
+}

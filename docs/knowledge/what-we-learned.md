@@ -472,6 +472,24 @@ compares `right-elevation.png` with the side tracing each round. Grid: `benchmar
 - **The fronts did not improve,** and the redraw arm's marquee got cruder. More inputs compete for attention in one agentic session. Splitting the work (front pass, then side and depth pass) may help.
 - Cost unchanged: $1.66 and $1.91 for Sonnet high, plus 6 image calls.
 
+### Two passes: front, then sides, back and roof (2026-10-08)
+
+`--two-pass` runs two fresh builder sessions. Pass 1 builds the volume and puts all its care into the front (tracing +
+depth map), with the front in its own function. Pass 2 designs the sides, back and roof from the side view's
+silhouette, band lines and bay rhythm (no longer cell for cell) and must leave the front unchanged. The keep-better
+pick now also sees the reference side and the build's side elevation. Grid: `benchmarks/gauntlet/two-pass.png`
+(dance hall one-pass vs two-pass; grocery store pass 1 vs pass 2).
+
+| Run | Cost | Time | Result |
+|---|---|---|---|
+| Dance hall, two-pass | $2.61 | 14.5 min | **best right-sized dance hall so far**: the stepped gold marquee with jewels is back, fins thinner; the side follows the drawn side (tower at the front, the roof stepping back, windows, bands) |
+| Grocery store, two-pass (second subject) | $2.79 | 16 min | front faithful (awnings, sign, flower boxes, recessed door); pass 2's side had artifacts, so the judge kept pass 1 |
+
+- **Splitting the attention works.** With the front as the only job, pass 1 rebuilt the marquee faithfully; the one-pass run with the same inputs had made it crude. Pass 2 left the front cell-identical in both runs.
+- **The side view is only as good as its drawing.** The grocery's drawn side was weak (a narrow brick wall, the chimney as a strip), and pass 2 added noise. The judge catching that and keeping pass 1 is the safety net working.
+- **Mirror trap found (by the grocery builder).** The front faces north, so a person on the street looks south and their left is world +x: tracing column c is world x = W−1−c. Symmetric subjects hide it; the grocery came out mirrored until the builder noticed. It is now stated in the build prompt. The shape brushes write in world coordinates too, which made pass 2 avoid them.
+- About $1 more and twice the time of one pass; worth it for fidelity, a cost to weigh for drafts.
+
 ## Why the good-looking approach is slow (from the transcripts)
 
 Measured on 014 and 027. [V]

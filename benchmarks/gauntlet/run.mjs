@@ -50,7 +50,7 @@ export const SUBJECTS = {
 const s = SUBJECTS[key];
 if (!s) throw new Error(`--subject one of ${Object.keys(SUBJECTS).join(", ")}`);
 const tag = PHASE1_MODEL_ID.replace(/^claude-/, "").replace(/-\d.*$/, "");
-const runId = `${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "")}-${key}-${tag}-${effort}${from ? "-rerun" : ""}${respec ? "-respec" : ""}${trace ? "-trace" : ""}${process.argv.includes("--redraw") ? "-redraw" : ""}${process.argv.includes("--thin") ? "-thin" : ""}${native ? `-native${native.join("x")}` : ""}${process.argv.includes("--views") ? "-views" : ""}`;
+const runId = `${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "")}-${key}-${tag}-${effort}${from ? "-rerun" : ""}${respec ? "-respec" : ""}${trace ? "-trace" : ""}${process.argv.includes("--redraw") ? "-redraw" : ""}${process.argv.includes("--thin") ? "-thin" : ""}${native ? `-native${native.join("x")}` : ""}${process.argv.includes("--views") ? "-views" : ""}${process.argv.includes("--two-pass") ? "-2pass" : ""}`;
 const dir = join(HERE, "runs", runId);
 mkdirSync(dir, { recursive: true });
 const t0 = Date.now(), usage = { cost: 0 }, stages = [];
@@ -163,7 +163,8 @@ if (process.argv.includes("--views") && traceSize) {
   mark("views", { side: v.side && `${v.side.cols}x${v.side.rows}`, depth: v.depth && `${v.depth.cols}x${v.depth.rows}` });
   if (v.side) viewsNote += `side.png / side-trace.png / side-trace.txt: the SIDE ELEVATION, traced at ${v.side.cols} deep x ${v.side.rows} tall. ` +
     `It shows the side wall on your right when you face the front (the -x / west wall; it is what 'mcd render' calls right-elevation): column x=0 is the FRONT edge, ` +
-    `higher columns go back (+z); y=0 is the ground. Its column count is the building's depth. Build that wall from it cell for cell and mirror it for the other side. `;
+    `higher columns go back (+z); y=0 is the ground. Its column count is the building's depth. It is a rough sketch: take from it the SILHOUETTE (roof and step profile), ` +
+    `the storey and band lines, and the RHYTHM of piers and openings, not every cell; the craft (frames, sills, piers with depth, sub-block detail) is yours. Mirror it for the other side. `;
   if (v.depth) viewsNote += `depth.png / depth.txt: a DEPTH MAP of the front at ${v.depth.cols} x ${v.depth.rows}: for every front cell, how many blocks it sits proud of (+) or recessed from (-) the main wall plane. ` +
     `Use it for the relief: fins, piers, mouldings, reveals, recessed openings. Same-colour features (cream on cream) exist ONLY in this map, so follow it. `;
 }
@@ -194,36 +195,81 @@ if (!reuseSpec) {
 
 }
 
-// 3. agentic build with the plugin (two rounds saved)
-const agentPrompt = [
+// 3. agentic build with the plugin (two rounds saved, or two passes: front, then sides/back/roof)
+const thinRules = process.argv.includes("--thin") ? [
+  "SIZE IS FIXED: do not scale the building up to fit detail. Detail finer than a block goes into SUB-BLOCK parts, the way skilled builders detail small builds:",
+  "a thin vertical line or fin → wall / fence / glass pane / iron bars or a trapdoor on the face; a half-height ledge, sill or step → slab;",
+  "a diagonal or sloped edge → stairs (with the right facing and half); small ornaments → buttons, heads, lanterns, end rods, banners.",
+  "Separate neighbouring elements by DEPTH, not only colour: push alternate fins/piers 1 block proud, recess windows 1, so each casts its own shadow.",
+] : [];
+const geometry = [
+  "Geometry: the main front faces NORTH (−z); x runs along the street; y = 0 is the ground. MIRROR TRAP: a person on the street looks SOUTH, so their",
+  "left is world +x: a front tracing's column c (left to right as drawn) is world x = W−1−c, not x = c. Asymmetric fronts come out mirrored if you",
+  "forget; check the rendered front-elevation.png against the tracing's left/right. Author it as code (mcd new build.mjs; design one bay,",
+  "tile it, mirror for symmetry). For curved and stepped forms use the build library's SHAPE BRUSHES (see the skill's references/shapes-curved.md",
+  "and references/shapes-massing.md: dome, cylinder, minaret, arch, setbacks, gableRoof, hipRoof, fins, parapet, cornice) instead of placing those",
+  "blocks by hand.",
+];
+const base = [
   "Load and follow the minecraft-design skill. Build the building shown in concept.jpg (left: front elevation, right: 3/4 view) as structure",
   "files in this directory, following spec.md (its sizes and its MATERIAL MAP are binding: use exactly those block ids for those regions).",
   "Where spec.md and concept.jpg disagree on form, the CONCEPT wins.",
+];
+const runAgent = (prompt, label) => {
+  const r = spawnSync("claude", ["-p", "--plugin-dir", PLUGIN, "--model", PHASE1_MODEL_ID, "--effort", effort,
+    "--allowedTools", "Bash Read Write Edit Glob Grep", "--output-format", "json", prompt], { cwd: dir, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  let o = {};
+  try { o = JSON.parse(r.stdout); } catch { o = { result: r.stdout?.slice(0, 2000), error: r.stderr?.slice(0, 2000) }; }
+  usage.cost += o.total_cost_usd || 0;
+  mark(label, { turns: o.num_turns, cost: o.total_cost_usd });
+  return o.result || "";
+};
+const twoPass = process.argv.includes("--two-pass");
+if (twoPass) {
+  // PASS 1 — the front: tracing + depth map, one focused job. PASS 2 — a fresh session designs the sides, back and roof
+  // from the side elevation's silhouette and rhythm, keeping the front unchanged. Each pass gets the attention it needs.
+  const pass1 = [
+    ...base,
+    "THIS PASS IS THE FRONT ONLY (a second pass will design the sides, back and roof). Build the whole volume so it stands (the side elevation's depth,",
+    "plain side walls and a simple flat roof are fine for now), and put all your care into the FRONT FACE and its relief.",
+    ...(traceNote ? [traceNote + " Build the front face to match the tracing cell for cell."] : []),
+    ...(viewsNote.includes("depth.txt") ? ["depth.png / depth.txt: a DEPTH MAP of the front: for every front cell, how many blocks it sits proud of (+) or recessed from (-) the main wall plane. " +
+      "Build the relief from it: fins, piers, mouldings, reveals, recessed openings. Same-colour features (cream on cream) exist ONLY in this map, so follow it."] : []),
+    ...thinRules, ...geometry,
+    "ROUND 1: build, save round-1.nbt, render: mcd render round-1.nbt --front n --tiles r1-tiles. Compare r1-tiles/front-elevation.png with trace.png and",
+    "concept.jpg, and r1-tiles/front-left.png with the 3/4 view, cell by cell for the front: list the mismatches (outline, zones, openings, colours, relief).",
+    "Fix them in build.mjs and re-render until the front matches, then save the final as round-1.nbt (overwrite). Keep build.mjs readable: the front in",
+    "its own clearly named function, so the next pass can change the sides without touching it. Report in ≤6 lines.",
+  ].join(" ");
+  const rep1 = runAgent(pass1, "pass 1 (front)");
+  const pass2 = [
+    ...base,
+    "A first pass built the FRONT in build.mjs (saved as round-1.nbt). THIS PASS designs the SIDES, the BACK and the ROOF. Do NOT change the front face:",
+    "its front elevation must render the same as round-1.",
+    ...(viewsNote.includes("side-trace") ? [viewsNote.split("depth.png")[0]] : []),
+    "Read the concept's 3/4 view for how the side meets the front and how the roof steps; give the side walls the same quality as the front: the side",
+    "elevation's silhouette, storey and band lines and bay rhythm, piers and frames with depth, a designed roof (steps, parapets, copings), and a back",
+    "that finishes the building (it can be simpler).",
+    ...thinRules, ...geometry,
+    "Render: mcd render round-2.nbt --front n --tiles r2-tiles. Compare r2-tiles/right-elevation.png with side-trace.png and r2-tiles/front-left.png with",
+    "the 3/4 view; fix the biggest mismatches, re-render, and save the final as round-2.nbt. Keep round-1.nbt untouched. Report in ≤6 lines.",
+  ].join(" ");
+  const rep2 = runAgent(pass2, "pass 2 (sides, back, roof)");
+  writeFileSync(join(dir, "agent-report.md"), `## Pass 1 (front)\n\n${rep1}\n\n## Pass 2 (sides, back, roof)\n\n${rep2}\n`);
+} else {
+const agentPrompt = [
+  ...base,
   ...(traceNote ? [traceNote + " Build the front face to match the tracing cell for cell (then add the depth the 3/4 view shows), and compare your front elevation against trace.png in each round."] : []),
   ...(viewsNote ? [viewsNote + "In each round also compare r*-tiles/right-elevation.png with side-trace.png, and check the front's relief against depth.txt."] : []),
-  ...(process.argv.includes("--thin") ? [
-    "SIZE IS FIXED: do not scale the building up to fit detail. Detail finer than a block goes into SUB-BLOCK parts, the way skilled builders detail small builds:",
-    "a thin vertical line or fin → wall / fence / glass pane / iron bars or a trapdoor on the face; a half-height ledge, sill or step → slab;",
-    "a diagonal or sloped edge → stairs (with the right facing and half); small ornaments → buttons, heads, lanterns, end rods, banners.",
-    "Separate neighbouring elements by DEPTH, not only colour: push alternate fins/piers 1 block proud, recess windows 1, so each casts its own shadow.",
-  ] : []),
-  "Geometry: the main front faces NORTH (−z); x runs along the street; y = 0 is the ground. Author it as code (mcd new build.mjs; design one bay,",
-  "tile it, mirror for symmetry). For curved and stepped forms use the build library's SHAPE BRUSHES (see the skill's references/shapes-curved.md",
-  "and references/shapes-massing.md: dome, cylinder, minaret, arch, setbacks, gableRoof, hipRoof, fins, parapet, cornice) instead of placing those",
-  "blocks by hand — get the silhouette and massing right first (critique the 3/4 view for massing before details).",
+  ...thinRules, ...geometry,
+  "Get the silhouette and massing right first (critique the 3/4 view for massing before details).",
   "ROUND 1: build, save round-1.nbt, then render: mcd render round-1.nbt --front n --tiles r1-tiles. Read r1-tiles/front-elevation.png and",
   "r1-tiles/front-left.png next to concept.jpg and list the biggest mismatches (silhouette, roof, zones, bays, openings, materials, depth).",
   "ROUND 2: fix them, save round-2.nbt, render it the same way (r2-tiles), and compare again.",
   "Keep BOTH files. Report in ≤8 lines: what you built, the mismatches you fixed, which round you think is better and why.",
 ].join(" ");
-const agent = spawnSync("claude", ["-p", "--plugin-dir", PLUGIN, "--model", PHASE1_MODEL_ID, "--effort", effort,
-  "--allowedTools", "Bash Read Write Edit Glob Grep", "--output-format", "json", agentPrompt], { cwd: dir, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
-// the agent's working dir is the run dir; copy concept/spec names it expects
-let agentOut = {};
-try { agentOut = JSON.parse(agent.stdout); } catch { agentOut = { result: agent.stdout?.slice(0, 2000), error: agent.stderr?.slice(0, 2000) }; }
-usage.cost += agentOut.total_cost_usd || 0;
-writeFileSync(join(dir, "agent-report.md"), (agentOut.result || "") + "\n");
-mark("agentic build", { turns: agentOut.num_turns, cost: agentOut.total_cost_usd });
+writeFileSync(join(dir, "agent-report.md"), runAgent(agentPrompt, "agentic build") + "\n");
+}
 
 // 4. external keep-the-better on matched composites
 const rounds = ["round-1", "round-2"].filter((r) => existsSync(join(dir, `${r}.nbt`)));
@@ -233,12 +279,15 @@ for (const r of rounds) {
   execFileSync("node", [MCD, "render", join(dir, `${r}.nbt`), "--front", "n", "--out", join(dir, `${r}-sheet.png`), "--tiles", tiles], { stdio: "ignore" });
   composites[r] = join(dir, `${r}-matched.png`);
   execFileSync("magick", ["(", concept, "-resize", "x420", ")", "(", join(tiles, "front-elevation.png"), "-resize", "x420", ")",
-    "(", join(tiles, "front-left.png"), "-resize", "x420", ")", "+append", composites[r]]);
+    "(", join(tiles, "front-left.png"), "-resize", "x420", ")",
+    ...(existsSync(join(dir, "side.png")) ? ["(", join(dir, "side.png"), "-resize", "x420", ")", "(", join(tiles, "right-elevation.png"), "-resize", "x420", ")"] : []),
+    "+append", composites[r]]);
 }
 let kept = rounds.at(-1), why = "only one round";
 if (rounds.length === 2) {
   const p = await requestTextWithImage({
-    prompt: "Two builds of the same building, each shown as [reference sheet | build front elevation | build 3/4]. Image 1 = build A, image 2 = build B. " +
+    prompt: (existsSync(join(dir, "side.png")) ? "Two builds of the same building, each shown as [reference sheet | build front elevation | build 3/4 | reference side elevation | build side elevation]. " :
+      "Two builds of the same building, each shown as [reference sheet | build front elevation | build 3/4]. ") + "Image 1 = build A, image 2 = build B. " +
       "Which build better matches the reference sheet (form, roof, materials, details) AND is better crafted? Reply ONLY JSON: {\"better\": \"A\"|\"B\", \"why\": \"one sentence\"}",
     images: [img(composites["round-1"]), img(composites["round-2"])], model: PICKER,
   });
