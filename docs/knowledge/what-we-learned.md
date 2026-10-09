@@ -456,6 +456,22 @@ size each was really drawn at, and traces the pick 1:1. Grid: `benchmarks/gauntl
 - **Why: a tracing records colour, not relief.** The redraw dance hall's character is colour (navy fins on cream), and tracing carries that. These concepts' character is relief (cream fins stepped on cream, deep reveals, a stepped crown), which is all one colour in a flat elevation. The tracing shows a uniform cream area, and the builder fills it flat.
 - **Next lever:** carry depth as well as colour. Options: have the image model draw a depth or relief map of the front alongside the elevation; read the 3/4 view for depth per region; or have the spec assign a depth to every traced region. The redraw route plus thin blocks remains the best right-sized result so far.
 
+### Side elevation + depth map (2026-10-08)
+
+The owner's observation: almost all the effort goes into the front and very little into the sides. `views.mjs`
+(`--views`) has the image model draw, from the concept, a **side elevation** sprite (depth × height) and a **depth
+map** of the front (five greys: +2 forward to −2 recessed). Three candidates each are made, picked by measured size,
+and traced; the depth map is quantised to numbers (`depth.txt`). The spec and the builder get both, and the builder
+compares `right-elevation.png` with the side tracing each round. Grid: `benchmarks/gauntlet/dance-hall-views.png`
+(concept | front | 3/4 | side, then the drawn side view; each pair is without views, then with).
+
+- **The drawings are usable.** The side views match the concept's 3/4 (piers, tall windows, the stepped top at the front, the marquee's profile). The side came out deeper than the 0.9 × width guess, so the side drawing sets the depth. The depth maps read correctly: fins +2, windows −1/−2, marquee +2, doors deep.
+- **The sides gained real structure.** Both builds' side walls now have the drawn rhythm and roof profile. With the redraw concept, the side shows the tower rising at the front and the terraces stepping down the side, which matches the concept's 3/4 far better than the plain wall before.
+- **Depth came back partly.** Concept #2's crown regained vertical fins and steps from the depth map (+2 cells), where before it was a flat mass.
+- **Copying cell for cell exposes the drawing's noise.** The side sprites are low-fidelity designs; traced literally, they give blotchy window patterns. Better: take the side's silhouette, storey lines and bay rhythm from it, and keep the craft (window frames, piers) to the builder.
+- **The fronts did not improve,** and the redraw arm's marquee got cruder. More inputs compete for attention in one agentic session. Splitting the work (front pass, then side and depth pass) may help.
+- Cost unchanged: $1.66 and $1.91 for Sonnet high, plus 6 image calls.
+
 ## Why the good-looking approach is slow (from the transcripts)
 
 Measured on 014 and 027. [V]

@@ -50,7 +50,7 @@ export const SUBJECTS = {
 const s = SUBJECTS[key];
 if (!s) throw new Error(`--subject one of ${Object.keys(SUBJECTS).join(", ")}`);
 const tag = PHASE1_MODEL_ID.replace(/^claude-/, "").replace(/-\d.*$/, "");
-const runId = `${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "")}-${key}-${tag}-${effort}${from ? "-rerun" : ""}${respec ? "-respec" : ""}${trace ? "-trace" : ""}${process.argv.includes("--redraw") ? "-redraw" : ""}${process.argv.includes("--thin") ? "-thin" : ""}${native ? `-native${native.join("x")}` : ""}`;
+const runId = `${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "")}-${key}-${tag}-${effort}${from ? "-rerun" : ""}${respec ? "-respec" : ""}${trace ? "-trace" : ""}${process.argv.includes("--redraw") ? "-redraw" : ""}${process.argv.includes("--thin") ? "-thin" : ""}${native ? `-native${native.join("x")}` : ""}${process.argv.includes("--views") ? "-views" : ""}`;
 const dir = join(HERE, "runs", runId);
 mkdirSync(dir, { recursive: true });
 const t0 = Date.now(), usage = { cost: 0 }, stages = [];
@@ -65,7 +65,7 @@ if (from) {
   concept = join(dir, "concept.jpg");
   writeFileSync(concept, readFileSync(join(src, "concept.jpg")));
 }
-let traceNote = "";
+let traceNote = "", traceSize = null;
 if (trace) {
   // --trace auto[:scale] finds the elevation (Gemini box + pixel pitch); --trace x,y,w,h,cols,rows is the manual form
   const { traceElevation, locateWithGemini } = await import("./sheet-trace.mjs");
@@ -107,6 +107,7 @@ if (trace) {
     `It is a TRACING: use it for the outline, the position and size of every feature, and the colour regions, block by block.` +
     (t.scale > 1 ? ` The building is built at ${t.scale}x the concept's block scale, so each concept block is ${t.scale}x${t.scale} blocks here: ` +
       `use the extra resolution for the detail the concept draws within a block (thin fins, mouldings, insets, sub-block steps), and scale depth by ${t.scale} too.` : "");
+  traceSize = [t.cols, t.rows];
   mark("trace", { cols: t.cols, rows: t.rows, scale: t.scale, pitch: t.pitch, box: t.box });
 }
 if (reuseSpec) {
@@ -143,6 +144,7 @@ if (reuseSpec) {
   writeFileSync(join(dir, "trace.json"), JSON.stringify({ ...best.fit, pick: best.n, native }, null, 1) + "\n");
   traceNote = `trace.png / trace.txt: the concept's front elevation read cell by cell at its designed size of ${best.fit.cols} x ${best.fit.rows} blocks (x left to right, y=0 at the ground). ` +
     `It is a TRACING: use it for the outline, the position and size of every feature, and the colour regions, block by block.`;
+  traceSize = [best.fit.cols, best.fit.rows];
   mark("native pick", { n: best.n, cols: best.fit.cols, rows: best.fit.rows, score: best.fit.score });
 } else if (!from) {
   const conceptPrompt = referenceSheetPrompt(s);
@@ -152,6 +154,20 @@ if (reuseSpec) {
   writeFileSync(concept, Buffer.from(c.base64, "base64"));
   mark("concept", { model: c.model });
 }
+// --views: the image model also draws a SIDE ELEVATION and a DEPTH MAP of the front from the concept, each traced on
+// its grid, so the sides and the relief get the same fidelity as the coloured front
+let viewsNote = "";
+if (process.argv.includes("--views") && traceSize) {
+  const { makeViews } = await import("./views.mjs");
+  const v = await makeViews(concept, dir, traceSize[0], traceSize[1], Math.round(traceSize[0] * 0.9));
+  mark("views", { side: v.side && `${v.side.cols}x${v.side.rows}`, depth: v.depth && `${v.depth.cols}x${v.depth.rows}` });
+  if (v.side) viewsNote += `side.png / side-trace.png / side-trace.txt: the SIDE ELEVATION, traced at ${v.side.cols} deep x ${v.side.rows} tall. ` +
+    `It shows the side wall on your right when you face the front (the -x / west wall; it is what 'mcd render' calls right-elevation): column x=0 is the FRONT edge, ` +
+    `higher columns go back (+z); y=0 is the ground. Its column count is the building's depth. Build that wall from it cell for cell and mirror it for the other side. `;
+  if (v.depth) viewsNote += `depth.png / depth.txt: a DEPTH MAP of the front at ${v.depth.cols} x ${v.depth.rows}: for every front cell, how many blocks it sits proud of (+) or recessed from (-) the main wall plane. ` +
+    `Use it for the relief: fins, piers, mouldings, reveals, recessed openings. Same-colour features (cream on cream) exist ONLY in this map, so follow it. `;
+}
+
 if (!reuseSpec) {
   // 2. spec measured off the sheet, with an exact material map
   const specPrompt = [
@@ -162,6 +178,7 @@ if (!reuseSpec) {
     "   If your counts disagree with the stated size, THE SHEET WINS: keep the sheet's proportions (scale uniformly if you must), never squash one axis",
     "   to fit a stated number — squashing destroys the tall/slender features that make the design.",
     ...(traceNote ? [`   ${traceNote} Its grid size is authoritative for width and height.`] : []),
+    ...(viewsNote ? [`   ${viewsNote} The side elevation's width is authoritative for depth; describe the side walls and the front's depth layers from these.`] : []),
     "3. Vertical zones bottom to top with heights in blocks; horizontal bays left to right with widths in blocks; the roof/top form and its edges.",
     "4. MATERIAL MAP: a table mapping every distinct colour/texture region you can see on the sheet to an exact vanilla 1.20+ block id",
     "   (e.g. 'cream wall field → smooth_sandstone', 'gold trim → gold_block'), with where each region is. Match the sheet's materials, not generic ones.",
@@ -170,7 +187,7 @@ if (!reuseSpec) {
     `Stated subject: ${s.what}. Stated size: ${native ? `${native[0]} wide x ${native[1]} tall on the front (the concept was designed at this size)` : s.size}.`,
     "Under ~600 words. Output ONLY the spec (markdown).",
   ].join("\n");
-  const spec = await requestTextWithImage({ prompt: specPrompt, images: [img(concept), ...(trace || native ? [img(join(dir, "trace.png"))] : [])], model: PHASE1_MODEL_ID, effort });
+  const spec = await requestTextWithImage({ prompt: specPrompt, images: [img(concept), ...(trace || native ? [img(join(dir, "trace.png"))] : []), ...(viewsNote ? ["side-trace.png", "depth.png"].filter((f) => existsSync(join(dir, f))).map((f) => img(join(dir, f))) : [])], model: PHASE1_MODEL_ID, effort });
   usage.cost += spec.raw?.total_cost_usd || 0;
   writeFileSync(join(dir, "spec.md"), spec.text + "\n");
   mark("spec");
@@ -183,6 +200,7 @@ const agentPrompt = [
   "files in this directory, following spec.md (its sizes and its MATERIAL MAP are binding: use exactly those block ids for those regions).",
   "Where spec.md and concept.jpg disagree on form, the CONCEPT wins.",
   ...(traceNote ? [traceNote + " Build the front face to match the tracing cell for cell (then add the depth the 3/4 view shows), and compare your front elevation against trace.png in each round."] : []),
+  ...(viewsNote ? [viewsNote + "In each round also compare r*-tiles/right-elevation.png with side-trace.png, and check the front's relief against depth.txt."] : []),
   ...(process.argv.includes("--thin") ? [
     "SIZE IS FIXED: do not scale the building up to fit detail. Detail finer than a block goes into SUB-BLOCK parts, the way skilled builders detail small builds:",
     "a thin vertical line or fin → wall / fence / glass pane / iron bars or a trapdoor on the face; a half-height ledge, sill or step → slab;",

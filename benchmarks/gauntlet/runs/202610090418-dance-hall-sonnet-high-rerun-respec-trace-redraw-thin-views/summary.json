@@ -1,0 +1,104 @@
+{
+ "runId": "202610090418-dance-hall-sonnet-high-rerun-respec-trace-redraw-thin-views",
+ "subject": "dance-hall",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-2",
+ "why": "The front elevations are identical, but B's side wall has a dark base course, windows and pilasters like the reference, while A's side wall is covered in noisy, irregular pale patches that match nothing in the sheet.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 1.9098887999999996,
+ "durationMs": 617489,
+ "stages": [
+  {
+   "n": "redraw",
+   "s": 35,
+   "attempt": 2,
+   "cols": 26,
+   "rows": 30,
+   "score": 29.9,
+   "box": {
+    "x": 264.6,
+    "y": 49.28666666666667,
+    "w": 689,
+    "h": 793
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw",
+   "s": 48,
+   "attempt": 3,
+   "cols": 26,
+   "rows": 31,
+   "score": 33.1,
+   "box": {
+    "x": 133.7846153846154,
+    "y": -11.561290322580646,
+    "w": 961,
+    "h": 896
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw",
+   "s": 56,
+   "attempt": 1,
+   "cols": 28,
+   "rows": 28,
+   "score": 1.9,
+   "box": {
+    "x": 180,
+    "y": 28,
+    "w": 840,
+    "h": 840
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw pick",
+   "s": 56,
+   "attempt": 1,
+   "cols": 28,
+   "rows": 28,
+   "score": 1.9
+  },
+  {
+   "n": "trace",
+   "s": 56,
+   "cols": 28,
+   "rows": 28,
+   "scale": 1,
+   "box": {
+    "x": 180,
+    "y": 28,
+    "w": 840,
+    "h": 840
+   }
+  },
+  {
+   "n": "views",
+   "s": 102,
+   "side": "33x28",
+   "depth": "26x28"
+  },
+  {
+   "n": "spec",
+   "s": 148
+  },
+  {
+   "n": "agentic build",
+   "s": 608,
+   "turns": 32,
+   "cost": 1.4810029999999998
+  },
+  {
+   "n": "keep-better",
+   "s": 617,
+   "kept": "round-2",
+   "why": "The front elevations are identical, but B's side wall has a dark base course, windows and pilasters like the reference, while A's side wall is covered in noisy, irregular pale patches that match nothing in the sheet."
+  }
+ ]
+}

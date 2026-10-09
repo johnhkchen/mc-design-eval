@@ -97,12 +97,12 @@ if (import.meta.url === `file://${process.argv[1]}`) {
 
 // A vision model locates the elevation (pixel heuristics fail on white-on-white subjects and graph-paper sheets);
 // the pixel pass still measures the block pitch, which models get wrong by up to 2x.
-export async function locateWithGemini(path, model = process.env.MC_LOCATE_MODEL || "gemini-3.1-pro-preview") {
+export async function locateWithGemini(path, model = process.env.MC_LOCATE_MODEL || "gemini-3.1-pro-preview", target) {
   const { readFileSync } = await import("node:fs");
   const key = process.env.GEMINI_API_KEY?.trim() || readFileSync(new URL("../../.env", import.meta.url), "utf8").match(/^GEMINI_API_KEY=(.*)$/m)[1].trim();
   const [w, h] = execFileSync("magick", [path, "-format", "%w %h", "info:"], { encoding: "utf8" }).trim().split(" ").map(Number);
   const body = { contents: [{ parts: [{ inlineData: { mimeType: /\.png$/i.test(path) ? "image/png" : "image/jpeg", data: readFileSync(path).toString("base64") } },
-    { text: "This is a Minecraft builder's reference sheet. Detect the FRONT ELEVATION drawing of the building (the flat, straight-on view; not the 3/4 view, not labels, not swatches). The box must include the whole building: every tower, minaret, spire tip, finial, parapet and the plinth or base, and nothing else. Reply JSON: {\"box_2d\": [ymin, xmin, ymax, xmax]} normalised 0-1000." }] }],
+    { text: target ? `Detect ${target} in this image. The box must include the whole drawing of the building and nothing else (not the background). Reply JSON: {"box_2d": [ymin, xmin, ymax, xmax]} normalised 0-1000.` : "This is a Minecraft builder's reference sheet. Detect the FRONT ELEVATION drawing of the building (the flat, straight-on view; not the 3/4 view, not labels, not swatches). The box must include the whole building: every tower, minaret, spire tip, finial, parapet and the plinth or base, and nothing else. Reply JSON: {\"box_2d\": [ymin, xmin, ymax, xmax]} normalised 0-1000." }] }],
     generationConfig: { responseMimeType: "application/json" } };
   let ymin, xmin, ymax, xmax;
   for (let attempt = 1; ; attempt++) {

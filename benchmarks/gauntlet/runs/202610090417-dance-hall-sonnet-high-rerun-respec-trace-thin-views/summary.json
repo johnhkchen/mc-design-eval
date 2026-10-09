@@ -1,0 +1,52 @@
+{
+ "runId": "202610090417-dance-hall-sonnet-high-rerun-respec-trace-thin-views",
+ "subject": "dance-hall",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-2",
+ "why": "B is nearly identical to A, but its crown has vertical dark slits that echo the reference's vertical fins (A's crown has scattered square windows), and its roof is a cleaner, more deliberate parapet.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 1.6595338000000002,
+ "durationMs": 564110,
+ "stages": [
+  {
+   "n": "trace",
+   "s": 3,
+   "cols": 24,
+   "rows": 27,
+   "scale": 1,
+   "pitch": 24,
+   "box": {
+    "x": 58,
+    "y": 54,
+    "w": 585,
+    "h": 654
+   }
+  },
+  {
+   "n": "views",
+   "s": 56,
+   "side": "22x28",
+   "depth": "23x25"
+  },
+  {
+   "n": "spec",
+   "s": 138
+  },
+  {
+   "n": "agentic build",
+   "s": 556,
+   "turns": 21,
+   "cost": 1.1873680000000002
+  },
+  {
+   "n": "keep-better",
+   "s": 564,
+   "kept": "round-2",
+   "why": "B is nearly identical to A, but its crown has vertical dark slits that echo the reference's vertical fins (A's crown has scattered square windows), and its roof is a cleaner, more deliberate parapet."
+  }
+ ]
+}
