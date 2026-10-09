@@ -513,6 +513,28 @@ Detail passes with Haiku 5.5 (high effort), judged by an Opus keep-better pick (
 - **The high-value treatments are under-used:** relief, profiles, a real cornice. In the agentic run Haiku wrote only 9-10 rules, against 13-20 in the free elicitation.
 - **Next:** give the detailer a target, not a blank brief. A stronger model (or the critique step) names 5-8 specific detail opportunities against the concept ("the parapet needs a stepped stair coping", "window bays need projecting sills"), and Haiku writes the rules for each. Make mixes opt-in, with a low ratio.
 
+### Deterministic treatments + detail jobs (2026-10-09)
+
+The owner's direction: the tools Haiku reaches for should be cheap to call and deterministic to run; a gradient or
+wall variation needs no LLM. What Haiku reached for, across 185 rule lines: texture/variation 25, copings 19,
+cornices 16, frames 15, lintels 12, patterns 10, plinths 9, sills 6. Built from that (plugin 8b231f6):
+- **Material families:** clean-to-worn variants of each material, its trim material and its stairs/slab/wall forms.
+- **Treatments:** `vary` (blue-noise spacing, never two variants touching, default 12%), `gradient` (ordered dither, monotonic), `weather` (wear hugging the ground and corners), `courses`, `quoins`, `cornice simple|stepped|bracketed|deep`, `coping`, `plinth`, `sills`, `lintels flat|hood|arch`, `frames`, `pilasters every n`.
+- **First-class selectors:** `openings`, `wall tops`, `ground row`, `corners`, `top row`.
+- **`mix` now warns on speckle.** 59 plugin tests pass.
+- **On a plain brick box, 7 lines produce a dressed building** (`minecraft-design/examples/detailing/compare.png`).
+
+Then Sonnet named 5-8 detail jobs per build and Haiku wrote rules for them ($0.44-0.62 per build;
+`benchmarks/gauntlet/detail-jobs.png`). **The judge kept the undetailed build on all three.** The grocery store got
+busy (pilasters across the awnings, frames over the shutters, a coursing band), the dance hall's roofline went
+notched, and the Taj changed little.
+
+- **The treatments work on plain surfaces and clutter crafted ones.** These builds had already been detailed by the form passes; the detail pass stacked a second layer of craft on the first. The demo house was plain, and there the same treatments read as skilled.
+- **So the experiment the owner proposed has not been run yet:** form passes told NOT to detail (full blocks, openings, massing only), then the detail phase. That is the setup the treatments were made for.
+- **Two cheap guards to add:**
+  - treatments by default touch only PLAIN cells (full blocks in a uniform neighbourhood; skip cells next to existing stairs, slabs, panes or ornaments);
+  - the jobs step must list what is already detailed and only propose jobs for plain surfaces, at most five.
+
 ## Why the good-looking approach is slow (from the transcripts)
 
 Measured on 014 and 027. [V]

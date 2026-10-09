@@ -1,0 +1,31 @@
+# Taj detail pass: jobs.md 1-8. ALL FACES = the four walls; roof separately. Massing untouched.
+# Keep first: the black frames stay black against every later rule.
+ALL FACES where F -> keep
+
+# Textures first (later rules win): the dome and drum, the iwan back, the terrace.
+# 8: dome and drum, B and C only (no stairs)
+north rows 36-49 where B or C -> gradient calcite..smooth_quartz up
+roof rows 9-49 where B or C -> gradient calcite..smooth_quartz up
+roof where D -> vary 0.06 calcite
+# 7: the iwan recess shades toward its back (G cells only)
+north cols 26-32 rows 9-21 where G -> gradient light_gray_concrete..calcite up
+# 6: minaret shafts get banded courses
+north cols 2-8,51-57 rows 9-35 where B -> courses 6 calcite
+
+# Construction after the textures.
+# 1: podium panels framed (frames finds no openings at depth 1: left as written), first quartz course as a stepped foot
+ALL FACES rows 3-5 -> frames quartz_block
+ALL FACES row 2 -> cornice stepped smooth_quartz
+# 2: stepped coping on the slab line, coping on the terrace's outer ring only (not the dome steps)
+ALL FACES row 8 -> cornice stepped quartz_block
+roof rows 0-8 where E -> coping stairs quartz_block
+# 5: bracketed cornice under the parapet arcade
+ALL FACES row 28 -> cornice bracketed quartz_block
+# 3: window bays get moulded surrounds, arch lintels, sills
+ALL FACES cols 12-14,17-19,39-41,44-46 rows 9-21 where H -> frames smooth_quartz
+ALL FACES cols 12-14,17-19,39-41,44-46 rows 9-21 where H -> sills quartz_block
+ALL FACES cols 12-14,17-19,39-41,44-46 rows 9-21 where H -> lintels arch quartz_block
+# 4: engaged pilasters on the wings
+ALL FACES cols 8-22 and 36-50 rows 9-22 -> pilasters every 5 smooth_quartz out 1
+# 6: corbelled balconies under each minaret gallery
+north cols 2-8,51-57 directly below E -> quartz_stairs top out 1

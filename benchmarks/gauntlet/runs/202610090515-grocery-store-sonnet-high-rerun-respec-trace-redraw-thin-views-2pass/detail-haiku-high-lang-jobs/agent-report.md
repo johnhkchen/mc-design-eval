@@ -1,0 +1,1 @@
+The background `find` job I started earlier has finished. It was a broad search for the detail-language doc, which I'd already found by its direct path, so its output doesn't change the detail pass. Nothing else is pending: `detail-2.nbt` and `t2/` are the final outputs from my report.

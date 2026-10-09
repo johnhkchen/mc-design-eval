@@ -1,0 +1,34 @@
+# Detail pass, dance hall. Rules only; massing, layout and design untouched.
+# Texture first (weather), then locks (keep), then construction (later rules win).
+
+# job 7 texture: darken the base toward the ground (north + west + roof face lists)
+all faces rows 0-3 where B -> weather 0.25
+
+# keep the designed black base/zig-zag and the lanterns over the entrance from being overwritten
+north where C,H -> keep
+
+# job 3: outer wing pilasters, carved and proud
+north cols 1-2,24-25 rows 4-15 where A -> vary 0.15 chiseled_sandstone
+north cols 1,25 rows 0-15 -> pilasters every 24 cut_sandstone out 1
+
+# job 4: entrance and ground-floor openings, framed and hooded
+north rows 0-3 openings -> frames chiseled_sandstone; lintels hood sandstone_stairs
+
+# job 7: plinth under the wings (after weather, so the foot course stays dressed)
+north rows 0 cols 1-7,19-25 -> plinth cut_sandstone 2
+
+# job 2: wing crowns step up with a moulded lip
+north rows 16 cols 3-9,17-23 topmost -> cornice stepped cut_sandstone
+
+# job 5: tower crown capped
+north rows 27-29 topmost -> coping slab cut_sandstone
+
+# job 1: west glazing framed and shadowed (east not in this --face list)
+west openings -> sills cut_sandstone_slab; lintels flat cut_sandstone
+
+# job 8: thin carved band under the U stair course
+west row 13 -> courses 1 chiseled_sandstone
+
+# job 6: roof step edges capped
+roof rows 4,11 cols 1-25 wall tops -> coping slab cut_sandstone
+roof rows 33-34 wall tops -> coping slab cut_sandstone
