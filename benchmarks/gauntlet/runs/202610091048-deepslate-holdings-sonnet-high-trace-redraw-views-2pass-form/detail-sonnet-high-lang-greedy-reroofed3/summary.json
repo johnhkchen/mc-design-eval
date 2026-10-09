@@ -1,0 +1,15 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "lang": true,
+ "greedy": true,
+ "jobsAccepted": 1,
+ "jobsTotal": 10,
+ "input": "reroofed3.nbt",
+ "kept": "detail-greedy",
+ "why": "The two builds are almost identical, but A's side-elevation timber panel is broken into storey bands, which echoes the floor rhythm of the concept, while B's is one flat, unbroken grid that looks more mechanical.",
+ "planOps": 13,
+ "turns": 20,
+ "costUsd": 0.7711433999999999,
+ "durationMs": 201185
+}

@@ -8,6 +8,7 @@ import { join, dirname, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFileSync, spawnSync } from "node:child_process";
 import { requestTextWithImage } from "../../src/sdk-binding.mjs";
+const { decodePng } = await import(new URL("../../../minecraft-design/tools/src/png.mjs", import.meta.url));
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const PLUGIN = join(HERE, "..", "..", "..", "minecraft-design");
@@ -114,18 +115,39 @@ export async function detailPass(runDir, { input = "final.nbt", model = "claude-
       try { execFileSync("node", [MCD, "paint", join(dir, "input.nbt"), nbt, "--rules", rulesFile, "--face", faces], { stdio: "ignore" }); }
       catch { greedyLog.push({ job: title, kept: false, why: "paint failed" }); continue; }
       renderTiles(nbt, tiles); composite(tiles, tiles + "-c.png");
-      const flip = Math.random() < 0.5;
-      const [A, B] = flip ? [tiles + "-c.png", curTiles + "-c.png"] : [curTiles + "-c.png", tiles + "-c.png"];
+      // show the reviewer WHERE the job changed the build, at a size it can see: per view, diff before/after pixels, crop
+      // tightly around the change (with context) and upscale. A wide strip of whole tiles gets downscaled by the vision
+      // model until a sill is a pixel. No changed pixels at all = no visible change, without a model call.
+      const views = ["street", "front-elevation", "front-left", "right-elevation"].map((v) => {
+        const a = decodePng(readFileSync(join(curTiles, `${v}.png`))), b = decodePng(readFileSync(join(tiles, `${v}.png`)));
+        let n = 0, x0 = 1e9, y0 = 1e9, x1 = -1, y1 = -1;
+        for (let y = 0; y < a.height; y++) for (let x = 0; x < a.width; x++) {
+          const i = 4 * (y * a.width + x);
+          if (Math.abs(a.rgba[i] - b.rgba[i]) + Math.abs(a.rgba[i + 1] - b.rgba[i + 1]) + Math.abs(a.rgba[i + 2] - b.rgba[i + 2]) > 30) { n++; x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y); }
+        }
+        return { v, n, box: n ? { x0, y0, x1, y1, w: a.width, h: a.height } : null };
+      }).filter((d) => d.n > 40).sort((p, q) => q.n - p.n).slice(0, 2);
+      if (!views.length) { greedyLog.push({ job: title, kept: false, verdict: "no-pixels-changed", why: "the job changed no visible pixels in any view" }); continue; }
+      const crops = [];
+      for (const { v, box } of views) {
+        const pad = Math.round(Math.max(box.x1 - box.x0, box.y1 - box.y0) * 0.35) + 24;
+        const cx0 = Math.max(0, box.x0 - pad), cy0 = Math.max(0, box.y0 - pad), cw = Math.min(box.w, box.x1 + pad) - cx0, ch = Math.min(box.h, box.y1 + pad) - cy0;
+        const pair = join(dir, `g-${n + 1}-${v}-pair.png`);
+        execFileSync("magick", ["(", join(curTiles, `${v}.png`), "-crop", `${cw}x${ch}+${cx0}+${cy0}`, "+repage", "-resize", "700x700", ")",
+          "(", join(tiles, `${v}.png`), "-crop", `${cw}x${ch}+${cx0}+${cy0}`, "+repage", "-resize", "700x700", ")", "-background", "white", "-splice", "12x0", "+append", pair]);
+        crops.push({ v, pair });
+      }
       const v = await requestTextWithImage({
-        prompt: `Image 1 is the concept. Images 2 (A) and 3 (B) are the same Minecraft build [street view | front elevation | 3/4 | side], differing ONLY by one detailing job ("${title}"). ` +
-          "Judge as a skilled builder at full size: does the job make the build more crafted and closer to the concept (profiles, depth, finish), or is it noise, clutter, " +
-          "a wrong colour or a broken silhouette? Reply ONLY JSON: {\"better\": \"A\"|\"B\"|\"same\", \"why\": \"one sentence\"}",
-        images: [img(concept), img(A), img(B)], model: judgeModel, effort: "low",
+        prompt: `Image 1 is the concept. ${crops.map((c, i) => `Image ${i + 2} is a close-up of the ${c.v} view: LEFT = before, RIGHT = after`).join("; ")}. ` +
+          `The only change is one detailing job ("${title}") on a Minecraft build. Judge as a skilled builder: does the change make the build more crafted ` +
+          "and closer to the concept (profiles, depth, finish, believable weathering), or is it noise, clutter, a wrong colour or a broken silhouette? " +
+          "Reply ONLY JSON: {\"verdict\": \"improves\"|\"neutral\"|\"worse\", \"why\": \"one sentence\"}",
+        images: [img(concept), ...crops.map((c) => img(c.pair))], model: judgeModel, effort: "low",
       });
       cost0 += v.raw?.total_cost_usd || 0;
       let j = {}; try { j = JSON.parse(v.text.slice(v.text.indexOf("{"), v.text.lastIndexOf("}") + 1)); } catch { /* treat as reject */ }
-      const candIs = flip ? "A" : "B", kept = j.better === candIs;
-      greedyLog.push({ job: title, kept, why: j.why || v.text.slice(0, 200) });
+      const kept = j.verdict === "improves";
+      greedyLog.push({ job: title, kept, verdict: j.verdict, views: crops.map((c) => c.v), why: j.why || v.text.slice(0, 200) });
       if (kept) { accepted += "\n" + job; curNbt = nbt; curTiles = tiles; }
     }
     writeFileSync(join(dir, "rules-accepted.txt"), accepted + "\n");
@@ -140,16 +162,17 @@ export async function detailPass(runDir, { input = "final.nbt", model = "claude-
       const tiles = join(dir, `${f}-judge`);
       execFileSync("node", [MCD, "render", join(dir, f), "--front", "n", "--tiles", tiles, "--out", join(dir, `${f}-sheet.png`)], { stdio: "ignore" });
       comp[f] = join(dir, `${f}-matched.png`);
-      execFileSync("magick", ["(", concept, "-resize", "x700", ")", "(", join(tiles, "front-elevation.png"), "-resize", "x700", ")", "(", join(tiles, "front-left.png"), "-resize", "x700", ")",
-        "(", join(tiles, "right-elevation.png"), "-resize", "x700", ")", "+append", comp[f]]);
+      // a 2x2 grid about 1400 px square (a wide strip would be downscaled by the vision model until detail vanishes)
+      execFileSync("magick", ["(", "(", join(tiles, "front-elevation.png"), "-resize", "700x700", ")", "(", join(tiles, "front-left.png"), "-resize", "700x700", ")", "+append", ")",
+        "(", "(", join(tiles, "street.png"), "-resize", "700x700", ")", "(", join(tiles, "right-elevation.png"), "-resize", "700x700", ")", "+append", ")", "-background", "white", "-append", comp[f]]);
     }
     // order shuffled against position bias
     const flip = Math.random() < 0.5, A = flip ? cand : "input.nbt", Bf = flip ? "input.nbt" : cand;
     const p = await requestTextWithImage({
-      prompt: "Two versions of the same Minecraft build, each shown as [reference concept | front elevation | 3/4 view | side elevation]. Image 1 = A, image 2 = B. " +
+      prompt: "Image 1 is the reference concept. Images 2 (A) and 3 (B) are two versions of the same Minecraft build, each a grid of [front elevation, 3/4 view / street view, side elevation]. " +
         "They have the same form; one has an extra detailing pass. Which is the better finished build: closer to the concept's craft and character, " +
         "with detail that reads as skilled (not noisy or busy)? Reply ONLY JSON: {\"better\": \"A\"|\"B\", \"why\": \"one sentence\"}",
-      images: [img(comp[A]), img(comp[Bf])], model: PICKER,
+      images: [img(concept), img(comp[A]), img(comp[Bf])], model: PICKER,
     });
     cost += p.raw?.total_cost_usd || 0;
     const j = JSON.parse(p.text.slice(p.text.indexOf("{"), p.text.lastIndexOf("}") + 1));

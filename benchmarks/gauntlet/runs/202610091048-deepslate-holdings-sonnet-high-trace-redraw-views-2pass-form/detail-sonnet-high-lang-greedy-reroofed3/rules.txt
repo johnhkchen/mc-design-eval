@@ -1,0 +1,32 @@
+## JOB 1: plinth weathering
+all faces ground row where stone_bricks -> weather 0.5
+all faces ground row where cobbled_deepslate -> weather 0.4
+
+## JOB 2: plinth mossy variation
+all faces rows 0-1 where stone_bricks -> vary 0.2 mossy_stone_bricks
+
+## JOB 3: front wall field variation
+north rows 2-16 where deepslate_bricks -> vary 0.15
+
+## JOB 4: shaft side wall field variation
+west rows 2-17 where deepslate_bricks -> vary 0.15
+
+## JOB 5: elevator head walls
+north rows 18-28 cols 15-18 -> vary 0.15
+west rows 18-28 cols 3-7 -> vary 0.15
+north rows 18-28 cols 15-18 -> courses 5 polished_deepslate
+
+## JOB 6: upper window lintels (front)
+north rows 8-16 cols 1-14 openings -> lintels flat polished_deepslate
+
+## JOB 7: upper window sills (side)
+west rows 8-16 cols 10-22 openings -> sills oak_slab
+
+## JOB 8: oak chute courses
+west cols 3-6 rows 2-17 where stripped_oak_log -> courses 4 oak_planks
+
+## JOB 9: oak chute variation
+west cols 3-6 rows 2-17 where stripped_oak_log -> vary 0.12 oak_planks
+
+## JOB 10: roof edge coping
+roof wall tops -> coping slab polished_deepslate

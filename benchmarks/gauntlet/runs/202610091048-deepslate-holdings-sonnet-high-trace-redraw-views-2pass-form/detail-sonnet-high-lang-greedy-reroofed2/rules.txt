@@ -1,0 +1,37 @@
+## JOB 1: Plinth weathering and moss
+all faces rows 0-1 where stone_bricks -> weather 0.5
+all faces ground row -> vary
+
+## JOB 2: Flank plinth variation
+west row 0 cols 4-22 where stone_bricks -> vary
+west row 1 where mossy_stone_bricks -> vary
+
+## JOB 3: Elevator-head tower banding and texture
+north cols 15-18 rows 19-27 where deepslate_bricks -> courses 4 polished_deepslate
+north cols 15-18 rows 19-28 where deepslate_bricks -> mix 1/8 cracked_deepslate_bricks
+
+## JOB 4: Chimney shaft texture
+north cols 4-5 rows 26-28 -> mix 1/6 cracked_deepslate_bricks
+west cols 18-19 rows 26-28 -> mix 1/6 cracked_deepslate_bricks
+
+## JOB 5: Shaft flank wall (west) banding
+west cols 3-6 rows 18-27 where deepslate_bricks -> mix 1/8 cracked_deepslate_bricks
+west cols 3-6 rows 18-27 where deepslate_bricks -> courses 5 polished_deepslate
+
+## JOB 6: Window lintels, front
+north rows 9-14 where glass_pane -> lintels flat polished_deepslate
+
+## JOB 7: Window lintels, west flank
+west rows 9-14 where glass_pane -> lintels flat polished_deepslate
+
+## JOB 8: Wall field variation, west flank
+west rows 2-15 where deepslate_bricks -> mix 1/9 cracked_deepslate_bricks force
+
+## JOB 9: Wall field variation, front
+north rows 2-15 where deepslate_bricks -> mix 1/9 cracked_deepslate_bricks force
+
+## JOB 10: Roof-line coping on the front frieze
+north row 17 -> coping slab polished_deepslate
+
+## JOB 11: Roof edge
+roof wall tops -> coping slab polished_deepslate

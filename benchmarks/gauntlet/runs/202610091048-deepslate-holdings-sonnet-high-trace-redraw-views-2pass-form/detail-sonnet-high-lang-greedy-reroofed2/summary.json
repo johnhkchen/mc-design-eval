@@ -1,0 +1,15 @@
+{
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "lang": true,
+ "greedy": true,
+ "jobsAccepted": 0,
+ "jobsTotal": 11,
+ "input": "reroofed2.nbt",
+ "kept": "detail-greedy",
+ "why": "At this render scale the two images look the same to me, with no visible difference in the facade, roof or entry, so the detailing pass adds nothing that reads; I picked A because it reaches the same result without extra blocks.",
+ "planOps": 16,
+ "turns": 24,
+ "costUsd": 0.8896758,
+ "durationMs": 250179
+}
