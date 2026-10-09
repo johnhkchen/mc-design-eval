@@ -1,0 +1,117 @@
+# /Volumes/ext1/swe/repos/mc-design-eval/benchmarks/gauntlet/runs/202610090515-grocery-store-sonnet-high-rerun-respec-trace-redraw-thin-views-2pass/round-1.nbt (size 15x18x15): each face as rows x columns, seen from outside
+# legend: A=smooth_stone  B=barrel  C=melon  D=red_tulip  E=azure_bluet  F=dark_oak_door  G=composter  H=pumpkin  I=orange_tulip  J=bricks  K=poppy  L=dark_oak_fence  M=light_blue_stained_glass_pane  N=dandelion  O=black_concrete  P=dark_oak_slab  Q=pink_tulip  R=cornflower  S=stripped_dark_oak_log  T=dark_oak_planks  U=red_wool  V=white_wool  W=quartz_slab  X=lantern  Y=moss_block  Z=lime_concrete  a=smooth_quartz  b=jungle_trapdoor  c=quartz_stairs  d=allium  e=dark_oak_trapdoor  f=cobblestone  g=stone
+# '.' = sky / nothing. Columns: left to right as seen from outside that face. Rows: y, top first (roof: z, front first).
+
+## NORTH face  (15 columns x 18 rows; column 0 = x=14, column 14 = x=0)
+      0    5    10   
+y 17  ......aaa.....g
+y 16  .aaaaaJJJaaaaaf
+y 15  aaaaaaaaaaaaaaa
+y 14  WaTTTaTTTaTTTaW
+y 13  .JJJJJJJJJJJJJJ
+y 12  .JcJcJcJcJcJcJJ
+y 11  .JeMeJeMeJeMeJJ
+y 10  .JeMeJeMeJeMeJJ
+y  9  .JDIQJdREJKNDJJ
+y  8  .JbbbcbbbcbbbJJ
+y  7  .aaaaaaaaaaaaaJ
+y  6  .WWWXYZYZYXWWWJ
+y  5  .UVUVTTTTTVUVUJ
+y  4  .UVUVUTTTUVUVUJ
+y  3  .STTTSOOOSTTTSJ
+y  2  .KCLMNFOPQMLHRJ
+y  1  .BCDEBFGBBHIHBJ
+y  0  AAAAAAAAAAAAAAA
+   depth behind the front plane (0 = frontmost, 9 = 9 or more; same rows):
+y 17  ......111.....9
+y 16  .02220222022209
+y 15  101110111011101
+y 14  201110111011102
+y 13  .22122212221229
+y 12  .23432343234329
+y 11  .23432343234329
+y 10  .23432343234329
+y  9  .22222111222229
+y  8  .21111000111129
+y  7  .11131111131119
+y  6  .33331111133339
+y  5  .10101333101019
+y  4  .10101344101019
+y  3  .34443555344439
+y  2  .10341354143019
+y  1  .10111344101019
+y  0  000000000000000
+
+## WEST face  (15 columns x 18 rows; column 0 = z=0, column 14 = z=14)
+      0    5    10   
+y 17  .aa........ggg.
+y 16  aaaaaaaaaaafff.
+y 15  aaaaaaaaaaaJJJa
+y 14  aaWWWWWWWWWJJJW
+y 13  .JJJJJJJJJJJJJ.
+y 12  ..JJJJJJJJJJfJ.
+y 11  ..JJJJJJJJJJfJ.
+y 10  ..JJJJJJJTJJfJ.
+y  9  .EJJJJJJJJJJfJ.
+y  8  bbJJJJJJJJJJfJ.
+y  7  .aJJJJJJJJJJJJ.
+y  6  .YJWJJJJJJJJJJ.
+y  5  VUTTTJJJJJJJJJ.
+y  4  VU.STJJJJJJJJJ.
+y  3  ...STTJJJTJJJJ.
+y  2  HR.STTJJJTJJJJ.
+y  1  HB.STTJJJTJJJJ.
+y  0  AAAAAAAAAAAAAAA
+   depth behind the front plane (0 = frontmost, 9 = 9 or more; same rows):
+y 17  .66........000.
+y 16  11111111111000.
+y 15  100000000000000
+y 14  110000000000000
+y 13  .3111111111000.
+y 12  ..111111111000.
+y 11  ..111111111000.
+y 10  ..111111111000.
+y  9  .6111111111000.
+y  8  62111111111000.
+y  7  .1111111111000.
+y  6  .5511111111000.
+y  5  21111111111000.
+y  4  21.11111111000.
+y  3  ...11111111000.
+y  2  21.11111111000.
+y  1  21.11111111000.
+y  0  000000000000000
+
+## ROOF face  (15 columns x 15 rows; column 0 = x=0, column 14 = x=14)
+      0    5    10   
+z  0  AaVAVabbbaVAVaA
+z  1  aaaaaaaaaaaaaaa
+z  2  aaaaaaaaaaaaaaa
+z  3  aaAAAAAAAAAAAaa
+z  4  aaAAAAAAAAAAAaa
+z  5  aaAAAAAAAAAAAaa
+z  6  aaAAAAAAAAAAAaa
+z  7  aaAAAAAAAAAAAaa
+z  8  aaAAAAAAAAAAAaa
+z  9  aaAAAAAAAAAAAaa
+z 10  aaAAAAAAAAAAAaa
+z 11  gaAAAAAAAAAAAaa
+z 12  gaAAAAAAAAAAAaa
+z 13  gaaaaaaaaaaaaaa
+z 14  aaaaaaaaaaaaaaa
+   depth behind the front plane (0 = frontmost, 9 = 9 or more; same rows):
+z  0  919991999199919
+z  1  212221000122212
+z  2  211111000111112
+z  3  212222222222212
+z  4  212222222222212
+z  5  212222222222212
+z  6  212222222222212
+z  7  212222222222212
+z  8  212222222222212
+z  9  212222222222212
+z 10  212222222222212
+z 11  012222222222212
+z 12  012222222222212
+z 13  011111111111112
+z 14  222222222222222

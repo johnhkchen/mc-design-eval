@@ -1,0 +1,17 @@
+# Taj detail pass 2: north elevation + roof. Keep massing; add craft.
+FACE north
+# plinth: ledge texture and a shaded head under each recessed panel
+rows 6-7 where smooth_quartz -> mix smooth_quartz 3, quartz_block 1 seed 2
+row 5 where calcite -> polished_diorite
+# large white fields: subtle marble variation
+rows 9-34 where quartz_block -> mix quartz_block 4, smooth_quartz 1 seed 11
+# window sills (under the arches) and lintels (above them)
+rows 9,17 where calcite -> quartz_slab top
+rows 13,21 where calcite -> quartz_stairs top
+# grey jambs framing the iron-bar windows
+rows 10-12,18-20 where calcite -> polished_diorite
+# grey pilasters on the outer edge of each wing, beside the black frame
+rows 9-28 cols 9,49 where quartz_block -> polished_diorite
+FACE roof
+# roof marble field: same subtle variation as the walls
+rows 9-49 where quartz_block -> mix quartz_block 4, smooth_quartz 1 seed 9

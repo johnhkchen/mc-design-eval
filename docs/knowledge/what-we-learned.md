@@ -490,6 +490,29 @@ pick now also sees the reference side and the build's side elevation. Grid: `ben
 - **Mirror trap found (by the grocery builder).** The front faces north, so a person on the street looks south and their left is world +x: tracing column c is world x = W−1−c. Symmetric subjects hide it; the grocery came out mirrored until the builder noticed. It is now stated in the build prompt. The shape brushes write in world coordinates too, which made pass 2 avoid them.
 - About $1 more and twice the time of one pass; worth it for fidelity, a cost to weigh for drafts.
 
+### A detail phase, with a vocabulary Haiku chose (2026-10-09)
+
+The owner's points: detailing (stairs vs slab vs mixed) is too early for the form passes; Haiku 5.5 may detail well
+given constraints and a vocabulary that calls scripts; work in rows, columns and faces; let Haiku write light
+code-like instructions, see what notation it prefers, then have a stronger model write the interpreter.
+
+What was built (plugin 328ba46):
+- **`mcd features` / `mcd detail`:** named exterior features (band, wall-top, pier, field, opening, ...) and about a dozen scripted operations (cornice, cap, stairify, sill, lintel, frame, mix, stripe, project, recess, attach). They handle facing, the stairs/slab/wall form of a material (closest colour when none exists), function protection and box growth.
+- **`mcd faces`:** each face as rows × columns seen from outside, one letter per block, plus a depth map.
+- **Elicitation:** 9 samples (3 builds × 3, $0.14 total, `benchmarks/detail-lang/corpus/`). Haiku converged on one rule language without coordination: `FACE rows a..b cols c..d where <letter> [depth>=n] [directly above X] -> block [stairs|slab top|bottom] [out 1]`, plus parity and `mod` patterns, `keep`, `for each k` loops, and rules applied in order.
+- **`mcd paint`:** an interpreter for that language, written by an Opus subagent from the corpus. 78% of Haiku's free-form rule lines run unchanged; the misses are mostly prose inside the rule block. 49 plugin tests pass.
+
+Detail passes with Haiku 5.5 (high effort), judged by an Opus keep-better pick (`detail-baseline.png`, `detail-lang.png`):
+
+| Arm | Dance hall | Grocery | Taj | Cost / time each |
+|---|---|---|---|---|
+| Feature ops (`mcd detail`) | kept detail (barely visible) | kept detail (arched heads, lintels, plinth) | - | ~$0.29, ~2 min |
+| Face-map rules (`mcd paint`) | **kept input** (speckle on the wings) | **kept input** (speckled roof) | kept detail (framed wing bays) | ~$0.29, 2-5 min |
+
+- **The phase works and is cheap,** but the visible effect is small at these sizes, and **texture mixes are the main source of noise** in both arms.
+- **The high-value treatments are under-used:** relief, profiles, a real cornice. In the agentic run Haiku wrote only 9-10 rules, against 13-20 in the free elicitation.
+- **Next:** give the detailer a target, not a blank brief. A stronger model (or the critique step) names 5-8 specific detail opportunities against the concept ("the parapet needs a stepped stair coping", "window bays need projecting sills"), and Haiku writes the rules for each. Make mixes opt-in, with a low ratio.
+
 ## Why the good-looking approach is slow (from the transcripts)
 
 Measured on 014 and 027. [V]

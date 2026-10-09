@@ -1,0 +1,21 @@
+# L6   FACE north                                                                                 header
++ L7   N1  cornice lip      rows y15 cols 0-14   letter a         -> quartz_stairs half=top facin cells 15 wrote 15
++ L8   N2  cornice ends     rows y15 cols 0,14   letter a         -> quartz_slab half=top         cells 2 wrote 2
++ L9   N3  parapet tread    rows y16 cols 1-5,9-13 letter a       -> quartz_slab half=bottom      cells 10 wrote 10
++ L10  N4  parapet cap      rows y17 cols 6-8    letter a         -> quartz_slab half=top         cells 3 wrote 3
++ L11  N5  quoins           cols 1,13 rows y13,y11,y9 letter J    -> smooth_quartz                cells 6 wrote 6
++ L12  N6  sill course      rows y7 cols 1-13    letter a         -> quartz_slab half=bottom      cells 13 wrote 9 skipped 4
++ L13  N7  hood lips        rows y12 cols 3,7,11 letter J         -> quartz_slab half=top         cells 3 wrote 3
+· L14  N8  shutters         rows y10-y11 letter e                 -> dark_oak_trapdoor open=true  cells 12 wrote 0 skipped 12
++ L15  N9  sign shelf       rows y5 cols 5-9     letter T         -> dark_oak_slab half=bottom    cells 5 wrote 5
++ L16  N10 brick mix        field J, rows y8-y13, cells where (col+row) mod 7 == 0 -> mossy_stone cells 5 wrote 5
+! L17  N11 doorway reveal   rows y1-y3, cells with depth>=3 whose neighbour on the left or right  ERROR don't understand "whose"
+· L19  N12 awning           any letter U or V in rows y4-y5 -> keep (no wool stairs in vanilla)   cells 18 wrote 0
+# L21  FACE west                                                                                  header
++ L22  W1  chimney stack    col 12 rows y8-y12   letter f         -> cobblestone_wall             cells 5 wrote 5
++ L23  W2  chimney cap      col 12 row y13       letter J         -> stone_brick_slab half=top    cells 1 wrote 1
+# L25  FACE roof (cols = x, rows = z, front edge z0)                                              header
++ L26  R1  front drip       row z0 letters a,V                    -> quartz_slab half=top         cells 8 wrote 4 skipped 4
++ L27  R2  tile grid        field A, z3-z12, x1-13; where x mod 4 == 2 OR z mod 4 == 3 -> stone_b cells 54 wrote 54
+· L29  R3  skylight         z0 cols 6-8 letter b                  -> keep (vent)                  cells 3 wrote 0
+# shift 0,0,0

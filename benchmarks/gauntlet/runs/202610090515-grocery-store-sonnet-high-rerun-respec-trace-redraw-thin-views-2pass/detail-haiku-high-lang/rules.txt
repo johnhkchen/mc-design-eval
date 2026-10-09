@@ -1,0 +1,15 @@
+# NORTH face (front)
+FACE north
+# awning: striped hood, one block proud on both rows
+row 5 where U -> red_wool out 1
+row 5 where V -> white_wool out 1
+row 4 where U -> red_wool out 1
+row 4 where V -> white_wool out 1
+# cornice: moulded upside-down stair lip one block proud of the recessed quartz
+row 15 where depth>=1 -> stairs(smooth_quartz) top out 1
+# window lintels: quartz hoods proud of the brick
+row 12 where c -> stairs top out 1
+# flower boxes proud of the wall
+row 8 where b -> b out 1
+# roof field: smooth stone with a stone speckle
+roof rows 3-12 where A -> mix A 5, g 1 seed 3

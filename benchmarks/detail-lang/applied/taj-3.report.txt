@@ -1,0 +1,23 @@
+# L6   FACE north                                                                                 header
++ L9   AT y3-5 where C -> mix 1/9 D                                                               cells 126 wrote 20
+· L12  AT y6-7 where D depth<=1 -> keep                                                           cells 118 wrote 0
+· L13  AT y8 where E -> keep                                                                      cells 59 wrote 0
++ L16  AT y16 c12-14,17-19,39-41,44-46 where J -> stairs out                                      cells 12 wrote 12
+· L17  AT y15 c12-14,17-19,39-41,44-46 where J -> keep                                            cells 12 wrote 0
++ L20  AT y14 c12,14,17,19,39,41,44,46 where I -> stairs in                                       cells 8 wrote 8
+· L21  AT y14 c13,18,40,45 where C -> keep                                                        cells 4 wrote 0
+· L24  AT y23 c1-7,51-57 where E -> keep                                                          cells 14 wrote 0
+· L25  AT y21-22 c1-7,51-57 where I -> keep                                                       cells 14 wrote 0
+· L28  AT y33,y40 c1-7,51-57 where E -> keep                                                      cells 20 wrote 0
+· L29  AT y41-42 c4,54 where K -> keep                                                            cells 2 wrote 0
+· L32  AT y28 c23-35 where B depth<=1 -> slab top                                                 cells 0 wrote 0
+· L35  AT y35 c20-38 where F -> keep                                                              cells 19 wrote 0
+· L36  AT y36 c20-38 where D -> keep                                                              cells 19 wrote 0
+# L38  FACE roof                                                                                  header
+· L41  AT z10,z48 c11-21,37-47 where E -> keep                                                    cells 44 wrote 0
+· L42  AT z4,z54 c4,54 where K -> keep                                                            cells 4 wrote 0
+· L43  AT z10,z48 c10,48 where K -> keep                                                          cells 4 wrote 0
+· L46  AT z8,z50 c23-35 where F -> keep                                                           cells 26 wrote 0
++ L47  AT z8,z50 c22,36 where I -> stairs out                                                     cells 4 wrote 4
+· L50  AT z11-47 c9-49 where B depth<=1 -> mix 1/12 J                                             cells 0 wrote 0
+# shift 0,0,0

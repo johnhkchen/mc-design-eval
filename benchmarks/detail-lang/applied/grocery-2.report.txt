@@ -1,0 +1,15 @@
++ L6   north rows 15 where a,A -> slab(smooth_stone) half top facing out                          cells 15 wrote 15
++ L7   west  rows 15 where a,A -> slab(smooth_stone) half top facing out                          cells 12 wrote 12
++ L8   north rows 12 where c -> stairs(quartz) facing out half bottom                             cells 6 wrote 6
++ L11  north rows 12 cols 3,7,11 where J -> slab(quartz) half bottom                              cells 3 wrote 3
++ L12  north rows 7 where a -> slab(smooth_stone) half top facing out                             cells 13 wrote 9 skipped 4
++ L15  north rows 4-5 cols 1-4,10-13 where U -> stairs(red_sandstone) facing out half top         cells 8 wrote 8
++ L16  north rows 4-5 cols 1-4,10-13 where V -> stairs(quartz) facing out half top                cells 8 wrote 8
++ L19  north row 3 cols 6-8 where O -> slab(dark_oak) half top facing out                         cells 3 wrote 3
++ L20  north rows 1-2 cols 4,10 where M -> mix(glass_pane 100)                                    cells 2 wrote 2
++ L21  north row 0 where A -> slab(stone) half bottom                                             cells 15 wrote 15
++ L24  north rows 8-13 cols 1,5,9,13 where J -> mix(bricks 85, stone_bricks 15, seed=piers)       cells 22 wrote 22
++ L27  roof z 0 where a,A,V,a -> slab(quartz) half top facing out                                 cells 12 wrote 12
+! L28  roof z 0 except b                                                                          ERROR no '->' (write WHERE -> WHAT)
+· L31  west rows 8-12 cols 11 where f -> wall(cobblestone)                                        cells 0 wrote 0
+# shift 0,0,0

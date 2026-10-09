@@ -1,0 +1,15 @@
+# Detail pass, art deco dance hall. North = front. Form untouched; craft openings, caps, edges, fields.
+FACE north
+# openings: sills under glass, lintels over glass (glass letters N O P R F)
+N1 sills under glass: directly below glass where I|A|B -> cut_sandstone_slab top out 1
+N2 lintels over glass: directly above glass where I|A|B -> sandstone_stairs top
+# copings: tan caps on blue fins and wing caps (sky cells directly above blue)
+N3 caps on blue: topmost where directly above E and sky -> cut_sandstone_slab top
+# outer pilasters: capital course at the top of each pilaster, then chiseled band
+N4 pilaster capitals: rows 14-15 cols 1-2 and 24-25 where B|I -> cut_sandstone_slab top
+N5 pilaster ornament: rows 9-11 cols 1-2 and 24-25 where B -> chiseled_sandstone
+# field texture: a few chiseled inlays on the flat cream wing and tower fields
+N6 wing field inlays: rows 4-12 cols 3-7 and 19-23 where I -> mix I 9, chiseled_sandstone 1 seed 4
+N7 tower field inlays: rows 17-22 cols 10-16 where I -> mix I 8, chiseled_sandstone 1 seed 6
+# base band: a stone course over the lintel and a dark skirting at grade
+N8 base cornice: row 3 where B -> sandstone_stairs top out 1

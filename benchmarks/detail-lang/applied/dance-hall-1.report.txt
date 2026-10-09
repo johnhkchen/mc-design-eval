@@ -1,0 +1,18 @@
+! L2   DETAIL dance-hall-round-2                                                                  ERROR no '->' (write WHERE -> WHAT)
+! L3   MATERIALS: cut_sandstone, sandstone, smooth_quartz, chiseled_sandstone; keep all other let ERROR no selection (rows/cols, letters, depth, a pattern ...)
+# L5   FACE NORTH                                                                                 header
++ L7   row 3 cols 9-17: A -> slab sandstone top                                                   cells 6 wrote 6
+· L8   row 3 cols 10,13,16: H -> keep                                                             cells 3 wrote 0
+· L10  rows 1-2 cols 9-10, 16-17: A -> keep                                                       cells 6 wrote 0
++ L12  rows 4-22 cols 3-6, 19-22 where row % 6 == 4 and letter I -> chiseled_sandstone            cells 12 wrote 12
++ L14  rows 5-14 cols 4,6,20,22: I -> chiseled_sandstone                                          cells 32 wrote 32
+# L16  FACE WEST                                                                                  header
++ L18  row 13 cols 9-13, 21-25: I -> slab cut_sandstone top out                                   cells 10 wrote 10
++ L20  rows 9-12 cols 9,13,21,25: I -> chiseled_sandstone                                         cells 16 wrote 16
+· L22  row 15 cols 6-32: W -> keep                                                                cells 27 wrote 0
+· L24  row 8 cols 15-17: R -> keep                                                                cells 2 wrote 0
+# L26  FACE ROOF                                                                                  header
+· L28  cols 1, 25 rows 11-32: W -> keep                                                           cells 44 wrote 0
++ L30  rows 13,15,17,19,21,23 cols 9-16 adjacent to N: B -> slab cut_sandstone top                cells 24 wrote 24
++ L32  row 27 cols 8-18: A -> chiseled_sandstone                                                  cells 11 wrote 11
+# shift 0,0,0

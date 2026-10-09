@@ -1,0 +1,26 @@
+# parapet copings and a moulded lip on the cream cornice
+cap F36 slab
+cap F38 slab
+cornice F33
+cornice F34
+cornice F35
+# centre pediment: the string course becomes stepped quartz (spec section 5)
+stairify F9
+# apartment window lintels: quartz hoods over each glass bay (spec: quartz_stairs lintel pairs; give the base block, the stairs form is found)
+lintel F42 smooth_quartz
+lintel F45 smooth_quartz
+lintel F48 smooth_quartz
+# shop windows: dark-oak jambs
+frame F50 dark_oak_planks
+frame F51 dark_oak_planks
+frame F52 dark_oak_planks
+frame F53 dark_oak_planks
+# splayed stone plinths on the side walls, matching the stone sidewalk rim
+plinth F54 stone_bricks
+plinth F87 stone_bricks
+# brick texture on the large side fields
+mix F54 bricks:6,mud_bricks:1
+mix F87 bricks:6,mud_bricks:1
+mix F77 bricks:6,mud_bricks:1
+# chimney cap in stone, topping out at y=18 as the spec says
+cap F106 slab

@@ -1,0 +1,12 @@
+# L2   FACE north  (y = row label, c = column index, as in the maps)                              header
++ L5   y19..21 c26..32 where I,G -> stairs out top                                                cells 21 wrote 21
++ L8   y24..25 c10..21 where D -> checker D,J                                                     cells 24 wrote 24
++ L9   y24..25 c37..48 where D -> checker D,J                                                     cells 24 wrote 24
++ L12  y13 c12..14,17..19,39..41,44..46 where C -> stairs out bottom                              cells 12 wrote 12  (calcite stairs -> pale_oak_stairs)
++ L13  y21 c12..14,17..19,39..41,44..46 where C -> stairs out top                                 cells 12 wrote 12  (calcite stairs -> pale_oak_stairs)
++ L14  y9  c12..14,17..19,39..41,44..46 where C -> slab top                                       cells 12 wrote 12  (calcite slab -> pale_oak_slab)
++ L15  y17 c12..14,17..19,39..41,44..46 where C -> slab top                                       cells 12 wrote 12  (calcite slab -> pale_oak_slab)
++ L18  y34 c20..38 where B -> mix B 3, D 1 seed 34                                                cells 19 wrote 19
++ L21  y2..5 c0..58 where C -> mix C 3, D 1 seed 3                                                cells 126 wrote 126
++ L24  y24..30 c2..6,52..56 where B -> mix B 4, J 1 seed 6                                        cells 70 wrote 70
+# shift 0,0,0

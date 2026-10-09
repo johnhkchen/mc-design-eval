@@ -1,0 +1,10 @@
++ L6   N y16 c1-5,9-13 where a : becomes smooth_quartz_stairs shape=stairs half=top facing=out    cells 10 wrote 10
++ L7   N y15 c1-13 where a     : becomes smooth_quartz_slab shape=slab half=top                   cells 13 wrote 13
++ L10  N y12 c3,7,11 where J   : becomes smooth_quartz_slab shape=slab half=bottom                cells 3 wrote 3
+· L11  N y11,y10 where e       : becomes dark_oak_trapdoor shape=trapdoor open=true facing=out    cells 12 wrote 0 skipped 12
++ L12  N y7 c2-4,6-8,10-12 where a : becomes smooth_quartz_slab shape=slab half=top               cells 9 wrote 5 skipped 4
++ L15  R z4,z8,z12 c2-12 where A : becomes stone_bricks                                           cells 33 wrote 33
++ L16  R z1-2 c0-14 where a      : becomes smooth_quartz_slab shape=slab half=top                 cells 30 wrote 30
+· L19  N y5 c1-4,10-13 where U,V : leave                                                          cells 8 wrote 0
+· L20  N y14 c2-4,6-8,10-12 where T : leave                                                       cells 9 wrote 0
+# shift 0,0,0

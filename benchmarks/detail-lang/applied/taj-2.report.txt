@@ -1,0 +1,23 @@
+# L7   N1 plinth niches: for each calcite niche (rows 3-5, cols 4k+3..4k+5, k=0..13):             loop
+! L8   row 5 centre col  -> quartz_stairs facing north   (pointed head)                           ERROR don't understand "centre"
+! L9   row 5 side cols   -> quartz_slab bottom                                                    ERROR don't understand "side"
+· L10  rows 3-4          -> keep C (recess stays)                                                 cells 84 wrote 0
++ L12  N2 dome drip: row 36 cols 20-38 (smooth quartz under the black band at row 35) -> smooth_q cells 19 wrote 19
++ L15  N3 flank cornices: row 26 cols 10-21 and 38-49 (B above each D spandrel panel) -> quartz_s cells 24 wrote 24
+· L17  rows 24-25 D panels -> keep, they are the inset                                            cells 48 wrote 0
++ L19  N4 window sills: each 3-wide calcite run at row 9 (cols 12-14, 17-19, 39-41, 44-46) -> qua cells 12 wrote 12  (ignored after the comma: "keep CHC shafts as they are")
+· L22  N5 gate lintel: row 27 F band cols 23-35 -> keep                                           cells 13 wrote 0
+! L23  row 28 cols 23-35 B directly above -> quartz_stairs facing south (inverted,                ERROR above what? (e.g. directly above F, adjacent to N)
+! L24  shoulder of the iwan head). Centre 3 cols (cols 27-31) -> quartz_slab top instead.         ERROR don't understand "Centre"
+! L26  N6 corner pilasters: cols 2-6 and 52-56 rows 9-30 (B piers) the outermost col (2 and 56) - ERROR col: expected numbers (e.g. col 3-5 or col 1,4,7)
+! L31  R1 minaret caps: corner blocks z 1-7 and z 51-57, x 1-7 and x 51-57 z 1 and z 7 edges (the ERROR don't understand "edges"
+! L33  keep the K lightning rods at (z 4, x 4), (z 4, x 54), (z 54, x 4), (z 54, x 54)            ERROR no '->' (write WHERE -> WHAT)
++ L35  R2 drum band: z 8 and z 50 I runs (x 8-50) -> quartz_stairs facing outward                 cells 60 wrote 60
+· L36  black F run at z 8 cols 22-36 -> keep                                                      cells 13 wrote 0
+! L38  R3 dome ribs: z 9-49 central B field, the vertical I lines at x 9 and x 49 -> keep (alread ERROR don't understand "central"
+! L40  cols 14-44 (coping over the gallery)                                                       ERROR no '->' (write WHERE -> WHAT)
+! L43  - Dark trims: F black_concrete only on existing F cells; never add new F.                  ERROR no selection (rows/cols, letters, depth, a pattern ...)
+! L44  - Calcite C panels stay calcite; never convert C to quartz.                                ERROR no '->' (write WHERE -> WHAT)
+! L45  - Any stair/slab op must check neighbours: only place where the target cell is B, D, or I, ERROR don't understand "only"
+! L46  - Any `out 1` ledge must have sky/air in front of it, not solid; otherwise skip and log.   ERROR no '->' (write WHERE -> WHAT)
+# shift 0,0,0

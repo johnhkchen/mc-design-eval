@@ -1,0 +1,14 @@
++ L6   north cols 1,25 rows 1..15 letter A : flute alt chiseled_sandstone/sandstone by row parity cells 24 wrote 24
++ L7   west  cols 4..5 rows 2..28 letter A : flute alt chiseled_sandstone/sandstone by row parity cells 31 wrote 31
++ L10  north rows 0..1 letter B : cut_sandstone_slab bottom                                       cells 8 wrote 8
++ L11  west  rows 0..1 letter A : sandstone_slab bottom                                           cells 6 wrote 6
++ L12  roof  z 33..34 letter B : cut_sandstone_slab bottom                                        cells 16 wrote 16
+! L15  north all cols, cell at column top where a neighbour column is >=2 rows higher : cut_sands ERROR column: expected numbers (e.g. column 3-5 or column 1,4,7)
+! L16  west  all z, same rule on the silhouette top                    : cut_sandstone_stairs fac ERROR don't understand "same"
+! L19  west  rows (top of each F/N glass bay)+1 letter I directly above F : cut_sandstone_slab to ERROR rows: expected numbers (e.g. rows 3-5 or rows 1,4,7)
+! L20  west  rows (bottom of each F/N glass bay)-1 letter W              : keep sandstone_slab    ERROR rows: expected numbers (e.g. rows 3-5 or rows 1,4,7)
+! L23  west  rows 14..15 depth 0 : row 14 = cut_sandstone_stairs facing out (drip); row 15 = sand ERROR don't understand "row"
+! L24  north rows where depth=0 across >=20 cols : leave as-is unless a letter B sits directly be ERROR rows: expected numbers (e.g. rows 3-5 or rows 1,4,7)
++ L27  north row 3 letter A cols 8..9 and 11..12 and 14..15 and 17..18 : alt sandstone/cut_sandst cells 8 wrote 8
+· L28  roof  z 4..10 letter A adjacent to letter B : replace A with cut_sandstone_stairs facing o cells 0 wrote 0
+# shift 0,0,0

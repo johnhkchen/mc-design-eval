@@ -1,0 +1,34 @@
+# front (north): surrounds, sills and hoods on the openings
+frame F2 smooth_quartz
+frame F75 smooth_quartz
+lintel F39 cut_sandstone
+lintel F40 cut_sandstone
+frame F77 cut_sandstone
+frame F78 cut_sandstone
+frame F79 cut_sandstone
+frame F80 cut_sandstone
+# front: copings on the pilaster and fin tops, stepped wing trim
+cap F4 slab
+cap F5 slab
+cap F6 slab
+cap F7 slab
+cap F8 slab
+stairify F72 top
+stairify F73 top
+attach F61 glowstone every 3 mid
+# sides: texture mixes on the big flat fields
+mix F89 cut_sandstone:3,smooth_sandstone:1
+mix F94 cut_sandstone:3,smooth_sandstone:1
+mix F91 sandstone:3,cut_sandstone:1
+mix F278 cut_sandstone:3,smooth_sandstone:1
+mix F282 cut_sandstone:3,smooth_sandstone:1
+mix F280 sandstone:3,cut_sandstone:1
+# sides: plinths on the base bands, cornices on the string courses, copings on the parapets
+plinth F97
+plinth F101
+plinth F286
+plinth F290
+cornice F102
+cornice F291
+cap F104 slab
+cap F293 slab

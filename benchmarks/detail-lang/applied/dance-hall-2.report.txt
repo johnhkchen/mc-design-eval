@@ -1,0 +1,20 @@
+# L6   ALL FACES  sills and lintels                                                               header
+! L7   1  SILL    every GLASS cell: the cell directly below, if A|B|I -> slab top, same material  ERROR every: expected a number (every 3, every 3rd)
+! L9   2  LINTEL  every GLASS cell: the cell directly above, if A|B|I and that cell is not GLASS  ERROR every: expected a number (every 3, every 3rd)
+# L12  NORTH  door surround and transom                                                           header
++ L13  3  JAMB    rows 0-2, cols 10 and 16: A|B|I -> chiseled_sandstone                           cells 2 wrote 2
++ L14  4  LINTEL  row 3, cols 11-12 and 14-15: A -> cut_sandstone_slab bottom                     cells 4 wrote 4
+# L17  NORTH  tower glass frame                                                                   header
++ L18  5  FRAME   rows 10-15, cols 11 and 15: I -> chiseled_sandstone                             cells 12 wrote 12
+# L20  NORTH  pier caps and stepped flanks                                                        header
++ L21  6  CAP     cols 1-2 and 24-25: topmost A|B|I cell of each column -> cut_sandstone_stairs f cells 4 wrote 4  (cut_sandstone stairs -> sandstone_stairs)
+! L23  7  FLANK   rows 17-21: outermost B|I cell on each side of the centre pyramid, where the ce ERROR don't understand "outermost"
+# L27  NORTH  wing texture mix                                                                    header
++ L28  8  MIX     rows 4-14, cols 3-4 and 22-23: I where (row + col) mod 3 == 0 -> chiseled_sands cells 14 wrote 14
+# L30  WEST  field texture                                                                        header
++ L31  9  MIX     rows 1-2 and 4-6, every 3rd B in each row, starting at col 6 -> chiseled_sandst cells 45 wrote 45
+# L34  ROOF  skylight curbs                                                                       header
+! L35  10 CURB    every N cell (skylights at z 14, 18, 22): the B cells orthogonally adjacent     ERROR every: expected a number (every 3, every 3rd)
+! L38  KEEP    E blue bands, K/L/Q/J gold-diamond-emerald canopy, M/T lights, existing U stairs   ERROR no '->' (write WHERE -> WHAT)
+! L39  and V/W slabs are untouched.                                                               ERROR no '->' (write WHERE -> WHAT)
+# shift 0,0,0
