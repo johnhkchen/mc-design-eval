@@ -1,0 +1,21 @@
+# texture first
+all faces where deepslate_bricks -> weather 0.3
+all faces where deepslate_bricks -> vary
+# 1 entablature
+north row 17 cols 1-14 -> cornice bracketed polished_deepslate
+west row 17 cols 3-22 -> cornice bracketed polished_deepslate
+# 2 portico
+north rows 6-7 cols 5-12 -> cornice deep quartz_block
+north row 7 cols 5-12 -> coping slab smooth_quartz
+# 3 lintels
+north cols 1-14 openings -> lintels hood polished_deepslate
+west cols 13-14 openings -> lintels hood polished_deepslate
+# 4 plinth + moss gradient
+all faces ground row -> plinth stone_bricks 2
+north rows 0-2 -> gradient mossy_stone_bricks..stone_bricks up
+west rows 0-2 -> gradient mossy_stone_bricks..stone_bricks up
+# 5 roof
+roof wall tops -> coping slab polished_deepslate
+roof where deepslate_tiles -> vary
+# 7 floor coursing
+west cols 3-6 rows 2-18 -> courses 6 oak_planks

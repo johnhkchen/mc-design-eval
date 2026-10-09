@@ -1,0 +1,9 @@
+
+## JOB 1: Plinth foot course
+all faces ground row -> plinth stone_bricks
+
+
+## JOB 3: Deepslate wall field variation
+all faces where deepslate_bricks -> vary 0.14 force
+all faces where deepslate_bricks -> weather 0.3 force
+

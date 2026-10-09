@@ -1,0 +1,36 @@
+## JOB 1: Plinth foot course
+all faces ground row -> plinth stone_bricks
+
+## JOB 2: Mossy weathered base
+all faces rows 0-1 where stone_bricks,mossy_stone_bricks,cobbled_deepslate -> vary force
+all faces row 0 where stone_bricks -> vary 0.3 mossy_stone_bricks force
+
+## JOB 3: Deepslate wall field variation
+all faces where deepslate_bricks -> vary 0.14 force
+all faces where deepslate_bricks -> weather 0.3 force
+
+## JOB 4: Window lintels in polished deepslate
+all faces where deepslate_bricks,cracked_deepslate_bricks and directly above glass -> polished_deepslate force
+
+## JOB 5: Entrance sign band end-caps and pillar capitals
+north rows 6-7 cols 5,12 -> chiseled_quartz_block force
+north row 5 cols 7,10 -> chiseled_quartz_block force
+north row 2 cols 5,7,10,12 -> quartz_bricks force
+
+## JOB 6: Portico stepped cornice
+north row 7 cols 5-12 -> cornice stepped quartz_block
+
+## JOB 7: Eaves cornice at the frieze
+north top row -> cornice simple polished_deepslate
+west cols 8-20 row 17 -> cornice simple polished_deepslate
+east cols 2-20 row 17 -> cornice simple polished_deepslate
+south cols 2-16 row 17 -> cornice simple polished_deepslate
+
+## JOB 8: Shaft piers vertical grain and floor joints
+west cols 3-6 rows 2-18 where stripped_oak_log -> stripped_oak_log axis=y force
+west cols 3-6 rows 8,12,16 -> oak_planks force
+east cols 16-19 rows 9-16 where stripped_oak_log -> stripped_oak_log axis=y force
+
+## JOB 9: Roof tile variation and seams
+roof where deepslate_tiles -> vary 0.1 force
+roof rows 12-20 where deepslate_tiles -> courses 5 deepslate_bricks

@@ -15,10 +15,12 @@ const MCD = join(PLUGIN, "tools", "bin", "mcd.mjs");
 const PICKER = process.env.MC_PICK_MODEL_ID || "claude-opus-5-5";
 const img = (p) => ({ data: readFileSync(p), mediaType: /\.jpe?g$/i.test(p) ? "image/jpeg" : "image/png" });
 
-export async function detailPass(runDir, { input = "final.nbt", model = "claude-haiku-5-5", effort = "high", lang = false, faces = "north,west,roof", jobs = false, jobsModel = "claude-sonnet-5-5" } = {}) {
+export async function detailPass(runDir, { input = "final.nbt", model = "claude-haiku-5-5", effort = "high", lang = false, faces = "north,west,roof", jobs = false, jobsModel = "claude-sonnet-5-5", greedy = false, judgeModel = "claude-sonnet-5-5", scale = 2 } = {}) {
+  // big renders for everyone (detailer, judges): fine detail is invisible on 300 px tiles
+  process.env.MCD_TILE_SCALE = String(scale);
   const t0 = Date.now();
   let cost0 = 0;
-  const dir = join(runDir, `detail-${model.replace(/^claude-/, "").replace(/-\d.*$/, "")}-${effort}${lang ? "-lang" : ""}${jobs ? "-jobs" : ""}`);
+  const dir = join(runDir, `detail-${model.replace(/^claude-/, "").replace(/-\d.*$/, "")}-${effort}${lang ? "-lang" : ""}${jobs ? "-jobs" : ""}${greedy ? "-greedy" : ""}${input !== "final.nbt" ? "-" + basename(input, ".nbt") : ""}`);
   mkdirSync(dir, { recursive: true });
   copyFileSync(join(runDir, input), join(dir, "input.nbt"));
   const concept = ["concept.jpg", "concept.png"].map((f) => join(runDir, f)).find(existsSync);
@@ -65,6 +67,13 @@ export async function detailPass(runDir, { input = "final.nbt", model = "claude-
     `4. $MCD paint input.nbt detail-1.nbt --rules rules.txt --face ${faces} ; read the per-line report (fix lines that errored or wrote 0);`,
     "   $MCD render detail-1.nbt --front n --tiles t1 ; compare t1 with t0 and the concept: what got better, what got busier or wrong?",
     `5. Edit rules.txt (drop what hurt, add what is missing) and paint AGAIN FROM input.nbt: $MCD paint input.nbt detail-2.nbt --rules rules.txt --face ${faces} ; render to t2.`,
+    ...(greedy ? [
+      "FORMAT: group rules.txt into JOBS, each starting with a header line '## JOB <n>: <short title>' followed by its 1-6 rules. Each job must stand",
+      "on its own (it will be accepted or rejected separately by a reviewer looking at large renders). Aim for 8-14 jobs covering the whole",
+      "building: base/plinth, every kind of opening (sills, lintels, frames), the entrance, piers/pilasters (capitals, bases), string courses,",
+      "eaves and cornices, wall tops/copings, the roof edge, the sides and the back, and restrained surface treatment (weathering is welcome).",
+      "Do not be lazy: a careful detailer writes many precise jobs; small ones are fine.",
+    ] : []),
     "Never edit .nbt files or write build scripts; only rules. Report in ≤6 lines: the treatments you chose and whether detail-2 beats input.",
   ].join("\n");
   const prompt = lang ? langPrompt : [
@@ -86,7 +95,44 @@ export async function detailPass(runDir, { input = "final.nbt", model = "claude-
   let o = {}; try { o = JSON.parse(r.stdout); } catch { o = { result: r.stdout?.slice(0, 2000) }; }
   writeFileSync(join(dir, "agent-report.md"), (o.result || "") + "\n");
   let cost = (o.total_cost_usd || 0) + cost0;
-  const cand = ["detail-2.nbt", "detail-1.nbt"].find((f) => existsSync(join(dir, f)));
+  // GREEDY: apply the jobs one at a time; a reviewer keeps a job only if it improves the build on large renders
+  let greedyLog = [];
+  if (greedy && lang && existsSync(join(dir, "rules.txt"))) {
+    const text = readFileSync(join(dir, "rules.txt"), "utf8");
+    const parts = text.split(/^(?=## JOB )/m);
+    const preamble = parts[0].startsWith("## JOB") ? "" : parts.shift();
+    const jobsList = parts.filter((p) => p.startsWith("## JOB"));
+    let accepted = preamble, curNbt = join(dir, "input.nbt"), curTiles = join(dir, "g-0");
+    const renderTiles = (nbt, tiles) => execFileSync("node", [MCD, "render", nbt, "--front", "n", "--tiles", tiles, "--out", tiles + ".png"], { stdio: "ignore" });
+    const composite = (tiles, out) => execFileSync("magick", ["(", join(tiles, "street.png"), "-resize", "x700", ")", "(", join(tiles, "front-elevation.png"), "-resize", "x700", ")",
+      "(", join(tiles, "front-left.png"), "-resize", "x700", ")", "(", join(tiles, "right-elevation.png"), "-resize", "x700", ")", "+append", out]);
+    renderTiles(curNbt, curTiles); composite(curTiles, curTiles + "-c.png");
+    for (const [n, job] of jobsList.entries()) {
+      const title = job.split("\n")[0].replace(/^## /, "");
+      const rulesFile = join(dir, `g-${n + 1}.rules.txt`), nbt = join(dir, `g-${n + 1}.nbt`), tiles = join(dir, `g-${n + 1}`);
+      writeFileSync(rulesFile, accepted + "\n" + job);
+      try { execFileSync("node", [MCD, "paint", join(dir, "input.nbt"), nbt, "--rules", rulesFile, "--face", faces], { stdio: "ignore" }); }
+      catch { greedyLog.push({ job: title, kept: false, why: "paint failed" }); continue; }
+      renderTiles(nbt, tiles); composite(tiles, tiles + "-c.png");
+      const flip = Math.random() < 0.5;
+      const [A, B] = flip ? [tiles + "-c.png", curTiles + "-c.png"] : [curTiles + "-c.png", tiles + "-c.png"];
+      const v = await requestTextWithImage({
+        prompt: `Image 1 is the concept. Images 2 (A) and 3 (B) are the same Minecraft build [street view | front elevation | 3/4 | side], differing ONLY by one detailing job ("${title}"). ` +
+          "Judge as a skilled builder at full size: does the job make the build more crafted and closer to the concept (profiles, depth, finish), or is it noise, clutter, " +
+          "a wrong colour or a broken silhouette? Reply ONLY JSON: {\"better\": \"A\"|\"B\"|\"same\", \"why\": \"one sentence\"}",
+        images: [img(concept), img(A), img(B)], model: judgeModel, effort: "low",
+      });
+      cost0 += v.raw?.total_cost_usd || 0;
+      let j = {}; try { j = JSON.parse(v.text.slice(v.text.indexOf("{"), v.text.lastIndexOf("}") + 1)); } catch { /* treat as reject */ }
+      const candIs = flip ? "A" : "B", kept = j.better === candIs;
+      greedyLog.push({ job: title, kept, why: j.why || v.text.slice(0, 200) });
+      if (kept) { accepted += "\n" + job; curNbt = nbt; curTiles = tiles; }
+    }
+    writeFileSync(join(dir, "rules-accepted.txt"), accepted + "\n");
+    execFileSync("node", [MCD, "paint", join(dir, "input.nbt"), join(dir, "detail-greedy.nbt"), "--rules", join(dir, "rules-accepted.txt"), "--face", faces], { stdio: "ignore" });
+    writeFileSync(join(dir, "greedy.json"), JSON.stringify(greedyLog, null, 1) + "\n");
+  }
+  const cand = ["detail-greedy.nbt", "detail-2.nbt", "detail-1.nbt"].find((f) => existsSync(join(dir, f)));
   let kept = "input", why = "no detailed file";
   if (cand) {
     const comp = {};
@@ -94,8 +140,8 @@ export async function detailPass(runDir, { input = "final.nbt", model = "claude-
       const tiles = join(dir, `${f}-judge`);
       execFileSync("node", [MCD, "render", join(dir, f), "--front", "n", "--tiles", tiles, "--out", join(dir, `${f}-sheet.png`)], { stdio: "ignore" });
       comp[f] = join(dir, `${f}-matched.png`);
-      execFileSync("magick", ["(", concept, "-resize", "x420", ")", "(", join(tiles, "front-elevation.png"), "-resize", "x420", ")", "(", join(tiles, "front-left.png"), "-resize", "x420", ")",
-        "(", join(tiles, "right-elevation.png"), "-resize", "x420", ")", "+append", comp[f]]);
+      execFileSync("magick", ["(", concept, "-resize", "x700", ")", "(", join(tiles, "front-elevation.png"), "-resize", "x700", ")", "(", join(tiles, "front-left.png"), "-resize", "x700", ")",
+        "(", join(tiles, "right-elevation.png"), "-resize", "x700", ")", "+append", comp[f]]);
     }
     // order shuffled against position bias
     const flip = Math.random() < 0.5, A = flip ? cand : "input.nbt", Bf = flip ? "input.nbt" : cand;
@@ -111,13 +157,13 @@ export async function detailPass(runDir, { input = "final.nbt", model = "claude-
   }
   const planFile = join(dir, lang ? "rules.txt" : "plan.txt");
   const plan = existsSync(planFile) ? readFileSync(planFile, "utf8").split("\n").filter((l) => l.trim() && !l.startsWith("#")).length : 0;
-  const summary = { model, effort, lang, input, kept, why, planOps: plan, turns: o.num_turns, costUsd: cost, durationMs: Date.now() - t0 };
+  const summary = { model, effort, lang, greedy, jobsAccepted: greedyLog.filter((g) => g.kept).length, jobsTotal: greedyLog.length, input, kept, why, planOps: plan, turns: o.num_turns, costUsd: cost, durationMs: Date.now() - t0 };
   writeFileSync(join(dir, "summary.json"), JSON.stringify(summary, null, 1) + "\n");
   return { dir, ...summary };
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const arg = (k, d) => (process.argv.includes(k) ? process.argv[process.argv.indexOf(k) + 1] : d);
-  const r = await detailPass(process.argv[2], { input: arg("--input", "final.nbt"), model: arg("--model", "claude-haiku-5-5"), effort: arg("--effort", "high"), lang: process.argv.includes("--lang"), faces: arg("--faces", "north,west,roof"), jobs: process.argv.includes("--jobs") });
+  const r = await detailPass(process.argv[2], { input: arg("--input", "final.nbt"), model: arg("--model", "claude-haiku-5-5"), effort: arg("--effort", "high"), lang: process.argv.includes("--lang"), faces: arg("--faces", "north,west,roof"), jobs: process.argv.includes("--jobs"), greedy: process.argv.includes("--greedy"), scale: Number(arg("--scale", 2)) });
   console.log(JSON.stringify(r));
 }

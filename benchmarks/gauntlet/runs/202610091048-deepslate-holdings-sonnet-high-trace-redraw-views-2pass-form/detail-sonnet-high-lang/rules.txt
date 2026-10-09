@@ -1,0 +1,8 @@
+all faces where deepslate_bricks -> weather 0.25
+all faces where deepslate_bricks -> vary 0.1 cracked_deepslate_bricks
+all faces where mossy_stone_bricks -> vary
+all faces where stone_bricks -> weather 0.3
+north rows 9-16 where glass_pane -> lintels flat polished_deepslate
+west rows 9-16 where glass_pane -> lintels flat polished_deepslate
+roof where deepslate_tiles -> vary 0.08 cobbled_deepslate
+roof wall tops -> coping slab polished_deepslate

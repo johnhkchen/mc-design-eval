@@ -1,0 +1,16 @@
+
+## JOB 4: entrance portico cornice
+north row 7 cols 5-12 where J -> cornice stepped smooth_quartz
+
+
+## JOB 8: eave cornice under the roof
+north row 17 where N -> cornice bracketed polished_deepslate
+east row 17 where N -> cornice bracketed polished_deepslate force
+south row 17 where N -> cornice bracketed polished_deepslate force
+west row 17 where N -> cornice bracketed polished_deepslate force
+
+
+## JOB 11: tower base and shoulder
+north row 18 cols 15-18 where P -> cornice simple polished_deepslate force
+north rows 19-28 cols 15-18 where P -> vary 0.1 force
+

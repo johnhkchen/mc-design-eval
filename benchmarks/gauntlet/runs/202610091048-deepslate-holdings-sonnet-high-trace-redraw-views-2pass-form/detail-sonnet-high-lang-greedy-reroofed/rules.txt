@@ -1,0 +1,41 @@
+## JOB 1: plinth foot and weathering
+all faces rows 0-1 where stone_bricks -> weather 0.35
+all faces ground row -> plinth stone_bricks
+
+## JOB 2: wall field variation
+all faces rows 2-15 where deepslate_bricks -> vary 0.12 force
+all faces rows 2-6 where deepslate_bricks -> gradient cracked_deepslate_bricks..deepslate_bricks up force
+all faces rows 2-15 where deepslate_bricks -> weather 0.2 force
+
+## JOB 3: drip hoods over every window
+all faces directly above L where P,Q -> polished_deepslate_stairs top out force
+
+## JOB 4: entrance portico cornice
+north row 7 cols 5-12 where J -> cornice stepped smooth_quartz
+
+## JOB 5: portico base lanterns
+north row 7 cols 1,13 -> lantern out 1
+
+## JOB 7: mid string course between storeys
+north row 11 where P,Q -> cornice simple polished_deepslate
+east row 11 where P,Q -> cornice simple polished_deepslate
+south row 11 where P,Q -> cornice simple polished_deepslate
+
+## JOB 8: eave cornice under the roof
+north row 17 where N -> cornice bracketed polished_deepslate
+east row 17 where N -> cornice bracketed polished_deepslate force
+south row 17 where N -> cornice bracketed polished_deepslate force
+west row 17 where N -> cornice bracketed polished_deepslate force
+
+## JOB 9: roof edge coping
+roof wall tops -> coping slab deepslate_tile_slab
+
+## JOB 10: shaft flank storey bands
+west cols 3-6 rows 8,12,16 -> oak_planks force
+
+## JOB 11: tower base and shoulder
+north row 18 cols 15-18 where P -> cornice simple polished_deepslate force
+north rows 19-28 cols 15-18 where P -> vary 0.1 force
+
+## JOB 12: back door frame
+south openings where F -> frames polished_deepslate

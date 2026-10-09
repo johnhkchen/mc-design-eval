@@ -1,0 +1,6 @@
+
+## JOB 2: wall field variation
+all faces rows 2-15 where deepslate_bricks -> vary 0.12 force
+all faces rows 2-6 where deepslate_bricks -> gradient cracked_deepslate_bricks..deepslate_bricks up force
+all faces rows 2-15 where deepslate_bricks -> weather 0.2 force
+
