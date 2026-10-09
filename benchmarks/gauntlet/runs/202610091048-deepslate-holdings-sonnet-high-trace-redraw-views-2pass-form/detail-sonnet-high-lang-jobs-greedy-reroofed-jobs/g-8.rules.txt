@@ -1,0 +1,28 @@
+
+## JOB 1: Eaves cornice, north wall top
+FACE north
+row 17 cols 1-14 -> cornice stepped polished_deepslate
+
+
+## JOB 5: Plinth and mossy ground row
+FACE north
+ground row -> plinth stone_bricks 2
+ground row -> weather 0.4
+rows 0-1 where A,B -> gradient mossy_stone_bricks..stone_bricks up
+FACE west
+ground row -> plinth stone_bricks 2
+ground row -> weather 0.4
+
+
+## JOB 6: Entrance porch entablature
+FACE north
+row 7 cols 5-12 -> cornice stepped smooth_quartz
+row 6 cols 6-11 where J -> chiseled_quartz_block
+
+
+## JOB 8: Restrained wall texture, west body
+FACE west
+rows 1-17 where P,Q,R -> weather 0.3
+rows 1-17 where P -> vary 0.12 cracked_deepslate_bricks
+rows 1-17 where P,Q -> gradient deepslate_bricks..cracked_deepslate_bricks up
+

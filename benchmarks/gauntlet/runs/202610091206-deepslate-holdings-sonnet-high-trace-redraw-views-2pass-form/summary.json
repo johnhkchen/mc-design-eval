@@ -1,0 +1,115 @@
+{
+ "runId": "202610091206-deepslate-holdings-sonnet-high-trace-redraw-views-2pass-form",
+ "subject": "deepslate-holdings",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-2",
+ "why": "The front elevations of the two builds are nearly identical, but A's side is a blank black slab, while B carries the timber piers, window bays and rooftop turret around the side and roof, so B is closer to the reference's fully detailed side elevation and is better crafted.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 4.386201800000001,
+ "durationMs": 1586276,
+ "stages": [
+  {
+   "n": "concept chosen",
+   "s": 0,
+   "from": "benchmarks/charter-row/concepts/deepslate-holdings/cx-c1.png"
+  },
+  {
+   "n": "redraw",
+   "s": 30,
+   "attempt": 1,
+   "cols": 36,
+   "rows": 46,
+   "score": 47,
+   "box": {
+    "x": 53,
+    "y": 17.234782608695653,
+    "w": 994,
+    "h": 1326
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw",
+   "s": 49,
+   "attempt": 3,
+   "cols": 36,
+   "rows": 46,
+   "score": 44.7,
+   "box": {
+    "x": 34.28333333333333,
+    "y": 2.0608695652173896,
+    "w": 1029,
+    "h": 1373
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw",
+   "s": 67,
+   "attempt": 2,
+   "cols": 33,
+   "rows": 46,
+   "score": 47,
+   "box": {
+    "x": 50.4969696969697,
+    "y": 17,
+    "w": 1031,
+    "h": 1373
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw pick",
+   "s": 67,
+   "attempt": 3,
+   "cols": 36,
+   "rows": 46,
+   "score": 44.7
+  },
+  {
+   "n": "trace",
+   "s": 67,
+   "cols": 36,
+   "rows": 46,
+   "scale": 1,
+   "box": {
+    "x": 34.28333333333333,
+    "y": 2.0608695652173896,
+    "w": 1029,
+    "h": 1373
+   }
+  },
+  {
+   "n": "views",
+   "s": 192,
+   "side": "25x43",
+   "depth": "40x50"
+  },
+  {
+   "n": "spec",
+   "s": 239
+  },
+  {
+   "n": "pass 1 (front)",
+   "s": 860,
+   "turns": 36,
+   "cost": 1.8660424000000002
+  },
+  {
+   "n": "pass 2 (sides, back, roof)",
+   "s": 1576,
+   "turns": 44,
+   "cost": 2.0918676000000005
+  },
+  {
+   "n": "keep-better",
+   "s": 1586,
+   "kept": "round-2",
+   "why": "The front elevations of the two builds are nearly identical, but A's side is a blank black slab, while B carries the timber piers, window bays and rooftop turret around the side and roof, so B is closer to the reference's fully detailed side elevation and is better crafted."
+  }
+ ]
+}

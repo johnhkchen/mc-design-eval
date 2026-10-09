@@ -1,0 +1,80 @@
+[
+ {
+  "job": "JOB 1: Eaves cornice, north wall top",
+  "kept": true,
+  "verdict": "improves",
+  "views": [
+   "street",
+   "front-elevation"
+  ],
+  "why": "The new dark cornice course across the top of the north wall adds a crafted horizontal band with some shadow depth under the gable, though a few pillar tops get slightly muddied and the effect is subtle."
+ },
+ {
+  "job": "JOB 2: Eaves cornice, west wall top",
+  "kept": false,
+  "verdict": "no-pixels-changed",
+  "why": "the job changed no visible pixels in any view"
+ },
+ {
+  "job": "JOB 3: Pilaster capitals and bases (north)",
+  "kept": false,
+  "verdict": "worse",
+  "views": [
+   "street",
+   "front-elevation"
+  ],
+  "why": "The change adds large, flat gray diagonal bands across the white entrance portico and its pilasters that look like rendering artifacts or wrong-colour blocks rather than crafted capitals and bases, so it reads as noise and breaks the clean white portico from the concept."
+ },
+ {
+  "job": "JOB 4: Window sills and lintels (north)",
+  "kept": false,
+  "verdict": "worse",
+  "views": [
+   "street",
+   "front-elevation"
+  ],
+  "why": "The change adds ragged dark blocks that clutter the front elevation and cut into the timber pilasters, so the north facade no longer matches the concept's clean lintels and sills."
+ },
+ {
+  "job": "JOB 5: Plinth and mossy ground row",
+  "kept": true,
+  "verdict": "improves",
+  "views": [
+   "front-left",
+   "right-elevation"
+  ],
+  "why": "The right elevation gains a stepped stone plinth base course that grounds the building and matches the concept's mossy stone footing, with only a small, harmless added step cluster at the front-left entrance."
+ },
+ {
+  "job": "JOB 6: Entrance porch entablature",
+  "kept": true,
+  "verdict": "improves",
+  "views": [
+   "street",
+   "front-elevation"
+  ],
+  "why": "The porch lintel now projects as a cornice with a row of dentils and a shadowed underside, so it reads as a crafted entablature like the concept's white portico. The wall below the lintel goes slightly grey and flat, and the entablature is shallower than in the concept."
+ },
+ {
+  "job": "JOB 7: Stair-shaft glazing grid",
+  "kept": false,
+  "verdict": "no-pixels-changed",
+  "why": "the job changed no visible pixels in any view"
+ },
+ {
+  "job": "JOB 8: Restrained wall texture, west body",
+  "kept": false,
+  "verdict": "neutral",
+  "views": [
+   "right-elevation",
+   "front-elevation"
+  ],
+  "why": "The change is a barely perceptible speckle of cracked-deepslate texture on the west wall (a few lighter pixels at best), with no visible gain in depth, profile or concept fidelity and no harm to colour or silhouette."
+ },
+ {
+  "job": "JOB 9: Roof edge trim, north gable and shaft head",
+  "kept": false,
+  "verdict": "no-pixels-changed",
+  "why": "the job changed no visible pixels in any view"
+ }
+]

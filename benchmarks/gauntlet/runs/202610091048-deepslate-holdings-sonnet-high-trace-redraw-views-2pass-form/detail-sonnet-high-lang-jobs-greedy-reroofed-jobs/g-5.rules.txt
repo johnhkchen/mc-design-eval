@@ -1,0 +1,15 @@
+
+## JOB 1: Eaves cornice, north wall top
+FACE north
+row 17 cols 1-14 -> cornice stepped polished_deepslate
+
+
+## JOB 5: Plinth and mossy ground row
+FACE north
+ground row -> plinth stone_bricks 2
+ground row -> weather 0.4
+rows 0-1 where A,B -> gradient mossy_stone_bricks..stone_bricks up
+FACE west
+ground row -> plinth stone_bricks 2
+ground row -> weather 0.4
+

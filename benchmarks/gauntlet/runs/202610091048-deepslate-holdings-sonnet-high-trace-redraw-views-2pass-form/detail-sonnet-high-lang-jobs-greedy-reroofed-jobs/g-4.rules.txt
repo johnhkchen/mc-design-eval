@@ -1,0 +1,11 @@
+
+## JOB 1: Eaves cornice, north wall top
+FACE north
+row 17 cols 1-14 -> cornice stepped polished_deepslate
+
+
+## JOB 4: Window sills and lintels (north)
+FACE north
+rows 9-15 cols 1-14 where L -> sills oak_slab
+rows 9-15 cols 1-14 where L -> lintels hood deepslate_tile_stairs
+

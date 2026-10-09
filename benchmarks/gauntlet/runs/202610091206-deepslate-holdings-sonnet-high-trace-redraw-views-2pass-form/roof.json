@@ -1,0 +1,46 @@
+{
+ "style": "mansard",
+ "pitch": "steep",
+ "lower": 5,
+ "material": "deepslate_tile",
+ "trim": "polished_deepslate",
+ "eave": "cornice",
+ "ridge": "crest",
+ "overhang": 1,
+ "y": 32,
+ "pediment": {
+  "face": "north",
+  "width": 21,
+  "pitch": 45,
+  "tympanum": "deepslate_tiles",
+  "cornice": "oak",
+  "oculus": true
+ },
+ "dormers": {
+  "face": "east",
+  "count": 3,
+  "style": "gable"
+ },
+ "keep": [
+  {
+   "from": [
+    5,
+    32,
+    12
+   ],
+   "to": [
+    11,
+    45,
+    18
+   ]
+  }
+ ],
+ "footprint": [
+  [
+   2,
+   7,
+   32,
+   22
+  ]
+ ]
+}

@@ -1,0 +1,122 @@
+[
+ {
+  "job": "JOB 1: Facade wall texture, north",
+  "kept": false,
+  "verdict": "neutral",
+  "views": [
+   "front-elevation",
+   "street"
+  ],
+  "why": "The north facade texture change is barely perceptible in the crops (slightly more varied stone tones, with no new depth, profiles or weathering) and nothing is broken, so the build is not meaningfully closer to the concept."
+ },
+ {
+  "job": "JOB 2: Side wall texture, west",
+  "kept": false,
+  "verdict": "neutral",
+  "views": [
+   "right-elevation",
+   "front-elevation"
+  ],
+  "why": "The west side wall gains only faint, scattered cracked-deepslate mottling that barely registers at this scale, with no depth or profile change and no damage to the silhouette, so it is a harmless but negligible tweak."
+ },
+ {
+  "job": "JOB 3: Lighter rubble lower storey",
+  "kept": true,
+  "verdict": "improves",
+  "views": [
+   "right-elevation",
+   "front-elevation"
+  ],
+  "why": "The lighter rubble mottling on the lower storey adds subtle cracked, weathered texture that suits the concept's aged stone base, with no change to silhouette or colour balance, though the effect is faint at this scale."
+ },
+ {
+  "job": "JOB 4: Mossy stone plinth",
+  "kept": true,
+  "verdict": "improves",
+  "views": [
+   "front-left",
+   "front-elevation"
+  ],
+  "why": "The base now has a dressed stone-brick plinth with mossy accents running along the front and side, which grounds the building and echoes the concept's weathered foundation, though the effect is subtle and the moss is sparse."
+ },
+ {
+  "job": "JOB 5: Window frames, hoods and sills, north",
+  "kept": true,
+  "verdict": "improves",
+  "views": [
+   "street",
+   "front-elevation"
+  ],
+  "why": "The north window hoods and sills add dark shaded depth and a slight projection above each window, closer to the concept's framed openings, with no clutter or silhouette damage, though the effect is small and only reads at close range."
+ },
+ {
+  "job": "JOB 6: Window frames, hoods and sills, west",
+  "kept": false,
+  "verdict": "neutral",
+  "views": [
+   "right-elevation",
+   "front-elevation"
+  ],
+  "why": "The west-side change adds only a small dark hood stub and a plank sill sticking out from the wall corner, which barely reads at elevation scale and does not add the frame, hood or sill detail the concept shows, though it does not clutter or break the silhouette."
+ },
+ {
+  "job": "JOB 7: Eave cornice",
+  "kept": false,
+  "verdict": "neutral",
+  "views": [
+   "front-elevation",
+   "street"
+  ],
+  "why": "The cornice adds a thin dark ledge line under the eave, but it's nearly invisible against the dark roof and wall and partly stripped across the pediment, so it adds little crafted depth and doesn't visibly break or improve the silhouette."
+ },
+ {
+  "job": "JOB 8: Storey belt courses",
+  "kept": false,
+  "verdict": "neutral",
+  "views": [
+   "front-elevation",
+   "street"
+  ],
+  "why": "The belt courses add only faint horizontal dark ledges at the storey lines (slightly visible at the left edge and right-hand shaft), which barely change the build, so they are neither real concept-style cornice depth nor harmful clutter."
+ },
+ {
+  "job": "JOB 9: Pilaster capitals and bases",
+  "kept": false,
+  "verdict": "neutral",
+  "views": [
+   "street",
+   "front-elevation"
+  ],
+  "why": "The before and after crops look almost identical: any pilaster capitals or bases are too subtle to read at this scale, so the build looks no more crafted and the silhouette is unbroken."
+ },
+ {
+  "job": "JOB 10: Roof edge coping",
+  "kept": false,
+  "verdict": "neutral",
+  "views": [
+   "front-left",
+   "front-elevation"
+  ],
+  "why": "The coping adds a thin dark edge line along the roof rim and a slightly darker crenellation top, but at this scale it is barely visible and neither improves the profile nor harms the silhouette."
+ },
+ {
+  "job": "JOB 11: Portico crown",
+  "kept": true,
+  "verdict": "improves",
+  "views": [
+   "front-left",
+   "street"
+  ],
+  "why": "The portico now has a stepped cornice with a toothed (dentil-like) lintel row and added depth, which reads as a crafted crown close to the concept's pediment, though a few stray white blocks on the roof top slightly mar the finish."
+ },
+ {
+  "job": "JOB 12: Portico column capitals",
+  "kept": false,
+  "verdict": "neutral",
+  "views": [
+   "front-elevation",
+   "street"
+  ],
+  "why": "The capitals add only a faint lighter band at the top of the white portico columns, and at this scale it barely changes the crisp but plain column heads, so it reads as neither clutter nor a clear step toward the concept's ornate capitals."
+ }
+]

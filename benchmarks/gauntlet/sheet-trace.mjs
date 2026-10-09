@@ -111,10 +111,14 @@ async function locateClaude(path, target) {
   const { requestTextWithImage } = await import("../../src/sdk-binding.mjs");
   const [w, h] = execFileSync("magick", [path, "-format", "%w %h", "info:"], { encoding: "utf8" }).trim().split(" ").map(Number);
   const what = target || "the FRONT ELEVATION drawing of the building (the flat, straight-on view; not the 3/4 view, not labels, not swatches), including every tower, spire, chimney, parapet and the base";
-  const r = await requestTextWithImage({
+  let r;
+  for (let attempt = 1; ; attempt++) {   // claude -p occasionally returns no result; retry a few times
+    try { r = await requestTextWithImage({
     prompt: `This image is ${w} x ${h} pixels. Give the bounding box of ${what}. Reply ONLY JSON: {"box_2d": [ymin, xmin, ymax, xmax]} normalised 0-1000.`,
     images: [{ data: readFileSync(path), mediaType: /\.png$/i.test(path) ? "image/png" : "image/jpeg" }], model: process.env.MC_LOCATE_CLAUDE || "claude-sonnet-5-5", effort: "low",
-  });
+    }); if (r.text.includes("box_2d")) break; } catch (e) { if (attempt >= 4) throw e; }
+    if (attempt >= 4) break;
+  }
   const [ymin, xmin, ymax, xmax] = JSON.parse(r.text.slice(r.text.indexOf("{"), r.text.lastIndexOf("}") + 1)).box_2d;
   return { x: Math.round(xmin / 1000 * w), y: Math.round(ymin / 1000 * h), w: Math.round((xmax - xmin) / 1000 * w), h: Math.round((ymax - ymin) / 1000 * h) };
 }
