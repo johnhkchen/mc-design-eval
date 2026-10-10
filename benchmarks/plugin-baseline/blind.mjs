@@ -1,7 +1,7 @@
 // Blind judging on existing builds: the judges never see the brief. Per build, a blind read (what is it? grades) on the
 // eye-level card, then a text-only match of the guess to the subject; per pair, a blind compare in both orders by Haiku,
 // with Sonnet (both orders) only where Haiku's two orders disagree. Scored against the owner's labels.json.
-//   node benchmarks/plugin-baseline/blind.mjs [--run baseline-1] [--subjects a,b] [--arms stock,plugin]
+//   node benchmarks/plugin-baseline/blind.mjs [--run baseline-1] [--subjects a,b] [--arms stock,plugin] [--out blind-v2] [--match]
 import { spawn } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -15,7 +15,7 @@ const opt = (k, d) => (argv.includes(k) ? argv[argv.indexOf(k) + 1] : d);
 const RUN = join(HERE, "runs", opt("--run", "baseline-1"));
 const SUBJECTS = opt("--subjects", Object.keys(ALL).join(",")).split(",");
 const [A, B] = opt("--arms", "stock,plugin").split(",");
-const OUT = join(RUN, "blind");
+const OUT = join(RUN, opt("--out", "blind-v2"));   // blind = first prompt (v1, kept); blind-v2 = describe-first + weathering
 mkdirSync(OUT, { recursive: true });
 const HAIKU = ["claude-haiku-5-5", "low"], SONNET = ["claude-sonnet-5-5", "medium"];
 const LABELS = existsSync(join(RUN, "labels.json")) ? JSON.parse(readFileSync(join(RUN, "labels.json"), "utf8")).pairs : {};
@@ -43,8 +43,8 @@ const card = (s, arm) => join(RUN, `${s}-${arm}`, "judge", "card-eye.png");
 async function read(s, arm) {
   const r = await call(`${s}-${arm}-read-haiku`, "read_blind", ["--card", card(s, arm), "--model", ...HAIKU.slice(0, 1), "--effort", HAIKU[1]]);
   const guess = r.verdict ? `${r.verdict.what} (${r.verdict.style})` : "";
-  const m = guess ? await call(`${s}-${arm}-match`, "match_guess", ["--subject", `${ALL[s].name}: ${ALL[s].what}`, "--guess", guess]) : null;
-  return { arm, what: r.verdict?.what, style: r.verdict?.style, usability: r.verdict?.usability, fit: m?.verdict?.fit, cost: r.cost + (m?.cost || 0), error: r.error || m?.error };
+  const m = guess && argv.includes("--match") ? await call(`${s}-${arm}-match`, "match_guess", ["--subject", `${ALL[s].name}: ${ALL[s].what}`, "--guess", guess]) : null;
+  return { arm, what: r.verdict?.what, style: r.verdict?.style, texture: r.verdict?.texture, usability: r.verdict?.usability, fit: m?.verdict?.fit, cost: r.cost + (m?.cost || 0), error: r.error || m?.error };
 }
 async function pair(s) {
   const both = (m, tag) => Promise.all([
@@ -63,12 +63,13 @@ const rows = await Promise.all(SUBJECTS.map(async (s) => {
     errors: [ra.error, rb.error, ...p.calls.map((c) => c.error)].filter(Boolean) };
 }));
 writeFileSync(join(OUT, "summary.json"), JSON.stringify(rows, null, 1));
-const L = [`| subject | owner | blind pick | by | ${A}: named as (fit) | ${B}: named as (fit) |`, "|---|---|---|---|---|---|"];
-for (const r of rows) L.push(`| ${r.subject} | ${r.label ?? "-"} | ${r.winner} | ${r.by} | ${r.reads[0].what} (${r.reads[0].fit}) | ${r.reads[1].what} (${r.reads[1].fit}) |`);
+const cell = (x) => `${x.what} [${x.texture}, ${x.usability}]${x.fit ? ` (${x.fit})` : ""}`;
+const L = [`| subject | owner | blind pick | by | ${A}: named as [texture, usability] | ${B}: named as [texture, usability] |`, "|---|---|---|---|---|---|"];
+for (const r of rows) L.push(`| ${r.subject} | ${r.label ?? "-"} | ${r.winner} | ${r.by} | ${cell(r.reads[0])} | ${cell(r.reads[1])} |`);
 const agree = rows.filter((r) => r.label && r.winner === r.label).length;
 const fits = (arm) => rows.map((r) => r.reads.find((x) => x.arm === arm)?.fit);
 L.push("", `Agreement with the owner: ${agree}/${rows.filter((r) => r.label).length}.`,
-  `Recognised blind (Exact or Close): ${A} ${fits(A).filter((f) => f === "Exact" || f === "Close").length}/${rows.length}, ${B} ${fits(B).filter((f) => f === "Exact" || f === "Close").length}/${rows.length}.`,
+  ...(argv.includes("--match") ? [`Recognised blind (Exact or Close): ${A} ${fits(A).filter((f) => f === "Exact" || f === "Close").length}/${rows.length}, ${B} ${fits(B).filter((f) => f === "Exact" || f === "Close").length}/${rows.length}.`] : []),
   `Cost: $${rows.reduce((t, r) => t + r.cost, 0).toFixed(3)}.`);
 writeFileSync(join(OUT, "results.md"), L.join("\n") + "\n");
 console.log(L.join("\n"));

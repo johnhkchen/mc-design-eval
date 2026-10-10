@@ -1,0 +1,212 @@
+[
+ {
+  "subject": "tea-house",
+  "label": "plugin",
+  "winner": "plugin",
+  "by": "haiku",
+  "reads": [
+   {
+    "arm": "stock",
+    "what": "an open-sided pavilion or pagoda-style hall with a stepped roof on a stone plinth",
+    "style": "Asian-inspired pavilion, stepped pagoda roof, dark timber and grey stone",
+    "texture": "Clean",
+    "usability": "NeedsWork",
+    "cost": 0.0040197
+   },
+   {
+    "arm": "plugin",
+    "what": "a Japanese-style farmhouse with a dark tiled roof and flared eaves",
+    "style": "Japanese minka or Edo-period countryside house, dark timber and tile",
+    "texture": "Weathered",
+    "usability": "NearlyUsable",
+    "cost": 0.0032043900000000005
+   }
+  ],
+  "cost": 0.013596870000000002,
+  "errors": []
+ },
+ {
+  "subject": "desert-market",
+  "label": "plugin",
+  "winner": "plugin",
+  "by": "sonnet",
+  "reads": [
+   {
+    "arm": "stock",
+    "what": "a fortified desert hall with a crenellated parapet and a central gate",
+    "style": "Desert or Old West fortified civic/saloon hall, adobe-and-sandstone",
+    "texture": "Clean",
+    "usability": "NeedsWork",
+    "cost": 0.0039062
+   },
+   {
+    "arm": "plugin",
+    "what": "a two-storey desert trading post or saloon with a striped awning and a domed tower",
+    "style": "Old West / desert adobe market town, sandstone and terracotta",
+    "texture": "Weathered",
+    "usability": "NeedsWork",
+    "cost": 0.0030973899999999998
+   }
+  ],
+  "cost": 0.13542995000000002,
+  "errors": [
+   "  File \"baml_src/ns_judge/blind_prompt.baml\", line 70, in user.judge.ComparePairBlind |   File \"baml_src/eyes.baml\", line 23, in user.<(user.ClaudeEyes as ai.Client)>.invoke |   File \"baml_src/eyes.baml\", line 118, in user.eyes_invoke | uncaught throw: ai.errors.ProviderError {provider: \"claude-eyes\", message: \"no result (exit 1)\", error_type: \"error_max_structured_output_retries\", error_code: null, raw_body: \"{\\\"type\\\":\\\"system\\\",\\\"subtype\\\":\\\"init\\\",\\\"cwd\\\":\\\"/Volumes/ext1/swe/repos/mc-design-eval/benchmarks/plugin-baseline/runs/baseline-1/blind-v2\\\",\\\"session_id\\\":\\\"855cf786-458e-4afe-8d82-60bd5c127b25\\\",\\\"tools\\\":[\\\"StructuredOutput\\\"],\\\"mcp_servers\\\":[],\\\"model\\\":\\\"claude-haiku-5-5\\\",\\\"permissionMode\\\":\\\"default\\\",\\\"slash_commands\\\":[\\\"deep-research\\\",\\\"design\\\",\\\"design-sync\\\",\\\"dataviz\\\",\\\"update-config\\\",\\\"verify\\\",\\\"debug\\\",\\\"code-review\\\",\\\"simplify\\\",\\\"batch\\\",\\\"fewer-permission-prompts\\\",\\\"doctor\\\",\\\"loop\\\",\\\"schedule\\\",\\\"claude-api\\\",\\\"workflow-authoring\\\",\\\"run\\\",\\\"run-skill-generator\\\",\\\"plugin-authoring\\\",\\\"advisor\\\",\\\"agents\\\",\\\"auto-mode-setup\\\",\\\"autocompact\\\",\\\"clear\\\",\\\"color\\\",\\\"compact\\\",\\\"config\\\",\\\"output-style\\\",\\\"context\\\",\\\"effort\\\",\\\"fast\\\",\\\"focus\\\",\\\"heapdump\\\",\\\"init\\\",\\\"mcp\\\",\\\"import\\\",\\\"model\\\",\\\"__remote-workflow\\\",\\\"workflow-launch-exec\\\",\\\"reload-plugins\\\",\\\"reload-skills\\\",\\\"rename\\\",\\\"ultrareview\\\",\\\"security-review\\\",\\\"usage-credits\\\",\\\"extra-usage\\\",\\\"usage\\\",\\\"insights\\\",\\\"recap\\\",\\\"skill-doctor\\\",\\\"goal\\\",\\\"design-consent\\\",\\\"design-revoke\\\",\\\"list-agents\\\",\\\"team-onboarding\\\"],\\\"terminal_slash_commands\\\":[\\\"doctor\\\",\\\"color\\\",\\\"focus\\\",\\\"reload-plugins\\\"],\\\"apiKeySource\\\":\\\"none\\\",\\\"claude_code_version\\\":\\\"2.1.293\\\",\\\"output_style\\\":\\\"default\\\",\\\"agents\\\":[\\\"claude\\\",\\\"Explore\\\",\\\"general-purpose\\\",\\\"Plan\\\",\\\"statusline-setup\\\"],\\\"skills\\\":[\\\"deep-research\\\",\\\"design\\\",\\\"design-sync\\\",\\\"dataviz\\\",\\\"update-config\\\",\\\"verify\\\",\\\"debug\\\",\\\"code-review\\\",\\\"simplify\\\",\\\"batch\\\",\\\"fewer-permission-prompts\\\",\\\"doctor\\\",\\\"loop\\\",\\\"schedule\\\",\\\"claude-api\\\",\\\"workflow-authoring\\\",\\\"run\\\",\\\"run-skill-generator\\\",\\\"plugin-authoring\\\"],\\\"plugins\\\":[{\\\"name\\\":\\\"cc-plugin-agents-md\\\",\\\"path\\\":\\\"builtin\\\",\\\"source\\\":\\\"cc-plugin-agents-md@builtin\\\"},{\\\"name\\\":\\\"cc-plugin-telemetry\\\",\\\"path\\\":\\\"builtin\\\",\\\"source\\\":\\\"cc-plugin-telemetry@builtin\\\"},{\\\"name\\\":\\\"cc-plugin-plugin-authoring\\\",\\\"path\\\":\\\"builtin\\\",\\\"source\\\":\\\"cc-plugin-plugin-authoring@builtin\\\"}],\\\"capabilities\\\":[\\\"interrupt_receipt_v1\\\",\\\"interrupt_cancel_queued_v1\\\",\\\"interrupt_send_now_v1\\\",\\\"msg_lifecycle_v1\\\",\\\"request_marker_lists_v1\\\",\\\"sdk_mcp_tools_list_changed\\\",\\\"sdk_mcp_manifests\\\",\\\"mcp_read_resource_v1\\\",\\\"mcp_tool_ui_meta_v1\\\",\\\"ui_sur\", status_code: null}"
+  ]
+ },
+ {
+  "subject": "stave-church",
+  "label": "plugin",
+  "winner": "plugin",
+  "by": "haiku",
+  "reads": [
+   {
+    "arm": "stock",
+    "what": "a tiered pagoda-style tower house with a stone plinth",
+    "style": "East Asian pagoda / temple tower, dark wood, Minecraft survival scale",
+    "texture": "Clean",
+    "usability": "NeedsWork",
+    "cost": 0.0040057
+   },
+   {
+    "arm": "plugin",
+    "what": "a multi-tier Japanese-style pagoda or tower, built as a tiered wooden temple",
+    "style": "East Asian pagoda / temple, dark oak with stone plinth",
+    "texture": "Weathered",
+    "usability": "NearlyUsable",
+    "cost": 0.00297489
+   }
+  ],
+  "cost": 0.01497909,
+  "errors": []
+ },
+ {
+  "subject": "lighthouse",
+  "label": "plugin",
+  "winner": "plugin",
+  "by": "sonnet",
+  "reads": [
+   {
+    "arm": "stock",
+    "what": "a striped coastal lighthouse with a timber keeper's cottage beside it",
+    "style": "classic vanilla Minecraft maritime, coastal village",
+    "texture": "Clean",
+    "usability": "NearlyUsable",
+    "cost": 0.0032748900000000004
+   },
+   {
+    "arm": "plugin",
+    "what": "a lighthouse with an attached keeper's cottage",
+    "style": "Stone-based coastal lighthouse, medieval-to-rustic village style",
+    "texture": "Weathered",
+    "usability": "NearlyUsable",
+    "cost": 0.0037382
+   }
+  ],
+  "cost": 0.14630647,
+  "errors": []
+ },
+ {
+  "subject": "wizard-tower",
+  "label": "plugin",
+  "winner": "plugin",
+  "by": "haiku",
+  "reads": [
+   {
+    "arm": "stock",
+    "what": "a stone watchtower with a stepped purple-and-slate pyramid roof",
+    "style": "medieval fantasy, mossy stone keep or watch tower",
+    "texture": "Weathered",
+    "usability": "NearlyUsable",
+    "cost": 0.00307039
+   },
+   {
+    "arm": "plugin",
+    "what": "a tiered pagoda-style watchtower with a copper spire",
+    "style": "medieval fantasy, Japanese pagoda crossed with timber-framed Tudor",
+    "texture": "Weathered",
+    "usability": "NearlyUsable",
+    "cost": 0.00716993
+   }
+  ],
+  "cost": 0.016950600000000003,
+  "errors": []
+ },
+ {
+  "subject": "glass-cafe",
+  "label": "plugin",
+  "winner": "contested",
+  "by": "sonnet",
+  "reads": [
+   {
+    "arm": "stock",
+    "what": "a black-framed glass storefront shop or saloon with checkered floor trim",
+    "style": "modern-retro commercial storefront, black and glass with a checkerboard base",
+    "texture": "Clean",
+    "usability": "NearlyUsable",
+    "cost": 0.0028048900000000004
+   },
+   {
+    "arm": "plugin",
+    "what": "a small dark modern cafe or bar pavilion with a wide cantilevered roof",
+    "style": "modern minimalist, dark-walled, with a leafy street-side terrace",
+    "texture": "Clean",
+    "usability": "NearlyUsable",
+    "cost": 0.0030583900000000002
+   }
+  ],
+  "cost": 0.15340691999999997,
+  "errors": []
+ },
+ {
+  "subject": "red-barn",
+  "label": "plugin",
+  "winner": "plugin",
+  "by": "sonnet",
+  "reads": [
+   {
+    "arm": "stock",
+    "what": "a red-brick gabled market hall with a stepped-gable front",
+    "style": "medieval/Flemish-inspired civic hall, red brick with stone plinth and timber-look corners",
+    "texture": "Clean",
+    "usability": "NearlyUsable",
+    "cost": 0.0033628900000000003
+   },
+   {
+    "arm": "plugin",
+    "what": "a red barn with white corner trim, stone plinth and a dark slate roof, with a stepped gable front",
+    "style": "rustic farmhouse / American red barn, with a stepped-gable, castle-like crest on the front",
+    "texture": "Clean",
+    "usability": "NearlyUsable",
+    "cost": 0.0029078899999999998
+   }
+  ],
+  "cost": 0.1421268,
+  "errors": []
+ },
+ {
+  "subject": "steampunk-workshop",
+  "label": "plugin",
+  "winner": "stock",
+  "by": "haiku",
+  "reads": [
+   {
+    "arm": "stock",
+    "what": "a brick Flemish-style townhouse or warehouse with a stepped gable",
+    "style": "Low-Countries brick, Dutch/Flemish stepped-gable townhouse",
+    "texture": "Clean",
+    "usability": "NeedsWork",
+    "cost": 0.00324439
+   },
+   {
+    "arm": "plugin",
+    "what": "a brick tavern or frontier saloon with a stone plinth",
+    "style": "rustic frontier brick with stone base and green copper-style trim",
+    "texture": "Damaged",
+    "usability": "Rough",
+    "cost": 0.00335389
+   }
+  ],
+  "cost": 0.01316056,
+  "errors": []
+ }
+]
