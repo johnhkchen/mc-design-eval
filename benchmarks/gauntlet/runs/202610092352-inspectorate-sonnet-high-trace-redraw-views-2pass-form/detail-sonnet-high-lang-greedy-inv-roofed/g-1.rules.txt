@@ -1,0 +1,7 @@
+
+## JOB 1: Fascia sign PERMIT OFFICE (clean quartz band, gold lettering pixels)
+# sign face is only 2 rows (y7-8) x 8 cols (x9-16); a 3-tall 12-wide board does not fit, so a 2-row board with a gold letter band
+north row 7 cols 9-16 -> smooth_quartz force
+north rows 7-8 cols 10-15 -> checker raw_gold_block,smooth_quartz force
+# side return of the sign: the west corner band is a plain run, no separate sign face to return on
+

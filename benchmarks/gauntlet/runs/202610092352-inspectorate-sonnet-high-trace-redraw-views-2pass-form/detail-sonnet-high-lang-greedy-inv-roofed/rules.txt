@@ -1,0 +1,142 @@
+## JOB 1: Fascia sign PERMIT OFFICE (clean quartz band, gold lettering pixels)
+# sign face is only 2 rows (y7-8) x 8 cols (x9-16); a 3-tall 12-wide board does not fit, so a 2-row board with a gold letter band
+north row 7 cols 9-16 -> smooth_quartz force
+north rows 7-8 cols 10-15 -> checker raw_gold_block,smooth_quartz force
+# side return of the sign: the west corner band is a plain run, no separate sign face to return on
+
+## JOB 2: Cyan end caps of the fascia sign
+north rows 7-8 cols 8,17 -> light_blue_concrete force
+north row 9 cols 8,17 -> cyan_terracotta force
+
+## JOB 3: Plaque INSPECTORATE (stone tablet, dark lettering)
+north row 14 cols 10-15 -> smooth_stone force
+north row 13 cols 10-15 -> alt polished_blackstone/smooth_stone force
+
+## JOB 4: Square-boss end blocks of plaque and pier feet
+north rows 13-14 cols 9,16 -> chiseled_polished_blackstone force
+north row 9 cols 1-2,23-24 -> chiseled_stone_bricks force
+
+## JOB 5: Gold cross emblem in the pediment
+north rows 16-18 cols 12-13 -> gold_block force
+north row 17 cols 11,14 -> gold_block force
+
+## JOB 6: Stepped raking cornice of the pediment
+# the build already carries the stepped stone_brick_stairs raking line up both slopes: kept as is
+north row 16 cols 8,17 -> chiseled_stone_bricks force
+
+## JOB 7: Roof-corner and pediment-foot finials
+roof x 7,18 z 3 -> finial stone_brick_wall+stone_brick_wall+mossy_stone_brick_wall+stone_brick_slab
+roof x 1,24 z 3 -> finial stone_brick_wall+mossy_stone_brick_wall+stone_brick_slab
+roof x 1,24 z 24 -> finial stone_brick_wall+mossy_stone_brick_wall+stone_brick_slab
+
+## JOB 9: Hanging lanterns on the upper corner piers
+north row 11 cols 2,23 -> attach lantern
+
+## JOB 10: Ground-floor corner lamp-bracket arms
+north row 7 cols 1,24 -> attach lantern polished_blackstone_wall
+
+## JOB 11: Teal banners at the corners
+north rows 4-5 cols 1,24 -> cyan_wall_banner out 1
+
+## JOB 12: Copper downpipes beside the corner banners
+north rows 3-5 cols 3,22 -> waxed_exposed_copper out 1
+
+## JOB 13: Wall lanterns on the ground-floor piers
+north row 5 cols 9,16 -> attach lantern polished_blackstone_wall
+
+## JOB 14: Hanging lanterns inside the arches
+north row 7 cols 5,20 -> chain force
+north row 6 cols 5,20 -> lantern hanging=true force
+north row 6 cols 12 -> lantern hanging=true force
+
+## JOB 15: Stepped corbelled arches over the shopfront bays
+north row 7 cols 4,18 -> smooth_quartz_stairs top right force
+north row 7 cols 7,21 -> smooth_quartz_stairs top left force
+north row 6 cols 10 -> smooth_quartz_stairs top right force
+north row 6 cols 15 -> smooth_quartz_stairs top left force
+
+## JOB 16: Shopfront mullion grid
+north row 5 cols 4-7,10-11,14-15,18-21 where glass -> light_blue_stained_glass force
+
+## JOB 17: Double door with transom
+north row 5 cols 12-13 -> glass_pane force
+
+## JOB 18: Entrance steps nosed with stairs
+# steps already read as two quartz treads; stair nosing rendered as gaps, so left unchanged
+
+## JOB 19: Potted shrubs and topiary
+# the build already has azalea planters either side of the door and at the corners: kept; add white flowers on them
+north row 3 cols 9,16 -> mix 1/2 oxeye_daisy
+
+## JOB 20: Stone planter ledges before the shop windows
+north row 2 cols 4-7,18-21 -> stone_brick_slab out 1 force
+
+## JOB 21: Filing cabinet with scattered papers
+north rows 1-2 col 18 -> barrel out 1
+north row 1 cols 20,22 -> white_carpet out 1
+
+## JOB 22: Interior furnishings
+# the shop interior is behind the glass and can only be reached by writing outward from the face: skipped
+
+## JOB 23: Plinth / base course
+all faces ground row -> plinth deepslate_bricks 2
+
+## JOB 24: Paving apron
+north row 0 -> vary 0.2
+
+## JOB 25: Moss and cracked weathering
+all faces rows 0-3 where deepslate_bricks -> weather 0.35
+all faces rows 15-24 where stone_bricks -> vary 0.1
+
+## JOB 26: Upper-storey window frames with transom bars
+north row 11 cols 5-6,10-11,14-15,19-20 -> oak_fence force
+west row 11 cols 8-9,14-15,20-21 -> oak_fence force
+
+## JOB 27: Dark pilasters flanking the upper windows
+north rows 10-12 cols 4,7,18,21 -> polished_deepslate_wall out 1
+
+## JOB 28: Window hoods
+north rows 10-12 cols 4-7,18-21 openings -> lintels hood stone_brick_stairs
+west rows 10-12 openings -> lintels hood stone_brick_stairs
+
+## JOB 29: Stone window sills with corbels
+north rows 10-12 openings -> sills stone_brick_slab
+west rows 10-12 openings -> sills stone_brick_slab
+
+## JOB 30: Window boxes with flowers
+north row 10 cols 5-6,10-11,14-15,19-20 -> flowering_azalea out 1
+
+## JOB 31: Louvred shutters
+north rows 10-12 cols 19-20 -> louvres oak_trapdoor vertical
+west rows 10-12 cols 8-9 -> louvres oak_trapdoor vertical
+
+## JOB 32: Timber piers with bracket caps
+north row 13 cols 2,23 -> oak_stairs top out 1 force
+
+## JOB 33: Slim mossy downpipe strips
+north rows 10-13 cols 3,22 -> mossy_stone_brick_wall out 1
+
+## JOB 34: Dentil row under the eave
+# the dentil frieze (stairs alternating with stripped oak) already runs on row 14: kept as is
+
+## JOB 35: Overhanging stone cornice
+all faces row 15 -> cornice stepped stone_bricks
+
+## JOB 36: Corner eave brackets
+north row 13 cols 1,24 -> oak_slab top out 1 force
+
+## JOB 37: Belt course between storeys
+all faces row 9 -> cornice simple polished_andesite
+
+## JOB 38: Side-return arcade posts
+west rows 3-7 where dark_oak_planks -> stripped_dark_oak_log axis=y
+
+## JOB 39: Roof edge coping
+roof wall tops -> coping slab stone_brick_slab
+
+## JOB 40: Chimney with copper cap
+roof where copper_block -> clear force
+then
+roof x 3-4 z 21-22 -> stone_bricks out 4 force
+then
+roof x 3-4 z 21-22 topmost -> orange_terracotta force

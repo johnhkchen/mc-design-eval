@@ -1,0 +1,74 @@
+
+## JOB 1: Fascia sign PERMIT OFFICE (clean quartz band, gold lettering pixels)
+# sign face is only 2 rows (y7-8) x 8 cols (x9-16); a 3-tall 12-wide board does not fit, so a 2-row board with a gold letter band
+north row 7 cols 9-16 -> smooth_quartz force
+north rows 7-8 cols 10-15 -> checker raw_gold_block,smooth_quartz force
+# side return of the sign: the west corner band is a plain run, no separate sign face to return on
+
+
+## JOB 2: Cyan end caps of the fascia sign
+north rows 7-8 cols 8,17 -> light_blue_concrete force
+north row 9 cols 8,17 -> cyan_terracotta force
+
+
+## JOB 4: Square-boss end blocks of plaque and pier feet
+north rows 13-14 cols 9,16 -> chiseled_polished_blackstone force
+north row 9 cols 1-2,23-24 -> chiseled_stone_bricks force
+
+
+## JOB 5: Gold cross emblem in the pediment
+north rows 16-18 cols 12-13 -> gold_block force
+north row 17 cols 11,14 -> gold_block force
+
+
+## JOB 6: Stepped raking cornice of the pediment
+# the build already carries the stepped stone_brick_stairs raking line up both slopes: kept as is
+north row 16 cols 8,17 -> chiseled_stone_bricks force
+
+
+## JOB 9: Hanging lanterns on the upper corner piers
+north row 11 cols 2,23 -> attach lantern
+
+
+## JOB 10: Ground-floor corner lamp-bracket arms
+north row 7 cols 1,24 -> attach lantern polished_blackstone_wall
+
+
+## JOB 14: Hanging lanterns inside the arches
+north row 7 cols 5,20 -> chain force
+north row 6 cols 5,20 -> lantern hanging=true force
+north row 6 cols 12 -> lantern hanging=true force
+
+
+## JOB 21: Filing cabinet with scattered papers
+north rows 1-2 col 18 -> barrel out 1
+north row 1 cols 20,22 -> white_carpet out 1
+
+
+## JOB 23: Plinth / base course
+all faces ground row -> plinth deepslate_bricks 2
+
+
+## JOB 26: Upper-storey window frames with transom bars
+north row 11 cols 5-6,10-11,14-15,19-20 -> oak_fence force
+west row 11 cols 8-9,14-15,20-21 -> oak_fence force
+
+
+## JOB 28: Window hoods
+north rows 10-12 cols 4-7,18-21 openings -> lintels hood stone_brick_stairs
+west rows 10-12 openings -> lintels hood stone_brick_stairs
+
+
+## JOB 29: Stone window sills with corbels
+north rows 10-12 openings -> sills stone_brick_slab
+west rows 10-12 openings -> sills stone_brick_slab
+
+
+## JOB 30: Window boxes with flowers
+north row 10 cols 5-6,10-11,14-15,19-20 -> flowering_azalea out 1
+
+
+## JOB 31: Louvred shutters
+north rows 10-12 cols 19-20 -> louvres oak_trapdoor vertical
+west rows 10-12 cols 8-9 -> louvres oak_trapdoor vertical
+

@@ -1,0 +1,33 @@
+
+## JOB 1: Fascia sign PERMIT OFFICE (clean quartz band, gold lettering pixels)
+# sign face is only 2 rows (y7-8) x 8 cols (x9-16); a 3-tall 12-wide board does not fit, so a 2-row board with a gold letter band
+north row 7 cols 9-16 -> smooth_quartz force
+north rows 7-8 cols 10-15 -> checker raw_gold_block,smooth_quartz force
+# side return of the sign: the west corner band is a plain run, no separate sign face to return on
+
+
+## JOB 2: Cyan end caps of the fascia sign
+north rows 7-8 cols 8,17 -> light_blue_concrete force
+north row 9 cols 8,17 -> cyan_terracotta force
+
+
+## JOB 4: Square-boss end blocks of plaque and pier feet
+north rows 13-14 cols 9,16 -> chiseled_polished_blackstone force
+north row 9 cols 1-2,23-24 -> chiseled_stone_bricks force
+
+
+## JOB 5: Gold cross emblem in the pediment
+north rows 16-18 cols 12-13 -> gold_block force
+north row 17 cols 11,14 -> gold_block force
+
+
+## JOB 6: Stepped raking cornice of the pediment
+# the build already carries the stepped stone_brick_stairs raking line up both slopes: kept as is
+north row 16 cols 8,17 -> chiseled_stone_bricks force
+
+
+## JOB 7: Roof-corner and pediment-foot finials
+roof x 7,18 z 3 -> finial stone_brick_wall+stone_brick_wall+mossy_stone_brick_wall+stone_brick_slab
+roof x 1,24 z 3 -> finial stone_brick_wall+mossy_stone_brick_wall+stone_brick_slab
+roof x 1,24 z 24 -> finial stone_brick_wall+mossy_stone_brick_wall+stone_brick_slab
+

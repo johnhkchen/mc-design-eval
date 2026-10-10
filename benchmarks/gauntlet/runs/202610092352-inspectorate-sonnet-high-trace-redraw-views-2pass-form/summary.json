@@ -1,0 +1,115 @@
+{
+ "runId": "202610092352-inspectorate-sonnet-high-trace-redraw-views-2pass-form",
+ "subject": "inspectorate",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-2",
+ "why": "B's side elevation carries the reference's timber-framed upper storey with windows and a cream ground floor with openings, and it adds the chimney, while A's side is a blank dark slab, so B matches the form and materials better and is more crafted.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 3.1206086,
+ "durationMs": 1263351,
+ "stages": [
+  {
+   "n": "concept chosen",
+   "s": 0,
+   "from": "benchmarks/charter-row/concepts/inspectorate/cx-c1.png"
+  },
+  {
+   "n": "redraw",
+   "s": 68,
+   "attempt": 3,
+   "cols": 26,
+   "rows": 19,
+   "score": 50.5,
+   "box": {
+    "x": 157,
+    "y": 30.031578947368423,
+    "w": 1238,
+    "h": 953
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw",
+   "s": 81,
+   "attempt": 2,
+   "cols": 28,
+   "rows": 19,
+   "score": 52.8,
+   "box": {
+    "x": 224,
+    "y": 52.67368421052632,
+    "w": 1103,
+    "h": 919
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw",
+   "s": 105,
+   "attempt": 1,
+   "cols": 26,
+   "rows": 18,
+   "score": 63.2,
+   "box": {
+    "x": 51,
+    "y": 29.8,
+    "w": 1447,
+    "h": 972
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw pick",
+   "s": 105,
+   "attempt": 3,
+   "cols": 26,
+   "rows": 19,
+   "score": 50.5
+  },
+  {
+   "n": "trace",
+   "s": 105,
+   "cols": 26,
+   "rows": 19,
+   "scale": 1,
+   "box": {
+    "x": 157,
+    "y": 30.031578947368423,
+    "w": 1238,
+    "h": 953
+   }
+  },
+  {
+   "n": "views",
+   "s": 203,
+   "side": "39x31",
+   "depth": "37x27"
+  },
+  {
+   "n": "spec",
+   "s": 263
+  },
+  {
+   "n": "pass 1 (front)",
+   "s": 921,
+   "turns": 23,
+   "cost": 1.6634722000000002
+  },
+  {
+   "n": "pass 2 (sides, back, roof)",
+   "s": 1256,
+   "turns": 20,
+   "cost": 1.0019424
+  },
+  {
+   "n": "keep-better",
+   "s": 1263,
+   "kept": "round-2",
+   "why": "B's side elevation carries the reference's timber-framed upper storey with windows and a cream ground floor with openings, and it adds the chimney, while A's side is a blank dark slab, so B matches the form and materials better and is more crafted."
+  }
+ ]
+}
