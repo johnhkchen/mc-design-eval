@@ -1,0 +1,15 @@
+{"owner":"11/12","owner-free":"8/12","laterWins":"5/12"}
+q8 desert-market       v2old/v2         owner A    owner=A owner-free=A later=B | collection final: before vs after the roof overhaul
+q14 parisian            iterated/plugin  owner A    owner=A owner-free=A later=A | fresh: plugin one-shot vs after 2 feedback rounds
+q9 lighthouse          v2old/v2         owner A    owner=A owner-free=A later=B | collection final: before vs after the roof overhaul
+q4 red-barn            v2/v1            owner B    owner=B owner-free=B later=A | collection: first build vs after improvement tasks
+q12 parisian            stock/plugin     owner B    owner=B owner-free=B later=B | fresh: stock vs plugin one-shot
+q13 parisian            iterated/stock   owner A    owner=A owner-free=A later=A | fresh: stock vs plugin + 2 feedback rounds
+q10 stave-church        v2old/v2         owner B    owner=B owner-free=A later=B | collection final: before vs after the roof overhaul
+q2 glass-cafe          v1/v2            owner A    owner=A owner-free=B later=B | collection: first build vs after improvement tasks
+q1 desert-market       v1/v2            owner A    owner=A owner-free=A later=B | collection: first build vs after improvement tasks
+q6 steampunk-workshop  v1/v2            owner A    owner=A owner-free=A later=B | collection: first build vs after improvement tasks
+q11 tea-house           v2/v2old         owner B    owner=A owner-free=A later=A | collection final: before vs after the roof overhaul
+q3 lighthouse          v1/v2            owner B    owner=B owner-free=A later=B | collection: first build vs after improvement tasks
+q7 tea-house           v2/v1            owner tie  owner=A owner-free=A later=A | collection: first build vs after improvement tasks
+q5 stave-church        v2/v1            owner tie  owner=A owner-free=tie later=A | collection: first build vs after improvement tasks
