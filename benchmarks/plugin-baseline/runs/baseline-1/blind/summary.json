@@ -1,0 +1,210 @@
+[
+ {
+  "subject": "tea-house",
+  "label": "plugin",
+  "winner": "plugin",
+  "by": "haiku",
+  "reads": [
+   {
+    "arm": "stock",
+    "what": "an open-sided wooden pavilion on a stone plinth, with a stepped hip roof and lanterns",
+    "style": "East Asian-inspired pavilion, or a market shelter / pagoda-style hall",
+    "usability": "NeedsWork",
+    "fit": "Close",
+    "cost": 0.0065808
+   },
+   {
+    "arm": "plugin",
+    "what": "a Japanese-style teahouse or townhouse with a layered dark-tile roof",
+    "style": "Japanese traditional, Edo-era wooden house with a stone plinth",
+    "usability": "NeedsWork",
+    "fit": "Exact",
+    "cost": 0.0065386
+   }
+  ],
+  "cost": 0.0205568,
+  "errors": []
+ },
+ {
+  "subject": "desert-market",
+  "label": "plugin",
+  "winner": "plugin",
+  "by": "haiku",
+  "reads": [
+   {
+    "arm": "stock",
+    "what": "a walled desert trading post with a crenellated sandstone parapet and a central entrance portal",
+    "style": "Old West / desert fort-market, sandstone and terracotta",
+    "usability": "NeedsWork",
+    "fit": "Close",
+    "cost": 0.00517114
+   },
+   {
+    "arm": "plugin",
+    "what": "a desert trading post with a striped awning",
+    "style": "sandstone desert bazaar, Old West market",
+    "usability": "NeedsWork",
+    "fit": "Exact",
+    "cost": 0.00509274
+   }
+  ],
+  "cost": 0.01639798,
+  "errors": []
+ },
+ {
+  "subject": "stave-church",
+  "label": "plugin",
+  "winner": "plugin",
+  "by": "haiku",
+  "reads": [
+   {
+    "arm": "stock",
+    "what": "a tiered pagoda-style tower on a stone plinth",
+    "style": "East Asian pagoda, stepped timber-style tower",
+    "usability": "NeedsWork",
+    "fit": "Close",
+    "cost": 0.00503874
+   },
+   {
+    "arm": "plugin",
+    "what": "a tiered Japanese pagoda-style tower with a stone plinth and a tall central mast",
+    "style": "East Asian pagoda / Japanese castle keep, dark timber",
+    "usability": "NeedsWork",
+    "fit": "Close",
+    "cost": 0.0051722400000000016
+   }
+  ],
+  "cost": 0.01661158,
+  "errors": []
+ },
+ {
+  "subject": "lighthouse",
+  "label": "plugin",
+  "winner": "plugin",
+  "by": "sonnet",
+  "reads": [
+   {
+    "arm": "stock",
+    "what": "a lighthouse with an attached keeper's cottage",
+    "style": "New England coastal, red-and-white striped lighthouse on a grassy islet",
+    "usability": "NeedsWork",
+    "fit": "Exact",
+    "cost": 0.0048372400000000005
+   },
+   {
+    "arm": "plugin",
+    "what": "a striped lighthouse with an attached stone keeper's cottage",
+    "style": "medieval-coastal, stone-and-plaster lighthouse",
+    "usability": "NeedsWork",
+    "fit": "Exact",
+    "cost": 0.005164740000000001
+   }
+  ],
+  "cost": 0.13440408,
+  "errors": []
+ },
+ {
+  "subject": "wizard-tower",
+  "label": "plugin",
+  "winner": "plugin",
+  "by": "haiku",
+  "reads": [
+   {
+    "arm": "stock",
+    "what": "a stone watchtower with a pagoda-style pointed roof",
+    "style": "medieval-fantasy, mossy stone with purple accent trim",
+    "usability": "NeedsWork",
+    "fit": "Close",
+    "cost": 0.004853240000000001
+   },
+   {
+    "arm": "plugin",
+    "what": "a stone-and-timber watchtower with a teal roof",
+    "style": "medieval fantasy, stone base with timber-framed upper floors",
+    "usability": "NeedsWork",
+    "fit": "Close",
+    "cost": 0.005134340000000001
+   }
+  ],
+  "cost": 0.01615868,
+  "errors": []
+ },
+ {
+  "subject": "glass-cafe",
+  "label": "plugin",
+  "winner": "plugin",
+  "by": "sonnet",
+  "reads": [
+   {
+    "arm": "stock",
+    "what": "a single-storey black-and-white storefront shop with a tiled base",
+    "style": "mid-century modern commercial, monochrome black/white/grey",
+    "usability": "NeedsWork",
+    "fit": "Close",
+    "cost": 0.005121240000000001
+   },
+   {
+    "arm": "plugin",
+    "what": "a small modern cafe or kiosk with a flat overhanging roof",
+    "style": "modern minimal, black and dark wood on a stone plinth",
+    "usability": "NeedsWork",
+    "fit": "Exact",
+    "cost": 0.0050792400000000005
+   }
+  ],
+  "cost": 0.15622558,
+  "errors": []
+ },
+ {
+  "subject": "red-barn",
+  "label": "plugin",
+  "winner": "plugin",
+  "by": "sonnet",
+  "reads": [
+   {
+    "arm": "stock",
+    "what": "a red-brick-and-timber merchant house with a gabled front and a small porch",
+    "style": "medieval/Tudor-ish village house, red plaster with stone plinth and dark wood roof",
+    "usability": "NeedsWork",
+    "fit": "Kind",
+    "cost": 0.0049939400000000005
+   },
+   {
+    "arm": "plugin",
+    "what": "a medieval tavern hall with a crenellated gable front",
+    "style": "medieval fantasy inn / fortified hall",
+    "usability": "NeedsWork",
+    "fit": "Close",
+    "cost": 0.00520784
+   }
+  ],
+  "cost": 0.15624788,
+  "errors": []
+ },
+ {
+  "subject": "steampunk-workshop",
+  "label": "plugin",
+  "winner": "stock",
+  "by": "haiku",
+  "reads": [
+   {
+    "arm": "stock",
+    "what": "a brick cottage with a green-tiled roof and a tall chimney",
+    "style": "Northern European / Dutch-style brick townhouse, plain vernacular",
+    "usability": "NeedsWork",
+    "fit": "Kind",
+    "cost": 0.004913540000000001
+   },
+   {
+    "arm": "plugin",
+    "what": "a brick-and-stone frontier tavern with a wide open doorway",
+    "style": "rustic brick frontier, Old West saloon feel",
+    "usability": "Rough",
+    "fit": "Kind",
+    "cost": 0.00530164
+   }
+  ],
+  "cost": 0.01627628,
+  "errors": []
+ }
+]
