@@ -1,0 +1,6 @@
+{
+  "_doc": "Which CLI answers each BAML function (BAML renders the prompt and parses the reply; the CLI only answers). provider: claude (claude -p, Claude plan) | codex (codex exec, ChatGPT plan). fallback is tried if the first fails.",
+  "JudgeGlance":  { "provider": "claude", "model": "claude-opus-5-5",   "fallback": { "provider": "codex" } },
+  "ReviewChange": { "provider": "claude", "model": "claude-sonnet-5-5", "effort": "low", "fallback": { "provider": "codex" } },
+  "default":      { "provider": "claude", "model": "claude-sonnet-5-5", "fallback": { "provider": "codex" } }
+}
