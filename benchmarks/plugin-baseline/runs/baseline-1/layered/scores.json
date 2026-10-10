@@ -1,0 +1,754 @@
+{
+ "score": {
+  "tea-house-stock": {
+   "l0": {
+    "blocks": 632,
+    "kinds": 12,
+    "detailShare": 0.369,
+    "floating": 0,
+    "orphans": [
+     {
+      "pos": [
+       5,
+       10,
+       5
+      ],
+      "block": "dark_oak_planks",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       7,
+       10,
+       5
+      ],
+      "block": "dark_oak_planks",
+      "attached": "sticks out sideways"
+     }
+    ],
+    "largestFlat": 13,
+    "paletteFlags": 4,
+    "valid": true
+   },
+   "type": [
+    "open-sided pagoda-style pavilion",
+    "Dark wooden pavilion on stone base"
+   ],
+   "placeable": -2.5,
+   "crafted": 8,
+   "collection": 5.5,
+   "characterful": 5.5
+  },
+  "tea-house-plugin": {
+   "l0": {
+    "blocks": 762,
+    "kinds": 26,
+    "detailShare": 0.234,
+    "floating": 0,
+    "orphans": [],
+    "largestFlat": 30,
+    "paletteFlags": 4,
+    "valid": true
+   },
+   "type": [
+    "Japanese-style dark-roof house",
+    "Japanese-style dark-roof house"
+   ],
+   "placeable": -1.5,
+   "crafted": 8.75,
+   "collection": 7.25,
+   "characterful": 9.25
+  },
+  "desert-market-stock": {
+   "l0": {
+    "blocks": 1111,
+    "kinds": 22,
+    "detailShare": 0.106,
+    "floating": 0,
+    "orphans": [],
+    "largestFlat": 194,
+    "paletteFlags": 7,
+    "valid": false
+   },
+   "type": [
+    "Walled desert hall with gate",
+    "Fortified stone hall with entrance"
+   ],
+   "placeable": -7,
+   "crafted": 4.5,
+   "collection": -2.5,
+   "characterful": -2.5
+  },
+  "desert-market-plugin": {
+   "l0": {
+    "blocks": 1160,
+    "kinds": 22,
+    "detailShare": 0.103,
+    "floating": 0,
+    "orphans": [
+     {
+      "pos": [
+       2,
+       4,
+       15
+      ],
+      "block": "stripped_spruce_log",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       4,
+       4,
+       15
+      ],
+      "block": "stripped_spruce_log",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       6,
+       4,
+       15
+      ],
+      "block": "stripped_spruce_log",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       8,
+       4,
+       15
+      ],
+      "block": "stripped_spruce_log",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       10,
+       4,
+       15
+      ],
+      "block": "stripped_spruce_log",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       12,
+       4,
+       15
+      ],
+      "block": "stripped_spruce_log",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       14,
+       4,
+       15
+      ],
+      "block": "stripped_spruce_log",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       16,
+       4,
+       15
+      ],
+      "block": "stripped_spruce_log",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       0,
+       4,
+       3
+      ],
+      "block": "stripped_spruce_log",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       18,
+       4,
+       3
+      ],
+      "block": "stripped_spruce_log",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       0,
+       4,
+       5
+      ],
+      "block": "stripped_spruce_log",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       18,
+       4,
+       5
+      ],
+      "block": "stripped_spruce_log",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       0,
+       4,
+       7
+      ],
+      "block": "stripped_spruce_log",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       18,
+       4,
+       7
+      ],
+      "block": "stripped_spruce_log",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       0,
+       4,
+       9
+      ],
+      "block": "stripped_spruce_log",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       18,
+       4,
+       9
+      ],
+      "block": "stripped_spruce_log",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       0,
+       4,
+       11
+      ],
+      "block": "stripped_spruce_log",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       18,
+       4,
+       11
+      ],
+      "block": "stripped_spruce_log",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       0,
+       4,
+       13
+      ],
+      "block": "stripped_spruce_log",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       18,
+       4,
+       13
+      ],
+      "block": "stripped_spruce_log",
+      "attached": "sticks out sideways"
+     }
+    ],
+    "largestFlat": 104,
+    "paletteFlags": 4,
+    "valid": true
+   },
+   "type": [
+    "Desert market shop with awning",
+    "sandstone market hall with awnings"
+   ],
+   "placeable": -3,
+   "crafted": 8.75,
+   "collection": 5.75,
+   "characterful": 6
+  },
+  "stave-church-stock": {
+   "l0": {
+    "blocks": 1015,
+    "kinds": 8,
+    "detailShare": 0.354,
+    "floating": 0,
+    "orphans": [
+     {
+      "pos": [
+       6,
+       8,
+       14
+      ],
+      "block": "spruce_planks",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       6,
+       8,
+       16
+      ],
+      "block": "spruce_planks",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       6,
+       22,
+       6
+      ],
+      "block": "spruce_planks",
+      "attached": "dangles from above"
+     }
+    ],
+    "largestFlat": 44,
+    "paletteFlags": 4,
+    "valid": true
+   },
+   "type": [
+    "Pagoda-style wooden tower",
+    "Tiered pagoda-style tower"
+   ],
+   "placeable": -0.5,
+   "crafted": 10,
+   "collection": 9.5,
+   "characterful": 9.5
+  },
+  "stave-church-plugin": {
+   "l0": {
+    "blocks": 1696,
+    "kinds": 18,
+    "detailShare": 0.265,
+    "floating": 0,
+    "orphans": [],
+    "largestFlat": 35,
+    "paletteFlags": 11,
+    "valid": true
+   },
+   "type": [
+    "Japanese-style multi-tier pagoda",
+    "Tiered pagoda-style temple"
+   ],
+   "placeable": -1.75,
+   "crafted": 11,
+   "collection": 9.25,
+   "characterful": 11.56
+  },
+  "lighthouse-stock": {
+   "l0": {
+    "blocks": 1928,
+    "kinds": 26,
+    "detailShare": 0.174,
+    "floating": 0,
+    "orphans": [
+     {
+      "pos": [
+       6,
+       13,
+       12
+      ],
+      "block": "white_concrete",
+      "attached": "dangles from above"
+     },
+     {
+      "pos": [
+       6,
+       13,
+       16
+      ],
+      "block": "white_concrete",
+      "attached": "dangles from above"
+     },
+     {
+      "pos": [
+       10,
+       13,
+       12
+      ],
+      "block": "white_concrete",
+      "attached": "dangles from above"
+     },
+     {
+      "pos": [
+       10,
+       13,
+       16
+      ],
+      "block": "white_concrete",
+      "attached": "dangles from above"
+     },
+     {
+      "pos": [
+       16,
+       9,
+       7
+      ],
+      "block": "dark_oak_slab",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       22,
+       4,
+       5
+      ],
+      "block": "cobblestone",
+      "attached": "dangles from above"
+     },
+     {
+      "pos": [
+       26,
+       9,
+       7
+      ],
+      "block": "dark_oak_slab",
+      "attached": "sticks out sideways"
+     }
+    ],
+    "largestFlat": 373,
+    "paletteFlags": 2,
+    "valid": true
+   },
+   "type": [
+    "lighthouse with keeper's cottage",
+    "Lighthouse with cottage"
+   ],
+   "placeable": -2.5,
+   "crafted": 8.5,
+   "collection": 6,
+   "characterful": 7
+  },
+  "lighthouse-plugin": {
+   "l0": {
+    "blocks": 1534,
+    "kinds": 28,
+    "detailShare": 0.093,
+    "floating": 0,
+    "orphans": [
+     {
+      "pos": [
+       12,
+       0,
+       14
+      ],
+      "block": "stone",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       13,
+       0,
+       0
+      ],
+      "block": "mossy_cobblestone",
+      "attached": "sticks out sideways"
+     }
+    ],
+    "largestFlat": 48,
+    "paletteFlags": 2,
+    "valid": true
+   },
+   "type": [
+    "lighthouse with stone base",
+    "lighthouse with stone base"
+   ],
+   "placeable": -2,
+   "crafted": 9,
+   "collection": 7,
+   "characterful": 9.25
+  },
+  "wizard-tower-stock": {
+   "l0": {
+    "blocks": 1756,
+    "kinds": 24,
+    "detailShare": 0.036,
+    "floating": 0,
+    "orphans": [
+     {
+      "pos": [
+       7,
+       0,
+       14
+      ],
+      "block": "stone_bricks",
+      "attached": "sticks out sideways"
+     }
+    ],
+    "largestFlat": 20,
+    "paletteFlags": 2,
+    "valid": true
+   },
+   "type": [
+    "Stone watchtower with pointed roof",
+    "stone tower with stepped roof"
+   ],
+   "placeable": -1,
+   "crafted": 8,
+   "collection": 7,
+   "characterful": 9.25
+  },
+  "wizard-tower-plugin": {
+   "l0": {
+    "blocks": 1403,
+    "kinds": 27,
+    "detailShare": 0.07,
+    "floating": 0,
+    "orphans": [],
+    "largestFlat": 0,
+    "paletteFlags": 3,
+    "valid": true
+   },
+   "type": [
+    "stone tower with timber balconies",
+    "stone tower with timber balconies"
+   ],
+   "placeable": -1.75,
+   "crafted": 10.5,
+   "collection": 8.75,
+   "characterful": 11.56
+  },
+  "glass-cafe-stock": {
+   "l0": {
+    "blocks": 619,
+    "kinds": 17,
+    "detailShare": 0.149,
+    "floating": 0,
+    "orphans": [],
+    "largestFlat": 111,
+    "paletteFlags": 3,
+    "valid": true
+   },
+   "type": [
+    "Black-pillared glass storefront shop",
+    "glass-front shop with checkered base"
+   ],
+   "placeable": -2,
+   "crafted": 5.5,
+   "collection": 3.5,
+   "characterful": 3.5
+  },
+  "glass-cafe-plugin": {
+   "l0": {
+    "blocks": 875,
+    "kinds": 20,
+    "detailShare": 0.077,
+    "floating": 0,
+    "orphans": [],
+    "largestFlat": 130,
+    "paletteFlags": 3,
+    "valid": true
+   },
+   "type": [
+    "black cafe with wood roof",
+    "Black cafe with overhang"
+   ],
+   "placeable": -1.5,
+   "crafted": 7.5,
+   "collection": 6,
+   "characterful": 7.38
+  },
+  "red-barn-stock": {
+   "l0": {
+    "blocks": 1050,
+    "kinds": 13,
+    "detailShare": 0.31,
+    "floating": 0,
+    "orphans": [
+     {
+      "pos": [
+       6,
+       13,
+       2
+      ],
+      "block": "dark_oak_slab",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       6,
+       13,
+       22
+      ],
+      "block": "dark_oak_slab",
+      "attached": "sticks out sideways"
+     }
+    ],
+    "largestFlat": 43,
+    "paletteFlags": 1,
+    "valid": true
+   },
+   "type": [
+    "barn with stepped gable",
+    "red barn with stepped gable"
+   ],
+   "placeable": -3,
+   "crafted": 8.25,
+   "collection": 5.25,
+   "characterful": 5.75
+  },
+  "red-barn-plugin": {
+   "l0": {
+    "blocks": 1634,
+    "kinds": 22,
+    "detailShare": 0.18,
+    "floating": 0,
+    "orphans": [
+     {
+      "pos": [
+       7,
+       8,
+       3
+      ],
+      "block": "white_concrete",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       11,
+       8,
+       3
+      ],
+      "block": "white_concrete",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       9,
+       7,
+       2
+      ],
+      "block": "hay_block",
+      "attached": "dangles from above"
+     }
+    ],
+    "largestFlat": 99,
+    "paletteFlags": 2,
+    "valid": true
+   },
+   "type": [
+    "red barn with stone base",
+    "red barn with gambrel roof"
+   ],
+   "placeable": -2.5,
+   "crafted": 8.5,
+   "collection": 6,
+   "characterful": 6.75
+  },
+  "steampunk-workshop-stock": {
+   "l0": {
+    "blocks": 812,
+    "kinds": 35,
+    "detailShare": 0.288,
+    "floating": 0,
+    "orphans": [],
+    "largestFlat": 68,
+    "paletteFlags": 1,
+    "valid": true
+   },
+   "type": [
+    "Brick house with stepped roof",
+    "brick house with green roof"
+   ],
+   "placeable": -2,
+   "crafted": 6.5,
+   "collection": 4.5,
+   "characterful": 4.75
+  },
+  "steampunk-workshop-plugin": {
+   "l0": {
+    "blocks": 1169,
+    "kinds": 19,
+    "detailShare": 0.106,
+    "floating": 0,
+    "orphans": [
+     {
+      "pos": [
+       0,
+       2,
+       0
+      ],
+      "block": "waxed_copper_block",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       6,
+       11,
+       0
+      ],
+      "block": "waxed_copper_block",
+      "attached": "sticks out sideways"
+     },
+     {
+      "pos": [
+       10,
+       11,
+       0
+      ],
+      "block": "waxed_copper_block",
+      "attached": "sticks out sideways"
+     }
+    ],
+    "largestFlat": 65,
+    "paletteFlags": 1,
+    "valid": true
+   },
+   "type": [
+    "Brick gatehouse with wooden hall",
+    "Brick hall with open entrance"
+   ],
+   "placeable": -6.75,
+   "crafted": 5.5,
+   "collection": -1.25,
+   "characterful": 3.69
+  }
+ },
+ "retest": {
+  "roof_form": 0.875,
+  "roof_overhang": 0.9375,
+  "roof_lid": 0.9375,
+  "massing": 1,
+  "facade_depth": 0.9375,
+  "street_door": 0.9375,
+  "street_windows": 0.75,
+  "blank_walls": 0.6875,
+  "wall_gaps": 0.8125,
+  "stray_blocks": 0.6875,
+  "weathering": 0.75,
+  "materials": 0.625,
+  "props": 1,
+  "sign": 1,
+  "storeys": 0.875
+ },
+ "vsSonnet": {
+  "roof_form": 1,
+  "roof_overhang": 1,
+  "roof_lid": 0.5,
+  "massing": 0.75,
+  "facade_depth": 1,
+  "street_door": 1,
+  "street_windows": 1,
+  "blank_walls": 0.75,
+  "wall_gaps": 0.75,
+  "stray_blocks": 1,
+  "weathering": 0.5,
+  "materials": 0.75,
+  "props": 1,
+  "sign": 1,
+  "storeys": 0.75
+ }
+}
