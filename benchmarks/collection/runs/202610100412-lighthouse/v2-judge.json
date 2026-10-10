@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Good",
+ "roof": "Fair",
+ "facades": "Good",
+ "elements": "Fair",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "A convincing striped tower on a mossy rocky base with a proper gallery and lantern room, but the black bulbous cap reads as an onion dome, the keeper's cottage is cramped and muddled against the tower, and stray floating slabs break the finish.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Lantern cap is a heavy, bulging black dome that reads as an onion or helmet on four thin posts. It is oversized for the lantern room and not a lighthouse cap.",
+   "fix": "Replace it with a shallow cone or low-pitch pyramid cap with a slight overhang. Use a thinner black or dark-grey roof preset, add a ring course at the base, and keep the lightning-rod finial."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Major",
+   "problem": "The keeper's cottage is a tiny lean-to jammed into the tower's side. Its roof runs up the tower wall and the chimney and gable are tangled with the base, so it doesn't read as a separate small house.",
+   "fix": "Widen and lengthen the cottage so it stands clear of the tower, with its own gable ridge and a clear single-storey wall. Join it to the tower with a short link or doorway, and put a stone chimney on the gable end."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Major",
+   "problem": "Floating grey slab fragments hang in the air beside the tower (visible in the street view and back elevation), and the rear of the cottage has stray blocks. These look like build errors.",
+   "fix": "Run the floating-block check and delete the orphan slabs. If they are meant as a gallery or cottage eave, attach them to the wall."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "The lantern room is mostly open posts with a few glass panes, so the light reads as a small block on a platform and the gallery looks empty.",
+   "fix": "Enclose the lantern room with a ring of glass panes or glass blocks, put a glowstone or sea lantern at the centre, and keep the fence railing on the gallery."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Minor",
+   "problem": "The tower stripes are fine, but the narrow window slits stack in a column and the back stripes look blocky. The cottage walls are mostly plain, with little trim or depth.",
+   "fix": "Stagger the tower windows or add a stone sill to each. Give the cottage corner posts, a door with a lantern, and a window or two on the visible side."
+  }
+ ]
+}

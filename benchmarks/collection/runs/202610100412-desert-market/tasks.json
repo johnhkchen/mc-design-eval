@@ -1,0 +1,62 @@
+[
+ {
+  "title": "Round the dome: smoother profile + orange band",
+  "kind": "fix",
+  "where": "roof dome, centre (7, y4..8, 7), radius 3",
+  "instruction": "In build.mjs change the dome() call (profile \"pointed\", height 4.5) to try profile \"bulb\" or \"onion\" with height 4.5 and keep it within y<=8; render front-left.png and keep whichever reads as a dome rather than a stepped pyramid. Then replace the ring of sandstone_stairs at y=5 with red_sandstone_stairs (the existing band loop) so the orange band is continuous."
+ },
+ {
+  "title": "Wind tower with two slots per face and a banded cap",
+  "kind": "detail",
+  "where": "wind tower x11..13, y5..8, z8..10 (back-right of the deck)",
+  "instruction": "Widen the tower to 4x4 (x10..13, z7..10; move the fill and the beam stubs accordingly) and cut two 1-wide dark_oak_planks vent slots per face (2 tall, y6..7) instead of one; add a red_sandstone band at y5 and keep the red_sandstone_slab cap at y8. Edit the fill/put block labelled 'wind tower' in build.mjs."
+ },
+ {
+  "title": "Real slope on the awnings",
+  "kind": "fix",
+  "where": "front awnings x2..6 and x10..14, z0..1, y3",
+  "instruction": "The awning is two flat rows of stairs. Make it slope toward the wall: z=0 row at y=3 stays, z=1 row moves up to y=4 (facing south) and the viga row y=4 at z=1 moves to y=5 only where it does not collide; add a top slab valance (red_sandstone_slab / quartz_slab alternating, type top) on the z=0 row's front edge. Edit the awning loop in build.mjs; run mcd diff --fail-empty."
+ },
+ {
+  "title": "Hanging blade sign for the entrance",
+  "kind": "sign",
+  "where": "west entrance pier (6,3,1) north face, facing north",
+  "instruction": "Use signboard(g, \"BAZAAR\", {at:[6,3,1], face:'north', hanging:true, wood:'spruce'}) (or B.sign hanging) with text lines BAZAAR / SOUK; make sure it clears the awning stairs at y=3 (move it to y=2 if needed). Mirror a second blade sign reading \"POTTERY\" on the east pier (10,..)."
+ },
+ {
+  "title": "Striped banners on the entrance piers",
+  "kind": "banner",
+  "where": "north face, piers x6 and x10 above the awning line, y=4 at z=1",
+  "instruction": "B.banner(\"orange\", [[\"stripe_center\",\"white\"],[\"stripe_bottom\",\"white\"]], {facing:'north'}) at (6,4,1)-type wall positions replacing the viga there; same on x10. Check they have wall behind (z=2) and read against sandstone."
+ },
+ {
+  "title": "Hanging lantern chains in the entrance arch",
+  "kind": "props",
+  "where": "entrance arch x7..9, z2..3, y1..3",
+  "instruction": "Replace the single lantern at (8,3,3) with two lanterns on iron chains: B.chain('y') at (7,3,3) and (9,3,3) with B.lantern(true) at y=2 under each; keep the walk-through clear (door is 3 tall: lanterns only on the sides)."
+ },
+ {
+  "title": "Clay pot variety and baskets on the deck and counters",
+  "kind": "props",
+  "where": "stall counters (3..5,2,3) and (11..13,2,3); deck x3..5,z3..8",
+  "instruction": "Swap two decorated_pot for potted_cactus/potted_dead_bush, add bamboo_mosaic_slab (type bottom) as woven basket lids on top of the barrels at (4,1,4) and (12,1,4), and set 3 more composter/hay_block baskets along the deck's west edge x=3 (z=4,6,7)."
+ },
+ {
+  "title": "Break up the blank back plinth and corners",
+  "kind": "detail",
+  "where": "back (south) face z=12, y0..1 and the south-east/south-west corners",
+  "instruction": "mcd paint rule file: 'south ground row -> plinth mud_bricks' then 'south corners -> quoins cut_sandstone'; run mcd diff --fail-empty to confirm; only keep if back-elevation.png looks less blank."
+ },
+ {
+  "title": "Add a second tier of terracotta stripes on the front piers",
+  "kind": "detail",
+  "where": "north face piers x6 and x10, y1..3 and corner piers x2, x14",
+  "instruction": "mcd paint: 'north cols 4,8 rows 2-3 -> orange_terracotta' style rule (check mcd faces for the column numbers) so each front pier carries the 2-row orange stripe like the concept; keep arch frames dark."
+ },
+ {
+  "title": "Interior fit-out: stall shelves and hanging goods",
+  "kind": "props",
+  "where": "interior x4..12, z5..9, y1..3",
+  "instruction": "Add chiseled_bookshelf-free shelving: spruce_slab (type top) shelf rows at y=2 along z=9 wall x4..12 with decorated_pot / potted plants on them; hang 3 orange/white wall banners on the z=9 interior wall at y=2..3. Do not block the x=8 carpet runner."
+ }
+]

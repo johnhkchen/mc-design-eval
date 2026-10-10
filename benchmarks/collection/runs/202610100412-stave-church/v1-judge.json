@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Fair",
+ "facades": "Poor",
+ "elements": "Fair",
+ "finish": "Fair",
+ "palette": "Fair",
+ "summary": "The dark-tar-and-spruce palette and the dragon-head gables say stave church, but the mass is a flat slab under one huge slate pyramid, so the stacked tiers, gallery and stone base don't read.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The lower roof is one huge uniform deepslate pyramid that swallows the whole footprint and reads as a lid. The stacked steep tiers are missing, and the dark-on-dark shingles have no texture, courses or eave line.",
+   "fix": "Break it into 2-3 smaller stepped tiers with a clear eave overhang and a vertical wall band between each. Make the pitch steeper. Alternate deepslate_tile_stairs and slabs, with a stripped-spruce eave trim, so the shingle courses show."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Major",
+   "problem": "The ground floor is a low, wide box, and the tiers above are pushed to the centre and stacked directly on the roof. The nave, tower and ground floor don't read as separate stepped volumes. The profile is squat and pyramidal, not a tall stave church.",
+   "fix": "Raise the nave walls with a clerestory band. Make each upper tier a narrower timber box with its own roof. Keep the silhouette tall and narrow, and shrink the ground-floor eave so it doesn't dominate."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The ground floor is a thin strip of flat spruce under a roof that covers it. The svalgang gallery reads as a plain wall with a few dark slots. There is no arcade, no depth and no carved portal. The stone base is large, blank and flat.",
+   "fix": "Cut an open arcade of posts with a gap between the posts and the inner wall, and a shingled lean-to roof over it. Add a carved portal on the front. Break up the stone base with a stair or slab course, a cobble/mossy mix and a plinth step."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "The dragon heads are tiny, wooden and sprawling, and they sit on the roof slopes rather than at the gable peaks. They read as stray prongs. The spire and cross finial are small, and the upper tower has a see-through hole on the back elevation.",
+   "fix": "Place the dragon heads as mirrored pairs that curve outward at the ridge ends of each tier. Fill the hole in the upper tower with a louvre or window. Make the spire a tall, slender shingled needle."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The upper timber section is a jumble of stair and plank shapes, which gives noisy detail with no clear rhythm. The back elevation has stray floating-looking posts and torches at the gallery ends.",
+   "fix": "Replace the busy detail with a regular pattern: vertical stripped logs with a trim rail, and symmetrical crossed-beam gable ends. Tidy the loose posts at the gallery ends into the arcade rhythm."
+  }
+ ]
+}

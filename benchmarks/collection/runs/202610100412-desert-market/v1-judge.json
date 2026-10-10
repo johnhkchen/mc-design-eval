@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Good",
+ "roof": "Fair",
+ "facades": "Good",
+ "elements": "Good",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "A characterful adobe market hall with a strong sandstone, terracotta and dark-oak palette, striped awnings and vigas, but the roof reads as a cluttered terrace and the stepped dome is a blocky sand heap rather than a rounded dome or wind tower.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The central dome is a stack of sand steps with a sunken notch on top. It reads as a pyramid or sand pile, not a rounded adobe dome. It also sits off-centre against the wind tower, so the skyline looks unresolved.",
+   "fix": "Rebuild it as a rounded dome using stair and slab rings in smooth sandstone with a small finial. Or replace it with a clear square wind tower with open louvres and a slab cap."
+  },
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The flat roof is crowded. A fence railing, a floating awning, pots, flowers and a small stub tower all compete on the terrace, and the fence posts poke above the parapet. The back elevation shows the fence sitting loose on the parapet, so it reads as noise rather than a deliberate parapet.",
+   "fix": "Cut the rooftop props to one awning and a few pots. Replace the tall fence with a clean parapet of sandstone walls or slabs at the edge. Trim the fence posts to a uniform height."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Minor",
+   "problem": "The back and side walls are flat bands of repeating sandstone with the same viga squares and no openings or relief, so they read as blank. The walls also look thin and boxy rather than thick and rounded.",
+   "fix": "Add recessed windows, a back door or niches with trapdoor shutters. Round the corners with stair or slab bevels, and add a plaster-coloured trim band."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The vigas are oversized dark-oak cubes and look heavy, with extra beams sticking out at the corners and sides. The awning edges also look ragged where they overlap the viga ends.",
+   "fix": "Use thinner log-end vigas with a 1-block protrusion, evenly spaced. Keep the awnings clear of the viga line."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "The clay pots and baskets under the arcade are small and hard to read at street view, and the arcade is dark and shallow, so the market stalls feel thin.",
+   "fix": "Put larger pots and hay or barrel stacks in front of the stalls, and open the arcade with lighter floor and wall tones."
+  }
+ ]
+}

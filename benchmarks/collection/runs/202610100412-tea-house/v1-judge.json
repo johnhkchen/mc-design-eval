@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Fair",
+ "facades": "Fair",
+ "elements": "Poor",
+ "finish": "Fair",
+ "palette": "Fair",
+ "summary": "A recognisable raised timber teahouse with a good dark-tile hip roof, but the roof reads as a flat lid with no curved eaves, the shoji walls are mostly hidden, and the maple is a red blocky blob that looks like a mushroom stuck to the side.",
+ "issues": [
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "The maple is a chunky red cube cluster on a thick dark trunk jammed against the left corner; it reads as a red mushroom or a stray block, and it sits partly inside the roof edge.",
+   "fix": "Move the maple out into the garden at least 3 blocks from the house. Replace the solid red mass with a thinner trunk and an irregular canopy of red and orange leaf blocks, with gaps and a few hanging leaf blocks to break the cube silhouette."
+  },
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The roof is a heavy, flat-topped deepslate-tile lid with a stepped, blocky edge. Eaves are straight and there are no upswept corners, so it does not read as a curved Japanese hip-and-gable. A single chimney-like spike sits on the ridge.",
+   "fix": "Use the hip-and-gable roof preset with stair-and-slab courses and an upturn at the four corners and along the eave line. Replace the ridge spike with a flat ridge cap and add a visible gable (irimoya) end. Mix a few tile shades to break up the dark slab."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The roof overhang is so deep that it hides almost the whole wall. The sliding paper screens show only as two pale panels on the back and a sliver at the front. The engawa wraps a recessed, nearly empty dark interior, so the signature white-panel-in-dark-frame wall is lost.",
+   "fix": "Pull the roof overhang in by 1 block, or raise the wall height by 1. Run continuous shoji bays (white panels framed by dark trapdoors or stripped logs) on the front and sides. Add a visible sliding door in the front centre."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The footings and veranda are rough. Stone footings are thin, gaps under the floor show as white or empty holes in the back view, and the vine blocks along the base are patchy. Stepping stones and the lantern are small and hard to pick out among the grass.",
+   "fix": "Fill the under-floor gaps with a continuous cobblestone or stone-brick footing course. Lay a clear stepping-stone path of stone slabs from the front edge to the engawa steps. Make the lantern a clear stone-wall post with a lantern on top, placed beside the path."
+  },
+  {
+   "aspect": "Palette",
+   "severity": "Minor",
+   "problem": "Dark roof, dark timber and dark posts merge into one heavy mass. The red maple is the only accent and clashes in scale with everything else.",
+   "fix": "Use a lighter timber (stripped spruce or oak) for the engawa floor and frame. Keep the dark roof as contrast, and let the maple use red, orange and a little green to blend with the garden greens."
+  }
+ ]
+}

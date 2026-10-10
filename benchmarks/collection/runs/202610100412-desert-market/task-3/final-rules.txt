@@ -1,0 +1,8 @@
+# plaster-coloured trim band on the sandstone course, back and sides
+south row y4 where sandstone -> white_terracotta
+west row y4 where sandstone -> white_terracotta
+east row y4 where sandstone -> white_terracotta
+# corner bevels on the back wall (slab lip on the exposed wall tops)
+south corners wall tops -> slab top
+# recessed back windows: surround with jambs, lintel and sill
+south openings -> surround plain

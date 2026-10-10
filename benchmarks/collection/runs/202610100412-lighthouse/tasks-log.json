@@ -1,0 +1,51 @@
+[
+ {
+  "title": "Tower is a square-section box with flat faces and sharp corners, but the brief a",
+  "kind": "Detail",
+  "aspect": "Massing",
+  "where": "see problem",
+  "instruction": "Rebuild the shaft as an octagonal or circular cylinder (disc/ring brush per layer), tapering a block or two toward the top, and carry the red/white bands around the curved wall.",
+  "kept": false,
+  "verdict": "no-output"
+ },
+ {
+  "title": "Lantern cap reads as a flat black lid. From the 3/4 views the gallery floor and ",
+  "kind": "Roof",
+  "aspect": "Roof",
+  "where": "see problem",
+  "instruction": "Use a roof preset to build a tall conical or domed cap with a small overhang. Raise it on thin posts so the glass lantern room shows clearly, and keep one light block (sea lantern or glowstone) visible inside.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The lantern room now shows a warm glowing lantern under the cap where before there was a dark, hole-like block, so it reads as a working light, and the cap's stepped profile reads a little more like a roof; the cap is still dark and the change is modest."
+ },
+ {
+  "title": "The cottage roof is a mess: brick-red slopes meet a black gable cap and a grey w",
+  "kind": "Roof",
+  "aspect": "Roof",
+  "where": "see problem",
+  "instruction": "Rebuild it as one clean gable with a consistent ridge line and a one-block eave overhang, using a single roof material with a stair-course edge. Set the chimney on the ridge, rising from the gable-end wall.",
+  "kept": false,
+  "verdict": "Worse",
+  "why": "The brick-red slopes read as one coherent roof, but the replacement is a stack of stepped plank blocks with loose white and grey blocks poking out, so the cottage roof now reads as clutter with floating bits rather than a crafted roof."
+ },
+ {
+  "title": "The cottage attaches to the tower awkwardly. A grey stone stub rises beside the ",
+  "kind": "Detail",
+  "aspect": "Finish",
+  "where": "see problem",
+  "instruction": "Make the cottage a clean lower volume against the tower wall, with the grey wall block replaced by a proper chimney. Space the tower windows evenly and trim the base grass patches to moss and vine accents.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The cottage roof is now a continuous pitched slab with the chimney stub removed, so the cottage no longer reads as a grey stone pillar jammed against the tower, though a small floating grey slab now sits on the roof face and the tower cap and gallery are unchanged."
+ },
+ {
+  "title": "The cottage front is dark and cluttered, and the door and porch read weakly at s",
+  "kind": "Detail",
+  "aspect": "Facades",
+  "where": "see problem",
+  "instruction": "Add a clear door with a lit lantern and a small porch awning on the cottage, and put a door with steps on the tower base facing the path.",
+  "kept": false,
+  "verdict": "Neutral",
+  "why": "The only visible addition is a pale stone step at the porch threshold, and the dark roof, cluttered stonework, and recessed door read the same as before, so the change is too small to make the cottage front read better at a glance."
+ }
+]

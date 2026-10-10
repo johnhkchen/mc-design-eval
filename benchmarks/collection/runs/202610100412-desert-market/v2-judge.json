@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Good",
+ "roof": "Fair",
+ "facades": "Fair",
+ "elements": "Good",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "A recognisable adobe market hall with a strong awning arcade and viga ends, but the roof reads as a flat tiled lid with a lumpy sand-block dome and the sides and back are blank walls.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The flat roof is a plain terracotta-tile deck with a boxy stepped sand-block 'dome' and a floating awning frame. It reads as a stack of cubes, not a rounded adobe dome or wind tower.",
+   "fix": "Replace the stepped block with a proper rounded dome from the dome brush (sandstone, smooth stair or slab profile). Give it a small lantern or finial cap. Give the wind tower open vent slots, and tie the roof awning to the parapet so it doesn't float."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The back and side walls are large flat sandstone expanses with only two small windows, a door and a few lanterns. The walls look thin and square-edged, not thick and rounded like adobe.",
+   "fix": "Round the corners with stair or slab chamfers. Add recessed windows with deep reveals and a terracotta band. Add a few clay-pot or basket props and a plaster-tone variation patch to break up the blank wall."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "The vigas are oversized dark-oak log blocks stuck on in a regular row. They read as heavy black cubes, not beam ends, and some stick out at odd places on the back, such as the floating one at right.",
+   "fix": "Use thinner stripped-log ends, 1 block out, spaced evenly just under the parapet. Remove the strays on the tower and the back corners."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The parapet is thin and patchy, with the crenellation present on only some sides. The pots, baskets and lone lightning-rod pole are too small to read from the street.",
+   "fix": "Run a continuous slab or wall parapet around the whole roof edge. Cluster larger pot and basket groups at the arcade bases, and remove or replace the lone rod with something clearly purposeful."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Minor",
+   "problem": "The footprint is a plain rectangle, and the tower and dome sit off-centre on the roof without a clear relationship to the entrance.",
+   "fix": "Centre the dome over the entrance axis and step the front to form a shallow forecourt. Make the tower taller so it reads as a landmark."
+  }
+ ]
+}

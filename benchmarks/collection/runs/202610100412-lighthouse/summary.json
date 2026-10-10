@@ -1,0 +1,101 @@
+{
+ "key": "lighthouse",
+ "name": "Coastal lighthouse and keeper's cottage",
+ "tasks": 5,
+ "tasksKept": 2,
+ "kept": "v2",
+ "usability": "NeedsWork",
+ "grades": {
+  "massing": "Good",
+  "roof": "Fair",
+  "facades": "Good",
+  "elements": "Fair",
+  "finish": "Fair",
+  "palette": "Good"
+ },
+ "summary": "A convincing striped tower on a mossy rocky base with a proper gallery and lantern room, but the black bulbous cap reads as an onion dome, the keeper's cottage is cramped and muddled against the tower, and stray floating slabs break the finish.",
+ "accepted": false,
+ "costUsd": 2.28,
+ "minutes": 23.3,
+ "log": [
+  {
+   "n": "build",
+   "s": 440,
+   "turns": 44,
+   "cost": 1.7951642000000003
+  },
+  {
+   "n": "judge v1",
+   "s": 454,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "A readable striped lighthouse with a railed gallery and a keeper's cottage on a mossy rock base, but the tower is a square box rather than round, the lantern room is half-buried under a black lid, and the cottage's roof and chimney are a messy tangle."
+  },
+  {
+   "n": 5,
+   "s": 455
+  },
+  {
+   "n": "task 1: Tower is a square-section box with flat ",
+   "s": 515,
+   "turns": 16,
+   "cost": 0.027502
+  },
+  {
+   "n": "task 2: Lantern cap reads as a flat black lid. F",
+   "s": 609,
+   "turns": 16,
+   "cost": 0.030060350000000003
+  },
+  {
+   "n": "  review 2",
+   "s": 618,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "task 3: The cottage roof is a mess: brick-red sl",
+   "s": 944,
+   "turns": 1,
+   "cost": 0.05563888
+  },
+  {
+   "n": "  review 3",
+   "s": 952,
+   "kept": false,
+   "verdict": "Worse"
+  },
+  {
+   "n": "task 4: The cottage attaches to the tower awkwar",
+   "s": 1028,
+   "turns": 16,
+   "cost": 0.031066919999999998
+  },
+  {
+   "n": "  review 4",
+   "s": 1035,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "task 5: The cottage front is dark and cluttered,",
+   "s": 1373,
+   "turns": 1,
+   "cost": 0.039433340000000004
+  },
+  {
+   "n": "  review 5",
+   "s": 1382,
+   "kept": false,
+   "verdict": "Neutral"
+  },
+  {
+   "n": "judge v2",
+   "s": 1396,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "A convincing striped tower on a mossy rocky base with a proper gallery and lantern room, but the black bulbous cap reads as an onion dome, the keeper's cottage is cramped and muddled against the tower, and stray floating slabs break the finish.",
+   "tasksKept": 2
+  }
+ ]
+}

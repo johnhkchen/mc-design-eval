@@ -1,0 +1,101 @@
+{
+ "key": "tea-house",
+ "name": "Japanese tea house",
+ "tasks": 5,
+ "tasksKept": 3,
+ "kept": "v2",
+ "usability": "NeedsWork",
+ "grades": {
+  "massing": "Fair",
+  "roof": "Fair",
+  "facades": "Fair",
+  "elements": "Fair",
+  "finish": "Fair",
+  "palette": "Fair"
+ },
+ "summary": "A cozy raised-floor tea house with a good engawa, stone footings and a readable dark-tile roof, but the roof is a heavy flat-topped lid with no curved eaves, the maple is a floating block cluster, and the paper-screen walls barely read.",
+ "accepted": false,
+ "costUsd": 2.99,
+ "minutes": 17,
+ "log": [
+  {
+   "n": "build",
+   "s": 595,
+   "turns": 61,
+   "cost": 2.5496047999999996
+  },
+  {
+   "n": "judge v1",
+   "s": 610,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "A recognisable raised timber teahouse with a good dark-tile hip roof, but the roof reads as a flat lid with no curved eaves, the shoji walls are mostly hidden, and the maple is a red blocky blob that looks like a mushroom stuck to the side."
+  },
+  {
+   "n": 5,
+   "s": 610
+  },
+  {
+   "n": "task 1: The maple is a chunky red cube cluster o",
+   "s": 700,
+   "turns": 11,
+   "cost": 0.02694942
+  },
+  {
+   "n": "  review 1",
+   "s": 709,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "task 2: The roof is a heavy, flat-topped deepsla",
+   "s": 804,
+   "turns": 26,
+   "cost": 0.04169530999999999
+  },
+  {
+   "n": "  review 2",
+   "s": 815,
+   "kept": false,
+   "verdict": "Neutral"
+  },
+  {
+   "n": "task 3: The roof overhang is so deep that it hid",
+   "s": 859,
+   "turns": 12,
+   "cost": 0.021013280000000002
+  },
+  {
+   "n": "task 4: The footings and veranda are rough. Ston",
+   "s": 926,
+   "turns": 9,
+   "cost": 0.02287751
+  },
+  {
+   "n": "  review 4",
+   "s": 935,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "task 5: Dark roof, dark timber and dark posts me",
+   "s": 994,
+   "turns": 15,
+   "cost": 0.027552289999999997
+  },
+  {
+   "n": "  review 5",
+   "s": 1004,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "judge v2",
+   "s": 1019,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "A cozy raised-floor tea house with a good engawa, stone footings and a readable dark-tile roof, but the roof is a heavy flat-topped lid with no curved eaves, the maple is a floating block cluster, and the paper-screen walls barely read.",
+   "tasksKept": 3
+  }
+ ]
+}

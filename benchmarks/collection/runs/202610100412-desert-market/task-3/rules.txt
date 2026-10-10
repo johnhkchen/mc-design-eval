@@ -1,0 +1,12 @@
+# plaster-coloured trim band on the sandstone course above the plinth, back and sides
+south row y4 where sandstone -> white_terracotta
+west row y4 where sandstone -> white_terracotta
+east row y4 where sandstone -> white_terracotta
+# corner bevels: slab lips on the outer corner cells of the back and side walls
+south corners wall tops -> slab top
+west corners -> slab top
+east corners -> slab top
+# recessed windows: sill and surround on the back and side openings
+south openings -> sills
+west openings -> sills
+east openings -> sills

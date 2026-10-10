@@ -1,0 +1,11 @@
+# Toolkit gaps (stave church)
+- Dragon heads / curved carved gable ornaments: placed by hand (dragon() in build.mjs); closest tool: none (a `finial` stack is straight only). Need a profile brush: an outward-and-up curl made of stairs/logs/trapdoors.
+- Gallery (svalgang) ring: posts, rails and a lean-to roof around a core volume built by hand; `mcd roof` hip over the full plan plus `carve` worked, but there is no "arcade/colonnade ring" brush with posts, rail and beam.
+- Roof over a core with a gallery: the hip had to be built over the whole plan then carved out; wanted a "skirt" / lean-to roof style around a taller core.
+- Stacked tiers (nave, clerestory, belfry): walls and gables per tier by hand; closest `setbacks` has no gable/steep roof per tier and no ridge-axis choice.
+- Roof pitch: `steep` pyramid on a 3x3 belfry gave a needle; wanted a spire with a flared base (broach) option on `tower: spire`.
+- Pediment on a hip: `pediment` is classical (quartz-style cornice); wanted a timber-framed gable end with bargeboards and exposed beams.
+- Timber framing (St Andrew's crosses, stave posts, rafter ends): hand-placed logs; closest `pilasters profile timber` (vertical only). Need a diagonal brace brush.
+- Lattice windows: panes plus open trapdoors by hand; `glazing grid` works on flat facades but not inside gable triangles.
+- Fence cross finial: fence connection states set manually (B.fence has no connected form); a `finial cross` preset would help.
+- Wall signs: B.sign gave an unsupported-attachment warning because I placed it in the wall cell, not in front; a `signboard` brush was not used because the porch is open on three sides.

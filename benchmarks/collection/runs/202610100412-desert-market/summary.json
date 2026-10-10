@@ -1,0 +1,107 @@
+{
+ "key": "desert-market",
+ "name": "Desert adobe market hall",
+ "tasks": 5,
+ "tasksKept": 4,
+ "kept": "v2",
+ "usability": "NeedsWork",
+ "grades": {
+  "massing": "Good",
+  "roof": "Fair",
+  "facades": "Fair",
+  "elements": "Good",
+  "finish": "Fair",
+  "palette": "Good"
+ },
+ "summary": "A recognisable adobe market hall with a strong awning arcade and viga ends, but the roof reads as a flat tiled lid with a lumpy sand-block dome and the sides and back are blank walls.",
+ "accepted": false,
+ "costUsd": 3.21,
+ "minutes": 23.3,
+ "log": [
+  {
+   "n": "build",
+   "s": 656,
+   "turns": 72,
+   "cost": 2.7566086000000003
+  },
+  {
+   "n": "judge v1",
+   "s": 670,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "A characterful adobe market hall with a strong sandstone, terracotta and dark-oak palette, striped awnings and vigas, but the roof reads as a cluttered terrace and the stepped dome is a blocky sand heap rather than a rounded dome or wind tower."
+  },
+  {
+   "n": 5,
+   "s": 671
+  },
+  {
+   "n": "task 1: The central dome is a stack of sand step",
+   "s": 775,
+   "turns": 22,
+   "cost": 0.03497405
+  },
+  {
+   "n": "  review 1",
+   "s": 788,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "task 2: The flat roof is crowded. A fence railin",
+   "s": 873,
+   "turns": 15,
+   "cost": 0.030001739999999995
+  },
+  {
+   "n": "  review 2",
+   "s": 884,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "task 3: The back and side walls are flat bands o",
+   "s": 939,
+   "turns": 15,
+   "cost": 0.024416430000000006
+  },
+  {
+   "n": "  review 3",
+   "s": 947,
+   "kept": false,
+   "verdict": "Worse"
+  },
+  {
+   "n": "task 4: The vigas are oversized dark-oak cubes a",
+   "s": 1024,
+   "turns": 17,
+   "cost": 0.029491649999999994
+  },
+  {
+   "n": "  review 4",
+   "s": 1034,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "task 5: The clay pots and baskets under the arca",
+   "s": 1375,
+   "turns": 1,
+   "cost": 0.03189213
+  },
+  {
+   "n": "  review 5",
+   "s": 1385,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "judge v2",
+   "s": 1399,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "A recognisable adobe market hall with a strong awning arcade and viga ends, but the roof reads as a flat tiled lid with a lumpy sand-block dome and the sides and back are blank walls.",
+   "tasksKept": 4
+  }
+ ]
+}

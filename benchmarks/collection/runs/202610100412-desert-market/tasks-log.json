@@ -1,0 +1,52 @@
+[
+ {
+  "title": "The central dome is a stack of sand steps with a sunken notch on top. It reads a",
+  "kind": "Roof",
+  "aspect": "Roof",
+  "where": "see problem",
+  "instruction": "Rebuild it as a rounded dome using stair and slab rings in smooth sandstone with a small finial. Or replace it with a clear square wind tower with open louvres and a slab cap.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The stepped sand stack with its notch was a busy, slightly broken-looking mass, and the flat plinth with a recessed well reads as a calm, solid adobe centrepiece, though the thin red post is a small clashing accent and the dome or tower read is now weaker."
+ },
+ {
+  "title": "The flat roof is crowded. A fence railing, a floating awning, pots, flowers and ",
+  "kind": "Roof",
+  "aspect": "Roof",
+  "where": "see problem",
+  "instruction": "Cut the rooftop props to one awning and a few pots. Replace the tall fence with a clean parapet of sandstone walls or slabs at the edge. Trim the fence posts to a uniform height.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The fence railing, flowers and cluttered rail are replaced by a continuous sandstone parapet that matches the adobe walls, leaving a single clay pot as the accent, so the flat roof reads as a crafted, uncrowded terrace. Minor flaw: the back-left parapet segment in the second view looks slightly detached at its end."
+ },
+ {
+  "title": "The back and side walls are flat bands of repeating sandstone with the same viga",
+  "kind": "Detail",
+  "aspect": "Facades",
+  "where": "see problem",
+  "instruction": "Add recessed windows, a back door or niches with trapdoor shutters. Round the corners with stair or slab bevels, and add a plaster-coloured trim band.",
+  "kept": false,
+  "verdict": "Worse",
+  "why": "The after-view replaces the sandstone bands with translucent pinkish-grey panels that read as glass or a rendering artifact, clashing with the adobe palette and looking less crafted than the original."
+ },
+ {
+  "title": "The vigas are oversized dark-oak cubes and look heavy, with extra beams sticking",
+  "kind": "Detail",
+  "aspect": "Finish",
+  "where": "see problem",
+  "instruction": "Use thinner log-end vigas with a 1-block protrusion, evenly spaced. Keep the awnings clear of the viga line.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The dark-oak viga cubes that stuck out along the front and roof edge are mostly gone, leaving a continuous sandstone parapet with only a few end-caps, so the facade reads lighter and cleaner without losing the beam cue."
+ },
+ {
+  "title": "The clay pots and baskets under the arcade are small and hard to read at street ",
+  "kind": "Props",
+  "aspect": "Elements",
+  "where": "see problem",
+  "instruction": "Put larger pots and hay or barrel stacks in front of the stalls, and open the arcade with lighter floor and wall tones.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The baskets under the arcade are now larger woven-looking stacks that read as stocked goods from street distance, where the small pots and baskets used to disappear, and they sit within the existing awning bays without floating or breaking the facade, though the yellow-green tone is a bit bright against the sandstone and terracotta."
+ }
+]

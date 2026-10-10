@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Good",
+ "roof": "Fair",
+ "facades": "Good",
+ "elements": "Good",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "A readable striped lighthouse with a railed gallery and a keeper's cottage on a mossy rock base, but the tower is a square box rather than round, the lantern room is half-buried under a black lid, and the cottage's roof and chimney are a messy tangle.",
+ "issues": [
+  {
+   "aspect": "Massing",
+   "severity": "Major",
+   "problem": "Tower is a square-section box with flat faces and sharp corners, but the brief asks for a round striped lighthouse; the stripes read as painted panels on a block.",
+   "fix": "Rebuild the shaft as an octagonal or circular cylinder (disc/ring brush per layer), tapering a block or two toward the top, and carry the red/white bands around the curved wall."
+  },
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Lantern cap reads as a flat black lid. From the 3/4 views the gallery floor and cap stack into a dark slab, and the glass lantern room is barely visible beneath it. The back view shows a proper pyramid, so the cap does not match the other angles.",
+   "fix": "Use a roof preset to build a tall conical or domed cap with a small overhang. Raise it on thin posts so the glass lantern room shows clearly, and keep one light block (sea lantern or glowstone) visible inside."
+  },
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The cottage roof is a mess: brick-red slopes meet a black gable cap and a grey wall block at odd angles, with a stray black wedge and a floating chimney stub. It is hard to tell where the ridge and eaves are.",
+   "fix": "Rebuild it as one clean gable with a consistent ridge line and a one-block eave overhang, using a single roof material with a stair-course edge. Set the chimney on the ridge, rising from the gable-end wall."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The cottage attaches to the tower awkwardly. A grey stone stub rises beside the tower and the junction is a jumble. Window slits on the tower are narrow and irregular, and the base has scattered bright grass squares that read as noise.",
+   "fix": "Make the cottage a clean lower volume against the tower wall, with the grey wall block replaced by a proper chimney. Space the tower windows evenly and trim the base grass patches to moss and vine accents."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Minor",
+   "problem": "The cottage front is dark and cluttered, and the door and porch read weakly at street view. The tower has no visible door at ground level from the front.",
+   "fix": "Add a clear door with a lit lantern and a small porch awning on the cottage, and put a door with steps on the tower base facing the path."
+  }
+ ]
+}

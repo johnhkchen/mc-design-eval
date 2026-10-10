@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Fair",
+ "facades": "Fair",
+ "elements": "Fair",
+ "finish": "Fair",
+ "palette": "Fair",
+ "summary": "A cozy raised-floor tea house with a good engawa, stone footings and a readable dark-tile roof, but the roof is a heavy flat-topped lid with no curved eaves, the maple is a floating block cluster, and the paper-screen walls barely read.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Roof is a heavy slab of dark tile with flat stepped planes and a blocky pediment cut-out. It dwarfs the small body, has no upswept curved eaves, and reads as a lid rather than a hipped-and-gabled Japanese roof.",
+   "fix": "Use a hip roof preset with a gentler pitch, flare the eave corners upward with stair/slab tips, and keep the ridge lower. Make the overhang even on all sides, and rebuild the gable end as a clean pediment instead of a notch."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "The maple is a few red and orange cubes stacked on a thin trunk, with a gap between canopy and trunk. It reads as a mailbox or signpost, not a tree.",
+   "fix": "Build a rounded, layered canopy of red and orange leaf blocks with a gap-free trunk and a few branches. Add some fallen-leaf carpet blocks on the grass below."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "Shoji screens are not legible. The walls are mostly blank pale panels, and the dark timber framing is thin or missing. The back and side walls are hidden under the roof, with a wide flat front wall and few vertical divisions.",
+   "fix": "Run dark spruce or dark oak posts every 2 blocks, with horizontal rails at the top and middle, and pale panels (white concrete or snow) between them. Add trapdoor or fence-gate kumiko lattice, and one sliding-door offset."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The engawa is a flat, uniform plank band with a repetitive fence-post railing. The stone lantern is just one stone post, and the stepping stones are scattered with no clear path. The garden is sparse.",
+   "fix": "Add a stone path from the steps to the lantern, give the lantern a base, post and cap, and add a few bushes, moss and a small pond or gravel patch."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Minor",
+   "problem": "The building is a plain rectangle with one roof mass and no offset wing or porch. The hipped-and-gabled roof from the brief is only partly there.",
+   "fix": "Add a small projecting entry porch with its own lower roof, or step the eave heights so the roof breaks into two tiers."
+  }
+ ]
+}
