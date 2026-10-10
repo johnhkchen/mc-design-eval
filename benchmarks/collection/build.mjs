@@ -1,18 +1,28 @@
 // COLLECTION BUILDER: many usable, good-at-a-glance builds, cheaply. The concept is INSPIRATION, not a fidelity target.
 //   1. one builder session (Sonnet) designs and builds the whole building with the plugin's procedural tools (shape
 //      brushes, roofs, detail treatments, ornaments), using the brief + the concept image for character
-//   2. a glance judge (Opus) scores the renders 1-10 as a skilled builder would ("usable in a world? good at a glance?")
-//      and names the 3 biggest fixes
-//   3. below the bar: ONE revision session on those fixes, re-judged; keep the better
-//   4. accepted builds go to collection/<name>.nbt with a card (render, score, cost)
+//   2. a glance judge (Opus, BAML JudgeGlance) gives a CATEGORICAL verdict: Reject / NeedsWork / Usable / Showcase,
+//      aspect grades and typed issues with fixes (never a 1-10 score)
+//   3. delegated improvements: the judge's issues + the builder's own task list, each run by a small worker (Haiku)
+//      and kept only if a close-up before/after review (BAML ReviewChange) says it improves the build; re-judged
+//   4. Usable/Showcase builds go to accepted/<name>.nbt with a card (render, verdict, cost)
 //
-//   node benchmarks/collection/build.mjs --charter <key> [--concept file] [--bar 7] [--model claude-sonnet-5-5]
+//   node benchmarks/collection/build.mjs --charter <key> [--concept file] [--model claude-sonnet-5-5] [--worker claude-haiku-5-5]
 import { readFileSync, writeFileSync, mkdirSync, existsSync, copyFileSync, appendFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFileSync, spawnSync } from "node:child_process";
 import { requestTextWithImage } from "../../src/sdk-binding.mjs";
-import { renderTiles, reviewChange } from "./review.mjs";
+import { renderTiles, VIEWS } from "./review.mjs";
+
+// typed, categorical judgements through BAML (baml_src/collection.baml via baml-call.mts)
+function baml(fn, args, { model = "claude-sonnet-5-5", effort, parseOnly } = {}) {
+  const r = spawnSync("npx", ["tsx", join(HERE, "baml-call.mts")], { input: JSON.stringify({ fn, args, model, effort, parseOnly }), encoding: "utf8", maxBuffer: 1 << 26 });
+  if (r.status !== 0) throw new Error(`baml ${fn}: ${(r.stderr || "").slice(-400)}`);
+  const o = JSON.parse(r.stdout);
+  return { result: o.result, cost: o.cost || 0 };
+}
+const ACCEPT = new Set(["Usable", "Showcase"]);
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const PLUGIN = join(HERE, "..", "..", "..", "minecraft-design");
@@ -20,7 +30,7 @@ const MCD = join(PLUGIN, "tools", "bin", "mcd.mjs");
 const arg = (k, d) => (process.argv.includes(k) ? process.argv[process.argv.indexOf(k) + 1] : d);
 const img = (p) => ({ data: readFileSync(p), mediaType: /\.jpe?g$/i.test(p) ? "image/jpeg" : "image/png" });
 const worker = arg("--worker", "claude-haiku-5-5");
-const model = arg("--model", "claude-sonnet-5-5"), bar = Number(arg("--bar", 7)), key = arg("--charter");
+const model = arg("--model", "claude-sonnet-5-5"), key = arg("--charter");
 
 const { BUILDINGS, STYLE, SCALE } = await import("../charter-row/row.mjs");
 const b = BUILDINGS[key];
@@ -82,15 +92,31 @@ function card(nbt, tag) {
 }
 
 async function judge(cardPng) {
-  const r = await requestTextWithImage({
-    prompt: "You are a skilled Minecraft builder reviewing a build for a shared world (views: street at eye height, two 3/4 views, back elevation). " +
-      `Brief: ${b.name}, ${b.what.split(";")[0]}. Score it 1-10 for how good and usable it is AT A GLANCE (massing, roof, depth, openings, finish, ` +
-      "no noise or broken bits; recognisable elements read as what they are, e.g. banners as banners). 7 = good enough to use as-is; 9 = portfolio quality. Then name the 3 changes that would raise the score most. " +
-      "Reply ONLY JSON: {\"score\": n, \"verdict\": \"one sentence\", \"fixes\": [\"...\", \"...\", \"...\"]}",
-    images: [img(cardPng)], model: "claude-opus-5-5",
+  const r = baml("JudgeGlance", [`${b.name}: ${b.what}`, { image: cardPng }], { model: "claude-opus-5-5" });
+  cost += r.cost;
+  return r.result;
+}
+const RANK = { Reject: 0, NeedsWork: 1, Usable: 2, Showcase: 3 };
+const fixesOf = (j) => (j.issues || []).map((i) => `[${i.severity} ${i.aspect}] ${i.problem} -> ${i.fix}`);
+
+const { decodePng } = await import(join(PLUGIN, "tools", "src", "png.mjs"));
+function closeups(before, after, wd) {
+  return VIEWS.map((v) => {
+    const a = decodePng(readFileSync(join(before, `${v}.png`))), c = decodePng(readFileSync(join(after, `${v}.png`)));
+    let n = 0, x0 = 1e9, y0 = 1e9, x1 = -1, y1 = -1;
+    for (let y = 0; y < a.height; y++) for (let x = 0; x < a.width; x++) {
+      const i = 4 * (y * a.width + x);
+      if (Math.abs(a.rgba[i] - c.rgba[i]) + Math.abs(a.rgba[i + 1] - c.rgba[i + 1]) + Math.abs(a.rgba[i + 2] - c.rgba[i + 2]) > 30) { n++; x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y); }
+    }
+    return { v, n, w: a.width, h: a.height, x0, y0, x1, y1 };
+  }).filter((d) => d.n > 30).sort((p, q) => q.n - p.n).slice(0, 2).map((d) => {
+    const pad = Math.round(Math.max(d.x1 - d.x0, d.y1 - d.y0) * 0.4) + 30;
+    const cx = Math.max(0, d.x0 - pad), cy = Math.max(0, d.y0 - pad), cw = Math.min(d.w, d.x1 + pad) - cx, ch = Math.min(d.h, d.y1 + pad) - cy;
+    const f = join(wd, `review-${d.v}.png`);
+    execFileSync("magick", ["(", join(before, `${d.v}.png`), "-crop", `${cw}x${ch}+${cx}+${cy}`, "+repage", "-resize", "700x700", ")",
+      "(", join(after, `${d.v}.png`), "-crop", `${cw}x${ch}+${cx}+${cy}`, "+repage", "-resize", "700x700", ")", "-background", "white", "-splice", "12x0", "+append", f]);
+    return f;
   });
-  cost += r.raw?.total_cost_usd || 0;
-  return JSON.parse(r.text.slice(r.text.indexOf("{"), r.text.lastIndexOf("}") + 1));
 }
 
 // 1. build
@@ -99,11 +125,18 @@ const rep1 = runAgent(builderPrompt("Design and build this building."), "build")
 if (!existsSync(join(dir, "build.nbt"))) throw new Error("builder produced no build.nbt");
 copyFileSync(join(dir, "build.nbt"), join(dir, "v1.nbt"));
 let best = { tag: "v1", j: await judge(card(join(dir, "v1.nbt"), "v1")) };
-mark("judge v1", { score: best.j.score, verdict: best.j.verdict });
+mark("judge v1", { usability: best.j.usability, roof: best.j.roof, summary: best.j.summary });
 // 2. one revision if below the bar
 // 2. delegated improvements: each task in tasks.json runs as its own small worker session (Haiku) on a copy of the
 // current build; a close-up before/after review keeps or drops it. Cheap, parallel-safe, and nothing is one-shot.
-const tasks = existsSync(join(dir, "tasks.json")) ? (() => { const t = readFileSync(join(dir, "tasks.json"), "utf8"); try { return JSON.parse(t.slice(t.indexOf("["), t.lastIndexOf("]") + 1)); } catch { return []; } })() : [];
+let tasks = [];
+if (existsSync(join(dir, "tasks.json"))) {
+  const t = readFileSync(join(dir, "tasks.json"), "utf8");
+  try { tasks = baml("ParseTasks", [t.trim().startsWith("[") ? `{"tasks": ${t}}` : t], { parseOnly: true }).result.tasks || []; } catch { tasks = []; }
+}
+// the glance judge's issues come first (they decide acceptance); the builder's own list follows, deduped by title
+const fromJudge = (best.j.issues || []).map((i) => ({ title: i.problem.slice(0, 80), kind: i.aspect === "Roof" ? "Roof" : i.aspect === "Elements" ? "Props" : "Detail", aspect: i.aspect, where: "see problem", instruction: i.fix }));
+tasks = [...fromJudge, ...tasks].filter((t, i, all) => all.findIndex((u) => u.title === t.title) === i).slice(0, 10);
 mark("tasks", { n: tasks.length });
 let cur = join(dir, "v1.nbt"), curTiles = renderTiles(cur, join(dir, "t-cur-0")), taskLog = [];
 const briefShort = `${b.name}, ${b.what.split(";")[0]}`;
@@ -123,9 +156,12 @@ for (const [i, t] of tasks.entries()) {
   runAgent(prompt, `task ${i + 1}: ${t.title.slice(0, 40)}`, worker, "medium", wd);
   if (!existsSync(join(wd, "out.nbt"))) { taskLog.push({ ...t, kept: false, verdict: "no-output" }); continue; }
   const tiles = renderTiles(join(wd, "out.nbt"), join(wd, "t"));
-  const v = await reviewChange({ before: curTiles, after: tiles, title: t.title, brief: briefShort, concept: existsSync(join(dir, "concept.jpg")) ? join(dir, "concept.jpg") : null, workDir: wd });
-  cost += v.cost;
-  const kept = v.verdict === "improves";
+  const crops = closeups(curTiles, tiles, wd);
+  if (!crops.length) { taskLog.push({ ...t, kept: false, verdict: "Neutral", why: "no pixels changed" }); continue; }
+  const rv = baml("ReviewChange", [t.title, briefShort, { images: crops }], { model: "claude-sonnet-5-5", effort: "low" });
+  cost += rv.cost;
+  const v = { verdict: rv.result.verdict, why: rv.result.why };
+  const kept = v.verdict === "Improves";
   taskLog.push({ ...t, kept, verdict: v.verdict, why: v.why });
   mark(`  review ${i + 1}`, { kept, verdict: v.verdict });
   if (kept) { cur = join(wd, "out.nbt"); curTiles = tiles; }
@@ -134,12 +170,12 @@ writeFileSync(join(dir, "tasks-log.json"), JSON.stringify(taskLog, null, 1) + "\
 if (taskLog.some((t) => t.kept)) {
   copyFileSync(cur, join(dir, "v2.nbt"));
   const j2 = await judge(card(join(dir, "v2.nbt"), "v2"));
-  mark("judge v2", { score: j2.score, verdict: j2.verdict, tasksKept: taskLog.filter((t) => t.kept).length });
-  if (j2.score >= best.j.score) best = { tag: "v2", j: j2 };
+  mark("judge v2", { usability: j2.usability, roof: j2.roof, summary: j2.summary, tasksKept: taskLog.filter((t) => t.kept).length });
+  if (RANK[j2.usability] >= RANK[best.j.usability]) best = { tag: "v2", j: j2 };
 }
 // 3. accept into the collection
-const accepted = best.j.score >= bar;
-const summary = { key, name: b.name, tasks: tasks.length, tasksKept: taskLog.filter((t) => t.kept).length, kept: best.tag, score: best.j.score, verdict: best.j.verdict, accepted, costUsd: +cost.toFixed(2), minutes: +((Date.now() - t0) / 60000).toFixed(1), log };
+const accepted = ACCEPT.has(best.j.usability);
+const summary = { key, name: b.name, tasks: tasks.length, tasksKept: taskLog.filter((t) => t.kept).length, kept: best.tag, usability: best.j.usability, grades: { massing: best.j.massing, roof: best.j.roof, facades: best.j.facades, elements: best.j.elements, finish: best.j.finish, palette: best.j.palette }, summary: best.j.summary, accepted, costUsd: +cost.toFixed(2), minutes: +((Date.now() - t0) / 60000).toFixed(1), log };
 writeFileSync(join(dir, "summary.json"), JSON.stringify(summary, null, 1) + "\n");
 if (accepted) {
   const coll = join(HERE, "accepted"); mkdirSync(coll, { recursive: true });
@@ -147,4 +183,4 @@ if (accepted) {
   copyFileSync(join(dir, `${best.tag}-card.png`), join(coll, `${key}.png`));
 }
 appendFileSync(join(HERE, "ledger.jsonl"), JSON.stringify({ t: new Date().toISOString(), runId, ...summary, log: undefined }) + "\n");
-console.log(`[${key}] ${accepted ? "ACCEPTED" : "rejected"}: ${best.tag} ${best.j.score}/10, $${summary.costUsd}, ${summary.minutes} min`);
+console.log(`[${key}] ${accepted ? "ACCEPTED" : "not accepted"}: ${best.tag} ${best.j.usability}, $${summary.costUsd}, ${summary.minutes} min`);
