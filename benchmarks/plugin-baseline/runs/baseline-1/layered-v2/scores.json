@@ -1,0 +1,861 @@
+{
+ "version": "v2-2026-10-10",
+ "score": {
+  "lighthouse-plain": {
+   "l0": {
+    "blocks": 1667,
+    "kinds": 18,
+    "detailShare": 0.076,
+    "floating": 0,
+    "stray": 0,
+    "largestFlat": 32,
+    "paletteFlags": 2,
+    "blankWalls": 0,
+    "visibleMaterials": 10,
+    "agedShare": 0.029,
+    "valid": true
+   },
+   "type": [
+    "lighthouse with keeper's cottage",
+    "lighthouse with attached cottage"
+   ],
+   "placeable": -1.5,
+   "crafted": 6.75,
+   "characterful": 7.38
+  },
+  "lighthouse-plugin": {
+   "l0": {
+    "blocks": 1534,
+    "kinds": 28,
+    "detailShare": 0.093,
+    "floating": 0,
+    "stray": 2,
+    "largestFlat": 48,
+    "paletteFlags": 2,
+    "blankWalls": 0,
+    "visibleMaterials": 9,
+    "agedShare": 0.029,
+    "valid": true
+   },
+   "type": [
+    "lighthouse with cottage annex",
+    "Striped lighthouse with annex"
+   ],
+   "placeable": -0.5,
+   "crafted": 6.5,
+   "characterful": 7.38
+  },
+  "glass-cafe-plugin": {
+   "l0": {
+    "blocks": 875,
+    "kinds": 20,
+    "detailShare": 0.077,
+    "floating": 0,
+    "stray": 0,
+    "largestFlat": 130,
+    "paletteFlags": 3,
+    "blankWalls": 0,
+    "visibleMaterials": 5,
+    "agedShare": 0,
+    "valid": true
+   },
+   "type": [
+    "Black-walled cafe with patio",
+    "Dark walled cafe with overhang"
+   ],
+   "placeable": 0,
+   "crafted": 6.75,
+   "characterful": 7.25
+  },
+  "glass-cafe-plain": {
+   "l0": {
+    "blocks": 1154,
+    "kinds": 24,
+    "detailShare": 0.072,
+    "floating": 0,
+    "stray": 0,
+    "largestFlat": 221,
+    "paletteFlags": 1,
+    "blankWalls": 2,
+    "visibleMaterials": 8,
+    "agedShare": 0,
+    "valid": true
+   },
+   "type": [
+    "dark stone cafe with terrace",
+    "Dark-walled cafe with terrace"
+   ],
+   "placeable": -2,
+   "crafted": 6,
+   "characterful": 5.5
+  },
+  "stave-church-described": {
+   "l0": {
+    "blocks": 3611,
+    "kinds": 10,
+    "detailShare": 0.212,
+    "floating": 0,
+    "stray": 1,
+    "largestFlat": 96,
+    "paletteFlags": 5,
+    "blankWalls": 0,
+    "visibleMaterials": 6,
+    "agedShare": 0,
+    "valid": true
+   },
+   "type": [
+    "Japanese-style multi-tier pagoda",
+    "Multi-tier pagoda"
+   ],
+   "placeable": -4,
+   "crafted": 8.5,
+   "characterful": 4.5
+  },
+  "stave-church-stock": {
+   "l0": {
+    "blocks": 1015,
+    "kinds": 8,
+    "detailShare": 0.354,
+    "floating": 0,
+    "stray": 3,
+    "largestFlat": 44,
+    "paletteFlags": 4,
+    "blankWalls": 0,
+    "visibleMaterials": 4,
+    "agedShare": 0,
+    "valid": true
+   },
+   "type": [
+    "tiered pagoda-style tower",
+    "pagoda-style tiered tower"
+   ],
+   "placeable": -2.25,
+   "crafted": 10,
+   "characterful": 7.75
+  },
+  "desert-market-described": {
+   "l0": {
+    "blocks": 1628,
+    "kinds": 18,
+    "detailShare": 0.09,
+    "floating": 0,
+    "stray": 18,
+    "largestFlat": 248,
+    "paletteFlags": 5,
+    "blankWalls": 0,
+    "visibleMaterials": 7,
+    "agedShare": 0,
+    "valid": true
+   },
+   "type": [
+    "Sandstone desert market hall",
+    "Sandstone desert building with tower"
+   ],
+   "placeable": -3.5,
+   "crafted": 8,
+   "characterful": 6.13
+  },
+  "desert-market-stock": {
+   "l0": {
+    "blocks": 1111,
+    "kinds": 22,
+    "detailShare": 0.106,
+    "floating": 0,
+    "stray": 0,
+    "largestFlat": 194,
+    "paletteFlags": 7,
+    "blankWalls": 1,
+    "visibleMaterials": 5,
+    "agedShare": 0,
+    "valid": false
+   },
+   "type": [
+    "Crenellated sandstone and terracotta hall",
+    "crenellated brick hall with entrance"
+   ],
+   "placeable": -6.5,
+   "crafted": 5.5,
+   "characterful": -0.5
+  },
+  "desert-market-plain": {
+   "l0": {
+    "blocks": 814,
+    "kinds": 19,
+    "detailShare": 0.061,
+    "floating": 0,
+    "stray": 2,
+    "largestFlat": 98,
+    "paletteFlags": 3,
+    "blankWalls": 3,
+    "visibleMaterials": 7,
+    "agedShare": 0,
+    "valid": true
+   },
+   "type": [
+    "Sandstone saloon with awnings",
+    "sandstone saloon with awnings"
+   ],
+   "placeable": -6,
+   "crafted": 5,
+   "characterful": 0.5
+  },
+  "desert-market-plugin": {
+   "l0": {
+    "blocks": 1160,
+    "kinds": 22,
+    "detailShare": 0.103,
+    "floating": 0,
+    "stray": 20,
+    "largestFlat": 104,
+    "paletteFlags": 4,
+    "blankWalls": 0,
+    "visibleMaterials": 8,
+    "agedShare": 0,
+    "valid": true
+   },
+   "type": [
+    "walled market stall with awning",
+    "sandstone shop with striped awning"
+   ],
+   "placeable": -3.5,
+   "crafted": 6.25,
+   "characterful": 4.38
+  },
+  "tea-house-plugin": {
+   "l0": {
+    "blocks": 762,
+    "kinds": 26,
+    "detailShare": 0.234,
+    "floating": 0,
+    "stray": 0,
+    "largestFlat": 30,
+    "paletteFlags": 4,
+    "blankWalls": 0,
+    "visibleMaterials": 11,
+    "agedShare": 0.019,
+    "valid": true
+   },
+   "type": [
+    "Japanese-style house with dark roof",
+    "Japanese-style house"
+   ],
+   "placeable": -0.75,
+   "crafted": 6.5,
+   "characterful": 7.31
+  },
+  "tea-house-plain": {
+   "l0": {
+    "blocks": 579,
+    "kinds": 16,
+    "detailShare": 0.285,
+    "floating": 0,
+    "stray": 0,
+    "largestFlat": 28,
+    "paletteFlags": 4,
+    "blankWalls": 0,
+    "visibleMaterials": 8,
+    "agedShare": 0.027,
+    "valid": true
+   },
+   "type": [
+    "wooden house with stone roof",
+    "Timber house, stone-tiled roof"
+   ],
+   "placeable": -2.25,
+   "crafted": 6.5,
+   "characterful": 5.88
+  },
+  "steampunk-workshop-stock": {
+   "l0": {
+    "blocks": 812,
+    "kinds": 35,
+    "detailShare": 0.288,
+    "floating": 0,
+    "stray": 0,
+    "largestFlat": 68,
+    "paletteFlags": 1,
+    "blankWalls": 2,
+    "visibleMaterials": 7,
+    "agedShare": 0.344,
+    "valid": true
+   },
+   "type": [
+    "Brick hall with stepped roof",
+    "Brick house, stepped gable roof"
+   ],
+   "placeable": -2,
+   "crafted": 7,
+   "characterful": 7
+  },
+  "steampunk-workshop-described": {
+   "l0": {
+    "blocks": 2989,
+    "kinds": 34,
+    "detailShare": 0.036,
+    "floating": 0,
+    "stray": 10,
+    "largestFlat": 324,
+    "paletteFlags": 7,
+    "blankWalls": 2,
+    "visibleMaterials": 8,
+    "agedShare": 0.253,
+    "valid": true
+   },
+   "type": [
+    "brick factory with chimneys",
+    "brick factory with chimneys"
+   ],
+   "placeable": -5.5,
+   "crafted": 6,
+   "characterful": 4.75
+  },
+  "stave-church-plugin": {
+   "l0": {
+    "blocks": 1696,
+    "kinds": 18,
+    "detailShare": 0.265,
+    "floating": 0,
+    "stray": 0,
+    "largestFlat": 35,
+    "paletteFlags": 11,
+    "blankWalls": 0,
+    "visibleMaterials": 10,
+    "agedShare": 0.01,
+    "valid": true
+   },
+   "type": [
+    "Tiered pagoda-style tower",
+    "Pagoda-style tiered tower"
+   ],
+   "placeable": -0.75,
+   "crafted": 9,
+   "characterful": 9.81
+  },
+  "stave-church-plain": {
+   "l0": {
+    "blocks": 1398,
+    "kinds": 17,
+    "detailShare": 0.229,
+    "floating": 0,
+    "stray": 0,
+    "largestFlat": 24,
+    "paletteFlags": 4,
+    "blankWalls": 0,
+    "visibleMaterials": 9,
+    "agedShare": 0.005,
+    "valid": true
+   },
+   "type": [
+    "Tiered pagoda-style shrine",
+    "Pagoda-style tiered wooden tower"
+   ],
+   "placeable": -1.5,
+   "crafted": 7,
+   "characterful": 7.63
+  },
+  "wizard-tower-described": {
+   "l0": {
+    "blocks": 1946,
+    "kinds": 19,
+    "detailShare": 0.093,
+    "floating": 4,
+    "stray": 18,
+    "largestFlat": 21,
+    "paletteFlags": 1,
+    "blankWalls": 0,
+    "visibleMaterials": 8,
+    "agedShare": 0.098,
+    "valid": true
+   },
+   "type": [
+    "Tall timber-framed tower house",
+    "timber-framed tower house"
+   ],
+   "placeable": -5,
+   "crafted": 6.25,
+   "characterful": 5
+  },
+  "wizard-tower-stock": {
+   "l0": {
+    "blocks": 1756,
+    "kinds": 24,
+    "detailShare": 0.036,
+    "floating": 0,
+    "stray": 1,
+    "largestFlat": 20,
+    "paletteFlags": 2,
+    "blankWalls": 0,
+    "visibleMaterials": 8,
+    "agedShare": 0.105,
+    "valid": true
+   },
+   "type": [
+    "stone tower with tiered spire",
+    "Stone tower with tiered spire"
+   ],
+   "placeable": -0.5,
+   "crafted": 6,
+   "characterful": 6.88
+  },
+  "steampunk-workshop-plugin": {
+   "l0": {
+    "blocks": 1169,
+    "kinds": 19,
+    "detailShare": 0.106,
+    "floating": 0,
+    "stray": 3,
+    "largestFlat": 65,
+    "paletteFlags": 1,
+    "blankWalls": 1,
+    "visibleMaterials": 6,
+    "agedShare": 0.202,
+    "valid": true
+   },
+   "type": [
+    "brick ruined hall with gaps",
+    "Open-fronted brick hall"
+   ],
+   "placeable": -5,
+   "crafted": 5,
+   "characterful": 5.13
+  },
+  "steampunk-workshop-plain": {
+   "l0": {
+    "blocks": 1291,
+    "kinds": 28,
+    "detailShare": 0.04,
+    "floating": 4,
+    "stray": 4,
+    "largestFlat": 45,
+    "paletteFlags": 7,
+    "blankWalls": 3,
+    "visibleMaterials": 8,
+    "agedShare": 0,
+    "valid": true
+   },
+   "type": [
+    "brick tavern with stone trim",
+    "Brick saloon with porch"
+   ],
+   "placeable": -8.25,
+   "crafted": 4,
+   "characterful": -0.06
+  },
+  "red-barn-plugin": {
+   "l0": {
+    "blocks": 1634,
+    "kinds": 22,
+    "detailShare": 0.18,
+    "floating": 0,
+    "stray": 3,
+    "largestFlat": 99,
+    "paletteFlags": 2,
+    "blankWalls": 1,
+    "visibleMaterials": 7,
+    "agedShare": 0,
+    "valid": true
+   },
+   "type": [
+    "Red barn",
+    "Red barn with porch"
+   ],
+   "placeable": -1.5,
+   "crafted": 7,
+   "characterful": 6
+  },
+  "red-barn-plain": {
+   "l0": {
+    "blocks": 1380,
+    "kinds": 16,
+    "detailShare": 0.054,
+    "floating": 46,
+    "stray": 48,
+    "largestFlat": 102,
+    "paletteFlags": 3,
+    "blankWalls": 1,
+    "visibleMaterials": 6,
+    "agedShare": 0,
+    "valid": true
+   },
+   "type": [
+    "Barn with cupola",
+    "barn with cupola"
+   ],
+   "placeable": -6,
+   "crafted": 6,
+   "characterful": 2.13
+  },
+  "wizard-tower-plugin": {
+   "l0": {
+    "blocks": 1403,
+    "kinds": 27,
+    "detailShare": 0.07,
+    "floating": 0,
+    "stray": 0,
+    "largestFlat": 0,
+    "paletteFlags": 3,
+    "blankWalls": 0,
+    "visibleMaterials": 14,
+    "agedShare": 0.389,
+    "valid": true
+   },
+   "type": [
+    "Stone-based pagoda tower",
+    "Stone tower with timber pagoda tiers"
+   ],
+   "placeable": -1.5,
+   "crafted": 7.5,
+   "characterful": 8.63
+  },
+  "wizard-tower-plain": {
+   "l0": {
+    "blocks": 1347,
+    "kinds": 25,
+    "detailShare": 0.083,
+    "floating": 0,
+    "stray": 10,
+    "largestFlat": 18,
+    "paletteFlags": 3,
+    "blankWalls": 0,
+    "visibleMaterials": 9,
+    "agedShare": 0.176,
+    "valid": true
+   },
+   "type": [
+    "stone tower with timber top",
+    "stone tower with timber top"
+   ],
+   "placeable": -2.25,
+   "crafted": 6,
+   "characterful": 7.44
+  }
+ },
+ "retest": {
+  "roof_form": 0.7916666666666666,
+  "roof_overhang": 0.875,
+  "roof_lid": 0.7916666666666666,
+  "massing": 1,
+  "facade_depth": 0.7916666666666666,
+  "street_door": 0.9583333333333334,
+  "street_windows": 0.7916666666666666,
+  "wall_gaps": 0.75,
+  "weathering": 0.6666666666666666,
+  "props": 0.7916666666666666,
+  "sign": 1,
+  "storeys": 0.7083333333333334
+ },
+ "rows": [
+  {
+   "id": "p4",
+   "subject": "lighthouse",
+   "A": "plain",
+   "B": "plugin",
+   "owner": null,
+   "picks": {
+    "placeable": "B",
+    "crafted": "tie",
+    "characterful": "tie"
+   },
+   "scores": {
+    "placeable": [
+     -1.5,
+     -0.5
+    ],
+    "crafted": [
+     6.75,
+     6.5
+    ],
+    "characterful": [
+     7.38,
+     7.38
+    ]
+   }
+  },
+  {
+   "id": "p6",
+   "subject": "glass-cafe",
+   "A": "plugin",
+   "B": "plain",
+   "owner": null,
+   "picks": {
+    "placeable": "A",
+    "crafted": "A",
+    "characterful": "A"
+   },
+   "scores": {
+    "placeable": [
+     0,
+     -2
+    ],
+    "crafted": [
+     6.75,
+     6
+    ],
+    "characterful": [
+     7.25,
+     5.5
+    ]
+   }
+  },
+  {
+   "id": "p10",
+   "subject": "stave-church",
+   "A": "described",
+   "B": "stock",
+   "owner": null,
+   "picks": {
+    "placeable": "B",
+    "crafted": "B",
+    "characterful": "B"
+   },
+   "scores": {
+    "placeable": [
+     -4,
+     -2.25
+    ],
+    "crafted": [
+     8.5,
+     10
+    ],
+    "characterful": [
+     4.5,
+     7.75
+    ]
+   }
+  },
+  {
+   "id": "p9",
+   "subject": "desert-market",
+   "A": "described",
+   "B": "stock",
+   "owner": null,
+   "picks": {
+    "placeable": "A",
+    "crafted": "A",
+    "characterful": "A"
+   },
+   "scores": {
+    "placeable": [
+     -3.5,
+     -6.5
+    ],
+    "crafted": [
+     8,
+     5.5
+    ],
+    "characterful": [
+     6.13,
+     -0.5
+    ]
+   }
+  },
+  {
+   "id": "p2",
+   "subject": "desert-market",
+   "A": "plain",
+   "B": "plugin",
+   "owner": null,
+   "picks": {
+    "placeable": "B",
+    "crafted": "B",
+    "characterful": "B"
+   },
+   "scores": {
+    "placeable": [
+     -6,
+     -3.5
+    ],
+    "crafted": [
+     5,
+     6.25
+    ],
+    "characterful": [
+     0.5,
+     4.38
+    ]
+   }
+  },
+  {
+   "id": "p1",
+   "subject": "tea-house",
+   "A": "plugin",
+   "B": "plain",
+   "owner": null,
+   "picks": {
+    "placeable": "A",
+    "crafted": "tie",
+    "characterful": "A"
+   },
+   "scores": {
+    "placeable": [
+     -0.75,
+     -2.25
+    ],
+    "crafted": [
+     6.5,
+     6.5
+    ],
+    "characterful": [
+     7.31,
+     5.88
+    ]
+   }
+  },
+  {
+   "id": "p12",
+   "subject": "steampunk-workshop",
+   "A": "stock",
+   "B": "described",
+   "owner": null,
+   "picks": {
+    "placeable": "A",
+    "crafted": "A",
+    "characterful": "A"
+   },
+   "scores": {
+    "placeable": [
+     -2,
+     -5.5
+    ],
+    "crafted": [
+     7,
+     6
+    ],
+    "characterful": [
+     7,
+     4.75
+    ]
+   }
+  },
+  {
+   "id": "p3",
+   "subject": "stave-church",
+   "A": "plugin",
+   "B": "plain",
+   "owner": null,
+   "picks": {
+    "placeable": "A",
+    "crafted": "A",
+    "characterful": "A"
+   },
+   "scores": {
+    "placeable": [
+     -0.75,
+     -1.5
+    ],
+    "crafted": [
+     9,
+     7
+    ],
+    "characterful": [
+     9.81,
+     7.63
+    ]
+   }
+  },
+  {
+   "id": "p11",
+   "subject": "wizard-tower",
+   "A": "described",
+   "B": "stock",
+   "owner": null,
+   "picks": {
+    "placeable": "B",
+    "crafted": "tie",
+    "characterful": "B"
+   },
+   "scores": {
+    "placeable": [
+     -5,
+     -0.5
+    ],
+    "crafted": [
+     6.25,
+     6
+    ],
+    "characterful": [
+     5,
+     6.88
+    ]
+   }
+  },
+  {
+   "id": "p8",
+   "subject": "steampunk-workshop",
+   "A": "plugin",
+   "B": "plain",
+   "owner": null,
+   "picks": {
+    "placeable": "A",
+    "crafted": "A",
+    "characterful": "A"
+   },
+   "scores": {
+    "placeable": [
+     -5,
+     -8.25
+    ],
+    "crafted": [
+     5,
+     4
+    ],
+    "characterful": [
+     5.13,
+     -0.06
+    ]
+   }
+  },
+  {
+   "id": "p7",
+   "subject": "red-barn",
+   "A": "plugin",
+   "B": "plain",
+   "owner": null,
+   "picks": {
+    "placeable": "A",
+    "crafted": "A",
+    "characterful": "A"
+   },
+   "scores": {
+    "placeable": [
+     -1.5,
+     -6
+    ],
+    "crafted": [
+     7,
+     6
+    ],
+    "characterful": [
+     6,
+     2.13
+    ]
+   }
+  },
+  {
+   "id": "p5",
+   "subject": "wizard-tower",
+   "A": "plugin",
+   "B": "plain",
+   "owner": null,
+   "picks": {
+    "placeable": "A",
+    "crafted": "A",
+    "characterful": "A"
+   },
+   "scores": {
+    "placeable": [
+     -1.5,
+     -2.25
+    ],
+    "crafted": [
+     7.5,
+     6
+    ],
+    "characterful": [
+     8.63,
+     7.44
+    ]
+   }
+  }
+ ]
+}
