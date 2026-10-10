@@ -1,0 +1,36 @@
+{
+ "key": "settlers-league",
+ "name": "The Settlers' League hall",
+ "kept": "v2",
+ "score": 5,
+ "verdict": "The massing, overhanging stone-brick gable and proud log corner posts work well, but the front is a flat wool colour chart, loose wool blocks float off the sides, and the balcony level is cluttered, so it reads as unfinished rather than as a banner shop.",
+ "accepted": false,
+ "costUsd": 2.22,
+ "minutes": 12.1,
+ "log": [
+  {
+   "n": "build",
+   "s": 228,
+   "turns": 26,
+   "cost": 0.8608362000000002
+  },
+  {
+   "n": "judge v1",
+   "s": 525,
+   "score": 5,
+   "verdict": "The front reads right away as a cheerful banner shop: the striped wool awning, the flag swatches and the timber posts give it character. But behind that front it's a heavy dark box with a stepped slab roof and patchy side walls, so it doesn't hold up from the 3/4 views."
+  },
+  {
+   "n": "revise",
+   "s": 716,
+   "turns": 28,
+   "cost": 0.8304187999999999
+  },
+  {
+   "n": "judge v2",
+   "s": 728,
+   "score": 5,
+   "verdict": "The massing, overhanging stone-brick gable and proud log corner posts work well, but the front is a flat wool colour chart, loose wool blocks float off the sides, and the balcony level is cluttered, so it reads as unfinished rather than as a banner shop."
+  }
+ ]
+}

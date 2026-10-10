@@ -1,0 +1,36 @@
+{
+ "key": "tribunal-house",
+ "name": "Tribunal House",
+ "kept": "v2",
+ "score": 6,
+ "verdict": "A temple-front courthouse that reads clearly as civic and old, with a strong podium, a grand stair and a clean white colonnade, but the dark roof is too heavy and jagged and the side walls are too unfinished for it to be used as-is.",
+ "accepted": false,
+ "costUsd": 2.35,
+ "minutes": 8.2,
+ "log": [
+  {
+   "n": "build",
+   "s": 359,
+   "turns": 27,
+   "cost": 1.236669
+  },
+  {
+   "n": "judge v1",
+   "s": 375,
+   "score": 6,
+   "verdict": "The temple form reads clearly as a courthouse: raised podium, broad front stair, portico and pedimented gable. But the all-black deepslate mass with flat birch-plank slabs for columns looks like a wooden shed in mourning rather than an old stone hall of justice, and stray bits like the chimneys, gold blob and white cubes add noise."
+  },
+  {
+   "n": "revise",
+   "s": 477,
+   "turns": 27,
+   "cost": 0.5993368000000001
+  },
+  {
+   "n": "judge v2",
+   "s": 491,
+   "score": 6,
+   "verdict": "A temple-front courthouse that reads clearly as civic and old, with a strong podium, a grand stair and a clean white colonnade, but the dark roof is too heavy and jagged and the side walls are too unfinished for it to be used as-is."
+  }
+ ]
+}

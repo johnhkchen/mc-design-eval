@@ -1,0 +1,36 @@
+{
+ "key": "reading-room",
+ "name": "The Reading Room",
+ "kept": "v2",
+ "score": 5,
+ "verdict": "Small, cozy, and clean with no broken bits, and the door, lamp-lit window with curtain, barrel and lanterns all read; but the flat deepslate-tile roof is too tall and heavy and looks like a lid, the 2-wide sand-coloured corner posts look like blobs, the side walls are flat with almost no openings, and the two things the brief asks for most, the READING ROOM sign and the open garden gate, don't show up at a glance.",
+ "accepted": false,
+ "costUsd": 2.58,
+ "minutes": 9.7,
+ "log": [
+  {
+   "n": "build",
+   "s": 247,
+   "turns": 34,
+   "cost": 1.0761916
+  },
+  {
+   "n": "judge v1",
+   "s": 263,
+   "score": 4,
+   "verdict": "The props are good (barrel, lantern, potted flower, fence run), but the roof is a heavy stepped slab of solid deepslate blocks that's taller than the walls and swallows the little annex, and the front reads as a patchwork of materials rather than a lived-in storeroom."
+  },
+  {
+   "n": "revise",
+   "s": 564,
+   "turns": 27,
+   "cost": 0.9685581999999999
+  },
+  {
+   "n": "judge v2",
+   "s": 580,
+   "score": 5,
+   "verdict": "Small, cozy, and clean with no broken bits, and the door, lamp-lit window with curtain, barrel and lanterns all read; but the flat deepslate-tile roof is too tall and heavy and looks like a lid, the 2-wide sand-coloured corner posts look like blobs, the side walls are flat with almost no openings, and the two things the brief asks for most, the READING ROOM sign and the open garden gate, don't show up at a glance."
+  }
+ ]
+}
