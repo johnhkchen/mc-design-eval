@@ -1,7 +1,7 @@
 // COLLECTION BUILDER: many usable, good-at-a-glance builds, cheaply. The concept is INSPIRATION, not a fidelity target.
 //   1. one builder session (Sonnet) designs and builds the whole building with the plugin's procedural tools (shape
 //      brushes, roofs, detail treatments, ornaments), using the brief + the concept image for character
-//   2. a glance judge (Opus, BAML JudgeGlance) gives a CATEGORICAL verdict: Reject / NeedsWork / Usable / Showcase,
+//   2. a glance judge (Sonnet, BAML JudgeGlance) gives a CATEGORICAL verdict: Reject / NeedsWork / Usable / Showcase,
 //      aspect grades and typed issues with fixes (never a 1-10 score)
 //   3. delegated improvements: the judge's issues + the builder's own task list, each run by a small worker (Haiku)
 //      and kept only if a close-up before/after review (BAML ReviewChange) says it improves the build; re-judged
@@ -16,7 +16,7 @@ import { requestTextWithImage } from "../../src/sdk-binding.mjs";
 import { renderTiles, VIEWS } from "./review.mjs";
 
 // typed, categorical judgements through BAML (baml_src/collection.baml via baml-call.mts)
-function baml(fn, args, { model = "claude-sonnet-5-5", effort, parseOnly } = {}) {
+function baml(fn, args, { model, effort, parseOnly } = {}) {
   const r = spawnSync("npx", ["tsx", join(HERE, "baml-call.mts")], { input: JSON.stringify({ fn, args, model, effort, parseOnly }), encoding: "utf8", maxBuffer: 1 << 26 });
   if (r.status !== 0) throw new Error(`baml ${fn}: ${(r.stderr || "").slice(-400)}`);
   const o = JSON.parse(r.stdout);
@@ -92,7 +92,7 @@ function card(nbt, tag) {
 }
 
 async function judge(cardPng) {
-  const r = baml("JudgeGlance", [`${b.name}: ${b.what}`, { image: cardPng }], { model: "claude-opus-5-5" });
+  const r = baml("JudgeGlance", [`${b.name}: ${b.what}`, { image: cardPng }], {});   // model from routes.json
   cost += r.cost;
   return r.result;
 }
@@ -158,7 +158,7 @@ for (const [i, t] of tasks.entries()) {
   const tiles = renderTiles(join(wd, "out.nbt"), join(wd, "t"));
   const crops = closeups(curTiles, tiles, wd);
   if (!crops.length) { taskLog.push({ ...t, kept: false, verdict: "Neutral", why: "no pixels changed" }); continue; }
-  const rv = baml("ReviewChange", [t.title, briefShort, { images: crops }], { model: "claude-sonnet-5-5", effort: "low" });
+  const rv = baml("ReviewChange", [t.title, briefShort, { images: crops }], {});   // model from routes.json (Haiku)
   cost += rv.cost;
   const v = { verdict: rv.result.verdict, why: rv.result.why };
   const kept = v.verdict === "Improves";

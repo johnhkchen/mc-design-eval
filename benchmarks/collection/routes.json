@@ -1,6 +1,6 @@
 {
-  "_doc": "Which CLI answers each BAML function (BAML renders the prompt and parses the reply; the CLI only answers). provider: claude (claude -p, Claude plan) | codex (codex exec, ChatGPT plan). fallback is tried if the first fails.",
-  "JudgeGlance":  { "provider": "claude", "model": "claude-opus-5-5",   "fallback": { "provider": "codex" } },
-  "ReviewChange": { "provider": "claude", "model": "claude-sonnet-5-5", "effort": "low", "fallback": { "provider": "codex" } },
-  "default":      { "provider": "claude", "model": "claude-sonnet-5-5", "fallback": { "provider": "codex" } }
+  "_doc": "Which CLI answers each BAML function (BAML renders the prompt and parses the reply; the CLI only answers). Roles: Sonnet = main agent and glance judge; Haiku 5.5 = fast cheap reviews/parsing (keep inputs small, well under 100K tokens); no Opus per build. provider: claude (claude -p) | codex (codex exec). fallback is tried if the first fails.",
+  "JudgeGlance":  { "provider": "claude", "model": "claude-sonnet-5-5", "effort": "medium", "fallback": { "provider": "codex" } },
+  "ReviewChange": { "provider": "claude", "model": "claude-haiku-5-5",  "effort": "low",    "fallback": { "provider": "codex" } },
+  "default":      { "provider": "claude", "model": "claude-haiku-5-5",  "effort": "low",    "fallback": { "provider": "codex" } }
 }
