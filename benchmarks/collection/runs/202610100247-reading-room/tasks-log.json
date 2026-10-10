@@ -1,0 +1,92 @@
+[
+ {
+  "title": "Make the garden gate read as a gate",
+  "kind": "props",
+  "where": "east lane, x6 z0..2, y1..2 (left end of the street view)",
+  "instruction": "In build.mjs replace the single open oak_fence_gate at (6,1,0) with a framed entrance: oak_log posts (axis y) at (6,1,0) and (6,2,0), the open oak_fence_gate at (6,1,1) facing east (open=true), a cobblestone_wall cap on (6,3,0), and a lantern (standing) on the cap. Keep (6,0,*) path blocks.",
+  "kept": false,
+  "verdict": "worse",
+  "why": "The change adds a bare light-grey block topped with a floating lantern beside the post and removes the open gate, fence and ivy, so it reads as a stray unfinished pillar rather than a garden gate."
+ },
+ {
+  "title": "Add a roof eave lip on the front and back",
+  "kind": "roof",
+  "where": "north and south roof edge, y4-y5, z0 and z8",
+  "instruction": "In build.mjs add a row of upside-down deepslate_tile_stairs (B.stairs('deepslate_tile','south','top') for the north edge at z0, facing north at z8) at y5 across x0..5 so the roof overhangs the wall by one block. Keep the grid at 7x7x9; re-run mcd paint with rules.txt afterwards.",
+  "kept": true,
+  "verdict": "improves",
+  "why": "The after build has a visible overhanging eave lip on the front and back that adds roof depth and a crafted edge in the street and front-right views, though the lip reads slightly heavy and boxy."
+ },
+ {
+  "title": "Chimney on the west gable",
+  "kind": "roof",
+  "where": "roof, x1 z5, y5..6",
+  "instruction": "Run `mcd roof` with --chimney 1,5 or add a 1x1 stone_bricks chimney from y5 to y6 at (1,5), capped with a stone_brick_slab, keeping total height 7. Weather it with `mcd paint` (weather 0.4).",
+  "kept": false,
+  "verdict": "neutral",
+  "why": "The chimney cap is a single bright pale block sunk into the dark slate roof, so it reads as a small light patch or hole rather than a stack, and it is barely visible at a glance, though it does echo the reference's pale chimney top."
+ },
+ {
+  "title": "Hang a second small sign by the barrel",
+  "kind": "sign",
+  "where": "north face, x0 z1 y3 (above the barrel, right of the READING ROOM board)",
+  "instruction": "B.sign('spruce', ['PUBLIC','RECORD'], {facing:'north', color:'black'}) placed on the wall at (0,3,0).",
+  "kept": false,
+  "verdict": "neutral",
+  "why": "The dark 'PUBLIC RECORD' sign is legible and reads as a separate board tacked beside the READING ROOM sign, but it butts directly against it so the two merge into one long banner, and the dark oak clashes slightly with the lighter board while adding little the barrel doesn't already say."
+ },
+ {
+  "title": "Moss and cracks at the base",
+  "kind": "detail",
+  "where": "all four faces, rows y0-y2",
+  "instruction": "mcd paint rule: `all faces rows 0-2 where stone_bricks -> gradient mossy_stone_bricks..stone_bricks up`, then `all faces ground row -> weather 0.5`. Compare before/after and keep only if it does not read as stripes.",
+  "kept": true,
+  "verdict": "improves",
+  "why": "The extra moss patches on the base stone-brick courses add believable weathering that suits the old storeroom and match the mossy base in the concept art, without covering the door, planter or barrel or adding stray colours."
+ },
+ {
+  "title": "Window surrounds in deepslate on every side",
+  "kind": "detail",
+  "where": "north x3 y2-3; west x0 z3-4; east x5 z3,5; south x2-3",
+  "instruction": "mcd paint: `all faces openings -> frames deepslate_bricks`, then `north openings -> lintels flat deepslate_bricks`. Check nothing grows past 7 wide.",
+  "kept": true,
+  "verdict": "improves",
+  "why": "The deepslate surrounds give the window and the street-side opening a darker, cleaner frame that matches the concept's dark stone trim and adds contrast against the lighter wall, though the effect is subtle and the old mossy stone is lost in the opening."
+ },
+ {
+  "title": "Curtains on the side and back windows",
+  "kind": "banner",
+  "where": "west window (1,2..3,3..4), back window (2..3,2..3,6)",
+  "instruction": "B.banner('red',[['stripe_center','white']],{facing:'east'}) at (1,3,3) and (1,3,4) for the west; facing 'north' at (2,3,6),(3,3,6) for the back. Keep colours the same as the front curtains.",
+  "kept": false,
+  "verdict": "worse",
+  "why": "The new curtains are a flat, translucent red strip that overlaps the hanging lantern and the wall beside the window, so the back window now reads as cluttered, with the lantern half-buried, while the street view looks the same as before."
+ },
+ {
+  "title": "Operator touch: clean quartz doorstep",
+  "kind": "detail",
+  "where": "north face, doorstep (1,0,0)",
+  "instruction": "Replace the doorstep stone_brick_slab at (1,0,0) in build.mjs with smooth_quartz_slab (type top). Change nothing else: the Reading Room is a humble Concord annex with only a token operator touch.",
+  "kept": false,
+  "verdict": "worse",
+  "why": "The pure white quartz block on the doorstep step is a stark, bright patch against the mossy grey stone that reads as a mismatched, unweathered tile instead of a crafted doorstep, and it clashes with the build's dark, aged palette."
+ },
+ {
+  "title": "Interior: floor rug and warm light",
+  "kind": "props",
+  "where": "interior x2..3 z3..5 y1",
+  "instruction": "Place red_carpet at (2,1,4),(3,1,4) and a candle on the lectern-side stool; replace the chest at (3,1,6) with a bookshelf stack. Re-check `mcd check` walkability stays true at the door (x1,z2).",
+  "kept": true,
+  "verdict": "improves",
+  "why": "The bookshelf under the window adds a warm, readable interior detail (colourful book spines) that suits a reading room and sits cleanly in the frame, while the front view only shows tiny edge-pixel noise beside the curtain."
+ },
+ {
+  "title": "Fix walkability readout and door reveal",
+  "kind": "fix",
+  "where": "door cell (1,1..2,2) and interior path z2..6",
+  "instruction": "mcd check reports 'not walkable end to end' (narrowest 1). Remove the bookshelf at (1,1,3) and (1,2,3) so the entry has a 2-wide path, then re-run mcd check.",
+  "kept": false,
+  "verdict": "neutral",
+  "why": "The close-up shows the door-side panel changing from a red/blue/green bookshelf-like detail to dull grey and dark-brown blocks, which removes some colour but doesn't visibly improve walkability or the door reveal at a glance."
+ }
+]

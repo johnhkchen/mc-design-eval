@@ -1,0 +1,157 @@
+{
+ "key": "reading-room",
+ "name": "The Reading Room",
+ "tasks": 10,
+ "tasksKept": 4,
+ "kept": "v2",
+ "score": 5,
+ "verdict": "The stone-and-log storeroom massing and mossy plinth are a good start, but the heavy flat deepslate cap, the busy front where you can't tell door, window and shutters apart, and the gate pieces floating off the corner keep it from reading as a lived-in reading room.",
+ "accepted": false,
+ "costUsd": 3.89,
+ "minutes": 17.1,
+ "log": [
+  {
+   "n": "build",
+   "s": 470,
+   "turns": 64,
+   "cost": 1.8727529999999997
+  },
+  {
+   "n": "judge v1",
+   "s": 489,
+   "score": 5,
+   "verdict": "The materials work well together (log corners, stone brick, spruce infill, deepslate) and the barrel, lantern and bookshelf window read correctly, but the roof is a flat, heavy deepslate lid with no gable or overhang, the entrance is muddled by several door-like panels, and the garden gate shows up as loose trapdoors and fence bits floating by the plinth, so at a glance it reads as a squat box with clutter."
+  },
+  {
+   "n": 10,
+   "s": 489
+  },
+  {
+   "n": "task 1: Make the garden gate read as a gate",
+   "s": 538,
+   "turns": 13,
+   "cost": 0.020257269999999997
+  },
+  {
+   "n": "  review 1",
+   "s": 542,
+   "kept": false,
+   "verdict": "worse"
+  },
+  {
+   "n": "task 2: Add a roof eave lip on the front and bac",
+   "s": 582,
+   "turns": 11,
+   "cost": 0.01740324
+  },
+  {
+   "n": "  review 2",
+   "s": 586,
+   "kept": true,
+   "verdict": "improves"
+  },
+  {
+   "n": "task 3: Chimney on the west gable",
+   "s": 657,
+   "turns": 17,
+   "cost": 0.02566395
+  },
+  {
+   "n": "  review 3",
+   "s": 666,
+   "kept": false,
+   "verdict": "neutral"
+  },
+  {
+   "n": "task 4: Hang a second small sign by the barrel",
+   "s": 690,
+   "turns": 6,
+   "cost": 0.01304099
+  },
+  {
+   "n": "  review 4",
+   "s": 695,
+   "kept": false,
+   "verdict": "neutral"
+  },
+  {
+   "n": "task 5: Moss and cracks at the base",
+   "s": 723,
+   "turns": 10,
+   "cost": 0.014900220000000002
+  },
+  {
+   "n": "  review 5",
+   "s": 731,
+   "kept": true,
+   "verdict": "improves"
+  },
+  {
+   "n": "task 6: Window surrounds in deepslate on every s",
+   "s": 821,
+   "turns": 21,
+   "cost": 0.030100939999999996
+  },
+  {
+   "n": "  review 6",
+   "s": 829,
+   "kept": true,
+   "verdict": "improves"
+  },
+  {
+   "n": "task 7: Curtains on the side and back windows",
+   "s": 870,
+   "turns": 12,
+   "cost": 0.018228659999999997
+  },
+  {
+   "n": "  review 7",
+   "s": 874,
+   "kept": false,
+   "verdict": "worse"
+  },
+  {
+   "n": "task 8: Operator touch: clean quartz doorstep",
+   "s": 905,
+   "turns": 10,
+   "cost": 0.015515539999999998
+  },
+  {
+   "n": "  review 8",
+   "s": 910,
+   "kept": false,
+   "verdict": "worse"
+  },
+  {
+   "n": "task 9: Interior: floor rug and warm light",
+   "s": 951,
+   "turns": 11,
+   "cost": 0.01840541
+  },
+  {
+   "n": "  review 9",
+   "s": 955,
+   "kept": true,
+   "verdict": "improves"
+  },
+  {
+   "n": "task 10: Fix walkability readout and door reveal",
+   "s": 1008,
+   "turns": 14,
+   "cost": 0.021746019999999998
+  },
+  {
+   "n": "  review 10",
+   "s": 1011,
+   "kept": false,
+   "verdict": "neutral"
+  },
+  {
+   "n": "judge v2",
+   "s": 1027,
+   "score": 5,
+   "verdict": "The stone-and-log storeroom massing and mossy plinth are a good start, but the heavy flat deepslate cap, the busy front where you can't tell door, window and shutters apart, and the gate pieces floating off the corner keep it from reading as a lived-in reading room.",
+   "tasksKept": 4
+  }
+ ]
+}

@@ -1,0 +1,11 @@
+FACE east
+rows 0-3 -> weather 0.5
+rows 0-3 where deepslate_bricks -> vary 0.2 cracked_deepslate_bricks
+
+FACE west
+rows 0-3 -> weather 0.5
+rows 0-3 where deepslate_bricks -> vary 0.2 cracked_deepslate_bricks
+
+FACE south
+rows 0-3 -> weather 0.5
+rows 0-3 where deepslate_bricks -> vary 0.2 cracked_deepslate_bricks

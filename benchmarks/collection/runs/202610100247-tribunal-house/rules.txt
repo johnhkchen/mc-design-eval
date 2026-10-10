@@ -1,0 +1,14 @@
+FACE east
+all -> weather 0.2
+all where stone_bricks -> vary
+FACE west
+all -> weather 0.2
+all where stone_bricks -> vary
+FACE south
+all -> weather 0.2
+all where stone_bricks -> vary
+FACE north
+all where stone_bricks -> weather 0.2
+all where stone_bricks -> vary
+FACE roof
+all -> weather 0.15

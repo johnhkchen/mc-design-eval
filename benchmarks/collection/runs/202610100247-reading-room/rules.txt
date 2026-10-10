@@ -1,0 +1,5 @@
+all faces where stone_bricks -> weather 0.35
+all faces where stone_bricks -> vary
+all faces where deepslate_bricks -> weather 0.4
+east where stone_bricks rows 1-3 -> vary 0.2
+roof where deepslate_tiles -> vary

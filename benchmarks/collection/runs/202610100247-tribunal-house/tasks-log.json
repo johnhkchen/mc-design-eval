@@ -1,0 +1,83 @@
+[
+ {
+  "title": "Make the name plaque legible and gold",
+  "kind": "sign",
+  "where": "north portico, over the doors: signs at x=12 and x=14, y=8, z=8 (facing north) on the quartz board x11..15,y8,z9",
+  "instruction": "In build.mjs section 5 (plaque) re-issue the two B.sign calls with { facing:'north', color:'orange', glow:true }; keep the text 'TRIBUNAL' / 'HOUSE' and 'HEARD' / 'HERE'. Re-run `node build.mjs`, then mcd paint, and check street.png that the lettering reads from the foot of the steps.",
+  "kept": false,
+  "verdict": "neutral",
+  "why": "The only change is a faint yellow tint in the tiny text on the plaque strips, which is still unreadable at a glance and not visibly gold, so the plaque is no more legible or noticeably better than before."
+ },
+ {
+  "title": "Hang two banners in the portico",
+  "kind": "banner",
+  "where": "portico back wall (z=10 face), x=8 and x=18, y=5..6, hanging at z=9 facing north",
+  "instruction": "Add put(8,6,9,B.banner('white',[['border','gray'],['circle','black']],{facing:'north'})) and the same at x=18 (courthouse seal). Make sure the block at (x,6,10) is solid wall (it is stone brick). Check the street view; remove if they hide the window bays.",
+  "kept": true,
+  "verdict": "improves",
+  "why": "Two dark banners now hang between the columns flanking the entrance, adding a civic, courthouse-like accent that fits the portico, though they are small and the dark emblem is only modestly visible."
+ },
+ {
+  "title": "Make the pediment seal read",
+  "kind": "detail",
+  "where": "north pediment tympanum, x=11..15, y=12..15, z=3",
+  "instruction": "The scales emblem is small and shadowed by the raking verge. Edit build.mjs section 7: make the panel x=10..16 (frame polished_andesite, interior smooth_quartz), keep y=12..15, and recolour the beam/post to polished_deepslate; add gold: set(13,15,3,'gold_block') as a finial above the beam if the cell is free. Re-render street.png and front-elevation.png.",
+  "kept": false,
+  "verdict": "neutral",
+  "why": "{\"verdict\": \"improves\", \"why\": \"The pediment's dark void gets bright quartz panels beside it, but they read as stray white patches rather than a scales-of-justi"
+ },
+ {
+  "title": "Texture the roof slopes",
+  "kind": "roof",
+  "where": "roof, both slopes (east and west), x=0..26, y=12..18",
+  "instruction": "Re-run the roof() call in build.mjs with pattern:{material:'andesite',every:5,offset:2} (banded courses) and hips untouched, keep material 'stone_brick', pitch 0.42 (height must stay <= 19). Compare with `mcd compare` and keep the better one.",
+  "kept": false,
+  "verdict": "neutral",
+  "why": "The roof slopes still read as flat grey stone-brick courses with the same ridge lines, chimneys and wooden gable trim, so the added texture is barely perceptible at a glance and doesn't make the roof more crafted or closer to the concept."
+ },
+ {
+  "title": "Weathered base on the flanks and rear",
+  "kind": "detail",
+  "where": "east, west and south faces, y=0..4 (ground row)",
+  "instruction": "Add to rules.txt under each FACE: `rows 0-3 -> weather 0.5` and `rows 0-3 where deepslate_bricks -> vary 0.2 cracked_deepslate_bricks`. Re-run mcd paint stage1.nbt build.nbt --rules rules.txt --face north,south,east,west,roof. Cracked and mossy, not gloomy.",
+  "kept": false,
+  "verdict": "neutral",
+  "why": "The weathered base adds a few more mossy and cobble patches along the bottom course, but the change is barely visible at a glance in either view and doesn't noticeably improve how the building reads."
+ },
+ {
+  "title": "Lamps on the side pilaster caps",
+  "kind": "props",
+  "where": "west x=0 and east x=26, pilaster caps at z=11, 15, 19 (y=10)",
+  "instruction": "In build.mjs section 7b, on top of each pilaster cap (y=11) add B.fence('oak') at (xo,11,z) and B.lantern(false) at (xo,12,z) for z in [11,19]. Stay inside x 0..26 and height <= 19; re-render left/right-elevation.png.",
+  "kept": false,
+  "verdict": "neutral",
+  "why": "The added lanterns are only a few tiny, barely visible specks on the roof edge and side, so they neither clutter nor meaningfully improve the glance read, and they don't actually sit on pilaster caps."
+ },
+ {
+  "title": "Flower planters beside the steps",
+  "kind": "props",
+  "where": "foot of the steps, x=2 and x=24, z=2, y=1..2",
+  "instruction": "Currently barrel + oak_leaves. Replace the leaves with set(x,1,2,'azalea_leaves',{persistent:'true'}) and add a flower_pot-style accent: set(x,2,2,'potted_red_tulip') on top. Also add set(4,3,6,'potted_azalea_bush') and set(22,3,6,'potted_azalea_bush') in the portico corners.",
+  "kept": true,
+  "verdict": "improves",
+  "why": "Small flower sprigs now sit on the existing planters flanking the steps, adding a subtle touch of colour and life that fits the concept's planters without clutter or broken blocks."
+ },
+ {
+  "title": "Rear gable window readable",
+  "kind": "fix",
+  "where": "south (rear) gable, x=12..14, y=13..15, z=21",
+  "instruction": "The deepslate frame with iron bars and one glass pane is hidden in shadow. Edit build.mjs: frame in polished_andesite instead of deepslate_bricks, replace the iron_bars at x=12,14 with glass_pane, and add set(13,16,21,'deepslate_brick_slab',{type:'bottom'}) above as a hood.",
+  "kept": true,
+  "verdict": "improves",
+  "why": "The back gable now has a framed, lighter-stone window block with a dark opening that reads as a deliberate window instead of a plain dark hole, though the change is small and the front view is essentially unchanged."
+ },
+ {
+  "title": "Clean quartz kick-plate under the east gallery windows",
+  "kind": "detail",
+  "where": "east face, y=3..4 under the gallery windows at z=13..14 and z=17..18",
+  "instruction": "Add to rules.txt under FACE east: a rule `east row 3 cols <columns of the two windows from mcd faces> -> smooth_quartz_slab top` for a clean kick-plate, plus `east row 6 col <gap between the windows> -> attach lantern`. Operators only clean street-level stone; leave the upper wall weathered. Re-run mcd paint and mcd compare, keep the better.",
+  "kept": false,
+  "verdict": "neutral",
+  "why": "The white quartz strip is a tiny, barely visible accent in the window recesses, and its bright white against the grey stone slightly reads as a stray bright block (with a stray orange glow) rather than a clear kick-plate, so it neither helps nor hurts the glance."
+ }
+]

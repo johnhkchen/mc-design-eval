@@ -1,0 +1,145 @@
+{
+ "key": "tribunal-house",
+ "name": "Tribunal House",
+ "tasks": 9,
+ "tasksKept": 3,
+ "kept": "v2",
+ "score": 6,
+ "verdict": "The temple-front massing, broad stair and pedimented gable read as a courthouse straight away, but the tan wooden columns undercut the stone character, the roof is a plain slab with stray lumps and an odd stepped band, and the back wall is flat and blotchy with patchy weathering.",
+ "accepted": false,
+ "costUsd": 3.51,
+ "minutes": 16.2,
+ "log": [
+  {
+   "n": "build",
+   "s": 414,
+   "turns": 40,
+   "cost": 1.6369776000000003
+  },
+  {
+   "n": "judge v1",
+   "s": 432,
+   "score": 6,
+   "verdict": "The temple-front massing, podium and grand stair read clearly as a courthouse, but the honey-coloured wooden columns clash with the 'stone courthouse' brief, the roof has a visible mid-slope seam and stray chimney stubs, and the back elevation is a big flat wall with blotchy weathering and only three small windows."
+  },
+  {
+   "n": 9,
+   "s": 432
+  },
+  {
+   "n": "task 1: Make the name plaque legible and gold",
+   "s": 488,
+   "turns": 15,
+   "cost": 0.02126897
+  },
+  {
+   "n": "  review 1",
+   "s": 492,
+   "kept": false,
+   "verdict": "neutral"
+  },
+  {
+   "n": "task 2: Hang two banners in the portico",
+   "s": 539,
+   "turns": 10,
+   "cost": 0.018524910000000002
+  },
+  {
+   "n": "  review 2",
+   "s": 543,
+   "kept": true,
+   "verdict": "improves"
+  },
+  {
+   "n": "task 3: Make the pediment seal read",
+   "s": 608,
+   "turns": 20,
+   "cost": 0.02566089
+  },
+  {
+   "n": "  review 3",
+   "s": 613,
+   "kept": false,
+   "verdict": "neutral"
+  },
+  {
+   "n": "task 4: Texture the roof slopes",
+   "s": 699,
+   "turns": 18,
+   "cost": 0.024415520000000003
+  },
+  {
+   "n": "  review 4",
+   "s": 703,
+   "kept": false,
+   "verdict": "neutral"
+  },
+  {
+   "n": "task 5: Weathered base on the flanks and rear",
+   "s": 744,
+   "turns": 15,
+   "cost": 0.02081607
+  },
+  {
+   "n": "  review 5",
+   "s": 754,
+   "kept": false,
+   "verdict": "neutral"
+  },
+  {
+   "n": "task 6: Lamps on the side pilaster caps",
+   "s": 797,
+   "turns": 12,
+   "cost": 0.018241
+  },
+  {
+   "n": "  review 6",
+   "s": 802,
+   "kept": false,
+   "verdict": "neutral"
+  },
+  {
+   "n": "task 7: Flower planters beside the steps",
+   "s": 831,
+   "turns": 8,
+   "cost": 0.0148986
+  },
+  {
+   "n": "  review 7",
+   "s": 836,
+   "kept": true,
+   "verdict": "improves"
+  },
+  {
+   "n": "task 8: Rear gable window readable",
+   "s": 862,
+   "turns": 8,
+   "cost": 0.014147340000000003
+  },
+  {
+   "n": "  review 8",
+   "s": 867,
+   "kept": true,
+   "verdict": "improves"
+  },
+  {
+   "n": "task 9: Clean quartz kick-plate under the east g",
+   "s": 950,
+   "turns": 18,
+   "cost": 0.0262709
+  },
+  {
+   "n": "  review 9",
+   "s": 955,
+   "kept": false,
+   "verdict": "neutral"
+  },
+  {
+   "n": "judge v2",
+   "s": 971,
+   "score": 6,
+   "verdict": "The temple-front massing, broad stair and pedimented gable read as a courthouse straight away, but the tan wooden columns undercut the stone character, the roof is a plain slab with stray lumps and an odd stepped band, and the back wall is flat and blotchy with patchy weathering.",
+   "tasksKept": 3
+  }
+ ]
+}

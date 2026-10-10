@@ -10,9 +10,10 @@ export const SCALE = [
 
 // Two layers every building is made of, in a different mix. `newness` 0 = untouched Concord, 1 = all operator.
 export const STYLE = {
-  concord: "THE CONCORD (original, older): deepslate bricks and deepslate tiles for walls, polished deepslate and chiseled deepslate for trim, " +
-    "stripped oak and oak logs for columns, posts and beams, oak doors and frames, a stone-brick or cobbled deepslate plinth; heavy, honest, " +
-    "symmetrical civic architecture with cornices, pediments and deep window reveals; weathered (cracked deepslate, a little moss at the base).",
+  concord: "THE CONCORD (original, older): walls of stone bricks, tuff bricks and andesite with deepslate as the ACCENT (plinths, quoins, trim " +
+    "bands, window surrounds), not the whole building; roofs of lighter slate (deepslate tiles only on small or steep roofs, otherwise stone-brick, " +
+    "andesite or spruce shingles); stripped oak and oak for columns, posts, beams, doors and frames; heavy, honest, symmetrical civic " +
+    "architecture with cornices, pediments and deep window reveals; weathered (cracked and mossy at the base) but not gloomy.",
   operator: "THE OPERATORS (later, newer): smooth quartz, calcite, white concrete, large clean glass panes, slim light-grey or cyan accents, small " +
     "gold or copper lettering and fittings. They ADAPTED the old buildings the way real buildings get reused, not by stacking new floors on " +
     "top: the original building stays whole and readable (its walls, roof, columns, cornices, proportions), and the new layer appears where " +
