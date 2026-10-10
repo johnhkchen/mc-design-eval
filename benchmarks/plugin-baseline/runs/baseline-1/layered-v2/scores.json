@@ -550,7 +550,7 @@
    "subject": "lighthouse",
    "A": "plain",
    "B": "plugin",
-   "owner": null,
+   "owner": "B",
    "picks": {
     "placeable": "B",
     "crafted": "tie",
@@ -576,7 +576,7 @@
    "subject": "glass-cafe",
    "A": "plugin",
    "B": "plain",
-   "owner": null,
+   "owner": "B",
    "picks": {
     "placeable": "A",
     "crafted": "A",
@@ -602,7 +602,7 @@
    "subject": "stave-church",
    "A": "described",
    "B": "stock",
-   "owner": null,
+   "owner": "A",
    "picks": {
     "placeable": "B",
     "crafted": "B",
@@ -628,7 +628,7 @@
    "subject": "desert-market",
    "A": "described",
    "B": "stock",
-   "owner": null,
+   "owner": "A",
    "picks": {
     "placeable": "A",
     "crafted": "A",
@@ -654,7 +654,7 @@
    "subject": "desert-market",
    "A": "plain",
    "B": "plugin",
-   "owner": null,
+   "owner": "B",
    "picks": {
     "placeable": "B",
     "crafted": "B",
@@ -680,7 +680,7 @@
    "subject": "tea-house",
    "A": "plugin",
    "B": "plain",
-   "owner": null,
+   "owner": "A",
    "picks": {
     "placeable": "A",
     "crafted": "tie",
@@ -706,7 +706,7 @@
    "subject": "steampunk-workshop",
    "A": "stock",
    "B": "described",
-   "owner": null,
+   "owner": "B",
    "picks": {
     "placeable": "A",
     "crafted": "A",
@@ -732,7 +732,7 @@
    "subject": "stave-church",
    "A": "plugin",
    "B": "plain",
-   "owner": null,
+   "owner": "A",
    "picks": {
     "placeable": "A",
     "crafted": "A",
@@ -758,7 +758,7 @@
    "subject": "wizard-tower",
    "A": "described",
    "B": "stock",
-   "owner": null,
+   "owner": "A",
    "picks": {
     "placeable": "B",
     "crafted": "tie",
@@ -784,7 +784,7 @@
    "subject": "steampunk-workshop",
    "A": "plugin",
    "B": "plain",
-   "owner": null,
+   "owner": "B",
    "picks": {
     "placeable": "A",
     "crafted": "A",
@@ -810,7 +810,7 @@
    "subject": "red-barn",
    "A": "plugin",
    "B": "plain",
-   "owner": null,
+   "owner": "tie",
    "picks": {
     "placeable": "A",
     "crafted": "A",
@@ -836,7 +836,7 @@
    "subject": "wizard-tower",
    "A": "plugin",
    "B": "plain",
-   "owner": null,
+   "owner": "A",
    "picks": {
     "placeable": "A",
     "crafted": "A",
