@@ -1,0 +1,67 @@
+{
+ "style": "hip",
+ "pitch": "half",
+ "y": 17,
+ "footprint": [
+  [
+   2,
+   2,
+   23,
+   22
+  ]
+ ],
+ "overhang": 1,
+ "eave": "cornice",
+ "material": "deepslate_tiles",
+ "trim": "stone_bricks",
+ "hips": "deepslate_tiles",
+ "ridge": "none",
+ "pediment": {
+  "face": "north",
+  "width": 12,
+  "pitch": 45,
+  "tympanum": "stone_bricks",
+  "cornice": "stone_bricks",
+  "oculus": false,
+  "depth": 4
+ },
+ "chimneys": [
+  {
+   "at": [
+    3,
+    3
+   ],
+   "size": 1,
+   "material": "stone_bricks",
+   "rise": 3
+  },
+  {
+   "at": [
+    22,
+    3
+   ],
+   "size": 1,
+   "material": "stone_bricks",
+   "rise": 3
+  },
+  {
+   "at": [
+    3,
+    21
+   ],
+   "size": 1,
+   "material": "stone_bricks",
+   "rise": 3
+  },
+  {
+   "at": [
+    22,
+    21
+   ],
+   "size": 1,
+   "material": "stone_bricks",
+   "rise": 3
+  }
+ ],
+ "keep": []
+}

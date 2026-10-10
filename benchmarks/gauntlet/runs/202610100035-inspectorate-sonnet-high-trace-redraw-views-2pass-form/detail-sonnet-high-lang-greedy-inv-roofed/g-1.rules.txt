@@ -1,0 +1,6 @@
+
+## JOB 35: Weathering of base and walls (moss and cracks at the ground, light wear above)
+all faces rows 0-3 where deepslate_bricks -> weather 0.35
+north rows 10-13 where deepslate_bricks -> vary 0.1
+west rows 10-13 where deepslate_bricks -> vary 0.1
+

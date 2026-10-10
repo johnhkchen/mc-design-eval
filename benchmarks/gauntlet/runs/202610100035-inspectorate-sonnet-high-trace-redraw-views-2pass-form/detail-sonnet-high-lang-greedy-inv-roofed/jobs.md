@@ -1,0 +1,36 @@
+FEATURE INVENTORY of the concept's small features (from close-up crops). Implement EACH item as its own JOB, most visible first; skip an item only if the build already has it or it cannot fit (say so in a # comment):
+1. **INSPECTORATE plaque** — upper storey, centred on the front under the pediment, with a framed square boss at each end — about 11×2 lettering on a 13×3 plaque, bosses 3×3 — smooth_stone or stone_bricks, chiseled_stone_bricks bosses, gray_concrete letters — **attach** the lettering, **frames** for the bosses, or raw rules.
+2. **PERMIT OFFICE fascia sign** — ground level, above the three central arches, front face, with light-blue end caps — about 13×2 gold letters on a 15×3 fascia — quartz_block, smooth_quartz, gold lettering via gold_block or yellow_concrete, light_blue_concrete caps — **attach** the lettering, **lintels** or **frames** for the fascia.
+3. **Pediment with stepped raking cornice** — roof, central gable over the entrance, front face — about 12 wide, stepped 1 block per course, 3–4 tall — stone_brick_stairs, stone_brick_slab, polished_andesite_stairs — **cornice**, with **coping** along the slopes.
+4. **Gold cross emblem** — pediment tympanum, centre of the gable face — 3×3 — gold_block or yellow_concrete — **attach**.
+5. **Roof-corner finials / stone pinnacles** — roofline, at both front corners and flanking the pediment, with one more on the right side — 1×1 footprint, 3–4 tall, with a 1–2 block mossy or timber base — stone_brick_wall, mossy_stone_bricks, stone_bricks, oak_log base — **finial**.
+6. **Vertical timber piers** — upper storey, at both corners and between the windows — 1–2 wide × 5 tall — stripped_oak_log, oak_wood — **pilasters**, or **quoins** at the corners.
+7. **Pier capitals / corner brackets** — top of each timber pier at the eave — about 3×2 — oak_stairs, oak_slab, stripped_oak_log — **brackets**.
+8. **Corbel / dentil row** — under the roof eave, running the full front and returning down the sides — 1 block each, every other block — oak_trapdoor, oak_stairs, spruce_trapdoor — **brackets**.
+9. **Eave cornice** — roof edge above the dentils, full width and returning on the sides — 1–2 blocks projecting — stone_brick_stairs, stone_brick_slab, polished_andesite_stairs — **cornice**.
+10. **Upper-storey windows** — 4 across the front, more on the sides, dark glass with a cross mullion and transom — about 2–3 wide × 3–4 tall — oak_trapdoor or stripped_oak_log frame, black_stained_glass_pane, glass_pane — **frames**.
+11. **Dark blue-grey jambs** — upper storey, a strip each side of every window — 1 wide × 3–4 tall — deepslate_tiles, polished_deepslate, blue_terracotta — **pilasters** or **frames**.
+12. **Window hoods / lintels** — above each upper window — 3–5 wide × 1 tall — stone_brick_slab, stone_brick_stairs, polished_andesite_slab — **lintels**.
+13. **Window sills with flower boxes** — under each upper window — 3–5 wide × 1 tall — stone_brick_slab, oak_trapdoor, azalea or red_tulip — **sills**.
+14. **Wooden shutters, closed** — right-most upper window on the front and the matching one on the side — 2–3 wide × 3–4 tall — spruce_trapdoor, jungle_trapdoor, oak_trapdoor — **louvres**.
+15. **Hanging lanterns on chains** — upper storey, beside the timber piers at both outer corners, and on the right side face — 1 block wide, about 4 tall including 2–3 chain links — lantern, iron_chain, with a copper cap — **attach**, or **brackets** for the mount.
+16. **Mossy slim pilasters with gold caps** — upper storey, inboard of the outer windows near both front corners — 1 wide × 5–7 tall — mossy_stone_brick_wall, mossy_cobblestone_wall, gold_block or waxed_cut_copper cap — **pilasters**.
+17. **Chiselled corner bosses** — at the upper-storey base corners above the string course, and at the plaque ends — 2×2 to 3×3 — chiseled_stone_bricks, stone_bricks, polished_andesite — **quoins** or **frames**.
+18. **String course between storeys** — above the quartz ground floor, full width and returning on the sides — 1 tall — stone_brick_slab, polished_andesite_slab, smooth_stone_slab — **cornice** or raw rules.
+19. **Stepped arch heads over the shopfront bays** — ground level, three arches on the front plus the side bays — 5–6 wide × 3 tall, 2–3 stair steps each side — quartz_stairs, smooth_quartz_stairs, quartz_slab — **lintels**.
+20. **Shopfront glazing with light-blue mullion grid** — ground level, 3 bays on the front and the side bays — 4–6 wide × 4 tall per bay — light_blue_stained_glass_pane, glass_pane — **frames**.
+21. **Wall-mounted bracket lanterns** — ground floor, on the piers between the arches and at the outer front corners, with one on the side return — 1×2 with a 2-block arm — lantern, iron_chain, iron_bars, dark_oak_trapdoor — **brackets**.
+22. **Hanging lanterns inside the arcade bays** — under the arch soffits behind the glass, one per bay plus one over the doors — 1 lantern on 1–2 chain blocks — lantern, iron_chain — **attach**.
+23. **Soul / blue-glow lantern on a bracket** — ground floor front, on the pier left of the entrance — 1 block — soul_lantern, chain, iron_bars — **brackets**.
+24. **Projecting corner banner brackets with teal banners** — ground-floor front corners, top of the quartz piers, and the right side face — banner 1×3, arm 2–3 blocks — cyan_banner or light_blue_banner with a gold cross, dark_oak_fence or iron_bars arm, chain — **brackets** or **attach**.
+25. **Copper rods beside the corner lanterns** — ground floor corner piers, next to the banner brackets — 1×3 — lightning_rod, waxed_copper_block — **attach**.
+26. **Double entrance doors with gold handles** — entrance porch, ground level, front centre — 2 wide × 3 tall — dark_oak_door ×2, gold_block accents — **frames** for the surround.
+27. **Entrance steps with side cheeks** — in front of the doors — about 6 wide × 3 deep, 3 treads — quartz_stairs, quartz_slab, smooth_quartz — raw rules.
+28. **Potted shrubs and planters with white flowers** — ground level, flanking each shopfront bay and the entrance, and in a row along the east side — 1×2 each — barrel or oak_trapdoor box, flowering_azalea, azalea_leaves, white_tulip — **attach**.
+29. **Filing cabinet with scattered papers** — right of the entrance steps on the pavement — 1×2, with loose paper nearby — barrel, white_carpet, paper — **attach**.
+30. **Interior counters, shelves and teal banners** — visible through the glass, ground-floor bays — 1–3 blocks each — barrel, bookshelf, lectern, cyan_banner — **attach**.
+31. **Dark timber colonnade on the east return** — ground floor, east side, posts on stone bases, 4 or so in a row — 1 × 5 each — dark_oak_log, stripped_dark_oak_wood, stone_brick_wall — **pilasters**.
+32. **Mossy plinth base course** — ground-level base all round, below the quartz walls — 2–3 tall, full width — mossy_stone_bricks, stone_bricks, cracked_stone_bricks — **plinth**.
+33. **Flagstone pavement border** — ground, around the building — 2–3 wide — stone_bricks, mossy_stone_bricks, andesite, polished_andesite — raw rules.
+34. **Chimney with copper pot** — roof, rear right corner, visible on the 3/4 view — about 2×2 base, 4–5 tall plus a 1×1 pot — stone_bricks, mossy_stone_bricks, waxed_copper_block or orange_terracotta cap — **finial** or raw rules.
+

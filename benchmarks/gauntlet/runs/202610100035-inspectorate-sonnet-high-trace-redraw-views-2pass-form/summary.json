@@ -1,0 +1,119 @@
+{
+ "runId": "202610100035-inspectorate-sonnet-high-trace-redraw-views-2pass-form",
+ "subject": "inspectorate",
+ "model": "claude-sonnet-5-5",
+ "effort": "high",
+ "kept": "round-2",
+ "why": "B has the same front as A but carries the cream ground floor with blue-glass windows around onto its side elevation, plus timber pilasters, an upper storey and a hipped roof. A's side is a blank dark brick slab that ignores the reference completely.",
+ "rounds": [
+  "round-1",
+  "round-2"
+ ],
+ "costUsd": 4.475595800000001,
+ "durationMs": 1571435,
+ "stages": [
+  {
+   "n": "concept chosen",
+   "s": 0,
+   "from": "benchmarks/charter-row/concepts/inspectorate/cx-c1.png"
+  },
+  {
+   "n": "redraw",
+   "s": 30,
+   "attempt": 1,
+   "cols": 26,
+   "rows": 18,
+   "score": 63.2,
+   "box": {
+    "x": 51,
+    "y": 29.8,
+    "w": 1447,
+    "h": 972
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw",
+   "s": 43,
+   "attempt": 2,
+   "cols": 28,
+   "rows": 19,
+   "score": 52.8,
+   "box": {
+    "x": 224,
+    "y": 52.67368421052632,
+    "w": 1103,
+    "h": 919
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw",
+   "s": 58,
+   "attempt": 3,
+   "cols": 26,
+   "rows": 19,
+   "score": 50.5,
+   "box": {
+    "x": 157,
+    "y": 30.031578947368423,
+    "w": 1238,
+    "h": 953
+   },
+   "scale": 1
+  },
+  {
+   "n": "redraw pick",
+   "s": 58,
+   "attempt": 3,
+   "cols": 26,
+   "rows": 19,
+   "score": 50.5
+  },
+  {
+   "n": "trace",
+   "s": 58,
+   "cols": 26,
+   "rows": 19,
+   "scale": 1,
+   "box": {
+    "x": 157,
+    "y": 30.031578947368423,
+    "w": 1238,
+    "h": 953
+   }
+  },
+  {
+   "n": "views",
+   "s": 105,
+   "side": "24x19",
+   "depth": "26x19"
+  },
+  {
+   "n": "spec",
+   "s": 166
+  },
+  {
+   "n": "defining shapes",
+   "s": 177
+  },
+  {
+   "n": "pass 1 (front)",
+   "s": 763,
+   "turns": 44,
+   "cost": 2.2920318000000006
+  },
+  {
+   "n": "pass 2 (sides, back, roof)",
+   "s": 1564,
+   "turns": 34,
+   "cost": 1.5991254000000001
+  },
+  {
+   "n": "keep-better",
+   "s": 1571,
+   "kept": "round-2",
+   "why": "B has the same front as A but carries the cream ground floor with blue-glass windows around onto its side elevation, plus timber pilasters, an upper storey and a hipped roof. A's side is a blank dark brick slab that ignores the reference completely."
+  }
+ ]
+}

@@ -5,7 +5,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { makeImage } from "../../src/images.mjs";
-import { locateWithGemini, findElevation, fitGrid } from "./sheet-trace.mjs";
+import { locateWithGemini, findElevation, fitGrid, traceElevation } from "./sheet-trace.mjs";
 
 // depth levels: grey value -> blocks proud of the main wall plane (+ forward, - recessed)
 export const DEPTH_LEVELS = [[255, 2], [192, 1], [128, 0], [64, -1], [0, -2]];
@@ -47,6 +47,17 @@ export async function makeViews(concept, dir, W, H, D) {
   const P = prompts(W, H, D);
   const [side, depth] = await Promise.all([best("side", concept, dir, D, H, P.side), best("depth", concept, dir, W, H, P.depth)]);
   const out = {};
+  // the image model drifts in block scale between views; resample the side to the FRONT's height (keeping its aspect)
+  // and the depth map to the front's exact grid, so every drawing the builder gets shares one scale
+  if (side.pick && side.pick.rows !== H) {
+    const cols = Math.max(4, Math.round(side.pick.cols * H / side.pick.rows));
+    const t = traceElevation(side.pick.p, join(dir, `side-${side.pick.i}-trace`), { box: side.pick.box, cols, rows: H });
+    Object.assign(side.pick, { cols: t.cols, rows: t.rows, resampled: true });
+  }
+  if (depth.pick && (depth.pick.rows !== H || depth.pick.cols !== W)) {
+    const t = traceElevation(depth.pick.p, join(dir, `depth-${depth.pick.i}-trace`), { box: depth.pick.box, cols: W, rows: H });
+    Object.assign(depth.pick, { cols: t.cols, rows: t.rows, resampled: true });
+  }
   if (side.pick) {
     for (const f of ["trace.txt", "trace.png"]) writeFileSync(join(dir, `side-${f}`), readFileSync(join(dir, `side-${side.pick.i}-trace`, f)));
     writeFileSync(join(dir, "side.png"), readFileSync(side.pick.p));

@@ -1,0 +1,51 @@
+
+## JOB 35: Weathering of base and walls (moss and cracks at the ground, light wear above)
+all faces rows 0-3 where deepslate_bricks -> weather 0.35
+north rows 10-13 where deepslate_bricks -> vary 0.1
+west rows 10-13 where deepslate_bricks -> vary 0.1
+
+
+## JOB 32: Mossy plinth base course (stair foot, two courses, moss gradient)
+all faces ground row -> plinth deepslate_bricks 2
+all faces rows 0-1 where deepslate_bricks -> gradient mossy_stone_bricks..deepslate_bricks up
+
+
+## JOB 33: Flagstone pavement border around the front
+# pavement is 2 deep in front of the plinth; step cells at the entrance are already occupied and are skipped
+north row 0 -> alt stone_bricks/polished_andesite out 2
+
+
+## JOB 1: INSPECTORATE plaque (stone tablet proud of the frieze, dark lettering row, chiselled end bosses)
+north row 14 cols 10-15 -> smooth_stone out 1
+north row 13 cols 10-15 -> alt gray_concrete/smooth_stone out 1
+north row 14 cols 9,16 -> chiseled_stone_bricks out 1
+
+
+## JOB 2: PERMIT OFFICE fascia sign (quartz plate, gold lettering band, light-blue end caps)
+# fascia is only 2 rows (y7-8) x 8 cols (x9-16); lettering is a gold band, not readable text
+north rows 7-8 cols 9-16 -> smooth_quartz out 1
+north row 8 cols 10-15 -> alt yellow_concrete/smooth_quartz out 1
+north rows 7-8 cols 8,17 -> light_blue_concrete out 1
+
+
+## JOB 3: Pediment raking cornice (stepped stair line picked out in polished andesite, foot blocks)
+north rows 17-21 where stone_brick_stairs -> polished_andesite_stairs force
+north row 17 cols 8,17 -> chiseled_stone_bricks
+
+
+## JOB 4: Gold cross emblem in the pediment tympanum
+# the build already has a gold block at the pediment base (y16); this completes a Latin cross above it
+north rows 17-19 cols 12-13 -> gold_block
+north row 18 cols 11,14 -> gold_block
+
+
+## JOB 5: Roof pinnacles: mossy bases, stone caps in place of the fires
+roof where campfire -> stone_brick_wall force
+north rows 19-20 cols 3,22 -> mossy_stone_bricks
+west rows 19-20 cols 3,21 -> mossy_stone_bricks
+roof x 7,18 z 2 -> finial stone_brick_wall+stone_brick_wall+stone_brick_slab
+
+
+## JOB 7: Pier capitals (upside-down oak stairs on each pier head)
+north row 13 cols 2,8,9,16,17,23 -> oak_stairs top out 1
+

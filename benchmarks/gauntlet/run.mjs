@@ -198,6 +198,7 @@ if (!reuseSpec) {
     "3. Vertical zones bottom to top with heights in blocks; horizontal bays left to right with widths in blocks; the roof/top form and its edges.",
     "4. MATERIAL MAP: a table mapping every distinct colour/texture region you can see on the sheet to an exact vanilla 1.20+ block id",
     "   (e.g. 'cream wall field → smooth_sandstone', 'gold trim → gold_block'), with where each region is. Match the sheet's materials, not generic ones.",
+    "   Read materials from the CONCEPT SHEET (image 1) only; the tracing (image 2) is flattened for layout and its colours are not the materials.",
     "5. Features and where they sit (doors, windows, signs, ornaments, props), in block coordinates from the front-left ground corner.",
     "6. Depth plan: what projects and recesses, by how much.",
     `Stated subject: ${s.what}. Stated size: ${native ? `${native[0]} wide x ${native[1]} tall on the front (the concept was designed at this size)` : s.size}.`,
@@ -234,7 +235,37 @@ const base = [
   "Load and follow the minecraft-design skill. Build the building shown in concept.jpg (left: front elevation, right: 3/4 view) as structure",
   "files in this directory, following spec.md (its sizes and its MATERIAL MAP are binding: use exactly those block ids for those regions).",
   "Where spec.md and concept.jpg disagree on form, the CONCEPT wins.",
+  "MATERIALS AND COLOURS come from concept.jpg: redraw.png and the tracings are simplified for LAYOUT and SIZE only (their flat greys and sky-blue",
+  "glass are not the concept's materials). Match the concept's tones: warm vs cold, light vs dark, the stone, timber, glass and trim it actually shows.",
 ];
+// concept front box (for the palette check the builders run each round)
+let paletteCmd = "";
+{
+  const { locateWithGemini } = await import("./sheet-trace.mjs");
+  try {
+    const b = await locateWithGemini(concept);
+    paletteCmd = `node ${join(HERE, "palette-check.mjs")} concept.jpg <tiles>/front-elevation.png --box ${b.x},${b.y},${b.w},${b.h}`;
+  } catch { /* no palette check if the front can't be located */ }
+}
+const paletteRule = paletteCmd ? [
+  "COLOUR CHECK every round: run `" + paletteCmd + "` (replace <tiles>). It compares your front with the concept zone by zone and lists drifts",
+  "('middle centre: concept light cream, build dark grey'). Fix every drift it reports unless the concept truly differs; aim for mean ΔE under 10.",
+] : [];
+// DEFINING SHAPES: the two to four forms that make the building recognisable, each with the build-library tool that makes it
+let shapesNote = "";
+if (formOnly || process.argv.includes("--two-pass")) {
+  const r = await requestTextWithImage({
+    prompt: "Image 1 is a Minecraft building concept. Name its 2-4 DEFINING SHAPES: the forms that make it recognisable and that a builder must not lose " +
+      "(e.g. 'three round arches across the ground-floor arcade', 'a triangular pediment over the centre bay', 'a stepped tower'). For each: where it is, " +
+      "its size in blocks for a front about " + (traceSize ? `${traceSize[0]} x ${traceSize[1]}` : "the stated size") + ", and the build-library tool that makes it " +
+      "(arch, dome, setbacks, gableRoof, hipRoof, fins, parapet, cornice, stepGable, falseFront, cylinder). Reply as a short numbered list, nothing else.",
+    images: [img(concept)], model: PHASE1_MODEL_ID, effort: "low",
+  });
+  usage.cost += r.raw?.total_cost_usd || 0;
+  shapesNote = "DEFINING SHAPES (must be built, with the named shape tool, and checked in every render):\n" + r.text.trim();
+  writeFileSync(join(dir, "shapes.md"), shapesNote + "\n");
+  mark("defining shapes");
+}
 const runAgent = (prompt, label) => {
   const r = spawnSync("claude", ["-p", "--plugin-dir", PLUGIN, "--model", PHASE1_MODEL_ID, "--effort", effort,
     "--allowedTools", "Bash Read Write Edit Glob Grep", "--output-format", "json", prompt], { cwd: dir, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
@@ -255,6 +286,7 @@ if (twoPass) {
     ...(traceNote ? [traceNote + " Build the front face to match the tracing cell for cell."] : []),
     ...(viewsNote.includes("depth.txt") ? ["depth.png / depth.txt: a DEPTH MAP of the front: for every front cell, how many blocks it sits proud of (+) or recessed from (-) the main wall plane. " +
       "Build the relief from it: fins, piers, mouldings, reveals, recessed openings. Same-colour features (cream on cream) exist ONLY in this map, so follow it."] : []),
+    ...(shapesNote ? [shapesNote] : []), ...paletteRule,
     ...thinRules, ...formRules, ...geometry,
     "ROUND 1: build, save round-1.nbt, render: mcd render round-1.nbt --front n --tiles r1-tiles. Compare r1-tiles/front-elevation.png with trace.png and",
     "concept.jpg, and r1-tiles/front-left.png with the 3/4 view, cell by cell for the front: list the mismatches (outline, zones, openings, colours, relief).",
@@ -270,7 +302,7 @@ if (twoPass) {
     "Read the concept's 3/4 view for how the side meets the front and how the roof steps; give the side walls the same quality as the front: the side",
     "elevation's silhouette, storey and band lines and bay rhythm, piers and frames with depth, a designed roof (steps, parapets, copings), and a back",
     "that finishes the building (it can be simpler).",
-    ...thinRules, ...formRules, ...geometry,
+    ...paletteRule, ...thinRules, ...formRules, ...geometry,
     "Render: mcd render round-2.nbt --front n --tiles r2-tiles. Compare r2-tiles/right-elevation.png with side-trace.png and r2-tiles/front-left.png with",
     "the 3/4 view; fix the biggest mismatches, re-render, and save the final as round-2.nbt. Keep round-1.nbt untouched. Report in ≤6 lines.",
   ].join(" ");

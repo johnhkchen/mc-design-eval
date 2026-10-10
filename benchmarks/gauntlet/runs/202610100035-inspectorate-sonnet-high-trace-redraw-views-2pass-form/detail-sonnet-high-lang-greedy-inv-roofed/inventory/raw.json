@@ -1,0 +1,584 @@
+[
+ {
+  "what": "Hanging lantern on chain, with copper/rust bracket cap",
+  "where": "Main block, front face, both outer corners of the upper storey, hanging from the eave beneath the timber corner post capital; also on the 3/4 view's front-right corner",
+  "size": "1 block wide, about 4 blocks tall including 3 chain links",
+  "blocks": "chain, lantern, copper_block or waxed_oxidized_copper cap at the top"
+ },
+ {
+  "what": "Gold cross emblem in the pediment tympanum",
+  "where": "Entrance pediment, centre of the gable face, upper level",
+  "size": "3x3 blocks, cross shape",
+  "blocks": "gold_block, or raw_gold_block and yellow_concrete"
+ },
+ {
+  "what": "Pediment raking cornice, stepped stair trim",
+  "where": "Entrance pediment, both sloped edges of the gable, with a flat horizontal cornice band below",
+  "size": "about 8 blocks per slope, 1 block thick",
+  "blocks": "stone_brick_stairs, stone_brick_slab, polished_andesite_stairs"
+ },
+ {
+  "what": "Pediment apex block and corner acroteria",
+  "where": "Entrance pediment, peak and ends of the gable",
+  "size": "2x1 block cap at the apex, 1-2 blocks each at the ends",
+  "blocks": "stone_bricks, polished_andesite, stone_brick_slab"
+ },
+ {
+  "what": "Chimney / roof-corner finials",
+  "where": "Roof, at the left and right front corners and beside the pediment, 3 stepped pinnacles on each side",
+  "size": "1x1 footprint, 3-4 blocks tall, with a 2-block mossy base",
+  "blocks": "stone_bricks, mossy_stone_bricks, mossy_stone_brick_stairs, stone_brick_wall, with oak_log or stripped_oak_log blocks at the base"
+ },
+ {
+  "what": "Corbel/dentil row under the eave",
+  "where": "Main block, top of the upper storey, running the whole length of the front eave and returning along the side",
+  "size": "1 block each, spaced every other block, about 1 block deep",
+  "blocks": "oak_trapdoor, oak_stairs, spruce_trapdoor or stripped_oak_log"
+ },
+ {
+  "what": "Eave cornice with stone overhang",
+  "where": "Main block, roof edge above the dentils, full width",
+  "size": "1-2 blocks deep, full width",
+  "blocks": "stone_brick_slab, stone_brick_stairs, andesite_slab"
+ },
+ {
+  "what": "Lettering sign panel 'INSPECTORATE'",
+  "where": "Entrance pediment, frieze directly below the gable, centred",
+  "size": "about 12-13 blocks wide x 2 tall, with a 3x3 framed square boss at each end",
+  "blocks": "smooth_stone, stone_bricks, chiseled_stone_bricks, black_concrete or gray_concrete letters, oak_sign or item frames"
+ },
+ {
+  "what": "Framed square corner bosses flanking the sign",
+  "where": "Upper storey, at either end of the sign panel and at the lower corners of the main block",
+  "size": "3x3 blocks, with a recessed square inside",
+  "blocks": "chiseled_stone_bricks, stone_bricks, polished_andesite"
+ },
+ {
+  "what": "Window frames with mullions and transoms",
+  "where": "Upper storey, 4 windows across the front face, 2 on the side faces",
+  "size": "3 blocks wide x 4 tall, with a cross mullion",
+  "blocks": "oak_trapdoor, stripped_oak_log, glass_pane, black_stained_glass_pane, spruce_trapdoor"
+ },
+ {
+  "what": "Window hood / lintel",
+  "where": "Upper storey, above each window, with a drip-moulding slab on the central pair",
+  "size": "5 blocks wide x 1 tall",
+  "blocks": "stone_brick_slab, stone_brick_stairs, polished_andesite_slab"
+ },
+ {
+  "what": "Window sill with flower box",
+  "where": "Upper storey, below each window, with a small planter strip",
+  "size": "5 blocks wide x 1 tall",
+  "blocks": "stone_brick_slab, oak_trapdoor, spruce_leaves, azalea"
+ },
+ {
+  "what": "Wooden shutters",
+  "where": "Upper storey, the right-most window on the front face, and the matching one on the 3/4 view",
+  "size": "3 blocks wide x 4 tall, closed pair",
+  "blocks": "oak_trapdoor, jungle_trapdoor, spruce_trapdoor"
+ },
+ {
+  "what": "Flanking pilasters / dark blue-grey column strips",
+  "where": "Upper storey, beside every window (framing both sides)",
+  "size": "1 block wide x 4 tall",
+  "blocks": "deepslate_tile_wall, polished_deepslate, blue_terracotta, cobbled_deepslate_wall"
+ },
+ {
+  "what": "Vertical timber piers/columns on the upper storey",
+  "where": "Upper storey, between windows, and at both corners",
+  "size": "2 blocks wide x 5 tall",
+  "blocks": "stripped_oak_log, oak_wood, birch_log"
+ },
+ {
+  "what": "Mossy stone drainpipe/rod strip with gold cap",
+  "where": "Main block, front face, beside the outermost windows at the upper storey",
+  "size": "1 block wide x 6-7 tall, with a 1-block cap",
+  "blocks": "mossy_stone_brick_wall, mossy_cobblestone_wall, waxed_cut_copper or gold_block cap, chain"
+ },
+ {
+  "what": "Carved/horizontal stone band course between storeys",
+  "where": "Main block, above the ground floor, below the upper storey, with a stone-brick course on the upper wall",
+  "size": "1 block tall, full width",
+  "blocks": "stone_bricks, stone_brick_slab, polished_andesite"
+ },
+ {
+  "what": "Hanging lantern on chain beside timber pier",
+  "where": "Main block, upper storey, far-left and far-right corners of front face; also on the right side face",
+  "size": "1x1 lantern plus 2-3 chain blocks",
+  "blocks": "lantern, iron_chain"
+ },
+ {
+  "what": "Wall-mounted bracket lanterns with iron arm",
+  "where": "Main block ground level, on the piers between the shopfront arches and at the outer ends of the front face",
+  "size": "1x1 lantern, 1-2 blocks of bracket and chain",
+  "blocks": "lantern, soul_lantern, iron_chain, dark_oak_fence, polished_blackstone_wall"
+ },
+ {
+  "what": "Hanging lanterns inside the shopfront glazing",
+  "where": "Entrance bay and the two flanking window bays, just behind the glass at ground level",
+  "size": "1x1 lantern with 1-2 chains",
+  "blocks": "lantern, iron_chain"
+ },
+ {
+  "what": "Bracket arm holding banner and lantern",
+  "where": "Main block, ground level, front corners at the top of the quartz wall below the string course",
+  "size": "3 blocks wide, 1 block high",
+  "blocks": "iron_bars, polished_blackstone_wall, dark_oak_fence, stone_brick_stairs"
+ },
+ {
+  "what": "Hanging teal banner with gold cross",
+  "where": "Ground level, outer left and right corners of front face, and on the right side face",
+  "size": "1 wide x 3 tall",
+  "blocks": "cyan_banner, light_blue_banner"
+ },
+ {
+  "what": "Interior teal banners with gold cross",
+  "where": "Visible through the shopfront glass in each bay, ground level",
+  "size": "1 wide x 2-3 tall",
+  "blocks": "cyan_banner"
+ },
+ {
+  "what": "Copper pipe or rod beside lantern",
+  "where": "Ground level, hanging below the bracket arm at the outer corners",
+  "size": "1x3 vertical",
+  "blocks": "waxed_copper_block, copper_block, lightning_rod"
+ },
+ {
+  "what": "Gold cross finial in pediment",
+  "where": "Pediment, centre of the gable face above the Inspectorate sign",
+  "size": "3x3 cross",
+  "blocks": "gold_block, yellow_concrete, glowstone"
+ },
+ {
+  "what": "Stepped pediment trim",
+  "where": "Roof, central gable above the entrance, front face",
+  "size": "about 12 blocks wide, stepped 1 block per course",
+  "blocks": "stone_brick_stairs, stone_brick_slab, polished_andesite"
+ },
+ {
+  "what": "Lettering 'INSPECTORATE' on a stone plaque",
+  "where": "Main block, upper storey, centred on front face, framed by square carved blocks at each end",
+  "size": "about 11x2 letters on a 13x3 plaque",
+  "blocks": "smooth_stone, chiseled_stone_bricks, gray_concrete, polished_andesite"
+ },
+ {
+  "what": "Lettering 'PERMIT OFFICE' on a quartz fascia sign with light-blue end caps",
+  "where": "Entrance porch/ground level, above the central three arches, front face; repeated on the right side face",
+  "size": "about 13x2 gold letters on a 15x3 fascia",
+  "blocks": "quartz_block, smooth_quartz, gold_block, light_blue_concrete, yellow_terracotta"
+ },
+ {
+  "what": "Corner chiselled boss blocks (square carved plinths)",
+  "where": "Main block, upper storey, base of each timber pier and the sign ends",
+  "size": "1x1 or 2x2",
+  "blocks": "chiseled_stone_bricks, stone_bricks"
+ },
+ {
+  "what": "Window sills with flower boxes",
+  "where": "Upper storey, under each window on the front and side faces",
+  "size": "3 wide x 1 high",
+  "blocks": "stone_brick_slab, stone_brick_stairs, flowering_azalea, red_tulip, spruce_trapdoor"
+ },
+ {
+  "what": "Window mullions and glazing bars",
+  "where": "Upper storey windows on the front and sides",
+  "size": "1 block cross divisions per 2x3 window",
+  "blocks": "spruce_trapdoor, dark_oak_fence, glass_pane"
+ },
+ {
+  "what": "Window hoods or lintels",
+  "where": "Upper storey, above each window on the front face",
+  "size": "3 wide x 1 high",
+  "blocks": "stone_brick_slab, stone_brick_stairs, polished_andesite_slab"
+ },
+ {
+  "what": "Wooden window shutters, closed",
+  "where": "Upper storey, right-hand window on the front face and on the side",
+  "size": "2x3",
+  "blocks": "spruce_trapdoor, jungle_trapdoor, oak_trapdoor"
+ },
+ {
+  "what": "Dark blue-grey column jambs flanking windows",
+  "where": "Upper storey, either side of each window",
+  "size": "1 wide x 3 tall",
+  "blocks": "deepslate_tiles, polished_deepslate, blue_terracotta"
+ },
+ {
+  "what": "Mossy slim decorative pilaster with gold caps",
+  "where": "Main block, upper storey, near both outer front corners",
+  "size": "1 wide x about 5 tall",
+  "blocks": "mossy_stone_bricks, mossy_cobblestone, gold_block, stripped_oak_log"
+ },
+ {
+  "what": "Dentil or corbel course under the eave",
+  "where": "Eave, below the roof edge along the front, side faces and around the timber pier tops",
+  "size": "1x1 blocks every other block, about 1 block tall",
+  "blocks": "oak_stairs, oak_trapdoor, spruce_stairs, stripped_oak_wood"
+ },
+ {
+  "what": "Timber pier capitals as bracket blocks",
+  "where": "Upper storey, top of each timber pier at the eave",
+  "size": "3x2",
+  "blocks": "oak_stairs, oak_slab, stripped_oak_log"
+ },
+ {
+  "what": "Stepped cornice and eave band",
+  "where": "Eave, along the front and side faces under the roof",
+  "size": "1-2 blocks projecting, full building width",
+  "blocks": "stone_brick_stairs, stone_brick_slab, polished_andesite_stairs"
+ },
+ {
+  "what": "Roof corner finials or stone pinnacles on timber base",
+  "where": "Roof, front corners and either side of the pediment",
+  "size": "1x1 and 3-4 tall",
+  "blocks": "stone_brick_wall, mossy_stone_bricks, stone_brick_stairs, oak_log"
+ },
+ {
+  "what": "Chimney stack with copper cap",
+  "where": "Roof, right rear on the right side face",
+  "size": "3x3 base, about 5 tall with a 1x1 pot",
+  "blocks": "stone_bricks, mossy_stone_bricks, stone_brick_wall, waxed_copper_block, orange_terracotta"
+ },
+ {
+  "what": "Contrasting pale quartz and stone string course",
+  "where": "Between ground and upper storey, running across the front below the sill line",
+  "size": "1 block high, full width",
+  "blocks": "stone_brick_slab, polished_andesite_slab, smooth_stone_slab"
+ },
+ {
+  "what": "Stepped arch lintels over shopfront bays",
+  "where": "Entrance porch and ground level, over each of the three glazed arches",
+  "size": "about 6 wide x 3 tall, stepped",
+  "blocks": "quartz_stairs, quartz_slab, smooth_quartz_stairs"
+ },
+ {
+  "what": "Light-blue glazing mullions in shopfront",
+  "where": "Ground level, in the three large glazed bays",
+  "size": "1 block grid every 3-4 blocks",
+  "blocks": "light_blue_stained_glass_pane, glass_pane"
+ },
+ {
+  "what": "Double entrance door with gold handles",
+  "where": "Entrance porch, ground level, front centre",
+  "size": "2x3",
+  "blocks": "dark_oak_door, jungle_door, gold_block"
+ },
+ {
+  "what": "Entrance steps",
+  "where": "Entrance porch, ground level, in front of the door and flanking the sides",
+  "size": "about 7 wide x 3 deep, 2-3 treads",
+  "blocks": "quartz_stairs, smooth_quartz_stairs, quartz_slab"
+ },
+ {
+  "what": "Potted shrubs or planters with white flowers",
+  "where": "Ground level, flanking each shopfront bay and the entrance, with some on the right side face",
+  "size": "1x2 each",
+  "blocks": "flower_pot, potted_azalea_bush, flowering_azalea_leaves, oak_leaves, white_tulip, oak_trapdoor, barrel"
+ },
+ {
+  "what": "Wooden crate planters",
+  "where": "Ground level, either side of the entrance steps",
+  "size": "1x1",
+  "blocks": "barrel, dark_oak_trapdoor, flowering_azalea"
+ },
+ {
+  "what": "Filing cabinet with scattered papers",
+  "where": "Ground level, right of the entrance steps and on the pavement",
+  "size": "1x2 cabinet plus scattered paper",
+  "blocks": "dark_oak_drawer, barrel, smoker, white_carpet, paper"
+ },
+ {
+  "what": "Interior counter and shelves visible through glass",
+  "where": "Ground level, inside the shopfront bays",
+  "size": "2-3 blocks wide",
+  "blocks": "barrel, bookshelf, lectern, oak_stairs, chiseled_bookshelf"
+ },
+ {
+  "what": "Plinth base of mossy stone brick with moss patches",
+  "where": "Ground level plinth, the base course below the quartz walls",
+  "size": "2-3 blocks tall, full width",
+  "blocks": "mossy_stone_bricks, stone_bricks, cracked_stone_bricks, moss_carpet"
+ },
+ {
+  "what": "Flagstone pavement border",
+  "where": "Ground, surrounding the base of the building",
+  "size": "2-3 blocks wide",
+  "blocks": "stone_bricks, mossy_stone_bricks, andesite, polished_andesite"
+ },
+ {
+  "what": "Hanging lantern on chain, bracket-mounted on column face",
+  "where": "main block, front face, upper-storey corner timber piers (far left and far right), mid-height",
+  "size": "1 block wide, 2 tall plus 2-3 chain links",
+  "blocks": "lantern, chain, optional iron_bars bracket"
+ },
+ {
+  "what": "Wall-mounted lantern on forged iron bracket",
+  "where": "ground-floor front face, on the piers between the arches (about 4 along the front); also on the side-return corner",
+  "size": "1x2 with a 2-block bracket arm",
+  "blocks": "lantern, chain, iron_bars, dark_oak_trapdoor"
+ },
+ {
+  "what": "Hanging lantern inside the arcade bays",
+  "where": "ground floor, under the arch heads in front of the glass, one per bay (about 3 on the front)",
+  "size": "1 block lantern, 1-2 chain links",
+  "blocks": "lantern, chain"
+ },
+ {
+  "what": "Soul/blue-glow lantern on a bracket",
+  "where": "ground floor front, pier left of the entrance (blue glass)",
+  "size": "1 block",
+  "blocks": "soul_lantern, chain, iron_bars"
+ },
+ {
+  "what": "Projecting corner banner bracket with teal banner and gold cross",
+  "where": "ground-floor front corners, at the top of the quartz piers (left and right ends), and the corner on the 3/4 view",
+  "size": "banner 1 wide x 3 tall; arm 2-3 blocks",
+  "blocks": "cyan_banner (or light_blue_banner) with a gold cross pattern, dark_oak_fence or iron_bars arm, chain, lantern, copper rod (lightning_rod or waxed_exposed_copper)"
+ },
+ {
+  "what": "Banners in the shop interior",
+  "where": "ground floor, inside the glass bays (left bay, entrance bay)",
+  "size": "1x2",
+  "blocks": "cyan_banner"
+ },
+ {
+  "what": "Orange copper rods on the corner piers",
+  "where": "ground floor, beside the corner banner brackets",
+  "size": "1x3",
+  "blocks": "lightning_rod, waxed_copper_block"
+ },
+ {
+  "what": "Sign band with gold lettering 'PERMIT OFFICE'",
+  "where": "ground-floor front, above the arcade, centre, projecting slightly with teal end caps",
+  "size": "about 11 wide x 2 tall",
+  "blocks": "quartz_slab, smooth_quartz, light_blue_concrete or cyan_terracotta end caps, yellow/gold lettering via oak_sign (glow ink) or gold_block/yellow_concrete pixels"
+ },
+ {
+  "what": "Inscribed stone plaque 'INSPECTORATE'",
+  "where": "upper storey, front, centre under the pediment, framed with carved/chiseled square blocks",
+  "size": "about 9 wide x 2 tall",
+  "blocks": "stone_bricks, chiseled_stone_bricks, polished_andesite, with lettering from dark signs or cobbled_deepslate pixels"
+ },
+ {
+  "what": "Gold cross emblem",
+  "where": "pediment, centre, front face (also on the side view)",
+  "size": "3x3",
+  "blocks": "gold_block, waxed_cut_copper or yellow_concrete"
+ },
+ {
+  "what": "Stepped pediment trim/cornice",
+  "where": "roof front, central gable with stepped stair edging",
+  "size": "about 12 wide, 3-4 tall",
+  "blocks": "stone_brick_stairs, stone_brick_slab, cobblestone_stairs"
+ },
+ {
+  "what": "Finial/pinnacle turrets",
+  "where": "roof corners and flanking the pediment, 4 on the front face (on the roofline) and one on the right rear",
+  "size": "1x1 footprint, 3-4 tall",
+  "blocks": "cobblestone_wall, stone_brick_wall, mossy_stone_bricks, chiseled_stone_bricks"
+ },
+ {
+  "what": "Chimney with copper/orange pot",
+  "where": "roof, rear right corner, on the 3/4 view",
+  "size": "2x2, 4-5 tall plus a pot",
+  "blocks": "stone_bricks, mossy_stone_bricks, stone_brick_wall, terracotta/copper cap or flower_pot"
+ },
+ {
+  "what": "Wooden timber corbel/dentil band",
+  "where": "eave, directly under the roof, running along the front and sides, with larger brackets at the corner",
+  "size": "1 block tall, runs the full width",
+  "blocks": "oak_stairs and oak_trapdoor, spruce_trapdoor, stripped_oak_log (alternating)"
+ },
+ {
+  "what": "Timber corner and pier posts (contrasting trim)",
+  "where": "upper storey, front and side, as 3-wide pilasters between windows",
+  "size": "1-2 wide x 5 tall",
+  "blocks": "oak_log, stripped_oak_wood, oak_planks"
+ },
+ {
+  "what": "Window frames with mullions and transoms",
+  "where": "upper storey, 4 windows on the front and more on the side, the frame set in a dark stone surround",
+  "size": "2 wide x 3 tall",
+  "blocks": "oak_trapdoor frames, glass_pane (black stained or tinted), dark_oak_planks, oak_fence"
+ },
+ {
+  "what": "Wooden window shutters, closed",
+  "where": "upper storey, front, the rightmost window and the side window",
+  "size": "2x3",
+  "blocks": "spruce_trapdoor or oak_trapdoor (open, facing out), jungle_trapdoor"
+ },
+ {
+  "what": "Window sill with flower box",
+  "where": "upper storey, beneath each front and side window",
+  "size": "3 wide x 1 tall",
+  "blocks": "stone_brick_slab, stone_brick_stairs, with orange/red flowers via flower_pot or azalea, red_tulip on oak_trapdoor"
+ },
+ {
+  "what": "Carved square corner blocks (rosettes)",
+  "where": "upper-storey base corners and pier ends at the floor line, and at the eave corners",
+  "size": "2x2",
+  "blocks": "chiseled_stone_bricks, stone_bricks, polished_andesite"
+ },
+ {
+  "what": "Gilded or mossy accent studs on the pier face",
+  "where": "upper storey, the slim vertical pier by the outer window on both ends, with a gold stub bottom",
+  "size": "1x4",
+  "blocks": "mossy_stone_bricks, vines, waxed_copper, gold_block"
+ },
+ {
+  "what": "Stepped corbelled arch heads (stairs in an inverted stepped profile)",
+  "where": "ground floor, every arcade bay on the front, side and the corner returns",
+  "size": "5-6 wide x 3 tall",
+  "blocks": "quartz_stairs, smooth_quartz_stairs, quartz_slab"
+ },
+ {
+  "what": "Shopfront glazing with light-blue mullion grid",
+  "where": "ground floor, 3 bays on the front and side bays",
+  "size": "4-6 wide x 4 tall per bay",
+  "blocks": "light_blue_stained_glass_pane, glass_pane, light_blue_stained_glass"
+ },
+ {
+  "what": "Double entrance doors with gold handles",
+  "where": "ground floor, centre, entrance porch",
+  "size": "2 wide x 3 tall",
+  "blocks": "dark_oak_door or jungle_door x2, with gold handles via item_frame or gold_block"
+ },
+ {
+  "what": "Entrance steps with side cheek blocks",
+  "where": "ground floor, front centre porch, 3 treads with a stepped quartz stair",
+  "size": "6 wide x 3 deep",
+  "blocks": "quartz_stairs, quartz_slab, smooth_quartz"
+ },
+ {
+  "what": "Wooden planter boxes with flowering shrubs",
+  "where": "ground floor, front on either side of the entrance; others at the base of each bay",
+  "size": "1x2",
+  "blocks": "barrel or dark_oak_planks box, flowering_azalea or azalea_leaves, oxeye_daisy, white_tulip, flower_pot"
+ },
+ {
+  "what": "Stone planters/plinths with foliage",
+  "where": "ground-floor front, outer left and right of the base, with stone plinth blocks",
+  "size": "2x2",
+  "blocks": "stone_bricks, mossy_cobblestone, azalea, oak_leaves, fern"
+ },
+ {
+  "what": "Letter or filing cabinet with scattered papers",
+  "where": "ground, front right of the steps, next to the entrance",
+  "size": "1x2",
+  "blocks": "barrel or dark_oak_drawer-like (barrel), white_carpet and paper via item frames or white_carpet scatter"
+ },
+ {
+  "what": "Mossy plinth base courses and moss patches",
+  "where": "base of the building, ground level, plinth and pavement, with vines at the corner",
+  "size": "1-2 tall around the base",
+  "blocks": "mossy_stone_bricks, mossy_cobblestone, moss_carpet, vine, cracked_stone_bricks"
+ },
+ {
+  "what": "Stone sill ledge between storeys (string course)",
+  "where": "the floor line between ground and upper storeys, running across the whole front and sides",
+  "size": "1 tall, full width",
+  "blocks": "stone_brick_slab, stone_brick_stairs, polished_andesite_slab"
+ },
+ {
+  "what": "Hanging shop items and wall shelves inside the shopfront",
+  "where": "ground floor interior, visible through the glass",
+  "size": "1-2 blocks",
+  "blocks": "bookshelf, barrel, lectern, item_frame"
+ },
+ {
+  "what": "Hanging chain lantern",
+  "where": "Main block, ground-floor shopfront, inside the glass bays and over the central entrance doors, hanging under the arch soffit (3 to 4 in total on the front)",
+  "size": "1 block lantern on 1-2 blocks of chain",
+  "blocks": "lantern (hanging=true), iron_chain"
+ },
+ {
+  "what": "Wall-mounted bracket lantern",
+  "where": "Main block, ground floor, on the quartz piers between the arched bays and at the outer front corners, on the east return face too",
+  "size": "1 lantern on a 1x2 dark bracket, about 2-3 blocks tall",
+  "blocks": "lantern, iron_chain, iron_bars, dark_oak_trapdoor, polished_blackstone_wall"
+ },
+ {
+  "what": "Hanging teal banner with gold cross",
+  "where": "Main block, ground level, at the outer corner piers of the front and the east return, hanging from a wall bracket beside a lantern",
+  "size": "1 wide x 3 tall",
+  "blocks": "cyan_banner (or light_blue_banner) with gold/yellow cross pattern, iron_chain, dark_oak_fence"
+ },
+ {
+  "what": "Copper pipe or rod beside the lantern",
+  "where": "Main block, ground floor, corner piers, running above each corner lantern",
+  "size": "1 x 2 blocks",
+  "blocks": "lightning_rod, copper_block / waxed_exposed_copper"
+ },
+ {
+  "what": "Glazing bars (window mullions) on shopfront",
+  "where": "Main block, ground floor, the three arched shopfront bays and the east return bays",
+  "size": "1 block wide grid, full bay height (about 4-5 blocks)",
+  "blocks": "light_blue_stained_glass_pane, glass_pane, light_blue_stained_glass"
+ },
+ {
+  "what": "Double entrance doors with gold handles",
+  "where": "Entrance porch, centre of the front face at ground level",
+  "size": "2 wide x 3 tall",
+  "blocks": "dark_oak_door x2 or spruce_door, gold handles via gold_block or yellow_concrete accents"
+ },
+ {
+  "what": "Entrance steps with side cheeks",
+  "where": "Entrance porch, centre front, ground level",
+  "size": "about 5 wide, 3 treads deep, cheek blocks 1 x 2",
+  "blocks": "quartz_stairs, smooth_quartz_slab, stone_brick_stairs"
+ },
+ {
+  "what": "Planter box with shrub and white flowers",
+  "where": "Main block front, on both sides of the doors beside the steps, and in front of the piers at the ground level",
+  "size": "1x1 box with 1-2 blocks of foliage",
+  "blocks": "barrel or spruce_planks/crafting-like crate, flowering_azalea_leaves, azalea_leaves, oak_leaves, potted_azalea_bush"
+ },
+ {
+  "what": "Row of stone planter boxes along the east side",
+  "where": "Main block, east face, ground level between the dark colonnade piers",
+  "size": "1 x 1 x 1 with a bush on top, 4 or 5 in a row",
+  "blocks": "mossy_stone_bricks, stone_bricks, flowering_azalea_leaves, azalea_leaves"
+ },
+ {
+  "what": "Window-sill ledge / base ledge under the shopfront glass",
+  "where": "Main block, ground floor, below each glazed bay, 1 block high plinth",
+  "size": "1 block high, bay-wide (4-5 wide)",
+  "blocks": "quartz_slab, smooth_quartz_stairs, stone_brick_slab"
+ },
+ {
+  "what": "Stepped arch corbels / voussoirs over the shop bays",
+  "where": "Main block, ground level, over each arched bay, stepping up each side",
+  "size": "2-3 stair steps each side",
+  "blocks": "quartz_stairs, smooth_quartz_stairs, quartz_slab"
+ },
+ {
+  "what": "Mossy stone plinth and paving course",
+  "where": "Main block base, all around the building at ground level, forming a raised kerb",
+  "size": "1-2 blocks high, 1-2 blocks deep around the perimeter",
+  "blocks": "mossy_stone_bricks, stone_bricks, cracked_stone_bricks, stone_brick_stairs, stone_brick_slab"
+ },
+ {
+  "what": "Dark timber post columns with stone bases",
+  "where": "Main block, east return colonnade, ground floor",
+  "size": "1 x 5 blocks each, 4 or so in a row",
+  "blocks": "dark_oak_log, stripped_dark_oak_wood, stone_brick_wall"
+ },
+ {
+  "what": "Mail or filing cabinet with scattered papers",
+  "where": "Entrance porch, right of the steps, ground level",
+  "size": "1 x 2 blocks, with a few loose sheets on the paving",
+  "blocks": "barrel, dark_oak_trapdoor, white_carpet, paper (item frames), lectern"
+ },
+ {
+  "what": "Interior hanging banners seen through the glass",
+  "where": "Inside the shopfront, ground-floor bays and the lobby",
+  "size": "1 x 2-3",
+  "blocks": "cyan_banner, light_blue_banner"
+ },
+ {
+  "what": "Interior furniture and shelves seen through glass",
+  "where": "Inside the ground-floor bays: desks, shelves, lamps",
+  "size": "1-3 blocks each",
+  "blocks": "spruce_trapdoor, bookshelf, lectern, oak_stairs, oak_slab, item_frame, flower_pot"
+ }
+]

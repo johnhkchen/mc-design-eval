@@ -116,6 +116,8 @@ export async function detailPass(runDir, { input = "final.nbt", model = "claude-
     const parts = text.split(/^(?=## JOB )/m);
     const preamble = parts[0].startsWith("## JOB") ? "" : parts.shift();
     const jobsList = parts.filter((p) => p.startsWith("## JOB"));
+    let conceptBox = null;
+    try { const { locateWithGemini } = await import("./sheet-trace.mjs"); conceptBox = await locateWithGemini(concept); } catch { /* no colour guard */ }
     let accepted = preamble, curNbt = join(dir, "input.nbt"), curTiles = join(dir, "g-0");
     const renderTiles = (nbt, tiles) => execFileSync("node", [MCD, "render", nbt, "--front", "n", "--tiles", tiles, "--out", tiles + ".png"], { stdio: "ignore" });
     const composite = (tiles, out) => execFileSync("magick", ["(", join(tiles, "street.png"), "-resize", "x700", ")", "(", join(tiles, "front-elevation.png"), "-resize", "x700", ")",
@@ -141,6 +143,13 @@ export async function detailPass(runDir, { input = "final.nbt", model = "claude-
         return { v, n, box: n ? { x0, y0, x1, y1, w: a.width, h: a.height } : null };
       }).filter((d) => d.n > 40).sort((p, q) => q.n - p.n).slice(0, 2);
       if (!views.length) { greedyLog.push({ job: title, kept: false, verdict: "no-pixels-changed", why: "the job changed no visible pixels in any view" }); continue; }
+      // colour guard: a job that moves the front's colours further from the concept is rejected without a model call
+      if (conceptBox) {
+        const { paletteCheck } = await import("./palette-check.mjs");
+        const before = paletteCheck(concept, join(curTiles, "front-elevation.png"), { box: conceptBox }).meanDeltaE;
+        const after = paletteCheck(concept, join(tiles, "front-elevation.png"), { box: conceptBox }).meanDeltaE;
+        if (after > before + 1) { greedyLog.push({ job: title, kept: false, verdict: "colour-drift", why: `front colours moved away from the concept (mean ΔE ${before} -> ${after})` }); continue; }
+      }
       const crops = [];
       for (const { v, box } of views) {
         const pad = Math.round(Math.max(box.x1 - box.x0, box.y1 - box.y0) * 0.35) + 24;

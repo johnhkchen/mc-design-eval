@@ -1,0 +1,11 @@
+
+## JOB 35: Weathering of base and walls (moss and cracks at the ground, light wear above)
+all faces rows 0-3 where deepslate_bricks -> weather 0.35
+north rows 10-13 where deepslate_bricks -> vary 0.1
+west rows 10-13 where deepslate_bricks -> vary 0.1
+
+
+## JOB 32: Mossy plinth base course (stair foot, two courses, moss gradient)
+all faces ground row -> plinth deepslate_bricks 2
+all faces rows 0-1 where deepslate_bricks -> gradient mossy_stone_bricks..deepslate_bricks up
+

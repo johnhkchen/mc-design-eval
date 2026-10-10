@@ -1,0 +1,75 @@
+{
+ "input": "final.nbt",
+ "kept": "roofed.nbt",
+ "why": "A has the concept's pitched dark slate hip roof with a stepped central pediment, while B is a flat parapeted deck that loses the roof silhouette entirely, although A's four spindly corner chimneys are too tall and thin compared with the concept's short stubby finials.",
+ "spec": {
+  "style": "hip",
+  "pitch": "half",
+  "y": 17,
+  "footprint": [
+   [
+    2,
+    2,
+    23,
+    22
+   ]
+  ],
+  "overhang": 1,
+  "eave": "cornice",
+  "material": "deepslate_tiles",
+  "trim": "stone_bricks",
+  "hips": "deepslate_tiles",
+  "ridge": "none",
+  "pediment": {
+   "face": "north",
+   "width": 12,
+   "pitch": 45,
+   "tympanum": "stone_bricks",
+   "cornice": "stone_bricks",
+   "oculus": false,
+   "depth": 4
+  },
+  "chimneys": [
+   {
+    "at": [
+     3,
+     3
+    ],
+    "size": 1,
+    "material": "stone_bricks",
+    "rise": 3
+   },
+   {
+    "at": [
+     22,
+     3
+    ],
+    "size": 1,
+    "material": "stone_bricks",
+    "rise": 3
+   },
+   {
+    "at": [
+     3,
+     21
+    ],
+    "size": 1,
+    "material": "stone_bricks",
+    "rise": 3
+   },
+   {
+    "at": [
+     22,
+     21
+    ],
+    "size": 1,
+    "material": "stone_bricks",
+    "rise": 3
+   }
+  ],
+  "keep": []
+ },
+ "tool": "detected: eave y=16 (roof from y=17), footprint [2,2,23,22], removed 254 old roof blocks",
+ "costUsd": 0.4418158,
+ "durationMs": 23614
+}
