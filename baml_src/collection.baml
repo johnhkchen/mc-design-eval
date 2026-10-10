@@ -67,6 +67,27 @@ function JudgeGlance(brief: string, card: image) -> GlanceVerdict {
   "#
 }
 
+// V2: the card has a roof close-up and the judge grades the roof against the brief's roof type (earlier runs used JudgeGlance and stay comparable)
+function JudgeGlanceV2(brief: string, card: image) -> GlanceVerdict {
+  client ClaudeStub
+  prompt #"
+    You are a skilled Minecraft builder reviewing a build for a shared world. The image shows four views of ONE build:
+    street view at eye height (top left), front-left 3/4 (top right), front-right 3/4 (bottom left), back elevation (bottom right).
+
+    {{ card }}
+
+    The brief it was built to: {{ brief }}
+
+    Judge it AT A GLANCE, the way a player walking past would, and as a builder deciding whether to use it.
+    Grade each aspect, then give the overall usability. Usability is your holistic call, not an average:
+    one major problem (a roof that reads as a lid, a blank side wall, a sign that reads as a plank) makes it NeedsWork.
+    Showcase is rare. List the issues that matter most, major first, each with a concrete fix.
+    Grade the roof against the brief's roof type (a barn's gambrel, a tea house's upturned eaves, a tower's cone; the roof close-up panel is the lower row), and suggest only tools that exist: `mcd roof --preset` (cottage, shop, townhouse, civic, temple, granary, modern, barn, teahouse, tower-cap, lantern-cap, church, workshop, desert, cafe), a roof palette, dormers, chimneys, craft brushes and `mcd paint`; never a tool that is not named here.
+
+    {{ ctx.output_format }}
+  "#
+}
+
 enum ChangeVerdict {
   Improves
   Neutral     @description("no visible difference, or as good as before")

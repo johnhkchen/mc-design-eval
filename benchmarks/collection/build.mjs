@@ -1,14 +1,14 @@
 // COLLECTION BUILDER: many usable, good-at-a-glance builds, cheaply. The concept is INSPIRATION, not a fidelity target.
 //   1. one builder session (Sonnet) designs and builds the whole building with the plugin's procedural tools (shape
 //      brushes, roofs, detail treatments, ornaments), using the brief + the concept image for character
-//   2. a glance judge (Sonnet, BAML JudgeGlance) gives a CATEGORICAL verdict: Reject / NeedsWork / Usable / Showcase,
+//   2. a glance judge (Sonnet, BAML JudgeGlanceV2: the 2x3 card adds a roof close-up; JudgeGlance = v1) gives a CATEGORICAL verdict: Reject / NeedsWork / Usable / Showcase,
 //      aspect grades and typed issues with fixes (never a 1-10 score)
 //   3. delegated improvements: the judge's issues + the builder's own task list, each run by a small worker (Haiku)
 //      and kept only if a close-up before/after review (BAML ReviewChange) says it improves the build; re-judged
 //   4. Usable/Showcase builds go to accepted/<name>.nbt with a card (render, verdict, cost)
 //
 //   node benchmarks/collection/build.mjs --charter <key> [--concept file] [--model claude-sonnet-5-5] [--worker claude-haiku-5-5]
-import { readFileSync, writeFileSync, mkdirSync, existsSync, copyFileSync, appendFileSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync, copyFileSync, appendFileSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFileSync, spawnSync, spawn } from "node:child_process";
@@ -73,9 +73,13 @@ const builderPrompt = (task) => [
   "   each the REAL Minecraft thing it must be: banners are banner blocks with patterns (B.banner / `attach ... banner`), signs are signs with",
   "   text (B.sign), lanterns are lanterns, an awning is stairs/slabs/carpet in stripes, a flagpole is fences/bars plus a banner, flowers are",
   "   flowers in pots or on grass, barrels are barrels. Never substitute a coloured full block for an object.",
-  "2. Build it as code (mcd new build.mjs) with the build library's shape brushes for arches/towers/setbacks. Build the ROOF with",
-  "   `mcd roof --preset <cottage|shop|townhouse|civic|temple|granary|modern>` (references/roofs.md; flags override the preset),",
-  "   never by placing roof blocks by hand.",
+  "2. Build it as code (mcd new build.mjs) with the build library's shape brushes for arches/towers/setbacks. Build the ROOF with a",
+  "   PRESET picked BY BUILDING TYPE from the table in references/roofs.md (cottage/house, shop, townhouse, civic, temple, barn, teahouse/pagoda,",
+  "   tower-cap, lantern-cap, church/stave, workshop, desert, cafe, modern, granary; flags override the preset), never by placing roof blocks by",
+  "   hand and never starting from a bare --style. Run `mcd roof build.nbt --preset <name> --dry-run` FIRST and fix EVERY warning it prints",
+  "   (contrast, overhang, single material, too tall, no ridge, big plane ...), then run it for real. Never bypass a guard rail",
+  "   (--no-contrast, --overhang 0, --texture none, pitch < 0.5) without `--why \"<reason citing the concept image>\"`; shorten the walls rather",
+  "   than the eaves to fit a size cap.",
   "3. Finish with the craft brushes, from code (B.* / plaque(), signboard(), pilaster(), surround(), ...) or `mcd paint`",
   "   (references/detail-language.md and craft.md): plaque / signboard / bunting for names and signs, pilasters with a profile,",
   "   surround on openings, glazing on big glass, weather / vary PRESETS, fixtures for lanterns, planters, railing, finial,",
@@ -106,14 +110,18 @@ function runAgent(prompt, label, m = model, effort = "high", cwd = dir) {
 
 function card(nbt, tag) {
   const tiles = join(dir, `${tag}-tiles`), out = join(dir, `${tag}-card.png`);
-  execFileSync("node", [MCD, "render", nbt, "--front", "n", "--tiles", tiles, "--out", join(dir, `${tag}-sheet.png`)], { stdio: "ignore", env: { ...process.env, MCD_TILE_SCALE: "2" } });
-  execFileSync("magick", ["(", "(", join(tiles, "street.png"), "-resize", "700x700", ")", "(", join(tiles, "front-left.png"), "-resize", "700x700", ")", "+append", ")",
-    "(", "(", join(tiles, "front-right.png"), "-resize", "700x700", ")", "(", join(tiles, "back-elevation.png"), "-resize", "700x700", ")", "+append", ")", "-background", "white", "-append", out]);
+  execFileSync("node", [MCD, "render", nbt, "--front", "n", "--closeups", "--tiles", tiles, "--out", join(dir, `${tag}-sheet.png`)], { stdio: "ignore", env: { ...process.env, MCD_TILE_SCALE: "2" } });
+  // 2x3 card (<= 1400 px wide): street | front-left, front-right | back, then the ROOF close-up (texture, eave, ridge) at the lower left
+  const roofTile = readdirSync(tiles).find((f) => /^roof-.*\.png$/.test(f));
+  const rows = [["street.png", "front-left.png"], ["front-right.png", "back-elevation.png"], ...(roofTile ? [[roofTile]] : [])];
+  const args = [];
+  for (const row of rows) args.push("(", ...row.flatMap((f) => ["(", join(tiles, f), "-resize", "700x700", ")"]), "+append", ")");
+  execFileSync("magick", [...args, "-background", "white", "-gravity", "NorthWest", "-append", out]);
   return out;
 }
 
 async function judge(cardPng) {
-  const r = baml("JudgeGlance", [`${b.name}: ${b.what}`, { image: cardPng }], {});   // model from routes.json
+  const r = baml("JudgeGlanceV2", [`${b.name}: ${b.what}`, { image: cardPng }], {});   // model from routes.json
   cost += r.cost;
   return r.result;
 }
