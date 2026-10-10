@@ -1,0 +1,117 @@
+{
+ "note": "blind labelling set 3: same-arm pairs (arm order cannot predict) + the Parisian fresh-subject trio; sides/order randomised (seed 20261011)",
+ "pairs": [
+  {
+   "id": "q8",
+   "subject": "desert-market",
+   "name": "Desert adobe market hall",
+   "A": "v2old",
+   "B": "v2",
+   "kind": "collection final: before vs after the roof overhaul"
+  },
+  {
+   "id": "q14",
+   "subject": "parisian",
+   "name": "Parisian apartment building",
+   "A": "iterated",
+   "B": "plugin",
+   "kind": "fresh: plugin one-shot vs after 2 feedback rounds"
+  },
+  {
+   "id": "q9",
+   "subject": "lighthouse",
+   "name": "Coastal lighthouse and keeper’s cottage",
+   "A": "v2old",
+   "B": "v2",
+   "kind": "collection final: before vs after the roof overhaul"
+  },
+  {
+   "id": "q4",
+   "subject": "red-barn",
+   "name": "Farm barn",
+   "A": "v2",
+   "B": "v1",
+   "kind": "collection: first build vs after improvement tasks"
+  },
+  {
+   "id": "q12",
+   "subject": "parisian",
+   "name": "Parisian apartment building",
+   "A": "stock",
+   "B": "plugin",
+   "kind": "fresh: stock vs plugin one-shot"
+  },
+  {
+   "id": "q13",
+   "subject": "parisian",
+   "name": "Parisian apartment building",
+   "A": "iterated",
+   "B": "stock",
+   "kind": "fresh: stock vs plugin + 2 feedback rounds"
+  },
+  {
+   "id": "q10",
+   "subject": "stave-church",
+   "name": "Nordic stave church",
+   "A": "v2old",
+   "B": "v2",
+   "kind": "collection final: before vs after the roof overhaul"
+  },
+  {
+   "id": "q2",
+   "subject": "glass-cafe",
+   "name": "Modern glass café",
+   "A": "v1",
+   "B": "v2",
+   "kind": "collection: first build vs after improvement tasks"
+  },
+  {
+   "id": "q1",
+   "subject": "desert-market",
+   "name": "Desert adobe market hall",
+   "A": "v1",
+   "B": "v2",
+   "kind": "collection: first build vs after improvement tasks"
+  },
+  {
+   "id": "q6",
+   "subject": "steampunk-workshop",
+   "name": "Steampunk workshop",
+   "A": "v1",
+   "B": "v2",
+   "kind": "collection: first build vs after improvement tasks"
+  },
+  {
+   "id": "q11",
+   "subject": "tea-house",
+   "name": "Japanese tea house",
+   "A": "v2",
+   "B": "v2old",
+   "kind": "collection final: before vs after the roof overhaul"
+  },
+  {
+   "id": "q3",
+   "subject": "lighthouse",
+   "name": "Coastal lighthouse and keeper’s cottage",
+   "A": "v1",
+   "B": "v2",
+   "kind": "collection: first build vs after improvement tasks"
+  },
+  {
+   "id": "q7",
+   "subject": "tea-house",
+   "name": "Japanese tea house",
+   "A": "v2",
+   "B": "v1",
+   "kind": "collection: first build vs after improvement tasks"
+  },
+  {
+   "id": "q5",
+   "subject": "stave-church",
+   "name": "Nordic stave church",
+   "A": "v2",
+   "B": "v1",
+   "kind": "collection: first build vs after improvement tasks"
+  }
+ ]
+}

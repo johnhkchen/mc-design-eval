@@ -1,0 +1,166 @@
+{
+ "tag": "final",
+ "observations": [
+  {
+   "building_type": "Multi-storey stone townhouse",
+   "roof_form": "Hip",
+   "roof_overhang": true,
+   "roof_lid": false,
+   "massing": "Some",
+   "facade_depth": "Some",
+   "street_door": true,
+   "street_windows": "NineOrMore",
+   "wall_gaps": "None",
+   "weathering": "None",
+   "props": "Few",
+   "sign": false,
+   "storeys": 4
+  },
+  {
+   "building_type": "Stone tower with dark roof",
+   "roof_form": "Gable",
+   "roof_overhang": true,
+   "roof_lid": false,
+   "massing": "Some",
+   "facade_depth": "Some",
+   "street_door": true,
+   "street_windows": "NineOrMore",
+   "wall_gaps": "None",
+   "weathering": "None",
+   "props": "Few",
+   "sign": false,
+   "storeys": 4
+  }
+ ],
+ "look": {
+  "colour_harmony": "Harmonious",
+  "colour_interest": "Medium",
+  "form_interest": "Medium",
+  "detail_finesse": "High",
+  "odd_element": true,
+  "grounded": true,
+  "reads_clearly": false
+ },
+ "l0": {
+  "valid": 1,
+  "floating": 0,
+  "stray": 0,
+  "blankWalls": 3,
+  "paletteFlags": 1,
+  "visibleMaterials": 7,
+  "hueFamilies": 2,
+  "neutralShare": 0.862,
+  "satMean": 0.085,
+  "lumStd": 73.9,
+  "wallRoofContrast": 164,
+  "agedShare": 0,
+  "detailShare": 0.263,
+  "stairShare": 0.122,
+  "slabShare": 0.059,
+  "fenceWallTrapShare": 0.014,
+  "rooflineVariety": 0.671,
+  "footprintFill": 0.826,
+  "heightToWidth": 1.39,
+  "blocks": 3424
+ },
+ "features": {
+  "valid": 1,
+  "stray": 0,
+  "blankWalls": 3,
+  "paletteFlags": 1,
+  "visibleMaterials": 7,
+  "hueFamilies": 2,
+  "neutralShare": 0.862,
+  "satMean": 0.085,
+  "lumStd": 73.9,
+  "wallRoofContrast": 164,
+  "agedShare": 0,
+  "detailShare": 0.263,
+  "stairShare": 0.122,
+  "slabShare": 0.059,
+  "fenceWallTrapShare": 0.014,
+  "rooflineVariety": 0.671,
+  "footprintFill": 0.826,
+  "heightToWidth": 1.39,
+  "shapedRoof": 1,
+  "overhang": 1,
+  "lidRoof": 0,
+  "massing": 1,
+  "depth": 1,
+  "door": 1,
+  "windows": 3,
+  "wallGaps": 0,
+  "weathering": 0,
+  "props": 1,
+  "sign": 0,
+  "harmony": 2,
+  "colourInterest": 1,
+  "formInterest": 1,
+  "detailFinesse": 2,
+  "oddElement": 1,
+  "grounded": 1,
+  "readsClearly": 0
+ },
+ "review": {
+  "score": -0.67,
+  "improve": [
+   {
+    "feature": "weathering",
+    "value": 0,
+    "pull": -0.8,
+    "criterion": "texture and realism",
+    "inTheirWords": "More interesting textures"
+   },
+   {
+    "feature": "depth",
+    "value": 1,
+    "pull": -0.64,
+    "criterion": "detail: small blocks used well (stairs, depth)",
+    "inTheirWords": "Better depth and details"
+   },
+   {
+    "feature": "visibleMaterials",
+    "value": 7,
+    "pull": -0.49,
+    "criterion": "texture and realism",
+    "inTheirWords": "More interesting textures"
+   },
+   {
+    "feature": "props",
+    "value": 1,
+    "pull": -0.48,
+    "criterion": "other",
+    "inTheirWords": null
+   },
+   {
+    "feature": "wallRoofContrast",
+    "value": 164,
+    "pull": -0.47,
+    "criterion": "other",
+    "inTheirWords": null
+   },
+   {
+    "feature": "massing",
+    "value": 1,
+    "pull": -0.42,
+    "criterion": "form: distinctive, clear shapes",
+    "inTheirWords": "More interesting colors and shapes"
+   }
+  ],
+  "strengths": [
+   {
+    "feature": "lumStd",
+    "pull": 0.88
+   },
+   {
+    "feature": "wallGaps",
+    "pull": 0.76
+   },
+   {
+    "feature": "hueFamilies",
+    "pull": 0.38
+   }
+  ]
+ },
+ "cost": 0.009545020000000001
+}

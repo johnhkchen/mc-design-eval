@@ -1,0 +1,152 @@
+{
+ "tag": "round-2",
+ "observations": [
+  {
+   "building_type": "Timber-framed stone townhouse",
+   "roof_form": "Mixed",
+   "roof_overhang": true,
+   "roof_lid": false,
+   "massing": "Some",
+   "facade_depth": "Deep",
+   "street_door": true,
+   "street_windows": "NineOrMore",
+   "wall_gaps": "None",
+   "weathering": "Few",
+   "props": "Many",
+   "sign": false,
+   "storeys": 4
+  },
+  {
+   "building_type": "Tall timber-framed town house",
+   "roof_form": "Mixed",
+   "roof_overhang": true,
+   "roof_lid": false,
+   "massing": "Some",
+   "facade_depth": "Deep",
+   "street_door": true,
+   "street_windows": "NineOrMore",
+   "wall_gaps": "None",
+   "weathering": "Few",
+   "props": "Many",
+   "sign": false,
+   "storeys": 4
+  }
+ ],
+ "look": {
+  "colour_harmony": "Harmonious",
+  "colour_interest": "High",
+  "form_interest": "High",
+  "detail_finesse": "High",
+  "odd_element": true,
+  "grounded": true,
+  "reads_clearly": true
+ },
+ "l0": {
+  "valid": 1,
+  "floating": 0,
+  "stray": 27,
+  "blankWalls": 0,
+  "paletteFlags": 6,
+  "visibleMaterials": 10,
+  "hueFamilies": 3,
+  "neutralShare": 0.668,
+  "satMean": 0.164,
+  "lumStd": 66.7,
+  "wallRoofContrast": 144,
+  "agedShare": 0.004,
+  "detailShare": 0.325,
+  "stairShare": 0.097,
+  "slabShare": 0.091,
+  "fenceWallTrapShare": 0.05,
+  "rooflineVariety": 0.711,
+  "footprintFill": 0.754,
+  "heightToWidth": 1.33,
+  "blocks": 4157
+ },
+ "features": {
+  "valid": 1,
+  "stray": 27,
+  "blankWalls": 0,
+  "paletteFlags": 6,
+  "visibleMaterials": 10,
+  "hueFamilies": 3,
+  "neutralShare": 0.668,
+  "satMean": 0.164,
+  "lumStd": 66.7,
+  "wallRoofContrast": 144,
+  "agedShare": 0.004,
+  "detailShare": 0.325,
+  "stairShare": 0.097,
+  "slabShare": 0.091,
+  "fenceWallTrapShare": 0.05,
+  "rooflineVariety": 0.711,
+  "footprintFill": 0.754,
+  "heightToWidth": 1.33,
+  "shapedRoof": 1,
+  "overhang": 1,
+  "lidRoof": 0,
+  "massing": 1,
+  "depth": 2,
+  "door": 1,
+  "windows": 3,
+  "wallGaps": 0,
+  "weathering": 1,
+  "props": 2,
+  "sign": 0,
+  "harmony": 2,
+  "colourInterest": 2,
+  "formInterest": 2,
+  "detailFinesse": 2,
+  "oddElement": 1,
+  "grounded": 1,
+  "readsClearly": 1
+ },
+ "review": {
+  "score": 11.45,
+  "improve": [
+   {
+    "feature": "hueFamilies",
+    "value": 3,
+    "pull": -0.76,
+    "criterion": "colour: a deliberate, interesting palette",
+    "inTheirWords": "More interesting colors and shapes"
+   },
+   {
+    "feature": "massing",
+    "value": 1,
+    "pull": -0.42,
+    "criterion": "form: distinctive, clear shapes",
+    "inTheirWords": "More interesting colors and shapes"
+   },
+   {
+    "feature": "wallRoofContrast",
+    "value": 144,
+    "pull": -0.4,
+    "criterion": "other",
+    "inTheirWords": null
+   },
+   {
+    "feature": "heightToWidth",
+    "value": 1.33,
+    "pull": -0.07,
+    "criterion": "form: distinctive, clear shapes",
+    "inTheirWords": "More interesting colors and shapes"
+   }
+  ],
+  "strengths": [
+   {
+    "feature": "depth",
+    "pull": 3.19
+   },
+   {
+    "feature": "fenceWallTrapShare",
+    "pull": 1.8
+   },
+   {
+    "feature": "props",
+    "pull": 1.76
+   }
+  ]
+ },
+ "cost": 0.009481719999999999
+}
