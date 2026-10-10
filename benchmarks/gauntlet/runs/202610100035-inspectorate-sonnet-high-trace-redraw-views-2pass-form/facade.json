@@ -1,0 +1,151 @@
+{
+ "out": "benchmarks/gauntlet/runs/202610100035-inspectorate-sonnet-high-trace-redraw-views-2pass-form/facade.nbt",
+ "size": [
+  26,
+  19,
+  26
+ ],
+ "clusters": [
+  {
+   "block": "deepslate_tiles",
+   "n": 29,
+   "redrawColour": [
+    20,
+    1,
+    -1
+   ],
+   "dE": 3
+  },
+  {
+   "block": "spruce_planks",
+   "n": 16,
+   "redrawColour": [
+    35,
+    10,
+    27
+   ],
+   "dE": 5
+  },
+  {
+   "block": "moss_block",
+   "n": 20,
+   "redrawColour": [
+    41,
+    -11,
+    29
+   ],
+   "dE": 9
+  },
+  {
+   "block": "polished_deepslate",
+   "n": 43,
+   "redrawColour": [
+    33,
+    0,
+    3
+   ],
+   "dE": 4
+  },
+  {
+   "block": "cobbled_deepslate",
+   "n": 62,
+   "redrawColour": [
+    39,
+    0,
+    1
+   ],
+   "dE": 7
+  },
+  {
+   "block": "stone_bricks",
+   "n": 15,
+   "redrawColour": [
+    43,
+    0,
+    0
+   ],
+   "dE": 9
+  },
+  {
+   "block": "stone_bricks",
+   "n": 49,
+   "redrawColour": [
+    53,
+    1,
+    1
+   ],
+   "dE": 2
+  },
+  {
+   "block": "stone_bricks",
+   "n": 6,
+   "redrawColour": [
+    56,
+    9,
+    1
+   ],
+   "dE": 10
+  },
+  {
+   "block": "stone_bricks",
+   "n": 9,
+   "redrawColour": [
+    71,
+    4,
+    -8
+   ],
+   "dE": 21
+  },
+  {
+   "block": "stripped_oak_log",
+   "n": 22,
+   "redrawColour": [
+    56,
+    13,
+    49
+   ],
+   "dE": 16
+  },
+  {
+   "block": "quartz_bricks",
+   "n": 30,
+   "redrawColour": [
+    74,
+    1,
+    11
+   ],
+   "dE": 19
+  },
+  {
+   "block": "quartz_bricks",
+   "n": 50,
+   "redrawColour": [
+    90,
+    1,
+    10
+   ],
+   "dE": 6
+  }
+ ],
+ "candidates": 57,
+ "specBlocks": [
+  "deepslate_bricks",
+  "cracked_deepslate_bricks",
+  "cobbled_deepslate",
+  "mossy_stone_bricks",
+  "moss_block",
+  "polished_deepslate",
+  "deepslate_tiles",
+  "stone_bricks",
+  "stripped_oak_log",
+  "oak_planks",
+  "smooth_quartz",
+  "quartz_bricks",
+  "quartz_block",
+  "gold_block",
+  "cyan_concrete",
+  "copper_block"
+ ],
+ "cells": 377,
+ "glassCells": 26
+}
