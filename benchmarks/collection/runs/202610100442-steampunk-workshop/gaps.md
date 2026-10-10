@@ -1,0 +1,13 @@
+# Toolkit gaps (steampunk workshop)
+- A sawtooth roof preset: had to chain `roof()` `shed` over three rects and hand-glaze the vertical steps (no skylight option); `granary` monitor was the closest.
+- `roof()` shed with `copper_block` silently gave a gappy slope (no stair/slab variant); the tool should warn or fall back to the `cut_` variant.
+- Sloped skylight strip (glass in the roof surface): no option; needs a hand edit.
+- Gear / cog / circular window: no brush; had to place the disc, ring and teeth by hand with a distance test. `arch`/`dome` are the closest, none take a round window.
+- Pipes, elbows, valves: no pipe brush (runs with joints, bends, valve wheels); did copper blocks by hand and used `grindstone` as a valve wheel.
+- Crane / gantry / jib: nothing; limited by the 1-block proud layer, hand-placed beam, chain and barrel.
+- Mirroring a finished build (with stair/door/pane state flips) was not available: wrote mirrorGrid() by hand; `mirrorX` only works inside a paint function.
+- `mcd check` circulation assumes a corridor along the long axis (needs standable cells at both ends of the box), so it reports false for every closed building; needs a door-to-door mode.
+- `surround` preset `plain` on a plinth-height wall turns the whole lower wall grey; no "recess only" option.
+- Chimney brush with flared cap and bands: used `cylinder shape:square` + hand-built caps; `roof --chimney` can only sit on a roof, not rise from a wall plane.
+- Hanging lantern / copper lantern in `fixture` defaults to spruce/iron; had to hand-place `copper_lantern`.
+- Face-map detail (`mcd paint`) was not used: the facade is built before the mirror, so closeups use code brushes only.

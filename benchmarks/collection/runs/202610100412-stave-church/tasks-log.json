@@ -1,0 +1,52 @@
+[
+ {
+  "title": "The lower roof is one huge uniform deepslate pyramid that swallows the whole foo",
+  "kind": "Roof",
+  "aspect": "Roof",
+  "where": "see problem",
+  "instruction": "Break it into 2-3 smaller stepped tiers with a clear eave overhang and a vertical wall band between each. Make the pitch steeper. Alternate deepslate_tile_stairs and slabs, with a stripped-spruce eave trim, so the shingle courses show.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The lower roof now reads as a separate eave tier over a visible timber gallery with window openings, instead of one undifferentiated deepslate pyramid, which is closer to how a stave church's stacked roofs read, though a dark recess and a loose timber block near the gable still look a little unresolved."
+ },
+ {
+  "title": "The ground floor is a low, wide box, and the tiers above are pushed to the centr",
+  "kind": "Detail",
+  "aspect": "Massing",
+  "where": "see problem",
+  "instruction": "Raise the nave walls with a clerestory band. Make each upper tier a narrower timber box with its own roof. Keep the silhouette tall and narrow, and shrink the ground-floor eave so it doesn't dominate.",
+  "kept": false,
+  "verdict": "Neutral",
+  "why": "The ground floor still reads as a low, wide box and the tiers are still stacked on the same footprint, so the stated problem is not clearly fixed, while a dark block now sits awkwardly on the lower roof near the centre, which is a small new clutter."
+ },
+ {
+  "title": "The ground floor is a thin strip of flat spruce under a roof that covers it. The",
+  "kind": "Detail",
+  "aspect": "Facades",
+  "where": "see problem",
+  "instruction": "Cut an open arcade of posts with a gap between the posts and the inner wall, and a shingled lean-to roof over it. Add a carved portal on the front. Break up the stone base with a stair or slab course, a cobble/mossy mix and a plinth step.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The stone entrance now reads as a deliberate porch with steps and a lit doorway that ties into the stone base, which gives the ground floor a clear focal point. The mossy cobble pile is a little busy and the step blocks are slightly uneven, but neither reads as floating or broken."
+ },
+ {
+  "title": "The dragon heads are tiny, wooden and sprawling, and they sit on the roof slopes",
+  "kind": "Props",
+  "aspect": "Elements",
+  "where": "see problem",
+  "instruction": "Place the dragon heads as mirrored pairs that curve outward at the ridge ends of each tier. Fill the hole in the upper tower with a louvre or window. Make the spire a tall, slender shingled needle.",
+  "kept": false,
+  "verdict": "Worse",
+  "why": "The dragon heads became compact light-grey stubs on dark posts that read as chimneys or pillars rather than carved dragon heads, the grey clashes with the tarred timber, and loose grey blocks sit on the roof slopes and ridge, which looks broken and cluttered at a glance even though the tall spire is a clear, legible addition."
+ },
+ {
+  "title": "The upper timber section is a jumble of stair and plank shapes, which gives nois",
+  "kind": "Detail",
+  "aspect": "Finish",
+  "where": "see problem",
+  "instruction": "Replace the busy detail with a regular pattern: vertical stripped logs with a trim rail, and symmetrical crossed-beam gable ends. Tidy the loose posts at the gallery ends into the arcade rhythm.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The after view replaces the jumble of stair and plank fragments with cleaner, more continuous vertical timber bands that read as one tiered upper section, though a few chunky plank blocks still protrude from the roof."
+ }
+]

@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Poor",
+ "facades": "Poor",
+ "elements": "Fair",
+ "finish": "Fair",
+ "palette": "Poor",
+ "summary": "The terrace, tables, planters and railings read as a café, but a heavy black brick slab roof and dark brick walls turn the light glass pavilion into a dark bunker.",
+ "issues": [
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The brief asks for floor-to-ceiling glass on two sides, but the walls are mostly solid deepslate brick. Only a few small glass panels show on the front, and the back and left sides are blank brick with a single window.",
+   "fix": "Replace the wall fill on the two glass sides with glass panes or blocks between slim dark pillars every 3-4 blocks. Keep the solid wall only on the service side and add a few recesses to break it up."
+  },
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The cantilevered roof is a thick, flat slab of the same dark brick as the walls. It reads as a heavy lid with no slimness, no fascia edge and no visible timber soffit from outside.",
+   "fix": "Thin the slab to 1 block and give it a pale concrete or smooth stone fascia. Put a spruce or oak plank soffit underneath on the overhang, and keep it lighter than the walls so it looks like it floats."
+  },
+  {
+   "aspect": "Palette",
+   "severity": "Major",
+   "problem": "Almost everything is the same dark grey-black (roof, walls, pillars). The steel frame disappears into the walls, and the light concrete plinth is the only contrast. The result looks gloomy rather than modern and airy.",
+   "fix": "Make the walls pale (smooth quartz, white concrete or glass). Keep black only for the thin frame posts and mullions, and use light stone for the roof edge. Keep the timber for the soffit, furniture and planters."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "The CAFE sign is small, sits low on the dark wall corner under the roof edge, and is partly hidden by planters. It does not read as a neon sign from the 3/4 views.",
+   "fix": "Move it onto a clear wall face or hang it from the roof fascia. Use larger letters in glowstone or orange concrete with a dark backing board, and keep the planters out of the way."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The terrace is a flat, light grey slab with cluttered furniture. The glass railing stops at black corner posts that look oversized. The back elevation has loose hanging lanterns and a lone door, and the unrelated back planter adds noise.",
+   "fix": "Vary the terrace paving with a 2-tone border or inset strip, space the tables evenly and trim the corner posts to 1x1 columns. Remove the stray lanterns, or hang them evenly under the roof edge."
+  }
+ ]
+}

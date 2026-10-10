@@ -1,0 +1,62 @@
+[
+ {
+  "title": "Lean the cone: shift the top of the spire",
+  "kind": "roof",
+  "where": "roof apex, x3..7 z3..7, y24..29",
+  "instruction": "In build.mjs section 7, rebuild the top 4 courses of the cone (y>=24) one block toward -x/-z (NW) of centre so the spire visibly leans; keep finial fence (5,28,5) + lantern following the new apex. Re-run mcd check for orphans."
+ },
+ {
+  "title": "Bigger, better telescope",
+  "kind": "props",
+  "where": "east balcony x10..12, y17..19, z5",
+  "instruction": "Replace the 3 lightning_rods with a thicker barrel: stripped_dark_oak_log axis x at (10,18,5),(11,18,5) plus lightning_rod facing east at (12,18,5); add a dark_oak_fence tripod x2 below at (10,17,5),(11,17,5)."
+ },
+ {
+  "title": "Hanging sign for the tower name",
+  "kind": "sign",
+  "where": "front wall of shaft, x6 y8 z2 (above the door, below the slit window)",
+  "instruction": "B.sign('dark_oak', ['THE CROOKED','SPIRE'], {facing:'north', color:'yellow', glow:true}) at (6,8,2); check there is stone at (6,8,3)."
+ },
+ {
+  "title": "Second banner pair on west face",
+  "kind": "banner",
+  "where": "west wall of shaft x2, y8..9, z5 and z7",
+  "instruction": "B.banner('cyan', [['circle','yellow'],['border','black']], {facing:'west'}) at (2,9,5) and (2,9,7) (same sun design as the front banners)."
+ },
+ {
+  "title": "Lighter timber trim to cure dark-on-dark",
+  "kind": "detail",
+  "where": "floor-1 and floor-2 corner braces (dark_oak_stairs under the deck beams)",
+  "instruction": "Change the knee-brace stairs in storey() from dark_oak to spruce stairs (put(x,yb,z,B.stairs('spruce',...))), and the window corner blocks from dark_oak_planks to spruce_planks, so braces read against the dark logs."
+ },
+ {
+  "title": "Flower boxes under floor-2 windows",
+  "kind": "props",
+  "where": "front wall floor 2, x4..6 z0, y16; west wall z4..6 x0",
+  "instruction": "Add dark_oak_slab type=top at (4..6,16,0) with potted_azure_bluet / potted_pink_tulip at y17 beside the glowing window (not in front of the window centre); mirror on the west wall at x0, z4..6."
+ },
+ {
+  "title": "Round the shaft corners",
+  "kind": "fix",
+  "where": "stone shaft corner cells (3,3),(9,3),(3,9),(9,9), y3..10",
+  "instruction": "Replace each corner block with a stone_brick_stairs facing outward-diagonal pair (stairs shape outer_left/outer_right) at y3..10 to chamfer the corners; keep chiseled quoins every 3rd row on the neighbouring cells."
+ },
+ {
+  "title": "Smoke and cap on the chimney",
+  "kind": "detail",
+  "where": "chimney at x2 z7 above y25",
+  "instruction": "Cap the chimney: replace the top stone_bricks block of the chimney at x2 z7 (below the campfire) with stone_brick_wall, and add 4 stone_brick_stairs (half top, facing outward) around it one block lower as a corbelled collar; keep the campfire on top."
+ },
+ {
+  "title": "Ivy up the timber jetties",
+  "kind": "detail",
+  "where": "floor-1 / floor-2 faces, y12..18",
+  "instruction": "Raise the vine base probability for y>10 from 0.1 to 0.25 in the ivy loop in build.mjs and add 'up' vines hanging under the balcony deck; re-run mcd check."
+ },
+ {
+  "title": "Mud-brick lintel over the door",
+  "kind": "fix",
+  "where": "front door (6,3..5,3)",
+  "instruction": "Make the header y5 x5..7 stone bricks with a stair hood: set stone_brick_stairs facing north half top at (5,6,2),(6,6,2),(7,6,2) so the hood stands proud of the wall."
+ }
+]

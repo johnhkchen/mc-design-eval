@@ -1,0 +1,52 @@
+[
+ {
+  "title": "Gear window on the front face is a messy scatter of copper blocks and glass with",
+  "kind": "Props",
+  "aspect": "Elements",
+  "where": "see problem",
+  "instruction": "Clear the area and rebuild with a ring brush: a 9-11 block-diameter circle of copper/cut_copper, a smaller inner glass disc, 4-8 spokes and a center hub. Frame it with a brick or stone arch so it reads as one round window.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The window surround now reads as a deliberate stone-and-copper frame with a clearer sill band instead of a scatter of mixed blocks, though a stray copper block still floats inside the glass opening and the gear shape is still hard to read."
+ },
+ {
+  "title": "The right-hand wall on the front-right view is largely open: large rectangular h",
+  "kind": "Detail",
+  "aspect": "Facades",
+  "where": "see problem",
+  "instruction": "Fill the openings with brick, then cut deliberate windows: framed in stone or copper, 2x3 with glass panes and sills. Keep any loading bay as a single clear opening with a lintel.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The right-hand wall was a large rectangular hole showing interior through the wall, and the change fills it with a framed brick panel with a dark recessed window and a stone sill, so the facade reads as a solid, crafted wall instead of a gap. The only minor concern is the new panel's edge sitting slightly proud of the adjacent pipe and valve column."
+ },
+ {
+  "title": "The roof is mostly a flat or lightly stepped oxidized-copper slope with glass st",
+  "kind": "Roof",
+  "aspect": "Roof",
+  "where": "see problem",
+  "instruction": "Use a sawtooth preset: 3 repeated ridges with vertical glazed faces and sloped copper backs, running side to side. Cap the edges with a continuous stone parapet, and close the hole between the roof and the front wall.",
+  "kept": false,
+  "verdict": "Worse",
+  "why": "The new grey sawtooth blocks add a silhouette the brief asked for, but they read as loose, muddy-grey slabs that clash with the oxidized copper, and they hide most of the glass skylights in the front view, which were the roof's main light feature."
+ },
+ {
+  "title": "The crane and loading door are not legible. The door is a small dark wood block ",
+  "kind": "Props",
+  "aspect": "Elements",
+  "where": "see problem",
+  "instruction": "Add a 2-wide loading door with a clear lintel. Above it, build a projecting beam (iron bars or fence) with a chain hanging down and a hook. Run continuous copper-pipe lines along the walls, with a valve block (lever or button) at the bends.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The loading bay now reads as a wider dark-wood door with a visible central opening and a row of iron rails above it, which is more legible than the lone small block, although the crane itself still doesn't read clearly."
+ },
+ {
+  "title": "Copper accent patches on the brick walls are random and unframed. Stray blocks f",
+  "kind": "Detail",
+  "aspect": "Finish",
+  "where": "see problem",
+  "instruction": "Run the copper as ordered horizontal bands or riveted panels at regular spacing, and remove floating blocks. Taper the chimney tops with a stepped collar and add a campfire or smoke cap.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The scattered copper blocks are mostly gone, leaving a more uniform brick field that reads as one wall, though some copper pillar accents remain and the new brick band above the gable is a plain fill."
+ }
+]

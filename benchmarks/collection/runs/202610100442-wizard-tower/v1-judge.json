@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Good",
+ "roof": "Fair",
+ "facades": "Good",
+ "elements": "Fair",
+ "finish": "Good",
+ "palette": "Good",
+ "summary": "A charming stone-base, jettied timber-frame tower with ivy and lanterns, but the roof reads as a wide squat hipped lid with a thin spike rather than a tall crooked conical wizard hat, and the telescope balcony is hard to read.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The roof is a broad stepped pyramid with a wide eave that sits on the tower like a lid; it is not tall, conical or leaning, and the 3/4 views show a flat-looking, boxy hip with a dormer poking out.",
+   "fix": "Rebuild as a tall, narrow cone or steep octagonal spire, at least 1.5 to 2 times the height of the upper floors. Shift each layer's center by one block as it rises to give the lean, and shrink the eave overhang. Keep the dormer or drop it."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Major",
+   "problem": "The tower is a square, symmetric box with only a small jetty; nothing reads as crooked or fantasy. The timber upper floors look like a boxy cottage perched on a stone stem.",
+   "fix": "Offset or rotate each upper storey by a block or two, jetty out more on different faces, and taper or narrow the upper floor. Add a corner turret or an uneven bay so the silhouette is asymmetric."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "The balcony and telescope are tiny and lost on the side of the upper floor; in the street view they read as clutter. There are also no clearly readable small round windows, which appear as square glass or white plaster panels.",
+   "fix": "Extend the balcony to 2 or 3 blocks deep with a clear fence rail and put the telescope on a distinct dark-metal tube at the rail's edge, facing out. Make the windows round by building ring-shaped frames with dark trim blocks around a single glass pane."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Minor",
+   "problem": "The white plaster panels with dark timber are large and flat. The back elevation has a blank, noisy stone shaft with a few stray panes, and the glowing window is just a small orange patch.",
+   "fix": "Break up the plaster with diagonal braces or smaller infill panels, and add 1 or 2 narrow windows on the stone shaft. Make the glowing window bigger, using a shroomlight or glowstone backing behind the glass."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The base has scattered grass and moss blocks, and the chimney with a campfire on top looks stuck on. Dangling lanterns are sparse and hang on odd chains.",
+   "fix": "Tidy the base with a more consistent cobble/moss mix, give the chimney a proper stone cap and flue, and hang the lanterns evenly along the jetty's underside."
+  }
+ ]
+}

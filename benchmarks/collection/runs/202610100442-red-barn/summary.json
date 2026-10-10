@@ -1,0 +1,107 @@
+{
+ "key": "red-barn",
+ "name": "Farm barn",
+ "tasks": 5,
+ "tasksKept": 4,
+ "kept": "v2",
+ "usability": "NeedsWork",
+ "grades": {
+  "massing": "Good",
+  "roof": "Fair",
+  "facades": "Fair",
+  "elements": "Fair",
+  "finish": "Fair",
+  "palette": "Fair"
+ },
+ "summary": "The gambrel barn silhouette and checkerboard-trimmed doors are recognisable, but the huge unbroken slate-black roof, hollow loft opening and blown-out gable make it read more like a dark lid on a red box than a classic red barn.",
+ "accepted": false,
+ "costUsd": 2.74,
+ "minutes": 28.9,
+ "log": [
+  {
+   "n": "build",
+   "s": 515,
+   "turns": 50,
+   "cost": 2.2523362
+  },
+  {
+   "n": "judge v1",
+   "s": 530,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "The gable end reads clearly as a stepped barn with doors, loft and cupola, but the roof is a heavy black lid and the long side walls are mostly white with sparse red slots, so it only half reads as a classic red barn."
+  },
+  {
+   "n": 5,
+   "s": 530
+  },
+  {
+   "n": "task 1: The barn is not red where it matters: th",
+   "s": 710,
+   "turns": 16,
+   "cost": 0.026511229999999997
+  },
+  {
+   "n": "  review 1",
+   "s": 720,
+   "kept": false,
+   "verdict": "Worse"
+  },
+  {
+   "n": "task 2: The gambrel profile is visible only on t",
+   "s": 1037,
+   "turns": 1,
+   "cost": 0.03752203
+  },
+  {
+   "n": "  review 2",
+   "s": 1051,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "task 3: The long side walls are blank white with",
+   "s": 1367,
+   "turns": 1,
+   "cost": 0.026295719999999998
+  },
+  {
+   "n": "  review 3",
+   "s": 1379,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "task 4: The main door's X-bracing does not read.",
+   "s": 1539,
+   "turns": 15,
+   "cost": 0.04929282000000001
+  },
+  {
+   "n": "  review 4",
+   "s": 1551,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "task 5: The front and rear elevations are flat, ",
+   "s": 1705,
+   "turns": 28,
+   "cost": 0.04525967999999999
+  },
+  {
+   "n": "  review 5",
+   "s": 1719,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "judge v2",
+   "s": 1735,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "The gambrel barn silhouette and checkerboard-trimmed doors are recognisable, but the huge unbroken slate-black roof, hollow loft opening and blown-out gable make it read more like a dark lid on a red box than a classic red barn.",
+   "tasksKept": 4
+  }
+ ]
+}

@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Poor",
+ "facades": "Fair",
+ "elements": "Poor",
+ "finish": "Poor",
+ "palette": "Good",
+ "summary": "The brick, copper and stone palette reads as steampunk, but the build is a hollow box with a flat green lid, an open see-through front and a broken back wall, and its brief elements (gear window, sawtooth skylights, crane, pipes) barely read.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The roof is a flat or stepped green copper slab with a glass strip. It reads as a lid, not a sawtooth or curved roof, and the skylights are not distinct.",
+   "fix": "Replace it with a sawtooth roof preset: 3-4 repeating ridges, each with a vertical glass face on the same side, in oxidised copper stairs and slabs. Add a short parapet around the edge."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The front face is open and see-through, with missing wall sections, glass showing sky, and a ragged stone frame. The back wall has a large hole under the roofline, and an arch-shaped cutout near the top shows sky.",
+   "fix": "Close the shell by filling the front and back walls solidly with brick. Then cut deliberate openings only for the door, windows and loading bay, each framed with stone trim."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "The big round gear window is not readable. The upper front only shows a jagged sky-coloured gap and glass shards. The crane, valves and pipes are tiny or absent, and only a thin copper pipe is visible on the side.",
+   "fix": "Build a circular ring window about 7 blocks wide with a copper rim and iron-bar spokes, placed centred above the door. Add a crane from a fence or iron-bar jib with a chain hanging over the loading door, plus thick copper-block pipe runs with button or lever valves on the walls."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Major",
+   "problem": "There are stray floating blocks and uneven edges: loose stone stubs at the base, a copper block floating beside the back wall, and a ragged top edge on the back wall. The ground-floor interior also reads as a mess of dark blobs.",
+   "fix": "Run the orphan and floating checks and delete the strays. Square off the base with a continuous stone plinth, and clean up the back-wall crown with a straight cornice line."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Minor",
+   "problem": "A plain cube with little projection. Chimneys are the only vertical accent and are short, and there is no side annex or bay to give a workshop silhouette.",
+   "fix": "Add one or two tall brick stacks, 8+ blocks above the roof, with banded copper tops. Also add a lean-to or loading-bay projection on one side."
+  }
+ ]
+}

@@ -1,0 +1,107 @@
+{
+ "key": "glass-cafe",
+ "name": "Modern glass café",
+ "tasks": 5,
+ "tasksKept": 4,
+ "kept": "v2",
+ "usability": "NeedsWork",
+ "grades": {
+  "massing": "Good",
+  "roof": "Fair",
+  "facades": "Fair",
+  "elements": "Fair",
+  "finish": "Fair",
+  "palette": "Fair"
+ },
+ "summary": "Reads as a modern flat-roofed café with a plinth, terrace and CAFE sign, but the heavy dark-slab roof overpowers a thin glass pavilion, the glazing barely reads as floor-to-ceiling, and the back wall is blank.",
+ "accepted": false,
+ "costUsd": 1.78,
+ "minutes": 16.9,
+ "log": [
+  {
+   "n": "build",
+   "s": 359,
+   "turns": 37,
+   "cost": 1.3300627999999999
+  },
+  {
+   "n": "judge v1",
+   "s": 374,
+   "usability": "NeedsWork",
+   "roof": "Poor",
+   "summary": "The terrace, tables, planters and railings read as a café, but a heavy black brick slab roof and dark brick walls turn the light glass pavilion into a dark bunker."
+  },
+  {
+   "n": 5,
+   "s": 375
+  },
+  {
+   "n": "task 1: The brief asks for floor-to-ceiling glas",
+   "s": 671,
+   "turns": 1,
+   "cost": 0.03728432999999999
+  },
+  {
+   "n": "  review 1",
+   "s": 682,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "task 2: The cantilevered roof is a thick, flat s",
+   "s": 744,
+   "turns": 13,
+   "cost": 0.025563709999999996
+  },
+  {
+   "n": "  review 2",
+   "s": 752,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "task 3: Almost everything is the same dark grey-",
+   "s": 798,
+   "turns": 12,
+   "cost": 0.02079929
+  },
+  {
+   "n": "  review 3",
+   "s": 807,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "task 4: The CAFE sign is small, sits low on the ",
+   "s": 923,
+   "turns": 16,
+   "cost": 0.03492613
+  },
+  {
+   "n": "  review 4",
+   "s": 930,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "task 5: The terrace is a flat, light grey slab w",
+   "s": 988,
+   "turns": 11,
+   "cost": 0.02479813
+  },
+  {
+   "n": "  review 5",
+   "s": 999,
+   "kept": false,
+   "verdict": "Neutral"
+  },
+  {
+   "n": "judge v2",
+   "s": 1013,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "Reads as a modern flat-roofed café with a plinth, terrace and CAFE sign, but the heavy dark-slab roof overpowers a thin glass pavilion, the glazing barely reads as floor-to-ceiling, and the back wall is blank.",
+   "tasksKept": 4
+  }
+ ]
+}

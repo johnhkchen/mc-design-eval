@@ -1,0 +1,11 @@
+# long side walls: base trim, red panels, glass bays on evenly spaced dark oak posts, white eave trim
+east y1 -> smooth_quartz force
+west y1 -> smooth_quartz force
+east y2 -> red_terracotta force
+west y2 -> red_terracotta force
+east y3 -> gray_stained_glass_pane force
+west y3 -> gray_stained_glass_pane force
+east y2-y3 every 3rd from col 1 -> dark_oak_log force
+west y2-y3 every 3rd from col 1 -> dark_oak_log force
+east y4 -> smooth_quartz_slab top force
+west y4 -> smooth_quartz_slab top force

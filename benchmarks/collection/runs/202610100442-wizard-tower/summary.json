@@ -1,0 +1,107 @@
+{
+ "key": "wizard-tower",
+ "name": "Fantasy wizard tower",
+ "tasks": 5,
+ "tasksKept": 2,
+ "kept": "v2",
+ "usability": "NeedsWork",
+ "grades": {
+  "massing": "Good",
+  "roof": "Fair",
+  "facades": "Good",
+  "elements": "Fair",
+  "finish": "Fair",
+  "palette": "Good"
+ },
+ "summary": "A charming stone-base tower with jettied timber-and-plaster floors and good ivy, lanterns and a glowing window, but the broad pyramid roof reads like a lid on a box rather than a tall crooked wizard's cone, and the telescope balcony is too small to read.",
+ "accepted": false,
+ "costUsd": 2.7,
+ "minutes": 21,
+ "log": [
+  {
+   "n": "build",
+   "s": 604,
+   "turns": 50,
+   "cost": 2.2066034000000005
+  },
+  {
+   "n": "judge v1",
+   "s": 620,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "A charming stone-base, jettied timber-frame tower with ivy and lanterns, but the roof reads as a wide squat hipped lid with a thin spike rather than a tall crooked conical wizard hat, and the telescope balcony is hard to read."
+  },
+  {
+   "n": 5,
+   "s": 620
+  },
+  {
+   "n": "task 1: The roof is a broad stepped pyramid with",
+   "s": 731,
+   "turns": 21,
+   "cost": 0.036837619999999995
+  },
+  {
+   "n": "  review 1",
+   "s": 740,
+   "kept": false,
+   "verdict": "Worse"
+  },
+  {
+   "n": "task 2: The tower is a square, symmetric box wit",
+   "s": 809,
+   "turns": 15,
+   "cost": 0.02883642
+  },
+  {
+   "n": "  review 2",
+   "s": 820,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "task 3: The balcony and telescope are tiny and l",
+   "s": 953,
+   "turns": 19,
+   "cost": 0.041262059999999996
+  },
+  {
+   "n": "  review 3",
+   "s": 963,
+   "kept": false,
+   "verdict": "Worse"
+  },
+  {
+   "n": "task 4: The white plaster panels with dark timbe",
+   "s": 1114,
+   "turns": 13,
+   "cost": 0.03548292
+  },
+  {
+   "n": "  review 4",
+   "s": 1125,
+   "kept": false,
+   "verdict": "Worse"
+  },
+  {
+   "n": "task 5: The base has scattered grass and moss bl",
+   "s": 1236,
+   "turns": 20,
+   "cost": 0.03980446000000001
+  },
+  {
+   "n": "  review 5",
+   "s": 1245,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "judge v2",
+   "s": 1262,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "A charming stone-base tower with jettied timber-and-plaster floors and good ivy, lanterns and a glowing window, but the broad pyramid roof reads like a lid on a box rather than a tall crooked wizard's cone, and the telescope balcony is too small to read.",
+   "tasksKept": 2
+  }
+ ]
+}

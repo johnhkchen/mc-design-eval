@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Good",
+ "roof": "Fair",
+ "facades": "Fair",
+ "elements": "Fair",
+ "finish": "Fair",
+ "palette": "Fair",
+ "summary": "Reads as a modern flat-roofed café with a plinth, terrace and CAFE sign, but the heavy dark-slab roof overpowers a thin glass pavilion, the glazing barely reads as floor-to-ceiling, and the back wall is blank.",
+ "issues": [
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The brief's floor-to-ceiling glass on two sides is not visible. Glass shows only as small mullioned panes between black piers. The back and side walls are plain light-grey blank planes with one door and two small windows.",
+   "fix": "Replace the street and side walls with continuous full-height glass panes between slim dark pillars every 3-4 blocks. Keep the back wall solid but add a horizontal band of clerestory glass and a timber panel or planter to break up the flat plane."
+  },
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The cantilevered roof reads as a thick dark lid. The top is a busy blackstone/deepslate-brick pattern with a light stone rim. The overhang is shallow, and the timber soffit is hard to see from any view.",
+   "fix": "Make the roof top one flat, quiet material, such as smooth stone or a dark concrete slab, with a thin rim. Cut the rim to a single slab course and extend the overhang 2-3 blocks over the terrace. Line the underside with spruce or oak planks so the soffit reads from eye level."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "The 'CAFE' sign is orange letters on a dark brick wall at the corner. The letters are hard to read, and the sign looks like paint on a wall rather than a neon sign. The tables and chairs are a jumble of stairs and trapdoors.",
+   "fix": "Build the sign as a projecting or free-standing glowing element, using glowstone or shroomlight letters with a dark backing and a sea lantern or end rod outline. Space the tables in a tidy grid, with one table and 2-4 chairs per set."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The black corner blocks on the plinth edge look like stray cubes. The terrace glass railings are very thin. The hanging lanterns on chains float without a clear support in the back view.",
+   "fix": "Turn the black plinth-corner blocks into proper rail posts that match the steel pillars, or remove them. Attach the lanterns to the roof underside so the chains have visible support."
+  },
+  {
+   "aspect": "Palette",
+   "severity": "Minor",
+   "problem": "The grey plinth, grey walls, grey roof rim and dark roof all sit in a similar mid-grey range, so the building looks flat. The timber and orange accents are too small to balance it.",
+   "fix": "Make the plinth darker concrete and the walls lighter or glass. Use more warm timber on the soffit and terrace deck, and keep the orange for the sign only."
+  }
+ ]
+}

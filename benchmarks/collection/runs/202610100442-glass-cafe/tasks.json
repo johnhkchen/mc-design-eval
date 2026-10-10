@@ -1,0 +1,62 @@
+[
+ {
+  "title": "Make the CAFE sign glow like neon",
+  "kind": "sign",
+  "where": "front (north) dark panel x11..15, y3..4, z4; underline at x12..14,y2,z4",
+  "instruction": "The orange banner letters are flat. Put two glowing wall signs, B.sign(\"spruce\",[\"\",\"CAFE\",\"\",\"\"],{facing:\"north\",color:\"orange\",glow:true}), at x13,y2,z3 and x12,y2,z3 (north-facing, on the panel; the hedge is at x14..15), keep the shroomlight underline at y2, re-render the sign closeup."
+ },
+ {
+  "title": "Hanging blade sign at the entrance",
+  "kind": "sign",
+  "where": "in front of door x8..9, y3, z3",
+  "instruction": "signboard hanging on the north face above the door: mcd paint rule `north row 3 cols 6-7 -> signboard \"CAFE\" hanging spruce` (or signboard() from code) so a blade sign reads down the street."
+ },
+ {
+  "title": "Interior counter detail",
+  "kind": "props",
+  "where": "counter x5..12 (u4..11), y1..2, z9; back bar z10",
+  "instruction": "Add stools at x6,8,10,12,y1,z8 (spruce_fence with a spruce_slab top on y2 is not needed: use spruce_stairs facing north), candles on the counter top (y3) only where a block is below, and swap 2 bookshelf cells at z10,y2 for barrels."
+ },
+ {
+  "title": "Add a mullion rhythm to the glass",
+  "kind": "detail",
+  "where": "front glass x4..9,y1..4,z4 and side glass x3,y1..4,z5..10",
+  "instruction": "mcd paint rule `north openings -> mullions black_concrete every 3` (and `east`/`west` for the side) so the glazing reads as panes in a slim dark frame with a mid transom; check closeup that it stays slim."
+ },
+ {
+  "title": "Terrace planters at the corners",
+  "kind": "props",
+  "where": "plinth corners x0,z0 and x16,z0 and beside the steps x10..11,z1",
+  "instruction": "planter(g,{at,face:\"north\",kind:\"ground\",width:2,depth:1}) at three more spots; swap moss soil for dirt if palette flags it. Leave the steps (x7..10,z0) clear."
+ },
+ {
+  "title": "Terrace string lights / more table lanterns",
+  "kind": "props",
+  "where": "soffit over the front terrace z2..3 and west terrace x0..2",
+  "instruction": "fixture(g,{at:[x,5,z],face:'north',mount:'hang'}) under the soffit every 3 blocks over the terrace so the terrace has light (no lantern at x0..2 yet)."
+ },
+ {
+  "title": "Back wall relief",
+  "kind": "detail",
+  "where": "back (south) wall x3..13, y1..4, z11",
+  "instruction": "mcd paint: `south -> pilasters every 5 profile simple deepslate_tiles` and `south x 10..13 y 2..3 -> louvres oak_trapdoor`; skip the door at x5 and the window x7..9."
+ },
+ {
+  "title": "West wall detail",
+  "kind": "detail",
+  "where": "west wall x15, y1..4, z4..11",
+  "instruction": "Two slit windows exist at z6..7 and z9; add `surround plain` on them, and `west -> weather light` on the deepslate bricks."
+ },
+ {
+  "title": "Roof fascia relief",
+  "kind": "roof",
+  "where": "roof ring y5..6 all sides",
+  "instruction": "mcd roof spec change: eave:'cornice' dentils false on the modern preset, or add a rooftop rail (rail:true) set back; a thin lighter coping line (smooth_stone slab) at y6 around the edge to catch the light."
+ },
+ {
+  "title": "Fix: dark-on-dark palette flag",
+  "kind": "fix",
+  "where": "walls x11..15 / back / west (deepslate_bricks) vs fascia deepslate_tiles",
+  "instruction": "mcd palette flags trim-invisible. Change the wall block from deepslate_bricks to tuff_bricks or polished_deepslate in build.mjs (P.panel) and re-run; compare closeups."
+ }
+]

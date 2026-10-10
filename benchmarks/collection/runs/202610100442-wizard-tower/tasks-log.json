@@ -1,0 +1,52 @@
+[
+ {
+  "title": "The roof is a broad stepped pyramid with a wide eave that sits on the tower like",
+  "kind": "Roof",
+  "aspect": "Roof",
+  "where": "see problem",
+  "instruction": "Rebuild as a tall, narrow cone or steep octagonal spire, at least 1.5 to 2 times the height of the upper floors. Shift each layer's center by one block as it rises to give the lean, and shrink the eave overhang. Keep the dormer or drop it.",
+  "kept": false,
+  "verdict": "Worse",
+  "why": "The new roof is a tall, ragged green mass with irregular stair-step protrusions and no overhanging eave, so it reads as a lumpy block rather than the crafted conical roof the task asked for, and the chimney and the before-view's clean stepped profile are lost."
+ },
+ {
+  "title": "The tower is a square, symmetric box with only a small jetty; nothing reads as c",
+  "kind": "Detail",
+  "aspect": "Massing",
+  "where": "see problem",
+  "instruction": "Offset or rotate each upper storey by a block or two, jetty out more on different faces, and taper or narrow the upper floor. Add a corner turret or an uneven bay so the silhouette is asymmetric.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The change breaks the flat, square wall plane with a visible timber jetty beam and a deeper recessed timber bay, which reads as intended framing rather than noise, though the jetty stub is small and the upper recess is a little dark."
+ },
+ {
+  "title": "The balcony and telescope are tiny and lost on the side of the upper floor; in t",
+  "kind": "Props",
+  "aspect": "Elements",
+  "where": "see problem",
+  "instruction": "Extend the balcony to 2 or 3 blocks deep with a clear fence rail and put the telescope on a distinct dark-metal tube at the rail's edge, facing out. Make the windows round by building ring-shaped frames with dark trim blocks around a single glass pane.",
+  "kept": false,
+  "verdict": "Worse",
+  "why": "The railing makes the balcony read more clearly, but the telescope is now a black slab that floats past the wall with no visible support, and the pale fence clashes with the dark timber, so the new bits look broken rather than crafted."
+ },
+ {
+  "title": "The white plaster panels with dark timber are large and flat. The back elevation",
+  "kind": "Detail",
+  "aspect": "Facades",
+  "where": "see problem",
+  "instruction": "Break up the plaster with diagonal braces or smaller infill panels, and add 1 or 2 narrow windows on the stone shaft. Make the glowing window bigger, using a shroomlight or glowstone backing behind the glass.",
+  "kept": false,
+  "verdict": "Worse",
+  "why": "The cross-shaped plaster panels were replaced by one large, flat, warm orange-brown block that still reads as a flat slab and clashes with the white plaster and dark timber. It removes the framed rhythm instead of breaking up the large flat panel."
+ },
+ {
+  "title": "The base has scattered grass and moss blocks, and the chimney with a campfire on",
+  "kind": "Detail",
+  "aspect": "Finish",
+  "where": "see problem",
+  "instruction": "Tidy the base with a more consistent cobble/moss mix, give the chimney a proper stone cap and flue, and hang the lanterns evenly along the jetty's underside.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The base reads as a cleaner, more deliberate stone plinth with the scattered grass, moss and bushes gone, and the chimney is now a plain stone stack, though the lit campfire's warm accent is lost."
+ }
+]

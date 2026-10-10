@@ -1,0 +1,52 @@
+[
+ {
+  "title": "The brief asks for floor-to-ceiling glass on two sides, but the walls are mostly",
+  "kind": "Detail",
+  "aspect": "Facades",
+  "where": "see problem",
+  "instruction": "Replace the wall fill on the two glass sides with glass panes or blocks between slim dark pillars every 3-4 blocks. Keep the solid wall only on the service side and add a few recesses to break it up.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The after view adds steel-framed glazing with an interior bookshelf visible behind it, which better matches the brief's floor-to-ceiling glass and reads as a café storefront, though a black void in the lower row and a stone block above the new glazing are small blemishes."
+ },
+ {
+  "title": "The cantilevered roof is a thick, flat slab of the same dark brick as the walls.",
+  "kind": "Roof",
+  "aspect": "Roof",
+  "where": "see problem",
+  "instruction": "Thin the slab to 1 block and give it a pale concrete or smooth stone fascia. Put a spruce or oak plank soffit underneath on the overhang, and keep it lighter than the walls so it looks like it floats.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The slab edge changes from the same dark brick as the walls to a lighter, smooth grey-olive fascia, so the cantilevered roof reads as a distinct, thin slab with a clear shadow line instead of a solid mass, though the olive tone is slightly muddy."
+ },
+ {
+  "title": "Almost everything is the same dark grey-black (roof, walls, pillars). The steel ",
+  "kind": "Detail",
+  "aspect": "Palette",
+  "where": "see problem",
+  "instruction": "Make the walls pale (smooth quartz, white concrete or glass). Keep black only for the thin frame posts and mullions, and use light stone for the roof edge. Keep the timber for the soffit, furniture and planters.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The light stone coping around the dark roof gives the cantilevered slab a crisp, deliberate edge and breaks up the all-dark mass, though the pale wall block and small white cube on the left are slightly unresolved."
+ },
+ {
+  "title": "The CAFE sign is small, sits low on the dark wall corner under the roof edge, an",
+  "kind": "Props",
+  "aspect": "Elements",
+  "where": "see problem",
+  "instruction": "Move it onto a clear wall face or hang it from the roof fascia. Use larger letters in glowstone or orange concrete with a dark backing board, and keep the planters out of the way.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The sign is now a large, legible block-built fascia on a dark stone-brick backdrop that reads as a deliberate signage wall, and the removed foliage clutter on the left is replaced by a clean, crafted surface, though the orange letters sit a bit close to the top edge and the dark wall adds some visual weight."
+ },
+ {
+  "title": "The terrace is a flat, light grey slab with cluttered furniture. The glass raili",
+  "kind": "Detail",
+  "aspect": "Finish",
+  "where": "see problem",
+  "instruction": "Vary the terrace paving with a 2-tone border or inset strip, space the tables evenly and trim the corner posts to 1x1 columns. Remove the stray lanterns, or hang them evenly under the roof edge.",
+  "kept": false,
+  "verdict": "Neutral",
+  "why": "The terrace slab is still the same flat light grey and the glass railing is unchanged, so the requested fix is not visible; the only real differences are a hanging lantern on a chain by the soffit and a slightly rearranged, sparser furniture cluster, which read as a minor, plausible detail rather than an improvement or a new defect."
+ }
+]

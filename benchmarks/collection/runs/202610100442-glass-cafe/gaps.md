@@ -1,0 +1,12 @@
+# Toolkit gaps (glass café)
+- Flat roof with a THICK fascia ring and recessed timber soffit: mcd roof flat-parapet only gives a 1-2 course parapet + slab coping; I placed the fascia ring, soffit and deck by hand and used roof() only for the coping.
+- Cantilever/overhang on selected sides only (2 over front and one side, 1 elsewhere): roof() takes one footprint, no per-side overhang; had to widen the footprint by hand.
+- Mirrored (viewer-left) design: no mirror-aware helper for put/fill with facing flips beyond mirrorX; wrote my own X(u)/put wrapper. A build-level "design in street coordinates" option would help.
+- Large glass walls: glazing brush works on existing walls; no "curtain wall" brush (glass + steel mullions + head/sill rail on a bay rhythm). Glass_pane is invisible at render scale; had to use full glass blocks and hand-place black_concrete posts.
+- Furniture: no table/chair/stool/counter brush (fence+trapdoor tables, stair chairs placed by hand). Chair facing semantics (stairs back) cost a fix.
+- Neon sign: plaque banner style gives flat orange letters; no glowing block-letter option on a 4-row panel (block font needs 5+ rows plus margin).
+- Recessed downlights: placed glowstone in the soffit by hand; palette flags it as an outlier (and sea_lantern is flagged by check as an unsupported lantern).
+- Terrace glass screens + posts: no railing brush for a glass balustrade at plinth edge with a gap for steps.
+- Entry steps: plinth with half-height approach course by hand; no 'steps' brush for plinths.
+- Tall hedges: leaf-block hedge in a planter box by hand; planter brush only does beds/window boxes.
+- Back-wall plant room vent: could not find a louvre option that works on a plain wall (louvres needs glass); abandoned it.

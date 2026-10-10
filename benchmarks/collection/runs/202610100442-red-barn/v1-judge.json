@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Good",
+ "roof": "Fair",
+ "facades": "Fair",
+ "elements": "Fair",
+ "finish": "Fair",
+ "palette": "Fair",
+ "summary": "The gable end reads clearly as a stepped barn with doors, loft and cupola, but the roof is a heavy black lid and the long side walls are mostly white with sparse red slots, so it only half reads as a classic red barn.",
+ "issues": [
+  {
+   "aspect": "Palette",
+   "severity": "Major",
+   "problem": "The barn is not red where it matters: the long walls are mostly white or cream, the roof is near-black, and red appears only in the gable end and thin side slots.",
+   "fix": "Make the side walls red (terracotta or red concrete) with white corner and window trim. Switch the roof to a dark gray or weathered tone that is lighter than the current near-black."
+  },
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The gambrel profile is visible only on the gable end. From the 3/4 views the roof is one flat black slab with no visible break, no overhang, and no ridge detail, so it reads as a lid.",
+   "fix": "Add an eave overhang of at least 1 block with stair edging. Make the lower slope steep and the upper slope shallow, with a clear slab break line between them. Add a ridge cap and a different stair or slab material at the eaves."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The long side walls are blank white with irregular dark and red notches that look like broken infill. They have no window rhythm and no regular framing.",
+   "fix": "Replace the notches with evenly spaced bays: a dark oak post every 3 blocks, a red wall panel between posts, and small trapdoor or glass windows. Run a white trim band along the base and under the eaves."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "The main door's X-bracing does not read. The doors are a red and black checkerboard with a single vertical post, and the cupola is a white box with a red patch that has no clear weather vane.",
+   "fix": "Make each sliding door a flat red panel with white trim and diagonal white X-bracing in stairs or slabs, with a visible center gap. Give the cupola louvered windows, a small roof, and a fence-and-banner weather vane."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The front and rear elevations are flat, and the hay loft door and hoist beam are small and low-contrast. The foundation and the props are fine, but the sides lack depth.",
+   "fix": "Make the loft door larger, with a white frame and a dark oak hoist beam projecting forward. Recess the main doors one block, and add a stone foundation course along both long sides."
+  }
+ ]
+}

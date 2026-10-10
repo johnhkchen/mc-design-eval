@@ -1,171 +1,101 @@
 [
  {
-  "tool": "mcd render: glance and close-up views for small features",
+  "tool": "mcd render: glance-scale visibility and per-job before/after diff",
   "kind": "RendererGap",
-  "need": "Include oblique close-up crops around each detail job's target cells, an interior or eye-level view when a job touches interiors, and banners in the standard views, so 1-2 block features are visible to the judge.",
+  "need": "Report changed cells and visible-pixel delta per job, render a close-up before/after crop of the target cells, and flag any feature that vanishes or changes nothing at glance distance.",
   "members": [
    2,
-   11,
    15,
+   22,
    38,
    42,
    58,
-   69,
-   77
-  ],
-  "key": "mcd render glance and close up views for small features",
-  "n": 8,
-  "runs": 6,
-  "value": 58.78775382679627,
-  "evidence": [
-   "Rejected chimney: judged 'barely visible at a glance'. Rejected curtains: 'the street view looks the same as before'.",
-   "Rejected 'Interior stock and meeting room': the changes are barely visible from outside, so the judge cannot see the work.",
-   "Five rejections say the same thing: the plaque text, the lanterns, the quartz kick-plate, the weathered base and the roof texture are all too small or too sparse to read at a glance.",
-   "Most neutral verdicts (plinth, wall field, lintels, sills, chute, wall texture) said the change was too faint to see at full-build scale, so the judge could not assess it."
-  ]
- },
- {
-  "tool": "mcd diff: per-job change census and zero-write failure",
-  "kind": "RendererGap",
-  "need": "Each detail job reports cells written per rule and visible-pixel delta with a before/after crop. Jobs that write zero cells or enumerate zero targets fail with a reason instead of passing as successful no-ops, and sub-floor changes are flagged invisible at glance scale.",
-  "members": [
-   22,
-   31,
-   32,
-   61,
    65,
    76,
    85
   ],
-  "key": "mcd diff per job change census and zero write failure",
+  "key": "mcd render glance scale visibility and per job before after diff",
+  "n": 9,
+  "runs": 6,
+  "value": 66.1362230551458,
+  "evidence": [
+   "Rejected chimney: judged 'barely visible at a glance'. Rejected curtains: 'the street view looks the same as before'.",
+   "Five rejections say the same thing: the plaque text, the lanterns, the quartz kick-plate, the weathered base and the roof texture are all too small or too sparse to read at a glance.",
+   "About 25 'no visible change' observations across jobs (e.g. 'A and B pixel-identical in all four views', 'changes too subtle to read'). Full-size views cannot show 1-block texture.",
+   "Most neutral verdicts (plinth, wall field, lintels, sills, chute, wall texture) said the change was too faint to see at full-build scale, so the judge could not assess it."
+  ]
+ },
+ {
+  "tool": "opening surround: sill, lintel, reveal and drip hood",
+  "kind": "MissingOption",
+  "need": "Give openings a recess reveal, a full-width sill or kick-plate, a lintel and a projecting drip hood with a set proud depth, plus an avoid-cells set so trim never cuts pilasters or piers, and enumerate openings per face so zero targets report a blocker.",
+  "members": [
+   6,
+   21,
+   25,
+   31,
+   35,
+   36,
+   55
+  ],
+  "key": "opening surround sill lintel reveal and drip hood",
   "n": 7,
   "runs": 4,
-  "value": 36,
+  "value": 30,
   "evidence": [
-   "About 25 'no visible change' observations across jobs (e.g. 'A and B pixel-identical in all four views', 'changes too subtle to read'). Full-size views cannot show 1-block texture.",
-   "Window lintels (front and west flank) and the back door frame showed no change; the back door is not visible in either render, so the job likely had no target.",
-   "Detail jobs 'Eaves cornice, west wall top', 'Stair-shaft glazing grid', 'Roof edge trim, north gable and shaft head' and 'Roof edge' each changed no visible pixels in any view.",
-   "JOB 13 (pediment rake changed no pixels), JOB 20 (entrance doors no pixels), JOB 36 (edge piers no pixels). Session notes: paint skipped already-detailed cells (0 written); weather rule wrote 0 cells on stone_bricks roof face"
+   "Rejected 'Fix walkability readout and door reveal': the door-side panel was recoloured to dull grey and brown, which removed colour but did not visibly improve the door reveal at a glance.",
+   "'Clean quartz kick-plate under the east gallery windows' was rejected: the strip was a tiny accent that read as a stray bright block, not as a kick-plate.",
+   "Drip hoods over every window produced pixel-identical renders, or were too small to see.",
+   "Window lintels (front and west flank) and the back door frame showed no change; the back door is not visible in either render, so the job likely had no target."
   ]
  },
  {
-  "tool": "B.plaque / B.signText / B.banner: legible signage",
+  "tool": "mcd check: floating, orphan, support and visibility",
   "kind": "MissingTool",
-  "need": "Lay out a short phrase as block letters at a minimum readable height and width ratio, with a plaque fallback when it does not fit. Enforce spacing between adjacent signs and banners, and let a banner hang as one full-height panel on a pilaster face.",
+  "need": "List every block with no face-adjacent support or owning role, fill support under treads and cheeks, and flag detail placements with no exposed face in the standard views.",
   "members": [
-   3,
-   7,
-   16,
-   39,
-   40,
-   66
-  ],
-  "key": "b plaque b signtext b banner legible signage",
-  "n": 6,
-  "runs": 5,
-  "value": 33.54101966249685,
-  "evidence": [
-   "Rejected 'Hang a second small sign by the barrel': the dark board butts directly against the READING ROOM sign so the two merge into one long banner, and the dark oak clashes with the lighter board.",
-   "Rejected 'Make the sign legible and prominent': sign text unreadably tiny; the fix didn't make it more legible or prominent.",
-   "'Make the name plaque legible and gold' was rejected: the text was unreadable and the plaque was not visibly gold.",
-   "JOB 7 teal banners read as a striped patch with a stray lantern off the column edge; JOB 2 banners became fragmented slivers with floating white bits"
-  ]
- },
- {
-  "tool": "mcd palette check: role, contrast and accent family",
-  "kind": "MissingTool",
-  "need": "Flag blocks whose tone or saturation breaks their role's contrast or aged palette, map white, quartz and gold roles to matching blocks, reject non-architectural blocks as facade or roof material, and check new accents against the build's accent family.",
-  "members": [
-   5,
-   10,
-   14,
-   54,
-   83,
-   88
-  ],
-  "key": "mcd palette check role contrast and accent family",
-  "n": 6,
-  "runs": 5,
-  "value": 33.54101966249685,
-  "evidence": [
-   "Rejected 'Operator touch: clean quartz doorstep': a pure white quartz step is a stark bright patch against mossy grey stone, reading as a mismatched, unweathered tile.",
-   "Rejected stepped-peak task: stripped log corner posts clash with the dark stone walls, so the roofline looks less crafted.",
-   "Rejected lean-to: red and yellow wool blocks read as clutter on a building facade.",
-   "JOB 27 quartz cap and bands read as a mismatched thin grey strip instead of white quartz"
-  ]
- },
- {
-  "tool": "mcd check: support, orphan and visibility",
-  "kind": "MissingTool",
-  "need": "List every block with no face-adjacent support or structural connection, flag placements with no exposed face in the standard views, and make stair and step helpers fill the support course under each tread and report see-through voids.",
-  "members": [
-   12,
    13,
    43,
    68,
    91
   ],
-  "key": "mcd check support orphan and visibility",
-  "n": 5,
+  "key": "mcd check floating orphan support and visibility",
+  "n": 4,
   "runs": 4,
-  "value": 30,
+  "value": 24,
   "evidence": [
-   "Rejected 'Plank/wool lean-to': a patchy strip of wool and plank bands, and a stray red cube sticks out from the side.",
    "Stray red cube on the lean-to and detached stone above the gable; both were visible only in the render.",
    "JOB 16 flagpole rod changed no visible pixels in any view",
-   "JOB 7 floating finials; JOB 35 stray protruding cornice stubs; JOB 12 stray tan blocks on white piers; JOB 24 stray pale block."
+   "JOB 7 floating finials; JOB 35 stray protruding cornice stubs; JOB 12 stray tan blocks on white piers; JOB 24 stray pale block.",
+   "JOB 27: the change opens a see-through hole in the bottom step course and a gap beside the cheek, creating broken voids and a ragged silhouette."
   ]
  },
  {
-  "tool": "B.pilaster: capital, base and shoulder profile",
+  "tool": "B.pilaster: capital, base and column profile",
   "kind": "MissingTool",
-  "need": "Build a 1-2 block capital and base from stair and slab courses for any pilaster, post, column or drum width, with a flare or shoulder ring option. Keep the shaft clear of attached lanterns and banners.",
+  "need": "Build a capital and base profile of 1 to 2 blocks for any pilaster, column or post width, so columns read as ornamented shafts instead of plain or slab-like members.",
   "members": [
    26,
-   29,
    37,
    63,
    81,
    90
   ],
-  "key": "b pilaster capital base and shoulder profile",
-  "n": 6,
+  "key": "b pilaster capital base and column profile",
+  "n": 5,
   "runs": 4,
-  "value": 28,
+  "value": 24,
   "evidence": [
    "Entrance sign band end-caps and pillar capitals show no visible change in either build.",
-   "Tower base and shoulder: the only change was faint block texture on the shaft; the base and shoulder did not improve.",
    "'Pilaster capitals and bases (north)' added large flat grey diagonal bands across the white portico and pilasters, which read as artifacts and broke the clean portico.",
-   "JOB 9 (pilaster capitals and bases not readable), JOB 12 (portico capitals only a faint lighter band)"
+   "JOB 9 (pilaster capitals and bases not readable), JOB 12 (portico capitals only a faint lighter band)",
+   "JOB 38: arcade posts were only recoloured to a darker, flatter tone with no new profile."
   ]
  },
  {
-  "tool": "opening surround: reveal, sill, lintel and hood projection",
-  "kind": "MissingOption",
-  "need": "Give each opening a recess reveal and a sill, lintel or drip-hood projection of 1 to 2 blocks that spans the full opening width. Accept an avoid-cells set so trim never cuts into pilasters or piers.",
-  "members": [
-   6,
-   21,
-   25,
-   35,
-   36,
-   55
-  ],
-  "key": "opening surround reveal sill lintel and hood projection",
-  "n": 6,
-  "runs": 4,
-  "value": 26,
-  "evidence": [
-   "Rejected 'Fix walkability readout and door reveal': the door-side panel was recoloured to dull grey and brown, which removed colour but did not visibly improve the door reveal at a glance.",
-   "'Clean quartz kick-plate under the east gallery windows' was rejected: the strip was a tiny accent that read as a stray bright block, not as a kick-plate.",
-   "Drip hoods over every window produced pixel-identical renders, or were too small to see.",
-   "'Upper window lintels (front)' showed no visible lintel profile; 'Upper window sills (side)' added only tiny sparse plank stubs."
-  ]
- },
- {
-  "tool": "mcd paint: weathering and vary presets with contrast floor",
+  "tool": "paint vary / weather: contrast floor and clustered coverage",
   "kind": "MisusedTool",
-  "need": "Weather or vary by contiguous course or panel with a coverage fraction, clustering and a minimum contrast and mottling density, with a visible default. Reject variants below the contrast floor so changes do not read as same-family no-ops.",
+  "need": "Enforce a minimum contrast step and coverage fraction for variation and weathering presets, weathering by contiguous course or panel with clustering rather than scattered single blocks, and a visible default density, including a plinth weathered variant.",
   "members": [
    19,
    23,
@@ -174,7 +104,7 @@
    64,
    82
   ],
-  "key": "mcd paint weathering and vary presets with contrast floor",
+  "key": "paint vary weather contrast floor and clustered coverage",
   "n": 6,
   "runs": 4,
   "value": 24,
@@ -186,59 +116,79 @@
   ]
  },
  {
-  "tool": "singletons (no shared tool)",
-  "kind": "MissingTool",
-  "need": "Each needs its own brush or option: a gate prop, an emblem inlay, a roof course texture option, a rail round flat tops, and a louvred vent option.",
+  "tool": "mcd render: legibility of textures, thin glass, glow and small features",
+  "kind": "RendererGap",
+  "need": "Render true textures and opacity, flag untextured or translucent blocks, show a glow halo for light sources, and provide a close-up view so thin glazing and small features are judged, not lost.",
   "members": [
-   0,
-   17,
-   18,
-   44,
-   52
+   127,
+   166,
+   194,
+   230
   ],
-  "key": "singletons no shared tool",
-  "n": 5,
-  "runs": 3,
-  "value": 22.516660498395403,
+  "key": "mcd render legibility of textures thin glass glow and small features",
+  "n": 4,
+  "runs": 4,
+  "value": 24,
   "evidence": [
-   "Rejected 'Make the garden gate read as a gate': a bare light block with a floating lantern beside the post reads as a stray unfinished pillar, and the open gate, fence and ivy were removed.",
-   "'Make the pediment seal read' was rejected: the bright quartz panels read as stray white patches, not as a seal.",
-   "'Texture the roof slopes' was rejected: the slopes still read as flat grey stone-brick courses, and the added texture was barely perceptible.",
-   "JOB 15 tower-top railing: stray pickets, uneven cross-bars, cluttered spiky tangle instead of a clean rail"
+   "Rejected task: after-view 'replaces the sandstone bands with translucent pinkish-grey panels that read as glass or a rendering artifact'. The cause is unconfirmed; it may be a block or texture fault rather than a design choice.",
+   "Builder: glass_pane is invisible at render scale, so full glass blocks were used instead. Reviewer: glazing reads as small mullioned panes only.",
+   "Stained glass rendered pale/pink with no light engine; builder placed shroomlight in the glass to make it read as lit. Reviewer: 'the glowing window is just a small orange patch'.",
+   "Weather vane is a thin line hard to see. Cupola almost invisible from front and side views. Slits visible only in the back view. Evidence that the judge cannot see these is inferred, not measured."
   ]
  },
  {
-  "tool": "band and window dressing: clearance-checked placement (incl. shutters)",
+  "tool": "mcd palette check: outlier, accent and contrast lint",
   "kind": "MissingTool",
-  "need": "Place fascias, curtains and shutters only in solid wall zones outside the glazing, recessed by a depth offset. Block placement that overlaps window or door cells or clashes with hanging lanterns, signs or wall props, and build panel-shaped closed shutters sized to the opening.",
+  "need": "Flag blocks whose luminance, saturation or hue falls outside the build's palette family or breaks their role's contrast, and suggest a contrast-safe substitute per role before render.",
   "members": [
-   4,
-   8,
-   79,
-   86
+   5,
+   83,
+   88,
+   108
   ],
-  "key": "band and window dressing clearance checked placement incl shutters",
+  "key": "mcd palette check outlier accent and contrast lint",
   "n": 4,
   "runs": 4,
   "value": 22,
   "evidence": [
-   "Rejected 'Curtains on the side and back windows': a flat, translucent red strip overlaps the hanging lantern and the wall beside the window, so the back window reads as cluttered.",
-   "Rejected sign task: new oak beam across the upper storey is a wide plain slab that covers the windows, so the window row looks blocked.",
-   "JOB 31: shutters replaced the glazed window with a black void and thin slats, so the windows read as holes.",
-   "JOB 14: the 'shutters' render as two thin vertical brown slats running full window height, so the opening reads as dark and empty."
+   "Rejected 'Operator touch: clean quartz doorstep': a pure white quartz step is a stark bright patch against mossy grey stone, reading as a mismatched, unweathered tile.",
+   "JOB 12 tan blocks on white piers; JOB 24 pale weathered block against dark stone.",
+   "JOB 16: gold caps read as odd yellow blocks. JOB 23: cyan soul lantern clashes with the warm lantern palette. JOB 34: bright orange copper cap does not match the dark slate roof.",
+   "Builder: 'dark oak fence invisible on dark oak log background'; 'spruce_planks trim invisible on spruce_planks walls'. Reviewer: 'dark roof, dark timber and dark posts merge into one heavy mass'."
   ]
  },
  {
-  "tool": "B.lantern: feature-anchored light fixture",
+  "tool": "sign: spacing, legibility, lettering and fascia clearance",
   "kind": "MissingTool",
-  "need": "Attach a lantern to a named feature by role (pilaster cap, post top, wall top, bracket or chain), sized to read at street scale, refusing placement with no solid support or an offset from the existing lantern row.",
+  "need": "Place signs and bands only in solid wall zones above openings, keep clearance from adjacent signs, enforce a minimum readable letter height, and lay out short text as block letters with a plaque fallback.",
+  "members": [
+   3,
+   7,
+   8,
+   40
+  ],
+  "key": "sign spacing legibility lettering and fascia clearance",
+  "n": 4,
+  "runs": 3,
+  "value": 19.05255888325765,
+  "evidence": [
+   "Rejected 'Hang a second small sign by the barrel': the dark board butts directly against the READING ROOM sign so the two merge into one long banner, and the dark oak clashes with the lighter board.",
+   "Rejected 'Make the sign legible and prominent': sign text unreadably tiny; the fix didn't make it more legible or prominent.",
+   "Rejected sign task: new oak beam across the upper storey is a wide plain slab that covers the windows, so the window row looks blocked.",
+   "JOB 1 gold lettering read as scattered gold blocks and orange teeth, not legible DEEPSLATE HOLDINGS text"
+  ]
+ },
+ {
+  "tool": "B.lantern: anchored light fixtures",
+  "kind": "MissingTool",
+  "need": "Attach lanterns by named feature role (pilaster cap, post top, wall bracket, hung from an overhang) at a size that reads at street scale, through a solid support, aligned to the existing lantern row, and without stray colour cast.",
   "members": [
    20,
    27,
    71,
    87
   ],
-  "key": "b lantern feature anchored light fixture",
+  "key": "b lantern anchored light fixtures",
   "n": 4,
   "runs": 4,
   "value": 18,
@@ -250,38 +200,97 @@
   ]
  },
  {
-  "tool": "mcd roof edge: cornice, coping and string course",
-  "kind": "MisusedTool",
-  "need": "Cornices, coping, string courses and roof-edge trim get a default projection of at least 2 blocks with a dentil or corbel rhythm option. Coping runs as one closed course on the wall-top ring, and the job fails if the ring is open.",
+  "tool": "glazing grid: mullions, glazing bars, transoms and panel material",
+  "kind": "MissingOption",
+  "need": "Draw mullion and glazing-bar grids in the frame material with set spacing and depth, with a panel-material option for non-glass faces and transom or sidelight variants for doors.",
   "members": [
-   24,
-   28,
-   33,
-   57,
-   80
+   53,
+   56,
+   73,
+   74,
+   100
   ],
-  "key": "mcd roof edge cornice coping and string course",
+  "key": "glazing grid mullions glazing bars transoms and panel material",
   "n": 5,
   "runs": 3,
   "value": 17.32050807568877,
   "evidence": [
-   "Mid string course between storeys not visible in either render; shaft flank storey bands add no visible profile.",
-   "Roof-edge coping left stray specks on the rooftop with no edge improvement; roof-line coping on the front frieze not visible.",
-   "'Roof edge' (JOB 11) had only a tiny vent and cap change; 'Roof edge coping' (JOB 10) showed no meaningful roof-edge profile at street view.",
-   "JOB 7 (eave ledge nearly invisible), JOB 8 (belt courses faint), JOB 10 (roof coping barely visible), JOB 12 (heavy dentilled cornice and string course not produced)"
+   "JOB 26 mullion grid is only faintly different from the before state, with flat glass and no crafted depth",
+   "JOB 10 glazing change gave flat pale panes with almost no mullion detail",
+   "JOB 16: mullion grid shows only faint light-blue lines on the glass.",
+   "JOB 17: transom change is tiny and barely shifts the read against the concept's double door."
   ]
  },
  {
-  "tool": "shapes-curved arch: window and door heads",
+  "tool": "plaque / signboard: placement on flat, curved, open and lit faces",
   "kind": "MissingOption",
-  "need": "Apply a segmental, corbelled or stepped arch head with an optional keystone to an existing rectangular opening in place, without rebuilding the surrounding wall.",
+  "need": "Place one-block sign bands, flanking signs, free-standing or porch-attached signs, and glowing block-letter signs on flat or curved walls.",
+  "members": [
+   123,
+   138,
+   157,
+   170
+  ],
+  "key": "plaque signboard placement on flat curved open and lit faces",
+  "n": 4,
+  "runs": 4,
+  "value": 16,
+  "evidence": [
+   "Builder: 'Wall signs... could not fit a 1-cell-high band between awning and viga' and fell back to hand-placed B.sign.",
+   "Builder did not build the door sign or pennant because plaque and signboard fail on curved walls.",
+   "B.sign gave an unsupported-attachment warning when placed in the wall cell. signboard was not usable because the porch is open on three sides.",
+   "Builder: plaque gives flat orange letters; block font needs 5+ rows plus margin. Reviewer (x2): CAFE sign is small, low, hidden by planters, and reads as paint rather than a neon sign."
+  ]
+ },
+ {
+  "tool": "massing: lean-to, porch, wing and non-rectangular shell",
+  "kind": "MissingTool",
+  "need": "Build a lean-to, porch or wing with its own lower roof bonded to the host wall, and a thick-walled shell from any footprint polygon with chamfer or rounded-corner and wall-thickness options, with an orphan check.",
+  "members": [
+   12,
+   110,
+   114
+  ],
+  "key": "massing lean to porch wing and non rectangular shell",
+  "n": 3,
+  "runs": 3,
+  "value": 15.588457268119894,
+  "evidence": [
+   "Rejected 'Plank/wool lean-to': a patchy strip of wool and plank bands, and a stray red cube sticks out from the side.",
+   "Reviewer: 'plain rectangle with one roof mass and no offset wing or porch'; 'add a small projecting entry porch with its own lower roof, or step the eave heights'.",
+   "Builder looped over two overlapping rectangles to get rounded corners and a 2-wall shell. Reviewer: 'walls look thin and square-edged, not thick and rounded like adobe'. shell is rectangular only."
+  ]
+ },
+ {
+  "tool": "B.rail: railing, gate and raised deck",
+  "kind": "MissingTool",
+  "need": "Run a single-height railing with regular posts and a continuous top rail round any flat roof, tower top or raised deck, with a gap for steps, a gate prop that reads as an opening between posts, and a footing course under decks.",
+  "members": [
+   0,
+   44,
+   101
+  ],
+  "key": "b rail railing gate and raised deck",
+  "n": 3,
+  "runs": 3,
+  "value": 15.588457268119894,
+  "evidence": [
+   "Rejected 'Make the garden gate read as a gate': a bare light block with a floating lantern beside the post reads as a stray unfinished pillar, and the open gate, fence and ivy were removed.",
+   "JOB 15 tower-top railing: stray pickets, uneven cross-bars, cluttered spiky tangle instead of a clean rail",
+   "Builder: 'engawa/veranda all hand-placed'; 'raised floor on footings with 1-block gap: nothing'. Reviewer: 'gaps under the floor show as white or empty holes'; 'flat, uniform plank band with repetitive fence-post railing'."
+  ]
+ },
+ {
+  "tool": "arch (shapes-curved): openings and heads",
+  "kind": "MissingOption",
+  "need": "Apply an arch or segmental head to an existing rectangular opening in place, with an optional stepped or corbelled profile, contrasting voussoir material and keystone.",
   "members": [
    49,
    62,
    72,
    89
   ],
-  "key": "shapes curved arch window and door heads",
+  "key": "arch shapes curved openings and heads",
   "n": 4,
   "runs": 3,
   "value": 13.856406460551018,
@@ -293,15 +302,114 @@
   ]
  },
  {
-  "tool": "B.planter: planting mass and potted plant",
+  "tool": "relief projection defaults (mcd paint depth)",
+  "kind": "MisusedTool",
+  "need": "Default projections for sills, pilasters, quoins, cornices, roof trim and crow-steps to at least 2 blocks with a contrasting role material, so 1-block relief does not vanish at street scale.",
+  "members": [
+   33,
+   41,
+   48,
+   78
+  ],
+  "key": "relief projection defaults mcd paint depth",
+  "n": 4,
+  "runs": 3,
+  "value": 13.856406460551018,
+  "evidence": [
+   "'Roof edge' (JOB 11) had only a tiny vent and cap change; 'Roof edge coping' (JOB 10) showed no meaningful roof-edge profile at street view.",
+   "JOB 2 pilasters proud of the wall and dark quoins: before and after renders nearly identical; JOB 8 pier capitals and base blocks not visible",
+   "JOB 33 stepped dark cap and crenellations are barely visible and do not add the concept's gable stair-stepping",
+   "JOB 20 planter ledges, JOB 27 pilasters, JOB 36 eave brackets, JOB 39 coping, JOB 35 cornice: thin, barely visible relief."
+  ]
+ },
+ {
+  "tool": "thin members: posts, downpipes and pier widening",
   "kind": "MissingTool",
-  "need": "Place a planter or potted shrub as a small volume of about 3x2 footprint and 2 high, with a leaf or flower palette, seated on a plinth or in a named bay or corner.",
+  "need": "Place posts, rails, downpipes and piers at a minimum 2-wide or capped 1-wide section in a palette role, running continuously from roof edge to ground, widening with the wall's own material and no ragged edges.",
+  "members": [
+   50,
+   70,
+   84
+  ],
+  "key": "thin members posts downpipes and pier widening",
+  "n": 3,
+  "runs": 3,
+  "value": 13.856406460551018,
+  "evidence": [
+   "JOB 18 handrails are two small sticks; JOB 24 gate posts are thin stubs; JOB 30 post-and-rail strip is barely visible; JOB 31 downpipe became tan posts in the wrong colour",
+   "JOB 12: two tan/terracotta blocks at window height, no vertical run; JOB 33: faint mossy strips barely change the read.",
+   "JOB 6: widened piers render as pale flat light-oak blocks with a ragged stepped edge on the right pier, clashing with the darker concept tone."
+  ]
+ },
+ {
+  "tool": "window dressing: shutters and curtains",
+  "kind": "MissingTool",
+  "need": "Build closed panel-shaped shutters sized to the opening, outside the glazing, and recess curtains or drapes inside the opening with a depth offset, refusing placement over lanterns, signs or other wall props.",
+  "members": [
+   4,
+   79,
+   86
+  ],
+  "key": "window dressing shutters and curtains",
+  "n": 3,
+  "runs": 3,
+  "value": 13.856406460551018,
+  "evidence": [
+   "Rejected 'Curtains on the side and back windows': a flat, translucent red strip overlaps the hanging lantern and the wall beside the window, so the back window reads as cluttered.",
+   "JOB 31: shutters replaced the glazed window with a black void and thin slats, so the windows read as holes.",
+   "JOB 14: the 'shutters' render as two thin vertical brown slats running full window height, so the opening reads as dark and empty."
+  ]
+ },
+ {
+  "tool": "mcd check: per-face envelope census",
+  "kind": "MissingTool",
+  "need": "Report per face the opening count, relief, blank-wall status, and see-through or envelope holes with coordinates, before the render review.",
+  "members": [
+   126,
+   161,
+   209
+  ],
+  "key": "mcd check per face envelope census",
+  "n": 3,
+  "runs": 3,
+  "value": 13.856406460551018,
+  "evidence": [
+   "Reviewer: 'The back and side walls are flat bands... no openings or relief, so they read as blank'. Current checks did not flag this.",
+   "Reviewer saw a see-through hole in the upper tower on the back elevation; mcd check reported orphans but no elevation through-hole finding.",
+   "Reviewer: right wall largely open with holes showing interior and sky; front face see-through; back wall has a void. Existing orphan/floating checks did not catch these."
+  ]
+ },
+ {
+  "tool": "mcd roof: eave overhang, brackets and grow-free overhang",
+  "kind": "MissingOption",
+  "need": "Provide an eave overhang with alternating shingle courses and an optional trim line, per-side overhang, overhang kept inside the footprint, and eave brackets that do not need an overhang.",
+  "members": [
+   146,
+   164,
+   216,
+   217
+  ],
+  "key": "mcd roof eave overhang brackets and grow free overhang",
+  "n": 4,
+  "runs": 3,
+  "value": 13.856406460551018,
+  "evidence": [
+   "Dark-on-dark deepslate with no courses, texture or eave line. Reviewer asked for alternating deepslate_tile stairs and slabs with a stripped-spruce eave trim.",
+   "Builder: overhang on 2 sides only (1 elsewhere); roof() takes one footprint, so the footprint was widened by hand. Reviewer: overhang is shallow and the terrace side is unsheltered.",
+   "Overhang grew the grid 15x17x21 to 17x17x22 and shifted coordinates. Builder forced overhang 0, losing the eave. grow:false was too restrictive for a pyramid overhang. Cupola cap went past y=16.",
+   "Dark stair corbels under the eave were not possible at overhang 0, because brackets need an overhang to hang under."
+  ]
+ },
+ {
+  "tool": "B.planter: planter, potted shrub and topiary",
+  "kind": "MissingTool",
+  "need": "Place planters and potted shrubs as small volumes of about 3x2 footprint and 2 high, with a leaf or flower palette, at a named bay or corner so they read as planting from the street.",
   "members": [
    51,
    60,
    75
   ],
-  "key": "b planter planting mass and potted plant",
+  "key": "b planter planter potted shrub and topiary",
   "n": 3,
   "runs": 2,
   "value": 12.727922061357857,
@@ -312,36 +420,110 @@
   ]
  },
  {
-  "tool": "mcd glazing: mullion grid and door transom",
-  "kind": "MissingOption",
-  "need": "Offer a mullion or glazing-bar preset (spacing, frame material, depth) for windows and shopfronts, plus transom and sidelight variants for doors, so glass reads as divided panes rather than flat dark fields.",
+  "tool": "street dressing: awning, props and stone lantern",
+  "kind": "MissingTool",
+  "need": "Place striped awnings attached to the wall or posts at set spacing, clusters of market goods and street props with a grouping option, and a stone lantern with base, post and cap, all sized to read from street distance.",
   "members": [
-   53,
-   56,
-   73,
-   74
+   102,
+   112,
+   113
   ],
-  "key": "mcd glazing mullion grid and door transom",
-  "n": 4,
+  "key": "street dressing awning props and stone lantern",
+  "n": 3,
   "runs": 2,
-  "value": 11.313708498984761,
+  "value": 12.727922061357857,
   "evidence": [
-   "JOB 26 mullion grid is only faintly different from the before state, with flat glass and no crafted depth",
-   "JOB 10 glazing change gave flat pale panes with almost no mullion detail",
-   "JOB 16: mullion grid shows only faint light-blue lines on the glass.",
-   "JOB 17: transom change is tiny and barely shifts the read against the concept's double door."
+   "Builder: 'stone lantern (toro) hand-built'. Reviewer: 'stone lantern is just one stone post'; 'give the lantern a base, post and cap'.",
+   "Builder hand-placed a sloped striped awning in a loop (closest tool is bunting, which is banners only). Reviewer: 'floating awning frame' and 'awning edges ragged where they overlap the viga ends'.",
+   "Builder hand-placed decorated_pot, barrel, hay_block and composter. Reviewer: 'clay pots and baskets are small and hard to read at street view'. planter only does window boxes and raised beds."
   ]
  },
  {
-  "tool": "mcd roof: chimney seat and cap",
+  "tool": "new: lanternCap (lantern drum with cap, cupola and vane)",
+  "kind": "MissingTool",
+  "need": "Build a glazed lantern drum (mullioned glass, iron-bar frame, visible central lamp) with a shallow cap on posts, eave overhang, finial or vane, and a louvred shaft option, sized to a footprint.",
+  "members": [
+   129,
+   131,
+   220
+  ],
+  "key": "new lanterncap lantern drum with cap cupola and vane",
+  "n": 3,
+  "runs": 2,
+  "value": 12.727922061357857,
+  "evidence": [
+   "Reviewer: the lantern cap reads as a flat black lid or an onion/helmet dome. The roof presets do not cover lantern caps.",
+   "Builder hand-placed a ring of glass, iron bars and glowstone. Reviewer: the lantern room is mostly open posts, so the light reads as a small block.",
+   "Louvres and shaft hand-built. Cap roof() added layers. No weathervane brush (finial has no arrow, tower top is hollow). Cupola nearly invisible from front; vane a thin line."
+  ]
+ },
+ {
+  "tool": "timberFrame(g,{rect,y,height,bay,window})",
+  "kind": "MissingTool",
+  "need": "Lay half-timber bays with posts, sills, knee or cross bracing, plaster infill, diagonal braces in an X or Z pattern, bargeboards and exposed tie beams for timber gables, with window cut-outs.",
+  "members": [
+   154,
+   155,
+   186
+  ],
+  "key": "timberframe g rect y height bay window",
+  "n": 3,
+  "runs": 2,
+  "value": 12.727922061357857,
+  "evidence": [
+   "pediment is classical (quartz-style cornice); no timber gable exists. Reviewer asked for symmetrical crossed-beam gable ends with bargeboards.",
+   "Timber framing hand-placed. pilasters profile timber is vertical only. Reviewer: stave and St Andrew's crosses wanted.",
+   "Plaster, log posts, knee braces and round windows were all hand-looped. Reviewer: 'large flat white panels'. Closest tools (surround timber, pilasters) do not cover bracing or infill."
+  ]
+ },
+ {
+  "tool": "mcd roof: chimney",
+  "kind": "MissingOption",
+  "need": "Place chimneys on the ridge or gable with a flue and cap, measure rise from the local roof surface, optionally band the stack with a flared cap, and flag a floating stub.",
+  "members": [
+   140,
+   183,
+   207
+  ],
+  "key": "mcd roof chimney",
+  "n": 3,
+  "runs": 3,
+  "value": 12.12435565298214,
+  "evidence": [
+   "Chimney was a 2x2 with no flue or top. Reviewer: a floating chimney stub and a grey stone stub beside the tower.",
+   "rise is relative to the roof apex, so a chimney at the eave towered over the roof; a negative rise was needed. Reviewer: 'chimney floats beside the roof with a visible gap', 'stuck on'.",
+   "Reviewer: chimneys are short, plain and flat-topped. Builder: 'roof --chimney can only sit on a roof, not rise from a wall plane'; hand-built caps."
+  ]
+ },
+ {
+  "tool": "plinth <F>: base treatment and approach steps",
+  "kind": "MissingOption",
+  "need": "Break a large blank base with a stair course, cobble/mossy mix and plinth step, add a half or full approach course centred on a chosen face, and default a continuous plinth to the full footprint.",
+  "members": [
+   162,
+   172,
+   214
+  ],
+  "key": "plinth f base treatment and approach steps",
+  "n": 3,
+  "runs": 3,
+  "value": 12.12435565298214,
+  "evidence": [
+   "Stone base large, blank and flat. plinth <F> exists in detailing.md but was not used; builder left the base blank. Reviewer wants a stair/slab course and a cobble/mossy mix.",
+   "Builder: entry steps on the plinth placed by hand; no steps brush for plinths.",
+   "Reviewer: loose stone stubs at the base; asked for a continuous stone plinth. Builder had orphan and floating cleanup but not a base plinth."
+  ]
+ },
+ {
+  "tool": "mcd roof: chimney seating and replace mode",
   "kind": "MisusedTool",
-  "need": "Chimneys seat on the local roof plane by extending down to the slope, take a dark masonry cap by default, and offer a replace-existing mode so the old chimney is removed.",
+  "need": "Chimneys seat on the local roof plane down to the sloped surface under their footprint, take a dark masonry cap by default, and offer a replace mode that removes the old stack.",
   "members": [
    1,
    47,
    92
   ],
-  "key": "mcd roof chimney seat and cap",
+  "key": "mcd roof chimney seating and replace mode",
   "n": 3,
   "runs": 3,
   "value": 10.392304845413264,
@@ -352,53 +534,91 @@
   ]
  },
  {
-  "tool": "mcd paint: relief depth defaults",
-  "kind": "MisusedTool",
-  "need": "Default pilasters, quoins, ledges and widened piers to a proud depth of 2 in a contrasting role material, keeping the wall plane flat and refusing a lighter-toned material than the frame by default.",
+  "tool": "projecting band: string course, cornice and dentils",
+  "kind": "MissingOption",
+  "need": "Offer a continuous string course or cornice that projects at least 2 blocks, runs between storeys on every face, uses a dentil or corbel rhythm, and returns cleanly at corners with no detached stubs.",
   "members": [
-   41,
-   78,
-   84
+   24,
+   57,
+   80
   ],
-  "key": "mcd paint relief depth defaults",
+  "key": "projecting band string course cornice and dentils",
   "n": 3,
   "runs": 3,
   "value": 10.392304845413264,
   "evidence": [
-   "JOB 2 pilasters proud of the wall and dark quoins: before and after renders nearly identical; JOB 8 pier capitals and base blocks not visible",
-   "JOB 20 planter ledges, JOB 27 pilasters, JOB 36 eave brackets, JOB 39 coping, JOB 35 cornice: thin, barely visible relief.",
-   "JOB 6: widened piers render as pale flat light-oak blocks with a ragged stepped edge on the right pier, clashing with the darker concept tone."
+   "Mid string course between storeys not visible in either render; shaft flank storey bands add no visible profile.",
+   "JOB 7 (eave ledge nearly invisible), JOB 8 (belt courses faint), JOB 10 (roof coping barely visible), JOB 12 (heavy dentilled cornice and string course not produced)",
+   "JOB 35 cornice shows stray stubs at the sides; JOB 36 eave brackets barely visible; JOB 34 dentil row changed no pixels."
   ]
  },
  {
-  "tool": "mcd roofs: gable apex cap and raking trim",
-  "kind": "MissingTool",
-  "need": "Build a bonded stepped apex cap and a continuous stair-stepped raking band along both gable edges that follows the pitch, with a set thickness and default crow-step depth of at least 2 with a contrasting cap.",
+  "tool": "mcd check: orphan and support rules",
+  "kind": "MisusedTool",
+  "need": "Run floating-block and orphan checks as a gate on the exported build, on all faces, accept sea_lantern and role-declared intentional orphans, and flag unsupported finials.",
   "members": [
-   9,
-   46,
-   48
+   142,
+   174,
+   229
   ],
-  "key": "mcd roofs gable apex cap and raking trim",
+  "key": "mcd check orphan and support rules",
   "n": 3,
-  "runs": 2,
-  "value": 9.899494936611665,
+  "runs": 3,
+  "value": 10.392304845413264,
   "evidence": [
-   "Rejected 'Stepped stone peak above the gable': a boxy, detached stone lump floats above the gable with a visible hole beside it.",
-   "JOB 10 raking band came out thinner, ragged at half-height steps, and partly lost in shading",
-   "JOB 33 stepped dark cap and crenellations are barely visible and do not add the concept's gable stair-stepping"
+   "Reviewer: floating grey slab fragments hang beside the tower and the rear of the cottage has stray blocks. The build passed a check run on an earlier version.",
+   "Builder: sea_lantern flagged as an unsupported lantern by check; palette flags glowstone downlights as outliers.",
+   "check flags hanging bale, pyramid cap top and interior shroomlight as orphans, all intended. A floating spire finial was not caught."
   ]
  },
  {
-  "tool": "B.finial: grounded peak and flagpole",
+  "tool": "facade rhythm: all faces, pilasters and bands",
   "kind": "MissingOption",
-  "need": "A slender finial or flagpole seated on an apex or roof corner with no air gap, sized to read at normal distance, with its material drawn from the palette accent role.",
+  "need": "Apply window slits, pilasters at every n blocks, and regular metal bands with rivet panels to every face, without growing the grid.",
+  "members": [
+   197,
+   213,
+   225
+  ],
+  "key": "facade rhythm all faces pilasters and bands",
+  "n": 3,
+  "runs": 3,
+  "value": 10.392304845413264,
+  "evidence": [
+   "Reviewer: 'the rear stone shaft is a blank wall with only a couple of odd blocks', 'add a window slit, buttress or ivy streaks and a lantern on the back stone shaft'.",
+   "Reviewer: copper accent patches on brick walls are random and unframed; wants ordered horizontal bands or riveted panels at regular spacing.",
+   "pilasters every n profile timber grew the grid, so board-and-batten posts were hand-placed on a rhythm."
+  ]
+ },
+ {
+  "tool": "lantern fixture: hanging under eaves, with material option",
+  "kind": "MissingOption",
+  "need": "Hang lanterns from a chain or bracket under any eave, overhang or beam underside, spaced evenly, with copper, iron or spruce material chosen by option.",
+  "members": [
+   175,
+   193,
+   206
+  ],
+  "key": "lantern fixture hanging under eaves with material option",
+  "n": 3,
+  "runs": 3,
+  "value": 10.392304845413264,
+  "evidence": [
+   "Builder: lanterns on chains placed without support. Reviewer: lanterns float without visible support in the back view and look loose.",
+   "Builder: 'fixtures at eaves only works on facades found by face maps and could not reach the jetty corners'. Reviewer: 'lanterns are sparse and hang on odd chains'.",
+   "Builder: hanging lantern in fixture defaults to spruce/iron; had to hand-place copper_lantern."
+  ]
+ },
+ {
+  "tool": "B.finial / B.flagpole: vertical element on apex or roof point",
+  "kind": "MissingTool",
+  "need": "Place a grounded pole with an optional cap or ball on any apex, roof corner or pediment foot, scaled so it reads as a finial or flagpole, with no air gap and a finial material drawn from the palette role.",
   "members": [
    45,
    59,
    67
   ],
-  "key": "b finial grounded peak and flagpole",
+  "key": "b finial b flagpole vertical element on apex or roof point",
   "n": 3,
   "runs": 2,
   "value": 9.899494936611665,
@@ -409,20 +629,1072 @@
   ]
  },
  {
-  "tool": "B.post: thin member and downpipe",
-  "kind": "MissingTool",
-  "need": "Place posts, rails, downpipes and gate posts at a minimum section of 2 wide, or a capped 1-wide, in a palette role colour. A downpipe runs continuously from roof edge to ground down a pier or corner.",
+  "tool": "glazing grid (brush option, applied to gables and new bays)",
+  "kind": "MissingOption",
+  "need": "Apply glazing and louvre grids inside gable triangles, on belfry walls and on new bays, with floor-to-ceiling mode, pane-to-pier ratio, and a curtain-wall bay rhythm on any face.",
   "members": [
-   50,
-   70
+   153,
+   165,
+   167
   ],
-  "key": "b post thin member and downpipe",
+  "key": "glazing grid brush option applied to gables and new bays",
+  "n": 3,
+  "runs": 2,
+  "value": 9.899494936611665,
+  "evidence": [
+   "glazing grid works on flat facades but not inside gable triangles. Builder hand-placed lattice windows; reviewer wanted a louvred belfry in place of the see-through hole.",
+   "Builder: no curtain-wall brush; posts placed by hand. Reviewer (x2): brief's floor-to-ceiling glass not visible; glass shows only as small panes between black piers; side and back walls blank.",
+   "Builder: glazing brush works on existing walls only. Reviewer: back and side walls remain blank planes."
+  ]
+ },
+ {
+  "tool": "mcd render: interior and eye-level views",
+  "kind": "RendererGap",
+  "need": "Include an interior or through-window view in the default view set whenever a job touches interiors, so changes not visible from outside can be judged.",
+  "members": [
+   11,
+   77
+  ],
+  "key": "mcd render interior and eye level views",
   "n": 2,
   "runs": 2,
   "value": 8.485281374238571,
   "evidence": [
-   "JOB 18 handrails are two small sticks; JOB 24 gate posts are thin stubs; JOB 30 post-and-rail strip is barely visible; JOB 31 downpipe became tan posts in the wrong colour",
-   "JOB 12: two tan/terracotta blocks at window height, no vertical run; JOB 33: faint mossy strips barely change the read."
+   "Rejected 'Interior stock and meeting room': the changes are barely visible from outside, so the judge cannot see the work.",
+   "JOB 22 interior furnishings invisible in exterior views; JOB 24 one-block paving change and JOB 25 moss flecks too small to judge."
+  ]
+ },
+ {
+  "tool": "mcd render: true colour and entity visibility",
+  "kind": "RendererGap",
+  "need": "Render white and paper blocks at true luminance and show banners and entity blocks in the standard close-ups, or state explicitly that they are not rendered.",
+  "members": [
+   69,
+   107
+  ],
+  "key": "mcd render true colour and entity visibility",
+  "n": 2,
+  "runs": 2,
+  "value": 8.485281374238571,
+  "evidence": [
+   "JOB 11: teal corner banners do not appear in front or front-left close-ups; only a tan block change shows.",
+   "Builder: 'paper white renders light grey in mcd render (white concrete / wool)'; snow_block was the only clean white. Reviewer: 'paper-screen walls barely read'."
+  ]
+ },
+ {
+  "tool": "palette by role: role-to-block mapping",
+  "kind": "MisusedTool",
+  "need": "Map roles such as wall, post, corner, roof, white/quartz and accent gold to architectural blocks by contrast with the wall role, and reject non-architectural blocks like wool as facade or roof material unless marked decorative.",
+  "members": [
+   10,
+   14,
+   54
+  ],
+  "key": "palette by role role to block mapping",
+  "n": 3,
+  "runs": 2,
+  "value": 8.485281374238571,
+  "evidence": [
+   "Rejected stepped-peak task: stripped log corner posts clash with the dark stone walls, so the roofline looks less crafted.",
+   "Rejected lean-to: red and yellow wool blocks read as clutter on a building facade.",
+   "JOB 27 quartz cap and bands read as a mismatched thin grey strip instead of white quartz"
+  ]
+ },
+ {
+  "tool": "coping and parapet: continuous top-edge course",
+  "kind": "MisusedTool",
+  "need": "Build a single continuous coping course around the full wall-top ring by default, with a separate coping material and per-side railing or parapet options, failing the job if the ring is not closed.",
+  "members": [
+   28,
+   117,
+   118
+  ],
+  "key": "coping and parapet continuous top edge course",
+  "n": 3,
+  "runs": 2,
+  "value": 8.485281374238571,
+  "evidence": [
+   "Roof-edge coping left stray specks on the rooftop with no edge improvement; roof-line coping on the front frieze not visible.",
+   "Builder used paint railing rules with explicit x ranges because roof had no per-side railing or coping option. Reviewer: 'fence posts poke above the parapet'. Also 'deck's mud-brick slab merges with the coping'.",
+   "Reviewer: 'the parapet is thin and patchy, with the crenellation present on only some sides' and 'a continuous slab or wall parapet around the whole roof edge'."
+  ]
+ },
+ {
+  "tool": "new: ring brush (corbel course and arcade)",
+  "kind": "MissingTool",
+  "need": "Build a ring of upside-down stair or slab corbels with per-cell facing, or an arcade of evenly spaced posts with rail or lattice, a gap to the inner wall, and a beam line.",
+  "members": [
+   135,
+   151
+  ],
+  "key": "new ring brush corbel course and arcade",
+  "n": 2,
+  "runs": 2,
+  "value": 8.485281374238571,
+  "evidence": [
+   "Builder hand-placed a corbelled gallery under a round tower with jagged diagonals. Reviewer: the gallery floor and cap stack into a dark slab.",
+   "Gallery (svalgang) ring built by hand around the core. Reviewer: evenly spaced plank pillars read as a warehouse wall; wants an open arcade with a gap to the inner wall and a base plinth."
+  ]
+ },
+ {
+  "tool": "landscaping: mound and rock outcrop plinth",
+  "kind": "MissingTool",
+  "need": "Build a height-field mound or rock outcrop with a cut-in stepped stair, moss and fern cover, and one cobble/moss mix, sized for small plinths.",
+  "members": [
+   144,
+   191
+  ],
+  "key": "landscaping mound and rock outcrop plinth",
+  "n": 2,
+  "runs": 2,
+  "value": 8.485281374238571,
+  "evidence": [
+   "Builder hand-wrote a height loop for a rocky outcrop. heightfield and strata are for valleys, not rock islands.",
+   "Hand-written height-field loop. Reviewer: 'stone base platform is noisy and irregular', 'base has scattered grass and moss blocks'. Landscaping brushes did not fit a tiny plinth."
+  ]
+ },
+ {
+  "tool": "mcd roof: tall spire and cone profiles",
+  "kind": "MissingOption",
+  "need": "Provide proportionate steep pitch for small footprints, a flared-base broach spire, and a smooth tall cone with per-ring lean and taper, without stair-step lumps.",
+  "members": [
+   147,
+   148,
+   180
+  ],
+  "key": "mcd roof tall spire and cone profiles",
+  "n": 3,
+  "runs": 2,
+  "value": 8.485281374238571,
+  "evidence": [
+   "steep pyramid on a 3x3 belfry gave a thin needle. Reviewer: spire and cross finial are small; wants a tall slender shingled needle.",
+   "Builder wanted a broach option on tower: spire; pyramid gave a straight needle with no flare at the base.",
+   "Pyramid is a square-stepped, centred, broad form; reviewer wanted 'a tall crooked wizard's cone', 'lean barely visible'. A rejected cone attempt read as 'a tall ragged green mass with irregular stair-step protrusions'."
+  ]
+ },
+ {
+  "tool": "new: hoist (jib, crane beam and hoist beam)",
+  "kind": "MissingTool",
+  "need": "Build a beam projecting past a wall or gable with a bracket, hanging chain, hook and load, sized relative to the opening below.",
+  "members": [
+   205,
+   222
+  ],
+  "key": "new hoist jib crane beam and hoist beam",
+  "n": 2,
+  "runs": 2,
+  "value": 8.485281374238571,
+  "evidence": [
+   "Reviewer: crane arm and hoist not legible, nothing above the loading door. Builder: 'Crane / gantry / jib: nothing.'",
+   "Logs, stair bracket, iron_chain and hay bale all placed by hand. Closest existing tool is attach lantern. Bale flagged as orphan."
+  ]
+ },
+ {
+  "tool": "props: prop groups and free-standing props",
+  "kind": "MissingTool",
+  "need": "Scatter prop groups (bales, barrels) and free-standing props such as a telescope on a stand, plus a fence-run brush that works on grade and stops at path gaps.",
+  "members": [
+   189,
+   223
+  ],
+  "key": "props prop groups and free standing props",
+  "n": 2,
+  "runs": 2,
+  "value": 8.485281374238571,
+  "evidence": [
+   "No prop library; closest was lightning_rod + fence. Rejected task: 'telescope is now a black slab that floats past the wall with no visible support'.",
+   "Bale stacks, barrels and fence with path gap all hand-placed. planters covers only windows and beds. railing works on a roof top, not on grass."
+  ]
+ },
+ {
+  "tool": "B.plaque: raised-panel inscription tablet",
+  "kind": "MissingTool",
+  "need": "Place a raised-panel tablet with legible inset lettering and gold-trim or gold-leaf frame option, keeping clearance from posts and signs.",
+  "members": [
+   16,
+   66
+  ],
+  "key": "b plaque raised panel inscription tablet",
+  "n": 2,
+  "runs": 2,
+  "value": 7.0710678118654755,
+  "evidence": [
+   "'Make the name plaque legible and gold' was rejected: the text was unreadable and the plaque was not visibly gold.",
+   "JOB 3 INSPECTORATE plaque: raised carved panels became flat pale stone plus dark blocks and a wood post cutting the sign band; reads patchy, not a plaque."
+  ]
+ },
+ {
+  "tool": "gable edge: raking band and apex cap",
+  "kind": "MissingTool",
+  "need": "Build a continuous stair-stepped raking band that follows the pitch on both gable edges, plus a stepped apex cap bonded to the roof and wall cells beneath it.",
+  "members": [
+   9,
+   46
+  ],
+  "key": "gable edge raking band and apex cap",
+  "n": 2,
+  "runs": 2,
+  "value": 7.0710678118654755,
+  "evidence": [
+   "Rejected 'Stepped stone peak above the gable': a boxy, detached stone lump floats above the gable with a visible hole beside it.",
+   "JOB 10 raking band came out thinner, ragged at half-height steps, and partly lost in shading"
+  ]
+ },
+ {
+  "tool": "gable tympanum: emblem inlay and pattern fill",
+  "kind": "MissingOption",
+  "need": "Place a recognisable emblem as a contiguous inlay in a named pediment or gable field using a small pattern library and palette contrast rule, and offer lattice, kumiko or timber-frame fill patterns.",
+  "members": [
+   17,
+   98
+  ],
+  "key": "gable tympanum emblem inlay and pattern fill",
+  "n": 2,
+  "runs": 2,
+  "value": 7.0710678118654755,
+  "evidence": [
+   "'Make the pediment seal read' was rejected: the bright quartz panels read as stray white patches, not as a seal.",
+   "Builder: 'pediment tympanum cannot take a lattice/timber-frame pattern'; kumiko window in the gable was hand-placed trapdoors."
+  ]
+ },
+ {
+  "tool": "mcd check: placement clearance and circulation",
+  "kind": "MissingTool",
+  "need": "Flag tree or prop cells within N blocks of a footprint or overlapping a roof edge, and treat doors as passable openings, counting doorsteps outside the box with a street-edge parameter for end-to-end walk checks.",
+  "members": [
+   111,
+   119
+  ],
+  "key": "mcd check placement clearance and circulation",
+  "n": 2,
+  "runs": 2,
+  "value": 7.0710678118654755,
+  "evidence": [
+   "Reviewer: 'maple ... sits partly inside the roof edge'; 'move the maple out into the garden at least 3 blocks from the house'. `mcd check` reported orphan and floating blocks but not clearance.",
+   "Builder: 'check circulation treats doors as walls and ignores doorsteps outside the box, so end-to-end along x reported false even with side doors'. Also 'minClearWidth=4 on x-axis' flagged."
+  ]
+ },
+ {
+  "tool": "louvres: vent slots and panels on shafts and solid walls",
+  "kind": "MissingTool",
+  "need": "Cut evenly spaced vent slots or louvre panels into shaft or wall faces, with slot width, spacing, and a stepped cap, on plain solid walls as well as glass.",
+  "members": [
+   124,
+   168
+  ],
+  "key": "louvres vent slots and panels on shafts and solid walls",
+  "n": 2,
+  "runs": 2,
+  "value": 7.0710678118654755,
+  "evidence": [
+   "Builder: 'filled a 3x3 shaft and placed vents by hand'. Reviewer: 'Give the wind tower open vent slots'.",
+   "Builder: louvres needs glass; no louvre option works on a plain wall, so the plant-room vent was abandoned."
+  ]
+ },
+ {
+  "tool": "railing: continuous fence and glass balustrade around rings and plinths",
+  "kind": "MissingOption",
+  "need": "Connect fence and railing blocks around a circular gallery, and offer glass or post-and-glass railing with a configurable gap for steps and matching corner posts.",
+  "members": [
+   134,
+   171
+  ],
+  "key": "railing continuous fence and glass balustrade around rings and plinths",
+  "n": 2,
+  "runs": 2,
+  "value": 7.0710678118654755,
+  "evidence": [
+   "Builder wrote fence connection states by hand because ring connects only walls. Reviewer: the gallery looks empty.",
+   "Builder: no railing brush for a glass balustrade with a step gap; terrace screens and posts placed by hand. Reviewer: glass railing is very thin; corner posts look oversized or like stray cubes."
+  ]
+ },
+ {
+  "tool": "mirror: state-aware mirror of a finished region",
+  "kind": "MissingOption",
+  "need": "Mirror a finished build or region, including stair shape, facing, door hinge, pane and fence state, and not only writes made inside a callback.",
+  "members": [
+   136,
+   212
+  ],
+  "key": "mirror state aware mirror of a finished region",
+  "n": 2,
+  "runs": 2,
+  "value": 7.0710678118654755,
+  "evidence": [
+   "Builder wrote its own mirror because mirrorX only mirrors writes inside its callback. Symmetric cottage front detail was needed.",
+   "Builder: 'Mirroring a finished build (with stair/door/pane state flips) was not available: wrote mirrorGrid() by hand; mirrorX only works inside a paint function.'"
+  ]
+ },
+ {
+  "tool": "mcd roof: skirt / lean-to over a core and bay annex",
+  "kind": "MissingOption",
+  "need": "Build a skirt or lean-to roof outward from the core footprint that meets its wall, with its own pitch and an optional loading opening, without hipping the full plan and carving it out.",
+  "members": [
+   152,
+   208
+  ],
+  "key": "mcd roof skirt lean to over a core and bay annex",
+  "n": 2,
+  "runs": 2,
+  "value": 7.0710678118654755,
+  "evidence": [
+   "Builder built a hip over the whole plan and carved it out to make the gallery lean-to roof. Reviewer: the lean-to roof over the arcade needs a shingled finish.",
+   "Reviewer: plain cube with little projection and no side annex or bay. Stave church builder also added a lean-to roof by hand."
+  ]
+ },
+ {
+  "tool": "ringWindow (round window / gear brush)",
+  "kind": "MissingTool",
+  "need": "Build a round or octagonal window with a ring frame, glass centre, optional spokes, hub and teeth, sized to read as round at street distance and centred over an opening.",
+  "members": [
+   187,
+   203
+  ],
+  "key": "ringwindow round window gear brush",
+  "n": 2,
+  "runs": 2,
+  "value": 7.0710678118654755,
+  "evidence": [
+   "Only a pediment oculus exists. Reviewer: 'small round windows read as square glass panes', 'make the windows round by building ring-shaped frames'.",
+   "Reviewer: gear window reads as damage, not a gear; 'big round gear window is not readable'. Builder: no circular window brush; placed disc, ring and teeth by hand with a distance test."
+  ]
+ },
+ {
+  "tool": "mcd roof: pitch fit and overhang clamp",
+  "kind": "MisusedTool",
+  "need": "Auto-fit pitch to span and the height limit with a maxHeight cap, clamp overhang to wall height and span with a warning above a set wall-face fraction, round pitch to clean steps, and keep dutch-gable off narrow spans.",
+  "members": [
+   95,
+   96,
+   97
+  ],
+  "key": "mcd roof pitch fit and overhang clamp",
+  "n": 3,
+  "runs": 1,
+  "value": 6,
+  "evidence": [
+   "Builder: 9-wide span at 45° overshot the 9-block height limit; pitch tuned by trial renders; `finial` could not be used because the roof hit the height cap.",
+   "Reviewer: 'overhang so deep it hides almost the whole wall'; 'pull the roof overhang in by 1 block'. Rejected detail task on the same issue returned no output.",
+   "Builder: pitch 0.67–1.0 gives lumpy plateaus and odd rise rounding; `dutch-gable` gave a tower-like gablet and slab ring on a 9×7 span, so it was unusable."
+  ]
+ },
+ {
+  "tool": "cylinder / curved wall: bands, openings and surround",
+  "kind": "MissingOption",
+  "need": "On a round shaft, take a per-layer or repeating band block list, place windows on an even or staggered rhythm with optional sills, and frame openings at true radial positions.",
+  "members": [
+   128,
+   132,
+   133
+  ],
+  "key": "cylinder curved wall bands openings and surround",
+  "n": 3,
+  "runs": 1,
+  "value": 6,
+  "evidence": [
+   "Builder called cylinder once per colour band; the reviewer's Major Massing issue asked for red/white bands carried around a curved wall.",
+   "Builder hand-placed tower window and door frames on a round wall. Reviewer: tower window slits are narrow, irregular and stacked in a column.",
+   "Reviewer: window slits stack in a column and need staggering or sills. Builder placed them by hand."
+  ]
+ },
+ {
+  "tool": "jetty / balcony (cantilever brush)",
+  "kind": "MissingTool",
+  "need": "Place a cantilevered jetty or balcony deck of a set depth, its brackets, and a full rail on chosen faces in one call.",
+  "members": [
+   184,
+   188
+  ],
+  "key": "jetty balcony cantilever brush",
+  "n": 2,
+  "runs": 1,
+  "value": 6,
+  "evidence": [
+   "Each storey and its upside-down stair brackets were placed by hand. Reviewer: 'jettied floors' only read through a small jetty.",
+   "Deck, fence ring and stair brackets were hand-placed. Reviewer: 'balcony and telescope are tiny and lost', 'extend to a 2-block platform with a full fence rail'. Closest is the railing treatment, which covers the top only."
+  ]
+ },
+ {
+  "tool": "mcd paint: zero-write guard",
+  "kind": "MisusedTool",
+  "need": "Report cells written per rule, fail with the reason when a rule writes zero cells, and default to force for cells a job explicitly targets.",
+  "members": [
+   32,
+   61
+  ],
+  "key": "mcd paint zero write guard",
+  "n": 2,
+  "runs": 2,
+  "value": 5.656854249492381,
+  "evidence": [
+   "Detail jobs 'Eaves cornice, west wall top', 'Stair-shaft glazing grid', 'Roof edge trim, north gable and shaft head' and 'Roof edge' each changed no visible pixels in any view.",
+   "JOB 13 (pediment rake changed no pixels), JOB 20 (entrance doors no pixels), JOB 36 (edge piers no pixels). Session notes: paint skipped already-detailed cells (0 written); weather rule wrote 0 cells on stone_bricks roof face"
+  ]
+ },
+ {
+  "tool": "roof covering texture: course pattern and mixed shades",
+  "kind": "MissingOption",
+  "need": "Give roof coverings a staggered or mixed-block course pattern with a contrast setting, and a multi-shade mix option for dark tile and deepslate, so slopes do not read as a flat single-material field.",
+  "members": [
+   18,
+   109
+  ],
+  "key": "roof covering texture course pattern and mixed shades",
+  "n": 2,
+  "runs": 2,
+  "value": 5.656854249492381,
+  "evidence": [
+   "'Texture the roof slopes' was rejected: the slopes still read as flat grey stone-brick courses, and the added texture was barely perceptible.",
+   "Builder: 'paint vary wrote 0 cells on deepslate tiles'; 'no roof-tile weathering for dark tiles'. Reviewer: 'mix a few tile shades to break up the dark slab'."
+  ]
+ },
+ {
+  "tool": "cylinder and dome silhouette: base flare, shoulder and smooth ring",
+  "kind": "MissingOption",
+  "need": "Give towers, drums and small domes a base flare or plinth ring, a shoulder corbel ring and a smooth stair or slab ring profile at small radii, with a course-band option.",
+  "members": [
+   29,
+   116
+  ],
+  "key": "cylinder and dome silhouette base flare shoulder and smooth ring",
+  "n": 2,
+  "runs": 2,
+  "value": 5.656854249492381,
+  "evidence": [
+   "Tower base and shoulder: the only change was faint block texture on the shaft; the base and shoulder did not improve.",
+   "Builder: 'Dome profiles at radius 3 on a flat deck read as a stepped pyramid'. Reviewer: 'lumpy sand-block dome... reads as a pyramid or sand pile'. dome has no band option."
+  ]
+ },
+ {
+  "tool": "mcd palette: role declarations and contrast-gated outlier flag",
+  "kind": "MissingOption",
+  "need": "Let the builder declare monochrome or per-cell/region roles, and flag trim as an outlier only when its contrast with the adjacent face is below a threshold.",
+  "members": [
+   120,
+   228
+  ],
+  "key": "mcd palette role declarations and contrast gated outlier flag",
+  "n": 2,
+  "runs": 2,
+  "value": 5.656854249492381,
+  "evidence": [
+   "Builder: 'flags the intentional white quartz awning stripes as outliers' and 'flags sandstone-on-sandstone trim in a monochrome desert palette'. Trim-invisible and dark-on-dark flags recurred across several checks.",
+   "Recessed red door leaves flagged as trim until the leaf block changed. Stray dark logs mixed into the red wall."
+  ]
+ },
+ {
+  "tool": "vary / weather: family-restricted variant packs",
+  "kind": "MissingOption",
+  "need": "Restrict weathering and variation to one material family, and offer variant or board-and-batten patterns for single-block materials.",
+  "members": [
+   122,
+   226
+  ],
+  "key": "vary weather family restricted variant packs",
+  "n": 2,
+  "runs": 2,
+  "value": 5.656854249492381,
+  "evidence": [
+   "Builder: 'Weather/vary on sandstone produced diorite/calcite/dripstone speckle'. The builder disabled the pass instead of getting a family-safe result.",
+   "Red terracotta has no variant family. vary and weather did nothing on the main wall."
+  ]
+ },
+ {
+  "tool": "mcd roof: style-matched default presets",
+  "kind": "MisusedTool",
+  "need": "Default caps and domes to cone or low-pitch profiles, and make pitch and overhang presets match the named style, so tall narrow roofs are not wide shallow lids.",
+  "members": [
+   130,
+   181
+  ],
+  "key": "mcd roof style matched default presets",
+  "n": 2,
+  "runs": 2,
+  "value": 5.656854249492381,
+  "evidence": [
+   "Reviewer: the bulbous black cap reads as an onion dome. The cap used a bulb-like shape where a cone was wanted.",
+   "Builder kept a broad pyramid with a wide eave; reviewer: 'reads like a lid on a box', 'shrink the eave overhang to 1 block'. Pitch was also reduced to 1.5 to fix grid overflow."
+  ]
+ },
+ {
+  "tool": "landscaping: clumped vegetation defaults",
+  "kind": "MisusedTool",
+  "need": "Scatter grass and moss in clumps with a consistent cobble-to-moss ratio by default, not single scattered blocks.",
+  "members": [
+   143,
+   192
+  ],
+  "key": "landscaping clumped vegetation defaults",
+  "n": 2,
+  "runs": 2,
+  "value": 5.656854249492381,
+  "evidence": [
+   "Reviewer: the base has scattered bright grass squares that read as noise. Minor Finish.",
+   "Reviewer: 'scattered grass and moss blocks', 'trim stray mossy blocks on the base platform'."
+  ]
+ },
+ {
+  "tool": "mcd roof: dormers on steep and pyramid roofs",
+  "kind": "MissingOption",
+  "need": "Make dormers work on pyramid, cone and hip roofs, accept several faces in one call, and report any dropped dormer with the reason.",
+  "members": [
+   179,
+   219
+  ],
+  "key": "mcd roof dormers on steep and pyramid roofs",
+  "n": 2,
+  "runs": 2,
+  "value": 5.656854249492381,
+  "evidence": [
+   "dormers:[{face:'north'}] on a pyramid silently produced nothing across gable/shed, row 0/2 and width 1/3 variants; builder hand-cut the dormer. Reviewer: 'dormer poking out' / 'dormer sits awkwardly'.",
+   "dormers takes one face per call, so the concept's three per side could not be expressed. On a pyramid roof that does not rise over them, all dormer variants dropped silently."
+  ]
+ },
+ {
+  "tool": "mcd roof: finial seat and cross preset",
+  "kind": "MissingOption",
+  "need": "Seat a finial on the apex block automatically, with independent height control and a cross preset that sets fence connection states.",
+  "members": [
+   158,
+   218
+  ],
+  "key": "mcd roof finial seat and cross preset",
+  "n": 2,
+  "runs": 2,
+  "value": 5.656854249492381,
+  "evidence": [
+   "B.fence has no connected form; fence connection states set by hand for the cross finial. Reviewer: spire and cross finial too small.",
+   "Wizard tower got a broad pyramid where a tall spire was wanted. Pitch was cut to 1.5 to avoid grid overflow. The finial floated until an apex block was added by hand."
+  ]
+ },
+ {
+  "tool": "mcd roof: flat-roof edge (parapet, fascia, soffit)",
+  "kind": "MissingOption",
+  "need": "For flat roofs with overhang, offer a slim selectable slab, a fascia or rim band, a soffit course, and a continuous parapet with a checked corner join.",
+  "members": [
+   163,
+   202
+  ],
+  "key": "mcd roof flat roof edge parapet fascia soffit",
+  "n": 2,
+  "runs": 2,
+  "value": 5.656854249492381,
+  "evidence": [
+   "Builder: flat-parapet gives only a 1-2 course parapet and slab coping; fascia ring, soffit and deck were placed by hand. Reviewer: roof reads as a thick dark lid with no fascia edge and no visible soffit.",
+   "Reviewer: parapet at front-left leaves a gap and the roof edge is ragged at the back."
+  ]
+ },
+ {
+  "tool": "setbacks: per-tier roof and massing offsets",
+  "kind": "MissingOption",
+  "need": "Give each setback tier its own gable or hip roof and ridge axis, with per-storey x/z offset, rotation and taper.",
+  "members": [
+   145,
+   185
+  ],
+  "key": "setbacks per tier roof and massing offsets",
+  "n": 2,
+  "runs": 2,
+  "value": 5.656854249492381,
+  "evidence": [
+   "Stacked tiers (nave, clerestory, belfry) built wall-by-wall by hand; setbacks has no per-tier steep roof or ridge-axis choice. Reviewer: lower roof is a lid, upper tiers sit on it, ground floor is a low wide box.",
+   "Reviewer (x2): 'square symmetric box', 'offset each upper storey by a block or two', 'taper the stone shaft', 'upper floors look like a separate cottage perched on a stone chimney'."
+  ]
+ },
+ {
+  "tool": "surround / openings: recess-only and infill options",
+  "kind": "MissingOption",
+  "need": "For 1 to 2 wide openings, recess or frame without changing wall material, add a backing, reveal or infill so no opening reads as a void, and set a recess depth for door leaves.",
+  "members": [
+   211,
+   224
+  ],
+  "key": "surround openings recess only and infill options",
+  "n": 2,
+  "runs": 2,
+  "value": 5.656854249492381,
+  "evidence": [
+   "Builder: 'surround preset plain on a plinth-height wall turns the whole lower wall grey; no recess-only option.'",
+   "surround and glazing are tuned for 3+ wide. Builder used grey pane over dark oak backing. Loft door showed a black void. Back slits were see-through. Doors were not recessed."
+  ]
+ },
+ {
+  "tool": "mcd paint: already-detailed guard",
+  "kind": "MisusedTool",
+  "need": "When the already-detailed guard skips cells, report the skipped cells or require an explicit force keyword, and make paint non-mutating when named as such.",
+  "members": [
+   195,
+   227
+  ],
+  "key": "mcd paint already detailed guard",
+  "n": 2,
+  "runs": 2,
+  "value": 5.656854249492381,
+  "evidence": [
+   "mcd paint surround on an already-framed door reported 'already detailed' and wrote 0 cells; the force keyword was only found by trial.",
+   "Roof and surround rules skipped as already-detailed. force keyword needed to overwrite. Wall recolour reported applied but walls still read white and cream."
+  ]
+ },
+ {
+  "tool": "tree: species option and gap-free organic canopy",
+  "kind": "MissingTool",
+  "need": "Offer a red or orange autumn species option and a rounded, layered canopy with irregular gaps and a gap-free trunk-to-canopy connection, with no floating or orphan leaves.",
+  "members": [
+   103,
+   104
+  ],
+  "key": "tree species option and gap free organic canopy",
+  "n": 2,
+  "runs": 1,
+  "value": 5,
+  "evidence": [
+   "Builder: 'tree supports only oak/birch/dark_oak/spruce/azalea (no red maple)'. Reviewer: 'the maple is a red cube cluster'; 'reads as a mailbox or signpost, not a tree'.",
+   "Builder: maple canopy needed pruning to remove floating/orphan blocks. Reviewer: 'floating block cluster'; 'gap between canopy and trunk'; 'break the cube silhouette'."
+  ]
+ },
+ {
+  "tool": "landscape: path stepping-stone mode and leaf-litter scatter",
+  "kind": "MissingOption",
+  "need": "Give path a stepping-stone mode of staggered slabs on a straight run between two points, and a shrub or leaf-litter scatter brush placed within a set radius of a building or path.",
+  "members": [
+   105,
+   106
+  ],
+  "key": "landscape path stepping stone mode and leaf litter scatter",
+  "n": 2,
+  "runs": 1,
+  "value": 5,
+  "evidence": [
+   "Builder: `path` 'follows terrain and uses dirt_path; no stepping-stone mode'. Reviewer: 'stepping stones are scattered with no clear path'.",
+   "Reviewer: 'the garden is sparse'; 'add a few bushes, moss and a small pond or gravel patch'; 'add some fallen-leaf carpet blocks on the grass'."
+  ]
+ },
+ {
+  "tool": "attach-to-adjacent-mass: roof clip and link",
+  "kind": "MissingOption",
+  "need": "Clip a roof against an adjacent mass, and join a small house to a curved tower with a short link or doorway, so the house keeps its own ridge.",
+  "members": [
+   139,
+   141
+  ],
+  "key": "attach to adjacent mass roof clip and link",
+  "n": 2,
+  "runs": 1,
+  "value": 5,
+  "evidence": [
+   "Builder had to build the tower wall after the cottage roof so the cylinder overwrote the buried roof end. Reviewer: the cottage roof runs up the tower wall and reads as a mess.",
+   "Reviewer: the cottage is a tiny lean-to jammed against the tower wall, not a separate small house."
+  ]
+ },
+ {
+  "tool": "mcd roof: sawtooth and skylight",
+  "kind": "MissingTool",
+  "need": "Build a sawtooth roof from a footprint, ridge axis and ridge count, with sloped copper backs, vertical glazed faces and a continuous parapet, plus a skylight strip or per-bay glazing option in the roof surface.",
+  "members": [
+   198,
+   199
+  ],
+  "key": "mcd roof sawtooth and skylight",
+  "n": 2,
+  "runs": 1,
+  "value": 5,
+  "evidence": [
+   "Reviewer: roof reads as a flat lid, not a sawtooth. Builder: had to chain roof() shed over three rects and hand-glaze the steps; 'no sawtooth option'.",
+   "Builder: 'Sloped skylight strip (glass in the roof surface): no option; needs a hand edit.' Reviewer: skylights are not distinct."
+  ]
+ },
+ {
+  "tool": "gableOrnament (curved dragon-head profile brush)",
+  "kind": "MissingTool",
+  "need": "Build a compact curved neck with an upswept beak from stairs, logs and trapdoors, anchored at ridge-end peaks by default and mirrored across gable ends.",
+  "members": [
+   149,
+   150
+  ],
+  "key": "gableornament curved dragon head profile brush",
+  "n": 2,
+  "runs": 1,
+  "value": 5,
+  "evidence": [
+   "Dragon heads hand-placed via dragon() in build.mjs; no curved ornament tool exists (finial is straight only). Reviewer: loose brown blocks and curls float on roof edges, read as stray prongs.",
+   "Dragon heads sat on roof slopes rather than gable peaks. Reviewer: place as mirrored pairs at the ridge ends of each tier."
+  ]
+ },
+ {
+  "tool": "mcd roof: material by palette role",
+  "kind": "MisusedTool",
+  "need": "Draw roof material from the palette role, auto-pick cut stair or slab variants for sloped full blocks, and check contrast with walls and glazing.",
+  "members": [
+   200,
+   201
+  ],
+  "key": "mcd roof material by palette role",
+  "n": 2,
+  "runs": 1,
+  "value": 4,
+  "evidence": [
+   "Builder: 'shed with copper_block silently gave a gappy slope (no stair/slab variant).'",
+   "Rejected task: grey sawtooth blocks 'clash with the oxidized copper' and hide the glass skylights in the front view."
+  ]
+ },
+ {
+  "tool": "mcd roof: irimoya / hip-and-gable preset",
+  "kind": "MissingTool",
+  "need": "Offer a hip-and-gable preset with a true gablet on the front or back face, a flat ridge cap and no ridge spike.",
+  "members": [
+   93
+  ],
+  "key": "mcd roof irimoya hip and gable preset",
+  "n": 1,
+  "runs": 1,
+  "value": 3,
+  "evidence": [
+   "Builder: no East-Asian roof preset (`temple` is Greek); `pediment` gives a flat-topped hip plateau, not a gablet. Reviewer: 'does not read as a Japanese hip-and-gable'; 'rebuild the gable end as a clean pediment instead of a notch'."
+  ]
+ },
+ {
+  "tool": "B.shoji: paper-screen wall panel",
+  "kind": "MissingTool",
+  "need": "Lay a pale panel inside dark posts at a set bay spacing, with top and middle rails, an optional lattice band and a sliding-door offset.",
+  "members": [
+   99
+  ],
+  "key": "b shoji paper screen wall panel",
+  "n": 1,
+  "runs": 1,
+  "value": 3,
+  "evidence": [
+   "Builder: 'no brush for paper screens'; panels, posts and ranma were hand-placed. Reviewer: 'shoji screens are not legible'; 'run dark posts every 2 blocks with horizontal rails'; 'continuous shoji bays'."
+  ]
+ },
+ {
+  "tool": "B.beam-ends: protruding vigas under eave or parapet",
+  "kind": "MissingTool",
+  "need": "Place protruding beam ends on an even rhythm under a parapet or eave line, with log type, depth, spacing and face options, refusing any end not attached to a wall.",
+  "members": [
+   115
+  ],
+  "key": "b beam ends protruding vigas under eave or parapet",
+  "n": 1,
+  "runs": 1,
+  "value": 3,
+  "evidence": [
+   "Builder hand-placed log stubs on all four sides. Reviewer: 'oversized dark-oak cubes', 'floating one at right', 'strays on the tower and back corners'. brackets only does stairs and slabs."
+  ]
+ },
+ {
+  "tool": "new: awning and shutter (porch fittings)",
+  "kind": "MissingTool",
+  "need": "Place a porch awning, paired shutters and a window-box planter in one call, with the glass set back from the wall.",
+  "members": [
+   137
+  ],
+  "key": "new awning and shutter porch fittings",
+  "n": 1,
+  "runs": 1,
+  "value": 3,
+  "evidence": [
+   "Builder hand-placed all three. Reviewer: door and porch read weakly at street view, and the cottage front is dark and cluttered."
+  ]
+ },
+ {
+  "tool": "new: ivy treatment",
+  "kind": "MissingTool",
+  "need": "Place vine blocks and leaf tufts on chosen wall faces, with strand continuation and clustering.",
+  "members": [
+   190
+  ],
+  "key": "new ivy treatment",
+  "n": 1,
+  "runs": 1,
+  "value": 3,
+  "evidence": [
+   "Ivy was a hand loop with clustering. Closest was vary/gradient, which only swaps blocks."
+  ]
+ },
+ {
+  "tool": "new: paving",
+  "kind": "MissingTool",
+  "need": "Lay a patterned surface with a two-tone border or inset strip across a rectangular area.",
+  "members": [
+   177
+  ],
+  "key": "new paving",
+  "n": 1,
+  "runs": 1,
+  "value": 3,
+  "evidence": [
+   "Reviewer: terrace is a flat light-grey slab; wants a 2-tone border or inset strip. Builder notes do not mention paving, so this is inferred from the reviewer."
+  ]
+ },
+ {
+  "tool": "new: downlight (recessed)",
+  "kind": "MissingTool",
+  "need": "Place a light block flush in a soffit or ceiling course at a set spacing.",
+  "members": [
+   173
+  ],
+  "key": "new downlight recessed",
+  "n": 1,
+  "runs": 1,
+  "value": 3,
+  "evidence": [
+   "Builder: glowstone placed in the soffit by hand; the palette flags it as an outlier."
+  ]
+ },
+ {
+  "tool": "new: furniture (tables, chairs, counters, stools)",
+  "kind": "MissingTool",
+  "need": "Place tables with N chairs per set on a grid, counters and stools, with chair facing set from the table direction.",
+  "members": [
+   169
+  ],
+  "key": "new furniture tables chairs counters stools",
+  "n": 1,
+  "runs": 1,
+  "value": 3,
+  "evidence": [
+   "Builder: no table/chair brush; fence+trapdoor tables and stair chairs placed by hand, and chair facing (stair back) needed a fix. Reviewer: tables and chairs are a jumble of stairs and trapdoors; spacing uneven."
+  ]
+ },
+ {
+  "tool": "new: pipeRun",
+  "kind": "MissingTool",
+  "need": "Lay continuous pipe runs along a wall or roof with bends, joints and a valve block at each bend.",
+  "members": [
+   204
+  ],
+  "key": "new piperun",
+  "n": 1,
+  "runs": 1,
+  "value": 3,
+  "evidence": [
+   "Reviewer: pipes and valves are a few stray rods and dots. Builder: no pipe brush; used copper blocks and grindstone as a valve by hand."
+  ]
+ },
+ {
+  "tool": "new: door leaf / brace",
+  "kind": "MissingTool",
+  "need": "Build a flat door leaf with a diagonal X brace, centre seam and rail, and a leaf-width rule so the X does not read as a checker.",
+  "members": [
+   221
+  ],
+  "key": "new door leaf brace",
+  "n": 1,
+  "runs": 1,
+  "value": 3,
+  "evidence": [
+   "X hand-written as diagonal cells on a 4x4 leaf. Half the cells made it read as a red-and-white checkerboard."
+  ]
+ },
+ {
+  "tool": "new: ladder / stair through floors",
+  "kind": "MissingTool",
+  "need": "Route a ladder or stair through several floors and add backing blocks where wall lines shift at each floor.",
+  "members": [
+   196
+  ],
+  "key": "new ladder stair through floors",
+  "n": 1,
+  "runs": 1,
+  "value": 3,
+  "evidence": [
+   "Builder hand-placed backing blocks at each floor of a multi-storey shaft because the wall lines shift with the jetties."
+  ]
+ },
+ {
+  "tool": "new: apse / chancel (half-cylinder end brush)",
+  "kind": "MissingTool",
+  "need": "Add a half-cylinder or polygonal apse to one end of a box, with its roof stepping down from the nave.",
+  "members": [
+   159
+  ],
+  "key": "new apse chancel half cylinder end brush",
+  "n": 1,
+  "runs": 1,
+  "value": 3,
+  "evidence": [
+   "Reviewer: add a lower chancel or apse at one end and step roof heights down toward the ends. Not expressible with the existing cylinder brush alone."
+  ]
+ },
+ {
+  "tool": "B.banner: hung panel on pilaster or column",
+  "kind": "MissingOption",
+  "need": "Hang a banner as one clean full-height panel of fixed width on a pilaster or column face, with an optional lantern hung below it and no broken slivers.",
+  "members": [
+   39
+  ],
+  "key": "b banner hung panel on pilaster or column",
+  "n": 1,
+  "runs": 1,
+  "value": 2,
+  "evidence": [
+   "JOB 7 teal banners read as a striped patch with a stray lantern off the column edge; JOB 2 banners became fragmented slivers with floating white bits"
+  ]
+ },
+ {
+  "tool": "mcd roof: eave curve",
+  "kind": "MissingOption",
+  "need": "Add an upswept eave option that kicks the corners and eave line up with stair or slab courses, with a tunable kick height.",
+  "members": [
+   94
+  ],
+  "key": "mcd roof eave curve",
+  "n": 1,
+  "runs": 1,
+  "value": 2,
+  "evidence": [
+   "Builder: eave corner tips were hand-placed full blocks; `flared` kicks only slightly. Reviewer: 'no upswept corners'; 'straight eaves'; 'flare the eave corners upward with stair/slab tips'."
+  ]
+ },
+ {
+  "tool": "louvred vent option (tower head)",
+  "kind": "MissingOption",
+  "need": "Offer a louvre vent with alternating slats and dark gaps so the vent reads as a vent rather than a plank streak.",
+  "members": [
+   52
+  ],
+  "key": "louvred vent option tower head",
+  "n": 1,
+  "runs": 1,
+  "value": 2,
+  "evidence": [
+   "JOB 14 tower-head vent change is a faint lighter-plank streak with no profile or depth"
+  ]
+ },
+ {
+  "tool": "dome / tower: axis-centring helper",
+  "kind": "MisusedTool",
+  "need": "Centre a dome or tower on the entrance axis or a named facade centre by default, with off-centre placement as an explicit choice.",
+  "members": [
+   125
+  ],
+  "key": "dome tower axis centring helper",
+  "n": 1,
+  "runs": 1,
+  "value": 2,
+  "evidence": [
+   "Reviewer: 'the dome sits off-centre against the wind tower' and 'tower and dome sit off-centre without a clear relationship to the entrance'."
+  ]
+ },
+ {
+  "tool": "mcd check: circulation mode",
+  "kind": "MissingOption",
+  "need": "Accept door-to-door or chosen entrance-pair routes in the circulation check, not only a corridor along the long axis.",
+  "members": [
+   210
+  ],
+  "key": "mcd check circulation mode",
+  "n": 1,
+  "runs": 1,
+  "value": 2,
+  "evidence": [
+   "Builder: 'mcd check circulation ... reports false for every closed building; needs a door-to-door mode.'"
+  ]
+ },
+ {
+  "tool": "build.mjs: street-coordinate frontage option",
+  "kind": "MissingOption",
+  "need": "Let a build be designed in street coordinates (front, left, right), so mirrored or viewer-left designs need no custom put/fill wrapper.",
+  "members": [
+   178
+  ],
+  "key": "build mjs street coordinate frontage option",
+  "n": 1,
+  "runs": 1,
+  "value": 2,
+  "evidence": [
+   "Builder: mirrored (viewer-left) design needed a custom X(u)/put wrapper beyond mirrorX."
+  ]
+ },
+ {
+  "tool": "mcd roof --detect (dry run)",
+  "kind": "MissingOption",
+  "need": "Report resulting height, footprint growth and grid overflow for a style, pitch and grow setting before any blocks are written.",
+  "members": [
+   182
+  ],
+  "key": "mcd roof detect dry run",
+  "n": 1,
+  "runs": 1,
+  "value": 2,
+  "evidence": [
+   "grow:false caused a fit error on a pyramid overhang; grow:true silently grew the grid; height was only found by trial (cupola cap exceeded y=16)."
+  ]
+ },
+ {
+  "tool": "setbacks: continuous eave default",
+  "kind": "MisusedTool",
+  "need": "Default stepped tier joins to a continuous eave edge, with no crenellated jags or corner stubs.",
+  "members": [
+   160
+  ],
+  "key": "setbacks continuous eave default",
+  "n": 1,
+  "runs": 1,
+  "value": 2,
+  "evidence": [
+   "Roof edges crenellated and jagged where tiers meet; stray block stubs at the corners. Reviewer asked for a continuous stair or slab eave edge."
+  ]
+ },
+ {
+  "tool": "mcd roof: gambrel / barn preset",
+  "kind": "MissingOption",
+  "need": "Provide a gambrel preset with steep lower and shallow upper slopes, a visible break line, eave overhang and ridge cap, so pitches are not hand-tuned.",
+  "members": [
+   215
+  ],
+  "key": "mcd roof gambrel barn preset",
+  "n": 1,
+  "runs": 1,
+  "value": 2,
+  "evidence": [
+   "No barn preset (only granary). Builder overrode to gambrel with pitch 1.5, lower 2, upperPitch 0.34, found by reading roofs.mjs. Roof reads as one flat black slab with no break line."
+  ]
+ },
+ {
+  "tool": "timber facade preset: regular rhythm",
+  "kind": "MisusedTool",
+  "need": "Default the timber facade preset to a regular rhythm of vertical stripped logs with a trim rail, not a mix of stair and plank shapes.",
+  "members": [
+   156
+  ],
+  "key": "timber facade preset regular rhythm",
+  "n": 1,
+  "runs": 1,
+  "value": 2,
+  "evidence": [
+   "Upper timber section is a jumble of stair and plank shapes with noisy detail. Reviewer: replace with a regular pattern of vertical stripped logs and a trim rail."
+  ]
+ },
+ {
+  "tool": "planter: hedge option",
+  "kind": "MissingOption",
+  "need": "Offer a planter box option for tall leaf-block hedges, not only beds and window boxes.",
+  "members": [
+   176
+  ],
+  "key": "planter hedge option",
+  "n": 1,
+  "runs": 1,
+  "value": 2,
+  "evidence": [
+   "Builder: tall hedge in a planter box placed by hand; planter brush only does beds and window boxes."
+  ]
+ },
+ {
+  "tool": "paint: non-mutating or mutating call contract",
+  "kind": "MisusedTool",
+  "need": "Either mutate the grid in place or name the call so it is clearly non-mutating, so edits are not dropped silently.",
+  "members": [
+   121
+  ],
+  "key": "paint non mutating or mutating call contract",
+  "n": 1,
+  "runs": 1,
+  "value": 2,
+  "evidence": [
+   "Builder: '`paint` returns a COPY (grid in `.grid`); easy to lose the railing by calling it like a mutating brush'."
   ]
  }
 ]

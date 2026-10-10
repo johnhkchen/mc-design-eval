@@ -1,0 +1,107 @@
+{
+ "key": "steampunk-workshop",
+ "name": "Steampunk workshop",
+ "tasks": 5,
+ "tasksKept": 4,
+ "kept": "v2",
+ "usability": "NeedsWork",
+ "grades": {
+  "massing": "Fair",
+  "roof": "Poor",
+  "facades": "Fair",
+  "elements": "Poor",
+  "finish": "Poor",
+  "palette": "Good"
+ },
+ "summary": "The brick, copper and stone palette reads as steampunk, but the build is a hollow box with a flat green lid, an open see-through front and a broken back wall, and its brief elements (gear window, sawtooth skylights, crane, pipes) barely read.",
+ "accepted": false,
+ "costUsd": 2.55,
+ "minutes": 20.9,
+ "log": [
+  {
+   "n": "build",
+   "s": 545,
+   "turns": 53,
+   "cost": 1.9988724
+  },
+  {
+   "n": "judge v1",
+   "s": 563,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "A good brick-and-copper palette with chimneys and a skylit sawtooth-ish roof, but the front face is a chaotic scatter of floating copper blocks, the side and back walls have big see-through holes, and the gear window reads as noise instead of a gear."
+  },
+  {
+   "n": 5,
+   "s": 563
+  },
+  {
+   "n": "task 1: Gear window on the front face is a messy",
+   "s": 711,
+   "turns": 24,
+   "cost": 0.04425642
+  },
+  {
+   "n": "  review 1",
+   "s": 721,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "task 2: The right-hand wall on the front-right v",
+   "s": 831,
+   "turns": 14,
+   "cost": 0.03263195
+  },
+  {
+   "n": "  review 2",
+   "s": 840,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "task 3: The roof is mostly a flat or lightly ste",
+   "s": 920,
+   "turns": 17,
+   "cost": 0.03129967
+  },
+  {
+   "n": "  review 3",
+   "s": 931,
+   "kept": false,
+   "verdict": "Worse"
+  },
+  {
+   "n": "task 4: The crane and loading door are not legib",
+   "s": 1103,
+   "turns": 24,
+   "cost": 0.09302212
+  },
+  {
+   "n": "  review 4",
+   "s": 1118,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "task 5: Copper accent patches on the brick walls",
+   "s": 1230,
+   "turns": 21,
+   "cost": 0.039673070000000005
+  },
+  {
+   "n": "  review 5",
+   "s": 1241,
+   "kept": true,
+   "verdict": "Improves"
+  },
+  {
+   "n": "judge v2",
+   "s": 1256,
+   "usability": "NeedsWork",
+   "roof": "Poor",
+   "summary": "The brick, copper and stone palette reads as steampunk, but the build is a hollow box with a flat green lid, an open see-through front and a broken back wall, and its brief elements (gear window, sawtooth skylights, crane, pipes) barely read.",
+   "tasksKept": 4
+  }
+ ]
+}

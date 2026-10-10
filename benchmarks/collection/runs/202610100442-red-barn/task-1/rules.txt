@@ -1,0 +1,9 @@
+east where F -> red_terracotta
+west where F -> red_terracotta
+east rows 2-9 corners -> quoins smooth_quartz
+west rows 2-9 corners -> quoins smooth_quartz
+east openings -> frames smooth_quartz
+west openings -> frames smooth_quartz
+roof where P -> stone_brick_slab force
+roof where L -> stone_brick_stairs force
+roof where N -> stone_bricks force

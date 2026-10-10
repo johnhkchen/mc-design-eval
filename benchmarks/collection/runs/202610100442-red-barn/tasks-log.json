@@ -1,0 +1,52 @@
+[
+ {
+  "title": "The barn is not red where it matters: the long walls are mostly white or cream, ",
+  "kind": "Detail",
+  "aspect": "Palette",
+  "where": "see problem",
+  "instruction": "Make the side walls red (terracotta or red concrete) with white corner and window trim. Switch the roof to a dark gray or weathered tone that is lighter than the current near-black.",
+  "kept": false,
+  "verdict": "Worse",
+  "why": "The long walls still read mostly white with only a thin red band, so the red-barn identity isn't fixed, while the roof swapped from dark slate to pale grey stone blocks that clash with the red and the barn's character, and the added windows make it read more like an office block."
+ },
+ {
+  "title": "The gambrel profile is visible only on the gable end. From the 3/4 views the roo",
+  "kind": "Roof",
+  "aspect": "Roof",
+  "where": "see problem",
+  "instruction": "Add an eave overhang of at least 1 block with stair edging. Make the lower slope steep and the upper slope shallow, with a clear slab break line between them. Add a ridge cap and a different stair or slab material at the eaves.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The gambrel's stepped white-trimmed profile now shows along the side and gable, so the roof reads as a classic barn silhouette instead of a flat box, though the taller roof hides much of the wall and the cupola is no longer visible in the 3/4 views."
+ },
+ {
+  "title": "The long side walls are blank white with irregular dark and red notches that loo",
+  "kind": "Detail",
+  "aspect": "Facades",
+  "where": "see problem",
+  "instruction": "Replace the notches with evenly spaced bays: a dark oak post every 3 blocks, a red wall panel between posts, and small trapdoor or glass windows. Run a white trim band along the base and under the eaves.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The grey and white notched blocks on the long walls are replaced by a coherent red siding band with a white trim course, which matches the red gable, the white-trimmed doors and the barn's colour scheme, so the walls read as crafted barn wall rather than blank or noisy."
+ },
+ {
+  "title": "The main door's X-bracing does not read. The doors are a red and black checkerbo",
+  "kind": "Props",
+  "aspect": "Elements",
+  "where": "see problem",
+  "instruction": "Make each sliding door a flat red panel with white trim and diagonal white X-bracing in stairs or slabs, with a visible center gap. Give the cupola louvered windows, a small roof, and a fence-and-banner weather vane.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The visible change is a small cupola with a weather vane seated on the gambrel ridge, which reads as a classic barn feature and is not floating or clashing, while the requested X-brace on the doors is still too small to see at this distance."
+ },
+ {
+  "title": "The front and rear elevations are flat, and the hay loft door and hoist beam are",
+  "kind": "Detail",
+  "aspect": "Finish",
+  "where": "see problem",
+  "instruction": "Make the loft door larger, with a white frame and a dark oak hoist beam projecting forward. Recess the main doors one block, and add a stone foundation course along both long sides.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The flat gable now has white trim framing the loft opening and a dark oak hoist beam with a capped top, which reads as a crafted barn-loft detail, though the dark loft interior is a little blotchy."
+ }
+]

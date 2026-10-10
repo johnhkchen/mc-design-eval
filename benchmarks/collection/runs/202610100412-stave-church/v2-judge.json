@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Poor",
+ "facades": "Fair",
+ "elements": "Fair",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "The tarred-timber palette and stone base say stave church, but the roof is one big uniform deepslate pyramid with the upper tiers and dragon heads stuck on top, so it reads as a heavy lid on a boxy hall rather than a stack of steep shingled roofs.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The lower roof is a single flat-looking, stepped deepslate slab over the whole box, and the upper roofs sit on it as a lump. There are no distinct steep tiers, so it reads as a lid.",
+   "fix": "Rebuild as 2-3 separate stacked roofs. Each should be steeper (about 1:1 or more) than the one below, with its own clear eave overhang and a visible wall band between tiers. Use the roof preset with different ridge heights and shrinking footprints. Alternate stair and slab courses to suggest shingle rows."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Major",
+   "problem": "A long, low rectangular box with a wide, shallow base roof. The central tower is small and set back, so the silhouette is squat and has none of the tall, tiered stave church profile.",
+   "fix": "Raise the nave walls and make the central tower taller and wider so it rises clearly above the nave roof. Add a lower chancel or apse at one end and step the roof heights down toward the ends."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "The dragon-head gable ends read as loose brown blocks and curls floating on the roof edges, not carved dragons. The top spire is a thin cross-like stick, and the back elevation shows a messy lattice-and-hole tower.",
+   "fix": "Build each dragon head as a compact 3-4 block curved neck. Use stairs and trapdoors for the upswept beak, anchor it to the ridge ends, and mirror it on all four gable ends. Tidy the back tower into a clean louvered belfry and finish it with a proper spire."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Minor",
+   "problem": "The svalgang gallery is just evenly spaced plank pillars under the eave, with dark window slots above. It looks like a plain warehouse wall, and the back face has little detail.",
+   "fix": "Add a low railing or lattice between the posts, with a visible open arcade of arches or cross-bracing. Carve a few small openings and a base plinth course, and use dark-oak trapdoors as shutters for depth."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The roof edges are crenellated and jagged where tiers meet. The front steps and moss patches look noisy, and the roof corners have odd projecting block stubs.",
+   "fix": "Clean the eave line with a continuous stair or slab edge. Remove the stray stubs and add a spruce trim line under the eave. Keep the moss to one or two deliberate spots."
+  }
+ ]
+}

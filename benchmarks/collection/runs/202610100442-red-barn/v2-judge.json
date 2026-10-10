@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Good",
+ "roof": "Fair",
+ "facades": "Fair",
+ "elements": "Fair",
+ "finish": "Fair",
+ "palette": "Fair",
+ "summary": "The gambrel barn silhouette and checkerboard-trimmed doors are recognisable, but the huge unbroken slate-black roof, hollow loft opening and blown-out gable make it read more like a dark lid on a red box than a classic red barn.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Both roof slopes are a single flat expanse of near-black stairs. There is no visible gambrel break, no overhang and no ridge detail, so the roof dominates and reads as a lid.",
+   "fix": "Rebuild with the gambrel roof preset: steep lower pitch, shallower upper pitch, a visible break line and a 1-block eave overhang. Switch the material to a warm dark red or weathered gray and add a contrasting ridge cap row."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "The hay loft door is a big empty hole in the gable. It shows a black void, and the hoist beam is a vague dark post inside it. The back elevation also shows two see-through slits where the loft should be.",
+   "fix": "Fill the loft opening with a framed door of dark oak trapdoors or planks. Leave a small hay-filled opening. Extend a hoist beam of stripped logs and fence out past the gable face with a chain or lantern under it. Close the back slits or make them proper windows."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The sliding doors read as a red-and-white checkerboard, not X-braced doors. The white trim is blocky and wide, and the gable above the doors has a large bright white frame that overwhelms the red.",
+   "fix": "Make the doors solid red planks or terracotta with thin white diagonal X braces in quartz stairs or slabs, plus a horizontal rail and a center seam. Narrow the white door frame to one block and use red wall fill in the gable."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "The cupola is almost invisible from the front and side views. It shows as a small gray block on the ridge, and from behind it looks like a crenellated castle turret. The weather vane is a thin line that is hard to see.",
+   "fix": "Build a small 3x3 cupola with a red or white louvered body (trapdoors) and a small pitched cap. Put a fence-and-banner vane on top. Remove the battlement-style stone crenellation."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The side walls are almost completely hidden under the roof and show only a thin red-and-dark strip over the foundation. The wall coloring is patchy, with dark log blocks mixed into the red. The side wall has no windows or doors.",
+   "fix": "Raise the wall height or cut the roof overhang back so the red board siding shows. Use consistent red planks with white corner trim and add a few small windows or a side door. Replace the stray dark logs with matching trim."
+  }
+ ]
+}

@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Good",
+ "roof": "Fair",
+ "facades": "Good",
+ "elements": "Fair",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "A charming stone-base tower with jettied timber-and-plaster floors and good ivy, lanterns and a glowing window, but the broad pyramid roof reads like a lid on a box rather than a tall crooked wizard's cone, and the telescope balcony is too small to read.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The roof is a wide, shallow stepped pyramid with a big overhang, so from the 3/4 and street views it looks like a flat lid rather than a tall conical wizard hat; the lean is barely visible and the spire only shows from the back elevation.",
+   "fix": "Rebuild the cap as a narrower, much taller cone (pitch ~2.5+ blocks of rise per ring), shrink the eave overhang to 1 block, and shift each ring 1 block toward one side so the lean reads from the front; keep the finial on the apex."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Major",
+   "problem": "The tower is a straight square prism with a boxy plan; the 'crooked' feel only comes from the jetty, and the upper floors look like a separate cottage perched on a stone chimney rather than one tapering tower.",
+   "fix": "Offset the upper floors slightly in x/z per storey, taper the stone shaft with a 1-block setback, and make the top floor smaller than the one below it so the silhouette narrows toward the cone."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "The balcony and telescope are tiny and tucked on one side, visible only in the back view as a few fence posts and a thin rod; the small round windows are not recognizable as round, they read as square glass panes.",
+   "fix": "Extend the balcony to a deeper 2-block platform with a full fence rail on the front-facing side, build the telescope from a thicker lightning-rod/copper-block barrel on a stand, and shape round windows as a 3x3 ring of glass with the corners cut."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Minor",
+   "problem": "The upper-floor plaster panels are large flat white areas with a dark timber grid, and the rear stone shaft is a blank wall with only a couple of odd blocks.",
+   "fix": "Add diagonal or cross bracing in the plaster panels, and add a window slit, buttress or ivy streaks and a lantern on the back stone shaft."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The chimney floats beside the roof with a visible gap, and the dormer sits awkwardly on the pyramid; the stone base platform is noisy and irregular.",
+   "fix": "Anchor the chimney to the roof slope with stair or slab steps and a base block, simplify the dormer so it merges with the roof, and trim stray mossy blocks on the base platform."
+  }
+ ]
+}

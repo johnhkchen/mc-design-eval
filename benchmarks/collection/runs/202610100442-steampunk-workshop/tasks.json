@@ -1,0 +1,62 @@
+[
+ {
+  "title": "Sloped skylight strips",
+  "kind": "roof",
+  "where": "all three sawtooth slopes, x=1..5, 6..10, 11..15, z=3..11 (final coords), rows of the weathered_cut_copper slabs/stairs",
+  "instruction": "Edit build.mjs: after the roof() calls, replace a 2-wide strip of the slope along z (z=3..11) with cyan_stained_glass (or glass_pane) on each of the three teeth so the skylights read on the slope, not only on the vertical steps. Keep stair/slab edge cells."
+ },
+ {
+  "title": "Taller, tapered chimney tops",
+  "kind": "detail",
+  "where": "chimney stacks at x=14..16,z=4..6 and x=12..13,z=8..9, y=10..13",
+  "instruction": "Add a flared cap: ring of upside-down polished_blackstone_brick_stairs around each blackstone top at y=13 is out of height; instead replace the top brick course (y=12) with polished_blackstone_bricks and put a cut_copper band at y=10 and y=7 so the stack reads banded and taller."
+ },
+ {
+  "title": "Crane jib over the gate",
+  "kind": "props",
+  "where": "front, x=5..11, y=5..7, z=0",
+  "instruction": "Add a jib arm: dark_oak_fence posts at x=11,y=5..7,z=0 and a dark_oak_fence beam y=7 x=8..11 z=0, with a pulley copper_chain from (8,6,0) down to the existing hoist chain; use mcd paint 'attach' not needed, edit build.mjs."
+ },
+ {
+  "title": "Copper boiler tank by the front base",
+  "kind": "props",
+  "where": "front, x=2..4 (viewer right of the gate), y=1..2, z=0..1",
+  "instruction": "Replace the 4 barrels at x=2..4 with a horizontal tank: copper_block x=2..4,y=1..2,z=0 with chiseled_copper end caps at x=2 and x=4 and a lightning_rod pipe from (3,3,0) up the wall."
+ },
+ {
+  "title": "Steam vents on the roof",
+  "kind": "props",
+  "where": "tooth tops at x=10,z=3 and x=5,z=11, roof surface y=9..10",
+  "instruction": "Place a 1x1 brick stub (3 tall) with a copper_trapdoor lid on the roof at those two cells, to read as vent stacks (mcd roof --chimney x,z alternative)."
+ },
+ {
+  "title": "Hanging blade sign",
+  "kind": "sign",
+  "where": "front-left piers, east end wall x=15,y=5..6,z=0..2",
+  "instruction": "Use signboard(h,'AETHER WORKS',{at:[14,5,0],face:'north',mode:'hanging',wood:'dark_oak'}) in build.mjs; if no room, B.sign dark_oak with lines 'AETHER','WORKS','OPEN','DAWN-DUSK'."
+ },
+ {
+  "title": "Gear window glazing and cog teeth",
+  "kind": "detail",
+  "where": "front gear window centred (8,8,0), radius 4",
+  "instruction": "Add 4 more cog teeth at the 22.5-degree angles with cut_copper_stairs, and replace the iron_bars cross with copper_bars so the mullions match the copper ring."
+ },
+ {
+  "title": "Interior boiler and gauges",
+  "kind": "props",
+  "where": "interior x=3..13, z=2..12, y=1..4",
+  "instruction": "Add a copper_block boiler (3x3x3) at x=7..9,z=7..9 with copper_bulb gauges and grindstone valves on its north face; lanterns on fences; connect with lightning_rod pipes to the east wall."
+ },
+ {
+  "title": "Weather the brick",
+  "kind": "fix",
+  "where": "all four exterior faces, bricks",
+  "instruction": "Run: mcd paint build.nbt out.nbt --rules 'all faces where bricks -> weather light' --face north,south,east,west, then mcd diff build.nbt out.nbt --fail-empty; keep if the sheet reads better."
+ },
+ {
+  "title": "Pipe runs on the back wall",
+  "kind": "detail",
+  "where": "back wall z=14 (proud layer), x=2..14, y=3..6",
+  "instruction": "Add a horizontal copper_block pipe y=5, x=2..14, z=14 with chiseled_copper joints every 4 and two grindstone valves facing south at x=6 and x=11 (south face = z=14); add a vertical riser at x=14 up to y=7."
+ }
+]

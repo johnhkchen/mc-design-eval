@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Fair",
+ "facades": "Poor",
+ "elements": "Fair",
+ "finish": "Poor",
+ "palette": "Good",
+ "summary": "A good brick-and-copper palette with chimneys and a skylit sawtooth-ish roof, but the front face is a chaotic scatter of floating copper blocks, the side and back walls have big see-through holes, and the gear window reads as noise instead of a gear.",
+ "issues": [
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "Gear window on the front face is a messy scatter of copper blocks and glass with no clear circular outline or spokes; it reads as damage or clutter, not a gear.",
+   "fix": "Clear the area and rebuild with a ring brush: a 9-11 block-diameter circle of copper/cut_copper, a smaller inner glass disc, 4-8 spokes and a center hub. Frame it with a brick or stone arch so it reads as one round window."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The right-hand wall on the front-right view is largely open: large rectangular holes show the interior and sky. The back elevation has a big dark void and a window-like gap, so walls look unfinished or broken.",
+   "fix": "Fill the openings with brick, then cut deliberate windows: framed in stone or copper, 2x3 with glass panes and sills. Keep any loading bay as a single clear opening with a lintel."
+  },
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The roof is mostly a flat or lightly stepped oxidized-copper slope with glass strips, and it doesn't clearly read as a sawtooth or curved roof. The parapet at the front-left leaves a gap, and the roof edge is ragged at the back.",
+   "fix": "Use a sawtooth preset: 3 repeated ridges with vertical glazed faces and sloped copper backs, running side to side. Cap the edges with a continuous stone parapet, and close the hole between the roof and the front wall."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "The crane and loading door are not legible. The door is a small dark wood block cluster under a dark beam, and there's no crane arm or hoist. Pipes and valves are only a few stray copper rods and dots.",
+   "fix": "Add a 2-wide loading door with a clear lintel. Above it, build a projecting beam (iron bars or fence) with a chain hanging down and a hook. Run continuous copper-pipe lines along the walls, with a valve block (lever or button) at the bends."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "Copper accent patches on the brick walls are random and unframed. Stray blocks float away from the wall (a lone block off the back-left, loose rods on the roof), and the chimneys are plain flat-topped stacks.",
+   "fix": "Run the copper as ordered horizontal bands or riveted panels at regular spacing, and remove floating blocks. Taper the chimney tops with a stepped collar and add a campfire or smoke cap."
+  }
+ ]
+}
