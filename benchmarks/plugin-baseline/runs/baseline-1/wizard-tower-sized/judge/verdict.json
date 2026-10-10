@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Good",
+ "roof": "Fair",
+ "facades": "Fair",
+ "elements": "Fair",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "A readable wizard tower with a stone base, jettied timber storeys and a leaning purple cone, but the noisy lumpy roof, flat plaster panels and barely visible small props keep it from being placeable as-is.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Cone is a lumpy mix of purple, magenta and grey blocks with ragged stepped silhouette and a hole at the top; reads as noisy rubble, not a smooth tall witch-hat cone with brim.",
+   "fix": "Rebuild with `mcd roof --preset tower-cap` using a two-tone roof palette (dark purple with a sparse accent course), keep the slight lean as a clean shift of the tip, and add a finial brush at the apex."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "Timber storeys are large flat plaster panels with few studs and sparse windows; the jetty edges are jagged and sawtooth on the diagonal views.",
+   "fix": "Add pilaster/brackets brushes for studs and jetty undersides, use glazing and surround brushes for small round-style windows, and apply a cornice at each jetty edge to clean the outline."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "Telescope, lanterns and glowing window are tiny or invisible at glance; balcony railing is thin and the telescope is a single stray pink block.",
+   "fix": "Use the railing brush on the balcony, add a larger telescope prop from fixtures, hang more lanterns under the jetty with fixtures, and make one clearly glowing window with glazing plus a light source."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Minor",
+   "problem": "Tower is nearly straight and symmetric apart from the roof; the crooked feel is weak and the stone base is plain and tall relative to the door.",
+   "fix": "Offset upper storeys by a block for a bit of drift, and add a plinth and quoins to the base for depth."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "Ivy is scattered in patchy dots on the stone and plaster, and the stone base has a flat uniform wall with a small door.",
+   "fix": "Use planters and cluster ivy in vertical runs from the base up, and frame the door with a surround brush."
+  }
+ ]
+}

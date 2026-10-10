@@ -1,0 +1,49 @@
+{
+ "name": "tea-house-plugin-glance-sonnet",
+ "fn": "glance3",
+ "code": 0,
+ "verdict": {
+  "identity": "Recognisable",
+  "usability": "NeedsWork",
+  "massing": "Good",
+  "roof": "Fair",
+  "facades": "Fair",
+  "elements": "Fair",
+  "finish": "Fair",
+  "palette": "Good",
+  "summary": "A dark-tiled, stone-footed timber pavilion that reads as East Asian at a glance, but the roof is a stepped lid with flat caps, the paper screens are barely visible slits, and the garden props are thin.",
+  "issues": [
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "Roof reads as a stepped, flat-topped lid. The upper tier is a flat slab, the eaves are straight slab layers, and the gable is not legible. Only the stray slab ends at the corners hint at upturn.",
+    "fix": "Build a real hip with a gable end: stair courses stepping up to a ridge, with a gable-end triangle in tile. Add upturned eave tips by placing inverted stairs or slabs one block higher at each corner, and a ridge cap."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Major",
+    "problem": "The sliding paper-screen walls do not read. The front is mostly dark timber with two tiny white slits. Side walls are hidden under the roof and are dark and flat, so there is no rhythm of white panels in frames.",
+    "fix": "Replace the wall bays with a repeated grid of white panels (white stained glass or paper-like blocks) between dark log posts and a horizontal rail. Make them 2 tall and 2 wide, with a lower timber kick-board."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "Garden elements are weak. The stone lantern is a small lantern on a cobble post and is hard to read, the maple is just leaf-block bushes, and the stepping stones are a plain path. The engawa veranda is barely distinct.",
+    "fix": "Build a stone lantern with a base, shaft, and a wider cap with a glowing block. Plant a tall maple with a trunk and a red or orange leaf canopy. Scatter stepping stones across the grass as separate stone slabs. Extend a plank veranda with a rail along the front."
+   },
+   {
+    "aspect": "Finish",
+    "severity": "Minor",
+    "problem": "Odd floating or protruding bits: a gray block cantilevered beside the front-left lantern, a tall log slab on the front-right corner, and a dark hole where the porch meets the roof. The ridge has a lone log block on glass that reads as a stray dormer.",
+    "fix": "Remove the floating gray block and the stray log post, or integrate them as a lantern or gate. Replace the roof log-and-glass dormer with a proper ridge vent or delete it."
+   },
+   {
+    "aspect": "Massing",
+    "severity": "Minor",
+    "problem": "The roof overhang is deep but the body under it is low and squat, with the raised floor on footings only faintly visible. The result is a heavy, top-heavy lid.",
+    "fix": "Raise the floor platform on visible stone footings by a block, and raise the wall height by one so the screens have more presence under the eaves."
+   }
+  ]
+ },
+ "cost": 0.0153962
+}

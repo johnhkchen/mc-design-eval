@@ -1,0 +1,57 @@
+{
+ "key": "wizard-tower",
+ "arm": "plugin",
+ "name": "Fantasy wizard tower",
+ "exit": 0,
+ "stderr": "",
+ "minutes": 1.3,
+ "costUsd": 0.30463,
+ "turns": 13,
+ "durationMin": 1.2,
+ "subtype": "success",
+ "isError": false,
+ "skillUsed": true,
+ "nbt": true,
+ "verdict": {
+  "usability": "NeedsWork",
+  "massing": "Fair",
+  "roof": "Fair",
+  "facades": "Fair",
+  "elements": "Fair",
+  "finish": "Fair",
+  "palette": "Good",
+  "summary": "Good wizard-tower silhouette and palette with a stone base, jettied timber floors and a verdigris cone, but the roof is a noisy speckled blob, the tower is squat/boxy rather than crooked and tall, and the balcony, telescope and round windows barely read.",
+  "issues": [
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "Conical roof is a lumpy, stepped pyramid with random mixed copper/oxidised/dark-planks speckle; it reads as noisy, not a clean cone, and has no lean or flare.",
+    "fix": "Rebuild with `mcd roof --preset tower-cap` using a restrained two-tone roof palette (weathered copper with a few dark accents in courses), then add a finial brush at the tip."
+   },
+   {
+    "aspect": "Massing",
+    "severity": "Major",
+    "problem": "Body is a square box with a heavy roof on top; the brief's tall, crooked, jettied tower isn't conveyed. The base is wide and stumpy, and the sides show no taper or offset floors.",
+    "fix": "Offset each timber storey 1 block in a different direction for the crooked look, narrow the upper floors, and raise the shaft towards 30 tall; use plinth and cornice brushes to separate storeys."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "Balcony with telescope is just a tiny brown block at the side; small round windows are not visible; ivy is only faint moss on the stone base.",
+    "fix": "Add a railing brush balcony ring on the upper floor with a clear telescope prop, use glazing for small round windows on the plaster band, and add planters or leaf ivy trailing up the stone and timber."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Minor",
+    "problem": "Timber floors are heavy dark bands with white plaster gaps; the upper floors look chunky and the stone base is flat and ragged on the near corner.",
+    "fix": "Add brackets under the jetty, quoins on the stone corners, and surround on windows to give clearer structure."
+   },
+   {
+    "aspect": "Finish",
+    "severity": "Minor",
+    "problem": "Base has ragged stepped stone cut-outs and the lanterns are tiny, with a lone door that is hard to see; the glowing window is only a small orange patch.",
+    "fix": "Square off the base with a plinth brush, enlarge the door with a surround, and use fixtures to add larger lanterns and a brighter glowing window."
+   }
+  ]
+ }
+}

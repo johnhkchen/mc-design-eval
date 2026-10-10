@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Poor",
+ "facades": "Fair",
+ "elements": "Fair",
+ "finish": "Fair",
+ "palette": "Fair",
+ "summary": "A readable sandstone market hall with a decent arcade and viga row, but the huge flat roof reads as an empty lid with a blocky tower and a scrappy pyramid, and the sides are flat and thin on adobe character.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Roof is a big empty flat slab; the tower is a plain slab-sided box and the stepped pyramid with pink cap looks like random debris rather than a dome.",
+   "fix": "Re-run `mcd roof --preset desert` with a parapet and a proper dome/lantern-cap or tower-cap; add a finial on the tower top and a coping brush on the parapet; drop the ragged pyramid."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "Side and back walls are flat sandstone with just a red band and a few small dots; no thick rounded adobe feel, no openings or relief.",
+   "fix": "Use pilaster and quoins brushes for rounded corners, add surround/glazing openings or louvres on the sides, and a plinth at the base; use `mcd paint` to vary the adobe tones."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "Awnings read as small red flaps rather than striped cloth, and pots/baskets are tiny and hard to see under the arcade.",
+   "fix": "Use bunting or banner awnings in alternating red/white stripes over each bay, and add planters and fixtures (clay pots, baskets) at the pier bases."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Minor",
+   "problem": "The tower sits at the corner with no visual tie to the hall, and the arcade piers are thin and uneven in the 3/4 views.",
+   "fix": "Thicken the piers, use brackets under the arcade lintel, and set the tower flush with a wall plane with a cornice."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "Viga ends are evenly spaced but sit mostly on top of the parapet and look stuck-on; the wall band beneath is bare.",
+   "fix": "Place the vigas just below the roof line through the wall and add a cornice brush so they read as beam ends."
+  }
+ ]
+}

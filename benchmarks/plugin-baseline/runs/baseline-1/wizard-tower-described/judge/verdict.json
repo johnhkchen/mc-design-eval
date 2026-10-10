@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Fair",
+ "facades": "Fair",
+ "elements": "Fair",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "It has a promising stone base, timber-framed jettied floors and a purple cone, but the roof is a lumpy, oversized blob that swallows the tower and the tiny stubby spire and floating bits make it look unfinished.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The conical roof is a bulbous, noisy mass with ragged stepped steps and random dark patches. It is roughly as tall as the whole shaft, so it reads as a lumpy mushroom or hat, not a tall crooked cone.",
+   "fix": "Rebuild with `mcd roof --preset tower-cap`, a narrower footprint and a steeper profile. Use a two-tone roof palette in even courses instead of random patches, and keep the lean as a clean, consistent offset."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Major",
+   "problem": "The proportions are squat. The stone base and two timber floors are short and narrow under a huge roof. The jetties are barely visible from the front and the tower is not 30 tall with a slender silhouette.",
+   "fix": "Add a storey to the stone base or timber section. Step each upper floor out one block with a `cornice` or `brackets` brush under the jetty. Reduce the roof height share so the body reads as the main mass."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "The finial and spire at the top are detached floating dark blocks with a gap above the roof. The balcony and telescope are tiny and hidden on the back, and the round windows and glowing window are hard to read.",
+   "fix": "Use the `finial` brush so the spire is attached to the roof apex. Add a `railing` balcony on a visible front or side face. Use `glazing` and `fixtures` for lit round windows on the front."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Minor",
+   "problem": "The timber floors are patchy with an uneven plaster fill and inconsistent framing. The front face is largely lost in the street view, and the ivy is sparse specks.",
+   "fix": "Use `pilaster` or `quoins` for regular corner posts and consistent studs. Add `planters` or clustered ivy at the base and corners. Add a `plinth` between the stone and the timber."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The roof eave at the back is a jagged lip, the base has ragged stepped notches on the side, and the lanterns are tiny.",
+   "fix": "Add a clean `coping` or `cornice` ring at the eave and square off the base notches. Make the lanterns more visible with `fixtures` at the door and balcony."
+  }
+ ]
+}

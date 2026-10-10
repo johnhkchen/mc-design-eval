@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Good",
+ "roof": "Fair",
+ "facades": "Fair",
+ "elements": "Fair",
+ "finish": "Fair",
+ "palette": "Fair",
+ "summary": "A readable barn box with a stepped gambrel profile and a red/white checker gable, but the roof is a dark slab with no real gambrel break, the long walls are flat red with gaps, and the barn doors, loft hoist and cupola are weak.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Roof is a heavy dark-grey slab of deepslate brick that reads as a lid. The gambrel is only a stepped curve at the gable ends, with no steep-lower/shallow-upper break along the long sides, and there is no overhang.",
+   "fix": "Rebuild the roof with `mcd roof --preset barn` for a true gambrel with eaves. Use a red or weathered-wood roof palette, or a lighter grey, and add coping along the gable verge."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "The sliding double doors read as a small single door in a red/white checkerboard. There are no big doors and no white X-bracing. The loft door is a tiny hay block and the hoist beam is a lone dark log stub.",
+   "fix": "Frame a 4-wide, 4-tall double-door opening with the surround brush in white. Add an X brace with the brackets brush or white blocks. Put a proper loft door above it, with a projecting beam and a fixture (the fixtures brush) for the hoist."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The long side walls are flat red slabs with white gaps and holes under the roof, and the back elevation is a blank red wall. The gable checker pattern is noisy and doesn't read as barn trim.",
+   "fix": "Add white corner and edge trim with the quoins and pilaster brushes. Use the glazing brush for small windows. Run a plinth and cornice line along the sides. Replace the checker with plain red boards plus white X-trim."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "The cupola is small and sits on top of the roof, with no louvres. The weather vane is a thin stick. The hay bales and fence are scattered at the corners and look like noise.",
+   "fix": "Enlarge the cupola with the louvres brush and a small pitched cap. Use the finial brush for the vane. Group the hay bales by the doors and run a continuous fence."
+  },
+  {
+   "aspect": "Palette",
+   "severity": "Minor",
+   "problem": "Red, white and near-black are high contrast, and the black roof is too heavy. The stone foundation is fine but thin.",
+   "fix": "Lighten the roof with a `mcd paint` roof palette change, and keep the foundation as a cobble plinth."
+  }
+ ]
+}

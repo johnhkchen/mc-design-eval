@@ -1,0 +1,57 @@
+{
+ "key": "red-barn",
+ "arm": "plugin",
+ "name": "Farm barn",
+ "exit": 0,
+ "stderr": "",
+ "minutes": 2.1,
+ "costUsd": 0.39284379999999997,
+ "turns": 11,
+ "durationMin": 2.1,
+ "subtype": "success",
+ "isError": false,
+ "skillUsed": true,
+ "nbt": true,
+ "verdict": {
+  "usability": "NeedsWork",
+  "massing": "Fair",
+  "roof": "Poor",
+  "facades": "Fair",
+  "elements": "Fair",
+  "finish": "Fair",
+  "palette": "Fair",
+  "summary": "It has a good barn palette and props, but the roof is a flat-dark lid with a stepped, castle-like crenellated gable and a squashed cupola, and the red/white checkerboard front reads as a circus tent rather than X-braced barn doors.",
+  "issues": [
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "Roof is a uniform dark slab with no gambrel break, no overhang, and the stepped white gable edge looks like castle battlements, not a barn gambrel.",
+    "fix": "Rebuild with `mcd roof --preset barn` (true gambrel, steep lower and shallow upper slope, eave overhang), with a varied roof palette; drop the crenellated white step trim and use plain trim or coping along the verge."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Major",
+    "problem": "Front door area is a red/white checkerboard filling the whole gable, so it reads as a circus tent. There are no clear sliding doors or X-bracing.",
+    "fix": "Make the gable plain red. Set a big double-door recess with white trim frame and diagonal X braces using `surround` and `brackets` or white stair/slab lines. Add plank door panels."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Major",
+    "problem": "Back elevation is a blank red wall, and the long side walls have only tiny scattered white holes with no rhythm.",
+    "fix": "Add `pilaster` or `quoins` bays, `glazing` windows at regular spacing, a small loft hatch on the back, and a `plinth` or `cornice` band so the walls have depth."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Minor",
+    "problem": "Cupola is a tiny, squashed block with a flat battlement-like cap. The weather vane is barely visible. The hoist beam is an oversized cross-shaped timber that hides the loft door.",
+    "fix": "Rebuild the cupola with `mcd roof --preset lantern-cap` on a slightly wider base, add a `finial` as the vane, and shorten the hoist beam to a small projecting arm over a clear loft door."
+   },
+   {
+    "aspect": "Finish",
+    "severity": "Minor",
+    "problem": "The foundation is correct but flat. The fence is sparse and thin, and the hay is scattered unevenly.",
+    "fix": "Add a `plinth` course and `planters` or hay clusters by the door. Run the fence in a continuous line with a gate by the path."
+   }
+  ]
+ }
+}

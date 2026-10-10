@@ -1,0 +1,49 @@
+{
+ "name": "wizard-tower-plugin-glance-haiku",
+ "fn": "glance3",
+ "code": 0,
+ "verdict": {
+  "identity": "Generic",
+  "usability": "NeedsWork",
+  "massing": "Fair",
+  "roof": "Fair",
+  "facades": "Fair",
+  "elements": "Poor",
+  "finish": "Fair",
+  "palette": "Good",
+  "summary": "A tidy stone-base, timber-storey, teal-roofed tower that reads as a fantasy tower in general, but the brief's crooked lean, jettied upper floors, round windows and telescope balcony are missing, so it could be any wizard tower.",
+  "issues": [
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "No telescope balcony; the middle storey shows only fence posts and no platform or telescope",
+    "fix": "Add a jutting balcony on the second timber storey with a rail, a lectern or telescope prop (iron bars and an observer or copper block), and a lantern on the rail corner."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "No round windows; openings are flat white plaster panels and rectangles",
+    "fix": "Replace the upper-storey panels on the front and sides with small round windows (a ring of stairs or stained glass at 3 wide), keeping one glowing window lit with a lantern or glowstone behind it."
+   },
+   {
+    "aspect": "Massing",
+    "severity": "Major",
+    "problem": "Storeys stack straight and vertical; no outward jetty and no crooked lean",
+    "fix": "Offset each timber storey 1 to 2 blocks outward with corbel beams under the overhang, and shift the upper stack a block or two off the stone base axis so the tower leans."
+   },
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "Roof is a stepped pyramid of blocks that reads as a lid, not a tall conical roof",
+    "fix": "Taper the roof by one block per layer using stairs or slabs for a smooth cone profile, and shift each layer's centre a block to carry the slight lean."
+   },
+   {
+    "aspect": "Finish",
+    "severity": "Minor",
+    "problem": "Roof surface is noisy with random teal and verdigris blocks; ivy is absent, with only moss patches on the stone",
+    "fix": "Pick one roof block family with a single accent, and hang vines from the stone base and under the balcony to show the ivy."
+   }
+  ]
+ },
+ "cost": 0.0012998999999999999
+}

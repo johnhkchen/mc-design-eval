@@ -1,0 +1,2253 @@
+[
+ {
+  "key": "tea-house",
+  "arm": "stock",
+  "name": "Japanese tea house",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 0.5,
+  "costUsd": 0.1117952,
+  "turns": 2,
+  "durationMin": 0.5,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Poor",
+   "elements": "Poor",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "A dark stepped pyramid lid swallows a tiny, murky base, so it reads as a brown ziggurat on a stone plate rather than a tea house with paper screens, upturned eaves, a maple and stepping stones.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof is a plain stepped pyramid that covers about two thirds of the height. It has no curved or upturned eaves, no hipped-and-gabled form, and it reads as a lid on the walls.",
+     "fix": "Rebuild it with `mcd roof --preset teahouse`. Keep the deep overhang but lower the pitch, so the eaves flick up at the corners and a gable shows on the front. Add a finial at the ridge."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "The walls are nearly black and recessed under the roof. There are no white paper-screen panels, only a few stray white holes in the street and back views.",
+     "fix": "Use glazing and surround brushes to build shoji grids of white panels in lighter timber frames across the full front and sides. Use `mcd paint` to lift the frame colour a step above the roof."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The engawa veranda, stepping stones, stone lantern and maple are missing or unreadable. The only props are tiny corner lanterns, and the stone step at the back is a lone block.",
+     "fix": "Add an engawa with the railing brush and a wide lighter-wood deck around the base. Lay a stepping-stone path to the door. Place a stone lantern and a maple with red or orange leaves on the plinth."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Minor",
+     "problem": "The footprint is a square block with a sheer roof mass on top and no raised floor or footing detail. The proportions are off: the walls are about 3 blocks tall under a roof of about 6.",
+     "fix": "Raise the floor on a plinth brush with visible stone footings. Make the walls taller and the roof shallower, using brackets under the eaves to carry the overhang."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "The roof tiers show a repeating notched stud pattern and flat planks. The roof has no ridge cap, and the eaves have no trim.",
+     "fix": "Add a cornice or coping brush along the eave edge and a finial on the ridge. Vary the roof palette with a darker tile and a lighter edge course."
+    }
+   ]
+  }
+ },
+ {
+  "key": "tea-house",
+  "arm": "described",
+  "name": "Japanese tea house",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 1.9,
+  "costUsd": 0.2501994,
+  "turns": 2,
+  "durationMin": 1.8,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "A recognisable raised timber tea house with a good dark-tile and timber palette, but the roof is a huge heavy lid with no curved eaves, and the walls are open dark posts instead of white paper screens.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof is an oversized, nearly flat-sided black hip that swamps the small body. Eaves are straight with no upturn, and the back elevation shows a big blank slab. A stray grey gap shows at the gable.",
+     "fix": "Rebuild with `mcd roof --preset teahouse` at a lower pitch and a tighter footprint so the eaves flick up at the corners. Add a finial or coping at the ridge. Fill the gable gap."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "The walls read as dark open posts with a dark interior. The white shoji panels are missing on the sides and mostly missing on the front, so the house looks like a stilted shed.",
+     "fix": "Use the glazing brush to fill every bay between the posts with white panels. Use a light pane or white block in dark timber grids. Add a few solid bays for rhythm."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The engawa veranda is not readable. There is no clear deck ring or railing at floor level. The stone footings are tiny, and the floor reads as a thin plank band.",
+     "fix": "Extend a plank deck 1–2 blocks past the walls on the front and sides. Add the railing brush and the plinth brush, and put stepping stones up to the edge."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Minor",
+     "problem": "The maple is a boxy cube blob clipped against the roof corner. The lantern and bamboo are small and scattered.",
+     "fix": "Move the maple clear of the eaves and give it a rounder, layered canopy with a few red leaf-litter blocks. Group the lantern near the path entrance using fixtures."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "Plain walls and a flat roof edge give little trim or depth. The stepping-stone path is a thin zigzag along the plot edge and does not lead to the house.",
+     "fix": "Add the brackets and cornice brushes under the eaves. Curve the stepping stones from the front corner to the veranda steps."
+    }
+   ]
+  }
+ },
+ {
+  "key": "tea-house",
+  "arm": "sized",
+  "name": "Japanese tea house",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 1.6,
+  "costUsd": 0.2195552,
+  "turns": 2,
+  "durationMin": 1.5,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "Nice raised-floor timber base with a lantern and maple, but the roof is a heavy stacked-square lid with no curved, upturned eaves, and the paper-screen walls barely read.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof is concentric stepped squares (a ziggurat lid) with no hipped-and-gabled form and no upturned eaves; only tiny corner posts hint at curves. It dominates the small body and looks flat and heavy.",
+     "fix": "Rebuild with `mcd roof --preset teahouse` in a dark tile palette so eaves sweep up at the corners, and add a gabled top section/finial; reduce the overhang depth."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "The sliding paper-screen walls are mostly dark solid timber with only two thin glass slits; no white panels in frames, so the shoji read is lost. The back elevation is mostly blank.",
+     "fix": "Use the glazing brush to fill the wall bays with white panel grids in dark frames, and add `mcd paint` or surround for lattice framing; open the centre bay as a wide shoji door."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "Engawa veranda is not legible: the wraparound deck is just a plank band with huge dark posts, and no railing or stepping access. Stepping stones are a few grey slabs in odd places.",
+     "fix": "Extend the plank deck as a clear veranda with railing brush and a step up; lay a curving line of stepping stones from the path to the deck edge."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Minor",
+     "problem": "Posts taper and lean oddly in the street view, and the stilted floor leaves a wide gap with thin stone footings, so the body feels squat under the oversized roof.",
+     "fix": "Make posts straight and consistent, thicken footings with plinth brush, and raise wall height a block to rebalance with the roof."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "Maple is a plain cube blob that covers the side view, and the lantern is tiny and lost.",
+     "fix": "Shape the maple canopy with an irregular, layered crown set back from the house, and move the lantern beside the path with a clearer stone base."
+    }
+   ]
+  }
+ },
+ {
+  "key": "tea-house",
+  "arm": "plain",
+  "name": "Japanese tea house",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 1,
+  "costUsd": 0.1851832,
+  "turns": 5,
+  "durationMin": 1,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "judgeFiles": [
+   "card-sheet.png",
+   "card-tiles",
+   "card.png",
+   "ledger.jsonl"
+  ],
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Poor",
+   "elements": "Poor",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "A dark timber box under a huge flat-stepped grey lid with no paper screens, no curved eaves, and oversized red blocks standing in for the maple, so it doesn't read as a Japanese tea house.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof is a stepped grey pyramid with a flat slab top and a stray wood patch; it reads as a lid. No hipped-and-gabled form, no upturned curved eaves, and the light grey stone-brick is not dark tile.",
+     "fix": "Rebuild with `mcd roof --preset teahouse` in a dark tile palette (deepslate/dark stair courses), keep the hip with a small gable, and add a finial on the ridge. Remove the flat top slab and the odd wood dormer-like patches."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "Walls are plain dark timber with no white paper-screen panels; the back elevation is mostly open holes with sky showing through, and the front is dark and flat.",
+     "fix": "Use the glazing brush to fill the openings with white panels (e.g. white stained glass or paper-white blocks) in a dark timber lattice, and add the surround brush to frame each shoji bay. Close the see-through gaps on the back."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The red blocky shapes on the right and left read as stray red wool blobs, not a maple. The stone lantern is just a thin stone pillar. The engawa veranda and stepping stones are barely legible.",
+     "fix": "Replace the red blobs with a proper maple (a trunk with a rounded red-leaf canopy, or planters with red foliage). Build a clear stone lantern with a base, post and lit cap using the fixtures brush. Add a railing brush veranda around the front and a clear stepping-stone path."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Minor",
+     "problem": "The roof is far larger than the body, and the raised floor on stone footings is not evident, so the building sits low and heavy.",
+     "fix": "Use the plinth brush to add stone footings and raise the floor so the veranda sits visibly above the garden; reduce the roof's mass relative to the walls."
+    },
+    {
+     "aspect": "Palette",
+     "severity": "Minor",
+     "problem": "Light grey roof against very dark brown walls is a harsh, unbalanced contrast, and the bright red accent clashes.",
+     "fix": "Use a dark roof palette with warm mid-brown timber, white screens and a smaller red maple accent."
+    }
+   ]
+  }
+ },
+ {
+  "key": "tea-house",
+  "arm": "plugin",
+  "name": "Japanese tea house",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 1.4,
+  "costUsd": 0.3187928,
+  "turns": 12,
+  "durationMin": 1.4,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": true,
+  "nbt": true,
+  "judgeFiles": [
+   "card-sheet.png",
+   "card-tiles",
+   "card.png",
+   "ledger.jsonl"
+  ],
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "A dark, Japanese-feeling tea house with a good palette and a stepped tiered roof, but the roof is a heavy lid that swallows the walls, the paper screens barely read, and the garden props are too small to notice.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof is a huge flat-topped stepped slab that covers most of the building height and hides the walls. The eaves are only small corner nubs, so there are no curved or upturned eaves, and the gable is missing.",
+     "fix": "Rebuild the roof with `mcd roof --preset teahouse`. Keep a hipped lower tier with a smaller gabled upper ridge, and make the eave corners flick up. Reduce the roof height so the walls get more of the 9-block height."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "The sliding paper-screen walls don't read. The walls are dark wood with only a few thin white slits, and the sides are almost solid timber. Wall height is squat under the roof.",
+     "fix": "Use the glazing brush to fill the wall bays with white panels (white stained glass or paper) in a grid of dark timber frames. Add a surround or brackets to each bay, and keep the panels continuous along the front and sides."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The engawa veranda, the stone lantern and the maple are hard to spot. The porch is hidden under the roof, the lantern is tiny, and the maple is just green leaf cubes with no red or orange. The log pillar at the right corner looks stray.",
+     "fix": "Add a railing brush along a raised, projecting engawa deck. Place a taller stone lantern (stone wall, lantern on top, finial) by the path. Build a proper maple with a trunk and a round red or orange leaf canopy. Delete or re-place the stray log post."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Minor",
+     "problem": "The footprint is a plain box on a flat plot. The stone footings are low and the raised-floor effect is weak. The stepping stones are not clear.",
+     "fix": "Raise the floor on a plinth of stone footings, a block or two higher. Lay separate stepping-stone slabs in a curved path across the grass."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "The roof is one flat dark tone, and the dormer is a lone log block with glass that looks odd. The back elevation is plain.",
+     "fix": "Remove the dormer, or turn it into a proper gable vent. Add a coping or cornice line at the eaves. Give the back wall the same screen bays."
+    }
+   ]
+  }
+ },
+ {
+  "key": "desert-market",
+  "arm": "stock",
+  "name": "Desert adobe market hall",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 0.5,
+  "costUsd": 0.1151156,
+  "turns": 2,
+  "durationMin": 0.5,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "judgeError": "no verdict (exit 1): xt1/swe/repos/minecraft-design/tools/bin/mcd.mjs:492:1\\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)\\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)\\n\"}\n"
+ },
+ {
+  "key": "desert-market",
+  "arm": "described",
+  "name": "Desert adobe market hall",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 1.2,
+  "costUsd": 0.18637600000000001,
+  "turns": 2,
+  "durationMin": 1.2,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "A readable sandstone market hall with a decent arcade and viga row, but the huge flat roof reads as an empty lid with a blocky tower and a scrappy pyramid, and the sides are flat and thin on adobe character.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof is a big empty flat slab; the tower is a plain slab-sided box and the stepped pyramid with pink cap looks like random debris rather than a dome.",
+     "fix": "Re-run `mcd roof --preset desert` with a parapet and a proper dome/lantern-cap or tower-cap; add a finial on the tower top and a coping brush on the parapet; drop the ragged pyramid."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "Side and back walls are flat sandstone with just a red band and a few small dots; no thick rounded adobe feel, no openings or relief.",
+     "fix": "Use pilaster and quoins brushes for rounded corners, add surround/glazing openings or louvres on the sides, and a plinth at the base; use `mcd paint` to vary the adobe tones."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "Awnings read as small red flaps rather than striped cloth, and pots/baskets are tiny and hard to see under the arcade.",
+     "fix": "Use bunting or banner awnings in alternating red/white stripes over each bay, and add planters and fixtures (clay pots, baskets) at the pier bases."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Minor",
+     "problem": "The tower sits at the corner with no visual tie to the hall, and the arcade piers are thin and uneven in the 3/4 views.",
+     "fix": "Thicken the piers, use brackets under the arcade lintel, and set the tower flush with a wall plane with a cornice."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "Viga ends are evenly spaced but sit mostly on top of the parapet and look stuck-on; the wall band beneath is bare.",
+     "fix": "Place the vigas just below the roof line through the wall and add a cornice brush so they read as beam ends."
+    }
+   ]
+  }
+ },
+ {
+  "key": "desert-market",
+  "arm": "sized",
+  "name": "Desert adobe market hall",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 0.8,
+  "costUsd": 0.14943220000000002,
+  "turns": 2,
+  "durationMin": 0.8,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "A sandstone and terracotta box with a decent arcade on the front, but the flat lid roof with a tiny stair-step pile and a stub tower, and the blank back wall, make it read as a plain block rather than an adobe market hall.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof is a huge flat sand slab with a thin parapet. It reads as a lid. The 'dome' is a small stepped stair pile and the wind tower is a tiny box with trapdoor slats, both off-centre and undersized. No vigas show.",
+     "fix": "Rebuild the roof with `mcd roof --preset desert`, with a taller coping/cornice parapet. Replace the stair pile with a real rounded dome or a taller wind tower using the tower-cap or lantern-cap preset. Add protruding log or stripped-log beam ends along the parapet face."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "The back and left sides are blank sand walls with a row of identical dark squares and one terracotta stripe. They read as flat and unfinished, and the walls are not thick or rounded.",
+     "fix": "Add pilaster and quoins at the corners and between bays. Add surround and glazing to the openings, plus a cornice or plinth for depth. Break up the long wall with a recessed door and planters."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The arcade's awnings, pots and baskets are not legible. The red pieces behind the columns are dark clumps, and the stepped arch shapes look jagged. No striped cloth reads from the street.",
+     "fix": "Use bunting or banner brushes in alternating red and white stripes as awnings under the arcade, and add planters and fixtures as clay pots. Clean the arch openings into consistent stepped arches."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Minor",
+     "problem": "The footprint is a single rectangle with no setbacks or height variation. The terracotta band at the base is heavy and the corner blocks look like squares.",
+     "fix": "Raise the wind tower or dome to give a focal silhouette, and add a plinth step or a lower side annex."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "Terracotta columns stop abruptly at the top and the dark vigas squares on the columns look like stray blocks. The roof stair detail has gaps.",
+     "fix": "Cap the columns with brackets or a cornice, and tidy the stair pile's edges."
+    }
+   ]
+  }
+ },
+ {
+  "key": "desert-market",
+  "arm": "plain",
+  "name": "Desert adobe market hall",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 0.9,
+  "costUsd": 0.1655602,
+  "turns": 4,
+  "durationMin": 0.9,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Good",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "A readable desert palette with striped awnings and vigas, but it's a flat slab with a stray terracotta block on the roof, a blank back wall and no real dome or rounded adobe massing.",
+   "issues": [
+    {
+     "aspect": "Massing",
+     "severity": "Major",
+     "problem": "Single low rectangular slab with razor-straight edges; no rounded or thick adobe feel, and the wind tower or dome is only a tiny stub on the roof.",
+     "fix": "Add a taller wind tower or a stepped corner block with a lantern-cap or tower-cap `mcd roof --preset`, and soften the corners with coping and cornice brushes."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "Back elevation is a blank sandstone wall with one terracotta stripe and a row of orange blocks along the base. It reads as an unfinished, flat wall.",
+     "fix": "Add recessed windows with the surround and glazing brushes, pilasters at regular intervals, and a plinth along the base in place of the orange blocks."
+    },
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "The roof is a flat deck with a terracotta block and a sandstone cube in the middle that looks like a dropped lump rather than a dome. The parapet is thin, and the vigas are skinny and sparse, in uneven clusters.",
+     "fix": "Use the `desert` roof preset with a thicker coping parapet, space the vigas evenly along the front and sides, and swap the lump for a real dome or lantern-cap."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Minor",
+     "problem": "The awnings are a good striped read, but the arcade is made of heavy dark log pillars, and the baskets and pots are tiny red blocks that don't read as props.",
+     "fix": "Use the planters and fixtures brushes for pots and baskets, and use brackets between the posts and awnings."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "Terracotta blocks stick out at the front corners and on the roof. Side windows are tiny dark squares, and the front interior is dark and cluttered.",
+     "fix": "Trim the stray corner blocks, give the windows a surround, and tidy the arcade interior."
+    }
+   ]
+  }
+ },
+ {
+  "key": "desert-market",
+  "arm": "plugin",
+  "name": "Desert adobe market hall",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 1.4,
+  "costUsd": 0.36740320000000004,
+  "turns": 17,
+  "durationMin": 1.4,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": true,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Good",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "The striped awnings, vigas and sandstone-and-terracotta palette say desert market at once, but the build is a flat slab with a lumpy, ragged stepped dome and tower on top, and the back and side walls are blank.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "The central dome is a jagged, stepped heap of sandstone with holes and loose gaps, perched on a plain box. It reads as a rough lump, not a rounded adobe dome or wind tower.",
+     "fix": "Replace it with a clean dome or a stepped-in tower cap using `mcd roof --preset desert` or `tower-cap`. Finish the base with a coping or cornice brush, and fill the gaps so each course is a regular ring."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "The back elevation is a flat sandstone wall with a band of viga blocks and a few tiny doors. Both side walls are blank and the walls don't read as thick or rounded.",
+     "fix": "Add pilaster and surround brushes for window and door reveals, plus louvres, planters and a plinth along the back and sides. Rounded parapet corners (stairs or slabs) and a few recessed niches would add the thick-wall look."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Major",
+     "problem": "The footprint is a wide low slab with a big empty roof terrace. The wind tower sits off to one corner and the dome block is boxy, so the silhouette is flat and unbalanced.",
+     "fix": "Raise the central block to form a clerestory or dome drum. Move the wind tower so it balances the dome, and break the parapet with coping and finials to get a stepped silhouette."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Minor",
+     "problem": "The vigas are chunky wood blocks laid as a band, so they read as crates rather than protruding beam ends. The clay pots and baskets under the arcade are small and hard to read from the street.",
+     "fix": "Use the brackets brush or single log ends poking 1 block out at regular spacing. Group the pots and baskets with the fixtures and planters brushes in front of the stalls."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "The street view shows a see-through gap in the middle of the arcade. The dark piers are thin, and stray posts and pots sit loose on the roof.",
+     "fix": "Close the gap with a doorway surround and glazing brush. Cluster the roof props at the tower or parapet, or remove them."
+    }
+   ]
+  }
+ },
+ {
+  "key": "stave-church",
+  "arm": "stock",
+  "name": "Nordic stave church",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 0.8,
+  "costUsd": 0.14767819999999998,
+  "turns": 4,
+  "durationMin": 0.7,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Poor",
+   "elements": "Poor",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "The stepped tiers and spire give a stave-church-like silhouette, but it's a dark, near-monochrome block with no svalgang gallery, no dragon-head gables and flat walls, so it reads as a generic pagoda-ish tower rather than a Norwegian stave church.",
+   "issues": [
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "No open gallery (svalgang) around the ground floor; the lower walls are solid dark planks with a few tiny windows, and no carved dragon-head gable ends are visible.",
+     "fix": "Build a ring of posts with the railing brush and a low shed roof or cornice around the base to make the gallery. Add finial and brackets at each gable peak to suggest crossed dragon heads."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "Ground-floor walls are large flat dark planks with few small slit windows; the side faces are almost blank and show no stave or post rhythm.",
+     "fix": "Add pilaster brushes at regular intervals for the vertical staves, add surround and glazing on the openings, and use plinth and cornice bands to break up the wall."
+    },
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "The tiers are stepped layers that read as pagoda or lid slabs; they have no steep pitch or visible shingles, and the side annex roof is a flat slab.",
+     "fix": "Rebuild the tiers with `mcd roof --preset church` or `tower-cap` at steep pitch with a shingle roof palette, and keep a clear overhang on each tier. Give the lower annex a matching pitched roof."
+    },
+    {
+     "aspect": "Palette",
+     "severity": "Minor",
+     "problem": "Everything is the same dark brown, so tiers, walls and trim merge into one mass, and the stone base is a thin grey strip.",
+     "fix": "Use `mcd paint` to give the roofs a slightly different tarred tone from the walls. Add lighter trim accents and a taller, darker cobble plinth."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Minor",
+     "problem": "The footprint is boxy, with a small side annex that looks tacked on; the central tower is thin and the proportions are tower-like rather than a long nave plus a taller central mass.",
+     "fix": "Extend the nave along the depth with a lower chancel apse at the rear, and place the annex symmetrically."
+    }
+   ]
+  }
+ },
+ {
+  "key": "stave-church",
+  "arm": "described",
+  "name": "Nordic stave church",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 1.4,
+  "costUsd": 0.20138640000000002,
+  "turns": 2,
+  "durationMin": 1.3,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Poor",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "The stacked tiers and spire say stave church from afar, but it reads as a pagoda-like pyramid of roof with a tiny hidden ground floor, no real walls, and gallery and dragon heads barely legible.",
+   "issues": [
+    {
+     "aspect": "Massing",
+     "severity": "Major",
+     "problem": "Almost the whole build is roof: a stepped pyramid sits on a very short ground storey, so there is no nave body, no lower-and-higher gable composition, and it reads as a pagoda or ziggurat, not a church with a long nave and a chancel.",
+     "fix": "Raise the walled storey to about 8 blocks, with a long gabled nave 17 deep and a narrower chancel. Then place a smaller tower mass above it and use `mcd roof --preset church` for the main roofs, with two or three steep tiers stepping up."
+    },
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "The tiers are square pyramids that are identical on all four sides, with no ridge lines or gable ends. The shingle pattern is a noisy checker of two plank tones, and the eaves are flat and heavy.",
+     "fix": "Use gabled tiers with `church` preset ridges running along the length. Use one shingle material with a subtle second-tone accent. Add `cornice` or `coping` brushes at the eaves and `finial` brushes on the ridge ends."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "The ground floor is hidden under the lowest roof. The svalgang gallery is a dark strip with thin posts, and no wall faces, doors or windows are visible. The stone base is a flat grey slab.",
+     "fix": "Lift the gallery roof and build an open arcade with `railing` and `pilaster` posts. Add a dark plank wall behind it with a door using `surround`, and small `glazing` windows. Give the base a `plinth` course."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The dragon-head gable ends are tiny cross-shaped stubs on the corners of the tiers. They look like antennas or horns, not carved dragon heads, and the spire is a plain pole.",
+     "fix": "Make the dragon heads bigger, with crossed curved projections at the gable peaks, using `brackets` and `finial` brushes in dark spruce. Give the spire a stepped base and a taller needle-like finial."
+    },
+    {
+     "aspect": "Palette",
+     "severity": "Minor",
+     "problem": "The build is nearly all one dark brown, so the tiers, posts and walls blur together, and the light-brown shingle squares look noisy against it.",
+     "fix": "Use a roof palette of dark spruce shingles with a few blackstone or stripped-log accents. Keep the walls a separate darker tarred tone, and use `mcd paint` to set clear contrast between wall, roof and trim."
+    }
+   ]
+  }
+ },
+ {
+  "key": "stave-church",
+  "arm": "sized",
+  "name": "Nordic stave church",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 0.8,
+  "costUsd": 0.131244,
+  "turns": 2,
+  "durationMin": 0.7,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Poor",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "The stepped tiers and spire give a stave-church silhouette, but the roofs are heavy stepped slabs sitting on a squat, flat, single-colour box with no dragon heads, gables or readable gallery.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roofs are stepped solid slabs of dark planks that read as a ziggurat or lid, not steep shingled gables; the lower tier covers the whole footprint and hides the gallery and walls.",
+     "fix": "Rebuild the tiers with `mcd roof --preset church` (steep gables) per tier, inset each tier from the one below, and use a stair-based shingle palette that differs slightly from the walls."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "No carved dragon-head gable ends; the floating dark bars around the roof are stray bits that read as noise, not dragon finials.",
+     "fix": "Remove the floating blocks. Attach `finial` brushes at the gable peaks and use `brackets` to make crossed, curved dragon-head ends on each tier."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "The ground floor is a flat wall of dark posts with no clear door, windows or open svalgang. The back shows only a few gaps, and the sides are blank.",
+     "fix": "Add a recessed open gallery with `railing` between the posts, a clear gabled door with `surround`, and `glazing` or `louvres` on the upper storeys. Use `cornice` to separate the storeys."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Minor",
+     "problem": "The footprint is wide and low, and the upper tiers shrink fast, so the church looks squat and pyramidal. The tall nave and tower proportion is lost.",
+     "fix": "Raise the upper walls so the clerestory shows between tiers, and make the central tower narrower and taller to hit the 22-block height."
+    },
+    {
+     "aspect": "Palette",
+     "severity": "Minor",
+     "problem": "Everything is the same near-black brown, so planks, posts and roof merge and there is no depth. The stone base is a thin grey strip.",
+     "fix": "Vary the roof with a slightly lighter or different dark wood, use `mcd paint` to give the posts a different tone, and add a taller `plinth` in stone."
+    }
+   ]
+  }
+ },
+ {
+  "key": "stave-church",
+  "arm": "plain",
+  "name": "Nordic stave church",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 0.9,
+  "costUsd": 0.165828,
+  "turns": 4,
+  "durationMin": 0.9,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "The tiered stone-base-and-stacked-roofs idea is there, but the roofs are flat stepped slabs that read as a ziggurat or pagoda instead of steep shingled stave-church roofs, and the gable dragon heads show up as floating sign-like planks.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Tiers are shallow, flat stepped slabs of stone brick that read as lids or a ziggurat, not steep shingled gables; the lowest tier covers the whole footprint and hides the walls and svalgang.",
+     "fix": "Rebuild each tier with `mcd roof --preset church` (steep pitch, gable ends facing the nave axis) and a dark shingle palette. Shrink the lowest tier to a narrow lean-to skirt over the gallery."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "Dragon-head gable ends are brown plank/sign shapes on poles at the corners. They read as flags or signposts, not carved dragon heads, and they do not sit on the gable peaks.",
+     "fix": "Remove the poles. Use the `finial` and `brackets` brushes to put crossed, upswept dark-wood dragon finials at the ridge ends of each gable."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Major",
+     "problem": "The footprint is a square block with concentric square tiers, so it reads as a pagoda. A stave church has a long nave, a narrower chancel, and a tower that rises from the nave ridge. The brief asks for 13 by 17 and that is not clear here.",
+     "fix": "Make the nave rectangular (13 wide by about 12 deep) with a lower chancel apse at the back. Raise a square belfry from the ridge and cap it with `tower-cap`."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Minor",
+     "problem": "Upper-wall timber has a blotchy light/dark checker pattern, and the ground-floor gallery is only a dark strip of posts under the roof edge. It does not read as an open svalgang.",
+     "fix": "Use `railing` and `pilaster` brushes to make a posted gallery with an open arcade, and use `mcd paint` to unify the upper walls in tarred dark oak."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "The spire is small and hard to see. Spare plank blocks stick out of the upper roofs and look like noise.",
+     "fix": "Clear the stray blocks. Add a clear `finial` spire on the top cap and `cornice` or `coping` along the tier edges."
+    }
+   ]
+  }
+ },
+ {
+  "key": "stave-church",
+  "arm": "plugin",
+  "name": "Nordic stave church",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 2.8,
+  "costUsd": 0.5196008,
+  "turns": 21,
+  "durationMin": 2.7,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": true,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Poor",
+   "palette": "Good",
+   "summary": "The dark tarred timber, stone plinth and tiered stack with a spire say stave church from a distance, but the tiers are messy stepped slabs with scattered stair and plank clutter, the roofs read as stone and wood lids rather than shingled steep gables, and the svalgang gallery is only stubby posts.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Tiers read as flat stepped slabs and lids with stone-brick tops, not steep shingled pitched roofs. The top cap is a grey stone block, and the lower tier is a wide flat shelf.",
+     "fix": "Rebuild each tier with `mcd roof --preset church` in a dark shingle palette (dark oak stairs, no stone). Steepen the pitch and shrink each tier inward so every level is a clear gable."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Major",
+     "problem": "Roof close-up and 3/4 views show noisy, chaotic stair and plank bits, grey and black stone patches, and gaps where tiers meet. It looks broken and not crafted.",
+     "fix": "Clear the stray stair and plank fragments between tiers. Fill the junctions with continuous roof courses, add `cornice` and `coping` brushes along the eaves, and keep stone to the plinth only."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The dragon-head gable ends are small, ragged plank spikes that don't read as carved dragons. The svalgang is a row of thin posts under a solid timber band and barely reads as a gallery.",
+     "fix": "Use `finial` and `brackets` brushes to build bold, symmetric curled dragon heads at each ridge end. Rebuild the gallery as a recessed colonnade under a low lean-to roof with `railing` between the posts."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Minor",
+     "problem": "The base box is wide and squat with a flat top. The tiers are not clearly nave plus taller central tower, and the spire is a thin stick.",
+     "fix": "Add a lower nave and apse mass around a narrower, taller central tower. Cap it with a `finial` spire and a lantern-cap roof."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Minor",
+     "problem": "The street-level wall is a flat dark band with few openings, and the front has no carved portal.",
+     "fix": "Add a `surround` portal with a door and a few `glazing` slits. Use `pilaster` for stave posts at regular intervals along the walls."
+    }
+   ]
+  }
+ },
+ {
+  "key": "lighthouse",
+  "arm": "stock",
+  "name": "Coastal lighthouse and keeper's cottage",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 0.9,
+  "costUsd": 0.15774939999999998,
+  "turns": 2,
+  "durationMin": 0.8,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "The red-and-white striped tower with its gallery and cap reads as a lighthouse, but the tower is square rather than round, and the cottage roof is a skeleton of loose beams. The cottage is also detached rather than attached.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Keeper's cottage roof shows as spaced dark rafters or logs with gaps on the 3/4 views, so it looks unfinished and not like a pitched roof. The back view shows a flat dark slab.",
+     "fix": "Rebuild with `mcd roof --preset cottage` using a solid dark-wood or slate palette, add eave overhang and a proper ridge, and keep the chimney through the roof."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Major",
+     "problem": "The tower is a square, stepped box with a hard jog partway up, not a round tapered tower. It also stands apart from the cottage, which the brief wanted attached.",
+     "fix": "Chamfer the corners into an octagonal or round-ish section, taper it with one step per band, and move the cottage flush against the tower base. Add a `plinth` brush for the base."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Minor",
+     "problem": "Tower walls are flat, smooth white and red with no windows or door. The cottage walls are plain grey.",
+     "fix": "Add a tower door with `surround`, and 2–3 small slit windows with the `glazing` brush. Add `quoins` and a `plinth` to the cottage."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Minor",
+     "problem": "The lantern room is tiny and its glass is faint. The gallery railing is thin and barely reads. The cap is a blobby red slab.",
+     "fix": "Make the lantern glass bigger and clearer, add a `railing` brush around the gallery, and use `mcd roof --preset lantern-cap` with a `finial`."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "Red bands are uneven, with ragged jogs at the corners. The rocky base is a thin grey ring, and the grass plot is bare.",
+     "fix": "Keep the stripes as clean full-width bands, widen and thicken the rock base with mixed stone, and add `planters` or fences near the cottage."
+    }
+   ]
+  }
+ },
+ {
+  "key": "lighthouse",
+  "arm": "described",
+  "name": "Coastal lighthouse and keeper's cottage",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 0.9,
+  "costUsd": 0.15138659999999998,
+  "turns": 2,
+  "durationMin": 0.8,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "The red-and-white striped tower, lantern room and rocky base read as a lighthouse, but the tower is a square prism rather than round and the cottage roof is an open slatted frame, so it needs work.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Keeper's cottage roof is open, with spaced slats and no solid fill. You can see through it to the interior in the 3/4 views, and the front views show no ridge.",
+     "fix": "Rebuild the cottage roof with `mcd roof --preset cottage` using a solid dark-red palette, and add a chimney that sits on the ridge."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Major",
+     "problem": "The tower is a square 4-sided prism with visible corner seams, not the round tower the brief asks for. It also has no taper and looks thin next to the 15x15 base.",
+     "fix": "Rebuild the shaft with a rounded octagonal or circular footprint that narrows slightly toward the top. Add a `plinth` at the base and `coping` or `cornice` under the gallery."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Minor",
+     "problem": "The lantern gallery has no railing, only a flat grey slab. The glazing is small and the cap is a stepped red pyramid with a stray spire block.",
+     "fix": "Add the `railing` brush around the gallery. Enlarge the glass to a full ring and use `mcd roof --preset lantern-cap` with a `finial`."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Minor",
+     "problem": "The tower walls are flat. The windows are single white holes and there is no door at the base. The cottage walls are plain, with one door and small windows.",
+     "fix": "Use `surround` and `glazing` on the tower windows, add a door with a `surround` at the base, and add `quoins` and `planters` to the cottage."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "The rocky base is ragged, with floating stray blocks at the edges. The cottage floats awkwardly against the tower.",
+     "fix": "Clean up the loose rock blocks at the corners and add a `plinth` under the cottage so it sits on the rock."
+    }
+   ]
+  }
+ },
+ {
+  "key": "lighthouse",
+  "arm": "sized",
+  "name": "Coastal lighthouse and keeper's cottage",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 0.6,
+  "costUsd": 0.1323884,
+  "turns": 2,
+  "durationMin": 0.6,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "The red-and-white striped tower, gallery and lantern read instantly as a lighthouse, but the tower is a square shaft rather than round, and the keeper's cottage is a ruined, roofless-looking lean-to hidden behind it.",
+   "issues": [
+    {
+     "aspect": "Massing",
+     "severity": "Major",
+     "problem": "Tower is a square, blocky shaft with stray red bulges and notches at the lower stripes, not a round tapering tower.",
+     "fix": "Rebuild the shaft as a circular, slightly tapering stack of rings, using the same stripe heights on every ring, and remove the stray protruding blocks."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "Keeper's cottage is a thin, low box behind the tower with jagged broken walls and holes. It has no readable pitched roof and no visible door.",
+     "fix": "Rebuild the cottage as a solid 2-storey box with a gable using `mcd roof --preset cottage`, add a door and `glazing` windows on the front face, and fully close the walls."
+    },
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Cottage roof is a flat dark-wood strip with ragged edges. The chimney is a lone brick pillar floating on the back.",
+     "fix": "Add a proper pitched roof with `mcd roof --preset cottage` and a `chimneys` stack on the ridge, then add `coping` on the gable edges."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "Rocky base is a jumbled, uneven pile, and a loose block floats off the right side. The back elevation shows a brown plank band and a brick strip that read as errors.",
+     "fix": "Tidy the base into a deliberate rock plinth with `plinth`, delete the stray block, and repaint the plank band as white with `mcd paint`."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Minor",
+     "problem": "Tower walls are flat stripes with only a tiny door and no windows, so they feel blank.",
+     "fix": "Add a few slit windows with `surround` and a door `surround` on the base, and a `cornice` under the gallery."
+    }
+   ]
+  }
+ },
+ {
+  "key": "lighthouse",
+  "arm": "plain",
+  "name": "Coastal lighthouse and keeper's cottage",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 0.6,
+  "costUsd": 0.13141799999999998,
+  "turns": 4,
+  "durationMin": 0.5,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Good",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "The red and white striped lighthouse with gallery and lantern reads instantly, but the tower is a square, ribbed shaft rather than a round one, it is too slender for the brief, and the little cottage is dwarfed and squeezed against it.",
+   "issues": [
+    {
+     "aspect": "Massing",
+     "severity": "Major",
+     "problem": "The tower is a square-section column with notched corners, not a round tower. It is also tall and thin, with no taper, so it reads as a pillar.",
+     "fix": "Rebuild the shaft as a stepped circular footprint (octagonal rings) that narrows toward the top. Keep the stripes as bands. Widen the base so it sits on the rock with more weight."
+    },
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "The lantern cap is a flat, stepped slab of dark brick that reads as a lid. The lantern glass is mostly hidden beneath it, and there is no finial.",
+     "fix": "Replace it with `mcd roof --preset lantern-cap` (or tower-cap) so it forms a dome or cone. Add a finial brush on top and raise the glazing so the lantern room is visible."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Minor",
+     "problem": "The cottage is small and tucked against the tower. Its gable is bare, with a single door and no windows, and the chimney is thin. It reads as an afterthought.",
+     "fix": "Enlarge the cottage a little and shift it out from the tower. Add `surround` or `glazing` windows and a planter at the door, and thicken the chimney with a `coping` cap."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Minor",
+     "problem": "The tower windows are tiny, flat square holes. The stripes have chevron-notched edges that look like a modeling artifact.",
+     "fix": "Use `surround` on the windows to give them frames. Clean the stripe edges so the bands are straight, and add a `plinth` or `cornice` at the base and the gallery."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "The rocky base is a noisy, scattered pile with stray moss patches. It has no clear path or steps to the door, and the gallery railing posts are sparse.",
+     "fix": "Consolidate the rock into a tidier mound with a clear stair path to the door. Use the `railing` brush on the gallery for continuous rails."
+    }
+   ]
+  }
+ },
+ {
+  "key": "lighthouse",
+  "arm": "plugin",
+  "name": "Coastal lighthouse and keeper's cottage",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 0.9,
+  "costUsd": 0.23747539999999998,
+  "turns": 11,
+  "durationMin": 0.9,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": true,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Good",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "The red-and-white striped tower with a gallery and lantern room reads as a lighthouse, but the tower is a square box rather than round, and the cottage is tiny and tacked on, so it needs work.",
+   "issues": [
+    {
+     "aspect": "Massing",
+     "severity": "Major",
+     "problem": "The tower is a square prism with flat faces and sharp corners. The brief asks for a round tower, and there is no taper.",
+     "fix": "Rebuild the shaft with a rounded or octagonal plan that narrows toward the top. Add a plinth brush at the base and a cornice or coping brush under the gallery."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Major",
+     "problem": "The keeper's cottage is tiny next to a 28-tall tower. It is stuck on one side and looks like a shed, with a mostly blank wall and a hidden door.",
+     "fix": "Widen and deepen the cottage so it fills the base. Add a door with a surround brush, glazing on the windows, and planters or fixtures. Seat it properly on the rock."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "The shaft is large, flat pale-grey walls with two red bands. The windows are ragged stone-grey patches with no glass and no depth. They read as damage.",
+     "fix": "Replace the patches with small framed windows using the glazing and surround brushes. Stagger them up the spiral of storeys. Add a door with a surround and some quoins or pilasters to break up the flat faces."
+    },
+    {
+     "aspect": "Roof",
+     "severity": "Minor",
+     "problem": "The lantern cap is a flat, dark, stepped slab with a hole in the top. It reads as a lid, not a conical or domed cap. The cottage roof is acceptable but plain.",
+     "fix": "Use `mcd roof --preset lantern-cap` or `tower-cap` for a pointed cap, and add a finial brush. Give the cottage a cottage preset roof with a clearer chimney."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "The rocky base is noisy, with scattered moss blocks, stray stair bits and loose cubes sticking out. The lantern room glass is thin and hard to read.",
+     "fix": "Tidy the base into a cleaner rock apron with a consistent plinth. Put fuller glazing in the lantern room, and use a railing brush for a continuous gallery rail."
+    }
+   ]
+  }
+ },
+ {
+  "key": "wizard-tower",
+  "arm": "stock",
+  "name": "Fantasy wizard tower",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 0.6,
+  "costUsd": 0.11656419999999998,
+  "turns": 2,
+  "durationMin": 0.5,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Good",
+   "facades": "Fair",
+   "elements": "Poor",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "The black-and-purple cone cap is a fine wizard hat, but the shaft below is a straight, symmetrical stone chimney with no jetty, lean, timber framing, balcony or telescope, so it misses most of the crooked wizard tower brief.",
+   "issues": [
+    {
+     "aspect": "Massing",
+     "severity": "Major",
+     "problem": "Shaft is a perfectly straight, uniform prism with no jettied upper floors, no lean and no crookedness, so it reads as a lighthouse or chimney rather than a crooked wizard tower.",
+     "fix": "Step the upper storeys outward one block per floor (jetty) and shift each storey 1 block sideways. Add a plinth at the base and a cornice under each jetty to sell the overhang."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "All four sides are flat grey stone brick with evenly spaced identical purple slits. There are no timber-framed upper floors and no stone-to-timber change, so the walls look blank and repetitive.",
+     "fix": "Switch the upper storeys to plaster with dark timber framing using pilaster and brackets brushes, keep stone only on the base, and stagger the window positions per storey."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The brief's balcony with telescope, round windows, ivy and lanterns are barely visible. The balcony is a thin brown ring under the roof with no telescope, the windows are square purple slits, and the door is tiny with two lantern dots.",
+     "fix": "Build a wider railing balcony with a telescope (finial/railing brushes) just below the cap. Use glazing for round-looking windows, add planters or ivy streaks up the sides, and hang fixtures lanterns at the door and balcony."
+    },
+    {
+     "aspect": "Roof",
+     "severity": "Minor",
+     "problem": "The cone is a bit squat and bulbous, the purple bands are chunky, and the spire is very thin. The lean the brief asks for is missing and the cone looks symmetrical.",
+     "fix": "Use mcd roof --preset tower-cap and offset the upper rings 1 block to one side for a slight tilt. Make the finial taller and slimmer."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "Vertical seams or ridges run down the corners in the 3/4 views, the base is only a thin grass fringe, and the wall surface has no depth.",
+     "fix": "Add quoins at the corners, a plinth at the foot, and a coping or cornice at the shaft top to give the walls trim and relief."
+    }
+   ]
+  }
+ },
+ {
+  "key": "wizard-tower",
+  "arm": "described",
+  "name": "Fantasy wizard tower",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 0.9,
+  "costUsd": 0.15391939999999998,
+  "turns": 2,
+  "durationMin": 0.9,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "It has a promising stone base, timber-framed jettied floors and a purple cone, but the roof is a lumpy, oversized blob that swallows the tower and the tiny stubby spire and floating bits make it look unfinished.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "The conical roof is a bulbous, noisy mass with ragged stepped steps and random dark patches. It is roughly as tall as the whole shaft, so it reads as a lumpy mushroom or hat, not a tall crooked cone.",
+     "fix": "Rebuild with `mcd roof --preset tower-cap`, a narrower footprint and a steeper profile. Use a two-tone roof palette in even courses instead of random patches, and keep the lean as a clean, consistent offset."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Major",
+     "problem": "The proportions are squat. The stone base and two timber floors are short and narrow under a huge roof. The jetties are barely visible from the front and the tower is not 30 tall with a slender silhouette.",
+     "fix": "Add a storey to the stone base or timber section. Step each upper floor out one block with a `cornice` or `brackets` brush under the jetty. Reduce the roof height share so the body reads as the main mass."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The finial and spire at the top are detached floating dark blocks with a gap above the roof. The balcony and telescope are tiny and hidden on the back, and the round windows and glowing window are hard to read.",
+     "fix": "Use the `finial` brush so the spire is attached to the roof apex. Add a `railing` balcony on a visible front or side face. Use `glazing` and `fixtures` for lit round windows on the front."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Minor",
+     "problem": "The timber floors are patchy with an uneven plaster fill and inconsistent framing. The front face is largely lost in the street view, and the ivy is sparse specks.",
+     "fix": "Use `pilaster` or `quoins` for regular corner posts and consistent studs. Add `planters` or clustered ivy at the base and corners. Add a `plinth` between the stone and the timber."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "The roof eave at the back is a jagged lip, the base has ragged stepped notches on the side, and the lanterns are tiny.",
+     "fix": "Add a clean `coping` or `cornice` ring at the eave and square off the base notches. Make the lanterns more visible with `fixtures` at the door and balcony."
+    }
+   ]
+  }
+ },
+ {
+  "key": "wizard-tower",
+  "arm": "sized",
+  "name": "Fantasy wizard tower",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 1.4,
+  "costUsd": 0.20637780000000003,
+  "turns": 2,
+  "durationMin": 1.4,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Good",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "A readable wizard tower with a stone base, jettied timber storeys and a leaning purple cone, but the noisy lumpy roof, flat plaster panels and barely visible small props keep it from being placeable as-is.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Cone is a lumpy mix of purple, magenta and grey blocks with ragged stepped silhouette and a hole at the top; reads as noisy rubble, not a smooth tall witch-hat cone with brim.",
+     "fix": "Rebuild with `mcd roof --preset tower-cap` using a two-tone roof palette (dark purple with a sparse accent course), keep the slight lean as a clean shift of the tip, and add a finial brush at the apex."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "Timber storeys are large flat plaster panels with few studs and sparse windows; the jetty edges are jagged and sawtooth on the diagonal views.",
+     "fix": "Add pilaster/brackets brushes for studs and jetty undersides, use glazing and surround brushes for small round-style windows, and apply a cornice at each jetty edge to clean the outline."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "Telescope, lanterns and glowing window are tiny or invisible at glance; balcony railing is thin and the telescope is a single stray pink block.",
+     "fix": "Use the railing brush on the balcony, add a larger telescope prop from fixtures, hang more lanterns under the jetty with fixtures, and make one clearly glowing window with glazing plus a light source."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Minor",
+     "problem": "Tower is nearly straight and symmetric apart from the roof; the crooked feel is weak and the stone base is plain and tall relative to the door.",
+     "fix": "Offset upper storeys by a block for a bit of drift, and add a plinth and quoins to the base for depth."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "Ivy is scattered in patchy dots on the stone and plaster, and the stone base has a flat uniform wall with a small door.",
+     "fix": "Use planters and cluster ivy in vertical runs from the base up, and frame the door with a surround brush."
+    }
+   ]
+  }
+ },
+ {
+  "key": "wizard-tower",
+  "arm": "plain",
+  "name": "Fantasy wizard tower",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 1.3,
+  "costUsd": 0.1954476,
+  "turns": 4,
+  "durationMin": 1.2,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "A characterful mossy stone base and dark timber jetty with a teal cap read as a wizard tower, but the cap is a lumpy, stubby pyramid sitting on a boxy cube, the timber house is a dark undifferentiated block, and the telescope balcony and round windows barely read.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof is a short, lumpy pyramid with a noisy random-patch teal texture; not a tall slender cone and no clear lean. It reads as a blob/lid on the cube.",
+     "fix": "Rebuild with `mcd roof --preset tower-cap` with a taller pitch and a single oxidised-copper palette (limited two-tone), add a finial at the tip and a slight offset in the upper courses for the lean."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Major",
+     "problem": "Timber upper block is a cube roughly as wide as the stone base top, so the silhouette is stout base + box + cap rather than a tall tapering tower; the jetty is only a slight lip.",
+     "fix": "Narrow the stone shaft toward the top, stack two storeys of timber with each stepping out further (brackets under each jetty), and add height so it nears 30 tall."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "Timber storeys are near-black flat walls with little framing, and the base's cobble/brick mix is patchy; the street view is a dark mass with few readable windows.",
+     "fix": "Use `surround` and `glazing` brushes for framed windows, add `pilaster` or `brackets` for visible half-timber studs in a lighter contrasting wood, and use `plinth` and `quoins` on the stone base."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "Balcony and telescope are tiny and unreadable (copper block and a plank shelf); round windows are not evident; the glowing window is a small glowstone patch.",
+     "fix": "Widen the balcony with `railing`, add a clear telescope (rod/copper segments on a post) via `fixtures`, and make a few small round-looking windows with `glazing` plus lantern-lit glow."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "Ivy is scattered unevenly and in places looks like floating noise; hanging lanterns dangle loosely; stray timber bits on the roof edge.",
+     "fix": "Use `planters`/ivy in deliberate vertical runs along corners, tuck lanterns under brackets, and clean the dormer-like stubs on the roof."
+    }
+   ]
+  }
+ },
+ {
+  "key": "wizard-tower",
+  "arm": "plugin",
+  "name": "Fantasy wizard tower",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 1.3,
+  "costUsd": 0.30463,
+  "turns": 13,
+  "durationMin": 1.2,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": true,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "Good wizard-tower silhouette and palette with a stone base, jettied timber floors and a verdigris cone, but the roof is a noisy speckled blob, the tower is squat/boxy rather than crooked and tall, and the balcony, telescope and round windows barely read.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Conical roof is a lumpy, stepped pyramid with random mixed copper/oxidised/dark-planks speckle; it reads as noisy, not a clean cone, and has no lean or flare.",
+     "fix": "Rebuild with `mcd roof --preset tower-cap` using a restrained two-tone roof palette (weathered copper with a few dark accents in courses), then add a finial brush at the tip."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Major",
+     "problem": "Body is a square box with a heavy roof on top; the brief's tall, crooked, jettied tower isn't conveyed. The base is wide and stumpy, and the sides show no taper or offset floors.",
+     "fix": "Offset each timber storey 1 block in a different direction for the crooked look, narrow the upper floors, and raise the shaft towards 30 tall; use plinth and cornice brushes to separate storeys."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "Balcony with telescope is just a tiny brown block at the side; small round windows are not visible; ivy is only faint moss on the stone base.",
+     "fix": "Add a railing brush balcony ring on the upper floor with a clear telescope prop, use glazing for small round windows on the plaster band, and add planters or leaf ivy trailing up the stone and timber."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Minor",
+     "problem": "Timber floors are heavy dark bands with white plaster gaps; the upper floors look chunky and the stone base is flat and ragged on the near corner.",
+     "fix": "Add brackets under the jetty, quoins on the stone corners, and surround on windows to give clearer structure."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "Base has ragged stepped stone cut-outs and the lanterns are tiny, with a lone door that is hard to see; the glowing window is only a small orange patch.",
+     "fix": "Square off the base with a plinth brush, enlarge the door with a surround, and use fixtures to add larger lanterns and a brighter glowing window."
+    }
+   ]
+  }
+ },
+ {
+  "key": "glass-cafe",
+  "arm": "stock",
+  "name": "Modern glass café",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 0.5,
+  "costUsd": 0.10426360000000001,
+  "turns": 3,
+  "durationMin": 0.4,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Poor",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "It's a tidy glass-and-black-frame box with a flat roof, but it reads as a plain lid-topped shoebox. There's no visible cantilever or timber soffit, and the terrace, tables, planters and neon sign the brief asked for are missing or unreadable.",
+   "issues": [
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "No readable neon sign, and no outdoor terrace with tables. Only a couple of tiny planters sit at the facade ends, and the interior furniture is barely visible.",
+     "fix": "Add a B.sign or signboard brush above the door with a bright glowing palette. Extend a plinth-material terrace 3-4 deep in front, then place tables with the fixtures brush and planters with the planters brush, plus a railing."
+    },
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "The flat roof is a pale slab with a toothed white rim. It reads as a lid, with no real cantilever overhang and no timber soffit underneath. The six green skylight squares look like noise.",
+     "fix": "Run mcd roof --preset cafe (or modern) with a 2-block overhang beyond the glass. Use a spruce or oak soffit palette underneath, replace the toothed edge with a slim coping, and cut the skylights to a few aligned strips."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Major",
+     "problem": "A plain rectangular box with no cantilever shadow line, no entrance recess and no terrace footprint. All four sides look nearly the same, so the glass-on-two-sides idea is lost.",
+     "fix": "Make the front and one side fully glazed with a deeper overhang. Make the back and the other side solid or lightly glazed. Add a recessed entrance bay and a terrace slab to break up the box."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Minor",
+     "problem": "The thick black pillars alternate with small gridded panes, so it reads as a black wall with windows rather than slim steel with floor-to-ceiling glass. The dark base alternates black and white like a checkerboard.",
+     "fix": "Use the glazing brush for wide panes with thin mullions and cut the black piers to one block. Use the plinth brush for a continuous concrete plinth instead of the checker pattern."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "The glass is cluttered with a lot of grid lines, and the interior shows through confusingly. The back elevation has stray props, such as a floating red block.",
+     "fix": "Remove the stray blocks and simplify the glazing grid. Tidy the interior so only a counter and a few tables show."
+    }
+   ]
+  }
+ },
+ {
+  "key": "glass-cafe",
+  "arm": "described",
+  "name": "Modern glass café",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 1.4,
+  "costUsd": 0.211655,
+  "turns": 4,
+  "durationMin": 1.4,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "The cantilevered flat roof, timber soffit and CAFE sign are the right ideas, but the black roof slab and giant black sign slab swamp the little glass box below, so it reads as a lid with a billboard rather than a glazed café.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof is a thick, near-black slab that dominates the building and hides the glass box. From street view it reads as a heavy hat or lid. The roof tiles are dark on dark with a black rim.",
+     "fix": "Thin the roof to one slab plus a slim coping edge. Use `mcd roof --preset cafe` or `modern` with a lighter roof palette (light grey or concrete). Keep the timber soffit visible under the overhang."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The neon sign is a huge black wall standing on the roof. Its text only shows on the back face, and the front and sides are blank black. From the street it reads as a blank slab, not a sign.",
+     "fix": "Rebuild it with B.sign or the signboard brush as a smaller, lit panel. Put the lettering on the street-facing front. Use a magenta frame with glowing letters and cut the black backing down to a thin panel."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "The glazing is hard to read. From the street the walls look like white/grey panels between thick black bars, not floor-to-ceiling glass. The back wall is mostly solid black with small windows. The walls also look slanted in the street view.",
+     "fix": "Use the glazing brush to put clear glass between slim dark mullions on the two street-facing sides. Keep the walls vertical. Use the pilaster brush for slim posts instead of wide black bars."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Minor",
+     "problem": "The roof overhang is large relative to the low body. The sign is too tall and out of proportion. The cantilever does not clearly rest on any supports.",
+     "fix": "Cut the overhang to 1–2 blocks. Lower the sign. Add a slim steel post or corner column under the cantilever."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "The terrace is sparse. Planters and tables are tiny and lost against the dark base. The plinth is not clearly read.",
+     "fix": "Use the planters and railing brushes along the terrace edge. Add the plinth brush in light concrete. Add a few more tables and seats."
+    }
+   ]
+  }
+ },
+ {
+  "key": "glass-cafe",
+  "arm": "sized",
+  "name": "Modern glass café",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 0.6,
+  "costUsd": 0.1134616,
+  "turns": 2,
+  "durationMin": 0.5,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Poor",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "The cantilevered flat roof and terrace read as a modern café, but the glazing is mostly missing, the back and side walls are blank grey, and the roof is a heavy grey lid with the sign sitting on top.",
+   "issues": [
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "The brief asks for floor-to-ceiling glass on two sides, but the front has only small dark-framed windows in a black wall. The back is a blank grey slab with no openings, and the side wall is plain.",
+     "fix": "Run the glazing brush across the full wall height on the front and the left side, using thin dark mullions between panes. Keep solid wall only on the back, and add a few openings or louvres there."
+    },
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "The roof is a flat grey quartz-like slab with a very thick black fascia. It reads as a heavy lid with no edge detail. The brief's timber soffit is only a thin band.",
+     "fix": "Use mcd roof --preset cafe or modern with a slim coping or cornice. Thin the black fascia to one course, and make the timber soffit visible underneath."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The neon sign sits on the roof as a row of glass and orange blocks. It reads as a roof-edge strip, and it is hidden from the street. The back view shows it too.",
+     "fix": "Use B.sign or the signboard brush on the front fascia, at eye level, with text or a bold shape in glowstone and a dark backing. Remove the rooftop strip."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Minor",
+     "problem": "The roof's black cantilever and corner columns are bulky, and the enclosed box behind is small and set back, so the building reads as a car-port. The grey plinth is thin at the back.",
+     "fix": "Enlarge the enclosed volume toward the sides, thin the columns to 1×1 steel posts, and extend the plinth with the plinth brush."
+    },
+    {
+     "aspect": "Palette",
+     "severity": "Minor",
+     "problem": "Black, grey and orange are flat and heavy. The black walls hide the glass character, and the back wall is a pale grey that clashes.",
+     "fix": "Use mcd paint to lighten the walls to concrete or white, keep the dark steel for frames only, and keep the timber for the soffit."
+    }
+   ]
+  }
+ },
+ {
+  "key": "glass-cafe",
+  "arm": "plain",
+  "name": "Modern glass café",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 0.6,
+  "costUsd": 0.1343066,
+  "turns": 4,
+  "durationMin": 0.6,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "A cafe with a decent glazed front and terrace, but the huge, thick, featureless blackstone slab roof sits like a lid on thin glass and dominates the whole build.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof is a thick, heavy slab of dark cobbled blackstone, about 3 blocks deep with a stone band under it. It reads as a lid, not a slim cantilevered flat roof, and it hides the interior from above.",
+     "fix": "Rebuild with `mcd roof --preset modern` or `cafe`: a thin one-block slab in a smooth dark material, plus `coping` on the edge. Keep the timber soffit and drop the stacked stone band."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Major",
+     "problem": "The roof is about as tall as the glazed storey, so the proportions are top-heavy. The side and back walls are tall blank blackstone brick, not glass on two sides.",
+     "fix": "Cut the roof to 1 block of fascia. Replace the left or right side wall with `glazing` and slim frame posts, keeping brick only on the back."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "No neon-style sign is visible. There is only a small orange block patch at the front right that reads as a stray ore or lava block.",
+     "fix": "Add a `signboard` or `B.sign` above the door, or a `plaque` on the fascia, in a bright glowing accent such as sea lantern or glowstone lettering."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Minor",
+     "problem": "The glass is thin and cluttered. The steel frame is sparse and uneven, with black pillars of mixed width and an open gap at the right of the back wall.",
+     "fix": "Use the `glazing` brush with a regular 1-wide dark mullion rhythm, and close the back-right corner with a matching wall or pillar."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "The plinth has stray stair bits and broken steps at the front edge, and the planters and tables are scattered unevenly.",
+     "fix": "Tidy the plinth edge with the `plinth` brush. Use `planters` to line the terrace evenly and align the tables."
+    }
+   ]
+  }
+ },
+ {
+  "key": "glass-cafe",
+  "arm": "plugin",
+  "name": "Modern glass café",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 1,
+  "costUsd": 0.2630962,
+  "turns": 14,
+  "durationMin": 1,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": true,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "The terrace, planters and plinth are charming, but a huge black slab roof swallows the café, with a blank black back wall and glass that barely reads, so it looks like a dark box under a lid rather than a light modern glass café.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof is a thick, tall black slab with a raised parapet rim; it reads as a heavy lid or tray. The cantilever is barely visible and the timber soffit shows only as a thin band on the side.",
+     "fix": "Re-run `mcd roof --preset modern` or `cafe` with a thinner one-block slab and a lighter palette (light concrete or slate), no raised rim, and a wider overhang on the glass sides. Use the `cornice` or `coping` brush to edge it, and put timber on the underside."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "Back elevation is a blank, flat black wall with no windows, frame or detail. The sides that should be glass look solid black from most angles.",
+     "fix": "Use the `glazing` brush for floor-to-ceiling panes on the two brief sides, with `pilaster` brushes as slim mullions. Give the back wall a door, a few windows or `louvres`, and use a lighter wall tone."
+    },
+    {
+     "aspect": "Palette",
+     "severity": "Major",
+     "problem": "Near-black walls, black roof and black frame merge into one dark mass, so the 'slim dark steel frame' has no contrast to read against. The glass looks dull and grey.",
+     "fix": "Keep dark only for the frame and use `mcd paint` to make the wall infill light concrete or glass. Use a lighter roof palette so the dark mullions stand out."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Minor",
+     "problem": "The neon-style sign is a small orange block and a brown patch near the door. It doesn't read as a sign.",
+     "fix": "Use the `signboard` or `plaque` brush with B.sign for a clear sign above the entrance, using glowstone or sea-lantern text on a dark panel."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Minor",
+     "problem": "The building is a low box set back under the oversized roof, so the volume feels squat and the terrace is crowded with a row of identical planters.",
+     "fix": "Raise the walls to the full 4 blocks of glass, thin the roof, and use the `planters` and `railing` brushes to space and vary the terrace edge."
+    }
+   ]
+  }
+ },
+ {
+  "key": "red-barn",
+  "arm": "stock",
+  "name": "Farm barn",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 0.5,
+  "costUsd": 0.1120268,
+  "turns": 2,
+  "durationMin": 0.4,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Fair",
+   "elements": "Poor",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "A red box with a plain dark-oak gable lid, not a gambrel, and the cupola, hay loft door and hoist, X-braced doors and hay bales all missing or unreadable, so it reads as a generic shed instead of a barn.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof is a single-pitch gable of stacked stair rows that reads as a lid. There is no gambrel break, and the gable end shows a stepped silhouette that doesn't match the roof.",
+     "fix": "Rebuild with `mcd roof --preset barn` for the two-slope gambrel, with a small overhang and a ridge or coping line. Match the gable-end infill to the slope."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "Cupola with weather vane is absent and the ridge is bare. The hay loft door and hoist beam are missing too (only a tiny dark slit and a window hole in the gable).",
+     "fix": "Add a cupola on the ridge with a small roof and a finial for the vane. Put a loft door in the gable with a surround, and add a projecting beam with a fence hook (brackets, fixtures) above it."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The big double doors are muddled. The white trim is fat grey slabs and the door leaves are a striped brown/white jumble, so there is no clear X-brace.",
+     "fix": "Use two clean wide door leaves of dark oak with a white surround (surround brush). Make the X-bracing from diagonal white blocks across each leaf, or use `mcd paint` to correct the trim."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "The long side walls are flat red with sparse white slits that look like holes. The back wall is a blank red expanse with one grey patch, and there is no corner or trim detail.",
+     "fix": "Add white corner and vertical battens (pilaster, quoins), a cornice under the eaves, and proper glazing in the side windows. Add a back door surround and a loft hatch."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Minor",
+     "problem": "Hay bales are barely visible, and the fence is a sparse line of lone posts floating at the front and side.",
+     "fix": "Stack hay bales by the doors, and use a continuous railing brush for the fence with rails between the posts."
+    }
+   ]
+  }
+ },
+ {
+  "key": "red-barn",
+  "arm": "described",
+  "name": "Farm barn",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 1.9,
+  "costUsd": 0.24930400000000003,
+  "turns": 2,
+  "durationMin": 1.9,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "It has the right barn ingredients (red walls, cupola, hoist, hay, fence), but the heavy black stepped roof reads as a lid, and the white-and-red checker doors don't read as X-braced sliding doors.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "The roof is a thick black stepped slab that swallows the building. It has no clear gambrel break, so it reads as a lid. The eaves overhang is blocky, and the gable end is a stepped red stair-shape that looks like a dome rather than a gambrel.",
+     "fix": "Rebuild with `mcd roof --preset barn` to get the steep-lower, shallow-upper gambrel. Use a dark red or weathered roof palette instead of near-black, and keep the overhang to one block."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The big sliding doors on the front are a white wall with red checker diamonds. They don't read as doors, there is no X-brace, and the trim isn't visible. The doors look like a quilt pattern.",
+     "fix": "Use `surround` to make two large red door leaves, about 4 wide by 6 tall. Frame them in white trim with `pilaster` posts and a lintel, then add diagonal white X-bracing and a center split. Drop the checker pattern."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "The gable-end face is split into mismatched zones: pale grey corner strips, dark red upper triangle, and light red lower area, with a diagonal shadow band across it. The side walls are plain red with a few tiny slits, and the back wall is blank apart from two windows.",
+     "fix": "Make the gable one consistent red. Add white corner trim with `quoins`, a white `cornice` along the eaves, and a few `glazing` or `louvres` openings. Space window bays along the long sides."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Minor",
+     "problem": "The hay loft door and hoist beam are tiny dark-wood bits under the eave, partly hidden by the roof overhang. The hoist hangs a white block on a chain, which reads as odd.",
+     "fix": "Move the loft door higher and make it larger, with white trim from `surround`. Extend the hoist beam out past the eave with `brackets`, and hang a hook or dark block instead of the white one."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "The cupola and vane are small and spindly. The foundation is a thin grey strip, and the hay bales and fence are sparse and scattered.",
+     "fix": "Enlarge the cupola slightly and use a `finial` for the vane. Raise the stone foundation to 2 blocks with `plinth`. Cluster the hay bales by the doors and loft."
+    }
+   ]
+  }
+ },
+ {
+  "key": "red-barn",
+  "arm": "sized",
+  "name": "Farm barn",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 1.2,
+  "costUsd": 0.1774734,
+  "turns": 2,
+  "durationMin": 1.2,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "It's a recognisable red barn with a good palette, but the roof is a stepped slab with no real gambrel break, the doors and X-bracing are missing from the long walls, and the cupola reads as a floating frame.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof is a uniform stepped staircase of dark stone brick, one slope with no gambrel break (steep lower, shallow upper). It reads as a lid, with no overhang or eave.",
+     "fix": "Rebuild with `mcd roof --preset barn` using a red or dark-wood roof palette. Keep the steep lower pitch and shallow upper pitch, and add an eave overhang plus a cornice or coping at the gable edge."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The big sliding double doors with white X-braced trim are not readable. The gable end has only a white panel with red diamond shapes. The long side walls are plain red with a few white slivers, and the back wall is a blank red expanse.",
+     "fix": "Put a large door pair on the gable end, 4–5 wide and 4 tall, framed by white trim. Add diagonal X-braces with the `surround` and `pilaster` brushes, or use `mcd paint` for the white X lines. Add door-like bays on the long side."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "The back elevation is a huge flat red wall with no windows, trim or relief. The long side walls are flat as well, with no corner trim or horizontal banding.",
+     "fix": "Add louvres or small glazing windows, a `plinth` and `cornice` line, and white `quoins` at the corners. Add a hay-door or vent on the back gable."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Minor",
+     "problem": "The cupola is a tiny white U-frame on the ridge with a thin rod. It reads as a broken chimney, not a cupola with a weather vane. The hay-loft hoist is a lone dark block.",
+     "fix": "Build a proper cupola: a 3x3 white box with louvres and its own small roof, topped with a `finial` as the vane. Make the loft door a clear opening with a projecting beam, using `brackets` or `fixtures`."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "The foundation reads as a thin gray strip, partly hidden. Hay bales and fence are small and cluster only at the front corners.",
+     "fix": "Raise the stone foundation by one course. Extend the fence along the front and add a few more hay bales."
+    }
+   ]
+  }
+ },
+ {
+  "key": "red-barn",
+  "arm": "plain",
+  "name": "Farm barn",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 1,
+  "costUsd": 0.1752104,
+  "turns": 4,
+  "durationMin": 1,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Good",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "A readable barn box with a stepped gambrel profile and a red/white checker gable, but the roof is a dark slab with no real gambrel break, the long walls are flat red with gaps, and the barn doors, loft hoist and cupola are weak.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof is a heavy dark-grey slab of deepslate brick that reads as a lid. The gambrel is only a stepped curve at the gable ends, with no steep-lower/shallow-upper break along the long sides, and there is no overhang.",
+     "fix": "Rebuild the roof with `mcd roof --preset barn` for a true gambrel with eaves. Use a red or weathered-wood roof palette, or a lighter grey, and add coping along the gable verge."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The sliding double doors read as a small single door in a red/white checkerboard. There are no big doors and no white X-bracing. The loft door is a tiny hay block and the hoist beam is a lone dark log stub.",
+     "fix": "Frame a 4-wide, 4-tall double-door opening with the surround brush in white. Add an X brace with the brackets brush or white blocks. Put a proper loft door above it, with a projecting beam and a fixture (the fixtures brush) for the hoist."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "The long side walls are flat red slabs with white gaps and holes under the roof, and the back elevation is a blank red wall. The gable checker pattern is noisy and doesn't read as barn trim.",
+     "fix": "Add white corner and edge trim with the quoins and pilaster brushes. Use the glazing brush for small windows. Run a plinth and cornice line along the sides. Replace the checker with plain red boards plus white X-trim."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Minor",
+     "problem": "The cupola is small and sits on top of the roof, with no louvres. The weather vane is a thin stick. The hay bales and fence are scattered at the corners and look like noise.",
+     "fix": "Enlarge the cupola with the louvres brush and a small pitched cap. Use the finial brush for the vane. Group the hay bales by the doors and run a continuous fence."
+    },
+    {
+     "aspect": "Palette",
+     "severity": "Minor",
+     "problem": "Red, white and near-black are high contrast, and the black roof is too heavy. The stone foundation is fine but thin.",
+     "fix": "Lighten the roof with a `mcd paint` roof palette change, and keep the foundation as a cobble plinth."
+    }
+   ]
+  }
+ },
+ {
+  "key": "red-barn",
+  "arm": "plugin",
+  "name": "Farm barn",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 2.1,
+  "costUsd": 0.39284379999999997,
+  "turns": 11,
+  "durationMin": 2.1,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": true,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "It has a good barn palette and props, but the roof is a flat-dark lid with a stepped, castle-like crenellated gable and a squashed cupola, and the red/white checkerboard front reads as a circus tent rather than X-braced barn doors.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof is a uniform dark slab with no gambrel break, no overhang, and the stepped white gable edge looks like castle battlements, not a barn gambrel.",
+     "fix": "Rebuild with `mcd roof --preset barn` (true gambrel, steep lower and shallow upper slope, eave overhang), with a varied roof palette; drop the crenellated white step trim and use plain trim or coping along the verge."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "Front door area is a red/white checkerboard filling the whole gable, so it reads as a circus tent. There are no clear sliding doors or X-bracing.",
+     "fix": "Make the gable plain red. Set a big double-door recess with white trim frame and diagonal X braces using `surround` and `brackets` or white stair/slab lines. Add plank door panels."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "Back elevation is a blank red wall, and the long side walls have only tiny scattered white holes with no rhythm.",
+     "fix": "Add `pilaster` or `quoins` bays, `glazing` windows at regular spacing, a small loft hatch on the back, and a `plinth` or `cornice` band so the walls have depth."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Minor",
+     "problem": "Cupola is a tiny, squashed block with a flat battlement-like cap. The weather vane is barely visible. The hoist beam is an oversized cross-shaped timber that hides the loft door.",
+     "fix": "Rebuild the cupola with `mcd roof --preset lantern-cap` on a slightly wider base, add a `finial` as the vane, and shorten the hoist beam to a small projecting arm over a clear loft door."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "The foundation is correct but flat. The fence is sparse and thin, and the hay is scattered unevenly.",
+     "fix": "Add a `plinth` course and `planters` or hay clusters by the door. Run the fence in a continuous line with a gate by the path."
+    }
+   ]
+  }
+ },
+ {
+  "key": "steampunk-workshop",
+  "arm": "stock",
+  "name": "Steampunk workshop",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 0.9,
+  "costUsd": 0.15078399999999997,
+  "turns": 2,
+  "durationMin": 0.9,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Fair",
+   "elements": "Poor",
+   "finish": "Poor",
+   "palette": "Fair",
+   "summary": "A brick box with a plain striped gable roof full of gaps, so it reads as an unfinished shed rather than a steampunk workshop: no sawtooth, no gear window, no crane, no pipes.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof is separate copper/green stripes with open gaps between rows, so you can see into the building. It reads as a skeleton or lid, not a sawtooth or curved roof with skylights.",
+     "fix": "Rebuild with `mcd roof --preset workshop` so the roof is solid. Then add a sawtooth rhythm with glazing skylight rows (glazing brush) on the vertical faces, using one copper-to-oxidised palette."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The big gear-shaped round window is missing. The gable has only a small square glass pane. There is no crane on the loading door, and the pipes and valves are barely visible.",
+     "fix": "Use the glazing brush for a large round window in the gable, with a surround. Add a crane arm over the loading door with brackets and a railing. Add pipe runs and valves with the fixtures brush on the long walls."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "Long walls are flat brick, with dark vertical slabs standing in for pilasters and no riveted copper. Windows are tiny and dull, and the back elevation is nearly blank.",
+     "fix": "Add copper panels with `mcd paint` and quoins or pilaster brushes in copper. Add surround and glazing to the windows. Put fixtures, pipes and louvres on the back wall."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Minor",
+     "problem": "Only one thin chimney, with a tiny cap. The brief asked for tall chimney stacks.",
+     "fix": "Add a second, thicker chimney with a chimney tool and a coping or cornice cap. Place the pair on the roof ridge."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "The dark vertical corner and wall strips look like holes. The brick base and plinth are plain. The gable stepping is ragged where the roof meets the wall.",
+     "fix": "Swap the dark strips for copper or oak pilasters. Add a plinth and cornice or coping so the roof edge sits cleanly on the gable."
+    }
+   ]
+  }
+ },
+ {
+  "key": "steampunk-workshop",
+  "arm": "described",
+  "name": "Steampunk workshop",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 1.7,
+  "costUsd": 0.2393946,
+  "turns": 4,
+  "durationMin": 1.6,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "A readable brick-and-copper workshop with two chimneys, a crane and a gear window, but the roof is a stepped copper-block lid, the gear window is a muddy blob of protruding blocks, and the walls are noisy on the front and flat behind.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Sawtooth roof is built from stacked full copper blocks in flat steps. It reads as a heavy stepped lid with no slope, no glazed faces, and only thin glass slits. No eave or overhang.",
+     "fix": "Rebuild with `mcd roof --preset workshop` (sawtooth). Use stair courses with a vertical glazed face on each tooth. Add a roof palette of oxidised copper stairs and slabs, and `cornice` or `coping` at the edges."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The gear-shaped round window on the front is a cluster of green and copper blocks sticking out at random. It reads as noise, not a gear or a window, and the glass is barely visible.",
+     "fix": "Rebuild it as a clean circle about 7 wide with a dark glass centre. Use `glazing` for the pane and `surround` for a copper rim. Add a small hub and spoke pattern flush to the wall, with no random protrusions."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "The front face is cluttered with scattered protruding copper blocks and diagonal grey stripes, which look like damage. The back wall is a flat brick panel with diagonal grey dashes and a dark band, and no windows or pipes.",
+     "fix": "Remove the stray protrusions. Add `pilaster` or `quoins` bays and `plinth` and `cornice` bands. Put `louvres` or `glazing` windows in the bays. Run vertical pipes with `fixtures` and `brackets`."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Minor",
+     "problem": "The crane and loading door are thin and tucked into the corner. The door is hard to read, and the crane arm floats beside the roof.",
+     "fix": "Make the loading door wider with a `surround` and a lintel. Thicken the crane mast with `brackets` and anchor the arm to the wall above the door."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Minor",
+     "problem": "The body is a plain box. The chimneys are good, but the green caps on the stacks match the roof too closely and look like toy blocks.",
+     "fix": "Add a small side annex or a step in the footprint. Cap the chimneys with `coping` in dark stone or a `finial`."
+    }
+   ]
+  }
+ },
+ {
+  "key": "steampunk-workshop",
+  "arm": "sized",
+  "name": "Steampunk workshop",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 1.2,
+  "costUsd": 0.17833780000000002,
+  "turns": 2,
+  "durationMin": 1.1,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Fair",
+   "elements": "Poor",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "A copper-and-brick box with a good palette, but the roof is a stepped verdigris lid with no sawtooth or curve, there are no tall chimney stacks, and the gear window is a scatter of white blocks, so it doesn't read as a steampunk workshop.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof is a flat stepped slab of oxidized copper that reads as a lid. There is no sawtooth or curved profile, and the skylights are tiny glass slots lost in the green.",
+     "fix": "Rebuild with `mcd roof --preset workshop` for a sawtooth profile with a glazed vertical face on each tooth. Use a roof palette of copper and verdigris, and add skylight dormers."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The gear-shaped round window on the front is a ragged cluster of white blocks and glass with holes, so it doesn't read as a gear. The white frame around the door also looks like a stray bracket.",
+     "fix": "Redo it as a clean circular ring with 8 teeth, using the glazing and surround brushes. Fill it with glass and iron-bar spokes, and re-trim the door frame in copper rather than white."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "There are no tall chimney stacks. Only two tiny brick fire pits sit on the roof. The crane over the loading door is barely visible, just a chain and a barrel.",
+     "fix": "Add 2–3 chimneys that rise 5+ blocks above the roof, with a brick shaft and a coping cap. Add a projecting crane arm with a hanging hook using the brackets and fixtures brushes."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Minor",
+     "problem": "The side and back walls are a flat grid of brick panels and copper bands with almost no depth. Pipes and valves exist only as thin strips on the left edge.",
+     "fix": "Add pilaster and quoins bays, and run pipes with valve fixtures across the walls with brackets. Add a cornice below the roof."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Minor",
+     "problem": "The build is a single plain box with no variation in the footprint or skyline, so it reads as a crate on a plinth.",
+     "fix": "Add a lean-to loading bay or a stepped annex on one side. Use the plinth brush for a heavier base."
+    }
+   ]
+  }
+ },
+ {
+  "key": "steampunk-workshop",
+  "arm": "plain",
+  "name": "Steampunk workshop",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 1,
+  "costUsd": 0.17843560000000003,
+  "turns": 4,
+  "durationMin": 1,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": false,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "A brick-and-copper box with a good steampunk palette, but the roof is a flat patchwork lid with holey glass, the gear window is missing, and the chimneys are stubby cubes.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "The roof reads as a flat, lumpy copper lid with checkerboard glass holes and no clear sawtooth or curved profile. The skylights look like gaps, not glazing.",
+     "fix": "Rebuild the roof with `mcd roof --preset workshop`, which gives a sawtooth profile. Use a copper roof palette and put the glazing on the vertical faces of the teeth so they read as skylights. Add a coping or cornice brush at the edge."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "There is no big gear-shaped round window. The front gable has only scattered glass squares, and the crane over the loading door is just a dark wood T-blob.",
+     "fix": "Use the glazing and surround brushes to build a 7-9 block round window with spokes on the front gable. Build the crane as a clear boom with a bracket brush and a hanging chain or lantern, projecting over the door."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The chimneys are short blackstone-capped brick cubes sitting in the roof. They don't read as tall stacks. The pipes and valves on the walls are missing, apart from a few lanterns.",
+     "fix": "Raise the chimneys to 5-6 blocks above the roof with a narrower shaft and a finial or coping cap. Use the fixtures brush for vertical pipe runs and valves on the walls."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "The front is chaotic. Copper patches are scattered at random across the brick, and the door area is ragged with ill-fitting window gaps. The side walls are repetitive brick-and-stone frames, and the back wall is a big flat brick sheet.",
+     "fix": "Apply the pilaster and quoins brushes to give a regular bay rhythm. Frame the loading door with a surround brush. Place riveted copper bands in a deliberate pattern, and add pipes and fixtures to the back wall."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "The roofline is jagged, with random copper steps, floating glass strips and stray blocks on the parapet. The stone plinth is plain.",
+     "fix": "Run a continuous cornice or coping around the parapet and clean up the stray blocks. Add a plinth brush for a stronger base."
+    }
+   ]
+  }
+ },
+ {
+  "key": "steampunk-workshop",
+  "arm": "plugin",
+  "name": "Steampunk workshop",
+  "exit": 0,
+  "stderr": "",
+  "minutes": 1.5,
+  "costUsd": 0.3301246,
+  "turns": 14,
+  "durationMin": 1.4,
+  "subtype": "success",
+  "isError": false,
+  "skillUsed": true,
+  "nbt": true,
+  "verdict": {
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Poor",
+   "elements": "Poor",
+   "finish": "Poor",
+   "palette": "Fair",
+   "summary": "It's a plain brick box with a flat green-copper lid, and the walls are riddled with holes and copper blocks scattered at random, so none of the steampunk workshop features (gear window, sawtooth roof, crane, pipes) read at a glance.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Flat oxidized-copper slab with a skylight strip reads as a lid, not a sawtooth or curved roof. Chimneys are short squat stubs.",
+     "fix": "Rebuild with `mcd roof --preset workshop` for a sawtooth profile, with glazed skylight faces on the steep sides. Add a copper roof palette and taller chimney stacks with a cornice or coping cap."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "Walls have see-through gaps and ragged copper patches and stripes in no order. The back elevation is a blank brick sheet with floating copper slabs on the sides.",
+     "fix": "Fill the shell solid brick. Use the pilaster and quoins brushes for regular copper-clad piers and bands, then add a plinth and cornice. Put real windows into the back wall with the glazing brush."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "No gear-shaped round window, no readable pipes or valves, and the crane over the loading door is only a dark beam and a lantern.",
+     "fix": "Use the surround and glazing brushes to make a large circular gear window above the door. Add a run of vertical and horizontal pipes with the fixtures brush, and use brackets and railing to build a projecting crane arm with a chain over the loading door."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Major",
+     "problem": "Floating copper blocks overhang the side edges, the street view shows holes, and there is stray debris at the base.",
+     "fix": "Delete the floating copper slabs. Seal the gaps and make copper trim sit flush on the walls as framed bands."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Minor",
+     "problem": "Simple rectangular box with no step, lean-to or annex, so the footprint reads dull.",
+     "fix": "Add a lower side annex or a stepped front bay, and put the chimneys on the roof ridge line."
+    }
+   ]
+  }
+ }
+]

@@ -1,0 +1,57 @@
+{
+ "key": "steampunk-workshop",
+ "arm": "stock",
+ "name": "Steampunk workshop",
+ "exit": 0,
+ "stderr": "",
+ "minutes": 0.9,
+ "costUsd": 0.15078399999999997,
+ "turns": 2,
+ "durationMin": 0.9,
+ "subtype": "success",
+ "isError": false,
+ "skillUsed": false,
+ "nbt": true,
+ "verdict": {
+  "usability": "NeedsWork",
+  "massing": "Fair",
+  "roof": "Poor",
+  "facades": "Fair",
+  "elements": "Poor",
+  "finish": "Poor",
+  "palette": "Fair",
+  "summary": "A brick box with a plain striped gable roof full of gaps, so it reads as an unfinished shed rather than a steampunk workshop: no sawtooth, no gear window, no crane, no pipes.",
+  "issues": [
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "Roof is separate copper/green stripes with open gaps between rows, so you can see into the building. It reads as a skeleton or lid, not a sawtooth or curved roof with skylights.",
+    "fix": "Rebuild with `mcd roof --preset workshop` so the roof is solid. Then add a sawtooth rhythm with glazing skylight rows (glazing brush) on the vertical faces, using one copper-to-oxidised palette."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "The big gear-shaped round window is missing. The gable has only a small square glass pane. There is no crane on the loading door, and the pipes and valves are barely visible.",
+    "fix": "Use the glazing brush for a large round window in the gable, with a surround. Add a crane arm over the loading door with brackets and a railing. Add pipe runs and valves with the fixtures brush on the long walls."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Major",
+    "problem": "Long walls are flat brick, with dark vertical slabs standing in for pilasters and no riveted copper. Windows are tiny and dull, and the back elevation is nearly blank.",
+    "fix": "Add copper panels with `mcd paint` and quoins or pilaster brushes in copper. Add surround and glazing to the windows. Put fixtures, pipes and louvres on the back wall."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Minor",
+    "problem": "Only one thin chimney, with a tiny cap. The brief asked for tall chimney stacks.",
+    "fix": "Add a second, thicker chimney with a chimney tool and a coping or cornice cap. Place the pair on the roof ridge."
+   },
+   {
+    "aspect": "Finish",
+    "severity": "Minor",
+    "problem": "The dark vertical corner and wall strips look like holes. The brick base and plinth are plain. The gable stepping is ragged where the roof meets the wall.",
+    "fix": "Swap the dark strips for copper or oak pilasters. Add a plinth and cornice or coping so the roof edge sits cleanly on the gable."
+   }
+  ]
+ }
+}

@@ -1,0 +1,63 @@
+{
+ "key": "tea-house",
+ "arm": "plugin",
+ "name": "Japanese tea house",
+ "exit": 0,
+ "stderr": "",
+ "minutes": 1.4,
+ "costUsd": 0.3187928,
+ "turns": 12,
+ "durationMin": 1.4,
+ "subtype": "success",
+ "isError": false,
+ "skillUsed": true,
+ "nbt": true,
+ "judgeFiles": [
+  "card-sheet.png",
+  "card-tiles",
+  "card.png",
+  "ledger.jsonl"
+ ],
+ "verdict": {
+  "usability": "NeedsWork",
+  "massing": "Fair",
+  "roof": "Fair",
+  "facades": "Fair",
+  "elements": "Fair",
+  "finish": "Fair",
+  "palette": "Good",
+  "summary": "A dark, Japanese-feeling tea house with a good palette and a stepped tiered roof, but the roof is a heavy lid that swallows the walls, the paper screens barely read, and the garden props are too small to notice.",
+  "issues": [
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "Roof is a huge flat-topped stepped slab that covers most of the building height and hides the walls. The eaves are only small corner nubs, so there are no curved or upturned eaves, and the gable is missing.",
+    "fix": "Rebuild the roof with `mcd roof --preset teahouse`. Keep a hipped lower tier with a smaller gabled upper ridge, and make the eave corners flick up. Reduce the roof height so the walls get more of the 9-block height."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Major",
+    "problem": "The sliding paper-screen walls don't read. The walls are dark wood with only a few thin white slits, and the sides are almost solid timber. Wall height is squat under the roof.",
+    "fix": "Use the glazing brush to fill the wall bays with white panels (white stained glass or paper) in a grid of dark timber frames. Add a surround or brackets to each bay, and keep the panels continuous along the front and sides."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "The engawa veranda, the stone lantern and the maple are hard to spot. The porch is hidden under the roof, the lantern is tiny, and the maple is just green leaf cubes with no red or orange. The log pillar at the right corner looks stray.",
+    "fix": "Add a railing brush along a raised, projecting engawa deck. Place a taller stone lantern (stone wall, lantern on top, finial) by the path. Build a proper maple with a trunk and a round red or orange leaf canopy. Delete or re-place the stray log post."
+   },
+   {
+    "aspect": "Massing",
+    "severity": "Minor",
+    "problem": "The footprint is a plain box on a flat plot. The stone footings are low and the raised-floor effect is weak. The stepping stones are not clear.",
+    "fix": "Raise the floor on a plinth of stone footings, a block or two higher. Lay separate stepping-stone slabs in a curved path across the grass."
+   },
+   {
+    "aspect": "Finish",
+    "severity": "Minor",
+    "problem": "The roof is one flat dark tone, and the dormer is a lone log block with glass that looks odd. The back elevation is plain.",
+    "fix": "Remove the dormer, or turn it into a proper gable vent. Add a coping or cornice line at the eaves. Give the back wall the same screen bays."
+   }
+  ]
+ }
+}

@@ -1,0 +1,57 @@
+{
+ "key": "lighthouse",
+ "arm": "plugin",
+ "name": "Coastal lighthouse and keeper's cottage",
+ "exit": 0,
+ "stderr": "",
+ "minutes": 0.9,
+ "costUsd": 0.23747539999999998,
+ "turns": 11,
+ "durationMin": 0.9,
+ "subtype": "success",
+ "isError": false,
+ "skillUsed": true,
+ "nbt": true,
+ "verdict": {
+  "usability": "NeedsWork",
+  "massing": "Fair",
+  "roof": "Fair",
+  "facades": "Fair",
+  "elements": "Good",
+  "finish": "Fair",
+  "palette": "Good",
+  "summary": "The red-and-white striped tower with a gallery and lantern room reads as a lighthouse, but the tower is a square box rather than round, and the cottage is tiny and tacked on, so it needs work.",
+  "issues": [
+   {
+    "aspect": "Massing",
+    "severity": "Major",
+    "problem": "The tower is a square prism with flat faces and sharp corners. The brief asks for a round tower, and there is no taper.",
+    "fix": "Rebuild the shaft with a rounded or octagonal plan that narrows toward the top. Add a plinth brush at the base and a cornice or coping brush under the gallery."
+   },
+   {
+    "aspect": "Massing",
+    "severity": "Major",
+    "problem": "The keeper's cottage is tiny next to a 28-tall tower. It is stuck on one side and looks like a shed, with a mostly blank wall and a hidden door.",
+    "fix": "Widen and deepen the cottage so it fills the base. Add a door with a surround brush, glazing on the windows, and planters or fixtures. Seat it properly on the rock."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Major",
+    "problem": "The shaft is large, flat pale-grey walls with two red bands. The windows are ragged stone-grey patches with no glass and no depth. They read as damage.",
+    "fix": "Replace the patches with small framed windows using the glazing and surround brushes. Stagger them up the spiral of storeys. Add a door with a surround and some quoins or pilasters to break up the flat faces."
+   },
+   {
+    "aspect": "Roof",
+    "severity": "Minor",
+    "problem": "The lantern cap is a flat, dark, stepped slab with a hole in the top. It reads as a lid, not a conical or domed cap. The cottage roof is acceptable but plain.",
+    "fix": "Use `mcd roof --preset lantern-cap` or `tower-cap` for a pointed cap, and add a finial brush. Give the cottage a cottage preset roof with a clearer chimney."
+   },
+   {
+    "aspect": "Finish",
+    "severity": "Minor",
+    "problem": "The rocky base is noisy, with scattered moss blocks, stray stair bits and loose cubes sticking out. The lantern room glass is thin and hard to read.",
+    "fix": "Tidy the base into a cleaner rock apron with a consistent plinth. Put fuller glazing in the lantern room, and use a railing brush for a continuous gallery rail."
+   }
+  ]
+ }
+}

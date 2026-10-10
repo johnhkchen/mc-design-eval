@@ -206,3 +206,8 @@ benchmarks/sculpture/workshop/**/*.png
 # concept bake-off raw model outputs (composites in */sheet.png are committed)
 benchmarks/concept-builds/concept-bakeoff/*/*.jpg
 benchmarks/concept-builds/concept-bakeoff/*.jpg
+
+# Plugin baseline runs: keep runners, results, verdicts, briefs and .nbt; renders and transcripts are local-only
+benchmarks/plugin-baseline/runs/*/*/session.jsonl
+benchmarks/plugin-baseline/runs/*/*/judge/card-tiles/
+benchmarks/plugin-baseline/runs/*/*/judge/card.png

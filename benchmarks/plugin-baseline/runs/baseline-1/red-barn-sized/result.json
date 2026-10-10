@@ -1,0 +1,57 @@
+{
+ "key": "red-barn",
+ "arm": "sized",
+ "name": "Farm barn",
+ "exit": 0,
+ "stderr": "",
+ "minutes": 1.2,
+ "costUsd": 0.1774734,
+ "turns": 2,
+ "durationMin": 1.2,
+ "subtype": "success",
+ "isError": false,
+ "skillUsed": false,
+ "nbt": true,
+ "verdict": {
+  "usability": "NeedsWork",
+  "massing": "Fair",
+  "roof": "Fair",
+  "facades": "Fair",
+  "elements": "Fair",
+  "finish": "Fair",
+  "palette": "Good",
+  "summary": "It's a recognisable red barn with a good palette, but the roof is a stepped slab with no real gambrel break, the doors and X-bracing are missing from the long walls, and the cupola reads as a floating frame.",
+  "issues": [
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "Roof is a uniform stepped staircase of dark stone brick, one slope with no gambrel break (steep lower, shallow upper). It reads as a lid, with no overhang or eave.",
+    "fix": "Rebuild with `mcd roof --preset barn` using a red or dark-wood roof palette. Keep the steep lower pitch and shallow upper pitch, and add an eave overhang plus a cornice or coping at the gable edge."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "The big sliding double doors with white X-braced trim are not readable. The gable end has only a white panel with red diamond shapes. The long side walls are plain red with a few white slivers, and the back wall is a blank red expanse.",
+    "fix": "Put a large door pair on the gable end, 4–5 wide and 4 tall, framed by white trim. Add diagonal X-braces with the `surround` and `pilaster` brushes, or use `mcd paint` for the white X lines. Add door-like bays on the long side."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Major",
+    "problem": "The back elevation is a huge flat red wall with no windows, trim or relief. The long side walls are flat as well, with no corner trim or horizontal banding.",
+    "fix": "Add louvres or small glazing windows, a `plinth` and `cornice` line, and white `quoins` at the corners. Add a hay-door or vent on the back gable."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Minor",
+    "problem": "The cupola is a tiny white U-frame on the ridge with a thin rod. It reads as a broken chimney, not a cupola with a weather vane. The hay-loft hoist is a lone dark block.",
+    "fix": "Build a proper cupola: a 3x3 white box with louvres and its own small roof, topped with a `finial` as the vane. Make the loft door a clear opening with a projecting beam, using `brackets` or `fixtures`."
+   },
+   {
+    "aspect": "Finish",
+    "severity": "Minor",
+    "problem": "The foundation reads as a thin gray strip, partly hidden. Hay bales and fence are small and cluster only at the front corners.",
+    "fix": "Raise the stone foundation by one course. Extend the fence along the front and add a few more hay bales."
+   }
+  ]
+ }
+}

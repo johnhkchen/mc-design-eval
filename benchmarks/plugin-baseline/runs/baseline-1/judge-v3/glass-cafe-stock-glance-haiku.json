@@ -1,0 +1,49 @@
+{
+ "name": "glass-cafe-stock-glance-haiku",
+ "fn": "glance3",
+ "code": 0,
+ "verdict": {
+  "identity": "Generic",
+  "usability": "Rough",
+  "massing": "Good",
+  "roof": "Fair",
+  "facades": "Fair",
+  "elements": "Poor",
+  "finish": "Fair",
+  "palette": "Fair",
+  "summary": "A clean single-storey glass-fronted box with a flat roof that reads as a modern shop, but the café's defining features (neon sign, outdoor terrace, timber soffit) are missing, so it could be any modern retail unit.",
+  "issues": [
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "No neon-style sign anywhere on the fascia or roofline; the building has no café identity",
+    "fix": "Add a glowing sign band (e.g. light-blue or warm neon via glowstone/sea lantern lines or glass-pane lettering) on the front fascia above the glazing, set proud of the roof edge so it reads from the street."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "Outdoor terrace with tables and planters is absent; front is bare plinth and glass",
+    "fix": "Lay a raised terrace (stone-brick or smooth stone slab) 1-2 blocks out from the front glazing, with 3-4 fence/stair-block tables with seats and corner planters with flowers or leaves."
+   },
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "Cantilever underside is grey/stone, not timber; roof reads as a lid on a box",
+    "fix": "Clad the soffit (underside of the overhang along the front and sides) in spruce or oak slabs or planks, and extend the overhang 1-2 blocks past the wall line so the cantilever shows in shadow."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Major",
+    "problem": "Black wall panels dominate the sides and back, making large blank dark areas between glazing",
+    "fix": "Replace the wide black wall sections on the two glazed sides with full-height glass panels between thin dark steel mullions (iron bars or dark prismarine-style frame), keeping black only for the thin mullions and corners."
+   },
+   {
+    "aspect": "Roof",
+    "severity": "Minor",
+    "problem": "Six glowing teal squares on the roof read as lights or hatches, not skylights",
+    "fix": "Flush them with the roof surface as glass or light-blue stained glass panes, or remove them so the roof reads as a clean flat slab."
+   }
+  ]
+ },
+ "cost": 0.0012668999999999998
+}

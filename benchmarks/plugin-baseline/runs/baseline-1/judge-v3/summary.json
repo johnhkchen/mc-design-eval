@@ -1,0 +1,804 @@
+[
+ {
+  "name": "tea-house-stock-glance-haiku",
+  "fn": "glance3",
+  "code": 0,
+  "verdict": {
+   "identity": "Generic",
+   "usability": "Rough",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Fair",
+   "elements": "Poor",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "A tidy tiered timber pavilion on a stone plinth that reads as a generic pagoda or stepped pavilion, not a Japanese tea house: the roof is a stepped lid with no curved eaves, the walls have no white paper screens, and the garden elements are absent.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Hipped-and-gabled roof reads as a stepped ziggurat/lid; stair-stepped tiers, no deep overhang, no curved eaves",
+     "fix": "Replace the stacked stair tiers with a single hipped roof plane plus a gable, push the eaves out 2-3 blocks, and curve the eave corners with stair/slab steps so the roof edge lifts upward."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "Walls are dark timber with open holes; no white sliding paper-screen panels in dark frames",
+     "fix": "Fill the wall bays between the timber posts with white concrete or white wool panels set inside dark log/stripped-oak frames, and leave one panel set as a sliding track offset."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "No stone lantern, maple tree, or stepping stones; the torch posts stand in for the lantern",
+     "fix": "Add a stone lantern (stone brick base, stone slab, lantern) beside the walk, a stepping-stone path of stone-brick or andesite pads leading to the entry, and a maple tree (oak leaves in red/orange or a mangrove-style canopy) in the corner."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Minor",
+     "problem": "Engawa veranda is only a thin ledge at the base; reads as a step rather than a deck",
+     "fix": "Widen the veranda to a 2-block wooden deck around the front and sides with a railing of fences or stripped-log posts."
+    },
+    {
+     "aspect": "Palette",
+     "severity": "Minor",
+     "problem": "Monochrome dark brown and grey; no contrast to set off the timber",
+     "fix": "Introduce white screens and pale stone (white or light-gray plinth) so the building separates from the dark brown wood, and use a dark-gray roof tile block to pick up the tile language."
+    }
+   ]
+  },
+  "cost": 0.00115109
+ },
+ {
+  "name": "tea-house-stock-glance-sonnet",
+  "fn": "glance3",
+  "code": 0,
+  "verdict": {
+   "identity": "Generic",
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Poor",
+   "elements": "Poor",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "It reads as a dark-wood pavilion under a huge stepped pyramid roof, but the paper screens, engawa, curved eaves, lantern and maple that would make it a tea house are missing or too weak to see.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "The roof is a huge, tall stepped pyramid of solid dark planks that swallows the building. It reads as a lid or ziggurat, with no gable end and no upswept curved eaves.",
+     "fix": "Lower the roof pitch and make it a hipped-and-gabled form with a ridge. Add stair and slab edges that flick up at the corners for the eave curve, and use dark tile-like blocks such as deepslate or dark prismarine stairs instead of stacked plank steps."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "The walls are almost all dark with no white paper-screen panels. Only a few small white holes show, and they look like gaps. The sliding-shoji look is absent.",
+     "fix": "Fill the wall bays between dark timber posts with white panels (white stained glass, or white concrete or wool set back one block). Add a horizontal rail and a lower dark band so each bay reads as a screen."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The engawa veranda, stepping stones, stone lantern and maple are missing. The only props are two small lanterns on posts, and the entry is a single grey block.",
+     "fix": "Add a one-block-wide plank veranda with a low rail around the front. Lay stepping stones of stone slabs across the garden. Build a stone lantern from a cobblestone wall, a slab and a lantern or glowstone. Add a maple with a dark-oak trunk and red or orange leaf blobs."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Minor",
+     "problem": "The roof is about as tall as the walls and much wider than the body, so the proportions are top-heavy. The raised floor is a plain slab that looks like a podium rather than footings.",
+     "fix": "Shorten the roof to about 3 blocks and trim its overhang. Raise the floor on spaced stone-brick footing posts with a visible gap under the floorboards."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "The dark timber walls are low-contrast and muddy. The roof steps show noisy repeated stair notches and no trim.",
+     "fix": "Use a lighter timber such as spruce or stripped logs for posts and beams against the dark roof. Add a ridge cap and clean edge trim."
+    }
+   ]
+  },
+  "cost": 0.0145462
+ },
+ {
+  "name": "tea-house-plugin-glance-haiku",
+  "fn": "glance3",
+  "code": 0,
+  "verdict": {
+   "identity": "Recognisable",
+   "usability": "NeedsWork",
+   "massing": "Good",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Good",
+   "palette": "Good",
+   "summary": "A solid, well-proportioned timber house on stone footings with a dark tiled stepped roof, a stone lantern and a stepping-stone path, so it reads as a Japanese-style building, but the curved eaves are flat slabs and the paper-screen walls are too thin to read as the tea house's signature, and the maple is missing.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Hipped-and-gabled roof reads as a stacked lid; eaves are flat slabs with only small corner tips, not curved eaves",
+     "fix": "Shape the eave edges with stair blocks that step up and out at each corner, and extend the corner tips so the roofline sweeps upward toward the ends."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "No maple tree anywhere in the garden; the green bushes read as generic shrubs",
+     "fix": "Add a small maple beside the house: a dark-log trunk of 2-3 blocks with a red or orange leaf canopy (e.g. azalea or nether wart shaped), placed off the veranda corner."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "Paper-screen walls are sparse thin white strips on the front and back; most of the wall is open dark frame, so the sliding-screen identity is lost",
+     "fix": "Fill each bay between the dark timber posts with white panels (white wool or quartz slabs) set one block deep, leaving only the sliding tracks as dark lines."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Minor",
+     "problem": "Engawa veranda is only a narrow bench-like strip; it does not read as a continuous timber walkway around the house",
+     "fix": "Run a full-length slab walkway one block out from the floor along the front and one side, with the same timber as the floor and a post at each corner."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "Tall dark post on the right side of the front stands out as an unexplained column; the roof-ridge block is floating",
+     "fix": "Either tie the post into the veranda structure with a beam at the top, or remove it; set the ridge finial onto a supporting block."
+    }
+   ]
+  },
+  "cost": 0.00106659
+ },
+ {
+  "name": "tea-house-plugin-glance-sonnet",
+  "fn": "glance3",
+  "code": 0,
+  "verdict": {
+   "identity": "Recognisable",
+   "usability": "NeedsWork",
+   "massing": "Good",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "A dark-tiled, stone-footed timber pavilion that reads as East Asian at a glance, but the roof is a stepped lid with flat caps, the paper screens are barely visible slits, and the garden props are thin.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof reads as a stepped, flat-topped lid. The upper tier is a flat slab, the eaves are straight slab layers, and the gable is not legible. Only the stray slab ends at the corners hint at upturn.",
+     "fix": "Build a real hip with a gable end: stair courses stepping up to a ridge, with a gable-end triangle in tile. Add upturned eave tips by placing inverted stairs or slabs one block higher at each corner, and a ridge cap."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "The sliding paper-screen walls do not read. The front is mostly dark timber with two tiny white slits. Side walls are hidden under the roof and are dark and flat, so there is no rhythm of white panels in frames.",
+     "fix": "Replace the wall bays with a repeated grid of white panels (white stained glass or paper-like blocks) between dark log posts and a horizontal rail. Make them 2 tall and 2 wide, with a lower timber kick-board."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "Garden elements are weak. The stone lantern is a small lantern on a cobble post and is hard to read, the maple is just leaf-block bushes, and the stepping stones are a plain path. The engawa veranda is barely distinct.",
+     "fix": "Build a stone lantern with a base, shaft, and a wider cap with a glowing block. Plant a tall maple with a trunk and a red or orange leaf canopy. Scatter stepping stones across the grass as separate stone slabs. Extend a plank veranda with a rail along the front."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "Odd floating or protruding bits: a gray block cantilevered beside the front-left lantern, a tall log slab on the front-right corner, and a dark hole where the porch meets the roof. The ridge has a lone log block on glass that reads as a stray dormer.",
+     "fix": "Remove the floating gray block and the stray log post, or integrate them as a lantern or gate. Replace the roof log-and-glass dormer with a proper ridge vent or delete it."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Minor",
+     "problem": "The roof overhang is deep but the body under it is low and squat, with the raised floor on footings only faintly visible. The result is a heavy, top-heavy lid.",
+     "fix": "Raise the floor platform on visible stone footings by a block, and raise the wall height by one so the screens have more presence under the eaves."
+    }
+   ]
+  },
+  "cost": 0.0153962
+ },
+ {
+  "name": "tea-house-pair-stockL-haiku",
+  "fn": "pair",
+  "code": 0,
+  "verdict": {
+   "identity": "Right",
+   "craft": "Right",
+   "overall": "Right",
+   "margin": "Clear",
+   "why": "The right build has a hipped-and-gabled dark tile roof with upturned eave tips, timber-framed walls with white panels, stone footings, a stone lantern, and a stone path set in a garden, so it reads as a tea house, while the left is a stepped, pagoda-like dark block on a stone plinth with no visible engawa, lantern, or garden setting; the right also has the more varied finish and palette, though its roof is somewhat blocky and it shows no clear maple."
+  },
+  "cost": 0.00059967
+ },
+ {
+  "name": "tea-house-pair-pluginL-haiku",
+  "fn": "pair",
+  "code": 0,
+  "verdict": {
+   "identity": "Left",
+   "craft": "Left",
+   "overall": "Left",
+   "margin": "Clear",
+   "why": "Left shows the brief's defining features: a dark tiled hipped-and-gabled roof with upturned eave corners, a raised timber floor on stone footings, lanterns, and a garden setting with stepping stones and greenery. Right is a monolithic stepped pyramid in one dark timber tone with no curved eaves, no visible paper screens, and no garden context, so it reads more like a pagoda or ziggurat than a tea house."
+  },
+  "cost": 0.00058767
+ },
+ {
+  "name": "tea-house-pair-stockL-sonnet",
+  "fn": "pair",
+  "code": 0,
+  "verdict": {
+   "identity": "Right",
+   "craft": "Right",
+   "overall": "Right",
+   "margin": "Clear",
+   "why": "Right has a dark tile roof with upturned eave tips, a garden with grass, stepping stones and a stone lantern, a veranda and white screen panels. Left is a brown stepped pyramid on a gray slab with almost no garden or paper screens, and its roof dominates a nearly windowless base."
+  },
+  "cost": 0.0063578
+ },
+ {
+  "name": "tea-house-pair-pluginL-sonnet",
+  "fn": "pair",
+  "code": 0,
+  "verdict": {
+   "identity": "Left",
+   "craft": "Left",
+   "overall": "Left",
+   "margin": "Clear",
+   "why": "Left has a dark-tile roof with upturned eave tips, white paper-screen panels, stone footings, a garden with stepping stones, a lantern and foliage, while Right is a monochrome brown stepped pyramid on a flat stone slab with no garden, no white screens and no curved eaves."
+  },
+  "cost": 0.070355
+ },
+ {
+  "name": "wizard-tower-stock-glance-haiku",
+  "fn": "glance3",
+  "code": 0,
+  "verdict": {
+   "identity": "Generic",
+   "usability": "Rough",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Poor",
+   "finish": "Good",
+   "palette": "Good",
+   "summary": "A tidy, well-finished stone tower with a purple-and-dark cap that reads as a tower, but the brief's wizard features (timber jetty, telescope balcony, crooked lean, round windows) are missing, so it could be any fantasy tower.",
+   "issues": [
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "No balcony or telescope anywhere on the shaft; the brief's signature prop is absent",
+     "fix": "Add a railed balcony ring (fence or slab edge) on the storey just below the roof, with a telescope prop (iron or dark oak with a pointed end) angled out over it."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "Upper floors are plain stone; no timber framing and no jetty overhang",
+     "fix": "Replace the upper storey walls with dark oak frame and white or light plaster infill, and cantilever each upper storey 1 block outward past the storey below using stair or slab supports."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Major",
+     "problem": "Shaft is perfectly vertical and square; the crooked lean is not there",
+     "fix": "Shift each storey's centre 1 block in a consistent direction as you go up (a 2-3 block total lean over 30 blocks) and carry the same offset into the roof."
+    },
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Stacked stepped tiers read as a pagoda or ziggurat cap, not a tall conical roof",
+     "fix": "Rebuild the cap as a tighter taper: step in by one block per course with slabs on every course so the edges smooth out, and tilt the apex slightly to match the lean."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Minor",
+     "problem": "Windows are small rectangles; brief asks for small round windows and the glow reads as purple trim",
+     "fix": "Swap rectangular openings for round ones (ring of stone stairs or trapdoors around a glass or lantern centre) and place one warm-lit window so the glowing window reads."
+    }
+   ]
+  },
+  "cost": 0.0013488999999999999
+ },
+ {
+  "name": "wizard-tower-plugin-glance-haiku",
+  "fn": "glance3",
+  "code": 0,
+  "verdict": {
+   "identity": "Generic",
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Poor",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "A tidy stone-base, timber-storey, teal-roofed tower that reads as a fantasy tower in general, but the brief's crooked lean, jettied upper floors, round windows and telescope balcony are missing, so it could be any wizard tower.",
+   "issues": [
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "No telescope balcony; the middle storey shows only fence posts and no platform or telescope",
+     "fix": "Add a jutting balcony on the second timber storey with a rail, a lectern or telescope prop (iron bars and an observer or copper block), and a lantern on the rail corner."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "No round windows; openings are flat white plaster panels and rectangles",
+     "fix": "Replace the upper-storey panels on the front and sides with small round windows (a ring of stairs or stained glass at 3 wide), keeping one glowing window lit with a lantern or glowstone behind it."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Major",
+     "problem": "Storeys stack straight and vertical; no outward jetty and no crooked lean",
+     "fix": "Offset each timber storey 1 to 2 blocks outward with corbel beams under the overhang, and shift the upper stack a block or two off the stone base axis so the tower leans."
+    },
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof is a stepped pyramid of blocks that reads as a lid, not a tall conical roof",
+     "fix": "Taper the roof by one block per layer using stairs or slabs for a smooth cone profile, and shift each layer's centre a block to carry the slight lean."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "Roof surface is noisy with random teal and verdigris blocks; ivy is absent, with only moss patches on the stone",
+     "fix": "Pick one roof block family with a single accent, and hang vines from the stone base and under the balcony to show the ivy."
+    }
+   ]
+  },
+  "cost": 0.0012998999999999999
+ },
+ {
+  "name": "wizard-tower-pair-stockL-haiku",
+  "fn": "pair",
+  "code": 0,
+  "verdict": {
+   "identity": "Right",
+   "craft": "Right",
+   "overall": "Right",
+   "margin": "Clear",
+   "why": "The Right build has a mossy stone base with lanterns, dark timber-framed upper storeys with white infill, a glowing orange window, and a teal conical roof, so it reads as the brief's wizard tower, while the Left build is a plain purple-trimmed stone shaft with a pointed cap and none of the timber, lanterns, glow, or jetties; the Right roof is lumpy in places, which keeps the craft win from being decisive."
+  },
+  "cost": 0.00053348
+ },
+ {
+  "name": "wizard-tower-pair-pluginL-haiku",
+  "fn": "pair",
+  "code": 0,
+  "verdict": {
+   "identity": "Left",
+   "craft": "Right",
+   "overall": "Right",
+   "margin": "Clear",
+   "why": "The left build has a stone base, timber-framed jettied floors, lanterns, and a glowing window, so it reads as the brief's building, but its roof is a jumbled teal voxel cone and the massing is stubby and boxy; the right build is a clean, tall, well-proportioned stone tower with a tiered conical roof and a crisp finish, but it lacks timber jetties, a balcony, lanterns, and a glowing window, so it reads less as a wizard tower and more as a generic purple-trimmed spire."
+  },
+  "cost": 0.00036048000000000005
+ },
+ {
+  "name": "wizard-tower-pair-stockL-sonnet",
+  "fn": "pair",
+  "code": 0,
+  "verdict": {
+   "identity": "Right",
+   "craft": "Right",
+   "overall": "Right",
+   "margin": "Clear",
+   "why": "Right has the brief's stone base, jettied timber-framed upper floors, a lantern, a glowing window, a balcony and a leaning conical roof. Left is a plain tall stone shaft with a symmetric purple-and-black cone and little else, so it reads as a generic tower, not a crooked wizard tower."
+  },
+  "cost": 0.006404
+ },
+ {
+  "name": "wizard-tower-pair-pluginL-sonnet",
+  "fn": "pair",
+  "code": 0,
+  "verdict": {
+   "identity": "Left",
+   "craft": "Right",
+   "overall": "Left",
+   "margin": "Clear",
+   "why": "Left has the brief's defining features: a stone base, timber-framed upper floors that jetty outward, a glowing window, a balcony with a telescope, lanterns and a tall conical roof. Right is a clean, well-finished tower, but it is a straight gray shaft with a neat roof and no jetty, timber framing, crookedness or visible balcony, so it reads as a generic tower rather than a crooked wizard tower."
+  },
+  "cost": 0.070689
+ },
+ {
+  "name": "red-barn-stock-glance-haiku",
+  "fn": "glance3",
+  "code": 0,
+  "verdict": {
+   "identity": "Recognisable",
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "It reads as a red barn on a stone plinth with a fence, but the roof is a single stepped gable slab rather than a gambrel, the cupola and weather vane are missing, and the hay bales are not clearly there, so it is a barn-ish shed rather than this barn.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Single-pitch roof with stepped gable ends instead of a gambrel (no kink break on the long slopes); roof slab overhangs and reads as a lid.",
+     "fix": "Rebuild the roof as two pitches per side: steep lower slope (about 60 deg) for the first 3-4 courses, then a shallow upper slope to the ridge; add a matching kink line on both gable ends and trim the overhang to 1 block."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "Cupola with weather vane is absent from the ridge; the brief's signature roof element does not come through.",
+     "fix": "Add a 3x3 cupola on the ridge centre: four corner posts, a small roof cap of stairs or slabs, and a vane (a fence-post pole with a sign or iron-trapdoor arrow) on top."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "Big sliding double doors are a white-framed opening with a checkered interior; the X-braced trim is not legible from the street view.",
+     "fix": "Frame the doors in white concrete or quartz with a diagonal X of stripped-log or dark-oak trim across each leaf; make both leaves read as separate doors with a centre seam."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Minor",
+     "problem": "Hay loft door and hoist beam are not clear; the gable window is a plain hole with no beam or hoist.",
+     "fix": "Under the gable window, extend a dark-oak beam 2 blocks out from the wall with a hanging fence post or chain, and make the loft door a 2-tall opening framed in the same white trim."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Minor",
+     "problem": "Hay bales are not visible; the yellow patches inside the doors are too small to read as bales.",
+     "fix": "Place a stack of 3-4 hay bale blocks beside the fence line or just inside the doors, sitting on the stone base."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Minor",
+     "problem": "Long side walls have only small scattered openings and a few light posts; they read as a blank red panel.",
+     "fix": "Add a regular bay rhythm: one 2x3 window or stable-door every 4 blocks on each long wall, with white frames matching the doors."
+    }
+   ]
+  },
+  "cost": 0.00116431
+ },
+ {
+  "name": "red-barn-plugin-glance-haiku",
+  "fn": "glance3",
+  "code": 0,
+  "verdict": {
+   "identity": "Generic",
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Good",
+   "summary": "It reads as a red farm building with hay, a fence and a stone plinth, but the roof is a dark slab with castle-style battlement trim rather than a gambrel barn roof, so it looks more like a fortified hall than a barn.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Eaves and gable edges are stepped white crenellations, so the roof reads as a castle battlement rather than a barn",
+     "fix": "Remove the white stepped trim along the eaves and gable; finish each eave with a plain stair or slab overhang in dark roofing, or a single white fascia line"
+    },
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof is one steep dark slope with no gambrel break, so the classic barn profile is missing",
+     "fix": "Rebuild the roof as a gambrel: steep stair-stepped lower slope on each side, shallower upper slope meeting at the ridge, seated on the wall tops"
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "Front big doors are a red/white checkerboard with a dark centre, not white X-braced sliding doors",
+     "fix": "Make the door leaves plain red with a white frame and white X-brace built from stairs or slabs; add a track beam above the doors"
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Minor",
+     "problem": "Back elevation is a large blank red wall with a few small window blocks and no loft door or hoist",
+     "fix": "Add a centred hay loft door with a white frame and a protruding hoist beam at the top, and a pair of dark trim lines to break the wall"
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "Cupola is a small dark box sitting on top of the roof with no base or walls, so it looks stuck on",
+     "fix": "Give the cupola four red or white walls, a base sitting on the ridge, and a small dark roof under the weather vane"
+    }
+   ]
+  },
+  "cost": 0.00126381
+ },
+ {
+  "name": "red-barn-pair-stockL-haiku",
+  "fn": "pair",
+  "code": 0,
+  "verdict": {
+   "identity": "Right",
+   "craft": "Right",
+   "overall": "Right",
+   "margin": "Clear",
+   "why": "The right build shows the brief's defining features (a cupola with a weather vane, a hoist beam over the loft door, hay bales, a fence, a stone foundation, and white-trimmed doors), while the left has only the red walls, stone band, and doors, with no visible cupola or hay bales; the right's crenellated trim and checkered doors look more castle-like than barn-like, but its detail and finish still beat the left's plain red gable."
+  },
+  "cost": 0.00060139
+ },
+ {
+  "name": "red-barn-pair-pluginL-haiku",
+  "fn": "pair",
+  "code": 0,
+  "verdict": {
+   "identity": "Left",
+   "craft": "Right",
+   "overall": "Left",
+   "margin": "Slight",
+   "why": "The left build carries more of the brief's named features (a visible cupola with weather vane, hay bales, a fence, a stone base, and big white-trimmed doors), but its crenellated roof edges and checkerboard facade make it read partly as a fortress. The right build is cleaner and more coherent in massing and palette, with a stone plinth, timber framing, and a well-resolved gable, yet it has no cupola or vane and its hay bales are barely visible, so it reads more as a red timber house than a farm barn."
+  },
+  "cost": 0.00073489
+ },
+ {
+  "name": "red-barn-pair-stockL-sonnet",
+  "fn": "pair",
+  "code": 0,
+  "verdict": {
+   "identity": "Right",
+   "craft": "Right",
+   "overall": "Right",
+   "margin": "Clear",
+   "why": "Right includes more of the brief's features: X-braced white trim on the doors, a hoist beam with a hay loft door, a cupola with a weather vane, hay bales, a fence and a grassy base. Left is a plain red box with a dark roof and has no cupola, hoist or hay. Right's gambrel roof is only loosely gambrel, and the checkerboard front looks odd, but it is still richer and more finished than Left."
+  },
+  "cost": 0.006762200000000001
+ },
+ {
+  "name": "red-barn-pair-pluginL-sonnet",
+  "fn": "pair",
+  "code": 0,
+  "verdict": {
+   "identity": "Left",
+   "craft": "Left",
+   "overall": "Left",
+   "margin": "Clear",
+   "why": "Left has more of the brief's features: a stepped gambrel-like profile, white X-braced checkered doors, a hoist beam with a hay bale, a cupola with a weather vane, hay bales and a fence. Right is a plain gable box with no cupola, hoist or loft door, and almost no hay, though its roof is cleaner. Left's dark roof and checker pattern are somewhat busy, but it still reads as a barn far better."
+  },
+  "cost": 0.070693
+ },
+ {
+  "name": "glass-cafe-stock-glance-haiku",
+  "fn": "glance3",
+  "code": 0,
+  "verdict": {
+   "identity": "Generic",
+   "usability": "Rough",
+   "massing": "Good",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Poor",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "A clean single-storey glass-fronted box with a flat roof that reads as a modern shop, but the café's defining features (neon sign, outdoor terrace, timber soffit) are missing, so it could be any modern retail unit.",
+   "issues": [
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "No neon-style sign anywhere on the fascia or roofline; the building has no café identity",
+     "fix": "Add a glowing sign band (e.g. light-blue or warm neon via glowstone/sea lantern lines or glass-pane lettering) on the front fascia above the glazing, set proud of the roof edge so it reads from the street."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "Outdoor terrace with tables and planters is absent; front is bare plinth and glass",
+     "fix": "Lay a raised terrace (stone-brick or smooth stone slab) 1-2 blocks out from the front glazing, with 3-4 fence/stair-block tables with seats and corner planters with flowers or leaves."
+    },
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Cantilever underside is grey/stone, not timber; roof reads as a lid on a box",
+     "fix": "Clad the soffit (underside of the overhang along the front and sides) in spruce or oak slabs or planks, and extend the overhang 1-2 blocks past the wall line so the cantilever shows in shadow."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "Black wall panels dominate the sides and back, making large blank dark areas between glazing",
+     "fix": "Replace the wide black wall sections on the two glazed sides with full-height glass panels between thin dark steel mullions (iron bars or dark prismarine-style frame), keeping black only for the thin mullions and corners."
+    },
+    {
+     "aspect": "Roof",
+     "severity": "Minor",
+     "problem": "Six glowing teal squares on the roof read as lights or hatches, not skylights",
+     "fix": "Flush them with the roof surface as glass or light-blue stained glass panes, or remove them so the roof reads as a clean flat slab."
+    }
+   ]
+  },
+  "cost": 0.0012668999999999998
+ },
+ {
+  "name": "glass-cafe-stock-glance-sonnet",
+  "fn": "glance3",
+  "code": 0,
+  "verdict": {
+   "identity": "Generic",
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Fair",
+   "elements": "Poor",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "It's a glazed black-framed box with a flat lid roof, and the café features (cantilever, timber soffit, terrace with tables and planters, neon sign) are missing or can't be seen from outside.",
+   "issues": [
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "There is no outdoor terrace, tables, planters or neon-style sign outside. The only props are a few tiny pots and furniture seen through the glass.",
+     "fix": "Add a paving terrace along the glazed front and side. Put tables (carpet on fence or trapdoors) with stools and planters (leaves in pots) on it. Mount a sign above the entrance in sea lantern or glowstone with colored glass or end rods."
+    },
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "The roof is a flat lid with a thick quartz crenellated parapet, so it looks like a castle battlement and not a slim modern cantilever. There is no overhang and no visible timber soffit.",
+     "fix": "Remove the toothed rim. Use a thin slab roof that overhangs 1-2 blocks past the glass, with spruce or dark oak planks underneath as the soffit, and a slim pale edge."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Major",
+     "problem": "It is a plain rectangle with no cantilever, no plinth step and no entrance recess. The black piers read as a heavy box and not as a light glass pavilion.",
+     "fix": "Extend the roof past the walls on the glazed sides, on thin posts. Step the plinth out as a concrete platform. Recess or cover the entrance."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Minor",
+     "problem": "The black blocks between the glazing are wide solid piers, not slim steel mullions. The checker base of black and white blocks looks like a chess pattern, not a concrete plinth.",
+     "fix": "Narrow the piers to 1-wide black frame lines and glaze the full height. Make the plinth a solid light-grey concrete band."
+    },
+    {
+     "aspect": "Finish",
+     "severity": "Minor",
+     "problem": "The roof's sea-lantern skylights are evenly scattered and look like noise. The glazing is a repetitive grid with no depth.",
+     "fix": "Remove the skylights or set them in a neat strip. Add a clear sign and trim to break up the repetition."
+    }
+   ]
+  },
+  "cost": 0.0137224
+ },
+ {
+  "name": "glass-cafe-plugin-glance-haiku",
+  "fn": "glance3",
+  "code": 0,
+  "verdict": {
+   "identity": "Generic",
+   "usability": "Rough",
+   "massing": "Fair",
+   "roof": "Fair",
+   "facades": "Poor",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "A tidy flat-roofed pavilion with a timber soffit, grey plinth and terrace props, but the brief's floor-to-ceiling glass is missing, so it reads as a dark generic shop rather than a modern glass café.",
+   "issues": [
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "Back elevation and side walls are solid black with no glazing; floor-to-ceiling glass on two sides is absent",
+     "fix": "Replace the black wall infill on the front and one side with full-height glass panels (2 blocks tall per storey) between slim dark steel mullions every 2-3 blocks; keep the frame, swap the infill."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "Sign above the entrance is a speckled brown/orange block panel that reads as a plank, not a neon sign",
+     "fix": "Build the sign as a raised fascia band with glowing lines (sea lantern or light-colored glass outline, with a recognisable word-shape) mounted on the soffit line, not a flat block panel."
+    },
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Thick dark slab with a lighter grey edge band reads as a lid sitting on the box, not a thin cantilevered roof",
+     "fix": "Thin the roof to 1 block of cap with a 1-block dark-steel edge line, and extend the timber soffit out past the walls so the cantilever shows as a shadow line."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Minor",
+     "problem": "Walls and roof are near-equal visual weight, so the cantilever and open terrace side feel heavy",
+     "fix": "Set the glazed walls back 1-2 blocks from the roof edge so the slab appears to float over the terrace."
+    },
+    {
+     "aspect": "Palette",
+     "severity": "Minor",
+     "problem": "Mostly black with brown and orange accents; the glass-and-steel character the brief asks for is lost",
+     "fix": "Use light glass (light blue stained glass or glass panes) and light-grey concrete for the plinth and terrace edges to lift the contrast."
+    }
+   ]
+  },
+  "cost": 0.0010364
+ },
+ {
+  "name": "glass-cafe-plugin-glance-sonnet",
+  "fn": "glance3",
+  "code": 0,
+  "verdict": {
+   "identity": "Generic",
+   "usability": "NeedsWork",
+   "massing": "Fair",
+   "roof": "Poor",
+   "facades": "Fair",
+   "elements": "Fair",
+   "finish": "Fair",
+   "palette": "Fair",
+   "summary": "A black box under a heavy slab-like lid with a wooden band, hedges and a plinth; the cantilever and glass walls barely come through, so it reads as a generic dark kiosk rather than a light modern glass café.",
+   "issues": [
+    {
+     "aspect": "Roof",
+     "severity": "Major",
+     "problem": "Roof is a thick dark slab with a raised parapet rim and a black hollow top, reading as a lid or tray, not a thin flat cantilever; the overhang is hardly visible on the sides.",
+     "fix": "Make the roof a thin 1-block slab layer with no raised rim, in a lighter concrete or dark grey tone, extending 2 blocks past the walls on the front and terrace sides. Remove the black stacked layers above the timber band."
+    },
+    {
+     "aspect": "Facades",
+     "severity": "Major",
+     "problem": "Walls are solid black with little glass: the back and side are a blank black wall, and the front has only a few small panes. The floor-to-ceiling glazing on two sides is missing.",
+     "fix": "Replace the front and one side wall with full-height glass panes, 4 tall, divided by thin dark pillars every 3-4 blocks. Keep solid walls only on the back, and break up the back with a few window strips or a texture change."
+    },
+    {
+     "aspect": "Massing",
+     "severity": "Major",
+     "problem": "The roof slab is heavy and dominates; the walls are set far back and read as a dark void, so the lightweight cantilever-over-glass proportion is lost.",
+     "fix": "Raise the wall height so the roof sits at about 8 tall with a lighter structure beneath. Use slim dark pillars at the corners and a glass infill so the roof looks like it floats."
+    },
+    {
+     "aspect": "Elements",
+     "severity": "Major",
+     "problem": "The neon-style sign is just a small orange block and a glowstone-like patch above the door; the tables are tiny and hidden, and the hedge planters are repetitive.",
+     "fix": "Build a readable sign on the front fascia, using sea lanterns or glowstone in a letter or line shape against dark blocks. Add 3-4 clear table-and-chair sets on the terrace, and swap some bushes for planter boxes made of trapdoors or slabs."
+    },
+    {
+     "aspect": "Palette",
+     "severity": "Minor",
+     "problem": "Everything is near-black with orange accents; the low contrast flattens the detail and the timber soffit is only visible as an outer band.",
+     "fix": "Lighten the roof and plinth to concrete grey, use dark steel only for the frame, and show the timber as a soffit underside on the cantilever."
+    }
+   ]
+  },
+  "cost": 0.014342400000000002
+ },
+ {
+  "name": "glass-cafe-pair-stockL-haiku",
+  "fn": "pair",
+  "code": 0,
+  "verdict": {
+   "identity": "Right",
+   "craft": "Left",
+   "overall": "Right",
+   "margin": "Slight",
+   "why": "Right carries more of the brief's defining features (cantilevered roof over a timber soffit, a stone plinth, the tiled terrace with tables, planters and lanterns), while Left is mostly a glass-fronted box with no terrace, planters or soffit; Left is the cleaner build, with a more consistent glazing rhythm and fewer blank walls, but its missing features outweigh that."
+  },
+  "cost": 0.00073398
+ },
+ {
+  "name": "glass-cafe-pair-pluginL-haiku",
+  "fn": "pair",
+  "code": 0,
+  "verdict": {
+   "identity": "Right",
+   "craft": "Right",
+   "overall": "Right",
+   "margin": "Clear",
+   "why": "The right build reads as a modern glass café: floor-to-ceiling glass bays on the sides and front, a slim dark frame, a cantilevered flat roof with a light stone edge, and a clean plinth, while the left is a dark solid box with a timber-band soffit that reads more like a closed pavilion and shows little glass."
+  },
+  "cost": 0.00031998000000000004
+ },
+ {
+  "name": "glass-cafe-pair-stockL-sonnet",
+  "fn": "pair",
+  "code": 0,
+  "verdict": {
+   "identity": "Right",
+   "craft": "Right",
+   "overall": "Right",
+   "margin": "Clear",
+   "why": "Right has the brief's cantilevered roof with a timber soffit, a concrete plinth, a terrace with tables, planters, lanterns and a sign, even though its roof is a heavy black slab and the back wall is blank; Left is a glazed box with a flat roof, no overhang, no terrace and no sign, so it reads more like an office or a shop than a café."
+  },
+  "cost": 0.006364
+ },
+ {
+  "name": "glass-cafe-pair-pluginL-sonnet",
+  "fn": "pair",
+  "code": 0,
+  "verdict": {
+   "identity": "Right",
+   "craft": "Right",
+   "overall": "Right",
+   "margin": "Clear",
+   "why": "Right shows the floor-to-ceiling glass, slim dark frame, flat roof and interior furnishing that define a modern café, though it lacks a terrace and sign. Left has a huge black slab roof that hides the building, with a mostly blank black body and a back wall with no detail, even though it has a terrace, planters and an orange sign."
+  },
+  "cost": 0.066609
+ }
+]

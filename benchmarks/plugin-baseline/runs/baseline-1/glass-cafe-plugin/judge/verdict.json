@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Poor",
+ "facades": "Fair",
+ "elements": "Fair",
+ "finish": "Fair",
+ "palette": "Fair",
+ "summary": "The terrace, planters and plinth are charming, but a huge black slab roof swallows the café, with a blank black back wall and glass that barely reads, so it looks like a dark box under a lid rather than a light modern glass café.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Roof is a thick, tall black slab with a raised parapet rim; it reads as a heavy lid or tray. The cantilever is barely visible and the timber soffit shows only as a thin band on the side.",
+   "fix": "Re-run `mcd roof --preset modern` or `cafe` with a thinner one-block slab and a lighter palette (light concrete or slate), no raised rim, and a wider overhang on the glass sides. Use the `cornice` or `coping` brush to edge it, and put timber on the underside."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "Back elevation is a blank, flat black wall with no windows, frame or detail. The sides that should be glass look solid black from most angles.",
+   "fix": "Use the `glazing` brush for floor-to-ceiling panes on the two brief sides, with `pilaster` brushes as slim mullions. Give the back wall a door, a few windows or `louvres`, and use a lighter wall tone."
+  },
+  {
+   "aspect": "Palette",
+   "severity": "Major",
+   "problem": "Near-black walls, black roof and black frame merge into one dark mass, so the 'slim dark steel frame' has no contrast to read against. The glass looks dull and grey.",
+   "fix": "Keep dark only for the frame and use `mcd paint` to make the wall infill light concrete or glass. Use a lighter roof palette so the dark mullions stand out."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "The neon-style sign is a small orange block and a brown patch near the door. It doesn't read as a sign.",
+   "fix": "Use the `signboard` or `plaque` brush with B.sign for a clear sign above the entrance, using glowstone or sea-lantern text on a dark panel."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Minor",
+   "problem": "The building is a low box set back under the oversized roof, so the volume feels squat and the terrace is crowded with a row of identical planters.",
+   "fix": "Raise the walls to the full 4 blocks of glass, thin the roof, and use the `planters` and `railing` brushes to space and vary the terrace edge."
+  }
+ ]
+}

@@ -1,0 +1,57 @@
+{
+ "key": "glass-cafe",
+ "arm": "stock",
+ "name": "Modern glass café",
+ "exit": 0,
+ "stderr": "",
+ "minutes": 0.5,
+ "costUsd": 0.10426360000000001,
+ "turns": 3,
+ "durationMin": 0.4,
+ "subtype": "success",
+ "isError": false,
+ "skillUsed": false,
+ "nbt": true,
+ "verdict": {
+  "usability": "NeedsWork",
+  "massing": "Fair",
+  "roof": "Fair",
+  "facades": "Fair",
+  "elements": "Poor",
+  "finish": "Fair",
+  "palette": "Fair",
+  "summary": "It's a tidy glass-and-black-frame box with a flat roof, but it reads as a plain lid-topped shoebox. There's no visible cantilever or timber soffit, and the terrace, tables, planters and neon sign the brief asked for are missing or unreadable.",
+  "issues": [
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "No readable neon sign, and no outdoor terrace with tables. Only a couple of tiny planters sit at the facade ends, and the interior furniture is barely visible.",
+    "fix": "Add a B.sign or signboard brush above the door with a bright glowing palette. Extend a plinth-material terrace 3-4 deep in front, then place tables with the fixtures brush and planters with the planters brush, plus a railing."
+   },
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "The flat roof is a pale slab with a toothed white rim. It reads as a lid, with no real cantilever overhang and no timber soffit underneath. The six green skylight squares look like noise.",
+    "fix": "Run mcd roof --preset cafe (or modern) with a 2-block overhang beyond the glass. Use a spruce or oak soffit palette underneath, replace the toothed edge with a slim coping, and cut the skylights to a few aligned strips."
+   },
+   {
+    "aspect": "Massing",
+    "severity": "Major",
+    "problem": "A plain rectangular box with no cantilever shadow line, no entrance recess and no terrace footprint. All four sides look nearly the same, so the glass-on-two-sides idea is lost.",
+    "fix": "Make the front and one side fully glazed with a deeper overhang. Make the back and the other side solid or lightly glazed. Add a recessed entrance bay and a terrace slab to break up the box."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Minor",
+    "problem": "The thick black pillars alternate with small gridded panes, so it reads as a black wall with windows rather than slim steel with floor-to-ceiling glass. The dark base alternates black and white like a checkerboard.",
+    "fix": "Use the glazing brush for wide panes with thin mullions and cut the black piers to one block. Use the plinth brush for a continuous concrete plinth instead of the checker pattern."
+   },
+   {
+    "aspect": "Finish",
+    "severity": "Minor",
+    "problem": "The glass is cluttered with a lot of grid lines, and the interior shows through confusingly. The back elevation has stray props, such as a floating red block.",
+    "fix": "Remove the stray blocks and simplify the glazing grid. Tidy the interior so only a counter and a few tables show."
+   }
+  ]
+ }
+}

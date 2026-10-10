@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Poor",
+ "facades": "Fair",
+ "elements": "Fair",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "The red-and-white striped tower, lantern room and rocky base read as a lighthouse, but the tower is a square prism rather than round and the cottage roof is an open slatted frame, so it needs work.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Keeper's cottage roof is open, with spaced slats and no solid fill. You can see through it to the interior in the 3/4 views, and the front views show no ridge.",
+   "fix": "Rebuild the cottage roof with `mcd roof --preset cottage` using a solid dark-red palette, and add a chimney that sits on the ridge."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Major",
+   "problem": "The tower is a square 4-sided prism with visible corner seams, not the round tower the brief asks for. It also has no taper and looks thin next to the 15x15 base.",
+   "fix": "Rebuild the shaft with a rounded octagonal or circular footprint that narrows slightly toward the top. Add a `plinth` at the base and `coping` or `cornice` under the gallery."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "The lantern gallery has no railing, only a flat grey slab. The glazing is small and the cap is a stepped red pyramid with a stray spire block.",
+   "fix": "Add the `railing` brush around the gallery. Enlarge the glass to a full ring and use `mcd roof --preset lantern-cap` with a `finial`."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Minor",
+   "problem": "The tower walls are flat. The windows are single white holes and there is no door at the base. The cottage walls are plain, with one door and small windows.",
+   "fix": "Use `surround` and `glazing` on the tower windows, add a door with a `surround` at the base, and add `quoins` and `planters` to the cottage."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The rocky base is ragged, with floating stray blocks at the edges. The cottage floats awkwardly against the tower.",
+   "fix": "Clean up the loose rock blocks at the corners and add a `plinth` under the cottage so it sits on the rock."
+  }
+ ]
+}

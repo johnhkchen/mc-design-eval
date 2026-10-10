@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Fair",
+ "facades": "Fair",
+ "elements": "Fair",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "The red-and-white striped tower, gallery and lantern read instantly as a lighthouse, but the tower is a square shaft rather than round, and the keeper's cottage is a ruined, roofless-looking lean-to hidden behind it.",
+ "issues": [
+  {
+   "aspect": "Massing",
+   "severity": "Major",
+   "problem": "Tower is a square, blocky shaft with stray red bulges and notches at the lower stripes, not a round tapering tower.",
+   "fix": "Rebuild the shaft as a circular, slightly tapering stack of rings, using the same stripe heights on every ring, and remove the stray protruding blocks."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "Keeper's cottage is a thin, low box behind the tower with jagged broken walls and holes. It has no readable pitched roof and no visible door.",
+   "fix": "Rebuild the cottage as a solid 2-storey box with a gable using `mcd roof --preset cottage`, add a door and `glazing` windows on the front face, and fully close the walls."
+  },
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Cottage roof is a flat dark-wood strip with ragged edges. The chimney is a lone brick pillar floating on the back.",
+   "fix": "Add a proper pitched roof with `mcd roof --preset cottage` and a `chimneys` stack on the ridge, then add `coping` on the gable edges."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "Rocky base is a jumbled, uneven pile, and a loose block floats off the right side. The back elevation shows a brown plank band and a brick strip that read as errors.",
+   "fix": "Tidy the base into a deliberate rock plinth with `plinth`, delete the stray block, and repaint the plank band as white with `mcd paint`."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Minor",
+   "problem": "Tower walls are flat stripes with only a tiny door and no windows, so they feel blank.",
+   "fix": "Add a few slit windows with `surround` and a door `surround` on the base, and a `cornice` under the gallery."
+  }
+ ]
+}

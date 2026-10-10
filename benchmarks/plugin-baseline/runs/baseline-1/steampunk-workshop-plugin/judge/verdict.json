@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Poor",
+ "facades": "Poor",
+ "elements": "Poor",
+ "finish": "Poor",
+ "palette": "Fair",
+ "summary": "It's a plain brick box with a flat green-copper lid, and the walls are riddled with holes and copper blocks scattered at random, so none of the steampunk workshop features (gear window, sawtooth roof, crane, pipes) read at a glance.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Flat oxidized-copper slab with a skylight strip reads as a lid, not a sawtooth or curved roof. Chimneys are short squat stubs.",
+   "fix": "Rebuild with `mcd roof --preset workshop` for a sawtooth profile, with glazed skylight faces on the steep sides. Add a copper roof palette and taller chimney stacks with a cornice or coping cap."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "Walls have see-through gaps and ragged copper patches and stripes in no order. The back elevation is a blank brick sheet with floating copper slabs on the sides.",
+   "fix": "Fill the shell solid brick. Use the pilaster and quoins brushes for regular copper-clad piers and bands, then add a plinth and cornice. Put real windows into the back wall with the glazing brush."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "No gear-shaped round window, no readable pipes or valves, and the crane over the loading door is only a dark beam and a lantern.",
+   "fix": "Use the surround and glazing brushes to make a large circular gear window above the door. Add a run of vertical and horizontal pipes with the fixtures brush, and use brackets and railing to build a projecting crane arm with a chain over the loading door."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Major",
+   "problem": "Floating copper blocks overhang the side edges, the street view shows holes, and there is stray debris at the base.",
+   "fix": "Delete the floating copper slabs. Seal the gaps and make copper trim sit flush on the walls as framed bands."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Minor",
+   "problem": "Simple rectangular box with no step, lean-to or annex, so the footprint reads dull.",
+   "fix": "Add a lower side annex or a stepped front bay, and put the chimneys on the roof ridge line."
+  }
+ ]
+}

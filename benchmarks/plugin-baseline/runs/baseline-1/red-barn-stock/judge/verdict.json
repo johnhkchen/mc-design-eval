@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Poor",
+ "facades": "Fair",
+ "elements": "Poor",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "A red box with a plain dark-oak gable lid, not a gambrel, and the cupola, hay loft door and hoist, X-braced doors and hay bales all missing or unreadable, so it reads as a generic shed instead of a barn.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Roof is a single-pitch gable of stacked stair rows that reads as a lid. There is no gambrel break, and the gable end shows a stepped silhouette that doesn't match the roof.",
+   "fix": "Rebuild with `mcd roof --preset barn` for the two-slope gambrel, with a small overhang and a ridge or coping line. Match the gable-end infill to the slope."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "Cupola with weather vane is absent and the ridge is bare. The hay loft door and hoist beam are missing too (only a tiny dark slit and a window hole in the gable).",
+   "fix": "Add a cupola on the ridge with a small roof and a finial for the vane. Put a loft door in the gable with a surround, and add a projecting beam with a fence hook (brackets, fixtures) above it."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "The big double doors are muddled. The white trim is fat grey slabs and the door leaves are a striped brown/white jumble, so there is no clear X-brace.",
+   "fix": "Use two clean wide door leaves of dark oak with a white surround (surround brush). Make the X-bracing from diagonal white blocks across each leaf, or use `mcd paint` to correct the trim."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The long side walls are flat red with sparse white slits that look like holes. The back wall is a blank red expanse with one grey patch, and there is no corner or trim detail.",
+   "fix": "Add white corner and vertical battens (pilaster, quoins), a cornice under the eaves, and proper glazing in the side windows. Add a back door surround and a loft hatch."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "Hay bales are barely visible, and the fence is a sparse line of lone posts floating at the front and side.",
+   "fix": "Stack hay bales by the doors, and use a continuous railing brush for the fence with rails between the posts."
+  }
+ ]
+}

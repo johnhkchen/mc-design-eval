@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Fair",
+ "facades": "Poor",
+ "elements": "Poor",
+ "finish": "Fair",
+ "palette": "Fair",
+ "summary": "The stepped tiers and spire give a stave-church-like silhouette, but it's a dark, near-monochrome block with no svalgang gallery, no dragon-head gables and flat walls, so it reads as a generic pagoda-ish tower rather than a Norwegian stave church.",
+ "issues": [
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "No open gallery (svalgang) around the ground floor; the lower walls are solid dark planks with a few tiny windows, and no carved dragon-head gable ends are visible.",
+   "fix": "Build a ring of posts with the railing brush and a low shed roof or cornice around the base to make the gallery. Add finial and brackets at each gable peak to suggest crossed dragon heads."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "Ground-floor walls are large flat dark planks with few small slit windows; the side faces are almost blank and show no stave or post rhythm.",
+   "fix": "Add pilaster brushes at regular intervals for the vertical staves, add surround and glazing on the openings, and use plinth and cornice bands to break up the wall."
+  },
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The tiers are stepped layers that read as pagoda or lid slabs; they have no steep pitch or visible shingles, and the side annex roof is a flat slab.",
+   "fix": "Rebuild the tiers with `mcd roof --preset church` or `tower-cap` at steep pitch with a shingle roof palette, and keep a clear overhang on each tier. Give the lower annex a matching pitched roof."
+  },
+  {
+   "aspect": "Palette",
+   "severity": "Minor",
+   "problem": "Everything is the same dark brown, so tiers, walls and trim merge into one mass, and the stone base is a thin grey strip.",
+   "fix": "Use `mcd paint` to give the roofs a slightly different tarred tone from the walls. Add lighter trim accents and a taller, darker cobble plinth."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Minor",
+   "problem": "The footprint is boxy, with a small side annex that looks tacked on; the central tower is thin and the proportions are tower-like rather than a long nave plus a taller central mass.",
+   "fix": "Extend the nave along the depth with a lower chancel apse at the rear, and place the annex symmetrically."
+  }
+ ]
+}

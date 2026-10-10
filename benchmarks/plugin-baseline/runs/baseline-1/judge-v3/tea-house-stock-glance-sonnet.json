@@ -1,0 +1,49 @@
+{
+ "name": "tea-house-stock-glance-sonnet",
+ "fn": "glance3",
+ "code": 0,
+ "verdict": {
+  "identity": "Generic",
+  "usability": "NeedsWork",
+  "massing": "Fair",
+  "roof": "Fair",
+  "facades": "Poor",
+  "elements": "Poor",
+  "finish": "Fair",
+  "palette": "Fair",
+  "summary": "It reads as a dark-wood pavilion under a huge stepped pyramid roof, but the paper screens, engawa, curved eaves, lantern and maple that would make it a tea house are missing or too weak to see.",
+  "issues": [
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "The roof is a huge, tall stepped pyramid of solid dark planks that swallows the building. It reads as a lid or ziggurat, with no gable end and no upswept curved eaves.",
+    "fix": "Lower the roof pitch and make it a hipped-and-gabled form with a ridge. Add stair and slab edges that flick up at the corners for the eave curve, and use dark tile-like blocks such as deepslate or dark prismarine stairs instead of stacked plank steps."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Major",
+    "problem": "The walls are almost all dark with no white paper-screen panels. Only a few small white holes show, and they look like gaps. The sliding-shoji look is absent.",
+    "fix": "Fill the wall bays between dark timber posts with white panels (white stained glass, or white concrete or wool set back one block). Add a horizontal rail and a lower dark band so each bay reads as a screen."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "The engawa veranda, stepping stones, stone lantern and maple are missing. The only props are two small lanterns on posts, and the entry is a single grey block.",
+    "fix": "Add a one-block-wide plank veranda with a low rail around the front. Lay stepping stones of stone slabs across the garden. Build a stone lantern from a cobblestone wall, a slab and a lantern or glowstone. Add a maple with a dark-oak trunk and red or orange leaf blobs."
+   },
+   {
+    "aspect": "Massing",
+    "severity": "Minor",
+    "problem": "The roof is about as tall as the walls and much wider than the body, so the proportions are top-heavy. The raised floor is a plain slab that looks like a podium rather than footings.",
+    "fix": "Shorten the roof to about 3 blocks and trim its overhang. Raise the floor on spaced stone-brick footing posts with a visible gap under the floorboards."
+   },
+   {
+    "aspect": "Finish",
+    "severity": "Minor",
+    "problem": "The dark timber walls are low-contrast and muddy. The roof steps show noisy repeated stair notches and no trim.",
+    "fix": "Use a lighter timber such as spruce or stripped logs for posts and beams against the dark roof. Add a ridge cap and clean edge trim."
+   }
+  ]
+ },
+ "cost": 0.0145462
+}

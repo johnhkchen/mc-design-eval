@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Poor",
+ "facades": "Fair",
+ "elements": "Poor",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "A copper-and-brick box with a good palette, but the roof is a stepped verdigris lid with no sawtooth or curve, there are no tall chimney stacks, and the gear window is a scatter of white blocks, so it doesn't read as a steampunk workshop.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Roof is a flat stepped slab of oxidized copper that reads as a lid. There is no sawtooth or curved profile, and the skylights are tiny glass slots lost in the green.",
+   "fix": "Rebuild with `mcd roof --preset workshop` for a sawtooth profile with a glazed vertical face on each tooth. Use a roof palette of copper and verdigris, and add skylight dormers."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "The gear-shaped round window on the front is a ragged cluster of white blocks and glass with holes, so it doesn't read as a gear. The white frame around the door also looks like a stray bracket.",
+   "fix": "Redo it as a clean circular ring with 8 teeth, using the glazing and surround brushes. Fill it with glass and iron-bar spokes, and re-trim the door frame in copper rather than white."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "There are no tall chimney stacks. Only two tiny brick fire pits sit on the roof. The crane over the loading door is barely visible, just a chain and a barrel.",
+   "fix": "Add 2–3 chimneys that rise 5+ blocks above the roof, with a brick shaft and a coping cap. Add a projecting crane arm with a hanging hook using the brackets and fixtures brushes."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Minor",
+   "problem": "The side and back walls are a flat grid of brick panels and copper bands with almost no depth. Pipes and valves exist only as thin strips on the left edge.",
+   "fix": "Add pilaster and quoins bays, and run pipes with valve fixtures across the walls with brackets. Add a cornice below the roof."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Minor",
+   "problem": "The build is a single plain box with no variation in the footprint or skyline, so it reads as a crate on a plinth.",
+   "fix": "Add a lean-to loading bay or a stepped annex on one side. Use the plinth brush for a heavier base."
+  }
+ ]
+}

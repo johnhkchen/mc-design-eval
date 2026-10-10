@@ -1,0 +1,55 @@
+{
+ "name": "red-barn-stock-glance-haiku",
+ "fn": "glance3",
+ "code": 0,
+ "verdict": {
+  "identity": "Recognisable",
+  "usability": "NeedsWork",
+  "massing": "Fair",
+  "roof": "Poor",
+  "facades": "Fair",
+  "elements": "Fair",
+  "finish": "Fair",
+  "palette": "Good",
+  "summary": "It reads as a red barn on a stone plinth with a fence, but the roof is a single stepped gable slab rather than a gambrel, the cupola and weather vane are missing, and the hay bales are not clearly there, so it is a barn-ish shed rather than this barn.",
+  "issues": [
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "Single-pitch roof with stepped gable ends instead of a gambrel (no kink break on the long slopes); roof slab overhangs and reads as a lid.",
+    "fix": "Rebuild the roof as two pitches per side: steep lower slope (about 60 deg) for the first 3-4 courses, then a shallow upper slope to the ridge; add a matching kink line on both gable ends and trim the overhang to 1 block."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "Cupola with weather vane is absent from the ridge; the brief's signature roof element does not come through.",
+    "fix": "Add a 3x3 cupola on the ridge centre: four corner posts, a small roof cap of stairs or slabs, and a vane (a fence-post pole with a sign or iron-trapdoor arrow) on top."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "Big sliding double doors are a white-framed opening with a checkered interior; the X-braced trim is not legible from the street view.",
+    "fix": "Frame the doors in white concrete or quartz with a diagonal X of stripped-log or dark-oak trim across each leaf; make both leaves read as separate doors with a centre seam."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Minor",
+    "problem": "Hay loft door and hoist beam are not clear; the gable window is a plain hole with no beam or hoist.",
+    "fix": "Under the gable window, extend a dark-oak beam 2 blocks out from the wall with a hanging fence post or chain, and make the loft door a 2-tall opening framed in the same white trim."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Minor",
+    "problem": "Hay bales are not visible; the yellow patches inside the doors are too small to read as bales.",
+    "fix": "Place a stack of 3-4 hay bale blocks beside the fence line or just inside the doors, sitting on the stone base."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Minor",
+    "problem": "Long side walls have only small scattered openings and a few light posts; they read as a blank red panel.",
+    "fix": "Add a regular bay rhythm: one 2x3 window or stable-door every 4 blocks on each long wall, with white frames matching the doors."
+   }
+  ]
+ },
+ "cost": 0.00116431
+}

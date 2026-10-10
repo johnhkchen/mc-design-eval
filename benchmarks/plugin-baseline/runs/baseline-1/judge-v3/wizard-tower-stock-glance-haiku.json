@@ -1,0 +1,49 @@
+{
+ "name": "wizard-tower-stock-glance-haiku",
+ "fn": "glance3",
+ "code": 0,
+ "verdict": {
+  "identity": "Generic",
+  "usability": "Rough",
+  "massing": "Fair",
+  "roof": "Fair",
+  "facades": "Fair",
+  "elements": "Poor",
+  "finish": "Good",
+  "palette": "Good",
+  "summary": "A tidy, well-finished stone tower with a purple-and-dark cap that reads as a tower, but the brief's wizard features (timber jetty, telescope balcony, crooked lean, round windows) are missing, so it could be any fantasy tower.",
+  "issues": [
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "No balcony or telescope anywhere on the shaft; the brief's signature prop is absent",
+    "fix": "Add a railed balcony ring (fence or slab edge) on the storey just below the roof, with a telescope prop (iron or dark oak with a pointed end) angled out over it."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Major",
+    "problem": "Upper floors are plain stone; no timber framing and no jetty overhang",
+    "fix": "Replace the upper storey walls with dark oak frame and white or light plaster infill, and cantilever each upper storey 1 block outward past the storey below using stair or slab supports."
+   },
+   {
+    "aspect": "Massing",
+    "severity": "Major",
+    "problem": "Shaft is perfectly vertical and square; the crooked lean is not there",
+    "fix": "Shift each storey's centre 1 block in a consistent direction as you go up (a 2-3 block total lean over 30 blocks) and carry the same offset into the roof."
+   },
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "Stacked stepped tiers read as a pagoda or ziggurat cap, not a tall conical roof",
+    "fix": "Rebuild the cap as a tighter taper: step in by one block per course with slabs on every course so the edges smooth out, and tilt the apex slightly to match the lean."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Minor",
+    "problem": "Windows are small rectangles; brief asks for small round windows and the glow reads as purple trim",
+    "fix": "Swap rectangular openings for round ones (ring of stone stairs or trapdoors around a glass or lantern centre) and place one warm-lit window so the glowing window reads."
+   }
+  ]
+ },
+ "cost": 0.0013488999999999999
+}

@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Poor",
+ "facades": "Fair",
+ "elements": "Fair",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "The red-and-white striped tower with its gallery and cap reads as a lighthouse, but the tower is square rather than round, and the cottage roof is a skeleton of loose beams. The cottage is also detached rather than attached.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Keeper's cottage roof shows as spaced dark rafters or logs with gaps on the 3/4 views, so it looks unfinished and not like a pitched roof. The back view shows a flat dark slab.",
+   "fix": "Rebuild with `mcd roof --preset cottage` using a solid dark-wood or slate palette, add eave overhang and a proper ridge, and keep the chimney through the roof."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Major",
+   "problem": "The tower is a square, stepped box with a hard jog partway up, not a round tapered tower. It also stands apart from the cottage, which the brief wanted attached.",
+   "fix": "Chamfer the corners into an octagonal or round-ish section, taper it with one step per band, and move the cottage flush against the tower base. Add a `plinth` brush for the base."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Minor",
+   "problem": "Tower walls are flat, smooth white and red with no windows or door. The cottage walls are plain grey.",
+   "fix": "Add a tower door with `surround`, and 2–3 small slit windows with the `glazing` brush. Add `quoins` and a `plinth` to the cottage."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "The lantern room is tiny and its glass is faint. The gallery railing is thin and barely reads. The cap is a blobby red slab.",
+   "fix": "Make the lantern glass bigger and clearer, add a `railing` brush around the gallery, and use `mcd roof --preset lantern-cap` with a `finial`."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "Red bands are uneven, with ragged jogs at the corners. The rocky base is a thin grey ring, and the grass plot is bare.",
+   "fix": "Keep the stripes as clean full-width bands, widen and thicken the rock base with mixed stone, and add `planters` or fences near the cottage."
+  }
+ ]
+}

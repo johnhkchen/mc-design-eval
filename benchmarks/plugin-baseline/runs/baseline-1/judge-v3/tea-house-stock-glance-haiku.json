@@ -1,0 +1,49 @@
+{
+ "name": "tea-house-stock-glance-haiku",
+ "fn": "glance3",
+ "code": 0,
+ "verdict": {
+  "identity": "Generic",
+  "usability": "Rough",
+  "massing": "Fair",
+  "roof": "Poor",
+  "facades": "Fair",
+  "elements": "Poor",
+  "finish": "Fair",
+  "palette": "Fair",
+  "summary": "A tidy tiered timber pavilion on a stone plinth that reads as a generic pagoda or stepped pavilion, not a Japanese tea house: the roof is a stepped lid with no curved eaves, the walls have no white paper screens, and the garden elements are absent.",
+  "issues": [
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "Hipped-and-gabled roof reads as a stepped ziggurat/lid; stair-stepped tiers, no deep overhang, no curved eaves",
+    "fix": "Replace the stacked stair tiers with a single hipped roof plane plus a gable, push the eaves out 2-3 blocks, and curve the eave corners with stair/slab steps so the roof edge lifts upward."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Major",
+    "problem": "Walls are dark timber with open holes; no white sliding paper-screen panels in dark frames",
+    "fix": "Fill the wall bays between the timber posts with white concrete or white wool panels set inside dark log/stripped-oak frames, and leave one panel set as a sliding track offset."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "No stone lantern, maple tree, or stepping stones; the torch posts stand in for the lantern",
+    "fix": "Add a stone lantern (stone brick base, stone slab, lantern) beside the walk, a stepping-stone path of stone-brick or andesite pads leading to the entry, and a maple tree (oak leaves in red/orange or a mangrove-style canopy) in the corner."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Minor",
+    "problem": "Engawa veranda is only a thin ledge at the base; reads as a step rather than a deck",
+    "fix": "Widen the veranda to a 2-block wooden deck around the front and sides with a railing of fences or stripped-log posts."
+   },
+   {
+    "aspect": "Palette",
+    "severity": "Minor",
+    "problem": "Monochrome dark brown and grey; no contrast to set off the timber",
+    "fix": "Introduce white screens and pale stone (white or light-gray plinth) so the building separates from the dark brown wood, and use a dark-gray roof tile block to pick up the tile language."
+   }
+  ]
+ },
+ "cost": 0.00115109
+}

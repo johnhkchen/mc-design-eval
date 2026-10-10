@@ -1,0 +1,49 @@
+{
+ "name": "red-barn-plugin-glance-haiku",
+ "fn": "glance3",
+ "code": 0,
+ "verdict": {
+  "identity": "Generic",
+  "usability": "NeedsWork",
+  "massing": "Fair",
+  "roof": "Poor",
+  "facades": "Fair",
+  "elements": "Fair",
+  "finish": "Fair",
+  "palette": "Good",
+  "summary": "It reads as a red farm building with hay, a fence and a stone plinth, but the roof is a dark slab with castle-style battlement trim rather than a gambrel barn roof, so it looks more like a fortified hall than a barn.",
+  "issues": [
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "Eaves and gable edges are stepped white crenellations, so the roof reads as a castle battlement rather than a barn",
+    "fix": "Remove the white stepped trim along the eaves and gable; finish each eave with a plain stair or slab overhang in dark roofing, or a single white fascia line"
+   },
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "Roof is one steep dark slope with no gambrel break, so the classic barn profile is missing",
+    "fix": "Rebuild the roof as a gambrel: steep stair-stepped lower slope on each side, shallower upper slope meeting at the ridge, seated on the wall tops"
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "Front big doors are a red/white checkerboard with a dark centre, not white X-braced sliding doors",
+    "fix": "Make the door leaves plain red with a white frame and white X-brace built from stairs or slabs; add a track beam above the doors"
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Minor",
+    "problem": "Back elevation is a large blank red wall with a few small window blocks and no loft door or hoist",
+    "fix": "Add a centred hay loft door with a white frame and a protruding hoist beam at the top, and a pair of dark trim lines to break the wall"
+   },
+   {
+    "aspect": "Finish",
+    "severity": "Minor",
+    "problem": "Cupola is a small dark box sitting on top of the roof with no base or walls, so it looks stuck on",
+    "fix": "Give the cupola four red or white walls, a base sitting on the ridge, and a small dark roof under the weather vane"
+   }
+  ]
+ },
+ "cost": 0.00126381
+}

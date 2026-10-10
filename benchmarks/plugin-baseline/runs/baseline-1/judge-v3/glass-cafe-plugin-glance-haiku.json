@@ -1,0 +1,49 @@
+{
+ "name": "glass-cafe-plugin-glance-haiku",
+ "fn": "glance3",
+ "code": 0,
+ "verdict": {
+  "identity": "Generic",
+  "usability": "Rough",
+  "massing": "Fair",
+  "roof": "Fair",
+  "facades": "Poor",
+  "elements": "Fair",
+  "finish": "Fair",
+  "palette": "Fair",
+  "summary": "A tidy flat-roofed pavilion with a timber soffit, grey plinth and terrace props, but the brief's floor-to-ceiling glass is missing, so it reads as a dark generic shop rather than a modern glass café.",
+  "issues": [
+   {
+    "aspect": "Facades",
+    "severity": "Major",
+    "problem": "Back elevation and side walls are solid black with no glazing; floor-to-ceiling glass on two sides is absent",
+    "fix": "Replace the black wall infill on the front and one side with full-height glass panels (2 blocks tall per storey) between slim dark steel mullions every 2-3 blocks; keep the frame, swap the infill."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "Sign above the entrance is a speckled brown/orange block panel that reads as a plank, not a neon sign",
+    "fix": "Build the sign as a raised fascia band with glowing lines (sea lantern or light-colored glass outline, with a recognisable word-shape) mounted on the soffit line, not a flat block panel."
+   },
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "Thick dark slab with a lighter grey edge band reads as a lid sitting on the box, not a thin cantilevered roof",
+    "fix": "Thin the roof to 1 block of cap with a 1-block dark-steel edge line, and extend the timber soffit out past the walls so the cantilever shows as a shadow line."
+   },
+   {
+    "aspect": "Massing",
+    "severity": "Minor",
+    "problem": "Walls and roof are near-equal visual weight, so the cantilever and open terrace side feel heavy",
+    "fix": "Set the glazed walls back 1-2 blocks from the roof edge so the slab appears to float over the terrace."
+   },
+   {
+    "aspect": "Palette",
+    "severity": "Minor",
+    "problem": "Mostly black with brown and orange accents; the glass-and-steel character the brief asks for is lost",
+    "fix": "Use light glass (light blue stained glass or glass panes) and light-grey concrete for the plinth and terrace edges to lift the contrast."
+   }
+  ]
+ },
+ "cost": 0.0010364
+}

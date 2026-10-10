@@ -1,0 +1,57 @@
+{
+ "key": "lighthouse",
+ "arm": "plain",
+ "name": "Coastal lighthouse and keeper's cottage",
+ "exit": 0,
+ "stderr": "",
+ "minutes": 0.6,
+ "costUsd": 0.13141799999999998,
+ "turns": 4,
+ "durationMin": 0.5,
+ "subtype": "success",
+ "isError": false,
+ "skillUsed": false,
+ "nbt": true,
+ "verdict": {
+  "usability": "NeedsWork",
+  "massing": "Fair",
+  "roof": "Fair",
+  "facades": "Fair",
+  "elements": "Good",
+  "finish": "Fair",
+  "palette": "Good",
+  "summary": "The red and white striped lighthouse with gallery and lantern reads instantly, but the tower is a square, ribbed shaft rather than a round one, it is too slender for the brief, and the little cottage is dwarfed and squeezed against it.",
+  "issues": [
+   {
+    "aspect": "Massing",
+    "severity": "Major",
+    "problem": "The tower is a square-section column with notched corners, not a round tower. It is also tall and thin, with no taper, so it reads as a pillar.",
+    "fix": "Rebuild the shaft as a stepped circular footprint (octagonal rings) that narrows toward the top. Keep the stripes as bands. Widen the base so it sits on the rock with more weight."
+   },
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "The lantern cap is a flat, stepped slab of dark brick that reads as a lid. The lantern glass is mostly hidden beneath it, and there is no finial.",
+    "fix": "Replace it with `mcd roof --preset lantern-cap` (or tower-cap) so it forms a dome or cone. Add a finial brush on top and raise the glazing so the lantern room is visible."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Minor",
+    "problem": "The cottage is small and tucked against the tower. Its gable is bare, with a single door and no windows, and the chimney is thin. It reads as an afterthought.",
+    "fix": "Enlarge the cottage a little and shift it out from the tower. Add `surround` or `glazing` windows and a planter at the door, and thicken the chimney with a `coping` cap."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Minor",
+    "problem": "The tower windows are tiny, flat square holes. The stripes have chevron-notched edges that look like a modeling artifact.",
+    "fix": "Use `surround` on the windows to give them frames. Clean the stripe edges so the bands are straight, and add a `plinth` or `cornice` at the base and the gallery."
+   },
+   {
+    "aspect": "Finish",
+    "severity": "Minor",
+    "problem": "The rocky base is a noisy, scattered pile with stray moss patches. It has no clear path or steps to the door, and the gallery railing posts are sparse.",
+    "fix": "Consolidate the rock into a tidier mound with a clear stair path to the door. Use the `railing` brush on the gallery for continuous rails."
+   }
+  ]
+ }
+}

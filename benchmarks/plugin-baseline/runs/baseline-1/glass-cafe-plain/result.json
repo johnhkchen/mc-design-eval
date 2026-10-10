@@ -1,0 +1,57 @@
+{
+ "key": "glass-cafe",
+ "arm": "plain",
+ "name": "Modern glass café",
+ "exit": 0,
+ "stderr": "",
+ "minutes": 0.6,
+ "costUsd": 0.1343066,
+ "turns": 4,
+ "durationMin": 0.6,
+ "subtype": "success",
+ "isError": false,
+ "skillUsed": false,
+ "nbt": true,
+ "verdict": {
+  "usability": "NeedsWork",
+  "massing": "Fair",
+  "roof": "Poor",
+  "facades": "Fair",
+  "elements": "Fair",
+  "finish": "Fair",
+  "palette": "Fair",
+  "summary": "A cafe with a decent glazed front and terrace, but the huge, thick, featureless blackstone slab roof sits like a lid on thin glass and dominates the whole build.",
+  "issues": [
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "Roof is a thick, heavy slab of dark cobbled blackstone, about 3 blocks deep with a stone band under it. It reads as a lid, not a slim cantilevered flat roof, and it hides the interior from above.",
+    "fix": "Rebuild with `mcd roof --preset modern` or `cafe`: a thin one-block slab in a smooth dark material, plus `coping` on the edge. Keep the timber soffit and drop the stacked stone band."
+   },
+   {
+    "aspect": "Massing",
+    "severity": "Major",
+    "problem": "The roof is about as tall as the glazed storey, so the proportions are top-heavy. The side and back walls are tall blank blackstone brick, not glass on two sides.",
+    "fix": "Cut the roof to 1 block of fascia. Replace the left or right side wall with `glazing` and slim frame posts, keeping brick only on the back."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "No neon-style sign is visible. There is only a small orange block patch at the front right that reads as a stray ore or lava block.",
+    "fix": "Add a `signboard` or `B.sign` above the door, or a `plaque` on the fascia, in a bright glowing accent such as sea lantern or glowstone lettering."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Minor",
+    "problem": "The glass is thin and cluttered. The steel frame is sparse and uneven, with black pillars of mixed width and an open gap at the right of the back wall.",
+    "fix": "Use the `glazing` brush with a regular 1-wide dark mullion rhythm, and close the back-right corner with a matching wall or pillar."
+   },
+   {
+    "aspect": "Finish",
+    "severity": "Minor",
+    "problem": "The plinth has stray stair bits and broken steps at the front edge, and the planters and tables are scattered unevenly.",
+    "fix": "Tidy the plinth edge with the `plinth` brush. Use `planters` to line the terrace evenly and align the tables."
+   }
+  ]
+ }
+}

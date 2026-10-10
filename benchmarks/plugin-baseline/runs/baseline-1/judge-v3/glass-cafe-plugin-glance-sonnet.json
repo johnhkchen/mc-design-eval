@@ -1,0 +1,49 @@
+{
+ "name": "glass-cafe-plugin-glance-sonnet",
+ "fn": "glance3",
+ "code": 0,
+ "verdict": {
+  "identity": "Generic",
+  "usability": "NeedsWork",
+  "massing": "Fair",
+  "roof": "Poor",
+  "facades": "Fair",
+  "elements": "Fair",
+  "finish": "Fair",
+  "palette": "Fair",
+  "summary": "A black box under a heavy slab-like lid with a wooden band, hedges and a plinth; the cantilever and glass walls barely come through, so it reads as a generic dark kiosk rather than a light modern glass café.",
+  "issues": [
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "Roof is a thick dark slab with a raised parapet rim and a black hollow top, reading as a lid or tray, not a thin flat cantilever; the overhang is hardly visible on the sides.",
+    "fix": "Make the roof a thin 1-block slab layer with no raised rim, in a lighter concrete or dark grey tone, extending 2 blocks past the walls on the front and terrace sides. Remove the black stacked layers above the timber band."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Major",
+    "problem": "Walls are solid black with little glass: the back and side are a blank black wall, and the front has only a few small panes. The floor-to-ceiling glazing on two sides is missing.",
+    "fix": "Replace the front and one side wall with full-height glass panes, 4 tall, divided by thin dark pillars every 3-4 blocks. Keep solid walls only on the back, and break up the back with a few window strips or a texture change."
+   },
+   {
+    "aspect": "Massing",
+    "severity": "Major",
+    "problem": "The roof slab is heavy and dominates; the walls are set far back and read as a dark void, so the lightweight cantilever-over-glass proportion is lost.",
+    "fix": "Raise the wall height so the roof sits at about 8 tall with a lighter structure beneath. Use slim dark pillars at the corners and a glass infill so the roof looks like it floats."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "The neon-style sign is just a small orange block and a glowstone-like patch above the door; the tables are tiny and hidden, and the hedge planters are repetitive.",
+    "fix": "Build a readable sign on the front fascia, using sea lanterns or glowstone in a letter or line shape against dark blocks. Add 3-4 clear table-and-chair sets on the terrace, and swap some bushes for planter boxes made of trapdoors or slabs."
+   },
+   {
+    "aspect": "Palette",
+    "severity": "Minor",
+    "problem": "Everything is near-black with orange accents; the low contrast flattens the detail and the timber soffit is only visible as an outer band.",
+    "fix": "Lighten the roof and plinth to concrete grey, use dark steel only for the frame, and show the timber as a soffit underside on the cantilever."
+   }
+  ]
+ },
+ "cost": 0.014342400000000002
+}

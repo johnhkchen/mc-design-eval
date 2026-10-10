@@ -1,0 +1,49 @@
+{
+ "name": "glass-cafe-stock-glance-sonnet",
+ "fn": "glance3",
+ "code": 0,
+ "verdict": {
+  "identity": "Generic",
+  "usability": "NeedsWork",
+  "massing": "Fair",
+  "roof": "Fair",
+  "facades": "Fair",
+  "elements": "Poor",
+  "finish": "Fair",
+  "palette": "Fair",
+  "summary": "It's a glazed black-framed box with a flat lid roof, and the café features (cantilever, timber soffit, terrace with tables and planters, neon sign) are missing or can't be seen from outside.",
+  "issues": [
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "There is no outdoor terrace, tables, planters or neon-style sign outside. The only props are a few tiny pots and furniture seen through the glass.",
+    "fix": "Add a paving terrace along the glazed front and side. Put tables (carpet on fence or trapdoors) with stools and planters (leaves in pots) on it. Mount a sign above the entrance in sea lantern or glowstone with colored glass or end rods."
+   },
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "The roof is a flat lid with a thick quartz crenellated parapet, so it looks like a castle battlement and not a slim modern cantilever. There is no overhang and no visible timber soffit.",
+    "fix": "Remove the toothed rim. Use a thin slab roof that overhangs 1-2 blocks past the glass, with spruce or dark oak planks underneath as the soffit, and a slim pale edge."
+   },
+   {
+    "aspect": "Massing",
+    "severity": "Major",
+    "problem": "It is a plain rectangle with no cantilever, no plinth step and no entrance recess. The black piers read as a heavy box and not as a light glass pavilion.",
+    "fix": "Extend the roof past the walls on the glazed sides, on thin posts. Step the plinth out as a concrete platform. Recess or cover the entrance."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Minor",
+    "problem": "The black blocks between the glazing are wide solid piers, not slim steel mullions. The checker base of black and white blocks looks like a chess pattern, not a concrete plinth.",
+    "fix": "Narrow the piers to 1-wide black frame lines and glaze the full height. Make the plinth a solid light-grey concrete band."
+   },
+   {
+    "aspect": "Finish",
+    "severity": "Minor",
+    "problem": "The roof's sea-lantern skylights are evenly scattered and look like noise. The glazing is a repetitive grid with no depth.",
+    "fix": "Remove the skylights or set them in a neat strip. Add a clear sign and trim to break up the repetition."
+   }
+  ]
+ },
+ "cost": 0.0137224
+}

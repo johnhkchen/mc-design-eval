@@ -1,0 +1,49 @@
+{
+ "name": "tea-house-plugin-glance-haiku",
+ "fn": "glance3",
+ "code": 0,
+ "verdict": {
+  "identity": "Recognisable",
+  "usability": "NeedsWork",
+  "massing": "Good",
+  "roof": "Fair",
+  "facades": "Fair",
+  "elements": "Fair",
+  "finish": "Good",
+  "palette": "Good",
+  "summary": "A solid, well-proportioned timber house on stone footings with a dark tiled stepped roof, a stone lantern and a stepping-stone path, so it reads as a Japanese-style building, but the curved eaves are flat slabs and the paper-screen walls are too thin to read as the tea house's signature, and the maple is missing.",
+  "issues": [
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "Hipped-and-gabled roof reads as a stacked lid; eaves are flat slabs with only small corner tips, not curved eaves",
+    "fix": "Shape the eave edges with stair blocks that step up and out at each corner, and extend the corner tips so the roofline sweeps upward toward the ends."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "No maple tree anywhere in the garden; the green bushes read as generic shrubs",
+    "fix": "Add a small maple beside the house: a dark-log trunk of 2-3 blocks with a red or orange leaf canopy (e.g. azalea or nether wart shaped), placed off the veranda corner."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Major",
+    "problem": "Paper-screen walls are sparse thin white strips on the front and back; most of the wall is open dark frame, so the sliding-screen identity is lost",
+    "fix": "Fill each bay between the dark timber posts with white panels (white wool or quartz slabs) set one block deep, leaving only the sliding tracks as dark lines."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Minor",
+    "problem": "Engawa veranda is only a narrow bench-like strip; it does not read as a continuous timber walkway around the house",
+    "fix": "Run a full-length slab walkway one block out from the floor along the front and one side, with the same timber as the floor and a post at each corner."
+   },
+   {
+    "aspect": "Finish",
+    "severity": "Minor",
+    "problem": "Tall dark post on the right side of the front stands out as an unexplained column; the roof-ridge block is floating",
+    "fix": "Either tie the post into the veranda structure with a beam at the top, or remove it; set the ridge finial onto a supporting block."
+   }
+  ]
+ },
+ "cost": 0.00106659
+}

@@ -1,0 +1,57 @@
+{
+ "key": "tea-house",
+ "arm": "described",
+ "name": "Japanese tea house",
+ "exit": 0,
+ "stderr": "",
+ "minutes": 1.9,
+ "costUsd": 0.2501994,
+ "turns": 2,
+ "durationMin": 1.8,
+ "subtype": "success",
+ "isError": false,
+ "skillUsed": false,
+ "nbt": true,
+ "verdict": {
+  "usability": "NeedsWork",
+  "massing": "Fair",
+  "roof": "Fair",
+  "facades": "Fair",
+  "elements": "Fair",
+  "finish": "Fair",
+  "palette": "Good",
+  "summary": "A recognisable raised timber tea house with a good dark-tile and timber palette, but the roof is a huge heavy lid with no curved eaves, and the walls are open dark posts instead of white paper screens.",
+  "issues": [
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "Roof is an oversized, nearly flat-sided black hip that swamps the small body. Eaves are straight with no upturn, and the back elevation shows a big blank slab. A stray grey gap shows at the gable.",
+    "fix": "Rebuild with `mcd roof --preset teahouse` at a lower pitch and a tighter footprint so the eaves flick up at the corners. Add a finial or coping at the ridge. Fill the gable gap."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Major",
+    "problem": "The walls read as dark open posts with a dark interior. The white shoji panels are missing on the sides and mostly missing on the front, so the house looks like a stilted shed.",
+    "fix": "Use the glazing brush to fill every bay between the posts with white panels. Use a light pane or white block in dark timber grids. Add a few solid bays for rhythm."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "The engawa veranda is not readable. There is no clear deck ring or railing at floor level. The stone footings are tiny, and the floor reads as a thin plank band.",
+    "fix": "Extend a plank deck 1–2 blocks past the walls on the front and sides. Add the railing brush and the plinth brush, and put stepping stones up to the edge."
+   },
+   {
+    "aspect": "Massing",
+    "severity": "Minor",
+    "problem": "The maple is a boxy cube blob clipped against the roof corner. The lantern and bamboo are small and scattered.",
+    "fix": "Move the maple clear of the eaves and give it a rounder, layered canopy with a few red leaf-litter blocks. Group the lantern near the path entrance using fixtures."
+   },
+   {
+    "aspect": "Finish",
+    "severity": "Minor",
+    "problem": "Plain walls and a flat roof edge give little trim or depth. The stepping-stone path is a thin zigzag along the plot edge and does not lead to the house.",
+    "fix": "Add the brackets and cornice brushes under the eaves. Curve the stepping stones from the front corner to the veranda steps."
+   }
+  ]
+ }
+}

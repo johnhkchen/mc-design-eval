@@ -1,0 +1,57 @@
+{
+ "key": "stave-church",
+ "arm": "described",
+ "name": "Nordic stave church",
+ "exit": 0,
+ "stderr": "",
+ "minutes": 1.4,
+ "costUsd": 0.20138640000000002,
+ "turns": 2,
+ "durationMin": 1.3,
+ "subtype": "success",
+ "isError": false,
+ "skillUsed": false,
+ "nbt": true,
+ "verdict": {
+  "usability": "NeedsWork",
+  "massing": "Fair",
+  "roof": "Fair",
+  "facades": "Poor",
+  "elements": "Fair",
+  "finish": "Fair",
+  "palette": "Fair",
+  "summary": "The stacked tiers and spire say stave church from afar, but it reads as a pagoda-like pyramid of roof with a tiny hidden ground floor, no real walls, and gallery and dragon heads barely legible.",
+  "issues": [
+   {
+    "aspect": "Massing",
+    "severity": "Major",
+    "problem": "Almost the whole build is roof: a stepped pyramid sits on a very short ground storey, so there is no nave body, no lower-and-higher gable composition, and it reads as a pagoda or ziggurat, not a church with a long nave and a chancel.",
+    "fix": "Raise the walled storey to about 8 blocks, with a long gabled nave 17 deep and a narrower chancel. Then place a smaller tower mass above it and use `mcd roof --preset church` for the main roofs, with two or three steep tiers stepping up."
+   },
+   {
+    "aspect": "Roof",
+    "severity": "Major",
+    "problem": "The tiers are square pyramids that are identical on all four sides, with no ridge lines or gable ends. The shingle pattern is a noisy checker of two plank tones, and the eaves are flat and heavy.",
+    "fix": "Use gabled tiers with `church` preset ridges running along the length. Use one shingle material with a subtle second-tone accent. Add `cornice` or `coping` brushes at the eaves and `finial` brushes on the ridge ends."
+   },
+   {
+    "aspect": "Facades",
+    "severity": "Major",
+    "problem": "The ground floor is hidden under the lowest roof. The svalgang gallery is a dark strip with thin posts, and no wall faces, doors or windows are visible. The stone base is a flat grey slab.",
+    "fix": "Lift the gallery roof and build an open arcade with `railing` and `pilaster` posts. Add a dark plank wall behind it with a door using `surround`, and small `glazing` windows. Give the base a `plinth` course."
+   },
+   {
+    "aspect": "Elements",
+    "severity": "Major",
+    "problem": "The dragon-head gable ends are tiny cross-shaped stubs on the corners of the tiers. They look like antennas or horns, not carved dragon heads, and the spire is a plain pole.",
+    "fix": "Make the dragon heads bigger, with crossed curved projections at the gable peaks, using `brackets` and `finial` brushes in dark spruce. Give the spire a stepped base and a taller needle-like finial."
+   },
+   {
+    "aspect": "Palette",
+    "severity": "Minor",
+    "problem": "The build is nearly all one dark brown, so the tiers, posts and walls blur together, and the light-brown shingle squares look noisy against it.",
+    "fix": "Use a roof palette of dark spruce shingles with a few blackstone or stripped-log accents. Keep the walls a separate darker tarred tone, and use `mcd paint` to set clear contrast between wall, roof and trim."
+   }
+  ]
+ }
+}
