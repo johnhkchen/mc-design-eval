@@ -71,6 +71,8 @@ const builderPrompt = (task) => [
   "   \"where\": \"face / position in block coordinates\", \"instruction\": \"exactly what to make and with which tool (mcd paint rule, B.sign text,",
   "   B.banner colours/patterns, mcd roof spec change, a small edit to build.mjs)\"}]. Signs: give the exact text. Banners: colours and patterns.",
   "   Each task must be doable in a few minutes on its own. Be honest about what still needs polish.",
+  "6. Write gaps.md: TOOLKIT GAPS you hit: what you had to place by hand, could not express with a tool, or where a tool's options or",
+  "   defaults let you down (one line each: what you needed, which tool came closest). This decides which tools get built next.",
   "Use the toolkit (MCD=\"node " + MCD + "\"). The front faces NORTH (-z); x runs along the street. Keep within the size. Report in <=5 lines.",
 ].filter(Boolean).join("\n");
 
@@ -125,6 +127,7 @@ const rep1 = runAgent(builderPrompt("Design and build this building."), "build")
 if (!existsSync(join(dir, "build.nbt"))) throw new Error("builder produced no build.nbt");
 copyFileSync(join(dir, "build.nbt"), join(dir, "v1.nbt"));
 let best = { tag: "v1", j: await judge(card(join(dir, "v1.nbt"), "v1")) };
+writeFileSync(join(dir, "v1-judge.json"), JSON.stringify(best.j, null, 1) + "\n");
 mark("judge v1", { usability: best.j.usability, roof: best.j.roof, summary: best.j.summary });
 // 2. one revision if below the bar
 // 2. delegated improvements: each task in tasks.json runs as its own small worker session (Haiku) on a copy of the
@@ -170,6 +173,7 @@ writeFileSync(join(dir, "tasks-log.json"), JSON.stringify(taskLog, null, 1) + "\
 if (taskLog.some((t) => t.kept)) {
   copyFileSync(cur, join(dir, "v2.nbt"));
   const j2 = await judge(card(join(dir, "v2.nbt"), "v2"));
+  writeFileSync(join(dir, "v2-judge.json"), JSON.stringify(j2, null, 1) + "\n");
   mark("judge v2", { usability: j2.usability, roof: j2.roof, summary: j2.summary, tasksKept: taskLog.filter((t) => t.kept).length });
   if (RANK[j2.usability] >= RANK[best.j.usability]) best = { tag: "v2", j: j2 };
 }
@@ -182,5 +186,7 @@ if (accepted) {
   copyFileSync(join(dir, `${best.tag}.nbt`), join(coll, `${key}.nbt`));
   copyFileSync(join(dir, `${best.tag}-card.png`), join(coll, `${key}.png`));
 }
+// tool-gap intel: classify this run's shortfalls (Haiku) into the shared backlog
+spawnSync("node", [join(HERE, "..", "intel", "gaps.mjs"), "collect", dir], { stdio: "inherit" });
 appendFileSync(join(HERE, "ledger.jsonl"), JSON.stringify({ t: new Date().toISOString(), runId, ...summary, log: undefined }) + "\n");
 console.log(`[${key}] ${accepted ? "ACCEPTED" : "not accepted"}: ${best.tag} ${best.j.usability}, $${summary.costUsd}, ${summary.minutes} min`);

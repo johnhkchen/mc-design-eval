@@ -122,3 +122,67 @@ function ParseTasks(text: string) -> TaskList {
     {{ ctx.output_format }}
   "#
 }
+
+// ---- TOOL-GAP INTEL: every run's shortfalls, classified so Opus effort goes into tools that pay back on every build ----
+enum GapKind {
+  MissingTool    @description("no tool does this; builders hand-place it or skip it")
+  MissingOption  @description("a tool exists but lacks the option/variant needed")
+  MisusedTool    @description("a tool exists and could do it, but builders choose bad parameters (wants a preset/default)")
+  RendererGap    @description("the build may be right but the renders/judge cannot see it")
+  NotATool       @description("a one-off design judgement no tool would fix")
+}
+
+class ToolGap {
+  kind GapKind
+  aspect Aspect
+  tool string @description("the existing tool it concerns (e.g. mcd roof, railing, B.banner) or a short proposed name for a new one")
+  need string @description("what the tool must do, in one line, general enough to help other buildings")
+  evidence string @description("the observation it came from, shortened")
+}
+
+class GapReport {
+  gaps ToolGap[]
+}
+
+function ClassifyGaps(observations: string, toolkit: string) -> GapReport {
+  client ClaudeStub
+  prompt #"
+    You maintain a Minecraft building TOOLKIT used by AI builders. Below are observations from one build: a reviewer's issues,
+    improvement tasks that were rejected (with why), and the builder's own notes on what it had to hand-place or could not express.
+    For each observation that a REUSABLE DETERMINISTIC TOOL (or an option, preset or renderer fix) could prevent on future builds,
+    emit a gap. Be general: "railing round any flat top" not "railing on this tower". Skip pure taste calls (NotATool) unless
+    they recur. Merge duplicates.
+
+    ## The toolkit today
+    {{ toolkit }}
+
+    ## Observations
+    {{ observations }}
+
+    {{ ctx.output_format }}
+  "#
+}
+
+class GapCluster {
+  tool string @description("canonical name of the tool to build or extend, e.g. 'mcd roof: material contrast' or 'new: gate/door prop brush'")
+  kind GapKind
+  need string @description("one line: what the tool must do, general")
+  members int[] @description("ids of the gaps in this cluster")
+}
+
+class GapClusters {
+  clusters GapCluster[]
+}
+
+function ClusterGaps(gaps: string) -> GapClusters {
+  client ClaudeStub
+  prompt #"
+    Below are tool-gap notes from many Minecraft builds (id | kind | tool | need). Group the ones that one REUSABLE tool, option,
+    preset or renderer fix would solve into clusters, with a canonical tool name and a general need. Every id belongs to exactly
+    one cluster; singletons are fine. Prefer extending an existing tool to inventing a new one when the need fits it.
+
+    {{ gaps }}
+
+    {{ ctx.output_format }}
+  "#
+}
