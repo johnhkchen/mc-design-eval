@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Poor",
+ "facades": "Fair",
+ "elements": "Fair",
+ "finish": "Poor",
+ "palette": "Fair",
+ "summary": "The raised timber base, garden and lantern read as a tea house, but the roof is a ragged stepped pile of blackstone with holes and no curved eaves, and a giant red blob on one corner ruins the silhouette.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Roof is a lumpy stepped heap of dark brick with gaps showing stone and timber underneath. There is no hipped-and-gabled form, no upturned eaves and no overhang. It reads as a lid or ruin.",
+   "fix": "Clear the roof and rebuild it with `mcd roof --preset teahouse` in a dark tile palette. Add a deep overhang with raised corners and a clean ridge. Use a hipped-and-gabled layout, with no holes in the slopes."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "A large red block cluster on the front-right corner reads as a stray blob or sign, not a maple. It breaks the silhouette and the massing.",
+   "fix": "Remove it. Use `mcd paint` and craft brushes to build a proper maple in the garden beside the house: a slim log trunk with a rounded red-leaf canopy, kept separate from the roof and the walls."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The shoji paper-screen walls barely read. Only a few narrow white slivers show between heavy dark posts. The back elevation is mostly a blank timber band, and the walls have no grid rhythm.",
+   "fix": "Replace the wall bays with a repeating grid of white panels framed by thin dark timber. Add a lighter lintel and sill line on every face, including the back. Keep the posts slim."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The engawa veranda is cluttered. Fence and rail pieces are scattered, stair and plank bits are ragged, and a chimney-like block sticks up from the roof centre.",
+   "fix": "Regularise the veranda into a continuous floor strip with a clean low rail. Remove the roof chimney, or finish it as a deliberate lantern-cap. Run the footing course evenly around all sides."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "The stepping stones and path are broken up and the stone lantern is small. The garden is mostly random grass patches and gray blocks.",
+   "fix": "Lay a clear stepping-stone path from the front stairs. Make the lantern taller and more distinctive, and add a few moss and flower accents."
+  }
+ ]
+}

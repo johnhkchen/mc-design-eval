@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Fair",
+ "facades": "Fair",
+ "elements": "Good",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "A charming striped-awning market with good props and a strong terracotta/sand palette, but it reads as a flat-topped box with a cluttered rooftop, a dome that is really a stepped sand pyramid, and a blank back wall.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The 'dome or wind tower' is a stepped sandstone pyramid squatting in the middle of the roof, with orange awning patches and fence bits stuck to it. It reads as a ziggurat or a pile of blocks, not a rounded dome or a tall wind tower, and the rooftop is cluttered.",
+   "fix": "Run `mcd roof --preset desert` to get a proper parapet and dome cap, and use `mcd roof --preset tower-cap` or `lantern-cap` for the dome or wind tower. Remove the loose orange slab canopies and stair scraps on the roof, and keep the tower rounder and taller."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The back elevation is a flat, blank band of sandstone and terracotta. It has a few tiny windows, one door and a row of identical viga squares, with no depth, no recessed openings and no shading. The walls also read as thin slabs, not thick rounded adobe.",
+   "fix": "Use `mcd paint` to break up the wall with a plaster/terracotta mottle. Use craft brushes to recess the windows and add sill and lintel trim, buttress pilasters, and rounded parapet corners. Add a few clay pots or baskets along the back base."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Minor",
+   "problem": "The building is a plain rectangular slab with square corners and a uniform height. The arcade is only a lean-to row of awnings across the front, and the base has a notch and an odd step at the front corner.",
+   "fix": "Round or chamfer the corners with a craft brush. Step the parapet height or add a raised corner tower block. Clean up the stepped notch at the front-right base."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The viga ends are all the same dark log blocks in a regular row. The white parapet cap is stark and the parapet has a harsh seam at the corner. The fence on the roof reads as a pasture fence, not a parapet.",
+   "fix": "Vary the viga projection and spacing. Swap the white cap for a sandstone or terracotta palette and fill the parapet solid. Remove the roof fence and let the parapet do the work."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "The striped awnings read well, but the front view is dark and busy under them, so the pots, baskets and stalls are hard to pick out. The banners on the roof look random.",
+   "fix": "Lighten the shaded interior with a lighter floor and back wall. Group the pots and baskets at the pillars in clear view, and remove or relocate the roof banners."
+  }
+ ]
+}

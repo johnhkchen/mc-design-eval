@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Poor",
+ "facades": "Fair",
+ "elements": "Fair",
+ "finish": "Poor",
+ "palette": "Fair",
+ "summary": "The raised timber base, paper-screen openings and stone-lantern garden read as a tea house, but the roof is a ragged, hole-ridden pile of dark bricks with no hipped-and-gabled form or curved eaves, and the stray red blocks wreck the look.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The roof is a lumpy stepped heap of dark brick with open gaps and a stone-brick scar down the middle, so it reads as a damaged lid. It has no clear hip or gable, no deep overhang and no upturned eaves.",
+   "fix": "Rebuild the roof with `mcd roof --preset teahouse` for the hipped-and-gabled form and upturned eave corners. Use a single dark tile palette (no stone-brick patches), and run the roof close-up check to confirm there are no holes."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "Large red wool-like blocks stick out of the front-right corner and the left end of the back elevation. They read as stray blocks rather than a maple, and they hide the building corner.",
+   "fix": "Remove the red blocks. Build a proper maple with a trunk log and a rounded canopy of red or orange leaves, set clear of the veranda in the garden corner."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The paper-screen walls are only thin white slits between heavy dark posts, and the back elevation is mostly a solid timber band. The sliding-screen look the brief asks for is lost.",
+   "fix": "Replace the wall fill between posts with wide white panels (white concrete or glass panes) in slim dark timber frames, using `mcd paint` for a consistent frame grid. Keep a few solid dark bands only at the plinth and the lintel."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The engawa railings and the stairs are cluttered, and the roof edge has stray protruding bricks and rails that break the silhouette.",
+   "fix": "Regularise the veranda with a simple continuous rail and one clean stair. Trim the loose bricks along the eaves and the ridge, and use a craft brush for an even eave line."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "The stepping stones and the stone lantern are tiny, and the lantern pillar looks like a plain column. The garden is mostly flat grass.",
+   "fix": "Lay a clear winding path of stone slabs from the stair. Give the lantern a base, shaft, cap and lantern block, and add a few more bushes and a small pond or gravel patch."
+  }
+ ]
+}

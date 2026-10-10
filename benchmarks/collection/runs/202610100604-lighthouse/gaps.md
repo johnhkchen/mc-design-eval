@@ -1,0 +1,15 @@
+# Toolkit gaps hit on the lighthouse + keeper's cottage
+
+- **Roof extents vs. the size cap**: `roof()` (cottage preset) extends the footprint by overhang +1 AND an extra course (verge/flare), so a 7-wide wall block spilled to x+2; no way to say "keep the roof inside this box" (closest: `grow:false`, which throws). I shrank the cottage / switched `ridgeAxis` by trial and error.
+- **Roof abutting another mass**: no "butt against this wall" option for the cottage roof meeting the tower (closest: `overhang.west: 0` + `--why`; the verge still reads as a detached eave).
+- **Round-wall openings**: `surround` / `glazing` assume a planar wall; on a 7-wide round tower the jambs of a classical surround cover the whole 3-wide flat face and eat the stripes. I hand-placed sill slab + lintel + stair hood per window. Needed: a `surround ... preset minimal` (head + sill only) or a curved-wall aware frame.
+- **Striped / banded cylinders**: `cylinder` has `bands` for one extra block every N layers, not a repeating colour pattern (3 red, 3 white); I called `cylinder` once per band.
+- **Gallery / corbel ring for towers**: hand-wrote the corbel (upside-down stairs oriented by dominant axis), deck disc, and the connected fence ring with computed north/south/east/west states. Needed: `gallery(g, {center, radius, railing, corbel, lanterns})`; `ring()` only connects `*_wall`, not fences.
+- **Lantern room**: glass-pane ring with posts, lamp, door to the gallery: all by hand (pane connection states computed manually). Needed: `lanternRoom` brush (panes with correct connections, glazing bars, lamp pedestal).
+- **Rock / crag base**: `heightfield` + `strata` target big sites; for a 15x15 plinth of cliff I wrote my own height hash, rock mix and moss/grass scattering. `boulder` worked, but there is no "sea cliff" / stair-cut-into-rock brush; the stair run ended up as a stone-brick block.
+- **Vines on ledges**: hand-looped vine states (north/south/east/west) wherever a lower column meets a higher one. Needed: `ivy(g, {box, density})` that picks supported faces.
+- **Timber surround overruns**: `surround preset timber` writes a window box one out plus a rim trapdoor two out; on an east wall at the grid edge it wrote out of bounds, and the log jambs/lintel turned a plaster wall almost fully dark oak at 1-wide windows. I dropped it for hand shutters (open trapdoors) and used `planter box` alone.
+- **Shutters**: no shutter brush (open trapdoors either side of a window, hinged on the wall); hand-placed per window with facing derived by hand.
+- **Interior**: ladders / landings / hatch placed by hand (`ladder` needs a solid block behind: `check` found the plinth gap).
+- **Preset palettes**: `cottage` preset's default `spruce-shingle` is wrong for a red-tile cottage; had to pass my own `{mix, eave, ridge, verge}`. A `red-tile-cottage` palette (brick + granite, dark verge) would save that.
+- **Dry-run on a partial footprint**: `mcd roof build.nbt --dry-run` re-detects the whole building; with two roofs (cottage + lantern cap) I used the library `roof(..., {dryRun})` in code instead of the CLI.

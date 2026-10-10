@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Poor",
+ "facades": "Fair",
+ "elements": "Poor",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "A tidy stone base and ground-floor gallery carry the right stave-church idea, but the tiered roofs read as a mottled pagoda pyramid, with random blackstone patches instead of shingles and no real dragon gables, so the silhouette is more Japanese temple than Norwegian stave church.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Tiers are four-sided stepped pyramids with a noisy stair/plank jumble and random blackstone patches. They read as a pagoda, not steep gabled stave-church roofs with shingle courses.",
+   "fix": "Rebuild the tiers with `mcd roof --preset church` (steep gables, ridge along the nave axis), give each tier a uniform dark shingle palette, and drop the scattered blackstone speckle."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "No carved dragon-head gable ends. The eave corners carry small hook-shaped wood stubs, and the back view has stray floating horizontal beams, so nothing reads as a dragon.",
+   "fix": "Use craft brushes to build crossed, upswept dragon-head finials at each gable peak (dark logs and stairs curling outward), symmetric on both ends, and remove the floating beam pieces."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Major",
+   "problem": "The plan is a square stack of equal-width tiers with a tall plain upper tower. A stave church has a long nave with a lower chancel and a narrower tower rising from the ridge, so this reads as a tower or pagoda.",
+   "fix": "Extend the ground floor into a rectangular nave, make the upper tiers progressively narrower along the ridge, and cap with a slim spire using `mcd roof --preset tower-cap`."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Minor",
+   "problem": "The gallery walls are pale oak, too light against the brief's dark tarred timber. The upper walls are blank brown planks with tiny windows, and the street-view front lacks a clear portal.",
+   "fix": "Run `mcd paint` to darken the walls to spruce or dark oak, keeping the lighter wood only as trim, and add a carved portal with a gabled porch."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The top lantern uses a cream quartz or birch rail band that looks foreign. The gallery is a solid row of posts with no open arcade, and the lanterns at the base are sparse.",
+   "fix": "Replace the pale rail with dark spruce trapdoors or fence, open the gallery with arched gaps between posts, and add a few lanterns along the svalgang."
+  }
+ ]
+}

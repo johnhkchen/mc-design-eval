@@ -1,0 +1,52 @@
+[
+ {
+  "title": "The roof is a chaotic mix of stone brick, cobble and deepslate, with red wall pa",
+  "kind": "Roof",
+  "aspect": "Roof",
+  "where": "see problem",
+  "instruction": "Rebuild the roof with `mcd roof --preset barn` and a single-material roof palette, for example dark oak or deepslate tile stairs with matching slabs. Fill every gap so no wall colour shows through, and keep the gambrel break visible on both gable ends.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The chaotic mix of stone brick, cobble, deepslate and red patches is replaced by one coherent wooden roof that reads as a barn roof, and the white gable trim and cupola now stand out cleanly against it."
+ },
+ {
+  "title": "The barn doors and loft wall use a large red/white checkerboard. It reads as a t",
+  "kind": "Detail",
+  "aspect": "Facades",
+  "where": "see problem",
+  "instruction": "Use `mcd paint` to make the walls solid red with white trim. Keep white only for the door frame, the X-braces and the corner posts. Add vertical board lines and a few windows on the long sides.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The red/white checkerboard on the doors and loft wall is replaced by calmer, uniform red panels that read as barn doors and a loft wall, though the white X-brace trim is now lost and a few stray red roof bits appear."
+ },
+ {
+  "title": "The cupola is lost in the roof clutter. It looks like a small white and red box ",
+  "kind": "Props",
+  "aspect": "Elements",
+  "where": "see problem",
+  "instruction": "Place a clear cupola centred on the ridge, with white walls, louvre trapdoors, a small cap and a proper vane. Do this after the roof is clean. Keep the hoist beam projecting visibly over the loft door.",
+  "kept": false,
+  "verdict": "Worse",
+  "why": "The cupola still reads as a plain box, and the new thin iron-bar louvres and detached frame pieces float above the roof like scaffolding, adding clutter without making the cupola read as a crafted feature."
+ },
+ {
+  "title": "The gable edges are jagged white stair steps with uneven profiles. There are flo",
+  "kind": "Detail",
+  "aspect": "Finish",
+  "where": "see problem",
+  "instruction": "Run a consistent white barge-board along the gable edges and add a symmetric eave overhang. Remove or mirror the loose side blocks.",
+  "kept": false,
+  "verdict": "Worse",
+  "why": "The jagged stair steps are replaced by tall, straight white slabs and detached-looking cubes that stick up beside the dark roof, so the gable reads as floating pillars rather than a crafted roof edge."
+ },
+ {
+  "title": "The grey and black roof competes with the red body. The white is too bright, and",
+  "kind": "Detail",
+  "aspect": "Palette",
+  "where": "see problem",
+  "instruction": "Use a dark slate or weathered roof against the red walls, and a visible cobble or stone foundation band, set with white trim only.",
+  "kept": false,
+  "verdict": "Worse",
+  "why": "The red body is calmer and the white glare is gone, but the grey-black roof still dominates the sides, and the change drops the white X-braced door trim, the lanterns, and the dark eave band, so the barn loses its readable doors and articulation and reads as a flat red slab."
+ }
+]

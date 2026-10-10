@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Poor",
+ "facades": "Fair",
+ "elements": "Fair",
+ "finish": "Poor",
+ "palette": "Fair",
+ "summary": "The gable-end front has the right barn pieces (X-braced doors, hoist beam, hay and fence), but the roof is a noisy jumble of grey stone with red patches showing through. It doesn't read as a gambrel and swamps the whole build.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The roof is a chaotic mix of stone brick, cobble and deepslate, with red wall patches poking through and stray stair and slab bits. It reads as rubble, not a gambrel. The lower slope is a flat dark band, and there is no clear break line between the steep upper and shallow lower slopes.",
+   "fix": "Rebuild the roof with `mcd roof --preset barn` and a single-material roof palette, for example dark oak or deepslate tile stairs with matching slabs. Fill every gap so no wall colour shows through, and keep the gambrel break visible on both gable ends."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The barn doors and loft wall use a large red/white checkerboard. It reads as a tiled floor or a flag, not a red timber barn. The back elevation is the same checker plus a grey gradient, and the long sides are blank dark slabs.",
+   "fix": "Use `mcd paint` to make the walls solid red with white trim. Keep white only for the door frame, the X-braces and the corner posts. Add vertical board lines and a few windows on the long sides."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "The cupola is lost in the roof clutter. It looks like a small white and red box between stone blocks, and the weather vane is a single dark stub. The hoist beam and the hay block on a chain are faint against the busy roof.",
+   "fix": "Place a clear cupola centred on the ridge, with white walls, louvre trapdoors, a small cap and a proper vane. Do this after the roof is clean. Keep the hoist beam projecting visibly over the loft door."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The gable edges are jagged white stair steps with uneven profiles. There are floating dark side blocks beside the front at eaves height, and a muddled brown trim band with no overhang.",
+   "fix": "Run a consistent white barge-board along the gable edges and add a symmetric eave overhang. Remove or mirror the loose side blocks."
+  },
+  {
+   "aspect": "Palette",
+   "severity": "Minor",
+   "problem": "The grey and black roof competes with the red body. The white is too bright, and the foundation barely reads as stone.",
+   "fix": "Use a dark slate or weathered roof against the red walls, and a visible cobble or stone foundation band, set with white trim only."
+  }
+ ]
+}

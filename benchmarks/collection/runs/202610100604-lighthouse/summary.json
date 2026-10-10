@@ -1,0 +1,83 @@
+{
+ "key": "lighthouse",
+ "name": "Coastal lighthouse and keeper's cottage",
+ "tasks": 5,
+ "tasksKept": 4,
+ "kept": "v2",
+ "usability": "NeedsWork",
+ "grades": {
+  "massing": "Good",
+  "roof": "Fair",
+  "facades": "Good",
+  "elements": "Good",
+  "finish": "Fair",
+  "palette": "Good"
+ },
+ "summary": "A recognisable striped lighthouse on a mossy rock base with a believable lantern room, but the cottage roof is a flat brick slope that reads as a lean-to and the black lantern cap looks like a flat witch's hat rather than a proper dome or cone.",
+ "accepted": false,
+ "costUsd": 3.31,
+ "minutes": 16.5,
+ "log": [
+  {
+   "n": "build",
+   "s": 773,
+   "turns": 76,
+   "cost": 2.8086190000000006
+  },
+  {
+   "n": "judge v1",
+   "s": 799,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "A recognisable striped lighthouse on a mossy rock base with an attached brick-roofed cottage, but the black lantern cap reads as a heavy lid and the cottage roof is a flat-looking slab that crowds the tower."
+  },
+  {
+   "n": 5,
+   "s": 800
+  },
+  {
+   "n": "task 1: Lantern cap is a wide, flat, layered bla",
+   "s": 874,
+   "turns": 12,
+   "cost": 0.02227778
+  },
+  {
+   "n": "task 3: The lantern room has no clear glowing gl",
+   "s": 907,
+   "turns": 17,
+   "cost": 0.03431878
+  },
+  {
+   "n": "task 2: Cottage roof is a single steep brick sla",
+   "s": 914,
+   "turns": 21,
+   "cost": 0.06649008
+  },
+  {
+   "n": "task 5: The back elevation of the cottage is a f",
+   "s": 917,
+   "turns": 16,
+   "cost": 0.03428076
+  },
+  {
+   "n": "task 4: The red and white stripes are ragged. Ja",
+   "s": 958,
+   "turns": 14,
+   "cost": 0.03102679
+  },
+  {
+   "n": "reviews",
+   "s": 967,
+   "kept": 4,
+   "of": 5
+  },
+  {
+   "n": "judge v2",
+   "s": 991,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "A recognisable striped lighthouse on a mossy rock base with a believable lantern room, but the cottage roof is a flat brick slope that reads as a lean-to and the black lantern cap looks like a flat witch's hat rather than a proper dome or cone.",
+   "tasksKept": 4
+  }
+ ]
+}

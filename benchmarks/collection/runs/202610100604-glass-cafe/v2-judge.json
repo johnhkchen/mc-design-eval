@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Good",
+ "roof": "Fair",
+ "facades": "Fair",
+ "elements": "Good",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "A well-proportioned modern café on a concrete plinth with a readable neon CAFE sign, terrace and planters, but the huge, flat, dark roof slab sits on top like a lid and the glass sides are mostly dark panels rather than airy floor-to-ceiling glazing.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The roof is a huge, uniform dark slab with a thick white edge. From both 3/4 views it hides the whole building and reads as a heavy lid, not a slim cantilevered flat roof. The roof is too dark and too thick against the airy glass brief.",
+   "fix": "Re-run `mcd roof --preset cafe` (or `modern`) with a thinner white fascia and a lighter roof palette such as light gray concrete or smooth stone. Keep the timber soffit visible under the overhang. Use `mcd paint` to break up the flat slab with a narrow border or a slightly different tone."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The 'floor-to-ceiling glass' reads as black wall with a few small window panes. The back elevation is mostly dark brick with two small windows and a door. The front is dominated by dark panels around the sign. The brief's transparency is missing.",
+   "fix": "Replace the dark fill on the two glazed sides with continuous glass panes between slim dark pillars, using a craft brush for glazing bays. Leave only thin dark mullions. Keep the sign as the one dark accent."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The terrace interior is cluttered. Tables and chairs are jammed together beneath the roof edge. Corner blackstone posts and the lantern float oddly. The roof overhang hides most of the terrace in the 3/4 views.",
+   "fix": "Space out the table sets and keep a clear path from the stairs to the door. Use `mcd paint` to tidy the plinth edge. Place lanterns on the posts or the soffit instead of leaving them loose."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "The CAFE sign is readable from the street but small. It sits flat in a dark panel and is hidden from the side views by the roof. The planters are small green blobs that don't read clearly as planters.",
+   "fix": "Enlarge the sign or put it on a projecting fascia so it can be seen from the 3/4 angles. Replace the leaf-block planters with trough-style planters using trapdoors or planks as a rim, with flowers inside."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Minor",
+   "problem": "The plinth is a very thick, plain grey slab that is taller than the building's visible base. It dominates the street view and makes the café look small.",
+   "fix": "Reduce the plinth height by a course. Add a different trim course or accent line along the top edge with `mcd paint` so it reads as a deliberate concrete base."
+  }
+ ]
+}

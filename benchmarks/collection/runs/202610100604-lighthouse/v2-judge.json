@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Good",
+ "roof": "Fair",
+ "facades": "Good",
+ "elements": "Good",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "A recognisable striped lighthouse on a mossy rock base with a believable lantern room, but the cottage roof is a flat brick slope that reads as a lean-to and the black lantern cap looks like a flat witch's hat rather than a proper dome or cone.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Lantern cap is a wide, flat black stepped disc with a crater-like hollow top; it reads as a hat brim or lid rather than a cone or dome, and it overhangs the glass awkwardly.",
+   "fix": "Rebuild the cap with `mcd roof --preset lantern-cap` (or `tower-cap`) so it tapers in rings to a point, keep the copper finial on top, and use a dark palette with a slightly lighter edge course."
+  },
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Keeper's cottage roof is a single steep brick slope pressed against the tower, with no visible ridge or gable. From the front-left it reads as a staircase lean-to, and the roof close-up shows scattered stair and block texture with no clear ridge line.",
+   "fix": "Re-run `mcd roof --preset cottage` with a roof palette of brick and stairs, a proper ridge and gable ends, and a small overhang. Add a dormer, and keep the chimney with a stone cap on the ridge."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Minor",
+   "problem": "Back elevation of the cottage is a flat brick wall with a dark rectangular patch and no windows. The open timber porch on the lower level looks unfinished, and the cut-off edge on the right looks like a broken bit.",
+   "fix": "Use craft brushes to add two small framed windows with shutters, and close the porch edge with a corner post and trim. Use `mcd paint` to even out the brick patches."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "A stray stone block and a pillar stub stick up beside the gallery on the back view. There are also noisy random moss and grass patches on the rock base.",
+   "fix": "Remove or shape the stray stone into a proper lamp-room buttress. Thin out the moss and keep a consistent rock palette with a few deliberate grass tufts."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "Tower stripes are chunky and the narrow window slit is the only opening. The street view shows the tower door and cottage entrance as small and unclear, so the lighthouse reads thin at eye height.",
+   "fix": "Add a clear arched door at the tower base with a lantern either side. Add one or two more slit windows spaced up the shaft, and lay a short stone path from the cottage door."
+  }
+ ]
+}

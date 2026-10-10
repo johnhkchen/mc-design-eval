@@ -1,0 +1,62 @@
+[
+ {
+  "title": "Round window rings on the two timber storeys",
+  "kind": "detail",
+  "where": "north face x3..7, y12..14 (floor 1) and y16..18 (floor 2); same on east/west/south faces, centred on each wall",
+  "instruction": "The 3x3 plus-shaped windows read as crosses. Edit build.mjs round(): add a 5-wide ring of dark_oak_planks/stripped_dark_oak_log with cut corners around each window (stairs on the diagonals, facing outward) so it reads as a circle; rerun build.mjs, mcd roof, finish.mjs."
+ },
+ {
+  "title": "Tidy the glowing dormer",
+  "kind": "roof",
+  "where": "cone north face, y21..24, x4..6",
+  "instruction": "In finish.mjs replace the dark_oak_stairs hood with a 3-wide small gable: dark_oak_stairs facing north/south on the sides and a slab ridge, window = orange_stained_glass with shroomlight behind; check with mcd zoom --at 5,22,3 --from n."
+ },
+ {
+  "title": "Telescope that reads as a telescope",
+  "kind": "props",
+  "where": "east balcony x10..12, y15..17, z5",
+  "instruction": "Replace the stripped-log tube + lightning rod with a 4-long tube pointing up-and-out: stripped_dark_oak_log axis x at (10,17,5),(11,17,5), a copper stair rising at (12,17,5) facing west and a lightning_rod facing east at (12,18,5); add a fence tripod and a brass lantern (B.lantern) on the rail post beside it."
+ },
+ {
+  "title": "Sun banner under the balcony and a second banner on the west",
+  "kind": "banner",
+  "where": "west face of floor 1 at x1,y12,z5 (outside the wall at x2) and south face of the shaft at x6,y8,z10",
+  "instruction": "B.banner('cyan', [['circle','yellow'],['border','black']], {facing:'west'}) at (1,12,5) on the west timber wall's plaster panel and the same with facing:'south' at (6,8,10) on the shaft back wall. One banner each."
+ },
+ {
+  "title": "Hanging name sign by the door",
+  "kind": "sign",
+  "where": "north face of shaft, x8, y5, z2 (right of the door)",
+  "instruction": "B.sign('dark_oak', ['ARCHMAGE','OF THE','CROOKED TOWER'], {facing:'north', color:'white', glow:false}) on a fence arm at (8,5,2); or mcd paint rule 'north row 5 col 8 -> attach sign \"ARCHMAGE|CROOKED TOWER\" dark_oak'."
+ },
+ {
+  "title": "Break up the cone: grey slate patches and a ring course",
+  "kind": "roof",
+  "where": "cone y20..26, all faces",
+  "instruction": "Edit roof.json material mix: raise stone_bricks to 14 and add cobbled_deepslate 6; add 'ring':true and a trim:'dark_oak'; run mcd roof --dry-run first, fix every warning."
+ },
+ {
+  "title": "Darker mossy foot and more ivy on the timber",
+  "kind": "detail",
+  "where": "all faces y3..14, concentrated on the west and south faces",
+  "instruction": "mcd paint rule: 'all faces rows 0-8 where stone_bricks -> weather moderate' then raise the vine probabilities in finish.mjs for y10..14 by 2x; keep vines off windows."
+ },
+ {
+  "title": "Window boxes under the floor-2 and rear windows",
+  "kind": "props",
+  "where": "floor 2 north face z1 below the round window (y15), south face z9 floor 1 y11",
+  "instruction": "mcd paint rule 'north rows 11-12 cols 5 -> planters' or B.slab('dark_oak','top') strips with potted_poppy / potted_azure_bluet pots like the one on floor 1."
+ },
+ {
+  "title": "Lantern post beside the stair flight",
+  "kind": "props",
+  "where": "x3,z0 and x9,z0 on the mound edge",
+  "instruction": "fence 2 tall (dark_oak_fence) with B.lantern(false) on top and a vine curling on the post; matches the two on the stoop."
+ },
+ {
+  "title": "Soften the roof lean kink at the tip",
+  "kind": "fix",
+  "where": "cone tip, x4..5, y26..29",
+  "instruction": "Replace the single lightning-rod finial with a short bent finial: dark_oak_fence at (4,27,5) and (5,28,5), a B.lantern(false) on top; keep the tip within y29."
+ }
+]

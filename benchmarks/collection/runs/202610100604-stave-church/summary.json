@@ -1,0 +1,83 @@
+{
+ "key": "stave-church",
+ "name": "Nordic stave church",
+ "tasks": 5,
+ "tasksKept": 4,
+ "kept": "v2",
+ "usability": "NeedsWork",
+ "grades": {
+  "massing": "Fair",
+  "roof": "Poor",
+  "facades": "Fair",
+  "elements": "Poor",
+  "finish": "Fair",
+  "palette": "Good"
+ },
+ "summary": "A tidy stone base and ground-floor gallery carry the right stave-church idea, but the tiered roofs read as a mottled pagoda pyramid, with random blackstone patches instead of shingles and no real dragon gables, so the silhouette is more Japanese temple than Norwegian stave church.",
+ "accepted": false,
+ "costUsd": 2.1,
+ "minutes": 10.4,
+ "log": [
+  {
+   "n": "build",
+   "s": 407,
+   "turns": 51,
+   "cost": 1.6244843999999994
+  },
+  {
+   "n": "judge v1",
+   "s": 439,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "The tiered silhouette, stone base, and spire read as a stave church from a distance, but the roofs are blocky grey stair-stepped slabs, the gable ends are muddy two-tone planks, and the thin ground floor looks like a bare open pavilion rather than a tarred timber gallery."
+  },
+  {
+   "n": 5,
+   "s": 440
+  },
+  {
+   "n": "task 3: Wood is light and warm oak-brown, not da",
+   "s": 520,
+   "turns": 12,
+   "cost": 0.02289353
+  },
+  {
+   "n": "task 2: The ground floor is a row of widely spac",
+   "s": 542,
+   "turns": 19,
+   "cost": 0.03172138000000001
+  },
+  {
+   "n": "task 4: The dragon-head gable ends are only smal",
+   "s": 549,
+   "turns": 18,
+   "cost": 0.030726900000000005
+  },
+  {
+   "n": "task 1: Roof tiers are chunky grey stone-brick b",
+   "s": 569,
+   "turns": 22,
+   "cost": 0.035585450000000005
+  },
+  {
+   "n": "task 5: The roof edges are stepped and ragged, t",
+   "s": 579,
+   "turns": 22,
+   "cost": 0.03778472
+  },
+  {
+   "n": "reviews",
+   "s": 594,
+   "kept": 4,
+   "of": 5
+  },
+  {
+   "n": "judge v2",
+   "s": 626,
+   "usability": "NeedsWork",
+   "roof": "Poor",
+   "summary": "A tidy stone base and ground-floor gallery carry the right stave-church idea, but the tiered roofs read as a mottled pagoda pyramid, with random blackstone patches instead of shingles and no real dragon gables, so the silhouette is more Japanese temple than Norwegian stave church.",
+   "tasksKept": 4
+  }
+ ]
+}

@@ -1,0 +1,83 @@
+{
+ "key": "desert-market",
+ "name": "Desert adobe market hall",
+ "tasks": 5,
+ "tasksKept": 4,
+ "kept": "v2",
+ "usability": "NeedsWork",
+ "grades": {
+  "massing": "Good",
+  "roof": "Fair",
+  "facades": "Fair",
+  "elements": "Good",
+  "finish": "Fair",
+  "palette": "Good"
+ },
+ "summary": "A charming adobe market hall with a convincing viga-and-awning front, but the roof reads as a pit of random sandstone stacked behind a terracotta parapet, and the plain back wall lets it down.",
+ "accepted": false,
+ "costUsd": 1.8,
+ "minutes": 10,
+ "log": [
+  {
+   "n": "build",
+   "s": 291,
+   "turns": 37,
+   "cost": 1.3262887999999997
+  },
+  {
+   "n": "judge v1",
+   "s": 314,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "A charming striped-awning market with good props and a strong terracotta/sand palette, but it reads as a flat-topped box with a cluttered rooftop, a dome that is really a stepped sand pyramid, and a blank back wall."
+  },
+  {
+   "n": 5,
+   "s": 315
+  },
+  {
+   "n": "task 1: The 'dome or wind tower' is a stepped sa",
+   "s": 412,
+   "turns": 19,
+   "cost": 0.03211107
+  },
+  {
+   "n": "task 2: The back elevation is a flat, blank band",
+   "s": 443,
+   "turns": 25,
+   "cost": 0.04103704
+  },
+  {
+   "n": "task 4: The viga ends are all the same dark log ",
+   "s": 450,
+   "turns": 25,
+   "cost": 0.04232625
+  },
+  {
+   "n": "task 3: The building is a plain rectangular slab",
+   "s": 496,
+   "turns": 12,
+   "cost": 0.02124229
+  },
+  {
+   "n": "task 5: The striped awnings read well, but the f",
+   "s": 540,
+   "turns": 19,
+   "cost": 0.033307989999999996
+  },
+  {
+   "n": "reviews",
+   "s": 565,
+   "kept": 4,
+   "of": 5
+  },
+  {
+   "n": "judge v2",
+   "s": 602,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "A charming adobe market hall with a convincing viga-and-awning front, but the roof reads as a pit of random sandstone stacked behind a terracotta parapet, and the plain back wall lets it down.",
+   "tasksKept": 4
+  }
+ ]
+}

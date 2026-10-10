@@ -1,0 +1,52 @@
+[
+ {
+  "title": "Lantern cap is a wide, flat, layered black hat that overhangs the glass room and",
+  "kind": "Roof",
+  "aspect": "Roof",
+  "where": "see problem",
+  "instruction": "Rebuild the cap with `mcd roof --preset lantern-cap` (or `tower-cap`) on the lantern room so it forms a tight cone or dome with a slim overhang, and use a dark palette with a lighter or copper top accent.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The lantern now ends in a warm copper cap that reads as a deliberate crown on the glass room and contrasts clearly with the black roof, though the mottled dark patches in the centre add some noise."
+ },
+ {
+  "title": "Cottage roof is a single steep brick slab with no visible ridge, no gable ends, ",
+  "kind": "Roof",
+  "aspect": "Roof",
+  "where": "see problem",
+  "instruction": "Re-run `mcd roof --preset cottage` on the cottage footprint with a clear ridge, gable ends and a small eave overhang. Use a brick and dark-wood roof palette and add a dormer so it reads as a house roof.",
+  "kept": false,
+  "verdict": "Worse",
+  "why": "The after roof shows a jumbled stepped gable with holes, mixed brick, oak and white blocks poking through, and no clean ridge, so it reads as broken construction rather than a crafted gable, and the chimney has disappeared."
+ },
+ {
+  "title": "The lantern room has no clear glowing glass. The glass is thin and recessed behi",
+  "kind": "Props",
+  "aspect": "Elements",
+  "where": "see problem",
+  "instruction": "Enlarge the lantern glass to full-height panes between slim posts, add a glowstone or sea lantern core, and widen the gallery with a continuous railing using the craft brushes.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The lantern glass now reads as distinct pale-cyan panes framing a lit core, where before it was nearly invisible, though the denser railing now partly hides the lantern and the glass glows only faintly."
+ },
+ {
+  "title": "The red and white stripes are ragged. Jagged notches show on the tower edges, la",
+  "kind": "Detail",
+  "aspect": "Finish",
+  "where": "see problem",
+  "instruction": "Clean the stripe edges so each band is a full ring, remove the protruding stone blocks, and use `mcd paint` to re-band the shaft evenly.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The stripe edges are now clean vertical lines, with the jagged notches and stray protruding stone blocks removed, so the tower reads as a deliberately built striped form with no new clutter or floating pieces."
+ },
+ {
+  "title": "The back elevation of the cottage is a flat brick wall with little detail. The t",
+  "kind": "Detail",
+  "aspect": "Facades",
+  "where": "see problem",
+  "instruction": "Add windows, a timber trim course and a chimney stack with a cap to the rear wall using the chimney and dormer tools.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The dark horizontal band and grey inset on the brick back wall break up the flat face and read as a beam or window head, and the new stone pier adds believable vertical mass under the gallery, though its overhanging cap block looks slightly unsupported."
+ }
+]

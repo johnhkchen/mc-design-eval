@@ -1,0 +1,83 @@
+{
+ "key": "glass-cafe",
+ "name": "Modern glass café",
+ "tasks": 5,
+ "tasksKept": 4,
+ "kept": "v2",
+ "usability": "NeedsWork",
+ "grades": {
+  "massing": "Good",
+  "roof": "Fair",
+  "facades": "Fair",
+  "elements": "Good",
+  "finish": "Fair",
+  "palette": "Good"
+ },
+ "summary": "A well-proportioned modern café on a concrete plinth with a readable neon CAFE sign, terrace and planters, but the huge, flat, dark roof slab sits on top like a lid and the glass sides are mostly dark panels rather than airy floor-to-ceiling glazing.",
+ "accepted": false,
+ "costUsd": 2.14,
+ "minutes": 14.1,
+ "log": [
+  {
+   "n": "build",
+   "s": 490,
+   "turns": 44,
+   "cost": 1.5771093999999999
+  },
+  {
+   "n": "judge v1",
+   "s": 514,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "A tidy plinth, terrace and neon CAFE sign give it a clear café read, but the heavy, tiled, double-layered dark roof sits like a lid on a mostly dark-walled box, so it doesn't feel like a light glass pavilion."
+  },
+  {
+   "n": 5,
+   "s": 514
+  },
+  {
+   "n": "task 5: The CAFE sign is legible but sits on a b",
+   "s": 602,
+   "turns": 17,
+   "cost": 0.027028270000000007
+  },
+  {
+   "n": "task 2: The brief asks for floor-to-ceiling glas",
+   "s": 632,
+   "turns": 18,
+   "cost": 0.03562389999999999
+  },
+  {
+   "n": "task 4: The terrace is cluttered: tables and cha",
+   "s": 677,
+   "turns": 17,
+   "cost": 0.08150908999999999
+  },
+  {
+   "n": "task 3: Everything is near-black (roof, walls, p",
+   "s": 707,
+   "turns": 18,
+   "cost": 0.025549279999999997
+  },
+  {
+   "n": "task 1: The roof is a thick two-layer slab of bl",
+   "s": 809,
+   "turns": 31,
+   "cost": 0.06802895
+  },
+  {
+   "n": "reviews",
+   "s": 822,
+   "kept": 4,
+   "of": 5
+  },
+  {
+   "n": "judge v2",
+   "s": 847,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "A well-proportioned modern café on a concrete plinth with a readable neon CAFE sign, terrace and planters, but the huge, flat, dark roof slab sits on top like a lid and the glass sides are mostly dark panels rather than airy floor-to-ceiling glazing.",
+   "tasksKept": 4
+  }
+ ]
+}

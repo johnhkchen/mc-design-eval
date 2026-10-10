@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Poor",
+ "facades": "Fair",
+ "elements": "Poor",
+ "finish": "Poor",
+ "palette": "Fair",
+ "summary": "The barn has a decent footprint and a readable red-and-white gable end, but the roof is a noisy jumble of dark plank steps, the cupola and hoist beam are lost in it, and the long sides are dark and blank, so it doesn't read as a gambrel barn.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The roof is a single dark spruce slab with ragged stair/plank steps, odd white notches on the slope, and no clear gambrel break (steep lower pitch and shallow upper pitch). It reads as a lumpy lid, not a barn roof.",
+   "fix": "Rebuild the roof with `mcd roof --preset barn` for a true gambrel profile. Use a roof palette of a dark stair slope with a slightly lighter ridge course. Delete the stray white blocks on the slopes and the loose plank overhangs."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "The cupola and weather vane are a messy tangle of dark planks and flat T-shaped beams sticking out above the ridge. They have no clear body, base or vane and read as debris. The hoist beam and hay loft door are lost too.",
+   "fix": "Remove the beams above the ridge. Add a small 3x3 cupola with a louvred body (trapdoors) and a tiny pyramid cap, seated on the ridge. Add a one-block fence or rod vane on top. Put a clean 1-block hoist beam projecting from above a white-framed loft door on the gable."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The long side walls are hidden under the roof overhang and read as dark and blank, with only a few notches. The gable end is a busy red/white checkerboard. The sliding doors do not read as doors, and there are no clear white X-braces. A dark log pole splits the front down the middle.",
+   "fix": "Make the gable end a solid red wall. Put two big sliding doors in it with white trim and X-bracing, using `mcd paint` for the white diagonals. Add a stone foundation course. Give the side walls red panels with white trim bands and a few windows."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The gable edges are jagged, with stray white and dark blocks. The roof edges are uneven and there are floating beam bits, so the build looks noisy and unfinished.",
+   "fix": "Run `mcd check` to find orphan blocks. Clean the roof edges with a uniform trim course and add a consistent white barge board along the gable rake."
+  },
+  {
+   "aspect": "Palette",
+   "severity": "Minor",
+   "problem": "The very dark brown roof dominates and swallows the red walls, and the checkerboard of red and white is too high-contrast. It does not read as a classic red barn.",
+   "fix": "Lighten the roof, for example weathered grey or a lighter wood, with a dark ridge. Keep the walls mainly red with white trim only at the doors, corners and eaves."
+  }
+ ]
+}

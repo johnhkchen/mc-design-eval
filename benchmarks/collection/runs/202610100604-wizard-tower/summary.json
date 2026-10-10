@@ -1,0 +1,83 @@
+{
+ "key": "wizard-tower",
+ "name": "Fantasy wizard tower",
+ "tasks": 5,
+ "tasksKept": 3,
+ "kept": "v2",
+ "usability": "NeedsWork",
+ "grades": {
+  "massing": "Good",
+  "roof": "Fair",
+  "facades": "Good",
+  "elements": "Good",
+  "finish": "Fair",
+  "palette": "Good"
+ },
+ "summary": "A charming stone-base, jettied timber-frame tower with ivy, lanterns and a balcony telescope, but the cone reads as a flat lid with a spike stuck on top, so it never reaches the tall crooked wizard-hat silhouette the brief asks for.",
+ "accepted": false,
+ "costUsd": 2.09,
+ "minutes": 9.9,
+ "log": [
+  {
+   "n": "build",
+   "s": 318,
+   "turns": 38,
+   "cost": 1.5465411999999996
+  },
+  {
+   "n": "judge v1",
+   "s": 347,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "A charming stone-base, jettied timber-frame wizard tower with ivy, lanterns, a balcony and a telescope, but the tall cone is really a flat verdigris lid with a thin crooked spire stuck on top, so it doesn't read as a conical wizard hat from the front."
+  },
+  {
+   "n": 5,
+   "s": 348
+  },
+  {
+   "n": "task 5: The plaster infill panels are plain whit",
+   "s": 429,
+   "turns": 15,
+   "cost": 0.027011470000000003
+  },
+  {
+   "n": "task 2: The roof has a noisy jumble of brown sta",
+   "s": 493,
+   "turns": 30,
+   "cost": 0.06257635
+  },
+  {
+   "n": "task 3: The upper floors are a plain square box,",
+   "s": 509,
+   "turns": 15,
+   "cost": 0.03880077
+  },
+  {
+   "n": "task 1: The roof is a wide, flat-stepped slab wi",
+   "s": 521,
+   "turns": 20,
+   "cost": 0.02955786
+  },
+  {
+   "n": "task 4: The balcony and telescope are tucked at ",
+   "s": 526,
+   "turns": 21,
+   "cost": 0.07968185000000001
+  },
+  {
+   "n": "reviews",
+   "s": 541,
+   "kept": 3,
+   "of": 5
+  },
+  {
+   "n": "judge v2",
+   "s": 596,
+   "usability": "NeedsWork",
+   "roof": "Fair",
+   "summary": "A charming stone-base, jettied timber-frame tower with ivy, lanterns and a balcony telescope, but the cone reads as a flat lid with a spike stuck on top, so it never reaches the tall crooked wizard-hat silhouette the brief asks for.",
+   "tasksKept": 3
+  }
+ ]
+}

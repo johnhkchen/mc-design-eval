@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Good",
+ "roof": "Fair",
+ "facades": "Fair",
+ "elements": "Good",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "A charming adobe market hall with a convincing viga-and-awning front, but the roof reads as a pit of random sandstone stacked behind a terracotta parapet, and the plain back wall lets it down.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Roof interior is a lumpy, random-looking heap of sandstone steps (the intended dome) sitting in an open terracotta frame; it reads as a debris pile, not a dome or wind tower, and the deck is a flat empty floor.",
+   "fix": "Run `mcd roof --preset desert` to get a clean flat deck with parapet, then replace the heap with a deliberate shape such as a smooth round dome from a craft brush on a square drum, or a tidy square wind tower with dark vent openings."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "Back elevation is a flat, mostly blank sandstone wall: two tiny windows and a door, and widely spaced viga squares. It looks unfinished next to the front.",
+   "fix": "Use `mcd paint` to add a terracotta trim band under the parapet, pilaster strips between the windows, and slightly larger recessed windows with shutters. Add a couple of pots or baskets at the base so the back keeps the market feel."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "Parapet is a plain single-block terracotta ring with no coping or relief. Walls are sharp-cornered boxes, not the thick rounded adobe the brief asks for.",
+   "fix": "Soften the corners and parapet edge with stair or slab blocks via craft brushes, and add a different-tone cap course along the top."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "Rooftop banner and stray props (barrels, planters) are scattered at random on the roof deck, adding noise. Awnings are chunky stair stacks that look heavy from the 3/4 views.",
+   "fix": "Remove the roof banner and group the props at a single corner. Thin the awnings to one stair row with a clear stripe repeat."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Minor",
+   "problem": "A small plain sandstone cube on one roof corner and the heap on the other leave the roofline unbalanced, with no clear focal tower.",
+   "fix": "Pick one focal feature, either a centered dome or a corner wind tower, and make it a defined, taller shape. Delete the other."
+  }
+ ]
+}

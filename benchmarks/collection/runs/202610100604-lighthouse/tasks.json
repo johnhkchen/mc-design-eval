@@ -1,0 +1,68 @@
+[
+ {
+  "title": "Rock base: break up the blocky stone-brick foreground",
+  "kind": "fix",
+  "where": "x 2-6, z 0-2, y 0-3 (the stair run and cheek walls) and x 0-1 / x 13-14 edges, y 0-3",
+  "instruction": "In build.mjs section 1 replace the stone_bricks stair-run foundation with natural rock: keep the stone_brick stairs on the tread cells only, make the cheek walls and the fill under them the ROCK mix (stone / cobblestone / andesite / mossy_cobblestone), and add 2-3 more `boulder(g, ...)` calls at the corners (e.g. [1,3,13],[13,3,13],[0,3,2]) with moss: 0.4."
+ },
+ {
+  "title": "Rock: more ledges and drop-off on the sides",
+  "kind": "fix",
+  "where": "outside the plinth/cottage footprint, x 0-2 and 12-14, z 9-14",
+  "instruction": "In build.mjs raise the drop in the `heights` formula (dist*1.15 -> dist*1.6) for cells with z>=10, so the back and sides step down 1-2 courses; keep protectedCell() cells at GROUND. Re-run, then `mcd check` for floating blocks."
+ },
+ {
+  "title": "Lantern room: make the glass read",
+  "kind": "detail",
+  "where": "lantern room x 2-6, y 19-22, z 4-8",
+  "instruction": "Swap glass_pane for full `glass` blocks on the 4 diagonal wall cells of ring2 and keep the cardinal dark_oak posts; add iron_bars as horizontal glazing bars at y=21 on the diagonal cells; then render the lantern close-up tile (`mcd zoom build.nbt --at 4,20,2 --radius 4 --from n`) and keep the better version."
+ },
+ {
+  "title": "Hanging lanterns under the cap overhang",
+  "kind": "props",
+  "where": "under the cap eave at the 4 cardinal positions around the lantern room, x 4 +-3, z 6 +-3, y 22",
+  "instruction": "In build.mjs after the cap call, set B.chain(\"y\") at (4,22,3),(4,22,9),(1,22,6),(7,22,6) only where the cell is air and a cap block is above, with B.lantern(true) one below if y 21 is free; keep the lightning rod and total height 28."
+ },
+ {
+  "title": "Windows on the tower: lighter frames",
+  "kind": "detail",
+  "where": "tower windows (x 4, z 3 / z 9; x 1; x 7) y 6-16",
+  "instruction": "The proud sill slabs and stair hoods on the E/W faces read as clutter in the silhouette. Remove the sill slab on the east and west windows only (comment out the `B.slab(\"stone_brick\",\"top\")` line for f === 'east'|'west') and keep them on the north and south faces."
+ },
+ {
+  "title": "Cottage porch: lean-to canopy over the door",
+  "kind": "roof",
+  "where": "cottage front, x 9-12, z 3-4, y 7-8",
+  "instruction": "Add a shed canopy: `roof(g, [[9,3,12,4]], 'shop', {y: 7, style: 'shed', ...})` or place a row of spruce_stairs (facing south) at y 7 on z=4 with dark_oak_log posts at (9,4..6,3) and (12,4..6,3); keep the lantern at the door."
+ },
+ {
+  "title": "Cottage roof: add a dormer on the front slope",
+  "kind": "roof",
+  "where": "north slope of the cottage roof, x 9-11",
+  "instruction": "Re-run the cottage roof call in build.mjs with `dormers: {face: 'north', count: 1, style: 'gable', width: 3, height: 2, window: true}` (and keep the chimney); run `--dry-run` style check first (DRY=1 node build.mjs) and fix any ROOF_DORMER_DROPPED warning by moving it to x 10-12."
+ },
+ {
+  "title": "Sign by the cottage door",
+  "kind": "sign",
+  "where": "cottage front wall, x 11, y 5, z 5 (between the door and the window)",
+  "instruction": "Remove the north shutter at (11,5..6,4) and place B.sign('spruce', ['KEEPER','NO. 1'], {wall:true, facing:'north', color:'black'}) at (11,5,4) with a hanging iron bracket (fixture mount 'arm') above it."
+ },
+ {
+  "title": "Banner: red-and-white pennant on the gallery",
+  "kind": "banner",
+  "where": "gallery railing, south side, x 4, y 20, z 10",
+  "instruction": "B.banner('red', [['stripe_middle','white'],['border','red']], {wall:false, rotation: 8}) on a standing fence post on the railing at (4,20,10), on a short iron-bars flagpole 2 high; keep within height 28."
+ },
+ {
+  "title": "Tower plinth: age and a waterline",
+  "kind": "detail",
+  "where": "tower plinth y 4-5 all around, and cottage plinth y 4",
+  "instruction": "Use `mcd paint` (weather moderate) on the plinth faces only, or extend the cracked/mossy replace loop in build.mjs to the cottage cobblestone plinth and add a ring of seagrass-free moss_carpet at y=4 around the tower base where air."
+ },
+ {
+  "title": "Garden at the cottage: fence and planters",
+  "kind": "props",
+  "where": "x 9-13, z 2-4, y 3-4 (front lawn) and the back of the cottage z 13-14",
+  "instruction": "Extend the dark_oak_fence run along z=4 to x 9-13 with a gate gap at x=10 (fence_gate facing north) and add `planter(g,{at:[11,4,3],face:'north',kind:'ground',width:2,depth:1})`; add 2 barrels at (13,4,13) and (12,4,13)."
+ }
+]

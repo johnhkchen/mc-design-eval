@@ -1,0 +1,52 @@
+[
+ {
+  "title": "Roof tiers are chunky grey stone-brick blocks with stepped fronts and scattered ",
+  "kind": "Roof",
+  "aspect": "Roof",
+  "where": "see problem",
+  "instruction": "Re-run `mcd roof --preset church` on each tier with a dark-wood shingle roof palette (spruce/dark oak stairs with a few blackstone accents), so each tier reads as smooth steep shingled slopes with clean ridges and overhangs.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The grey stone-brick tiers with their stepped fronts are replaced by warm timber shingle courses that match the tarred-timber palette and read as crafted roofing, though some scattered dark specks remain and read as dirt on the upper tiers."
+ },
+ {
+  "title": "The ground floor is a row of widely spaced bare posts with a thin back wall, so ",
+  "kind": "Detail",
+  "aspect": "Facades",
+  "where": "see problem",
+  "instruction": "Use `mcd paint` to give the gallery a continuous low wall with a railing of fence or trapdoor trim between the posts, and re-skin the gable faces in one dark spruce palette with a darker X or cross-beam trim.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The added oak benches and stair-block seating along the base of the gallery make the ground floor read as a usable svalgang rather than bare posts, though the benches are small and the posts are still widely spaced."
+ },
+ {
+  "title": "Wood is light and warm oak-brown, not dark tarred timber, and the roofs are mid-",
+  "kind": "Detail",
+  "aspect": "Palette",
+  "where": "see problem",
+  "instruction": "Repaint the walls, posts and gable ends with `mcd paint` using dark oak/spruce and blackstone, and keep stone only for the base. Reserve a lighter accent for the lanterns and carved heads.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The light oak-brown wood separates the tiered roof bands, gable heads and gallery from the dark shingles and stone base, so the silhouette reads more clearly and the timber looks crafted rather than muddy, with no floating or broken pieces visible."
+ },
+ {
+  "title": "The dragon-head gable ends are only small dark curled wood blobs on the ridge en",
+  "kind": "Props",
+  "aspect": "Elements",
+  "where": "see problem",
+  "instruction": "Use a craft brush to build larger, outward-curving dragon heads with a jaw and a notch at each gable peak, and add a tiered mini-spire (lantern-cap style) with a wider base.",
+  "kept": false,
+  "verdict": "Worse",
+  "why": "The dragon-head ends still read as small, blocky, hooked clusters rather than carved dragon heads, and the tall spire is replaced by a wide wooden mushroom-like cap on a short post, which breaks the stave church's vertical silhouette and looks like a stray floating piece."
+ },
+ {
+  "title": "The roof edges are stepped and ragged, the gable triangles have stray window and",
+  "kind": "Detail",
+  "aspect": "Finish",
+  "where": "see problem",
+  "instruction": "Run `mcd check` and clean up the stray blocks, use dormers or small louvre windows in the gable triangles only where intended, and add a stair or slab drip edge under the eaves.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The after views replace the ragged stair-and-plank jumble on the upper tier with regular horizontal eave beams and cleaner gable edges, so the roof reads as deliberate stacked tiers, though the dragon-head ends look slightly reduced."
+ }
+]

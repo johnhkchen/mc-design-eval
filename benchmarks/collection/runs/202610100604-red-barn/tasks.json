@@ -1,0 +1,62 @@
+[
+ {
+  "title": "Rail the cupola up to a readable weather vane",
+  "kind": "fix",
+  "where": "cupola on the ridge, x6..8 y10..13 z10..12",
+  "instruction": "Edit build.mjs: the vane is only a flat iron_bars cross at y13 (the 14-tall cap leaves no room above). Make it read as an arrow: keep iron_bars at (7,13,10),(7,13,11),(7,13,12) along z for the shaft and only (6,13,11),(8,13,11) as the crossbar, and swap the cap centre at (7,12,11) for an iron_bars post. Re-render the cupola closeup."
+ },
+ {
+  "title": "Make the X-brace on the big doors read as an X",
+  "kind": "detail",
+  "where": "front doors x3..11 y1..4 at z4 (recess plane), and the same on the back gable at z18",
+  "instruction": "Edit gableEnd() in build.mjs: add white smooth_quartz_slab/stairs half-steps beside each diagonal cell (stairs facing along the diagonal) and a 1-block white border (top row y4 and outer columns x3, x11) so each leaf shows a framed X instead of a checker."
+ },
+ {
+  "title": "Hay-loft shutters and glazing",
+  "kind": "detail",
+  "where": "front gable x6..8 y7..8, z3",
+  "instruction": "Replace the two open pale_oak trapdoors by a white-framed pair of shutters with an X (spruce_trapdoor, open) and set x7 y7..8 behind to air so the hay reads; add a dark_oak_slab sill at (6..8,6,2)."
+ },
+ {
+  "title": "Eave brackets under the gable overhang",
+  "kind": "detail",
+  "where": "front and back gable eaves, x3 and x11, y5, z2 / z20",
+  "instruction": "mcd paint or fixture(): dark_oak stairs upside down (facing inward) as corbels under the barge boards at the four gable corners, 1 block below the verge start."
+ },
+ {
+  "title": "Dormer glazing that shows",
+  "kind": "roof",
+  "where": "4 dormers on the east/west roof planes (x3 and x11, z8 and z14, y6..8)",
+  "instruction": "mcd roof spec change: dormers.window = \"white_stained_glass_pane\" with a quartz frame, or place spruce_trapdoors (open) as shutters beside each dormer window; currently the dark glass vanishes in the slate."
+ },
+ {
+  "title": "Door sign / farm name board",
+  "kind": "sign",
+  "where": "front wall above the track beam, centre, x6..8 y... (z2) or on the red wall at x3, y3, z2",
+  "instruction": "B.sign('spruce', ['RED OAK','FARM'], {facing:'north', color:'white'}) hung on the wall beside the doors at (3,3,2); optionally a hanging sign on the track beam."
+ },
+ {
+  "title": "Hay stack + barrel group north-east corner",
+  "kind": "props",
+  "where": "yard, x11..13 z1..4",
+  "instruction": "Add a 3x2 hay_block stack 2 high with mixed axes, a water-filled cauldron and 2 barrels; leave the gravel path clear."
+ },
+ {
+  "title": "Weather the foundation and walls",
+  "kind": "detail",
+  "where": "all four walls y1..4",
+  "instruction": "mcd paint 'weather moderate' on the stone foundation course only (stone_bricks -> cracked/mossy mix) and add a row of oak_fence 'fence + gate' pieces at the yard opening (x4..10 z0) using oak_fence_gate facing north."
+ },
+ {
+  "title": "Side wall relief",
+  "kind": "detail",
+  "where": "east and west long walls x2/x12, z5..18",
+  "instruction": "Add dark_oak_log vertical battens (axis y, y2..3) every 3rd block between the windows, keeping the man-door at z11 clear; red wall currently reads flat between the windows."
+ },
+ {
+  "title": "Roof ridge close-up",
+  "kind": "roof",
+  "where": "ridge x7 z3..19 y10",
+  "instruction": "mcd roof ridge option: ridge 'crest' (iron bars) or 'wall' to give the ridge a visible cap, then re-run the dry-run; fix the stone_brick_slab orphan at (7,10,20)."
+ }
+]

@@ -1,0 +1,52 @@
+[
+ {
+  "title": "The roof is a thick two-layer slab of blackstone brick with a noisy grey/glass s",
+  "kind": "Roof",
+  "aspect": "Roof",
+  "where": "see problem",
+  "instruction": "Re-run `mcd roof --preset modern` (or `cafe`) for a single thin slab with a clean fascia. Use a roof palette of one dark slab block, with no speckle. Keep the timber soffit visible underneath and drop the doubled eave step.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The grey and glass specks that made the roof read as noise are gone, leaving a uniform dark roof with a clean cream fascia that frames the cantilever and reads as a deliberate, crafted edge, though the thin cream band sits slightly proud of the roof and its corners need a closer look."
+ },
+ {
+  "title": "The brief asks for floor-to-ceiling glass on two sides, but the back elevation i",
+  "kind": "Detail",
+  "aspect": "Facades",
+  "where": "see problem",
+  "instruction": "Replace the dark wall fill on the front and one side with full-height glass between slim dark pillars. Keep the back and far side solid. Use `mcd paint` to set the steel frame to a thin dark mullion grid.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The before wall shows small dark-framed windows set into solid dark masonry, while the after wall has taller, floor-to-ceiling glass bays between slim dark posts, which reads as the glass café the brief asks for, with no floating or broken pieces visible."
+ },
+ {
+  "title": "Everything is near-black (roof, walls, pillars, frame), so the steel frame, glas",
+  "kind": "Detail",
+  "aspect": "Palette",
+  "where": "see problem",
+  "instruction": "Lighten the walls toward concrete or white. Keep the dark tone for the thin frame only. Let the timber soffit and warm lanterns provide the accent.",
+  "kept": false,
+  "verdict": "Worse",
+  "why": "The dark wall fill is replaced by an opaque light-grey slab that reads as concrete rather than glass, the windows still don't run floor-to-ceiling, and a stray white sliver appears at the pillar base, so the change adds clashing, unfinished-looking bits."
+ },
+ {
+  "title": "The terrace is cluttered: tables and chairs are jumbled at the corners, leafy pl",
+  "kind": "Detail",
+  "aspect": "Finish",
+  "where": "see problem",
+  "instruction": "Arrange the tables in an even row with matching chairs. Replace the big leaf blocks with low planter boxes and a small flower accent. Run the railing continuously between the corner posts.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The tall leafy bushes that poked above the rail are replaced by low, matching planters with flowers, which reads tidier from the front, though a small stray white block near the left tables is a minor blemish."
+ },
+ {
+  "title": "The CAFE sign is legible but sits on a black panel at the door. The lower orange",
+  "kind": "Props",
+  "aspect": "Elements",
+  "where": "see problem",
+  "instruction": "Keep the lettering and use a calmer emissive block for the strip. Add a thin dark frame around the sign so it reads as a deliberate neon fixture.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The glowing orange block under the sign, which competed with the orange CAFE letters, is now a calm cream panel that reads as a plain wall base, so the sign stands out cleanly and nothing floats or clashes."
+ }
+]

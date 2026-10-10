@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Good",
+ "roof": "Fair",
+ "facades": "Fair",
+ "elements": "Good",
+ "finish": "Fair",
+ "palette": "Fair",
+ "summary": "A tidy plinth, terrace and neon CAFE sign give it a clear café read, but the heavy, tiled, double-layered dark roof sits like a lid on a mostly dark-walled box, so it doesn't feel like a light glass pavilion.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The roof is a thick two-layer slab of blackstone brick with a noisy grey/glass speckle pattern. It reads as a heavy tiled lid, not a slim cantilevered flat roof, and is the dominant element from every angle.",
+   "fix": "Re-run `mcd roof --preset modern` (or `cafe`) for a single thin slab with a clean fascia. Use a roof palette of one dark slab block, with no speckle. Keep the timber soffit visible underneath and drop the doubled eave step."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The brief asks for floor-to-ceiling glass on two sides, but the back elevation is mostly dark brick with two small framed windows and a door. The front is mostly black panels with only small glazed patches, so the glass-box idea is lost.",
+   "fix": "Replace the dark wall fill on the front and one side with full-height glass between slim dark pillars. Keep the back and far side solid. Use `mcd paint` to set the steel frame to a thin dark mullion grid."
+  },
+  {
+   "aspect": "Palette",
+   "severity": "Minor",
+   "problem": "Everything is near-black (roof, walls, pillars, frame), so the steel frame, glass and soffit don't separate. The result is heavy, not light and modern.",
+   "fix": "Lighten the walls toward concrete or white. Keep the dark tone for the thin frame only. Let the timber soffit and warm lanterns provide the accent."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The terrace is cluttered: tables and chairs are jumbled at the corners, leafy planters are oversized hedges, and the glass railing looks thin and patchy against the plinth.",
+   "fix": "Arrange the tables in an even row with matching chairs. Replace the big leaf blocks with low planter boxes and a small flower accent. Run the railing continuously between the corner posts."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "The CAFE sign is legible but sits on a black panel at the door. The lower orange glow strip reads as lava or magma rather than a neon accent.",
+   "fix": "Keep the lettering and use a calmer emissive block for the strip. Add a thin dark frame around the sign so it reads as a deliberate neon fixture."
+  }
+ ]
+}

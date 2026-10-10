@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Good",
+ "roof": "Fair",
+ "facades": "Good",
+ "elements": "Good",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "A charming stone-base, jettied timber-frame tower with ivy, lanterns and a balcony telescope, but the cone reads as a flat lid with a spike stuck on top, so it never reaches the tall crooked wizard-hat silhouette the brief asks for.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The roof is a wide, flat stepped plate with a thin crooked spire on top. It reads as a lid plus a spike, not a tall conical hat, and the cone is too short for the brief.",
+   "fix": "Rebuild it with `mcd roof --preset tower-cap`, or `lantern-cap` with a taller pitch. Keep a slight lean, shrink the eave overhang, and taper the cone in even steps from the eave to the tip. Use a roof palette of a single oxidised-copper family."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Major",
+   "problem": "The roof centre has a stray block cluster: a dark-wood stack with an orange glass block and a grey chimney stub. It reads as noise sitting on the slope, and the chimney and campfire poke out at the side of the spire.",
+   "fix": "Remove the orange glass block and the dark-wood stack. Add a proper chimney through the roof with the chimney option, and seat it in the slope. Use `mcd paint` to unify the roof blocks."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "The balcony and telescope are small, and from street level they are hard to read as a telescope. The round windows read as square panes or glass slits.",
+   "fix": "Use a craft brush to extend the balcony deck and add a clear rail. Make the telescope a longer, thicker, angled tube. Place round windows with a ring-window brush."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Minor",
+   "problem": "The jettied upper floors are wide, flat white-and-dark panels with little relief. The stone base is blocky and plain, with a few odd extruded blocks on the ground.",
+   "fix": "Add timber braces and corner posts with a craft brush. Vary the stone with a mossy palette, and trim the loose ground-cover blocks."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Minor",
+   "problem": "The crooked, leaning feel exists only in the spire. The shaft itself is straight and boxy, so the tower does not look crooked.",
+   "fix": "Shift each jetty storey 1 block sideways, and offset the roof cap so the whole tower leans slightly."
+  }
+ ]
+}

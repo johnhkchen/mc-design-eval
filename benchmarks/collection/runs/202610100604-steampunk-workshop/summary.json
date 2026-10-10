@@ -1,0 +1,83 @@
+{
+ "key": "steampunk-workshop",
+ "name": "Steampunk workshop",
+ "tasks": 5,
+ "tasksKept": 4,
+ "kept": "v2",
+ "usability": "NeedsWork",
+ "grades": {
+  "massing": "Fair",
+  "roof": "Poor",
+  "facades": "Fair",
+  "elements": "Fair",
+  "finish": "Poor",
+  "palette": "Good"
+ },
+ "summary": "A solid brick-and-copper base with a convincing loading door, but the sawtooth roof is ragged and broken and the walls are blotchy with random copper and stone patches, so it reads as a ruin rather than a workshop.",
+ "accepted": false,
+ "costUsd": 2.86,
+ "minutes": 17.3,
+ "log": [
+  {
+   "n": "build",
+   "s": 714,
+   "turns": 53,
+   "cost": 2.2972221999999993
+  },
+  {
+   "n": "judge v1",
+   "s": 742,
+   "usability": "NeedsWork",
+   "roof": "Poor",
+   "summary": "The brick, copper and grey stone palette says steampunk, and the chimneys and loading door are readable. But the roof is an unclear stepped, patchy sawtooth, the front face is a noisy jumble of copper blocks, and the gear window doesn't read as a gear."
+  },
+  {
+   "n": 5,
+   "s": 743
+  },
+  {
+   "n": "task 1: The sawtooth roof reads as stepped coppe",
+   "s": 827,
+   "turns": 19,
+   "cost": 0.029512200000000002
+  },
+  {
+   "n": "task 3: The gear-shaped round window reads as a ",
+   "s": 918,
+   "turns": 21,
+   "cost": 0.07223544000000001
+  },
+  {
+   "n": "task 2: The front and side walls are a random sc",
+   "s": 938,
+   "turns": 19,
+   "cost": 0.07065567
+  },
+  {
+   "n": "task 5: The footprint is a plain box with a tall",
+   "s": 954,
+   "turns": 21,
+   "cost": 0.03324254999999999
+  },
+  {
+   "n": "task 4: The chimney stacks are uneven in height ",
+   "s": 1004,
+   "turns": 26,
+   "cost": 0.041551569999999996
+  },
+  {
+   "n": "reviews",
+   "s": 1015,
+   "kept": 4,
+   "of": 5
+  },
+  {
+   "n": "judge v2",
+   "s": 1037,
+   "usability": "NeedsWork",
+   "roof": "Poor",
+   "summary": "A solid brick-and-copper base with a convincing loading door, but the sawtooth roof is ragged and broken and the walls are blotchy with random copper and stone patches, so it reads as a ruin rather than a workshop.",
+   "tasksKept": 4
+  }
+ ]
+}

@@ -1,0 +1,83 @@
+{
+ "key": "tea-house",
+ "name": "Japanese tea house",
+ "tasks": 5,
+ "tasksKept": 3,
+ "kept": "v2",
+ "usability": "NeedsWork",
+ "grades": {
+  "massing": "Fair",
+  "roof": "Poor",
+  "facades": "Fair",
+  "elements": "Fair",
+  "finish": "Poor",
+  "palette": "Fair"
+ },
+ "summary": "The raised timber base, paper-screen openings and stone-lantern garden read as a tea house, but the roof is a ragged, hole-ridden pile of dark bricks with no hipped-and-gabled form or curved eaves, and the stray red blocks wreck the look.",
+ "accepted": false,
+ "costUsd": 2.91,
+ "minutes": 13.8,
+ "log": [
+  {
+   "n": "build",
+   "s": 601,
+   "turns": 66,
+   "cost": 2.4305382000000004
+  },
+  {
+   "n": "judge v1",
+   "s": 627,
+   "usability": "NeedsWork",
+   "roof": "Poor",
+   "summary": "The raised timber base, garden and lantern read as a tea house, but the roof is a ragged stepped pile of blackstone with holes and no curved eaves, and a giant red blob on one corner ruins the silhouette."
+  },
+  {
+   "n": 5,
+   "s": 628
+  },
+  {
+   "n": "task 1: Roof is a lumpy stepped heap of dark bri",
+   "s": 690,
+   "turns": 16,
+   "cost": 0.02384391
+  },
+  {
+   "n": "task 5: The stepping stones and path are broken ",
+   "s": 724,
+   "turns": 15,
+   "cost": 0.0309814
+  },
+  {
+   "n": "task 4: The engawa veranda is cluttered. Fence a",
+   "s": 727,
+   "turns": 9,
+   "cost": 0.025699910000000003
+  },
+  {
+   "n": "task 3: The shoji paper-screen walls barely read",
+   "s": 748,
+   "turns": 15,
+   "cost": 0.03346935000000001
+  },
+  {
+   "n": "task 2: A large red block cluster on the front-r",
+   "s": 787,
+   "turns": 23,
+   "cost": 0.044264680000000015
+  },
+  {
+   "n": "reviews",
+   "s": 799,
+   "kept": 3,
+   "of": 5
+  },
+  {
+   "n": "judge v2",
+   "s": 827,
+   "usability": "NeedsWork",
+   "roof": "Poor",
+   "summary": "The raised timber base, paper-screen openings and stone-lantern garden read as a tea house, but the roof is a ragged, hole-ridden pile of dark bricks with no hipped-and-gabled form or curved eaves, and the stray red blocks wreck the look.",
+   "tasksKept": 3
+  }
+ ]
+}

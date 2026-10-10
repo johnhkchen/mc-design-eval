@@ -1,0 +1,10 @@
+# ground gallery: a continuous low wall (y2) with a trapdoor railing (y3) filling the gaps between the posts
+north row 2 depth 1 -> stone_brick_wall out 1 force
+north row 3 depth 1 -> spruce_trapdoor top out 1 force
+# gable faces: one dark spruce palette, cross-beams and centre spine in darker trim
+east rows 13-21 where deepslate_tiles|cobbled_deepslate|polished_deepslate|dark_oak_planks|spruce_planks|blackstone|polished_deepslate_stairs|deepslate_tile_stairs|cobbled_deepslate_stairs|dark_oak_stairs|spruce_slab -> spruce_planks
+west rows 13-21 where deepslate_tiles|cobbled_deepslate|polished_deepslate|dark_oak_planks|spruce_planks|blackstone|polished_deepslate_stairs|deepslate_tile_stairs|cobbled_deepslate_stairs|dark_oak_stairs|spruce_slab -> spruce_planks
+east rows 15,19 where spruce_planks|deepslate_tiles|cobbled_deepslate|polished_deepslate|dark_oak_planks -> dark_oak_planks
+west rows 15,19 where spruce_planks|deepslate_tiles|cobbled_deepslate|polished_deepslate|dark_oak_planks -> dark_oak_planks
+east col 8 rows 13-21 where spruce_planks|deepslate_tiles|cobbled_deepslate|polished_deepslate|dark_oak_planks -> stripped_spruce_log
+west col 8 rows 13-21 where spruce_planks|deepslate_tiles|cobbled_deepslate|polished_deepslate|dark_oak_planks -> stripped_spruce_log

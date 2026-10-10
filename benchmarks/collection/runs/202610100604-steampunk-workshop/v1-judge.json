@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Poor",
+ "facades": "Fair",
+ "elements": "Fair",
+ "finish": "Poor",
+ "palette": "Good",
+ "summary": "The brick, copper and grey stone palette says steampunk, and the chimneys and loading door are readable. But the roof is an unclear stepped, patchy sawtooth, the front face is a noisy jumble of copper blocks, and the gear window doesn't read as a gear.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The sawtooth roof reads as stepped copper stairs with random oxidized-green patches. The skylight glazing is only thin glass lines on the roof, so it doesn't look like sawtooth ridges with glass faces. The side and rear gable ends are ragged.",
+   "fix": "Rebuild the roof with `mcd roof --preset workshop` and give it a clean two-tone palette (copper with a weathered-green edge course only). Add real skylight panes on the vertical faces of the sawtooth, and trim the ends square with a stone parapet course."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The front and side walls are a random scatter of copper plates, brick patches, and protruding single blocks. The wall planes aren't clear, and the surface reads as noise instead of riveted panels. The front also looks like a trapezoid, because the wall steps in near the top.",
+   "fix": "Regularize the walls into clear bays. Use brick infill between stone pillars with a copper band at each floor line, and apply `mcd paint` with a restrained copper/brick pattern. Remove the stray protruding blocks and keep the front wall flush."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "The gear-shaped round window reads as a ragged copper ring around a glass blob, with a floating block in the middle. It looks broken, not like a gear. The pipes and valves are a few stray grey and brown blocks.",
+   "fix": "Use a craft brush to build a symmetric round window: a circle of glass with a copper ring and alternating tooth blocks outside it, plus a centered hub. Run continuous copper pipe lines along the wall with a visible valve block at each joint."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The chimney stacks are uneven in height and merge into the wall with copper blocks scattered on their sides. The caps are flat blackstone slabs with a lone campfire. The tops of the back wall are jagged.",
+   "fix": "Use `mcd chimney` to build clean, tapered stacks of different heights, each with a rim course and a smoke or campfire cap. Square off the back-wall tops with a stone cap course."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Minor",
+   "problem": "The footprint is a plain box with a tall flat front, and the loading door and crane are tucked into the base. The crane isn't visible as a projecting arm.",
+   "fix": "Add a projecting crane arm of dark-oak fence and chain above the loading door. Run an `mcd roof` dormer or gable over the door bay to break up the front."
+  }
+ ]
+}

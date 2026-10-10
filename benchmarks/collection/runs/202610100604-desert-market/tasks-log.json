@@ -1,0 +1,52 @@
+[
+ {
+  "title": "The 'dome or wind tower' is a stepped sandstone pyramid squatting in the middle ",
+  "kind": "Roof",
+  "aspect": "Roof",
+  "where": "see problem",
+  "instruction": "Run `mcd roof --preset desert` to get a proper parapet and dome cap, and use `mcd roof --preset tower-cap` or `lantern-cap` for the dome or wind tower. Remove the loose orange slab canopies and stair scraps on the roof, and keep the tower rounder and taller.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The orange terracotta clutter on the roof is gone, and a plain sandstone block now gives the wind tower a clean, palette-matched mass, though the two dark blocks on its face read a little like stray windows."
+ },
+ {
+  "title": "The back elevation is a flat, blank band of sandstone and terracotta. It has a f",
+  "kind": "Detail",
+  "aspect": "Facades",
+  "where": "see problem",
+  "instruction": "Use `mcd paint` to break up the wall with a plaster/terracotta mottle. Use craft brushes to recess the windows and add sill and lintel trim, buttress pilasters, and rounded parapet corners. Add a few clay pots or baskets along the back base.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The after-image adds clay pots and baskets against the previously blank back band, breaking up the flat wall with props that fit the market theme, and they sit on the ground without clashing or floating, though the change is small at this scale."
+ },
+ {
+  "title": "The building is a plain rectangular slab with square corners and a uniform heigh",
+  "kind": "Detail",
+  "aspect": "Massing",
+  "where": "see problem",
+  "instruction": "Round or chamfer the corners with a craft brush. Step the parapet height or add a raised corner tower block. Clean up the stepped notch at the front-right base.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The change adds a sandstone-coloured chamfer or rounded fillet at the square wall corner, which answers the brief's complaint about square corners and matches the existing sand texture, though the pale wedge in the close-up is a little ambiguous."
+ },
+ {
+  "title": "The viga ends are all the same dark log blocks in a regular row. The white parap",
+  "kind": "Detail",
+  "aspect": "Finish",
+  "where": "see problem",
+  "instruction": "Vary the viga projection and spacing. Swap the white cap for a sandstone or terracotta palette and fill the parapet solid. Remove the roof fence and let the parapet do the work.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The stark white parapet is replaced by terracotta coping that matches the adobe walls and reads as one warm, finished roof edge, though the viga ends are now mostly hidden, so the beam detail is lost."
+ },
+ {
+  "title": "The striped awnings read well, but the front view is dark and busy under them, s",
+  "kind": "Props",
+  "aspect": "Elements",
+  "where": "see problem",
+  "instruction": "Lighten the shaded interior with a lighter floor and back wall. Group the pots and baskets at the pillars in clear view, and remove or relocate the roof banners.",
+  "kept": false,
+  "verdict": "Worse",
+  "why": "The interior under the awnings is lighter and less cluttered, but the warm sand plinth became a cool white slab that clashes with the adobe palette, and the terracotta entry path that led to the door is gone."
+ }
+]

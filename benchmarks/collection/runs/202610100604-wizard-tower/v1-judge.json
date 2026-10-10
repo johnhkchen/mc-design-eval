@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Good",
+ "roof": "Fair",
+ "facades": "Good",
+ "elements": "Good",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "A charming stone-base, jettied timber-frame wizard tower with ivy, lanterns, a balcony and a telescope, but the tall cone is really a flat verdigris lid with a thin crooked spire stuck on top, so it doesn't read as a conical wizard hat from the front.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The roof is a wide, flat-stepped slab with a small spire rising from its centre. From the street and 3/4 views it reads as a lid with a chimney-like spike, not the tall conical roof with a slight lean the brief asks for. Only the back elevation shows a cone, and that cone is lopsided.",
+   "fix": "Rebuild the cap with `mcd roof --preset tower-cap` so it tapers continuously from the eave to the tip. Make the cone about twice as tall as it is now and keep the lean to one or two blocks. Use a two-tone verdigris palette so the courses read as a cone."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Major",
+   "problem": "The roof has a noisy jumble of brown stair and glass blocks on its front face. A stone chimney column is fused to the spire, and a stray flame sits on top of it. These read as broken bits rather than a dormer and a chimney.",
+   "fix": "Remove the amber glass and the stair clutter. Add one clean dormer with `mcd roof` dormers, and give the chimney its own separate stack with a chimney option. Run `mcd paint` to even out the roof palette."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Minor",
+   "problem": "The upper floors are a plain square box, so the tower looks sturdy rather than crooked. The overhang is also fairly slight.",
+   "fix": "Offset each jettied floor by one more block and rotate or shift the top storey a block sideways with a craft brush, so the tower leans and reads as crooked."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "The balcony and telescope are tucked at the side and are tiny. The round windows read as square panes, and the glowing window is an orange block that is hard to read as a window.",
+   "fix": "Make the balcony deeper, with a clearer rail and a longer telescope. Use a craft brush to carve circular window shapes with a glass pane, and put a lantern or glowstone behind the glowing window."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Minor",
+   "problem": "The plaster infill panels are plain white-grey, and the stone base is fairly flat above the door.",
+   "fix": "Vary the infill with a roof palette-style `mcd paint` pass, adding a few darker panels and cracked stone, and add ivy to the upper timber floors too."
+  }
+ ]
+}

@@ -1,0 +1,6 @@
+south where orange_terracotta -> vary 0.3 red_terracotta
+south where smooth_sandstone -> vary 0.3 cut_sandstone
+south openings -> surround plain
+south openings -> sills
+south openings -> lintels flat
+south rows 0-4 -> pilasters every 6 profile simple

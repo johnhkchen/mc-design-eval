@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Good",
+ "roof": "Fair",
+ "facades": "Fair",
+ "elements": "Fair",
+ "finish": "Fair",
+ "palette": "Fair",
+ "summary": "The tiered silhouette, stone base, and spire read as a stave church from a distance, but the roofs are blocky grey stair-stepped slabs, the gable ends are muddy two-tone planks, and the thin ground floor looks like a bare open pavilion rather than a tarred timber gallery.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Roof tiers are chunky grey stone-brick blocks with stepped fronts and scattered dark blotches. They read as a stone ziggurat rather than layered wooden shingles, and the upper tier's pitch is lost behind boxy steps.",
+   "fix": "Re-run `mcd roof --preset church` on each tier with a dark-wood shingle roof palette (spruce/dark oak stairs with a few blackstone accents), so each tier reads as smooth steep shingled slopes with clean ridges and overhangs."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The ground floor is a row of widely spaced bare posts with a thin back wall, so it reads as an open pavilion and not a svalgang. The gable ends above are a muddy two-tone mix of oak and spruce planks with no carved or framed detail.",
+   "fix": "Use `mcd paint` to give the gallery a continuous low wall with a railing of fence or trapdoor trim between the posts, and re-skin the gable faces in one dark spruce palette with a darker X or cross-beam trim."
+  },
+  {
+   "aspect": "Palette",
+   "severity": "Major",
+   "problem": "Wood is light and warm oak-brown, not dark tarred timber, and the roofs are mid-grey. The overall tone is brown and grey mush with no dark-to-light contrast.",
+   "fix": "Repaint the walls, posts and gable ends with `mcd paint` using dark oak/spruce and blackstone, and keep stone only for the base. Reserve a lighter accent for the lanterns and carved heads."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Minor",
+   "problem": "The dragon-head gable ends are only small dark curled wood blobs on the ridge ends, and they barely read as dragons from the street. The spire is a thin plain pole with a tiny tip.",
+   "fix": "Use a craft brush to build larger, outward-curving dragon heads with a jaw and a notch at each gable peak, and add a tiered mini-spire (lantern-cap style) with a wider base."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The roof edges are stepped and ragged, the gable triangles have stray window and glass bits, and the base has lanterns on stone posts that look tacked on. Eave trim is a flat brown band.",
+   "fix": "Run `mcd check` and clean up the stray blocks, use dormers or small louvre windows in the gable triangles only where intended, and add a stair or slab drip edge under the eaves."
+  }
+ ]
+}

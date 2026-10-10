@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Fair",
+ "roof": "Poor",
+ "facades": "Fair",
+ "elements": "Fair",
+ "finish": "Poor",
+ "palette": "Good",
+ "summary": "A solid brick-and-copper base with a convincing loading door, but the sawtooth roof is ragged and broken and the walls are blotchy with random copper and stone patches, so it reads as a ruin rather than a workshop.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "The sawtooth roof is chewed up: the street and back views show gaps, holes and floating fragments in the teeth, and the skylight glazing is only partly there. It reads as a ruin, not a tidy sawtooth.",
+   "fix": "Rebuild the roof with `mcd roof --preset workshop` for a continuous sawtooth with a glazed vertical face on each tooth. Use a roof palette of copper with a verdigris accent instead of random patches."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Major",
+   "problem": "The front and side walls are random blotches of brick, copper and stone with no pattern. They read as noise or damage rather than riveted copper panels, and the side walls have no structure.",
+   "fix": "Regularise the walls into bays: brick infill between stone pilasters, with a continuous copper band at each storey. Use `mcd paint` to restrict copper to whole panels and rivet rows."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "The gear-shaped round window is not legible. There is only a flat glass patch above the door. The chimney stacks are missing from the view, apart from a few small floating props on the roof line. The pipes and valves barely read.",
+   "fix": "Add a round gear window with a craft brush (a circle with a notched rim in copper) on the front facade. Add tall chimneys with `mcd roof` chimney options, and run pipe lines with valves down the walls."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "There are floating props on the roofline and stray stone blocks on the walls. The wall edges are ragged and there are no corner posts.",
+   "fix": "Run `mcd check` and remove the floating items. Add stone corner quoins and a trim course under the roof."
+  },
+  {
+   "aspect": "Massing",
+   "severity": "Minor",
+   "problem": "The box is plain, with no stepped volume, and the loading door has no visible crane or hoist projecting from it.",
+   "fix": "Add a projecting beam and a chain hoist over the loading door, and a small lean-to or step in one wall for depth."
+  }
+ ]
+}

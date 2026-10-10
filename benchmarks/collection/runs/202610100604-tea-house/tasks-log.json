@@ -1,0 +1,52 @@
+[
+ {
+  "title": "Roof is a lumpy stepped heap of dark brick with gaps showing stone and timber un",
+  "kind": "Roof",
+  "aspect": "Roof",
+  "where": "see problem",
+  "instruction": "Clear the roof and rebuild it with `mcd roof --preset teahouse` in a dark tile palette. Add a deep overhang with raised corners and a clean ridge. Use a hipped-and-gabled layout, with no holes in the slopes.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The lumpy stepped heap of dark brick is replaced by one continuous roof plane with a clear overhang and timber fascia, so it reads as a crafted roof, though the pale stone corner blocks and the red block at the right edge still look slightly loose."
+ },
+ {
+  "title": "A large red block cluster on the front-right corner reads as a stray blob or sig",
+  "kind": "Props",
+  "aspect": "Elements",
+  "where": "see problem",
+  "instruction": "Remove it. Use `mcd paint` and craft brushes to build a proper maple in the garden beside the house: a slim log trunk with a rounded red-leaf canopy, kept separate from the roof and the walls.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The red canopy now sits on its own grounded trunk in the garden, reading as a deliberate maple rather than a stray blob clipping the roof eave, though its saturated red still clashes somewhat with the muted timber palette."
+ },
+ {
+  "title": "The shoji paper-screen walls barely read. Only a few narrow white slivers show b",
+  "kind": "Detail",
+  "aspect": "Facades",
+  "where": "see problem",
+  "instruction": "Replace the wall bays with a repeating grid of white panels framed by thin dark timber. Add a lighter lintel and sill line on every face, including the back. Keep the posts slim.",
+  "kept": false,
+  "verdict": "Worse",
+  "why": "The paper-screen panels lost their tall white read and now show only a thin grey band under the lintel, with the rest of each opening filled brown, so the walls look like plain plank infill instead of shoji."
+ },
+ {
+  "title": "The engawa veranda is cluttered. Fence and rail pieces are scattered, stair and ",
+  "kind": "Detail",
+  "aspect": "Finish",
+  "where": "see problem",
+  "instruction": "Regularise the veranda into a continuous floor strip with a clean low rail. Remove the roof chimney, or finish it as a deliberate lantern-cap. Run the footing course evenly around all sides.",
+  "kept": false,
+  "verdict": "Worse",
+  "why": "The veranda looks essentially unchanged, but a hole now opens in the dark roof, exposing a glaring white block and a torch-like lantern that read as broken, floating bits."
+ },
+ {
+  "title": "The stepping stones and path are broken up and the stone lantern is small. The g",
+  "kind": "Props",
+  "aspect": "Elements",
+  "where": "see problem",
+  "instruction": "Lay a clear stepping-stone path from the front stairs. Make the lantern taller and more distinctive, and add a few moss and flower accents.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The stone lantern now reads as a proper tall column with its light at the top, and the small flowers and grass tufts add garden life without clashing, though the lantern tucks close against the red eave block."
+ }
+]

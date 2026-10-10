@@ -1,0 +1,83 @@
+{
+ "key": "red-barn",
+ "name": "Farm barn",
+ "tasks": 5,
+ "tasksKept": 2,
+ "kept": "v2",
+ "usability": "NeedsWork",
+ "grades": {
+  "massing": "Fair",
+  "roof": "Poor",
+  "facades": "Fair",
+  "elements": "Poor",
+  "finish": "Poor",
+  "palette": "Fair"
+ },
+ "summary": "The barn has a decent footprint and a readable red-and-white gable end, but the roof is a noisy jumble of dark plank steps, the cupola and hoist beam are lost in it, and the long sides are dark and blank, so it doesn't read as a gambrel barn.",
+ "accepted": false,
+ "costUsd": 2.44,
+ "minutes": 13.8,
+ "log": [
+  {
+   "n": "build",
+   "s": 503,
+   "turns": 48,
+   "cost": 1.7905908000000004
+  },
+  {
+   "n": "judge v1",
+   "s": 529,
+   "usability": "NeedsWork",
+   "roof": "Poor",
+   "summary": "The gable-end front has the right barn pieces (X-braced doors, hoist beam, hay and fence), but the roof is a noisy jumble of grey stone with red patches showing through. It doesn't read as a gambrel and swamps the whole build."
+  },
+  {
+   "n": 5,
+   "s": 530
+  },
+  {
+   "n": "task 3: The cupola is lost in the roof clutter. ",
+   "s": 654,
+   "turns": 19,
+   "cost": 0.03252095
+  },
+  {
+   "n": "task 1: The roof is a chaotic mix of stone brick",
+   "s": 683,
+   "turns": 26,
+   "cost": 0.08373367
+  },
+  {
+   "n": "task 4: The gable edges are jagged white stair s",
+   "s": 684,
+   "turns": 19,
+   "cost": 0.04123279999999999
+  },
+  {
+   "n": "task 5: The grey and black roof competes with th",
+   "s": 712,
+   "turns": 14,
+   "cost": 0.02469617
+  },
+  {
+   "n": "task 2: The barn doors and loft wall use a large",
+   "s": 790,
+   "turns": 26,
+   "cost": 0.14836876999999998
+  },
+  {
+   "n": "reviews",
+   "s": 801,
+   "kept": 2,
+   "of": 5
+  },
+  {
+   "n": "judge v2",
+   "s": 831,
+   "usability": "NeedsWork",
+   "roof": "Poor",
+   "summary": "The barn has a decent footprint and a readable red-and-white gable end, but the roof is a noisy jumble of dark plank steps, the cupola and hoist beam are lost in it, and the long sides are dark and blank, so it doesn't read as a gambrel barn.",
+   "tasksKept": 2
+  }
+ ]
+}

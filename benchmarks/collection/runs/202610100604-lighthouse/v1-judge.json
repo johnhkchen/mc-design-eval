@@ -1,0 +1,42 @@
+{
+ "usability": "NeedsWork",
+ "massing": "Good",
+ "roof": "Fair",
+ "facades": "Good",
+ "elements": "Good",
+ "finish": "Fair",
+ "palette": "Good",
+ "summary": "A recognisable striped lighthouse on a mossy rock base with an attached brick-roofed cottage, but the black lantern cap reads as a heavy lid and the cottage roof is a flat-looking slab that crowds the tower.",
+ "issues": [
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Lantern cap is a wide, flat, layered black hat that overhangs the glass room and reads as a lid, not a lighthouse dome or cone; it also hides the lantern glass from the street view.",
+   "fix": "Rebuild the cap with `mcd roof --preset lantern-cap` (or `tower-cap`) on the lantern room so it forms a tight cone or dome with a slim overhang, and use a dark palette with a lighter or copper top accent."
+  },
+  {
+   "aspect": "Roof",
+   "severity": "Major",
+   "problem": "Cottage roof is a single steep brick slab with no visible ridge, no gable ends, and a stone cap strip along the top. It reads as a ramp leaning on the tower, not a pitched cottage roof.",
+   "fix": "Re-run `mcd roof --preset cottage` on the cottage footprint with a clear ridge, gable ends and a small eave overhang. Use a brick and dark-wood roof palette and add a dormer so it reads as a house roof."
+  },
+  {
+   "aspect": "Elements",
+   "severity": "Major",
+   "problem": "The lantern room has no clear glowing glass. The glass is thin and recessed behind dark posts, and the gallery railing is small, so the lighthouse's key feature does not read from the street.",
+   "fix": "Enlarge the lantern glass to full-height panes between slim posts, add a glowstone or sea lantern core, and widen the gallery with a continuous railing using the craft brushes."
+  },
+  {
+   "aspect": "Finish",
+   "severity": "Minor",
+   "problem": "The red and white stripes are ragged. Jagged notches show on the tower edges, ladder and glass strips stick out of the back, and stray stone blocks poke out of the shaft.",
+   "fix": "Clean the stripe edges so each band is a full ring, remove the protruding stone blocks, and use `mcd paint` to re-band the shaft evenly."
+  },
+  {
+   "aspect": "Facades",
+   "severity": "Minor",
+   "problem": "The back elevation of the cottage is a flat brick wall with little detail. The timber-frame front is fine, but the rear has no windows or trim.",
+   "fix": "Add windows, a timber trim course and a chimney stack with a cap to the rear wall using the chimney and dormer tools."
+  }
+ ]
+}

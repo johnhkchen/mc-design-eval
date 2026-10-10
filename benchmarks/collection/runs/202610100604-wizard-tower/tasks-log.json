@@ -1,0 +1,52 @@
+[
+ {
+  "title": "The roof is a wide, flat-stepped slab with a small spire rising from its centre.",
+  "kind": "Roof",
+  "aspect": "Roof",
+  "where": "see problem",
+  "instruction": "Rebuild the cap with `mcd roof --preset tower-cap` so it tapers continuously from the eave to the tip. Make the cone about twice as tall as it is now and keep the lean to one or two blocks. Use a two-tone verdigris palette so the courses read as a cone.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The roof now reads as a single tall, tapered conical cap that rises cleanly from the timber storey into the spire, where before it was a wide flat-stepped slab with clutter (brown and grey blocks, a floating-looking chimney) on top. The colours stay within the existing teal and stone palette, and nothing looks floating or broken."
+ },
+ {
+  "title": "The roof has a noisy jumble of brown stair and glass blocks on its front face. A",
+  "kind": "Detail",
+  "aspect": "Finish",
+  "where": "see problem",
+  "instruction": "Remove the amber glass and the stair clutter. Add one clean dormer with `mcd roof` dormers, and give the chimney its own separate stack with a chimney option. Run `mcd paint` to even out the roof palette.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The stair and glass jumble is replaced by a clean, tiered cone with a terracotta eave ring and a single copper-capped spire, so the roof reads as one crafted form; a few stray brown and grey stubs remain, and the telescope and gold finial are missing in the second view."
+ },
+ {
+  "title": "The upper floors are a plain square box, so the tower looks sturdy rather than c",
+  "kind": "Detail",
+  "aspect": "Massing",
+  "where": "see problem",
+  "instruction": "Offset each jettied floor by one more block and rotate or shift the top storey a block sideways with a craft brush, so the tower leans and reads as crooked.",
+  "kept": false,
+  "verdict": "Neutral",
+  "why": "The silhouette of the upper floors still reads as a plain square box with no visible jetty, lean, or crooked form, and the window and trim changes are too small to read at this distance, so the glance is essentially unchanged (though nothing added is clashing or floating)."
+ },
+ {
+  "title": "The balcony and telescope are tucked at the side and are tiny. The round windows",
+  "kind": "Props",
+  "aspect": "Elements",
+  "where": "see problem",
+  "instruction": "Make the balcony deeper, with a clearer rail and a longer telescope. Use a craft brush to carve circular window shapes with a glass pane, and put a lantern or glowstone behind the glowing window.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The balcony is now a larger, connected deck with a readable copper telescope and posts, and the window panes read as framed glass instead of the earlier small, indistinct openings, though the copper tube is a slightly loud accent."
+ },
+ {
+  "title": "The plaster infill panels are plain white-grey, and the stone base is fairly fla",
+  "kind": "Detail",
+  "aspect": "Facades",
+  "where": "see problem",
+  "instruction": "Vary the infill with a roof palette-style `mcd paint` pass, adding a few darker panels and cracked stone, and add ivy to the upper timber floors too.",
+  "kept": false,
+  "verdict": "Neutral",
+  "why": "The plaster panels still read as plain white-grey and the stone base looks essentially unchanged; the only visible addition is more ivy on the upper walls, which fits the wizard-tower theme but doesn't address either named issue."
+ }
+]

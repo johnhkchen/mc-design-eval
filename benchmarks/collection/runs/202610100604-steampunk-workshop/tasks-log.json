@@ -1,0 +1,52 @@
+[
+ {
+  "title": "The sawtooth roof reads as stepped copper stairs with random oxidized-green patc",
+  "kind": "Roof",
+  "aspect": "Roof",
+  "where": "see problem",
+  "instruction": "Rebuild the roof with `mcd roof --preset workshop` and give it a clean two-tone palette (copper with a weathered-green edge course only). Add real skylight panes on the vertical faces of the sawtooth, and trim the ends square with a stone parapet course.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The random oxidized-green patches are gone and the roof reads as a uniform run of terracotta courses with one deliberate green eave band, though the sawtooth profile still shows some stepping."
+ },
+ {
+  "title": "The front and side walls are a random scatter of copper plates, brick patches, a",
+  "kind": "Detail",
+  "aspect": "Facades",
+  "where": "see problem",
+  "instruction": "Regularize the walls into clear bays. Use brick infill between stone pillars with a copper band at each floor line, and apply `mcd paint` with a restrained copper/brick pattern. Remove the stray protruding blocks and keep the front wall flush.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The scattered copper plates and brick patches are replaced by continuous brick courses, stone piers, and a clean window band, so the front and side walls read as deliberate masonry rather than noise, with no floating or clashing bits added."
+ },
+ {
+  "title": "The gear-shaped round window reads as a ragged copper ring around a glass blob, ",
+  "kind": "Props",
+  "aspect": "Elements",
+  "where": "see problem",
+  "instruction": "Use a craft brush to build a symmetric round window: a circle of glass with a copper ring and alternating tooth blocks outside it, plus a centered hub. Run continuous copper pipe lines along the wall with a visible valve block at each joint.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The ragged copper ring is now a clean, even rectangular frame around one continuous glass panel, so it reads as a deliberate window rather than a broken ring, though the gear silhouette is lost and the three small dark valve-like fixtures on the parapet are a minor addition."
+ },
+ {
+  "title": "The chimney stacks are uneven in height and merge into the wall with copper bloc",
+  "kind": "Detail",
+  "aspect": "Finish",
+  "where": "see problem",
+  "instruction": "Use `mcd chimney` to build clean, tapered stacks of different heights, each with a rim course and a smoke or campfire cap. Square off the back-wall tops with a stone cap course.",
+  "kept": true,
+  "verdict": "Improves",
+  "why": "The near-black blackstone caps that clashed with the brick and copper are replaced by grey stone that matches the parapet, so the chimney tops read as part of the building, though the small crates on top add some clutter."
+ },
+ {
+  "title": "The footprint is a plain box with a tall flat front, and the loading door and cr",
+  "kind": "Detail",
+  "aspect": "Massing",
+  "where": "see problem",
+  "instruction": "Add a projecting crane arm of dark-oak fence and chain above the loading door. Run an `mcd roof` dormer or gable over the door bay to break up the front.",
+  "kept": false,
+  "verdict": "Worse",
+  "why": "The new hoist beam pokes out of the roof tiles as a thin dark stub, and its chain ends in mid-air above the loading door with nothing to hook onto, so it reads as a broken floating bit rather than a working crane."
+ }
+]
