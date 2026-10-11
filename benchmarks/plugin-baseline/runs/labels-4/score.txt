@@ -1,0 +1,10 @@
+{"owner":"6/9","owner-v1":"7/9","laterWins":"6/9"}
+r1 victorian           v3/stock         owner A    owner=A owner-v1=A later=A | stock vs plugin + 2 taste rounds
+r2 victorian           v1/stock         owner A    owner=A owner-v1=A later=A | stock vs plugin one-shot (collect v1)
+r3 art-deco            stock/v3         owner B    owner=B owner-v1=B later=B | stock vs plugin + 2 taste rounds
+r4 art-deco            v3/v1            owner B    owner=A owner-v1=A later=A | plugin one-shot vs after 2 taste rounds
+r5 beach               v1/v3            owner A    owner=B owner-v1=B later=B | plugin one-shot vs after 2 taste rounds
+r6 beach               stock/v3         owner B    owner=B owner-v1=B later=B | stock vs plugin + 2 taste rounds
+r7 art-deco            v1/stock         owner A    owner=A owner-v1=A later=A | stock vs plugin one-shot (collect v1)
+r8 victorian           v3/v1            owner B    owner=tie owner-v1=B later=A | plugin one-shot vs after 2 taste rounds
+r9 beach               v1/stock         owner A    owner=A owner-v1=A later=A | stock vs plugin one-shot (collect v1)
