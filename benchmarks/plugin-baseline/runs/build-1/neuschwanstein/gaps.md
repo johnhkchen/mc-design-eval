@@ -1,0 +1,13 @@
+# Toolkit gaps (Neuschwanstein session)
+- Multi-part roofs: `mcd roof` re-roofs one detected footprint, so on a castle its dry-run only reports a 97x41 cone; I called library `roof(..., {dryRun:true})` per part instead (closest: `roof`/`reroof`).
+- A round tower with a tall conical cap: `roof "tower-cap"` wants a square footprint and adds a dormer on 7+ wide towers that shows up as an orphan block; no preset for a slender (r2) corbelled turret. Wrote `corbelRing` + `cylinder` + `tower-cap`.
+- Pyramid cap on a square tower: `tower-cap` + `style: pyramid` gave spruce soffit/fascia by default (brown ring on a slate roof); had to pass `edges:false`. The `cottage` preset likewise puts dark_oak verges on a slate roof (palette outlier flag); had to pass `verge`.
+- `arch` in a 1-thick wall: the stair-smoothed intrados is invisible, windows read as rectangles. Wrote `archWindow` (chamfer stairs at the shoulder, jambs, proud sill). A `window` brush with a pointed head would help (closest: `arch`, `surround arch`).
+- `B.pane` / `g.set(..., "glass_pane")` has no connection states, so panes and iron bars render as lone posts; had to write `fixPanes` (a post-pass that sets north/south/east/west from neighbours).
+- `B.wall("quartz")` silently wrote the nonexistent `quartz_wall`; only `mcd info` flagged it afterwards.
+- No gallery / balcony brush (corbel stairs + slab ring + balustrade); hand-wrote it twice (main tower gallery, Palas balcony).
+- `stepGable` has no finial or return option; wrote `finialAt`. It also overwrites the roof end course, so it has to run after the roof.
+- No crag brush: `heightfield` has no terraces or retaining walls on cliff edges, `boulder` leaves one-block specks. Wrote `rock.mjs` (terraced heightfield with stone-brick edge walls) and `despeckle`.
+- No spiral arrow-slit helper for round towers (wrote `spiralSlits`); no round-tower-with-deck helper (wrote `roundTower`).
+- `parapet` crenellated only on a rect ring; the curtain walls needed solid 2-thick walls plus a ring, written by hand.
+- Windows into hollow volumes show the opposite wall's windows (sky through the building); needed hand-placed interior partitions. A `shell` option for a mid partition would help.
