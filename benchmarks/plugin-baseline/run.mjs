@@ -1,6 +1,6 @@
 // Baseline: does Claude Code build better with the minecraft-design plugin than without? Both arms get the same Codex
 // concept image and the same prompt (plugin arm only adds the skill sentence + --plugin-dir). Sessions run in parallel,
-// each in a fresh dir; build.nbt is scored by the frozen judge (mcd-agent judge).
+// each in a fresh dir; build.nbt is scored by the frozen glance judge (benchmarks/judges, judge.glance).
 //   node benchmarks/plugin-baseline/run.mjs <subject>... | --all   [--arm stock,described,sized,plain,plugin] [--run <name>] [--budget 4]
 //   node benchmarks/plugin-baseline/run.mjs --aggregate [--run <name>]     (rebuild results.json/results.md only)
 import { mkdirSync, writeFileSync, readFileSync, existsSync, copyFileSync, readdirSync, createWriteStream } from "node:fs";
@@ -11,7 +11,7 @@ import { SUBJECTS } from "../collection/subjects.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const PLUGIN = join(HERE, "..", "..", "..", "minecraft-design");
-const AGENT = join(PLUGIN, "tools", "bin", "mcd-agent.mjs");
+const JUDGES = new URL("../judges", import.meta.url).pathname; // the lab's judging instruments (BAML)
 const MODEL = "claude-sonnet-5-5";
 const SCALE = "1:1 scale, a player is 2 blocks tall (doors 2 tall, storeys 4)";
 const argv = process.argv.slice(2);
@@ -46,7 +46,11 @@ const run = (cmd, args, opts) => new Promise((res) => {
 });
 
 async function judge(dir, r) {
-  const j = await run("node", [AGENT, "judge", join(dir, "build.nbt"), "--brief-file", join(dir, "brief.txt"), "--out-dir", join(dir, "judge")], { stdio: ["ignore", "pipe", "pipe"] });
+  const out = join(dir, "judge");
+  mkdirSync(out, { recursive: true });
+  const j = await run("baml", ["run", "--project", JUDGES, "--agent-skill-check", "off", "--output-format", "json", "judge.glance", "--",
+    "--plugin", PLUGIN, "--nbt", join(dir, "build.nbt"), "--brief", readFileSync(join(dir, "brief.txt"), "utf8").trim(), "--out_dir", out],
+    { stdio: ["ignore", "pipe", "pipe"], env: { ...process.env, MCD_LEDGER: join(out, "ledger.jsonl") } });
   writeFileSync(join(dir, "judge", "stdout.txt"), j.out);   // the judge prints the verdict JSON on stdout (card png goes to --out-dir)
   delete r.judgeError;
   try { const o = j.out; r.verdict = JSON.parse(o.slice(o.indexOf("{"), o.lastIndexOf("}") + 1)); writeFileSync(join(dir, "judge", "verdict.json"), JSON.stringify(r.verdict, null, 1)); }

@@ -7,6 +7,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { l0, PLUGIN } from "./l0.mjs";
 import { features, reviewOf } from "./profile-lib.mjs";
+const JUDGES = new URL("../judges", import.meta.url).pathname; // the lab's judging instruments (BAML)
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const argv = process.argv.slice(2);
@@ -20,7 +21,7 @@ function baml(fn, dir, tag) {
   const file = join(dir, `${tag}.json`);
   if (existsSync(file)) return Promise.resolve(read(file));
   return new Promise((res) => {
-    const p = spawn("baml", ["run", "--project", PLUGIN, "--agent-skill-check", "off", "--output-format", "json", `judge.${fn}`, "--", "--plugin", PLUGIN,
+    const p = spawn("baml", ["run", "--project", JUDGES, "--agent-skill-check", "off", "--output-format", "json", `judge.${fn}`, "--", "--plugin", PLUGIN,
       "--card", join(dir, "card-eye.png"), "--model", "claude-haiku-5-5", "--effort", "low", "--out_dir", dir], { env: { ...process.env, MCD_LEDGER: join(dir, "ledger.jsonl") } });
     let out = ""; p.stdout.on("data", (d) => (out += d));
     p.on("close", () => { let v = null; try { v = JSON.parse(out.slice(out.indexOf("{"))); } catch {} if (v) writeFileSync(file, JSON.stringify(v)); res(v); });

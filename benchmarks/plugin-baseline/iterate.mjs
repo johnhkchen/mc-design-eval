@@ -11,6 +11,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { l0, PLUGIN } from "./l0.mjs";
 import { features, reviewOf } from "./profile-lib.mjs";
+const JUDGES = new URL("../judges", import.meta.url).pathname; // the lab's judging instruments (BAML)
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const argv = process.argv.slice(2);
@@ -39,7 +40,7 @@ function session(dir, prompt, plugin, tag) {
 }
 function baml(fn, args, ledger) {
   return new Promise((res) => {
-    const p = spawn("baml", ["run", "--project", PLUGIN, "--agent-skill-check", "off", "--output-format", "json", `judge.${fn}`, "--", "--plugin", PLUGIN, ...args],
+    const p = spawn("baml", ["run", "--project", JUDGES, "--agent-skill-check", "off", "--output-format", "json", `judge.${fn}`, "--", "--plugin", PLUGIN, ...args],
       { env: { ...process.env, MCD_LEDGER: ledger } });
     let out = ""; p.stdout.on("data", (d) => (out += d));
     p.on("close", () => { try { res(JSON.parse(out.slice(out.indexOf("{")))); } catch { res(null); } });

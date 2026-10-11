@@ -7,6 +7,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { SUBJECTS as ALL } from "../collection/subjects.mjs";
+const JUDGES = new URL("../judges", import.meta.url).pathname; // the lab's judging instruments (BAML)
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const PLUGIN = "/Volumes/ext1/swe/repos/minecraft-design";
@@ -25,7 +26,7 @@ function call(name, fn, args) {
   if (existsSync(file)) return Promise.resolve(JSON.parse(readFileSync(file, "utf8")));
   const ledger = join(OUT, `${name}.ledger.jsonl`);
   return new Promise((res) => {
-    const p = spawn("baml", ["run", "--project", PLUGIN, "--agent-skill-check", "off", "--output-format", "json", `judge.${fn}`, "--", "--plugin", PLUGIN, ...args, "--out_dir", OUT],
+    const p = spawn("baml", ["run", "--project", JUDGES, "--agent-skill-check", "off", "--output-format", "json", `judge.${fn}`, "--", "--plugin", PLUGIN, ...args, "--out_dir", OUT],
       { env: { ...process.env, MCD_LEDGER: ledger } });
     let out = "", err = "";
     p.stdout.on("data", (d) => (out += d)); p.stderr.on("data", (d) => (err += d));

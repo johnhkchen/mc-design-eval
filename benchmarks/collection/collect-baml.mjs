@@ -1,5 +1,6 @@
-// Run subjects through the PLUGIN's packed BAML workflow (minecraft-design/tools/bin/mcd-agent.mjs collect) instead of
-// build.mjs: same brief and Codex concept, all subjects at once (parallel, never serial).
+// HISTORICAL (the collection runs of 2026-10-09/10): subjects through the plugin's packed workflow as it was then
+// (`mcd-agent collect --improve tasks`, removed 2026-10-10; check out minecraft-design 8e82109 to re-run).
+// Same brief and Codex concept, all subjects at once (parallel, never serial).
 //   node benchmarks/collection/collect-baml.mjs <subject>... | --all     (subjects.mjs keys)
 import { writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";

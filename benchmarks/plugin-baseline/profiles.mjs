@@ -9,6 +9,7 @@ import { fileURLToPath } from "node:url";
 import { l0, PLUGIN } from "./l0.mjs";
 import { SCHEMES } from "./schemes.mjs";
 import { features, reviewOf } from "./profile-lib.mjs";
+const JUDGES = new URL("../judges", import.meta.url).pathname; // the lab's judging instruments (BAML)
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const RUN = join(HERE, "runs", "baseline-1");
@@ -44,7 +45,7 @@ function lookCall(b) {
   if (existsSync(file)) return Promise.resolve(read(file));
   const ledger = join(LOOK, `${b}.ledger.jsonl`);
   return new Promise((res) => {
-    const p = spawn("baml", ["run", "--project", PLUGIN, "--agent-skill-check", "off", "--output-format", "json", "judge.look", "--", "--plugin", PLUGIN,
+    const p = spawn("baml", ["run", "--project", JUDGES, "--agent-skill-check", "off", "--output-format", "json", "judge.look", "--", "--plugin", PLUGIN,
       "--card", join(RUN, b, "judge", "card-eye.png"), "--model", "claude-haiku-5-5", "--effort", "low", "--out_dir", LOOK], { env: { ...process.env, MCD_LEDGER: ledger } });
     let out = ""; p.stdout.on("data", (d) => (out += d));
     p.on("close", () => {
