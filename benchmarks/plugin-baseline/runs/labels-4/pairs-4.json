@@ -1,0 +1,77 @@
+{
+ "note": "blind labelling set 4: the shipped collect loop (taste rounds) on 3 fresh subjects vs stock; sides/order randomised (seed 20261012)",
+ "pairs": [
+  {
+   "id": "r1",
+   "subject": "victorian",
+   "name": "Victorian painted-lady townhouse",
+   "A": "v3",
+   "B": "stock",
+   "kind": "stock vs plugin + 2 taste rounds"
+  },
+  {
+   "id": "r2",
+   "subject": "victorian",
+   "name": "Victorian painted-lady townhouse",
+   "A": "v1",
+   "B": "stock",
+   "kind": "stock vs plugin one-shot (collect v1)"
+  },
+  {
+   "id": "r3",
+   "subject": "art-deco",
+   "name": "Art Deco cinema",
+   "A": "stock",
+   "B": "v3",
+   "kind": "stock vs plugin + 2 taste rounds"
+  },
+  {
+   "id": "r4",
+   "subject": "art-deco",
+   "name": "Art Deco cinema",
+   "A": "v3",
+   "B": "v1",
+   "kind": "plugin one-shot vs after 2 taste rounds"
+  },
+  {
+   "id": "r5",
+   "subject": "beach",
+   "name": "Modern minimalist beach house",
+   "A": "v1",
+   "B": "v3",
+   "kind": "plugin one-shot vs after 2 taste rounds"
+  },
+  {
+   "id": "r6",
+   "subject": "beach",
+   "name": "Modern minimalist beach house",
+   "A": "stock",
+   "B": "v3",
+   "kind": "stock vs plugin + 2 taste rounds"
+  },
+  {
+   "id": "r7",
+   "subject": "art-deco",
+   "name": "Art Deco cinema",
+   "A": "v1",
+   "B": "stock",
+   "kind": "stock vs plugin one-shot (collect v1)"
+  },
+  {
+   "id": "r8",
+   "subject": "victorian",
+   "name": "Victorian painted-lady townhouse",
+   "A": "v3",
+   "B": "v1",
+   "kind": "plugin one-shot vs after 2 taste rounds"
+  },
+  {
+   "id": "r9",
+   "subject": "beach",
+   "name": "Modern minimalist beach house",
+   "A": "v1",
+   "B": "stock",
+   "kind": "stock vs plugin one-shot (collect v1)"
+  }
+ ]
+}

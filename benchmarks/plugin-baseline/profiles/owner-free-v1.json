@@ -1,0 +1,344 @@
+{
+ "name": "owner-free",
+ "version": 1,
+ "created": "2026-10-10",
+ "labels": {
+  "sets": [
+   "labels.json (set 1, 8 pairs)",
+   "labels-2.json (set 2, 11 decisive pairs)"
+  ],
+  "pairs": 19
+ },
+ "criteria": [
+  {
+   "key": "colour",
+   "say": "colour: a deliberate, interesting palette",
+   "features": [
+    "harmony",
+    "colourInterest",
+    "hueFamilies",
+    "lumStd",
+    "paletteFlags"
+   ],
+   "quotes": [
+    "More interesting colors and shapes",
+    "Better color theory, no strange red wool flag",
+    "More whimsical shape, nice colors and form",
+    "Nice color scheme"
+   ]
+  },
+  {
+   "key": "form",
+   "say": "form: distinctive, clear shapes",
+   "features": [
+    "formInterest",
+    "massing",
+    "rooflineVariety",
+    "heightToWidth"
+   ],
+   "quotes": [
+    "More interesting colors and shapes",
+    "More whimsical shape, nice colors and form",
+    "Clearer forms on build, both kind of meh"
+   ]
+  },
+  {
+   "key": "detail",
+   "say": "detail: small blocks used well (stairs, depth)",
+   "features": [
+    "detailFinesse",
+    "stairShare",
+    "slabShare",
+    "depth",
+    "detailShare"
+   ],
+   "quotes": [
+    "Better depth and details",
+    "Better details and realism",
+    "Better use of stair blocks for detail"
+   ]
+  },
+  {
+   "key": "texture",
+   "say": "texture and realism",
+   "features": [
+    "colourInterest",
+    "agedShare",
+    "weathering",
+    "visibleMaterials"
+   ],
+   "quotes": [
+    "More interesting textures",
+    "Better details and realism"
+   ]
+  },
+  {
+   "key": "sense",
+   "say": "it makes sense: grounded, nothing odd, reads as what it is",
+   "features": [
+    "grounded",
+    "oddElement",
+    "readsClearly"
+   ],
+   "quotes": [
+    "Lighthouse keeper's house firmly on foundation",
+    "Better color theory, no strange red wool flag",
+    "More interesting build, roof reads as workshop clearly"
+   ]
+  }
+ ],
+ "model": {
+  "kind": "pairwise logistic on standardised feature differences, sign-constrained",
+  "signs": {
+   "valid": 1,
+   "stray": -1,
+   "blankWalls": -1,
+   "paletteFlags": -1,
+   "visibleMaterials": 0,
+   "hueFamilies": 0,
+   "neutralShare": 0,
+   "satMean": 0,
+   "lumStd": 0,
+   "wallRoofContrast": 0,
+   "agedShare": 0,
+   "detailShare": 1,
+   "stairShare": 1,
+   "slabShare": 1,
+   "fenceWallTrapShare": 1,
+   "rooflineVariety": 1,
+   "footprintFill": 0,
+   "heightToWidth": 0,
+   "shapedRoof": 1,
+   "overhang": 1,
+   "lidRoof": -1,
+   "massing": 1,
+   "depth": 1,
+   "door": 1,
+   "windows": 1,
+   "wallGaps": -1,
+   "weathering": 0,
+   "props": 1,
+   "sign": 1,
+   "harmony": 1,
+   "colourInterest": 1,
+   "formInterest": 1,
+   "detailFinesse": 1,
+   "oddElement": -1,
+   "grounded": 1,
+   "readsClearly": 1
+  },
+  "lambda": 0.1,
+  "features": [
+   "valid",
+   "stray",
+   "blankWalls",
+   "paletteFlags",
+   "visibleMaterials",
+   "hueFamilies",
+   "neutralShare",
+   "satMean",
+   "lumStd",
+   "wallRoofContrast",
+   "agedShare",
+   "detailShare",
+   "stairShare",
+   "slabShare",
+   "fenceWallTrapShare",
+   "rooflineVariety",
+   "footprintFill",
+   "heightToWidth",
+   "shapedRoof",
+   "overhang",
+   "lidRoof",
+   "massing",
+   "depth",
+   "door",
+   "windows",
+   "wallGaps",
+   "weathering",
+   "props",
+   "sign",
+   "harmony",
+   "colourInterest",
+   "formInterest",
+   "detailFinesse",
+   "oddElement",
+   "grounded",
+   "readsClearly"
+  ],
+  "mean": [
+   0.9629629629629629,
+   3.925925925925926,
+   0.5925925925925926,
+   3.5555555555555554,
+   7.703703703703703,
+   2.3333333333333335,
+   0.3342962962962963,
+   0.30592592592592593,
+   43.574074074074076,
+   32.666666666666664,
+   0.04477777777777778,
+   0.15522222222222226,
+   0.08340740740740739,
+   0.013925925925925928,
+   0.017703703703703708,
+   0.5794074074074074,
+   0.9174074074074073,
+   1.1533333333333333,
+   0.75,
+   0.7222222222222222,
+   0.2222222222222222,
+   1.4074074074074074,
+   1.1666666666666667,
+   0.9351851851851852,
+   1.1759259259259258,
+   0.5925925925925926,
+   0.6388888888888888,
+   1.212962962962963,
+   0,
+   1.1481481481481481,
+   1.1111111111111112,
+   1.1481481481481481,
+   1.1851851851851851,
+   0.7407407407407407,
+   1,
+   0.4444444444444444
+  ],
+  "sd": [
+   0.18885257457751045,
+   5.906217225977974,
+   0.9529392837236005,
+   2.2986845406196887,
+   2.0333299601941928,
+   0.6085806194501847,
+   0.20439790801546234,
+   0.10398822081652859,
+   12.01238843837948,
+   43.96378981405965,
+   0.06978927718408139,
+   0.10065023167287034,
+   0.0957482266576947,
+   0.023970546627562393,
+   0.013829155499817567,
+   0.29763590226231224,
+   0.16963146529817041,
+   0.694342214697559,
+   0.42491829279939874,
+   0.3986861137335368,
+   0.35572912430182496,
+   0.49135182079339246,
+   0.3042903097250923,
+   0.21073716068038972,
+   0.6694899067601934,
+   0.5188491009674776,
+   0.6136311676215145,
+   0.40083075596135853,
+   1,
+   0.355246779504646,
+   0.5665577237325317,
+   0.7046776885348314,
+   0.3884477215445006,
+   0.43822813208145306,
+   1,
+   0.49690399499995325
+  ],
+  "weights": {
+   "valid": 0.17457857186165776,
+   "stray": 0.3425819947156671,
+   "blankWalls": 0.1696425755523589,
+   "paletteFlags": 0.20323339564741172,
+   "visibleMaterials": 0.5884300550414793,
+   "hueFamilies": -0.1934906128568235,
+   "neutralShare": 0.14797316041177067,
+   "satMean": -0.10295606628529234,
+   "lumStd": -0.016233447859282164,
+   "wallRoofContrast": -0.15616243129847285,
+   "agedShare": -0.03753427816731672,
+   "detailShare": -0.29413726847541405,
+   "stairShare": -0.22946140521939856,
+   "slabShare": -0.15102576076991653,
+   "fenceWallTrapShare": 0.06652438929167999,
+   "rooflineVariety": -0.01075945533597664,
+   "footprintFill": -0.04769669483096332,
+   "heightToWidth": -0.022554035102855717,
+   "shapedRoof": 0.03301461751271607,
+   "overhang": 0.10074684276150254,
+   "lidRoof": -0.07253193827346557,
+   "massing": 0.244735137468679,
+   "depth": 0.3553531838408496,
+   "door": -0.08002639049958236,
+   "windows": 0.04250560227748895,
+   "wallGaps": -0.1080741148947704,
+   "weathering": 0.2578421733436266,
+   "props": 0.3290039182325939,
+   "sign": 0,
+   "harmony": -0.44045740786860865,
+   "colourInterest": 0.25023164337084775,
+   "formInterest": 0.023431535507388773,
+   "detailFinesse": -0.2846086858318567,
+   "oddElement": 0.17620604255255526,
+   "grounded": 0,
+   "readsClearly": 0.03764935555026259
+  }
+ },
+ "accuracy": {
+  "nestedLOO": "18/19",
+  "nestedLOO_set2": "10/11",
+  "armOrderBaseline": "17/19",
+  "armOrderBaseline_set2": "9/11",
+  "trainSet1_testSet2": "10/11",
+  "inSampleLOO_tunedLambda": "19/19",
+  "bestSingleFeatureHindsight": "visibleMaterials 15/19"
+ },
+ "top": [
+  {
+   "feature": "visibleMaterials",
+   "weight": 0.588
+  },
+  {
+   "feature": "harmony",
+   "weight": -0.44
+  },
+  {
+   "feature": "depth",
+   "weight": 0.355
+  },
+  {
+   "feature": "stray",
+   "weight": 0.343
+  },
+  {
+   "feature": "props",
+   "weight": 0.329
+  },
+  {
+   "feature": "detailShare",
+   "weight": -0.294
+  },
+  {
+   "feature": "detailFinesse",
+   "weight": -0.285
+  },
+  {
+   "feature": "weathering",
+   "weight": 0.258
+  },
+  {
+   "feature": "colourInterest",
+   "weight": 0.25
+  },
+  {
+   "feature": "massing",
+   "weight": 0.245
+  },
+  {
+   "feature": "stairShare",
+   "weight": -0.229
+  },
+  {
+   "feature": "paletteFlags",
+   "weight": 0.203
+  }
+ ],
+ "cost": 0.0734245
+}

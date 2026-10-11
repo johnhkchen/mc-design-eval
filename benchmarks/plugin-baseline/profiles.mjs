@@ -26,8 +26,15 @@ function pairsOf() {
   for (const [s, w] of Object.entries(l1)) out.push({ set: 1, s, win: `${s}-${w}`, lose: `${s}-${w === "plugin" ? "stock" : "plugin"}` });
   const p2 = read(join(RUN, "pairs-2.json")).pairs, l2 = read(join(RUN, "labels-2.json"));
   for (const p of p2) { const k = l2.picks[p.id]; if (k === "tie") continue; out.push({ set: 2, id: p.id, s: p.subject, win: `${p.subject}-${p[k]}`, lose: `${p.subject}-${p[k === "A" ? "B" : "A"]}`, note: l2.notes?.[p.id] }); }
+  // set 3: same-arm and fresh-subject pairs (runs/labels-3; features were sealed there before the labels)
+  const L3 = join(HERE, "runs", "labels-3");
+  if (!argv.includes("--sets12") && existsSync(join(L3, "labels-3.json"))) {
+    const p3 = read(join(L3, "pairs-3.json")).pairs, l3 = read(join(L3, "labels-3.json"));
+    for (const p of p3) { const k = l3.picks[p.id]; if (!k || k === "tie") continue; out.push({ set: 3, id: p.id, s: p.subject, win: `${p.subject}-${p[k]}`, lose: `${p.subject}-${p[k === "A" ? "B" : "A"]}`, note: l3.notes?.[p.id] }); }
+  }
   return out;
 }
+const F3 = existsSync(join(HERE, "runs", "labels-3", "features.json")) ? read(join(HERE, "runs", "labels-3", "features.json")) : {};
 
 // ---- L1 look reads (one Haiku call per build, cached; first call warms the prompt cache)
 const LOOK = join(RUN, "look");
@@ -89,9 +96,10 @@ const CRITERIA = [
 const cmd = argv[0];
 if (cmd === "fit") {
   const pairs = pairsOf(), builds = [...new Set(pairs.flatMap((p) => [p.win, p.lose]))];
-  const first = await lookCall(builds[0]);
-  const looks = Object.fromEntries(await Promise.all(builds.map(async (b) => [b, b === builds[0] ? first : await lookCall(b)])));
-  const F = Object.fromEntries(builds.map((b) => [b, features(b, l0(join(RUN, b)), obsOf(b), looks[b]?.look)]));
+  const fresh = builds.filter((b) => !F3[b]);
+  const first = await lookCall(fresh[0]);
+  const looks = Object.fromEntries(await Promise.all(fresh.map(async (b) => [b, b === fresh[0] ? first : await lookCall(b)])));
+  const F = Object.fromEntries(builds.map((b) => [b, F3[b] ?? features(b, l0(join(RUN, b)), obsOf(b), looks[b]?.look)]));
   const names = Object.keys(F[builds[0]]);
   SIGNS = argv.includes("--free") ? null : names.map((n) => SIGN[n] ?? 0);
   const mean = names.map((n) => builds.reduce((t, b) => t + F[b][n], 0) / builds.length);
@@ -100,8 +108,8 @@ if (cmd === "fit") {
   const X = pairs.map((p) => z(p.win).map((v, i) => v - z(p.lose)[i]));
 
   // honest estimate: nested LOO (lambda chosen inside each fold)
-  let nested = 0, nested2 = 0;
-  X.forEach((x, i) => { const rest = X.filter((_, j) => j !== i), { lambda } = bestLambda(rest); if (predict(fit(rest, lambda), x) > 0) { nested++; if (pairs[i].set === 2) nested2++; } });
+  let nested = 0, nested2 = 0, nested3 = 0;
+  X.forEach((x, i) => { const rest = X.filter((_, j) => j !== i), { lambda } = bestLambda(rest); if (predict(fit(rest, lambda), x) > 0) { nested++; if (pairs[i].set === 2) nested2++; if (pairs[i].set === 3) nested3++; } });
   // confound checks: (a) "the arm with more help wins" (plugin > plain > described > stock) needs no features at all;
   // (b) train on set 1 only (all stock vs plugin), test on set 2
   const RANK = { stock: 0, described: 1, sized: 2, plain: 3, plugin: 4 }, arm = (b) => b.split("-").pop();
@@ -114,11 +122,11 @@ if (cmd === "fit") {
   const schemeAcc = Object.fromEntries(Object.entries(SCHEMES).map(([k]) => [k, null]));
   const single = names.map((n, i) => ({ n, a: X.filter((x) => x[i] > 0).length / X.length })).sort((a, b) => b.a - a.a)[0];
   const profile = {
-    name: NAME, version: 1, created: new Date().toISOString().slice(0, 10),
-    labels: { sets: ["labels.json (set 1, 8 pairs)", "labels-2.json (set 2, 11 decisive pairs)"], pairs: pairs.length },
+    name: NAME, version: pairs.some((p) => p.set === 3) ? 2 : 1, created: new Date().toISOString().slice(0, 10),
+    labels: { sets: [...new Set(pairs.map((p) => p.set))].map((n) => ({ 1: "labels.json (set 1)", 2: "labels-2.json (set 2)", 3: "labels-3.json (set 3, same-arm + fresh)" })[n]), pairs: pairs.length },
     criteria: CRITERIA.map(({ key, say, features }) => ({ key, say, features, quotes: pairs.filter((p) => p.note && CRITERIA.find((c) => c.key === key).words.some((wd) => p.note.toLowerCase().includes(wd))).map((p) => p.note) })),
     model: { kind: "pairwise logistic on standardised feature differences, sign-constrained", signs: Object.fromEntries(names.map((n) => [n, SIGN[n] ?? 0])), lambda, features: names, mean, sd, weights: Object.fromEntries(names.map((n, i) => [n, w[i]])) },
-    accuracy: { nestedLOO: `${nested}/${X.length}`, nestedLOO_set2: `${nested2}/${X2.length}`, armOrderBaseline: `${armHits}/${X.length}`, armOrderBaseline_set2: `${armHits2}/${X2.length}`,
+    accuracy: { nestedLOO: `${nested}/${X.length}`, nestedLOO_set2: `${nested2}/${X2.length}`, nestedLOO_set3: `${nested3}/${pairs.filter((p) => p.set === 3).length}`, armOrderBaseline: `${armHits}/${X.length}`, armOrderBaseline_set2: `${armHits2}/${X2.length}`,
       trainSet1_testSet2: `${transfer}/${X2.length}`, inSampleLOO_tunedLambda: `${Math.round(acc * X.length)}/${X.length}`, bestSingleFeatureHindsight: `${single.n} ${Math.round(single.a * X.length)}/${X.length}` },
     top: ranked.slice(0, 12),
     cost: Object.values(looks).reduce((t, r) => t + (r?.cost || 0), 0),

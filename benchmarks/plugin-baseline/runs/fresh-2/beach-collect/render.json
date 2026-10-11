@@ -1,0 +1,310 @@
+{
+ "sheet": "sheet.png",
+ "version": "1.21.4",
+ "front": "n",
+ "ground": 1,
+ "unknownBlocks": [],
+ "tiles": {
+  "street": "tiles/street.png",
+  "down the street, left": "tiles/down-the-street-left.png",
+  "down the street, right": "tiles/down-the-street-right.png",
+  "front (elevation)": "tiles/front-elevation.png",
+  "left (elevation)": "tiles/left-elevation.png",
+  "right (elevation)": "tiles/right-elevation.png",
+  "back (elevation)": "tiles/back-elevation.png",
+  "front-left": "tiles/front-left.png",
+  "front-right": "tiles/front-right.png",
+  "glance 320px": "tiles/glance-320px.png",
+  "entrance n 21,3,11 45px": "tiles/entrance-n-21-3-11-45px.png",
+  "entrance s 2 15,3,22 44px": "tiles/entrance-s-2-15-3-22-44px.png",
+  "eave n 1/2 (y 2) 15px": "tiles/eave-n-1-2-y-2-15px.png",
+  "eave n 2/2 (y 2) 15px": "tiles/eave-n-2-2-y-2-15px.png",
+  "busiest north 20px": "tiles/busiest-north-20px.png",
+  "busiest east 25px": "tiles/busiest-east-25px.png",
+  "busiest south 26px": "tiles/busiest-south-26px.png",
+  "busiest west 28px": "tiles/busiest-west-28px.png",
+  "roof n corner 24px": "tiles/roof-n-corner-24px.png",
+  "wall_banner x3 26,5,11 54px": "tiles/wall-banner-x3-26-5-11-54px.png",
+  "wall_banner x3 26,5,20 53px": "tiles/wall-banner-x3-26-5-20-53px.png",
+  "smooth_quartz_stairs 28,3,17 54px": "tiles/smooth-quartz-stairs-28-3-17-54px.png",
+  "smooth_quartz_stairs 31,3,14 54px": "tiles/smooth-quartz-stairs-31-3-14-54px.png",
+  "campfire 31,3,17 54px": "tiles/campfire-31-3-17-54px.png",
+  "smooth_quartz_stairs 31,3,20 54px": "tiles/smooth-quartz-stairs-31-3-20-54px.png"
+ },
+ "closeups": [
+  {
+   "label": "glance 320px",
+   "kind": "glance"
+  },
+  {
+   "label": "entrance n 21,3,11",
+   "kind": "entrance",
+   "box": [
+    [
+     19,
+     3,
+     9
+    ],
+    [
+     23,
+     6,
+     13
+    ]
+   ],
+   "from": "north",
+   "pxPerBlock": 45.2
+  },
+  {
+   "label": "entrance s 2 15,3,22",
+   "kind": "entrance",
+   "box": [
+    [
+     13,
+     3,
+     20
+    ],
+    [
+     18,
+     6,
+     24
+    ]
+   ],
+   "from": "south",
+   "pxPerBlock": 43.6
+  },
+  {
+   "label": "eave n 1/2 (y 2)",
+   "kind": "eave",
+   "box": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     20,
+     4,
+     3
+    ]
+   ],
+   "from": "north",
+   "pxPerBlock": 14.7
+  },
+  {
+   "label": "eave n 2/2 (y 2)",
+   "kind": "eave",
+   "box": [
+    [
+     21,
+     1,
+     0
+    ],
+    [
+     41,
+     4,
+     3
+    ]
+   ],
+   "from": "north",
+   "pxPerBlock": 14.7
+  },
+  {
+   "label": "busiest north",
+   "kind": "facade",
+   "box": [
+    [
+     27,
+     6,
+     1
+    ],
+    [
+     34,
+     11,
+     27
+    ]
+   ],
+   "from": "north",
+   "pxPerBlock": 20.3
+  },
+  {
+   "label": "busiest east",
+   "kind": "facade",
+   "box": [
+    [
+     25,
+     1,
+     11
+    ],
+    [
+     41,
+     6,
+     18
+    ]
+   ],
+   "from": "east",
+   "pxPerBlock": 24.9
+  },
+  {
+   "label": "busiest south",
+   "kind": "facade",
+   "box": [
+    [
+     12,
+     1,
+     22
+    ],
+    [
+     19,
+     6,
+     37
+    ]
+   ],
+   "from": "south",
+   "pxPerBlock": 25.5
+  },
+  {
+   "label": "busiest west",
+   "kind": "facade",
+   "box": [
+    [
+     3,
+     6,
+     10
+    ],
+    [
+     13,
+     11,
+     17
+    ]
+   ],
+   "from": "west",
+   "pxPerBlock": 28.3
+  },
+  {
+   "label": "roof n corner",
+   "kind": "roof",
+   "box": [
+    [
+     32,
+     2,
+     6
+    ],
+    [
+     36,
+     12,
+     9
+    ]
+   ],
+   "from": "north",
+   "pxPerBlock": 24
+  },
+  {
+   "label": "wall_banner x3 26,5,11",
+   "kind": "small",
+   "box": [
+    [
+     25,
+     5,
+     10
+    ],
+    [
+     28,
+     7,
+     13
+    ]
+   ],
+   "from": "east",
+   "pxPerBlock": 54
+  },
+  {
+   "label": "wall_banner x3 26,5,20",
+   "kind": "small",
+   "box": [
+    [
+     25,
+     5,
+     19
+    ],
+    [
+     28,
+     7,
+     23
+    ]
+   ],
+   "from": "east",
+   "pxPerBlock": 52.7
+  },
+  {
+   "label": "smooth_quartz_stairs 28,3,17",
+   "kind": "small",
+   "box": [
+    [
+     27,
+     3,
+     16
+    ],
+    [
+     29,
+     4,
+     18
+    ]
+   ],
+   "from": "north",
+   "pxPerBlock": 54
+  },
+  {
+   "label": "smooth_quartz_stairs 31,3,14",
+   "kind": "small",
+   "box": [
+    [
+     30,
+     3,
+     13
+    ],
+    [
+     32,
+     4,
+     15
+    ]
+   ],
+   "from": "north",
+   "pxPerBlock": 54
+  },
+  {
+   "label": "campfire 31,3,17",
+   "kind": "small",
+   "box": [
+    [
+     30,
+     3,
+     16
+    ],
+    [
+     32,
+     4,
+     18
+    ]
+   ],
+   "from": "north",
+   "pxPerBlock": 54
+  },
+  {
+   "label": "smooth_quartz_stairs 31,3,20",
+   "kind": "small",
+   "box": [
+    [
+     30,
+     3,
+     19
+    ],
+    [
+     32,
+     4,
+     21
+    ]
+   ],
+   "from": "east",
+   "pxPerBlock": 54
+  }
+ ]
+}

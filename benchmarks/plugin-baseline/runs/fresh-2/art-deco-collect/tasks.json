@@ -1,0 +1,72 @@
+[
+ {
+  "title": "Vertical CINEMA blade sign on the tower",
+  "kind": "sign",
+  "aspect": "Elements",
+  "where": "north face, tower tier 1, x=7 flank pylon (z=4..5), y=17..26",
+  "instruction": "Use signboard(g,'CINEMA',{at:[23,19,5],face:'north',mode:'hanging',wood:'birch'}) or stack wall signs one letter per row (C,I,N,E,M,A) on the pylon side face x=24, facing east, black text, glow:true."
+ },
+ {
+  "title": "Film-title sign boards under the marquee",
+  "kind": "sign",
+  "aspect": "Elements",
+  "where": "under the marquee soffit, z=3, x=12 and x=18, y=2..4",
+  "instruction": "Put a signboard on the marquee's east and west end faces (x=9 and x=21 outer cells): signboard(g,'METROPOLIS',{at:[8,6,3],face:'west',mode:'wall',wood:'birch',width:3,height:1}) and the same for 'THE JAZZ SINGER' on face east at x=22. Text max 12 characters per line."
+ },
+ {
+  "title": "Gold finials on the tier-2 and tier-1 pylons",
+  "kind": "detail",
+  "aspect": "Massing",
+  "where": "tops of pylons at x=7,23 y=32 and x=9,21 y=42, z=4..5",
+  "instruction": "On each pylon top add a lightning_rod (waxed) or end_rod stack of 2 above the slab cap, via mcd paint rule: north peak -> finial end_rod+lightning_rod corner."
+ },
+ {
+  "title": "Sea-lantern light strips up the tower pylons",
+  "kind": "detail",
+  "aspect": "Finish",
+  "where": "pylons at x=9,21 (z=5) y=28..40 and x=11,19 y=38..49",
+  "instruction": "Replace every 4th quartz block in the pylon column z=5 with sea_lantern (g.set(x,y,5,'sea_lantern')), starting 3 above the pylon base, so the tower glows at night."
+ },
+ {
+  "title": "Door-pull and kick details on the entrance doors",
+  "kind": "detail",
+  "aspect": "Facades",
+  "where": "north vestibule door wall z=8, x=11,12,18,19, y=1..2",
+  "instruction": "Add mullion glazing: glazing(g,{at:[12,3,8],face:'north',preset:'transom'}) for the fanlights; put B.trapdoor('dark_oak','north','bottom',false) kick plates at y=1 beside each door."
+ },
+ {
+  "title": "Planters flanking the entrance",
+  "kind": "props",
+  "aspect": "Elements",
+  "where": "sidewalk z=3..4, x=8 and x=22",
+  "instruction": "Raised bed: 2x1 polished_blackstone_slab border with azalea + pink_tulip on top (planter(g,{at:[8,1,4],face:'north',...}) or by hand); one per side, symmetrical."
+ },
+ {
+  "title": "Add EXIT sign lamps and wall lanterns on the sides",
+  "kind": "props",
+  "aspect": "Finish",
+  "where": "east and west walls x=1 / x=29, z=14,22, y=4",
+  "instruction": "Use mcd paint: 'east row 4 cols (fins) -> attach lantern every 8' on the side fins, one lantern per 2 fins, to light the side street."
+ },
+ {
+  "title": "Gilded trim on the T2/T3 cornice rings",
+  "kind": "detail",
+  "aspect": "Palette",
+  "where": "front wall z=6 just below the tier cornices: y=25 (x=9..21) and y=35 (x=11..19)",
+  "instruction": "Place a full gold_block course under each cornice lip at the front: y=25 for x=9..21 (tier 1 cornice) and y=35 for x=11..19, z=6, replacing nothing but air-facing wall cells, so each tier shows a gilt line."
+ },
+ {
+  "title": "Rear stage house: lower fly-tower block on the back roof",
+  "kind": "roof",
+  "aspect": "Massing",
+  "where": "roof, x=8..22, z=24..33, y=18..22",
+  "instruction": "Build a hollow quartz/sandstone box 15x10x5 with setbacks(g,{base:[8,18,24],footprint:[15,10],tiers:[{height:5,block:'smooth_sandstone',coping:{block:'smooth_quartz_slab'}}]}); add a row of 3 vent louvres on its north face."
+ },
+ {
+  "title": "Back wall: EXIT lamps and a loading-door canopy",
+  "kind": "detail",
+  "aspect": "Facades",
+  "where": "back wall z=33, x=5..7 and x=23..25, y=3..4",
+  "instruction": "Over each iron exit door add a 3-wide smooth_quartz_slab canopy at y=4 projecting 1 (z=34) with stair brackets (upside-down smooth_quartz_stairs) at both ends."
+ }
+]

@@ -1,0 +1,72 @@
+[
+ {
+  "title": "Gold bargeboard on the porch gable",
+  "kind": "detail",
+  "aspect": "Roof",
+  "where": "north face, porch gable x11..15, y8..10, z3",
+  "instruction": "Replace the quartz verge stairs on the two slopes of the porch gable with bamboo_stairs facing the same way, then add a second gold course of bamboo_slab (top) one block out under the eave at y8 using the paint rule 'north rows 8 -> cornice simple bamboo' limited to cols over x11..15."
+ },
+ {
+  "title": "Pennant bunting under the porch header",
+  "kind": "banner",
+  "aspect": "Elements",
+  "where": "north face, porch header row y6, x12..14, z3 (wall behind: the quartz header at y7)",
+  "instruction": "Use the bunting brush: bunting(g,{from:[12,6,3],to:[14,6,3],face:'north',colors:['pink','yellow','light_blue'],every:1}). Each banner needs the header block behind it and two air cells below."
+ },
+ {
+  "title": "Flower boxes under the ground-floor flank windows",
+  "kind": "props",
+  "aspect": "Facades",
+  "where": "east wall x=20 at z8..9, z13..14, z18..19, z23..24, y3 (one out, x=21)",
+  "instruction": "planter(g,{at:[20,3,zMax],face:'east',width:2,kind:'box',plants:['pink_tulip','allium']}) for each window pair; at is the wall cell under the window's left column as seen from outside (the larger z)."
+ },
+ {
+  "title": "Lanterns on the bay corners",
+  "kind": "props",
+  "aspect": "Finish",
+  "where": "canted bay, x16 and x20, z3, y9 (belt course height)",
+  "instruction": "fixture(g,{at:[16,9,5],face:'north',mount:'bracket'}) and the same at [20,9,5]: an upside-down stair corbel with a lantern, one per splay."
+ },
+ {
+  "title": "Iron gate for the garden",
+  "kind": "detail",
+  "aspect": "Elements",
+  "where": "x12..14, z1, y1..3 (the gap between the gate pillars)",
+  "instruction": "Fill x12 and x14 at y1 with stone_brick_wall and y2..3 with iron_bars, and put a dark_oak_fence_gate (facing north, open=true) at x13,y1,z1 so the gate reads as a gate, not a gap."
+ },
+ {
+  "title": "Rooftop crest on the mansard deck",
+  "kind": "roof",
+  "aspect": "Roof",
+  "where": "mansard top deck, y25..26, x8..16, z12..22",
+  "instruction": "Run: mcd paint build.nbt out.nbt --rules r.txt --face roof with the rule 'roof wall tops -> railing iron_bars posts every 4' so the iron crest is continuous round the deck edge."
+ },
+ {
+  "title": "Pink-and-cream awning over the bay's ground-floor window",
+  "kind": "detail",
+  "aspect": "Facades",
+  "where": "north face of the bay, x17..19, y8, z3",
+  "instruction": "At y8 over the bay front window (x17,18,19, z3) place stairs facing south with the low step north, alternating cherry_stairs (x17, x19) and smooth_quartz_stairs (x18); put an open cherry_trapdoor (facing south) hanging at x17 and x19 on y7 as scalloped valance."
+ },
+ {
+  "title": "Weather the plinth lightly",
+  "kind": "fix",
+  "aspect": "Palette",
+  "where": "all faces, ground rows y1..2",
+  "instruction": "mcd paint build.nbt out.nbt --rules r.txt --face north,east,south,west with 'all faces ground row -> weather light' then keep out.nbt only if mcd diff shows a visible change."
+ },
+ {
+  "title": "Hanging blade sign for a boarding-house",
+  "kind": "sign",
+  "aspect": "Elements",
+  "where": "north face, x16, y5, z6 (wall just right of the porch pilaster)",
+  "instruction": "signboard(g,'ROOMS',{at:[16,5,6],face:'north',mode:'hanging',wood:'spruce'}) after checking that the cell in front is air; text exactly 'ROOMS'."
+ },
+ {
+  "title": "Window boxes on the back windows",
+  "kind": "props",
+  "aspect": "Facades",
+  "where": "south face z=25, windows at x7..8 and x16..17, y3 (one out, z=26)",
+  "instruction": "planter(g,{at:[7,3,25],face:'south',width:2,kind:'box'}) and at [16,3,25]; at is the bottom-left wall cell as seen from outside."
+ }
+]

@@ -1,0 +1,30 @@
+{
+ "chimneys": [
+  {
+   "at": [
+    7,
+    20
+   ],
+   "size": 2,
+   "material": "stone_bricks",
+   "rise": 3
+  },
+  {
+   "at": [
+    17,
+    20
+   ],
+   "size": 2,
+   "material": "stone_bricks",
+   "rise": 3
+  }
+ ],
+ "dormers": {
+  "face": "north",
+  "count": 3,
+  "style": "gable",
+  "width": 3,
+  "height": 2,
+  "wall": "cherry_planks"
+ }
+}

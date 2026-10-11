@@ -1,6 +1,6 @@
 // Seal a profile's predictions for a labelling set before the labels exist: blind observations (ObserveBuild x2,
 // ObserveLook) + L0 for every build, then each profile's pick per pair. Later: --score compares with the labels.
-//   node benchmarks/plugin-baseline/predict.mjs --set runs/labels-3 [--profiles owner,owner-free] [--score labels-3.json]
+//   node benchmarks/plugin-baseline/predict.mjs --set runs/labels-3 [--pairs pairs-3.json] [--profiles owner,owner-free] [--score labels-3.json]
 import { spawn } from "node:child_process";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -13,7 +13,7 @@ const argv = process.argv.slice(2);
 const opt = (k, d) => (argv.includes(k) ? argv[argv.indexOf(k) + 1] : d);
 const SET = join(HERE, opt("--set", "runs/labels-3"));
 const PROFILES = opt("--profiles", "owner,owner-free").split(",");
-const { pairs } = JSON.parse(readFileSync(join(SET, "pairs-3.json"), "utf8"));
+const { pairs } = JSON.parse(readFileSync(join(SET, opt("--pairs", "pairs-3.json")), "utf8"));
 const read = (f) => JSON.parse(readFileSync(f, "utf8"));
 
 function baml(fn, dir, tag) {
@@ -43,7 +43,7 @@ for (const name of PROFILES) {
   });
 }
 // a no-feature baseline for same-method pairs: "the later version wins" (v2 over v1, v2 over v2old, iterated over plugin over stock)
-const ORDER = { v1: 0, v2old: 1, v2: 2, stock: 0, plugin: 1, iterated: 2 };
+const ORDER = { v1: 0, v2old: 1, v2: 2, v3: 3, stock: -1, plugin: 1, iterated: 2 };
 out.laterWins = pairs.map((p) => ({ id: p.id, pick: ORDER[p.A] > ORDER[p.B] ? "A" : "B" }));
 const sealed = join(SET, "predictions.json");
 if (!argv.includes("--score")) { writeFileSync(sealed, JSON.stringify(out, null, 1)); writeFileSync(join(SET, "features.json"), JSON.stringify(F, null, 1)); console.log(`sealed ${pairs.length} predictions for ${PROFILES.join(", ")}; observation cost $${out.cost}`); process.exit(0); }
