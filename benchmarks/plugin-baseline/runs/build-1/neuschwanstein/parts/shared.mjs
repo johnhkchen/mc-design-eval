@@ -6,6 +6,9 @@ export const P = {
   wall: "calcite", wallStairs: "calcite", trim: "smooth_sandstone", quoin: "stone_bricks",
   brick: "bricks", slate: "dark-slate", rockBase: "stone", base: "stone_bricks", floor: "stone_bricks",
 };
+export const DY = 16;   // the castle is built at its own levels, then lifted DY onto the (deepened) crag
+P.slate2 = "slate"; P.gold = "gold_block";
+export const GOLD = ["gold_block", "lightning_rod"];
 export const LOG = [];
 export const note = (s) => { LOG.push(s); console.log(s); };
 
@@ -48,7 +51,7 @@ export function slit(g, x, y, z, h = 3, pane = "glass_pane") { for (let j = 0; j
 
 /** One turret cap: dark-slate cone with finial. rect = [x0,z0,x1,z1] of the shaft, y = shaft top + 1. */
 export function turretCap(g, rect, y, o = {}) {
-  const r = roof(g, [rect], "tower-cap", { y, material: P.slate, ...o });
+  const r = roof(g, [rect], "tower-cap", { y, material: P.slate, finial: GOLD, dormer: false, ...o });
   if (r.warnings?.length) for (const w of r.warnings) note(`WARN turretCap ${rect}: ${w.code} ${w.message ?? ""}`);
   return r;
 }
@@ -120,9 +123,53 @@ export function despeckle(g, passes = 3) {
 }
 
 /** A finial on top of whatever is the highest block in column (x,z): sandstone wall post and a lightning rod. */
-export function finialAt(g, x, z, posts = 1) {
+export function finialAt(g, x, z, posts = 1, gold = false) {
   let y = g.size[1] - 2;
   while (y > 0 && g.isAir(x, y, z)) y--;
-  for (let i = 1; i <= posts; i++) g.set(x, y + i, z, ...B.wall("stone_brick"));
+  for (let i = 1; i <= posts; i++) g.set(x, y + i, z, ...(gold ? [P.gold] : B.wall("stone_brick")));
   g.set(x, y + posts + 1, z, "lightning_rod", { facing: "up", powered: "false", waterlogged: "false" });
+}
+
+/**
+ * Romanesque-revival window group on one face: lights = widths from the left, 1 = lancet (h-2 tall), 3 = round-arched
+ * (archWindow); white quartz-pillar mullions between and jambs at both ends.
+ */
+export function romWindow(g, face, plane, pos, y, lights, h = 5) {
+  const ns = face === "north" || face === "south";
+  const cell = (i) => (ns ? [pos + i, plane] : [plane, pos + i]);
+  let i = 0;
+  const gaps = [0 - 1];
+  for (const w of lights) {
+    if (w === 3) archWindow(g, face, plane, pos + i, y, { w: 3, h, frame: false });
+    else for (let j = 0; j < h - 2; j++) { const [x, z] = cell(i); g.set(x, y + j + 1, z, "glass_pane", {}); if (j === 0) g.set(x, y, z, P.wall); }
+    i += w; gaps.push(i); i += 1;
+  }
+  const out = { north: [0, -1], south: [0, 1], east: [1, 0], west: [-1, 0] }[face];
+  const total = i - 1;
+  for (const k of [...gaps.map((v, n) => (n === 0 ? -1 : gaps[n])), total]) {
+    const [x, z] = cell(k);
+    for (let j = 0; j < h - 1; j++) if (g.inBounds(x, y + j, z) && !g.isAir(x, y + j, z)) g.set(x, y + j, z, "quartz_pillar");
+  }
+  for (let k = -1; k <= total; k++) {
+    const [x, z] = cell(k), sx = x + out[0], sz = z + out[1];
+    if (g.inBounds(sx, y - 1, sz) && g.isAir(sx, y - 1, sz)) g.set(sx, y - 1, sz, ...B.slab("smooth_sandstone", "top"));
+  }
+}
+/** Pilaster strip: quartz pillar one proud of the wall, capped with an upside-down sandstone stair. face = outward dir. */
+export function pilaster(g, face, plane, pos, y0, y1) {
+  const ns = face === "north" || face === "south";
+  const d = { north: -1, south: 1, east: 1, west: -1 }[face];
+  const cell = (u) => (ns ? [pos, plane + d * u] : [plane + d * u, pos]);
+  for (let y = y0; y <= y1; y++) { const [x, z] = cell(1); if (g.isAir(x, y, z)) g.set(x, y, z, "quartz_pillar"); }
+  const [x, z] = cell(1);
+  g.set(x, y1 + 1, z, ...B.stairs("smooth_sandstone", { north: "south", south: "north", east: "west", west: "east" }[face], "top"));
+}
+/** Octagon ring (width 7 centred cx,cz) at y, hollow, block. */
+export function octagon(g, cx, cz, y, block = P.wall, fill = false) {
+  for (let dx = -3; dx <= 3; dx++) for (let dz = -3; dz <= 3; dz++) {
+    const a = Math.max(Math.abs(dx), Math.abs(dz)), s = Math.abs(dx) + Math.abs(dz);
+    if (s > 4) continue;
+    const inner = a <= 2 && s <= 3;
+    if (!inner || fill) g.set(cx + dx, y, cz + dz, block);
+  }
 }

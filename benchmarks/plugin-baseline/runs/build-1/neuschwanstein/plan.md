@@ -54,3 +54,14 @@ Deviations from the table: gatehouse z 7..15 (shifted back 4 so the crag can fal
 wing 79..87 x 22..31 on a podium, stair turret centre (65,29) from y11, 9 slender turrets (Palas corners, wing corners, Knights' House N corners, Bower N corners),
 roof presets: tower-cap (every cone and pyramid), cottage (Knights' House), civic overridden to steep gable + dormers + chimneys (Palas).
 Ideas for a later session: gold finials, true gothic window heads, interior floors, a Marienbrucke, more courtyard life.
+
+## Revision 1 (comment-1: verticality, Palas facades, roofs/caps, interiors) — done 00:3x
+- Castle is authored at its own levels in a `CASTLE_H` grid, then lifted `DY=16` onto a deepened crag (build.mjs); rock.mjs terraces at 10+DY/16+DY, steep falloff (4.4/block), brick retaining wall only on the top 9 rows of the cliff. Grid is now 112x118x52 (over the 75 asked: the comment asked to extend downward).
+- Stair turret: r2 shaft to y66, corbel, octagonal belfry y67-73 with arched openings, needle spire (slate palette, gold finial) top y98 vs Palas ridge y74.
+- Palas: 5 storeys (wall top y52), roof very-steep (ridge y74), pilaster bays + romWindow groups per storey (single / pair / triple / pair / lancets), two-storey loggia (x90..102, y38..50) on a rusticated base, bold 5-deep north balcony on piers, interiors (floors y23/37/44, blue throne hall with gold, apse platform, chandeliers; coffered Singers' Hall).
+- Gold finials: turretCap default finial gold_block + lightning_rod; main tower, bower, stepped gables too. Turret caps use the lighter `slate` palette vs the Palas `dark-slate`.
+- Tool note: `mcd check/palette` need `node --stack-size=60000` on this build (175k blocks overflow the stack).
+
+## Revision 3 (comment-3: back cliff, apse, back facade, front approach, courtyard life) — done
+- parts/backcliff.mjs: south crag rebuilt (buttress/gully profile per x, strata ledges + undercuts, mossy ledge tops), zig-zag service path (two switchbacks) to a postern in a small wall on the upper court's south edge, clinging pines (cliffPines). parts/road.mjs: winding stair-ramp road + parapet + lanterns from the west crag up to the causeway. parts/apse.mjs: semicircular throne-hall apse (x93..101, z47..50) with 5 round-arched windows, conical slate roof + gold finial, gold platform + throne inside; three-storey oriel (x75..79) on corbels with small cap; string courses on the back. parts/courtyard.mjs: fountain, lamp posts, banner poles, cart, flower boxes + banners on the Knights' House, postern wall.
+- gatehouse: east gate tower shortened (stands in front of the stair turret) and flagpole cut so the spire reads.

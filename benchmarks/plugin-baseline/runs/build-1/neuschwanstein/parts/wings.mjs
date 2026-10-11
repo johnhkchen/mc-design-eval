@@ -1,5 +1,5 @@
 // The Knights' House (gabled, west) and the square Bower, with their windows and doors.
-import { P, B, shell, roof, note, archWindow, stepGable, finialAt } from "./shared.mjs";
+import { P, B, shell, roof, note, archWindow, stepGable, finialAt, GOLD } from "./shared.mjs";
 export const KNIGHTS = { x0: 20, z0: 32, x1: 38, z1: 44, y0: 17, top: 31 };
 export const BOWER = { x0: 8, z0: 38, x1: 18, z1: 48, y0: 17, top: 38 };
 const door = (g, x, y, z, facing) => { g.set(x, y, z, ...B.door("spruce", facing, "lower")); g.set(x, y + 1, z, ...B.door("spruce", facing, "upper")); };
@@ -14,7 +14,7 @@ export function wings(g, { level }) {
   shell(g, [Bw.x0, Bw.y0, Bw.z0], [Bw.x1, Bw.top, Bw.z1], P.wall, { floor: false, ceiling: true });
   g.fill([Bw.x0 + 1, Bw.y0, 43], [Bw.x1 - 1, Bw.top - 1, 43], P.wall);
   const rr = [[Bw.x0, Bw.z0, Bw.x1, Bw.z1]];
-  const bo = { y: Bw.top + 1, style: "pyramid", material: P.slate, pitch: "very-steep", edges: false, dormers: { face: "all", count: 1, style: "gable", width: 3, height: 3 } };
+  const bo = { y: Bw.top + 1, style: "pyramid", material: P.slate, pitch: "very-steep", edges: false, finial: GOLD, material2: 0, dormers: { face: "all", count: 1, style: "gable", width: 3, height: 3 } };
   r = roof(g, rr, "tower-cap", { ...bo, dryRun: true });
   for (const w of r.warnings ?? []) note(`bower roof WARN ${w.code}: ${w.message ?? ""}`);
   roof(g, rr, "tower-cap", bo);

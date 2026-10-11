@@ -15,8 +15,9 @@ export function gatehouse(g, { level }) {
   g.fill([54, 19, z0 + 1], [56, 19, z0 + 1], "iron_bars");
   // round white towers
   for (const [cx, cz] of GTOWERS) {
-    roundTower(g, cx, cz, 4, y0, 25);                                          // y11..35
-    turretCap(g, rectOf(cx, cz, 4), 36, { pitch: 3.9 });
+    const east = cx > 55;                                                      // the east tower stands in front of the stair turret: shorter and squatter so the spire reads
+    roundTower(g, cx, cz, 4, y0, east ? 18 : 25);                              // y11..35 (east y11..28)
+    turretCap(g, rectOf(cx, cz, 4), east ? 29 : 36, { pitch: east ? 2.6 : 3.9 });
   }
   // crenellated brick parapet round the top
   parapet(g, { from: [x0, top + 1, z0], to: [x1, z1], block: P.brick, style: "crenellated" });
@@ -32,6 +33,6 @@ export function gatehouse(g, { level }) {
   for (const x of [49, 61]) g.set(x, 19, z0 - 1, ...B.banner("light_blue", [["rhombus", "white"], ["border", "white"]], { facing: "north" }));
   for (const x of [49, 61]) { g.set(x, 20, z0 - 1, "smooth_quartz"); }
   // flagpole on the roof
-  for (let y = top + 1; y <= top + 9; y++) g.set(55, y, 10, ...B.fence("spruce"));
-  g.set(55, top + 9, 9, ...B.banner("light_blue", [["rhombus", "white"]], { facing: "north" }));
+  for (let y = top + 1; y <= top + 5; y++) g.set(55, y, 10, ...B.fence("spruce"));
+  g.set(55, top + 5, 9, ...B.banner("light_blue", [["rhombus", "white"]], { facing: "north" }));
 }
