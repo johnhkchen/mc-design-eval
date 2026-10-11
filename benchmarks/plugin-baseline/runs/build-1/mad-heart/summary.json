@@ -3,8 +3,8 @@
  "kept": "v1",
  "best": "/Volumes/ext1/swe/repos/mc-design-eval/benchmarks/plugin-baseline/runs/build-1/mad-heart/v1.nbt",
  "card": "/Volumes/ext1/swe/repos/mc-design-eval/benchmarks/plugin-baseline/runs/build-1/mad-heart/v1-card.png",
- "summary": "The build session ran out of time (45 min) before finishing; this is the last build.nbt it saved. Cost not recorded.",
+ "summary": "The build session hit the 45-min workflow timeout, then ran on orphaned ~5 more minutes (stopped by hand); v1 is the last build.nbt it saved. Cost not recorded.",
  "revisions": [],
- "seconds": 2700,
+ "seconds": 3020,
  "cost_usd": 0
 }
