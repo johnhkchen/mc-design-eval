@@ -1,0 +1,21 @@
+{
+  "preset": "shop",
+  "footprint": [[1, 7, 14, 30]],
+  "y": 17,
+  "pitch": "half",
+  "maxHeight": 4,
+  "overhang": 1,
+  "edges": { "fascia": false },
+  "material": "dark-slate",
+  "gable": "bamboo_mosaic",
+  "ridge": "crest",
+  "dormers": false,
+  "chimneys": [
+    { "at": [1, 13], "size": 1, "material": "bricks" },
+    { "at": [14, 27], "size": 1, "material": "bricks" }
+  ],
+  "keep": [
+    { "from": [0, 16, 3], "to": [15, 24, 7] },
+    { "from": [1, 16, 19], "to": [2, 26, 23] }
+  ]
+}
