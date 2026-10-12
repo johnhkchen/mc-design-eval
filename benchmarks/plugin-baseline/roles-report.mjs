@@ -18,11 +18,17 @@ const runs = [];
   }
 })(root, 0);
 
+// the plugin's trade cards: a role asked for under another name (aka) counts toward the card's trade
+const PLUGIN = process.env.MCD_PLUGIN ?? new URL("../../../minecraft-design", import.meta.url).pathname;
+const { loadTrades } = await import(join(PLUGIN, "tools/src/trades.mjs"));
 const read = (f) => { try { return JSON.parse(readFileSync(f, "utf8")); } catch { return null; } };
 const norm = (r) => r.toLowerCase().replace(/\(.*?\)/g, "").replace(/[^a-z ]/g, " ").replace(/\s+/g, " ").trim().replace(/s$/, "");
+const CARD = new Map();
+for (const t of loadTrades()) for (const n of [t.trade, ...t.aka]) CARD.set(norm(n), norm(t.trade));
+const canon = (r) => CARD.get(norm(r)) ?? norm(r);
 const roles = new Map();
 const add = (role, kind, run, note) => {
-  const k = norm(role);
+  const k = canon(role);
   if (!k) return;
   const e = roles.get(k) ?? { role: k, recruit: 0, companion: 0, runs: new Set(), notes: [] };
   e[kind]++; e.runs.add(run); if (note && e.notes.length < 4) e.notes.push(note);
@@ -38,5 +44,7 @@ const rows = [...roles.values()].sort((a, b) => b.recruit + b.companion - (a.rec
 if (process.argv.includes("--json")) console.log(JSON.stringify(rows.map((r) => ({ ...r, runs: [...r.runs] })), null, 1));
 else {
   console.log(`${rows.length} roles from ${runs.length} runs (recruited by the designer / called for by workers):`);
-  for (const r of rows) console.log(`${String(r.recruit).padStart(3)} ${String(r.companion).padStart(3)}  ${r.role}  [${r.runs.size} run${r.runs.size > 1 ? "s" : ""}]${r.notes[0] ? `  e.g. ${r.notes[0].slice(0, 90)}` : ""}`);
+  const carded = new Set(CARD.values());
+  console.log("(* = a trade card covers it; other names for a carded role are counted under it)");
+  for (const r of rows) console.log(`${String(r.recruit).padStart(3)} ${String(r.companion).padStart(3)} ${carded.has(r.role) ? "*" : " "} ${r.role}  [${r.runs.size} run${r.runs.size > 1 ? "s" : ""}]${r.notes[0] ? `  e.g. ${r.notes[0].slice(0, 90)}` : ""}`);
 }
