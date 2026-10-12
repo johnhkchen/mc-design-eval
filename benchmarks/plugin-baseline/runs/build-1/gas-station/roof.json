@@ -1,0 +1,13 @@
+{
+  "preset": "modern",
+  "material": "polished_andesite",
+  "trim": "polished_andesite",
+  "texture": false,
+  "footprint": [[9, 24, 23, 33]],
+  "y": 6,
+  "keep": [
+    { "from": [12, 6, 23], "to": [21, 7, 23] },
+    { "from": [24, 6, 24], "to": [32, 9, 33] },
+    { "from": [10, 5, 22], "to": [23, 5, 23] }
+  ]
+}
