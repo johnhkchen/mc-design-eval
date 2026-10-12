@@ -78,18 +78,19 @@ function svg(dir, rows) {
     const rate = rows.reduce((s, r) => s + (r.start <= a && r.end >= b && r.ms ? (r.cost ?? 0) / r.ms : 0), 0);   // $/ms
     const next = cum + rate * (b - a);
     if (half == null && next >= total / 2 && rate > 0) half = a + (total / 2 - cum) / rate;
-    segs.push(`<line x1="${x(a).toFixed(1)}" y1="${cyOf(cum).toFixed(1)}" x2="${x(b).toFixed(1)}" y2="${cyOf(next).toFixed(1)}" stroke="${colour(rate * 60000, maxRate)}" stroke-width="3" stroke-linecap="round"/>`);
-    area.push(`${x(a).toFixed(1)},${cyOf(cum).toFixed(1)}`, `${x(b).toFixed(1)},${cyOf(next).toFixed(1)}`);
+    const [xa, xb, ya, yb] = [x(a).toFixed(1), x(b).toFixed(1), cyOf(cum).toFixed(1), cyOf(next).toFixed(1)];
+    segs.push(`<polygon points="${xa},${cy0} ${xa},${ya} ${xb},${yb} ${xb},${cy0}" fill="${colour(rate * 60000, maxRate)}" stroke="${colour(rate * 60000, maxRate)}" stroke-width="0.5"/>`);
+    area.push(`${xa},${ya}`, `${xb},${yb}`);
     cum = next;
   }
   area.push(`${L + W},${cyOf(cum).toFixed(1)}`, `${L + W},${cy0}`);
   o.push(`<text x="16" y="${cy0 - ch + 10}" fill="#333">spend so far</text>`,
     `<text x="16" y="${cy0 - ch + 25}" fill="#777">(slope = $/min)</text>`,
-    `<polygon points="${area.join(" ")}" fill="#ece6da"/>`,
-    ...[0, 0.5, 1].map((f) => `<line x1="${L}" y1="${cy0 - f * ch}" x2="${L + W}" y2="${cy0 - f * ch}" stroke="#d8d3c8" stroke-dasharray="${f ? "3 3" : ""}"/><text x="${L - 8}" y="${cy0 - f * ch + 4}" text-anchor="end" fill="#777">${f ? `${f * 100}% · $${(total * f).toFixed(2)}` : "0%"}</text>`),
-    ...segs);
-  if (half != null) o.push(`<line x1="${x(half).toFixed(1)}" y1="${cy0 - ch / 2}" x2="${x(half).toFixed(1)}" y2="${cy0}" stroke="#777" stroke-dasharray="2 3"/>`,
-    `<text x="${(x(half) + 6).toFixed(1)}" y="${cy0 - 4}" fill="#555">half the spend by ${((half - t0) / 60000).toFixed(1)}m</text>`);
+    ...segs,
+    `<polyline points="${area.slice(1, -2).join(" ")}" fill="none" stroke="#0005" stroke-width="1"/>`,
+    ...[0, 0.5, 1].map((f) => `<line x1="${L}" y1="${cy0 - f * ch}" x2="${L + W}" y2="${cy0 - f * ch}" stroke="#0003" stroke-dasharray="${f ? "3 3" : ""}"/><text x="${L - 8}" y="${cy0 - f * ch + 4}" text-anchor="end" fill="#777">${f ? `${f * 100}% · $${(total * f).toFixed(2)}` : "0%"}</text>`));
+  if (half != null) o.push(`<line x1="${x(half).toFixed(1)}" y1="${cy0 - ch / 2}" x2="${x(half).toFixed(1)}" y2="${cy0}" stroke="#333" stroke-dasharray="2 3"/>`,
+    `<text x="${(x(half) + 6).toFixed(1)}" y="${cy0 - 6}" fill="#fff" font-weight="bold">half the spend by ${((half - t0) / 60000).toFixed(1)}m</text>`);
   // minute grid
   const step = span > 40 ? 10 : 5;
   for (let m = 0; m <= span; m += step) {
