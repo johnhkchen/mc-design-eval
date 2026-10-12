@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 // A run's agents on a timeline: one bar per model session from its ledger.jsonl (start = t - ms), bar length its wall
 // time, bar height AND colour its spend per minute (cost / minutes), a strip on top with how many agents run at once.
-// Names come from the session tapes (crew/<part-N> cwd -> plan parts then rooms; root sessions by model and order).
+// A second strip draws the cumulative spend, 0% to 100% of the run's cost over time: its slope is the spend rate (each
+// session's cost spread evenly over its wall time), coloured on the bars' scale, so the phase that spent most shows
+// as the steepest, reddest stretch. Names come from the session tapes (crew/<part-N> cwd -> plan parts then rooms; root sessions by model and order).
 //   node gantt.mjs <run dir> [...more]   -> <run>/gantt.svg + gantt.png (rsvg-convert)
 import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -52,7 +54,7 @@ function svg(dir, rows) {
   const span = (t1 - t0) / 60000, total = rows.reduce((a, r) => a + (r.cost ?? 0), 0);
   // one scale for every run (an Opus planner's rate), so charts compare: a cheap run looks cheap
   const maxRate = Math.max(SCALE, ...rows.map((r) => r.rate));
-  const L = 230, W = 760, R = 250, top = 130, rowH = 26, H = top + rows.length * rowH + 50;
+  const L = 230, W = 760, R = 250, top = 250, rowH = 26, H = top + rows.length * rowH + 50;
   const x = (ms) => L + ((ms - t0) / 60000 / span) * W;
   const o = [`<svg xmlns="http://www.w3.org/2000/svg" width="${L + W + R}" height="${H}" font-family="Helvetica,Arial,sans-serif" font-size="12">`,
     `<rect width="100%" height="100%" fill="#fbfaf7"/>`,
@@ -66,6 +68,28 @@ function svg(dir, rows) {
   o.push(`<text x="16" y="90" fill="#333">agents running</text><text x="16" y="105" fill="#777">(peak ${peak})</text>`,
     `<polyline points="${pts.join(" ")}" fill="#c9d6e8" stroke="#4a6fa5" stroke-width="1"/>`,
     `<line x1="${L}" y1="110" x2="${L + W}" y2="110" stroke="#999"/>`);
+  // cumulative spend: piecewise linear between session starts and ends, slope = the summed rate of the sessions running
+  const cy0 = 220, ch = 90, ticks = [...new Set(rows.flatMap((r) => [r.start, r.end]))].sort((a, b) => a - b);
+  const cyOf = (c) => cy0 - (total ? c / total : 0) * ch;
+  let cum = 0, half = null;
+  const segs = [], area = [`${L},${cy0}`];
+  for (let k = 0; k + 1 < ticks.length; k++) {
+    const a = ticks[k], b = ticks[k + 1];
+    const rate = rows.reduce((s, r) => s + (r.start <= a && r.end >= b && r.ms ? (r.cost ?? 0) / r.ms : 0), 0);   // $/ms
+    const next = cum + rate * (b - a);
+    if (half == null && next >= total / 2 && rate > 0) half = a + (total / 2 - cum) / rate;
+    segs.push(`<line x1="${x(a).toFixed(1)}" y1="${cyOf(cum).toFixed(1)}" x2="${x(b).toFixed(1)}" y2="${cyOf(next).toFixed(1)}" stroke="${colour(rate * 60000, maxRate)}" stroke-width="3" stroke-linecap="round"/>`);
+    area.push(`${x(a).toFixed(1)},${cyOf(cum).toFixed(1)}`, `${x(b).toFixed(1)},${cyOf(next).toFixed(1)}`);
+    cum = next;
+  }
+  area.push(`${L + W},${cyOf(cum).toFixed(1)}`, `${L + W},${cy0}`);
+  o.push(`<text x="16" y="${cy0 - ch + 10}" fill="#333">spend so far</text>`,
+    `<text x="16" y="${cy0 - ch + 25}" fill="#777">(slope = $/min)</text>`,
+    `<polygon points="${area.join(" ")}" fill="#ece6da"/>`,
+    ...[0, 0.5, 1].map((f) => `<line x1="${L}" y1="${cy0 - f * ch}" x2="${L + W}" y2="${cy0 - f * ch}" stroke="#d8d3c8" stroke-dasharray="${f ? "3 3" : ""}"/><text x="${L - 8}" y="${cy0 - f * ch + 4}" text-anchor="end" fill="#777">${f ? `${f * 100}% · $${(total * f).toFixed(2)}` : "0%"}</text>`),
+    ...segs);
+  if (half != null) o.push(`<line x1="${x(half).toFixed(1)}" y1="${cy0 - ch / 2}" x2="${x(half).toFixed(1)}" y2="${cy0}" stroke="#777" stroke-dasharray="2 3"/>`,
+    `<text x="${(x(half) + 6).toFixed(1)}" y="${cy0 - 4}" fill="#555">half the spend by ${((half - t0) / 60000).toFixed(1)}m</text>`);
   // minute grid
   const step = span > 40 ? 10 : 5;
   for (let m = 0; m <= span; m += step) {
