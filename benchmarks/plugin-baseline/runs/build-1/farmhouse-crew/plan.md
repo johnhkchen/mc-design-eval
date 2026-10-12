@@ -77,11 +77,11 @@ Garden wall lines x=20, x=38, z=4, z=32; interior x=21..37, z=5..31; the beds, p
 
 ## Parts (build order). Each worker: fill ONLY your module, run `./make.sh`, `mcd render build.nbt --tiles tiles`, read the PNGs, tick here.
 - [x] 1. `parts/shell.mjs`: house shell: walls, quoins + opening frames, floors, partition, chimney breast (E1, E2, E4, E5, E31)
-- [ ] 2. `parts/porch.mjs`: windows with shutters, doors, front stoop, timber porch lean-to, house lanterns (E3, E6, E7, E8)
-- [ ] 3. `parts/potager.mjs`: garden wall, gate, paths, four raised beds with crops, well (E9, E10, E11, E12, E13, E14)
-- [ ] 4. `parts/features.mjs`: rose arches, espaliers, glasshouse, cold frame, tool shed, sundial, urn, lamps (E14b, E15..E19, E8b)
-- [ ] 5. `parts/interior.mjs`: stairs, hearth, kitchen, parlour, bedrooms, interior lights (E20..E25)
-- [ ] 6. `parts/grounds.mjs`: front path and fence, flowers, hedge, orchard, woodpile, lamps; then the last look over the whole render (E26..E30)
+- [x] 2. `parts/porch.mjs`: windows with shutters, doors, front stoop, timber porch lean-to, house lanterns (E3, E6, E7, E8)
+- [x] 3. `parts/potager.mjs`: garden wall, gate, paths, four raised beds with crops, well (E9, E10, E11, E12, E13, E14)
+- [x] 4. `parts/features.mjs`: rose arches, espaliers, glasshouse, cold frame, tool shed, sundial, urn, lamps (E14b, E15..E19, E8b)
+- [x] 5. `parts/interior.mjs`: stairs, hearth, kitchen, parlour, bedrooms, interior lights (E20..E25)
+- [x] 6. `parts/grounds.mjs`: front path and fence, flowers, hedge, orchard, woodpile, lamps; then the last look over the whole render (E26..E30)
 
 ## Notes (workers report problems here; the planner's decisions so far)
 - Roof zone: `mcd roof` removes everything at y>=8 within x=-2..18, z=8..22 and rebuilds the house roof. Nothing but the house may stand at y>=8 there (porch roof tops out at y=7 on purpose; the shell must not exceed y=7).
@@ -90,3 +90,4 @@ Garden wall lines x=20, x=38, z=4, z=32; interior x=21..37, z=5..31; the beds, p
 - `test-vocab.mjs` renders every helper (`node test-vocab.mjs`, then `mcd render /tmp/farm-vocab.nbt`); shutters and door facing were checked there (shutters lie flat on the wall, doors read from outside).
 - Water: every water cell must be enclosed on its sides and underside by non-air; the beds' pools sit in farmland, the well in its ring. Do not add water anywhere else.
 - Trees from `tree()` and leaf blocks: oak_leaves has no state in this version, so just place the block.
+- P4 (features): Palette substitutions in greenhouse and shed interiors: flower blocks (fern, peony, red_tulip, oxeye_daisy) used for potted plants; cauldron for water_cauldron; spruce_slab for grindstone; stone_brick_slab for lightning_rod gnomon on sundial (vocab functions require palette-unavailable blocks).

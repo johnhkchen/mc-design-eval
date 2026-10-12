@@ -25,5 +25,86 @@
 import { table, chair, bed, barrel, chest, hearth, furnace, bookshelf, waterCauldron, pot, lantern, B } from "../vocab.mjs";
 
 export function build(g) {
-  // TODO(worker): implement the spec above.
+  // E20: STAIRS
+  g.set(2, 2, 13, ...B.stairs("oak", "south"));
+  g.set(2, 3, 14, ...B.stairs("oak", "south"));
+  g.set(2, 4, 15, ...B.stairs("oak", "south"));
+  g.set(2, 5, 16, ...B.stairs("oak", "south"));
+  // Stair rail
+  g.set(3, 6, 14, ...B.fence("oak"));
+  g.set(3, 6, 15, ...B.fence("oak"));
+  g.set(2, 6, 13, ...B.fence("oak"));
+  // Barrels under stair
+  barrel(g, 2, 2, 15);
+  barrel(g, 2, 2, 16);
+
+  // E23: PARLOUR (x=2..8, z=12..18, y=2..4)
+  table(g, 5, 2, 15);
+  table(g, 6, 2, 15);
+  chair(g, 5, 2, 14, "south");
+  chair(g, 6, 2, 14, "south");
+  chair(g, 5, 2, 16, "north");
+  chair(g, 6, 2, 16, "north");
+  chair(g, 4, 2, 15, "east");
+  chair(g, 7, 2, 15, "west");
+  // Bookshelves 2x2
+  bookshelf(g, 6, 2, 18);
+  bookshelf(g, 6, 3, 18);
+  bookshelf(g, 7, 2, 18);
+  bookshelf(g, 7, 3, 18);
+  // Chest and pot
+  chest(g, 3, 2, 18, "north");
+  pot(g, 3, 2, 12, "potted_fern");
+  // Parlour hanging lantern
+  lantern(g, 5, 4, 15, true);
+
+  // E21: HEARTH (in the brick niche at x=9..10, z=14..15)
+  hearth(g, 10, 2, 15, "east");
+  // Hearth step
+  g.set(11, 2, 15, ...B.stairs("stone_brick", "west"));
+
+  // E22: KITCHEN (x=10..14, z=12..18, y=2..4)
+  // Counter on z=12
+  barrel(g, 11, 2, 12);
+  g.set(12, 2, 12, "crafting_table");
+  furnace(g, 13, 2, 12, "south", "smoker");
+  furnace(g, 14, 2, 12, "south", "furnace");
+  // Water cauldron
+  waterCauldron(g, 14, 2, 13);
+  // Dining table
+  table(g, 13, 2, 16);
+  table(g, 13, 2, 17);
+  // Dining chairs
+  chair(g, 12, 2, 16, "east");
+  chair(g, 12, 2, 17, "east");
+  chair(g, 14, 2, 16, "west");
+  chair(g, 14, 2, 17, "west");
+  chair(g, 13, 2, 18, "north");
+  // Kitchen hanging lantern
+  lantern(g, 13, 4, 16, true);
+  // Barrels
+  barrel(g, 14, 2, 18);
+  barrel(g, 10, 2, 18);
+  // Pot
+  pot(g, 11, 2, 18, "potted_poppy");
+
+  // E24: WEST BEDROOM (x=2..8, z=12..18, y=6..7)
+  bed(g, 5, 6, 17, "south", "red");
+  bed(g, 7, 6, 17, "south", "white");
+  barrel(g, 6, 6, 18);
+  lantern(g, 6, 7, 18, false);
+  chest(g, 3, 6, 18, "north");
+  // Red carpets
+  g.set(5, 6, 14, "red_carpet");
+  g.set(6, 6, 14, "red_carpet");
+  g.set(5, 6, 15, "red_carpet");
+  g.set(6, 6, 15, "red_carpet");
+
+  // E24: EAST BEDROOM (x=10..14, z=12..18, y=6..7)
+  bed(g, 13, 6, 17, "east", "blue");
+  barrel(g, 14, 6, 13);
+  barrel(g, 14, 6, 14);
+  lantern(g, 14, 7, 14, false);
+  bookshelf(g, 12, 6, 18);
+  pot(g, 11, 6, 12, "potted_oxeye_daisy");
 }
