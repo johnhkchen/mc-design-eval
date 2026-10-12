@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="778" font-family="Helvetica,Arial,sans-serif" font-size="12">
+<rect width="100%" height="100%" fill="#fbfaf7"/>
+<text x="16" y="24" font-size="16" font-weight="bold">midcentury-crew4: 23 agent sessions, 13 min, $1.06</text>
+<text x="16" y="42" fill="#555">bar length = wall time; bar height and colour = spend per minute (full height and deepest red = $0.40/min, the same in every chart)</text>
+<text x="16" y="60" fill="#555">spend by model: haiku $1.06</text>
+<text x="16" y="90" fill="#333">agents running</text><text x="16" y="105" fill="#777">(peak 16)</text>
+<polyline points="230,110 230.0,110 230.0,107.91666666666667 231.8,107.91666666666667 231.8,105.83333333333333 231.8,105.83333333333333 231.8,103.75 231.8,103.75 231.8,101.66666666666667 232.0,101.66666666666667 232.0,99.58333333333333 334.5,99.58333333333333 334.5,101.66666666666667 444.5,101.66666666666667 444.5,103.75 507.2,103.75 507.2,105.83333333333333 511.9,105.83333333333333 511.9,107.91666666666667 541.2,107.91666666666667 541.2,110 542.2,110 542.2,107.91666666666667 723.0,107.91666666666667 723.0,110 724.1,110 724.1,107.91666666666667 724.2,107.91666666666667 724.2,105.83333333333333 724.6,105.83333333333333 724.6,103.75 724.6,103.75 724.6,101.66666666666667 724.8,101.66666666666667 724.8,99.58333333333333 724.8,99.58333333333333 724.8,97.5 725.0,97.5 725.0,95.41666666666667 725.3,95.41666666666667 725.3,93.33333333333333 725.4,93.33333333333333 725.4,91.25 725.6,91.25 725.6,89.16666666666666 725.6,89.16666666666666 725.6,87.08333333333333 725.6,87.08333333333333 725.6,85 725.7,85 725.7,82.91666666666666 725.7,82.91666666666666 725.7,80.83333333333333 725.8,80.83333333333333 725.8,78.75 725.8,78.75 725.8,76.66666666666666 770.9,76.66666666666666 770.9,78.75 782.3,78.75 782.3,80.83333333333333 783.9,80.83333333333333 783.9,82.91666666666666 808.0,82.91666666666666 808.0,85 809.1,85 809.1,87.08333333333333 814.6,87.08333333333333 814.6,89.16666666666666 815.5,89.16666666666666 815.5,91.25 818.5,91.25 818.5,93.33333333333333 824.8,93.33333333333333 824.8,95.41666666666667 829.6,95.41666666666667 829.6,97.5 834.0,97.5 834.0,99.58333333333333 840.0,99.58333333333333 840.0,101.66666666666667 842.5,101.66666666666667 842.5,103.75 856.0,103.75 856.0,105.83333333333333 860.2,105.83333333333333 860.2,107.91666666666667 897.5,107.91666666666667 897.5,110 900.9,110 900.9,107.91666666666667 990.0,107.91666666666667 990.0,110" fill="#c9d6e8" stroke="#4a6fa5" stroke-width="1"/>
+<line x1="230" y1="110" x2="990" y2="110" stroke="#999"/>
+<line x1="230" y1="122" x2="230" y2="738" stroke="#e3e0d8"/>
+<text x="230" y="754" text-anchor="middle" fill="#777">0m</text>
+<line x1="529.2082791455766" y1="122" x2="529.2082791455766" y2="738" stroke="#e3e0d8"/>
+<text x="529.2082791455766" y="754" text-anchor="middle" fill="#777">5m</text>
+<line x1="828.4165582911533" y1="122" x2="828.4165582911533" y2="738" stroke="#e3e0d8"/>
+<text x="828.4165582911533" y="754" text-anchor="middle" fill="#777">10m</text>
+<text x="222" y="147" text-anchor="end" fill="#222">kit (vocab / scaffold)</text>
+<rect x="230.0" y="141.5" width="311.2" height="3.0" rx="2" fill="hsl(52,70%,54%)" stroke="#0003"/>
+<text x="547.2" y="147" fill="#555">haiku@medium $0.18 · 5.2m · 71K out</text>
+<text x="222" y="173" text-anchor="end" fill="#222">kit (vocab / scaffold)</text>
+<rect x="231.8" y="167.5" width="280.2" height="3.0" rx="2" fill="hsl(57,70%,55%)" stroke="#0003"/>
+<text x="517.9" y="173" fill="#555">haiku@medium $0.13 · 4.7m · 64K out</text>
+<text x="222" y="199" text-anchor="end" fill="#222">kit (vocab / scaffold)</text>
+<rect x="231.8" y="193.5" width="212.7" height="3.0" rx="2" fill="hsl(62,70%,56%)" stroke="#0003"/>
+<text x="450.5" y="199" fill="#555">haiku@medium $0.08 · 3.6m · 47K out</text>
+<text x="222" y="225" text-anchor="end" fill="#222">kit (vocab / scaffold)</text>
+<rect x="231.8" y="219.5" width="102.7" height="3.0" rx="2" fill="hsl(67,70%,57%)" stroke="#0003"/>
+<text x="340.5" y="225" fill="#555">haiku@medium $0.03 · 1.7m · 24K out</text>
+<text x="222" y="251" text-anchor="end" fill="#222">kit (vocab / scaffold)</text>
+<rect x="232.0" y="245.5" width="275.3" height="3.0" rx="2" fill="hsl(58,70%,55%)" stroke="#0003"/>
+<text x="513.2" y="251" fill="#555">haiku@medium $0.12 · 4.6m · 61K out</text>
+<text x="222" y="277" text-anchor="end" fill="#222">house shell and ground</text>
+<rect x="542.2" y="271.5" width="180.7" height="3.0" rx="2" fill="hsl(61,70%,56%)" stroke="#0003"/>
+<text x="729.0" y="277" fill="#555">haiku@high $0.07 · 3.0m · 40K out</text>
+<text x="222" y="303" text-anchor="end" fill="#222">atrium</text>
+<rect x="724.1" y="297.5" width="90.6" height="3.0" rx="2" fill="hsl(69,70%,58%)" stroke="#0003"/>
+<text x="820.6" y="303" fill="#555">haiku@high $0.02 · 1.5m · 19K out</text>
+<text x="222" y="329" text-anchor="end" fill="#222">corridor</text>
+<rect x="724.2" y="323.5" width="59.8" height="3.0" rx="2" fill="hsl(67,70%,57%)" stroke="#0003"/>
+<text x="789.9" y="329" fill="#555">haiku@high $0.02 · 1.0m · 12K out</text>
+<text x="222" y="355" text-anchor="end" fill="#222">bedroom 2</text>
+<rect x="724.6" y="349.5" width="94.0" height="3.0" rx="2" fill="hsl(70,70%,58%)" stroke="#0003"/>
+<text x="824.5" y="355" fill="#555">haiku@high $0.02 · 1.6m · 21K out</text>
+<text x="222" y="381" text-anchor="end" fill="#222">bath 2</text>
+<rect x="724.6" y="375.5" width="46.2" height="3.0" rx="2" fill="hsl(64,70%,57%)" stroke="#0003"/>
+<text x="776.9" y="381" fill="#555">haiku@high $0.02 · 0.8m · 9K out</text>
+<text x="222" y="407" text-anchor="end" fill="#222">master bedroom</text>
+<rect x="724.8" y="401.5" width="104.8" height="3.0" rx="2" fill="hsl(67,70%,58%)" stroke="#0003"/>
+<text x="835.6" y="407" fill="#555">haiku@high $0.03 · 1.8m · 22K out</text>
+<text x="222" y="433" text-anchor="end" fill="#222">bath 1</text>
+<rect x="724.8" y="427.5" width="83.2" height="3.0" rx="2" fill="hsl(72,70%,59%)" stroke="#0003"/>
+<text x="814.0" y="433" fill="#555">haiku@high $0.02 · 1.4m · 16K out</text>
+<text x="222" y="459" text-anchor="end" fill="#222">bedroom 1</text>
+<rect x="725.0" y="453.5" width="90.5" height="3.0" rx="2" fill="hsl(69,70%,58%)" stroke="#0003"/>
+<text x="821.5" y="459" fill="#555">haiku@high $0.02 · 1.5m · 17K out</text>
+<text x="222" y="485" text-anchor="end" fill="#222">living</text>
+<rect x="725.3" y="479.5" width="134.9" height="3.0" rx="2" fill="hsl(72,70%,59%)" stroke="#0003"/>
+<text x="866.2" y="485" fill="#555">haiku@high $0.03 · 2.3m · 28K out</text>
+<text x="222" y="511" text-anchor="end" fill="#222">dining</text>
+<rect x="725.4" y="505.5" width="172.0" height="3.0" rx="2" fill="hsl(62,70%,56%)" stroke="#0003"/>
+<text x="903.5" y="511" fill="#555">haiku@high $0.06 · 2.9m · 36K out</text>
+<text x="222" y="537" text-anchor="end" fill="#222">kitchen</text>
+<rect x="725.6" y="531.5" width="114.4" height="3.0" rx="2" fill="hsl(73,70%,59%)" stroke="#0003"/>
+<text x="846.0" y="537" fill="#555">haiku@high $0.02 · 1.9m · 24K out</text>
+<text x="222" y="563" text-anchor="end" fill="#222">gallery</text>
+<rect x="725.6" y="557.5" width="116.9" height="3.0" rx="2" fill="hsl(71,70%,58%)" stroke="#0003"/>
+<text x="848.5" y="563" fill="#555">haiku@high $0.03 · 2.0m · 25K out</text>
+<text x="222" y="589" text-anchor="end" fill="#222">pool, patio and garden details</text>
+<rect x="725.6" y="583.5" width="99.2" height="3.0" rx="2" fill="hsl(70,70%,58%)" stroke="#0003"/>
+<text x="830.8" y="589" fill="#555">haiku@high $0.02 · 1.7m · 21K out</text>
+<text x="222" y="615" text-anchor="end" fill="#222">car and front garden</text>
+<rect x="725.7" y="609.5" width="56.6" height="3.0" rx="2" fill="hsl(71,70%,58%)" stroke="#0003"/>
+<text x="788.3" y="615" fill="#555">haiku@high $0.01 · 0.9m · 11K out</text>
+<text x="222" y="641" text-anchor="end" fill="#222">facades, glazing and entry</text>
+<rect x="725.7" y="635.5" width="108.3" height="3.0" rx="2" fill="hsl(75,70%,59%)" stroke="#0003"/>
+<text x="840.0" y="641" fill="#555">haiku@high $0.02 · 1.8m · 23K out</text>
+<text x="222" y="667" text-anchor="end" fill="#222">roofs, beams and fireplace stack</text>
+<rect x="725.8" y="661.5" width="83.3" height="3.0" rx="2" fill="hsl(67,70%,58%)" stroke="#0003"/>
+<text x="815.1" y="667" fill="#555">haiku@high $0.02 · 1.4m · 17K out</text>
+<text x="222" y="693" text-anchor="end" fill="#222">site, carport and paving</text>
+<rect x="725.8" y="687.5" width="130.2" height="3.0" rx="2" fill="hsl(76,70%,60%)" stroke="#0003"/>
+<text x="862.0" y="693" fill="#555">haiku@high $0.02 · 2.2m · 27K out</text>
+<text x="222" y="719" text-anchor="end" fill="#222">inspector</text>
+<rect x="900.9" y="713.5" width="89.1" height="3.0" rx="2" fill="hsl(57,70%,55%)" stroke="#0003"/>
+<text x="996.0" y="719" fill="#555">haiku@high $0.04 · 1.5m · 17K out</text>
+</svg>
