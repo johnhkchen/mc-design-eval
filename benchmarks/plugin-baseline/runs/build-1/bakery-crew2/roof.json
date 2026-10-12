@@ -1,0 +1,31 @@
+{
+  "preset": "shop",
+  "material": {
+    "mix": [["deepslate_tile", 50], ["cobbled_deepslate", 30], ["polished_deepslate", 20]],
+    "eave": "deepslate_brick",
+    "ridge": "deepslate_brick",
+    "verge": "spruce"
+  },
+  "contrast": false,
+  "ridgeAxis": "z",
+  "front": "north",
+  "gable": "white_wool",
+  "verge": "spruce",
+  "footprint": [6, 8, 16, 22],
+  "y": 11,
+  "keep": [
+    { "from": [7, 11, 9], "to": [15, 11, 21] },
+    { "from": [8, 14, 8], "to": [14, 14, 8] },
+    { "from": [11, 11, 8], "to": [11, 13, 8] },
+    { "from": [9, 12, 8], "to": [10, 13, 8] },
+    { "from": [12, 12, 8], "to": [13, 13, 8] },
+    { "from": [11, 15, 8], "to": [11, 16, 8] },
+    { "from": [10, 15, 7], "to": [10, 16, 7] },
+    { "from": [12, 15, 7], "to": [12, 16, 7] },
+    { "from": [11, 19, 5], "to": [11, 19, 8] },
+    { "from": [11, 16, 5], "to": [11, 18, 5] },
+    { "from": [8, 14, 22], "to": [14, 14, 22] },
+    { "from": [11, 11, 22], "to": [11, 13, 22] },
+    { "from": [11, 15, 22], "to": [11, 16, 22] }
+  ]
+}
