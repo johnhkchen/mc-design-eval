@@ -1,0 +1,17 @@
+{
+  "preset": "civic",
+  "footprint": [4, 10, 36, 26],
+  "y": 17,
+  "pitch": 45,
+  "overhang": 1,
+  "eave": "cornice",
+  "trim": "smooth_quartz",
+  "ridge": "slab",
+  "material": { "mix": [["cobbled_deepslate", 45], ["deepslate_tile", 35], ["polished_deepslate", 20]], "eave": "polished_blackstone_bricks", "ridge": "stone_brick", "verge": "dark_oak" },
+  "pediment": false,
+  "keep": [
+    { "from": [18, 17, 10], "to": [22, 35, 14] },
+    { "from": [5, 17, 17], "to": [6, 23, 18] },
+    { "from": [34, 17, 17], "to": [35, 23, 18] }
+  ]
+}
