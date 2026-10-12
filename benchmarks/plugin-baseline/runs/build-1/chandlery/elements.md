@@ -1,0 +1,25 @@
+# Required elements: the chandlery
+
+Coordinates from plan.md (x east, y up, z south; front faces north). Part numbers: P1 masonry shell, P2 timber frame, P3 roofs, P4 openings and fittings, P5 chimneys and hearths, P6 grounds and lean-to.
+
+- [x] **Shop bay window** (P4, `bayWindow`). Sill wall `stone_bricks` x=9..13, y=1, z=7. Posts `stripped_dark_oak_log` axis y at x=9 and x=13, y=2..4. `glass_pane` at x=10..12, y=2..4, z=7, with connection states set. The wall behind (x=10..12, y=2..4, z=8) stays air. Fascia `dark_oak_planks` x=9..13, y=5, z=7. Sill shelf: `dark_oak_slab` (top) x=10..12 at (y=2, z=8), holding `candle` clusters. The shelf sits on the y=1 floor row, so it is a counter-height display.
+- [ ] **Candles for sale** (P4/rooms, `candleCluster`). `candle` / `white_candle` / `yellow_candle` with `candles: 2..4` and `lit: true` on the bay shelf, the shop shelves and the counter. `honeycomb_block` only as an accent on the shelves.
+- [x] **Shop door** (P4, `doorPair`). `dark_oak_door` lower and upper halves at (7,2..3,8), facing north, hinge left. Transom `glass_pane` at (7,4,8). Step `stone_brick_stairs` facing south at (7,1,7).
+- [x] **Family door** (P4, `doorPair`). `dark_oak_door` at (15,2..3,8), facing north. Brick at (15,4,8). Hood `stone_brick_slab` (top) at (15,4,7). Step at (15,1,7). `lantern` hanging true at (16,5,7), hung from the sill beam above.
+- [x] **Shop sign** (P4, `wallSign`). `dark_oak_wall_sign` at (11,5,6), facing north, on the fascia. Text "CHANDLER".
+- [x] **Hanging sign on a bracket** (P4, `hangingSignArm`). `dark_oak_fence` at (5,6,6) and (5,6,5). `dark_oak_hanging_sign` at (5,5,5) facing north. Lit `candle` cluster (3) at (5,7,5) on the arm end.
+- [ ] **Jettied half-timbered upper storey** (P2, `framePanel`, `braceStair`, `jettyBracket`). Brackets `dark_oak_stairs` upside down, facing south, at x=5, 8, 14, 17, (y=5, z=7). Sill beam y=6 and head plate y=10, `stripped_dark_oak_wood` along the run. Posts `stripped_dark_oak_log` axis y at x=5, 8, 11, 14, 17. `calcite` daub in all panels. Mirrored braces in x=6..7 and x=15..16.
+- [x] **Brick ground storey on a stone plinth, with quoins** (P1, `brickCourse`, `quoin`). Plinth `stone_bricks` y=1, with `mossy_stone_bricks` about 1 in 8. `bricks` y=2..5. Quoins in `stone_bricks` at the corners.
+- [x] **Slate roof, 45°, with two gabled dormers** (P3). `$MCD roof` with the architect's spec. Dark-oak verges, calcite gable triangles.
+- [x] **East brick chimney stack** (P5, `chimneyStack`). `bricks` x=18..19, z=11..12, y=1..18. `deepslate_bricks` band at y=16. Cap `brick_slab` (top) at y=19 on 3 cells. Lit `campfire` at (19,19,12) on a `bricks` block at (19,18,12). It rises out of the roof through the keep box.
+- [x] **Kitchen firebox** (P5, `firebox`). Cells (17..18, 2..3, 11..12) are air. `stone_bricks` floor at y=1. Lit `campfire` at (18,2,11) and (18,2,12). Lintel `stripped_dark_oak_wood` axis z at (17,4,11..12).
+- [x] **Workshop with rendering-hearth chimney** (P1 walls, P5 stack, `chimneyStack`, `firebox`). `bricks` x=8..9, z=28..29, y=1..13. Band `deepslate_bricks` at y=11. Cap `brick_slab` (top) with a `campfire` (lit, signal_fire true) at (8,13,29) over `hay_block` (8,12,29). Firebox (8..9, 2..3, 27..28) with a lit campfire at (8..9,2,28) and a lintel at y=4.
+- [x] **Dipping vats and wheel** (rooms, `candleVat`, `dippingWheel`). `cauldron` and `water_cauldron` vats, a `dark_oak_fence` post with `iron_chain` and hanging `candle`s, a bench with `grindstone`.
+- [x] **Drying lean-to with racks** (P6, `leanToBay`, `candleRack`). Posts `stripped_dark_oak_log` axis y at x=18, z=18, 21, 24, y=1..3. Slab roof as in plan ROOFS. Racks of `dark_oak_fence` with `dark_oak_trapdoor` shelves and `white_candle` clusters.
+- [x] **Beehives and flower bed** (P6, `hiveStand`). `beehive` facing north at (15,1,31), (17,1,31), (19,1,31), (21,1,31). Flower bed x=14..22, z=29..30 in alternating dandelion, poppy, cornflower, oxeye_daisy, allium.
+- [x] **Picket fence and gates** (P6, `picketFence`). `spruce_fence` along the plan lines. `spruce_fence_gate` at (21,1,18) and (2,1,18).
+- [x] **Street, kerb, pavement** (P6, `streetRows`). Cobblestone with gravel patches at z=0..3, `stone_bricks` kerb at z=4, `polished_andesite` at z=5..7.
+- [x] **Woodpile, tallow barrels, cauldron** (P6). `spruce_log` axis x at x=10..12, z=29..30, y=1..2, with a `spruce_slab` (bottom) lid at y=3. `barrel`s at x=2..3, z=28..30. `cauldron` at (4,1,30).
+- [x] **Apple tree and herb strip** (P6, `appleTree`, `herbBed`). Trunk `oak_log` at (3,1..4,22). Persistent `oak_leaves` crown at y=4..7. `coarse_dirt` herb strip at x=1..4, z=8..17 with `sweet_berry_bush`, `poppy`, `dandelion`.
+- [x] **Upper-storey window boxes and shutters** (P4, `windowBox`, `shutterPair`). `dark_oak_slab` (top) sills at x=9..10 and 12..13, z=6, topped with `potted_poppy` and `potted_dandelion`. Open `spruce_trapdoor` shutters on the side windows.
+- [x] **Interior stair** (P1, rooms). `oak_stairs`-style `dark_oak_stairs` at x=16: z=16 y=2, z=15 y=3, z=14 y=4, z=13 y=5, facing north. Hole in the y=6 floor over x=16, z=13..16.

@@ -1,0 +1,194 @@
+{
+ "summary": "An English market-town chandlery. Facing the street is a red-brick shop storey with a projecting candle-filled bay window and a separate family door. Above it is a jettied dark-oak and calcite half-timbered storey under a 45° slate gable with two dormers and an east-gable chimney. Behind it are a brick workshop with its own tall rendering-hearth chimney, an open drying lean-to for the candle racks, and a beehive garden that supplies the wax, so the street front reads as a shop, house and workshop all at once. English market-town chandlery: red-brick ground storey on a stone plinth with a five-wide candle bay, a jettied dark-oak/calcite upper storey under a 45° slate roof with two dormers, and a brick east chimney.\nBehind it stand a brick workshop with a signal-fire rendering chimney, an open drying lean-to with candle racks, and a back garden of beehives behind a picket fence.\nSix trade-cut parts; seven rooms; elements.md and the plan.md sections are written.",
+ "rooms": [
+  {
+   "name": "Shop",
+   "purpose": "The candle shop: warm, crowded and fragrant. Focal piece is a counter of dark_oak_planks with slab top near the back, candle shelves (trapdoors, slabs, honeycomb_block accents, lit candle clusters) on the west and south walls, and the bay display on the sill shelf. Floor spruce_planks.",
+   "box": [
+    6,
+    2,
+    9,
+    11,
+    5,
+    16
+   ],
+   "ways_in": "Shop door (7,2..3,8) from the street; doorway (10,2..3,17) to the workshop; partition opening (12,2..3,10) to the family hall. The bay [10,2,7,12,4,8] opens into it."
+  },
+  {
+   "name": "Family hall and kitchen",
+   "purpose": "The family's living room and kitchen. Focal piece is the brick hearth at the east wall, with a table and benches in the middle. The stair along x=16 and a cosy, lit mood. Floor oak_planks.",
+   "box": [
+    13,
+    2,
+    9,
+    16,
+    5,
+    16
+   ],
+   "ways_in": "Family door (15,2..3,8); opening (12,2..3,10) from the shop; back door (16,2..3,17) to the lean-to; stair at x=16, z=13..16 up."
+  },
+  {
+   "name": "Chandler's workshop",
+   "purpose": "The dipping and moulding room, hot and dim, open to the rafters. Focal piece is the rendering hearth at the south with a lit campfire and a tallow cauldron in front. Cauldron dipping vats and a dipping wheel (fence post with chains and candles) in the middle, a moulding bench and barrels along the walls. Floor stone_bricks.",
+   "box": [
+    6,
+    2,
+    18,
+    12,
+    5,
+    26
+   ],
+   "ways_in": "Doorway (10,2..3,17) from the shop; spruce side door (13,2..3,21) to the lean-to."
+  },
+  {
+   "name": "Drying lean-to",
+   "purpose": "Open timber shed where candles cure: racks of dark-oak fence uprights with trapdoor shelves holding white_candle clusters, tallow barrels at the back, a lantern. Floor podzol and coarse_dirt.",
+   "box": [
+    15,
+    1,
+    18,
+    18,
+    3,
+    24
+   ],
+   "ways_in": "Back door (16,2..3,17) from the hall; side door (13,2..3,21) from the workshop; open on the east and south to the yard."
+  },
+  {
+   "name": "Parlour",
+   "purpose": "The family's best room, over the shop. Warm and book-lined, lit by the paired front windows and the dormers. Focal piece is a lectern with bookshelves, a settle under the windows and a rug. Open to the roof beams. Floor dark_oak_planks.",
+   "box": [
+    6,
+    7,
+    8,
+    16,
+    10,
+    12
+   ],
+   "ways_in": "The stair head at (16,7,12) from the stair at x=16; doorways (8,7..8,13) and (13,7..8,13) to the bedchambers."
+  },
+  {
+   "name": "West bedchamber",
+   "purpose": "Small, quiet bedroom: a bed against the west wall, a chest, a lantern and a candle on a shelf.",
+   "box": [
+    6,
+    7,
+    14,
+    10,
+    10,
+    16
+   ],
+   "ways_in": "Doorway (8,7..8,13) from the parlour."
+  },
+  {
+   "name": "East bedchamber",
+   "purpose": "Small bedroom over the hall: a bed, a chest, a window to the east. A fence rail at x=15 guards the stairwell.",
+   "box": [
+    12,
+    7,
+    14,
+    14,
+    10,
+    16
+   ],
+   "ways_in": "Doorway (13,7..8,13) from the parlour."
+  }
+ ],
+ "entrance": [
+  7,
+  1,
+  6
+ ],
+ "concept_subject": "A candle maker's home and shop in an English market town, its eaves to a cobbled street (the street is to the north). The main house is 13 blocks wide on a grey stone-brick plinth. Its ground storey is warm red brick with long-and-short stone quoins. In the middle a five-wide shop bay window stands one block out: dark-oak posts, three panes glowing with clusters of yellow and white candles, and a dark-oak fascia board carrying a sign. A dark-oak shop door with a glazed transom stands to its left and a separate family door with a little stone hood to its right. Over this the upper storey juts out one block on upside-down dark-oak brackets. It is half-timbered: near-black dark-oak posts and beams over off-white calcite daub, a pair of windows above the bay, and diagonal braces in the outer panels. It sits under a 45° grey slate roof with dark-oak verges, a slab ridge and two small gabled dormers facing the street. A red-brick chimney stack with a dark band and a smoking cap climbs the east gable end. A dark-oak bracket at the west corner holds a hanging sign with a lit three-candle cluster on its tip. Behind the house runs a lower, single-storey brick workshop under its own slate gable, with a second tall brick chimney at its back gable sending up a tall plume of smoke from the tallow-rendering hearth. Against its east side is an open dark-oak lean-to sheltering racks of drying candles and tallow barrels. A spruce picket fence closes a back garden with a row of four beehives and a bright flower bed, a woodpile by the chimney, barrels and a cauldron by the gate, an apple tree and a dirt path from the side gate.",
+ "concept_size": "26 wide, 34 deep (house 13 x 11, workshop 9 x 10 behind), 2 storeys plus a 45° roof, ridge at 16 and chimney to 19 blocks",
+ "concept_palette": "bricks (walls, chimneys); stone_bricks and mossy_stone_bricks (plinth, quoins, steps); stripped_dark_oak_log and stripped_dark_oak_wood (frame); dark_oak_stairs, dark_oak_slab, dark_oak_planks, dark_oak_fence (brackets, braces, trim, lean-to); calcite (daub, gables); slate roof palette (deepslate tones); deepslate_bricks (chimney bands); glass_pane; candles, lantern, campfire; spruce_fence; grass, coarse_dirt, podzol, cobblestone, gravel, polished_andesite",
+ "parts": [
+  {
+   "name": "Masonry shell",
+   "module": "parts/shell.mjs",
+   "scope": "Plinth (y=1), brick ground walls x5..17, z8..17, the workshop walls x5..13, z18..27 and quoins. Also the ground and y=6 floors with the stair hole at x=16, z13..16, the partitions, the interior stair, and every opening. Leaves the RESERVED cells as air. Uses brickCourse and quoin."
+  },
+  {
+   "name": "Timber frame",
+   "module": "parts/frame.mjs",
+   "scope": "The jettied upper storey x5..17, y6..10, z7..17 on all four faces, built whole with calcite. Also jetty brackets at x=5, 8, 14, 17 (y=5, z=7), the sill beam and head plate, mirrored braces, and the gable frames at x=5 and x=17. Uses jettyBracket, framePanel, braceStair, gableFrame."
+  },
+  {
+   "name": "Roofs",
+   "module": "parts/roofs.mjs",
+   "scope": "roof.json for the main slate roof (ridge y=16, dormers, keep box 18..19,11..19,11..12) and the workshop roof (ridge y=10, keep for the stack). Also the hand-built lean-to slab roof at x=15..19, y=4..5, z=18..25. Run roof --dry-run and fix the warnings."
+  },
+  {
+   "name": "Openings and fittings",
+   "module": "parts/fittings.mjs",
+   "scope": "The shop bay (x9..13, z=7), the doors with steps and hood, transom and glass panes on all windows, shutters, window boxes, the fascia sign, the hanging sign and arm at (5,5..7,5..6), the lantern, and the candle display clusters. Uses bayWindow, doorPair, windowBox, shutterPair, wallSign, hangingSignArm, candleCluster."
+  },
+  {
+   "name": "Chimneys and hearths",
+   "module": "parts/chimneys.mjs",
+   "scope": "The east stack (x18..19, z11..12, y1..19) with the kitchen firebox, and the workshop stack (x8..9, z28..29, y1..13) with its signal-fire cap and rendering firebox. Uses chimneyStack, firebox."
+  },
+  {
+   "name": "Grounds and lean-to",
+   "module": "parts/grounds.mjs",
+   "scope": "The street rows, the yard, fences and gates, paths, beehives, the flower bed, the woodpile, barrels and cauldron, the apple tree and the herb strip. Also the lean-to posts and candle racks at x15..18, z18..24. Uses streetRows, picketFence, hiveStand, appleTree, leanToBay, candleRack."
+  }
+ ],
+ "vocab": null,
+ "recruit": [
+  {
+   "role": "stonemason",
+   "why": "Courses, a plinth, quoins and worked openings in brick and stone",
+   "parts": [
+    "Masonry shell"
+   ]
+  },
+  {
+   "role": "timber framer (Zimmermann)",
+   "why": "A jettied dark-oak frame with a readable post grid, mirrored braces, brackets and white daub",
+   "parts": [
+    "Timber frame"
+   ]
+  },
+  {
+   "role": "slater (roofer)",
+   "why": "A 45° slate roof with dormers, verges and a keep box around the stack, plus the lean-to shed roof",
+   "parts": [
+    "Roofs"
+   ]
+  },
+  {
+   "role": "glazier and joiner",
+   "why": "The shop bay, doors, panes, shutters, window boxes and signs",
+   "parts": [
+    "Openings and fittings"
+   ]
+  },
+  {
+   "role": "chimney and hearth builder",
+   "why": "Two brick stacks through or beside the roof, the fireboxes and smoking campfire caps",
+   "parts": [
+    "Chimneys and hearths"
+   ]
+  },
+  {
+   "role": "gardener and groundsman",
+   "why": "The street, paths, picket fence, hives, flowers, the tree, and the lean-to racks",
+   "parts": [
+    "Grounds and lean-to"
+   ]
+  },
+  {
+   "role": "chandler's furnisher",
+   "why": "Interior furnishing of the shop counter, the workshop vats and wheel, and the family rooms",
+   "parts": [
+    "Shop",
+    "Chandler's workshop",
+    "Family hall and kitchen",
+    "Drying lean-to",
+    "Parlour",
+    "West bedchamber",
+    "East bedchamber"
+   ]
+  }
+ ]
+}
