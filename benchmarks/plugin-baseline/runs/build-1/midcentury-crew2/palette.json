@@ -1,0 +1,38 @@
+{
+  "roles": {
+    "stucco": ["white_concrete"],
+    "structure": ["dark_oak_log"],
+    "header": ["dark_oak_planks"],
+    "fascia": ["dark_oak_slab"],
+    "base_paving": ["smooth_stone", "smooth_stone_slab"],
+    "ledgestone": ["mud_bricks", "packed_mud", "mud_brick_slab"],
+    "glass": ["glass_pane"],
+    "front_door": ["acacia_door"],
+    "utility_door": ["dark_oak_door"],
+    "accent": ["orange_concrete"],
+    "car": ["cyan_concrete", "white_concrete", "iron_block", "black_concrete", "glass_pane", "yellow_concrete", "red_concrete"],
+    "driveway_joints": ["light_gray_concrete"],
+    "ground": ["sand", "gravel", "grass_block", "dirt"],
+    "pool": ["water", "light_blue_concrete", "smooth_quartz_slab"],
+    "planting": ["jungle_log", "jungle_leaves", "cactus", "large_fern", "potted_cactus", "dead_bush", "short_grass"],
+    "floor_public": ["smooth_stone", "light_gray_concrete", "white_concrete"],
+    "floor_bedrooms": ["spruce_planks"],
+    "floor_baths": ["smooth_quartz"],
+    "pit_floor": ["smooth_quartz", "smooth_quartz_stairs"],
+    "ceiling": ["spruce_planks"],
+    "panelling": ["spruce_trapdoor", "spruce_stairs", "spruce_slab", "spruce_planks", "spruce_fence"],
+    "partitions": ["white_concrete"],
+    "fireplace": ["mud_bricks", "black_concrete", "campfire", "smooth_stone_slab"],
+    "beds": ["orange_bed", "cyan_bed", "yellow_bed", "light_blue_bed", "white_bed"],
+    "lights": ["lantern", "sea_lantern", "end_rod", "daylight_detector", "dark_oak_fence"]
+  },
+  "objects": [
+    "smooth_red_sandstone_stairs", "orange_carpet", "white_carpet", "cyan_carpet", "yellow_carpet",
+    "quartz_stairs", "quartz_slab", "smooth_quartz_stairs", "birch_planks", "birch_slab", "birch_stairs",
+    "birch_trapdoor", "iron_trapdoor", "lectern", "bookshelf", "flower_pot", "item_frame", "barrel",
+    "smoker", "furnace", "cauldron", "spruce_fence", "spruce_slab", "spruce_stairs", "spruce_trapdoor",
+    "spruce_planks", "smooth_quartz", "dark_oak_fence", "lantern", "sea_lantern", "end_rod", "daylight_detector",
+    "potted_cactus", "large_fern", "dead_bush", "short_grass", "cactus", "jungle_leaves", "jungle_log",
+    "water", "light_blue_concrete", "smooth_quartz_slab", "campfire"
+  ]
+}

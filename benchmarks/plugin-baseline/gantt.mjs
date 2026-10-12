@@ -7,6 +7,7 @@ import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
 
+const SCALE = 0.4;   // $/min at full bar height
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
 const read = (f) => readFileSync(f, "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l));
 
@@ -32,7 +33,7 @@ function sessions(dir) {
     else if (crew) r.name = `${crew[1] === "fix" ? "fix: " : ""}${names[+crew[2] - 1] ?? crew[0]}`;
     else if (r.model === "opus") r.name = "architect (form)";
     else if (r.model === "sonnet") r.name = "designer (plan)";
-    else if (!seenArt) r.name = "kit (vocab / scaffold)";
+    else if (r.effort === "medium" && !seenArt) r.name = "kit (vocab / scaffold)";
     else r.name = rootHaikuAfterArt++ === 0 ? names[0] ?? "part 1" : "inspector";
     r.min = (r.ms ?? 0) / 60000;
     r.rate = r.min > 0 ? (r.cost ?? 0) / r.min : 0;
@@ -49,13 +50,14 @@ function colour(rate, max) {               // log scale: pale green (nearly free
 function svg(dir, rows) {
   const t0 = Math.min(...rows.map((r) => r.start)), t1 = Math.max(...rows.map((r) => r.end));
   const span = (t1 - t0) / 60000, total = rows.reduce((a, r) => a + (r.cost ?? 0), 0);
-  const maxRate = Math.max(...rows.map((r) => r.rate), 0.01);
+  // one scale for every run (an Opus planner's rate), so charts compare: a cheap run looks cheap
+  const maxRate = Math.max(SCALE, ...rows.map((r) => r.rate));
   const L = 230, W = 760, R = 250, top = 130, rowH = 26, H = top + rows.length * rowH + 50;
   const x = (ms) => L + ((ms - t0) / 60000 / span) * W;
   const o = [`<svg xmlns="http://www.w3.org/2000/svg" width="${L + W + R}" height="${H}" font-family="Helvetica,Arial,sans-serif" font-size="12">`,
     `<rect width="100%" height="100%" fill="#fbfaf7"/>`,
     `<text x="16" y="24" font-size="16" font-weight="bold">${esc(basename(dir))}: ${rows.length} agent sessions, ${span.toFixed(0)} min, $${total.toFixed(2)}</text>`,
-    `<text x="16" y="42" fill="#555">bar length = wall time; bar height and colour = spend per minute (tallest/reddest $${maxRate.toFixed(3)}/min)</text>`,
+    `<text x="16" y="42" fill="#555">bar length = wall time; bar height and colour = spend per minute (full height and deepest red = $${maxRate.toFixed(2)}/min, the same in every chart)</text>`,
     `<text x="16" y="60" fill="#555">spend by model: ${Object.entries(rows.reduce((a, r) => ((a[r.model] = (a[r.model] ?? 0) + (r.cost ?? 0)), a), {})).map(([m, c]) => `${m} $${c.toFixed(2)}`).join(" · ")}</text>`];
   // concurrency strip
   const ev = rows.flatMap((r) => [[r.start, 1], [r.end, -1]]).sort((a, b) => a[0] - b[0] || a[1] - b[1]);
