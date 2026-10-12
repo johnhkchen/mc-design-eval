@@ -1,0 +1,291 @@
+{
+ "sheet": "scratch/t1/sheet.png",
+ "version": "1.21.4",
+ "front": "n",
+ "ground": 1,
+ "unknownBlocks": [],
+ "tiles": {
+  "street": "scratch/t1/street.png",
+  "down the street, left": "scratch/t1/down-the-street-left.png",
+  "down the street, right": "scratch/t1/down-the-street-right.png",
+  "front (elevation)": "scratch/t1/front-elevation.png",
+  "left (elevation)": "scratch/t1/left-elevation.png",
+  "right (elevation)": "scratch/t1/right-elevation.png",
+  "back (elevation)": "scratch/t1/back-elevation.png",
+  "front-left": "scratch/t1/front-left.png",
+  "front-right": "scratch/t1/front-right.png",
+  "glance 320px": "scratch/t1/glance-320px.png",
+  "entrance n 24,1,8 44px": "scratch/t1/entrance-n-24-1-8-44px.png",
+  "eave n 1/2 (y 20) 23px": "scratch/t1/eave-n-1-2-y-20-23px.png",
+  "eave n 2/2 (y 20) 22px": "scratch/t1/eave-n-2-2-y-20-22px.png",
+  "busiest north 30px": "scratch/t1/busiest-north-30px.png",
+  "busiest east 24px": "scratch/t1/busiest-east-24px.png",
+  "busiest south 32px": "scratch/t1/busiest-south-32px.png",
+  "busiest west 23px": "scratch/t1/busiest-west-23px.png",
+  "roof n corner 24px": "scratch/t1/roof-n-corner-24px.png",
+  "end_rod x5 6,19,10 50px": "scratch/t1/end-rod-x5-6-19-10-50px.png",
+  "end_rod x5 12,19,10 50px": "scratch/t1/end-rod-x5-12-19-10-50px.png",
+  "wall_sign x2 24,4,7 54px": "scratch/t1/wall-sign-x2-24-4-7-54px.png",
+  "candle x2 20,14,14 54px": "scratch/t1/candle-x2-20-14-14-54px.png",
+  "lantern x2 26,15,9 54px": "scratch/t1/lantern-x2-26-15-9-54px.png",
+  "lantern x2 10,17,13 54px": "scratch/t1/lantern-x2-10-17-13-54px.png"
+ },
+ "closeups": [
+  {
+   "label": "glance 320px",
+   "kind": "glance"
+  },
+  {
+   "label": "entrance n 24,1,8",
+   "kind": "entrance",
+   "box": [
+    [
+     22,
+     1,
+     6
+    ],
+    [
+     27,
+     4,
+     10
+    ]
+   ],
+   "from": "north",
+   "pxPerBlock": 43.6
+  },
+  {
+   "label": "eave n 1/2 (y 20)",
+   "kind": "eave",
+   "box": [
+    [
+     2,
+     19,
+     0
+    ],
+    [
+     14,
+     22,
+     3
+    ]
+   ],
+   "from": "north",
+   "pxPerBlock": 23
+  },
+  {
+   "label": "eave n 2/2 (y 20)",
+   "kind": "eave",
+   "box": [
+    [
+     15,
+     19,
+     0
+    ],
+    [
+     28,
+     22,
+     3
+    ]
+   ],
+   "from": "north",
+   "pxPerBlock": 21.5
+  },
+  {
+   "label": "busiest north",
+   "kind": "facade",
+   "box": [
+    [
+     20,
+     1,
+     1
+    ],
+    [
+     27,
+     6,
+     9
+    ]
+   ],
+   "from": "north",
+   "pxPerBlock": 29.5
+  },
+  {
+   "label": "busiest east",
+   "kind": "facade",
+   "box": [
+    [
+     9,
+     2,
+     1
+    ],
+    [
+     27,
+     7,
+     8
+    ]
+   ],
+   "from": "east",
+   "pxPerBlock": 23.9
+  },
+  {
+   "label": "busiest south",
+   "kind": "facade",
+   "box": [
+    [
+     10,
+     20,
+     18
+    ],
+    [
+     17,
+     25,
+     23
+    ]
+   ],
+   "from": "south",
+   "pxPerBlock": 31.7
+  },
+  {
+   "label": "busiest west",
+   "kind": "facade",
+   "box": [
+    [
+     4,
+     1,
+     6
+    ],
+    [
+     23,
+     6,
+     13
+    ]
+   ],
+   "from": "west",
+   "pxPerBlock": 23.3
+  },
+  {
+   "label": "roof n corner",
+   "kind": "roof",
+   "box": [
+    [
+     23,
+     20,
+     1
+    ],
+    [
+     27,
+     34,
+     4
+    ]
+   ],
+   "from": "north",
+   "pxPerBlock": 24
+  },
+  {
+   "label": "end_rod x5 6,19,10",
+   "kind": "small",
+   "box": [
+    [
+     5,
+     19,
+     8
+    ],
+    [
+     9,
+     21,
+     12
+    ]
+   ],
+   "from": "south",
+   "pxPerBlock": 50.3
+  },
+  {
+   "label": "end_rod x5 12,19,10",
+   "kind": "small",
+   "box": [
+    [
+     11,
+     19,
+     8
+    ],
+    [
+     15,
+     21,
+     12
+    ]
+   ],
+   "from": "north",
+   "pxPerBlock": 50.3
+  },
+  {
+   "label": "wall_sign x2 24,4,7",
+   "kind": "small",
+   "box": [
+    [
+     23,
+     4,
+     6
+    ],
+    [
+     26,
+     5,
+     8
+    ]
+   ],
+   "from": "north",
+   "pxPerBlock": 54
+  },
+  {
+   "label": "candle x2 20,14,14",
+   "kind": "small",
+   "box": [
+    [
+     19,
+     14,
+     12
+    ],
+    [
+     22,
+     15,
+     15
+    ]
+   ],
+   "from": "south",
+   "pxPerBlock": 54
+  },
+  {
+   "label": "lantern x2 26,15,9",
+   "kind": "small",
+   "box": [
+    [
+     25,
+     15,
+     8
+    ],
+    [
+     27,
+     17,
+     10
+    ]
+   ],
+   "from": "west",
+   "pxPerBlock": 54
+  },
+  {
+   "label": "lantern x2 10,17,13",
+   "kind": "small",
+   "box": [
+    [
+     9,
+     17,
+     11
+    ],
+    [
+     12,
+     18,
+     14
+    ]
+   ],
+   "from": "north",
+   "pxPerBlock": 54
+  }
+ ]
+}
