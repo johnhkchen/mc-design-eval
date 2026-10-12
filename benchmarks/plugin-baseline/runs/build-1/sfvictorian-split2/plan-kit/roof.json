@@ -1,0 +1,18 @@
+{
+  "preset": "shop",
+  "footprint": [[1, 7, 14, 32]],
+  "y": 17,
+  "pitch": "half",
+  "maxHeight": 3,
+  "overhang": { "north": 0, "south": 1, "east": 1, "west": 1 },
+  "why": "concept: low hidden gable behind an Italianate false front; the keep box guards the cornice",
+  "material": "dark-slate",
+  "gable": "bamboo_mosaic",
+  "ridge": "crest",
+  "dormers": { "count": 0 },
+  "chimneys": [
+    { "at": [1, 12], "size": 1, "material": "bricks" },
+    { "at": [1, 21], "size": 1, "material": "bricks" }
+  ],
+  "keep": [{ "from": [0, 16, 3], "to": [15, 21, 7] }]
+}

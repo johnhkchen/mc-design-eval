@@ -1,0 +1,43 @@
+# Required elements: SF Italianate painted lady
+
+Coordinates are the architect's (plan.md). "Part" = the PARTS entry (P1..P6) that builds it. "Vocab" = a VOCABULARY helper in plan.md.
+Rule: every object is real geometry (stairs, slabs, trapdoors, panes, pillars), never a coloured full block standing in.
+
+| # | Element | Real construction, block by block | Where | Part | Vocab |
+|---|---|---|---|---|---|
+| 1 | Tall narrow 3-storey front over garage base | z7 wall x1..14: y0..3 `dark_prismarine`; y4 belt `crimson_planks` x7..9 (rest of y4 is the floor edge, `dark_prismarine`); siding `warped_planks` y5..7, 9..11, 13..15; gold `bamboo_mosaic` y8 and y12; frieze `crimson_planks` y16 | z7, x1..14, y0..16 | P1 (wall), P4 (proud trim) | `frontWallZone` |
+| 2 | Garage-level base | `dark_prismarine` y0..3, z7 and z32; garage door opening x2..5 y1..3, cellar light (8,2,7) | z7 | P1 (wall), P5 (door) | `garageDoor` |
+| 3 | Garage door | opening x2..5 y1..3 filled with 12 `crimson_trapdoor` (facing=north, open=true, half=bottom) at z7, standing vertical like a panelled door (3 high x 4 wide); the lintel is the y4 floor | x2..5, y1..3, z7 | P5 | `garageDoor` |
+| 4 | Stair of steps up to the porch | solid `dark_prismarine` fill x10..13; treads `smooth_quartz_stairs` facing=south: z2 y1, z3 y2, z4 y3; landing `smooth_quartz` z5..6 y4; cheek walls x9 and x14 `dark_prismarine` stepped, `smooth_quartz_slab` cap | x9..14, y0..5, z2..6 | P2 | `frontStair`, `newel` |
+| 5 | Newel posts with lanterns | `quartz_pillar` y1..2 + `lantern` (hanging=false) y3 at (9,*,2) and (14,*,2) | (9,1..3,2), (14,1..3,2) | P2 | `newel` |
+| 6 | Recessed entry porch | floor y4 `smooth_quartz` continues the landing; side walls x9, x14 z8..9 y5..7 `warped_planks`; back wall z10 x10..13; ceiling = the y8 slab; open front at z7 | x10..13, y4..8, z7..10 | P1 (walls/ceiling), P2 (floor) | none |
+| 7 | Two porch columns | `quartz_pillar` axis=y at (10,5..6,7) and (13,5..6,7); capital `chiseled_quartz_block` at y7; plinth `smooth_quartz_slab` bottom is NOT placed (floor y4 is the base) | (10,5..7,7), (13,5..7,7) | P4 | `column` |
+| 8 | Porch arch spring | `smooth_quartz_stairs` half=top facing=south at (11,7,7), (12,7,7) under the gold porch head | (11..12,7,7) | P4 | `archSpring` |
+| 9 | Front door | `crimson_door` pair: (11,5,10) and (12,5,10), hinges outward (11 hinge=left, 12 hinge=right, facing=south), transom `glass_pane` (11..12,7,10) | z10 | P5 | `doorPair` |
+| 10 | Full-height angled bay, stacked up the front | walls per course y4..15: z5 x2..5 and diagonals (1,y,6), (6,y,6); y4 skirt `crimson_planks`; y5..7, 9..11, 13..15 `warped_planks`; y8, y12 `bamboo_mosaic`; corner posts `quartz_pillar` at (2,y,5), (5,y,5) y4..15; lights (windows) per OPENINGS; floors y4, y8, y12 and the cap y16 extend to z6 x2..5; the front wall z7 x2..5 y5..15 is OPEN (the bay's mouth, rooms are connected through it) | x1..6, y3..17, z4..6 | P1 (walls, floors), P4 (corbels, cap, crown), P5 (glass) | `bayCourse`, `corbel` |
+| 11 | Bay corbels | `smooth_quartz_stairs` half=top facing=south at (2..5,3,5) and (1,3,6), (6,3,6) | y3 | P4 | `corbel` |
+| 12 | Bracketed cornice | y16 brackets: `smooth_quartz_stairs` half=top facing=south at (7,16,6), (9,16,6), (11,16,6), (13,16,6) and (2,16,4), (5,16,4); y17 solid `smooth_quartz` z6 x7..14; crown y17 z5 x7..14 `smooth_quartz_stairs` half=top facing=south; over the bay y17 solid z5 x1..6 + (1,17,6),(6,17,6), crown z4 x1..6 | y16..17, z4..6 | P4 | `bracket`, `corniceRun` |
+| 13 | False-front parapet | y18 z7 x1..14: `warped_planks` posts at x1, x5, x10, x14; `bamboo_mosaic` panels between; y19 coping `smooth_quartz_slab` bottom x1..4 and x11..14 | y18..19, z7 | P4 | `parapet` |
+| 14 | Pediment with keystone | y19 x6..9 `bamboo_mosaic`; rakes `smooth_quartz_stairs` (5,19,7) facing=east, (10,19,7) facing=west; y20 (6,20,7) facing=east, (9,20,7) facing=west; (7..8,20,7) `chiseled_quartz_block`; drip stairs at (5..10,19,6) facing=south half=top | x5..10, y19..20, z6..7 | P4 | `pediment` |
+| 15 | Tall narrow double-hung windows | each opening filled with `glass_pane` in the wall plane (1x3 or 2x3); on 3-high openings a meeting rail: `smooth_quartz_slab` half=bottom at the opening's middle row, flush in the wall plane, so the glass reads as an upper and a lower sash; cream sill below, hood above | all OPENINGS | P5 | `sashWindow` |
+| 16 | Ornate window pediments / hoods | 2nd floor: (8,12,6) stair facing=east half=top, (9,12,6) `smooth_quartz_slab` top, (10,12,6) stair facing=west half=top; same at x11..13 over x12; top floor `smooth_quartz_slab` top at (9,15,6), (12,15,6); bay hoods z4 x3..4 slab top at y8 and y12 | per plan | P4 | `hood` |
+| 17 | Sills and trim | `smooth_quartz_slab` half=top one cell proud under every window (z6 wall, z4 bay front, z33 back) | under each window | P4 (front), P5 (back) | `sill` |
+| 18 | Fish-scale shingles | `bamboo_mosaic` bands y8, y12 across z7 x1..14 and all bay cells, parapet panels, pediment, back gable | listed | P1, P3, P4 | `fishScaleBand` |
+| 19 | Horizontal siding | `warped_planks` between the bands | listed | P1 | `frontWallZone` |
+| 20 | Painted-lady colour scheme (5 colours) | teal `warped_planks`, gold `bamboo_mosaic`, burgundy `crimson_planks`/doors, cream `smooth_quartz*`, sea-green `dark_prismarine` | whole | all | PALETTE |
+| 21 | Low roof behind the false front | `roof()` shop preset per ROOFS; `iron_bars` crest at the ridge; gable end back `bamboo_mosaic` | y17..19, z8..33 | P3 | `roofCall` |
+| 22 | Brick chimneys | `bricks` stacks (1,16..21,12) and (1,16..21,21), a `brick_slab` bottom cap on top (1,22,12),(1,22,21); (the fireplaces are inside, element 31) | x1 | P3 | `chimney` |
+| 23 | Party walls close on both sides | west neighbour x0 `yellow_terracotta` y0..13, cap `smooth_quartz_slab` y14; east x15 `light_blue_terracotta` y0..16, cap y17; both z7..32 | x0, x15 | P1 | `neighbour` |
+| 24 | Front garden behind an iron fence | bed (7..8,0,3..6) `podzol` + `rose_bush` (lower+upper), `azure_bluet`, `allium`, `flowering_azalea`; fence posts `polished_blackstone_wall` (6,1,2), (6,1,6), `iron_bars` x7..8 z2 and x6 z3..5 | x6..8, z2..6 | P6 | `ironFence`, `gardenBed` |
+| 25 | Street lamp | `polished_blackstone_wall` (0,1..3,1), `lantern` (0,4,1) | (0,1..4,1) | P6 | `streetLamp` |
+| 26 | Sidewalk and driveway | z0 `polished_andesite` curb, z1 `smooth_stone`; drive x1..6 z2..6 `polished_andesite` | y0 | P1 | none |
+| 27 | Slope of the street | the east neighbour's cap y17 vs the west y14 and its terracotta heights | x0, x15 | P1 | `neighbour` |
+| 28 | Back deck with rail and steps | floor y4 `spruce_planks` x2..13 z33..37; posts `spruce_log` y0..3 at x2, x7, x13 on z37; `spruce_fence` y5 around z37 and x2/x13 with a gap x11..13 z37; stair `spruce_stairs` facing=north z38 y3, z39 y2, z40 y1 x11..13 with `spruce_planks` under | x2..13, z33..40 | P6 | `deck`, `deckStair` |
+| 29 | Deep back garden | `grass_block` x1..14 z38..48, path `polished_andesite` x11..12 z41..48, tree, veg bed (farmland + water (8,0,45), `wheat`/`carrots`), `spruce_fence` x0, x15, z49 | z38..49 | P6 | `gardenTree`, `vegBed` |
+| 30 | Garden tree | `oak_log` (4,1..4,44); crown `oak_leaves` / `flowering_azalea_leaves` (persistent=true) in a rounded blob x2..6 z42..46 y4..7 | (4,*,44) | P6 | `gardenTree` |
+| 31 | Fireplaces (inside, part of the shell) | firebox cells (1,5..6,y) are RESERVED: `bricks` surround around it is built by P2: hearth `brick_slab`, mantel `smooth_quartz_slab` top at y7... the room designers fill the firebox: `netherrack` with `fire` above it | (1,5..6,11..13), (1,5..6,20..22) | P2 (surround), rooms | `fireplace` |
+| 32 | Entry hall with long stair along the party wall | hall stair x12..13 z12..14, `birch_stairs` facing=south, fill under `birch_planks`; birch banister `birch_fence` | x10..13, z11..23 | P2 | `stairRun` |
+| 33 | Clawfoot tub | 2 cells long, in the bathroom: `quartz_stairs` at both ends (half=bottom, backs facing outward), `quartz_slab` (type=bottom) between, `water_cauldron` is not used; the room designer places it against the wall | bathroom | rooms | `clawfootTub` |
+| 34 | Top room under the roof | open hollow x2..13 y13..19 z8..31; `birch_planks` floor y12; bay window seat | top | rooms | `windowSeat` |
+| 35 | Back face | z32 `dark_prismarine` y0..3, siding with bands y8, y12, frieze y16; gable `bamboo_mosaic`; windows with sills/hoods at z33 | z32 | P1, P3, P5 | `frontWallZone` |
+| 36 | Window lighting (night) | `lantern` wall-hung inside by rooms; exterior: lanterns at the newels and street lamp | | rooms, P2, P6 | PALETTE |
