@@ -1,1 +1,153 @@
-{"roles": {"ground": ["grass_block","dirt","coarse_dirt","gravel","dirt_path","farmland","podzol","moss_block"], "wall_stone": ["cobblestone","stone","andesite","mossy_cobblestone"], "stone_trim": ["stone_bricks","cracked_stone_bricks","mossy_stone_bricks","stone_brick_stairs","stone_brick_slab","stone_brick_wall","cobblestone_slab","cobblestone_stairs","cobblestone_wall","smooth_stone","smooth_stone_slab","polished_andesite","polished_andesite_slab"], "brick": ["bricks","brick_stairs","brick_slab","brick_wall"], "timber": ["spruce_planks","spruce_log","spruce_slab","spruce_stairs","spruce_fence","spruce_trapdoor","dark_oak_planks","dark_oak_log","dark_oak_slab","dark_oak_stairs","dark_oak_fence","oak_planks","oak_log","stripped_oak_log","oak_slab","oak_stairs","oak_fence","oak_fence_gate","oak_trapdoor","oak_pressure_plate","birch_planks","birch_log","birch_slab"], "shutter": ["warped_trapdoor"], "glass": ["glass","glass_pane"], "foliage": ["oak_leaves","azalea_leaves","flowering_azalea_leaves","spruce_leaves","vine"], "crops": ["wheat","carrots","potatoes","beetroots","sweet_berry_bush"], "flowers": ["rose_bush","lilac","peony","allium","cornflower","poppy","dandelion","short_grass","fern","pink_tulip","red_tulip","oxeye_daisy"], "water": ["water"]}, "objects": ["oak_door","spruce_door","lantern","cauldron","iron_chain","decorated_pot","composter","barrel","chest","crafting_table","hay_block","oak_pressure_plate","pumpkin","melon"]}
+{
+ "roles": {
+  "ground": [
+   "grass_block",
+   "dirt",
+   "coarse_dirt",
+   "gravel",
+   "dirt_path",
+   "farmland",
+   "podzol",
+   "moss_block"
+  ],
+  "wall_stone": [
+   "cobblestone",
+   "stone",
+   "andesite",
+   "mossy_cobblestone"
+  ],
+  "stone_trim": [
+   "stone_bricks",
+   "cracked_stone_bricks",
+   "mossy_stone_bricks",
+   "stone_brick_stairs",
+   "stone_brick_slab",
+   "stone_brick_wall",
+   "cobblestone_slab",
+   "cobblestone_stairs",
+   "cobblestone_wall",
+   "smooth_stone",
+   "smooth_stone_slab",
+   "polished_andesite",
+   "polished_andesite_slab"
+  ],
+  "brick": [
+   "bricks",
+   "brick_stairs",
+   "brick_slab",
+   "brick_wall"
+  ],
+  "timber": [
+   "spruce_planks",
+   "spruce_log",
+   "spruce_slab",
+   "spruce_stairs",
+   "spruce_fence",
+   "spruce_trapdoor",
+   "dark_oak_planks",
+   "dark_oak_log",
+   "dark_oak_slab",
+   "dark_oak_stairs",
+   "dark_oak_fence",
+   "oak_planks",
+   "oak_log",
+   "stripped_oak_log",
+   "oak_slab",
+   "oak_stairs",
+   "oak_fence",
+   "oak_fence_gate",
+   "oak_trapdoor",
+   "oak_pressure_plate",
+   "birch_planks",
+   "birch_log",
+   "birch_slab"
+  ],
+  "shutter": [
+   "warped_trapdoor"
+  ],
+  "glass": [
+   "glass",
+   "glass_pane"
+  ],
+  "foliage": [
+   "oak_leaves",
+   "azalea_leaves",
+   "flowering_azalea_leaves",
+   "spruce_leaves",
+   "vine"
+  ],
+  "crops": [
+   "wheat",
+   "carrots",
+   "potatoes",
+   "beetroots",
+   "sweet_berry_bush"
+  ],
+  "flowers": [
+   "rose_bush",
+   "lilac",
+   "peony",
+   "allium",
+   "cornflower",
+   "poppy",
+   "dandelion",
+   "short_grass",
+   "fern",
+   "lavender",
+   "pink_tulip",
+   "red_tulip",
+   "oxeye_daisy"
+  ],
+  "water": [
+   "water"
+  ]
+ },
+ "objects": [
+  "oak_door",
+  "spruce_door",
+  "lantern",
+  "campfire",
+  "red_bed",
+  "white_bed",
+  "blue_bed",
+  "barrel",
+  "chest",
+  "crafting_table",
+  "furnace",
+  "smoker",
+  "water_cauldron",
+  "cauldron",
+  "bookshelf",
+  "lectern",
+  "flower_pot",
+  "decorated_pot",
+  "composter",
+  "hay_block",
+  "lightning_rod",
+  "grindstone",
+  "white_carpet",
+  "red_carpet",
+  "potted_poppy",
+  "potted_cornflower",
+  "potted_fern",
+  "potted_azalea_bush",
+  "potted_red_tulip",
+  "potted_oxeye_daisy",
+  "potted_oak_sapling",
+  "potted_allium",
+  "potted_dandelion",
+  "loom",
+  "cartography_table",
+  "iron_bars",
+  "chain",
+  "iron_chain",
+  "bell",
+  "pumpkin",
+  "melon",
+  "stripped_spruce_log",
+  "oak_sign",
+  "oak_wall_sign",
+  "ladder",
+  "oak_pressure_plate"
+ ]
+}
