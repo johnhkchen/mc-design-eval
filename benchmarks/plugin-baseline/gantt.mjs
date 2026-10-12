@@ -30,9 +30,9 @@ function sessions(dir) {
     let best = -1, gap = 5000;
     tapes.forEach((t, i) => { const d = Math.abs(t.start - r.start); if (!used.has(i) && d < gap) { gap = d; best = i; } });
     const cwd = best >= 0 ? (used.add(best), tapes[best].cwd) : "";
-    const crew = cwd.match(/\/crew\/(part|fix)-(\d+)$/);
+    const crew = cwd.match(/\/crew\/(part|fix|lamp)-(\d+)$/);
     if (r.model === "codex") { r.name = "concept art + palette"; seenArt = true; }
-    else if (crew) r.name = `${crew[1] === "fix" ? "fix: " : ""}${names[+crew[2] - 1] ?? crew[0]}`;
+    else if (crew) r.name = `${crew[1] === "fix" ? "fix: " : crew[1] === "lamp" ? "lamps: " : ""}${(names[+crew[2] - 1] ?? crew[0]).replace(/^room: /, "")}`;
     else if (r.model === "opus") r.name = "architect (form)";
     else if (r.model === "sonnet") r.name = "designer (plan)";
     else if (r.effort === "medium" && !seenArt) r.name = "kit (vocab / scaffold)";
