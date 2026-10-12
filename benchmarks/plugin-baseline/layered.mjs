@@ -105,7 +105,7 @@ const builds = V2
   ? [...new Set(PAIRS.flatMap((p) => [`${p.subject}|${p.A}`, `${p.subject}|${p.B}`]))].map((k) => { const [s, a] = k.split("|"); return { s, a, dir: join(RUN, `${s}-${a}`) }; })
   : SUBJ.flatMap((s) => ARMS.map((a) => ({ s, a, dir: join(RUN, `${s}-${a}`) })));
 const card = (b) => join(b.dir, "judge", "card-eye.png");
-const H = ["claude-haiku-5-5", "low"], S = ["claude-sonnet-5-5", "medium"];
+const H = ["haiku", "low"], S = ["sonnet", "medium"];
 const first = await observe(`${builds[0].s}-${builds[0].a}-haiku-1`, card(builds[0]), ...H);   // writes the cache
 const jobs = builds.flatMap((b) => [1, 2].map((i) => ({ b, name: `${b.s}-${b.a}-haiku-${i}`, m: H })))
   .concat(builds.filter((b) => SONNET_ON.includes(b.s)).map((b) => ({ b, name: `${b.s}-${b.a}-sonnet`, m: S })));

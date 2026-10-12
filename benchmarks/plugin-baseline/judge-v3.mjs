@@ -17,7 +17,7 @@ const [A, B] = opt("--arms", "stock,plugin").split(",");
 const OUT = join(RUN, "judge-v3");
 mkdirSync(OUT, { recursive: true });
 const SONNET_SINGLES = opt("--sonnet-singles", "tea-house,glass-cafe").split(","); // Sonnet reference singles kept few (usage)
-const HAIKU = ["claude-haiku-5-5", "low"], SONNET = ["claude-sonnet-5-5", "medium"];
+const HAIKU = ["haiku", "low"], SONNET = ["sonnet", "medium"];
 
 function call(name, fn, args) {
   const file = join(OUT, `${name}.json`);

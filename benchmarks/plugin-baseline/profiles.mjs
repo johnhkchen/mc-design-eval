@@ -46,7 +46,7 @@ function lookCall(b) {
   const ledger = join(LOOK, `${b}.ledger.jsonl`);
   return new Promise((res) => {
     const p = spawn("baml", ["run", "--project", JUDGES, "--agent-skill-check", "off", "--output-format", "json", "judge.look", "--", "--plugin", PLUGIN,
-      "--card", join(RUN, b, "judge", "card-eye.png"), "--model", "claude-haiku-5-5", "--effort", "low", "--out_dir", LOOK], { env: { ...process.env, MCD_LEDGER: ledger } });
+      "--card", join(RUN, b, "judge", "card-eye.png"), "--model", "haiku", "--effort", "low", "--out_dir", LOOK], { env: { ...process.env, MCD_LEDGER: ledger } });
     let out = ""; p.stdout.on("data", (d) => (out += d));
     p.on("close", () => {
       let v = null; try { v = JSON.parse(out.slice(out.indexOf("{"))); } catch {}

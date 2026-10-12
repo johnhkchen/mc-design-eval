@@ -57,7 +57,7 @@ class Observations {
 }
 
 function ObserveBuild(card: image) -> Observations {
-    client: "anthropic/claude-haiku-5-5"
+    client: "anthropic/haiku"
     prompt: `
         You will see ONE Minecraft build as a player meets it: the street view at eye height (top left), the view from down
         the street on each side, and the back. Report only what you can see, as short facts. Do not judge or rate it.

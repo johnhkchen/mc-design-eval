@@ -48,7 +48,7 @@ function match_guess(
     guess: string,
     out_dir: string,
 ) -> MatchVerdict {
-    MatchGuess(subject, guess, client = root.thinker(plugin, "claude-haiku-5-5", "low", out_dir))
+    MatchGuess(subject, guess, client = root.thinker(plugin, "haiku", "low", out_dir))
 }
 
 test "blind replies parse offline" {

@@ -18,7 +18,7 @@ const SUBJECTS = opt("--subjects", Object.keys(ALL).join(",")).split(",");
 const [A, B] = opt("--arms", "stock,plugin").split(",");
 const OUT = join(RUN, opt("--out", "blind-v2"));   // blind = first prompt (v1, kept); blind-v2 = describe-first + weathering
 mkdirSync(OUT, { recursive: true });
-const HAIKU = ["claude-haiku-5-5", "low"], SONNET = ["claude-sonnet-5-5", "medium"];
+const HAIKU = ["haiku", "low"], SONNET = ["sonnet", "medium"];
 const LABELS = existsSync(join(RUN, "labels.json")) ? JSON.parse(readFileSync(join(RUN, "labels.json"), "utf8")).pairs : {};
 
 function call(name, fn, args) {

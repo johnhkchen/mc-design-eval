@@ -28,7 +28,7 @@ function run(cmd, args, cwd, out) {
 async function stock({ key, subject }) {
   const dir = join(ROOT, `${key}-stock`); mkdirSync(dir, { recursive: true });
   if (existsSync(join(dir, "build.nbt"))) return { reused: true };
-  const r = await run("claude", ["-p", "--model", "claude-sonnet-5-5", "--setting-sources", "", "--strict-mcp-config", "--permission-mode", "bypassPermissions",
+  const r = await run("claude", ["-p", "--model", "sonnet", "--setting-sources", "", "--strict-mcp-config", "--permission-mode", "bypassPermissions",
     "--output-format", "stream-json", "--verbose", "--max-budget-usd", "4", `Make me a Minecraft .nbt file of ${subject}. Save it as ./build.nbt. Don't ask questions.`], dir, join(dir, "session.jsonl"));
   const res = r.o.split("\n").filter((l) => l.includes('"type":"result"')).map((l) => JSON.parse(l)).at(-1) || {};
   return { code: r.code, cost: res.total_cost_usd ?? 0, minutes: r.minutes };

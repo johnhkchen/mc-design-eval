@@ -12,7 +12,7 @@ import { SUBJECTS } from "../collection/subjects.mjs";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const PLUGIN = join(HERE, "..", "..", "..", "minecraft-design");
 const JUDGES = new URL("../judges", import.meta.url).pathname; // the lab's judging instruments (BAML)
-const MODEL = "claude-sonnet-5-5";
+const MODEL = "sonnet";
 const SCALE = "1:1 scale, a player is 2 blocks tall (doors 2 tall, storeys 4)";
 const argv = process.argv.slice(2);
 const opt = (k, d) => (argv.includes(k) ? argv[argv.indexOf(k) + 1] : d);

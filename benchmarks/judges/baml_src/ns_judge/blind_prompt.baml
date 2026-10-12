@@ -37,7 +37,7 @@ class BlindRead {
 }
 
 function ReadBlind(card: image) -> BlindRead {
-    client: "anthropic/claude-sonnet-5-5"
+    client: "anthropic/sonnet"
     prompt: `
         You are a skilled Minecraft builder walking through a shared world. The image shows ONE build as a player meets it:
         the street view at eye height (top left), the view from down the street on each side, and the back.
@@ -68,7 +68,7 @@ class BlindPair {
 }
 
 function ComparePairBlind(left: image, right: image) -> BlindPair {
-    client: "anthropic/claude-sonnet-5-5"
+    client: "anthropic/sonnet"
     prompt: `
         You are a skilled Minecraft builder choosing between two builds of the same kind of building. Each image shows ONE
         build as a player meets it (street view at eye height, down-the-street views, the back).
@@ -108,7 +108,7 @@ class MatchVerdict {
 }
 
 function MatchGuess(subject: string, guess: string) -> MatchVerdict {
-    client: "anthropic/claude-haiku-5-5"
+    client: "anthropic/haiku"
     prompt: `
         A player looked at a Minecraft build and named it. How well does their name match what it was built to be?
 

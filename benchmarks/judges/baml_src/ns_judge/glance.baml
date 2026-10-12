@@ -9,7 +9,7 @@ function tools_note() -> string {
 function glance(plugin: string, nbt: string, brief: string, out_dir: string) -> GlanceVerdict {
     baml.fs.mkdir(out_dir, baml.fs.MkdirOptions { recursive: true });
     let card = root.card_of(plugin, nbt, `${out_dir}/card.png`);
-    let c = root.eyes(plugin, "claude-sonnet-5-5", "medium", out_dir);
+    let c = root.eyes(plugin, "sonnet", "medium", out_dir);
     let img = baml.media.Image.from_file(card, "image/png");
     let tries = 0;
     while (tries < 3) {

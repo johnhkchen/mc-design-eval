@@ -22,7 +22,7 @@ function baml(fn, dir, tag) {
   if (existsSync(file)) return Promise.resolve(read(file));
   return new Promise((res) => {
     const p = spawn("baml", ["run", "--project", JUDGES, "--agent-skill-check", "off", "--output-format", "json", `judge.${fn}`, "--", "--plugin", PLUGIN,
-      "--card", join(dir, "card-eye.png"), "--model", "claude-haiku-5-5", "--effort", "low", "--out_dir", dir], { env: { ...process.env, MCD_LEDGER: join(dir, "ledger.jsonl") } });
+      "--card", join(dir, "card-eye.png"), "--model", "haiku", "--effort", "low", "--out_dir", dir], { env: { ...process.env, MCD_LEDGER: join(dir, "ledger.jsonl") } });
     let out = ""; p.stdout.on("data", (d) => (out += d));
     p.on("close", () => { let v = null; try { v = JSON.parse(out.slice(out.indexOf("{"))); } catch {} if (v) writeFileSync(file, JSON.stringify(v)); res(v); });
   });

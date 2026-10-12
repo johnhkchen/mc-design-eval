@@ -32,7 +32,7 @@ class Look {
 }
 
 function ObserveLook(card: image) -> Look {
-    client: "anthropic/claude-haiku-5-5"
+    client: "anthropic/haiku"
     prompt: `
         You will see ONE Minecraft build as a player meets it: the street view at eye height (top left), the view from down
         the street on each side, and the back. Answer each question briefly from what you see. Do not rate the build overall.

@@ -25,7 +25,7 @@ mkdirSync(ROOT, { recursive: true });
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
 
 function session(dir, prompt, plugin, tag) {
-  const args = ["-p", "--model", "claude-sonnet-5-5", "--setting-sources", "", "--strict-mcp-config", "--permission-mode", "bypassPermissions",
+  const args = ["-p", "--model", "sonnet", "--setting-sources", "", "--strict-mcp-config", "--permission-mode", "bypassPermissions",
     "--output-format", "stream-json", "--verbose", "--max-budget-usd", BUDGET, ...(plugin ? ["--plugin-dir", PLUGIN] : []), prompt];
   return new Promise((res) => {
     const p = spawn("claude", args, { cwd: dir, stdio: ["ignore", "pipe", "pipe"] });
@@ -53,7 +53,7 @@ async function review(dir, tag) {
   const out = join(dir, `review-${tag}`); mkdirSync(out, { recursive: true });
   spawnSync("node", [MCD, "card", join(dir, "build.nbt"), "--out", join(out, "card.png"), "--front", "n"], { encoding: "utf8" });
   spawnSync("node", [MCD, "card", join(dir, "build.nbt"), "--out", join(out, "card-eye.png"), "--tiles", join(out, "card-tiles"), "--layout", "eye", "--reuse"], { encoding: "utf8" });
-  const ledger = join(out, "ledger.jsonl"), common = ["--card", join(out, "card-eye.png"), "--model", "claude-haiku-5-5", "--effort", "low", "--out_dir", out];
+  const ledger = join(out, "ledger.jsonl"), common = ["--card", join(out, "card-eye.png"), "--model", "haiku", "--effort", "low", "--out_dir", out];
   const [o1, o2, look] = await Promise.all([baml("observe", common, ledger), baml("observe", common, ledger), baml("look", common, ledger)]);
   const m = l0(dir), obs = [o1, o2].filter(Boolean), f = features(`${KEY}-${tag}`, m, obs, look);
   const r = { tag, observations: obs, look, l0: m, features: f, review: reviewOf(f, PROFILE), cost: cost(ledger) };

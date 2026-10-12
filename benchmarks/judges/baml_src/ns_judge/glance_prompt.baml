@@ -23,7 +23,7 @@ class GlanceVerdict {
 }
 
 function JudgeGlance(brief: string, tools: string, card: image) -> GlanceVerdict {
-    client: "anthropic/claude-sonnet-5-5"
+    client: "anthropic/sonnet"
     prompt: `
         You are a skilled Minecraft builder reviewing a build for a shared world. The image shows views of ONE build:
         street view at eye height (top left), front-left 3/4 (top right), front-right 3/4 (middle left), back elevation (middle right),

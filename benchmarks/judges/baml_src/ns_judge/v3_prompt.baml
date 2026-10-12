@@ -41,7 +41,7 @@ class GlanceVerdict3 {
 }
 
 function JudgeGlanceV3(brief: string, card: image) -> GlanceVerdict3 {
-    client: "anthropic/claude-sonnet-5-5"
+    client: "anthropic/sonnet"
     prompt: `
         You are a skilled Minecraft builder reviewing a build for a shared world. The image shows views of ONE build:
         street view at eye height (top left), front-left 3/4 (top right), front-right 3/4 (middle left), back elevation (middle right),
@@ -84,7 +84,7 @@ class PairVerdict {
 }
 
 function ComparePair(brief: string, left: image, right: image) -> PairVerdict {
-    client: "anthropic/claude-sonnet-5-5"
+    client: "anthropic/sonnet"
     prompt: `
         You are a skilled Minecraft builder choosing between two builds made to the same brief. Each image is a card of ONE
         build (street view, two 3/4 views, back elevation, roof close-up).
