@@ -1,0 +1,26 @@
+rect 2,3,21,34:
+truss simulation: span 17 m, rise 7 m, 30 m along the ridge; timber 250 mm square per block (C24), slate 0.9 kN/m2 on the slope x1.35, snow 0.8 kN/m2 x1.5, sag limit span/250
+  kingpost   every 3.88  x2  worst 0.95  (top compression 81 kN over 11.0 m)  sag 2/68 mm  timber 26.8  OK
+  queenpost  every 3.88  x1  worst 0.94  (top compression 107 kN over 7.3 m)  sag 4/68 mm  timber 19.8  OK
+  howe4      every 4.43  x1  worst 0.67  (top compression 138 kN over 5.5 m)  sag 6/68 mm  timber 20.7  OK
+  pratt4     every 4.43  x1  worst 0.67  (top compression 138 kN over 5.5 m)  sag 5/68 mm  timber 19.5  OK
+  fink       every 4.43  x1  worst 0.66  (top compression 137 kN over 5.5 m)  sag 5/68 mm  timber 18.9  OK
+  howe6      every 4.43  x1  worst 0.37  (top compression 154 kN over 3.7 m)  sag 6/68 mm  timber 26.4  OK
+  pratt6     every 4.43  x1  worst 0.37  (top compression 154 kN over 3.7 m)  sag 6/68 mm  timber 24.7  OK
+  howe8      every 4.43  x1  worst 0.27  (top compression 161 kN over 2.8 m)  sag 6/68 mm  timber 31.8  OK
+  pratt8     every 4.43  x1  worst 0.27  (top compression 161 kN over 2.8 m)  sag 6/68 mm  timber 29.8  OK
+PICK: fink, 6 trusses 4.43 m apart, members 1 block thick (worst member at 0.66 of its strength)
+
+rect 21,3,40,34:
+truss simulation: span 17 m, rise 7 m, 30 m along the ridge; timber 250 mm square per block (C24), slate 0.9 kN/m2 on the slope x1.35, snow 0.8 kN/m2 x1.5, sag limit span/250
+  kingpost   every 3.88  x2  worst 0.95  (top compression 81 kN over 11.0 m)  sag 2/68 mm  timber 26.8  OK
+  queenpost  every 3.88  x1  worst 0.94  (top compression 107 kN over 7.3 m)  sag 4/68 mm  timber 19.8  OK
+  howe4      every 4.43  x1  worst 0.67  (top compression 138 kN over 5.5 m)  sag 6/68 mm  timber 20.7  OK
+  pratt4     every 4.43  x1  worst 0.67  (top compression 138 kN over 5.5 m)  sag 5/68 mm  timber 19.5  OK
+  fink       every 4.43  x1  worst 0.66  (top compression 137 kN over 5.5 m)  sag 5/68 mm  timber 18.9  OK
+  howe6      every 4.43  x1  worst 0.37  (top compression 154 kN over 3.7 m)  sag 6/68 mm  timber 26.4  OK
+  pratt6     every 4.43  x1  worst 0.37  (top compression 154 kN over 3.7 m)  sag 6/68 mm  timber 24.7  OK
+  howe8      every 4.43  x1  worst 0.27  (top compression 161 kN over 2.8 m)  sag 6/68 mm  timber 31.8  OK
+  pratt8     every 4.43  x1  worst 0.27  (top compression 161 kN over 2.8 m)  sag 6/68 mm  timber 29.8  OK
+PICK: fink, 6 trusses 4.43 m apart, members 1 block thick (worst member at 0.66 of its strength)
+
