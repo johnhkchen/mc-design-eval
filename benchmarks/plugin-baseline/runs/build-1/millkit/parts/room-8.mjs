@@ -13,8 +13,8 @@ export function build(g) {
     "F": ["dark_oak_fence", {}],
     "S": ["dark_oak_stairs", { facing: "south", half: "bottom" }],
   }, [
-    "BF",     // z14: barrel at x40, table post at x41
-    "BS",     // z15: barrel at x40, chair at x41
+    ".F",     // z14: table post at x41 (bed at x40 z14..15)
+    ".S",     // z15: chair at x41
     "C",      // z16: chest at x40
   ]);
 
@@ -24,11 +24,13 @@ export function build(g) {
     "P": ["oak_pressure_plate", {}],
     "L": ["lantern", { hanging: "false", waterlogged: "false" }],
   }, [
-    "QP",     // z14: pot on the barrel, table plate
-    "L",      // z15: standing lantern on the barrel
+    ".P",     // z14: table plate
+    "..",
+    "L",      // z16: standing lantern on the chest
   ]);
 
   // bed: foot at x43 z15, head at x43 z16 (pillow end south, toward the back door side)
   bed(g, [43, 3, 15], "south", "red");
+  bed(g, [40, 3, 14], "south", "white");
 
 }

@@ -25,7 +25,7 @@ export function build(g) {
   const rows = [
     // y3: z10..15, x31..33
     [
-      "B C",
+      "B  ",
       "hW ",
       "FW ",
       "jW ",
@@ -34,7 +34,7 @@ export function build(g) {
     ],
     // y4
     [
-      "p L",
+      "p  ",
       "   ",
       "S  ",
       "   ",
@@ -54,4 +54,5 @@ export function build(g) {
   layers(g, [31, 3, 10], legend, rows);
   // The focal piece: the family bed, foot at x33 z14, head one step south (pillow end toward the back wall).
   bed(g, [33, 3, 14], "south", "red");
+  bed(g, [33, 3, 11], "south", "white");
 }

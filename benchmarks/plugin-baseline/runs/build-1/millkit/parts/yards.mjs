@@ -1,5 +1,6 @@
 // P5 Yards: plots 4-6 (kitchen garden, chicken run and trough, shared well yard), the plot 0 back step and wood pile,
 // the plot 1 back-yard flower beds and the plot 7 loading barrels. The coop itself (walls, floor, nests) is the shell's.
+import { feedShed } from "./coop.mjs";
 import { B } from "/Volumes/ext1/swe/repos/minecraft-design/tools/src/build.mjs";
 import {
   gate_pair, scarecrow, woodpile, wash_line, well, tree, channel, crop_bed, trough,
@@ -71,8 +72,8 @@ export function build(g) {
   fenceCells(g, ring(60, 5, 71, 18, [[65, 5], [66, 5]]), "oak_fence");
   gate_pair(g, 65, 5, "oak");
   // Coop ramp (spruce slab, bottom half) up to the chicken door's floor, straw corner, feed trough and water trough.
-  put(g, 64, 1, 11, ...B.slab("spruce", "bottom"));
-  trough(g, 62, 64, 8);
+  feedShed(g);
+  trough(g, 62, 63, 8);
   trough(g, 69, 69, 8, { water: true });
   put(g, 61, 1, 10, "hay_block", { axis: "y" });
 

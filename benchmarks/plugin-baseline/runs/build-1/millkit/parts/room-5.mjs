@@ -12,14 +12,12 @@ export function build(g) {
     "R": "birch_fence",
     "b": ["barrel", { facing: "up" }],
     "c": ["oak_stairs", { facing: "north", half: "bottom" }],
-    "w": ["oak_stairs", { facing: "west", half: "bottom" }],
-    "s": ["oak_stairs", { facing: "south", half: "bottom" }],
     "T": "birch_fence",
   }, [
     ["R..",   // z10: coat rack by the front door, door cell 29,10 kept clear
-     "bc.",   // z11: barrel, chair facing the table
-     "wT.",   // z12: chair facing east, table leg
-     ".s.",   // z13: chair facing north (stove cell 27,13 is P4's)
+     "b..",   // z11: barrel
+     "T..",   // z12: table leg (the second bed stands at x29 z12..13; column x28 stays clear)
+     "...",   // z13: stove cell 27,13 is P4's
      "...",   // z14: bed foot (bed() below), partition door cell 29,14 clear
      "..."],  // z15: bed head
   ]);
@@ -29,14 +27,14 @@ export function build(g) {
     "P": "potted_poppy",
     "t": ["oak_slab", { type: "top" }],
   }, [
-    ["...", "P..", ".t.", "...", "...", "..."],
+    ["...", "P..", "t..", "...", "...", "..."],
   ]);
 
   // y 5: standing lantern on the table top face, the room's light
   layers(g, [27, 5, 10], {
     "l": ["lantern", { hanging: "false" }],
   }, [
-    ["...", "...", ".l.", "...", "...", "..."],
+    ["...", "...", "l..", "...", "...", "..."],
   ]);
 
   // coat rack banner on top of the rack post (standing, faces north)
@@ -44,4 +42,5 @@ export function build(g) {
 
   // the family bed: foot 27,3,14, head one step south (27,3,15), pillow end at the back wall
   bed(g, [27, 3, 14], "south", "red");
+  bed(g, [29, 3, 12], "south", "white");
 }

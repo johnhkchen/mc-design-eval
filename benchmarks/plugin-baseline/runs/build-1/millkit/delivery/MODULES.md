@@ -4,12 +4,12 @@
 
 | # | file | blocks |
 |---|---|---|
-| 0 | millkit-00-shotgun-house.nbt | 3306 |
-| 1 | millkit-01-saddlebag-duplex.nbt | 3441 |
-| 2 | millkit-02-hall-parlour-cottage.nbt | 3384 |
-| 3 | millkit-03-shotgun-house-mirrored.nbt | 3305 |
+| 0 | millkit-00-shotgun-house.nbt | 3304 |
+| 1 | millkit-01-saddlebag-duplex.nbt | 3439 |
+| 2 | millkit-02-hall-parlour-cottage.nbt | 3383 |
+| 3 | millkit-03-shotgun-house-mirrored.nbt | 3303 |
 | 4 | millkit-04-kitchen-garden.nbt | 2861 |
-| 5 | millkit-05-chicken-coop.nbt | 2990 |
+| 5 | millkit-05-chicken-coop.nbt | 3057 |
 | 6 | millkit-06-well-yard.nbt | 2875 |
 | 7 | millkit-07-company-store.nbt | 3464 |
 

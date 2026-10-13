@@ -1,6 +1,7 @@
 // P1 Shell: piers and skirting, decks, walls and gable fills of plots 0-3, coop, store body and false front.
 // The writer helpers only fill air, so the first write into a cell wins: protected cells are written first or filtered out.
 import { B, carve } from "/Volumes/ext1/swe/repos/minecraft-design/tools/src/build.mjs";
+import { henhouse } from "./coop.mjs";
 import { pier_skirt, house_walls, false_front, coop } from "../vocab.mjs";
 
 // Proxy grid that refuses writes into cells where skip(x, y, z) is true (chimneys, openings).
@@ -89,11 +90,7 @@ export function build(g) {
   });
 
   // ---- plot 5 coop
-  coop(g, 63, 12);
-  // The chicken door and the vent are plain openings: an open trapdoor standing in the wall cell has air behind it (fit:
-  // floating shutter), so both cells go back to air.
-  carve(g, [64, 2, 12], [64, 2, 12]);
-  carve(g, [67, 3, 12], [67, 3, 12]);
+  henhouse(g);
 
   // ---- plot 7 company store
   {

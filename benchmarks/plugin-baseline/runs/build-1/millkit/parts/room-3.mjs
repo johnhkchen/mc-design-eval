@@ -19,20 +19,20 @@ const LEGEND = {
 
 // rows run along +x (x14..16), successive rows along +z (z10..15)
 const FLOOR = [
-  "B B", // z10: pot barrel west, lamp barrel east
-  "c  ", // z11: chair facing the table
+  "  B", // z10: lamp barrel east (north bed at x14 z10..11)
+  "   ", // z11
   "T  ", // z12: table post; stove placed by stove() at x16
   "d H", // z13: chair facing the table; chest east
-  "  B", // z14: bed foot (bed()) west; barrel east
-  "  B", // z15: bed head (bed()) west; barrel east
+  "   ", // z14: beds (bed()) at x14 and x16
+  "   ", // z15
 ];
 const ABOVE = [
-  "P L", // z10: pot on the barrel, lantern on the lamp barrel
+  "  L", // z10: lantern on the lamp barrel
   "   ",
   "U  ", // z12: table top slab
   "   ",
-  "  L", // z14: lantern on barrel
-  "  N", // z15: candles on barrel
+  "   ",
+  "   ",
 ];
 const TABLE_TOP = [
   "   ",
@@ -46,5 +46,7 @@ const TABLE_TOP = [
 export function build(g) {
   layers(g, [14, 3, 10], LEGEND, [FLOOR, ABOVE, TABLE_TOP]);
   bed(g, [14, 3, 14], "south", "red");
+  bed(g, [14, 3, 10], "south", "white");
+  bed(g, [16, 3, 14], "south", "white");
   stove(g, 16, 3, 12, "west");
 }

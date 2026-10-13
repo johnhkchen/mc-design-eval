@@ -30,7 +30,7 @@ function porchRoof(g, x0, x1, y, mat, block = mat) {
 // Plot 2: hall-and-parlour, side gable, spruce shingle. Chimney x 25..26 at the west gable.
 // Plot 3: shotgun mirrored, green copper tin, dark oak verge. Chimney x 37..38.
 const HOUSES = [
-  { i: 0, box: [3, 9, 8, 17], ridgeAxis: "z", overhang: 1, material: { mix: [["polished_andesite", 3], ["birch", 1]], eave: "birch", ridge: "polished_andesite", verge: "birch" }, verge: "birch",
+  { i: 0, box: [3, 9, 8, 17], ridgeAxis: "z", overhang: 1, material: { mix: [["polished_andesite", 1]], eave: "polished_andesite", ridge: "polished_andesite", verge: "polished_andesite" }, verge: "polished_andesite",
     gable: "birch_planks", chimney: CHIMNEYS.p0, top: 12,
     porch: { x0: 3, x1: 8, mat: "polished_andesite" } },
   { i: 1, box: [13, 9, 22, 16], ridgeAxis: "x", overhang: { north: 1, south: 1, east: 0, west: 0 }, material: { mix: [["mangrove", 3], ["dark_oak", 1]], eave: "dark_oak", ridge: "dark_oak", verge: "dark_oak" },
@@ -49,7 +49,7 @@ export function build(g) {
   for (const h of HOUSES) {
     const r = roof(g, h.box, "gable", {
       y: 7, pitch: 45, eave: "plain", ridge: "slab", ridgeAxis: h.ridgeAxis, front: "n",
-      overhang: h.overhang, material: h.material, verge: h.verge, gable: h.gable, texture: h.texture,
+      overhang: h.overhang, material: h.material, contrast: h.contrast, verge: h.verge, gable: h.gable, texture: h.texture,
       keep: [stack(h.chimney, h.top)],
     });
     out.push(`plot ${h.i} roof: ${r.cells ?? "?"} cells, refused ${r.refused ?? 0}`);
@@ -68,8 +68,8 @@ export function build(g) {
   porchRoof(g, 85, 94, 7, "polished_andesite");
 
   // Coop: small front gable (ridge along z), spruce tin, spruce verge; the gable ends are on the north and south.
-  const coop = roof(g, [63, 12, 68, 16], "gable", {
-    y: 5, pitch: 45, eave: "plain", ridge: "slab", ridgeAxis: "z", front: "n", overhang: 1,
+  const coop = roof(g, [64, 11, 69, 16], "gable", {
+    y: 6, pitch: 45, eave: "plain", ridge: "slab", ridgeAxis: "z", front: "n", overhang: 1,
     material: "spruce", texture: false, contrast: false, verge: "spruce",
   });
   out.push(`coop roof: ${coop.cells ?? "?"} cells, refused ${coop.refused ?? 0}`);

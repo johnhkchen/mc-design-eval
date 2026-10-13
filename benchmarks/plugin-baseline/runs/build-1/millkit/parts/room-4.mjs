@@ -15,7 +15,7 @@ const LEGEND = {
 
 const ROWS = [
   [
-    "B.B", // z10: barrels at x19 (dresser) and x21, the lane x20 clear
+    "B..", // z10: barrel at x19 (dresser); the north bed stands at x21 z10..11, the lane x20 clear
     "...", // z11
     "...", // z12: the smoker at x19 is the Hearths part's stove, already built
     "...", // z13
@@ -35,4 +35,5 @@ const ROWS = [
 export function build(g) {
   layers(g, [19, 3, 10], LEGEND, ROWS);
   bed(g, [21, 3, 14], "south", "red");
+  bed(g, [21, 3, 10], "south", "white");
 }
