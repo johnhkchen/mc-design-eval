@@ -1,0 +1,11 @@
+A modular housing kit for a Southern agricultural settlement (a cotton mill village, about 1880-1930, on a Create-mod server; the plantation house built earlier is the owner's house nearby). Villagers live here and add life: family houses, gardens, chickens, a company store. Build it as ONE sample row of modules on a fixed plot grid, so each plot can be cut out as its own module file and repeated in any layout.
+THE GRID (exact, every module must keep to it): a dirt-and-gravel lane runs along x at z 0..4 (with a lantern post every 12 blocks at the lane's edge); plots are 12 wide (x) and 14 deep (z 5..18); plot i covers x = 12*i .. 12*i+11. Each module stands inside its plot with its front on the lane side (north), its door or gate at the plot's middle (x = 12*i+5..6), and the plot's two side columns (x = 12*i and 12*i+11) kept as a low fence or hedge line or open path so neighbours join cleanly. 8 plots in a row (96 wide):
+ plot 0: shotgun house (one room wide, rooms front to back, front porch, gable to the lane)
+ plot 1: saddlebag duplex (two rooms either side of a central chimney, two front doors, long porch)
+ plot 2: hall-and-parlour cottage (two rooms side by side, porch across the front, chimney at one end)
+ plot 3: shotgun house again, mirrored, other wood and roof colour (a variant)
+ plot 4: kitchen garden (fenced beds of crops on farmland, a water channel, a composter, a scarecrow)
+ plot 5: chicken coop and fenced run (small coop with nesting boxes of hay and barrels, run, feed trough)
+ plot 6: shared well with a bench, a shade tree and a wash line
+ plot 7: company store (a false-front clapboard store with a porch, counter, shelves, barrels and crates, and villager job-site blocks for trading: composter, smoker, barrel, loom, fletching table)
+Houses: board-and-batten or clapboard walls on brick or stone piers, tin or shingle roofs, porches, real windows; beds for a villager family (each with two clear blocks above, reachable from the door), a table, a stove (furnace or smoker) by the chimney. Simple, sturdy, lived in; each house a little different. Lit so no mob spawns.
