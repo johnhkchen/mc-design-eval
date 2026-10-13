@@ -6605,5 +6605,11 @@
   }
  ],
  "floorAbove": 13,
- "note": "y 0 = shop floor; envelope y -4..6 (deep) / 5 (shallow); floor above at y 7+; wall lines non-conducting within the envelope's height"
+ "note": "y 0 = shop floor; envelope y -4..6 (deep) / 5 (shallow); floor above at y 7+; wall lines non-conducting within the envelope's height",
+ "display": {
+  "A1": "hay_block",
+  "A2": "hay_block,pumpkin,honeycomb_block",
+  "A3": "melon",
+  "A4": "pumpkin,hay_block,melon"
+ }
 }
