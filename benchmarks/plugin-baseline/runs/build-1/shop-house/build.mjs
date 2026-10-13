@@ -68,5 +68,6 @@ runParts(g, [
   ["room: Loft", room14.build],
 ], { palette: "palette.json", roof: "roof.json" });
 
+roof.finish(g);                                                          // gable trim to the ridge, no stair on a bottom slab
 g.save(out);
 console.log(`saved ${out}`);

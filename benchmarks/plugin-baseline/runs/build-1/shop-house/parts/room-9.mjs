@@ -14,7 +14,7 @@ const LEGEND = {
   "F": ["red_bed", { facing: "west", part: "foot" }],
   "b": ["barrel", { facing: "up", open: "false" }],
   "p": "flower_pot",
-  "w": "bookshelf",
+  "w": ["barrel", { facing: "up", open: "false" }],   // wardrobe of barrels
   "r": "white_carpet",
   "c": ["candle", { candles: "2", lit: "true" }],
   "L": ["lantern", { hanging: "false" }],

@@ -22,7 +22,7 @@ export function build(g) {
     b: "barrel",
     s: ["spruce_stairs", { facing: "west", half: "bottom" }],
     p: "flower_pot",
-    t: "spruce_slab",
+    t: ["spruce_slab", { type: "top" }],   // table top, a top slab so the candle stands on a full face
     L: ["lantern", { hanging: "false" }],
     H: ["lantern", { hanging: "true" }],
     c: ["candle", { candles: "1", lit: "true" }],

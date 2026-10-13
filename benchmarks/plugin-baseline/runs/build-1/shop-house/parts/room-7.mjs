@@ -33,22 +33,22 @@ const Y14 = [
   "......",
 ];
 
-// y 15: bookshelves' upper shelf and the table top
+// y 15: a pot and a lamp on the shelf tops (three shelves at most), and the table top
 const Y15 = [
-  "#.....",
-  "#.....",
-  "#.....",
+  "p.....",
+  "......",
+  "l.....",
   "...T..",
   "......",
   "......",
   "......",
 ];
 
-// y 16: a pot on the shelf end, a lit candle on the table
+// y 16: a lit candle on the table
 const Y16 = [
-  "p.....",
   "......",
-  "l.....",
+  "......",
+  "......",
   "...c..",
   "......",
   "......",

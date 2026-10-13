@@ -27,3 +27,24 @@ export function build(g) {
     ],
   });
 }
+
+/**
+ * After runParts (the roof tool's cells are locked while the parts run): the finishing the tool leaves.
+ * 1. The main gable trim stops one course short of the ridge at both ends: the apex course x 11..12, y 31 is missing
+ *    on the verge row (z 3 / z 24, dark oak) and the slate row behind it (z 4 / z 23), so the rake did not run eave to
+ *    ridge. Both stairs meet at the ridge, as on every slope row in between.
+ * 2. A slate stair standing on a bottom slab hangs half a block in the air: the slab becomes a top slab.
+ */
+export function finish(g) {
+  const stair = (block, facing) => [block, { facing, half: "bottom", shape: "straight", waterlogged: "false" }];
+  for (const [z, block] of [[3, "dark_oak_stairs"], [24, "dark_oak_stairs"], [4, "polished_deepslate_stairs"], [23, "polished_deepslate_stairs"]]) {
+    g.set(11, 31, z, ...stair(block, "east"));
+    g.set(12, 31, z, ...stair(block === "polished_deepslate_stairs" ? "deepslate_tile_stairs" : block, "west"));
+  }
+  for (const c of [...g]) {
+    const [x, y, z] = c.pos;
+    if (y < 19 || !/_stairs$/.test(c.block)) continue;
+    const below = g.get(x, y - 1, z);
+    if (below && /deepslate.*_slab$/.test(below.block) && below.state?.type === "bottom") g.set(x, y - 1, z, below.block, { ...below.state, type: "top" });
+  }
+}

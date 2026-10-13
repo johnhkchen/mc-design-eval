@@ -13,7 +13,7 @@ const LEGEND = {
   K: "barrel",
   C: "red_carpet",
   F: "spruce_fence",                                              // table leg
-  T: ["spruce_slab", { type: "bottom" }],                         // table top
+  T: ["spruce_slab", { type: "top" }],                            // table top, a top slab so the pot stands on a full face
   P: "flower_pot",
   L: ["lantern", { hanging: "true" }],
 };

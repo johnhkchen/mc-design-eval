@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // Stairs, glazing and doors: stair flights 1 and 2, wells, rails, loft ladder, doors, windows, shutters.
-import { B, DIRS } from "/Volumes/ext1/swe/repos/minecraft-design/tools/src/build.mjs";
-import { stairFlight, shutterPair, QUARTZ_SLAB } from "../vocab.mjs";
+import { B, DIRS, shutter } from "/Volumes/ext1/swe/repos/minecraft-design/tools/src/build.mjs";
+import { stairFlight, QUARTZ_SLAB } from "../vocab.mjs";
 import { doorPair } from "../vocab/h2.mjs";
 
 const AIR = /(^|:)(cave_)?air$/;
@@ -68,7 +68,7 @@ export function build(g) {
   for (const x of [6, 11, 16]) {
     glaze(g, "x", x, 14, 6, 2, 3);
     glaze(g, "x", x, 19, 6, 2, 3, { z: 4 });                                     // sill slab below the second floor
-    shutterPair(g, x, 19, 4, "north");
+    for (const sx of [x - 1, x + 2]) shutter(g, [sx, 19, 4], "north", "dark_oak", { height: 3 });   // flat on the wall beside the window
   }
   for (const z of [9, 17]) for (const y of [14, 19]) glaze(g, "z", 19, y, z, 2, 3);          // east
   for (const z of [9, 18]) for (const y of [14, 19]) glaze(g, "z", 4, y, z, 1, 3);           // west

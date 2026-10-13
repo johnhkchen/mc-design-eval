@@ -101,7 +101,7 @@ export function aislePartition(g, xs, z, { y0 = 5, y1 = 12 } = {}) {
 }
 
 // A straight spruce stair flight of `width` cells: step i sits at y0 + i, starting at (x, z) and walking in dir (its
-// facing is the walking-up direction). stringer: a bottom slab under each step after the first (a solid flight).
+// facing is the walking-up direction). stringer: a planks block under each step after the first (a solid flight).
 // rails: which open sides get a dark oak fence rail at step height + 1, "neg" (x - 1 or z - 1) and/or "pos"; the
 // top step gets none, so the arrival stays open. room: the box the flight must fit inside (throws if not).
 export function stairFlight(g, x, z, y0, y1, dir, { width = 2, rails = ["neg", "pos"], stringer = true, room = null } = {}) {
@@ -115,7 +115,7 @@ export function stairFlight(g, x, z, y0, y1, dir, { width = 2, rails = ["neg", "
   fits(foot, room);
   const w = writer(g, foot);
   for (const [a, b, c] of steps) w.put(a, b, c, B.stairs("spruce", dir, "bottom"));
-  for (const [a, b, c] of under) w.put(a, b, c, B.slab("spruce", "bottom"));
+  for (const [a, b, c] of under) w.put(a, b, c, "spruce_planks");
   for (const [a, b, c] of rail) w.put(a, b, c, ["dark_oak_fence", {}]);
   linkFences(g, rail, "dark_oak");
   return done(w);
