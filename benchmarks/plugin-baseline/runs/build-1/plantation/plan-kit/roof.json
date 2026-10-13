@@ -1,0 +1,24 @@
+{
+  "preset": "civic",
+  "footprint": [[25, 35, 70, 61], [37, 62, 58, 75]],
+  "y": 18,
+  "style": "hip",
+  "pitch": "half",
+  "overhang": 1,
+  "material": "slate",
+  "eave": "cornice",
+  "trim": "smooth_quartz",
+  "ridge": "slab",
+  "pediment": false,
+  "dormers": [
+    { "face": "north", "count": 3, "style": "gable", "width": 3, "height": 3, "window": "glass_pane", "wall": "smooth_quartz" },
+    { "face": "south", "count": 2, "style": "gable", "width": 3, "height": 3, "window": "glass_pane", "wall": "smooth_quartz" }
+  ],
+  "keep": [
+    { "from": [33, 0, 46], "to": [34, 32, 47] },
+    { "from": [33, 0, 56], "to": [34, 32, 57] },
+    { "from": [61, 0, 46], "to": [62, 32, 47] },
+    { "from": [61, 0, 56], "to": [62, 32, 57] }
+  ],
+  "trusses": { "material": "stripped_spruce_log" }
+}

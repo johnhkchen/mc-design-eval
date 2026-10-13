@@ -1,0 +1,34 @@
+# REQUIRED ELEMENTS (checklist). Coordinates from plan.md. Part numbers: P1 shell, P2 roofs+chimneys, P3 colonnade+galleries, P4 joinery, P5 outbuildings, P6 grounds.
+
+- [ ] **Colossal columns (8 stacks, 2x2, x25-26,31-32,37-38,43-44,51-52,57-58,63-64,69-70 z35..36)** (P3, `colossalColumn`): base y4 `smooth_quartz` 2x2; shaft y5..15 `quartz_pillar` axis y; capital y16 `chiseled_quartz_block` 2x2 + ring of upside-down `quartz_stairs` on z34 and z37 sides (half top, facing outward). Shaft passes through the y10 porch floor (floor skips those cells).
+- [ ] **Double gallery** (P3, `galleryFloor`): ground floor y3 `smooth_quartz` x25..70 z35..41; upper porch floor y10 `spruce_planks` z36..41 with `smooth_quartz` edge at z35 y10; ceiling y17 `smooth_quartz` z35..41; entablature band y17 x24..71 z35..36 and ends x25/x70.
+- [ ] **Balustrades** (P3, `balustrade`): `birch_fence` y11 + `smooth_quartz_slab` type top y12 between columns on z35 (upper) and fence y4 + slab y5 (ground, skip x45..50); also gallery ends x25/x70 z37..41.
+- [ ] **Raised brick base with arched vents** (P1, `ventArch`): `bricks` y0..2, six vents at z35 y1 `iron_bars` flanked by upside-down `brick_stairs` lintel at y2.
+- [ ] **Front steps and cheeks** (P6, `frontSteps`): per plan SITE row; `smooth_quartz_stairs` on bricks, newel + `lantern`.
+- [ ] **Grand double front door x45..50** (P4, `fanlitDoor`): posts `quartz_pillar` x45/x50, sidelights `glass_pane` x46/x49, double `dark_oak_door` x47..48 (hinges mirrored), transom `glass_pane` y6..8, lintel `chiseled_quartz_block`+`smooth_quartz` y9, cap upside-down `quartz_stairs` y9 x44..51. Upper twin at y11..15 (door y11..12).
+- [ ] **Tall shuttered windows** (P4, `tallWindow` + `shutterPair`): 2x5 on the front, 2x4 on ends; `glass_pane`, `smooth_quartz_slab` sill, `smooth_quartz` lintel; `dark_oak_trapdoor` open shutters each side, flat on the wall (use `shutter()`).
+- [ ] **Low hipped slate roof, quartz dentil cornice** (P2): roof.json R-main exactly as plan ROOFS; trusses `stripped_spruce_log`.
+- [ ] **Dormers x5** (P2): 3 north (x≈36..38,46..49,57..59), 2 south; gable dormers, `glass_pane`, `smooth_quartz` cheeks, slate hip cap.
+- [ ] **Chimneys x4** (P2, `chimneyStack`): `bricks` 2x2 y0..28 at x33-34/61-62 z46-47/56-57, band `deepslate_bricks` y26, cap `brick_stairs` ring y27 (upside-down), lit `campfire` at y27 top (hay_block under for signal height). Roof stays whole round the stack.
+- [ ] **Fireplaces (P-hearth)** (P2, `hearth`): firebox 1x1x2 in stack face toward room at y4..5, y11..12: floor `smooth_stone`, lit `campfire`, lintel upside-down `brick_stairs`, mantel `smooth_quartz_slab`.
+- [ ] **Wide central hall** x45..50 z43..60, both floors, `grandStair` at the back (P4), marble floor `smooth_quartz`/`stone_bricks` checker (rooms designer).
+- [ ] **Grand stair** (P4, `grandStair`): `smooth_quartz_stairs` x45..46 rising NORTH from z60 (y4) to z54 (y10), landing y10 z53; hole in upper floor x45..46 z54..56 with `birch_fence` rail; solid `bricks`/`quartz` core under steps; spruce rail band.
+- [ ] **8 bedrooms** (guest ground; B2,B3,B4; master; B5; B6,B7 over kitchen) with `bed()` helper; **master suite** the largest (x52..63 z43..49, own bath x65..68, windows onto upper porch).
+- [ ] **Bathrooms x5** (ensuite master; hall baths W x40..43 and E x63..68; guest; powder): `cauldron`/`water_cauldron` tub, `dark_oak_trapdoor` + `flower_pot` basin, `iron_bars` mirror... (room designers).
+- [ ] **Kitchen** (x48..57 z62..74) with hearth, `smoker`, `furnace`, barrels, island; **open to the vaulted living room** along x47/48 (no wall).
+- [ ] **Dining room** (x52..68 z43..49), long table, chairs, sideboard, chandelier of `iron_chain`+`lantern`.
+- [ ] **Vaulted living room** (x38..47 z62..74, y4..16, open two storeys): coved vault y15..17 by upside-down `quartz_stairs` stepping in 1/course; Palladian window south; balcony rail x48 y11 from upper wing (P1 `vaultCove`).
+- [ ] **Upper porch reached from upstairs hall** (door x47..48 z42 y11..12) (P4).
+- [ ] **Drive + allee of 8 live oaks** (P6, `liveOak`, `driveStrip`): `gravel` x45..50 z0..23, `smooth_stone` kerbs, oaks per plan SITE, crowns meet; `vine` moss hanging.
+- [ ] **Oval forecourt with lawn island, azaleas, urn** (P6, `forecourtOval`, `urn`).
+- [ ] **Gate piers + boundary fence + lamp posts** (P6, `gatePier`, `lampPost`).
+- [ ] **Carriage house** x76..91 z40..53 (P5, `carriageHouse`): bricks, 3 arched doors, loft, ladder, hip roof, cupola with `lightning_rod`.
+- [ ] **Guest cottage** x76..87 z60..75 (P5, `cottage`): white miniature, 4-column porch, hip roof, chimney.
+- [ ] **Gazebo** centre (13,81) (P6, `gazebo`): octagon floor, 8 columns, fence balustrade, stair-cone roof, rod.
+- [ ] **Greenhouse** x4..21 z64..75 (P6, `greenhouse`): brick dwarf wall, quartz posts, glass, glass gable roof, benches.
+- [ ] **Formal garden with hedged beds and fountain** x4..22 z36..60 (P6, `parterreBed`, `fountain`).
+- [ ] **Flowering trees** (P6, `cherryTree`, `magnolia`).
+- [ ] **River frontage, pond-like river, dock** (P6, `riverBand`, `dock`): sand bank, water y-3..-1, dock x44..51 z84..92.
+- [ ] **Rear porch + steps** (P3, `rearPorch`): 6 slim `quartz_pillar` columns, shed roof of `deepslate_tile_stairs`, steps.
+- [ ] **Garden-door stoops** W/E (P3, `stoop`).
+- [ ] **Lighting**: hanging lanterns in hall (`chain`), porch lanterns (`lampPost`, `porchLantern`) (room designers + P6).
