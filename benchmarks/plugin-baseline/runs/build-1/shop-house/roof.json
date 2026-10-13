@@ -1,0 +1,22 @@
+{
+  "preset": "shop",
+  "front": "north",
+  "ridgeAxis": "z",
+  "footprint": { "from": [4, 24, 5], "to": [19, 24, 22] },
+  "y": 24,
+  "overhang": 2,
+  "gable": "bricks",
+  "verge": "dark_oak",
+  "material": {
+    "mix": [["deepslate_tiles", 50], ["cobbled_deepslate", 30], ["polished_deepslate", 20]],
+    "eave": "polished_deepslate",
+    "ridge": "deepslate_tile_slab",
+    "verge": "dark_oak"
+  },
+  "trusses": { "material": "stripped_dark_oak_log" },
+  "keep": [
+    { "from": [20, 22, 13], "to": [21, 31, 14] },
+    { "from": [11, 26, 5], "to": [12, 27, 5] },
+    { "from": [11, 26, 22], "to": [12, 27, 22] }
+  ]
+}
