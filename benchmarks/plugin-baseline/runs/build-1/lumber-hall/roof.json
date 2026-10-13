@@ -1,11 +1,73 @@
 {
-  "preset": "granary",
-  "material": { "mix": [["cobbled_deepslate", 45], ["deepslate_tiles", 35], ["polished_deepslate", 20]], "eave": "cobbled_deepslate", "ridge": "cobbled_deepslate", "verge": "dark_oak" },
-  "footprint": [[2, 3, 21, 34], [21, 3, 40, 34]],
-  "y": 24,
-  "overhang": { "north": 1, "south": 1, "east": 1, "west": 1 },
-  "keep": [
-    { "from": [2, 24, 3], "to": [40, 34, 3] },
-    { "from": [2, 24, 34], "to": [40, 34, 34] }
+ "preset": "granary",
+ "material": {
+  "mix": [
+   [
+    "cobbled_deepslate",
+    45
+   ],
+   [
+    "deepslate_tiles",
+    35
+   ],
+   [
+    "polished_deepslate",
+    20
+   ]
+  ],
+  "eave": "cobbled_deepslate",
+  "ridge": "cobbled_deepslate",
+  "verge": "dark_oak"
+ },
+ "footprint": [
+  [
+   2,
+   3,
+   21,
+   34
+  ],
+  [
+   21,
+   3,
+   40,
+   34
   ]
+ ],
+ "y": 24,
+ "overhang": {
+  "north": 1,
+  "south": 1,
+  "east": 1,
+  "west": 1
+ },
+ "keep": [
+  {
+   "from": [
+    2,
+    24,
+    3
+   ],
+   "to": [
+    40,
+    34,
+    3
+   ]
+  },
+  {
+   "from": [
+    2,
+    24,
+    34
+   ],
+   "to": [
+    40,
+    34,
+    34
+   ]
+  }
+ ],
+ "trusses": {
+  "material": "stripped_dark_oak_log",
+  "every": 4
+ }
 }
