@@ -10,6 +10,8 @@ truss simulation: span 17 m, rise 7 m, 30 m along the ridge; timber 250 mm squar
   howe8      every 4.43  x1  worst 0.27  (top compression 161 kN over 2.8 m)  sag 6/68 mm  timber 31.8  OK
   pratt8     every 4.43  x1  worst 0.27  (top compression 161 kN over 2.8 m)  sag 6/68 mm  timber 29.8  OK
 PICK: fink, 6 trusses 4.43 m apart, members 1 block thick (worst member at 0.66 of its strength)
+aesthetic (0.6 webs at 45 degrees or plumb + 0.4 openness, 70% open or more = full; mirrored; snapped panel points re-simulated): kingpost every 2.82 x2: looks 1 (open 0.78), timber 35.6; fink every 2.82 x1: looks 0.8 (open 0.56), timber 27.9; fink every 2.82 x2: looks 0.8 (open 0.56), timber 50.8; fink every 3.88 x1: looks 0.8 (open 0.56), timber 21.6; fink every 3.88 x2: looks 0.8 (open 0.56), timber 38.3; fink every 4.43 x1: looks 0.8 (open 0.56), timber 19.6
+BUILT: fink, 6 trusses 4.43 m apart, looks 0.8, worst member 0.77, panel points snapped
 
 rect 21,3,40,34:
 truss simulation: span 17 m, rise 7 m, 30 m along the ridge; timber 250 mm square per block (C24), slate 0.9 kN/m2 on the slope x1.35, snow 0.8 kN/m2 x1.5, sag limit span/250
@@ -23,4 +25,6 @@ truss simulation: span 17 m, rise 7 m, 30 m along the ridge; timber 250 mm squar
   howe8      every 4.43  x1  worst 0.27  (top compression 161 kN over 2.8 m)  sag 6/68 mm  timber 31.8  OK
   pratt8     every 4.43  x1  worst 0.27  (top compression 161 kN over 2.8 m)  sag 6/68 mm  timber 29.8  OK
 PICK: fink, 6 trusses 4.43 m apart, members 1 block thick (worst member at 0.66 of its strength)
+aesthetic (0.6 webs at 45 degrees or plumb + 0.4 openness, 70% open or more = full; mirrored; snapped panel points re-simulated): kingpost every 2.82 x2: looks 1 (open 0.78), timber 35.6; fink every 2.82 x1: looks 0.8 (open 0.56), timber 27.9; fink every 2.82 x2: looks 0.8 (open 0.56), timber 50.8; fink every 3.88 x1: looks 0.8 (open 0.56), timber 21.6; fink every 3.88 x2: looks 0.8 (open 0.56), timber 38.3; fink every 4.43 x1: looks 0.8 (open 0.56), timber 19.6
+BUILT: fink, 6 trusses 4.43 m apart, looks 0.8, worst member 0.77, panel points snapped
 
