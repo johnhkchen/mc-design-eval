@@ -1,0 +1,62 @@
+{
+  "preset": "townhouse",
+  "footprint": [
+    [
+      3,
+      2,
+      26,
+      19
+    ]
+  ],
+  "y": 24,
+  "front": "south",
+  "ridgeAxis": "x",
+  "overhang": 1,
+  "dormers": {
+    "face": "south",
+    "count": 3
+  },
+  "keep": [
+    {
+      "from": [
+        1,
+        24,
+        9
+      ],
+      "to": [
+        2,
+        33,
+        10
+      ]
+    },
+    {
+      "from": [
+        12,
+        24,
+        0
+      ],
+      "to": [
+        13,
+        33,
+        1
+      ]
+    },
+    {
+      "from": [
+        27,
+        24,
+        9
+      ],
+      "to": [
+        28,
+        33,
+        10
+      ]
+    }
+  ],
+  "material": "deepslate_tiles",
+  "trim": "smooth_sandstone",
+  "verge": "smooth_sandstone",
+  "soffit": "smooth_sandstone_slab",
+  "texture": false
+}

@@ -1,0 +1,1 @@
+Workflow crashed at the lamplighter step after every part was built (wave index past the stair part; fixed in plugin 9fb0158). The redstone engineer pass was then run by hand: see engineer-report.md (Sonnet, $0.63, not in ledger.jsonl). installed.nbt = build with the benched machines pasted in, for looking only.
