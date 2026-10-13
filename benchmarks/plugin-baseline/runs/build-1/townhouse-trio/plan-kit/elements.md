@@ -1,0 +1,25 @@
+# Required elements: townhouse trio
+
+Brief: "A townhouse trio: three attached townhouses or small apartment buildings in a row." Coordinates from plan.md (x street, y up, z from street north z=0 to garden). Mirror: C x = 30 - A x.
+
+- [ ] **Three attached houses, one row** (A brick, B stucco, C brick) — shared plinth y1..2 `stone_bricks` x3..27 z12; party walls x=11, x=19 (1 thick, full height, no openings). Vocab `wallCourse`, `partyPilaster`. Part 1.
+- [ ] **Shared stone string course** y=7 x3..27 z12 (`cut_sandstone` on A/C, `smooth_quartz` on B), returned round side faces x=3, x=27. Vocab `stringCourse`. Part 1.
+- [ ] **Brick end houses A/C** `bricks` walls y3..16, `smooth_sandstone` quoins x3..4 / x26..27 (2 courses on, 1 off), sills `smooth_sandstone_slab` top, lintels `cut_sandstone` 1 wider each side. Vocab `quoinColumn`, `windowDress`. Part 1 + 5.
+- [ ] **Canted bay windows A and C** (x7..10 / x20..23, z10..11, y1..12): walls `smooth_sandstone`; front z=10 x8..9 (A), cants z=11 x7, x10; glass `glass_pane` y3..5 and y8..10, sill band `cut_sandstone` y=7, floor/roof of bay: `smooth_stone_slab` deck y=12 edged `quartz_slab`. The cant cells x7,x10 at z=10 stay air. Vocab `cantedBay`. Parts 1 (body), 3 (deck), 5 (panes).
+- [ ] **Mansard roofs A and C** `dark-slate` `townhouse` preset, y18..23, dormer gable at x=7 / x=23 on north face, stone dentil cornice, iron-bar crest, overhang 1. Vocab `mansardSpec`. Part 3.
+- [ ] **Taller stucco centre house B** `smooth_sandstone` to y=22, parapet y23..24 with `smooth_stone` coping + `iron_bars` rail; `modern`/slate flat deck. Vocab `parapetSpec`. Parts 1, 3.
+- [ ] **Bracketed cornice on B** quartz stairs upside-down facing south at y=22 z=11 x11..19; brackets upside-down quartz stairs y=21 z=11 x=12,14,16,18; returned along x=10 / x=20 at y=22. Vocab `bracketCornice`. Part 3.
+- [ ] **B eave line** `stone_brick_slab` (top) y=17 x11..19 z=11, carries A/C cornice line across B. Part 3.
+- [ ] **Quartz portico + balcony on B** pedestals (13,1..2,9),(17,1..2,9) `smooth_quartz`; `quartz_pillar` axis y (13,3..6,9),(17,3..6,9); cheeks x13,x17 z10..11 y1..2; entablature `smooth_quartz` x13..17 y=7 z9..11; balcony `iron_bars` y=8 along z=9 and x=13, x=17 (z9..11), gap none (French door at (15,8..9,12)). Vocab `portico`. Part 5.
+- [ ] **Stoops** A x4..6, C x24..26, B x14..16, z9..11: `stone_brick_stairs` z=9 y1 and z=10 y2 (facing south), landing `stone_bricks` z=11 y2; B landing x13..17. `polished_blackstone_wall` rails x=3, x=27. Vocab `stoop`. Part 5.
+- [ ] **Three differently painted doors**: A `warped_door` (5,3..4,12), B `dark_oak_door` (15,3..4,12), C `crimson_door` (25,3..4,12), both halves, facing north (out), hinge consistent; transoms `glass_pane` y=5 (B fanlight). Door hoods A/C: `quartz_slab` top at y=6 z=11 x4..6 / x24..26 on upside-down `quartz_stairs` at (4,5,11),(6,5,11)/(24,5,11),(26,5,11). Vocab `doorFit`, `doorHood`. Part 5.
+- [ ] **Windows** every opening in plan OPENINGS glazed `glass_pane` (connected), sills + heads per FACADES; French door B (15,8..9,12) as `dark_oak_door` pair with transom. Vocab `windowDress`. Part 5.
+- [ ] **Window boxes** under second-storey windows A/C at y=12 z=11: `spruce_trapdoor` (open, facing north? standing against wall) with `potted_red_tulip`/`poppy` flowers... use `flower_pot`s. Vocab `windowBox`. Part 5.
+- [ ] **Area railings** `iron_bars` y=1 z=9 x7..10, x20..23, x12, x18. Part 5.
+- [ ] **Two chimney stacks** A/B (x10..12, z18..19) and B/C (x18..20, z18..19), `bricks`, from own footing y1, to y=28; `deepslate_bricks` band y=26; cap `stone_brick_slab` y=28 stepping out 1 (x9..13 / x17..21, z17..20); lit `campfire` at (11,28,18),(11,28,19),(19,28,18),(19,28,19) (smoke). Flue air y5..27. Vocab `chimneyStack`. Part 4.
+- [ ] **Four fireplaces** (10,3..4,18..19) A, (12,3..4,18..19) B, (18,..) B, (20,..) C: back firebox, `stone_bricks` floor, lit `campfire` at back (not walked on), lintel upside-down `brick_stairs` y=5 over cells... Vocab `hearth`. Part 4.
+- [ ] **Stairs inside each house**: wells A x9..10 z20..23, B x12..13 z20..23, C x20..21 z20..23, floors y=7,12,(B)17; 4–5 `spruce_stairs` per storey rising south, landing, `spruce_fence` rail; ladders (4,18..20,23)/(26,18..20,23) to attics. Vocab `stairFlight`, `atticLadder`. Part 2.
+- [ ] **Rear gardens + walls + gates + back doors** per plan; `spruce_door` back doors (5/15/25,3..4,24), steps, brick garden walls 2 high with `stone_brick_slab` coping, `spruce_fence_gate` x=7,15,23 z=34, `dirt_path` central path, beds `coarse_dirt`/flowers. Vocab `gardenWall`, `gardenBed`. Part 6.
+- [ ] **Street**: andesite road with gravel patches, `smooth_stone` kerb, `polished_andesite` pavement, street trees x=2,15,28 z=7 (oak log axis y 4 high, persistent leaves y4..7 5 wide, podzol pit), lamp posts x=9,21 z=8. Vocab `streetTree`, `lampPost`. Part 6.
+- [ ] **Lighting**: lantern each side of each front door (hanging under hood A/C; on fence arm B at x=13 / 17 z=11?? use portico underside), lamp posts. Part 6 (street) + part 5 (doors).
+- [ ] **Rear + side faces**: bricks A/C, plinth, string course, windows per OPENINGS. Part 1 + 5.
