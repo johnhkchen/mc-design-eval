@@ -25,18 +25,19 @@ function sessions(dir) {
     return { start: m ? Date.parse(`${m[1]}:${m[2]}:${m[3]}.${m[4]}Z`) : NaN, cwd };
   }) : [];
   const used = new Set();
-  let seenArt = false, rootHaikuAfterArt = 0;
+  let art = 0, rootHaiku = 0;
   for (const r of rows.sort((a, b) => a.start - b.start)) {
     let best = -1, gap = 5000;
     tapes.forEach((t, i) => { const d = Math.abs(t.start - r.start); if (!used.has(i) && d < gap) { gap = d; best = i; } });
     const cwd = best >= 0 ? (used.add(best), tapes[best].cwd) : "";
     const crew = cwd.match(/\/crew\/(part|fix|lamp)-(\d+)$/);
-    if (r.model === "codex") { r.name = "concept art + palette"; seenArt = true; }
+    // the art runs before the plan: a mood board, then the concept rounds
+    if (r.model === "codex") r.name = art++ === 0 ? "mood board" : `concept round ${art - 1}`;
     else if (crew) r.name = `${crew[1] === "fix" ? "fix: " : crew[1] === "lamp" ? "lamps: " : ""}${(names[+crew[2] - 1] ?? crew[0]).replace(/^room: /, "")}`;
     else if (r.model === "opus") r.name = "architect (form)";
     else if (r.model === "sonnet") r.name = "designer (plan)";
-    else if (r.effort === "medium" && !seenArt) r.name = "kit (vocab / scaffold)";
-    else r.name = rootHaikuAfterArt++ === 0 ? names[0] ?? "part 1" : "inspector";
+    else if (r.effort === "medium") r.name = "kit (vocab / scaffold)";
+    else r.name = rootHaiku++ === 0 ? names[0] ?? "part 1" : "inspector";
     r.min = (r.ms ?? 0) / 60000;
     r.rate = r.min > 0 ? (r.cost ?? 0) / r.min : 0;
   }
