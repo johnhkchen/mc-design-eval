@@ -1,0 +1,17 @@
+{
+  "style": "gable",
+  "footprint": [1, 9, 10, 15],
+  "y": 7,
+  "pitch": 45,
+  "ridgeAxis": "x",
+  "material": "exposed_cut_copper",
+  "texture": false,
+  "eave": "plain",
+  "ridge": "slab",
+  "verge": "stripped_oak_log",
+  "gable": "oak_log",
+  "overhang": { "north": 1, "south": 1, "east": 0, "west": 0 },
+  "edges": false,
+  "keep": [{ "from": [2, 6, 16], "to": [3, 20, 17] }],
+  "trusses": { "material": "stripped_oak_log" }
+}
