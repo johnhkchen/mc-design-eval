@@ -4,14 +4,14 @@
 
 | # | file | blocks |
 |---|---|---|
-| 0 | millkit2-00-dogtrot-house.nbt | 3372 |
-| 1 | millkit2-01-camelback-shotgun.nbt | 3430 |
-| 2 | millkit2-02-i-house.nbt | 3746 |
-| 3 | millkit2-03-pyramid-cottage.nbt | 3513 |
-| 4 | millkit2-04-boarding-house.nbt | 3690 |
-| 5 | millkit2-05-work-yard.nbt | 3045 |
+| 0 | millkit2-00-dogtrot-house.nbt | 3257 |
+| 1 | millkit2-01-camelback-shotgun.nbt | 3366 |
+| 2 | millkit2-02-i-house.nbt | 3777 |
+| 3 | millkit2-03-pyramid-cottage.nbt | 3428 |
+| 4 | millkit2-04-boarding-house.nbt | 3614 |
+| 5 | millkit2-05-work-yard.nbt | 3015 |
 | 6 | millkit2-06-pecan-bee-yard.nbt | 3302 |
-| 7 | millkit2-07-mill-bungalow.nbt | 3516 |
+| 7 | millkit2-07-mill-bungalow.nbt | 3451 |
 
 `millkit2-whole.nbt` is the sample row as built (96 x 33 x 20).
 
