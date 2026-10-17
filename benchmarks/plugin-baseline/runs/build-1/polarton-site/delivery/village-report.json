@@ -1,0 +1,103 @@
+{
+ "frame": [
+  93,
+  41,
+  90
+ ],
+ "placed": [
+  {
+   "module": 0,
+   "plot": 1,
+   "face": "north",
+   "turns": 0,
+   "pad": 4,
+   "blocks": 808
+  },
+  {
+   "module": 1,
+   "plot": 2,
+   "face": "west",
+   "turns": 3,
+   "pad": 16,
+   "blocks": 833
+  },
+  {
+   "module": 2,
+   "plot": 3,
+   "face": "east",
+   "turns": 1,
+   "pad": 15,
+   "blocks": 907
+  },
+  {
+   "module": 3,
+   "plot": 4,
+   "face": "south",
+   "turns": 2,
+   "pad": 5,
+   "blocks": 598
+  },
+  {
+   "module": 4,
+   "plot": 5,
+   "face": "east",
+   "turns": 1,
+   "pad": 17,
+   "blocks": 868
+  },
+  {
+   "module": 5,
+   "plot": 6,
+   "face": "north",
+   "turns": 0,
+   "pad": 4,
+   "blocks": 739
+  },
+  {
+   "module": 6,
+   "plot": 7,
+   "face": "north",
+   "turns": 0,
+   "pad": 5,
+   "blocks": 753
+  },
+  {
+   "module": 7,
+   "plot": 8,
+   "face": "west",
+   "turns": 3,
+   "pad": 14,
+   "blocks": 967
+  }
+ ],
+ "floatersRemoved": [
+  "spruce_trapdoor@70,13,52",
+  "spruce_trapdoor@70,13,53",
+  "spruce_trapdoor@70,13,54",
+  "spruce_trapdoor@70,13,55",
+  "spruce_trapdoor@70,13,56",
+  "spruce_trapdoor@70,13,51",
+  "spruce_trapdoor@70,13,50",
+  "spruce_trapdoor@70,13,49",
+  "spruce_trapdoor@70,13,48",
+  "spruce_trapdoor@70,13,47",
+  "spruce_trapdoor@70,13,46",
+  "spruce_trapdoor@57,15,79",
+  "spruce_trapdoor@57,15,80",
+  "spruce_trapdoor@57,15,81",
+  "spruce_trapdoor@57,15,82",
+  "spruce_trapdoor@57,15,83",
+  "spruce_trapdoor@57,15,84",
+  "spruce_trapdoor@57,15,85",
+  "spruce_trapdoor@57,15,86",
+  "spruce_trapdoor@57,15,87"
+ ],
+ "villageChanges": {
+  "placed": 8670,
+  "dug": 5648
+ },
+ "kitChanges": {
+  "placed": 6437,
+  "dug": 12
+ }
+}
