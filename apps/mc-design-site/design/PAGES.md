@@ -47,8 +47,8 @@ Reference: `catalog.json`, `polarton-04-church.jpg`, `polarton-07-owners-house.j
 Build /catalog from src/data/catalog.json. Header: eyebrow "The catalog", title "Buildings", one paragraph:
 "Every building here has been approved and built on a real server. Each sits on a standard plot with its door to the
 street, ready to drop into a town." Filter chips by type (all, industry, civic, house, workshop, farm), then a grid of
-catalog cards: 4 across on desktop, 2 on tablets, 1 on phones. Thumbnails are the catalog renders
-and owner's house; give the rest a sky-tinted placeholder with the building name.
+catalog cards: 4 across on desktop, 2 on tablets, 1 on phones. Thumbnails are the catalog
+renders; a building without one gets a sky-tinted placeholder with its name.
 ```
 
 ## Prompt 3 — building page
