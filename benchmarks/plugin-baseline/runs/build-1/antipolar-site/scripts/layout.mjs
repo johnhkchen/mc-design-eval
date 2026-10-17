@@ -25,7 +25,7 @@ export const STREETS = [
   { name: "east levee", level: CREST, points: [[63, 46], [63, 146]] },
   { name: "south levee", level: CREST, points: [[20, 146], [63, 146]] },
   // from the ring's north-east corner on to the village's back, a dike along the swamp's edge
-  { name: "shore street", level: CREST, points: [[63, 46], [64, 40], [68, 35], [76, 34], [96, 34]] },
+  { name: "shore street", level: CREST, points: [[63, 46], [64, 40], [68, 35], [76, 34], [102, 34]] },
   // up the draw (x 50, z 150..172) to the plateau
   { name: "bluff road", startY: CREST, min: CREST, points: [[51, 146], [51, 151], [51, 158], [51, 165], [51, 172], [51, 177]] },
   { name: "plateau road west", level: 8, points: [[51, 177], [40, 177], [28, 177], [16, 177], [6, 177]] },
@@ -42,9 +42,9 @@ export const POLDERS = [
 export const ZONES = [
   { name: "shore row", use: "houses on the meadow between Polarton's back fences, the village's backs and the levee street", rect: [21, 27, 96, 41], color: [255, 200, 120] },
   { name: "wetland", use: "kept: willows, mud flats and open water outside the levees", rect: [66, 42, 139, 147], color: [70, 160, 200], alpha: 0.1 },
-  { name: "willow island", use: "the low island in the swamp: a park, reached later by a boardwalk off the east levee", rect: [66, 72, 92, 96], color: [60, 200, 120] },
+  { name: "willow island", use: "the low island in the swamp: a park, reached later by a boardwalk off the east levee", rect: [80, 70, 96, 98], color: [60, 200, 120] },
   { name: "landing", use: "a fishing landing on the west levee's swamp side", rect: [8, 88, 16, 104], color: [120, 200, 230] },
-  { name: "pump house", use: "where the ditches meet the levee: a Create pump lifts the water over into the swamp", rect: [58, 98, 66, 106], color: [200, 120, 255] },
+  { name: "pump house", use: "where the ditches meet the levee: a Create pump lifts the water over into the swamp", rect: [56, 99, 62, 105], color: [200, 120, 255] },
   { name: "bluff grove", use: "the slope up to the plateau: pecan orchard (no earthworks)", rect: [0, 150, 44, 170], color: [170, 210, 90] },
   { name: "farmstead", use: "barn, granary and the farm family's house at the top of the bluff road", rect: [56, 160, 84, 174], color: [255, 120, 120] },
   { name: "fields west", use: "corn and cotton on the level plateau", rect: [0, 179, 46, 194], color: [240, 230, 80] },
@@ -110,10 +110,32 @@ export function computeLayout() {
   // polder 3: paddies a block deep (water y -1 on mud y -2), 1-wide bunds between them every 8
   for (let z = P3[1]; z <= P3[3]; z++) for (let x = P3[0]; x <= P3[2]; x++) { const bund = (x - P3[0]) % 8 === 0 || (z - P3[1]) % 8 === 0 || x === P3[2] || z === P3[3]; set(x, z, bund ? { t: FLOOR, surf: "grass_block", kind: "bund" } : { t: FLOOR - 1, surf: "mud", water: FLOOR, kind: "paddy" }, 3); }
 
+  // ---- the waterfront, on the swamp side of the east levee and the shore street ---------------------------------
+  // mixed-use plots (a shop on the street, rooms above, a gallery over the water) stand on their own piles over the
+  // water, their fronts on the levee street at its crest (y 2, the door level with the street). Between them 2-wide
+  // alleys go down by half steps to the boardwalk (deck y 1, one above the water), and finger piers run out from it.
+  const DECK = 1, waterfront = [], piers = [], alleys = [];
+  const deck = (x, z, kind) => { const g = H[z]?.[x] ?? -99; if (g > DECK) return; set(x, z, { t: DECK, surf: "spruce_planks", kind, deck: true, ground: g }, 4); };
+  // east levee: plots x 66..75, 10 along z, skipping the island's reach; the boardwalk x 76..78
+  const EAST = { x0: RING.east + 3, x1: RING.east + 12, bw: [RING.east + 13, RING.east + 15] };
+  for (const z0 of [52, 64, 100, 112, 124, 136]) waterfront.push({ x0: EAST.x0, z0, x1: EAST.x1, z1: z0 + 9, face: "west", front: CREST, street: "east levee" });
+  // shore street: plots z 38..47 on its south side, the boardwalk z 49..51 behind them
+  const SHORE = { z0: 38, z1: 47, bw: [49, 51] };
+  for (const x0 of [69, 81, 93]) waterfront.push({ x0, z0: SHORE.z0, x1: x0 + 9, z1: SHORE.z1, face: "north", front: CREST, street: "shore street" });
+  for (let z = SHORE.bw[0]; z <= 146; z++) for (let x = EAST.bw[0]; x <= EAST.bw[1]; x++) deck(x, z, "boardwalk");
+  for (let x = RING.east + 3; x <= 104; x++) for (let z = SHORE.bw[0]; z <= SHORE.bw[1]; z++) deck(x, z, "boardwalk");
+  // finger piers, 2 wide, 10 out
+  for (const z of [58, 70, 82, 94, 106, 118, 130, 142]) { piers.push({ x0: EAST.bw[1] + 1, z0: z, x1: EAST.bw[1] + 10, z1: z + 1 }); for (let x = EAST.bw[1] + 1; x <= EAST.bw[1] + 10; x++) for (const dz of [0, 1]) deck(x, z + dz, "pier"); }
+  for (const x of [86, 98]) { piers.push({ x0: x, z0: SHORE.bw[1] + 1, x1: x + 1, z1: SHORE.bw[1] + 10 }); for (let z = SHORE.bw[1] + 1; z <= SHORE.bw[1] + 10; z++) for (const dx of [0, 1]) deck(x + dx, z, "pier"); }
+  // alleys: crest 2 down to the deck 1 by two half steps, a landing at each end
+  const alley = (cells, along) => { const n = cells.length, prof = cells.map((_, i) => (i < 3 ? CREST : i < 5 ? CREST - 0.5 : DECK)); cells.forEach(([x, z], i) => { set(x, z, { t: prof[i], surf: "spruce_planks", kind: "alley", deck: true, ground: H[z]?.[x] ?? -99 }, 5); }); alleys.push({ cells: cells.length, prof }); };
+  for (const z of [62, 74, 110, 122, 134]) for (const dz of [0, 1]) alley(Array.from({ length: 10 }, (_, i) => [EAST.x0 + i, z + dz]));
+  for (const x of [79, 91]) for (const dx of [0, 1]) alley(Array.from({ length: 10 }, (_, i) => [x + dx, SHORE.z0 + i]));
+
   // ---- earthworks tally ----------------------------------------------------------------------------------------
   let cut = 0, fill = 0, drained = 0, belowExport = 0;
-  for (const [k, v] of T) { const [x, z] = k.split(",").map(Number), g = H[z][x], top = Math.floor(v.t) + (v.t % 1 ? 1 : 0);
+  for (const [k, v] of T) { if (v.deck) continue; const [x, z] = k.split(",").map(Number), g = H[z][x], top = Math.floor(v.t) + (v.t % 1 ? 1 : 0);
     if (g < 0) { if (v.water == null && top < 0) drained++; fill += Math.max(0, top + 1); } else if (g > top) cut += g - top; else fill += top - g;
     if (v.t < 0) belowExport += v.t <= FLOOR - 1 ? 2 : 1; }
-  return { site, T, streets, plots, ramps, ditches, polders: POLDERS, zones: ZONES, earth: { cut, fill, drainedCells: drained, cellsBelowTheExport: belowExport } };
+  return { site, T, streets, plots, waterfront, piers, alleys, ramps, ditches, polders: POLDERS, zones: ZONES, earth: { cut, fill, drainedCells: drained, cellsBelowTheExport: belowExport } };
 }
