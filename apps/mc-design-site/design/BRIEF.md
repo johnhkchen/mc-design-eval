@@ -1,7 +1,7 @@
-# mc-design — guidelines for Figma Make
+# mc-design — design brief
 
-Paste this file into the Make file's `guidelines/Guidelines.md` before the first prompt. Make reads it on every prompt, so
-the per-page prompts can stay short.
+The standing brief for every UI change on mc-design.b28.dev. Read it before touching a page; the per-page specs are in
+`PAGES.md`. (Adapted from a Figma Make guidelines file: one brief up front, then small page-sized changes.)
 
 ## What this is
 
@@ -29,7 +29,7 @@ Top navigation: Catalog, Projects, How it works, Board. A Sign in with Discord b
 
 ## Content rules
 
-- Use the real content in the attached data. Never invent buildings, clients, numbers or testimonials.
+- Use the real content in `src/data/`. Never invent buildings, clients, numbers or testimonials.
 - Builds are credited by gamer name: the client is **Antipolar**. The town is **Dragonholde**.
 - Projects: **DH-01 Polarton** (working name; built) and **DH-02 Swamp reclamation** (earthworks planned, not built).
 - Buildings are numbered like a catalog: "No. 04 · Church". The number comes from the id (`polarton-04-church` → 04).
@@ -58,11 +58,11 @@ Top navigation: Catalog, Projects, How it works, Board. A Sign in with Discord b
 
 - **3-D viewer (building page).** A large canvas area, about 4:3, sky-tinted background. Shows the render image as a
   poster until loaded. Under it: a ▶ Print button, a scrubber (0 → all blocks), and a live caption
-  "412 / 868 blocks · 10 min of cannon time". Drag rotates, scroll zooms. Build it as a placeholder that shows the
-  poster image; the real WebGL view is wired in later.
+  "412 / 868 blocks · 10 min of cannon time". Drag rotates, scroll zooms. Implemented in `Viewer3D.svelte` (deepslate).
 - **Before/after scrubber (case studies, home).** A wide canvas area, about 16:10, with a vertical divider and a round
   handle, "Before" tag top-left and "Built" (or "Planned") tag top-right. Dragging the divider reveals the after image
-  over the before image. Placeholder: two attached render images, same framing.
+  over the before image. Implemented in `Scrubber3D.svelte`: two 3-D views
+  sharing one camera, so it holds while rotating.
 - **Catalog card.** Square thumbnail, eyebrow "No. 04 · civic", the name, one spec line "12 × 14 plot · 868 blocks".
 - **Spec list.** Label/value pairs: Plot, Door, Blocks, Cannon time, Version, Built in.
 - **Board job row.** Status chip (queued / loaded / running / done / dropped), title, file name, world corner with a
@@ -70,7 +70,13 @@ Top navigation: Catalog, Projects, How it works, Board. A Sign in with Discord b
 
 ## Technical constraints
 
-- React + TypeScript, Tailwind is fine. Keep components small and named for what they show.
-- Data comes from the attached `catalog.json`; keep it in one data file so it can be swapped for an API later.
-- No real sign-in, payments, or uploads: show the UI and stub the action.
+- Astro pages, Svelte islands only where something reacts (3-D views, scrubbers, filters, the board).
+- Colours, type and spacing come from the tokens in `src/styles/site.css`. No literal colours in components.
+- Data comes from `src/data/` (catalog.json, projects.js) or the Worker API. Never hard-code numbers in markup.
+- No real sign-in, payments or uploads until they exist: show the UI and stub the action.
 - Don't add pages or features that aren't listed here.
+
+## How a change is checked
+
+One page per change. Screenshot it at 390 px and 1280 px, light and dark, before calling it done; fix what the
+screenshots show, not what the code suggests.

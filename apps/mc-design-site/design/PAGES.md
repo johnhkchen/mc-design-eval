@@ -1,26 +1,13 @@
-# Figma Make prompts for mc-design.b28.dev
+# Page specs for mc-design.b28.dev
 
-## How to run them
-
-1. Create a Make file. Paste `Guidelines.md` into its `guidelines/Guidelines.md`. Do this once: it saves repeating the
-   brief in every prompt.
-2. Run **Prompt 1**. It's front-loaded: the shell, the home page and the visual direction in one go.
-3. Run the page prompts **one at a time**, in order, and check each before the next. Small scope gives better output
-   and uses fewer credits.
-4. For fixes, select the element in the preview and prompt about just that ("make this card's spec line monospace"),
-   or attach a screenshot of the problem.
-5. At most 3 attachments per prompt. Attachments are direction, not pixel specs. Files are in `attach/`.
-6. To compare directions, duplicate the file after Prompt 1 and run one of the alternative direction lines in each.
-
-Bringing it back: Make writes React. We keep the site in Astro + Svelte, so its code is a reference, not a drop-in.
-Download the code or push it to GitHub from Make's settings, then I port the layout and styles across and wire the real
-3-D views and data.
+One section per page, in build order. Each is scoped to one change; `BRIEF.md` holds everything shared. Reference
+images are in `reference/`.
 
 ---
 
 ## Prompt 1 — shell and home
 
-Attach: `current-home.png`, `dh01-before.jpg`, `dh01-after.jpg`
+Reference: `current-home.png`, `dh01-before.jpg`, `dh01-after.jpg`
 
 ```
 Build the mc-design website described in Guidelines.md: the shared layout (top nav, footer) and the Home page. Stub
@@ -31,14 +18,14 @@ Home, top to bottom:
    "Send us your land. Get back a town you can build.", one paragraph: "Each town is designed around the hills, water
    and trees of the land you send us. You get schematics a schematicannon pastes in survival, with world coordinates
    and the materials list." Two buttons: "Browse the catalog" (primary), "See a town come together" (secondary).
-   Right: the before/after scrubber from Guidelines.md, using the two attached renders (before = the bare hill,
+   Right: the before/after scrubber from BRIEF.md, with the DH-01 models (before = the bare hill,
    after = the town). Caption: "DH-01 Polarton, for Antipolar in Dragonholde. Drag the divider."
 2. Three short points: "Fits your land", "Builds in survival", "A catalog that grows".
 3. "From the catalog": four catalog cards and a link "All 8 buildings →".
 4. "Projects": two large cards, DH-01 Polarton (Built) and DH-02 Swamp reclamation (Earthworks planned).
 5. "Coming: upload your own land": three numbered steps, Survey, Plan, Town.
 
-The attached screenshot is the current site: keep its content and order, improve the design.
+reference/current-home.png is the current site: keep its content and order, improve the design.
 
 Direction: a builder's pattern book, like the mail-order house catalogs of 1880 to 1930, the era these builds come
 from. Confident slab or grotesque headings, plain sans body text, monospace specs, copper-green accent, generous
@@ -54,19 +41,19 @@ Alternative direction lines (swap for the last paragraph, one per duplicated fil
 
 ## Prompt 2 — catalog
 
-Attach: `catalog.json`, `polarton-04-church.jpg`, `polarton-07-owners-house.jpg`
+Reference: `catalog.json`, `polarton-04-church.jpg`, `polarton-07-owners-house.jpg`
 
 ```
-Build /catalog from the attached catalog.json. Header: eyebrow "The catalog", title "Buildings", one paragraph:
+Build /catalog from src/data/catalog.json. Header: eyebrow "The catalog", title "Buildings", one paragraph:
 "Every building here has been approved and built on a real server. Each sits on a standard plot with its door to the
 street, ready to drop into a town." Filter chips by type (all, industry, civic, house, workshop, farm), then a grid of
-catalog cards: 4 across on desktop, 2 on tablets, 1 on phones. Use the attached renders as thumbnails for the church
+catalog cards: 4 across on desktop, 2 on tablets, 1 on phones. Thumbnails are the catalog renders
 and owner's house; give the rest a sky-tinted placeholder with the building name.
 ```
 
 ## Prompt 3 — building page
 
-Attach: `current-building.png`, `polarton-04-church.jpg`
+Reference: `current-building.png`, `polarton-04-church.jpg`
 
 ```
 Build /catalog/:id, shown for the Church (polarton-04-church). Desktop: the 3-D viewer from Guidelines.md on the left
@@ -75,18 +62,18 @@ Build /catalog/:id, shown for the Church (polarton-04-church). Desktop: the 3-D 
 faces the street; Blocks 868; Cannon time about 22 min at 1.5 s a block; Version Minecraft 1.21.1; Built in DH-01
 Polarton, Dragonholde), "Main materials" in two columns from catalog.json, a primary button "Download the schematic
 (.nbt)", and a note: "Paste with Create's schematicannon using Replace Solid with Solid. It carries no air, so it won't
-remove anything already there." Make the Print scrubber work on the placeholder: moving it updates the caption.
+remove anything already there." Moving the Print scrubber updates the caption.
 ```
 
 ## Prompt 4 — case study
 
-Attach: `current-project.png`, `dh01-before.jpg`, `dh01-after.jpg`
+Reference: `current-project.png`, `dh01-before.jpg`, `dh01-after.jpg`
 
 ```
 Build /projects/:id, shown for DH-01. Top: tabs DH-01 / DH-02, eyebrow "DH-01 · Built · for Antipolar in Dragonholde
 · 93 × 90 blocks", title "Polarton (working name)", lede "A bare hillside west of the village, turned into a terraced
 working town: gin, smithy and barns by the stream, school, church and houses up on the plateau." Then a full-width
-before/after scrubber with the attached renders. Then three short sections side by side: "The land", "The plan",
+before/after scrubber with the before/after models. Then three short sections side by side: "The land", "The plan",
 "The build" (write two sentences each from the lede; no invented numbers). Then "The buildings": catalog cards for
 all 8 from catalog.json. For DH-02 the after tag reads "Planned" and there are no building cards.
 ```
@@ -105,7 +92,7 @@ Make the steps feel like a process, not a feature grid.
 
 ## Prompt 6 — construction board
 
-Attach: `board.png` (screenshot of /board)
+Reference: `board.png` (screenshot of /board)
 
 ```
 Build /board as a denser, utilitarian tool in the same visual language. Header stats: Projects, Cannons busy (0/20),
@@ -127,9 +114,9 @@ No real auth.
 
 ---
 
-## Iteration prompts that work well
+## Follow-up changes that keep scope small
 
-- `Keep everything else the same. Only change <element>: <what>.`
-- `On phones (390 px wide) the <section> overflows. Stack it and keep a 16 px side margin.`
-- `Dark mode: <element> is unreadable. Fix its colours using the existing theme tokens.`
-- `Replace any invented text on this page with content from catalog.json or Guidelines.md.`
+- Keep everything else the same. Only change <element>: <what>.
+- At 390 px the <section> overflows: stack it and keep a 16 px side margin.
+- Dark mode: <element> is unreadable: fix it with the existing tokens.
+- Replace any invented text on this page with content from the data files or BRIEF.md.
