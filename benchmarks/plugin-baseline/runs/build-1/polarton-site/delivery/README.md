@@ -5,6 +5,14 @@ below is in the export's frame: x runs west to east, z north to south, and the l
 
 ## Files
 
+- `landscape.nbt`: the terraformed land alone, as a full-area schematic (93 × 35 × 90).
+  - It includes the earthworks, streets, pads, walls, fences and tracks, and the village's 3 plots as they are.
+  - It has explicit air in all 6,645 cells that were dug or cleared, so "Replace with Empty" takes the landmass away.
+  - It has no new buildings: `kit-changes.nbt`, on the same corner, adds them later.
+  - The landscape plus the kit changes equals `village.nbt` exactly.
+- `kit-changes.nbt`: the 8 buildings alone, against the landscape.
+- `village-changes.nbt`: landscape and buildings in one paste, against the original export.
+
 - `changes.nbt`: only what changed.
   - 3,256 blocks placed.
   - 6,645 explicit air cells, where earth was dug or trees were cleared.
