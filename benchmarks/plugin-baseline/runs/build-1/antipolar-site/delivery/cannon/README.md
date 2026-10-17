@@ -14,6 +14,9 @@ every block is set.
 - **Where:** put it back where you took `antipolar_expansion_002_raw.nbt` from. Use the same corner and the same bottom,
   so the hologram's outline sits on the area you selected for the export. Corner (+0, +0, +0), no rotation.
 - **Mode:** *Don't Replace Solid*. It holds no air and only places into air and water.
+- **Line it up on the road:** the file carries the end of Polarton's terrace road as it stands now: gravel, path,
+  coarse dirt, and the pasture's spruce fence and gate (x 8–26, z 12–28, where the road runs out toward the swamp). Move
+  the hologram until its road lies exactly on the real one. Those blocks are already there, so the paste leaves them alone.
 - **Check:** a pink wool post, 3 high, stands at each of the export's 4 corners. If the posts land on the corners of the
   land you exported, it's aligned. Take the posts away afterwards.
 - **Finding the corner:** the export's corner is Polarton's export corner + (18, 3, 64). That's x + 18, y + 3, z + 64 from

@@ -166,7 +166,11 @@ for (const b of boxes) {
 // from the export's bottom (y 0) up past the decks, so it goes on exactly where the export was taken: the same corner,
 // the hologram's outline on the export's outline. Pink wool corner posts at the export's four corners confirm it.
 const posts = new Map(); for (const [x, z] of [[0, 0], [X - 1, 0], [0, Z - 1], [X - 1, Z - 1]]) { const y = surfaceY(before, x, z) + 1; for (const dy of [0, 1, 2]) posts.set(KC(x, y + dy, z), "pink_wool"); }
-const staged = [...[...towerCells].map(([k, v]) => [k, v]), ...[...markers, ...posts].map(([k, b]) => [k, [b]])];
+// the end of Polarton's terrace road (x 8..26, z 12..28) as it stands: its hologram lies on the real road when aligned
+// (those cells are solid already, so the paste leaves them as they are)
+const roadChunk = new Map();
+for (let z = 12; z <= 28; z++) for (let x = 8; x <= 26; x++) for (let y = 0; y < 18; y++) { const c = before.get(x, y + YS, z); if (c && /gravel|dirt_path|coarse_dirt|mud_brick_slab|spruce_fence|lantern/.test(c.block)) roadChunk.set(KC(x, y, z), [strip(c.block), c.state]); }
+const staged = [...[...towerCells].map(([k, v]) => [k, v]), ...[...markers, ...posts].map(([k, b]) => [k, [b]]), ...roadChunk];
 const stLo = [0, 0, 0], stHi = [X - 1, Math.max(...staged.map(([k]) => +k.split(",")[1])), Z - 1];
 const st = new Grid([stHi[0] - stLo[0] + 1, stHi[1] - stLo[1] + 1, stHi[2] - stLo[2] + 1], { dataVersion: orig.dataVersion });
 for (const [k, [b, s]] of staged) { const [x, y, z] = k.split(",").map(Number); st.set(x - stLo[0], y - stLo[1], z - stLo[2], b, s); }
