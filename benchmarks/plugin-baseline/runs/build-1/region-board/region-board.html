@@ -1,0 +1,297 @@
+<title>Polarton Region Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Land office plat board: a surveyed map on the left, the work queue on the right, the cannon yard and the project ledgers below. */
+:root {
+  --paper: #f3f1ea; --sheet: #fbfaf6; --ink: #1d2a36; --muted: #5d6874; --rule: #cfd2cc;
+  --survey: #2f5d7c; --survey-soft: #d9e4ea; --water: #c9dbe0; --parcel: #e6e1d2;
+  --queued: #8a939b; --loaded: #b7791f; --running: #2b6cb0; --done: #2f7d4f; --blocked: #a0453a;
+  --ap: #2f5d7c; --pol: #7a5c2e;
+  --display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --body: "Public Sans", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #141a20; --sheet: #1b232b; --ink: #e3e7ea; --muted: #9aa5ae; --rule: #2f3a44;
+  --survey: #7fb0d0; --survey-soft: #22323f; --water: #1d3440; --parcel: #2a2f2b;
+  --queued: #7d8790; --loaded: #e0a64a; --running: #6ea8e6; --done: #5fb985; --blocked: #e07a6b;
+  --ap: #7fb0d0; --pol: #d2aa6a; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #141a20; --sheet: #1b232b; --ink: #e3e7ea; --muted: #9aa5ae; --rule: #2f3a44;
+  --survey: #7fb0d0; --survey-soft: #22323f; --water: #1d3440; --parcel: #2a2f2b;
+  --queued: #7d8790; --loaded: #e0a64a; --running: #6ea8e6; --done: #5fb985; --blocked: #e07a6b;
+  --ap: #7fb0d0; --pol: #d2aa6a; color-scheme: dark }
+body { background: var(--paper); color: var(--ink); font: 15px/1.5 var(--body); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 48px; display: grid; gap: 22px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: .02em; margin: 0; text-wrap: balance; }
+h1 { font-size: 2rem; text-transform: uppercase; }
+h2 { font-size: 1.25rem; text-transform: uppercase; letter-spacing: .06em; }
+h3 { font-size: 1.1rem; }
+.eyebrow { font: 600 .72rem/1 var(--body); text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+header { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: end; justify-content: space-between; border-bottom: 2px solid var(--ink); padding-bottom: 12px; }
+.stats { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.stat { display: grid; gap: 2px; }
+.stat b { font: 600 1.35rem/1 var(--display); font-variant-numeric: tabular-nums; }
+.top { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 22px; }
+@media (max-width: 860px) { .top { grid-template-columns: minmax(0, 1fr); } }
+.panel { background: var(--sheet); border: 1px solid var(--rule); padding: 14px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.panel > header { border: 0; padding: 0; }
+#map svg { width: 100%; height: auto; display: block; max-height: 640px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .8rem; color: var(--muted); }
+.sw { display: inline-block; width: 10px; height: 10px; margin-right: 5px; vertical-align: -1px; }
+.queue { display: grid; gap: 8px; }
+.job { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 4px 10px; align-items: center; padding: 8px 0; border-top: 1px solid var(--rule); }
+.job:first-child { border-top: 0; }
+.job .t { font-weight: 600; }
+.job .sub { grid-column: 2 / 4; font-size: .82rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.chip { font: 600 .72rem/1 var(--body); text-transform: uppercase; letter-spacing: .08em; padding: 6px 8px; border: 1.5px solid currentColor; background: transparent; color: var(--queued); cursor: pointer; min-width: 74px; text-align: center; }
+.chip[data-s="loaded"] { color: var(--loaded); } .chip[data-s="running"] { color: var(--running); } .chip[data-s="done"] { color: var(--done); background: color-mix(in srgb, var(--done) 12%, transparent); }
+.chip:disabled { cursor: not-allowed; color: var(--blocked); border-style: dashed; }
+.chip:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--survey); outline-offset: 2px; }
+.box { width: 20px; height: 20px; accent-color: var(--done); }
+.copy { font: 500 .78rem var(--mono); background: var(--survey-soft); color: var(--ink); border: 0; padding: 3px 6px; cursor: pointer; }
+.back { background: none; border: 0; color: var(--muted); cursor: pointer; font-size: .9rem; padding: 2px 4px; }
+details.mat summary { cursor: pointer; color: var(--survey); }
+details.mat ul { margin: 6px 0 0; padding-left: 18px; columns: 2; font-size: .8rem; }
+.yard { overflow-x: auto; }
+.yard svg { display: block; min-width: 620px; width: 100%; height: auto; }
+.pool { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 4px; }
+@media (max-width: 520px) { .pool { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+.slot { border: 1px solid var(--rule); padding: 5px 4px; font: 500 .72rem/1.2 var(--mono); min-height: 40px; overflow: hidden; }
+.slot b { display: block; font-family: var(--display); font-size: .9rem; }
+.slot.busy { border-color: var(--running); background: color-mix(in srgb, var(--running) 10%, transparent); }
+.slot.ld { border-color: var(--loaded); background: color-mix(in srgb, var(--loaded) 10%, transparent); }
+.projects { display: grid; gap: 22px; }
+.stages { display: flex; flex-wrap: wrap; gap: 0; }
+.stg { font: 600 .74rem/1 var(--body); text-transform: uppercase; letter-spacing: .08em; padding: 6px 10px; border: 1px solid var(--rule); margin-right: -1px; color: var(--muted); }
+.stg.on { background: var(--ink); color: var(--sheet); border-color: var(--ink); }
+.stg.past { color: var(--done); }
+.group { display: grid; gap: 0; }
+.group h3 { padding-top: 10px; color: var(--survey); text-transform: uppercase; letter-spacing: .06em; font-size: .95rem; }
+.note { border-left: 3px solid var(--loaded); padding: 4px 10px; font-size: .88rem; }
+.empty { padding: 28px 14px; text-align: center; color: var(--muted); }
+.settings { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; font-size: .85rem; }
+.settings input { width: 64px; font: 500 .9rem var(--mono); padding: 3px 6px; background: var(--paper); color: var(--ink); border: 1px solid var(--rule); }
+@media (prefers-reduced-motion: no-preference) { .chip, .slot { transition: color .15s, background .15s, border-color .15s; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div><div class="eyebrow">Land office · world coordinates</div><h1>Polarton Region Board</h1></div>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <div class="top">
+    <section class="panel" id="map" aria-label="Region map">
+      <header><h2>Plat</h2><div class="legend"><span><i class="sw" style="background:var(--queued)"></i>queued</span><span><i class="sw" style="background:var(--loaded)"></i>loaded</span><span><i class="sw" style="background:var(--running)"></i>running</span><span><i class="sw" style="background:var(--done)"></i>done</span></div></header>
+      <div id="mapBody" class="empty">Loading the region…</div>
+    </section>
+    <section class="panel" aria-label="Next up">
+      <header><h2>Next up</h2><span class="eyebrow">ready to load</span></header>
+      <div class="queue" id="next"><div class="empty">The ready jobs appear here once the board loads.</div></div>
+    </section>
+  </div>
+
+  <section class="panel" aria-label="Cannon yard">
+    <header><h2>Cannon yard</h2><div class="settings" id="settings"></div></header>
+    <div class="pool" id="pool"></div>
+    <div class="yard" id="yard"></div>
+  </section>
+
+  <section class="projects" id="projects"></section>
+</div>
+
+<script>
+const STAGES = ["capture", "plan", "earthworks", "buildings", "done"];
+const NEXT = { queued: "loaded", loaded: "running", running: "done" };
+const PREV = { loaded: "queued", running: "loaded", done: "running" };
+const state = { projects: [], tasks: [], pool: { cannons: 20, secPerBlock: 1.5, setupMin: 5 }, ready: false, db: null, canWrite: true };
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const fmtH = (h) => h < 1 ? Math.round(h * 60) + " min" : h.toFixed(1) + " h";
+const hoursOf = (t) => (t.work || 0) * state.pool.secPerBlock / 3600;
+const byId = () => Object.fromEntries(state.tasks.map((t) => [t.id, t]));
+const blockers = (t, ix) => (t.deps || []).filter((d) => ix[d] && ix[d].status !== "done");
+const projColor = (p) => p === "polarton" ? "var(--pol)" : "var(--ap)";
+
+function schedule() {
+  const ix = byId(), C = state.pool.cannons, setupH = state.pool.setupMin / 60;
+  const free = Array.from({ length: C }, () => 0), bars = [], finish = {};
+  const active = state.tasks.filter((t) => t.kind === "cannon" && (t.status === "loaded" || t.status === "running"));
+  for (const t of active) { const c = Number.isInteger(t.cannon) && t.cannon < C ? t.cannon : free.indexOf(Math.min(...free));
+    const s = free[c], e = s + hoursOf(t); free[c] = e; finish[t.id] = e; bars.push({ t, c, s, e }); }
+  for (const t of state.tasks) if (t.kind === "cannon" && t.status === "done") finish[t.id] = 0;
+  let clock = 0;
+  const queued = state.tasks.filter((t) => t.kind === "cannon" && t.status === "queued").sort((a, b) => (a.project > b.project) - (a.project < b.project) || a.seq - b.seq);
+  let left = queued.slice(), guard = 0;
+  while (left.length && guard++ < 500) {
+    const t = left.find((q) => (q.deps || []).every((d) => d in finish || !ix[d]));
+    if (!t) break; left = left.filter((q) => q !== t);
+    const depEnd = Math.max(0, ...(t.deps || []).map((d) => finish[d] || 0));
+    let c = 0; for (let i = 1; i < C; i++) if (free[i] < free[c]) c = i;
+    clock += setupH; const s = Math.max(free[c], depEnd, clock), e = s + hoursOf(t);
+    free[c] = e; finish[t.id] = e; bars.push({ t, c, s, e, planned: true });
+  }
+  return { bars, end: Math.max(0, ...bars.map((b) => b.e)) };
+}
+
+function renderStats(sch) {
+  const cannon = state.tasks.filter((t) => t.kind === "cannon"), open = cannon.filter((t) => t.status !== "done");
+  const busy = cannon.filter((t) => t.status === "loaded" || t.status === "running").length;
+  const work = open.reduce((a, t) => a + (t.work || 0), 0);
+  $("stats").innerHTML = [
+    ["Projects", state.projects.length], ["Cannons busy", `${busy}/${state.pool.cannons}`],
+    ["Blocks left", work.toLocaleString()], ["Cannon-hours left", fmtH(work * state.pool.secPerBlock / 3600)], ["Est. finish", sch.bars.length ? fmtH(sch.end) : "—"]
+  ].map(([k, v]) => `<div class="stat"><span class="eyebrow">${k}</span><b>${v}</b></div>`).join("");
+}
+
+function renderMap() {
+  if (!state.projects.length) { $("mapBody").className = "empty"; $("mapBody").textContent = "No parcels yet. Claude adds each development here as it is planned."; return; }
+  const bb = state.projects.map((p) => p.bbox).filter(Boolean);
+  const x0 = Math.min(...bb.map((b) => b[0])) - 12, z0 = Math.min(...bb.map((b) => b[1])) - 12, x1 = Math.max(...bb.map((b) => b[2])) + 12, z1 = Math.max(...bb.map((b) => b[3])) + 12;
+  const W = x1 - x0, H = z1 - z0;
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Parcels and cannon job footprints in world coordinates"><defs><pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="var(--rule)" stroke-width="2"/></pattern></defs>`;
+  s += `<rect x="0" y="0" width="${W}" height="${H}" fill="var(--sheet)"/>`;
+  for (let gx = Math.ceil(x0 / 16) * 16; gx < x1; gx += 16) s += `<line x1="${gx - x0}" y1="0" x2="${gx - x0}" y2="${H}" stroke="var(--rule)" stroke-width="${gx % 64 ? .2 : .5}"/>`;
+  for (let gz = Math.ceil(z0 / 16) * 16; gz < z1; gz += 16) s += `<line x1="0" y1="${gz - z0}" x2="${W}" y2="${gz - z0}" stroke="var(--rule)" stroke-width="${gz % 64 ? .2 : .5}"/>`;
+  const col = { queued: "var(--queued)", loaded: "var(--loaded)", running: "var(--running)", done: "var(--done)" };
+  for (const p of state.projects) { const [a, b, c, d] = p.bbox;
+    s += `<a href="#p-${esc(p.id)}"><rect x="${a - x0}" y="${b - z0}" width="${c - a + 1}" height="${d - b + 1}" fill="${p.stage === "done" ? "url(#hatch)" : "var(--parcel)"}" fill-opacity="${p.stage === "done" ? 1 : .55}" stroke="${projColor(p.id)}" stroke-width="1.2"/></a>`; }
+  const jobs = state.tasks.filter((t) => t.kind === "cannon" && t.foot && t.file !== "0-staging.nbt").sort((a, b) => (b.foot[2] - b.foot[0]) * (b.foot[3] - b.foot[1]) - (a.foot[2] - a.foot[0]) * (a.foot[3] - a.foot[1]));
+  for (const t of jobs) { const [a, b, c, d] = t.foot;
+    s += `<rect x="${a - x0 + .6}" y="${b - z0 + .6}" width="${c - a - .2}" height="${d - b - .2}" fill="${col[t.status]}" fill-opacity="${t.status === "queued" ? .1 : .28}" stroke="${col[t.status]}" stroke-width=".6" stroke-dasharray="${t.kind === "cannon" && /dig/.test(t.file) ? "2 1.5" : ""}"><title>${esc(t.file)} · ${t.status}</title></rect>`; }
+  for (const p of state.projects) { const [a, b] = p.bbox;
+    s += `<text x="${a - x0 + 3}" y="${b - z0 + 9}" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="9" fill="${projColor(p.id)}" letter-spacing=".6">${esc(p.name.toUpperCase())}</text>`; }
+  const lx = Math.ceil(x0 / 64) * 64, lz = Math.ceil(z0 / 64) * 64;
+  s += `<text x="${lx - x0 + 1.5}" y="${H - 3}" font-family="JetBrains Mono, monospace" font-size="4.2" fill="var(--muted)">x ${lx}</text><text x="2" y="${lz - z0 - 1.5}" font-family="JetBrains Mono, monospace" font-size="4.2" fill="var(--muted)">z ${lz}</text>`;
+  s += `<g transform="translate(${W - 10},14)"><path d="M0,-8 L3,2 L0,0 L-3,2 Z" fill="var(--ink)"/><text y="-10" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-size="6" font-weight="700" fill="var(--ink)">N</text></g></svg>`;
+  $("mapBody").className = ""; $("mapBody").innerHTML = s;
+}
+
+function jobRow(t, ix, opts = {}) {
+  const bl = blockers(t, ix);
+  const blocked = t.status === "queued" && bl.length > 0;
+  if (t.kind !== "cannon") {
+    return `<div class="job"><input class="box" type="checkbox" id="cb-${esc(t.id)}" data-todo="${esc(t.id)}" ${t.status === "done" ? "checked" : ""} ${state.canWrite ? "" : "disabled"}><label for="cb-${esc(t.id)}" class="t">${esc(t.title)}</label><span></span></div>`;
+  }
+  const corner = (t.corner || []).join(" ");
+  const mats = Object.entries(t.materials || {}).sort((a, b) => b[1] - a[1]);
+  const label = blocked ? "waiting" : t.status;
+  return `<div class="job">
+    <button class="chip" data-s="${t.status}" data-job="${esc(t.id)}" ${blocked || t.status === "done" || !state.canWrite ? "disabled" : ""} title="${blocked ? "Waits on " + esc(bl.map((d) => ix[d].file).join(", ")) : t.status === "done" ? "Done" : "Mark " + NEXT[t.status]}">${label}</button>
+    <span class="t">${opts.project ? `<span class="eyebrow" style="color:${projColor(t.project)}">${esc(t.project)}</span> ` : ""}${esc(t.title)} <span class="muted mono" style="font-weight:400;font-size:.8rem">${esc(t.file)}</span></span>
+    <span>${t.status !== "queued" && state.canWrite ? `<button class="back" data-back="${esc(t.id)}" aria-label="Step ${esc(t.file)} back to ${PREV[t.status]}" title="Back to ${PREV[t.status]}">↶</button>` : ""}</span>
+    <div class="sub">
+      <span>corner <button class="copy" data-copy="${esc(corner)}" title="Copy for the schematic tool">${esc(corner)}</button></span>
+      <span>${(t.work || 0).toLocaleString()} blocks · ${fmtH(hoursOf(t))}</span>
+      ${Number.isInteger(t.cannon) && t.status !== "done" && t.status !== "queued" ? `<span>cannon #${t.cannon + 1}</span>` : ""}
+      <span>${esc(t.mode || "")}</span>
+      ${blocked ? `<span style="color:var(--blocked)">waits on ${bl.length} job${bl.length > 1 ? "s" : ""}</span>` : ""}
+      ${mats.length ? `<details class="mat"><summary>${mats.length} block kinds</summary><ul>${mats.map(([b, n]) => `<li><span class="mono">${n.toLocaleString()}</span> ${esc(b.replace(/_/g, " "))}</li>`).join("")}</ul></details>` : ""}
+    </div></div>`;
+}
+
+function renderNext() {
+  const ix = byId();
+  const ready = state.tasks.filter((t) => t.kind === "cannon" && t.status === "queued" && !blockers(t, ix).length).sort((a, b) => a.seq - b.seq);
+  const live = state.tasks.filter((t) => t.kind === "cannon" && (t.status === "loaded" || t.status === "running"));
+  const free = state.pool.cannons - live.length;
+  if (!ready.length && !live.length) { $("next").innerHTML = `<div class="empty">Nothing ready to load. Jobs waiting on others unlock as those finish.</div>`; return; }
+  $("next").innerHTML = `<div class="muted" style="font-size:.85rem">${free} cannon${free === 1 ? "" : "s"} free · ${ready.length} job${ready.length === 1 ? "" : "s"} ready</div>` + live.concat(ready.slice(0, Math.max(0, free) + 2)).map((t) => jobRow(t, ix, { project: true })).join("");
+}
+
+function renderYard(sch) {
+  const live = Object.fromEntries(state.tasks.filter((t) => t.kind === "cannon" && (t.status === "loaded" || t.status === "running") && Number.isInteger(t.cannon)).map((t) => [t.cannon, t]));
+  $("pool").innerHTML = Array.from({ length: state.pool.cannons }, (_, i) => { const t = live[i];
+    return `<div class="slot ${t ? (t.status === "running" ? "busy" : "ld") : ""}"><b>#${i + 1}</b>${t ? esc(t.file.replace(".nbt", "")) : '<span class="muted">idle</span>'}</div>`; }).join("");
+  const lanes = [...new Set(sch.bars.map((b) => b.c))].sort((a, b) => a - b);
+  if (!lanes.length) { $("yard").innerHTML = `<div class="empty">No cannon work left to schedule.</div>`; return; }
+  const LW = 46, RH = 18, W = 900, T = Math.max(sch.end, .5), sx = (h) => LW + (h / T) * (W - LW - 10), H = lanes.length * RH + 26;
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Estimated schedule per cannon">`;
+  const step = T > 8 ? 2 : T > 3 ? 1 : .5;
+  for (let h = 0; h <= T + 1e-9; h += step) s += `<line x1="${sx(h)}" y1="0" x2="${sx(h)}" y2="${H - 16}" stroke="var(--rule)" stroke-width="1"/><text x="${sx(h)}" y="${H - 4}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--muted)">${h}h</text>`;
+  lanes.forEach((c, i) => { s += `<text x="0" y="${i * RH + 13}" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--muted)">#${c + 1}</text>`; });
+  for (const b of sch.bars) { const i = lanes.indexOf(b.c), w = Math.max(2, sx(b.e) - sx(b.s));
+    const fill = b.planned ? projColor(b.t.project) : b.t.status === "running" ? "var(--running)" : "var(--loaded)";
+    s += `<rect x="${sx(b.s)}" y="${i * RH + 3}" width="${w}" height="${RH - 6}" fill="${fill}" fill-opacity="${b.planned ? .45 : .9}"><title>${esc(b.t.file)} · ${fmtH(b.e - b.s)} · starts ~${fmtH(b.s)}</title></rect>`;
+    if (w > 70) s += `<text x="${sx(b.s) + 4}" y="${i * RH + 13}" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink)">${esc(b.t.file.replace(".nbt", ""))}</text>`; }
+  s += `</svg>`;
+  $("yard").innerHTML = s + `<div class="muted" style="font-size:.8rem;margin-top:6px">Estimate: ${state.pool.secPerBlock} s per block, ${state.pool.setupMin} min to set up each cannon, one setup at a time. Solid bars are loaded or running; pale bars are queued work placed on the next free cannon once its prerequisites finish.</div>`;
+}
+
+function renderSettings() {
+  const p = state.pool;
+  $("settings").innerHTML = `<label>Cannons <input id="set-cannons" type="number" min="1" max="64" value="${p.cannons}" ${state.canWrite ? "" : "disabled"}></label>
+    <label>s / block <input id="set-spb" type="number" min="0.1" max="10" step="0.1" value="${p.secPerBlock}" ${state.canWrite ? "" : "disabled"}></label>
+    <label>setup min <input id="set-setup" type="number" min="0" max="60" step="1" value="${p.setupMin}" ${state.canWrite ? "" : "disabled"}></label>
+    <span class="muted">fed by ${esc(p.feed || "hand")}</span>`;
+}
+
+function renderProjects() {
+  const ix = byId();
+  if (!state.projects.length) { $("projects").innerHTML = ""; return; }
+  $("projects").innerHTML = state.projects.slice().sort((a, b) => a.order - b.order).map((p) => {
+    const si = STAGES.indexOf(p.stage), tasks = state.tasks.filter((t) => t.project === p.id);
+    const done = tasks.filter((t) => t.status === "done").length;
+    const groups = STAGES.slice(0, 4).map((st) => { const ts = tasks.filter((t) => t.stage === st).sort((a, b) => a.seq - b.seq);
+      if (!ts.length) return ""; const d = ts.filter((t) => t.status === "done").length;
+      return `<div class="group"><h3>${st} <span class="muted mono" style="font-size:.8rem">${d}/${ts.length}</span></h3>${ts.map((t) => jobRow(t, ix)).join("")}</div>`; }).join("");
+    return `<section class="panel" id="p-${esc(p.id)}">
+      <header style="display:flex;flex-wrap:wrap;gap:8px 20px;align-items:end;justify-content:space-between">
+        <div><div class="eyebrow">parcel · corner ${esc((p.exportCorner || []).join(" "))}</div><h2 style="color:${projColor(p.id)}">${esc(p.name)}</h2></div>
+        <div class="stages">${STAGES.map((s, i) => `<span class="stg ${i === si ? "on" : i < si ? "past" : ""}">${s}</span>`).join("")}</div>
+      </header>
+      <div>${esc(p.summary || "")} <span class="muted">${done}/${tasks.length} tasks done.</span></div>
+      ${p.note ? `<div class="note">${esc(p.note)}</div>` : ""}
+      ${groups}
+    </section>`; }).join("");
+}
+
+function render() {
+  if (!state.ready) return;
+  const sch = schedule();
+  renderStats(sch); renderMap(); renderNext(); renderSettings(); renderYard(sch); renderProjects();
+}
+
+async function setStatus(id, to) {
+  const t = state.tasks.find((x) => x.id === id); if (!t || !state.db) return;
+  const patch = { status: to, updatedAt: new Date().toISOString() };
+  if (to === "loaded" && !Number.isInteger(t.cannon)) {
+    const used = new Set(state.tasks.filter((x) => x.kind === "cannon" && (x.status === "loaded" || x.status === "running") && Number.isInteger(x.cannon)).map((x) => x.cannon));
+    let c = 0; while (used.has(c)) c++; patch.cannon = c < state.pool.cannons ? c : null;
+  }
+  if (to === "queued") patch.cannon = null;
+  try { await state.db.collection("tasks").doc(id).update(patch); }
+  catch (e) { if (e && e.code === "invalid_argument") { state.canWrite = false; render(); } }
+}
+
+document.addEventListener("click", async (ev) => {
+  const el = ev.target.closest("button"); if (!el) return;
+  if (el.dataset.copy) { const v = el.dataset.copy; try { await navigator.clipboard.writeText(v); el.textContent = "copied"; setTimeout(() => (el.textContent = v), 900); } catch { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } return; }
+  if (el.dataset.job) { const t = state.tasks.find((x) => x.id === el.dataset.job); if (t && NEXT[t.status]) { el.disabled = true; await setStatus(t.id, NEXT[t.status]); } return; }
+  if (el.dataset.back) { const t = state.tasks.find((x) => x.id === el.dataset.back); if (t && PREV[t.status]) await setStatus(t.id, PREV[t.status]); }
+});
+document.addEventListener("change", async (ev) => {
+  const el = ev.target;
+  if (el.dataset.todo) { await setStatus(el.dataset.todo, el.checked ? "done" : "queued"); return; }
+  const map = { "set-cannons": "cannons", "set-spb": "secPerBlock", "set-setup": "setupMin" };
+  if (map[el.id] && state.db) { const v = Number(el.value); if (!Number.isFinite(v) || v <= 0 && el.id !== "set-setup") return;
+    try { await state.db.collection("config").doc("pool").update({ [map[el.id]]: el.id === "set-cannons" ? Math.round(v) : v }); } catch (e) { if (e && e.code === "invalid_argument") { state.canWrite = false; render(); } } }
+});
+
+(async () => {
+  const db = await window.claude?.use?.("db");
+  if (!db) { $("mapBody").textContent = "The board's data loads when this page is opened in claude.ai while signed in."; $("next").innerHTML = `<div class="empty">Open the board in claude.ai to see the queue.</div>`; return; }
+  state.db = db;
+  const user = await window.claude.use("user");
+  if (user && typeof user.can === "function") { const w = await user.can("data.write"); if (w === false) state.canWrite = false; }
+  let got = 0; const mark = () => { if (++got >= 3) { state.ready = true; } render(); };
+  const seen = { p: false, t: false, c: false };
+  db.collection("projects").onSnapshot((s) => { state.projects = s.docs.map((d) => ({ id: d.id, ...d.data() })); if (!seen.p) { seen.p = true; mark(); } else render(); });
+  db.collection("tasks").onSnapshot((s) => { state.tasks = s.docs.map((d) => ({ id: d.id, ...d.data() })); if (!seen.t) { seen.t = true; mark(); } else render(); });
+  db.collection("config").onSnapshot((s) => { const d = s.docs.find((x) => x.id === "pool"); if (d) state.pool = { ...state.pool, ...d.data() }; if (!seen.c) { seen.c = true; mark(); } else render(); });
+})();
+</script>
