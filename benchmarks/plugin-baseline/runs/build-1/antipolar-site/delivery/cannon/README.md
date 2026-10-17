@@ -12,7 +12,7 @@ every block is set.
 
 **0. Staging.** `0-staging.nbt` has your export's footprint (140 × 195) and starts at its bottom; it is 23 tall, to reach the decks.
 - **Where:** put it back where you took `antipolar_expansion_002_raw.nbt` from. Use the same corner and the same bottom,
-  so the hologram's outline sits on the area you selected for the export. Corner (+0, +0, +0), no rotation.
+  so the hologram's outline sits on the area you selected for the export. World corner **−1965 62 −168** (the export's corner, +0, +0, +0), no rotation.
 - **Mode:** *Don't Replace Solid*. It holds no air and only places into air and water.
 - **Line it up on the road:** the file carries the end of Polarton's terrace road as it stands now: gravel, path,
   coarse dirt, and the pasture's spruce fence and gate (x 8–26, z 12–28, where the road runs out toward the swamp). Move
@@ -43,38 +43,49 @@ Digging solid fill inside a closed ring lets no water in.
 
 **3. Afterwards:** break the bottom block of each tower (scaffolding all falls), take away the magenta wool.
 
+## World coordinates
+
+The end of the terrace road where it runs out toward the swamp is the anchor: its south-east cell (the coarse-dirt
+corner, export cell (20, 5, 28)) is world block **(−1945, 67, −140)**. You stood on it at (−1944.5, 68, −139.5).
+- **The export's corner:** that puts it at **(−1965, 62, −168)**.
+- **The water's surface:** it lands at y 62, the world's sea level. That confirms the height.
+- **What to type:** each file's **world corner** (below) is what goes into the schematic's coordinates. That's its lowest
+  north-west corner, no rotation, no mirror.
+- **If it's off by a block:** if the staging hologram's road sits a block off the real road, I took the wrong end cell.
+  Tell me which way and I'll shift every number.
+
 ## Files
 
-| File | Section | Kind | Corner (x, y, z) | Size | KB | Mode |
-|---|---|---|---|---|---|---|
-| 0-staging.nbt | all | staging | +0, +0, +0 | 140 × 23 × 195 | 2 KB | Don't Replace Solid (placement only: it holds no air) |
-| 1-A-fill.nbt | A shore west | fill | +7, +0, +26 | 70 × 15 × 27 | 62 KB | Replace Solid with Empty |
-| 1-A-fill-below.nbt | A shore west | fill below | +8, -4, +38 | 69 × 4 × 15 | 9 KB | Replace Solid with Empty |
-| 2-A-dig.nbt | A shore west | dig | +8, -4, +38 | 69 × 5 × 15 | 12 KB | Replace Solid with Empty |
-| 1-B-fill.nbt | B shore east | fill | +77, +0, +28 | 50 × 14 × 25 | 38 KB | Replace Solid with Empty |
-| 1-C-fill.nbt | C polder north | fill | +2, +0, +53 | 75 × 14 × 47 | 107 KB | Replace Solid with Empty |
-| 1-C-fill-below.nbt | C polder north | fill below | +8, -4, +53 | 69 × 4 × 47 | 30 KB | Replace Solid with Empty |
-| 2-C-dig.nbt | C polder north | dig | +8, -4, +53 | 69 × 5 × 47 | 38 KB | Replace Solid with Empty |
-| 1-D-fill.nbt | D waterfront north | fill | +77, +0, +53 | 36 × 13 × 47 | 51 KB | Replace Solid with Empty |
-| 1-E-fill.nbt | E polder south | fill | +1, +0, +100 | 76 × 14 × 55 | 126 KB | Replace Solid with Empty |
-| 1-E-fill-below.nbt | E polder south | fill below | +8, -4, +100 | 69 × 4 × 55 | 35 KB | Replace Solid with Empty |
-| 2-E-dig.nbt | E polder south | dig | +8, -4, +100 | 69 × 5 × 55 | 44 KB | Replace Solid with Empty |
-| 1-F-fill.nbt | F waterfront south | fill | +77, +0, +100 | 48 × 14 × 55 | 84 KB | Replace Solid with Empty |
-| 1-G-fill.nbt | G bluff and plateau | fill | +0, +0, +155 | 77 × 10 × 25 | 44 KB | Replace Solid with Empty |
-| 1-H-fill.nbt | H pasture | fill | +77, +0, +155 | 45 × 12 × 25 | 32 KB | Replace Solid with Empty |
+| File | Section | Kind | World corner (x, y, z) | Corner from the export's | Size | KB | Mode |
+|---|---|---|---|---|---|---|---|
+| 0-staging.nbt | all | staging | **-1965 62 -168** | +0, +0, +0 | 140 × 23 × 195 | 2 KB | Don't Replace Solid (placement only: it holds no air) |
+| 1-A-fill.nbt | A shore west | fill | **-1958 62 -142** | +7, +0, +26 | 70 × 15 × 27 | 62 KB | Replace Solid with Empty |
+| 1-A-fill-below.nbt | A shore west | fill below | **-1957 58 -130** | +8, -4, +38 | 69 × 4 × 15 | 9 KB | Replace Solid with Empty |
+| 2-A-dig.nbt | A shore west | dig | **-1957 58 -130** | +8, -4, +38 | 69 × 5 × 15 | 12 KB | Replace Solid with Empty |
+| 1-B-fill.nbt | B shore east | fill | **-1888 62 -140** | +77, +0, +28 | 50 × 14 × 25 | 38 KB | Replace Solid with Empty |
+| 1-C-fill.nbt | C polder north | fill | **-1963 62 -115** | +2, +0, +53 | 75 × 14 × 47 | 107 KB | Replace Solid with Empty |
+| 1-C-fill-below.nbt | C polder north | fill below | **-1957 58 -115** | +8, -4, +53 | 69 × 4 × 47 | 30 KB | Replace Solid with Empty |
+| 2-C-dig.nbt | C polder north | dig | **-1957 58 -115** | +8, -4, +53 | 69 × 5 × 47 | 38 KB | Replace Solid with Empty |
+| 1-D-fill.nbt | D waterfront north | fill | **-1888 62 -115** | +77, +0, +53 | 36 × 13 × 47 | 51 KB | Replace Solid with Empty |
+| 1-E-fill.nbt | E polder south | fill | **-1964 62 -68** | +1, +0, +100 | 76 × 14 × 55 | 126 KB | Replace Solid with Empty |
+| 1-E-fill-below.nbt | E polder south | fill below | **-1957 58 -68** | +8, -4, +100 | 69 × 4 × 55 | 35 KB | Replace Solid with Empty |
+| 2-E-dig.nbt | E polder south | dig | **-1957 58 -68** | +8, -4, +100 | 69 × 5 × 55 | 44 KB | Replace Solid with Empty |
+| 1-F-fill.nbt | F waterfront south | fill | **-1888 62 -68** | +77, +0, +100 | 48 × 14 × 55 | 84 KB | Replace Solid with Empty |
+| 1-G-fill.nbt | G bluff and plateau | fill | **-1965 62 -13** | +0, +0, +155 | 77 × 10 × 25 | 44 KB | Replace Solid with Empty |
+| 1-H-fill.nbt | H pasture | fill | **-1888 62 -13** | +77, +0, +155 | 45 × 12 × 25 | 32 KB | Replace Solid with Empty |
 
-## Towers (cannon decks at y 22)
+## Towers (cannon decks at export y 22, world y 84)
 
-| Section | x, z | Column y | Where |
-|---|---|---|---|
-| A | 41, 37 | 2..21 | in its section |
-| B | 89, 23 | 1..21 | just outside its section |
-| C | 5, 54 | 2..21 | in its section |
-| D | 63, 37 | 2..21 | just outside its section |
-| E | 5, 135 | 1..21 | in its section |
-| F | 108, 133 | 1..21 | in its section |
-| G | 38, 167 | 9..21 | in its section |
-| H | 99, 163 | 1..21 | in its section |
+| Section | World x, z (deck at y 84) | Export x, z | Column y | Where |
+|---|---|---|---|---|
+| A | **-1924, -131** | 41, 37 | 2..21 | in its section |
+| B | **-1876, -145** | 89, 23 | 1..21 | just outside its section |
+| C | **-1960, -114** | 5, 54 | 2..21 | in its section |
+| D | **-1902, -131** | 63, 37 | 2..21 | just outside its section |
+| E | **-1960, -33** | 5, 135 | 1..21 | in its section |
+| F | **-1857, -35** | 108, 133 | 1..21 | in its section |
+| G | **-1927, -1** | 38, 167 | 9..21 | in its section |
+| H | **-1866, -5** | 99, 163 | 1..21 | in its section |
 
 ## Checked
 
