@@ -27,7 +27,7 @@ Plans write their jobs here with a script, keeping statuses already on the board
 
 ## Cloud (Cloudflare)
 
-Live at https://dragonholde-board.john-hk-chen.workers.dev: the Vite build as static assets, `worker/index.js` as the
+Live at https://mc-design.b28.dev (custom domain; workers.dev is off): the Vite build as static assets, `worker/index.js` as the
 API (the same contract as the dev server), D1 `dragonholde-board` for board state, R2 `dragonholde-assets` for files
 (`<project>/<file>`, served at `/api/assets/<key>`). Viewing is public; changing the board needs the `ADMIN_TOKEN`
 secret (stored on the build machine at `~/.config/dragonholde/admin-token`) until Discord login lands.
