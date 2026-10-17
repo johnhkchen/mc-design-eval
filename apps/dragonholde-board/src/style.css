@@ -19,7 +19,7 @@
   --queued: #7d8790; --loaded: #e0a64a; --running: #6ea8e6; --done: #5fb985; --blocked: #e07a6b;
   --p1: #d2aa6a; --p2: #7fb0d0; --p3: #b79ad6; --p4: #7cc4b0; --dropped: #4a535b; color-scheme: dark }
 body { background: var(--paper); color: var(--ink); font: 15px/1.5 var(--body); }
-.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 48px; display: grid; gap: 22px; }
+.wrap { grid-template-columns: minmax(0, 1fr); max-width: 1180px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 48px; display: grid; gap: 22px; }
 h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: .02em; margin: 0; text-wrap: balance; }
 h1 { font-size: 2rem; text-transform: uppercase; }
 h2 { font-size: 1.25rem; text-transform: uppercase; letter-spacing: .06em; }
@@ -47,7 +47,8 @@ header { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: end; justi
 .chip[data-s="loaded"] { color: var(--loaded); } .chip[data-s="running"] { color: var(--running); } .chip[data-s="done"] { color: var(--done); background: color-mix(in srgb, var(--done) 12%, transparent); }
 .chip[data-s="dropped"] { color: var(--muted); border-style: dotted; }
 .job.is-dropped .t { text-decoration: line-through; color: var(--muted); }
-.chip:disabled { cursor: not-allowed; color: var(--blocked); border-style: dashed; }
+.chip:disabled { cursor: default; }
+.chip[data-blocked] { color: var(--blocked); border-style: dashed; }
 .chip:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--survey); outline-offset: 2px; }
 .box { width: 20px; height: 20px; accent-color: var(--done); }
 .copy { font: 500 .78rem var(--mono); background: var(--survey-soft); color: var(--ink); border: 0; padding: 3px 6px; cursor: pointer; }

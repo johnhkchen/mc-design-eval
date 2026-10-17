@@ -1,0 +1,12 @@
+// The Dragonholde board on Cloudflare: the Vite build as static assets, the API as a Worker in front of D1 (board
+// state) and R2 (NBT files and renders). Viewing is public; changing the board needs the admin token until Discord
+// login lands.
+{
+  "name": "dragonholde-board",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-10-01",
+  "assets": { "directory": "./dist", "not_found_handling": "single-page-application", "run_worker_first": ["/api/*"] },
+  "d1_databases": [{ "binding": "DB", "database_name": "dragonholde-board", "database_id": "83f67a00-b2fc-4120-8226-e726c8019cfe", "migrations_dir": "migrations" }],
+  "r2_buckets": [{ "binding": "FILES", "bucket_name": "dragonholde-assets" }],
+  "observability": { "enabled": true }
+}

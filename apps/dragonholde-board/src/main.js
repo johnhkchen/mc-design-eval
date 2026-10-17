@@ -60,12 +60,13 @@ function jobRow(t, ix, opts = {}) {
   const label = blocked ? "waiting" : t.status;
   if (t.status === "dropped") return `<div class="job is-dropped"><button class="chip" data-s="dropped" disabled>dropped</button><span class="t">${esc(t.title)} <span class="muted mono" style="font-weight:400;font-size:.8rem">${esc(t.file || "")}</span></span><span>${state.canWrite ? `<button class="back" data-restore="${esc(t.id)}" title="Restore to queued" aria-label="Restore ${esc(t.title)}">↶</button>` : ""}</span></div>`;
   return `<div class="job">
-    <button class="chip" data-s="${t.status}" data-job="${esc(t.id)}" ${blocked || t.status === "done" || !state.canWrite ? "disabled" : ""} title="${blocked ? "Waits on " + esc(bl.map((d) => ix[d].file).join(", ")) : t.status === "done" ? "Done" : "Mark " + NEXT[t.status]}">${label}</button>
+    <button class="chip" data-s="${t.status}" ${blocked ? "data-blocked" : ""} data-job="${esc(t.id)}" ${blocked || t.status === "done" || !state.canWrite ? "disabled" : ""} title="${blocked ? "Waits on " + esc(bl.map((d) => ix[d].file).join(", ")) : t.status === "done" ? "Done" : "Mark " + NEXT[t.status]}">${label}</button>
     <span class="t">${opts.project ? `<span class="eyebrow" style="color:${projColor(t.project)}">${esc(projOf(t.project)?.code || t.project)}</span> ` : ""}${esc(t.title)} <span class="muted mono" style="font-weight:400;font-size:.8rem">${esc(t.file)}</span></span>
     <span>${t.status !== "queued" && state.canWrite ? `<button class="back" data-back="${esc(t.id)}" aria-label="Step ${esc(t.file)} back to ${PREV[t.status]}" title="Back to ${PREV[t.status]}">↶</button>` : ""}</span>
     <div class="sub">
       <span>corner <button class="copy" data-copy="${esc(corner)}" title="Copy for the schematic tool">${esc(corner)}</button></span>
       <span>${(t.work || 0).toLocaleString()} blocks · ${fmtH(hoursOf(t))}</span>
+      ${t.asset ? `<a href="/api/assets/${t.asset.split("/").map(encodeURIComponent).join("/")}" download="${esc(t.file)}">download .nbt</a>` : ""}
       ${Number.isInteger(t.cannon) && t.status !== "done" && t.status !== "queued" ? `<span>cannon #${t.cannon + 1}</span>` : ""}
       <span>${esc(t.mode || "")}</span>
       ${blocked ? `<span style="color:var(--blocked)">waits on ${bl.length} job${bl.length > 1 ? "s" : ""}</span>` : ""}
@@ -165,8 +166,11 @@ document.addEventListener("change", async (ev) => {
     await api("/api/pool", { [map[el.id]]: el.id === "set-cannons" ? Math.round(v) : v }); }
 });
 
+const token = () => { try { return localStorage.getItem("boardToken") || ""; } catch { return ""; } };
+const authHeaders = () => (token() ? { authorization: `Bearer ${token()}` } : {});
+
 async function api(path, patch) {
-  const r = await fetch(path, { method: "PATCH", headers: { "content-type": "application/json" }, body: JSON.stringify(patch) }).catch(() => null);
+  const r = await fetch(path, { method: "PATCH", headers: { "content-type": "application/json", ...authHeaders() }, body: JSON.stringify(patch) }).catch(() => null);
   if (!r || !r.ok) { $("stats").insertAdjacentHTML("beforeend", `<div class="conn">Not saved: ${r ? esc((await r.json()).error) : "the board server isn't reachable"}</div>`); }
   await load();
 }
@@ -175,12 +179,27 @@ async function load() {
   const r = await fetch("/api/board").catch(() => null);
   if (!r || !r.ok) { $("mapBody").textContent = "Can't reach the board server. Start it with npm run dev."; return; }
   const b = await r.json();
+  const sess = await fetch("/api/session", { headers: authHeaders() }).then((x) => x.json()).catch(() => ({ canWrite: false }));
+  state.canWrite = !!sess.canWrite; renderSignIn(sess);
   state.town = Object.values(b.towns || {})[0] || null;
   state.projects = Object.entries(b.projects || {}).map(([id, p]) => ({ id, ...p }));
   state.tasks = Object.entries(b.tasks || {}).map(([id, t]) => ({ id, ...t }));
   state.pool = { ...state.pool, ...b.pool };
   state.ready = true; render();
 }
+
+function renderSignIn(sess) {
+  const el = $("signin");
+  if (sess.canWrite) { el.innerHTML = token() ? `<span class="muted">Signed in to change the board.</span> <button class="back" id="signout">Sign out</button>` : ""; return; }
+  el.innerHTML = `<form id="signinForm" class="settings"><span class="muted">Viewing only. To change the board:</span>
+    <label for="tokenInput">admin token</label><input id="tokenInput" type="password" autocomplete="current-password" style="width:200px"><button class="copy" type="submit">Sign in</button></form>`;
+}
+document.addEventListener("submit", (ev) => {
+  if (ev.target.id !== "signinForm") return; ev.preventDefault();
+  try { localStorage.setItem("boardToken", $("tokenInput").value.trim()); } catch {}
+  load();
+});
+document.addEventListener("click", (ev) => { if (ev.target.id === "signout") { try { localStorage.removeItem("boardToken"); } catch {} load(); } });
 
 load();
 if (import.meta.hot) import.meta.hot.on("board:changed", load);

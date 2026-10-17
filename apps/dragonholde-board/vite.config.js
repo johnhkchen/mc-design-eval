@@ -2,7 +2,7 @@
 // pages to reload it whenever it changes on disk (a status tapped on a phone, or a plan script adding jobs).
 import { defineConfig } from "vite";
 import { readFile, writeFile, rename } from "node:fs/promises";
-import { resolve, relative, sep } from "node:path";
+import { resolve } from "node:path";
 
 const DATA = resolve(import.meta.dirname, "data/board.json");
 const REPO = resolve(import.meta.dirname, "../..");
@@ -31,7 +31,19 @@ function boardApi() {
       server.middlewares.use(async (req, res, next) => {
         const url = new URL(req.url, "http://x");
         try {
-          if (url.pathname === "/api/board" && req.method === "GET") return send(res, 200, JSON.parse(await readFile(DATA, "utf8")));
+          if (url.pathname === "/api/board" && req.method === "GET") {
+            const b = JSON.parse(await readFile(DATA, "utf8"));
+            for (const t of Object.values(b.tasks)) if (t.kind === "cannon" && t.nbt) t.asset = `${t.project}/${t.file}`;
+            return send(res, 200, b);
+          }
+          if (url.pathname === "/api/session") return send(res, 200, { canWrite: true });
+          if (url.pathname.startsWith("/api/assets/") && req.method === "GET") {
+            // Same keys as the cloud's R2 (<project>/<file>), read from the repo path the job records.
+            const key = decodeURIComponent(url.pathname.slice("/api/assets/".length));
+            const t = Object.values(JSON.parse(await readFile(DATA, "utf8")).tasks).find((t) => t.nbt && `${t.project}/${t.file}` === key);
+            if (!t) return send(res, 404, { error: "no such asset" });
+            res.setHeader("content-type", "application/octet-stream"); return res.end(await readFile(resolve(REPO, t.nbt)));
+          }
           const m = url.pathname.match(/^\/api\/tasks\/([\w.-]+)$/);
           if (m && req.method === "PATCH") {
             const patch = await body(req);
@@ -43,12 +55,6 @@ function boardApi() {
           if (url.pathname === "/api/pool" && req.method === "PATCH") {
             const patch = await body(req);
             return send(res, 200, await edit((b) => { for (const k of POOL_FIELDS) if (typeof patch[k] === "number" && patch[k] >= 0) b.pool[k] = patch[k]; return b.pool; }));
-          }
-          if (url.pathname === "/api/nbt" && req.method === "GET") {
-            // A job's .nbt, for a structure preview: only files inside the repo's benchmarks/ tree.
-            const f = resolve(REPO, url.searchParams.get("file") || "");
-            if (!relative(REPO, f).startsWith("benchmarks" + sep) || !f.endsWith(".nbt")) return send(res, 400, { error: "file must be a .nbt under benchmarks/" });
-            res.setHeader("content-type", "application/octet-stream"); return res.end(await readFile(f));
           }
         } catch (e) { return send(res, 500, { error: String(e.message || e) }); }
         next();

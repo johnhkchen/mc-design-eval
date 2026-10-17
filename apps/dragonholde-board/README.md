@@ -24,3 +24,16 @@ Plans write their jobs here with a script, keeping statuses already on the board
 ## Structure preview (next)
 
 `GET /api/nbt?file=<repo path>` serves a job's `.nbt` (only under `benchmarks/`), ready for an in-browser renderer.
+
+## Cloud (Cloudflare)
+
+Live at https://dragonholde-board.john-hk-chen.workers.dev: the Vite build as static assets, `worker/index.js` as the
+API (the same contract as the dev server), D1 `dragonholde-board` for board state, R2 `dragonholde-assets` for files
+(`<project>/<file>`, served at `/api/assets/<key>`). Viewing is public; changing the board needs the `ADMIN_TOKEN`
+secret (stored on the build machine at `~/.config/dragonholde/admin-token`) until Discord login lands.
+
+    npx wrangler d1 migrations apply dragonholde-board --remote   # schema: migrations/
+    node scripts/push.mjs                                         # board.json rows → D1 (keeps statuses), .nbt → R2
+    npx vite build && npx wrangler deploy
+
+D1 holds the live statuses; `data/board.json` holds what plans write.
