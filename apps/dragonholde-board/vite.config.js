@@ -57,4 +57,4 @@ function boardApi() {
   };
 }
 
-export default defineConfig({ plugins: [boardApi()], server: { port: 5178, strictPort: true, allowedHosts: [".ts.net"] } });
+export default defineConfig({ plugins: [boardApi()], server: { host: "127.0.0.1", port: 5178, strictPort: true, allowedHosts: [".ts.net"] } });
