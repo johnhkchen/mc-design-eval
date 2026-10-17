@@ -1,15 +1,10 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Dragonholde Board</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
-<link rel="stylesheet" href="/src/style.css">
-</head>
-<body>
-<div class="wrap">
+---
+import Base from "../layouts/Base.astro";
+import "../board.css";
+---
+<Base title="Construction board" description="Cannon jobs, todos and the schedule for every project in Dragonholde.">
+  <div class="board">
+<div class="board-wrap">
   <header>
     <div><div class="eyebrow" id="townCode">Land office · world coordinates</div><h1 id="townName">Dragonholde</h1></div>
     <div class="stats" id="stats"></div>
@@ -35,5 +30,7 @@
   <section class="projects" id="projects"></section>
   <footer class="panel" id="signin" aria-label="Sign in"></footer>
 </div>
-<script type="module" src="/src/main.js"></script>
-</body></html>
+
+  </div>
+  <script src="../board.js"></script>
+</Base>

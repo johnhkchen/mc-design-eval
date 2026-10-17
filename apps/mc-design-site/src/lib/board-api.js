@@ -1,11 +1,10 @@
-// The board's data lives in data/board.json, not in the browser: the dev server reads and writes it, and tells open
+// Dev-server half of the board API (the Worker in worker/index.js is the cloud half). The board's data lives in data/board.json, not in the browser: the dev server reads and writes it, and tells open
 // pages to reload it whenever it changes on disk (a status tapped on a phone, or a plan script adding jobs).
-import { defineConfig } from "vite";
 import { readFile, writeFile, rename } from "node:fs/promises";
 import { resolve } from "node:path";
 
-const DATA = resolve(import.meta.dirname, "data/board.json");
-const REPO = resolve(import.meta.dirname, "../..");
+const DATA = resolve(import.meta.dirname, "../../data/board.json");
+const REPO = resolve(import.meta.dirname, "../../../..");
 const TASK_FIELDS = ["status", "cannon"];
 const POOL_FIELDS = ["cannons", "secPerBlock", "setupMin"];
 const STATUSES = ["queued", "loaded", "running", "done", "dropped"];
@@ -22,7 +21,7 @@ const edit = (fn) => (queue = queue.then(async () => {
 const body = (req) => new Promise((ok, fail) => { let s = ""; req.on("data", (c) => (s += c)); req.on("end", () => { try { ok(JSON.parse(s || "{}")); } catch (e) { fail(e); } }); });
 const send = (res, code, obj) => { res.statusCode = code; res.setHeader("content-type", "application/json"); res.end(JSON.stringify(obj)); };
 
-function boardApi() {
+export function boardApi() {
   return {
     name: "board-api",
     configureServer(server) {
@@ -62,5 +61,3 @@ function boardApi() {
     },
   };
 }
-
-export default defineConfig({ plugins: [boardApi()], server: { host: "127.0.0.1", port: 5178, strictPort: true, allowedHosts: [".ts.net"] } });

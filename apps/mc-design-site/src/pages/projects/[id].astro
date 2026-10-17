@@ -1,0 +1,46 @@
+---
+import Base from "../../layouts/Base.astro";
+import Scrubber3D from "../../components/Scrubber3D.svelte";
+import catalog from "../../data/catalog.json";
+import { projects } from "../../data/projects.js";
+export function getStaticPaths() { return projects.map((p) => ({ params: { id: p.id }, props: { p } })); }
+const { p } = Astro.props;
+const title = `${p.code} ${p.name || "Swamp reclamation"}`;
+const mods = catalog.filter((e) => p.modules.includes(e.id));
+---
+<Base title={title} description={p.lede}>
+  <section class="wrap section">
+    <nav class="tabs" aria-label="Projects">{projects.map((q) => <a href={`/projects/${q.id}/`} aria-current={q.id === p.id ? "page" : undefined}>{q.code}</a>)}</nav>
+    <span class="eyebrow">{p.code} · {p.status} · for {p.client} in {p.town} · {p.size}</span>
+    <h1>{p.name || "Swamp reclamation"}{p.placeholder && <span class="muted ph"> (working name)</span>}</h1>
+    <p class="lede">{p.lede}</p>
+    <Scrubber3D client:visible before={p.before} after={p.after} poster={p.poster} label={title} beforeLabel="Before" afterLabel={p.status === "Built" ? "Built" : "Planned"} />
+  </section>
+  <section class="wrap section story">
+    {p.story.map(([h, t]) => <div><h3>{h}</h3><p>{t}</p></div>)}
+  </section>
+  {mods.length > 0 && (
+    <section class="wrap section">
+      <h2>The buildings</h2>
+      <div class="cards">
+        {mods.map((e) => (
+          <a class="card" href={`/catalog/${e.id}/`}>
+            <div class="thumb"><img src={e.image} alt={e.name} loading="lazy" width="525" height="525" /></div>
+            <span class="eyebrow"><span class="no">No. {e.id.split("-")[1]}</span> · {e.type}</span>
+            <h3>{e.name}</h3>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+  <section class="wrap section"><p class="muted">The cannon jobs for this project are on the <a href="/board/">construction board</a>.</p></section>
+</Base>
+<style>
+  .tabs { display: flex; gap: 6px; }
+  .tabs a { font: 600 .85rem/1 var(--body); padding: 7px 11px; border: 1px solid var(--rule); border-radius: 3px; text-decoration: none; color: var(--ink); }
+  .tabs a[aria-current="page"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .ph { font-size: .5em; font-weight: 500; }
+  .lede { font-size: 1.15rem; }
+  .story { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 28px; padding-top: 8px; }
+  .story div { display: grid; gap: 8px; align-content: start; }
+</style>

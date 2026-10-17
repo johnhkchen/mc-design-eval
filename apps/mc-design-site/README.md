@@ -1,10 +1,16 @@
-# Dragonholde board
+# mc-design site
 
-Construction board for the owner's server: towns, projects (with their client), every cannon job and todo with a
-status you tick off, a cannon yard and an estimated schedule with the critical path.
+mc-design.b28.dev: the public catalog of approved buildings (thumbnails, then a 3-D view with a schematicannon
+print scrubber on each building's page), case studies with a 3-D before/after scrubber, How it works, and the
+construction board at /board. Astro pages with Svelte islands (src/components); 3-D views use deepslate, with block
+models and textures fetched from misode's mcmeta at view time (src/lib/deepslate.js).
 
     npm install
-    npm run dev        # http://localhost:5178, and on your LAN (phone) via the Network address Vite prints
+    npm run dev        # http://127.0.0.1:5178 (also on the tailnet at :8443)
+    npm run deploy     # astro build && wrangler deploy
+
+Catalog entries come from approved kits: `node scripts/catalog.mjs <renders dir>` (renders from `mcd render --tiles`).
+Case-study models are in public/models, listed in src/data/projects.js with the offset that aligns each pair.
 
 ## Data
 

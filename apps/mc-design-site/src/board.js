@@ -1,4 +1,4 @@
-import { schedule as plan, criticalPath, hoursOf as hoursFor } from "./schedule.js";
+import { schedule as plan, criticalPath, hoursOf as hoursFor } from "./lib/schedule.js";
 
 const STAGES = ["capture", "plan", "earthworks", "buildings", "done"];
 const NEXT = { queued: "loaded", loaded: "running", running: "done" };
@@ -42,10 +42,10 @@ function renderMap() {
   for (const t of jobs) { const [a, b, c, d] = t.foot;
     s += `<rect x="${a - x0 + .6}" y="${b - z0 + .6}" width="${c - a - .2}" height="${d - b - .2}" fill="${col[t.status]}" fill-opacity="${t.status === "queued" ? .1 : .28}" stroke="${col[t.status]}" stroke-width=".6" stroke-dasharray="${t.kind === "cannon" && /dig/.test(t.file) ? "2 1.5" : ""}"><title>${esc(t.file)} · ${t.status}</title></rect>`; }
   for (const p of state.projects) { const [a, b] = p.bbox;
-    s += `<text x="${a - x0 + 3}" y="${b - z0 + 9}" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="9" fill="${projColor(p.id)}" letter-spacing=".6">${esc(p.code || p.id)}</text>`; }
+    s += `<text x="${a - x0 + 3}" y="${b - z0 + 9}" font-family="Zilla Slab, Georgia, serif" font-weight="700" font-size="9" fill="${projColor(p.id)}" letter-spacing=".6">${esc(p.code || p.id)}</text>`; }
   const lx = Math.ceil(x0 / 64) * 64, lz = Math.ceil(z0 / 64) * 64;
   s += `<text x="${lx - x0 + 1.5}" y="${H - 3}" font-family="JetBrains Mono, monospace" font-size="4.2" fill="var(--muted)">x ${lx}</text><text x="2" y="${lz - z0 - 1.5}" font-family="JetBrains Mono, monospace" font-size="4.2" fill="var(--muted)">z ${lz}</text>`;
-  s += `<g transform="translate(${W - 10},14)"><path d="M0,-8 L3,2 L0,0 L-3,2 Z" fill="var(--ink)"/><text y="-10" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-size="6" font-weight="700" fill="var(--ink)">N</text></g></svg>`;
+  s += `<g transform="translate(${W - 10},14)"><path d="M0,-8 L3,2 L0,0 L-3,2 Z" fill="var(--ink)"/><text y="-10" text-anchor="middle" font-family="Zilla Slab, Georgia, serif" font-size="6" font-weight="700" fill="var(--ink)">N</text></g></svg>`;
   $("mapBody").className = ""; $("mapBody").innerHTML = s;
 }
 

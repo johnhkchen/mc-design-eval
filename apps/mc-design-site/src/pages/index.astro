@@ -1,0 +1,82 @@
+---
+import Base from "../layouts/Base.astro";
+import Scrubber3D from "../components/Scrubber3D.svelte";
+import catalog from "../data/catalog.json";
+import { projects } from "../data/projects.js";
+const p = projects[0];
+---
+<Base>
+  <section class="wrap hero">
+    <div class="pitch">
+      <span class="eyebrow">Minecraft towns, made to fit the land</span>
+      <h1>Send us your land. Get back a town you can build.</h1>
+      <p>Each town is designed around the hills, water and trees of the land you send us. You get schematics that a schematicannon pastes in survival, with world coordinates and the materials list.</p>
+      <div class="cta"><a class="btn" href="/catalog/">Browse the catalog</a><a class="btn ghost" href="/projects/dh-01/">See a town come together</a></div>
+    </div>
+    <div class="show">
+      <Scrubber3D client:visible before={p.before} after={p.after} poster={p.poster} label="Polarton" beforeLabel="The land" afterLabel="The town" />
+      <p class="muted cap">{p.code} {p.name}, for Antipolar in Dragonholde. Drag the divider, then turn the hill.</p>
+    </div>
+  </section>
+
+  <section class="wrap section points">
+    <div><h3>Fits your land</h3><p class="muted">Streets follow the contours, every plot gets a levelled pad and retaining walls, and nothing floats or blocks a door.</p></div>
+    <div><h3>Builds in survival</h3><p class="muted">No creative paste, no admin needed. Each file comes with its world corner, its paste mode and a materials list for loading the cannon.</p></div>
+    <div><h3>A catalog that grows</h3><p class="muted">Every building we approve joins the catalog, and new towns are drawn from it.</p></div>
+  </section>
+
+  <hr class="rule wrap" />
+  <section class="wrap section">
+    <div class="head"><h2>From the catalog</h2><a href="/catalog/">All {catalog.length} buildings →</a></div>
+    <div class="cards">
+      {catalog.slice(0, 4).map((e) => (
+        <a class="card" href={`/catalog/${e.id}/`}>
+          <div class="thumb"><img src={e.image} alt={e.name} loading="lazy" width="525" height="525" /></div>
+          <span class="eyebrow"><span class="no">No. {e.id.split("-")[1]}</span> · {e.type}</span>
+          <h3>{e.name}</h3>
+          <span class="spec">{e.footprint.join(" × ")} plot · {e.blocks.toLocaleString()} blocks</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <hr class="rule wrap" />
+  <section class="wrap section">
+    <h2>Projects</h2>
+    <div class="projects">
+      {projects.map((q) => (
+        <a class="card" href={`/projects/${q.id}/`}>
+          <div class="thumb wide"><img src={q.poster} alt={`${q.code} ${q.name || ""}`} loading="lazy" /></div>
+          <span class="eyebrow">{q.code} · {q.status} · for {q.client}</span>
+          <h3>{q.name || "Swamp reclamation"}</h3>
+          <p class="muted">{q.lede}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <hr class="rule wrap" />
+  <section class="wrap section soon">
+    <span class="eyebrow">Coming</span>
+    <h2>Upload your own land</h2>
+    <ol>
+      <li><b>Survey.</b> Upload an export and see your land mapped: water, slopes, trees, and where you can build.</li>
+      <li><b>Plan.</b> Roads, plots and earthworks laid over your land.</li>
+      <li><b>Town.</b> A terraformed, populated town from the catalog, cut into cannon files for however many cannons you run.</li>
+    </ol>
+  </section>
+</Base>
+<style>
+  .hero { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; align-items: center; padding-block: 48px 24px; }
+  @media (max-width: 900px) { .hero { grid-template-columns: minmax(0, 1fr); } }
+  .pitch { display: grid; gap: 18px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; }
+  .show { display: grid; gap: 8px; min-width: 0; }
+  .cap { font-size: .88rem; }
+  .points { grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 28px; }
+  .points div { display: grid; gap: 6px; align-content: start; }
+  .head { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: baseline; }
+  .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 32px; }
+  .thumb.wide { aspect-ratio: 16 / 10; }
+  .soon ol { margin: 0; padding-left: 1.2em; display: grid; gap: 10px; max-width: 70ch; }
+</style>

@@ -1,0 +1,27 @@
+---
+import Base from "../layouts/Base.astro";
+const steps = [
+  ["Capture", "You export your land with Create's Schematic and Quill and send the file. If water is involved, we also ask for what lies under it, so we can count the fill properly rather than guess."],
+  ["Plan", "Roads, plots and earthworks are laid over your land. Each plan reports how many blocks the cannons must change and how long the longest chain of pastes takes, so a plan that would tie up your cannons gets re-cut before you see it."],
+  ["Kit", "Buildings come from the catalog, or are designed for the town and then join the catalog. Each sits on a standard plot with its door to the street and a stepped, accessible approach."],
+  ["Deliver", "Files are cut so every cannon gets about the same amount of work. Each comes with its world corner, its paste mode and its materials, and a staging file places the cannon decks and alignment markers."],
+  ["Build", "You paste in survival. The construction board tracks every job, which cannon it is on, and what can start next."],
+];
+---
+<Base title="How it works" description="From an export of your land to a town you paste in survival.">
+  <section class="wrap section">
+    <span class="eyebrow">How it works</span>
+    <h1>From your land to a town you can paste</h1>
+    <ol class="steps">{steps.map(([h, t], i) => <li><span class="no">{String(i + 1).padStart(2, "0")}</span><div><h3>{h}</h3><p>{t}</p></div></li>)}</ol>
+  </section>
+  <section class="wrap section">
+    <h2>Behind it</h2>
+    <p>The designs come from an AI pipeline: a strong model plans each project once, and cheaper models build many variations from that plan. Plain code places the blocks. A person approves every building before it goes in the catalog. The pipeline is written in BAML and runs partly on Cloudflare; the write-up of that is coming.</p>
+  </section>
+</Base>
+<style>
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; max-width: 760px; }
+  .steps li { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 12px; align-items: start; }
+  .steps .no { font-size: 1.6rem; line-height: 1; }
+  .steps div { display: grid; gap: 4px; }
+</style>

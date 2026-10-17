@@ -1,0 +1,22 @@
+{
+  "name": "mc-design-site",
+  "private": true,
+  "type": "module",
+  "description": "mc-design.b28.dev: the catalog, case studies and construction board (Astro + Svelte islands; Worker API over D1 and R2)",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "deploy": "astro build && wrangler deploy",
+    "test": "node --test src/lib/*.test.js"
+  },
+  "dependencies": {
+    "deepslate": "0.27.2",
+    "gl-matrix": "^3.4.4"
+  },
+  "devDependencies": {
+    "@astrojs/svelte": "^9.1.0",
+    "astro": "^7.4.0",
+    "svelte": "^5.57.2",
+    "wrangler": "^4.151.1"
+  }
+}

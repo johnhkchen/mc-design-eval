@@ -1,0 +1,354 @@
+[
+  {
+    "id": "polarton-00-cotton-gin",
+    "name": "Cotton gin",
+    "type": "industry",
+    "style": "Southern mill village, 1880–1930",
+    "project": "dh-01",
+    "approved": "Delivered and pasted in Dragonholde (DH-01)",
+    "footprint": [
+      12,
+      14
+    ],
+    "height": 27,
+    "front": "north",
+    "blocks": 808,
+    "materials": [
+      {
+        "block": "stripped_spruce_log",
+        "n": 148
+      },
+      {
+        "block": "birch_planks",
+        "n": 123
+      },
+      {
+        "block": "grass_block",
+        "n": 77
+      },
+      {
+        "block": "cobblestone",
+        "n": 59
+      },
+      {
+        "block": "spruce_fence",
+        "n": 56
+      },
+      {
+        "block": "cobblestone_stairs",
+        "n": 51
+      }
+    ],
+    "image": "/img/catalog/polarton-00-cotton-gin.jpg",
+    "nbt": "/nbt/polarton-00-cotton-gin.nbt",
+    "version": "1.21.1"
+  },
+  {
+    "id": "polarton-01-schoolhouse",
+    "name": "Schoolhouse",
+    "type": "civic",
+    "style": "Southern mill village, 1880–1930",
+    "project": "dh-01",
+    "approved": "Delivered and pasted in Dragonholde (DH-01)",
+    "footprint": [
+      12,
+      14
+    ],
+    "height": 27,
+    "front": "north",
+    "blocks": 833,
+    "materials": [
+      {
+        "block": "white_concrete",
+        "n": 218
+      },
+      {
+        "block": "grass_block",
+        "n": 118
+      },
+      {
+        "block": "spruce_fence",
+        "n": 59
+      },
+      {
+        "block": "andesite_stairs",
+        "n": 57
+      },
+      {
+        "block": "spruce_planks",
+        "n": 44
+      },
+      {
+        "block": "stone_brick_stairs",
+        "n": 38
+      }
+    ],
+    "image": "/img/catalog/polarton-01-schoolhouse.jpg",
+    "nbt": "/nbt/polarton-01-schoolhouse.nbt",
+    "version": "1.21.1"
+  },
+  {
+    "id": "polarton-02-hill-farmhouse",
+    "name": "Hill farmhouse",
+    "type": "house",
+    "style": "Southern mill village, 1880–1930",
+    "project": "dh-01",
+    "approved": "Delivered and pasted in Dragonholde (DH-01)",
+    "footprint": [
+      12,
+      14
+    ],
+    "height": 27,
+    "front": "north",
+    "blocks": 907,
+    "materials": [
+      {
+        "block": "spruce_planks",
+        "n": 152
+      },
+      {
+        "block": "stripped_spruce_log",
+        "n": 141
+      },
+      {
+        "block": "grass_block",
+        "n": 126
+      },
+      {
+        "block": "mangrove_stairs",
+        "n": 67
+      },
+      {
+        "block": "spruce_fence",
+        "n": 67
+      },
+      {
+        "block": "spruce_stairs",
+        "n": 54
+      }
+    ],
+    "image": "/img/catalog/polarton-02-hill-farmhouse.jpg",
+    "nbt": "/nbt/polarton-02-hill-farmhouse.nbt",
+    "version": "1.21.1"
+  },
+  {
+    "id": "polarton-03-smithy",
+    "name": "Smithy",
+    "type": "workshop",
+    "style": "Southern mill village, 1880–1930",
+    "project": "dh-01",
+    "approved": "Delivered and pasted in Dragonholde (DH-01)",
+    "footprint": [
+      12,
+      14
+    ],
+    "height": 27,
+    "front": "north",
+    "blocks": 587,
+    "materials": [
+      {
+        "block": "grass_block",
+        "n": 84
+      },
+      {
+        "block": "stripped_spruce_log",
+        "n": 73
+      },
+      {
+        "block": "cobblestone",
+        "n": 59
+      },
+      {
+        "block": "spruce_fence",
+        "n": 55
+      },
+      {
+        "block": "cobblestone_stairs",
+        "n": 46
+      },
+      {
+        "block": "bricks",
+        "n": 44
+      }
+    ],
+    "image": "/img/catalog/polarton-03-smithy.jpg",
+    "nbt": "/nbt/polarton-03-smithy.nbt",
+    "version": "1.21.1"
+  },
+  {
+    "id": "polarton-04-church",
+    "name": "Church",
+    "type": "civic",
+    "style": "Southern mill village, 1880–1930",
+    "project": "dh-01",
+    "approved": "Delivered and pasted in Dragonholde (DH-01)",
+    "footprint": [
+      12,
+      14
+    ],
+    "height": 27,
+    "front": "north",
+    "blocks": 868,
+    "materials": [
+      {
+        "block": "calcite",
+        "n": 212
+      },
+      {
+        "block": "grass_block",
+        "n": 110
+      },
+      {
+        "block": "white_concrete",
+        "n": 63
+      },
+      {
+        "block": "spruce_fence",
+        "n": 54
+      },
+      {
+        "block": "spruce_planks",
+        "n": 45
+      },
+      {
+        "block": "coarse_dirt",
+        "n": 38
+      }
+    ],
+    "image": "/img/catalog/polarton-04-church.jpg",
+    "nbt": "/nbt/polarton-04-church.nbt",
+    "version": "1.21.1"
+  },
+  {
+    "id": "polarton-05-tobacco-barn",
+    "name": "Tobacco barn",
+    "type": "farm",
+    "style": "Southern mill village, 1880–1930",
+    "project": "dh-01",
+    "approved": "Delivered and pasted in Dragonholde (DH-01)",
+    "footprint": [
+      12,
+      14
+    ],
+    "height": 27,
+    "front": "north",
+    "blocks": 729,
+    "materials": [
+      {
+        "block": "stripped_dark_oak_log",
+        "n": 167
+      },
+      {
+        "block": "grass_block",
+        "n": 101
+      },
+      {
+        "block": "stripped_spruce_log",
+        "n": 71
+      },
+      {
+        "block": "waxed_exposed_cut_copper_stairs",
+        "n": 65
+      },
+      {
+        "block": "spruce_fence",
+        "n": 50
+      },
+      {
+        "block": "cobblestone",
+        "n": 39
+      }
+    ],
+    "image": "/img/catalog/polarton-05-tobacco-barn.jpg",
+    "nbt": "/nbt/polarton-05-tobacco-barn.nbt",
+    "version": "1.21.1"
+  },
+  {
+    "id": "polarton-06-corn-crib-granary",
+    "name": "Corn crib and granary",
+    "type": "farm",
+    "style": "Southern mill village, 1880–1930",
+    "project": "dh-01",
+    "approved": "Delivered and pasted in Dragonholde (DH-01)",
+    "footprint": [
+      12,
+      14
+    ],
+    "height": 27,
+    "front": "north",
+    "blocks": 744,
+    "materials": [
+      {
+        "block": "stripped_oak_log",
+        "n": 124
+      },
+      {
+        "block": "grass_block",
+        "n": 117
+      },
+      {
+        "block": "oak_planks",
+        "n": 80
+      },
+      {
+        "block": "bamboo_fence",
+        "n": 68
+      },
+      {
+        "block": "stone_brick_stairs",
+        "n": 62
+      },
+      {
+        "block": "spruce_fence",
+        "n": 52
+      }
+    ],
+    "image": "/img/catalog/polarton-06-corn-crib-granary.jpg",
+    "nbt": "/nbt/polarton-06-corn-crib-granary.nbt",
+    "version": "1.21.1"
+  },
+  {
+    "id": "polarton-07-owners-house",
+    "name": "Owner's house",
+    "type": "house",
+    "style": "Southern mill village, 1880–1930",
+    "project": "dh-01",
+    "approved": "Delivered and pasted in Dragonholde (DH-01)",
+    "footprint": [
+      12,
+      14
+    ],
+    "height": 27,
+    "front": "north",
+    "blocks": 967,
+    "materials": [
+      {
+        "block": "bricks",
+        "n": 252
+      },
+      {
+        "block": "grass_block",
+        "n": 119
+      },
+      {
+        "block": "waxed_oxidized_cut_copper_stairs",
+        "n": 98
+      },
+      {
+        "block": "spruce_planks",
+        "n": 56
+      },
+      {
+        "block": "spruce_fence",
+        "n": 53
+      },
+      {
+        "block": "calcite",
+        "n": 50
+      }
+    ],
+    "image": "/img/catalog/polarton-07-owners-house.jpg",
+    "nbt": "/nbt/polarton-07-owners-house.nbt",
+    "version": "1.21.1"
+  }
+]

@@ -1,0 +1,46 @@
+---
+import "../styles/site.css";
+const { title, description = "Minecraft towns designed to fit your land and built in survival with a schematicannon." } = Astro.props;
+const path = Astro.url.pathname;
+const nav = [["/catalog/", "Catalog"], ["/projects/dh-01/", "Projects"], ["/how/", "How it works"], ["/board/", "Board"]];
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{title ? `${title} · mc-design` : "mc-design"}</title>
+  <meta name="description" content={description} />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" />
+</head>
+<body>
+  <header class="top">
+    <div class="wrap bar">
+      <a class="mark" href="/">mc<span>·</span>design</a>
+      <nav aria-label="Main">
+        {nav.map(([href, label]) => <a href={href} aria-current={path.startsWith(href.split("/").slice(0, 2).join("/") + "/") ? "page" : undefined}>{label}</a>)}
+      </nav>
+    </div>
+  </header>
+  <main><slot /></main>
+  <footer class="foot">
+    <div class="wrap">
+      <span>Towns and buildings for Minecraft 1.21.1, delivered as schematics. Built in Dragonholde.</span>
+      <span class="muted">Not affiliated with Mojang or Microsoft. 3-D views use deepslate by misode.</span>
+    </div>
+  </footer>
+</body>
+</html>
+<style>
+  .top { border-bottom: 1px solid var(--rule); background: var(--paper); position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; }
+  .bar { display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: center; justify-content: space-between; padding-block: 14px; }
+  .mark { font: 700 1.35rem/1 var(--display); color: var(--ink); text-decoration: none; letter-spacing: .01em; }
+  .mark span { color: var(--accent); }
+  nav { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+  nav a { color: var(--ink); text-decoration: none; font-weight: 500; font-size: .95rem; padding-block: 4px; border-bottom: 2px solid transparent; }
+  nav a[aria-current="page"] { border-bottom-color: var(--accent); }
+  .foot { border-top: 1px solid var(--rule); margin-top: 40px; padding-block: 28px; font-size: .88rem; }
+  .foot .wrap { display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between; }
+</style>

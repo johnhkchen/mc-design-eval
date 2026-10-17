@@ -1,0 +1,43 @@
+/* A builder's pattern book: the catalog of buildings you order and raise, set like the mail-order house books of the
+   period the builds come from. Slab display type, plain sans text, mono for specs; copper-green from the roofs. */
+:root {
+  --paper: #f2f4f1; --sheet: #fbfcfa; --ink: #1c2420; --ink-soft: #55615a; --rule: #d3d9d3;
+  --accent: #2b7a69; --accent-ink: #ffffff; --sky: #bcd5ee; --mark: #b8433f;
+  --display: "Zilla Slab", Rockwell, "Roboto Slab", Georgia, serif;
+  --body: "Public Sans", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #121815; --sheet: #19211d; --ink: #e4e9e5; --ink-soft: #9caba2; --rule: #2c3631;
+  --accent: #5fc0a8; --accent-ink: #0d1411; --sky: #22303d; --mark: #e0716b; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #121815; --sheet: #19211d; --ink: #e4e9e5; --ink-soft: #9caba2; --rule: #2c3631;
+  --accent: #5fc0a8; --accent-ink: #0d1411; --sky: #22303d; --mark: #e0716b; color-scheme: dark }
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 var(--body); }
+img { max-width: 100%; display: block; }
+a { color: var(--accent); text-underline-offset: 3px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; line-height: 1.1; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
+h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+h3 { font-size: 1.3rem; }
+p { margin: 0; max-width: 64ch; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 20px; }
+.eyebrow { font: 600 .74rem/1 var(--body); text-transform: uppercase; letter-spacing: .14em; color: var(--ink-soft); }
+.no { font-family: var(--display); font-weight: 600; color: var(--mark); }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: .9em; }
+.muted { color: var(--ink-soft); }
+.btn { display: inline-block; font: 600 .95rem/1 var(--body); padding: 12px 18px; border-radius: 3px; text-decoration: none; background: var(--accent); color: var(--accent-ink); border: 1.5px solid var(--accent); }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.section { padding-block: 56px; display: grid; gap: 24px; }
+.rule { border: 0; border-top: 1px solid var(--rule); margin: 0; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 28px 22px; }
+.card { display: grid; gap: 8px; text-decoration: none; color: inherit; align-content: start; }
+.card .thumb { aspect-ratio: 1; background: var(--sky); border-radius: 4px; overflow: hidden; }
+.card .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .25s; }
+.card:hover .thumb img { transform: scale(1.03); }
+.card h3 { font-size: 1.15rem; }
+.spec { font-family: var(--mono); font-size: .8rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: reduce) { .card .thumb img { transition: none; } }
