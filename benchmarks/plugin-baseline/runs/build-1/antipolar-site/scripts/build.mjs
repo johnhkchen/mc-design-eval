@@ -162,9 +162,12 @@ for (const b of boxes) {
     for (let t = 0; t < n; t++) { const z0 = b.z0 + t * span, z1 = Math.min(b.z1, z0 + span - 1), g = cut(src, b, z0, z1), f = n === 1 ? b.file : b.file.replace(".nbt", `-${t + 1}of${n}.nbt`); g.save(`${OUT}/${f}`); out.push({ ...b, file: f, corner: [b.x0, b.y0, z0], size: g.size, kb: Math.round(statSync(`${OUT}/${f}`).size / 1024) }); }
     if (out.every((f) => f.kb * 1024 <= CAP)) { files.push(...out); break; } for (const f of out) unlinkSync(`${OUT}/${f.file}`); }
 }
-// staging: towers and every marker, placement only (no air), one paste at the export's corner
-const stLo = [1e9, 1e9, 1e9], stHi = [-1e9, -1e9, -1e9], staged = [...[...towerCells].map(([k, v]) => [k, v]), ...[...markers].map(([k, b]) => [k, [b]])];
-for (const [k] of staged) k.split(",").map(Number).forEach((v, i) => { stLo[i] = Math.min(stLo[i], v); stHi[i] = Math.max(stHi[i], v); });
+// staging: towers and every marker, placement only (no air). Its box is the export's own footprint (x 0..139, z 0..194)
+// from the export's bottom (y 0) up past the decks, so it goes on exactly where the export was taken: the same corner,
+// the hologram's outline on the export's outline. Pink wool corner posts at the export's four corners confirm it.
+const posts = new Map(); for (const [x, z] of [[0, 0], [X - 1, 0], [0, Z - 1], [X - 1, Z - 1]]) { const y = surfaceY(before, x, z) + 1; for (const dy of [0, 1, 2]) posts.set(KC(x, y + dy, z), "pink_wool"); }
+const staged = [...[...towerCells].map(([k, v]) => [k, v]), ...[...markers, ...posts].map(([k, b]) => [k, [b]])];
+const stLo = [0, 0, 0], stHi = [X - 1, Math.max(...staged.map(([k]) => +k.split(",")[1])), Z - 1];
 const st = new Grid([stHi[0] - stLo[0] + 1, stHi[1] - stLo[1] + 1, stHi[2] - stLo[2] + 1], { dataVersion: orig.dataVersion });
 for (const [k, [b, s]] of staged) { const [x, y, z] = k.split(",").map(Number); st.set(x - stLo[0], y - stLo[1], z - stLo[2], b, s); }
 st.save(`${OUT}/0-staging.nbt`);
@@ -184,7 +187,7 @@ const stray = []; for (const [k, b] of markers) if (b === "pink_wool") { const [
 for (const f of files.filter((f) => f.kind === "dig")) paste(f);
 const sigc = (c) => (c && !/air$/.test(c.block) ? strip(c.block) + JSON.stringify(Object.entries(c.state ?? {}).sort()) : "air");
 let diff = 0; const diffAt = []; const keys = new Set([...sim.cells.keys(), ...finalState.cells.keys()]);
-for (const k of keys) { const [x, y, z] = k.split(",").map(Number); if (y < YS && !inLower(x, z)) continue; if (sigc(sim.cells.get(k)) !== sigc(finalState.cells.get(k))) { diff++; if (diffAt.length < 8) diffAt.push(`${x},${y - YS},${z}: ${sigc(sim.cells.get(k))} vs ${sigc(finalState.cells.get(k))}`); } }
+for (const k of keys) { const [x, y, z] = k.split(",").map(Number); if (y < YS && !inLower(x, z)) continue; if (posts.has(KC(x, y - YS, z))) continue; if (sigc(sim.cells.get(k)) !== sigc(finalState.cells.get(k))) { diff++; if (diffAt.length < 8) diffAt.push(`${x},${y - YS},${z}: ${sigc(sim.cells.get(k))} vs ${sigc(finalState.cells.get(k))}`); } }
 
 // ---- outputs: finished-state files for checking and rendering, the paste list ------------------------------------------
 const shifted = (src) => src; // grid y = world y + 4

@@ -10,8 +10,16 @@ every block is set.
 
 ## The order
 
-**0. Staging.** One cannon pastes `0-staging.nbt` at corner (+0, +1, +21), mode *Don't Replace Solid*. It holds no air
-and places only into air and water. It gives you:
+**0. Staging.** `0-staging.nbt` has your export's footprint (140 × 195) and starts at its bottom; it is 23 tall, to reach the decks.
+- **Where:** put it back where you took `antipolar_expansion_002_raw.nbt` from. Use the same corner and the same bottom,
+  so the hologram's outline sits on the area you selected for the export. Corner (+0, +0, +0), no rotation.
+- **Mode:** *Don't Replace Solid*. It holds no air and only places into air and water.
+- **Check:** a pink wool post, 3 high, stands at each of the export's 4 corners. If the posts land on the corners of the
+  land you exported, it's aligned. Take the posts away afterwards.
+- **Finding the corner:** the export's corner is Polarton's export corner + (18, 3, 64). That's x + 18, y + 3, z + 64 from
+  where `polarton_expansion_001_xl.nbt` began.
+
+It gives you:
 - **8 scaffolding towers**, one per section: a column up from the ground to a 5 × 5 deck at y 22, with the section's letter in
   pink wool on the deck. Put that section's cannon and chests on the deck. The deck sits above every box.
 - **Pink wool at the 4 corners of each section's fill box**, a block above the ground (on the water where it is wet).
@@ -36,7 +44,7 @@ Digging solid fill inside a closed ring lets no water in.
 
 | File | Section | Kind | Corner (x, y, z) | Size | KB | Mode |
 |---|---|---|---|---|---|---|
-| 0-staging.nbt | all | staging | +0, +1, +21 | 127 × 22 × 159 | 1 KB | Don't Replace Solid (placement only: it holds no air) |
+| 0-staging.nbt | all | staging | +0, +0, +0 | 140 × 23 × 195 | 2 KB | Don't Replace Solid (placement only: it holds no air) |
 | 1-A-fill.nbt | A shore west | fill | +7, +0, +26 | 70 × 15 × 27 | 62 KB | Replace Solid with Empty |
 | 1-A-fill-below.nbt | A shore west | fill below | +8, -4, +38 | 69 × 4 × 15 | 9 KB | Replace Solid with Empty |
 | 2-A-dig.nbt | A shore west | dig | +8, -4, +38 | 69 × 5 × 15 | 12 KB | Replace Solid with Empty |
