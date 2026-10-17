@@ -71,7 +71,7 @@
 
 <style>
   .viewer { margin: 0; display: grid; gap: 10px; }
-  .stage { position: relative; aspect-ratio: 4 / 3; max-width: 100%; border-radius: 4px; overflow: hidden; background: var(--sky); touch-action: none; cursor: grab; }
+  .stage { position: relative; aspect-ratio: 4 / 3; max-width: 100%; border-radius: 4px; overflow: hidden; background: var(--render-sky); touch-action: none; cursor: grab; }
   .stage:active { cursor: grabbing; }
   canvas, .poster { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
   .poster { object-fit: contain; }

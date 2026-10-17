@@ -49,16 +49,25 @@ export function loadResources() {
 
 /** Fetch an .nbt and read its blocks: [{pos, name, props}], plus its size. `offset` shifts every block (to align a pair). */
 export async function loadBlocks(url, { offset = [0, 0, 0] } = {}) {
-  const buf = new Uint8Array(await (await fetch(url)).arrayBuffer());
+  const [buf, res] = await Promise.all([fetch(url).then((r) => r.arrayBuffer()).then((b) => new Uint8Array(b)), loadResources()]);
   const s = Structure.fromNbt(NbtFile.read(buf).root);
   const size = s.getSize();
   const blocks = [];
   for (const b of s.getBlocks()) {
     const name = b.state.getName().toString();
     if (/air$/.test(name)) continue;
-    blocks.push({ pos: [b.pos[0] + offset[0], b.pos[1] + offset[1], b.pos[2] + offset[2]], name: STAND_IN[name] || name, props: STAND_IN[name] ? {} : b.state.getProperties(), water: !!STAND_IN[name] });
+    blocks.push({ pos: [b.pos[0] + offset[0], b.pos[1] + offset[1], b.pos[2] + offset[2]], name: STAND_IN[name] || name, props: STAND_IN[name] ? {} : withDefaults(res, name, b.state.getProperties()), water: !!STAND_IN[name] });
   }
   return { blocks: visible(blocks), size: [size[0] + Math.max(0, offset[0]), size[1] + Math.max(0, offset[1]), size[2] + Math.max(0, offset[2])] };
+}
+
+// Some files leave out block states (a bare grass_block); deepslate then matches no variant and draws nothing.
+// Fill them from the block's first listed variant.
+function withDefaults(res, name, props) {
+  if (Object.keys(props).length) return props;
+  const keys = Object.keys(res.getBlockDefinition(name)?.variants ?? {});
+  if (!keys.length || keys.includes("")) return props;
+  return Object.fromEntries(keys[0].split(",").map((kv) => kv.split("=")));
 }
 
 // Only the top layer of water is kept: a swamp is mostly water, and its depths add nothing but faces to draw.
@@ -84,10 +93,13 @@ export function cannonOrder(blocks) {
   return [...first.sort((a, b) => key(a) - key(b)), ...later.sort((a, b) => key(a) - key(b))];
 }
 
-/** A camera that orbits the structure's centre: yaw/pitch/distance, plus a pan offset. */
+// A narrow lens, so builds read close to the isometric renders instead of the fisheye of deepslate's 70°.
+const FOV = 30 * Math.PI / 180;
+/** A camera that orbits the structure's centre: yaw/pitch/distance, plus a pan offset. Starts with the whole box in frame. */
 export function orbitFor(size) {
   const r = Math.hypot(size[0], size[1], size[2]);
-  return { yaw: Math.PI * 1.25, pitch: 0.55, dist: r * 0.75, pan: [0, 0], center: [size[0] / 2, size[1] * 0.2, size[2] / 2], min: r * 0.25, max: Math.min(r * 3, 400) };
+  const dist = (r * 0.5) / Math.tan(FOV / 2) * 0.95;
+  return { yaw: Math.PI * 1.25, pitch: 0.55, dist, pan: [0, 0], center: [size[0] / 2, size[1] * 0.45, size[2] / 2], min: dist * 0.15, max: dist * 2.5 };
 }
 export function viewMatrix(cam) {
   const m = mat4.create();
@@ -104,6 +116,7 @@ export function createView(canvas, structure, res) {
   if (!gl) throw new Error("WebGL is not available in this browser");
   // No outline mesh for empty cells: deepslate builds one per air cell in the box, which is most of a landscape's cost.
   const renderer = new StructureRenderer(gl, structure, res, { chunkSize: 16, useInvisibleBlockBuffer: false });
+  renderer.getPerspective = () => mat4.perspective(mat4.create(), FOV, canvas.clientWidth / canvas.clientHeight, 1, 4000);
   const fit = () => {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr);

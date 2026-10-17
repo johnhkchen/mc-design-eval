@@ -7,6 +7,7 @@ export default defineConfig({
   site: "https://mc-design.b28.dev",
   integrations: [svelte()],
   trailingSlash: "ignore",
+  devToolbar: { enabled: false },
   server: { host: "127.0.0.1", port: 5178 },
   vite: { plugins: [boardApi()], server: { allowedHosts: [".ts.net"] } },
 });

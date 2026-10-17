@@ -63,7 +63,7 @@
 
 <style>
   .scrubber { margin: 0; display: grid; gap: 10px; }
-  .stage { position: relative; aspect-ratio: 16 / 10; max-width: 100%; border-radius: 4px; overflow: hidden; background: var(--sky); touch-action: none; cursor: grab; user-select: none; }
+  .stage { position: relative; aspect-ratio: 16 / 10; max-width: 100%; border-radius: 4px; overflow: hidden; background: var(--render-sky); touch-action: none; cursor: grab; user-select: none; }
   .stage:active { cursor: grabbing; }
   canvas, .poster { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
   .poster { object-fit: cover; }

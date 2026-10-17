@@ -1,4 +1,5 @@
 ---
+import { SEC_PER_BLOCK, cannonMinutes } from "../../data/cannon.js";
 import Base from "../../layouts/Base.astro";
 import Viewer3D from "../../components/Viewer3D.svelte";
 import catalog from "../../data/catalog.json";
@@ -6,7 +7,7 @@ import { projectById } from "../../data/projects.js";
 export function getStaticPaths() { return catalog.map((e) => ({ params: { id: e.id }, props: { e } })); }
 const { e } = Astro.props;
 const project = projectById[e.project];
-const minutes = Math.round((e.blocks * 1.5) / 60);
+const minutes = cannonMinutes(e.blocks);
 ---
 <Base title={e.name} description={`${e.name}: a ${e.style.toLowerCase()} building for Minecraft ${e.version}, on a ${e.footprint.join(" × ")} plot.`}>
   <section class="wrap section detail">
@@ -19,7 +20,7 @@ const minutes = Math.round((e.blocks * 1.5) / 60);
         <dt>Plot</dt><dd class="mono">{e.footprint.join(" × ")} blocks, {e.height} high</dd>
         <dt>Door</dt><dd>Faces the street (north in the file)</dd>
         <dt>Blocks</dt><dd class="mono">{e.blocks.toLocaleString()}</dd>
-        <dt>Cannon time</dt><dd class="mono">about {minutes} min at 1.5 s a block</dd>
+        <dt>Cannon time</dt><dd class="mono">about {minutes} min at {SEC_PER_BLOCK} s a block</dd>
         <dt>Version</dt><dd class="mono">Minecraft {e.version}</dd>
         {project && <><dt>Built in</dt><dd><a href={`/projects/${project.id}/`}>{project.code} {project.name}</a>, {project.town}</dd></>}
       </dl>

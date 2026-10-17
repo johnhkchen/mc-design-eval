@@ -1,18 +1,25 @@
 ---
 import Base from "../layouts/Base.astro";
+// Each step pairs with a real picture from DH-01 or DH-02.
 const steps = [
-  ["Capture", "You export your land with Create's Schematic and Quill and send the file. If water is involved, we also ask for what lies under it, so we can count the fill properly rather than guess."],
-  ["Plan", "Roads, plots and earthworks are laid over your land. Each plan reports how many blocks the cannons must change and how long the longest chain of pastes takes, so a plan that would tie up your cannons gets re-cut before you see it."],
-  ["Kit", "Buildings come from the catalog, or are designed for the town and then join the catalog. Each sits on a standard plot with its door to the street and a stepped, accessible approach."],
-  ["Deliver", "Files are cut so every cannon gets about the same amount of work. Each comes with its world corner, its paste mode and its materials, and a staging file places the cannon decks and alignment markers."],
-  ["Build", "You paste in survival. The construction board tracks every job, which cannon it is on, and what can start next."],
+  ["Capture", "You export your land with Create's Schematic and Quill and send the file. If water is involved, we also ask for what lies under it, so we can count the fill properly rather than guess.", ["/img/projects/dh01-before.jpg", "DH-01 as Antipolar sent it: a bare hill by a stream"]],
+  ["Plan", "Roads, plots and earthworks are laid over your land. Each plan reports how many blocks the cannons must change and how long the longest chain of pastes takes, so a plan that would tie up your cannons gets re-cut before you see it.", ["/img/projects/dh01-plan.jpg", "The DH-01 plan: streets, plots, and where the hill was cut"]],
+  ["Kit", "Buildings come from the catalog, or are designed for the town and then join the catalog. Each sits on a standard plot with its door to the street and a stepped, accessible approach.", ["/img/catalog/polarton-04-church.jpg", "No. 04, the church, one of the eight DH-01 buildings", "contain"]],
+  ["Deliver", "Files are cut so every cannon gets about the same amount of work. Each comes with its world corner, its paste mode and its materials, and a staging file places the cannon decks and alignment markers.", ["/img/projects/dh02-plan.jpg", "DH-02 cut into lettered sections, one per cannon"]],
+  ["Build", "You paste in survival. The construction board tracks every job, which cannon it is on, and what can start next.", ["/img/projects/dh01-after.jpg", "DH-01 as built"]],
 ];
 ---
 <Base title="How it works" description="From an export of your land to a town you paste in survival.">
   <section class="wrap section">
     <span class="eyebrow">How it works</span>
     <h1>From your land to a town you can paste</h1>
-    <ol class="steps">{steps.map(([h, t], i) => <li><span class="no">{String(i + 1).padStart(2, "0")}</span><div><h3>{h}</h3><p>{t}</p></div></li>)}</ol>
+    <ol class="steps">{steps.map(([h, t, [src, alt, fit = "cover"]], i) => (
+      <li>
+        <span class="no">{String(i + 1).padStart(2, "0")}</span>
+        <div class="text"><h3>{h}</h3><p>{t}</p></div>
+        <figure><img src={src} alt={alt} style={`object-fit: ${fit}`} loading="lazy" width="600" height="600" /><figcaption class="muted">{alt}</figcaption></figure>
+      </li>
+    ))}</ol>
   </section>
   <section class="wrap section">
     <h2>Behind it</h2>
@@ -20,8 +27,17 @@ const steps = [
   </section>
 </Base>
 <style>
-  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; max-width: 760px; }
-  .steps li { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 12px; align-items: start; }
-  .steps .no { font-size: 1.6rem; line-height: 1; }
-  .steps div { display: grid; gap: 4px; }
+  .steps { list-style: none; margin: 8px 0 0; padding: 0; display: grid; }
+  .steps li { display: grid; grid-template-columns: 3.2rem minmax(0, 6fr) minmax(0, 4fr); gap: 0 28px; align-items: start; padding-block: 28px; border-top: 1px solid var(--rule); position: relative; }
+  .steps li:last-child { border-bottom: 1px solid var(--rule); }
+  .steps .no { font-size: 2rem; line-height: 1; }
+  .steps .text { display: grid; gap: 6px; }
+  .steps h3 { font-size: 1.5rem; }
+  figure { margin: 0; display: grid; gap: 6px; }
+  figure img { aspect-ratio: 4 / 3; width: 100%; height: auto; object-fit: cover; border-radius: 4px; background: var(--render-sky); }
+  figcaption { font-size: .82rem; }
+  @media (max-width: 760px) {
+    .steps li { grid-template-columns: 2.6rem minmax(0, 1fr); gap: 14px 12px; }
+    .steps figure { grid-column: 2; }
+  }
 </style>

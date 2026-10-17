@@ -6,6 +6,8 @@
   --display: "Zilla Slab", Rockwell, "Roboto Slab", Georgia, serif;
   --body: "Public Sans", system-ui, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  /* The sky baked into every render; the same in both themes so posters, thumbnails and 3-D views match. */
+  --render-sky: linear-gradient(#a7c7f0, #dbe7f7);
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
@@ -34,10 +36,12 @@ p { margin: 0; max-width: 64ch; }
 .section { padding-block: 56px; display: grid; gap: 24px; }
 .rule { border: 0; border-top: 1px solid var(--rule); margin: 0; }
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 28px 22px; }
+@media (max-width: 600px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 14px; } .card h3 { font-size: 1rem; } }
 .card { display: grid; gap: 8px; text-decoration: none; color: inherit; align-content: start; }
-.card .thumb { aspect-ratio: 1; background: var(--sky); border-radius: 4px; overflow: hidden; }
+.card .thumb { aspect-ratio: 1; background: var(--render-sky); border-radius: 4px; overflow: hidden; }
 .card .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .25s; }
 .card:hover .thumb img { transform: scale(1.03); }
 .card h3 { font-size: 1.15rem; }
 .spec { font-family: var(--mono); font-size: .8rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
 @media (prefers-reduced-motion: reduce) { .card .thumb img { transition: none; } }
+.spec > span { white-space: nowrap; }

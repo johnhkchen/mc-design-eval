@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import CatalogCard from "../../components/CatalogCard.svelte";
 import Scrubber3D from "../../components/Scrubber3D.svelte";
 import catalog from "../../data/catalog.json";
 import { projects } from "../../data/projects.js";
@@ -19,16 +20,20 @@ const mods = catalog.filter((e) => p.modules.includes(e.id));
   <section class="wrap section story">
     {p.story.map(([h, t]) => <div><h3>{h}</h3><p>{t}</p></div>)}
   </section>
+  {p.plan && (
+    <section class="wrap section">
+      <figure class="plan">
+        <img src={p.plan} alt={`Plan of ${title}`} loading="lazy" width="1200" height="1200" />
+        <figcaption><span class="eyebrow">The plan</span><p class="muted">{p.planCaption}</p></figcaption>
+      </figure>
+    </section>
+  )}
   {mods.length > 0 && (
     <section class="wrap section">
       <h2>The buildings</h2>
       <div class="cards">
         {mods.map((e) => (
-          <a class="card" href={`/catalog/${e.id}/`}>
-            <div class="thumb"><img src={e.image} alt={e.name} loading="lazy" width="525" height="525" /></div>
-            <span class="eyebrow"><span class="no">No. {e.id.split("-")[1]}</span> · {e.type}</span>
-            <h3>{e.name}</h3>
-          </a>
+          <CatalogCard e={e} />
         ))}
       </div>
     </section>
@@ -42,5 +47,9 @@ const mods = catalog.filter((e) => p.modules.includes(e.id));
   .ph { font-size: .5em; font-weight: 500; }
   .lede { font-size: 1.15rem; }
   .story { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 28px; padding-top: 8px; }
+  .plan { margin: 0; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 28px; align-items: end; }
+  .plan img { width: 100%; height: auto; border-radius: 4px; image-rendering: pixelated; }
+  .plan figcaption { display: grid; gap: 8px; }
+  @media (max-width: 800px) { .plan { grid-template-columns: minmax(0, 1fr); } }
   .story div { display: grid; gap: 8px; align-content: start; }
 </style>
