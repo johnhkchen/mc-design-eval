@@ -2,10 +2,10 @@
 //   0. staging.nbt: one cannon places a scaffolding tower with a deck for every section's cannon (the section's letter
 //      in pink wool on its deck), PINK wool at each section box's corners (eaten by the section's own paste) and MAGENTA
 //      wool at each below-water box's corners (they stay until you take them away). Placement only: no air in it.
-//   1. <S>-fill.nbt (every section): the works above the water line, full box, the polder brought up to y 0 as solid
-//      fill. <S>-fill-below.nbt (ring sections A, C, E): everything from y -4 to -1 under the ring made solid: water
+//   1. 1-<S>-fill.nbt (every section): the works above the water line, full box, the polder brought up to y 0 as solid
+//      fill. 1-<S>-fill-below.nbt (ring sections A, C, E): everything from y -4 to -1 under the ring made solid: water
 //      under the levees and the polder replaced by fill, so nothing is dug yet and no water can move.
-//   2. <S>-dig.nbt (ring sections, once A, C and E are all filled: the ring is then closed): the polder dug out to its
+//   2. 2-<S>-dig.nbt (ring sections, once A, C and E are all filled: the ring is then closed): the polder dug out to its
 //      floor at y -2, the ditches, canals and paddies cut. Digging solid fill inside a closed ring lets no water in.
 // Every file holds the whole of its box (the cannon reads a missing cell as air). Cells below y 0 appear only inside the
 // ring's own rectangle, where every block is set by us. Towers are kept in every file that covers them.
@@ -136,12 +136,12 @@ const boxes = [];
 for (const s of secs) {
   // the box above the water line: x/z as cropped, y from 0 to the highest cell the section changes
   let yTop = 0; for (let z = s.z0; z <= s.z1; z++) for (let x = s.x0; x <= s.x1; x++) for (let y = 0; y < 18; y++) { const a = before.get(x, y + YS, z), b = landfill.get(x, y + YS, z); const an = a && !/air$/.test(a.block) ? a.block + JSON.stringify(a.state ?? {}) : "air", bn = b && !/air$/.test(b.block) ? b.block + JSON.stringify(b.state ?? {}) : "air"; if (an !== bn) yTop = Math.max(yTop, y); }
-  const up = { file: `${s.name[0]}-fill.nbt`, section: s.name, kind: "fill", x0: s.x0, z0: s.z0, x1: s.x1, z1: s.z1, y0: 0, y1: yTop, mode: "Replace Solid with Empty" };
+  const up = { file: `1-${s.name[0]}-fill.nbt`, section: s.name, kind: "fill", x0: s.x0, z0: s.z0, x1: s.x1, z1: s.z1, y0: 0, y1: yTop, mode: "Replace Solid with Empty" };
   boxes.push(up);
   for (const [x, z] of [[up.x0, up.z0], [up.x1, up.z0], [up.x0, up.z1], [up.x1, up.z1]]) markers.set(KC(x, surfaceY(before, x, z) + 1, z), "pink_wool");
   if (ringSec(s)) { const lb = { x0: Math.max(s.x0, LOWER_BOX.x0), z0: Math.max(s.z0, LOWER_BOX.z0), x1: Math.min(s.x1, LOWER_BOX.x1), z1: Math.min(s.z1, LOWER_BOX.z1) };
-    boxes.push({ file: `${s.name[0]}-fill-below.nbt`, section: s.name, kind: "fill below", ...lb, y0: LOWER_BOX.y0, y1: -1, mode: "Replace Solid with Empty" });
-    boxes.push({ file: `${s.name[0]}-dig.nbt`, section: s.name, kind: "dig", ...lb, y0: LOWER_BOX.y0, y1: 0, mode: "Replace Solid with Empty" });
+    boxes.push({ file: `1-${s.name[0]}-fill-below.nbt`, section: s.name, kind: "fill below", ...lb, y0: LOWER_BOX.y0, y1: -1, mode: "Replace Solid with Empty" });
+    boxes.push({ file: `2-${s.name[0]}-dig.nbt`, section: s.name, kind: "dig", ...lb, y0: LOWER_BOX.y0, y1: 0, mode: "Replace Solid with Empty" });
     // magenta: the below-water boxes' corners, a block above the finished fill so they outlast the fill paste
     for (const [x, z] of [[lb.x0, lb.z0], [lb.x1, lb.z0], [lb.x0, lb.z1], [lb.x1, lb.z1]]) { const y = Math.max(surfaceY(landfill, x, z), 0) + 1; markers.set(KC(x, y, z), "magenta_wool"); } }
 }

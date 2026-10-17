@@ -19,13 +19,13 @@ and places only into air and water. It gives you:
 - **Magenta wool at the 4 corners of each below-water box** (sections A, C, E), a block above the finished fill. They
   outlast the fill so you can line up the dig. Take them away by hand afterwards.
 
-**1. Fill.** For every section paste `<S>-fill.nbt`, and for A, C and E also `<S>-fill-below.nbt` (*Replace Solid with
+**1. Fill.** For every section paste `1-<S>-fill.nbt`, and for A, C and E also `1-<S>-fill-below.nbt` (*Replace Solid with
 Empty*, no rotation). The two can run in either order. The levee ring goes up, and its inside is landfilled solid from
 y −4 to y 0. Nothing is dug and no water is left open, so nothing can flood. The towers are part of every file that
 covers them, so the cannons never take their own towers down.
 
-**2. Dig, once A, C and E are all filled** (the ring is then closed all round): paste `A-dig.nbt`, `C-dig.nbt`,
-`E-dig.nbt`. These dig the polder down to its floor at y −2 and cut the seepage ditch, canals, field ditches and paddies.
+**2. Dig, once A, C and E are all filled** (the ring is then closed all round): paste `2-A-dig.nbt`, `2-C-dig.nbt`,
+`2-E-dig.nbt`. These dig the polder down to its floor at y −2 and cut the seepage ditch, canals, field ditches and paddies.
 Digging solid fill inside a closed ring lets no water in.
 - **The cannon does not place water** (I believe it skips fluids; worth a check on the test pond first). The ditches and
   paddies will come out dry. Flood them from the swamp with buckets, or later through the pump houses.
@@ -37,20 +37,20 @@ Digging solid fill inside a closed ring lets no water in.
 | File | Section | Kind | Corner (x, y, z) | Size | KB | Mode |
 |---|---|---|---|---|---|---|
 | 0-staging.nbt | all | staging | +0, +1, +21 | 127 × 22 × 159 | 1 KB | Don't Replace Solid (placement only: it holds no air) |
-| A-fill.nbt | A shore west | fill | +7, +0, +26 | 70 × 15 × 27 | 62 KB | Replace Solid with Empty |
-| A-fill-below.nbt | A shore west | fill below | +8, -4, +38 | 69 × 4 × 15 | 9 KB | Replace Solid with Empty |
-| A-dig.nbt | A shore west | dig | +8, -4, +38 | 69 × 5 × 15 | 12 KB | Replace Solid with Empty |
-| B-fill.nbt | B shore east | fill | +77, +0, +28 | 50 × 14 × 25 | 38 KB | Replace Solid with Empty |
-| C-fill.nbt | C polder north | fill | +2, +0, +53 | 75 × 14 × 47 | 107 KB | Replace Solid with Empty |
-| C-fill-below.nbt | C polder north | fill below | +8, -4, +53 | 69 × 4 × 47 | 30 KB | Replace Solid with Empty |
-| C-dig.nbt | C polder north | dig | +8, -4, +53 | 69 × 5 × 47 | 38 KB | Replace Solid with Empty |
-| D-fill.nbt | D waterfront north | fill | +77, +0, +53 | 36 × 13 × 47 | 51 KB | Replace Solid with Empty |
-| E-fill.nbt | E polder south | fill | +1, +0, +100 | 76 × 14 × 55 | 126 KB | Replace Solid with Empty |
-| E-fill-below.nbt | E polder south | fill below | +8, -4, +100 | 69 × 4 × 55 | 35 KB | Replace Solid with Empty |
-| E-dig.nbt | E polder south | dig | +8, -4, +100 | 69 × 5 × 55 | 44 KB | Replace Solid with Empty |
-| F-fill.nbt | F waterfront south | fill | +77, +0, +100 | 48 × 14 × 55 | 84 KB | Replace Solid with Empty |
-| G-fill.nbt | G bluff and plateau | fill | +0, +0, +155 | 77 × 10 × 25 | 44 KB | Replace Solid with Empty |
-| H-fill.nbt | H pasture | fill | +77, +0, +155 | 45 × 12 × 25 | 32 KB | Replace Solid with Empty |
+| 1-A-fill.nbt | A shore west | fill | +7, +0, +26 | 70 × 15 × 27 | 62 KB | Replace Solid with Empty |
+| 1-A-fill-below.nbt | A shore west | fill below | +8, -4, +38 | 69 × 4 × 15 | 9 KB | Replace Solid with Empty |
+| 2-A-dig.nbt | A shore west | dig | +8, -4, +38 | 69 × 5 × 15 | 12 KB | Replace Solid with Empty |
+| 1-B-fill.nbt | B shore east | fill | +77, +0, +28 | 50 × 14 × 25 | 38 KB | Replace Solid with Empty |
+| 1-C-fill.nbt | C polder north | fill | +2, +0, +53 | 75 × 14 × 47 | 107 KB | Replace Solid with Empty |
+| 1-C-fill-below.nbt | C polder north | fill below | +8, -4, +53 | 69 × 4 × 47 | 30 KB | Replace Solid with Empty |
+| 2-C-dig.nbt | C polder north | dig | +8, -4, +53 | 69 × 5 × 47 | 38 KB | Replace Solid with Empty |
+| 1-D-fill.nbt | D waterfront north | fill | +77, +0, +53 | 36 × 13 × 47 | 51 KB | Replace Solid with Empty |
+| 1-E-fill.nbt | E polder south | fill | +1, +0, +100 | 76 × 14 × 55 | 126 KB | Replace Solid with Empty |
+| 1-E-fill-below.nbt | E polder south | fill below | +8, -4, +100 | 69 × 4 × 55 | 35 KB | Replace Solid with Empty |
+| 2-E-dig.nbt | E polder south | dig | +8, -4, +100 | 69 × 5 × 55 | 44 KB | Replace Solid with Empty |
+| 1-F-fill.nbt | F waterfront south | fill | +77, +0, +100 | 48 × 14 × 55 | 84 KB | Replace Solid with Empty |
+| 1-G-fill.nbt | G bluff and plateau | fill | +0, +0, +155 | 77 × 10 × 25 | 44 KB | Replace Solid with Empty |
+| 1-H-fill.nbt | H pasture | fill | +77, +0, +155 | 45 × 12 × 25 | 32 KB | Replace Solid with Empty |
 
 ## Towers (cannon decks at y 22)
 
