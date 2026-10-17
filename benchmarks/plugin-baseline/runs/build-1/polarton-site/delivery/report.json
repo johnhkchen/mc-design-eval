@@ -1,0 +1,135 @@
+{
+ "streets": [
+  {
+   "name": "lane 1 west",
+   "length": 16,
+   "from": 0,
+   "to": 3
+  },
+  {
+   "name": "lane 2 west",
+   "length": 26,
+   "from": 0,
+   "to": 3
+  },
+  {
+   "name": "contour +3",
+   "length": 67,
+   "from": 3,
+   "to": 3
+  },
+  {
+   "name": "terrace",
+   "length": 39,
+   "from": 3,
+   "to": 8
+  },
+  {
+   "name": "plateau",
+   "length": 50,
+   "from": 6.5,
+   "to": 11
+  }
+ ],
+ "modulePlots": 8,
+ "extras": [
+  "small build",
+  "farm",
+  "farm",
+  "farm",
+  "pasture",
+  "park",
+  "park",
+  "park",
+  "park",
+  "park",
+  "park",
+  "park",
+  "park"
+ ],
+ "earth": {
+  "cut": 978,
+  "fill": 792
+ },
+ "retainingWallBlocks": 519,
+ "treesCleared": {
+  "logs": 359,
+  "leaves": 4259,
+  "floatingRemnants": 19
+ },
+ "streetStepsOver05": 3,
+ "stepExamples": [
+  "50,68:3->2",
+  "39,44:10->9",
+  "39,45:10->8.5"
+ ],
+ "driveways": [
+  {
+   "plot": "70,67",
+   "face": "north",
+   "len": 2,
+   "ok": true,
+   "faults": []
+  },
+  {
+   "plot": "44,24",
+   "face": "west",
+   "len": 1,
+   "ok": true,
+   "faults": []
+  },
+  {
+   "plot": "25,38",
+   "face": "east",
+   "len": 1,
+   "ok": true,
+   "faults": []
+  },
+  {
+   "plot": "70,46",
+   "face": "south",
+   "len": 0,
+   "ok": true,
+   "faults": []
+  },
+  {
+   "plot": "22,26",
+   "face": "east",
+   "len": 2,
+   "ok": true,
+   "faults": []
+  },
+  {
+   "plot": "58,74",
+   "face": "north",
+   "len": 9,
+   "ok": true,
+   "faults": []
+  },
+  {
+   "plot": "46,76",
+   "face": "north",
+   "len": 9,
+   "ok": true,
+   "faults": []
+  },
+  {
+   "plot": "46,37",
+   "face": "west",
+   "len": 1,
+   "ok": true,
+   "faults": []
+  },
+  {
+   "plot": "53,65",
+   "face": "north",
+   "len": 0,
+   "ok": true,
+   "faults": []
+  }
+ ],
+ "changes": {
+  "placed": 3256,
+  "dug": 6645
+ }
+}
