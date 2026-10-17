@@ -5,30 +5,25 @@ below is in the export's frame: x runs west to east, z north to south, and the l
 
 ## Files
 
-- `landscape.nbt`: the terraformed land alone, as a full-area schematic (93 × 35 × 90).
-  - It includes the earthworks, streets, pads, walls, fences and tracks, and the village's 3 plots as they are.
-  - It has explicit air in all 6,645 cells that were dug or cleared, so "Replace with Empty" takes the landmass away.
-  - It has no new buildings: `kit-changes.nbt`, on the same corner, adds them later.
-  - The landscape plus the kit changes equals `village.nbt` exactly.
-- `kit-changes.nbt`: the 8 buildings alone, against the landscape.
-- `village-changes.nbt`: landscape and buildings in one paste, against the original export.
+The schematicannon reads every cell a schematic leaves out as air. So a file pasted with "Replace Solid with Empty" must
+hold the whole of its box, untouched blocks included, or it wipes them.
 
-- `changes.nbt`: only what changed.
-  - 3,256 blocks placed.
-  - 6,645 explicit air cells, where earth was dug or trees were cleared.
-  - Vanilla blocks only.
-- `after.nbt`: the whole area as it should look afterwards (for checking and rendering, not for pasting).
-- `cannon-test.nbt`: 3 × 3 × 3. A stone floor with one corner cell explicit air, and one cobblestone above the middle.
-- `layout.json`: streets (centre points with heights), module plots, extra plots.
-- `report.json`: earthworks, walls, trees cleared, driveway checks.
+1. **`landscape.nbt`** (61 × 25 × 90, 160 KB): the terraformed land.
+   - **Paste:** with its lowest north-west corner at the export's corner **+ (21, 3, 0)**: x + 21, y + 3, z + 0. No rotation, **Replace Solid with Empty**.
+   - **The box:** exactly what the earthworks touch. It holds every block in it, untouched ones included, with explicit air wherever earth or trees come out. Nothing below y 3, and no village columns (x 82 and east).
+   - **Result:** it digs the landmass and lays the streets, pads, retaining walls, driveways, fences and tracks. No buildings.
+2. **`kit-changes.nbt`** (93 × 41 × 90, 25 KB): the 8 buildings.
+   - **Paste:** whenever you have the materials, at the export's own corner, no rotation, **Replace Solid with Solid**.
+   - **No air in it:** that mode never clears, and the landscape already cleared everything the buildings need.
+3. **`cannon-test.nbt`**: on flat ground, "Replace Solid with Empty". The corner stone should go and a cobblestone appear.
 
-## Pasting with the schematicannon
+A simulated paste of 1 then 2 over the original export gives exactly `village.nbt`, block for block.
 
-1. **Test the air handling first.** Paste `cannon-test.nbt` on flat ground with "Replace with Empty".
-   - If the floor's corner block is removed, explicit air digs.
-   - If it stays, the cannon skips air: nothing will be dug, and the streets and pads will sit on uncut ground.
-2. **Paste `changes.nbt`** with its corner exactly where the export's corner was, with no rotation and no mirror.
-   - The cannon only needs materials for what is placed. Nothing in it is modded.
+`not-for-the-cannon/` holds the changes-only files (`changes.nbt`, `village-changes.nbt`). They leave untouched cells
+out, so "Replace with Empty" would wipe the hill and the village. Keep them for tools that skip missing cells, never the cannon.
+
+- `after.nbt`, `village.nbt`: the whole area after the earthworks, and with the buildings (for checking and rendering).
+- `layout.json`: streets (centre points with heights), module plots, extra plots. `report.json`: earthworks, walls, trees, driveways.
 
 ## What it builds
 

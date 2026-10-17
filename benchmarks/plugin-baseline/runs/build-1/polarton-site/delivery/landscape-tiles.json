@@ -1,0 +1,31 @@
+{
+ "note": "offset = this tile's lowest north-west corner, from the export's corner (same frame as the export)",
+ "box": {
+  "from": [
+   21,
+   3,
+   0
+  ],
+  "to": [
+   81,
+   27,
+   89
+  ]
+ },
+ "tiles": [
+  {
+   "file": "landscape.nbt",
+   "offset": [
+    21,
+    3,
+    0
+   ],
+   "size": [
+    61,
+    25,
+    90
+   ],
+   "kb": 160
+  }
+ ]
+}
