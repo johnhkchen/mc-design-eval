@@ -15,7 +15,7 @@ const labels = [
   ...L.zones.map((z) => ({ text: z.name.toUpperCase(), x: (z.rect[0] + z.rect[2] + 1) / 2, z: z.name === "wetland" ? 60 : (z.rect[1] + z.rect[3] + 1) / 2 - 1, scale: 1 })),
   ...L.polders.map((p, i) => ({ text: ["POLDER 1 FAUBOURG", "POLDER 2 FIELDS", "POLDER 3 RICE"][i], x: (p.rect[0] + p.rect[2] + 1) / 2, z: p.rect[1] + 3, scale: 1 })),
   ...L.plots.map((p, i) => ({ text: `H${i + 1}`, x: (p.x0 + p.x1 + 1) / 2, z: (p.z0 + p.z1 + 1) / 2 + 1, scale: 1 })),
-  ...L.waterfront.map((p, i) => ({ text: `M${i + 1}`, x: (p.x0 + p.x1 + 1) / 2, z: (p.z0 + p.z1 + 1) / 2 + 1, scale: 1 })),
+  ...L.waterfront.map((p, i) => ({ text: /distillery/.test(p.use) ? "DISTILLERY" : /brewhouse/.test(p.use) ? "BREWHOUSE" : `M${L.waterfront.slice(0, i + 1).filter((q) => q.use === "mixed use").length}`, x: (p.x0 + p.x1 + 1) / 2, z: (p.z0 + p.z1 + 1) / 2 + 1, scale: 1 })),
   ...secs.map((s) => ({ text: s.name.split(" ")[0], x: s.x1 - 2, z: s.z0 + 3, scale: 2 })),
   { text: "POLARTON", x: 40, z: 8, scale: 1 }, { text: "VILLAGE", x: 105, z: 8, scale: 1 },
   { text: "CREST 2", x: 20, z: 70, scale: 1 }, { text: "CREST 2", x: 63, z: 125, scale: 1 }, { text: "FLOOR -1", x: 42, z: 79, scale: 1 },

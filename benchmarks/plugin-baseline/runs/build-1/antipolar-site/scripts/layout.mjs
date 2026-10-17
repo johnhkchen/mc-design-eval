@@ -118,10 +118,14 @@ export function computeLayout() {
   const deck = (x, z, kind) => { const g = H[z]?.[x] ?? -99; if (g > DECK) return; set(x, z, { t: DECK, surf: "spruce_planks", kind, deck: true, ground: g }, 4); };
   // east levee: plots x 66..75, 10 along z, skipping the island's reach; the boardwalk x 76..78
   const EAST = { x0: RING.east + 3, x1: RING.east + 12, bw: [RING.east + 13, RING.east + 15] };
-  for (const z0 of [52, 64, 100, 112, 124, 136]) waterfront.push({ x0: EAST.x0, z0, x1: EAST.x1, z1: z0 + 9, face: "west", front: CREST, street: "east levee" });
+  for (const z0 of [52, 64]) waterfront.push({ x0: EAST.x0, z0, x1: EAST.x1, z1: z0 + 9, face: "west", front: CREST, street: "east levee", use: "mixed use" });
+  // beside the fields, the works that take their grain: corn to the distillery, rice to the brewhouse; each a double
+  // plot with its own piers for the barrels going out by boat
+  waterfront.push({ x0: EAST.x0, z0: 100, x1: EAST.x1, z1: 121, face: "west", front: CREST, street: "east levee", use: "distillery (corn whiskey: still house, mash tun, a rickhouse for the barrels)" });
+  waterfront.push({ x0: EAST.x0, z0: 124, x1: EAST.x1, z1: 145, face: "west", front: CREST, street: "east levee", use: "brewhouse (rice beer: kettles, a malt floor, a cellar store)" });
   // shore street: plots z 38..47 on its south side, the boardwalk z 49..51 behind them
   const SHORE = { z0: 38, z1: 47, bw: [49, 51] };
-  for (const x0 of [69, 81, 93]) waterfront.push({ x0, z0: SHORE.z0, x1: x0 + 9, z1: SHORE.z1, face: "north", front: CREST, street: "shore street" });
+  for (const x0 of [69, 81, 93]) waterfront.push({ x0, z0: SHORE.z0, x1: x0 + 9, z1: SHORE.z1, face: "north", front: CREST, street: "shore street", use: "mixed use" });
   for (let z = SHORE.bw[0]; z <= 146; z++) for (let x = EAST.bw[0]; x <= EAST.bw[1]; x++) deck(x, z, "boardwalk");
   for (let x = RING.east + 3; x <= 104; x++) for (let z = SHORE.bw[0]; z <= SHORE.bw[1]; z++) deck(x, z, "boardwalk");
   // finger piers, 2 wide, 10 out
@@ -129,7 +133,7 @@ export function computeLayout() {
   for (const x of [86, 98]) { piers.push({ x0: x, z0: SHORE.bw[1] + 1, x1: x + 1, z1: SHORE.bw[1] + 10 }); for (let z = SHORE.bw[1] + 1; z <= SHORE.bw[1] + 10; z++) for (const dx of [0, 1]) deck(x + dx, z, "pier"); }
   // alleys: crest 2 down to the deck 1 by two half steps, a landing at each end
   const alley = (cells, along) => { const n = cells.length, prof = cells.map((_, i) => (i < 3 ? CREST : i < 5 ? CREST - 0.5 : DECK)); cells.forEach(([x, z], i) => { set(x, z, { t: prof[i], surf: "spruce_planks", kind: "alley", deck: true, ground: H[z]?.[x] ?? -99 }, 5); }); alleys.push({ cells: cells.length, prof }); };
-  for (const z of [62, 74, 110, 122, 134]) for (const dz of [0, 1]) alley(Array.from({ length: 10 }, (_, i) => [EAST.x0 + i, z + dz]));
+  for (const z of [62, 74, 122]) for (const dz of [0, 1]) alley(Array.from({ length: 10 }, (_, i) => [EAST.x0 + i, z + dz]));
   for (const x of [79, 91]) for (const dx of [0, 1]) alley(Array.from({ length: 10 }, (_, i) => [x + dx, SHORE.z0 + i]));
 
   // ---- earthworks tally ----------------------------------------------------------------------------------------

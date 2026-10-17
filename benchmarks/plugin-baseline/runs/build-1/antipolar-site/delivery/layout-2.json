@@ -2,7 +2,7 @@
  "frame": "antipolar_expansion_002_raw.nbt; its corner is Polarton's (18,3,64); heights are top-block y; water surface y 0",
  "earth": {
   "cut": 1985,
-  "fill": 5691,
+  "fill": 5703,
   "drainedCells": 1090,
   "cellsBelowTheExport": 3391
  },
@@ -21,7 +21,7 @@
    "z0": 26,
    "z1": 52,
    "xMin": 60,
-   "note": "the ring's north-east corner, shore street, mixed-use plots M7-M9, the north boardwalk and its piers",
+   "note": "the ring's north-east corner, shore street, mixed-use plots M5-M7, the north boardwalk and its piers",
    "x0": 60,
    "x1": 106
   },
@@ -36,21 +36,29 @@
   {
    "name": "D fields",
    "z0": 88,
-   "z1": 110,
-   "note": "polder 2: floor, ditches, pump house site",
+   "z1": 99,
+   "note": "polder 2 north: floor, first ditch, the boardwalk past the island",
    "x0": 16,
    "x1": 88
   },
   {
-   "name": "E rice",
-   "z0": 111,
+   "name": "E works",
+   "z0": 100,
+   "z1": 145,
+   "note": "polder 2 south and polder 3 (ditches, paddies, bunds), the pump house site, the distillery and brewhouse plots and their piers",
+   "x0": 16,
+   "x1": 88
+  },
+  {
+   "name": "F bluff",
+   "z0": 146,
    "z1": 172,
-   "note": "the polder 2/3 cross-dike, polder 3: paddies and bunds, the south levee, M4-M6, the bluff road up the draw",
+   "note": "the south levee, the bluff road up the draw",
    "x0": 16,
-   "x1": 88
+   "x1": 78
   },
   {
-   "name": "F plateau west",
+   "name": "G plateau west",
    "z0": 173,
    "z1": 194,
    "xMax": 51,
@@ -59,7 +67,7 @@
    "x1": 51
   },
   {
-   "name": "G plateau east",
+   "name": "H plateau east",
    "z0": 173,
    "z1": 194,
    "xMin": 52,
@@ -2578,7 +2586,8 @@
    "z1": 61,
    "face": "west",
    "front": 2,
-   "street": "east levee"
+   "street": "east levee",
+   "use": "mixed use"
   },
   {
    "x0": 66,
@@ -2587,43 +2596,28 @@
    "z1": 73,
    "face": "west",
    "front": 2,
-   "street": "east levee"
+   "street": "east levee",
+   "use": "mixed use"
   },
   {
    "x0": 66,
    "z0": 100,
    "x1": 75,
-   "z1": 109,
-   "face": "west",
-   "front": 2,
-   "street": "east levee"
-  },
-  {
-   "x0": 66,
-   "z0": 112,
-   "x1": 75,
    "z1": 121,
    "face": "west",
    "front": 2,
-   "street": "east levee"
+   "street": "east levee",
+   "use": "distillery (corn whiskey: still house, mash tun, a rickhouse for the barrels)"
   },
   {
    "x0": 66,
    "z0": 124,
    "x1": 75,
-   "z1": 133,
-   "face": "west",
-   "front": 2,
-   "street": "east levee"
-  },
-  {
-   "x0": 66,
-   "z0": 136,
-   "x1": 75,
    "z1": 145,
    "face": "west",
    "front": 2,
-   "street": "east levee"
+   "street": "east levee",
+   "use": "brewhouse (rice beer: kettles, a malt floor, a cellar store)"
   },
   {
    "x0": 69,
@@ -2632,7 +2626,8 @@
    "z1": 47,
    "face": "north",
    "front": 2,
-   "street": "shore street"
+   "street": "shore street",
+   "use": "mixed use"
   },
   {
    "x0": 81,
@@ -2641,7 +2636,8 @@
    "z1": 47,
    "face": "north",
    "front": 2,
-   "street": "shore street"
+   "street": "shore street",
+   "use": "mixed use"
   },
   {
    "x0": 93,
@@ -2650,7 +2646,8 @@
    "z1": 47,
    "face": "north",
    "front": 2,
-   "street": "shore street"
+   "street": "shore street",
+   "use": "mixed use"
   }
  ],
  "piers": [
