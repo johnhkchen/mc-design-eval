@@ -1,0 +1,423 @@
+{
+ "frame": "the export's: its corner is Polarton's (18,3,64); world y = export y; files' corners are given from the export's corner",
+ "worldGridNote": "final-world.nbt / landfill-world.nbt hold world y -4..23 at grid y 0..27",
+ "trees": {
+  "logs": 718,
+  "leaves": 9504,
+  "remnants": 1024
+ },
+ "piles": 282,
+ "towers": [
+  {
+   "section": "A shore west",
+   "x": 41,
+   "z": 37,
+   "ground": 1,
+   "inside": true
+  },
+  {
+   "section": "B shore east",
+   "x": 89,
+   "z": 23,
+   "ground": 0,
+   "inside": false
+  },
+  {
+   "section": "C polder north",
+   "x": 5,
+   "z": 54,
+   "ground": 1,
+   "inside": true
+  },
+  {
+   "section": "D waterfront north",
+   "x": 63,
+   "z": 37,
+   "ground": 1,
+   "inside": false
+  },
+  {
+   "section": "E polder south",
+   "x": 5,
+   "z": 135,
+   "ground": 0,
+   "inside": true
+  },
+  {
+   "section": "F waterfront south",
+   "x": 108,
+   "z": 133,
+   "ground": 0,
+   "inside": true
+  },
+  {
+   "section": "G bluff and plateau",
+   "x": 38,
+   "z": 167,
+   "ground": 8,
+   "inside": true
+  },
+  {
+   "section": "H pasture",
+   "x": 99,
+   "z": 163,
+   "ground": 0,
+   "inside": true
+  }
+ ],
+ "files": [
+  {
+   "file": "0-staging.nbt",
+   "section": "all",
+   "kind": "staging",
+   "corner": [
+    0,
+    1,
+    21
+   ],
+   "size": [
+    127,
+    22,
+    159
+   ],
+   "kb": 1,
+   "mode": "Don't Replace Solid (placement only: it holds no air)"
+  },
+  {
+   "file": "A-fill.nbt",
+   "section": "A shore west",
+   "kind": "fill",
+   "x0": 7,
+   "z0": 26,
+   "x1": 76,
+   "z1": 52,
+   "y0": 0,
+   "y1": 14,
+   "mode": "Replace Solid with Empty",
+   "corner": [
+    7,
+    0,
+    26
+   ],
+   "size": [
+    70,
+    15,
+    27
+   ],
+   "kb": 62
+  },
+  {
+   "file": "A-fill-below.nbt",
+   "section": "A shore west",
+   "kind": "fill below",
+   "x0": 8,
+   "z0": 38,
+   "x1": 76,
+   "z1": 52,
+   "y0": -4,
+   "y1": -1,
+   "mode": "Replace Solid with Empty",
+   "corner": [
+    8,
+    -4,
+    38
+   ],
+   "size": [
+    69,
+    4,
+    15
+   ],
+   "kb": 9
+  },
+  {
+   "file": "A-dig.nbt",
+   "section": "A shore west",
+   "kind": "dig",
+   "x0": 8,
+   "z0": 38,
+   "x1": 76,
+   "z1": 52,
+   "y0": -4,
+   "y1": 0,
+   "mode": "Replace Solid with Empty",
+   "corner": [
+    8,
+    -4,
+    38
+   ],
+   "size": [
+    69,
+    5,
+    15
+   ],
+   "kb": 12
+  },
+  {
+   "file": "B-fill.nbt",
+   "section": "B shore east",
+   "kind": "fill",
+   "x0": 77,
+   "z0": 28,
+   "x1": 126,
+   "z1": 52,
+   "y0": 0,
+   "y1": 13,
+   "mode": "Replace Solid with Empty",
+   "corner": [
+    77,
+    0,
+    28
+   ],
+   "size": [
+    50,
+    14,
+    25
+   ],
+   "kb": 38
+  },
+  {
+   "file": "C-fill.nbt",
+   "section": "C polder north",
+   "kind": "fill",
+   "x0": 2,
+   "z0": 53,
+   "x1": 76,
+   "z1": 99,
+   "y0": 0,
+   "y1": 13,
+   "mode": "Replace Solid with Empty",
+   "corner": [
+    2,
+    0,
+    53
+   ],
+   "size": [
+    75,
+    14,
+    47
+   ],
+   "kb": 107
+  },
+  {
+   "file": "C-fill-below.nbt",
+   "section": "C polder north",
+   "kind": "fill below",
+   "x0": 8,
+   "z0": 53,
+   "x1": 76,
+   "z1": 99,
+   "y0": -4,
+   "y1": -1,
+   "mode": "Replace Solid with Empty",
+   "corner": [
+    8,
+    -4,
+    53
+   ],
+   "size": [
+    69,
+    4,
+    47
+   ],
+   "kb": 30
+  },
+  {
+   "file": "C-dig.nbt",
+   "section": "C polder north",
+   "kind": "dig",
+   "x0": 8,
+   "z0": 53,
+   "x1": 76,
+   "z1": 99,
+   "y0": -4,
+   "y1": 0,
+   "mode": "Replace Solid with Empty",
+   "corner": [
+    8,
+    -4,
+    53
+   ],
+   "size": [
+    69,
+    5,
+    47
+   ],
+   "kb": 38
+  },
+  {
+   "file": "D-fill.nbt",
+   "section": "D waterfront north",
+   "kind": "fill",
+   "x0": 77,
+   "z0": 53,
+   "x1": 112,
+   "z1": 99,
+   "y0": 0,
+   "y1": 12,
+   "mode": "Replace Solid with Empty",
+   "corner": [
+    77,
+    0,
+    53
+   ],
+   "size": [
+    36,
+    13,
+    47
+   ],
+   "kb": 51
+  },
+  {
+   "file": "E-fill.nbt",
+   "section": "E polder south",
+   "kind": "fill",
+   "x0": 1,
+   "z0": 100,
+   "x1": 76,
+   "z1": 154,
+   "y0": 0,
+   "y1": 13,
+   "mode": "Replace Solid with Empty",
+   "corner": [
+    1,
+    0,
+    100
+   ],
+   "size": [
+    76,
+    14,
+    55
+   ],
+   "kb": 126
+  },
+  {
+   "file": "E-fill-below.nbt",
+   "section": "E polder south",
+   "kind": "fill below",
+   "x0": 8,
+   "z0": 100,
+   "x1": 76,
+   "z1": 154,
+   "y0": -4,
+   "y1": -1,
+   "mode": "Replace Solid with Empty",
+   "corner": [
+    8,
+    -4,
+    100
+   ],
+   "size": [
+    69,
+    4,
+    55
+   ],
+   "kb": 35
+  },
+  {
+   "file": "E-dig.nbt",
+   "section": "E polder south",
+   "kind": "dig",
+   "x0": 8,
+   "z0": 100,
+   "x1": 76,
+   "z1": 154,
+   "y0": -4,
+   "y1": 0,
+   "mode": "Replace Solid with Empty",
+   "corner": [
+    8,
+    -4,
+    100
+   ],
+   "size": [
+    69,
+    5,
+    55
+   ],
+   "kb": 44
+  },
+  {
+   "file": "F-fill.nbt",
+   "section": "F waterfront south",
+   "kind": "fill",
+   "x0": 77,
+   "z0": 100,
+   "x1": 124,
+   "z1": 154,
+   "y0": 0,
+   "y1": 13,
+   "mode": "Replace Solid with Empty",
+   "corner": [
+    77,
+    0,
+    100
+   ],
+   "size": [
+    48,
+    14,
+    55
+   ],
+   "kb": 84
+  },
+  {
+   "file": "G-fill.nbt",
+   "section": "G bluff and plateau",
+   "kind": "fill",
+   "x0": 0,
+   "z0": 155,
+   "x1": 76,
+   "z1": 179,
+   "y0": 0,
+   "y1": 9,
+   "mode": "Replace Solid with Empty",
+   "corner": [
+    0,
+    0,
+    155
+   ],
+   "size": [
+    77,
+    10,
+    25
+   ],
+   "kb": 44
+  },
+  {
+   "file": "H-fill.nbt",
+   "section": "H pasture",
+   "kind": "fill",
+   "x0": 77,
+   "z0": 155,
+   "x1": 121,
+   "z1": 179,
+   "y0": 0,
+   "y1": 11,
+   "mode": "Replace Solid with Empty",
+   "corner": [
+    77,
+    0,
+    155
+   ],
+   "size": [
+    45,
+    12,
+    25
+   ],
+   "kb": 32
+  }
+ ],
+ "simulation": {
+  "openCellsBelowY1AfterFills": 0,
+  "pinkMarkersLeftAfterFills": 0,
+  "mismatchesAfterDigs": 0,
+  "examples": []
+ },
+ "earth": {
+  "cutAboveWater": 2036,
+  "fillAboveWater": 11285,
+  "fillBelowWater": 11676,
+  "riprapStones": 1656,
+  "deckPlanks": 762,
+  "note": "fill below the water line counts every block of the lower box (y -4..-1) the works set solid; the export cannot show what is there now"
+ }
+}

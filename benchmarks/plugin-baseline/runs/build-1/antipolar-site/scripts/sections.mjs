@@ -1,17 +1,18 @@
-// The district in sections, one schematicannon each: z bands cut where the works are thin (across a cross-dike's
-// lane or a levee's crest), each cropped in x to what its works touch. A section's file holds its whole box.
+// The district in eight sections, one schematicannon each. The cuts follow the ring: x 76 is the ring's outer edge on
+// the east (so everything below the water line, which stays inside the ring's rectangle, falls in the west sections),
+// z 52 / 99 / 154 run across the levee banks and the polder road. Each section is cropped to what its works touch.
 export const SECTIONS = [
-  { name: "A shore west", z0: 26, z1: 52, xMax: 59, note: "terrace descent, north levee, shore row pads H5 H6" },
-  { name: "B shore east", z0: 26, z1: 52, xMin: 60, note: "the ring's north-east corner, shore street, mixed-use plots M5-M7, the north boardwalk and its piers" },
-  { name: "C faubourg", z0: 53, z1: 87, note: "polder 1: its floor, street, house pads, the west levee's ramp" },
-  { name: "D fields", z0: 88, z1: 99, note: "polder 2 north: floor, first ditch, the boardwalk past the island" },
-  { name: "E works", z0: 100, z1: 145, note: "polder 2 south and polder 3 (ditches, paddies, bunds), the pump house site, the distillery and brewhouse plots and their piers" },
-  { name: "F bluff", z0: 146, z1: 172, note: "the south levee, the bluff road up the draw" },
-  { name: "G plateau west", z0: 173, z1: 194, xMax: 51, note: "plateau road west" },
-  { name: "H plateau east", z0: 173, z1: 194, xMin: 52, note: "plateau road east" },
+  { name: "A shore west", x0: 0, x1: 76, z0: 26, z1: 52, note: "terrace descent, north levee, the ring's north bank and seepage ditch, the north ramp" },
+  { name: "B shore east", x0: 77, x1: 130, z0: 26, z1: 52, note: "shore street and its stub, M3-M5 made land, the north boardwalk and its piers" },
+  { name: "C polder north", x0: 0, x1: 76, z0: 53, z1: 99, note: "west and east levees, the faubourg's raised lots, canal 1 and its sluices, the fields' north half" },
+  { name: "D waterfront north", x0: 77, x1: 130, z0: 53, z1: 99, note: "M1-M2 made land, the east boardwalk, piers, the island boardwalk and its stub" },
+  { name: "E polder south", x0: 0, x1: 76, z0: 100, z1: 154, note: "the fields' south half, canal 2, the rice beds, the south levee and ramp, the landing" },
+  { name: "F waterfront south", x0: 77, x1: 130, z0: 100, z1: 154, note: "the distillery and brewhouse made land, piers, the boatyard, the south levee's east stub" },
+  { name: "G bluff and plateau", x0: 0, x1: 76, z0: 155, z1: 194, note: "the bluff road, grove lane and its stub, the plateau roads" },
+  { name: "H pasture", x0: 77, x1: 130, z0: 155, z1: 194, note: "the plateau road's east end, the pasture road and its stub" },
 ];
 export function sectionBoxes(T) {
-  return SECTIONS.map((s) => { let x0 = Infinity, x1 = -Infinity;
-    for (const k of T.keys()) { const [x, z] = k.split(",").map(Number); if (z < s.z0 || z > s.z1 || x < (s.xMin ?? 0) || x > (s.xMax ?? 1e9)) continue; x0 = Math.min(x0, x); x1 = Math.max(x1, x); }
-    return { ...s, x0, x1 }; });
+  return SECTIONS.map((s) => { let x0 = Infinity, x1 = -Infinity, z0 = Infinity, z1 = -Infinity;
+    for (const k of T.keys()) { const [x, z] = k.split(",").map(Number); if (z < s.z0 || z > s.z1 || x < s.x0 || x > s.x1) continue; x0 = Math.min(x0, x); x1 = Math.max(x1, x); z0 = Math.min(z0, z); z1 = Math.max(z1, z); }
+    return { ...s, x0, x1, z0, z1, rect: [s.x0, s.z0, s.x1, s.z1] }; });
 }

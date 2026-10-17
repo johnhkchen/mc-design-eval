@@ -1,8 +1,8 @@
 {
  "frame": "antipolar_expansion_002_raw.nbt; its corner is Polarton's (18,3,64); heights are top-block y; water surface y 0",
  "earth": {
-  "cut": 1985,
-  "fill": 5703,
+  "cut": 2067,
+  "fill": 6110,
   "drainedCells": 1090,
   "cellsBelowTheExport": 3391
  },
@@ -31,7 +31,7 @@
    "z1": 87,
    "note": "polder 1: its floor, street, house pads, the west levee's ramp",
    "x0": 16,
-   "x1": 99
+   "x1": 100
   },
   {
    "name": "D fields",
@@ -47,15 +47,15 @@
    "z1": 145,
    "note": "polder 2 south and polder 3 (ditches, paddies, bunds), the pump house site, the distillery and brewhouse plots and their piers",
    "x0": 16,
-   "x1": 88
+   "x1": 91
   },
   {
    "name": "F bluff",
    "z0": 146,
    "z1": 172,
-   "note": "the south levee, the bluff road up the draw",
+   "note": "the south levee, the bluff road up the draw, the boatyard pad and its lane",
    "x0": 16,
-   "x1": 78
+   "x1": 100
   },
   {
    "name": "G plateau west",
@@ -2694,12 +2694,6 @@
    "z1": 131
   },
   {
-   "x0": 79,
-   "z0": 142,
-   "x1": 88,
-   "z1": 143
-  },
-  {
    "x0": 86,
    "z0": 52,
    "x1": 87,
@@ -2710,6 +2704,206 @@
    "z0": 52,
    "x1": 99,
    "z1": 61
+  }
+ ],
+ "yard": {
+  "rect": [
+   76,
+   148,
+   100,
+   160
+  ],
+  "t": 1
+ },
+ "yardPlots": [
+  {
+   "name": "ways 1",
+   "rect": [
+    78,
+    139,
+    83,
+    147
+   ],
+   "use": "slipway: a timber cradle on greased ways down into the water, for a flatboat or towboat up to 6 x 16"
+  },
+  {
+   "name": "ways 2",
+   "rect": [
+    86,
+    139,
+    91,
+    147
+   ],
+   "use": "slipway for skiffs and bateaux, a hull in frame"
+  },
+  {
+   "name": "boat shed",
+   "rect": [
+    77,
+    148,
+    92,
+    155
+   ],
+   "use": "an open-sided shed over the heads of both ways, a loft for oakum and sails"
+  },
+  {
+   "name": "sawmill",
+   "rect": [
+    94,
+    148,
+    100,
+    160
+   ],
+   "use": "cypress sawmill (a Create saw) and the timber yard: logs stacked to season, plank stacks"
+  },
+  {
+   "name": "back row",
+   "rect": [
+    77,
+    157,
+    92,
+    160
+   ],
+   "use": "steam box for bending ribs, the pitch kettle, the chandler's office and store"
+  }
+ ],
+ "channel": {
+  "cells": 365,
+  "dredged": 32,
+  "routes": [
+   {
+    "from": [
+     90,
+     58
+    ],
+    "ok": true,
+    "length": 89
+   },
+   {
+    "from": [
+     90,
+     70
+    ],
+    "ok": true,
+    "length": 69
+   },
+   {
+    "from": [
+     90,
+     82
+    ],
+    "ok": true,
+    "length": 57
+   },
+   {
+    "from": [
+     90,
+     94
+    ],
+    "ok": true,
+    "length": 45
+   },
+   {
+    "from": [
+     90,
+     106
+    ],
+    "ok": true,
+    "length": 33
+   },
+   {
+    "from": [
+     90,
+     118
+    ],
+    "ok": true,
+    "length": 21
+   },
+   {
+    "from": [
+     90,
+     130
+    ],
+    "ok": true,
+    "length": 9
+   },
+   {
+    "from": [
+     86,
+     63
+    ],
+    "ok": true,
+    "length": 86
+   },
+   {
+    "from": [
+     98,
+     63
+    ],
+    "ok": true,
+    "length": 86
+   },
+   {
+    "from": [
+     80,
+     88
+    ],
+    "ok": true,
+    "length": 61
+   }
+  ]
+ },
+ "fleet": [
+  {
+   "boat": "cypress flatboat (cargo barge)",
+   "size": "5 x 14",
+   "draws": "a block",
+   "where": "distillery and brewhouse piers",
+   "n": 3,
+   "note": "poled or towed; open deck for cotton bales and barrels, a small cabin aft, a sweep oar"
+  },
+  {
+   "boat": "sternwheel towboat",
+   "size": "6 x 16",
+   "draws": "a block",
+   "where": "the shore piers",
+   "n": 1,
+   "note": "a shallow bayou steamer: boiler and stack forward of the pilot house, the paddle wheel at the stern (a Create bearing turns it)"
+  },
+  {
+   "boat": "quarter boat (houseboat)",
+   "size": "5 x 10",
+   "where": "the shore piers",
+   "n": 1,
+   "note": "living quarters for the boat crews: a cabin on a barge hull, a porch at each end"
+  },
+  {
+   "boat": "bateau (plank skiff)",
+   "size": "2 x 6",
+   "where": "the east piers and the boatyard",
+   "n": 4,
+   "note": "flat-bottomed, square ends, oars or a pole"
+  },
+  {
+   "boat": "pirogue (cypress dugout)",
+   "size": "1 x 4",
+   "where": "the landing, the island pier",
+   "n": 6,
+   "note": "for the shallowest water; fishing, trapping, the rice beds' flooding gates"
+  },
+  {
+   "boat": "flatboat on the ways",
+   "size": "5 x 14",
+   "where": "ways 1",
+   "n": 1,
+   "note": "hauled out for caulking, a hull half re-planked"
+  },
+  {
+   "boat": "hull in frame",
+   "size": "2 x 6",
+   "where": "ways 2",
+   "n": 1,
+   "note": "ribs steamed and set, keel plank down"
   }
  ],
  "ditchesZ": [
@@ -2908,7 +3102,7 @@
    "name": "low pasture",
    "use": "the wet meadow south-east: pasture and hay, ground left as it is",
    "rect": [
-    96,
+    104,
     150,
     139,
     194
