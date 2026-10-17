@@ -1,146 +1,20 @@
-<title>Dragonholde Board</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
-<style>
-/* Land office plat board: a surveyed map on the left, the work queue on the right, the cannon yard and the project ledgers below. */
-:root {
-  --paper: #f3f1ea; --sheet: #fbfaf6; --ink: #1d2a36; --muted: #5d6874; --rule: #cfd2cc;
-  --survey: #2f5d7c; --survey-soft: #d9e4ea; --water: #c9dbe0; --parcel: #e6e1d2;
-  --queued: #8a939b; --loaded: #b7791f; --running: #2b6cb0; --done: #2f7d4f; --blocked: #a0453a;
-  --p1: #7a5c2e; --p2: #2f5d7c; --p3: #6b4f86; --p4: #3f7a6a; --dropped: #b3b7ba;
-  --display: "Barlow Condensed", "Arial Narrow", sans-serif;
-  --body: "Public Sans", system-ui, sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
-}
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --paper: #141a20; --sheet: #1b232b; --ink: #e3e7ea; --muted: #9aa5ae; --rule: #2f3a44;
-  --survey: #7fb0d0; --survey-soft: #22323f; --water: #1d3440; --parcel: #2a2f2b;
-  --queued: #7d8790; --loaded: #e0a64a; --running: #6ea8e6; --done: #5fb985; --blocked: #e07a6b;
-  --p1: #d2aa6a; --p2: #7fb0d0; --p3: #b79ad6; --p4: #7cc4b0; --dropped: #4a535b; color-scheme: dark } }
-:root[data-theme="dark"] {
-  --paper: #141a20; --sheet: #1b232b; --ink: #e3e7ea; --muted: #9aa5ae; --rule: #2f3a44;
-  --survey: #7fb0d0; --survey-soft: #22323f; --water: #1d3440; --parcel: #2a2f2b;
-  --queued: #7d8790; --loaded: #e0a64a; --running: #6ea8e6; --done: #5fb985; --blocked: #e07a6b;
-  --p1: #d2aa6a; --p2: #7fb0d0; --p3: #b79ad6; --p4: #7cc4b0; --dropped: #4a535b; color-scheme: dark }
-body { background: var(--paper); color: var(--ink); font: 15px/1.5 var(--body); }
-.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 48px; display: grid; gap: 22px; }
-h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: .02em; margin: 0; text-wrap: balance; }
-h1 { font-size: 2rem; text-transform: uppercase; }
-h2 { font-size: 1.25rem; text-transform: uppercase; letter-spacing: .06em; }
-h3 { font-size: 1.1rem; }
-.eyebrow { font: 600 .72rem/1 var(--body); text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
-.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
-.muted { color: var(--muted); }
-header { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: end; justify-content: space-between; border-bottom: 2px solid var(--ink); padding-bottom: 12px; }
-.stats { display: flex; flex-wrap: wrap; gap: 8px 24px; }
-.stat { display: grid; gap: 2px; }
-.stat b { font: 600 1.35rem/1 var(--display); font-variant-numeric: tabular-nums; }
-.top { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 22px; }
-@media (max-width: 860px) { .top { grid-template-columns: minmax(0, 1fr); } }
-.panel { background: var(--sheet); border: 1px solid var(--rule); padding: 14px; display: grid; gap: 10px; align-content: start; min-width: 0; }
-.panel > header { border: 0; padding: 0; }
-#map svg { width: 100%; height: auto; display: block; max-height: 640px; }
-.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .8rem; color: var(--muted); }
-.sw { display: inline-block; width: 10px; height: 10px; margin-right: 5px; vertical-align: -1px; }
-.queue { display: grid; gap: 8px; }
-.job { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 4px 10px; align-items: center; padding: 8px 0; border-top: 1px solid var(--rule); }
-.job:first-child { border-top: 0; }
-.job .t { font-weight: 600; }
-.job .sub { grid-column: 2 / 4; font-size: .82rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 12px; }
-.chip { font: 600 .72rem/1 var(--body); text-transform: uppercase; letter-spacing: .08em; padding: 6px 8px; border: 1.5px solid currentColor; background: transparent; color: var(--queued); cursor: pointer; min-width: 74px; text-align: center; }
-.chip[data-s="loaded"] { color: var(--loaded); } .chip[data-s="running"] { color: var(--running); } .chip[data-s="done"] { color: var(--done); background: color-mix(in srgb, var(--done) 12%, transparent); }
-.chip[data-s="dropped"] { color: var(--muted); border-style: dotted; }
-.job.is-dropped .t { text-decoration: line-through; color: var(--muted); }
-.chip:disabled { cursor: not-allowed; color: var(--blocked); border-style: dashed; }
-.chip:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--survey); outline-offset: 2px; }
-.box { width: 20px; height: 20px; accent-color: var(--done); }
-.copy { font: 500 .78rem var(--mono); background: var(--survey-soft); color: var(--ink); border: 0; padding: 3px 6px; cursor: pointer; }
-.back { background: none; border: 0; color: var(--muted); cursor: pointer; font-size: .9rem; padding: 2px 4px; }
-details.mat summary { cursor: pointer; color: var(--survey); }
-details.mat ul { margin: 6px 0 0; padding-left: 18px; columns: 2; font-size: .8rem; }
-.yard { overflow-x: auto; }
-.yard svg { display: block; min-width: 620px; width: 100%; height: auto; }
-.pool { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 4px; }
-@media (max-width: 520px) { .pool { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
-.slot { border: 1px solid var(--rule); padding: 5px 4px; font: 500 .72rem/1.2 var(--mono); min-height: 40px; overflow: hidden; }
-.slot b { display: block; font-family: var(--display); font-size: .9rem; }
-.slot.busy { border-color: var(--running); background: color-mix(in srgb, var(--running) 10%, transparent); }
-.slot.ld { border-color: var(--loaded); background: color-mix(in srgb, var(--loaded) 10%, transparent); }
-.projects { display: grid; gap: 22px; }
-.stages { display: flex; flex-wrap: wrap; gap: 0; }
-.stg { font: 600 .74rem/1 var(--body); text-transform: uppercase; letter-spacing: .08em; padding: 6px 10px; border: 1px solid var(--rule); margin-right: -1px; color: var(--muted); }
-.stg.on { background: var(--ink); color: var(--sheet); border-color: var(--ink); }
-.stg.past { color: var(--done); }
-.group { display: grid; gap: 0; }
-.group h3 { padding-top: 10px; color: var(--survey); text-transform: uppercase; letter-spacing: .06em; font-size: .95rem; }
-.note { border-left: 3px solid var(--loaded); padding: 4px 10px; font-size: .88rem; }
-.empty { padding: 28px 14px; text-align: center; color: var(--muted); }
-.settings { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; font-size: .85rem; }
-.settings input { width: 64px; font: 500 .9rem var(--mono); padding: 3px 6px; background: var(--paper); color: var(--ink); border: 1px solid var(--rule); }
-@media (prefers-reduced-motion: no-preference) { .chip, .slot { transition: color .15s, background .15s, border-color .15s; } }
-</style>
+import { schedule as plan, criticalPath, hoursOf as hoursFor } from "./schedule.js";
 
-<div class="wrap">
-  <header>
-    <div><div class="eyebrow" id="townCode">Land office · world coordinates</div><h1 id="townName">Dragonholde</h1></div>
-    <div class="stats" id="stats"></div>
-  </header>
-
-  <div class="top">
-    <section class="panel" id="map" aria-label="Region map">
-      <header><h2>Plat</h2><div class="legend"><span><i class="sw" style="background:var(--queued)"></i>queued</span><span><i class="sw" style="background:var(--loaded)"></i>loaded</span><span><i class="sw" style="background:var(--running)"></i>running</span><span><i class="sw" style="background:var(--done)"></i>done</span><span><i class="sw" style="background:var(--dropped)"></i>dropped</span></div></header>
-      <div id="mapBody" class="empty">Loading the region…</div>
-    </section>
-    <section class="panel" aria-label="Next up">
-      <header><h2>Next up</h2><span class="eyebrow">ready to load</span></header>
-      <div class="queue" id="next"><div class="empty">The ready jobs appear here once the board loads.</div></div>
-    </section>
-  </div>
-
-  <section class="panel" aria-label="Cannon yard">
-    <header><h2>Cannon yard</h2><div class="settings" id="settings"></div></header>
-    <div class="pool" id="pool"></div>
-    <div class="yard" id="yard"></div>
-  </section>
-
-  <section class="projects" id="projects"></section>
-</div>
-
-<script>
 const STAGES = ["capture", "plan", "earthworks", "buildings", "done"];
 const NEXT = { queued: "loaded", loaded: "running", running: "done" };
 const PREV = { loaded: "queued", running: "loaded", done: "running" };
-const state = { town: null, projects: [], tasks: [], pool: { cannons: 20, secPerBlock: 1.5, setupMin: 5 }, ready: false, db: null, canWrite: true };
+const state = { town: null, projects: [], tasks: [], pool: { cannons: 20, secPerBlock: 1.5, setupMin: 5 }, ready: false, canWrite: true };
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const fmtH = (h) => h < 1 ? Math.round(h * 60) + " min" : h.toFixed(1) + " h";
-const hoursOf = (t) => (t.work || 0) * state.pool.secPerBlock / 3600;
+const hoursOf = (t) => hoursFor(t, state.pool);
 const byId = () => Object.fromEntries(state.tasks.map((t) => [t.id, t]));
 const blockers = (t, ix) => (t.deps || []).filter((d) => ix[d] && ix[d].status !== "done" && ix[d].status !== "dropped");
 const projOf = (id) => state.projects.find((p) => p.id === id);
 const projColor = (id) => `var(--p${(((projOf(id)?.order || 1) - 1) % 4) + 1})`;
 const projLabel = (p) => p ? `${p.code || p.id} · ${p.name || "unnamed"}${p.placeholder ? " (placeholder)" : ""}` : "";
 
-function schedule() {
-  const ix = byId(), C = state.pool.cannons, setupH = state.pool.setupMin / 60;
-  const free = Array.from({ length: C }, () => 0), bars = [], finish = {};
-  const active = state.tasks.filter((t) => t.kind === "cannon" && (t.status === "loaded" || t.status === "running"));
-  for (const t of active) { const c = Number.isInteger(t.cannon) && t.cannon < C ? t.cannon : free.indexOf(Math.min(...free));
-    const s = free[c], e = s + hoursOf(t); free[c] = e; finish[t.id] = e; bars.push({ t, c, s, e }); }
-  for (const t of state.tasks) if (t.kind === "cannon" && (t.status === "done" || t.status === "dropped")) finish[t.id] = 0;
-  let clock = 0;
-  const queued = state.tasks.filter((t) => t.kind === "cannon" && t.status === "queued").sort((a, b) => (a.project > b.project) - (a.project < b.project) || a.seq - b.seq);
-  let left = queued.slice(), guard = 0;
-  while (left.length && guard++ < 500) {
-    const t = left.find((q) => (q.deps || []).every((d) => d in finish || !ix[d]));
-    if (!t) break; left = left.filter((q) => q !== t);
-    const depEnd = Math.max(0, ...(t.deps || []).map((d) => finish[d] || 0));
-    let c = 0; for (let i = 1; i < C; i++) if (free[i] < free[c]) c = i;
-    clock += setupH; const s = Math.max(free[c], depEnd, clock), e = s + hoursOf(t);
-    free[c] = e; finish[t.id] = e; bars.push({ t, c, s, e, planned: true });
-  }
-  return { bars, end: Math.max(0, ...bars.map((b) => b.e)) };
-}
+const schedule = () => plan(state.tasks, state.pool);
 
 function renderStats(sch) {
   const cannon = state.tasks.filter((t) => t.kind === "cannon"), open = cannon.filter((t) => t.status !== "done" && t.status !== "dropped");
@@ -148,7 +22,7 @@ function renderStats(sch) {
   const work = open.reduce((a, t) => a + (t.work || 0), 0);
   $("stats").innerHTML = [
     ["Projects", state.projects.length], ["Cannons busy", `${busy}/${state.pool.cannons}`],
-    ["Blocks left", work.toLocaleString()], ["Cannon-hours left", fmtH(work * state.pool.secPerBlock / 3600)], ["Est. finish", sch.bars.length ? fmtH(sch.end) : "—"]
+    ["Blocks left", work.toLocaleString()], ["Cannon-hours left", fmtH(work * state.pool.secPerBlock / 3600)], ["Critical path", fmtH(criticalPath(state.tasks, state.pool))], ["Est. finish", sch.bars.length ? fmtH(sch.end) : "—"]
   ].map(([k, v]) => `<div class="stat"><span class="eyebrow">${k}</span><b>${v}</b></div>`).join("");
 }
 
@@ -264,15 +138,15 @@ function render() {
 }
 
 async function setStatus(id, to) {
-  const t = state.tasks.find((x) => x.id === id); if (!t || !state.db) return;
+  const t = state.tasks.find((x) => x.id === id); if (!t) return;
   const patch = { status: to, updatedAt: new Date().toISOString() };
   if (to === "loaded" && !Number.isInteger(t.cannon)) {
     const used = new Set(state.tasks.filter((x) => x.kind === "cannon" && (x.status === "loaded" || x.status === "running") && Number.isInteger(x.cannon)).map((x) => x.cannon));
     let c = 0; while (used.has(c)) c++; patch.cannon = c < state.pool.cannons ? c : null;
   }
   if (to === "queued") patch.cannon = null;
-  try { await state.db.collection("tasks").doc(id).update(patch); }
-  catch (e) { if (e && e.code === "invalid_argument") { state.canWrite = false; render(); } }
+  delete patch.updatedAt;
+  await api(`/api/tasks/${encodeURIComponent(id)}`, patch);
 }
 
 document.addEventListener("click", async (ev) => {
@@ -287,21 +161,26 @@ document.addEventListener("change", async (ev) => {
   const el = ev.target;
   if (el.dataset.todo) { await setStatus(el.dataset.todo, el.checked ? "done" : "queued"); return; }
   const map = { "set-cannons": "cannons", "set-spb": "secPerBlock", "set-setup": "setupMin" };
-  if (map[el.id] && state.db) { const v = Number(el.value); if (!Number.isFinite(v) || v <= 0 && el.id !== "set-setup") return;
-    try { await state.db.collection("config").doc("pool").update({ [map[el.id]]: el.id === "set-cannons" ? Math.round(v) : v }); } catch (e) { if (e && e.code === "invalid_argument") { state.canWrite = false; render(); } } }
+  if (map[el.id]) { const v = Number(el.value); if (!Number.isFinite(v) || v <= 0 && el.id !== "set-setup") return;
+    await api("/api/pool", { [map[el.id]]: el.id === "set-cannons" ? Math.round(v) : v }); }
 });
 
-(async () => {
-  const db = await window.claude?.use?.("db");
-  if (!db) { $("mapBody").textContent = "The board's data loads when this page is opened in claude.ai while signed in."; $("next").innerHTML = `<div class="empty">Open the board in claude.ai to see the queue.</div>`; return; }
-  state.db = db;
-  const user = await window.claude.use("user");
-  if (user && typeof user.can === "function") { const w = await user.can("data.write"); if (w === false) state.canWrite = false; }
-  db.collection("towns").onSnapshot((s) => { state.town = s.docs[0] ? s.docs[0].data() : null; render(); });
-  let got = 0; const mark = () => { if (++got >= 3) { state.ready = true; } render(); };
-  const seen = { p: false, t: false, c: false };
-  db.collection("projects").onSnapshot((s) => { state.projects = s.docs.map((d) => ({ id: d.id, ...d.data() })); if (!seen.p) { seen.p = true; mark(); } else render(); });
-  db.collection("tasks").onSnapshot((s) => { state.tasks = s.docs.map((d) => ({ id: d.id, ...d.data() })); if (!seen.t) { seen.t = true; mark(); } else render(); });
-  db.collection("config").onSnapshot((s) => { const d = s.docs.find((x) => x.id === "pool"); if (d) state.pool = { ...state.pool, ...d.data() }; if (!seen.c) { seen.c = true; mark(); } else render(); });
-})();
-</script>
+async function api(path, patch) {
+  const r = await fetch(path, { method: "PATCH", headers: { "content-type": "application/json" }, body: JSON.stringify(patch) }).catch(() => null);
+  if (!r || !r.ok) { $("stats").insertAdjacentHTML("beforeend", `<div class="conn">Not saved: ${r ? esc((await r.json()).error) : "the board server isn't reachable"}</div>`); }
+  await load();
+}
+
+async function load() {
+  const r = await fetch("/api/board").catch(() => null);
+  if (!r || !r.ok) { $("mapBody").textContent = "Can't reach the board server. Start it with npm run dev."; return; }
+  const b = await r.json();
+  state.town = Object.values(b.towns || {})[0] || null;
+  state.projects = Object.entries(b.projects || {}).map(([id, p]) => ({ id, ...p }));
+  state.tasks = Object.entries(b.tasks || {}).map(([id, t]) => ({ id, ...t }));
+  state.pool = { ...state.pool, ...b.pool };
+  state.ready = true; render();
+}
+
+load();
+if (import.meta.hot) import.meta.hot.on("board:changed", load);

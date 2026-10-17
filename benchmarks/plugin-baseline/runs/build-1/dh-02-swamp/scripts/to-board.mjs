@@ -1,7 +1,9 @@
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
-// Seeds the Dragonholde board (https://claude.ai/artifact/9RmeQiUydkE3bDTuHVuTSJ) from DH-02's cannon delivery. Run from dh-02-swamp/: node ../region-board/seed-dh.mjs <out-dir>; then ArtifactData batch the JSON files.
+import { readFileSync, writeFileSync, existsSync, renameSync } from "node:fs";
+// Writes DH-02's projects, todos and cannon jobs into the Dragonholde board (apps/dragonholde-board/data/board.json).
+// Run from dh-02-swamp/: node scripts/to-board.mjs. Jobs already on the board keep their status and cannon.
 import { load } from "/Volumes/ext1/swe/repos/minecraft-design/tools/src/structure.mjs";
-const OUT = process.argv[2]; mkdirSync(OUT, { recursive: true });
+const BOARD = new URL("../../../../../../apps/dragonholde-board/data/board.json", import.meta.url).pathname;
+const NBT = "benchmarks/plugin-baseline/runs/build-1/dh-02-swamp/delivery/cannon/";
 const A = [-1965, 62, -168];
 const r = JSON.parse(readFileSync("delivery/cannon/report.json"));
 const md = readFileSync("delivery/cannon/MATERIALS.md", "utf8");
@@ -41,8 +43,15 @@ for (const f of r.files) {
   put("tasks", id, { project: "dh-02", stage: "earthworks", seq: seq++, kind: "cannon", status: "queued", cannon: null,
     title: f.kind === "staging" ? "Staging: cannon decks + markers" : `${f.section}: ${f.kind}`,
     file: f.file, corner, size: f.size, foot: [corner[0], corner[2], corner[0] + f.size[0] - 1, corner[2] + f.size[2] - 1],
-    mode: f.mode, placed, removed: rem, work: placed + rem, materials: m, deps });
+    mode: f.mode, nbt: NBT + f.file, placed, removed: rem, work: placed + rem, materials: m, deps });
 }
 for (const d of docs) if (d.col === "tasks" && d.data.deps === null) d.data.deps = ringFills;
-for (const d of docs) writeFileSync(`${OUT}/${d.col}--${d.id}.json`, JSON.stringify(d.data));
-console.log(docs.length, "docs"); for (const d of docs.filter((d) => d.data.kind === "cannon")) console.log(d.id, d.data.work, d.data.foot.join(" "));
+const board = existsSync(BOARD) ? JSON.parse(readFileSync(BOARD, "utf8")) : { towns: {}, projects: {}, tasks: {}, pool: {} };
+const KEEP = ["status", "cannon", "updatedAt"];
+for (const { col, id, data } of docs) {
+  if (col === "config") { board.pool = { ...data, ...board.pool }; continue; }
+  const old = board[col][id];
+  board[col][id] = old && col === "tasks" ? { ...data, ...Object.fromEntries(KEEP.filter((k) => k in old).map((k) => [k, old[k]])) } : old && col === "projects" ? { ...data, stage: old.stage } : data;
+}
+writeFileSync(BOARD + ".tmp", JSON.stringify(board, null, 2) + "\n"); renameSync(BOARD + ".tmp", BOARD);
+console.log(`${docs.length} entries written to ${BOARD}`);

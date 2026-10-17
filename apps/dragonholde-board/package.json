@@ -1,0 +1,14 @@
+{
+  "name": "dragonholde-board",
+  "private": true,
+  "type": "module",
+  "description": "Construction board for the owner's server: towns, projects, cannon jobs and todos, kept in data/board.json",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "test": "node --test src/*.test.js"
+  },
+  "devDependencies": {
+    "vite": "^8.3.4"
+  }
+}

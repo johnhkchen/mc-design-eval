@@ -1,0 +1,838 @@
+{
+  "towns": {
+    "dh": {
+      "code": "DH",
+      "name": "Dragonholde",
+      "namedBy": "villager mod (random; may change)"
+    }
+  },
+  "projects": {
+    "dh-01": {
+      "code": "DH-01",
+      "name": "Polarton",
+      "placeholder": true,
+      "town": "dh",
+      "client": "Antipolar",
+      "order": 1,
+      "stage": "done",
+      "bbox": [
+        -1983,
+        -232,
+        -1891,
+        -143
+      ],
+      "summary": "Terraced hill village, partly a demo of the terrain-aware build system. Landscape and buildings pasted.",
+      "exportCorner": [
+        -1983,
+        59,
+        -232
+      ]
+    },
+    "dh-02": {
+      "code": "DH-02",
+      "name": null,
+      "town": "dh",
+      "client": "Antipolar",
+      "order": 2,
+      "stage": "plan",
+      "bbox": [
+        -1965,
+        -168,
+        -1826,
+        26
+      ],
+      "summary": "Swamp reclamation the client pointed us to after DH-01: levee ring, polder farms, waterfront, distillery, brewhouse, boatyard.",
+      "exportCorner": [
+        -1965,
+        62,
+        -168
+      ],
+      "note": "The first earthworks delivery (15 section files) is too slow: its critical path is about 8.5 h. It is expected to be dropped in favour of a re-plan from a capture of the swamp bed, cut into short waves for 20 cannons."
+    }
+  },
+  "tasks": {
+    "dh-01-capture": {
+      "project": "dh-01",
+      "stage": "capture",
+      "seq": 1,
+      "title": "Capture: polarton_expansion_001_xl",
+      "kind": "todo",
+      "status": "done"
+    },
+    "dh-01-plan": {
+      "project": "dh-01",
+      "stage": "plan",
+      "seq": 1,
+      "title": "Approve terraces, streets and plots",
+      "kind": "todo",
+      "status": "done"
+    },
+    "dh-01-land": {
+      "project": "dh-01",
+      "stage": "earthworks",
+      "seq": 1,
+      "title": "Paste landscape.nbt (terraform)",
+      "kind": "todo",
+      "status": "done"
+    },
+    "dh-01-village": {
+      "project": "dh-01",
+      "stage": "buildings",
+      "seq": 1,
+      "title": "Paste the village buildings over the landscape",
+      "kind": "todo",
+      "status": "done"
+    },
+    "dh-02-capture": {
+      "project": "dh-02",
+      "stage": "capture",
+      "seq": 1,
+      "title": "Capture: antipolar_expansion_002_raw",
+      "kind": "todo",
+      "status": "done"
+    },
+    "dh-02-bed": {
+      "project": "dh-02",
+      "stage": "capture",
+      "seq": 2,
+      "title": "Capture the swamp bed below the water line (spec to come)",
+      "kind": "todo",
+      "status": "queued"
+    },
+    "dh-02-plan": {
+      "project": "dh-02",
+      "stage": "plan",
+      "seq": 1,
+      "title": "Approve roads, zoning, levees and waterfront (plan-3)",
+      "kind": "todo",
+      "status": "done"
+    },
+    "dh-02-pond": {
+      "project": "dh-02",
+      "stage": "plan",
+      "seq": 2,
+      "title": "Pond test: does Replace Solid with Empty clear water source blocks?",
+      "kind": "todo",
+      "status": "queued"
+    },
+    "dh-02-align": {
+      "project": "dh-02",
+      "stage": "earthworks",
+      "seq": 0,
+      "title": "Check the staging hologram's road sits on the real road",
+      "kind": "todo",
+      "status": "queued"
+    },
+    "dh-02-k1": {
+      "project": "dh-02",
+      "stage": "buildings",
+      "seq": 1,
+      "title": "Kit 1: waterfront mixed-use, distillery, brewhouse, pump houses",
+      "kind": "todo",
+      "status": "queued"
+    },
+    "dh-02-k2": {
+      "project": "dh-02",
+      "stage": "buildings",
+      "seq": 2,
+      "title": "Kit 2: boatyard and fleet",
+      "kind": "todo",
+      "status": "queued"
+    },
+    "dh-02-k3": {
+      "project": "dh-02",
+      "stage": "buildings",
+      "seq": 3,
+      "title": "Kit 3: faubourg cottages and farmstead",
+      "kind": "todo",
+      "status": "queued"
+    },
+    "dh-02-0-staging": {
+      "project": "dh-02",
+      "stage": "earthworks",
+      "seq": 1,
+      "kind": "cannon",
+      "status": "queued",
+      "cannon": null,
+      "title": "Staging: cannon decks + markers",
+      "file": "0-staging.nbt",
+      "corner": [
+        -1965,
+        62,
+        -168
+      ],
+      "size": [
+        140,
+        23,
+        195
+      ],
+      "foot": [
+        -1965,
+        -168,
+        -1826,
+        26
+      ],
+      "mode": "Don't Replace Solid (placement only: it holds no air)",
+      "nbt": "benchmarks/plugin-baseline/runs/build-1/dh-02-swamp/delivery/cannon/0-staging.nbt",
+      "placed": 390,
+      "removed": 0,
+      "work": 390,
+      "materials": {
+        "scaffolding": 275,
+        "pink_wool": 108,
+        "magenta_wool": 7
+      },
+      "deps": [],
+      "updatedAt": "2026-10-17T12:08:04.209Z"
+    },
+    "dh-02-1-a-fill": {
+      "project": "dh-02",
+      "stage": "earthworks",
+      "seq": 2,
+      "kind": "cannon",
+      "status": "queued",
+      "cannon": null,
+      "title": "A shore west: fill",
+      "file": "1-A-fill.nbt",
+      "corner": [
+        -1958,
+        62,
+        -142
+      ],
+      "size": [
+        70,
+        15,
+        27
+      ],
+      "foot": [
+        -1958,
+        -142,
+        -1889,
+        -116
+      ],
+      "mode": "Replace Solid with Empty",
+      "nbt": "benchmarks/plugin-baseline/runs/build-1/dh-02-swamp/delivery/cannon/1-A-fill.nbt",
+      "placed": 2127,
+      "removed": 0,
+      "work": 2127,
+      "materials": {
+        "dirt": 723,
+        "packed_mud": 397,
+        "coarse_dirt": 276,
+        "grass_block": 229,
+        "dirt_path": 200,
+        "gravel": 96,
+        "mud_brick_slab": 54,
+        "cobblestone": 53,
+        "mossy_cobblestone": 31,
+        "stone": 27,
+        "andesite": 23,
+        "spruce_planks": 12,
+        "scaffolding": 2,
+        "magenta_wool": 2,
+        "stripped_spruce_log": 2
+      },
+      "deps": [
+        "dh-02-0-staging"
+      ]
+    },
+    "dh-02-1-a-fill-below": {
+      "project": "dh-02",
+      "stage": "earthworks",
+      "seq": 3,
+      "kind": "cannon",
+      "status": "queued",
+      "cannon": null,
+      "title": "A shore west: fill below",
+      "file": "1-A-fill-below.nbt",
+      "corner": [
+        -1957,
+        58,
+        -130
+      ],
+      "size": [
+        69,
+        4,
+        15
+      ],
+      "foot": [
+        -1957,
+        -130,
+        -1889,
+        -116
+      ],
+      "mode": "Replace Solid with Empty",
+      "nbt": "benchmarks/plugin-baseline/runs/build-1/dh-02-swamp/delivery/cannon/1-A-fill-below.nbt",
+      "placed": 4140,
+      "removed": 0,
+      "work": 4140,
+      "materials": {
+        "packed_mud": 2921,
+        "dirt": 1090,
+        "grass_block": 75,
+        "cobblestone": 16,
+        "andesite": 15,
+        "mossy_cobblestone": 8,
+        "dirt_path": 8,
+        "stone": 7
+      },
+      "deps": [
+        "dh-02-0-staging"
+      ]
+    },
+    "dh-02-2-a-dig": {
+      "project": "dh-02",
+      "stage": "earthworks",
+      "seq": 4,
+      "kind": "cannon",
+      "status": "queued",
+      "cannon": null,
+      "title": "A shore west: dig",
+      "file": "2-A-dig.nbt",
+      "corner": [
+        -1957,
+        58,
+        -130
+      ],
+      "size": [
+        69,
+        5,
+        15
+      ],
+      "foot": [
+        -1957,
+        -130,
+        -1889,
+        -116
+      ],
+      "mode": "Replace Solid with Empty",
+      "nbt": "benchmarks/plugin-baseline/runs/build-1/dh-02-swamp/delivery/cannon/2-A-dig.nbt",
+      "placed": 10,
+      "removed": 141,
+      "work": 151,
+      "materials": {
+        "mud_brick_slab": 10
+      },
+      "deps": [
+        "dh-02-1-a-fill",
+        "dh-02-1-a-fill-below",
+        "dh-02-1-c-fill",
+        "dh-02-1-c-fill-below",
+        "dh-02-1-e-fill",
+        "dh-02-1-e-fill-below"
+      ]
+    },
+    "dh-02-1-b-fill": {
+      "project": "dh-02",
+      "stage": "earthworks",
+      "seq": 5,
+      "kind": "cannon",
+      "status": "queued",
+      "cannon": null,
+      "title": "B shore east: fill",
+      "file": "1-B-fill.nbt",
+      "corner": [
+        -1888,
+        62,
+        -140
+      ],
+      "size": [
+        50,
+        14,
+        25
+      ],
+      "foot": [
+        -1888,
+        -140,
+        -1839,
+        -116
+      ],
+      "mode": "Replace Solid with Empty",
+      "nbt": "benchmarks/plugin-baseline/runs/build-1/dh-02-swamp/delivery/cannon/1-B-fill.nbt",
+      "placed": 2216,
+      "removed": 0,
+      "work": 2216,
+      "materials": {
+        "dirt": 966,
+        "coarse_dirt": 367,
+        "spruce_planks": 174,
+        "stripped_spruce_log": 155,
+        "cobblestone": 146,
+        "mossy_cobblestone": 108,
+        "dirt_path": 91,
+        "stone": 69,
+        "andesite": 54,
+        "gravel": 46,
+        "grass_block": 32,
+        "spruce_slab": 8
+      },
+      "deps": [
+        "dh-02-0-staging"
+      ]
+    },
+    "dh-02-1-c-fill": {
+      "project": "dh-02",
+      "stage": "earthworks",
+      "seq": 6,
+      "kind": "cannon",
+      "status": "queued",
+      "cannon": null,
+      "title": "C polder north: fill",
+      "file": "1-C-fill.nbt",
+      "corner": [
+        -1963,
+        62,
+        -115
+      ],
+      "size": [
+        75,
+        14,
+        47
+      ],
+      "foot": [
+        -1963,
+        -115,
+        -1889,
+        -69
+      ],
+      "mode": "Replace Solid with Empty",
+      "nbt": "benchmarks/plugin-baseline/runs/build-1/dh-02-swamp/delivery/cannon/1-C-fill.nbt",
+      "placed": 4747,
+      "removed": 0,
+      "work": 4747,
+      "materials": {
+        "coarse_dirt": 2285,
+        "dirt": 886,
+        "packed_mud": 470,
+        "grass_block": 406,
+        "dirt_path": 192,
+        "cobblestone": 154,
+        "gravel": 94,
+        "mossy_cobblestone": 84,
+        "stone": 59,
+        "spruce_planks": 54,
+        "andesite": 41,
+        "stripped_spruce_log": 12,
+        "mud_brick_slab": 8,
+        "magenta_wool": 1,
+        "scaffolding": 1
+      },
+      "deps": [
+        "dh-02-0-staging"
+      ]
+    },
+    "dh-02-1-c-fill-below": {
+      "project": "dh-02",
+      "stage": "earthworks",
+      "seq": 7,
+      "kind": "cannon",
+      "status": "queued",
+      "cannon": null,
+      "title": "C polder north: fill below",
+      "file": "1-C-fill-below.nbt",
+      "corner": [
+        -1957,
+        58,
+        -115
+      ],
+      "size": [
+        69,
+        4,
+        47
+      ],
+      "foot": [
+        -1957,
+        -115,
+        -1889,
+        -69
+      ],
+      "mode": "Replace Solid with Empty",
+      "nbt": "benchmarks/plugin-baseline/runs/build-1/dh-02-swamp/delivery/cannon/1-C-fill-below.nbt",
+      "placed": 12972,
+      "removed": 0,
+      "work": 12972,
+      "materials": {
+        "dirt": 6818,
+        "packed_mud": 4162,
+        "grass_block": 1404,
+        "coarse_dirt": 155,
+        "mud": 111,
+        "dirt_path": 92,
+        "gravel": 74,
+        "cobblestone": 59,
+        "stone": 30,
+        "mossy_cobblestone": 26,
+        "andesite": 23,
+        "stone_bricks": 18
+      },
+      "deps": [
+        "dh-02-0-staging"
+      ]
+    },
+    "dh-02-2-c-dig": {
+      "project": "dh-02",
+      "stage": "earthworks",
+      "seq": 8,
+      "kind": "cannon",
+      "status": "queued",
+      "cannon": null,
+      "title": "C polder north: dig",
+      "file": "2-C-dig.nbt",
+      "corner": [
+        -1957,
+        58,
+        -115
+      ],
+      "size": [
+        69,
+        5,
+        47
+      ],
+      "foot": [
+        -1957,
+        -115,
+        -1889,
+        -69
+      ],
+      "mode": "Replace Solid with Empty",
+      "nbt": "benchmarks/plugin-baseline/runs/build-1/dh-02-swamp/delivery/cannon/2-C-dig.nbt",
+      "placed": 16,
+      "removed": 3630,
+      "work": 3646,
+      "materials": {
+        "spruce_planks": 15,
+        "mud_brick_slab": 1
+      },
+      "deps": [
+        "dh-02-1-a-fill",
+        "dh-02-1-a-fill-below",
+        "dh-02-1-c-fill",
+        "dh-02-1-c-fill-below",
+        "dh-02-1-e-fill",
+        "dh-02-1-e-fill-below"
+      ]
+    },
+    "dh-02-1-d-fill": {
+      "project": "dh-02",
+      "stage": "earthworks",
+      "seq": 9,
+      "kind": "cannon",
+      "status": "queued",
+      "cannon": null,
+      "title": "D waterfront north: fill",
+      "file": "1-D-fill.nbt",
+      "corner": [
+        -1888,
+        62,
+        -115
+      ],
+      "size": [
+        36,
+        13,
+        47
+      ],
+      "foot": [
+        -1888,
+        -115,
+        -1853,
+        -69
+      ],
+      "mode": "Replace Solid with Empty",
+      "nbt": "benchmarks/plugin-baseline/runs/build-1/dh-02-swamp/delivery/cannon/1-D-fill.nbt",
+      "placed": 692,
+      "removed": 0,
+      "work": 692,
+      "materials": {
+        "spruce_planks": 295,
+        "stripped_spruce_log": 155,
+        "dirt": 131,
+        "coarse_dirt": 95,
+        "spruce_slab": 16
+      },
+      "deps": [
+        "dh-02-0-staging"
+      ]
+    },
+    "dh-02-1-e-fill": {
+      "project": "dh-02",
+      "stage": "earthworks",
+      "seq": 10,
+      "kind": "cannon",
+      "status": "queued",
+      "cannon": null,
+      "title": "E polder south: fill",
+      "file": "1-E-fill.nbt",
+      "corner": [
+        -1964,
+        62,
+        -68
+      ],
+      "size": [
+        76,
+        14,
+        55
+      ],
+      "foot": [
+        -1964,
+        -68,
+        -1889,
+        -14
+      ],
+      "mode": "Replace Solid with Empty",
+      "nbt": "benchmarks/plugin-baseline/runs/build-1/dh-02-swamp/delivery/cannon/1-E-fill.nbt",
+      "placed": 6011,
+      "removed": 0,
+      "work": 6011,
+      "materials": {
+        "coarse_dirt": 2310,
+        "dirt": 1549,
+        "packed_mud": 935,
+        "grass_block": 449,
+        "dirt_path": 362,
+        "gravel": 161,
+        "cobblestone": 89,
+        "mossy_cobblestone": 46,
+        "stone": 38,
+        "mud_brick_slab": 38,
+        "andesite": 23,
+        "spruce_planks": 5,
+        "scaffolding": 3,
+        "magenta_wool": 2,
+        "stripped_spruce_log": 1
+      },
+      "deps": [
+        "dh-02-0-staging"
+      ]
+    },
+    "dh-02-1-e-fill-below": {
+      "project": "dh-02",
+      "stage": "earthworks",
+      "seq": 11,
+      "kind": "cannon",
+      "status": "queued",
+      "cannon": null,
+      "title": "E polder south: fill below",
+      "file": "1-E-fill-below.nbt",
+      "corner": [
+        -1957,
+        58,
+        -68
+      ],
+      "size": [
+        69,
+        4,
+        55
+      ],
+      "foot": [
+        -1957,
+        -68,
+        -1889,
+        -14
+      ],
+      "mode": "Replace Solid with Empty",
+      "nbt": "benchmarks/plugin-baseline/runs/build-1/dh-02-swamp/delivery/cannon/1-E-fill-below.nbt",
+      "placed": 15180,
+      "removed": 0,
+      "work": 15180,
+      "materials": {
+        "dirt": 7274,
+        "packed_mud": 6122,
+        "grass_block": 747,
+        "mud": 624,
+        "coarse_dirt": 142,
+        "dirt_path": 79,
+        "gravel": 66,
+        "cobblestone": 33,
+        "mossy_cobblestone": 33,
+        "stone": 25,
+        "stone_bricks": 18,
+        "andesite": 17
+      },
+      "deps": [
+        "dh-02-0-staging"
+      ]
+    },
+    "dh-02-2-e-dig": {
+      "project": "dh-02",
+      "stage": "earthworks",
+      "seq": 12,
+      "kind": "cannon",
+      "status": "queued",
+      "cannon": null,
+      "title": "E polder south: dig",
+      "file": "2-E-dig.nbt",
+      "corner": [
+        -1957,
+        58,
+        -68
+      ],
+      "size": [
+        69,
+        5,
+        55
+      ],
+      "foot": [
+        -1957,
+        -68,
+        -1889,
+        -14
+      ],
+      "mode": "Replace Solid with Empty",
+      "nbt": "benchmarks/plugin-baseline/runs/build-1/dh-02-swamp/delivery/cannon/2-E-dig.nbt",
+      "placed": 26,
+      "removed": 4210,
+      "work": 4236,
+      "materials": {
+        "spruce_planks": 15,
+        "mud_brick_slab": 11
+      },
+      "deps": [
+        "dh-02-1-a-fill",
+        "dh-02-1-a-fill-below",
+        "dh-02-1-c-fill",
+        "dh-02-1-c-fill-below",
+        "dh-02-1-e-fill",
+        "dh-02-1-e-fill-below"
+      ]
+    },
+    "dh-02-1-f-fill": {
+      "project": "dh-02",
+      "stage": "earthworks",
+      "seq": 13,
+      "kind": "cannon",
+      "status": "queued",
+      "cannon": null,
+      "title": "F waterfront south: fill",
+      "file": "1-F-fill.nbt",
+      "corner": [
+        -1888,
+        62,
+        -68
+      ],
+      "size": [
+        48,
+        14,
+        55
+      ],
+      "foot": [
+        -1888,
+        -68,
+        -1841,
+        -14
+      ],
+      "mode": "Replace Solid with Empty",
+      "nbt": "benchmarks/plugin-baseline/runs/build-1/dh-02-swamp/delivery/cannon/1-F-fill.nbt",
+      "placed": 2782,
+      "removed": 0,
+      "work": 2782,
+      "materials": {
+        "dirt": 1285,
+        "coarse_dirt": 534,
+        "stripped_spruce_log": 357,
+        "spruce_planks": 188,
+        "grass_block": 121,
+        "dirt_path": 87,
+        "cobblestone": 71,
+        "gravel": 42,
+        "mossy_cobblestone": 34,
+        "stone": 29,
+        "andesite": 22,
+        "spruce_slab": 12
+      },
+      "deps": [
+        "dh-02-0-staging"
+      ]
+    },
+    "dh-02-1-g-fill": {
+      "project": "dh-02",
+      "stage": "earthworks",
+      "seq": 14,
+      "kind": "cannon",
+      "status": "queued",
+      "cannon": null,
+      "title": "G bluff and plateau: fill",
+      "file": "1-G-fill.nbt",
+      "corner": [
+        -1965,
+        62,
+        -13
+      ],
+      "size": [
+        77,
+        10,
+        25
+      ],
+      "foot": [
+        -1965,
+        -13,
+        -1889,
+        11
+      ],
+      "mode": "Replace Solid with Empty",
+      "nbt": "benchmarks/plugin-baseline/runs/build-1/dh-02-swamp/delivery/cannon/1-G-fill.nbt",
+      "placed": 698,
+      "removed": 0,
+      "work": 698,
+      "materials": {
+        "dirt_path": 205,
+        "coarse_dirt": 176,
+        "gravel": 116,
+        "dirt": 103,
+        "mud_brick_slab": 93,
+        "grass_block": 4,
+        "scaffolding": 1
+      },
+      "deps": [
+        "dh-02-0-staging"
+      ]
+    },
+    "dh-02-1-h-fill": {
+      "project": "dh-02",
+      "stage": "earthworks",
+      "seq": 15,
+      "kind": "cannon",
+      "status": "queued",
+      "cannon": null,
+      "title": "H pasture: fill",
+      "file": "1-H-fill.nbt",
+      "corner": [
+        -1888,
+        62,
+        -13
+      ],
+      "size": [
+        45,
+        12,
+        25
+      ],
+      "foot": [
+        -1888,
+        -13,
+        -1844,
+        11
+      ],
+      "mode": "Replace Solid with Empty",
+      "nbt": "benchmarks/plugin-baseline/runs/build-1/dh-02-swamp/delivery/cannon/1-H-fill.nbt",
+      "placed": 464,
+      "removed": 0,
+      "work": 464,
+      "materials": {
+        "dirt": 256,
+        "mud_brick_slab": 54,
+        "dirt_path": 46,
+        "coarse_dirt": 43,
+        "grass_block": 41,
+        "gravel": 24
+      },
+      "deps": [
+        "dh-02-0-staging"
+      ]
+    }
+  },
+  "pool": {
+    "cannons": 20,
+    "secPerBlock": 1.5,
+    "setupMin": 5,
+    "feed": "Bank System block download"
+  }
+}

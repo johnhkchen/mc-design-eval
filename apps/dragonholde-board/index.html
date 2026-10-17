@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dragonholde Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div><div class="eyebrow" id="townCode">Land office · world coordinates</div><h1 id="townName">Dragonholde</h1></div>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <div class="top">
+    <section class="panel" id="map" aria-label="Region map">
+      <header><h2>Plat</h2><div class="legend"><span><i class="sw" style="background:var(--queued)"></i>queued</span><span><i class="sw" style="background:var(--loaded)"></i>loaded</span><span><i class="sw" style="background:var(--running)"></i>running</span><span><i class="sw" style="background:var(--done)"></i>done</span><span><i class="sw" style="background:var(--dropped)"></i>dropped</span></div></header>
+      <div id="mapBody" class="empty">Loading the region…</div>
+    </section>
+    <section class="panel" aria-label="Next up">
+      <header><h2>Next up</h2><span class="eyebrow">ready to load</span></header>
+      <div class="queue" id="next"><div class="empty">The ready jobs appear here once the board loads.</div></div>
+    </section>
+  </div>
+
+  <section class="panel" aria-label="Cannon yard">
+    <header><h2>Cannon yard</h2><div class="settings" id="settings"></div></header>
+    <div class="pool" id="pool"></div>
+    <div class="yard" id="yard"></div>
+  </section>
+
+  <section class="projects" id="projects"></section>
+</div>
+<script type="module" src="/src/main.js"></script>
+</body></html>
