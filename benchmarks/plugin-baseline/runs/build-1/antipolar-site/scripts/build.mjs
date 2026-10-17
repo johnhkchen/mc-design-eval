@@ -181,9 +181,12 @@ files.unshift({ file: "0-staging.nbt", section: "all", kind: "staging", corner: 
 // every fill file (its box replaced, missing = air), then every dig file; compare with the finished state ---------------
 const sim = before.clone();
 for (let z = LOWER_BOX.z0; z <= LOWER_BOX.z1; z++) for (let x = LOWER_BOX.x0; x <= LOWER_BOX.x1; x++) for (let y = LOWER_BOX.y0; y < 0; y++) sim.set(x, y + YS, z, "water", { level: "0" });
-for (const [k, [b, s]] of staged) { const [x, y, z] = k.split(",").map(Number); if (/air|water/.test(strip(sim.blockAt(x, y + YS, z)))) sim.set(x, y + YS, z, b, s); }
+// what each paste has to place (the cannon places a cell only where the world differs; it skips fluids), as items
+const needs = new Map(), sigb = (b, st) => strip(b) + JSON.stringify(Object.entries(st ?? {}).sort());
+const need = (file, b, st) => { const id = strip(b); if (/^(air|water|lava)$/.test(id)) return; const m = needs.get(file) ?? new Map(); needs.set(file, m); const n = /_slab$/.test(id) && st?.type === "double" ? 2 : 1; m.set(id, (m.get(id) ?? 0) + n); };
+for (const [k, [b, s]] of staged) { const [x, y, z] = k.split(",").map(Number); if (/air|water/.test(strip(sim.blockAt(x, y + YS, z)))) { need("0-staging.nbt", b, s); sim.set(x, y + YS, z, b, s); } }
 const paste = (f) => { const src = f.kind === "dig" ? finalState : fillState; const [cx, cy, cz] = f.corner;
-  for (let z = 0; z < f.size[2]; z++) for (let y = 0; y < f.size[1]; y++) for (let x = 0; x < f.size[0]; x++) { const c = src.get(cx + x, cy + y + YS, cz + z); if (c && !/air$/.test(c.block)) sim.set(cx + x, cy + y + YS, cz + z, c.block, c.state, c.nbt); else sim.set(cx + x, cy + y + YS, cz + z, "air"); } };
+  for (let z = 0; z < f.size[2]; z++) for (let y = 0; y < f.size[1]; y++) for (let x = 0; x < f.size[0]; x++) { const c = src.get(cx + x, cy + y + YS, cz + z); if (c && !/air$/.test(c.block)) { const cur = sim.get(cx + x, cy + y + YS, cz + z); if (!cur || sigb(cur.block, cur.state) !== sigb(c.block, c.state)) need(f.file, c.block, c.state); sim.set(cx + x, cy + y + YS, cz + z, c.block, c.state, c.nbt); } else sim.set(cx + x, cy + y + YS, cz + z, "air"); } };
 // check after the fills: below y 1 inside the ring, no air (nothing can flood)
 for (const f of files.filter((f) => /^fill/.test(f.kind))) paste(f);
 let openBelow = 0; for (let z = LOWER_BOX.z0; z <= LOWER_BOX.z1; z++) for (let x = LOWER_BOX.x0; x <= LOWER_BOX.x1; x++) for (let y = LOWER_BOX.y0; y <= 0; y++) if (strip(sim.blockAt(x, y + YS, z)) === "air") openBelow++;
@@ -199,3 +202,19 @@ shifted(final).save("delivery/final-world.nbt"); shifted(landfill).save("deliver
 const report = { frame: "the export's: its corner is Polarton's (18,3,64); world y = export y; files' corners are given from the export's corner", worldGridNote: "final-world.nbt / landfill-world.nbt hold world y -4..23 at grid y 0..27", trees: { logs: removeLog.size, leaves: removeLeaf.size, remnants }, piles, towers, files, simulation: { openCellsBelowY1AfterFills: openBelow, pinkMarkersLeftAfterFills: stray.length, mismatchesAfterDigs: diff, examples: diffAt }, earth: L.earth };
 writeFileSync(`${OUT}/report.json`, JSON.stringify(report, null, 1));
 console.log(JSON.stringify({ towers, files: files.map((f) => `${f.file} ${f.size.join("x")} corner ${f.corner.join(",")} ${f.kb} KB`), simulation: report.simulation, trees: report.trees }, null, 1));
+
+// ---- materials: /give commands per file in paste order, in loads of at most 36 stacks (one empty inventory) ---------------
+const STACK = (id) => (/sign$|_bed$|bucket/.test(id) ? 16 : 64);
+let md = "# Materials for the cannons, in the order the files go on\n\nEach file\x27s blocks as `/give` commands, in **loads** of at most 36 stacks: one load fills an empty inventory. Run a load, empty it into that cannon\x27s chest, run the next. Counts are exactly what the cannon has to place: the simulated world just before that paste, compared cell by cell. Cells already right are left out, and so is water (the cannon skips fluids).\n\nAdd gunpowder for the cannon\x27s fuel as usual: it is not counted here.\n";
+const order = ["0-staging.nbt", ...files.filter((f) => /^fill/.test(f.kind)).map((f) => f.file), ...files.filter((f) => f.kind === "dig").map((f) => f.file)];
+const summary = [];
+for (const file of order) { const m = needs.get(file) ?? new Map(); const items = [...m].sort((a, b) => b[1] - a[1]); const total = items.reduce((a, [, n]) => a + n, 0);
+  const loads = []; let cur = [], slots = 0;
+  for (const [id, n0] of items) { let n = n0; while (n > 0) { const free = 36 - slots; if (free === 0) { loads.push(cur); cur = []; slots = 0; continue; } const take = Math.min(n, free * STACK(id)); cur.push([id, take]); slots += Math.ceil(take / STACK(id)); n -= take; } }
+  if (cur.length) loads.push(cur);
+  summary.push(`| ${file} | ${total} | ${loads.length} |`);
+  md += `\n## ${file}\n\n${total} blocks, ${loads.length} load${loads.length === 1 ? "" : "s"}: ${items.map(([id, n]) => `${n} ${id.replace(/_/g, " ")}`).join(", ") || "nothing to place"}.\n`;
+  loads.forEach((ld, i) => { md += `\nLoad ${i + 1} of ${loads.length}:\n\n\`\`\`\n${ld.map(([id, n]) => `/give @s minecraft:${id} ${n}`).join("\n")}\n\`\`\`\n`; }); }
+md = md.replace("\n## 0-staging.nbt", `\n| File | Blocks | Loads |\n|---|---|---|\n${summary.join("\n")}\n\n## 0-staging.nbt`);
+writeFileSync(`${OUT}/MATERIALS.md`, md);
+console.error("materials:", summary.join(" "));
