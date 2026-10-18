@@ -2,12 +2,19 @@
   import CatalogCard from "./CatalogCard.svelte";
   // The catalog, filterable by building type.
   let { entries } = $props();
+  const series = ["all", ...new Set(entries.map((e) => e.series))];
+  let set = $state("all");
   const types = ["all", ...new Set(entries.map((e) => e.type))];
   const count = (t) => (t === "all" ? entries.length : entries.filter((e) => e.type === t).length);
   let type = $state("all");
-  const shown = $derived(type === "all" ? entries : entries.filter((e) => e.type === type));
+  const shown = $derived(entries.filter((e) => (type === "all" || e.type === type) && (set === "all" || e.series === set)));
 </script>
 
+<div class="filters" role="group" aria-label="Filter by series">
+  {#each series as t}
+    <button class:on={set === t} aria-pressed={set === t} onclick={() => (set = t)}>{t === "all" ? "every series" : t} <span class="n">{t === "all" ? entries.length : entries.filter((e) => e.series === t).length}</span></button>
+  {/each}
+</div>
 <div class="filters" role="group" aria-label="Filter by type">
   {#each types as t}
     <button class:on={type === t} aria-pressed={type === t} onclick={() => (type = t)}>{t} <span class="n">{count(t)}</span></button>

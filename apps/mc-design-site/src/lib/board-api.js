@@ -2,6 +2,10 @@
 // pages to reload it whenever it changes on disk (a status tapped on a phone, or a plan script adding jobs).
 import { readFile, writeFile, rename } from "node:fs/promises";
 import { resolve } from "node:path";
+import { handleFixes } from "./fixes.js";
+import { fileStore } from "./fixes-file-store.js";
+
+const FIXES = fileStore(resolve(import.meta.dirname, "../../data/fixes.json"));
 
 const DATA = resolve(import.meta.dirname, "../../data/board.json");
 const REPO = resolve(import.meta.dirname, "../../../..");
@@ -36,6 +40,15 @@ export function boardApi() {
             return send(res, 200, b);
           }
           if (url.pathname === "/api/session") return send(res, 200, { canWrite: true });
+          if (url.pathname.startsWith("/api/issues") || url.pathname.startsWith("/api/fix-jobs")) {
+            const r = await handleFixes({ method: req.method, path: url.pathname, query: Object.fromEntries(url.searchParams), body: req.method === "GET" ? null : await body(req), canWrite: true }, FIXES);
+            if (r) return send(res, r.status, r.json);
+          }
+          if (url.pathname.startsWith("/api/candidates/") && req.method === "GET") {
+            // a fix job's candidate renders and files, made by scripts/fixer.mjs into .cache/candidates
+            const f = resolve(import.meta.dirname, "../../.cache/candidates", decodeURIComponent(url.pathname.slice("/api/candidates/".length)).replace(/\.\./g, ""));
+            res.setHeader("content-type", f.endsWith(".jpg") ? "image/jpeg" : "application/octet-stream"); return res.end(await readFile(f));
+          }
           if (url.pathname.startsWith("/api/assets/") && req.method === "GET") {
             // Same keys as the cloud's R2 (<project>/<file>), read from the repo path the job records.
             const key = decodeURIComponent(url.pathname.slice("/api/assets/".length));

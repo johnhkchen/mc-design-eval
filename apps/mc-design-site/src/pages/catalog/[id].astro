@@ -4,6 +4,7 @@ import Base from "../../layouts/Base.astro";
 import Viewer3D from "../../components/Viewer3D.svelte";
 import catalog from "../../data/catalog.json";
 import { projectById } from "../../data/projects.js";
+import { catalogNo } from "../../data/catalog-ids.js";
 export function getStaticPaths() { return catalog.map((e) => ({ params: { id: e.id }, props: { e } })); }
 const { e } = Astro.props;
 const project = projectById[e.project];
@@ -14,7 +15,7 @@ const minutes = cannonMinutes(e.blocks);
     <div class="view"><Viewer3D client:visible src={e.nbt} poster={e.image} label={e.name} cannon /></div>
     <div class="info">
       <a class="muted back" href="/catalog/">← Catalog</a>
-      <span class="eyebrow"><span class="no">No. {e.id.split("-")[1]}</span> · {e.type} · {e.style}</span>
+      <span class="eyebrow"><span class="no">No. {catalogNo(e)}</span> · {e.type} · {e.style}</span>
       <h1>{e.name}</h1>
       <dl>
         <dt>Plot</dt><dd class="mono">{e.footprint.join(" × ")} blocks, {e.height} high</dd>
@@ -22,7 +23,8 @@ const minutes = cannonMinutes(e.blocks);
         <dt>Blocks</dt><dd class="mono">{e.blocks.toLocaleString()}</dd>
         <dt>Cannon time</dt><dd class="mono">about {minutes} min at {SEC_PER_BLOCK} s a block</dd>
         <dt>Version</dt><dd class="mono">Minecraft {e.version}</dd>
-        {project && <><dt>Built in</dt><dd><a href={`/projects/${project.id}/`}>{project.code} {project.name}</a>, {project.town}</dd></>}
+        {project ? <><dt>Built in</dt><dd><a href={`/projects/${project.id}/`}>{project.code} {project.name}</a>, {project.town}</dd></> : <><dt>Placed in</dt><dd>{e.approved.replace(/^Placed in the /, "")}</dd></>}
+        {e.variantOf && <><dt>Variant of</dt><dd><a href={`/catalog/${e.variantOf}/`}>{catalog.find((b) => b.id === e.variantOf)?.name}</a>, recoloured</dd></>}
       </dl>
       <h3>Main materials</h3>
       <ul class="mats">{e.materials.map((m) => <li><span class="mono">{m.n.toLocaleString()}</span> {m.block.replace(/_/g, " ")}</li>)}</ul>

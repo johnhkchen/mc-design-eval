@@ -1,0 +1,13 @@
+---
+import Base from "../layouts/Base.astro";
+import IssuesBoard from "../components/IssuesBoard.svelte";
+import catalog from "../data/catalog.json";
+---
+<Base title="Issues" description="What the checks found in each catalog building, grouped by kind, and the fixes scheduled for them.">
+  <section class="wrap section">
+    <span class="eyebrow">Fix system</span>
+    <h1>Issues</h1>
+    <p class="muted">Every catalog building goes through the same checks: how things sit, whether every room can be reached and is lit, and whether the walk from the street to the door meets the accessible standard. Buildings with the same kind of issue are fixed together in one job, so we can see which fixes work.</p>
+    <IssuesBoard client:load catalog={catalog.map(({ id, name, image, variantOf }) => ({ id, name, image, variantOf }))} />
+  </section>
+</Base>

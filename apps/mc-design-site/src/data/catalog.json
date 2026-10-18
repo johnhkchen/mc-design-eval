@@ -3,6 +3,7 @@
     "id": "polarton-00-cotton-gin",
     "name": "Cotton gin",
     "type": "industry",
+    "series": "Polarton kit",
     "style": "Southern mill village, 1880–1930",
     "project": "dh-01",
     "approved": "Delivered and pasted in Dragonholde (DH-01)",
@@ -41,12 +42,18 @@
     ],
     "image": "/img/catalog/polarton-00-cotton-gin.jpg",
     "nbt": "/nbt/polarton-00-cotton-gin.nbt",
-    "version": "1.21.1"
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/polarton-kit",
+      "plot": 0,
+      "file": "benchmarks/plugin-baseline/runs/build-1/polarton-kit/delivery/polarton-00-cotton-gin.nbt"
+    }
   },
   {
     "id": "polarton-01-schoolhouse",
     "name": "Schoolhouse",
     "type": "civic",
+    "series": "Polarton kit",
     "style": "Southern mill village, 1880–1930",
     "project": "dh-01",
     "approved": "Delivered and pasted in Dragonholde (DH-01)",
@@ -85,12 +92,18 @@
     ],
     "image": "/img/catalog/polarton-01-schoolhouse.jpg",
     "nbt": "/nbt/polarton-01-schoolhouse.nbt",
-    "version": "1.21.1"
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/polarton-kit",
+      "plot": 1,
+      "file": "benchmarks/plugin-baseline/runs/build-1/polarton-kit/delivery/polarton-01-schoolhouse.nbt"
+    }
   },
   {
     "id": "polarton-02-hill-farmhouse",
     "name": "Hill farmhouse",
     "type": "house",
+    "series": "Polarton kit",
     "style": "Southern mill village, 1880–1930",
     "project": "dh-01",
     "approved": "Delivered and pasted in Dragonholde (DH-01)",
@@ -129,12 +142,18 @@
     ],
     "image": "/img/catalog/polarton-02-hill-farmhouse.jpg",
     "nbt": "/nbt/polarton-02-hill-farmhouse.nbt",
-    "version": "1.21.1"
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/polarton-kit",
+      "plot": 2,
+      "file": "benchmarks/plugin-baseline/runs/build-1/polarton-kit/delivery/polarton-02-hill-farmhouse.nbt"
+    }
   },
   {
     "id": "polarton-03-smithy",
     "name": "Smithy",
     "type": "workshop",
+    "series": "Polarton kit",
     "style": "Southern mill village, 1880–1930",
     "project": "dh-01",
     "approved": "Delivered and pasted in Dragonholde (DH-01)",
@@ -173,12 +192,18 @@
     ],
     "image": "/img/catalog/polarton-03-smithy.jpg",
     "nbt": "/nbt/polarton-03-smithy.nbt",
-    "version": "1.21.1"
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/polarton-kit",
+      "plot": 3,
+      "file": "benchmarks/plugin-baseline/runs/build-1/polarton-kit/delivery/polarton-03-smithy.nbt"
+    }
   },
   {
     "id": "polarton-04-church",
     "name": "Church",
     "type": "civic",
+    "series": "Polarton kit",
     "style": "Southern mill village, 1880–1930",
     "project": "dh-01",
     "approved": "Delivered and pasted in Dragonholde (DH-01)",
@@ -217,12 +242,18 @@
     ],
     "image": "/img/catalog/polarton-04-church.jpg",
     "nbt": "/nbt/polarton-04-church.nbt",
-    "version": "1.21.1"
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/polarton-kit",
+      "plot": 4,
+      "file": "benchmarks/plugin-baseline/runs/build-1/polarton-kit/delivery/polarton-04-church.nbt"
+    }
   },
   {
     "id": "polarton-05-tobacco-barn",
     "name": "Tobacco barn",
     "type": "farm",
+    "series": "Polarton kit",
     "style": "Southern mill village, 1880–1930",
     "project": "dh-01",
     "approved": "Delivered and pasted in Dragonholde (DH-01)",
@@ -261,12 +292,18 @@
     ],
     "image": "/img/catalog/polarton-05-tobacco-barn.jpg",
     "nbt": "/nbt/polarton-05-tobacco-barn.nbt",
-    "version": "1.21.1"
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/polarton-kit",
+      "plot": 5,
+      "file": "benchmarks/plugin-baseline/runs/build-1/polarton-kit/delivery/polarton-05-tobacco-barn.nbt"
+    }
   },
   {
     "id": "polarton-06-corn-crib-granary",
     "name": "Corn crib and granary",
     "type": "farm",
+    "series": "Polarton kit",
     "style": "Southern mill village, 1880–1930",
     "project": "dh-01",
     "approved": "Delivered and pasted in Dragonholde (DH-01)",
@@ -305,12 +342,18 @@
     ],
     "image": "/img/catalog/polarton-06-corn-crib-granary.jpg",
     "nbt": "/nbt/polarton-06-corn-crib-granary.nbt",
-    "version": "1.21.1"
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/polarton-kit",
+      "plot": 6,
+      "file": "benchmarks/plugin-baseline/runs/build-1/polarton-kit/delivery/polarton-06-corn-crib-granary.nbt"
+    }
   },
   {
     "id": "polarton-07-owners-house",
     "name": "Owner's house",
     "type": "house",
+    "series": "Polarton kit",
     "style": "Southern mill village, 1880–1930",
     "project": "dh-01",
     "approved": "Delivered and pasted in Dragonholde (DH-01)",
@@ -349,6 +392,775 @@
     ],
     "image": "/img/catalog/polarton-07-owners-house.jpg",
     "nbt": "/nbt/polarton-07-owners-house.nbt",
-    "version": "1.21.1"
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/polarton-kit",
+      "plot": 7,
+      "file": "benchmarks/plugin-baseline/runs/build-1/polarton-kit/delivery/polarton-07-owners-house.nbt"
+    }
+  },
+  {
+    "id": "sears-00-magnolia",
+    "name": "Magnolia",
+    "type": "house",
+    "series": "Mail-order houses",
+    "style": "After the Sears Modern Homes catalog, 1908–1940",
+    "project": "oak-lake",
+    "approved": "Placed in the Oak Lake showcase town",
+    "footprint": [
+      16,
+      20
+    ],
+    "height": 15,
+    "front": "north",
+    "blocks": 1292,
+    "materials": [
+      {
+        "block": "grass_block",
+        "n": 202
+      },
+      {
+        "block": "dark_oak_planks",
+        "n": 174
+      },
+      {
+        "block": "deepslate_tile_stairs",
+        "n": 133
+      },
+      {
+        "block": "white_concrete",
+        "n": 126
+      },
+      {
+        "block": "smooth_quartz",
+        "n": 120
+      },
+      {
+        "block": "bricks",
+        "n": 118
+      }
+    ],
+    "image": "/img/catalog/sears-00-magnolia.jpg",
+    "nbt": "/nbt/sears-00-magnolia.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/sears-kit",
+      "plot": 0,
+      "file": "benchmarks/plugin-baseline/runs/build-1/sears-kit/modules/sears-00-magnolia.nbt"
+    }
+  },
+  {
+    "id": "sears-01-alhambra",
+    "name": "Alhambra",
+    "type": "house",
+    "series": "Mail-order houses",
+    "style": "After the Sears Modern Homes catalog, 1908–1940",
+    "project": "oak-lake",
+    "approved": "Placed in the Oak Lake showcase town",
+    "footprint": [
+      16,
+      20
+    ],
+    "height": 16,
+    "front": "north",
+    "blocks": 1209,
+    "materials": [
+      {
+        "block": "white_terracotta",
+        "n": 260
+      },
+      {
+        "block": "grass_block",
+        "n": 207
+      },
+      {
+        "block": "oak_planks",
+        "n": 136
+      },
+      {
+        "block": "mud_bricks",
+        "n": 117
+      },
+      {
+        "block": "cobblestone",
+        "n": 108
+      },
+      {
+        "block": "bricks",
+        "n": 75
+      }
+    ],
+    "image": "/img/catalog/sears-01-alhambra.jpg",
+    "nbt": "/nbt/sears-01-alhambra.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/sears-kit",
+      "plot": 1,
+      "file": "benchmarks/plugin-baseline/runs/build-1/sears-kit/modules/sears-01-alhambra.nbt"
+    }
+  },
+  {
+    "id": "sears-02-vallonia",
+    "name": "Vallonia",
+    "type": "house",
+    "series": "Mail-order houses",
+    "style": "After the Sears Modern Homes catalog, 1908–1940",
+    "project": "oak-lake",
+    "approved": "Placed in the Oak Lake showcase town",
+    "footprint": [
+      16,
+      20
+    ],
+    "height": 13,
+    "front": "north",
+    "blocks": 1122,
+    "materials": [
+      {
+        "block": "grass_block",
+        "n": 214
+      },
+      {
+        "block": "deepslate_tile_slab",
+        "n": 171
+      },
+      {
+        "block": "cobblestone",
+        "n": 142
+      },
+      {
+        "block": "lime_terracotta",
+        "n": 140
+      },
+      {
+        "block": "oak_planks",
+        "n": 104
+      },
+      {
+        "block": "spruce_planks",
+        "n": 99
+      }
+    ],
+    "image": "/img/catalog/sears-02-vallonia.jpg",
+    "nbt": "/nbt/sears-02-vallonia.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/sears-kit",
+      "plot": 2,
+      "file": "benchmarks/plugin-baseline/runs/build-1/sears-kit/modules/sears-02-vallonia.nbt"
+    }
+  },
+  {
+    "id": "sears-03-puritan",
+    "name": "Puritan",
+    "type": "house",
+    "series": "Mail-order houses",
+    "style": "After the Sears Modern Homes catalog, 1908–1940",
+    "project": "oak-lake",
+    "approved": "Placed in the Oak Lake showcase town",
+    "footprint": [
+      16,
+      20
+    ],
+    "height": 16,
+    "front": "north",
+    "blocks": 1098,
+    "materials": [
+      {
+        "block": "grass_block",
+        "n": 211
+      },
+      {
+        "block": "birch_planks",
+        "n": 151
+      },
+      {
+        "block": "deepslate_tile_slab",
+        "n": 123
+      },
+      {
+        "block": "oak_planks",
+        "n": 122
+      },
+      {
+        "block": "cobblestone",
+        "n": 99
+      },
+      {
+        "block": "spruce_planks",
+        "n": 75
+      }
+    ],
+    "image": "/img/catalog/sears-03-puritan.jpg",
+    "nbt": "/nbt/sears-03-puritan.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/sears-kit",
+      "plot": 3,
+      "file": "benchmarks/plugin-baseline/runs/build-1/sears-kit/modules/sears-03-puritan.nbt"
+    }
+  },
+  {
+    "id": "sears-04-cornell",
+    "name": "Cornell",
+    "type": "house",
+    "series": "Mail-order houses",
+    "style": "After the Sears Modern Homes catalog, 1908–1940",
+    "project": "oak-lake",
+    "approved": "Placed in the Oak Lake showcase town",
+    "footprint": [
+      16,
+      20
+    ],
+    "height": 18,
+    "front": "north",
+    "blocks": 1368,
+    "materials": [
+      {
+        "block": "grass_block",
+        "n": 313
+      },
+      {
+        "block": "oak_planks",
+        "n": 162
+      },
+      {
+        "block": "cyan_terracotta",
+        "n": 145
+      },
+      {
+        "block": "deepslate_tile_stairs",
+        "n": 134
+      },
+      {
+        "block": "spruce_planks",
+        "n": 107
+      },
+      {
+        "block": "bricks",
+        "n": 98
+      }
+    ],
+    "image": "/img/catalog/sears-04-cornell.jpg",
+    "nbt": "/nbt/sears-04-cornell.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/sears-kit",
+      "plot": 4,
+      "file": "benchmarks/plugin-baseline/runs/build-1/sears-kit/modules/sears-04-cornell.nbt"
+    }
+  },
+  {
+    "id": "sears-05-stanford",
+    "name": "Stanford",
+    "type": "house",
+    "series": "Mail-order houses",
+    "style": "After the Sears Modern Homes catalog, 1908–1940",
+    "project": "oak-lake",
+    "approved": "Placed in the Oak Lake showcase town",
+    "footprint": [
+      16,
+      20
+    ],
+    "height": 15,
+    "front": "north",
+    "blocks": 1055,
+    "materials": [
+      {
+        "block": "grass_block",
+        "n": 304
+      },
+      {
+        "block": "calcite",
+        "n": 130
+      },
+      {
+        "block": "oak_planks",
+        "n": 101
+      },
+      {
+        "block": "bricks",
+        "n": 72
+      },
+      {
+        "block": "deepslate_tile_stairs",
+        "n": 71
+      },
+      {
+        "block": "smooth_quartz",
+        "n": 68
+      }
+    ],
+    "image": "/img/catalog/sears-05-stanford.jpg",
+    "nbt": "/nbt/sears-05-stanford.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/sears-kit",
+      "plot": 5,
+      "file": "benchmarks/plugin-baseline/runs/build-1/sears-kit/modules/sears-05-stanford.nbt"
+    }
+  },
+  {
+    "id": "sears-06-winona",
+    "name": "Winona",
+    "type": "house",
+    "series": "Mail-order houses",
+    "style": "After the Sears Modern Homes catalog, 1908–1940",
+    "project": "oak-lake",
+    "approved": "Placed in the Oak Lake showcase town",
+    "footprint": [
+      16,
+      20
+    ],
+    "height": 11,
+    "front": "north",
+    "blocks": 871,
+    "materials": [
+      {
+        "block": "grass_block",
+        "n": 310
+      },
+      {
+        "block": "spruce_stairs",
+        "n": 89
+      },
+      {
+        "block": "oak_planks",
+        "n": 71
+      },
+      {
+        "block": "smooth_sandstone",
+        "n": 56
+      },
+      {
+        "block": "smooth_quartz",
+        "n": 42
+      },
+      {
+        "block": "spruce_planks",
+        "n": 38
+      }
+    ],
+    "image": "/img/catalog/sears-06-winona.jpg",
+    "nbt": "/nbt/sears-06-winona.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/sears-kit",
+      "plot": 6,
+      "file": "benchmarks/plugin-baseline/runs/build-1/sears-kit/modules/sears-06-winona.nbt"
+    }
+  },
+  {
+    "id": "sears-07-craftsman",
+    "name": "Craftsman two-storey",
+    "type": "house",
+    "series": "Mail-order houses",
+    "style": "After the Sears Modern Homes catalog, 1908–1940",
+    "project": "oak-lake",
+    "approved": "Placed in the Oak Lake showcase town",
+    "footprint": [
+      16,
+      20
+    ],
+    "height": 17,
+    "front": "north",
+    "blocks": 1393,
+    "materials": [
+      {
+        "block": "grass_block",
+        "n": 313
+      },
+      {
+        "block": "spruce_planks",
+        "n": 256
+      },
+      {
+        "block": "oak_planks",
+        "n": 136
+      },
+      {
+        "block": "deepslate_tile_slab",
+        "n": 99
+      },
+      {
+        "block": "deepslate_tile_stairs",
+        "n": 94
+      },
+      {
+        "block": "glass_pane",
+        "n": 66
+      }
+    ],
+    "image": "/img/catalog/sears-07-craftsman.jpg",
+    "nbt": "/nbt/sears-07-craftsman.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/sears-kit",
+      "plot": 7,
+      "file": "benchmarks/plugin-baseline/runs/build-1/sears-kit/modules/sears-07-craftsman.nbt"
+    }
+  },
+  {
+    "id": "sears-01-alhambra-b",
+    "name": "Alhambra, yellow stucco",
+    "type": "house",
+    "variantOf": "sears-01-alhambra",
+    "swap": "white=yellow",
+    "series": "Mail-order houses",
+    "style": "After the Sears Modern Homes catalog, 1908–1940",
+    "project": "oak-lake",
+    "approved": "Placed in the Oak Lake showcase town",
+    "footprint": [
+      16,
+      20
+    ],
+    "height": 16,
+    "front": "north",
+    "blocks": 1209,
+    "materials": [
+      {
+        "block": "yellow_terracotta",
+        "n": 260
+      },
+      {
+        "block": "grass_block",
+        "n": 207
+      },
+      {
+        "block": "oak_planks",
+        "n": 136
+      },
+      {
+        "block": "mud_bricks",
+        "n": 117
+      },
+      {
+        "block": "cobblestone",
+        "n": 108
+      },
+      {
+        "block": "bricks",
+        "n": 75
+      }
+    ],
+    "image": "/img/catalog/sears-01-alhambra-b.jpg",
+    "nbt": "/nbt/sears-01-alhambra-b.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/sears-kit",
+      "plot": 1,
+      "file": "benchmarks/plugin-baseline/runs/build-1/oak-lake-sears/delivery/houses/sears-01-alhambra-b.nbt"
+    }
+  },
+  {
+    "id": "sears-02-vallonia-b",
+    "name": "Vallonia, grey with dark trim",
+    "type": "house",
+    "variantOf": "sears-02-vallonia",
+    "swap": "lime=light_gray,spruce=dark_oak",
+    "series": "Mail-order houses",
+    "style": "After the Sears Modern Homes catalog, 1908–1940",
+    "project": "oak-lake",
+    "approved": "Placed in the Oak Lake showcase town",
+    "footprint": [
+      16,
+      20
+    ],
+    "height": 13,
+    "front": "north",
+    "blocks": 1122,
+    "materials": [
+      {
+        "block": "grass_block",
+        "n": 214
+      },
+      {
+        "block": "deepslate_tile_slab",
+        "n": 171
+      },
+      {
+        "block": "cobblestone",
+        "n": 142
+      },
+      {
+        "block": "light_gray_terracotta",
+        "n": 140
+      },
+      {
+        "block": "oak_planks",
+        "n": 104
+      },
+      {
+        "block": "dark_oak_planks",
+        "n": 99
+      }
+    ],
+    "image": "/img/catalog/sears-02-vallonia-b.jpg",
+    "nbt": "/nbt/sears-02-vallonia-b.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/sears-kit",
+      "plot": 2,
+      "file": "benchmarks/plugin-baseline/runs/build-1/oak-lake-sears/delivery/houses/sears-02-vallonia-b.nbt"
+    }
+  },
+  {
+    "id": "sears-03-puritan-b",
+    "name": "Puritan, dark shingle",
+    "type": "house",
+    "variantOf": "sears-03-puritan",
+    "swap": "birch=spruce",
+    "series": "Mail-order houses",
+    "style": "After the Sears Modern Homes catalog, 1908–1940",
+    "project": "oak-lake",
+    "approved": "Placed in the Oak Lake showcase town",
+    "footprint": [
+      16,
+      20
+    ],
+    "height": 16,
+    "front": "north",
+    "blocks": 1098,
+    "materials": [
+      {
+        "block": "spruce_planks",
+        "n": 226
+      },
+      {
+        "block": "grass_block",
+        "n": 211
+      },
+      {
+        "block": "deepslate_tile_slab",
+        "n": 123
+      },
+      {
+        "block": "oak_planks",
+        "n": 122
+      },
+      {
+        "block": "cobblestone",
+        "n": 99
+      },
+      {
+        "block": "bricks",
+        "n": 51
+      }
+    ],
+    "image": "/img/catalog/sears-03-puritan-b.jpg",
+    "nbt": "/nbt/sears-03-puritan-b.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/sears-kit",
+      "plot": 3,
+      "file": "benchmarks/plugin-baseline/runs/build-1/oak-lake-sears/delivery/houses/sears-03-puritan-b.nbt"
+    }
+  },
+  {
+    "id": "sears-04-cornell-b",
+    "name": "Cornell, grey with a red roof",
+    "type": "house",
+    "variantOf": "sears-04-cornell",
+    "swap": "cyan=light_gray,deepslate_tiles=bricks",
+    "series": "Mail-order houses",
+    "style": "After the Sears Modern Homes catalog, 1908–1940",
+    "project": "oak-lake",
+    "approved": "Placed in the Oak Lake showcase town",
+    "footprint": [
+      16,
+      20
+    ],
+    "height": 18,
+    "front": "north",
+    "blocks": 1368,
+    "materials": [
+      {
+        "block": "grass_block",
+        "n": 313
+      },
+      {
+        "block": "oak_planks",
+        "n": 162
+      },
+      {
+        "block": "light_gray_terracotta",
+        "n": 145
+      },
+      {
+        "block": "brick_stairs",
+        "n": 135
+      },
+      {
+        "block": "spruce_planks",
+        "n": 107
+      },
+      {
+        "block": "bricks",
+        "n": 101
+      }
+    ],
+    "image": "/img/catalog/sears-04-cornell-b.jpg",
+    "nbt": "/nbt/sears-04-cornell-b.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/sears-kit",
+      "plot": 4,
+      "file": "benchmarks/plugin-baseline/runs/build-1/oak-lake-sears/delivery/houses/sears-04-cornell-b.nbt"
+    }
+  },
+  {
+    "id": "sears-05-stanford-b",
+    "name": "Stanford, red roof",
+    "type": "house",
+    "variantOf": "sears-05-stanford",
+    "swap": "deepslate_tiles=bricks",
+    "series": "Mail-order houses",
+    "style": "After the Sears Modern Homes catalog, 1908–1940",
+    "project": "oak-lake",
+    "approved": "Placed in the Oak Lake showcase town",
+    "footprint": [
+      16,
+      20
+    ],
+    "height": 15,
+    "front": "north",
+    "blocks": 1055,
+    "materials": [
+      {
+        "block": "grass_block",
+        "n": 304
+      },
+      {
+        "block": "calcite",
+        "n": 130
+      },
+      {
+        "block": "oak_planks",
+        "n": 101
+      },
+      {
+        "block": "bricks",
+        "n": 76
+      },
+      {
+        "block": "brick_stairs",
+        "n": 71
+      },
+      {
+        "block": "smooth_quartz",
+        "n": 68
+      }
+    ],
+    "image": "/img/catalog/sears-05-stanford-b.jpg",
+    "nbt": "/nbt/sears-05-stanford-b.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/sears-kit",
+      "plot": 5,
+      "file": "benchmarks/plugin-baseline/runs/build-1/oak-lake-sears/delivery/houses/sears-05-stanford-b.nbt"
+    }
+  },
+  {
+    "id": "sears-06-winona-b",
+    "name": "Winona, white and oak",
+    "type": "house",
+    "variantOf": "sears-06-winona",
+    "swap": "spruce=oak,smooth_sandstone=white_terracotta",
+    "series": "Mail-order houses",
+    "style": "After the Sears Modern Homes catalog, 1908–1940",
+    "project": "oak-lake",
+    "approved": "Placed in the Oak Lake showcase town",
+    "footprint": [
+      16,
+      20
+    ],
+    "height": 11,
+    "front": "north",
+    "blocks": 871,
+    "materials": [
+      {
+        "block": "grass_block",
+        "n": 310
+      },
+      {
+        "block": "oak_planks",
+        "n": 109
+      },
+      {
+        "block": "oak_stairs",
+        "n": 89
+      },
+      {
+        "block": "white_terracotta",
+        "n": 56
+      },
+      {
+        "block": "smooth_quartz",
+        "n": 42
+      },
+      {
+        "block": "cobblestone",
+        "n": 33
+      }
+    ],
+    "image": "/img/catalog/sears-06-winona-b.jpg",
+    "nbt": "/nbt/sears-06-winona-b.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/sears-kit",
+      "plot": 6,
+      "file": "benchmarks/plugin-baseline/runs/build-1/oak-lake-sears/delivery/houses/sears-06-winona-b.nbt"
+    }
+  },
+  {
+    "id": "sears-07-craftsman-b",
+    "name": "Craftsman, dark shingle",
+    "type": "house",
+    "variantOf": "sears-07-craftsman",
+    "swap": "spruce=dark_oak",
+    "series": "Mail-order houses",
+    "style": "After the Sears Modern Homes catalog, 1908–1940",
+    "project": "oak-lake",
+    "approved": "Placed in the Oak Lake showcase town",
+    "footprint": [
+      16,
+      20
+    ],
+    "height": 17,
+    "front": "north",
+    "blocks": 1393,
+    "materials": [
+      {
+        "block": "grass_block",
+        "n": 313
+      },
+      {
+        "block": "dark_oak_planks",
+        "n": 284
+      },
+      {
+        "block": "oak_planks",
+        "n": 136
+      },
+      {
+        "block": "deepslate_tile_slab",
+        "n": 99
+      },
+      {
+        "block": "deepslate_tile_stairs",
+        "n": 94
+      },
+      {
+        "block": "glass_pane",
+        "n": 66
+      }
+    ],
+    "image": "/img/catalog/sears-07-craftsman-b.jpg",
+    "nbt": "/nbt/sears-07-craftsman-b.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/sears-kit",
+      "plot": 7,
+      "file": "benchmarks/plugin-baseline/runs/build-1/oak-lake-sears/delivery/houses/sears-07-craftsman-b.nbt"
+    }
   }
 ]

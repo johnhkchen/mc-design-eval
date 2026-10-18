@@ -1,4 +1,7 @@
-// The board's API on Cloudflare: the same contract as the Vite dev server (vite.config.js), backed by D1 and R2.
+// The site's API on Cloudflare: the same contract as the dev server (src/lib/board-api.js), backed by D1 and R2: the
+// construction board, and the fix system (src/lib/fixes.js: issues by kind, batched fix jobs).
+import { handleFixes } from "../src/lib/fixes.js";
+import { d1Store } from "./fixes-d1.js";
 const STATUSES = ["queued", "loaded", "running", "done", "dropped"];
 const POOL_FIELDS = ["cannons", "secPerBlock", "setupMin"];
 
@@ -28,6 +31,11 @@ export default {
       const obj = await env.FILES.get(decodeURIComponent(p.slice("/api/assets/".length)));
       if (!obj) return json({ error: "no such asset" }, 404);
       return new Response(obj.body, { headers: { "content-type": obj.httpMetadata?.contentType || "application/octet-stream", etag: obj.httpEtag, "cache-control": "public, max-age=300" } });
+    }
+    if (p.startsWith("/api/issues") || p.startsWith("/api/fix-jobs")) {
+      const body = req.method === "GET" ? null : await req.json().catch(() => ({}));
+      const r = await handleFixes({ method: req.method, path: p, query: Object.fromEntries(url.searchParams), body, canWrite: canWrite(req, env) }, d1Store(env.DB));
+      if (r) return json(r.json, r.status);
     }
     const m = p.match(/^\/api\/tasks\/([\w.-]+)$/);
     if ((m || p === "/api/pool") && req.method === "PATCH") {
