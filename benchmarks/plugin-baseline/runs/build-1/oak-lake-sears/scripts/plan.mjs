@@ -95,7 +95,8 @@ execFileSync("magick", [...args, `${OUT}/plan.png`]);
   const byName = {}; for (const st of streets) { const n = st.name.trim(); (byName[n] ??= []).push(st); }
   for (const [n, sts] of Object.entries(byName)) { const P = sts.at(-1).pts, p = P[Math.floor(P.length / 2)];
     const len = sts.reduce((t, q) => t + q.len, 0), g = Math.max(...sts.map((q) => q.maxGrade)), txt = `${n} · ${len} blocks${g > 0.01 ? ` · steepest 1 in ${Math.round(1 / g)}` : " · level"}`;
-    const x = Math.max(4, Math.min(X * S - txt.length * 10, p[0] * S + 14)), y = Math.max(4, Math.min(Z * S - 26, p[1] * S - 10));
+    const nudge = { "Lake Drive": [-10, 42] }[n] ?? [0, 0]; /* clear of a crossing street's label */
+    const x = Math.max(4, Math.min(X * S - txt.length * 10, p[0] * S + 14 + nudge[0])), y = Math.max(4, Math.min(Z * S - 26, p[1] * S - 10 + nudge[1]));
     a.push("-fill", "#ffffffdd", "-draw", `rectangle ${x - 4},${y - 2} ${x + txt.length * 9.6},${y + 22}`, "-fill", "#1c2420", "-annotate", `+${x}+${y}`, txt); }
   a.push("-pointsize", "15", "-fill", "#ffffffdd", "-draw", "rectangle 6,6 290,70", "-fill", "#963c28", "-annotate", "+12+10", "avenue", "-fill", "#285a96", "-annotate", "+12+30", "drives", "-fill", "#464646", "-annotate", "+12+50", "streets", "-fill", "#1c2420", "-annotate", "+80+10", "all 5 wide", "-annotate", "+80+30", "contours every 2 blocks", "-annotate", "+80+50", "160 x 160 blocks, north up");
   execFileSync("magick", [...a, `${OUT}/roads.png`]);
