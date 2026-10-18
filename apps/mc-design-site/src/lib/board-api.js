@@ -1,11 +1,17 @@
 // Dev-server half of the board API (the Worker in worker/index.js is the cloud half). The board's data lives in data/board.json, not in the browser: the dev server reads and writes it, and tells open
 // pages to reload it whenever it changes on disk (a status tapped on a phone, or a plan script adding jobs).
 import { readFile, writeFile, rename } from "node:fs/promises";
+import { execFile } from "node:child_process";
 import { resolve } from "node:path";
 import { handleFixes } from "./fixes.js";
 import { fileStore } from "./fixes-file-store.js";
 
 const FIXES = fileStore(resolve(import.meta.dirname, "../../data/fixes.json"));
+// on the dev server a click runs the job: scheduling runs the runner on the oldest queued job, accepting applies it.
+// One at a time, in click order. (The cloud has no runner: scripts/fixer.mjs --loop on this machine does both.)
+const SITE = resolve(import.meta.dirname, "../..");
+let runner = Promise.resolve();
+const run = (...args) => (runner = runner.then(() => new Promise((ok) => execFile("node", ["scripts/fixer.mjs", ...args], { cwd: SITE, timeout: 30 * 60e3 }, (e, out, err) => { if (e) console.error(`[fixer] ${err || e.message}`); else console.log(`[fixer] ${out.trim()}`); ok(); }))));
 
 const DATA = resolve(import.meta.dirname, "../../data/board.json");
 const REPO = resolve(import.meta.dirname, "../../../..");
@@ -41,13 +47,16 @@ export function boardApi() {
           }
           if (url.pathname === "/api/session") return send(res, 200, { canWrite: true });
           if (url.pathname.startsWith("/api/issues") || url.pathname.startsWith("/api/fix-jobs")) {
-            const r = await handleFixes({ method: req.method, path: url.pathname, query: Object.fromEntries(url.searchParams), body: req.method === "GET" ? null : await body(req), canWrite: true }, FIXES);
+            const b = req.method === "GET" ? null : await body(req);
+            const r = await handleFixes({ method: req.method, path: url.pathname, query: Object.fromEntries(url.searchParams), body: b, canWrite: true }, FIXES);
+            if (r && r.status === 200 && req.method === "POST" && url.pathname === "/api/fix-jobs") run();
+            if (r && r.status === 200 && req.method === "PATCH" && /^\/api\/fix-jobs\//.test(url.pathname) && b?.status === "accepted") run("--apply");
             if (r) return send(res, r.status, r.json);
           }
           if (url.pathname.startsWith("/api/candidates/") && req.method === "GET") {
             // a fix job's candidate renders and files, made by scripts/fixer.mjs into .cache/candidates
             const f = resolve(import.meta.dirname, "../../.cache/candidates", decodeURIComponent(url.pathname.slice("/api/candidates/".length)).replace(/\.\./g, ""));
-            res.setHeader("content-type", f.endsWith(".jpg") ? "image/jpeg" : "application/octet-stream"); return res.end(await readFile(f));
+            res.setHeader("content-type", f.endsWith(".jpg") ? "image/jpeg" : /\.(md|json)$/.test(f) ? "text/plain; charset=utf-8" : "application/octet-stream"); return res.end(await readFile(f));
           }
           if (url.pathname.startsWith("/api/assets/") && req.method === "GET") {
             // Same keys as the cloud's R2 (<project>/<file>), read from the repo path the job records.

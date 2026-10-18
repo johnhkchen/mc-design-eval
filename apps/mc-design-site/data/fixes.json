@@ -681,5 +681,45 @@
    "id": "c-1fe8mqj"
   }
  ],
- "jobs": []
+ "jobs": [
+  {
+   "id": "study-mvdci8vj",
+   "type": "study",
+   "kind": "no front door",
+   "buildings": [
+    "polarton-00-cotton-gin",
+    "polarton-03-smithy"
+   ],
+   "note": "",
+   "tier": "auto",
+   "budget": 0,
+   "status": "review",
+   "createdAt": "2026-10-18T04:48:49.519Z",
+   "updatedAt": "2026-10-18T04:48:49.572Z",
+   "result": {
+    "tier": "auto",
+    "counts": {
+     "occurrences": 2,
+     "buildings": 2,
+     "open": 2,
+     "fixed": 0,
+     "bySeries": {
+      "Polarton kit": 2
+     },
+     "byType": {
+      "industry": 1,
+      "workshop": 1
+     },
+     "byRun": {
+      "benchmarks/plugin-baseline/runs/build-1/polarton-kit": 2
+     }
+    },
+    "packet": "/api/candidates/study-mvdci8vj/packet.md",
+    "file": "/Volumes/ext1/swe/repos/mc-design-eval/apps/mc-design-site/.cache/candidates/study-mvdci8vj/packet.md",
+    "cost": 0,
+    "minutes": 0,
+    "summary": "Evidence gathered (no model): 2 occurrences in 2 buildings."
+   }
+  }
+ ]
 }

@@ -26,3 +26,14 @@ test("jobs and reports need a sign-in; viewing doesn't", async () => {
   assert.equal((await handleFixes({ method: "POST", path: "/api/fix-jobs", body: { kind: "x", buildings: ["a"] }, canWrite: false }, store)).status, 401);
   assert.equal(issueId({ source: "person", building: "a", kind: "k", at: null, what: "w" }).startsWith("p-"), true);
 });
+
+test("a fix is code only; a model can only study a kind, with a cap", async () => {
+  const jobs = [], store = { listIssues: async () => [], listJobs: async () => jobs, insertJob: async (j) => jobs.push(j) };
+  const post = (body) => handleFixes({ method: "POST", path: "/api/fix-jobs", body, canWrite: true }, store);
+  assert.equal((await post({ kind: "floating", buildings: ["a"], tier: "sonnet" })).status, 400);
+  const fix = await post({ kind: "floating", buildings: ["a"] });
+  assert.equal(fix.json.type, "fix"); assert.equal(fix.json.tier, "auto"); assert.equal(fix.json.budget, 0);
+  const study = await post({ type: "study", kind: "no front door", buildings: ["a", "b"], tier: "haiku", budget: 99 });
+  assert.equal(study.json.type, "study"); assert.equal(study.json.budget, 20);
+  assert.equal((await post({ type: "bake", kind: "x", buildings: ["a"] })).status, 400);
+});

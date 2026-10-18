@@ -1,43 +1,33 @@
 # The fix system
 
-Find what's wrong with catalog buildings, fix buildings with the same kind of issue together, and keep score of
-which fixes work.
+Run like a bakery: a cake that comes out wrong in a way code can repair is repaired; one that can't is tagged, and the
+tagged ones of a kind are studied together for why the recipe keeps making them. The recipe (the plugin's prompts,
+planner, crews and toolkit, or the check itself) is what gets fixed.
 
-1. **Detect** — `node scripts/check.mjs` runs every catalog building through the toolkit's deterministic checks
-   (fit, room walk, light, the street-to-door way in) and syncs the results to the site's issues. An issue the check
-   stops finding becomes *fixed*; a waived one stays waived. People report what the checks can't see on `/issues`.
-2. **Schedule** — on `/issues`, select the buildings in a group (one kind of issue) and schedule a fix, with an
-   optional note on how to fix it. Needs the admin token (set on the board page) until Discord sign-in.
-3. **Fix** — `node scripts/fixer.mjs` takes the oldest queued job and runs it at the job's tier (below), checks each
-   candidate before and after, renders it and posts the result. `--loop` keeps polling; `--dry` tests the model tiers
-   without a model call.
-4. **Review** — on `/issues`, accept or reject each job's candidates. `node scripts/fixer.mjs --apply` puts accepted
-   candidates into the catalog, rebuilds it and re-checks.
+1. **Detect** — `node scripts/check.mjs` runs every catalog building through the deterministic checks (fit, room walk,
+   light, the street-to-door way in) and syncs the results to the site's issues. An issue the check stops finding
+   becomes *fixed*; a waived one (intended, not an error) stays waived. People report what the checks can't see.
+2. **Fix by code** — a kind the toolkit can repair (`minecraft-design` `tools/src/autofix.mjs`, also `mcd fix`) gets a
+   *Fix N by code* button on `/issues`. No model. A building's fix is kept only if the checks show the issue cleared
+   and nothing else got worse; the candidates are rendered, and *Accept into the catalog* puts them in (rebuilds the
+   catalog and re-checks). What code couldn't fix is tagged for study.
+3. **Study** — every other kind, person reports, and code's failures are *tagged*. A study looks at every build that
+   ever came out this way (fixed ones count; waived ones don't):
+   - *Gather the evidence* (code, no model): each occurrence with its kit run and plot, the plan's rooms and parts for
+     that plot, the run's files, failed code fixes, and the plugin files that made and found it, as `packet.md`.
+   - *Ask Haiku why* (cap $0.50) / *Ask Sonnet why* (cap $2): only on a person's click. The model reads the evidence
+     with read-only tools via `claude -p --bare` (authenticated only by `ANTHROPIC_API_KEY` from `.env.local`, which is
+     git-ignored, so it's billed to the API), with a hard `--max-budget-usd` cap, and answers in a fixed shape: where
+     (brief, form, planner, crews, toolkit, inspector, check is wrong, intended), why, evidence, the smallest recipe
+     change, whether a code fixer could do it, and whether the check is right.
+   - *Accept* makes it a **recipe change to make** in the plugin, listed on `/issues`. Making it is plugin work, done
+     on request. A diagnosis that says a code fixer could do it is how a kind moves from step 3 to step 2.
+4. **Score** — the *By kind* table: buildings ever, open, fixed by code, tagged, studies, study cost.
 
-## Escalation protocol
+Models never edit a building here: fix jobs are code only (the API refuses a fix job at a model tier). A building's
+revision by a model is a revision on a person's comment, on the board.
 
-Fixes are code first. A model is used only when a person asks for one, with a cost cap.
-
-| Tier | Who fixes | When | Cost |
-|---|---|---|---|
-| **auto** (every job starts here) | the toolkit's deterministic fixers (`minecraft-design` `tools/src/autofix.mjs`, also `mcd fix`) | always first | none |
-| **haiku** | one lean revision per kit run, on the Anthropic API | a person clicks *Escalate to Haiku* | cap, default $1 |
-| **sonnet** | one Sonnet revision per kit run, on the Anthropic API | a person clicks *Escalate to Sonnet* | cap, default $4 |
-
-- **auto** keeps a building's fix only if the checks show the issue cleared and no other kind of issue got worse;
-  otherwise the building is listed with the reason ("no deterministic fixer", "the fix didn't clear it", "made X
-  worse") and the job goes to *escalate* (or to *review*, with the rest listed, when some buildings were fixed).
-- Code fixers today: floating shutter, stairs end short, on a bottom slab, floating decor, dark room. A kind that keeps
-  being escalated is the next fixer to write: the study table's "left for escalation" column says which.
-- The model tiers need `ANTHROPIC_API_KEY` in `apps/mc-design-site/.env.local` (git-ignored) on the runner's machine;
-  the key is passed only to that revision's process. The cap is checked against the run's ledger afterwards and
-  flagged on the job when it's exceeded.
-- Every fix, code or model, still goes to *review*: checks can't see design (the first code fix of Polarton's
-  "floating shutters" flattened eave fascias the check had misread; the check was fixed, but the accept step stays).
-
-The "What the fixes have done" table on `/issues` counts, per kind: jobs, buildings tried, cleared by code, cleared by a
-model, left for escalation, accepted jobs and model cost.
-
-Cloud: the same API runs in the Worker over D1 (`migrations/0002_fixes.sql`); point the scripts at it with
-`--to https://mc-design.b28.dev` and `MCD_ADMIN_TOKEN` in the environment (never committed). Candidate files go to
-R2 under `fixes/<job>/`.
+Running jobs: on the dev server a click runs the job (`scripts/fixer.mjs`, one at a time). For the cloud site, run
+`node scripts/fixer.mjs --to https://mc-design.b28.dev --loop` on this machine with `MCD_ADMIN_TOKEN` in the
+environment (never committed); it runs queued jobs and applies accepted fixes. Candidate files go to R2 under
+`fixes/<job>/`. The cloud store is D1 (`migrations/0002_fixes.sql`, not yet applied remotely).
