@@ -28,13 +28,22 @@ each layer the first covering source in `src/sources/index.mjs` wins; a place ca
 
 | Layer | San Francisco | Elsewhere |
 |---|---|---|
-| ground | DataSF 5 ft contours (PDDL) | none yet (flat): add a DEM source, e.g. USGS 3DEP (US) or Copernicus GLO-30 |
+| lidar | USGS 3DEP point cloud, CA_SanFrancisco_1_B23 (2023, ~100 points/m², public domain): ground, each building cell's roof, and the canopy | other 3DEP collections (add to `usgs-lidar.mjs`) |
+| aerial | USDA NAIP 0.6 m RGB + near-infrared, newest year (public domain): roof colours, green / sand / paving | NAIP (continental US) |
+| parcels | DataSF Assessor tax rolls, latest year (PDDL): year built, construction, use, storeys, address per parcel | none yet |
+| ground | lidar ground returns; else DataSF 5 ft contours (PDDL) | none yet (flat): add a DEM source, e.g. USGS 3DEP (US) or Copernicus GLO-30 |
 | buildings | DataSF footprints with LiDAR heights (PDDL) | OpenStreetMap (`height` or `building:levels`, else 8 m) |
 | streets | DataSF centrelines (PDDL) | OpenStreetMap |
 | parks | DataSF Recreation and Parks (PDDL) | none yet (OSM `leisure=park` would do) |
 | water | USGS NHD (public domain, US) | OpenStreetMap |
 | paths, trees, playgrounds | OpenStreetMap (ODbL) | OpenStreetMap |
-| canopy | Meta & WRI canopy height maps (CC BY 4.0, worldwide) | same |
+| canopy | from the lidar; else Meta & WRI canopy height maps (CC BY 4.0, worldwide) | Meta & WRI |
+
+Buildings take their shape from the lidar: each footprint cell's roof is the highest return there (a 3x3 median within
+the footprint, capped at the footprint's own recorded peak, so a tree over a roof isn't roof). Materials
+(`src/materials.mjs`): walls by the assessor's record (painted clapboard for Victorian and Edwardian houses, stucco for
+interwar ones, brick for masonry, concrete for steel and concrete frames, sandstone for civic and commercial), roofs
+the median aerial colour matched to a roofing block, open ground by the aerial photo's colour and NDVI.
 
 Trees come from the canopy map where there is one (`src/trees.mjs`: treetops are the local maxima, crowns are voxelised
 from the map, trunks run up under each top), else from mapped tree points.

@@ -5,21 +5,29 @@
 //   water      two blocks deep at the ground's level; paths 2 m wide; playgrounds as packed mud
 //   buildings  each footprint as a plain mass from the lowest ground under it to its roof height, one colour each:
 //              massing for the design pipeline to replace, never the finished look
-//   trees      from the canopy map when there is one (trees.mjs), else the mapped tree points as simple trees
+//   lidar      when there is a point cloud: the ground from its ground returns, each building cell's roof at the highest
+//              return there (a 3x3 median inside the footprint, so one spike isn't a mast), and the canopy from the
+//              returns standing 2 m above the ground away from any building (in place of the canopy map)
+//   trees      from the canopy (trees.mjs), else the mapped tree points as simple trees
+//   materials  walls by the assessor's record (era and construction: materials.mjs), roofs the colour the aerial photo
+//              shows, open ground green, sand or paving by the aerial photo's colour and near-infrared
 // The manifest lists every building (id, footprint cells, base, height, peak) in the structure's frame, the streets
 // and the sources with their licences, so a kit build can take the footprints as its plots.
 import { Voxels } from "./voxels.mjs";
 import { cellsIn, distanceTo, along } from "./raster.mjs";
 import { groundFromContours } from "./ground.mjs";
 import { canopyTrees } from "./trees.mjs";
+import { wallFor, roofBlock, groundFrom } from "./materials.mjs";
 
-const COLOURS = ["white", "light_gray", "pink", "light_blue", "yellow", "lime", "orange", "cyan", "magenta", "brown"];
 // widths in metres; everything below is in blocks (metres x the place's scale)
 const ROAD_M = 6, WALK_M = 10.5;
 
 export function buildPlace(place, frame, L) {
   const { N } = frame, I = (x, z) => z * N + x, sc = frame.scale ?? 1, ROAD = ROAD_M * sc, WALK = WALK_M * sc;
-  const H = L.ground ? groundFromContours(frame, L.ground, { field: L.ground.field, unit: L.ground.unit * (frame.scale ?? 1) }) : new Float64Array(N * N);
+  const lid = L.lidar?.rasters, air = L.aerial?.rasters;
+  const parcels = new Map((L.parcels?.features ?? []).map((f) => [f.properties.parcel, f.properties]));
+  const H = lid ? Float64Array.from(lid.ground, (m) => m * (frame.scale ?? 1))
+    : L.ground ? groundFromContours(frame, L.ground, { field: L.ground.field, unit: L.ground.unit * (frame.scale ?? 1) }) : new Float64Array(N * N);
   const park = new Uint8Array(N * N), water = new Uint8Array(N * N), path = new Uint8Array(N * N), play = new Uint8Array(N * N);
   for (const f of L.parks?.features ?? []) for (const [x, z] of cellsIn(frame, f.geometry)) park[I(x, z)] = 1;
   for (const f of L.water?.features ?? []) for (const [x, z] of cellsIn(frame, f.geometry)) water[I(x, z)] = 1;
@@ -34,11 +42,33 @@ export function buildPlace(place, frame, L) {
   const buildings = (L.buildings?.features ?? []).map((f, k) => {
     const cells = cellsIn(frame, f.geometry).filter(([x, z]) => road[I(x, z)] > ROAD); if (!cells.length) return null;
     const p = f.properties, base = Math.min(...cells.map(([x, z]) => ground(x, z)));
-    return { id: p.id, parcel: p.parcel ?? null, name: p.name ?? null, cells, base, height: Math.max(3, Math.round(p.height * (frame.scale ?? 1))), peak: p.peak, k };
+    const height = Math.max(3, Math.round(p.height * sc));
+    // each cell's roof: the lidar surface there (3x3 median within the footprint), or the footprint's median height
+    const own = new Set(cells.map(([x, z]) => I(x, z))), tops = new Map();
+    for (const [x, z] of cells) {
+      let t = base + height;
+      if (lid) { const v = [];
+        for (let dz = -1; dz <= 1; dz++) for (let dx = -1; dx <= 1; dx++) { const j = I(x + dx, z + dz); if (own.has(j) && lid.count[j] > 0) v.push(lid.surface[j]); }
+        if (v.length) { v.sort((a, b) => a - b); let m = Math.round(v[v.length >> 1] * sc) - floor;
+          // no higher than the footprint's own peak (a tree over the roof is not roof), 1 m of slack
+          if (Number.isFinite(p.peak) && p.peak > 0) m = Math.min(m, base + Math.round((p.peak + 1) * sc));
+          if (m > ground(x, z) + Math.round(2 * sc)) t = m; } }
+      tops.set(I(x, z), t);
+    }
+    return { id: p.id, parcel: p.parcel ?? null, name: p.name ?? null, cells, base, height, peak: p.peak, k, tops, own };
   }).filter(Boolean);
   const isB = new Uint8Array(N * N); for (const b of buildings) for (const [x, z] of b.cells) isB[I(x, z)] = 1;
-  let canopyTop = Math.round(8 * sc); if (L.canopy) { canopyTop = 0; for (const v of L.canopy.data) if (v > canopyTop) canopyTop = v; }
-  const top = Math.max(...buildings.map((b) => b.base + b.height), Math.round(hi) - floor) + Math.ceil(canopyTop) + 3;   // H is already in blocks
+  // the canopy: from the lidar where there is one (returns 2 m above the ground, a block clear of any building, with at
+  // least three canopy neighbours so a lamp post isn't a tree), else the canopy map
+  let chm = L.canopy?.data ?? null;
+  if (lid) { chm = new Float32Array(N * N); const near = new Uint8Array(N * N);
+    for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) if (isB[I(x, z)]) for (let dz = -1; dz <= 1; dz++) for (let dx = -1; dx <= 1; dx++) { const xx = x + dx, zz = z + dz; if (xx >= 0 && zz >= 0 && xx < N && zz < N) near[I(xx, zz)] = 1; }
+    const h = (i) => (lid.count[i] && !near[i] ? lid.surface[i] - lid.ground[i] : 0);
+    for (let z = 1; z < N - 1; z++) for (let x = 1; x < N - 1; x++) { const i = I(x, z), v = h(i); if (v < 2) continue;
+      let k = 0; for (let dz = -1; dz <= 1; dz++) for (let dx = -1; dx <= 1; dx++) if ((dx || dz) && h(I(x + dx, z + dz)) >= 2) k++;
+      if (k >= 3) chm[i] = v * sc; } }
+  let canopyTop = Math.round(8 * sc); if (chm) { canopyTop = 0; for (const v of chm) if (v > canopyTop) canopyTop = v; }
+  const top = Math.max(...buildings.map((b) => Math.max(...b.tops.values())), Math.round(hi) - floor) + Math.ceil(canopyTop) + 3;   // H is already in blocks
   const g = new Voxels([N, top, N], { dataVersion: 3955 });   // 2 bytes a cell (voxels.mjs), not an object a block
 
   for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) {
@@ -47,16 +77,26 @@ export function buildPlace(place, frame, L) {
     for (let yy = Math.max(0, low); yy < y; yy++) g.set(x, yy, z, y - yy <= Math.round(3 * sc) ? "dirt" : "stone");
     const d = road[i];
     if (water[i] && d > WALK && !isB[i]) { const deep = Math.max(2, Math.round(2 * sc)); g.set(x, y - deep, z, "clay"); for (let k = 0; k < deep; k++) g.set(x, y - k, z, "water", { level: "0" }); continue; }
-    g.set(x, y, z, d <= ROAD ? "gray_concrete" : d <= WALK && !park[i] ? "smooth_stone" : isB[i] ? "stone" : path[i] ? "andesite" : play[i] ? "packed_mud" : "grass_block");
+    const seen = air ? groundFrom(air.r[i], air.g[i], air.b[i], air.nir[i], { park: !!park[i] }) : null;
+    g.set(x, y, z, d <= ROAD ? "gray_concrete" : d <= WALK && !park[i] ? "smooth_stone" : isB[i] ? "stone" : path[i] ? "andesite" : play[i] ? "packed_mud" : seen ?? "grass_block");
   }
   // hollow masses (walls and roof): placeholders, and a solid town at 2 blocks a metre is millions of blocks
-  for (const b of buildings) { const c = `${COLOURS[b.k % COLOURS.length]}_concrete`, own = new Set(b.cells.map(([x, z]) => z * N + x)), top = b.base + b.height;
-    for (const [x, z] of b.cells) { const edge = [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dz]) => !own.has((z + dz) * N + x + dx));
-      if (edge) for (let y = ground(x, z) + 1; y <= top; y++) g.set(x, y, z, c); else g.set(x, top, z, c); } }
+  // a wall where the footprint ends, and a closed roof: each cell from just above its lowest neighbour's roof to its own
+  for (const b of buildings) {
+    const rec = parcels.get(b.parcel), wall = wallFor(b.id, rec, b.cells.length / (sc * sc));
+    // the roof: the median aerial colour over the footprint, matched to a roofing block
+    let roof = wall.block;
+    if (air) { const px = b.cells.map(([x, z]) => I(x, z)).filter((i) => air.r[i] || air.g[i] || air.b[i]);
+      if (px.length) { const med = (a) => { const v = px.map((i) => a[i]).sort((p, q) => p - q); return v[v.length >> 1]; }; roof = roofBlock([med(air.r), med(air.g), med(air.b)]); } }
+    Object.assign(b, { wall: wall.block, kind: wall.kind, roof, record: rec ?? null });
+    for (const [x, z] of b.cells) { const t = b.tops.get(I(x, z)), nb = [[1, 0], [-1, 0], [0, 1], [0, -1]].map(([dx, dz]) => I(x + dx, z + dz));
+      const edge = nb.some((j) => !b.own.has(j)), from = edge ? ground(x, z) + 1 : Math.min(t, ...nb.map((j) => b.tops.get(j) + 1));
+      // walls up to the roof's lowest course here; the top course (and the closing courses inside) are roof
+      for (let y = from; y <= t; y++) g.set(x, y, z, edge && y < t ? wall.block : roof); } }
 
   const open = (x, z) => { const i = I(x, z); return !isB[i] && !water[i] && road[i] > ROAD; };
   let trees;
-  if (L.canopy) trees = canopyTrees(g, { chm: L.canopy.data, n: N, ground, open, scale: sc });
+  if (chm) trees = canopyTrees(g, { chm, n: N, ground, open, scale: sc });
   else { trees = { trees: [] };
     for (const f of L.trees?.features ?? []) { const [fx, fz] = frame.toBlock(...f.geometry.coordinates), x = Math.floor(fx), z = Math.floor(fz);
       if (x < 2 || z < 2 || x >= N - 2 || z >= N - 2 || !open(x, z)) continue; const y0 = ground(x, z);
@@ -66,6 +106,7 @@ export function buildPlace(place, frame, L) {
 
   const manifest = { place: place.id, name: place.name, size: g.size, metresPerBlock: 1 / sc, floorElevation: +(floor / sc).toFixed(1), box: frame.box, ground: [+(lo / sc).toFixed(1), +(hi / sc).toFixed(1)],
     streets: [...new Set((L.streets?.features ?? []).map((f) => f.properties.name))], trees: trees.trees.length,
-    buildings: buildings.map(({ cells, k, ...b }) => ({ ...b, footprint: cells })) };
+    buildings: buildings.map(({ cells, k, tops, own, ...b }) => ({ ...b, top: Math.max(...tops.values()), footprint: cells })),
+    aerial: L.aerial ? { year: L.aerial.year, tiles: L.aerial.tiles } : null, parcelRollYear: L.parcels?.rollYear ?? null };
   return { grid: g, manifest };
 }

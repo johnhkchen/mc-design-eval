@@ -27,5 +27,14 @@ export default [
   src("sf-streets", ["streets"], "Streets – Active and Retired", "3psu-pn9h", "line", (fc) => ({ streets: { ...fc, features: fc.features
     .filter((f) => String(f.properties.active) === "true" && !/^HWY/.test(f.properties.street))
     .map((f) => ({ ...f, properties: { name: `${f.properties.street} ${f.properties.st_type ?? ""}`.trim() } })) } })),
+  // the assessor's roll (latest year): what each parcel's building is. Joined to a footprint by its parcel (block + lot).
+  src("sf-parcels", ["parcels"], "Assessor Historical Secured Property Tax Rolls", "wv5m-vpq2", "the_geom", (fc) => {
+    const latest = Math.max(...fc.features.map((f) => +f.properties.closed_roll_year || 0)), by = new Map();
+    for (const f of fc.features) { const p = f.properties; if (+p.closed_roll_year !== latest) continue;
+      by.set(`SF${p.block}${p.lot}`, { type: "Feature", geometry: f.geometry, properties: { parcel: `SF${p.block}${p.lot}`, year: +p.year_property_built || null,
+        stories: +p.number_of_stories || null, units: +p.number_of_units || null, construction: p.construction_type ?? null, use: p.use_definition ?? null,
+        address: (p.property_location ?? "").replace(/\s+/g, " ").replace(/^0000 0*/, "").replace(/0000$/, "").trim() } }); }
+    return { parcels: { type: "FeatureCollection", rollYear: latest, features: [...by.values()] } };
+  }),
   src("sf-parks", ["parks"], "Recreation and Parks Properties", "gtr9-ntp6", "shape", (fc) => ({ parks: { ...fc, features: fc.features.map((f) => ({ ...f, properties: { name: f.properties.property_name } })) } })),
 ];

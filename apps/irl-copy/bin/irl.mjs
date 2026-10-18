@@ -23,6 +23,7 @@ async function fetchPlace(n) {
     const t0 = Date.now(), layers = await s.fetch(place, frame), meta = {};
     for (const [layer, data] of Object.entries(layers)) {
       if (data.kind === "raster") { writeFileSync(cache(n, `${s.id}.${layer}.f32`), Buffer.from(data.data.buffer)); meta[layer] = { kind: "raster", n: data.n, tile: data.tile }; }
+      else if (data.kind === "rasters") { const { rasters, ...rest } = data; for (const [r, a] of Object.entries(rasters)) writeFileSync(cache(n, `${s.id}.${layer}.${r}.f32`), Buffer.from(a.buffer)); meta[layer] = { ...rest, names: Object.keys(rasters) }; }
       else meta[layer] = data;
     }
     writeFileSync(cache(n, `${s.id}.json`), JSON.stringify({ source: s.id, fetchedAt: new Date().toISOString(), layers: meta }));
@@ -36,8 +37,10 @@ function buildFrom(n) {
     const f = cache(n, `${s.id}.json`); if (!existsSync(f)) throw new Error(`no cache for ${s.id}: run fetch first`);
     const d = JSON.parse(readFileSync(f, "utf8")).layers[layer]; if (!d) continue;
     // a raster is sampled on the place's grid, so it's only good for the frame it was fetched at (scale, size)
-    if (d.kind === "raster" && d.n !== frame.N) throw new Error(`${s.id} ${layer} was fetched for a ${d.n}x${d.n} grid, the place is now ${frame.N}x${frame.N} (scale or size changed): run fetch again`);
-    L[layer] = d.kind === "raster" ? { ...d, data: new Float32Array(readFileSync(cache(n, `${s.id}.${layer}.f32`)).buffer.slice(0)) } : d; }
+    if ((d.kind === "raster" || d.kind === "rasters") && d.n !== frame.N) throw new Error(`${s.id} ${layer} was fetched for a ${d.n}x${d.n} grid, the place is now ${frame.N}x${frame.N} (scale or size changed): run fetch again`);
+    const f32 = (file) => new Float32Array(readFileSync(cache(n, file)).buffer.slice(0));
+    L[layer] = d.kind === "raster" ? { ...d, data: f32(`${s.id}.${layer}.f32`) }
+      : d.kind === "rasters" ? { ...d, rasters: Object.fromEntries(d.names.map((r) => [r, f32(`${s.id}.${layer}.${r}.f32`)])) } : d; }
   const { grid, manifest } = buildPlace(place, frame, L), out = `${HERE}/out/${n}`;
   mkdirSync(out, { recursive: true });
   const used = [...new Set(Object.entries(p).filter(([l, s]) => s && L[l]).map(([, s]) => s))];

@@ -3,6 +3,11 @@
   "private": true,
   "type": "module",
   "description": "A real place, from open data, as Minecraft land with building masses (input for the design pipeline)",
-  "scripts": { "test": "node --test test/*.test.mjs" },
-  "dependencies": { "geotiff": "2.1.3" }
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "geotiff": "2.1.3",
+    "laz-perf": "^0.0.7"
+  }
 }

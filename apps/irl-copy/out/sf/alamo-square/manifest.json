@@ -3,11 +3,11 @@
  "name": "Alamo Square and the Painted Ladies",
  "size": [
   448,
-  133,
+  144,
   448
  ],
  "metresPerBlock": 0.7142857142857143,
- "floorElevation": 30.7,
+ "floorElevation": 32.9,
  "box": {
   "north": 37.77774144144144,
   "south": 37.774858558558556,
@@ -15,8 +15,8 @@
   "east": -122.43177633350722
  },
  "ground": [
-  35.1,
-  79.2
+  37.2,
+  84.2
  ],
  "streets": [
   "STEINER ST",
@@ -25,15 +25,28 @@
   "GROVE ST",
   "FULTON ST"
  ],
- "trees": 75,
+ "trees": 787,
  "buildings": [
   {
    "id": "201006.0039039",
    "parcel": "SF0822015",
    "name": null,
-   "base": 50,
+   "base": 51,
    "height": 20,
    "peak": 15.8,
+   "wall": "light_blue_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0822015",
+    "year": 1900,
+    "stories": 3,
+    "units": 3,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "0848 0844 FELL ST"
+   },
+   "top": 73,
    "footprint": [
     [
      436,
@@ -1329,9 +1342,14 @@
    "id": "201006.0006086",
    "parcel": "SF0798007",
    "name": null,
-   "base": 19,
+   "base": 21,
    "height": 20,
    "peak": 22.2,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "white_concrete",
+   "record": null,
+   "top": 44,
    "footprint": [
     [
      434,
@@ -2851,9 +2869,22 @@
    "id": "201006.0006918",
    "parcel": "SF0803007",
    "name": null,
-   "base": 33,
+   "base": 35,
    "height": 19,
    "peak": 18.7,
+   "wall": "white_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0803007",
+    "year": 1900,
+    "stories": 3,
+    "units": 14,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "930 HAYES ST"
+   },
+   "top": 60,
    "footprint": [
     [
      443,
@@ -5453,9 +5484,14 @@
    "id": "201006.0014750",
    "parcel": "SF0803003",
    "name": null,
-   "base": 28,
+   "base": 26,
    "height": 17,
    "peak": 17.3,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "smooth_stone",
+   "record": null,
+   "top": 48,
    "footprint": [
     [
      447,
@@ -5531,9 +5567,14 @@
    "id": "201006.0019849",
    "parcel": "SF0798006",
    "name": null,
-   "base": 17,
+   "base": 20,
    "height": 18,
    "peak": 19,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "polished_andesite",
+   "record": null,
+   "top": 38,
    "footprint": [
     [
      441,
@@ -6213,9 +6254,22 @@
    "id": "201006.0027870",
    "parcel": "SF0822034",
    "name": null,
-   "base": 38,
+   "base": 39,
    "height": 19,
    "peak": 17.1,
+   "wall": "magenta_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0822034",
+    "year": 1900,
+    "stories": 3,
+    "units": 3,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "0941 0937 HAYES ST"
+   },
+   "top": 64,
    "footprint": [
     [
      438,
@@ -7671,9 +7725,14 @@
    "id": "201006.0081149",
    "parcel": "SF0822035",
    "name": null,
-   "base": 37,
+   "base": 38,
    "height": 11,
    "peak": 13.1,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "polished_andesite",
+   "record": null,
+   "top": 58,
    "footprint": [
     [
      443,
@@ -8285,9 +8344,22 @@
    "id": "201006.0035628",
    "parcel": "SF0798008",
    "name": null,
-   "base": 21,
+   "base": 25,
    "height": 18,
    "peak": 14.9,
+   "wall": "white_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0798008",
+    "year": 1900,
+    "stories": 4,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "924 GROVE ST"
+   },
+   "top": 44,
    "footprint": [
     [
      424,
@@ -9623,9 +9695,22 @@
    "id": "201006.0036101",
    "parcel": "SF0823002",
    "name": null,
-   "base": 55,
+   "base": 57,
    "height": 16,
    "peak": 15.8,
+   "wall": "white_terracotta",
+   "kind": "Edwardian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0823002",
+    "year": 1903,
+    "stories": 2,
+    "units": 4,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "639 STEINER ST"
+   },
+   "top": 80,
    "footprint": [
     [
      296,
@@ -10953,9 +11038,22 @@
    "id": "201006.0038902",
    "parcel": "SF0822033",
    "name": null,
-   "base": 39,
+   "base": 41,
    "height": 19,
    "peak": 16.7,
+   "wall": "white_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0822033",
+    "year": 1900,
+    "stories": 3,
+    "units": 3,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "945 HAYES ST"
+   },
+   "top": 64,
    "footprint": [
     [
      421,
@@ -12255,9 +12353,22 @@
    "id": "201006.0039330",
    "parcel": "SF0824010",
    "name": null,
-   "base": 50,
+   "base": 52,
    "height": 19,
    "peak": 16.2,
+   "wall": "cyan_terracotta",
+   "kind": "Edwardian, painted wood",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0824010",
+    "year": 1912,
+    "stories": 3,
+    "units": 7,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "1155 HAYES ST"
+   },
+   "top": 75,
    "footprint": [
     [
      5,
@@ -13473,9 +13584,22 @@
    "id": "201006.0040001",
    "parcel": "SF0822063",
    "name": null,
-   "base": 42,
+   "base": 44,
    "height": 19,
    "peak": 16.7,
+   "wall": "lime_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0822063",
+    "year": 1885,
+    "stories": 1,
+    "units": null,
+    "construction": "NA",
+    "use": "Single Family Residential",
+    "address": "963 HAYES ST"
+   },
+   "top": 67,
    "footprint": [
     [
      394,
@@ -14771,9 +14895,22 @@
    "id": "201006.0042104",
    "parcel": "SF0824001H",
    "name": null,
-   "base": 54,
+   "base": 61,
    "height": 16,
    "peak": 15,
+   "wall": "white_concrete",
+   "kind": "stucco, interwar",
+   "roof": "white_concrete",
+   "record": {
+    "parcel": "SF0824001H",
+    "year": 1930,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "1125 HAYES ST"
+   },
+   "top": 80,
    "footprint": [
     [
      50,
@@ -16037,9 +16174,22 @@
    "id": "201006.0044492",
    "parcel": "SF0798033",
    "name": null,
-   "base": 25,
+   "base": 27,
    "height": 8,
    "peak": 14.9,
+   "wall": "stone_bricks",
+   "kind": "masonry",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0798033",
+    "year": 2004,
+    "stories": 2,
+    "units": null,
+    "construction": "C",
+    "use": "Single Family Residential",
+    "address": "926 GROVE ST0001"
+   },
+   "top": 49,
    "footprint": [
     [
      409,
@@ -17271,9 +17421,22 @@
    "id": "201006.0093068",
    "parcel": "SF0803018",
    "name": null,
-   "base": 43,
+   "base": 44,
    "height": 16,
    "peak": 13.5,
+   "wall": "magenta_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0803018",
+    "year": 1898,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "712 STEINER ST"
+   },
+   "top": 63,
    "footprint": [
     [
      337,
@@ -18237,9 +18400,22 @@
    "id": "201006.0094884",
    "parcel": "SF0798033",
    "name": null,
-   "base": 27,
+   "base": 29,
    "height": 13,
    "peak": 14.7,
+   "wall": "stone_bricks",
+   "kind": "masonry",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0798033",
+    "year": 2004,
+    "stories": 2,
+    "units": null,
+    "construction": "C",
+    "use": "Single Family Residential",
+    "address": "926 GROVE ST0001"
+   },
+   "top": 51,
    "footprint": [
     [
      399,
@@ -19199,9 +19375,22 @@
    "id": "201006.0096695",
    "parcel": "SF0823008",
    "name": null,
-   "base": 63,
+   "base": 65,
    "height": 6,
    "peak": 10,
+   "wall": "smooth_sandstone",
+   "kind": "civic or commercial",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0823008",
+    "year": 1900,
+    "stories": 1,
+    "units": 1,
+    "construction": "D",
+    "use": "Miscellaneous/Mixed-Use",
+    "address": "906 FELL ST"
+   },
+   "top": 80,
    "footprint": [
     [
      259,
@@ -20145,9 +20334,22 @@
    "id": "201006.0097863",
    "parcel": "SF0798033",
    "name": null,
-   "base": 25,
+   "base": 27,
    "height": 15,
    "peak": 12.3,
+   "wall": "stone_bricks",
+   "kind": "masonry",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0798033",
+    "year": 2004,
+    "stories": 2,
+    "units": null,
+    "construction": "C",
+    "use": "Single Family Residential",
+    "address": "926 GROVE ST0001"
+   },
+   "top": 43,
    "footprint": [
     [
      413,
@@ -21095,9 +21297,22 @@
    "id": "201006.0103461",
    "parcel": "SF0803030",
    "name": null,
-   "base": 24,
+   "base": 26,
    "height": 12,
    "peak": 10.2,
+   "wall": "smooth_sandstone",
+   "kind": "stucco, interwar",
+   "roof": "white_terracotta",
+   "record": {
+    "parcel": "SF0803030",
+    "year": 1948,
+    "stories": 2,
+    "units": 2,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "0933 0931 GROVE ST"
+   },
+   "top": 42,
    "footprint": [
     [
      420,
@@ -22017,9 +22232,22 @@
    "id": "201006.0104501",
    "parcel": "SF0803029",
    "name": null,
-   "base": 25,
+   "base": 27,
    "height": 12,
    "peak": 10.3,
+   "wall": "smooth_sandstone",
+   "kind": "stucco, interwar",
+   "roof": "white_terracotta",
+   "record": {
+    "parcel": "SF0803029",
+    "year": 1948,
+    "stories": 2,
+    "units": 2,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "0939 0937 GROVE ST"
+   },
+   "top": 42,
    "footprint": [
     [
      419,
@@ -22939,9 +23167,22 @@
    "id": "201006.0152670",
    "parcel": "SF0823009",
    "name": null,
-   "base": 64,
+   "base": 65,
    "height": 9,
    "peak": 7.4,
+   "wall": "orange_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0823009",
+    "year": 1900,
+    "stories": 1,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "910 FELL ST"
+   },
+   "top": 75,
    "footprint": [
     [
      249,
@@ -23557,9 +23798,22 @@
    "id": "201006.0002413",
    "parcel": "SF0823011",
    "name": null,
-   "base": 66,
+   "base": 69,
    "height": 22,
    "peak": 18.7,
+   "wall": "smooth_sandstone",
+   "kind": "civic or commercial",
+   "roof": "white_concrete",
+   "record": {
+    "parcel": "SF0823011",
+    "year": 1900,
+    "stories": null,
+    "units": null,
+    "construction": "NA",
+    "use": "Commercial Retail",
+    "address": "1099 HAYES ST"
+   },
+   "top": 96,
    "footprint": [
     [
      178,
@@ -32163,9 +32417,22 @@
    "id": "201006.0003642",
    "parcel": "SF0803008",
    "name": null,
-   "base": 33,
+   "base": 36,
    "height": 19,
    "peak": 18.9,
+   "wall": "smooth_sandstone",
+   "kind": "civic or commercial",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0803008",
+    "year": 1926,
+    "stories": 3,
+    "units": 40,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "940 HAYES ST"
+   },
+   "top": 64,
    "footprint": [
     [
      422,
@@ -38685,9 +38952,22 @@
    "id": "201006.0006622",
    "parcel": "SF0824001A",
    "name": null,
-   "base": 57,
+   "base": 61,
    "height": 19,
    "peak": 17.8,
+   "wall": "pink_terracotta",
+   "kind": "stucco, interwar",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0824001A",
+    "year": 1937,
+    "stories": 3,
+    "units": 18,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "555 PIERCE ST"
+   },
+   "top": 86,
    "footprint": [
     [
      103,
@@ -42719,9 +42999,22 @@
    "id": "201006.0008177",
    "parcel": "SF0823001",
    "name": null,
-   "base": 50,
+   "base": 51,
    "height": 18,
    "peak": 18.8,
+   "wall": "smooth_sandstone",
+   "kind": "stucco, interwar",
+   "roof": "white_concrete",
+   "record": {
+    "parcel": "SF0823001",
+    "year": 1924,
+    "stories": 3,
+    "units": 18,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "655 STEINER ST"
+   },
+   "top": 76,
    "footprint": [
     [
      301,
@@ -46213,9 +46506,22 @@
    "id": "201006.0008287",
    "parcel": "SF0822031",
    "name": null,
-   "base": 39,
+   "base": 41,
    "height": 17,
    "peak": 15.2,
+   "wall": "pink_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0822031",
+    "year": 1900,
+    "stories": 3,
+    "units": 12,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "957 HAYES ST"
+   },
+   "top": 64,
    "footprint": [
     [
      415,
@@ -49667,9 +49973,22 @@
    "id": "201006.0008586",
    "parcel": "SF0803015",
    "name": null,
-   "base": 45,
+   "base": 46,
    "height": 34,
    "peak": 28.8,
+   "wall": "white_concrete",
+   "kind": "stucco, interwar",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0803015",
+    "year": 1927,
+    "stories": 6,
+    "units": 36,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "700 STEINER ST"
+   },
+   "top": 87,
    "footprint": [
     [
      334,
@@ -53033,9 +53352,22 @@
    "id": "201006.0008759",
    "parcel": "SF0824002",
    "name": null,
-   "base": 50,
+   "base": 52,
    "height": 19,
    "peak": 18.5,
+   "wall": "white_terracotta",
+   "kind": "Edwardian, painted wood",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0824002",
+    "year": 1906,
+    "stories": 3,
+    "units": 15,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "1145 HAYES ST"
+   },
+   "top": 79,
    "footprint": [
     [
      26,
@@ -56323,9 +56655,22 @@
    "id": "201006.0008827",
    "parcel": "SF0822037",
    "name": null,
-   "base": 44,
+   "base": 46,
    "height": 12,
    "peak": 15,
+   "wall": "white_concrete",
+   "kind": "postwar",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0822037",
+    "year": 1979,
+    "stories": null,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "650 STEINER ST0001"
+   },
+   "top": 68,
    "footprint": [
     [
      361,
@@ -59601,9 +59946,22 @@
    "id": "201006.0009730",
    "parcel": "SF0798031",
    "name": null,
-   "base": 30,
+   "base": 34,
    "height": 18,
    "peak": 15.9,
+   "wall": "white_terracotta",
+   "kind": "Victorian, painted wood",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0798031",
+    "year": 1885,
+    "stories": 5,
+    "units": 13,
+    "construction": "NA",
+    "use": "Multi-Family Residential",
+    "address": "930 GROVE ST"
+   },
+   "top": 56,
    "footprint": [
     [
      357,
@@ -62647,9 +63005,22 @@
    "id": "201006.0010155",
    "parcel": "SF0798058",
    "name": null,
-   "base": 36,
+   "base": 37,
    "height": 18,
    "peak": 17.4,
+   "wall": "white_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0798058",
+    "year": 1895,
+    "stories": 3,
+    "units": null,
+    "construction": "NA",
+    "use": "Single Family Residential",
+    "address": "940 GROVE ST"
+   },
+   "top": 61,
    "footprint": [
     [
      348,
@@ -65581,9 +65952,22 @@
    "id": "201006.0010616",
    "parcel": "SF0823005",
    "name": null,
-   "base": 62,
+   "base": 65,
    "height": 18,
    "peak": 18.4,
+   "wall": "smooth_sandstone",
+   "kind": "civic or commercial",
+   "roof": "tuff",
+   "record": {
+    "parcel": "SF0823005",
+    "year": 1900,
+    "stories": 2,
+    "units": 2,
+    "construction": "D",
+    "use": "Commercial Misc",
+    "address": "603 STEINER ST"
+   },
+   "top": 89,
    "footprint": [
     [
      282,
@@ -66911,9 +67295,22 @@
    "id": "201006.0127631",
    "parcel": "SF0803027",
    "name": null,
-   "base": 27,
+   "base": 29,
    "height": 13,
    "peak": 10.6,
+   "wall": "white_concrete",
+   "kind": "stucco, interwar",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0803027",
+    "year": 1948,
+    "stories": 2,
+    "units": 2,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "0951 0949 GROVE ST"
+   },
+   "top": 44,
    "footprint": [
     [
      392,
@@ -67709,9 +68106,22 @@
    "id": "201006.0015867",
    "parcel": "SF0822019",
    "name": null,
-   "base": 55,
+   "base": 57,
    "height": 14,
    "peak": 14.3,
+   "wall": "white_terracotta",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0822019",
+    "year": 1900,
+    "stories": 2,
+    "units": 8,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "874 FELL ST"
+   },
+   "top": 77,
    "footprint": [
     [
      384,
@@ -69707,9 +70117,14 @@
    "id": "201006.0016841",
    "parcel": "SF0803026",
    "name": null,
-   "base": 31,
+   "base": 33,
    "height": 12,
    "peak": 19.7,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "tuff",
+   "record": null,
+   "top": 50,
    "footprint": [
     [
      376,
@@ -71665,9 +72080,22 @@
    "id": "201006.0024492",
    "parcel": "SF0822016",
    "name": null,
-   "base": 51,
+   "base": 52,
    "height": 18,
    "peak": 14.4,
+   "wall": "pink_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0822016",
+    "year": 1900,
+    "stories": 3,
+    "units": 3,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "854 FELL ST"
+   },
+   "top": 72,
    "footprint": [
     [
      422,
@@ -73231,9 +73659,22 @@
    "id": "201006.0025814",
    "parcel": "SF0803025",
    "name": null,
-   "base": 35,
+   "base": 38,
    "height": 16,
    "peak": 15,
+   "wall": "white_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "tuff",
+   "record": {
+    "parcel": "SF0803025",
+    "year": 1900,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "973 GROVE ST"
+   },
+   "top": 59,
    "footprint": [
     [
      365,
@@ -74765,9 +75206,22 @@
    "id": "201006.0026141",
    "parcel": "SF0822018",
    "name": null,
-   "base": 54,
+   "base": 57,
    "height": 15,
    "peak": 14.5,
+   "wall": "cyan_terracotta",
+   "kind": "Victorian, painted wood",
+   "roof": "tuff",
+   "record": {
+    "parcel": "SF0822018",
+    "year": 1900,
+    "stories": 2,
+    "units": 2,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "870 FELL ST"
+   },
+   "top": 76,
    "footprint": [
     [
      401,
@@ -76291,9 +76745,14 @@
    "id": "201006.0026192",
    "parcel": "SF0824001C",
    "name": null,
-   "base": 59,
+   "base": 60,
    "height": 14,
    "peak": 11.8,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "stone",
+   "record": null,
+   "top": 74,
    "footprint": [
     [
      111,
@@ -76389,9 +76848,22 @@
    "id": "201006.0027175",
    "parcel": "SF0822051",
    "name": null,
-   "base": 45,
+   "base": 51,
    "height": 16,
    "peak": 14.1,
+   "wall": "cyan_terracotta",
+   "kind": "Edwardian, painted wood",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0822051",
+    "year": 1903,
+    "stories": null,
+    "units": null,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "644 STEINER ST"
+   },
+   "top": 69,
    "footprint": [
     [
      371,
@@ -77879,9 +78351,22 @@
    "id": "201006.0028060",
    "parcel": "SF0823014",
    "name": null,
-   "base": 56,
+   "base": 58,
    "height": 13,
    "peak": 13.6,
+   "wall": "cyan_terracotta",
+   "kind": "Victorian, painted wood",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0823014",
+    "year": 1900,
+    "stories": 2,
+    "units": 3,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "1027 HAYES ST"
+   },
+   "top": 77,
    "footprint": [
     [
      251,
@@ -79349,9 +79834,22 @@
    "id": "201006.0029614",
    "parcel": "SF0824001B",
    "name": null,
-   "base": 57,
+   "base": 59,
    "height": 13,
    "peak": 15.5,
+   "wall": "smooth_sandstone",
+   "kind": "stucco, interwar",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0824001B",
+    "year": 1923,
+    "stories": 2,
+    "units": 3,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "0531 0527 PIERCE ST"
+   },
+   "top": 82,
    "footprint": [
     [
      110,
@@ -80731,9 +81229,22 @@
    "id": "201006.0029621",
    "parcel": "SF0823003",
    "name": null,
-   "base": 57,
+   "base": 61,
    "height": 15,
    "peak": 14.8,
+   "wall": "white_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0823003",
+    "year": 1894,
+    "stories": 3,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "635 STEINER ST"
+   },
+   "top": 82,
    "footprint": [
     [
      301,
@@ -82169,9 +82680,14 @@
    "id": "201006.0029732",
    "parcel": "SF0822020",
    "name": null,
-   "base": 56,
+   "base": 60,
    "height": 14,
    "peak": 11.2,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "polished_andesite",
+   "record": null,
+   "top": 77,
    "footprint": [
     [
      358,
@@ -83431,9 +83947,22 @@
    "id": "201006.0031954",
    "parcel": "SF0803011",
    "name": null,
-   "base": 42,
+   "base": 44,
    "height": 20,
    "peak": 15.6,
+   "wall": "white_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0803011",
+    "year": 1900,
+    "stories": 3,
+    "units": 3,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "0974 0970 HAYES ST"
+   },
+   "top": 67,
    "footprint": [
     [
      369,
@@ -84833,9 +85362,22 @@
    "id": "201006.0032428",
    "parcel": "SF0822047",
    "name": null,
-   "base": 42,
+   "base": 46,
    "height": 15,
    "peak": 13.8,
+   "wall": "orange_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0822047",
+    "year": 1900,
+    "stories": null,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "969 HAYES ST0001"
+   },
+   "top": 65,
    "footprint": [
     [
      379,
@@ -86207,9 +86749,14 @@
    "id": "201006.0032683",
    "parcel": "SF0822024",
    "name": null,
-   "base": 50,
+   "base": 53,
    "height": 18,
    "peak": 16,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "white_terracotta",
+   "record": null,
+   "top": 76,
    "footprint": [
     [
      368,
@@ -87613,9 +88160,22 @@
    "id": "201006.0033427",
    "parcel": "SF0803010",
    "name": null,
-   "base": 40,
+   "base": 43,
    "height": 18,
    "peak": 14.2,
+   "wall": "white_terracotta",
+   "kind": "Edwardian, painted wood",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0803010",
+    "year": 1904,
+    "stories": 3,
+    "units": 3,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "0968 0964 HAYES ST"
+   },
+   "top": 64,
    "footprint": [
     [
      378,
@@ -88991,9 +89551,22 @@
    "id": "201006.0033690",
    "parcel": "SF0822023",
    "name": null,
-   "base": 53,
+   "base": 54,
    "height": 18,
    "peak": 14.8,
+   "wall": "pink_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "white_concrete",
+   "record": {
+    "parcel": "SF0822023",
+    "year": 1900,
+    "stories": 3,
+    "units": 6,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "0616 0612 STEINER ST"
+   },
+   "top": 76,
    "footprint": [
     [
      374,
@@ -90365,9 +90938,22 @@
    "id": "201006.0033988",
    "parcel": "SF0823017",
    "name": null,
-   "base": 64,
+   "base": 65,
    "height": 13,
    "peak": 11.3,
+   "wall": "pink_concrete_powder",
+   "kind": "Edwardian, painted wood",
+   "roof": "tuff",
+   "record": {
+    "parcel": "SF0823017",
+    "year": 1908,
+    "stories": 2,
+    "units": null,
+    "construction": "NA",
+    "use": "Single Family Residential",
+    "address": "942 FELL ST"
+   },
+   "top": 78,
    "footprint": [
     [
      235,
@@ -90967,9 +91553,22 @@
    "id": "201006.0072707",
    "parcel": "SF0803013",
    "name": null,
-   "base": 45,
+   "base": 46,
    "height": 19,
    "peak": 20.7,
+   "wall": "pink_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "tuff",
+   "record": {
+    "parcel": "SF0803013",
+    "year": 1900,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "982 HAYES ST"
+   },
+   "top": 76,
    "footprint": [
     [
      343,
@@ -92021,9 +92620,22 @@
    "id": "201006.0077337",
    "parcel": "SF0823015",
    "name": null,
-   "base": 55,
+   "base": 56,
    "height": 20,
    "peak": 19.3,
+   "wall": "white_terracotta",
+   "kind": "Victorian, painted wood",
+   "roof": "tuff",
+   "record": {
+    "parcel": "SF0823015",
+    "year": 1900,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "1021 HAYES ST"
+   },
+   "top": 82,
    "footprint": [
     [
      266,
@@ -93054,6 +93666,19 @@
    "base": 57,
    "height": 13,
    "peak": 13.4,
+   "wall": "light_gray_terracotta",
+   "kind": "stucco, interwar",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0823013",
+    "year": 1924,
+    "stories": 2,
+    "units": 2,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "1035 1033 HAYES ST"
+   },
+   "top": 76,
    "footprint": [
     [
      238,
@@ -94253,9 +94878,22 @@
    "id": "201006.0049307",
    "parcel": "SF0824002D",
    "name": null,
-   "base": 53,
+   "base": 58,
    "height": 17,
    "peak": 14.8,
+   "wall": "lime_concrete_powder",
+   "kind": "Edwardian, painted wood",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0824002D",
+    "year": 1906,
+    "stories": 2,
+    "units": 5,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "1133 HAYES ST"
+   },
+   "top": 77,
    "footprint": [
     [
      40,
@@ -95451,9 +96089,22 @@
    "id": "201006.0057025",
    "parcel": "SF0823012",
    "name": null,
-   "base": 60,
+   "base": 62,
    "height": 10,
    "peak": 12.1,
+   "wall": "lime_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0823012",
+    "year": 1900,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "1045 HAYES ST"
+   },
+   "top": 78,
    "footprint": [
     [
      229,
@@ -96609,9 +97260,22 @@
    "id": "201006.0112735",
    "parcel": "SF0803019",
    "name": null,
-   "base": 42,
+   "base": 43,
    "height": 17,
    "peak": 13.4,
+   "wall": "white_terracotta",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0803019",
+    "year": 1900,
+    "stories": 2,
+    "units": null,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "714 STEINER ST"
+   },
+   "top": 62,
    "footprint": [
     [
      336,
@@ -97483,9 +98147,22 @@
    "id": "201006.0113371",
    "parcel": "SF0823004",
    "name": null,
-   "base": 59,
+   "base": 62,
    "height": 11,
    "peak": 10.3,
+   "wall": "yellow_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0823004",
+    "year": 1897,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "625 STEINER ST"
+   },
+   "top": 78,
    "footprint": [
     [
      300,
@@ -98376,6 +99053,19 @@
    "base": 50,
    "height": 6,
    "peak": 6.4,
+   "wall": "lime_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0822017",
+    "year": 1900,
+    "stories": 3,
+    "units": 4,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "860 FELL ST"
+   },
+   "top": 60,
    "footprint": [
     [
      416,
@@ -98911,9 +99601,14 @@
    "id": "201006.0013240",
    "parcel": "SF0777044",
    "name": null,
-   "base": 38,
+   "base": 40,
    "height": 16,
    "peak": 14.3,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "polished_andesite",
+   "record": null,
+   "top": 60,
    "footprint": [
     [
      0,
@@ -99685,9 +100380,14 @@
    "id": "201006.0032039",
    "parcel": "SF0824009A",
    "name": null,
-   "base": 50,
+   "base": 52,
    "height": 19,
    "peak": 16.3,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "white_terracotta",
+   "record": null,
+   "top": 73,
    "footprint": [
     [
      0,
@@ -99759,9 +100459,22 @@
    "id": "201006.0136898",
    "parcel": "SF0823005",
    "name": null,
-   "base": 63,
+   "base": 65,
    "height": 7,
    "peak": 10.6,
+   "wall": "smooth_sandstone",
+   "kind": "civic or commercial",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0823005",
+    "year": 1900,
+    "stories": 2,
+    "units": 2,
+    "construction": "D",
+    "use": "Commercial Misc",
+    "address": "603 STEINER ST"
+   },
+   "top": 81,
    "footprint": [
     [
      281,
@@ -100509,9 +101222,22 @@
    "id": "201006.0148178",
    "parcel": "SF0822019",
    "name": null,
-   "base": 55,
+   "base": 57,
    "height": 9,
    "peak": 12.4,
+   "wall": "orange_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0822019",
+    "year": 1900,
+    "stories": 2,
+    "units": 8,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "874 FELL ST"
+   },
+   "top": 75,
    "footprint": [
     [
      385,
@@ -101179,9 +101905,22 @@
    "id": "201006.0062100",
    "parcel": "SF0798018",
    "name": null,
-   "base": 15,
+   "base": 18,
    "height": 13,
    "peak": 12.3,
+   "wall": "lime_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0798018",
+    "year": 1900,
+    "stories": 2,
+    "units": 3,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "921 FULTON ST"
+   },
+   "top": 36,
    "footprint": [
     [
      370,
@@ -102309,9 +103048,22 @@
    "id": "201006.0064350",
    "parcel": "SF0803012",
    "name": null,
-   "base": 44,
+   "base": 45,
    "height": 14,
    "peak": 13.9,
+   "wall": "yellow_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0803012",
+    "year": 1900,
+    "stories": 2,
+    "units": 2,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "0980 0978 HAYES ST"
+   },
+   "top": 66,
    "footprint": [
     [
      359,
@@ -103419,9 +104171,22 @@
    "id": "201006.0065937",
    "parcel": "SF0823016",
    "name": null,
-   "base": 54,
+   "base": 55,
    "height": 21,
    "peak": 18,
+   "wall": "cyan_terracotta",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0823016",
+    "year": 1900,
+    "stories": 2,
+    "units": 3,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "1019 1015 HAYES ST"
+   },
+   "top": 79,
    "footprint": [
     [
      273,
@@ -104516,6 +105281,19 @@
    "base": 13,
    "height": 16,
    "peak": 16.4,
+   "wall": "light_gray_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "tuff",
+   "record": {
+    "parcel": "SF0798020",
+    "year": 1896,
+    "stories": 3,
+    "units": null,
+    "construction": "NA",
+    "use": "Single Family Residential",
+    "address": "915 FULTON ST"
+   },
+   "top": 37,
    "footprint": [
     [
      387,
@@ -106575,9 +107353,22 @@
    "id": "201006.0016726",
    "parcel": "SF0822021",
    "name": null,
-   "base": 57,
+   "base": 58,
    "height": 17,
    "peak": 15.3,
+   "wall": "light_blue_concrete_powder",
+   "kind": "Edwardian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0822021",
+    "year": 1904,
+    "stories": 2,
+    "units": 4,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "898 FELL ST"
+   },
+   "top": 80,
    "footprint": [
     [
      346,
@@ -108188,6 +108979,19 @@
    "base": 14,
    "height": 17,
    "peak": 16.5,
+   "wall": "pink_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0798004",
+    "year": 1900,
+    "stories": 2,
+    "units": 3,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "0835 0833 FILLMORE ST"
+   },
+   "top": 35,
    "footprint": [
     [
      439,
@@ -109151,9 +109955,22 @@
    "id": "201006.0020076",
    "parcel": "SF0822022",
    "name": null,
-   "base": 55,
+   "base": 56,
    "height": 17,
    "peak": 13.7,
+   "wall": "orange_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0822022",
+    "year": 1900,
+    "stories": 3,
+    "units": 8,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "0610 0606 STEINER ST"
+   },
+   "top": 76,
    "footprint": [
     [
      378,
@@ -110897,9 +111714,22 @@
    "id": "201006.0088534",
    "parcel": "SF0803024",
    "name": null,
-   "base": 36,
+   "base": 37,
    "height": 10,
    "peak": 9.8,
+   "wall": "white_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0803024",
+    "year": 1900,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "981 GROVE ST"
+   },
+   "top": 52,
    "footprint": [
     [
      342,
@@ -111879,9 +112709,14 @@
    "id": "201006.0026867",
    "parcel": "SF0822061",
    "name": null,
-   "base": 50,
+   "base": 51,
    "height": 17,
    "peak": 15.4,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "polished_andesite",
+   "record": null,
+   "top": 72,
    "footprint": [
     [
      443,
@@ -112536,6 +113371,19 @@
    "base": 12,
    "height": 19,
    "peak": 17.9,
+   "wall": "magenta_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0798003",
+    "year": 1900,
+    "stories": 4,
+    "units": 9,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "837 FILLMORE ST"
+   },
+   "top": 35,
    "footprint": [
     [
      446,
@@ -113331,9 +114179,22 @@
    "id": "201006.0028578",
    "parcel": "SF0798023",
    "name": null,
-   "base": 22,
+   "base": 25,
    "height": 20,
    "peak": 17.9,
+   "wall": "yellow_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0798023",
+    "year": 1890,
+    "stories": 3,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "890 STEINER ST"
+   },
+   "top": 48,
    "footprint": [
     [
      319,
@@ -114789,9 +115650,22 @@
    "id": "201006.0029105",
    "parcel": "SF0803009",
    "name": null,
-   "base": 39,
+   "base": 42,
    "height": 17,
    "peak": 14.9,
+   "wall": "orange_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0803009",
+    "year": 1900,
+    "stories": 3,
+    "units": 3,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "0962 0958 HAYES ST"
+   },
+   "top": 64,
    "footprint": [
     [
      382,
@@ -116247,9 +117121,22 @@
    "id": "201006.0030074",
    "parcel": "SF0822017",
    "name": null,
-   "base": 52,
+   "base": 54,
    "height": 17,
    "peak": 14.9,
+   "wall": "light_blue_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0822017",
+    "year": 1900,
+    "stories": 3,
+    "units": 4,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "860 FELL ST"
+   },
+   "top": 75,
    "footprint": [
     [
      406,
@@ -117681,9 +118568,22 @@
    "id": "201006.0031511",
    "parcel": "SF0798051",
    "name": null,
-   "base": 14,
+   "base": 15,
    "height": 14,
    "peak": 15.1,
+   "wall": "lime_concrete_powder",
+   "kind": "Edwardian, painted wood",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0798051",
+    "year": 1908,
+    "stories": 1,
+    "units": null,
+    "construction": "NA",
+    "use": "Single Family Residential",
+    "address": "917 FULTON ST"
+   },
+   "top": 36,
    "footprint": [
     [
      379,
@@ -119075,9 +119975,22 @@
    "id": "201006.0033243",
    "parcel": "SF0798017",
    "name": null,
-   "base": 17,
+   "base": 19,
    "height": 16,
    "peak": 16.2,
+   "wall": "pink_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0798017",
+    "year": 1900,
+    "stories": 3,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "925 FULTON ST"
+   },
+   "top": 42,
    "footprint": [
     [
      344,
@@ -120453,9 +121366,22 @@
    "id": "201006.0046548",
    "parcel": "SF0822056",
    "name": null,
-   "base": 48,
+   "base": 52,
    "height": 15,
    "peak": 15.8,
+   "wall": "pink_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0822056",
+    "year": 1900,
+    "stories": 1,
+    "units": null,
+    "construction": "NA",
+    "use": "Single Family Residential",
+    "address": "636 STEINER ST"
+   },
+   "top": 71,
    "footprint": [
     [
      358,
@@ -121663,9 +122589,22 @@
    "id": "201006.0052851",
    "parcel": "SF0803023",
    "name": null,
-   "base": 36,
+   "base": 37,
    "height": 18,
    "peak": 16.8,
+   "wall": "orange_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0803023",
+    "year": 1898,
+    "stories": 3,
+    "units": 2,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "0722A0722 STEINER ST"
+   },
+   "top": 61,
    "footprint": [
     [
      329,
@@ -122841,9 +123780,22 @@
    "id": "201006.0055732",
    "parcel": "SF0798013",
    "name": null,
-   "base": 25,
+   "base": 27,
    "height": 18,
    "peak": 14.6,
+   "wall": "white_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0798013",
+    "year": 1900,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "0850 0848 STEINER ST"
+   },
+   "top": 48,
    "footprint": [
     [
      315,
@@ -124006,6 +124958,19 @@
    "base": 41,
    "height": 17,
    "peak": 13.8,
+   "wall": "pink_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0803020",
+    "year": 1900,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "716 STEINER ST"
+   },
+   "top": 62,
    "footprint": [
     [
      336,
@@ -124881,9 +125846,22 @@
    "id": "201006.0119249",
    "parcel": "SF0803028",
    "name": null,
-   "base": 26,
+   "base": 28,
    "height": 13,
    "peak": 10.6,
+   "wall": "pink_terracotta",
+   "kind": "stucco, interwar",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0803028",
+    "year": 1948,
+    "stories": 2,
+    "units": 2,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "0945 0943 GROVE ST"
+   },
+   "top": 44,
    "footprint": [
     [
      408,
@@ -125719,9 +126697,22 @@
    "id": "201006.0123241",
    "parcel": "SF0803036",
    "name": null,
-   "base": 23,
+   "base": 24,
    "height": 13,
    "peak": 10.8,
+   "wall": "pink_terracotta",
+   "kind": "stucco, interwar",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0803036",
+    "year": 1939,
+    "stories": 1,
+    "units": null,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "925 GROVE ST"
+   },
+   "top": 40,
    "footprint": [
     [
      439,
@@ -126540,6 +127531,11 @@
    "base": 23,
    "height": 13,
    "peak": 11.1,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "smooth_stone",
+   "record": null,
+   "top": 39,
    "footprint": [
     [
      446,
@@ -127027,9 +128023,22 @@
    "id": "201006.0105612",
    "parcel": "SF0803017",
    "name": null,
-   "base": 44,
+   "base": 45,
    "height": 17,
    "peak": 15.5,
+   "wall": "lime_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0803017",
+    "year": 1898,
+    "stories": 3,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "710 STEINER ST"
+   },
+   "top": 65,
    "footprint": [
     [
      338,
@@ -127941,9 +128950,22 @@
    "id": "201006.0109792",
    "parcel": "SF0803021",
    "name": null,
-   "base": 39,
+   "base": 40,
    "height": 17,
    "peak": 14,
+   "wall": "cyan_terracotta",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0803021",
+    "year": 1900,
+    "stories": 2,
+    "units": null,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "718 STEINER ST"
+   },
+   "top": 61,
    "footprint": [
     [
      331,
@@ -128835,9 +129857,22 @@
    "id": "201006.0110065",
    "parcel": "SF0803022",
    "name": null,
-   "base": 38,
+   "base": 39,
    "height": 16,
    "peak": 13.9,
+   "wall": "lime_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0803022",
+    "year": 1900,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "720 STEINER ST"
+   },
+   "top": 60,
    "footprint": [
     [
      330,
@@ -129725,9 +130760,22 @@
    "id": "201006.0162758",
    "parcel": "SF0798008",
    "name": null,
-   "base": 20,
+   "base": 22,
    "height": 6,
    "peak": 7.9,
+   "wall": "lime_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0798008",
+    "year": 1900,
+    "stories": 4,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "924 GROVE ST"
+   },
+   "top": 30,
    "footprint": [
     [
      421,
@@ -130034,6 +131082,19 @@
    "base": 30,
    "height": 20,
    "peak": 17,
+   "wall": "light_gray_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0798012",
+    "year": 1890,
+    "stories": 4,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "818 STEINER ST"
+   },
+   "top": 53,
    "footprint": [
     [
      315,
@@ -131285,9 +132346,22 @@
    "id": "201006.0042470",
    "parcel": "SF0798011",
    "name": null,
-   "base": 32,
+   "base": 33,
    "height": 16,
    "peak": 14.3,
+   "wall": "light_gray_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0798011",
+    "year": 1900,
+    "stories": 2,
+    "units": 3,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "814 STEINER ST"
+   },
+   "top": 51,
    "footprint": [
     [
      318,
@@ -132547,9 +133621,22 @@
    "id": "201006.0044520",
    "parcel": "SF0778011",
    "name": null,
-   "base": 31,
+   "base": 32,
    "height": 16,
    "peak": 13.6,
+   "wall": "white_terracotta",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0778011",
+    "year": 1900,
+    "stories": 3,
+    "units": 3,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "1062 FULTON ST"
+   },
+   "top": 52,
    "footprint": [
     [
      124,
@@ -133785,9 +134872,14 @@
    "id": "201006.0000642",
    "parcel": "SF0779091",
    "name": null,
-   "base": 12,
+   "base": 16,
    "height": 17,
    "peak": 20.1,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "polished_andesite",
+   "record": null,
+   "top": 37,
    "footprint": [
     [
      327,
@@ -134343,9 +135435,14 @@
    "id": "201006.0004181",
    "parcel": "SF0778013",
    "name": null,
-   "base": 33,
+   "base": 34,
    "height": 16,
    "peak": 26.1,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "polished_andesite",
+   "record": null,
+   "top": 53,
    "footprint": [
     [
      70,
@@ -135189,9 +136286,14 @@
    "id": "201006.0005075",
    "parcel": "SF0778013",
    "name": null,
-   "base": 31,
+   "base": 32,
    "height": 14,
    "peak": 12.4,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "white_terracotta",
+   "record": null,
+   "top": 47,
    "footprint": [
     [
      98,
@@ -135843,9 +136945,22 @@
    "id": "201006.0005985",
    "parcel": "SF0778006",
    "name": null,
-   "base": 21,
+   "base": 23,
    "height": 20,
    "peak": 17.7,
+   "wall": "smooth_sandstone",
+   "kind": "civic or commercial",
+   "roof": "white_concrete",
+   "record": {
+    "parcel": "SF0778006",
+    "year": 1912,
+    "stories": 3,
+    "units": null,
+    "construction": "D",
+    "use": "Commercial Hotel",
+    "address": "1000 FULTON ST"
+   },
+   "top": 47,
    "footprint": [
     [
      200,
@@ -139825,9 +140940,22 @@
    "id": "201006.0006241",
    "parcel": "SF0779014",
    "name": null,
-   "base": 17,
+   "base": 18,
    "height": 29,
    "peak": 25.8,
+   "wall": "bricks",
+   "kind": "masonry",
+   "roof": "white_concrete",
+   "record": {
+    "parcel": "SF0779014",
+    "year": 1926,
+    "stories": 5,
+    "units": 35,
+    "construction": "C",
+    "use": "Multi-Family Residential",
+    "address": "990 FULTON ST"
+   },
+   "top": 54,
    "footprint": [
     [
      276,
@@ -143271,9 +144399,22 @@
    "id": "201006.0006413",
    "parcel": "SF0778007",
    "name": null,
-   "base": 25,
+   "base": 28,
    "height": 19,
    "peak": 15.8,
+   "wall": "yellow_concrete_powder",
+   "kind": "Edwardian, painted wood",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0778007",
+    "year": 1912,
+    "stories": 3,
+    "units": 18,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "1040 FULTON ST"
+   },
+   "top": 49,
    "footprint": [
     [
      168,
@@ -145989,9 +147130,14 @@
    "id": "201006.0007533",
    "parcel": "SF0779010",
    "name": null,
-   "base": 8,
+   "base": 10,
    "height": 21,
    "peak": 22,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "polished_andesite",
+   "record": null,
+   "top": 34,
    "footprint": [
     [
      396,
@@ -146063,9 +147209,22 @@
    "id": "201006.0007947",
    "parcel": "SF0777005",
    "name": null,
-   "base": 36,
+   "base": 37,
    "height": 18,
    "peak": 16.3,
+   "wall": "white_concrete",
+   "kind": "stucco, interwar",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0777005",
+    "year": 1924,
+    "stories": 3,
+    "units": 12,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "1100 FULTON ST"
+   },
+   "top": 60,
    "footprint": [
     [
      41,
@@ -149621,9 +150780,22 @@
    "id": "201006.0011453",
    "parcel": "SF0778012B",
    "name": null,
-   "base": 34,
+   "base": 35,
    "height": 19,
    "peak": 16.8,
+   "wall": "smooth_sandstone",
+   "kind": "stucco, interwar",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0778012B",
+    "year": 1925,
+    "stories": 3,
+    "units": 12,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "1096 FULTON ST"
+   },
+   "top": 60,
    "footprint": [
     [
      82,
@@ -152271,9 +153443,14 @@
    "id": "201006.0014676",
    "parcel": "SF0777006",
    "name": null,
-   "base": 37,
+   "base": 39,
    "height": 15,
    "peak": 13.2,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "smooth_stone",
+   "record": null,
+   "top": 58,
    "footprint": [
     [
      19,
@@ -154433,9 +155610,22 @@
    "id": "201006.0016559",
    "parcel": "SF0798028",
    "name": null,
-   "base": 18,
+   "base": 19,
    "height": 18,
    "peak": 17.4,
+   "wall": "light_blue_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0798028",
+    "year": 1900,
+    "stories": null,
+    "units": null,
+    "construction": "NA",
+    "use": "Single Family Residential",
+    "address": "896 STEINER ST01/2"
+   },
+   "top": 44,
    "footprint": [
     [
      325,
@@ -156403,9 +157593,22 @@
    "id": "201006.0016682",
    "parcel": "SF0778009",
    "name": null,
-   "base": 29,
+   "base": 30,
    "height": 19,
    "peak": 16.7,
+   "wall": "lime_concrete_powder",
+   "kind": "Edwardian, painted wood",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0778009",
+    "year": 1909,
+    "stories": 3,
+    "units": 6,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "1056 FULTON ST"
+   },
+   "top": 53,
    "footprint": [
     [
      141,
@@ -158141,9 +159344,22 @@
    "id": "201006.0018237",
    "parcel": "SF0778012A",
    "name": null,
-   "base": 33,
+   "base": 34,
    "height": 19,
    "peak": 16.2,
+   "wall": "lime_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "tuff",
+   "record": {
+    "parcel": "SF0778012A",
+    "year": 1900,
+    "stories": 3,
+    "units": 6,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "1088 1086 FULTON ST"
+   },
+   "top": 58,
    "footprint": [
     [
      89,
@@ -159987,9 +161203,14 @@
    "id": "201006.0019114",
    "parcel": "SF0777003",
    "name": null,
-   "base": 36,
+   "base": 37,
    "height": 17,
    "peak": 15.5,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "white_concrete",
+   "record": null,
+   "top": 54,
    "footprint": [
     [
      8,
@@ -160173,9 +161394,22 @@
    "id": "201006.0019498",
    "parcel": "SF0778012",
    "name": null,
-   "base": 32,
+   "base": 33,
    "height": 19,
    "peak": 16.7,
+   "wall": "white_terracotta",
+   "kind": "Victorian, painted wood",
+   "roof": "tuff",
+   "record": {
+    "parcel": "SF0778012",
+    "year": 1890,
+    "stories": 3,
+    "units": 4,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "1082 1080 FULTON ST"
+   },
+   "top": 56,
    "footprint": [
     [
      110,
@@ -161934,6 +163168,11 @@
    "base": 36,
    "height": 17,
    "peak": 15.4,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "stone",
+   "record": null,
+   "top": 59,
    "footprint": [
     [
      27,
@@ -163465,9 +164704,22 @@
    "id": "201006.0020902",
    "parcel": "SF0798001",
    "name": null,
-   "base": 6,
+   "base": 7,
    "height": 16,
    "peak": 14.4,
+   "wall": "pink_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "white_terracotta",
+   "record": {
+    "parcel": "SF0798001",
+    "year": 1900,
+    "stories": 3,
+    "units": 5,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "863 FILLMORE ST"
+   },
+   "top": 25,
    "footprint": [
     [
      447,
@@ -164463,9 +165715,22 @@
    "id": "201006.0021553",
    "parcel": "SF0778008",
    "name": null,
-   "base": 27,
+   "base": 29,
    "height": 19,
    "peak": 15.2,
+   "wall": "magenta_concrete_powder",
+   "kind": "Edwardian, painted wood",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0778008",
+    "year": 1909,
+    "stories": 3,
+    "units": 3,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "1052 1048 FULTON ST"
+   },
+   "top": 51,
    "footprint": [
     [
      158,
@@ -166065,9 +167330,22 @@
    "id": "201006.0022836",
    "parcel": "SF0778010",
    "name": null,
-   "base": 29,
+   "base": 31,
    "height": 15,
    "peak": 13.5,
+   "wall": "orange_concrete_powder",
+   "kind": "Edwardian, painted wood",
+   "roof": "white_terracotta",
+   "record": {
+    "parcel": "SF0778010",
+    "year": 1911,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "1060 FULTON ST"
+   },
+   "top": 51,
    "footprint": [
     [
      136,
@@ -167642,6 +168920,19 @@
    "base": 10,
    "height": 16,
    "peak": 14.6,
+   "wall": "light_gray_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "white_concrete",
+   "record": {
+    "parcel": "SF0798002",
+    "year": 1893,
+    "stories": 3,
+    "units": 2,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "847 FILLMORE ST"
+   },
+   "top": 31,
    "footprint": [
     [
      447,
@@ -168629,9 +169920,14 @@
    "id": "201006.0028082",
    "parcel": "SF0798005",
    "name": null,
-   "base": 16,
+   "base": 17,
    "height": 17,
    "peak": 16.6,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "smooth_stone",
+   "record": null,
+   "top": 36,
    "footprint": [
     [
      444,
@@ -169195,9 +170491,22 @@
    "id": "201006.0028737",
    "parcel": "SF0798016",
    "name": null,
-   "base": 16,
+   "base": 17,
    "height": 16,
    "peak": 18.2,
+   "wall": "lime_concrete_powder",
+   "kind": "Edwardian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0798016",
+    "year": 1907,
+    "stories": 4,
+    "units": 4,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "0933 0927 FULTON ST"
+   },
+   "top": 44,
    "footprint": [
     [
      341,
@@ -170648,6 +171957,19 @@
    "base": 8,
    "height": 12,
    "peak": 10.8,
+   "wall": "cyan_terracotta",
+   "kind": "Victorian, painted wood",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0798022",
+    "year": 1900,
+    "stories": 3,
+    "units": 3,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "0907 0903 FULTON ST"
+   },
+   "top": 25,
    "footprint": [
     [
      420,
@@ -171859,9 +173181,22 @@
    "id": "201006.0056481",
    "parcel": "SF0798026",
    "name": null,
-   "base": 8,
+   "base": 10,
    "height": 15,
    "peak": 12.3,
+   "wall": "magenta_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0798026",
+    "year": 1895,
+    "stories": null,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "855 FILLMORE ST"
+   },
+   "top": 28,
    "footprint": [
     [
      443,
@@ -172529,9 +173864,22 @@
    "id": "201006.0175282",
    "parcel": "SF0778011",
    "name": null,
-   "base": 31,
+   "base": 32,
    "height": 3,
    "peak": 1.5,
+   "wall": "orange_concrete_powder",
+   "kind": "Victorian, painted wood",
+   "roof": "tuff",
+   "record": {
+    "parcel": "SF0778011",
+    "year": 1900,
+    "stories": 3,
+    "units": 3,
+    "construction": "D",
+    "use": "Multi-Family Residential",
+    "address": "1062 FULTON ST"
+   },
+   "top": 36,
    "footprint": [
     [
      124,
@@ -172580,7 +173928,18 @@
    ]
   }
  ],
+ "aerial": {
+  "year": "2022",
+  "tiles": [
+   "ca_m_3712213_sw_10_060_20220518",
+   "ca_m_3712213_se_10_060_20220518"
+  ]
+ },
+ "parcelRollYear": 2025,
  "sources": {
+  "lidar": "usgs-lidar",
+  "aerial": "naip",
+  "parcels": "sf-parcels",
   "ground": "sf-contours",
   "buildings": "sf-buildings",
   "streets": "sf-streets",
@@ -172592,6 +173951,9 @@
   "canopy": "meta-canopy"
  },
  "credits": [
+  "U.S. Geological Survey, 3D Elevation Program (Public domain (US Government work))",
+  "USDA Farm Production and Conservation Business Center, National Agriculture Imagery Program (Public domain (US Government work))",
+  "City and County of San Francisco, DataSF (Open Data Commons PDDL 1.0 (public domain))",
   "City and County of San Francisco, DataSF (Open Data Commons PDDL 1.0 (public domain))",
   "City and County of San Francisco, DataSF (Open Data Commons PDDL 1.0 (public domain))",
   "City and County of San Francisco, DataSF (Open Data Commons PDDL 1.0 (public domain))",

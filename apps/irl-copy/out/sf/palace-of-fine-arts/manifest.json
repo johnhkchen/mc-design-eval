@@ -3,11 +3,11 @@
  "name": "Palace of Fine Arts",
  "size": [
   392,
-  95,
+  128,
   392
  ],
  "metresPerBlock": 0.7142857142857143,
- "floorElevation": -4.3,
+ "floorElevation": -2.9,
  "box": {
   "north": 37.803961261261264,
   "south": 37.80143873873874,
@@ -15,27 +15,40 @@
   "east": -122.44660372161472
  },
  "ground": [
-  0,
-  1.5
+  1.6,
+  5.8
  ],
  "streets": [
-  "GORGAS AVE",
   "PALACE DR",
   "NORTH POINT ST",
   "LYON ST",
   "BEACH ST",
   "BAY ST",
-  "BAKER ST"
+  "BAKER ST",
+  "GORGAS AVE"
  ],
- "trees": 34,
+ "trees": 278,
  "buildings": [
   {
    "id": "201006.0034453",
    "parcel": "SF0925037",
    "name": null,
-   "base": 7,
+   "base": 11,
    "height": 14,
    "peak": 11.5,
+   "wall": "white_concrete",
+   "kind": "stucco, interwar",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0925037",
+    "year": 1929,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "2415 BAY ST"
+   },
+   "top": 29,
    "footprint": [
     [
      346,
@@ -1395,9 +1408,14 @@
    "id": "201006.0034955",
    "parcel": "SF0918003",
    "name": null,
-   "base": 6,
+   "base": 10,
    "height": 13,
    "peak": 11.4,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "white_terracotta",
+   "record": null,
+   "top": 26,
    "footprint": [
     [
      388,
@@ -1889,9 +1907,22 @@
    "id": "201006.0036878",
    "parcel": "SF0925031",
    "name": null,
-   "base": 8,
+   "base": 11,
    "height": 11,
    "peak": 10.7,
+   "wall": "light_gray_terracotta",
+   "kind": "stucco, interwar",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0925031",
+    "year": 1929,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "2451 BAY ST"
+   },
+   "top": 27,
    "footprint": [
     [
      280,
@@ -2955,9 +2986,22 @@
    "id": "201006.0039512",
    "parcel": "SF0925033",
    "name": null,
-   "base": 8,
+   "base": 11,
    "height": 10,
    "peak": 9.3,
+   "wall": "smooth_sandstone",
+   "kind": "stucco, interwar",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0925033",
+    "year": 1929,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "2439 BAY ST"
+   },
+   "top": 24,
    "footprint": [
     [
      300,
@@ -4161,9 +4205,22 @@
    "id": "201006.0039596",
    "parcel": "SF0915010A",
    "name": null,
-   "base": 6,
+   "base": 10,
    "height": 13,
    "peak": 9.9,
+   "wall": "white_terracotta",
+   "kind": "stucco, interwar",
+   "roof": "white_concrete",
+   "record": {
+    "parcel": "SF0915010A",
+    "year": 1927,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "3510 BAKER ST"
+   },
+   "top": 24,
    "footprint": [
     [
      381,
@@ -5447,9 +5504,22 @@
    "id": "201006.0089561",
    "parcel": "SF0925036",
    "name": null,
-   "base": 8,
+   "base": 11,
    "height": 13,
    "peak": 10.8,
+   "wall": "white_concrete",
+   "kind": "stucco, interwar",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0925036",
+    "year": 1929,
+    "stories": 3,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "2427 BAY ST"
+   },
+   "top": 26,
    "footprint": [
     [
      332,
@@ -6425,9 +6495,22 @@
    "id": "201006.0000031",
    "parcel": "SF0916002",
    "name": null,
-   "base": 6,
+   "base": 8,
    "height": 19,
    "peak": 23.8,
+   "wall": "smooth_sandstone",
+   "kind": "civic or commercial",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0916002",
+    "year": 1900,
+    "stories": null,
+    "units": null,
+    "construction": "NA",
+    "use": "Miscellaneous/Mixed-Use",
+    "address": "3601 3301 LYON ST"
+   },
+   "top": 41,
    "footprint": [
     [
      93,
@@ -99095,9 +99178,14 @@
    "id": "201006.0000096",
    "parcel": "SF1300001",
    "name": null,
-   "base": 6,
+   "base": 8,
    "height": 8,
    "peak": 9.4,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "light_gray_terracotta",
+   "record": null,
+   "top": 19,
    "footprint": [
     [
      0,
@@ -105289,9 +105377,14 @@
    "id": "201006.0000962",
    "parcel": "SF1300001",
    "name": null,
-   "base": 6,
+   "base": 9,
    "height": 12,
    "peak": 14.8,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "smooth_stone",
+   "record": null,
+   "top": 23,
    "footprint": [
     [
      66,
@@ -111479,9 +111572,22 @@
    "id": "201006.0000986",
    "parcel": "SF0916002",
    "name": null,
-   "base": 6,
+   "base": 8,
    "height": 52,
    "peak": 49.1,
+   "wall": "smooth_sandstone",
+   "kind": "civic or commercial",
+   "roof": "white_terracotta",
+   "record": {
+    "parcel": "SF0916002",
+    "year": 1900,
+    "stories": null,
+    "units": null,
+    "construction": "NA",
+    "use": "Miscellaneous/Mixed-Use",
+    "address": "3601 3301 LYON ST"
+   },
+   "top": 76,
    "footprint": [
     [
      182,
@@ -129673,9 +129779,22 @@
    "id": "201006.0006456",
    "parcel": "SF0916002",
    "name": null,
-   "base": 6,
+   "base": 8,
    "height": 27,
    "peak": 22,
+   "wall": "smooth_sandstone",
+   "kind": "civic or commercial",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0916002",
+    "year": 1900,
+    "stories": null,
+    "units": null,
+    "construction": "NA",
+    "use": "Miscellaneous/Mixed-Use",
+    "address": "3601 3301 LYON ST"
+   },
+   "top": 39,
    "footprint": [
     [
      133,
@@ -133795,9 +133914,14 @@
    "id": "201006.0064533",
    "parcel": "SF0918003A",
    "name": null,
-   "base": 6,
+   "base": 10,
    "height": 13,
    "peak": 12.6,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "smooth_stone",
+   "record": null,
+   "top": 28,
    "footprint": [
     [
      388,
@@ -134397,9 +134521,22 @@
    "id": "201006.0014743",
    "parcel": "SF0925001",
    "name": null,
-   "base": 7,
+   "base": 11,
    "height": 15,
    "peak": 12.3,
+   "wall": "white_terracotta",
+   "kind": "stucco, interwar",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0925001",
+    "year": 1930,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "3299 BAKER ST"
+   },
+   "top": 29,
    "footprint": [
     [
      365,
@@ -136551,9 +136688,14 @@
    "id": "201006.0017317",
    "parcel": "SF0918002M",
    "name": null,
-   "base": 6,
+   "base": 10,
    "height": 13,
    "peak": 10.4,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "smooth_stone",
+   "record": null,
+   "top": 24,
    "footprint": [
     [
      388,
@@ -136753,9 +136895,22 @@
    "id": "201006.0019647",
    "parcel": "SF0925030",
    "name": null,
-   "base": 8,
+   "base": 11,
    "height": 16,
    "peak": 13.5,
+   "wall": "white_terracotta",
+   "kind": "stucco, interwar",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0925030",
+    "year": 1937,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "2457 BAY ST"
+   },
+   "top": 30,
    "footprint": [
     [
      271,
@@ -137995,9 +138150,22 @@
    "id": "201006.0083741",
    "parcel": "SF0915010B",
    "name": null,
-   "base": 6,
+   "base": 10,
    "height": 13,
    "peak": 10.7,
+   "wall": "pink_terracotta",
+   "kind": "stucco, interwar",
+   "roof": "white_concrete",
+   "record": {
+    "parcel": "SF0915010B",
+    "year": 1928,
+    "stories": 3,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "3520 BAKER ST"
+   },
+   "top": 25,
    "footprint": [
     [
      376,
@@ -139009,9 +139177,14 @@
    "id": "201006.0086437",
    "parcel": "SF0918002Q",
    "name": null,
-   "base": 6,
+   "base": 10,
    "height": 13,
    "peak": 11.3,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "smooth_stone",
+   "record": null,
+   "top": 25,
    "footprint": [
     [
      391,
@@ -139491,9 +139664,22 @@
    "id": "201006.0030090",
    "parcel": "SF0925034",
    "name": null,
-   "base": 8,
+   "base": 11,
    "height": 10,
    "peak": 10.1,
+   "wall": "smooth_sandstone",
+   "kind": "stucco, interwar",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0925034",
+    "year": 1929,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "2435 BAY ST"
+   },
+   "top": 26,
    "footprint": [
     [
      311,
@@ -140809,9 +140995,22 @@
    "id": "201006.0033449",
    "parcel": "SF0925032",
    "name": null,
-   "base": 8,
+   "base": 11,
    "height": 10,
    "peak": 9.3,
+   "wall": "white_terracotta",
+   "kind": "stucco, interwar",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0925032",
+    "year": 1929,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "2445 BAY ST"
+   },
+   "top": 25,
    "footprint": [
     [
      289,
@@ -141939,9 +142138,14 @@
    "id": "201006.0045716",
    "parcel": "SF0918002O",
    "name": null,
-   "base": 6,
+   "base": 10,
    "height": 13,
    "peak": 10.6,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "polished_andesite",
+   "record": null,
+   "top": 26,
    "footprint": [
     [
      387,
@@ -142321,9 +142525,14 @@
    "id": "201006.0053420",
    "parcel": "SF0918004",
    "name": null,
-   "base": 6,
+   "base": 10,
    "height": 13,
    "peak": 11.9,
+   "wall": "smooth_sandstone",
+   "kind": "civic or unrecorded",
+   "roof": "smooth_stone",
+   "record": null,
+   "top": 24,
    "footprint": [
     [
      385,
@@ -143367,9 +143576,22 @@
    "id": "201006.0056874",
    "parcel": "SF0925035",
    "name": null,
-   "base": 8,
+   "base": 11,
    "height": 13,
    "peak": 10.4,
+   "wall": "white_terracotta",
+   "kind": "stucco, interwar",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0925035",
+    "year": 1930,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "2429 BAY ST"
+   },
+   "top": 25,
    "footprint": [
     [
      322,
@@ -144465,9 +144687,22 @@
    "id": "201006.0059603",
    "parcel": "SF0915010G",
    "name": null,
-   "base": 6,
+   "base": 10,
    "height": 13,
    "peak": 10.8,
+   "wall": "pink_terracotta",
+   "kind": "stucco, interwar",
+   "roof": "tuff",
+   "record": {
+    "parcel": "SF0915010G",
+    "year": 1928,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "3544 BAKER ST"
+   },
+   "top": 25,
    "footprint": [
     [
      358,
@@ -145503,9 +145738,22 @@
    "id": "201006.0157252",
    "parcel": "SF0916002",
    "name": null,
-   "base": 6,
+   "base": 8,
    "height": 30,
    "peak": 21.7,
+   "wall": "smooth_sandstone",
+   "kind": "civic or commercial",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0916002",
+    "year": 1900,
+    "stories": null,
+    "units": null,
+    "construction": "NA",
+    "use": "Miscellaneous/Mixed-Use",
+    "address": "3601 3301 LYON ST"
+   },
+   "top": 39,
    "footprint": [
     [
      209,
@@ -146005,9 +146253,22 @@
    "id": "201006.0175898",
    "parcel": "SF0916002",
    "name": null,
-   "base": 6,
+   "base": 8,
    "height": 3,
    "peak": 4.9,
+   "wall": "smooth_sandstone",
+   "kind": "civic or commercial",
+   "roof": "gray_concrete",
+   "record": {
+    "parcel": "SF0916002",
+    "year": 1900,
+    "stories": null,
+    "units": null,
+    "construction": "NA",
+    "use": "Miscellaneous/Mixed-Use",
+    "address": "3601 3301 LYON ST"
+   },
+   "top": 13,
    "footprint": [
     [
      202,
@@ -146059,9 +146320,22 @@
    "id": "201006.0175899",
    "parcel": "SF0916002",
    "name": null,
-   "base": 6,
+   "base": 8,
    "height": 3,
    "peak": 3.2,
+   "wall": "smooth_sandstone",
+   "kind": "civic or commercial",
+   "roof": "gray_concrete",
+   "record": {
+    "parcel": "SF0916002",
+    "year": 1900,
+    "stories": null,
+    "units": null,
+    "construction": "NA",
+    "use": "Miscellaneous/Mixed-Use",
+    "address": "3601 3301 LYON ST"
+   },
+   "top": 11,
    "footprint": [
     [
      201,
@@ -146105,9 +146379,22 @@
    "id": "201006.0175902",
    "parcel": "SF0916002",
    "name": null,
-   "base": 6,
+   "base": 8,
    "height": 3,
    "peak": 2.6,
+   "wall": "smooth_sandstone",
+   "kind": "civic or commercial",
+   "roof": "polished_andesite",
+   "record": {
+    "parcel": "SF0916002",
+    "year": 1900,
+    "stories": null,
+    "units": null,
+    "construction": "NA",
+    "use": "Miscellaneous/Mixed-Use",
+    "address": "3601 3301 LYON ST"
+   },
+   "top": 12,
    "footprint": [
     [
      210,
@@ -146151,9 +146438,22 @@
    "id": "201006.0175983",
    "parcel": "SF0916002",
    "name": null,
-   "base": 6,
+   "base": 8,
    "height": 3,
    "peak": 1.7,
+   "wall": "smooth_sandstone",
+   "kind": "civic or commercial",
+   "roof": "cyan_terracotta",
+   "record": {
+    "parcel": "SF0916002",
+    "year": 1900,
+    "stories": null,
+    "units": null,
+    "construction": "NA",
+    "use": "Miscellaneous/Mixed-Use",
+    "address": "3601 3301 LYON ST"
+   },
+   "top": 12,
    "footprint": [
     [
      146,
@@ -146201,9 +146501,22 @@
    "id": "201006.0006360",
    "parcel": "SF0916002",
    "name": null,
-   "base": 6,
+   "base": 8,
    "height": 26,
    "peak": 21.9,
+   "wall": "smooth_sandstone",
+   "kind": "civic or commercial",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0916002",
+    "year": 1900,
+    "stories": null,
+    "units": null,
+    "construction": "NA",
+    "use": "Miscellaneous/Mixed-Use",
+    "address": "3601 3301 LYON ST"
+   },
+   "top": 39,
    "footprint": [
     [
      182,
@@ -150375,9 +150688,22 @@
    "id": "201006.0027485",
    "parcel": "SF0918004A",
    "name": null,
-   "base": 6,
+   "base": 10,
    "height": 16,
    "peak": 14.7,
+   "wall": "white_terracotta",
+   "kind": "stucco, interwar",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0918004A",
+    "year": 1927,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "3460 BAKER ST"
+   },
+   "top": 31,
    "footprint": [
     [
      386,
@@ -151785,9 +152111,22 @@
    "id": "201006.0030015",
    "parcel": "SF0915010E",
    "name": null,
-   "base": 6,
+   "base": 10,
    "height": 14,
    "peak": 12.8,
+   "wall": "light_gray_terracotta",
+   "kind": "stucco, interwar",
+   "roof": "stone",
+   "record": {
+    "parcel": "SF0915010E",
+    "year": 1928,
+    "stories": 3,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "3530 BAKER ST"
+   },
+   "top": 28,
    "footprint": [
     [
      380,
@@ -153223,9 +153562,22 @@
    "id": "201006.0032497",
    "parcel": "SF0915010D",
    "name": null,
-   "base": 6,
+   "base": 10,
    "height": 13,
    "peak": 11.6,
+   "wall": "pink_terracotta",
+   "kind": "stucco, interwar",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0915010D",
+    "year": 1927,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "3500 BAKER ST"
+   },
+   "top": 26,
    "footprint": [
     [
      387,
@@ -154609,9 +154961,22 @@
    "id": "201006.0054195",
    "parcel": "SF0915010F",
    "name": null,
-   "base": 6,
+   "base": 10,
    "height": 13,
    "peak": 10.2,
+   "wall": "smooth_sandstone",
+   "kind": "stucco, interwar",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0915010F",
+    "year": 1928,
+    "stories": 2,
+    "units": 1,
+    "construction": "D",
+    "use": "Single Family Residential",
+    "address": "3536 BAKER ST"
+   },
+   "top": 26,
    "footprint": [
     [
      373,
@@ -155791,9 +156156,22 @@
    "id": "201006.0156555",
    "parcel": "SF0916002",
    "name": null,
-   "base": 6,
+   "base": 8,
    "height": 30,
    "peak": 21.6,
+   "wall": "smooth_sandstone",
+   "kind": "civic or commercial",
+   "roof": "tuff",
+   "record": {
+    "parcel": "SF0916002",
+    "year": 1900,
+    "stories": null,
+    "units": null,
+    "construction": "NA",
+    "use": "Miscellaneous/Mixed-Use",
+    "address": "3601 3301 LYON ST"
+   },
+   "top": 40,
    "footprint": [
     [
      165,
@@ -156317,9 +156695,22 @@
    "id": "201006.0175897",
    "parcel": "SF0916002",
    "name": null,
-   "base": 6,
+   "base": 8,
    "height": 3,
    "peak": 2.9,
+   "wall": "smooth_sandstone",
+   "kind": "civic or commercial",
+   "roof": "smooth_stone",
+   "record": {
+    "parcel": "SF0916002",
+    "year": 1900,
+    "stories": null,
+    "units": null,
+    "construction": "NA",
+    "use": "Miscellaneous/Mixed-Use",
+    "address": "3601 3301 LYON ST"
+   },
+   "top": 13,
    "footprint": [
     [
      134,
@@ -156359,9 +156750,22 @@
    "id": "201006.0175903",
    "parcel": "SF0916002",
    "name": null,
-   "base": 6,
+   "base": 8,
    "height": 22,
    "peak": 19,
+   "wall": "smooth_sandstone",
+   "kind": "civic or commercial",
+   "roof": "gray_concrete",
+   "record": {
+    "parcel": "SF0916002",
+    "year": 1900,
+    "stories": null,
+    "units": null,
+    "construction": "NA",
+    "use": "Miscellaneous/Mixed-Use",
+    "address": "3601 3301 LYON ST"
+   },
+   "top": 35,
    "footprint": [
     [
      190,
@@ -156402,7 +156806,17 @@
    ]
   }
  ],
+ "aerial": {
+  "year": "2022",
+  "tiles": [
+   "ca_m_3712213_sw_10_060_20220518"
+  ]
+ },
+ "parcelRollYear": 2025,
  "sources": {
+  "lidar": "usgs-lidar",
+  "aerial": "naip",
+  "parcels": "sf-parcels",
   "ground": "sf-contours",
   "buildings": "sf-buildings",
   "streets": "sf-streets",
@@ -156414,6 +156828,9 @@
   "canopy": "meta-canopy"
  },
  "credits": [
+  "U.S. Geological Survey, 3D Elevation Program (Public domain (US Government work))",
+  "USDA Farm Production and Conservation Business Center, National Agriculture Imagery Program (Public domain (US Government work))",
+  "City and County of San Francisco, DataSF (Open Data Commons PDDL 1.0 (public domain))",
   "City and County of San Francisco, DataSF (Open Data Commons PDDL 1.0 (public domain))",
   "City and County of San Francisco, DataSF (Open Data Commons PDDL 1.0 (public domain))",
   "City and County of San Francisco, DataSF (Open Data Commons PDDL 1.0 (public domain))",

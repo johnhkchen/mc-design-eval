@@ -4,9 +4,11 @@ import datasf from "./datasf.mjs";
 import nhd from "./usgs-nhd.mjs";
 import osm from "./osm.mjs";
 import canopy from "./meta-canopy.mjs";
+import lidar from "./usgs-lidar.mjs";
+import naip from "./naip.mjs";
 
-export const SOURCES = [...datasf, ...nhd, ...canopy, ...osm];
-export const LAYERS = ["ground", "buildings", "streets", "parks", "water", "paths", "trees", "playgrounds", "canopy"];
+export const SOURCES = [...lidar, ...naip, ...datasf, ...nhd, ...canopy, ...osm];
+export const LAYERS = ["lidar", "aerial", "parcels", "ground", "buildings", "streets", "parks", "water", "paths", "trees", "playgrounds", "canopy"];
 
 /** layer -> the source that supplies it for this place (null if none does) */
 export function plan(place) {
