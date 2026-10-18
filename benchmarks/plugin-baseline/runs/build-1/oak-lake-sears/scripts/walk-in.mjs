@@ -4,12 +4,13 @@
 import { load } from "/Volumes/ext1/swe/repos/minecraft-design/tools/src/structure.mjs";
 import { approachReport } from "/Volumes/ext1/swe/repos/minecraft-design/tools/src/approach.mjs";
 import { GRADE } from "./site.mjs";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 const here = (p) => new URL(p, import.meta.url).pathname;
 const KIT = process.argv[2], OUT = process.argv[3] ?? here("../delivery");
 const kit = load(KIT), town = load(`${OUT}/town.nbt`), L = JSON.parse(readFileSync(`${OUT}/build.json`, "utf8"));
 const HOUSES = (process.env.HOUSES ?? "0,7,5,4,1,3,6,2,4,7,0,1,5,3,6").split(",").map(Number);
-const NAMES = ["Magnolia", "Alhambra", "Vallonia", "Puritan", "Cornell", "Stanford", "Winona", "Craftsman"];
+const ROW = KIT.endsWith("row.nbt") && existsSync(`${OUT}/row.json`) ? JSON.parse(readFileSync(`${OUT}/row.json`, "utf8")) : null;
+const NAMES = ROW ? ROW.map((r) => r.house) : ["Magnolia", "Alhambra", "Vallonia", "Puritan", "Cornell", "Stanford", "Winona", "Craftsman"];
 // each module's front door: the lower half of the door nearest the street (smallest z)
 const door = []; for (const c of kit.cells.values()) { if (!/_door$/.test(c.block) || c.state?.half !== "lower") continue; const i = Math.floor(c.pos[0] / 16); if (c.pos[2] < 5) continue; if (!door[i] || c.pos[2] < door[i][2]) door[i] = c.pos; }
 const Q = { north: 0, east: 1, south: 2, west: 3 }, OUTD = { north: [0, -1], south: [0, 1], west: [-1, 0], east: [1, 0] };
