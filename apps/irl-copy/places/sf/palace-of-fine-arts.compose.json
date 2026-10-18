@@ -39,6 +39,28 @@
     {
      "from": "white_terracotta",
      "to": "cut_sandstone"
+    },
+    {
+     "from": "oak_leaves",
+     "to": "air"
+    },
+    {
+     "from": "flowering_azalea_leaves",
+     "to": "air"
+    },
+    {
+     "from": "vine",
+     "to": "air"
+    },
+    {
+     "from": "dirt",
+     "to": "smooth_sandstone",
+     "maxY": 25
+    },
+    {
+     "from": "dirt",
+     "to": "air",
+     "minY": 26
     }
    ]
   },
@@ -54,6 +76,28 @@
     {
      "from": "white_terracotta",
      "to": "cut_sandstone"
+    },
+    {
+     "from": "oak_leaves",
+     "to": "air"
+    },
+    {
+     "from": "flowering_azalea_leaves",
+     "to": "air"
+    },
+    {
+     "from": "vine",
+     "to": "air"
+    },
+    {
+     "from": "dirt",
+     "to": "smooth_sandstone",
+     "maxY": 25
+    },
+    {
+     "from": "dirt",
+     "to": "air",
+     "minY": 26
     }
    ]
   },
@@ -108,5 +152,5 @@
    "clear": "band"
   }
  ],
- "colours": "Matched to the reference photo (01-rotunda-lagoon.jpg, overcast, so by relative tone): the dome is the palest surface, a warm grey-beige, not red; the rotunda's column shafts are red-brown (granite stays); the colonnade shafts are buff like the body; the hall cornice tan."
+ "colours": "Matched to the reference photo (01-rotunda-lagoon.jpg, overcast, so by relative tone): the dome is the palest surface, a warm grey-beige, not red; the rotunda's column shafts are red-brown (granite stays); the colonnade shafts are buff like the body; the hall cornice tan. The planter boxes on the colonnade are open stone boxes, as built (never planted): the kit's soil, leaves and vines come out."
 }
