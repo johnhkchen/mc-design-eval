@@ -45,6 +45,11 @@ the footprint, capped at the footprint's own recorded peak, so a tree over a roo
 interwar ones, brick for masonry, concrete for steel and concrete frames, sandstone for civic and commercial), roofs
 the median aerial colour matched to a roofing block, open ground by the aerial photo's colour and NDVI.
 
+Recorded buildings get a fit-out (`src/fitout.mjs`): a floor at every storey (the roll's storey count or the measured
+height at ~3.6 m a storey, whichever is more: the roll counts living floors, not a raised ground floor or an attic), a
+front door on the side facing the nearest street, windows along that front at each storey, a glazed shopfront on a
+commercial ground floor, and a few windows round the back. The manifest records each building's storeys and entrance.
+
 Trees come from the canopy map where there is one (`src/trees.mjs`: treetops are the local maxima, crowns are voxelised
 from the map, trunks run up under each top), else from mapped tree points.
 

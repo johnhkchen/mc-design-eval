@@ -9,6 +9,7 @@
 //              return there (a 3x3 median inside the footprint, so one spike isn't a mast), and the canopy from the
 //              returns standing 2 m above the ground away from any building (in place of the canopy map)
 //   trees      from the canopy (trees.mjs), else the mapped tree points as simple trees
+//   fit-out    a floor at every storey, a front door on the side facing the street, windows along it (fitout.mjs)
 //   materials  walls by the assessor's record (era and construction: materials.mjs), roofs the colour the aerial photo
 //              shows, open ground green, sand or paving by the aerial photo's colour and near-infrared
 // The manifest lists every building (id, footprint cells, base, height, peak) in the structure's frame, the streets
@@ -18,6 +19,7 @@ import { cellsIn, distanceTo, along } from "./raster.mjs";
 import { groundFromContours } from "./ground.mjs";
 import { canopyTrees } from "./trees.mjs";
 import { wallFor, roofBlock, groundFrom } from "./materials.mjs";
+import { fitOut } from "./fitout.mjs";
 
 // widths in metres; everything below is in blocks (metres x the place's scale)
 const ROAD_M = 6, WALK_M = 10.5;
@@ -92,7 +94,9 @@ export function buildPlace(place, frame, L) {
     for (const [x, z] of b.cells) { const t = b.tops.get(I(x, z)), nb = [[1, 0], [-1, 0], [0, 1], [0, -1]].map(([dx, dz]) => I(x + dx, z + dz));
       const edge = nb.some((j) => !b.own.has(j)), from = edge ? ground(x, z) + 1 : Math.min(t, ...nb.map((j) => b.tops.get(j) + 1));
       // walls up to the roof's lowest course here; the top course (and the closing courses inside) are roof
-      for (let y = from; y <= t; y++) g.set(x, y, z, edge && y < t ? wall.block : roof); } }
+      for (let y = from; y <= t; y++) g.set(x, y, z, edge && y < t ? wall.block : roof); }
+    // floors, a front door to the street, windows (fitout.mjs); not on the big civic buildings, which the design pass draws
+    if (rec && wall.kind !== "civic or commercial" || /commercial/.test(wall.kind) && b.cells.length / (sc * sc) < 800) Object.assign(b, fitOut(g, b, { I, ground, road, sc })); }
 
   const open = (x, z) => { const i = I(x, z); return !isB[i] && !water[i] && road[i] > ROAD; };
   let trees;
