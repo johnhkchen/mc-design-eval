@@ -1,6 +1,6 @@
 // The fix system's cloud store: the issues and fix_jobs tables in D1 (migrations/0002_fixes.sql).
 const issue = (r) => ({ id: r.id, building: r.building, kind: r.kind, at: r.at ? JSON.parse(r.at) : null, what: r.what, source: r.source, status: r.status, version: r.version, createdAt: r.created_at, jobId: r.job_id });
-const job = (r) => ({ id: r.id, kind: r.kind, buildings: JSON.parse(r.buildings), note: r.note, status: r.status, createdAt: r.created_at, updatedAt: r.updated_at, result: r.result ? JSON.parse(r.result) : null });
+const job = (r) => ({ id: r.id, kind: r.kind, buildings: JSON.parse(r.buildings), note: r.note, tier: r.tier, budget: r.budget, status: r.status, createdAt: r.created_at, updatedAt: r.updated_at, result: r.result ? JSON.parse(r.result) : null });
 const COLS = { status: "status", version: "version", jobId: "job_id", updatedAt: "updated_at", result: "result" };
 
 export function d1Store(DB) {
@@ -14,7 +14,7 @@ export function d1Store(DB) {
     putIssues: async (rows) => { if (!rows.length) return; await DB.batch(rows.map((r) => DB.prepare("INSERT OR IGNORE INTO issues (id, building, kind, at, what, source, status, version, created_at, job_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
       .bind(r.id, r.building, r.kind, r.at == null ? null : JSON.stringify(r.at), r.what, r.source, r.status, r.version, r.createdAt, r.jobId))); },
     patchIssue: (id, p) => patch("issues", id, p),
-    insertJob: (j) => DB.prepare("INSERT INTO fix_jobs (id, kind, buildings, note, status, created_at, updated_at, result) VALUES (?, ?, ?, ?, ?, ?, ?, NULL)").bind(j.id, j.kind, JSON.stringify(j.buildings), j.note, j.status, j.createdAt, j.updatedAt).run(),
+    insertJob: (j) => DB.prepare("INSERT INTO fix_jobs (id, kind, buildings, note, tier, budget, status, created_at, updated_at, result) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NULL)").bind(j.id, j.kind, JSON.stringify(j.buildings), j.note, j.tier, j.budget, j.status, j.createdAt, j.updatedAt).run(),
     patchJob: (id, p) => patch("fix_jobs", id, p),
   };
 }

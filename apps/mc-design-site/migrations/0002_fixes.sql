@@ -19,7 +19,9 @@ CREATE TABLE fix_jobs (
   kind TEXT NOT NULL,
   buildings TEXT NOT NULL,
   note TEXT NOT NULL DEFAULT '',
-  status TEXT NOT NULL DEFAULT 'queued' CHECK (status IN ('queued', 'running', 'review', 'accepted', 'rejected', 'failed')),
+  tier TEXT NOT NULL DEFAULT 'auto' CHECK (tier IN ('auto', 'haiku', 'sonnet')),
+  budget REAL NOT NULL DEFAULT 0,
+  status TEXT NOT NULL DEFAULT 'queued' CHECK (status IN ('queued', 'running', 'review', 'escalate', 'accepted', 'rejected', 'failed')),
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL,
   result TEXT

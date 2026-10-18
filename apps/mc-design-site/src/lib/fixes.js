@@ -2,10 +2,21 @@
 // deterministic checks (scripts/check.mjs) or from a person; fix jobs batch buildings with the same kind of issue so
 // one revision fixes them together, and their before/after counts show which fixes work.
 //   issue: { id, building, kind, at, what, source: check|person, status: open|waived|fixed, version, createdAt, jobId }
-//   job:   { id, kind, buildings, note, status: queued|running|review|accepted|rejected|failed, createdAt, updatedAt, result }
+//   job:   { id, kind, buildings, note, tier, budget, status: queued|running|review|escalate|accepted|rejected|failed,
+//            createdAt, updatedAt, result }
+//
+// ESCALATION PROTOCOL. Every job starts at tier "auto": deterministic code, no model (the toolkit's autofix.mjs, kept
+// only if the checks show the issue cleared and nothing else worse). What auto can't clear is listed in the job's
+// result and the job goes to "escalate" (or to "review" with the rest listed, when some buildings were fixed). Only a
+// person moves it up: "Escalate to Haiku" or "Escalate to Sonnet" on /issues makes a new job at that tier with a cost
+// cap, run on the Anthropic API (ANTHROPIC_API_KEY from .env.local on the runner's machine). Every result records the
+// tier that fixed it, so the study table shows which kinds still need a model.
 
 export const ISSUE_STATUS = ["open", "waived", "fixed"];
-export const JOB_STATUS = ["queued", "running", "review", "accepted", "rejected", "failed"];
+export const JOB_STATUS = ["queued", "running", "review", "escalate", "accepted", "rejected", "failed"];
+export const TIERS = { auto: { label: "Deterministic (no model)", budget: 0 }, haiku: { label: "Haiku on the API", budget: 1 }, sonnet: { label: "Sonnet on the API", budget: 4 } };
+// the kinds the toolkit fixes by code (minecraft-design tools/src/autofix.mjs FIXERS); the rest start at "escalate"
+export const AUTOFIX = ["floating shutter", "stairs end short", "on a bottom slab", "floating", "dark room"];
 
 // what each kind means to a player, for the issues page
 export const KINDS = {
@@ -55,9 +66,11 @@ export async function handleFixes({ method, path, query, body, canWrite }, store
   if (path === "/api/fix-jobs" && method === "GET") { const jobs = await store.listJobs(); return { status: 200, json: query?.status ? jobs.filter((j) => j.status === query.status) : jobs }; }
   if (path === "/api/fix-jobs" && method === "POST") {
     if (!canWrite) return deny;
-    const { kind, buildings, note = "" } = body ?? {};
+    const { kind, buildings, note = "", tier = "auto", budget } = body ?? {};
     if (!kind || !Array.isArray(buildings) || !buildings.length) return { status: 400, json: { error: "kind and a non-empty buildings list are required" } };
-    const job = { id: `fix-${Date.now().toString(36)}`, kind: String(kind), buildings: buildings.map(String), note: String(note).slice(0, 2000), status: "queued", createdAt: now, updatedAt: now, result: null };
+    if (!TIERS[tier]) return { status: 400, json: { error: `tier must be one of ${Object.keys(TIERS).join(", ")}` } };
+    const cap = tier === "auto" ? 0 : Math.min(20, Math.max(0.1, Number(budget ?? TIERS[tier].budget) || TIERS[tier].budget));
+    const job = { id: `fix-${Date.now().toString(36)}`, kind: String(kind), buildings: buildings.map(String), note: String(note).slice(0, 2000), tier, budget: cap, status: "queued", createdAt: now, updatedAt: now, result: null };
     await store.insertJob(job); return { status: 200, json: job };
   }
   m = path.match(/^\/api\/fix-jobs\/([\w-]+)$/);
