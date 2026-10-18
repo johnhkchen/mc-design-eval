@@ -1,0 +1,15 @@
+{
+  "roles": {
+    "ground": ["smooth_stone"],
+    "wall": ["smooth_sandstone", "smooth_sandstone_stairs", "smooth_sandstone_slab"],
+    "base": ["sandstone", "sandstone_stairs", "sandstone_slab", "sandstone_wall"],
+    "trim": ["cut_sandstone", "cut_sandstone_slab"],
+    "carved": ["chiseled_sandstone"],
+    "granite": ["granite", "granite_stairs", "granite_slab", "polished_granite"],
+    "figure": ["white_terracotta", "calcite"],
+    "dome": ["terracotta", "brown_terracotta"],
+    "light": ["glowstone", "lantern"],
+    "planting": ["oak_leaves", "flowering_azalea_leaves", "vine", "dirt"]
+  },
+  "objects": ["glowstone", "lantern", "oak_leaves", "flowering_azalea_leaves", "vine", "dirt"]
+}

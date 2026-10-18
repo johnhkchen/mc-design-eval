@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="716" font-family="Helvetica,Arial,sans-serif" font-size="12">
+<rect width="100%" height="100%" fill="#fbfaf7"/>
+<text x="16" y="24" font-size="16" font-weight="bold">palace-kit: 16 agent sessions, 32 min, $2.23</text>
+<text x="16" y="42" fill="#555">bar length = wall time; bar height and colour = spend per minute (full height and deepest red = $0.40/min, the same in every chart)</text>
+<text x="16" y="60" fill="#555">spend by model: opus $1.11 · sonnet $0.43 · haiku $0.69</text>
+<text x="16" y="90" fill="#333">agents running</text><text x="16" y="105" fill="#777">(peak 7)</text>
+<polyline points="230,110 230.0,110 230.0,107.91666666666667 379.2,107.91666666666667 379.2,110 379.5,110 379.5,107.91666666666667 392.1,107.91666666666667 392.1,110 392.4,110 392.4,107.91666666666667 393.2,107.91666666666667 393.2,105.83333333333333 393.2,105.83333333333333 393.2,103.75 422.4,103.75 422.4,105.83333333333333 534.5,105.83333333333333 534.5,107.91666666666667 547.9,107.91666666666667 547.9,110 548.3,110 548.3,107.91666666666667 565.8,107.91666666666667 565.8,110 566.2,110 566.2,107.91666666666667 567.2,107.91666666666667 567.2,105.83333333333333 567.3,105.83333333333333 567.3,103.75 567.3,103.75 567.3,101.66666666666667 567.3,101.66666666666667 567.3,99.58333333333333 567.3,99.58333333333333 567.3,97.5 567.4,97.5 567.4,95.41666666666667 608.1,95.41666666666667 608.1,97.5 608.3,97.5 608.3,99.58333333333333 618.4,99.58333333333333 618.4,101.66666666666667 624.2,101.66666666666667 624.2,103.75 628.1,103.75 628.1,105.83333333333333 634.3,105.83333333333333 634.3,107.91666666666667 664.7,107.91666666666667 664.7,110 665.9,110 665.9,107.91666666666667 675.7,107.91666666666667 675.7,110 713.0,110 713.0,107.91666666666667 974.1,107.91666666666667 974.1,110 974.5,110 974.5,107.91666666666667 990.0,107.91666666666667 990.0,110" fill="#c9d6e8" stroke="#4a6fa5" stroke-width="1"/>
+<line x1="230" y1="110" x2="990" y2="110" stroke="#999"/>
+<text x="16" y="140" fill="#333">spend so far</text>
+<text x="16" y="155" fill="#777">(slope = $/min)</text>
+<polygon points="230.0,220 230.0,220.0 379.2,175.1 379.2,220" fill="hsl(18,70%,46%)" stroke="hsl(18,70%,46%)" stroke-width="0.5"/>
+<polygon points="379.2,220 379.2,175.1 379.5,175.1 379.5,220" fill="hsl(130,70%,72%)" stroke="hsl(130,70%,72%)" stroke-width="0.5"/>
+<polygon points="379.5,220 379.5,175.1 392.1,168.1 392.1,220" fill="hsl(4,70%,43%)" stroke="hsl(4,70%,43%)" stroke-width="0.5"/>
+<polygon points="392.1,220 392.1,168.1 392.4,168.1 392.4,220" fill="hsl(130,70%,72%)" stroke="hsl(130,70%,72%)" stroke-width="0.5"/>
+<polygon points="392.4,220 392.4,168.1 393.2,168.1 393.2,220" fill="hsl(59,70%,56%)" stroke="hsl(59,70%,56%)" stroke-width="0.5"/>
+<polygon points="393.2,220 393.2,168.1 393.2,168.1 393.2,220" fill="hsl(48,70%,53%)" stroke="hsl(48,70%,53%)" stroke-width="0.5"/>
+<polygon points="393.2,220 393.2,168.1 422.4,164.5 422.4,220" fill="hsl(37,70%,51%)" stroke="hsl(37,70%,51%)" stroke-width="0.5"/>
+<polygon points="422.4,220 422.4,164.5 534.5,154.0 534.5,220" fill="hsl(43,70%,52%)" stroke="hsl(43,70%,52%)" stroke-width="0.5"/>
+<polygon points="534.5,220 534.5,154.0 547.9,153.4 547.9,220" fill="hsl(59,70%,56%)" stroke="hsl(59,70%,56%)" stroke-width="0.5"/>
+<polygon points="547.9,220 547.9,153.4 548.3,153.4 548.3,220" fill="hsl(130,70%,72%)" stroke="hsl(130,70%,72%)" stroke-width="0.5"/>
+<polygon points="548.3,220 548.3,153.4 565.8,143.0 565.8,220" fill="hsl(3,70%,43%)" stroke="hsl(3,70%,43%)" stroke-width="0.5"/>
+<polygon points="565.8,220 565.8,143.0 566.2,143.0 566.2,220" fill="hsl(130,70%,72%)" stroke="hsl(130,70%,72%)" stroke-width="0.5"/>
+<polygon points="566.2,220 566.2,143.0 567.2,143.0 567.2,220" fill="hsl(68,70%,58%)" stroke="hsl(68,70%,58%)" stroke-width="0.5"/>
+<polygon points="567.2,220 567.2,143.0 567.3,143.0 567.3,220" fill="hsl(57,70%,55%)" stroke="hsl(57,70%,55%)" stroke-width="0.5"/>
+<polygon points="567.3,220 567.3,143.0 567.3,143.0 567.3,220" fill="hsl(48,70%,53%)" stroke="hsl(48,70%,53%)" stroke-width="0.5"/>
+<polygon points="567.3,220 567.3,143.0 567.3,143.0 567.3,220" fill="hsl(42,70%,52%)" stroke="hsl(42,70%,52%)" stroke-width="0.5"/>
+<polygon points="567.3,220 567.3,143.0 567.3,143.0 567.3,220" fill="hsl(37,70%,51%)" stroke="hsl(37,70%,51%)" stroke-width="0.5"/>
+<polygon points="567.3,220 567.3,143.0 567.4,143.0 567.4,220" fill="hsl(35,70%,50%)" stroke="hsl(35,70%,50%)" stroke-width="0.5"/>
+<polygon points="567.4,220 567.4,143.0 608.1,136.5 608.1,220" fill="hsl(31,70%,49%)" stroke="hsl(31,70%,49%)" stroke-width="0.5"/>
+<polygon points="608.1,220 608.1,136.5 608.3,136.4 608.3,220" fill="hsl(35,70%,50%)" stroke="hsl(35,70%,50%)" stroke-width="0.5"/>
+<polygon points="608.3,220 608.3,136.4 618.4,135.3 618.4,220" fill="hsl(39,70%,51%)" stroke="hsl(39,70%,51%)" stroke-width="0.5"/>
+<polygon points="618.4,220 618.4,135.3 624.2,134.8 624.2,220" fill="hsl(45,70%,52%)" stroke="hsl(45,70%,52%)" stroke-width="0.5"/>
+<polygon points="624.2,220 624.2,134.8 628.1,134.6 628.1,220" fill="hsl(52,70%,54%)" stroke="hsl(52,70%,54%)" stroke-width="0.5"/>
+<polygon points="628.1,220 628.1,134.6 634.3,134.3 634.3,220" fill="hsl(61,70%,56%)" stroke="hsl(61,70%,56%)" stroke-width="0.5"/>
+<polygon points="634.3,220 634.3,134.3 664.7,133.8 664.7,220" fill="hsl(79,70%,60%)" stroke="hsl(79,70%,60%)" stroke-width="0.5"/>
+<polygon points="664.7,220 664.7,133.8 665.9,133.8 665.9,220" fill="hsl(130,70%,72%)" stroke="hsl(130,70%,72%)" stroke-width="0.5"/>
+<polygon points="665.9,220 665.9,133.8 675.7,133.5 675.7,220" fill="hsl(66,70%,57%)" stroke="hsl(66,70%,57%)" stroke-width="0.5"/>
+<polygon points="675.7,220 675.7,133.5 713.0,133.5 713.0,220" fill="hsl(130,70%,72%)" stroke="hsl(130,70%,72%)" stroke-width="0.5"/>
+<polygon points="713.0,220 713.0,133.5 974.1,130.5 974.1,220" fill="hsl(85,70%,62%)" stroke="hsl(85,70%,62%)" stroke-width="0.5"/>
+<polygon points="974.1,220 974.1,130.5 974.5,130.5 974.5,220" fill="hsl(130,70%,72%)" stroke="hsl(130,70%,72%)" stroke-width="0.5"/>
+<polygon points="974.5,220 974.5,130.5 990.0,130.0 990.0,220" fill="hsl(67,70%,57%)" stroke="hsl(67,70%,57%)" stroke-width="0.5"/>
+<polyline points="230.0,220.0 379.2,175.1 379.2,175.1 379.5,175.1 379.5,175.1 392.1,168.1 392.1,168.1 392.4,168.1 392.4,168.1 393.2,168.1 393.2,168.1 393.2,168.1 393.2,168.1 422.4,164.5 422.4,164.5 534.5,154.0 534.5,154.0 547.9,153.4 547.9,153.4 548.3,153.4 548.3,153.4 565.8,143.0 565.8,143.0 566.2,143.0 566.2,143.0 567.2,143.0 567.2,143.0 567.3,143.0 567.3,143.0 567.3,143.0 567.3,143.0 567.3,143.0 567.3,143.0 567.3,143.0 567.3,143.0 567.4,143.0 567.4,143.0 608.1,136.5 608.1,136.5 608.3,136.4 608.3,136.4 618.4,135.3 618.4,135.3 624.2,134.8 624.2,134.8 628.1,134.6 628.1,134.6 634.3,134.3 634.3,134.3 664.7,133.8 664.7,133.8 665.9,133.8 665.9,133.8 675.7,133.5 675.7,133.5 713.0,133.5 713.0,133.5 974.1,130.5 974.1,130.5 974.5,130.5 974.5,130.5 990.0,130.0" fill="none" stroke="#0005" stroke-width="1"/>
+<line x1="230" y1="220" x2="990" y2="220" stroke="#0003" stroke-dasharray=""/><text x="222" y="224" text-anchor="end" fill="#777">0%</text>
+<line x1="230" y1="175" x2="990" y2="175" stroke="#0003" stroke-dasharray="3 3"/><text x="222" y="179" text-anchor="end" fill="#777">50% · $1.12</text>
+<line x1="230" y1="130" x2="990" y2="130" stroke="#0003" stroke-dasharray="3 3"/><text x="222" y="134" text-anchor="end" fill="#777">100% · $2.23</text>
+<line x1="379.6" y1="175" x2="379.6" y2="220" stroke="#333" stroke-dasharray="2 3"/>
+<text x="385.6" y="214" fill="#fff" font-weight="bold">half the spend by 6.3m</text>
+<line x1="230" y1="242" x2="230" y2="676" stroke="#e3e0d8"/>
+<text x="230" y="692" text-anchor="middle" fill="#777">0m</text>
+<line x1="347.9923905258321" y1="242" x2="347.9923905258321" y2="676" stroke="#e3e0d8"/>
+<text x="347.9923905258321" y="692" text-anchor="middle" fill="#777">5m</text>
+<line x1="465.98478105166413" y1="242" x2="465.98478105166413" y2="676" stroke="#e3e0d8"/>
+<text x="465.98478105166413" y="692" text-anchor="middle" fill="#777">10m</text>
+<line x1="583.9771715774962" y1="242" x2="583.9771715774962" y2="676" stroke="#e3e0d8"/>
+<text x="583.9771715774962" y="692" text-anchor="middle" fill="#777">15m</text>
+<line x1="701.9695621033283" y1="242" x2="701.9695621033283" y2="676" stroke="#e3e0d8"/>
+<text x="701.9695621033283" y="692" text-anchor="middle" fill="#777">20m</text>
+<line x1="819.9619526291602" y1="242" x2="819.9619526291602" y2="676" stroke="#e3e0d8"/>
+<text x="819.9619526291602" y="692" text-anchor="middle" fill="#777">25m</text>
+<line x1="937.9543431549923" y1="242" x2="937.9543431549923" y2="676" stroke="#e3e0d8"/>
+<text x="937.9543431549923" y="692" text-anchor="middle" fill="#777">30m</text>
+<text x="222" y="267" text-anchor="end" fill="#222">architect (form)</text>
+<rect x="230.0" y="258.2" width="149.2" height="9.7" rx="2" fill="hsl(18,70%,46%)" stroke="#0003"/>
+<text x="385.2" y="267" fill="#555">opus@medium $1.11 · 6.3m · 33K out</text>
+<text x="222" y="293" text-anchor="end" fill="#222">designer (plan)</text>
+<rect x="379.5" y="280.1" width="12.5" height="17.9" rx="2" fill="hsl(4,70%,43%)" stroke="#0003"/>
+<text x="398.1" y="293" fill="#555">sonnet@medium $0.17 · 0.5m · 5K out</text>
+<text x="222" y="319" text-anchor="end" fill="#222">kit (vocab / scaffold)</text>
+<rect x="392.4" y="313.5" width="155.5" height="3.0" rx="2" fill="hsl(59,70%,56%)" stroke="#0003"/>
+<text x="553.9" y="319" fill="#555">haiku@medium $0.17 · 6.6m · 90K out</text>
+<text x="222" y="345" text-anchor="end" fill="#222">kit (vocab / scaffold)</text>
+<rect x="393.2" y="339.5" width="29.2" height="3.0" rx="2" fill="hsl(67,70%,58%)" stroke="#0003"/>
+<text x="428.4" y="345" fill="#555">haiku@medium $0.02 · 1.2m · 15K out</text>
+<text x="222" y="371" text-anchor="end" fill="#222">kit (vocab / scaffold)</text>
+<rect x="393.2" y="365.5" width="141.3" height="3.0" rx="2" fill="hsl(57,70%,55%)" stroke="#0003"/>
+<text x="540.5" y="371" fill="#555">haiku@medium $0.17 · 6.0m · 78K out</text>
+<text x="222" y="397" text-anchor="end" fill="#222">designer (plan)</text>
+<rect x="548.3" y="383.5" width="17.5" height="19.1" rx="2" fill="hsl(3,70%,43%)" stroke="#0003"/>
+<text x="571.8" y="397" fill="#555">sonnet@medium $0.26 · 0.7m · 5K out</text>
+<text x="222" y="423" text-anchor="end" fill="#222">Rotunda columns and entablature</text>
+<rect x="566.2" y="417.5" width="52.2" height="3.0" rx="2" fill="hsl(68,70%,58%)" stroke="#0003"/>
+<text x="624.4" y="423" fill="#555">haiku@high $0.04 · 2.2m · 25K out</text>
+<text x="222" y="449" text-anchor="end" fill="#222">Peristyle walkway</text>
+<rect x="567.2" y="443.5" width="60.9" height="3.0" rx="2" fill="hsl(74,70%,59%)" stroke="#0003"/>
+<text x="634.1" y="449" fill="#555">haiku@high $0.03 · 2.6m · 33K out</text>
+<text x="222" y="475" text-anchor="end" fill="#222">Rotunda interior</text>
+<rect x="567.3" y="469.5" width="67.0" height="3.0" rx="2" fill="hsl(71,70%,58%)" stroke="#0003"/>
+<text x="640.3" y="475" fill="#555">haiku@high $0.04 · 2.8m · 33K out</text>
+<text x="222" y="501" text-anchor="end" fill="#222">Exhibition hall and lamps</text>
+<rect x="567.3" y="495.5" width="41.0" height="3.0" rx="2" fill="hsl(70,70%,58%)" stroke="#0003"/>
+<text x="614.3" y="501" fill="#555">haiku@high $0.03 · 1.7m · 19K out</text>
+<text x="222" y="527" text-anchor="end" fill="#222">Planters, figures, niches</text>
+<rect x="567.3" y="521.5" width="40.8" height="3.0" rx="2" fill="hsl(72,70%,59%)" stroke="#0003"/>
+<text x="614.1" y="527" fill="#555">haiku@high $0.02 · 1.7m · 19K out</text>
+<text x="222" y="553" text-anchor="end" fill="#222">Peristyle bay and end columns</text>
+<rect x="567.3" y="547.5" width="97.4" height="3.0" rx="2" fill="hsl(79,70%,60%)" stroke="#0003"/>
+<text x="670.7" y="553" fill="#555">haiku@high $0.04 · 4.1m · 32K out</text>
+<text x="222" y="579" text-anchor="end" fill="#222">Attic and dome</text>
+<rect x="567.4" y="573.5" width="56.8" height="3.0" rx="2" fill="hsl(72,70%,59%)" stroke="#0003"/>
+<text x="630.2" y="579" fill="#555">haiku@high $0.03 · 2.4m · 29K out</text>
+<text x="222" y="605" text-anchor="end" fill="#222">fix: Peristyle walkway</text>
+<rect x="665.9" y="599.5" width="9.8" height="3.0" rx="2" fill="hsl(66,70%,57%)" stroke="#0003"/>
+<text x="681.7" y="605" fill="#555">haiku@high $0.01 · 0.4m · 5K out</text>
+<text x="222" y="631" text-anchor="end" fill="#222">lamps: Rotunda interior</text>
+<rect x="713.0" y="625.5" width="261.1" height="3.0" rx="2" fill="hsl(85,70%,62%)" stroke="#0003"/>
+<text x="980.1" y="631" fill="#555">haiku@high $0.08 · 11.1m · 43K out</text>
+<text x="222" y="657" text-anchor="end" fill="#222">kit (vocab / scaffold)</text>
+<rect x="974.5" y="651.5" width="15.5" height="3.0" rx="2" fill="hsl(67,70%,57%)" stroke="#0003"/>
+<text x="996.0" y="657" fill="#555">haiku@medium $0.01 · 0.7m · 7K out</text>
+</svg>

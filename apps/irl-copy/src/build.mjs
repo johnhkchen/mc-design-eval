@@ -112,5 +112,5 @@ export function buildPlace(place, frame, L) {
     streets: [...new Set((L.streets?.features ?? []).map((f) => f.properties.name))], trees: trees.trees.length,
     buildings: buildings.map(({ cells, k, tops, own, ...b }) => ({ ...b, top: Math.max(...tops.values()), footprint: cells })),
     aerial: L.aerial ? { year: L.aerial.year, tiles: L.aerial.tiles } : null, parcelRollYear: L.parcels?.rollYear ?? null };
-  return { grid: g, manifest };
+  return { grid: g, manifest, ground };
 }

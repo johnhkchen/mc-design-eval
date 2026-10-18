@@ -1,0 +1,34 @@
+The Palace of Fine Arts, San Francisco (Bernard Maybeck, 1915, for the Panama-Pacific International Exposition; rebuilt in
+concrete 1964-67): a romantic Roman ruin by a lagoon. An open octagonal rotunda with a great salmon-ochre dome, flanked by two
+curving peristyles (colonnades) of paired Corinthian columns carrying an entablature, topped by tall open planter boxes with a
+draped weeping figure leaning on each corner, and behind them the long curved exhibition hall. Everything is the colour of weathered
+tinted plaster: warm sandstone and buff, the dome a deeper salmon-ochre, the column shafts slightly lighter, shadows in the deep coffers.
+It must read, at a glance, as THIS building: the domed rotunda on its ring of giant arches, and the colonnade marching away behind it.
+
+Scale: 1.4 blocks per metre (a column 1.2 m across is 2 blocks; a 3.6 m storey about 5). The modules are for a public catalog of
+buildings for a Minecraft 1.21.1 server: use only blocks that exist in 1.21.1 (no pale oak, nothing from 1.21.4+). Placement code
+will set them on the real site from city data, so every module must keep exactly to its plot and its stated size.
+
+Build it as ONE row of four modules on fixed plots along x, each standing at y 0 on a flat 1-block ground of smooth stone
+(paving), its front facing north (low z):
+ plot 0, x 0..63, z 0..63 (64 x 64), up to y 70: THE ROTUNDA. An open octagon about 58 blocks across: on each of the eight faces a
+   giant round arch (about 26 blocks tall) between massive piers, each pier faced with clustered Corinthian columns; over the arches
+   an entablature and a tall attic (the drum) carrying a relief frieze band; on the drum the dome, about 48 blocks across, peak near
+   y 68, salmon-ochre, with ribs, and a coffered underside seen from inside. The inside is one open, walkable space (the public walks
+   through it), floored in paving. No windows or doors: it is open to the air through its arches.
+ plot 1, x 64..79, z 0..23 (16 x 24), up to y 32: A PERISTYLE BAY, the repeating unit of the colonnade. Two rows of paired Corinthian
+   columns (shafts 2 x 2, bases and capitals proud) running along x, about 20 blocks to the top of the capitals, a full entablature
+   (architrave, frieze, cornice) on top tying both rows, and on top of that one open planter box (about 8 blocks tall, a hollow
+   box with leaves/vines spilling out) with a draped weeping figure suggested at each top corner (blocks, not entities). The bay
+   must TILE: placed end to end along x it continues seamlessly (its x ends are where the next bay's begin; half a column spacing
+   at each end, no end walls). A walkway of paving between the rows.
+ plot 2, x 80..95, z 0..23 (16 x 24), up to y 32: A PERISTYLE END, where a colonnade arm stops: the same columns, entablature and
+   planter box as plot 1 at its west end (so it joins a bay), and at its east end a closing pier: a solid square pier the depth of
+   the colonnade with a niche, carrying the entablature round the corner.
+ plot 3, x 96..111, z 0..23 (16 x 24), up to y 34: AN EXHIBITION HALL BAY, the repeating unit of the long curved hall behind the
+   colonnade: a tall solid wall (about 22 blocks to the cornice, then a parapet) facing north, with a large round-arched recessed
+   entrance or a tall blind arch in the middle, a frieze band and cornice, pilasters at the bay ends; behind the wall a simple
+   pitched roof down to the back (south). It must TILE along x like plot 1.
+
+No furniture, beds, rooms or villagers: this is a monument. Light it so no mob spawns (lanterns hidden in the coffers and on the
+pier faces, glowstone in the dome's underside). Nothing may leave its plot.
