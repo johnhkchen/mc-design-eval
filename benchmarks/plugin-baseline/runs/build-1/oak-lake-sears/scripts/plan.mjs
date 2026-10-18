@@ -79,6 +79,27 @@ for (const [t, x, z] of labels) { const small = /^\d+$/.test(t); args.push("-poi
   if (!small) args.push("-stroke", "none", "-annotate", `+${Math.round(x * S - t.length * 5)}+${Math.round(z * S - 10)}`, t); }
 execFileSync("magick", [...args, `${OUT}/plan.png`]);
 
+// ---- the road layout alone: streets coloured by kind over pale ground, with names and lengths ------------------------
+{
+  const KIND = { avenue: [150, 60, 40], drive: [40, 90, 150], street: [70, 70, 70] };
+  const R = Buffer.alloc(X * S * Z * S * 3);
+  for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) {
+    const k = `${x},${z}`, st = roadAt.get(k), h = H[z][x];
+    const t = Math.max(0, Math.min(1, h / 26));
+    let c = water[z][x] ? [170, 200, 232] : st ? KIND[st.kind] : park(x, z) ? [214, 232, 200] : [238 - 30 * (1 - t), 236 - 24 * (1 - t), 226 - 20 * (1 - t)];
+    const cont = !st && !water[z][x] && x + 1 < X && z + 1 < Z && (Math.floor(h / 2) !== Math.floor(H[z][x + 1] / 2) || Math.floor(h / 2) !== Math.floor(H[z + 1][x] / 2));
+    for (let dz = 0; dz < S; dz++) for (let dx = 0; dx < S; dx++) { const cc = cont && (dx === S - 1 || dz === S - 1) ? c.map((v) => v * 0.88) : c;
+      const o = ((z * S + dz) * X * S + x * S + dx) * 3; R[o] = cc[0]; R[o + 1] = cc[1]; R[o + 2] = cc[2]; } }
+  writeFileSync(`${OUT}/roads.ppm`, Buffer.concat([Buffer.from(`P6 ${X * S} ${Z * S} 255\n`), R]));
+  const a = [`${OUT}/roads.ppm`, "-font", "/System/Library/Fonts/Supplemental/Arial.ttf", "-gravity", "NorthWest", "-pointsize", "19"];
+  const byName = {}; for (const st of streets) { const n = st.name.trim(); (byName[n] ??= []).push(st); }
+  for (const [n, sts] of Object.entries(byName)) { const P = sts.at(-1).pts, p = P[Math.floor(P.length / 2)];
+    const len = sts.reduce((t, q) => t + q.len, 0), g = Math.max(...sts.map((q) => q.maxGrade)), txt = `${n} · ${len} blocks${g > 0.01 ? ` · steepest 1 in ${Math.round(1 / g)}` : " · level"}`;
+    const x = Math.max(4, Math.min(X * S - txt.length * 10, p[0] * S + 14)), y = Math.max(4, Math.min(Z * S - 26, p[1] * S - 10));
+    a.push("-fill", "#ffffffdd", "-draw", `rectangle ${x - 4},${y - 2} ${x + txt.length * 9.6},${y + 22}`, "-fill", "#1c2420", "-annotate", `+${x}+${y}`, txt); }
+  a.push("-pointsize", "15", "-fill", "#ffffffdd", "-draw", "rectangle 6,6 290,70", "-fill", "#963c28", "-annotate", "+12+10", "avenue", "-fill", "#285a96", "-annotate", "+12+30", "drives", "-fill", "#464646", "-annotate", "+12+50", "streets", "-fill", "#1c2420", "-annotate", "+80+10", "all 5 wide", "-annotate", "+80+30", "contours every 2 blocks", "-annotate", "+80+50", "160 x 160 blocks, north up");
+  execFileSync("magick", [...a, `${OUT}/roads.png`]);
+}
 const summary = { streets: streets.map((s) => ({ name: s.name, len: s.len, maxGrade: s.maxGrade, cut: s.cut, fill: s.fill })), lots: lots.length, zones: ZONES.map((z) => z.name), lotEarth: lots.reduce((a, p) => a + p.cut + p.fill, 0), perStreet: Object.fromEntries([...new Set(lots.map((l) => l.street))].map((n) => [n, lots.filter((l) => l.street === n).length])) };
 writeFileSync(`${OUT}/plan.json`, JSON.stringify({ spec: SPEC, zones: ZONES, features: FEATURES, lakeDrive: LAKE_DRIVE, lots, summary }, null, 1) + "\n");
 console.log(JSON.stringify(summary, null, 1));
