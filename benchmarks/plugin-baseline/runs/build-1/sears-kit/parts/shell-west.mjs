@@ -101,18 +101,10 @@ export function build(g) {
       ...win(N(21), 53, 54, [G]), [58, 2, 21, 58, 3, 21],
       [51, 1, 17, 51, 3, 17],
     ] });
-  // gambrel (roofs.mjs P3_SLABS): a vertical lower slope y5..8 front and back, a shallow slab upper slope; the birch end walls
-  // rise under it, with the end-pair openings left out (y6..7)
-  const gambrelGap = [[61, 6, 17, 61, 7, 18], [51, 6, 19, 51, 7, 20]];
-  for (const x of [51, 61]) for (let z = 14; z <= 20; z++) for (let y = 5; y < P3_SLABS[z][0]; y++) if (!inBoxes(gambrelGap, x, y, z)) g.set(x, y, z, "birch_planks");
-  // the lower slope as steep spruce shingle courses (a different material from the slate upper slope, so the break reads) across the rear and the front cheeks; the long shed dormer face (birch, y5..9) between,
-  // its window pairs (x54..55, 57..58, y6..7) left open for the fittings
+  // gambrel: the roof part lays it (the toolkit's gambrel, steep lower slope from the y5 eave breaking to a shallow upper slope,
+  // its birch gable ends with the end-pair openings y6..7 kept for the fittings). The shell builds only the long shed dormer's
+  // face (birch, z13, x53..59, y5..9) with its window pairs (x54..55, 57..58, y6..7) left open for the fittings
   const dormerGlass = [[54, 6, 13, 55, 7, 13], [57, 6, 13, 58, 7, 13]];
-  for (let x = 51; x <= 61; x++) for (let y = 5; y <= 9; y++) {
-    if (x >= 53 && x <= 59) { if (!inBoxes(dormerGlass, x, y, 13)) g.set(x, y, 13, "birch_planks"); }
-    else if (y <= 8) g.set(x, y, 13, "spruce_planks");
-    if (y <= 8) g.set(x, y, 21, "spruce_planks");
-  }
-  for (const x of [53, 59]) g.set(x, 9, 14, "birch_planks");
+  for (let x = 53; x <= 59; x++) for (let y = 5; y <= 9; y++) if (!inBoxes(dormerGlass, x, y, 13)) g.set(x, y, 13, "birch_planks");
   flight(g, { from: [55, 2, 15], facing: "south", to: 5 });
 }

@@ -1,7 +1,7 @@
 // Part "roofs": the eight roofs (plan.md ROOFS). Plot 0's hip is roof.json, laid by runParts right after the shell; the
 // other seven are laid here by the roof tool, one per plot, with the chimney stacks and the other plots' wall tops kept.
 import { roof, B } from "/Volumes/ext1/swe/repos/minecraft-design/tools/src/build.mjs";
-import { P2_SLABS, P3_SLABS } from "./shell-west.mjs";
+import { P2_SLABS } from "./shell-west.mjs";
 
 // keep boxes as { from, to }: the chimney stacks (y0..20) and anything a part builds above the eave that must stay
 const stack = (x0, z0, x1, z1) => ({ from: [x0, 0, z0], to: [x1, 20, z1] });
@@ -63,26 +63,36 @@ export function build(g) {
   g.fill([35, 5, 10], [45, 5, 12], "spruce_planks");
   // exposed rafter ends: the beam row's trapdoors are the porch part's (rafterTails at z8)
 
-  // plot 3 Puritan: a gambrel, ridge along x: a vertical lower slope (shell-west: slate y5..8 front cheeks and rear) breaking to a
-  // shallow slab upper slope (P3_SLABS), the long shed dormer across the front (x53..59: its face and roof one course up)
-  for (let x = 50; x <= 62; x++) for (const [zs, [y, type]] of Object.entries(P3_SLABS)) {
-    const z = +zs;
-    if ((x === 62 && z === 17) || (x === 50 && z >= 15 && z <= 19) || (x === 51 && z >= 16 && z <= 18)) continue;
-    if (x >= 53 && x <= 59 && (z === 13 || z === 14)) { g.set(x, 10, z, "deepslate_tile_slab", { type: "bottom" }); continue; }
-    g.set(x, y, z, "deepslate_tile_slab", { type });
+  // plot 3 Puritan: the Dutch Colonial gambrel, ridge along x, laid course by course (the toolkit's gambrel starts one cell inside
+  // the wall line with no eave, leaving a gap over the wall top). Each side: a steep slate lower slope flaring out past the wall
+  // (z12/z22 block + stair, z13/z21 block + stair: two courses per cell), the knee at y9, then a shallow half-pitch upper slope of
+  // slabs to a ridge cap at z17. The upper storey lives inside it; the gable ends are birch walls under the profile.
+  const P3 = { 12: [[5, "b"], [6, "s"]], 13: [[7, "b"], [8, "s"]], 14: [[9, "bottom"]], 15: [[9, "top"]], 16: [[10, "bottom"]],
+    17: [[10, "top"], [11, "bottom"]], 18: [[10, "bottom"]], 19: [[9, "top"]], 20: [[9, "bottom"]], 21: [[7, "b"], [8, "s"]], 22: [[5, "b"], [6, "s"]] };
+  const lowY = (z) => Math.min(...P3[z].map(([y]) => y));
+  const dormerX = (x) => x >= 53 && x <= 59, chimney = (x, z) => (x === 50 && z >= 16 && z <= 18) || (x === 51 && z === 17);
+  // the upper storey's walls under the lower slope: z13 beside the dormer and z21, two courses of birch
+  for (let x = 51; x <= 61; x++) for (const y of [5, 6]) { if (!dormerX(x) && x !== 52 && x !== 60) g.set(x, y, 13, "birch_planks"); g.set(x, y, 21, "birch_planks"); }
+  // the gable ends: birch up under the profile, the end-pair openings (E z17..18, W z19..20, y6..7) left for the fittings
+  const endGap = (x, y, z) => y >= 6 && y <= 7 && ((x === 61 && (z === 17 || z === 18)) || (x === 51 && (z === 19 || z === 20)));
+  for (const x of [51, 61]) for (let z = 13; z <= 21; z++) for (let y = 5; y < lowY(z) + (P3[z][0][1] === "top" ? 1 : 0); y++) if (!endGap(x, y, z) && !chimney(x, z)) g.set(x, y, z, "birch_planks");
+  for (let x = 50; x <= 62; x++) for (const [zs, courses] of Object.entries(P3)) {
+    const z = +zs, front = z <= 17 && z !== 17 ? true : z < 17;
+    if (chimney(x, z)) continue;
+    // the shed dormer (x53..59) takes the front lower slope and the first rows of the upper slope; its roof carries on at y10
+    if (dormerX(x) && z >= 12 && z <= 15) continue;
+    for (const [y, t] of courses) {
+      if ((x === 51 || x === 61) && t === "top") continue;                                   // the gable wall fills that cell
+      if (t === "b") g.set(x, y, z, "deepslate_tiles");
+      else if (t === "s") g.set(x, y, z, ...B.stairs("deepslate_tile", z < 17 ? "south" : "north"));
+      else g.set(x, y, z, "deepslate_tile_slab", { type: t });
+    }
   }
-  // the slab edge of the lower slope: a drip course of upside-down slate stairs along the front cheeks' foot and the rear
-  // the lower slope (spruce shingle, shell-west) leans out one cell at its foot: a block at y5 and a steep stair at y6 (the wall
-  // above stays vertical), so the front cheeks and the rear show the steep lower slope, then the break at y9 into the shallow
-  // slate upper slope
-  for (let x = 51; x <= 61; x++) if (x < 53 || x > 59) {
-    g.set(x, 5, 12, "spruce_planks");
-    g.set(x, 6, 12, ...B.stairs("spruce", "south"));
-  }
-  for (let x = 51; x <= 61; x++) {
-    g.set(x, 5, 22, "spruce_planks");
-    g.set(x, 6, 22, ...B.stairs("spruce", "north"));
-  }
+  // the long shed dormer across the front (the catalog Puritan's signature): the shell's birch face (z13, x53..59) with birch
+  // corners x52 and x60, cheeks back to the upper slope, and a slate slab roof at y10 from the front overhang (z12) to z15, where
+  // it runs into the upper slope (z16, y10). Inside it is left to the upper rooms.
+  for (const x of [52, 60]) { for (let y = 5; y <= 9; y++) g.set(x, y, 13, "birch_planks"); g.set(x, 9, 14, "birch_planks"); g.set(x, 9, 15, "birch_planks"); }
+  for (let x = 52; x <= 60; x++) for (let z = 12; z <= 15; z++) g.set(x, 10, z, "deepslate_tile_slab", { type: "bottom" });
 
   // plot 4 Cornell: low hip, wide eaves, hipped dormer on the front, and the hip porch roof over the full-width porch
   // plain eave and soffit, no fascia (plan ROOFS); the wide eave's end would otherwise float past the plot
@@ -96,28 +106,17 @@ export function build(g) {
   for (let x = 66; x <= 78; x++) for (let z = 8; z <= 12; z++) if (z !== 9 || x < 67 || x > 77) g.set(x, 5, z, "deepslate_tile_slab", { type: "bottom" });
 
   // plot 5 Stanford: steep side gable with two gabled dormers on the front
-  roof(g, [83, 14, 93, 21], "cottage", { texture: false, fascia: "spruce", soffit: "spruce",
-    y: 7, ridgeAxis: "x", pitch: 45, material: "deepslate_tiles", verge: "smooth_quartz", overhang: 1,
-    // no dormers option: its quartz-edged dormers read as loose white stair pieces; the two dormers are built by hand below.
+  roof(g, [83, 14, 93, 21], "cottage", { texture: false, fascia: "spruce", soffit: "spruce", edges: { barge: false }, gable: "calcite",
+    // steep, as a Cape Cod is (at 45 degrees the roof doesn't rise over a dormer within 4 rows and the toolkit drops them)
+    y: 7, ridgeAxis: "x", pitch: "steep", material: "deepslate_tiles", verge: "spruce", overhang: 1,
+    // the toolkit's two gabled dormers on the front, framed in the spruce verge round a calcite face (the white quartz verge made
+    // them read as loose white stair pieces)
+    dormers: { face: "north", count: 2, style: "gable", wall: "calcite" },
     // chimneys: [] drops the cottage preset's own cobblestone stub (x92 z18), a stray pillar through the roof and the attic
     chimneys: [],
-    // the side gable walls (shell) already stand at x 83 and 93 up the rake: the roof leaves those cells to them
-    keep: [stack(87, 17, 89, 19), { from: [83, 6, 14], to: [83, 9, 21] }, { from: [93, 6, 14], to: [93, 9, 21] }],
+    // the roof fills the steeper gable triangles above the shell's (calcite); the gable window pairs (z17..18, y7..8) stay open
+    keep: [stack(87, 17, 89, 19), { from: [83, 7, 17], to: [83, 8, 18] }, { from: [93, 7, 17], to: [93, 8, 18] }],
   });
-
-  // plot 5 Stanford: two neat gabled dormers (x85..87, x89..91), their front wall flush with the house wall (z14) through the eave:
-  // two short walls (calcite, as the house), a 1x2 double-hung window x86 / x90 (y8..9), and a small gable roof of the main
-  // roof's own slate: stairs on each side with a slate ridge course, the gable front calcite. Nothing white on the roof but the wall.
-  for (const cx of [86, 90]) {
-    for (const x of [cx - 1, cx + 1]) for (const z of [14, 15, 16]) for (const y of [8, 9]) g.set(x, y, z, "calcite");
-    for (const y of [8, 9]) g.set(cx, y, 14, "glass_pane", { east: "true", west: "true" });
-    for (const z of [15, 16]) for (const y of [8, 9]) g.set(cx, y, z, "air");
-    for (const z of [14, 15, 16]) {
-      g.set(cx - 1, 10, z, ...B.stairs("deepslate_tile", "east"));
-      g.set(cx + 1, 10, z, ...B.stairs("deepslate_tile", "west"));
-      g.set(cx, 10, z, z === 14 ? "calcite" : "deepslate_tiles");
-    }
-  }
 
   // plot 6 Winona: front gable, ridge along z at x 104 (gable end to the street)
   roof(g, [100, 13, 108, 22], "gable", { texture: false, fascia: "spruce", soffit: "spruce",

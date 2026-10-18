@@ -26,7 +26,7 @@ const CHIMNEYS = [
   { wall: [35, 1, 17], into: "east", top: 11 },
   { wall: [51, 1, 17], into: "east", top: 14 },
   { wall: [77, 1, 17], into: "west", top: 16 },
-  { at: [88, 1, 18], open: "south", top: 13 },
+  { at: [88, 1, 18], open: "south", top: 17 },   // clear of the steep Cape Cod ridge (y15)
   { wall: [100, 1, 18], into: "east", top: 7 },
   { wall: [125, 1, 17], into: "west", top: 15 },
 ];

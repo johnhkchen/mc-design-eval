@@ -37,7 +37,7 @@ const KITS = [{
   // colour variants of the mail-order houses (mcd reskin of the base module; a fix goes to the base, then re-skins)
   series: "Mail-order houses", dir: `${RUNS}/oak-lake-sears/delivery/houses`, run: `${RUNS}/sears-kit`, project: "oak-lake",
   approved: "Placed in the Oak Lake showcase town", style: "After the Sears Modern Homes catalog, 1908–1940", modules: {
-    "sears-01-alhambra-b": { name: "Alhambra, yellow stucco", type: "house", variantOf: "sears-01-alhambra", swap: "white=yellow" },
+    "sears-01-alhambra-b": { name: "Alhambra, cream stucco", type: "house", variantOf: "sears-01-alhambra", swap: "white_terracotta=smooth_sandstone" },
     "sears-02-vallonia-b": { name: "Vallonia, grey with dark trim", type: "house", variantOf: "sears-02-vallonia", swap: "lime=light_gray,spruce=dark_oak" },
     "sears-03-puritan-b": { name: "Puritan, dark shingle", type: "house", variantOf: "sears-03-puritan", swap: "birch=spruce" },
     "sears-04-cornell-b": { name: "Cornell, grey with a red roof", type: "house", variantOf: "sears-04-cornell", swap: "cyan=light_gray,deepslate_tiles=bricks" },

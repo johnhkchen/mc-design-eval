@@ -563,7 +563,7 @@
     ],
     "height": 16,
     "front": "north",
-    "blocks": 1098,
+    "blocks": 1121,
     "materials": [
       {
         "block": "grass_block",
@@ -571,11 +571,11 @@
       },
       {
         "block": "birch_planks",
-        "n": 151
+        "n": 183
       },
       {
         "block": "deepslate_tile_slab",
-        "n": 123
+        "n": 126
       },
       {
         "block": "oak_planks",
@@ -586,8 +586,8 @@
         "n": 99
       },
       {
-        "block": "spruce_planks",
-        "n": 75
+        "block": "bricks",
+        "n": 57
       }
     ],
     "image": "/img/catalog/sears-03-puritan.jpg",
@@ -661,9 +661,9 @@
       16,
       20
     ],
-    "height": 15,
+    "height": 19,
     "front": "north",
-    "blocks": 1055,
+    "blocks": 1145,
     "materials": [
       {
         "block": "grass_block",
@@ -671,7 +671,7 @@
       },
       {
         "block": "calcite",
-        "n": 130
+        "n": 178
       },
       {
         "block": "oak_planks",
@@ -679,15 +679,15 @@
       },
       {
         "block": "bricks",
-        "n": 72
+        "n": 88
       },
       {
         "block": "deepslate_tile_stairs",
-        "n": 71
+        "n": 88
       },
       {
         "block": "smooth_quartz",
-        "n": 68
+        "n": 51
       }
     ],
     "image": "/img/catalog/sears-05-stanford.jpg",
@@ -801,10 +801,10 @@
   },
   {
     "id": "sears-01-alhambra-b",
-    "name": "Alhambra, yellow stucco",
+    "name": "Alhambra, cream stucco",
     "type": "house",
     "variantOf": "sears-01-alhambra",
-    "swap": "white=yellow",
+    "swap": "white_terracotta=smooth_sandstone",
     "series": "Mail-order houses",
     "style": "After the Sears Modern Homes catalog, 1908–1940",
     "project": "oak-lake",
@@ -818,7 +818,7 @@
     "blocks": 1209,
     "materials": [
       {
-        "block": "yellow_terracotta",
+        "block": "smooth_sandstone",
         "n": 260
       },
       {
@@ -919,19 +919,19 @@
     ],
     "height": 16,
     "front": "north",
-    "blocks": 1098,
+    "blocks": 1121,
     "materials": [
-      {
-        "block": "spruce_planks",
-        "n": 226
-      },
       {
         "block": "grass_block",
         "n": 211
       },
       {
+        "block": "spruce_planks",
+        "n": 183
+      },
+      {
         "block": "deepslate_tile_slab",
-        "n": 123
+        "n": 126
       },
       {
         "block": "oak_planks",
@@ -943,7 +943,7 @@
       },
       {
         "block": "bricks",
-        "n": 51
+        "n": 57
       }
     ],
     "image": "/img/catalog/sears-03-puritan-b.jpg",
@@ -1021,9 +1021,9 @@
       16,
       20
     ],
-    "height": 15,
+    "height": 19,
     "front": "north",
-    "blocks": 1055,
+    "blocks": 1145,
     "materials": [
       {
         "block": "grass_block",
@@ -1031,23 +1031,23 @@
       },
       {
         "block": "calcite",
-        "n": 130
+        "n": 178
+      },
+      {
+        "block": "bricks",
+        "n": 125
       },
       {
         "block": "oak_planks",
         "n": 101
       },
       {
-        "block": "bricks",
-        "n": 76
-      },
-      {
         "block": "brick_stairs",
-        "n": 71
+        "n": 88
       },
       {
         "block": "smooth_quartz",
-        "n": 68
+        "n": 51
       }
     ],
     "image": "/img/catalog/sears-05-stanford-b.jpg",

@@ -11,7 +11,7 @@ const MCD = "/Volumes/ext1/swe/repos/minecraft-design/tools/bin/mcd.mjs";
 const BASE = ["magnolia", "alhambra", "vallonia", "puritan", "cornell", "stanford", "winona", "craftsman"];
 // one variant per house but the Magnolia (it stays the white one, and appears once); colour swaps of the same era
 const VARIANT = {
-  alhambra: "white=yellow",                      // cream-yellow stucco
+  alhambra: "white_terracotta=smooth_sandstone", // cream stucco (yellow terracotta read garish)
   vallonia: "lime=light_gray,spruce=dark_oak",   // grey siding, dark trim
   puritan: "birch=spruce",                       // darker shingle walls
   cornell: "cyan=light_gray,deepslate_tiles=bricks", // grey siding, red tile roof

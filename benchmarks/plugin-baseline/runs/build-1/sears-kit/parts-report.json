@@ -1,7 +1,7 @@
 [
  {
   "part": "shell west (plots 0-3)",
-  "placed": 1914,
+  "placed": 1792,
   "refused": 0,
   "refusedAt": [],
   "offPalette": []
@@ -23,8 +23,8 @@
  },
  {
   "part": "roofs",
-  "placed": 1640,
-  "refused": 1,
+  "placed": 1847,
+  "refused": 13,
   "refusedAt": [
    [
     41,
@@ -32,13 +32,62 @@
     18,
     "deepslate_tile_slab",
     "spruce_planks"
+   ],
+   [
+    83,
+    7,
+    15,
+    "calcite",
+    "calcite"
+   ],
+   [
+    83,
+    7,
+    16,
+    "calcite",
+    "calcite"
+   ],
+   [
+    83,
+    8,
+    16,
+    "calcite",
+    "calcite"
+   ],
+   [
+    83,
+    7,
+    19,
+    "calcite",
+    "calcite"
+   ],
+   [
+    83,
+    8,
+    19,
+    "calcite",
+    "calcite"
+   ],
+   [
+    83,
+    7,
+    20,
+    "calcite",
+    "calcite"
+   ],
+   [
+    93,
+    7,
+    15,
+    "calcite",
+    "calcite"
    ]
   ],
   "offPalette": []
  },
  {
   "part": "porches and facade ornament",
-  "placed": 633,
+  "placed": 637,
   "refused": 0,
   "refusedAt": [],
   "offPalette": []
@@ -52,7 +101,7 @@
  },
  {
   "part": "chimneys, walks and grounds",
-  "placed": 982,
+  "placed": 1008,
   "refused": 0,
   "refusedAt": [],
   "offPalette": []
