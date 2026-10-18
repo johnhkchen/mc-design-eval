@@ -1,4 +1,5 @@
-// Shaders for the deepslate views: sunlight with cast shadows, a sky-tinted ambient, and distance haze into the sky
+// Shaders for the deepslate views: a sky (a gradient that warms toward sunrise and sunset, the sun's disc and glow, soft
+// clouds lit from the sun's side), sunlight with cast shadows, a sky-tinted ambient, and distance haze into the horizon's
 // colour, in place of deepslate's flat face shading. deepslate draws every chunk mesh with drawMesh() through whichever
 // program is active, so a sun's-eye depth pass (a shadow map, kept until the sun or the structure changes) and the lit
 // main pass both reuse its meshes. Needs WEBGL_depth_texture (all current browsers); without it the view stays plain.
@@ -63,6 +64,33 @@ const DEPTH_FS = `
   uniform sampler2D sampler;
   void main(void) { if (texture2D(sampler, clamp(vTexCoord, vTexLimit.xy, vTexLimit.zw)).a < 0.5) discard; gl_FragColor = vec4(1.0); }`;
 
+const SKY_VS = `
+  attribute vec2 p; varying vec2 vp;
+  void main(void) { vp = p; gl_Position = vec4(p, 0.9999, 1.0); }`;
+const SKY_FS = `
+  precision highp float;
+  varying vec2 vp;
+  uniform mat4 invVP; uniform vec3 camPos; uniform vec3 sunDir; uniform vec3 sunColor; uniform vec3 zenith; uniform vec3 horizon;
+  float hash(vec2 q) { return fract(sin(dot(q, vec2(127.1, 311.7))) * 43758.5453); }
+  float noise(vec2 q) { vec2 i = floor(q), f = fract(q), w = f * f * (3.0 - 2.0 * f);
+    return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), w.x), mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), w.x), w.y); }
+  float fbm(vec2 q) { float v = 0.0, a = 0.5; for (int i = 0; i < 5; i++) { v += a * noise(q); q *= 2.03; a *= 0.5; } return v; }
+  void main(void) {
+    vec4 w = invVP * vec4(vp, 1.0, 1.0);
+    vec3 d = normalize(w.xyz / w.w - camPos);
+    vec3 c = d.y >= 0.0 ? mix(horizon, zenith, pow(d.y, 0.55)) : horizon * (1.0 - min(0.15, -d.y));
+    float s = max(dot(d, sunDir), 0.0);
+    c += sunColor * (pow(s, 6.0) * 0.22 + pow(s, 64.0) * 0.45);                       // the glow round the sun
+    c += vec3(1.0, 0.96, 0.88) * smoothstep(0.99935, 0.9997, s) * 1.6;                 // its disc
+    if (d.y > 0.01) {                                                                   // clouds on a plane overhead
+      vec2 uv = d.xz / d.y * 0.55;
+      float cl = smoothstep(0.52, 0.8, fbm(uv * 1.7 + vec2(3.1, 1.7)));
+      vec3 lit = mix(horizon, vec3(1.0), 0.65) + sunColor * 0.35 * pow(s, 3.0);
+      c = mix(c, lit, cl * smoothstep(0.01, 0.22, d.y) * 0.9);
+    }
+    gl_FragColor = vec4(c, 1.0);
+  }`;
+
 function program(gl, vs, fs, attrs) {
   const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
     if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; };
@@ -82,7 +110,9 @@ function sunAt(t) {
   const warm = 1 - Math.min(1, el / 0.9);
   const sun = [1.0, 0.93 - 0.18 * warm, 0.82 - 0.35 * warm].map((v) => v * (0.8 + 0.2 * (1 - warm)));
   const sky = [0.56 + 0.1 * warm, 0.62 + 0.02 * warm, 0.74 - 0.08 * warm];
-  return { dir, sun, sky };
+  // the sky's own colours: a clear blue at noon, a warm horizon under a deeper zenith when the sun is low
+  const k = warm ** 1.5, mix = (a, b) => a.map((v, i) => v + (b[i] - v) * k);
+  return { dir, sun, sky, zenith: mix([0.3, 0.5, 0.85], [0.27, 0.35, 0.62]), horizon: mix([0.76, 0.85, 0.96], [0.98, 0.7, 0.46]) };
 }
 
 export function shading(gl, renderer, size) {
@@ -90,6 +120,8 @@ export function shading(gl, renderer, size) {
   if (!ext) return null;
   const main = program(gl, MAIN_VS, MAIN_FS, ["vertPos", "texCoord", "texLimit", "vertColor", "normal"]);
   const depth = program(gl, DEPTH_VS, DEPTH_FS, ["vertPos", "texCoord", "texLimit"]);
+  const skyProg = program(gl, SKY_VS, SKY_FS, ["p"]), quad = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, quad); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);   // one triangle over the screen
   // a town wants a fine shadow map; a phone (or a small build) gets 2048, a quarter of the memory
   const small = typeof matchMedia === "function" && (matchMedia("(pointer: coarse)").matches || innerWidth < 900);
   const N = Math.min(gl.getParameter(gl.MAX_TEXTURE_SIZE), Math.max(...size) > 64 && !small ? 4096 : 2048);
@@ -140,9 +172,20 @@ export function shading(gl, renderer, size) {
   return {
     setSun(t) { sun = sunAt(t); fresh = false; },
     invalidate() { fresh = false; },
-    draw(view, { fog = [0.86, 0.9, 0.97], dist = 300, shaded = true } = {}) {
+    draw(view, { fog, dist = 300, shaded = true } = {}) {
       if (shaded && !fresh) shadowPass();
       clearAttribs();
+      fog = fog ?? (shaded ? sun.horizon : [0.86, 0.9, 0.97]);
+      if (shaded) {                                                         // the sky first, behind everything
+        const vp = mat4.multiply(mat4.create(), renderer.projMatrix, view), inv = mat4.invert(mat4.create(), vp), iv = mat4.invert(mat4.create(), view);
+        gl.useProgram(skyProg); gl.disable(gl.DEPTH_TEST); gl.depthMask(false);
+        gl.uniformMatrix4fv(u(skyProg, "invVP"), false, inv); gl.uniform3fv(u(skyProg, "camPos"), [iv[12], iv[13], iv[14]]);
+        gl.uniform3fv(u(skyProg, "sunDir"), sun.dir); gl.uniform3fv(u(skyProg, "sunColor"), sun.sun);
+        gl.uniform3fv(u(skyProg, "zenith"), sun.zenith); gl.uniform3fv(u(skyProg, "horizon"), sun.horizon);
+        gl.bindBuffer(gl.ARRAY_BUFFER, quad); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0); gl.enableVertexAttribArray(0);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+        gl.disableVertexAttribArray(0); gl.enable(gl.DEPTH_TEST); gl.depthMask(true);
+      }
       renderer.setShader(main);
       gl.uniformMatrix4fv(u(main, "mSun"), false, mSun);
       gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, depthTex); gl.uniform1i(u(main, "shadowMap"), 1);

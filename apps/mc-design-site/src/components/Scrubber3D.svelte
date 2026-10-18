@@ -35,6 +35,8 @@
         views = [createView(cBefore, toStructure(a.blocks, size), res), createView(cAfter, toStructure(b.blocks, size), res)];
         attachOrbit(wrap, cam, redraw);
         canShade = views.every((v) => v.canShade); applyShade();
+        // for staged screenshots (scripts set the camera and the sun, then redraw)
+        globalThis.__mcdView = { cam, redraw, sun: (t) => { sun = t; applyShade(); } };
         document.addEventListener("fullscreenchange", () => { full = document.fullscreenElement === fig; redraw(); });
         status = "ready";
         const loop = () => { if (!alive) return; if (dirty) { dirty = false; for (const v of views) v.draw(cam); } frame = requestAnimationFrame(loop); };

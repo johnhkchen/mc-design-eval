@@ -62,6 +62,16 @@ footprint: a circle fit, an inverse map so the band has no holes, facings turned
 (`swap: [{ from, to, minY?, maxY? }]`) so the design run's files stay as they are; `node bin/irl.mjs modules <place> <dir>`
 writes the modules with their swaps applied, for the catalog.
 
+## Photographs (Chunky)
+
+`node bin/irl.mjs world <place>` writes the place (composed, if it has a compose file) as a Minecraft Java world
+(`src/anvil.mjs`: region files, 1.18+ chunk sections, a minimal level.dat) in `out/<place>/world/`: a single-player
+save, and what Chunky reads. `node bin/chunky-shot.mjs <place> <name> --eye x,y,z --look x,y,z --sun alt,az` writes a
+scene and renders it headless with [Chunky](https://github.com/chunky-dev/chunky) (GPL-3.0, installed separately: its
+launcher jar in ~/.local/share/chunky-tool, the 1.21.1 textures via `-download-mc 1.21.1`, the 2.5 snapshot core via
+`--updateAlpha`), path traced with the Nishita sky, to `out/<place>/shots/<name>.png`. Full quality is 3200x2000 at
+1000 samples per pixel (about 15 minutes on this machine); below a few hundred samples the image is noisy.
+
 ## Adding a place
 
 `node bin/irl.mjs landmark <no> sf/<site>` frames a place on one of San Francisco's Article 10 landmarks (its boundary,

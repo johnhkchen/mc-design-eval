@@ -6,6 +6,8 @@
 //   node bin/irl.mjs build <place>        compose out/<place>/{land.nbt, manifest.json, SOURCES.md} from the cache
 //   node bin/irl.mjs all <place>          fetch, then build
 //   node bin/irl.mjs landmark <no> <place> [--half m] [--scale s]   a place file framed on an SF Article 10 landmark
+//   node bin/irl.mjs world <place>        build (and compose, if the place has a compose file) into a Minecraft Java world:
+//                                         out/<place>/world/ (for Chunky, or a single-player save)
 //   node bin/irl.mjs modules <place> <dir>    each module of the place's compose file as its own .nbt, its swaps applied
 //                                         (for the catalog: names from "catalog": { module: id } in the compose file)
 //   node bin/irl.mjs compose <place>      build, then put the designed modules in (places/<place>.compose.json):
@@ -18,6 +20,7 @@ import { SOURCES, LAYERS, plan } from "../src/sources/index.mjs";
 import { buildPlace } from "../src/build.mjs";
 import { compose } from "../src/place.mjs";
 import { landmark } from "../src/sources/datasf.mjs";
+import { writeWorld } from "../src/anvil.mjs";
 import { load as loadStructure } from "/Volumes/ext1/swe/repos/minecraft-design/tools/src/structure.mjs";   // reads the design pipeline's modules
 
 const HERE = resolve(import.meta.dirname, ".."), [cmd, name] = process.argv.slice(2);
@@ -39,10 +42,10 @@ async function fetchPlace(n) {
   }
 }
 
-function buildFrom(n, { composeWith } = {}) {
+function buildFrom(n, { composeWith, world } = {}) {
   const place = load(n), frame = frameFor(place), p = plan(place), L = {};
   for (const layer of LAYERS) { const s = p[layer]; if (!s) continue;
-    const f = cache(n, `${s.id}.json`); if (!existsSync(f)) throw new Error(`no cache for ${s.id}: run fetch first`);
+    const f = cache(n, `${s.id}.json`); if (!existsSync(f)) { console.warn(`(no cache for ${s.id}: the ${layer} layer is left out; fetch to add it)`); continue; }
     const d = JSON.parse(readFileSync(f, "utf8")).layers[layer]; if (!d) continue;
     // a raster is sampled on the place's grid, so it's only good for the frame it was fetched at (scale, size)
     if ((d.kind === "raster" || d.kind === "rasters") && d.n !== frame.N) throw new Error(`${s.id} ${layer} was fetched for a ${d.n}x${d.n} grid, the place is now ${frame.N}x${frame.N} (scale or size changed): run fetch again`);
@@ -54,7 +57,9 @@ function buildFrom(n, { composeWith } = {}) {
     const spec = JSON.parse(readFileSync(`${HERE}/places/${n}.compose.json`, "utf8")), files = new Map();
     const mod = (name) => { const m = spec.modules[name]; if (!files.has(m.file)) files.set(m.file, loadStructure(resolve(HERE, m.file))); return { module: files.get(m.file), plot: m.plot, swap: m.swap }; };
     const notes = compose(grid, manifest, spec.placements.map((p) => ({ ...p, ...mod(p.module), ...(p.end ? { end: mod(p.end) } : {}) })), { ground, I: (x, z) => z * frame.N + x });
-    mkdirSync(out, { recursive: true }); grid.save(`${out}/composed.nbt`); console.log(notes.join("\n")); console.log(`${n}: composed -> out/${n}/composed.nbt`); return;
+    mkdirSync(out, { recursive: true }); grid.save(`${out}/composed.nbt`); console.log(notes.join("\n")); console.log(`${n}: composed -> out/${n}/composed.nbt`);
+    if (world) { const r = writeWorld(`${out}/world`, grid, { name: place.name }); console.log(`${n}: world -> out/${n}/world (${r.chunks} chunks, ${r.regions} regions)`); }
+    return;
   }
   mkdirSync(out, { recursive: true });
   const used = [...new Set(Object.entries(p).filter(([l, s]) => s && L[l]).map(([, s]) => s))];
@@ -74,6 +79,7 @@ if (cmd === "sources") {
 else if (cmd === "build") buildFrom(name);
 else if (cmd === "all") { await fetchPlace(name); buildFrom(name); }
 else if (cmd === "compose") buildFrom(name, { composeWith: true });
+else if (cmd === "world") buildFrom(name, { composeWith: existsSync(`${HERE}/places/${name}.compose.json`), world: true });
 else if (cmd === "modules") {
   const spec = JSON.parse(readFileSync(`${HERE}/places/${name}.compose.json`, "utf8")), dir = resolve(process.argv[4]); mkdirSync(dir, { recursive: true });
   const { Voxels } = await import("../src/voxels.mjs");
