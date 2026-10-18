@@ -2,7 +2,8 @@
 // irl-copy: a real place, from open data, as Minecraft land with building masses: the input the design pipeline takes
 // in place of a player's land export.
 //   node bin/irl.mjs sources [place]      the sources, and which supplies each layer for a place
-//   node bin/irl.mjs fetch <place>        download every planned source into .cache/<place>/ (once per source)
+//   node bin/irl.mjs fetch <place>        download every planned source into .cache/<place>/ (once per source); with
+//                                         "align": "auto" it first turns the place to its landmark or street grid
 //   node bin/irl.mjs build <place>        compose out/<place>/{land.nbt, manifest.json, SOURCES.md} from the cache
 //   node bin/irl.mjs all <place>          fetch, then build
 //   node bin/irl.mjs landmark <no> <place> [--city san-francisco|seattle] [--half m] [--scale s]   a place file framed on a city landmark
@@ -22,13 +23,28 @@ import { compose } from "../src/place.mjs";
 import { landmark as sfLandmark } from "../src/sources/datasf.mjs";
 import { landmark as seaLandmark } from "../src/sources/seattle.mjs";
 import { writeWorld } from "../src/anvil.mjs";
+import { alignment } from "../src/align.mjs";
 import { load as loadStructure } from "/Volumes/ext1/swe/repos/minecraft-design/tools/src/structure.mjs";   // reads the design pipeline's modules
 
 const HERE = resolve(import.meta.dirname, ".."), [cmd, name] = process.argv.slice(2);
 const load = (n) => ({ id: n, ...JSON.parse(readFileSync(`${HERE}/places/${n}.json`, "utf8")) });
 const cache = (n, s) => `${HERE}/.cache/${n}/${s}`;
 
+// place.align "auto": before anything is sampled on the grid, turn the place so its landmark's footprint (or, failing a
+// rectangular one, its streets) runs along the axes; the angle is written into the place file (rotate, and what it came
+// from), once: delete rotate to measure again. The footprints and streets are fetched over a box that holds any turn.
+async function resolveAlign(n) {
+  const place = load(n); if (place.align !== "auto" || typeof place.rotate === "number") return;
+  const wide = frameFor({ ...place, rotate: 45 }), flat = frameFor({ ...place, rotate: 0 }), p = plan(place), got = {};
+  for (const layer of ["buildings", "streets"]) { const s = p[layer]; if (s) got[layer] = (await s.fetch(place, wide))[layer]?.features ?? []; }
+  const a = alignment(place, { buildings: got.buildings, streets: got.streets, toBlock: flat.toBlock });
+  const { id, ...file } = place; file.rotate = a.rotate; file.rotateFrom = { from: a.from, ...a.detail };
+  writeFileSync(`${HERE}/places/${n}.json`, JSON.stringify(file, null, 1) + "\n");
+  console.log(`${n}: turned ${a.rotate} degrees (from the ${a.from}${a.detail[a.from] ? `: ${JSON.stringify(a.detail[a.from])}` : ""})`);
+}
+
 async function fetchPlace(n) {
+  await resolveAlign(n);
   const place = load(n), frame = frameFor(place), chosen = [...new Set(Object.values(plan(place)).filter(Boolean))];
   mkdirSync(`${HERE}/.cache/${n}`, { recursive: true });
   for (const s of chosen) {
@@ -102,7 +118,7 @@ else if (cmd === "landmark") {
   const lons = pts.map((p) => p[0]), lats = pts.map((p) => p[1]), lat = (Math.min(...lats) + Math.max(...lats)) / 2, lon = (Math.min(...lons) + Math.max(...lons)) / 2;
   const reach = Math.max((Math.max(...lats) - Math.min(...lats)) * 111000, (Math.max(...lons) - Math.min(...lons)) * 111000 * Math.cos((lat * Math.PI) / 180)) / 2;
   const place = { name: lm.name, note: `${city === "seattle" ? "Seattle" : "San Francisco"} landmark No. ${lm.number}, ${lm.address} (designated ${lm.year}).`, city, country: "US", scale: arg("--scale", 1.4),
-    centre: [+lat.toFixed(6), +lon.toFixed(6)], half: arg("--half", Math.round(reach + 40)), landmark: { number: lm.number, photo: lm.photo, document: lm.document } };
+    centre: [+lat.toFixed(6), +lon.toFixed(6)], half: arg("--half", Math.round(reach + 40)), align: "auto", landmark: { number: lm.number, photo: lm.photo, document: lm.document } };
   mkdirSync(dirname(`${HERE}/places/${target}.json`), { recursive: true });
   writeFileSync(`${HERE}/places/${target}.json`, JSON.stringify(place, null, 1) + "\n"); console.log(JSON.stringify(place));
 }

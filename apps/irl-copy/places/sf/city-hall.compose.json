@@ -1,5 +1,5 @@
 {
- "note": "The City Hall kit (lab run city-hall-kit, v1: dome, east portico, wing bay, corner pavilion on plots along x) set on City Hall's footprint (146 x 193 blocks at 1.4): porticoes centred on the east and west fronts, wing bays filling every front, corner pavilions turned so their decorated faces look out, the dome on its pavilion at the centre. The roofs and light courts between stay as the lidar massing.",
+ "note": "The place is turned to City Hall's footprint (9.25 degrees: the Civic Center grid), and the layout centred on the squared footprint (137 x 179). The City Hall kit (lab run city-hall-kit, v1: dome, east portico, wing bay, corner pavilion on plots along x) set on City Hall's footprint (146 x 193 blocks at 1.4): porticoes centred on the east and west fronts, wing bays filling every front, corner pavilions turned so their decorated faces look out, the dome on its pavilion at the centre. The roofs and light courts between stay as the lidar massing.",
  "modules": {
   "dome": {
    "file": "../../benchmarks/plugin-baseline/runs/build-1/city-hall-kit/v1.nbt",
@@ -67,8 +67,8 @@
    "module": "dome",
    "mode": "at",
    "at": [
-    41,
-    64
+    37,
+    57
    ],
    "quarter": 0
   },
@@ -77,8 +77,8 @@
    "module": "portico",
    "mode": "at",
    "at": [
-    122,
-    64
+    118,
+    57
    ],
    "quarter": 1
   },
@@ -87,8 +87,8 @@
    "module": "portico",
    "mode": "at",
    "at": [
-    0,
-    64
+    -4,
+    57
    ],
    "quarter": 3
   },
@@ -97,8 +97,8 @@
    "module": "bay",
    "mode": "at",
    "at": [
-    122,
-    32
+    118,
+    25
    ],
    "quarter": 1,
    "repeat": {
@@ -114,8 +114,8 @@
    "module": "bay",
    "mode": "at",
    "at": [
-    122,
-    128
+    118,
+    121
    ],
    "quarter": 1,
    "repeat": {
@@ -131,8 +131,8 @@
    "module": "bay",
    "mode": "at",
    "at": [
-    0,
-    32
+    -4,
+    25
    ],
    "quarter": 3,
    "repeat": {
@@ -148,8 +148,8 @@
    "module": "bay",
    "mode": "at",
    "at": [
-    0,
-    128
+    -4,
+    121
    ],
    "quarter": 3,
    "repeat": {
@@ -165,8 +165,8 @@
    "module": "bay",
    "mode": "at",
    "at": [
-    32,
-    0
+    28,
+    -7
    ],
    "quarter": 0,
    "repeat": {
@@ -182,8 +182,8 @@
    "module": "bay",
    "mode": "at",
    "at": [
-    32,
-    169
+    28,
+    162
    ],
    "quarter": 2,
    "repeat": {
@@ -199,8 +199,8 @@
    "module": "corner",
    "mode": "at",
    "at": [
-    114,
-    0
+    110,
+    -7
    ],
    "quarter": 0
   },
@@ -209,8 +209,8 @@
    "module": "corner",
    "mode": "at",
    "at": [
-    114,
-    161
+    110,
+    154
    ],
    "quarter": 1
   },
@@ -219,8 +219,8 @@
    "module": "corner",
    "mode": "at",
    "at": [
-    0,
-    161
+    -4,
+    154
    ],
    "quarter": 2
   },
@@ -229,8 +229,8 @@
    "module": "corner",
    "mode": "at",
    "at": [
-    0,
-    0
+    -4,
+    -7
    ],
    "quarter": 3
   }

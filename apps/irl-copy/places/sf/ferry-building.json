@@ -9,10 +9,18 @@
   -122.393485
  ],
  "half": 140,
- "rotate": 36,
+ "align": "auto",
  "landmark": {
   "number": 90,
   "photo": "https://sfplanninggis.org/Preservation/Landmarks/Large/90.jpg",
   "document": "https://sfplanninggis.org/docs/landmarks_and_districts/LM90.pdf"
+ },
+ "rotate": 36,
+ "rotateFrom": {
+  "from": "footprint",
+  "footprint": {
+   "angle": -36,
+   "fill": 0.87
+  }
  }
 }

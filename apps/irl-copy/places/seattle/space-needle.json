@@ -9,9 +9,22 @@
   -122.34925
  ],
  "half": 120,
+ "align": "auto",
  "landmark": {
   "number": 211,
   "photo": "SpaceNeedle10DON.jpg",
   "document": "space-needle-designation.pdf"
+ },
+ "rotate": -0.49,
+ "rotateFrom": {
+  "from": "grid",
+  "footprint": {
+   "angle": -34.75,
+   "fill": 0.28
+  },
+  "grid": {
+   "angle": 0.49,
+   "share": 0.76
+  }
  }
 }
