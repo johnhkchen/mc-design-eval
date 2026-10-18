@@ -1,0 +1,803 @@
+{
+ "spec": [
+  {
+   "name": "West Avenue",
+   "kind": "avenue",
+   "points": [
+    [
+     22,
+     0
+    ],
+    [
+     22,
+     159
+    ]
+   ]
+  },
+  {
+   "name": "Lake Drive",
+   "kind": "drive",
+   "points": [
+    [
+     48,
+     46
+    ],
+    [
+     70,
+     40
+    ],
+    [
+     100,
+     38
+    ],
+    [
+     122,
+     50
+    ],
+    [
+     126,
+     80
+    ],
+    [
+     122,
+     108
+    ]
+   ]
+  },
+  {
+   "name": "Lake Drive ",
+   "kind": "drive",
+   "points": [
+    [
+     122,
+     108
+    ],
+    [
+     100,
+     120
+    ],
+    [
+     70,
+     120
+    ],
+    [
+     50,
+     108
+    ],
+    [
+     46,
+     76
+    ],
+    [
+     48,
+     46
+    ]
+   ]
+  },
+  {
+   "name": "Hillside Drive",
+   "kind": "drive",
+   "points": [
+    [
+     132,
+     0
+    ],
+    [
+     131,
+     30
+    ],
+    [
+     128,
+     56
+    ],
+    [
+     124,
+     64
+    ]
+   ]
+  },
+  {
+   "name": "Green Street",
+   "kind": "street",
+   "points": [
+    [
+     24,
+     44
+    ],
+    [
+     47,
+     46
+    ]
+   ]
+  },
+  {
+   "name": "Church Street",
+   "kind": "street",
+   "points": [
+    [
+     24,
+     108
+    ],
+    [
+     49,
+     108
+    ]
+   ]
+  },
+  {
+   "name": "North Lane",
+   "kind": "street",
+   "points": [
+    [
+     99,
+     37
+    ],
+    [
+     98,
+     0
+    ]
+   ]
+  },
+  {
+   "name": "Park Lane",
+   "kind": "street",
+   "points": [
+    [
+     88,
+     121
+    ],
+    [
+     88,
+     159
+    ]
+   ]
+  }
+ ],
+ "zones": [
+  {
+   "name": "Village green",
+   "kind": "green",
+   "rect": [
+    27,
+    4,
+    44,
+    22
+   ]
+  },
+  {
+   "name": "Shops",
+   "kind": "shops",
+   "rect": [
+    0,
+    2,
+    19,
+    38
+   ]
+  },
+  {
+   "name": "School",
+   "kind": "school",
+   "rect": [
+    96,
+    126,
+    156,
+    158
+   ]
+  },
+  {
+   "name": "Church",
+   "kind": "church",
+   "rect": [
+    27,
+    112,
+    46,
+    134
+   ]
+  },
+  {
+   "name": "Oak Woods",
+   "kind": "woods",
+   "rect": [
+    129,
+    66,
+    159,
+    124
+   ]
+  }
+ ],
+ "features": [
+  {
+   "name": "Boathouse",
+   "at": [
+    58,
+    84
+   ]
+  },
+  {
+   "name": "Bandstand",
+   "at": [
+    66,
+    56
+   ]
+  },
+  {
+   "name": "Playground",
+   "at": [
+    104,
+    108
+   ]
+  },
+  {
+   "name": "Shore path",
+   "at": [
+    86,
+    64
+   ]
+  }
+ ],
+ "lakeDrive": [
+  [
+   48,
+   46
+  ],
+  [
+   70,
+   40
+  ],
+  [
+   100,
+   38
+  ],
+  [
+   122,
+   50
+  ],
+  [
+   126,
+   80
+  ],
+  [
+   122,
+   108
+  ],
+  [
+   100,
+   120
+  ],
+  [
+   70,
+   120
+  ],
+  [
+   50,
+   108
+  ],
+  [
+   46,
+   76
+  ],
+  [
+   48,
+   46
+  ]
+ ],
+ "lots": [
+  {
+   "x0": 25,
+   "z0": 23,
+   "x1": 44,
+   "z1": 38,
+   "face": "west",
+   "pad": 9,
+   "road": 9,
+   "cut": 392,
+   "fill": 0,
+   "dc": 5,
+   "df": 0,
+   "wall": 109,
+   "gate": [
+    24,
+    30
+   ],
+   "setback": 0,
+   "street": "West Avenue"
+  },
+  {
+   "x0": 25,
+   "z0": 49,
+   "x1": 44,
+   "z1": 64,
+   "face": "west",
+   "pad": 9,
+   "road": 9,
+   "cut": 0,
+   "fill": 16,
+   "dc": 0,
+   "df": 1,
+   "wall": 0,
+   "gate": [
+    24,
+    56
+   ],
+   "setback": 0,
+   "street": "West Avenue"
+  },
+  {
+   "x0": 25,
+   "z0": 66,
+   "x1": 44,
+   "z1": 81,
+   "face": "west",
+   "pad": 9,
+   "road": 9,
+   "cut": 0,
+   "fill": 0,
+   "dc": 0,
+   "df": 0,
+   "wall": 0,
+   "gate": [
+    24,
+    73
+   ],
+   "setback": 0,
+   "street": "West Avenue"
+  },
+  {
+   "x0": 25,
+   "z0": 135,
+   "x1": 44,
+   "z1": 150,
+   "face": "west",
+   "pad": 13,
+   "road": 10,
+   "cut": 482,
+   "fill": 122,
+   "dc": 3,
+   "df": 4,
+   "wall": 90,
+   "gate": [
+    24,
+    142
+   ],
+   "setback": 0,
+   "street": "West Avenue"
+  },
+  {
+   "x0": 0,
+   "z0": 39,
+   "x1": 19,
+   "z1": 54,
+   "face": "east",
+   "pad": 9,
+   "road": 9,
+   "cut": 4,
+   "fill": 70,
+   "dc": 2,
+   "df": 1,
+   "wall": 2,
+   "gate": [
+    20,
+    46
+   ],
+   "setback": 1,
+   "street": "West Avenue"
+  },
+  {
+   "x0": 0,
+   "z0": 56,
+   "x1": 19,
+   "z1": 71,
+   "face": "east",
+   "pad": 8,
+   "road": 9,
+   "cut": 80,
+   "fill": 0,
+   "dc": 1,
+   "df": 0,
+   "wall": 0,
+   "gate": [
+    20,
+    63
+   ],
+   "setback": 1,
+   "street": "West Avenue"
+  },
+  {
+   "x0": 0,
+   "z0": 73,
+   "x1": 19,
+   "z1": 88,
+   "face": "east",
+   "pad": 9,
+   "road": 10,
+   "cut": 1,
+   "fill": 0,
+   "dc": 1,
+   "df": 0,
+   "wall": 0,
+   "gate": [
+    20,
+    80
+   ],
+   "setback": 1,
+   "street": "West Avenue"
+  },
+  {
+   "x0": 0,
+   "z0": 90,
+   "x1": 19,
+   "z1": 105,
+   "face": "east",
+   "pad": 10,
+   "road": 12,
+   "cut": 53,
+   "fill": 376,
+   "dc": 3,
+   "df": 5,
+   "wall": 66,
+   "gate": [
+    20,
+    97
+   ],
+   "setback": 1,
+   "street": "West Avenue"
+  },
+  {
+   "x0": 0,
+   "z0": 120,
+   "x1": 19,
+   "z1": 135,
+   "face": "east",
+   "pad": 9,
+   "road": 9,
+   "cut": 76,
+   "fill": 25,
+   "dc": 4,
+   "df": 2,
+   "wall": 18,
+   "gate": [
+    20,
+    127
+   ],
+   "setback": 1,
+   "street": "West Avenue"
+  },
+  {
+   "x0": 0,
+   "z0": 137,
+   "x1": 19,
+   "z1": 152,
+   "face": "east",
+   "pad": 10,
+   "road": 11,
+   "cut": 235,
+   "fill": 297,
+   "dc": 6,
+   "df": 3,
+   "wall": 95,
+   "gate": [
+    20,
+    144
+   ],
+   "setback": 1,
+   "street": "West Avenue"
+  },
+  {
+   "x0": 46,
+   "z0": 20,
+   "x1": 61,
+   "z1": 39,
+   "face": "south",
+   "pad": 13,
+   "road": 10,
+   "cut": 374,
+   "fill": 19,
+   "dc": 3,
+   "df": 2,
+   "wall": 54,
+   "gate": [
+    53,
+    40
+   ],
+   "setback": 3,
+   "street": "Lake Drive"
+  },
+  {
+   "x0": 63,
+   "z0": 18,
+   "x1": 78,
+   "z1": 37,
+   "face": "south",
+   "pad": 16,
+   "road": 14,
+   "cut": 162,
+   "fill": 27,
+   "dc": 1,
+   "df": 1,
+   "wall": 0,
+   "gate": [
+    70,
+    38
+   ],
+   "setback": 1,
+   "street": "Lake Drive"
+  },
+  {
+   "x0": 80,
+   "z0": 17,
+   "x1": 95,
+   "z1": 36,
+   "face": "south",
+   "pad": 13,
+   "road": 11,
+   "cut": 457,
+   "fill": 408,
+   "dc": 4,
+   "df": 5,
+   "wall": 188,
+   "gate": [
+    87,
+    37
+   ],
+   "setback": 0,
+   "street": "Lake Drive"
+  },
+  {
+   "x0": 102,
+   "z0": 18,
+   "x1": 117,
+   "z1": 37,
+   "face": "south",
+   "pad": 11,
+   "road": 8,
+   "cut": 482,
+   "fill": 321,
+   "dc": 5,
+   "df": 3,
+   "wall": 181,
+   "gate": [
+    109,
+    38
+   ],
+   "setback": 4,
+   "street": "Lake Drive"
+  },
+  {
+   "x0": 70,
+   "z0": 123,
+   "x1": 85,
+   "z1": 142,
+   "face": "north",
+   "pad": 9,
+   "road": 6,
+   "cut": 178,
+   "fill": 156,
+   "dc": 5,
+   "df": 3,
+   "wall": 75,
+   "gate": [
+    77,
+    122
+   ],
+   "setback": 1,
+   "street": "Lake Drive"
+  },
+  {
+   "x0": 53,
+   "z0": 121,
+   "x1": 68,
+   "z1": 140,
+   "face": "north",
+   "pad": 8,
+   "road": 5,
+   "cut": 517,
+   "fill": 93,
+   "dc": 6,
+   "df": 3,
+   "wall": 173,
+   "gate": [
+    60,
+    120
+   ],
+   "setback": 4,
+   "street": "Lake Drive"
+  },
+  {
+   "x0": 135,
+   "z0": 1,
+   "x1": 154,
+   "z1": 16,
+   "face": "west",
+   "pad": 17,
+   "road": 16,
+   "cut": 212,
+   "fill": 405,
+   "dc": 6,
+   "df": 5,
+   "wall": 110,
+   "gate": [
+    134,
+    8
+   ],
+   "setback": 1,
+   "street": "Hillside Drive"
+  },
+  {
+   "x0": 134,
+   "z0": 18,
+   "x1": 153,
+   "z1": 33,
+   "face": "west",
+   "pad": 17,
+   "road": 15,
+   "cut": 236,
+   "fill": 11,
+   "dc": 3,
+   "df": 1,
+   "wall": 8,
+   "gate": [
+    133,
+    25
+   ],
+   "setback": 1,
+   "street": "Hillside Drive"
+  },
+  {
+   "x0": 109,
+   "z0": 0,
+   "x1": 128,
+   "z1": 15,
+   "face": "east",
+   "pad": 17,
+   "road": 17,
+   "cut": 411,
+   "fill": 51,
+   "dc": 5,
+   "df": 2,
+   "wall": 21,
+   "gate": [
+    129,
+    7
+   ],
+   "setback": 1,
+   "street": "Hillside Drive"
+  },
+  {
+   "x0": 25,
+   "z0": 86,
+   "x1": 40,
+   "z1": 105,
+   "face": "south",
+   "pad": 12,
+   "road": 10,
+   "cut": 191,
+   "fill": 176,
+   "dc": 3,
+   "df": 4,
+   "wall": 86,
+   "gate": [
+    32,
+    106
+   ],
+   "setback": 1,
+   "street": "Church Street"
+  },
+  {
+   "x0": 76,
+   "z0": 0,
+   "x1": 95,
+   "z1": 15,
+   "face": "east",
+   "pad": 13,
+   "road": 14,
+   "cut": 219,
+   "fill": 412,
+   "dc": 2,
+   "df": 4,
+   "wall": 139,
+   "gate": [
+    96,
+    7
+   ],
+   "setback": 1,
+   "street": "North Lane"
+  },
+  {
+   "x0": 66,
+   "z0": 144,
+   "x1": 85,
+   "z1": 159,
+   "face": "east",
+   "pad": 14,
+   "road": 12,
+   "cut": 312,
+   "fill": 75,
+   "dc": 3,
+   "df": 5,
+   "wall": 52,
+   "gate": [
+    86,
+    151
+   ],
+   "setback": 1,
+   "street": "Park Lane"
+  }
+ ],
+ "summary": {
+  "streets": [
+   {
+    "name": "West Avenue",
+    "len": 160,
+    "maxGrade": 0.2,
+    "cut": 192,
+    "fill": 233
+   },
+   {
+    "name": "Lake Drive",
+    "len": 134,
+    "maxGrade": 0.2,
+    "cut": 638,
+    "fill": 365
+   },
+   {
+    "name": "Lake Drive ",
+    "len": 138,
+    "maxGrade": 0.2,
+    "cut": 462,
+    "fill": 609
+   },
+   {
+    "name": "Hillside Drive",
+    "len": 65,
+    "maxGrade": 0.2,
+    "cut": 151,
+    "fill": 189
+   },
+   {
+    "name": "Green Street",
+    "len": 24,
+    "maxGrade": 0,
+    "cut": 0,
+    "fill": 0
+   },
+   {
+    "name": "Church Street",
+    "len": 26,
+    "maxGrade": 0.2,
+    "cut": 62,
+    "fill": 75
+   },
+   {
+    "name": "North Lane",
+    "len": 38,
+    "maxGrade": 0.2,
+    "cut": 340,
+    "fill": 9
+   },
+   {
+    "name": "Park Lane",
+    "len": 39,
+    "maxGrade": 0.2,
+    "cut": 474,
+    "fill": 17
+   }
+  ],
+  "lots": 22,
+  "zones": [
+   "Village green",
+   "Shops",
+   "School",
+   "Church",
+   "Oak Woods"
+  ],
+  "lotEarth": 8134,
+  "perStreet": {
+   "West Avenue": 10,
+   "Lake Drive": 6,
+   "Hillside Drive": 3,
+   "Church Street": 1,
+   "North Lane": 1,
+   "Park Lane": 1
+  }
+ }
+}

@@ -1,10 +1,10 @@
 // global plot packing: every axis-aligned 12x14 plot whose gate (middle of the front) reaches a street within `reach`
 // blocks straight out, pad level chosen within -2..+3 of the street, greedy by earth moved + setback
 import { rampLength, rampProfile } from "./access.mjs";
-export function packPlots(site, streets, { wide = 12, deep = 14, reach = 10, keepOut = [], maxCut = 7, maxFill = 5, gap = 1, wSet = 12, wOff = 15, runs = 400 } = {}) {
+export function packPlots(site, streets, { wide = 12, deep = 14, reach = 10, keepOut = [], blocked = () => false, maxCut = 7, maxFill = 5, gap = 1, wSet = 12, wOff = 15, runs = 400 } = {}) {
   const { X, Z, H, water, hole, built } = site;
   const road = new Map(); for (const st of streets) for (const c of st.cells) road.set(`${c.x},${c.z}`, c);
-  const blk = (x, z) => x < 0 || z < 0 || x >= X || z >= Z || water[z][x] || hole(x, z) || built[z][x] || road.has(`${x},${z}`) || keepOut.some((k) => x >= k[0] && x <= k[2] && z >= k[1] && z <= k[3]);
+  const blk = (x, z) => x < 0 || z < 0 || x >= X || z >= Z || water[z][x] || hole(x, z) || built[z][x] || road.has(`${x},${z}`) || blocked(x, z) || keepOut.some((k) => x >= k[0] && x <= k[2] && z >= k[1] && z <= k[3]);
   const B = []; for (let z = 0; z < Z; z++) { B.push(new Uint8Array(X)); for (let x = 0; x < X; x++) B[z][x] = blk(x, z) ? 1 : 0; }
   // prefix sums of blocked cells for O(1) rectangle tests
   const S = Array.from({ length: Z + 1 }, () => new Int32Array(X + 1));
@@ -16,7 +16,8 @@ export function packPlots(site, streets, { wide = 12, deep = 14, reach = 10, kee
     for (let z0 = 0; z0 + d <= Z; z0++) for (let x0 = 0; x0 + w <= X; x0++) { const x1 = x0 + w - 1, z1 = z0 + d - 1;
       if (blockedIn(x0, z0, x1, z1)) continue;
       // two gate cells in the middle of the front; walk straight out to the street
-      const g = face === "north" ? [[x0 + 5, z0 - 1], [x0 + 6, z0 - 1]] : face === "south" ? [[x0 + 5, z1 + 1], [x0 + 6, z1 + 1]] : face === "west" ? [[x0 - 1, z0 + 5], [x0 - 1, z0 + 6]] : [[x1 + 1, z0 + 5], [x1 + 1, z0 + 6]];
+      const m = (wide >> 1) - 1; /* the gate: the two cells in the middle of the front */
+      const g = face === "north" ? [[x0 + m, z0 - 1], [x0 + m + 1, z0 - 1]] : face === "south" ? [[x0 + m, z1 + 1], [x0 + m + 1, z1 + 1]] : face === "west" ? [[x0 - 1, z0 + m], [x0 - 1, z0 + m + 1]] : [[x1 + 1, z0 + m], [x1 + 1, z0 + m + 1]];
       let hit = null, k = 0;
       for (; k < reach; k++) { const a = road.get(`${g[0][0] + ox * k},${g[0][1] + oz * k}`), b = road.get(`${g[1][0] + ox * k},${g[1][1] + oz * k}`); if (a || b) { hit = a ?? b; break; } const [ax, az] = [g[0][0] + ox * k, g[0][1] + oz * k]; if (ax < 0 || az < 0 || ax >= X || az >= Z || water[az][ax] || hole(ax, az)) break; }
       if (!hit) continue;
