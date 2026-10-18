@@ -51,11 +51,16 @@ export function buildPlace(place, frame, L) {
   const buildings = (L.buildings?.features ?? []).map((f, k) => {
     const cells = cellsIn(frame, f.geometry).filter(([x, z]) => road[I(x, z)] > ROAD); if (!cells.length) return null;
     const p = f.properties, base = Math.min(...cells.map(([x, z]) => ground(x, z)));
-    const height = Math.max(3, Math.round(p.height * sc));
+    // the footprint's height, from its record, else the lidar surface's median over it (Seattle's outlines carry none)
+    let hm = p.height; if (!Number.isFinite(hm) && lid) { const v = cells.map(([x, z]) => I(x, z)).filter((i) => lid.count[i] > 0).map((i) => lid.surface[i] - lid.ground[i]).sort((a, b) => a - b); hm = v.length ? v[v.length >> 1] : NaN; }
+    const height = Math.max(3, Math.round((Number.isFinite(hm) ? hm : 6) * sc));
     // each cell's roof: the lidar surface there (3x3 median within the footprint), or the footprint's median height
     const own = new Set(cells.map(([x, z]) => I(x, z))), tops = new Map();
+    // where the lidar has no roof over a cell, the recorded height; with no record (the height above is the lidar's own
+    // median), a single storey, or a tower's outline would stand its full height wherever it reaches past the tower
+    const fallback = Number.isFinite(p.height) ? base + height : base + Math.round(3 * sc);
     for (const [x, z] of cells) {
-      let t = base + height;
+      let t = fallback;
       if (lid) { const v = [];
         for (let dz = -1; dz <= 1; dz++) for (let dx = -1; dx <= 1; dx++) { const j = I(x + dx, z + dz); if (own.has(j) && lid.count[j] > 0) v.push(lid.surface[j]); }
         if (v.length) { v.sort((a, b) => a - b); let m = Math.round(v[v.length >> 1] * sc) - floor;
@@ -76,11 +81,15 @@ export function buildPlace(place, frame, L) {
     // lamp post or a cornice past the footprint, but foliage is bright in near-infrared and stone isn't
     const green = (i) => !air || (air.nir[i] - air.r[i]) / (air.nir[i] + air.r[i] + 1e-6) > 0.12;
     const h = (i) => (lid.count[i] && !near[i] && green(i) ? lid.surface[i] - lid.ground[i] : 0);
-    for (let z = 1; z < N - 1; z++) for (let x = 1; x < N - 1; x++) { const i = I(x, z), v = h(i); if (v < 2) continue;
+    // no tree stands over 70 m (the tallest in either city are about 60): taller returns off a footprint are a tower's
+    // reach past its outline (the Space Needle's legs and saucer over its lawn), not a crown
+    for (let z = 1; z < N - 1; z++) for (let x = 1; x < N - 1; x++) { const i = I(x, z), v = h(i); if (v < 2 || v > 70) continue;
       let k = 0; for (let dz = -1; dz <= 1; dz++) for (let dx = -1; dx <= 1; dx++) if ((dx || dz) && h(I(x + dx, z + dz)) >= 2) k++;
       if (k >= 3) chm[i] = v * sc; } }
   let canopyTop = Math.round(8 * sc); if (chm) { canopyTop = 0; for (const v of chm) if (v > canopyTop) canopyTop = v; }
-  const top = Math.max(...buildings.map((b) => Math.max(...b.tops.values())), Math.round(hi) - floor) + Math.ceil(canopyTop) + 3;   // H is already in blocks
+  // the tallest roof or the tallest crown on the highest ground, whichever is higher (H is already in blocks)
+  let roofTop = 0; for (const b of buildings) for (const t of b.tops.values()) if (t > roofTop) roofTop = t;
+  const top = Math.max(roofTop, Math.round(hi) - floor + Math.ceil(canopyTop)) + 3;
   const g = new Voxels([N, top, N], { dataVersion: 3955 });   // 2 bytes a cell (voxels.mjs), not an object a block
 
   for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) {

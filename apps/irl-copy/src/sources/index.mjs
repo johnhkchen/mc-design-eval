@@ -1,13 +1,14 @@
 // Every data source, in order of preference per layer: the first source that covers a place and offers a layer
 // supplies it (a place can name its own choice per layer). Adding a city = adding a file here.
 import datasf from "./datasf.mjs";
+import seattle from "./seattle.mjs";
 import nhd from "./usgs-nhd.mjs";
 import osm from "./osm.mjs";
 import canopy from "./meta-canopy.mjs";
 import lidar from "./usgs-lidar.mjs";
 import naip from "./naip.mjs";
 
-export const SOURCES = [...lidar, ...naip, ...datasf, ...nhd, ...canopy, ...osm];
+export const SOURCES = [...lidar, ...naip, ...datasf, ...seattle, ...nhd, ...canopy, ...osm];
 export const LAYERS = ["lidar", "aerial", "parcels", "landmarks", "ground", "buildings", "streets", "parks", "water", "paths", "trees", "playgrounds", "canopy"];
 
 /** layer -> the source that supplies it for this place (null if none does) */

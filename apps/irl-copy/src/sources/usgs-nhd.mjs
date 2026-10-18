@@ -6,7 +6,12 @@ export default [{
   async fetch(place, { box: b }) {
     const q = new URLSearchParams({ geometry: `${b.west},${b.south},${b.east},${b.north}`, geometryType: "esriGeometryEnvelope", inSR: "4326", outSR: "4326",
       spatialRel: "esriSpatialRelIntersects", outFields: "GNIS_NAME,FTYPE,AREASQKM", returnGeometry: "true", f: "geojson" });
-    const r = await fetch(`https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/12/query?${q}`); if (!r.ok) throw new Error(`NHD: ${r.status}`);
-    return { water: await r.json() };
+    // the National Map's servers time out now and then (502, 504): a few tries, backing off
+    for (let k = 0; ; k++) {
+      const r = await fetch(`https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/12/query?${q}`);
+      if (r.ok) return { water: await r.json() };
+      if (k >= 4 || r.status < 500) throw new Error(`NHD: ${r.status}`);
+      await new Promise((ok) => setTimeout(ok, 2000 * 2 ** k));
+    }
   },
 }];

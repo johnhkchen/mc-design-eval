@@ -5,7 +5,7 @@
 //   node bin/irl.mjs fetch <place>        download every planned source into .cache/<place>/ (once per source)
 //   node bin/irl.mjs build <place>        compose out/<place>/{land.nbt, manifest.json, SOURCES.md} from the cache
 //   node bin/irl.mjs all <place>          fetch, then build
-//   node bin/irl.mjs landmark <no> <place> [--half m] [--scale s]   a place file framed on an SF Article 10 landmark
+//   node bin/irl.mjs landmark <no> <place> [--city san-francisco|seattle] [--half m] [--scale s]   a place file framed on a city landmark
 //   node bin/irl.mjs world <place>        build (and compose, if the place has a compose file) into a Minecraft Java world:
 //                                         out/<place>/world/ (for Chunky, or a single-player save)
 //   node bin/irl.mjs modules <place> <dir>    each module of the place's compose file as its own .nbt, its swaps applied
@@ -19,7 +19,8 @@ import { frameFor } from "../src/frame.mjs";
 import { SOURCES, LAYERS, plan } from "../src/sources/index.mjs";
 import { buildPlace } from "../src/build.mjs";
 import { compose } from "../src/place.mjs";
-import { landmark } from "../src/sources/datasf.mjs";
+import { landmark as sfLandmark } from "../src/sources/datasf.mjs";
+import { landmark as seaLandmark } from "../src/sources/seattle.mjs";
 import { writeWorld } from "../src/anvil.mjs";
 import { load as loadStructure } from "/Volumes/ext1/swe/repos/minecraft-design/tools/src/structure.mjs";   // reads the design pipeline's modules
 
@@ -95,11 +96,12 @@ else if (cmd === "modules") {
 }
 else if (cmd === "landmark") {
   // centred on the landmark's boundary, a box reaching 40 m past it (or --half), at 1.4 blocks a metre (or --scale)
-  const lm = await landmark(name), target = process.argv[4], arg = (k, d) => (process.argv.includes(k) ? +process.argv[process.argv.indexOf(k) + 1] : d);
+  const city = process.argv.includes("--city") ? process.argv[process.argv.indexOf("--city") + 1] : "san-francisco";
+  const lm = await ({ "san-francisco": sfLandmark, seattle: seaLandmark })[city](name), target = process.argv[4], arg = (k, d) => (process.argv.includes(k) ? +process.argv[process.argv.indexOf(k) + 1] : d);
   const pts = (lm.geometry.type === "Polygon" ? [lm.geometry.coordinates] : lm.geometry.coordinates).flat(2);
   const lons = pts.map((p) => p[0]), lats = pts.map((p) => p[1]), lat = (Math.min(...lats) + Math.max(...lats)) / 2, lon = (Math.min(...lons) + Math.max(...lons)) / 2;
   const reach = Math.max((Math.max(...lats) - Math.min(...lats)) * 111000, (Math.max(...lons) - Math.min(...lons)) * 111000 * Math.cos((lat * Math.PI) / 180)) / 2;
-  const place = { name: lm.name, note: `San Francisco landmark No. ${lm.number}, ${lm.address} (designated ${lm.year}).`, city: "san-francisco", country: "US", scale: arg("--scale", 1.4),
+  const place = { name: lm.name, note: `${city === "seattle" ? "Seattle" : "San Francisco"} landmark No. ${lm.number}, ${lm.address} (designated ${lm.year}).`, city, country: "US", scale: arg("--scale", 1.4),
     centre: [+lat.toFixed(6), +lon.toFixed(6)], half: arg("--half", Math.round(reach + 40)), landmark: { number: lm.number, photo: lm.photo, document: lm.document } };
   mkdirSync(dirname(`${HERE}/places/${target}.json`), { recursive: true });
   writeFileSync(`${HERE}/places/${target}.json`, JSON.stringify(place, null, 1) + "\n"); console.log(JSON.stringify(place));

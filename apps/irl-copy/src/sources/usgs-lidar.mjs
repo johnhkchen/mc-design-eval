@@ -7,7 +7,8 @@
 //   count     returns per cell (how sure the surface is)
 import { createLazPerf } from "laz-perf";
 
-const COLLECTIONS = [{ id: "CA_SanFrancisco_1_B23", covers: (p) => p.city === "san-francisco" }];
+const COLLECTIONS = [{ id: "CA_SanFrancisco_1_B23", covers: (p) => p.city === "san-francisco" },
+  { id: "WA_KingCo_1_2021", covers: (p) => p.city === "seattle" }];       // King County west half, QL1, flown 2021
 const BASE = "https://usgs-lidar-public.s3.amazonaws.com";
 const NOISE = new Set([7, 18]), GROUND = 2, WATER = 9;
 
