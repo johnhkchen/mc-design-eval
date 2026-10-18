@@ -60,6 +60,9 @@ export function compose(g, manifest, placements, { ground, I }) {
     if (p.mode === "centre") {
       const xs = b.footprint.map((c) => c[0]), zs = b.footprint.map((c) => c[1]);
       const cx = Math.round((Math.min(...xs) + Math.max(...xs) + 1) / 2 - W / 2), cz = Math.round((Math.min(...zs) + Math.max(...zs) + 1) / 2 - D / 2);
+      // the module's whole box, not just the footprint: trees under its arches and between its columns go
+      for (let dz = 0; dz < D; dz++) for (let dx = 0; dx < W; dx++) for (let y = b.base + 1; y < g.size[1]; y++) {
+        const c = g.get(cx + dx, y, cz + dz); if (c && /leaves$|_log$/.test(c.block)) g.set(cx + dx, y, cz + dz, "air"); }
       for (let dz = 0; dz < D; dz++) for (let dx = 0; dx < W; dx++) for (let y = skip; y < H; y++) {
         const c = copyCell(p.module.get(x0 + dx, y, z0 + dz), 0, p.swap, y); if (c) g.set(cx + dx, b.base + y, cz + dz, ...c); }
       notes.push(`${p.building}: ${W}x${D} module centred at ${cx},${cz}`);

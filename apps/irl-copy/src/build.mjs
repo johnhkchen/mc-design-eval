@@ -65,7 +65,10 @@ export function buildPlace(place, frame, L) {
   let chm = L.canopy?.data ?? null;
   if (lid) { chm = new Float32Array(N * N); const near = new Uint8Array(N * N);
     for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) if (isB[I(x, z)]) for (let dz = -1; dz <= 1; dz++) for (let dx = -1; dx <= 1; dx++) { const xx = x + dx, zz = z + dz; if (xx >= 0 && zz >= 0 && xx < N && zz < N) near[I(xx, zz)] = 1; }
-    const h = (i) => (lid.count[i] && !near[i] ? lid.surface[i] - lid.ground[i] : 0);
+    // and green in the aerial photo's near-infrared, where there is one: lidar can't tell a crown from a planter box, a
+    // lamp post or a cornice past the footprint, but foliage is bright in near-infrared and stone isn't
+    const green = (i) => !air || (air.nir[i] - air.r[i]) / (air.nir[i] + air.r[i] + 1e-6) > 0.12;
+    const h = (i) => (lid.count[i] && !near[i] && green(i) ? lid.surface[i] - lid.ground[i] : 0);
     for (let z = 1; z < N - 1; z++) for (let x = 1; x < N - 1; x++) { const i = I(x, z), v = h(i); if (v < 2) continue;
       let k = 0; for (let dz = -1; dz <= 1; dz++) for (let dx = -1; dx <= 1; dx++) if ((dx || dz) && h(I(x + dx, z + dz)) >= 2) k++;
       if (k >= 3) chm[i] = v * sc; } }
