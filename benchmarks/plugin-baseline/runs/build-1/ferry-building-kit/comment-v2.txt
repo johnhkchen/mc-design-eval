@@ -1,0 +1,13 @@
+Owner's fix round for the Ferry Building kit (v1 -> v2). Keep everything that works: the white tower over the long arcade,
+the grey nave with its glazed skylight, the plots and their stated sizes. Fix:
+1. CLOCK FACES. The tower shaft has only narrow slits where the clocks belong. Put a big round clock face on each of its four
+   sides near the top of the shaft (about y 58..68, about 11 across): a white dial (white concrete / quartz / calcite) in a
+   dark round frame, twelve dark hour marks, dark hands showing about 10 past 10, glowstone or sea lantern behind so it reads
+   lit. Round, not square: step the edge so it reads as a circle from the front.
+2. NAVE ROOF. Part of the nave roof was never built: the nave is open to the sky in places (the unfinished parts). Close it so
+   every module is roofed over its whole depth: the grey roof slopes up from both long walls to the glazed skylight ridge,
+   continuous along x, and the wing section (plot 1) still TILES seamlessly end to end.
+3. THE ODD GABLE. One gable is a dark, steep, spiky roof unlike the rest. Make the bay-side halls one family: grey walls and
+   roofs (andesite / stone / deepslate tiles), gables with the huge round-arched lunette windows from the photo of the south end.
+Also check: every module stays inside its plot (nothing past its x or z range, nothing above its height), the land front faces
+north in every module, and no mob can spawn inside (light the nave and arcade).

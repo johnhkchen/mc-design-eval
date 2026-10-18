@@ -1,0 +1,239 @@
+{
+ "note": "B: the place turned (layout shifted -4,-7 to centre it on the squared footprint, 137 x 179); the place turned 9.25 degrees so the Civic Center grid runs along the axes. The City Hall kit (lab run city-hall-kit, v1: dome, east portico, wing bay, corner pavilion on plots along x) set on City Hall's footprint (146 x 193 blocks at 1.4): porticoes centred on the east and west fronts, wing bays filling every front, corner pavilions turned so their decorated faces look out, the dome on its pavilion at the centre. The roofs and light courts between stay as the lidar massing.",
+ "modules": {
+  "dome": {
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/city-hall-kit/v1.nbt",
+   "plot": [
+    0,
+    0,
+    63,
+    63
+   ],
+   "swap": [
+    {
+     "from": "polished_tuff",
+     "to": "polished_andesite",
+     "minY": 72
+    },
+    {
+     "from": "polished_tuff_stairs",
+     "to": "polished_andesite_stairs",
+     "minY": 72
+    },
+    {
+     "from": "polished_tuff_slab",
+     "to": "polished_andesite_slab",
+     "minY": 72
+    }
+   ]
+  },
+  "portico": {
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/city-hall-kit/v1.nbt",
+   "plot": [
+    64,
+    0,
+    127,
+    23
+   ]
+  },
+  "bay": {
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/city-hall-kit/v1.nbt",
+   "plot": [
+    128,
+    0,
+    143,
+    23
+   ]
+  },
+  "corner": {
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/city-hall-kit/v1.nbt",
+   "plot": [
+    144,
+    0,
+    175,
+    31
+   ]
+  }
+ },
+ "catalog": {
+  "dome": "sf-05-city-hall-dome",
+  "portico": "sf-06-city-hall-portico",
+  "bay": "sf-07-city-hall-bay",
+  "corner": "sf-08-city-hall-corner"
+ },
+ "placements": [
+  {
+   "building": "201006.0000041",
+   "module": "dome",
+   "mode": "at",
+   "at": [
+    37,
+    57
+   ],
+   "quarter": 0
+  },
+  {
+   "building": "201006.0000041",
+   "module": "portico",
+   "mode": "at",
+   "at": [
+    118,
+    57
+   ],
+   "quarter": 1
+  },
+  {
+   "building": "201006.0000041",
+   "module": "portico",
+   "mode": "at",
+   "at": [
+    -4,
+    57
+   ],
+   "quarter": 3
+  },
+  {
+   "building": "201006.0000041",
+   "module": "bay",
+   "mode": "at",
+   "at": [
+    118,
+    25
+   ],
+   "quarter": 1,
+   "repeat": {
+    "count": 2,
+    "step": [
+     0,
+     16
+    ]
+   }
+  },
+  {
+   "building": "201006.0000041",
+   "module": "bay",
+   "mode": "at",
+   "at": [
+    118,
+    121
+   ],
+   "quarter": 1,
+   "repeat": {
+    "count": 2,
+    "step": [
+     0,
+     16
+    ]
+   }
+  },
+  {
+   "building": "201006.0000041",
+   "module": "bay",
+   "mode": "at",
+   "at": [
+    -4,
+    25
+   ],
+   "quarter": 3,
+   "repeat": {
+    "count": 2,
+    "step": [
+     0,
+     16
+    ]
+   }
+  },
+  {
+   "building": "201006.0000041",
+   "module": "bay",
+   "mode": "at",
+   "at": [
+    -4,
+    121
+   ],
+   "quarter": 3,
+   "repeat": {
+    "count": 2,
+    "step": [
+     0,
+     16
+    ]
+   }
+  },
+  {
+   "building": "201006.0000041",
+   "module": "bay",
+   "mode": "at",
+   "at": [
+    28,
+    -7
+   ],
+   "quarter": 0,
+   "repeat": {
+    "count": 5,
+    "step": [
+     16,
+     0
+    ]
+   }
+  },
+  {
+   "building": "201006.0000041",
+   "module": "bay",
+   "mode": "at",
+   "at": [
+    28,
+    162
+   ],
+   "quarter": 2,
+   "repeat": {
+    "count": 5,
+    "step": [
+     16,
+     0
+    ]
+   }
+  },
+  {
+   "building": "201006.0000041",
+   "module": "corner",
+   "mode": "at",
+   "at": [
+    110,
+    -7
+   ],
+   "quarter": 0
+  },
+  {
+   "building": "201006.0000041",
+   "module": "corner",
+   "mode": "at",
+   "at": [
+    110,
+    154
+   ],
+   "quarter": 1
+  },
+  {
+   "building": "201006.0000041",
+   "module": "corner",
+   "mode": "at",
+   "at": [
+    -4,
+    154
+   ],
+   "quarter": 2
+  },
+  {
+   "building": "201006.0000041",
+   "module": "corner",
+   "mode": "at",
+   "at": [
+    -4,
+    -7
+   ],
+   "quarter": 3
+  }
+ ],
+ "colours": "Matched to the east-front photo: the dome is a light lead grey (the kit's polished tuff read dark green), gold only on its band, ring and lantern."
+}

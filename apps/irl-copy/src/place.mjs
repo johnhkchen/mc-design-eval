@@ -12,6 +12,7 @@
 //                  end?: { module, plot } (the arc's closing piece, at its far end), edge?: "inner"|"outer" (which side of the
 //                  footprint the band hugs), front?: "inner"|"outer" (which way the module's north faces), clear?: "all"|"band",
 //                  ground?: false (drop the module's own bottom course) }]
+import { Voxels } from "./voxels.mjs";
 const DIRS = ["south", "west", "north", "east"];                    // yaw 0, 90, 180, 270 degrees (Minecraft's)
 const turn = (facing, quarter) => (DIRS.includes(facing) ? DIRS[(DIRS.indexOf(facing) + quarter + 4) % 4] : facing);
 
@@ -70,7 +71,39 @@ function placeAt(g, b, p, { H, skip }) {
   return `${p.building}: ${W}x${D} module at +${p.at.join(",")}${q ? `, ${q} quarter turn${q > 1 ? "s" : ""}` : ""}${n > 1 ? `, x${n}` : ""}`;
 }
 
-export function compose(g, manifest, placements, { ground, I }) {
+/** Voxels turned by any angle about a pivot (x, z), nearest block: each target cell looks up the source cell it came from
+ *  (an inverse map, so there are no holes), facings turn by the nearest quarter. Cells the source cleared are cleared. */
+export function rotateInto(g, src, cleared, { angle, pivot: [px, pz], box: [x0, z0, x1, z1] }) {
+  const t = (angle * Math.PI) / 180, c = Math.cos(t), s = Math.sin(t), q = ((Math.round(angle / 90) % 4) + 4) % 4, [X, Y, Z] = g.size;
+  // the turned box's corners bound the cells to visit
+  const corners = [[x0, z0], [x1 + 1, z0], [x0, z1 + 1], [x1 + 1, z1 + 1]].map(([x, z]) => [px + (x - px) * c - (z - pz) * s, pz + (x - px) * s + (z - pz) * c]);
+  const xa = Math.max(0, Math.floor(Math.min(...corners.map((p) => p[0])))), xb = Math.min(X - 1, Math.ceil(Math.max(...corners.map((p) => p[0]))));
+  const za = Math.max(0, Math.floor(Math.min(...corners.map((p) => p[1])))), zb = Math.min(Z - 1, Math.ceil(Math.max(...corners.map((p) => p[1]))));
+  let n = 0;
+  for (let z = za; z <= zb; z++) for (let x = xa; x <= xb; x++) {
+    const dx = x + 0.5 - px, dz = z + 0.5 - pz, sx = Math.floor(px + dx * c + dz * s), sz = Math.floor(pz - dx * s + dz * c);
+    if (sx < x0 || sx > x1 || sz < z0 || sz > z1) continue;
+    for (let y = 0; y < Y; y++) { const b = src.get(sx, y, sz);
+      if (b) { g.set(x, y, z, b.block, b.state?.facing ? { ...b.state, facing: turn(b.state.facing, q) } : b.state); n++; }
+      else if (cleared[(sz * Y + y) * X + sx]) g.set(x, y, z, "air"); }
+  }
+  return n;
+}
+
+export function compose(g, manifest, placements, { ground, I, angle = 0 }) {
+  if (angle) {
+    // a building set at an angle to the grid: composed square on a scratch volume, then turned onto the site about the
+    // centre of its footprint's box (Minecraft has no rotated blocks, so the turn resamples to the nearest block)
+    const [X, Y] = g.size, src = new Voxels(g.size), cleared = new Uint8Array(src.data.length); let x0 = Infinity, z0 = Infinity, x1 = -Infinity, z1 = -Infinity;
+    const scratch = { size: g.size, get: (x, y, z) => src.get(x, y, z), set(x, y, z, block, state) { if (!src.inBounds(x, y, z)) return this;
+      x0 = Math.min(x0, x); x1 = Math.max(x1, x); z0 = Math.min(z0, z); z1 = Math.max(z1, z);
+      if (/air$/.test(block)) cleared[(z * Y + y) * X + x] = 1; src.set(x, y, z, block, state); return this; } };
+    const notes = compose(scratch, manifest, placements, { ground, I });
+    const b = manifest.buildings.find((m) => m.id === placements[0].building), xs = b.footprint.map((c) => c[0]), zs = b.footprint.map((c) => c[1]);
+    const pivot = [(Math.min(...xs) + Math.max(...xs) + 1) / 2, (Math.min(...zs) + Math.max(...zs) + 1) / 2];
+    const n = rotateInto(g, src, cleared, { angle, pivot, box: [x0, z0, x1, z1] });
+    return [...notes, `turned ${angle} degrees about ${pivot.map((v) => v.toFixed(1)).join(",")}: ${n} blocks`];
+  }
   const notes = [], byId = new Map(manifest.buildings.map((b) => [b.id, b]));
   for (const p of placements) {
     const b = byId.get(p.building); if (!b) { notes.push(`${p.building}: not in the manifest`); continue; }
