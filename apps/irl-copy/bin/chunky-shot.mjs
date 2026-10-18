@@ -3,7 +3,7 @@
 // scene description for the place's world (out/<place>/world, from `irl world`) with a camera that looks from an eye to a
 // target, the sun at an altitude and azimuth, the physically based Nishita sky with clouds, and renders it headless.
 //   node bin/chunky-shot.mjs <place> <name> --eye x,y,z --look x,y,z [--sun alt,az (degrees)] [--size 3200x2000]
-//     [--spp 400] [--fov 50] [--fog 0.0] [--chunky <launcher jar>]
+//     [--spp 400] [--fov 50] [--fog 0.0] [--exposure 1] [--post TONEMAP2 (ACES filmic; TONEMAP1, TONEMAP3 Hable, GAMMA)] [--clouds yes] [--chunky <launcher jar>]
 //   -> out/<place>/shots/<name>.png   (Chunky's scene and render dump stay in out/<place>/chunky/)
 // Conventions (Chunky's, as measured on a top view): yaw 0 looks along -x, pi/2 along +z; pitch -pi/2 is level, 0 straight down; the sun's azimuth
 // 0 is toward +x (east in our frame), altitude up from the horizon.
@@ -29,7 +29,7 @@ const yaw = YAW[opt("--yawmode", "A")], pitch = -Math.PI / 2 - Math.atan2(d[1], 
 const chunks =readdirSync(`${world}/region`).flatMap((f) => { const m = /^r\.(-?\d+)\.(-?\d+)\.mca$/.exec(f); if (!m) return [];
   const rx = +m[1], rz = +m[2], out2 = []; for (let x = 0; x < 32; x++) for (let z = 0; z < 32; z++) out2.push([rx * 32 + x, rz * 32 + z]); return out2; });
 const scene = {
-  sdfVersion: 10, name, width: W, height: H, exposure: +opt("--exposure", 1.0), postprocess: "TONEMAP1", outputMode: "PNG",
+  sdfVersion: 10, name, width: W, height: H, exposure: +opt("--exposure", 1.0), postprocess: opt("--post", "TONEMAP2"), outputMode: "PNG",
   renderTime: 0, spp: 0, sppTarget: spp, rayDepth: 6, pathTrace: true, dumpFrequency: 500, saveSnapshots: false,
   emittersEnabled: true, emitterIntensity: 13, sunSamplingStrategy: "IMPORTANCE", fancierTranslucency: true, transmissivityCap: 1.0,
   waterOpacity: 0.42, waterVisibility: 9, useCustomWaterColor: false, biomeColorsEnabled: true, transparentSky: false,

@@ -1,0 +1,36 @@
+The San Francisco Ferry Building (A. Page Brown, 1898) at the foot of Market Street: a long, low two-storey Beaux-Arts
+terminal of pale grey-cream sandstone on the Embarcadero, its land front an unbroken ARCADE of round arches on the ground
+floor with a row of arched windows above, a cornice and a low parapet; in the middle a grand entrance pavilion of three tall
+arches, and rising from it the CLOCK TOWER modelled on the Giralda of Seville: a tall square shaft with a big round clock face
+on each side, then stacked open belfry stages with columns and arches, a lantern, a small dome and a flagpole. Behind the
+front a long grey roof over the nave (the marketplace), a skylight running its whole length; on the bay side grey gabled halls
+with huge round-arched windows. It must read, at a glance, as THIS building: the white clock tower over the long arcade.
+
+Scale: 1.4 blocks per metre. The modules are for a public catalog for a Minecraft 1.21.1 server: only blocks that exist in
+1.21.1 (no pale oak, nothing 1.21.4+). Placement code sets them on the real site from city data (the footprint is 203 x 58 m:
+80 blocks deep from the land front to the bay side, the wings' roofline about 29 blocks up, the tower's flagpole 102), so each
+module keeps exactly to its plot and stated size.
+
+ONE row of three modules on fixed plots along x, each standing at y 0 on a flat 1-block ground of smooth stone, the LAND FRONT
+facing north (low z) and the bay side south (high z). Every module is a full cross-section of the building, 80 deep:
+ plot 0, x 0..47, z 0..79 (48 x 80), up to y 104: THE CLOCK TOWER AND ENTRANCE PAVILION. On the land front a pavilion
+   standing a little proud of the wings (to y about 32), three tall round-arched entrances (doors at the street) between
+   paired pilasters, a strong cornice and balustrade; from its middle the tower, a square shaft about 14 across rising to
+   about y 70, plain rusticated corners, a round clock face on each of its four sides near the top of the shaft (y about
+   58..68: a white dial with dark hands and hour marks), then two open stages of arches and columns stepping in, a lantern,
+   a small dome and the flagpole to y 103. Behind the pavilion the nave runs through (as in plot 1), and on the bay side a
+   tall central gable with a great arched window.
+ plot 1, x 48..63, z 0..79 (16 x 80), up to y 38: A WING SECTION, the repeating unit: on the land front two bays of the
+   ground-floor arcade (round arches on piers, about 9 high, open to a walk behind), above them two arched windows, cornice
+   and parapet at about y 29; behind it the nave, its grey roof (deepslate or andesite) sloping up to a long glazed skylight
+   ridge (glass) at about y 38, lit inside; on the bay side a plain grey wall with tall arched windows, its own cornice. It
+   must TILE: end to end along x it continues seamlessly (half a bay at each end).
+ plot 2, x 64..101, z 0..79 (38 x 80), up to y 42: AN END PAVILION: the building's end, the arcade and windows of the wing
+   turning the corner onto the east face (high x), a slightly taller corner block on the land front; on the east face and
+   the bay side grey gabled halls with huge round-arched (lunette) windows, as in the photo of the south end. Its west side
+   (low x) plain and open where it meets the wing.
+
+Use the photograph only as inspiration for character and colour: pale cream-grey stone (smooth sandstone, calcite, white
+terracotta, end stone bricks) for the land front and tower, grey for the roofs and the bay-side halls. No furniture or
+villagers; the nave may have market stalls as simple counters. Light it so no mob spawns (lanterns in the arcade and nave,
+glowstone behind the clock faces). Nothing may leave its plot.

@@ -33,8 +33,8 @@ async function fetchPlace(n) {
   for (const s of chosen) {
     const t0 = Date.now(), layers = await s.fetch(place, frame), meta = {};
     for (const [layer, data] of Object.entries(layers)) {
-      if (data.kind === "raster") { writeFileSync(cache(n, `${s.id}.${layer}.f32`), Buffer.from(data.data.buffer)); meta[layer] = { kind: "raster", n: data.n, tile: data.tile }; }
-      else if (data.kind === "rasters") { const { rasters, ...rest } = data; for (const [r, a] of Object.entries(rasters)) writeFileSync(cache(n, `${s.id}.${layer}.${r}.f32`), Buffer.from(a.buffer)); meta[layer] = { ...rest, names: Object.keys(rasters) }; }
+      if (data.kind === "raster") { writeFileSync(cache(n, `${s.id}.${layer}.f32`), Buffer.from(data.data.buffer)); meta[layer] = { kind: "raster", n: data.n, rotate: frame.rotate, tile: data.tile }; }
+      else if (data.kind === "rasters") { const { rasters, ...rest } = data; for (const [r, a] of Object.entries(rasters)) writeFileSync(cache(n, `${s.id}.${layer}.${r}.f32`), Buffer.from(a.buffer)); meta[layer] = { ...rest, rotate: frame.rotate, names: Object.keys(rasters) }; }
       else meta[layer] = data;
     }
     writeFileSync(cache(n, `${s.id}.json`), JSON.stringify({ source: s.id, fetchedAt: new Date().toISOString(), layers: meta }));
@@ -48,7 +48,7 @@ function buildFrom(n, { composeWith, world } = {}) {
     const f = cache(n, `${s.id}.json`); if (!existsSync(f)) { console.warn(`(no cache for ${s.id}: the ${layer} layer is left out; fetch to add it)`); continue; }
     const d = JSON.parse(readFileSync(f, "utf8")).layers[layer]; if (!d) continue;
     // a raster is sampled on the place's grid, so it's only good for the frame it was fetched at (scale, size)
-    if ((d.kind === "raster" || d.kind === "rasters") && d.n !== frame.N) throw new Error(`${s.id} ${layer} was fetched for a ${d.n}x${d.n} grid, the place is now ${frame.N}x${frame.N} (scale or size changed): run fetch again`);
+    if ((d.kind === "raster" || d.kind === "rasters") && (d.n !== frame.N || (d.rotate ?? 0) !== frame.rotate)) throw new Error(`${s.id} ${layer} was fetched for a ${d.n}x${d.n} grid turned ${d.rotate ?? 0} degrees, the place is now ${frame.N}x${frame.N} turned ${frame.rotate} (scale, size or rotation changed): run fetch again`);
     const f32 = (file) => new Float32Array(readFileSync(cache(n, file)).buffer.slice(0));
     L[layer] = d.kind === "raster" ? { ...d, data: f32(`${s.id}.${layer}.f32`) }
       : d.kind === "rasters" ? { ...d, rasters: Object.fromEntries(d.names.map((r) => [r, f32(`${s.id}.${layer}.${r}.f32`)])) } : d; }

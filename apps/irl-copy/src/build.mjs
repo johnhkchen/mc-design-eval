@@ -33,6 +33,13 @@ export function buildPlace(place, frame, L) {
   const park = new Uint8Array(N * N), water = new Uint8Array(N * N), path = new Uint8Array(N * N), play = new Uint8Array(N * N);
   for (const f of L.parks?.features ?? []) for (const [x, z] of cellsIn(frame, f.geometry)) park[I(x, z)] = 1;
   for (const f of L.water?.features ?? []) for (const [x, z] of cellsIn(frame, f.geometry)) water[I(x, z)] = 1;
+  // open water the hydrography leaves out (the NHD's waterbodies stop at the shore of the Bay): lidar ground within a metre
+  // of sea level with nothing standing on it (a pier's deck reads metres up), levelled to one surface
+  if (lid) {
+    const sea = []; for (let i = 0; i < N * N; i++) if (lid.ground[i] < 1 && (!lid.count[i] || lid.surface[i] - lid.ground[i] < 0.5)) { water[i] = 2; sea.push(lid.ground[i]); }
+    if (sea.length > N) { sea.sort((p, q) => p - q); const level = sea[sea.length >> 1] * sc; for (let i = 0; i < N * N; i++) if (water[i] === 2) H[i] = level; }
+    else for (let i = 0; i < N * N; i++) if (water[i] === 2) water[i] = 0;
+  }
   for (const f of L.playgrounds?.features ?? []) for (const [x, z] of cellsIn(frame, f.geometry)) play[I(x, z)] = 1;
   // paths 2 m wide
   for (const [fx, fz] of along(frame, L.paths?.features ?? [])) for (let dz = -sc; dz <= sc; dz += 0.5) for (let dx = -sc; dx <= sc; dx += 0.5) {
