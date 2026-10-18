@@ -35,6 +35,8 @@ function buildFrom(n) {
   for (const layer of LAYERS) { const s = p[layer]; if (!s) continue;
     const f = cache(n, `${s.id}.json`); if (!existsSync(f)) throw new Error(`no cache for ${s.id}: run fetch first`);
     const d = JSON.parse(readFileSync(f, "utf8")).layers[layer]; if (!d) continue;
+    // a raster is sampled on the place's grid, so it's only good for the frame it was fetched at (scale, size)
+    if (d.kind === "raster" && d.n !== frame.N) throw new Error(`${s.id} ${layer} was fetched for a ${d.n}x${d.n} grid, the place is now ${frame.N}x${frame.N} (scale or size changed): run fetch again`);
     L[layer] = d.kind === "raster" ? { ...d, data: new Float32Array(readFileSync(cache(n, `${s.id}.${layer}.f32`)).buffer.slice(0)) } : d; }
   const { grid, manifest } = buildPlace(place, frame, L), out = `${HERE}/out/${n}`;
   mkdirSync(out, { recursive: true });

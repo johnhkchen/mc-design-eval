@@ -2,8 +2,8 @@
 
 A real place, from open data, as Minecraft land with plain building masses. It is an **input** to the design
 pipeline, never part of it: its output takes the place of a player's land export (as Oak Lake's or Polarton's did),
-and the minecraft-design plugin builds the actual buildings on the footprints. Nothing here imports from the build
-workflow; the only thing used from the plugin is the structure file writer.
+and the minecraft-design plugin builds the actual buildings on the footprints. Nothing here imports from the plugin:
+it writes its own structure files (`src/voxels.mjs`); only the tests read them back with the toolkit's loader.
 
 ```
 node bin/irl.mjs sources [place]   which source supplies each layer
@@ -57,10 +57,11 @@ lab's `benchmarks/plugin-baseline/runs/build-1/sf-landmarks/refs/LICENSES.md`.
 
 ## Scale
 
-`scale` is blocks per metre (default 1). The San Francisco places use 2 (2 blocks = 1 m), to see whether the finer grain
-carries a Victorian facade. Road, sidewalk and path widths, water depth and tree limits are set in metres and scale
-with it. A 320 m place at scale 2 is 640 x 640 blocks and needs `node --max-old-space-size=8192` (the masses are hollow
-shells to keep it there).
+`scale` is blocks per metre (default 1; fractional is fine: lengths round to whole blocks). The San Francisco places use
+1.4: a 7.6 m Painted Lady is 11 blocks wide, a storey about 5. Road, sidewalk and path widths, water depth and tree
+limits are set in metres and scale with it. The volume is built in `src/voxels.mjs` (a palette and 2 bytes per cell,
+written straight to a structure file), not the toolkit's grid (an object per block, ~640 bytes): 2:1 on a 320 m place
+took 5 GB that way.
 
 ## Reference datasets (not layers)
 
