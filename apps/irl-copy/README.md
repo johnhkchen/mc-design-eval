@@ -54,3 +54,20 @@ terms forbid models "extracted, traced, or otherwise derived" from them.
 
 Reference images for the facades (not layers) live with the design run that uses them, each with its licence: the
 lab's `benchmarks/plugin-baseline/runs/build-1/sf-landmarks/refs/LICENSES.md`.
+
+## Scale
+
+`scale` is blocks per metre (default 1). The San Francisco places use 2 (2 blocks = 1 m), to see whether the finer grain
+carries a Victorian facade. Road, sidewalk and path widths, water depth and tree limits are set in metres and scale
+with it. A 320 m place at scale 2 is 640 x 640 blocks and needs `node --max-old-space-size=8192` (the masses are hollow
+shells to keep it there).
+
+## Reference datasets (not layers)
+
+- **San Francisco Landmark Dataset** (Stanford Digital Repository, https://purl.stanford.edu/vn158kj2087): 1.7M
+  street-level building images, 640x480 (central PCIs and facade-aligned PFIs), with the building's latitude and
+  longitude in each filename; 261 tars, 56.8 GB, grouped by panorama, not place. Use with citation: D. M. Chen,
+  G. Baatz, K. Köser, S. S. Tsai, R. Vedantham, T. Pylvänäinen, K. Roimela, X. Chen, J. Bach, M. Pollefeys, B. Girod,
+  R. Grzeszczuk, "City-Scale Landmark Identification on Mobile Devices," CVPR 2011. Its terms ask that it not be used to
+  identify people: facades only. The first file of each tar locates the tar (a 512-byte range read); the nearest start
+  about 0.9 km from Alamo Square and 1.7 km from the Palace, so a tar has to be listed to confirm coverage.
