@@ -10,7 +10,7 @@ import { approachReport } from "/Volumes/ext1/swe/repos/minecraft-design/tools/s
 export const REPO = resolve(import.meta.dirname, "../../../..");
 // the kit's rooms, moved into module i's frame: rooms inside plot i's x range, shifted by (w*i, 0, 5)
 export const roomsFor = (e) => {
-  const f = resolve(REPO, e.source.run, "rooms.json"); if (!existsSync(f)) return [];
+  const f = resolve(REPO, e.source.run, "rooms.json"); if (e.source.plot == null || !existsSync(f)) return [];
   const w = e.footprint[0], x0 = w * e.source.plot;
   return (JSON.parse(readFileSync(f, "utf8")).rooms ?? []).filter((r) => r.box && Math.min(r.box[0], r.box[3]) >= x0 && Math.max(r.box[0], r.box[3]) < x0 + w)
     .map((r) => ({ ...r, box: [r.box[0] - x0, r.box[1], r.box[2] - 5, r.box[3] - x0, r.box[4], r.box[5] - 5] }));

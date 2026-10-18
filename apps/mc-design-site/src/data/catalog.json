@@ -1162,5 +1162,205 @@
       "plot": 7,
       "file": "benchmarks/plugin-baseline/runs/build-1/oak-lake-sears/delivery/houses/sears-07-craftsman-b.nbt"
     }
+  },
+  {
+    "id": "sf-01-palace-rotunda",
+    "name": "Palace of Fine Arts rotunda",
+    "type": "civic",
+    "series": "San Francisco landmarks",
+    "style": "Beaux-Arts, Panama-Pacific International Exposition, 1915",
+    "project": "sf-palace",
+    "approved": "Placed on the open-data Palace of Fine Arts site (SF-01)",
+    "footprint": [
+      64,
+      64
+    ],
+    "height": 69,
+    "front": "north",
+    "blocks": 42513,
+    "materials": [
+      {
+        "block": "smooth_sandstone",
+        "n": 22772
+      },
+      {
+        "block": "cut_sandstone",
+        "n": 4332
+      },
+      {
+        "block": "smooth_stone",
+        "n": 4032
+      },
+      {
+        "block": "calcite",
+        "n": 3188
+      },
+      {
+        "block": "white_terracotta",
+        "n": 2747
+      },
+      {
+        "block": "granite",
+        "n": 1600
+      }
+    ],
+    "image": "/img/catalog/sf-01-palace-rotunda.jpg",
+    "nbt": "/nbt/sf-01-palace-rotunda.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/palace-kit",
+      "plot": null,
+      "file": "benchmarks/plugin-baseline/runs/build-1/palace-kit/modules/sf-01-palace-rotunda.nbt"
+    }
+  },
+  {
+    "id": "sf-02-palace-colonnade",
+    "name": "Palace colonnade bay",
+    "type": "civic",
+    "series": "San Francisco landmarks",
+    "style": "Beaux-Arts, Panama-Pacific International Exposition, 1915",
+    "project": "sf-palace",
+    "approved": "Placed on the open-data Palace of Fine Arts site (SF-01)",
+    "footprint": [
+      16,
+      24
+    ],
+    "height": 32,
+    "front": "north",
+    "blocks": 2472,
+    "materials": [
+      {
+        "block": "smooth_sandstone",
+        "n": 1208
+      },
+      {
+        "block": "cut_sandstone",
+        "n": 500
+      },
+      {
+        "block": "smooth_stone",
+        "n": 384
+      },
+      {
+        "block": "sandstone",
+        "n": 136
+      },
+      {
+        "block": "smooth_sandstone_slab",
+        "n": 120
+      },
+      {
+        "block": "chiseled_sandstone",
+        "n": 80
+      }
+    ],
+    "image": "/img/catalog/sf-02-palace-colonnade.jpg",
+    "nbt": "/nbt/sf-02-palace-colonnade.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/palace-kit",
+      "plot": null,
+      "file": "benchmarks/plugin-baseline/runs/build-1/palace-kit/modules/sf-02-palace-colonnade.nbt"
+    }
+  },
+  {
+    "id": "sf-03-palace-colonnade-end",
+    "name": "Palace colonnade end",
+    "type": "civic",
+    "series": "San Francisco landmarks",
+    "style": "Beaux-Arts, Panama-Pacific International Exposition, 1915",
+    "project": "sf-palace",
+    "approved": "Placed on the open-data Palace of Fine Arts site (SF-01)",
+    "footprint": [
+      16,
+      24
+    ],
+    "height": 32,
+    "front": "north",
+    "blocks": 4162,
+    "materials": [
+      {
+        "block": "smooth_sandstone",
+        "n": 2684
+      },
+      {
+        "block": "cut_sandstone",
+        "n": 508
+      },
+      {
+        "block": "smooth_stone",
+        "n": 384
+      },
+      {
+        "block": "sandstone",
+        "n": 332
+      },
+      {
+        "block": "chiseled_sandstone",
+        "n": 92
+      },
+      {
+        "block": "smooth_sandstone_slab",
+        "n": 58
+      }
+    ],
+    "image": "/img/catalog/sf-03-palace-colonnade-end.jpg",
+    "nbt": "/nbt/sf-03-palace-colonnade-end.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/palace-kit",
+      "plot": null,
+      "file": "benchmarks/plugin-baseline/runs/build-1/palace-kit/modules/sf-03-palace-colonnade-end.nbt"
+    }
+  },
+  {
+    "id": "sf-04-palace-hall-bay",
+    "name": "Palace exhibition hall bay",
+    "type": "civic",
+    "series": "San Francisco landmarks",
+    "style": "Beaux-Arts, Panama-Pacific International Exposition, 1915",
+    "project": "sf-palace",
+    "approved": "Placed on the open-data Palace of Fine Arts site (SF-01)",
+    "footprint": [
+      16,
+      24
+    ],
+    "height": 28,
+    "front": "north",
+    "blocks": 1999,
+    "materials": [
+      {
+        "block": "smooth_sandstone",
+        "n": 700
+      },
+      {
+        "block": "sandstone",
+        "n": 410
+      },
+      {
+        "block": "smooth_stone",
+        "n": 384
+      },
+      {
+        "block": "smooth_sandstone_stairs",
+        "n": 160
+      },
+      {
+        "block": "cut_sandstone",
+        "n": 154
+      },
+      {
+        "block": "smooth_sandstone_slab",
+        "n": 128
+      }
+    ],
+    "image": "/img/catalog/sf-04-palace-hall-bay.jpg",
+    "nbt": "/nbt/sf-04-palace-hall-bay.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/palace-kit",
+      "plot": null,
+      "file": "benchmarks/plugin-baseline/runs/build-1/palace-kit/modules/sf-04-palace-hall-bay.nbt"
+    }
   }
 ]

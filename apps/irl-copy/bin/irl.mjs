@@ -5,15 +5,19 @@
 //   node bin/irl.mjs fetch <place>        download every planned source into .cache/<place>/ (once per source)
 //   node bin/irl.mjs build <place>        compose out/<place>/{land.nbt, manifest.json, SOURCES.md} from the cache
 //   node bin/irl.mjs all <place>          fetch, then build
+//   node bin/irl.mjs landmark <no> <place> [--half m] [--scale s]   a place file framed on an SF Article 10 landmark
+//   node bin/irl.mjs modules <place> <dir>    each module of the place's compose file as its own .nbt, its swaps applied
+//                                         (for the catalog: names from "catalog": { module: id } in the compose file)
 //   node bin/irl.mjs compose <place>      build, then put the designed modules in (places/<place>.compose.json):
 //                                         out/<place>/composed.nbt
 // <place> is a file under places/ without .json (e.g. sf/alamo-square).
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
-import { resolve } from "node:path";
+import { dirname, resolve } from "node:path";
 import { frameFor } from "../src/frame.mjs";
 import { SOURCES, LAYERS, plan } from "../src/sources/index.mjs";
 import { buildPlace } from "../src/build.mjs";
 import { compose } from "../src/place.mjs";
+import { landmark } from "../src/sources/datasf.mjs";
 import { load as loadStructure } from "/Volumes/ext1/swe/repos/minecraft-design/tools/src/structure.mjs";   // reads the design pipeline's modules
 
 const HERE = resolve(import.meta.dirname, ".."), [cmd, name] = process.argv.slice(2);
@@ -70,4 +74,28 @@ if (cmd === "sources") {
 else if (cmd === "build") buildFrom(name);
 else if (cmd === "all") { await fetchPlace(name); buildFrom(name); }
 else if (cmd === "compose") buildFrom(name, { composeWith: true });
+else if (cmd === "modules") {
+  const spec = JSON.parse(readFileSync(`${HERE}/places/${name}.compose.json`, "utf8")), dir = resolve(process.argv[4]); mkdirSync(dir, { recursive: true });
+  const { Voxels } = await import("../src/voxels.mjs");
+  for (const [mod, id] of Object.entries(spec.catalog ?? {})) {
+    const m = spec.modules[mod], src = loadStructure(resolve(HERE, m.file)), [x0, z0, x1, z1] = m.plot;
+    let H = 0; for (const c of src.cells.values()) if (c.pos[0] >= x0 && c.pos[0] <= x1 && c.pos[2] >= z0 && c.pos[2] <= z1 && !/air$/.test(c.block)) H = Math.max(H, c.pos[1] + 1);
+    const out = new Voxels([x1 - x0 + 1, H, z1 - z0 + 1]);
+    for (const c of src.cells.values()) { const [x, y, z] = c.pos; if (x < x0 || x > x1 || z < z0 || z > z1 || /air$/.test(c.block)) continue;
+      const n = c.block.replace(/^minecraft:/, ""), w = m.swap?.find((r) => r.from === n && (r.minY == null || y >= r.minY) && (r.maxY == null || y <= r.maxY));
+      out.set(x - x0, y, z - z0, w ? w.to : c.block, c.state); }
+    out.save(`${dir}/${id}.nbt`); console.log(`${id}: ${out.size.join("x")}`);
+  }
+}
+else if (cmd === "landmark") {
+  // centred on the landmark's boundary, a box reaching 40 m past it (or --half), at 1.4 blocks a metre (or --scale)
+  const lm = await landmark(name), target = process.argv[4], arg = (k, d) => (process.argv.includes(k) ? +process.argv[process.argv.indexOf(k) + 1] : d);
+  const pts = (lm.geometry.type === "Polygon" ? [lm.geometry.coordinates] : lm.geometry.coordinates).flat(2);
+  const lons = pts.map((p) => p[0]), lats = pts.map((p) => p[1]), lat = (Math.min(...lats) + Math.max(...lats)) / 2, lon = (Math.min(...lons) + Math.max(...lons)) / 2;
+  const reach = Math.max((Math.max(...lats) - Math.min(...lats)) * 111000, (Math.max(...lons) - Math.min(...lons)) * 111000 * Math.cos((lat * Math.PI) / 180)) / 2;
+  const place = { name: lm.name, note: `San Francisco landmark No. ${lm.number}, ${lm.address} (designated ${lm.year}).`, city: "san-francisco", country: "US", scale: arg("--scale", 1.4),
+    centre: [+lat.toFixed(6), +lon.toFixed(6)], half: arg("--half", Math.round(reach + 40)), landmark: { number: lm.number, photo: lm.photo, document: lm.document } };
+  mkdirSync(dirname(`${HERE}/places/${target}.json`), { recursive: true });
+  writeFileSync(`${HERE}/places/${target}.json`, JSON.stringify(place, null, 1) + "\n"); console.log(JSON.stringify(place));
+}
 else console.log(readFileSync(new URL(import.meta.url), "utf8").split("\n").slice(1, 9).join("\n"));

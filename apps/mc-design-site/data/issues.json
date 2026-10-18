@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-18T09:03:32.753Z",
+ "checkedAt": "2026-10-18T12:51:28.561Z",
  "buildings": {
   "polarton-00-cotton-gin": {
    "version": "2b6fa29d3524",
@@ -114,6 +114,46 @@
   "sears-07-craftsman-b": {
    "version": "b5a48d828498",
    "issues": []
+  },
+  "sf-01-palace-rotunda": {
+   "version": "d5ab72ca5680",
+   "issues": [
+    {
+     "kind": "no front door",
+     "at": null,
+     "what": "no door at all"
+    }
+   ]
+  },
+  "sf-02-palace-colonnade": {
+   "version": "fd52a402b236",
+   "issues": [
+    {
+     "kind": "no front door",
+     "at": null,
+     "what": "no door at all"
+    }
+   ]
+  },
+  "sf-03-palace-colonnade-end": {
+   "version": "e0e4349c0508",
+   "issues": [
+    {
+     "kind": "no front door",
+     "at": null,
+     "what": "no door at all"
+    }
+   ]
+  },
+  "sf-04-palace-hall-bay": {
+   "version": "cb3b32bdb015",
+   "issues": [
+    {
+     "kind": "no front door",
+     "at": null,
+     "what": "no door at all"
+    }
+   ]
   }
  }
 }

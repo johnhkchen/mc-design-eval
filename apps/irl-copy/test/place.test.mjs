@@ -25,3 +25,15 @@ test("a module bent along an arc fills the band without holes and turns its stai
   const stairs = []; for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) { const c = g.get(x, 1, z); if (c) stairs.push(c.state.facing); }
   assert.ok(stairs.length > 10 && new Set(stairs).size >= 2, "stairs placed and turned with the curve");
 });
+
+test("a module set at an offset turns a quarter clockwise as a rotation, its stairs with it, and repeats", () => {
+  const N = 40, g = new Voxels([N, 6, N]), mod = new Voxels([3, 2, 2]);
+  mod.set(0, 0, 0, "stone"); mod.set(2, 0, 0, "dirt"); mod.set(0, 0, 1, "oak_stairs", { facing: "north", half: "bottom" });
+  const manifest = { buildings: [{ id: "b", base: 1, footprint: [[10, 10], [20, 20]] }] };
+  compose(g, manifest, [{ building: "b", module: mod, plot: [0, 0, 2, 1], mode: "at", at: [0, 0], quarter: 1, repeat: { count: 2, step: [5, 0] } }], { ground: () => 0, I: (x, z) => z * N + x });
+  // one quarter clockwise: the module's north-west corner goes to the north-east, its north-east corner to the south-east
+  assert.equal(g.get(11, 1, 10).block, "minecraft:stone");
+  assert.equal(g.get(11, 1, 12).block, "minecraft:dirt");
+  assert.equal(g.get(10, 1, 10).state.facing, "east");               // north-facing stairs now face east
+  assert.equal(g.get(16, 1, 10).block, "minecraft:stone");           // repeated 5 blocks east
+});

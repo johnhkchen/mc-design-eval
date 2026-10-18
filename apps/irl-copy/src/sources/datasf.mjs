@@ -18,6 +18,14 @@ const src = (id, layers, name, dataset, geom, shape) => ({
   async fetch(place, frame) { return shape(await socrata(dataset, geom, frame.box)); },
 });
 
+/** One of the city's Article 10 landmarks by number: its name, boundary, designation year and photo. */
+export async function landmark(no) {
+  const r = await fetch(`${D}/97yj-54sx.geojson?${new URLSearchParams({ $where: `landmarkno='${no}'` })}`); if (!r.ok) throw new Error(`landmark ${no}: ${r.status}`);
+  const f = (await r.json()).features[0]; if (!f) throw new Error(`no landmark ${no}`);
+  const p = f.properties; return { number: +no, name: p.name, address: p.address, year: p.yeardesignated ? Math.round(+p.yeardesignated) : null,
+    photo: p.photo?.url ?? p.photo ?? null, document: p.designationdocument?.url ?? p.designationdocument ?? null, geometry: f.geometry };
+}
+
 export default [
   // 5 ft contours on the San Francisco datum: elevation in feet
   src("sf-contours", ["ground"], "Elevation Contours (5 ft)", "6d73-6c4f", "the_geom", (fc) => ({ ground: { kind: "contours", unit: 0.3048, field: "elevation", ...fc } })),
@@ -36,5 +44,8 @@ export default [
         address: (p.property_location ?? "").replace(/\s+/g, " ").replace(/^0000 0*/, "").replace(/0000$/, "").trim() } }); }
     return { parcels: { type: "FeatureCollection", rollYear: latest, features: [...by.values()] } };
   }),
+  // the city's designated landmarks (Article 10 of the Planning Code): names and boundaries, for naming and framing places
+  src("sf-landmarks", ["landmarks"], "Landmarks Listed in Article 10 of the San Francisco Planning Code", "97yj-54sx", "the_geom", (fc) => ({ landmarks: { ...fc, features: fc.features.map((f) => ({ ...f,
+    properties: { number: +f.properties.landmarkno || null, name: f.properties.name, year: f.properties.yeardesignated ? Math.round(+f.properties.yeardesignated) : null } })) } })),
   src("sf-parks", ["parks"], "Recreation and Parks Properties", "gtr9-ntp6", "shape", (fc) => ({ parks: { ...fc, features: fc.features.map((f) => ({ ...f, properties: { name: f.properties.property_name } })) } })),
 ];

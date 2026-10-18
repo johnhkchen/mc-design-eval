@@ -45,6 +45,16 @@ const KITS = [{
     "sears-06-winona-b": { name: "Winona, white and oak", type: "house", variantOf: "sears-06-winona", swap: "spruce=oak,smooth_sandstone=white_terracotta" },
     "sears-07-craftsman-b": { name: "Craftsman, dark shingle", type: "house", variantOf: "sears-07-craftsman", swap: "spruce=dark_oak" },
   },
+}, {
+  // real San Francisco landmarks, recreated from open data at 1.4 blocks a metre (apps/irl-copy); the kit's modules with the
+  // site's colour corrections (irl-copy modules); no rooms: monuments
+  series: "San Francisco landmarks", dir: `${RUNS}/palace-kit/modules`, run: `${RUNS}/palace-kit`, project: "sf-palace", rooms: false,
+  approved: "Placed on the open-data Palace of Fine Arts site (SF-01)", style: "Beaux-Arts, Panama-Pacific International Exposition, 1915", modules: {
+    "sf-01-palace-rotunda": { name: "Palace of Fine Arts rotunda", type: "civic" },
+    "sf-02-palace-colonnade": { name: "Palace colonnade bay", type: "civic" },
+    "sf-03-palace-colonnade-end": { name: "Palace colonnade end", type: "civic" },
+    "sf-04-palace-hall-bay": { name: "Palace exhibition hall bay", type: "civic" },
+  },
 }];
 // the server is 1.21.1: blocks from newer versions as their 1.21.1 equivalents
 const FOR_1_21_1 = [[/^minecraft:pale_oak_log$/, "minecraft:stripped_birch_log"], [/^minecraft:pale_oak_/, "minecraft:birch_"], [/^minecraft:iron_chain$/, "minecraft:chain"]];
@@ -61,7 +71,7 @@ for (const kit of KITS) for (const [id, meta] of Object.entries(kit.modules)) {
   const tiles = resolve(HERE, ".cache/renders", id);
   if (!existsSync(`${tiles}/front-right.png`)) { mkdirSync(tiles, { recursive: true }); execFileSync("node", [MCD, "render", nbt, "--out", `${tiles}/sheet.png`, "--tiles", tiles]); }
   execFileSync("magick", [`${tiles}/front-right.png`, "-strip", "-quality", "82", resolve(HERE, "public/img/catalog", id + ".jpg")]);
-  const plot = Number(/-(\d+)/.exec(id)[1]);
+  const plot = kit.rooms === false ? null : Number(/-(\d+)/.exec(id)[1]);
   entries.push({ id, ...meta, series: kit.series, style: kit.style, project: kit.project, approved: kit.approved,
     footprint: [g.size[0], g.size[2]], height: top, front: "north", blocks: Object.values(counts).reduce((a, b) => a + b, 0),
     materials: Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 6).map(([block, n]) => ({ block, n })),

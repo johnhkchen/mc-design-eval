@@ -53,7 +53,19 @@ commercial ground floor, and a few windows round the back. The manifest records 
 Trees come from the canopy map where there is one (`src/trees.mjs`: treetops are the local maxima, crowns are voxelised
 from the map, trunks run up under each top), else from mapped tree points.
 
+## Placing designed modules
+
+`node bin/irl.mjs compose <place>` builds the place and sets the design pipeline's modules on it from
+`places/<place>.compose.json` (`src/place.mjs`): `centre` (whole, on the footprint's centre), `arc` (bent along a curved
+footprint: a circle fit, an inverse map so the band has no holes, facings turned with the curve, never mirrored) and `at`
+(at an offset in the footprint's box, turned by quarter turns, repeated). Each module can carry colour swaps
+(`swap: [{ from, to, minY?, maxY? }]`) so the design run's files stay as they are; `node bin/irl.mjs modules <place> <dir>`
+writes the modules with their swaps applied, for the catalog.
+
 ## Adding a place
+
+`node bin/irl.mjs landmark <no> sf/<site>` frames a place on one of San Francisco's Article 10 landmarks (its boundary,
+plus 40 m, or `--half`), with the landmark's number, photo and designation document recorded.
 
 Add `places/<city>/<site>.json` with `name`, `city`, `country`, `centre` [lat, lon] and `half` (metres from the
 centre to the box's edge; optional `scale` blocks per metre, `sources` { layer: source id }). For a new city, add a

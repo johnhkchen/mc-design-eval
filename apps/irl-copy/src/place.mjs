@@ -5,7 +5,10 @@
 // and its distance out from the inner edge (an inverse map, so the band has no holes), and anything with a facing turns to
 // the nearest compass direction of the curve there.
 //   compose(g, manifest, placements, { ground, I, N }) -> notes
-//   placements: [{ building, module: <grid>, plot: [x0, z0, x1, z1] (the module's box in its file), mode: "centre"|"arc",
+//   placements: [{ building, module: <grid>, plot: [x0, z0, x1, z1] (the module's box in its file), mode: "centre"|"arc"|"at",
+//                  at mode: at: [dx, dz] from the footprint box's north-west corner, y?: blocks above the footprint's base,
+//                  quarter?: 0-3 quarter turns clockwise seen from above (its north to east, south, west), repeat?: { count,
+//                  step: [dx, dz] }, keep?: true (leave the mass under it: by default the module's box is cleared first)
 //                  end?: { module, plot } (the arc's closing piece, at its far end), edge?: "inner"|"outer" (which side of the
 //                  footprint the band hugs), front?: "inner"|"outer" (which way the module's north faces), clear?: "all"|"band",
 //                  ground?: false (drop the module's own bottom course) }]
@@ -50,12 +53,30 @@ const copyCell = (c, quarter, swap, y) => {
   return [s ? s.to : c.block, c.state ? { ...c.state, ...(c.state.facing ? { facing: turn(c.state.facing, quarter) } : {}) } : undefined];
 };
 
+// a module at an offset in the footprint's box, turned by quarter turns (a rotation: its blocks' facings turn with it),
+// repeated along a step; its box is cleared first unless keep
+function placeAt(g, b, p, { H, skip }) {
+  const [x0, z0, x1, z1] = p.plot, W = x1 - x0 + 1, D = z1 - z0 + 1, q = ((p.quarter ?? 0) % 4 + 4) % 4;
+  const xs = b.footprint.map((c) => c[0]), zs = b.footprint.map((c) => c[1]), bx = Math.min(...xs), bz = Math.min(...zs);
+  const [w2, d2] = q % 2 ? [D, W] : [W, D], y0 = b.base + (p.y ?? 0), n = p.repeat?.count ?? 1, [sx, sz] = p.repeat?.step ?? [0, 0];
+  // module (mx, mz) -> turned (tx, tz) in a w2 x d2 box: one quarter clockwise takes north to east
+  const turnXZ = (mx, mz) => (q === 0 ? [mx, mz] : q === 1 ? [D - 1 - mz, mx] : q === 2 ? [W - 1 - mx, D - 1 - mz] : [mz, W - 1 - mx]);
+  for (let k = 0; k < n; k++) {
+    const ox = bx + p.at[0] + k * sx, oz = bz + p.at[1] + k * sz;
+    if (!p.keep) for (let tz = 0; tz < d2; tz++) for (let tx = 0; tx < w2; tx++) for (let y = y0 + skip; y < Math.min(g.size[1], y0 + H); y++) g.set(ox + tx, y, oz + tz, "air");
+    for (let mz = 0; mz < D; mz++) for (let mx = 0; mx < W; mx++) { const [tx, tz] = turnXZ(mx, mz);
+      for (let y = skip; y < H; y++) { const c = copyCell(p.module.get(x0 + mx, y, z0 + mz), q, p.swap, y); if (c) g.set(ox + tx, y0 + y, oz + tz, ...c); } }
+  }
+  return `${p.building}: ${W}x${D} module at +${p.at.join(",")}${q ? `, ${q} quarter turn${q > 1 ? "s" : ""}` : ""}${n > 1 ? `, x${n}` : ""}`;
+}
+
 export function compose(g, manifest, placements, { ground, I }) {
   const notes = [], byId = new Map(manifest.buildings.map((b) => [b.id, b]));
   for (const p of placements) {
     const b = byId.get(p.building); if (!b) { notes.push(`${p.building}: not in the manifest`); continue; }
     const [x0, z0, x1, z1] = p.plot, W = x1 - x0 + 1, D = z1 - z0 + 1, H = Math.min(p.module.size[1], g.size[1]);
     const skip = p.ground === false ? 1 : 0;        // leave out the module's own paving course (its y 0 sits on the ground block)
+    if (p.mode === "at") { notes.push(placeAt(g, b, p, { H, skip })); continue; }
     if (p.mode === "centre" || p.clear !== "band") clear(g, b, ground, I);
     if (p.mode === "centre") {
       const xs = b.footprint.map((c) => c[0]), zs = b.footprint.map((c) => c[1]);
