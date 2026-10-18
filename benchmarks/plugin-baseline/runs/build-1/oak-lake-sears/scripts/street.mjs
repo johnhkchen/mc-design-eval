@@ -43,7 +43,7 @@ export function plotsAlong(site, st, side, { wide = 12, deep = 14, setback = 1, 
   const { X, Z, H, water, hole, built } = site; const out = [];
   const roadAt = new Map(st.cells.map((c) => [`${c.x},${c.z}`, c]));
   const blocked = (x, z) => x < 0 || z < 0 || x >= X || z >= Z || water[z][x] || hole(x, z) || built[z][x] || taken.has(`${x},${z}`) || keepOut.some((k) => x >= k[0] && x <= k[2] && z >= k[1] && z <= k[3]);
-  const P = st.pts; let i = 6;
+  const P = st.pts, rim = (st.half ?? 2) + 0.5; let i = 6; /* the road's edge from its centre line */
   while (i < P.length - 6) {
     const [ax, az] = P[i - 4], [bx, bz] = P[i + 4], tx = bx - ax, tz = bz - az;
     const alongX = Math.abs(tx) >= Math.abs(tz); const [cx, cz] = P[i];
@@ -52,9 +52,9 @@ export function plotsAlong(site, st, side, { wide = 12, deep = 14, setback = 1, 
     let best = null;
     for (let sb = setback; sb <= setback + 5 && !best; sb++) {
     let rect, face, gate;
-    if (alongX) { const s = Math.sign(nz) || 1, edge = Math.round(cz + s * (2.5 + sb)); const x0 = Math.round(cx) - (wide >> 1);
+    if (alongX) { const s = Math.sign(nz) || 1, edge = s > 0 ? Math.ceil(cz + rim + sb) : Math.floor(cz - rim - sb); /* first cell past the road's edge */ const x0 = Math.round(cx) - (wide >> 1);
       rect = s > 0 ? [x0, edge, x0 + wide - 1, edge + deep - 1] : [x0, edge - deep + 1, x0 + wide - 1, edge]; face = s > 0 ? "north" : "south"; gate = [Math.round(cx) - 1, s > 0 ? edge - 1 : edge + 1]; }
-    else { const s = Math.sign(nx) || 1, edge = Math.round(cx + s * (2.5 + sb)); const z0 = Math.round(cz) - (wide >> 1);
+    else { const s = Math.sign(nx) || 1, edge = s > 0 ? Math.ceil(cx + rim + sb) : Math.floor(cx - rim - sb); const z0 = Math.round(cz) - (wide >> 1);
       rect = s > 0 ? [edge, z0, edge + deep - 1, z0 + wide - 1] : [edge - deep + 1, z0, edge, z0 + wide - 1]; face = s > 0 ? "west" : "east"; gate = [s > 0 ? edge - 1 : edge + 1, Math.round(cz) - 1]; }
     const [x0, z0, x1, z1] = rect; const road = Math.round(st.y[i]);
     let ok = true; const hs = [];

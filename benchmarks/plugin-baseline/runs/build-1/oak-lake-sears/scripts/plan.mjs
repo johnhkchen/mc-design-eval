@@ -13,40 +13,53 @@ mkdirSync(OUT, { recursive: true });
 const site = readSite(), { X, Z, H, water } = site;
 
 // ---- streets (centre-line way points in the export's x, z) -----------------------------------------------------------
-const LAKE_DRIVE = [[48, 46], [70, 40], [100, 38], [122, 50], [126, 80], [122, 108], [100, 120], [70, 120], [50, 108], [46, 76], [48, 46]];
+const LAKE_DRIVE = [[52, 46], [70, 40], [100, 38], [122, 50], [126, 80], [122, 108], [100, 120], [70, 120], [53, 108], [50, 76], [52, 46]];
+// `points` lays a street along way points (smoothed into curves); `from`/`via`/`to` routes it by least cost instead
+// ([x, z, heading], heading 0..7 = E, SE, S, SW, W, NW, N, NE). The crescents' way points follow the contours.
 const SPEC = [
-  { name: "West Avenue", kind: "avenue", points: [[22, 0], [22, 159]] },
+  // a boulevard: two 3-wide carriageways either side of a planted centre strip (7 wide in all)
+  { name: "West Avenue", kind: "avenue", half: 3, points: [[24, 0], [24, 159]] },
   // the loop in two halves (a closed polyline collapses in the street simplifier: its ends coincide)
   { name: "Lake Drive", kind: "drive", points: LAKE_DRIVE.slice(0, 6) },
   { name: "Lake Drive ", kind: "drive", points: LAKE_DRIVE.slice(5) },
   { name: "Hillside Drive", kind: "drive", points: [[132, 0], [131, 30], [128, 56], [124, 64]] },
-  { name: "Green Street", kind: "street", points: [[24, 44], [47, 46]] },
-  { name: "Church Street", kind: "street", points: [[24, 108], [49, 108]] },
-  { name: "North Lane", kind: "street", points: [[99, 37], [98, 0]] },
-  { name: "Park Lane", kind: "street", points: [[88, 121], [88, 159]] },
+  { name: "Green Street", kind: "street", points: [[28, 45], [50, 46]] },
+  { name: "Church Street", kind: "street", points: [[28, 108], [52, 108]] },
+  // the north and south quarters each get a crescent off Lake Drive, bending with the ground
+  { name: "North Crescent", kind: "street", points: [[62, 43], [60, 32], [70, 25], [96, 24], [108, 30], [112, 43]] },
+  { name: "South Crescent", kind: "street", points: [[58, 119], [56, 128], [66, 135], [82, 135], [90, 129], [92, 121]] },
+  // no lane south to the edge: the ground climbs 7 blocks in 8 onto the south plateau; the school fronts Lake Drive
 ];
 // ---- zones: what is not house lots ------------------------------------------------------------------------------------
 const ZONES = [
-  { name: "Village green", kind: "green", rect: [27, 4, 44, 22] },
-  { name: "Shops", kind: "shops", rect: [0, 2, 19, 38] },
+  { name: "Village green", kind: "green", rect: [29, 4, 47, 22] },
+  { name: "Shops", kind: "shops", rect: [0, 2, 20, 38] },
   { name: "School", kind: "school", rect: [96, 126, 156, 158] },
-  { name: "Church", kind: "church", rect: [27, 112, 46, 134] },
+  { name: "Church", kind: "church", rect: [29, 112, 48, 134] },
   // the east slope climbs 8 -> 20 above the lake in 20 blocks: kept wooded with a trail, not terraced for lots
   { name: "Oak Woods", kind: "woods", rect: [129, 66, 159, 124] },
 ];
 // buildings and places in the lake park (designed later, like the school and church)
-const FEATURES = [{ name: "Boathouse", at: [58, 84] }, { name: "Bandstand", at: [66, 56] }, { name: "Playground", at: [104, 108] }, { name: "Shore path", at: [86, 64] }];
+const FEATURES = [{ name: "Crescent garden", at: [76, 33] }, { name: "Crescent garden", at: [66, 128] }, { name: "Boathouse", at: [58, 84] }, { name: "Bandstand", at: [66, 56] }, { name: "Playground", at: [104, 108] }, { name: "Shore path", at: [86, 64] }];
 const inPoly = (x, z, P) => { let c = false; for (let i = 0, j = P.length - 1; i < P.length; j = i++) { const [xi, zi] = P[i], [xj, zj] = P[j]; if ((zi > z) !== (zj > z) && x < ((xj - xi) * (z - zi)) / (zj - zi) + xi) c = !c; } return c; };
 const park = (x, z) => inPoly(x + 0.5, z + 0.5, LAKE_DRIVE);
 const zoneAt = (x, z) => ZONES.find((zn) => x >= zn.rect[0] && x <= zn.rect[2] && z >= zn.rect[1] && z <= zn.rect[3]);
 
-const streets = SPEC.map((s) => { const st = street(site, { points: s.points, half: 2, maxGrade: 0.2, straightIn: 0 }); st.name = s.name; st.kind = s.kind; return st; });
+const zoneRects = () => ZONES.map((zn) => zn.rect);
+const streets = SPEC.map((s) => {
+  const st = s.points ? street(site, { points: s.points, half: s.half ?? 2, maxGrade: 0.2, straightIn: 0 })
+    : street(site, { from: s.from, via: s.via ?? [], to: s.to, half: s.half ?? 2, maxGrade: 0.2, straightIn: 0, keepOut: zoneRects() });
+  if (!st) throw new Error(`no route for ${s.name}`);
+  st.name = s.name; st.kind = s.kind; st.half = s.half ?? 2; return st; });
 const roadAt = new Map(); for (const st of streets) for (const c of st.cells) roadAt.set(`${c.x},${c.z}`, st);
+const median = new Set(); for (const st of streets) if (st.half === 3) for (const c of st.cells) if (c.d <= 0.5) median.add(`${c.x},${c.z}`);
 // lots shoulder to shoulder along each side of each street (Lake Drive's lake-view lots first), one block apart
 const taken = new Set();
 for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) if (roadAt.has(`${x},${z}`) || park(x, z) || zoneAt(x, z)) taken.add(`${x},${z}`);
 const lots = [];
-for (const st of streets) for (const side of ["left", "right"]) {
+const ORDER = ["West Avenue", "North Crescent", "South Crescent"];
+const byOrder = [...streets].sort((a, b) => ((ORDER.indexOf(a.name) + 1 || 99) - (ORDER.indexOf(b.name) + 1 || 99)));
+for (const st of byOrder) for (const side of ["left", "right"]) {
   // the street's own cells are free to plotsAlong (it tests them itself); everything else stays taken
   const own = st.cells.map((c) => `${c.x},${c.z}`); own.forEach((k) => taken.delete(k));
   for (const p of plotsAlong(site, st, side, { wide: 16, deep: 20, setback: 0, maxCut: 6, maxFill: 5, pitch: 17, taken })) lots.push({ ...p, street: st.name.trim() });
@@ -59,7 +72,7 @@ const COL = { water: [70, 120, 190], park: [150, 196, 120], green: [170, 210, 13
 const lotAt = new Map(); lots.forEach((p, i) => { for (let z = p.z0; z <= p.z1; z++) for (let x = p.x0; x <= p.x1; x++) lotAt.set(`${x},${z}`, i); });
 for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) {
   const k = `${x},${z}`, h = H[z][x], zn = zoneAt(x, z); let c;
-  if (water[z][x]) c = COL.water; else if (roadAt.has(k)) c = COL.road; else if (lotAt.has(k)) c = COL.lot; else if (zn) c = COL[zn.kind]; else if (park(x, z)) c = COL.park;
+  if (water[z][x]) c = COL.water; else if (median.has(k)) c = COL.park; else if (roadAt.has(k)) c = COL.road; else if (lotAt.has(k)) c = COL.lot; else if (zn) c = COL[zn.kind]; else if (park(x, z)) c = COL.park;
   else { const t = Math.max(0, Math.min(1, h / 26)); c = [110 + 60 * t, 140 + 50 * t, 90 + 40 * t]; }
   // contour lines every 2 blocks of height
   const cont = !water[z][x] && x + 1 < X && z + 1 < Z && (Math.floor(h / 2) !== Math.floor(H[z][x + 1] / 2) || Math.floor(h / 2) !== Math.floor(H[z + 1][x] / 2));
@@ -69,7 +82,7 @@ for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) {
     const o = ((z * S + dz) * X * S + x * S + dx) * 3; img[o] = cc[0]; img[o + 1] = cc[1]; img[o + 2] = cc[2]; } }
 writeFileSync(`${OUT}/plan.ppm`, Buffer.concat([Buffer.from(`P6 ${X * S} ${Z * S} 255\n`), img]));
 const labels = [
-  ...SPEC.filter((s) => s.name.trim() === s.name).map((s) => { const p = s.points[Math.floor(s.points.length / 2)]; return [s.name, p[0], p[1]]; }),
+  ...streets.filter((s) => s.name.trim() === s.name).map((s) => { const p = s.pts[Math.floor(s.pts.length / 2)]; return [s.name, p[0], p[1]]; }),
   ...ZONES.map((zn) => [zn.name, (zn.rect[0] + zn.rect[2]) / 2, (zn.rect[1] + zn.rect[3]) / 2]),
   ["Lake park", 76, 48], ["Oak Lake", 88, 86], ...FEATURES.map((f) => ["• " + f.name, f.at[0] + f.name.length / 2, f.at[1]]),
   ...lots.map((p, i) => [String(i + 1), (p.x0 + p.x1) / 2, (p.z0 + p.z1) / 2]),
@@ -86,7 +99,7 @@ execFileSync("magick", [...args, `${OUT}/plan.png`]);
   for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) {
     const k = `${x},${z}`, st = roadAt.get(k), h = H[z][x];
     const t = Math.max(0, Math.min(1, h / 26));
-    let c = water[z][x] ? [170, 200, 232] : st ? KIND[st.kind] : park(x, z) ? [214, 232, 200] : [238 - 30 * (1 - t), 236 - 24 * (1 - t), 226 - 20 * (1 - t)];
+    let c = water[z][x] ? [170, 200, 232] : median.has(k) ? [96, 150, 80] : st ? KIND[st.kind] : park(x, z) ? [214, 232, 200] : [238 - 30 * (1 - t), 236 - 24 * (1 - t), 226 - 20 * (1 - t)];
     const cont = !st && !water[z][x] && x + 1 < X && z + 1 < Z && (Math.floor(h / 2) !== Math.floor(H[z][x + 1] / 2) || Math.floor(h / 2) !== Math.floor(H[z + 1][x] / 2));
     for (let dz = 0; dz < S; dz++) for (let dx = 0; dx < S; dx++) { const cc = cont && (dx === S - 1 || dz === S - 1) ? c.map((v) => v * 0.88) : c;
       const o = ((z * S + dz) * X * S + x * S + dx) * 3; R[o] = cc[0]; R[o + 1] = cc[1]; R[o + 2] = cc[2]; } }
@@ -98,7 +111,7 @@ execFileSync("magick", [...args, `${OUT}/plan.png`]);
     const nudge = { "Lake Drive": [-10, 42] }[n] ?? [0, 0]; /* clear of a crossing street's label */
     const x = Math.max(4, Math.min(X * S - txt.length * 10, p[0] * S + 14 + nudge[0])), y = Math.max(4, Math.min(Z * S - 26, p[1] * S - 10 + nudge[1]));
     a.push("-fill", "#ffffffdd", "-draw", `rectangle ${x - 4},${y - 2} ${x + txt.length * 9.6},${y + 22}`, "-fill", "#1c2420", "-annotate", `+${x}+${y}`, txt); }
-  a.push("-pointsize", "15", "-fill", "#ffffffdd", "-draw", "rectangle 6,6 290,70", "-fill", "#963c28", "-annotate", "+12+10", "avenue", "-fill", "#285a96", "-annotate", "+12+30", "drives", "-fill", "#464646", "-annotate", "+12+50", "streets", "-fill", "#1c2420", "-annotate", "+80+10", "all 5 wide", "-annotate", "+80+30", "contours every 2 blocks", "-annotate", "+80+50", "160 x 160 blocks, north up");
+  a.push("-pointsize", "15", "-fill", "#ffffffdd", "-draw", "rectangle 6,6 380,70", "-fill", "#963c28", "-annotate", "+12+10", "avenue", "-fill", "#285a96", "-annotate", "+12+30", "drives", "-fill", "#464646", "-annotate", "+12+50", "streets", "-fill", "#1c2420", "-annotate", "+80+10", "avenue 7 wide (planted strip), others 5", "-annotate", "+80+30", "contours every 2 blocks", "-annotate", "+80+50", "160 x 160 blocks, north up");
   execFileSync("magick", [...a, `${OUT}/roads.png`]);
 }
 const summary = { streets: streets.map((s) => ({ name: s.name, len: s.len, maxGrade: s.maxGrade, cut: s.cut, fill: s.fill })), lots: lots.length, zones: ZONES.map((z) => z.name), lotEarth: lots.reduce((a, p) => a + p.cut + p.fill, 0), perStreet: Object.fromEntries([...new Set(lots.map((l) => l.street))].map((n) => [n, lots.filter((l) => l.street === n).length])) };

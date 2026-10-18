@@ -3,13 +3,14 @@
   {
    "name": "West Avenue",
    "kind": "avenue",
+   "half": 3,
    "points": [
     [
-     22,
+     24,
      0
     ],
     [
-     22,
+     24,
      159
     ]
    ]
@@ -19,7 +20,7 @@
    "kind": "drive",
    "points": [
     [
-     48,
+     52,
      46
     ],
     [
@@ -61,15 +62,15 @@
      120
     ],
     [
-     50,
+     53,
      108
     ],
     [
-     46,
+     50,
      76
     ],
     [
-     48,
+     52,
      46
     ]
    ]
@@ -101,11 +102,11 @@
    "kind": "street",
    "points": [
     [
-     24,
-     44
+     28,
+     45
     ],
     [
-     47,
+     50,
      46
     ]
    ]
@@ -115,40 +116,72 @@
    "kind": "street",
    "points": [
     [
-     24,
+     28,
      108
     ],
     [
-     49,
+     52,
      108
     ]
    ]
   },
   {
-   "name": "North Lane",
+   "name": "North Crescent",
    "kind": "street",
    "points": [
     [
-     99,
-     37
+     62,
+     43
     ],
     [
-     98,
-     0
+     60,
+     32
+    ],
+    [
+     70,
+     25
+    ],
+    [
+     96,
+     24
+    ],
+    [
+     108,
+     30
+    ],
+    [
+     112,
+     43
     ]
    ]
   },
   {
-   "name": "Park Lane",
+   "name": "South Crescent",
    "kind": "street",
    "points": [
     [
-     88,
+     58,
+     119
+    ],
+    [
+     56,
+     128
+    ],
+    [
+     66,
+     135
+    ],
+    [
+     82,
+     135
+    ],
+    [
+     90,
+     129
+    ],
+    [
+     92,
      121
-    ],
-    [
-     88,
-     159
     ]
    ]
   }
@@ -158,9 +191,9 @@
    "name": "Village green",
    "kind": "green",
    "rect": [
-    27,
+    29,
     4,
-    44,
+    47,
     22
    ]
   },
@@ -170,7 +203,7 @@
    "rect": [
     0,
     2,
-    19,
+    20,
     38
    ]
   },
@@ -188,9 +221,9 @@
    "name": "Church",
    "kind": "church",
    "rect": [
-    27,
+    29,
     112,
-    46,
+    48,
     134
    ]
   },
@@ -206,6 +239,20 @@
   }
  ],
  "features": [
+  {
+   "name": "Crescent garden",
+   "at": [
+    76,
+    33
+   ]
+  },
+  {
+   "name": "Crescent garden",
+   "at": [
+    66,
+    128
+   ]
+  },
   {
    "name": "Boathouse",
    "at": [
@@ -237,7 +284,7 @@
  ],
  "lakeDrive": [
   [
-   48,
+   52,
    46
   ],
   [
@@ -269,338 +316,318 @@
    120
   ],
   [
-   50,
+   53,
    108
   ],
   [
-   46,
+   50,
    76
   ],
   [
-   48,
+   52,
    46
   ]
  ],
  "lots": [
   {
-   "x0": 25,
+   "x0": 28,
    "z0": 23,
-   "x1": 44,
+   "x1": 47,
    "z1": 38,
    "face": "west",
-   "pad": 9,
+   "pad": 10,
    "road": 9,
-   "cut": 392,
-   "fill": 0,
-   "dc": 5,
-   "df": 0,
-   "wall": 109,
+   "cut": 387,
+   "fill": 125,
+   "dc": 4,
+   "df": 1,
+   "wall": 103,
    "gate": [
-    24,
+    27,
     30
    ],
    "setback": 0,
    "street": "West Avenue"
   },
   {
-   "x0": 25,
+   "x0": 28,
    "z0": 49,
-   "x1": 44,
+   "x1": 47,
    "z1": 64,
    "face": "west",
    "pad": 9,
    "road": 9,
    "cut": 0,
-   "fill": 16,
+   "fill": 36,
    "dc": 0,
    "df": 1,
    "wall": 0,
    "gate": [
-    24,
+    27,
     56
    ],
    "setback": 0,
    "street": "West Avenue"
   },
   {
-   "x0": 25,
+   "x0": 28,
    "z0": 66,
-   "x1": 44,
+   "x1": 47,
    "z1": 81,
    "face": "west",
    "pad": 9,
    "road": 9,
    "cut": 0,
-   "fill": 0,
+   "fill": 22,
    "dc": 0,
-   "df": 0,
+   "df": 1,
    "wall": 0,
    "gate": [
-    24,
+    27,
     73
    ],
    "setback": 0,
    "street": "West Avenue"
   },
   {
-   "x0": 25,
+   "x0": 28,
    "z0": 135,
-   "x1": 44,
+   "x1": 47,
    "z1": 150,
    "face": "west",
-   "pad": 13,
-   "road": 10,
-   "cut": 482,
-   "fill": 122,
-   "dc": 3,
-   "df": 4,
-   "wall": 90,
+   "pad": 14,
+   "road": 11,
+   "cut": 227,
+   "fill": 66,
+   "dc": 2,
+   "df": 5,
+   "wall": 44,
    "gate": [
-    24,
+    27,
     142
    ],
    "setback": 0,
    "street": "West Avenue"
   },
   {
-   "x0": 0,
+   "x0": 1,
    "z0": 39,
-   "x1": 19,
+   "x1": 20,
    "z1": 54,
    "face": "east",
    "pad": 9,
    "road": 9,
-   "cut": 4,
-   "fill": 70,
-   "dc": 2,
+   "cut": 1,
+   "fill": 71,
+   "dc": 1,
    "df": 1,
-   "wall": 2,
+   "wall": 0,
    "gate": [
-    20,
+    21,
     46
    ],
-   "setback": 1,
+   "setback": 0,
    "street": "West Avenue"
   },
   {
-   "x0": 0,
+   "x0": 1,
    "z0": 56,
-   "x1": 19,
+   "x1": 20,
    "z1": 71,
    "face": "east",
    "pad": 8,
    "road": 9,
-   "cut": 80,
+   "cut": 81,
    "fill": 0,
    "dc": 1,
    "df": 0,
    "wall": 0,
    "gate": [
-    20,
+    21,
     63
    ],
-   "setback": 1,
+   "setback": 0,
    "street": "West Avenue"
   },
   {
-   "x0": 0,
+   "x0": 1,
    "z0": 73,
-   "x1": 19,
+   "x1": 20,
    "z1": 88,
    "face": "east",
    "pad": 9,
    "road": 10,
-   "cut": 1,
+   "cut": 2,
    "fill": 0,
    "dc": 1,
    "df": 0,
    "wall": 0,
    "gate": [
-    20,
+    21,
     80
    ],
-   "setback": 1,
+   "setback": 0,
    "street": "West Avenue"
   },
   {
-   "x0": 0,
+   "x0": 1,
    "z0": 90,
-   "x1": 19,
+   "x1": 20,
    "z1": 105,
    "face": "east",
-   "pad": 10,
-   "road": 12,
-   "cut": 53,
-   "fill": 376,
-   "dc": 3,
-   "df": 5,
-   "wall": 66,
+   "pad": 9,
+   "road": 11,
+   "cut": 150,
+   "fill": 98,
+   "dc": 5,
+   "df": 4,
+   "wall": 88,
    "gate": [
-    20,
+    21,
     97
    ],
-   "setback": 1,
+   "setback": 0,
    "street": "West Avenue"
   },
   {
-   "x0": 0,
+   "x0": 1,
    "z0": 120,
-   "x1": 19,
+   "x1": 20,
    "z1": 135,
    "face": "east",
    "pad": 9,
    "road": 9,
    "cut": 76,
-   "fill": 25,
+   "fill": 21,
    "dc": 4,
    "df": 2,
-   "wall": 18,
+   "wall": 16,
    "gate": [
-    20,
+    21,
     127
    ],
-   "setback": 1,
+   "setback": 0,
    "street": "West Avenue"
   },
   {
-   "x0": 0,
+   "x0": 1,
    "z0": 137,
-   "x1": 19,
+   "x1": 20,
    "z1": 152,
    "face": "east",
    "pad": 10,
-   "road": 11,
-   "cut": 235,
-   "fill": 297,
+   "road": 12,
+   "cut": 239,
+   "fill": 295,
    "dc": 6,
    "df": 3,
-   "wall": 95,
+   "wall": 103,
    "gate": [
-    20,
+    21,
     144
    ],
-   "setback": 1,
+   "setback": 0,
    "street": "West Avenue"
   },
   {
-   "x0": 46,
-   "z0": 20,
-   "x1": 61,
-   "z1": 39,
+   "x0": 56,
+   "z0": 4,
+   "x1": 71,
+   "z1": 23,
    "face": "south",
-   "pad": 13,
-   "road": 10,
-   "cut": 374,
-   "fill": 19,
-   "dc": 3,
-   "df": 2,
-   "wall": 54,
+   "pad": 14,
+   "road": 16,
+   "cut": 184,
+   "fill": 160,
+   "dc": 2,
+   "df": 5,
+   "wall": 84,
    "gate": [
-    53,
-    40
+    63,
+    24
    ],
    "setback": 3,
-   "street": "Lake Drive"
+   "street": "North Crescent"
   },
   {
-   "x0": 63,
-   "z0": 18,
-   "x1": 78,
-   "z1": 37,
+   "x0": 73,
+   "z0": 2,
+   "x1": 88,
+   "z1": 21,
    "face": "south",
-   "pad": 16,
-   "road": 14,
-   "cut": 162,
-   "fill": 27,
+   "pad": 14,
+   "road": 16,
+   "cut": 178,
+   "fill": 642,
+   "dc": 3,
+   "df": 5,
+   "wall": 156,
+   "gate": [
+    80,
+    22
+   ],
+   "setback": 1,
+   "street": "North Crescent"
+  },
+  {
+   "x0": 90,
+   "z0": 3,
+   "x1": 105,
+   "z1": 22,
+   "face": "south",
+   "pad": 15,
+   "road": 13,
+   "cut": 125,
+   "fill": 33,
    "dc": 1,
    "df": 1,
    "wall": 0,
    "gate": [
-    70,
-    38
+    97,
+    23
    ],
    "setback": 1,
-   "street": "Lake Drive"
+   "street": "North Crescent"
   },
   {
-   "x0": 80,
-   "z0": 17,
-   "x1": 95,
-   "z1": 36,
-   "face": "south",
-   "pad": 13,
-   "road": 11,
-   "cut": 457,
-   "fill": 408,
-   "dc": 4,
-   "df": 5,
-   "wall": 188,
-   "gate": [
-    87,
-    37
-   ],
-   "setback": 0,
-   "street": "Lake Drive"
-  },
-  {
-   "x0": 102,
-   "z0": 18,
-   "x1": 117,
-   "z1": 37,
-   "face": "south",
+   "x0": 51,
+   "z0": 137,
+   "x1": 66,
+   "z1": 156,
+   "face": "north",
    "pad": 11,
    "road": 8,
-   "cut": 482,
-   "fill": 321,
-   "dc": 5,
+   "cut": 698,
+   "fill": 33,
+   "dc": 4,
    "df": 3,
-   "wall": 181,
+   "wall": 139,
    "gate": [
-    109,
-    38
+    58,
+    136
    ],
    "setback": 4,
-   "street": "Lake Drive"
+   "street": "South Crescent"
   },
   {
-   "x0": 70,
-   "z0": 123,
-   "x1": 85,
-   "z1": 142,
+   "x0": 68,
+   "z0": 138,
+   "x1": 83,
+   "z1": 157,
    "face": "north",
-   "pad": 9,
-   "road": 6,
-   "cut": 178,
-   "fill": 156,
+   "pad": 12,
+   "road": 9,
+   "cut": 660,
+   "fill": 270,
    "dc": 5,
-   "df": 3,
-   "wall": 75,
+   "df": 5,
+   "wall": 210,
    "gate": [
-    77,
-    122
+    75,
+    137
    ],
-   "setback": 1,
-   "street": "Lake Drive"
-  },
-  {
-   "x0": 53,
-   "z0": 121,
-   "x1": 68,
-   "z1": 140,
-   "face": "north",
-   "pad": 8,
-   "road": 5,
-   "cut": 517,
-   "fill": 93,
-   "dc": 6,
-   "df": 3,
-   "wall": 173,
-   "gate": [
-    60,
-    120
-   ],
-   "setback": 4,
-   "street": "Lake Drive"
+   "setback": 0,
+   "street": "South Crescent"
   },
   {
    "x0": 135,
@@ -659,68 +686,28 @@
     129,
     7
    ],
-   "setback": 1,
+   "setback": 0,
    "street": "Hillside Drive"
   },
   {
-   "x0": 25,
+   "x0": 28,
    "z0": 86,
-   "x1": 40,
+   "x1": 43,
    "z1": 105,
    "face": "south",
    "pad": 12,
    "road": 10,
-   "cut": 191,
-   "fill": 176,
-   "dc": 3,
-   "df": 4,
-   "wall": 86,
-   "gate": [
-    32,
-    106
-   ],
-   "setback": 1,
-   "street": "Church Street"
-  },
-  {
-   "x0": 76,
-   "z0": 0,
-   "x1": 95,
-   "z1": 15,
-   "face": "east",
-   "pad": 13,
-   "road": 14,
-   "cut": 219,
-   "fill": 412,
-   "dc": 2,
-   "df": 4,
-   "wall": 139,
-   "gate": [
-    96,
-    7
-   ],
-   "setback": 1,
-   "street": "North Lane"
-  },
-  {
-   "x0": 66,
-   "z0": 144,
-   "x1": 85,
-   "z1": 159,
-   "face": "east",
-   "pad": 14,
-   "road": 12,
-   "cut": 312,
-   "fill": 75,
+   "cut": 158,
+   "fill": 256,
    "dc": 3,
    "df": 5,
-   "wall": 52,
+   "wall": 127,
    "gate": [
-    86,
-    151
+    35,
+    106
    ],
-   "setback": 1,
-   "street": "Park Lane"
+   "setback": 0,
+   "street": "Church Street"
   }
  ],
  "summary": {
@@ -729,22 +716,22 @@
     "name": "West Avenue",
     "len": 160,
     "maxGrade": 0.2,
-    "cut": 192,
-    "fill": 233
+    "cut": 269,
+    "fill": 319
    },
    {
     "name": "Lake Drive",
-    "len": 134,
+    "len": 130,
     "maxGrade": 0.2,
-    "cut": 638,
-    "fill": 365
+    "cut": 641,
+    "fill": 360
    },
    {
     "name": "Lake Drive ",
-    "len": 138,
+    "len": 136,
     "maxGrade": 0.2,
-    "cut": 462,
-    "fill": 609
+    "cut": 440,
+    "fill": 589
    },
    {
     "name": "Hillside Drive",
@@ -755,34 +742,34 @@
    },
    {
     "name": "Green Street",
-    "len": 24,
-    "maxGrade": 0,
-    "cut": 0,
+    "len": 23,
+    "maxGrade": 0.01,
+    "cut": 6,
     "fill": 0
    },
    {
     "name": "Church Street",
-    "len": 26,
+    "len": 25,
     "maxGrade": 0.2,
-    "cut": 62,
-    "fill": 75
+    "cut": 97,
+    "fill": 73
    },
    {
-    "name": "North Lane",
-    "len": 38,
+    "name": "North Crescent",
+    "len": 74,
     "maxGrade": 0.2,
-    "cut": 340,
-    "fill": 9
+    "cut": 125,
+    "fill": 174
    },
    {
-    "name": "Park Lane",
-    "len": 39,
+    "name": "South Crescent",
+    "len": 54,
     "maxGrade": 0.2,
-    "cut": 474,
-    "fill": 17
+    "cut": 119,
+    "fill": 94
    }
   ],
-  "lots": 22,
+  "lots": 19,
   "zones": [
    "Village green",
    "Shops",
@@ -790,14 +777,13 @@
    "Church",
    "Oak Woods"
   ],
-  "lotEarth": 8134,
+  "lotEarth": 6620,
   "perStreet": {
    "West Avenue": 10,
-   "Lake Drive": 6,
+   "North Crescent": 3,
+   "South Crescent": 2,
    "Hillside Drive": 3,
-   "Church Street": 1,
-   "North Lane": 1,
-   "Park Lane": 1
+   "Church Street": 1
   }
  }
 }
