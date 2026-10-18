@@ -41,7 +41,7 @@ const ZONES = [
   { name: "Oak Woods", kind: "woods", rect: [129, 66, 159, 124] },
 ];
 // buildings and places in the lake park (designed later, like the school and church)
-const FEATURES = [{ name: "Crescent garden", at: [76, 33] }, { name: "Crescent garden", at: [66, 128] }, { name: "Boathouse", at: [57, 98] }, { name: "Bandstand", at: [88, 50] }];
+const FEATURES = [{ name: "Crescent garden", at: [76, 33] }, { name: "Crescent garden", at: [66, 128] }, { name: "Bandstand", at: [88, 50] }];
 const inPoly = (x, z, P) => { let c = false; for (let i = 0, j = P.length - 1; i < P.length; j = i++) { const [xi, zi] = P[i], [xj, zj] = P[j]; if ((zi > z) !== (zj > z) && x < ((xj - xi) * (z - zi)) / (zj - zi) + xi) c = !c; } return c; };
 const park = (x, z) => inPoly(x + 0.5, z + 0.5, LAKE_DRIVE);
 const zoneAt = (x, z) => ZONES.find((zn) => x >= zn.rect[0] && x <= zn.rect[2] && z >= zn.rect[1] && z <= zn.rect[3]);
@@ -71,12 +71,12 @@ for (const st of byOrder) for (const side of ["left", "right"]) {
 
 // ---- the plan picture ---------------------------------------------------------------------------------------------------
 const S = 5, img = Buffer.alloc(X * S * Z * S * 3);
-const COL = { water: [70, 120, 190], park: [150, 196, 120], green: [170, 210, 130], shops: [214, 160, 120], school: [232, 190, 110], church: [190, 160, 210], woods: [96, 140, 84], field: [118, 178, 88], courts: [176, 104, 82], picnic: [196, 214, 120], beach: [236, 222, 170], play: [240, 176, 110], building: [210, 150, 90], trail: [150, 110, 70], road: [226, 208, 168], lot: [246, 240, 222], edge: [120, 96, 70] };
+const COL = { water: [70, 120, 190], park: [150, 196, 120], green: [170, 210, 130], shops: [214, 160, 120], school: [232, 190, 110], church: [190, 160, 210], woods: [96, 140, 84], field: [118, 178, 88], courts: [176, 104, 82], picnic: [196, 214, 120], beach: [236, 222, 170], play: [240, 176, 110], building: [210, 150, 90], trail: [150, 110, 70], dock: [120, 80, 50], ramp: [150, 150, 150], road: [226, 208, 168], lot: [246, 240, 222], edge: [120, 96, 70] };
 const lotAt = new Map(); lots.forEach((p, i) => { for (let z = p.z0; z <= p.z1; z++) for (let x = p.x0; x <= p.x1; x++) lotAt.set(`${x},${z}`, i); });
 for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) {
   const k = `${x},${z}`, h = H[z][x], zn = zoneAt(x, z); let c;
-  const ar = PARK.inArea(x, z);
-  if (water[z][x]) c = COL.water; else if (median.has(k)) c = COL.park; else if (roadAt.has(k)) c = COL.road; else if (trailAt.has(k)) c = COL.trail; else if (ar) c = COL[ar.kind]; else if (lotAt.has(k)) c = COL.lot; else if (zn) c = COL[zn.kind]; else if (park(x, z)) c = COL.park;
+  const ar = PARK.inArea(x, z), dk = PARK.dockAt.get(k);
+  if (dk) c = COL[dk.kind]; else if (water[z][x]) c = COL.water; else if (median.has(k)) c = COL.park; else if (roadAt.has(k)) c = COL.road; else if (trailAt.has(k)) c = COL.trail; else if (ar) c = COL[ar.kind]; else if (lotAt.has(k)) c = COL.lot; else if (zn) c = COL[zn.kind]; else if (park(x, z)) c = COL.park;
   else { const t = Math.max(0, Math.min(1, h / 26)); c = [110 + 60 * t, 140 + 50 * t, 90 + 40 * t]; }
   // contour lines every 2 blocks of height
   const cont = !water[z][x] && x + 1 < X && z + 1 < Z && (Math.floor(h / 2) !== Math.floor(H[z][x + 1] / 2) || Math.floor(h / 2) !== Math.floor(H[z + 1][x] / 2));
@@ -87,6 +87,7 @@ for (let z = 0; z < Z; z++) for (let x = 0; x < X; x++) {
 writeFileSync(`${OUT}/plan.ppm`, Buffer.concat([Buffer.from(`P6 ${X * S} ${Z * S} 255\n`), img]));
 const labels = [
   ...PARK.areas.map((a) => [a.name, (a.rect[0] + a.rect[2]) / 2, (a.rect[1] + a.rect[3]) / 2]),
+  ...PARK.docks.map((d) => [d.name, d.shore[0] + (d.dir[0] ? -d.dir[0] * 8 : 0), d.shore[1] + (d.dir[1] ? -d.dir[1] * 4 : 3)]),
   ["Oak Woods trail", 146, 108], ["Shore path", 96, 62],
   ...streets.filter((s) => s.name.trim() === s.name).map((s) => { const p = s.pts[Math.floor(s.pts.length / 2)]; return [s.name, p[0], p[1]]; }),
   ...ZONES.filter((zn) => !PARK.areas.some((a) => a.rect[0] >= zn.rect[0] && a.rect[2] <= zn.rect[2] && a.rect[1] >= zn.rect[1] && a.rect[3] <= zn.rect[3])).map((zn) => [zn.name, (zn.rect[0] + zn.rect[2]) / 2, (zn.rect[1] + zn.rect[3]) / 2]),
@@ -121,6 +122,6 @@ execFileSync("magick", [...args, `${OUT}/plan.png`]);
   a.push("-pointsize", "15", "-fill", "#ffffffdd", "-draw", "rectangle 6,6 380,70", "-fill", "#963c28", "-annotate", "+12+10", "avenue", "-fill", "#285a96", "-annotate", "+12+30", "drives", "-fill", "#464646", "-annotate", "+12+50", "streets", "-fill", "#1c2420", "-annotate", "+80+10", "avenue 7 wide (planted strip), others 5", "-annotate", "+80+30", "contours every 2 blocks", "-annotate", "+80+50", "160 x 160 blocks, north up");
   execFileSync("magick", [...a, `${OUT}/roads.png`]);
 }
-const summary = { park: PARK.areas.map((a) => ({ name: a.name, size: a.size.join(" x "), ...(a.level ? { pad: a.pad, cut: a.cut, fill: a.fill } : {}), water: a.water })), trails: PARK.trails.map((t) => ({ name: t.name, cells: t.cells.size })), streets: streets.map((s) => ({ name: s.name, len: s.len, maxGrade: s.maxGrade, cut: s.cut, fill: s.fill })), lots: lots.length, zones: ZONES.map((z) => z.name), lotEarth: lots.reduce((a, p) => a + p.cut + p.fill, 0), perStreet: Object.fromEntries([...new Set(lots.map((l) => l.street))].map((n) => [n, lots.filter((l) => l.street === n).length])) };
-writeFileSync(`${OUT}/plan.json`, JSON.stringify({ spec: SPEC, zones: ZONES, features: FEATURES, park: { areas: PARK.areas, trails: PARK.trails.map((t) => ({ name: t.name, cells: [...t.cells] })) }, lakeDrive: LAKE_DRIVE, lots, summary }, null, 1) + "\n");
+const summary = { docks: PARK.docks.map((d) => ({ name: d.name, kind: d.kind, run: d.run, width: d.width, ...(d.grade ? { drop: d.drop, grade: d.grade } : {}) })), park: PARK.areas.map((a) => ({ name: a.name, size: a.size.join(" x "), ...(a.level ? { pad: a.pad, cut: a.cut, fill: a.fill } : {}), water: a.water })), trails: PARK.trails.map((t) => ({ name: t.name, cells: t.cells.size })), streets: streets.map((s) => ({ name: s.name, len: s.len, maxGrade: s.maxGrade, cut: s.cut, fill: s.fill })), lots: lots.length, zones: ZONES.map((z) => z.name), lotEarth: lots.reduce((a, p) => a + p.cut + p.fill, 0), perStreet: Object.fromEntries([...new Set(lots.map((l) => l.street))].map((n) => [n, lots.filter((l) => l.street === n).length])) };
+writeFileSync(`${OUT}/plan.json`, JSON.stringify({ spec: SPEC, zones: ZONES, features: FEATURES, park: { docks: PARK.docks, areas: PARK.areas, trails: PARK.trails.map((t) => ({ name: t.name, cells: [...t.cells] })) }, lakeDrive: LAKE_DRIVE, lots, summary }, null, 1) + "\n");
 console.log(JSON.stringify(summary, null, 1));

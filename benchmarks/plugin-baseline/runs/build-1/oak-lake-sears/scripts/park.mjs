@@ -19,6 +19,15 @@ export const AREAS = [
   { name: "Swimming beach", kind: "beach", rect: [54, 78, 63, 94], note: "sand on the west shore beside the boathouse" },
   { name: "Playground", kind: "play", rect: [108, 98, 118, 106], note: "swings, slide, sandpit" },
 ];
+// docks and the launch ramp: from a point on land, heading [dx, dz] toward the water. A dock starts at the shore and
+// runs `len` out over open water; the ramp runs from the road down to the water line and 2 blocks on under it, so a
+// boat slides in. Small timber work, the scale of a lake park, not a marina.
+export const DOCKS = [
+  { name: "Boathouse dock", kind: "dock", from: [56, 96], dir: [1, 0], len: 8, width: 3 },
+  { name: "Fishing pier", kind: "dock", from: [90, 47], dir: [0, 1], len: 9, width: 2 },
+  { name: "Canoe landing", kind: "dock", from: [118, 90], dir: [-1, 0], len: 5, width: 2 },
+  { name: "Boat launch", kind: "ramp", from: [84, 117], dir: [0, -1], width: 3 },
+];
 // trails as way points; the shore path is found from the water itself
 export const TRAILS = [
   { name: "Oak Woods trail", points: [[126, 66], [140, 72], [152, 84], [154, 100], [148, 116], [134, 121], [129, 104], [131, 86], [126, 66]] },
@@ -61,5 +70,16 @@ export function parkPlan(site, { park, roadAt }) {
       for (let lv = hs[0]; lv <= hs.at(-1); lv++) { let cut = 0, fill = 0; for (const h of hs) { if (h > lv) cut += h - lv; else fill += lv - h; } if (!best || cut + fill < best.cut + best.fill) best = { pad: lv, cut, fill }; }
       Object.assign(out, best); }
     return out; });
-  return { areas, trails, inArea };
+  // docks: walk from the land point to the first open water, then lay the deck (or the ramp) across the heading
+  const docks = DOCKS.map((d) => {
+    const [dx, dz] = d.dir, [px, pz] = [-dz, dx]; let [x, z] = d.from, k = 0;
+    const open = (cx, cz) => comp[cz * X + cx] === lake; /* the lake itself, not a pool beside it */
+    while (k < 40 && !open(x, z)) { x += dx; z += dz; k++; }
+    const shore = [x - dx, z - dz], cells = [], lane = (cx, cz) => { for (let w = 0; w < d.width; w++) { const o = w - ((d.width - 1) >> 1); cells.push([cx + px * o, cz + pz * o]); } };
+    if (d.kind === "dock") { for (let j = 0; j < d.len; j++) lane(x + dx * j, z + dz * j); }
+    else { for (let j = 0; j <= k + 2; j++) lane(d.from[0] + dx * j, d.from[1] + dz * j); }
+    const drop = d.kind === "ramp" ? H[d.from[1]][d.from[0]] : 0;
+    return { ...d, shore, cells, run: d.kind === "ramp" ? k : d.len, ...(d.kind === "ramp" ? { drop, grade: `1 in ${Math.round(k / Math.max(1, drop))}` } : {}) }; });
+  const dockAt = new Map(); for (const d of docks) for (const [x, z] of d.cells) dockAt.set(`${x},${z}`, d);
+  return { areas, trails, inArea, docks, dockAt };
 }
