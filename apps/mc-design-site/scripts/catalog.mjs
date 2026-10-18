@@ -55,6 +55,14 @@ const KITS = [{
     "sf-03-palace-colonnade-end": { name: "Palace colonnade end", type: "civic" },
     "sf-04-palace-hall-bay": { name: "Palace exhibition hall bay", type: "civic" },
   },
+}, {
+  series: "San Francisco landmarks", dir: `${RUNS}/city-hall-kit/modules`, run: `${RUNS}/city-hall-kit`, project: "sf-city-hall", rooms: false,
+  approved: "Placed on the open-data Civic Center site (SF-02)", style: "Beaux-Arts, Arthur Brown Jr., 1915", modules: {
+    "sf-05-city-hall-dome": { name: "City Hall dome and rotunda", type: "civic" },
+    "sf-06-city-hall-portico": { name: "City Hall east portico", type: "civic" },
+    "sf-07-city-hall-bay": { name: "City Hall wing bay", type: "civic" },
+    "sf-08-city-hall-corner": { name: "City Hall corner pavilion", type: "civic" },
+  },
 }];
 // the server is 1.21.1: blocks from newer versions as their 1.21.1 equivalents
 const FOR_1_21_1 = [[/^minecraft:pale_oak_log$/, "minecraft:stripped_birch_log"], [/^minecraft:pale_oak_/, "minecraft:birch_"], [/^minecraft:iron_chain$/, "minecraft:chain"]];

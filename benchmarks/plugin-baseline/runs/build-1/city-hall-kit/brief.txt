@@ -1,0 +1,35 @@
+San Francisco City Hall (Arthur Brown Jr., 1915): the Beaux-Arts civic palace of the Civic Center, its dome taller than the
+United States Capitol's. A long, symmetrical two-storey granite palace on a rusticated base, its fronts lined with a GIANT
+ORDER of fluted Doric columns standing proud of a recessed wall of tall windows, an entablature and a balustraded attic
+over them; a pedimented central portico on the east (Polk Street) front; projecting corner pavilions; and rising from the
+centre the great dome on a tall drum ringed by paired columns, the dome itself leaden grey with fine ribs, gilded trim and
+a lantern whose cupola and finial are gilded. Light grey granite everywhere else, with gold accents only on the dome and lantern.
+It must read, at a glance, as THIS building: the colonnaded palace front and the tall grey dome with its gilded lantern over it.
+
+Scale: 1.4 blocks per metre (a 1.4 m column is 2 blocks across; a storey about 7 here, the floors are tall). The modules are
+for a public catalog for a Minecraft 1.21.1 server: only blocks that exist in 1.21.1 (no pale oak, nothing 1.21.4+). Placement
+code sets them on the real site from city data (the footprint is 104 x 138 m, the roofline 27 m up, the dome's lantern 88 m),
+so each module keeps exactly to its plot and stated size.
+
+ONE row of four modules on fixed plots along x, each standing at y 0 on a flat 1-block ground of smooth stone, its FRONT
+facing north (low z):
+ plot 0, x 0..63, z 0..63 (64 x 64), up to y 126: THE DOME AND ITS PAVILION. A square central block (the rotunda's
+   pavilion) from y 0 to the roofline at y 38, walls in the same giant order as the fronts, with a flat roof and balustrade;
+   on it a round drum about 46 across rising to about y 70, ringed by paired giant columns with windows between, an
+   entablature and a stepped attic; then the dome, about 42 across at its base, rising to about y 112, leaden grey with
+   sixteen fine ribs and a gilded band at its base; then a columned lantern with a gilded cupola and finial to y 125. Hollow inside (a rotunda), lit.
+ plot 1, x 64..127, z 0..23 (64 x 24), up to y 52: THE EAST PORTICO, the central entrance pavilion of the main front: a
+   rusticated base storey with three tall arched doorways (doors at the street level, steps of slabs), above it six giant
+   fluted Doric columns across the front carrying a full entablature and a triangular PEDIMENT filled with relief, flanked by
+   paired columns; balustraded attic behind. Its x ends meet the wing bays.
+ plot 2, x 128..143, z 0..23 (16 x 24), up to y 41: A WING BAY, the repeating unit of every front: rusticated granite base
+   storey (y 1..9) with tall windows; above it a pair of giant fluted Doric columns (2 x 2 shafts, y 10..33) standing in
+   front of a recessed wall with two storeys of tall windows; entablature (y 34..36), attic with small windows and a
+   balustrade on top (to y 41). It must TILE: end to end along x it continues seamlessly (half a column spacing at each end).
+ plot 3, x 144..175, z 0..31 (32 x 32), up to y 44: A CORNER PAVILION: a projecting square block that ends a front and turns
+   the corner: on its north and east faces the same base, giant order (here pilasters and a pair of columns in antis) and
+   entablature, a taller attic (to y 44); its south and west sides plain where they meet the wings.
+
+Use the photograph only as inspiration for character and colour. No furniture, rooms or villagers: a monument. Light it so
+no mob spawns (lanterns behind the balustrades and in the drum, glowstone in the dome's inner shell). Nothing may leave its
+plot.

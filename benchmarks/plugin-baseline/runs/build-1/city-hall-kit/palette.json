@@ -1,0 +1,21 @@
+{
+  "roles": {
+    "ground": ["smooth_stone", "smooth_stone_slab"],
+    "plinth": ["polished_andesite", "polished_andesite_stairs", "polished_andesite_slab"],
+    "granite": ["polished_diorite", "polished_diorite_stairs", "polished_diorite_slab", "diorite"],
+    "shaft": ["quartz_pillar"],
+    "quartz": ["smooth_quartz", "smooth_quartz_stairs", "smooth_quartz_slab"],
+    "frieze": ["calcite"],
+    "carved": ["chiseled_quartz_block", "quartz_bricks"],
+    "tuff": ["polished_tuff", "polished_tuff_stairs", "polished_tuff_slab"],
+    "gilding": ["gold_block", "lightning_rod"]
+  },
+  "objects": [
+    "gray_stained_glass_pane",
+    "dark_oak_door",
+    "diorite_wall",
+    "lantern",
+    "chain",
+    "glowstone"
+  ]
+}

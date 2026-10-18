@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-18T12:51:28.561Z",
+ "checkedAt": "2026-10-18T13:54:56.616Z",
  "buildings": {
   "polarton-00-cotton-gin": {
    "version": "2b6fa29d3524",
@@ -147,6 +147,40 @@
   },
   "sf-04-palace-hall-bay": {
    "version": "cb3b32bdb015",
+   "issues": [
+    {
+     "kind": "no front door",
+     "at": null,
+     "what": "no door at all"
+    }
+   ]
+  },
+  "sf-05-city-hall-dome": {
+   "version": "8940a08c0024",
+   "issues": [
+    {
+     "kind": "no front door",
+     "at": null,
+     "what": "no door at all"
+    }
+   ]
+  },
+  "sf-06-city-hall-portico": {
+   "version": "98f7a8af3e77",
+   "issues": []
+  },
+  "sf-07-city-hall-bay": {
+   "version": "8f28810b9364",
+   "issues": [
+    {
+     "kind": "no front door",
+     "at": null,
+     "what": "no door at all"
+    }
+   ]
+  },
+  "sf-08-city-hall-corner": {
+   "version": "cd797de631c2",
    "issues": [
     {
      "kind": "no front door",

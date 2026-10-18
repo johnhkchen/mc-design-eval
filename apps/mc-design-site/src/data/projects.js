@@ -61,7 +61,29 @@ export const projects = [
       "Canopy heights: Meta and World Resources Institute, High Resolution Canopy Height Maps (CC BY 4.0)",
       "Reference photograph: \u201cPalace of Fine Arts - March 2018 (1476)\u201d, Gregory Varnum, CC BY-SA 4.0, via Wikimedia Commons",
     ],
-    modules: [],
+    modules: ["sf-01-palace-rotunda", "sf-02-palace-colonnade", "sf-03-palace-colonnade-end", "sf-04-palace-hall-bay"],
+  },
+  {
+    id: "sf-city-hall", code: "SF-02", name: "San Francisco City Hall", client: null, where: "a real place, recreated from open data", status: "Built",
+    lede: "Arthur Brown Jr.'s Beaux-Arts City Hall in the Civic Center, at 1.4 blocks to the metre: the colonnaded palace fronts, the corner pavilions and the great dome on its columned drum, on the real block with the Opera House and Veterans Building across Van Ness.",
+    before: { src: "/models/sf-city-hall-before.nbt", offset: [0, 0, 0] }, after: { src: "/models/sf-city-hall-after.nbt", offset: [0, 0, 0] },
+    beforeLabel: "Open data", afterLabel: "Designed",
+    poster: "/img/projects/sf-city-hall-after.jpg", plan: "/img/projects/sf-city-hall-plan.jpg",
+    planCaption: "The Civic Center from above: City Hall's four fronts set on its measured footprint, the dome at the centre, and the neighbouring blocks as massing from the data.", size: "340 × 340 m",
+    story: [
+      ["The data", "The same open data as the Palace: the 2023 lidar survey for the ground and every building's shape, the city's footprints, streets and parcels, and 2022 aerial photographs for roofs and lawns. The site was framed on City Hall's boundary in the city's own list of landmarks (No. 21)."],
+      ["The design", "A four-piece kit designed from the measurements and a freely licensed photograph: the dome on its pavilion, the east portico with its pediment, a giant-order wing bay that repeats along every front, and a corner pavilion, turned to face each street. $5.05 with a larger planning budget."],
+      ["The colours", "Light grey granite, the dome a lead grey with gold only on its band and lantern, as in the photograph."],
+    ],
+    credits: [
+      "Ground, buildings and trees: U.S. Geological Survey, 3D Elevation Program (public domain)",
+      "Aerial colours: USDA National Agriculture Imagery Program (public domain)",
+      "Footprints, streets, parks, parcels, landmarks: City and County of San Francisco, DataSF (PDDL / public domain)",
+      "Paths and trees: \u00a9 OpenStreetMap contributors (ODbL)",
+      "Canopy heights: Meta and World Resources Institute, High Resolution Canopy Height Maps (CC BY 4.0)",
+      "Reference photograph: City Hall east front, King of Hearts, CC BY-SA 3.0, via Wikimedia Commons",
+    ],
+    modules: ["sf-05-city-hall-dome", "sf-06-city-hall-portico", "sf-07-city-hall-bay", "sf-08-city-hall-corner"],
   },
 ];
 export const projectById = Object.fromEntries(projects.map((p) => [p.id, p]));

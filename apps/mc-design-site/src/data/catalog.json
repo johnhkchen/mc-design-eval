@@ -1362,5 +1362,205 @@
       "plot": null,
       "file": "benchmarks/plugin-baseline/runs/build-1/palace-kit/modules/sf-04-palace-hall-bay.nbt"
     }
+  },
+  {
+    "id": "sf-05-city-hall-dome",
+    "name": "City Hall dome and rotunda",
+    "type": "civic",
+    "series": "San Francisco landmarks",
+    "style": "Beaux-Arts, Arthur Brown Jr., 1915",
+    "project": "sf-city-hall",
+    "approved": "Placed on the open-data Civic Center site (SF-02)",
+    "footprint": [
+      64,
+      64
+    ],
+    "height": 126,
+    "front": "north",
+    "blocks": 50244,
+    "materials": [
+      {
+        "block": "polished_diorite",
+        "n": 20648
+      },
+      {
+        "block": "smooth_stone",
+        "n": 8468
+      },
+      {
+        "block": "polished_andesite",
+        "n": 5354
+      },
+      {
+        "block": "smooth_quartz",
+        "n": 5344
+      },
+      {
+        "block": "quartz_pillar",
+        "n": 3376
+      },
+      {
+        "block": "calcite",
+        "n": 1936
+      }
+    ],
+    "image": "/img/catalog/sf-05-city-hall-dome.jpg",
+    "nbt": "/nbt/sf-05-city-hall-dome.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/city-hall-kit",
+      "plot": null,
+      "file": "benchmarks/plugin-baseline/runs/build-1/city-hall-kit/modules/sf-05-city-hall-dome.nbt"
+    }
+  },
+  {
+    "id": "sf-06-city-hall-portico",
+    "name": "City Hall east portico",
+    "type": "civic",
+    "series": "San Francisco landmarks",
+    "style": "Beaux-Arts, Arthur Brown Jr., 1915",
+    "project": "sf-city-hall",
+    "approved": "Placed on the open-data Civic Center site (SF-02)",
+    "footprint": [
+      64,
+      24
+    ],
+    "height": 50,
+    "front": "north",
+    "blocks": 21253,
+    "materials": [
+      {
+        "block": "polished_diorite",
+        "n": 8196
+      },
+      {
+        "block": "smooth_stone",
+        "n": 6466
+      },
+      {
+        "block": "calcite",
+        "n": 2810
+      },
+      {
+        "block": "smooth_quartz",
+        "n": 1102
+      },
+      {
+        "block": "quartz_pillar",
+        "n": 880
+      },
+      {
+        "block": "chain",
+        "n": 446
+      }
+    ],
+    "image": "/img/catalog/sf-06-city-hall-portico.jpg",
+    "nbt": "/nbt/sf-06-city-hall-portico.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/city-hall-kit",
+      "plot": null,
+      "file": "benchmarks/plugin-baseline/runs/build-1/city-hall-kit/modules/sf-06-city-hall-portico.nbt"
+    }
+  },
+  {
+    "id": "sf-07-city-hall-bay",
+    "name": "City Hall wing bay",
+    "type": "civic",
+    "series": "San Francisco landmarks",
+    "style": "Beaux-Arts, Arthur Brown Jr., 1915",
+    "project": "sf-city-hall",
+    "approved": "Placed on the open-data Civic Center site (SF-02)",
+    "footprint": [
+      16,
+      24
+    ],
+    "height": 42,
+    "front": "north",
+    "blocks": 5193,
+    "materials": [
+      {
+        "block": "polished_diorite",
+        "n": 2738
+      },
+      {
+        "block": "smooth_stone",
+        "n": 1626
+      },
+      {
+        "block": "smooth_quartz",
+        "n": 248
+      },
+      {
+        "block": "quartz_pillar",
+        "n": 176
+      },
+      {
+        "block": "calcite",
+        "n": 104
+      },
+      {
+        "block": "gray_stained_glass_pane",
+        "n": 92
+      }
+    ],
+    "image": "/img/catalog/sf-07-city-hall-bay.jpg",
+    "nbt": "/nbt/sf-07-city-hall-bay.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/city-hall-kit",
+      "plot": null,
+      "file": "benchmarks/plugin-baseline/runs/build-1/city-hall-kit/modules/sf-07-city-hall-bay.nbt"
+    }
+  },
+  {
+    "id": "sf-08-city-hall-corner",
+    "name": "City Hall corner pavilion",
+    "type": "civic",
+    "series": "San Francisco landmarks",
+    "style": "Beaux-Arts, Arthur Brown Jr., 1915",
+    "project": "sf-city-hall",
+    "approved": "Placed on the open-data Civic Center site (SF-02)",
+    "footprint": [
+      32,
+      32
+    ],
+    "height": 45,
+    "front": "north",
+    "blocks": 13935,
+    "materials": [
+      {
+        "block": "polished_diorite",
+        "n": 6501
+      },
+      {
+        "block": "smooth_stone",
+        "n": 4591
+      },
+      {
+        "block": "smooth_quartz",
+        "n": 1138
+      },
+      {
+        "block": "quartz_pillar",
+        "n": 352
+      },
+      {
+        "block": "calcite",
+        "n": 351
+      },
+      {
+        "block": "gray_stained_glass_pane",
+        "n": 268
+      }
+    ],
+    "image": "/img/catalog/sf-08-city-hall-corner.jpg",
+    "nbt": "/nbt/sf-08-city-hall-corner.nbt",
+    "version": "1.21.1",
+    "source": {
+      "run": "benchmarks/plugin-baseline/runs/build-1/city-hall-kit",
+      "plot": null,
+      "file": "benchmarks/plugin-baseline/runs/build-1/city-hall-kit/modules/sf-08-city-hall-corner.nbt"
+    }
   }
 ]
