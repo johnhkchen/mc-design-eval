@@ -42,11 +42,23 @@
     },
     {
      "from": "oak_leaves",
-     "to": "air"
+     "to": "smooth_sandstone",
+     "maxY": 30
     },
     {
      "from": "flowering_azalea_leaves",
-     "to": "air"
+     "to": "smooth_sandstone",
+     "maxY": 30
+    },
+    {
+     "from": "oak_leaves",
+     "to": "air",
+     "minY": 31
+    },
+    {
+     "from": "flowering_azalea_leaves",
+     "to": "air",
+     "minY": 31
     },
     {
      "from": "vine",
@@ -54,13 +66,7 @@
     },
     {
      "from": "dirt",
-     "to": "smooth_sandstone",
-     "maxY": 25
-    },
-    {
-     "from": "dirt",
-     "to": "air",
-     "minY": 26
+     "to": "smooth_sandstone"
     }
    ]
   },
@@ -79,11 +85,23 @@
     },
     {
      "from": "oak_leaves",
-     "to": "air"
+     "to": "smooth_sandstone",
+     "maxY": 30
     },
     {
      "from": "flowering_azalea_leaves",
-     "to": "air"
+     "to": "smooth_sandstone",
+     "maxY": 30
+    },
+    {
+     "from": "oak_leaves",
+     "to": "air",
+     "minY": 31
+    },
+    {
+     "from": "flowering_azalea_leaves",
+     "to": "air",
+     "minY": 31
     },
     {
      "from": "vine",
@@ -91,13 +109,7 @@
     },
     {
      "from": "dirt",
-     "to": "smooth_sandstone",
-     "maxY": 25
-    },
-    {
-     "from": "dirt",
-     "to": "air",
-     "minY": 26
+     "to": "smooth_sandstone"
     }
    ]
   },
@@ -152,5 +164,5 @@
    "clear": "band"
   }
  ],
- "colours": "Matched to the reference photo (01-rotunda-lagoon.jpg, overcast, so by relative tone): the dome is the palest surface, a warm grey-beige, not red; the rotunda's column shafts are red-brown (granite stays); the colonnade shafts are buff like the body; the hall cornice tan. The planter boxes on the colonnade are open stone boxes, as built (never planted): the kit's soil, leaves and vines come out."
+ "colours": "Matched to the reference photo (01-rotunda-lagoon.jpg, overcast, so by relative tone): the dome is the palest surface, a warm grey-beige, not red; the rotunda's column shafts are red-brown (granite stays); the colonnade shafts are buff like the body; the hall cornice tan. The planter boxes on the colonnade read as solid panelled stone blocks with a weeping figure at each corner (Maybeck meant them planted; they never were): the kit's soil becomes stone, its leaves and vines come out."
 }
