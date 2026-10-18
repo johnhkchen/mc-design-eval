@@ -20,14 +20,14 @@ const WALKS = [
 // chimney calls (plan.md): wall cell at floor y 1, the room side (into), the flue's last course (top). The shell leaves the
 // mouths unset (not air), so the chimney's mouth and lintel are written like any other cell of the stack
 const CHIMNEYS = [
-  { wall: [2, 1, 17], into: "east", top: 15 },
-  { wall: [13, 1, 17], into: "west", top: 15 },
+  { wall: [2, 1, 17], into: "east", top: 11 },
+  { wall: [13, 1, 17], into: "west", top: 11 },
   { wall: [27, 1, 21], into: "north", top: 14 },
-  { wall: [35, 1, 17], into: "east", top: 14 },
+  { wall: [35, 1, 17], into: "east", top: 11 },
   { wall: [51, 1, 17], into: "east", top: 14 },
-  { wall: [77, 1, 17], into: "west", top: 15 },
+  { wall: [77, 1, 17], into: "west", top: 16 },
   { at: [88, 1, 18], open: "south", top: 13 },
-  { wall: [108, 1, 18], into: "west", top: 11 },
+  { wall: [100, 1, 18], into: "east", top: 7 },
   { wall: [125, 1, 17], into: "west", top: 15 },
 ];
 
@@ -98,4 +98,10 @@ export function build(g) {
     g.set(x, 2, 3, "lantern", { hanging: "false" });
   }
   for (const c of CHIMNEYS) chimneyAt(g, c, taken);
+  // Stanford's central hearth: the chimney's lintel stair sat on the room cell in front of the fire and the floor plank under it, so
+  // the fire was shut into the stack. Now the mouth is open into the room: a grate of iron bars in the floor layer in front of the
+  // fire (88,1,19), and a dark oak trapdoor fire-screen lying open against the flue's front at y2 and y3 (the lane along z19 stays
+  // walkable beside them; the screens count as the flue's walls).
+  g.set(88, 1, 19, "iron_bars");
+  for (const y of [2, 3]) g.set(88, y, 19, "dark_oak_trapdoor", { facing: "south", half: "bottom", open: "true", powered: "false", waterlogged: "false" });
 }

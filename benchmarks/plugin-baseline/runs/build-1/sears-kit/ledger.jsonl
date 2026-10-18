@@ -129,3 +129,5 @@
 {"t":"2026-10-18T00:38:38.123Z","model":"haiku","effort":"high","resolved":["claude-haiku-5-5"],"cost":0.06079905000000001,"turns":16,"ms":128283,"in":30,"cacheWrite":49552,"cacheRead":1259225,"out":25381}
 {"t":"2026-10-18T00:39:08.927Z","model":"haiku","effort":"high","resolved":["claude-haiku-5-5"],"cost":0.07527692999999999,"turns":17,"ms":165558,"in":32,"cacheWrite":51154,"cacheRead":1333446,"out":34017}
 {"t":"2026-10-18T00:58:01.168Z","model":"haiku","effort":"high","resolved":["claude-haiku-5-5"],"warn":"haiku output near 100K: split this job","cost":2.0180183000000005,"turns":129,"ms":1131234,"in":254,"cacheWrite":314212,"cacheRead":28436464,"out":191328}
+{"t":"2026-10-18T01:13:57.067Z","model":"sonnet","effort":"high","resolved":["claude-sonnet-5-5"],"cost":1.5789424,"turns":51,"ms":594200,"in":76,"cacheWrite":174961,"cacheRead":4511079,"out":69028}
+{"t":"2026-10-18T01:23:08.131Z","model":"sonnet","effort":"high","resolved":["claude-sonnet-5-5"],"cost":1.361369,"turns":61,"ms":448060,"in":90,"cacheWrite":118846,"cacheRead":5631940,"out":50088}

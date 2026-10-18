@@ -10,6 +10,9 @@ import { B } from "/Volumes/ext1/swe/repos/minecraft-design/tools/src/build.mjs"
 export function build(g) {
   // ---- plot 0 Magnolia: full-height portico (4 quartz columns, pediment) and the balcony over the door ----
   portico(g, { x0: 4, x1: 11, z0: 9, z1: 12, deck: "smooth_quartz", column: "quartz_pillar", trim: "smooth_quartz", rake: "quartz" });
+  // flush the pediment's top step: the peak is two stairs meeting back to back, not a full block a jump above the rakes
+  g.set(7, 12, 9, ...B.stairs("quartz", "east"));
+  g.set(8, 12, 9, ...B.stairs("quartz", "west"));
   balcony(g, { x0: 6, x1: 9, z0: 10, z1: 12, y: 5, floor: "smooth_quartz", rail: "iron_bars" });
 
   // ---- plot 1 Alhambra: shaped parapet on the front wall, arcaded porch with a flat deck and red-tile pent ----
@@ -39,7 +42,12 @@ export function build(g) {
   rafterTails(g, { x0: 35, x1: 45, z: 8, y: 5, into: "south", wood: "spruce" });
 
   // ---- plot 3 Puritan: pedimented entry porch, two quartz columns ----
-  pedimentPorch(g, { x0: 55, x1: 57, z0: 10, z1: 12, y: 1, facing: "north", trim: "quartz" });
+  // a small entry hood on two columns: the columns stand at x54 and x58, so the way in between them is 3 wide (x55..57, level with
+  // the 3-wide walk and ramp), a solid quartz soffit closes the whole 5x3 bay against the dormer-high wall, and a slate slab canopy
+  g.fill([54, 1, 10], [58, 1, 12], "smooth_quartz");
+  for (const x of [54, 58]) g.fill([x, 2, 10], [x, 4, 10], "quartz_pillar", { axis: "y" });
+  g.fill([54, 5, 10], [58, 5, 12], "smooth_quartz");
+  g.fill([54, 6, 10], [58, 6, 12], "deepslate_tile_slab", { type: "bottom" });
 
   // ---- plot 4 Cornell: full-width square-columned porch ----
   squarePorch(g, { x0: 67, x1: 77, z0: 9, z1: 12, column: "smooth_quartz", pier: "bricks", frieze: "smooth_quartz", deck: "oak_planks" });

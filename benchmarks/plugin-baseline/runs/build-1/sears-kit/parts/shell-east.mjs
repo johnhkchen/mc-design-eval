@@ -53,7 +53,8 @@ function gable(g, holes, { axis, fixed, a0, a1, wallTop, block }) {
   }
 }
 
-// Cornell (plot 4): two-storey cube, x 67..77, z 13..21; interior x 68..76, z 14..20
+// Cornell (plot 4): two-storey cube, x 67..77, z 13..21; interior x 68..76, z 14..20. Walls y2..9: two full floors of wall (the
+// upper storey's windows y6..7 with a wall course y8..9 above them under the eave), the low hip starts at y10 (roofs.mjs)
 function cornell(g) {
   const h = new Set();
   const FLOOR = "oak_planks", PART = "spruce_planks";
@@ -68,11 +69,12 @@ function cornell(g) {
   cut(h, [72], [2, 3, 6, 7], [18]);                 // hall doorway through the partition
 
   fill(g, h, R(68, 76), [1, 5], R(14, 20), FLOOR);
-  ring(g, h, { x0: 67, x1: 77, z0: 13, z1: 21, ys: R(1, 8) }, (x, y, z, corner) => {
+  ring(g, h, { x0: 67, x1: 77, z0: 13, z1: 21, ys: R(1, 9) }, (x, y, z, corner) => {
     if (y === 1) return ["bricks"];
     if (corner || y === 5) return ["smooth_quartz"];
     return ["cyan_terracotta"];
   });
+  fill(g, h, R(68, 76), [9], R(14, 20), PART);      // the ceiling of the upper storey (the lanterns hang from it)
   fill(g, h, R(69, 76), [2, 3, 4], [18], PART);     // partitions: living/parlour from dining/kitchen
   fill(g, h, R(69, 76), [6, 7, 8], [18], PART);
 }
@@ -86,6 +88,7 @@ function stanford(g) {
   cut(h, [83, 93], [7, 8], [17, 18]);               // gable pairs
   cut(h, [85, 86, 88, 90, 91], [2, 3], [21]);       // south: pairs and back door
   cut(h, [88], R(1, 6), [18]);                      // central flue and hearth mouth in the partition
+  cut(h, [88], [1], [19]);                          // the hearth grate in the floor layer in front of the fire (grounds.mjs)
   cut(h, [92], [5], [17, 18, 19]);                  // stair hole (plan RESERVED)
 
   fill(g, h, R(84, 92), [1, 5], R(15, 20), FLOOR);
@@ -106,7 +109,7 @@ function winona(g) {
   cut(h, [101, 102, 104, 106, 107], [2, 3], [13]);  // front pairs and door
   cut(h, [103, 104, 105], [6, 7], [13]);            // gable triple
   cut(h, [100, 108], [2, 3], [15, 16, 20, 21]);     // side pairs
-  cut(h, [108], [1, 2], [18]);                      // hearth mouth
+  cut(h, [100], [1, 2], [18]);                      // hearth mouth (west wall, the chimney moved off the east side)
   cut(h, [102, 103, 106], [2, 3], [22]);            // back pair and back door
   cut(h, [105], [2, 3], [19]);                      // doorway through the partition
 

@@ -86,8 +86,6 @@ export function build(g) {
   windowTriple(g, { x: 36, y: 2, z: 13, face: "north" });
   windowTriple(g, { x: 42, y: 2, z: 13, face: "north" });
   doorSet(g, { x: 40, y: 2, z: 13, face: "north", wood: "spruce" });
-  // dormer face z11: triple x39..41 y10..11
-  windowTriple(g, { x: 39, y: 10, z: 11, face: "north" });
   // W x35 / E x45: pairs z14..15 and z19..20 (ground), gable pair z16..17 y6..7 on both ends
   for (const z of [14, 19]) {
     windowPair(g, { x: 35, y: 2, z, face: "west" });
@@ -131,8 +129,8 @@ export function build(g) {
   windowPair(g, { x: 68, y: 6, z: 13, face: "north" });
   windowPair(g, { x: 75, y: 6, z: 13, face: "north" });
   windowTriple(g, { x: 71, y: 6, z: 13, face: "north" });
-  // hipped dormer face z14: triple x71..73 y11..12
-  windowTriple(g, { x: 71, y: 11, z: 14, face: "north" });
+  // hipped dormer face z14: triple x71..73 y12..13 (the hip starts at y10 on the two full storeys of wall)
+  windowTriple(g, { x: 71, y: 12, z: 14, face: "north" });
   // W x67 / E x77: pairs z14..15 and z19..20 both floors
   for (const z of [14, 19]) {
     windowPair(g, { x: 67, y: 2, z, face: "west" });

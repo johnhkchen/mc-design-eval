@@ -26,14 +26,14 @@ const FURNITURE = [
     "F   CCb", // z15: furnace; carpet; barrel at the hearth-side sideboard
     "c   AfC", // z16: cauldron; armchair facing the table; table (fence); carpet
     "b   CCC", // z17: barrel; carpet
-    "b      ", // z18: barrel; the hearth front stays clear
+    "       ", // z18: the west hearth front stays clear (the chimney moved here from the east wall)
   ],
   [
     "       ", // z14
     "      P", // z15: flower pot on the sideboard barrel (y3)
     "     p ", // z16: pressure plate on the table
     "M      ", // z17: lantern standing on the west barrel, the room's light
-    "M      ", // z18: and on the barrel beside it
+    "       ", // z18
   ],
   [
     "       ", // z14

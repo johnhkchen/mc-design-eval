@@ -1,0 +1,429 @@
+{
+ "grade": 32,
+ "lots": [
+  {
+   "lot": 1,
+   "x0": 28,
+   "z0": 23,
+   "x1": 47,
+   "z1": 38,
+   "face": "west",
+   "pad": 9,
+   "road": 9,
+   "cut": 387,
+   "fill": 125,
+   "dc": 4,
+   "df": 1,
+   "wall": 103,
+   "gate": [
+    27,
+    30
+   ],
+   "setback": 0,
+   "street": "West Avenue",
+   "frontLevel": 9,
+   "plannedPad": 10
+  },
+  {
+   "lot": 2,
+   "x0": 28,
+   "z0": 49,
+   "x1": 47,
+   "z1": 64,
+   "face": "west",
+   "pad": 9,
+   "road": 9,
+   "cut": 0,
+   "fill": 36,
+   "dc": 0,
+   "df": 1,
+   "wall": 0,
+   "gate": [
+    27,
+    56
+   ],
+   "setback": 0,
+   "street": "West Avenue",
+   "frontLevel": 9,
+   "plannedPad": 9
+  },
+  {
+   "lot": 3,
+   "x0": 28,
+   "z0": 66,
+   "x1": 47,
+   "z1": 81,
+   "face": "west",
+   "pad": 9,
+   "road": 9,
+   "cut": 0,
+   "fill": 22,
+   "dc": 0,
+   "df": 1,
+   "wall": 0,
+   "gate": [
+    27,
+    73
+   ],
+   "setback": 0,
+   "street": "West Avenue",
+   "frontLevel": 9,
+   "plannedPad": 9
+  },
+  {
+   "lot": 4,
+   "x0": 28,
+   "z0": 135,
+   "x1": 47,
+   "z1": 150,
+   "face": "west",
+   "pad": 10,
+   "road": 11,
+   "cut": 227,
+   "fill": 66,
+   "dc": 2,
+   "df": 5,
+   "wall": 44,
+   "gate": [
+    27,
+    142
+   ],
+   "setback": 0,
+   "street": "West Avenue",
+   "frontLevel": 10,
+   "plannedPad": 14
+  },
+  {
+   "lot": 5,
+   "x0": 1,
+   "z0": 39,
+   "x1": 20,
+   "z1": 54,
+   "face": "east",
+   "pad": 9,
+   "road": 9,
+   "cut": 1,
+   "fill": 71,
+   "dc": 1,
+   "df": 1,
+   "wall": 0,
+   "gate": [
+    21,
+    46
+   ],
+   "setback": 0,
+   "street": "West Avenue",
+   "frontLevel": 9,
+   "plannedPad": 9
+  },
+  {
+   "lot": 6,
+   "x0": 1,
+   "z0": 56,
+   "x1": 20,
+   "z1": 71,
+   "face": "east",
+   "pad": 9,
+   "road": 9,
+   "cut": 81,
+   "fill": 0,
+   "dc": 1,
+   "df": 0,
+   "wall": 0,
+   "gate": [
+    21,
+    63
+   ],
+   "setback": 0,
+   "street": "West Avenue",
+   "frontLevel": 9,
+   "plannedPad": 8
+  },
+  {
+   "lot": 7,
+   "x0": 1,
+   "z0": 73,
+   "x1": 20,
+   "z1": 88,
+   "face": "east",
+   "pad": 10,
+   "road": 10,
+   "cut": 2,
+   "fill": 0,
+   "dc": 1,
+   "df": 0,
+   "wall": 0,
+   "gate": [
+    21,
+    80
+   ],
+   "setback": 0,
+   "street": "West Avenue",
+   "frontLevel": 10,
+   "plannedPad": 9
+  },
+  {
+   "lot": 8,
+   "x0": 1,
+   "z0": 90,
+   "x1": 20,
+   "z1": 105,
+   "face": "east",
+   "pad": 11,
+   "road": 11,
+   "cut": 150,
+   "fill": 98,
+   "dc": 5,
+   "df": 4,
+   "wall": 88,
+   "gate": [
+    21,
+    97
+   ],
+   "setback": 0,
+   "street": "West Avenue",
+   "frontLevel": 11,
+   "plannedPad": 9
+  },
+  {
+   "lot": 9,
+   "x0": 1,
+   "z0": 120,
+   "x1": 20,
+   "z1": 135,
+   "face": "east",
+   "pad": 9,
+   "road": 9,
+   "cut": 76,
+   "fill": 21,
+   "dc": 4,
+   "df": 2,
+   "wall": 16,
+   "gate": [
+    21,
+    127
+   ],
+   "setback": 0,
+   "street": "West Avenue",
+   "frontLevel": 9,
+   "plannedPad": 9
+  },
+  {
+   "lot": 10,
+   "x0": 1,
+   "z0": 137,
+   "x1": 20,
+   "z1": 152,
+   "face": "east",
+   "pad": 10,
+   "road": 12,
+   "cut": 239,
+   "fill": 295,
+   "dc": 6,
+   "df": 3,
+   "wall": 103,
+   "gate": [
+    21,
+    144
+   ],
+   "setback": 0,
+   "street": "West Avenue",
+   "frontLevel": 10,
+   "plannedPad": 10
+  },
+  {
+   "lot": 11,
+   "x0": 56,
+   "z0": 4,
+   "x1": 71,
+   "z1": 23,
+   "face": "south",
+   "pad": 17,
+   "road": 16,
+   "cut": 184,
+   "fill": 160,
+   "dc": 2,
+   "df": 5,
+   "wall": 84,
+   "gate": [
+    63,
+    24
+   ],
+   "setback": 3,
+   "street": "North Crescent",
+   "frontLevel": 17,
+   "plannedPad": 14
+  },
+  {
+   "lot": 12,
+   "x0": 73,
+   "z0": 2,
+   "x1": 88,
+   "z1": 21,
+   "face": "south",
+   "pad": 16,
+   "road": 16,
+   "cut": 178,
+   "fill": 642,
+   "dc": 3,
+   "df": 5,
+   "wall": 156,
+   "gate": [
+    80,
+    22
+   ],
+   "setback": 1,
+   "street": "North Crescent",
+   "frontLevel": 16,
+   "plannedPad": 14
+  },
+  {
+   "lot": 13,
+   "x0": 135,
+   "z0": 1,
+   "x1": 154,
+   "z1": 16,
+   "face": "west",
+   "pad": 16,
+   "road": 16,
+   "cut": 212,
+   "fill": 405,
+   "dc": 6,
+   "df": 5,
+   "wall": 110,
+   "gate": [
+    134,
+    8
+   ],
+   "setback": 1,
+   "street": "Hillside Drive",
+   "frontLevel": 16,
+   "plannedPad": 17
+  },
+  {
+   "lot": 14,
+   "x0": 134,
+   "z0": 18,
+   "x1": 153,
+   "z1": 33,
+   "face": "west",
+   "pad": 15,
+   "road": 15,
+   "cut": 236,
+   "fill": 11,
+   "dc": 3,
+   "df": 1,
+   "wall": 8,
+   "gate": [
+    133,
+    25
+   ],
+   "setback": 1,
+   "street": "Hillside Drive",
+   "frontLevel": 15,
+   "plannedPad": 17
+  },
+  {
+   "lot": 15,
+   "x0": 28,
+   "z0": 86,
+   "x1": 43,
+   "z1": 105,
+   "face": "south",
+   "pad": 9,
+   "road": 10,
+   "cut": 158,
+   "fill": 256,
+   "dc": 3,
+   "df": 5,
+   "wall": 127,
+   "gate": [
+    35,
+    106
+   ],
+   "setback": 0,
+   "street": "Church Street",
+   "frontLevel": 9,
+   "plannedPad": 12
+  }
+ ],
+ "docks": [
+  {
+   "name": "Boathouse dock",
+   "kind": "dock",
+   "from": [
+    56,
+    96
+   ],
+   "dir": [
+    1,
+    0
+   ],
+   "len": 8,
+   "width": 3,
+   "shore": [
+    69,
+    96
+   ],
+   "run": 8
+  },
+  {
+   "name": "Fishing pier",
+   "kind": "dock",
+   "from": [
+    90,
+    47
+   ],
+   "dir": [
+    0,
+    1
+   ],
+   "len": 9,
+   "width": 2,
+   "shore": [
+    90,
+    62
+   ],
+   "run": 9
+  },
+  {
+   "name": "Canoe landing",
+   "kind": "dock",
+   "from": [
+    118,
+    90
+   ],
+   "dir": [
+    -1,
+    0
+   ],
+   "len": 5,
+   "width": 2,
+   "shore": [
+    109,
+    90
+   ],
+   "run": 5
+  },
+  {
+   "name": "Boat launch",
+   "kind": "ramp",
+   "from": [
+    84,
+    117
+   ],
+   "dir": [
+    0,
+    -1
+   ],
+   "width": 3,
+   "shore": [
+    84,
+    110
+   ],
+   "run": 8,
+   "drop": 2,
+   "grade": "1 in 4"
+  }
+ ]
+}

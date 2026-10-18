@@ -1,7 +1,7 @@
 [
  {
   "part": "shell west (plots 0-3)",
-  "placed": 1763,
+  "placed": 1914,
   "refused": 0,
   "refusedAt": [],
   "offPalette": []
@@ -16,92 +16,43 @@
  },
  {
   "part": "shell east (plots 4-7)",
-  "placed": 1366,
+  "placed": 1464,
   "refused": 0,
   "refusedAt": [],
   "offPalette": []
  },
  {
   "part": "roofs",
-  "placed": 1969,
-  "refused": 36,
+  "placed": 1640,
+  "refused": 1,
   "refusedAt": [
    [
-    35,
+    41,
     8,
-    19,
-    "spruce_planks",
-    "lime_terracotta"
-   ],
-   [
-    35,
-    7,
-    20,
-    "spruce_stairs",
-    "lime_terracotta"
-   ],
-   [
-    45,
-    8,
-    19,
-    "spruce_planks",
-    "lime_terracotta"
-   ],
-   [
-    45,
-    7,
-    20,
-    "spruce_stairs",
-    "lime_terracotta"
-   ],
-   [
-    35,
-    5,
-    14,
-    "lime_terracotta",
-    "lime_terracotta"
-   ],
-   [
-    35,
-    6,
-    14,
-    "lime_terracotta",
-    "lime_terracotta"
-   ],
-   [
-    35,
-    7,
-    14,
-    "lime_terracotta",
-    "lime_terracotta"
-   ],
-   [
-    35,
-    8,
-    14,
-    "lime_terracotta",
-    "lime_terracotta"
+    18,
+    "deepslate_tile_slab",
+    "spruce_planks"
    ]
   ],
   "offPalette": []
  },
  {
   "part": "porches and facade ornament",
-  "placed": 593,
+  "placed": 633,
   "refused": 0,
   "refusedAt": [],
   "offPalette": []
  },
  {
   "part": "glazing, doors, shutters",
-  "placed": 493,
+  "placed": 500,
   "refused": 0,
   "refusedAt": [],
   "offPalette": []
  },
  {
   "part": "chimneys, walks and grounds",
-  "placed": 1052,
+  "placed": 982,
   "refused": 0,
   "refusedAt": [],
   "offPalette": []
@@ -157,9 +108,17 @@
  },
  {
   "part": "room: P0 attic",
-  "placed": 16,
-  "refused": 0,
-  "refusedAt": [],
+  "placed": 15,
+  "refused": 1,
+  "refusedAt": [
+   [
+    5,
+    11,
+    15,
+    "flower_pot",
+    "deepslate_tile_stairs"
+   ]
+  ],
   "offPalette": []
  },
  {
@@ -290,7 +249,7 @@
  },
  {
   "part": "room: P3 west bedroom",
-  "placed": 10,
+  "placed": 12,
   "refused": 0,
   "refusedAt": [],
   "offPalette": []
@@ -304,7 +263,7 @@
  },
  {
   "part": "room: P3 rear bedroom",
-  "placed": 6,
+  "placed": 8,
   "refused": 0,
   "refusedAt": [],
   "offPalette": []
@@ -346,9 +305,24 @@
  },
  {
   "part": "room: P4 upper hall",
-  "placed": 4,
-  "refused": 0,
-  "refusedAt": [],
+  "placed": 2,
+  "refused": 2,
+  "refusedAt": [
+   [
+    72,
+    9,
+    15,
+    "spruce_planks",
+    "spruce_planks"
+   ],
+   [
+    72,
+    9,
+    19,
+    "spruce_planks",
+    "spruce_planks"
+   ]
+  ],
   "offPalette": []
  },
  {
@@ -360,9 +334,17 @@
  },
  {
   "part": "room: P4 north-east bedroom",
-  "placed": 11,
-  "refused": 0,
-  "refusedAt": [],
+  "placed": 10,
+  "refused": 1,
+  "refusedAt": [
+   [
+    74,
+    9,
+    15,
+    "spruce_planks",
+    "spruce_planks"
+   ]
+  ],
   "offPalette": []
  },
  {
@@ -423,7 +405,7 @@
  },
  {
   "part": "room: P6 living and kitchen",
-  "placed": 24,
+  "placed": 22,
   "refused": 0,
   "refusedAt": [],
   "offPalette": []
