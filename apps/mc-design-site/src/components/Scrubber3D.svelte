@@ -53,7 +53,7 @@
     <canvas bind:this={cAfter} class:hidden={status !== "ready"} style="clip-path: inset(0 0 0 {split}%)"></canvas>
     {#if status === "ready"}
       <span class="tag left">{beforeLabel}</span><span class="tag right">{afterLabel}</span>
-      <div class="divider" style="left: {split}%" onpointerdown={dragSplit} role="presentation"><span class="knob">⟷</span></div>
+      <div class="divider" data-no-orbit style="left: {split}%" onpointerdown={dragSplit} role="presentation"><span class="knob">⟷</span></div>
     {/if}
     {#if status === "loading"}<span class="note">Loading the 3-D view…</span>{/if}
     {#if status === "error"}<span class="note">3-D view unavailable: {error}</span>{/if}

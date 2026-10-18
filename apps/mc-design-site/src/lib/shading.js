@@ -4,7 +4,8 @@
 // main pass both reuse its meshes. Needs WEBGL_depth_texture (all current browsers); without it the view stays plain.
 //   const s = shading(gl, renderer, size)   null if unsupported
 //   s.setSun(t)       t 0..1: morning (sun low in the east) through noon to evening (low in the west)
-//   s.draw(view)      instead of renderer.drawStructure(view)
+//   s.draw(view, { shaded })   instead of renderer.drawStructure(view); shaded false = deepslate's flat lighting, still
+//                     with cut-out leaves
 //   s.invalidate()    after setStructure(): the shadow map is drawn again
 import { mat4, vec3 } from "gl-matrix";
 
@@ -25,7 +26,7 @@ const MAIN_FS = `
   varying highp vec4 vSun; varying highp float vDist;
   uniform sampler2D sampler; uniform highp float pixelSize;
   uniform sampler2D shadowMap; uniform float texel; uniform vec3 sunDir; uniform vec3 sunColor; uniform vec3 skyColor;
-  uniform vec3 fogColor; uniform float fogNear; uniform float fogFar;
+  uniform vec3 fogColor; uniform float fogNear; uniform float fogFar; uniform float cutout; uniform float shaded;
   float lit(vec3 n) {
     float ndl = dot(n, sunDir);
     if (ndl <= 0.0) return 0.0;
@@ -38,9 +39,12 @@ const MAIN_FS = `
   }
   void main(void) {
     vec4 tex = texture2D(sampler, clamp(vTexCoord, vTexLimit.xy + vec2(0.5) * pixelSize, vTexLimit.zw - vec2(0.5) * pixelSize));
-    if (tex.a < 0.01) discard;
+    // leaves, flowers and the rest of the solid meshes are cut out (a pixel is there or not): a mipmapped leaf edge blended
+    // half-transparent over whatever was drawn behind it (often the sky) is the white shimmer. Glass and water blend.
+    if (cutout > 0.5) { if (tex.a < 0.5) discard; tex.a = 1.0; } else if (tex.a < 0.01) discard;
     vec3 n = normalize(vNormal);
     vec3 albedo = tex.rgb * vTint;
+    if (shaded < 0.5) { gl_FragColor = vec4(albedo * (n.y * 0.2 + abs(n.z) * 0.1 + 0.8), tex.a); return; }   // deepslate's own
     // sky from above, a little bounce from below, the sun where it reaches
     vec3 light = skyColor * (0.58 + 0.2 * n.y) + sunColor * lit(n);
     vec3 c = albedo * light;
@@ -105,7 +109,6 @@ export function shading(gl, renderer, size) {
   gl.bindFramebuffer(gl.FRAMEBUFFER, null);
   if (!ok) return null;
 
-  const plain = renderer.shaderProgram;
   const centre = [size[0] / 2, size[1] / 2, size[2] / 2], R = Math.hypot(...size) / 2 + 2;
   const mSun = mat4.create();
   let sun = sunAt(0.38), fresh = false;
@@ -137,19 +140,27 @@ export function shading(gl, renderer, size) {
   return {
     setSun(t) { sun = sunAt(t); fresh = false; },
     invalidate() { fresh = false; },
-    draw(view, { fog = [0.86, 0.9, 0.97], dist = 300 } = {}) {
-      if (!fresh) shadowPass();
+    draw(view, { fog = [0.86, 0.9, 0.97], dist = 300, shaded = true } = {}) {
+      if (shaded && !fresh) shadowPass();
       clearAttribs();
-      gl.useProgram(main);
+      renderer.setShader(main);
       gl.uniformMatrix4fv(u(main, "mSun"), false, mSun);
       gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, depthTex); gl.uniform1i(u(main, "shadowMap"), 1);
       gl.activeTexture(gl.TEXTURE0); gl.uniform1i(u(main, "sampler"), 0);
-      gl.uniform1f(u(main, "texel"), 1 / N);
+      gl.uniform1f(u(main, "texel"), 1 / N); gl.uniform1f(u(main, "shaded"), shaded ? 1 : 0);
       gl.uniform3fv(u(main, "sunDir"), sun.dir); gl.uniform3fv(u(main, "sunColor"), sun.sun); gl.uniform3fv(u(main, "skyColor"), sun.sky);
       gl.uniform3fv(u(main, "fogColor"), fog); gl.uniform1f(u(main, "fogNear"), dist * 1.05); gl.uniform1f(u(main, "fogFar"), dist * 2.2);
-      renderer.shaderProgram = main;
-      renderer.drawStructure(view);
-      renderer.shaderProgram = plain;
+      renderer.setTexture(renderer.atlasTexture, renderer.resources.getPixelSize?.());
+      renderer.prepareDraw(view);
+      // deepslate's chunks keep solid and translucent blocks in separate meshes: solids first, cut out; then the translucent
+      // ones blended over them, without writing depth (so glass behind glass still shows)
+      const chunks = renderer.chunkBuilder.chunks.flatMap((a) => a.flatMap((b) => b.flatMap((c) => c ?? [])));
+      const attrs = { pos: true, color: true, texture: true, normal: true };
+      gl.uniform1f(u(main, "cutout"), 1);
+      for (const c of chunks) if (!c.mesh.isEmpty()) renderer.drawMesh(c.mesh, attrs);
+      gl.uniform1f(u(main, "cutout"), 0); gl.depthMask(false);
+      for (const c of chunks) if (!c.transparentMesh.isEmpty()) renderer.drawMesh(c.transparentMesh, attrs);
+      gl.depthMask(true);
       clearAttribs();
     },
   };

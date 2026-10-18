@@ -33,6 +33,7 @@ export function loadResources() {
     const c = document.createElement("canvas"); c.width = c.height = size;
     const ctx = c.getContext("2d"); ctx.drawImage(img, 0, 0);
     const data = ctx.getImageData(0, 0, size, size), idMap = {};
+    bleed(data);
     for (const id in uvs) { const [u, v, du, dv] = uvs[id]; const h = du !== dv && id.startsWith("block/") ? du : dv;
       idMap[Identifier.create(id).toString()] = [u / size, v / size, (u + du) / size, (v + h) / size]; }
     const atlas = new TextureAtlas(data, idMap);
@@ -46,6 +47,27 @@ export function loadResources() {
       getDefaultBlockProperties: () => null,
     };
   })());
+}
+
+// Alpha bleeding: a fully transparent pixel in Mojang's textures keeps a white (or black) colour, and the mipmaps the GPU
+// samples at a distance average it into the edges of leaves and glass, which then shimmer white. Give each transparent
+// pixel the colour of an opaque neighbour (a few passes outward), leaving its alpha at 0.
+function bleed({ data, width: w, height: h }) {
+  let edge = [];
+  for (let i = 0; i < w * h; i++) if (data[i * 4 + 3] === 0) edge.push(i);
+  for (let pass = 0; pass < 4 && edge.length; pass++) {
+    const fill = [], rest = [];
+    for (const i of edge) {
+      const x = i % w, y = (i - x) / w; let r = 0, g = 0, b = 0, n = 0;
+      for (const j of [x > 0 ? i - 1 : -1, x < w - 1 ? i + 1 : -1, y > 0 ? i - w : -1, y < h - 1 ? i + w : -1]) {
+        if (j >= 0 && data[j * 4 + 3] > 0) { r += data[j * 4]; g += data[j * 4 + 1]; b += data[j * 4 + 2]; n++; } }
+      if (n) fill.push([i, r / n, g / n, b / n]); else rest.push(i);
+    }
+    // mark this pass's pixels as filled (alpha 1 for now) so the next pass grows from them
+    for (const [i, r, g, b] of fill) { data[i * 4] = r; data[i * 4 + 1] = g; data[i * 4 + 2] = b; data[i * 4 + 3] = 1; }
+    edge = rest;
+  }
+  for (let i = 0; i < w * h; i++) if (data[i * 4 + 3] === 1) data[i * 4 + 3] = 0;
 }
 
 /** Fetch an .nbt and read its blocks: [{pos, name, props}], plus its size. `offset` shifts every block (to align a pair). */
@@ -131,7 +153,7 @@ export function createView(canvas, structure, res, { shaders = true } = {}) {
     get canShade() { return !!shade; },
     draw(cam) {
       fit(); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-      if (shade && on) shade.draw(viewMatrix(cam), { dist: cam.dist }); else renderer.drawStructure(viewMatrix(cam));
+      if (shade) shade.draw(viewMatrix(cam), { dist: cam.dist, shaded: on }); else renderer.drawStructure(viewMatrix(cam));
     },
     setStructure(s) { renderer.setStructure(s); shade?.invalidate(); },
     setShaders(v) { on = v; },
@@ -142,7 +164,8 @@ export function createView(canvas, structure, res, { shaders = true } = {}) {
 /** Pointer controls on an element: drag to rotate, right-drag or shift-drag to pan, wheel or pinch to zoom. */
 export function attachOrbit(el, cam, onChange) {
   const pts = new Map(); let pinch = 0;
-  const down = (e) => { el.setPointerCapture(e.pointerId); pts.set(e.pointerId, { x: e.clientX, y: e.clientY, b: e.button, shift: e.shiftKey }); };
+  // a control on the stage (the before/after divider) marks itself data-no-orbit: dragging it never turns the view
+  const down = (e) => { if (e.target.closest?.("[data-no-orbit]")) return; el.setPointerCapture(e.pointerId); pts.set(e.pointerId, { x: e.clientX, y: e.clientY, b: e.button, shift: e.shiftKey }); };
   const move = (e) => {
     const p = pts.get(e.pointerId); if (!p) return;
     const dx = e.clientX - p.x, dy = e.clientY - p.y; p.x = e.clientX; p.y = e.clientY;
