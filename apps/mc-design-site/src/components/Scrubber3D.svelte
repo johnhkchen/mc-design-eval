@@ -5,7 +5,11 @@
   import { loadResources, loadBlocks, toStructure, orbitFor, createView, attachOrbit } from "../lib/deepslate.js";
 
   let { before, after, poster = "", label = "", beforeLabel = "Before", afterLabel = "After" } = $props();
-  let wrap, cBefore, cAfter;
+  let wrap, cBefore, cAfter, fig;
+  // shaders: sunlight, cast shadows and haze (lib/shading.js), with the sun's place in the day
+  let shaders = $state(true), sun = $state(0.38), canShade = $state(false), full = $state(false);
+  const applyShade = () => { for (const v of views) { v.setShaders(shaders); v.setSun(sun); } redraw(); };
+  const toggleFull = () => (document.fullscreenElement ? document.exitFullscreen() : fig.requestFullscreen?.())?.catch?.(() => {});
   let split = $state(50);
   let status = $state("loading");
   let error = $state("");
@@ -30,6 +34,8 @@
         cam = orbitFor(size);
         views = [createView(cBefore, toStructure(a.blocks, size), res), createView(cAfter, toStructure(b.blocks, size), res)];
         attachOrbit(wrap, cam, redraw);
+        canShade = views.every((v) => v.canShade); applyShade();
+        document.addEventListener("fullscreenchange", () => { full = document.fullscreenElement === fig; redraw(); });
         status = "ready";
         const loop = () => { if (!alive) return; if (dirty) { dirty = false; for (const v of views) v.draw(cam); } frame = requestAnimationFrame(loop); };
         loop();
@@ -40,7 +46,7 @@
   });
 </script>
 
-<figure class="scrubber">
+<figure class="scrubber" bind:this={fig}>
   <div class="stage" bind:this={wrap} aria-label={label ? `${label}: before and after, in 3-D` : "Before and after, in 3-D"}>
     {#if poster && status !== "ready"}<img class="poster" src={poster} alt={label} />{/if}
     <canvas bind:this={cBefore} class:hidden={status !== "ready"}></canvas>
@@ -56,6 +62,11 @@
     <figcaption>
       <label class="sr" for="split-{label}">Before / after split</label>
       <input id="split-{label}" type="range" min="0" max="100" bind:value={split} />
+      {#if canShade}
+        <label class="tog"><input type="checkbox" bind:checked={shaders} onchange={applyShade} /> Shaders</label>
+        {#if shaders}<label class="sun">Sun <input type="range" min="0" max="1" step="0.01" bind:value={sun} oninput={applyShade} aria-label="Time of day" /></label>{/if}
+      {/if}
+      <button class="fsb" onclick={toggleFull}>{full ? "Exit full screen" : "Full screen"}</button>
       <span class="hint">Drag the divider to compare · drag the land to rotate · scroll to zoom</span>
     </figcaption>
   {/if}
@@ -76,5 +87,10 @@
   .note { position: absolute; left: 12px; bottom: 10px; font-size: .85rem; color: var(--ink-soft); background: var(--paper); padding: 2px 8px; border-radius: 3px; }
   figcaption { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; font-size: .88rem; color: var(--ink-soft); }
   input[type="range"] { flex: 0 1 220px; accent-color: var(--accent); }
+  .tog, .sun { display: inline-flex; gap: 6px; align-items: center; }
+  .sun input { flex: 0 1 140px; }
+  .fsb { font: inherit; font-weight: 600; padding: 5px 10px; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); border-radius: 3px; cursor: pointer; }
+  .scrubber:fullscreen { background: var(--paper); padding: 12px; display: flex; flex-direction: column; }
+  .scrubber:fullscreen .stage { aspect-ratio: auto; flex: 1; }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 </style>

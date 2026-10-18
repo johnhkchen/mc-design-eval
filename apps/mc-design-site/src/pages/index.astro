@@ -6,7 +6,7 @@ import catalog from "../data/catalog.json";
 import { projects } from "../data/projects.js";
 const p = projects[0];
 const blocks = catalog.reduce((n, e) => n + e.blocks, 0);
-const facts = [[catalog.length, "buildings in the catalog"], [projects.length, "projects in Dragonholde"], [blocks.toLocaleString("en-US"), "blocks in the catalog"], ["1.21.1", "Minecraft version"]];
+const facts = [[catalog.length, "buildings in the catalog"], [projects.length, "projects"], [blocks.toLocaleString("en-US"), "blocks in the catalog"], ["1.21.1", "Minecraft version"]];
 ---
 <Base>
   <section class="wrap hero">
@@ -46,12 +46,12 @@ const facts = [[catalog.length, "buildings in the catalog"], [projects.length, "
 
   <div class="wrap"><hr class="rule" /></div>
   <section class="wrap section">
-    <div class="head"><h2>Projects</h2><span class="muted">Both for Antipolar, in Dragonholde</span></div>
+    <div class="head"><h2>Projects</h2><span class="muted">Two for Antipolar in Dragonholde, and a showcase town</span></div>
     <div class="projects">
       {projects.map((q) => (
         <a class="card" href={`/projects/${q.id}/`}>
           <div class="thumb wide"><img src={q.poster} alt={`${q.code} ${q.name || ""}`} loading="lazy" /></div>
-          <span class="eyebrow">{q.code} · {q.status} · for {q.client}</span>
+          <span class="eyebrow">{q.code} · {q.status} · {q.client ? `for ${q.client}` : "showcase"}</span>
           <h3>{q.name || "Swamp reclamation"}</h3>
           <p class="muted">{q.lede}</p>
         </a>
@@ -79,7 +79,7 @@ const facts = [[catalog.length, "buildings in the catalog"], [projects.length, "
   .points { grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 28px; }
   .points div { display: grid; gap: 6px; align-content: start; }
   .head { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: baseline; }
-  .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 32px; }
+  .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 32px; }
   .thumb.wide { aspect-ratio: 16 / 10; }
   .facts { margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 1px solid var(--rule); }
   .facts div { padding: 16px 20px 18px; display: grid; gap: 4px; align-content: start; }

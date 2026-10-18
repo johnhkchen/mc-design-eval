@@ -26,5 +26,19 @@ export const projects = [
     ],
     modules: [],
   },
+  {
+    id: "oak-lake", code: "OL-01", name: "Oak Lake", client: null, where: "a showcase on a vanilla survival landscape", status: "Built",
+    lede: "A master-planned lakeside neighbourhood of mail-order houses: a tree-lined boulevard, crescents on the contours, a school, a church plot, a park with fields, trails and docks.",
+    before: { src: "/models/oak-lake-before.nbt", offset: [0, 0, 0] }, after: { src: "/models/oak-lake-after.nbt", offset: [0, 0, 0] },
+    poster: "/img/projects/oaklake-after.jpg", plan: "/img/projects/oaklake-plan.jpg",
+    planCaption: "The master plan: West Avenue as a boulevard, the Lake Drive loop, crescents along the contours, the school grounds, church plot and green, and the park round the lake.", size: "160 × 160 blocks",
+    story: [
+      ["The land", "An untouched vanilla landscape: oak woods round a small lake, the ground falling to the water on every side. Nothing had been built on it."],
+      ["The plan", "Streets climb in half steps only, so every walk from the street to a front door meets the accessible standard. The lake is the park: a shore path, picnic areas, a beach, a boat launch, a fishing pier and a canoe landing, with ball and athletic fields and tennis courts uphill."],
+      ["The houses", "Fifteen lots, each holding one of the eight mail-order houses or one of seven colour variants, so no two neighbours match. Every way in was walked and passes."],
+    ],
+    modules: ["sears-00-magnolia", "sears-01-alhambra", "sears-02-vallonia", "sears-03-puritan", "sears-04-cornell", "sears-05-stanford", "sears-06-winona", "sears-07-craftsman",
+      "sears-01-alhambra-b", "sears-02-vallonia-b", "sears-03-puritan-b", "sears-04-cornell-b", "sears-05-stanford-b", "sears-06-winona-b", "sears-07-craftsman-b"],
+  },
 ];
 export const projectById = Object.fromEntries(projects.map((p) => [p.id, p]));

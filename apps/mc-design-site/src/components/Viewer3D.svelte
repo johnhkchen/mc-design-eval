@@ -6,6 +6,8 @@
 
   let { src, poster = "", label = "", cannon = false, secPerBlock = 1.5 } = $props();
   let canvas, wrap;
+  let shaders = $state(true), sun = $state(0.38), canShade = $state(false);
+  const applyShade = () => { view.setShaders(shaders); view.setSun(sun); redraw(); };
   let status = $state("loading");
   let error = $state("");
   let shown = $state(0);
@@ -39,6 +41,7 @@
         cam = orbitFor(size);
         view = createView(canvas, toStructure(ordered, size), res);
         attachOrbit(wrap, cam, redraw);
+        canShade = view.canShade; applyShade();
         status = "ready";
         const loop = () => { if (!alive) return; if (dirty) { dirty = false; view.draw(cam); } frame = requestAnimationFrame(loop); };
         loop();
@@ -65,6 +68,10 @@
       {:else}
         <span class="hint">Drag to rotate · scroll to zoom · right-drag to pan</span>
       {/if}
+      {#if canShade}
+        <label class="tog"><input type="checkbox" bind:checked={shaders} onchange={applyShade} /> Shaders</label>
+        {#if shaders}<label class="tog">Sun <input class="sun" type="range" min="0" max="1" step="0.01" bind:value={sun} oninput={applyShade} aria-label="Time of day" /></label>{/if}
+      {/if}
     </figcaption>
   {/if}
 </figure>
@@ -80,5 +87,7 @@
   figcaption { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; font-size: .88rem; color: var(--ink-soft); }
   input[type="range"] { flex: 1 1 200px; accent-color: var(--accent); }
   .play { font: inherit; font-weight: 600; padding: 6px 12px; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); border-radius: 3px; cursor: pointer; }
+  .tog { display: inline-flex; gap: 6px; align-items: center; }
+  .tog input.sun { flex: 0 1 120px; width: 120px; }
   .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 </style>

@@ -12,7 +12,7 @@ const mods = catalog.filter((e) => p.modules.includes(e.id));
 <Base title={title} description={p.lede}>
   <section class="wrap section">
     <nav class="tabs" aria-label="Projects">{projects.map((q) => <a href={`/projects/${q.id}/`} aria-current={q.id === p.id ? "page" : undefined}>{q.code}</a>)}</nav>
-    <span class="eyebrow">{p.code} · {p.status} · for {p.client} in {p.town} · {p.size}</span>
+    <span class="eyebrow">{p.code} · {p.status} · {p.client ? `for ${p.client} in ${p.town}` : p.where} · {p.size}</span>
     <h1>{p.name || "Swamp reclamation"}{p.placeholder && <span class="muted ph"> (working name)</span>}</h1>
     <p class="lede">{p.lede}</p>
     <Scrubber3D client:visible before={p.before} after={p.after} poster={p.poster} label={title} beforeLabel="Before" afterLabel={p.status === "Built" ? "Built" : "Planned"} />
@@ -38,7 +38,7 @@ const mods = catalog.filter((e) => p.modules.includes(e.id));
       </div>
     </section>
   )}
-  <section class="wrap section"><p class="muted">The cannon jobs for this project are on the <a href="/board/">construction board</a>.</p></section>
+  {p.client && <section class="wrap section"><p class="muted">The cannon jobs for this project are on the <a href="/board/">construction board</a>.</p></section>}
 </Base>
 <style>
   .tabs { display: flex; gap: 6px; }

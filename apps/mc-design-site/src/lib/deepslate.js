@@ -2,6 +2,7 @@
 // misode's mcmeta mirror (the site does not host Mojang's assets). One loader is shared by every view on a page.
 import { BlockDefinition, BlockModel, BlockPos, Identifier, NbtFile, Structure, StructureRenderer, TextureAtlas, upperPowerOfTwo } from "deepslate";
 import { mat4 } from "gl-matrix";
+import { shading } from "./shading.js";
 
 const MCMETA = "https://raw.githubusercontent.com/misode/mcmeta";
 const VERSION = "1.21.1";
@@ -9,8 +10,8 @@ const VERSION = "1.21.1";
 // Full cubes that hide the faces behind them; everything else draws all its faces.
 const OPAQUE = /(_planks|_log|_wood|_hyphae|_stem|stone|cobblestone|bricks|dirt|grass_block|podzol|mycelium|sand|gravel|terracotta|concrete|_wool|_ore|deepslate|tuff|andesite|diorite|granite|^mud$|packed_mud|clay|netherrack|blackstone|basalt|calcite|quartz|smooth_|_block|prismarine|obsidian|bedrock|bookshelf|hay_block|pumpkin|melon|sponge|snow_block|ice$|magma|glowstone|lamp|crafting_table|furnace|barrel|loom|smoker|blast|cartography|fletching|smithing|_shroom|mushroom_block)$/;
 const NOT_OPAQUE = /(slab|stairs|wall|fence|button|pressure|door|trapdoor|pane|glass|leaves|carpet|sign|torch|lantern|chain|rail|vine|flower|sapling|bars|fern|ladder|candle|pot|head|skull|banner|bed|chest|anvil|cauldron|hopper|lectern|scaffolding|campfire|bell|grindstone|stonecutter|composter|cake|rod|frame|pickle|coral|kelp|seagrass|mushroom$|wire|repeater|comparator|lever|plate|snow$|path|farmland|dripleaf|azalea)/;
-// Water has no block model; show it as tinted glass so ponds and canals stay visible.
-const STAND_IN = { "minecraft:water": "minecraft:light_blue_stained_glass", "minecraft:bubble_column": "minecraft:light_blue_stained_glass" };
+// deepslate draws water itself (its fluid renderer, still and flowing textures, tinted); a bubble column shows as water.
+const STAND_IN = { "minecraft:bubble_column": "minecraft:water" };
 
 let resources = null;
 export function loadResources() {
@@ -40,7 +41,7 @@ export function loadResources() {
       getBlockModel: (id) => mods[id.toString()],
       getTextureUV: (id) => atlas.getTextureUV(id),
       getTextureAtlas: () => atlas.getTextureAtlas(),
-      getBlockFlags: (id) => { const n = id.path; return { opaque: OPAQUE.test(n) && !NOT_OPAQUE.test(n), semi_transparent: /glass|ice$|slime|honey/.test(n), self_culling: /glass/.test(n) }; },
+      getBlockFlags: (id) => { const n = id.path; return { opaque: OPAQUE.test(n) && !NOT_OPAQUE.test(n), semi_transparent: /glass|ice$|slime|honey|^water$/.test(n), self_culling: /glass|^water$/.test(n) }; },
       getBlockProperties: () => null,
       getDefaultBlockProperties: () => null,
     };
@@ -56,7 +57,7 @@ export async function loadBlocks(url, { offset = [0, 0, 0] } = {}) {
   for (const b of s.getBlocks()) {
     const name = b.state.getName().toString();
     if (/air$/.test(name)) continue;
-    blocks.push({ pos: [b.pos[0] + offset[0], b.pos[1] + offset[1], b.pos[2] + offset[2]], name: STAND_IN[name] || name, props: STAND_IN[name] ? {} : withDefaults(res, name, b.state.getProperties()), water: !!STAND_IN[name] });
+    blocks.push({ pos: [b.pos[0] + offset[0], b.pos[1] + offset[1], b.pos[2] + offset[2]], name: STAND_IN[name] || name, props: STAND_IN[name] ? { level: "0" } : withDefaults(res, name, b.state.getProperties()), water: /water$|bubble_column$/.test(name) });
   }
   return { blocks: visible(blocks), size: [size[0] + Math.max(0, offset[0]), size[1] + Math.max(0, offset[1]), size[2] + Math.max(0, offset[2])] };
 }
@@ -110,8 +111,9 @@ export function viewMatrix(cam) {
   return m;
 }
 
-/** One WebGL view of a structure on a canvas. Resize-aware; draw(cam) renders a frame. */
-export function createView(canvas, structure, res) {
+/** One WebGL view of a structure on a canvas. Resize-aware; draw(cam) renders a frame. With shaders (on by default where
+ *  the browser can), sunlight with cast shadows and haze (lib/shading.js); setShaders(on), setSun(t 0..1). */
+export function createView(canvas, structure, res, { shaders = true } = {}) {
   const gl = canvas.getContext("webgl", { antialias: true, preserveDrawingBuffer: false });
   if (!gl) throw new Error("WebGL is not available in this browser");
   // No outline mesh for empty cells: deepslate builds one per air cell in the box, which is most of a landscape's cost.
@@ -123,9 +125,17 @@ export function createView(canvas, structure, res) {
     if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
     renderer.setViewport(0, 0, w, h);
   };
+  let shade = null, on = shaders;
+  try { shade = shading(gl, renderer, [structure.getSize()[0], structure.getSize()[1], structure.getSize()[2]]); } catch (e) { console.warn("shaders unavailable:", e); }
   return {
-    draw(cam) { fit(); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT); renderer.drawStructure(viewMatrix(cam)); },
-    setStructure(s) { renderer.setStructure(s); },
+    get canShade() { return !!shade; },
+    draw(cam) {
+      fit(); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      if (shade && on) shade.draw(viewMatrix(cam), { dist: cam.dist }); else renderer.drawStructure(viewMatrix(cam));
+    },
+    setStructure(s) { renderer.setStructure(s); shade?.invalidate(); },
+    setShaders(v) { on = v; },
+    setSun(t) { shade?.setSun(t); },
   };
 }
 

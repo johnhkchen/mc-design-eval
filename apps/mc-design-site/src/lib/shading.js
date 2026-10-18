@@ -1,0 +1,156 @@
+// Shaders for the deepslate views: sunlight with cast shadows, a sky-tinted ambient, and distance haze into the sky
+// colour, in place of deepslate's flat face shading. deepslate draws every chunk mesh with drawMesh() through whichever
+// program is active, so a sun's-eye depth pass (a shadow map, kept until the sun or the structure changes) and the lit
+// main pass both reuse its meshes. Needs WEBGL_depth_texture (all current browsers); without it the view stays plain.
+//   const s = shading(gl, renderer, size)   null if unsupported
+//   s.setSun(t)       t 0..1: morning (sun low in the east) through noon to evening (low in the west)
+//   s.draw(view)      instead of renderer.drawStructure(view)
+//   s.invalidate()    after setStructure(): the shadow map is drawn again
+import { mat4, vec3 } from "gl-matrix";
+
+const MAIN_VS = `
+  attribute vec4 vertPos; attribute vec2 texCoord; attribute vec4 texLimit; attribute vec3 vertColor; attribute vec3 normal;
+  uniform mat4 mView; uniform mat4 mProj; uniform mat4 mSun;
+  varying highp vec2 vTexCoord; varying highp vec4 vTexLimit; varying highp vec3 vTint; varying highp vec3 vNormal;
+  varying highp vec4 vSun; varying highp float vDist;
+  void main(void) {
+    vec4 eye = mView * vertPos;
+    gl_Position = mProj * eye;
+    vTexCoord = texCoord; vTexLimit = texLimit; vTint = vertColor; vNormal = normal;
+    vSun = mSun * vertPos; vDist = length(eye.xyz);
+  }`;
+const MAIN_FS = `
+  precision highp float;
+  varying highp vec2 vTexCoord; varying highp vec4 vTexLimit; varying highp vec3 vTint; varying highp vec3 vNormal;
+  varying highp vec4 vSun; varying highp float vDist;
+  uniform sampler2D sampler; uniform highp float pixelSize;
+  uniform sampler2D shadowMap; uniform float texel; uniform vec3 sunDir; uniform vec3 sunColor; uniform vec3 skyColor;
+  uniform vec3 fogColor; uniform float fogNear; uniform float fogFar;
+  float lit(vec3 n) {
+    float ndl = dot(n, sunDir);
+    if (ndl <= 0.0) return 0.0;
+    vec3 p = vSun.xyz / vSun.w * 0.5 + 0.5;
+    if (p.x < 0.0 || p.x > 1.0 || p.y < 0.0 || p.y > 1.0 || p.z > 1.0) return ndl;
+    float bias = 0.0006 + 0.0018 * (1.0 - ndl), s = 0.0;
+    for (int i = -1; i <= 1; i++) for (int j = -1; j <= 1; j++)
+      s += p.z - bias > texture2D(shadowMap, p.xy + vec2(float(i), float(j)) * texel).r ? 0.0 : 1.0;
+    return ndl * s / 9.0;
+  }
+  void main(void) {
+    vec4 tex = texture2D(sampler, clamp(vTexCoord, vTexLimit.xy + vec2(0.5) * pixelSize, vTexLimit.zw - vec2(0.5) * pixelSize));
+    if (tex.a < 0.01) discard;
+    vec3 n = normalize(vNormal);
+    vec3 albedo = tex.rgb * vTint;
+    // sky from above, a little bounce from below, the sun where it reaches
+    vec3 light = skyColor * (0.58 + 0.2 * n.y) + sunColor * lit(n);
+    vec3 c = albedo * light;
+    c = c / (1.0 + 0.18 * c);                                    // a soft shoulder, so sunlit pale walls don't clip
+    c = mix(c, fogColor, smoothstep(fogNear, fogFar, vDist) * 0.55);
+    gl_FragColor = vec4(c, tex.a);
+  }`;
+const DEPTH_VS = `
+  attribute vec4 vertPos; attribute vec2 texCoord; attribute vec4 texLimit;
+  uniform mat4 mSun;
+  varying highp vec2 vTexCoord; varying highp vec4 vTexLimit;
+  void main(void) { gl_Position = mSun * vertPos; vTexCoord = texCoord; vTexLimit = texLimit; }`;
+const DEPTH_FS = `
+  precision highp float;
+  varying highp vec2 vTexCoord; varying highp vec4 vTexLimit;
+  uniform sampler2D sampler;
+  void main(void) { if (texture2D(sampler, clamp(vTexCoord, vTexLimit.xy, vTexLimit.zw)).a < 0.5) discard; gl_FragColor = vec4(1.0); }`;
+
+function program(gl, vs, fs, attrs) {
+  const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; };
+  const p = gl.createProgram();
+  gl.attachShader(p, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(p, sh(gl.FRAGMENT_SHADER, fs));
+  attrs.forEach((a, i) => gl.bindAttribLocation(p, i, a));   // the same slots in both programs, so no stale array is left enabled
+  gl.linkProgram(p);
+  if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p));
+  return p;
+}
+
+// the sun through the day: east -> over the street side (north, where the catalog's fronts face, so the default view is
+// lit) -> west; elevation low -> high -> low; warmer when low
+function sunAt(t) {
+  const az = Math.PI * (0.1 + 0.8 * t), el = 0.18 + 0.85 * Math.sin(Math.PI * t);
+  const dir = vec3.normalize(vec3.create(), [Math.cos(az) * Math.cos(el), Math.sin(el), -(Math.sin(az) * Math.cos(el) * 0.6 + 0.4)]);
+  const warm = 1 - Math.min(1, el / 0.9);
+  const sun = [1.0, 0.93 - 0.18 * warm, 0.82 - 0.35 * warm].map((v) => v * (0.8 + 0.2 * (1 - warm)));
+  const sky = [0.56 + 0.1 * warm, 0.62 + 0.02 * warm, 0.74 - 0.08 * warm];
+  return { dir, sun, sky };
+}
+
+export function shading(gl, renderer, size) {
+  const ext = gl.getExtension("WEBGL_depth_texture");
+  if (!ext) return null;
+  const main = program(gl, MAIN_VS, MAIN_FS, ["vertPos", "texCoord", "texLimit", "vertColor", "normal"]);
+  const depth = program(gl, DEPTH_VS, DEPTH_FS, ["vertPos", "texCoord", "texLimit"]);
+  // a town wants a fine shadow map; a phone (or a small build) gets 2048, a quarter of the memory
+  const small = typeof matchMedia === "function" && (matchMedia("(pointer: coarse)").matches || innerWidth < 900);
+  const N = Math.min(gl.getParameter(gl.MAX_TEXTURE_SIZE), Math.max(...size) > 64 && !small ? 4096 : 2048);
+  const depthTex = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, depthTex);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.DEPTH_COMPONENT, N, N, 0, gl.DEPTH_COMPONENT, gl.UNSIGNED_INT, null);
+  for (const [k, v] of [[gl.TEXTURE_MIN_FILTER, gl.NEAREST], [gl.TEXTURE_MAG_FILTER, gl.NEAREST], [gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE], [gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE]]) gl.texParameteri(gl.TEXTURE_2D, k, v);
+  // WebGL1 wants a colour attachment on most drivers: a 16-bit renderbuffer we never read
+  const colour = gl.createRenderbuffer();
+  gl.bindRenderbuffer(gl.RENDERBUFFER, colour);
+  gl.renderbufferStorage(gl.RENDERBUFFER, gl.RGBA4, N, N);
+  const fbo = gl.createFramebuffer();
+  gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+  gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.RENDERBUFFER, colour);
+  gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.TEXTURE_2D, depthTex, 0);
+  const ok = gl.checkFramebufferStatus(gl.FRAMEBUFFER) === gl.FRAMEBUFFER_COMPLETE;
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  if (!ok) return null;
+
+  const plain = renderer.shaderProgram;
+  const centre = [size[0] / 2, size[1] / 2, size[2] / 2], R = Math.hypot(...size) / 2 + 2;
+  const mSun = mat4.create();
+  let sun = sunAt(0.38), fresh = false;
+  const u = (p, name) => gl.getUniformLocation(p, name);
+  const clearAttribs = () => { for (let i = 0; i < 8; i++) gl.disableVertexAttribArray(i); };
+
+  function shadowPass() {
+    const eye = vec3.scaleAndAdd(vec3.create(), centre, sun.dir, R * 1.5);
+    const up = Math.abs(sun.dir[1]) > 0.95 ? [0, 0, 1] : [0, 1, 0];
+    const v = mat4.lookAt(mat4.create(), eye, centre, up), p = mat4.ortho(mat4.create(), -R, R, -R, R, 0.5 * R, 2.6 * R);
+    mat4.multiply(mSun, p, v);
+    const vp = gl.getParameter(gl.VIEWPORT);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+    gl.viewport(0, 0, N, N);
+    gl.clear(gl.DEPTH_BUFFER_BIT | gl.COLOR_BUFFER_BIT);
+    gl.colorMask(false, false, false, false);
+    clearAttribs();
+    renderer.setShader(depth);
+    gl.uniformMatrix4fv(u(depth, "mSun"), false, mSun);
+    renderer.setTexture(renderer.atlasTexture, renderer.resources.getPixelSize?.());
+    gl.uniform1i(u(depth, "sampler"), 0);
+    for (const m of renderer.chunkBuilder.getMeshes()) renderer.drawMesh(m, { pos: true, texture: true });
+    gl.colorMask(true, true, true, true);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    gl.viewport(vp[0], vp[1], vp[2], vp[3]);
+    fresh = true;
+  }
+
+  return {
+    setSun(t) { sun = sunAt(t); fresh = false; },
+    invalidate() { fresh = false; },
+    draw(view, { fog = [0.86, 0.9, 0.97], dist = 300 } = {}) {
+      if (!fresh) shadowPass();
+      clearAttribs();
+      gl.useProgram(main);
+      gl.uniformMatrix4fv(u(main, "mSun"), false, mSun);
+      gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, depthTex); gl.uniform1i(u(main, "shadowMap"), 1);
+      gl.activeTexture(gl.TEXTURE0); gl.uniform1i(u(main, "sampler"), 0);
+      gl.uniform1f(u(main, "texel"), 1 / N);
+      gl.uniform3fv(u(main, "sunDir"), sun.dir); gl.uniform3fv(u(main, "sunColor"), sun.sun); gl.uniform3fv(u(main, "skyColor"), sun.sky);
+      gl.uniform3fv(u(main, "fogColor"), fog); gl.uniform1f(u(main, "fogNear"), dist * 1.05); gl.uniform1f(u(main, "fogFar"), dist * 2.2);
+      renderer.shaderProgram = main;
+      renderer.drawStructure(view);
+      renderer.shaderProgram = plain;
+      clearAttribs();
+    },
+  };
+}
