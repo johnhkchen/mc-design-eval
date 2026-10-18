@@ -40,5 +40,28 @@ export const projects = [
     modules: ["sears-00-magnolia", "sears-01-alhambra", "sears-02-vallonia", "sears-03-puritan", "sears-04-cornell", "sears-05-stanford", "sears-06-winona", "sears-07-craftsman",
       "sears-01-alhambra-b", "sears-02-vallonia-b", "sears-03-puritan-b", "sears-04-cornell-b", "sears-05-stanford-b", "sears-06-winona-b", "sears-07-craftsman-b"],
   },
+  {
+    id: "sf-palace", code: "SF-01", name: "Palace of Fine Arts", client: null, where: "a real place, recreated from open data", status: "Built",
+    lede: "San Francisco's Palace of Fine Arts by its lagoon, at 1.4 blocks to the metre: the ground, trees, streets and every building's shape from public data, and the rotunda, colonnades and hall front designed from the city's measurements.",
+    before: { src: "/models/sf-palace-before.nbt", offset: [0, 0, 0] }, after: { src: "/models/sf-palace-after.nbt", offset: [0, 0, 0] },
+    beforeLabel: "Open data", afterLabel: "Designed",
+    poster: "/img/projects/sf-palace-after.jpg", plan: "/img/projects/sf-palace-plan.jpg",
+    planCaption: "The whole site: the rotunda by the lagoon, the two colonnades bent along their measured arcs, and the exhibition hall's front along its crescent.", size: "280 × 280 m",
+    story: [
+      ["The data", "The ground and every building's shape come from the 2023 USGS lidar survey, about 100 points to the square metre. Footprints, streets and parks are the city's, roofs and lawns are coloured from 2022 aerial photographs, and the trees stand where the lidar found canopy, at the heights it measured."],
+      ["The design", "The monument itself was designed, not traced: a four-piece kit (the rotunda, a colonnade bay, a colonnade end and a hall bay) built for $2.23 from the city's dimensions and a freely licensed photograph, then set on the site, with the colonnades bent along their real curves."],
+      ["The colours", "Matched to the reference photograph: the pale grey-beige dome, the red-brown column shafts of the rotunda, and the warm stone of everything else."],
+    ],
+    credits: [
+      "Ground, buildings and trees: U.S. Geological Survey, 3D Elevation Program (public domain)",
+      "Aerial colours: USDA National Agriculture Imagery Program (public domain)",
+      "Footprints, streets, parks, parcels: City and County of San Francisco, DataSF (PDDL)",
+      "Lagoon: USGS National Hydrography Dataset (public domain)",
+      "Paths and trees: © OpenStreetMap contributors (ODbL)",
+      "Canopy heights: Meta and World Resources Institute, High Resolution Canopy Height Maps (CC BY 4.0)",
+      "Reference photograph: \u201cPalace of Fine Arts - March 2018 (1476)\u201d, Gregory Varnum, CC BY-SA 4.0, via Wikimedia Commons",
+    ],
+    modules: [],
+  },
 ];
 export const projectById = Object.fromEntries(projects.map((p) => [p.id, p]));

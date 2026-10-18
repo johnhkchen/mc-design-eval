@@ -48,7 +48,7 @@ function buildFrom(n, { composeWith } = {}) {
   const { grid, manifest, ground } = buildPlace(place, frame, L), out = `${HERE}/out/${n}`;
   if (composeWith) {
     const spec = JSON.parse(readFileSync(`${HERE}/places/${n}.compose.json`, "utf8")), files = new Map();
-    const mod = (name) => { const m = spec.modules[name]; if (!files.has(m.file)) files.set(m.file, loadStructure(resolve(HERE, m.file))); return { module: files.get(m.file), plot: m.plot }; };
+    const mod = (name) => { const m = spec.modules[name]; if (!files.has(m.file)) files.set(m.file, loadStructure(resolve(HERE, m.file))); return { module: files.get(m.file), plot: m.plot, swap: m.swap }; };
     const notes = compose(grid, manifest, spec.placements.map((p) => ({ ...p, ...mod(p.module), ...(p.end ? { end: mod(p.end) } : {}) })), { ground, I: (x, z) => z * frame.N + x });
     mkdirSync(out, { recursive: true }); grid.save(`${out}/composed.nbt`); console.log(notes.join("\n")); console.log(`${n}: composed -> out/${n}/composed.nbt`); return;
   }

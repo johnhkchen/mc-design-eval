@@ -15,7 +15,7 @@ const mods = catalog.filter((e) => p.modules.includes(e.id));
     <span class="eyebrow">{p.code} · {p.status} · {p.client ? `for ${p.client} in ${p.town}` : p.where} · {p.size}</span>
     <h1>{p.name || "Swamp reclamation"}{p.placeholder && <span class="muted ph"> (working name)</span>}</h1>
     <p class="lede">{p.lede}</p>
-    <Scrubber3D client:visible before={p.before} after={p.after} poster={p.poster} label={title} beforeLabel="Before" afterLabel={p.status === "Built" ? "Built" : "Planned"} />
+    <Scrubber3D client:visible before={p.before} after={p.after} poster={p.poster} label={title} beforeLabel={p.beforeLabel ?? "Before"} afterLabel={p.afterLabel ?? (p.status === "Built" ? "Built" : "Planned")} />
   </section>
   <section class="wrap section story">
     {p.story.map(([h, t]) => <div><h3>{h}</h3><p>{t}</p></div>)}
@@ -38,6 +38,9 @@ const mods = catalog.filter((e) => p.modules.includes(e.id));
       </div>
     </section>
   )}
+  {p.credits && (
+    <section class="wrap section"><h2 class="credits-h">Sources and credits</h2><ul class="credits">{p.credits.map((c) => <li>{c}</li>)}</ul></section>
+  )}
   {p.client && <section class="wrap section"><p class="muted">The cannon jobs for this project are on the <a href="/board/">construction board</a>.</p></section>}
 </Base>
 <style>
@@ -51,5 +54,7 @@ const mods = catalog.filter((e) => p.modules.includes(e.id));
   .plan img { width: 100%; height: auto; border-radius: 4px; image-rendering: pixelated; }
   .plan figcaption { display: grid; gap: 8px; }
   @media (max-width: 800px) { .plan { grid-template-columns: minmax(0, 1fr); } }
+  .credits-h { font-size: 1.2rem; }
+  .credits { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; color: var(--ink-soft); font-size: .9rem; }
   .story div { display: grid; gap: 8px; align-content: start; }
 </style>

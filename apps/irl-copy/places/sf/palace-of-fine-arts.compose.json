@@ -1,15 +1,112 @@
 {
-  "note": "The Palace kit (lab run palace-kit, v1: four modules on plots along x) set on the site: the rotunda on its footprint, the two peristyle arms bent along their arcs with the closing pier at the far end, and the exhibition hall's lagoon front bent along the inner edge of its crescent (the hall's body stays as massing behind it).",
-  "modules": {
-    "rotunda": { "file": "../../benchmarks/plugin-baseline/runs/build-1/palace-kit/v1.nbt", "plot": [0, 0, 63, 63] },
-    "peristyle": { "file": "../../benchmarks/plugin-baseline/runs/build-1/palace-kit/v1.nbt", "plot": [64, 0, 79, 23] },
-    "peristyle-end": { "file": "../../benchmarks/plugin-baseline/runs/build-1/palace-kit/v1.nbt", "plot": [80, 0, 95, 23] },
-    "hall": { "file": "../../benchmarks/plugin-baseline/runs/build-1/palace-kit/v1.nbt", "plot": [96, 0, 111, 23] }
+ "note": "The Palace kit (lab run palace-kit, v1: four modules on plots along x) set on the site: the rotunda on its footprint, the two peristyle arms bent along their arcs with the closing pier at the far end, and the exhibition hall's lagoon front bent along the inner edge of its crescent (the hall's body stays as massing behind it).",
+ "modules": {
+  "rotunda": {
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/palace-kit/v1.nbt",
+   "plot": [
+    0,
+    0,
+    63,
+    63
+   ],
+   "swap": [
+    {
+     "from": "terracotta",
+     "to": "calcite",
+     "minY": 44
+    },
+    {
+     "from": "brown_terracotta",
+     "to": "white_terracotta",
+     "minY": 44
+    },
+    {
+     "from": "polished_granite",
+     "to": "polished_diorite",
+     "minY": 44
+    }
+   ]
   },
-  "placements": [
-    { "building": "201006.0000986", "module": "rotunda", "mode": "centre" },
-    { "building": "201006.0006360", "module": "peristyle", "end": "peristyle-end", "mode": "arc", "edge": "inner", "front": "inner" },
-    { "building": "201006.0006456", "module": "peristyle", "end": "peristyle-end", "mode": "arc", "edge": "inner", "front": "inner" },
-    { "building": "201006.0000031", "module": "hall", "mode": "arc", "edge": "inner", "front": "inner", "clear": "band" }
-  ]
+  "peristyle": {
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/palace-kit/v1.nbt",
+   "plot": [
+    64,
+    0,
+    79,
+    23
+   ],
+   "swap": [
+    {
+     "from": "white_terracotta",
+     "to": "cut_sandstone"
+    }
+   ]
+  },
+  "peristyle-end": {
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/palace-kit/v1.nbt",
+   "plot": [
+    80,
+    0,
+    95,
+    23
+   ],
+   "swap": [
+    {
+     "from": "white_terracotta",
+     "to": "cut_sandstone"
+    }
+   ]
+  },
+  "hall": {
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/palace-kit/v1.nbt",
+   "plot": [
+    96,
+    0,
+    111,
+    23
+   ],
+   "swap": [
+    {
+     "from": "granite_stairs",
+     "to": "smooth_sandstone_stairs"
+    },
+    {
+     "from": "granite_slab",
+     "to": "smooth_sandstone_slab"
+    }
+   ]
+  }
+ },
+ "placements": [
+  {
+   "building": "201006.0000986",
+   "module": "rotunda",
+   "mode": "centre"
+  },
+  {
+   "building": "201006.0006360",
+   "module": "peristyle",
+   "end": "peristyle-end",
+   "mode": "arc",
+   "edge": "inner",
+   "front": "inner"
+  },
+  {
+   "building": "201006.0006456",
+   "module": "peristyle",
+   "end": "peristyle-end",
+   "mode": "arc",
+   "edge": "inner",
+   "front": "inner"
+  },
+  {
+   "building": "201006.0000031",
+   "module": "hall",
+   "mode": "arc",
+   "edge": "inner",
+   "front": "inner",
+   "clear": "band"
+  }
+ ],
+ "colours": "Matched to the reference photo (01-rotunda-lagoon.jpg, overcast, so by relative tone): the dome is the palest surface, a warm grey-beige, not red; the rotunda's column shafts are red-brown (granite stays); the colonnade shafts are buff like the body; the hall cornice tan."
 }

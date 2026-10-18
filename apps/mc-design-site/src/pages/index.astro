@@ -46,12 +46,12 @@ const facts = [[catalog.length, "buildings in the catalog"], [projects.length, "
 
   <div class="wrap"><hr class="rule" /></div>
   <section class="wrap section">
-    <div class="head"><h2>Projects</h2><span class="muted">Two for Antipolar in Dragonholde, and a showcase town</span></div>
+    <div class="head"><h2>Projects</h2><span class="muted">For Antipolar in Dragonholde, a showcase town, and a real place</span></div>
     <div class="projects">
       {projects.map((q) => (
         <a class="card" href={`/projects/${q.id}/`}>
           <div class="thumb wide"><img src={q.poster} alt={`${q.code} ${q.name || ""}`} loading="lazy" /></div>
-          <span class="eyebrow">{q.code} · {q.status} · {q.client ? `for ${q.client}` : "showcase"}</span>
+          <span class="eyebrow">{q.code} · {q.status} · {q.client ? `for ${q.client}` : q.where?.startsWith("a real") ? "real place" : "showcase"}</span>
           <h3>{q.name || "Swamp reclamation"}</h3>
           <p class="muted">{q.lede}</p>
         </a>

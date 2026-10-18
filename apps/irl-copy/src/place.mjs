@@ -42,7 +42,13 @@ export function fitArc(cells) {
 function clear(g, b, ground, I) {
   for (const [x, z] of b.footprint) for (let y = ground(x, z) + 1; y < g.size[1]; y++) g.set(x, y, z, "air");
 }
-const copyCell = (c, quarter) => (c && !/air$/.test(c.block) ? [c.block, c.state ? { ...c.state, ...(c.state.facing ? { facing: turn(c.state.facing, quarter) } : {}) } : undefined] : null);
+// a module block, its facing turned a number of quarter turns, and recoloured by the placement's swaps
+// (swap: [{ from, to, minY?, maxY? }], exact block names, so the design run's files stay as they are)
+const copyCell = (c, quarter, swap, y) => {
+  if (!c || /air$/.test(c.block)) return null;
+  const name = c.block.replace(/^minecraft:/, ""), s = swap?.find((w) => w.from === name && (w.minY == null || y >= w.minY) && (w.maxY == null || y <= w.maxY));
+  return [s ? s.to : c.block, c.state ? { ...c.state, ...(c.state.facing ? { facing: turn(c.state.facing, quarter) } : {}) } : undefined];
+};
 
 export function compose(g, manifest, placements, { ground, I }) {
   const notes = [], byId = new Map(manifest.buildings.map((b) => [b.id, b]));
@@ -55,7 +61,7 @@ export function compose(g, manifest, placements, { ground, I }) {
       const xs = b.footprint.map((c) => c[0]), zs = b.footprint.map((c) => c[1]);
       const cx = Math.round((Math.min(...xs) + Math.max(...xs) + 1) / 2 - W / 2), cz = Math.round((Math.min(...zs) + Math.max(...zs) + 1) / 2 - D / 2);
       for (let dz = 0; dz < D; dz++) for (let dx = 0; dx < W; dx++) for (let y = skip; y < H; y++) {
-        const c = copyCell(p.module.get(x0 + dx, y, z0 + dz), 0); if (c) g.set(cx + dx, b.base + y, cz + dz, ...c); }
+        const c = copyCell(p.module.get(x0 + dx, y, z0 + dz), 0, p.swap, y); if (c) g.set(cx + dx, b.base + y, cz + dz, ...c); }
       notes.push(`${p.building}: ${W}x${D} module centred at ${cx},${cz}`);
       continue;
     }
@@ -76,7 +82,7 @@ export function compose(g, manifest, placements, { ground, I }) {
       const out = outer ? D - 1 - v : v, mv = frontIn ? out : D - 1 - out;               // out = 0 at the inner edge
       const base = ground(Math.min(g.size[0] - 1, x), Math.min(g.size[2] - 1, z));
       if (p.clear === "band") for (let y = base + 1; y < g.size[1]; y++) g.set(x, y, z, "air");
-      for (let y = skip; y < H; y++) { const c = copyCell(src.module.get(sx0 + mu, y, sz0 + mv), quarter); if (c) { g.set(x, base + y, z, ...c); placed++; } }
+      for (let y = skip; y < H; y++) { const c = copyCell(src.module.get(sx0 + mu, y, sz0 + mv), quarter, src.swap, y); if (c) { g.set(x, base + y, z, ...c); placed++; } }
     }
     notes.push(`${p.building}: bent along an arc r ${arc.r0.toFixed(0)}..${arc.r1.toFixed(0)} about ${arc.cx.toFixed(0)},${arc.cz.toFixed(0)}, ${span.toFixed(0)} blocks long, ${placed} blocks`);
   }
