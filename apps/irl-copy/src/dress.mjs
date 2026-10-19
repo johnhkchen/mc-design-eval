@@ -71,7 +71,7 @@ export function trimCanopy(chm, site, { green = null } = {}) {
     for (let k = 0; k < comp.length; k++) { const i = comp[k], x = i % N, z = (i / N) | 0;
       for (let dz = -1; dz <= 1; dz++) for (let dx = -1; dx <= 1; dx++) { const xx = x + dx, zz = z + dz, j = zz * N + xx;
         if (inside(xx, zz) && !seen[j] && chm[j] > 0) { seen[j] = 1; comp.push(j); } } }
-    const leafy = green ? comp.filter((i) => green(i)) : comp, top = Math.max(...comp.map((i) => chm[i])) / sc;
+    const leafy = green ? comp.filter((i) => green(i)) : comp, top = comp.reduce((m, i) => Math.max(m, chm[i]), -Infinity) / sc;
     const bare = !leafy.length && (comp.length < 30 * m2 || top < 4 || comp.some((i) => lamps.has(i) || byB(i % N, (i / N) | 0)));
     if (comp.length < 8 * m2 || bare || comp.filter((i) => float[i]).length * 2 > comp.length) { for (const i of comp) chm[i] = 0; dropped++; continue; }
     kept++; if (!leafy.length || leafy.length === comp.length) continue;

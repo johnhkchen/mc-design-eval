@@ -17,6 +17,9 @@ const opt = (k, d) => (process.argv.includes(k) ? process.argv[process.argv.inde
 const v3 = (s) => s.split(",").map(Number);
 const eye = v3(opt("--eye")), look = v3(opt("--look")), [alt, az] = v3(opt("--sun", "22,10")).map((d) => (d * Math.PI) / 180);
 const [W, H] = opt("--size", "3200x2000").split("x").map(Number), spp = +opt("--spp", 400), fov = +opt("--fov", 50);
+// Chunky's panoramic slot reads its fov as the VERTICAL angle and spans fov x width/height across (measured: 140 at 3:1
+// wrapped past 360 degrees), so the horizontal angle asked for is turned into that
+const chunkyFov = opt("--projection", "PINHOLE") === "PANORAMIC_SLOT" ? +(fov * H / W).toFixed(3) : fov;
 const jar = opt("--chunky", `${homedir()}/.local/share/chunky-tool/chunky-2.4.6.jar`);
 const out = `${HERE}/out/${place}`, world = `${out}/world`, sceneDir = `${out}/chunky`;
 if (!existsSync(`${world}/level.dat`)) throw new Error(`no world: run 'node bin/irl.mjs world ${place}' first`);
@@ -36,7 +39,7 @@ const scene = {
   hideUnknownBlocks: false, waterWorldEnabled: false,
   fog: { mode: +opt("--fog", 0) > 0 ? "UNIFORM" : "NONE", uniformDensity: +opt("--fog", 0), skyFogDensity: 1, fogColor: { red: 0.66, green: 0.73, blue: 0.82 }, fastFog: true, layers: [] },
   world: { path: world, dimension: "minecraft:overworld" },
-  camera: { name: "camera 1", position: { x: eye[0], y: eye[1], z: eye[2] }, orientation: { roll: 0, pitch, yaw }, projectionMode: opt("--projection", "PINHOLE"), fov, dof: "Infinity", focalOffset: 2, shift: { x: 0, y: 0 } },
+  camera: { name: "camera 1", position: { x: eye[0], y: eye[1], z: eye[2] }, orientation: { roll: 0, pitch, yaw }, projectionMode: opt("--projection", "PINHOLE"), fov: chunkyFov, dof: "Infinity", focalOffset: 2, shift: { x: 0, y: 0 } },
   sun: { altitude: alt, azimuth: az, intensity: +opt("--sun-intensity", 1.25), luminosity: 100, apparentBrightness: 1, radius: 0.03, modifySunTexture: false,
     color: { red: 1, green: 1, blue: 1 }, importanceSampling: { chance: 0.1, radius: 1.2 } },
   sky: { skyYaw: 0, skyPitch: 0, skyRoll: 0, skyMirrored: true, skyExposure: 1, skyLight: +opt("--sky-light", 1), apparentSkyLight: +opt("--sky-light", 1), mode: "SIMULATED", horizonOffset: 0.1,

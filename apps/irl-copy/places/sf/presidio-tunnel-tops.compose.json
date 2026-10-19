@@ -1,0 +1,4238 @@
+{
+ "note": "Presidio Tunnel Tops, the Main Post and the Golden Gate Bridge at 0.5 blocks per metre (turned 5.34 degrees: the bridge deck along z). The Tunnel Tops park as two landscape kits on the real ground (presidio-ggb/tunnel-tops-west-kit, tunnel-tops-east-kit: module y 0 = world y 2, placed by offset from the Visitor Center's footprint box); the Main Post kit (Walt Disney Family Museum, the Montgomery Street barracks x4, the Officers' Club, the Visitor Center) built square and turned onto the Main Post's angled footprints (centre mode with angle); the bridge, Fort Point and Crissy Field west placements carried over from sf/presidio-ggb; the presidio-fill generic modules on the small footprints and the metered fill (bin/fill.mjs) on the Main Post's other large buildings. The park kits' hidden light blocks are left out of the render scene (Chunky draws them as glowing pools on the lawns); their lamps stay.",
+ "modules": {
+  "ttWest": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/tunnel-tops-west-kit/v2.nbt",
+   "plot": [
+    0,
+    0,
+    119,
+    145
+   ],
+   "swap": [
+    {
+     "from": "light",
+     "to": "air"
+    }
+   ]
+  },
+  "ttEast": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/tunnel-tops-east-kit/v2.nbt",
+   "plot": [
+    0,
+    0,
+    85,
+    145
+   ],
+   "swap": [
+    {
+     "from": "light",
+     "to": "air"
+    }
+   ]
+  },
+  "disney": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/main-post-kit/v1.nbt",
+   "plot": [
+    0,
+    0,
+    23,
+    19
+   ]
+  },
+  "barracks": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/main-post-kit/v1.nbt",
+   "plot": [
+    24,
+    0,
+    49,
+    17
+   ]
+  },
+  "officersClub": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/main-post-kit/v1.nbt",
+   "plot": [
+    50,
+    0,
+    77,
+    25
+   ]
+  },
+  "visitorCenter": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/main-post-kit/v1.nbt",
+   "plot": [
+    78,
+    0,
+    94,
+    9
+   ]
+  },
+  "tower": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/ggb-bridge-kit/v2.nbt",
+   "plot": [
+    0,
+    0,
+    46,
+    23
+   ],
+   "swap": [
+    {
+     "from": "orange_terracotta",
+     "to": "orange_concrete"
+    }
+   ]
+  },
+  "deck": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/ggb-bridge-kit/v2.nbt",
+   "plot": [
+    48,
+    0,
+    62,
+    15
+   ],
+   "swap": [
+    {
+     "from": "orange_terracotta",
+     "to": "orange_concrete"
+    }
+   ]
+  },
+  "mainCables": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/ggb-bridge-kit/v2.nbt",
+   "plot": [
+    63,
+    0,
+    77,
+    248
+   ],
+   "swap": [
+    {
+     "from": "orange_terracotta",
+     "to": "orange_concrete"
+    }
+   ]
+  },
+  "sideCables": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/ggb-bridge-kit/v2.nbt",
+   "plot": [
+    78,
+    0,
+    92,
+    231
+   ],
+   "swap": [
+    {
+     "from": "orange_terracotta",
+     "to": "orange_concrete"
+    }
+   ]
+  },
+  "fort": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/ggb-south-kit/v2-split.nbt",
+   "plot": [
+    50,
+    0,
+    92,
+    36
+   ]
+  },
+  "approach": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/ggb-south-kit/v2-split.nbt",
+   "plot": [
+    0,
+    0,
+    42,
+    190
+   ],
+   "swap": [
+    {
+     "from": "orange_terracotta",
+     "to": "orange_concrete"
+    },
+    {
+     "from": "smooth_sandstone",
+     "to": "calcite"
+    },
+    {
+     "from": "cut_sandstone",
+     "to": "smooth_stone"
+    },
+    {
+     "from": "smooth_sandstone_slab",
+     "to": "smooth_stone_slab"
+    }
+   ]
+  },
+  "crissy0": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/crissy-west-kit/v1.nbt",
+   "plot": [
+    0,
+    0,
+    28,
+    38
+   ]
+  },
+  "crissy1": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/crissy-west-kit/v1.nbt",
+   "plot": [
+    29,
+    0,
+    56,
+    22
+   ]
+  },
+  "crissy2": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/crissy-west-kit/v1.nbt",
+   "plot": [
+    57,
+    0,
+    83,
+    19
+   ]
+  },
+  "crissy3": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/crissy-west-kit/v1.nbt",
+   "plot": [
+    84,
+    0,
+    97,
+    35
+   ]
+  },
+  "crissy4": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/crissy-west-kit/v1.nbt",
+   "plot": [
+    98,
+    0,
+    107,
+    10
+   ]
+  },
+  "crissy5": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/crissy-west-kit/v1.nbt",
+   "plot": [
+    108,
+    0,
+    118,
+    8
+   ]
+  },
+  "crissy6": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/crissy-west-kit/v1.nbt",
+   "plot": [
+    119,
+    0,
+    131,
+    11
+   ]
+  },
+  "crissy7": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/crissy-west-kit/v1.nbt",
+   "plot": [
+    132,
+    0,
+    139,
+    7
+   ]
+  },
+  "crissy8": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/crissy-west-kit/v1.nbt",
+   "plot": [
+    140,
+    0,
+    148,
+    8
+   ]
+  },
+  "crissy9": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/crissy-west-kit/v1.nbt",
+   "plot": [
+    149,
+    0,
+    155,
+    7
+   ]
+  },
+  "fill-house": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/presidio-fill-kit/v1.nbt",
+   "plot": [
+    0,
+    0,
+    7,
+    7
+   ]
+  },
+  "fill-duplex": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/presidio-fill-kit/v1.nbt",
+   "plot": [
+    8,
+    0,
+    17,
+    9
+   ]
+  },
+  "fill-garage": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/presidio-fill-kit/v1.nbt",
+   "plot": [
+    18,
+    0,
+    23,
+    5
+   ]
+  },
+  "fill-shed": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/presidio-fill-kit/v1.nbt",
+   "plot": [
+    24,
+    0,
+    27,
+    3
+   ]
+  },
+  "fill-barracks": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/presidio-fill-kit/v1.nbt",
+   "plot": [
+    28,
+    0,
+    43,
+    13
+   ]
+  },
+  "fill-hall": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/presidio-fill-kit/v1.nbt",
+   "plot": [
+    44,
+    0,
+    63,
+    19
+   ]
+  },
+  "fill-officers": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/presidio-fill-kit/v1.nbt",
+   "plot": [
+    64,
+    0,
+    75,
+    11
+   ]
+  },
+  "fill-battery": {
+   "file": "../../benchmarks/plugin-baseline/runs/presidio-ggb/presidio-fill-kit/v1.nbt",
+   "plot": [
+    76,
+    0,
+    93,
+    23
+   ]
+  },
+  "fill-201006.0000181": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0000181.nbt",
+   "plot": [
+    0,
+    0,
+    35,
+    49
+   ]
+  },
+  "fill-201006.0000989": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0000989.nbt",
+   "plot": [
+    0,
+    0,
+    14,
+    56
+   ]
+  },
+  "fill-201006.0000997": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0000997.nbt",
+   "plot": [
+    0,
+    0,
+    33,
+    32
+   ]
+  },
+  "fill-201006.0001114": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0001114.nbt",
+   "plot": [
+    0,
+    0,
+    51,
+    21
+   ]
+  },
+  "fill-201006.0001155": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0001155.nbt",
+   "plot": [
+    0,
+    0,
+    39,
+    52
+   ]
+  },
+  "fill-201006.0001191": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0001191.nbt",
+   "plot": [
+    0,
+    0,
+    39,
+    46
+   ]
+  },
+  "fill-201006.0001216": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0001216.nbt",
+   "plot": [
+    0,
+    0,
+    38,
+    46
+   ]
+  },
+  "fill-201006.0001366": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0001366.nbt",
+   "plot": [
+    0,
+    0,
+    28,
+    22
+   ]
+  },
+  "fill-201006.0001829": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0001829.nbt",
+   "plot": [
+    0,
+    0,
+    25,
+    28
+   ]
+  },
+  "fill-201006.0002257": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0002257.nbt",
+   "plot": [
+    0,
+    0,
+    25,
+    29
+   ]
+  },
+  "fill-201006.0002548": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0002548.nbt",
+   "plot": [
+    0,
+    0,
+    27,
+    34
+   ]
+  },
+  "fill-201006.0002589": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0002589.nbt",
+   "plot": [
+    0,
+    0,
+    23,
+    22
+   ]
+  },
+  "fill-201006.0002633": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0002633.nbt",
+   "plot": [
+    0,
+    0,
+    24,
+    28
+   ]
+  },
+  "fill-201006.0002678": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0002678.nbt",
+   "plot": [
+    0,
+    0,
+    27,
+    25
+   ]
+  },
+  "fill-201006.0002877": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0002877.nbt",
+   "plot": [
+    0,
+    0,
+    24,
+    29
+   ]
+  },
+  "fill-201006.0003232": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0003232.nbt",
+   "plot": [
+    0,
+    0,
+    19,
+    22
+   ]
+  },
+  "fill-201006.0003390": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0003390.nbt",
+   "plot": [
+    0,
+    0,
+    23,
+    16
+   ]
+  },
+  "fill-201006.0004147": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0004147.nbt",
+   "plot": [
+    0,
+    0,
+    14,
+    21
+   ]
+  },
+  "fill-201006.0005341": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0005341.nbt",
+   "plot": [
+    0,
+    0,
+    13,
+    23
+   ]
+  },
+  "fill-201006.0005534": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0005534.nbt",
+   "plot": [
+    0,
+    0,
+    16,
+    15
+   ]
+  },
+  "fill-201006.0006362": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0006362.nbt",
+   "plot": [
+    0,
+    0,
+    13,
+    14
+   ]
+  },
+  "fill-201006.0007025": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0007025.nbt",
+   "plot": [
+    0,
+    0,
+    9,
+    18
+   ]
+  },
+  "fill-201006.0007167": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0007167.nbt",
+   "plot": [
+    0,
+    0,
+    16,
+    13
+   ]
+  },
+  "fill-201006.0007863": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0007863.nbt",
+   "plot": [
+    0,
+    0,
+    11,
+    12
+   ]
+  },
+  "fill-201006.0001312": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0001312.nbt",
+   "plot": [
+    0,
+    0,
+    32,
+    32
+   ]
+  },
+  "fill-201006.0003677": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0003677.nbt",
+   "plot": [
+    0,
+    0,
+    20,
+    20
+   ]
+  },
+  "fill-201006.0006931": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0006931.nbt",
+   "plot": [
+    0,
+    0,
+    21,
+    16
+   ]
+  },
+  "fill-201006.0006932": {
+   "file": "work/sf/presidio-tunnel-tops/fill/201006.0006932.nbt",
+   "plot": [
+    0,
+    0,
+    20,
+    16
+   ]
+  }
+ },
+ "placements": [
+  {
+   "building": "201006.0005606",
+   "module": "ttWest",
+   "mode": "at",
+   "at": [
+    -66,
+    -111
+   ],
+   "y": -8,
+   "ground": false
+  },
+  {
+   "building": "201006.0005606",
+   "module": "ttEast",
+   "mode": "at",
+   "at": [
+    54,
+    -111
+   ],
+   "y": -8,
+   "ground": false
+  },
+  {
+   "building": "201006.0001569",
+   "module": "disney",
+   "mode": "centre",
+   "angle": -54
+  },
+  {
+   "building": "201006.0002027",
+   "module": "barracks",
+   "mode": "centre",
+   "angle": -53
+  },
+  {
+   "building": "201006.0002089",
+   "module": "barracks",
+   "mode": "centre",
+   "angle": -55
+  },
+  {
+   "building": "201006.0002093",
+   "module": "barracks",
+   "mode": "centre",
+   "angle": -54
+  },
+  {
+   "building": "201006.0002101",
+   "module": "barracks",
+   "mode": "centre",
+   "angle": -55
+  },
+  {
+   "building": "201006.0000767",
+   "module": "officersClub",
+   "mode": "centre",
+   "angle": 157
+  },
+  {
+   "building": "201006.0005606",
+   "module": "visitorCenter",
+   "mode": "centre",
+   "angle": -65
+  },
+  {
+   "building": "201006.0000856",
+   "module": "fort",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0000856",
+   "mode": "at",
+   "y": -1,
+   "ground": false,
+   "module": "tower",
+   "at": [
+    -19,
+    -190
+   ]
+  },
+  {
+   "building": "201006.0000856",
+   "mode": "at",
+   "y": -1,
+   "ground": false,
+   "module": "deck",
+   "at": [
+    -3,
+    -430
+   ],
+   "keep": true,
+   "repeat": {
+    "count": 15,
+    "step": [
+     0,
+     16
+    ]
+   },
+   "trees": false
+  },
+  {
+   "building": "201006.0000856",
+   "mode": "at",
+   "y": -1,
+   "ground": false,
+   "module": "deck",
+   "at": [
+    -3,
+    -166
+   ],
+   "keep": true,
+   "repeat": {
+    "count": 2,
+    "step": [
+     0,
+     16
+    ]
+   },
+   "trees": false
+  },
+  {
+   "building": "201006.0000856",
+   "mode": "at",
+   "y": -2,
+   "ground": false,
+   "module": "deck",
+   "at": [
+    -3,
+    -134
+   ],
+   "keep": true,
+   "repeat": {
+    "count": 2,
+    "step": [
+     0,
+     16
+    ]
+   },
+   "trees": false
+  },
+  {
+   "building": "201006.0000856",
+   "mode": "at",
+   "y": -3,
+   "ground": false,
+   "module": "deck",
+   "at": [
+    -3,
+    -102
+   ],
+   "keep": true,
+   "repeat": {
+    "count": 2,
+    "step": [
+     0,
+     16
+    ]
+   },
+   "trees": false
+  },
+  {
+   "building": "201006.0000856",
+   "mode": "at",
+   "y": -4,
+   "ground": false,
+   "module": "deck",
+   "at": [
+    -3,
+    -70
+   ],
+   "keep": true,
+   "repeat": {
+    "count": 2,
+    "step": [
+     0,
+     16
+    ]
+   },
+   "trees": false
+  },
+  {
+   "building": "201006.0000856",
+   "mode": "at",
+   "y": -5,
+   "ground": false,
+   "module": "deck",
+   "at": [
+    -3,
+    -38
+   ],
+   "keep": true,
+   "repeat": {
+    "count": 2,
+    "step": [
+     0,
+     16
+    ]
+   },
+   "trees": false
+  },
+  {
+   "building": "201006.0000856",
+   "mode": "at",
+   "y": -1,
+   "ground": false,
+   "module": "mainCables",
+   "at": [
+    -3,
+    -427
+   ],
+   "keep": true,
+   "trees": false
+  },
+  {
+   "building": "201006.0000856",
+   "mode": "at",
+   "y": -1,
+   "ground": false,
+   "module": "sideCables",
+   "at": [
+    -3,
+    -178
+   ],
+   "keep": true,
+   "trees": false
+  },
+  {
+   "building": "201006.0000856",
+   "mode": "at",
+   "y": -1,
+   "ground": false,
+   "module": "approach",
+   "at": [
+    -11,
+    -17
+   ],
+   "keep": true,
+   "trees": false
+  },
+  {
+   "building": "201006.0001005",
+   "module": "crissy0",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0001467",
+   "module": "crissy1",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0001463",
+   "module": "crissy2",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0002072",
+   "module": "crissy3",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0010529",
+   "module": "crissy4",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0013013",
+   "module": "crissy5",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0008998",
+   "module": "crissy6",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0040809",
+   "module": "crissy7",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0040157",
+   "module": "crissy8",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0093516",
+   "module": "crissy9",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0050237",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0059826",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0060412",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0001179",
+   "module": "fill-battery",
+   "mode": "at",
+   "at": [
+    -2,
+    13
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0001249",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    -1,
+    16
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0001303",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    -1,
+    17
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0001323",
+   "module": "fill-battery",
+   "mode": "at",
+   "at": [
+    11,
+    11
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0002260",
+   "module": "fill-hall",
+   "mode": "at",
+   "at": [
+    0,
+    5
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0002590",
+   "module": "fill-battery",
+   "mode": "at",
+   "at": [
+    -1,
+    3
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0002656",
+   "module": "fill-hall",
+   "mode": "at",
+   "at": [
+    1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0002732",
+   "module": "fill-battery",
+   "mode": "at",
+   "at": [
+    2,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0002770",
+   "module": "fill-hall",
+   "mode": "at",
+   "at": [
+    0,
+    6
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0002945",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    -1,
+    4
+   ],
+   "quarter": 1,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0003167",
+   "module": "fill-battery",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0003285",
+   "module": "fill-hall",
+   "mode": "at",
+   "at": [
+    2,
+    1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0003293",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    6
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0003300",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    6
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0003309",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    8
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0003313",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    6
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0003321",
+   "module": "fill-hall",
+   "mode": "at",
+   "at": [
+    1,
+    1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0003328",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    6
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0003358",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    -1,
+    6
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0003373",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    -1,
+    5
+   ],
+   "quarter": 1,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0003383",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    -1,
+    5
+   ],
+   "quarter": 3,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0003585",
+   "module": "fill-hall",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0003734",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    5
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0004769",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0004938",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    -1,
+    3
+   ],
+   "quarter": 1,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0005026",
+   "module": "fill-hall",
+   "mode": "at",
+   "at": [
+    2,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0005293",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    0,
+    4
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0005338",
+   "module": "fill-hall",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0005429",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0005456",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    6
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0005569",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    2
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0005580",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0005743",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    0,
+    1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0005938",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    0,
+    3
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0006645",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0006852",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0007206",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    2,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0007572",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    5,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0007584",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0008282",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    2,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0008699",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    3
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0008832",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0008992",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0009047",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0009048",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0009168",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0009269",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    2
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0009430",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0009731",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0010058",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    9,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0010963",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0011292",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 1,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0060652",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0098107",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0098291",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0100844",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0102374",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0138005",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0138955",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0138963",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0141644",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0146407",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0149363",
+   "module": "fill-shed",
+   "mode": "at",
+   "at": [
+    1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0150890",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0151722",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0151845",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0152376",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0152945",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0155488",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0155615",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0156038",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0156458",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0157000",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0157121",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0157497",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0157588",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0158259",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0158319",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0158762",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0159187",
+   "module": "fill-shed",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0159891",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0160037",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0160060",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0160227",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0160274",
+   "module": "fill-shed",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0160549",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0160889",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0160991",
+   "module": "fill-shed",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0161010",
+   "module": "fill-shed",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0161195",
+   "module": "fill-shed",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0161202",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0161347",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0161392",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0161460",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0161520",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0161521",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0161716",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0162213",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0162219",
+   "module": "fill-shed",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0162979",
+   "module": "fill-shed",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0163281",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0163291",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0163292",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0164186",
+   "module": "fill-shed",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0164335",
+   "module": "fill-shed",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0164345",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0164531",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0012407",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0012439",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0012457",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0012520",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0012541",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0012584",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0012894",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0014659",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0014667",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 1,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0015018",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0015162",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0015253",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0015333",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0015859",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0015928",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0015931",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0016099",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0016337",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0017836",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0018127",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0018712",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0019758",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0020968",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0021063",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0021484",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0021605",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0021607",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0021672",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0039248",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0107150",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0129975",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0067046",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0071975",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0073056",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0073752",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0077298",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0022241",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    2
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0024315",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0024484",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0026245",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0026320",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0026334",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0026684",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0026893",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0026895",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0027193",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0027208",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0028264",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0028371",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0028405",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0028593",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0028632",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0028948",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0030290",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0030597",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0031044",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0031270",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0031779",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0032067",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0032578",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0032707",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0034225",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0154317",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0154706",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0112094",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0112737",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0112740",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0114708",
+   "module": "fill-shed",
+   "mode": "at",
+   "at": [
+    2,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0121348",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0121517",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0121705",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0121997",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0122196",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0122254",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0122325",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0122358",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0122533",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0122552",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0122979",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0122980",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0123012",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0123022",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0123125",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0123915",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0125658",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0126571",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0044693",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0049822",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0050710",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0050854",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0050988",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0001459",
+   "module": "fill-hall",
+   "mode": "at",
+   "at": [
+    6,
+    5
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0001702",
+   "module": "fill-hall",
+   "mode": "at",
+   "at": [
+    0,
+    3
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0001737",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    7,
+    1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0002227",
+   "module": "fill-hall",
+   "mode": "at",
+   "at": [
+    5,
+    1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0002234",
+   "module": "fill-hall",
+   "mode": "at",
+   "at": [
+    1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0002246",
+   "module": "fill-hall",
+   "mode": "at",
+   "at": [
+    5,
+    1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0002247",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    6,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0003888",
+   "module": "fill-hall",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0005138",
+   "module": "fill-hall",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0009563",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    4
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0010924",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0012026",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0090848",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0137248",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0145841",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0146059",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0151800",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0152732",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0159819",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0160504",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0160993",
+   "module": "fill-shed",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0161085",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0161128",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0161761",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0161781",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0164547",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0012442",
+   "module": "fill-barracks",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 1,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0012959",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    2
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0013499",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0013623",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0014330",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0014755",
+   "module": "fill-garage",
+   "mode": "at",
+   "at": [
+    -1,
+    1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0014804",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0014844",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0015045",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0015401",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0015902",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0015905",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0016227",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0016241",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0016638",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0016683",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0016753",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0016790",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0017178",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0017324",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0018330",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0035423",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0043020",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0131338",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0132122",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0069617",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0026325",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0026456",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0026702",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0027572",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0028052",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0028174",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0034013",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0034060",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0012738",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0012761",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0013424",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    1,
+    -1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0014586",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    0,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0016515",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    1
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0016810",
+   "module": "fill-officers",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 2,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0017235",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0017425",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0084153",
+   "module": "fill-house",
+   "mode": "at",
+   "at": [
+    -1,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0029933",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0030262",
+   "module": "fill-duplex",
+   "mode": "at",
+   "at": [
+    -1,
+    -1
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0000181",
+   "module": "fill-201006.0000181",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0000989",
+   "module": "fill-201006.0000989",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0000997",
+   "module": "fill-201006.0000997",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0001114",
+   "module": "fill-201006.0001114",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0001155",
+   "module": "fill-201006.0001155",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0001191",
+   "module": "fill-201006.0001191",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0001216",
+   "module": "fill-201006.0001216",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0001366",
+   "module": "fill-201006.0001366",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0001829",
+   "module": "fill-201006.0001829",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0002257",
+   "module": "fill-201006.0002257",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0002548",
+   "module": "fill-201006.0002548",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0002589",
+   "module": "fill-201006.0002589",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0002633",
+   "module": "fill-201006.0002633",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0002678",
+   "module": "fill-201006.0002678",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0002877",
+   "module": "fill-201006.0002877",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0003232",
+   "module": "fill-201006.0003232",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0003390",
+   "module": "fill-201006.0003390",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0004147",
+   "module": "fill-201006.0004147",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0005341",
+   "module": "fill-201006.0005341",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0005534",
+   "module": "fill-201006.0005534",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0006362",
+   "module": "fill-201006.0006362",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0007025",
+   "module": "fill-201006.0007025",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0007167",
+   "module": "fill-201006.0007167",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0007863",
+   "module": "fill-201006.0007863",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0001312",
+   "module": "fill-201006.0001312",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0003677",
+   "module": "fill-201006.0003677",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0006931",
+   "module": "fill-201006.0006931",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "201006.0006932",
+   "module": "fill-201006.0006932",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  }
+ ]
+}

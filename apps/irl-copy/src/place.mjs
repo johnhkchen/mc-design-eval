@@ -11,7 +11,8 @@
 //                  step: [dx, dz] }, mirror?: true (reflected across its x first), keep?: true (leave the mass under it: by default the module's box is cleared first; with trees: false the trees in its box still go), clear?: "all" (the whole footprint first)
 //                  end?: { module, plot } (the arc's closing piece, at its far end), edge?: "inner"|"outer" (which side of the
 //                  footprint the band hugs), front?: "inner"|"outer" (which way the module's north faces), clear?: "all"|"band",
-//                  ground?: false (drop the module's own bottom course) }]
+//                  ground?: false (drop the module's own bottom course),
+//                  centre mode: angle?: degrees clockwise (the module turned about its centre onto the footprint's centre), shift?: [dx, dz] }]
 import { Voxels } from "./voxels.mjs";
 const DIRS = ["south", "west", "north", "east"];                    // yaw 0, 90, 180, 270 degrees (Minecraft's)
 const turn = (facing, quarter) => (DIRS.includes(facing) ? DIRS[(DIRS.indexOf(facing) + quarter + 4) % 4] : facing);
@@ -55,7 +56,9 @@ function clear(g, b, ground, I) {
 const copyCell = (c, quarter, swap, y) => {
   if (!c || /air$/.test(c.block)) return null;
   const name = c.block.replace(/^minecraft:/, ""), s = swap?.find((w) => w.from === name && (w.minY == null || y >= w.minY) && (w.maxY == null || y <= w.maxY));
-  return [s ? s.to : c.block, c.state ? { ...c.state, ...(c.state.facing ? { facing: turn(c.state.facing, quarter) } : {}) } : undefined];
+  // a state value a module's script left "undefined" (a door with no facing) or a facing that is no direction ("e") would stop a world reader: drop it
+  const st = c.state && Object.fromEntries(Object.entries(c.state).filter(([k, v]) => v != null && v !== "undefined" && (k !== "facing" || /^(north|south|east|west|up|down)$/.test(v))));
+  return [s ? s.to : c.block, st ? { ...st, ...(st.facing ? { facing: turn(st.facing, quarter) } : {}) } : undefined];
 };
 
 // a module at an offset in the footprint's box, turned by quarter turns (a rotation: its blocks' facings turn with it),
@@ -78,6 +81,24 @@ function placeAt(g, b, p, { H, skip }) {
         const c = copyCell(cell, q, p.swap, y); if (c) g.set(ox + tx, y0 + y, oz + tz, ...c); } }
   }
   return `${p.building}: ${W}x${D} module at +${p.at.join(",")}${mir ? ", mirrored" : ""}${q ? `, ${q} quarter turn${q > 1 ? "s" : ""}` : ""}${n > 1 ? `, x${n}` : ""}`;
+}
+
+// a module turned by any angle (degrees, clockwise seen from above) about its own centre, set on the centre of the
+// footprint's cells: a building at an angle to the grid (the Presidio's Main Post runs 54 degrees off the bridge's axis).
+// Each cell of the turned box looks up the module cell it came from (an inverse map, so no holes); facings turn by the
+// nearest quarter; trees in the turned box go. The footprint's mass was cleared by the caller.
+function placeTurned(g, b, p, { H, skip }) {
+  const [x0, z0, x1, z1] = p.plot, W = x1 - x0 + 1, D = z1 - z0 + 1, t = (p.angle * Math.PI) / 180, c = Math.cos(t), s = Math.sin(t);
+  const q = ((Math.round(p.angle / 90) % 4) + 4) % 4, n = b.footprint.length;
+  const cx = b.footprint.reduce((a, f) => a + f[0], 0) / n + 0.5 + (p.shift?.[0] ?? 0), cz = b.footprint.reduce((a, f) => a + f[1], 0) / n + 0.5 + (p.shift?.[1] ?? 0);
+  const R = Math.ceil(Math.hypot(W, D) / 2) + 1, y0 = b.base + (p.y ?? 0); let placed = 0;
+  for (let z = Math.floor(cz - R); z <= cz + R; z++) for (let x = Math.floor(cx - R); x <= cx + R; x++) {
+    const dx = x + 0.5 - cx, dz = z + 0.5 - cz, mx = Math.floor(W / 2 + dx * c + dz * s), mz = Math.floor(D / 2 - dx * s + dz * c);
+    if (mx < 0 || mz < 0 || mx >= W || mz >= D) continue;
+    for (let y = y0 + 1; y < g.size[1]; y++) { const old = g.get(x, y, z); if (old && /leaves$|_log$/.test(old.block)) g.set(x, y, z, "air"); }
+    for (let y = skip; y < H; y++) { const cell = copyCell(p.module.get(x0 + mx, y, z0 + mz), q, p.swap, y); if (cell) { g.set(x, y0 + y, z, ...cell); placed++; } }
+  }
+  return `${p.building}: ${W}x${D} module turned ${p.angle} degrees on the footprint's centre ${cx.toFixed(1)},${cz.toFixed(1)}: ${placed} blocks`;
 }
 
 /** Voxels turned by any angle about a pivot (x, z), nearest block: each target cell looks up the source cell it came from
@@ -126,6 +147,7 @@ export function compose(g, manifest, placements, { ground, I, angle = 0 }) {
     if (p.mode === "at") { if (p.clear === "all" && !cleared.has(b.id)) { clear(g, b, ground, I); cleared.add(b.id); }
       notes.push(placeAt(g, b, p, { H, skip })); continue; }
     if (p.mode === "centre" || p.clear !== "band") clear(g, b, ground, I);
+    if (p.mode === "centre" && p.angle) { notes.push(placeTurned(g, b, p, { H, skip })); continue; }
     if (p.mode === "centre") {
       const xs = b.footprint.map((c) => c[0]), zs = b.footprint.map((c) => c[1]);
       const cx = Math.round((Math.min(...xs) + Math.max(...xs) + 1) / 2 - W / 2), cz = Math.round((Math.min(...zs) + Math.max(...zs) + 1) / 2 - D / 2);

@@ -1,0 +1,12 @@
+{
+ "name": "Presidio Tunnel Tops, the Main Post and the Golden Gate Bridge",
+ "note": "The Presidio of San Francisco seen from the Tunnel Tops: the Main Post (the Walt Disney Family Museum and the Montgomery Street barracks on the Main Parade Ground, the Officers' Club, the Visitor Center), the Presidio Tunnel Tops park over the Presidio Parkway, Crissy Field and the Bay, and to the west Fort Point and the Golden Gate Bridge's south tower with the start of the main span. Scale 0.5 blocks per metre and turned 5.34 degrees (the bridge deck along z), the same frame conventions as sf/presidio-ggb, so its bridge kits drop in.",
+ "city": "san-francisco",
+ "country": "US",
+ "scale": 0.5,
+ "centre": [37.8066, -122.4664],
+ "half": 1100,
+ "rotate": 5.34,
+ "rotateFrom": { "from": "bridge axis", "southTower": [37.8140, -122.47789], "northTower": [37.82548, -122.47925] },
+ "dryGrass": true
+}
