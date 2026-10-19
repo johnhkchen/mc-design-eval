@@ -1,0 +1,17 @@
+Owner: "The bay side of the build is really plain." Revise the BAY SIDE (the south face, high z, of every module) only; keep
+the land front, tower, roofs and nave exactly as in v2, the plots and sizes, and the wing section's seamless tiling along x.
+Reference photos of the real bay side: /Volumes/ext1/swe/repos/mc-design-eval/benchmarks/plugin-baseline/runs/build-1/sf-landmarks/refs/ferry-building/04-south-end.jpg (the south end's grey gables over the market terrace) and
+/Volumes/ext1/swe/repos/mc-design-eval/benchmarks/plugin-baseline/runs/build-1/sf-landmarks/refs/ferry-building/05-bay-side.jpg (the long bay facade from the water); also /Volumes/ext1/swe/repos/mc-design-eval/benchmarks/plugin-baseline/runs/build-1/sf-landmarks/refs/ferry-building/06-high-roof-plan.jpg. Look at them.
+1. WING SECTION (plot 1) bay face: one big round-arched FAN-LIGHT window per section in the upper storey, nearly the
+   section's width, with radiating mullions (dark iron bars / dark glass panes on a light frame) and a keystone; under it a
+   lower storey of arched openings (a gallery along the water) with lit shopfronts behind; a white cornice line between the
+   storeys and a cornice with a modest parapet at the top. The rhythm of big fan lights repeating along the whole bay side
+   is the point. It must still tile seamlessly end to end.
+2. TOWER MODULE (plot 0) bay face: a tall central gable with the greatest fan light, pilasters each side, and a sign band
+   under it (a long dark band with light lettering blocks suggesting "MARKETPLACE"; blocks, not entities).
+3. END PAVILION (plot 2) bay face and east end: as in the south-end photo: a run of grey gables, each with a huge fan-light
+   lunette, a lower block between them; along the ground a row of canvas awnings (striped or tan: banner-like wool / carpet
+   on fence posts or trapdoors), and on the terrace in front, inside the plot, a few market tents (white and blue wool
+   canopies on fence posts) and café tables with umbrellas.
+Colour: light and mid grey walls (light gray concrete, stone, andesite), white trim (calcite, quartz), dark window frames.
+Light everything so no mob spawns. Nothing may leave its plot; the land front faces north in every module as before.

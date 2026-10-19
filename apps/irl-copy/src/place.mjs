@@ -8,7 +8,7 @@
 //   placements: [{ building, module: <grid>, plot: [x0, z0, x1, z1] (the module's box in its file), mode: "centre"|"arc"|"at",
 //                  at mode: at: [dx, dz] from the footprint box's north-west corner, y?: blocks above the footprint's base,
 //                  quarter?: 0-3 quarter turns clockwise seen from above (its north to east, south, west), repeat?: { count,
-//                  step: [dx, dz] }, mirror?: true (reflected across its x first), keep?: true (leave the mass under it: by default the module's box is cleared first)
+//                  step: [dx, dz] }, mirror?: true (reflected across its x first), keep?: true (leave the mass under it: by default the module's box is cleared first), clear?: "all" (the whole footprint first)
 //                  end?: { module, plot } (the arc's closing piece, at its far end), edge?: "inner"|"outer" (which side of the
 //                  footprint the band hugs), front?: "inner"|"outer" (which way the module's north faces), clear?: "all"|"band",
 //                  ground?: false (drop the module's own bottom course) }]
@@ -110,12 +110,15 @@ export function compose(g, manifest, placements, { ground, I, angle = 0 }) {
     const n = rotateInto(g, src, cleared, { angle, pivot, box: [x0, z0, x1, z1] });
     return [...notes, `turned ${angle} degrees about ${pivot.map((v) => v.toFixed(1)).join(",")}: ${n} blocks`];
   }
-  const notes = [], byId = new Map(manifest.buildings.map((b) => [b.id, b]));
+  const notes = [], cleared = new Set(), byId = new Map(manifest.buildings.map((b) => [b.id, b]));
   for (const p of placements) {
     const b = byId.get(p.building); if (!b) { notes.push(`${p.building}: not in the manifest`); continue; }
     const [x0, z0, x1, z1] = p.plot, W = x1 - x0 + 1, D = z1 - z0 + 1, H = Math.min(p.module.size[1], g.size[1]);
     const skip = p.ground === false ? 1 : 0;        // leave out the module's own paving course (its y 0 sits on the ground block)
-    if (p.mode === "at") { notes.push(placeAt(g, b, p, { H, skip })); continue; }
+    // clear: "all" on an "at" placement clears the whole footprint's mass first (once per building), for a kit that covers
+    // the building, so no sliver of the placeholder mass is left standing against a front
+    if (p.mode === "at") { if (p.clear === "all" && !cleared.has(b.id)) { clear(g, b, ground, I); cleared.add(b.id); }
+      notes.push(placeAt(g, b, p, { H, skip })); continue; }
     if (p.mode === "centre" || p.clear !== "band") clear(g, b, ground, I);
     if (p.mode === "centre") {
       const xs = b.footprint.map((c) => c[0]), zs = b.footprint.map((c) => c[1]);
