@@ -62,6 +62,12 @@ footprint: a circle fit, an inverse map so the band has no holes, facings turned
 (`swap: [{ from, to, minY?, maxY? }]`) so the design run's files stay as they are; `node bin/irl.mjs modules <place> <dir>`
 writes the modules with their swaps applied, for the catalog.
 
+Nothing is left hanging in the air (`src/float.mjs`): after the modules go in, every piece not joined to the ground
+through touching faces is found. One that nearly touches (a module's tower one course over its podium, a skylight or
+chimney short of its roof, up to 6 blocks) is propped up with its own block; a tree crown whose trunk a placement cleared
+is removed; whatever still floats (joined by no face, edge or corner) is listed with the placement it belongs to, so the
+compose file or the kit can be fixed.
+
 ## Photographs (Chunky)
 
 `node bin/irl.mjs world <place>` writes the place (composed, if it has a compose file) as a Minecraft Java world

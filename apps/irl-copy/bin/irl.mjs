@@ -25,6 +25,7 @@ import { compose } from "../src/place.mjs";
 import { landmark as sfLandmark } from "../src/sources/datasf.mjs";
 import { landmark as seaLandmark } from "../src/sources/seattle.mjs";
 import { writeWorld } from "../src/anvil.mjs";
+import { floating, underpin } from "../src/float.mjs";
 import { alignment } from "../src/align.mjs";
 import { load as loadStructure } from "/Volumes/ext1/swe/repos/minecraft-design/tools/src/structure.mjs";   // reads the design pipeline's modules
 
@@ -80,6 +81,21 @@ function buildFrom(n, { composeWith, world } = {}) {
     const spec = JSON.parse(readFileSync(`${HERE}/places/${n}.compose.json`, "utf8")), files = new Map();
     const mod = (name) => { const m = spec.modules[name]; if (!files.has(m.file)) files.set(m.file, loadStructure(resolve(HERE, m.file))); return { module: files.get(m.file), plot: m.plot, swap: m.swap }; };
     const notes = compose(grid, manifest, spec.placements.map((p) => ({ ...p, ...mod(p.module), ...(p.end ? { end: mod(p.end) } : {}) })), { ground, I: (x, z) => z * frame.N + x, angle: spec.angle ?? 0 });
+    // anything left hanging in the air (a module on the wrong base, a kit missing its bottom course): named, by the
+    // placement whose footprint box holds it, so the compose file or the kit can be fixed
+    // first propped up where they nearly touch (a module's tower one block over its podium, a chimney short of its roof)
+    let propped = 0; for (const h of floating(grid, { ground })) propped += underpin(grid, h);
+    if (propped) console.warn(`${n}: ${propped} blocks of support under pieces that hung just clear of what is under them`);
+    // a crown whose trunk a placement cleared (the module's box takes logs, the leaves overhanging it stay) goes too
+    let crowns = 0; for (const h of floating(grid, { ground, min: 1 })) if (h.cells.every((c) => /leaves$/.test(grid.palette[grid.data[c]].block))) { for (const c of h.cells) grid.data[c] = 0; crowns++; }
+    if (crowns) console.warn(`${n}: ${crowns} tree crowns left without their trunks removed`);
+    const hung = floating(grid, { ground, faces: false }), boxes = spec.placements.map((p) => { const b = manifest.buildings.find((m) => m.id === p.building); if (!b) return null;
+      const xs = b.footprint.map((c) => c[0]), zs = b.footprint.map((c) => c[1]); return { m: p.module, b: p.building, box: [Math.min(...xs), Math.min(...zs), Math.max(...xs), Math.max(...zs)] }; }).filter(Boolean);
+    for (const h of hung.slice(0, 40)) { const [x0, y0, z0, x1, y1, z1] = h.box, cx = (x0 + x1) / 2, cz = (z0 + z1) / 2;
+      const by = boxes.filter((q) => cx >= q.box[0] - 8 && cx <= q.box[2] + 8 && cz >= q.box[1] - 8 && cz <= q.box[3] + 8).map((q) => `${q.m} (${q.b})`);
+      const k = new Map(); for (const c of h.cells) { const b = grid.palette[grid.data[c]].block.replace("minecraft:", ""); k.set(b, (k.get(b) ?? 0) + 1); }
+      console.warn(`floating: ${h.size} blocks (${[...k].sort((a, b) => b[1] - a[1]).slice(0, 3).map(([b, v]) => `${b} ${v}`).join(", ")}) at ${x0},${y0},${z0}..${x1},${y1},${z1}, ${h.gap} above what is under it${by.length ? ` - ${[...new Set(by)].join(", ")}` : ""}`); }
+    if (hung.length) console.warn(`${n}: ${hung.length} floating pieces of 8+ blocks (${hung.reduce((s, h) => s + h.size, 0)} blocks)`);
     mkdirSync(out, { recursive: true }); grid.save(`${out}/composed.nbt`); console.log(notes.join("\n")); console.log(`${n}: composed -> out/${n}/composed.nbt`);
     if (world) { const r = writeWorld(`${out}/world`, grid, { name: place.name }); console.log(`${n}: world -> out/${n}/world (${r.chunks} chunks, ${r.regions} regions)`); }
     return;
