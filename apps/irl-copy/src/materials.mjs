@@ -40,11 +40,15 @@ export function wallFor(id, rec, areaM2 = 0) {
 
 /** What open ground the aerial photo shows: green (by NDVI), sand, or paving. In a park, shade and dry grass read low
  *  on NDVI too, so only clearly bare, bright ground is paving there. */
-export function groundFrom(r, g, b, nir, { park = false } = {}) {
+export function groundFrom(r, g, b, nir, { park = false, dry = false } = {}) {
   if (!r && !g && !b) return null;
   const ndvi = (nir - r) / (nir + r + 1e-6), lum = 0.3 * r + 0.59 * g + 0.11 * b;
   if (ndvi > (park ? 0.02 : 0.18)) return "grass_block";
   if (park && lum < 140) return "grass_block";
   if (lum > 150 && r > b + 25 && g > b + 10) return "sand";
+  // place.dryGrass (a California summer photo): tan, summer-dry grass reads as pavement by its near-infrared alone; warm and
+  // a little green is grass, and a pale warm beach under sea haze is sand
+  if (dry && ndvi > 0.02 && r > b + 8 && lum < 165) return "grass_block";
+  if (dry && lum > 140 && r > b + 6 && g >= b) return "sand";
   return lum > 120 ? "smooth_stone" : "andesite";
 }

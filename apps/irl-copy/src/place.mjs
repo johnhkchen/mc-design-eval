@@ -8,7 +8,7 @@
 //   placements: [{ building, module: <grid>, plot: [x0, z0, x1, z1] (the module's box in its file), mode: "centre"|"arc"|"at",
 //                  at mode: at: [dx, dz] from the footprint box's north-west corner, y?: blocks above the footprint's base,
 //                  quarter?: 0-3 quarter turns clockwise seen from above (its north to east, south, west), repeat?: { count,
-//                  step: [dx, dz] }, mirror?: true (reflected across its x first), keep?: true (leave the mass under it: by default the module's box is cleared first), clear?: "all" (the whole footprint first)
+//                  step: [dx, dz] }, mirror?: true (reflected across its x first), keep?: true (leave the mass under it: by default the module's box is cleared first; with trees: false the trees in its box still go), clear?: "all" (the whole footprint first)
 //                  end?: { module, plot } (the arc's closing piece, at its far end), edge?: "inner"|"outer" (which side of the
 //                  footprint the band hugs), front?: "inner"|"outer" (which way the module's north faces), clear?: "all"|"band",
 //                  ground?: false (drop the module's own bottom course) }]
@@ -69,6 +69,9 @@ function placeAt(g, b, p, { H, skip }) {
   const turnXZ = (mx, mz) => (q === 0 ? [mx, mz] : q === 1 ? [D - 1 - mz, mx] : q === 2 ? [W - 1 - mx, D - 1 - mz] : [mz, W - 1 - mx]);
   for (let k = 0; k < n; k++) {
     const ox = bx + p.at[0] + k * sx, oz = bz + p.at[1] + k * sz;
+    // keep with trees: false: the land stays (a viaduct over a hillside) but trees inside the module's box go
+    if (p.keep && p.trees === false) for (let tz = 0; tz < d2; tz++) for (let tx = 0; tx < w2; tx++) for (let y = y0 + 1; y < g.size[1]; y++) {
+      const c = g.get(ox + tx, y, oz + tz); if (c && /leaves$|_log$/.test(c.block)) g.set(ox + tx, y, oz + tz, "air"); }
     if (!p.keep) for (let tz = 0; tz < d2; tz++) for (let tx = 0; tx < w2; tx++) for (let y = y0 + skip; y < Math.min(g.size[1], y0 + H); y++) g.set(ox + tx, y, oz + tz, "air");
     for (let mz = 0; mz < D; mz++) for (let mx = 0; mx < W; mx++) { const [tx, tz] = turnXZ(mx, mz);
       for (let y = skip; y < H; y++) { const src = p.module.get(x0 + (mir ? W - 1 - mx : mx), y, z0 + mz), cell = mir && src ? { ...src, state: mirrorState(src.state) } : src;

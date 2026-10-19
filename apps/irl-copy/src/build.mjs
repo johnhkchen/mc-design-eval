@@ -124,7 +124,7 @@ export function buildPlace(place, frame, L) {
   // the open ground's cover by the aerial photo, cell by cell, then the commonest within 2 blocks: one pixel of sunlit
   // concrete is not a sandpit, and a plaza shouldn't speckle stone, andesite and sand
   const cover = new Array(N * N).fill(null);
-  if (air) { const raw = new Array(N * N); for (let i = 0; i < N * N; i++) raw[i] = groundFrom(air.r[i], air.g[i], air.b[i], air.nir[i], { park: !!park[i] });
+  if (air) { const raw = new Array(N * N); for (let i = 0; i < N * N; i++) raw[i] = groundFrom(air.r[i], air.g[i], air.b[i], air.nir[i], { park: !!park[i], dry: !!place.dryGrass });
     for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) { const n = new Map(); let best = raw[I(x, z)], bn = 0;
       for (let dz = -2; dz <= 2; dz++) for (let dx = -2; dx <= 2; dx++) { const xx = x + dx, zz = z + dz; if (xx < 0 || zz < 0 || xx >= N || zz >= N) continue;
         const v = raw[I(xx, zz)]; if (!v) continue; const c = (n.get(v) ?? 0) + 1; n.set(v, c); if (c > bn) { bn = c; best = v; } }

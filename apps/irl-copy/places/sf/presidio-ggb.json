@@ -4,8 +4,22 @@
  "city": "san-francisco",
  "country": "US",
  "scale": 0.5,
- "centre": [37.81141, -122.47014],
+ "centre": [
+  37.81141,
+  -122.47014
+ ],
  "half": 850,
  "rotate": 5.34,
- "rotateFrom": { "from": "bridge axis", "southTower": [37.8140, -122.47789], "northTower": [37.82548, -122.47925] }
+ "rotateFrom": {
+  "from": "bridge axis",
+  "southTower": [
+   37.814,
+   -122.47789
+  ],
+  "northTower": [
+   37.82548,
+   -122.47925
+  ]
+ },
+ "dryGrass": true
 }
