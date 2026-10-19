@@ -49,7 +49,7 @@ const scene = {
 mkdirSync(sceneDir, { recursive: true }); mkdirSync(`${out}/shots`, { recursive: true });
 writeFileSync(`${sceneDir}/${name}.json`, JSON.stringify(scene, null, 1));
 const t0 = Date.now();
-execFileSync("java", ["-Xmx8g", "-jar", jar, "-scene-dir", sceneDir, "-reload-chunks", "-f", "-render", name], { stdio: ["ignore", "inherit", "inherit"] });
+execFileSync("java", [`-Xmx${process.env.CHUNKY_HEAP ?? "8g"}`, "-jar", jar, "-scene-dir", sceneDir, "-reload-chunks", "-f", "-render", name], { stdio: ["ignore", "inherit", "inherit"] });
 // Chunky writes its snapshots under <scene dir>/snapshots/: the newest PNG for this scene is the photograph
 const snaps = existsSync(`${sceneDir}/snapshots`) ? readdirSync(`${sceneDir}/snapshots`, { recursive: true }).map(String) : [];
 const png = snaps.filter((f) => f.split("/").pop().startsWith(name) && f.endsWith(".png")).sort().at(-1);
