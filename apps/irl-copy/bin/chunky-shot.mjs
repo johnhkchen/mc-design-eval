@@ -3,7 +3,7 @@
 // scene description for the place's world (out/<place>/world, from `irl world`) with a camera that looks from an eye to a
 // target, the sun at an altitude and azimuth, the physically based Nishita sky with clouds, and renders it headless.
 //   node bin/chunky-shot.mjs <place> <name> --eye x,y,z --look x,y,z [--sun alt,az (degrees)] [--size 3200x2000]
-//     [--spp 400] [--fov 50] [--projection PINHOLE|PANORAMIC_SLOT (a wide cylindrical panorama: --fov is its horizontal angle, e.g. 140 at 6000x2000)|PANORAMIC|FISHEYE] [--fog 0.0] [--exposure 1] [--post TONEMAP2 (ACES filmic; TONEMAP1, TONEMAP3 Hable, GAMMA)] [--emitters 13] [--sky-light 1] [--sun-intensity 1.25] (dusk: a dim sky, brighter lamps) [--clouds yes] [--chunky <launcher jar>]
+//     [--spp 400] [--fov 50] [--projection PINHOLE|PANORAMIC_SLOT (a wide cylindrical panorama: --fov is its horizontal angle, e.g. 140 at 6000x2000)|PANORAMIC|FISHEYE] [--fog 0.0] [--exposure 1] [--post TONEMAP2 (ACES filmic; TONEMAP1, TONEMAP3 Hable, GAMMA)] [--emitters 13] [--sky-light 1] [--sun-intensity 1.25] (dusk: a dim sky, brighter lamps) [--clouds yes] [--chunks x0,z0,x1,z1] [--frustum] (load only the chunks in that box / in the camera's view) [--chunky <launcher jar>]
 //   -> out/<place>/shots/<name>.png   (Chunky's scene and render dump stay in out/<place>/chunky/)
 // Conventions (Chunky's, as measured on a top view): yaw 0 looks along -x, pi/2 along +z; pitch -pi/2 is level, 0 straight down; the sun's azimuth
 // 0 is toward +x (east in our frame), altitude up from the horizon.
@@ -31,6 +31,18 @@ const YAW = { A: Math.atan2(d[2], -d[0]), B: Math.atan2(-d[2], -d[0]) };
 const yaw = YAW[opt("--yawmode", "A")], pitch = -Math.PI / 2 - Math.atan2(d[1], h);
 const chunks =readdirSync(`${world}/region`).flatMap((f) => { const m = /^r\.(-?\d+)\.(-?\d+)\.mca$/.exec(f); if (!m) return [];
   const rx = +m[1], rz = +m[2], out2 = []; for (let x = 0; x < 32; x++) for (let z = 0; z < 32; z++) out2.push([rx * 32 + x, rz * 32 + z]); return out2; });
+// a big world can run Chunky out of heap: --chunks x0,z0,x1,z1 (blocks) loads only the chunks that meet that box, and
+// --frustum only those whose centre is within the camera's horizontal view (plus 10 degrees, and everything within 96
+// blocks of the eye); both may be given (a chunk must pass each)
+const view = (() => { const p = opt("--projection", "PINHOLE"), hf = p === "PANORAMIC_SLOT" ? fov : p === "PINHOLE" ? (2 * Math.atan(Math.tan((fov * Math.PI) / 360) * (W / H)) * 180) / Math.PI : 360;
+  return { half: ((hf / 2 + 10) * Math.PI) / 180, dir: Math.atan2(d[2], d[0]) }; })();
+const box = opt("--chunks")?.split(",").map(Number);
+const chunkList = chunks.filter(([cx, cz]) => {
+  if (box && (cx * 16 + 15 < box[0] || cx * 16 > box[2] || cz * 16 + 15 < box[1] || cz * 16 > box[3])) return false;
+  if (!process.argv.includes("--frustum") || view.half >= Math.PI) return true;
+  const dx = cx * 16 + 8 - eye[0], dz = cz * 16 + 8 - eye[2]; if (Math.hypot(dx, dz) < 96) return true;
+  return Math.abs(Math.atan2(Math.sin(Math.atan2(dz, dx) - view.dir), Math.cos(Math.atan2(dz, dx) - view.dir))) <= view.half; });
+if (chunkList.length < chunks.length) console.log(`${chunkList.length} of ${chunks.length} chunks in view`);
 const scene = {
   sdfVersion: 10, name, width: W, height: H, exposure: +opt("--exposure", 1.0), postprocess: opt("--post", "TONEMAP2"), outputMode: "PNG",
   renderTime: 0, spp: 0, sppTarget: spp, rayDepth: 6, pathTrace: true, dumpFrequency: 500, saveSnapshots: false,
@@ -44,7 +56,7 @@ const scene = {
     color: { red: 1, green: 1, blue: 1 }, importanceSampling: { chance: 0.1, radius: 1.2 } },
   sky: { skyYaw: 0, skyPitch: 0, skyRoll: 0, skyMirrored: true, skyExposure: 1, skyLight: +opt("--sky-light", 1), apparentSkyLight: +opt("--sky-light", 1), mode: "SIMULATED", horizonOffset: 0.1,
     cloudsEnabled: opt("--clouds", "no") === "yes", cloudSize: 64, cloudOffset: { x: 0, y: eye[1] + 120, z: 0 }, simulatedSky: "Nishita", skyCacheResolution: 128 },
-  chunkList: chunks, cameraPresets: {}, materials: {}, renderer: "PathTracingRenderer", previewRenderer: "PreviewRenderer",
+  chunkList, cameraPresets: {}, materials: {}, renderer: "PathTracingRenderer", previewRenderer: "PreviewRenderer",
 };
 mkdirSync(sceneDir, { recursive: true }); mkdirSync(`${out}/shots`, { recursive: true });
 writeFileSync(`${sceneDir}/${name}.json`, JSON.stringify(scene, null, 1));
