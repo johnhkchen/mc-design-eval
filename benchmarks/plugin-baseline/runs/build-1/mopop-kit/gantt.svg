@@ -1,99 +1,96 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1310" height="537" font-family="Helvetica,Arial,sans-serif" font-size="12">
-<defs><pattern id="idle" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#f1ece0"/><line x1="0" y1="0" x2="0" y2="8" stroke="#e2d9c4" stroke-width="3"/></pattern></defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="1140" height="487" font-family="Helvetica,Arial,sans-serif" font-size="12">
+<defs><pattern id="idle" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#f4f0e6"/><line x1="0" y1="0" x2="0" y2="8" stroke="#e6dfcd" stroke-width="3"/></pattern></defs>
 <rect width="100%" height="100%" fill="#fbfaf7"/>
-<rect x="666.5" y="116" width="26.0" height="381" fill="#efe9dc"/>
-<rect x="880.3" y="116" width="12.0" height="381" fill="#efe9dc"/>
-<text x="16" y="24" font-size="16" font-weight="bold">mopop-kit: 15 agent sessions, 2h 44m end to end, 32m active, $5.41</text>
-<text x="16" y="42" fill="#555">bar colour = spend per minute (deepest red = $0.40/min, the same in every chart); overlapping sessions of one role stack into a clump, one thin lane each</text>
-<text x="16" y="60" fill="#333">end to end 2h 44m: 32m with an agent running (20%), 2h 12m with none (every idle stretch of 2+ min collapsed to a break) · 0.8 agent-hours, 1.4 agents on average while any ran</text>
-<text x="16" y="78" fill="#333">tokens: 403K out, 16.2M cache read, 1.0M cache write, 446 in · $5.41 (opus $4.38 · sonnet $0.52 · haiku $0.51)</text>
-<text x="16" y="126" fill="#333">agents running</text><text x="16" y="141" fill="#777">(peak 5)</text>
-<polygon points="230,146 230.0,146.0 230.0,137.0 346.6,137.0 346.6,146.0 346.9,146.0 346.9,137.0 380.5,137.0 380.5,146.0 380.8,146.0 380.8,137.0 381.6,137.0 381.6,128.0 381.6,128.0 381.6,119.0 407.0,119.0 407.0,128.0 499.5,128.0 499.5,137.0 522.0,137.0 522.0,146.0 522.4,146.0 522.4,137.0 543.2,137.0 543.2,146.0 543.6,146.0 543.6,137.0 544.5,137.0 544.5,128.0 544.5,128.0 544.5,119.0 544.5,119.0 544.5,110.0 544.5,110.0 544.5,101.0 567.7,101.0 567.7,110.0 576.8,110.0 576.8,119.0 586.4,119.0 586.4,128.0 606.9,128.0 606.9,137.0 612.2,137.0 612.2,146.0 612.6,146.0 612.6,137.0 649.2,137.0 649.2,146.0 654.3,146.0 654.3,137.0 666.5,137.0 666.5,146.0 692.5,146.0 692.5,137.0 880.3,137.0 880.3,146.0 892.3,146.0 892.3,137.0 1028.0,137.0 1028.0,146.0 1050,146" fill="#c9d6e8" stroke="#4a6fa5" stroke-width="1"/>
-<line x1="230" y1="146" x2="1050" y2="146" stroke="#999"/>
-<polygon points="230.0,256 230.0,256.0 346.6,241.3 346.6,256" fill="hsl(18,70%,46%)" stroke="hsl(18,70%,46%)" stroke-width="0.5"/>
-<polygon points="346.6,256 346.6,241.3 346.9,241.3 346.9,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="346.9,256 346.9,241.3 380.5,236.8 380.5,256" fill="hsl(16,70%,46%)" stroke="hsl(16,70%,46%)" stroke-width="0.5"/>
-<polygon points="380.5,256 380.5,236.8 380.8,236.8 380.8,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="380.8,256 380.8,236.8 381.6,236.8 381.6,256" fill="hsl(68,70%,58%)" stroke="hsl(68,70%,58%)" stroke-width="0.5"/>
-<polygon points="381.6,256 381.6,236.8 381.6,236.8 381.6,256" fill="hsl(49,70%,53%)" stroke="hsl(49,70%,53%)" stroke-width="0.5"/>
-<polygon points="381.6,256 381.6,236.8 407.0,235.5 407.0,256" fill="hsl(37,70%,50%)" stroke="hsl(37,70%,50%)" stroke-width="0.5"/>
-<polygon points="407.0,256 407.0,235.5 499.5,231.8 499.5,256" fill="hsl(42,70%,52%)" stroke="hsl(42,70%,52%)" stroke-width="0.5"/>
-<polygon points="499.5,256 499.5,231.8 522.0,231.3 522.0,256" fill="hsl(55,70%,55%)" stroke="hsl(55,70%,55%)" stroke-width="0.5"/>
-<polygon points="522.0,256 522.0,231.3 522.4,231.3 522.4,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="522.4,256 522.4,231.3 543.2,227.1 543.2,256" fill="hsl(7,70%,44%)" stroke="hsl(7,70%,44%)" stroke-width="0.5"/>
-<polygon points="543.2,256 543.2,227.1 543.6,227.1 543.6,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="543.6,256 543.6,227.1 544.5,227.1 544.5,256" fill="hsl(69,70%,58%)" stroke="hsl(69,70%,58%)" stroke-width="0.5"/>
-<polygon points="544.5,256 544.5,227.1 544.5,227.1 544.5,256" fill="hsl(53,70%,54%)" stroke="hsl(53,70%,54%)" stroke-width="0.5"/>
-<polygon points="544.5,256 544.5,227.1 544.5,227.1 544.5,256" fill="hsl(45,70%,52%)" stroke="hsl(45,70%,52%)" stroke-width="0.5"/>
-<polygon points="544.5,256 544.5,227.1 544.5,227.1 544.5,256" fill="hsl(39,70%,51%)" stroke="hsl(39,70%,51%)" stroke-width="0.5"/>
-<polygon points="544.5,256 544.5,227.1 567.7,225.8 567.7,256" fill="hsl(35,70%,50%)" stroke="hsl(35,70%,50%)" stroke-width="0.5"/>
-<polygon points="567.7,256 567.7,225.8 576.8,225.5 576.8,256" fill="hsl(41,70%,51%)" stroke="hsl(41,70%,51%)" stroke-width="0.5"/>
-<polygon points="576.8,256 576.8,225.5 586.4,225.2 586.4,256" fill="hsl(48,70%,53%)" stroke="hsl(48,70%,53%)" stroke-width="0.5"/>
-<polygon points="586.4,256 586.4,225.2 606.9,224.7 606.9,256" fill="hsl(56,70%,55%)" stroke="hsl(56,70%,55%)" stroke-width="0.5"/>
-<polygon points="606.9,256 606.9,224.7 612.2,224.7 612.2,256" fill="hsl(72,70%,59%)" stroke="hsl(72,70%,59%)" stroke-width="0.5"/>
-<polygon points="612.2,256 612.2,224.7 612.6,224.7 612.6,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="612.6,256 612.6,224.7 649.2,224.3 649.2,256" fill="hsl(72,70%,59%)" stroke="hsl(72,70%,59%)" stroke-width="0.5"/>
-<polygon points="649.2,256 649.2,224.3 654.3,224.3 654.3,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="654.3,256 654.3,224.3 666.5,224.2 666.5,256" fill="hsl(68,70%,58%)" stroke="hsl(68,70%,58%)" stroke-width="0.5"/>
-<polygon points="666.5,256 666.5,224.2 692.5,224.2 692.5,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="692.5,256 692.5,224.2 880.3,189.4 880.3,256" fill="hsl(9,70%,44%)" stroke="hsl(9,70%,44%)" stroke-width="0.5"/>
-<polygon points="880.3,256 880.3,189.4 892.3,189.4 892.3,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="892.3,256 892.3,189.4 1028.0,166.0 1028.0,256" fill="hsl(11,70%,44%)" stroke="hsl(11,70%,44%)" stroke-width="0.5"/>
-<polygon points="1028.0,256 1028.0,166.0 1050.0,166.0 1050.0,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polyline points="230.0,256.0 346.6,241.3 346.6,241.3 346.9,241.3 346.9,241.3 380.5,236.8 380.5,236.8 380.8,236.8 380.8,236.8 381.6,236.8 381.6,236.8 381.6,236.8 381.6,236.8 407.0,235.5 407.0,235.5 499.5,231.8 499.5,231.8 522.0,231.3 522.0,231.3 522.4,231.3 522.4,231.3 543.2,227.1 543.2,227.1 543.6,227.1 543.6,227.1 544.5,227.1 544.5,227.1 544.5,227.1 544.5,227.1 544.5,227.1 544.5,227.1 544.5,227.1 544.5,227.1 567.7,225.8 567.7,225.8 576.8,225.5 576.8,225.5 586.4,225.2 586.4,225.2 606.9,224.7 606.9,224.7 612.2,224.7 612.2,224.7 612.6,224.7 612.6,224.7 649.2,224.3 649.2,224.3 654.3,224.3 654.3,224.3 666.5,224.2 666.5,224.2 692.5,224.2 692.5,224.2 880.3,189.4 880.3,189.4 892.3,189.4 892.3,189.4 1028.0,166.0 1028.0,166.0 1050.0,166.0" fill="none" stroke="#0005" stroke-width="1"/>
-<text x="16" y="176" fill="#333">spend so far</text>
-<text x="16" y="191" fill="#777">(slope = $/min)</text>
-<line x1="230" y1="256" x2="1050" y2="256" stroke="#0003" stroke-dasharray=""/><text x="222" y="260" text-anchor="end" fill="#777">0%</text>
-<line x1="230" y1="211" x2="1050" y2="211" stroke="#0003" stroke-dasharray="3 3"/><text x="222" y="215" text-anchor="end" fill="#777">50% · $2.70</text>
-<line x1="230" y1="166" x2="1050" y2="166" stroke="#0003" stroke-dasharray="3 3"/><text x="222" y="170" text-anchor="end" fill="#777">100% · $5.41</text>
-<line x1="763.8" y1="211" x2="763.8" y2="256" stroke="#333" stroke-dasharray="2 3"/>
-<text x="769.8" y="250" fill="#333" font-weight="bold">half the spend in 21m of active time (of 32m)</text>
-<line x1="287.7" y1="278" x2="287.7" y2="497" stroke="#e3e0d8"/>
-<text x="287.7" y="513" text-anchor="middle" fill="#777">5:50 PM</text>
-<line x1="405.0" y1="278" x2="405.0" y2="497" stroke="#e3e0d8"/>
-<text x="405.0" y="513" text-anchor="middle" fill="#777">5:55 PM</text>
-<line x1="522.2" y1="278" x2="522.2" y2="497" stroke="#e3e0d8"/>
-<text x="522.2" y="513" text-anchor="middle" fill="#777">6:00 PM</text>
-<line x1="639.5" y1="278" x2="639.5" y2="497" stroke="#e3e0d8"/>
-<text x="639.5" y="513" text-anchor="middle" fill="#777">6:05 PM</text>
-<path d="M670.5,501 l4,-8 M684.5,501 l4,-8" stroke="#8a7f6a" stroke-width="1.5"/>
-<line x1="723.8" y1="278" x2="723.8" y2="497" stroke="#e3e0d8"/>
-<text x="723.8" y="513" text-anchor="middle" fill="#777">8:10 PM</text>
-<line x1="841.1" y1="278" x2="841.1" y2="497" stroke="#e3e0d8"/>
-<text x="841.1" y="513" text-anchor="middle" fill="#777">8:15 PM</text>
-<line x1="899.8" y1="278" x2="899.8" y2="497" stroke="#e3e0d8"/>
-<text x="899.8" y="513" text-anchor="middle" fill="#777">8:25 PM</text>
-<line x1="1017.1" y1="278" x2="1017.1" y2="497" stroke="#e3e0d8"/>
-<text x="1017.1" y="513" text-anchor="middle" fill="#777">8:30 PM</text>
-<text x="679.5" y="527" text-anchor="middle" fill="#8a7f6a" font-size="11">+2h 03m</text>
-<text x="886.3" y="527" text-anchor="middle" fill="#8a7f6a" font-size="11">+8m</text>
-<text x="222" y="302" text-anchor="end" fill="#222">architect (form)</text>
-<rect x="230.0" y="294.0" width="116.6" height="8.0" rx="2" fill="hsl(18,70%,46%)" stroke="#0002" stroke-width="0.5"><title>architect (form): opus@medium $0.88 · 5.0m</title></rect>
-<text x="352.6" y="302" fill="#555">opus@medium $0.88 · 5.0m · 25K out</text>
-<text x="222" y="328" text-anchor="end" fill="#222">designer (plan) ×2</text>
-<rect x="346.9" y="319.8" width="33.6" height="8.5" rx="2" fill="hsl(16,70%,46%)" stroke="#0002" stroke-width="0.5"><title>designer (plan): sonnet@medium $0.27 · 1.4m</title></rect>
-<rect x="522.4" y="317.6" width="20.8" height="12.8" rx="2" fill="hsl(7,70%,44%)" stroke="#0002" stroke-width="0.5"><title>designer (plan): sonnet@medium $0.25 · 0.9m</title></rect>
-<text x="549.2" y="328" fill="#555">$0.52 · 8m wall</text>
-<text x="222" y="354" text-anchor="end" fill="#222">kit (vocab / scaffold) ×3</text>
-<rect x="380.8" y="342.0" width="26.2" height="4.0" rx="1" fill="hsl(68,70%,58%)" stroke="#0002" stroke-width="0.5"><title>kit (vocab / scaffold): haiku@medium $0.02 · 1.1m</title></rect>
-<rect x="381.6" y="347.0" width="117.9" height="4.0" rx="1" fill="hsl(59,70%,56%)" stroke="#0002" stroke-width="0.5"><title>kit (vocab / scaffold): haiku@medium $0.13 · 5.0m</title></rect>
-<rect x="381.6" y="352.0" width="140.5" height="4.0" rx="1" fill="hsl(55,70%,55%)" stroke="#0002" stroke-width="0.5"><title>kit (vocab / scaffold): haiku@medium $0.19 · 6.0m</title></rect>
-<text x="528.0" y="354" fill="#555">$0.33 · 6m wall · peak 3</text>
-<text x="222" y="384.5" text-anchor="end" fill="#222">crew: parts and rooms ×6</text>
-<rect x="543.6" y="368.0" width="63.3" height="4.0" rx="1" fill="hsl(69,70%,58%)" stroke="#0002" stroke-width="0.5"><title>Middle shells: haiku@high $0.04 · 2.7m</title></rect>
-<rect x="544.5" y="373.0" width="23.3" height="4.0" rx="1" fill="hsl(66,70%,57%)" stroke="#0002" stroke-width="0.5"><title>Plaza and grounds: haiku@high $0.02 · 1.0m</title></rect>
-<rect x="544.5" y="378.0" width="32.3" height="4.0" rx="1" fill="hsl(68,70%,58%)" stroke="#0002" stroke-width="0.5"><title>Lobbies, doors, floors: haiku@high $0.02 · 1.4m</title></rect>
-<rect x="544.5" y="383.0" width="42.0" height="4.0" rx="1" fill="hsl(71,70%,58%)" stroke="#0002" stroke-width="0.5"><title>Monorail: haiku@high $0.03 · 1.8m</title></rect>
-<rect x="544.5" y="388.0" width="67.7" height="4.0" rx="1" fill="hsl(72,70%,59%)" stroke="#0002" stroke-width="0.5"><title>South shells: haiku@high $0.04 · 2.9m</title></rect>
-<rect x="612.6" y="368.0" width="36.6" height="4.0" rx="1" fill="hsl(72,70%,59%)" stroke="#0002" stroke-width="0.5"><title>Lobbies, doors, floors: haiku@high $0.02 · 1.6m</title></rect>
-<text x="655.2" y="384.5" fill="#555">$0.17 · 5m wall · peak 5</text>
-<text x="222" y="415" text-anchor="end" fill="#222">fixes</text>
-<rect x="654.3" y="409.5" width="12.3" height="3.0" rx="2" fill="hsl(68,70%,58%)" stroke="#0002" stroke-width="0.5"><title>fix: Plaza and grounds: haiku@high $0.01 · 0.5m</title></rect>
-<text x="672.5" y="415" fill="#555">haiku@high $0.01 · 0.5m · 5K out</text>
-<text x="222" y="441" text-anchor="end" fill="#222">fix round v2</text>
-<rect x="692.5" y="431.1" width="187.7" height="11.7" rx="2" fill="hsl(9,70%,44%)" stroke="#0002" stroke-width="0.5"><title>fix round v2 (opus): opus@high $2.09 · 8.0m</title></rect>
-<text x="886.3" y="441" fill="#555">opus@high $2.09 · 8.0m · 39K out</text>
-<text x="222" y="467" text-anchor="end" fill="#222">fix round v3</text>
-<rect x="892.3" y="457.5" width="135.7" height="10.9" rx="2" fill="hsl(11,70%,44%)" stroke="#0002" stroke-width="0.5"><title>fix round v3 (opus): opus@high $1.41 · 5.8m</title></rect>
-<text x="1034.0" y="467" fill="#555">opus@high $1.41 · 5.8m · 29K out</text>
+<rect x="658.9" y="86" width="26.0" height="361" fill="#efe9dc"/>
+<rect x="882.2" y="86" width="12.0" height="361" fill="#efe9dc"/>
+<text x="16" y="26" font-size="16" font-weight="bold">mopop-kit</text>
+<text x="16" y="48" fill="#333">2h 44m end to end · 32m with agents running · 0.8 agent-hours · 17.2M tokens in · 403K out · $5.41</text>
+<rect x="16" y="58" width="10" height="10" rx="2" fill="#3b3355"/><text x="30" y="67" fill="#333">opus $4.38</text>
+<rect x="112" y="58" width="10" height="10" rx="2" fill="#6f86c6"/><text x="126" y="67" fill="#333">sonnet $0.52</text>
+<rect x="221.2" y="58" width="10" height="10" rx="2" fill="#d9b45a"/><text x="235.2" y="67" fill="#333">haiku $0.51</text>
+<text x="16" y="115" fill="#333">agents</text><text x="192" y="90" text-anchor="end" fill="#555">5</text>
+<polygon points="200,136 200.0,136.0 200.0,126.0 322.5,126.0 322.5,136.0 322.9,136.0 322.9,126.0 358.2,126.0 358.2,136.0 358.5,136.0 358.5,126.0 359.3,126.0 359.3,116.0 359.3,116.0 359.3,106.0 386.1,106.0 386.1,116.0 483.3,116.0 483.3,126.0 507.0,126.0 507.0,136.0 507.3,136.0 507.3,126.0 529.2,126.0 529.2,136.0 529.6,136.0 529.6,126.0 530.5,126.0 530.5,116.0 530.5,116.0 530.5,106.0 530.5,106.0 530.5,96.0 530.6,96.0 530.6,86.0 555.0,86.0 555.0,96.0 564.5,96.0 564.5,106.0 574.7,106.0 574.7,116.0 596.1,116.0 596.1,126.0 601.7,126.0 601.7,136.0 602.2,136.0 602.2,126.0 640.7,126.0 640.7,136.0 646.0,136.0 646.0,126.0 658.9,126.0 658.9,136.0 684.9,136.0 684.9,126.0 882.2,126.0 882.2,136.0 894.2,136.0 894.2,126.0 1036.9,126.0 1036.9,136.0 1060,136" fill="#c9d3e6" stroke="#5b6f99" stroke-width="1"/>
+<polygon points="200.0,216 200.0,216.0 322.5,206.2 322.5,216" fill="hsl(18,70%,46%)" stroke="hsl(18,70%,46%)" stroke-width="0.5"/>
+<polygon points="322.5,216 322.5,206.2 322.9,206.2 322.9,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="322.9,216 322.9,206.2 358.2,203.2 358.2,216" fill="hsl(16,70%,46%)" stroke="hsl(16,70%,46%)" stroke-width="0.5"/>
+<polygon points="358.2,216 358.2,203.2 358.5,203.2 358.5,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="358.5,216 358.5,203.2 359.3,203.2 359.3,216" fill="hsl(68,70%,58%)" stroke="hsl(68,70%,58%)" stroke-width="0.5"/>
+<polygon points="359.3,216 359.3,203.2 359.3,203.2 359.3,216" fill="hsl(49,70%,53%)" stroke="hsl(49,70%,53%)" stroke-width="0.5"/>
+<polygon points="359.3,216 359.3,203.2 386.1,202.3 386.1,216" fill="hsl(37,70%,50%)" stroke="hsl(37,70%,50%)" stroke-width="0.5"/>
+<polygon points="386.1,216 386.1,202.3 483.3,199.9 483.3,216" fill="hsl(42,70%,52%)" stroke="hsl(42,70%,52%)" stroke-width="0.5"/>
+<polygon points="483.3,216 483.3,199.9 507.0,199.6 507.0,216" fill="hsl(55,70%,55%)" stroke="hsl(55,70%,55%)" stroke-width="0.5"/>
+<polygon points="507.0,216 507.0,199.6 507.3,199.6 507.3,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="507.3,216 507.3,199.6 529.2,196.8 529.2,216" fill="hsl(7,70%,44%)" stroke="hsl(7,70%,44%)" stroke-width="0.5"/>
+<polygon points="529.2,216 529.2,196.8 529.6,196.8 529.6,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="529.6,216 529.6,196.8 530.5,196.8 530.5,216" fill="hsl(69,70%,58%)" stroke="hsl(69,70%,58%)" stroke-width="0.5"/>
+<polygon points="530.5,216 530.5,196.8 530.5,196.8 530.5,216" fill="hsl(53,70%,54%)" stroke="hsl(53,70%,54%)" stroke-width="0.5"/>
+<polygon points="530.5,216 530.5,196.8 530.5,196.8 530.5,216" fill="hsl(45,70%,52%)" stroke="hsl(45,70%,52%)" stroke-width="0.5"/>
+<polygon points="530.5,216 530.5,196.8 530.6,196.8 530.6,216" fill="hsl(39,70%,51%)" stroke="hsl(39,70%,51%)" stroke-width="0.5"/>
+<polygon points="530.6,216 530.6,196.8 555.0,195.9 555.0,216" fill="hsl(35,70%,50%)" stroke="hsl(35,70%,50%)" stroke-width="0.5"/>
+<polygon points="555.0,216 555.0,195.9 564.5,195.6 564.5,216" fill="hsl(41,70%,51%)" stroke="hsl(41,70%,51%)" stroke-width="0.5"/>
+<polygon points="564.5,216 564.5,195.6 574.7,195.4 574.7,216" fill="hsl(48,70%,53%)" stroke="hsl(48,70%,53%)" stroke-width="0.5"/>
+<polygon points="574.7,216 574.7,195.4 596.1,195.2 596.1,216" fill="hsl(56,70%,55%)" stroke="hsl(56,70%,55%)" stroke-width="0.5"/>
+<polygon points="596.1,216 596.1,195.2 601.7,195.1 601.7,216" fill="hsl(72,70%,59%)" stroke="hsl(72,70%,59%)" stroke-width="0.5"/>
+<polygon points="601.7,216 601.7,195.1 602.2,195.1 602.2,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="602.2,216 602.2,195.1 640.7,194.9 640.7,216" fill="hsl(72,70%,59%)" stroke="hsl(72,70%,59%)" stroke-width="0.5"/>
+<polygon points="640.7,216 640.7,194.9 646.0,194.9 646.0,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="646.0,216 646.0,194.9 658.9,194.8 658.9,216" fill="hsl(68,70%,58%)" stroke="hsl(68,70%,58%)" stroke-width="0.5"/>
+<polygon points="658.9,216 658.9,194.8 684.9,194.8 684.9,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="684.9,216 684.9,194.8 882.2,171.6 882.2,216" fill="hsl(9,70%,44%)" stroke="hsl(9,70%,44%)" stroke-width="0.5"/>
+<polygon points="882.2,216 882.2,171.6 894.2,171.6 894.2,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="894.2,216 894.2,171.6 1036.9,156.0 1036.9,216" fill="hsl(11,70%,44%)" stroke="hsl(11,70%,44%)" stroke-width="0.5"/>
+<polygon points="1036.9,216 1036.9,156.0 1060.0,156.0 1060.0,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polyline points="200.0,216.0 322.5,206.2 322.5,206.2 322.9,206.2 322.9,206.2 358.2,203.2 358.2,203.2 358.5,203.2 358.5,203.2 359.3,203.2 359.3,203.2 359.3,203.2 359.3,203.2 386.1,202.3 386.1,202.3 483.3,199.9 483.3,199.9 507.0,199.6 507.0,199.6 507.3,199.6 507.3,199.6 529.2,196.8 529.2,196.8 529.6,196.8 529.6,196.8 530.5,196.8 530.5,196.8 530.5,196.8 530.5,196.8 530.5,196.8 530.5,196.8 530.6,196.8 530.6,196.8 555.0,195.9 555.0,195.9 564.5,195.6 564.5,195.6 574.7,195.4 574.7,195.4 596.1,195.2 596.1,195.2 601.7,195.1 601.7,195.1 602.2,195.1 602.2,195.1 640.7,194.9 640.7,194.9 646.0,194.9 646.0,194.9 658.9,194.8 658.9,194.8 684.9,194.8 684.9,194.8 882.2,171.6 882.2,171.6 894.2,171.6 894.2,171.6 1036.9,156.0 1036.9,156.0 1060.0,156.0" fill="none" stroke="#0005" stroke-width="1"/>
+<line x1="200" y1="216" x2="1060" y2="216" stroke="#bbb"/>
+<text x="192" y="160" text-anchor="end" fill="#555">$5.41</text>
+<text x="16" y="190" fill="#333">spend</text>
+<line x1="759.8" y1="186" x2="759.8" y2="216" stroke="#333" stroke-dasharray="2 3"/>
+<text x="764.8" y="210" fill="#333">half by 21m</text>
+<line x1="260.7" y1="86" x2="260.7" y2="447" stroke="#ebe8e0"/>
+<text x="260.7" y="463" text-anchor="middle" fill="#777">5:50 PM</text>
+<line x1="383.9" y1="86" x2="383.9" y2="447" stroke="#ebe8e0"/>
+<text x="383.9" y="463" text-anchor="middle" fill="#777">5:55 PM</text>
+<line x1="507.2" y1="86" x2="507.2" y2="447" stroke="#ebe8e0"/>
+<text x="507.2" y="463" text-anchor="middle" fill="#777">6:00 PM</text>
+<line x1="630.5" y1="86" x2="630.5" y2="447" stroke="#ebe8e0"/>
+<text x="630.5" y="463" text-anchor="middle" fill="#777">6:05 PM</text>
+<line x1="717.7" y1="86" x2="717.7" y2="447" stroke="#ebe8e0"/>
+<text x="717.7" y="463" text-anchor="middle" fill="#777">8:10 PM</text>
+<line x1="841.0" y1="86" x2="841.0" y2="447" stroke="#ebe8e0"/>
+<text x="841.0" y="463" text-anchor="middle" fill="#777">8:15 PM</text>
+<line x1="902.1" y1="86" x2="902.1" y2="447" stroke="#ebe8e0"/>
+<text x="902.1" y="463" text-anchor="middle" fill="#777">8:25 PM</text>
+<line x1="1025.4" y1="86" x2="1025.4" y2="447" stroke="#ebe8e0"/>
+<text x="1025.4" y="463" text-anchor="middle" fill="#777">8:30 PM</text>
+<text x="671.9" y="479" text-anchor="middle" fill="#a0957e" font-size="11">+2h 03m</text>
+<text x="888.2" y="479" text-anchor="middle" fill="#a0957e" font-size="11">+8m</text>
+<text x="192" y="262" text-anchor="end" fill="#222">architect (form)</text>
+<rect x="200.0" y="254.0" width="122.5" height="8" rx="1" fill="#3b3355"><title>architect (form): opus@medium $0.88 · 5.0m</title></rect>
+<text x="1072" y="262" fill="#555">$0.88</text>
+<text x="192" y="288" text-anchor="end" fill="#222">designer (plan) <tspan fill="#888">×2</tspan></text>
+<rect x="322.9" y="280.0" width="35.3" height="8" rx="1" fill="#6f86c6"><title>designer (plan): sonnet@medium $0.27 · 1.4m</title></rect>
+<rect x="507.3" y="280.0" width="21.8" height="8" rx="1" fill="#6f86c6"><title>designer (plan): sonnet@medium $0.25 · 0.9m</title></rect>
+<text x="1072" y="288" fill="#555">$0.52</text>
+<text x="192" y="314" text-anchor="end" fill="#222">kit (vocab / scaffold) <tspan fill="#888">×3</tspan></text>
+<rect x="358.5" y="302.0" width="27.6" height="4" rx="1" fill="#d9b45a"><title>kit (vocab / scaffold): haiku@medium $0.02 · 1.1m</title></rect>
+<rect x="359.3" y="307.0" width="124.0" height="4" rx="1" fill="#d9b45a"><title>kit (vocab / scaffold): haiku@medium $0.13 · 5.0m</title></rect>
+<rect x="359.3" y="312.0" width="147.6" height="4" rx="1" fill="#d9b45a"><title>kit (vocab / scaffold): haiku@medium $0.19 · 6.0m</title></rect>
+<text x="1072" y="314" fill="#555">$0.33</text>
+<text x="192" y="344.5" text-anchor="end" fill="#222">parts and rooms <tspan fill="#888">×6</tspan></text>
+<rect x="529.6" y="328.0" width="66.5" height="4" rx="1" fill="#d9b45a"><title>Middle shells: haiku@high $0.04 · 2.7m</title></rect>
+<rect x="530.5" y="333.0" width="24.5" height="4" rx="1" fill="#d9b45a"><title>Plaza and grounds: haiku@high $0.02 · 1.0m</title></rect>
+<rect x="530.5" y="338.0" width="34.0" height="4" rx="1" fill="#d9b45a"><title>Lobbies, doors, floors: haiku@high $0.02 · 1.4m</title></rect>
+<rect x="530.5" y="343.0" width="44.1" height="4" rx="1" fill="#d9b45a"><title>Monorail: haiku@high $0.03 · 1.8m</title></rect>
+<rect x="530.6" y="348.0" width="71.2" height="4" rx="1" fill="#d9b45a"><title>South shells: haiku@high $0.04 · 2.9m</title></rect>
+<rect x="602.2" y="328.0" width="38.5" height="4" rx="1" fill="#d9b45a"><title>Lobbies, doors, floors: haiku@high $0.02 · 1.6m</title></rect>
+<text x="1072" y="344.5" fill="#555">$0.17</text>
+<text x="192" y="375" text-anchor="end" fill="#222">fixes</text>
+<rect x="646.0" y="367.0" width="12.9" height="8" rx="1" fill="#d9b45a"><title>fix: Plaza and grounds: haiku@high $0.01 · 0.5m</title></rect>
+<text x="1072" y="375" fill="#555">$0.01</text>
+<text x="192" y="401" text-anchor="end" fill="#222">fix round v2</text>
+<rect x="684.9" y="393.0" width="197.3" height="8" rx="1" fill="#3b3355"><title>fix round v2 (opus): opus@high $2.09 · 8.0m</title></rect>
+<text x="1072" y="401" fill="#555">$2.09</text>
+<text x="192" y="427" text-anchor="end" fill="#222">fix round v3</text>
+<rect x="894.2" y="419.0" width="142.7" height="8" rx="1" fill="#3b3355"><title>fix round v3 (opus): opus@high $1.41 · 5.8m</title></rect>
+<text x="1072" y="427" fill="#555">$1.41</text>
 </svg>

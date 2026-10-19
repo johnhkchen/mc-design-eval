@@ -1,264 +1,261 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1310" height="649" font-family="Helvetica,Arial,sans-serif" font-size="12">
-<defs><pattern id="idle" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#f1ece0"/><line x1="0" y1="0" x2="0" y2="8" stroke="#e2d9c4" stroke-width="3"/></pattern></defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="1140" height="599" font-family="Helvetica,Arial,sans-serif" font-size="12">
+<defs><pattern id="idle" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#f4f0e6"/><line x1="0" y1="0" x2="0" y2="8" stroke="#e6dfcd" stroke-width="3"/></pattern></defs>
 <rect width="100%" height="100%" fill="#fbfaf7"/>
-<rect x="574.5" y="116" width="12.0" height="493" fill="#efe9dc"/>
-<rect x="630.8" y="116" width="12.0" height="493" fill="#efe9dc"/>
-<rect x="686.9" y="116" width="26.0" height="493" fill="#efe9dc"/>
-<rect x="861.6" y="116" width="12.0" height="493" fill="#efe9dc"/>
-<rect x="1009.1" y="116" width="12.0" height="493" fill="#efe9dc"/>
-<text x="16" y="24" font-size="16" font-weight="bold">seattle-towers-kit: 71 agent sessions, 3h 26m end to end, 1h 10m active, $4.97</text>
-<text x="16" y="42" fill="#555">bar colour = spend per minute (deepest red = $0.78/min, the same in every chart); overlapping sessions of one role stack into a clump, one thin lane each</text>
-<text x="16" y="60" fill="#333">end to end 3h 26m: 1h 10m with an agent running (34%), 2h 16m with none (every idle stretch of 2+ min collapsed to a break) · 5.3 agent-hours, 4.6 agents on average while any ran</text>
-<text x="16" y="78" fill="#333">tokens: 1.1M out, 55.2M cache read, 3.2M cache write, 2K in · $4.97 (opus $0.64 · sonnet $1.40 · haiku $2.93)</text>
-<text x="16" y="126" fill="#333">agents running</text><text x="16" y="141" fill="#777">(peak 24)</text>
-<polygon points="230,146 230.0,146.0 230.0,144.1 261.4,144.1 261.4,146.0 261.5,146.0 261.5,144.1 277.7,144.1 277.7,146.0 277.8,146.0 277.8,144.1 278.2,144.1 278.2,142.3 278.2,142.3 278.2,140.4 278.2,140.4 278.2,138.5 297.1,138.5 297.1,140.4 320.9,140.4 320.9,142.3 325.0,142.3 325.0,144.1 343.4,144.1 343.4,146.0 343.5,146.0 343.5,144.1 370.3,144.1 370.3,146.0 370.6,146.0 370.6,144.1 373.4,144.1 373.4,146.0 373.7,146.0 373.7,144.1 410.2,144.1 410.2,146.0 410.7,146.0 410.7,144.1 411.3,144.1 411.3,142.3 411.3,142.3 411.3,140.4 411.4,140.4 411.4,138.5 411.4,138.5 411.4,136.6 411.4,136.6 411.4,134.8 411.4,134.8 411.4,132.9 411.4,132.9 411.4,131.0 411.4,131.0 411.4,129.1 411.4,129.1 411.4,127.3 411.4,127.3 411.4,125.4 411.4,125.4 411.4,123.5 411.4,123.5 411.4,121.6 411.4,121.6 411.4,119.8 411.4,119.8 411.4,117.9 411.5,117.9 411.5,116.0 411.5,116.0 411.5,114.1 411.5,114.1 411.5,112.3 411.5,112.3 411.5,110.4 411.5,110.4 411.5,108.5 411.5,108.5 411.5,106.6 411.5,106.6 411.5,104.8 411.5,104.8 411.5,102.9 411.5,102.9 411.5,101.0 431.2,101.0 431.2,102.9 436.6,102.9 436.6,101.0 460.5,101.0 460.5,102.9 475.6,102.9 475.6,101.0 477.3,101.0 477.3,102.9 479.2,102.9 479.2,104.8 487.5,104.8 487.5,106.6 493.6,106.6 493.6,104.8 495.8,104.8 495.8,106.6 502.8,106.6 502.8,108.5 503.9,108.5 503.9,110.4 504.1,110.4 504.1,112.3 505.1,112.3 505.1,114.1 506.5,114.1 506.5,116.0 506.5,116.0 506.5,117.9 506.7,117.9 506.7,119.8 506.9,119.8 506.9,121.6 507.0,121.6 507.0,123.5 507.0,123.5 507.0,121.6 509.6,121.6 509.6,123.5 510.8,123.5 510.8,121.6 511.0,121.6 511.0,123.5 511.0,123.5 511.0,125.4 511.7,125.4 511.7,127.3 512.8,127.3 512.8,125.4 514.3,125.4 514.3,127.3 515.3,127.3 515.3,125.4 518.5,125.4 518.5,127.3 518.5,127.3 518.5,125.4 518.8,125.4 518.8,127.3 519.8,127.3 519.8,125.4 520.6,125.4 520.6,123.5 522.0,123.5 522.0,125.4 522.0,125.4 522.0,123.5 522.2,123.5 522.2,125.4 523.2,125.4 523.2,127.3 523.2,127.3 523.2,129.1 524.1,129.1 524.1,131.0 529.3,131.0 529.3,132.9 529.8,132.9 529.8,131.0 529.9,131.0 529.9,132.9 530.3,132.9 530.3,134.8 531.7,134.8 531.7,136.6 532.3,136.6 532.3,138.5 532.5,138.5 532.5,136.6 532.7,136.6 532.7,138.5 534.2,138.5 534.2,140.4 538.5,140.4 538.5,138.5 540.2,138.5 540.2,140.4 540.8,140.4 540.8,138.5 541.2,138.5 541.2,140.4 541.3,140.4 541.3,138.5 542.6,138.5 542.6,140.4 542.8,140.4 542.8,142.3 543.6,142.3 543.6,140.4 551.7,140.4 551.7,142.3 552.9,142.3 552.9,144.1 566.1,144.1 566.1,146.0 568.8,146.0 568.8,144.1 570.9,144.1 570.9,142.3 571.3,142.3 571.3,144.1 572.4,144.1 572.4,146.0 573.4,146.0 573.4,144.1 574.5,144.1 574.5,146.0 586.5,146.0 586.5,144.1 591.5,144.1 591.5,146.0 603.0,146.0 603.0,144.1 605.5,144.1 605.5,146.0 606.8,146.0 606.8,144.1 607.8,144.1 607.8,142.3 609.2,142.3 609.2,144.1 610.0,144.1 610.0,146.0 629.2,146.0 629.2,144.1 630.8,144.1 630.8,146.0 642.8,146.0 642.8,144.1 648.5,144.1 648.5,142.3 652.7,142.3 652.7,144.1 653.0,144.1 653.0,142.3 663.2,142.3 663.2,140.4 669.0,140.4 669.0,142.3 670.5,142.3 670.5,140.4 670.7,140.4 670.7,142.3 674.9,142.3 674.9,144.1 677.9,144.1 677.9,142.3 677.9,142.3 677.9,144.1 678.7,144.1 678.7,142.3 679.1,142.3 679.1,140.4 679.5,140.4 679.5,138.5 684.1,138.5 684.1,140.4 684.7,140.4 684.7,142.3 685.2,142.3 685.2,144.1 686.9,144.1 686.9,146.0 691.6,146.0 691.6,147.9 691.6,147.9 691.6,146.0 712.9,146.0 712.9,144.1 861.6,144.1 861.6,146.0 873.6,146.0 873.6,144.1 1009.1,144.1 1009.1,146.0 1021.1,146.0 1021.1,144.1 1050.0,144.1 1050.0,146.0 1050,146" fill="#c9d6e8" stroke="#4a6fa5" stroke-width="1"/>
-<line x1="230" y1="146" x2="1050" y2="146" stroke="#999"/>
-<polygon points="230.0,256 230.0,256.0 261.4,244.5 261.4,256" fill="hsl(26,70%,48%)" stroke="hsl(26,70%,48%)" stroke-width="0.5"/>
-<polygon points="261.4,256 261.4,244.5 261.5,244.5 261.5,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="261.5,256 261.5,244.5 277.7,239.0 277.7,256" fill="hsl(28,70%,48%)" stroke="hsl(28,70%,48%)" stroke-width="0.5"/>
-<polygon points="277.7,256 277.7,239.0 277.8,239.0 277.8,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="277.8,256 277.8,239.0 278.2,239.0 278.2,256" fill="hsl(64,70%,57%)" stroke="hsl(64,70%,57%)" stroke-width="0.5"/>
-<polygon points="278.2,256 278.2,239.0 278.2,239.0 278.2,256" fill="hsl(46,70%,53%)" stroke="hsl(46,70%,53%)" stroke-width="0.5"/>
-<polygon points="278.2,256 278.2,239.0 278.2,239.0 278.2,256" fill="hsl(39,70%,51%)" stroke="hsl(39,70%,51%)" stroke-width="0.5"/>
-<polygon points="278.2,256 278.2,239.0 297.1,234.5 297.1,256" fill="hsl(35,70%,50%)" stroke="hsl(35,70%,50%)" stroke-width="0.5"/>
-<polygon points="297.1,256 297.1,234.5 320.9,230.1 320.9,256" fill="hsl(39,70%,51%)" stroke="hsl(39,70%,51%)" stroke-width="0.5"/>
-<polygon points="320.9,256 320.9,230.1 325.0,229.6 325.0,256" fill="hsl(45,70%,52%)" stroke="hsl(45,70%,52%)" stroke-width="0.5"/>
-<polygon points="325.0,256 325.0,229.6 343.4,228.1 343.4,256" fill="hsl(56,70%,55%)" stroke="hsl(56,70%,55%)" stroke-width="0.5"/>
-<polygon points="343.4,256 343.4,228.1 343.5,228.1 343.5,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="343.5,256 343.5,228.1 370.3,220.4 370.3,256" fill="hsl(31,70%,49%)" stroke="hsl(31,70%,49%)" stroke-width="0.5"/>
-<polygon points="370.3,256 370.3,220.4 370.6,220.4 370.6,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="370.6,256 370.6,220.4 373.4,219.0 373.4,256" fill="hsl(20,70%,47%)" stroke="hsl(20,70%,47%)" stroke-width="0.5"/>
-<polygon points="373.4,256 373.4,219.0 373.7,219.0 373.7,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="373.7,256 373.7,219.0 410.2,208.3 410.2,256" fill="hsl(31,70%,49%)" stroke="hsl(31,70%,49%)" stroke-width="0.5"/>
-<polygon points="410.2,256 410.2,208.3 410.7,208.3 410.7,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="410.7,256 410.7,208.3 411.3,208.3 411.3,256" fill="hsl(98,70%,65%)" stroke="hsl(98,70%,65%)" stroke-width="0.5"/>
-<polygon points="411.3,256 411.3,208.3 411.3,208.3 411.3,256" fill="hsl(89,70%,63%)" stroke="hsl(89,70%,63%)" stroke-width="0.5"/>
-<polygon points="411.3,256 411.3,208.3 411.4,208.3 411.4,256" fill="hsl(85,70%,62%)" stroke="hsl(85,70%,62%)" stroke-width="0.5"/>
-<polygon points="411.4,256 411.4,208.3 411.4,208.3 411.4,256" fill="hsl(78,70%,60%)" stroke="hsl(78,70%,60%)" stroke-width="0.5"/>
-<polygon points="411.4,256 411.4,208.3 411.4,208.3 411.4,256" fill="hsl(75,70%,59%)" stroke="hsl(75,70%,59%)" stroke-width="0.5"/>
-<polygon points="411.4,256 411.4,208.3 411.4,208.3 411.4,256" fill="hsl(72,70%,59%)" stroke="hsl(72,70%,59%)" stroke-width="0.5"/>
-<polygon points="411.4,256 411.4,208.3 411.4,208.3 411.4,256" fill="hsl(70,70%,58%)" stroke="hsl(70,70%,58%)" stroke-width="0.5"/>
-<polygon points="411.4,256 411.4,208.3 411.4,208.3 411.4,256" fill="hsl(64,70%,57%)" stroke="hsl(64,70%,57%)" stroke-width="0.5"/>
-<polygon points="411.4,256 411.4,208.3 411.4,208.3 411.4,256" fill="hsl(63,70%,56%)" stroke="hsl(63,70%,56%)" stroke-width="0.5"/>
-<polygon points="411.4,256 411.4,208.3 411.4,208.3 411.4,256" fill="hsl(60,70%,56%)" stroke="hsl(60,70%,56%)" stroke-width="0.5"/>
-<polygon points="411.4,256 411.4,208.3 411.4,208.3 411.4,256" fill="hsl(54,70%,55%)" stroke="hsl(54,70%,55%)" stroke-width="0.5"/>
-<polygon points="411.4,256 411.4,208.3 411.4,208.3 411.4,256" fill="hsl(53,70%,54%)" stroke="hsl(53,70%,54%)" stroke-width="0.5"/>
-<polygon points="411.4,256 411.4,208.3 411.4,208.3 411.4,256" fill="hsl(52,70%,54%)" stroke="hsl(52,70%,54%)" stroke-width="0.5"/>
-<polygon points="411.4,256 411.4,208.3 411.4,208.3 411.4,256" fill="hsl(50,70%,54%)" stroke="hsl(50,70%,54%)" stroke-width="0.5"/>
-<polygon points="411.4,256 411.4,208.3 411.5,208.3 411.5,256" fill="hsl(47,70%,53%)" stroke="hsl(47,70%,53%)" stroke-width="0.5"/>
-<polygon points="411.5,256 411.5,208.3 411.5,208.3 411.5,256" fill="hsl(46,70%,53%)" stroke="hsl(46,70%,53%)" stroke-width="0.5"/>
-<polygon points="411.5,256 411.5,208.3 411.5,208.3 411.5,256" fill="hsl(43,70%,52%)" stroke="hsl(43,70%,52%)" stroke-width="0.5"/>
-<polygon points="411.5,256 411.5,208.3 411.5,208.3 411.5,256" fill="hsl(42,70%,52%)" stroke="hsl(42,70%,52%)" stroke-width="0.5"/>
-<polygon points="411.5,256 411.5,208.3 411.5,208.3 411.5,256" fill="hsl(40,70%,51%)" stroke="hsl(40,70%,51%)" stroke-width="0.5"/>
-<polygon points="411.5,256 411.5,208.3 411.5,208.3 411.5,256" fill="hsl(39,70%,51%)" stroke="hsl(39,70%,51%)" stroke-width="0.5"/>
-<polygon points="411.5,256 411.5,208.3 411.5,208.3 411.5,256" fill="hsl(39,70%,51%)" stroke="hsl(39,70%,51%)" stroke-width="0.5"/>
-<polygon points="411.5,256 411.5,208.3 411.5,208.3 411.5,256" fill="hsl(38,70%,51%)" stroke="hsl(38,70%,51%)" stroke-width="0.5"/>
-<polygon points="411.5,256 411.5,208.3 411.5,208.3 411.5,256" fill="hsl(38,70%,51%)" stroke="hsl(38,70%,51%)" stroke-width="0.5"/>
-<polygon points="411.5,256 411.5,208.3 431.2,204.2 431.2,256" fill="hsl(37,70%,51%)" stroke="hsl(37,70%,51%)" stroke-width="0.5"/>
-<polygon points="431.2,256 431.2,204.2 436.6,203.2 436.6,256" fill="hsl(40,70%,51%)" stroke="hsl(40,70%,51%)" stroke-width="0.5"/>
-<polygon points="436.6,256 436.6,203.2 460.5,198.7 460.5,256" fill="hsl(39,70%,51%)" stroke="hsl(39,70%,51%)" stroke-width="0.5"/>
-<polygon points="460.5,256 460.5,198.7 475.6,196.0 475.6,256" fill="hsl(40,70%,51%)" stroke="hsl(40,70%,51%)" stroke-width="0.5"/>
-<polygon points="475.6,256 475.6,196.0 477.3,195.2 477.3,256" fill="hsl(21,70%,47%)" stroke="hsl(21,70%,47%)" stroke-width="0.5"/>
-<polygon points="477.3,256 477.3,195.2 479.2,194.9 479.2,256" fill="hsl(40,70%,51%)" stroke="hsl(40,70%,51%)" stroke-width="0.5"/>
-<polygon points="479.2,256 479.2,194.9 487.5,193.4 487.5,256" fill="hsl(41,70%,51%)" stroke="hsl(41,70%,51%)" stroke-width="0.5"/>
-<polygon points="487.5,256 487.5,193.4 493.6,192.4 493.6,256" fill="hsl(42,70%,52%)" stroke="hsl(42,70%,52%)" stroke-width="0.5"/>
-<polygon points="493.6,256 493.6,192.4 495.8,192.1 495.8,256" fill="hsl(41,70%,51%)" stroke="hsl(41,70%,51%)" stroke-width="0.5"/>
-<polygon points="495.8,256 495.8,192.1 502.8,191.0 502.8,256" fill="hsl(43,70%,52%)" stroke="hsl(43,70%,52%)" stroke-width="0.5"/>
-<polygon points="502.8,256 502.8,191.0 503.9,190.8 503.9,256" fill="hsl(43,70%,52%)" stroke="hsl(43,70%,52%)" stroke-width="0.5"/>
-<polygon points="503.9,256 503.9,190.8 504.1,190.8 504.1,256" fill="hsl(44,70%,52%)" stroke="hsl(44,70%,52%)" stroke-width="0.5"/>
-<polygon points="504.1,256 504.1,190.8 505.1,190.6 505.1,256" fill="hsl(47,70%,53%)" stroke="hsl(47,70%,53%)" stroke-width="0.5"/>
-<polygon points="505.1,256 505.1,190.6 506.5,190.5 506.5,256" fill="hsl(49,70%,53%)" stroke="hsl(49,70%,53%)" stroke-width="0.5"/>
-<polygon points="506.5,256 506.5,190.5 506.5,190.5 506.5,256" fill="hsl(49,70%,53%)" stroke="hsl(49,70%,53%)" stroke-width="0.5"/>
-<polygon points="506.5,256 506.5,190.5 506.7,190.5 506.7,256" fill="hsl(51,70%,54%)" stroke="hsl(51,70%,54%)" stroke-width="0.5"/>
-<polygon points="506.7,256 506.7,190.5 506.9,190.4 506.9,256" fill="hsl(52,70%,54%)" stroke="hsl(52,70%,54%)" stroke-width="0.5"/>
-<polygon points="506.9,256 506.9,190.4 507.0,190.4 507.0,256" fill="hsl(53,70%,54%)" stroke="hsl(53,70%,54%)" stroke-width="0.5"/>
-<polygon points="507.0,256 507.0,190.4 507.0,190.4 507.0,256" fill="hsl(55,70%,55%)" stroke="hsl(55,70%,55%)" stroke-width="0.5"/>
-<polygon points="507.0,256 507.0,190.4 509.6,189.7 509.6,256" fill="hsl(30,70%,49%)" stroke="hsl(30,70%,49%)" stroke-width="0.5"/>
-<polygon points="509.6,256 509.6,189.7 510.8,189.3 510.8,256" fill="hsl(31,70%,49%)" stroke="hsl(31,70%,49%)" stroke-width="0.5"/>
-<polygon points="510.8,256 510.8,189.3 511.0,189.3 511.0,256" fill="hsl(30,70%,49%)" stroke="hsl(30,70%,49%)" stroke-width="0.5"/>
-<polygon points="511.0,256 511.0,189.3 511.0,189.3 511.0,256" fill="hsl(30,70%,49%)" stroke="hsl(30,70%,49%)" stroke-width="0.5"/>
-<polygon points="511.0,256 511.0,189.3 511.7,189.2 511.7,256" fill="hsl(54,70%,54%)" stroke="hsl(54,70%,54%)" stroke-width="0.5"/>
-<polygon points="511.7,256 511.7,189.2 512.8,189.1 512.8,256" fill="hsl(55,70%,55%)" stroke="hsl(55,70%,55%)" stroke-width="0.5"/>
-<polygon points="512.8,256 512.8,189.1 514.3,187.9 514.3,256" fill="hsl(10,70%,44%)" stroke="hsl(10,70%,44%)" stroke-width="0.5"/>
-<polygon points="514.3,256 514.3,187.9 515.3,187.8 515.3,256" fill="hsl(55,70%,55%)" stroke="hsl(55,70%,55%)" stroke-width="0.5"/>
-<polygon points="515.3,256 515.3,187.8 518.5,187.5 518.5,256" fill="hsl(51,70%,54%)" stroke="hsl(51,70%,54%)" stroke-width="0.5"/>
-<polygon points="518.5,256 518.5,187.5 518.5,187.5 518.5,256" fill="hsl(55,70%,55%)" stroke="hsl(55,70%,55%)" stroke-width="0.5"/>
-<polygon points="518.5,256 518.5,187.5 518.8,187.4 518.8,256" fill="hsl(35,70%,50%)" stroke="hsl(35,70%,50%)" stroke-width="0.5"/>
-<polygon points="518.8,256 518.8,187.4 519.8,187.2 519.8,256" fill="hsl(36,70%,50%)" stroke="hsl(36,70%,50%)" stroke-width="0.5"/>
-<polygon points="519.8,256 519.8,187.2 520.6,186.6 520.6,256" fill="hsl(12,70%,45%)" stroke="hsl(12,70%,45%)" stroke-width="0.5"/>
-<polygon points="520.6,256 520.6,186.6 522.0,185.4 522.0,256" fill="hsl(11,70%,45%)" stroke="hsl(11,70%,45%)" stroke-width="0.5"/>
-<polygon points="522.0,256 522.0,185.4 522.0,185.4 522.0,256" fill="hsl(12,70%,45%)" stroke="hsl(12,70%,45%)" stroke-width="0.5"/>
-<polygon points="522.0,256 522.0,185.4 522.2,185.0 522.2,256" fill="hsl(0,70%,42%)" stroke="hsl(0,70%,42%)" stroke-width="0.5"/>
-<polygon points="522.2,256 522.2,185.0 523.2,183.4 523.2,256" fill="hsl(0,70%,42%)" stroke="hsl(0,70%,42%)" stroke-width="0.5"/>
-<polygon points="523.2,256 523.2,183.4 523.2,183.4 523.2,256" fill="hsl(0,70%,42%)" stroke="hsl(0,70%,42%)" stroke-width="0.5"/>
-<polygon points="523.2,256 523.2,183.4 524.1,182.0 524.1,256" fill="hsl(0,70%,42%)" stroke="hsl(0,70%,42%)" stroke-width="0.5"/>
-<polygon points="524.1,256 524.1,182.0 529.3,181.7 529.3,256" fill="hsl(57,70%,55%)" stroke="hsl(57,70%,55%)" stroke-width="0.5"/>
-<polygon points="529.3,256 529.3,181.7 529.8,181.6 529.8,256" fill="hsl(62,70%,56%)" stroke="hsl(62,70%,56%)" stroke-width="0.5"/>
-<polygon points="529.8,256 529.8,181.6 529.9,181.6 529.9,256" fill="hsl(35,70%,50%)" stroke="hsl(35,70%,50%)" stroke-width="0.5"/>
-<polygon points="529.9,256 529.9,181.6 530.3,181.5 530.3,256" fill="hsl(35,70%,50%)" stroke="hsl(35,70%,50%)" stroke-width="0.5"/>
-<polygon points="530.3,256 530.3,181.5 531.7,181.2 531.7,256" fill="hsl(36,70%,50%)" stroke="hsl(36,70%,50%)" stroke-width="0.5"/>
-<polygon points="531.7,256 531.7,181.2 532.3,181.1 532.3,256" fill="hsl(36,70%,50%)" stroke="hsl(36,70%,50%)" stroke-width="0.5"/>
-<polygon points="532.3,256 532.3,181.1 532.5,181.0 532.5,256" fill="hsl(37,70%,50%)" stroke="hsl(37,70%,50%)" stroke-width="0.5"/>
-<polygon points="532.5,256 532.5,181.0 532.7,180.9 532.7,256" fill="hsl(15,70%,45%)" stroke="hsl(15,70%,45%)" stroke-width="0.5"/>
-<polygon points="532.7,256 532.7,180.9 534.2,180.2 534.2,256" fill="hsl(21,70%,47%)" stroke="hsl(21,70%,47%)" stroke-width="0.5"/>
-<polygon points="534.2,256 534.2,180.2 538.5,180.1 538.5,256" fill="hsl(73,70%,59%)" stroke="hsl(73,70%,59%)" stroke-width="0.5"/>
-<polygon points="538.5,256 538.5,180.1 540.2,179.3 540.2,256" fill="hsl(22,70%,47%)" stroke="hsl(22,70%,47%)" stroke-width="0.5"/>
-<polygon points="540.2,256 540.2,179.3 540.8,179.3 540.8,256" fill="hsl(73,70%,59%)" stroke="hsl(73,70%,59%)" stroke-width="0.5"/>
-<polygon points="540.8,256 540.8,179.3 541.2,179.0 541.2,256" fill="hsl(17,70%,46%)" stroke="hsl(17,70%,46%)" stroke-width="0.5"/>
-<polygon points="541.2,256 541.2,179.0 541.3,179.0 541.3,256" fill="hsl(18,70%,46%)" stroke="hsl(18,70%,46%)" stroke-width="0.5"/>
-<polygon points="541.3,256 541.3,179.0 542.6,177.6 542.6,256" fill="hsl(6,70%,43%)" stroke="hsl(6,70%,43%)" stroke-width="0.5"/>
-<polygon points="542.6,256 542.6,177.6 542.8,177.5 542.8,256" fill="hsl(18,70%,46%)" stroke="hsl(18,70%,46%)" stroke-width="0.5"/>
-<polygon points="542.8,256 542.8,177.5 543.6,177.5 543.6,256" fill="hsl(96,70%,64%)" stroke="hsl(96,70%,64%)" stroke-width="0.5"/>
-<polygon points="543.6,256 543.6,177.5 551.7,177.3 551.7,256" fill="hsl(75,70%,59%)" stroke="hsl(75,70%,59%)" stroke-width="0.5"/>
-<polygon points="551.7,256 551.7,177.3 552.9,177.3 552.9,256" fill="hsl(96,70%,64%)" stroke="hsl(96,70%,64%)" stroke-width="0.5"/>
-<polygon points="552.9,256 552.9,177.3 566.1,177.2 566.1,256" fill="hsl(105,70%,66%)" stroke="hsl(105,70%,66%)" stroke-width="0.5"/>
-<polygon points="566.1,256 566.1,177.2 568.8,177.2 568.8,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="568.8,256 568.8,177.2 570.9,174.4 570.9,256" fill="hsl(1,70%,42%)" stroke="hsl(1,70%,42%)" stroke-width="0.5"/>
-<polygon points="570.9,256 570.9,174.4 571.3,173.6 571.3,256" fill="hsl(0,70%,42%)" stroke="hsl(0,70%,42%)" stroke-width="0.5"/>
-<polygon points="571.3,256 571.3,173.6 572.4,173.2 572.4,256" fill="hsl(29,70%,49%)" stroke="hsl(29,70%,49%)" stroke-width="0.5"/>
-<polygon points="572.4,256 572.4,173.2 573.4,173.2 573.4,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="573.4,256 573.4,173.2 574.5,172.7 574.5,256" fill="hsl(21,70%,47%)" stroke="hsl(21,70%,47%)" stroke-width="0.5"/>
-<polygon points="574.5,256 574.5,172.7 586.5,172.7 586.5,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="586.5,256 586.5,172.7 591.5,172.1 591.5,256" fill="hsl(46,70%,53%)" stroke="hsl(46,70%,53%)" stroke-width="0.5"/>
-<polygon points="591.5,256 591.5,172.1 603.0,172.1 603.0,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="603.0,256 603.0,172.1 605.5,171.4 605.5,256" fill="hsl(33,70%,50%)" stroke="hsl(33,70%,50%)" stroke-width="0.5"/>
-<polygon points="605.5,256 605.5,171.4 606.8,171.4 606.8,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="606.8,256 606.8,171.4 607.8,171.1 607.8,256" fill="hsl(29,70%,49%)" stroke="hsl(29,70%,49%)" stroke-width="0.5"/>
-<polygon points="607.8,256 607.8,171.1 609.2,170.2 609.2,256" fill="hsl(17,70%,46%)" stroke="hsl(17,70%,46%)" stroke-width="0.5"/>
-<polygon points="609.2,256 609.2,170.2 610.0,170.0 610.0,256" fill="hsl(32,70%,49%)" stroke="hsl(32,70%,49%)" stroke-width="0.5"/>
-<polygon points="610.0,256 610.0,170.0 629.2,170.0 629.2,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="629.2,256 629.2,170.0 630.8,169.4 630.8,256" fill="hsl(25,70%,48%)" stroke="hsl(25,70%,48%)" stroke-width="0.5"/>
-<polygon points="630.8,256 630.8,169.4 642.8,169.4 642.8,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="642.8,256 642.8,169.4 648.5,169.3 648.5,256" fill="hsl(83,70%,61%)" stroke="hsl(83,70%,61%)" stroke-width="0.5"/>
-<polygon points="648.5,256 648.5,169.3 652.7,169.2 652.7,256" fill="hsl(71,70%,58%)" stroke="hsl(71,70%,58%)" stroke-width="0.5"/>
-<polygon points="652.7,256 652.7,169.2 653.0,169.2 653.0,256" fill="hsl(84,70%,61%)" stroke="hsl(84,70%,61%)" stroke-width="0.5"/>
-<polygon points="653.0,256 653.0,169.2 663.2,168.9 663.2,256" fill="hsl(74,70%,59%)" stroke="hsl(74,70%,59%)" stroke-width="0.5"/>
-<polygon points="663.2,256 663.2,168.9 669.0,168.6 669.0,256" fill="hsl(68,70%,58%)" stroke="hsl(68,70%,58%)" stroke-width="0.5"/>
-<polygon points="669.0,256 669.0,168.6 670.5,168.6 670.5,256" fill="hsl(77,70%,60%)" stroke="hsl(77,70%,60%)" stroke-width="0.5"/>
-<polygon points="670.5,256 670.5,168.6 670.7,168.6 670.7,256" fill="hsl(67,70%,57%)" stroke="hsl(67,70%,57%)" stroke-width="0.5"/>
-<polygon points="670.7,256 670.7,168.6 674.9,168.4 674.9,256" fill="hsl(73,70%,59%)" stroke="hsl(73,70%,59%)" stroke-width="0.5"/>
-<polygon points="674.9,256 674.9,168.4 677.9,168.4 677.9,256" fill="hsl(83,70%,61%)" stroke="hsl(83,70%,61%)" stroke-width="0.5"/>
-<polygon points="677.9,256 677.9,168.4 677.9,168.4 677.9,256" fill="hsl(68,70%,58%)" stroke="hsl(68,70%,58%)" stroke-width="0.5"/>
-<polygon points="677.9,256 677.9,168.4 678.7,168.4 678.7,256" fill="hsl(79,70%,60%)" stroke="hsl(79,70%,60%)" stroke-width="0.5"/>
-<polygon points="678.7,256 678.7,168.4 679.1,168.3 679.1,256" fill="hsl(65,70%,57%)" stroke="hsl(65,70%,57%)" stroke-width="0.5"/>
-<polygon points="679.1,256 679.1,168.3 679.5,168.3 679.5,256" fill="hsl(57,70%,55%)" stroke="hsl(57,70%,55%)" stroke-width="0.5"/>
-<polygon points="679.5,256 679.5,168.3 684.1,167.8 684.1,256" fill="hsl(51,70%,54%)" stroke="hsl(51,70%,54%)" stroke-width="0.5"/>
-<polygon points="684.1,256 684.1,167.8 684.7,167.8 684.7,256" fill="hsl(57,70%,55%)" stroke="hsl(57,70%,55%)" stroke-width="0.5"/>
-<polygon points="684.7,256 684.7,167.8 685.2,167.8 685.2,256" fill="hsl(66,70%,57%)" stroke="hsl(66,70%,57%)" stroke-width="0.5"/>
-<polygon points="685.2,256 685.2,167.8 686.9,167.7 686.9,256" fill="hsl(78,70%,60%)" stroke="hsl(78,70%,60%)" stroke-width="0.5"/>
-<polygon points="686.9,256 686.9,167.7 691.6,167.7 691.6,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="691.6,256 691.6,167.7 712.9,167.7 712.9,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="712.9,256 712.9,167.7 861.6,166.9 861.6,256" fill="hsl(103,70%,66%)" stroke="hsl(103,70%,66%)" stroke-width="0.5"/>
-<polygon points="861.6,256 861.6,166.9 873.6,166.9 873.6,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="873.6,256 873.6,166.9 1009.1,166.4 1009.1,256" fill="hsl(106,70%,67%)" stroke="hsl(106,70%,67%)" stroke-width="0.5"/>
-<polygon points="1009.1,256 1009.1,166.4 1021.1,166.4 1021.1,256" fill="#d9d4c7" stroke="#d9d4c7" stroke-width="0.5"/>
-<polygon points="1021.1,256 1021.1,166.4 1050.0,166.0 1050.0,256" fill="hsl(89,70%,63%)" stroke="hsl(89,70%,63%)" stroke-width="0.5"/>
-<polyline points="230.0,256.0 261.4,244.5 261.4,244.5 261.5,244.5 261.5,244.5 277.7,239.0 277.7,239.0 277.8,239.0 277.8,239.0 278.2,239.0 278.2,239.0 278.2,239.0 278.2,239.0 278.2,239.0 278.2,239.0 297.1,234.5 297.1,234.5 320.9,230.1 320.9,230.1 325.0,229.6 325.0,229.6 343.4,228.1 343.4,228.1 343.5,228.1 343.5,228.1 370.3,220.4 370.3,220.4 370.6,220.4 370.6,220.4 373.4,219.0 373.4,219.0 373.7,219.0 373.7,219.0 410.2,208.3 410.2,208.3 410.7,208.3 410.7,208.3 411.3,208.3 411.3,208.3 411.3,208.3 411.3,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.4,208.3 411.5,208.3 411.5,208.3 411.5,208.3 411.5,208.3 411.5,208.3 411.5,208.3 411.5,208.3 411.5,208.3 411.5,208.3 411.5,208.3 411.5,208.3 411.5,208.3 411.5,208.3 411.5,208.3 411.5,208.3 411.5,208.3 411.5,208.3 411.5,208.3 431.2,204.2 431.2,204.2 436.6,203.2 436.6,203.2 460.5,198.7 460.5,198.7 475.6,196.0 475.6,196.0 477.3,195.2 477.3,195.2 479.2,194.9 479.2,194.9 487.5,193.4 487.5,193.4 493.6,192.4 493.6,192.4 495.8,192.1 495.8,192.1 502.8,191.0 502.8,191.0 503.9,190.8 503.9,190.8 504.1,190.8 504.1,190.8 505.1,190.6 505.1,190.6 506.5,190.5 506.5,190.5 506.5,190.5 506.5,190.5 506.7,190.5 506.7,190.5 506.9,190.4 506.9,190.4 507.0,190.4 507.0,190.4 507.0,190.4 507.0,190.4 509.6,189.7 509.6,189.7 510.8,189.3 510.8,189.3 511.0,189.3 511.0,189.3 511.0,189.3 511.0,189.3 511.7,189.2 511.7,189.2 512.8,189.1 512.8,189.1 514.3,187.9 514.3,187.9 515.3,187.8 515.3,187.8 518.5,187.5 518.5,187.5 518.5,187.5 518.5,187.5 518.8,187.4 518.8,187.4 519.8,187.2 519.8,187.2 520.6,186.6 520.6,186.6 522.0,185.4 522.0,185.4 522.0,185.4 522.0,185.4 522.2,185.0 522.2,185.0 523.2,183.4 523.2,183.4 523.2,183.4 523.2,183.4 524.1,182.0 524.1,182.0 529.3,181.7 529.3,181.7 529.8,181.6 529.8,181.6 529.9,181.6 529.9,181.6 530.3,181.5 530.3,181.5 531.7,181.2 531.7,181.2 532.3,181.1 532.3,181.1 532.5,181.0 532.5,181.0 532.7,180.9 532.7,180.9 534.2,180.2 534.2,180.2 538.5,180.1 538.5,180.1 540.2,179.3 540.2,179.3 540.8,179.3 540.8,179.3 541.2,179.0 541.2,179.0 541.3,179.0 541.3,179.0 542.6,177.6 542.6,177.6 542.8,177.5 542.8,177.5 543.6,177.5 543.6,177.5 551.7,177.3 551.7,177.3 552.9,177.3 552.9,177.3 566.1,177.2 566.1,177.2 568.8,177.2 568.8,177.2 570.9,174.4 570.9,174.4 571.3,173.6 571.3,173.6 572.4,173.2 572.4,173.2 573.4,173.2 573.4,173.2 574.5,172.7 574.5,172.7 586.5,172.7 586.5,172.7 591.5,172.1 591.5,172.1 603.0,172.1 603.0,172.1 605.5,171.4 605.5,171.4 606.8,171.4 606.8,171.4 607.8,171.1 607.8,171.1 609.2,170.2 609.2,170.2 610.0,170.0 610.0,170.0 629.2,170.0 629.2,170.0 630.8,169.4 630.8,169.4 642.8,169.4 642.8,169.4 648.5,169.3 648.5,169.3 652.7,169.2 652.7,169.2 653.0,169.2 653.0,169.2 663.2,168.9 663.2,168.9 669.0,168.6 669.0,168.6 670.5,168.6 670.5,168.6 670.7,168.6 670.7,168.6 674.9,168.4 674.9,168.4 677.9,168.4 677.9,168.4 677.9,168.4 677.9,168.4 678.7,168.4 678.7,168.4 679.1,168.3 679.1,168.3 679.5,168.3 679.5,168.3 684.1,167.8 684.1,167.8 684.7,167.8 684.7,167.8 685.2,167.8 685.2,167.8 686.9,167.7 686.9,167.7 691.6,167.7 691.6,167.7 712.9,167.7 712.9,167.7 861.6,166.9 861.6,166.9 873.6,166.9 873.6,166.9 1009.1,166.4 1009.1,166.4 1021.1,166.4 1021.1,166.4 1050.0,166.0" fill="none" stroke="#0005" stroke-width="1"/>
-<text x="16" y="176" fill="#333">spend so far</text>
-<text x="16" y="191" fill="#777">(slope = $/min)</text>
-<line x1="230" y1="256" x2="1050" y2="256" stroke="#0003" stroke-dasharray=""/><text x="222" y="260" text-anchor="end" fill="#777">0%</text>
-<line x1="230" y1="211" x2="1050" y2="211" stroke="#0003" stroke-dasharray="3 3"/><text x="222" y="215" text-anchor="end" fill="#777">50% · $2.48</text>
-<line x1="230" y1="166" x2="1050" y2="166" stroke="#0003" stroke-dasharray="3 3"/><text x="222" y="170" text-anchor="end" fill="#777">100% · $4.97</text>
-<line x1="400.9" y1="211" x2="400.9" y2="256" stroke="#333" stroke-dasharray="2 3"/>
-<text x="406.9" y="250" fill="#333" font-weight="bold">half the spend in 17m of active time (of 1h 10m)</text>
-<line x1="254.9" y1="278" x2="254.9" y2="609" stroke="#e3e0d8"/>
-<text x="254.9" y="625" text-anchor="middle" fill="#777">5:50 PM</text>
-<line x1="356.1" y1="278" x2="356.1" y2="609" stroke="#e3e0d8"/>
-<text x="356.1" y="625" text-anchor="middle" fill="#777">6:00 PM</text>
-<line x1="457.3" y1="278" x2="457.3" y2="609" stroke="#e3e0d8"/>
-<text x="457.3" y="625" text-anchor="middle" fill="#777">6:10 PM</text>
-<line x1="558.4" y1="278" x2="558.4" y2="609" stroke="#e3e0d8"/>
-<text x="558.4" y="625" text-anchor="middle" fill="#777">6:20 PM</text>
-<path d="M690.9,613 l4,-8 M704.9,613 l4,-8" stroke="#8a7f6a" stroke-width="1.5"/>
-<line x1="793.3" y1="278" x2="793.3" y2="609" stroke="#e3e0d8"/>
-<text x="793.3" y="625" text-anchor="middle" fill="#777">8:40 PM</text>
-<line x1="923.5" y1="278" x2="923.5" y2="609" stroke="#e3e0d8"/>
-<text x="923.5" y="625" text-anchor="middle" fill="#777">9:00 PM</text>
-<text x="699.9" y="639" text-anchor="middle" fill="#8a7f6a" font-size="11">+1h 55m</text>
-<text x="867.6" y="639" text-anchor="middle" fill="#8a7f6a" font-size="11">+8m</text>
-<text x="222" y="302" text-anchor="end" fill="#222">architect (form)</text>
-<rect x="230.0" y="295.6" width="31.4" height="4.7" rx="2" fill="hsl(26,70%,48%)" stroke="#0002" stroke-width="0.5"><title>architect (form): opus@medium $0.64 · 3.1m</title></rect>
-<text x="267.4" y="302" fill="#555">opus@medium $0.64 · 3.1m · 17K out</text>
-<text x="222" y="328" text-anchor="end" fill="#222">designer (plan) ×4</text>
-<rect x="261.5" y="321.9" width="16.2" height="4.3" rx="2" fill="hsl(28,70%,48%)" stroke="#0002" stroke-width="0.5"><title>designer (plan): sonnet@medium $0.30 · 1.6m</title></rect>
-<rect x="343.5" y="322.1" width="26.8" height="3.7" rx="2" fill="hsl(31,70%,49%)" stroke="#0002" stroke-width="0.5"><title>designer (plan): sonnet@medium $0.43 · 2.6m</title></rect>
-<rect x="370.6" y="320.7" width="2.8" height="6.5" rx="2" fill="hsl(20,70%,47%)" stroke="#0002" stroke-width="0.5"><title>designer (plan): sonnet@medium $0.08 · 0.3m</title></rect>
-<rect x="373.7" y="322.1" width="36.6" height="3.7" rx="2" fill="hsl(31,70%,49%)" stroke="#0002" stroke-width="0.5"><title>designer (plan): sonnet@medium $0.59 · 3.6m</title></rect>
-<text x="416.2" y="328" fill="#555">$1.40 · 15m wall</text>
-<text x="222" y="356" text-anchor="end" fill="#222">kit (vocab / scaffold) ×4</text>
-<rect x="277.8" y="342.0" width="19.3" height="4.0" rx="1" fill="hsl(64,70%,57%)" stroke="#0002" stroke-width="0.5"><title>kit (vocab / scaffold): haiku@medium $0.06 · 1.9m</title></rect>
-<rect x="278.2" y="347.0" width="65.2" height="4.0" rx="1" fill="hsl(56,70%,55%)" stroke="#0002" stroke-width="0.5"><title>kit (vocab / scaffold): haiku@medium $0.28 · 6.4m</title></rect>
-<rect x="278.2" y="352.0" width="46.8" height="4.0" rx="1" fill="hsl(62,70%,56%)" stroke="#0002" stroke-width="0.5"><title>kit (vocab / scaffold): haiku@medium $0.15 · 4.6m</title></rect>
-<rect x="278.2" y="357.0" width="42.7" height="4.0" rx="1" fill="hsl(64,70%,57%)" stroke="#0002" stroke-width="0.5"><title>kit (vocab / scaffold): haiku@medium $0.12 · 4.2m</title></rect>
-<text x="349.4" y="356" fill="#555">$0.60 · 6m wall · peak 4</text>
-<text x="222" y="436" text-anchor="end" fill="#222">crew: parts and rooms ×27</text>
-<rect x="410.7" y="372.0" width="95.9" height="4.0" rx="1" fill="hsl(98,70%,65%)" stroke="#0002" stroke-width="0.5"><title>Roofs and crowns: haiku@high $0.04 · 9.5m</title></rect>
-<rect x="411.3" y="377.0" width="95.6" height="4.0" rx="1" fill="hsl(104,70%,66%)" stroke="#0002" stroke-width="0.5"><title>KOMO E atrium lobby: haiku@high $0.03 · 9.4m</title></rect>
-<rect x="411.3" y="382.0" width="141.5" height="4.0" rx="1" fill="hsl(109,70%,67%)" stroke="#0002" stroke-width="0.5"><title>Aperture apartments north: haiku@high $0.03 · 14.0m</title></rect>
-<rect x="411.4" y="387.0" width="67.9" height="4.0" rx="1" fill="hsl(98,70%,65%)" stroke="#0002" stroke-width="0.5"><title>KOMO W podium studio: haiku@high $0.03 · 6.7m</title></rect>
-<rect x="411.4" y="392.0" width="100.3" height="4.0" rx="1" fill="hsl(108,70%,67%)" stroke="#0002" stroke-width="0.5"><title>KOMO W office floor: haiku@high $0.02 · 9.9m</title></rect>
-<rect x="411.4" y="397.0" width="91.4" height="4.0" rx="1" fill="hsl(103,70%,66%)" stroke="#0002" stroke-width="0.5"><title>Aperture bike room: haiku@high $0.03 · 9.0m</title></rect>
-<rect x="411.4" y="402.0" width="95.1" height="4.0" rx="1" fill="hsl(106,70%,67%)" stroke="#0002" stroke-width="0.5"><title>KOMO E drum restaurant: haiku@high $0.02 · 9.4m</title></rect>
-<rect x="411.4" y="407.0" width="84.4" height="4.0" rx="1" fill="hsl(89,70%,62%)" stroke="#0002" stroke-width="0.5"><title>Aperture residents lobby: haiku@high $0.06 · 8.3m</title></rect>
-<rect x="411.4" y="412.0" width="98.2" height="4.0" rx="1" fill="hsl(106,70%,66%)" stroke="#0002" stroke-width="0.5"><title>Grounds and lighting: haiku@high $0.02 · 9.7m</title></rect>
-<rect x="411.4" y="417.0" width="95.6" height="4.0" rx="1" fill="hsl(97,70%,64%)" stroke="#0002" stroke-width="0.5"><title>Aperture shops: haiku@high $0.04 · 9.4m</title></rect>
-<rect x="411.4" y="422.0" width="110.6" height="4.0" rx="1" fill="hsl(79,70%,60%)" stroke="#0002" stroke-width="0.5"><title>KOMO E south wing offices: haiku@high $0.14 · 10.9m</title></rect>
-<rect x="411.4" y="427.0" width="95.3" height="4.0" rx="1" fill="hsl(97,70%,64%)" stroke="#0002" stroke-width="0.5"><title>Facade fittings: haiku@high $0.04 · 9.4m</title></rect>
-<rect x="411.4" y="432.0" width="118.5" height="4.0" rx="1" fill="hsl(106,70%,66%)" stroke="#0002" stroke-width="0.5"><title>Hyatt rooftop plant room: haiku@high $0.03 · 11.7m</title></rect>
-<rect x="411.4" y="437.0" width="76.1" height="4.0" rx="1" fill="hsl(98,70%,65%)" stroke="#0002" stroke-width="0.5"><title>KOMO E broadcast studio: haiku@high $0.03 · 7.5m</title></rect>
-<rect x="411.4" y="442.0" width="19.7" height="4.0" rx="1" fill="hsl(81,70%,61%)" stroke="#0002" stroke-width="0.5"><title>Satellite dishes: haiku@high $0.02 · 2.0m</title></rect>
-<rect x="411.5" y="447.0" width="120.8" height="4.0" rx="1" fill="hsl(111,70%,68%)" stroke="#0002" stroke-width="0.5"><title>Hyatt annex meeting rooms: haiku@high $0.02 · 11.9m</title></rect>
-<rect x="411.5" y="452.0" width="92.6" height="4.0" rx="1" fill="hsl(78,70%,60%)" stroke="#0002" stroke-width="0.5"><title>KOMO E drum meeting room: haiku@high $0.13 · 9.1m</title></rect>
-<rect x="411.5" y="457.0" width="92.4" height="4.0" rx="1" fill="hsl(104,70%,66%)" stroke="#0002" stroke-width="0.5"><title>Hyatt guest floor corridor: haiku@high $0.02 · 9.1m</title></rect>
-<rect x="411.5" y="462.0" width="107.0" height="4.0" rx="1" fill="hsl(84,70%,61%)" stroke="#0002" stroke-width="0.5"><title>KOMO E east offices: haiku@high $0.10 · 10.6m</title></rect>
-<rect x="411.5" y="467.0" width="49.0" height="4.0" rx="1" fill="hsl(94,70%,64%)" stroke="#0002" stroke-width="0.5"><title>Hyatt wedge breakfast hall: haiku@high $0.03 · 4.8m</title></rect>
-<rect x="411.5" y="472.0" width="120.2" height="4.0" rx="1" fill="hsl(107,70%,67%)" stroke="#0002" stroke-width="0.5"><title>Hyatt lobby and breakfast room: haiku@high $0.03 · 11.9m</title></rect>
-<rect x="411.5" y="477.0" width="154.6" height="4.0" rx="1" fill="hsl(105,70%,66%)" stroke="#0002" stroke-width="0.5"><title>KOMO E newsroom: haiku@high $0.04 · 15.3m</title></rect>
-<rect x="411.5" y="482.0" width="99.4" height="4.0" rx="1" fill="hsl(109,70%,67%)" stroke="#0002" stroke-width="0.5"><title>Aperture apartments south: haiku@high $0.02 · 9.8m</title></rect>
-<rect x="411.5" y="487.0" width="93.6" height="4.0" rx="1" fill="hsl(100,70%,65%)" stroke="#0002" stroke-width="0.5"><title>KOMO shells: haiku@high $0.03 · 9.2m</title></rect>
-<rect x="515.3" y="372.0" width="14.0" height="4.0" rx="1" fill="hsl(84,70%,61%)" stroke="#0002" stroke-width="0.5"><title>Aperture apartments south: haiku@high $0.01 · 1.4m</title></rect>
-<rect x="519.8" y="377.0" width="2.4" height="4.0" rx="1" fill="hsl(19,70%,46%)" stroke="#0002" stroke-width="0.5"><title>Grounds and lighting: haiku@high $0.07 · 0.2m</title></rect>
-<rect x="543.6" y="372.0" width="8.1" height="4.0" rx="1" fill="hsl(81,70%,61%)" stroke="#0002" stroke-width="0.5"><title>Hyatt guest floor corridor: haiku@high $0.01 · 0.8m</title></rect>
-<text x="572.1" y="436" fill="#555">$1.10 · 15m wall · peak 24</text>
-<text x="222" y="518.5" text-anchor="end" fill="#222">inspector ×23</text>
-<rect x="436.6" y="502.0" width="86.6" height="4.0" rx="1" fill="hsl(103,70%,66%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.03 · 8.6m</title></rect>
-<rect x="475.6" y="507.0" width="2.0" height="4.0" rx="1" fill="hsl(30,70%,49%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.03 · 0.2m</title></rect>
-<rect x="493.6" y="507.0" width="25.1" height="4.0" rx="1" fill="hsl(102,70%,66%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.01 · 2.5m</title></rect>
-<rect x="507.0" y="512.0" width="3.9" height="4.0" rx="1" fill="hsl(37,70%,50%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.05 · 0.4m</title></rect>
-<rect x="510.8" y="517.0" width="19.4" height="4.0" rx="1" fill="hsl(88,70%,62%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.01 · 1.9m</title></rect>
-<rect x="512.8" y="512.0" width="2.0" height="4.0" rx="1" fill="hsl(12,70%,45%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.06 · 0.1m</title></rect>
-<rect x="518.5" y="512.0" width="4.7" height="4.0" rx="1" fill="hsl(44,70%,52%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.04 · 0.5m</title></rect>
-<rect x="520.6" y="507.0" width="20.7" height="4.0" rx="1" fill="hsl(79,70%,60%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.03 · 2.0m</title></rect>
-<rect x="522.0" y="522.0" width="2.1" height="4.0" rx="1" fill="hsl(0,70%,42%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.16 · 0.2m</title></rect>
-<rect x="529.8" y="502.0" width="2.9" height="4.0" rx="1" fill="hsl(40,70%,51%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.03 · 0.3m</title></rect>
-<rect x="532.5" y="512.0" width="2.0" height="4.0" rx="1" fill="hsl(22,70%,47%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.04 · 0.2m</title></rect>
-<rect x="538.5" y="502.0" width="2.0" height="4.0" rx="1" fill="hsl(24,70%,47%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.04 · 0.2m</title></rect>
-<rect x="540.8" y="502.0" width="2.0" height="4.0" rx="1" fill="hsl(18,70%,46%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.06 · 0.2m</title></rect>
-<rect x="541.3" y="507.0" width="2.0" height="4.0" rx="1" fill="hsl(22,70%,47%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.03 · 0.1m</title></rect>
-<rect x="568.8" y="502.0" width="2.6" height="4.0" rx="1" fill="hsl(1,70%,42%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.19 · 0.3m</title></rect>
-<rect x="570.9" y="507.0" width="2.0" height="4.0" rx="1" fill="hsl(29,70%,49%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.03 · 0.2m</title></rect>
-<rect x="573.4" y="502.0" width="2.0" height="4.0" rx="1" fill="hsl(21,70%,47%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.03 · 0.1m</title></rect>
-<rect x="586.5" y="502.0" width="5.0" height="4.0" rx="1" fill="hsl(46,70%,53%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.04 · 0.5m</title></rect>
-<rect x="603.0" y="502.0" width="2.5" height="4.0" rx="1" fill="hsl(33,70%,50%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.04 · 0.3m</title></rect>
-<rect x="606.8" y="502.0" width="2.4" height="4.0" rx="1" fill="hsl(29,70%,49%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.04 · 0.2m</title></rect>
-<rect x="607.8" y="507.0" width="2.2" height="4.0" rx="1" fill="hsl(32,70%,49%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.03 · 0.2m</title></rect>
-<rect x="629.2" y="502.0" width="2.0" height="4.0" rx="1" fill="hsl(25,70%,48%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.03 · 0.2m</title></rect>
-<rect x="691.6" y="502.0" width="2.0" height="4.0" rx="1" fill="hsl(130,70%,72%)" stroke="#0002" stroke-width="0.5"><title>inspector: haiku@high $0.00 · 0.0m</title></rect>
-<text x="697.6" y="518.5" fill="#555">$1.05 · 50m wall · peak 5</text>
-<text x="222" y="551" text-anchor="end" fill="#222">fixes ×9</text>
-<rect x="642.8" y="537.0" width="9.9" height="4.0" rx="1" fill="hsl(83,70%,61%)" stroke="#0002" stroke-width="0.5"><title>fix: KOMO shells: haiku@high $0.01 · 1.0m</title></rect>
-<rect x="648.5" y="542.0" width="20.5" height="4.0" rx="1" fill="hsl(84,70%,61%)" stroke="#0002" stroke-width="0.5"><title>fix: Satellite dishes: haiku@high $0.02 · 2.0m</title></rect>
-<rect x="653.0" y="537.0" width="17.7" height="4.0" rx="1" fill="hsl(90,70%,63%)" stroke="#0002" stroke-width="0.5"><title>fix: Grounds and lighting: haiku@high $0.01 · 1.7m</title></rect>
-<rect x="663.2" y="547.0" width="11.7" height="4.0" rx="1" fill="hsl(89,70%,63%)" stroke="#0002" stroke-width="0.5"><title>fix: KOMO E east offices: haiku@high $0.01 · 1.2m</title></rect>
-<rect x="670.5" y="542.0" width="7.4" height="4.0" rx="1" fill="hsl(83,70%,61%)" stroke="#0002" stroke-width="0.5"><title>fix: KOMO E south wing offices: haiku@high $0.01 · 0.7m</title></rect>
-<rect x="677.9" y="537.0" width="7.3" height="4.0" rx="1" fill="hsl(79,70%,60%)" stroke="#0002" stroke-width="0.5"><title>fix: Aperture shops: haiku@high $0.01 · 0.7m</title></rect>
-<rect x="678.7" y="542.0" width="6.0" height="4.0" rx="1" fill="hsl(76,70%,60%)" stroke="#0002" stroke-width="0.5"><title>fix: Aperture bike room: haiku@high $0.01 · 0.6m</title></rect>
-<rect x="679.1" y="547.0" width="7.8" height="4.0" rx="1" fill="hsl(78,70%,60%)" stroke="#0002" stroke-width="0.5"><title>fix: Aperture apartments north: haiku@high $0.01 · 0.8m</title></rect>
-<rect x="679.5" y="552.0" width="4.7" height="4.0" rx="1" fill="hsl(75,70%,59%)" stroke="#0002" stroke-width="0.5"><title>fix: Aperture apartments south: haiku@high $0.01 · 0.5m</title></rect>
-<text x="692.9" y="551" fill="#555">$0.09 · 4m wall · peak 4</text>
-<text x="222" y="579" text-anchor="end" fill="#222">lamplighters ×3</text>
-<rect x="712.9" y="573.5" width="148.7" height="3.0" rx="2" fill="hsl(103,70%,66%)" stroke="#0002" stroke-width="0.5"><title>lamps: Hyatt lobby and breakfast room: haiku@high $0.04 · 14.7m</title></rect>
-<rect x="873.6" y="573.5" width="135.5" height="3.0" rx="2" fill="hsl(106,70%,67%)" stroke="#0002" stroke-width="0.5"><title>lamps: Hyatt guest floor corridor: haiku@high $0.03 · 13.4m</title></rect>
-<rect x="1021.1" y="573.5" width="28.9" height="3.0" rx="2" fill="hsl(89,70%,63%)" stroke="#0002" stroke-width="0.5"><title>lamps: Hyatt rooftop plant room: haiku@high $0.02 · 2.9m</title></rect>
-<text x="1056.0" y="579" fill="#555">$0.10 · 42m wall</text>
+<rect x="563.0" y="86" width="12.0" height="473" fill="#efe9dc"/>
+<rect x="621.7" y="86" width="12.0" height="473" fill="#efe9dc"/>
+<rect x="680.1" y="86" width="26.0" height="473" fill="#efe9dc"/>
+<rect x="862.8" y="86" width="12.0" height="473" fill="#efe9dc"/>
+<rect x="1017.5" y="86" width="12.0" height="473" fill="#efe9dc"/>
+<text x="16" y="26" font-size="16" font-weight="bold">seattle-towers-kit</text>
+<text x="16" y="48" fill="#333">3h 26m end to end · 1h 10m with agents running · 5.3 agent-hours · 58.5M tokens in · 1.1M out · $4.97</text>
+<rect x="16" y="58" width="10" height="10" rx="2" fill="#d9b45a"/><text x="30" y="67" fill="#333">haiku $2.93</text>
+<rect x="118.6" y="58" width="10" height="10" rx="2" fill="#6f86c6"/><text x="132.6" y="67" fill="#333">sonnet $1.40</text>
+<rect x="227.79999999999998" y="58" width="10" height="10" rx="2" fill="#3b3355"/><text x="241.79999999999998" y="67" fill="#333">opus $0.64</text>
+<text x="16" y="115" fill="#333">agents</text><text x="192" y="90" text-anchor="end" fill="#555">24</text>
+<polygon points="200,136 200.0,136.0 200.0,133.9 233.1,133.9 233.1,136.0 233.2,136.0 233.2,133.9 250.3,133.9 250.3,136.0 250.4,136.0 250.4,133.9 250.8,133.9 250.8,131.8 250.8,131.8 250.8,129.8 250.8,129.8 250.8,127.7 270.7,127.7 270.7,129.8 295.8,129.8 295.8,131.8 300.1,131.8 300.1,133.9 319.4,133.9 319.4,136.0 319.6,136.0 319.6,133.9 347.8,133.9 347.8,136.0 348.1,136.0 348.1,133.9 351.1,133.9 351.1,136.0 351.4,136.0 351.4,133.9 389.9,133.9 389.9,136.0 390.4,136.0 390.4,133.9 391.1,133.9 391.1,131.8 391.1,131.8 391.1,129.8 391.1,129.8 391.1,127.7 391.1,127.7 391.1,125.6 391.1,125.6 391.1,123.5 391.1,123.5 391.1,121.4 391.1,121.4 391.1,119.3 391.1,119.3 391.1,117.3 391.2,117.3 391.2,115.2 391.2,115.2 391.2,113.1 391.2,113.1 391.2,111.0 391.2,111.0 391.2,108.9 391.2,108.9 391.2,106.8 391.2,106.8 391.2,104.8 391.2,104.8 391.2,102.7 391.2,102.7 391.2,100.6 391.2,100.6 391.2,98.5 391.2,98.5 391.2,96.4 391.2,96.4 391.2,94.3 391.2,94.3 391.2,92.3 391.2,92.3 391.2,90.2 391.2,90.2 391.2,88.1 391.2,88.1 391.2,86.0 412.0,86.0 412.0,88.1 417.7,88.1 417.7,86.0 442.8,86.0 442.8,88.1 458.8,88.1 458.8,86.0 460.6,86.0 460.6,88.1 462.6,88.1 462.6,90.2 471.3,90.2 471.3,92.3 477.8,92.3 477.8,90.2 480.1,90.2 480.1,92.3 487.4,92.3 487.4,94.3 488.6,94.3 488.6,96.4 488.7,96.4 488.7,98.5 489.8,98.5 489.8,100.6 491.3,100.6 491.3,102.7 491.4,102.7 491.4,104.8 491.6,104.8 491.6,106.8 491.8,106.8 491.8,108.9 491.9,108.9 491.9,111.0 491.9,111.0 491.9,108.9 494.6,108.9 494.6,111.0 495.9,111.0 495.9,108.9 496.0,108.9 496.0,111.0 496.1,111.0 496.1,113.1 496.8,113.1 496.8,115.2 498.0,115.2 498.0,113.1 499.5,113.1 499.5,115.2 500.6,115.2 500.6,113.1 504.0,113.1 504.0,115.2 504.0,115.2 504.0,113.1 504.3,113.1 504.3,115.2 505.4,115.2 505.4,113.1 506.1,113.1 506.1,111.0 507.7,111.0 507.7,113.1 507.7,113.1 507.7,111.0 507.9,111.0 507.9,113.1 509.0,113.1 509.0,115.2 509.0,115.2 509.0,117.3 509.9,117.3 509.9,119.3 515.3,119.3 515.3,121.4 515.8,121.4 515.8,119.3 516.0,119.3 516.0,121.4 516.4,121.4 516.4,123.5 517.9,123.5 517.9,125.6 518.5,125.6 518.5,127.7 518.8,127.7 518.8,125.6 518.9,125.6 518.9,127.7 520.5,127.7 520.5,129.8 525.0,129.8 525.0,127.7 526.8,127.7 526.8,129.8 527.4,129.8 527.4,127.7 527.9,127.7 527.9,129.8 528.0,129.8 528.0,127.7 529.4,127.7 529.4,129.8 529.6,129.8 529.6,131.8 530.4,131.8 530.4,129.8 539.0,129.8 539.0,131.8 540.2,131.8 540.2,133.9 554.2,133.9 554.2,136.0 556.9,136.0 556.9,133.9 559.1,133.9 559.1,131.8 559.6,131.8 559.6,133.9 560.8,133.9 560.8,136.0 561.8,136.0 561.8,133.9 563.0,133.9 563.0,136.0 575.0,136.0 575.0,133.9 580.2,133.9 580.2,136.0 592.3,136.0 592.3,133.9 595.0,133.9 595.0,136.0 596.4,136.0 596.4,133.9 597.4,133.9 597.4,131.8 598.9,131.8 598.9,133.9 599.7,133.9 599.7,136.0 620.0,136.0 620.0,133.9 621.7,133.9 621.7,136.0 633.7,136.0 633.7,133.9 639.6,133.9 639.6,131.8 644.1,131.8 644.1,133.9 644.4,133.9 644.4,131.8 655.1,131.8 655.1,129.8 661.2,129.8 661.2,131.8 662.8,131.8 662.8,129.8 663.0,129.8 663.0,131.8 667.4,131.8 667.4,133.9 670.6,133.9 670.6,131.8 670.6,131.8 670.6,133.9 671.4,133.9 671.4,131.8 671.9,131.8 671.9,129.8 672.3,129.8 672.3,127.7 677.2,127.7 677.2,129.8 677.8,129.8 677.8,131.8 678.3,131.8 678.3,133.9 680.1,133.9 680.1,136.0 684.8,136.0 684.8,138.1 684.8,138.1 684.8,136.0 706.1,136.0 706.1,133.9 862.8,133.9 862.8,136.0 874.8,136.0 874.8,133.9 1017.5,133.9 1017.5,136.0 1029.5,136.0 1029.5,133.9 1060.0,133.9 1060.0,136.0 1060,136" fill="#c9d3e6" stroke="#5b6f99" stroke-width="1"/>
+<polygon points="200.0,216 200.0,216.0 233.1,208.3 233.1,216" fill="hsl(26,70%,48%)" stroke="hsl(26,70%,48%)" stroke-width="0.5"/>
+<polygon points="233.1,216 233.1,208.3 233.2,208.3 233.2,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="233.2,216 233.2,208.3 250.3,204.7 250.3,216" fill="hsl(28,70%,48%)" stroke="hsl(28,70%,48%)" stroke-width="0.5"/>
+<polygon points="250.3,216 250.3,204.7 250.4,204.7 250.4,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="250.4,216 250.4,204.7 250.8,204.7 250.8,216" fill="hsl(64,70%,57%)" stroke="hsl(64,70%,57%)" stroke-width="0.5"/>
+<polygon points="250.8,216 250.8,204.7 250.8,204.7 250.8,216" fill="hsl(46,70%,53%)" stroke="hsl(46,70%,53%)" stroke-width="0.5"/>
+<polygon points="250.8,216 250.8,204.7 250.8,204.7 250.8,216" fill="hsl(39,70%,51%)" stroke="hsl(39,70%,51%)" stroke-width="0.5"/>
+<polygon points="250.8,216 250.8,204.7 270.7,201.7 270.7,216" fill="hsl(35,70%,50%)" stroke="hsl(35,70%,50%)" stroke-width="0.5"/>
+<polygon points="270.7,216 270.7,201.7 295.8,198.8 295.8,216" fill="hsl(39,70%,51%)" stroke="hsl(39,70%,51%)" stroke-width="0.5"/>
+<polygon points="295.8,216 295.8,198.8 300.1,198.4 300.1,216" fill="hsl(45,70%,52%)" stroke="hsl(45,70%,52%)" stroke-width="0.5"/>
+<polygon points="300.1,216 300.1,198.4 319.4,197.4 319.4,216" fill="hsl(56,70%,55%)" stroke="hsl(56,70%,55%)" stroke-width="0.5"/>
+<polygon points="319.4,216 319.4,197.4 319.6,197.4 319.6,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="319.6,216 319.6,197.4 347.8,192.3 347.8,216" fill="hsl(31,70%,49%)" stroke="hsl(31,70%,49%)" stroke-width="0.5"/>
+<polygon points="347.8,216 347.8,192.3 348.1,192.3 348.1,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="348.1,216 348.1,192.3 351.1,191.3 351.1,216" fill="hsl(20,70%,47%)" stroke="hsl(20,70%,47%)" stroke-width="0.5"/>
+<polygon points="351.1,216 351.1,191.3 351.4,191.3 351.4,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="351.4,216 351.4,191.3 389.9,184.2 389.9,216" fill="hsl(31,70%,49%)" stroke="hsl(31,70%,49%)" stroke-width="0.5"/>
+<polygon points="389.9,216 389.9,184.2 390.4,184.2 390.4,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="390.4,216 390.4,184.2 391.1,184.2 391.1,216" fill="hsl(98,70%,65%)" stroke="hsl(98,70%,65%)" stroke-width="0.5"/>
+<polygon points="391.1,216 391.1,184.2 391.1,184.2 391.1,216" fill="hsl(89,70%,63%)" stroke="hsl(89,70%,63%)" stroke-width="0.5"/>
+<polygon points="391.1,216 391.1,184.2 391.1,184.2 391.1,216" fill="hsl(85,70%,62%)" stroke="hsl(85,70%,62%)" stroke-width="0.5"/>
+<polygon points="391.1,216 391.1,184.2 391.1,184.2 391.1,216" fill="hsl(78,70%,60%)" stroke="hsl(78,70%,60%)" stroke-width="0.5"/>
+<polygon points="391.1,216 391.1,184.2 391.1,184.2 391.1,216" fill="hsl(75,70%,59%)" stroke="hsl(75,70%,59%)" stroke-width="0.5"/>
+<polygon points="391.1,216 391.1,184.2 391.1,184.2 391.1,216" fill="hsl(72,70%,59%)" stroke="hsl(72,70%,59%)" stroke-width="0.5"/>
+<polygon points="391.1,216 391.1,184.2 391.1,184.2 391.1,216" fill="hsl(70,70%,58%)" stroke="hsl(70,70%,58%)" stroke-width="0.5"/>
+<polygon points="391.1,216 391.1,184.2 391.1,184.2 391.1,216" fill="hsl(64,70%,57%)" stroke="hsl(64,70%,57%)" stroke-width="0.5"/>
+<polygon points="391.1,216 391.1,184.2 391.2,184.2 391.2,216" fill="hsl(63,70%,56%)" stroke="hsl(63,70%,56%)" stroke-width="0.5"/>
+<polygon points="391.2,216 391.2,184.2 391.2,184.2 391.2,216" fill="hsl(60,70%,56%)" stroke="hsl(60,70%,56%)" stroke-width="0.5"/>
+<polygon points="391.2,216 391.2,184.2 391.2,184.2 391.2,216" fill="hsl(54,70%,55%)" stroke="hsl(54,70%,55%)" stroke-width="0.5"/>
+<polygon points="391.2,216 391.2,184.2 391.2,184.2 391.2,216" fill="hsl(53,70%,54%)" stroke="hsl(53,70%,54%)" stroke-width="0.5"/>
+<polygon points="391.2,216 391.2,184.2 391.2,184.2 391.2,216" fill="hsl(52,70%,54%)" stroke="hsl(52,70%,54%)" stroke-width="0.5"/>
+<polygon points="391.2,216 391.2,184.2 391.2,184.2 391.2,216" fill="hsl(50,70%,54%)" stroke="hsl(50,70%,54%)" stroke-width="0.5"/>
+<polygon points="391.2,216 391.2,184.2 391.2,184.2 391.2,216" fill="hsl(47,70%,53%)" stroke="hsl(47,70%,53%)" stroke-width="0.5"/>
+<polygon points="391.2,216 391.2,184.2 391.2,184.2 391.2,216" fill="hsl(46,70%,53%)" stroke="hsl(46,70%,53%)" stroke-width="0.5"/>
+<polygon points="391.2,216 391.2,184.2 391.2,184.2 391.2,216" fill="hsl(43,70%,52%)" stroke="hsl(43,70%,52%)" stroke-width="0.5"/>
+<polygon points="391.2,216 391.2,184.2 391.2,184.2 391.2,216" fill="hsl(42,70%,52%)" stroke="hsl(42,70%,52%)" stroke-width="0.5"/>
+<polygon points="391.2,216 391.2,184.2 391.2,184.2 391.2,216" fill="hsl(40,70%,51%)" stroke="hsl(40,70%,51%)" stroke-width="0.5"/>
+<polygon points="391.2,216 391.2,184.2 391.2,184.2 391.2,216" fill="hsl(39,70%,51%)" stroke="hsl(39,70%,51%)" stroke-width="0.5"/>
+<polygon points="391.2,216 391.2,184.2 391.2,184.2 391.2,216" fill="hsl(39,70%,51%)" stroke="hsl(39,70%,51%)" stroke-width="0.5"/>
+<polygon points="391.2,216 391.2,184.2 391.2,184.2 391.2,216" fill="hsl(38,70%,51%)" stroke="hsl(38,70%,51%)" stroke-width="0.5"/>
+<polygon points="391.2,216 391.2,184.2 391.2,184.2 391.2,216" fill="hsl(38,70%,51%)" stroke="hsl(38,70%,51%)" stroke-width="0.5"/>
+<polygon points="391.2,216 391.2,184.2 412.0,181.5 412.0,216" fill="hsl(37,70%,51%)" stroke="hsl(37,70%,51%)" stroke-width="0.5"/>
+<polygon points="412.0,216 412.0,181.5 417.7,180.8 417.7,216" fill="hsl(40,70%,51%)" stroke="hsl(40,70%,51%)" stroke-width="0.5"/>
+<polygon points="417.7,216 417.7,180.8 442.8,177.8 442.8,216" fill="hsl(39,70%,51%)" stroke="hsl(39,70%,51%)" stroke-width="0.5"/>
+<polygon points="442.8,216 442.8,177.8 458.8,176.0 458.8,216" fill="hsl(40,70%,51%)" stroke="hsl(40,70%,51%)" stroke-width="0.5"/>
+<polygon points="458.8,216 458.8,176.0 460.6,175.5 460.6,216" fill="hsl(21,70%,47%)" stroke="hsl(21,70%,47%)" stroke-width="0.5"/>
+<polygon points="460.6,216 460.6,175.5 462.6,175.2 462.6,216" fill="hsl(40,70%,51%)" stroke="hsl(40,70%,51%)" stroke-width="0.5"/>
+<polygon points="462.6,216 462.6,175.2 471.3,174.3 471.3,216" fill="hsl(41,70%,51%)" stroke="hsl(41,70%,51%)" stroke-width="0.5"/>
+<polygon points="471.3,216 471.3,174.3 477.8,173.6 477.8,216" fill="hsl(42,70%,52%)" stroke="hsl(42,70%,52%)" stroke-width="0.5"/>
+<polygon points="477.8,216 477.8,173.6 480.1,173.4 480.1,216" fill="hsl(41,70%,51%)" stroke="hsl(41,70%,51%)" stroke-width="0.5"/>
+<polygon points="480.1,216 480.1,173.4 487.4,172.6 487.4,216" fill="hsl(43,70%,52%)" stroke="hsl(43,70%,52%)" stroke-width="0.5"/>
+<polygon points="487.4,216 487.4,172.6 488.6,172.5 488.6,216" fill="hsl(43,70%,52%)" stroke="hsl(43,70%,52%)" stroke-width="0.5"/>
+<polygon points="488.6,216 488.6,172.5 488.7,172.5 488.7,216" fill="hsl(44,70%,52%)" stroke="hsl(44,70%,52%)" stroke-width="0.5"/>
+<polygon points="488.7,216 488.7,172.5 489.8,172.4 489.8,216" fill="hsl(47,70%,53%)" stroke="hsl(47,70%,53%)" stroke-width="0.5"/>
+<polygon points="489.8,216 489.8,172.4 491.3,172.3 491.3,216" fill="hsl(49,70%,53%)" stroke="hsl(49,70%,53%)" stroke-width="0.5"/>
+<polygon points="491.3,216 491.3,172.3 491.4,172.3 491.4,216" fill="hsl(49,70%,53%)" stroke="hsl(49,70%,53%)" stroke-width="0.5"/>
+<polygon points="491.4,216 491.4,172.3 491.6,172.3 491.6,216" fill="hsl(51,70%,54%)" stroke="hsl(51,70%,54%)" stroke-width="0.5"/>
+<polygon points="491.6,216 491.6,172.3 491.8,172.3 491.8,216" fill="hsl(52,70%,54%)" stroke="hsl(52,70%,54%)" stroke-width="0.5"/>
+<polygon points="491.8,216 491.8,172.3 491.9,172.3 491.9,216" fill="hsl(53,70%,54%)" stroke="hsl(53,70%,54%)" stroke-width="0.5"/>
+<polygon points="491.9,216 491.9,172.3 491.9,172.3 491.9,216" fill="hsl(55,70%,55%)" stroke="hsl(55,70%,55%)" stroke-width="0.5"/>
+<polygon points="491.9,216 491.9,172.3 494.6,171.8 494.6,216" fill="hsl(30,70%,49%)" stroke="hsl(30,70%,49%)" stroke-width="0.5"/>
+<polygon points="494.6,216 494.6,171.8 495.9,171.5 495.9,216" fill="hsl(31,70%,49%)" stroke="hsl(31,70%,49%)" stroke-width="0.5"/>
+<polygon points="495.9,216 495.9,171.5 496.0,171.5 496.0,216" fill="hsl(30,70%,49%)" stroke="hsl(30,70%,49%)" stroke-width="0.5"/>
+<polygon points="496.0,216 496.0,171.5 496.1,171.5 496.1,216" fill="hsl(30,70%,49%)" stroke="hsl(30,70%,49%)" stroke-width="0.5"/>
+<polygon points="496.1,216 496.1,171.5 496.8,171.5 496.8,216" fill="hsl(54,70%,54%)" stroke="hsl(54,70%,54%)" stroke-width="0.5"/>
+<polygon points="496.8,216 496.8,171.5 498.0,171.4 498.0,216" fill="hsl(55,70%,55%)" stroke="hsl(55,70%,55%)" stroke-width="0.5"/>
+<polygon points="498.0,216 498.0,171.4 499.5,170.6 499.5,216" fill="hsl(10,70%,44%)" stroke="hsl(10,70%,44%)" stroke-width="0.5"/>
+<polygon points="499.5,216 499.5,170.6 500.6,170.5 500.6,216" fill="hsl(55,70%,55%)" stroke="hsl(55,70%,55%)" stroke-width="0.5"/>
+<polygon points="500.6,216 500.6,170.5 504.0,170.3 504.0,216" fill="hsl(51,70%,54%)" stroke="hsl(51,70%,54%)" stroke-width="0.5"/>
+<polygon points="504.0,216 504.0,170.3 504.0,170.3 504.0,216" fill="hsl(55,70%,55%)" stroke="hsl(55,70%,55%)" stroke-width="0.5"/>
+<polygon points="504.0,216 504.0,170.3 504.3,170.3 504.3,216" fill="hsl(35,70%,50%)" stroke="hsl(35,70%,50%)" stroke-width="0.5"/>
+<polygon points="504.3,216 504.3,170.3 505.4,170.1 505.4,216" fill="hsl(36,70%,50%)" stroke="hsl(36,70%,50%)" stroke-width="0.5"/>
+<polygon points="505.4,216 505.4,170.1 506.1,169.7 506.1,216" fill="hsl(12,70%,45%)" stroke="hsl(12,70%,45%)" stroke-width="0.5"/>
+<polygon points="506.1,216 506.1,169.7 507.7,169.0 507.7,216" fill="hsl(11,70%,45%)" stroke="hsl(11,70%,45%)" stroke-width="0.5"/>
+<polygon points="507.7,216 507.7,169.0 507.7,169.0 507.7,216" fill="hsl(12,70%,45%)" stroke="hsl(12,70%,45%)" stroke-width="0.5"/>
+<polygon points="507.7,216 507.7,169.0 507.9,168.7 507.9,216" fill="hsl(0,70%,42%)" stroke="hsl(0,70%,42%)" stroke-width="0.5"/>
+<polygon points="507.9,216 507.9,168.7 509.0,167.6 509.0,216" fill="hsl(0,70%,42%)" stroke="hsl(0,70%,42%)" stroke-width="0.5"/>
+<polygon points="509.0,216 509.0,167.6 509.0,167.6 509.0,216" fill="hsl(0,70%,42%)" stroke="hsl(0,70%,42%)" stroke-width="0.5"/>
+<polygon points="509.0,216 509.0,167.6 509.9,166.7 509.9,216" fill="hsl(0,70%,42%)" stroke="hsl(0,70%,42%)" stroke-width="0.5"/>
+<polygon points="509.9,216 509.9,166.7 515.3,166.4 515.3,216" fill="hsl(57,70%,55%)" stroke="hsl(57,70%,55%)" stroke-width="0.5"/>
+<polygon points="515.3,216 515.3,166.4 515.8,166.4 515.8,216" fill="hsl(62,70%,56%)" stroke="hsl(62,70%,56%)" stroke-width="0.5"/>
+<polygon points="515.8,216 515.8,166.4 516.0,166.4 516.0,216" fill="hsl(35,70%,50%)" stroke="hsl(35,70%,50%)" stroke-width="0.5"/>
+<polygon points="516.0,216 516.0,166.4 516.4,166.3 516.4,216" fill="hsl(35,70%,50%)" stroke="hsl(35,70%,50%)" stroke-width="0.5"/>
+<polygon points="516.4,216 516.4,166.3 517.9,166.1 517.9,216" fill="hsl(36,70%,50%)" stroke="hsl(36,70%,50%)" stroke-width="0.5"/>
+<polygon points="517.9,216 517.9,166.1 518.5,166.0 518.5,216" fill="hsl(36,70%,50%)" stroke="hsl(36,70%,50%)" stroke-width="0.5"/>
+<polygon points="518.5,216 518.5,166.0 518.8,166.0 518.8,216" fill="hsl(37,70%,50%)" stroke="hsl(37,70%,50%)" stroke-width="0.5"/>
+<polygon points="518.8,216 518.8,166.0 518.9,166.0 518.9,216" fill="hsl(15,70%,45%)" stroke="hsl(15,70%,45%)" stroke-width="0.5"/>
+<polygon points="518.9,216 518.9,166.0 520.5,165.5 520.5,216" fill="hsl(21,70%,47%)" stroke="hsl(21,70%,47%)" stroke-width="0.5"/>
+<polygon points="520.5,216 520.5,165.5 525.0,165.4 525.0,216" fill="hsl(73,70%,59%)" stroke="hsl(73,70%,59%)" stroke-width="0.5"/>
+<polygon points="525.0,216 525.0,165.4 526.8,164.9 526.8,216" fill="hsl(22,70%,47%)" stroke="hsl(22,70%,47%)" stroke-width="0.5"/>
+<polygon points="526.8,216 526.8,164.9 527.4,164.8 527.4,216" fill="hsl(73,70%,59%)" stroke="hsl(73,70%,59%)" stroke-width="0.5"/>
+<polygon points="527.4,216 527.4,164.8 527.9,164.7 527.9,216" fill="hsl(17,70%,46%)" stroke="hsl(17,70%,46%)" stroke-width="0.5"/>
+<polygon points="527.9,216 527.9,164.7 528.0,164.6 528.0,216" fill="hsl(18,70%,46%)" stroke="hsl(18,70%,46%)" stroke-width="0.5"/>
+<polygon points="528.0,216 528.0,164.6 529.4,163.8 529.4,216" fill="hsl(6,70%,43%)" stroke="hsl(6,70%,43%)" stroke-width="0.5"/>
+<polygon points="529.4,216 529.4,163.8 529.6,163.7 529.6,216" fill="hsl(18,70%,46%)" stroke="hsl(18,70%,46%)" stroke-width="0.5"/>
+<polygon points="529.6,216 529.6,163.7 530.4,163.7 530.4,216" fill="hsl(96,70%,64%)" stroke="hsl(96,70%,64%)" stroke-width="0.5"/>
+<polygon points="530.4,216 530.4,163.7 539.0,163.5 539.0,216" fill="hsl(75,70%,59%)" stroke="hsl(75,70%,59%)" stroke-width="0.5"/>
+<polygon points="539.0,216 539.0,163.5 540.2,163.5 540.2,216" fill="hsl(96,70%,64%)" stroke="hsl(96,70%,64%)" stroke-width="0.5"/>
+<polygon points="540.2,216 540.2,163.5 554.2,163.5 554.2,216" fill="hsl(105,70%,66%)" stroke="hsl(105,70%,66%)" stroke-width="0.5"/>
+<polygon points="554.2,216 554.2,163.5 556.9,163.5 556.9,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="556.9,216 556.9,163.5 559.1,161.6 559.1,216" fill="hsl(1,70%,42%)" stroke="hsl(1,70%,42%)" stroke-width="0.5"/>
+<polygon points="559.1,216 559.1,161.6 559.6,161.0 559.6,216" fill="hsl(0,70%,42%)" stroke="hsl(0,70%,42%)" stroke-width="0.5"/>
+<polygon points="559.6,216 559.6,161.0 560.8,160.8 560.8,216" fill="hsl(29,70%,49%)" stroke="hsl(29,70%,49%)" stroke-width="0.5"/>
+<polygon points="560.8,216 560.8,160.8 561.8,160.8 561.8,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="561.8,216 561.8,160.8 563.0,160.5 563.0,216" fill="hsl(21,70%,47%)" stroke="hsl(21,70%,47%)" stroke-width="0.5"/>
+<polygon points="563.0,216 563.0,160.5 575.0,160.5 575.0,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="575.0,216 575.0,160.5 580.2,160.0 580.2,216" fill="hsl(46,70%,53%)" stroke="hsl(46,70%,53%)" stroke-width="0.5"/>
+<polygon points="580.2,216 580.2,160.0 592.3,160.0 592.3,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="592.3,216 592.3,160.0 595.0,159.6 595.0,216" fill="hsl(33,70%,50%)" stroke="hsl(33,70%,50%)" stroke-width="0.5"/>
+<polygon points="595.0,216 595.0,159.6 596.4,159.6 596.4,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="596.4,216 596.4,159.6 597.4,159.4 597.4,216" fill="hsl(29,70%,49%)" stroke="hsl(29,70%,49%)" stroke-width="0.5"/>
+<polygon points="597.4,216 597.4,159.4 598.9,158.8 598.9,216" fill="hsl(17,70%,46%)" stroke="hsl(17,70%,46%)" stroke-width="0.5"/>
+<polygon points="598.9,216 598.9,158.8 599.7,158.7 599.7,216" fill="hsl(32,70%,49%)" stroke="hsl(32,70%,49%)" stroke-width="0.5"/>
+<polygon points="599.7,216 599.7,158.7 620.0,158.7 620.0,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="620.0,216 620.0,158.7 621.7,158.3 621.7,216" fill="hsl(25,70%,48%)" stroke="hsl(25,70%,48%)" stroke-width="0.5"/>
+<polygon points="621.7,216 621.7,158.3 633.7,158.3 633.7,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="633.7,216 633.7,158.3 639.6,158.2 639.6,216" fill="hsl(83,70%,61%)" stroke="hsl(83,70%,61%)" stroke-width="0.5"/>
+<polygon points="639.6,216 639.6,158.2 644.1,158.1 644.1,216" fill="hsl(71,70%,58%)" stroke="hsl(71,70%,58%)" stroke-width="0.5"/>
+<polygon points="644.1,216 644.1,158.1 644.4,158.1 644.4,216" fill="hsl(84,70%,61%)" stroke="hsl(84,70%,61%)" stroke-width="0.5"/>
+<polygon points="644.4,216 644.4,158.1 655.1,157.9 655.1,216" fill="hsl(74,70%,59%)" stroke="hsl(74,70%,59%)" stroke-width="0.5"/>
+<polygon points="655.1,216 655.1,157.9 661.2,157.7 661.2,216" fill="hsl(68,70%,58%)" stroke="hsl(68,70%,58%)" stroke-width="0.5"/>
+<polygon points="661.2,216 661.2,157.7 662.8,157.7 662.8,216" fill="hsl(77,70%,60%)" stroke="hsl(77,70%,60%)" stroke-width="0.5"/>
+<polygon points="662.8,216 662.8,157.7 663.0,157.7 663.0,216" fill="hsl(67,70%,57%)" stroke="hsl(67,70%,57%)" stroke-width="0.5"/>
+<polygon points="663.0,216 663.0,157.7 667.4,157.6 667.4,216" fill="hsl(73,70%,59%)" stroke="hsl(73,70%,59%)" stroke-width="0.5"/>
+<polygon points="667.4,216 667.4,157.6 670.6,157.6 670.6,216" fill="hsl(83,70%,61%)" stroke="hsl(83,70%,61%)" stroke-width="0.5"/>
+<polygon points="670.6,216 670.6,157.6 670.6,157.6 670.6,216" fill="hsl(68,70%,58%)" stroke="hsl(68,70%,58%)" stroke-width="0.5"/>
+<polygon points="670.6,216 670.6,157.6 671.4,157.6 671.4,216" fill="hsl(79,70%,60%)" stroke="hsl(79,70%,60%)" stroke-width="0.5"/>
+<polygon points="671.4,216 671.4,157.6 671.9,157.6 671.9,216" fill="hsl(65,70%,57%)" stroke="hsl(65,70%,57%)" stroke-width="0.5"/>
+<polygon points="671.9,216 671.9,157.6 672.3,157.5 672.3,216" fill="hsl(57,70%,55%)" stroke="hsl(57,70%,55%)" stroke-width="0.5"/>
+<polygon points="672.3,216 672.3,157.5 677.2,157.2 677.2,216" fill="hsl(51,70%,54%)" stroke="hsl(51,70%,54%)" stroke-width="0.5"/>
+<polygon points="677.2,216 677.2,157.2 677.8,157.2 677.8,216" fill="hsl(57,70%,55%)" stroke="hsl(57,70%,55%)" stroke-width="0.5"/>
+<polygon points="677.8,216 677.8,157.2 678.3,157.2 678.3,216" fill="hsl(66,70%,57%)" stroke="hsl(66,70%,57%)" stroke-width="0.5"/>
+<polygon points="678.3,216 678.3,157.2 680.1,157.2 680.1,216" fill="hsl(78,70%,60%)" stroke="hsl(78,70%,60%)" stroke-width="0.5"/>
+<polygon points="680.1,216 680.1,157.2 684.8,157.2 684.8,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="684.8,216 684.8,157.2 706.1,157.2 706.1,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="706.1,216 706.1,157.2 862.8,156.6 862.8,216" fill="hsl(103,70%,66%)" stroke="hsl(103,70%,66%)" stroke-width="0.5"/>
+<polygon points="862.8,216 862.8,156.6 874.8,156.6 874.8,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="874.8,216 874.8,156.6 1017.5,156.2 1017.5,216" fill="hsl(106,70%,67%)" stroke="hsl(106,70%,67%)" stroke-width="0.5"/>
+<polygon points="1017.5,216 1017.5,156.2 1029.5,156.2 1029.5,216" fill="#ddd8cc" stroke="#ddd8cc" stroke-width="0.5"/>
+<polygon points="1029.5,216 1029.5,156.2 1060.0,156.0 1060.0,216" fill="hsl(89,70%,63%)" stroke="hsl(89,70%,63%)" stroke-width="0.5"/>
+<polyline points="200.0,216.0 233.1,208.3 233.1,208.3 233.2,208.3 233.2,208.3 250.3,204.7 250.3,204.7 250.4,204.7 250.4,204.7 250.8,204.7 250.8,204.7 250.8,204.7 250.8,204.7 250.8,204.7 250.8,204.7 270.7,201.7 270.7,201.7 295.8,198.8 295.8,198.8 300.1,198.4 300.1,198.4 319.4,197.4 319.4,197.4 319.6,197.4 319.6,197.4 347.8,192.3 347.8,192.3 348.1,192.3 348.1,192.3 351.1,191.3 351.1,191.3 351.4,191.3 351.4,191.3 389.9,184.2 389.9,184.2 390.4,184.2 390.4,184.2 391.1,184.2 391.1,184.2 391.1,184.2 391.1,184.2 391.1,184.2 391.1,184.2 391.1,184.2 391.1,184.2 391.1,184.2 391.1,184.2 391.1,184.2 391.1,184.2 391.1,184.2 391.1,184.2 391.1,184.2 391.1,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 391.2,184.2 412.0,181.5 412.0,181.5 417.7,180.8 417.7,180.8 442.8,177.8 442.8,177.8 458.8,176.0 458.8,176.0 460.6,175.5 460.6,175.5 462.6,175.2 462.6,175.2 471.3,174.3 471.3,174.3 477.8,173.6 477.8,173.6 480.1,173.4 480.1,173.4 487.4,172.6 487.4,172.6 488.6,172.5 488.6,172.5 488.7,172.5 488.7,172.5 489.8,172.4 489.8,172.4 491.3,172.3 491.3,172.3 491.4,172.3 491.4,172.3 491.6,172.3 491.6,172.3 491.8,172.3 491.8,172.3 491.9,172.3 491.9,172.3 491.9,172.3 491.9,172.3 494.6,171.8 494.6,171.8 495.9,171.5 495.9,171.5 496.0,171.5 496.0,171.5 496.1,171.5 496.1,171.5 496.8,171.5 496.8,171.5 498.0,171.4 498.0,171.4 499.5,170.6 499.5,170.6 500.6,170.5 500.6,170.5 504.0,170.3 504.0,170.3 504.0,170.3 504.0,170.3 504.3,170.3 504.3,170.3 505.4,170.1 505.4,170.1 506.1,169.7 506.1,169.7 507.7,169.0 507.7,169.0 507.7,169.0 507.7,169.0 507.9,168.7 507.9,168.7 509.0,167.6 509.0,167.6 509.0,167.6 509.0,167.6 509.9,166.7 509.9,166.7 515.3,166.4 515.3,166.4 515.8,166.4 515.8,166.4 516.0,166.4 516.0,166.4 516.4,166.3 516.4,166.3 517.9,166.1 517.9,166.1 518.5,166.0 518.5,166.0 518.8,166.0 518.8,166.0 518.9,166.0 518.9,166.0 520.5,165.5 520.5,165.5 525.0,165.4 525.0,165.4 526.8,164.9 526.8,164.9 527.4,164.8 527.4,164.8 527.9,164.7 527.9,164.7 528.0,164.6 528.0,164.6 529.4,163.8 529.4,163.8 529.6,163.7 529.6,163.7 530.4,163.7 530.4,163.7 539.0,163.5 539.0,163.5 540.2,163.5 540.2,163.5 554.2,163.5 554.2,163.5 556.9,163.5 556.9,163.5 559.1,161.6 559.1,161.6 559.6,161.0 559.6,161.0 560.8,160.8 560.8,160.8 561.8,160.8 561.8,160.8 563.0,160.5 563.0,160.5 575.0,160.5 575.0,160.5 580.2,160.0 580.2,160.0 592.3,160.0 592.3,160.0 595.0,159.6 595.0,159.6 596.4,159.6 596.4,159.6 597.4,159.4 597.4,159.4 598.9,158.8 598.9,158.8 599.7,158.7 599.7,158.7 620.0,158.7 620.0,158.7 621.7,158.3 621.7,158.3 633.7,158.3 633.7,158.3 639.6,158.2 639.6,158.2 644.1,158.1 644.1,158.1 644.4,158.1 644.4,158.1 655.1,157.9 655.1,157.9 661.2,157.7 661.2,157.7 662.8,157.7 662.8,157.7 663.0,157.7 663.0,157.7 667.4,157.6 667.4,157.6 670.6,157.6 670.6,157.6 670.6,157.6 670.6,157.6 671.4,157.6 671.4,157.6 671.9,157.6 671.9,157.6 672.3,157.5 672.3,157.5 677.2,157.2 677.2,157.2 677.8,157.2 677.8,157.2 678.3,157.2 678.3,157.2 680.1,157.2 680.1,157.2 684.8,157.2 684.8,157.2 706.1,157.2 706.1,157.2 862.8,156.6 862.8,156.6 874.8,156.6 874.8,156.6 1017.5,156.2 1017.5,156.2 1029.5,156.2 1029.5,156.2 1060.0,156.0" fill="none" stroke="#0005" stroke-width="1"/>
+<line x1="200" y1="216" x2="1060" y2="216" stroke="#bbb"/>
+<text x="192" y="160" text-anchor="end" fill="#555">$4.97</text>
+<text x="16" y="190" fill="#333">spend</text>
+<line x1="380.1" y1="186" x2="380.1" y2="216" stroke="#333" stroke-dasharray="2 3"/>
+<text x="385.1" y="210" fill="#333">half by 17m</text>
+<line x1="226.2" y1="86" x2="226.2" y2="559" stroke="#ebe8e0"/>
+<text x="226.2" y="575" text-anchor="middle" fill="#777">5:50 PM</text>
+<line x1="332.8" y1="86" x2="332.8" y2="559" stroke="#ebe8e0"/>
+<text x="332.8" y="575" text-anchor="middle" fill="#777">6:00 PM</text>
+<line x1="439.4" y1="86" x2="439.4" y2="559" stroke="#ebe8e0"/>
+<text x="439.4" y="575" text-anchor="middle" fill="#777">6:10 PM</text>
+<line x1="546.1" y1="86" x2="546.1" y2="559" stroke="#ebe8e0"/>
+<text x="546.1" y="575" text-anchor="middle" fill="#777">6:20 PM</text>
+<line x1="790.8" y1="86" x2="790.8" y2="559" stroke="#ebe8e0"/>
+<text x="790.8" y="575" text-anchor="middle" fill="#777">8:40 PM</text>
+<line x1="927.4" y1="86" x2="927.4" y2="559" stroke="#ebe8e0"/>
+<text x="927.4" y="575" text-anchor="middle" fill="#777">9:00 PM</text>
+<text x="693.1" y="591" text-anchor="middle" fill="#a0957e" font-size="11">+1h 55m</text>
+<text x="868.8" y="591" text-anchor="middle" fill="#a0957e" font-size="11">+8m</text>
+<text x="192" y="262" text-anchor="end" fill="#222">architect (form)</text>
+<rect x="200.0" y="254.0" width="33.1" height="8" rx="1" fill="#3b3355"><title>architect (form): opus@medium $0.64 · 3.1m</title></rect>
+<text x="1072" y="262" fill="#555">$0.64</text>
+<text x="192" y="288" text-anchor="end" fill="#222">designer (plan) <tspan fill="#888">×4</tspan></text>
+<rect x="233.2" y="280.0" width="17.1" height="8" rx="1" fill="#6f86c6"><title>designer (plan): sonnet@medium $0.30 · 1.6m</title></rect>
+<rect x="319.6" y="280.0" width="28.2" height="8" rx="1" fill="#6f86c6"><title>designer (plan): sonnet@medium $0.43 · 2.6m</title></rect>
+<rect x="348.1" y="280.0" width="3.0" height="8" rx="1" fill="#6f86c6"><title>designer (plan): sonnet@medium $0.08 · 0.3m</title></rect>
+<rect x="351.4" y="280.0" width="38.5" height="8" rx="1" fill="#6f86c6"><title>designer (plan): sonnet@medium $0.59 · 3.6m</title></rect>
+<text x="1072" y="288" fill="#555">$1.40</text>
+<text x="192" y="316" text-anchor="end" fill="#222">kit (vocab / scaffold) <tspan fill="#888">×4</tspan></text>
+<rect x="250.4" y="302.0" width="20.3" height="4" rx="1" fill="#d9b45a"><title>kit (vocab / scaffold): haiku@medium $0.06 · 1.9m</title></rect>
+<rect x="250.8" y="307.0" width="68.7" height="4" rx="1" fill="#d9b45a"><title>kit (vocab / scaffold): haiku@medium $0.28 · 6.4m</title></rect>
+<rect x="250.8" y="312.0" width="49.3" height="4" rx="1" fill="#d9b45a"><title>kit (vocab / scaffold): haiku@medium $0.15 · 4.6m</title></rect>
+<rect x="250.8" y="317.0" width="45.0" height="4" rx="1" fill="#d9b45a"><title>kit (vocab / scaffold): haiku@medium $0.12 · 4.2m</title></rect>
+<text x="1072" y="316" fill="#555">$0.60</text>
+<text x="192" y="396" text-anchor="end" fill="#222">parts and rooms <tspan fill="#888">×27</tspan></text>
+<rect x="390.4" y="332.0" width="101.0" height="4" rx="1" fill="#d9b45a"><title>Roofs and crowns: haiku@high $0.04 · 9.5m</title></rect>
+<rect x="391.1" y="337.0" width="100.7" height="4" rx="1" fill="#d9b45a"><title>KOMO E atrium lobby: haiku@high $0.03 · 9.4m</title></rect>
+<rect x="391.1" y="342.0" width="149.1" height="4" rx="1" fill="#d9b45a"><title>Aperture apartments north: haiku@high $0.03 · 14.0m</title></rect>
+<rect x="391.1" y="347.0" width="71.5" height="4" rx="1" fill="#d9b45a"><title>KOMO W podium studio: haiku@high $0.03 · 6.7m</title></rect>
+<rect x="391.1" y="352.0" width="105.6" height="4" rx="1" fill="#d9b45a"><title>KOMO W office floor: haiku@high $0.02 · 9.9m</title></rect>
+<rect x="391.1" y="357.0" width="96.3" height="4" rx="1" fill="#d9b45a"><title>Aperture bike room: haiku@high $0.03 · 9.0m</title></rect>
+<rect x="391.1" y="362.0" width="100.2" height="4" rx="1" fill="#d9b45a"><title>KOMO E drum restaurant: haiku@high $0.02 · 9.4m</title></rect>
+<rect x="391.1" y="367.0" width="88.9" height="4" rx="1" fill="#d9b45a"><title>Aperture residents lobby: haiku@high $0.06 · 8.3m</title></rect>
+<rect x="391.1" y="372.0" width="103.4" height="4" rx="1" fill="#d9b45a"><title>Grounds and lighting: haiku@high $0.02 · 9.7m</title></rect>
+<rect x="391.2" y="377.0" width="100.7" height="4" rx="1" fill="#d9b45a"><title>Aperture shops: haiku@high $0.04 · 9.4m</title></rect>
+<rect x="391.2" y="382.0" width="116.5" height="4" rx="1" fill="#d9b45a"><title>KOMO E south wing offices: haiku@high $0.14 · 10.9m</title></rect>
+<rect x="391.2" y="387.0" width="100.4" height="4" rx="1" fill="#d9b45a"><title>Facade fittings: haiku@high $0.04 · 9.4m</title></rect>
+<rect x="391.2" y="392.0" width="124.9" height="4" rx="1" fill="#d9b45a"><title>Hyatt rooftop plant room: haiku@high $0.03 · 11.7m</title></rect>
+<rect x="391.2" y="397.0" width="80.2" height="4" rx="1" fill="#d9b45a"><title>KOMO E broadcast studio: haiku@high $0.03 · 7.5m</title></rect>
+<rect x="391.2" y="402.0" width="20.8" height="4" rx="1" fill="#d9b45a"><title>Satellite dishes: haiku@high $0.02 · 2.0m</title></rect>
+<rect x="391.2" y="407.0" width="127.3" height="4" rx="1" fill="#d9b45a"><title>Hyatt annex meeting rooms: haiku@high $0.02 · 11.9m</title></rect>
+<rect x="391.2" y="412.0" width="97.5" height="4" rx="1" fill="#d9b45a"><title>KOMO E drum meeting room: haiku@high $0.13 · 9.1m</title></rect>
+<rect x="391.2" y="417.0" width="97.4" height="4" rx="1" fill="#d9b45a"><title>Hyatt guest floor corridor: haiku@high $0.02 · 9.1m</title></rect>
+<rect x="391.2" y="422.0" width="112.7" height="4" rx="1" fill="#d9b45a"><title>KOMO E east offices: haiku@high $0.10 · 10.6m</title></rect>
+<rect x="391.2" y="427.0" width="51.6" height="4" rx="1" fill="#d9b45a"><title>Hyatt wedge breakfast hall: haiku@high $0.03 · 4.8m</title></rect>
+<rect x="391.2" y="432.0" width="126.6" height="4" rx="1" fill="#d9b45a"><title>Hyatt lobby and breakfast room: haiku@high $0.03 · 11.9m</title></rect>
+<rect x="391.2" y="437.0" width="162.9" height="4" rx="1" fill="#d9b45a"><title>KOMO E newsroom: haiku@high $0.04 · 15.3m</title></rect>
+<rect x="391.2" y="442.0" width="104.8" height="4" rx="1" fill="#d9b45a"><title>Aperture apartments south: haiku@high $0.02 · 9.8m</title></rect>
+<rect x="391.2" y="447.0" width="98.6" height="4" rx="1" fill="#d9b45a"><title>KOMO shells: haiku@high $0.03 · 9.2m</title></rect>
+<rect x="500.6" y="332.0" width="14.7" height="4" rx="1" fill="#d9b45a"><title>Aperture apartments south: haiku@high $0.01 · 1.4m</title></rect>
+<rect x="505.4" y="337.0" width="2.5" height="4" rx="1" fill="#d9b45a"><title>Grounds and lighting: haiku@high $0.07 · 0.2m</title></rect>
+<rect x="530.4" y="332.0" width="8.6" height="4" rx="1" fill="#d9b45a"><title>Hyatt guest floor corridor: haiku@high $0.01 · 0.8m</title></rect>
+<text x="1072" y="396" fill="#555">$1.10</text>
+<text x="192" y="478.5" text-anchor="end" fill="#222">inspector <tspan fill="#888">×23</tspan></text>
+<rect x="417.7" y="462.0" width="91.2" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.03 · 8.6m</title></rect>
+<rect x="458.8" y="467.0" width="2.0" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.03 · 0.2m</title></rect>
+<rect x="477.8" y="467.0" width="26.5" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.01 · 2.5m</title></rect>
+<rect x="491.9" y="472.0" width="4.2" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.05 · 0.4m</title></rect>
+<rect x="495.9" y="477.0" width="20.5" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.01 · 1.9m</title></rect>
+<rect x="498.0" y="472.0" width="2.0" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.06 · 0.1m</title></rect>
+<rect x="504.0" y="472.0" width="5.0" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.04 · 0.5m</title></rect>
+<rect x="506.1" y="467.0" width="21.8" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.03 · 2.0m</title></rect>
+<rect x="507.7" y="482.0" width="2.2" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.16 · 0.2m</title></rect>
+<rect x="515.8" y="462.0" width="3.1" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.03 · 0.3m</title></rect>
+<rect x="518.8" y="472.0" width="2.0" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.04 · 0.2m</title></rect>
+<rect x="525.0" y="462.0" width="2.0" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.04 · 0.2m</title></rect>
+<rect x="527.4" y="462.0" width="2.2" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.06 · 0.2m</title></rect>
+<rect x="528.0" y="467.0" width="2.0" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.03 · 0.1m</title></rect>
+<rect x="556.9" y="462.0" width="2.7" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.19 · 0.3m</title></rect>
+<rect x="559.1" y="467.0" width="2.0" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.03 · 0.2m</title></rect>
+<rect x="561.8" y="462.0" width="2.0" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.03 · 0.1m</title></rect>
+<rect x="575.0" y="462.0" width="5.3" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.04 · 0.5m</title></rect>
+<rect x="592.3" y="462.0" width="2.7" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.04 · 0.3m</title></rect>
+<rect x="596.4" y="462.0" width="2.5" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.04 · 0.2m</title></rect>
+<rect x="597.4" y="467.0" width="2.4" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.03 · 0.2m</title></rect>
+<rect x="620.0" y="462.0" width="2.0" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.03 · 0.2m</title></rect>
+<rect x="684.8" y="462.0" width="2.0" height="4" rx="1" fill="#d9b45a"><title>inspector: haiku@high $0.00 · 0.0m</title></rect>
+<text x="1072" y="478.5" fill="#555">$1.05</text>
+<text x="192" y="511" text-anchor="end" fill="#222">fixes <tspan fill="#888">×9</tspan></text>
+<rect x="633.7" y="497.0" width="10.4" height="4" rx="1" fill="#d9b45a"><title>fix: KOMO shells: haiku@high $0.01 · 1.0m</title></rect>
+<rect x="639.6" y="502.0" width="21.6" height="4" rx="1" fill="#d9b45a"><title>fix: Satellite dishes: haiku@high $0.02 · 2.0m</title></rect>
+<rect x="644.4" y="497.0" width="18.6" height="4" rx="1" fill="#d9b45a"><title>fix: Grounds and lighting: haiku@high $0.01 · 1.7m</title></rect>
+<rect x="655.1" y="507.0" width="12.3" height="4" rx="1" fill="#d9b45a"><title>fix: KOMO E east offices: haiku@high $0.01 · 1.2m</title></rect>
+<rect x="662.8" y="502.0" width="7.8" height="4" rx="1" fill="#d9b45a"><title>fix: KOMO E south wing offices: haiku@high $0.01 · 0.7m</title></rect>
+<rect x="670.6" y="497.0" width="7.7" height="4" rx="1" fill="#d9b45a"><title>fix: Aperture shops: haiku@high $0.01 · 0.7m</title></rect>
+<rect x="671.4" y="502.0" width="6.3" height="4" rx="1" fill="#d9b45a"><title>fix: Aperture bike room: haiku@high $0.01 · 0.6m</title></rect>
+<rect x="671.9" y="507.0" width="8.2" height="4" rx="1" fill="#d9b45a"><title>fix: Aperture apartments north: haiku@high $0.01 · 0.8m</title></rect>
+<rect x="672.3" y="512.0" width="4.9" height="4" rx="1" fill="#d9b45a"><title>fix: Aperture apartments south: haiku@high $0.01 · 0.5m</title></rect>
+<text x="1072" y="511" fill="#555">$0.09</text>
+<text x="192" y="539" text-anchor="end" fill="#222">lamplighters <tspan fill="#888">×3</tspan></text>
+<rect x="706.1" y="531.0" width="156.7" height="8" rx="1" fill="#d9b45a"><title>lamps: Hyatt lobby and breakfast room: haiku@high $0.04 · 14.7m</title></rect>
+<rect x="874.8" y="531.0" width="142.7" height="8" rx="1" fill="#d9b45a"><title>lamps: Hyatt guest floor corridor: haiku@high $0.03 · 13.4m</title></rect>
+<rect x="1029.5" y="531.0" width="30.5" height="8" rx="1" fill="#d9b45a"><title>lamps: Hyatt rooftop plant room: haiku@high $0.02 · 2.9m</title></rect>
+<text x="1072" y="539" fill="#555">$0.10</text>
 </svg>
