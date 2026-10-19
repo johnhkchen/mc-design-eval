@@ -3,7 +3,7 @@
 // scene description for the place's world (out/<place>/world, from `irl world`) with a camera that looks from an eye to a
 // target, the sun at an altitude and azimuth, the physically based Nishita sky with clouds, and renders it headless.
 //   node bin/chunky-shot.mjs <place> <name> --eye x,y,z --look x,y,z [--sun alt,az (degrees)] [--size 3200x2000]
-//     [--spp 400] [--fov 50] [--projection PINHOLE|PANORAMIC_SLOT (a wide cylindrical panorama: --fov is its horizontal angle, e.g. 140 at 6000x2000)|PANORAMIC|FISHEYE] [--fog 0.0] [--exposure 1] [--post TONEMAP2 (ACES filmic; TONEMAP1, TONEMAP3 Hable, GAMMA)] [--emitters 13] [--sky-light 1] [--sun-intensity 1.25] (dusk: a dim sky, brighter lamps) [--clouds yes] [--chunks x0,z0,x1,z1] [--frustum] (load only the chunks in that box / in the camera's view) [--chunky <launcher jar>]
+//     [--spp 400] [--fov 50] [--projection PINHOLE|PANORAMIC_SLOT (a wide cylindrical panorama: --fov is its horizontal angle, e.g. 140 at 6000x2000)|PANORAMIC|FISHEYE] [--fog 0.0] [--exposure 1] [--post TONEMAP2 (ACES filmic; TONEMAP1, TONEMAP3 Hable, GAMMA)] [--emitters 13] [--sky-light 1] [--sun-intensity 1.25] (dusk: a dim sky, brighter lamps) [--clouds yes] [--water-plane y] (water past the world's edge) [--horizon 0.1] (the sky's horizon offset: 0.4 lifts the dark band under the horizon out of an oblique view) [--sky-fog 1] [--chunks x0,z0,x1,z1] [--frustum] (load only the chunks in that box / in the camera's view) [--chunky <launcher jar>]
 //   -> out/<place>/shots/<name>.png   (Chunky's scene and render dump stay in out/<place>/chunky/)
 // Conventions (Chunky's, as measured on a top view): yaw 0 looks along -x, pi/2 along +z; pitch -pi/2 is level, 0 straight down; the sun's azimuth
 // 0 is toward +x (east in our frame), altitude up from the horizon.
@@ -49,12 +49,15 @@ const scene = {
   emittersEnabled: true, emitterIntensity: +opt("--emitters", 13), sunSamplingStrategy: "IMPORTANCE", fancierTranslucency: true, transmissivityCap: 1.0,
   waterOpacity: 0.42, waterVisibility: 9, useCustomWaterColor: false, biomeColorsEnabled: true, transparentSky: false,
   hideUnknownBlocks: false, waterWorldEnabled: false,
-  fog: { mode: +opt("--fog", 0) > 0 ? "UNIFORM" : "NONE", uniformDensity: +opt("--fog", 0), skyFogDensity: 1, fogColor: { red: 0.66, green: 0.73, blue: 0.82 }, fastFog: true, layers: [] },
+  // --water-plane y: an endless water plane at that height past the world's edge (clipped inside the loaded chunks), so an
+  // oblique view sees a horizon of water instead of the void's black band under the sky
+  ...(opt("--water-plane") != null ? { waterWorldEnabled: true, waterWorldHeight: +opt("--water-plane"), waterWorldClipEnabled: true, waterWorldHeightOffsetEnabled: false } : {}),
+  fog: { mode: +opt("--fog", 0) > 0 ? "UNIFORM" : "NONE", uniformDensity: +opt("--fog", 0), skyFogDensity: +opt("--sky-fog", 1), fogColor: { red: 0.66, green: 0.73, blue: 0.82 }, fastFog: true, layers: [] },
   world: { path: world, dimension: "minecraft:overworld" },
   camera: { name: "camera 1", position: { x: eye[0], y: eye[1], z: eye[2] }, orientation: { roll: 0, pitch, yaw }, projectionMode: opt("--projection", "PINHOLE"), fov: chunkyFov, dof: "Infinity", focalOffset: 2, shift: { x: 0, y: 0 } },
   sun: { altitude: alt, azimuth: az, intensity: +opt("--sun-intensity", 1.25), luminosity: 100, apparentBrightness: 1, radius: 0.03, modifySunTexture: false,
     color: { red: 1, green: 1, blue: 1 }, importanceSampling: { chance: 0.1, radius: 1.2 } },
-  sky: { skyYaw: 0, skyPitch: 0, skyRoll: 0, skyMirrored: true, skyExposure: 1, skyLight: +opt("--sky-light", 1), apparentSkyLight: +opt("--sky-light", 1), mode: "SIMULATED", horizonOffset: 0.1,
+  sky: { skyYaw: 0, skyPitch: 0, skyRoll: 0, skyMirrored: true, skyExposure: 1, skyLight: +opt("--sky-light", 1), apparentSkyLight: +opt("--sky-light", 1), mode: "SIMULATED", horizonOffset: +opt("--horizon", 0.1),
     cloudsEnabled: opt("--clouds", "no") === "yes", cloudSize: 64, cloudOffset: { x: 0, y: eye[1] + 120, z: 0 }, simulatedSky: "Nishita", skyCacheResolution: 128 },
   chunkList, cameraPresets: {}, materials: {}, renderer: "PathTracingRenderer", previewRenderer: "PreviewRenderer",
 };

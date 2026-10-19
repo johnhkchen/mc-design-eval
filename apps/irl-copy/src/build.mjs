@@ -103,7 +103,8 @@ export function buildPlace(place, frame, L) {
           // no higher than the footprint's own peak (a tree over the roof is not roof), 1 m of slack
           if (Number.isFinite(p.peak) && p.peak > 0) m = Math.min(m, base + Math.round((p.peak + 1) * sc));
           if (m > ground(x, z) + Math.round(2 * sc)) t = m; } }
-      tops.set(I(x, z), t);
+      // Minecraft 1.21.1 builds no higher than y 319 (a world's sections start at 0 here): a supertall stops at the limit
+      tops.set(I(x, z), Math.min(t, 318));
     }
     return { id: p.id, parcel: p.parcel ?? null, name: p.name ?? null, cells, base, height, peak: p.peak, k, tops, own };
   }).filter(Boolean);
