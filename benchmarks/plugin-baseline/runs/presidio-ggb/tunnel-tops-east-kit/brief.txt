@@ -1,0 +1,166 @@
+Presidio Tunnel Tops (2022, by James Corner Field Operations), San Francisco: the 14-acre park built on the lids of the Presidio Parkway tunnels, joining the Presidio's Main Post (south, uphill) to Crissy Field and the Bay (north, downhill). It is the foreground of a hero view, so it must read, at a glance, as THIS park and never as a generic lawn: broad sweeping lawns cut by long, curving, pale decomposed-granite paths (smooth sandstone / birch planks / sand-coloured paving, 2-3 wide, with gentle bends and forks), and between them big drifts of native coastal planting in soft grey-greens, ochres and purples (azalea/flowering azalea leaves, moss carpets and moss blocks, tall grass, ferns, sweet berry bushes, dead bushes, cornflowers/alliums, sunflowers sparingly; low coastal shrubs as leaf blocks a block or two high), stands of Monterey cypress and pine (dark, flat-topped crowns of spruce/dark oak leaves on logs), seating walls of pale concrete with timber tops, wooden benches, and slim black lamp posts. Light it all so no mob spawns (lamps along every path, lanterns on walls; light blocks hidden under moss carpet are fine).
+
+Scale: 0.5 blocks per metre. For a public catalog for a Minecraft 1.21.1 server: only blocks that exist in 1.21.1 (no pale oak, nothing 1.21.4+). No villagers. This is a LANDSCAPE module on the real terrain: build it IN SITE ORIENTATION (north is low z, east is high x) exactly to the maps below. VERTICAL DATUM: module y 0 = the land model's world y 2; the module replaces EVERYTHING in its box from y 1 up, so you must rebuild the whole ground of the box: in every column fill solid ground (dirt under the surface, stone below y 2) from y 1 up to the GROUND HEIGHT MAP's value, the surface block at that height (grass_block for lawns and planting beds, path blocks for paths, the paving for W cells), so the edges of the box meet the land around it seamlessly (keep the outermost 2 blocks of every edge exactly at the mapped heights). Inside the park you may reshape the ground by 1-2 blocks to make terraces, seating steps and smooth slopes (use slabs and stairs to soften every 1-block step on lawns and paths, no raw terraces), but keep the overall rise from the low north edge up to the Main Post in the south. B cells: buildings placed separately; leave them flat ground at the mapped height with nothing on them. W cells outside the park are roads, walks and plazas: pave them (roads gray_concrete with white/yellow markings where they run long and straight, walks smooth stone / light paving). T cells: water at y 2 (one block of water over clay at y 1). Nothing may leave its plot or exceed y 30.
+
+ONE module, plot 0, x 0..85, z 0..145 (86 x 146), up to y 30: THE EAST HALF of the Tunnel Tops (its west edge at x 0 continues from a sister module, the west half, at the same heights: the Outpost play area and the big lawn come in across x 0 and must run straight on). Features in place (module coordinates):
+ - THE FIELD STATION (around x 4..16, z 22..34): the park's small modern nature pavilion: a low timber-and-glass building (dark timber cladding, big glass panes, a flat or shallow roof with a deep overhang), 2 storeys tall at most, with a little deck in front.
+ - The east end of the OUTPOST play area (x 0..20, z 18..42): timber log play pieces and boulders on gravel, matching the west half.
+ - THE EAST MEADOW (x 7..38, z 63..84): a round, mounded mowed lawn ringed by a pale path, with a few young trees at its edge.
+ - The east end of THE BIG LAWN (x 0..10, z 57..80).
+ - THE CAMPFIRE CIRCLE (about x 40..56, z 88..104): a small sunken circular amphitheatre: three concentric rings of pale stone/timber seating steps around a central fire ring (a campfire in a stone circle), surrounded by cypress.
+ - THE PICNIC PLACE (about x 20..60, z 40..60, between the Field Station and the meadow): terraces stepping down the slope with retaining seating walls, timber picnic tables and benches, umbrellas suggested by banners on fences, planting beds.
+ - THE PARKWAY'S EAST TUNNEL PORTAL: the Presidio Parkway emerges from its tunnels under the park's east edge at about x 66..80, z 48..68 and runs on east (the lower W band at the box's east edge): a clean concrete portal face (smooth stone / light grey concrete, 4-5 high, two dark tunnel mouths with lights) set into the slope, the park running over its lid; concrete retaining walls each side.
+ - The OVERLOOK terraces continue along the high south edge (x 0..60, z 100..135): stepped seating walls of pale concrete with timber benches facing north, a promenade, planters, lamps.
+ - Everywhere else in the park: native planting drifts between curving paths, cypress and pine clumps, especially along the east edge.
+
+GROUND HEIGHT MAP: the ground surface block's y in the module (module y 0 = world y 2), one base-36 digit per cell (0-9 then a=10, b=11, ... z=35); under a building, the height around it
+2222333333333333333333333333333333333333333
+2233333333333333333333333333333333222222221
+3333333333333333333333333332111111111111111
+3333333333333322222222221111111111111111111
+2222222222222222222111111111222222333333333
+2222222222222221121111222233333333333333333
+1111122333333333333333333333333333333333333
+2223333333333333333333333333333333333333333
+33333333???????3333333333333333333333333333
+33333333????????333333333233333333333333333
+33333333???????3333333332233333333333333333
+33333333?3333333333333333333333333334443333
+3333333333333333333333333333333333444444333
+3333333333333333333333333333333334444444433
+3333333333333333333333333333333344444444333
+3333333333333333333333333333333344444444332
+3333333333333333333333333333333444554444332
+3333333333333333333333333333444445555544332
+3333333333333333333333333344455555555554332
+3444333333333333333444443345556555555554332
+4444444433333333444445543355666655555554332
+4455555443333344445555554456666665555554332
+4555565544334445555666666666666666565553332
+5555666554444555566666666666666666666543333
+5556666655555556666666666666666666666543333
+5666666665555666666666666666666666666533333
+6666666666666666666666666666666666666532222
+6666666666666666666666666666666666666532222
+7666666666666666666666666666666666555533223
+7766666666666667777666666666666666555543333
+7776666666666777777776666666666666555544332
+7777666666667777777777666666666665555543332
+7777766666677777777777766666677665555433333
+7777766666777777777777666666777665554332233
+7777777777777777777777666667777655553222233
+7777777777777777777777666667777655553222333
+7777777777777777777777666667776655543222333
+7777777777777777777777666667666655653223333
+7777777777777777777776666677666555653223333
+7777777777777777777776666777666554553333333
+7777777777777777777776666776666544544333333
+7778777777777777777776666776665444444433333
+7788877777777777777777666766664444444443333
+778877777777777777777766776665444???4444443
+777777777777777777777777766665444????444444
+777777777777777777777777766664444????444444
+87777777777777777777777776665444?????44??44
+776777777777777777777666666654445????4?????
+77766666777777777777766666665445555544?????
+77766666666777777777766666664445555554444??
+8877666666666677777777666666444??5555544444
+8877666776666666777777776665444??5555544444
+8876667777776666667776666665554??5555554444
+886666777777776656666666666555???5555555444
+887777777777777766665566666555???5555555443
+877788777777777777665556666555???5555555443
+777788777777777777766555565555??55555554432
+77788777777777777777765555555???55555554322
+7788877777777777777777655555566665555544323
+7788877777777777777777765555666665555543223
+788887777777777777?777766555666666555433223
+88888877777777777????7766555666666555432234
+88888887777777877?????766555??6666555432334
+8888888887778887??????665555??6666554322334
+888888888888888????77?76555??6666?554323344
+88888888888888?????77776555??66665543323344
+88888888888888????777776555??666?5543323444
+88???88888888????7777775555?6666?5543233444
+88????888888????7767777655??666655543233444
+888???88888?????7777777655??666555443233445
+88888???888????8777777666666666555433223444
+88888???8888????777777666666665554433323344
+88888??888888???777777666666665554433322334
+
+SITE MAP: P = Tunnel Tops park, R = road (asphalt), W = paved walk/plaza, B = a building's footprint (placed separately: keep it flat ground at the map height, build nothing there), T = water, . = other ground (grass, planting, parking edges)
+..................WWWWWWWWW..WWWWWWW.WWWWWW
+..........................WWWWWWWWWWWWWWW..
+........WWWWWWWWWWWWWWWWWWWW...............
+WWWWWWWWWWWWWW.............................
+..........W..W...........................WW
+............................WWWWWWWWWWWWWWW
+..............WWWWWWWWPPPPPPPPPPPPPP.WWWWW.
+WWWWWWWWWPPPPPPPPPPPPPPPPPPPPPPPPPPPPPWWWW.
+PPPPPPPPBBBBBBBBPPPPPPPPPPPPPPPPPPPPPPWWWW.
+PPPPPPPPBBBBBBBBBPPPPPPPPPPPPPPPPPPPPPWWWWW
+PPPPPPPPBBBBBBBBPPPPPPPPPPPPPPPPPPPPPPWWWWW
+PPPPPPPPBBBBBBBPPPPPPPPPPPPPPPPPPPPPPPWWWWW
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPWWWW.
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPWWWW.
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPWWWWW.
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPWWWW..
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPWWWW..
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPWWWW..
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPWWWWW..
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPWWWW...
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPWWWW...
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPWWW....
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPWWWW....
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPWWWW....
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPWWWW....
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPWWWWWWWWW
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPWWWWWWWWW
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPWWWWWWWWW
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP...WWWWWW
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPW...WWWWWW
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPW...WWWWW.
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP...WWWW...
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPW...WWWW...
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPW...WWWWWWW
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP....WWWWWWW
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP...WWWWWWWW
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPW...WWWWWWWW
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPW...WWWWWWWW
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP...WWWWWWWWW
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPW...WWWWWWWWW
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPW...W....WWWW
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPW...W........
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPW...BW........
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPW...BBBBWW...W
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPPW...BBBBBW...W
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPP....BBBBBW....
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPW...BBBBBWBBBWW
+PPPPPPPPPPPPPPPPPPPPPPPPPPPPW...BBBBBWBBBBB
+PPPPP...WPPPPPPPPPPPPPPPPPPPW...W.WBBWBBBBB
+PPPP.......WPPPPPPPPPPPPPPPW...BWWWWWWWBBBB
+PPPP...........PPPPPPPPPPPPW...BBBWWWWWWWWW
+PPPW............WPPPPPPPPPPW...BBWWWWWWWWWW
+PPW....WWWW........PPPPPPPW....BBBWWWWWWWWW
+PP....WWWWWWW...W...PPPPPPW...BBBBWWWWWWWW.
+PW...WWWWWWWWWW.W.....PPPPW...BBBWWWWWWWW..
+W...WW.WWWWWWWWWWW.....WWWW...BBBWWWWWWW...
+....W.WWWWWWWWWWWWW......W...BBBBWWWWWW....
+...WWWWWWWWWWWWWWWWWW........BBBBWWWWW.....
+..WWWWWWWWWWWWWWWWW.WW.......WBBWWWWWW.....
+..WWWWWWWWWWWWWWW.WW..WW.....WWWWWWWW......
+.WWWWWWWWWWWWW.WW.BBWW.WW...WWWWWWWWW......
+WWWWWWWWWWWWWWWW.BBBBWW.W...WWWWWWWW.......
+WWWWWWWWWWWWWWW.BBBBBBWWW...BBWWWWW.......W
+WWWWWWWWWWWWWWWBBBBBBBBW....BBWWWW........W
+WWWWWWWWWWWWWWWBBBBBBBWW...BBBWWBB........W
+WWWWWWWWWW.WWWBBBBBW..WW...BBWWWB........W.
+WWWBWWWWWW.W.BBBBBWW.WWW...BBWWWBB.......W.
+WWBBBBWWWWW..BBBBBWWWWW...BBBWWWBB.......W.
+WWBBBBWWWW..BBBBBWWWWWW...BBBWWBB........W.
+WWBBBBWWWW.BBBBBWW.WWWW...BBWWW...........W
+....BBBBWW.BBBBBWW.WWW....BBWW.............
+.....BBBBWWBBBBBWWWWWW...WWWWW.............
+.....BBBW.WW.BBBWW..WW...WWWWW.............
+
+Use the photograph only as inspiration for character and colour.

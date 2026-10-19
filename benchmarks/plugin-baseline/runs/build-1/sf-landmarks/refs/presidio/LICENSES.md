@@ -1,0 +1,19 @@
+# Presidio (Main Post, Tunnel Tops) reference photos
+
+From Wikimedia Commons, used as build references (concept images for the kit runs).
+
+- tunnel-tops/tunnel-tops-01.jpg: "Tunnel Tops Park with Alcatraz.jpg" by Dicklyon, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0), https://commons.wikimedia.org/wiki/File:Tunnel_Tops_Park_with_Alcatraz.jpg
+- tunnel-tops/tunnel-tops-aerial.jpg: "Presidio Tunnel Tops aerial.jpg" by Dicklyon, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0), https://commons.wikimedia.org/wiki/File:Presidio_Tunnel_Tops_aerial.jpg
+- tunnel-tops/presidio-2023-01.jpg: "Presidio of San Francisco (2023)-L1003411.jpg" by Frank Schulenburg, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0), https://commons.wikimedia.org/wiki/File:Presidio_of_San_Francisco_(2023)-L1003411.jpg
+- tunnel-tops/presidio-2023-02.jpg: "Presidio of San Francisco (2023)-L1003404.jpg" by Frank Schulenburg, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0), https://commons.wikimedia.org/wiki/File:Presidio_of_San_Francisco_(2023)-L1003404.jpg
+- tunnel-tops/presidio-2023-03.jpg: "Presidio of San Francisco (2023)-L1003418.jpg" by Frank Schulenburg, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0), https://commons.wikimedia.org/wiki/File:Presidio_of_San_Francisco_(2023)-L1003418.jpg
+- disney/disney-01.jpg: "The Walt Disney Family Museum in the Presidio, San Francisco (TK1).JPG" by Tobias Kleinlercher / Wikipedia, CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0), https://commons.wikimedia.org/wiki/File:The_Walt_Disney_Family_Museum_in_the_Presidio,_San_Francisco_(TK1).JPG
+- disney/disney-02.jpg: "Walt Disney Family Museum by Joy of Museums.jpg" by Joyofmuseums, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0), https://commons.wikimedia.org/wiki/File:Walt_Disney_Family_Museum_by_Joy_of_Museums.jpg
+- disney/disney-03.jpg: "Disney Museum 1.JPG" by Cullen328 by Jim Heaphy, CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0), https://commons.wikimedia.org/wiki/File:Disney_Museum_1.JPG
+- barracks/barracks-01.jpg: "Montgomery St. Barracks, Presidio of SF front.JPG" by BrokenSphere, CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0), https://commons.wikimedia.org/wiki/File:Montgomery_St._Barracks,_Presidio_of_SF_front.JPG
+- barracks/barracks-02.jpg: "3 of the Montgomery St. Barracks, Presidio of SF.JPG" by BrokenSphere, CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0), https://commons.wikimedia.org/wiki/File:3_of_the_Montgomery_St._Barracks,_Presidio_of_SF.JPG
+- barracks/parade-ground-01.jpg: "Presidio of SF Main Post Parade Ground 1.JPG" by BrokenSphere, CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0), https://commons.wikimedia.org/wiki/File:Presidio_of_SF_Main_Post_Parade_Ground_1.JPG
+- barracks/porch-01.jpg: "Presidio Barracks Porch.jpg" by PeteBobb, CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0), https://commons.wikimedia.org/wiki/File:Presidio_Barracks_Porch.jpg
+- officers-club/officers-club-01.jpg: "Presidio of SF Officer's Club front.JPG" by BrokenSphere, CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0), https://commons.wikimedia.org/wiki/File:Presidio_of_SF_Officer%27s_Club_front.JPG
+- officers-club/officers-club-02.jpg: "Presidio of San Francisco Officer's Club (TK1).JPG" by Tobias Kleinlercher / Wikipedia, CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0), https://commons.wikimedia.org/wiki/File:Presidio_of_San_Francisco_Officer%27s_Club_(TK1).JPG
+- visitor-center/visitor-center-01.jpg: "Ribbon-cutting ceremony of the new Presidio Visitor Center.jpg" by Frank Schulenburg, CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0), https://commons.wikimedia.org/wiki/File:Ribbon-cutting_ceremony_of_the_new_Presidio_Visitor_Center.jpg
