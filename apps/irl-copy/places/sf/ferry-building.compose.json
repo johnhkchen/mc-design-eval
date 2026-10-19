@@ -1,8 +1,8 @@
 {
- "note": "The Ferry Building kit (lab run ferry-building-kit, v2: tower and entrance pavilion, wing section, end pavilion; each a full cross-section 80 deep) on the squared footprint (81 x 284 blocks; the place is turned 36 degrees so the Embarcadero runs along z): land fronts west onto the Embarcadero, the tower at the middle, five wing sections each side, an end pavilion at each end (the south one mirrored).",
+ "note": "The Ferry Building kit (lab run ferry-building-kit, v3: tower and entrance pavilion, wing section, end pavilion; each a full cross-section 80 deep) on the squared footprint (81 x 284 blocks; the place is turned 36 degrees so the Embarcadero runs along z): land fronts west onto the Embarcadero, the tower at the middle, five wing sections each side, an end pavilion at each end (the south one mirrored).",
  "modules": {
   "tower": {
-   "file": "../../benchmarks/plugin-baseline/runs/build-1/ferry-building-kit/v2.nbt",
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/ferry-building-kit/v3.nbt",
    "plot": [
     0,
     0,
@@ -11,7 +11,7 @@
    ]
   },
   "wing": {
-   "file": "../../benchmarks/plugin-baseline/runs/build-1/ferry-building-kit/v2.nbt",
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/ferry-building-kit/v3.nbt",
    "plot": [
     48,
     0,
@@ -20,7 +20,7 @@
    ]
   },
   "end": {
-   "file": "../../benchmarks/plugin-baseline/runs/build-1/ferry-building-kit/v2.nbt",
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/ferry-building-kit/v3.nbt",
    "plot": [
     64,
     0,
