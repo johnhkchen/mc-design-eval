@@ -166,6 +166,18 @@ export function buildPlace(place, frame, L) {
       for (let dy = 3; dy <= 6; dy++) for (let dx = -2; dx <= 2; dx++) for (let dz = -2; dz <= 2; dz++) if (Math.abs(dx) + Math.abs(dz) <= (dy === 6 ? 1 : 3) && !g.get(x + dx, y0 + dy, z + dz)) g.set(x + dx, y0 + dy, z + dz, "oak_leaves", { persistent: "true", distance: "1", waterlogged: "false" });
       trees.trees.push({ at: [x, z] }); } }
   const dressing = { ...trimmed, ...dress(g, site) };
+  // a tree whose ground the dressing turned to sea (a rock or a float the lidar's canopy stood on) floats: its trunk goes,
+  // and the leaves no trunk holds up any more
+  { const [, Y] = g.size, gone = [], name = (x, y, z) => g.get(x, y, z)?.block ?? "";
+    for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) {
+      let w = -1; for (let y = 0; y < Y; y++) if (/water/.test(name(x, y, z))) w = y; if (w < 0) continue;
+      let y = w + 1; while (y < w + 6 && !name(x, y, z)) y++;                        // the first thing over the water, if near
+      if (!/_log$/.test(name(x, y, z))) continue;
+      for (let yy = y; yy < Y && /_log$/.test(name(x, yy, z)); yy++) g.set(x, yy, z, "air"); gone.push([x, y, z]); }
+    for (const [cx, cy, cz] of gone) for (let dz = -4; dz <= 4; dz++) for (let dx = -4; dx <= 4; dx++) for (let y = cy; y < Math.min(Y, cy + 16); y++) {
+      const x = cx + dx, z = cz + dz; if (!/leaves$/.test(name(x, y, z))) continue;
+      let held = false; for (let ez = -3; ez <= 3 && !held; ez++) for (let ex = -3; ex <= 3 && !held; ex++) for (let ey = -5; ey <= 2 && !held; ey++) if (/_log$/.test(name(x + ex, y + ey, z + ez))) held = true;
+      if (!held) g.set(x, y, z, "air"); } }
 
   const manifest = { place: place.id, name: place.name, size: g.size, metresPerBlock: 1 / sc, floorElevation: +(floor / sc).toFixed(1), box: frame.box, ground: [+(lo / sc).toFixed(1), +(hi / sc).toFixed(1)],
     streets: [...new Set((L.streets?.features ?? []).map((f) => f.properties.name))], trees: trees.trees.length, dressing,
