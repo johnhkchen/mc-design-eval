@@ -111,6 +111,9 @@ export function compose(g, manifest, placements, { ground, I, angle = 0 }) {
     return [...notes, `turned ${angle} degrees about ${pivot.map((v) => v.toFixed(1)).join(",")}: ${n} blocks`];
   }
   const notes = [], cleared = new Set(), byId = new Map(manifest.buildings.map((b) => [b.id, b]));
+  // room overhead: a module may stand taller than the lidar massing (a spire the lidar's median softens)
+  const need = Math.max(0, ...placements.map((p) => { const b = byId.get(p.building); return b ? b.base + (p.y ?? 0) + p.module.size[1] + 2 : 0; }));
+  if (need > g.size[1] && g.growTo) g.growTo(need);
   for (const p of placements) {
     const b = byId.get(p.building); if (!b) { notes.push(`${p.building}: not in the manifest`); continue; }
     const [x0, z0, x1, z1] = p.plot, W = x1 - x0 + 1, D = z1 - z0 + 1, H = Math.min(p.module.size[1], g.size[1]);

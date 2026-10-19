@@ -1,0 +1,29 @@
+{
+ "note": "The Space Needle kit (lab run space-needle-kit, v1: one 64 x 64 module, legs, core, SkyLine, saucer with halo, roof and spire to y 258) centred on the saucer the lidar measured (60 blocks across, centre 164, 167); its box clears the extruded massing of the saucer outline.",
+ "modules": {
+  "needle": {
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/space-needle-kit/v1.nbt",
+   "plot": [
+    0,
+    0,
+    63,
+    63
+   ]
+  }
+ },
+ "catalog": {
+  "needle": "sea-01-space-needle"
+ },
+ "placements": [
+  {
+   "building": "SEA1270134472",
+   "module": "needle",
+   "mode": "at",
+   "at": [
+    111,
+    9
+   ],
+   "quarter": 0
+  }
+ ]
+}

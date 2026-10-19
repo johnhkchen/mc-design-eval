@@ -26,6 +26,13 @@ export class Voxels {
     this.data[i] = p; return this;
   }
   get(x, y, z) { const i = this.at(x, y, z); if (i < 0 || !this.data[i]) return null; const p = this.palette[this.data[i]]; return { pos: [x, y, z], block: p.block, state: p.state ?? undefined }; }
+  /** Taller, in place (more sky over the same ground): a module can stand higher than the massing it replaces. */
+  growTo(Y) {
+    const [X, Y0, Z] = this.size; if (Y <= Y0) return this;
+    const d = new Uint16Array(X * Y * Z);
+    for (let z = 0; z < Z; z++) for (let y = 0; y < Y0; y++) d.set(this.data.subarray((z * Y0 + y) * X, (z * Y0 + y + 1) * X), (z * Y + y) * X);
+    this.data = d; this.size = [X, Y, Z]; return this;
+  }
   count() { let n = 0; for (const v of this.data) if (v) n++; return n; }
 
   /** A vanilla structure file: size, palette, blocks (pos + state index), entities, DataVersion; gzipped. */

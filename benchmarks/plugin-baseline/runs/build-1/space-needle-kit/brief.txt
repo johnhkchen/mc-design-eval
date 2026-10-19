@@ -1,0 +1,32 @@
+The Space Needle, Seattle (John Graham & Company with Victor Steinbrueck, 1962, for the World's Fair): a slender tower of
+three pairs of steel legs, warm white ("astronaut white"), that splay out at the ground, pinch together at a narrow WAIST
+about two thirds of the way up, then flare out again to carry the TOP HOUSE: a flying-saucer disc ringed by a slatted
+HALO of radiating ribs, the glazed restaurant and observation deck inside it, a small domed roof (gold-orange "galaxy gold"
+trim on the roof's band), and a thin spire with a beacon. Between the legs the open-lattice core carries the glass
+elevators (one gold elevator car visible). At 30 m up, the SkyLine level: a small hexagonal platform among the legs. It must
+read, at a glance, as THIS tower: the hourglass legs and the halo-ringed saucer on top.
+
+Scale: 1.4 blocks per metre. For a public catalog for a Minecraft 1.21.1 server: only blocks that exist in 1.21.1 (no pale oak,
+nothing 1.21.4+). Placement code sets it on its real site from city data (measured by lidar: the saucer 60 blocks across, its
+roof 235 above the ground, the spire's tip 258), so it keeps exactly to its plot and stated size.
+
+ONE module on a fixed plot, standing at y 0 on a flat 1-block ground of smooth stone; its "front" (the elevator face) north:
+ plot 0, x 0..63, z 0..63 (64 x 64), up to y 259: THE SPACE NEEDLE, centred on (32, 32).
+   - Legs: three pairs (six legs, at 0, 120 and 240 degrees around the centre, each pair two legs side by side with a gap),
+     their feet about 40 blocks apart across the plot at the ground, leaning in to the WAIST at about y 120 where they come
+     within about 8 of the centre, then leaning back out to meet the saucer's underside at about 14 from the centre. Each leg
+     2 x 2 (white concrete, quartz or calcite), straight runs stepped with stairs and slabs, braced by horizontal ties every 12.
+   - Core: a lattice of iron bars and white walls on the axis (about 6 across) from the ground to the saucer, with the
+     elevator shafts (glass) on the north face and a gold block elevator car somewhere up it; a stair ladder inside.
+   - SkyLine level at y 42..48: a small hexagonal deck (about 30 across) with glass walls and a flat white soffit.
+   - Top house, y 205..235: a disc 60 across, its underside a shallow cone of radiating white ribs; the halo (a ring of
+     closely spaced white rib fins, iron bars or white stained glass panes, with a thin outer rail) around the rim at y
+     212..222; inside it the restaurant and observation deck, a dark glazed band (gray or black stained glass) with a white
+     floor slab and a glass rail around the deck; above, a smaller round roof stepping in to about 24 across, a band of orange
+     terracotta or gold trim, a white dome at about y 235.
+   - Spire: a thin mast (end rods, iron bars or chain) on the dome to y 258, a beacon or sea lantern at its tip.
+   - At the foot, a small round glass Pavilion (about 30 across, 7 high) wrapped around the base of the core, between the
+     legs' feet, with a curving ramp (slabs) up to its door.
+Use the photographs only as inspiration for character and colour. No furniture or villagers (tables in the restaurant are
+fine). Light it so no mob spawns (sea lanterns or glowstone hidden in the saucer floor and the SkyLine soffit, lights in the
+core). Nothing may leave its plot.
