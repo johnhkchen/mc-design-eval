@@ -1,0 +1,802 @@
+{
+ "note": "Pike Place Market: six lean kits (runs/pike-place), each module on its footprint, parts of the market parcel at their own ground level",
+ "modules": {
+  "pike-arcade-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-arcade/build.nbt",
+   "plot": [
+    0,
+    0,
+    42,
+    311
+   ]
+  },
+  "pike-marketfront-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-marketfront/build.nbt",
+   "plot": [
+    0,
+    0,
+    127,
+    339
+   ]
+  },
+  "pike-marketfront-1": {
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-marketfront/build.nbt",
+   "plot": [
+    132,
+    0,
+    212,
+    132
+   ]
+  },
+  "pike-corner-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-corner/build.nbt",
+   "plot": [
+    0,
+    0,
+    57,
+    101
+   ]
+  },
+  "pike-corner-1": {
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-corner/build.nbt",
+   "plot": [
+    62,
+    0,
+    123,
+    101
+   ]
+  },
+  "pike-corner-2": {
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-corner/build.nbt",
+   "plot": [
+    128,
+    0,
+    206,
+    154
+   ]
+  },
+  "pike-corner-3": {
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-corner/build.nbt",
+   "plot": [
+    211,
+    0,
+    252,
+    31
+   ]
+  },
+  "pike-north-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-north/build.nbt",
+   "plot": [
+    0,
+    0,
+    59,
+    158
+   ]
+  },
+  "pike-north-1": {
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-north/build.nbt",
+   "plot": [
+    64,
+    0,
+    117,
+    157
+   ]
+  },
+  "pike-waterfront-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-waterfront/build.nbt",
+   "plot": [
+    0,
+    0,
+    119,
+    171
+   ]
+  },
+  "pike-waterfront-1": {
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-waterfront/build.nbt",
+   "plot": [
+    124,
+    0,
+    172,
+    94
+   ]
+  },
+  "pike-waterfront-2": {
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-waterfront/build.nbt",
+   "plot": [
+    177,
+    0,
+    242,
+    110
+   ]
+  },
+  "pike-waterfront-3": {
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-waterfront/build.nbt",
+   "plot": [
+    247,
+    0,
+    309,
+    102
+   ]
+  },
+  "pike-first-ave-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-first-ave/build.nbt",
+   "plot": [
+    0,
+    0,
+    60,
+    53
+   ]
+  },
+  "pike-first-ave-1": {
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-first-ave/build.nbt",
+   "plot": [
+    65,
+    0,
+    128,
+    72
+   ]
+  },
+  "pike-first-ave-2": {
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-first-ave/build.nbt",
+   "plot": [
+    133,
+    0,
+    191,
+    61
+   ]
+  },
+  "pike-first-ave-3": {
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-first-ave/build.nbt",
+   "plot": [
+    196,
+    0,
+    260,
+    64
+   ]
+  },
+  "pike-first-ave-4": {
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-first-ave/build.nbt",
+   "plot": [
+    265,
+    0,
+    321,
+    37
+   ]
+  },
+  "pike-first-ave-5": {
+   "file": "../../benchmarks/plugin-baseline/runs/pike-place/pike-first-ave/build.nbt",
+   "plot": [
+    326,
+    0,
+    387,
+    61
+   ]
+  },
+  "fill-SEA1270106546": {
+   "file": "work/seattle/pike-place/fill/SEA1270106546.nbt",
+   "plot": [
+    0,
+    0,
+    63,
+    42
+   ]
+  },
+  "fill-SEA1270135283": {
+   "file": "work/seattle/pike-place/fill/SEA1270135283.nbt",
+   "plot": [
+    0,
+    0,
+    47,
+    59
+   ]
+  },
+  "fill-SEA1270099000": {
+   "file": "work/seattle/pike-place/fill/SEA1270099000.nbt",
+   "plot": [
+    0,
+    0,
+    13,
+    13
+   ]
+  },
+  "fill-SEA1270110932": {
+   "file": "work/seattle/pike-place/fill/SEA1270110932.nbt",
+   "plot": [
+    0,
+    0,
+    9,
+    36
+   ]
+  },
+  "fill-SEA1270125675": {
+   "file": "work/seattle/pike-place/fill/SEA1270125675.nbt",
+   "plot": [
+    0,
+    0,
+    21,
+    35
+   ]
+  },
+  "fill-SEA1270114211": {
+   "file": "work/seattle/pike-place/fill/SEA1270114211.nbt",
+   "plot": [
+    0,
+    0,
+    70,
+    90
+   ]
+  },
+  "fill-SEA1270120146": {
+   "file": "work/seattle/pike-place/fill/SEA1270120146.nbt",
+   "plot": [
+    0,
+    0,
+    59,
+    16
+   ]
+  },
+  "fill-SEA1270145957": {
+   "file": "work/seattle/pike-place/fill/SEA1270145957.nbt",
+   "plot": [
+    0,
+    0,
+    12,
+    13
+   ]
+  },
+  "fill-SEA1270106905": {
+   "file": "work/seattle/pike-place/fill/SEA1270106905.nbt",
+   "plot": [
+    0,
+    0,
+    51,
+    36
+   ]
+  },
+  "fill-SEA1270158151": {
+   "file": "work/seattle/pike-place/fill/SEA1270158151.nbt",
+   "plot": [
+    0,
+    0,
+    8,
+    8
+   ]
+  },
+  "fill-SEA1270110930": {
+   "file": "work/seattle/pike-place/fill/SEA1270110930.nbt",
+   "plot": [
+    0,
+    0,
+    59,
+    155
+   ]
+  },
+  "fill-SEA1270106900": {
+   "file": "work/seattle/pike-place/fill/SEA1270106900.nbt",
+   "plot": [
+    0,
+    0,
+    31,
+    7
+   ]
+  },
+  "fill-SEA1270109651": {
+   "file": "work/seattle/pike-place/fill/SEA1270109651.nbt",
+   "plot": [
+    0,
+    0,
+    9,
+    10
+   ]
+  },
+  "fill-SEA1270106906": {
+   "file": "work/seattle/pike-place/fill/SEA1270106906.nbt",
+   "plot": [
+    0,
+    0,
+    57,
+    40
+   ]
+  },
+  "fill-SEA1270109652": {
+   "file": "work/seattle/pike-place/fill/SEA1270109652.nbt",
+   "plot": [
+    0,
+    0,
+    10,
+    10
+   ]
+  },
+  "fill-SEA1270132734": {
+   "file": "work/seattle/pike-place/fill/SEA1270132734.nbt",
+   "plot": [
+    0,
+    0,
+    39,
+    78
+   ]
+  },
+  "fill-SEA1270135285": {
+   "file": "work/seattle/pike-place/fill/SEA1270135285.nbt",
+   "plot": [
+    0,
+    0,
+    51,
+    40
+   ]
+  },
+  "fill-SEA1270108999": {
+   "file": "work/seattle/pike-place/fill/SEA1270108999.nbt",
+   "plot": [
+    0,
+    0,
+    112,
+    67
+   ]
+  },
+  "fill-SEA1270126970": {
+   "file": "work/seattle/pike-place/fill/SEA1270126970.nbt",
+   "plot": [
+    0,
+    0,
+    40,
+    75
+   ]
+  },
+  "fill-SEA1270120147": {
+   "file": "work/seattle/pike-place/fill/SEA1270120147.nbt",
+   "plot": [
+    0,
+    0,
+    62,
+    16
+   ]
+  }
+ },
+ "placements": [
+  {
+   "building": "SEA1270106902",
+   "module": "pike-arcade-0",
+   "mode": "at",
+   "at": [
+    196,
+    28
+   ],
+   "y": 22,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270106902",
+   "module": "pike-marketfront-0",
+   "mode": "at",
+   "at": [
+    81,
+    0
+   ],
+   "y": 2,
+   "quarter": 0
+  },
+  {
+   "building": "SEA1270106902",
+   "module": "pike-marketfront-1",
+   "mode": "at",
+   "at": [
+    0,
+    140
+   ],
+   "y": 0,
+   "quarter": 0
+  },
+  {
+   "building": "SEA1270106902",
+   "module": "pike-corner-0",
+   "mode": "at",
+   "at": [
+    167,
+    340
+   ],
+   "y": 17,
+   "quarter": 0
+  },
+  {
+   "building": "SEA1270106902",
+   "module": "pike-corner-1",
+   "mode": "at",
+   "at": [
+    225,
+    340
+   ],
+   "y": 32,
+   "quarter": 0
+  },
+  {
+   "building": "SEA1270126969",
+   "module": "pike-corner-2",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270126968",
+   "module": "pike-corner-3",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270109000",
+   "module": "pike-north-0",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270109001",
+   "module": "pike-north-1",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270099001",
+   "module": "pike-waterfront-0",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270107325",
+   "module": "pike-waterfront-1",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270109648",
+   "module": "pike-waterfront-2",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270109650",
+   "module": "pike-waterfront-3",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270126967",
+   "module": "pike-first-ave-0",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270126966",
+   "module": "pike-first-ave-1",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270110931",
+   "module": "pike-first-ave-2",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270114208",
+   "module": "pike-first-ave-3",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270162410",
+   "module": "pike-first-ave-4",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270162409",
+   "module": "pike-first-ave-5",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "y": 0,
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270106546",
+   "module": "fill-SEA1270106546",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270135283",
+   "module": "fill-SEA1270135283",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270099000",
+   "module": "fill-SEA1270099000",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270110932",
+   "module": "fill-SEA1270110932",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270125675",
+   "module": "fill-SEA1270125675",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270114211",
+   "module": "fill-SEA1270114211",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270120146",
+   "module": "fill-SEA1270120146",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270145957",
+   "module": "fill-SEA1270145957",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270106905",
+   "module": "fill-SEA1270106905",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270158151",
+   "module": "fill-SEA1270158151",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270110930",
+   "module": "fill-SEA1270110930",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270106900",
+   "module": "fill-SEA1270106900",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270109651",
+   "module": "fill-SEA1270109651",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270106906",
+   "module": "fill-SEA1270106906",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270109652",
+   "module": "fill-SEA1270109652",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270132734",
+   "module": "fill-SEA1270132734",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270135285",
+   "module": "fill-SEA1270135285",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270108999",
+   "module": "fill-SEA1270108999",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270126970",
+   "module": "fill-SEA1270126970",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270120147",
+   "module": "fill-SEA1270120147",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  }
+ ]
+}
