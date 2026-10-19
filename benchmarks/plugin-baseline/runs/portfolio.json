@@ -1,0 +1,13 @@
+{
+ "title": "Landmark renders: agents and renders, Palace of Fine Arts to the National Mall",
+ "projects": [
+  { "name": "Palace of Fine Arts", "billing": "Subscription", "runs": ["benchmarks/plugin-baseline/runs/build-1/palace-kit"], "renders": [{ "png": "apps/irl-copy/out/sf/palace-of-fine-arts/shots/palace-lagoon.png" }, { "png": "apps/irl-copy/out/sf/palace-of-fine-arts/shots/palace-lagoon-v2.png" }] },
+  { "name": "City Hall", "billing": "Subscription", "runs": ["benchmarks/plugin-baseline/runs/build-1/city-hall-kit"], "renders": [{ "png": "apps/irl-copy/out/sf/city-hall/shots/city-hall-plaza.png" }] },
+  { "name": "Ferry Building", "billing": "Subscription", "runs": ["benchmarks/plugin-baseline/runs/build-1/ferry-building-kit"], "renders": [{ "png": "apps/irl-copy/out/sf/ferry-building/shots/ferry-embarcadero.png" }] },
+  { "name": "Seattle Center", "billing": "Subscription", "runs": ["benchmarks/plugin-baseline/runs/build-1/space-needle-kit", "benchmarks/plugin-baseline/runs/build-1/mopop-kit", "benchmarks/plugin-baseline/runs/build-1/armory-kit", "benchmarks/plugin-baseline/runs/build-1/pacsci-kit", "benchmarks/plugin-baseline/runs/build-1/seattle-towers-kit"], "renders": [{ "png": "apps/irl-copy/out/seattle/space-needle/shots/seattle-center.png" }, { "png": "apps/irl-copy/out/seattle/space-needle/shots/seattle-center-v2.png" }] },
+  { "name": "Pike Place", "billing": "API", "runs": ["benchmarks/plugin-baseline/runs/pike-place"], "renders": [{ "png": "apps/irl-copy/out/seattle/pike-place/shots/pike-place-dusk.png" }] },
+  { "name": "Presidio + Golden Gate", "billing": "API", "runs": ["benchmarks/plugin-baseline/runs/presidio-ggb"], "renders": [{ "scene": "apps/irl-copy/out/sf/presidio-tunnel-tops/chunky/presidio-tunnel-tops-pano.json", "lost": true }, { "png": "apps/irl-copy/out/sf/presidio-tunnel-tops/shots/presidio-ggb-marin.png" }] },
+  { "name": "Rockefeller Center", "billing": "API", "runs": ["benchmarks/plugin-baseline/runs/rockefeller-center", "apps/irl-copy/work/nyc/rockefeller-center/fill"], "renders": [{ "png": "apps/irl-copy/out/nyc/rockefeller-center/shots/rockefeller-se-golden.png" }] },
+  { "name": "National Mall", "billing": "API", "runs": ["benchmarks/plugin-baseline/runs/national-mall", "apps/irl-copy/work/dc/national-mall/fill"], "renders": [{ "png": "apps/irl-copy/out/dc/national-mall/shots/national-mall-golden.png" }] }
+ ]
+}
