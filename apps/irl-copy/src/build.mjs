@@ -120,7 +120,10 @@ export function buildPlace(place, frame, L) {
     const h = (i) => (lid.count[i] && !near[i] ? lid.surface[i] - lid.ground[i] : 0);
     // no tree stands over 70 m (the tallest in either city are about 60): taller returns off a footprint are a tower's
     // reach past its outline (the Space Needle's legs and saucer over its lawn), not a crown
-    for (let z = 1; z < N - 1; z++) for (let x = 1; x < N - 1; x++) { const i = I(x, z), v = h(i); if (v < 2 || v > 70) continue;
+    // (place.maxTreeM lowers that where the flight caught construction cranes: the Mall's 2014 lidar has two over the
+    // African American museum's site, which grew into 25-block log columns)
+    const tallest = place.maxTreeM ?? 70;
+    for (let z = 1; z < N - 1; z++) for (let x = 1; x < N - 1; x++) { const i = I(x, z), v = h(i); if (v < 2 || v > tallest) continue;
       let k = 0; for (let dz = -1; dz <= 1; dz++) for (let dx = -1; dx <= 1; dx++) if ((dx || dz) && h(I(x + dx, z + dz)) >= 2) k++;
       if (k >= 3) chm[i] = v * sc; } }
   let canopyTop = Math.round(8 * sc); if (chm) { canopyTop = 0; for (const v of chm) if (v > canopyTop) canopyTop = v; }
