@@ -4,6 +4,8 @@
 // sessions go through the plugin's lean wrapper, so their cost lands in a ledger (and $MCD_BILLING / $MCD_BUDGET_USD
 // apply); the modules are then placed in the compose file.
 //   node bin/fill.mjs <place> [--model haiku] [--jobs 8] [--only id,id] [--ledger <file>] [--place-only]
+//     [--roofs] each footprint cell also carries the lidar's roof height there (a 4th number), for skylines of towers on
+//     podiums and setbacks; [--min-cells n] skip footprints smaller than n cells (default 20)
 //     -> work/<place>/fill/<id>.nbt (+ .mjs, -sheet.png), placements added to places/<place>.compose.json
 import { spawn } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -24,25 +26,28 @@ const gfile = `${HERE}/.cache/${name}/usgs-lidar.lidar.ground.f32`, G = existsSy
 let lo = Infinity; if (G) for (const v of G) lo = Math.min(lo, v * sc);
 const ground = (x, z) => (G ? Math.round(G[z * N + x] * sc) - (Math.floor(lo) - Math.round(4 * sc)) : 0);
 const parcels = new Map();
-try { for (const f of JSON.parse(readFileSync(`${HERE}/.cache/${name}/${place.city === "seattle" ? "sea" : "sf"}-parcels.json`, "utf8")).layers.parcels.features) parcels.set(f.properties.parcel, f.properties); } catch {}
+try { for (const f of JSON.parse(readFileSync(`${HERE}/.cache/${name}/${({ seattle: "sea", "new-york": "nyc" })[place.city] ?? "sf"}-parcels.json`, "utf8")).layers.parcels.features) parcels.set(f.properties.parcel, f.properties); } catch {}
 
 const placed = new Set(compose.placements.map((p) => p.building));
-const todo = m.buildings.filter((b) => !placed.has(b.id) && (!only || only.includes(b.id)) && b.footprint.length >= 20);
+const todo = m.buildings.filter((b) => !placed.has(b.id) && (!only || only.includes(b.id)) && b.footprint.length >= +opt("--min-cells", 20));
+// --roofs: the lidar's surface per cell (as build.mjs rounds the ground), capped at the building's top, for the 4th number
+const sfile = `${HERE}/.cache/${name}/usgs-lidar.lidar.surface.f32`, roofs = argv.includes("--roofs") && G && existsSync(sfile) ? new Float32Array(readFileSync(sfile).buffer.slice(0)) : null;
 
 function brief(b) {
   const xs = b.footprint.map((c) => c[0]), zs = b.footprint.map((c) => c[1]), x0 = Math.min(...xs), z0 = Math.min(...zs);
   const W = Math.max(...xs) - x0 + 1, D = Math.max(...zs) - z0 + 1, base = Math.min(...b.footprint.map(([x, z]) => ground(x, z)));
-  const cells = b.footprint.map(([x, z]) => [x - x0, z - z0, ground(x, z) - base]);
+  const fl = Math.floor(lo) - Math.round(4 * sc), roofAt = (x, z) => Math.max(ground(x, z), Math.min(Math.round(roofs[z * N + x] * sc) - fl, b.top)) - base;
+  const cells = b.footprint.map(([x, z]) => (roofs ? [x - x0, z - z0, ground(x, z) - base, roofAt(x, z)] : [x - x0, z - z0, ground(x, z) - base]));
   writeFileSync(`${dir}/${b.id}.cells.json`, JSON.stringify(cells));
   const p = parcels.get(b.parcel) ?? {}, H = b.top - b.base;
-  const what = [p.name, p.use, p.year && `built ${p.year}`, p.address].filter(Boolean).join("; ") || "no record";
+  const what = [b.name, p.name, p.landmark, p.use, p.year && `built ${p.year}`, p.address].filter(Boolean).join("; ") || "no record";
   return `Build one real building as a Minecraft 1.21.1 module for a city diorama of ${place.name} (${place.note ?? ""}). Scale ${sc} blocks per metre.
 The building: ${what}. Footprint ${W} x ${D} blocks; its roof is about ${H} blocks above its lowest ground (from lidar). Decide from that record what it looks like (era, height in storeys of about ${Math.round(3.3 * sc)} blocks, materials typical of the city and its age) and make it read well at a glance from the air and the street at dusk.
 Write a Node ESM script ${dir}/${b.id}.mjs that builds it and saves ${dir}/${b.id}.nbt:
   import { readFileSync } from "node:fs"; import { Voxels } from "${HERE}/src/voxels.mjs";
-  const cells = JSON.parse(readFileSync("${dir}/${b.id}.cells.json", "utf8"));   // [x, z, ground] per footprint cell, x 0..${W - 1}, z 0..${D - 1}
+  const cells = JSON.parse(readFileSync("${dir}/${b.id}.cells.json", "utf8"));   // [x, z, ground${roofs ? ", roof" : ""}] per footprint cell, x 0..${W - 1}, z 0..${D - 1}
   const g = new Voxels([${W}, ${H + 12}, ${D}]);  g.set(x, y, z, "white_concrete");  g.set(x, y, z, "oak_stairs", { facing: "north", half: "bottom", shape: "straight", waterlogged: "false" });  g.save(".../${b.id}.nbt");
-Rules: build only on the footprint cells; y 0 is the lowest ground under it and each cell's ground is its third number: fill solid from y 0 up to that cell's ground (foundation), so nothing floats on a slope; the downhill side shows its extra storeys. Real articulation: window grids of glass panes with frames, a base course, storey lines, a cornice or parapet, entrances with doors and canopies, shopfronts on the ground floor where it is commercial, roof equipment or terraces; warm lights (lanterns, shroomlights, glowstone behind glass) in some windows. No interiors (an air gap behind the glass and a floor slab per storey). Block ids without "minecraft:", only blocks that exist in 1.21.1.
+Rules: build only on the footprint cells; y 0 is the lowest ground under it and each cell's ground is its third number: fill solid from y 0 up to that cell's ground (foundation), so nothing floats on a slope; the downhill side shows its extra storeys.${roofs ? " Each cell's fourth number is the lidar's roof height above y 0 there: follow it for the massing (a tower on a podium, setbacks stepping in as it rises, lower wings), smoothing lidar noise into clean flat tiers." : ""} Every storey, setback tier and roof stands directly on what is below it: no empty course under a tier, nothing hanging in the air. Real articulation: window grids of glass panes with frames, a base course, storey lines, a cornice or parapet, entrances with doors and canopies, shopfronts on the ground floor where it is commercial, roof equipment or terraces; warm lights (lanterns, shroomlights, glowstone behind glass) in some windows. No interiors (an air gap behind the glass and a floor slab per storey). Block ids without "minecraft:", only blocks that exist in 1.21.1.
 Then run, in ${dir}: node ${PLUGIN}/tools/bin/mcd.mjs render ${b.id}.nbt  (writes ${b.id}-sheet.png); Read the sheet once, fix what reads badly (flat walls, stray blocks, holes), re-run the script, and stop. Reply with one line: what you built.`;
 }
 
