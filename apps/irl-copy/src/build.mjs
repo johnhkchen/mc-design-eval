@@ -30,6 +30,10 @@ const ROAD_M = 6, WALK_M = 10.5;
 export function buildPlace(place, frame, L) {
   const { N } = frame, I = (x, z) => z * N + x, sc = frame.scale ?? 1, ROAD = ROAD_M * sc, WALK = WALK_M * sc;
   const lid = L.lidar?.rasters, air = L.aerial?.rasters;
+  // a bridge's deck is not ground: ways tagged bridge (the Golden Gate's sidewalks, a footbridge) would be laid at the level
+  // of whatever they cross, the water included; leave them out (a designed module puts the bridge in)
+  const onBridge = (f) => { const t = f.properties ?? {}; return (t.bridge && t.bridge !== "no") || (t["min_height"] && parseFloat(t["min_height"]) > 2); };
+  for (const k of ["streets", "paths", "barriers", "rails"]) if (L[k]?.features) L = { ...L, [k]: { ...L[k], features: L[k].features.filter((f) => !onBridge(f)) } };
   const parcels = new Map((L.parcels?.features ?? []).map((f) => [f.properties.parcel, f.properties]));
   const H = lid ? Float64Array.from(lid.ground, (m) => m * (frame.scale ?? 1))
     : L.ground ? groundFromContours(frame, L.ground, { field: L.ground.field, unit: L.ground.unit * (frame.scale ?? 1) }) : new Float64Array(N * N);
@@ -37,12 +41,22 @@ export function buildPlace(place, frame, L) {
   for (const f of L.parks?.features ?? []) for (const [x, z] of cellsIn(frame, f.geometry)) park[I(x, z)] = 1;
   for (const f of L.water?.features ?? []) for (const [x, z] of cellsIn(frame, f.geometry)) water[I(x, z)] = 1;
   // open water the hydrography leaves out (the NHD's waterbodies stop at the shore of the Bay): lidar ground within a metre
-  // of sea level with nothing standing on it (a pier's deck reads metres up), levelled to one surface
+  // of sea level with nothing standing on it (a pier's deck reads metres up) or only something far overhead (a bridge's
+  // deck, 20 m and more up), levelled to one surface
   if (lid) {
     // the water line differs by datum (the Bay reads near 0 m, Elliott Bay about 1.5 m): within 0.7 m of the frame's
     // lowest ground (its 2nd percentile), never above 3 m
     const sorted = Float32Array.from(lid.ground).sort(), lo = sorted[Math.floor(sorted.length * 0.02)], line = Math.min(3, Math.max(1, lo + 0.7));
-    const sea = []; for (let i = 0; i < N * N; i++) if (lid.ground[i] < line && (!lid.count[i] || lid.surface[i] - lid.ground[i] < 0.5)) { water[i] = 2; sea.push(lid.ground[i]); }
+    const sea = []; for (let i = 0; i < N * N; i++) if (lid.ground[i] < line && (!lid.count[i] || lid.surface[i] - lid.ground[i] < 0.5 || lid.surface[i] - lid.ground[i] > 20)) { water[i] = 2; sea.push(lid.ground[i]); }
+    // open water often returns no points at all (the Golden Gate): the gap is filled from the shore, metres up. A big
+    // returnless region (over N cells) that touches the water found above is water too
+    if (sea.length) { const seen = new Uint8Array(N * N);
+      for (let s = 0; s < N * N; s++) { if (seen[s] || lid.count[s]) continue;
+        const comp = [s], stack = [s]; seen[s] = 1; let wet = false;
+        while (stack.length) { const i = stack.pop(), x = i % N, z = (i / N) | 0;
+          for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { const nx = x + dx, nz = z + dz; if (nx < 0 || nz < 0 || nx >= N || nz >= N) continue;
+            const j = nz * N + nx; if (water[j] === 2) wet = true; if (seen[j] || lid.count[j]) continue; seen[j] = 1; stack.push(j); comp.push(j); } }
+        if (wet && comp.length > N) for (const i of comp) if (water[i] !== 2) { water[i] = 2; sea.push(Math.min(lid.ground[i], line)); } } }
     if (sea.length > N) { sea.sort((p, q) => p - q); const level = sea[sea.length >> 1] * sc; for (let i = 0; i < N * N; i++) if (water[i] === 2) H[i] = level; }
     else for (let i = 0; i < N * N; i++) if (water[i] === 2) water[i] = 0;
     // the ground returns carry a few centimetres of noise, and rounding that to blocks on a gentle slope leaves ragged
