@@ -8,7 +8,7 @@
 // Conventions (Chunky's, as measured on a top view): yaw 0 looks along -x, pi/2 along +z; pitch -pi/2 is level, 0 straight down; the sun's azimuth
 // 0 is toward +x (east in our frame), altitude up from the horizon.
 import { execFileSync } from "node:child_process";
-import { mkdirSync, writeFileSync, readdirSync, copyFileSync, existsSync } from "node:fs";
+import { mkdirSync, writeFileSync, readFileSync, readdirSync, copyFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { homedir } from "node:os";
 
@@ -61,7 +61,14 @@ const scene = {
 mkdirSync(sceneDir, { recursive: true }); mkdirSync(`${out}/shots`, { recursive: true });
 writeFileSync(`${sceneDir}/${name}.json`, JSON.stringify(scene, null, 1));
 const t0 = Date.now();
-execFileSync("java", [`-Xmx${process.env.CHUNKY_HEAP ?? "8g"}`, "-jar", jar, "-scene-dir", sceneDir, "-reload-chunks", "-f", "-render", name], { stdio: ["ignore", "inherit", "inherit"] });
+// Chunky's launcher starts the renderer as a second JVM with its own heap (1 GB unless set in its settings), which a big
+// world outgrows whatever -Xmx the launcher gets: run the newest installed core directly, with $CHUNKY_HEAP (default 8g)
+const heap = `-Xmx${process.env.CHUNKY_HEAP ?? "8g"}`, home = `${homedir()}/.chunky`, args = ["-scene-dir", sceneDir, "-reload-chunks", "-f", "-render", name];
+const core = existsSync(`${home}/versions`) && !process.argv.includes("--chunky") ? readdirSync(`${home}/versions`).filter((f) => f.endsWith(".json"))
+  .map((f) => JSON.parse(readFileSync(`${home}/versions/${f}`, "utf8"))).sort((a, b) => String(b.timestamp).localeCompare(String(a.timestamp)))[0] : null;
+if (core) { let java = "java"; try { java = `${execFileSync("/usr/libexec/java_home", ["-v", "17+"], { encoding: "utf8" }).trim()}/bin/java`; } catch {}
+  execFileSync(java, [heap, `-Dchunky.home=${home}`, "-classpath", core.libraries.map((l) => `${home}/lib/${l.name}`).join(":"), "se.llbit.chunky.main.Chunky", ...args], { stdio: ["ignore", "inherit", "inherit"] }); }
+else execFileSync("java", [heap, "-jar", jar, ...args], { stdio: ["ignore", "inherit", "inherit"] });
 // Chunky writes its snapshots under <scene dir>/snapshots/: the newest PNG for this scene is the photograph
 const snaps = existsSync(`${sceneDir}/snapshots`) ? readdirSync(`${sceneDir}/snapshots`, { recursive: true }).map(String) : [];
 const png = snaps.filter((f) => f.split("/").pop().startsWith(name) && f.endsWith(".png")).sort().at(-1);
