@@ -42,6 +42,14 @@ export function buildPlace(place, frame, L) {
     const sea = []; for (let i = 0; i < N * N; i++) if (lid.ground[i] < 1 && (!lid.count[i] || lid.surface[i] - lid.ground[i] < 0.5)) { water[i] = 2; sea.push(lid.ground[i]); }
     if (sea.length > N) { sea.sort((p, q) => p - q); const level = sea[sea.length >> 1] * sc; for (let i = 0; i < N * N; i++) if (water[i] === 2) H[i] = level; }
     else for (let i = 0; i < N * N; i++) if (water[i] === 2) water[i] = 0;
+    // the ground returns carry a few centimetres of noise, and rounding that to blocks on a gentle slope leaves ragged
+    // one-block terraces over every plaza and car park: relax it over about 3 m (two box passes), water held level
+    const r = Math.max(1, Math.round(2 * sc)), tmp = new Float64Array(N * N);
+    for (let pass = 0; pass < 2; pass++) for (const [src, dst, ax] of [[H, tmp, 1], [tmp, H, N]]) {
+      for (let a = 0; a < N; a++) for (let b = 0; b < N; b++) {
+        const i = ax === 1 ? a * N + b : b * N + a, at = b; if (water[i]) { dst[i] = src[i]; continue; }
+        let s = 0, n = 0; for (let d = -r; d <= r; d++) { const t = at + d; if (t < 0 || t >= N) continue; const j = i + d * ax; if (water[j]) continue; s += src[j]; n++; }
+        dst[i] = s / n; } }
   }
   for (const f of L.playgrounds?.features ?? []) for (const [x, z] of cellsIn(frame, f.geometry)) play[I(x, z)] = 1;
   // paths 2 m wide
@@ -96,13 +104,21 @@ export function buildPlace(place, frame, L) {
   const top = Math.max(roofTop, Math.round(hi) - floor + Math.ceil(canopyTop)) + 3;
   const g = new Voxels([N, top, N], { dataVersion: 3955 });   // 2 bytes a cell (voxels.mjs), not an object a block
 
+  // the open ground's cover by the aerial photo, cell by cell, then the commonest within 2 blocks: one pixel of sunlit
+  // concrete is not a sandpit, and a plaza shouldn't speckle stone, andesite and sand
+  const cover = new Array(N * N).fill(null);
+  if (air) { const raw = new Array(N * N); for (let i = 0; i < N * N; i++) raw[i] = groundFrom(air.r[i], air.g[i], air.b[i], air.nir[i], { park: !!park[i] });
+    for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) { const n = new Map(); let best = raw[I(x, z)], bn = 0;
+      for (let dz = -2; dz <= 2; dz++) for (let dx = -2; dx <= 2; dx++) { const xx = x + dx, zz = z + dz; if (xx < 0 || zz < 0 || xx >= N || zz >= N) continue;
+        const v = raw[I(xx, zz)]; if (!v) continue; const c = (n.get(v) ?? 0) + 1; n.set(v, c); if (c > bn) { bn = c; best = v; } }
+      cover[I(x, z)] = best; } }
   for (let z = 0; z < N; z++) for (let x = 0; x < N; x++) {
     const y = ground(x, z), i = I(x, z); let low = y - 3;
     for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { const nx = x + dx, nz = z + dz; low = nx < 0 || nz < 0 || nx >= N || nz >= N ? 0 : Math.min(low, ground(nx, nz) - 1); }
     for (let yy = Math.max(0, low); yy < y; yy++) g.set(x, yy, z, y - yy <= Math.round(3 * sc) ? "dirt" : "stone");
     const d = road[i];
     if (water[i] && d > WALK && !isB[i]) { const deep = Math.max(2, Math.round(2 * sc)); g.set(x, y - deep, z, "clay"); for (let k = 0; k < deep; k++) g.set(x, y - k, z, "water", { level: "0" }); continue; }
-    const seen = air ? groundFrom(air.r[i], air.g[i], air.b[i], air.nir[i], { park: !!park[i] }) : null;
+    const seen = cover[i];
     g.set(x, y, z, d <= ROAD ? "gray_concrete" : d <= WALK && !park[i] ? "smooth_stone" : isB[i] ? "stone" : path[i] ? "andesite" : play[i] ? "packed_mud" : seen ?? "grass_block");
   }
   // hollow masses (walls and roof): placeholders, and a solid town at 2 blocks a metre is millions of blocks
