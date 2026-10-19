@@ -91,7 +91,31 @@ function idle(rows, t0, t1) {
   return out;
 }
 
-const LANE = 5, ROW = 24, GAP = 8;
+const LANE = 5, ROW = 24, GAP = 8, COLLAPSE = 10 * 60000, IDLE_PX = 34;
+
+// time -> x with every idle stretch of 10+ minutes collapsed to a narrow break, so active time takes the width
+function makeScale(t0, t1, gaps, L, W) {
+  const G = gaps.filter(([a, b]) => b - a >= COLLAPSE).sort((p, q) => p[0] - q[0]);
+  const active = Math.max(1, t1 - t0 - G.reduce((t, [a, b]) => t + b - a, 0)), k = (W - G.length * IDLE_PX) / active;
+  const pieces = []; let cur = t0, pos = L;
+  for (const [a, b] of G) { pieces.push({ a: cur, b: a, xa: pos, xb: pos + (a - cur) * k }); pos += (a - cur) * k; pieces.push({ a, b, xa: pos, xb: pos + IDLE_PX, idle: true }); pos += IDLE_PX; cur = b; }
+  pieces.push({ a: cur, b: t1, xa: pos, xb: L + W });
+  const x = (t) => { if (t <= t0) return L; for (const p of pieces) if (t <= p.b) return p.xa + (p.b > p.a ? (t - p.a) / (p.b - p.a) : 0) * (p.xb - p.xa); return L + W; };
+  x.inv = (px) => { for (const p of pieces) if (px <= p.xb) return p.a + (p.xb > p.xa ? (px - p.xa) / (p.xb - p.xa) : 0) * (p.b - p.a); return t1; };
+  x.pieces = pieces;
+  return x;
+}
+
+// what the whole thing cost end to end: wall time against time with an agent running, agent-hours, tokens, dollars
+const big = (n) => (n >= 1e6 ? `${(n / 1e6).toFixed(1)}M` : n >= 1e3 ? `${(n / 1e3).toFixed(0)}K` : String(n));
+function endToEnd(rows, t0, t1) {
+  const iv = rows.map((r) => [r.start, r.end]).sort((a, b) => a[0] - b[0]); let act = 0, s0 = null, e0 = null;
+  for (const [a, b] of iv) { if (s0 === null || a > e0) { if (s0 !== null) act += e0 - s0; s0 = a; e0 = b; } else e0 = Math.max(e0, b); } if (s0 !== null) act += e0 - s0;
+  const sum = (f) => rows.reduce((t, r) => t + (r[f] ?? 0), 0), agentMin = sum("ms") / 60000, wall = (t1 - t0) / 60000, active = act / 60000;
+  return { wall, active, idle: wall - active, agentMin, avg: active ? agentMin / active : 0, cost: sum("cost"), out: sum("out"), inp: sum("in"), cr: sum("cacheRead"), cw: sum("cacheWrite"),
+    time: `end to end ${hm(wall)}: ${hm(active)} with an agent running (${Math.round((active / wall) * 100)}%), ${hm(wall - active)} with none (idle stretches of 10+ min collapsed to a break) · ${(agentMin / 60).toFixed(1)} agent-hours, ${(active ? agentMin / active : 0).toFixed(1)} agents on average while any ran`,
+    tokens: (c) => `tokens: ${big(sum("out"))} out, ${big(sum("cacheRead"))} cache read, ${big(sum("cacheWrite"))} cache write, ${big(sum("in"))} in · $${sum("cost").toFixed(2)} (${c})` };
+}
 function blockHeight(gs) { return gs.reduce((h, g) => h + (g.lanes > 1 ? Math.max(ROW, g.lanes * LANE + 8) : ROW) + 2, 0); }
 
 // one run's roles from y0 down: a row per lone role (bar height = rate), a clump per overlapping role
@@ -117,21 +141,33 @@ function drawBlock(o, gs, x, y0, L, maxRate) {
   return y - y0;
 }
 
-// clock ticks every 5/10/15/30/60 minutes, whichever leaves room
-function axis(o, x, t0, t1, W, yTop, yBot) {
-  const span = (t1 - t0) / 60000, step = [5, 10, 15, 30, 60, 120].find((s) => (span / s) * 70 <= W) ?? 240;
-  const first = Math.ceil(t0 / (step * 60000)) * step * 60000;
-  for (let t = first; t <= t1; t += step * 60000) {
-    const gx = x(t).toFixed(1);
-    o.push(`<line x1="${gx}" y1="${yTop}" x2="${gx}" y2="${yBot}" stroke="#e3e0d8"/>`, `<text x="${gx}" y="${yBot + 16}" text-anchor="middle" fill="#777">${clock.format(t)}</text>`);
+// clock ticks every 5/10/15/30/60 minutes over the active stretches, a break mark where idle time was collapsed
+function axis(o, x, W, yTop, yBot) {
+  const act = x.pieces.filter((p) => !p.idle), span = act.reduce((t, p) => t + (p.b - p.a), 0) / 60000;
+  const step = [5, 10, 15, 30, 60, 120].find((st) => (span / st) * 70 <= W) ?? 240;
+  let lastLabel = -Infinity;
+  for (const p of x.pieces) {
+    if (p.idle) { o.push(`<path d="M${(p.xa + 6).toFixed(1)},${yBot + 4} l4,-8 M${(p.xb - 10).toFixed(1)},${yBot + 4} l4,-8" stroke="#8a7f6a" stroke-width="1.5"/>`,
+      `<text x="${((p.xa + p.xb) / 2).toFixed(1)}" y="${yBot + 30}" text-anchor="middle" fill="#8a7f6a" font-size="11">+${hm((p.b - p.a) / 60000)}</text>`); continue; }
+    for (let t = Math.ceil(p.a / (step * 60000)) * step * 60000; t <= p.b; t += step * 60000) {
+      const gx = x(t); o.push(`<line x1="${gx.toFixed(1)}" y1="${yTop}" x2="${gx.toFixed(1)}" y2="${yBot}" stroke="#e3e0d8"/>`);
+      if (gx - lastLabel > 52 && x.pieces.every((q) => !q.idle || gx < q.xa - 24 || gx > q.xb + 24)) { o.push(`<text x="${gx.toFixed(1)}" y="${yBot + 16}" text-anchor="middle" fill="#777">${clock.format(t)}</text>`); lastLabel = gx; }
+    }
   }
 }
 
-function idleBands(o, gaps, x, yTop, yBot) {
+// collapsed idle time: a plain strip behind the whole chart (its duration is on the axis)
+function breaks(o, x, yTop, yBot) {
+  for (const p of x.pieces) if (p.idle) o.push(`<rect x="${p.xa.toFixed(1)}" y="${yTop}" width="${(p.xb - p.xa).toFixed(1)}" height="${yBot - yTop}" fill="#efe9dc"/>`);
+}
+
+function idleBands(o, gaps, x, yTop, yBot, label = true) {
+  gaps = gaps.filter(([a, b]) => b - a < COLLAPSE || x(b) - x(a) > IDLE_PX + 1);   // collapsed stretches are drawn by breaks()
   for (const [a, b] of gaps) {
-    const xa = x(a), xb = x(b);
-    o.push(`<rect x="${xa.toFixed(1)}" y="${yTop}" width="${(xb - xa).toFixed(1)}" height="${yBot - yTop}" fill="url(#idle)"/>`);
-    if (xb - xa > 90 && yBot - yTop > 30) o.push(`<text x="${((xa + xb) / 2).toFixed(1)}" y="${yBot - 6}" text-anchor="middle" fill="#8a7f6a">no agent in the ledger · ${hm((b - a) / 60000)}</text>`);
+    const xa = x(a), xb = x(b), w = xb - xa, txt = `no agent · ${hm((b - a) / 60000)}`;
+    o.push(`<rect x="${xa.toFixed(1)}" y="${yTop}" width="${w.toFixed(1)}" height="${yBot - yTop}" fill="url(#idle)"/>`);
+    if (!label) continue;
+    if (w > 100 && yBot - yTop > 30) o.push(`<text x="${(xa + w / 2).toFixed(1)}" y="${yBot - 6}" text-anchor="middle" fill="#8a7f6a">${txt}</text>`);
   }
 }
 
@@ -139,12 +175,14 @@ function idleBands(o, gaps, x, yTop, yBot) {
 function spendStrip(o, rows, x, t0, t1, L, W, cy0, ch, maxRate) {
   const total = rows.reduce((a, r) => a + (r.cost ?? 0), 0), ticks = [...new Set([t0, ...rows.flatMap((r) => [r.start, r.end]), t1])].sort((a, b) => a - b);
   const cyOf = (c) => cy0 - (total ? c / total : 0) * ch;
-  let cum = 0, half = null; const line = [];
+  let cum = 0, half = null, act = 0, actHalf = null; const line = [];
   for (let k = 0; k + 1 < ticks.length; k++) {
     const a = ticks[k], b = ticks[k + 1];
     const rate = rows.reduce((s, r) => s + (r.start <= a && r.end >= b && r.ms ? (r.cost ?? 0) / r.ms : 0), 0);   // $/ms
     const next = cum + rate * (b - a);
-    if (half == null && next >= total / 2 && rate > 0) half = a + (total / 2 - cum) / rate;
+    const running = rows.some((r) => r.start <= a && r.end >= b);
+    if (half == null && next >= total / 2 && rate > 0) { half = a + (total / 2 - cum) / rate; actHalf = act + (half - a); }
+    if (running) act += b - a;
     const [xa, xb, ya, yb] = [x(a).toFixed(1), x(b).toFixed(1), cyOf(cum).toFixed(1), cyOf(next).toFixed(1)];
     const c = rate > 0 ? colour(rate * 60000, maxRate) : "#d9d4c7";
     o.push(`<polygon points="${xa},${cy0} ${xa},${ya} ${xb},${yb} ${xb},${cy0}" fill="${c}" stroke="${c}" stroke-width="0.5"/>`);
@@ -155,7 +193,7 @@ function spendStrip(o, rows, x, t0, t1, L, W, cy0, ch, maxRate) {
     `<text x="16" y="${cy0 - ch + 10}" fill="#333">spend so far</text>`, `<text x="16" y="${cy0 - ch + 25}" fill="#777">(slope = $/min)</text>`,
     ...[0, 0.5, 1].map((f) => `<line x1="${L}" y1="${cy0 - f * ch}" x2="${L + W}" y2="${cy0 - f * ch}" stroke="#0003" stroke-dasharray="${f ? "3 3" : ""}"/><text x="${L - 8}" y="${cy0 - f * ch + 4}" text-anchor="end" fill="#777">${f ? `${f * 100}% · $${(total * f).toFixed(2)}` : "0%"}</text>`));
   if (half != null) o.push(`<line x1="${x(half).toFixed(1)}" y1="${cy0 - ch / 2}" x2="${x(half).toFixed(1)}" y2="${cy0}" stroke="#333" stroke-dasharray="2 3"/>`,
-    `<text x="${(x(half) + 6).toFixed(1)}" y="${cy0 - 6}" fill="#333" font-weight="bold">half the spend by ${clock.format(half)}</text>`);
+    `<text x="${(x(half) + 6).toFixed(1)}" y="${cy0 - 6}" fill="#333" font-weight="bold">half the spend in ${hm(actHalf / 60000)} of active time (of ${hm(act / 60000)})</text>`);
   return total;
 }
 
@@ -167,23 +205,24 @@ const byModel = (rows) => Object.entries(rows.reduce((a, r) => ((a[r.model] = (a
 function svgRun(run) {
   const rows = run.rows, t0 = Math.min(...rows.map((r) => r.start)), t1 = run.last, gs = groups(rows);
   const maxRate = Math.max(SCALE, ...rows.map((r) => r.rate));
-  const L = 230, W = 820, R = 260, top = 250, H = top + blockHeight(gs) + 50;
-  const x = (ms) => L + ((ms - t0) / (t1 - t0)) * W;
+  const L = 230, W = 820, R = 260, D = 36, top = 250 + D, H = top + blockHeight(gs) + 60, gaps = idle(rows, t0, t1);
+  const x = makeScale(t0, t1, gaps, L, W), e = endToEnd(rows, t0, t1);
   const o = HEAD(L + W + R, H);
-  o.push(`<text x="16" y="24" font-size="16" font-weight="bold">${esc(run.name)}: ${rows.length} agent sessions, ${hm((t1 - t0) / 60000)} wall, $${rows.reduce((a, r) => a + (r.cost ?? 0), 0).toFixed(2)}</text>`,
+  breaks(o, x, 80 + D, H - 40);
+  o.push(`<text x="16" y="24" font-size="16" font-weight="bold">${esc(run.name)}: ${rows.length} agent sessions, ${hm(e.wall)} end to end, ${hm(e.active)} active, $${e.cost.toFixed(2)}</text>`,
     `<text x="16" y="42" fill="#555">bar colour = spend per minute (deepest red = $${maxRate.toFixed(2)}/min, the same in every chart); overlapping sessions of one role stack into a clump, one thin lane each</text>`,
-    `<text x="16" y="60" fill="#555">spend by model: ${byModel(rows)}</text>`);
+    `<text x="16" y="60" fill="#333">${esc(e.time)}</text>`, `<text x="16" y="78" fill="#333">${esc(e.tokens(byModel(rows)))}</text>`);
   // agents running: a filled step line on the run's wall time
   const ev = rows.flatMap((r) => [[r.start, 1], [r.end, -1]]).sort((a, b) => a[0] - b[0] || a[1] - b[1]);
   let n = 0, peak = 0; for (const [, d] of ev) { n += d; peak = Math.max(peak, n); }
-  const sy = (k) => 110 - k * (45 / Math.max(peak, 1)); n = 0; const pts = [`${L},110`];
+  const base = 110 + D, sy = (k) => base - k * (45 / Math.max(peak, 1)); n = 0; const pts = [`${L},${base}`];
   for (const [t, d] of ev) { pts.push(`${x(t).toFixed(1)},${sy(n).toFixed(1)}`); n += d; pts.push(`${x(t).toFixed(1)},${sy(n).toFixed(1)}`); }
-  pts.push(`${L + W},110`);
-  o.push(`<text x="16" y="90" fill="#333">agents running</text><text x="16" y="105" fill="#777">(peak ${peak})</text>`,
-    `<polygon points="${pts.join(" ")}" fill="#c9d6e8" stroke="#4a6fa5" stroke-width="1"/>`, `<line x1="${L}" y1="110" x2="${L + W}" y2="110" stroke="#999"/>`);
-  spendStrip(o, rows, x, t0, t1, L, W, 220, 90, maxRate);
-  axis(o, x, t0, t1, W, top - 8, H - 40);
-  idleBands(o, idle(rows, t0, t1), x, top - 8, H - 40);
+  pts.push(`${L + W},${base}`);
+  o.push(`<text x="16" y="${90 + D}" fill="#333">agents running</text><text x="16" y="${105 + D}" fill="#777">(peak ${peak})</text>`,
+    `<polygon points="${pts.join(" ")}" fill="#c9d6e8" stroke="#4a6fa5" stroke-width="1"/>`, `<line x1="${L}" y1="${base}" x2="${L + W}" y2="${base}" stroke="#999"/>`);
+  idleBands(o, gaps, x, top - 8, H - 40);
+  spendStrip(o, rows, x, t0, t1, L, W, 220 + D, 90, maxRate);
+  axis(o, x, W, top - 8, H - 40);
   drawBlock(o, gs, x, top, L, maxRate);
   o.push("</svg>");
   return o.join("\n");
@@ -197,15 +236,16 @@ function svgProject(runs) {
   const maxRate = Math.max(SCALE, ...all.map((r) => r.rate));
   runs.sort((a, b) => Math.min(...a.rows.map((r) => r.start)) - Math.min(...b.rows.map((r) => r.start)));
   runs.forEach((r, i) => { r.colour = PALETTE[i % PALETTE.length]; r.gs = groups(r.rows); });
-  const L = 230, W = 1000, R = 260, sTop = 96, sH = 190, cy0 = sTop + sH + 120, ch = 80, top = cy0 + 50;
-  const H = top + runs.reduce((h, r) => h + 26 + blockHeight(r.gs) + GAP, 0) + 50;
-  const x = (ms) => L + ((ms - t0) / (t1 - t0)) * W;
-  const o = HEAD(L + W + R, H), total = all.reduce((a, r) => a + (r.cost ?? 0), 0);
-  o.push(`<text x="16" y="24" font-size="16" font-weight="bold">${esc(TITLE ?? "Project")}: ${runs.length} buildings, ${all.length} agent sessions, ${hm((t1 - t0) / 60000)} wall, $${total.toFixed(2)}</text>`,
+  const L = 230, W = 1000, R = 260, sTop = 114, sH = 190, cy0 = sTop + sH + 120, ch = 80, top = cy0 + 50;
+  const H = top + runs.reduce((h, r) => h + 26 + blockHeight(r.gs) + GAP, 0) + 60, gaps = idle(all, t0, t1);
+  const x = makeScale(t0, t1, gaps, L, W), e = endToEnd(all, t0, t1);
+  const o = HEAD(L + W + R, H);
+  breaks(o, x, sTop - 4, H - 40);
+  o.push(`<text x="16" y="24" font-size="16" font-weight="bold">${esc(TITLE ?? "Project")}: ${runs.length} buildings, ${all.length} agent sessions, ${hm(e.wall)} end to end, ${hm(e.active)} active, $${e.cost.toFixed(2)}</text>`,
     `<text x="16" y="42" fill="#555">top: agents running per building, stacked about the middle (a streamgraph); below: each building's roles, overlapping sessions stacked into clumps; bar colour = spend per minute (deepest red = $${maxRate.toFixed(2)}/min)</text>`,
-    `<text x="16" y="60" fill="#555">spend by model: ${byModel(all)}</text>`);
-  // streamgraph: sampled counts per building, stacked symmetric about the centre line (silhouette offset)
-  const N = 800, ts = Array.from({ length: N + 1 }, (_, i) => t0 + ((t1 - t0) * i) / N);
+    `<text x="16" y="60" fill="#333">${esc(e.time)}</text>`, `<text x="16" y="78" fill="#333">${esc(e.tokens(byModel(all)))}</text>`);
+  // streamgraph: counts per building sampled evenly across the drawn width, stacked symmetric about the centre line
+  const N = 800, ts = Array.from({ length: N + 1 }, (_, i) => x.inv(L + (W * i) / N));
   const counts = runs.map((r) => ts.map((t) => r.rows.reduce((k, s) => k + (s.start <= t && t < s.end ? 1 : 0), 0)));
   const smooth = counts.map((c) => c.map((_, i) => { let t = 0, n = 0; for (let d = -4; d <= 4; d++) if (c[i + d] != null) { t += c[i + d]; n++; } return t / n; }));
   const raw = ts.map((_, i) => counts.reduce((a, c) => a + c[i], 0)), sums = ts.map((_, i) => smooth.reduce((a, c) => a + c[i], 0));
@@ -231,8 +271,7 @@ function svgProject(runs) {
   // legend
   let lx = L; runs.forEach((r) => { o.push(`<rect x="${lx}" y="${sTop + sH + 14}" width="10" height="10" rx="2" fill="${r.colour}"/><text x="${lx + 14}" y="${sTop + sH + 23}" fill="#333">${esc(r.name)}</text>`); lx += 34 + r.name.length * 7.4; });
   spendStrip(o, all, x, t0, t1, L, W, cy0, ch, maxRate);
-  axis(o, x, t0, t1, W, sTop - 4, H - 40);
-  idleBands(o, idle(all, t0, t1), x, sTop - 4, sTop + 8);
+  axis(o, x, W, sTop - 4, H - 40);
   // each building: a header row in its colour, its idle stretches shaded, then its roles
   let y = top;
   for (const r of runs) {
