@@ -1,0 +1,131 @@
+{
+ "common": "Scale: 0.42 blocks per metre (a storey is about 1.5 blocks: windows are single openings or slits, columns are walls or fences one block thick, roofs are stairs and slabs; keep big forms crisp and true to the real proportions, which matter more here than small detail). For a public catalog for a Minecraft 1.21.1 server: only blocks that exist in 1.21.1 (no pale oak, nothing 1.21.4+). These are real landmarks of the National Mall in Washington DC, for a hero aerial render at golden hour and dusk, seen from a few hundred blocks away and above, looking along the Mall: they must read at a glance as THESE buildings, by silhouette, colour and their one or two signature features. Build each IN SITE ORIENTATION exactly as in its map: north is low z, east is high x; the Mall runs east-west (along x), the Capitol at its east end, the Washington Monument at its west. Placement sets each module on its real footprint without turning. Exterior only: no interiors beyond what shows through glass. Light every building and landscape so no mob spawns (lanterns, hidden light sources, lit windows); at dusk the monuments are floodlit white, so put warm light at their bases. No villagers, no signs with text.",
+ "kits": [
+  {
+   "key": "capitol-kit",
+   "intro": "The United States Capitol (1793-1868, dome by Thomas U. Walter 1855-66), the east end and climax of the National Mall: the hero of the render.",
+   "plots": [
+    {
+     "id": "DC86912",
+     "roof": 39,
+     "extra": 4,
+     "label": "THE US CAPITOL",
+     "text": "A long white neoclassical building running NORTH-SOUTH (along z), its WEST FRONT facing the Mall (low x). Three parts: the central block with the GREAT DOME at the middle of the footprint (z centre about 47), the Senate wing to the north (low z) and the House wing to the south (high z), joined by short connecting corridors, the whole about 96 long. THE DOME is the signature and must be perfect at this scale: a square base, then a tall round colonnaded drum (the peristyle: a ring of white columns, about 16 across), an attic storey with windows, then the ribbed, cast-iron bell-shaped dome (about 12-13 across at its base, white, with subtle ribs of light grey), a second smaller colonnaded tholos/lantern on top, and the bronze Statue of Freedom (a dark figure 2-3 blocks tall) at the very top: dome and statue reach about y 39 above the base. The wings: white marble, two to three storeys over a raised rusticated basement, rows of tall windows between Corinthian pilasters and colonnades, a balustrade along every roofline hiding low grey/copper roofs, each wing with a pedimented columned portico on its east face (high x) and a long colonnade on its west face. The central block's west side: a projecting centre with a columned loggia above the terraces (the West Front), with the inaugural west steps leading down to the terraces (the terraces themselves are in the grounds kit, against this west face at x 0 of this plot). The east face (high x): the great East Portico, a deep double row of columns under a pediment, at the top of a broad flight of steps. All white (white concrete, smooth quartz, calcite, quartz pillars, diorite trim for shadows); windows dark with warm lit panes at dusk; floodlights at the base so it glows white at night."
+    }
+   ]
+  },
+  {
+   "key": "capitol-grounds-kit",
+   "intro": "The US Capitol's West Front grounds: Olmsted's marble terraces and grand staircases, the sweeping West Lawn and its curving walks, Union Square with the Ulysses S. Grant Memorial and the Capitol Reflecting Pool: the foreground at the foot of the Capitol in a view along the Mall.",
+   "plots": [
+    {
+     "box": [1010, 622, 1194, 746],
+     "ref": "DC86912",
+     "height": 20,
+     "marks": { "DC87453": "G", "DC87452": "g", "DC87355": "P", "DC87360": "p", "DC87451": "J" },
+     "label": "THE CAPITOL'S WEST FRONT GROUNDS",
+     "text": "The Capitol building itself stands just east of this box (its west face along x 185, the box's east edge, which is NOT in the box): build up to it. From west to east: (1) THE CAPITOL REFLECTING POOL (the big water area at about x 17..63, z 14..111): a large shallow rectangular pool of still water (water one block deep over smooth stone), its edges a smooth granite coping (polished andesite / smooth stone slabs), two long sides straight; (2) UNION SQUARE and THE ULYSSES S. GRANT MEMORIAL at the pool's east end (G marks the statue at about x 63, z 77..79): a long white marble platform (about 3 blocks high, 10 long along z) with the dark bronze equestrian statue of Grant on a tall pedestal at its centre, four bronze lions around it, and at each end of the platform a dark bronze sculpture group (the cavalry charge to the north, the artillery to the south); smaller statues P (the Peace Monument side) and J (the Garfield statue) as small white pedestals with dark bronze figures; (3) THE WEST LAWN rising steadily east toward the Capitol (follow the height map), two great sweeping lawns split by a broad central walk on the axis (z about 61), each lawn edged by Olmsted's curving pale walks (Pennsylvania and Maryland Avenue walks) that arc up toward the terraces, groups of big old trees (oaks, elms: wide round crowns of dark oak and oak leaves on thick trunks) framing the lawn edges but leaving the central view open, lamp posts along the walks; (4) OLMSTED'S WEST TERRACE against the Capitol (x about 160..184): a grand white marble terrace wall two or three tiers high with balustrades, monumental double staircases climbing from the lawn to the terrace on the axis and to each side, fountains and urns, planting beds at its foot, the whole floodlit so it glows. Keep the central axis view from the pool to the Capitol completely open."
+    }
+   ]
+  },
+  {
+   "key": "monument-kit",
+   "intro": "The Washington Monument (1848-84) on its grassy knoll: the 555-foot marble obelisk at the centre of the Mall, ringed by fifty American flags.",
+   "plots": [
+    {
+     "box": [213, 649, 312, 748],
+     "ref": "DC87354",
+     "height": 76,
+     "marks": { "DC87354": "M", "DC86868": "S", "DC86850": "L" },
+     "label": "THE WASHINGTON MONUMENT AND ITS GROUNDS",
+     "text": "THE OBELISK on the M cells (x 47..53, z 47..53, 7 x 7): a perfectly smooth, plain, square white marble shaft tapering very slightly as it rises (7 wide at the base, 5 wide by the top, stepping in by one block on each face at even heights), its top a pointed pyramidion (from about 64 blocks up to an apex 71 blocks above the plaza: stairs and slabs to a point, a tiny dark aluminium tip). THE COLOUR CHANGE is its signature: about one third of the way up (19 blocks above the plaza) the marble changes shade where construction stopped for 23 years: the lower third a paler, cooler white (smooth quartz / calcite) and the upper two thirds a slightly warmer, darker cream-beige (white terracotta or smooth sandstone mixed with calcite) with a crisp horizontal line between them. Two small dark observation windows on each face just under the pyramidion, and red aircraft warning lights there. THE PLAZA: a round granite plaza (smooth stone, polished andesite) about 21 across around the base, with low curved granite seating walls in arcs, and a small stone screening pavilion on the S cells at the east side of the base. THE FLAG RING: fifty tall white flagpoles (end rods or white walls/fences 5-6 blocks high) evenly spaced in a full circle about 16 blocks out from the obelisk's centre, each flying a small American flag (red and white striped wool or banners with a blue canton) at the top, lit from below. THE KNOLL: the Monument stands on a gentle grassy hill (follow the height map): mown lawn everywhere, walks of pale concrete radiating out from the plaza to the corners and curving around the knoll, a few scattered trees only near the edges, low lamps along the walks. L: a small stone lodge (the Survey Lodge). The obelisk must be dead straight, smooth and white: no buttresses, no decoration."
+    }
+   ]
+  },
+  {
+   "key": "castle-kit",
+   "intro": "The Smithsonian Institution Building (the Castle, James Renwick Jr., 1847-55) and its neighbours on the south side of the Mall: the Arts and Industries Building, the Freer Gallery of Art and the Hirshhorn Museum.",
+   "plots": [
+    {
+     "id": "DC86863",
+     "roof": 19,
+     "label": "THE SMITHSONIAN CASTLE",
+     "text": "A picturesque Norman Romanesque revival castle of deep red-maroon Seneca sandstone (red terracotta, polished granite and red nether brick details; never bright red), long along x with its main front facing NORTH to the Mall (low z). NINE TOWERS of different heights and shapes give its unmistakable jagged silhouette: the tallest, the slender north-centre tower (the Flag Tower, about 19 blocks above the base) with a steep pyramidal spire; a big square tower just east of centre; a pair of tall octagonal towers on the south front; smaller turrets and pinnacles at the corners and wing ends; every tower roof a steep dark grey slate pyramid or cone (deepslate tiles stairs) with small finials. The main block three storeys, rows of tall round-arched windows (dark glass, warm light at dusk), corbel tables under the eaves, steep dark slate roofs; lower wings at each end (the west wing with a chapel-like range of tall arched windows), a central north entrance with a round-arched porch. Lit warmly at dusk."
+    },
+    {
+     "id": "DC86860",
+     "label": "THE ARTS AND INDUSTRIES BUILDING (1881)",
+     "text": "A colourful Victorian exhibition hall in red brick with polychrome bands (bricks, red/orange/yellow/blue terracotta bands and patterns): a Greek cross plan inside a square, a central octagonal rotunda with a raised clerestory and a lantern, four tall gabled naves running out to the four sides each ending in a big gabled entrance pavilion with a large arched window and flanking towers; low corner pavilions with small towers; grey slate roofs with clerestory windows along every nave; the north entrance pavilion faces the Mall."
+    },
+    {
+     "id": "DC87511",
+     "label": "THE FREER GALLERY OF ART (1923)",
+     "text": "A low, two-storey Italian Renaissance palazzo in pale pink-grey granite (white terracotta, smooth stone, polished diorite trim): a square block around a central open courtyard (with a small fountain and trees), its north front on the Mall with an arched loggia entrance of three round arches, small square windows, a heavy cornice and a low hipped grey roof."
+    },
+    {
+     "id": "DC87512",
+     "label": "THE HIRSHHORN MUSEUM (1974)",
+     "text": "A hollow cylinder of rough pinkish-beige precast concrete (white terracotta / smooth sandstone mixed with light grey concrete) about 29 across and 6-7 blocks tall, RAISED one storey above the ground on four massive curved piers so its plaza runs under it; a round open courtyard in the middle with a round fountain; the outer wall almost blank, but one long horizontal window slit (a balcony band of dark glass) runs all round the inner courtyard face on the top floor. A circular paved plaza around it with low walls and a few sculptures (dark blocks)."
+    }
+   ]
+  },
+  {
+   "key": "gallery-kit",
+   "intro": "The National Gallery of Art on the north side of the Mall: John Russell Pope's neoclassical West Building (1941) and I. M. Pei's East Building (1978).",
+   "plots": [
+    {
+     "id": "DC86963",
+     "roof": 22,
+     "label": "THE NATIONAL GALLERY OF ART, WEST BUILDING",
+     "text": "A very long, low, symmetrical neoclassical temple of pale rose-pink Tennessee marble (white terracotta, with smooth quartz and calcite for the columns, cornices and trim; the pink graduating slightly paler toward the top), running along x. At its centre a LOW DOME on a drum over a rotunda (shallow, Pantheon-like, dark grey-green lead/copper: weathered copper or dark prismarine/green-grey, with a round oculus lantern), reaching about 22 blocks. On the south front (high z, facing the Mall) a grand Ionic portico of eight white columns under a plain pediment at the top of wide steps; a matching portico on the north front (Constitution Avenue). The long wings either side of the centre are almost windowless walls of pink marble divided by tall shallow pilasters, a plain frieze and cornice, ending in projecting end pavilions; the roof is flat with long rows of glass skylights (glass, light grey frames) over the galleries. Warm floodlights at the portico at dusk."
+    },
+    {
+     "id": "DC86962",
+     "roof": 21,
+     "label": "THE NATIONAL GALLERY OF ART, EAST BUILDING",
+     "text": "I. M. Pei's abstract geometric building of the SAME pale pink marble as the West Building (white terracotta), almost windowless: a trapezoid divided into two triangles, an isosceles triangle on the west (facing the West Building across the plaza, its entrance a deep dark recessed slot) and a smaller right triangle on the east; at the corners sharp tall prismatic towers rising above the main roof (parallelogram-shaped, flat-topped, about 21 blocks); the famous razor-sharp acute angle at the south-west corner (a knife edge); between the two triangles a huge glass atrium roof of triangular skylights in a space frame (glass panes in a light grey grid) that glows at dusk. Large plain planar walls, no ornament, crisp edges, a few horizontal dark window bands only."
+    }
+   ]
+  },
+  {
+   "key": "museums-north-kit",
+   "intro": "Three museums on the north side of the Mall: the National Museum of Natural History (1910), the National Museum of American History (1964) and the National Museum of African American History and Culture (2016).",
+   "plots": [
+    {
+     "id": "DC86964",
+     "roof": 25,
+     "label": "THE NATIONAL MUSEUM OF NATURAL HISTORY",
+     "text": "A big Beaux-Arts museum of pale grey-white granite (smooth stone, white concrete, diorite trim), running along x: at its centre a broad, low octagonal rotunda DOME (weathered green copper: oxidized copper / oxidized cut copper ribs, with a small lantern) reaching about 25 blocks, rising above a projecting south pavilion (facing the Mall, high z) with a grand Corinthian portico of white columns under a triangular pediment at the top of wide steps; long three-storey wings to the east and west with tall windows between Corinthian pilasters, a cornice and balustrade, and hipped RED clay-tile roofs (red terracotta / granite stairs) on the wings; projecting end pavilions; inner light courts. Floodlit portico at dusk."
+    },
+    {
+     "id": "DC86954",
+     "label": "THE NATIONAL MUSEUM OF AMERICAN HISTORY",
+     "text": "A late-modernist box of pink-beige Tennessee marble (white terracotta) faced with tall vertical stone panels and narrow recessed vertical window slots, a deep projecting cornice band, a flat roof with a smaller stepped-back clerestory penthouse in the middle; its south (Mall) entrance a broad recessed glass front under a deep overhang with terraces and steps; a big glass atrium in the centre glowing at dusk."
+    },
+    {
+     "id": "DC86946",
+     "roof": 33,
+     "label": "THE NATIONAL MUSEUM OF AFRICAN AMERICAN HISTORY AND CULTURE",
+     "text": "The 'Corona': a square building whose upper part is three stacked tiers each wider than the one below (an inverted stepped pyramid, each tier's walls tilting outward), clad in a bronze-coloured ornamental metal lattice (cut copper and waxed cut copper / copper grate-like patterns: copper blocks with holes or trapdoors over dark glass) that glows warm amber from inside at dusk; the corona sits on a low recessed glass base; on the south side a broad flat porch canopy over a shallow reflecting pool and the entrance; landscaped grounds around."
+    }
+   ]
+  },
+  {
+   "key": "museums-south-kit",
+   "intro": "Two museums on the south side of the Mall: the National Air and Space Museum (1976) and the National Museum of the American Indian (2004).",
+   "plots": [
+    {
+     "id": "DC86851",
+     "label": "THE NATIONAL AIR AND SPACE MUSEUM",
+     "text": "A long, low modernist building of pale pink Tennessee marble (white terracotta) running along x: FOUR plain windowless marble cubes in a row alternating with THREE tall bays walled and roofed in glass in dark steel frames (the glass galleries where aircraft hang: suggest a few small aircraft shapes inside the glass in white/grey), the glass bays slightly lower than the cubes; flat roofs; the main entrance on the north (Mall) side in the central glass bay, with terraces and steps; at dusk the glass bays glow."
+    },
+    {
+     "id": "DC86857",
+     "roof": 20,
+     "label": "THE NATIONAL MUSEUM OF THE AMERICAN INDIAN",
+     "text": "A curvilinear building with no straight walls, clad in rough golden-yellow Kasota limestone laid in horizontal strata like a wind-carved cliff (sandstone, smooth sandstone, cut sandstone in banded layers, a little orange terracotta), its curving walls stepping back and overhanging in layers; the main entrance on the EAST side under a deep curved overhang; a shallow dome (the Potomac atrium) rising from the centre; around it wetland landscaping: a pond, boulders (grandfather rocks), native planting."
+    }
+   ]
+  }
+ ]
+}

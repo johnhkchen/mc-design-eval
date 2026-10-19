@@ -87,6 +87,12 @@ Add `places/<city>/<site>.json` with `name`, `city`, `country`, `centre` [lat, l
 centre to the box's edge; optional `scale` blocks per metre, `sources` { layer: source id }). For a new city, add a
 source file for its portal and list it first in `index.mjs`.
 
+Washington DC (`city: "washington-dc"`, `src/sources/dc.mjs`): Open Data DC's footprints (named by the museum and
+memorial points and the historic landmarks, joined to tax parcels), owner polygons with land use, historic landmarks,
+DDOT centrelines, NPS and DPR parks and waterbodies (CC BY 4.0); the USGS Sandy NCR 2014 lidar. Optional place keys used
+there: `peaks` { footprint id: metres } where the lidar caught a bird over a roof, and `parkPaths` { width, block } to
+draw the walks inside parks wider and in their own surface (the Mall's gravel walks).
+
 ## Licences
 
 Only sources whose licence allows building and publishing a derived model are used, and their credit lines go

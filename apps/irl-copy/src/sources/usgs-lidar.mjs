@@ -9,7 +9,8 @@ import { createLazPerf } from "laz-perf";
 
 const COLLECTIONS = [{ id: "CA_SanFrancisco_1_B23", covers: (p) => p.city === "san-francisco" },
   { id: "WA_KingCo_1_2021", covers: (p) => p.city === "seattle" },       // King County west half, QL1, flown 2021
-  { id: "NY_NewYorkCity", covers: (p) => p.city === "new-york" }];        // the five boroughs, flown 2017 (topobathymetric)
+  { id: "NY_NewYorkCity", covers: (p) => p.city === "new-york" },        // the five boroughs, flown 2017 (topobathymetric)
+  { id: "USGS_LPC_MD_VA_Sandy_NCR_2014_LAS_2015", covers: (p) => p.city === "washington-dc" }];  // the National Capital Region after Sandy, flown 2014
 const BASE = "https://usgs-lidar-public.s3.amazonaws.com";
 const NOISE = new Set([7, 18]), GROUND = 2, WATER = 9;
 

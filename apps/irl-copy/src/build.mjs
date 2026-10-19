@@ -72,13 +72,21 @@ export function buildPlace(place, frame, L) {
   // paths 2 m wide
   for (const [fx, fz] of along(frame, L.paths?.features ?? [])) for (let dz = -sc; dz <= sc; dz += 0.5) for (let dx = -sc; dx <= sc; dx += 0.5) {
     if (dx * dx + dz * dz > sc * sc) continue; const x = Math.floor(fx + dx), z = Math.floor(fz + dz); if (x >= 0 && z >= 0 && x < N && z < N) path[I(x, z)] = 1; }
+  // place.parkPaths { width (m), block }: the walks inside parks drawn wider and in their own surface (the National Mall's
+  // gravel walks are 6-12 m, and read pale between the elm rows); paths elsewhere (sidewalks mapped as footways) stay 2 m
+  if (place.parkPaths) { const r = (place.parkPaths.width ?? 6) * sc / 2;
+    for (const [fx, fz] of along(frame, L.paths?.features ?? [])) { const cx = Math.floor(fx), cz = Math.floor(fz); if (cx < 0 || cz < 0 || cx >= N || cz >= N || !park[I(cx, cz)]) continue;
+      for (let dz = -r; dz <= r; dz += 0.5) for (let dx = -r; dx <= r; dx += 0.5) { if (dx * dx + dz * dz > r * r) continue;
+        const x = Math.floor(fx + dx), z = Math.floor(fz + dz); if (x >= 0 && z >= 0 && x < N && z < N && park[I(x, z)]) path[I(x, z)] = 2; } } }
   const road = distanceTo(frame, (L.streets?.features ?? []).map((f) => f.geometry), WALK + 2 * sc);
 
   let lo = Infinity, hi = -Infinity; for (const h of H) { lo = Math.min(lo, h); hi = Math.max(hi, h); }
   const floor = Math.floor(lo) - Math.round(4 * sc), ground = (x, z) => Math.round(H[I(x, z)]) - floor;
   const buildings = (L.buildings?.features ?? []).map((f, k) => {
     const cells = cellsIn(frame, f.geometry).filter(([x, z]) => road[I(x, z)] > ROAD); if (!cells.length) return null;
-    const p = f.properties, base = Math.min(...cells.map(([x, z]) => ground(x, z)));
+    // place.peaks { id: metres }: a footprint's real peak where its record has none and the lidar caught something over it
+    // (a bird or a crane: a 12-storey block in Washington read 700 m)
+    const p = place.peaks?.[f.properties.id] != null ? { ...f.properties, peak: place.peaks[f.properties.id] } : f.properties, base = Math.min(...cells.map(([x, z]) => ground(x, z)));
     // the footprint's height, from its record, else the lidar surface's median over it (Seattle's outlines carry none)
     let hm = p.height; if (!Number.isFinite(hm) && lid) { const v = cells.map(([x, z]) => I(x, z)).filter((i) => lid.count[i] > 0).map((i) => lid.surface[i] - lid.ground[i]).sort((a, b) => a - b); hm = v.length ? v[v.length >> 1] : NaN; }
     const height = Math.max(3, Math.round((Number.isFinite(hm) ? hm : 6) * sc));
@@ -136,7 +144,7 @@ export function buildPlace(place, frame, L) {
     const d = road[i];
     if (water[i] && d > WALK && !isB[i]) { const deep = Math.max(2, Math.round(2 * sc)); g.set(x, y - deep, z, "clay"); for (let k = 0; k < deep; k++) g.set(x, y - k, z, "water", { level: "0" }); continue; }
     const seen = cover[i];
-    g.set(x, y, z, d <= ROAD ? "gray_concrete" : d <= WALK && !park[i] ? "smooth_stone" : isB[i] ? "stone" : path[i] ? "andesite" : play[i] ? "packed_mud" : seen ?? "grass_block");
+    g.set(x, y, z, d <= ROAD ? "gray_concrete" : d <= WALK && !park[i] ? "smooth_stone" : isB[i] ? "stone" : path[i] ? (path[i] === 2 ? place.parkPaths.block ?? "andesite" : "andesite") : play[i] ? "packed_mud" : seen ?? "grass_block");
   }
   // hollow masses (walls and roof): placeholders, and a solid town at 2 blocks a metre is millions of blocks
   // a wall where the footprint ends, and a closed roof: each cell from just above its lowest neighbour's roof to its own

@@ -8,14 +8,21 @@ export function cellsIn(frame, geom) {
   for (const rings of polys(geom)) {
     const R = rings.map((r) => r.map(([lon, lat]) => toBlock(lon, lat)));
     const xs = R[0].map((p) => p[0]), zs = R[0].map((p) => p[1]);
-    for (let z = Math.max(0, Math.floor(Math.min(...zs))); z <= Math.min(N - 1, Math.ceil(Math.max(...zs))); z++)
-      for (let x = Math.max(0, Math.floor(Math.min(...xs))); x <= Math.min(N - 1, Math.ceil(Math.max(...xs))); x++) {
-        const px = x + 0.5, pz = z + 0.5; let inside = false;
-        for (const r of R) for (let i = 0, j = r.length - 1; i < r.length; j = i++) {
-          const [xi, zi] = r[i], [xj, zj] = r[j];
-          if (zi > pz !== zj > pz && px < ((xj - xi) * (pz - zi)) / (zj - zi) + xi) inside = !inside; }
-        if (inside) cells.push([x, z]);
-      }
+    // a scanline per row: the rings' crossings at the row's centre line (the same even-odd test as cell by cell, each
+    // edge's crossing computed once per row instead of once per cell, so a river of 10,000 vertices stays quick)
+    let xmin = Infinity, xmax = -Infinity; for (const x of xs) { if (x < xmin) xmin = x; if (x > xmax) xmax = x; }
+    let zmin = Infinity, zmax = -Infinity; for (const z of zs) { if (z < zmin) zmin = z; if (z > zmax) zmax = z; }
+    const x0 = Math.max(0, Math.floor(xmin)), x1 = Math.min(N - 1, Math.ceil(xmax));
+    for (let z = Math.max(0, Math.floor(zmin)); z <= Math.min(N - 1, Math.ceil(zmax)); z++) {
+      const pz = z + 0.5, cross = [];
+      for (const r of R) for (let i = 0, j = r.length - 1; i < r.length; j = i++) {
+        const [xi, zi] = r[i], [xj, zj] = r[j];
+        if (zi > pz !== zj > pz) cross.push(((xj - xi) * (pz - zi)) / (zj - zi) + xi); }
+      if (!cross.length) continue;
+      cross.sort((a, b) => a - b);
+      // a cell is inside when an odd number of crossings lie strictly right of its centre
+      for (let x = x0, k = 0; x <= x1; x++) { const px = x + 0.5; while (k < cross.length && cross[k] <= px) k++; if ((cross.length - k) & 1) cells.push([x, z]); }
+    }
   }
   return cells;
 }

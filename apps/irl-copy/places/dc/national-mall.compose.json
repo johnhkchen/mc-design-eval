@@ -1,0 +1,287 @@
+{
+ "note": "The National Mall at 0.42 blocks per metre: hero kits (runs/national-mall) in site orientation, landscape modules (the Capitol's West Front grounds, the Monument grounds) on the land's own ground, each building module on its footprint; the metered fill (bin/fill.mjs) on the rest.",
+ "modules": {
+  "capitol-kit-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/national-mall/capitol-kit/v1.nbt",
+   "plot": [
+    0,
+    0,
+    35,
+    95
+   ]
+  },
+  "capitol-grounds-kit-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/national-mall/capitol-grounds-kit/v1.nbt",
+   "plot": [
+    0,
+    0,
+    184,
+    124
+   ]
+  },
+  "monument-kit-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/national-mall/monument-kit/v1.nbt",
+   "plot": [
+    0,
+    0,
+    99,
+    99
+   ]
+  },
+  "castle-kit-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/national-mall/castle-kit/v1.nbt",
+   "plot": [
+    0,
+    0,
+    56,
+    20
+   ]
+  },
+  "castle-kit-1": {
+   "file": "../../benchmarks/plugin-baseline/runs/national-mall/castle-kit/v1.nbt",
+   "plot": [
+    61,
+    0,
+    102,
+    41
+   ]
+  },
+  "castle-kit-2": {
+   "file": "../../benchmarks/plugin-baseline/runs/national-mall/castle-kit/v1.nbt",
+   "plot": [
+    107,
+    0,
+    136,
+    25
+   ]
+  },
+  "castle-kit-3": {
+   "file": "../../benchmarks/plugin-baseline/runs/national-mall/castle-kit/v1.nbt",
+   "plot": [
+    141,
+    0,
+    169,
+    30
+   ]
+  },
+  "gallery-kit-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/national-mall/gallery-kit/v1.nbt",
+   "plot": [
+    0,
+    0,
+    100,
+    39
+   ]
+  },
+  "gallery-kit-1": {
+   "file": "../../benchmarks/plugin-baseline/runs/national-mall/gallery-kit/v1.nbt",
+   "plot": [
+    105,
+    0,
+    153,
+    33
+   ]
+  },
+  "museums-north-kit-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/national-mall/museums-north-kit/v1.nbt",
+   "plot": [
+    0,
+    0,
+    114,
+    46
+   ]
+  },
+  "museums-north-kit-1": {
+   "file": "../../benchmarks/plugin-baseline/runs/national-mall/museums-north-kit/v1.nbt",
+   "plot": [
+    119,
+    0,
+    183,
+    28
+   ]
+  },
+  "museums-north-kit-2": {
+   "file": "../../benchmarks/plugin-baseline/runs/national-mall/museums-north-kit/v1.nbt",
+   "plot": [
+    188,
+    0,
+    215,
+    33
+   ]
+  },
+  "museums-south-kit-0": {
+   "file": "../../benchmarks/plugin-baseline/runs/national-mall/museums-south-kit/v1.nbt",
+   "plot": [
+    0,
+    0,
+    87,
+    30
+   ]
+  },
+  "museums-south-kit-1": {
+   "file": "../../benchmarks/plugin-baseline/runs/national-mall/museums-south-kit/v1.nbt",
+   "plot": [
+    92,
+    0,
+    139,
+    28
+   ]
+  }
+ },
+ "placements": [
+  {
+   "building": "DC86912",
+   "module": "capitol-grounds-kit-0",
+   "mode": "at",
+   "at": [
+    -185,
+    -14
+   ],
+   "y": -10,
+   "ground": false
+  },
+  {
+   "building": "DC87354",
+   "module": "monument-kit-0",
+   "mode": "at",
+   "at": [
+    -47,
+    -47
+   ],
+   "y": -5,
+   "ground": false
+  },
+  {
+   "building": "DC86912",
+   "module": "capitol-kit-0",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "DC86863",
+   "module": "castle-kit-0",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "DC86860",
+   "module": "castle-kit-1",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "DC87511",
+   "module": "castle-kit-2",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "DC87512",
+   "module": "castle-kit-3",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "DC86963",
+   "module": "gallery-kit-0",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "DC86962",
+   "module": "gallery-kit-1",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "DC86964",
+   "module": "museums-north-kit-0",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "DC86954",
+   "module": "museums-north-kit-1",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "DC86946",
+   "module": "museums-north-kit-2",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "DC86851",
+   "module": "museums-south-kit-0",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "DC86857",
+   "module": "museums-south-kit-1",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  }
+ ]
+}
