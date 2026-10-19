@@ -82,23 +82,25 @@ function groups(rows) {
   });
 }
 
-// stretches of 5+ minutes inside [t0, t1] with no session running
+// stretches of 2+ minutes inside [t0, t1] with no session running
 function idle(rows, t0, t1) {
   const iv = rows.map((r) => [r.start, r.end]).sort((a, b) => a[0] - b[0]), out = [];
   let at = t0;
-  for (const [a, b] of iv) { if (a - at >= 5 * 60000) out.push([at, a]); at = Math.max(at, b); }
-  if (t1 - at >= 5 * 60000) out.push([at, t1]);
+  for (const [a, b] of iv) { if (a - at >= COLLAPSE) out.push([at, a]); at = Math.max(at, b); }
+  if (t1 - at >= COLLAPSE) out.push([at, t1]);
   return out;
 }
 
-const LANE = 5, ROW = 24, GAP = 8, COLLAPSE = 10 * 60000, IDLE_PX = 34;
+const LANE = 5, ROW = 24, GAP = 8, COLLAPSE = 2 * 60000, LONG = 10 * 60000;
+const breakPx = (ms) => (ms >= LONG ? 26 : 12);   // a collapsed stretch's drawn width
 
-// time -> x with every idle stretch of 10+ minutes collapsed to a narrow break, so active time takes the width
+// time -> x with every stretch of 2+ minutes with no agent running collapsed to a narrow break, so active time takes the width
 function makeScale(t0, t1, gaps, L, W) {
-  const G = gaps.filter(([a, b]) => b - a >= COLLAPSE).sort((p, q) => p[0] - q[0]);
-  const active = Math.max(1, t1 - t0 - G.reduce((t, [a, b]) => t + b - a, 0)), k = (W - G.length * IDLE_PX) / active;
+  // breaks only a blip apart (under 90 s of activity between them) merge into one; the blips draw inside it
+  const G = []; for (const [a, b] of gaps.filter(([a, b]) => b - a >= COLLAPSE).sort((p, q) => p[0] - q[0])) { const l = G[G.length - 1]; if (l && a - l[1] < 90e3) l[1] = b; else G.push([a, b]); }
+  const active = Math.max(1, t1 - t0 - G.reduce((t, [a, b]) => t + b - a, 0)), k = (W - G.reduce((t, [a, b]) => t + breakPx(b - a), 0)) / active;
   const pieces = []; let cur = t0, pos = L;
-  for (const [a, b] of G) { pieces.push({ a: cur, b: a, xa: pos, xb: pos + (a - cur) * k }); pos += (a - cur) * k; pieces.push({ a, b, xa: pos, xb: pos + IDLE_PX, idle: true }); pos += IDLE_PX; cur = b; }
+  for (const [a, b] of G) { pieces.push({ a: cur, b: a, xa: pos, xb: pos + (a - cur) * k }); pos += (a - cur) * k; pieces.push({ a, b, xa: pos, xb: pos + breakPx(b - a), idle: true }); pos += breakPx(b - a); cur = b; }
   pieces.push({ a: cur, b: t1, xa: pos, xb: L + W });
   const x = (t) => { if (t <= t0) return L; for (const p of pieces) if (t <= p.b) return p.xa + (p.b > p.a ? (t - p.a) / (p.b - p.a) : 0) * (p.xb - p.xa); return L + W; };
   x.inv = (px) => { for (const p of pieces) if (px <= p.xb) return p.a + (p.xb > p.xa ? (px - p.xa) / (p.xb - p.xa) : 0) * (p.b - p.a); return t1; };
@@ -113,7 +115,7 @@ function endToEnd(rows, t0, t1) {
   for (const [a, b] of iv) { if (s0 === null || a > e0) { if (s0 !== null) act += e0 - s0; s0 = a; e0 = b; } else e0 = Math.max(e0, b); } if (s0 !== null) act += e0 - s0;
   const sum = (f) => rows.reduce((t, r) => t + (r[f] ?? 0), 0), agentMin = sum("ms") / 60000, wall = (t1 - t0) / 60000, active = act / 60000;
   return { wall, active, idle: wall - active, agentMin, avg: active ? agentMin / active : 0, cost: sum("cost"), out: sum("out"), inp: sum("in"), cr: sum("cacheRead"), cw: sum("cacheWrite"),
-    time: `end to end ${hm(wall)}: ${hm(active)} with an agent running (${Math.round((active / wall) * 100)}%), ${hm(wall - active)} with none (idle stretches of 10+ min collapsed to a break) · ${(agentMin / 60).toFixed(1)} agent-hours, ${(active ? agentMin / active : 0).toFixed(1)} agents on average while any ran`,
+    time: `end to end ${hm(wall)}: ${hm(active)} with an agent running (${Math.round((active / wall) * 100)}%), ${hm(wall - active)} with none (every idle stretch of 2+ min collapsed to a break) · ${(agentMin / 60).toFixed(1)} agent-hours, ${(active ? agentMin / active : 0).toFixed(1)} agents on average while any ran`,
     tokens: (c) => `tokens: ${big(sum("out"))} out, ${big(sum("cacheRead"))} cache read, ${big(sum("cacheWrite"))} cache write, ${big(sum("in"))} in · $${sum("cost").toFixed(2)} (${c})` };
 }
 function blockHeight(gs) { return gs.reduce((h, g) => h + (g.lanes > 1 ? Math.max(ROW, g.lanes * LANE + 8) : ROW) + 2, 0); }
@@ -147,13 +149,15 @@ function axis(o, x, W, yTop, yBot) {
   const step = [5, 10, 15, 30, 60, 120].find((st) => (span / st) * 70 <= W) ?? 240;
   let lastLabel = -Infinity;
   for (const p of x.pieces) {
-    if (p.idle) { o.push(`<path d="M${(p.xa + 6).toFixed(1)},${yBot + 4} l4,-8 M${(p.xb - 10).toFixed(1)},${yBot + 4} l4,-8" stroke="#8a7f6a" stroke-width="1.5"/>`,
-      `<text x="${((p.xa + p.xb) / 2).toFixed(1)}" y="${yBot + 30}" text-anchor="middle" fill="#8a7f6a" font-size="11">+${hm((p.b - p.a) / 60000)}</text>`); continue; }
+    if (p.idle) {
+      if (p.b - p.a >= LONG) o.push(`<path d="M${(p.xa + 4).toFixed(1)},${yBot + 4} l4,-8 M${(p.xb - 8).toFixed(1)},${yBot + 4} l4,-8" stroke="#8a7f6a" stroke-width="1.5"/>`);
+      continue; }
     for (let t = Math.ceil(p.a / (step * 60000)) * step * 60000; t <= p.b; t += step * 60000) {
       const gx = x(t); o.push(`<line x1="${gx.toFixed(1)}" y1="${yTop}" x2="${gx.toFixed(1)}" y2="${yBot}" stroke="#e3e0d8"/>`);
-      if (gx - lastLabel > 52 && x.pieces.every((q) => !q.idle || gx < q.xa - 24 || gx > q.xb + 24)) { o.push(`<text x="${gx.toFixed(1)}" y="${yBot + 16}" text-anchor="middle" fill="#777">${clock.format(t)}</text>`); lastLabel = gx; }
+      if (gx - lastLabel > 52 && x.pieces.every((q) => !q.idle || q.b - q.a < LONG || gx < q.xa - 24 || gx > q.xb + 24)) { o.push(`<text x="${gx.toFixed(1)}" y="${yBot + 16}" text-anchor="middle" fill="#777">${clock.format(t)}</text>`); lastLabel = gx; }
     }
   }
+  breakLabels(o, x, yBot);
 }
 
 // collapsed idle time: a plain strip behind the whole chart (its duration is on the axis)
@@ -161,8 +165,19 @@ function breaks(o, x, yTop, yBot) {
   for (const p of x.pieces) if (p.idle) o.push(`<rect x="${p.xa.toFixed(1)}" y="${yTop}" width="${(p.xb - p.xa).toFixed(1)}" height="${yBot - yTop}" fill="#efe9dc"/>`);
 }
 
+// break durations under the axis, longest first, each where it doesn't meet one already placed
+function breakLabels(o, x, yBot) {
+  const placed = [];
+  for (const p of x.pieces.filter((q) => q.idle && q.b - q.a >= 5 * 60000).sort((m, n) => (n.b - n.a) - (m.b - m.a))) {
+    const cx = (p.xa + p.xb) / 2, txt = `+${hm((p.b - p.a) / 60000)}`, w = txt.length * 6.2 + 6;
+    if (placed.some(([l, r]) => cx - w / 2 < r && cx + w / 2 > l)) continue;
+    placed.push([cx - w / 2, cx + w / 2]);
+    o.push(`<text x="${cx.toFixed(1)}" y="${yBot + 30}" text-anchor="middle" fill="#8a7f6a" font-size="11">${txt}</text>`);
+  }
+}
+
 function idleBands(o, gaps, x, yTop, yBot, label = true) {
-  gaps = gaps.filter(([a, b]) => b - a < COLLAPSE || x(b) - x(a) > IDLE_PX + 1);   // collapsed stretches are drawn by breaks()
+  gaps = gaps.filter(([a, b]) => x(b) - x(a) > breakPx(b - a) + 1);   // collapsed stretches are drawn by breaks()
   for (const [a, b] of gaps) {
     const xa = x(a), xb = x(b), w = xb - xa, txt = `no agent · ${hm((b - a) / 60000)}`;
     o.push(`<rect x="${xa.toFixed(1)}" y="${yTop}" width="${w.toFixed(1)}" height="${yBot - yTop}" fill="url(#idle)"/>`);
