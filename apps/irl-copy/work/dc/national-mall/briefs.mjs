@@ -37,7 +37,7 @@ for (const kit of spec.kits) {
       plots.push(` plot ${i}, x ${px}..${px + W - 1}, z 0..${D - 1} (${W} x ${D}), up to y ${top}: ${q.label} — ${q.text}`);
       maps.push(`PLOT ${i} (${q.label}): a LANDSCAPE plot, place box x ${x0}..${x1}, z ${z0}..${z1}. VERTICAL DATUM: module y 0 = the land's world y ${G0}; the module replaces EVERYTHING in its box from y 1 up, so rebuild the whole ground: in every column fill solid ground (dirt under the surface, stone below) from y 1 up to the GROUND HEIGHT MAP's value, the surface block at that height, so the box's edges meet the land around it seamlessly (keep the outermost 2 blocks of every edge exactly at the mapped heights). Inside you may reshape by 1-2 blocks for terraces and steps (soften 1-block steps with slabs and stairs). Nothing may leave its plot or exceed y ${top}.\nGROUND HEIGHT MAP: the ground surface block's y in the module, one base-36 digit per cell (0-9 then a=10, b=11, ...), rows z 0..${D - 1}, columns x 0..${W - 1}:\n${hmap.join("\n")}\nSITE MAP (. = open ground; letters = structure footprints in the box):\n${named.join("\n") || "(none)"}\n${mask.join("\n")}`);
       const ref = byId.get(q.ref), [rx, rz] = boxOf(ref);
-      modules[key] = { file: `../../benchmarks/plugin-baseline/runs/national-mall/${kit.key}/${q.version ?? "v1"}.nbt`, plot: [px, 0, px + W - 1, D - 1] };
+      modules[key] = { file: `../../benchmarks/plugin-baseline/runs/national-mall/${kit.key}/${q.version ?? "v1"}.nbt`, plot: [px, 0, px + W - 1, D - 1], ...(q.swap ? { swap: q.swap } : {}) };
       landscape.push({ building: q.ref, module: key, mode: "at", at: [x0 - rx, z0 - rz], y: G0 - ref.base, ground: false });
       px += W + 4; continue;
     }
@@ -50,7 +50,7 @@ for (const kit of spec.kits) {
       s += c * 2 >= k * k ? "#" : "."; h += gs.length ? b36(Math.max(...gs) - base) : "."; } mask.push(s); hmap.push(h); }
     plots.push(` plot ${i}, x ${px}..${px + W - 1}, z 0..${D - 1} (${W} x ${D}), up to y ${top}: ${q.label} — ${q.text}`);
     maps.push(`PLOT ${i} (${q.label}): place box x ${x0}..${x1}, z ${z0}..${z1}; y 0 = its lowest ground; the real roofs reach about y ${b.top - b.base} (lidar); 1 char = ${k}x${k} blocks\nFOOTPRINT (# = build here):\n${mask.join("\n")}\nGROUND above y 0 (base 36; build down to it, never float or bury):\n${hmap.join("\n")}`);
-    modules[key] = { file: `../../benchmarks/plugin-baseline/runs/national-mall/${kit.key}/${q.version ?? "v1"}.nbt`, plot: [px, 0, px + W - 1, D - 1] };
+    modules[key] = { file: `../../benchmarks/plugin-baseline/runs/national-mall/${kit.key}/${q.version ?? "v1"}.nbt`, plot: [px, 0, px + W - 1, D - 1], ...(q.swap ? { swap: q.swap } : {}) };
     buildings.push({ building: b.id, module: key, mode: "at", at: [0, 0], quarter: 0, clear: "all" });
     px += W + 4;
   }
