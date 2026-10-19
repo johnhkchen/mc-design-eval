@@ -50,7 +50,9 @@ async function fetchPlace(n) {
   const place = load(n), frame = frameFor(place), chosen = [...new Set(Object.values(plan(place)).filter(Boolean))].filter((s) => !only || s.id === only);
   mkdirSync(`${HERE}/.cache/${n}`, { recursive: true });
   for (const s of chosen) {
-    const t0 = Date.now(), layers = await s.fetch(place, frame), meta = {};
+    // a source that fails (a service down) is left out, so the sources after it still arrive; fetch --only retries it
+    const t0 = Date.now(), meta = {};
+    let layers; try { layers = await s.fetch(place, frame); } catch (e) { console.error(`${s.id}: failed (${e.message}); left out`); continue; }
     for (const [layer, data] of Object.entries(layers)) {
       if (data.kind === "raster") { writeFileSync(cache(n, `${s.id}.${layer}.f32`), Buffer.from(data.data.buffer)); meta[layer] = { kind: "raster", n: data.n, rotate: frame.rotate, tile: data.tile }; }
       else if (data.kind === "rasters") { const { rasters, ...rest } = data; for (const [r, a] of Object.entries(rasters)) writeFileSync(cache(n, `${s.id}.${layer}.${r}.f32`), Buffer.from(a.buffer)); meta[layer] = { ...rest, rotate: frame.rotate, names: Object.keys(rasters) }; }

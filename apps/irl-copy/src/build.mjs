@@ -39,7 +39,10 @@ export function buildPlace(place, frame, L) {
   // open water the hydrography leaves out (the NHD's waterbodies stop at the shore of the Bay): lidar ground within a metre
   // of sea level with nothing standing on it (a pier's deck reads metres up), levelled to one surface
   if (lid) {
-    const sea = []; for (let i = 0; i < N * N; i++) if (lid.ground[i] < 1 && (!lid.count[i] || lid.surface[i] - lid.ground[i] < 0.5)) { water[i] = 2; sea.push(lid.ground[i]); }
+    // the water line differs by datum (the Bay reads near 0 m, Elliott Bay about 1.5 m): within 0.7 m of the frame's
+    // lowest ground (its 2nd percentile), never above 3 m
+    const sorted = Float32Array.from(lid.ground).sort(), lo = sorted[Math.floor(sorted.length * 0.02)], line = Math.min(3, Math.max(1, lo + 0.7));
+    const sea = []; for (let i = 0; i < N * N; i++) if (lid.ground[i] < line && (!lid.count[i] || lid.surface[i] - lid.ground[i] < 0.5)) { water[i] = 2; sea.push(lid.ground[i]); }
     if (sea.length > N) { sea.sort((p, q) => p - q); const level = sea[sea.length >> 1] * sc; for (let i = 0; i < N * N; i++) if (water[i] === 2) H[i] = level; }
     else for (let i = 0; i < N * N; i++) if (water[i] === 2) water[i] = 0;
     // the ground returns carry a few centimetres of noise, and rounding that to blocks on a gentle slope leaves ragged
