@@ -1,0 +1,112 @@
+{
+ "common": "Scale: 1.4 blocks per metre. For a public catalog for a Minecraft 1.21.1 server: only blocks that exist in 1.21.1 (no pale oak, nothing 1.21.4+). These are real buildings of Pike Place Market in Seattle, for a hero render at dusk. Placement code sets each module on its real footprint exactly as it stands (no turning), so build each IN ITS SITE ORIENTATION, as in the footprint maps: Pike Place, the market street, runs along z just east of the Main Arcade (north-west end at low z, Pike Street at high z); 1st Avenue is further east (high x, uphill); Elliott Bay is west (low x, downhill). The ground climbs steeply from the waterfront up to Pike Place: y 0 of each plot is the lowest ground under that footprint, and the GROUND map gives the ground height above y 0 per cell. Buildings on the bluff show extra lower storeys on their downhill (low x) side: build down to the ground there, never floating and never buried. Build only on the footprint cells (#). Exterior only: no interiors beyond what shows through glass (lit stalls, shop interiors near the windows). Make it read at dusk: warm lights in windows and stalls, lanterns, neon where the real building has it.",
+ "kits": [
+  {
+   "key": "pike-arcade",
+   "intro": "The Main Arcade of Pike Place Market (1907) with the PUBLIC MARKET CENTER sign and clock: the heart of the market and the hero of the render.",
+   "plots": [
+    {
+     "id": "SEA1270106902", "where": "((x >= 360) || (x >= 347 && z >= 400)) && z <= 485",
+     "label": "THE MAIN ARCADE AND THE NORTH ARCADE (west side of Pike Place)",
+     "text": "Along its street face (east, high x) a continuous open arcade of produce, flower and fish stalls under a low shed roof on slender green-painted posts: counters heaped with colour (melons, pumpkins, apples, crates, buckets of flowers), canvas awnings, hanging lamps and hand-painted wooden signs. Above, two to three storeys of old market building in white-painted brick and wood with rows of multi-pane windows. On the downhill west side (low x) it drops several floors (the Down Under levels) with tiers of windows over the bay. At the SOUTH END (high z), where Pike Street meets Pike Place, the iconic corner: on the roof the big neon sign PUBLIC MARKET CENTER in red neon letters (red concrete or red terracotta outlined with redstone lamps or glowstone behind red stained glass) on a white frame, facing up Pike Street (toward +x and +z); below it the round clock (white face, red neon ring, the words PUBLIC MARKET) and the MEET THE PRODUCER sign; under them the corner entrance with Pike Place Fish Market's ice beds of fish. The long narrow north part (the North Arcade) is an open covered market roof on posts over rows of craft-stall tables."
+    }
+   ]
+  },
+  {
+   "key": "pike-marketfront",
+   "intro": "MarketFront (2017) and the hillclimb: the modern western addition of Pike Place Market, stepping down the bluff toward Elliott Bay.",
+   "plots": [
+    {
+     "id": "SEA1270106902", "where": "!((x >= 360) || (x >= 347 && z >= 400)) && x >= 232 && z <= 485",
+     "label": "MARKETFRONT AND THE MARKET'S WESTERN BUILDINGS",
+     "text": "At Pike Place level a large public rooftop plaza (light stone and wood decking, planters with grasses, benches, a bronze pig sculpture, glass railings, views over the bay); under it, several storeys stepping down the slope: glass-fronted stalls and shops in timber and grey metal panels, a long glass gallery, housing above with balconies; on the north the older market buildings (white brick, many windows). Its west face shows the levels as tiers of glass and timber."
+    },
+    {
+     "id": "SEA1270106902", "where": "x < 232 && z <= 485",
+     "label": "THE HILLCLIMB LANDING AND OVERLOOK",
+     "text": "Where the Overlook Walk lands from the waterfront: broad terraced concrete stairs and ramps with planters and grass, benches, lamps, and a concrete-and-glass elevator and stair tower climbing toward the market; landscaped slopes between the terraces."
+    }
+   ]
+  },
+  {
+   "key": "pike-corner",
+   "intro": "The market's south and east blocks: the Economy Market and Corner Market at the foot of Pike Street, the Sanitary Market across Pike Place from the arcade, and a small Post Alley building.",
+   "plots": [
+    {
+     "id": "SEA1270106902", "where": "z > 485 && x < 376",
+     "label": "THE ECONOMY MARKET (1916)",
+     "text": "Two storeys of red-brown brick at the foot of Pike Street, its entrance an arched glass atrium doorway with cream terracotta trim off Pike Street, inside a skylit atrium with stalls; white window frames, a flat roof with a parapet."
+    },
+    {
+     "id": "SEA1270106902", "where": "z > 485 && x >= 376",
+     "label": "THE CORNER MARKET (1912)",
+     "text": "Three storeys of red-brown brick on the corner of Pike Place and Pike Street: the ground floor open produce stalls under canvas awnings behind big arched openings, the upper storeys regular tall windows in white frames, a cornice and parapet on a flat roof."
+    },
+    {
+     "id": "SEA1270126969",
+     "label": "THE SANITARY MARKET (1910, rebuilt 1942)",
+     "text": "A long two-storey building in cream stucco and concrete facing the Main Arcade across Pike Place: open-fronted shops and stalls along the street with striped awnings and painted signs, SANITARY PUBLIC MARKET lettering over the entrance, small upper windows, a flat roof."
+    },
+    {
+     "id": "SEA1270126968",
+     "label": "THE GARDEN CENTER BUILDING (1908) ON POST ALLEY",
+     "text": "A small two-storey brick building with shopfronts on Post Alley, painted signs, a fire escape and a flat roof."
+    }
+   ]
+  },
+  {
+   "key": "pike-north",
+   "intro": "The north end of Pike Place: the Soames-Dunn Building with the original Starbucks, and the Butterworth Building.",
+   "plots": [
+    {
+     "id": "SEA1270109000",
+     "label": "THE SOAMES-DUNN BUILDING (1918)",
+     "text": "Two storeys of brick and stucco along the east side of Pike Place (its street face is low x): shopfronts with big wooden-framed display windows under a long awning, an upper floor of paired windows; in the row the first Starbucks, a brown wooden storefront with the old brown round logo sign and a wooden door, and Bavarian Meats beside it; flower boxes."
+    },
+    {
+     "id": "SEA1270109001",
+     "label": "THE BUTTERWORTH BUILDING (1903)",
+     "text": "The old mortuary between Pike Place and 1st Avenue: four storeys of red brick, arched windows on the upper floors, a heavy cornice, its main facade on 1st Avenue (high x) with shopfronts, its back on Pike Place."
+    }
+   ]
+  },
+  {
+   "key": "pike-waterfront",
+   "intro": "The waterfront below the market: Pier 59 and the Seattle Aquarium on Elliott Bay, and the Waterfront Landings along Alaskan Way.",
+   "plots": [
+    {
+     "id": "SEA1270099001",
+     "label": "PIER 59 (THE SEATTLE AQUARIUM'S PIER SHED)",
+     "text": "A long historic pier shed on timber piles over the water: a long gabled roof in dark grey, walls of pale timber and windows, a modern glass entrance with the SEATTLE AQUARIUM sign facing Alaskan Way (high x), sea-life murals, decking and railings around it, pilings showing at the water."
+    },
+    {
+     "id": "SEA1270107325",
+     "label": "THE AQUARIUM'S BAY WING (1980)",
+     "text": "Low concrete and glass aquarium halls at the end of the pier: rooftop seal and otter pools (water), viewing decks with railings, an underwater-dome hall (glass)."
+    },
+    {
+     "id": "SEA1270109648",
+     "label": "WATERFRONT LANDINGS NORTH",
+     "text": "Four to six storeys of residential building on Alaskan Way: pale stucco and brick, bay windows and balconies, stepped flat roofs with rooftop terraces, ground floor shops facing the street (high x)."
+    },
+    {
+     "id": "SEA1270109650",
+     "label": "WATERFRONT LANDINGS SOUTH",
+     "text": "The second block of the same development: the same pale stucco, brick base, bays and balconies, rooftop terraces."
+    }
+   ]
+  },
+  {
+   "key": "pike-first-ave",
+   "intro": "The blocks around the market on Pine, Stewart and Western: hotels and old brick buildings that frame the market.",
+   "plots": [
+    { "id": "SEA1270126967", "label": "INN AT THE MARKET (1985)", "text": "A four-storey hotel at Pike Place and Stewart: cream stucco around a courtyard, bay windows, a rooftop deck facing the bay, a ground-floor cafe with awnings." },
+    { "id": "SEA1270126966", "label": "101 STEWART (1986)", "text": "A 1980s office tower of brick and beige panels with ribbon windows and a stepped, terraced top; shops at street level." },
+    { "id": "SEA1270110931", "label": "PALIHOTEL (1900)", "text": "A five-storey Edwardian brick hotel: red brick, bay windows, a sheet-metal cornice, a lit blade sign, shops below." },
+    { "id": "SEA1270114208", "label": "THE FIX BUILDING (1910)", "text": "A five-storey brick warehouse turned apartments on Western Avenue: red-brown brick, large multi-pane windows, a stepped parapet, fire escapes." },
+    { "id": "SEA1270162410", "label": "THE HAHN BUILDING (1910)", "text": "A three-storey brick building on Pike Street with a hostel sign (GREEN TORTOISE), shopfronts and a cornice." },
+    { "id": "SEA1270162409", "label": "PIKE STREET COMMERCIAL BUILDING (1923)", "text": "A two-storey brick and terracotta commercial building on Pike Street with large shop windows and a neon sign band." }
+   ]
+  }
+ ]
+}

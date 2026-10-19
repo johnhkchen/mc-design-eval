@@ -1,0 +1,100 @@
+The Main Arcade of Pike Place Market (1907) with the PUBLIC MARKET CENTER sign and clock: the heart of the market and the hero of the render.
+
+Scale: 1.4 blocks per metre. For a public catalog for a Minecraft 1.21.1 server: only blocks that exist in 1.21.1 (no pale oak, nothing 1.21.4+). These are real buildings of Pike Place Market in Seattle, for a hero render at dusk. Placement code sets each module on its real footprint exactly as it stands (no turning), so build each IN ITS SITE ORIENTATION, as in the footprint maps: Pike Place, the market street, runs along z just east of the Main Arcade (north-west end at low z, Pike Street at high z); 1st Avenue is further east (high x, uphill); Elliott Bay is west (low x, downhill). The ground climbs steeply from the waterfront up to Pike Place: y 0 of each plot is the lowest ground under that footprint, and the GROUND map gives the ground height above y 0 per cell. Buildings on the bluff show extra lower storeys on their downhill (low x) side: build down to the ground there, never floating and never buried. Build only on the footprint cells (#). Exterior only: no interiors beyond what shows through glass (lit stalls, shop interiors near the windows). Make it read at dusk: warm lights in windows and stalls, lanterns, neon where the real building has it.
+
+Plots along x, each standing at y 0:
+ plot 0, x 0..42, z 0..311 (43 x 312), up to y 82: THE MAIN ARCADE AND THE NORTH ARCADE (west side of Pike Place) — Along its street face (east, high x) a continuous open arcade of produce, flower and fish stalls under a low shed roof on slender green-painted posts: counters heaped with colour (melons, pumpkins, apples, crates, buckets of flowers), canvas awnings, hanging lamps and hand-painted wooden signs. Above, two to three storeys of old market building in white-painted brick and wood with rows of multi-pane windows. On the downhill west side (low x) it drops several floors (the Down Under levels) with tiers of windows over the bay. At the SOUTH END (high z), where Pike Street meets Pike Place, the iconic corner: on the roof the big neon sign PUBLIC MARKET CENTER in red neon letters (red concrete or red terracotta outlined with redstone lamps or glowstone behind red stained glass) on a white frame, facing up Pike Street (toward +x and +z); below it the round clock (white face, red neon ring, the words PUBLIC MARKET) and the MEET THE PRODUCER sign; under them the corner entrance with Pike Place Fish Market's ice beds of fish. The long narrow north part (the North Arcade) is an open covered market roof on posts over rows of craft-stall tables.
+
+PLOT 0 (THE MAIN ARCADE AND THE NORTH ARCADE (west side of Pike Place)): place box x 347..389, z 174..485; y 0 = its lowest ground; the real roofs reach about y 49 (lidar); 1 char = 7x7 blocks
+FOOTPRINT (# = build here):
+....#..
+....#..
+....#..
+....#..
+....#..
+....#..
+....#..
+....#..
+....#..
+....#..
+....#..
+....#..
+....#..
+....#..
+....#..
+....#..
+....#..
+....#..
+....#..
+....##.
+....##.
+....##.
+....##.
+...###.
+...###.
+...###.
+...###.
+..####.
+..####.
+..####.
+..####.
+..####.
+.#####.
+.#####.
+.#####.
+.#####.
+######.
+######.
+######.
+######.
+######.
+######.
+######.
+######.
+.#####.
+GROUND above y 0 (highest ground in each cell; build down to it, never float or bury):
+ .  .  . 13 18 18  .
+ .  .  . 13 17 18  .
+ .  .  . 13 17 18  .
+ .  .  . 13 17 18  .
+ .  .  . 14 17 18  .
+ .  .  . 14 18 19  .
+ .  .  . 14 18 19  .
+ .  .  . 14 18 19  .
+ .  .  . 15 18 19  .
+ .  .  . 15 18 19  .
+ .  .  . 14 18 19  .
+ .  .  . 13 17 19  .
+ .  .  . 12 17 19  .
+ .  .  . 11 17 19  .
+ .  .  . 11 16 19  .
+ .  .  .  . 16 19  .
+ .  .  .  . 16 20  .
+ .  .  .  . 16 19  .
+ .  .  .  . 16 19  .
+ .  .  .  . 15 20  .
+ .  .  .  . 16 20  .
+ .  .  .  7 16 20  .
+ .  .  .  7 15 20  .
+ .  .  .  8 15 20  .
+ .  .  5 10 16 20  .
+ .  .  5 10 16 21  .
+ .  .  6 11 16 20  .
+ .  .  7 12 17 20  .
+ .  3  7 12 17 21  .
+ .  3  8 12 17 21  .
+ .  3  8 13 17 20  .
+ .  4  8 13 17 22  .
+ .  4  9 13 17 21  .
+ 2  5  9 13 18 21  .
+ 2  5 10 14 18 21  .
+ 2  6 10 14 18 21  .
+ 3  7 10 14 18 21  .
+ 4  7 11 14 18 22  .
+ 4  8 11 15 18 22  .
+ 5  8 12 15 19 22  .
+ 5  9 12 15 19 22  .
+ 6  9 12 16 19 22  .
+ 6  9 12 16 19 23 23
+ 7 10 12 16 19 23 23
+ 7 10 12 15 19 23 23

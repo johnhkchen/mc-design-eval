@@ -1,0 +1,175 @@
+The north end of Pike Place: the Soames-Dunn Building with the original Starbucks, and the Butterworth Building.
+
+Scale: 1.4 blocks per metre. For a public catalog for a Minecraft 1.21.1 server: only blocks that exist in 1.21.1 (no pale oak, nothing 1.21.4+). These are real buildings of Pike Place Market in Seattle, for a hero render at dusk. Placement code sets each module on its real footprint exactly as it stands (no turning), so build each IN ITS SITE ORIENTATION, as in the footprint maps: Pike Place, the market street, runs along z just east of the Main Arcade (north-west end at low z, Pike Street at high z); 1st Avenue is further east (high x, uphill); Elliott Bay is west (low x, downhill). The ground climbs steeply from the waterfront up to Pike Place: y 0 of each plot is the lowest ground under that footprint, and the GROUND map gives the ground height above y 0 per cell. Buildings on the bluff show extra lower storeys on their downhill (low x) side: build down to the ground there, never floating and never buried. Build only on the footprint cells (#). Exterior only: no interiors beyond what shows through glass (lit stalls, shop interiors near the windows). Make it read at dusk: warm lights in windows and stalls, lanterns, neon where the real building has it.
+
+Plots along x, each standing at y 0:
+ plot 0, x 0..59, z 0..158 (60 x 159), up to y 69: THE SOAMES-DUNN BUILDING (1918) — Two storeys of brick and stucco along the east side of Pike Place (its street face is low x): shopfronts with big wooden-framed display windows under a long awning, an upper floor of paired windows; in the row the first Starbucks, a brown wooden storefront with the old brown round logo sign and a wooden door, and Bavarian Meats beside it; flower boxes.
+ plot 1, x 64..117, z 0..157 (54 x 158), up to y 65: THE BUTTERWORTH BUILDING (1903) — The old mortuary between Pike Place and 1st Avenue: four storeys of red brick, arched windows on the upper floors, a heavy cornice, its main facade on 1st Avenue (high x) with shopfronts, its back on Pike Place.
+
+PLOT 0 (THE SOAMES-DUNN BUILDING (1918)): place box x 400..459, z 89..247; y 0 = its lowest ground; the real roofs reach about y 47 (lidar); 1 char = 4x4 blocks
+FOOTPRINT (# = build here):
+###....#####...
+#############..
+##############.
+##############.
+##############.
+#############..
+#############..
+##############.
+##############.
+##############.
+##############.
+##############.
+##############.
+##############.
+##############.
+##############.
+##############.
+##############.
+##############.
+##############.
+###########....
+###########....
+###########....
+###########....
+###########....
+.##########....
+.########...##.
+.######....####
+.######....####
+.######....####
+.######....####
+.######....####
+.########..####
+.######....####
+.######....####
+.######.#######
+.##############
+.##############
+.##############
+.###########...
+GROUND above y 0 (highest ground in each cell; build down to it, never float or bury):
+ 1  1  2  2  .  .  5  6  7  7  8  9 11  .  .
+ 1  1  2  3  4  4  5  6  7  8  8  9 11 11  .
+ 1  1  2  3  4  4  5  6  7  8  8  9 10 11  .
+ 1  2  2  3  4  5  5  6  7  8  9  9 10 11  .
+ 1  2  2  3  4  5  5  6  7  8  9 10 10 11  .
+ 1  2  2  3  4  5  5  6  7  8  9 10 11 11  .
+ 1  2  2  3  4  5  5  6  7  8  9 10 11 11  .
+ 1  2  2  3  4  5  5  6  7  8  9 10 10 11  .
+ 1  2  2  3  4  5  5  6  7  8  9  9 10 11  .
+ 1  2  2  3  4  4  5  6  7  8  8  9 10 11  .
+ 1  2  2  3  4  4  5  6  7  7  8  9 10 11  .
+ 1  2  2  3  4  4  5  6  7  7  8  9 10 11  .
+ 1  2  2  3  4  4  5  6  6  7  8  9 10 11  .
+ 1  2  2  3  3  4  5  5  6  7  8  9 10 11  .
+ 1  2  2  3  3  4  5  5  6  7  8  8  9 11 11
+ 1  2  2  3  3  4  4  5  6  6  7  8  9 10 11
+ 1  2  2  3  3  4  4  5  5  6  7  8  9 10 11
+ 1  2  2  2  3  3  4  4  5  5  6  7  9 11 12
+ 1  2  2  2  3  3  3  4  4  4  5  6  8 11 12
+ 1  2  2  2  3  3  3  3  3  3  4  4  6  9 10
+ 1  2  2  2  2  3  3  3  3  3  2  .  .  .  .
+ 1  2  2  2  2  2  3  3  3  2  2  .  .  .  .
+ 1  2  2  2  2  2  2  2  2  2  2  .  .  .  .
+ 2  2  2  2  2  2  2  2  2  2  2  .  .  .  .
+ 2  2  2  2  2  2  2  2  2  2  2  .  .  .  .
+ 2  2  2  2  2  2  3  3  3  3  2  .  .  .  .
+ 2  2  2  2  2  3  3  3  3  3  3  4  6  9 11
+ 2  2  2  2  3  3  3  .  .  .  .  5  7  9 11
+ 2  2  2  2  3  3  3  .  .  .  .  6  8  9 10
+ 2  2  2  2  3  3  3  .  .  .  .  7  8  9 11
+ 2  2  2  3  3  3  3  .  .  .  .  7  8 10 11
+ 2  2  2  3  3  3  3  3  3  .  .  7  8 10 11
+ 2  2  3  3  3  3  3  3  3  .  .  7  9 10 11
+ 2  2  3  3  3  3  3  4  3  .  .  8  9 10 11
+ .  3  3  3  3  4  4  4  .  .  .  8  9 10 11
+ .  3  3  3  4  4  5  5  6  6  7  8  9 10 10
+ .  3  3  4  4  4  5  6  6  7  7  8  9 10 11
+ .  3  3  4  4  5  5  6  6  7  8  8  9 10 11
+ .  3  3  4  4  5  6  6  7  7  8  9  9 10 10
+ .  3  3  4  5  5  6  6  7  7  8  9  9 10 10
+
+PLOT 1 (THE BUTTERWORTH BUILDING (1903)): place box x 461..514, z 88..245; y 0 = its lowest ground; the real roofs reach about y 44 (lidar); 1 char = 4x4 blocks
+FOOTPRINT (# = build here):
+.....########.
+#############.
+#############.
+#############.
+#############.
+#############.
+#############.
+#############.
+#############.
+#############.
+#############.
+#############.
+#############.
+.############.
+.############.
+.############.
+.############.
+.############.
+.############.
+.############.
+.############.
+#############.
+#############.
+#############.
+#############.
+#############.
+#############.
+.############.
+.############.
+.############.
+.############.
+.############.
+.############.
+.############.
+.############.
+.#############
+.#############
+.#############
+.############.
+......#.......
+GROUND above y 0 (highest ground in each cell; build down to it, never float or bury):
+ 2  3  4  5  5  6  7  8  8  9 10 11 11  .
+ 2  3  4  4  5  6  7  7  8  9 10 10 11  .
+ 2  3  3  4  5  6  6  7  8  9 10 10 11  .
+ 1  2  3  4  5  5  6  7  8  9 10 10 11  .
+ 1  2  3  4  4  5  6  7  8  9  9 11 11  .
+ 1  2  3  3  4  5  6  7  8  8  9 11 11  .
+ 1  2  2  3  4  5  5  6  7  8  9 11 11  .
+ 1  1  2  3  3  4  5  6  7  8  9 10 11  .
+ 1  1  2  2  3  4  5  6  7  8  9 10 10  .
+ 1  1  1  1  2  3  4  5  6  8  9 10 10  .
+ 1  1  1  1  1  2  4  5  6  8  9 10 10  .
+ 1  1  1  1  1  2  4  5  6  7  9 10 10  .
+ 1  1  1  1  1  2  4  5  6  7  9 10 10  .
+ 1  1  1  1  1  3  4  5  6  7  9 10 10  .
+ .  1  1  2  2  3  4  5  6  7  9 10 10  .
+ .  1  2  2  3  3  4  5  6  7  8 10 10  .
+ 1  1  2  2  3  4  5  6  7  7  9 10 10  .
+ 1  1  2  3  3  4  5  6  7  8  9 10 10  .
+ 1  1  2  3  3  4  5  6  7  8  8 10 10  .
+ 1  1  2  3  3  4  5  6  7  7  8  9 10  .
+ 1  1  2  3  4  4  5  6  7  7  8  9  9  .
+ 1  1  2  3  4  4  5  6  7  7  8  9  9  .
+ 1  1  2  3  4  4  5  6  7  7  8  9  9  .
+ 1  1  2  3  4  4  5  6  7  7  8  9  9  .
+ 1  1  2  3  4  4  5  6  6  7  8  9  9  .
+ 1  1  2  3  3  4  5  6  6  7  8  9  9  .
+ 1  1  2  3  3  4  5  6  6  7  8  9  9  .
+ .  1  2  3  3  4  5  6  6  7  8  8  9  .
+ .  1  2  3  3  4  5  5  6  7  8  8  9  .
+ .  1  2  3  3  4  5  5  6  7  7  8  9  .
+ .  1  2  3  3  4  5  5  6  7  7  8  9  .
+ .  1  2  3  3  4  5  5  6  7  7  8  9  .
+ .  1  2  3  3  4  5  5  6  7  7  8  9  .
+ .  1  2  3  3  4  5  5  6  7  7  8  8  9
+ .  1  2  3  3  4  5  5  6  6  7  8  8  9
+ .  1  2  3  3  4  5  5  6  6  7  8  8  8
+ .  1  2  3  3  4  5  5  6  6  7  8  8  8
+ .  1  2  3  3  4  5  5  6  6  7  7  8  8
+ .  2  2  3  4  4  5  5  6  6  7  8  8  8
+ .  2  2  3  3  4  5  5  6  6  7  7  .  .
