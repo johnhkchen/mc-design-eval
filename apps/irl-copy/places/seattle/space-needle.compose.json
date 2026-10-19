@@ -1,13 +1,94 @@
 {
- "note": "The Space Needle kit (lab run space-needle-kit, v1: one 64 x 64 module, legs, core, SkyLine, saucer with halo, roof and spire to y 258) centred on the saucer the lidar measured (60 blocks across, centre 164, 167); its box clears the extruded massing of the saucer outline.",
+ "note": "Seattle Center in full: the Space Needle kit (v2, Opus fix round: hourglass waist, core stairs, lighting, open halo) centred on the saucer the lidar measured, and four lean kits built on their footprints in site orientation, each module dropped at its footprint box corner with the massing cleared: MoPOP; the Armory with Chihuly's Glasshouse and Galleries; the Pacific Science Center (the part in the frame); KOMO Plaza East and West, Hyatt House and Aperture on Fifth.",
  "modules": {
   "needle": {
-   "file": "../../benchmarks/plugin-baseline/runs/build-1/space-needle-kit/v1.nbt",
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/space-needle-kit/v2.nbt",
    "plot": [
     0,
     0,
     63,
     63
+   ]
+  },
+  "mopop": {
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/mopop-kit/v1.nbt",
+   "plot": [
+    0,
+    0,
+    101,
+    152
+   ]
+  },
+  "armory": {
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/armory-kit/build.nbt",
+   "plot": [
+    0,
+    0,
+    220,
+    148
+   ]
+  },
+  "glasshouse": {
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/armory-kit/build.nbt",
+   "plot": [
+    221,
+    0,
+    252,
+    46
+   ]
+  },
+  "galleries": {
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/armory-kit/build.nbt",
+   "plot": [
+    253,
+    0,
+    296,
+    104
+   ]
+  },
+  "pacsci": {
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/pacsci-kit/build.nbt",
+   "plot": [
+    0,
+    0,
+    144,
+    177
+   ]
+  },
+  "komoEast": {
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/seattle-towers-kit/build.nbt",
+   "plot": [
+    0,
+    0,
+    104,
+    124
+   ]
+  },
+  "komoWest": {
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/seattle-towers-kit/build.nbt",
+   "plot": [
+    105,
+    0,
+    151,
+    61
+   ]
+  },
+  "hyatt": {
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/seattle-towers-kit/build.nbt",
+   "plot": [
+    152,
+    0,
+    200,
+    92
+   ]
+  },
+  "aperture": {
+   "file": "../../benchmarks/plugin-baseline/runs/build-1/seattle-towers-kit/build.nbt",
+   "plot": [
+    201,
+    0,
+    250,
+    52
    ]
   }
  },
@@ -24,6 +105,105 @@
     9
    ],
    "quarter": 0
+  },
+  {
+   "building": "SEA1270133687",
+   "module": "mopop",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270134763",
+   "module": "armory",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270134470",
+   "module": "glasshouse",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270099651",
+   "module": "galleries",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270099642",
+   "module": "pacsci",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270123762",
+   "module": "komoEast",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270154128",
+   "module": "komoWest",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270123760",
+   "module": "hyatt",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
+  },
+  {
+   "building": "SEA1270123759",
+   "module": "aperture",
+   "mode": "at",
+   "at": [
+    0,
+    0
+   ],
+   "quarter": 0,
+   "clear": "all"
   }
  ]
 }
